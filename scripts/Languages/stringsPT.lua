@@ -1407,4 +1407,4 @@ STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_WARN = "Os monstros estão aqui."
 STRINGS.NAMES.BELL1 = "Old Bell"
 GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL1 = "Old Bell."
 
-modimport("scripts/stringsPT2.lua")
+modimport("scripts/Languages/stringsPT2.lua")

@@ -43,13 +43,13 @@ local CRIATURAS =
 	  	schoolrange = SCHOOL_AREA.TINY,		
 	},	
 
-	adult_flytrap = { 
+--[[	adult_flytrap = { 
 	  	prefab = "adult_flytrap", 
 	  	schoolmin = 1,
 	  	schoolmax = 1,
 	  	schoolrange = SCHOOL_AREA.TINY,		
-	},		
-	
+	},	
+]]		
 	lightrays_jungle = { 
 	  	prefab = "lightrays_jungle", 
 	  	schoolmin = 1,
