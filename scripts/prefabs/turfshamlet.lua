@@ -105,6 +105,6 @@ table.insert(ret, make_turf(GROUND.PIGRUINS or GROUND.MARSH, {name = "pigruins",
 table.insert(ret, make_turf(GROUND.ANTFLOOR or GROUND.MARSH, {name = "antfloor", anim = "antcave", invent = "images/turfs/turf01-13.xml"})) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret, make_turf(GROUND.BATFLOOR or GROUND.MARSH, {name = "batfloor", anim = "batcave", invent = "images/turfs/turf01-12.xml"})) --place a marsh tile, if the swamp generation is disabled
 
-
+table.insert(ret, make_turf(GROUND.HAMARCHIVE or GROUND.MARSH, {name = "hamarchive", anim = "pig_ruins", invent = "images/turfs/turf01-11.xml"})) --place a marsh
 return unpack(ret)
 

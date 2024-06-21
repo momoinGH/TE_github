@@ -33,6 +33,8 @@ local function fn(Sim)
 	inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 	MakeInventoryPhysics(inst)
+	
+    MakeInventoryFloatable(inst, "small", 0.05, {1.2, 0.75, 1.2})
 
 	inst.AnimState:SetBank("hand_lens")
 	inst.AnimState:SetBuild("hand_lens")
@@ -45,6 +47,8 @@ local function fn(Sim)
 	if not TheWorld.ismastersim then
 		return inst
 	end	
+	
+	inst.components.floater:SetBankSwapOnFloat(true, -10, {sym_build = "swap_hand_lens"})
 	
 	inst:AddComponent("finiteuses")
 

@@ -57,9 +57,11 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
-
+	
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("goatmum.png")
+	
      MakeCharacterPhysics(inst, 50, .4)
 
 	inst.DynamicShadow:SetSize(2, 1)
@@ -68,8 +70,6 @@ local function fn()
     inst.Transform:SetScale(1.3, 1.3, 1.3)
 --	inst.Transform:SetRotation(180)
 
-	local minimap = inst.entity:AddMiniMapEntity()
---	minimap:SetIcon("minimap_octopusking.png")
     inst.MiniMapEntity:SetPriority(1)
 
     inst.AnimState:SetBank("quagmire_goatmom_basic")

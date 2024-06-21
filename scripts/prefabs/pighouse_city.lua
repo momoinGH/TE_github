@@ -391,7 +391,7 @@ local function OnLoadPostPass(inst)
     --citypossessionfn( inst )
 end
 
-local function makefn(animset, setbuild, spawnList)
+local function makefn(animset, setbuild, spawnList, minimapicon)
 
     local function fn(Sim)
     	local inst = CreateEntity()
@@ -402,7 +402,8 @@ local function makefn(animset, setbuild, spawnList)
         inst.entity:AddSoundEmitter()
 
     	local minimap = inst.entity:AddMiniMapEntity()
-    	minimap:SetIcon( "pighouse.png" )
+    	--minimap:SetIcon( "pig_townhouse.png" )
+    	minimap:SetIcon(minimapicon or "pig_townhouse.png")
         --{anim="level1", sound="dontstarve/common/campfire", radius=2, intensity=.75, falloff=.33, colour = {197/255,197/255,170/255}},
         light:SetFalloff(1)
         light:SetIntensity(.5)
@@ -554,7 +555,7 @@ local function makefn2(animset, setbuild, spawnList)
         inst.entity:AddSoundEmitter()
 
     	local minimap = inst.entity:AddMiniMapEntity()
-    	minimap:SetIcon( "pighouse.png" )
+    	minimap:SetIcon( "pig_townhouse.png" )
         --{anim="level1", sound="dontstarve/common/campfire", radius=2, intensity=.75, falloff=.33, colour = {197/255,197/255,170/255}},
         light:SetFalloff(1)
         light:SetIntensity(.5)
@@ -701,8 +702,8 @@ local lista =
     return fn
 end
 
-local function house(name, anim, build, spawnList)
-    return Prefab( "common/objects/"..name, makefn(anim, build, spawnList ), assets, prefabs)
+local function house(name, anim, build, spawnList, minimapicon)
+    return Prefab( "common/objects/"..name, makefn(anim, build, spawnList, minimapicon), assets, prefabs)
 end
 
 local function house2(name, anim, build, spawnList)
@@ -710,10 +711,11 @@ local function house2(name, anim, build, spawnList)
 end
 
 return house("pighouse_city",nil,nil),
+       house("pighouse_farm","pig_shop","pig_farmhouse_build",spawned_farm, "pig_farmhouse.png"),
+       house("pighouse_mine","pig_shop","pig_farmhouse_build",spawned_mine, "pig_farmhouse.png"),
+	   
 	   house2("pighouse_city2",nil,nil),
-       house("pighouse_farm","pig_shop","pig_farmhouse_build",spawned_farm),
-       house("pighouse_mine","pig_shop","pig_farmhouse_build",spawned_mine),
-
+	   
        MakePlacer("common/pighouse_city_placer", "pig_shop", "pig_townhouse1_green_build", "idle", nil, nil, nil, 0.75)
 
 	  -- MakePlacer("common/pighouse_placer", "pig_house", "pig_house", "idle")  

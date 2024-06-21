@@ -10,7 +10,7 @@ local function fn()
 	inst.entity:AddNetwork()   
 	--inst.entity:AddSoundEmitter()
     MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst, "idle_water", "idle")	
+    MakeInventoryFloatable(inst)	
 	
     inst.AnimState:SetBank("snake_skull")
     inst.AnimState:SetBuild("snake_skull")

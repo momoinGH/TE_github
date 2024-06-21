@@ -144,7 +144,7 @@ local function superfn(Sim)
 	inst:AddTag("telescope")
 	inst:AddTag("supertelescope")
 	inst:AddTag("allow_action_on_impassable")
-    MakeInventoryFloatable(inst)
+    MakeInventoryFloatable(inst, "med")
 
 	inst.entity:SetPristine()
 

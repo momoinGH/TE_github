@@ -54,7 +54,7 @@ local function set_stump(inst)
     end
     RemovePhysicsColliders(inst)
     inst:AddTag("stump")
-    inst.MiniMapEntity:SetIcon("tuber_trees.png")
+    inst.MiniMapEntity:SetIcon("tuber_trees_stump.png")
 end
 
 local function dig_up_stump(inst, chopper)
@@ -107,7 +107,7 @@ local function OnBurnt(inst)
     inst.components.workable:SetOnFinishCallback(chop_down_burnt_tree)
     inst.AnimState:PlayAnimation("burnt_tall", true)
     inst:AddTag("burnt")
-    inst.MiniMapEntity:SetIcon("tuber_trees.png")
+    inst.MiniMapEntity:SetIcon("tuber_trees_burnt.png")
 end
 
 local function inspect_tree(inst)
@@ -142,6 +142,8 @@ local function onload(inst, data)
                 inst.components.workable:SetWorkLeft(1)
             end
         elseif data.burnt and not inst:HasTag("burnt") then
+		    inst:AddTag("fire") -- Add the fire tag here: OnEntityWake will handle it actually doing burnt logic
+			inst.MiniMapEntity:SetIcon("tuber_trees_burnt.png")
             OnBurnt(inst)
         end
     end

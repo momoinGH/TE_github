@@ -99,7 +99,7 @@ local function entrance()
 
     inst.Transform:SetEightFaced()
 	
-	inst.MiniMapEntity:SetIcon("minimap_volcano_entrance.tex")
+	inst.MiniMapEntity:SetIcon("pig_lootshop.png")
 	
 	inst:AddTag("vulcano_part")
 	inst:AddTag("antlion_sinkhole_blocker")
@@ -596,8 +596,8 @@ local function fnescada()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
-	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetIcon( "vamp_bat_cave.png" )	
+	--local minimap = inst.entity:AddMiniMapEntity()
+	--minimap:SetIcon( "vamp_bat_cave.png" )	
 	
     inst.AnimState:SetBank("pig_shop_doormats")
     inst.AnimState:SetBuild("pig_shop_doormats")

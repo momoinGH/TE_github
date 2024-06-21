@@ -183,7 +183,7 @@ if not inst:HasTag("machetecut") then return end
 end
 
 local function makegrass(inst)
-	inst.MiniMapEntity:SetIcon("grass.png")
+	inst.MiniMapEntity:SetIcon("grass_tall.png")
 	inst.AnimState:SetBank("grass_tall")	
 	inst.AnimState:SetBuild("grass_tall")
 end

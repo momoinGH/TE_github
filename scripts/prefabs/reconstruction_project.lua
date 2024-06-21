@@ -331,7 +331,10 @@ local function fn(Sim)
     --MakeObstaclePhysics(inst, .25)         
 
     inst.entity:AddSoundEmitter()
-
+	
+    inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon("rubble.png")
+	
     anim:SetBank("pig_house")
     anim:SetBuild("pig_house")
 

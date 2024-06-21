@@ -396,6 +396,7 @@ barcoinv:Remove()
 end
 caster.components.driver.vehicle:Remove()
 caster:RemoveComponent("rowboatwakespawner")
+if caster.components.drownable ~= nil then caster.components.drownable.enabled = true end
 caster:RemoveComponent("driver")
 caster:RemoveTag("sail")
 caster:RemoveTag("surf")
@@ -516,6 +517,7 @@ barcoinv:Remove()
 end
 caster.components.driver.vehicle:Remove()
 caster:RemoveComponent("rowboatwakespawner")
+if caster.components.drownable ~= nil then caster.components.drownable.enabled = true end
 caster:RemoveComponent("driver")
 caster:RemoveTag("sail")
 caster:RemoveTag("surf")

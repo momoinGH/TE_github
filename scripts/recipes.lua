@@ -85,7 +85,7 @@ AddRecipe2("armor_snakeskin", 		{Ingredient("boneshard", 2), Ingredient("snakesk
 AddRecipe2("palmleaf_umbrella",		{Ingredient("twigs", 4), Ingredient("petals", 6), Ingredient("palmleaf", 3, v_atlas)},  							TECH.NONE, 		  {atlas=h_atlas}, {"CLOTHING","RAIN"})
 AddRecipe2("double_umbrellahat",	{Ingredient("umbrella", 1), Ingredient("shark_gills", 2, v_atlas), Ingredient("strawhat", 2)}, 						TECH.SCIENCE_TWO, {atlas=v_atlas}, {"CLOTHING","RAIN"})
 AddRecipe2("aerodynamichat",		{Ingredient("coconut", 1, v_atlas), Ingredient("shark_fin", 1, v_atlas), Ingredient("vine", 2, v_atlas)}, 			TECH.SCIENCE_TWO, {atlas=v_atlas}, {"CLOTHING"})
-AddRecipe2("thatchpack",			{Ingredient("palmleaf", 6, v_atlas)},																				TECH.NONE,		  {atlas=v_atlas}, {"CLOTHING"})
+AddRecipe2("thatchpack",			{Ingredient("palmleaf", 6, v_atlas)},																				TECH.NONE,		  {atlas=v_atlas}, {"CONTAINERS"})
 AddRecipe2("piratehat",				{Ingredient("boneshard", 2), Ingredient("rope", 1), Ingredient("silk", 2)},											TECH.SCIENCE_TWO, {atlas=v_atlas}, {"CLOTHING"})
 AddRecipe2("captainhat",			{Ingredient("boneshard", 1), Ingredient("seaweed", 1, v_atlas), Ingredient("strawhat", 1)},							TECH.SCIENCE_TWO, {atlas=v_atlas}, {"CLOTHING"})
 
@@ -182,7 +182,7 @@ AddRecipe2("gasmaskhat",			{Ingredient("peagawkfeather", 4, h_atlas), Ingredient
 AddRecipe2("corkboatitem",			{Ingredient("rope", 1), Ingredient("cork", 4, h_atlas)},													TECH.NONE, 		  {atlas=h_atlas}, {"SEAFARING"})
 
 AddRecipe2("bonestaff",			    {Ingredient("pugalisk_skull", 1, h_atlas), Ingredient("boneshard", 1), Ingredient("nightmarefuel", 2)},     TECH.LOST,        {atlas=h_atlas}, {"MAGIC"})
-AddRecipe2("armorvortexcloak",	    {Ingredient("ancient_remnant", 5, h_atlas), Ingredient("armor_sanity", 1)},                                 TECH.LOST,        {atlas=h_atlas}, {"MAGIC"})
+AddRecipe2("armorvortexcloak",	    {Ingredient("ancient_remnant", 5, h_atlas), Ingredient("armor_sanity", 1)},                                 TECH.LOST,        {atlas=h_atlas}, {"MAGIC","ARMOUR","CONTAINERS"})
 AddRecipe2("living_artifact",		{Ingredient("infused_iron", 6, h_atlas), Ingredient("waterdrop", 1, h_atlas)}, 								TECH.LOST,        {atlas=h_atlas}, {"MAGIC"})
 AddRecipe2("armorlimestone",		{Ingredient("limestone", 3, v_atlas), Ingredient("rope", 2)}, 								                TECH.SCIENCE_TWO, {atlas=h_atlas}, {"ARMOUR"})
 AddRecipe2("antchest",			    {Ingredient("chitin", 6, h_atlas), Ingredient("beeswax",1), Ingredient("honey",9)}, 						TECH.LOST,        {atlas=h_atlas, min_spacing=1, placer="antchest_placer"}, {"COOKING"})

@@ -29,9 +29,10 @@ local function fn(Sim)
 	local anim = inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
+	
 	MakeInventoryPhysics(inst)
-	--MakeInventoryFloatable(inst, "idle_water", "idle")
-
+	MakeInventoryFloatable(inst, "med", 0.05, {1.1, 0.5, 1.1}, true, -9)
+    
 	anim:SetBank("halberd")
 	anim:SetBuild("halberd")
 	anim:PlayAnimation("idle")
@@ -39,13 +40,14 @@ local function fn(Sim)
 	inst:AddTag("halberd")
 
 	inst:AddTag("sharp")
-	MakeInventoryFloatable(inst)
 
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
 		return inst
 	end	
+	
+	inst.components.floater:SetBankSwapOnFloat(true, -11, {sym_build = "swap_halberd"})
 	
 	inst:AddComponent("weapon")
 	inst.components.weapon:SetDamage(HALBERD_DAMAGE)

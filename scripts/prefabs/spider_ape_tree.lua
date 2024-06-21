@@ -152,7 +152,7 @@ local function OnBurnt(inst, imm)
     end
     inst.AnimState:PlayAnimation(inst.anims.burnt, true)
     inst:AddTag("burnt")
-
+    inst.MiniMapEntity:SetIcon("jungletree_burnt.png")
     inst.highlight_override = burnt_highlight_override
 end
 
@@ -352,6 +352,7 @@ local function chop_down_tree(inst, chopper)
     inst.components.workable:SetWorkLeft(1)
 
     inst:AddTag("stump")
+	inst.MiniMapEntity:SetIcon("jungleTree_stump.png")	
     if inst.components.growable then
         inst.components.growable:StopGrowing()
     end
@@ -458,6 +459,7 @@ local function onload(inst, data)
 
         if data.burnt then
             inst:AddTag("fire") -- Add the fire tag here: OnEntityWake will handle it actually doing burnt logic
+			inst.MiniMapEntity:SetIcon("jungleTree_burnt.png")
         elseif data.stump then
             inst:RemoveComponent("burnable")
             MakeSmallBurnable(inst)
@@ -468,6 +470,7 @@ local function onload(inst, data)
             RemovePhysicsColliders(inst)
             inst.AnimState:PlayAnimation(inst.anims.stump)
             inst:AddTag("stump")
+			inst.MiniMapEntity:SetIcon("jungleTree_stump.png")
             inst:RemoveTag("shelter")
             inst:RemoveTag("gustable")
 --            inst:RemoveComponent("blowinwindgust")
@@ -717,6 +720,7 @@ local function makefn(build, stage, data)
             inst:RemoveTag("gustable")
             RemovePhysicsColliders(inst)
             inst.AnimState:PlayAnimation(inst.anims.stump)
+			inst.MiniMapEntity:SetIcon("jungleTree_stump.png")
             inst:AddTag("stump")
             inst:AddComponent("workable")
             inst.components.workable:SetWorkAction(ACTIONS.DIG)

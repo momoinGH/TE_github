@@ -7946,4 +7946,11 @@ STRINGS.RECIPE_DESC.ANTCHEST = "Save the sweet things."
 STRINGS.NAMES.BELL1 = "old bell"
 STRINGS.RECIPE_DESC.BELL1 = "This is no ordinary bell."
 
+
+STRINGS.NAMES.BAT_LEATHER = "bat leather"
+STRINGS.RECIPE_DESC.PIGSKIN = "leather,still leather."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAT_LEATHER = "Is the bat hide-ing in there?"
+
+STRINGS.NAMES.TURF_HAMARCHIVE = "ruins maze turf"
+
 modimport("scripts/stringsEU2.lua")

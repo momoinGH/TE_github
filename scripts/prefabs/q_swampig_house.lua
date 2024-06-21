@@ -150,7 +150,7 @@ local function fn()
 
     MakeObstaclePhysics(inst, 1)
 
-    inst.MiniMapEntity:SetIcon("minimap_quagmire_swampig_house_rubble.png")
+    inst.MiniMapEntity:SetIcon("quagmire_swampig_house_rubble.png")
 
     inst.AnimState:SetBank("pig_house_old")
 	inst.AnimState:SetBuild("quagmire_werepig_house")
@@ -225,7 +225,7 @@ local function fn1()
 
     MakeObstaclePhysics(inst, 1)
 
-    inst.MiniMapEntity:SetIcon("minimap_quagmire_swampig_house.png")
+    inst.MiniMapEntity:SetIcon("quagmire_swampig_house.png")
 
     inst.AnimState:SetBank("pig_house_old")
 	inst.AnimState:SetBuild("quagmire_merm_house")
@@ -282,4 +282,5 @@ local function fn1()
     return inst
 end
 
-return Prefab("quagmire_swampig_house_rubble", fn, assets, prefabs), Prefab("quagmire_swampig_house", fn1, assets, prefabs)
+return Prefab("quagmire_swampig_house_rubble", fn, assets, prefabs), 
+       Prefab("quagmire_swampig_house", fn1, assets, prefabs)

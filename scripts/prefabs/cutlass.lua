@@ -38,21 +38,23 @@ local function fn(Sim)
 	inst.entity:AddNetwork()
     
     MakeInventoryPhysics(inst)
-    
+    MakeInventoryFloatable(inst, "small", 0.05, {1.2, 0.75, 1.2})
+
     anim:SetBank("cutlass")
     anim:SetBuild("cutlass")
     anim:PlayAnimation("idle")
     
     inst:AddTag("sharp")
     inst:AddTag("cutlass")
-	MakeInventoryFloatable(inst)
-	
+   
 	inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-
+	
+	inst.components.floater:SetBankSwapOnFloat(true, -20, {sym_build = "swap_cutlass"})
+	
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(CUTLASS_DAMAGE)
     inst.components.weapon:SetOnAttack(onattack)

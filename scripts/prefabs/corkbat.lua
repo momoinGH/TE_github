@@ -30,7 +30,7 @@ local function fn(Sim)
     inst.entity:AddNetwork()
 
 	MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)
+    MakeInventoryFloatable(inst, "med", 0.05, {1.2, 0.75, 1.2})
 
 	inst.AnimState:SetBuild("cork_bat")
 	inst.AnimState:SetBank("cork_bat")
@@ -45,6 +45,8 @@ local function fn(Sim)
 	if not TheWorld.ismastersim then
 		return inst
 	end	
+	
+	inst.components.floater:SetBankSwapOnFloat(true, -11, {sym_build = "swap_cork_bat"})	
 	
 	inst:AddComponent("weapon")
 	inst.components.weapon:SetDamage(CORK_BAT_DAMAGE)

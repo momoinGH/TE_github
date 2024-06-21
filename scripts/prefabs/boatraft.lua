@@ -263,7 +263,7 @@ local function MakeBoat(name,radius)
         inst.entity:AddAnimState()
         inst.entity:AddSoundEmitter()
         inst.entity:AddMiniMapEntity()
-        inst.MiniMapEntity:SetIcon("boat.png")
+        --inst.MiniMapEntity:SetIcon("boat.png")
         inst.entity:AddNetwork()
 
         inst:AddTag("ignorewalkableplatforms")
@@ -378,21 +378,26 @@ local function MakeBoat(name,radius)
         inst:AddComponent("hull")
         inst.components.hull:SetRadius(radius)
         local boatlip = SpawnPrefab('boatlipinvisible')
-		if name == "raft" then
-		inst.barco = SpawnPrefab('boatlipraft')	
-		inst.barco.entity:SetParent(inst.entity)
-		inst.barco.Transform:SetPosition(0, 0, 0)
-		end
+		
 		if name == "lograft" then
 		inst.barco = SpawnPrefab('boatliplograft')		
 		inst.barco.entity:SetParent(inst.entity)
 		inst.barco.Transform:SetPosition(0, 0, 0)
-		end		
+        inst.MiniMapEntity:SetIcon("lograft.png")
+		end	
+		
+		if name == "raft" then
+		inst.barco = SpawnPrefab('boatlipraft')	
+		inst.barco.entity:SetParent(inst.entity)
+		inst.barco.Transform:SetPosition(0, 0, 0)
+        inst.MiniMapEntity:SetIcon("raft.png")
+		end
 		
 		if name == "boat_raft_rot" then
 		inst.barco2 = SpawnPrefab('boatlipraftrot')		
 		inst.barco2.entity:SetParent(inst.entity)
 		inst.barco2.Transform:SetPosition(0, 0, 0)
+        inst.MiniMapEntity:SetIcon("boat_raft.png")
 		
 		inst.barco3 = SpawnPrefab('boatlip')	
 		inst.barco3.AnimState:OverrideSymbol("boat_plants", "boat_test", "")

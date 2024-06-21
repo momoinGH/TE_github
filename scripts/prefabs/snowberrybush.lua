@@ -71,7 +71,7 @@ local function shrub_fn()
 	inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
-	inst.MiniMapEntity:SetIcon("quagmire_spotspice_shrub.png")
+	inst.MiniMapEntity:SetIcon("frostbush.png")
 
     inst.AnimState:SetRayTestOnBB(true)
     inst.AnimState:SetBuild("frostbush")

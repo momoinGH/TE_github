@@ -30,13 +30,17 @@ local function fn(Sim)
     anim:SetBank("pig_scepter")
     anim:SetBuild("pig_scepter")
     anim:PlayAnimation("idle")
+	
+	MakeInventoryFloatable(inst, "large", 0.05, {1.1, 0.5, 1.1}, true, -9)
 
     inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
 		return inst
 	end  
-    
+	
+    inst.components.floater:SetBankSwapOnFloat(true, -11, {sym_build = "swap_pig_scepter"})   
+	
     inst:AddComponent("inspectable")
   
     inst:AddComponent("inventoryitem")

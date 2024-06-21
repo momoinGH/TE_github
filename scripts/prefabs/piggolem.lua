@@ -356,9 +356,9 @@ local function guard()
 
     MakeMediumBurnableCharacter(inst, "pig_torso")
 
-    inst:AddComponent("named")
-    inst.components.named.possiblenames = STRINGS.PIGNAMES
-    inst.components.named:PickNewName()
+    --inst:AddComponent("named")
+    --inst.components.named.possiblenames = STRINGS.PIGNAMES
+    --inst.components.named:PickNewName()
 
     ------------------------------------------
     MakeHauntablePanic(inst)
@@ -401,10 +401,10 @@ local function guard()
 
     ------------------------------------------
 
-    inst:AddComponent("sleeper")
-    inst.components.sleeper:SetResistance(3)
-    inst.components.sleeper:SetSleepTest(GuardShouldSleep)
-    inst.components.sleeper:SetWakeTest(GuardShouldWake)
+    --inst:AddComponent("sleeper")
+    --inst.components.sleeper:SetResistance(3)
+   -- inst.components.sleeper:SetSleepTest(GuardShouldSleep)
+   -- inst.components.sleeper:SetWakeTest(GuardShouldWake)
     ------------------------------------------
     MakeMediumFreezableCharacter(inst, "pig_torso")
 

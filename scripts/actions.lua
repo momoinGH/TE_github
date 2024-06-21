@@ -478,6 +478,7 @@ end end
 barcoinv:Remove()
 end
 act.doer.components.driver.vehicle:Remove()
+if act.doer.components.drownable ~= nil then act.doer.components.drownable.enabled = true end
 act.doer:RemoveComponent("driver")
 act.doer:RemoveTag("sail")
 act.doer:RemoveTag("surf")
@@ -3007,6 +3008,7 @@ AddStategraphState(
             inst:RemoveTag("sail")
             inst:RemoveTag("surf")
             inst:RemoveComponent("rowboatwakespawner")
+			if inst.components.drownable ~= nil then inst.components.drownable.enabled = true end
             inst:RemoveComponent("driver")
             if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then
             inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO):Remove()
@@ -3059,6 +3061,7 @@ AddStategraphState(
             inst:RemoveTag("sail")
             inst:RemoveTag("surf")
             inst:RemoveComponent("rowboatwakespawner")
+			if inst.components.drownable ~= nil then inst.components.drownable.enabled = true end
             inst:RemoveComponent("driver")
             if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then
             inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO):Remove()

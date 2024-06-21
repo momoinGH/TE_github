@@ -252,7 +252,7 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddMiniMapEntity()
-    inst.MiniMapEntity:SetIcon("boat.png")
+    inst.MiniMapEntity:SetIcon("boat_iron.png")
     inst.entity:AddNetwork()
 
     inst:AddTag("ignorewalkableplatforms")

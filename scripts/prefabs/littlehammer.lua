@@ -30,6 +30,8 @@ local function fn(Sim)
 	local anim = inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
     MakeInventoryPhysics(inst)
+	
+	MakeInventoryFloatable(inst, "small", 0.05, {1.2, 0.75, 1.2})
 
     anim:SetBank("ballpein_hammer")
     anim:SetBuild("ballpein_hammer")
@@ -42,6 +44,8 @@ local function fn(Sim)
 	if not TheWorld.ismastersim then
 		return inst
 	end
+	
+	inst.components.floater:SetBankSwapOnFloat(true, -10, {sym_build = "swap_ballpein_hammer"})	
 	
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(LITTLE_HAMMER_DAMAGE)

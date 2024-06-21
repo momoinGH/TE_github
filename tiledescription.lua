@@ -43,7 +43,9 @@ function SetInfo()
 		underwater_sandy = 	{ specs = {name = "cave"},		layer = 5}, --example tile
 		underwater_rocky = 	{ specs = {name = "marsh"},		layer = 5}, --example tile		
 		windy = 			{ specs = {name = "windy"},	turf = {{"turf_windy"}} ,	layer = 25},    --frost lake	
-		marsh_sw = 			{ specs = {name = "marsh_sw"},	turf = {{"turf_marsh_sw"}} ,	layer = 25},    --frost lake			
+		marsh_sw = 			{ specs = {name = "marsh_sw"},	turf = {{"turf_marsh_sw"}} ,	layer = 25},    --frost lake
+
+		hamarchive = 		{ specs = {name = "deeprainforest"}, 	turf = {{"turf_hamarchive"}} ,	layer = 25}, 				
 	}
 
 	return NEW_TILE_DESCRIPTION

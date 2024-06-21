@@ -25,13 +25,14 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
+	
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("boarlord.png")
 
     MakeObstaclePhysics(inst, 2, .5)
 
-	local minimap = inst.entity:AddMiniMapEntity()
---	minimap:SetIcon("minimap_octopusking.png")
+
     inst.MiniMapEntity:SetPriority(1)
 
     inst.DynamicShadow:SetSize(10, 5)

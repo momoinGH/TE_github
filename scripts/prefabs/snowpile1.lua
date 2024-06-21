@@ -224,7 +224,7 @@ local function fn(Sim)
     inst.entity:AddSoundEmitter()
 
 	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetIcon( "dung_pile.png" )
+	minimap:SetIcon( "snow_pile.png" )
 
 	anim:SetBank("dung_pile")
 	anim:SetBuild("snow_pile")

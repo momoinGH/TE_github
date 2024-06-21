@@ -102,7 +102,7 @@ local function fn()
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
 
-    inst.MiniMapEntity:SetIcon("minimap_quagmire_pond_salt.png")
+    inst.MiniMapEntity:SetIcon("quagmire_pond_salt.png")
 
     inst:AddTag("watersource")
     inst:AddTag("antlion_sinkhole_blocker")

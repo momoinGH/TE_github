@@ -5,7 +5,9 @@ local assets =
 	--Asset("ANIM", "anim/evergreen_tall_old.zip"),
 	--Asset("ANIM", "anim/evergreen_short_normal.zip"),
 
+	Asset("ANIM", "anim/tree_forest_rot_build.zip"),
 	Asset("ANIM", "anim/tree_rainforest_gas_build.zip"),
+
 	Asset("ANIM", "anim/tree_forest_bloom_build.zip"),
 
 	Asset("ANIM", "anim/tree_rainforest_build.zip"),
@@ -17,6 +19,8 @@ local assets =
 	Asset("SOUND", "sound/forest.fsb"),
 	Asset("INV_IMAGE", "jungleTreeSeed"),
 	Asset("MINIMAP_IMAGE", "tree_rainforest"),
+	Asset("MINIMAP_IMAGE", "tree_rainforest_stump"),
+	Asset("MINIMAP_IMAGE", "tree_rainforest_burnt"),
 }
 
 local prefabs =
@@ -82,7 +86,7 @@ local builds =
 		normal_loot = {"log", "log"}, -- "jungletreeseed"
 		short_loot = {"log"},
 		tall_loot = {"log", "log", "log"}, -- "jungletreeseed", "jungletreeseed"
-	},	
+	},
 	blooming = {
 		file="tree_rainforest_bloom_build",
 		prefab_name="rainforesttree",
@@ -135,11 +139,11 @@ local old_anims =
 
 local function dig_up_stump(inst, chopper)
 	inst.components.lootdropper:SpawnLootPrefab("log")
-	
+
 	if inst.components.mystery and inst.components.mystery.investigated then
 		inst.components.lootdropper:SpawnLootPrefab(inst.components.mystery.reward)
-	end	
-	inst:Remove()	
+	end
+	inst:Remove()
 end
 
 local function chop_down_burnt_tree(inst, chopper)
@@ -196,6 +200,7 @@ local function OnBurnt(inst, imm)
 		inst:DoTaskInTime( 0.5, changes)
 	end
 	inst.AnimState:PlayAnimation(inst.anims.burnt, true)
+	inst.MiniMapEntity:SetIcon("tree_rainforest_burnt.png")
 	--inst.AnimState:SetRayTestOnBB(true);
 	inst:AddTag("burnt")
 
@@ -220,24 +225,24 @@ local function Sway(inst)
 end
 
 local function updateTreeType(inst)
-	inst.AnimState:SetBuild(GetBuild(inst).file)	
+	inst.AnimState:SetBuild(GetBuild(inst).file)
 end
 
 local function doTransformBloom(inst)
 	if inst.build == "rot" then return end
 	if not inst:HasTag("rotten") then
 		inst.build = "blooming"
-		
-		updateTreeType(inst)	
+
+		updateTreeType(inst)
 	end
 end
 
 local function doTransformNormal(inst)
 	if inst.build == "rot" then return end
 
-	if not inst:HasTag("rotten") then	
+	if not inst:HasTag("rotten") then
 		inst.build = "normal"
-		
+
 		updateTreeType(inst)
 	end
 end
@@ -253,14 +258,14 @@ end
 local function OnSeasonChange(inst)
 if not inst:HasTag("rotten") then
 if TheWorld.state.iswinter then
-stopbloom(inst)	
+stopbloom(inst)
 end
 if TheWorld.state.isspring then
 startbloom(inst)
 end
 
 if TheWorld.state.issummer then
-startbloom(inst)	
+startbloom(inst)
 end
 if TheWorld.state.isautumn then
 stopbloom(inst)
@@ -426,9 +431,9 @@ local function chop_tree(inst, chopper, chops)
 	else
 		inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
 	end
-	
+
 	local x, y, z= inst.Transform:GetWorldPosition()
-	
+
 	local fx = SpawnPrefab("chop_mangrove_pink")
 	if fx then
 	fx.Transform:SetPosition(x,y + 2 + math.random()*2,z)
@@ -490,6 +495,7 @@ local function chop_down_tree(inst, chopper)
 
 	RemovePhysicsColliders(inst)
 	inst.AnimState:PushAnimation(inst.anims.stump)
+	
 
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.DIG)
@@ -497,6 +503,7 @@ local function chop_down_tree(inst, chopper)
 	inst.components.workable:SetWorkLeft(1)
 
 	inst:AddTag("stump")
+    inst.MiniMapEntity:SetIcon("tree_rainforest_stump.png")
 	if inst.components.growable then
 		inst.components.growable:StopGrowing()
 	end
@@ -569,6 +576,7 @@ end
 
 local function tree_burnt(inst)
 	OnBurnt(inst)
+	inst.MiniMapEntity:SetIcon("tree_rainforest_burnt.png")
 	inst.pineconetask = inst:DoTaskInTime(10,
 		function()
 			local pt = Vector3(inst.Transform:GetWorldPosition())
@@ -589,33 +597,33 @@ local function dropCritter(inst, prefab)
 	local pt = Vector3(inst.Transform:GetWorldPosition())
 
 	if math.random(0, 1) == 1 then
-		pt = pt + (TheCamera:GetRightVec()*((math.random()*1)+1)) 
+		pt = pt + (TheCamera:GetRightVec()*((math.random()*1)+1))
 	else
 		pt = pt - (TheCamera:GetRightVec()*((math.random()*1)+1))
 	end
 
 	snake.sg:GoToState("fall")
 	pt.y = pt.y + (2*inst.components.growable.stage)
-	
+
 	snake.Transform:SetPosition(pt:Get())
 end
 
 local function tree_lit(inst)
 	DefaultIgniteFn(inst)
-	if not inst.flushed and math.random() < 0.4 then		
-		inst.flushed = true		
+	if not inst.flushed and math.random() < 0.4 then
+		inst.flushed = true
 
 		local prefab = "snake_amphibious"
-		
-		if math.random() < 0.5 then 
+
+		if math.random() < 0.5 then
 			prefab = "scorpion"
 		end
 
 		inst:DoTaskInTime(math.random()*0.5, function() dropCritter(inst, prefab) end)
 		if math.random() < 0.3 and prefab == "snake_amphibious" then
 			inst:DoTaskInTime(math.random()*0.5, function() dropCritter(inst, prefab) end)
-		end	
-		
+		end
+
 	end
 end
 
@@ -652,35 +660,35 @@ local function onsave(inst, data)
 	if inst.unbloomtaskinfo then
 		data.unbloomtask = inst:TimeRemainingInTask(inst.unbloomtaskinfo)
 	end
-	
+
 	if inst.build then
 		data.build = inst.build
-	end	
+	end
 end
 
 local function onload(inst, data)
 	if data then
-		if not data.build or builds[data.build] == nil then				
+		if not data.build or builds[data.build] == nil then
 			 doTransformNormal(inst)
 		else
 			inst.build = data.build
 		end
 
-	if inst.build == "rot" then 
+	if inst.build == "rot" then
 	inst.entity:AddAnimState():SetBuild("tree_rainforest_gas_build")
-	inst.components.lootdropper:SetLoot({"log", "log"})	
-	end	
+	inst.components.lootdropper:SetLoot({"log", "log"})
+	end
 
         if data.bloomtask then
             if inst.bloomtask then inst.bloomtask:Cancel() inst.bloomtask = nil end
             inst.bloomtaskinfo = nil
             inst.bloomtask, inst.bloomtaskinfo = inst:ResumeTask(data.bloomtask, function() doTransformBloom(inst) end)
-        end   
+        end
         if data.unbloomtask then
             if inst.unbloomtask then inst.unbloomtask:Cancel() inst.unbloomtask = nil end
             inst.unbloomtaskinfo = nil
             inst.unbloomtask, inst.unbloomtaskinfo = inst:ResumeTask(data.unbloomtask, function() doTransformNormal(inst) end)
-        end 
+        end
 
 		if data.flushed then
 			inst.flushed = data.flushed
@@ -688,6 +696,7 @@ local function onload(inst, data)
 
 		if data.burnt then
 			inst:AddTag("fire") -- Add the fire tag here: OnEntityWake will handle it actually doing burnt logic
+			inst.MiniMapEntity:SetIcon("tree_rainforest_burnt.png")
 		elseif data.stump then
 			inst:RemoveComponent("burnable")
 			MakeSmallBurnable(inst)
@@ -697,6 +706,7 @@ local function onload(inst, data)
 			inst:RemoveComponent("growable")
 			RemovePhysicsColliders(inst)
 			inst.AnimState:PlayAnimation(inst.anims.stump)
+			inst.MiniMapEntity:SetIcon("tree_rainforest_stump.png")
 			inst:AddTag("stump")
 			inst:RemoveTag("shelter")
 			inst:RemoveTag("gustable")
@@ -767,7 +777,7 @@ end
 --	burr.AnimState:PushAnimation("idle")
 
 	--pt.y = pt.y + (2*inst.components.growable.stage)
-	
+
 --	burr.Transform:SetPosition(pt:Get())
 --end
 
@@ -798,7 +808,7 @@ local function makefn(build, stage, data)
 
 		local minimap = inst.entity:AddMiniMapEntity()
 		minimap:SetIcon("tree_rainforest.png")
-
+		
 		minimap:SetPriority(-1)
 
 		inst:AddTag("tree")
@@ -807,7 +817,7 @@ local function makefn(build, stage, data)
 		inst:AddTag("gustable")
 		inst:AddTag("jungletree")
 		inst:AddTag("plant")
-		inst:AddTag("twiggytreesw")		
+		inst:AddTag("twiggytreesw")
 
 		if build == "rot" then
 			inst:AddTag("rotten")
@@ -823,14 +833,14 @@ local function makefn(build, stage, data)
 
 	if not TheWorld.ismastersim then
 		return inst
-	end		
-		
+	end
+
 		-------------------
 		MakeLargeBurnable(inst)
 		inst.components.burnable:SetFXLevel(3)
 		inst.components.burnable:SetOnBurntFn(tree_burnt)
 		--inst.components.burnable:MakeDragonflyBait(1)
-		
+
 		MakeSmallPropagator(inst)
 		inst.components.burnable:SetOnIgniteFn(tree_lit)
 
@@ -891,6 +901,7 @@ local function makefn(build, stage, data)
 			inst:RemoveTag("gustable")
 			RemovePhysicsColliders(inst)
 			inst.AnimState:PlayAnimation(inst.anims.stump)
+			inst.MiniMapEntity:SetIcon("tree_rainforest_stump.png")
 			inst:AddTag("stump")
 			inst:AddComponent("workable")
 			inst.components.workable:SetWorkAction(ACTIONS.DIG)

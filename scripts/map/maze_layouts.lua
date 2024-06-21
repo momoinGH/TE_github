@@ -121,7 +121,7 @@ local function GetLayoutsForType( name, sub_dir, params, areas )
         v.fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED
 		
 		if string.find(name, "hamlet") then
-			v.ground_types[42] = GROUND.BATTLEGROUND
+			v.ground_types[42] = GROUND.HAMARCHIVE
 		end
 -- v.areas = ruins_areas
     end
@@ -149,7 +149,7 @@ local function GetSpecialLayoutsForType( layout_dir, name, sub_dir, areas )
         v.fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED
 		
 	if string.find(name, "hamlet") then
-			v.ground_types[42] = GROUND.BATTLEGROUND
+			v.ground_types[42] = GROUND.HAMARCHIVE
 		end
 -- v.areas = ruins_areas
     end

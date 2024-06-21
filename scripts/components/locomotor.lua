@@ -1431,6 +1431,7 @@ end
 if self.inst.components.driver.vehicle then
 self.inst.components.driver.vehicle:Remove()
 end
+if self.inst.components.drownable ~= nil then self.inst.components.drownable.enabled = true end
 self.inst:RemoveComponent("driver")
 self.inst:RemoveTag("sail")
 self.inst:RemoveTag("surf")

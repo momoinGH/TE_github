@@ -271,6 +271,8 @@ PrefabFiles =
 "infused_iron",
 "armor_limestone",
 "bat_leather",
+"palmleaf_umbrella",
+"blowdart_sw",
 }
 
 if GetModConfigData("whirlpools") then
@@ -3382,7 +3384,62 @@ else
 params= deepval(containers.widgetsetup, "params", "icepack")
 end
 
+local armorvortexcloak =
+{
+  widget =
+  {
+    slotpos = 
+	{
+    Vector3(-162, -186, 0),	
+    Vector3(-162, -111, 0), 
+    Vector3(-162, -36, 0),
+	Vector3(-162, 39, 0),
+	Vector3(-162, 114, 0),
+	Vector3(-87, -186, 0),
+	Vector3(-87, -111, 0),
+	Vector3(-87, -36, 0),
+	Vector3(-87, 39, 0),
+	Vector3(-87, 114, 0),
+	
+	},
+    animbank = "ui_krampusbag_2x5",
+    animbuild = "ui_krampusbag_2x5",
+	bgimage = nil,
+    bgatlas = nil,
+	pos = Vector3(-5, -60, 0),
+    --pos = Vector3(825, -60, 0)
+    --side_align_tip = 160,
+    --isboat = true,
+  },
+  issidewidget = true,
+  type = "pack",
+  openlimit = 1,
+}
 
+local thatchpack =
+{
+  widget =
+  {
+    slotpos = 
+	{
+    Vector3(0, -135, 0),	
+    Vector3(0, -60, 0), 
+    Vector3(0, 15, 0),
+	Vector3(0, 90, 0),
+	
+	},
+	
+    animbank = "ui_cookpot_1x4",
+    animbuild = "ui_cookpot_1x4",
+	bgimage = nil,
+    bgatlas = nil,
+    pos = Vector3(-60, -60, 0),
+--	isboat = true,
+  },
+  issidewidget = true,
+  type = "pack",
+  openlimit = 1,
+}
 
 local smelter =
 {
@@ -3429,31 +3486,7 @@ local corkchest =
 --	isboat = true,
   },
   issidewidget = false,
-  type = "cookpot",
-}
-
-local thatchpack =
-{
-  widget =
-  {
-    slotpos = 
-	{
-    Vector3(0, -135, 0),	
-    Vector3(0, -60, 0), 
-    Vector3(0, 15, 0),
-	Vector3(0, 90, 0),
-	
-	},
-	
-    animbank = "ui_cookpot_1x4",
-    animbuild = "ui_cookpot_1x4",
-	bgimage = nil,
-    bgatlas = nil,
-    pos = Vector3(-60, -60, 0),
---	isboat = true,
-  },
-  issidewidget = true,
-  type = "cookpot",
+  type = "chest",
 }
 
 local cargoboatslot =
@@ -3662,6 +3695,8 @@ local trawlnetdroppedslot =
   type = "chest",
 }
 
+
+params["armorvortexcloak"] = armorvortexcloak
 params["cargoboat"] = cargoboatslot
 params["encrustedboat"] = encrustedslot
 params["rowboat"] = rowboatslot
@@ -3675,6 +3710,34 @@ params["corkboat"] = rowboatslot
 params["smelter"] = smelter
 params["corkchest"] = corkchest
 params["thatchpack"] = thatchpack
+
+--[[
+function params.armorvortexcloak.itemtestfn(container, item, slot)
+    if slot == 1 then
+		return true
+	elseif slot == 2 then
+		return true
+	elseif slot == 3 then
+		return true
+	elseif slot == 4 then
+		return true
+	elseif slot == 5 then
+		return true
+	elseif slot == 6 then
+		return true
+	elseif slot == 7 then
+		return true
+	elseif slot == 8 then
+		return true
+	elseif slot == 9 then
+		return true
+	elseif slot == 10 then
+		return true
+	else
+		return false
+	end
+end
+
 
 function params.thatchpack.itemtestfn(container, item, slot)
     if slot == 1 then
@@ -3703,7 +3766,7 @@ function params.corkchest.itemtestfn(container, item, slot)
 		return false
 	end
 end
-
+]]
 function params.smelter.itemtestfn(container, item, slot)
     if slot == 1 and (item:HasTag("iron") or item.prefab == "iron" or item.prefab == "goldnugget" or item.prefab == "gold_dust" or item.prefab == "flint" or item.prefab == "nitre" or item.prefab == "dubloon" or item.prefab == "obsidian" or item.prefab == "magnifying_glass" or item.prefab == "goldpan" or item.prefab == "ballpein_hammer" or item.prefab == "shears" or item.prefab == "candlehat") then
 		return true

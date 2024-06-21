@@ -158,7 +158,7 @@ local function fn1()
     inst.AnimState:SetRayTestOnBB(true)
 	inst.AnimState:SetBank("hedge")
 	inst.AnimState:SetBuild("hedge2_build")
-	inst.AnimState:PlayAnimation("growth3",true)
+	inst.AnimState:PlayAnimation("growth2",true)
 	MakeObstaclePhysics(inst, .35)
 
 	inst:AddTag("machetecut")

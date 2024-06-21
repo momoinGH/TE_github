@@ -58,14 +58,14 @@ end
 
 local function commonfn()
 
-
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
     inst.entity:AddNetwork()
 	
     MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)	
+	MakeInventoryFloatable(inst, "med")
+	
     --inst.Transform:SetFourFaced()
     anim:SetBank("bugrepellent")
     anim:SetBuild("bugrepellent")

@@ -1,9 +1,5 @@
 local assets =
 {
-    Asset("ANIM", "anim/umbrella.zip"),
-    Asset("ANIM", "anim/swap_umbrella.zip"),
-    Asset("ANIM", "anim/parasol.zip"),
-    Asset("ANIM", "anim/swap_parasol.zip"),
     Asset("ANIM", "anim/swap_parasol_palmleaf.zip"),
     Asset("ANIM", "anim/parasol_palmleaf.zip"),		
 }
@@ -41,32 +37,6 @@ local function onequiptomodel(inst, owner, from_ground)
     if inst.components.fueled then
         inst.components.fueled:StopConsuming()
     end
-end
-
-local function onequip_grass(inst, owner) 
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("equipskinneditem", inst:GetSkinName())
-        owner.AnimState:OverrideItemSkinSymbol("swap_object", skin_build, "swap_parasol", inst.GUID, "swap_parasol")
-    else
-        owner.AnimState:OverrideSymbol("swap_object", "swap_parasol", "swap_parasol")
-    end
-    owner.AnimState:Show("ARM_carry")
-    owner.AnimState:Hide("ARM_normal")
-
-    owner.DynamicShadow:SetSize(1.7, 1)
-end
-
-local function onunequip_grass(inst, owner)
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("unequipskinneditem", inst:GetSkinName())
-    end
-
-    owner.AnimState:Hide("ARM_carry")
-    owner.AnimState:Show("ARM_normal")
-
-    owner.DynamicShadow:SetSize(1.3, 0.6)
 end
 
 local function onperish(inst)
@@ -131,68 +101,6 @@ local function common_fn(name)
     return inst
 end
 
-local function grass()
-    local inst = common_fn("parasol")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(TUNING.GRASS_UMBRELLA_PERISHTIME)
-    inst.components.perishable:StartPerishing()
-    inst.components.perishable:SetOnPerishFn(onperish)
-    inst:AddTag("show_spoilage")
-
-    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_MED)
-
-    inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)
-
-    inst.components.equippable:SetOnEquip( onequip_grass )
-    inst.components.equippable:SetOnUnequip( onunequip_grass )
-    inst.components.equippable:SetOnEquipToModel( onequiptomodel )	
-    inst.components.equippable.dapperness = TUNING.DAPPERNESS_SMALL
-
-    local swap_data = {sym_build = "swap_parasol", bank = "parasol"}
-    inst.components.floater:SetBankSwapOnFloat(true, -40, swap_data)
-    inst.components.floater:SetVerticalOffset(0.05)
-	inst.components.floater:SetScale({ 0.75, 0.35, 1 })
-
-    inst:AddComponent("fuel")
-    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
-
-    MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
-    MakeSmallPropagator(inst)
-
-    return inst
-end
-
-local function pigskin()
-    local inst = common_fn("umbrella")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = FUELTYPE.USAGE
-    inst.components.fueled:SetDepletedFn(onperish)
-    inst.components.fueled:InitializeFuelLevel(TUNING.UMBRELLA_PERISHTIME)
-
-    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_HUGE)
-
-    inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)
-
-    inst.components.equippable:SetOnEquip(onequip)
-    inst.components.equippable:SetOnUnequip(onunequip)
-    inst.components.equippable:SetOnEquipToModel( onequiptomodel )
-
-	inst.components.floater:SetScale({ .75, 0.35, 1.0 })
-	inst.components.floater:SetBankSwapOnFloat(true, -35, { sym_name = "swap_umbrella_float", sym_build = "swap_umbrella" })
-
-    return inst
-end
-
 local function onequip_palmleaf(inst, owner) 
     owner.AnimState:OverrideSymbol("swap_object", "swap_parasol_palmleaf", "swap_parasol_palmleaf")
     owner.AnimState:Show("ARM_carry")
@@ -210,7 +118,7 @@ local function onunequip_palmleaf(inst, owner)
     owner.DynamicShadow:SetSize(1.3, 0.6)
 end
 
-local function palmleaf(Sim)
+local function palmleaf()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -235,41 +143,45 @@ local function palmleaf(Sim)
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst:AddComponent("waterproofer")
-    inst:AddComponent("inspectable")
-    inst:AddComponent("inventoryitem")
-    inst:AddComponent("equippable")
-
-    inst:AddComponent("insulator")
-    inst.components.insulator:SetSummer()
-
-    MakeHauntableLaunch(inst)
 	
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.GRASS_UMBRELLA_PERISHTIME)
     inst.components.perishable:StartPerishing()
     inst.components.perishable:SetOnPerishFn(onperish)
     inst:AddTag("show_spoilage")
-
-    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_MED)
-
-    inst.components.equippable:SetOnEquip( onequip_palmleaf )
-    inst.components.equippable:SetOnUnequip( onunequip_palmleaf )
-
+	
+    inst:AddComponent("waterproofer")
+	inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_MED)
+	
+	inst:AddComponent("insulator")
+    inst.components.insulator:SetSummer()
     inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)
-
+		
+    inst:AddComponent("equippable")
+	inst.components.equippable:SetOnEquip( onequip_palmleaf )
+    inst.components.equippable:SetOnUnequip( onunequip_palmleaf )
     inst.components.equippable.dapperness = TUNING.DAPPERNESS_SMALL
+	
+	local swap_data = {sym_build = "swap_parasol_palmleaf", bank = "parasol_palmleaf"}
+    inst.components.floater:SetBankSwapOnFloat(true, -40, swap_data)
+    inst.components.floater:SetVerticalOffset(0.05)
+	inst.components.floater:SetScale({ 0.75, 0.35, 1 })
+	
+    inst:AddComponent("inspectable")
+	
+    inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
+    MakeHauntableLaunch(inst)
+
+    inst:AddComponent("fuel")
+    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
+	
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeSmallPropagator(inst)
-
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"	
 
     return inst
 end
 
 
-return Prefab("umbrella", pigskin, assets),
-    Prefab("grass_umbrella", grass, assets),
-	Prefab( "palmleaf_umbrella", palmleaf, assets)		
+return Prefab( "palmleaf_umbrella", palmleaf, assets)		

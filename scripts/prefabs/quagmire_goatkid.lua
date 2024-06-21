@@ -59,9 +59,11 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
-
+	
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("goatkid.png")
+	
     MakeObstaclePhysics(inst, 0.8, .4)
 
     inst.DynamicShadow:SetSize(1.5, 0.75)
@@ -71,7 +73,7 @@ local function fn()
 --	inst.Transform:SetRotation(180)
 
 	local minimap = inst.entity:AddMiniMapEntity()
---	minimap:SetIcon("minimap_octopusking.png")
+
     inst.MiniMapEntity:SetPriority(1)
 
 	inst.AnimState:SetBank("quagmire_goatkid_basic")
@@ -130,9 +132,11 @@ local function fn1()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
-
+	
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("goatkid.png")
+	
     MakeObstaclePhysics(inst, 0.8, .4)
 
     inst.DynamicShadow:SetSize(1.5, 0.75)
@@ -142,7 +146,7 @@ local function fn1()
 --	inst.Transform:SetRotation(180)
 
 	local minimap = inst.entity:AddMiniMapEntity()
---	minimap:SetIcon("minimap_octopusking.png")
+
     inst.MiniMapEntity:SetPriority(1)
 
 	inst.AnimState:SetBank("quagmire_goatkid_basic")
@@ -213,6 +217,9 @@ local function fnmerm1()
 		inst.entity:AddDynamicShadow()
 		inst.entity:AddNetwork()
 
+        inst.entity:AddMiniMapEntity()
+	    inst.MiniMapEntity:SetIcon("summy.png")
+
 		MakeObstaclePhysics(inst, 0.2)
 		
 		inst.Transform:SetFourFaced()
@@ -259,7 +266,10 @@ local function fnmerm2()
 		inst.entity:AddSoundEmitter()
 		inst.entity:AddDynamicShadow()
 		inst.entity:AddNetwork()
-
+		
+        inst.entity:AddMiniMapEntity()
+	    inst.MiniMapEntity:SetIcon("pipton.png")
+		
 		MakeObstaclePhysics(inst, 0.2)
 		
 		inst.Transform:SetFourFaced()
@@ -305,6 +315,9 @@ local function fnmerm3()
 		inst.entity:AddSoundEmitter()
 		inst.entity:AddDynamicShadow()
 		inst.entity:AddNetwork()
+
+        inst.entity:AddMiniMapEntity()
+	    inst.MiniMapEntity:SetIcon("oliver.png")
 
 		MakeObstaclePhysics(inst, 0.2)
 		

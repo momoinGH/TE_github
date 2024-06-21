@@ -31,8 +31,9 @@ local function fn(Sim)
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)
-    
+	--MakeInventoryFloatable(inst)
+	MakeInventoryFloatable(inst, "small", 0.05, {1.2, 0.75, 1.2})
+
     anim:SetBank("shears")
     anim:SetBuild("shears")
     anim:PlayAnimation("idle")
@@ -44,6 +45,8 @@ local function fn(Sim)
 	if not TheWorld.ismastersim then
 		return inst
 	end	
+	
+	inst.components.floater:SetBankSwapOnFloat(true, -20, {sym_build = "swap_shears"})
 	
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(SHEARS_DAMAGE)

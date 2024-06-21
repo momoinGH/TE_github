@@ -175,7 +175,7 @@ local function grass(name, stage)
         inst.entity:AddMiniMapEntity()
         inst.entity:AddNetwork()
 
-        inst.MiniMapEntity:SetIcon("grass.png")
+        inst.MiniMapEntity:SetIcon("grassGreen.png")
 
 		inst.AnimState:SetBank("grass_inwater")
 		inst.AnimState:SetBuild("grass_inwater")

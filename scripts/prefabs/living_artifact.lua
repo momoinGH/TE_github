@@ -1,6 +1,6 @@
 local Badge = require "widgets/badge"
 
-local IRON_LORD_DAMAGE = 16
+local IRON_LORD_DAMAGE = 68
 local IRON_LORD_TIME = 180
 
 local assets =

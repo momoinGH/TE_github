@@ -4396,3 +4396,50 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNOWWARG = "This big dog is tough to handle!
 
 STRINGS.NAMES.SNOWPERD = "snow perd"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNOWPERD = "Stupid bird! Stay away from my berries!"
+
+
+
+
+STRINGS.NAMES.SPIDER_APE_TREE = "spider jungle tree"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDER_APE_TREE = "Where are those annoying monkeys?"
+
+STRINGS.NAMES.FROGLEGS_POISON = "Poison frog legs"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FROGLEGS_POISON = "It looks poisonous."
+STRINGS.NAMES.FROGLEGS_POISON_COOKED = "cooked Poison frog legs"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FROGLEGS_POISON_COOKED = "Meat contaminated with toxins."
+
+STRINGS.NAMES.PUGALISK_SKULL = "pugalisk skull"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PUGALISK_SKULL = "haha."
+
+STRINGS.NAMES.ANCIENT_REMNANT = "ancient remnant"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANCIENT_REMNANT = "Well, this is the fabric from the creepy guy."
+
+STRINGS.NAMES.INFUSED_IRON = "infused Iron" 
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.INFUSED_IRON = "I need to figure out quickly what it can do before it runs out of power."
+
+STRINGS.NAMES.ARMORLIMESTONE = "limestone armor"
+STRINGS.RECIPE_DESC.ARMORLIMESTONE = "A solid coral reef."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMORLIMESTONE = "Can wear the reef rock."
+
+STRINGS.NAMES.BONESTAFF = "snake bonestaff"
+STRINGS.RECIPE_DESC.BONESTAFF = "Feel the gaze of the pugalisk!"
+
+STRINGS.NAMES.ARMORVORTEXCLOAK = "vortex cloak"
+STRINGS.RECIPE_DESC.ARMORVORTEXCLOAK = "There's a pocket. It's pretty deep."
+
+STRINGS.NAMES.LIVING_ARTIFACT = "living artifact"
+STRINGS.RECIPE_DESC.LIVING_ARTIFACT = "Let's put them together and see what happens."
+
+STRINGS.NAMES.ANTCHEST = "honey chest"
+STRINGS.RECIPE_DESC.ANTCHEST = "Save the sweet things."
+
+STRINGS.NAMES.BELL1 = "old bell"
+STRINGS.RECIPE_DESC.BELL1 = "This is no ordinary bell."
+
+
+STRINGS.NAMES.BAT_LEATHER = "bat leather"
+STRINGS.RECIPE_DESC.PIGSKIN = "leather,still leather."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAT_LEATHER = "Is the bat hide-ing in there?"
+
+STRINGS.NAMES.TURF_HAMARCHIVE = "ruins maze turf"
+

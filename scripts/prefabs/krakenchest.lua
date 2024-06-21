@@ -421,7 +421,7 @@ local function fn5(Sim)
     inst.entity:AddNetwork()
 	MakeInventoryPhysics(inst)
 
-	inst.MiniMapEntity:SetIcon("roottrunk.png")
+	inst.MiniMapEntity:SetIcon("root_chest_child.png")
 	
 	inst.AnimState:SetBank("roottrunk")
 	inst.AnimState:SetBuild("treasure_chest_roottrunk")

@@ -10,7 +10,7 @@ local function fn()
 	inst.entity:AddAnimState()
 	inst.entity:AddNetwork()  
     MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst, "idle_water", "idle")
+    MakeInventoryFloatable(inst)
 	
     --MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
 

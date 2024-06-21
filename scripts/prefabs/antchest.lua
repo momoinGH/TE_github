@@ -70,7 +70,7 @@ local function onhit(inst, worker)
 end
 
 local function onbuilt(inst)
-	inst.AnimState:PlayAnimation("place")
+--	inst.AnimState:PlayAnimation("place")
 	inst.AnimState:PushAnimation("closed", true)
 end
 
@@ -171,7 +171,7 @@ local function fn(Sim)
     inst.entity:AddNetwork()
 	MakeInventoryPhysics(inst)
 
-	inst.MiniMapEntity:SetIcon("antchest.png")
+	inst.MiniMapEntity:SetIcon("ant_chest_honey.png")
 	
 	inst.AnimState:SetBank("ant_chest")
 	inst.AnimState:SetBuild("ant_chest_honey_build")
@@ -226,7 +226,7 @@ local function fn1(Sim)
     inst.entity:AddNetwork()
 	MakeInventoryPhysics(inst)
 
-	inst.MiniMapEntity:SetIcon("treasure_chest_cork")
+	inst.MiniMapEntity:SetIcon("cork_chest.png")
 	
 	inst.AnimState:SetBank("treasure_chest_cork")
 	inst.AnimState:SetBuild("treasure_chest_cork")

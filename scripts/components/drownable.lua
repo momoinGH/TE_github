@@ -208,4 +208,18 @@ function Drownable:DropInventory()
 end
 
 
+function Drownable:OnSave()
+    return
+    {
+		enabled = self.enabled
+    }
+end
+
+function Drownable:OnLoad(data)
+    if data.enabled ~= nil then
+        self.enabled = data.enabled
+    end
+end
+
+
 return Drownable

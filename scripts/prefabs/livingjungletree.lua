@@ -46,7 +46,7 @@ local function OnBurnt(inst)
     inst.AnimState:PlayAnimation("burnt_tall", true)
     inst.AnimState:SetRayTestOnBB(true)
     inst:AddTag("burnt")
-    inst.MiniMapEntity:SetIcon("livingtree_burnt.png")
+    inst.MiniMapEntity:SetIcon("livingjungletree_burnt.png")
 end
 
 local function ondug(inst)
@@ -74,7 +74,7 @@ local function makestump(inst, instant)
     inst.components.workable:SetWorkLeft(1)
     inst:AddTag("stump")
 
-    inst.MiniMapEntity:SetIcon("livingjungletree.tex")
+    inst.MiniMapEntity:SetIcon("livingjungletree_stump.png")
 end
 
 local function onworked(inst, chopper, workleft)

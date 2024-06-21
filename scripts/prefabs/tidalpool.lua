@@ -91,7 +91,7 @@ local function commonfn(pondtype)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
 
-    inst.MiniMapEntity:SetIcon("minimap_tidalpool.png")
+    inst.MiniMapEntity:SetIcon("tidalpool.png")
 
     inst:AddTag("watersource")
     inst:AddTag("antlion_sinkhole_blocker")

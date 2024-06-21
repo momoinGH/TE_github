@@ -67,6 +67,7 @@ self.inst:RemoveTag("surf")
 self.inst:RemoveTag("aquatic")
 self.inst.AnimState:SetSortOrder(0)
 if self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.BARCO):Remove() end
+if self.inst.components.drownable ~= nil then self.inst.components.drownable.enabled = true end
 self.inst:RemoveComponent("driver")
 local fx = SpawnPrefab("collapse_small")
 fx.Transform:SetPosition(x, y, z)
@@ -112,6 +113,7 @@ self.inst:RemoveTag("surf")
 self.inst:RemoveTag("aquatic")
 self.inst.AnimState:SetSortOrder(0)
 if self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.BARCO):Remove() end
+if self.inst.components.drownable ~= nil then self.inst.components.drownable.enabled = true end
 self.inst:RemoveComponent("driver")
 local fx = SpawnPrefab("collapse_small")
 fx.Transform:SetPosition(x, y, z)
@@ -488,6 +490,7 @@ function Driver:OnMount(vehicle)
 --self.vehicle.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
 --self.vehicle.AnimState:SetSortOrder(2)
 	self.inst:AddTag("aquatic")
+	if self.inst.components.drownable ~= nil then self.inst.components.drownable.enabled = false end
 	if self.vehicle.prefab == ("surfboard") then self.inst:AddTag("surf") end
 	self.inst:AddComponent("rowboatwakespawner")
 --	vehicle.entity:AddFollower()

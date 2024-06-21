@@ -35,18 +35,17 @@ local function fn(Sim)
     inst.entity:AddNetwork()	
 
     MakeInventoryPhysics(inst)
---    MakeInventoryFloatable(inst, "idle_water", "idle")
-    
+	MakeInventoryFloatable(inst, "small", 0.05, {1.2, 0.75, 1.2})
+
     anim:SetBank("city_hammer")
     anim:SetBuild("city_hammer")
     anim:PlayAnimation("idle")
   
-	MakeInventoryFloatable(inst)
-  
     if not TheWorld.ismastersim then
         return inst
     end
-
+	
+    inst.components.floater:SetBankSwapOnFloat(true, -10, {sym_build = "swap_city_hammer"})
     
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(TUNING.HAMMER_DAMAGE)

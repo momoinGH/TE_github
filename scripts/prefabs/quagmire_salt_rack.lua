@@ -25,6 +25,9 @@ local function fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("salt_rack.png")
+
     inst.AnimState:SetBank("quagmire_salt_rack")
     inst.AnimState:SetBuild("quagmire_salt_rack")
     inst.AnimState:PlayAnimation("idle", true)

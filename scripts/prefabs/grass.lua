@@ -323,7 +323,7 @@ local function grassnova(name, stage)
         inst.entity:AddMiniMapEntity()
         inst.entity:AddNetwork()
 
-        inst.MiniMapEntity:SetIcon("grass.png")
+        inst.MiniMapEntity:SetIcon("grassGreen.png")
 
         inst.AnimState:SetBank("grass")
 		inst.AnimState:SetBuild("grassgreen_build")

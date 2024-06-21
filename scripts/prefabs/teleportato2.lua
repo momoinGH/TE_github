@@ -1795,7 +1795,10 @@ local function fn(Sim)
 	local trans = inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
 	inst.entity:AddNetwork()
-
+	
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("forge_altar.png")
+	
 inst.spider = 0
 inst.spiderwave = 0
 inst.hound = 0
@@ -1824,10 +1827,7 @@ inst.arenaativa = 0
 
 	MakeObstaclePhysics(inst, 1.1)
 
-	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetPriority( 5 )
-	minimap:SetIcon("teleportato_base.png")
-	minimap:SetPriority( 1 )
+	inst.MiniMapEntity:SetPriority(1)
 	
 	inst.entity:AddSoundEmitter()
 

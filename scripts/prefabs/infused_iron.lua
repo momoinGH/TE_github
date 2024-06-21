@@ -21,7 +21,8 @@ local function fn()
 	inst.entity:AddNetwork()  
     inst.entity:AddLight() 	
 	
-    MakeInventoryPhysics(inst)	
+    MakeInventoryPhysics(inst)
+	MakeInventoryFloatable(inst)		
 	
 	inst.entity:AddSoundEmitter()
 	inst.pickupsound = "metal"

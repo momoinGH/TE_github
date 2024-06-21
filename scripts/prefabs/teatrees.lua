@@ -429,6 +429,35 @@ local function chop_down_tree(inst, chopper)
     end
     detachchild(inst)
 
+
+
+
+    inst:DoTaskInTime(.4, function()
+		local sz = (inst.components.growable and inst.components.growable.stage > 2) and .5 or .25
+		GetPlayer().components.playercontroller:ShakeCamera(inst, "FULL", 0.25, 0.03, sz, 6)
+    end)
+
+    RemovePhysicsColliders(inst)
+    inst.AnimState:PushAnimation(inst.anims.stump)
+    inst.MiniMapEntity:SetIcon("teatree_stump.png")
+
+    if inst.leaveschangetask then
+        inst.leaveschangetask:Cancel()
+        inst.leaveschangetask = nil
+    end
+
+	inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.DIG)
+    inst.components.workable:SetOnFinishCallback(dig_up_stump)
+    inst.components.workable:SetWorkLeft(1)
+
+    if inst.components.growable then
+        inst.components.growable:StopGrowing()
+    end
+	
+	
+	
+	
 	local px, py, pz = inst.Transform:GetWorldPosition()	
 	local novacasa = SpawnPrefab("teatree_stump")
 	novacasa.Transform:SetPosition(px, py, pz)	
@@ -513,6 +542,7 @@ local function onburntchanges(inst)
     inst:RemoveComponent("spawner")
 
     inst.AnimState:PlayAnimation(inst.anims.burnt, true)
+	inst.MiniMapEntity:SetIcon("teatree_burnt.png")
     inst:DoTaskInTime(3*FRAMES, function(inst)
         if inst.components.burnable and inst.components.propagator then
             inst.components.burnable:Extinguish()
@@ -525,6 +555,7 @@ end
 
 local function OnBurnt(inst, imm)
     inst:AddTag("burnt")
+    inst.MiniMapEntity:SetIcon("teatree_burnt.png")
     if imm then
         if inst.monster then
             inst.monster = false
@@ -826,6 +857,7 @@ local function onload(inst, data)
 
         if data.burnt then
             inst:AddTag("fire") -- Add the fire tag here: OnEntityWake will handle it actually doing burnt logic
+			inst.MiniMapEntity:SetIcon("teatree_burnt.png")
         elseif data.stump then
             while inst:HasTag("shelter") do inst:RemoveTag("shelter") end
             while inst:HasTag("cattoyairborne") do inst:RemoveTag("cattoyairborne") end
@@ -842,6 +874,7 @@ local function onload(inst, data)
                 end
             end
             inst.AnimState:PlayAnimation(inst.anims.stump)
+			inst.MiniMapEntity:SetIcon("teatree_stump.png")
 
             MakeSmallBurnable(inst)
             inst:RemoveComponent("workable")
@@ -1131,6 +1164,7 @@ local function makefn(build, stage, data)
             RemovePhysicsColliders(inst)
             inst.AnimState:PlayAnimation(inst.anims.stump)
             inst:AddTag("stump")
+	        inst.MiniMapEntity:SetIcon("teatree_stump.png")			
 			inst:RemoveTag("teatree")
             inst:AddComponent("workable")
             inst.components.workable:SetWorkAction(ACTIONS.DIG)

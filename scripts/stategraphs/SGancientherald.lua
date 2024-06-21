@@ -63,7 +63,7 @@ function SpawnFireRain(inst)
 end
 
 function SpawnGhosts(inst)
-	SpawnRandomInRange(inst,"ghost", 4, 6, 10) --pigghost
+	SpawnRandomInRange(inst,"pigghost", 4, 6, 10) --pigghost
 end
 
 function SpawnNightmares(inst)

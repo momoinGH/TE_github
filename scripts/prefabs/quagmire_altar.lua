@@ -56,7 +56,10 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-
+	
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("quagmire_altar.png")
+		
     MakeObstaclePhysics(inst, .5)
 
     inst.AnimState:SetBank("quagmire_altar")

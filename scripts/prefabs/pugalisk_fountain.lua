@@ -96,8 +96,8 @@ local function fn(Sim)
     
     MakeObstaclePhysics(inst, 2)
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("pig_ruins_well.png")
+	inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("pugalisk_fountain.png")
 
 	inst.entity:SetPristine()
 

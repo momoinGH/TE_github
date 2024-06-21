@@ -29,7 +29,7 @@ local function fn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst, "idle_water", "anim")
+    MakeInventoryFloatable(inst)
     
     inst.AnimState:SetBank("armor_limestone")
     inst.AnimState:SetBuild("armor_limestone")

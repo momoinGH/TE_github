@@ -119,12 +119,12 @@ local function tree_fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
     MakeObstaclePhysics(inst, .25)
-
---    inst.MiniMapEntity:SetIcon("cave_banana_tree.png")
+	
+    inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon("crabapple_tree.png")
 
     inst:AddTag("plant")
 
@@ -208,7 +208,7 @@ local function stump_fn()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.MiniMapEntity:SetIcon("crabapple_stump.png")
+    inst.MiniMapEntity:SetIcon("crabapple_tree_stump.png")
 
     inst:AddTag("plant")
 
@@ -269,12 +269,12 @@ local function burnt_fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
     MakeObstaclePhysics(inst, .25)
-
---    inst.MiniMapEntity:SetIcon("cave_banana_tree_burnt.png")
+	
+    inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon("crabapple_tree_burnt.png")
 
     inst:AddTag("plant")
 

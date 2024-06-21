@@ -147,6 +147,9 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
+	
+	inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon("quagmire_safe.png")
 
     inst:AddTag("structure")
 	inst:AddTag("safe")

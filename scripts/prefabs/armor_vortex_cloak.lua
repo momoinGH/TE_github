@@ -2,6 +2,8 @@ local assets=
 {
 	Asset("ANIM", "anim/armor_vortex_cloak.zip"),
     Asset("ANIM", "anim/cloak_fx.zip"),
+	--Asset("MINIMAP_IMAGE", "armor_vortex_cloak"),
+	Asset("ANIM", "anim/ui_krampusbag_2x5.zip"),
 }
 
 local ARMORVORTEX = 150*3
@@ -66,6 +68,7 @@ local function onunequip(inst, owner)
 --    inst.SoundEmitter:KillSound("vortex")
 end
 
+
 local function nofuel(inst)
 
 end
@@ -100,10 +103,12 @@ local function fn()
     inst:AddTag("vortex_cloak")	
 	
     inst.entity:SetPristine()
-
-    inst.entity:SetPristine()
+	
+	local minimap = inst.entity:AddMiniMapEntity()
+	minimap:SetIcon( "armor_vortex_cloak.png" )	
+	
 	if not TheWorld.ismastersim then	
-	inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("backpack") end	
+	inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("armorvortexcloak") end	
 	return inst
 	end
         
@@ -115,7 +120,8 @@ local function fn()
     inst.foleysound = "dontstarve_DLC003/common/crafted/vortex_armour/foley"
 
     inst:AddComponent("container")
-	inst.components.container:WidgetSetup("backpack")
+	inst.components.container:WidgetSetup("armorvortexcloak")
+
 
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = "NIGHTMARE"

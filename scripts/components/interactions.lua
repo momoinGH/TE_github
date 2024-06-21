@@ -134,6 +134,7 @@ end
 --if jumper.components.driver.simbolo then jumper.AnimState:ClearOverrideSymbol(jumper.components.driver.simbolo) end
 --if jumper.components.driver.simbolo1 then jumper.AnimState:ClearOverrideSymbol(jumper.components.driver.simbolo1) end
 jumper.components.driver.vehicle:Remove()
+if jumper.components.drownable ~= nil then jumper.components.drownable.enabled = true end
 jumper:RemoveComponent("driver")
 jumper:RemoveTag("sail")
 jumper:RemoveTag("surf")
@@ -217,6 +218,7 @@ end
 --if jumper.components.driver.simbolo then jumper.AnimState:ClearOverrideSymbol(jumper.components.driver.simbolo) end
 --if jumper.components.driver.simbolo1 then jumper.AnimState:ClearOverrideSymbol(jumper.components.driver.simbolo1) end
 jumper.components.driver.vehicle:Remove()
+if jumper.components.drownable ~= nil then jumper.components.drownable.enabled = true end
 jumper:RemoveComponent("driver")
 jumper:RemoveTag("sail")
 jumper:RemoveTag("surf")

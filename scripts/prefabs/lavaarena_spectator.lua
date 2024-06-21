@@ -94,15 +94,15 @@ local function fn1()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
-
+	
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("forgeboar.png")
+	
 	inst.Transform:SetFourFaced()
     MakeObstaclePhysics(inst, 1.5, .5)
 	inst.Transform:SetRotation(0)
---	local minimap = inst.entity:AddMiniMapEntity()
---	minimap:SetIcon("minimap_octopusking.png")
---    inst.MiniMapEntity:SetPriority(1)
+
 
     inst.DynamicShadow:SetSize(10, 5)
 
@@ -130,15 +130,15 @@ local function fn2()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
+	
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("forgeboar.png")	
 
 	inst.Transform:SetFourFaced()
     MakeObstaclePhysics(inst, 1.5, .5)
 	inst.Transform:SetRotation(270)
---	local minimap = inst.entity:AddMiniMapEntity()
---	minimap:SetIcon("minimap_octopusking.png")
---    inst.MiniMapEntity:SetPriority(1)
+
 
     inst.DynamicShadow:SetSize(10, 5)
 
@@ -165,15 +165,15 @@ local function fn3()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
+	
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("forgeboar.png")
 
 	inst.Transform:SetFourFaced()
     MakeObstaclePhysics(inst, 1.5, .5)
 	inst.Transform:SetRotation(270)
---	local minimap = inst.entity:AddMiniMapEntity()
---	minimap:SetIcon("minimap_octopusking.png")
---    inst.MiniMapEntity:SetPriority(1)
+
 
     inst.DynamicShadow:SetSize(10, 5)
 
@@ -200,15 +200,15 @@ local function fn4()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
+	
+	inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("forgeboar.png")
 
 	inst.Transform:SetFourFaced()
     MakeObstaclePhysics(inst, 1.5, .5)
 	inst.Transform:SetRotation(180)
---	local minimap = inst.entity:AddMiniMapEntity()
---	minimap:SetIcon("minimap_octopusking.png")
---    inst.MiniMapEntity:SetPriority(1)
+
 
     inst.DynamicShadow:SetSize(10, 5)
 

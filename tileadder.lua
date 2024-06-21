@@ -52,6 +52,9 @@ if name == "beardrug" 			then return "levels/tiles/rocky.tex" end
 if name == "checkeredlawn" 		then return "levels/tiles/cobbleroad.tex" end
 if name == "foundation" 		then return "levels/tiles/blocky.tex" end
 if name == "pigruins" 			then return "levels/tiles/carpet.tex" end
+
+
+if name == "hamarchive" 		then return "levels/tiles/deeprainforest.tex" end
 --[[
 
 
@@ -96,7 +99,10 @@ if name == "beach" 				then return "levels/tiles/beach.xml" end
 if name == "beardrug" 			then return "levels/tiles/rocky.xml" end
 if name == "checkeredlawn" 		then return "levels/tiles/cobbleroad.xml" end
 if name == "foundation" 		then return "levels/tiles/blocky.xml" end
-if name == "pigruins" 			then return "levels/tiles/carpet.xml" end 
+if name == "pigruins" 			then return "levels/tiles/carpet.xml" end
+
+
+if name == "hamarchive" 		then return "levels/tiles/deeprainforest.xml" end 
 --[[ 
 
 

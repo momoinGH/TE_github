@@ -27,6 +27,9 @@ local function makefn(inst)
     MakeInventoryPhysics(inst)   
     MakeInventoryFloatable(inst)
 	
+	inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon("pheromone_stone.png")
+	
     inst.AnimState:SetBank("pheromone_stone")
     inst.AnimState:SetBuild("pheromone_stone")
     inst.AnimState:PlayAnimation("pherostone")	

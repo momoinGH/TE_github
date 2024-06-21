@@ -79,6 +79,9 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
+	
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("forge_portal.png")
 
     inst.AnimState:SetBuild("lavaarena_portal")
     inst.AnimState:SetBank("lavaarena_portal")
@@ -144,6 +147,9 @@ local function fn1()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
+	
+	inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("forge_portal.png")
 
     inst.AnimState:SetBuild("lavaarena_portal")
     inst.AnimState:SetBank("lavaarena_portal")

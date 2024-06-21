@@ -7,7 +7,7 @@ local assets =
 
 local prefabs =
 {
-	"dragoon",
+	"bear",
 }
 
 local function ongohome(inst, child)
@@ -84,7 +84,7 @@ local function fn()
 	MakeObstaclePhysics(inst, 1.5)
 
 	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetIcon("dragoon_den.png")
+	minimap:SetIcon("bearden.png")
 
     inst.AnimState:SetBank("merm_sw_house")
     inst.AnimState:SetBuild("wildbea_house")

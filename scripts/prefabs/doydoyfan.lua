@@ -78,6 +78,8 @@ local function doydoyfan()
 
     MakeInventoryPhysics(inst)
 	MakeInventoryFloatable(inst)	
+	inst.components.floater:SetSize("med")
+    inst.components.floater:SetVerticalOffset(0.05)
 
     inst.AnimState:SetBank("fan_tropical")
     inst.AnimState:SetBuild("fan_tropical")

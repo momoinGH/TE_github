@@ -100,9 +100,9 @@
 <Element name="pandahouse.png" u1="0.45" u2="0.5" v1="0.75" v2="0.80" />
 <Element name="cristaled_tree.png" u1="0.50" u2="0.55" v1="0.75" v2="0.80" />
 <Element name="fishpalace.png" u1="0.55" u2="0.6" v1="0.75" v2="0.80" />
-<Element name="wildbeaver_house.png" u1="0.60" u2="0.65" v1="0.75" v2="0.80" />
+<Element name="wildbeaver_house_old.png" u1="0.60" u2="0.65" v1="0.75" v2="0.80" />
 <Element name="pig_shop_spears.png" u1="0.65" u2="0.7" v1="0.75" v2="0.80" />
-<Element name="pigiglu.png" u1="0.70" u2="0.75" v1="0.75" v2="0.80" />
+<Element name="pig_iglu.png" u1="0.70" u2="0.75" v1="0.75" v2="0.80" />
 <Element name="wobster_densw.png" u1="0.75" u2="0.8" v1="0.75" v2="0.80" />
 <Element name="piggravestones.png" u1="0.8" u2="0.85" v1="0.75" v2="0.80" />
 <Element name="tree_forest_rot.png" u1="0.85" u2="0.9" v1="0.75" v2="0.80" />
@@ -110,7 +110,7 @@
 <Element name="pandatree.png" u1="0.95" u2="1" v1="0.75" v2="0.80" />
 
 
-<Element name="tree_mangrovebee.png" 	 u1="0.00" u2="0.05" v1="0.70" v2="0.75" />
+<Element name="tree_mangrovebee_old.png" 	 u1="0.00" u2="0.05" v1="0.70" v2="0.75" />
 <Element name="mutator_frost.tex" 	 	 u1="0.05" u2="0.10" v1="0.70" v2="0.75" />
 <Element name="mutator_tropical.tex" 	 u1="0.10" u2="0.15" v1="0.70" v2="0.75" />
 <Element name="grotto_grub_nest.png" 	 u1="0.15" u2="0.20" v1="0.70" v2="0.75" />
@@ -122,14 +122,14 @@
 <Element name="spidercoralhole.png" 	 u1="0.45" u2="0.50" v1="0.70" v2="0.75" />
 <Element name="grotto_pillar_bug.png" 	 u1="0.50" u2="0.55" v1="0.70" v2="0.75" />
 <Element name="feather_chicken.tex" 	 u1="0.55" u2="0.60" v1="0.70" v2="0.75" />
-<Element name="icedpad.png" 			 u1="0.60" u2="0.65" v1="0.70" v2="0.75" />
-<Element name="coi.png" 				 u1="0.65" u2="0.70" v1="0.70" v2="0.75" />
-<Element name=".png" u1="0.70" u2="0.75" v1="0.70" v2="0.75" />
-<Element name=".png" u1="0.75" u2="0.80" v1="0.70" v2="0.75" />
-<Element name=".png" u1="0.80" u2="0.85" v1="0.70" v2="0.75" />
-<Element name=".png" u1="0.85" u2="0.90" v1="0.70" v2="0.75" />
-<Element name=".png" u1="0.90" u2="0.95" v1="0.70" v2="0.75" />
-<Element name=".png" u1="0.95" u2="1.00" v1="0.70" v2="0.75" />
+<Element name="icedpad.png" 	u1="0.60" u2="0.65" v1="0.70" v2="0.75" />
+<Element name="coi.png" 		u1="0.65" u2="0.70" v1="0.70" v2="0.75" />
+<Element name="pig_fishingshop.png" u1="0.70" u2="0.75" v1="0.70" v2="0.75" />
+<Element name="pig_lootshop.png" u1="0.75" u2="0.80" v1="0.70" v2="0.75" />
+<Element name="wildbeaver_house.png" u1="0.80" u2="0.85" v1="0.70" v2="0.75" />
+<Element name="bearden.png" u1="0.85" u2="0.90" v1="0.70" v2="0.75" />
+<Element name="frostbush.png" u1="0.90" u2="0.95" v1="0.70" v2="0.75" />
+<Element name="snow_pile.png" u1="0.95" u2="1.00" v1="0.70" v2="0.75" />
 
 
 <Element name="minimap_volcano_entrance.png" u1="0" u2="0.15" v1="0" v2="0.15" />

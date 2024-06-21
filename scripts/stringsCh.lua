@@ -1453,10 +1453,10 @@ STRINGS.NAMES.COCONADE = "椰子炸弹"
 GLOBAL.STRINGS.RECIPE_DESC.COCONADE = "炸开巨石!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONADE = "椰子做的炸弹，"
 
-GLOBAL.STRINGS.NAMES.BLOWDART_POISON = "毒吹箭"
+GLOBAL.STRINGS.NAMES.BLOWDART_POISON = "淬毒吹箭"
 GLOBAL.STRINGS.RECIPE_DESC.BLOWDART_POISON = "这个可以让敌人中毒！"
 GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.BLOWDART_POISON = "朝你的敌人喷毒！"
-STRINGS.NAMES.BLOWDART_POISON = "毒吹箭"
+STRINGS.NAMES.BLOWDART_POISON = "淬毒吹箭"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BLOWDART_POISON = "朝你的敌人喷毒！"
 
 STRINGS.NAMES.SHARD_SWORD = "碎裂剑"
@@ -3185,10 +3185,24 @@ STRINGS.CITY_PIG_GUARD_LIGHT_TORCH = {
                                     DEFAULT = {"我点亮了这热烈的火炬！", "火炬，火炬！", "宵禁时间！"},
                                 }
 STRINGS.CITY_PIG_TALK_REFUSE_GIFT = {
-                                    DEFAULT = {"你有 %s吗？我可以付钱。"},                                   
+                                    DEFAULT = {"你有货物吗？我可以付钱。"}, 
+                                    pigman_beautician = {"你有羽毛吗？","你有鸟儿的羽毛吗？", "你有漂亮的羽毛吗？", "卖给我羽毛。"},
+                                    pigman_mechanic = {"你有木板吗？", "你有绳子吗？", "我要买你那些精炼的东西。", "你有精炼货物吗？"},
+                                    pigman_mayor = {"你有金子吗？", "卖给我金块。", "我要的是金子。"},
+                                    pigman_collector = {"你有新奇的小东西吗？", "我能买你身上的小东西吗？","针刺，蛛丝，蚊子，虫壳，花茎，毒腺，腺体和莲花我都要。"},
+                                    pigman_banker = {"有珠宝吗？", "我要买你的宝石。", "你愿意卖给我珠宝吗？"},
+                                    pigman_florist = {"你有花瓣吗？", "我要买你的花瓣。"},
+                                    pigman_farmer = {"你有草吗？", "能卖给我你的草吗？"},
+                                    pigman_miner = {"你有石头吗？", "我会为你的石头付钱。", "卖石头吗？", "我喜欢石头。", "卖给我一些石头吧。"},
+                                    pigman_shopkeep = {"你有碎叶吗？", "把你的碎叶卖给我吧。", "你有剪下的树篱吗？"},
+                                    pigman_storeowner = {"你有碎叶吗？","有修剪下来的碎叶吗？", "把你修剪树篱下来的碎叶卖给我吧。"},
+                                    pigman_erudite = {"你有古代的遗物吗？", "给我看看你的小猪遗物", "你有噩梦燃料吗？", "卖给我噩梦燃料吧。"},
+                                    pigman_hatmaker = {"我要买你的羽毛。", "你有蜘蛛丝吗？", "我需要蜘蛛丝。", "卖给我一些蜘蛛丝吧。"},
+                                    pigman_professor = {"你有遗物吗？", "我要古代的宝贝。", "我可以为你的遗物付钱。"},
+                                    pigman_hunter = {"你有狗牙吗？", "能卖给我针刺吗？", "我收购狗牙。"},								
                                 }
 STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY = {
-                                    DEFAULT = {" %s 天再来吧。"},                                   
+                                    DEFAULT = {" 过几天再来吧。"},                                   
                                 }                              
 STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY_TOMORROW = {
                                     DEFAULT = {"第二天再来吧。"},                                   
@@ -3197,7 +3211,7 @@ STRINGS.CITY_PIG_TALK_RELIC_GIFT = {
                                     DEFAULT = {"拿去那边的博物馆吧。", "“猪圈”才是存放它的地方。"},            -- \"THE STY\" 
                                 }
 STRINGS.CITY_PIG_TALK_TAKE_GIFT = {
-                                    DEFAULT = {"非常感谢, 请给我更多 %s 。"},                                   
+                                    DEFAULT = {"非常感谢, 请给我更多。"},                                   
                                 }
 STRINGS.CITY_PIG_TALK_GIVE_REWARD = {
                                     DEFAULT = {"一份可敬的工作，这是你的奖励", "你做的真高尚", "干得漂亮"},                                   
@@ -6881,7 +6895,7 @@ STRINGS.MERM_TALK_GO_HOME =
 -----------------new adde by vagner-----------------------
 
 
-STRINGS.NAMES.STUNGRAYUNDERWATER = "魔鬼飞鱼"
+STRINGS.NAMES.STUNGRAYUNDERWATER = "恶臭蝠鲼"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.STUNGRAYUNDERWATER = "我觉得我应该离这东西远点。"
 
 STRINGS.NAMES.DOGFISH_UNDER = "狗鱼"
@@ -7117,6 +7131,8 @@ STRINGS.RECIPE_DESC.BELL1 = "这可不是普通的铃铛。"
 STRINGS.NAMES.BAT_LEATHER = "蝙蝠皮"
 STRINGS.RECIPE_DESC.PIGSKIN = "皮革就是皮革。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAT_LEATHER = "蝙蝠躲在里面吗？"
+
+STRINGS.NAMES.TURF_HAMARCHIVE = "遗迹迷宫地皮"
 -------------------------------------------------------------
 if STRINGS.GF == nil then return end
 
