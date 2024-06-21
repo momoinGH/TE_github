@@ -219,7 +219,9 @@ local function fn(Sim)
 	local shadow = inst.entity:AddDynamicShadow()
 	shadow:SetSize( 6, 2 )
 	inst.Transform:SetSixFaced()
-
+	
+	inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("ox.png")
 
 	MakeCharacterPhysics(inst, 100, .75)
 --	MakeAmphibiousCharacterPhysics(inst, 100, .5)

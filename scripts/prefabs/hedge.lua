@@ -85,13 +85,13 @@ local function onhackedfn(inst, hacker, hacksleft)
     fx.Transform:SetPosition(x,y,z)
 
 	if(hacksleft <= 0) then
-		inst.AnimState:PlayAnimation("growth2to1")
+		inst.AnimState:PlayAnimation("hit")
 		inst.AnimState:PushAnimation("growth1")
 		inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
 	else
 
-		inst.AnimState:PlayAnimation("growth2to3")
-		inst.AnimState:PushAnimation("growth3")		
+		inst.AnimState:PlayAnimation("hit")
+		inst.AnimState:PushAnimation("growth2")		
 	end
 	
 	inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")

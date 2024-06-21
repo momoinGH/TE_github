@@ -24,11 +24,14 @@ local function fn(Sim)
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
     MakeInventoryPhysics(inst)
+	inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()	
     inst.entity:AddSoundEmitter()
 	
     MakeInventoryFloatable(inst)
  
+ 	inst.MiniMapEntity:SetIcon("key_to_city.png")
+	
     inst.AnimState:SetBank("keytocity")
     inst.AnimState:SetBuild("key_to_city")
     inst:AddTag("prototyper")

@@ -60,13 +60,15 @@ local function create_summer()
 
 
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+    inst.components.equippable.equipslot = EQUIPSLOTS.WAIST or EQUIPSLOTS.BODY
 
     inst.components.equippable:SetOnEquip( onequip )
     inst.components.equippable:SetOnUnequip( onunequip )
     
 	inst:AddComponent("insulator")
 	
+    inst:AddTag("clothing")
+
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = "USAGE"
     inst.components.fueled:InitializeFuelLevel(TUNING.TRUNKVEST_PERISHTIME)
@@ -123,13 +125,15 @@ local function create_winter()
 
 
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+    inst.components.equippable.equipslot = EQUIPSLOTS.WAIST or EQUIPSLOTS.BODY -- 适配五格
 
     inst.components.equippable:SetOnEquip( onequip )
     inst.components.equippable:SetOnUnequip( onunequip )
     
 	inst:AddComponent("insulator")
-	
+
+    inst:AddTag("clothing") -- 适配六格
+
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = "USAGE"
     inst.components.fueled:InitializeFuelLevel(TUNING.TRUNKVEST_PERISHTIME)

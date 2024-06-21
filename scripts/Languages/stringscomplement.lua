@@ -2138,6 +2138,10 @@ STRINGS.CITYPIGNAMES=
         "Wellington",
         "Gulliver", 
     },
+	QUEEN = 
+    {
+        "Queen Malfalfa",
+    },
 }
 
 

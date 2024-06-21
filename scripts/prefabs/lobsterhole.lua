@@ -2,7 +2,7 @@ local assets =
 {
     Asset("ANIM", "anim/lobster_den.zip"),
     Asset("ANIM", "anim/lobsterdenswbuild.zip"),
-    Asset("MINIMAP_IMAGE", "wobster_den"),
+    --Asset("MINIMAP_IMAGE", "wobster_den"),
 }
 
 local prefabs =
@@ -164,7 +164,7 @@ local function fn()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.MiniMapEntity:SetIcon("wobster_densw.png")
+    inst.MiniMapEntity:SetIcon("lobster.png")
 
     inst:SetPhysicsRadiusOverride(2.35)
 

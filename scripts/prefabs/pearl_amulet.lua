@@ -43,7 +43,7 @@ local function fn()
     inst:AddComponent("inspectable")
 	
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+	inst.components.equippable.equipslot = EQUIPSLOTS.NECK or EQUIPSLOTS.BODY -- 适配五格
 	inst.components.equippable:SetOnEquip(onequip)
 	inst.components.equippable:SetOnUnequip(onunequip)
     
@@ -55,6 +55,8 @@ local function fn()
 	inst.components.inventoryitem.imagename = "pearl_amulet"
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/pearl_amulet.xml"
    
+    inst:AddTag("amulet") -- 适配六格
+
 	inst:AddComponent("fueled")
 	inst.components.fueled.fueltype = "MAGIC"
 	inst.components.fueled:InitializeFuelLevel(UW_TUNING.PEARL_AMULET_FUEL)

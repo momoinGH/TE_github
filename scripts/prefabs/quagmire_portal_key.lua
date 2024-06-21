@@ -19,11 +19,14 @@ local function fn()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
     MakeInventoryPhysics(inst)
+	inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()	
     inst.entity:AddSoundEmitter()
 
     MakeInventoryFloatable(inst)
 	
+	inst.MiniMapEntity:SetIcon("quagmire_portal_key.png")
+		
     inst.AnimState:SetBank("quagmire_portal_key")
     inst.AnimState:SetBuild("quagmire_portal_key")
     inst.AnimState:PlayAnimation("idle")
