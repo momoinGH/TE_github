@@ -5,6 +5,7 @@ local assets =
     Asset("ANIM", "anim/ds_pig_attacks.zip"),
     Asset("ANIM", "anim/ds_pig_elite.zip"),
     Asset("ANIM", "anim/ds_pig_elite_intro.zip"),
+	Asset("ANIM", "anim/ds_pig_boat_jump.zip"),
     Asset("ANIM", "anim/wildbore_elite_build.zip"),	
     Asset("ANIM", "anim/pig_build.zip"),
     Asset("ANIM", "anim/pigspotted_build.zip"),
@@ -15,6 +16,8 @@ local assets =
     Asset("ANIM", "anim/slide_puff.zip"),	
     Asset("SOUND", "sound/pig.fsb"),
     Asset("ANIM", "anim/wildbore_build.zip"),	
+	Asset("SOUND", "sound/pig.fsb"),
+	--Asset("ANIM", "anim/merm_actions.zip"),
 }
 
 local prefabs =
@@ -33,8 +36,14 @@ local normalbrain = require "brains/wildboreguardbrain"
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
 
+--jueying define
+local normalpig_health = TUNING.PIG_HEALTH * 1.5
+local guardpig_health = TUNING.PIG_GUARD_HEALTH * 1.2
+local normalpig_damage = TUNING.PIG_DAMAGE * 1.2
+local guardpig_damage = TUNING.PIG_GUARD_DAMAGE * 1.2
+
 local function ontalk(inst, script)
-    inst.SoundEmitter:PlaySound("dontstarve/pig/grunt")
+    inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/wild_boar/grunt")
 end
 
 local function GuardShouldSleep(inst)
@@ -171,12 +180,13 @@ end
 local function SetNormalPig(inst)
     inst:RemoveTag("werepig")
     inst:RemoveTag("guard")
-    inst:SetBrain(normalbrain)
+    inst:SetBrain(normalbrain)    
+	inst:SetStateGraph("SGpigminion")
     inst.AnimState:SetBuild("wildbore_build")
 
 	inst.variation = inst.variation
 	if inst.variation == nil then inst.variation = math.random(1,4) end
-    inst:SetStateGraph("SGpigminion")		
+		
 	inst.sg.mem.variation = inst.variation	
 	
 	if inst.variation == 1 then
@@ -216,7 +226,7 @@ local function SetNormalPig(inst)
     inst.components.werebeast:SetOnNormalFn(SetNormalPig)
     inst.components.sleeper:SetResistance(2)
 
-    inst.components.combat:SetDefaultDamage(TUNING.PIG_DAMAGE)
+    inst.components.combat:SetDefaultDamage(normalpig_damage)
     inst.components.combat:SetAttackPeriod(TUNING.PIG_ATTACK_PERIOD)
     inst.components.combat:SetKeepTargetFunction(NormalKeepTargetFn)
     inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED
@@ -225,7 +235,7 @@ local function SetNormalPig(inst)
     inst.components.sleeper:SetSleepTest(GuardShouldSleep)
     inst.components.sleeper:SetWakeTest(GuardShouldWake)
 
-    inst.components.health:SetMaxHealth(TUNING.PIG_HEALTH)
+    inst.components.health:SetMaxHealth(normalpig_health)
     inst.components.combat:SetRetargetFunction(3, NormalRetargetFn)
     inst.components.combat:SetTarget(nil)
 
@@ -243,8 +253,8 @@ local function SetGuardPig(inst)
     inst.components.werebeast:SetOnNormalFn(SetGuardPig)
     inst.components.sleeper:SetResistance(3)
 
-    inst.components.health:SetMaxHealth(TUNING.PIG_GUARD_HEALTH)
-    inst.components.combat:SetDefaultDamage(TUNING.PIG_GUARD_DAMAGE)
+    inst.components.health:SetMaxHealth(guardpig_health)
+    inst.components.combat:SetDefaultDamage(guardpig_damage)
     inst.components.combat:SetAttackPeriod(TUNING.PIG_GUARD_ATTACK_PERIOD)
     inst.components.combat:SetKeepTargetFunction(NormalKeepTargetFn)
     inst.components.combat:SetRetargetFunction(1, NormalRetargetFn)
@@ -495,7 +505,14 @@ local function normal()
     if not TheWorld.ismastersim then
         return inst
     end
-
+	
+	--inst.scrapbook_build = "wildbore_build"
+	
+    -- boat hopping setup
+    inst.components.locomotor:SetAllowPlatformHopping(true)
+    inst:AddComponent("embarker")
+    inst:AddComponent("drownable")
+	
     inst.build = builds[1]
     inst.AnimState:SetBuild(inst.build)	
     SetNormalPig(inst)
@@ -508,7 +525,14 @@ local function guard()
     if not TheWorld.ismastersim then
         return inst
     end
-
+	
+	--inst.scrapbook_build = "wildbore_build"
+	
+    -- boat hopping setup
+    inst.components.locomotor:SetAllowPlatformHopping(true)
+    inst:AddComponent("embarker")
+    inst:AddComponent("drownable")
+	
     inst.build = guardbuilds[math.random(#guardbuilds)]
     inst.AnimState:SetBuild(inst.build)
     SetGuardPig(inst)

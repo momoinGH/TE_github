@@ -79,7 +79,7 @@ return {
   
         {
           name = "",
-          type = "quagmire_swampig_house_rubble",
+          type = "quagmire_swampig_house",
           shape = "rectangle",
           x = 250,
           y = 25,
@@ -91,7 +91,7 @@ return {
 		
         {
           name = "",
-          type = "quagmire_swampig_house_rubble",
+          type = "quagmire_swampig_house",
           shape = "rectangle",
           x = 250,
           y = 475,
@@ -103,7 +103,7 @@ return {
 		
         {
           name = "",
-          type = "quagmire_swampig_house_rubble",
+          type = "quagmire_swampig_house",
           shape = "rectangle",
           x = 25,
           y = 250,
@@ -112,21 +112,9 @@ return {
           visible = true,
           properties = {}
         },
-        {
+		{
           name = "",
-          type = "quagmire_swampig_house_rubble",
-          shape = "rectangle",
-          x = 475,
-          y = 250,
-          width = 16,
-          height = 16,
-          visible = true,
-          properties = {}
-        },
-
-        {
-          name = "",
-          type = "quagmire_swampig_house_rubble",
+          type = "quagmire_swampig_house",
           shape = "rectangle",
           x = 350,
           y = 150,
@@ -137,9 +125,42 @@ return {
         },
         {
           name = "",
+          type = "quagmire_swampig_house_unbuilt",
+          shape = "rectangle",
+          x = 475,
+          y = 250,
+          width = 16,
+          height = 16,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",--
+          type = "quagmire_swampig_house_unbuilt",
+          shape = "rectangle",
+          x = 375,
+          y = 450,
+          width = 16,
+          height = 16,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",--
           type = "quagmire_swampig_house_rubble",
           shape = "rectangle",
-          x = 150,
+          x = 75,
+          y = 75,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "quagmire_swampig_house_rubble",
+          shape = "rectangle",
+          x = 50,
           y = 150,
           width = 0,
           height = 0,

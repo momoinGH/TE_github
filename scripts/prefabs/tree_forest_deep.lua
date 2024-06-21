@@ -566,7 +566,7 @@ local function makefn(build, stage, data)
 		MakeObstaclePhysics(inst, .25)
 
 		local minimap = inst.entity:AddMiniMapEntity()
-		minimap:SetIcon("jungleTree.png")
+		minimap:SetIcon("tree_forest_pink.png")
 
 		minimap:SetPriority(-1)
 

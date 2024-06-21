@@ -8,12 +8,15 @@ local assets =
 	Asset("ANIM", "anim/ds_pig_actions.zip"),
 	Asset("ANIM", "anim/ds_pig_attacks.zip"),
     Asset("ANIM", "anim/ds_pig_charge.zip"),
+	Asset("ANIM", "anim/ds_pig_boat_jump.zip"),
     Asset("ANIM", "anim/wildbore_build.zip"),
 	Asset("ANIM", "anim/pigspotted_build.zip"),
 	Asset("ANIM", "anim/pig_guard_build.zip"),
 	Asset("ANIM", "anim/werepig_build.zip"),
 	Asset("ANIM", "anim/werepig_basic.zip"),
 	Asset("ANIM", "anim/werepig_actions.zip"),
+	Asset("SOUND", "sound/pig.fsb"),
+	--Asset("ANIM", "anim/merm_actions.zip"),
 }
 
 local prefabs =
@@ -36,7 +39,7 @@ local normalpig_damage = TUNING.PIG_DAMAGE * 1.2
 local guardpig_damage = TUNING.PIG_GUARD_DAMAGE * 1.2
 
 local function ontalk(inst, script)
-    inst.SoundEmitter:PlaySound("dontstarve/pig/grunt")
+    inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/wild_boar/grunt")
 end
 
 --脑残值影响
@@ -178,9 +181,10 @@ local function OnNewTarget(inst, data)
 end
 
 local builds = {"wildbore_build", "pigspotted_build"}
-local guardbuilds = {"pig_guard_build"}
+local guardbuilds = {"wildbore_build"}
+local RETARGET_MUST_TAGS = { "_combat" }
 
-local function NormalRetargetFn(inst)
+--[[local function NormalRetargetFn(inst)
     return FindEntity(
         inst,
         TUNING.PIG_TARGET_DIST,
@@ -193,6 +197,38 @@ local function NormalRetargetFn(inst)
         { "playerghost", "INLIMBO", "abigail" } or   --不包含的tag
         { "playerghost", "INLIMBO" }
     )
+end]]
+
+local function NormalRetargetFn(inst)
+    if inst:HasTag("NPC_contestant") then
+        return nil
+    end
+
+	local exclude_tags = { "playerghost", "INLIMBO" , "NPC_contestant" }
+	if inst.components.follower.leader ~= nil then
+		table.insert(exclude_tags, "abigail")
+	end
+	if inst.components.minigame_spectator ~= nil then
+		table.insert(exclude_tags, "player") -- prevent spectators from auto-targeting webber
+	end
+
+    local oneof_tags = {"monster","wonkey","pirate"}
+    if not inst:HasTag("merm") then
+        table.insert(oneof_tags, "merm")
+    end
+
+    return not inst:IsInLimbo()
+        and FindEntity(
+                inst,
+                TUNING.PIG_TARGET_DIST,
+                function(guy)
+                    return guy:IsInLight() and inst.components.combat:CanTarget(guy)
+                end,
+                RETARGET_MUST_TAGS, -- see entityreplica.lua
+                exclude_tags,
+                oneof_tags
+            )
+        or nil
 end
 
 local function NormalKeepTargetFn(inst, target)
@@ -321,8 +357,47 @@ local function SetGuardPig(inst)
     inst:AddTag("guard")
     inst:SetBrain(guardbrain)
     inst:SetStateGraph("SGwildbore")
-    inst.AnimState:SetBuild(inst.build)
+    inst.AnimState:SetBuild("wildbore_build")
 
+	inst.variation = inst.variation
+	if inst.variation == nil then inst.variation = math.random(1,4) end
+		
+	inst.sg.mem.variation = inst.variation	
+	
+	if inst.variation == 1 then
+	inst.AnimState:OverrideSymbol("pig_arm", "wildbore_elite_build", "pig_arm_3")	
+--	inst.AnimState:OverrideSymbol("pig_ear", "wildbore_elite_build", "pig_ear_1")
+--	inst.AnimState:OverrideSymbol("pig_head", "wildbore_elite_build", "pig_head_1")
+	inst.AnimState:OverrideSymbol("pig_skirt", "wildbore_elite_build", "pig_skirt_1")
+	inst.AnimState:OverrideSymbol("pig_torso", "wildbore_elite_build", "pig_torso_1")
+	inst.AnimState:OverrideSymbol("spin_bod", "wildbore_elite_build", "spin_bod_1")
+	end
+	
+	if inst.variation == 2 then
+	inst.AnimState:OverrideSymbol("pig_arm", "wildbore_elite_build", "pig_arm_2")	
+--	inst.AnimState:OverrideSymbol("pig_ear", "wildbore_elite_build", "pig_ear_2")
+--	inst.AnimState:OverrideSymbol("pig_head", "wildbore_elite_build", "pig_head_2")
+	inst.AnimState:OverrideSymbol("pig_skirt", "wildbore_elite_build", "pig_skirt_2")
+	inst.AnimState:OverrideSymbol("pig_torso", "wildbore_elite_build", "pig_torso_2")
+	inst.AnimState:OverrideSymbol("spin_bod", "wildbore_elite_build", "spin_bod_2")
+	end
+
+	if inst.variation == 3 then
+
+--	inst.AnimState:OverrideSymbol("pig_ear", "wildbore_elite_build", "pig_ear_3")
+--	inst.AnimState:OverrideSymbol("pig_head", "wildbore_elite_build", "pig_head_3")
+	inst.AnimState:OverrideSymbol("pig_skirt", "wildbore_elite_build", "pig_skirt_3")
+	inst.AnimState:OverrideSymbol("pig_torso", "wildbore_elite_build", "pig_torso_3")
+	inst.AnimState:OverrideSymbol("spin_bod", "wildbore_elite_build", "spin_bod_3")
+	end
+
+	if inst.variation == 4 then
+	inst.AnimState:OverrideSymbol("pig_head", "wildbore_elite_build", "pig_head_4")
+	inst.AnimState:OverrideSymbol("pig_skirt", "wildbore_elite_build", "pig_skirt_4")
+	inst.AnimState:OverrideSymbol("pig_torso", "wildbore_elite_build", "pig_torso_4")
+	inst.AnimState:OverrideSymbol("spin_bod", "wildbore_elite_build", "spin_bod_4")
+	end	
+	
     inst.components.werebeast:SetOnNormalFn(SetGuardPig)
     inst.components.sleeper:SetResistance(3)
 
@@ -627,7 +702,14 @@ local function normal()
     if not TheWorld.ismastersim then
         return inst
     end
-
+	
+	--inst.scrapbook_build = "wildbore_build"
+	
+    -- boat hopping setup
+    inst.components.locomotor:SetAllowPlatformHopping(true)
+    inst:AddComponent("embarker")
+    inst:AddComponent("drownable")
+	
     --inst.build = builds[math.random(#builds)]
 	inst.build = "wildbore_build"
     inst.AnimState:SetBuild(inst.build)
@@ -641,9 +723,16 @@ local function guard()
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst.build = guardbuilds[math.random(#guardbuilds)]
-    inst.AnimState:SetBuild(inst.build)
+	
+	--inst.scrapbook_build = "wildbore_build"
+	
+    -- boat hopping setup
+    inst.components.locomotor:SetAllowPlatformHopping(true)
+    inst:AddComponent("embarker")
+    inst:AddComponent("drownable")
+	
+    inst.build = builds[1]
+    inst.AnimState:SetBuild(inst.build)	
     SetGuardPig(inst)
     return inst
 end

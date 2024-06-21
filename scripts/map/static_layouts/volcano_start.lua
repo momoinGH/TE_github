@@ -103,7 +103,7 @@ return {
         },
         {
           name = "",
-          type = "marblepillar",
+          type = "volcano_altar_pillar",
           shape = "rectangle",
           x = 95,
           y = 268,
@@ -114,7 +114,7 @@ return {
         },
         {
           name = "",
-          type = "marblepillar",
+          type = "volcano_altar_pillar",
           shape = "rectangle",
           x = 119,
           y = 106,
@@ -125,7 +125,7 @@ return {
         },
         {
           name = "",
-          type = "marblepillar",
+          type = "volcano_altar_pillar",
           shape = "rectangle",
           x = 240,
           y = 297,
@@ -136,7 +136,7 @@ return {
         },
         {
           name = "",
-          type = "marblepillar",
+          type = "volcano_altar_pillar",
           shape = "rectangle",
           x = 247,
           y = 95,
@@ -158,7 +158,7 @@ return {
         },
         {
           name = "",
-          type = "marblepillar",
+          type = "volcano_altar_pillar",
           shape = "rectangle",
           x = 301,
           y = 194,

@@ -204,7 +204,7 @@ local peach_smoothie =
 			test = function(cooker, names, tags) return (names.peach or names.grilled_peach) and (names.peach or names.grilled_peach)>=2 and tags.dairy and tags.sweetener and not tags.meat and not tags.egg and not tags.inedible and not tags.monster end,
 			priority = 100,
 			weight = 1,
-			foodtype = "VEGGIE",
+			foodtype = FOODTYPE.GOODIES,
 			health = 10,
 			hunger = 65,
 			sanity = 10,
@@ -249,7 +249,7 @@ local caramel_peach =
 			test = function(cooker, names, tags) return (names.peach or names.grilled_peach) and tags.sweetener and tags.sweetener >=2 and names.twigs and not tags.meat and not tags.egg and not tags.monster end,
 			priority = 100,
 			weight = 1,
-			foodtype = "VEGGIE",
+			foodtype = FOODTYPE.GOODIES,
 			health = 40,
 			hunger = 45,
 			sanity = 5,
@@ -264,12 +264,15 @@ local peach_juice =
 			test = function(cooker, names, tags) return (names.peach or names.grilled_peach) and  (names.peach or names.grilled_peach) >=2 and tags.sweetener and tags.water and not tags.meat and not tags.egg and not tags.monster  end,
 			priority = 100,
 			weight = 1,
-			foodtype = "VEGGIE",
+			foodtype = FOODTYPE.GOODIES,
 			health = 15,
 			hunger = 35,
 			sanity = 5,
 			cooktime = 0.5,
-			cookbook_atlas = "images/inventoryimages/peach_juice_bottle_green.xml",				
+			cookbook_atlas = "images/inventoryimages/peach_juice_bottle_green.xml",	
+			-- oneatenfn = function(inst, eater)
+			-- 	eater:PushEvent("learncookbookstats", inst.prefab)
+			-- end,--不是，这吃了怎么不解锁图鉴啊
 		}
 		
 local potion =
@@ -278,12 +281,15 @@ local potion =
 			test = function(cooker, names, tags) return tags.peachy and tags.goddessmagic and tags.loaf and (names.peach or names.grilled_peach) end,
 			priority = 100,
 			weight = 1,
-			foodtype = "MEAT",
+			foodtype = FOODTYPE.GOODIES,
 			health = 75,
 			hunger = 75,
 			sanity = 75,
 			cooktime = 0.5,
-			cookbook_atlas = "images/inventoryimages/potion_bottle_green.xml",			
+			cookbook_atlas = "images/inventoryimages/potion_bottle_green.xml",	
+			-- oneatenfn = function(inst, eater)
+			-- 	eater:PushEvent("learncookbookstats", inst.prefab)
+			-- end,			
 		}
 		
 		
@@ -293,7 +299,7 @@ local peach_custard =
 			test = function(cooker, names, tags) return (names.peach or names.grilled_peach) and tags.egg and tags.sweetener and (names.peach or names.grilled_peach) >=2 and not names.twigs and not tags.meat and not tags.monster end,
 			priority = 100,
 			weight = 1,
-			foodtype = "VEGGIE",
+			foodtype = FOODTYPE.GOODIES,
 			health = 20,
 			hunger = 62,
 			sanity = 5,
@@ -310,6 +316,13 @@ AddCookerRecipe("cookpot",peach_custard)
 AddCookerRecipe("cookpot",peachy_meatloaf)
 AddCookerRecipe("cookpot",potion)
 AddCookerRecipe("cookpot",peach_juice)
+AddCookerRecipe("portablecookpot",peach_smoothie)
+AddCookerRecipe("portablecookpot",peach_kabobs)
+AddCookerRecipe("portablecookpot",caramel_peach)
+AddCookerRecipe("portablecookpot",peach_custard)
+AddCookerRecipe("portablecookpot",peachy_meatloaf)
+AddCookerRecipe("portablecookpot",potion)
+AddCookerRecipe("portablecookpot",peach_juice)
 
 --local goddess_tab = AddRecipeTab("Wind Goddess Magic", 969, "images/inventoryimages/windyfan1.xml", "windyfan1.tex", nil )
 AddRecipe2("magicpowder",			{Ingredient("goddess_butterflywings", 8, "images/inventoryimages/goddess_butterflywings.xml"), Ingredient("nightmarefuel", 8), Ingredient("cutgreengrass", 8, "images/inventoryimages/cutgreengrass.xml")},											TECH.GODDESS_TWO, {atlas="images/inventoryimages/magicpowder.xml", numtogive=8}, 	{"CRAFTING_STATION"})

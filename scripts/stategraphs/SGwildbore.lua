@@ -11,6 +11,8 @@ local actionhandlers =
     ActionHandler(ACTIONS.ADDFUEL, "pickup"),
     ActionHandler(ACTIONS.TAKEITEM, "pickup"),
     ActionHandler(ACTIONS.UNPIN, "pickup"),
+	ActionHandler(ACTIONS.DROP, "dropitem"),
+    ActionHandler(ACTIONS.MARK, "dropitem"),
 
 }
 
@@ -70,7 +72,10 @@ local events=
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
     CommonHandlers.OnAttacked(true),
+	CommonHandlers.OnIpecacPoop(),
     CommonHandlers.OnDeath(),
+	CommonHandlers.OnHop(),
+	CommonHandlers.OnSink(),
     EventHandler("transformnormal", function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("transformNormal") end end),
     EventHandler("doaction", 
         function(inst, data) 
@@ -403,10 +408,10 @@ CommonStates.AddSleepStates(states,
 CommonStates.AddIdle(states,"funnyidle")
 CommonStates.AddSimpleState(states,"refuse", "pig_reject", {"busy"})
 CommonStates.AddFrozenStates(states)
-
 CommonStates.AddSimpleActionState(states,"pickup", "pig_pickup", 10*FRAMES, {"busy"})
-
 CommonStates.AddSimpleActionState(states, "gohome", "pig_pickup", 4*FRAMES, {"busy"})
-
+CommonStates.AddHopStates(states, true, { pre = "boat_jump_pre", loop = "boat_jump_loop", pst = "boat_jump_pst"})
+CommonStates.AddSinkAndWashAshoreStates(states)
+CommonStates.AddIpecacPoopState(states)
     
 return StateGraph("wildbore", states, events, "idle", actionhandlers)

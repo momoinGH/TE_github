@@ -6700,7 +6700,7 @@ AddRoom("OceanSwell_SW", {
 					
 						countprefabs = 
 						{
-
+					    --bermudatriangle = 6,
 		                },					
 						distributepercent = 0.005,
 						distributeprefabs =
@@ -6722,7 +6722,8 @@ AddRoom("OceanRough_SW", {
 						{
 						rawling = 1,
 						tar_pool = 8,
-						messagebottle1 = 20,									
+						messagebottle1 = 20,
+						--bermudatriangle = 6,									
 		                },	
 		
 						distributepercent = 0.01 ,
@@ -8113,7 +8114,7 @@ AddRoom("quagmire", {
 					                distributepercent = .2,
 					                distributeprefabs=
 					                {
-					                    cottontree = 0.5, --nitre
+					                    sugarwood_tall = 0.5, --nitre
 --					                    quagmire_pond_salt = .1,
 										flower=0.112,
 										carrot_planted=0.05,
@@ -8146,7 +8147,7 @@ AddRoom("quagmire1", {
 					                distributepercent = .2,
 					                distributeprefabs=
 					                {
-					                    cottontree = 0.5, --nitre
+					                    sugarwood_normal = 0.5, --nitre
 --					                    quagmire_pond_salt = .1,
 										quagmire_spotspice_shrub= 0.1,										
 					                },
@@ -8278,7 +8279,7 @@ AddRoom("quagmireswampcity", {
 										["CropCirclegorge"] = 1,
 									},			
 					                countprefabs= {
-					                    quagmire_swampig_house_rubble = 2,
+					                    quagmire_swampig_house = 2,
 					                }
 					            }
 					})					
@@ -8303,7 +8304,7 @@ AddRoom("quagmireswamp", {
 					                },
 					                countprefabs= {
 					                    quagmire_mushroomstump = 7,
-										quagmire_swampig_house_rubble = 1,
+										quagmire_swampig_house = 1,
 					                }									
 					            }
 
@@ -8370,7 +8371,7 @@ AddRoom("quagmirepinkset", {
 					                distributepercent = .6,									
 					                distributeprefabs=
 					                {
-					                    cottontree = 0.5, --nitre
+					                    sugarwood_short = 0.5, --nitre
 										cave_fern=0.112,
 										turnip_planted=0.05,
 										flint=0.05,
@@ -8398,7 +8399,7 @@ AddRoom("quagmirepink", {
 					                distributepercent = .6,									
 					                distributeprefabs=
 					                {
-					                    cottontree = 0.5, --nitre
+					                    sugarwood_normal = 0.5, --nitre
 										cave_fern=0.112,
 										turnip_planted=0.05,
 										flint=0.05,
@@ -27749,10 +27750,13 @@ taskset.set_pieces =
 			["ligamundosw"] = { count = 1, tasks={"Make a pick", "Dig that rock", "Great Plains", "Squeltch", "Beeeees!", "Speak to the king", "Forest hunters", "Badlands", "For a nice walk", "Lightning Bluff" } },
 			["MooseNest"] = { count = 9, tasks={"Make a pick", "Dig that rock", "Great Plains", "Squeltch", "Beeeees!", "Speak to the king", "Forest hunters", "Badlands", "For a nice walk", "Lightning Bluff"  } },
 			["CaveEntrance"] = { count = 10, tasks={"Make a pick", "Dig that rock", "Great Plains", "Squeltch", "Beeeees!", "Speak to the king", "Forest hunters", "Badlands", "For a nice walk", "Lightning Bluff" } },	   		
-			["Sculptures_5"] = { count = 1, tasks={"Make a pick", "Dig that rock", "Great Plains", "Squeltch", "Beeeees!", "Speak to the king", "Forest hunters", "Badlands", "For a nice walk", "Lightning Bluff" } },	   		
+			["Sculptures_5"] = { count = 1, tasks={"Make a pick", "Dig that rock", "Great Plains", "Squeltch", "Beeeees!", "Speak to the king", "Forest hunters", "Badlands", "For a nice walk", "Lightning Bluff" } },	
        }
 end
-	
+
+if GetModConfigData("Together") == 20 and GetModConfigData("gorgeisland") == 1 then			
+	taskset.set_pieces["mermtrader3setmainland"] = { count = 1, tasks={"Make a pick", "MDig that rock", "MGreat Plains", "MSqueltch", "MBeeeees!", "MSpeak to the king", "MForest hunters", "MBadlands", "MFor a nice walk", "MLightning Bluff"}}	   		   		
+end	
 	
 if GetModConfigData("Moon") == 10 then			
 taskset.set_pieces["MoonAltarRockGlass"] = { count = 1, tasks={"MoonIsland_Mine"}}
@@ -27849,28 +27853,35 @@ end
 if GetModConfigData("Shipwrecked") == 25 then	
 taskset.set_pieces["ligamundoswexit"] = { count = 1, tasks={"A_MISTO6", "A_MISTO7", "A_MISTO8", "A_MISTO9", "A_MISTO11", "A_MISTO14", "A_MISTO15", "A_MISTO16", "A_MISTO17", "A_MISTO20", "A_MISTO26", "A_MISTO27", "A_MISTO28", "A_MISTO38", "A_MISTO39", "A_MISTO43", "A_MISTO45", "A_MISTO50", "A_MISTO51"}}
 end
-
-
+---------------------------------------
+if GetModConfigData("Hamlet") == 20 then			
+taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks={"Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins", "XDeep_lost_ruins_gas", "XEdge_of_the_unknown_2"}}
+end
+	
+if GetModConfigData("Hamlet") == 15 then		
+taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks={"plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins", "Deep_lost_ruins_gas", "Edge_of_the_unknown_2"}}
+end
+	
+if GetModConfigData("Hamlet") == 10 then			
+taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks={"Mplains_ruins", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins", "MEdge_of_the_unknown_2", "MDeep_rainforest_2"}}
+end
 --------------------------------------------------cave entrances hamlet----------------------------------------------------
 if GetModConfigData("Hamlet") == 20 and GetModConfigData("hamlet_caves") == 1 then			
 taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks={"Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" }}
 taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks={"Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" }}
 taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks={"Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" }}
-taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks={"Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins", "XDeep_lost_ruins_gas", "XEdge_of_the_unknown_2"}}
 end
 
 if GetModConfigData("Hamlet") == 15 and GetModConfigData("hamlet_caves") == 1 then		
 taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks={"plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" }}
 taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks={"plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" }}
 taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks={"plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" }}
-taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks={"plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins", "Deep_lost_ruins_gas", "Edge_of_the_unknown_2"}}
 end
 
 if GetModConfigData("Hamlet") == 10 and GetModConfigData("hamlet_caves") == 1 then			
 taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks={"Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" }}
 taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks={"Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" }}
 taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks={"Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" }}
-taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks={"Mplains_ruins", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins", "MEdge_of_the_unknown_2", "MDeep_rainforest_2"}}
 end
 ----------------------------
 

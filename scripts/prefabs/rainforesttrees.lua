@@ -821,6 +821,7 @@ local function makefn(build, stage, data)
 
 		if build == "rot" then
 			inst:AddTag("rotten")
+			minimap:SetIcon("rainforesttree_rot.png")
 		end
 
 		inst.build = build

@@ -62,7 +62,7 @@ local function fn(Sim)
     anim:PlayAnimation("pillar",true)
 
     local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("pig_ruins_pillar")
+    minimap:SetIcon("pugalisk_ruins_pillar.png")
 
  --   inst.OnSave = onsave 
  --   inst.OnLoad = onload

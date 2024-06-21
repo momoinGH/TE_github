@@ -12,6 +12,35 @@ local prefabs =
 }
 local respawndays = math.random(4800, 9600) --tempo para renascer de 3 a 5 dias
 
+local function setobstical(inst)
+    local ground = TheWorld
+    if ground then
+        local pt = Point(inst.Transform:GetWorldPosition())
+        ground.Pathfinder:AddWall(pt.x, pt.y, pt.z)
+    end
+end
+
+local function ondeploywall(inst, pt, deployer)
+    --inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spider_egg_sack")
+    local wall = SpawnPrefab("wall_" .. data.name, inst.linked_skinname, inst.skin_id)
+    if wall ~= nil then
+        local x = math.floor(pt.x) + .5
+        local z = math.floor(pt.z) + .5
+        wall.Physics:SetCollides(false)
+        wall.Physics:Teleport(x, 0, z)
+        wall.Physics:SetCollides(true)
+        inst.components.stackable:Get():Remove()
+
+        if data.name == "enforcedlimestone" then
+            wall.AnimState:PlayAnimation("water_half", true)
+        end
+
+        if data.buildsound ~= nil then
+            wall.SoundEmitter:PlaySound(data.buildsound)
+        end
+    end
+end
+
 local function OnTimerDone(inst, data)
     if data.name == "spawndelay" then
     inst.AnimState:PlayAnimation("growth1to2")
@@ -24,35 +53,33 @@ local function OnTimerDone(inst, data)
 end
 
 
-local function dig_up(inst, worker)
+local function cut_up(inst, worker)
+    if inst:HasTag("machetecut") then
+        inst:RemoveTag("machetecut")
+        inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+        inst.components.workable:SetWorkLeft(4)
+        inst.components.lootdropper:SpawnLootPrefab("clippings")
+        inst.components.timer:StartTimer("spawndelay", respawndays)
 
-if inst:HasTag("machetecut") then
-inst:RemoveTag("machetecut")
-inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-inst.components.workable:SetWorkLeft(4)
-inst.components.lootdropper:SpawnLootPrefab("clippings")
-inst.components.timer:StartTimer("spawndelay", respawndays)
-
-return 
-end
+        return
+    end
 
 
-	if not inst:HasTag("machetecut") then
-    local fx = SpawnPrefab("collapse_small")
-    fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    fx:SetMaterial("clippings")
-	
-	
-		if inst.components.lootdropper ~= nil then
-		inst.components.lootdropper:SpawnLootPrefab("nitre")
-		end
-		inst:Remove()
-	end
+    if not inst:HasTag("machetecut") then
+        local fx = SpawnPrefab("collapse_small")
+        fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        fx:SetMaterial("clippings")
 
+
+        if inst.components.lootdropper ~= nil then
+            inst.components.lootdropper:SpawnLootPrefab("nitre")
+        end
+        inst:Remove()
+    end
 end
 
 local function onhackedfn(inst, hacker, hacksleft)
-if not inst:HasTag("machetecut") then return end
+    if not inst:HasTag("machetecut") then return end
 	local fx = SpawnPrefab("green_leaves_chop")
     local x, y, z= inst.Transform:GetWorldPosition()
     fx.Transform:SetPosition(x,y,z)
@@ -87,21 +114,22 @@ local function OnLoad(inst, data)
 end
 
 local function onbuilt(inst)
-if inst:HasTag("machetecut") then
-inst:RemoveTag("machetecut")
-end
-if inst.components.workable then
-inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-inst.components.workable:SetWorkLeft(4)
-inst.components.timer:StartTimer("spawndelay", respawndays)
-end
-inst.AnimState:PlayAnimation("growth1")
+    if inst:HasTag("machetecut") then
+        inst:RemoveTag("machetecut")
+    end
+    if inst.components.workable then
+        inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+        inst.components.workable:SetWorkLeft(4)
+        inst.components.timer:StartTimer("spawndelay", respawndays)
+    end
+    inst.AnimState:PlayAnimation("growth1")
 end
 
 local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
+	inst.Transform:SetEightFaced()
     inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
@@ -132,7 +160,7 @@ local function fn()
 	
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HACK)
-    inst.components.workable:SetOnFinishCallback(dig_up)
+    inst.components.workable:SetOnFinishCallback(cut_up)
     inst.components.workable:SetWorkLeft(3)
 	inst.components.workable.onwork = onhackedfn
 
@@ -143,7 +171,10 @@ local function fn()
 	inst.OnSave = OnSave
     inst.OnLoad = OnLoad
     inst:ListenForEvent("onbuilt", onbuilt)	
-
+	
+    inst.setobstical = setobstical  -----加上墙的寻路特性
+    inst:AddComponent("gridnudger") ------------加上这个就只能放在墙点,这两个必须同时使用
+	
     return inst
 end
 
@@ -151,6 +182,7 @@ local function fn1()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
+	inst.Transform:SetEightFaced()
     inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
@@ -181,7 +213,7 @@ local function fn1()
 	
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HACK)
-    inst.components.workable:SetOnFinishCallback(dig_up)
+    inst.components.workable:SetOnFinishCallback(cut_up)
     inst.components.workable:SetWorkLeft(3)
 	inst.components.workable.onwork = onhackedfn
 
@@ -192,7 +224,10 @@ local function fn1()
 	inst.OnSave = OnSave
     inst.OnLoad = OnLoad
     inst:ListenForEvent("onbuilt", onbuilt)	
-
+	
+    inst.setobstical = setobstical  -----加上墙的寻路特性
+    inst:AddComponent("gridnudger") ------------加上这个就只能放在墙点,这两个必须同时使用
+	
     return inst
 end
 
@@ -200,6 +235,7 @@ local function fn2()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
+	inst.Transform:SetEightFaced()
     inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
@@ -207,7 +243,7 @@ local function fn2()
     inst.AnimState:SetRayTestOnBB(true)
 	inst.AnimState:SetBank("hedge")
 	inst.AnimState:SetBuild("hedge3_build")
-	inst.AnimState:PlayAnimation("growth3",true)
+	inst.AnimState:PlayAnimation("growth2",true)
 	MakeObstaclePhysics(inst, .35)
 
 	inst:AddTag("machetecut")
@@ -230,7 +266,7 @@ local function fn2()
 	
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HACK)
-    inst.components.workable:SetOnFinishCallback(dig_up)
+    inst.components.workable:SetOnFinishCallback(cut_up)
     inst.components.workable:SetWorkLeft(3)
 	inst.components.workable.onwork = onhackedfn
 
@@ -241,13 +277,16 @@ local function fn2()
 	inst.OnSave = OnSave
     inst.OnLoad = OnLoad
     inst:ListenForEvent("onbuilt", onbuilt)	
-
+	
+    inst.setobstical = setobstical  -----加上墙的寻路特性
+    inst:AddComponent("gridnudger") ------------加上这个就只能放在墙点,这两个必须同时使用
+	
     return inst
 end
 
 return Prefab("hedge_block", fn, assets, prefabs),
        Prefab("hedge_cone", fn1, assets, prefabs),
        Prefab("hedge_layered", fn2, assets, prefabs),
-	   MakePlacer("hedge_block_placer", "hedge", "hedge1_build", "growth1"),
-	   MakePlacer("hedge_cone_placer", "hedge", "hedge2_build", "growth1"),
-	   MakePlacer("hedge_layered_placer", "hedge", "hedge3_build", "growth1")
+       MakePlacer("hedge_block_placer", "hedge", "hedge1_build", "growth1", false, false, true),
+       MakePlacer("hedge_cone_placer", "hedge", "hedge2_build", "growth1", false, false, true),
+       MakePlacer("hedge_layered_placer", "hedge", "hedge3_build", "growth1", false, false, true)

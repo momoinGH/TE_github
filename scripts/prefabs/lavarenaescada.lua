@@ -210,7 +210,7 @@ local function activefx_fn()
     inst.AnimState:PlayAnimation("portal_pre")
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:OverrideMultColour(1, 1, 1, .6)
-    inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+	inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(6)
     inst.AnimState:SetFinalOffset(1)
 

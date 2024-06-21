@@ -273,6 +273,16 @@ PrefabFiles =
 "bat_leather",
 "palmleaf_umbrella",
 "blowdart_sw",
+
+"bermudatriangle",
+"gorge_portal",
+"volcano_altar_pillar",
+"cave_entrance_ham",
+"piratihatitator",
+"hogusporkusator",
+"q_merm_house",
+"gorge_crabtrap",
+"gorge_smallmeat",
 }
 
 if GetModConfigData("whirlpools") then
@@ -1190,24 +1200,6 @@ RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "weevol
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "piko_orange.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "snake_bone.tex")
 
-
-modimport("scripts/stringscomplement.lua")
-modimport("scripts/stringscreeps.lua")
-modimport("scripts/wurt_quotes.lua")
-
---configurar idioma
-if GetModConfigData("set_idioma") ~= nil then
-if GetModConfigData("set_idioma") == "strings" then modimport("scripts/stringsEU.lua") 
-else modimport("scripts/"..GetModConfigData("set_idioma")..".lua")
-end
-end
-
-
-
-modimport("scripts/actions.lua")
-modimport "tileadder.lua"
-modimport ("scripts/ham_fx.lua")
-
 ------------------------------------------------
 --Start of Tile Adder. Copy this code to your modworldgenmain.lua for use.
 --See tiledescription.lua and tileadder.lua for more details.
@@ -1239,13 +1231,7 @@ local ground = GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPo
     end)
 end)
 ]]
-Waffles1.GetPath(_G, "STRINGS/ACTIONS/JUMPIN").USE = Waffles1.ReturnChild(STRINGS, "ACTIONS/USEITEM") or "Use"
 
-Waffles1.GetPath(_G, "ACTIONS/JUMPIN").strfn = function(act)
-    return act.doer ~= nil and act.doer:HasTag("playerghost") and "HAUNT"
-        or act.target ~= nil and act.target:HasTag("stairs") and "USE"
-        or nil
-end
 
 ---------------dodoy
 GLOBAL.doydoy_mate_time = 2
@@ -1475,6 +1461,8 @@ AddIngredientValues({"snake_bone"}, {bone=1}, true, false)
 AddIngredientValues({"yelow_cap"}, {veggie=0.5}, true, false)
 AddIngredientValues({"yelow_cooked"}, {veggie=0.5}, true, false)
 
+AddIngredientValues({"butterfly_tropical_wings"}, { decoration = 2 }, true, false)
+
 local fruityjuice =
 {
     name = "fruityjuice",
@@ -1488,7 +1476,7 @@ local fruityjuice =
     cooktime = 2,
 	floater = {"small", 0.05, 0.7},
     tags = {},
-	cookbook_atlas = "images/inventoryimages/volcanoinventory.xml"	
+	cookbook_atlas = "images/inventoryimages/volcanoinventory.xml",	
 }
 
 AddCookerRecipe("cookpot",fruityjuice)
@@ -1506,10 +1494,11 @@ local butterflymuffin =
 	health = TUNING.HEALING_MED,
 	hunger = TUNING.CALORIES_LARGE,
     sanity = TUNING.SANITY_TINY,
+	perishtime = TUNING.PERISH_SLOW,
     cooktime = 2,
 	floater = {"small", 0.05, 0.7},
     tags = {},
-	cookbook_atlas = "images/inventoryimages/volcanoinventory.xml"	
+	cookbook_atlas = "images/cookbook_" .. "butterflymuffin" .. ".xml",
 }
 
 AddCookerRecipe("cookpot",butterflymuffin)
@@ -1522,14 +1511,15 @@ local coffee =
     test = function(cooker, names, tags) return names.coffeebeans_cooked and (names.coffeebeans_cooked == 4 or (names.coffeebeans_cooked == 3 and (tags.dairy or tags.sweetener)))	end,
     priority = 30,
     weight = 1,
-    foodtype = "VEGGIE",
+	foodtype = FOODTYPE.GOODIES,
 	health = 3,
 	hunger = 75/8,
     sanity = -5,
-    cooktime = .5,
+	perishtime = TUNING.PERISH_MED,
+	cooktime = .5,
     tags = {},
 	cookbook_atlas = "images/inventoryimages/volcanoinventory.xml",
-	oneat_desc = "Speeds the body",
+	oneat_desc = STRINGS.UI.COOKBOOK.COFFEE,
 }
 AddCookerRecipe("cookpot",coffee)
 AddCookerRecipe("portablecookpot",coffee)
@@ -1634,7 +1624,7 @@ local musselbouillabaise =
 	sanity = TUNING.SANITY_MED,
 	cooktime = 2,
 	tags = { "masterfood" },
-	cookbook_atlas = "images/inventoryimages/volcanoinventory.xml"	
+	cookbook_atlas = "images/inventoryimages/volcanoinventory.xml",	
 }
 AddCookerRecipe("portablecookpot",musselbouillabaise)
 
@@ -1651,7 +1641,7 @@ local sweetpotatosouffle =
 	sanity = TUNING.SANITY_MED,
 	cooktime = 2,
 	tags = { "masterfood" },
-	cookbook_atlas = "images/inventoryimages/volcanoinventory.xml"	
+	cookbook_atlas = "images/inventoryimages/volcanoinventory.xml",	
 }
 AddCookerRecipe("portablecookpot",sweetpotatosouffle)
 
@@ -1668,8 +1658,9 @@ local sharkfinsoup =
 		sanity = -10,
 		naughtiness = 10,
 		cooktime = 1,
-		cookbook_atlas = "images/inventoryimages/volcanoinventory.xml"		
-}
+		cookbook_atlas = "images/inventoryimages/volcanoinventory.xml",		
+		oneat_desc = STRINGS.UI.COOKBOOK.SHARKFINSOUP,
+	}
 AddCookerRecipe("cookpot",sharkfinsoup)
 AddCookerRecipe("portablecookpot",sharkfinsoup)
 AddCookerRecipe("xiuyuan_cookpot",sharkfinsoup)
@@ -1689,7 +1680,7 @@ local lobsterdinner =
 		overridebuild = "cook_pot_food3",
 		potlevel = "high",
 		floater = {"med", 0.05, {0.65, 0.6, 0.65}},
-		cookbook_atlas = "images/inventoryimages/volcanoinventory.xml"		
+		cookbook_atlas = "images/inventoryimages/volcanoinventory.xml",		
 }
 AddCookerRecipe("cookpot",lobsterdinner)
 AddCookerRecipe("portablecookpot",lobsterdinner)
@@ -1739,7 +1730,7 @@ AddCookerRecipe("xiuyuan_cookpot",jellyopop)
 local californiaroll =
 {
     name = "californiaroll",
-		test = function(cooker, names, tags) return ((names.kelp or 0) + (names.kelp_cooked or 0) + (names.kelp_dried or 0) + (names.seaweed or 0) + (names.kelp_dried or 0)) == 2 and (tags.fish and tags.fish >= 1) end,
+		test = function(cooker, names, tags) return ((names.kelp or 0) + (names.kelp_cooked or 0) + (names.kelp_dried or 0) + (names.seaweed or 0)) == 2 and (tags.fish and tags.fish >= 1) end,
 		priority = 20,
 		weight = 1,
 		foodtype = "MEAT",
@@ -1775,27 +1766,27 @@ AddCookerRecipe("cookpot",bisque)
 AddCookerRecipe("portablecookpot",bisque)
 AddCookerRecipe("xiuyuan_cookpot",bisque)
 
-local bananapop =
-{
-    name = "bananapop",
-		test = function(cooker, names, tags) return (names.cave_banana or names.cave_banana_cooked) and tags.frozen and (tags.inedible or names.twigs) and not tags.meat and not tags.fish and (tags.inedible and tags.inedible <= 2) end,
-		priority = 20,
-		weight = 1,
-		foodtype = "VEGGIE",
-		health = TUNING.HEALING_MED,
-		hunger = TUNING.CALORIES_SMALL,
-		perishtime = TUNING.PERISH_SUPERFAST,
-		sanity = TUNING.SANITY_LARGE,
-		temperature = TUNING.COLD_FOOD_BONUS_TEMP,
-		temperatureduration = TUNING.FOOD_TEMP_AVERAGE,
-		cooktime = 0.5,
-		potlevel = "low",
-		floater = {nil, 0.05, 0.95},
-		cookbook_atlas = "images/inventoryimages/volcanoinventory.xml"	
-}
-AddCookerRecipe("cookpot",bananapop)
-AddCookerRecipe("portablecookpot",bananapop)
-AddCookerRecipe("xiuyuan_cookpot",bananapop)
+-- local bananapop =
+-- {
+--     name = "bananapop",
+-- 		test = function(cooker, names, tags) return (names.cave_banana or names.cave_banana_cooked) and tags.frozen and (tags.inedible or names.twigs) and not tags.meat and not tags.fish and (tags.inedible and tags.inedible <= 2) end,
+-- 		priority = 20,
+-- 		weight = 1,
+-- 		foodtype = "VEGGIE",
+-- 		health = TUNING.HEALING_MED,
+-- 		hunger = TUNING.CALORIES_SMALL,
+-- 		perishtime = TUNING.PERISH_SUPERFAST,
+-- 		sanity = TUNING.SANITY_LARGE,
+-- 		temperature = TUNING.COLD_FOOD_BONUS_TEMP,
+-- 		temperatureduration = TUNING.FOOD_TEMP_AVERAGE,
+-- 		cooktime = 0.5,
+-- 		potlevel = "low",
+-- 		floater = {nil, 0.05, 0.95},
+-- 		cookbook_atlas = "images/inventoryimages/volcanoinventory.xml"	
+-- }
+-- AddCookerRecipe("cookpot",bananapop)
+-- AddCookerRecipe("portablecookpot",bananapop)
+-- AddCookerRecipe("xiuyuan_cookpot",bananapop)
 
 
 local caviar =
@@ -1805,7 +1796,7 @@ local caviar =
 	priority = 20,
 	weight = 1,
 	foodtype = "MEAT",
-	health = TUNING.HEALING_SMAL,
+	health = TUNING.HEALING_SMALL,
 	hunger = TUNING.CALORIES_SMALL,
 	perishtime = TUNING.PERISH_MED,
 	sanity = TUNING.SANITY_LARGE,
@@ -1828,28 +1819,29 @@ local tropicalbouillabaisse =
 	perishtime = TUNING.PERISH_MED,
 	sanity = TUNING.SANITY_MED,
 	cooktime = 2,
-	cookbook_atlas = "images/inventoryimages/volcanoinventory.xml"	
+	cookbook_atlas = "images/inventoryimages/volcanoinventory.xml",	
+	oneat_desc = STRINGS.UI.COOKBOOK.TROPICALBOUILLABAISSE,
 }
 AddCookerRecipe("cookpot",tropicalbouillabaisse)
 AddCookerRecipe("portablecookpot",tropicalbouillabaisse)
 AddCookerRecipe("xiuyuan_cookpot",tropicalbouillabaisse)
 
-local spicyvegstinger =
-{
-	name = "spicyvegstinger",
-	test = function(cooker, names, tags) return (names.asparagus or names.asparagus_cooked or names.radish or names.radish_cooked) and tags.veggie and tags.veggie > 2 and tags.frozen and not tags.meat end,
-	priority = 15,
-	weight = 1,
-	foodtype = "VEGGIE",
-	health = TUNING.HEALING_SMALL,
-	hunger = TUNING.CALORIES_MED,
-	perishtime = TUNING.PERISH_SLOW,
-	sanity = TUNING.SANITY_LARGE,	
-	cooktime = 0.5,
-}
-AddCookerRecipe("cookpot",spicyvegstinger)
-AddCookerRecipe("portablecookpot",spicyvegstinger)
-AddCookerRecipe("xiuyuan_cookpot",spicyvegstinger)
+-- local spicyvegstinger =
+-- {
+-- 	name = "spicyvegstinger",
+-- 	test = function(cooker, names, tags) return (names.asparagus or names.asparagus_cooked or names.radish or names.radish_cooked) and tags.veggie and tags.veggie > 2 and tags.frozen and not tags.meat end,
+-- 	priority = 15,
+-- 	weight = 1,
+-- 	foodtype = "VEGGIE",
+-- 	health = TUNING.HEALING_SMALL,
+-- 	hunger = TUNING.CALORIES_MED,
+-- 	perishtime = TUNING.PERISH_SLOW,
+-- 	sanity = TUNING.SANITY_LARGE,	
+-- 	cooktime = 0.5,
+-- }
+-- AddCookerRecipe("cookpot",spicyvegstinger)
+-- AddCookerRecipe("portablecookpot",spicyvegstinger)
+-- AddCookerRecipe("xiuyuan_cookpot",spicyvegstinger)
 
 local feijoada =
 {
@@ -1930,13 +1922,14 @@ local tea =
 	test = function(cooker, names, tags) return tags.filter and tags.filter >= 2 and tags.sweetener and not tags.meat and not tags.veggie and not tags.inedible end,
 	priority = 25,
 	weight = 1,
-	foodtype = "VEGGIE",
+	foodtype = FOODTYPE.GOODIES,
 	health = TUNING.HEALING_SMALL,
 	hunger = TUNING.CALORIES_SMALL,
 	perishtime = TUNING.PERISH_ONE_DAY,
 	sanity = TUNING.SANITY_LARGE,
 	cooktime = 0.5,
 	cookbook_atlas = "images/inventoryimages/hamletinventory.xml",	
+	oneat_desc = STRINGS.UI.COOKBOOK.TEA,
 }
 AddCookerRecipe("cookpot",tea)
 AddCookerRecipe("portablecookpot",tea)
@@ -1948,13 +1941,14 @@ local icedtea =
 	test = function(cooker, names, tags) return tags.filter and tags.filter >= 2 and tags.sweetener and tags.frozen end,
 	priority = 30,
 	weight = 1,
-	foodtype = "VEGGIE",
+	foodtype = FOODTYPE.GOODIES,
 	health = TUNING.HEALING_SMALL,
 	hunger = TUNING.CALORIES_SMALL,
 	perishtime = TUNING.PERISH_FAST,
 	sanity = TUNING.SANITY_LARGE,
 	cooktime = 0.5,
 	cookbook_atlas = "images/inventoryimages/hamletinventory.xml",	
+	oneat_desc = STRINGS.UI.COOKBOOK.ICEDTEA,
 }
 AddCookerRecipe("cookpot",icedtea)
 AddCookerRecipe("portablecookpot",icedtea)
@@ -1984,6 +1978,7 @@ local nettlelosange =
 	test = function(cooker, names, tags) return tags.antihistamine and tags.antihistamine >= 3  end,
 	priority = 0,
 	weight = 1,
+    foodtype = "VEGGIE",
 	health = TUNING.HEALING_MED,
 	hunger = TUNING.CALORIES_MED,
 	perishtime = TUNING.PERISH_FAST,
@@ -1991,6 +1986,7 @@ local nettlelosange =
 	antihistamine = 720,
 	cooktime = .5,
 	cookbook_atlas = "images/inventoryimages/hamletinventory.xml",	
+	oneat_desc = STRINGS.UI.COOKBOOK.NETTLELOSANGE,
 }
 AddCookerRecipe("cookpot",nettlelosange)
 AddCookerRecipe("portablecookpot",nettlelosange)
@@ -2011,6 +2007,7 @@ local meated_nettle =
 	antihistamine = 600,
 	cooktime = 1,
 	cookbook_atlas = "images/inventoryimages/meated_nettle.xml",	
+	oneat_desc = STRINGS.UI.COOKBOOK.MEATED_NETTLE,
 }
 AddCookerRecipe("cookpot",meated_nettle)
 AddCookerRecipe("portablecookpot",meated_nettle)
@@ -3400,7 +3397,6 @@ local armorvortexcloak =
 	Vector3(-87, -36, 0),
 	Vector3(-87, 39, 0),
 	Vector3(-87, 114, 0),
-	
 	},
     animbank = "ui_krampusbag_2x5",
     animbuild = "ui_krampusbag_2x5",
@@ -3416,30 +3412,6 @@ local armorvortexcloak =
   openlimit = 1,
 }
 
-local thatchpack =
-{
-  widget =
-  {
-    slotpos = 
-	{
-    Vector3(0, -135, 0),	
-    Vector3(0, -60, 0), 
-    Vector3(0, 15, 0),
-	Vector3(0, 90, 0),
-	
-	},
-	
-    animbank = "ui_cookpot_1x4",
-    animbuild = "ui_cookpot_1x4",
-	bgimage = nil,
-    bgatlas = nil,
-    pos = Vector3(-60, -60, 0),
---	isboat = true,
-  },
-  issidewidget = true,
-  type = "pack",
-  openlimit = 1,
-}
 
 local smelter =
 {
@@ -3487,6 +3459,30 @@ local corkchest =
   },
   issidewidget = false,
   type = "chest",
+}
+
+local thatchpack =
+{
+  widget =
+  {
+    slotpos = 
+	{
+    Vector3(0, -135, 0),	
+    Vector3(0, -60, 0), 
+    Vector3(0, 15, 0),
+	Vector3(0, 90, 0),
+	
+	},
+	
+    animbank = "ui_cookpot_1x4",
+    animbuild = "ui_cookpot_1x4",
+	bgimage = nil,
+    bgatlas = nil,
+    pos = Vector3(-60, -60, 0),
+--	isboat = true,
+  },
+  issidewidget = true,
+  type = "pack",
 }
 
 local cargoboatslot =
@@ -3736,9 +3732,9 @@ function params.armorvortexcloak.itemtestfn(container, item, slot)
 	else
 		return false
 	end
-end
+end]]
 
-
+--[[
 function params.thatchpack.itemtestfn(container, item, slot)
     if slot == 1 then
 		return true
@@ -3751,8 +3747,8 @@ function params.thatchpack.itemtestfn(container, item, slot)
 	else
 		return false
 	end
-end
-
+end]]
+--[[
 function params.corkchest.itemtestfn(container, item, slot)
     if slot == 1 then
 		return true
@@ -3765,8 +3761,8 @@ function params.corkchest.itemtestfn(container, item, slot)
 	else
 		return false
 	end
-end
-]]
+end]]
+
 function params.smelter.itemtestfn(container, item, slot)
     if slot == 1 and (item:HasTag("iron") or item.prefab == "iron" or item.prefab == "goldnugget" or item.prefab == "gold_dust" or item.prefab == "flint" or item.prefab == "nitre" or item.prefab == "dubloon" or item.prefab == "obsidian" or item.prefab == "magnifying_glass" or item.prefab == "goldpan" or item.prefab == "ballpein_hammer" or item.prefab == "shears" or item.prefab == "candlehat") then
 		return true
@@ -4703,19 +4699,6 @@ AddSimPostInit(function()
 end)
 
 
----------------------
-GLOBAL.STRINGS.ACTIONS.JUMPIN = {
-					HAMLET = "Enter",
-					GENERIC = "Jump In",
-				}
-
-local Oldstrfnjumpin = ACTIONS.JUMPIN.strfn
-GLOBAL.ACTIONS.JUMPIN.strfn = function(act)
-    if act.target ~= nil and act.target:HasTag("hamletteleport") then
-        return "HAMLET"
-    end
-    return Oldstrfnjumpin(act)
-end
 
 ------darkness---------------
 AddPlayerPostInit(function(inst)
@@ -6271,4 +6254,45 @@ if GetModConfigData("kindofworld") == 5 then
 		end
 	end
 	AddSimPostInit(HamletcloudPostInit)
+end
+
+modimport "tileadder.lua"
+modimport ("scripts/ham_fx.lua")
+
+
+modimport("scripts/Languages/stringsEU.lua") 
+modimport("scripts/Languages/stringscomplement.lua")
+modimport("scripts/Languages/stringscreeps.lua")
+modimport("scripts/Languages/wurt_quotes.lua")
+
+modimport("scripts/actions.lua")
+--[[
+--configurar idioma
+if GetModConfigData("set_idioma") ~= nil then
+if GetModConfigData("set_idioma") == "strings" 
+  then 
+
+  else 
+  
+end
+end]]
+modimport("scripts/Languages/"..GetModConfigData("set_idioma")..".lua")
+---------------------
+
+
+
+Waffles1.GetPath(_G, "STRINGS/ACTIONS/JUMPIN").USE = Waffles1.ReturnChild(STRINGS, "ACTIONS/USEITEM") or "Use"
+
+Waffles1.GetPath(_G, "ACTIONS/JUMPIN").strfn = function(act)
+    return act.doer ~= nil and act.doer:HasTag("playerghost") and "HAUNT"
+        or act.target ~= nil and act.target:HasTag("stairs") and "USE"
+        or nil
+end
+
+local Oldstrfnjumpin = ACTIONS.JUMPIN.strfn
+GLOBAL.ACTIONS.JUMPIN.strfn = function(act)
+    if act.target ~= nil and act.target:HasTag("hamletteleport") then
+        return "HAMLET"
+    end
+    return Oldstrfnjumpin(act)
 end

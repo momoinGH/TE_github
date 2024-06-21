@@ -45,8 +45,8 @@ AddRecipe2("obsidianmachete", 		{Ingredient("machete", 1, v_atlas), Ingredient("
 AddRecipe2("spear_obsidian", 		{Ingredient("spear", 1), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas)},  				TECH.OBSIDIAN_TWO, {atlas=v_atlas, nounlock=true}, {"CRAFTING_STATION"})
 AddRecipe2("volcanostaff", 			{Ingredient("firestaff", 1),  Ingredient("obsidian", 4, v_atlas), Ingredient("dragoonheart", 1, v_atlas)}, 			TECH.OBSIDIAN_TWO, {atlas=v_atlas, nounlock=true}, {"CRAFTING_STATION"})
 AddRecipe2("armorobsidian", 		{Ingredient("armorwood", 1), Ingredient("obsidian", 5, v_atlas), Ingredient("dragoonheart", 1, v_atlas)}, 			TECH.OBSIDIAN_TWO, {atlas=v_atlas, nounlock=true}, {"CRAFTING_STATION"})
-AddRecipe2("obsidianbomb", 			{Ingredient("coconade", 3, v_atlas), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas)}, 			TECH.OBSIDIAN_TWO, {atlas=v_atlas, nounlock=true, numtogive=3}, {"CRAFTING_STATION"})
-AddRecipe2("book_meteor1", 			{Ingredient("papyrus", 2), Ingredient("obsidian", 2,v_atlas)}, 														TECH.SCIENCE_TWO, {atlas=v_atlas, builder_tag="bookbuilder", }, {"CHARACTER"})
+AddRecipe2("obsidianbomb", 			{Ingredient("coconade", 3, v_atlas), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas)}, 	TECH.OBSIDIAN_TWO, {atlas=v_atlas, nounlock=true, numtogive=3}, {"CRAFTING_STATION"})
+AddRecipe2("book_meteor1", 			{Ingredient("papyrus", 2), Ingredient("obsidian", 2,v_atlas)}, 														TECH.SCIENCE_TWO,  {atlas=v_atlas, builder_tag="bookbuilder", }, {"CHARACTER"})
 AddRecipe2("wind_conch", 			{Ingredient("obsidian", 4,v_atlas), Ingredient("purplegem", 1), Ingredient("magic_seal", 1,h_atlas)}, 				TECH.OBSIDIAN_TWO, {atlas=v_atlas, nounlock=true}, {"CRAFTING_STATION"})
 AddRecipe2("sail_stick", 			{Ingredient("obsidian", 2,v_atlas), Ingredient("nightmarefuel", 3), Ingredient("magic_seal", 1,h_atlas)}, 			TECH.OBSIDIAN_TWO, {atlas=h_atlas, nounlock=true}, {"CRAFTING_STATION"})
 			
@@ -85,7 +85,7 @@ AddRecipe2("armor_snakeskin", 		{Ingredient("boneshard", 2), Ingredient("snakesk
 AddRecipe2("palmleaf_umbrella",		{Ingredient("twigs", 4), Ingredient("petals", 6), Ingredient("palmleaf", 3, v_atlas)},  							TECH.NONE, 		  {atlas=h_atlas}, {"CLOTHING","RAIN"})
 AddRecipe2("double_umbrellahat",	{Ingredient("umbrella", 1), Ingredient("shark_gills", 2, v_atlas), Ingredient("strawhat", 2)}, 						TECH.SCIENCE_TWO, {atlas=v_atlas}, {"CLOTHING","RAIN"})
 AddRecipe2("aerodynamichat",		{Ingredient("coconut", 1, v_atlas), Ingredient("shark_fin", 1, v_atlas), Ingredient("vine", 2, v_atlas)}, 			TECH.SCIENCE_TWO, {atlas=v_atlas}, {"CLOTHING"})
-AddRecipe2("thatchpack",			{Ingredient("palmleaf", 6, v_atlas)},																				TECH.NONE,		  {atlas=v_atlas}, {"CONTAINERS"})
+AddRecipe2("thatchpack",			{Ingredient("palmleaf", 6, v_atlas)},																				TECH.NONE,		  {atlas=v_atlas}, {"CLOTHING"})
 AddRecipe2("piratehat",				{Ingredient("boneshard", 2), Ingredient("rope", 1), Ingredient("silk", 2)},											TECH.SCIENCE_TWO, {atlas=v_atlas}, {"CLOTHING"})
 AddRecipe2("captainhat",			{Ingredient("boneshard", 1), Ingredient("seaweed", 1, v_atlas), Ingredient("strawhat", 1)},							TECH.SCIENCE_TWO, {atlas=v_atlas}, {"CLOTHING"})
 
@@ -118,6 +118,9 @@ AddRecipe2("mussel_bed",			{Ingredient("mussel", 1, v_atlas), Ingredient("coral"
 AddRecipe2("porto_fish_farm",		{Ingredient("silk", 2), Ingredient("rope", 2), Ingredient("coconut", 4, v_atlas)}, 									TECH.SCIENCE_ONE, {atlas=v_atlas, image="fish_farm.tex"}, {"GARDENING"})
 AddRecipe2("doydoyfan", 			{Ingredient("cutreeds", 2), Ingredient("rope", 2), Ingredient("doydoyfeather", 5, v_atlas)}, 						TECH.SCIENCE_TWO, {atlas=v_atlas}, {"SUMMER"})
 AddRecipe2("palmleaf_hut", 			{Ingredient("palmleaf", 4, v_atlas), Ingredient("bamboo", 4, v_atlas), Ingredient("rope", 3)}, 						TECH.SCIENCE_TWO, {atlas=h_atlas, placer="palmleaf_hut_placer"}, {"SUMMER"})
+AddRecipe2("goldnugget",			{Ingredient("dubloon", 3, v_atlas)},  																	            TECH.SCIENCE_ONE, {atlas=h_atlas}, {"REFINE"})
+AddRecipe2("armorlimestone",		{Ingredient("limestone", 3, v_atlas), Ingredient("rope", 2)}, 								                        TECH.SCIENCE_TWO, {atlas=h_atlas}, {"ARMOUR"})
+AddRecipe2("bell1",			        {Ingredient("glommerwings", 1), Ingredient("glommerflower", 1)},                                                    TECH.MAGIC_TWO,   {atlas=h_atlas}, {"MAGIC"})
 
 --SEAFARING--
 AddRecipe2("boatmetal_item", 		{Ingredient("alloy", 4, h_atlas), Ingredient("iron", 4, h_atlas)}, 																TECH.SEAFARING_TWO, {atlas=v_atlas}, {"SEAFARING"})
@@ -148,6 +151,11 @@ AddRecipe2("porto_buoy",			{Ingredient("messagebottleempty1", 1, v_atlas), Ingre
 AddRecipe2("quackeringram",			{Ingredient("quackenbeak", 1, v_atlas), Ingredient("bamboo", 4, v_atlas), Ingredient("rope", 4)},								TECH.SEAFARING_TWO, {atlas=v_atlas}, {"SEAFARING"})
 AddRecipe2("porto_tar_extractor",	{Ingredient("coconut", 2, v_atlas), Ingredient("bamboo", 4, v_atlas), Ingredient("limestone", 4, v_atlas)},						TECH.SEAFARING_TWO, {atlas=v_atlas, image="tar_extractor.tex"}, {"SEAFARING"})
 AddRecipe2("porto_sea_yard",		{Ingredient("limestone", 6, v_atlas), Ingredient("tar", 6, v_atlas), Ingredient("log", 4)},										TECH.SEAFARING_TWO, {atlas=v_atlas, image="sea_yard.tex"}, {"SEAFARING"})
+
+----SW----
+if GetModConfigData("Shipwrecked") ~= 10  or GetModConfigData("startlocation") == 10 or GetModConfigData("kindofworld") == 5 then
+AddRecipe2("piratihatitator",       {Ingredient("parrot", 1, v_atlas), Ingredient("boards", 4), Ingredient("piratehat", 1, v_atlas)},           TECH.SCIENCE_ONE, {atlas=v_atlas, placer="piratihatitator_placer"},{"MAGIC"})
+end
 
 --HAMLET--
 if GetModConfigData("Hamlet") ~= 5  or GetModConfigData("startlocation") == 15 or GetModConfigData("kindofworld") == 5 then --GetModConfigData("painted_sands")
@@ -182,18 +190,16 @@ AddRecipe2("gasmaskhat",			{Ingredient("peagawkfeather", 4, h_atlas), Ingredient
 AddRecipe2("corkboatitem",			{Ingredient("rope", 1), Ingredient("cork", 4, h_atlas)},													TECH.NONE, 		  {atlas=h_atlas}, {"SEAFARING"})
 
 AddRecipe2("bonestaff",			    {Ingredient("pugalisk_skull", 1, h_atlas), Ingredient("boneshard", 1), Ingredient("nightmarefuel", 2)},     TECH.LOST,        {atlas=h_atlas}, {"MAGIC"})
-AddRecipe2("armorvortexcloak",	    {Ingredient("ancient_remnant", 5, h_atlas), Ingredient("armor_sanity", 1)},                                 TECH.LOST,        {atlas=h_atlas}, {"MAGIC","ARMOUR","CONTAINERS"})
+AddRecipe2("armorvortexcloak",	    {Ingredient("ancient_remnant", 5, h_atlas), Ingredient("armor_sanity", 1)},                                 TECH.LOST,        {atlas=h_atlas}, {"MAGIC"})
 AddRecipe2("living_artifact",		{Ingredient("infused_iron", 6, h_atlas), Ingredient("waterdrop", 1, h_atlas)}, 								TECH.LOST,        {atlas=h_atlas}, {"MAGIC"})
-AddRecipe2("armorlimestone",		{Ingredient("limestone", 3, v_atlas), Ingredient("rope", 2)}, 								                TECH.SCIENCE_TWO, {atlas=h_atlas}, {"ARMOUR"})
 AddRecipe2("antchest",			    {Ingredient("chitin", 6, h_atlas), Ingredient("beeswax",1), Ingredient("honey",9)}, 						TECH.LOST,        {atlas=h_atlas, min_spacing=1, placer="antchest_placer"}, {"COOKING"})
-AddRecipe2("bell1",			        {Ingredient("glommerwings", 1), Ingredient("glommerflower", 1)},                                            TECH.MAGIC_TWO,   {atlas=h_atlas}, {"MAGIC"})
 AddRecipe2("pigskin",			    {Ingredient("bat_leather", 1, h_atlas)},                                                                    TECH.SCIENCE_ONE, {atlas=h_atlas}, {"REFINE"})
-AddRecipe2("goldnugget",			{Ingredient("dubloon", 3, v_atlas)},  																	    TECH.SCIENCE_ONE, {atlas=h_atlas}, {"REFINE"})
+AddRecipe2("hogusporkusator",       {Ingredient("pigskin", 4), Ingredient("boards", 4), Ingredient("feather_robin_winter", 4)},                 TECH.SCIENCE_ONE, {atlas=h_atlas, placer="hogusporkusator_placer"}, {"MAGIC"})
 end
 
 if GetModConfigData("kindofworld") == 5 then
 AddRecipe2("antler",				{Ingredient("hippo_antler", 1, h_atlas), Ingredient("bill_quill", 3, h_atlas), Ingredient("flint", 1)},		TECH.SCIENCE_ONE, {atlas=h_atlas}, {"MAGIC"})
-AddRecipe2("researchlab4",			{Ingredient("pigskin", 4), Ingredient("boards", 4), Ingredient("feather_robin_winter", 4)}, 				TECH.SCIENCE_ONE, {placer="researchlab4_placer"}, {"MAGIC"})
+--AddRecipe2("researchlab4",			{Ingredient("pigskin", 4), Ingredient("boards", 4), Ingredient("feather_robin_winter", 4)}, 				TECH.SCIENCE_ONE, {placer="researchlab4_placer"}, {"MAGIC"})
 end
 
 --CITY--
@@ -236,6 +242,8 @@ AddRecipe2("turf_cobbleroad",	 		{Ingredient("cutstone", 2), Ingredient("boards"
 AddRecipe2("turf_checkeredlawn", 		{Ingredient("cutgrass", 2), Ingredient("nitre", 1)},											TECH.CITY_TWO, {atlas=v_atlas,  nounlock=true, numtogive=4}, {"CRAFTING_STATION"})
 
 --GORGE--
+AddRecipe2("quagmire_swampig_house",    {Ingredient("boards", 4), Ingredient("rocks", 8), Ingredient("pigskin", 4)},  	TECH.GORGE_TWO, {atlas=h_atlas, nounlock=true, placer="quagmire_swampig_house_placer"}, {"CRAFTING_STATION"})
+
 AddRecipe2("dubloon",					{Ingredient("quagmire_coin1", 2)}, 	TECH.GORGE_TWO, {atlas=h_atlas, nounlock=true}, {"CRAFTING_STATION"})
 AddRecipe2("oinc",						{Ingredient("quagmire_coin1", 2)},	TECH.GORGE_TWO, {atlas=h_atlas, nounlock=true}, {"CRAFTING_STATION"})
 AddRecipe2("quagmire_coin1",			{Ingredient("quagmire_coin2", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"CRAFTING_STATION"})

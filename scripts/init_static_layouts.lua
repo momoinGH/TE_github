@@ -195,8 +195,11 @@ Layouts["mermtrader2set"] = StaticLayout.Get("map/static_layouts/mermtrader2set"
 			fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,})	
 
 Layouts["mermtrader3set"] = StaticLayout.Get("map/static_layouts/mermtrader3set", {layout_position = GLOBAL.LAYOUT_POSITION.CENTER, start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-			fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,})				
-		
+			fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,})	
+
+Layouts["mermtrader3setmainland"] = StaticLayout.Get("map/static_layouts/mermtrader3setmainland", {layout_position = GLOBAL.LAYOUT_POSITION.CENTER, start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+			fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,})		
+
 Layouts["elderpig"] = StaticLayout.Get("map/static_layouts/elderpig", {layout_position = GLOBAL.LAYOUT_POSITION.CENTER, start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 			fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })				

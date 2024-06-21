@@ -243,7 +243,7 @@ return {
 
         {
           name = "",
-          type = "quagmire_portal",
+          type = "gorge_portal",
           shape = "rectangle",
           x = 250,
           y = 280,
@@ -337,8 +337,8 @@ return {
           name = "",
           type = "quagmire_trader_merm3",
           shape = "rectangle",
-          x = 250,
-          y = 280,
+          x = 400,
+          y = 100,
           width = 0,
           height = 0,
           visible = true,

@@ -35,6 +35,12 @@ local lobster_assets =
 	Asset("ANIM", "anim/lobster.zip"),
 }
 
+local quagmire_crabmeat_assets=
+{
+	Asset("ANIM", "anim/quagmire_crabmeat.zip"),
+    Asset("ANIM", "anim/dried_quagmire.zip"), 	
+}
+
 local prefabs =
 {
 	"fish_med_cooked",
@@ -491,9 +497,9 @@ local function quagmire_crabmeat_fn()
 	MakeInventoryPhysics(inst)
 	
 	inst.entity:AddAnimState()
-	inst.AnimState:SetBank("fishmeat_small")
-	inst.AnimState:SetBuild("fishmeat_small")
-	inst.AnimState:PlayAnimation("raw")
+	inst.AnimState:SetBank("quagmire_crabmeat")
+	inst.AnimState:SetBuild("quagmire_crabmeat")
+	inst.AnimState:PlayAnimation("idle")
 
 	inst:AddTag("catfood")
 	inst:AddTag("packimfood")
@@ -539,11 +545,12 @@ local function quagmire_crabmeat_fn()
 	inst:AddComponent("dryable")
 	inst.components.dryable:SetProduct("smallmeat_dried")
 	inst.components.dryable:SetDryTime(TUNING.DRY_FAST)
---	inst.components.dryable:SetOverrideSymbol("fishraw_small")
+	inst.components.dryable:SetBuildFile("dried_quagmire")
+	--inst.components.dryable:SetOverrideSymbol("fishraw_small")
 
 	inst:AddComponent("bait")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
+	inst.caminho = "images/inventoryimages2.xml"
 	
 	return inst
 end
@@ -555,8 +562,8 @@ local function quagmire_crabmeat_cooked_fn()
 	MakeInventoryPhysics(inst)
 	
 	inst.entity:AddAnimState()
-	inst.AnimState:SetBank("fishmeat_small")
-	inst.AnimState:SetBuild("fishmeat_small")
+	inst.AnimState:SetBank("quagmire_crabmeat")
+	inst.AnimState:SetBuild("quagmire_crabmeat")
 	inst.AnimState:PlayAnimation("cooked", true)
 
 --	MakeInventoryFloatable(inst, "cooked_water", "cooked")
@@ -596,8 +603,8 @@ local function quagmire_crabmeat_cooked_fn()
 --    inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 	inst.data = {}
 	inst:AddComponent("bait")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
+	inst.caminho = "images/images/inventoryimages2.xml"
 	
 	return inst
 end

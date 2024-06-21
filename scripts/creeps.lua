@@ -91,26 +91,27 @@
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/pearl.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/iron_ore.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/lavastone.xml" ))
-	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/fish_n_chips.xml" ))
-	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/sponge_cake.xml" ))
-	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/fish_gazpacho.xml" ))
-	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/tuna_muffin.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/fish_n_chips.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/sponge_cake.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/fish_gazpacho.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/tuna_muffin.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/sea_cucumber.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/jelly_cap.xml" ))
-	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/tentacle_sushi.xml" ))
-	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/fish_sushi.xml" ))
-	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/flower_sushi.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/tentacle_sushi.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/fish_sushi.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/flower_sushi.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/shrimp_tail.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/jelly_lantern.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/seagrass_chunk.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/cut_orange_coral.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/cut_blue_coral.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/cut_green_coral.xml" ))
-	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/seajelly.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/seajelly.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/coral_cluster.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/pearl_amulet.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/flare.xml" ))
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/sea_petals.xml" ))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/creepindeep_cuisine.xml"))
 
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/placeholder.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/diving_suit_summer.tex" ))
@@ -124,26 +125,27 @@
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/pearl.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/iron_ore.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/lavastone.tex" ))	
-	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/fish_n_chips.tex" ))
-	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/sponge_cake.tex" ))
-	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/fish_gazpacho.tex" ))
-	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/tuna_muffin.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/fish_n_chips.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/sponge_cake.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/fish_gazpacho.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/tuna_muffin.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/sea_cucumber.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/jelly_cap.tex" ))
-	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/tentacle_sushi.tex" ))
-	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/fish_sushi.tex" ))
-	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/flower_sushi.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/tentacle_sushi.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/fish_sushi.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/flower_sushi.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/shrimp_tail.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/jelly_lantern.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/seagrass_chunk.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/cut_orange_coral.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/cut_blue_coral.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/cut_green_coral.tex" ))
-	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/seajelly.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/seajelly.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/coral_cluster.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/pearl_amulet.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/flare.tex" ))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/sea_petals.tex" ))	
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/creepindeep_cuisine.tex"))
 
 
 
@@ -308,12 +310,13 @@ local sponge_cake =
 		test = function(cooker, names, tags) return tags.dairy and tags.sweetener and tags.sponge and tags.sponge and not tags.meat end,
 		priority = 0,
 		weight = 1,
+		foodtype = FOODTYPE.GOODIES,
 		health = 0,
 		hunger = 25,
 		sanity = 50,
 		perishtime = TUNING.PERISH_SUPERFAST,
 		cooktime = .5,
-		cookbook_atlas = "images/inventoryimages/sponge_cake.xml",		
+		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",		
 	floater = {"small", 0.05, 0.7},
     tags = {},
 }
@@ -329,12 +332,13 @@ local fish_n_chips =
 		test = function(cooker, names, tags) return tags.fish and tags.fish >= 2 and tags.veggie and tags.veggie >= 2 end,
 		priority = 10,
 		weight = 1,
+		foodtype = "MEAT",
 		health = 25,
 		hunger = 42.5,
 		sanity = 10,
 		perishtime = TUNING.PERISH_FAST,
 		cooktime = 1,
-		cookbook_atlas = "images/inventoryimages/fish_n_chips.xml",			
+		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
 	floater = {"small", 0.05, 0.7},
     tags = {},
 }
@@ -349,12 +353,13 @@ local tuna_muffin =
 		test = function(cooker, names, tags) return tags.fish and tags.fish >= 1 and tags.sponge and tags.sponge >= 1 and not tags.twigs end,
 		priority = 5,
 		weight = 1,
+		foodtype = "MEAT",
 		health = 0,
 		hunger = 32.5,
 		sanity = 10,
 		perishtime = TUNING.PERISH_MED,
 		cooktime = 2,
-		cookbook_atlas = "images/inventoryimages/tuna_muffin.xml",			
+		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
 	floater = {"small", 0.05, 0.7},
     tags = {},
 }
@@ -369,12 +374,13 @@ local tentacle_sushi =
 		test = function(cooker, names, tags) return tags.tentacle and tags.tentacle and tags.sea_veggie and tags.fish >= 0.5 and not tags.twigs end,
 		priority = 0,
 		weight = 1,
+		foodtype = "MEAT",
 		health = 35,
 		hunger = 5,
 		sanity = 5,
 		perishtime = TUNING.PERISH_MED,
 		cooktime = 2,
-		cookbook_atlas = "images/inventoryimages/tentacle_sushi.xml",		
+		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",		
 	floater = {"small", 0.05, 0.7},
     tags = {},
 }
@@ -389,12 +395,13 @@ local flower_sushi =
 		test = function(cooker, names, tags) return tags.flower and tags.sea_veggie and tags.fish and tags.fish >= 1 and not tags.twigs end,
 		priority = 0,
 		weight = 1,
+		foodtype = "MEAT",
 		health = 10,
 		hunger = 5,
 		sanity = 30,
 		perishtime = TUNING.PERISH_MED,
 		cooktime = 2,
-		cookbook_atlas = "images/inventoryimages/flower_sushi.xml",			
+		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
 	floater = {"small", 0.05, 0.7},
     tags = {},
 }
@@ -409,12 +416,13 @@ local fish_sushi =
 		test = function(cooker, names, tags) return tags.tentacle and tags.veggie >= 1 and tags.fish and tags.fish >= 1 and not tags.twigs end,
 		priority = 0,
 		weight = 1,
+		foodtype = "MEAT",
 		health = 5,
 		hunger = 50,
 		sanity = 0,
 		perishtime = TUNING.PERISH_MED,
 		cooktime = 2,
-		cookbook_atlas = "images/inventoryimages/fish_sushi.xml",			
+		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
 	floater = {"small", 0.05, 0.7},
     tags = {},
 }
@@ -429,12 +437,13 @@ local seajelly =
 		test = function(cooker, names, tags) return tags.sea_jelly and tags.sea_jelly > 1 and names.saltrock and names.saltrock > 1 and not tags.meat end,
 		priority = 0,
 		weight = 1,
+		foodtype = "MEAT",
 		health = 20,
 		hunger = 40,
 		sanity = 3,
 		perishtime = TUNING.PERISH_SLOW,
 		cooktime = 2,
-		cookbook_atlas = "images/inventoryimages/seajelly.xml",		
+		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",		
 	floater = {"small", 0.05, 0.7},
     tags = {},
 }

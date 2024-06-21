@@ -35,14 +35,14 @@ return {
       properties = {},
       encoding = "lua",
       data = {
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0
+        9, 9, 9, 9, 9, 9, 9, 9,
+        9, 9, 9, 9, 9, 9, 9, 9,
+        9, 9, 9, 9, 9, 9, 9, 9,
+        9, 9, 9, 9, 9, 9, 9, 9,
+        9, 9, 9, 9, 9, 9, 9, 9,
+        9, 9, 9, 9, 9, 9, 9, 9,
+        9, 9, 9, 9, 9, 9, 9, 9,
+        9, 9, 9, 9, 9, 9, 9, 9
       }
     },
     {
@@ -62,7 +62,230 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        }
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 8,
+          y = 8,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        --[[{
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 24,
+          y = 8,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 8,
+          y = 24,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },]]
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 8,
+          y = 40,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 40,
+          y = 8,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 120,
+          y = 120,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 104,
+          y = 120,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+        name = "",
+        type = "wall_wood",
+        shape = "rectangle",
+        x = 120,
+        y = 104,
+        width = 0,
+        height = 0,
+        visible = true,
+        properties = {}
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 120,
+          y = 88,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 88,
+          y = 120,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 8,
+          y = 120,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 24,
+          y = 120,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 40,
+          y = 120,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 8,
+          y = 104,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        --[[{
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 8,
+          y = 88,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },]]
+
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 120,
+          y = 8,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 104,
+          y = 8,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        --[[{
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 88,
+          y = 8,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 120,
+          y = 24,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "wall_wood",
+          shape = "rectangle",
+          x = 120,
+          y = 40,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },]]
       }
     }
   }

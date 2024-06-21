@@ -90,6 +90,16 @@ local function crab()
 
 	inst:AddComponent("inspectable")
 	
+	inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.nobounce = true
+    inst.components.inventoryitem.canbepickedup = false
+    inst.components.inventoryitem.canbepickedupalive = true
+    inst.components.inventoryitem:SetSinks(true)
+    inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
+	inst.caminho = "images/inventoryimages2.xml"
+
+    MakeFeedableSmallLivestock(inst, TUNING.RABBIT_PERISH_TIME, nil)
+	
     return inst
 end
 

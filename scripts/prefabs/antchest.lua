@@ -171,7 +171,7 @@ local function fn(Sim)
     inst.entity:AddNetwork()
 	MakeInventoryPhysics(inst)
 
-	inst.MiniMapEntity:SetIcon("ant_chest_honey.png")
+	inst.MiniMapEntity:SetIcon("ant_chest.png")
 	
 	inst.AnimState:SetBank("ant_chest")
 	inst.AnimState:SetBuild("ant_chest_honey_build")

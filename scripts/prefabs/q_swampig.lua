@@ -3,8 +3,11 @@ local assets =
 	Asset("ANIM", "anim/ds_pig_basic.zip"),
     Asset("ANIM", "anim/ds_pig_actions.zip"),
     Asset("ANIM", "anim/ds_pig_attacks.zip"),
+	Asset("ANIM", "anim/ds_pig_charge.zip"),
+	Asset("ANIM", "anim/ds_pig_boat_jump.zip"),
     Asset("ANIM", "anim/quagmire_swampig_build.zip"),
     Asset("ANIM", "anim/quagmire_swampig_extras.zip"),
+	Asset("SOUND", "sound/pig.fsb"),
 }
 
 local prefabs =
@@ -21,7 +24,7 @@ local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
 
 local function ontalk(inst, script)
-    inst.SoundEmitter:PlaySound("dontstarve/pig/grunt")
+    inst.SoundEmitter:PlaySound("dontstarve/quagmire/creature/swamp_pig/talk")
 end
 
 local function CalcSanityAura(inst, observer)
@@ -160,15 +163,23 @@ local function OnNewTarget(inst, data)
 end
 
 local builds = { "quagmire_swampig_build" }
-local guardbuilds = { "pig_guard_build" }
+--local guardbuilds = { "pig_guard_build" }
+local RETARGET_MUST_TAGS = { "_combat" }
 
 local function NormalRetargetFn(inst)
-	local exclude_tags = { "playerghost", "INLIMBO" }
+    if inst:HasTag("NPC_contestant") then
+        return nil
+    end
+
+	local exclude_tags = { "playerghost", "INLIMBO" , "NPC_contestant" }
 	if inst.components.follower.leader ~= nil then
 		table.insert(exclude_tags, "abigail")
 	end
+	if inst.components.minigame_spectator ~= nil then
+		table.insert(exclude_tags, "player") -- prevent spectators from auto-targeting webber
+	end
 
-    local oneof_tags = {"monster"}
+    local oneof_tags = {"monster","wonkey","pirate"}
     if not inst:HasTag("merm") then
         table.insert(oneof_tags, "merm")
     end
@@ -178,10 +189,9 @@ local function NormalRetargetFn(inst)
                 inst,
                 TUNING.PIG_TARGET_DIST,
                 function(guy)
-                    return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
-                        and inst.components.combat:CanTarget(guy)
+                    return guy:IsInLight() and inst.components.combat:CanTarget(guy)
                 end,
-                { "_combat" }, -- see entityreplica.lua
+                RETARGET_MUST_TAGS, -- see entityreplica.lua
                 exclude_tags,
                 oneof_tags
             )
@@ -202,7 +212,7 @@ local function NormalShouldSleep(inst)
                 (inst.LightWatcher == nil or inst.LightWatcher:IsInLight())))
 end
 
-local normalbrain = require "brains/pigbrain"
+local normalbrain = require "brains/swampigbrain"
 
 local function SuggestTreeTarget(inst, data)
     if data ~= nil and data.tree ~= nil and inst:GetBufferedAction() ~= ACTIONS.CHOP then
@@ -241,7 +251,7 @@ local function SetNormalPig(inst)
     inst.components.trader:Enable()
     inst.components.talker:StopIgnoringAll("becamewerepig")
 end
-
+--[[
 local function GuardRetargetFn(inst)
     --defend the king, then the torch, then myself
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
@@ -344,7 +354,7 @@ local function SetGuardPig(inst)
     inst.components.talker:StopIgnoringAll("becamewerepig")
     inst.components.follower:SetLeader(nil)
 end
-
+]]
 local function WerepigRetargetFn(inst)
     return FindEntity(
         inst,
@@ -505,7 +515,7 @@ local function common(moonbeast)
         inst:AddTag("trader")
 
         inst:AddComponent("talker")
-        inst.components.talker.fontsize = 35
+        inst.components.talker.fontsize = 28
         inst.components.talker.font = TALKINGFONT
         --inst.components.talker.colour = Vector3(133/255, 140/255, 167/255)
         inst.components.talker.offset = Vector3(0, -400, 0)
@@ -546,7 +556,7 @@ local function common(moonbeast)
     MakeMediumBurnableCharacter(inst, "pig_torso")
 
     inst:AddComponent("named")
-    inst.components.named.possiblenames = STRINGS.PIGNAMES
+    inst.components.named.possiblenames = STRINGS.SWAMPIG_NAMES
     inst.components.named:PickNewName()
 
     ------------------------------------------
@@ -673,7 +683,8 @@ local function normal()
 
     -- boat hopping setup
     inst.components.locomotor:SetAllowPlatformHopping(true)
-    inst:AddComponent("embarker")	
+    inst:AddComponent("embarker")
+    inst:AddComponent("drownable")	
 	
     inst.build = builds[math.random(#builds)]
     inst.AnimState:SetBuild(inst.build)
@@ -688,7 +699,7 @@ local function normal()
     SetNormalPig(inst)
     return inst
 end
-
+--[[
 local function guard()
     local inst = common(false)
 
@@ -705,7 +716,7 @@ local function guard()
     inst.components.werebeast:SetOnNormalFn(SetGuardPig)
     SetGuardPig(inst)
     return inst
-end
+end]]
 
 local gargoyles =
 {
