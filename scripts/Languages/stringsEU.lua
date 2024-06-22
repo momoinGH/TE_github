@@ -7960,6 +7960,10 @@ STRINGS.RECIPE_DESC.BONESTAFF = "Feel the gaze of the pugalisk!"
 STRINGS.NAMES.ARMORVORTEXCLOAK = "vortex cloak"
 STRINGS.RECIPE_DESC.ARMORVORTEXCLOAK = "There's a pocket. It's pretty deep."
 
+STRINGS.NAMES.ARMORVOIDCLOAK = "Void Cloak"
+STRINGS.RECIPE_DESC.ARMORVOIDCLOAK = "The material is thick, the pockets are deep"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMORVOIDCLOAK = "Very breathable, but light tight."
+
 STRINGS.NAMES.LIVING_ARTIFACT = "living artifact"
 STRINGS.RECIPE_DESC.LIVING_ARTIFACT = "Let's put them together and see what happens."
 

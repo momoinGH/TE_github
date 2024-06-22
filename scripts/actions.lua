@@ -6550,6 +6550,9 @@ end
 ACTIONS.KILLSOFTLY.distance = 2
 ACTIONS.KILLSOFTLY.priority = 3
 
+ACTIONS.ADDFUEL.priority = 1 -- Runar: 未定义的优先级，没有的话碎布加燃料会有问题
+ACTIONS.GIVE.priority = 0
+
 
 AddComponentAction("USEITEM", "sapbucket", function(inst, doer, target, actions, right)
 	if target:HasTag("tappable") and not target:HasTag("tapped") and not target:HasTag("stump") then

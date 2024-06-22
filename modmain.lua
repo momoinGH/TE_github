@@ -268,6 +268,7 @@ PrefabFiles =
 "froglegs_poison",
 "pugalisk_skull",
 "herald_tatters",
+"armor_void_cloak",
 "infused_iron",
 "armor_limestone",
 "bat_leather",
@@ -1199,6 +1200,10 @@ RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "aloe_c
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "weevole_carapace.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "piko_orange.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "snake_bone.tex")
+
+RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "armorvortexcloak.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "armorvoidcloak.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "ancient_remnant.tex")
 
 ------------------------------------------------
 --Start of Tile Adder. Copy this code to your modworldgenmain.lua for use.
@@ -2144,6 +2149,7 @@ GLOBAL.EQUIPSLOTS.BARCO = "barco"
 GLOBAL.FUELTYPE.TAR = "TAR"
 GLOBAL.FUELTYPE.REPARODEBARCO = "REPARODEBARCO"
 GLOBAL.FUELTYPE.LIVINGARTIFACT = "LIVINGARTIFACT"
+GLOBAL.FUELTYPE.ANCIENT_REMNANT = "ANCIENT_REMNANT" -- Runar: 在modmain太炸裂了
 GLOBAL.MATERIALS.SANDBAG = "sandbag"
 
 GLOBAL.TOOLACTIONS["HACK"] = true
