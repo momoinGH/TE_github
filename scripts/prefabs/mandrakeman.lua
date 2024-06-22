@@ -38,7 +38,7 @@ local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
 
 local function ontalk(inst, script)
-	inst.SoundEmitter:PlaySound("dontstarve/creatures/bunnyman/idle_med")
+    inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/elderdrake/dissy")
 end
 
 local function CalcSanityAura(inst, observer)
@@ -181,7 +181,8 @@ local function battlecry(combatcmp, target)
             return STRINGS.MANDRAKEMAN_MANDRAKE_BATTLECRY[math.random(#STRINGS.MANDRAKEMAN_MANDRAKE_BATTLECRY)]
         end
     end
-    return STRINGS.MANDRAKEMAN_BATTLECRY[math.random(4)]
+    --return STRINGS.MANDRAKEMAN_BATTLECRY[math.random(4)]
+    return STRINGS.MANDRAKEMAN_BATTLECRY[math.random(#STRINGS.MANDRAKEMAN_BATTLECRY)]
 end 
 
 local function DoAreaEffect(inst, knockout)
@@ -249,21 +250,24 @@ end
 
 local function fn()
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
-	local shadow = inst.entity:AddDynamicShadow()
-	shadow:SetSize( 1.5, .75 )
+	
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddDynamicShadow()
+    inst.entity:AddNetwork()
+
+    inst.DynamicShadow:SetSize(1.5, .75)
     inst.Transform:SetFourFaced()
     local s = 1.25
     inst.Transform:SetScale(s,s,s)
-    inst.entity:AddNetwork()
+
 
     inst.entity:AddLightWatcher()
-    
-    anim:SetBuild("elderdrake_build")  
-    anim:SetBank("elderdrake")  
-
+	
+  	inst.AnimState:SetBank("elderdrake")
+	inst.AnimState:SetBuild("elderdrake_build")  
+	
     MakeCharacterPhysics(inst, 50, .5)
 --    MakePoisonableCharacter(inst)
 
@@ -275,10 +279,10 @@ local function fn()
 
     inst:AddTag("grumpy")
     
-    anim:PlayAnimation("idle_loop")
-    anim:Hide("hat")
-    anim:Hide("head_happy")
-
+    inst.AnimState:PlayAnimation("idle_loop")
+    inst.AnimState:Hide("hat")
+    inst.AnimState:Hide("head_happy")
+	
     inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
@@ -286,7 +290,7 @@ local function fn()
 	end	
 	
     ------------------------------------------
-	inst:AddComponent("eater")
+    inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.VEGGIE }, { FOODTYPE.VEGGIE })
 --    table.insert(inst.components.eater.foodprefs, "RAW")
 --    table.insert(inst.components.eater.ablefoods, "RAW")
@@ -320,6 +324,7 @@ local function fn()
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({"livinglog","livinglog"})
+	inst.components.lootdropper:AddChanceLoot("Mandrake", 0.01)
     --inst.components.lootdropper.numrandomloot = 1
 
     ------------------------------------------
@@ -346,6 +351,7 @@ local function fn()
     ------------------------------------------
 
     inst:AddComponent("sleeper")
+	inst.components.sleeper.watchlight = true
     
     ------------------------------------------
     MakeMediumFreezableCharacter(inst, "pig_torso")
@@ -353,8 +359,11 @@ local function fn()
     ------------------------------------------
 
     inst:AddComponent("inspectable")
-	
-    inst.components.inspectable.getstatus = function(inst) if inst.components.follower.leader ~= nil then return "FOLLOWER" end end
+    inst.components.inspectable.getstatus = function(inst)
+        if inst.components.follower.leader ~= nil then
+            return "FOLLOWER"
+        end
+    end
     ------------------------------------------
     
     inst:ListenForEvent("attacked", OnAttacked)    
@@ -369,6 +378,8 @@ local function fn()
     
     
     inst.components.sleeper:SetResistance(2)
+	inst.components.sleeper.sleeptestfn = NocturnalSleepTest
+    inst.components.sleeper.waketestfn = NocturnalWakeTest
     inst.components.sleeper.nocturnal = true
 	inst.components.sleeper:SetSleepTest(ShouldSleep)
 
@@ -392,7 +403,9 @@ local function fn()
     inst.components.trader:Enable()
     --inst.Label:Enable(true)
     --inst.components.talker:StopIgnoringAll()	
-
+	
+    MakeHauntablePanic(inst)
+	
     local brain = require "brains/bunnymanbrain"
     inst:SetBrain(brain)
     inst:SetStateGraph("SGmandrakeman")

@@ -2568,7 +2568,37 @@ STRINGS.CITY_PIG_USHER_TRADE = "BERRIES"
 STRINGS.BANDIT_TALK_FIGHT = {"HAVE AT THEE","TAKE FROM THE RICH!","ENGUARD!"}
 
 
-
+STRINGS.MANDRAKEMANNAMES = {
+"Bambuseae",
+"Cornus",
+"Juniperus",
+"Asclepias",
+"Quercus",
+"Allium",
+"Pisum sativum",
+"Cirsium arvense",
+"Thymus",
+"Fabaceae",
+"Betula",
+"Rubus",
+"Daucus carota",
+"Brassica oleracea",
+"Castanea",
+"Trifolium",
+"Cucumis sativus",
+}
+STRINGS.MANDRAKEMAN_MANDRAKE_BATTLECRY = {
+"THIEF!",
+"ROBBER!",
+"CROOK!",
+"CHEAT!",
+}
+MANDRAKEMAN_RETREAT = {
+"AWAY!",
+"HURT!",
+"HOME!",
+"RUN!",
+}
 STRINGS.MANDRAKEMAN_BATTLECRY = {
 "ROT!",
 "SOIL!",

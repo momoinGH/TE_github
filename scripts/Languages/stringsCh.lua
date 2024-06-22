@@ -1992,6 +1992,31 @@ STRINGS.NAMES.MANDRAKEHOUSE = "曼德拉丘"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANDRAKEHOUSE = "好像有...什么尖声怪气的东西..."
 STRINGS.NAMES.MANDRAKEMAN = "曼德拉长者"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANDRAKEMAN = "肥大，尖声怪气。"
+STRINGS.MANDRAKEMANNAMES = {
+"箣竹",
+"山茱萸",
+"柏桧",
+"马利筋",
+"栎",
+"葱",
+"豌豆",
+"荆蓟",
+"麝香草",
+"豆",
+"桦木",
+"覆盆子",
+"胡萝卜",
+"甘蓝",
+"齿栗叶",
+"车轴草",
+"黄瓜",
+}
+STRINGS.MANDRAKEMAN_MANDRAKE_BATTLECRY = {
+"窃贼！",
+"强盗！",
+"罪犯！",
+"骗子！",
+}
 STRINGS.MANDRAKEMAN_BATTLECRY = {
 "腐败！",
 "泥土！",
@@ -2000,9 +2025,15 @@ STRINGS.MANDRAKEMAN_BATTLECRY = {
 }
 STRINGS.MANDRAKEMAN_GIVEUP = {
 "做甚？",
-"乏累。",
-"困倦。",
-"疲倦。",
+"乏累",
+"困倦",
+"疲倦",
+}
+MANDRAKEMAN_RETREAT = {
+"走开！",
+"疼痛！",
+"回家！",
+"快跑！",
 }
 ---------------------------------------毒瘴雨林Gas Rainforest---------------------
 
