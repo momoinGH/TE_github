@@ -7989,6 +7989,18 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.VOLCANO_ALTAR_PILLAR = "It's been eroded by 
 STRINGS.NAMES.QUAGMIRE_SWAMPIG_HOUSE_UNBUILT = "unbuilt swappig house"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUAGMIRE_SWAMPIG_HOUSE_UNBUILT = "It doesn't look built yet."
 
+STRINGS.NAMES.BUTTERFLYMUFFIN_SW = "Tropical Butter Muffin"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUTTERFLYMUFFIN_SW = "We threw the recipe away and just kind of winged it."
+
+STRINGS.NAMES.CALIFORNIAROLL_SW = "California Roll"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CALIFORNIAROLL_SW = "But I don't have chopsticks."
+
+STRINGS.NAMES.LOBSTERBISQUE_SW = "Lobster Bisque"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERBISQUE_SW = "Could use more salt, but that's none of my bisque-ness."
+
+STRINGS.NAMES.LOBSTERDINNER_SW = "Lobster Dinner"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERDINNER_SW = "If I eat it in the morning is it still dinner?"
+
 STRINGS.SWAMPIG_NAMES ={
         "Titus","Domitian","Nerva","Trajan","Hadrian","Antonius","Lucius","Marcus",
 		"Commodus","Pertinax","Didius","Septmius","Caracalla","Geta","Marcrinus",
