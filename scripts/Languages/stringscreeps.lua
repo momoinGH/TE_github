@@ -134,6 +134,10 @@ STRINGS.MERMNAMES.MERM_WORKER[2] =
 }
 
 -- Merm strings
+STRINGS.MERM_TALK_FISH   = {"Want fish.","Blut flort.","Go fish.","Glurtsu gleen.","Fresh fish. Good.","Blet blurn."}
+STRINGS.MERM_TALK_PANIC  = {"Just wanted fish!","GLOP GLOP GLOP!","Aaah!","GLORRRRRP!","Florp! Florp!","FLOPT! FTHRON!"}
+STRINGS.MERM_TALK_RUNAWAY= {"Cut line!","Florpy glrop glop!","Bad thing! Bad thing!","GLORP! GLOPRPY GLUP!","Protect fish!","Glut glut flrop!"}
+STRINGS.MERM_TALK_GO_HOME= {"Sleep with fishes.","Wort wort flrot.","Fish friend. Not food.","Wrut glor gloppy flort."}
 STRINGS.MERM_TALK_HELP_CHOP_WOOD = 
 {
 	MERM_NOBLE = {"Physical toil is best suited to others, I think.", "Sorry ol' thing, but my back you see...", "Good swing you have there.", "Don't worry, I'll wait."},

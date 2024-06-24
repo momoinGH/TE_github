@@ -7202,6 +7202,10 @@ GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEAWEEDUNDERWATER = "这就是这里�
 
 
     --NOTE: Limit to 7 strings per table！ (Using net_tinybyte for NPC chatter)
+GLOBAL.STRINGS.MERM_TALK_FISH   = {"想要鱼。","布拉特~弗洛特。","去捕鱼。","格拉特苏~格林。","鲜活的鱼。好。","布勒特~布勒恩。"}
+GLOBAL.STRINGS.MERM_TALK_PANIC  = {"只是想要鱼！","咯啰咯啰咯啰！","啊！","咯啰噗噗！","浮浪噗！浮浪噗！","呼啰噗特！费特隆！"}
+GLOBAL.STRINGS.MERM_TALK_RUNAWAY= {"切线！","弗罗皮~格洛普~格罗普！","坏东西！坏东西！","格洛普！格罗皮~格罗普！","保护鱼儿！","格拉特~格拉特~弗罗普！"}
+GLOBAL.STRINGS.MERM_TALK_GO_HOME= {"和鱼儿睡觉","沃特~沃特~弗洛特。","鱼儿朋友。不是食物。","瓦鲁特~格洛~格洛皮~弗洛特。"}
 GLOBAL.STRINGS.MERM_TALK_FOLLOWWILSON   = {"会跟着你", "浮浪噗 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "你要帮帮鱼人！", "格鲁特 格鲁粗 浮鲁噗！", "你好么", "浮浪噗 浮鲁特"}
 GLOBAL.STRINGS.MERM_TALK_HELP_CHOP_WOOD = {"会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "砍, 不停, 砍！", "格浪噗, 格鲁噗, 格浪噗！", "努力干, 浮浪噗！", "格鲁特 布鲁特, 浮浪噗！"}
 GLOBAL.STRINGS.MERM_TALK_HELP_MINE_ROCK = {"会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "打烂石头, 简单！", "呜尔特 沃噗, 浮浪噗 浮浪特！", "努力干, 浮浪噗！", "格鲁特 布鲁特, 浮浪噗！"}
