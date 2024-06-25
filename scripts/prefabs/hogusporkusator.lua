@@ -113,8 +113,8 @@ local function createmachine(level, name, soundprefix, sounddelay, techtree, mer
 
     local function onactivate(inst)
         if not inst:HasTag("burnt") then
-            inst:_PlayAnimation("use")
-            inst:_PushAnimation("idle", false)
+            inst.AnimState:PlayAnimation("use")
+            inst.AnimState:PushAnimation("idle", false)
             if not inst.SoundEmitter:PlayingSound("sound") then
                 inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_lvl4_run", "sound")
             end

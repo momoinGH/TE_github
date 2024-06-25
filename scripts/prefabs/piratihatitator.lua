@@ -49,9 +49,10 @@ local function onload(inst, data)
 end
 
 local function doonact(inst, soundprefix, onact)
-    if onact ~= nil then
+    --[[if onact ~= nil then
         onact(inst)
-    end
+    end]]
+	spawnparrots(inst)
     if inst._activecount > 1 then
         inst._activecount = inst._activecount - 1
     else
@@ -123,8 +124,8 @@ local function createmachine(level, name, soundprefix, sounddelay, techtree, mer
 
     local function onactivate(inst)
         if not inst:HasTag("burnt") then
-            inst:_PlayAnimation("use")
-            inst:_PushAnimation("idle", false)
+            inst.AnimState:PlayAnimation("use")
+            inst.AnimState:PushAnimation("idle", false)
             if not inst.SoundEmitter:PlayingSound("sound") then
                 inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_lvl4_run", "sound")
             end
