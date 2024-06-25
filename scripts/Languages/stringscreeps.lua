@@ -591,6 +591,10 @@ STRINGS.NAMES.SEAWEED_DRIED = "Seaweed Dried"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEAWEED_DRIED = "Salty!"
 
     --NOTE: Limit to 7 strings per table! (Using net_tinybyte for NPC chatter)
+STRINGS.MERM_TALK_FISH   = {"Want fish.","Blut flort.","Go fish.","Glurtsu gleen.","Fresh fish. Good.","Blet blurn."}
+STRINGS.MERM_TALK_PANIC  = {"Just wanted fish!","GLOP GLOP GLOP!","Aaah!","GLORRRRRP!","Florp! Florp!","FLOPT! FTHRON!"}
+STRINGS.MERM_TALK_RUNAWAY= {"Cut line!","Florpy glrop glop!","Bad thing! Bad thing!","GLORP! GLOPRPY GLUP!","Protect fish!","Glut glut flrop!"}
+STRINGS.MERM_TALK_GO_HOME= {"Sleep with fishes.","Wort wort flrot.","Fish friend. Not food.","Wrut glor gloppy flort."}
 GLOBAL.STRINGS.MERM_TALK_FOLLOWWILSON   = {"Will come with you.", "Flort glut.", "Make Mermfolk strong!", "Blut gloppy Glurtsu!", "You help Mermfolk!", "Glut Glurtsu flopt!", "You okay.", "Florpy flort."}
 GLOBAL.STRINGS.MERM_TALK_HELP_CHOP_WOOD = {"Will come with you.", "Flort glut.", "Make Mermfolk strong!", "Blut gloppy Glurtsu!", "Chop, choppy, chop!", "Grop, groppy, grop!", "Work hard, florp!", "Glort blut, florp!"}
 GLOBAL.STRINGS.MERM_TALK_HELP_MINE_ROCK = {"Will come with you.", "Flort glut.", "Make Mermfolk strong!", "Blut gloppy Glurtsu!", "Break rock, easy!", "Wult wop, florty flort!", "Work hard, florp!", "Glort blut, florp!"}
