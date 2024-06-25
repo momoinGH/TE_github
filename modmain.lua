@@ -165,7 +165,7 @@ PrefabFiles =
 "jungletreeguard_snake",
 "armor_cactus",
 "scorpionte",
-"cookpotfoodshamlet",
+-- "cookpotfoodshamlet",
 "cork",
 "corkbat",
 "hats_hamlet",
@@ -1031,9 +1031,6 @@ Asset("ANIM", "anim/fish2.zip"),
 Asset( "IMAGE", "images/inventoryimages/hamletinventory.tex" ),
 Asset( "ATLAS", "images/inventoryimages/hamletinventory.xml" ),
 
-Asset( "IMAGE", "images/inventoryimages/meated_nettle.tex" ),
-Asset( "ATLAS", "images/inventoryimages/meated_nettle.xml" ),
-
 Asset("ATLAS", "map_icons/hamleticon.xml"),
 Asset("IMAGE", "map_icons/hamleticon.tex" ),
 Asset("ATLAS", "map_icons/creepindedeepicon.xml"),
@@ -1080,8 +1077,12 @@ Asset( "ATLAS", "images/names_walani.xml" ),
 
 	Asset("IMAGE", "images/cookbook/cookbook_sw.tex"),
 	Asset("ATLAS", "images/cookbook/cookbook_sw.xml"),
+	Asset("IMAGE", "images/cookbook/cookbook_ham.tex"),
+	Asset("ATLAS", "images/cookbook/cookbook_ham.xml"),
 	Asset("IMAGE", "images/inventoryimages/cookpotfoods_sw.tex"),
 	Asset("ATLAS", "images/inventoryimages/cookpotfoods_sw.xml"),
+	Asset("IMAGE", "images/inventoryimages/cookpotfoods_ham.tex"),
+	Asset("ATLAS", "images/inventoryimages/cookpotfoods_ham.xml"),
 
 }
 
@@ -1373,196 +1374,6 @@ GLOBAL.RECIPETABS['GORGE'] 		= 	{str = "GORGE",     	 sort=94, icon = "tab_porta
 AddPrototyperDef("quagmire_portal_key", {action_str = "GORGE", icon_image = "tab_portal_key.tex", icon_atlas = "images/tabs.xml", is_crafting_station = true})
 
 modimport("scripts/recipes") --ALL RECIPES--
-----------------------------
-local fruityjuice =
-{
-    name = "fruityjuice",
-    test = function(cooker, names, tags) return names.blueberries_cooked and names.blueberries_cooked == 2 and names.foliage and tags.frozen or names.blueberries and names.blueberries == 2 and names.foliage and tags.frozen end,
-    priority = 1,
-    weight = 1,
-    foodtype = "VEGGIE",
-	health = TUNING.HEALING_MED,
-	hunger = TUNING.CALORIES_LARGE,
-    sanity = TUNING.SANITY_TINY,
-    cooktime = 2,
-	floater = {"small", 0.05, 0.7},
-    tags = {},
-	cookbook_atlas = "images/inventoryimages/volcanoinventory.xml",	
-}
-
-AddCookerRecipe("cookpot",fruityjuice)
-AddCookerRecipe("portablecookpot",fruityjuice)
-AddCookerRecipe("xiuyuan_cookpot",fruityjuice)
-
-local feijoada =
-{
-	name = "feijoada",
-		test = function(cooker, names, tags) return tags.meat and (names.jellybug == 3) or (names.jellybug_cooked == 3) or
-						(names.jellybug and names.jellybug_cooked and names.jellybug + names.jellybug_cooked == 3) end,
-	priority = 30,
-	weight = 1,
-	foodtype = "MEAT",
-	health = TUNING.HEALING_MED,
-	hunger = TUNING.CALORIES_HUGE,
-	perishtime = TUNING.PERISH_FASTISH,
-	sanity = TUNING.SANITY_MED,
-	cooktime = 3.5,
-	cookbook_atlas = "images/inventoryimages/hamletinventory.xml",
-}
-AddCookerRecipe("cookpot",feijoada)
-AddCookerRecipe("portablecookpot",feijoada)
-AddCookerRecipe("xiuyuan_cookpot",feijoada)
-
-local steamedhamsandwich =
-{
-	name = "steamedhamsandwich",
-	test = function(cooker, names, tags) return (names.meat or names.meat_cooked) and (tags.veggie and tags.veggie >= 2) and names.foliage end,
-	priority = 5,
-	weight = 1,
-	foodtype = "MEAT",
-	health = TUNING.HEALING_LARGE,
-	hunger = TUNING.CALORIES_LARGE,
-	perishtime = TUNING.PERISH_FAST,
-	sanity = TUNING.SANITY_MED,
-	cooktime = 2,
-	cookbook_atlas = "images/inventoryimages/hamletinventory.xml",	
-}
-AddCookerRecipe("cookpot",steamedhamsandwich)
-AddCookerRecipe("portablecookpot",steamedhamsandwich)
-AddCookerRecipe("xiuyuan_cookpot",steamedhamsandwich)
-
-local hardshell_tacos =
-{
-	name = "hardshell_tacos",
-	test = function(cooker, names, tags) return (names.weevole_carapace == 2) and  tags.veggie end,
-	priority = 1,
-	weight = 1,
-	foodtype = "VEGGIE",
-	health = TUNING.HEALING_MED,
-	hunger = TUNING.CALORIES_LARGE,
-	perishtime = TUNING.PERISH_SLOW,
-	sanity = TUNING.SANITY_TINY,
-	cooktime = 1,
-	cookbook_atlas = "images/inventoryimages/hamletinventory.xml",	
-}
-AddCookerRecipe("cookpot",hardshell_tacos)
-AddCookerRecipe("portablecookpot",hardshell_tacos)
-AddCookerRecipe("xiuyuan_cookpot",hardshell_tacos)
-
-local gummy_cake =
-{
-	name = "gummy_cake",
-	test = function(cooker, names, tags) return (names.slugbug or names.slugbug_cooked) and tags.sweetener end,
-	priority = 1,
-	weight = 1,
-	foodtype = "MEAT",
-	health = -TUNING.HEALING_SMALL,
-	hunger = TUNING.CALORIES_SUPERHUGE,
-	perishtime = TUNING.PERISH_PRESERVED,
-	sanity = -TUNING.SANITY_TINY,
-	cooktime = 2,	
-	cookbook_atlas = "images/inventoryimages/hamletinventory.xml",	
-}
-AddCookerRecipe("cookpot",gummy_cake)
-AddCookerRecipe("portablecookpot",gummy_cake)
-AddCookerRecipe("xiuyuan_cookpot",gummy_cake)
-
-local tea =
-{
-	name = "tea",
-	test = function(cooker, names, tags) return tags.filter and tags.filter >= 2 and tags.sweetener and not tags.meat and not tags.veggie and not tags.inedible end,
-	priority = 25,
-	weight = 1,
-	foodtype = FOODTYPE.GOODIES,
-	health = TUNING.HEALING_SMALL,
-	hunger = TUNING.CALORIES_SMALL,
-	perishtime = TUNING.PERISH_ONE_DAY,
-	sanity = TUNING.SANITY_LARGE,
-	cooktime = 0.5,
-	cookbook_atlas = "images/inventoryimages/hamletinventory.xml",	
-	oneat_desc = STRINGS.UI.COOKBOOK.TEA,
-}
-AddCookerRecipe("cookpot",tea)
-AddCookerRecipe("portablecookpot",tea)
-AddCookerRecipe("xiuyuan_cookpot",tea)
-
-local icedtea =
-{
-	name = "icedtea",
-	test = function(cooker, names, tags) return tags.filter and tags.filter >= 2 and tags.sweetener and tags.frozen end,
-	priority = 30,
-	weight = 1,
-	foodtype = FOODTYPE.GOODIES,
-	health = TUNING.HEALING_SMALL,
-	hunger = TUNING.CALORIES_SMALL,
-	perishtime = TUNING.PERISH_FAST,
-	sanity = TUNING.SANITY_LARGE,
-	cooktime = 0.5,
-	cookbook_atlas = "images/inventoryimages/hamletinventory.xml",	
-	oneat_desc = STRINGS.UI.COOKBOOK.ICEDTEA,
-}
-AddCookerRecipe("cookpot",icedtea)
-AddCookerRecipe("portablecookpot",icedtea)
-AddCookerRecipe("xiuyuan_cookpot",icedtea)
-
-local snakebonesoup =
-{
-	name = "snakebonesoup",
-	test = function(cooker, names, tags) return tags.bone and tags.bone >= 2 and tags.meat and tags.meat >= 2 end,
-	priority = 20,
-	weight = 1,
-	foodtype = "MEAT",
-	health = TUNING.HEALING_LARGE,
-	hunger = TUNING.CALORIES_MED,
-	perishtime = TUNING.PERISH_MED,
-	sanity = TUNING.SANITY_SMALL,
-	cooktime = 1,
-	cookbook_atlas = "images/inventoryimages/hamletinventory.xml",	
-}
-AddCookerRecipe("cookpot",snakebonesoup)
-AddCookerRecipe("portablecookpot",snakebonesoup)
-AddCookerRecipe("xiuyuan_cookpot",snakebonesoup)
-
-local nettlelosange =
-{
-	name = "nettlelosange",
-	test = function(cooker, names, tags) return tags.antihistamine and tags.antihistamine >= 3  end,
-	priority = 0,
-	weight = 1,
-    foodtype = "VEGGIE",
-	health = TUNING.HEALING_MED,
-	hunger = TUNING.CALORIES_MED,
-	perishtime = TUNING.PERISH_FAST,
-	sanity = TUNING.SANITY_TINY,
-	antihistamine = 720,
-	cooktime = .5,
-	cookbook_atlas = "images/inventoryimages/hamletinventory.xml",	
-	oneat_desc = STRINGS.UI.COOKBOOK.NETTLELOSANGE,
-}
-AddCookerRecipe("cookpot",nettlelosange)
-AddCookerRecipe("portablecookpot",nettlelosange)
-AddCookerRecipe("xiuyuan_cookpot",nettlelosange)
-
-
-local meated_nettle =
-{
-	name = "meated_nettle",
-	test = function(cooker, names, tags) return (tags.antihistamine and tags.antihistamine >=2) and (tags.meat and tags.meat >= 1) and (not tags.monster or tags.monster <= 1) and not tags.inedible end,
-	priority = 1,
-	weight = 1,
-	foodtype = "MEAT",	
-	health = TUNING.HEALING_MED,
-	hunger = TUNING.CALORIES_LARGE,
-	perishtime = TUNING.PERISH_FASTISH,
-	sanity = TUNING.SANITY_TINY,
-	antihistamine = 600,
-	cooktime = 1,
-	cookbook_atlas = "images/inventoryimages/meated_nettle.xml",	
-	oneat_desc = STRINGS.UI.COOKBOOK.MEATED_NETTLE,
-}
-AddCookerRecipe("cookpot",meated_nettle)
-AddCookerRecipe("portablecookpot",meated_nettle)
-AddCookerRecipe("xiuyuan_cookpot",meated_nettle)
 
 ----------------------posonables---------------------
 modimport("scripts/postinit_poisonables")

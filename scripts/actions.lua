@@ -6378,28 +6378,6 @@ AddCookerRecipe(
 
 local preparedFoods = GLOBAL.require("gorge_foods")
 
-AddCookerRecipeForCookers(
-	"wetgoop",
-	{
-		name = "wetgoop",
-		test = function(cooker, names, tags)
-			return true
-		end,
-		priority = -1,
-		weight = 1,
-		foodtype = "GENERIC",
-		perishtime = TUNING.PERISH_SLOW,
-		cooktime = 2,
-		health = 0,
-		hunger = 0,
-		sanity = 0,
-		perishtime = TUNING.PERISH_SLOW,
-		cookers = {"grill", "oven", "pot", "pot_syrup"},
-		tags = {},
-	},
-	cookers
-)
-
 local GNAW_REWARDS = {}
 
 for k,v in pairs(preparedFoods) do

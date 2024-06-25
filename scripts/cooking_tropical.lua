@@ -1,23 +1,11 @@
+-- 物品栏贴图路径
 local inventoryitems_atlas_sw = "images/inventoryimages/cookpotfoods_sw.xml"
--- local inventoryitems_atlas_sw = "images/inventoryimages/volcanoinventory.xml" -- 等补上热带蝴蝶松饼的位置信息再用
+local inventoryitems_atlas_ham = "images/inventoryimages/cookpotfoods_ham.xml"
+local inventoryitems_atlas_creeps = "images/inventoryimages/creepindeep_cuisine.xml"
+local inventoryitems_atlas_frost = "images/inventoryimages/volcanoinventory.xml"
 
--- local foods = require("preparedfoods_tropical")
--- for k, v in pairs (foods) do
---     if v.mod and v.mod == true then
---         RegisterInventoryItemAtlas(v.cookbook_atlas, v.name..".tex")
---     end
---     if v.isMasterfood == nil then -- 不是大厨料理才加入到烹饪锅 -- 剩下的好像没有了，到时候去掉
---         AddCookerRecipe("cookpot", v)
---         AddCookerRecipe("archive_cookpot", v)
---     end
---     AddCookerRecipe("portablecookpot", v)
---     if v.card_def then
---         AddRecipeCard("cookpot", v)
---     end
--- end
-
-local foods = require("preparedfoods_sw") -- 暂时加local
-for k, v in pairs (foods) do
+local foods_sw = require("preparedfoods_sw")
+for k, v in pairs (foods_sw) do
     if v.mod and v.mod == true then
         RegisterInventoryItemAtlas(inventoryitems_atlas_sw, v.name..".tex")
     end
@@ -31,8 +19,65 @@ for k, v in pairs (foods) do
     end
 end
 
--- GenerateSpicedFoods(require("preparedfoods_tropical"))
-GenerateSpicedFoods(require("preparedfoods_sw"))
+local foods_ham = require("preparedfoods_ham")
+for k, v in pairs (foods_ham) do
+    if v.mod and v.mod == true then
+        RegisterInventoryItemAtlas(inventoryitems_atlas_ham, v.name..".tex")
+    end
+    AddCookerRecipe("cookpot", v)
+    AddCookerRecipe("portablecookpot", v)
+    AddCookerRecipe("archive_cookpot", v)
+    if v.card_def then
+        AddRecipeCard("cookpot", v)
+    end
+end
+
+local foods_creeps = require("preparedfoods_creeps")
+for k, v in pairs (foods_creeps) do
+    if v.mod and v.mod == true then
+        RegisterInventoryItemAtlas(inventoryitems_atlas_creeps, v.name..".tex")
+    end
+    AddCookerRecipe("cookpot", v)
+    AddCookerRecipe("portablecookpot", v)
+    AddCookerRecipe("archive_cookpot", v)
+    if v.card_def then
+        AddRecipeCard("cookpot", v)
+    end
+end
+
+local foods_windy = require("preparedfoods_windy")
+for k, v in pairs (foods_windy) do
+    if v.mod and v.mod == true then
+        table.insert(Assets, Asset("ATLAS", "images/inventoryimages/"..k..".xml"))
+        table.insert(Assets, Asset("IMAGE", "images/inventoryimages/"..k..".tex" ))
+        RegisterInventoryItemAtlas("images/inventoryimages/"..k..".xml", v.name..".tex")
+    end
+    AddCookerRecipe("cookpot", v)
+    AddCookerRecipe("portablecookpot", v)
+    AddCookerRecipe("archive_cookpot", v)
+    if v.card_def then
+        AddRecipeCard("cookpot", v)
+    end
+end
+
+local foods_frost = require("preparedfoods_frost")
+for k, v in pairs (foods_frost) do
+    if v.mod and v.mod == true then
+        RegisterInventoryItemAtlas(inventoryitems_atlas_frost, v.name..".tex")
+    end
+    AddCookerRecipe("cookpot", v)
+    AddCookerRecipe("portablecookpot", v)
+    AddCookerRecipe("archive_cookpot", v)
+    if v.card_def then
+        AddRecipeCard("cookpot", v)
+    end
+end
+
+GenerateSpicedFoods(foods_sw)
+GenerateSpicedFoods(foods_ham)
+GenerateSpicedFoods(foods_creeps)
+GenerateSpicedFoods(foods_windy)
+GenerateSpicedFoods(foods_frost)
 local spicedfoods = require("spicedfoods")
 for k, recipe in pairs(spicedfoods) do
     if recipe.mod and recipe.mod == true then
@@ -41,6 +86,7 @@ for k, recipe in pairs(spicedfoods) do
     end
 end
 
+-- 食物属性，仅海难和哈姆
 AddIngredientValues({ "butterfly_tropical_wings" }, { decoration = 2 }, true, false)
 
 AddIngredientValues({ "limpets_cooked" }, { fish = 0.5 }, true, false)
@@ -142,3 +188,5 @@ AddIngredientValues({ "piko_orange" }, { filter = 1 }, true, false)
 AddIngredientValues({ "snake_bone" }, { bone = 1 }, true, false)
 AddIngredientValues({ "yelow_cap" }, { veggie = 0.5 }, true, false)
 AddIngredientValues({ "yelow_cooked" }, { veggie = 0.5 }, true, false)
+
+-- 食物属性，废案预留

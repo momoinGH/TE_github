@@ -29,6 +29,7 @@ local assets3 =
 local function Full_EatFn(inst, eater)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local peach = SpawnPrefab("peach_juice_bottle_green_most")
+	eater:PushEvent("learncookbookstats", inst.prefab)
 	peach.Transform:SetPosition(x, y, z)
 	if eater.components.inventory ~= nil then
 		eater.components.inventory:GiveItem(peach)
@@ -105,6 +106,7 @@ local function full()
 
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach_juice_bottle_green.xml"
+
 
     return inst
 end

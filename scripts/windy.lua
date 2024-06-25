@@ -27,10 +27,7 @@ table.insert(PrefabFiles,"goddess_statue5")
 table.insert(PrefabFiles,"goddess_statue_fire")
 table.insert(PrefabFiles,"page")
 table.insert(PrefabFiles,"goddess_figure")
-table.insert(PrefabFiles,"peach_smoothie")
 table.insert(PrefabFiles,"grilled_peach")
-table.insert(PrefabFiles,"caramel_peach")
-table.insert(PrefabFiles,"peach_kabobs")
 table.insert(PrefabFiles,"goddess_bowtie")
 table.insert(PrefabFiles,"gem_flower")
 table.insert(PrefabFiles,"gem_seeds")
@@ -38,8 +35,6 @@ table.insert(PrefabFiles,"goddess_sword")
 table.insert(PrefabFiles,"goddess_hat")
 table.insert(PrefabFiles,"goddess_deer2")
 table.insert(PrefabFiles,"goddess_ribbon")
-table.insert(PrefabFiles,"peachy_meatloaf")
-table.insert(PrefabFiles,"peach_custard")
 table.insert(PrefabFiles,"mixed_gem")
 table.insert(PrefabFiles,"goddess_lantern")
 table.insert(PrefabFiles,"goddess_lantern_fire")
@@ -180,7 +175,7 @@ table.insert(PrefabFiles,"goddess_fishingrod")
 RegisterInventoryItemAtlas("images/inventoryimages/peach.xml", "peach.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/grilled_peach.xml", "grilled_peach.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/magicpowder.xml", "magicpowder.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/peachy_meatloaf.xml", "peachy_meatloaf.tex")
+-- RegisterInventoryItemAtlas("images/inventoryimages/peachy_meatloaf.xml", "peachy_meatloaf.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/peach_juice_bottle_green.xml", "peach_juice_bottle_green.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/full_bottle_green.xml", "full_bottle_green.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/less_bottle_green_milk.xml", "less_bottle_green_milk.tex")
@@ -198,65 +193,6 @@ AddIngredientValues({"grilled_peach"}, 				{fruit = 1})
 AddIngredientValues({"peach_juice_bottle_green"},  {peachy = 1})
 AddIngredientValues({"peachy_meatloaf"},			 {loaf = 1})
 
-local peach_smoothie =
-		{
-			name = "peach_smoothie",
-			test = function(cooker, names, tags) return (names.peach or names.grilled_peach) and (names.peach or names.grilled_peach)>=2 and tags.dairy and tags.sweetener and not tags.meat and not tags.egg and not tags.inedible and not tags.monster end,
-			priority = 100,
-			weight = 1,
-			foodtype = FOODTYPE.GOODIES,
-			health = 10,
-			hunger = 65,
-			sanity = 10,
-			perishtime = TUNING.PERISH_MED,
-			cooktime = 0.5,
-			cookbook_atlas = "images/inventoryimages/peach_smoothie.xml",				
-		}
-		
-local peach_kabobs =
-		{
-			name = "peach_kabobs",
-			test = function(cooker, names, tags) return (names.peach or names.grilled_peach) and names.twigs and tags.veggie and tags.veggie >=1 and tags.meat and tags.meat >=1 and not tags.egg and not tags.monster  end,
-			priority = 100,
-			weight = 1,
-			foodtype = "MEAT",
-			health = 3,
-			hunger = 75,
-			sanity = 5,
-			perishtime = TUNING.PERISH_MED,
-			cooktime = 0.5,
-			cookbook_atlas = "images/inventoryimages/peach_kabobs.xml",				
-		}
-		
-local peachy_meatloaf =
-		{
-			name = "peachy_meatloaf",
-			test = function(cooker, names, tags) return (names.peach or names.grilled_peach) and (names.peach or names.grilled_peach) >=2 and tags.meat and tags.meat >=2 and not tags.egg end,
-			priority = 100,
-			weight = 1,
-			foodtype = "MEAT",
-			health = 10,
-			hunger = 80,
-			sanity = 5,
-			perishtime = TUNING.PERISH_SLOW,
-			cooktime = 0.5,
-			cookbook_atlas = "images/inventoryimages/peachy_meatloaf.xml",				
-		}
-		
-local caramel_peach =
-		{
-			name = "caramel_peach",
-			test = function(cooker, names, tags) return (names.peach or names.grilled_peach) and tags.sweetener and tags.sweetener >=2 and names.twigs and not tags.meat and not tags.egg and not tags.monster end,
-			priority = 100,
-			weight = 1,
-			foodtype = FOODTYPE.GOODIES,
-			health = 40,
-			hunger = 45,
-			sanity = 5,
-			perishtime = TUNING.PERISH_SLOW,
-			cooktime = 0.5,
-			cookbook_atlas = "images/inventoryimages/caramel_peach.xml",				
-		}
 		
 local peach_juice =
 		{
@@ -270,9 +206,8 @@ local peach_juice =
 			sanity = 5,
 			cooktime = 0.5,
 			cookbook_atlas = "images/inventoryimages/peach_juice_bottle_green.xml",	
-			-- oneatenfn = function(inst, eater)
-			-- 	eater:PushEvent("learncookbookstats", inst.prefab)
-			-- end,--不是，这吃了怎么不解锁图鉴啊
+      		tags = { "honeyed" },
+        	card_def = {ingredients = {{"peach", 2}, {"honey", 1}, {"full_bottle_green", 1} } },
 		}
 		
 local potion =
@@ -287,40 +222,11 @@ local potion =
 			sanity = 75,
 			cooktime = 0.5,
 			cookbook_atlas = "images/inventoryimages/potion_bottle_green.xml",	
-			-- oneatenfn = function(inst, eater)
-			-- 	eater:PushEvent("learncookbookstats", inst.prefab)
-			-- end,			
+    	    card_def = {ingredients = {{"peach", 1}, {"peach_juice_bottle_green", 1}, {"peachy_meatloaf", 1}, {"magicpowder", 1} } },
 		}
 		
-		
-local peach_custard =
-		{
-			name = "peach_custard",
-			test = function(cooker, names, tags) return (names.peach or names.grilled_peach) and tags.egg and tags.sweetener and (names.peach or names.grilled_peach) >=2 and not names.twigs and not tags.meat and not tags.monster end,
-			priority = 100,
-			weight = 1,
-			foodtype = FOODTYPE.GOODIES,
-			health = 20,
-			hunger = 62,
-			sanity = 5,
-			perishtime = TUNING.PERISH_SLOW,
-			stacksize = 2,
-			cooktime = 0.5,
-			cookbook_atlas = "images/inventoryimages/peach_custard.xml",			
-		}
-	
-AddCookerRecipe("cookpot",peach_smoothie)
-AddCookerRecipe("cookpot",peach_kabobs)
-AddCookerRecipe("cookpot",caramel_peach)
-AddCookerRecipe("cookpot",peach_custard)
-AddCookerRecipe("cookpot",peachy_meatloaf)
 AddCookerRecipe("cookpot",potion)
 AddCookerRecipe("cookpot",peach_juice)
-AddCookerRecipe("portablecookpot",peach_smoothie)
-AddCookerRecipe("portablecookpot",peach_kabobs)
-AddCookerRecipe("portablecookpot",caramel_peach)
-AddCookerRecipe("portablecookpot",peach_custard)
-AddCookerRecipe("portablecookpot",peachy_meatloaf)
 AddCookerRecipe("portablecookpot",potion)
 AddCookerRecipe("portablecookpot",peach_juice)
 

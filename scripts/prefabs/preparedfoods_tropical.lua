@@ -157,11 +157,23 @@ end
 
 local prefs = {}
 
--- for k, v in pairs(require("preparedfoods_tropical")) do -- 移除prefab后用这个
---     table.insert(prefs, MakePreparedFood(v))
--- end
-
 for k, v in pairs(require("preparedfoods_sw")) do
+    table.insert(prefs, MakePreparedFood(v))
+end
+
+for k, v in pairs(require("preparedfoods_ham")) do
+    table.insert(prefs, MakePreparedFood(v))
+end
+
+for k, v in pairs(require("preparedfoods_creeps")) do
+    table.insert(prefs, MakePreparedFood(v))
+end
+
+for k, v in pairs(require("preparedfoods_windy")) do
+    table.insert(prefs, MakePreparedFood(v))
+end
+
+for k, v in pairs(require("preparedfoods_frost")) do
     table.insert(prefs, MakePreparedFood(v))
 end
 

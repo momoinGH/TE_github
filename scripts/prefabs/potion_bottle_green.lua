@@ -6,6 +6,7 @@ local assets =
 }
 
 local function EatFn(inst, eater)
+	eater:PushEvent("learncookbookstats", inst.prefab)
 	if not eater:HasTag("speedbuffed") then
 		eater:AddTag("speedbuffed")
 		eater.components.locomotor.isrunning = true
