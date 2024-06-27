@@ -137,8 +137,6 @@ TUNING.STARTING_ITEM_IMAGE_OVERRIDE["surfboarditem"] = {
 
 end
 
-AddIngredientValues({"butterfly_tropical_wings"}, {veggie=0.5}, true, false)
-
 --if GetModConfigData("musica") == true then
 --RemapSoundEvent( "dontstarve/music/music_work", "tropical/music/music_work")
 --RemapSoundEvent( "dontstarve/music/music_work_winter", "tropical/music/music_work_winter")

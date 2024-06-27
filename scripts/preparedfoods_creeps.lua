@@ -8,8 +8,6 @@ local inventoryitems_atlas_creeps = "images/inventoryimages/creepindeep_cuisine.
 local foods_creeps = {
     sponge_cake = {
         test = function(cooker, names, tags) return tags.dairy and tags.sweetener and tags.sponge and tags.sponge >= 2 and not tags.meat end,
-        priority = 0,
-        weight = 1,
         foodtype = FOODTYPE.GOODIES,
         health = 0,
         hunger = 25,
@@ -17,81 +15,81 @@ local foods_creeps = {
         perishtime = TUNING.PERISH_SUPERFAST,
         cooktime = .5,
         tags = { "honeyed" },
-        card_def = {ingredients = {{"sweet_potato", 2}, {"bird_egg", 2}} },
+        card_def = {ingredients = {{"sponge_piece", 2}, {"goatmilk", 1}, {"honey", 1}} },
     },
 
     fish_n_chips = {
         test = function(cooker, names, tags) return tags.fish and tags.fish >= 2 and tags.veggie and tags.veggie >= 2 end,
         priority = 10,
-        weight = 1,
         health = 25,
         hunger = 42.5,
         sanity = 10,
         perishtime = TUNING.PERISH_FAST,
         cooktime = 1,
-        tags = {},
+        card_def = {ingredients = {{"fish_fillet", 2}, {"potato", 2} } },
     },
 
     tuna_muffin = {
         test = function(cooker, names, tags) return tags.fish and tags.fish >= 1 and tags.sponge and tags.sponge >= 1 and not tags.twigs end,
         priority = 5,
-        weight = 1,
         health = 0,
         hunger = 32.5,
         sanity = 10,
         perishtime = TUNING.PERISH_MED,
         cooktime = 2,
-        tags = {},
+        card_def = {ingredients = {{"fish_fillet", 1}, {"sponge_piece", 1}, {"carrot", 2}} },
     },
 
     tentacle_sushi = {
-        test = function(cooker, names, tags) return tags.tentacle and tags.tentacle and tags.sea_veggie and tags.fish >= 0.5 and not tags.twigs end,
-        priority = 0,
-        weight = 1,
+        test = function(cooker, names, tags) return tags.tentacle and tags.tentacle > 1 and tags.sea_veggie and tags.fish >= 0.5 and not tags.twigs end,
         health = 35,
         hunger = 5,
         sanity = 5,
         perishtime = TUNING.PERISH_MED,
         cooktime = 2,
-        tags = {},
+        card_def = {ingredients = {{"trinket_12", 2}, {"fish_fillet", 2} } },
     },
 
     flower_sushi = {
         test = function(cooker, names, tags) return tags.flower and tags.sea_veggie and tags.fish and tags.fish >= 1 and not tags.twigs end,
-        priority = 0,
-        weight = 1,
         health = 10,
         hunger = 5,
         sanity = 30,
         perishtime = TUNING.PERISH_MED,
         cooktime = 2,
-        tags = {},
+        card_def = {ingredients = {{"sea_petals", 1}, {"seagrass_chunk", 1}, {"fish_fillet", 2} } },
     },
 
     fish_sushi = {
         test = function(cooker, names, tags) return tags.tentacle and tags.veggie >= 1 and tags.fish and tags.fish >= 1 and not tags.twigs end,
-        priority = 0,
-        weight = 1,
         health = 5,
         hunger = 50,
         sanity = 0,
         perishtime = TUNING.PERISH_MED,
         cooktime = 2,
-        tags = {},
+        card_def = {ingredients = {{"trinket_12", 1}, {"fish_fillet", 1}, {"seagrass_chunk", 2} } },
     },
 
     seajelly = {
 		test = function(cooker, names, tags) return tags.sea_jelly and tags.sea_jelly > 1 and names.saltrock and names.saltrock > 1 and not tags.meat end,
-		priority = 0,
-		weight = 1,
 		health = 20,
 		hunger = 40,
 		sanity = 3,
 		perishtime = TUNING.PERISH_SLOW,
 		cooktime = 2,
-        tags = {},
+        card_def = {ingredients = {{"jelly_cap", 2}, {"saltrock", 2} } },
     },
     
+    fish_gazpacho = {
+        test = function(cooker, names, tags) return (names.fish_fillet or names.fish_fillet_cooked) and tags.veggie and tags.veggie >= 1 and tags.frozen and tags.frozen >= 2 end,
+        priority = 35, -- or 10?
+        health = TUNING.HEALING_MED - TUNING.HEALING_SMALL,
+        hunger = TUNING.CALORIES_LARGE,
+        sanity = TUNING.SANITY_SUPERTINY,
+        perishtime = TUNING.PERISH_FAST,
+        cooktime = 1,
+        card_def = {ingredients = {{"fish_fillet", 1}, {"seagrass_chunk", 1}, {"ice", 2}} },
+    },
 }
 
 for k, v in pairs(foods_creeps) do

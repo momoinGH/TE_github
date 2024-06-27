@@ -1206,10 +1206,11 @@ RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "aspara
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "asparagus_cooked.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "aloe.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "aloe_cooked.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "weevole_carapace.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "piko_orange.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "snake_bone.tex")
 
+
+-- 斗篷相关
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "armorvortexcloak.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "armorvoidcloak.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "ancient_remnant.tex")

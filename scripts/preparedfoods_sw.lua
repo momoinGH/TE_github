@@ -35,23 +35,23 @@ local foods_sw = {
         card_def = {ingredients = {{"butterfly_tropical_wings", 1}, {"carrot", 2}, {"twigs", 1}} },
     },
 
-    californiaroll_sw = {
-        test = function(cooker, names, tags)
-            return
-                (names.seaweed or 0) == 2 and (tags.fish and tags.fish >= 1)
-        end,
-        priority = 20,
-        weight = 1,
-        foodtype = FOODTYPE.MEAT,
-        health = TUNING.HEALING_MED,
-        hunger = TUNING.CALORIES_LARGE,
-        perishtime = TUNING.PERISH_MED,
-        sanity = TUNING.SANITY_SMALL,
-        cooktime = .5,
-        potlevel = "high",
-        floater = {"med", 0.05, {0.65, 0.6, 0.65}},
-        card_def = {ingredients = {{"seaweed", 2}, {"fishmeat_small", 2}} },
-    },
+    -- californiaroll_sw = {
+    --     test = function(cooker, names, tags)
+    --         return
+    --             (names.seaweed or 0) == 2 and (tags.fish and tags.fish >= 1)
+    --     end,
+    --     priority = 20,
+    --     weight = 1,
+    --     foodtype = FOODTYPE.MEAT,
+    --     health = TUNING.HEALING_MED,
+    --     hunger = TUNING.CALORIES_LARGE,
+    --     perishtime = TUNING.PERISH_MED,
+    --     sanity = TUNING.SANITY_SMALL,
+    --     cooktime = .5,
+    --     potlevel = "high",
+    --     floater = {"med", 0.05, {0.65, 0.6, 0.65}},
+    --     card_def = {ingredients = {{"seaweed", 2}, {"fishmeat_small", 2}} },
+    -- },
 
     caviar = {
         test = function(cooker, names, tags)
