@@ -6260,7 +6260,7 @@ modimport "tileadder.lua"
 modimport ("scripts/ham_fx.lua")
 
 
-modimport("scripts/Languages/stringsEU.lua") 
+--modimport("scripts/Languages/stringsEU.lua") 
 modimport("scripts/Languages/stringscomplement.lua")
 modimport("scripts/Languages/stringscreeps.lua")
 modimport("scripts/Languages/wurt_quotes.lua")
