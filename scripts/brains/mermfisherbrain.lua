@@ -370,7 +370,7 @@ function MermFisherBrain:OnStart(inst)
             ChattyNode(self.inst, STRINGS.MERM_TALK_RUNAWAY,
 				RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
 				
-            ChattyNode(self.inst, "MERM_TALK_FIND_FOOD",
+            ChattyNode(self.inst, STRINGS.MERM_TALK_FIND_FOOD,
                 DoAction(self.inst, FindFoodAction)),
 
             ChattyNode(self.inst, STRINGS.MERM_TALK_FOLLOWWILSON,

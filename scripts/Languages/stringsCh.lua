@@ -363,7 +363,14 @@ STRINGS.NAMES.SLIPSTOR_SPAWNER = "滑怪刷新点"
 
 
 -----------------------------潮滩相关Tidal beach----------------------------------------------
-
+STRINGS.MERMNAMES = 	{
+        "格罗皮","布鲁特","格朗特","姆罗普特","斯洛朋",
+        "布朗舍","费特哈","布洛特","斯立普","格罗朋",
+        "罗特罗特","格洛皮","姆沃普","格利喷","格勒特",
+        "谢尔普","谢鲁波","克里斯廷","丹","德鲁",
+		"戴夫","乔恩","布拉普","马特","那森","维克",
+		"格拉斯基","格鲁默","格拉兹","斯勒姆","斯鲁歇","斯勒纽斯",
+    }
 STRINGS.NAMES.MERMFISHER = "渔人"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMFISHER = "你最好别尝有鱼味的东西。"
 STRINGS.NAMES.MERMFISHERGUARD = "渔人守卫"
@@ -955,10 +962,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSSELBOUILLABAISE = "想象一下我可以�
 --STRINGS.NAMES.MONSTERTARTARE = "怪物肉鞑靼"
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.MONSTERTARTARE = "这周围肯定有别的东西可以吃。"
 
-STRINGS.NAMES.LOBSTERDINNER = "龙虾晚宴"
+STRINGS.NAMES.LOBSTERDINNER_sw = "龙虾晚宴"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERDINNER = "如果我早上吃它那还是晚餐吗？"
 
-STRINGS.NAMES.LOBSTERBISQUE = "龙虾浓汤"
+STRINGS.NAMES.LOBSTERBISQUE_sw = "龙虾浓汤"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERBISQUE = "可以再加点盐，但那不关我的事。"
 
 --STRINGS.NAMES.FRESHFRUITCREPES = "鲜果可丽饼"
@@ -967,7 +974,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERBISQUE = "可以再加点盐，但那
 STRINGS.NAMES.BISQUE = "鲜贝浓汤"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BISQUE = "老是煮这个会让我身上一股浓汤味！"
 
-STRINGS.NAMES.CALIFORNIAROLL = "加州卷"
+STRINGS.NAMES.CALIFORNIAROLL_sw = "加州卷"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CALIFORNIAROLL = "但我没有筷子。"
 
 STRINGS.NAMES.JELLYOPOP = "水母冻"
@@ -5125,15 +5132,28 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.STEAMEDHAMSANDWICH = "一个汉堡。"
 STRINGS.NAMES.SNAKEBONESOUP = "蛇骨汤"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNAKEBONESOUP = "蛇骨的最好利用法。" 
 
-GLOBAL.STRINGS.NAMES.FRUITYJUICE = "蓝莓汁"
-GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.FRUITYJUICE = "一杯冰果汁。"
-
 STRINGS.NAMES.NETTLELOSANGE = "荨麻卷"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.NETTLELOSANGE = "无害的疫苗。"
 
 STRINGS.NAMES.MEATED_NETTLE = "肉夹荨麻"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MEATED_NETTLE = "帮助我们对抗花粉症！"
 GLOBAL.STRINGS.CHARACTERS.GENERIC.ANNOUNCE_SNEEZE = "啊啊啊啊...啾！"
+
+--废案料理
+STRINGS.NAMES.BUBBLETEA  = "芋泥波波奶茶"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUBBLETEA  = "比想象中的口感还要好！"
+
+STRINGS.NAMES.FRENCHONIONSOUP  = "法式洋葱汤"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FRENCHONIONSOUP  = "一道经典法式菜肴。"
+
+STRINGS.NAMES.LOTUSCHIPS  = "莲藕汤"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUSCHIPS  = "这个使我心情舒畅。"
+
+STRINGS.NAMES.POI = "芋泥"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.POI = "美味又管饱。"
+
+STRINGS.NAMES.SLAW = "茴香沙拉"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SLAW = "梦想中的沙拉。"
 
 ------------------料理副作用
 
@@ -6131,6 +6151,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURNIP_OVERSIZED_WAXED = "打过蜡的巨型
 -----------------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------冰霜岛------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------
+--冰岛料理
+GLOBAL.STRINGS.NAMES.FRUITYJUICE = "蓝莓汁"
+GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.FRUITYJUICE = "一杯冰果汁。"
+----------------------------------------------------------------------------
 CITY_PIG_ESKIMO_TRADE = "鱼类"
 STRINGS.NAMES.PIG_ESKIMO = "因纽特猪人"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_ESKIMO = "他们只要活鱼。"
@@ -6895,11 +6919,15 @@ STRINGS.NAMES.FISH_FILLET = "生鱼片"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_FILLET = "很有鱼味儿。"
 STRINGS.NAMES.FISH_FILLET_COOKED = "熟鱼片"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_FILLET_COOKED = "要是有点饭就更好了。"
+STRINGS.NAMES.SHRIMP_TAIL = "小虾尾"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHRIMP_TAIL = "我真希望有蘸酱配着吃。"
+
+-- 海底料理
 STRINGS.NAMES.FISH_GAZPACHO = "西班牙鱼汤"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_GAZPACHO = "我要一口气把它喝完！"
 STRINGS.NAMES.SPONGE_CAKE = "海绵蛋糕"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPONGE_CAKE = "这个口感很棒。"
-STRINGS.NAMES.FISH_N_CHIPS = "炸鱼条"
+STRINGS.NAMES.FISH_N_CHIPS = "鱼肉薯条"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_N_CHIPS = "经典套餐。"
 STRINGS.NAMES.TUNA_MUFFIN = "金枪鱼松饼"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TUNA_MUFFIN = "这是一个相当高的松饼。完美！。"
@@ -6909,9 +6937,7 @@ STRINGS.NAMES.FLOWER_SUSHI = "花朵寿司"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOWER_SUSHI = "看着就令人心情舒畅。"
 STRINGS.NAMES.FISH_SUSHI = "鱼肉寿司"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_SUSHI = "普通的寿司，寻常的味道。"
-STRINGS.NAMES.SHRIMP_TAIL = "小虾尾"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHRIMP_TAIL = "我真希望有蘸酱配着吃。"
-STRINGS.NAMES.SEAJELLY = "海水母"
+STRINGS.NAMES.SEAJELLY = "水母果冻"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEAJELLY = "一想到要吃这个，我就变成水母了！"
 
 -- 怪物和boss
@@ -6971,6 +6997,7 @@ STRINGS.MERMNAMES.MERM_WORKER[2] =
 }
 
 -- Merm strings
+--[[
 STRINGS.MERM_TALK_HELP_CHOP_WOOD = 
 {
 	MERM_NOBLE = {"Physical toil is best suited to others, I think。", "Sorry ol' thing, but my back you see...", "Good swing you have there。", "Don't worry, I'll wait。"},
@@ -7018,7 +7045,7 @@ STRINGS.MERM_TALK_GO_HOME =
 	MERM_NOBLE = {"Time to retire。", "Brilliant day that！", "Time for a nightcap。", "Must be off！"},
 	MERM_WORKER = {"Time to knock off！", "Home time！", "At last！", "What's for supper？"},
 	MERM_GUARD = {"Better get some shut eye。", "Thought that shift would never end。", "Me legs are all stiff！", "I'm getting too old for this。"},
-}
+}]]
 
 
 -----------------new adde by vagner-----------------------
@@ -7202,17 +7229,17 @@ GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEAWEEDUNDERWATER = "这就是这里�
 
 
     --NOTE: Limit to 7 strings per table！ (Using net_tinybyte for NPC chatter)
-STRINGS.MERM_TALK_FISH   = {"想要鱼儿。","布拉特~弗洛特。","去抓鱼儿。","格拉特苏~格林。","鲜活鱼儿。好。","布勒特~布勒恩。"}
-STRINGS.MERM_TALK_PANIC  = {"只是想要鱼儿！","咯啰咯啰咯啰！","啊！","咯啰噗噗！","浮浪噗！浮浪噗！","呼啰噗特！费特隆！"}
-STRINGS.MERM_TALK_RUNAWAY= {"切线！","弗罗皮~格洛普~格罗普！","坏东西！坏东西！","格洛普！格罗皮~格罗普！","保护鱼儿！","格拉特~格拉特~弗罗普！"}
-STRINGS.MERM_TALK_GO_HOME= {"和鱼儿睡觉","沃特~沃特~弗洛特。","鱼儿朋友。不是食物。","瓦鲁特~格洛~格洛皮~弗洛特。"}
-
+STRINGS.MERM_TALK_FISH     = {"想要鱼儿。","布拉特~弗洛特。","去抓鱼儿。","格拉特苏~格林。","鲜活鱼儿。好。","布勒特~布勒恩。"}
+STRINGS.MERM_TALK_PANIC    = {"只是想要鱼儿！","咯啰咯啰咯啰！","啊！","咯啰噗噗！","浮浪噗！浮浪噗！","呼啰噗特！费特隆！"}
+STRINGS.MERM_TALK_RUNAWAY  = {"切线！","弗罗皮~格洛普~格罗普！","坏东西！坏东西！","格洛普！格罗皮~格罗普！","保护鱼儿！","格拉特~格拉特~弗罗普！"}
+STRINGS.MERM_TALK_GO_HOME  = {"和鱼儿睡觉","沃特~沃特~弗洛特。","鱼儿朋友。不是食物。","瓦鲁特~格洛~格洛皮~弗洛特。"}
+STRINGS.MERM_TALK_FIND_FOOD= {"食唔！","噫携~噫携~食唔。","弗洛提~格拉特。","这个可以。","找点好吃的！","让鱼人族更加强大！"}
 
 GLOBAL.STRINGS.MERM_TALK_FOLLOWWILSON   = {"会跟着你", "浮浪噗 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "你要帮帮鱼人！", "格鲁特 格鲁粗 浮鲁噗！", "你好么", "浮浪噗 浮鲁特"}
 GLOBAL.STRINGS.MERM_TALK_HELP_CHOP_WOOD = {"会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "砍, 不停, 砍！", "格浪噗, 格鲁噗, 格浪噗！", "努力干, 浮浪噗！", "格鲁特 布鲁特, 浮浪噗！"}
 GLOBAL.STRINGS.MERM_TALK_HELP_MINE_ROCK = {"会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "打烂石头, 简单！", "呜尔特 沃噗, 浮浪噗 浮浪特！", "努力干, 浮浪噗！", "格鲁特 布鲁特, 浮浪噗！"}
 GLOBAL.STRINGS.MERM_TALK_HELP_HAMMER    = {"会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "锤烂！ 锤烂！", "浮浪浮！ 浮浪浮！", "努力干, 浮浪噗！", "格鲁特 布鲁特, 浮浪噗！"}
-GLOBAL.STRINGS.MERM_TALK_FIND_FOOD      = {"会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "这个好", "格鲁特 格鲁特 浮鲁特", "找到好吃的！", "格濡特 浮浪噗 浮鲁特！"}
+--GLOBAL.STRINGS.MERM_TALK_FIND_FOOD      = {"会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "这个好", "格鲁特 格鲁特 浮鲁特", "找到好吃的！", "格濡特 浮浪噗 浮鲁特！"}
 GLOBAL.STRINGS.MERM_BATTLECRY           = {"格浪噗！ 走开！", "格浪噗！ 格浪噗 咕噜噗！", "灭了你！", "沃尔特 格鲁特！"}
 GLOBAL.STRINGS.MERM_GUARD_BATTLECRY     = {"开打了！", "呜鲁特 浮鲁特！", "为了鱼人族的荣耀！", "浮浪特 格鲁粗 浮鲁特！", "打啊啊啊！！", "格鲁特 浮浪噗！！", "保卫国王！", "格鲁浮 格鲁特森！"}
 GLOBAL.STRINGS.MERM_TALK_PANICBOSS      = {"什么东西来了！", "格鲁噗 浮浪特！", "呵啊！！ 坏东西！ 坏东西！", "格鲁鲁鲁浮！！ 格鲁浮 格鲁特！ 格鲁浮 格鲁特！", "它来毁灭我们了！", "浮浪特 呜尔特 格鲁粗！"}
