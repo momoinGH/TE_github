@@ -17,7 +17,8 @@ local LOCKS_KEYS = GLOBAL.LOCKS_KEYS
 
 modimport 'tileadder.lua'
 AddTiles()
-
+modimport("scripts/tools/spawnutil.lua")
+modimport("scripts/map/graph.lua")
 modimport "scripts/init_static_layouts.lua"
 
 
