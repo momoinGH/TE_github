@@ -6,7 +6,8 @@ local assets=
 	Asset("ANIM", "anim/ui_krampusbag_2x5.zip"),
 }
 
-local ARMORVORTEX = 150*3
+local ARMORVORTEX = 45 * 10
+local ARMORVORTEXFUEL = ARMORVORTEX / 45 * TUNING.LARGE_FUEL
 local ARMORVORTEX_ABSORPTION = 1
 
 local function setsoundparam(inst)
@@ -45,7 +46,15 @@ local function onequip(inst, owner)
 
     owner:AddTag("not_hit_stunned")
 --    owner.components.inventory:SetOverflow(inst)
-    inst.components.container:Open(owner)    
+
+    if not inst.components.container then
+        local container = inst:AddComponent("container")
+        container:WidgetSetup("armorvortexcloak")
+    end
+
+    if inst.components.container then
+        inst.components.container:Open(owner)    
+    end   
     inst.wisptask = inst:DoPeriodicTask(0.1,function() spawnwisp(owner, inst) end)  
 
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/vortex_armour/LP","vortex") 
@@ -64,10 +73,28 @@ local function onunequip(inst, owner)
         inst.wisptask:Cancel()
         inst.wisptask= nil
     end
-
+    local container = inst.components.container
+    for i = 1, container:GetNumSlots() do
+        local item = container:GetItemInSlot(i)
+        if item ~= nil then
+            inst.components.inventoryitem.cangoincontainer = false
+            return
+        end
+    end
+    inst:RemoveComponent("container")
+    inst.components.inventoryitem.cangoincontainer = true
 --    inst.SoundEmitter:KillSound("vortex")
 end
 
+local function ondrop(inst, owner)
+    if inst.components.inventoryitem.cangoincontainer == true then
+        inst.components.inventoryitem.cangoincontainer = false
+    end
+    if not inst.components.container then
+        local container = inst:AddComponent("container")
+	    container:WidgetSetup("armorvortexcloak")
+    end
+end
 
 local function nofuel(inst)
 
@@ -77,7 +104,7 @@ local function ontakefuel(inst)
     if inst.components.armor.condition and inst.components.armor.condition < 0 then
         inst.components.armor:SetCondition(0)
     end
-    inst.components.armor:SetCondition( math.min( inst.components.armor.condition + (inst.components.armor.maxcondition/10), inst.components.armor.maxcondition) )
+    inst.components.armor:SetPercent(inst.components.fueled:GetPercent())
 	local player = inst.components.inventoryitem.owner
 	if player then 
     player.components.sanity:DoDelta(-TUNING.SANITY_TINY)
@@ -86,13 +113,52 @@ local function ontakefuel(inst)
 	setsoundparam(inst)
 end
 
+local function SetupEquippable(inst)
+	inst:AddComponent("equippable")
+	inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+	inst.components.equippable:SetOnEquip(onequip)
+	inst.components.equippable:SetOnUnequip(onunequip)
+
+	if inst._equippable_restrictedtag ~= nil then
+		inst.components.equippable.restrictedtag = inst._equippable_restrictedtag
+	end
+end
+
+local function OnBroken(inst)
+    local owner = inst.components.inventoryitem.owner
+    if owner ~= nil and owner:HasTag("not_hit_stunned") ~=nil then
+        owner:RemoveTag("not_hit_stunned")
+    end
+end
+
+local function OnRepaired(inst)
+    local owner = inst.components.inventoryitem.owner
+    if owner ~= nil and owner:HasTag("not_hit_stunned") == nil then
+        owner:AddTag("not_hit_stunned")
+    end
+end
+
+local function OnTakeDamage(inst, damage_amount)
+    local owner = inst.components.inventoryitem.owner
+    if owner then
+        local sanity = owner.components.sanity
+        if sanity then
+            local unsaneness = damage_amount * TUNING.ARMOR_SANITY_DMG_AS_SANITY * 3
+            sanity:DoDelta(-unsaneness, false)
+        end
+    end
+    inst.components.fueled:SetPercent(inst.components.armor:GetPercent())
+end
+
 local function fn()
 	local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddSoundEmitter()
     inst.entity:AddAnimState()
-    MakeInventoryPhysics(inst)
 	inst.entity:AddNetwork()	
+    MakeInventoryPhysics(inst)
+
     
     inst.AnimState:SetBank("armor_vortex_cloak")
     inst.AnimState:SetBuild("armor_vortex_cloak")
@@ -100,7 +166,12 @@ local function fn()
 
     MakeInventoryFloatable(inst)  	
 	
+    inst:AddTag("backpack")
     inst:AddTag("vortex_cloak")	
+	inst:AddTag("shadow_item")
+
+    --shadowlevel (from shadowlevel component) added to pristine state for optimization
+    inst:AddTag("shadowlevel")
 	
     inst.entity:SetPristine()
 	
@@ -117,32 +188,30 @@ local function fn()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"		
 	inst.caminho = "images/inventoryimages/hamletinventory.xml"	
     inst.components.inventoryitem.cangoincontainer = false
+    inst.components.inventoryitem:SetOnDroppedFn(ondrop)
     inst.foleysound = "dontstarve_DLC003/common/crafted/vortex_armour/foley"
 
-    inst:AddComponent("container")
-	inst.components.container:WidgetSetup("armorvortexcloak")
+    local container = inst:AddComponent("container")
+	container:WidgetSetup("armorvortexcloak")
 
+    local armor = inst:AddComponent("armor")
+    armor:InitCondition(ARMORVORTEX, ARMORVORTEX_ABSORPTION)
+    armor:SetKeepOnFinished(true)
+    armor:SetImmuneTags({"shadow"})
+    inst.components.armor.ontakedamage = OnTakeDamage
 
-    inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "NIGHTMARE"
-    inst.components.fueled:InitializeFuelLevel(4 * TUNING.LARGE_FUEL)
+    local fueled = inst:AddComponent("fueled")
+    fueled:InitializeFuelLevel(ARMORVORTEXFUEL) -- Runar: 原来的燃值是充场面的，现在是等效燃值
+    fueled.fueltype = FUELTYPE.NIGHTMARE -- 燃料是噩梦燃料
+    fueled.secondaryfueltype = FUELTYPE.ANCIENT_REMNANT
+    fueled.ontakefuelfn = ontakefuel
+    fueled.accepting = true
 
-    inst.components.fueled.ontakefuelfn = ontakefuel
-    inst.components.fueled.accepting = true
+    local shadowlevel = inst:AddComponent("shadowlevel")
+    shadowlevel:SetDefaultLevel(TUNING.ARMOR_SANITY_SHADOW_LEVEL) -- Runar: 影甲的老麦2级暗影之力
 
-    inst:AddComponent("armor")
-    inst.components.armor:InitCondition(ARMORVORTEX, ARMORVORTEX_ABSORPTION)
-    inst.components.armor.dontremove = true
-    inst.components.armor:SetImmuneTags({"shadow"})
---    inst.components.armor.bonussanitydamage = 0.3
-    
-    inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.BODY
-    
-    inst.components.equippable:SetOnEquip(onequip)
-    inst.components.equippable:SetOnUnequip(onunequip)
-    --inst.components.equippable.dapperness = TUNING.CRAZINESS_MED
-	
+    SetupEquippable(inst)
+
     inst.OnBlocked = function(owner, data) OnBlocked(owner, data, inst) end		
     
     return inst

@@ -6378,28 +6378,6 @@ AddCookerRecipe(
 
 local preparedFoods = GLOBAL.require("gorge_foods")
 
-AddCookerRecipeForCookers(
-	"wetgoop",
-	{
-		name = "wetgoop",
-		test = function(cooker, names, tags)
-			return true
-		end,
-		priority = -1,
-		weight = 1,
-		foodtype = "GENERIC",
-		perishtime = TUNING.PERISH_SLOW,
-		cooktime = 2,
-		health = 0,
-		hunger = 0,
-		sanity = 0,
-		perishtime = TUNING.PERISH_SLOW,
-		cookers = {"grill", "oven", "pot", "pot_syrup"},
-		tags = {},
-	},
-	cookers
-)
-
 local GNAW_REWARDS = {}
 
 for k,v in pairs(preparedFoods) do
@@ -6549,6 +6527,9 @@ end
 
 ACTIONS.KILLSOFTLY.distance = 2
 ACTIONS.KILLSOFTLY.priority = 3
+
+ACTIONS.ADDFUEL.priority = 1 -- Runar: 未定义的优先级，没有的话碎布加燃料会有问题
+ACTIONS.GIVE.priority = 0
 
 
 AddComponentAction("USEITEM", "sapbucket", function(inst, doer, target, actions, right)

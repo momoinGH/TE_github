@@ -41,8 +41,9 @@ local function fn()
 	inst.caminho = "images/inventoryimages/hamletinventory.xml"
 	
     inst:AddComponent("fuel")
-    --inst.components.fuel.fueltype = "ANCIENT_REMNANT"
-    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
+    inst.components.fuel.fueltype = FUELTYPE.ANCIENT_REMNANT
+    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL * 4 -- Runar: 小小强化一下碎布
+
 
     return inst
 end

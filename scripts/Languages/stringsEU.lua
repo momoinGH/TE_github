@@ -7960,6 +7960,10 @@ STRINGS.RECIPE_DESC.BONESTAFF = "Feel the gaze of the pugalisk!"
 STRINGS.NAMES.ARMORVORTEXCLOAK = "vortex cloak"
 STRINGS.RECIPE_DESC.ARMORVORTEXCLOAK = "There's a pocket. It's pretty deep."
 
+STRINGS.NAMES.ARMORVOIDCLOAK = "Void Cloak"
+STRINGS.RECIPE_DESC.ARMORVOIDCLOAK = "The material is thick, the pockets are deep"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMORVOIDCLOAK = "Very breathable, but light tight."
+
 STRINGS.NAMES.LIVING_ARTIFACT = "living artifact"
 STRINGS.RECIPE_DESC.LIVING_ARTIFACT = "Let's put them together and see what happens."
 
@@ -7984,6 +7988,18 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.VOLCANO_ALTAR_PILLAR = "It's been eroded by 
 
 STRINGS.NAMES.QUAGMIRE_SWAMPIG_HOUSE_UNBUILT = "unbuilt swappig house"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUAGMIRE_SWAMPIG_HOUSE_UNBUILT = "It doesn't look built yet."
+
+STRINGS.NAMES.BUTTERFLYMUFFIN_SW = "Tropical Butter Muffin"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUTTERFLYMUFFIN_SW = "We threw the recipe away and just kind of winged it."
+
+STRINGS.NAMES.CALIFORNIAROLL_SW = "California Roll"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CALIFORNIAROLL_SW = "But I don't have chopsticks."
+
+STRINGS.NAMES.LOBSTERBISQUE_SW = "Lobster Bisque"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERBISQUE_SW = "Could use more salt, but that's none of my bisque-ness."
+
+STRINGS.NAMES.LOBSTERDINNER_SW = "Lobster Dinner"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERDINNER_SW = "If I eat it in the morning is it still dinner?"
 
 STRINGS.SWAMPIG_NAMES ={
         "Titus","Domitian","Nerva","Trajan","Hadrian","Antonius","Lucius","Marcus",
@@ -8016,5 +8032,21 @@ STRINGS.UI.COOKBOOK.TEA = "It warms the body/Provide acceleration effect"
 STRINGS.UI.COOKBOOK.ICEDTEA = "It cools the body/Provide acceleration effect"
 STRINGS.UI.COOKBOOK.NETTLELOSANGE = " Protects you from pollen"
 STRINGS.UI.COOKBOOK.MEATED_NETTLE = " Protects you from pollen"
+
+STRINGS.NAMES.BUBBLETEA = "Bubble Tea"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUBBLETEA = "..."
+
+STRINGS.NAMES.FRENCHONIONSOUP = "French Onion Soup"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FRENCHONIONSOUP = "..."
+
+STRINGS.NAMES.LOTUSCHIPS = "Lotus Root Soup"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUSCHIPS = "..."
+
+STRINGS.NAMES.POI = "Poi"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.POI = "..."
+
+STRINGS.NAMES.SLAW = "Fennel Slaw"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SLAW = "..."
+
 
 modimport("scripts/Languages/stringsEU2.lua")

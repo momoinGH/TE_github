@@ -190,7 +190,7 @@ table.insert(PrefabFiles,"sea_eel")
 table.insert(PrefabFiles,"kelp")
 table.insert(PrefabFiles,"wormplant")
 table.insert(PrefabFiles,"decorative_shell")
-table.insert(PrefabFiles,"citd_preparedfoods")
+-- table.insert(PrefabFiles,"citd_preparedfoods")
 table.insert(PrefabFiles,"sea_cucumber")
 table.insert(PrefabFiles,"commonfishschool")
 table.insert(PrefabFiles,"shrimp")
@@ -305,153 +305,153 @@ AddIngredientValues({"sea_petals"}, {flower=1}, false, false)
 AddIngredientValues({"jelly_cap"}, {sea_jelly=1}, false, false)
 AddIngredientValues({"saltrock"}, {saltrock=1}, false, false)
 
-local sponge_cake =
-{
-    name = "sponge_cake",
-		test = function(cooker, names, tags) return tags.dairy and tags.sweetener and tags.sponge and tags.sponge and not tags.meat end,
-		priority = 0,
-		weight = 1,
-		foodtype = FOODTYPE.GOODIES,
-		health = 0,
-		hunger = 25,
-		sanity = 50,
-		perishtime = TUNING.PERISH_SUPERFAST,
-		cooktime = .5,
-		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",		
-	floater = {"small", 0.05, 0.7},
-    tags = {},
-}
+-- local sponge_cake =
+-- {
+--     name = "sponge_cake",
+-- 		test = function(cooker, names, tags) return tags.dairy and tags.sweetener and tags.sponge and tags.sponge >= 2 and not tags.meat end,
+-- 		priority = 0,
+-- 		weight = 1,
+-- 		foodtype = FOODTYPE.GOODIES,
+-- 		health = 0,
+-- 		hunger = 25,
+-- 		sanity = 50,
+-- 		perishtime = TUNING.PERISH_SUPERFAST,
+-- 		cooktime = .5,
+-- 		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",		
+-- 	floater = {"small", 0.05, 0.7},
+--     tags = {},
+-- }
 
-AddCookerRecipe("cookpot",sponge_cake)
-AddCookerRecipe("portablecookpot",sponge_cake)
-AddCookerRecipe("xiuyuan_cookpot",sponge_cake)
+-- AddCookerRecipe("cookpot",sponge_cake)
+-- AddCookerRecipe("portablecookpot",sponge_cake)
+-- AddCookerRecipe("xiuyuan_cookpot",sponge_cake)
 
 
-local fish_n_chips =
-{
-    name = "fish_n_chips",
-		test = function(cooker, names, tags) return tags.fish and tags.fish >= 2 and tags.veggie and tags.veggie >= 2 end,
-		priority = 10,
-		weight = 1,
-		foodtype = "MEAT",
-		health = 25,
-		hunger = 42.5,
-		sanity = 10,
-		perishtime = TUNING.PERISH_FAST,
-		cooktime = 1,
-		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
-	floater = {"small", 0.05, 0.7},
-    tags = {},
-}
+-- local fish_n_chips =
+-- {
+--     name = "fish_n_chips",
+-- 		test = function(cooker, names, tags) return tags.fish and tags.fish >= 2 and tags.veggie and tags.veggie >= 2 end,
+-- 		priority = 10,
+-- 		weight = 1,
+-- 		foodtype = "MEAT",
+-- 		health = 25,
+-- 		hunger = 42.5,
+-- 		sanity = 10,
+-- 		perishtime = TUNING.PERISH_FAST,
+-- 		cooktime = 1,
+-- 		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
+-- 	floater = {"small", 0.05, 0.7},
+--     tags = {},
+-- }
 
-AddCookerRecipe("cookpot",fish_n_chips)
-AddCookerRecipe("portablecookpot",fish_n_chips)
-AddCookerRecipe("xiuyuan_cookpot",fish_n_chips)
+-- AddCookerRecipe("cookpot",fish_n_chips)
+-- AddCookerRecipe("portablecookpot",fish_n_chips)
+-- AddCookerRecipe("xiuyuan_cookpot",fish_n_chips)
 
-local tuna_muffin =
-{
-    name = "tuna_muffin",
-		test = function(cooker, names, tags) return tags.fish and tags.fish >= 1 and tags.sponge and tags.sponge >= 1 and not tags.twigs end,
-		priority = 5,
-		weight = 1,
-		foodtype = "MEAT",
-		health = 0,
-		hunger = 32.5,
-		sanity = 10,
-		perishtime = TUNING.PERISH_MED,
-		cooktime = 2,
-		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
-	floater = {"small", 0.05, 0.7},
-    tags = {},
-}
+-- local tuna_muffin =
+-- {
+--     name = "tuna_muffin",
+-- 		test = function(cooker, names, tags) return tags.fish and tags.fish >= 1 and tags.sponge and tags.sponge >= 1 and not tags.twigs end,
+-- 		priority = 5,
+-- 		weight = 1,
+-- 		foodtype = "MEAT",
+-- 		health = 0,
+-- 		hunger = 32.5,
+-- 		sanity = 10,
+-- 		perishtime = TUNING.PERISH_MED,
+-- 		cooktime = 2,
+-- 		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
+-- 	floater = {"small", 0.05, 0.7},
+--     tags = {},
+-- }
 
-AddCookerRecipe("cookpot",tuna_muffin)
-AddCookerRecipe("portablecookpot",tuna_muffin)
-AddCookerRecipe("xiuyuan_cookpot",tuna_muffin)
+-- AddCookerRecipe("cookpot",tuna_muffin)
+-- AddCookerRecipe("portablecookpot",tuna_muffin)
+-- AddCookerRecipe("xiuyuan_cookpot",tuna_muffin)
 	
-local tentacle_sushi =
-{
-    name = "tentacle_sushi",
-		test = function(cooker, names, tags) return tags.tentacle and tags.tentacle and tags.sea_veggie and tags.fish >= 0.5 and not tags.twigs end,
-		priority = 0,
-		weight = 1,
-		foodtype = "MEAT",
-		health = 35,
-		hunger = 5,
-		sanity = 5,
-		perishtime = TUNING.PERISH_MED,
-		cooktime = 2,
-		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",		
-	floater = {"small", 0.05, 0.7},
-    tags = {},
-}
+-- local tentacle_sushi =
+-- {
+--     name = "tentacle_sushi",
+-- 		test = function(cooker, names, tags) return tags.tentacle and tags.tentacle and tags.sea_veggie and tags.fish >= 0.5 and not tags.twigs end,
+-- 		priority = 0,
+-- 		weight = 1,
+-- 		foodtype = "MEAT",
+-- 		health = 35,
+-- 		hunger = 5,
+-- 		sanity = 5,
+-- 		perishtime = TUNING.PERISH_MED,
+-- 		cooktime = 2,
+-- 		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",		
+-- 	floater = {"small", 0.05, 0.7},
+--     tags = {},
+-- }
 
-AddCookerRecipe("cookpot",tentacle_sushi)
-AddCookerRecipe("portablecookpot",tentacle_sushi)
-AddCookerRecipe("xiuyuan_cookpot",tentacle_sushi)
+-- AddCookerRecipe("cookpot",tentacle_sushi)
+-- AddCookerRecipe("portablecookpot",tentacle_sushi)
+-- AddCookerRecipe("xiuyuan_cookpot",tentacle_sushi)
 
-local flower_sushi =
-{
-    name = "flower_sushi",
-		test = function(cooker, names, tags) return tags.flower and tags.sea_veggie and tags.fish and tags.fish >= 1 and not tags.twigs end,
-		priority = 0,
-		weight = 1,
-		foodtype = "MEAT",
-		health = 10,
-		hunger = 5,
-		sanity = 30,
-		perishtime = TUNING.PERISH_MED,
-		cooktime = 2,
-		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
-	floater = {"small", 0.05, 0.7},
-    tags = {},
-}
+-- local flower_sushi =
+-- {
+--     name = "flower_sushi",
+-- 		test = function(cooker, names, tags) return tags.flower and tags.sea_veggie and tags.fish and tags.fish >= 1 and not tags.twigs end,
+-- 		priority = 0,
+-- 		weight = 1,
+-- 		foodtype = "MEAT",
+-- 		health = 10,
+-- 		hunger = 5,
+-- 		sanity = 30,
+-- 		perishtime = TUNING.PERISH_MED,
+-- 		cooktime = 2,
+-- 		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
+-- 	floater = {"small", 0.05, 0.7},
+--     tags = {},
+-- }
 
-AddCookerRecipe("cookpot",flower_sushi)
-AddCookerRecipe("portablecookpot",flower_sushi)
-AddCookerRecipe("xiuyuan_cookpot",flower_sushi)
+-- AddCookerRecipe("cookpot",flower_sushi)
+-- AddCookerRecipe("portablecookpot",flower_sushi)
+-- AddCookerRecipe("xiuyuan_cookpot",flower_sushi)
 
-local fish_sushi =
-{
-    name = "fish_sushi",
-		test = function(cooker, names, tags) return tags.tentacle and tags.veggie >= 1 and tags.fish and tags.fish >= 1 and not tags.twigs end,
-		priority = 0,
-		weight = 1,
-		foodtype = "MEAT",
-		health = 5,
-		hunger = 50,
-		sanity = 0,
-		perishtime = TUNING.PERISH_MED,
-		cooktime = 2,
-		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
-	floater = {"small", 0.05, 0.7},
-    tags = {},
-}
+-- local fish_sushi =
+-- {
+--     name = "fish_sushi",
+-- 		test = function(cooker, names, tags) return tags.tentacle and tags.veggie >= 1 and tags.fish and tags.fish >= 1 and not tags.twigs end,
+-- 		priority = 0,
+-- 		weight = 1,
+-- 		foodtype = "MEAT",
+-- 		health = 5,
+-- 		hunger = 50,
+-- 		sanity = 0,
+-- 		perishtime = TUNING.PERISH_MED,
+-- 		cooktime = 2,
+-- 		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",			
+-- 	floater = {"small", 0.05, 0.7},
+--     tags = {},
+-- }
 
-AddCookerRecipe("cookpot",fish_sushi)
-AddCookerRecipe("portablecookpot",fish_sushi)
-AddCookerRecipe("xiuyuan_cookpot",fish_sushi)
+-- AddCookerRecipe("cookpot",fish_sushi)
+-- AddCookerRecipe("portablecookpot",fish_sushi)
+-- AddCookerRecipe("xiuyuan_cookpot",fish_sushi)
 
-local seajelly =
-{
-    name = "seajelly",
-		test = function(cooker, names, tags) return tags.sea_jelly and tags.sea_jelly > 1 and names.saltrock and names.saltrock > 1 and not tags.meat end,
-		priority = 0,
-		weight = 1,
-		foodtype = "MEAT",
-		health = 20,
-		hunger = 40,
-		sanity = 3,
-		perishtime = TUNING.PERISH_SLOW,
-		cooktime = 2,
-		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",		
-	floater = {"small", 0.05, 0.7},
-    tags = {},
-}
+-- local seajelly =
+-- {
+--     name = "seajelly",
+-- 		test = function(cooker, names, tags) return tags.sea_jelly and tags.sea_jelly > 1 and names.saltrock and names.saltrock > 1 and not tags.meat end,
+-- 		priority = 0,
+-- 		weight = 1,
+-- 		foodtype = "MEAT",
+-- 		health = 20,
+-- 		hunger = 40,
+-- 		sanity = 3,
+-- 		perishtime = TUNING.PERISH_SLOW,
+-- 		cooktime = 2,
+-- 		cookbook_atlas = "images/inventoryimages/creepindeep_cuisine.xml",		
+-- 	floater = {"small", 0.05, 0.7},
+--     tags = {},
+-- }
 
-AddCookerRecipe("cookpot",seajelly)
-AddCookerRecipe("portablecookpot",seajelly)
-AddCookerRecipe("xiuyuan_cookpot",seajelly)
+-- AddCookerRecipe("cookpot",seajelly)
+-- AddCookerRecipe("portablecookpot",seajelly)
+-- AddCookerRecipe("xiuyuan_cookpot",seajelly)
 
 RegisterInventoryItemAtlas("images/inventoryimages/sponge_piece.xml", "sponge_piece.tex" )
 RegisterInventoryItemAtlas("images/inventoryimages/fish_fillet.xml", "fish_fillet.tex"  )
