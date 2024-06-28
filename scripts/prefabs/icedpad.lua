@@ -370,15 +370,15 @@ local function fn()
 --    inst.components.hull:SetBoatLip(SpawnPrefab('boatlip'))
     inst:AddComponent("boatring")
 			
-    inst:AddComponent("childspawner")
+    --[[inst:AddComponent("childspawner")
     inst.components.childspawner:SetRegenPeriod(480)
     inst.components.childspawner:SetSpawnPeriod(TUNING.COOKIECUTTER_SPAWNER.RELEASE_TIME)
     inst.components.childspawner:SetMaxChildren(1)
     inst.components.childspawner:StartRegen()
 	inst.components.childspawner.spawnradius = {min = 0, max = 0}
-	inst.components.childspawner.childname = "otter"
+	inst.components.childspawner.childname = "otter" 
 	inst.components.childspawner.wateronly = true
-	inst.components.childspawner:StartSpawning()	
+	inst.components.childspawner:StartSpawning()	]]
 
 --    local walking_plank = SpawnPrefab("walkingplank")
 --    local edge_offset = -0.05

@@ -251,7 +251,7 @@ PrefabFiles =
 "grotto_grub_nest",
 "grotto_grub",
 "grotto_parsnip",
-"otter",
+--"otter",
 "grottoqueen",
 "icedpad",
 --"yeti",
