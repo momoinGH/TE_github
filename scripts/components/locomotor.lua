@@ -1,6 +1,6 @@
 local SourceModifierList = require("util/sourcemodifierlist")
 
-local DOZE_OFF_TIME = 2 --adicionei a 1178
+local DOZE_OFF_TIME = 2
 
 local PATHFIND_PERIOD = 1
 local PATHFIND_MAX_RANGE = 40
@@ -17,10 +17,10 @@ local INVALID_PLATFORM_ID = "INVALID PLATFORM"
 
 Dest = Class(function(self, inst, pt, buffered_action)
     self.inst = inst
-	if pt ~= nil then
-		self.pt = pt
-	end
-	self.buffered_action = buffered_action
+    if pt ~= nil then
+        self.pt = pt
+    end
+    self.buffered_action = buffered_action
 end)
 
 function Dest:IsValid()
@@ -28,9 +28,9 @@ function Dest:IsValid()
 end
 
 function Dest:__tostring()
-    return (self.inst ~= nil and ("Going to Entity: "..tostring(self.inst)))
-        or (self.pt ~= nil and ("Going to Point: "..tostring(self.pt)))
-        or (self.buffered_action ~= nil and ("Going to buffered action point: "..tostring(self.buffered_action.pos)))
+    return (self.inst ~= nil and ("Going to Entity: " .. tostring(self.inst)))
+        or (self.pt ~= nil and ("Going to Point: " .. tostring(self.pt)))
+        or (self.buffered_action ~= nil and ("Going to buffered action point: " .. tostring(self.buffered_action.pos)))
         or "No Dest"
 end
 
@@ -140,111 +140,112 @@ local function ClientFasterOnCreep(self)
 end
 
 local function ServerExternalSpeedMutliplier(self)
-----------------------efeito dos ventos----------------------------------
-local wind_speed = 1
-local vento = GetClosestInstWithTag("vento", self.inst, 10)	
-if vento then
-local wind = vento.Transform:GetRotation() + 180
-local windangle = self.inst.Transform:GetRotation() - wind
-local windproofness = 1.0
-local velocidadedovento = 1.5
+    ----------------------efeito dos ventos----------------------------------
+    local wind_speed = 1
+    local vento = GetClosestInstWithTag("vento", self.inst, 10)
+    if vento then
+        local wind = vento.Transform:GetRotation() + 180
+        local windangle = self.inst.Transform:GetRotation() - wind
+        local windproofness = 1.0
+        local velocidadedovento = 1.5
 
-if self.inst.components.inventory then
-local corpo = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-local cabeca = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-if cabeca and cabeca.prefab == "aerodynamichat" then 
-windproofness = 0.5
-end
-if corpo and corpo.prefab == "armor_windbreaker" then 
-windproofness = 0
-end
-end
+        if self.inst.components.inventory then
+            local corpo = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+            local cabeca = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+            if cabeca and cabeca.prefab == "aerodynamichat" then
+                windproofness = 0.5
+            end
+            if corpo and corpo.prefab == "armor_windbreaker" then
+                windproofness = 0
+            end
+        end
 
-local windfactor = 0.4 * windproofness * velocidadedovento * math.cos(windangle * DEGREES) + 1.0
-wind_speed = math.max(0.1, windfactor)
-end
-----------------------efeito das correntes marinhas----------------------------------
-local wave_speed = 1
-local ondamarinha = GetClosestInstWithTag("ondamarinha", self.inst, 6)	
-if ondamarinha then
-local wave = ondamarinha.Transform:GetRotation() + 180
-local waveangle = self.inst.Transform:GetRotation() - wave
-local waveproofness = 1.0
-local velocidadedoondamarinha = 2
+        local windfactor = 0.4 * windproofness * velocidadedovento * math.cos(windangle * DEGREES) + 1.0
+        wind_speed = math.max(0.1, windfactor)
+    end
+    ----------------------efeito das correntes marinhas----------------------------------
+    local wave_speed = 1
+    local ondamarinha = GetClosestInstWithTag("ondamarinha", self.inst, 6)
+    if ondamarinha then
+        local wave = ondamarinha.Transform:GetRotation() + 180
+        local waveangle = self.inst.Transform:GetRotation() - wave
+        local waveproofness = 1.0
+        local velocidadedoondamarinha = 2
 
 
-local wavefactor = 0.4 * waveproofness * velocidadedoondamarinha * math.cos(waveangle * DEGREES) + 1.0
-wave_speed = math.max(0.1, wavefactor)
-end
-----------------------efeito da inundação----------------------------------
-local flood_speed = 1
-local alagamento = GetClosestInstWithTag("mare", self.inst, 8)	
-if alagamento  and not self.inst:HasTag("ghost") then
-if not self.inst:HasTag("playerghost") then
-flood_speed = 0.6
-end
-end
--------------------------------------------------------------------------------------------
-local fogspeed = 1
-if self.inst:HasTag("hamfogspeed") then 
-fogspeed = 0.4
-end
+        local wavefactor = 0.4 * waveproofness * velocidadedoondamarinha * math.cos(waveangle * DEGREES) + 1.0
+        wave_speed = math.max(0.1, wavefactor)
+    end
+    ----------------------efeito da inundação----------------------------------
+    local flood_speed = 1
+    local alagamento = GetClosestInstWithTag("mare", self.inst, 8)
+    if alagamento and not self.inst:HasTag("ghost") then
+        if not self.inst:HasTag("playerghost") then
+            flood_speed = 0.6
+        end
+    end
+    -------------------------------------------------------------------------------------------
+    local fogspeed = 1
+    if self.inst:HasTag("hamfogspeed") then
+        fogspeed = 0.4
+    end
 
     return self.externalspeedmultiplier * wind_speed * wave_speed * fogspeed * flood_speed
 end
 
 local function ClientExternalSpeedMultiplier(self)
-----------------------efeito dos ventos----------------------------------
-local wind_speed = 1
-local vento = GetClosestInstWithTag("vento", self.inst, 10)	
-if vento then
-local wind = vento.Transform:GetRotation() + 180
-local windangle = self.inst.Transform:GetRotation() - wind
-local windproofness = 1.0
-local velocidadedovento = 1.5
+    ----------------------efeito dos ventos----------------------------------
+    local wind_speed = 1
+    local vento = GetClosestInstWithTag("vento", self.inst, 10)
+    if vento then
+        local wind = vento.Transform:GetRotation() + 180
+        local windangle = self.inst.Transform:GetRotation() - wind
+        local windproofness = 1.0
+        local velocidadedovento = 1.5
 
-if self.inst.replica.inventory then
-local corpo = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-local cabeca = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-if cabeca and cabeca.prefab == "aerodynamichat" then 
-windproofness = 0.5
-end
-if corpo and corpo.prefab == "armor_windbreaker" then 
-windproofness = 0
-end
-end
+        if self.inst.replica.inventory then
+            local corpo = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+            local cabeca = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+            if cabeca and cabeca.prefab == "aerodynamichat" then
+                windproofness = 0.5
+            end
+            if corpo and corpo.prefab == "armor_windbreaker" then
+                windproofness = 0
+            end
+        end
 
-local windfactor = 0.4 * windproofness * velocidadedovento * math.cos(windangle * DEGREES) + 1.0
-wind_speed = math.max(0.1, windfactor)
-end
-----------------------efeito das correntes marinhas----------------------------------
-local wave_speed = 1
-local ondamarinha = GetClosestInstWithTag("ondamarinha", self.inst, 6)	
-if ondamarinha then
-local wave = ondamarinha.Transform:GetRotation() + 180
-local waveangle = self.inst.Transform:GetRotation() - wave
-local waveproofness = 1.0
-local velocidadedoondamarinha = 2
+        local windfactor = 0.4 * windproofness * velocidadedovento * math.cos(windangle * DEGREES) + 1.0
+        wind_speed = math.max(0.1, windfactor)
+    end
+    ----------------------efeito das correntes marinhas----------------------------------
+    local wave_speed = 1
+    local ondamarinha = GetClosestInstWithTag("ondamarinha", self.inst, 6)
+    if ondamarinha then
+        local wave = ondamarinha.Transform:GetRotation() + 180
+        local waveangle = self.inst.Transform:GetRotation() - wave
+        local waveproofness = 1.0
+        local velocidadedoondamarinha = 2
 
 
-local wavefactor = 0.4 * waveproofness * velocidadedoondamarinha * math.cos(waveangle * DEGREES) + 1.0
-wave_speed = math.max(0.1, wavefactor)
-end
-----------------------efeito da inundação----------------------------------
-local flood_speed = 1
-local alagamento = GetClosestInstWithTag("mare", self.inst, 8)	
-if alagamento and not self.inst:HasTag("ghost") then
-if not self.inst:HasTag("playerghost") then
-flood_speed = 0.6
-end
-end
----------------------------------------efeito da neblina----------------------------------------------------
-local fogspeed = 1
-if self.inst:HasTag("hamfogspeed") then 
-fogspeed = 0.4
-end
+        local wavefactor = 0.4 * waveproofness * velocidadedoondamarinha * math.cos(waveangle * DEGREES) + 1.0
+        wave_speed = math.max(0.1, wavefactor)
+    end
+    ----------------------efeito da inundação----------------------------------
+    local flood_speed = 1
+    local alagamento = GetClosestInstWithTag("mare", self.inst, 8)
+    if alagamento and not self.inst:HasTag("ghost") then
+        if not self.inst:HasTag("playerghost") then
+            flood_speed = 0.6
+        end
+    end
+    ---------------------------------------efeito da neblina----------------------------------------------------
+    local fogspeed = 1
+    if self.inst:HasTag("hamfogspeed") then
+        fogspeed = 0.4
+    end
 
-	return ((self.inst.player_classified and self.inst.player_classified.externalspeedmultiplier:value() or self.externalspeedmultiplier) * self:GetPredictExternalSpeedMultipler()) * wind_speed  * wave_speed  * fogspeed * flood_speed
+    return ((self.inst.player_classified and self.inst.player_classified.externalspeedmultiplier:value() or self.externalspeedmultiplier) * self:GetPredictExternalSpeedMultipler()) *
+        wind_speed * wave_speed * fogspeed * flood_speed
 end
 
 local function ServerGetSpeedMultiplier(self)
@@ -259,19 +260,21 @@ local function ServerGetSpeedMultiplier(self)
             --NOTE: Check if inventory is open because client GetEquips returns
             --      nothing if inventory is closed.
             --      Don't check visibility though.
-			local is_mighty = self.inst.components.mightiness ~= nil and self.inst.components.mightiness:GetState() == "mighty"
+            local is_mighty = self.inst.components.mightiness ~= nil and
+            self.inst.components.mightiness:GetState() == "mighty"
             for k, v in pairs(self.inst.components.inventory.equipslots) do
                 if v.components.equippable ~= nil then
-					local item_speed_mult = v.components.equippable:GetWalkSpeedMult()
+                    local item_speed_mult = v.components.equippable:GetWalkSpeedMult()
                     if is_mighty and item_speed_mult < 1 then
-						item_speed_mult = 1
-					end
+                        item_speed_mult = 1
+                    end
 
                     mult = mult * item_speed_mult
                 end
             end
         end
     end
+
     return mult * (self:TempGroundSpeedMultiplier() or self.groundspeedmultiplier) * self.throttle
 end
 
@@ -287,133 +290,136 @@ local function ClientGetSpeedMultiplier(self)
                 mult = mult * inventoryitem:GetWalkSpeedMult()
             end
         else
-            --NOTE: GetEquips returns empty if inventory is closed! (Hidden still returns items.)		
-			local is_mighty = self.inst:HasTag("mightiness_mighty")		
+            --NOTE: GetEquips returns empty if inventory is closed! (Hidden still returns items.)
+            local is_mighty = self.inst:HasTag("mightiness_mighty")
             for k, v in pairs(inventory:GetEquips()) do
                 local inventoryitem = v.replica.inventoryitem
                 if inventoryitem ~= nil then
-					local item_speed_mult = inventoryitem:GetWalkSpeedMult()
+                    local item_speed_mult = inventoryitem:GetWalkSpeedMult()
                     if is_mighty and item_speed_mult < 1 then
-						item_speed_mult = 1
-					end
+                        item_speed_mult = 1
+                    end
 
                     mult = mult * item_speed_mult
                 end
             end
         end
     end
+
     return mult * (self:TempGroundSpeedMultiplier() or self.groundspeedmultiplier) * self.throttle
 end
 
 function ServerIsFasterOnGroundTile(self, ground_tile)
-	if self.inst.player_classified == nil or not self.inst.player_classified.isghostmode:value() then
-		local rider = self.inst.components.rider
-		local mount = rider ~= nil and rider:IsRiding() and rider:GetMount() or nil
-		if mount ~= nil then
-			return mount.components.locomotor ~= nil and mount.components.locomotor.faster_on_tiles[ground_tile]
-		end
-		return self.faster_on_tiles[ground_tile] == true
-	end
+    if self.inst.player_classified == nil or not self.inst.player_classified.isghostmode:value() then
+        local rider = self.inst.components.rider
+        local mount = rider ~= nil and rider:IsRiding() and rider:GetMount() or nil
+        if mount ~= nil then
+            return mount.components.locomotor ~= nil and mount.components.locomotor.faster_on_tiles[ground_tile]
+        else
+            return self.faster_on_tiles[ground_tile] == true
+        end
+    end
 
-	return false
+    return false
 end
 
 function ClientIsFasterOnGroundTile(self, ground_tile)
-	if self.inst.player_classified == nil or not self.inst.player_classified.isghostmode:value() then
-		local rider = self.inst.replica.rider
-		local mount = rider ~= nil and rider:IsRiding() and rider:GetMount() or nil
-		if mount ~= nil then
-			return mount:HasTag("turfrunner_"..tostring(ground_tile))
-		end
-		return self.inst:HasTag("turfrunner_"..tostring(ground_tile))
-	end
+    if self.inst.player_classified == nil or not self.inst.player_classified.isghostmode:value() then
+        local rider = self.inst.replica.rider
+        local mount = rider ~= nil and rider:IsRiding() and rider:GetMount() or nil
+        if mount ~= nil then
+            return mount:HasTag("turfrunner_" .. tostring(ground_tile))
+        else
+            return self.inst:HasTag("turfrunner_" .. tostring(ground_tile))
+        end
+    end
 
-	return false
+    return false
 end
 
 local LocoMotor = Class(function(self, inst)
-    self.inst = inst
-    self.ismastersim = TheWorld.ismastersim
+        self.inst = inst
+        self.ismastersim = TheWorld.ismastersim
 
-    if self.ismastersim then
-        inst:AddTag("locomotor")
-        self.RunSpeed = ServerRunSpeed
-        self.FasterOnRoad = ServerFasterOnRoad
-        self.FasterOnCreep = ServerFasterOnCreep		
-        self.ExternalSpeedMultiplier = ServerExternalSpeedMutliplier
-        self.GetSpeedMultiplier = ServerGetSpeedMultiplier
-		self.IsFasterOnGroundTile = ServerIsFasterOnGroundTile		
-    else
-        self.RunSpeed = ClientRunSpeed
-        self.FasterOnRoad = ClientFasterOnRoad
-        self.FasterOnCreep = ClientFasterOnCreep		
-        self.ExternalSpeedMultiplier = ClientExternalSpeedMultiplier
-        self.GetSpeedMultiplier = ClientGetSpeedMultiplier
-		self.IsFasterOnGroundTile = ClientIsFasterOnGroundTile		
-        removesetter(self, "runspeed")
-        removesetter(self, "externalspeedmultiplier")
-    end
+        if self.ismastersim then
+            inst:AddTag("locomotor")
+            self.RunSpeed = ServerRunSpeed
+            self.FasterOnRoad = ServerFasterOnRoad
+            self.FasterOnCreep = ServerFasterOnCreep
+            self.ExternalSpeedMultiplier = ServerExternalSpeedMutliplier
+            self.GetSpeedMultiplier = ServerGetSpeedMultiplier
+            self.IsFasterOnGroundTile = ServerIsFasterOnGroundTile
+        else
+            self.RunSpeed = ClientRunSpeed
+            self.FasterOnRoad = ClientFasterOnRoad
+            self.FasterOnCreep = ClientFasterOnCreep
+            self.ExternalSpeedMultiplier = ClientExternalSpeedMultiplier
+            self.GetSpeedMultiplier = ClientGetSpeedMultiplier
+            self.IsFasterOnGroundTile = ClientIsFasterOnGroundTile
+            removesetter(self, "runspeed")
+            removesetter(self, "externalspeedmultiplier")
+        end
 
-    self.dest = nil
-    self.atdestfn = nil
-    self.bufferedaction = nil
-    self.arrive_step_dist = ARRIVE_STEP
-    self.arrive_dist = ARRIVE_STEP
-    self.walkspeed = TUNING.WILSON_WALK_SPEED -- 4
-    self.runspeed = TUNING.WILSON_RUN_SPEED -- 6
-    self.throttle = 1
-    self.lastpos = {}
-    self.slowmultiplier = 0.6
-    self.fastmultiplier = 1.3
-    self.movestarttime = -1
-    self.movestoptime = -1	
-    --self.predictmovestarttime = nil	
-	--self.no_predict_fastforward = nil --see PlayerController:RepeatHeldAction()	
+        self.dest = nil
+        self.atdestfn = nil
+        self.bufferedaction = nil
+        self.arrive_step_dist = ARRIVE_STEP
+        self.arrive_dist = ARRIVE_STEP
+        self.walkspeed = TUNING.WILSON_WALK_SPEED -- 4
+        self.runspeed = TUNING.WILSON_RUN_SPEED -- 6
+        self.throttle = 1
+        self.lastpos = {}
+        self.slowmultiplier = 0.6
+        self.fastmultiplier = 1.3
+        self.movestarttime = -1
+        self.movestoptime = -1
+        --self.predictmovestarttime = nil
+        --self.no_predict_fastforward = nil --see PlayerController:RepeatHeldAction()
 
-    self.groundspeedmultiplier = 1.0
-    self.enablegroundspeedmultiplier = true
-    --self.tempgroundspeedmultiplier = nil
-    --self.tempgroundspeedmulttime = nil
-    --self.tempgroundtile = nil
-    self.isrunning = false
+        self.groundspeedmultiplier = 1.0
+        self.enablegroundspeedmultiplier = true
+        --self.tempgroundspeedmultiplier = nil
+        --self.tempgroundspeedmulttime = nil
+        --self.tempgroundtile = nil
+        self.isrunning = false
 
-    self._externalspeedmultipliers = {}
-    self.externalspeedmultiplier = 1
+        self._externalspeedmultipliers = {}
+        self.externalspeedmultiplier = 1
 
-    self.wasoncreep = false
-    self.triggerscreep = true   
-    self.is_prediction_enabled = false
-    self.hop_distance = TUNING.DEFAULT_LOCOMOTOR_HOP_DISTANCE
-	--self.hop_distance_fn = nil	
-    self.hopping = false
-    self.time_before_next_hop_is_allowed = 0
-	--self.hop_delay = nil	
+        self.wasoncreep = false
+        self.triggerscreep = true
+        self.is_prediction_enabled = false
+        self.hop_distance = TUNING.DEFAULT_LOCOMOTOR_HOP_DISTANCE
+        --self.hop_distance_fn = nil
+        self.hopping = false
+        self.time_before_next_hop_is_allowed = 0
+        --self.hop_delay = nil
 
-    self.faster_on_tiles = {}
-	
-    --self.isupdating = nil
-    --self.predictrunspeed = nil
-	--self.predictexternalspeedmultiplier = nil	
-	--self.pusheventwithdirection = false --mainly for players, to handle initial move dir, and not have to add "canrotate" to all interruptible states	
-end,
-nil,
-{
-    runspeed = onrunspeed,
-    externalspeedmultiplier = onexternalspeedmultiplier,
-})
+        self.faster_on_tiles = {}
+
+        --self.isupdating = nil
+        --self.predictrunspeed = nil
+        --self.predictexternalspeedmultiplier = nil
+        --self.pusheventwithdirection = false --mainly for players, to handle initial move dir, and not have to add "canrotate" to all interruptible states
+    end,
+    nil,
+    {
+        runspeed = onrunspeed,
+        externalspeedmultiplier = onexternalspeedmultiplier,
+    })
 
 function LocoMotor:EnableHopDelay(enable)
-	if enable == false then
-		self.hop_delay = nil
-	elseif self.hop_delay == nil then
-		self.hop_delay =
-		{
-			toplatform = nil,
-			fromplatform = nil,
-			starttick = -1,
-			lasttick = -1,
-		}
-	end
+    if enable == false then
+        self.hop_delay = nil
+    elseif self.hop_delay == nil then
+        self.hop_delay =
+        {
+            toplatform = nil,
+            fromplatform = nil,
+            starttick = -1,
+            lasttick = -1,
+        }
+    end
 end
 
 function LocoMotor:StartUpdatingInternal()
@@ -442,9 +448,9 @@ function LocoMotor:OnRemoveFromEntity()
     if self.ismastersim then
         self.inst:RemoveTag("locomotor")
 
-		for ground_tile, _ in pairs(self.faster_on_tiles) do
-			self.inst:RemoveTag("turfrunner_"..tostring(ground_tile))
-		end
+        for ground_tile in pairs(self.faster_on_tiles) do
+            self.inst:RemoveTag("turfrunner_" .. tostring(ground_tile))
+        end
     end
 end
 
@@ -501,8 +507,6 @@ function LocoMotor:RecalculateExternalSpeedMultiplier(sources)
 end
 
 function LocoMotor:SetExternalSpeedMultiplier(source, key, m)
-if key and key == "tropicalbouillabaisse" then self.inst:AddTag("tropicalbouillabaisse") end
-if key and key == "coffee" then self.inst:AddTag("coffee") end
     if key == nil then
         return
     elseif m == nil or m == 1 then
@@ -528,8 +532,6 @@ end
 
 --key is optional if you want to remove the entire source
 function LocoMotor:RemoveExternalSpeedMultiplier(source, key)
-if key and key == "tropicalbouillabaisse" then self.inst:RemoveTag("tropicalbouillabaisse") end
-if key and key == "coffee" then self.inst:RemoveTag("coffee") end
     local src_params = self._externalspeedmultipliers[source]
     if src_params == nil then
         return
@@ -563,22 +565,22 @@ function LocoMotor:GetExternalSpeedMultiplier(source, key)
 end
 
 function LocoMotor:SetPredictExternalSpeedMultiplier(source, key, m)
-	if not self.predictexternalspeedmultiplier then
-		self.predictexternalspeedmultiplier = SourceModifierList(self.inst)
-	end
-	self.predictexternalspeedmultiplier:SetModifier(source, m, key)
+    if not self.predictexternalspeedmultiplier then
+        self.predictexternalspeedmultiplier = SourceModifierList(self.inst)
+    end
+    self.predictexternalspeedmultiplier:SetModifier(source, m, key)
 end
 
 --key is optional if you want to remove the entire source
 function LocoMotor:RemovePredictExternalSpeedMultiplier(source, key)
-	if self.predictexternalspeedmultiplier then
-		self.predictexternalspeedmultiplier:RemoveModifier(source, key)
-	end
+    if self.predictexternalspeedmultiplier then
+        self.predictexternalspeedmultiplier:RemoveModifier(source, key)
+    end
 end
 
 --key is optional if you want to calculate the entire source
 function LocoMotor:GetPredictExternalSpeedMultipler(source, key)
-	return self.predictexternalspeedmultiplier and self.predictexternalspeedmultiplier:Get() or 1
+    return self.predictexternalspeedmultiplier and self.predictexternalspeedmultiplier:Get() or 1
 end
 
 function LocoMotor:SetSlowMultiplier(m)
@@ -612,20 +614,16 @@ function LocoMotor:GetRunSpeed()
 end
 
 function LocoMotor:SetFasterOnGroundTile(ground_tile, is_faster)
-	if self.ismastersim then
-		self.faster_on_tiles[ground_tile] = is_faster
-		if is_faster then
-			self.inst:AddTag("turfrunner_"..tostring(ground_tile))
-		else
-			self.inst:RemoveTag("turfrunner_"..tostring(ground_tile))
-		end
-	end
+    if self.ismastersim then
+        self.faster_on_tiles[ground_tile] = is_faster
+        self.inst:AddOrRemoveTag("turfrunner_" .. tostring(ground_tile), is_faster)
+    end
 end
 
 function LocoMotor:UpdateGroundSpeedMultiplier()
     local x, y, z = self.inst.Transform:GetWorldPosition()
     local oncreep = TheWorld.GroundCreep:OnCreep(x, y, z)
-    
+
     if oncreep and self.triggerscreep then
         -- if this ever needs to happen when self.enablegroundspeedmultiplier is set, need to move the check for self.enablegroundspeedmultiplier above
         if not self.wasoncreep then
@@ -645,27 +643,25 @@ function LocoMotor:UpdateGroundSpeedMultiplier()
         self.wasoncreep = false
 
         local current_ground_tile = TheWorld.Map:GetTileAtPoint(x, 0, z)
-		
-if current_ground_tile == GROUND.UNDERWATER_SANDY or 
-current_ground_tile == GROUND.UNDERWATER_ROCKY or 
-(current_ground_tile == GROUND.BEACH and TheWorld:HasTag("cave")) or 
-(current_ground_tile == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or 
-(current_ground_tile == GROUND.PAINTED and TheWorld:HasTag("cave")) or 
-(current_ground_tile == GROUND.BATTLEGROUND and TheWorld:HasTag("cave")) or 
-(current_ground_tile == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) then 
-if self.inst.prefab ~= "wurt" then
-self.groundspeedmultiplier = 0.5
-end
-if self.inst:HasTag("nadador") then self.groundspeedmultiplier = 0.8 end
-else		
-		
-        self.groundspeedmultiplier = (self:IsFasterOnGroundTile(current_ground_tile) or 
-									 (self:FasterOnRoad() and ((RoadManager ~= nil and RoadManager:IsOnRoad(x, 0, z)) or current_ground_tile == GROUND.ROAD or 
-									 (oncreep and self:FasterOnCreep()) or current_ground_tile == GROUND.COBBLEROAD)))
-									 and self.fastmultiplier 
-									 or 1
+        if current_ground_tile == GROUND.UNDERWATER_SANDY or
+            current_ground_tile == GROUND.UNDERWATER_ROCKY or
+            (current_ground_tile == GROUND.BEACH and TheWorld:HasTag("cave")) or
+            (current_ground_tile == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or
+            (current_ground_tile == GROUND.PAINTED and TheWorld:HasTag("cave")) or
+            (current_ground_tile == GROUND.BATTLEGROUND and TheWorld:HasTag("cave")) or
+            (current_ground_tile == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) then
+            if self.inst.prefab ~= "wurt" then
+                self.groundspeedmultiplier = 0.5
+            end
+            if self.inst:HasTag("nadador") then self.groundspeedmultiplier = 0.8 end
+        else
+            self.groundspeedmultiplier = (self:IsFasterOnGroundTile(current_ground_tile) or
+                    (self:FasterOnRoad() and ((RoadManager ~= nil and RoadManager:IsOnRoad(x, 0, z)) or current_ground_tile == GROUND.ROAD or
+                        (oncreep and self:FasterOnCreep()) or current_ground_tile == GROUND.COBBLEROAD)))
+                and self.fastmultiplier
+                or 1
+        end
     end
-end	
 end
 
 function LocoMotor:PushTempGroundSpeedMultiplier(mult, tile)
@@ -704,76 +700,76 @@ function LocoMotor:TempGroundTile()
 end
 
 function LocoMotor:StartStrafing()
-	if self.ismastersim and not self.inst.player_classified.isstrafing:value() then
-		self:SetStrafing(true)
-		self.inst.player_classified.isstrafing:set(true)
-		self.inst:PushEvent("startstrafing")
-	end
+    if self.ismastersim and not self.inst.player_classified.isstrafing:value() then
+        self:SetStrafing(true)
+        self.inst.player_classified.isstrafing:set(true)
+        self.inst:PushEvent("startstrafing")
+    end
 end
 
 function LocoMotor:StopStrafing()
-	if self.ismastersim and self.inst.player_classified.isstrafing:value() then
-		self:SetStrafing(false)
-		self.inst.player_classified.isstrafing:set(false)
-		self.inst:PushEvent("stopstrafing")
-	end
+    if self.ismastersim and self.inst.player_classified.isstrafing:value() then
+        self:SetStrafing(false)
+        self.inst.player_classified.isstrafing:set(false)
+        self.inst:PushEvent("stopstrafing")
+    end
 end
 
 function LocoMotor:SetStrafing(strafing)
-	if not strafing then
-		self.strafedir = nil
-	elseif self.strafedir == nil then
-		self.strafedir = self.inst.Transform:GetRotation()
-	end
+    if not strafing then
+        self.strafedir = nil
+    elseif self.strafedir == nil then
+        self.strafedir = self.inst.Transform:GetRotation()
+    end
 end
 
 function LocoMotor:SetMoveDir(dir)
-	if self.strafedir then
-		self.strafedir = dir
-	else
-		self.inst.Transform:SetRotation(dir)
-	end
+    if self.strafedir then
+        self.strafedir = dir
+    else
+        self.inst.Transform:SetRotation(dir)
+    end
 end
 
 function LocoMotor:FaceMovePoint(x, y, z)
-	if self.strafedir == nil then
-		self.inst:FacePoint(x, y, z)
-	elseif not (self.inst.sg and self.inst.sg:HasStateTag("busy")) then
-		self.strafedir = self.inst:GetAngleToPoint(x, y, z)
-	end
+    if self.strafedir == nil then
+        self.inst:FacePoint(x, y, z)
+    elseif not (self.inst.sg and self.inst.sg:HasStateTag("busy")) then
+        self.strafedir = self.inst:GetAngleToPoint(x, y, z)
+    end
 end
 
 local function SetMotorVelRelToStrafeDir(inst, speed, dir, strafedir)
-	local angle = (strafedir - dir) * DEGREES
-	inst.Physics:SetMotorVel(speed * math.cos(angle), 0, -speed * math.sin(angle))
+    local angle = (strafedir - dir) * DEGREES
+    inst.Physics:SetMotorVel(speed * math.cos(angle), 0, -speed * math.sin(angle))
 end
 
 function LocoMotor:SetMotorSpeed(speed)
-	if self.strafedir then
-		SetMotorVelRelToStrafeDir(self.inst, speed, self.inst.Transform:GetRotation(), self.strafedir)
-	else
-		self.inst.Physics:SetMotorVel(speed, 0, 0)
-	end
+    if self.strafedir then
+        SetMotorVelRelToStrafeDir(self.inst, speed, self.inst.Transform:GetRotation(), self.strafedir)
+    else
+        self.inst.Physics:SetMotorVel(speed, 0, 0)
+    end
 end
 
 function LocoMotor:OnStrafeFacingChanged(dir)
-	if self.strafedir and dir ~= self.inst.Transform:GetRotation() then
-		self.inst.Transform:SetRotation(dir)
-		SetMotorVelRelToStrafeDir(self.inst, self.inst.Physics:GetMotorSpeed(), dir, self.strafedir)
-	end
+    if self.strafedir and dir ~= self.inst.Transform:GetRotation() then
+        self.inst.Transform:SetRotation(dir)
+        SetMotorVelRelToStrafeDir(self.inst, self.inst.Physics:GetMotorSpeed(), dir, self.strafedir)
+    end
 end
 
 function LocoMotor:WalkForward(direct)
     self.isrunning = false
     if direct then self.wantstomoveforward = true end
-	self:SetMotorSpeed(self:GetWalkSpeed())
+    self:SetMotorSpeed(self:GetWalkSpeed())
     self:StartUpdatingInternal()
 end
 
 function LocoMotor:RunForward(direct)
     self.isrunning = true
     if direct then self.wantstomoveforward = true end
-	self:SetMotorSpeed(self:GetRunSpeed())
+    self:SetMotorSpeed(self:GetRunSpeed())
     self:StartUpdatingInternal()
 end
 
@@ -827,38 +823,58 @@ function LocoMotor:PreviewAction(bufferedaction, run, try_instant)
         self.inst.sg ~= nil and
         self.inst.components.playercontroller ~= nil and
         not self.inst.components.playercontroller.directwalking then
-		if self.inst.sg:HasStateTag("overridelocomote") then
-			self.inst:PreviewBufferedAction(bufferedaction)
-		else
-			self:Stop()
-			if bufferedaction.target ~= nil then
-				self:FaceMovePoint(bufferedaction.target.Transform:GetWorldPosition())
-			end
-			if not self.inst.sg:HasStateTag("idle") then
-				local idle_anim = self.inst:HasTag("playerghost") and "idle" or "idle_loop"
-				if not self.inst.AnimState:IsCurrentAnimation(idle_anim) then
-					self.inst.AnimState:PlayAnimation(idle_anim, true)
-				end
-			end
-			self.inst:PreviewBufferedAction(bufferedaction)
-			self.inst.sg:GoToState("idle", "noanim")
-		end
+        if self.inst.sg:HasStateTag("overridelocomote") then
+            self.inst:PreviewBufferedAction(bufferedaction)
+        else
+            local closeinspect = false
+            if bufferedaction.target then
+                if CLOSEINSPECTORUTIL.CanCloseInspect(self.inst, bufferedaction.target) then
+                    closeinspect = true
+                    self:GoToEntity(bufferedaction.target, bufferedaction, run)
+                end
+            elseif action_pos then
+                if CLOSEINSPECTORUTIL.CanCloseInspect(self.inst, action_pos) then
+                    closeinspect = true
+                    self:GoToPoint(nil, bufferedaction, run)
+                end
+            end
+            if not closeinspect then
+                self:Stop()
+
+                --V2C: since LOOKAT now has an action handler for closeinspect support,
+                --     we can use options.instant to bypass it during preview.
+                --     see EntityScript:PreviewBufferedAction
+                bufferedaction.options.instant = true
+
+                if bufferedaction.target ~= nil then
+                    self:FaceMovePoint(bufferedaction.target.Transform:GetWorldPosition())
+                end
+                if not self.inst.sg:HasStateTag("idle") then
+                    local idle_anim = self.inst:HasTag("playerghost") and "idle" or "idle_loop"
+                    if not self.inst.AnimState:IsCurrentAnimation(idle_anim) then
+                        self.inst.AnimState:PlayAnimation(idle_anim, true)
+                    end
+                end
+                self.inst:PreviewBufferedAction(bufferedaction)
+                self.inst.sg:GoToState("idle", "noanim")
+            end
+        end
     elseif bufferedaction.forced then
         if action_pos ~= nil then
             self:GoToPoint(nil, bufferedaction, run)
         end
-	elseif bufferedaction.action.instant or bufferedaction.action.do_not_locomote or bufferedaction.options.instant then
+    elseif bufferedaction.action.instant or bufferedaction.action.do_not_locomote or bufferedaction.options.instant then
         self.inst:PreviewBufferedAction(bufferedaction)
-	elseif bufferedaction.target ~= nil then
-		local inventoryitem = bufferedaction.target.replica.inventoryitem
-		local owner = inventoryitem ~= nil and inventoryitem:IsHeld() and bufferedaction.target.entity:GetParent() or nil
-		if owner ~= nil and owner:HasTag("pocketdimension_container") then
-			--don't try to walk to this container at (0, 0, 0)
-			self:FaceMovePoint(bufferedaction.target.Transform:GetWorldPosition())
-			self.inst:PushBufferedAction(bufferedaction)
-		elseif bufferedaction.distance ~= nil and bufferedaction.distance >= math.huge then
+    elseif bufferedaction.target ~= nil then
+        local inventoryitem = bufferedaction.target.replica.inventoryitem
+        local owner = inventoryitem ~= nil and inventoryitem:IsHeld() and bufferedaction.target.entity:GetParent() or nil
+        if owner ~= nil and owner:HasTag("pocketdimension_container") then
+            --don't try to walk to this container at (0, 0, 0)
+            self:FaceMovePoint(bufferedaction.target.Transform:GetWorldPosition())
+            self.inst:PushBufferedAction(bufferedaction)
+        elseif bufferedaction.distance ~= nil and bufferedaction.distance >= math.huge then
             --essentially instant
-			self:FaceMovePoint(bufferedaction.target.Transform:GetWorldPosition())
+            self:FaceMovePoint(bufferedaction.target.Transform:GetWorldPosition())
             self.inst:PreviewBufferedAction(bufferedaction)
         else
             self:GoToEntity(bufferedaction.target, bufferedaction, run)
@@ -867,7 +883,7 @@ function LocoMotor:PreviewAction(bufferedaction, run, try_instant)
         self.inst:PreviewBufferedAction(bufferedaction)
     elseif bufferedaction.action == ACTIONS.CASTAOE then
         if self.inst:GetDistanceSqToPoint(action_pos) <= bufferedaction.distance * bufferedaction.distance then
-			self:FaceMovePoint(action_pos:Get())
+            self:FaceMovePoint(action_pos:Get())
             self.inst:PreviewBufferedAction(bufferedaction)
         else
             self:GoToPoint(nil, bufferedaction, run)
@@ -877,7 +893,7 @@ function LocoMotor:PreviewAction(bufferedaction, run, try_instant)
         end
     elseif bufferedaction.distance ~= nil and bufferedaction.distance >= math.huge then
         --essentially instant
-		self:FaceMovePoint(action_pos:Get())
+        self:FaceMovePoint(action_pos:Get())
         self.inst:PreviewBufferedAction(bufferedaction)
     else
         self:GoToPoint(nil, bufferedaction, run)
@@ -887,14 +903,14 @@ end
 function LocoMotor:PushAction(bufferedaction, run, try_instant)
     if bufferedaction == nil then
         return
-	elseif self.inst.components.playercontroller ~= nil then
-		self.inst.components.playercontroller:OnRemoteBufferedAction()
-	end
+    elseif self.inst.components.playercontroller ~= nil then
+        self.inst.components.playercontroller:OnRemoteBufferedAction()
+    end
 
-	--V2C: see PlayerController:RepeatHeldAction()
-	if self.no_predict_fastforward then
-		bufferedaction.options.no_predict_fastforward = true
-	end
+    --V2C: see PlayerController:RepeatHeldAction()
+    if self.no_predict_fastforward then
+        bufferedaction.options.no_predict_fastforward = true
+    end
 
     if bufferedaction.action.pre_action_cb ~= nil then
         bufferedaction.action.pre_action_cb(bufferedaction)
@@ -919,11 +935,25 @@ function LocoMotor:PushAction(bufferedaction, run, try_instant)
         end
     elseif bufferedaction.action == ACTIONS.LOOKAT and
         self.inst.components.playercontroller ~= nil then
-        local pos = self.inst.components.playercontroller:GetRemotePredictPosition()
-        if pos ~= nil and not self.inst.components.playercontroller.directwalking then
-            self:GoToPoint(pos, bufferedaction, run)
-        else
-            self.inst:PushBufferedAction(bufferedaction)
+        local closeinspect = false
+        if bufferedaction.target then
+            if CLOSEINSPECTORUTIL.CanCloseInspect(self.inst, bufferedaction.target) then
+                closeinspect = true
+                self:GoToEntity(bufferedaction.target, bufferedaction, run)
+            end
+        elseif action_pos then
+            if CLOSEINSPECTORUTIL.CanCloseInspect(self.inst, action_pos) then
+                closeinspect = true
+                self:GoToPoint(nil, bufferedaction, run)
+            end
+        end
+        if not closeinspect then
+            local pos = self.inst.components.playercontroller:GetRemotePredictPosition()
+            if pos and not self.inst.components.playercontroller.directwalking then
+                self:GoToPoint(pos, bufferedaction, run)
+            else
+                self.inst:PushBufferedAction(bufferedaction)
+            end
         end
     elseif bufferedaction.forced then
         if bufferedaction.action.rangecheckfn ~= nil and
@@ -934,17 +964,18 @@ function LocoMotor:PushAction(bufferedaction, run, try_instant)
         if action_pos ~= nil then
             self:GoToPoint(nil, bufferedaction, run, bufferedaction.overridedest)
         end
-	elseif bufferedaction.action.instant or bufferedaction.action.do_not_locomote or bufferedaction.options.instant then
+    elseif bufferedaction.action.instant or bufferedaction.action.do_not_locomote or bufferedaction.options.instant then
         self.inst:PushBufferedAction(bufferedaction)
     elseif bufferedaction.target ~= nil then
-		local owner = bufferedaction.target.components.inventoryitem ~= nil and bufferedaction.target.components.inventoryitem.owner or nil
-		if owner ~= nil and owner:HasTag("pocketdimension_container") then
-			--don't try to walk to this container at (0, 0, 0)
-			self:FaceMovePoint(bufferedaction.target.Transform:GetWorldPosition())
-			self.inst:PushBufferedAction(bufferedaction)
-		elseif bufferedaction.distance ~= nil and bufferedaction.distance >= math.huge then
+        local owner = bufferedaction.target.components.inventoryitem ~= nil and
+        bufferedaction.target.components.inventoryitem.owner or nil
+        if owner ~= nil and owner:HasTag("pocketdimension_container") then
+            --don't try to walk to this container at (0, 0, 0)
+            self:FaceMovePoint(bufferedaction.target.Transform:GetWorldPosition())
+            self.inst:PushBufferedAction(bufferedaction)
+        elseif bufferedaction.distance ~= nil and bufferedaction.distance >= math.huge then
             --essentially instant
-			self:FaceMovePoint(bufferedaction.target.Transform:GetWorldPosition())
+            self:FaceMovePoint(bufferedaction.target.Transform:GetWorldPosition())
             self.inst:PushBufferedAction(bufferedaction)
         else
             self:GoToEntity(bufferedaction.target, bufferedaction, run)
@@ -953,7 +984,7 @@ function LocoMotor:PushAction(bufferedaction, run, try_instant)
         self.inst:PushBufferedAction(bufferedaction)
     elseif bufferedaction.action == ACTIONS.CASTAOE then
         if self.inst:GetDistanceSqToPoint(action_pos) <= bufferedaction.distance * bufferedaction.distance then
-			self:FaceMovePoint(action_pos:Get())
+            self:FaceMovePoint(action_pos:Get())
             self.inst:PushBufferedAction(bufferedaction)
         else
             self:GoToPoint(nil, bufferedaction, run)
@@ -963,7 +994,7 @@ function LocoMotor:PushAction(bufferedaction, run, try_instant)
         end
     elseif bufferedaction.distance ~= nil and bufferedaction.distance >= math.huge then
         --essentially instant
-		self:FaceMovePoint(action_pos:Get())
+        self:FaceMovePoint(action_pos:Get())
         self.inst:PushBufferedAction(bufferedaction)
     else
         self:GoToPoint(nil, bufferedaction, run)
@@ -983,17 +1014,18 @@ function LocoMotor:GoToEntity(target, bufferedaction, run)
 
     if bufferedaction ~= nil and bufferedaction.arrivedist ~= nil then
         arrive_dist = bufferedaction.arrivedist
-
     elseif bufferedaction ~= nil and bufferedaction.distance ~= nil then
         --NOTE: use actual physics (ignoring physicsradiusoverride)
         --      as fallback if bufferedaction.distance is too small
-        arrive_dist = ARRIVE_STEP + (target.Physics ~= nil and target.Physics:GetRadius() or 0) + (self.inst.Physics ~= nil and self.inst.Physics:GetRadius() or 0)
+        local owner = target.components.inventoryitem and target.components.inventoryitem:GetGrandOwner() or target
+        arrive_dist = ARRIVE_STEP + (owner.Physics and owner.Physics:GetRadius() or 0) + self.inst.Physics:GetRadius()
         arrive_dist = math.max(arrive_dist, bufferedaction.distance)
-
     else
-        arrive_dist = ARRIVE_STEP + target:GetPhysicsRadius(0) + self.inst:GetPhysicsRadius(0)
+        local owner = target.components.inventoryitem and target.components.inventoryitem:GetGrandOwner() or target
+        arrive_dist = ARRIVE_STEP + owner:GetPhysicsRadius(0) + self.inst:GetPhysicsRadius(0)
 
-        local extra_arrive_dist = (bufferedaction ~= nil and bufferedaction.action ~= nil and bufferedaction.action.extra_arrive_dist) or nil
+        local extra_arrive_dist = (bufferedaction ~= nil and bufferedaction.action ~= nil and bufferedaction.action.extra_arrive_dist) or
+        nil
         if extra_arrive_dist ~= nil then
             arrive_dist = arrive_dist + extra_arrive_dist(self.inst, self.dest)
         end
@@ -1019,10 +1051,10 @@ function LocoMotor:GoToEntity(target, bufferedaction, run)
     --self.arrive_step_dist = ARRIVE_STEP
     self:StartUpdatingInternal()
 
-	--Try instant arrive check if we're not moving
-	if not (self.inst.sg and self.inst.sg:HasStateTag("moving")) then
-		self:OnUpdate(0, true)
-	end
+    --Try instant arrive check if we're not moving
+    if not (self.inst.sg and self.inst.sg:HasStateTag("moving")) then
+        self:OnUpdate(0, true)
+    end
 end
 
 --V2C: Added overridedest for additional network controller support
@@ -1034,10 +1066,12 @@ function LocoMotor:GoToPoint(pt, bufferedaction, run, overridedest)
 
     self.arrive_dist =
         bufferedaction ~= nil
-        and (bufferedaction.arrivedist or bufferedaction.distance or math.max(bufferedaction.action.mindistance or 0, ARRIVE_STEP))
+        and
+        (bufferedaction.arrivedist or bufferedaction.distance or math.max(bufferedaction.action.mindistance or 0, ARRIVE_STEP))
         or ARRIVE_STEP
 
-    local extra_arrive_dist = (bufferedaction ~= nil and bufferedaction.action ~= nil and bufferedaction.action.extra_arrive_dist) or nil
+    local extra_arrive_dist = (bufferedaction ~= nil and bufferedaction.action ~= nil and bufferedaction.action.extra_arrive_dist) or
+    nil
     if extra_arrive_dist ~= nil then
         self.arrive_dist = self.arrive_dist + extra_arrive_dist(self.inst, self.dest, bufferedaction)
     end
@@ -1057,11 +1091,11 @@ function LocoMotor:GoToPoint(pt, bufferedaction, run, overridedest)
     self.wantstomoveforward = true
     self:SetBufferedAction(bufferedaction)
     self:StartUpdatingInternal()
-	
-	--Try instant arrive check if we're not moving
-	if not (self.inst.sg and self.inst.sg:HasStateTag("moving")) then
-		self:OnUpdate(0, true)
-	end	
+
+    --Try instant arrive check if we're not moving
+    if not (self.inst.sg and self.inst.sg:HasStateTag("moving")) then
+        self:OnUpdate(0, true)
+    end
 end
 
 function LocoMotor:SetBufferedAction(act)
@@ -1072,9 +1106,9 @@ function LocoMotor:SetBufferedAction(act)
     if self.allow_platform_hopping then
         self.last_platform_visited = INVALID_PLATFORM_ID
     end
-	if act ~= nil and self.inst.components.playercontroller ~= nil then
-		self.inst.components.playercontroller:OnLocomotorBufferedAction(act)
-	end
+    if act ~= nil and self.inst.components.playercontroller ~= nil then
+        self.inst.components.playercontroller:OnLocomotorBufferedAction(act)
+    end
 end
 
 function LocoMotor:Stop(sgparams)
@@ -1106,7 +1140,7 @@ function LocoMotor:WalkInDirection(direction, should_run)
     --Print(VERBOSITY.DEBUG, "LocoMotor:WalkInDirection ", self.inst.prefab)
     self:SetBufferedAction(nil)
     if not self.inst.sg or self.inst.sg:HasStateTag("canrotate") then
-        self.inst.Transform:SetRotation(direction)
+        self:SetMoveDir(direction)
     end
 
     self.wantstomoveforward = true
@@ -1132,7 +1166,7 @@ function LocoMotor:RunInDirection(direction, throttle)
     self.lastdesttile = nil
 
     if not self.inst.sg or self.inst.sg:HasStateTag("canrotate") then
-		self:SetMoveDir(direction)
+        self:SetMoveDir(direction)
     end
 
     self.wantstomoveforward = true
@@ -1141,7 +1175,7 @@ function LocoMotor:RunInDirection(direction, throttle)
     if self.directdrive then
         self:RunForward()
     end
-	self.inst:PushEvent("locomote", self.pusheventwithdirection and { dir = direction } or nil)
+    self.inst:PushEvent("locomote", self.pusheventwithdirection and { dir = direction } or nil)
     self:StartUpdatingInternal()
 end
 
@@ -1156,7 +1190,9 @@ function LocoMotor:GetDebugString()
         tile_x, tile_y = ground.Map:GetTileCoordsAtPoint(self.inst.Transform:GetWorldPosition())
     end
     local state = self.wantstorun and "RUN" or "WALK"
-    return string.format("%s, (%0.2f) [%s] [%s] (%u, %u):(%u, %u) +/-%2.2f", state, self.wantstorun and self:GetRunSpeed() or self:GetWalkSpeed(), tostring(self.dest), tostring(self.bufferedaction), tile_x, tile_y, pathtile_x, pathtile_y, self.arrive_step_dist or 0) 
+    return string.format("%s, (%0.2f) [%s] [%s] (%u, %u):(%u, %u) +/-%2.2f", state,
+        self.wantstorun and self:GetRunSpeed() or self:GetWalkSpeed(), tostring(self.dest), tostring(self.bufferedaction),
+        tile_x, tile_y, pathtile_x, pathtile_y, self.arrive_step_dist or 0)
 end
 
 function LocoMotor:HasDestination()
@@ -1189,36 +1225,37 @@ end
 
 function LocoMotor:SetAllowPlatformHopping(enabled)
     self.allow_platform_hopping = enabled
-    if enabled then    
+    if enabled then
         self.last_platform_visited = INVALID_PLATFORM_ID
     end
 end
 
 function LocoMotor:CheckEdge(my_platform, map, my_x, my_z, dir_x, dir_z, radius)
-    local pt_x, pt_z = my_x + dir_x * radius, my_z + dir_z * radius 
-    local platform = map:GetPlatformAtPoint(pt_x, pt_z) 
+    local pt_x, pt_z = my_x + dir_x * radius, my_z + dir_z * radius
+    local platform = map:GetPlatformAtPoint(pt_x, pt_z)
     local is_water = not map:IsVisualGroundAtPoint(pt_x, 0, pt_z)
-    return (is_water and platform == nil) or platform ~= my_platform    
+    return (is_water and platform == nil) or platform ~= my_platform
 end
 
 function LocoMotor:IsAtEdge(my_platform, map, my_x, my_z, dir_x, dir_z)
     local radius = self.inst.Physics:GetRadius()
     local edge_range = 0.25
-    return self:CheckEdge(my_platform, map, my_x, my_z, dir_x, dir_z, radius) or 
-           self:CheckEdge(my_platform, map, my_x, my_z, dir_x, dir_z, radius - edge_range) or 
-           self:CheckEdge(my_platform, map, my_x, my_z, dir_x, dir_z, radius + edge_range)
+    return self:CheckEdge(my_platform, map, my_x, my_z, dir_x, dir_z, radius) or
+        self:CheckEdge(my_platform, map, my_x, my_z, dir_x, dir_z, radius - edge_range) or
+        self:CheckEdge(my_platform, map, my_x, my_z, dir_x, dir_z, radius + edge_range)
 end
 
 function LocoMotor:GetHopDistance(speed_mult)
-	return self.hop_distance_fn ~= nil and self.hop_distance_fn(self.inst, speed_mult or 1) or self.hop_distance
+    return self.hop_distance_fn ~= nil and self.hop_distance_fn(self.inst, speed_mult or 1) or self.hop_distance
 end
 
 function LocoMotor:GetswPlatformAtPoint(pos_x, pos_y, pos_z, extra_radius)
-	if pos_z == nil then -- to support passing in (x, z) instead of (x, y, x)
-		pos_z = pos_y
-		pos_y = 0
-	end
-    local entities = TheSim:FindEntities(pos_x, pos_y, pos_z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS + (extra_radius or 0), {"barcoapto"})
+    if pos_z == nil then -- to support passing in (x, z) instead of (x, y, x)
+        pos_z = pos_y
+        pos_y = 0
+    end
+    local entities = TheSim:FindEntities(pos_x, pos_y, pos_z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS + (extra_radius or 0),
+        { "barcoapto" })
     for i, v in ipairs(entities) do
         if math.sqrt(v:GetDistanceSqToPoint(pos_x, 0, pos_z)) <= 0.5 then
             return v
@@ -1231,7 +1268,7 @@ local WALL_TAGS = { "wall" }
 function LocoMotor:ScanForPlatformInDir(my_platform, map, my_x, my_z, dir_x, dir_z, steps, step_size)
     local is_at_edge = self:IsAtEdge(my_platform, map, my_x, my_z, dir_x, dir_z)
     local is_first_hop_point = true
-    for i = 1,steps do
+    for i = 1, steps do
         local pt_x, pt_z = my_x + dir_x * i * step_size, my_z + dir_z * i * step_size
         local platform = map:GetPlatformAtPoint(pt_x, pt_z)
 
@@ -1243,10 +1280,10 @@ function LocoMotor:ScanForPlatformInDir(my_platform, map, my_x, my_z, dir_x, dir
                 --search for nearby walls and fences with active physics.
                 for _, v in ipairs(TheSim:FindEntities(math.floor(pt_x), 0, math.floor(pt_z), 1, WALL_TAGS)) do
                     if v ~= self.inst and
-                    v.entity:IsVisible() and
-                    v.components.placer == nil and
-                    v.entity:GetParent() == nil and 
-                    v.Physics and v.Physics:IsActive() then
+                        v.entity:IsVisible() and
+                        v.components.placer == nil and
+                        v.entity:GetParent() == nil and
+                        v.Physics:IsActive() then
                         return false, 0, 0, nil
                     end
                 end
@@ -1254,41 +1291,44 @@ function LocoMotor:ScanForPlatformInDir(my_platform, map, my_x, my_z, dir_x, dir
             --print(i, is_at_edge, my_platform, platform, pt_x - my_x, pt_z - my_z, is_water, step_size)
             if is_at_edge and platform ~= my_platform then
                 if platform ~= nil or not is_water then
-					if self.hop_delay and self.dest == nil then
-						--keep pushing toward the same direction during the delay before the hop is actually triggered
+                    if self.hop_delay and self.dest == nil then
+                        --keep pushing toward the same direction during the delay before the hop is actually triggered
                         local platform_delay = math.max(
-							platform and platform.components.platformhopdelay and platform.components.platformhopdelay:GetDelayTicks() or 0,
-							my_platform and my_platform.components.platformhopdelay and my_platform.components.platformhopdelay:GetDelayTicks() or 0
-						)
-						local delay = platform_delay > 0 and platform_delay or self.inst.forced_platformhopdelay or TUNING.PLATFORM_HOP_DELAY_TICKS
-						if delay > 0 then
-							--detect boat bridges (only from boat->boat)
-							local is_boat_bridge = false
-							if platform and my_platform then
-								--boatringdata is available on clients!
-								local vx, vy, vz = platform.Physics:GetVelocity()
-								if vx == 0 and vy == 0 and vz == 0 and not (platform.components.boatringdata and platform.components.boatringdata:IsRotating()) then
-									vx, vy, vz = my_platform.Physics:GetVelocity()
-									if vx == 0 and vy == 0 and vz == 0 and not (my_platform.components.boatringdata and my_platform.components.boatringdata:IsRotating()) then
-										is_boat_bridge = true
-									end
-								end
-							end
+                            platform and platform.components.platformhopdelay and
+                            platform.components.platformhopdelay:GetDelayTicks() or 0,
+                            my_platform and my_platform.components.platformhopdelay and
+                            my_platform.components.platformhopdelay:GetDelayTicks() or 0
+                        )
+                        local delay = platform_delay > 0 and platform_delay or self.inst.forced_platformhopdelay or
+                        TUNING.PLATFORM_HOP_DELAY_TICKS
+                        if delay > 0 then
+                            --detect boat bridges (only from boat->boat)
+                            local is_boat_bridge = false
+                            if platform and my_platform then
+                                --boatringdata is available on clients!
+                                local vx, vy, vz = platform.Physics:GetVelocity()
+                                if vx == 0 and vy == 0 and vz == 0 and not (platform.components.boatringdata and platform.components.boatringdata:IsRotating()) then
+                                    vx, vy, vz = my_platform.Physics:GetVelocity()
+                                    if vx == 0 and vy == 0 and vz == 0 and not (my_platform.components.boatringdata and my_platform.components.boatringdata:IsRotating()) then
+                                        is_boat_bridge = true
+                                    end
+                                end
+                            end
 
-							if not is_boat_bridge then
-								local tick = GetTick()
-								if platform ~= self.hop_delay.toplatform or my_platform ~= self.hop_delay.fromplatform or tick > self.hop_delay.lasttick + 1 then
-									self.hop_delay.toplatform = platform
-									self.hop_delay.fromplatform = my_platform
-									self.hop_delay.starttick = tick
-								end
-								self.hop_delay.lasttick = tick
-								if tick - self.hop_delay.starttick < delay then
-									return false, 0, 0, nil
-								end
-							end
-						end
-					end
+                            if not is_boat_bridge then
+                                local tick = GetTick()
+                                if platform ~= self.hop_delay.toplatform or my_platform ~= self.hop_delay.fromplatform or tick > self.hop_delay.lasttick + 1 then
+                                    self.hop_delay.toplatform = platform
+                                    self.hop_delay.fromplatform = my_platform
+                                    self.hop_delay.starttick = tick
+                                end
+                                self.hop_delay.lasttick = tick
+                                if tick - self.hop_delay.starttick < delay then
+                                    return false, 0, 0, nil
+                                end
+                            end
+                        end
+                    end
                     --print("SUCCESS!")
                     if is_first_hop_point then
                         is_first_hop_point = false
@@ -1304,7 +1344,7 @@ end
 
 local PLATFORM_SCAN_STEP_SIZE = 0.5
 local PLATFORM_SCAN_LANDING_RANGE = 1
-local BLOCKER_TAGS = {"blocker"}
+local BLOCKER_TAGS = { "blocker" }
 function LocoMotor:TestForBlocked(my_x, my_z, dir_x, dir_z, radius, test_length)
     local step_count = (test_length + PLATFORM_SCAN_LANDING_RANGE) / PLATFORM_SCAN_STEP_SIZE
     for i = 1, step_count do
@@ -1326,7 +1366,8 @@ function LocoMotor:ScanForPlatform(my_platform, target_x, target_z, hop_distance
 
     local step_count = math.min(dir_length + PLATFORM_SCAN_LANDING_RANGE, hop_distance) / PLATFORM_SCAN_STEP_SIZE
 
-    local can_hop, px, pz, found_platform = self:ScanForPlatformInDir(my_platform, TheWorld.Map, my_x, my_z, dir_x, dir_z, step_count, PLATFORM_SCAN_STEP_SIZE)
+    local can_hop, px, pz, found_platform = self:ScanForPlatformInDir(my_platform, TheWorld.Map, my_x, my_z, dir_x, dir_z,
+        step_count, PLATFORM_SCAN_STEP_SIZE)
     local blocked = false
     if can_hop then
         -- If we found a place to hop to, we need to check that our path is clear of obstacles.
@@ -1349,102 +1390,97 @@ function LocoMotor:ScanForPlatform(my_platform, target_x, target_z, hop_distance
             can_hop = false
             blocked = true
         end
-        ]]--
+        ]] --
     end
 
     return can_hop, px, pz, found_platform, blocked
 end
 
-function LocoMotor:StartHopping(x,z,target_platform)
+function LocoMotor:StartHopping(x, z, target_platform)
+    if self.inst.components.driver then
+        self.inst:RemoveComponent("rowboatwakespawner")
+        local barcoinv = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
+        if barcoinv and barcoinv.prefab == self.inst.components.driver.vehicle.prefab then
+            local consumo = SpawnPrefab(self.inst.components.driver.vehicle.prefab)
+            consumo.Transform:SetPosition(self.inst.components.driver.vehicle:GetPosition():Get())
+            consumo.components.finiteuses.current = barcoinv.components.finiteuses.current
 
-if self.inst.components.driver then
-self.inst:RemoveComponent("rowboatwakespawner")
-local barcoinv = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
-if barcoinv and barcoinv.prefab == self.inst.components.driver.vehicle.prefab  then 
-local consumo = SpawnPrefab(self.inst.components.driver.vehicle.prefab)
-consumo.Transform:SetPosition(self.inst.components.driver.vehicle:GetPosition():Get())
-consumo.components.finiteuses.current = barcoinv.components.finiteuses.current
+            local xd, yd, zd = consumo.Transform:GetWorldPosition()
+            if not TheWorld.Map:IsOceanAtPoint(xd, yd, zd, false) then
+                local posifinal = Vector3(consumo.Transform:GetWorldPosition())
+                local destino = FindSwimmableOffset(posifinal, math.random() * 2 * PI, 2, 6) or
+                    FindSwimmableOffset(posifinal, math.random() * 2 * PI, 4, 6) or
+                    FindSwimmableOffset(posifinal, math.random() * 2 * PI, 6, 6) or
+                    FindSwimmableOffset(posifinal, math.random() * 2 * PI, 8, 6) or
+                    FindSwimmableOffset(posifinal, math.random() * 2 * PI, 12, 6) or
+                    FindSwimmableOffset(posifinal, math.random() * 2 * PI, 14, 6) or
+                    FindSwimmableOffset(posifinal, math.random() * 2 * PI, 16, 6) or
+                    FindSwimmableOffset(posifinal, math.random() * 2 * PI, 20, 6) or
+                    FindSwimmableOffset(posifinal, math.random() * 2 * PI, 18, 6)
+                if destino then
+                    consumo.Transform:SetPosition(xd + destino.xd, yd + destino.yd, zd + destino.zd)
+                end
+            end
+            -------------------------transfere o conteudo do barco inventario para o barco do criado---------------------------------
+            if barcoinv.components.container then
+                local sailslot = barcoinv.components.container:GetItemInSlot(1)
+                if sailslot then
+                    consumo.components.container:GiveItem(sailslot, 1)
+                end
 
-local xd, yd, zd = consumo.Transform:GetWorldPosition()
-if not TheWorld.Map:IsOceanAtPoint(xd, yd, zd, false) then
-local posifinal = Vector3(consumo.Transform:GetWorldPosition())
-local destino = FindSwimmableOffset(posifinal, math.random() * 2 * PI, 2, 6) or
-				FindSwimmableOffset(posifinal, math.random() * 2 * PI, 4, 6) or
-				FindSwimmableOffset(posifinal, math.random() * 2 * PI, 6, 6) or
-				FindSwimmableOffset(posifinal, math.random() * 2 * PI, 8, 6) or
-				FindSwimmableOffset(posifinal, math.random() * 2 * PI, 12, 6) or
-				FindSwimmableOffset(posifinal, math.random() * 2 * PI, 14, 6) or
-				FindSwimmableOffset(posifinal, math.random() * 2 * PI, 16, 6) or
-				FindSwimmableOffset(posifinal, math.random() * 2 * PI, 20, 6) or				
-				FindSwimmableOffset(posifinal, math.random() * 2 * PI, 18, 6)
-if destino then
-consumo.Transform:SetPosition(xd + destino.xd, yd + destino.yd, zd + destino.zd)
-end
-end
--------------------------transfere o conteudo do barco inventario para o barco do criado---------------------------------
-if barcoinv.components.container then
-local sailslot = barcoinv.components.container:GetItemInSlot(1)
-if sailslot then
-consumo.components.container:GiveItem(sailslot, 1)
-end
+                local luzslot = barcoinv.components.container:GetItemInSlot(2)
+                if luzslot and luzslot.prefab == "quackeringram" then luzslot.navio1 = nil end
+                if luzslot then
+                    consumo.components.container:GiveItem(luzslot, 2)
+                end
 
-local luzslot = barcoinv.components.container:GetItemInSlot(2)
-if luzslot and luzslot.prefab == "quackeringram" then luzslot.navio1 = nil end
-if luzslot then
-consumo.components.container:GiveItem(luzslot, 2)
-end
+                local cargoslot1 = barcoinv.components.container:GetItemInSlot(3)
+                if cargoslot1 then
+                    consumo.components.container:GiveItem(cargoslot1, 3)
+                end
 
-local cargoslot1 = barcoinv.components.container:GetItemInSlot(3)
-if cargoslot1 then
-consumo.components.container:GiveItem(cargoslot1, 3)
-end
+                local cargoslot2 = barcoinv.components.container:GetItemInSlot(4)
+                if cargoslot2 then
+                    consumo.components.container:GiveItem(cargoslot2, 4)
+                end
 
-local cargoslot2 = barcoinv.components.container:GetItemInSlot(4)
-if cargoslot2 then
-consumo.components.container:GiveItem(cargoslot2, 4)
-end
+                local cargoslot3 = barcoinv.components.container:GetItemInSlot(5)
+                if cargoslot3 then
+                    consumo.components.container:GiveItem(cargoslot3, 5)
+                end
 
-local cargoslot3 = barcoinv.components.container:GetItemInSlot(5)
-if cargoslot3 then
-consumo.components.container:GiveItem(cargoslot3, 5)
-end
+                local cargoslot4 = barcoinv.components.container:GetItemInSlot(6)
+                if cargoslot4 then
+                    consumo.components.container:GiveItem(cargoslot4, 6)
+                end
 
-local cargoslot4 = barcoinv.components.container:GetItemInSlot(6)
-if cargoslot4 then
-consumo.components.container:GiveItem(cargoslot4, 6)
-end
+                local cargoslot5 = barcoinv.components.container:GetItemInSlot(7)
+                if cargoslot5 then
+                    consumo.components.container:GiveItem(cargoslot5, 7)
+                end
 
-local cargoslot5 = barcoinv.components.container:GetItemInSlot(7)
-if cargoslot5 then
-consumo.components.container:GiveItem(cargoslot5, 7)
-end
-
-local cargoslot6 = barcoinv.components.container:GetItemInSlot(8)
-if cargoslot6 then
-consumo.components.container:GiveItem(cargoslot6, 8)
-end end
-----------------------------------------------------------------------------------------------------------------------
-barcoinv:Remove()
-end
---if self.inst.components.driver.simbolo then self.inst.AnimState:ClearOverrideSymbol(self.inst.components.driver.simbolo) end
---if self.inst.components.driver.simbolo1 then self.inst.AnimState:ClearOverrideSymbol(self.inst.components.driver.simbolo1) end
-if self.inst.components.driver.vehicle then
-self.inst.components.driver.vehicle:Remove()
-end
-if self.inst.components.drownable ~= nil then self.inst.components.drownable.enabled = true end
-self.inst:RemoveComponent("driver")
-self.inst:RemoveTag("sail")
-self.inst:RemoveTag("surf")
-self.inst:RemoveTag("aquatic")
-end
-
-
-
-
-
+                local cargoslot6 = barcoinv.components.container:GetItemInSlot(8)
+                if cargoslot6 then
+                    consumo.components.container:GiveItem(cargoslot6, 8)
+                end
+            end
+            ----------------------------------------------------------------------------------------------------------------------
+            barcoinv:Remove()
+        end
+        --if self.inst.components.driver.simbolo then self.inst.AnimState:ClearOverrideSymbol(self.inst.components.driver.simbolo) end
+        --if self.inst.components.driver.simbolo1 then self.inst.AnimState:ClearOverrideSymbol(self.inst.components.driver.simbolo1) end
+        if self.inst.components.driver.vehicle then
+            self.inst.components.driver.vehicle:Remove()
+        end
+        if self.inst.components.drownable ~= nil then self.inst.components.drownable.enabled = true end
+        self.inst:RemoveComponent("driver")
+        self.inst:RemoveTag("sail")
+        self.inst:RemoveTag("surf")
+        self.inst:RemoveTag("aquatic")
+    end
     local embarker = self.inst.components.embarker
     if embarker ~= nil then
-        if target_platform ~= nil then 
+        if target_platform ~= nil then
             embarker:SetEmbarkable(target_platform)
         else
             embarker:SetDisembarkPos(x, z)
@@ -1452,9 +1488,9 @@ end
         if not self.inst.sg:HasStateTag("jumping") then
             self.inst:PushEvent("onhop")
         end
-    end    
+    end
 
-    self.hopping = true   
+    self.hopping = true
 
     -- Don't allow the player to hop for another ~200ms. This is to give the server a little bit of time to land it's hop before the client starts hopping again.
     -- This also solves an issue where the player controller which polls for hops has time to poll and realize that the first hop is done before the second on starts.
@@ -1475,7 +1511,7 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
         return
     end
 
-	if self.enablegroundspeedmultiplier and not arrive_check_only then
+    if self.enablegroundspeedmultiplier and not arrive_check_only then
         local x, y, z = self.inst.Transform:GetWorldPosition()
         local tx, ty = TheWorld.Map:GetTileCoordsAtPoint(x, 0, z)
         if tx ~= self.lastpos.x or ty ~= self.lastpos.y then
@@ -1484,8 +1520,8 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
         end
     end
 
-	local facedir
-	
+    local facedir
+
     --Print(VERBOSITY.DEBUG, "OnUpdate", self.inst.prefab)
     if self.dest then
         --Print(VERBOSITY.DEBUG, "    w dest")
@@ -1503,48 +1539,50 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
         local mypos_x, mypos_y, mypos_z = self.inst.Transform:GetWorldPosition()
 
         local reached_dest, invalid, in_cooldown = nil, nil, false
-		if self.bufferedaction and self.bufferedaction.action.customarrivecheck then
-			reached_dest, invalid = self.bufferedaction.action.customarrivecheck(self.inst, self.dest)
-		else
-			local dsq = distsq(destpos_x, destpos_z, mypos_x, mypos_z)
-			local arrive_dsq = self.arrive_dist * self.arrive_dist
-			if dt > 0 then
-				local run_dist = self:GetRunSpeed() * dt * .5
-				arrive_dsq = math.max(arrive_dsq, run_dist * run_dist)
-			end
-			reached_dest = dsq <= arrive_dsq
+        if self.bufferedaction and self.bufferedaction.action.customarrivecheck then
+            reached_dest, invalid = self.bufferedaction.action.customarrivecheck(self.inst, self.dest)
+        else
+            local dsq = distsq(destpos_x, destpos_z, mypos_x, mypos_z)
+            local arrive_dsq = self.arrive_dist * self.arrive_dist
+            if dt > 0 then
+                local run_dist = self:GetRunSpeed() * dt * .5
+                arrive_dsq = math.max(arrive_dsq, run_dist * run_dist)
+            end
+            reached_dest = dsq <= arrive_dsq
 
-			--special case for attacks (in_cooldown can get set here)
-			if self.bufferedaction and
-				self.bufferedaction.action == ACTIONS.ATTACK and
-				not (self.bufferedaction.forced and self.bufferedaction.target == nil)
-			then
-				local combat = self.inst.replica.combat
-				if combat then
-					reached_dest, invalid, in_cooldown = combat:LocomotorCanAttack(reached_dest, self.bufferedaction.target)
-				end
-			end
+            --special case for attacks (in_cooldown can get set here)
+            if self.bufferedaction and
+                self.bufferedaction.action == ACTIONS.ATTACK and
+                not (self.bufferedaction.forced and self.bufferedaction.target == nil)
+            then
+                local combat = self.inst.replica.combat
+                if combat then
+                    reached_dest, invalid, in_cooldown = combat:LocomotorCanAttack(reached_dest,
+                        self.bufferedaction.target)
+                end
+            end
         end
 
         if invalid then
             self:Stop()
             self:Clear()
         elseif reached_dest then
-        	--I think this is fine? we might need to make OnUpdateFinish() function that we can run to finish up the OnUpdate so we don't duplicate code
+            --I think this is fine? we might need to make OnUpdateFinish() function that we can run to finish up the OnUpdate so we don't duplicate code
             if in_cooldown then return end
             --Print(VERBOSITY.DEBUG, "REACH DEST")
-            self.inst:PushEvent("onreachdestination", { target = self.dest.inst, pos = Point(destpos_x, destpos_y, destpos_z) })
+            self.inst:PushEvent("onreachdestination",
+                { target = self.dest.inst, pos = Point(destpos_x, destpos_y, destpos_z) })
             if self.atdestfn ~= nil then
                 self.atdestfn(self.inst)
             end
 
             if self.bufferedaction ~= nil and self.bufferedaction ~= self.inst.bufferedaction then
                 if self.bufferedaction.target ~= nil and self.bufferedaction.target.Transform ~= nil and not self.bufferedaction.action.skip_locomotor_facing then
-					self:FaceMovePoint(self.bufferedaction.target.Transform:GetWorldPosition())
+                    self:FaceMovePoint(self.bufferedaction.target.Transform:GetWorldPosition())
                 elseif self.bufferedaction.invobject ~= nil and not self.bufferedaction.action.skip_locomotor_facing then
                     local act_pos = self.bufferedaction:GetActionPoint()
                     if act_pos ~= nil then
-						self:FaceMovePoint(act_pos:Get())
+                        self:FaceMovePoint(act_pos:Get())
                     end
                 end
                 if self.ismastersim then
@@ -1555,7 +1593,7 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
             end
             self:Stop()
             self:Clear()
-		elseif not arrive_check_only then
+        elseif not arrive_check_only then
             --Print(VERBOSITY.DEBUG, "LOCOMOTING")
             if self:WaitingForPathSearch() then
                 local pathstatus = TheWorld.Pathfinder:GetSearchStatus(self.path.handle)
@@ -1575,7 +1613,6 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
                                 -- for k,v in ipairs(foundpath.steps) do
                                 --     Print(VERBOSITY.DEBUG, string.format("%d, %s", k, tostring(Point(v.x, v.y, v.z))))
                                 -- end
-
                             else
                                 --Print(VERBOSITY.DEBUG, "DISCARDING straight line path")
                                 self.path.steps = nil
@@ -1586,7 +1623,8 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
                         end
                     else
                         if pathstatus == nil then
-                            Print(VERBOSITY.DEBUG, string.format("LOST PATH SEARCH %u. Maybe it timed out?", self.path.handle))
+                            Print(VERBOSITY.DEBUG,
+                                string.format("LOST PATH SEARCH %u. Maybe it timed out?", self.path.handle))
                         else
                             Print(VERBOSITY.DEBUG, "NO PATH")
                         end
@@ -1597,8 +1635,8 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
                 end
             end
 
-			local canrotate = self.inst.sg == nil or self.inst.sg:HasStateTag("canrotate")
-            if not self.inst.sg or self.inst.sg:HasStateTag("canrotate") then
+            local canrotate = self.inst.sg == nil or self.inst.sg:HasStateTag("canrotate")
+            if canrotate or self.pusheventwithdirection then
                 --Print(VERBOSITY.DEBUG, "CANROTATE")
                 local facepos_x, facepos_y, facepos_z = destpos_x, destpos_y, destpos_z
 
@@ -1613,11 +1651,11 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
 
                     local maxsteps = #self.path.steps
                     if self.path.currentstep < maxsteps then -- Add tolerance to step points that aren't the final destination.
-                        local physdiameter = self.inst:GetPhysicsRadius(0)*2
+                        local physdiameter = self.inst:GetPhysicsRadius(0) * 2
                         step_distsq = step_distsq - physdiameter * physdiameter
                     end
 
-                    if step_distsq <= (self.arrive_step_dist)*(self.arrive_step_dist) then
+                    if step_distsq <= (self.arrive_step_dist) * (self.arrive_step_dist) then
                         self.path.currentstep = self.path.currentstep + 1
 
                         if self.path.currentstep < maxsteps then
@@ -1632,23 +1670,23 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
                     end
                     facepos_x, facepos_y, facepos_z = steppos_x, steppos_y, steppos_z
                 end
-				
-				facedir = self.inst:GetAngleToPoint(facepos_x, facepos_y, facepos_z)
 
-                local x,y,z = self.inst.Physics:GetMotorVel()
-				if x < 0 and self.strafedir == nil then
-					facedir = facedir + 180
-					if canrotate then
-						--V2C: matching legacy behaviour, where this ignores busy state
-						--Print(VERBOSITY.DEBUG, "SET ROT", facedir)
-						self:SetMoveDir(facedir)
-					end
-				elseif canrotate and not (self.inst.sg and self.inst.sg:HasStateTag("busy")) then
-					--V2C: while I'd like to remove the busy check,
-					--     we'll keep it to match legacy behaviour:
-					--     it used to call self.inst:FacePoint(...)
-					--Print(VERBOSITY.DEBUG, "FACE PT", Point(facepos_x, facepos_y, facepos_z))
-					self:SetMoveDir(facedir)
+                facedir = self.inst:GetAngleToPoint(facepos_x, facepos_y, facepos_z)
+
+                local x, y, z = self.inst.Physics:GetMotorVel()
+                if x < 0 and self.strafedir == nil then
+                    facedir = facedir + 180
+                    if canrotate then
+                        --V2C: matching legacy behaviour, where this ignores busy state
+                        --Print(VERBOSITY.DEBUG, "SET ROT", facedir)
+                        self:SetMoveDir(facedir)
+                    end
+                elseif canrotate and not (self.inst.sg and self.inst.sg:HasStateTag("busy")) then
+                    --V2C: while I'd like to remove the busy check,
+                    --     we'll keep it to match legacy behaviour:
+                    --     it used to call self.inst:FaceMovePoint(...)
+                    --Print(VERBOSITY.DEBUG, "FACE PT", Point(facepos_x, facepos_y, facepos_z))
+                    self:SetMoveDir(facedir)
                 end
             end
 
@@ -1656,9 +1694,9 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
         end
     end
 
-	if arrive_check_only then
-		return
-	end
+    if arrive_check_only then
+        return
+    end
 
     local should_locomote = false
     if (self.ismastersim and not self.inst:IsInLimbo()) or not (self.ismastersim or self.inst:HasTag("INLIMBO")) then
@@ -1675,7 +1713,7 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
     end
 
     if should_locomote then
-		self.inst:PushEvent("locomote", self.pusheventwithdirection and facedir and { dir = facedir } or nil)
+        self.inst:PushEvent("locomote", self.pusheventwithdirection and facedir and { dir = facedir } or nil)
     elseif not self.wantstomoveforward and not self:WaitingForPathSearch() then
         self:ResetPath()
         self:StopUpdatingInternal()
@@ -1690,34 +1728,34 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
             local rotation = self.inst.Transform:GetRotation() * DEGREES
             local forward_x, forward_z = math.cos(rotation), -math.sin(rotation)
 
-			local hop_distance = self:GetHopDistance(self:GetSpeedMultiplier())
+            local hop_distance = self:GetHopDistance(self:GetSpeedMultiplier())
 
             local my_platform = self.inst:GetCurrentPlatform()
-			if TUNING.tropical.disembarkation then my_platform = self.inst:GetCurrentPlatform() or GetClosestInstWithTag("barcoapto", self.inst, 0.5) end
+            if TUNING.tropical.disembarkation then my_platform = self.inst:GetCurrentPlatform() or
+                GetClosestInstWithTag("barcoapto", self.inst, 0.5) end
+
             local other_platform = nil
             local destpos_x, destpos_y, destpos_z
             if self.dest and self.dest:IsValid() then
-				if my_platform == self.dest:GetPlatform() then
-				    destpos_x, destpos_y, destpos_z = self.dest:GetPoint()
-					other_platform = my_platform
-				end
-			end
-			if other_platform == nil then
+                if my_platform == self.dest:GetPlatform() then
+                    destpos_x, destpos_y, destpos_z = self.dest:GetPoint()
+                    other_platform = my_platform
+                end
+            end
+            if other_platform == nil then
                 destpos_x, destpos_z = forward_x * hop_distance + mypos_x, forward_z * hop_distance + mypos_z
-				other_platform = TheWorld.Map:GetPlatformAtPoint(destpos_x, destpos_z)
-			end
+                other_platform = TheWorld.Map:GetPlatformAtPoint(destpos_x, destpos_z)
+            end
 
             local can_hop = false
             local hop_x, hop_z, target_platform, blocked
             local too_early_top_hop = self.time_before_next_hop_is_allowed > 0
-            if not too_early_top_hop then       -- if my_platform ~= other_platform and not too_early_top_hop then  -- estava impedindo de pular no barco de perto
-                can_hop, hop_x, hop_z, target_platform, blocked = self:ScanForPlatform(my_platform, destpos_x, destpos_z, hop_distance)
+            if my_platform ~= other_platform and not too_early_top_hop then
+                can_hop, hop_x, hop_z, target_platform, blocked = self:ScanForPlatform(my_platform, destpos_x, destpos_z,
+                    hop_distance)
             end
             if not blocked then
-				local puloliberado = true
---				if self.inst:HasTag("aquatic") then  puloliberado = false end
---				if TUNING.tropical.disembarkation then  puloliberado = true end
-                if can_hop and puloliberado then --and not self.inst:HasTag("aquatic") then
+                if can_hop then
                     self.last_platform_visited = my_platform
 
                     self:StartHopping(hop_x, hop_z, target_platform)
@@ -1733,8 +1771,8 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
                         -- If my_platform ~= nil, we already ran the "is blocked" test as part of ScanForPlatform.
                         -- Otherwise, run one now.
                         if (my_platform ~= nil and not blocked) or
-                                not self:TestForBlocked(mypos_x, mypos_z, forward_x, forward_z, self.inst:GetPhysicsRadius(0), dist * 1.41421) then -- ~sqrt(2); _x,_z are a dist right triangle so sqrt(dist^2 + dist^2)
-                            self.inst:PushEvent("onhop", {x = _x, z = _z})
+                            not self:TestForBlocked(mypos_x, mypos_z, forward_x, forward_z, self.inst:GetPhysicsRadius(0), dist * 1.41421) then     -- ~sqrt(2); _x,_z are a dist right triangle so sqrt(dist^2 + dist^2)
+                            self.inst:PushEvent("onhop", { x = _x, z = _z })
                         end
                     end
                 end
@@ -1763,7 +1801,7 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
 end
 
 function LocoMotor:IsAquatic()
-	return self.pathcaps ~= nil and self.pathcaps.allowocean == true and self.pathcaps.ignoreLand == true
+    return self.pathcaps ~= nil and self.pathcaps.allowocean == true and self.pathcaps.ignoreLand == true
 end
 
 function LocoMotor:CanPathfindOnWater()
@@ -1783,7 +1821,7 @@ function LocoMotor:FindPath()
     --Print(VERBOSITY.DEBUG, "LocoMotor:FindPath", self.inst.prefab)
 
     --if self.inst.prefab ~= "wilson" then return end
-    
+
     if not self.dest:IsValid() then
         return
     end
@@ -1813,7 +1851,7 @@ function LocoMotor:FindPath()
             end
         end
 
-        self.lastdesttile = {x = desttile_x, y = desttile_y}
+        self.lastdesttile = { x = desttile_x, y = desttile_y }
 
         --Print(VERBOSITY.DEBUG, string.format("CHECK LOS for [%s] %s -> %s", self.inst.prefab, tostring(p0), tostring(p1)))
 
@@ -1827,7 +1865,6 @@ function LocoMotor:FindPath()
             -- only start a new search if we're not already waiting for the previous one to complete OR
             -- we already have a completed path we can keep following until new search returns
             if (self.path and self.path.steps) or not self:WaitingForPathSearch() then
-
                 self:KillPathSearch()
 
                 local handle = ground.Pathfinder:SubmitSearch(p0.x, p0.y, p0.z, p1.x, p1.y, p1.z, self.pathcaps)
@@ -1837,7 +1874,6 @@ function LocoMotor:FindPath()
                     --if we already had a path, just keep following it until we get our new one
                     self.path = self.path or {}
                     self.path.handle = handle
-
                 else
                     Print(VERBOSITY.DEBUG, "SUBMIT PATH FAILED")
                 end
