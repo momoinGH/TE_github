@@ -1,4 +1,4 @@
-local GHOSTVISION_COLOURCUBES = --faz o oculos de mogle funcionar certo nas ruinas
+local GHOSTVISION_COLOURCUBES =
 {
     day = "images/colour_cubes/ghost_cc.tex",
     dusk = "images/colour_cubes/ghost_cc.tex",
@@ -73,6 +73,18 @@ local function OnEquipChanged(inst)
             inst:PushEvent("scrapmonolevision", { enabled = self.scrapmonolevision })
         end
     end
+    if self.inspectaclesvision == not inst.replica.inventory:EquipHasTag("inspectaclesvision") then
+        self.inspectaclesvision = not self.inspectaclesvision
+        if not self.forceinspectaclesvision then
+            inst:PushEvent("inspectaclesvision", { enabled = self.inspectaclesvision })
+        end
+    end
+    if self.roseglassesvision == not inst.replica.inventory:EquipHasTag("roseglassesvision") then
+        self.roseglassesvision = not self.roseglassesvision
+        if not self.forceroseglassesvision then
+            inst:PushEvent("roseglassesvision", { enabled = self.roseglassesvision })
+        end
+    end
 end
 
 local function OnInit(inst, self)
@@ -92,7 +104,8 @@ local function OnInit(inst, self)
 end
 
 local function OnAreaChanged(inst, data)
-    inst.components.playervision:SetNightmareVision(data ~= nil and data.tags ~= nil and table.contains(data.tags, "Nightmare"))
+    inst.components.playervision:SetNightmareVision(data ~= nil and data.tags ~= nil and
+    table.contains(data.tags, "Nightmare"))
 end
 
 local PlayerVision = Class(function(self, inst)
@@ -107,10 +120,17 @@ local PlayerVision = Class(function(self, inst)
     self.nutrientsvision = false
     self.forcenutrientsvision = false
     self.scrapmonolevision = false
-    self.forcescrapmonolevision = false	
+    self.forcescrapmonolevision = false
+    self.inspectaclesvision = false
+    self.forceinspectaclesvision = false
+    self.roseglassesvision = false
+    self.forceroseglassesvision = false
     self.overridecctable = nil
     self.currentcctable = nil
     self.currentccphasefn = nil
+
+    self.blendcctable = nil
+    self.forcednightvisionstack = {}
 
     inst:DoTaskInTime(0, OnInit, self)
     inst:ListenForEvent("changearea", OnAreaChanged)
@@ -140,6 +160,14 @@ function PlayerVision:HasScrapMonoleVision()
     return self.scrapmonolevision or self.forcescrapmonolevision
 end
 
+function PlayerVision:HasInspectaclesVision()
+    return self.inspectaclesvision or self.forceinspectaclesvision
+end
+
+function PlayerVision:HasRoseGlassesVision()
+    return self.roseglassesvision or self.forceroseglassesvision
+end
+
 function PlayerVision:GetCCPhaseFn()
     return self.currentccphasefn
 end
@@ -149,46 +177,46 @@ function PlayerVision:GetCCTable()
 end
 
 function PlayerVision:UpdateCCTable()
-local alvodaluz = GetClosestInstWithTag("blows_air", self.inst, 30)
-if alvodaluz then
-    local cctable =
-        (self.ghostvision and GHOSTVISION_COLOURCUBES)
-        or self.overridecctable
-        or ((self.nightvision or self.forcenightvision) and NIGHTVISION_COLOURCUBES2)
-        or (self.nightmarevision and NIGHTMARE_COLORCUBES)
-        or nil
+    local alvodaluz = GetClosestInstWithTag("blows_air", self.inst, 30)
+    if alvodaluz then
+        local cctable =
+            (self.ghostvision and GHOSTVISION_COLOURCUBES)
+            or self.overridecctable
+            or ((self.nightvision or self.forcenightvision) and NIGHTVISION_COLOURCUBES2)
+            or (self.nightmarevision and NIGHTMARE_COLORCUBES)
+            or nil
 
-    local ccphasefn = 
-        (cctable == NIGHTVISION_COLOURCUBES2 and NIGHTVISION_PHASEFN)
-        or (cctable == NIGHTMARE_COLORCUBES and NIGHTMARE_PHASEFN)
-        or nil
+        local ccphasefn =
+            (cctable == NIGHTVISION_COLOURCUBES2 and NIGHTVISION_PHASEFN)
+            or (cctable == NIGHTMARE_COLORCUBES and NIGHTMARE_PHASEFN)
+            or nil
 
-    if cctable ~= self.currentcctable then
-        self.currentcctable = cctable
-        self.currentccphasefn = ccphasefn
-        self.inst:PushEvent("ccoverrides", cctable)
-        self.inst:PushEvent("ccphasefn", ccphasefn)
+        if cctable ~= self.currentcctable then
+            self.currentcctable = cctable
+            self.currentccphasefn = ccphasefn
+            self.inst:PushEvent("ccoverrides", cctable)
+            self.inst:PushEvent("ccphasefn", ccphasefn)
+        end
+    else
+        local cctable =
+            (self.ghostvision and GHOSTVISION_COLOURCUBES)
+            or self.overridecctable
+            or ((self.nightvision or self.forcenightvision) and NIGHTVISION_COLOURCUBES)
+            or (self.nightmarevision and NIGHTMARE_COLORCUBES)
+            or nil
+
+        local ccphasefn =
+            (cctable == NIGHTVISION_COLOURCUBES and NIGHTVISION_PHASEFN)
+            or (cctable == NIGHTMARE_COLORCUBES and NIGHTMARE_PHASEFN)
+            or nil
+
+        if cctable ~= self.currentcctable then
+            self.currentcctable = cctable
+            self.currentccphasefn = ccphasefn
+            self.inst:PushEvent("ccoverrides", cctable)
+            self.inst:PushEvent("ccphasefn", ccphasefn)
+        end
     end
-else
-    local cctable =
-        (self.ghostvision and GHOSTVISION_COLOURCUBES)
-        or self.overridecctable
-        or ((self.nightvision or self.forcenightvision) and NIGHTVISION_COLOURCUBES)
-        or (self.nightmarevision and NIGHTMARE_COLORCUBES)
-        or nil
-
-    local ccphasefn = 
-        (cctable == NIGHTVISION_COLOURCUBES and NIGHTVISION_PHASEFN)
-        or (cctable == NIGHTMARE_COLORCUBES and NIGHTMARE_PHASEFN)
-        or nil
-
-    if cctable ~= self.currentcctable then
-        self.currentcctable = cctable
-        self.currentccphasefn = ccphasefn
-        self.inst:PushEvent("ccoverrides", cctable)
-        self.inst:PushEvent("ccphasefn", ccphasefn)
-    end
-end	
 end
 
 function PlayerVision:SetGhostVision(enabled)
@@ -217,6 +245,48 @@ function PlayerVision:ForceNightVision(force)
     end
 end
 
+function PlayerVision:PushForcedNightVision(source, priority, customcctable, blend)
+    priority = priority or 0
+
+    local current = self.forcednightvisionstack[1]
+
+    table.insert(self.forcednightvisionstack, { source = source, priority = priority, cctable = customcctable, blend =
+    blend })
+    table.sort(self.forcednightvisionstack, function(l, r) return l.priority > r.priority end)
+
+    local new = self.forcednightvisionstack[1]
+
+    if current == nil or current ~= new then
+        self:ForceNightVision(true)
+        self:SetCustomCCTable(new.cctable, new.blend)
+    end
+end
+
+function PlayerVision:PopForcedNightVision(source)
+    local current = self.forcednightvisionstack[1]
+
+    for index, data in ipairs(self.forcednightvisionstack) do
+        if source == data.source then
+            table.remove(self.forcednightvisionstack, index)
+
+            if #self.forcednightvisionstack == 0 then
+                self:ForceNightVision(false)
+                self:SetCustomCCTable(nil)
+
+                return
+            end
+
+            local new = self.forcednightvisionstack[1]
+
+            if current ~= new then
+                self:SetCustomCCTable(new.cctable, new.blend)
+            end
+
+            break
+        end
+    end
+end
+
 function PlayerVision:ForceGoggleVision(force)
     if not self.forcegogglevision ~= not force then
         self.forcegogglevision = force == true
@@ -229,7 +299,7 @@ end
 function PlayerVision:ForceNutrientVision(force)
     if not self.forcenutrientsvision ~= not force then
         self.forcenutrientsvision = force == true
-        if not self.nutrientsvision then
+        if not self.nutrientsvision and self.inst == ThePlayer then
             TheWorld:PushEvent("nutrientsvision", { enabled = self.forcenutrientsvision })
         end
     end
@@ -244,9 +314,28 @@ function PlayerVision:ForceScrapMonoleVision(force)
     end
 end
 
-function PlayerVision:SetCustomCCTable(cctable)
+function PlayerVision:ForceInspectaclesVision(force)
+    if not self.forceinspectaclesvision ~= force then
+        self.forceinspectaclesvision = force == true
+        if not self.inspectaclesvision then
+            self.inst:PushEvent("inspectaclesvision", { enabled = self.forceinspectaclesvision })
+        end
+    end
+end
+
+function PlayerVision:ForceRoseGlassesVision(force)
+    if not self.forceroseglassesvision ~= force then
+        self.forceroseglassesvision = force == true
+        if not self.roseglassesvision then
+            self.inst:PushEvent("roseglassesvision", { enabled = self.forceroseglassesvision })
+        end
+    end
+end
+
+function PlayerVision:SetCustomCCTable(cctable, blend)
     if self.overridecctable ~= cctable then
         self.overridecctable = cctable
+        self.blendcctable = blend
         self:UpdateCCTable()
     end
 end

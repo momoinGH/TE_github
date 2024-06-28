@@ -11,9 +11,19 @@ local InternalTimes = {}
 
 local BASE_RADIUS = 8
 
+local moon_tree_mult =
+{
+    new = 0,
+    quarter = 0.5,
+    half = 1.0,
+    threequarter = 1.5,
+    full = 2.0,
+}
+
 local TimeMultipliers = {
     ["evergreen"] = function()
-        return TUNING.EVERGREEN_REGROWTH_TIME_MULT * ((TheWorld.state.issummer and 2) or (TheWorld.state.iswinter and 0) or 1)
+        return TUNING.EVERGREEN_REGROWTH_TIME_MULT *
+        ((TheWorld.state.issummer and 2) or (TheWorld.state.iswinter and 0) or 1)
     end,
     ["evergreen_sparse"] = function()
         return TUNING.EVERGREEN_REGROWTH_TIME_MULT
@@ -34,23 +44,23 @@ local TimeMultipliers = {
         return TUNING.MUSHTREE_REGROWTH_TIME_MULT * ((not TheWorld.state.isspring and 0) or 1)
     end,
     ["mushtree_yelow"] = function()
-        return TUNING.MUSHTREE_REGROWTH_TIME_MULT * ((not TheWorld.state.autumn and 0) or 1)	
-    end,	
+        return TUNING.MUSHTREE_REGROWTH_TIME_MULT * ((not TheWorld.state.autumn and 0) or 1)
+    end,
     ["moon_tree"] = function()
-        return TUNING.MOONTREE_REGROWTH_TIME_MULT * ((not TheWorld.state.isspring and 0) or 1)
+        return TUNING.MOONTREE_REGROWTH_TIME_MULT * (moon_tree_mult[TheWorld.state.moonphase] or 0)
     end,
     ["mushtree_moon"] = function()
         return TUNING.MOONMUSHTREE_REGROWTH_TIME_MULT * ((not TheWorld.state.iswinter and 0) or 1)
     end,
     ["palmconetree"] = function()
         return TUNING.PALMCONETREE_REGROWTH_TIME_MULT * ((TheWorld.state.iswinter and 0) or 1)
-    end,	
+    end,
 }
 
 local function DoUpdate()
     local dt = GetTime() - LastTime
     LastTime = GetTime()
-    for k,v in pairs(InternalTimes) do
+    for k, v in pairs(InternalTimes) do
         local timemult = TimeMultipliers[k]()
         InternalTimes[k] = InternalTimes[k] + dt * timemult * TUNING.REGROWTH_TIME_MULTIPLIER
     end
@@ -135,7 +145,8 @@ end)
 PlantRegrowth.TimeMultipliers = TimeMultipliers
 
 function PlantRegrowth:ResetGrowthTime()
-    self.nextregrowth = InternalTimes[self.inst.prefab] + GetRandomWithVariance(self.regrowthrate, self.regrowthrate * 0.2)
+    self.nextregrowth = InternalTimes[self.inst.prefab] +
+    GetRandomWithVariance(self.regrowthrate, self.regrowthrate * 0.2)
 end
 
 function PlantRegrowth:SetRegrowthRate(rate)
@@ -168,24 +179,23 @@ local function GetSpawnPoint(from_pt, radius, prefab)
     if map == nil then
         return
     end
-    local theta = math.random() * 2 * PI
-    local radius = math.random(radius/2, radius)
+    local theta = math.random() * TWOPI
+    radius = math.random(radius / 2, radius)
     local steps = 10
-    local validpos = nil
-    for i = 1, steps do
-        local offset = Vector3(radius * math.cos( theta ), 0, -radius * math.sin( theta ))
+    local step_decrement = (TWOPI / steps)
+    for _ = 1, steps do
+        local offset = Vector3(radius * math.cos(theta), 0, -radius * math.sin(theta))
         local try_pos = from_pt + offset
         if map:CanPlantAtPoint(try_pos:Get())
             and map:CanPlacePrefabFilteredAtPoint(try_pos.x, try_pos.y, try_pos.z, prefab)
             and not (RoadManager ~= nil and RoadManager:IsOnRoad(try_pos.x, 0, try_pos.z))
             and #TheSim:FindEntities(try_pos.x, try_pos.y, try_pos.z, 3) <= 0
-			and #TheSim:FindEntities(try_pos.x, try_pos.y, try_pos.z, BASE_RADIUS, nil, nil, SPAWN_BLOCKER_TAGS) <= 0 then
-            validpos = try_pos
-            break
+            and #TheSim:FindEntities(try_pos.x, try_pos.y, try_pos.z, BASE_RADIUS, nil, nil, SPAWN_BLOCKER_TAGS) <= 0 then
+            return try_pos
         end
-        theta = theta - (2 * PI / steps)
+        theta = theta - step_decrement
     end
-    return validpos
+    return nil
 end
 
 function PlantRegrowth:TrySpawnNearby()
@@ -209,11 +219,12 @@ function PlantRegrowth:TrySpawnNearby()
         end
     end
 
-    local spawnpoint = GetSpawnPoint(Point(x,y,z), self.fiveradius, self.product or self.inst.prefab)
+    local spawnpoint = GetSpawnPoint(Point(x, y, z), self.fiveradius, self.product or self.inst.prefab)
     if spawnpoint ~= nil then
         local targetradius = GetFiveRadius(spawnpoint.x, spawnpoint.z, self.inst.prefab)
         if targetradius then
-            local ents = TheSim:FindEntities(spawnpoint.x, spawnpoint.y, spawnpoint.z, targetradius, { self.searchtag or self.inst.prefab })
+            local ents = TheSim:FindEntities(spawnpoint.x, spawnpoint.y, spawnpoint.z, targetradius,
+                { self.searchtag or self.inst.prefab })
             if #ents < 5 then
                 local offspring = SpawnPrefab(self.product or self.inst.prefab)
                 offspring.Transform:SetPosition(spawnpoint:Get())
@@ -227,7 +238,7 @@ end
 function PlantRegrowth:OnSave()
     local data =
     {
-        regrowthtime =  self.nextregrowth - InternalTimes[self.inst.prefab]
+        regrowthtime = self.nextregrowth - InternalTimes[self.inst.prefab]
     }
     return next(data) ~= nil and data or nil
 end
@@ -244,11 +255,11 @@ function PlantRegrowth:GetDebugString()
         self.fiveradius = GetFiveRadius(x, z, self.inst.prefab)
     end
     if self.fiveradius then
-        return string.format("fiveradius: %2.2f regrowth time: %2.2f", self.fiveradius, self.nextregrowth - InternalTimes[self.inst.prefab])
+        return string.format("fiveradius: %2.2f regrowth time: %2.2f", self.fiveradius,
+            self.nextregrowth - InternalTimes[self.inst.prefab])
     else
         return string.format("NO GROWTH HERE")
     end
-
 end
 
 return PlantRegrowth
