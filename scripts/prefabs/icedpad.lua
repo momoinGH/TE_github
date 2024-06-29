@@ -224,7 +224,7 @@ local function StartBoatPhysics(inst)
     inst.Physics:SetDontRemoveOnSleep(true)
 end
 
-local function ReturnChildren(inst)
+--[[local function ReturnChildren(inst)
 inst:DoTaskInTime(math.random()*10, function(inst) 
   
     for k, child in pairs(inst.components.childspawner.childrenoutside) do
@@ -245,7 +245,7 @@ if math.random() <0.15 then
 inst:DoTaskInTime(math.random()*30, function(inst)   
 inst.components.childspawner:ReleaseAllChildren()    end)
 end
-end
+end]]
 
 local function SpawnFragment(lp, prefix, offset_x, offset_y, offset_z, ignite)
     local fragment = SpawnPrefab(prefix)
@@ -406,8 +406,8 @@ local function fn()
     inst.OnPhysicsWake = OnPhysicsWake
     inst.OnPhysicsSleep = OnPhysicsSleep	
 	
-	inst:WatchWorldState("startday", DoReleaseAllChildren)	
-	inst:WatchWorldState("stopday", ReturnChildren)	
+	--inst:WatchWorldState("startday", DoReleaseAllChildren)	
+	--inst:WatchWorldState("stopday", ReturnChildren)	
 	
 	inst:DoTaskInTime(0, groundtest)
 
