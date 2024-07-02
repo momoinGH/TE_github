@@ -42,7 +42,7 @@ local function fn(Sim)
     -- This looping sound seems to show up at 0,0,0.. so waiting a frame to start it when the tarpool will be in the world at it's location.
     inst:DoTaskInTime(0, function() inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/tar_LP","burble") end)
 
-    inst.AnimState:SetLayer(LAYER_BELOW_OCEAN)
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder( 3 )
 
     inst:AddTag("aquatic")
