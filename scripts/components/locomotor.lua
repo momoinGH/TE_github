@@ -324,17 +324,17 @@ function ServerIsFasterOnGroundTile(self, ground_tile)
 end
 
 function ClientIsFasterOnGroundTile(self, ground_tile)
-    if self.inst.player_classified == nil or not self.inst.player_classified.isghostmode:value() then
-        local rider = self.inst.replica.rider
-        local mount = rider ~= nil and rider:IsRiding() and rider:GetMount() or nil
-        if mount ~= nil then
-            return mount:HasTag("turfrunner_" .. tostring(ground_tile))
+	if self.inst.player_classified == nil or not self.inst.player_classified.isghostmode:value() then
+		local rider = self.inst.replica.rider
+		local mount = rider ~= nil and rider:IsRiding() and rider:GetMount() or nil
+		if mount ~= nil then
+			return mount:HasTag("turfrunner_"..tostring(ground_tile))
         else
-            return self.inst:HasTag("turfrunner_" .. tostring(ground_tile))
+		    return self.inst:HasTag("turfrunner_"..tostring(ground_tile))
         end
-    end
+	end
 
-    return false
+	return false
 end
 
 local LocoMotor = Class(function(self, inst)

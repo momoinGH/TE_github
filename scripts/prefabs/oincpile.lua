@@ -132,7 +132,6 @@ local function fn(Sim)
     ---------------------
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"
-    inst.components.pickable.getregentimefn = 0
     inst.components.pickable.onpickedfn = onpickedfn
 --    inst.components.pickable.makebarrenfn = makebarrenfn
 --    inst.components.pickable.makefullfn = makefullfn
@@ -183,7 +182,6 @@ local function fn49(Sim)
     ---------------------
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"
-    inst.components.pickable.getregentimefn = 0
     inst.components.pickable.onpickedfn = onpickedfn
 --    inst.components.pickable.makebarrenfn = makebarrenfn
 --    inst.components.pickable.makefullfn = makefullfn
@@ -234,7 +232,6 @@ local function fn46(Sim)
     ---------------------
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"
-    inst.components.pickable.getregentimefn = 0
     inst.components.pickable.onpickedfn = onpickedfn
 --    inst.components.pickable.makebarrenfn = makebarrenfn
 --    inst.components.pickable.makefullfn = makefullfn
@@ -285,7 +282,6 @@ local function fn42(Sim)
     ---------------------
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"
-    inst.components.pickable.getregentimefn = 0
     inst.components.pickable.onpickedfn = onpickedfn
 --    inst.components.pickable.makebarrenfn = makebarrenfn
 --    inst.components.pickable.makefullfn = makefullfn
@@ -336,7 +332,6 @@ local function fnfree(Sim)
     ---------------------
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"
-    inst.components.pickable.getregentimefn = 0
     inst.components.pickable.onpickedfn = onpickedfnfree
 --    inst.components.pickable.makebarrenfn = makebarrenfn
 --    inst.components.pickable.makefullfn = makefullfn

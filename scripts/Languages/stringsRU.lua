@@ -1,7 +1,17 @@
 local STRINGS = GLOBAL.STRINGS
 -- Translation by Baku 
 --[Translation was taken from Russian Language Pack and ru.dontstarve.wikia.com mostly]
-
+--SW
+GLOBAL.STRINGS.UI.CRAFTING_FILTERS.NAUTICAL = "Nautical"
+GLOBAL.STRINGS.UI.CRAFTING_FILTERS.OBSIDIAN = "Volcano"
+--HaM
+GLOBAL.STRINGS.UI.CRAFTING_FILTERS.LEGACY = "Legacy"
+GLOBAL.STRINGS.UI.CRAFTING_FILTERS.INTERIOR = "Interior"
+GLOBAL.STRINGS.UI.CRAFTING_FILTERS.CITY = "City"
+--Forge
+-- STRINGS.UI.CRAFTING_FILTERS.FORGE = "Forge "
+--Gorge
+GLOBAL.STRINGS.UI.CRAFTING_FILTERS.GORGE = "Gorge"
 -----------------------------Biome Jungle -----------------------------
 -----------------------------Biome Tidal Mash---------------------------
 

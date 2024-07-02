@@ -690,7 +690,7 @@ local function normal()
     inst.AnimState:SetBuild(inst.build)
     inst.components.werebeast:SetOnNormalFn(SetNormalPig)
 	
-    inst.AnimState:OverrideSymbol("pig_arm", inst.build, pigarm[math.random(1, 3)])
+    inst.AnimState:OverrideSymbol("pig_arm", inst.build, pigarm[1])
     inst.AnimState:OverrideSymbol("pig_ear", inst.build, pigear[math.random(1, 3)])
     inst.AnimState:OverrideSymbol("pig_head", inst.build, pighead[math.random(1, 10)])
     inst.AnimState:OverrideSymbol("pig_torso", inst.build, pigtorso[math.random(1, 10)])
