@@ -8,6 +8,19 @@ local prefabs =
      "chimineafire",
      "collapse_small",
 }    
+
+local loot =
+{
+    "sand",
+    "sand",
+	"tar",
+	"tar",
+	"tar",
+    "limestone",
+	"limestone",
+	"limestone",
+}
+
 local total_day_time = 480
 local CHIMINEA_FUEL_MAX = total_day_time * 2
 local CHIMINEA_FUEL_START = total_day_time
@@ -77,6 +90,8 @@ local function fn()
     
     -------------------------
     inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetLoot(loot)
+	
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(4)

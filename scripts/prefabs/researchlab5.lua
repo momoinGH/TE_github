@@ -1,5 +1,13 @@
 require "prefabutil"
 
+local loot =
+{
+    "limestone",
+    "limestone",
+	"sand",
+    "transistor",
+}
+
 local function Default_PlayAnimation(inst, anim)
 		inst.AnimState:PushAnimation("idle", true)
 end
@@ -199,6 +207,8 @@ local function onturnon(inst)
         inst:ListenForEvent("onbuilt", onbuilt)
 
         inst:AddComponent("lootdropper")
+		inst.components.lootdropper:SetLoot(loot)
+		
         inst:AddComponent("workable")
         inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
         inst.components.workable:SetWorkLeft(4)

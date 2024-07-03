@@ -233,7 +233,10 @@ end
 			inst.AnimState:SetSymbolLightOverride("wall_segment_red", 1)
 		end		
 
-        local item_floats = (data.name == "wood") or (data.name == "hay")
+        local item_floats = (data.name == "wood") 
+		                 or (data.name == "hay")
+						 or (data.name == "limestone")
+						 or (data.name == "enforcedlimestone")
         if item_floats then
             MakeInventoryFloatable(inst)
         end
@@ -329,8 +332,7 @@ end
         inst.Transform:SetEightFaced()
 
         MakeObstaclePhysics(inst, .5)
-		if data.name == "enforcedlimestone" then MakeWaterObstaclePhysics(inst, 0.5, 0.5, 0.5) inst:AddTag("ignorewalkableplatforms") end
-		
+		if data.name == "enforcedlimestone" then MakeWaterObstaclePhysics(inst, 0.5, 0.5, 0.5) inst:AddTag("ignorewalkableplatforms") end	
         inst.Physics:SetDontRemoveOnSleep(true)
 
         --inst.Transform:SetScale(1.3,1.3,1.3)
@@ -450,35 +452,47 @@ local wallprefabs = {}
 --NOTE: Stacksize is now set in the actual recipe for the item.
 local walldata =
 {
-    { name = MATERIALS.STONE,          material = "stone", tags = { "stone" },             loot = "rocks",            	maxloots = 2, maxhealth = TUNING.STONEWALL_HEALTH,                      buildsound = "dontstarve/common/place_structure_stone" },
-    { name = MATERIALS.STONE.."_2",    material = "stone", tags = { "stone" },             loot = "rocks",            	maxloots = 2, maxhealth = TUNING.STONEWALL_HEALTH,                      buildsound = "dontstarve/common/place_structure_stone" },
-    { name = MATERIALS.WOOD,     material = "wood",  tags = { "wood" },              		loot = "log",              	maxloots = 2, maxhealth = TUNING.WOODWALL_HEALTH,     flammable = true, buildsound = "dontstarve/common/place_structure_wood"  },
-    { name = MATERIALS.HAY,      material = "straw", tags = { "grass" },             		loot = "cutgrass",         	maxloots = 2, maxhealth = TUNING.HAYWALL_HEALTH,      flammable = true, buildsound = "dontstarve/common/place_structure_straw" },
-    { name = "ruins",            material = "stone", tags = { "stone", "ruins" },    		loot = "thulecite_pieces", 	maxloots = 2, maxhealth = TUNING.RUINSWALL_HEALTH,                      buildsound = "dontstarve/common/place_structure_stone" },
-    { name = "ruins_2",          material = "stone", tags = { "stone", "ruins" },    		loot = "thulecite_pieces", 	maxloots = 2, maxhealth = TUNING.RUINSWALL_HEALTH,                      buildsound = "dontstarve/common/place_structure_stone" },    
-	{
-		name = MATERIALS.MOONROCK,
-		material = "stone",
-		tags = { "stone", "moonrock" },
-		loot = "moonrocknugget",
-		maxloots = 2,
-		maxwork = TUNING.MOONROCKWALL_WORK,
-		maxhealth = TUNING.MOONROCKWALL_HEALTH,
-		playerdamagemod = TUNING.MOONROCKWALL_PLAYERDAMAGEMOD,
-		buildsound = "dontstarve/common/place_structure_stone",
-	},
-	{
-		name = MATERIALS.DREADSTONE,
-		material = "stone",
-		tags = { "stone", "dreadstone" },
-		loot = "dreadstone",
-		maxloots = 2,
-		maxwork = TUNING.DREADSTONEWALL_WORK,
-		maxhealth = TUNING.DREADSTONEWALL_HEALTH,
-		playerdamagemod = TUNING.DREADSTONEWALL_PLAYERDAMAGEMOD,
-		repairhealth = TUNING.REPAIR_DREADSTONE_HEALTH * 4,
-		buildsound = "dontstarve/common/place_structure_stone",
-	},
+    -- { name = MATERIALS.STONE,       material = "stone", tags = { "stone" },          loot = "rocks",            maxloots = 2, maxhealth = TUNING.STONEWALL_HEALTH, buildsound = "dontstarve/common/place_structure_stone" },
+    -- { name = MATERIALS.STONE .. "_2", material = "stone", tags = { "stone" },        loot = "rocks",            maxloots = 2, maxhealth = TUNING.STONEWALL_HEALTH, buildsound = "dontstarve/common/place_structure_stone" },
+    -- { name = MATERIALS.WOOD,        material = "wood",  tags = { "wood" },           loot = "log",              maxloots = 2, maxhealth = TUNING.WOODWALL_HEALTH,  flammable = true,                                      buildsound = "dontstarve/common/place_structure_wood" },
+    -- { name = MATERIALS.HAY,         material = "straw", tags = { "grass" },          loot = "cutgrass",         maxloots = 2, maxhealth = TUNING.HAYWALL_HEALTH,   flammable = true,                                      buildsound = "dontstarve/common/place_structure_straw" },
+     { name = "ruins",               material = "stone", tags = { "stone", "ruins" }, loot = "thulecite_pieces", maxloots = 2, maxhealth = TUNING.RUINSWALL_HEALTH, buildsound = "dontstarve/common/place_structure_stone" },
+     { name = "ruins_2",             material = "stone", tags = { "stone", "ruins" }, loot = "thulecite_pieces", maxloots = 2, maxhealth = TUNING.RUINSWALL_HEALTH, buildsound = "dontstarve/common/place_structure_stone" },
+    -- {
+    --     name = MATERIALS.MOONROCK,
+    --     material = "stone",
+    --     tags = { "stone", "moonrock" },
+    --     loot = "moonrocknugget",
+    --     maxloots = 2,
+    --     maxwork = TUNING.MOONROCKWALL_WORK,
+    --     maxhealth = TUNING.MOONROCKWALL_HEALTH,
+    --     playerdamagemod = TUNING.MOONROCKWALL_PLAYERDAMAGEMOD,
+    --     buildsound = "dontstarve/common/place_structure_stone",
+    -- },
+    -- {
+    --     name = MATERIALS.DREADSTONE,
+    --     material = "stone",
+    --     tags = { "stone", "dreadstone" },
+    --     loot = "dreadstone",
+    --     maxloots = 2,
+    --     maxwork = TUNING.DREADSTONEWALL_WORK,
+    --     maxhealth = TUNING.DREADSTONEWALL_HEALTH,
+    --     playerdamagemod = TUNING.DREADSTONEWALL_PLAYERDAMAGEMOD,
+    --     repairhealth = TUNING.REPAIR_DREADSTONE_HEALTH * 4,
+    --     buildsound = "dontstarve/common/place_structure_stone",
+    -- },
+    -- {
+    --     name = "scrap",
+    --     material = "stone",
+    --     tags = { "stone", "scrap" },
+    --     loot = "wagpunk_bits",
+    --     maxloots = 1,
+    --     maxwork = TUNING.SCRAPWALL_WORK,
+    --     maxhealth = TUNING.SCRAPWALL_HEALTH,
+    --     playerdamagemod = TUNING.SCRAPWALL_PLAYERDAMAGEMOD,
+    --     repairhealth = TUNING.REPAIR_SCRAP_HEALTH * 4,
+    --     buildsound = "dontstarve/common/place_structure_stone",
+    -- },
     { name = "enforcedlimestone", material = "stone", tags = { "stone" }, 	 		 		loot = "coral",   			maxloots = 1, maxhealth = 750,                   						buildsound = "dontstarve/common/place_structure_stone" },
     { name = "limestone", 		  material = "stone", tags = { "stone" }, 	 		 		loot = "coral",   			maxloots = 2, maxhealth = 500,                   						buildsound = "dontstarve/common/place_structure_stone" },
 	{ name = "pig_ruins", 		  material = "stone", tags = { "stone" }, 	 		 		loot = "rocks",   			maxloots = 2, maxhealth = 500,                   						buildsound = "dontstarve/common/place_structure_stone" },

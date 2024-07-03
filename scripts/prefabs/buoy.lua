@@ -10,13 +10,23 @@ local prefabs =
 	"collapse_small",
 }
 
+local loot =
+{
+    "bamboo",
+    "bamboo",
+	"messagebottleempty1",
+    "bioluminescence",
+    "bioluminescence",	
+}
+
 local HIT_SOUND = "terraria1/skins/hammush" -- TODO better sound for this maybe?
 
 local function onhammered(inst, worker)
 	if inst:HasTag("fire") and inst.components.burnable then
 		inst.components.burnable:Extinguish()
 	end
-	inst.components.lootdropper:SpawnLootPrefab("bamboo")	
+	--inst.components.lootdropper:SpawnLootPrefab("bamboo")	
+	inst.components.lootdropper:DropLoot()
 	SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	inst.SoundEmitter:PlaySound("dontstarve/common/destroy_metal")
 	inst:Remove()
@@ -143,7 +153,9 @@ local function fn(Sim)
     health.nofadeout = true	
     
     inst:AddComponent("inspectable")
+	
     inst:AddComponent("lootdropper") 
+	inst.components.lootdropper:SetLoot(loot)
     
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)

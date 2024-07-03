@@ -12,6 +12,15 @@ local prefabs=
 	"tar",
 }
 
+local loot =
+{
+    "coconut",
+    "bamboo",
+	"bamboo",
+    "limestone",
+    "limestone",	
+}
+
 local SEG_TIME = 30
 local TOTAL_DAY_TIME = SEG_TIME*16
 local TAR_EXTRACTOR_MAX_FUEL_TIME = TOTAL_DAY_TIME*2
@@ -272,6 +281,7 @@ local function fn(Sim)
     inst.components.inspectable.getstatus = getstatus
 
 	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetLoot(loot)
 	
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)

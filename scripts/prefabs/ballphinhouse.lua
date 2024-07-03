@@ -12,6 +12,15 @@ local prefabs =
 	"ballphin",
 }
 
+local loot =
+{
+    "limestone",
+    "limestone",
+	"seaweed",
+    "seaweed",
+	"dorsalfin",
+}
+
 local function onfar(inst) 
 
 end
@@ -154,7 +163,7 @@ local function fn(Sim)
     end
 
     inst:AddComponent("lootdropper")
-	inst.components.lootdropper:SetLoot({"coral", "coral", "coral"})	
+	inst.components.lootdropper:SetLoot(loot)	
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(4)

@@ -286,6 +286,8 @@ PrefabFiles =
 "gorge_smallmeat",
 
 "preparedfoods_tropical",
+
+"walls_tropical",
 }
 
 if GetModConfigData("whirlpools") then

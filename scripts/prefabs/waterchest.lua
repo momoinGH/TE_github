@@ -1,5 +1,18 @@
 require "prefabutil"
 
+local prefabs =
+{
+    "boards",
+    "tar",
+}
+
+local loot =
+{
+    "boards",
+    "boards",
+    "tar",
+}
+
 local function onopen(inst)
     if not inst:HasTag("burnt") then
         inst.AnimState:PlayAnimation("open")
@@ -103,6 +116,8 @@ local function MakeChest(name, bank, build, indestructible, custom_postinit, pre
 
         if not indestructible then
             inst:AddComponent("lootdropper")
+			inst.components.lootdropper:SetLoot(loot)
+			
             inst:AddComponent("workable")
             inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
             inst.components.workable:SetWorkLeft(2)
