@@ -1,12 +1,12 @@
+local DEBUG_MODE = BRANCH == "dev"
+
 local assets=
 {
 	Asset("ANIM", "anim/armor_vortex_cloak.zip"),
     Asset("ANIM", "anim/cloak_fx.zip"),
-	--Asset("MINIMAP_IMAGE", "armor_vortex_cloak"),
-	Asset("ANIM", "anim/ui_krampusbag_2x5.zip"),
 }
 
-local ARMORVORTEX = 45 * 10
+local ARMORVORTEX = 450
 local ARMORVORTEXFUEL = ARMORVORTEX / 45 * TUNING.LARGE_FUEL
 local ARMORVORTEX_ABSORPTION = 1
 
@@ -53,7 +53,7 @@ local function onequip(inst, owner)
     end
 
     if inst.components.container then
-        inst.components.container:Open(owner)    
+        inst.components.container:Open(owner)
     end   
     inst.wisptask = inst:DoPeriodicTask(0.1,function() spawnwisp(owner, inst) end)  
 
@@ -77,18 +77,18 @@ local function onunequip(inst, owner)
     for i = 1, container:GetNumSlots() do
         local item = container:GetItemInSlot(i)
         if item ~= nil then
-            inst.components.inventoryitem.cangoincontainer = false
+            inst.components.inventoryitem.canonlygoinpocket = false
             return
         end
     end
     inst:RemoveComponent("container")
-    inst.components.inventoryitem.cangoincontainer = true
+    inst.components.inventoryitem.canonlygoinpocket = true
 --    inst.SoundEmitter:KillSound("vortex")
 end
 
 local function ondrop(inst, owner)
-    if inst.components.inventoryitem.cangoincontainer == true then
-        inst.components.inventoryitem.cangoincontainer = false
+    if inst.components.inventoryitem.canonlygoinpocket == true then
+        inst.components.inventoryitem.canonlygoinpocket = false
     end
     if not inst.components.container then
         local container = inst:AddComponent("container")
@@ -156,9 +156,9 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddSoundEmitter()
     inst.entity:AddAnimState()
-	inst.entity:AddNetwork()	
+    inst.entity:AddNetwork()	
     MakeInventoryPhysics(inst)
-
+	
     
     inst.AnimState:SetBank("armor_vortex_cloak")
     inst.AnimState:SetBuild("armor_vortex_cloak")
@@ -172,22 +172,24 @@ local function fn()
 
     --shadowlevel (from shadowlevel component) added to pristine state for optimization
     inst:AddTag("shadowlevel")
-	
+
     inst.entity:SetPristine()
-	
-	local minimap = inst.entity:AddMiniMapEntity()
+
+    local minimap = inst.entity:AddMiniMapEntity()
 	minimap:SetIcon( "armor_vortex_cloak.png" )	
-	
-	if not TheWorld.ismastersim then	
-	inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("armorvortexcloak") end	
-	return inst
+
+	if not TheWorld.ismastersim then
+        if inst.replica.container then
+	        inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("armorvortexcloak") end	
+        end	
+	    return inst
 	end
         
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")    
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"		
 	inst.caminho = "images/inventoryimages/hamletinventory.xml"	
-    inst.components.inventoryitem.cangoincontainer = false
+    inst.components.inventoryitem.canonlygoinpocket = false
     inst.components.inventoryitem:SetOnDroppedFn(ondrop)
     inst.foleysound = "dontstarve_DLC003/common/crafted/vortex_armour/foley"
 
@@ -211,7 +213,7 @@ local function fn()
     shadowlevel:SetDefaultLevel(TUNING.ARMOR_SANITY_SHADOW_LEVEL) -- Runar: 影甲的老麦2级暗影之力
 
     SetupEquippable(inst)
-
+    
     inst.OnBlocked = function(owner, data) OnBlocked(owner, data, inst) end		
     
     return inst

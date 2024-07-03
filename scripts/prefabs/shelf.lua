@@ -91,12 +91,13 @@ local function SetImage(inst, ent, slot)
 	end
 --	print(inst.prefab)
 --print(ent)
---fazer para o prefab minising
-	if ent.caminho then atlas = ent.caminho
+--fazer para o prefab minising    
+    atlas = ent.caminho or GetInventoryItemAtlas(texname)
+	--[[if ent.caminho then atlas = ent.caminho
 	elseif atlas and atlas == "images/inventoryimages1.xml" then atlas = "images/inventoryimages1.xml"
 	elseif atlas and atlas == "images/inventoryimages2.xml" then atlas = "images/inventoryimages2.xml"
 	elseif atlas and atlas == "images/inventoryimages3.xml" then atlas = "images/inventoryimages3.xml"	
-	else atlas = "images/inventoryimages/hamletinventory.xml" end
+	else atlas = "images/inventoryimages/hamletinventory.xml" end]]
 
     inst.AnimState:OverrideSymbol(slot, resolvefilepath(atlas), texname)
 	
@@ -176,7 +177,7 @@ local function unlock(inst, key, doer)
 			end
         end 
     end
-    inst:AddTag("NOCLICK")
+    --inst:AddTag("NOCLICK")--加上这个就不能锤了
 	inst.destrancado = true
 end
 
@@ -290,7 +291,7 @@ local function common(setsize,swp_img_list, locked, physics_round)
 --    inst.AnimState:SetOrientation(ANIM_ORIENTATION.RotatingBillboard)
 	inst.Transform:SetTwoFaced()
 
-    inst:AddTag("NOCLICK")
+    --inst:AddTag("NOCLICK")
     inst:AddTag("wallsection")
     inst:AddTag("furniture")    
 
