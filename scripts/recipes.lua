@@ -105,7 +105,7 @@ AddRecipe2("armor_windbreaker",		{Ingredient("blubber", 2, v_atlas), Ingredient(
 AddRecipe2("gashat",				{Ingredient("coral", 2,h_atlas), Ingredient("messagebottleempty1", 2,v_atlas), Ingredient("jellyfish", 1,h_atlas)},	TECH.SCIENCE_TWO, {atlas=h_atlas}, {"CLOTHING"})
 AddRecipe2("antidote",				{Ingredient("venomgland", 1, v_atlas), Ingredient("coral", 2, v_atlas), Ingredient("seaweed", 2, v_atlas)},			TECH.SCIENCE_ONE, {atlas=v_atlas}, {"RESTORATION"})
 AddRecipe2("ox_flute",				{Ingredient("ox_horn", 1, v_atlas), Ingredient("nightmarefuel", 2), Ingredient("rope", 1)},							TECH.MAGIC_TWO,   {atlas=v_atlas}, {"MAGIC"})
-AddRecipe2("turf_snakeskinfloor",	{Ingredient("snakeskin", 2, v_atlas), Ingredient("fabric", 1, v_atlas)},  											TECH.SCIENCE_TWO, {atlas=v_atlas, numtogive=4}, {"DECOR"})
+
 AddRecipe2("sand_castle", 			{Ingredient("sand", 4, v_atlas), Ingredient("palmleaf", 2, v_atlas), Ingredient("seashell", 3, v_atlas)},			TECH.NONE, 		  {atlas=v_atlas, placer="sand_castle_placer"}, {"STRUCTURES"})
 AddRecipe2("turf_road",				{Ingredient("cutstone", 1), Ingredient("flint", 2)}, 																TECH.SCIENCE_TWO, {numtogive=4}, {"DECOR"})
 if GetModConfigData("kindofworld") == 10 then	--WHAT?
@@ -305,33 +305,38 @@ AddRecipe2("quagmire_seedpacket_mix",	{Ingredient("quagmire_coin1", 1)},	TECH.GO
 
 
 --TURFS--
-AddRecipe2("turf_magmafield",	 		{Ingredient("rocks", 2), Ingredient("ash", 1)},					TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
-AddRecipe2("turf_ash",			 		{Ingredient("ash", 3)},											TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
-AddRecipe2("turf_jungle",		 		{Ingredient("bamboo", 1, v_atlas), Ingredient("cutgrass", 1)},	TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
-AddRecipe2("turf_volcano",		 		{Ingredient("nitre", 2), Ingredient("ash", 1)},					TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
-AddRecipe2("turf_tidalmarsh",	 		{Ingredient("cutgrass", 2), Ingredient("nitre", 1)},			TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
-AddRecipe2("turf_meadow",		 		{Ingredient("cutgrass", 2)},									TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
-AddRecipe2("turf_beach",		 		{Ingredient("sand", 2, v_atlas)},								TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
-AddRecipe2("turf_quagmire_gateway", 	{Ingredient("cutgrass", 2), Ingredient("nitre", 1)},			TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas="images/inventoryimages/novositens.xml"}, {"DECOR"})
-AddRecipe2("turf_quagmire_citystone",	{Ingredient("cutgrass", 2), Ingredient("nitre", 1)},			TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas="images/inventoryimages/novositens.xml"}, {"DECOR"})
-AddRecipe2("turf_quagmire_parkfield",	{Ingredient("cutgrass", 2), Ingredient("nitre", 1)},			TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas="images/inventoryimages/novositens.xml"}, {"DECOR"})
-AddRecipe2("turf_quagmire_parkstone",	{Ingredient("cutgrass", 2), Ingredient("nitre", 1)},			TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas="images/inventoryimages/novositens.xml"}, {"DECOR"})
-AddRecipe2("turf_quagmire_peatforest",	{Ingredient("cutgrass", 2), Ingredient("nitre", 1)},			TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas="images/inventoryimages/novositens.xml"}, {"DECOR"})
---[[
-AddRecipe2("turf_fields", 				{Ingredient("oinc", 1, h_atlas)},			 					TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_suburb", 				{Ingredient("oinc", 1, h_atlas)}, 						        TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_gasjungle", 			{Ingredient("oinc", 1, h_atlas)}, 						      	TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_checkeredlawn", 		{Ingredient("oinc", 1, h_atlas)}, 						  		TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_deeprainforest", 		{Ingredient("oinc", 1, h_atlas)}, 						 		TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_rainforest", 			{Ingredient("oinc", 1, h_atlas)}, 						     	TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_pigruins", 			{Ingredient("oinc", 1, h_atlas)}, 						       	TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_antfloor", 			{Ingredient("oinc", 1, h_atlas)}, 						       	TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_batfloor", 			{Ingredient("oinc", 1, h_atlas)}, 						       	TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_battleground", 		{Ingredient("oinc", 1, h_atlas)}, 						   		TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_painted", 				{Ingredient("oinc", 1, h_atlas)}, 						        TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_plains", 				{Ingredient("oinc", 1, h_atlas)}, 						        TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-AddRecipe2("turf_beardrug", 			{Ingredient("oinc", 1, h_atlas)}, 								TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=h_atlas}, {"DECOR"})
-]]
+--Sw
+AddRecipe2("turf_snakeskinfloor",	    {Ingredient("snakeskin", 2, v_atlas), Ingredient("fabric", 1, v_atlas)}, TECH.SCIENCE_TWO,       {numtogive=4, atlas=v_atlas}, {"DECOR"})
+AddRecipe2("turf_magmafield",	 		{Ingredient("rocks", 2), Ingredient("ash", 1)},					         TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+AddRecipe2("turf_ash",			 		{Ingredient("ash", 3)},											         TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+AddRecipe2("turf_jungle",		 		{Ingredient("bamboo", 1, v_atlas), Ingredient("cutgrass", 1)},	         TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+AddRecipe2("turf_volcano",		 		{Ingredient("nitre", 2), Ingredient("ash", 1)},					         TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+AddRecipe2("turf_tidalmarsh",	 		{Ingredient("cutgrass", 2), Ingredient("nitre", 1)},			         TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+AddRecipe2("turf_meadow",		 		{Ingredient("cutgrass", 2)},									         TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+AddRecipe2("turf_beach",		 		{Ingredient("sand", 2, v_atlas)},								         TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+
+--Ham
+AddRecipe2("turf_fields", 				{Ingredient("turf_rainforest", 1, v_atlas), Ingredient("ash", 1)},		                   TECH.SCIENCE_TWO,       {numtogive=4, atlas=v_atlas}, {"DECOR"})
+--AddRecipe2("turf_suburb", 				{Ingredient("oinc", 1, h_atlas)}, 						                               TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+--AddRecipe2("turf_gasjungle", 			{Ingredient("oinc", 1, h_atlas)}, 						      	                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+--AddRecipe2("turf_checkeredlawn", 		{Ingredient("oinc", 1, h_atlas)}, 						  		                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+AddRecipe2("turf_deeprainforest", 		{Ingredient("bramble_bulb", 1, h_atlas), Ingredient("cutgrass", 2), Ingredient("ash", 1)}, TECH.SCIENCE_TWO,       {numtogive=4, atlas=v_atlas}, {"DECOR"})
+--AddRecipe2("turf_rainforest", 			{Ingredient("oinc", 1, h_atlas)}, 						     	                       TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+--AddRecipe2("turf_pigruins", 			{Ingredient("oinc", 1, h_atlas)}, 						       	                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+--AddRecipe2("turf_antfloor", 			{Ingredient("oinc", 1, h_atlas)}, 						       	                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+--AddRecipe2("turf_batfloor", 			{Ingredient("oinc", 1, h_atlas)}, 						       	                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+--AddRecipe2("turf_battleground", 		{Ingredient("oinc", 1, h_atlas)}, 						   		                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+--AddRecipe2("turf_painted", 				{Ingredient("oinc", 1, h_atlas)}, 						                               TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+--AddRecipe2("turf_plains", 				{Ingredient("oinc", 1, h_atlas)}, 						                               TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+--AddRecipe2("turf_beardrug", 			{Ingredient("oinc", 1, h_atlas)}, 								                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
+
+--Gorge
+AddRecipe2("turf_quagmire_gateway", 	{Ingredient("cutgrass", 2), Ingredient("petals", 1)},			                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas="images/inventoryimages/novositens.xml"}, {"DECOR"})
+AddRecipe2("turf_quagmire_citystone",	{Ingredient("rocks", 2), Ingredient("nitre", 1)},			                               TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas="images/inventoryimages/novositens.xml"}, {"DECOR"})
+AddRecipe2("turf_quagmire_parkfield",	{Ingredient("cutgrass", 2), Ingredient("quagmire_spotspice_sprig", 1)},			           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas="images/inventoryimages/novositens.xml"}, {"DECOR"})
+AddRecipe2("turf_quagmire_parkstone",	{Ingredient("rocks", 2), Ingredient("quagmire_spotspice_sprig", 1)},			           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas="images/inventoryimages/novositens.xml"}, {"DECOR"})
+AddRecipe2("turf_quagmire_peatforest",	{Ingredient("charcoal", 1), Ingredient("spoiled_food", 2)},		                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas="images/inventoryimages/novositens.xml"}, {"DECOR"})
+
 
 --INTERIOR--
 AddRecipe2("interior_floor_wood",				{Ingredient("oinc",5, h_atlas)}, 	TECH.HOME_TWO, {atlas=h_atlas, nounlock=true}, {"INTERIOR"})
