@@ -16,7 +16,8 @@ local assets =
 	Asset("ANIM", "anim/raft_log_build.zip"),
 	Asset("ANIM", "anim/pirate_boat_build.zip"),	
 	Asset("ANIM", "anim/coracle_boat_build.zip"),
-	Asset("ANIM", "anim/seafarer_boatsw.zip"),		
+	Asset("ANIM", "anim/seafarer_boatsw.zip"),
+    Asset("ANIM", "anim/waxwell_shadowboat_build.zip"),		
 }
 
 local prefabs =
@@ -835,6 +836,67 @@ local function fncorkboatitem(sim)
 end
 
 
+local function ondeployshadowboat(inst, pt, deployer)
+    local boat = SpawnPrefab("shadowwaxwell_boat")
+    if boat ~= nil then
+        boat.Physics:SetCollides(false)
+        boat.Physics:Teleport(pt.x, 0, pt.z)
+        boat.Physics:SetCollides(true)
+
+        inst:Remove()
+    end
+end
+
+local function fnshadowboat(sim)
+	local inst = CreateEntity()
+	local trans = inst.entity:AddTransform()
+	local anim = inst.entity:AddAnimState()
+	trans:SetFourFaced()
+	inst.entity:AddNetwork()
+
+    inst.AnimState:SetBank("seafarer_boatsw")
+    inst.AnimState:SetBuild("seafarer_boatsw")
+    inst.AnimState:PlayAnimation("row")
+	
+    inst:AddTag("boatbuilder")
+
+    MakeInventoryPhysics(inst)
+
+    MakeInventoryFloatable(inst, "med", 0.25, 0.83)
+
+    --Deployable needs to be client side because of the custom deploy range
+    inst:AddComponent("deployable")
+    inst.components.deployable.ondeploy = ondeployshadowboat
+    inst.components.deployable:SetDeployMode(DEPLOYMODE.WATER)
+	inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)	
+    
+	
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    MakeLargeBurnable(inst)
+    MakeLargePropagator(inst)
+
+    inst:AddComponent("inspectable")
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"	
+	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
+
+    --inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)
+
+    --inst:AddComponent("fuel")
+    --inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
+
+    MakeHauntableLaunch(inst)
+	
+	return inst
+end
+
+
 return Prefab( "porto_raft", fnraft, assets, prefabs),
 MakePlacer( "porto_raft_placer", "raft", "raft_build", "run_loop", false, false, false),
 Prefab( "porto_lograft", fnlograft, assets, prefabs),
@@ -855,6 +917,16 @@ Prefab( "surfboarditem", fnsurfboarditem, assets, prefabs),
 MakePlacer( "surfboarditem_placer", "raft", "raft_surfboard_build", "run_loop", false, false, false),
 Prefab( "corkboatitem", fncorkboatitem, assets, prefabs),
 MakePlacer( "corkboatitem_placer", "rowboat", "coracle_boat_build", "run_loop", false, false, false),
+
+
+
+Prefab( "porto_shadowboat", fnshadowboat, assets, prefabs),
+MakePlacer( "porto_shadowboat_placer", "rowboat", "waxwell_shadowboat_build", "run_loop", false, false, false),
+
+--Prefab( "shadowboatitem", fnshadowboatitem, assets, prefabs),
+--MakePlacer( "shadowboatitem_placer", "rowboat", "waxwell_shadowboat_build", "run_loop", false, false, false),
+
+
 
 Prefab( "porto_raft_old", fnraftold, assets, prefabs),
 MakePlacer( "porto_raft_old_placer", "raft", "raft_build", "run_loop", false, false, false),

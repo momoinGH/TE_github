@@ -4,6 +4,9 @@ local assets =
 {
 	Asset("ANIM", "anim/rowboat_basic.zip"),
 	Asset("ANIM", "anim/waxwell_shadowboat_build.zip"),
+	--	Asset("ANIM", "anim/swap_sail.zip"),
+    --	Asset("ANIM", "anim/swap_lantern_boat.zip"),
+    Asset("ANIM", "anim/boat_hud_row.zip"),
 }
 
 local controlador = nil
@@ -12,15 +15,28 @@ local prefabs =
 {
 
 }
+ 
 
-
---local function OnSave(inst, data)
---if inst:HasTag("ocupado") then data.apaga = 1 end
---end
-
-local function OnLoad(inst, data)
-inst:Remove() 
-end
+local function OnSave(inst, data)
+	if inst:HasTag("ocupado") then data.apaga = 1 end
+	end
+	
+	local function OnLoad(inst, data)
+	if data and data.apaga then inst:Remove() end
+	
+	
+	inst:DoTaskInTime(0, function(inst)
+	
+	local jogador = inst.components.inventoryitem.owner
+	if jogador ~= nil then
+	
+	jogador.components.inventory:DropItem(inst)
+	jogador:AddComponent("driver")
+	jogador.components.driver:OnMount(inst)
+	end
+		end)	
+	
+	end
 
 local function onfinished(inst)
 
@@ -33,7 +49,9 @@ local function onhammered(inst)
 		inst.components.burnable:Extinguish()
 	end
 	SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	SpawnPrefab("log").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	SpawnPrefab("papyrus").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	SpawnPrefab("nightmarefuel").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	SpawnPrefab("nightmarefuel").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
 	inst:Remove()
 end
@@ -55,25 +73,28 @@ local function fn()
 	inst.Transform:SetFourFaced()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-	inst.overridebuild = "pirate_boat_build"
+	inst.overridebuild = "rowboat_build"
 	inst.banc = "rowboat"
 	inst.entity:AddNetwork()
+	--	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+    --	inst.AnimState:SetSortOrder(0)
+
+    MakeWaterObstaclePhysics(inst, 0.5, 2, 1.25)
 
 	
-	inst:AddTag("shadowboat")
-
-	inst.AnimState:SetBank("rowboat")
 	inst.AnimState:SetBuild("waxwell_shadowboat_build")
+	inst.AnimState:SetBank("rowboat")
 	inst.AnimState:PlayAnimation("run_loop", true)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(0)
 
 	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetIcon("minimap_woodlegsboat.tex")
-	
+	minimap:SetIcon("shadowboat.png")
+
 	inst:AddTag("boatsw")
+	inst:AddTag("shadowboat")
+	inst:AddTag("barcoapto")	
 	inst:AddTag("aquatic")
-	inst:AddTag("NOCLICK")
+	inst:AddTag("ignorewalkableplatforms")
+	--inst:AddTag("NOCLICK")
 	
 	local phys = inst.entity:AddPhysics()
     phys:SetMass(1)
@@ -96,8 +117,8 @@ local function fn()
 
 -------------------adiciona container------------------------------------
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("woodlegsboat")
-    inst.replica.container:WidgetSetup("woodlegsboat")
+    inst.components.container:WidgetSetup("rowboat")
+    inst.replica.container:WidgetSetup("rowboat")
 --------------------------------------------------------------------------	
 	inst:AddComponent("interactions")
     inst:AddComponent("edible")
@@ -110,10 +131,13 @@ local function fn()
 	inst:AddComponent("equippable")
 
 	inst:AddComponent("finiteuses")
-	inst.components.finiteuses:SetMaxUses(999999999999999999999999999999)
-	inst.components.finiteuses:SetUses(999999999999999999999999999999)
+	inst.components.finiteuses:SetMaxUses(150)
+	inst.components.finiteuses:SetUses(150)
 	inst.components.finiteuses:SetOnFinished(onfinished)
 --	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1)
+
+    inst:AddComponent("armor")
+    inst.components.armor:InitCondition(150, 0.99)
 
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
@@ -135,7 +159,7 @@ local function fn()
     MakeHauntableLaunchAndSmash(inst)
 	
 	inst.OnLoad = OnLoad
---	inst.OnSave = OnSave
+	inst.OnSave = OnSave
 
     return inst
 end
