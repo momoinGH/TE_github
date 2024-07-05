@@ -34,16 +34,23 @@ end
 AddRecipe2("campfire", {Ingredient("cutgrass", 3), Ingredient("log", 2)}, TECH.NONE, {placer="campfire_placer"})
 
 --CHARACTER--
+--walani
 AddRecipe2("surfboarditem", 			{Ingredient("boards", 1), Ingredient("seashell", 1, v_atlas)}, 																TECH.NONE,		  {builder_tag="walani", 			atlas=v_atlas}, {"CHARACTER"})
+--woodlegs
 AddRecipe2("porto_woodlegsboat", 		{Ingredient("boards", 4), Ingredient("dubloon", 4, v_atlas), Ingredient("boatcannon", 1, v_atlas)}, 						TECH.NONE,		  {builder_tag="woodlegs", 			atlas=v_atlas}, {"CHARACTER"})
 AddRecipe2("luckyhat", 					{Ingredient("boneshard", 4), Ingredient("fabric", 3, v_atlas), Ingredient("dubloon", 10, v_atlas)},							TECH.NONE,		  {builder_tag="woodlegs", 			atlas=v_atlas}, {"CHARACTER"})
+--Wormwood
 AddRecipe2("poisonbalm",				{Ingredient("livinglog", 1), Ingredient("venomgland", 1, v_atlas)}, 														TECH.NONE, 		  {builder_tag="plantkin", 			atlas=h_atlas}, {"CHARACTER"})
+AddRecipe2("seaweed_stalk",				{Ingredient("bullkelp_root", 1), Ingredient("seaweed", 3, v_atlas), Ingredient(CHARACTER_INGREDIENT.HEALTH, 10)},           TECH.NONE, 		  {builder_tag="plantkin", 			atlas=h_atlas}, {"CHARACTER"})
+--wedbber
 AddRecipe2("mutator_tropical", 			{Ingredient("monstermeat", 2), Ingredient("silk", 1), Ingredient("venomgland", 1, v_atlas)}, 								TECH.NONE,		  {builder_tag="spiderwhisperer", 	atlas=cm_atlas}, {"CHARACTER"})
 AddRecipe2("mutator_frost", 			{Ingredient("monstermeat", 2), Ingredient("silk", 3), Ingredient("ice", 4)}, 												TECH.NONE,		  {builder_tag="spiderwhisperer",	atlas=cm_atlas}, {"CHARACTER"})
+--wurt
 AddRecipe2("mermfishhouse", 			{Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("fish2", 2,v_atlas)}, 										TECH.SCIENCE_ONE, {builder_tag="merm_builder", 		atlas=hm_atlas, placer="mermfishhouse_placer", image="mermhouse_tropical.png", testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
 AddRecipe2("mermhouse_crafted", 		{Ingredient("boards", 4), Ingredient("cutreeds", 3), Ingredient("pondfish", 2)}, 											TECH.SCIENCE_ONE, {builder_tag="merm_builder", 						placer="mermhouse_crafted_placer", 		testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
 AddRecipe2("mermthrone_construction",	{Ingredient("boards", 5), Ingredient("rope", 5)}, 																			TECH.SCIENCE_ONE, {builder_tag="merm_builder", 						placer="mermthrone_construction_placer",testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
 AddRecipe2("mermwatchtower", 			{Ingredient("boards", 5), Ingredient("tentaclespots", 1), Ingredient("spear", 2)}, 											TECH.SCIENCE_TWO, {builder_tag="merm_builder", 						placer="mermwatchtower_placer", 		testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
+--shadowmagic
 AddRecipe2("shadowmower_builder", 		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.SANITY, 60)}, 	TECH.SHADOW_TWO,  {builder_tag="shadowmagic", 		atlas=v_atlas,  nounlock=true}, {"CRAFTING_STATION"})
 AddRecipe2("shadowlumber_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWLUMBER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
 AddRecipe2("shadowminer_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWMINER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
@@ -214,7 +221,7 @@ AddRecipe2("gasmaskhat",			{Ingredient("peagawkfeather", 4, h_atlas), Ingredient
 
 AddRecipe2("bonestaff",			    {Ingredient("pugalisk_skull", 1, h_atlas), Ingredient("boneshard", 1), Ingredient("nightmarefuel", 2)},     TECH.LOST,        {atlas=h_atlas}, {"MAGIC"})
 AddRecipe2("armorvortexcloak",	    {Ingredient("ancient_remnant", 5, h_atlas), Ingredient("armor_sanity", 1)},                                 TECH.LOST,        {atlas=h_atlas}, {"MAGIC"})
-AddRecipe2("armorvoidcloak",        {Ingredient("armorvortexcloak", 1), Ingredient("horrorfuel", 4), Ingredient("voidcloth", 4),Ingredient("shadowheart", 1)}, TECH.SHADOWFORGING_TWO, {nounlock = true, atlas = "images/inventoryimages/hamletinventory.xml", image = "armorvoidcloak.tex", }, {"CRAFTING_STATION"})
+AddRecipe2("armorvoidcloak",        {Ingredient("armorvortexcloak", 1, h_atlas), Ingredient("horrorfuel", 4), Ingredient("voidcloth", 4),Ingredient("shadowheart", 1)}, TECH.SHADOWFORGING_TWO, {atlas=h_atlas, nounlock = true}, {"CRAFTING_STATION"})
 AddRecipe2("living_artifact",		{Ingredient("infused_iron", 6, h_atlas), Ingredient("waterdrop", 1, h_atlas)}, 								TECH.LOST,        {atlas=h_atlas}, {"MAGIC"})
 AddRecipe2("antchest",			    {Ingredient("chitin", 6, h_atlas), Ingredient("beeswax",1), Ingredient("honey",9)}, 						TECH.LOST,        {atlas=h_atlas, min_spacing=1, placer="antchest_placer"}, {"COOKING"})
 AddRecipe2("pigskin",			    {Ingredient("bat_leather", 1, h_atlas)},                                                                    TECH.SCIENCE_ONE, {atlas=h_atlas}, {"REFINE"})
@@ -317,10 +324,10 @@ AddRecipe2("turf_beach",		 		{Ingredient("sand", 2, v_atlas)},								         T
 
 --Ham
 AddRecipe2("turf_fields", 				{Ingredient("turf_rainforest", 1, v_atlas), Ingredient("ash", 1)},		                   TECH.SCIENCE_TWO,       {numtogive=4, atlas=v_atlas}, {"DECOR"})
+AddRecipe2("turf_deeprainforest", 		{Ingredient("bramble_bulb", 1, h_atlas), Ingredient("cutgrass", 2), Ingredient("ash", 1)}, TECH.SCIENCE_TWO,       {numtogive=4, atlas=v_atlas}, {"DECOR"})
 --AddRecipe2("turf_suburb", 				{Ingredient("oinc", 1, h_atlas)}, 						                               TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
 --AddRecipe2("turf_gasjungle", 			{Ingredient("oinc", 1, h_atlas)}, 						      	                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
 --AddRecipe2("turf_checkeredlawn", 		{Ingredient("oinc", 1, h_atlas)}, 						  		                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
-AddRecipe2("turf_deeprainforest", 		{Ingredient("bramble_bulb", 1, h_atlas), Ingredient("cutgrass", 2), Ingredient("ash", 1)}, TECH.SCIENCE_TWO,       {numtogive=4, atlas=v_atlas}, {"DECOR"})
 --AddRecipe2("turf_rainforest", 			{Ingredient("oinc", 1, h_atlas)}, 						     	                       TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
 --AddRecipe2("turf_pigruins", 			{Ingredient("oinc", 1, h_atlas)}, 						       	                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
 --AddRecipe2("turf_antfloor", 			{Ingredient("oinc", 1, h_atlas)}, 						       	                           TECH.TURFCRAFTING_ONE,  {numtogive=4, atlas=v_atlas}, {"DECOR"})
