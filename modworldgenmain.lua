@@ -26421,6 +26421,12 @@ table.insert(level.tasks, "Frostcavetask")
 table.insert(level.tasks, "frostExitRoom")
 end
 
+if GetModConfigData("frost_islandworld") == 15 then
+--table.insert(level.tasks, "frostcavedivide")
+--table.insert(level.tasks, "Frostcavetask")
+--table.insert(level.tasks, "frostExitRoom")
+end
+
 if GetModConfigData("underwater") then
 table.insert(level.tasks, "underwaterdivide")
 table.insert(level.tasks, "UnderwaterStart")
@@ -26597,6 +26603,17 @@ end
 --end
 
 if GetModConfigData("frost_islandworld") == 10 then		
+		table.insert(taskset.tasks, "FrostIsland_Wildbeaver")	
+		table.insert(taskset.tasks, "FrostIsland_Beach")	
+		table.insert(taskset.tasks, "FrostIsland_deciduoustree")	
+		table.insert(taskset.tasks, "FrostIsland_Mammoth")	
+		table.insert(taskset.tasks, "FrostIsland_Mine")		
+		table.insert(taskset.tasks, "FrostIsland_palace")	
+		table.insert(taskset.tasks, "FrostIsland_maxwell")
+		table.insert(taskset.tasks, "FrostIsland_icelake")
+end
+
+if GetModConfigData("frost_islandworld") == 15 then		
 		table.insert(taskset.tasks, "FrostIsland_Wildbeaver")	
 		table.insert(taskset.tasks, "FrostIsland_Beach")	
 		table.insert(taskset.tasks, "FrostIsland_deciduoustree")	
@@ -27208,6 +27225,12 @@ table.insert(level.tasks, "Frostcavetask")
 table.insert(level.tasks, "frostExitRoom")
 end
 
+if GetModConfigData("frost_island") == 15 then
+--table.insert(level.tasks, "frostcavedivide")
+--table.insert(level.tasks, "Frostcavetask")
+--table.insert(level.tasks, "frostExitRoom")
+end
+
 table.insert(level.tasks, "underwaterdivide")
 if GetModConfigData("underwater") then
 table.insert(level.tasks, "UnderwaterStart")
@@ -27405,6 +27428,16 @@ if GetModConfigData("frost_island") == 10 then
 		table.insert(taskset.tasks, "FrostIsland_icelake")
 end
 
+if GetModConfigData("frost_island") == 15 then		
+		table.insert(taskset.tasks, "FrostIsland_Wildbeaver")	
+		table.insert(taskset.tasks, "FrostIsland_Beach")	
+		table.insert(taskset.tasks, "FrostIsland_deciduoustree")	
+		table.insert(taskset.tasks, "FrostIsland_Mammoth")	
+		table.insert(taskset.tasks, "FrostIsland_Mine")		
+		table.insert(taskset.tasks, "FrostIsland_palace")	
+		table.insert(taskset.tasks, "FrostIsland_maxwell")
+		table.insert(taskset.tasks, "FrostIsland_icelake")
+end
 
 if GetModConfigData("Shipwrecked_plus") == true then
 --table.insert(taskset.tasks, "MISTO_eldorado")

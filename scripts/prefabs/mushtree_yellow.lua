@@ -51,9 +51,9 @@ end
 local REMOVABLE =
 {
     ["log"] = true,
-    ["blue_cap"] = true,
-    ["red_cap"] = true,
-    ["green_cap"] = true,
+    --["blue_cap"] = true,
+    --["red_cap"] = true,
+    --["green_cap"] = true,
 	["yelow_cap"] = true,
     ["charcoal"] = true,
 }
@@ -137,7 +137,7 @@ local growth_stages =
 
 local data =
 {
-    small =
+    --[[small =
     { --Green
         bank = "mushroom_tree_small",
         build = "mushroom_tree_small",
@@ -176,7 +176,7 @@ local data =
         lightradius = 1.5,
         lightcolour = { 111/255, 111/255, 227/255 },
         webbable = true,
-    },
+    },]]
 	
     yelow =
     { --yelow
@@ -586,9 +586,9 @@ function treeset(name, data, build, bloombuild)
     local prefabs =
     {
         "log",
-        "blue_cap",
-        "green_cap",
-        "red_cap",
+        --"blue_cap",
+        --"green_cap",
+        --"red_cap",
 		"yelow_cap",
         "charcoal",
         "ash",
@@ -605,9 +605,9 @@ function treeset(name, data, build, bloombuild)
     table.insert(treeprefabs, Prefab(name.."_bloom_burntfx", makeburntfx(name, data, true), { bloombuildasset }))
 end
 
-treeset("mushtree_tall", data.tall, "anim/mushroom_tree_tall.zip", "anim/mushroom_tree_tall_bloom.zip")
-treeset("mushtree_medium", data.medium, "anim/mushroom_tree_med.zip", "anim/mushroom_tree_med_bloom.zip")
-treeset("mushtree_small", data.small, "anim/mushroom_tree_small.zip", "anim/mushroom_tree_small_bloom.zip")
+--treeset("mushtree_tall", data.tall, "anim/mushroom_tree_tall.zip", "anim/mushroom_tree_tall_bloom.zip")
+--treeset("mushtree_medium", data.medium, "anim/mushroom_tree_med.zip", "anim/mushroom_tree_med_bloom.zip")
+--treeset("mushtree_small", data.small, "anim/mushroom_tree_small.zip", "anim/mushroom_tree_small_bloom.zip")
 treeset("mushtree_yelow", data.yelow, "anim/mushroom_tree_yelow.zip", "anim/mushroom_tree_yelow.zip")
 
 return unpack(treeprefabs)

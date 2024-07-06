@@ -6,13 +6,13 @@ end
 
 name	=  en_zh_zht("Tropical Experience Return of Them","热带体验：海难哈姆雷特联机版生态","熱帶體驗：船難哈姆雷特連線版生態")
 description =  en_zh_zht(
-"\nversion：3.76"..
+"\nversion：3.77"..
 "\nAttention: We added a complement to this mod."..
 "\nIn it will have several changes to improve the experience of the game."..
 "\nVisit only the main mod page and download."..
 "\nTropical Experience| Complement",
 
-"\n版本：3.76"..
+"\n版本：3.77"..
 "\n注意：我们为此模组添加了一些内容补充"..
 "\n其中包含了多项改进游戏体验的玩法变化，请访问此模组创意工坊进行下载"..
 "\n多种生态群系体验 | 补充内容"..
@@ -24,7 +24,7 @@ description =  en_zh_zht(
 "\n大风平原(Windy Plains)"..
 "\n\n兼容樱花林(Cherry Forest)",
 
-"\n版本：3.76"..
+"\n版本：3.77"..
 "\n注意：我們爲此模組添加了一些內容補充"..
 "\n其中包含了多項改進遊戲體驗的玩法變化，請訪問此模組創意工坊進行下載"..
 "\n多種生態羣系體驗 | 補充內容"..
@@ -38,7 +38,7 @@ description =  en_zh_zht(
 )
 
 author = "Vagner da Rocha Santos."
-version = "3.76"
+version = "3.77"
 forumthread = ""
 api_version = 10
 priority = -20
@@ -326,9 +326,9 @@ configuration_options =
 			name	= "frost_islandworld",
 			label	= en_zh_zht("Frost Land","冰霜岛屿","冰霜島嶼"),
 			hover	= en_zh_zht(
-				"It creates a snowy island in the ocean where it is winter all the time, it also creates the frozen cave.",
-				"创建一个永远是冬天的冰岛，同时创建冰霜洞穴\n灵感来自永不妥协(Uncompromising Mode)",
-				"創建一個永遠是冬天的冰島，同時創建冰霜洞穴\n靈感來自永不妥協(Uncompromising Mode)"),
+				"Creates Frost island、frozen cave where it is winter all the time.",
+				"创建永远是冬天的冰霜岛屿、冰霜洞穴\n灵感来自永不妥协(Uncompromising Mode)",
+				"創建永遠是冬天的冰霜岛屿、冰霜洞穴\n靈感來自永不妥協(Uncompromising Mode)"),
 			default = 10,
 			options =	{
 							{description = en_zh_zht("NO","禁用"), data = 5,
@@ -341,6 +341,11 @@ configuration_options =
 								"Generate on Caves & World",
 								"生成冰霜岛屿和冰霜洞穴",
 								"生成冰霜島嶼和冰霜洞穴")},
+							{description = en_zh_zht("YES","启用","啟用"), data = 15, 
+							hover = en_zh_zht(
+							"Just Generate Frost island on World",
+							"只在地面服务器生成冰霜岛屿",
+							"只在地面伺服器生成冰霜島嶼")},
 						},
 		},
 
@@ -362,7 +367,20 @@ configuration_options =
 						},
 			default = 0,
 		},
-
+		{
+			name	= "togethercaves_shipwreckedworld",
+			label	= en_zh_zht("Together Caves","联机版洞穴","連線版洞穴"),
+			hover	= en_zh_zht(
+			"Will generate defalt cave zone, do not forget to enable caves to work",
+			"会生成默认的联机版洞穴",
+			"會生成默認的連線版洞穴"),
+			options =
+			{
+				{description = en_zh_zht("Disabled","禁用"), data = 0, hover = en_zh_zht("This biome will not be generated","禁用该生态群系生成","禁用該生態羣系生成")},
+				{description =  en_zh_zht("Enabled","启用","啟用"),  data = 1, hover = en_zh_zht("Will generate a new cave zone","将生成一个新的洞穴区域","將生成一個新的洞穴區域")},
+			},
+			default = 1,
+		},
 		{
 			name	= "hamletcaves_shipwreckedworld",
 			label	= en_zh_zht("Hamlet Caves","哈姆雷特洞穴"),
@@ -386,20 +404,7 @@ configuration_options =
 			default = 1,
 		},
 
-		{
-			name	= "togethercaves_shipwreckedworld",
-			label	= en_zh_zht("Together Caves","联机版洞穴","連線版洞穴"),
-			hover	= en_zh_zht(
-			"Will generate defalt cave zone, do not forget to enable caves to work",
-			"会生成默认的联机版洞穴",
-			"會生成默認的連線版洞穴"),
-			options =
-			{
-				{description = en_zh_zht("Disabled","禁用"), data = 0, hover = en_zh_zht("This biome will not be generated","禁用该生态群系生成","禁用該生態羣系生成")},
-				{description =  en_zh_zht("Enabled","启用","啟用"),  data = 1, hover = en_zh_zht("Will generate a new cave zone","将生成一个新的洞穴区域","將生成一個新的洞穴區域")},
-			},
-			default = 1,
-		},
+
 
 
 	title(en_zh_zht("<for custom world>"				,"<自定义世界设置>","<自定義世界設置>")),
@@ -775,13 +780,14 @@ configuration_options =
 			name	= "frost_island",
 			label	= en_zh_zht("Frost Land","冰霜岛屿","冰霜島嶼"),
 			hover	= en_zh_zht(
-				"It creates a snowy island in the ocean where it is winter all the time, it also creates the frozen cave.",
-				"创建一个永远是冬天的冰岛，同时创建冰霜洞穴\n灵感来自永不妥协(Uncompromising Mode)",
-				"創建一個永遠是冬天的冰島，同時創建冰霜洞穴\n靈感來自永不妥協(Uncompromising Mode)"),
+				"Creates Frost island、frozen cave where it is winter all the time.",
+				"创建永远是冬天的冰霜岛屿、冰霜洞穴\n灵感来自永不妥协(Uncompromising Mode)",
+				"創建永遠是冬天的冰霜岛屿、冰霜洞穴\n靈感來自永不妥協(Uncompromising Mode)"),
 			default = 10,
 			options =	{
 							{description = en_zh_zht("NO","禁用"), data = 5, hover = en_zh_zht("Disable Generation","禁止生成冰霜岛屿群系","禁止生成冰霜島嶼羣系")},
-							{description = en_zh_zht("YES","启用","啟用"), data = 10, hover = en_zh_zht("Allow Generate on Caves & World","在洞穴和地面服务器中生成","在洞穴和地面伺服器中生成")},
+							{description = en_zh_zht("YES","启用","啟用"), data = 10, hover = en_zh_zht("Allow Generate on Caves & World","在洞穴和地面服务器生成冰霜岛屿及冰霜洞穴","在洞穴和地面伺服器生成冰霜岛屿及冰霜洞穴")},
+							{description = en_zh_zht("YES","启用","啟用"), data = 15, hover = en_zh_zht("Just Generate Frost island on World","只在地面服务器生成冰霜岛屿","只在地面伺服器生成冰霜島嶼")},
 						},
 		},
 

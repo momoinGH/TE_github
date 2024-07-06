@@ -453,7 +453,7 @@ end
 
 local data =
 {
-    {
+    --[[{
         name = "red_mushroom",
         animname="red",
         pickloot="red_cap",
@@ -491,7 +491,7 @@ local data =
         cookedhealth = -TUNING.HEALING_SMALL,
         cookedhunger = 0,
         transform_prefab = "mushtree_tall",
-    },
+    },]]
     {
         name = "yelow_mushroom",
         animname="yelow",
