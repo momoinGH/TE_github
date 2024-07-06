@@ -34,23 +34,24 @@ end
 AddRecipe2("campfire", {Ingredient("cutgrass", 3), Ingredient("log", 2)}, TECH.NONE, {placer="campfire_placer"})
 
 --CHARACTER--
---walani
+--Walani
 AddRecipe2("surfboarditem", 			{Ingredient("boards", 1), Ingredient("seashell", 1, v_atlas)}, 																TECH.NONE,		  {builder_tag="walani", 			atlas=v_atlas}, {"CHARACTER"})
---woodlegs
+--Woodlegs
 AddRecipe2("porto_woodlegsboat", 		{Ingredient("boards", 4), Ingredient("dubloon", 4, v_atlas), Ingredient("boatcannon", 1, v_atlas)}, 						TECH.NONE,		  {builder_tag="woodlegs", 			atlas=v_atlas}, {"CHARACTER"})
 AddRecipe2("luckyhat", 					{Ingredient("boneshard", 4), Ingredient("fabric", 3, v_atlas), Ingredient("dubloon", 10, v_atlas)},							TECH.NONE,		  {builder_tag="woodlegs", 			atlas=v_atlas}, {"CHARACTER"})
 --Wormwood
 AddRecipe2("poisonbalm",				{Ingredient("livinglog", 1), Ingredient("venomgland", 1, v_atlas)}, 														TECH.NONE, 		  {builder_tag="plantkin", 			atlas=h_atlas}, {"CHARACTER"})
 AddRecipe2("seaweed_stalk",				{Ingredient("bullkelp_root", 1), Ingredient("seaweed", 3, v_atlas), Ingredient(CHARACTER_INGREDIENT.HEALTH, 10)},           TECH.NONE, 		  {builder_tag="plantkin", 			atlas=h_atlas}, {"CHARACTER"})
---wedbber
+--Wedbber
 AddRecipe2("mutator_tropical", 			{Ingredient("monstermeat", 2), Ingredient("silk", 1), Ingredient("venomgland", 1, v_atlas)}, 								TECH.NONE,		  {builder_tag="spiderwhisperer", 	atlas=cm_atlas}, {"CHARACTER"})
 AddRecipe2("mutator_frost", 			{Ingredient("monstermeat", 2), Ingredient("silk", 3), Ingredient("ice", 4)}, 												TECH.NONE,		  {builder_tag="spiderwhisperer",	atlas=cm_atlas}, {"CHARACTER"})
---wurt
+--Wurt
 AddRecipe2("mermfishhouse", 			{Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("fish2", 2,v_atlas)}, 										TECH.SCIENCE_ONE, {builder_tag="merm_builder", 		atlas=hm_atlas, placer="mermfishhouse_placer", image="mermhouse_tropical.png", testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
 AddRecipe2("mermhouse_crafted", 		{Ingredient("boards", 4), Ingredient("cutreeds", 3), Ingredient("pondfish", 2)}, 											TECH.SCIENCE_ONE, {builder_tag="merm_builder", 						placer="mermhouse_crafted_placer", 		testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
 AddRecipe2("mermthrone_construction",	{Ingredient("boards", 5), Ingredient("rope", 5)}, 																			TECH.SCIENCE_ONE, {builder_tag="merm_builder", 						placer="mermthrone_construction_placer",testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
 AddRecipe2("mermwatchtower", 			{Ingredient("boards", 5), Ingredient("tentaclespots", 1), Ingredient("spear", 2)}, 											TECH.SCIENCE_TWO, {builder_tag="merm_builder", 						placer="mermwatchtower_placer", 		testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
---shadowmagic
+--Maxwell
+AddRecipe2("porto_shadowboat",			{Ingredient("papyrus", 3), Ingredient("nightmarefuel", 4), Ingredient(CHARACTER_INGREDIENT.SANITY, 60)},	                TECH.NONE,		  {builder_tag="shadowmagic", 		atlas=h_atlas}, {"CHARACTER"})
 AddRecipe2("shadowmower_builder", 		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.SANITY, 60)}, 	TECH.SHADOW_TWO,  {builder_tag="shadowmagic", 		atlas=v_atlas,  nounlock=true}, {"CRAFTING_STATION"})
 AddRecipe2("shadowlumber_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWLUMBER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
 AddRecipe2("shadowminer_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWMINER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")

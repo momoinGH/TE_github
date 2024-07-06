@@ -856,7 +856,9 @@ local function fnshadowboat(sim)
 
     inst.AnimState:SetBank("seafarer_boatsw")
     inst.AnimState:SetBuild("seafarer_boatsw")
-    inst.AnimState:PlayAnimation("row")
+    inst.AnimState:PlayAnimation("shadow",true)
+	inst.AnimState:SetMultColour(1, 1, 1, 0.5)
+    inst.AnimState:UsePointFiltering(true)
 	
     inst:AddTag("boatbuilder")
 
@@ -883,8 +885,8 @@ local function fnshadowboat(sim)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"	
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
+	inst.caminho = "images/inventoryimages/hamletinventory.xml"	
 
     --inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)
 
