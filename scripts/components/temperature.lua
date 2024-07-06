@@ -368,9 +368,15 @@ function Temperature:OnUpdate(dt, applyhealthdelta)
         (TheWorld.state.issummer and self.inst and self.inst:HasTag("player") and TUNING.tropical.hayfever == 20 and (self.inst.components.areaaware and self.inst.components.areaaware:GetCurrentArea() ~= nil or interior)) then
         local mascara = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
         local fan = GetClosestInstWithTag("prevents_hayfever", self.inst, 15)
+        if self.hayfever == nil then
+            self.hayfever = 0
+        end
         if mascara and mascara.prefab == "gasmaskhat" or mascara and mascara.prefab == "gashat" or fan then
-            if self.hayfever > 0 then self.hayfever = self.hayfever - 1 end
+            if self.hayfever > 0 then 
+                self.hayfever = self.hayfever - 1 
+            end
         else
+
             if not self.inst:HasTag("wereplayer") and not self.inst:HasTag("plantkin") then
                 self.hayfever = self.hayfever + 1
             end

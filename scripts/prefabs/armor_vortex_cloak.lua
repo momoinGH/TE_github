@@ -73,22 +73,18 @@ local function onunequip(inst, owner)
         inst.wisptask:Cancel()
         inst.wisptask= nil
     end
-    local container = inst.components.container
-    for i = 1, container:GetNumSlots() do
-        local item = container:GetItemInSlot(i)
-        if item ~= nil then
-            inst.components.inventoryitem.canonlygoinpocket = false
-            return
-        end
+    if inst.components.container:IsEmpty() == true then
+        inst:RemoveComponent("container")
+        inst.components.inventoryitem.cangoincontainer = true
+    else
+        inst.components.inventoryitem.cangoincontainer = false
     end
-    inst:RemoveComponent("container")
-    inst.components.inventoryitem.canonlygoinpocket = true
 --    inst.SoundEmitter:KillSound("vortex")
 end
 
 local function ondrop(inst, owner)
-    if inst.components.inventoryitem.canonlygoinpocket == true then
-        inst.components.inventoryitem.canonlygoinpocket = false
+    if inst.components.inventoryitem.cangoincontainer == true then
+        inst.components.inventoryitem.cangoincontainer = false
     end
     if not inst.components.container then
         local container = inst:AddComponent("container")
@@ -189,7 +185,8 @@ local function fn()
     inst:AddComponent("inventoryitem")    
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"		
 	inst.caminho = "images/inventoryimages/hamletinventory.xml"	
-    inst.components.inventoryitem.canonlygoinpocket = false
+    inst.components.inventoryitem.cangoincontainer = false
+    inst.components.inventoryitem.canonlygoinpocket = true
     inst.components.inventoryitem:SetOnDroppedFn(ondrop)
     inst.foleysound = "dontstarve_DLC003/common/crafted/vortex_armour/foley"
 
