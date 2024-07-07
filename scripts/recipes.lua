@@ -656,7 +656,7 @@ SortAfter("double_umbrellahat", "eyebrellahat", "CLOTHING")
 SortAfter("double_umbrellahat", "eyebrellahat", "RAIN")
 SortAfter("double_umbrellahat", "eyebrellahat", "SUMMER")
 SortBefore("tarlamp", "lantern", "LIGHT")
-SortAfter("boat_torch", "cotl_tabernacle_level1", "LIGHT")
+SortAfter("boat_torch", "coldfirepit", "LIGHT")
 SortAfter("boat_lantern", "boat_torch", "LIGHT")
 SortAfter("seatrap", "birdtrap", "TOOLS")
 SortAfter("seatrap", "birdtrap", "GARDENING")
@@ -668,7 +668,7 @@ SortAfter("captainhat", "bushhat", "CLOTHING")
 SortAfter("piratehat", "captainhat", "CLOTHING")
 SortAfter("armor_lifejacket", "armor_windbreaker", "CLOTHING")
 SortBefore("porto_buoy", "nightlight", "STRUCTURES")
-SortAfter("porto_buoy", "coldfirepit", "LIGHT")
+SortAfter("porto_buoy", "boat_lantern", "LIGHT")
 SortAfter("quackendrill", "beef_bell", "TOOLS")
 SortAfter("porto_tar_extractor", "icemaker", "STRUCTURES")
 SortAfter("porto_sea_yard", "tar_extractor", "STRUCTURES")
@@ -717,9 +717,12 @@ SortAfter("seaweed_stalk", "wormwood_lureplant", "CHARACTER")
 SortAfter("mermfishhouse", "mermwatchtower", "CHARACTER")
 --SortAfter("mermfishhouse", "mermwatchtower", "STRUCTURES")
 --SortAfter("wurt_turf_tidalmarsh", "wurt_turf_marsh", "CHARACTER")
-SortAfter("slingshotammo_obsidian", "slingshotammo_thulecite", "CHARACTER")--ia沃尔特配方：黑曜石弹
-SortBefore("slingshotammo_limestone", "slingshotammo_marble", "CHARACTER")--ia沃尔特配方：石灰岩弹
-SortAfter("slingshotammo_tar", "slingshotammo_poop", "CHARACTER")--ia沃尔特配方：焦油黏弹
+--SortAfter("slingshotammo_obsidian", "slingshotammo_thulecite", "CHARACTER")--ia沃尔特配方：黑曜石弹
+--SortBefore("slingshotammo_limestone", "slingshotammo_marble", "CHARACTER")--ia沃尔特配方：石灰岩弹
+--SortAfter("slingshotammo_tar", "slingshotammo_poop", "CHARACTER")--ia沃尔特配方：焦油黏弹
+
+SortAfter("shears", "goldenpitchfork", "TOOLS")
+SortAfter("bathat", "molehat", "LIGHT")
 
 --[[-----------------------------Sort keys----------------------------------------------------
 ------------------------------Code was written by Baku--------------------------------------
