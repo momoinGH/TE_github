@@ -159,7 +159,7 @@ AddRecipe2("sandbag_item",			{Ingredient("fabric", 2, v_atlas), Ingredient("sand
 AddRecipe2("doydoynest",			{Ingredient("twigs", 8), Ingredient("doydoyfeather", 2, v_atlas), Ingredient("poop", 4)}, 							TECH.SCIENCE_TWO, {atlas=v_atlas, placer="doydoynest_placer"}, {"STRUCTURES"})
 AddRecipe2("wall_limestone_item",	{Ingredient("limestone", 2, v_atlas)}, 																				TECH.SCIENCE_TWO, {atlas=v_atlas, numtogive=4}, {"STRUCTURES","DECOR"})
 AddRecipe2("wall_enforcedlimestone_item",{Ingredient("limestone", 2, v_atlas), Ingredient("seaweed", 4, v_atlas)}, 										TECH.SCIENCE_ONE, {atlas=v_atlas, numtogive=4}, {"STRUCTURES","DECOR"})
-AddRecipe2("seasack",				{Ingredient("seaweed", 5, v_atlas), Ingredient("vine", 2, v_atlas), Ingredient("shark_gills", 1, v_atlas)}, 		TECH.SCIENCE_TWO, {atlas=v_atlas}, {"CONTAINERS","COOKING"})
+AddRecipe2("seasack",				{Ingredient("seaweed", 5, v_atlas), Ingredient("vine", 2, v_atlas), Ingredient("shark_gills", 1, v_atlas)}, 		TECH.SCIENCE_TWO, {atlas=v_atlas}, {"CONTAINERS","COOKING","CLOTHING"})
 AddRecipe2("porto_waterchest1",		{Ingredient("boards", 4), Ingredient("tar", 1, v_atlas)}, 															TECH.SCIENCE_ONE, {atlas=v_atlas, image="waterchest1.png"}, {"STRUCTURES","CONTAINERS"})
 AddRecipe2("mussel_stick",			{Ingredient("bamboo", 2, v_atlas), Ingredient("vine", 1, v_atlas), Ingredient("seaweed", 1, v_atlas)},				TECH.SCIENCE_ONE, {atlas=v_atlas}, {"GARDENING"})
 AddRecipe2("mussel_bed",			{Ingredient("mussel", 1, v_atlas), Ingredient("coral", 1, v_atlas)}, 												TECH.SCIENCE_ONE, {atlas=v_atlas}, {"GARDENING"})
@@ -220,6 +220,9 @@ AddRecipe2("boatmetal_item", 		{Ingredient("alloy", 4, h_atlas), Ingredient("iro
 
 ----SW----
 if GetModConfigData("Shipwrecked") ~= 10  or GetModConfigData("startlocation") == 10 or GetModConfigData("kindofworld") == 5 then
+AddRecipe2("glass_shards",			{Ingredient("sand", 3, v_atlas)},																			TECH.SCIENCE_ONE, {atlas=v_atlas}, {"REFINE"})
+AddRecipe2("shard_sword",			{Ingredient("glass_shards", 3, v_atlas), Ingredient("nightmarefuel", 2), Ingredient("twigs", 2)},  			TECH.MAGIC_TWO,   {atlas=v_atlas}, {"MAGIC","WEAPONS"})
+AddRecipe2("shard_beak",			{Ingredient("glass_shards", 3, v_atlas), Ingredient("crow", 1), Ingredient("twigs", 2)},  					TECH.MAGIC_TWO,   {atlas=v_atlas}, {"MAGIC","WEAPONS"})
 AddRecipe2("piratihatitator",       {Ingredient("parrot", 1, v_atlas), Ingredient("boards", 4), Ingredient("piratehat", 1, v_atlas)},           TECH.SCIENCE_ONE, {atlas=v_atlas, placer="piratihatitator_placer"},{"PROTOTYPERS","MAGIC","STRUCTURES"})
 end
 
@@ -229,16 +232,14 @@ AddRecipe2("shears",				{Ingredient("twigs", 2), Ingredient("iron", 2, h_atlas)}
 AddRecipe2("bugrepellent",			{Ingredient("tuber_crop", 6, v_atlas), Ingredient("venus_stalk", 1, v_atlas)}, 								TECH.SCIENCE_ONE, {atlas=h_atlas}, {"TOOLS"})
 AddRecipe2("bathat",				{Ingredient("pigskin", 2), Ingredient("batwing", 1), Ingredient("compass", 1)},  							TECH.SCIENCE_TWO, {atlas=h_atlas}, {"LIGHT"})
 AddRecipe2("candlehat",				{Ingredient("cork", 4, h_atlas), Ingredient("iron", 2, h_atlas)}, 											TECH.SCIENCE_ONE, {atlas=h_atlas}, {"LIGHT"})
-AddRecipe2("glass_shards",			{Ingredient("sand", 3, v_atlas)},																			TECH.SCIENCE_ONE, {atlas=v_atlas}, {"REFINE"})
+
 --AddRecipe2("goldnugget",			{Ingredient("gold_dust", 6, h_atlas)},  																	TECH.SCIENCE_ONE, {atlas=h_atlas}, {"REFINE"})
-AddRecipe2("shard_sword",			{Ingredient("glass_shards", 3, v_atlas), Ingredient("nightmarefuel", 2), Ingredient("twigs", 2)},  			TECH.MAGIC_TWO,   {atlas=v_atlas}, {"MAGIC"})
-AddRecipe2("shard_beak",			{Ingredient("glass_shards", 3, v_atlas), Ingredient("crow", 1), Ingredient("twigs", 2)},  					TECH.MAGIC_TWO,   {atlas=v_atlas}, {"MAGIC"})
-AddRecipe2("armor_weevole",			{Ingredient("weevole_carapace", 4, v_atlas), Ingredient("chitin", 2, h_atlas)}, 							TECH.SCIENCE_TWO, {atlas=h_atlas}, {"ARMOUR"})
+AddRecipe2("armor_weevole",			{Ingredient("weevole_carapace", 4, v_atlas), Ingredient("chitin", 2, h_atlas)}, 							TECH.SCIENCE_TWO, {atlas=h_atlas}, {"ARMOUR","RAIN"})
 AddRecipe2("antsuit",				{Ingredient("chitin", 5, h_atlas), Ingredient("armorwood", 1)}, 											TECH.SCIENCE_ONE, {atlas=h_atlas}, {"ARMOUR"})
 AddRecipe2("antmaskhat",			{Ingredient("chitin", 5, h_atlas), Ingredient("footballhat", 1)}, 											TECH.SCIENCE_ONE, {atlas=h_atlas}, {"ARMOUR"})
 AddRecipe2("metalplatehat",			{Ingredient("alloy", 3, h_atlas), Ingredient("cork", 3, h_atlas)}, 											TECH.SCIENCE_ONE, {atlas=h_atlas}, {"ARMOUR"})
 AddRecipe2("armor_metalplate",		{Ingredient("alloy", 3, h_atlas), Ingredient("hammer", 1)}, 												TECH.SCIENCE_ONE, {atlas=h_atlas}, {"ARMOUR"})
-AddRecipe2("halberd",				{Ingredient("alloy", 1, h_atlas), Ingredient("twigs", 2)}, 													TECH.SCIENCE_ONE, {atlas=h_atlas}, {"WEAPONS"})
+AddRecipe2("halberd",				{Ingredient("alloy", 1, h_atlas), Ingredient("twigs", 2)}, 													TECH.SCIENCE_ONE, {atlas=h_atlas}, {"WEAPONS","TOOLS"})
 AddRecipe2("cork_bat",				{Ingredient("cork", 3, h_atlas), Ingredient("boards", 1)},  												TECH.SCIENCE_ONE, {atlas=h_atlas}, {"WEAPONS"})
 AddRecipe2("blunderbuss",			{Ingredient("oinc10", 1, h_atlas), Ingredient("boards", 2), Ingredient("gears", 1)}, 						TECH.SCIENCE_ONE, {atlas=h_atlas}, {"WEAPONS"})
 AddRecipe2("corkchest",				{Ingredient("cork", 2, h_atlas), Ingredient("rope", 1)}, 													TECH.SCIENCE_ONE, {atlas=h_atlas, min_spacing=1, placer="corkchest_placer"}, {"CONTAINERS"})
@@ -597,6 +598,7 @@ SortBefore("thatchpack", "backpack", "CONTAINERS")
 SortBefore("thatchpack", "backpack", "CLOTHING")
 SortAfter("seasack", "icepack", "CONTAINERS")
 SortAfter("seasack", "icepack", "COOKING")
+SortAfter("seasack", "icepack", "CLOTHING")
 SortAfter("palmleaf_hut", "siestahut", "STRUCTURES")
 SortAfter("palmleaf_hut", "double_umbrellahat", "RAIN")
 SortAfter("palmleaf_hut", "siestahut", "SUMMER")
@@ -650,7 +652,6 @@ SortAfter("tarsuit", "blubbersuit", "RAIN")
 SortAfter("armor_windbreaker", "tarsuit", "CLOTHING")
 SortAfter("armor_windbreaker", "tarsuit", "RAIN")
 SortAfter("gashat", "brainjellyhat", "CLOTHING")
-SortAfter("gasmaskhat", "gashat", "CLOTHING")
 SortAfter("aerodynamichat", "gasmaskhat", "CLOTHING")
 SortAfter("double_umbrellahat", "eyebrellahat", "CLOTHING")
 SortAfter("double_umbrellahat", "eyebrellahat", "RAIN")
@@ -669,7 +670,7 @@ SortAfter("piratehat", "captainhat", "CLOTHING")
 SortAfter("armor_lifejacket", "armor_windbreaker", "CLOTHING")
 SortBefore("porto_buoy", "nightlight", "STRUCTURES")
 SortAfter("porto_buoy", "boat_lantern", "LIGHT")
-SortAfter("quackendrill", "beef_bell", "TOOLS")
+SortAfter("quackendrill", "trawlnet", "TOOLS")
 SortAfter("porto_tar_extractor", "icemaker", "STRUCTURES")
 SortAfter("porto_sea_yard", "tar_extractor", "STRUCTURES")
 SortAfter("turf_jungle", "turf_monkey_ground", "DECOR")
@@ -720,9 +721,45 @@ SortAfter("mermfishhouse", "mermwatchtower", "CHARACTER")
 --SortAfter("slingshotammo_obsidian", "slingshotammo_thulecite", "CHARACTER")--ia沃尔特配方：黑曜石弹
 --SortBefore("slingshotammo_limestone", "slingshotammo_marble", "CHARACTER")--ia沃尔特配方：石灰岩弹
 --SortAfter("slingshotammo_tar", "slingshotammo_poop", "CHARACTER")--ia沃尔特配方：焦油黏弹
+SortAfter("shard_sword", "nightsword", "WEAPONS")
+SortAfter("shard_beak", "shard_sword", "WEAPONS")
+SortAfter("shard_sword", "nightsword", "MAGIC")
+SortAfter("shard_beak", "shard_sword", "MAGIC")
+
 
 SortAfter("shears", "goldenpitchfork", "TOOLS")
+SortAfter("halberd", "shears", "TOOLS")
+SortAfter("bugrepellent", "reskin_tool", "TOOLS")
+SortAfter("goldpan", "bugrepellent", "TOOLS")
+SortAfter("ballpein_hammer", "goldpan", "TOOLS")
+SortAfter("magnifying_glass", "ballpein_hammer", "TOOLS")
+
 SortAfter("bathat", "molehat", "LIGHT")
+SortAfter("candlehat", "cotl_tabernacle_level1", "LIGHT")
+
+SortAfter("basefan", "sculptingtable", "PROTOTYPERS")
+SortAfter("smelter", "basefan", "PROTOTYPERS")
+
+SortAfter("glass_shards", "messagebottleempty1", "REFINE")
+SortAfter("pigskin", "bearger_fur", "REFINE")
+
+SortAfter("halberd", "boomerang", "WEAPONS")
+SortAfter("cork_bat", "halberd", "WEAPONS")
+SortAfter("blunderbuss", "shard_beak", "WEAPONS")
+
+SortAfter("armor_weevole", "cookiecutterhat", "ARMOUR")
+SortAfter("antsuit", "beehat", "ARMOUR")
+SortAfter("antmaskhat", "antsuit", "ARMOUR")
+SortAfter("armor_metalplate", "antmaskhat", "ARMOUR")
+SortAfter("metalplatehat", "armor_metalplate", "ARMOUR")
+
+SortAfter("disguisehat", "mermhat", "CLOTHING")
+SortBefore("pithhat", "snakeskinhat", "CLOTHING")
+SortAfter("gasmaskhat", "gashat", "CLOTHING")
+SortAfter("thunderhat", "snakeskinhat", "CLOTHING")
+
+SortAfter("bell1", "ox_flute", "MAGIC")
+
 
 --[[-----------------------------Sort keys----------------------------------------------------
 ------------------------------Code was written by Baku--------------------------------------
