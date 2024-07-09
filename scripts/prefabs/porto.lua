@@ -25,7 +25,6 @@ local prefabs =
 
 }
 
-
 local function ondroppedsurfboarditem(inst)
 local map = TheWorld.Map
 local x, y, z = inst.Transform:GetWorldPosition()
@@ -567,8 +566,6 @@ local function fnencrustedboat(sim)
     inst.components.deployable:SetDeployMode(DEPLOYMODE.WATER)
 	inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)	
     
-	
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -644,7 +641,6 @@ local function fnsurfboard(sim)
     inst.components.deployable:SetDeployMode(DEPLOYMODE.WATER)
 	inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)	
     	
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -674,9 +670,6 @@ local function ondeploywoodlegsboat(inst, pt, deployer)
 	local canhao = SpawnPrefab("boatcannon") 
 	boat.components.container:GiveItem(velaw, 1)
 	boat.components.container:GiveItem(canhao, 2)	
-	
-	
-	
 	
     if boat ~= nil then
         boat.Physics:SetCollides(false)
@@ -711,8 +704,6 @@ local function fnwoodlegsboat(sim)
     inst.components.deployable:SetDeployMode(DEPLOYMODE.WATER)
 	inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)	
     
-	
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -761,7 +752,6 @@ local function fnsurfboarditem(sim)
     inst.components.deployable:SetDeployMode(DEPLOYMODE.WATER)
 	inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)	
     
-	
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -784,7 +774,9 @@ local function fnsurfboarditem(sim)
 	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
 	inst.components.inventoryitem:SetOnDroppedFn(ondroppedsurfboarditem)
 
-
+    inst:AddComponent("fuel")
+    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
+	
 	return inst
 end
 
@@ -808,7 +800,6 @@ local function fncorkboatitem(sim)
     inst.components.deployable:SetDeployMode(DEPLOYMODE.WATER)
 	inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)	
     
-	
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -831,6 +822,8 @@ local function fncorkboatitem(sim)
 	inst.caminho = "images/inventoryimages/hamletinventory.xml"	
 	inst.components.inventoryitem:SetOnDroppedFn(ondropped)
 
+    inst:AddComponent("fuel")
+    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
 
 	return inst
 end
@@ -856,7 +849,7 @@ local function fnshadowboat(sim)
 
     inst.AnimState:SetBank("seafarer_boatsw")
     inst.AnimState:SetBuild("seafarer_boatsw")
-    inst.AnimState:PlayAnimation("shadow",true)
+    inst.AnimState:PlayAnimation("shadow", true)
 	inst.AnimState:SetMultColour(1, 1, 1, 0.5)
     inst.AnimState:UsePointFiltering(true)
 	
@@ -872,8 +865,6 @@ local function fnshadowboat(sim)
     inst.components.deployable:SetDeployMode(DEPLOYMODE.WATER)
 	inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)	
     
-	
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -890,14 +881,10 @@ local function fnshadowboat(sim)
 
     --inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)
 
-    --inst:AddComponent("fuel")
-    --inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
-
     MakeHauntableLaunch(inst)
 	
 	return inst
 end
-
 
 return Prefab( "porto_raft", fnraft, assets, prefabs),
 MakePlacer( "porto_raft_placer", "raft", "raft_build", "run_loop", false, false, false),
@@ -920,15 +907,10 @@ MakePlacer( "surfboarditem_placer", "raft", "raft_surfboard_build", "run_loop", 
 Prefab( "corkboatitem", fncorkboatitem, assets, prefabs),
 MakePlacer( "corkboatitem_placer", "rowboat", "coracle_boat_build", "run_loop", false, false, false),
 
-
-
 Prefab( "porto_shadowboat", fnshadowboat, assets, prefabs),
 MakePlacer( "porto_shadowboat_placer", "rowboat", "waxwell_shadowboat_build", "run_loop", false, false, false),
-
 --Prefab( "shadowboatitem", fnshadowboatitem, assets, prefabs),
 --MakePlacer( "shadowboatitem_placer", "rowboat", "waxwell_shadowboat_build", "run_loop", false, false, false),
-
-
 
 Prefab( "porto_raft_old", fnraftold, assets, prefabs),
 MakePlacer( "porto_raft_old_placer", "raft", "raft_build", "run_loop", false, false, false),

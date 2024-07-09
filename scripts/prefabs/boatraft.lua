@@ -28,6 +28,8 @@ local sounds ={
     movement = "turnoftides/common/together/boat/movement",
 }
 
+local BOAT_COLLISION_SEGMENT_COUNT = 20
+
 local BOATBUMPER_MUST_TAGS = { "boatbumper" }
 local BOATCANNON_MUST_TAGS = { "boatcannon" }
 
@@ -252,6 +254,62 @@ local function SpawnFragment(lp, prefix, offset_x, offset_y, offset_z, ignite)
     return fragment
 end
 
+local function InstantlyBreakBoat(inst)
+    -- This is not for SGboat but is for safety on physics.
+    if inst.components.boatphysics then
+        inst.components.boatphysics:SetHalting(true)
+    end
+    --Keep this in sync with SGboat.
+    for entity_on_platform in pairs(inst.components.walkableplatform:GetEntitiesOnPlatform()) do
+        entity_on_platform:PushEvent("abandon_ship")
+    end
+    for player_on_platform in pairs(inst.components.walkableplatform:GetPlayersOnPlatform()) do
+        player_on_platform:PushEvent("onpresink")
+    end
+    inst:sinkloot()
+    if inst.postsinkfn then
+        inst:postsinkfn()
+    end
+    inst:Remove()
+end
+
+local function GetSafePhysicsRadius(inst)
+    return (inst.components.hull ~= nil and inst.components.hull:GetRadius() or TUNING.BOAT.RADIUS) +
+        0.10 -- Add a small offset for item overhangs.
+end
+
+local function IsBoatEdgeOverLand(inst, override_position_pt)
+    local map = TheWorld.Map
+    local radius = inst:GetSafePhysicsRadius()
+    local segment_count = BOAT_COLLISION_SEGMENT_COUNT * 2
+    local segment_span = TWOPI / segment_count
+    local x, y, z
+    if override_position_pt then
+        x, y, z = override_position_pt:Get()
+    else
+        x, y, z = inst.Transform:GetWorldPosition()
+    end
+    for segement_idx = 0, segment_count do
+        local angle = segement_idx * segment_span
+
+        local angle0 = angle - segment_span / 2
+        local x0 = math.cos(angle0) * radius
+        local z0 = math.sin(angle0) * radius
+        if not map:IsOceanTileAtPoint(x + x0, 0, z + z0) or map:IsVisualGroundAtPoint(x + x0, 0, z + z0) then
+            return true
+        end
+
+        local angle1 = angle + segment_span / 2
+        local x1 = math.cos(angle1) * radius
+        local z1 = math.sin(angle1) * radius
+        if not map:IsOceanTileAtPoint(x + x1, 0, z + z1) or map:IsVisualGroundAtPoint(x + x1, 0, z + z1) then
+            return true
+        end
+    end
+
+    return false
+end
+
 local function MakeBoat(name,radius)
     local stats_multiplier=(radius/4)^2
     local scale_multiplier=radius/4
@@ -456,7 +514,10 @@ local function MakeBoat(name,radius)
         inst:SetStateGraph("SGsurfboard")
 		
     inst.speed = speed
-
+    
+    inst.InstantlyBreakBoat = InstantlyBreakBoat
+    inst.GetSafePhysicsRadius = GetSafePhysicsRadius
+    inst.IsBoatEdgeOverLand = IsBoatEdgeOverLand
     inst.OnLoadPostPass = OnLoadPostPass		
 
         return inst

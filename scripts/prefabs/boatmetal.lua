@@ -43,6 +43,9 @@ local item_prefabs =
     "boatmetal",
 }
 
+local BOAT_COLLISION_SEGMENT_COUNT = 20
+
+
 local BOATBUMPER_MUST_TAGS = { "boatbumper" }
 local BOATCANNON_MUST_TAGS = { "boatcannon" }
 
@@ -245,6 +248,63 @@ local function SpawnFragment(lp, prefix, offset_x, offset_y, offset_z, ignite)
     return fragment
 end
 
+local function InstantlyBreakBoat(inst)
+    -- This is not for SGboat but is for safety on physics.
+    if inst.components.boatphysics then
+        inst.components.boatphysics:SetHalting(true)
+    end
+    --Keep this in sync with SGboat.
+    for entity_on_platform in pairs(inst.components.walkableplatform:GetEntitiesOnPlatform()) do
+        entity_on_platform:PushEvent("abandon_ship")
+    end
+    for player_on_platform in pairs(inst.components.walkableplatform:GetPlayersOnPlatform()) do
+        player_on_platform:PushEvent("onpresink")
+    end
+    inst:sinkloot()
+    if inst.postsinkfn then
+        inst:postsinkfn()
+    end
+    inst:Remove()
+end
+
+local function GetSafePhysicsRadius(inst)
+    return (inst.components.hull ~= nil and inst.components.hull:GetRadius() or TUNING.BOAT.RADIUS) +
+        0.18 -- Add a small offset for item overhangs.
+end
+
+local function IsBoatEdgeOverLand(inst, override_position_pt)
+    local map = TheWorld.Map
+    local radius = inst:GetSafePhysicsRadius()
+    local segment_count = BOAT_COLLISION_SEGMENT_COUNT * 2
+    local segment_span = TWOPI / segment_count
+    local x, y, z
+    if override_position_pt then
+        x, y, z = override_position_pt:Get()
+    else
+        x, y, z = inst.Transform:GetWorldPosition()
+    end
+    for segement_idx = 0, segment_count do
+        local angle = segement_idx * segment_span
+
+        local angle0 = angle - segment_span / 2
+        local x0 = math.cos(angle0) * radius
+        local z0 = math.sin(angle0) * radius
+        if not map:IsOceanTileAtPoint(x + x0, 0, z + z0) or map:IsVisualGroundAtPoint(x + x0, 0, z + z0) then
+            return true
+        end
+
+        local angle1 = angle + segment_span / 2
+        local x1 = math.cos(angle1) * radius
+        local z1 = math.sin(angle1) * radius
+        if not map:IsOceanTileAtPoint(x + x1, 0, z + z1) or map:IsVisualGroundAtPoint(x + x1, 0, z + z1) then
+            return true
+        end
+    end
+
+    return false
+end
+
+
 local function fn()
     local inst = CreateEntity()
 
@@ -261,7 +321,7 @@ local function fn()
 	inst.sounds = sounds
 	inst.walksound = "wood"
 	
-	inst:ListenForEvent("spawnnewboatleak", OnSpawnNewBoatLeak)
+	--inst:ListenForEvent("spawnnewboatleak", OnSpawnNewBoatLeak)
     inst.boat_crackle = "fx_boat_crackle"
 
     inst.sinkloot = function()
@@ -336,7 +396,7 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.Physics:SetDontRemoveOnSleep(true)
     EnableBoatItemCollision(inst)
 
@@ -357,6 +417,8 @@ local function fn()
     inst.components.repairable.onrepaired = OnRepaired
 
     inst:AddComponent("hullhealth")
+	inst.components.hullhealth.leakproof = true
+	
     inst:AddComponent("boatphysics")
     inst:AddComponent("boatdrifter")
     inst:AddComponent("savedrotation")
@@ -391,7 +453,7 @@ local function fn()
 ]]	
     inst:SetStateGraph("SGboat")
 
-	inst:ListenForEvent("spawnnewboatleak", OnSpawnNewBoatLeak)
+	--inst:ListenForEvent("spawnnewboatleak", OnSpawnNewBoatLeak)
 
     inst.StopBoatPhysics = StopBoatPhysics
     inst.StartBoatPhysics = StartBoatPhysics
@@ -401,6 +463,9 @@ local function fn()
 	
     inst.speed = speed
 
+    inst.InstantlyBreakBoat = InstantlyBreakBoat
+    inst.GetSafePhysicsRadius = GetSafePhysicsRadius
+    inst.IsBoatEdgeOverLand = IsBoatEdgeOverLand
     inst.OnLoadPostPass = OnLoadPostPass	
 
     return inst
@@ -575,8 +640,8 @@ local function item_fn()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"	
     --inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)
 
-    inst:AddComponent("fuel")
-    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
+    --inst:AddComponent("fuel")
+    --inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
 
 --    MakeLargeBurnable(inst)
 --    MakeLargePropagator(inst)
