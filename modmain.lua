@@ -3517,7 +3517,7 @@ end
 
 if inst.prefab == "ash" then
 if GLOBAL.TheWorld.ismastersim then
-inst:AddComponent("fertilizecoffee")
+inst:AddComponent("fertilizer")
 end
 end
 ------------------------

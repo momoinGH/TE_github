@@ -1059,7 +1059,7 @@ AddAction(FERTILIZE)
 
 
 
-
+--[[
 local FERTILIZECOFFEE = GLOBAL.Action({priority = 1, distance = 2, mount_valid = true})
 FERTILIZECOFFEE.str = (GLOBAL.STRINGS.ACTIONS.FERTILIZE)
 FERTILIZECOFFEE.id = "FERTILIZECOFFEE"
@@ -1090,7 +1090,7 @@ AddComponentAction("USEITEM", "fertilizecoffee", function(inst, doer, target, ac
             end	
 	end
 end)
-
+]]
 local function ExtraPickupRange(doer, dest)
 	if dest ~= nil then
 		local target_x, target_y, target_z = dest:GetPoint()
@@ -2474,10 +2474,10 @@ AddStategraphActionHandler("wilson_client", GLOBAL.ActionHandler(GLOBAL.ACTIONS.
 
 AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.INVESTIGATEGLASS, "investigate_start"))
 AddStategraphActionHandler("wilson_client", GLOBAL.ActionHandler(GLOBAL.ACTIONS.INVESTIGATEGLASS, "investigate_start"))
-
+--[[
 AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.FERTILIZECOFFEE, "doshortaction"))
 AddStategraphActionHandler("wilson_client", GLOBAL.ActionHandler(GLOBAL.ACTIONS.FERTILIZECOFFEE, "doshortaction"))
-
+]]
 AddStategraphActionHandler(
     "wilson",
     GLOBAL.ActionHandler(
