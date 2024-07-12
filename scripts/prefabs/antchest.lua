@@ -69,9 +69,21 @@ local function onhit(inst, worker)
 	end
 end
 
+local function setworkable(inst)
+	inst:AddComponent("lootdropper")
+	inst:AddComponent("workable")
+	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+	inst.components.workable:SetWorkLeft(2)
+	inst.components.workable:SetOnFinishCallback(onhammered)
+	inst.components.workable:SetOnWorkCallback(onhit)
+end
+
 local function onbuilt(inst)
 --	inst.AnimState:PlayAnimation("place")
 	inst.AnimState:PushAnimation("closed", true)
+	if inst.prefab == "antchest" then
+		inst.honeyWasLoaded = true
+	end
 end
 
 local function onsave(inst, data)
@@ -92,43 +104,20 @@ local function onload(inst, data)
 	end
 end
 
-local function testitem_honeychest(inst, item, slot)
-	return item.prefab == "honey" or item.prefab == "nectar_pod"
-end
+-- local function testitem_honeychest(inst, item, slot)
+-- 	return item.prefab == "honey" or item.prefab == "nectar_pod"
+-- end
 
 local function LoadHoneyFirstTime(inst)
-	if not inst.honeyWasLoaded then
-		inst.honeyWasLoaded = true
-
-if inst.components.container then
-local single1 = SpawnPrefab("honey")
-inst.components.container:GiveItem(single1, 1)		
-
-local single1 = SpawnPrefab("honey")
-inst.components.container:GiveItem(single1, 2)	
-
-local single1 = SpawnPrefab("honey")
-inst.components.container:GiveItem(single1, 3)	
-
-local single1 = SpawnPrefab("honey")
-inst.components.container:GiveItem(single1, 4)	
-
-local single1 = SpawnPrefab("honey")
-inst.components.container:GiveItem(single1, 5)	
-
-local single1 = SpawnPrefab("honey")
-inst.components.container:GiveItem(single1, 6)	
-
-local single1 = SpawnPrefab("honey")
-inst.components.container:GiveItem(single1, 7)	
-
-local single1 = SpawnPrefab("honey")
-inst.components.container:GiveItem(single1, 8)	
-
-local single1 = SpawnPrefab("honey")
-inst.components.container:GiveItem(single1, 9)	
-end
-end
+    if not inst.honeyWasLoaded then
+        inst.honeyWasLoaded = true
+        if inst.components.container then
+            for i = 1, 9 do
+                local single1 = SpawnPrefab("honey")
+                inst.components.container:GiveItem(single1, i)
+            end
+        end
+    end
 end
 
 local function RefreshAntChestBuild(inst)
@@ -184,7 +173,7 @@ local function fn(Sim)
 
     if not TheWorld.ismastersim then
 		inst.OnEntityReplicated = function(inst) 
-			inst.replica.container:WidgetSetup("treasurechest") 
+			inst.replica.container:WidgetSetup("antchest") 
 		end
 		return inst
 	end
@@ -192,14 +181,22 @@ local function fn(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("treasurechest")
+	inst.components.container:WidgetSetup("antchest")
 	inst.components.container.onopenfn = onopen
     inst.components.container.onclosefn = onclose
 --	inst.components.container.itemtestfn = testitem_honeychest
 
-	inst:AddComponent("lootdropper")
+	setworkable(inst)
+	
+	inst:AddComponent("preserver")
+	inst.components.preserver:SetPerishRateMultiplier(0)
 
 	inst:ListenForEvent( "onbuilt", onbuilt)
+
+    -- local upgradeable = inst:AddComponent("upgradeable")
+    -- upgradeable.upgradetype = UPGRADETYPES.CHEST
+    -- upgradeable:SetOnUpgradeFn(OnUpgrade)
+
 	MakeSnowCovered(inst, .01)	
 
 	MakeSmallBurnable(inst, nil, nil, true)
@@ -215,6 +212,10 @@ local function fn(Sim)
 	
 	return inst
 end
+
+-- local function fn_1(Sim)
+-- 	fn(Sim)
+-- end
 
 local function fn1(Sim)
 	local inst = CreateEntity()
@@ -252,12 +253,7 @@ local function fn1(Sim)
 	inst.components.container.onopenfn = onopencork
     inst.components.container.onclosefn = onclosecork
 
-	inst:AddComponent("lootdropper")
-	inst:AddComponent("workable")
-	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-	inst.components.workable:SetWorkLeft(2)
-	inst.components.workable:SetOnFinishCallback(onhammered)
-	inst.components.workable:SetOnWorkCallback(onhit)
+	setworkable(inst)
 
 	inst:ListenForEvent( "onbuilt", onbuilt)
 	MakeSnowCovered(inst, .01)	
@@ -269,6 +265,7 @@ local function fn1(Sim)
 end
 
 return 	Prefab("common/antchest", fn, assets),
+		-- Prefab("common/honeybox", fn_1, assets),
 		Prefab("common/corkchest", fn1, assets),
 		MakePlacer("common/corkchest_placer", "chest", "treasure_chest_cork", "closed"),
 	    MakePlacer("common/antchest_placer", "ant_chest", "ant_chest_honey_build", "closed")

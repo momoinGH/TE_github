@@ -255,7 +255,7 @@ AddRecipe2("bonestaff",			    {Ingredient("pugalisk_skull", 1, h_atlas), Ingredi
 AddRecipe2("armorvortexcloak",	    {Ingredient("ancient_remnant", 5, h_atlas), Ingredient("armor_sanity", 1)},                                 TECH.LOST,        {atlas=h_atlas}, { "ARMOUR", "MAGIC", "CONTAINERS" })
 AddRecipe2("armorvoidcloak",        {Ingredient("armorvortexcloak", 1, h_atlas), Ingredient("horrorfuel", 4), Ingredient("voidcloth", 4),Ingredient("shadowheart", 1)}, TECH.SHADOWFORGING_TWO, {atlas=h_atlas, nounlock = true}, {"CRAFTING_STATION"})
 AddRecipe2("living_artifact",		{Ingredient("infused_iron", 6, h_atlas), Ingredient("waterdrop", 1, h_atlas)}, 								TECH.LOST,        {atlas=h_atlas}, {"MAGIC"})
-AddRecipe2("antchest",			    {Ingredient("chitin", 6, h_atlas), Ingredient("beeswax",1), Ingredient("honey",9)}, 						TECH.LOST,        {atlas=h_atlas, min_spacing=1, placer="antchest_placer"}, {"STRUCTURES","CONTAINERS","COOKING","GARDENING"})
+AddRecipe2("antchest",			    {Ingredient("chitin", 6, h_atlas), Ingredient("beeswax",1), Ingredient("honey",3)}, 						TECH.LOST,        {atlas=h_atlas, min_spacing=1, placer="antchest_placer"}, {"STRUCTURES","CONTAINERS","COOKING","GARDENING"})
 AddRecipe2("pigskin",			    {Ingredient("bat_leather", 1, h_atlas)},                                                                    TECH.SCIENCE_ONE, {atlas=h_atlas}, {"REFINE"})
 AddRecipe2("hogusporkusator",       {Ingredient("pigskin", 4), Ingredient("boards", 4), Ingredient("feather_robin_winter", 4)},                 TECH.SCIENCE_ONE, {atlas=h_atlas, placer="hogusporkusator_placer"}, {"PROTOTYPERS","MAGIC","STRUCTURES"})
 
