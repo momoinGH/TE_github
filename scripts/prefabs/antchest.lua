@@ -5,7 +5,9 @@ local assets=
 	Asset("ANIM", "anim/ant_chest.zip"),
 	Asset("ANIM", "anim/ant_chest_honey_build.zip"),
 	Asset("ANIM", "anim/ant_chest_nectar_build.zip"),
-	Asset("ANIM", "anim/treasure_chest_cork.zip"),	
+
+	Asset("ANIM", "anim/honey_chest.zip"),
+	Asset("ANIM", "anim/honey_chest_honey_build.zip"),
 }
 
 local prefabs =
@@ -22,23 +24,6 @@ local function onopen(inst)
 end
 
 local function onclose(inst)
-	if not inst:HasTag("burnt") then
-			inst.AnimState:PlayAnimation("close", true)
-			inst.AnimState:PushAnimation("closed", true)
-			inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_close")
-
-	end
-end
-
-local function onopencork(inst) 
-	if not inst:HasTag("burnt") then
-			inst.AnimState:PlayAnimation("open", true)
-			inst.AnimState:PushAnimation("open_loop", true)
-			inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_open")
-	end
-end
-
-local function onclosecork(inst)
 	if not inst:HasTag("burnt") then
 			inst.AnimState:PlayAnimation("close", true)
 			inst.AnimState:PushAnimation("closed", true)
@@ -80,8 +65,8 @@ end
 
 local function onbuilt(inst)
 --	inst.AnimState:PlayAnimation("place")
-	inst.AnimState:PushAnimation("closed", true)
-	if inst.prefab == "antchest" then
+	inst.AnimState:PushAnimation("close", true)
+	if inst.prefab == "honeychest" then
 		inst.honeyWasLoaded = true
 	end
 end
@@ -191,6 +176,69 @@ local function fn(Sim)
 	inst:AddComponent("preserver")
 	inst.components.preserver:SetPerishRateMultiplier(0)
 
+	--inst:ListenForEvent( "onbuilt", onbuilt)
+
+    -- local upgradeable = inst:AddComponent("upgradeable")
+    -- upgradeable.upgradetype = UPGRADETYPES.CHEST
+    -- upgradeable:SetOnUpgradeFn(OnUpgrade)
+
+	MakeSnowCovered(inst, .01)	
+
+	MakeSmallBurnable(inst, nil, nil, true)
+	MakeSmallPropagator(inst)
+	
+--	inst:ListenForEvent("itemget", function() RefreshAntChestBuild(inst) end)
+--	inst:ListenForEvent("itemlose", function() RefreshAntChestBuild(inst) end)
+	inst:DoTaskInTime(0.01, function() LoadHoneyFirstTime(inst) end)	
+	
+		inst.OnSave = onsave 
+		inst.OnLoad = onload	
+	
+	
+	return inst
+end
+
+local function fn1(Sim)
+	local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+	inst.entity:AddMiniMapEntity()
+    inst.entity:AddNetwork()
+	MakeInventoryPhysics(inst)
+
+	inst.MiniMapEntity:SetIcon("honey_chest.png")
+	
+	inst.AnimState:SetBank("honey_chest")
+	inst.AnimState:SetBuild("honey_chest_build")
+	inst.AnimState:PlayAnimation("closed", true)
+	
+	inst:AddTag("structure")
+    inst:AddTag("chest")
+
+	inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+		inst.OnEntityReplicated = function(inst) 
+			inst.replica.container:WidgetSetup("antchest") 
+		end
+		return inst
+	end
+
+	inst:AddComponent("inspectable")
+
+	inst:AddComponent("container")
+	inst.components.container:WidgetSetup("antchest")
+	inst.components.container.onopenfn = onopen
+    inst.components.container.onclosefn = onclose
+--	inst.components.container.itemtestfn = testitem_honeychest
+
+	setworkable(inst)
+	
+	inst:AddComponent("preserver")
+	inst.components.preserver:SetPerishRateMultiplier(0)
+
 	inst:ListenForEvent( "onbuilt", onbuilt)
 
     -- local upgradeable = inst:AddComponent("upgradeable")
@@ -213,59 +261,7 @@ local function fn(Sim)
 	return inst
 end
 
--- local function fn_1(Sim)
--- 	fn(Sim)
--- end
-
-local function fn1(Sim)
-	local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
-    inst.entity:AddNetwork()
-	MakeInventoryPhysics(inst)
-
-	inst.MiniMapEntity:SetIcon("cork_chest.png")
-	
-	inst.AnimState:SetBank("treasure_chest_cork")
-	inst.AnimState:SetBuild("treasure_chest_cork")
-	inst.AnimState:PlayAnimation("closed", true)
-	
---	inst:AddTag("structure")
-    inst:AddTag("chest")
-	inst:AddTag("pogproof")
-
-	inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst) 
-			inst.replica.container:WidgetSetup("corkchest") 
-		end
-		return inst
-	end
-
-	inst:AddComponent("inspectable")
-
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("corkchest")
-	inst.components.container.onopenfn = onopencork
-    inst.components.container.onclosefn = onclosecork
-
-	setworkable(inst)
-
-	inst:ListenForEvent( "onbuilt", onbuilt)
-	MakeSnowCovered(inst, .01)	
-
-	MakeSmallBurnable(inst, nil, nil, true)
-	MakeSmallPropagator(inst)
-	
-	return inst
-end
-
 return 	Prefab("common/antchest", fn, assets),
-		-- Prefab("common/honeybox", fn_1, assets),
-		Prefab("common/corkchest", fn1, assets),
-		MakePlacer("common/corkchest_placer", "chest", "treasure_chest_cork", "closed"),
-	    MakePlacer("common/antchest_placer", "ant_chest", "ant_chest_honey_build", "closed")
+		Prefab("common/honeychest", fn1, assets),
+
+	    MakePlacer("common/honeychest_placer", "honey_chest", "honey_chest_build", "closed")
