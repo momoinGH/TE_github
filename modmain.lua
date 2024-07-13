@@ -291,6 +291,7 @@ PrefabFiles =
 "preparedfoods_tropical",
 
 "walls_tropical",
+"pollen",
 }
 
 if GetModConfigData("whirlpools") then
