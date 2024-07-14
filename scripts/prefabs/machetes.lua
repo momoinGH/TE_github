@@ -1,15 +1,19 @@
 local assets=
 {
 	Asset("ANIM", "anim/machete.zip"),
-	Asset("ANIM", "anim/machete_obsidian.zip"),
-	Asset("ANIM", "anim/goldenmachete.zip"),
 	Asset("ANIM", "anim/swap_machete.zip"),
-	Asset("ANIM", "anim/swap_machete_obsidian.zip"),
+		
+	Asset("ANIM", "anim/goldenmachete.zip"),
 	Asset("ANIM", "anim/swap_goldenmachete.zip"),
+	
+	Asset("ANIM", "anim/machete_obsidian.zip"),
+	Asset("ANIM", "anim/swap_machete_obsidian.zip"),
+	
+	Asset("ANIM", "anim/machete_glass.zip"),
+	Asset("ANIM", "anim/swap_machete_glass.zip"),
 }
 
- 
- 
+
 local function ondropped(inst)
 local map = TheWorld.Map
 local x, y, z = inst.Transform:GetWorldPosition()
@@ -371,6 +375,78 @@ local function obsidian(Sim)
 	return inst
 end
 
+local function onattack(inst, attacker, target)
+	inst.components.weapon.attackwear = target ~= nil and target:IsValid()
+		and (target:HasTag("shadow") or target:HasTag("shadowminion") or target:HasTag("shadowchesspiece") or target:HasTag("stalker") or target:HasTag("stalkerminion") or target:HasTag("shadowthrall"))
+		and TUNING.GLASSCUTTER.SHADOW_WEAR
+		or 1
+end
+
+local function onequipglass(inst, owner)
+	owner.AnimState:OverrideSymbol("swap_object", "swap_machete_glass", "swap_machete")
+	--owner.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")
+	owner.AnimState:Show("ARM_carry")
+	owner.AnimState:Hide("ARM_normal")
+end
+
+local function glass(Sim)
+	local inst = CreateEntity()
+	local trans = inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+	inst.entity:AddNetwork()
+	inst.entity:AddSoundEmitter()
+	MakeInventoryPhysics(inst)
+	-- MakeInventoryFloatable(inst, "idle_water", "idle")
+
+	inst.AnimState:SetBuild("machete_glass")
+	inst.AnimState:SetBank("machete")
+	inst.AnimState:PlayAnimation("idle")
+
+	inst:AddTag("sharp")
+	inst:AddTag("machete")
+	inst:AddTag("aquatic")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	inst.entity:SetPristine()
+	
+	inst:AddComponent("weapon")
+	inst.components.weapon:SetDamage(MACHETE_DAMAGE)
+    inst.components.weapon:SetOnAttack(onattack)
+
+	-----
+	inst:AddComponent("tool")
+	inst.components.tool:SetAction(ACTIONS.HACK)
+	-------
+	inst:AddComponent("finiteuses")
+    inst.components.finiteuses:SetMaxUses(TUNING.GLASSCUTTER.USES)
+    inst.components.finiteuses:SetUses(TUNING.GLASSCUTTER.USES)
+	inst.components.finiteuses:SetOnFinished( onfinished)
+	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 2.5)
+	-------
+	inst:AddComponent("equippable")
+
+	inst:AddComponent("inspectable")
+
+
+
+	--inst.components.equippable:SetOnEquip( onequip )
+
+	inst.components.equippable:SetOnUnequip( onunequip)
+	
+	inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
+	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1 / TUNING.GOLDENTOOLFACTOR)
+	inst.components.weapon.attackwear = 1 / TUNING.GOLDENTOOLFACTOR
+	inst.components.equippable:SetOnEquip( onequipglass )
+	inst.components.inventoryitem:SetOnDroppedFn(ondropped)
+	inst:DoTaskInTime(0, ondropped)	
+	return inst
+end
+
 return Prefab( "machete", normal, assets),
 	   Prefab( "goldenmachete", golden, assets),
-	   Prefab( "obsidianmachete", obsidian, assets)
+	   Prefab( "obsidianmachete", obsidian, assets),
+	   Prefab( "glassmachete", glass, assets)

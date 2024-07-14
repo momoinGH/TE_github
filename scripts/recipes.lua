@@ -89,7 +89,18 @@ AddRecipe2("shadowdigger_builder",		{Ingredient("nightmarefuel", 2), Ingredient(
 AddRecipe2("shadowduelist_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDUELIST)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
 --Wickerbottom
 AddRecipe2("book_meteor1", 			{Ingredient("papyrus", 2), Ingredient("obsidian", 2,v_atlas)},   TECH.SCIENCE_TWO,  {atlas=v_atlas, builder_tag="bookbuilder", }, {"CHARACTER"})
+--WX78--
+AddRecipe2("wx78module_movespeed_sw", {Ingredient("scandata", 2), Ingredient("crab" , 1, h_atlas)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_movespeed", }, { "CHARACTER" })
+SortAfter("wx78module_movespeed_sw", "wx78module_movespeed", "CHARACTER")
+AddRecipe2("wx78module_movespeed_ham", {Ingredient("scandata", 2), Ingredient("piko" , 1, h_atlas)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_movespeed", }, { "CHARACTER" })
+SortAfter("wx78module_movespeed_ham", "wx78module_movespeed_sw", "CHARACTER")
+AddRecipe2("wx78module_maxhunger_sw", {Ingredient("scandata", 3), Ingredient("shark_gills", 1, h_atlas), Ingredient("wx78module_maxhunger1", 1)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_maxhunger", }, { "CHARACTER" })
+SortAfter("wx78module_maxhunger_sw", "wx78module_maxhunger", "CHARACTER")
+AddRecipe2("wx78module_taser_ham", {Ingredient("scandata", 5), Ingredient("feather_thunder", 1, h_atlas)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_taser", }, { "CHARACTER" })
+SortAfter("wx78module_taser_ham", "wx78module_taser", "CHARACTER")
 
+--Moon--
+AddRecipe2("glassmachete", 			{Ingredient("twigs", 2), Ingredient("moonglass", 4)}, 															    TECH.CELESTIAL_THREE, {atlas=h_atlas, nounlock=true}, {"CRAFTING_STATION"})
 
 --OBSIDIAN--
 AddRecipe2("axeobsidian", 			{Ingredient("axe", 1), Ingredient("obsidian", 2, v_atlas), Ingredient("dragoonheart", 1, v_atlas)},  				TECH.OBSIDIAN_TWO, {atlas=v_atlas, nounlock=true}, {"OBSIDIAN"})
@@ -255,19 +266,9 @@ AddRecipe2("bonestaff",			    {Ingredient("pugalisk_skull", 1, h_atlas), Ingredi
 AddRecipe2("armorvortexcloak",	    {Ingredient("ancient_remnant", 5, h_atlas), Ingredient("armor_sanity", 1)},                                 TECH.LOST,        {atlas=h_atlas}, { "ARMOUR", "MAGIC", "CONTAINERS" })
 AddRecipe2("armorvoidcloak",        {Ingredient("armorvortexcloak", 1, h_atlas), Ingredient("horrorfuel", 4), Ingredient("voidcloth", 4),Ingredient("shadowheart", 1)}, TECH.SHADOWFORGING_TWO, {atlas=h_atlas, nounlock = true}, {"CRAFTING_STATION"})
 AddRecipe2("living_artifact",		{Ingredient("infused_iron", 6, h_atlas), Ingredient("waterdrop", 1, h_atlas)}, 								TECH.LOST,        {atlas=h_atlas}, {"MAGIC"})
-AddRecipe2("antchest",			    {Ingredient("chitin", 6, h_atlas), Ingredient("beeswax",1), Ingredient("honey",3)}, 						TECH.LOST,        {atlas=h_atlas, min_spacing=1, placer="antchest_placer"}, {"STRUCTURES","CONTAINERS","COOKING","GARDENING"})
+AddRecipe2("honeychest",			{Ingredient("chitin", 6, h_atlas), Ingredient("beeswax",1), Ingredient("honey",3)}, 						TECH.LOST,        {atlas=h_atlas, min_spacing=1, placer="honeychest_placer"}, {"STRUCTURES","CONTAINERS","COOKING","GARDENING"})
 AddRecipe2("pigskin",			    {Ingredient("bat_leather", 1, h_atlas)},                                                                    TECH.SCIENCE_ONE, {atlas=h_atlas}, {"REFINE"})
 AddRecipe2("hogusporkusator",       {Ingredient("pigskin", 4), Ingredient("boards", 4), Ingredient("feather_robin_winter", 4)},                 TECH.SCIENCE_ONE, {atlas=h_atlas, placer="hogusporkusator_placer"}, {"PROTOTYPERS","MAGIC","STRUCTURES"})
-
---WX78--
-AddRecipe2("wx78module_movespeed_sw", {Ingredient("scandata", 2), Ingredient("crab" , 1, h_atlas)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_movespeed", }, { "CHARACTER" })
-SortAfter("wx78module_movespeed_sw", "wx78module_movespeed", "CHARACTER")
-AddRecipe2("wx78module_movespeed_ham", {Ingredient("scandata", 2), Ingredient("piko" , 1, h_atlas)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_movespeed", }, { "CHARACTER" })
-SortAfter("wx78module_movespeed_ham", "wx78module_movespeed_sw", "CHARACTER")
-AddRecipe2("wx78module_maxhunger_sw", {Ingredient("scandata", 3), Ingredient("shark_gills", 1, h_atlas), Ingredient("wx78module_maxhunger1", 1)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_maxhunger", }, { "CHARACTER" })
-SortAfter("wx78module_maxhunger_sw", "wx78module_maxhunger", "CHARACTER")
-AddRecipe2("wx78module_taser_ham", {Ingredient("scandata", 5), Ingredient("feather_thunder", 1, h_atlas)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_taser", }, { "CHARACTER" })
-SortAfter("wx78module_taser_ham", "wx78module_taser", "CHARACTER")
 
 --LEGACY--
 AddRecipe2("goldpan",				{Ingredient("iron", 2, h_atlas), Ingredient("hammer", 1)}, 													TECH.SCIENCE_ONE, {atlas=h_atlas}, {"TOOLS", "LEGACY"})
@@ -795,10 +796,10 @@ SortAfter("roottrunk_child", "corkchest", "STRUCTURES")
 SortAfter("roottrunk_child", "corkchest", "CONTAINERS")
 SortBefore("chestupgrade_stacksize", "treasurechest", "CONTAINERS")
 
-SortAfter("antchest", "saltbox", "STRUCTURES")
-SortAfter("antchest", "saltbox", "CONTAINERS")
-SortAfter("antchest", "saltbox", "COOKING")
-SortAfter("antchest", "beebox", "GARDENING")
+SortAfter("honeychest", "saltbox", "STRUCTURES")
+SortAfter("honeychest", "saltbox", "CONTAINERS")
+SortAfter("honeychest", "saltbox", "COOKING")
+SortAfter("honeychest", "beebox", "GARDENING")
 SortBefore("sprinkler1", "beebox", "GARDENING")
 
 SortAfter("porto_lograft", "seafaring_prototyper", "SEAFARING")
