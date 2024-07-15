@@ -137,11 +137,14 @@ local function RefreshAntChestBuild(inst)
 	end
     local containsHoney = false
     local containsNectar = false
+    local containsPollen = false
 
     for _, v in ipairs(container.slots) do
         if v.prefab == "nectar_pod" then
             containsNectar = true
-        else
+		elseif v.prefab == "pollen" then
+			containsPollen = true
+		else
             containsHoney = true
         end
     end
@@ -149,6 +152,9 @@ local function RefreshAntChestBuild(inst)
     if containsHoney == true then
         inst.AnimState:SetBuild(prefix.."_honey_build")
         -- inst.MiniMapEntity:SetIcon(prefix.."_honey.png")
+	elseif containsPollen == true then
+		inst.AnimState:SetBuild(prefix.."_pollen_build")	
+        -- inst.MiniMapEntity:SetIcon(prefix.."_pollen.png")
     elseif containsNectar == true then
         inst.AnimState:SetBuild(prefix.."_nectar_build")
         -- inst.MiniMapEntity:SetIcon(prefix.."_nectar.png")
