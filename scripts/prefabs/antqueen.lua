@@ -34,7 +34,7 @@ local loot =
     "honey",
     "honey",
     "honey",
-	"antchest_blueprint",
+	"honeychest_blueprint",
 	--"bundlewrap_blueprint",
 }
 
