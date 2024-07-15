@@ -436,8 +436,8 @@ local function glass(Sim)
 	inst.components.equippable:SetOnUnequip( onunequip)
 	
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
+	inst.caminho = "images/inventoryimages/hamletinventory.xml"	
 	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1 / TUNING.GOLDENTOOLFACTOR)
 	inst.components.weapon.attackwear = 1 / TUNING.GOLDENTOOLFACTOR
 	inst.components.equippable:SetOnEquip( onequipglass )

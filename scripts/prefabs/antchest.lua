@@ -16,6 +16,18 @@ local prefabs =
 	"lavaarena_creature_teleport_small_fx",
 }
 
+local loot =
+{
+    "chitin",
+    "chitin",
+	"chitin",
+	"beeswax",
+    "honey",
+	"honey",
+    "rocks",
+	--"flint",
+}
+
 local function onopen(inst) 
 	if not inst:HasTag("burnt") then
 			inst.AnimState:PushAnimation("open", false)
@@ -56,16 +68,30 @@ end
 
 local function setworkable(inst)
 	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetLoot(loot)
+	
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-	inst.components.workable:SetWorkLeft(2)
+	inst.components.workable:SetWorkLeft(3)
+	inst.components.workable:SetOnFinishCallback(onhammered)
+	inst.components.workable:SetOnWorkCallback(onhit)
+end
+
+local function setworkable1(inst)
+	inst:AddComponent("lootdropper")
+	--inst.components.lootdropper:SetLoot(loot)
+	
+	inst:AddComponent("workable")
+	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+	inst.components.workable:SetWorkLeft(3)
 	inst.components.workable:SetOnFinishCallback(onhammered)
 	inst.components.workable:SetOnWorkCallback(onhit)
 end
 
 local function onbuilt(inst)
 --	inst.AnimState:PlayAnimation("place")
-	inst.AnimState:PushAnimation("close", true)
+	inst.AnimState:PushAnimation("close")
+	inst.AnimState:PushAnimation("closed")
 	if inst.prefab == "honeychest" then
 		inst.honeyWasLoaded = true
 	end
@@ -211,7 +237,7 @@ local function fn1(Sim)
 	inst.MiniMapEntity:SetIcon("honey_chest.png")
 	
 	inst.AnimState:SetBank("honey_chest")
-	inst.AnimState:SetBuild("honey_chest_build")
+	inst.AnimState:SetBuild("honey_chest")
 	inst.AnimState:PlayAnimation("closed", true)
 	
 	inst:AddTag("structure")
@@ -234,7 +260,7 @@ local function fn1(Sim)
     inst.components.container.onclosefn = onclose
 --	inst.components.container.itemtestfn = testitem_honeychest
 
-	setworkable(inst)
+	setworkable1(inst)
 	
 	inst:AddComponent("preserver")
 	inst.components.preserver:SetPerishRateMultiplier(0)
@@ -264,4 +290,4 @@ end
 return 	Prefab("common/antchest", fn, assets),
 		Prefab("common/honeychest", fn1, assets),
 
-	    MakePlacer("common/honeychest_placer", "honey_chest", "honey_chest_build", "closed")
+	    MakePlacer("common/honeychest_placer", "honey_chest", "honey_chest", "closed")
