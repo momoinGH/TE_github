@@ -143,6 +143,6 @@ local function cookedfn()
 end
 
 return
-         Prefab("pollen", defaultfn, assets, prefabs),
+         Prefab("pollen_item", defaultfn, assets, prefabs),
           Prefab("pollen_cooked", cookedfn, assets) 
 		  
