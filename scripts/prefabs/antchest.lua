@@ -92,9 +92,9 @@ local function onbuilt(inst)
 --	inst.AnimState:PlayAnimation("place")
 	inst.AnimState:PushAnimation("close")
 	inst.AnimState:PushAnimation("closed")
-	if inst.prefab == "honeychest" then
-		inst.honeyWasLoaded = true
-	end
+	-- if inst.prefab == "honeychest" then
+	-- 	inst.honeyWasLoaded = true
+	-- end
 end
 
 local function onsave(inst, data)
@@ -115,10 +115,6 @@ local function onload(inst, data)
 	end
 end
 
--- local function testitem_honeychest(inst, item, slot)
--- 	return item.prefab == "honey" or item.prefab == "nectar_pod"
--- end
-
 local function LoadHoneyFirstTime(inst)
     if not inst.honeyWasLoaded then
         inst.honeyWasLoaded = true
@@ -132,33 +128,40 @@ local function LoadHoneyFirstTime(inst)
 end
 
 local function RefreshAntChestBuild(inst)
-	local containsHoney  = false
-	local containsNectar = false
-
-	for index = 1, #slotpos, 1 do
-		local item = inst.components.container:GetItemInSlot(index)
-
-		if item then
-			if item.prefab == "honey" then
-				containsHoney = true
-			end
-
-			if item.prefab == "nectar_pod" then
-				containsNectar = true
-			end
-		end
-	end
-
-	if containsHoney then
-		inst.AnimState:SetBuild("ant_chest_honey_build")
-		inst.MiniMapEntity:SetIcon("ant_chest_honey.png")
-	elseif containsNectar then
-		inst.AnimState:SetBuild("ant_chest_nectar_build")
-		inst.MiniMapEntity:SetIcon("ant_chest_nectar.png")
+    local container = inst.components.container
+	local prefix = ""
+	if inst.prefab == "antchest" then
+		prefix = "ant_chest"
 	else
-		inst.AnimState:SetBuild("ant_chest")
-		inst.MiniMapEntity:SetIcon("ant_chest.png")
+		prefix = "honey_chest"
 	end
+    local containsHoney = false
+    local containsNectar = false
+    local containsPollen = false
+
+    for _, v in ipairs(container.slots) do
+        if v.prefab == "nectar_pod" then
+            containsNectar = true
+		elseif v.prefab == "pollen" then
+			containsPollen = true
+		else
+            containsHoney = true
+        end
+    end
+
+    if containsHoney == true then
+        inst.AnimState:SetBuild(prefix.."_honey_build")
+        -- inst.MiniMapEntity:SetIcon(prefix.."_honey.png")
+	elseif containsPollen == true then
+		inst.AnimState:SetBuild(prefix.."_pollen_build")	
+        -- inst.MiniMapEntity:SetIcon(prefix.."_pollen.png")
+    elseif containsNectar == true then
+        inst.AnimState:SetBuild(prefix.."_nectar_build")
+        -- inst.MiniMapEntity:SetIcon(prefix.."_nectar.png")
+    else
+        inst.AnimState:SetBuild(prefix)
+        -- inst.MiniMapEntity:SetIcon(prefix..".png")
+    end
 end
 
 local function fn(Sim)
@@ -195,26 +198,19 @@ local function fn(Sim)
 	inst.components.container:WidgetSetup("antchest")
 	inst.components.container.onopenfn = onopen
     inst.components.container.onclosefn = onclose
---	inst.components.container.itemtestfn = testitem_honeychest
 
 	setworkable(inst)
 	
 	inst:AddComponent("preserver")
 	inst.components.preserver:SetPerishRateMultiplier(0)
 
-	--inst:ListenForEvent( "onbuilt", onbuilt)
-
-    -- local upgradeable = inst:AddComponent("upgradeable")
-    -- upgradeable.upgradetype = UPGRADETYPES.CHEST
-    -- upgradeable:SetOnUpgradeFn(OnUpgrade)
-
 	MakeSnowCovered(inst, .01)	
 
 	MakeSmallBurnable(inst, nil, nil, true)
 	MakeSmallPropagator(inst)
 	
---	inst:ListenForEvent("itemget", function() RefreshAntChestBuild(inst) end)
---	inst:ListenForEvent("itemlose", function() RefreshAntChestBuild(inst) end)
+	inst:ListenForEvent("itemget", function() RefreshAntChestBuild(inst) end)
+	inst:ListenForEvent("itemlose", function() RefreshAntChestBuild(inst) end)
 	inst:DoTaskInTime(0.01, function() LoadHoneyFirstTime(inst) end)	
 	
 		inst.OnSave = onsave 
@@ -258,7 +254,6 @@ local function fn1(Sim)
 	inst.components.container:WidgetSetup("antchest")
 	inst.components.container.onopenfn = onopen
     inst.components.container.onclosefn = onclose
---	inst.components.container.itemtestfn = testitem_honeychest
 
 	setworkable1(inst)
 	
@@ -276,9 +271,8 @@ local function fn1(Sim)
 	MakeSmallBurnable(inst, nil, nil, true)
 	MakeSmallPropagator(inst)
 	
---	inst:ListenForEvent("itemget", function() RefreshAntChestBuild(inst) end)
---	inst:ListenForEvent("itemlose", function() RefreshAntChestBuild(inst) end)
-	inst:DoTaskInTime(0.01, function() LoadHoneyFirstTime(inst) end)	
+	inst:ListenForEvent("itemget", function() RefreshAntChestBuild(inst) end)
+	inst:ListenForEvent("itemlose", function() RefreshAntChestBuild(inst) end)
 	
 		inst.OnSave = onsave 
 		inst.OnLoad = onload	
