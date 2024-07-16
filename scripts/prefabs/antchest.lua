@@ -5,9 +5,12 @@ local assets=
 	Asset("ANIM", "anim/ant_chest.zip"),
 	Asset("ANIM", "anim/ant_chest_honey_build.zip"),
 	Asset("ANIM", "anim/ant_chest_nectar_build.zip"),
+    Asset("ANIM", "anim/ant_chest_pollen_build.zip"),
 
 	Asset("ANIM", "anim/honey_chest.zip"),
 	Asset("ANIM", "anim/honey_chest_honey_build.zip"),
+	Asset("ANIM", "anim/honey_chest_nectar_build.zip"),
+    Asset("ANIM", "anim/honey_chest_pollen_build.zip"),
 }
 
 local prefabs =
@@ -139,10 +142,10 @@ local function RefreshAntChestBuild(inst)
     local containsNectar = false
     local containsPollen = false
 
-    for _, v in ipairs(container.slots) do
+    for _, v in pairs(container.slots) do
         if v.prefab == "nectar_pod" then
             containsNectar = true
-		elseif v.prefab == "pollen" then
+		elseif v.prefab == "pollen_item" then
 			containsPollen = true
 		else
             containsHoney = true

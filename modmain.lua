@@ -3079,7 +3079,7 @@ params["corkchest"] = corkchest
 params["thatchpack"] = thatchpack
 
 params.antchest = deepcopy(params.icebox)
-local antchest_preservation = {--[["bee", "killerbee",]] "honey", "royal_jelly", --[["honeycomb", "beeswax",]] "nectar_pod", "pollen", "medal_withered_royaljelly", } -- 还是很怪，不知道能放什么比较舒服
+local antchest_preservation = {--[["bee", "killerbee",]] "honey", "royal_jelly", --[["honeycomb", "beeswax",]] "nectar_pod", "pollen_item", "medal_withered_royaljelly", } -- 还是很怪，不知道能放什么比较舒服
 function params.antchest.itemtestfn(container, item, slot)
 	for _, v in ipairs(antchest_preservation) do if item.prefab == v then return true end end
 	return false
