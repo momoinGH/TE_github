@@ -5656,6 +5656,7 @@ end]]
 modimport("scripts/Languages/"..GetModConfigData("set_idioma")..".lua")
 ---------------------
 modimport("scripts/cooking_tropical")
+modimport("scripts/standardcomponents")
 
 
 
