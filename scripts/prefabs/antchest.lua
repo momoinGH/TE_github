@@ -6,11 +6,13 @@ local assets=
 	Asset("ANIM", "anim/ant_chest_honey_build.zip"),
 	Asset("ANIM", "anim/ant_chest_nectar_build.zip"),
     Asset("ANIM", "anim/ant_chest_pollen_build.zip"),
+	Asset("ANIM", "anim/ant_chest_royal_build.zip"),
 
 	Asset("ANIM", "anim/honey_chest.zip"),
 	Asset("ANIM", "anim/honey_chest_honey_build.zip"),
 	Asset("ANIM", "anim/honey_chest_nectar_build.zip"),
     Asset("ANIM", "anim/honey_chest_pollen_build.zip"),
+	Asset("ANIM", "anim/honey_chest_royal_build.zip"),
 }
 
 local prefabs =
@@ -141,12 +143,15 @@ local function RefreshAntChestBuild(inst)
     local containsHoney = false
     local containsNectar = false
     local containsPollen = false
+    local containsRoyal = false
 
     for _, v in pairs(container.slots) do
         if v.prefab == "nectar_pod" then
             containsNectar = true
 		elseif v.prefab == "pollen_item" then
 			containsPollen = true
+		elseif v.prefab == "royal_jelly" then
+			containsRoyal = true
 		else
             containsHoney = true
         end
@@ -155,12 +160,15 @@ local function RefreshAntChestBuild(inst)
     if containsHoney == true then
         inst.AnimState:SetBuild(prefix.."_honey_build")
         -- inst.MiniMapEntity:SetIcon(prefix.."_honey.png")
+    elseif containsNectar == true then
+        inst.AnimState:SetBuild(prefix.."_nectar_build")
+        -- inst.MiniMapEntity:SetIcon(prefix.."_nectar.png")		
 	elseif containsPollen == true then
 		inst.AnimState:SetBuild(prefix.."_pollen_build")	
         -- inst.MiniMapEntity:SetIcon(prefix.."_pollen.png")
-    elseif containsNectar == true then
-        inst.AnimState:SetBuild(prefix.."_nectar_build")
-        -- inst.MiniMapEntity:SetIcon(prefix.."_nectar.png")
+	elseif containsRoyal == true then
+		inst.AnimState:SetBuild(prefix.."_royal_build")	
+        -- inst.MiniMapEntity:SetIcon(prefix.."_royal.png")
     else
         inst.AnimState:SetBuild(prefix)
         -- inst.MiniMapEntity:SetIcon(prefix..".png")
@@ -180,7 +188,7 @@ local function fn(Sim)
 	inst.MiniMapEntity:SetIcon("ant_chest.png")
 	
 	inst.AnimState:SetBank("ant_chest")
-	inst.AnimState:SetBuild("ant_chest_honey_build")
+	inst.AnimState:SetBuild("ant_chest")
 	inst.AnimState:PlayAnimation("closed", true)
 	
 	inst:AddTag("structure")
