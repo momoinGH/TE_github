@@ -55,7 +55,6 @@ end
 end
  
  
- 
 local function onfinished(inst)
 	inst:Remove()
 end
@@ -112,14 +111,10 @@ local function fn(Sim)
 	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1 / OBSIDIANTOOLFACTOR)
 	-------
 	inst:AddComponent("equippable")
+	inst.components.equippable:SetOnEquip( onequip )
+	inst.components.equippable:SetOnUnequip( onunequip)
 
 	inst:AddComponent("inspectable")
-
-
-
-	inst.components.equippable:SetOnEquip( onequip )
-
-	inst.components.equippable:SetOnUnequip( onunequip)
 
 	return inst
 end
@@ -160,20 +155,18 @@ local function normal(Sim)
 	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1)
 	-------
 	inst:AddComponent("equippable")
+	inst.components.equippable:SetOnEquip( onequip )
+	inst.components.equippable:SetOnUnequip( onunequip)
 
 	inst:AddComponent("inspectable")
 
-
-
-	inst.components.equippable:SetOnEquip( onequip )
-
-	inst.components.equippable:SetOnUnequip( onunequip)
-
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
+	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
 	inst.components.inventoryitem:SetOnDroppedFn(ondropped)
+
 	inst:DoTaskInTime(0, ondropped)	
+
 	return inst
 end
 
@@ -193,8 +186,8 @@ local function golden(Sim)
 	MakeInventoryPhysics(inst)
 	-- MakeInventoryFloatable(inst, "idle_water", "idle")
 
-	inst.AnimState:SetBuild("goldenmachete")
 	inst.AnimState:SetBank("machete")
+	inst.AnimState:SetBuild("goldenmachete")
 	inst.AnimState:PlayAnimation("idle")
 
 	inst:AddTag("sharp")
@@ -208,7 +201,7 @@ local function golden(Sim)
 	
 	inst:AddComponent("weapon")
 	inst.components.weapon:SetDamage(MACHETE_DAMAGE)
-
+	inst.components.weapon.attackwear = 1 / TUNING.GOLDENTOOLFACTOR
 	-----
 	inst:AddComponent("tool")
 	inst.components.tool:SetAction(ACTIONS.HACK)
@@ -217,26 +210,23 @@ local function golden(Sim)
 	inst.components.finiteuses:SetMaxUses(MACHETE_USES)
 	inst.components.finiteuses:SetUses(MACHETE_USES)
 	inst.components.finiteuses:SetOnFinished( onfinished)
-	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1)
+	--inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1)
+	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1 / TUNING.GOLDENTOOLFACTOR)	
 	-------
 	inst:AddComponent("equippable")
+	--inst.components.equippable:SetOnEquip( onequip )
+	inst.components.equippable:SetOnUnequip( onunequip)
+	inst.components.equippable:SetOnEquip( onequipgold )
 
 	inst:AddComponent("inspectable")
 
-
-
-	inst.components.equippable:SetOnEquip( onequip )
-
-	inst.components.equippable:SetOnUnequip( onunequip)
-	
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
-	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1 / TUNING.GOLDENTOOLFACTOR)
-	inst.components.weapon.attackwear = 1 / TUNING.GOLDENTOOLFACTOR
-	inst.components.equippable:SetOnEquip( onequipgold )
 	inst.components.inventoryitem:SetOnDroppedFn(ondropped)
+
 	inst:DoTaskInTime(0, ondropped)	
+
 	return inst
 end
 
@@ -249,11 +239,11 @@ local function ObsidianToolAttack(inst, attacker, target)
     local dano = Lerp(0, 1, charge / maxcharge)
     target.components.combat:GetAttacked(attacker, attacker.components.combat:CalcDamage(target, inst, dano), inst, "FIRE")
 
-    -- if charge == maxcharge then
-    --     if target.components.burnable then
-    --         target.components.burnable:Ignite()
-    --     end
-    -- end
+    if charge == maxcharge then
+        if target.components.burnable then
+            target.components.burnable:Ignite()
+        end
+    end
 end
 
 local function ObsidianToolHitWater(inst)
@@ -345,6 +335,7 @@ local function obsidian(Sim)
 	inst.AnimState:SetBank("machete_obsidian")
 
 	inst.components.weapon.attackwear = 1 / OBSIDIANTOOLFACTOR
+
 	inst.components.equippable:SetOnEquip(onequipobsidian)
 	inst.components.equippable:SetOnUnequip(onunequipobsidian)
 
@@ -355,6 +346,7 @@ local function obsidian(Sim)
     inst.components.obsidiantool.tool_type = "machete"
 	inst.components.obsidiantool.maxcharge = 75
     inst.components.obsidiantool.onchargedelta = ChangeObsidianLight
+
     inst:ListenForEvent("equipped", ManageObsidianLight)
     inst:ListenForEvent("onputininventory", ManageObsidianLight)
     inst:ListenForEvent("ondropped", ManageObsidianLight)	
@@ -368,7 +360,6 @@ local function obsidian(Sim)
     end	
 	
 	inst:AddComponent("temperature")		
-    MakeObsidianTool(inst)
 	
 	inst:ListenForEvent("floater_startfloating", ObsidianToolHitWater)	
 	inst:ListenForEvent("percentusedchange", PercentChanged)	
@@ -399,8 +390,8 @@ local function glass(Sim)
 	MakeInventoryPhysics(inst)
 	-- MakeInventoryFloatable(inst, "idle_water", "idle")
 
-	inst.AnimState:SetBuild("machete_glass")
 	inst.AnimState:SetBank("machete")
+	inst.AnimState:SetBuild("machete_glass")
 	inst.AnimState:PlayAnimation("idle")
 
 	inst:AddTag("sharp")
@@ -415,7 +406,8 @@ local function glass(Sim)
 	inst:AddComponent("weapon")
 	inst.components.weapon:SetDamage(MACHETE_DAMAGE)
     inst.components.weapon:SetOnAttack(onattack)
-
+	inst.components.weapon.attackwear = 1 / TUNING.GOLDENTOOLFACTOR
+	
 	-----
 	inst:AddComponent("tool")
 	inst.components.tool:SetAction(ACTIONS.HACK)
@@ -427,22 +419,18 @@ local function glass(Sim)
 	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 2.5)
 	-------
 	inst:AddComponent("equippable")
+	inst.components.equippable:SetOnEquip( onequipglass )
+	inst.components.equippable:SetOnUnequip( onunequip)	
+	--inst.components.equippable:SetOnEquip( onequip )
 
 	inst:AddComponent("inspectable")
 
-
-
-	--inst.components.equippable:SetOnEquip( onequip )
-
-	inst.components.equippable:SetOnUnequip( onunequip)
-	
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 	inst.caminho = "images/inventoryimages/hamletinventory.xml"	
-	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1 / TUNING.GOLDENTOOLFACTOR)
-	inst.components.weapon.attackwear = 1 / TUNING.GOLDENTOOLFACTOR
-	inst.components.equippable:SetOnEquip( onequipglass )
-	inst.components.inventoryitem:SetOnDroppedFn(ondropped)
+	--inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 2.5 / TUNING.GOLDENTOOLFACTOR)
+    inst.components.inventoryitem:SetOnDroppedFn(ondropped)
+	
 	inst:DoTaskInTime(0, ondropped)	
 	return inst
 end
