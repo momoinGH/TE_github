@@ -60,7 +60,7 @@ for k, v in pairs (foods_windy) do
     if v.mod and v.mod == true then
         table.insert(Assets, Asset("ATLAS", "images/inventoryimages/"..k..".xml"))
         table.insert(Assets, Asset("IMAGE", "images/inventoryimages/"..k..".tex" ))
-        RegisterInventoryItemAtlas("images/inventoryimages/"..k..".xml", v.name..".tex")
+        -- RegisterInventoryItemAtlas("images/inventoryimages/"..k..".xml", v.name..".tex")
     end
     AddCookerRecipe("cookpot", v)
     AddCookerRecipe("portablecookpot", v)
