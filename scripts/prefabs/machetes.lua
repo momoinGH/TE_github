@@ -249,11 +249,11 @@ local function ObsidianToolAttack(inst, attacker, target)
     local dano = Lerp(0, 1, charge / maxcharge)
     target.components.combat:GetAttacked(attacker, attacker.components.combat:CalcDamage(target, inst, dano), inst, "FIRE")
 
-    if charge == maxcharge then
-        if target.components.burnable then
-            target.components.burnable:Ignite()
-        end
-    end
+    -- if charge == maxcharge then
+    --     if target.components.burnable then
+    --         target.components.burnable:Ignite()
+    --     end
+    -- end
 end
 
 local function ObsidianToolHitWater(inst)
@@ -368,6 +368,7 @@ local function obsidian(Sim)
     end	
 	
 	inst:AddComponent("temperature")		
+    MakeObsidianTool(inst)
 	
 	inst:ListenForEvent("floater_startfloating", ObsidianToolHitWater)	
 	inst:ListenForEvent("percentusedchange", PercentChanged)	
