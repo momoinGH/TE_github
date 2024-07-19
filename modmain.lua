@@ -3079,67 +3079,7 @@ params["smelter"] = smelter
 params["corkchest"] = corkchest
 params["thatchpack"] = thatchpack
 
-params.antchest = deepcopy(params.icebox)
-local antchest_preservation = {--[["bee", "killerbee",]] "honey", "royal_jelly", --[["honeycomb", "beeswax",]] "nectar_pod", "pollen_item", "medal_withered_royaljelly", } -- 还是很怪，不知道能放什么比较舒服
-function params.antchest.itemtestfn(container, item, slot)
-	for _, v in ipairs(antchest_preservation) do if item.prefab == v then return true end end
-	return false
-end
---[[
-function params.armorvortexcloak.itemtestfn(container, item, slot)
-    if slot == 1 then
-		return true
-	elseif slot == 2 then
-		return true
-	elseif slot == 3 then
-		return true
-	elseif slot == 4 then
-		return true
-	elseif slot == 5 then
-		return true
-	elseif slot == 6 then
-		return true
-	elseif slot == 7 then
-		return true
-	elseif slot == 8 then
-		return true
-	elseif slot == 9 then
-		return true
-	elseif slot == 10 then
-		return true
-	else
-		return false
-	end
-end]]
-
---[[
-function params.thatchpack.itemtestfn(container, item, slot)
-    if slot == 1 then
-		return true
-	elseif slot == 2 then
-		return true
-	elseif slot == 3 then
-		return true
-	elseif slot == 4 then
-		return true
-	else
-		return false
-	end
-end]]
---[[
-function params.corkchest.itemtestfn(container, item, slot)
-    if slot == 1 then
-		return true
-	elseif slot == 2 then
-		return true
-	elseif slot == 3 then
-		return true
-	elseif slot == 4 then
-		return true
-	else
-		return false
-	end
-end]]
+modimport("main/containers")
 
 function params.smelter.itemtestfn(container, item, slot)
     if slot == 1 and (item:HasTag("iron") or item.prefab == "iron" or item.prefab == "goldnugget" or item.prefab == "gold_dust" or item.prefab == "flint" or item.prefab == "nitre" or item.prefab == "dubloon" or item.prefab == "obsidian" or item.prefab == "magnifying_glass" or item.prefab == "goldpan" or item.prefab == "ballpein_hammer" or item.prefab == "shears" or item.prefab == "candlehat") then

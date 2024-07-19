@@ -19,16 +19,13 @@ local function TransformToRoyalJelly(inst, antchest)
     if inst.components.inventoryitem and inst.components.inventoryitem.owner == antchest then
         antchest.components.container:RemoveItem(inst)
         local numpollens = 1
-
         if inst.components.stackable and inst.components.stackable:IsStack() and inst.components.stackable:StackSize() >
             1 then
             numpollens = inst.components.stackable:StackSize() + 1
         end
-
+        print("POLLEN", numpollens)
         inst:Remove()
-
-        -- print("NUM POLLENS = "..numpollens)
-        for index = 1, numpollens, 1 do
+        for index = 1, numpollens do
             local honey = SpawnPrefab("Royal_Jelly")
             local position = Vector3(antchest.Transform:GetWorldPosition())
             honey.Transform:SetPosition(position.x, position.y, position.z)
@@ -38,11 +35,8 @@ local function TransformToRoyalJelly(inst, antchest)
 end
 
 local function OnPutInInventory(inst, owner)
-    if owner.prefab == "antchest" then
-    inst:DoTaskInTime(48, function() TransformToRoyalJelly(inst, owner) end)
-    --     inst.components.perishable:StopPerishing()
-    -- else
-    --     inst.components.perishable:StartPerishing()	
+    if owner.prefab == "antchest" or owner.prefab == "honeychest" then
+    inst:DoTaskInTime(144, function() TransformToRoyalJelly(inst, owner) end)
 	end
 end
 
@@ -113,6 +107,7 @@ local function defaultfn()
     inst.components.edible.hungervalue = TUNING.CALORIES_TINY
     inst.components.edible.sanityvalue = -TUNING.SANITY_SMALL
 	
+    inst.components.inventoryitem:SetOnPutInInventoryFn(OnPutInInventory)
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 	inst.caminho = "images/inventoryimages/hamletinventory.xml"	
     

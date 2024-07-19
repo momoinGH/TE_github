@@ -136,10 +136,11 @@ end
 
 local function RefreshAntChestBuild(inst)
     local container = inst.components.container
-    local prefix = inst.prefab == "antchest" and "ant_chest" or "honey_chest"
+    local prefix = inst.prefab:sub(1, -6) .. "_" .. inst.prefab:sub(-5)
+    -- local prefix = inst.prefab == "antchest" and "ant_chest" or "honey_chest"
     local buildIdx = 0
-    local itemPrefab = {"nectar_pod", "pollen_item", "honey", "royal_jelly"} -- Priority: Low -> High
-    local buildName = {"nectar", "pollen", "honey", "royal"}
+    local itemPrefab = {"nectar_pod", "pollen_item", "honey", "royal_jelly", "medal_withered_royaljelly"} -- Priority: Low -> High
+    local buildName = {"nectar", "pollen", "honey", "royal", "royal"}
     for _, item in pairs(container.slots) do
         for idx, prf in ipairs(itemPrefab) do
             if item.prefab == prf then
@@ -244,7 +245,7 @@ local function fn1(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("antchest")
+    inst.components.container:WidgetSetup("honeychest")
     inst.components.container.onopenfn = onopen
     inst.components.container.onclosefn = onclose
 
