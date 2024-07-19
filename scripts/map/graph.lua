@@ -102,8 +102,8 @@ local function GenerateTreasure(root, entities, width, height)
     if entities.buriedtreasure == nil then
         entities.buriedtreasure = {}
     end
-    if entities.ia_messagebottle == nil then
-        entities.ia_messagebottle = {}
+    if entities.messagebottle1 == nil then
+        entities.messagebottle1 = {}
     end
 
     local minPaddingTreasure = 4
@@ -148,7 +148,7 @@ local function GenerateTreasure(root, entities, width, height)
         entData.x = (pointsX_w[i] - width / 2.0) * TILE_SCALE
         entData.z = (pointsY_w[i] - height / 2.0) * TILE_SCALE
         -- entData.data = {treasureguid = 1234}
-        table.insert(entities.ia_messagebottle, entData)
+        table.insert(entities.messagebottle1, entData)
     end
 
     print("GenerateTreasure done")
@@ -157,9 +157,9 @@ end
 local _PostPopulate = Graph.GlobalPostPopulate
 Graph.GlobalPostPopulate = function(self, entities, width, height, ...)
     _PostPopulate(self, entities, width, height, ...)
-    if true --[[ IA_worldtype ~= "default" and self.isshipwrecked ]] then
+    if true
+    then
         GenerateBermudaTriangles(self, entities, width, height)
-        -- GenerateTreasure(self, entities, width, height)
     end
 end
 

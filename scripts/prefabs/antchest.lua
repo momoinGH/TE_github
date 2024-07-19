@@ -14,7 +14,7 @@ local loot = {"chitin", "chitin", "chitin", "beeswax", "honey", "honey", "rocks"
 local function onopen(inst)
     if not inst:HasTag("burnt") then
         inst.AnimState:PushAnimation("open", false)
-        inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_open")
+		inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/honey_chest/open")
     end
 end
 
@@ -22,7 +22,7 @@ local function onclose(inst)
     if not inst:HasTag("burnt") then
         inst.AnimState:PlayAnimation("close", true)
         inst.AnimState:PushAnimation("closed", true)
-        inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_close")
+		inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/honey_chest/close")
 
     end
 end
@@ -44,6 +44,7 @@ local function onhit(inst, worker)
     if not inst:HasTag("burnt") then
         inst.AnimState:PlayAnimation("hit")
         inst.AnimState:PushAnimation("closed", true)
+		inst.SoundEmitter:PlaySound("waterlogged1/common/use_figjam")
         if inst.components.container then
             inst.components.container:DropEverything()
             inst.components.container:Close()
@@ -77,6 +78,7 @@ local function onbuilt(inst)
     --	inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("close")
     inst.AnimState:PushAnimation("closed")
+	inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/cork_chest/place")
     -- if inst.prefab == "honeychest" then
     -- 	inst.honeyWasLoaded = true
     -- end

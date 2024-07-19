@@ -42,16 +42,16 @@ local function GetContestContents3(inst)
 	end
 end
 
-local function onclose(inst)
-	inst.SoundEmitter:PlaySound("dontstarve/quagmire/common/safe/close")
-	inst.AnimState:PlayAnimation("close")
-	inst.AnimState:PushAnimation("idle_unlock")
+local function onopen(inst)
+	inst.AnimState:PlayAnimation("open")
+	inst.AnimState:PushAnimation("opened")	
+	inst.SoundEmitter:PlaySound("dontstarve/quagmire/common/safe/open")
 end
 
-local function onopen(inst)
-	inst.SoundEmitter:PlaySound("dontstarve/quagmire/common/safe/open")
-	inst.AnimState:PlayAnimation("open")
-	inst.AnimState:PushAnimation("opened")
+local function onclose(inst)
+	inst.AnimState:PlayAnimation("close")
+	inst.AnimState:PushAnimation("idle_unlock")	
+	inst.SoundEmitter:PlaySound("dontstarve/quagmire/common/safe/close")
 end
 
 local function onhammered(inst, worker)
@@ -76,8 +76,15 @@ local function onhit(inst, worker)
         end
         inst.AnimState:PlayAnimation("hit_unlocked")
         inst.AnimState:PushAnimation("idle_unlock", false)
+		inst.SoundEmitter:PlaySound("dontstarve/common/destroy_metal")
     end
 end
+
+local function onbuilt(inst)
+	inst.AnimState:PlayAnimation("close")
+    inst.AnimState:PushAnimation("idle_unlock")
+	inst.SoundEmitter:PlaySound("dontstarve/common/craftable/chest")
+end	
 
 local function onusekey(inst, key, doer)
     if not key:IsValid() or key.components.klaussackkey == nil or inst.unlocked then
@@ -184,6 +191,8 @@ local function fn()
     inst.components.container:WidgetSetup("quagmire_safe")
     inst.components.container.onopenfn = onopen
     inst.components.container.onclosefn = onclose
+	
+	inst:ListenForEvent("onbuilt", onbuilt)	
 	
 	inst.OnSave = onsave
 	inst.OnLoad = onload

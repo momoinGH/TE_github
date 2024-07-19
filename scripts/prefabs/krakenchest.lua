@@ -6,6 +6,8 @@ local assets=
 	Asset("ANIM", "anim/kraken_chest.zip"),
 	Asset("ANIM", "anim/luggage.zip"),
 	Asset("ANIM", "anim/treasure_chest_roottrunk.zip"),
+	
+	--Asset("SOUND", "sound/DLC003_sfx.fsb"),
 }
 
 local prefabs =
@@ -25,7 +27,6 @@ local function onclose(inst)
 	if not inst:HasTag("burnt") then
 			inst.AnimState:PushAnimation("closed", true)
 			inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_close")
-
 	end
 end
 
@@ -348,7 +349,7 @@ end
 local function onopenroot(inst) 
 	if not inst:HasTag("burnt") then
 			inst.AnimState:PushAnimation("open", false)
-			inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_open")
+		    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/root_trunk/open")
 	end
 end
 
@@ -356,9 +357,15 @@ local function oncloseroot(inst)
 	if not inst:HasTag("burnt") then
 			inst.AnimState:PlayAnimation("close", false)	
 			inst.AnimState:PushAnimation("closed", false)
-			inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_close")
+		    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/root_trunk/close")
 
 	end
+end
+
+local function onbuiltroot(inst)
+	inst.AnimState:PlayAnimation("place")
+	inst.AnimState:PushAnimation("closed", true)
+	inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/root_trunk/place")
 end
 
 local function fn4(Sim)
@@ -453,7 +460,7 @@ local function fn5(Sim)
 	inst.components.workable:SetOnFinishCallback(onhammered2)
 	inst.components.workable:SetOnWorkCallback(onhit)
 
-	inst:ListenForEvent( "onbuilt", onbuilt)
+	inst:ListenForEvent( "onbuilt", onbuiltroot)
 	MakeSnowCovered(inst, .01)	
 
 	MakeSmallBurnable(inst, nil, nil, true)

@@ -410,13 +410,13 @@ local function glass(Sim)
 	
 	-----
 	inst:AddComponent("tool")
-	inst.components.tool:SetAction(ACTIONS.HACK)
+	inst.components.tool:SetAction(ACTIONS.HACK,2.5)
 	-------
 	inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(TUNING.GLASSCUTTER.USES)
     inst.components.finiteuses:SetUses(TUNING.GLASSCUTTER.USES)
 	inst.components.finiteuses:SetOnFinished( onfinished)
-	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 2.5)
+	inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1)
 	-------
 	inst:AddComponent("equippable")
 	inst.components.equippable:SetOnEquip( onequipglass )
