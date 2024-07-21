@@ -192,7 +192,7 @@ PrefabFiles =
 --"froglegs_poison",
 "spearsw",
 "boatmetal",
-"bird_swarm",
+--"bird_swarm",
 "birds_ham",
 "blunderbuss",
 
