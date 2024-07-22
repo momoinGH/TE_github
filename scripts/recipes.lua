@@ -567,7 +567,7 @@ AddRecipe2("bed6",								{Ingredient("oinc",18, h_atlas)},	TECH.HOME_TWO, {atla
 AddRecipe2("bed7",								{Ingredient("oinc",20, h_atlas)},	TECH.HOME_TWO, {atlas=v_atlas, nounlock=true, min_spacing=1, placer="bed7_placer"}, {"INTERIOR"})
 AddRecipe2("bed8",								{Ingredient("oinc",22, h_atlas)},	TECH.HOME_TWO, {atlas=v_atlas, nounlock=true, min_spacing=1, placer="bed8_placer"}, {"INTERIOR"})
 
-GLOBAL.CONSTRUCTION_PLANS["collapsed_honeychest"] =	{ Ingredient("chitin", 3), Ingredient("beeswax",1), Ingredient("honey",1), Ingredient("alterguardianhatshard", 1) }
+GLOBAL.CONSTRUCTION_PLANS["collapsed_honeychest"] =	{ Ingredient("chitin", 3), Ingredient("beeswax",1), Ingredient("honey",2), Ingredient("alterguardianhatshard", 1) }
 
 --Recipe2 Sort!
 SortAfter("hammer", "pitchfork", "TOOLS")

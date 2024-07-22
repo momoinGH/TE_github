@@ -160,6 +160,7 @@ local function Upgrade_onhammered(inst, worker)
 			return
 		end
     end
+    onhammered(inst, worker)
 end
 
 local function Upgrade_onrestoredfromcollapsed(inst)
