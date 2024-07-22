@@ -14,16 +14,16 @@ local prefabs =
 
 local       BALLPHIN_TARGET_DIST = 8
 local		BALLPHIN_KEEP_TARGET_DIST = 15
-local		BALLPHIN_FRIEND_CHANCE = 0.01 -- chance that ballphins will spawn to assist you during a sharx attack
+--local		BALLPHIN_FRIEND_CHANCE = 0.01 -- chance that ballphins will spawn to assist you during a sharx attack
 local 		PIG_TARGET_DIST = 16
-local	    SOLOFISH_WALK_SPEED = 5
-local	    SOLOFISH_RUN_SPEED = 8
-local	    SOLOFISH_HEALTH = 100
-local	    SOLOFISH_WANDER_DIST = 10
-local	    SNAKE_DAMAGE = 10
-local       SNAKE_ATTACK_PERIOD = 3
-local       SNAKE_JUNGLETREE_CHANCE = 0.5
-local		SOLOFISH_HEALTH = 100
+local	    BALLPHIN_WALK_SPEED = 5
+local	    BALLPHIN_RUN_SPEED = 8
+local	    BALLPHIN_HEALTH = 250
+--local	    SOLOFISH_WANDER_DIST = 10
+local	    BALLPHIN_DAMAGE = 30
+local       BALLPHIN_ATTACK_PERIOD = 3
+local       BALLPHIN_JUNGLETREE_CHANCE = 0.5
+--local		BALLPHIN_HEALTH = 100
 
 local brain = require "brains/ballphinbrain"
 
@@ -123,8 +123,8 @@ local function fn()
     end
 
 	inst:AddComponent("locomotor")
-	inst.components.locomotor.walkspeed = SOLOFISH_WALK_SPEED -- 2--3.0
-	inst.components.locomotor.runspeed = SOLOFISH_RUN_SPEED--5--6.0 
+	inst.components.locomotor.walkspeed = BALLPHIN_WALK_SPEED -- 2--3.0
+	inst.components.locomotor.runspeed = BALLPHIN_RUN_SPEED--5--6.0 
 	
 	inst:AddComponent("inspectable")
 	inst.no_wet_prefix = true
@@ -139,14 +139,14 @@ local function fn()
 	inst:AddComponent("knownlocations")
 	
 	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(SNAKE_DAMAGE)
-	inst.components.combat:SetAttackPeriod(SNAKE_ATTACK_PERIOD)
+	inst.components.combat:SetDefaultDamage(BALLPHIN_DAMAGE)
+	inst.components.combat:SetAttackPeriod(BALLPHIN_ATTACK_PERIOD)
 	inst.components.combat:SetRetargetFunction(3, retargetfn)
 	inst.components.combat:SetKeepTargetFunction(KeepTarget)
 	inst.components.combat:SetHurtSound("dontstarve_DLC002/creatures/balphin/hit")
 
 	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(SOLOFISH_HEALTH)
+	inst.components.health:SetMaxHealth(BALLPHIN_HEALTH)
 
 	inst:AddComponent("sleeper")
 
@@ -204,8 +204,8 @@ local function fn1()
     end
 
 	inst:AddComponent("locomotor")
-	inst.components.locomotor.walkspeed = SOLOFISH_WALK_SPEED -- 2--3.0
-	inst.components.locomotor.runspeed = SOLOFISH_RUN_SPEED--5--6.0 
+	inst.components.locomotor.walkspeed = BALLPHIN_WALK_SPEED -- 2--3.0
+	inst.components.locomotor.runspeed = BALLPHIN_RUN_SPEED--5--6.0 
 	
 	inst:AddComponent("inspectable")
 	inst.no_wet_prefix = true
@@ -220,14 +220,14 @@ local function fn1()
 	inst:AddComponent("knownlocations")
 	
 	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(SNAKE_DAMAGE)
-	inst.components.combat:SetAttackPeriod(SNAKE_ATTACK_PERIOD)
+	inst.components.combat:SetDefaultDamage(BALLPHIN_DAMAGE)
+	inst.components.combat:SetAttackPeriod(BALLPHIN_ATTACK_PERIOD)
 	inst.components.combat:SetRetargetFunction(3, retargetfn)
 	inst.components.combat:SetKeepTargetFunction(KeepTarget)
 	inst.components.combat:SetHurtSound("dontstarve_DLC002/creatures/balphin/hit")
 
 	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(SOLOFISH_HEALTH)
+	inst.components.health:SetMaxHealth(BALLPHIN_HEALTH)
 
 	inst:AddComponent("sleeper")
 

@@ -192,7 +192,7 @@ PrefabFiles =
 --"froglegs_poison",
 "spearsw",
 "boatmetal",
-"bird_swarm",
+--"bird_swarm",
 "birds_ham",
 "blunderbuss",
 
@@ -323,6 +323,7 @@ table.insert(PrefabFiles,"roc_nest")
 table.insert(PrefabFiles,"glowfly")
 table.insert(PrefabFiles,"rabid_beetle")
 table.insert(PrefabFiles,"obsidianstaff")
+table.insert(PrefabFiles,"mermhouse_tropical")
 table.insert(PrefabFiles,"mermhouse_fisher")
 table.insert(PrefabFiles,"mermtrader")
 table.insert(PrefabFiles,"pig_scepter")
