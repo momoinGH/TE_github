@@ -7968,7 +7968,13 @@ STRINGS.NAMES.LIVING_ARTIFACT = "living artifact"
 STRINGS.RECIPE_DESC.LIVING_ARTIFACT = "Let's put them together and see what happens."
 
 STRINGS.NAMES.ANTCHEST = "honey chest"
-STRINGS.RECIPE_DESC.ANTCHEST = "Save the sweet things."
+-- OSTRINGS.RECIPE_DESC.ANTCHEST = "Save the sweet things."
+
+STRINGS.NAMES.HONEYCHEST = STRINGS.NAMES.ANTCHEST
+STRINGS.RECIPE_DESC.HONEYCHEST = "Save the sweet things."
+
+STRINGS.NAMES.UPDATEDCHEST = "Bottomless {container}"
+STRINGS.NAMES.COLLAPSEDHONEYCHEST = "Broken-down Honey Chest"
 
 STRINGS.NAMES.BELL1 = "old bell"
 STRINGS.RECIPE_DESC.BELL1 = "This is no ordinary bell."

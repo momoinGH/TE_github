@@ -11,6 +11,12 @@ local prefabs = {"collapse_small", "lavaarena_creature_teleport_small_fx"}
 local loot = {"chitin", "chitin", "chitin", "beeswax", "honey", "honey", "rocks" -- "flint",
 }
 
+local function UpdateNameFn(inst)
+    if inst.components.upgradeable.upgradetype == nil then
+        return subfmt(STRINGS.NAMES.UPDATEDCHEST, { container = STRINGS.NAMES[inst.prefab:upper()] })
+    end
+end
+
 local function onopen(inst)
     if not inst:HasTag("burnt") then
         inst.AnimState:PushAnimation("open", false)
@@ -84,6 +90,88 @@ local function onbuilt(inst)
     -- end
 end
 
+local function converttocollapsed(inst, droploot, burnt)
+
+	local x, y, z = inst.Transform:GetWorldPosition()
+	if droploot then
+		local fx = SpawnPrefab("collapse_small")
+		fx.Transform:SetPosition(x, y, z)
+		fx:SetMaterial("wood")
+		inst.components.lootdropper.min_speed = 2.25
+		inst.components.lootdropper.max_speed = 2.75
+		inst.components.lootdropper:DropLoot()
+		inst.components.lootdropper.min_speed = nil
+		inst.components.lootdropper.max_speed = nil
+	end
+
+	inst.components.container:Close()
+	inst.components.workable:SetWorkLeft(2)
+
+	local pile = SpawnPrefab("collapsed_honeychest")
+	pile.Transform:SetPosition(x, y, z)
+	pile:SetChest(inst, burnt)
+end
+
+local function Upgrade_onhit(inst, worker)
+	if not inst:HasTag("burnt") then
+		if inst.components.container then
+			inst.components.container:DropEverything(nil, true)
+			inst.components.container:Close()
+		end
+		inst.AnimState:PlayAnimation("hit")
+		inst.AnimState:PushAnimation("closed", false)
+	end
+end
+
+local function shouldcollapse(inst)
+	if inst.components.container and inst.components.container.infinitestacksize then
+		--NOTE: should already have called DropEverything(nil, true) (worked or burnt or deconstructed)
+		--      so everything remaining counts as an "overstack"
+		local overstacks = 0
+		for k, v in pairs(inst.components.container.slots) do
+			local stackable = v.components.stackable
+			if stackable then
+				overstacks = overstacks + math.ceil(stackable:StackSize() / (stackable.originalmaxsize or stackable.maxsize))
+				if overstacks >= TUNING.COLLAPSED_CHEST_EXCESS_STACKS_THRESHOLD then
+					return true
+				end
+			end
+		end
+	end
+	return false
+end
+
+local function Upgrade_onhammered(inst, worker)
+	if shouldcollapse(inst) then
+		if TheWorld.Map:IsPassableAtPoint(inst.Transform:GetWorldPosition()) then
+			inst.components.container:DropEverythingUpToMaxStacks(TUNING.COLLAPSED_CHEST_MAX_EXCESS_STACKS_DROPS)
+			if not inst.components.container:IsEmpty() then
+				converttocollapsed(inst, true, false)
+				return
+			end
+		else
+			--sunk, drops more, but will lose the remainder
+			inst.components.lootdropper:DropLoot()
+			inst.components.container:DropEverythingUpToMaxStacks(TUNING.COLLAPSED_CHEST_EXCESS_STACKS_THRESHOLD)
+			local fx = SpawnPrefab("collapse_small")
+			fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			fx:SetMaterial("wood")
+			inst:Remove()
+			return
+		end
+    end
+end
+
+local function Upgrade_onrestoredfromcollapsed(inst)
+    -- inst.AnimState:PlayAnimation("rebuild")
+    inst.AnimState:PushAnimation("closed", false)
+	-- if inst.skin_place_sound then
+	-- 	inst.SoundEmitter:PlaySound(inst.skin_place_sound)
+	-- else
+	-- 	inst.SoundEmitter:PlaySound(inst.sounds.built)
+	-- end
+end
+
 local function OnUpgrade(inst, performer, upgraded_from_item)
     local numupgrades = inst.components.upgradeable.numupgrades
     if numupgrades == 1 then
@@ -95,12 +183,13 @@ local function OnUpgrade(inst, performer, upgraded_from_item)
         -- end
     end
     inst.components.upgradeable.upgradetype = nil
+    inst.displaynamefn = UpdateNameFn
     if inst.components.lootdropper ~= nil then
         inst.components.lootdropper:SetLoot({"alterguardianhatshard"})
     end
-    -- inst.components.workable:SetOnWorkCallback(Upgrade_OnHit)
-    -- inst.components.workable:SetOnFinishCallback(Upgrade_OnHammered)
-    -- inst:ListenForEvent("restoredfromcollapsed", Upgrade_OnRestoredFromCollapsed)
+    inst.components.workable:SetOnWorkCallback(Upgrade_onhit)
+    inst.components.workable:SetOnFinishCallback(Upgrade_onhammered)
+    inst:ListenForEvent("restoredfromcollapsed", Upgrade_onrestoredfromcollapsed)
 end
 
 local function onsave(inst, data)
@@ -197,7 +286,6 @@ local function fn(Sim)
 
     MakeSnowCovered(inst, .01)
 
-    MakeSmallBurnable(inst, nil, nil, true)
     MakeSmallPropagator(inst)
 
     inst:ListenForEvent("itemget", function()
@@ -258,13 +346,12 @@ local function fn1(Sim)
 
     inst:ListenForEvent("onbuilt", onbuilt)
 
-    -- local upgradeable = inst:AddComponent("upgradeable")
-    -- upgradeable.upgradetype = UPGRADETYPES.CHEST
-    -- upgradeable:SetOnUpgradeFn(OnUpgrade)
+    local upgradeable = inst:AddComponent("upgradeable")
+    upgradeable.upgradetype = UPGRADETYPES.CHEST
+    upgradeable:SetOnUpgradeFn(OnUpgrade)
 
     MakeSnowCovered(inst, .01)
 
-    MakeSmallBurnable(inst, nil, nil, true)
     MakeSmallPropagator(inst)
 
     inst:ListenForEvent("itemget", function()
