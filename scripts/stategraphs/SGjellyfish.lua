@@ -73,12 +73,13 @@ local states=
 		timeline=
         {
             TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end),
-            TimeEvent(5*FRAMES, function(inst) 
-			local pclose = GetClosestInstWithTag("player", inst, 3)
-			if pclose and pclose.components.health then
-			pclose.components.health:DoDelta(-JELLYFISH_DAMAGE)
-			pclose.sg:GoToState("electrocute")
-			end	end),
+            -- momo说别电人了
+            -- TimeEvent(5*FRAMES, function(inst) 
+			-- local pclose = GetClosestInstWithTag("player", inst, 3)
+			-- if pclose and pclose.components.health then
+			-- pclose.components.health:DoDelta(-JELLYFISH_DAMAGE)
+			-- pclose.sg:GoToState("electrocute")
+			-- end	end),
         },
 		
         events=
