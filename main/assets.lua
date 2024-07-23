@@ -28,7 +28,6 @@ local dictInventoryItems = {
 for atlas, imageTab in pairs(dictInventoryItems) do
 	for _, image in ipairs(imageTab) do
 		RegisterInventoryItemAtlas(resolvefilepath("images/inventoryimages/" .. atlas .. ".xml"), image .. ".tex")
-		print("REGISTER", atlas, image)
 	end
 end
 
