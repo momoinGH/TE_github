@@ -146,8 +146,8 @@
 <Element name="sharkfinsoup.tex" u1="0.25" u2="0.3" v1="0.65" v2="0.7" />
 <Element name="cutlass.tex" u1="0.3" u2="0.35" v1="0.65" v2="0.7" />
 <Element name="needlespear.tex" u1="0.35" u2="0.4" v1="0.65" v2="0.7" />
-<Element name="lobsterbisque.tex" u1="0.4" u2="0.45" v1="0.65" v2="0.7" />
-<Element name="lobsterdinner.tex" u1="0.45" u2="0.5" v1="0.65" v2="0.7" />
+<Element name="mermhouse_tropical_crafted.tex" u1="0.4" u2="0.45" v1="0.65" v2="0.7" />
+<Element name="mermfishhouse_crafted.tex" u1="0.45" u2="0.5" v1="0.65" v2="0.7" />
 <Element name="aerodynamichat.tex" u1="0.5" u2="0.55" v1="0.65" v2="0.7" />
 <Element name="sandbag_item.tex" u1="0.55" u2="0.6" v1="0.65" v2="0.7" />
 <Element name="coral_brain.tex" u1="0.60" u2="0.65" v1="0.65" v2="0.7" />
