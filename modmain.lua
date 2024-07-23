@@ -288,7 +288,7 @@ PrefabFiles =
 "gorge_crabtrap",
 "gorge_smallmeat",
 
-"preparedfoods_tropical",
+"preparedfoods_tro",
 
 "walls_tropical",
 "pollen_item",
