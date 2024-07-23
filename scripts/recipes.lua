@@ -79,7 +79,7 @@ AddRecipe2("mutator_frost", 			{Ingredient("monstermeat", 2), Ingredient("silk",
 --Wurt
 AddRecipe2("mermfishhouse_crafted", 	{Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("fish2", 2,v_atlas)}, 										TECH.SCIENCE_ONE, {builder_tag="merm_builder", 		atlas=hm_atlas, placer="mermfishhouse_crafted_placer", image="mermhouse_fisher.png", testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
 AddRecipe2("mermhouse_tropical_crafted", {Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("fish2", 2,v_atlas)}, 										TECH.SCIENCE_ONE, {builder_tag="merm_builder", 		atlas=hm_atlas, placer="mermhouse_tropical_crafted_placer", image="mermhouse_tropical.png", testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
-AddRecipe2("quagmire_merm_house_crafted", {Ingredient("boards", 5), Ingredient("cutstone", 3), Ingredient("salmon", 2,v_atlas)}, 									TECH.SCIENCE_ONE, {builder_tag="merm_builder", 		atlas=g_atlas,  placer="quagmire_merm_house_crafted_placer", image="quagmire_merm_house_crafted.png", testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
+AddRecipe2("quagmire_merm_house_crafted", {Ingredient("boards", 5), Ingredient("cutstone", 3), Ingredient("salmon", 2,v_atlas)}, 									TECH.SCIENCE_ONE, {builder_tag="merm_builder", 		atlas=g_atlas,  placer="quagmire_merm_house_crafted_placer",  testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
 --AddRecipe2("mermhouse_crafted", 		{Ingredient("boards", 4), Ingredient("cutreeds", 3), Ingredient("pondfish", 2)}, 											TECH.SCIENCE_ONE, {builder_tag="merm_builder", 						placer="mermhouse_crafted_placer", 		testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
 --AddRecipe2("mermthrone_construction",	{Ingredient("boards", 5), Ingredient("rope", 5)}, 																			TECH.SCIENCE_ONE, {builder_tag="merm_builder", 						placer="mermthrone_construction_placer",testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
 --AddRecipe2("mermwatchtower", 			{Ingredient("boards", 5), Ingredient("tentaclespots", 1), Ingredient("spear", 2)}, 											TECH.SCIENCE_TWO, {builder_tag="merm_builder", 						placer="mermwatchtower_placer", 		testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH) end}, {"CHARACTER"})
@@ -112,7 +112,7 @@ AddRecipe2("spear_obsidian", 		{Ingredient("spear", 1), Ingredient("obsidian", 3
 AddRecipe2("volcanostaff", 			{Ingredient("firestaff", 1),  Ingredient("obsidian", 4, v_atlas), Ingredient("dragoonheart", 1, v_atlas)}, 			TECH.OBSIDIAN_TWO, {atlas=v_atlas, nounlock=true}, {"OBSIDIAN"})
 AddRecipe2("armorobsidian", 		{Ingredient("armorwood", 1), Ingredient("obsidian", 5, v_atlas), Ingredient("dragoonheart", 1, v_atlas)}, 			TECH.OBSIDIAN_TWO, {atlas=v_atlas, nounlock=true}, {"OBSIDIAN"})
 AddRecipe2("obsidianbomb", 			{Ingredient("coconade", 3, v_atlas), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas)}, 	TECH.OBSIDIAN_TWO, {atlas=v_atlas, nounlock=true, numtogive=3}, {"OBSIDIAN"})
-AddRecipe2("woodlegs_boatcannon",	{Ingredient("obsidian", 6, v_atlas), Ingredient("log", 5), Ingredient("gunpowder", 4)},											TECH.SEAFARING_TWO, {atlas=v_atlas}, {"OBSIDIAN"})
+AddRecipe2("woodlegs_boatcannon",	{Ingredient("obsidian", 6, v_atlas), Ingredient("log", 5), Ingredient("gunpowder", 4)},								TECH.SEAFARING_TWO,{atlas=v_atlas},                {"OBSIDIAN"})
 AddRecipe2("wind_conch", 			{Ingredient("obsidian", 4,v_atlas), Ingredient("purplegem", 1), Ingredient("magic_seal", 1,h_atlas)}, 				TECH.OBSIDIAN_TWO, {atlas=v_atlas, nounlock=true}, {"OBSIDIAN"})
 AddRecipe2("sail_stick", 			{Ingredient("obsidian", 2,v_atlas), Ingredient("nightmarefuel", 3), Ingredient("magic_seal", 1,h_atlas)}, 			TECH.OBSIDIAN_TWO, {atlas=h_atlas, nounlock=true}, {"OBSIDIAN"})
 
@@ -324,7 +324,7 @@ AddRecipe2("topiary_3",			 		{Ingredient("cutstone", 2), Ingredient("oinc", 9, h
 AddRecipe2("topiary_4",			 		{Ingredient("cutstone", 2), Ingredient("oinc", 9, h_atlas)},									TECH.CITY_TWO, {atlas=hm_atlas, nounlock=true, min_spacing=1, 			placer="topiary_4_placer",				image="topiary_4.png"}, {"CITY"})
 
 --GORGE--
-AddRecipe2("quagmire_swampig_house",    {Ingredient("boards", 4), Ingredient("rocks", 8), Ingredient("pigskin", 4)},  	TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, image="quagmire_swampig_house.png", placer="quagmire_swampig_house_placer"}, {"GORGE"})
+AddRecipe2("quagmire_swampig_house",    {Ingredient("boards", 4), Ingredient("rocks", 8), Ingredient("pigskin", 4)},  	TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true,  placer="quagmire_swampig_house_placer"}, {"GORGE"})
 
 AddRecipe2("dubloon",					{Ingredient("quagmire_coin1", 2)}, 	TECH.GORGE_TWO, {atlas=h_atlas, nounlock=true}, {"GORGE"})
 AddRecipe2("oinc",						{Ingredient("quagmire_coin1", 2)},	TECH.GORGE_TWO, {atlas=h_atlas, nounlock=true}, {"GORGE"})
@@ -344,7 +344,7 @@ AddRecipe2("quagmire_salt_rack_item",	{Ingredient("quagmire_coin1", 8)},	TECH.GO
 AddRecipe2("quagmire_crabtrap",	        {Ingredient("quagmire_coin2", 1)},	TECH.GORGE_TWO, {nounlock=true, image="quagmire_crabtrap.tex"}, {"GORGE"})
 AddRecipe2("quagmire_slaughtertool",	{Ingredient("quagmire_coin2", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
 AddRecipe2("quagmire_sapbucket",		{Ingredient("quagmire_coin1", 3)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_safe",			 	{Ingredient("quagmire_coin1", 20)}, TECH.GORGE_TWO, {atlas=g_atlas,  nounlock=true, image="quagmire_safe.png", placer="quagmire_safe_placer"}, {"GORGE"})
+AddRecipe2("quagmire_safe",			 	{Ingredient("quagmire_coin1", 20)}, TECH.GORGE_TWO, {atlas=g_atlas,  nounlock=true,  placer="quagmire_safe_placer"}, {"GORGE"})
 
 AddRecipe2("quagmire_goatmilk",			{Ingredient("quagmire_coin2", 3)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
 AddRecipe2("quagmire_seedpacket_1",		{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
