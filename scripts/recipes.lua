@@ -181,7 +181,7 @@ AddRecipe2("doydoynest",			{Ingredient("twigs", 8), Ingredient("doydoyfeather", 
 AddRecipe2("wall_limestone_item",	{Ingredient("limestone", 2, v_atlas)}, 																				TECH.SCIENCE_TWO, {atlas=v_atlas, numtogive=4}, {"STRUCTURES","DECOR"})
 AddRecipe2("wall_enforcedlimestone_item",{Ingredient("limestone", 2, v_atlas), Ingredient("seaweed", 4, v_atlas)}, 										TECH.SCIENCE_ONE, {atlas=v_atlas, numtogive=4}, {"STRUCTURES","DECOR"})
 AddRecipe2("seasack",				{Ingredient("seaweed", 5, v_atlas), Ingredient("vine", 2, v_atlas), Ingredient("shark_gills", 1, v_atlas)}, 		TECH.SCIENCE_TWO, {atlas=v_atlas}, {"CONTAINERS","COOKING","CLOTHING"})
-AddRecipe2("porto_waterchest1",		{Ingredient("boards", 4), Ingredient("tar", 1, v_atlas)}, 															TECH.SCIENCE_ONE, {atlas=v_atlas, image="waterchest1.png"}, {"STRUCTURES","CONTAINERS"})
+AddRecipe2("porto_waterchest1",		{Ingredient("boards", 4), Ingredient("tar", 1, v_atlas)}, 															TECH.SCIENCE_ONE, {atlas=v_atlas}, {"STRUCTURES","CONTAINERS"})
 AddRecipe2("mussel_stick",			{Ingredient("bamboo", 2, v_atlas), Ingredient("vine", 1, v_atlas), Ingredient("seaweed", 1, v_atlas)},				TECH.SCIENCE_ONE, {atlas=v_atlas}, {"GARDENING"})
 AddRecipe2("mussel_bed",			{Ingredient("mussel", 1, v_atlas), Ingredient("coral", 1, v_atlas)}, 												TECH.SCIENCE_ONE, {atlas=v_atlas}, {"GARDENING"})
 AddRecipe2("porto_fish_farm",		{Ingredient("silk", 2), Ingredient("rope", 2), Ingredient("coconut", 4, v_atlas)}, 									TECH.SCIENCE_ONE, {atlas=v_atlas, image="fish_farm.tex"}, {"GARDENING"})
