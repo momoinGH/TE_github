@@ -10,7 +10,8 @@ local Lock = Class(function(self, inst)
 end)
 
 function Lock:GetDebugString()
-    return string.format("type:%s, locked:%s, isstuck:%s, key:%s", self.locktype, tostring(self.islocked), tostring(self.isstuck), tostring(self.key) )
+	return string.format("type:%s, locked:%s, isstuck:%s, key:%s", self.locktype, tostring(self.islocked),
+		tostring(self.isstuck), tostring(self.key))
 end
 
 function Lock:SetOnUnlockedFn(fn)
@@ -26,7 +27,7 @@ function Lock:CompatableKey(keytype)
 end
 
 function Lock:IsStuck()
-    return self.isstuck
+	return self.isstuck
 end
 
 function Lock:IsLocked()
@@ -40,13 +41,13 @@ function Lock:Unlock(key, doer)
 			self.onunlocked(self.inst, key, doer)
 		end
 		if key then
-		    key.components.key:OnUsed(self.inst)
-		    if key.components.stackable and key.components.stackable.stacksize > 1 then
-			    key = key.components.stackable:Get()
+			key.components.key:OnUsed(self.inst)
+			if key.components.stackable and key.components.stackable.stacksize > 1 then
+				key = key.components.stackable:Get()
 			else
-			    key.components.inventoryitem:RemoveFromOwner()
-		    end
-		    self:SetKey(key)
+				key.components.inventoryitem:RemoveFromOwner()
+			end
+			self:SetKey(key)
 		end
 	end
 end
@@ -58,25 +59,26 @@ function Lock:Lock(doer)
 			self.onlocked(self.inst, doer)
 		end
 		if self.key then
-	        self.key.components.key:OnRemoved(self.inst, doer)
-	        if doer.components.inventory then
-                doer.components.inventory:GiveItem(self.key, nil, Vector3(TheSim:GetScreenPos(self.inst.Transform:GetWorldPosition() ) ) )
-	        end
+			self.key.components.key:OnRemoved(self.inst, doer)
+			if doer.components.inventory then
+				doer.components.inventory:GiveItem(self.key, nil,
+					Vector3(TheSim:GetScreenPos(self.inst.Transform:GetWorldPosition())))
+			end
 		end
-	    self:SetKey(nil)
+		self:SetKey(nil)
 	end
 end
 
 function Lock:SetKey(key)
 	if self.key then
-	    self.inst:RemoveChild(self.key)
-	    self.key:ReturnToScene()
+		self.inst:RemoveChild(self.key)
+		self.key:ReturnToScene()
 	end
 	if key then
-        self.inst:AddChild(key)
-        key:RemoveFromScene()
-    end
-    self.key = key
+		self.inst:AddChild(key)
+		key:RemoveFromScene()
+	end
+	self.key = key
 end
 
 function Lock:TestForUnlock(key)
@@ -89,46 +91,45 @@ function Lock:TestForUnlock(key)
 end
 
 function Lock:SetLocked(locked)
-    if locked ~= self.locked then
+	if locked ~= self.locked then
 		if locked and self.onlocked then
 			self.onlocked(self.inst)
 		elseif self.onunlocked then
 			self.onunlocked(self.inst)
 		end
-    end
+	end
 	self.islocked = locked
 end
 
 function Lock:OnSave()
-    local refs = nil
-    if self.key then
-		refs = {self.key.GUID}
-    end
-    return {locked = self.islocked, isstuck=self.isstuck, key=self.key and self.key.GUID}, refs
+	local refs = nil
+	if self.key then
+		refs = { self.key.GUID }
+	end
+	return { locked = self.islocked, isstuck = self.isstuck, key = self.key and self.key.GUID }, refs
 end
 
 function Lock:OnLoad(data)
-    if data then
-        self.locked = nil
-        self:SetLocked(data.locked)
-        self.isstuck = data.isstuck
-    end
+	if data then
+		self.locked = nil
+		self:SetLocked(data.locked)
+		self.isstuck = data.isstuck
+	end
 end
 
 function Lock:LoadPostPass(newents, data)
-    if data and data.key then
-        local key = newents[data.key]
-        if key then
-            self:SetKey(key.entity)
-        end
-    end
+	if data and data.key then
+		local key = newents[data.key]
+		if key then
+			self:SetKey(key.entity)
+		end
+	end
 end
 
 function Lock:CollectSceneActions(doer, actions)
-    if self:IsLocked() and self.key and not self:IsStuck() then
-        table.insert(actions, ACTIONS.UNLOCK)
-    end
+	if self:IsLocked() and self.key and not self:IsStuck() then
+		table.insert(actions, ACTIONS.UNLOCK)
+	end
 end
-
 
 return Lock
