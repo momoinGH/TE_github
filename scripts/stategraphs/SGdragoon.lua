@@ -13,9 +13,9 @@ local actionhandlers =
 	ActionHandler(ACTIONS.GOHOME, "gohome"),
 }
 
-local events=
+local events =
 {
-	EventHandler("attacked", 
+	EventHandler("attacked",
 		function(inst)
 			if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then
 				inst.sg:GoToState("hit")
@@ -34,10 +34,10 @@ local events=
 			end
 		end),
 
-	EventHandler("locomote", 
-		function(inst) 
+	EventHandler("locomote",
+		function(inst)
 			if not inst.sg:HasStateTag("idle") and not inst.sg:HasStateTag("moving") then return end
-			
+
 			if not inst.components.locomotor:WantsToMoveForward() then
 				if not inst.sg:HasStateTag("idle") then
 					inst.sg:GoToState("idle")
@@ -55,15 +55,15 @@ local events=
 
 	CommonHandlers.OnSleep(),
 	CommonHandlers.OnFreeze(),
-    CommonHandlers.OnHop(),		
+	CommonHandlers.OnHop(),
 }
 
-local states=
+local states =
 {
 
-	State{
+	State {
 		name = "idle",
-		tags = {"idle", "canrotate"},
+		tags = { "idle", "canrotate" },
 		onenter = function(inst, playanim)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/idle")
 			inst.Physics:Stop()
@@ -73,15 +73,15 @@ local states=
 			else
 				inst.AnimState:PlayAnimation("idle_loop", true)
 			end
-			inst.sg:SetTimeout(2*math.random()+.5)
+			inst.sg:SetTimeout(2 * math.random() + .5)
 		end,
 
 	},
 
-	
-	State{
+
+	State {
 		name = "attack",
-		tags = {"attack", "busy"},
+		tags = { "attack", "busy" },
 
 		onenter = function(inst, target)
 			inst.sg.statemem.target = target
@@ -91,48 +91,48 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/attack")
 		end,
 
-		timeline=
-		{   
+		timeline =
+		{
 
 			--.inst:ForceFacePoint(self.target:GetPosition())
-			
-			TimeEvent(8*FRAMES, function(inst) 
-				if inst.components.combat.target then 
-					inst:ForceFacePoint(inst.components.combat.target:GetPosition()) 
-				end 
+
+			TimeEvent(8 * FRAMES, function(inst)
+				if inst.components.combat.target then
+					inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+				end
 			end),
 
-			TimeEvent(15*FRAMES, function(inst) 
-				inst.components.combat:DoAttack(inst.sg.statemem.target) 
-				if inst.components.combat.target then 
-					inst:ForceFacePoint(inst.components.combat.target:GetPosition()) 
-				end 
+			TimeEvent(15 * FRAMES, function(inst)
+				inst.components.combat:DoAttack(inst.sg.statemem.target)
+				if inst.components.combat.target then
+					inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+				end
 				inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/attack_strike")
 				print("dragoon attack")
 			end),
 
-			TimeEvent(20*FRAMES, function(inst) 
-				if inst.components.combat.target then 
-					inst:ForceFacePoint(inst.components.combat.target:GetPosition()) 
-				end 
+			TimeEvent(20 * FRAMES, function(inst)
+				if inst.components.combat.target then
+					inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+				end
 			end),
 
-			TimeEvent(27*FRAMES, function(inst) 
-				if inst.components.combat.target then 
+			TimeEvent(27 * FRAMES, function(inst)
+				if inst.components.combat.target then
 					inst:ForceFacePoint(inst.components.combat.target:GetPosition())
-				end 
+				end
 			end),
 		},
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "eat",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst, cb)
 			inst.Physics:Stop()
@@ -140,22 +140,23 @@ local states=
 			inst.AnimState:PlayAnimation("atk")
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/attack_strike") end),
-			TimeEvent(24*FRAMES, function(inst) if inst:PerformBufferedAction() then inst.components.combat:SetTarget(nil) end end),
+			TimeEvent(14 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve_DLC002/creatures/dragoon/attack_strike") end),
+			TimeEvent(24 * FRAMES, function(inst) if inst:PerformBufferedAction() then inst.components.combat:SetTarget(nil) end end),
 		},
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst)  inst.sg:GoToState("taunt")  end),
+			EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
 		},
 	},
 
-	State{
+	State {
 		name = "spit",
-		tags = {"busy"},
-		
+		tags = { "busy" },
+
 		onenter = function(inst)
 			-- print("snake spit")
 			if ((inst.target ~= inst and not inst.target:HasTag("fire")) or inst.target == inst) and not (inst.recently_frozen) then
@@ -178,48 +179,50 @@ local states=
 			-- print("spit onexit")
 
 			if inst.last_target and inst.last_target ~= inst then
-				inst.num_targets_vomited = inst.last_target.components.stackable and inst.num_targets_vomited + inst.last_target.components.stackable:StackSize() or inst.num_targets_vomited + 1
+				inst.num_targets_vomited = inst.last_target.components.stackable and
+				inst.num_targets_vomited + inst.last_target.components.stackable:StackSize() or
+				inst.num_targets_vomited + 1
 				inst.last_target_spit_time = GetTime()
 			end
 			--inst.Transform:SetFourFaced()
-			if inst.vomitfx then 
-				inst.vomitfx:Remove() 
+			if inst.vomitfx then
+				inst.vomitfx:Remove()
 			end
 			inst.vomitfx = nil
 		end,
-		
-		events=
+
+		events =
 		{
-			EventHandler("animqueueover", function(inst) 
+			EventHandler("animqueueover", function(inst)
 				-- print("spit animqueueover")
 				inst.sg:GoToState("idle")
 			end),
 		},
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(37*FRAMES, function(inst) 
+			TimeEvent(37 * FRAMES, function(inst)
 				-- print("spit timeline")
 				-- print("vomitfire_fx spawned")						
 				inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/split")
 				inst:PerformBufferedAction()
 				inst.last_target = inst.target
 				inst.target = nil
-				inst.spit_interval = math.random(20,30)
+				inst.spit_interval = math.random(20, 30)
 				inst.last_spit_time = GetTime()
 			end),
 
-			TimeEvent(39*FRAMES, function(inst) 
+			TimeEvent(39 * FRAMES, function(inst)
 				-- print("spit timeline")
 				-- print("vomitfire_fx spawned")
 				inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/fireball")
 			end),
 		},
 	},
-	
-	State{
+
+	State {
 		name = "hit",
-		tags = {"busy", "hit"},
+		tags = { "busy", "hit" },
 
 		onenter = function(inst, cb)
 			inst.AnimState:PlayAnimation("hit")
@@ -227,15 +230,15 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/hit")
 		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "taunt",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst, cb)
 			inst.Physics:Stop()
@@ -243,44 +246,44 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/taunt")
 		end,
 
-		timeline=
+		timeline =
 		{
 			--TimeEvent(13*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dragoon/dragoon/taunt") end),
 			--TimeEvent(24*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dragoon/dragoon/taunt") end),
 		},
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "death",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/death")
 			inst.AnimState:PlayAnimation("death")
 			inst.Physics:Stop()
-			RemovePhysicsColliders(inst)            
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))            
+			RemovePhysicsColliders(inst)
+			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
 		end,
 
 	},
 
-	State{
+	State {
 		name = "walk",
-		tags = {"moving", "canrotate", "walking"},
-		
-		onenter = function(inst) 
+		tags = { "moving", "canrotate", "walking" },
+
+		onenter = function(inst)
 			inst.AnimState:PlayAnimation("walk_pre")
 			inst.AnimState:PushAnimation("walk_loop", true)
 			inst.components.locomotor:WalkForward()
 			--inst.sg:SetTimeout(2*math.random()+.5)
 		end,
-		
-		onupdate= function(inst)
+
+		onupdate = function(inst)
 			if not inst.components.locomotor:WantsToMoveForward() then
 				inst.sg:GoToState("idle", "walk_pst")
 			end
@@ -288,43 +291,43 @@ local states=
 
 		timeline = {
 			--TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("dragoon/dragoon/taunt") end),
-			TimeEvent(0*FRAMES, PlayFootstep ),
-			TimeEvent(4*FRAMES, PlayFootstep ),
+			TimeEvent(0 * FRAMES, PlayFootstep),
+			TimeEvent(4 * FRAMES, PlayFootstep),
 		},
 	},
 
-	State{
+	State {
 		name = "charge_pre",
-		tags = {"moving", "canrotate", "running"},
-		
+		tags = { "moving", "canrotate", "running" },
+
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("charge_pre")
 			--inst.sg:SetTimeout(2*math.random()+.5)
 		end,
-		
-		onupdate= function(inst)
+
+		onupdate = function(inst)
 			if not inst.components.locomotor:WantsToMoveForward() then
 				inst.sg:GoToState("idle", "charge_pst")
 			end
 		end,
 
 		events = {
-            EventHandler("animqueueover", function(inst) inst.sg:GoToState("charge") end),
-        }
+			EventHandler("animqueueover", function(inst) inst.sg:GoToState("charge") end),
+		}
 	},
 
-	State{
+	State {
 		name = "charge",
-		tags = {"moving", "canrotate", "running"},
-		
-		onenter = function(inst) 
+		tags = { "moving", "canrotate", "running" },
+
+		onenter = function(inst)
 			inst.AnimState:PlayAnimation("charge_loop")
 			inst.components.locomotor:RunForward()
 
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/charge")
 		end,
-		
-		onupdate= function(inst)
+
+		onupdate = function(inst)
 			if not inst.components.locomotor:WantsToMoveForward() then
 				inst.sg:GoToState("idle", "charge_pst")
 			end
@@ -332,26 +335,27 @@ local states=
 
 		timeline =
 		{
-			TimeEvent(0*FRAMES, SpawnMoveFx),
-			TimeEvent(4*FRAMES, SpawnMoveFx),
-			TimeEvent(8*FRAMES, SpawnMoveFx),
+			TimeEvent(0 * FRAMES, SpawnMoveFx),
+			TimeEvent(4 * FRAMES, SpawnMoveFx),
+			TimeEvent(8 * FRAMES, SpawnMoveFx),
 		},
 
 		events = {
-            EventHandler("animover", function(inst) inst.sg:GoToState("charge") end),
-        }
+			EventHandler("animover", function(inst) inst.sg:GoToState("charge") end),
+		}
 	},
 }
 
 CommonStates.AddSleepStates(states,
-{
-	sleeptimeline = {
-		TimeEvent(30*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/sleep") end),
-	},
-})
+	{
+		sleeptimeline = {
+			TimeEvent(30 * FRAMES,
+				function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/sleep") end),
+		},
+	})
 
 CommonStates.AddFrozenStates(states)
-CommonStates.AddHopStates(states, true, { pre = "walk_pre", loop = "walk_loop", pst = "walk_pst"})
-CommonStates.AddSimpleActionState(states, "gohome", "pig_pickup", 4*FRAMES, {"busy"})
+CommonStates.AddHopStates(states, true, { pre = "walk_pre", loop = "walk_loop", pst = "walk_pst" })
+CommonStates.AddSimpleActionState(states, "gohome", "pig_pickup", 4 * FRAMES, { "busy" })
 
 return StateGraph("dragoon", states, events, "taunt", actionhandlers)

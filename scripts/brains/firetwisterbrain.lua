@@ -11,10 +11,10 @@ end
 
 function fireTwisterBrain:OnStart()
     local root = PriorityNode(
-    {
-        ChaseAndAttack(self.inst),
-        Wander(self.inst, GetHomePos, 35),
-    }, .1)
+        {
+            ChaseAndAttack(self.inst),
+            Wander(self.inst, GetHomePos, 35),
+        }, .1)
 
     self.bt = BT(self.inst, root)
 end

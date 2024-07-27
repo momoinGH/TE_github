@@ -11,8 +11,8 @@ local prefabs =
     "monkeyprojectile",
     "monstermeat",
     "cave_banana",
-	"silk",
-	
+    "silk",
+
     "beardhair",
     "nightmarefuel",
 }
@@ -29,16 +29,16 @@ local SHARE_TARGET_DIST = 40
 local LOOT = { "smallmeat", "cave_banana" }
 local FORCED_NIGHTMARE_LOOT = { "nightmarefuel" }
 SetSharedLootTable('spider_ape',
-{
-    {'monstermeat',   1.0},
-    {'cave_banana',   0.5},
-    {'silk',          0.5},
-	
-    {'beardhair',     1.0},
-    {'nightmarefuel', 0.5},
-})
+    {
+        { 'monstermeat',   1.0 },
+        { 'cave_banana',   0.5 },
+        { 'silk',          0.5 },
 
-local function SetHarassPlayer(inst, player)--骚扰玩家
+        { 'beardhair',     1.0 },
+        { 'nightmarefuel', 0.5 },
+    })
+
+local function SetHarassPlayer(inst, player) --骚扰玩家
     if inst.harassplayer ~= player then
         if inst._harassovertask ~= nil then
             inst._harassovertask:Cancel()
@@ -97,7 +97,7 @@ local function EquipWeapons(inst)
         thrower:AddComponent("equippable")
         inst.components.inventory:GiveItem(thrower)
         inst.weaponitems.thrower = thrower
-        
+
         local hitter = CreateEntity()
         hitter.name = "Hitter"
         hitter.entity:AddTransform()
@@ -110,7 +110,6 @@ local function EquipWeapons(inst)
         hitter:AddComponent("equippable")
         inst.components.inventory:GiveItem(hitter)
         inst.weaponitems.hitter = hitter
-
     end
 end
 
@@ -146,7 +145,7 @@ end
 
 local function FindTargetOfInterest(inst)
     if not inst.curious then
-        return 
+        return
     end
 
     if inst.harassplayer == nil and inst.components.combat.target == nil then
@@ -170,15 +169,15 @@ end
 local function retargetfn(inst)
     return inst:HasTag("nightmare")
         and FindEntity(
-                inst,
-                20,
-                function(guy)
-                    return inst.components.combat:CanTarget(guy)
-                end,
-                { "_combat" }, --see entityreplica.lua
-                { "playerghost" },
-                { "character", "monster" }
-            )
+            inst,
+            20,
+            function(guy)
+                return inst.components.combat:CanTarget(guy)
+            end,
+            { "_combat" },     --see entityreplica.lua
+            { "playerghost" },
+            { "character", "monster" }
+        )
         or nil
 end
 
@@ -267,27 +266,26 @@ local function SetNightmareMonkey(inst)
         inst.task:Cancel()
         inst.task = nil
     end
- 
+
     inst.components.combat:SetTarget(nil)
 
     inst:RemoveEventCallback("entity_death", inst.listenfn, TheWorld)
 end
 
 local function SetNightmareMonkeyLoot(inst, forced)
-	if forced then
-		inst.components.lootdropper:SetLoot(FORCED_NIGHTMARE_LOOT)
-		inst.components.lootdropper:SetChanceLootTable("spider_ape")
-	else
-		inst.components.lootdropper:SetLoot(nil)
-		inst.components.lootdropper:SetChanceLootTable("spider_ape")
-	end
+    if forced then
+        inst.components.lootdropper:SetLoot(FORCED_NIGHTMARE_LOOT)
+        inst.components.lootdropper:SetChanceLootTable("spider_ape")
+    else
+        inst.components.lootdropper:SetLoot(nil)
+        inst.components.lootdropper:SetChanceLootTable("spider_ape")
+    end
 end
 
 local function TestNightmareArea(inst, area)
     if (TheWorld.state.isnightmarewild or TheWorld.state.isnightmaredawn)
         and inst.components.areaaware:CurrentlyInTag("Nightmare")
         and not inst:HasTag("nightmare") then
-
         DoFx(inst)
         SetNightmareMonkey(inst)
     elseif (not TheWorld.state.isnightmarewild and not TheWorld.state.isnightmaredawn)
@@ -301,7 +299,6 @@ local function TestNightmarePhase(inst, phase)
     if (phase == "wild" or phase == "dawn")
         and inst.components.areaaware:CurrentlyInTag("Nightmare")
         and not inst:HasTag("nightmare") then
-
         DoFx(inst)
         SetNightmareMonkey(inst)
     elseif (phase ~= "wild" and phase ~= "dawn")
@@ -331,7 +328,7 @@ local function fn()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()   
+    inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
 
@@ -369,7 +366,7 @@ local function fn()
     inst:AddComponent("thief")
 
     inst:AddComponent("locomotor")
-    inst.components.locomotor:SetSlowMultiplier( 1 )
+    inst.components.locomotor:SetSlowMultiplier(1)
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = false }
     inst.components.locomotor.walkspeed = TUNING.MONKEY_MOVE_SPEED
@@ -380,14 +377,14 @@ local function fn()
     inst.components.combat:SetRetargetFunction(1, retargetfn)
 
     inst.components.combat:SetKeepTargetFunction(shouldKeepTarget)
-    inst.components.combat:SetDefaultDamage(0)  --This doesn't matter, monkey uses weapon damage
+    inst.components.combat:SetDefaultDamage(0) --This doesn't matter, monkey uses weapon damage
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.MONKEY_HEALTH)
 
     inst:AddComponent("periodicspawner")
     inst.components.periodicspawner:SetPrefab("poop")
-    inst.components.periodicspawner:SetRandomTimes(200,400)
+    inst.components.periodicspawner:SetRandomTimes(200, 400)
     inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(15)
     inst.components.periodicspawner:Start()

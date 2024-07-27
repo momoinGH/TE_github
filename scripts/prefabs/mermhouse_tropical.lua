@@ -30,7 +30,6 @@ local loot =
 local PLACER_SCALE = 1.5
 
 local function OnUpdatePlacerHelper(helperinst)
-
     if not helperinst.placerinst:IsValid() then
         helperinst.components.updatelooper:RemoveOnUpdateFn(OnUpdatePlacerHelper)
         helperinst.AnimState:SetAddColour(0, 0, 0, 0)
@@ -39,7 +38,6 @@ local function OnUpdatePlacerHelper(helperinst)
     else
         helperinst.AnimState:SetAddColour(0, 0, 0, 0)
     end
-
 end
 
 local function CreatePlacerRing()
@@ -81,14 +79,13 @@ local function OnEnableHelper(inst, enabled, recipename, placerinst)
         inst.helper.components.updatelooper:AddOnUpdateFn(OnUpdatePlacerHelper)
         inst.helper.placerinst = placerinst
         OnUpdatePlacerHelper(inst.helper)
-
     elseif inst.helper ~= nil then
         inst.helper:Remove()
         inst.helper = nil
     end
 end
 
-local function OnStartHelper(inst)--, recipename, placerinst)
+local function OnStartHelper(inst) --, recipename, placerinst)
     if inst.AnimState:IsCurrentAnimation("place") then
         inst.components.deployhelper:StopHelper()
     end
@@ -135,9 +132,9 @@ local function OnSpawned(inst, child)
     if not inst:HasTag("burnt") then
         inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
         if TheWorld.state.isday and
-                inst.components.childspawner ~= nil and
-                inst.components.childspawner:CountChildrenOutside() >= 1 and
-                child.components.combat.target == nil then
+            inst.components.childspawner ~= nil and
+            inst.components.childspawner:CountChildrenOutside() >= 1 and
+            child.components.combat.target == nil then
             StopSpawning(inst)
         end
     end
@@ -190,8 +187,8 @@ local HAUNT_TARGET_MUST_TAGS = { "character" }
 local HAUNT_TARGET_CANT_TAGS = { "merm", "playerghost", "INLIMBO" }
 local function OnHaunt(inst)
     if inst.components.childspawner == nil or
-            not inst.components.childspawner:CanSpawn() or
-            math.random() > TUNING.HAUNT_CHANCE_HALF then
+        not inst.components.childspawner:CanSpawn() or
+        math.random() > TUNING.HAUNT_CHANCE_HALF then
         return false
     end
 
@@ -241,7 +238,7 @@ local function MakeMermHouse(name, common_postinit, master_postinit)
         local childspawner = inst:AddComponent("childspawner")
         childspawner.childname = "merm"
         childspawner:SetSpawnedFn(OnSpawned)
-        childspawner:SetGoHomeFn(OnGoHome)        
+        childspawner:SetGoHomeFn(OnGoHome)
 
         childspawner.emergencychildname = "merm"
         childspawner:SetEmergencyRadius(TUNING.MERMHOUSE_EMERGENCY_RADIUS)
@@ -282,7 +279,7 @@ local function mermhouse_tropical_common(inst)
     inst.MiniMapEntity:SetIcon("mermhouse_tropical.png")
     inst.AnimState:SetBank("merm_sw_house")
     inst.AnimState:SetBuild("merm_sw_house")
-    inst.AnimState:PlayAnimation("idle")    
+    inst.AnimState:PlayAnimation("idle")
 end
 
 local function OnPreLoad(inst, data)
@@ -312,7 +309,7 @@ local function mermhouse_crafted_common(inst)
     inst.AnimState:SetBank("merm_sw_house")
     inst.AnimState:SetBuild("merm_sw_house")
     inst.AnimState:PlayAnimation("idle", true)
---[[
+    --[[
     --Dedicated server does not need deployhelper
     if not TheNet:IsDedicated() then
         inst:AddComponent("deployhelper")
@@ -352,7 +349,7 @@ local function UpdateSpawningTime(inst, data)
         return
     end
 
-    inst.kelpofferings[data.inst.GUID] =  data.count and data.count > 0 and data.count or nil
+    inst.kelpofferings[data.inst.GUID] = data.count and data.count > 0 and data.count or nil
 
     local topcount = 0
 
@@ -399,9 +396,9 @@ local function invalid_placement_fn(player, placer)
         player.components.talker:Say(GetString(player, "ANNOUNCE_CANTBUILDHERE_HOUSE"))
     end
 end
-                  
+
 return MakeMermHouse("mermhouse_tropical", mermhouse_tropical_common, mermhouse_tropical_master),
-      -- MakePlacer("mermhouse_placer", "merm_house", "merm_house", "idle", nil,nil, nil, nil, nil, nil, nil, nil, invalid_placement_fn),
-       MakeMermHouse("mermhouse_tropical_crafted", mermhouse_crafted_common, mermhouse_tropical_crafted_master),
-      --MakePlacer("mermhouse_tropical_crafted_placer", "merm_sw_house", "merm_sw_house", "idle", nil,nil, nil, nil, nil, nil, nil, nil, invalid_placement_fn)
-	   MakePlacer("mermhouse_tropical_crafted_placer", "merm_sw_house", "merm_sw_house", "idle", false, false, false)  
+    -- MakePlacer("mermhouse_placer", "merm_house", "merm_house", "idle", nil,nil, nil, nil, nil, nil, nil, nil, invalid_placement_fn),
+    MakeMermHouse("mermhouse_tropical_crafted", mermhouse_crafted_common, mermhouse_tropical_crafted_master),
+    --MakePlacer("mermhouse_tropical_crafted_placer", "merm_sw_house", "merm_sw_house", "idle", nil,nil, nil, nil, nil, nil, nil, nil, invalid_placement_fn)
+    MakePlacer("mermhouse_tropical_crafted_placer", "merm_sw_house", "merm_sw_house", "idle", false, false, false)

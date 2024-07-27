@@ -1,7 +1,7 @@
 local quagmire_assets =
 {
     Asset("ANIM", "anim/quagmire_meat_small.zip"),
-	Asset("ANIM", "anim/dried_quagmire.zip"),
+    Asset("ANIM", "anim/dried_quagmire.zip"),
 }
 
 local quagmire_prefabs =
@@ -33,7 +33,7 @@ local function common(bank, build, anim, tags)
     inst:AddTag("dryable")
     inst:AddTag("lureplant_bait")
     inst:AddTag("cookable")
-	
+
     MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
@@ -78,8 +78,8 @@ local function quagmire_smallmeat()
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst.components.edible.healthvalue = 0
+
+    inst.components.edible.healthvalue = 0
     inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
     inst.components.edible.sanityvalue = -TUNING.SANITY_SMALL
 
@@ -88,11 +88,11 @@ local function quagmire_smallmeat()
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
     inst.components.floater:SetScale(0.9)
-	
+
     inst:AddComponent("dryable")
     inst.components.dryable:SetProduct("smallmeat_dried")
     inst.components.dryable:SetDryTime(TUNING.DRY_FAST)
-	inst.components.dryable:SetBuildFile("dried_quagmire")
+    inst.components.dryable:SetBuildFile("dried_quagmire")
     --inst.AnimState:PlayAnimation("raw", true)
 
     inst:AddComponent("cookable")
@@ -125,4 +125,4 @@ local function quagmire_cookedsmallmeat()
 end
 
 return Prefab("quagmire_smallmeat", quagmire_smallmeat, quagmire_assets, quagmire_prefabs),
-       Prefab("quagmire_cookedsmallmeat", quagmire_cookedsmallmeat, quagmire_assets)
+    Prefab("quagmire_cookedsmallmeat", quagmire_cookedsmallmeat, quagmire_assets)

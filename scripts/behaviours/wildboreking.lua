@@ -1,10 +1,10 @@
 local function TryFindSpotForMinion(player, dist)
     local x1, y1, z1 = player.Transform:GetWorldPosition()
-    local angle = math.random() * 2 * PI    
-    local x2, y2, z2 = 
-        x1 + math.cos(angle)*dist,
+    local angle = math.random() * 2 * PI
+    local x2, y2, z2 =
+        x1 + math.cos(angle) * dist,
         y1,
-        z1 + math.sin(angle)*dist   
+        z1 + math.sin(angle) * dist
     if TheWorld.Pathfinder:IsClear(x1, y1, z1, x2, y2, z2, { ignorewalls = false }) then
         return x2, y2, z2
     end
@@ -23,16 +23,17 @@ local function LaunchItem(inst, item, angle, minorspeedvariance)
     item.Physics:Teleport(x, 2.5, z)
     item.Physics:SetVel(math.cos(angle) * spd, 11.5, math.sin(angle) * spd)
     item:DoTaskInTime(.6, OnRestoreItemPhysics)
-    item:PushEvent("knockbackdropped", { owner = inst, knocker = inst, delayinteraction = .75, delayplayerinteraction = .5 })
---    if item.components.burnable ~= nil then
---        inst:ListenForEvent("onignite", function()
---            for k, v in pairs(inst._minigame_elites) do
---                k:SetCheatFlag()
---            end
---        end, item)
---    end
+    item:PushEvent("knockbackdropped",
+        { owner = inst, knocker = inst, delayinteraction = .75, delayplayerinteraction = .5 })
+    --    if item.components.burnable ~= nil then
+    --        inst:ListenForEvent("onignite", function()
+    --            for k, v in pairs(inst._minigame_elites) do
+    --                k:SetCheatFlag()
+    --            end
+    --        end, item)
+    --    end
 end
- 
+
 local function OnTossItems(inst)
     local items = {}
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -42,7 +43,7 @@ local function OnTossItems(inst)
     local numprops = 5
 
     for i = 1, numprops do
-            table.insert(items, "propsign")
+        table.insert(items, "propsign")
     end
 
     for i = 1, numgold do
@@ -53,18 +54,17 @@ local function OnTossItems(inst)
     local delta = 2 * PI / (numgold + numprops + 1) --purposely leave a random gap
     local variance = delta * .4
     while #items > 0 do
+        local item = SpawnPrefab(table.remove(items, math.random(#items)))
 
-	local item = SpawnPrefab(table.remove(items, math.random(#items)))
-
-    LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
-    angle = angle + delta
+        LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
+        angle = angle + delta
     end
-    
-	if numgold > 0 then
+
+    if numgold > 0 then
         inst.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")
     end
 end
- 
+
 local function FindSpotForMinion(player, dist)
     for i = 1, 100 do
         local x, y, z = TryFindSpotForMinion(player, dist)
@@ -74,8 +74,7 @@ local function FindSpotForMinion(player, dist)
     end
 
     for i = 1, 20 do
-
-        local r = dist - i/2
+        local r = dist - i / 2
         while r > 0 do
             r = r - 3
             local x, y, z = TryFindSpotForMinion(player, r)
@@ -83,7 +82,6 @@ local function FindSpotForMinion(player, dist)
                 return x, y, z
             end
         end
-
     end
 
     print("Did not find spot!!!!")
@@ -110,12 +108,12 @@ local function SpawnMinion(players, prefab, hat, rei)
         return
     end
 
-    minion.Transform:SetPosition(x, y, z) 
-	minion.sg:GoToState("appear_start")
-    cloud.Transform:SetPosition(x, y, z) 
+    minion.Transform:SetPosition(x, y, z)
+    minion.sg:GoToState("appear_start")
+    cloud.Transform:SetPosition(x, y, z)
     if hat then
         minion.components.inventory:Equip(SpawnPrefab(hat))
-    end    
+    end
     return minion
 end
 
@@ -135,28 +133,27 @@ local function MakeWave(players, wave, rei)
     end
 
     for i = 1, wave.n do
-        local minion = SpawnMinion(players, wave.prefab, wave.hat, rei)       
+        local minion = SpawnMinion(players, wave.prefab, wave.hat, rei)
         if wave.allwere then
             minion.components.werebeast:SetWere(10000000)
             minion:DoTaskInTime(5,
-                function ()
-                    minion.components.combat:EngageTarget(GetRandomItem(players))                
+                function()
+                    minion.components.combat:EngageTarget(GetRandomItem(players))
                 end)
-            
-        end            
-    end 
+        end
+    end
 end
 
 local MinionsWaves = {
     [1] = {
         prefab = "pigman_minion",
-        n = 5,      
+        n = 5,
     },
-    
+
     [2] = {
         prefab = "pigman_minion",
         leaderprefab = "pigguard_minion",
-        n = 10,     
+        n = 10,
     },
 
     [3] = {
@@ -164,14 +161,14 @@ local MinionsWaves = {
         leaderprefab = "pigguard_minion",
         leadershat = "footballhat",
         n = 15,
-    }, 
+    },
 
     [4] = {
         prefab = "pigman_minion",
         leaderprefab = "pigguard_minion",
         leadershat = "footballhat",
         n = 15,
-    }, 
+    },
 
     [5] = {
         prefab = "pigman_minion",
@@ -180,7 +177,7 @@ local MinionsWaves = {
         leadershat = "footballhat",
         leaderwere = true,
         n = 5,
-    },         
+    },
 
     [6] = {
         prefab = "pigman_minion",
@@ -189,7 +186,7 @@ local MinionsWaves = {
         leadershat = "ruinshat",
         leaderwere = true,
         n = 10,
-    }, 
+    },
 
     [7] = {
         prefab = "pigman_minion",
@@ -199,7 +196,7 @@ local MinionsWaves = {
         leaderwere = true,
         allwere = false,
         n = 5,
-    },    
+    },
 
     [8] = {
         prefab = "pigman_minion",
@@ -209,7 +206,7 @@ local MinionsWaves = {
         leaderwere = true,
         allwere = true,
         n = 15,
-    },       
+    },
 }
 
 --if TUNING.PigKingBossConf.Waves then
@@ -237,40 +234,38 @@ end
 
 function WildboreKingPanic:MakeWave(players)
     local health = self.inst.components.health:GetPercent()
-    local n = math.ceil( (1-health) * (#MinionsWaves+0.1))
-    
+    local n = math.ceil((1 - health) * (#MinionsWaves + 0.1))
+
     if n < 1 then
         n = 1
-    end    
+    end
 
-    if n > #MinionsWaves then 
+    if n > #MinionsWaves then
         n = #MinionsWaves
     end
 
     self.CannotMakeWave = true
-    self.inst:DoTaskInTime(30, 
-        function ()
-           self.CannotMakeWave = nil
+    self.inst:DoTaskInTime(30,
+        function()
+            self.CannotMakeWave = nil
         end)
 
-local rei = self.inst		
-		
+    local rei = self.inst
+
     RunWave(players, n, rei)
-	
-	self.inst:DoTaskInTime(1,
-        function ()
-           OnTossItems(rei)
-        end)	
-		
-	self.inst:DoTaskInTime(15,
-        function ()
-           OnTossItems(rei)
-        end)			
-	
+
+    self.inst:DoTaskInTime(1,
+        function()
+            OnTossItems(rei)
+        end)
+
+    self.inst:DoTaskInTime(15,
+        function()
+            OnTossItems(rei)
+        end)
 end
 
 function WildboreKingPanic:Visit()
-
     if self.status == READY then
         self:PickNewDirection()
         self.status = RUNNING
@@ -291,12 +286,9 @@ function WildboreKingPanic:Visit()
 end
 
 function WildboreKingPanic:PickNewDirection()
-    self.inst.components.locomotor:RunInDirection(math.random()*360)
-    self.waittime = GetTime() + 0.25 + math.random()*0.25
+    self.inst.components.locomotor:RunInDirection(math.random() * 360)
+    self.waittime = GetTime() + 0.25 + math.random() * 0.25
     if math.random() < 0.1 then
         self.inst.SoundEmitter:PlaySound("dontstarve/pig/PigKingHappy")
     end
 end
-
-
-

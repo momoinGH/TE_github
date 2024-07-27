@@ -8,23 +8,23 @@ local assets =
 
 local prefabs =
 {
-	"kelp",
-	"bullkelp_root",
+    "kelp",
+    "bullkelp_root",
 }
 
 local function ReplaceOnPickup(inst, pickupguy, src_pos)
---	inst:Remove()
+    --	inst:Remove()
 
-	local kelp = SpawnPrefab("kelp")
-	kelp.Transform:SetPosition(inst.Transform:GetWorldPosition())
---	kelp.Transform:SetPosition(src_pos:Get())
-	pickupguy.components.inventory:GiveItem(kelp) --, nil, src_pos)
+    local kelp = SpawnPrefab("kelp")
+    kelp.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    --	kelp.Transform:SetPosition(src_pos:Get())
+    pickupguy.components.inventory:GiveItem(kelp) --, nil, src_pos)
 
-	local root = SpawnPrefab("bullkelp_root")
-	root.Transform:SetPosition(inst.Transform:GetWorldPosition())
-	pickupguy.components.inventory:GiveItem(root) --, nil, src_pos)
-	inst:Remove()
-	return true -- true because inst was removed
+    local root = SpawnPrefab("bullkelp_root")
+    root.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    pickupguy.components.inventory:GiveItem(root) --, nil, src_pos)
+    inst:Remove()
+    return true                                -- true because inst was removed
 end
 
 local function fn()
@@ -42,7 +42,7 @@ local function fn()
 
     MakeInventoryFloatable(inst)
 
-	inst:SetPrefabNameOverride("BULLKELP_PLANT")
+    inst:SetPrefabNameOverride("BULLKELP_PLANT")
 
     inst.entity:SetPristine()
 
@@ -53,7 +53,7 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem:SetOnPickupFn(ReplaceOnPickup)
+    inst.components.inventoryitem:SetOnPickupFn(ReplaceOnPickup)
 
     MakeMediumBurnable(inst, TUNING.LARGE_BURNTIME)
     MakeSmallPropagator(inst)

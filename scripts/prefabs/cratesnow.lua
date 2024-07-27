@@ -5,15 +5,15 @@ local assets =
 
 local prefabs =
 {
-	 "collapse_small",
-	 "boards",
-	 "rope",
-	 "bluegem",
-	 "carrat",
-	 "winterhat",
-	 "lantern",
-	 "yotc_seedpacket",
-	 "yotc_seedpacket_rare",
+	"collapse_small",
+	"boards",
+	"rope",
+	"bluegem",
+	"carrat",
+	"winterhat",
+	"lantern",
+	"yotc_seedpacket",
+	"yotc_seedpacket_rare",
 }
 
 local function setanim(inst, anim)
@@ -38,32 +38,33 @@ local function onhammered(inst)
 	inst.components.lootdropper:DropLoot()
 	SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
-	
-local tamanhodomapa = (TheWorld.Map:GetSize())*2 - 2
-local map = TheWorld.Map
-local x
-local z
-local contagem = 0
-local numerodeitens = 1
 
-repeat
-x = math.random(-tamanhodomapa,tamanhodomapa)
-z = math.random(-tamanhodomapa,tamanhodomapa)
-local curr = map:GetTile(map:GetTileCoordsAtPoint(x,0,z))
-local curr1 = map:GetTile(map:GetTileCoordsAtPoint(x-4,0,z))
-local curr2 = map:GetTile(map:GetTileCoordsAtPoint(x+4,0,z))
-local curr3 = map:GetTile(map:GetTileCoordsAtPoint(x,0,z-4))
-local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x,0,z+4))
-contagem = contagem + 1
--------------------coloca os itens------------------------
-if (curr == GROUND.WATER_MANGROVE and curr1 == GROUND.WATER_MANGROVE and curr2 == GROUND.WATER_MANGROVE and curr3 == GROUND.WATER_MANGROVE and curr4 == GROUND.WATER_MANGROVE) then 
-local colocaitem = SpawnPrefab(inst.prefab) 
-colocaitem.Transform:SetPosition(x, 0, z)
-numerodeitens = numerodeitens - 1 end
------------------------------------------------------------
-until
-numerodeitens <= 0 or contagem == 500			
-	
+	local tamanhodomapa = (TheWorld.Map:GetSize()) * 2 - 2
+	local map = TheWorld.Map
+	local x
+	local z
+	local contagem = 0
+	local numerodeitens = 1
+
+	repeat
+		x = math.random(-tamanhodomapa, tamanhodomapa)
+		z = math.random(-tamanhodomapa, tamanhodomapa)
+		local curr = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z))
+		local curr1 = map:GetTile(map:GetTileCoordsAtPoint(x - 4, 0, z))
+		local curr2 = map:GetTile(map:GetTileCoordsAtPoint(x + 4, 0, z))
+		local curr3 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z - 4))
+		local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z + 4))
+		contagem = contagem + 1
+		-------------------coloca os itens------------------------
+		if (curr == GROUND.WATER_MANGROVE and curr1 == GROUND.WATER_MANGROVE and curr2 == GROUND.WATER_MANGROVE and curr3 == GROUND.WATER_MANGROVE and curr4 == GROUND.WATER_MANGROVE) then
+			local colocaitem = SpawnPrefab(inst.prefab)
+			colocaitem.Transform:SetPosition(x, 0, z)
+			numerodeitens = numerodeitens - 1
+		end
+		-----------------------------------------------------------
+	until
+		numerodeitens <= 0 or contagem == 500
+
 	inst:Remove()
 end
 
@@ -87,9 +88,9 @@ local function fn(Sim)
 
 	inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	if not TheWorld.ismastersim then
+		return inst
+	end
 
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
@@ -97,23 +98,23 @@ local function fn(Sim)
 	inst.components.workable:SetOnFinishCallback(onhammered)
 
 	inst:AddComponent("lootdropper")
-	inst.components.lootdropper:SetLoot({"boards"})
+	inst.components.lootdropper:SetLoot({ "boards" })
 	inst.components.lootdropper:AddRandomLoot("rope", 10)
-	inst.components.lootdropper:AddRandomLoot("rope",10)
-	inst.components.lootdropper:AddRandomLoot("fish",10)
-	inst.components.lootdropper:AddRandomLoot("flint",5)
-	inst.components.lootdropper:AddRandomLoot("goldnugget",5)
-	inst.components.lootdropper:AddRandomLoot("papyrus",5)
-	inst.components.lootdropper:AddRandomLoot("gears",1)
-	inst.components.lootdropper:AddRandomLoot("gunpowder",1)
-	inst.components.lootdropper:AddRandomLoot("pigskin",1)
-	inst.components.lootdropper:AddRandomLoot("bluegem",1)
-	inst.components.lootdropper:AddRandomLoot("carrat",1)
-	inst.components.lootdropper:AddRandomLoot("winterhat",1)	
-	inst.components.lootdropper:AddRandomLoot("lantern",1)
-	inst.components.lootdropper:AddRandomLoot("yotc_seedpacket",1)
-	inst.components.lootdropper:AddRandomLoot("yotc_seedpacket_rare",1)
-	
+	inst.components.lootdropper:AddRandomLoot("rope", 10)
+	inst.components.lootdropper:AddRandomLoot("fish", 10)
+	inst.components.lootdropper:AddRandomLoot("flint", 5)
+	inst.components.lootdropper:AddRandomLoot("goldnugget", 5)
+	inst.components.lootdropper:AddRandomLoot("papyrus", 5)
+	inst.components.lootdropper:AddRandomLoot("gears", 1)
+	inst.components.lootdropper:AddRandomLoot("gunpowder", 1)
+	inst.components.lootdropper:AddRandomLoot("pigskin", 1)
+	inst.components.lootdropper:AddRandomLoot("bluegem", 1)
+	inst.components.lootdropper:AddRandomLoot("carrat", 1)
+	inst.components.lootdropper:AddRandomLoot("winterhat", 1)
+	inst.components.lootdropper:AddRandomLoot("lantern", 1)
+	inst.components.lootdropper:AddRandomLoot("yotc_seedpacket", 1)
+	inst.components.lootdropper:AddRandomLoot("yotc_seedpacket_rare", 1)
+
 	inst.components.lootdropper.numrandomloot = 1
 
 	inst:AddComponent("inspectable")

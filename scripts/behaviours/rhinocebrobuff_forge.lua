@@ -2,7 +2,7 @@ RhinocebroBuff_Forge = Class(BehaviourNode, function(self, inst, distance, isvic
     BehaviourNode._ctor(self, "RhinocebroBuff_Forge")
     self.inst = inst
     self.distance = distance or 6
-	self.isvictory = isvictory or nil
+    self.isvictory = isvictory or nil
 end)
 
 function RhinocebroBuff_Forge:__tostring()
@@ -32,7 +32,7 @@ function RhinocebroBuff_Forge:Visit()
             if self.isvictory then
                 self.status = SUCCESS
                 self.inst:PushEvent("victorypose")
-            -- Cheer
+                -- Cheer
             elseif self.inst.cheer_ready then
                 self.status = SUCCESS
                 self.inst:PushEvent("startcheer")

@@ -11,16 +11,17 @@ local prefabs =
     "mermkingunderwter"
 }
 
-local respawndays = 5  --revive em no maximo 20 dias mas pode reviver antes
+local respawndays = 5 --revive em no maximo 20 dias mas pode reviver antes
 
 local function OnTimerDone(inst, data)
     if data.name == "spawndelay" then
-	local invader = GetClosestInstWithTag("mermking", inst, 100)
-	if not invader then
-    local mermking = SpawnPrefab("mermkingunderwater")
-    mermking.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    end end
-	inst.components.timer:StartTimer("spawndelay", 60*8*respawndays)
+        local invader = GetClosestInstWithTag("mermking", inst, 100)
+        if not invader then
+            local mermking = SpawnPrefab("mermkingunderwater")
+            mermking.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        end
+    end
+    inst.components.timer:StartTimer("spawndelay", 60 * 8 * respawndays)
 end
 
 local function fn()
@@ -40,12 +41,12 @@ local function fn()
     inst.AnimState:SetBuild("merm_king_carpet")
     inst.AnimState:PlayAnimation("idle", true)
 
-    inst.AnimState:SetOrientation( ANIM_ORIENTATION.OnGround )
-    inst.AnimState:SetLayer( LAYER_BACKGROUND )
-    inst.AnimState:SetSortOrder( 3 )
+    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
+    inst.AnimState:SetSortOrder(3)
 
     inst:AddTag("mermthrone")
-	inst:AddTag("NOCLICK")	
+    inst:AddTag("NOCLICK")
 
     inst.entity:SetPristine()
 
@@ -55,11 +56,11 @@ local function fn()
 
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDone)
-	inst.components.timer:StartTimer("spawndelay", 60*8*respawndays)
+    inst.components.timer:StartTimer("spawndelay", 60 * 8 * respawndays)
 
     return inst
 end
 
 
 
-return  Prefab("mermthroneunderwater", fn, assets, prefabs)
+return Prefab("mermthroneunderwater", fn, assets, prefabs)

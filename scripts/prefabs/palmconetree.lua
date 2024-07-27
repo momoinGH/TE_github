@@ -23,17 +23,17 @@ local prefabs =
 
 local function makeanims(stage)
     return {
-        idle="idle_"..stage,
-        sway1="sway1_loop_"..stage,
-        sway2="sway2_loop_"..stage,
-        chop="chop_"..stage,
-        fallleft="fallleft_"..stage,
-        fallright="fallright_"..stage,
-        stump="stump_"..stage,
-        burning="burning_loop_"..stage,
-        burnt="burnt_"..stage,
-        chop_burnt="chop_burnt_"..stage,
-        idle_chop_burnt="idle_chop_burnt_"..stage,
+        idle = "idle_" .. stage,
+        sway1 = "sway1_loop_" .. stage,
+        sway2 = "sway2_loop_" .. stage,
+        chop = "chop_" .. stage,
+        fallleft = "fallleft_" .. stage,
+        fallright = "fallright_" .. stage,
+        stump = "stump_" .. stage,
+        burning = "burning_loop_" .. stage,
+        burnt = "burnt_" .. stage,
+        chop_burnt = "chop_burnt_" .. stage,
+        idle_chop_burnt = "idle_chop_burnt_" .. stage,
     }
 end
 
@@ -48,32 +48,32 @@ local anims = {
 }
 
 SetSharedLootTable("palmconetree_small",
-{
-    {"log", 1.0},
-    {"log", 1.0},
-})
+    {
+        { "log", 1.0 },
+        { "log", 1.0 },
+    })
 
 SetSharedLootTable("palmconetree_normal",
-{
-    {"log", 1.0},
-    {"log", 1.0},
-    {"log", 1.0},
-})
+    {
+        { "log", 1.0 },
+        { "log", 1.0 },
+        { "log", 1.0 },
+    })
 
 SetSharedLootTable("palmconetree_tall",
-{
-    {"log", 1.0},
-    {"log", 1.0},
-    {"log", 1.0},
-    {"palmcone_scale", 1.0},
-    {"palmcone_scale", 1.0},
-    {"palmcone_seed", 1.0},
-})
+    {
+        { "log",            1.0 },
+        { "log",            1.0 },
+        { "log",            1.0 },
+        { "palmcone_scale", 1.0 },
+        { "palmcone_scale", 1.0 },
+        { "palmcone_seed",  1.0 },
+    })
 
 SetSharedLootTable("palmconetree_burnt",
-{
-    {"charcoal", 1.0},
-})
+    {
+        { "charcoal", 1.0 },
+    })
 
 -- For chopping down a tree that's been burnt.
 local function chop_down_burnt(inst, chopper)
@@ -129,7 +129,9 @@ local function tree_burnt_immediate_helper(inst, immediate)
     inst:AddTag("burnt")
 
     if inst.components.timer ~= nil and not inst.components.timer:TimerExists("decay") then
-        inst.components.timer:StartTimer("decay", GetRandomWithVariance(TUNING.PALMCONETREE_REGROWTH.DEAD_DECAY_TIME, TUNING.PALMCONETREE_REGROWTH.DEAD_DECAY_TIME*0.5))
+        inst.components.timer:StartTimer("decay",
+            GetRandomWithVariance(TUNING.PALMCONETREE_REGROWTH.DEAD_DECAY_TIME,
+                TUNING.PALMCONETREE_REGROWTH.DEAD_DECAY_TIME * 0.5))
     end
 end
 
@@ -158,17 +160,17 @@ local function on_chop_tree(inst, chopper, chops_remaining, num_chops)
 
     local x, y, z = inst.Transform:GetWorldPosition()
 
-    local tree_fx = SpawnPrefab("palmcone_leaf_fx_"..inst.size)
+    local tree_fx = SpawnPrefab("palmcone_leaf_fx_" .. inst.size)
     tree_fx.Transform:SetPosition(x, y + math.random() * 0.3, z)
 end
 
 local function dig_up_stump(inst, digger)
-	if inst.size == SHORT then
-	    inst.components.lootdropper:SpawnLootPrefab("log")
-	else
-	    inst.components.lootdropper:SpawnLootPrefab("log")
-	    inst.components.lootdropper:SpawnLootPrefab("log")
-	end
+    if inst.size == SHORT then
+        inst.components.lootdropper:SpawnLootPrefab("log")
+    else
+        inst.components.lootdropper:SpawnLootPrefab("log")
+        inst.components.lootdropper:SpawnLootPrefab("log")
+    end
     inst:Remove()
 end
 
@@ -210,7 +212,9 @@ local function make_stump(inst)
 
     -- Start the decay timer if we haven't already.
     if inst.components.timer ~= nil and not inst.components.timer:TimerExists("decay") then
-        inst.components.timer:StartTimer("decay", GetRandomWithVariance(TUNING.PALMCONETREE_REGROWTH.DEAD_DECAY_TIME, TUNING.PALMCONETREE_REGROWTH.DEAD_DECAY_TIME*0.5))
+        inst.components.timer:StartTimer("decay",
+            GetRandomWithVariance(TUNING.PALMCONETREE_REGROWTH.DEAD_DECAY_TIME,
+                TUNING.PALMCONETREE_REGROWTH.DEAD_DECAY_TIME * 0.5))
     end
 end
 
@@ -239,8 +243,8 @@ local function on_chop_tree_down(inst, chopper)
     end
 
     -- Note: currently just copied from evergreens. Potentially need to revisit.
-    inst:DoTaskInTime(0.4, function (inst)
-        ShakeAllCameras( CAMERASHAKE.FULL, .25, .03, (inst.size == TALL and .5) or .25, inst, 6 )
+    inst:DoTaskInTime(0.4, function(inst)
+        ShakeAllCameras(CAMERASHAKE.FULL, .25, .03, (inst.size == TALL and .5) or .25, inst, 6)
     end)
 
     make_stump(inst)
@@ -276,7 +280,7 @@ local function set_short_burnable(inst)
     end
     inst.components.propagator.acceptsheat = true
     inst.components.propagator:SetOnFlashPoint(DefaultIgniteFn)
-    inst.components.propagator.flashpoint = 5 + math.random()*5
+    inst.components.propagator.flashpoint = 5 + math.random() * 5
     inst.components.propagator.decayrate = 0.5
     inst.components.propagator.propagaterange = 5
     inst.components.propagator.heatoutput = 5
@@ -322,7 +326,7 @@ local function set_normal_burnable(inst)
     end
     inst.components.propagator.acceptsheat = true
     inst.components.propagator:SetOnFlashPoint(DefaultIgniteFn)
-    inst.components.propagator.flashpoint = 5 + math.random()*5
+    inst.components.propagator.flashpoint = 5 + math.random() * 5
     inst.components.propagator.decayrate = 0.5
     inst.components.propagator.propagaterange = 5
     inst.components.propagator.heatoutput = 5
@@ -367,7 +371,7 @@ local function set_tall_burnable(inst)
     end
     inst.components.propagator.acceptsheat = true
     inst.components.propagator:SetOnFlashPoint(DefaultIgniteFn)
-    inst.components.propagator.flashpoint = 15+math.random()*10
+    inst.components.propagator.flashpoint = 15 + math.random() * 10
     inst.components.propagator.decayrate = 0.5
     inst.components.propagator.propagaterange = 7
     inst.components.propagator.heatoutput = 8.5
@@ -399,7 +403,8 @@ local growth_stages = {
     {
         name = SHORT,
         time = function(inst)
-            return GetRandomWithVariance(TUNING.PALMCONETREE_GROWTH_TIME[1].base, TUNING.PALMCONETREE_GROWTH_TIME[1].random)
+            return GetRandomWithVariance(TUNING.PALMCONETREE_GROWTH_TIME[1].base,
+                TUNING.PALMCONETREE_GROWTH_TIME[1].random)
         end,
         fn = set_short,
         growfn = grow_short,
@@ -407,7 +412,8 @@ local growth_stages = {
     {
         name = NORMAL,
         time = function(inst)
-            return GetRandomWithVariance(TUNING.PALMCONETREE_GROWTH_TIME[2].base, TUNING.PALMCONETREE_GROWTH_TIME[2].random)
+            return GetRandomWithVariance(TUNING.PALMCONETREE_GROWTH_TIME[2].base,
+                TUNING.PALMCONETREE_GROWTH_TIME[2].random)
         end,
         fn = set_normal,
         growfn = grow_normal,
@@ -415,7 +421,8 @@ local growth_stages = {
     {
         name = TALL,
         time = function(inst)
-            return GetRandomWithVariance(TUNING.PALMCONETREE_GROWTH_TIME[3].base, TUNING.PALMCONETREE_GROWTH_TIME[3].random)
+            return GetRandomWithVariance(TUNING.PALMCONETREE_GROWTH_TIME[3].base,
+                TUNING.PALMCONETREE_GROWTH_TIME[3].random)
         end,
         fn = set_tall,
         growfn = grow_tall,
@@ -580,9 +587,9 @@ local function tree(name, stage, data)
 
         -------------------
         inst.size = (stage == 1 and SHORT)
-                or (stage == 2 and NORMAL)
-                or (stage == 3 and TALL)
-                or nil
+            or (stage == 2 and NORMAL)
+            or (stage == 3 and TALL)
+            or nil
 
         if inst.size == SHORT then
             set_short_burnable(inst)
@@ -649,7 +656,7 @@ local function tree(name, stage, data)
     return Prefab(name, fn, assets, prefabs)
 end
 
-return  tree("palmconetree", 0),
-        tree("palmconetree_short", 1),
-        tree("palmconetree_normal", 2),
-        tree("palmconetree_tall", 3)
+return tree("palmconetree", 0),
+    tree("palmconetree_short", 1),
+    tree("palmconetree_normal", 2),
+    tree("palmconetree_tall", 3)

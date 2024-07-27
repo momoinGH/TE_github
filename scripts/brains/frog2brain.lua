@@ -13,16 +13,18 @@ local MAX_CHASE_TIME = 8
 local SEE_BAIT_DIST = 20
 
 local function GoHomeAction(inst)
-    if inst.components.homeseeker and 
-       inst.components.homeseeker.home and 
-       inst.components.homeseeker.home:IsValid() then
+    if inst.components.homeseeker and
+        inst.components.homeseeker.home and
+        inst.components.homeseeker.home:IsValid() then
         return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
     end
 end
 
 local function EatFoodAction(inst)
     if inst:HasTag("eatsbait") then
-        local target = FindEntity(inst, SEE_BAIT_DIST, function(item) return item.components.bait and item:HasTag("frogbait") and not (item.components.inventoryitem and item.components.inventoryitem:IsHeld()) end)
+        local target = FindEntity(inst, SEE_BAIT_DIST,
+            function(item) return item.components.bait and item:HasTag("frogbait") and
+                not (item.components.inventoryitem and item.components.inventoryitem:IsHeld()) end)
         if target then
             local act = BufferedAction(inst, target, ACTIONS.EAT)
             act.validfn = function() return not (target.components.inventoryitem and target.components.inventoryitem:IsHeld()) end
@@ -33,7 +35,8 @@ end
 
 
 local function ShouldGoHome(inst)
-    return  (not TheWorld.state.isday and not inst:HasTag("duskok")) or (TheWorld.state.isnight and inst:HasTag("duskok")) or TheWorld.state.iswinter
+    return (not TheWorld.state.isday and not inst:HasTag("duskok")) or (TheWorld.state.isnight and inst:HasTag("duskok")) or
+    TheWorld.state.iswinter
 end
 
 local Frog2Brain = Class(Brain, function(self, inst)
@@ -41,22 +44,21 @@ local Frog2Brain = Class(Brain, function(self, inst)
 end)
 
 function Frog2Brain:OnStart()
-
---	local clock = GetClock()
+    --	local clock = GetClock()
 
     local root = PriorityNode(
-    {
-        ChaseAndAttack(self.inst, MAX_CHASE_TIME),
-        WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
-            DoAction(self.inst, function() return GoHomeAction(self.inst) end, "go home", true )),
-        DoAction(self.inst, EatFoodAction),
-		WhileNode(function() return TheWorld.state.isnight end, "IsNotNight",
-			Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)),                
-		StandStill(self.inst, function() return self.inst.sg:HasStateTag("idle") end, nil),
-    }, .25)
-    
+        {
+            ChaseAndAttack(self.inst, MAX_CHASE_TIME),
+            WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
+                DoAction(self.inst, function() return GoHomeAction(self.inst) end, "go home", true)),
+            DoAction(self.inst, EatFoodAction),
+            WhileNode(function() return TheWorld.state.isnight end, "IsNotNight",
+                Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                    MAX_WANDER_DIST)),
+            StandStill(self.inst, function() return self.inst.sg:HasStateTag("idle") end, nil),
+        }, .25)
+
     self.bt = BT(self.inst, root)
-    
 end
 
 return Frog2Brain

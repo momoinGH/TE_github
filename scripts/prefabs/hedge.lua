@@ -1,9 +1,9 @@
-local assets=
+local assets =
 {
     Asset("ANIM", "anim/hedge.zip"),
     Asset("ANIM", "anim/hedge1_build.zip"),
-	Asset("ANIM", "anim/hedge2_build.zip"),
-	Asset("ANIM", "anim/hedge3_build.zip"),
+    Asset("ANIM", "anim/hedge2_build.zip"),
+    Asset("ANIM", "anim/hedge3_build.zip"),
 }
 
 local prefabs =
@@ -43,12 +43,12 @@ end
 
 local function OnTimerDone(inst, data)
     if data.name == "spawndelay" then
-    inst.AnimState:PlayAnimation("growth1to2")
-    inst.AnimState:PushAnimation("growth2to3")	
-	inst.AnimState:PushAnimation("growth3",true)
-	inst:AddTag("machetecut")
-    inst.components.workable:SetWorkLeft(3)
-	inst.components.workable:SetWorkAction(ACTIONS.HACK)
+        inst.AnimState:PlayAnimation("growth1to2")
+        inst.AnimState:PushAnimation("growth2to3")
+        inst.AnimState:PushAnimation("growth3", true)
+        inst:AddTag("machetecut")
+        inst.components.workable:SetWorkLeft(3)
+        inst.components.workable:SetWorkAction(ACTIONS.HACK)
     end
 end
 
@@ -80,37 +80,36 @@ end
 
 local function onhackedfn(inst, hacker, hacksleft)
     if not inst:HasTag("machetecut") then return end
-	local fx = SpawnPrefab("green_leaves_chop")
-    local x, y, z= inst.Transform:GetWorldPosition()
-    fx.Transform:SetPosition(x,y,z)
+    local fx = SpawnPrefab("green_leaves_chop")
+    local x, y, z = inst.Transform:GetWorldPosition()
+    fx.Transform:SetPosition(x, y, z)
 
-	if(hacksleft <= 0) then
-		inst.AnimState:PlayAnimation("hit")
-		inst.AnimState:PushAnimation("growth1")
-		inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
-	else
+    if (hacksleft <= 0) then
+        inst.AnimState:PlayAnimation("hit")
+        inst.AnimState:PushAnimation("growth1")
+        inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
+    else
+        inst.AnimState:PlayAnimation("hit")
+        inst.AnimState:PushAnimation("growth2")
+    end
 
-		inst.AnimState:PlayAnimation("hit")
-		inst.AnimState:PushAnimation("growth2")		
-	end
-	
-	inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
+    inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
 end
 
 
 local function OnSave(inst, data)
-if not inst:HasTag("machetecut") then
-    data.tag = 1
-end
+    if not inst:HasTag("machetecut") then
+        data.tag = 1
+    end
 end
 
 local function OnLoad(inst, data)
     if data and data.tag == 1 then
-				inst.AnimState:PlayAnimation("growth1")				
-				inst:RemoveTag("machetecut")
-				inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-				inst.components.workable:SetWorkLeft(4)
-    end	
+        inst.AnimState:PlayAnimation("growth1")
+        inst:RemoveTag("machetecut")
+        inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+        inst.components.workable:SetWorkLeft(4)
+    end
 end
 
 local function onbuilt(inst)
@@ -129,20 +128,20 @@ local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-	inst.Transform:SetEightFaced()
+    inst.Transform:SetEightFaced()
     inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     inst.AnimState:SetRayTestOnBB(true)
-	inst.AnimState:SetBank("hedge")
-	inst.AnimState:SetBuild("hedge1_build")
-	inst.AnimState:PlayAnimation("growth3",true)
-	MakeObstaclePhysics(inst, .35)
+    inst.AnimState:SetBank("hedge")
+    inst.AnimState:SetBuild("hedge1_build")
+    inst.AnimState:PlayAnimation("growth3", true)
+    MakeObstaclePhysics(inst, .35)
 
-	inst:AddTag("machetecut")
-	inst:AddTag("hedgetoshear")
-	
+    inst:AddTag("machetecut")
+    inst:AddTag("hedgetoshear")
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -151,30 +150,30 @@ local function fn()
 
     inst.AnimState:SetTime(math.random() * 2)
 
-	inst:AddComponent("interactions")
+    inst:AddComponent("interactions")
     inst:AddComponent("inspectable")
     inst:AddComponent("lootdropper")
-	
-	inst:AddComponent("timer")
+
+    inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDone)
-	
+
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HACK)
     inst.components.workable:SetOnFinishCallback(cut_up)
     inst.components.workable:SetWorkLeft(3)
-	inst.components.workable.onwork = onhackedfn
+    inst.components.workable.onwork = onhackedfn
 
     MakeMediumBurnable(inst)
     MakeSmallPropagator(inst)
     MakeHauntableIgnite(inst)
-	
-	inst.OnSave = OnSave
+
+    inst.OnSave = OnSave
     inst.OnLoad = OnLoad
-    inst:ListenForEvent("onbuilt", onbuilt)	
-	
+    inst:ListenForEvent("onbuilt", onbuilt)
+
     inst.setobstical = setobstical  -----加上墙的寻路特性
     inst:AddComponent("gridnudger") ------------加上这个就只能放在墙点,这两个必须同时使用
-	
+
     return inst
 end
 
@@ -182,20 +181,20 @@ local function fn1()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-	inst.Transform:SetEightFaced()
+    inst.Transform:SetEightFaced()
     inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     inst.AnimState:SetRayTestOnBB(true)
-	inst.AnimState:SetBank("hedge")
-	inst.AnimState:SetBuild("hedge2_build")
-	inst.AnimState:PlayAnimation("growth2",true)
-	MakeObstaclePhysics(inst, .35)
+    inst.AnimState:SetBank("hedge")
+    inst.AnimState:SetBuild("hedge2_build")
+    inst.AnimState:PlayAnimation("growth2", true)
+    MakeObstaclePhysics(inst, .35)
 
-	inst:AddTag("machetecut")
-	inst:AddTag("hedgetoshear")
-	
+    inst:AddTag("machetecut")
+    inst:AddTag("hedgetoshear")
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -204,30 +203,30 @@ local function fn1()
 
     inst.AnimState:SetTime(math.random() * 2)
 
-	inst:AddComponent("interactions")
+    inst:AddComponent("interactions")
     inst:AddComponent("inspectable")
     inst:AddComponent("lootdropper")
-	
-	inst:AddComponent("timer")
+
+    inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDone)
-	
+
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HACK)
     inst.components.workable:SetOnFinishCallback(cut_up)
     inst.components.workable:SetWorkLeft(3)
-	inst.components.workable.onwork = onhackedfn
+    inst.components.workable.onwork = onhackedfn
 
     MakeMediumBurnable(inst)
     MakeSmallPropagator(inst)
     MakeHauntableIgnite(inst)
-	
-	inst.OnSave = OnSave
+
+    inst.OnSave = OnSave
     inst.OnLoad = OnLoad
-    inst:ListenForEvent("onbuilt", onbuilt)	
-	
+    inst:ListenForEvent("onbuilt", onbuilt)
+
     inst.setobstical = setobstical  -----加上墙的寻路特性
     inst:AddComponent("gridnudger") ------------加上这个就只能放在墙点,这两个必须同时使用
-	
+
     return inst
 end
 
@@ -235,19 +234,19 @@ local function fn2()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-	inst.Transform:SetEightFaced()
+    inst.Transform:SetEightFaced()
     inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     inst.AnimState:SetRayTestOnBB(true)
-	inst.AnimState:SetBank("hedge")
-	inst.AnimState:SetBuild("hedge3_build")
-	inst.AnimState:PlayAnimation("growth2",true)
-	MakeObstaclePhysics(inst, .35)
+    inst.AnimState:SetBank("hedge")
+    inst.AnimState:SetBuild("hedge3_build")
+    inst.AnimState:PlayAnimation("growth2", true)
+    MakeObstaclePhysics(inst, .35)
 
-	inst:AddTag("machetecut")
-	inst:AddTag("hedgetoshear")	
+    inst:AddTag("machetecut")
+    inst:AddTag("hedgetoshear")
 
     inst.entity:SetPristine()
 
@@ -257,36 +256,36 @@ local function fn2()
 
     inst.AnimState:SetTime(math.random() * 2)
 
-	inst:AddComponent("interactions")	
+    inst:AddComponent("interactions")
     inst:AddComponent("inspectable")
     inst:AddComponent("lootdropper")
-	
-	inst:AddComponent("timer")
+
+    inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDone)
-	
+
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HACK)
     inst.components.workable:SetOnFinishCallback(cut_up)
     inst.components.workable:SetWorkLeft(3)
-	inst.components.workable.onwork = onhackedfn
+    inst.components.workable.onwork = onhackedfn
 
     MakeMediumBurnable(inst)
     MakeSmallPropagator(inst)
     MakeHauntableIgnite(inst)
-	
-	inst.OnSave = OnSave
+
+    inst.OnSave = OnSave
     inst.OnLoad = OnLoad
-    inst:ListenForEvent("onbuilt", onbuilt)	
-	
+    inst:ListenForEvent("onbuilt", onbuilt)
+
     inst.setobstical = setobstical  -----加上墙的寻路特性
     inst:AddComponent("gridnudger") ------------加上这个就只能放在墙点,这两个必须同时使用
-	
+
     return inst
 end
 
 return Prefab("hedge_block", fn, assets, prefabs),
-       Prefab("hedge_cone", fn1, assets, prefabs),
-       Prefab("hedge_layered", fn2, assets, prefabs),
-       MakePlacer("hedge_block_placer", "hedge", "hedge1_build", "growth1", false, false, true),
-       MakePlacer("hedge_cone_placer", "hedge", "hedge2_build", "growth1", false, false, true),
-       MakePlacer("hedge_layered_placer", "hedge", "hedge3_build", "growth1", false, false, true)
+    Prefab("hedge_cone", fn1, assets, prefabs),
+    Prefab("hedge_layered", fn2, assets, prefabs),
+    MakePlacer("hedge_block_placer", "hedge", "hedge1_build", "growth1", false, false, true),
+    MakePlacer("hedge_cone_placer", "hedge", "hedge2_build", "growth1", false, false, true),
+    MakePlacer("hedge_layered_placer", "hedge", "hedge3_build", "growth1", false, false, true)

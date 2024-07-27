@@ -2,7 +2,7 @@
 --Created by ksaab
 --feel free to use it
 
-local assets=
+local assets =
 {
 	Asset("ANIM", "anim/lavaarena_elemental_basic.zip"),
 	Asset("ANIM", "anim/fireball_2_fx.zip"),
@@ -13,22 +13,22 @@ local prefabs =
 	"ash",
 }
 
-SetSharedLootTable( "flame_elemental",
-{
-	{"ash",   1.0},
-	{"ash",   1.0},
-})
+SetSharedLootTable("flame_elemental",
+	{
+		{ "ash", 1.0 },
+		{ "ash", 1.0 },
+	})
 
 local function retargetfn(inst)
 	local dist = TUNING.FLAME_ELEMENTAL_TFC.RANGE
-	local notags = {"FX", "NOCLICK", "INLIMBO"}
+	local notags = { "FX", "NOCLICK", "INLIMBO" }
 	return FindEntity(inst, dist, function(guy)
-		return  inst.components.combat:CanTarget(guy)
-	end, {"monster"}, notags)
+		return inst.components.combat:CanTarget(guy)
+	end, { "monster" }, notags)
 end
 
 local function KeepTarget(inst, target)
-	return inst.components.combat:CanTarget(target) 
+	return inst.components.combat:CanTarget(target)
 		and inst:GetDistanceSqToInst(target) <= (TUNING.FLAME_ELEMENTAL_TFC.RANGE * TUNING.FLAME_ELEMENTAL_TFC.RANGE)
 end
 
@@ -37,17 +37,17 @@ local function OnAttacked(inst, data)
 end
 
 local function OnAttackOther(inst, data)
-	if target.components.burnable ~= nil 
-		and not target.components.burnable:IsBurning() 
+	if target.components.burnable ~= nil
+		and not target.components.burnable:IsBurning()
 		and target.components.fueled == nil
 	then
 		if math.random() < 0.05 then
 			target.components.burnable:Ignite(true)
 		end
-        if target.components.freezable ~= nil and target.components.freezable:IsFrozen() then
-            target.components.freezable:Unfreeze()
+		if target.components.freezable ~= nil and target.components.freezable:IsFrozen() then
+			target.components.freezable:Unfreeze()
 		end
-    end
+	end
 end
 
 local function GoSuicide(inst)
@@ -57,21 +57,21 @@ local function GoSuicide(inst)
 end
 
 local function MakeWeapon(inst)
-    if inst.components.inventory ~= nil then
-        local weapon = CreateEntity()
-        weapon.entity:AddTransform()
-        MakeInventoryPhysics(weapon)
-        weapon:AddComponent("weapon")
-        weapon.components.weapon:SetDamage(TUNING.FLAME_ELEMENTAL_TFC.DAMAGE)
-        weapon.components.weapon:SetRange(TUNING.FLAME_ELEMENTAL_TFC.RANGE)--, TUNING.FLAME_ELEMENTAL_TFC.RANGE + 4)
+	if inst.components.inventory ~= nil then
+		local weapon = CreateEntity()
+		weapon.entity:AddTransform()
+		MakeInventoryPhysics(weapon)
+		weapon:AddComponent("weapon")
+		weapon.components.weapon:SetDamage(TUNING.FLAME_ELEMENTAL_TFC.DAMAGE)
+		weapon.components.weapon:SetRange(TUNING.FLAME_ELEMENTAL_TFC.RANGE) --, TUNING.FLAME_ELEMENTAL_TFC.RANGE + 4)
 		weapon.components.weapon:SetProjectile("flame_elemental_proj_tfc")
-        weapon:AddComponent("inventoryitem")
-        weapon.persists = false
-        weapon.components.inventoryitem:SetOnDroppedFn(weapon.Remove)
-        weapon:AddComponent("equippable")
-        inst.weapon = weapon
-        inst.components.inventory:Equip(inst.weapon)
-    end
+		weapon:AddComponent("inventoryitem")
+		weapon.persists = false
+		weapon.components.inventoryitem:SetOnDroppedFn(weapon.Remove)
+		weapon:AddComponent("equippable")
+		inst.weapon = weapon
+		inst.components.inventory:Equip(inst.weapon)
+	end
 end
 
 local function GetDebugString(inst)
@@ -101,11 +101,11 @@ local function fn(Sim)
 
 	inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then
-        return inst
+	if not TheWorld.ismastersim then
+		return inst
 	end
-	
-    --inst.persists = false
+
+	--inst.persists = false
 
 	inst:SetStateGraph("SGflameelemental_tfc")
 	inst:SetBrain(require "brains/flameelemental_tfcbrain")
@@ -134,66 +134,66 @@ local function fn(Sim)
 	return inst
 end
 
-local function OnThrown(inst) 
-    inst:Show() 
-    inst.AnimState:PlayAnimation("idle_loop")
+local function OnThrown(inst)
+	inst:Show()
+	inst.AnimState:PlayAnimation("idle_loop")
 end
 
-local function OnHit(inst) 
-    inst.AnimState:PlayAnimation("disappear")
-    inst:ListenForEvent("animover", function(inst) inst:Remove() end)
+local function OnHit(inst)
+	inst.AnimState:PlayAnimation("disappear")
+	inst:ListenForEvent("animover", function(inst) inst:Remove() end)
 end
 
-local function OnMiss(inst) 
-    inst.AnimState:PlayAnimation("disappear")
-    inst:ListenForEvent("animover", function(inst) inst:Remove() end)
+local function OnMiss(inst)
+	inst.AnimState:PlayAnimation("disappear")
+	inst:ListenForEvent("animover", function(inst) inst:Remove() end)
 end
 
 local function projfn()
-    local inst = CreateEntity()
+	local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
-    inst.entity:AddPhysics()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddNetwork()
+	inst.entity:AddPhysics()
 
-    MakeInventoryPhysics(inst)
-    RemovePhysicsColliders(inst)
+	MakeInventoryPhysics(inst)
+	RemovePhysicsColliders(inst)
 
 	inst.Transform:SetScale(0.6, 0.6, 0.6)
 
-    inst.AnimState:SetBank("fireball_fx")
-    inst.AnimState:SetBuild("fireball_2_fx")
-    inst.AnimState:PlayAnimation("idle_loop")
-    inst.AnimState:SetMultColour(1, 0.7, 0.7, 1)
-    inst.AnimState:SetFinalOffset(-1)
+	inst.AnimState:SetBank("fireball_fx")
+	inst.AnimState:SetBuild("fireball_2_fx")
+	inst.AnimState:PlayAnimation("idle_loop")
+	inst.AnimState:SetMultColour(1, 0.7, 0.7, 1)
+	inst.AnimState:SetFinalOffset(-1)
 
-    inst.Transform:SetTwoFaced()
+	inst.Transform:SetTwoFaced()
 
-    --inst:Hide()
+	--inst:Hide()
 
-    inst:AddTag("FX")
-    inst:AddTag("NOCLICK")
-    inst:AddTag("projectile")
+	inst:AddTag("FX")
+	inst:AddTag("NOCLICK")
+	inst:AddTag("projectile")
 
-    inst.entity:SetPristine()
+	inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	if not TheWorld.ismastersim then
+		return inst
+	end
 
-    inst.persists = false
+	inst.persists = false
 
-    inst:AddComponent("projectile")
-    inst.components.projectile:SetSpeed(40)
-    inst.components.projectile:SetHoming(true)
-    inst.components.projectile:SetHitDist(1.0)
-    inst.components.projectile:SetOnHitFn(OnHit)
-    inst.components.projectile:SetOnMissFn(OnMiss)
-    inst.components.projectile:SetOnThrownFn(OnThrown)
-    inst.components.projectile:SetLaunchOffset(Vector3(2, 0.3, 2))
+	inst:AddComponent("projectile")
+	inst.components.projectile:SetSpeed(40)
+	inst.components.projectile:SetHoming(true)
+	inst.components.projectile:SetHitDist(1.0)
+	inst.components.projectile:SetOnHitFn(OnHit)
+	inst.components.projectile:SetOnMissFn(OnMiss)
+	inst.components.projectile:SetOnThrownFn(OnThrown)
+	inst.components.projectile:SetLaunchOffset(Vector3(2, 0.3, 2))
 
-    return inst
+	return inst
 end
 
 return Prefab("flame_elemental_tfc", fn, assets, prefabs),

@@ -72,7 +72,6 @@ local function FindEntityToWorkAction(inst, action, addtltags)
                     target.components.burnable:IsSmoldering())) and
             target.entity:IsVisible() and
             target:IsNear(leader, KEEP_WORKING_DIST) then
-                
             if addtltags ~= nil then
                 for i, v in ipairs(addtltags) do
                     if target:HasTag(v) then
@@ -85,7 +84,8 @@ local function FindEntityToWorkAction(inst, action, addtltags)
         end
 
         --Find new target
-        target = FindEntity(leader, SEE_WORK_DIST, nil, { action.id.."_workable" }, { "fire", "smolder", "event_trigger", "INLIMBO", "NOCLICK" }, addtltags)
+        target = FindEntity(leader, SEE_WORK_DIST, nil, { action.id .. "_workable" },
+            { "fire", "smolder", "event_trigger", "INLIMBO", "NOCLICK" }, addtltags)
         return target ~= nil and BufferedAction(inst, target, action) or nil
     end
 end
@@ -122,43 +122,51 @@ end
 
 function ShadowWaxwellBrain:OnStart()
     local root = PriorityNode(
-    {
-        --#1 priority is dancing beside your leader. Obviously.
-        WhileNode(function() return ShouldDanceParty(self.inst) end, "Dance Party",
-            PriorityNode({
-                Leash(self.inst, GetLeaderPos, KEEP_DANCING_DIST, KEEP_DANCING_DIST),
-                ActionNode(function() DanceParty(self.inst) end),
-        }, .25)),
-
-        WhileNode(function() return IsNearLeader(self.inst, KEEP_WORKING_DIST) end, "Leader In Range",
-            PriorityNode({
-                --All shadows will avoid explosives
-                RunAway(self.inst, { fn = ShouldAvoidExplosive, tags = { "explosive" }, notags = { "INLIMBO" } }, AVOID_EXPLOSIVE_DIST, AVOID_EXPLOSIVE_DIST),
-                --Duelists will try to fight before fleeing
-                IfNode(function() return self.inst.prefab == "shadowduelist" end, "Is Duelist",
-                    PriorityNode({
-                        WhileNode(function() return self.inst.components.combat:GetCooldown() > .5 and ShouldKite(self.inst.components.combat.target, self.inst) end, "Dodge",
-                            RunAway(self.inst, { fn = ShouldKite, tags = { "_combat", "_health" }, notags = { "INLIMBO" } }, KITING_DIST, STOP_KITING_DIST)),
-                        ChaseAndAttack(self.inst),
+        {
+            --#1 priority is dancing beside your leader. Obviously.
+            WhileNode(function() return ShouldDanceParty(self.inst) end, "Dance Party",
+                PriorityNode({
+                    Leash(self.inst, GetLeaderPos, KEEP_DANCING_DIST, KEEP_DANCING_DIST),
+                    ActionNode(function() DanceParty(self.inst) end),
                 }, .25)),
-                --All shadows will flee from danger at this point
-                RunAway(self.inst, { fn = ShouldRunAway, oneoftags = { "monster", "hostile" }, notags = { "player", "INLIMBO" } }, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST),
-                --Workiers will try to work if not fleeing
-                IfNode(function() return self.inst.prefab == "shadowlumber" end, "Keep Chopping",
-                    DoAction(self.inst, function() return FindEntityToWorkAction(self.inst, ACTIONS.CHOP) end)),
-				IfNode(function() return self.inst.prefab == "shadowmower" end, "Keep Chopping",
-                    DoAction(self.inst, function() return FindEntityToWorkAction(self.inst, ACTIONS.HACK) end)),
-                IfNode(function() return self.inst.prefab == "shadowminer" end, "Keep Mining",
-                    DoAction(self.inst, function() return FindEntityToWorkAction(self.inst, ACTIONS.MINE) end)),
-                IfNode(function() return self.inst.prefab == "shadowdigger" end, "Keep Digging",
-                    DoAction(self.inst, function() return FindEntityToWorkAction(self.inst, ACTIONS.DIG, DIG_TAGS) end)),
-        }, .25)),
 
-        Follow(self.inst, GetLeader, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),
+            WhileNode(function() return IsNearLeader(self.inst, KEEP_WORKING_DIST) end, "Leader In Range",
+                PriorityNode({
+                    --All shadows will avoid explosives
+                    RunAway(self.inst, { fn = ShouldAvoidExplosive, tags = { "explosive" }, notags = { "INLIMBO" } },
+                        AVOID_EXPLOSIVE_DIST, AVOID_EXPLOSIVE_DIST),
+                    --Duelists will try to fight before fleeing
+                    IfNode(function() return self.inst.prefab == "shadowduelist" end, "Is Duelist",
+                        PriorityNode({
+                            WhileNode(
+                                function() return self.inst.components.combat:GetCooldown() > .5 and
+                                    ShouldKite(self.inst.components.combat.target, self.inst) end, "Dodge",
+                                RunAway(self.inst,
+                                    { fn = ShouldKite, tags = { "_combat", "_health" }, notags = { "INLIMBO" } },
+                                    KITING_DIST, STOP_KITING_DIST)),
+                            ChaseAndAttack(self.inst),
+                        }, .25)),
+                    --All shadows will flee from danger at this point
+                    RunAway(self.inst,
+                        { fn = ShouldRunAway, oneoftags = { "monster", "hostile" }, notags = { "player", "INLIMBO" } },
+                        RUN_AWAY_DIST, STOP_RUN_AWAY_DIST),
+                    --Workiers will try to work if not fleeing
+                    IfNode(function() return self.inst.prefab == "shadowlumber" end, "Keep Chopping",
+                        DoAction(self.inst, function() return FindEntityToWorkAction(self.inst, ACTIONS.CHOP) end)),
+                    IfNode(function() return self.inst.prefab == "shadowmower" end, "Keep Chopping",
+                        DoAction(self.inst, function() return FindEntityToWorkAction(self.inst, ACTIONS.HACK) end)),
+                    IfNode(function() return self.inst.prefab == "shadowminer" end, "Keep Mining",
+                        DoAction(self.inst, function() return FindEntityToWorkAction(self.inst, ACTIONS.MINE) end)),
+                    IfNode(function() return self.inst.prefab == "shadowdigger" end, "Keep Digging",
+                        DoAction(self.inst,
+                            function() return FindEntityToWorkAction(self.inst, ACTIONS.DIG, DIG_TAGS) end)),
+                }, .25)),
 
-        WhileNode(function() return GetLeader(self.inst) ~= nil end, "Has Leader",
-            FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn)),
-    }, .25)
+            Follow(self.inst, GetLeader, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),
+
+            WhileNode(function() return GetLeader(self.inst) ~= nil end, "Has Leader",
+                FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn)),
+        }, .25)
 
     self.bt = BT(self.inst, root)
 end

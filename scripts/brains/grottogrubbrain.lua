@@ -17,10 +17,10 @@ local function GetHomePos(inst)
 end
 
 local function GoHomeAction(inst)
-    if inst.components.homeseeker and 
-       inst.components.homeseeker.home and 
-       inst.components.homeseeker.home:IsValid() and
-	   inst.sg:HasStateTag("trapped") == false then
+    if inst.components.homeseeker and
+        inst.components.homeseeker.home and
+        inst.components.homeseeker.home:IsValid() and
+        inst.sg:HasStateTag("trapped") == false then
         return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
     end
 end
@@ -38,34 +38,37 @@ local function HideAction(inst)
 end
 
 local function TakeBaitAction(inst)
-    local target = FindEntity(inst, SEE_BAIT_DIST, function(item) return inst.components.eater:CanEat(item) end, nil, {"outofreach"})
-   
-	if target and inst.isunder == nil then
+    local target = FindEntity(inst, SEE_BAIT_DIST, function(item) return inst.components.eater:CanEat(item) end, nil,
+        { "outofreach" })
+
+    if target and inst.isunder == nil then
         local act = BufferedAction(inst, target, ACTIONS.EAT)
-		
+
         return act
     end
 end
 
 local GrottoGrubBrain = Class(Brain, function(self, inst)
-	Brain._ctor(self, inst)
+    Brain._ctor(self, inst)
 end)
 
 function GrottoGrubBrain:OnStart()
-	local root =
+    local root =
 
-	PriorityNode(
-	{
-		WhileNode( function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
-        WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
---        WhileNode( function() return FindClosestPlayerToInst(self.inst, 6, true) end, "OnSeePlayer", 
---			DoAction(self.inst, HideAction, "go hide")),
-        WhileNode( function() return not FindClosestPlayerToInst(self.inst, 12, true) and self.inst.isunder end, "OnNoPlayer", 
-			DoAction(self.inst, ShowAction, "emerge")),
-		DoAction(self.inst, TakeBaitAction, "take bait", false),
-		Wander(self.inst, GetHomePos, MAX_WANDER_DIST),
-	}, 0.5)
-	self.bt = BT(self.inst, root)
+        PriorityNode(
+            {
+                WhileNode(function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end,
+                    "PanicHaunted", Panic(self.inst)),
+                WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+                --        WhileNode( function() return FindClosestPlayerToInst(self.inst, 6, true) end, "OnSeePlayer",
+                --			DoAction(self.inst, HideAction, "go hide")),
+                WhileNode(function() return not FindClosestPlayerToInst(self.inst, 12, true) and self.inst.isunder end,
+                    "OnNoPlayer",
+                    DoAction(self.inst, ShowAction, "emerge")),
+                DoAction(self.inst, TakeBaitAction, "take bait", false),
+                Wander(self.inst, GetHomePos, MAX_WANDER_DIST),
+            }, 0.5)
+    self.bt = BT(self.inst, root)
 end
 
 return GrottoGrubBrain

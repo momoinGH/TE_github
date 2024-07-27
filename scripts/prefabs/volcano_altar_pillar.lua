@@ -10,14 +10,14 @@ local prefabs =
     "rock_break_fx",
 }
 
-SetSharedLootTable( 'altar_pillar',
-{
-    {'limestone', 1.00},
-    {'limestone', 1.00},
-    {'limestone', 0.33},
-	{'ash', 1.00},
-    {'ash', 0.33},
-})
+SetSharedLootTable('altar_pillar',
+    {
+        { 'limestone', 1.00 },
+        { 'limestone', 1.00 },
+        { 'limestone', 0.33 },
+        { 'ash',       1.00 },
+        { 'ash',       0.33 },
+    })
 
 local function onworked(inst, worker, workleft)
     if workleft <= 0 then

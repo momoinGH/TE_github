@@ -1,9 +1,9 @@
 local assets =
 {
     Asset("ANIM", "anim/cutgreengrass.zip"),
-	Asset("ATLAS", "images/inventoryimages/cutgreengrass.xml"),
-	Asset("IMAGE", "images/inventoryimages/cutgreengrass.tex"),
-	
+    Asset("ATLAS", "images/inventoryimages/cutgreengrass.xml"),
+    Asset("IMAGE", "images/inventoryimages/cutgreengrass.tex"),
+
 }
 
 local function fn()
@@ -21,7 +21,7 @@ local function fn()
 
     inst:AddTag("cattoy")
     MakeDragonflyBait(inst, 3)
-	MakeInventoryFloatable(inst)	
+    MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
 
@@ -30,8 +30,8 @@ local function fn()
     end
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/cutgreengrass.xml"
-	
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/cutgreengrass.xml"
+
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
@@ -39,7 +39,7 @@ local function fn()
     inst.components.edible.foodtype = FOODTYPE.ROUGHAGE
     inst.components.edible.woodiness = 1
     inst.components.edible.healthvalue = TUNING.HEALING_TINY
-    inst.components.edible.hungervalue = TUNING.CALORIES_TINY/2
+    inst.components.edible.hungervalue = TUNING.CALORIES_TINY / 2
 
     inst:AddComponent("inspectable")
     inst:AddComponent("tradable")

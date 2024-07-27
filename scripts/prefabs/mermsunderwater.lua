@@ -25,15 +25,15 @@ local assets =
     Asset("ANIM", "anim/merm_guard_shadow_build.zip"),
     Asset("ANIM", "anim/merm_guard_small_shadow_build.zip"),
 
-    Asset("ANIM", "anim/merm_guard_transformation.zip"),    
+    Asset("ANIM", "anim/merm_guard_transformation.zip"),
 
     Asset("ANIM", "anim/merm_actions_skills.zip"),
 
-	Asset("ANIM", "anim/merm_fisherman_build.zip"),
+    Asset("ANIM", "anim/merm_fisherman_build.zip"),
     Asset("ANIM", "anim/merm_fishing.zip"),
     Asset("ANIM", "anim/merm_trader1_build.zip"),
-    Asset("ANIM", "anim/merm_trader2_build.zip"),	
-    Asset("SOUND", "sound/merm.fsb"),	
+    Asset("ANIM", "anim/merm_trader2_build.zip"),
+    Asset("SOUND", "sound/merm.fsb"),
 }
 
 local prefabs =
@@ -75,7 +75,7 @@ local merm_shadow_loot =
 
 SetSharedLootTable("merm_lunar_loot", {
     -- NOTES(JBK): This is added onto whatever the base merm loot was.
-    {"tentaclespots", 0.25},
+    { "tentaclespots", 0.25 },
 })
 
 local sounds = {
@@ -84,7 +84,7 @@ local sounds = {
     death = "dontstarve/creatures/merm/death",
     talk = "dontstarve/characters/wurt/merm/warrior/talk",
     buff = "dontstarve/characters/wurt/merm/warrior/yell",
-    --debuff = "dontstarve/characters/wurt/merm/warrior/yell",    
+    --debuff = "dontstarve/characters/wurt/merm/warrior/yell",
 }
 
 local sounds_guard = {
@@ -94,7 +94,7 @@ local sounds_guard = {
     talk = "dontstarve/characters/wurt/merm/warrior/talk",
     buff = "dontstarve/characters/wurt/merm/warrior/yell",
     --debuff = ,
-} 
+}
 
 local merm_brain = require "brains/mermbrain"
 local merm_guard_brain = require "brains/mermguardbrain"
@@ -127,25 +127,25 @@ local function FindInvaderFn(guy, inst)
     if guy:HasTag("NPC_contestant") then
         return nil
     end
---[[local function FindInvaderFn(guy, inst)
+    --[[local function FindInvaderFn(guy, inst)
 
     local function test_disguise(test_guy)
         return test_guy.components.inventory and test_guy.components.inventory:EquipHasTag("merm")
     end]]
 
     local leader = inst.components.follower and inst.components.follower.leader
-    
+
     local leader_guy = guy.components.follower and guy.components.follower.leader
     if leader_guy and leader_guy.components.inventoryitem then
         leader_guy = leader_guy.components.inventoryitem:GetGrandOwner()
     end
 
     return (guy:HasTag("character") and not guy:HasTag("merm")) and
-           not (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:HasKingAnywhere()) and
-           not (leader and leader:HasTag("player")) and
-           not (leader_guy and (leader_guy:HasTag("merm")) and
-                not guy:HasTag("pig") and
-                not guy:HasTag("wonkey"))
+        not (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:HasKingAnywhere()) and
+        not (leader and leader:HasTag("player")) and
+        not (leader_guy and (leader_guy:HasTag("merm")) and
+            not guy:HasTag("pig") and
+            not guy:HasTag("wonkey"))
 end
 
 local function RetargetFn(inst)
@@ -171,7 +171,7 @@ local function KeepTargetFn(inst, target)
 
     if home and not follower then
         return home:GetDistanceSqToInst(target) < defend_dist
-               and home:GetDistanceSqToInst(inst) < defend_dist
+            and home:GetDistanceSqToInst(inst) < defend_dist
     else
         return inst.components.combat:CanTarget(target)
     end
@@ -186,7 +186,8 @@ local function OnAttackedByDecidRoot(inst, attacker)
     local max_target_shares = (isguard and TUNING.MERM_GUARD_MAX_TARGET_SHARES) or TUNING.MERM_MAX_TARGET_SHARES
 
     local x, y, z = inst.Transform:GetWorldPosition()
-    local combat_helpers = TheSim:FindEntities(x, y, z, SpringCombatMod(share_target_dist) * .5, DECIDROOTTARGET_MUST_TAGS, DECIDROOTTARGET_CANT_TAGS)
+    local combat_helpers = TheSim:FindEntities(x, y, z, SpringCombatMod(share_target_dist) * .5,
+        DECIDROOTTARGET_MUST_TAGS, DECIDROOTTARGET_CANT_TAGS)
     local num_helpers = 0
 
     for _, helper in ipairs(combat_helpers) do
@@ -207,7 +208,6 @@ end
 local function resolve_on_attacked(inst, attacker)
     if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
         OnAttackedByDecidRoot(inst, attacker.owner)
-
     elseif attacker.prefab ~= "deciduous_root" and inst.components.combat:CanTarget(attacker) then
         local isguard = inst:HasTag("mermguard")
 
@@ -217,7 +217,7 @@ local function resolve_on_attacked(inst, attacker)
         inst.components.combat:SetTarget(attacker)
         if inst.components.combat:HasTarget() then
             local home = inst.components.homeseeker and inst.components.homeseeker.home
-            if home and home.components.childspawner and inst:GetDistanceSqToInst(home) <= share_target_dist*share_target_dist then
+            if home and home.components.childspawner and inst:GetDistanceSqToInst(home) <= share_target_dist * share_target_dist then
                 max_target_shares = max_target_shares - home.components.childspawner.childreninside
                 home.components.childspawner:ReleaseAllChildren(attacker)
             end
@@ -253,8 +253,9 @@ local function MermSort(a, b) -- Better than bubble!
 end
 local function GetOtherMerms(inst, radius, maxcount, giver)
     local x, y, z = inst.Transform:GetWorldPosition()
-    
-    local merms = TheSim:FindEntities(x, y, z, radius, MERM_TAGS, giver and giver:HasTag("playermerm") and MERM_IGNORE_TAGS or MERM_IGNORE_TAGS_NOGUARDS)
+
+    local merms = TheSim:FindEntities(x, y, z, radius, MERM_TAGS,
+        giver and giver:HasTag("playermerm") and MERM_IGNORE_TAGS or MERM_IGNORE_TAGS_NOGUARDS)
     local merms_highpriority = {}
     local merms_lowpriority = {}
 
@@ -300,7 +301,7 @@ end
 local function dohiremerms(inst, giver, item)
     local mermkingmanager = TheWorld.components.mermkingmanager
     local isguard = inst:HasTag("mermguard")
-    local loyalty_max = (isguard and TUNING.MERM_GUARD_LOYALTY_MAXTIME) or TUNING.MERM_LOYALTY_MAXTIME      
+    local loyalty_max = (isguard and TUNING.MERM_GUARD_LOYALTY_MAXTIME) or TUNING.MERM_LOYALTY_MAXTIME
     local loyalty_radius = (isguard and TUNING.MERM_GUARD_FOLLOWER_RADIUS) or TUNING.MERM_FOLLOWER_RADIUS
     local loyalty_count = (isguard and TUNING.MERM_GUARD_FOLLOWER_COUNT) or TUNING.MERM_FOLLOWER_COUNT
     local loyalty_per_hunger = (isguard and TUNING.MERM_GUARD_LOYALTY_PER_HUNGER) or TUNING.MERM_LOYALTY_PER_HUNGER
@@ -308,7 +309,7 @@ local function dohiremerms(inst, giver, item)
     local loyalty_time = item.components.edible:GetHunger() * loyalty_per_hunger
 
 
--- King makes everything better! Keep it up!
+    -- King makes everything better! Keep it up!
     local hasking = (mermkingmanager and mermkingmanager:HasKingAnywhere()) or false
     if hasking then
         loyalty_max = loyalty_max + TUNING.MERM_LOYALTY_MAXTIME_KINGBONUS
@@ -321,7 +322,7 @@ local function dohiremerms(inst, giver, item)
     if inst.components.combat:TargetIs(giver) then
         inst.components.combat:SetTarget(nil)
     elseif giver.components.leader ~= nil and inst.components.follower ~= nil and
-            not (mermkingmanager and mermkingmanager:IsCandidate(inst)) then
+        not (mermkingmanager and mermkingmanager:IsCandidate(inst)) then
         giver:PushEvent("makefriend")
         giver.components.leader:AddFollower(inst)
 
@@ -343,7 +344,7 @@ local function dohiremerms(inst, giver, item)
             if othermerm.components.combat.target == giver then
                 othermerm.components.combat:SetTarget(nil)
             elseif giver.components.leader ~= nil and othermerm.components.follower ~= nil and
-                    not (mermkingmanager and mermkingmanager:IsCandidate(inst)) then
+                not (mermkingmanager and mermkingmanager:IsCandidate(inst)) then
                 -- "makefriend" event fires above no matter what do not play it again here.
                 giver.components.leader:AddFollower(othermerm)
 
@@ -363,7 +364,7 @@ local function dohiremerms(inst, giver, item)
             end
         end
     end
-end  
+end
 
 local function IsAbleToAccept(inst, item, giver)
     if inst.components.health ~= nil and inst.components.health:IsDead() then
@@ -397,32 +398,32 @@ local function ShouldAcceptItem(inst, item, giver)
         return true
     end
 
-    return (giver:HasTag("merm") and not (inst:HasTag("mermguard") and giver:HasTag("mermdisguise"))) and 
-           ((item.components.equippable ~= nil and item.components.equippable.equipslot == EQUIPSLOTS.HEAD) or
-           (item.components.edible and inst.components.eater and inst.components.eater:CanEat(item)) or
-           (item:HasTag("fish") and not (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))))
-        end
-        
-        local function DoCheer_Act(inst)
-            inst:PushEvent("cheer")
-        end
-        local function DoCheer(inst)
-            inst:DoTaskInTime(math.random()*SLIGHTDELAY, DoCheer_Act)
-        end
-        
-        local function DoDisapproval_Act(inst)
-            if inst.sg ~= nil and not inst.sg:HasStateTag("busy") then
-                inst.sg:GoToState("disapproval")
-            end
-        end
-        local function DoDisapproval(inst)
-            inst:DoTaskInTime(math.random()*SLIGHTDELAY, DoDisapproval_Act)
-        end
-        
+    return (giver:HasTag("merm") and not (inst:HasTag("mermguard") and giver:HasTag("mermdisguise"))) and
+        ((item.components.equippable ~= nil and item.components.equippable.equipslot == EQUIPSLOTS.HEAD) or
+            (item.components.edible and inst.components.eater and inst.components.eater:CanEat(item)) or
+            (item:HasTag("fish") and not (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))))
+end
+
+local function DoCheer_Act(inst)
+    inst:PushEvent("cheer")
+end
+local function DoCheer(inst)
+    inst:DoTaskInTime(math.random() * SLIGHTDELAY, DoCheer_Act)
+end
+
+local function DoDisapproval_Act(inst)
+    if inst.sg ~= nil and not inst.sg:HasStateTag("busy") then
+        inst.sg:GoToState("disapproval")
+    end
+end
+local function DoDisapproval(inst)
+    inst:DoTaskInTime(math.random() * SLIGHTDELAY, DoDisapproval_Act)
+end
+
 local function OnGetItemFromPlayer(inst, giver, item)
-    
     local loyalty_max = inst:HasTag("mermguard") and TUNING.MERM_GUARD_LOYALTY_MAXTIME or TUNING.MERM_LOYALTY_MAXTIME
-    local loyalty_per_hunger = inst:HasTag("mermguard") and TUNING.MERM_GUARD_LOYALTY_PER_HUNGER or TUNING.MERM_LOYALTY_PER_HUNGER
+    local loyalty_per_hunger = inst:HasTag("mermguard") and TUNING.MERM_GUARD_LOYALTY_PER_HUNGER or
+    TUNING.MERM_LOYALTY_PER_HUNGER
 
     if item.components.edible ~= nil then
         if inst.components.combat:TargetIs(giver) then
@@ -486,35 +487,34 @@ local function RoyalDowngrade(inst)
 
     if inst.updateeyebuild then
         inst:updateeyebuild()
-    end    
+    end
 end
 
 local function RoyalGuardUpgrade(inst)
-
     if inst.components.health:IsDead() then
         return
     end
-    
+
     inst.components.health:SetMaxHealth(TUNING.MERM_GUARD_HEALTH)
     inst.components.combat:SetDefaultDamage(inst:MermDamageCalculator())
 
     local build =
-        (inst:HasTag("lunarminion")  and "merm_guard_lunar_build" ) or
+        (inst:HasTag("lunarminion") and "merm_guard_lunar_build") or
         (inst:HasTag("shadowminion") and "merm_guard_shadow_build") or
         "merm_guard_build"
 
     inst.AnimState:SetBuild("merm_fisherman_build")
-	inst.AnimState:OverrideSymbol("pig_torso", "merm_guard_build", "pig_torso")
-	inst.AnimState:OverrideSymbol("pig_arm", "merm_guard_build", "pig_arm")
-	inst.AnimState:OverrideSymbol("pig_cheeks", "merm_guard_build", "pig_cheeks")	
-	inst.AnimState:OverrideSymbol("pig_head", "merm_guard_build", "pig_head")	
-	inst.AnimState:OverrideSymbol("pig_leg", "merm_guard_build", "pig_leg")	
-inst.AnimState:SetMultColour(255/255, 150/255, 0/255, 1)	
+    inst.AnimState:OverrideSymbol("pig_torso", "merm_guard_build", "pig_torso")
+    inst.AnimState:OverrideSymbol("pig_arm", "merm_guard_build", "pig_arm")
+    inst.AnimState:OverrideSymbol("pig_cheeks", "merm_guard_build", "pig_cheeks")
+    inst.AnimState:OverrideSymbol("pig_head", "merm_guard_build", "pig_head")
+    inst.AnimState:OverrideSymbol("pig_leg", "merm_guard_build", "pig_leg")
+    inst.AnimState:SetMultColour(255 / 255, 150 / 255, 0 / 255, 1)
     inst.Transform:SetScale(1, 1, 1)
 
     if inst.updateeyebuild then
         inst:updateeyebuild()
-    end      
+    end
 end
 local function RoyalGuardDowngrade(inst)
     if inst.components.health:IsDead() then
@@ -525,16 +525,16 @@ local function RoyalGuardDowngrade(inst)
     inst.components.combat:SetDefaultDamage(inst:MermDamageCalculator())
 
     local build =
-        (inst:HasTag("lunarminion")  and "merm_guard_small_lunar_build" ) or
+        (inst:HasTag("lunarminion") and "merm_guard_small_lunar_build") or
         (inst:HasTag("shadowminion") and "merm_guard_small_shadow_build") or
         "merm_guard_small_build"
     inst.AnimState:SetBuild("merm_fisherman_build")
-	inst.AnimState:OverrideSymbol("pig_torso", "merm_guard_small_build", "pig_torso")
-	inst.AnimState:OverrideSymbol("pig_arm", "merm_guard_small_build", "pig_arm")
-	inst.AnimState:OverrideSymbol("pig_cheeks", "merm_guard_small_build", "pig_cheeks")	
-	inst.AnimState:OverrideSymbol("pig_head", "merm_guard_small_build", "pig_head")	
-	inst.AnimState:OverrideSymbol("pig_leg", "merm_guard_small_build", "pig_leg")	
-inst.AnimState:SetMultColour(255/255, 150/255, 0/255, 1)	
+    inst.AnimState:OverrideSymbol("pig_torso", "merm_guard_small_build", "pig_torso")
+    inst.AnimState:OverrideSymbol("pig_arm", "merm_guard_small_build", "pig_arm")
+    inst.AnimState:OverrideSymbol("pig_cheeks", "merm_guard_small_build", "pig_cheeks")
+    inst.AnimState:OverrideSymbol("pig_head", "merm_guard_small_build", "pig_head")
+    inst.AnimState:OverrideSymbol("pig_leg", "merm_guard_small_build", "pig_leg")
+    inst.AnimState:SetMultColour(255 / 255, 150 / 255, 0 / 255, 1)
     inst.Transform:SetScale(1, 1, 1)
 end
 
@@ -550,7 +550,6 @@ local function ResolveMermChatter(inst, strid, strtbl)
             return table_at_id[fluency_id]
         end
     end
-
 end
 
 local function ShouldGuardSleep(inst)
@@ -563,12 +562,13 @@ end
 
 local function ShouldSleep(inst)
     return NocturnalSleepTest(inst)
-        and ((inst.components.follower == nil or inst.components.follower.leader) == nil and 
-        not TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))
+        and ((inst.components.follower == nil or inst.components.follower.leader) == nil and
+            not TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))
 end
 
 local function ShouldWakeUp(inst)
-    return NocturnalWakeTest(inst) or (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))
+    return NocturnalWakeTest(inst) or
+    (TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:IsCandidate(inst))
 end
 
 local function OnTimerDone(inst, data)
@@ -707,7 +707,7 @@ local function droppedtarget(inst, data)
         return nil
     end
 
-    if inst.components.inventory then 
+    if inst.components.inventory then
         tool = inst.components.inventory:FindItem(function(item)
             if item.components.equippable and item.components.equippable.equipslot == EQUIPSLOTS.HANDS then
                 return true
@@ -719,16 +719,17 @@ local function droppedtarget(inst, data)
     end
 end
 
-local function itemget(inst,data)
-
-    if not inst:HasTag("mermguard") then        
-        local tool = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or nil
-        if not tool and (data.item:HasTag("merm_tool") or data.item:HasTag("merm_tool_upgraded")) then            
+local function itemget(inst, data)
+    if not inst:HasTag("mermguard") then
+        local tool = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or
+        nil
+        if not tool and (data.item:HasTag("merm_tool") or data.item:HasTag("merm_tool_upgraded")) then
             inst.components.inventory:Equip(data.item)
         end
     end
     if inst:HasTag("mermguard") then
-        local armor = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) or nil
+        local armor = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) or
+        nil
         if not armor and (data.item:HasTag("mermarmorhat") or data.item:HasTag("mermarmorupgradedhat")) then
             inst.components.inventory:Equip(data.item)
         end
@@ -781,7 +782,7 @@ local function DoLunarMutation(inst)
     end
 
     lunarmerm.components.combat:SetTarget(inst.components.combat.target)
-    lunarmerm:PushEvent("mutated", {oldbuild=inst.AnimState:GetBuild()})
+    lunarmerm:PushEvent("mutated", { oldbuild = inst.AnimState:GetBuild() })
 
     inst:Remove()
 
@@ -817,14 +818,14 @@ local function DoLunarRevert(inst)
     end
 
     merm.components.combat:SetTarget(inst.components.combat.target)
-    merm:PushEvent("demutated", {oldbuild=inst.AnimState:GetBuild()})    
+    merm:PushEvent("demutated", { oldbuild = inst.AnimState:GetBuild() })
 
     inst:Remove()
 
     return merm
 end
 
-local function TestForLunarMutation(inst,item)
+local function TestForLunarMutation(inst, item)
     if item:HasTag("moonglass_piece") then
         inst:DoLunarMutation()
         item:Remove()
@@ -835,7 +836,7 @@ end
 local function living_merm_common_master(inst)
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.VEGETARIAN }, { FOODGROUP.VEGETARIAN })
-        
+
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetNocturnal(true)
     inst.components.sleeper:SetSleepTest(ShouldSleep)
@@ -863,7 +864,7 @@ local function CreateFlameFx(parent)
     inst.entity:AddAnimState()
     inst.entity:AddFollower()
 
-    inst.AnimState:SetMultColour(1,1,1,0.5)
+    inst.AnimState:SetMultColour(1, 1, 1, 0.5)
 
     inst.AnimState:SetBank("pigman")
     inst.AnimState:SetBuild("merm_actions_skills")
@@ -880,7 +881,7 @@ local function CreateFlameFx(parent)
     return inst
 end
 
-local function onunequip(inst,data)
+local function onunequip(inst, data)
     if data.item then
         if data.item.components.equippable and data.item.components.equippable.equipslot == EQUIPSLOTS.HANDS then
             inst.AnimState:Hide("ARM_carry_up")
@@ -888,7 +889,7 @@ local function onunequip(inst,data)
     end
 end
 
-local function equip(inst,data)
+local function equip(inst, data)
     if data.item then
         if data.item.components.equippable and data.item.components.equippable.equipslot == EQUIPSLOTS.HANDS then
             inst.AnimState:Show("ARM_carry_up")
@@ -900,7 +901,8 @@ end
 local function updateeyebuild(inst)
     if inst:HasDebuff("wurt_merm_planar") then
         if inst:HasTag("mermguard") then
-            local hasking = TheWorld.components.mermkingmanager ~= nil and TheWorld.components.mermkingmanager:HasKingAnywhere()
+            local hasking = TheWorld.components.mermkingmanager ~= nil and
+            TheWorld.components.mermkingmanager:HasKingAnywhere()
             if hasking then
                 inst.AnimState:AddOverrideBuild("merm_guard_lunar_eye_build")
             else
@@ -917,14 +919,14 @@ local function updateeyebuild(inst)
 end
 
 local function OnEntityWake(inst)
-	inst.components.bubbleblower:Start()	
+    inst.components.bubbleblower:Start()
 end
 
 local function OnEntitySleep(inst)
-	inst.components.bubbleblower:Stop()
+    inst.components.bubbleblower:Stop()
 end
 
-local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit,data)
+local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit, data)
     local function fn()
         local inst = CreateEntity()
 
@@ -952,9 +954,9 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit,
         inst:AddTag("character")
         inst:AddTag("merm")
         inst:AddTag("wet")
-		inst:AddTag("walrus")
-		inst:AddTag("houndfriend")
-        inst:AddTag("merm_npc")	
+        inst:AddTag("walrus")
+        inst:AddTag("houndfriend")
+        inst:AddTag("merm_npc")
 
         local talker = inst:AddComponent("talker")
         talker.fontsize = 35
@@ -962,13 +964,13 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit,
         talker.offset = Vector3(0, -400, 0)
         talker.resolvechatterfn = ResolveMermChatter
         talker:MakeChatter()
-		
-		inst:AddComponent("bubbleblower")		
+
+        inst:AddComponent("bubbleblower")
 
         if common_postinit ~= nil then
             common_postinit(inst)
         end
-        
+
         -- Sneak these into pristine state for optimization.
         inst:AddTag("_named")
 
@@ -976,7 +978,7 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit,
         if not TheWorld.ismastersim then
             return inst
         end
-        
+
         inst.ismerm = true
 
         -- Remove these tags so that they can be added properly when replicating components below.
@@ -991,19 +993,19 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit,
         -- boat hopping setup
         inst.components.locomotor:SetAllowPlatformHopping(true)
         inst:AddComponent("embarker")
-	    inst:AddComponent("drownable")
+        inst:AddComponent("drownable")
 
         -- Keep in sync with Wurt + mermking! But make sure no bonuses are applied!
         local foodaffinity = inst:AddComponent("foodaffinity")
         foodaffinity:AddFoodtypeAffinity(FOODTYPE.VEGGIE, 1)
-        foodaffinity:AddPrefabAffinity  ("kelp",          1) -- prevents the negative stats
-        foodaffinity:AddPrefabAffinity  ("kelp_cooked",   1) -- prevents the negative stats
-        foodaffinity:AddPrefabAffinity  ("boatpatch_kelp",1) -- prevents the negative stats
-        foodaffinity:AddPrefabAffinity  ("durian",        1) -- prevents the negative stats
-        foodaffinity:AddPrefabAffinity  ("durian_cooked", 1) -- prevents the negative stats
+        foodaffinity:AddPrefabAffinity("kelp", 1)            -- prevents the negative stats
+        foodaffinity:AddPrefabAffinity("kelp_cooked", 1)     -- prevents the negative stats
+        foodaffinity:AddPrefabAffinity("boatpatch_kelp", 1)  -- prevents the negative stats
+        foodaffinity:AddPrefabAffinity("durian", 1)          -- prevents the negative stats
+        foodaffinity:AddPrefabAffinity("durian_cooked", 1)   -- prevents the negative stats
 
         inst:AddComponent("eater")
-		inst.components.eater:SetDiet({ FOODTYPE.VEGETARIAN }, { FOODTYPE.VEGETARIAN })
+        inst.components.eater:SetDiet({ FOODTYPE.VEGETARIAN }, { FOODTYPE.VEGETARIAN })
 
         inst:AddComponent("health")
         inst.components.health:StartRegen(TUNING.MERM_HEALTH_REGEN_AMOUNT, TUNING.MERM_HEALTH_REGEN_PERIOD)
@@ -1031,7 +1033,7 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit,
 
         MakeMediumBurnableCharacter(inst, "pig_torso")
         MakeMediumFreezableCharacter(inst, "pig_torso")
-        
+
         inst:ListenForEvent("timerdone", OnTimerDone)
         inst:ListenForEvent("attacked", OnAttacked)
         inst:ListenForEvent("attackdodged", OnAttackDodged)
@@ -1058,19 +1060,19 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit,
         inst.dohiremerms = dohiremerms
 
         if not data or not data.unliving then
-            living_merm_common_master(inst) 
+            living_merm_common_master(inst)
         end
 
         if master_postinit ~= nil then
             master_postinit(inst)
-        end     
+        end
 
         if inst.sg and inst.physicsradiusoverride then
             inst.sg.mem.radius = inst.physicsradiusoverride
         end
 
-	inst.OnEntityWake = OnEntityWake
-	inst.OnEntitySleep = OnEntitySleep			
+        inst.OnEntityWake = OnEntityWake
+        inst.OnEntitySleep = OnEntitySleep
 
         return inst
     end
@@ -1124,7 +1126,7 @@ end
 -- Guard
 local function guard_common(inst)
     inst.AnimState:SetBuild("merm_fisherman_build")
-	inst.AnimState:OverrideSymbol("pig_ear", "merm_guard_build", "pig_ear")
+    inst.AnimState:OverrideSymbol("pig_ear", "merm_guard_build", "pig_ear")
     inst:AddTag("mermguard")
     inst.Transform:SetScale(1, 1, 1)
     inst:AddTag("guard")
@@ -1137,7 +1139,7 @@ local function on_mermking_created_upgrade_guard(inst)
     inst:PushEvent("onmermkingcreated")
 end
 local function guard_on_mermking_created_anywhere(inst)
-    inst:DoTaskInTime(math.random()*SLIGHTDELAY, on_mermking_created_upgrade_guard)
+    inst:DoTaskInTime(math.random() * SLIGHTDELAY, on_mermking_created_upgrade_guard)
 end
 
 local function on_mermking_destroyed_downgrade_guard(inst)
@@ -1145,7 +1147,7 @@ local function on_mermking_destroyed_downgrade_guard(inst)
     inst:PushEvent("onmermkingdestroyed")
 end
 local function guard_on_mermking_destroyed_anywhere(inst)
-    inst:DoTaskInTime(math.random()*SLIGHTDELAY, on_mermking_destroyed_downgrade_guard)
+    inst:DoTaskInTime(math.random() * SLIGHTDELAY, on_mermking_destroyed_downgrade_guard)
 end
 
 local function on_guard_initialize(inst)
@@ -1212,7 +1214,7 @@ local function guard_master(inst)
     -- Limit the triple attack upgrade to the merm guards
     inst.CanTripleAttack = Guard_CanTripleAttack
 
-    inst.components.locomotor.runspeed =  TUNING.MERM_GUARD_RUN_SPEED
+    inst.components.locomotor.runspeed = TUNING.MERM_GUARD_RUN_SPEED
     inst.components.locomotor.walkspeed = TUNING.MERM_GUARD_WALK_SPEED
 
     inst:SetStateGraph("SGmerm")
@@ -1224,7 +1226,7 @@ local function guard_master(inst)
     inst.components.health:SetMaxHealth(TUNING.MERM_GUARD_HEALTH)
     inst.components.combat:SetDefaultDamage(inst:MermDamageCalculator())
     inst.components.combat:SetAttackPeriod(TUNING.MERM_GUARD_ATTACK_PERIOD)
-    
+
     if inst.components.sleeper then
         inst.components.sleeper:SetSleepTest(ShouldGuardSleep)
         inst.components.sleeper:SetWakeTest(ShouldGuardWakeUp)
@@ -1235,7 +1237,8 @@ local function guard_master(inst)
     inst.components.follower.maxfollowtime = TUNING.MERM_GUARD_LOYALTY_MAXTIME
 
     inst:ListenForEvent("onmermkingcreated_anywhere", function() guard_on_mermking_created_anywhere(inst) end, TheWorld)
-    inst:ListenForEvent("onmermkingdestroyed_anywhere", function() guard_on_mermking_destroyed_anywhere(inst) end, TheWorld)
+    inst:ListenForEvent("onmermkingdestroyed_anywhere", function() guard_on_mermking_destroyed_anywhere(inst) end,
+        TheWorld)
     inst:ListenForEvent("onattackother", OnAttackOther)
 
     inst:DoTaskInTime(0, on_guard_initialize)
@@ -1249,20 +1252,20 @@ end
 local function common_common(inst)
     inst.sounds = sounds
     inst.AnimState:SetBuild("merm_trader1_build")
-	inst.build = "merm_trader1_build"
+    inst.build = "merm_trader1_build"
     inst.displaynamefn = common_displaynamefn
 end
 
 local function common_common2(inst)
     inst.sounds = sounds
     inst.AnimState:SetBuild("merm_trader2_build")
-	inst.build = "merm_trader2_build"	
+    inst.build = "merm_trader2_build"
 end
 
 local function common_common3(inst)
     inst.sounds = sounds
     inst.AnimState:SetBuild("merm_fisherman_build")
-	inst.build = "merm_fisherman_build"	
+    inst.build = "merm_fisherman_build"
 end
 
 
@@ -1271,7 +1274,7 @@ local function on_mermking_created_upgrade(inst)
     inst:PushEvent("onmermkingcreated")
 end
 local function on_mermking_created_anywhere(inst)
-    inst:DoTaskInTime(math.random()*SLIGHTDELAY, on_mermking_created_upgrade)
+    inst:DoTaskInTime(math.random() * SLIGHTDELAY, on_mermking_created_upgrade)
 end
 
 local function on_mermking_destroyed_downgrade(inst)
@@ -1279,7 +1282,7 @@ local function on_mermking_destroyed_downgrade(inst)
     inst:PushEvent("onmermkingdestroyed")
 end
 local function on_mermking_destroyed_anywhere(inst)
-    inst:DoTaskInTime(math.random()*SLIGHTDELAY, on_mermking_destroyed_downgrade)
+    inst:DoTaskInTime(math.random() * SLIGHTDELAY, on_mermking_destroyed_downgrade)
 end
 
 local function no_holes(pt)
@@ -1400,7 +1403,7 @@ local function shadow_merm_common(inst)
     inst:AddTag("shadow_aligned")
     inst.AnimState:UsePointFiltering(true)
 
-    inst.AnimState:SetMultColour(0,0,0,0.5)
+    inst.AnimState:SetMultColour(0, 0, 0, 0.5)
 
     inst._equipschanged = net_event(inst.GUID, "merm_shadow._equipschanged")
     inst.planarbuffed = net_bool(inst.GUID, "merm.planarbuffed", "planarbuffeddirty")
@@ -1419,7 +1422,7 @@ end
 
 local function OnChangedLeaderShadow(inst, new_leader)
     if new_leader == nil and not inst.components.health:IsDead() then
-        inst.sg:GoToState("hit_shadow")        
+        inst.sg:GoToState("hit_shadow")
     end
 end
 
@@ -1471,7 +1474,7 @@ local function shadow_mermguard_common(inst)
     inst:AddTag("shadowminion")
     inst:AddTag("shadow_aligned")
     inst.AnimState:UsePointFiltering(true)
-    inst.AnimState:SetMultColour(0,0,0,0.5)
+    inst.AnimState:SetMultColour(0, 0, 0, 0.5)
 
     inst._equipschanged = net_event(inst.GUID, "merm_shadow._equipschanged")
     inst.planarbuffed = net_bool(inst.GUID, "merm.planarbuffed", "planarbuffeddirty")
@@ -1542,7 +1545,7 @@ end
 
 local function lunar_merm_master(inst)
     common_master(inst)
-   
+
     inst.components.combat:SetAttackPeriod(TUNING.MERM_ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(1, RetargetFn)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
@@ -1555,7 +1558,7 @@ local function lunar_merm_master(inst)
     inst.components.planardamage:SetBaseDamage(0)
 
     inst.components.talker:IgnoreAll()
-    
+
     inst.components.lootdropper:SetChanceLootTable('merm_lunar_loot')
 
     inst.updateeyebuild = updateeyebuild
@@ -1594,7 +1597,7 @@ local function lunar_mermguard_master(inst)
 
     inst:AddComponent("planardamage")
     inst.components.planardamage:SetBaseDamage(0)
-    
+
     inst.components.lootdropper:SetChanceLootTable('merm_lunar_loot')
 
     inst.updateeyebuild = updateeyebuild
@@ -1613,7 +1616,7 @@ end
 
 local function oncollect(inst)
     inst.CanFish = false
-    
+
     if inst.components.timer:TimerExists("fish") then
         inst.components.timer:StopTimer("fish")
     end
@@ -1627,7 +1630,7 @@ local function common_master2(inst)
 
     inst:SetStateGraph("SGmermfisher")
     local brain = require "brains/mermfisherbrain"
-    inst:SetBrain(brain)	
+    inst:SetBrain(brain)
 
     inst.components.sleeper:SetNocturnal(true)
     inst.components.sleeper:SetSleepTest(ShouldSleep)
@@ -1649,32 +1652,32 @@ local function common_master2(inst)
 
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("suggest_tree_target", SuggestTreeTarget)
-	
+
     inst:AddComponent("fishingrod")
-	inst.components.fishingrod:SetWaitTimes(4, 40)
-    inst.components.fishingrod:SetStrainTimes(0, 5)	
-	
+    inst.components.fishingrod:SetWaitTimes(4, 40)
+    inst.components.fishingrod:SetStrainTimes(0, 5)
+
     inst:ListenForEvent("timerdone", ontimerdone)
 
-    inst:ListenForEvent("fishingcollect", oncollect)	
-	
+    inst:ListenForEvent("fishingcollect", oncollect)
+
     inst:AddComponent("named")
     inst.components.named.possiblenames = STRINGS.MERMNAMES
-    inst.components.named:PickNewName()	
-	
-    inst.CanFish = true	
+    inst.components.named:PickNewName()
 
---[[	
-    inst:ListenForEvent("onmermkingcreated",   function() 
+    inst.CanFish = true
+
+    --[[	
+    inst:ListenForEvent("onmermkingcreated",   function()
         inst:DoTaskInTime(math.random()*SLIGHTDELAY,function()
-            RoyalUpgrade(inst) 
-            inst:PushEvent("onmermkingcreated") 
+            RoyalUpgrade(inst)
+            inst:PushEvent("onmermkingcreated")
         end)
     end, TheWorld)
-    inst:ListenForEvent("onmermkingdestroyed", function() 
+    inst:ListenForEvent("onmermkingdestroyed", function()
         inst:DoTaskInTime(math.random()*SLIGHTDELAY,function()
             RoyalDowngrade(inst)
-            inst:PushEvent("onmermkingdestroyed")  
+            inst:PushEvent("onmermkingdestroyed")
         end)
     end, TheWorld)
 
@@ -1684,10 +1687,10 @@ local function common_master2(inst)
         RoyalUpgrade(inst)
     end
 	
-]]	
+]]
 end
 
 return --MakeMerm("merm1", assets, prefabs, common_common, common_master),
-	   --MakeMerm("merm2", assets, prefabs, common_common2, common_master),
-	   MakeMerm("mermfisherunderwater", assets, prefabs, common_common3, common_master2),	   
-       MakeMerm("mermfisherguardunderwater", assets, prefabs, guard_common, guard_master)
+--MakeMerm("merm2", assets, prefabs, common_common2, common_master),
+    MakeMerm("mermfisherunderwater", assets, prefabs, common_common3, common_master2),
+    MakeMerm("mermfisherguardunderwater", assets, prefabs, guard_common, guard_master)

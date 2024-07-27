@@ -3,13 +3,13 @@ local KrakenBrain = Class(Brain, function(self, inst)
 end)
 
 function KrakenBrain:OnStart()
---    local clock = GetClock()
-    
+    --    local clock = GetClock()
+
     local root = PriorityNode({
-    	StandAndAttack(self.inst),
+        StandAndAttack(self.inst),
         StandStill(self.inst),
     }, .25)
-    
+
     self.bt = BT(self.inst, root)
 end
 

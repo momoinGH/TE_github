@@ -20,9 +20,9 @@ end)
 local function GetHealAuras(inst, range)
     local pos = inst:GetPosition()
     local range = range or 8
-    local heal_auras = TheSim:FindEntities(pos.x, 0, pos.z, range, {"healingcircle"})
+    local heal_auras = TheSim:FindEntities(pos.x, 0, pos.z, range, { "healingcircle" })
     if heal_auras then
-        table.sort(heal_auras, function(a,b)
+        table.sort(heal_auras, function(a, b)
             local a_distance_sq = distsq(a:GetPosition(), pos)
             local b_distance_sq = distsq(b:GetPosition(), pos)
             return a_distance_sq <= b_distance_sq
@@ -32,7 +32,7 @@ local function GetHealAuras(inst, range)
 end
 
 local function GetNoBusyTags(inst)
-	return not (inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("frozen") or inst.sg:HasStateTag("sleeping") or inst.sg:HasStateTag("busy"))
+    return not (inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("frozen") or inst.sg:HasStateTag("sleeping") or inst.sg:HasStateTag("busy"))
 end
 
 local function ShouldChaseAndAttack(inst)
@@ -56,18 +56,17 @@ local function GetWanderPoint(inst)
 end
 
 function BeetletaurBrain:OnStart()
-    
     local root = PriorityNode(
-    {
-		ChaseAndAttack(self.inst, CHASE_TIME, CHASE_DIST),
-		ParallelNode{
-            SequenceNode{
-                WaitNode(5),
+        {
+            ChaseAndAttack(self.inst, CHASE_TIME, CHASE_DIST),
+            ParallelNode {
+                SequenceNode {
+                    WaitNode(5),
+                },
+                Wander(self.inst, GetWanderPoint, 5),
             },
-            Wander(self.inst, GetWanderPoint, 5),
-        },		
-		StandStill(self.inst, function() return true end),
-    }, .25)
+            StandStill(self.inst, function() return true end),
+        }, .25)
     self.bt = BT(self.inst, root)
 end
 

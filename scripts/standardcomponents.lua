@@ -1,6 +1,6 @@
 GLOBAL.setfenv(1, GLOBAL)
 
-local relative_temperature_thresholds = {-30, -10, 10, 30}
+local relative_temperature_thresholds = { -30, -10, 10, 30 }
 local function GetRangeForTemperature(temp, ambient)
     local range = 1
     for i, v in ipairs(relative_temperature_thresholds) do
@@ -10,7 +10,7 @@ local function GetRangeForTemperature(temp, ambient)
     end
     return range
 end
-local emitted_temperatures = {-10, 10, 25, 40, 60}
+local emitted_temperatures = { -10, 10, 25, 40, 60 }
 local function HeatFn(inst, observer)
     local range = GetRangeForTemperature(inst.components.temperature:GetCurrent(), TheWorld.state.temperature)
     return emitted_temperatures[range]

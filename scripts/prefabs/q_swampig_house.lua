@@ -1,8 +1,8 @@
 local assets =
 {
-    Asset("ANIM", "anim/pig_house_old.zip"), -- bank
+    Asset("ANIM", "anim/pig_house_old.zip"),          -- bank
     Asset("ANIM", "anim/quagmire_werepig_house.zip"), -- build
-	Asset("SOUND", "sound/pig.fsb"),
+    Asset("SOUND", "sound/pig.fsb"),
 }
 
 local prefabs =
@@ -26,9 +26,9 @@ local house_loot =
 local unbuilt_loot =
 {
     "boards",
-	"boards",
+    "boards",
     "rocks",
-	"rocks",
+    "rocks",
     --"pigskin",
 }
 
@@ -204,7 +204,7 @@ local function OnIsDay(inst, isday)
         if not TheWorld.state.iswinter then
             inst.components.childspawner:ReleaseAllChildren()
         end
-		StopSpawning(inst)
+        StopSpawning(inst)
     end
 end
 
@@ -247,7 +247,7 @@ local function fn_house()
     inst.MiniMapEntity:SetIcon("quagmire_swampig_house.png")
 
     inst.AnimState:SetBank("pig_house_old")
-	inst.AnimState:SetBuild("quagmire_werepig_house")
+    inst.AnimState:SetBuild("quagmire_werepig_house")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("structure")
@@ -292,16 +292,16 @@ local function fn_house()
     inst:ListenForEvent("burntup", onburntup)
 
     inst:AddComponent("inspectable")
-	
+
     --inst.components.inspectable.getstatus = getstatus
-	
+
     MakeSnowCovered(inst)
-	
+
     inst:ListenForEvent("onbuilt", onbuilt)
-	
+
     inst.OnSave = onsave
     inst.OnLoad = onload
-	
+
     inst.OnPreLoad = OnPreLoad
 
     return inst
@@ -328,7 +328,7 @@ local function fn_unbuilt()
     inst.MiniMapEntity:SetIcon("quagmire_swampig_house_unbuilt.png")
 
     inst.AnimState:SetBank("pig_house_old")
-	inst.AnimState:SetBuild("quagmire_werepig_house")
+    inst.AnimState:SetBuild("quagmire_werepig_house")
     inst.AnimState:PlayAnimation("unbuilt")
 
     inst:AddTag("structure")
@@ -353,7 +353,7 @@ local function fn_unbuilt()
 
     --inst:WatchWorldState("isday", OnIsDay)
 
-	MakeMediumBurnable(inst, TUNING.SMALL_BURNTIME)
+    MakeMediumBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeLargePropagator(inst)
     --inst:ListenForEvent("onignite", onignite)
     --inst:ListenForEvent("burntup", queimou)
@@ -382,7 +382,7 @@ local function fn_rubble()
     inst.MiniMapEntity:SetIcon("rubble.png")
 
     inst.AnimState:SetBank("pig_house_old")
-	inst.AnimState:SetBuild("quagmire_werepig_house")
+    inst.AnimState:SetBuild("quagmire_werepig_house")
     inst.AnimState:PlayAnimation("rubble")
 
     inst:AddTag("structure")
@@ -407,7 +407,7 @@ local function fn_rubble()
 
     --inst:WatchWorldState("isday", OnIsDay)
 
-	MakeMediumBurnable(inst, TUNING.SMALL_BURNTIME)
+    MakeMediumBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeLargePropagator(inst)
     --inst:ListenForEvent("onignite", onignite)
     --inst:ListenForEvent("burntup", queimou)
@@ -421,8 +421,8 @@ local function fn_rubble()
 
     return inst
 end
-return 
-       Prefab("quagmire_swampig_house", fn_house, assets, prefabs),
-       Prefab("quagmire_swampig_house_unbuilt", fn_unbuilt, assets, prefabs), 
-	   Prefab("quagmire_swampig_house_rubble", fn_rubble, assets, prefabs),
-	MakePlacer("quagmire_swampig_house_placer", "pig_house_old", "quagmire_werepig_house", "idle")
+return
+    Prefab("quagmire_swampig_house", fn_house, assets, prefabs),
+    Prefab("quagmire_swampig_house_unbuilt", fn_unbuilt, assets, prefabs),
+    Prefab("quagmire_swampig_house_rubble", fn_rubble, assets, prefabs),
+    MakePlacer("quagmire_swampig_house_placer", "pig_house_old", "quagmire_werepig_house", "idle")

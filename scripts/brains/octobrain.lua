@@ -23,21 +23,21 @@ local function GetFaceTargetFn(inst)
     end
 end
 local function KeepFaceTargetFn(inst, target)
-    return inst:GetDistanceSqToInst(target) <= KEEP_FACE_DIST*KEEP_FACE_DIST and not target:HasTag("notarget")
+    return inst:GetDistanceSqToInst(target) <= KEEP_FACE_DIST * KEEP_FACE_DIST and not target:HasTag("notarget")
 end
 
 local function HasValidHome(inst)
-    return inst.components.homeseeker and 
-       inst.components.homeseeker.home and 
-       not inst.components.homeseeker.home:HasTag("fire") and
-       not inst.components.homeseeker.home:HasTag("burnt") and
-       inst.components.homeseeker.home:IsValid()
+    return inst.components.homeseeker and
+        inst.components.homeseeker.home and
+        not inst.components.homeseeker.home:HasTag("fire") and
+        not inst.components.homeseeker.home:HasTag("burnt") and
+        inst.components.homeseeker.home:IsValid()
 end
 local function GoHomeAction(inst)
     if not inst.components.follower.leader and
         HasValidHome(inst) and
         not inst.components.combat.target then
-            return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
+        return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
     end
 end
 local function GetHomePos(inst)
@@ -52,31 +52,23 @@ local octobrain = Class(Brain, function(self, inst)
 end)
 
 function octobrain:OnStart()
-	--at night time return home
-    local night = WhileNode( function() return clock and not clock:IsDay() end, "IsNight",
-        PriorityNode{
-				--at night time go home (if it has one)
-                DoAction(self.inst, GoHomeAction, "go home", true ),
-		},	1)
+    --at night time return home
+    local night = WhileNode(function() return clock and not clock:IsDay() end, "IsNight",
+        PriorityNode {
+            --at night time go home (if it has one)
+            DoAction(self.inst, GoHomeAction, "go home", true),
+        }, 1)
 
     local root = PriorityNode(
-		{
-			ChaseAndAttack(self.inst, MAX_CHASE_TIME),
-			RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
-			FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
-			Wander(self.inst, GetNoLeaderHomePos, MAX_WANDER_DIST),
-		}, .25)
-    
-	
+        {
+            ChaseAndAttack(self.inst, MAX_CHASE_TIME),
+            RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
+            FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+            Wander(self.inst, GetNoLeaderHomePos, MAX_WANDER_DIST),
+        }, .25)
+
+
     self.bt = BT(self.inst, root)
 end
+
 return octobrain
-
-
-
-
-
-
-
-
-

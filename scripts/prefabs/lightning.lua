@@ -54,14 +54,14 @@ local function StartFX(proxy)
     end
 
     local pos0 = Vector3(TheFocalPoint.Transform:GetWorldPosition())
-   	local diff = pos - pos0
+    local diff = pos - pos0
     local distsq = diff:LengthSq()
     local minsounddist = 10
     local normpos = pos
-   	if distsq > minsounddist * minsounddist then
-       	--Sound needs to be played closer to us if lightning is too far from player
+    if distsq > minsounddist * minsounddist then
+        --Sound needs to be played closer to us if lightning is too far from player
         local normdiff = diff * (minsounddist / math.sqrt(distsq))
-   	    normpos = pos0 + normdiff
+        normpos = pos0 + normdiff
     end
 
     if ThePlayer ~= nil then

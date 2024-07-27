@@ -17,11 +17,11 @@ local assets_banner =
     Asset("ANIM", "anim/lavaarena_battlestandard.zip"),
 }
 
-SetSharedLootTable( "lizardman",
-{
---    {"meat", 1.0},
---    {"meat", 1.0},
-})
+SetSharedLootTable("lizardman",
+    {
+        --    {"meat", 1.0},
+        --    {"meat", 1.0},
+    })
 
 local targetDist = TUNING.LIZARDMAN_TFC.TARGET_DIST
 local keepDistSq = TUNING.LIZARDMAN_TFC.KEEP_TARGET_DIST * TUNING.LIZARDMAN_TFC.KEEP_TARGET_DIST
@@ -30,43 +30,43 @@ local tornsRange = TUNING.LIZARDMAN_TFC.ATTACK_RANGE
 local tornsDamage = TUNING.LIZARDMAN_TFC.TORNS_DAMAGE
 
 local function OnNewTarget(inst, data)
-	if inst.components.sleeper:IsAsleep() then
-		inst.components.sleeper:WakeUp()
-	end
+    if inst.components.sleeper:IsAsleep() then
+        inst.components.sleeper:WakeUp()
+    end
 end
 
 local function Retarget(inst)
-local player = GetClosestInstWithTag("player", inst, 70)
-if player then return inst.components.combat:SetTarget(player) end
+    local player = GetClosestInstWithTag("player", inst, 70)
+    if player then return inst.components.combat:SetTarget(player) end
     local notags = {}
-    notags = {"FX", "NOCLICK", "INLIMBO", "lizardman", "player"}
-	return FindEntity(inst, targetDist, function(guy)
-		return  inst.components.combat:CanTarget(guy)
-	end, nil, notags)
+    notags = { "FX", "NOCLICK", "INLIMBO", "lizardman", "player" }
+    return FindEntity(inst, targetDist, function(guy)
+        return inst.components.combat:CanTarget(guy)
+    end, nil, notags)
 end
 
 local function KeepTarget(inst, target)
-	return inst.components.combat:CanTarget(target) and inst:GetDistanceSqToInst(target) <= (keepDistSq)
+    return inst.components.combat:CanTarget(target) and inst:GetDistanceSqToInst(target) <= (keepDistSq)
 end
 
 local function OnAttacked(inst, data)
     local function IsArmored()
-        return data.attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) 
-            and data.attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) 
+        return data.attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+            and data.attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
     end
 
-    if data.attacker == nil 
-        or data.attacker.components.combat == nil 
-        or data.attacker.components.health == nil 
-    then 
-        return 
+    if data.attacker == nil
+        or data.attacker.components.combat == nil
+        or data.attacker.components.health == nil
+    then
+        return
     end
 
-	inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.attacker, shareDist, 
-        function(dude) 
-            return dude:HasTag("lizardman") 
-                and not dude.components.health:IsDead() 
+    inst.components.combat:SetTarget(data.attacker)
+    inst.components.combat:ShareTarget(data.attacker, shareDist,
+        function(dude)
+            return dude:HasTag("lizardman")
+                and not dude.components.health:IsDead()
         end, 5)
 
     if data.attacker:IsNear(inst, tornsRange) then
@@ -81,11 +81,11 @@ local function OnAttacked(inst, data)
 end
 
 local function OnAttackOther(inst, data)
-    inst.components.combat:ShareTarget(data.target, 
-        shareDist, 
-        function(dude) 
-            return dude:HasTag("lizardman") 
-                and not dude.components.health:IsDead() 
+    inst.components.combat:ShareTarget(data.target,
+        shareDist,
+        function(dude)
+            return dude:HasTag("lizardman")
+                and not dude.components.health:IsDead()
         end, 5)
 end
 
@@ -95,8 +95,9 @@ local function MakeWeapon(inst)
         weapon.entity:AddTransform()
         MakeInventoryPhysics(weapon)
         weapon:AddComponent("weapon")
-        weapon.components.weapon:SetDamage(TUNING.LIZARDMAN_TFC.DAMAGE)--TUNING.SPIDER_SPITTER_DAMAGE_RANGED)
-        weapon.components.weapon:SetRange(TUNING.LIZARDMAN_TFC.DIST_ATTACK_RANGE, TUNING.LIZARDMAN_TFC.DIST_ATTACK_RANGE + 4)
+        weapon.components.weapon:SetDamage(TUNING.LIZARDMAN_TFC.DAMAGE) --TUNING.SPIDER_SPITTER_DAMAGE_RANGED)
+        weapon.components.weapon:SetRange(TUNING.LIZARDMAN_TFC.DIST_ATTACK_RANGE,
+            TUNING.LIZARDMAN_TFC.DIST_ATTACK_RANGE + 4)
         weapon.components.weapon:SetProjectile("lizardman_spit_tfc")
         weapon:AddComponent("inventoryitem")
         weapon.persists = false
@@ -141,7 +142,7 @@ local function fn()
     inst:AddTag("scarytoprey")
     --inst:AddTag("hostile")
     inst:AddTag("lizardman")
-	inst:AddTag("Arena")
+    inst:AddTag("Arena")
 
     inst:AddComponent("talker")
     inst.components.talker.fontsize = 35
@@ -160,29 +161,29 @@ local function fn()
     end
 
     inst:AddComponent("locomotor")
-	inst.components.locomotor.runspeed = TUNING.LIZARDMAN_TFC.SPEED
+    inst.components.locomotor.runspeed = TUNING.LIZARDMAN_TFC.SPEED
 
-	inst:SetStateGraph("SGlizardman_tfc")
-	inst:SetBrain(require "brains/lizardman_tfcbrain")
+    inst:SetStateGraph("SGlizardman_tfc")
+    inst:SetBrain(require "brains/lizardman_tfcbrain")
 
-	inst:AddComponent("knownlocations")
+    inst:AddComponent("knownlocations")
 
-	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(TUNING.LIZARDMAN_TFC.HEALTH)
+    inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(TUNING.LIZARDMAN_TFC.HEALTH)
 
-	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(TUNING.LIZARDMAN_TFC.DAMAGE)
-	inst.components.combat:SetAttackPeriod(TUNING.LIZARDMAN_TFC.ATTACK_PERIOD)
-	inst.components.combat:SetRetargetFunction(5, Retarget)
-	inst.components.combat:SetRange(TUNING.LIZARDMAN_TFC.DIST_ATTACK_RANGE)
-	inst.components.combat.battlecryenabled = false
+    inst:AddComponent("combat")
+    inst.components.combat:SetDefaultDamage(TUNING.LIZARDMAN_TFC.DAMAGE)
+    inst.components.combat:SetAttackPeriod(TUNING.LIZARDMAN_TFC.ATTACK_PERIOD)
+    inst.components.combat:SetRetargetFunction(5, Retarget)
+    inst.components.combat:SetRange(TUNING.LIZARDMAN_TFC.DIST_ATTACK_RANGE)
+    inst.components.combat.battlecryenabled = false
 
-	inst:AddComponent("lootdropper")
-	inst.components.lootdropper:SetChanceLootTable("lizardman")
+    inst:AddComponent("lootdropper")
+    inst.components.lootdropper:SetChanceLootTable("lizardman")
 
-	inst:AddComponent("inspectable")
+    inst:AddComponent("inspectable")
     inst:AddComponent("inventory")
-    
+
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.LIZARDMAN }, { FOODTYPE.MEAT })
     inst.components.eater:SetCanEatHorrible()
@@ -190,7 +191,7 @@ local function fn()
     inst.components.eater.strongstomach = true
 
     inst:AddComponent("sleeper")
-    
+
     MakeMediumFreezableCharacter(inst, "body")
     MakeMediumBurnableCharacter(inst, "body")
 
@@ -207,17 +208,17 @@ end
 
 --range attack--------------------------
 ----------------------------------------
-local function OnThrown(inst) 
-    inst:Show() 
+local function OnThrown(inst)
+    inst:Show()
     inst.AnimState:PlayAnimation("idle_loop")
 end
 
-local function OnHit(inst) 
+local function OnHit(inst)
     inst.AnimState:PlayAnimation("blast")
     inst:ListenForEvent("animover", function(inst) inst:Remove() end)
 end
 
-local function OnMiss(inst) 
+local function OnMiss(inst)
     inst.AnimState:PlayAnimation("disappear")
     inst:ListenForEvent("animover", function(inst) inst:Remove() end)
 end
@@ -292,7 +293,7 @@ local function bannerfn()
 
     inst:AddTag("lizardman")
     inst:AddTag("banner")
-	inst:AddTag("Arena")
+    inst:AddTag("Arena")
 
     inst.entity:SetPristine()
 
@@ -302,17 +303,17 @@ local function bannerfn()
 
     inst.persists = false
 
-	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(100)
+    inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(100)
 
-	inst:AddComponent("combat")
-	--inst:AddComponent("lootdropper")
+    inst:AddComponent("combat")
+    --inst:AddComponent("lootdropper")
 
     inst:AddComponent("inspectable")
-    
+
     inst:ListenForEvent("death", OnBannerDeath)
     inst:DoTaskInTime(10, function(inst) inst.components.health:DoDelta(-100) end)
-    
+
     --MakeMediumBurnableCharacter(inst)
 
     return inst

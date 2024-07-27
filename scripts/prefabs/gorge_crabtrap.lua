@@ -63,8 +63,8 @@ local function fn()
 
     inst:AddTag("trap")
 
-    MakeInventoryFloatable(inst, "med", 0.05, {0.8, 0.5, 0.8})
-	
+    MakeInventoryFloatable(inst, "med", 0.05, { 0.8, 0.5, 0.8 })
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -74,16 +74,16 @@ local function fn()
     inst.sounds = sounds
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
-	inst.caminho = "images/images/inventoryimages2.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
+    inst.caminho = "images/images/inventoryimages2.xml"
 
     inst:AddComponent("inspectable")
-	
+
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(TUNING.TRAP_USES)
     inst.components.finiteuses:SetUses(TUNING.TRAP_USES)
     inst.components.finiteuses:SetOnFinished(on_usedup)
-		
+
     inst:AddComponent("trap")
     inst.components.trap.targettag = "canbetrapped"
     inst.components.trap:SetOnHarvestFn(onharvested)

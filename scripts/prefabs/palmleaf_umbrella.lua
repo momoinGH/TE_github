@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/swap_parasol_palmleaf.zip"),
-    Asset("ANIM", "anim/parasol_palmleaf.zip"),		
+    Asset("ANIM", "anim/parasol_palmleaf.zip"),
 }
 
 local function onequip(inst, owner)
@@ -68,7 +68,7 @@ local function common_fn(name)
 
     inst.AnimState:SetBank(name)
     inst.AnimState:SetBuild(name)
-    inst.AnimState:PlayAnimation("idle")  
+    inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("nopunch")
     inst:AddTag("umbrella")
@@ -84,8 +84,8 @@ local function common_fn(name)
     if not TheWorld.ismastersim then
         return inst
     end
-	
-    inst:AddComponent("tradable")	
+
+    inst:AddComponent("tradable")
 
     inst:AddComponent("waterproofer")
     inst:AddComponent("inspectable")
@@ -101,19 +101,19 @@ local function common_fn(name)
     return inst
 end
 
-local function onequip_palmleaf(inst, owner) 
+local function onequip_palmleaf(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", "swap_parasol_palmleaf", "swap_parasol_palmleaf")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
---    UpdateSound(inst)
-    
+    --    UpdateSound(inst)
+
     owner.DynamicShadow:SetSize(1.7, 1)
 end
 
-local function onunequip_palmleaf(inst, owner) 
-    owner.AnimState:Hide("ARM_carry") 
-    owner.AnimState:Show("ARM_normal") 
---    UpdateSound(inst)
+local function onunequip_palmleaf(inst, owner)
+    owner.AnimState:Hide("ARM_carry")
+    owner.AnimState:Show("ARM_normal")
+    --    UpdateSound(inst)
 
     owner.DynamicShadow:SetSize(1.3, 0.6)
 end
@@ -126,15 +126,15 @@ local function palmleaf()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst, "large")	
+    MakeInventoryFloatable(inst, "large")
 
     inst.AnimState:SetBank("parasol_palmleaf")
     inst.AnimState:SetBuild("parasol_palmleaf")
-    inst.AnimState:PlayAnimation("idle")  
+    inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("nopunch")
     inst:AddTag("umbrella")
-	inst:AddTag("aquatic")
+    inst:AddTag("aquatic")
     --waterproofer (from waterproofer component) added to pristine state for optimization
     inst:AddTag("waterproofer")
 
@@ -143,40 +143,40 @@ local function palmleaf()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.GRASS_UMBRELLA_PERISHTIME)
     inst.components.perishable:StartPerishing()
     inst.components.perishable:SetOnPerishFn(onperish)
     inst:AddTag("show_spoilage")
-	
+
     inst:AddComponent("waterproofer")
-	inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_MED)
-	
-	inst:AddComponent("insulator")
+    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_MED)
+
+    inst:AddComponent("insulator")
     inst.components.insulator:SetSummer()
     inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)
-		
+
     inst:AddComponent("equippable")
-	inst.components.equippable:SetOnEquip( onequip_palmleaf )
-    inst.components.equippable:SetOnUnequip( onunequip_palmleaf )
+    inst.components.equippable:SetOnEquip(onequip_palmleaf)
+    inst.components.equippable:SetOnUnequip(onunequip_palmleaf)
     inst.components.equippable.dapperness = TUNING.DAPPERNESS_SMALL
-	
-	local swap_data = {sym_build = "swap_parasol_palmleaf", bank = "parasol_palmleaf"}
+
+    local swap_data = { sym_build = "swap_parasol_palmleaf", bank = "parasol_palmleaf" }
     inst.components.floater:SetBankSwapOnFloat(true, -40, swap_data)
     inst.components.floater:SetVerticalOffset(0.05)
-	inst.components.floater:SetScale({ 0.75, 0.35, 1 })
-	
+    inst.components.floater:SetScale({ 0.75, 0.35, 1 })
+
     inst:AddComponent("inspectable")
-	
+
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
     MakeHauntableLaunch(inst)
 
     inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
-	
+
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeSmallPropagator(inst)
 
@@ -184,4 +184,4 @@ local function palmleaf()
 end
 
 
-return Prefab( "palmleaf_umbrella", palmleaf, assets)		
+return Prefab("palmleaf_umbrella", palmleaf, assets)

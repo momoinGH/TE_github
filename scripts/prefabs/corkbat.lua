@@ -27,10 +27,10 @@ local function fn(Sim)
 	local inst = CreateEntity()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
+	inst.entity:AddNetwork()
 
 	MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst, "med", 0.05, {1.2, 0.75, 1.2})
+	MakeInventoryFloatable(inst, "med", 0.05, { 1.2, 0.75, 1.2 })
 
 	inst.AnimState:SetBuild("cork_bat")
 	inst.AnimState:SetBank("cork_bat")
@@ -44,10 +44,10 @@ local function fn(Sim)
 
 	if not TheWorld.ismastersim then
 		return inst
-	end	
-	
-	inst.components.floater:SetBankSwapOnFloat(true, -11, {sym_build = "swap_cork_bat"})	
-	
+	end
+
+	inst.components.floater:SetBankSwapOnFloat(true, -11, { sym_build = "swap_cork_bat" })
+
 	inst:AddComponent("weapon")
 	inst.components.weapon:SetDamage(CORK_BAT_DAMAGE)
 
@@ -59,20 +59,20 @@ local function fn(Sim)
 	inst.components.finiteuses:SetMaxUses(CORK_BAT_USES)
 	inst.components.finiteuses:SetUses(CORK_BAT_USES)
 
-	inst.components.finiteuses:SetOnFinished( onfinished )
+	inst.components.finiteuses:SetOnFinished(onfinished)
 
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("equippable")
-	inst.components.equippable:SetOnEquip( onequip )
-	inst.components.equippable:SetOnUnequip( onunequip )
-	
+	inst.components.equippable:SetOnEquip(onequip)
+	inst.components.equippable:SetOnUnequip(onunequip)
+
 	inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 	inst.caminho = "images/inventoryimages/hamletinventory.xml"
-	
+
 	return inst
 end
 
 
-return Prefab( "common/inventory/cork_bat", fn, basic_assets)
+return Prefab("common/inventory/cork_bat", fn, basic_assets)

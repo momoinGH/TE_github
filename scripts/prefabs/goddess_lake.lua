@@ -1,13 +1,13 @@
 local assets =
 {
-    Asset("ANIM", "anim/oasis_tile.zip"),
-    Asset("MINIMAP_IMAGE", "oasis"),
+	Asset("ANIM", "anim/oasis_tile.zip"),
+	Asset("MINIMAP_IMAGE", "oasis"),
 }
 
 local prefabs =
 {
-    "fish",
-    "windpouch",
+	"fish",
+	"windpouch",
 	"goddess_fountain_lake"
 }
 
@@ -15,26 +15,26 @@ local function gemmed(inst)
 	inst.SoundEmitter:PlaySound("dontstarve/common/together/moondial/full_LP", "loop")
 end
 
-local function light(inst)    
+local function light(inst)
 	if inst.light == nil then
 		inst.light = inst:SpawnChild("goddess_lantern_fire")
 		inst.light.Transform:SetPosition(0, 1, 0)
-	end 
+	end
 	local ents = TheSim:FindFirstEntityWithTag("goddess_deer_gem")
 	local x, y, z = inst.Transform:GetWorldPosition()
 	if TheWorld.state.isfullmoon and ents == nil then
 		if inst.deer1 == nil then
 			inst.deer1 = SpawnPrefab("goddess_deer_gem")
 			inst.deer1.Transform:SetPosition(x + 8, 0, z + 8)
-		end 
+		end
 		if inst.deer2 == nil then
 			inst.deer2 = SpawnPrefab("goddess_deer_gem")
 			inst.deer2.Transform:SetPosition(x - 8, 0, z + 8)
-		end 
+		end
 		if inst.deer3 == nil then
 			inst.deer3 = SpawnPrefab("goddess_deer_gem")
-			inst.deer3.Transform:SetPosition(x + 8, 0,  z - 8)
-		end 
+			inst.deer3.Transform:SetPosition(x + 8, 0, z - 8)
+		end
 	end
 end
 
@@ -87,8 +87,8 @@ end
 
 local function GetFish(inst)
 	local pos = inst:GetPosition()
-	local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 8, nil, {"FX", "NOCLICK","DECOR","INLIMBO"}, {"player"})
-	for i,v in pairs(ents) do
+	local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 8, nil, { "FX", "NOCLICK", "DECOR", "INLIMBO" }, { "player" })
+	for i, v in pairs(ents) do
 		if v:HasTag("windy5") then
 			return math.random() < 0.65 and "goddess_fish" or "eel"
 		else
@@ -98,69 +98,69 @@ local function GetFish(inst)
 end
 
 local function fn()
-    local inst = CreateEntity()
+	local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
-    inst.entity:AddNetwork()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddMiniMapEntity()
+	inst.entity:AddNetwork()
 
-    inst.Transform:SetRotation(45)
+	inst.Transform:SetRotation(45)
 
-    MakeObstaclePhysics(inst, 6)
+	MakeObstaclePhysics(inst, 6)
 
-    inst.AnimState:SetBuild("oasis_tile")
-    inst.AnimState:SetBank("oasis_tile")
---	inst.AnimState:SetMultColour(50/255, 238/255, 50/255, 1)		
-    inst.AnimState:PlayAnimation("idle", true)
-    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:SetSortOrder(2)
-	
-    inst.MiniMapEntity:SetIcon("oasis.png")
+	inst.AnimState:SetBuild("oasis_tile")
+	inst.AnimState:SetBank("oasis_tile")
+	--	inst.AnimState:SetMultColour(50/255, 238/255, 50/255, 1)		
+	inst.AnimState:PlayAnimation("idle", true)
+	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+	inst.AnimState:SetLayer(LAYER_BACKGROUND)
+	inst.AnimState:SetSortOrder(2)
 
-    inst:AddTag("birdblocker")
-    inst:AddTag("antlion_sinkhole_blocker")
+	inst.MiniMapEntity:SetIcon("oasis.png")
+
+	inst:AddTag("birdblocker")
+	inst:AddTag("antlion_sinkhole_blocker")
 	inst:AddTag("goddess_fountain_gem")
 	inst:AddTag("goddess_fountain")
-	
+
 	inst.SoundEmitter:PlaySound("dontstarve/common/together/moondial/full_LP", "loop")
 
 	local s = 1
-	inst.Transform:SetScale(s,s,s)
-	
-    inst.no_wet_prefix = true
-    inst:SetDeployExtraSpacing(6)
+	inst.Transform:SetScale(s, s, s)
 
-    inst.entity:SetPristine()
+	inst.no_wet_prefix = true
+	inst:SetDeployExtraSpacing(6)
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	inst.entity:SetPristine()
 
-    inst:AddComponent("fishable")
-    inst.components.fishable.maxfish = TUNING.OASISLAKE_MAX_FISH
-    inst.components.fishable:SetRespawnTime(TUNING.OASISLAKE_FISH_RESPAWN_TIME)
-    inst.components.fishable:SetGetFishFn(GetFish)
+	if not TheWorld.ismastersim then
+		return inst
+	end
 
-    inst:AddComponent("hauntable")
-    inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
-	
+	inst:AddComponent("fishable")
+	inst.components.fishable.maxfish = TUNING.OASISLAKE_MAX_FISH
+	inst.components.fishable:SetRespawnTime(TUNING.OASISLAKE_FISH_RESPAWN_TIME)
+	inst.components.fishable:SetGetFishFn(GetFish)
+
+	inst:AddComponent("hauntable")
+	inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
+
 	inst:AddComponent("lootdropper")
-	
+
 	inst:AddComponent("leader")
-	
-    inst:AddComponent("inspectable")
-	
+
+	inst:AddComponent("inspectable")
+
 	inst:AddComponent("playerprox")
-    inst.components.playerprox:SetDist(12, 14)
-    inst.components.playerprox:SetOnPlayerNear(light)
-    inst.components.playerprox:SetOnPlayerFar(extinguish)
-	
+	inst.components.playerprox:SetDist(12, 14)
+	inst.components.playerprox:SetOnPlayerNear(light)
+	inst.components.playerprox:SetOnPlayerFar(extinguish)
+
 	inst:DoTaskInTime(0, fountain)
 
-    return inst
+	return inst
 end
 
 return Prefab("goddess_lake", fn, assets, prefabs)

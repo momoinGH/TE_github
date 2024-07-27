@@ -1,6 +1,6 @@
 local assets =
 {
-	Asset("ANIM", "anim/tikitorch.zip"),
+    Asset("ANIM", "anim/tikitorch.zip"),
     Asset("SOUND", "sound/common.fsb"),
 }
 
@@ -32,7 +32,7 @@ local function onhammered(inst)
     inst:Remove()
 end
 
-local function onhit(inst,worker)
+local function onhit(inst, worker)
     if inst.components.spawner.child ~= nil and inst.components.spawner.child.components.combat ~= nil then
         inst.components.spawner.child.components.combat:SuggestTarget(worker)
     end
@@ -85,10 +85,10 @@ local function OnHaunt(inst)
 end
 
 local function OnDay(inst)
-        if inst.components.spawner:IsOccupied() then
-        inst:DoTaskInTime(1 + math.random()*2, function() inst.components.spawner:ReleaseChild() end)
-        end
+    if inst.components.spawner:IsOccupied() then
+        inst:DoTaskInTime(1 + math.random() * 2, function() inst.components.spawner:ReleaseChild() end)
     end
+end
 
 local function fn()
     local inst = CreateEntity()
@@ -142,11 +142,11 @@ local function fn()
     inst.components.workable:SetOnWorkCallback(onhit)
 
     inst:AddComponent("spawner")
-	WorldSettings_Spawner_SpawnDelay(inst, TUNING.TOTAL_DAY_TIME*3, true)	
+    WorldSettings_Spawner_SpawnDelay(inst, TUNING.TOTAL_DAY_TIME * 3, true)
     inst.components.spawner:Configure("wanawanatiki", TUNING.TOTAL_DAY_TIME * 3)
---    inst.components.spawner:SetOnlySpawnOffscreen(true)
+    --    inst.components.spawner:SetOnlySpawnOffscreen(true)
     inst.components.spawner:SetOnVacateFn(OnVacate)
-    inst:ListenForEvent("daytime", function() OnDay(inst) end, TheWorld)	
+    inst:ListenForEvent("daytime", function() OnDay(inst) end, TheWorld)
 
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_SMALL)

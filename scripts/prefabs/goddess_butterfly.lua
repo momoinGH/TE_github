@@ -12,12 +12,12 @@ local prefabs =
 
 local brain = require "brains/butterflybrain"
 
-SetSharedLootTable( 'goddess_butterfly',
-{
-    {'butter',            			  0.01},
-    {'goddess_butterflywings',        0.20},
-	{'goddess_butterflywings',        0.75},
-})
+SetSharedLootTable('goddess_butterfly',
+    {
+        { 'butter',                 0.01 },
+        { 'goddess_butterflywings', 0.20 },
+        { 'goddess_butterflywings', 0.75 },
+    })
 
 local function OnDropped(inst)
     inst.sg:GoToState("idle")
@@ -60,7 +60,7 @@ local function CanDeploy(inst)
     return true
 end
 
-local function OnDeploy(inst, pt) 
+local function OnDeploy(inst, pt)
     local flower = SpawnPrefab("goddess_flower")
     if flower then
         flower:PushEvent("growfrombutterfly")
@@ -84,11 +84,11 @@ local function fn()
     inst.Physics:SetCollisionGroup(COLLISION.FLYERS)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.WORLD)
-	
-	MakeInventoryFloatable(inst)	
+
+    MakeInventoryFloatable(inst)
 
     inst:AddTag("goddess_butterfly")
-	inst:AddTag("butterfly")
+    inst:AddTag("butterfly")
     inst:AddTag("flying")
     inst:AddTag("insect")
     inst:AddTag("smallcreature")
@@ -124,7 +124,7 @@ local function fn()
     inst.components.inventoryitem.canbepickedup = false
     inst.components.inventoryitem.canbepickedupalive = true
     inst.components.inventoryitem.nobounce = true
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_butterfly.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_butterfly.xml"
 
     ------------------
     inst:AddComponent("pollinator")
@@ -148,7 +148,7 @@ local function fn()
 
     ------------------
     inst:AddComponent("lootdropper")
-	inst.components.lootdropper:SetChanceLootTable('goddess_butterfly') 
+    inst.components.lootdropper:SetChanceLootTable('goddess_butterfly')
 
     ------------------
     inst:AddComponent("workable")

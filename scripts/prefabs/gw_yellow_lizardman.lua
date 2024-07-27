@@ -4,58 +4,58 @@ local assets =
     Asset("ANIM", "anim/lizardman_anims.zip"),
 }
 
-SetSharedLootTable( "lizardman",
-{
-    {"meat", 1.0},
-    {"meat", 1.0},
-    {"snakeskin", 0.5},
-})
+SetSharedLootTable("lizardman",
+    {
+        { "meat",      1.0 },
+        { "meat",      1.0 },
+        { "snakeskin", 0.5 },
+    })
 
 local function Retarget(inst)
-	local dist = 12
-    local notags = {"FX", "NOCLICK", "INLIMBO", "lizardman"}
+    local dist = 12
+    local notags = { "FX", "NOCLICK", "INLIMBO", "lizardman" }
     local reqtags = nil
     if not inst.isFrenzy then
-        reqtags = {"monster"}
-        notags = {"FX", "NOCLICK", "INLIMBO", "shadow", "lizardman", "structure", "player"}
-    --else
+        reqtags = { "monster" }
+        notags = { "FX", "NOCLICK", "INLIMBO", "shadow", "lizardman", "structure", "player" }
+        --else
         --notags = {"FX", "NOCLICK", "INLIMBO", "lizardman"}
     end
-	return FindEntity(inst, dist, function(guy)
+    return FindEntity(inst, dist, function(guy)
         return inst.components.combat:CanTarget(guy)
-	end, reqtags, notags)
+    end, reqtags, notags)
 end
 
 local function KeepTarget(inst, target)
-	return inst.components.combat:CanTarget(target) and inst:GetDistanceSqToInst(target) <= (20 * 20)
+    return inst.components.combat:CanTarget(target) and inst:GetDistanceSqToInst(target) <= (20 * 20)
 end
 
 local function OnAttacked(inst, data)
-    if data.attacker == nil 
-        or data.attacker:HasTag("lizardman") 
-        or data.attacker.components.combat == nil 
-        or data.attacker.components.health == nil 
-    then 
-        return 
+    if data.attacker == nil
+        or data.attacker:HasTag("lizardman")
+        or data.attacker.components.combat == nil
+        or data.attacker.components.health == nil
+    then
+        return
     end
 
     inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.attacker, 20, 
-        function(dude) 
-            return dude:HasTag("lizardman") 
-                and not dude.components.health:IsDead() 
+    inst.components.combat:ShareTarget(data.attacker, 20,
+        function(dude)
+            return dude:HasTag("lizardman")
+                and not dude.components.health:IsDead()
         end, 5)
 end
 
 local function OnAttackOther(inst, data)
     if not inst.isFrenzy then
-        inst.components.combat:ShareTarget(data.target, 
-            20, 
-            function(dude) 
-                return dude:HasTag("lizardman") 
-                    and not dude.components.health:IsDead() 
+        inst.components.combat:ShareTarget(data.target,
+            20,
+            function(dude)
+                return dude:HasTag("lizardman")
+                    and not dude.components.health:IsDead()
             end, 5)
-     end
+    end
 end
 
 local function OnWeaponAttack(weapon, inst, target)
@@ -69,8 +69,8 @@ local function OnWeaponAttack(weapon, inst, target)
     local lpos =
     {
         {
-            start = {x = x, z = z}, 
-            finish = {x = xt, z = zt}
+            start = { x = x, z = z },
+            finish = { x = xt, z = zt }
         }
     }
     fxdummy.components.gflightningdrawer:DoLightning(lpos)
@@ -141,31 +141,31 @@ local function fn()
     end
 
     inst:AddComponent("locomotor")
-	inst.components.locomotor.runspeed = 6 * 0.9
-	local sg = require "stategraphs/SGlizardman"
-	inst:SetStateGraph("SGlizardman")
+    inst.components.locomotor.runspeed = 6 * 0.9
+    local sg = require "stategraphs/SGlizardman"
+    inst:SetStateGraph("SGlizardman")
 
-	local brain = require "brains/lizardmanbrain"
-	inst:SetBrain(brain)
+    local brain = require "brains/lizardmanbrain"
+    inst:SetBrain(brain)
 
-	inst:AddComponent("knownlocations")
+    inst:AddComponent("knownlocations")
 
-	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(680)
+    inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(680)
 
-	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(45)
-	inst.components.combat:SetAttackPeriod(2.5 * 2)
-	inst.components.combat:SetRetargetFunction(2, Retarget)
-	inst.components.combat:SetRange(16)
-	inst.components.combat.battlecryenabled = false
+    inst:AddComponent("combat")
+    inst.components.combat:SetDefaultDamage(45)
+    inst.components.combat:SetAttackPeriod(2.5 * 2)
+    inst.components.combat:SetRetargetFunction(2, Retarget)
+    inst.components.combat:SetRange(16)
+    inst.components.combat.battlecryenabled = false
 
-	inst:AddComponent("lootdropper")
-	inst.components.lootdropper:SetChanceLootTable("lizardman")
+    inst:AddComponent("lootdropper")
+    inst.components.lootdropper:SetChanceLootTable("lizardman")
 
-	inst:AddComponent("inspectable")
+    inst:AddComponent("inspectable")
     inst:AddComponent("inventory")
-    
+
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.LIZARDMAN }, { FOODGROUP.LIZARDMAN })
     inst.components.eater:SetCanEatHorrible()
@@ -175,7 +175,7 @@ local function fn()
 
     inst:AddComponent("sleeper")
     inst:AddComponent("colouradder")
-    
+
     MakeMediumFreezableCharacter(inst, "body")
     MakeMediumBurnableCharacter(inst, "body")
 

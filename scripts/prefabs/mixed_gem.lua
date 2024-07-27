@@ -1,9 +1,9 @@
 local assets =
 {
     Asset("ANIM", "anim/mixed_gem.zip"),
-	Asset("ATLAS", "images/inventoryimages/mixed_gem.xml"),
-	Asset("IMAGE", "images/inventoryimages/mixed_gem.tex"),
-	
+    Asset("ATLAS", "images/inventoryimages/mixed_gem.xml"),
+    Asset("IMAGE", "images/inventoryimages/mixed_gem.tex"),
+
 }
 
 local function fn()
@@ -14,15 +14,15 @@ local function fn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)	
+    MakeInventoryFloatable(inst)
 
     inst.AnimState:SetBank("mixed_gem")
     inst.AnimState:SetBuild("mixed_gem")
     inst.AnimState:PlayAnimation("idle")
-	inst.AnimState:PushAnimation("idle")
+    inst.AnimState:PushAnimation("idle")
 
     inst:AddTag("cattoy")
-	inst:AddTag("mixed_gem")
+    inst:AddTag("mixed_gem")
 
     inst.entity:SetPristine()
 
@@ -31,11 +31,11 @@ local function fn()
     end
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/mixed_gem.xml"
-	
-	inst:AddComponent("inspectable")
-	
-	inst:AddComponent("tradable")
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/mixed_gem.xml"
+
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("tradable")
 
     MakeHauntableLaunchAndIgnite(inst)
 

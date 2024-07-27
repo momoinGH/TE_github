@@ -13,7 +13,7 @@ local prefabs =
 
 local DAYLIGHT_SEARCH_RANGE = 30
 
-local names = {"f1","f2","f3","f4","f5","f6","f7","f8","f9","f10"}
+local names = { "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10" }
 local ROSE_NAME = "rose"
 local ROSE_CHANCE = 0.01
 
@@ -50,9 +50,9 @@ local function onpickedfn(inst, picker)
         picker:PushEvent("thorns")
     end
 
-	if not inst.planted then
-		TheWorld:PushEvent("beginregrowth", inst)
-	end
+    if not inst.planted then
+        TheWorld:PushEvent("beginregrowth", inst)
+    end
 
     inst:Remove()
 end
@@ -66,30 +66,30 @@ local function testfortransformonload(inst)
 end
 
 local function DieInDarkness(inst)
-    local x,y,z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x,0,z, DAYLIGHT_SEARCH_RANGE, { "daylight", "lightsource" })
-    for i,v in ipairs(ents) do
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, 0, z, DAYLIGHT_SEARCH_RANGE, { "daylight", "lightsource" })
+    for i, v in ipairs(ents) do
         local lightrad = v.Light:GetCalculatedRadius() * .7
-        if v:GetDistanceSqToPoint(x,y,z) < lightrad * lightrad then
+        if v:GetDistanceSqToPoint(x, y, z) < lightrad * lightrad then
             --found light
             return
         end
     end
     --in darkness
     inst:Remove()
-    SpawnPrefab("flower_withered").Transform:SetPosition(x,y,z)
+    SpawnPrefab("flower_withered").Transform:SetPosition(x, y, z)
 end
 
 local function OnIsCaveDay(inst, isday)
     if isday then
-        inst:DoTaskInTime(5.0 + math.random()*5.0, DieInDarkness)
+        inst:DoTaskInTime(5.0 + math.random() * 5.0, DieInDarkness)
     end
 end
 
 local function OnBurnt(inst)
-	if not inst.planted then
-		TheWorld:PushEvent("beginregrowth", inst)
-	end
+    if not inst.planted then
+        TheWorld:PushEvent("beginregrowth", inst)
+    end
     DefaultBurntFn(inst)
 end
 
@@ -106,7 +106,7 @@ local function fn()
 
     inst:AddTag("flower")
     inst:AddTag("cattoy")
-	inst:AddTag("goddess_flower")
+    inst:AddTag("goddess_flower")
 
     inst.entity:SetPristine()
 
@@ -131,10 +131,10 @@ local function fn()
     --inst.components.transformer.transformPrefab = "flower_evil"
 
     MakeSmallBurnable(inst)
-    inst.components.burnable:SetOnBurntFn(OnBurnt)	
+    inst.components.burnable:SetOnBurntFn(OnBurnt)
 
     MakeSmallPropagator(inst)
-	
+
     if TheWorld:HasTag("cave") then
         inst:WatchWorldState("iscaveday", OnIsCaveDay)
     end
@@ -180,5 +180,5 @@ function plantedflowerfn()
 end
 
 return Prefab("goddess_flower", fn, assets, prefabs),
-       Prefab("goddess_flower_rose", rosefn, assets, prefabs),
-       Prefab("planted_goddess_flower", plantedflowerfn, assets, prefabs)
+    Prefab("goddess_flower_rose", rosefn, assets, prefabs),
+    Prefab("planted_goddess_flower", plantedflowerfn, assets, prefabs)

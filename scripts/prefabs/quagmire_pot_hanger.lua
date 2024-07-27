@@ -96,7 +96,7 @@ local function GetContainer(inst)
 end
 
 local function SetDish(inst, doer, dish)
-if inst.components.specialstewer then inst.components.specialstewer:StartWorking() end
+    if inst.components.specialstewer then inst.components.specialstewer:StartWorking() end
     if inst.dish ~= nil and dish == nil then
         local overridebuild = "quagmire_" .. inst.dish.prefab
         inst.dish = nil
@@ -124,14 +124,14 @@ end
 local function OnDishTaken(inst)
     inst:SetDish(nil, nil)
     inst.components.specialstewer:ResetWork()
-	inst.SoundEmitter:KillSound("snd")
+    inst.SoundEmitter:KillSound("snd")
 end
 
 local function OnInstall(inst, target)
     inst.entity:SetParent(target.entity)
 
     target:AddTag("specialstewer_dishtaker")
-    target:AddTag("pot_hanger")	
+    target:AddTag("pot_hanger")
     target.dish = nil
     target.pot = inst
 
@@ -194,7 +194,7 @@ local function itemfn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)
+    MakeInventoryFloatable(inst)
     inst.AnimState:SetBank("quagmire_pot_hanger")
     inst.AnimState:SetBuild("quagmire_pot_hanger")
     inst.AnimState:PlayAnimation("item")

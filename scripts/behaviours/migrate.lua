@@ -6,7 +6,6 @@ end)
 
 
 function Migrate:Visit()
-
     local MIGRATION_HOME_RADIUS_SQ = 8 * 8
     --print("Migrate:Visit for "..tostring(self))
 
@@ -14,7 +13,7 @@ function Migrate:Visit()
 
     if distanceToHome and distanceToHome < MIGRATION_HOME_RADIUS_SQ then
         --print("RJL arrived at migration home!")
---        self.inst.components.locomotor:RemoveSpeedModifier_Mult("migration")
+        --        self.inst.components.locomotor:RemoveSpeedModifier_Mult("migration")
         self.status = FAILED
     end
 
@@ -23,7 +22,7 @@ function Migrate:Visit()
         -- run true, but rainbowjellyfish runspeed is purposefully slower than walking to take advantage of that mode for migration
         self.inst.components.locomotor:GoToPoint(self:GetHomePos())
         self.status = RUNNING
---        self.inst.components.locomotor:AddSpeedModifier_Mult("migration", -0.8)
+        --        self.inst.components.locomotor:AddSpeedModifier_Mult("migration", -0.8)
     elseif self.status == RUNNING then
         if distanceToHome and distanceToHome < MIGRATION_HOME_RADIUS_SQ then
             --print("RJL arrived at migration home!")
@@ -42,9 +41,9 @@ end
 
 function Migrate:GetDistFromHomeSq()
     local homepos = self:GetHomePos()
-	if not homepos then
-		return nil
-	end
+    if not homepos then
+        return nil
+    end
     local pos = Vector3(self.inst.Transform:GetWorldPosition())
     return distsq(homepos, pos)
 end

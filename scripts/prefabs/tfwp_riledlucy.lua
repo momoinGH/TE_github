@@ -67,22 +67,18 @@ end;
 
 
 local function p(f)
-    f.
-        localsounds.SoundEmitter:KillSound("talk")
+    f.localsounds.SoundEmitter:KillSound("talk")
 end;
 
 
 local function q(f)
     local r = f.lucy_classified ~= nil and f.lucy_classified:GetTalkSound() or nil;
     if r ~= nil then
-        f.
-            localsounds.SoundEmitter:KillSound("talk")
-        f.
-            localsounds.SoundEmitter:PlaySound(r)
+        f.localsounds.SoundEmitter:KillSound("talk")
+        f.localsounds.SoundEmitter:PlaySound(r)
     elseif not f.
         localsounds.SoundEmitter:PlayingSound("talk") then
-        f.
-            localsounds.SoundEmitter:PlaySound("dontstarve/characters/woodie/lucytalk_LP", "talk")
+        f.localsounds.SoundEmitter:PlaySound("dontstarve/characters/woodie/lucytalk_LP", "talk")
     end
 end;
 
@@ -146,16 +142,16 @@ end;
 local function N(f, O, F) f.components.aimedprojectile:Throw(f, O, F) end;
 
 
-local function P(f)
-    f:RemoveTag("NOCLICK")
-    f.ismoving = false;
-    f.Physics:Stop()
-    f.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
-    f.Physics:CollidesWith(COLLISION.WORLD)
-    f.Physics:CollidesWith(COLLISION.OBSTACLES)
-    f.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
-    f.components.inventoryitem.canbepickedup = true;
-    f.AnimState:SetMultColour(1, 1, 1, 1)
+local function P(inst)
+    inst:RemoveTag("NOCLICK")
+    inst.ismoving = false;
+    inst.Physics:Stop()
+    inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
+    inst.Physics:CollidesWith(COLLISION.WORLD)
+    inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+    inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+    inst.components.inventoryitem.canbepickedup = true;
+    inst.AnimState:SetMultColour(1, 1, 1, 1)
 end;
 
 
@@ -215,18 +211,18 @@ local function Q(f, R, S)
 end;
 
 
-local function T(f, R)
-    f:DoTaskInTime(0, function(f)
-        if not f:IsOnValidGround() then
-            f.ismoving = false;
-            f.Physics:Stop()
-            f.components.aimedprojectile:Stop()
-            f.AnimState:SetMultColour(0, 0, 0, 0)
-            f.AnimState:PlayAnimation("idle")
-            SpawnPrefab("splash_lavafx").Transform:SetPosition(f:GetPosition():Get())
-            Q(f, R, true)
+local function T(inst, R)
+    inst:DoTaskInTime(0, function(inst)
+        if not inst:IsOnValidGround() then
+            inst.ismoving = false;
+            inst.Physics:Stop()
+            inst.components.aimedprojectile:Stop()
+            inst.AnimState:SetMultColour(0, 0, 0, 0)
+            inst.AnimState:PlayAnimation("idle")
+            SpawnPrefab("splash_lavafx").Transform:SetPosition(inst:GetPosition():Get())
+            Q(inst, R, true)
         end;
-        if f.ismoving then T(f, R) end
+        if inst.ismoving then T(inst, R) end
     end)
 end;
 
@@ -275,7 +271,7 @@ local function Z(f, R, X)
 end;
 
 
-local function _()
+local function fn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -489,6 +485,6 @@ local function ae()
     return inst
 end;
 return
-    CustomPrefab("riledlucy", _, a, d, nil, "images/inventoryimages.xml", "lavaarena_lucy.tex",
+    CustomPrefab("riledlucy", fn, a, d, nil, "images/inventoryimages.xml", "lavaarena_lucy.tex",
         TUNING.FORGE_ITEM_PACK.RILEDLUCY, "swap_lucy_axe", "common_hand"), Prefab("lucyspin_fx", ae, b),
     Prefab("splash_lavafx", a2, c)

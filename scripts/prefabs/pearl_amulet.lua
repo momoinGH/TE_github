@@ -1,34 +1,34 @@
-local assets=
+local assets =
 {
-	Asset("ANIM", "anim/pearl_amulet.zip"),
-	
-	
-	Asset("IMAGE", "images/inventoryimages/pearl_amulet.tex"),
-	Asset("ATLAS", "images/inventoryimages/pearl_amulet.xml"),
+    Asset("ANIM", "anim/pearl_amulet.zip"),
+
+
+    Asset("IMAGE", "images/inventoryimages/pearl_amulet.tex"),
+    Asset("ATLAS", "images/inventoryimages/pearl_amulet.xml"),
 }
 
-local function onequip(inst, owner) 
+local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "pearl_amulet", "swap_body")
-	
+
     if inst.components.fueled then
-        inst.components.fueled:StartConsuming()        
+        inst.components.fueled:StartConsuming()
     end
 end
 
-local function onunequip(inst, owner) 
+local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
-    
-	if inst.components.fueled then
-        inst.components.fueled:StopConsuming()        
+
+    if inst.components.fueled then
+        inst.components.fueled:StopConsuming()
     end
 end
 
 local function fn()
-	local inst = CreateEntity()
-    inst.entity:AddNetwork()    
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-    MakeInventoryPhysics(inst)   
+    local inst = CreateEntity()
+    inst.entity:AddNetwork()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("pearl_amulet")
     inst.AnimState:SetBuild("pearl_amulet")
@@ -39,34 +39,33 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst:AddComponent("inspectable")
-	
+
     inst:AddComponent("equippable")
-	inst.components.equippable.equipslot = EQUIPSLOTS.NECK or EQUIPSLOTS.BODY -- 适配五格
-	inst.components.equippable:SetOnEquip(onequip)
-	inst.components.equippable:SetOnUnequip(onunequip)
-    
---	inst:AddComponent("dapperness")
---	inst.components.dapperness.dapperness = TUNING.DAPPERNESS_MED   
-   
+    inst.components.equippable.equipslot = EQUIPSLOTS.NECK or EQUIPSLOTS.BODY -- 适配五格
+    inst.components.equippable:SetOnEquip(onequip)
+    inst.components.equippable:SetOnUnequip(onunequip)
+
+    --	inst:AddComponent("dapperness")
+    --	inst.components.dapperness.dapperness = TUNING.DAPPERNESS_MED
+
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.foleysound = "dontstarve/movement/foley/jewlery"
-	inst.components.inventoryitem.imagename = "pearl_amulet"
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/pearl_amulet.xml"
-   
+    inst.components.inventoryitem.imagename = "pearl_amulet"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/pearl_amulet.xml"
+
     inst:AddTag("amulet") -- 适配六格
 
-	inst:AddComponent("fueled")
-	inst.components.fueled.fueltype = "MAGIC"
-	inst.components.fueled:InitializeFuelLevel(UW_TUNING.PEARL_AMULET_FUEL)
-	inst.components.fueled:SetDepletedFn(function() inst:Remove() end)
-	
-	inst:AddComponent("oxygensupplier")
-	inst.components.oxygensupplier:SetSupplyRate(UW_TUNING.PEARL_AMULET_RATE)
-	
+    inst:AddComponent("fueled")
+    inst.components.fueled.fueltype = "MAGIC"
+    inst.components.fueled:InitializeFuelLevel(UW_TUNING.PEARL_AMULET_FUEL)
+    inst.components.fueled:SetDepletedFn(function() inst:Remove() end)
+
+    inst:AddComponent("oxygensupplier")
+    inst.components.oxygensupplier:SetSupplyRate(UW_TUNING.PEARL_AMULET_RATE)
+
     return inst
 end
 
-return Prefab( "common/inventory/pearl_amulet", fn, assets)
-
+return Prefab("common/inventory/pearl_amulet", fn, assets)

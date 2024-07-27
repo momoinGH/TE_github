@@ -34,21 +34,23 @@ local function onextinguish(inst)
 end
 
 local function ontakefuel(inst)
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then
-inst.components.burnable:Extinguish()
-end	
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        inst.components.burnable:Extinguish()
+    end
     inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
 end
 
 local function updatefuelrate(inst)
-    inst.components.fueled.rate = TheWorld.state.israining and 1 + TUNING.COLDFIREPIT_RAIN_RATE * TheWorld.state.precipitationrate or 1
+    inst.components.fueled.rate = TheWorld.state.israining and
+    1 + TUNING.COLDFIREPIT_RAIN_RATE * TheWorld.state.precipitationrate or 1
 end
 
 local function onupdatefueled(inst)
     if inst.components.burnable ~= nil and inst.components.fueled ~= nil then
         updatefuelrate(inst)
-        inst.components.burnable:SetFXLevel(inst.components.fueled:GetCurrentSection(), inst.components.fueled:GetSectionPercent())
+        inst.components.burnable:SetFXLevel(inst.components.fueled:GetCurrentSection(),
+            inst.components.fueled:GetSectionPercent())
     end
 end
 
@@ -68,10 +70,10 @@ local function onbuilt(inst)
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("idle", false)
     inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then
-inst.components.burnable:Extinguish()
-end		
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        inst.components.burnable:Extinguish()
+    end
 end
 
 local SECTION_STATUS =
@@ -93,8 +95,8 @@ local function OnHaunt(inst, haunter)
         inst.components.fueled:DoDelta(TUNING.MED_FUEL)
         inst.components.hauntable.hauntvalue = TUNING.HAUNT_SMALL
         return true
-    --#HAUNTFIX
-    --elseif math.random() <= TUNING.HAUNT_CHANCE_HALF and
+        --#HAUNTFIX
+        --elseif math.random() <= TUNING.HAUNT_CHANCE_HALF and
         --inst.components.workable ~= nil and
         --inst.components.workable:CanBeWorked() then
         --inst.components.workable:WorkedBy(haunter, 1)
@@ -111,13 +113,13 @@ local function OnInit(inst)
 end
 
 local function OnSave(inst, data)
-	data._has_debuffable = inst.components.debuffable ~= nil 
+    data._has_debuffable = inst.components.debuffable ~= nil
 end
 
 local function OnPreLoad(inst, data)
-	if data ~= nil and data._has_debuffable then
-		inst:AddComponent("debuffable")
-	end
+    if data ~= nil and data._has_debuffable then
+        inst:AddComponent("debuffable")
+    end
 end
 
 local function fn()
@@ -141,8 +143,8 @@ local function fn()
     inst:AddTag("wildfireprotected")
     inst:AddTag("blueflame")
 
-	-- for storytellingprop component
-	inst:AddTag("storytellingprop")
+    -- for storytellingprop component
+    inst:AddTag("storytellingprop")
 
     MakeObstaclePhysics(inst, .3)
 
@@ -194,13 +196,13 @@ local function fn()
 
     inst:DoTaskInTime(0, OnInit)
 
-	inst.OnSave = OnSave
+    inst.OnSave = OnSave
     inst.OnPreLoad = OnPreLoad
-    
-    inst.restart_firepit = function( inst )
+
+    inst.restart_firepit = function(inst)
         local fuel_percent = inst.components.fueled:GetPercent()
         inst.components.fueled:MakeEmpty()
-        inst.components.fueled:SetPercent( fuel_percent )
+        inst.components.fueled:SetPercent(fuel_percent)
     end
 
     return inst

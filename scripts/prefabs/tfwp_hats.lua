@@ -58,7 +58,7 @@ local function DoPeriodicHeal(inst)
     end
 end
 
-local onequipfns = 
+local onequipfns =
 {
     healinggarland = function(inst, owner)
         OnEqipCrown(inst, owner)
@@ -68,7 +68,7 @@ local onequipfns =
     end,
 }
 
-local onunequipfns = 
+local onunequipfns =
 {
     healinggarland = function(inst, owner)
         OnUneqipCrown(inst, owner)
@@ -81,8 +81,8 @@ local onunequipfns =
 
 local function MakeHat(name, data)
     local build = data.build
-    
-    local assets = 
+
+    local assets =
     {
         Asset("ANIM", "anim/hat_" .. build .. ".zip"),
     }
@@ -95,7 +95,7 @@ local function MakeHat(name, data)
         inst.entity:AddNetwork()
 
         MakeInventoryPhysics(inst)
-		MakeInventoryFloatable(inst)	
+        MakeInventoryFloatable(inst)
 
         inst.AnimState:SetBank(build .. "hat")
         inst.AnimState:SetBuild("hat_" .. build)
@@ -137,49 +137,49 @@ local function MakeHat(name, data)
             inst:AddComponent("armor")
             inst.components.armor:InitCondition(data.armor[1] or 1000, data.armor[2] or 0.5)
         end
-		
-		
-		if name == "lightdamager" then	
-        inst.components.equippable:AddDamageTypeBuff(false,DAMAGETYPES.PHYSICAL,"barbedhelm",0.1)		
-		end
 
-		if name == "strongdamager" then	
-        inst.components.equippable:AddDamageTypeBuff(false,DAMAGETYPES.PHYSICAL,"noxhelm",0.15)		
-		end
 
-		if name == "feathercrown" then
-		inst.components.equippable.walkspeedmult = 1.2
-		end
-		
-		if name == "recharger" then
-		inst.components.equippable:AddUniqueBuff({cooldown_mult=-0.20})
-		end
-		
-		if name == "healingflower" then
-		inst.components.equippable:AddUniqueBuff({heal_recieved_mult=0.25})
-		end
-		
-		if name == "tiaraflowerpetals" then
-		inst.components.equippable:AddUniqueBuff({heal_dealt_mult=0.2})
-		end
+        if name == "lightdamager" then
+            inst.components.equippable:AddDamageTypeBuff(false, DAMAGETYPES.PHYSICAL, "barbedhelm", 0.1)
+        end
 
-		if name == "eyecirclet" then
-        inst.components.equippable:AddDamageTypeBuff(false,DAMAGETYPES.MAGIC,"clairvoyantcrown",0.25)
-		inst.components.equippable.walkspeedmult = 1.1
-		inst.components.equippable:AddUniqueBuff({cooldown_mult=-0.20})		
-		end			
+        if name == "strongdamager" then
+            inst.components.equippable:AddDamageTypeBuff(false, DAMAGETYPES.PHYSICAL, "noxhelm", 0.15)
+        end
 
-		if name == "crowndamager" then
-        inst.components.equippable:AddDamageTypeBuff(false,DAMAGETYPES.PHYSICAL,"resplendentnoxhelm",0.15)		
-		inst.components.equippable.walkspeedmult = 1.1
-		inst.components.equippable:AddUniqueBuff({cooldown_mult=-0.20})		
-		end
-		
-		if name == "healinggarland" then
-		inst.components.equippable.walkspeedmult = 1.1
-		inst.components.equippable:AddUniqueBuff({cooldown_mult=-0.20})		
-		end			
-		
+        if name == "feathercrown" then
+            inst.components.equippable.walkspeedmult = 1.2
+        end
+
+        if name == "recharger" then
+            inst.components.equippable:AddUniqueBuff({ cooldown_mult = -0.20 })
+        end
+
+        if name == "healingflower" then
+            inst.components.equippable:AddUniqueBuff({ heal_recieved_mult = 0.25 })
+        end
+
+        if name == "tiaraflowerpetals" then
+            inst.components.equippable:AddUniqueBuff({ heal_dealt_mult = 0.2 })
+        end
+
+        if name == "eyecirclet" then
+            inst.components.equippable:AddDamageTypeBuff(false, DAMAGETYPES.MAGIC, "clairvoyantcrown", 0.25)
+            inst.components.equippable.walkspeedmult = 1.1
+            inst.components.equippable:AddUniqueBuff({ cooldown_mult = -0.20 })
+        end
+
+        if name == "crowndamager" then
+            inst.components.equippable:AddDamageTypeBuff(false, DAMAGETYPES.PHYSICAL, "resplendentnoxhelm", 0.15)
+            inst.components.equippable.walkspeedmult = 1.1
+            inst.components.equippable:AddUniqueBuff({ cooldown_mult = -0.20 })
+        end
+
+        if name == "healinggarland" then
+            inst.components.equippable.walkspeedmult = 1.1
+            inst.components.equippable:AddUniqueBuff({ cooldown_mult = -0.20 })
+        end
+
         MakeHauntableLaunch(inst)
 
         inst._baseName = name
@@ -188,20 +188,20 @@ local function MakeHat(name, data)
         return inst
     end
 
-    return Prefab("lavaarena_".. name.. "hat", common, assets)
+    return Prefab("lavaarena_" .. name .. "hat", common, assets)
 end
 
-local hats = 
+local hats =
 {
-    lightdamager = {build = "lightdamager", fueled = TUNING.TOTAL_DAY_TIME * 5},
-    strongdamager = {build = "strongdamager", fueled = TUNING.TOTAL_DAY_TIME * 5},
-    feathercrown = {build = "feathercrown", fueled = TUNING.TOTAL_DAY_TIME * 5},
-    recharger = {build = "recharger", fueled = TUNING.TOTAL_DAY_TIME * 5},
-    healingflower = {build = "healingflower", perish = TUNING.TOTAL_DAY_TIME * 3},
-    tiaraflowerpetals = {build = "tiaraflowerpetals", perish = TUNING.TOTAL_DAY_TIME * 3},
-    eyecirclet = {build = "eyecirclet", fueled = TUNING.TOTAL_DAY_TIME * 5},
-    crowndamager = {build = "crowndamager", armor = {1500, 0.7}},
-    healinggarland = {build = "healinggarland", perish = TUNING.TOTAL_DAY_TIME * 3},
+    lightdamager = { build = "lightdamager", fueled = TUNING.TOTAL_DAY_TIME * 5 },
+    strongdamager = { build = "strongdamager", fueled = TUNING.TOTAL_DAY_TIME * 5 },
+    feathercrown = { build = "feathercrown", fueled = TUNING.TOTAL_DAY_TIME * 5 },
+    recharger = { build = "recharger", fueled = TUNING.TOTAL_DAY_TIME * 5 },
+    healingflower = { build = "healingflower", perish = TUNING.TOTAL_DAY_TIME * 3 },
+    tiaraflowerpetals = { build = "tiaraflowerpetals", perish = TUNING.TOTAL_DAY_TIME * 3 },
+    eyecirclet = { build = "eyecirclet", fueled = TUNING.TOTAL_DAY_TIME * 5 },
+    crowndamager = { build = "crowndamager", armor = { 1500, 0.7 } },
+    healinggarland = { build = "healinggarland", perish = TUNING.TOTAL_DAY_TIME * 3 },
 }
 
 local ret = {}

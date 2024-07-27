@@ -1,6 +1,6 @@
 local assets =
 {
-	Asset("ANIM", "anim/shipunder.zip"),	
+	Asset("ANIM", "anim/shipunder.zip"),
 	Asset("MINIMAP_IMAGE", "wreck"),
 }
 
@@ -17,7 +17,7 @@ local BOW = 2
 local MIDSHIP = 3
 local STERN = 4
 
-LIMPET_REGROW_TIME =  480*3
+LIMPET_REGROW_TIME = 480 * 3
 
 local anims =
 {
@@ -62,17 +62,17 @@ local anims =
 local sizes =
 {
 	mast = 0.1,
-	bow = 0.9, --1.6,
+	bow = 0.9,  --1.6,
 	midship = 0.9, --1.5,
 	stern = 0.9 --1.5
 }
 
 local sounds =
 {
---	mast = "dontstarve_DLC002/common/graveyard_shipwreck/shipwreck_1",
---	bow = "dontstarve_DLC002/common/graveyard_shipwreck/shipwreck_2",
---	midship = "dontstarve_DLC002/common/graveyard_shipwreck/shipwreck_3",
---	stern = "dontstarve_DLC002/common/graveyard_shipwreck/shipwreck_4"
+	--	mast = "dontstarve_DLC002/common/graveyard_shipwreck/shipwreck_1",
+	--	bow = "dontstarve_DLC002/common/graveyard_shipwreck/shipwreck_2",
+	--	midship = "dontstarve_DLC002/common/graveyard_shipwreck/shipwreck_3",
+	--	stern = "dontstarve_DLC002/common/graveyard_shipwreck/shipwreck_4"
 }
 
 local function makeemptyfn(inst)
@@ -112,14 +112,14 @@ local function onhammered(inst, worker)
 	if inst:HasTag("fire") and inst.components.burnable then
 		inst.components.burnable:Extinguish()
 	end
-	
+
 	local ghost = SpawnPrefab("pirateghost")
 	if ghost then
-	local pos = Point(inst.Transform:GetWorldPosition())
-	ghost.Transform:SetPosition(pos.x - .3, pos.y, pos.z - .3)
+		local pos = Point(inst.Transform:GetWorldPosition())
+		ghost.Transform:SetPosition(pos.x - .3, pos.y, pos.z - .3)
 	end
-	
---	inst.components.lootdropper:DropLoot()
+
+	--	inst.components.lootdropper:DropLoot()
 	SpawnPrefab("collapse_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
 	inst:Remove()
@@ -127,10 +127,10 @@ end
 
 local function settype(inst, wrecktype)
 	if type(wrecktype) == "number" or wrecktype == "random" then
-		local types = {"mast", "bow", "midship", "stern"}
+		local types = { "mast", "bow", "midship", "stern" }
 		inst.wrecktype = types[math.random(1, #types)]
 	elseif wrecktype == "hull" then
-		local hulls = {"bow", "midship", "stern"}
+		local hulls = { "bow", "midship", "stern" }
 		inst.wrecktype = hulls[math.random(1, #hulls)]
 	else
 		inst.wrecktype = wrecktype
@@ -178,7 +178,7 @@ local function onload(inst, data)
 end
 
 local function onwake(inst)
---	inst.SoundEmitter:PlaySound(sounds[inst.wrecktype], "amb")
+	--	inst.SoundEmitter:PlaySound(sounds[inst.wrecktype], "amb")
 end
 
 local function onsleep(inst)
@@ -186,34 +186,34 @@ local function onsleep(inst)
 end
 
 local function wreckfn2(Sim)
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
-	local minimap  =inst.entity:AddMiniMapEntity()
-    inst.entity:AddNetwork()
+	local inst    = CreateEntity()
+	local trans   = inst.entity:AddTransform()
+	local anim    = inst.entity:AddAnimState()
+	local sound   = inst.entity:AddSoundEmitter()
+	local minimap = inst.entity:AddMiniMapEntity()
+	inst.entity:AddNetwork()
 
 	anim:SetBank("shipwreck")
 	anim:SetBuild("shipunder")
-	
+
 	inst.AnimState:OverrideSymbol("ripple_bg", "shipwreck", "")
 	inst.AnimState:OverrideSymbol("ripple_sml", "shipwreck", "")
 	inst.AnimState:OverrideSymbol("pieces_shdw", "shipwreck", "")
-	
-	
-	inst:AddTag("ignorewalkableplatforms")		
-	MakeWaterObstaclePhysics(inst, 0.1, 2, 1.25)	
+
+
+	inst:AddTag("ignorewalkableplatforms")
+	MakeWaterObstaclePhysics(inst, 0.1, 2, 1.25)
 
 	inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
-	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+
 	minimap:SetIcon("wreck.png")
 
 	inst:AddComponent("pickable")
---	inst.components.pickable.picksound = "dontstarve_DLC002/common/limpet_harvest"
+	--	inst.components.pickable.picksound = "dontstarve_DLC002/common/limpet_harvest"
 	inst.components.pickable:SetUp("limpets", LIMPET_REGROW_TIME)
 	inst.components.pickable.getregentimefn = getregentimefn
 	inst.components.pickable.onpickedfn = onpickedfn
@@ -230,7 +230,7 @@ local function wreckfn2(Sim)
 	inst.components.workable:SetOnFinishCallback(onhammered)
 
 	inst:AddComponent("inspectable")
---	inst:AddComponent("waveobstacle")
+	--	inst:AddComponent("waveobstacle")
 
 	inst:AddComponent("lootdropper")
 	inst.components.lootdropper:SetLoot("boards")
@@ -249,4 +249,4 @@ local function wreckfn2(Sim)
 	return inst
 end
 
-return Prefab( "shipwrecked/obstacle/wreckunderwater", wreckfn2, assets, prefabs)
+return Prefab("shipwrecked/obstacle/wreckunderwater", wreckfn2, assets, prefabs)

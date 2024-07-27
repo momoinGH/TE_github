@@ -2,26 +2,26 @@ require "prefabutil"
 
 local assets =
 {
-	Asset("ANIM", "anim/teepee.zip"),
+    Asset("ANIM", "anim/teepee.zip"),
 }
 
 local prefabs =
 {
     "tikiman",
-	"goldnugget",
+    "goldnugget",
     "collapse_small",
 }
 
 local function ReturnChildren(inst)
-	for k,child in pairs(inst.components.childspawner.childrenoutside) do
-		if child.components.homeseeker then
-			child.components.homeseeker:GoHome()
-		end
-		child:PushEvent("gohome")
-	end
+    for k, child in pairs(inst.components.childspawner.childrenoutside) do
+        if child.components.homeseeker then
+            child.components.homeseeker:GoHome()
+        end
+        child:PushEvent("gohome")
+    end
     if not inst.task then
-        inst.task = inst:DoTaskInTime(math.random(60, 120), function() 
-            inst.task = nil 
+        inst.task = inst:DoTaskInTime(math.random(60, 120), function()
+            inst.task = nil
             inst:PushEvent("safetospawn")
         end)
     end
@@ -38,41 +38,41 @@ local function ongohome(inst, child)
     end
 end
 local function fn()
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
+    local inst = CreateEntity()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-	
-    MakeObstaclePhysics(inst, 1)  
 
-	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetIcon( "tent.png" )
-	
+    MakeObstaclePhysics(inst, 1)
+
+    local minimap = inst.entity:AddMiniMapEntity()
+    minimap:SetIcon("tent.png")
+
     inst:AddTag("structure")
     anim:SetBank("tent")
     anim:SetBuild("teepee")
     anim:PlayAnimation("idle", true)
-	
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
-    end	
+    end
 
-	inst:AddComponent( "childspawner" )
-	inst.components.childspawner:SetRegenPeriod(120)
-	inst.components.childspawner:SetSpawnPeriod(30)
-	inst.components.childspawner:SetMaxChildren(math.random(2,3))
-	--inst.components.childspawner:StartRegen()
-	inst.components.childspawner.childname = "tikiman"
+    inst:AddComponent("childspawner")
+    inst.components.childspawner:SetRegenPeriod(120)
+    inst.components.childspawner:SetSpawnPeriod(30)
+    inst.components.childspawner:SetMaxChildren(math.random(2, 3))
+    --inst.components.childspawner:StartRegen()
+    inst.components.childspawner.childname = "tikiman"
     inst.components.childspawner:StartSpawning()
     inst.components.childspawner.ongohome = ongohome
-	
-	MakeLargeBurnable(inst, nil, nil, true)
-	MakeLargePropagator(inst)
+
+    MakeLargeBurnable(inst, nil, nil, true)
+    MakeLargePropagator(inst)
 
     inst:AddComponent("inspectable")
-	return inst
+    return inst
 end
 
-return Prefab( "common/objects/teepee", fn, assets, prefabs)
+return Prefab("common/objects/teepee", fn, assets, prefabs)

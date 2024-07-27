@@ -8,14 +8,14 @@ local wall_prefabs =
 local assets =
 {
     Asset("ANIM", "anim/quagmire_key.zip"),
-} 
+}
 
 local function CalcRotationEnum(rot, isdoor)
     return math.floor((math.floor(rot + 0.5) / 45) % (isdoor and 8 or 4))
 end
 
 local function CalcFacingAngle(rot, isdoor)
-    return CalcRotationEnum(rot, isdoor) * 45 
+    return CalcRotationEnum(rot, isdoor) * 45
 end
 
 local function IsNarrow(inst)
@@ -35,8 +35,8 @@ end
 
 local function GetAnimName(inst, basename)
     return basename
-        ..(IsSwingRight(inst) and "right" or "")
-        ..(IsOpen(inst) and "_open" or "")
+        .. (IsSwingRight(inst) and "right" or "")
+        .. (IsOpen(inst) and "_open" or "")
 end
 
 local function GetAnimState(inst)
@@ -108,7 +108,7 @@ local function FindPairedDoor(inst)
     search_x = x + (swingright and search_x or -search_x)
     search_y = z + (swingright and -search_y or search_y)
 
-    local other_door = TheSim:FindEntities(search_x,0,search_y, 0.25, {"door"})[1]
+    local other_door = TheSim:FindEntities(search_x, 0, search_y, 0.25, { "door" })[1]
     if other_door then
         local opposite_swing = swingright ~= IsSwingRight(other_door)
         local opposite_rotation = inst.Transform:GetRotation() ~= other_door.Transform:GetRotation()
@@ -120,7 +120,7 @@ end
 
 local function GetNeighbors(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    return TheSim:FindEntities(x,0,z, 1.5, {"wall"})
+    return TheSim:FindEntities(x, 0, z, 1.5, { "wall" })
 end
 
 local function SetOffset(inst, offset)
@@ -167,9 +167,9 @@ local function _calcdooroffset(inst, neighbors)
     local search_x = -math.sin(rot / RADIANS) * 1.2
     local search_y = math.cos(rot / RADIANS) * 1.2
 
-    local walls = TheSim:FindEntities(x + search_x,0, z - search_y, 0.25, {"wall"}, {"alignwall"})
+    local walls = TheSim:FindEntities(x + search_x, 0, z - search_y, 0.25, { "wall" }, { "alignwall" })
     if #walls == 0 then
-        walls = TheSim:FindEntities(x - search_x,0, z + search_y, 0.25, {"wall"}, {"alignwall"})
+        walls = TheSim:FindEntities(x - search_x, 0, z + search_y, 0.25, { "wall" }, { "alignwall" })
     end
     return #walls > 0
 end
@@ -191,7 +191,7 @@ local function RefreshDoorOffset(inst, neighbors)
     if otherdoor and do_offset == false then
         do_offset = _calcdooroffset(otherdoor)
     end
-        
+
     if inst.offsetdoor ~= do_offset then
         inst.offsetdoor = do_offset
         ApplyDoorOffset(inst)
@@ -225,12 +225,12 @@ local function FixUpFenceOrientation(inst, deployedrotation) -- rotates the plac
             local x1, y1, z1 = neighbor.Transform:GetWorldPosition()
             local rot_to_neighbor = math.atan2(x - x1, z - z1) * RADIANS
             local rot = CalcFacingAngle(rot_to_neighbor, inst.isdoor)
-            
+
             if inst.isdoor then
                 if Vector3(x - x1, 0, z - z1):Dot(TheCamera:GetRightVec()) < 0 then
                     rot = rot + 180
                 end
-                
+
                 if neighbor.isdoor then
                     if CalcRotationEnum(neighbor.Transform:GetRotation(), false) == CalcRotationEnum(rot, false) then
                         rot = neighbor.Transform:GetRotation()
@@ -358,7 +358,7 @@ local function getdooractionstring(inst)
 end
 
 local function lockabledoor_displaynamefn(inst)
-    return not inst._isunlocked:value() and STRINGS.NAMES[string.upper(inst.prefab.."_locked")] or nil
+    return not inst._isunlocked:value() and STRINGS.NAMES[string.upper(inst.prefab .. "_locked")] or nil
 end
 
 local function lockabledoor_getstatus(inst)
@@ -405,7 +405,7 @@ local function onload(inst, data)
         inst.offsetdoor = data.offsetdoor
 
         if inst._isswingright ~= nil then
-            SetIsSwingRight(inst, data.swingright or (data.doorpairside == 2)) -- data.doorpairside is deprecated v2, swingright is v3 
+            SetIsSwingRight(inst, data.swingright or (data.doorpairside == 2)) -- data.doorpairside is deprecated v2, swingright is v3
         end
 
         local rotation = 0
@@ -413,7 +413,7 @@ local function onload(inst, data)
             -- very old style of save data. updates save data to v2 format, safe to remove this when we go out of the beta branch
             rotation = data.rotation - 90
         elseif data.rot ~= nil then
-            rotation = data.rot*45
+            rotation = data.rot * 45
         end
         SetOrientation(inst, rotation)
 
@@ -429,17 +429,17 @@ local function MakeWall(name, builds, isdoor, klaussackkeyid)
     local assets, custom_wall_prefabs
 
     if isdoor then
-        custom_wall_prefabs = { name.."_anim" }
+        custom_wall_prefabs = { name .. "_anim" }
         for i, v in ipairs(wall_prefabs) do
             table.insert(custom_wall_prefabs, v)
         end
     else
         assets =
         {
-            Asset("ANIM", "anim/"..builds.wide..".zip"),
+            Asset("ANIM", "anim/" .. builds.wide .. ".zip"),
         }
         if builds.narrow then
-            table.insert(assets, Asset("ANIM", "anim/"..builds.narrow..".zip"))
+            table.insert(assets, Asset("ANIM", "anim/" .. builds.narrow .. ".zip"))
         end
     end
 
@@ -464,10 +464,10 @@ local function MakeWall(name, builds, isdoor, klaussackkeyid)
         if isdoor then
             inst.isdoor = true
             inst:AddTag("door")
-            inst._isopen = net_bool(inst.GUID, name.."._open", "doorstatedirty")
-            inst._isswingright = net_bool(inst.GUID, name.."._swingright", "doorstatedirty")
+            inst._isopen = net_bool(inst.GUID, name .. "._open", "doorstatedirty")
+            inst._isswingright = net_bool(inst.GUID, name .. "._swingright", "doorstatedirty")
             if klaussackkeyid ~= nil then
-                inst._isunlocked = net_bool(inst.GUID, name.."._unlocked")
+                inst._isunlocked = net_bool(inst.GUID, name .. "._unlocked")
                 inst.displaynamefn = lockabledoor_displaynamefn
             end
             inst.GetActivateVerb = getdooractionstring
@@ -499,7 +499,7 @@ local function MakeWall(name, builds, isdoor, klaussackkeyid)
         inst:AddComponent("inspectable")
 
         if isdoor then
-            inst.dooranim = SpawnPrefab(name.."_anim")
+            inst.dooranim = SpawnPrefab(name .. "_anim")
             inst.dooranim.entity:SetParent(inst.entity)
             inst.highlightforward = inst.dooranim
             if klaussackkeyid ~= nil then
@@ -545,10 +545,10 @@ end
 local function MakeWallAnim(name, builds, isdoor)
     local assets =
     {
-        Asset("ANIM", "anim/"..builds.wide..".zip"),
+        Asset("ANIM", "anim/" .. builds.wide .. ".zip"),
     }
     if builds.narrow then
-        table.insert(assets, Asset("ANIM", "anim/"..builds.narrow..".zip"))
+        table.insert(assets, Asset("ANIM", "anim/" .. builds.narrow .. ".zip"))
     end
 
     local function fn()
@@ -600,7 +600,7 @@ end
 local function MakeInvItem(name, placement, animdata, isdoor)
     local assets =
     {
-        Asset("ANIM", "anim/"..animdata..".zip"),
+        Asset("ANIM", "anim/" .. animdata .. ".zip"),
     }
     local item_prefabs =
     {
@@ -608,8 +608,8 @@ local function MakeInvItem(name, placement, animdata, isdoor)
     }
 
     local function ondeploywall(inst, pt, deployer, rot)
-        local wall = SpawnPrefab(placement) 
-        if wall ~= nil then 
+        local wall = SpawnPrefab(placement)
+        if wall ~= nil then
             local x = math.floor(pt.x) + .5
             local z = math.floor(pt.z) + .5
 
@@ -705,7 +705,7 @@ local function MakeWallPlacer(placer, placement, builds, isdoor)
         builds.wide,
         builds.wide,
         not isdoor and "idle" or nil,
-        nil, nil, true, nil, 0, "eight", 
+        nil, nil, true, nil, 0, "eight",
         function(inst)
             inst.components.placer.onupdatetransform = placerupdate
             inst.builds = builds
@@ -720,63 +720,63 @@ local function MakeWallPlacer(placer, placement, builds, isdoor)
 end
 
 local function fnkey(Sim)
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	MakeInventoryPhysics(inst)
-	inst.entity:AddNetwork()
+    local inst = CreateEntity()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    MakeInventoryPhysics(inst)
+    inst.entity:AddNetwork()
 
     inst.AnimState:SetBank("quagmire_key")
     inst.AnimState:SetBuild("quagmire_key")
     inst.AnimState:PlayAnimation("park_key") --safe_key
 
-	inst.entity:SetPristine()
+    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst:AddComponent("inspectable")	
-	inst:AddComponent("tradable")
-	inst:AddComponent("inventoryitem")
-	
-	inst:AddComponent("klaussackkey")
+
+    inst:AddComponent("inspectable")
+    inst:AddComponent("tradable")
+    inst:AddComponent("inventoryitem")
+
+    inst:AddComponent("klaussackkey")
     inst.components.klaussackkey.keytype = "quagmire_key_park"
 
-	return inst
+    return inst
 end
 
 local function fnkey1(Sim)
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	MakeInventoryPhysics(inst)
-	inst.entity:AddNetwork()
+    local inst = CreateEntity()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    MakeInventoryPhysics(inst)
+    inst.entity:AddNetwork()
 
     inst.AnimState:SetBank("quagmire_key")
     inst.AnimState:SetBuild("quagmire_key")
     inst.AnimState:PlayAnimation("safe_key")
 
-	inst.entity:SetPristine()
+    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst:AddComponent("inspectable")	
-	inst:AddComponent("tradable")
-	inst:AddComponent("inventoryitem")
-	
-	inst:AddComponent("klaussackkey")
+
+    inst:AddComponent("inspectable")
+    inst:AddComponent("tradable")
+    inst:AddComponent("inventoryitem")
+
+    inst:AddComponent("klaussackkey")
     inst.components.klaussackkey.keytype = "quagmire_key"
 
-	return inst
+    return inst
 end
 
 
-return Prefab( "quagmire_key_park", fnkey, assets),
-	   Prefab( "quagmire_key", fnkey1, assets),
-	MakeWall("quagmire_park_gate", {wide="quagmire_park_gate"}, true, "quagmire_key_park"),
-	MakeWallAnim("quagmire_park_gate_anim", {wide="quagmire_park_gate"}, true)
+return Prefab("quagmire_key_park", fnkey, assets),
+    Prefab("quagmire_key", fnkey1, assets),
+    MakeWall("quagmire_park_gate", { wide = "quagmire_park_gate" }, true, "quagmire_key_park"),
+    MakeWallAnim("quagmire_park_gate_anim", { wide = "quagmire_park_gate" }, true)

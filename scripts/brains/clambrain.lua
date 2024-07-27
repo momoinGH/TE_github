@@ -20,17 +20,16 @@ local function GetFaceTargetFn(inst)
 end
 
 local function KeepFaceTargetFn(inst, target)
-    return inst:GetDistanceSqToInst(target) <= KEEP_FACE_DIST*KEEP_FACE_DIST and not target:HasTag("notarget")
+    return inst:GetDistanceSqToInst(target) <= KEEP_FACE_DIST * KEEP_FACE_DIST and not target:HasTag("notarget")
 end
 
 function ClamBrain:OnStart()
-
     local root = PriorityNode(
-    {
-        UseShield(self.inst, DAMAGE_UNTIL_SHIELD, SHIELD_TIME, AVOID_PROJECTILE_ATTACKS),
-		FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
-    }, .25)
-        
+        {
+            UseShield(self.inst, DAMAGE_UNTIL_SHIELD, SHIELD_TIME, AVOID_PROJECTILE_ATTACKS),
+            FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+        }, .25)
+
     self.bt = BT(self.inst, root)
 end
 

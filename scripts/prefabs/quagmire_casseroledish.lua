@@ -11,14 +11,14 @@ local function OnEntityReplicated(inst)
 end
 
 local function MakePot(suffix, numslots)
-    local name = "casseroledish"..suffix
+    local name = "casseroledish" .. suffix
     local animname = "quagmire_" .. name
     local assets =
     {
         Asset("ANIM", "anim/quagmire_grill.zip"),
-        Asset("ANIM", "anim/"..animname..".zip"),
-        Asset("ANIM", "anim/quagmire_ui_pot_1x"..tostring(numslots)..".zip"),
-        Asset("INV_IMAGE", animname.."_overcooked"),
+        Asset("ANIM", "anim/" .. animname .. ".zip"),
+        Asset("ANIM", "anim/quagmire_ui_pot_1x" .. tostring(numslots) .. ".zip"),
+        Asset("INV_IMAGE", animname .. "_overcooked"),
     }
 
     local function fn()
@@ -30,7 +30,7 @@ local function MakePot(suffix, numslots)
         inst.entity:AddNetwork()
 
         MakeInventoryPhysics(inst)
-		MakeInventoryFloatable(inst)
+        MakeInventoryFloatable(inst)
         inst.AnimState:SetBank(animname)
         inst.AnimState:SetBuild(animname)
         inst.AnimState:PlayAnimation("idle")

@@ -23,8 +23,9 @@ local function NumInDiapason(num, min, max)
 end
 
 local function EatFoodAction(inst)
-	local notags = {"FX", "NOCLICK", "DECOR", "INLIMBO"}
-	local target = FindEntity(inst, SEE_DIST, function(item) return inst.components.eater:CanEat(item) and item:IsOnValidGround() end, nil, notags)
+	local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
+	local target = FindEntity(inst, SEE_DIST,
+		function(item) return inst.components.eater:CanEat(item) and item:IsOnValidGround() end, nil, notags)
 	if target then
 		return BufferedAction(inst, target, ACTIONS.EAT)
 	end
@@ -44,49 +45,47 @@ local function GetWanderPoint(inst)
 
 	if target then
 		return target:GetPosition()
-	end 
+	end
 end
 
 local function GoHomeAction(inst)
-    if inst.components.homeseeker and 
-       inst.components.homeseeker.home and 
-	   inst.components.homeseeker.home:IsValid() 
+	if inst.components.homeseeker and
+		inst.components.homeseeker.home and
+		inst.components.homeseeker.home:IsValid()
 	then
-    	return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
-    end
+		return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
+	end
 end
 
-local function ShouldCharge(inst) 
-if inst:HasTag("nohat") then return false end
+local function ShouldCharge(inst)
+	if inst:HasTag("nohat") then return false end
 	local combat = inst.components.combat
-	return combat ~= nil and combat.target ~= nil 
+	return combat ~= nil and combat.target ~= nil
 		and not inst.sg:HasStateTag("attack")
 		and NumInDiapason(inst:GetDistanceSqToInst(combat.target), minChargeRange, maxChargeRange)
 		and GetTime() - inst.chargeLastTime >= chargeRecharge
 end
 
 function HattyPiggy_TFCBrain:OnStart()
-	
 	local root = PriorityNode(
-	{
-		WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst) ),
-		WhileNode(function() return ShouldCharge(self.inst) end, "Charge",
-			ActionNode(function() self.inst:PushEvent("docharge", self.inst.components.combat.target) end)),
-		ChaseAndAttack(self.inst, 30),
+		{
+			WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+			WhileNode(function() return ShouldCharge(self.inst) end, "Charge",
+				ActionNode(function() self.inst:PushEvent("docharge", self.inst.components.combat.target) end)),
+			ChaseAndAttack(self.inst, 30),
 
---		DoAction(self.inst, EatFoodAction, "EatFood", true ),
+			--		DoAction(self.inst, EatFoodAction, "EatFood", true ),
 
-		WhileNode( function() return TheWorld.state.iscavenight end, "Home Night",
-			DoAction(self.inst, GoHomeAction, "Go Home", true )),
-		WhileNode(function() return GetHome(self.inst) end, "Home Wander", 
-			Wander(self.inst, GetHomePos, 8) ),
-		
-		Wander(self.inst, GetWanderPoint, 20),
+			WhileNode(function() return TheWorld.state.iscavenight end, "Home Night",
+				DoAction(self.inst, GoHomeAction, "Go Home", true)),
+			WhileNode(function() return GetHome(self.inst) end, "Home Wander",
+				Wander(self.inst, GetHomePos, 8)),
 
-	}, .25)
-	
+			Wander(self.inst, GetWanderPoint, 20),
+
+		}, .25)
+
 	self.bt = BT(self.inst, root)
-	
 end
 
 return HattyPiggy_TFCBrain

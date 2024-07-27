@@ -1,14 +1,14 @@
 local assets =
 {
     Asset("ANIM", "anim/peachy_poop.zip"),
-	Asset("ATLAS", "images/inventoryimages/peachy_poop.xml"),
-	Asset("SCRIPT", "scripts/prefabs/fertilizer_nutrient_defs.lua"),	
+    Asset("ATLAS", "images/inventoryimages/peachy_poop.xml"),
+    Asset("SCRIPT", "scripts/prefabs/fertilizer_nutrient_defs.lua"),
 }
 local prefabs =
 {
     "flies",
     "poopcloud",
-    "gridplacer_farmablesoil",	
+    "gridplacer_farmablesoil",
 }
 
 local FERTILIZER_DEFS = require("prefabs/fertilizer_nutrient_defs").FERTILIZER_DEFS
@@ -66,45 +66,45 @@ local function fn()
     inst.AnimState:SetBank("peachy_poop")
     inst.AnimState:SetBuild("peachy_poop")
     inst.AnimState:PlayAnimation("idle")
-	
+
     MakeInventoryFloatable(inst, "med", 0.1, 0.73)
     MakeDeployableFertilizerPristine(inst)
 
-    inst:AddTag("fertilizerresearchable")	
-	inst:AddTag("poopy")	
-    inst.GetFertilizerKey = GetFertilizerKey	
-	
+    inst:AddTag("fertilizerresearchable")
+    inst:AddTag("poopy")
+    inst.GetFertilizerKey = GetFertilizerKey
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
-	inst:AddComponent("tradable")
-	
-	inst:AddComponent("inspectable")	
-	
+    inst:AddComponent("tradable")
+
+    inst:AddComponent("inspectable")
+
     inst:AddComponent("inventoryitem")
-  	inst:AddComponent("stackable")	
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/peachy_poop.xml"
+    inst:AddComponent("stackable")
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/peachy_poop.xml"
     inst:AddComponent("fertilizerresearchable")
     inst.components.fertilizerresearchable:SetResearchFn(fertilizerresearchfn)
-	
+
     inst:AddComponent("fertilizer")
-    inst.components.fertilizer.fertilizervalue = TUNING.POOP_FERTILIZE*2
+    inst.components.fertilizer.fertilizervalue = TUNING.POOP_FERTILIZE * 2
     inst.components.fertilizer.soil_cycles = TUNING.POOP_SOILCYCLES
     inst.components.fertilizer.withered_cycles = TUNING.POOP_WITHEREDCYCLES
     inst.components.fertilizer:SetNutrients(TUNING.GUANO_NUTRIENTS)
-	
-    inst:AddComponent("smotherer")	
-	
+
+    inst:AddComponent("smotherer")
+
     inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
     inst.components.inventoryitem:SetOnPickupFn(OnPickup)
-    inst.components.inventoryitem:SetOnPutInInventoryFn(OnPickup)	
-	
-	inst.flies = inst:SpawnChild("flies")
-	
-	inst:AddComponent("fuel")
+    inst.components.inventoryitem:SetOnPutInInventoryFn(OnPickup)
+
+    inst.flies = inst:SpawnChild("flies")
+
+    inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.MED_FUEL
     inst.components.fuel:SetOnTakenFn(FuelTaken)
 

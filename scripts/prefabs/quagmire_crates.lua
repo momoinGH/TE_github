@@ -62,7 +62,7 @@ end
 
 local function MakeCrate(kit)
     local prefabs
-    local name = "quagmire_crate"..(kit ~= nil and ("_"..kit) or "")
+    local name = "quagmire_crate" .. (kit ~= nil and ("_" .. kit) or "")
     if kit ~= nil then
         prefabs =
         {
@@ -84,7 +84,7 @@ local function MakeCrate(kit)
         inst.entity:AddNetwork()
 
         MakeInventoryPhysics(inst)
-		MakeInventoryFloatable(inst)		
+        MakeInventoryFloatable(inst)
 
         inst.AnimState:SetBank("quagmire_crate")
         inst.AnimState:SetBuild("quagmire_crate")

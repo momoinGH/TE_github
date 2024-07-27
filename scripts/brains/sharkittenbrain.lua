@@ -14,15 +14,15 @@ local SEE_FOOD_DIST = 15
 local STOP_RUN_DIST = 10
 local SEE_PLAYER_DIST = 5
 
-local FOOD_TAGS = {"kittenchow"}
-local NO_TAGS = {"FX", "NOCLICK", "DECOR","INLIMBO"}
+local FOOD_TAGS = { "kittenchow" }
+local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
-local function EatFoodAction(inst)  --Look for food to eat.
+local function EatFoodAction(inst) --Look for food to eat.
     local target = nil
     local action = nil
 
     if inst.sg:HasStateTag("busy") and not
-    inst.sg:HasStateTag("wantstoeat") then
+        inst.sg:HasStateTag("wantstoeat") then
         return
     end
 
@@ -30,12 +30,12 @@ local function EatFoodAction(inst)  --Look for food to eat.
     local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, SEE_FOOD_DIST, FOOD_TAGS, NO_TAGS)
 
     if not target then
-        for k,v in pairs(ents) do
+        for k, v in pairs(ents) do
             if v and v:IsOnValidGround() and
-            inst.components.eater:CanEat(v) and
-            v:GetTimeAlive() > 5 and
-            v.components.inventoryitem and not
-            v.components.inventoryitem:IsHeld() then
+                inst.components.eater:CanEat(v) and
+                v:GetTimeAlive() > 5 and
+                v.components.inventoryitem and not
+                v.components.inventoryitem:IsHeld() then
                 target = v
                 break
             end
@@ -43,13 +43,13 @@ local function EatFoodAction(inst)  --Look for food to eat.
     end
 
     if target then
-        local action = BufferedAction(inst,target,ACTIONS.EAT)
+        local action = BufferedAction(inst, target, ACTIONS.EAT)
         return action
     end
 end
 
 local function GetFaceTargetFn(inst)
-    return FindEntity(inst, 5, nil, {"tigershark"})
+    return FindEntity(inst, 5, nil, { "tigershark" })
 end
 
 local function KeepFaceTargetFn(inst, target)
@@ -57,9 +57,9 @@ local function KeepFaceTargetFn(inst, target)
 end
 
 local function GoHomeAction(inst)
-    if inst.components.homeseeker and 
-       inst.components.homeseeker.home and 
-       inst.components.homeseeker.home:IsValid() then
+    if inst.components.homeseeker and
+        inst.components.homeseeker.home and
+        inst.components.homeseeker.home:IsValid() then
         return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
     end
 end
@@ -84,13 +84,13 @@ end)
 
 function SharkittenBrain:OnStart()
     local root =
-    PriorityNode({
-        EventNode(self.inst, "gohome", 
-            DoAction(self.inst, GoHomeAction, "go home", true )),
-        DoAction(self.inst, EatFoodAction),
-        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
-        Wander(self.inst, function() return HomeOffset(self.inst) end, MAX_WANDER_DIST),
-    }, .25)
+        PriorityNode({
+            EventNode(self.inst, "gohome",
+                DoAction(self.inst, GoHomeAction, "go home", true)),
+            DoAction(self.inst, EatFoodAction),
+            FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+            Wander(self.inst, function() return HomeOffset(self.inst) end, MAX_WANDER_DIST),
+        }, .25)
     self.bt = BT(self.inst, root)
 end
 

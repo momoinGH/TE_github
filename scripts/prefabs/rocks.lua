@@ -59,123 +59,124 @@ local prefabs =
     "collapse_small",
 }
 
-SetSharedLootTable( 'rock1',
-{
-    {'rocks',  1.00},
-    {'rocks',  1.00},
-    {'rocks',  1.00},
-    {'nitre',  1.00},
-    {'flint',  1.00},
-    {'nitre',  0.25},
-    {'flint',  0.60},
-})
+SetSharedLootTable('rock1',
+    {
+        { 'rocks', 1.00 },
+        { 'rocks', 1.00 },
+        { 'rocks', 1.00 },
+        { 'nitre', 1.00 },
+        { 'flint', 1.00 },
+        { 'nitre', 0.25 },
+        { 'flint', 0.60 },
+    })
 
-SetSharedLootTable( 'rock2',
-{
-    {'rocks',       1.00},
-    {'rocks',       1.00},
-    {'rocks',       1.00},
-    {'goldnugget',  1.00},
-    {'flint',       1.00},
-    {'goldnugget',  0.25},
-    {'flint',       0.60},
-})
+SetSharedLootTable('rock2',
+    {
+        { 'rocks',      1.00 },
+        { 'rocks',      1.00 },
+        { 'rocks',      1.00 },
+        { 'goldnugget', 1.00 },
+        { 'flint',      1.00 },
+        { 'goldnugget', 0.25 },
+        { 'flint',      0.60 },
+    })
 
-SetSharedLootTable( 'rock_flintless',
-{
-    {'rocks',   1.0},
-    {'rocks',   1.0},
-    {'rocks',   1.0},
-    {'rocks',   1.0},
-    {'rocks',   0.6},
-})
+SetSharedLootTable('rock_flintless',
+    {
+        { 'rocks', 1.0 },
+        { 'rocks', 1.0 },
+        { 'rocks', 1.0 },
+        { 'rocks', 1.0 },
+        { 'rocks', 0.6 },
+    })
 
-SetSharedLootTable( 'rock_flintless_med',
-{
-    {'rocks', 1.0},
-    {'rocks', 1.0},
-    {'rocks', 1.0},
-    {'rocks', 0.4},
-})
+SetSharedLootTable('rock_flintless_med',
+    {
+        { 'rocks', 1.0 },
+        { 'rocks', 1.0 },
+        { 'rocks', 1.0 },
+        { 'rocks', 0.4 },
+    })
 
-SetSharedLootTable( 'rock_flintless_low',
-{
-    {'rocks', 1.0},
-    {'rocks', 1.0},
-    {'rocks', 0.2},
-})
+SetSharedLootTable('rock_flintless_low',
+    {
+        { 'rocks', 1.0 },
+        { 'rocks', 1.0 },
+        { 'rocks', 0.2 },
+    })
 
-SetSharedLootTable( 'rock_moon',
-{
-    {'rocks',           1.00},
-    {'flint',           1.00},
-    {'moonrocknugget',  1.00},
-    {'moonrocknugget',  1.00},
-    {'moonrocknugget',  0.6},
-    {'moonrocknugget',  0.3},
-})
+SetSharedLootTable('rock_moon',
+    {
+        { 'rocks',          1.00 },
+        { 'flint',          1.00 },
+        { 'moonrocknugget', 1.00 },
+        { 'moonrocknugget', 1.00 },
+        { 'moonrocknugget', 0.6 },
+        { 'moonrocknugget', 0.3 },
+    })
 
-SetSharedLootTable( 'rock_moon_shell',
-{
-    {'rocks',           1.00},
-    {'flint',           1.00},
-    {'moonrocknugget',  1.00},
-    {'moonrocknugget',  1.00},
-    {'moonrocknugget',  1.00},
-    {'moonrocknugget',  0.3},
-})
+SetSharedLootTable('rock_moon_shell',
+    {
+        { 'rocks',          1.00 },
+        { 'flint',          1.00 },
+        { 'moonrocknugget', 1.00 },
+        { 'moonrocknugget', 1.00 },
+        { 'moonrocknugget', 1.00 },
+        { 'moonrocknugget', 0.3 },
+    })
 
-SetSharedLootTable( 'rock_moon_glass',
-{
-    {'moonglass',       1.00},
-    {'moonglass',       1.00},
-    {'moonglass',       0.25},
-})
+SetSharedLootTable('rock_moon_glass',
+    {
+        { 'moonglass', 1.00 },
+        { 'moonglass', 1.00 },
+        { 'moonglass', 0.25 },
+    })
 
-SetSharedLootTable( 'rock_petrified_tree',
-{
-    {'rocks',  1.00},
-    {'rocks',  0.75},
-    {'nitre',  0.4},
-    {'flint',  0.25},
-})
-SetSharedLootTable( 'rock_petrified_tree_tall',
-{
-    {'rocks',  1.00},
-    {'rocks',  1.00},
-    {'rocks',  0.35},
-    {'nitre',  0.65},
-    {'flint',  0.75},
-})
-SetSharedLootTable( 'rock_petrified_tree_short',
-{
-    {'rocks',  1.00},    
-    {'rocks',  0.35},
-    {'nitre',  0.25},
-    {'flint',  0.25},
-})
-SetSharedLootTable( 'rock_petrified_tree_old',
-{
-    {'rocks',  0.50},    
-    {'rocks',  0.50},
-    {'nitre',  0.25},
-    {'flint',  0.75},
-})
+SetSharedLootTable('rock_petrified_tree',
+    {
+        { 'rocks', 1.00 },
+        { 'rocks', 0.75 },
+        { 'nitre', 0.4 },
+        { 'flint', 0.25 },
+    })
+SetSharedLootTable('rock_petrified_tree_tall',
+    {
+        { 'rocks', 1.00 },
+        { 'rocks', 1.00 },
+        { 'rocks', 0.35 },
+        { 'nitre', 0.65 },
+        { 'flint', 0.75 },
+    })
+SetSharedLootTable('rock_petrified_tree_short',
+    {
+        { 'rocks', 1.00 },
+        { 'rocks', 0.35 },
+        { 'nitre', 0.25 },
+        { 'flint', 0.25 },
+    })
+SetSharedLootTable('rock_petrified_tree_old',
+    {
+        { 'rocks', 0.50 },
+        { 'rocks', 0.50 },
+        { 'nitre', 0.25 },
+        { 'flint', 0.75 },
+    })
 
 
 local function OnWork(inst, worker, workleft)
-local pt = inst:GetPosition()
-local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.LAWN or tiletype == GROUND.FIELDS or tiletype == GROUND.CHECKEREDLAWN then
-if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
-local x, y, z = inst.Transform:GetWorldPosition()
-local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-local eles = TheSim:FindEntities(x,y,z, 40,{"guard"})
-for k,guardas in pairs(eles) do 
-if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat:SetTarget(worker) end
-end 
-end
-end
+    local pt = inst:GetPosition()
+    local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
+    if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.LAWN or tiletype == GROUND.FIELDS or tiletype == GROUND.CHECKEREDLAWN then
+        if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
+            local x, y, z = inst.Transform:GetWorldPosition()
+            local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
+            local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
+            for k, guardas in pairs(eles) do
+                if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat
+                        :SetTarget(worker) end
+            end
+        end
+    end
 
     if workleft <= 0 then
         local pt = inst:GetPosition()
@@ -187,9 +188,9 @@ end
             fx.Transform:SetPosition(pt.x, pt.y, pt.z)
         end
 
-		if not inst.doNotRemoveOnWorkDone then
-	        inst:Remove()
-		end
+        if not inst.doNotRemoveOnWorkDone then
+            inst:Remove()
+        end
     else
         inst.AnimState:PlayAnimation(
             (workleft < TUNING.ROCKS_MINE / 3 and "low") or
@@ -236,7 +237,7 @@ local function onload(inst, data)
         inst.treeSize = data.treeSize
         --V2C: Note that this will reset workleft as well
         --     Gotta change this if you set workable to savestate
-        setPetrifiedTreeSize(inst) 
+        setPetrifiedTreeSize(inst)
     end
 end
 
@@ -284,22 +285,22 @@ local function baserock_fn(bank, build, anim, minimapicon, tag, multcolour)
         return inst
     end
 
-    inst:AddComponent("lootdropper") 
+    inst:AddComponent("lootdropper")
 
     local workable = inst:AddComponent("workable")
     workable:SetWorkAction(ACTIONS.MINE)
     workable:SetWorkLeft(TUNING.ROCKS_MINE)
     workable:SetOnWorkCallback(OnWork)
-	
+
     multcolour = multcolour or 0.5
     if 0 <= multcolour and multcolour < 1 then
         local colour = multcolour + math.random() * (1.0 - multcolour)
         inst.AnimState:SetMultColour(colour, colour, colour, 1)
-    end	
+    end
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.nameoverride = "ROCK"
-	
+
     MakeSnowCovered(inst)
 
     MakeHauntableWork(inst)
@@ -386,17 +387,17 @@ end
 local function OnRockMoonCapsuleWorkFinished(inst)
     RemovePhysicsColliders(inst)
 
-	local seed = SpawnPrefab("moonrockseed")
-	seed.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    local seed = SpawnPrefab("moonrockseed")
+    seed.Transform:SetPosition(inst.Transform:GetWorldPosition())
     if seed.OnSpawned then
         seed:OnSpawned()
     end
 
-	inst.persists = false
+    inst.persists = false
     inst:AddTag("NOCLICK")
 
-	inst.AnimState:PlayAnimation("break")
-	inst:DoTaskInTime(2, ErodeAway)
+    inst.AnimState:PlayAnimation("break")
+    inst:DoTaskInTime(2, ErodeAway)
 end
 
 local function rock_moon_shell()
@@ -409,8 +410,8 @@ local function rock_moon_shell()
     inst.components.inspectable.nameoverride = "ROCK_MOON"
     inst.components.lootdropper:SetChanceLootTable('rock_moon_shell')
 
-	inst.doNotRemoveOnWorkDone = true
-	inst:ListenForEvent("workfinished", OnRockMoonCapsuleWorkFinished)
+    inst.doNotRemoveOnWorkDone = true
+    inst:ListenForEvent("workfinished", OnRockMoonCapsuleWorkFinished)
 
     return inst
 end
@@ -421,7 +422,7 @@ end
 
 local function set_moonglass_type(inst, new_type)
     inst.rock_type = new_type
-    local anim_name = (inst.rock_type == 1 and "moonglass_rock") or ("moonglass_rock"..tostring(new_type))
+    local anim_name = (inst.rock_type == 1 and "moonglass_rock") or ("moonglass_rock" .. tostring(new_type))
     inst.AnimState:SetBuild(anim_name)
     inst.AnimState:SetBank(anim_name)
 end
@@ -453,7 +454,8 @@ local function rock_moon_glass()
 end
 
 local function rock_petrified_tree_common(size)
-    local inst = baserock_fn("petrified_tree", "petrified_tree", { "petrify_in", "full" }, "petrified_tree.png", "shelter")
+    local inst = baserock_fn("petrified_tree", "petrified_tree", { "petrify_in", "full" }, "petrified_tree.png",
+        "shelter")
 
     inst:SetPrefabName("rock_petrified_tree")
 
@@ -515,4 +517,4 @@ return Prefab("rock1", rock1_fn, rock1_assets, prefabs),
     Prefab("rock_petrified_tree_med", rock_petrified_tree_med, rock_petrified_tree_assets, prefabs),
     Prefab("rock_petrified_tree_tall", rock_petrified_tree_tall, rock_petrified_tree_assets, prefabs),
     Prefab("rock_petrified_tree_short", rock_petrified_tree_short, rock_petrified_tree_assets, prefabs),
-    Prefab("rock_petrified_tree_old", rock_petrified_tree_old, rock_petrified_tree_assets, prefabs)    
+    Prefab("rock_petrified_tree_old", rock_petrified_tree_old, rock_petrified_tree_assets, prefabs)

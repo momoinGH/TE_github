@@ -8,20 +8,20 @@ local prefabs =
 local brain = require "brains/shadow_knightbrain"
 
 local function OnAttacked(inst, data)
-if data.attacker ~= nil then
-    inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.attacker, 30, function(dude)
-        return dude:HasTag("shadowminion2")
-            and not dude.components.health:IsDead()
-            and dude.components.follower ~= nil
-            and dude.components.follower.leader == inst.components.follower.leader
-    end, 10)
-end
+    if data.attacker ~= nil then
+        inst.components.combat:SetTarget(data.attacker)
+        inst.components.combat:ShareTarget(data.attacker, 30, function(dude)
+            return dude:HasTag("shadowminion2")
+                and not dude.components.health:IsDead()
+                and dude.components.follower ~= nil
+                and dude.components.follower.leader == inst.components.follower.leader
+        end, 10)
+    end
 end
 
 local function retargetfn(inst)
-local player = GetClosestInstWithTag("player", inst, 70)
-if player then return inst.components.combat:SetTarget(player) end
+    local player = GetClosestInstWithTag("player", inst, 70)
+    if player then return inst.components.combat:SetTarget(player) end
 end
 
 local function spearfn(inst)
@@ -31,7 +31,7 @@ local function spearfn(inst)
     inst.components.combat:SetDefaultDamage(TUNING.SHADOWWAXWELL_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNING.SHADOWWAXWELL_ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(2, retargetfn) --Look for leader's target.
---    inst.components.combat:SetKeepTargetFunction(keeptargetfn) --Keep attacking while leader is near.
+    --    inst.components.combat:SetKeepTargetFunction(keeptargetfn) --Keep attacking while leader is near.
 
     return inst
 end
@@ -40,67 +40,67 @@ local function nodebrisdmg(inst, amount, overtime, cause, ignore_invincible, aff
     return afflicter ~= nil and afflicter:HasTag("quakedebris")
 end
 
-local armas = 
+local armas =
 {
-"swap_spear",
-"swap_spike",
-"swap_nightmaresword_shadow",
-"swap_hammer",
-"swap_shovel",
-"swap_axe",
-"swap_pickaxe",
-"swap_machete",
-"swap_ham_bat",
+    "swap_spear",
+    "swap_spike",
+    "swap_nightmaresword_shadow",
+    "swap_hammer",
+    "swap_shovel",
+    "swap_axe",
+    "swap_pickaxe",
+    "swap_machete",
+    "swap_ham_bat",
 
 }
 
 local capa =
 {
-"hat_straw",
-"hat_top",
-"hat_beefalo",
-"hat_feather",
-"hat_bee",
-"hat_miner",
-"hat_spider",
-"hat_football",
-"hat_earmuffs",
-"hat_winter",
-"hat_bush",
-"hat_flower",
-"hat_walrus",
-"hat_slurtle",
-"hat_ruins",
-"hat_mole",
-"hat_wathgrithr",
-"hat_ice",
-"hat_rain",
-"hat_catcoon",
-"hat_watermelon",
-"hat_eyebrella",
-"hat_red_mushroom",
-"hat_green_mushroom",
-"hat_blue_mushroom",
-"hat_hive",
-"hat_dragonhead",
-"hat_dragonbody",
-"hat_dragontail",
-"hat_desert",
-"hat_goggles",
-"hat_skeleton",
+    "hat_straw",
+    "hat_top",
+    "hat_beefalo",
+    "hat_feather",
+    "hat_bee",
+    "hat_miner",
+    "hat_spider",
+    "hat_football",
+    "hat_earmuffs",
+    "hat_winter",
+    "hat_bush",
+    "hat_flower",
+    "hat_walrus",
+    "hat_slurtle",
+    "hat_ruins",
+    "hat_mole",
+    "hat_wathgrithr",
+    "hat_ice",
+    "hat_rain",
+    "hat_catcoon",
+    "hat_watermelon",
+    "hat_eyebrella",
+    "hat_red_mushroom",
+    "hat_green_mushroom",
+    "hat_blue_mushroom",
+    "hat_hive",
+    "hat_dragonhead",
+    "hat_dragonbody",
+    "hat_dragontail",
+    "hat_desert",
+    "hat_goggles",
+    "hat_skeleton",
 }
 
 local function MakeMinion(prefab, tool, hat, master_postinit)
-local assets =
+    local assets =
     {
         Asset("ANIM", "anim/waxwell_shadow_mod.zip"),
         Asset("SOUND", "sound/maxwell.fsb"),
     }
-	
+
     local function fn()
         local inst = CreateEntity()
-	
-		
+
+
         inst.entity:AddTransform()
         inst.entity:AddAnimState()
         inst.entity:AddSoundEmitter()
@@ -109,17 +109,17 @@ local assets =
         MakeGhostPhysics(inst, 1, 0.5)
 
         inst.Transform:SetFourFaced(inst)
-		local valoraleatorio = math.random(8,15)/10
-		inst.Transform:SetScale(valoraleatorio, valoraleatorio, valoraleatorio)
+        local valoraleatorio = math.random(8, 15) / 10
+        inst.Transform:SetScale(valoraleatorio, valoraleatorio, valoraleatorio)
 
         inst.AnimState:SetBank("wilson")
         inst.AnimState:SetBuild("waxwell_shadow_mod")
         inst.AnimState:PlayAnimation("idle")
         inst.AnimState:SetMultColour(0, 0, 0, .5)
 
-local tool = armas[math.random(8)]
-local hat = capa[math.random(32)]		
-		
+        local tool = armas[math.random(8)]
+        local hat = capa[math.random(32)]
+
         if tool ~= nil then
             inst.AnimState:OverrideSymbol("swap_object", tool, tool)
             inst.AnimState:Hide("ARM_normal")
@@ -161,13 +161,13 @@ local hat = capa[math.random(32)]
         inst:AddComponent("combat")
         inst.components.combat.hiteffectsymbol = "torso"
         inst.components.combat:SetRange(2)
-		inst.components.health:SetMaxHealth(TUNING.SHADOWWAXWELL_LIFE)
-		inst.components.health:StartRegen(TUNING.SHADOWWAXWELL_HEALTH_REGEN, TUNING.SHADOWWAXWELL_HEALTH_REGEN_PERIOD)
-		inst.components.combat:SetDefaultDamage(TUNING.SHADOWWAXWELL_DAMAGE)
-		inst.components.combat:SetAttackPeriod(TUNING.SHADOWWAXWELL_ATTACK_PERIOD)
-		inst.components.combat:SetRetargetFunction(2, retargetfn) --Look for leader's target.
-	
-	
+        inst.components.health:SetMaxHealth(TUNING.SHADOWWAXWELL_LIFE)
+        inst.components.health:StartRegen(TUNING.SHADOWWAXWELL_HEALTH_REGEN, TUNING.SHADOWWAXWELL_HEALTH_REGEN_PERIOD)
+        inst.components.combat:SetDefaultDamage(TUNING.SHADOWWAXWELL_DAMAGE)
+        inst.components.combat:SetAttackPeriod(TUNING.SHADOWWAXWELL_ATTACK_PERIOD)
+        inst.components.combat:SetRetargetFunction(2, retargetfn) --Look for leader's target.
+
+
         inst:AddComponent("follower")
         inst.components.follower:KeepLeaderOnAttacked()
         inst.components.follower.keepdeadleader = true
@@ -232,7 +232,7 @@ local function MakeBuilder(prefab)
         return inst
     end
 
-    return Prefab(prefab.."_builder", fn, nil, { prefab })
+    return Prefab(prefab .. "_builder", fn, nil, { prefab })
 end
 
 --------------------------------------------------------------------------

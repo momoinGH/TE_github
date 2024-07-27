@@ -22,26 +22,32 @@ local loot =
     "trident",
 }
 
-local trading_items = 
+local trading_items =
 {
-    { prefabs = { "kelp"  },         min_count = 2, max_count = 4, reset = false, add_filler = false, },
-    { prefabs = { "kelp"  },         min_count = 2, max_count = 3, reset = false, add_filler = false, },
+    { prefabs = { "kelp" },          min_count = 2, max_count = 4, reset = false, add_filler = false, },
+    { prefabs = { "kelp" },          min_count = 2, max_count = 3, reset = false, add_filler = false, },
     { prefabs = { "seeds" },         min_count = 4, max_count = 6, reset = false, add_filler = false, },
-    { prefabs = { "spoiled_food"  }, min_count = 2, max_count = 4, reset = false, add_filler = false, },
-    { prefabs = { "tentaclespots" }, min_count = 1, max_count = 1, reset = false, add_filler = true,  },
+    { prefabs = { "spoiled_food" },  min_count = 2, max_count = 4, reset = false, add_filler = false, },
+    { prefabs = { "tentaclespots" }, min_count = 1, max_count = 1, reset = false, add_filler = true, },
 
-    { 
-      prefabs = { "trinket_12", "trinket_3", "trinket_25", "trinket_17", "trinket_4" }, 
-      min_count = 1, max_count = 1, reset = false, add_filler = true,
+    {
+        prefabs = { "trinket_12", "trinket_3", "trinket_25", "trinket_17", "trinket_4" },
+        min_count = 1,
+        max_count = 1,
+        reset = false,
+        add_filler = true,
     },
-    
-    { 
-        prefabs = { "durian_seeds", "pepper_seeds", "eggplant_seeds", "pumpkin_seeds", "onion_seeds", "garlic_seeds"  }, 
-        min_count = 1, max_count = 2, reset = false, add_filler = true,
+
+    {
+        prefabs = { "durian_seeds", "pepper_seeds", "eggplant_seeds", "pumpkin_seeds", "onion_seeds", "garlic_seeds" },
+        min_count = 1,
+        max_count = 2,
+        reset = false,
+        add_filler = true,
     },
 }
 
-local trading_filler = { "seeds", "kelp", "seeds", "spoiled_food", "seeds", "seeds"}
+local trading_filler = { "seeds", "kelp", "seeds", "spoiled_food", "seeds", "seeds" }
 
 local MAX_TARGET_SHARES = 30
 local SHARE_TARGET_DIST = 40
@@ -58,11 +64,12 @@ local function OnAttacked(inst, data)
 end
 
 local function ShouldAcceptItem(inst, item, giver)
-	if giver:HasTag("player") then
-		local can_eat = (item.components.edible and inst.components.eater:CanEat(item)) and (inst.components.hunger and inst.components.hunger:GetPercent() < 1)
-		return can_eat or item:HasTag("fish")
-	end
-	return false
+    if giver:HasTag("player") then
+        local can_eat = (item.components.edible and inst.components.eater:CanEat(item)) and
+        (inst.components.hunger and inst.components.hunger:GetPercent() < 1)
+        return can_eat or item:HasTag("fish")
+    end
+    return false
 end
 
 local function launchitem(item, angle)
@@ -72,7 +79,6 @@ local function launchitem(item, angle)
 end
 
 local function TradeItem(inst)
-
     local item = inst.itemtotrade
     local giver = inst.tradegiver
 
@@ -101,7 +107,7 @@ local function TradeItem(inst)
     end
 
     if selected_item.add_filler then
-        for i=filler_min, filler_max do
+        for i = filler_min, filler_max do
             local filler_item = SpawnPrefab(trading_filler[math.random(1, #trading_filler)])
             filler_item.Transform:SetPosition(x, y, z)
             launchitem(filler_item, angle)
@@ -157,8 +163,7 @@ local function HungerDelta(inst, data)
         end
         inst.lastpercent_hunger = data.newpercent
 
-        if not inst.components.timer:TimerExists("hungrytalk_cooldown") or data.newpercent == 1 or (increase and not inst.components.timer:TimerExists("hungrytalk_increase_cooldown") ) then
-
+        if not inst.components.timer:TimerExists("hungrytalk_cooldown") or data.newpercent == 1 or (increase and not inst.components.timer:TimerExists("hungrytalk_increase_cooldown")) then
             if data.newpercent <= 0 then
                 inst.components.talker:Say(STRINGS.MERM_KING_TALK_HUNGER_STARVING)
             elseif data.newpercent < 0.1 then
@@ -173,7 +178,7 @@ local function HungerDelta(inst, data)
                 inst.components.talker:Say(STRINGS.MERM_KING_TALK_HUNGER_FULL)
             end
 
-            local time = Remap(data.newpercent, 1,0, 30,8) 
+            local time = Remap(data.newpercent, 1, 0, 30, 8)
             if increase then
                 inst.components.timer:StopTimer("hungrytalk_increase_cooldown")
                 inst.components.timer:StartTimer("hungrytalk_increase_cooldown", 10)
@@ -181,7 +186,7 @@ local function HungerDelta(inst, data)
             inst.components.timer:StopTimer("hungrytalk_cooldown")
             inst.components.timer:StartTimer("hungrytalk_cooldown", time)
         end
-        
+
         if data.newpercent <= 0 then
             inst.components.health:StopRegen()
         end
@@ -190,22 +195,20 @@ local function HungerDelta(inst, data)
             inst.components.health:StartRegen(TUNING.MERM_KING_HEALTH_REGEN, TUNING.MERM_KING_HEALTH_REGEN_PERIOD)
         end
     end
-
 end
 
 local function HealthDelta(inst, data)
     if data.newpercent and inst.components.combat.target ~= nil then
         if data.newpercent < 0.75 and data.oldpercent > data.newpercent then
-
             if inst.guards_available == nil then
                 inst.guards_available = 4
             end
 
             if inst.guards_available > 0 and (inst.guards == nil or #inst.guards == 0) and not inst.sg:HasStateTag("calling_guards") and not inst.components.health:IsDead() then
                 inst.sg:PushEvent("call_guards")
-                
+
                 if not inst.call_guard_task then
-                    inst.call_guard_task = inst:DoTaskInTime(TUNING.TOTAL_DAY_TIME, function() 
+                    inst.call_guard_task = inst:DoTaskInTime(TUNING.TOTAL_DAY_TIME, function()
                         inst.guards_available = 4
                         inst.call_guard_task = nil
                     end)
@@ -228,7 +231,7 @@ local function KeepTarget(inst, target)
     end
 
     if inst.guards and #inst.guards > 0 then
-        for i,v in ipairs(inst.guards) do
+        for i, v in ipairs(inst.guards) do
             if v.components.combat.target == target then
                 return true
             end
@@ -242,7 +245,7 @@ end
 
 local function OnGuardDeath(inst)
     local remove_at = nil
-    for i,v in ipairs(inst.king.guards) do
+    for i, v in ipairs(inst.king.guards) do
         if v == inst then
             remove_at = i
             break
@@ -253,7 +256,7 @@ local function OnGuardDeath(inst)
         table.remove(inst.king.guards, remove_at)
     end
 
-    inst.king:RemoveEventCallback("death",  inst.king.OnGuardDeath,   inst)
+    inst.king:RemoveEventCallback("death", inst.king.OnGuardDeath, inst)
     inst.king:RemoveEventCallback("onremove", inst.king.OnGuardRemoved, inst)
     inst.king:RemoveEventCallback("enterlimbo", inst.king.OnGuardEnterLimbo, inst)
 end
@@ -270,15 +273,15 @@ local function OnGuardEnterLimbo(inst)
 end
 
 local function CallGuards(inst)
-    local merm_positions = 
+    local merm_positions =
     {
-        { x =  2.5, z =  2.5 },
-        { x = -2.5, z =  2.5 },
-        { x =  2.5, z = -2.5 },
+        { x = 2.5,  z = 2.5 },
+        { x = -2.5, z = 2.5 },
+        { x = 2.5,  z = -2.5 },
         { x = -2.5, z = -2.5 },
     }
 
-    local x,y,z = inst.Transform:GetWorldPosition()
+    local x, y, z = inst.Transform:GetWorldPosition()
     inst.guards = {}
 
     if inst.guards_available == nil then
@@ -290,13 +293,13 @@ local function CallGuards(inst)
         new_merm.Transform:SetPosition(x + merm_positions[i].x, y, z + merm_positions[i].z)
         new_merm.components.combat:SetTarget(inst.components.combat.target)
         new_merm.king = inst
-        
+
         local fx = SpawnPrefab("merm_spawn_fx")
         fx.Transform:SetPosition(new_merm.Transform:GetWorldPosition())
         inst.SoundEmitter:PlaySound("dontstarve/characters/wurt/merm/throne/spawn")
 
         table.insert(inst.guards, new_merm)
-        inst:ListenForEvent("death",  OnGuardDeath, new_merm)
+        inst:ListenForEvent("death", OnGuardDeath, new_merm)
         inst:ListenForEvent("onremove", OnGuardRemoved, new_merm)
         inst:ListenForEvent("enterlimbo", OnGuardEnterLimbo, new_merm)
     end
@@ -309,7 +312,7 @@ local function ReturnMerms(inst)
         inst.guards = {}
     end
 
-    for i,v in ipairs(inst.guards) do
+    for i, v in ipairs(inst.guards) do
         if v.components.combat.target ~= nil then
             v.components.combat:GiveUp()
         end
@@ -331,7 +334,7 @@ local function OnSave(inst, data)
 
     if inst.guards and #inst.guards then
         data.guards = {}
-        for i,v in ipairs(inst.guards) do
+        for i, v in ipairs(inst.guards) do
             table.insert(data.guards, v.GUID)
             table.insert(ents, v.GUID)
         end
@@ -351,25 +354,25 @@ local function OnLoadPostPass(inst, newents, savedata)
 
     inst.guards = {}
     if savedata.guards then
-        for i,v in ipairs(savedata.guards) do
+        for i, v in ipairs(savedata.guards) do
             local guard = newents[v].entity
             if guard then
                 table.insert(inst.guards, guard)
                 guard.king = inst
                 guard.return_to_king = true
 
-                inst:ListenForEvent("death",  OnGuardDeath, guard)
+                inst:ListenForEvent("death", OnGuardDeath, guard)
                 inst:ListenForEvent("onremove", OnGuardRemoved, guard)
                 inst:ListenForEvent("enterlimbo", OnGuardEnterLimbo, guard)
             else
-                print ("ERROR, COULD NOT FIND GUARD WITH PROVIDED GUID")
+                print("ERROR, COULD NOT FIND GUARD WITH PROVIDED GUID")
             end
         end
     end
 
     if savedata.task_remaining then
-        inst.call_guard_task = inst:DoTaskInTime(savedata.task_remaining, 
-            function() 
+        inst.call_guard_task = inst:DoTaskInTime(savedata.task_remaining,
+            function()
                 inst.guards_available = 4
                 inst.call_guard_task = nil
             end)
@@ -377,11 +380,11 @@ local function OnLoadPostPass(inst, newents, savedata)
 end
 
 local function OnEntityWake(inst)
-	inst.components.bubbleblower:Start()	
+    inst.components.bubbleblower:Start()
 end
 
 local function OnEntitySleep(inst)
-	inst.components.bubbleblower:Stop()
+    inst.components.bubbleblower:Stop()
 end
 
 local function fn()
@@ -405,8 +408,8 @@ local function fn()
     inst:AddTag("wet")
 
     inst:AddComponent("talker")
-	inst:AddComponent("bubbleblower")
-	inst.AnimState:SetMultColour(255/255, 150/255, 0/255, 1)	
+    inst:AddComponent("bubbleblower")
+    inst.AnimState:SetMultColour(255 / 255, 150 / 255, 0 / 255, 1)
 
     inst.entity:SetPristine()
 
@@ -430,7 +433,7 @@ local function fn()
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.MERM_KING_HEALTH*3)
+    inst.components.health:SetMaxHealth(TUNING.MERM_KING_HEALTH * 3)
     inst.components.health.destroytime = 3.5
     inst.components.health:StartRegen(TUNING.MERM_KING_HEALTH_REGEN, TUNING.MERM_KING_HEALTH_REGEN_PERIOD)
 
@@ -461,16 +464,16 @@ local function fn()
 
     inst.trading_items = deepcopy(trading_items)
     inst.TradeItem = TradeItem
-    
+
     inst.CallGuards = CallGuards
     inst.ReturnMerms = ReturnMerms
-    
+
     inst.OnGuardDeath = OnGuardDeath
     inst.OnGuardRemoved = OnGuardRemoved
     inst.OnGuardEnterLimbo = OnGuardEnterLimbo
 
-	inst.OnEntityWake = OnEntityWake
-	inst.OnEntitySleep = OnEntitySleep	
+    inst.OnEntityWake = OnEntityWake
+    inst.OnEntitySleep = OnEntitySleep
 
     return inst
 end

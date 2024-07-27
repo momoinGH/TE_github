@@ -3,7 +3,7 @@ local assets =
     Asset("ANIM", "anim/withered_flowers.zip"),
 }
 
-local names = {"wf1","wf2","wf3"}
+local names = { "wf1", "wf2", "wf3" }
 
 local function onpickedfn(inst, picker)
     inst:Remove()
@@ -27,8 +27,8 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
-	inst:AddTag("deer_flower")
+
+    inst:AddTag("deer_flower")
 
     inst.AnimState:SetBank("withered_flowers")
     inst.AnimState:SetBuild("withered_flowers")
@@ -51,8 +51,8 @@ local function fn()
     inst.components.pickable.quickpick = true
     inst.components.pickable.wildfirestarter = true
 
-	inst:DoTaskInTime(1, onpickedfn)
-	
+    inst:DoTaskInTime(1, onpickedfn)
+
     MakeSmallBurnable(inst)
     MakeSmallPropagator(inst)
 

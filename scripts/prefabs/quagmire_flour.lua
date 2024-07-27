@@ -15,32 +15,32 @@ local function fn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)
+    MakeInventoryFloatable(inst)
 
     inst.AnimState:SetBank("quagmire_flour")
     inst.AnimState:SetBuild("quagmire_flour")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("quagmire_stewable")
-    inst:AddTag("flour")	
-	
+    inst:AddTag("flour")
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
-	inst:AddComponent("stackable")
-	inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
+    inst:AddComponent("stackable")
+    inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
 
-	inst:AddComponent("tradable")
+    inst:AddComponent("tradable")
 
-	inst:AddComponent("inspectable")
+    inst:AddComponent("inspectable")
 
-	inst:AddComponent("inventoryitem")	
+    inst:AddComponent("inventoryitem")
 
-	MakeHauntableLaunchAndPerish(inst)
-	MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
+    MakeHauntableLaunchAndPerish(inst)
+    MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeSmallPropagator(inst)
     return inst
 end

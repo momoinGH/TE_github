@@ -13,11 +13,11 @@ local BoatBadge = Class(Badge, function(self, owner)
 	self.num:SetSize(40)
 
 	self:SetScale(1.3)
-	
+
 	self:StartUpdating()
 end)
 
-function BoatBadge:OnUpdate(dt)	
+function BoatBadge:OnUpdate(dt)
 	-- local down = self.owner.components.temperature:IsOverheating() or self.owner.components.temperature:IsFreezing() or self.owner.components.hunger:IsStarving() or self.owner.components.health.takingfiredamage
 	-- local poison = self.owner.components.poisonable:IsPoisoned()
 
@@ -28,7 +28,7 @@ function BoatBadge:OnUpdate(dt)
 	if anim and self.arrowdir ~= anim then
 		self.arrowdir = anim
 		self.boatarrow:GetAnimState():PlayAnimation(anim, true)
-	end	
+	end
 end
 
 return BoatBadge

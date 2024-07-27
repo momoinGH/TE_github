@@ -13,8 +13,10 @@ local function fn()
 
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "tumbleweed"
-    inst.components.childspawner:SetMaxChildren(math.random(TUNING.MIN_TUMBLEWEEDS_PER_SPAWNER,TUNING.MAX_TUMBLEWEEDS_PER_SPAWNER))
-    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD, TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
+    inst.components.childspawner:SetMaxChildren(math.random(TUNING.MIN_TUMBLEWEEDS_PER_SPAWNER,
+        TUNING.MAX_TUMBLEWEEDS_PER_SPAWNER))
+    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD,
+        TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
     inst.components.childspawner:SetRegenPeriod(TUNING.TUMBLEWEED_REGEN_PERIOD)
     inst.components.childspawner.spawnoffscreen = true
     inst:DoTaskInTime(0, function(inst)
@@ -36,7 +38,8 @@ local function fn2()
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "quagmire_pebblecrab"
     inst.components.childspawner:SetMaxChildren(2)
-    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD, TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
+    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD,
+        TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
     inst.components.childspawner:SetRegenPeriod(TUNING.TUMBLEWEED_REGEN_PERIOD)
     inst.components.childspawner.spawnoffscreen = true
     inst:DoTaskInTime(0, function(inst)
@@ -57,8 +60,9 @@ local function fn3()
 
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "trapslug"
-    inst.components.childspawner:SetMaxChildren(math.random(1,2))
-    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD, TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
+    inst.components.childspawner:SetMaxChildren(math.random(1, 2))
+    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD,
+        TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
     inst.components.childspawner:SetRegenPeriod(TUNING.TUMBLEWEED_REGEN_PERIOD)
     inst.components.childspawner.spawnoffscreen = true
     inst:DoTaskInTime(0, function(inst)
@@ -80,7 +84,8 @@ local function fn5()
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "billsnow"
     inst.components.childspawner:SetMaxChildren(1)
-    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD, TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
+    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD,
+        TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
     inst.components.childspawner:SetRegenPeriod(TUNING.TUMBLEWEED_REGEN_PERIOD)
     inst.components.childspawner.spawnoffscreen = true
     inst:DoTaskInTime(0, function(inst)
@@ -102,7 +107,8 @@ local function fn6()
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "giantsnow"
     inst.components.childspawner:SetMaxChildren(1)
-    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD, TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
+    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD,
+        TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
     inst.components.childspawner:SetRegenPeriod(TUNING.TUMBLEWEED_REGEN_PERIOD)
     inst.components.childspawner.spawnoffscreen = true
     inst:DoTaskInTime(0, function(inst)
@@ -124,7 +130,8 @@ local function fn7()
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "giantgrub"
     inst.components.childspawner:SetMaxChildren(1)
-    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD, TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
+    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD,
+        TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
     inst.components.childspawner:SetRegenPeriod(TUNING.TUMBLEWEED_REGEN_PERIOD)
     inst.components.childspawner.spawnoffscreen = true
     inst:DoTaskInTime(0, function(inst)
@@ -158,9 +165,9 @@ local function fn8()
 end
 
 return Prefab("tumbleweedspawner", fn, nil, prefabs),
-	   Prefab("pebblecrabspawner", fn2, nil, prefabs),
-	   Prefab("trapslugspawner", fn3, nil, prefabs),	
-	   Prefab("billsnowspawner", fn5, nil, prefabs),	
-	   Prefab("giantsnowspawner", fn6, nil, prefabs),
-	   Prefab("giantgrubspawner", fn7, nil, prefabs),	   
-	   Prefab("pigghostspawner", fn8, nil, prefabs)	
+    Prefab("pebblecrabspawner", fn2, nil, prefabs),
+    Prefab("trapslugspawner", fn3, nil, prefabs),
+    Prefab("billsnowspawner", fn5, nil, prefabs),
+    Prefab("giantsnowspawner", fn6, nil, prefabs),
+    Prefab("giantgrubspawner", fn7, nil, prefabs),
+    Prefab("pigghostspawner", fn8, nil, prefabs)

@@ -1,10 +1,10 @@
 local assets =
 {
     Asset("ANIM", "anim/des_shard_sword_ground.zip"),
-    Asset("ANIM", "anim/swap_des_shard_sword.zip"),	
+    Asset("ANIM", "anim/swap_des_shard_sword.zip"),
     Asset("ANIM", "anim/des_shard_beak_ground.zip"),
     Asset("ANIM", "anim/swap_des_shard_beak.zip"),
-	Asset("ANIM", "anim/des_glass_shards.zip"),	
+    Asset("ANIM", "anim/des_glass_shards.zip"),
 }
 
 local day_time = 60 * 8
@@ -29,7 +29,7 @@ DES_GLASS_SWORD_THRONS = math.random(1, 5)
 DES_GLASS_SWORD_DAMAGE = 50
 DES_GLASS_SWORD_DAMAGE_MAX = 400
 DES_GLASS_SWORD_DAMAGE_VS_SHADOW = 100 -- Runar: 原本的斩杀线
-DES_GLASS_SWORD_DURABILITY = 50 
+DES_GLASS_SWORD_DURABILITY = 50
 
 
 
@@ -56,7 +56,8 @@ local function onattack1(inst, owner, target)
     if target.components.combat and target.components.health then
         if target:HasTag("shadow") then
             if target.components.health.currenthealth <= DES_GLASS_SWORD_DAMAGE_MAX then
-                target.components.combat:GetAttacked(owner, math.max(DES_GLASS_SWORD_DAMAGE_VS_SHADOW, target.components.health.currenthealth - 1), inst)
+                target.components.combat:GetAttacked(owner,
+                    math.max(DES_GLASS_SWORD_DAMAGE_VS_SHADOW, target.components.health.currenthealth - 1), inst)
             else
                 target.components.combat:GetAttacked(owner, DES_GLASS_SWORD_DAMAGE_MAX, inst)
                 if owner and owner.components.combat and owner.components.health and not owner.components.health:IsDead() then
@@ -104,7 +105,7 @@ local function fnshard_sword()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("sharp")
-	MakeInventoryFloatable(inst)
+    MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
 
@@ -126,9 +127,9 @@ local function fnshard_sword()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
-	
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip1)
     inst.components.equippable:SetOnUnequip(onunequip1)
@@ -174,10 +175,10 @@ local function fnshard_beak()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
-	
-	
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
+
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
@@ -206,11 +207,11 @@ local function fn()
     inst:AddTag("renewable")
     inst:AddTag("quakedebris")
 
-	
 
-	
+
+
     inst.entity:SetPristine()
-	
+
     if not TheWorld.ismastersim then
         return inst
     end
@@ -226,25 +227,26 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
-	
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     MakeHauntableLaunchAndSmash(inst)
 
     inst:AddComponent("bait")
-	print("COLOR CHANGE")
-	local s = math.random()*0.3 + 0.9
-	local r = math.random()*0.4+0.6
-	local g = math.random()*0.4+0.5
-	local b = math.random()*0.4+0.6
-	local a = math.random()*0.3+0.7
-	
-	inst.AnimState:SetScale(s,s,s,s)
-	inst.AnimState:SetMultColour(r,g,b,1)
-	
+    print("COLOR CHANGE")
+    local s = math.random() * 0.3 + 0.9
+    local r = math.random() * 0.4 + 0.6
+    local g = math.random() * 0.4 + 0.5
+    local b = math.random() * 0.4 + 0.6
+    local a = math.random() * 0.3 + 0.7
+
+    inst.AnimState:SetScale(s, s, s, s)
+    inst.AnimState:SetMultColour(r, g, b, 1)
+
     shine(inst)
 
     return inst
 end
 
-return Prefab("shard_sword", fnshard_sword, assets), Prefab("shard_beak", fnshard_beak, assets), Prefab("glass_shards", fn, assets)
+return Prefab("shard_sword", fnshard_sword, assets), Prefab("shard_beak", fnshard_beak, assets),
+    Prefab("glass_shards", fn, assets)

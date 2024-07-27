@@ -819,7 +819,7 @@ table.insert(PrefabFiles, "wildborekingstaff")
 table.insert(PrefabFiles, "wildboreking_spawner")
 
 
-if GetModConfigData("Hamlet") ~= 5 or GetModConfigData("startlocation") == 15 or GetModConfigData("kindofworld") == 5 or GetModConfigData("enableallprefabs") == true or GetModConfigData("hamletcaves_shipwreckedworld") == 1 then  --GetModConfigData("Plains_Hamlet")
+if GetModConfigData("Hamlet") ~= 5 or GetModConfigData("startlocation") == 15 or GetModConfigData("kindofworld") == 5 or GetModConfigData("enableallprefabs") == true or GetModConfigData("hamletcaves_shipwreckedworld") == 1 then --GetModConfigData("Plains_Hamlet")
 	table.insert(PrefabFiles, "rainforesttrees")
 	table.insert(PrefabFiles, "rainforesttree_sapling")
 	table.insert(PrefabFiles, "meteor_impact")
@@ -1366,8 +1366,14 @@ for i, v in pairs(_G.AllRecipes) do
 end
 
 
-GLOBAL.RECIPETABS['OBSIDIANTAB'] = { str = "OBSIDIANTAB", sort = 90, icon = "tab_volcano.tex", icon_atlas =
-"images/tabs.xml", crafting_station = true }
+GLOBAL.RECIPETABS['OBSIDIANTAB'] = {
+	str = "OBSIDIANTAB",
+	sort = 90,
+	icon = "tab_volcano.tex",
+	icon_atlas =
+	"images/tabs.xml",
+	crafting_station = true
+}
 AddPrototyperDef("obsidian_workbench",
 	{ action_str = "OBSIDIANTAB", icon_image = "tab_volcano.tex", icon_atlas = "images/tabs.xml", is_crafting_station = true })
 
@@ -1379,8 +1385,14 @@ GLOBAL.RECIPETABS['HOME'] = { str = "HOME", sort = 92, icon = "tab_home_decor.te
 AddPrototyperDef("wallrenovation",
 	{ action_str = "HOME", icon_image = "tab_home_decor.tex", icon_atlas = "images/tabs.xml", is_crafting_station = true })
 
-GLOBAL.RECIPETABS['GODDESSTAB'] = { str = "GODDESSTAB", sort = 93, icon = "windyfan1.tex", icon_atlas =
-"images/inventoryimages/windyfan1.xml", crafting_station = true }
+GLOBAL.RECIPETABS['GODDESSTAB'] = {
+	str = "GODDESSTAB",
+	sort = 93,
+	icon = "windyfan1.tex",
+	icon_atlas =
+	"images/inventoryimages/windyfan1.xml",
+	crafting_station = true
+}
 AddPrototyperDef("goddess_shrine",
 	{ action_str = "GODDESSTAB", icon_image = "windyfan1.tex", icon_atlas = "images/inventoryimages/windyfan1.xml", is_crafting_station = true })
 
@@ -1472,8 +1484,10 @@ AddPrefabPostInit("forest", function(inst)
 			inst:AddComponent("aporkalypse")
 		end
 
-		if GetModConfigData("kindofworld") ~= 10 and GetModConfigData("Hamlet") ~= 5 then inst:AddComponent(
-			"tropicalgroundspawner") end
+		if GetModConfigData("kindofworld") ~= 10 and GetModConfigData("Hamlet") ~= 5 then
+			inst:AddComponent(
+				"tropicalgroundspawner")
+		end
 		if GetModConfigData("kindofworld") == 15 or GetModConfigData("kindofworld") == 10 or GetModConfigData("kindofworld") == 20 then
 			if GetModConfigData("aquaticcreatures") then
 				inst:AddComponent("tropicalspawner")
@@ -2584,7 +2598,7 @@ AddComponentPostInit("locomotor", function(self)
 	local OldGetSpeedMultiplier = self.GetSpeedMultiplier
 	function self:GetSpeedMultiplier()
 		return (self.inst:HasTag("aquatic") and self.inst:HasTag("player")) and getspeedbonus(self.inst) or
-		OldGetSpeedMultiplier(self)
+			OldGetSpeedMultiplier(self)
 	end
 
 	local OldUpdate = self.OnUpdate
@@ -3988,10 +4002,10 @@ AddSimPostInit(function()
 				local pt = inst:GetPosition()
 				local ents = GLOBAL.TheSim:FindEntities(pt.x, pt.y, pt.z, 40, { "blows_air" })
 				if #ents > 0 then
-					data.updateFunc = function() end                                                                                 -- empty function
+					data.updateFunc = function() end -- empty function
 				else
 					data.updateFunc = self.old_updatefuncs[inst.prefab] ~= nil and self.old_updatefuncs[inst.prefab] or
-					function() end                                                                                                   -- the original one
+						function() end -- the original one
 				end
 			end
 		end
@@ -4241,16 +4255,31 @@ PLANT_DEFS.wheat.grow_time                     = MakeGrowTimes(12 * TUNING.SEG_T
 PLANT_DEFS.turnip.grow_time                    = MakeGrowTimes(12 * TUNING.SEG_TIME, 16 * TUNING.SEG_TIME,
 	4 * TUNING.TOTAL_DAY_TIME, 7 * TUNING.TOTAL_DAY_TIME)
 
-PLANT_DEFS.sweet_potato.moisture               = { drink_rate = drink_low, min_percent = TUNING
-.FARM_PLANT_DROUGHT_TOLERANCE }
-PLANT_DEFS.aloe.moisture                       = { drink_rate = drink_low, min_percent = TUNING
-.FARM_PLANT_DROUGHT_TOLERANCE }
-PLANT_DEFS.radish.moisture                     = { drink_rate = drink_low, min_percent = TUNING
-.FARM_PLANT_DROUGHT_TOLERANCE }
-PLANT_DEFS.wheat.moisture                      = { drink_rate = drink_low, min_percent = TUNING
-.FARM_PLANT_DROUGHT_TOLERANCE }
-PLANT_DEFS.turnip.moisture                     = { drink_rate = drink_low, min_percent = TUNING
-.FARM_PLANT_DROUGHT_TOLERANCE }
+PLANT_DEFS.sweet_potato.moisture               = {
+	drink_rate = drink_low,
+	min_percent = TUNING
+		.FARM_PLANT_DROUGHT_TOLERANCE
+}
+PLANT_DEFS.aloe.moisture                       = {
+	drink_rate = drink_low,
+	min_percent = TUNING
+		.FARM_PLANT_DROUGHT_TOLERANCE
+}
+PLANT_DEFS.radish.moisture                     = {
+	drink_rate = drink_low,
+	min_percent = TUNING
+		.FARM_PLANT_DROUGHT_TOLERANCE
+}
+PLANT_DEFS.wheat.moisture                      = {
+	drink_rate = drink_low,
+	min_percent = TUNING
+		.FARM_PLANT_DROUGHT_TOLERANCE
+}
+PLANT_DEFS.turnip.moisture                     = {
+	drink_rate = drink_low,
+	min_percent = TUNING
+		.FARM_PLANT_DROUGHT_TOLERANCE
+}
 
 PLANT_DEFS.sweet_potato.good_seasons           = { autumn = true, winter = true, spring = true }
 PLANT_DEFS.aloe.good_seasons                   = { autumn = true, winter = true, spring = true }
@@ -5081,11 +5110,13 @@ AddComponentPostInit("builder", function(self)
 
 	function self:MakeRecipeAtPoint(recipe, pt, rot, skin)
 		----------------------------------------------------------
-		if recipe.product == "sprinkler1" and (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.FARMING_SOIL) then return
-			self:MakeRecipe(recipe, pt, rot, skin) end
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_SANDY) then return false end                       --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_ROCKY) then return false end                       --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BEACH and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
+		if recipe.product == "sprinkler1" and (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.FARMING_SOIL) then
+			return
+				self:MakeRecipe(recipe, pt, rot, skin)
+		end
+		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_SANDY) then return false end                          --adicionado por vagner
+		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_ROCKY) then return false end                          --adicionado por vagner
+		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BEACH and GLOBAL.TheWorld:HasTag("cave")) then return false end  --adicionado por vagner
 		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.MAGMAFIELD and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
 		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.PAINTED and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
 		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BATTLEGROUND and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
@@ -5184,9 +5215,9 @@ AddClassPostConstruct("components/builder_replica", function(self)
 	function self:CanBuildAtPoint(pt, recipe, rot)
 		if recipe.product == "sprinkler1" and (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.FARMING_SOIL) then return true end
 
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_SANDY) then return false end                       --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_ROCKY) then return false end                       --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BEACH and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
+		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_SANDY) then return false end                          --adicionado por vagner
+		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_ROCKY) then return false end                          --adicionado por vagner
+		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BEACH and GLOBAL.TheWorld:HasTag("cave")) then return false end  --adicionado por vagner
 		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.MAGMAFIELD and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
 		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.PAINTED and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
 		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BATTLEGROUND and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
@@ -5303,7 +5334,7 @@ AddComponentPostInit("inventoryitem", function(self)
 				self.inst:DoTaskInTime(1, function()
 					if self.inst.onshelf then
 						local shelfitem = self.inst.onshelf and self.inst.onshelf.components and
-						self.inst.onshelf.components.shelfer and self.inst.onshelf.components.shelfer:GetGift()
+							self.inst.onshelf.components.shelfer and self.inst.onshelf.components.shelfer:GetGift()
 						if self.inst ~= shelfitem then
 							-- we thought we were on a shelf. Alas, we were not
 							self.inst.onshelf = nil
@@ -5335,7 +5366,7 @@ AddClassPostConstruct("components/playercontroller", function(self)
 			platform_for_velocity_calculation = self.inst:GetCurrentPlatform()
 			--		if TUNING.tropical.disembarkation then platform_for_velocity_calculation = self.inst:GetCurrentPlatform() or GetClosestInstWithTag("barcoapto", self.inst, 0.5) end
 			platform_for_velocity_calculation = self.inst:GetCurrentPlatform() or
-			GetClosestInstWithTag("barcoapto", self.inst, 0.5)
+				GetClosestInstWithTag("barcoapto", self.inst, 0.5)
 		end
 
 		if platform == nil and (platform_for_velocity_calculation == nil or GLOBAL.TheWorld.Map:IsOceanAtPoint(target_x, 0, target_z)) then
@@ -5355,14 +5386,14 @@ AddClassPostConstruct("components/playercontroller", function(self)
 					local hop_distance = math.sqrt(hop_distance_sq)
 					local normalized_hop_dir_x, normalized_hop_dir_z = hop_dir_x / hop_distance, hop_dir_z / hop_distance
 					local velocity = math.sqrt(platform_velocity_x * platform_velocity_x +
-					platform_velocity_z * platform_velocity_z)
+						platform_velocity_z * platform_velocity_z)
 					local normalized_platform_velocity_x, normalized_platform_velocity_z = platform_velocity_x / velocity,
 						platform_velocity_z / velocity
 					local hop_dir_dot_platform_velocity = normalized_platform_velocity_x * normalized_hop_dir_x +
-					normalized_platform_velocity_z * normalized_hop_dir_z
+						normalized_platform_velocity_z * normalized_hop_dir_z
 					if hop_dir_dot_platform_velocity > 0 then
 						target_velocity_rubber_band_distance = RUBBER_BAND_PING_TOLERANCE_IN_SECONDS * velocity *
-						hop_dir_dot_platform_velocity
+							hop_dir_dot_platform_velocity
 					end
 				end
 			end
@@ -5370,7 +5401,7 @@ AddClassPostConstruct("components/playercontroller", function(self)
 
 		local locomotor = self.inst.components.locomotor
 		local hop_rubber_band_distance = RUBBER_BAND_DISTANCE + target_velocity_rubber_band_distance +
-		locomotor:GetHopDistance()
+			locomotor:GetHopDistance()
 		local hop_rubber_band_distance_sq = hop_rubber_band_distance * hop_rubber_band_distance
 
 		if hop_distance_sq > hop_rubber_band_distance_sq then

@@ -3,24 +3,25 @@ local RUN_SPEED = 2
 
 require("stategraphs/commonstates")
 
-local actionhandlers = 
+local actionhandlers =
 {
     ActionHandler(ACTIONS.EAT, "eat_pre"),
-	ActionHandler(ACTIONS.GOHOME, "gohome"),
+    ActionHandler(ACTIONS.GOHOME, "gohome"),
 }
 
 local events =
 {
     CommonHandlers.OnSleep(),
-    CommonHandlers.OnHop(),		
+    CommonHandlers.OnHop(),
     CommonHandlers.OnFreeze(),
-    EventHandler("attacked", function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("hit") end end),
+    EventHandler("attacked",
+        function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("hit") end end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("trapped", function(inst) inst.sg:GoToState("trapped") end),
-    EventHandler("locomote", 
-        function(inst) 
+    EventHandler("locomote",
+        function(inst)
             if not inst.sg:HasStateTag("idle") and not inst.sg:HasStateTag("moving") then return end
-            
+
             if not inst.components.locomotor:WantsToMoveForward() then
                 if not inst.sg:HasStateTag("idle") then
                     if not inst.sg:HasStateTag("running") then
@@ -46,7 +47,7 @@ local states =
     State
     {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
 
         onenter = function(inst, playanim)
             inst.Physics:Stop()
@@ -63,20 +64,20 @@ local states =
     State
     {
         name = "run",
-        tags = {"moving", "running", "canrotate"},
-        
+        tags = { "moving", "running", "canrotate" },
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("glide", true)
             inst.components.locomotor:RunForward()
-            inst.flapSound = inst:DoPeriodicTask(6*FRAMES, 
-                function(inst) 
-                    inst.SoundEmitter:PlaySound("dontstarve/birds/flyin") 
+            inst.flapSound = inst:DoPeriodicTask(6 * FRAMES,
+                function(inst)
+                    inst.SoundEmitter:PlaySound("dontstarve/birds/flyin")
                 end)
         end,
 
         timeline =
         {
-            TimeEvent(20*FRAMES, function(inst) inst:PerformBufferedAction() end),
+            TimeEvent(20 * FRAMES, function(inst) inst:PerformBufferedAction() end),
         },
 
         onexit = function(inst)
@@ -84,14 +85,14 @@ local states =
                 inst.flapSound:Cancel()
                 inst.flapSound = nil
             end
-        end, 
-    },    
-    
+        end,
+    },
+
 
     State
     {
         name = "honk",
-        tags = {"idle"},
+        tags = { "idle" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -117,7 +118,7 @@ local states =
 
         timeline =
         {
-            TimeEvent(10*FRAMES, function(inst) inst:PerformBufferedAction() end),
+            TimeEvent(10 * FRAMES, function(inst) inst:PerformBufferedAction() end),
         },
 
         events =
@@ -136,7 +137,7 @@ local states =
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("eat", true)
-            inst.sg:SetTimeout(2+math.random()*4)
+            inst.sg:SetTimeout(2 + math.random() * 4)
         end,
 
         ontimeout = function(inst)
@@ -162,28 +163,28 @@ local states =
     State
     {
         name = "hop",
-        tags = {"moving", "canrotate", "hopping"},
-        
+        tags = { "moving", "canrotate", "hopping" },
+
         timeline =
         {
-            TimeEvent(5*FRAMES, function(inst) 
-                inst.Physics:Stop() 
+            TimeEvent(5 * FRAMES, function(inst)
+                inst.Physics:Stop()
                 inst.SoundEmitter:PlaySound("dontstarve/rabbit/hop")
-            end ),
+            end),
         },
-        
-        onenter = function(inst) 
+
+        onenter = function(inst)
             inst.AnimState:PlayAnimation("hop")
             inst.components.locomotor:WalkForward()
-            inst.sg:SetTimeout(2*math.random()+0.5)
+            inst.sg:SetTimeout(2 * math.random() + 0.5)
         end,
-        
+
         onupdate = function(inst)
             if not inst.components.locomotor:WantsToMoveForward() then
                 inst.sg:GoToState("idle")
             end
-        end,        
-        
+        end,
+
         ontimeout = function(inst)
             inst.sg:GoToState("hop")
         end,
@@ -192,26 +193,26 @@ local states =
     State
     {
         name = "death",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.SoundEmitter:PlaySound(inst.sounds.scream)
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
-            RemovePhysicsColliders(inst)        
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))   
+            RemovePhysicsColliders(inst)
+            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
         end,
     },
 
     State
     {
         name = "hit",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.SoundEmitter:PlaySound(inst.sounds.hurt)
             inst.AnimState:PlayAnimation("hit")
-            inst.Physics:Stop()            
+            inst.Physics:Stop()
         end,
 
         events =
@@ -222,8 +223,7 @@ local states =
 }
 CommonStates.AddSleepStates(states)
 CommonStates.AddFrozenStates(states)
-CommonStates.AddHopStates(states, true, { pre = "hop", loop = "hop", pst = "hop"})
-CommonStates.AddSimpleActionState(states, "gohome", "hop", 4*FRAMES, {"busy"})
+CommonStates.AddHopStates(states, true, { pre = "hop", loop = "hop", pst = "hop" })
+CommonStates.AddSimpleActionState(states, "gohome", "hop", 4 * FRAMES, { "busy" })
 
 return StateGraph("chicken", states, events, "idle", actionhandlers)
-

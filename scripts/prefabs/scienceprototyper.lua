@@ -47,12 +47,12 @@ local function doonact(inst, soundprefix)
         inst._activecount = 0
         inst.SoundEmitter:KillSound("sound")
     end
-    inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_"..soundprefix.."_ding")
+    inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_" .. soundprefix .. "_ding")
 end
 
 local function onturnoff(inst)
     if inst._activetask == nil and not inst:HasTag("burnt") then
-		inst:_PlayAnimation("idle", false)
+        inst:_PlayAnimation("idle", false)
         inst.SoundEmitter:KillSound("idlesound")
         inst.SoundEmitter:KillSound("loop")
     end
@@ -73,7 +73,7 @@ end
 local function createmachine(level, name, soundprefix, techtree, giftsound)
     local assets =
     {
-        Asset("ANIM", "anim/"..name..".zip"),
+        Asset("ANIM", "anim/" .. name .. ".zip"),
     }
 
     local prefabs =
@@ -82,17 +82,20 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
     }
 
     local function onturnon(inst, player)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado and inst.components.prototyper then
-	inst.components.prototyper.trees = require("techtree").Create({SCIENCE = 0,})
-	local fx = SpawnPrefab("shock_machines_fx")
-	if fx then local pt = inst:GetPosition() fx.Transform:SetPosition(pt.x, pt.y, pt.z) end 
-	if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-	return 
-	else
-	if inst.components.prototyper then inst.components.prototyper.trees = techtree end
-	end
-	
+        local alagado = GetClosestInstWithTag("mare", inst, 10)
+        if alagado and inst.components.prototyper then
+            inst.components.prototyper.trees = require("techtree").Create({ SCIENCE = 0, })
+            local fx = SpawnPrefab("shock_machines_fx")
+            if fx then
+                local pt = inst:GetPosition()
+                fx.Transform:SetPosition(pt.x, pt.y, pt.z)
+            end
+            if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
+            return
+        else
+            if inst.components.prototyper then inst.components.prototyper.trees = techtree end
+        end
+
         if inst._activetask == nil and not inst:HasTag("burnt") then
             if isgifting(inst) then
                 if inst.AnimState:IsCurrentAnimation("proximity_gift_loop") or
@@ -116,7 +119,8 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
                 end
                 if not inst.SoundEmitter:PlayingSound("idlesound") then
                     inst.SoundEmitter:KillSound("loop")
-                    inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_"..soundprefix.."_idle_LP", "idlesound")
+                    inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_" .. soundprefix .. "_idle_LP",
+                        "idlesound")
                 end
             end
         end
@@ -145,7 +149,7 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
             inst:_PlayAnimation("use")
             inst:_PushAnimation("idle", false)
             if not inst.SoundEmitter:PlayingSound("sound") then
-                inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_"..soundprefix.."_run", "sound")
+                inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_" .. soundprefix .. "_run", "sound")
             end
             inst._activecount = inst._activecount + 1
             inst:DoTaskInTime(1.5, doonact, soundprefix)
@@ -160,7 +164,7 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
         if not inst:HasTag("burnt") then
             inst:_PlayAnimation("gift")
             inst:_PushAnimation("idle", false)
-            inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_"..giftsound.."_gift_recieve")
+            inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_" .. giftsound .. "_gift_recieve")
             if inst._activetask ~= nil then
                 inst._activetask:Cancel()
             end
@@ -171,14 +175,13 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
     local function onbuilt(inst, data)
         inst:_PlayAnimation("place")
         inst:_PushAnimation("idle", false)
-        inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_"..soundprefix.."_place")
-        
-		if name == "researchlab" then
-	        AwardPlayerAchievement("build_researchlab", data.builder)
-	    elseif name == "researchlab2" then
-	        AwardPlayerAchievement("build_researchlab2", data.builder)
-	    end
-        
+        inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_" .. soundprefix .. "_place")
+
+        if name == "researchlab" then
+            AwardPlayerAchievement("build_researchlab", data.builder)
+        elseif name == "researchlab2" then
+            AwardPlayerAchievement("build_researchlab2", data.builder)
+        end
     end
 
     local function fn()
@@ -193,7 +196,7 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
         MakeObstaclePhysics(inst, .4)
 
         inst.MiniMapEntity:SetPriority(5)
-        inst.MiniMapEntity:SetIcon(name..".png")
+        inst.MiniMapEntity:SetIcon(name .. ".png")
 
         inst.AnimState:SetBank(name)
         inst.AnimState:SetBuild(name)
@@ -201,7 +204,7 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
 
         inst:AddTag("giftmachine")
         inst:AddTag("structure")
-        inst:AddTag("level"..level)
+        inst:AddTag("level" .. level)
 
         --prototyper (from prototyper component) added to pristine state for optimization
         inst:AddTag("prototyper")
@@ -306,7 +309,7 @@ end
 --Using old prefab names
 return createmachine(1, "researchlab", "lvl1", TUNING.PROTOTYPER_TREES.SCIENCEMACHINE, "science"),
     createmachine(2, "researchlab2", "lvl2", TUNING.PROTOTYPER_TREES.ALCHEMYMACHINE, "alchemy"),
-    MakePlacer("researchlab_placer", "researchlab", "researchlab", "idle" ),
+    MakePlacer("researchlab_placer", "researchlab", "researchlab", "idle"),
     MakePlacer("researchlab2_placer", "researchlab2", "researchlab2", "idle"),
     --Skin FX
     Prefab("researchlab2_pod_fx", fxfn)

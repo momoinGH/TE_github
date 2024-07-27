@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/goddess_flute.zip"),
-	Asset("ANIM", "anim/greentornado.zip"),
+    Asset("ANIM", "anim/greentornado.zip"),
 }
 
 local prefabs =
@@ -9,12 +9,12 @@ local prefabs =
     "greentornado",
 }
 
-local function HearPanFlute(inst, musician, instrument)	
-	if musician:HasTag("windy1") and musician:HasTag("windy2") then
-		SpawnPrefab("greentornado").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	else
-		SpawnPrefab("greentornado1").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	end
+local function HearPanFlute(inst, musician, instrument)
+    if musician:HasTag("windy1") and musician:HasTag("windy2") then
+        SpawnPrefab("greentornado").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    else
+        SpawnPrefab("greentornado1").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    end
 end
 
 local function ShouldAcceptItem(inst, item)
@@ -22,15 +22,15 @@ local function ShouldAcceptItem(inst, item)
 end
 
 local function OnGetItem(inst, giver, item)
-	local finiteuses =  inst.components.finiteuses:GetPercent()
-	if giver:HasTag("windy1") and giver:HasTag("windy2") then
-		inst.components.finiteuses:SetPercent(finiteuses + 0.40)
-	else
-		inst.components.finiteuses:SetPercent(finiteuses + 0.10)
-	end
-	if finiteuses >= 1 then
-		inst.components.finiteuses:SetPercent(1)
-	end
+    local finiteuses = inst.components.finiteuses:GetPercent()
+    if giver:HasTag("windy1") and giver:HasTag("windy2") then
+        inst.components.finiteuses:SetPercent(finiteuses + 0.40)
+    else
+        inst.components.finiteuses:SetPercent(finiteuses + 0.10)
+    end
+    if finiteuses >= 1 then
+        inst.components.finiteuses:SetPercent(1)
+    end
 end
 
 local function fn()
@@ -41,7 +41,7 @@ local function fn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)	
+    MakeInventoryFloatable(inst)
 
     inst:AddTag("goddess_flute")
 
@@ -68,9 +68,9 @@ local function fn()
     inst.components.finiteuses:SetUses(TUNING.PANFLUTE_USES)
     inst.components.finiteuses:SetOnFinished(inst.Remove)
     inst.components.finiteuses:SetConsumption(ACTIONS.PLAY, 1)
-	
+
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_flute.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_flute.xml"
 
     MakeHauntableLaunch(inst)
     AddHauntableCustomReaction(inst, function(inst, haunter)
@@ -100,9 +100,9 @@ local function tornado_fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
-	local s = 1.20
-	inst.Transform:SetScale(s,s + 0.2,s)
+
+    local s = 1.20
+    inst.Transform:SetScale(s, s + 0.2, s)
 
     inst.AnimState:SetFinalOffset(2)
     inst.AnimState:SetBank("tornado")
@@ -124,8 +124,8 @@ local function tornado_fn()
     inst:DoTaskInTime(TUNING.TORNADO_LIFETIME * 4, ontornadolifetime)
 
     inst:AddComponent("knownlocations")
-	
-	inst:AddComponent("follower")
+
+    inst:AddComponent("follower")
 
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = TUNING.TORNADO_WALK_SPEED * .33
@@ -134,10 +134,10 @@ local function tornado_fn()
     inst:SetStateGraph("SGgreentornado")
     inst:SetBrain(brain)
 
-	inst:DoPeriodicTask(0.15, function(inst)
+    inst:DoPeriodicTask(0.15, function(inst)
         SpawnPrefab("green_leaves_chop").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	end)
-	
+    end)
+
     inst.WINDSTAFF_CASTER = nil
     inst.persists = false
 
@@ -172,8 +172,8 @@ local function tornado1_fn()
     inst:DoTaskInTime(TUNING.TORNADO_LIFETIME, ontornadolifetime)
 
     inst:AddComponent("knownlocations")
-	
-	inst:AddComponent("follower")
+
+    inst:AddComponent("follower")
 
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = TUNING.TORNADO_WALK_SPEED * .33
@@ -181,7 +181,7 @@ local function tornado1_fn()
 
     inst:SetStateGraph("SGtornado")
     inst:SetBrain(brain)
-	
+
     inst.WINDSTAFF_CASTER = nil
     inst.persists = false
 
@@ -207,9 +207,9 @@ local function tornado2_fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
-	local s = 1.20
-	inst.Transform:SetScale(s,s + 0.2,s)
+
+    local s = 1.20
+    inst.Transform:SetScale(s, s + 0.2, s)
 
     inst.AnimState:SetFinalOffset(2)
     inst.AnimState:SetBank("tornado")
@@ -228,13 +228,13 @@ local function tornado2_fn()
         return inst
     end
 
-	inst:AddTag("greentornado2")
-	
+    inst:AddTag("greentornado2")
+
     inst:DoTaskInTime(TUNING.TORNADO_LIFETIME * 4, ontornadolifetime)
 
     inst:AddComponent("knownlocations")
-	
-	inst:AddComponent("follower")
+
+    inst:AddComponent("follower")
 
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = TUNING.TORNADO_WALK_SPEED * .33
@@ -243,16 +243,16 @@ local function tornado2_fn()
     inst:SetStateGraph("SGgreentornado1")
     inst:SetBrain(brain)
 
-	inst:DoPeriodicTask(0.15, function(inst)
+    inst:DoPeriodicTask(0.15, function(inst)
         SpawnPrefab("green_leaves_chop").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	end)
-	
+    end)
+
     inst.WINDSTAFF_CASTER = nil
     inst.persists = false
-	
-	inst.KillFX = KillFX
+
+    inst.KillFX = KillFX
     inst.OnKillFX = onkillfx
-	inst.TriggerFX = TriggerFX
+    inst.TriggerFX = TriggerFX
 
 
     return inst
@@ -260,5 +260,5 @@ end
 
 return Prefab("goddess_flute", fn, assets, prefabs),
     Prefab("greentornado", tornado_fn, assets),
-	Prefab("greentornado1", tornado1_fn, assets),
-	Prefab("greentornado2", tornado2_fn, assets)
+    Prefab("greentornado1", tornado1_fn, assets),
+    Prefab("greentornado2", tornado2_fn, assets)

@@ -14,60 +14,60 @@ local prefabs =
     "green_scale"
 }
 
-SetSharedLootTable( "lizardman",
-{
-    {"meat", 1.0},
-    {"meat", 1.0},
-    {"snakeskin", 0.5},
+SetSharedLootTable("lizardman",
+    {
+        { "meat",      1.0 },
+        { "meat",      1.0 },
+        { "snakeskin", 0.5 },
 
-})
+    })
 
 local frenzyDuration = 15
 
 local function OnNewTarget(inst, data)
-	if inst.components.sleeper:IsAsleep() then
-		inst.components.sleeper:WakeUp()
-	end
+    if inst.components.sleeper:IsAsleep() then
+        inst.components.sleeper:WakeUp()
+    end
 end
 
 local function Retarget(inst)
-	local dist = 12
-    local notags = {"FX", "NOCLICK", "INLIMBO", "lizardman"}
+    local dist = 12
+    local notags = { "FX", "NOCLICK", "INLIMBO", "lizardman" }
     local reqtags = nil
     if not inst.isFrenzy then
-        reqtags = {"monster"}
-        notags = {"FX", "NOCLICK", "INLIMBO", "lizardman", "structure", "player"}
-    --else
+        reqtags = { "monster" }
+        notags = { "FX", "NOCLICK", "INLIMBO", "lizardman", "structure", "player" }
+        --else
         --notags = {"FX", "NOCLICK", "INLIMBO", "lizardman"}
     end
-	return FindEntity(inst, dist, function(guy)
+    return FindEntity(inst, dist, function(guy)
         return inst.components.combat:CanTarget(guy)
-	end, reqtags, notags)
+    end, reqtags, notags)
 end
 
 local function KeepTarget(inst, target)
-	return inst.components.combat:CanTarget(target) and inst:GetDistanceSqToInst(target) <= (20 * 20)
+    return inst.components.combat:CanTarget(target) and inst:GetDistanceSqToInst(target) <= (20 * 20)
 end
 
 local function OnAttacked(inst, data)
     local function IsArmored()
-        return data.attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) 
-            and data.attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) 
+        return data.attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+            and data.attacker.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
     end
 
-    if data.attacker == nil 
-        or data.attacker:HasTag("lizardman") 
-        or data.attacker.components.combat == nil 
-        or data.attacker.components.health == nil 
-    then 
-        return 
+    if data.attacker == nil
+        or data.attacker:HasTag("lizardman")
+        or data.attacker.components.combat == nil
+        or data.attacker.components.health == nil
+    then
+        return
     end
 
     inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.attacker, 20, 
-        function(dude) 
-            return dude:HasTag("lizardman") 
-                and not dude.components.health:IsDead() 
+    inst.components.combat:ShareTarget(data.attacker, 20,
+        function(dude)
+            return dude:HasTag("lizardman")
+                and not dude.components.health:IsDead()
         end, 5)
 
     if data.attacker:IsNear(inst, 3) then
@@ -84,13 +84,13 @@ end
 
 local function OnAttackOther(inst, data)
     if not inst.isFrenzy then
-        inst.components.combat:ShareTarget(data.target, 
-            20, 
-            function(dude) 
-                return dude:HasTag("lizardman") 
-                    and not dude.components.health:IsDead() 
+        inst.components.combat:ShareTarget(data.target,
+            20,
+            function(dude)
+                return dude:HasTag("lizardman")
+                    and not dude.components.health:IsDead()
             end, 5)
-     end
+    end
 end
 
 --don't want to enrage lizardmans after wake instantly
@@ -163,7 +163,7 @@ local function MakeWeapon(inst)
 end
 
 local function ShouldAcceptItem(inst, item)
-    return false--item.components.equippable ~= nil
+    return false --item.components.equippable ~= nil
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
@@ -178,7 +178,8 @@ local function OnGetItemFromPlayer(inst, giver, item)
 end
 
 local function GetDebugString(inst)
-    return string.format("is frenzy: %s, try frenzy in %i", tostring(inst.isFrenzy), math.max(0, 30 - (GetTime() - inst.lastFrenzyTime)))
+    return string.format("is frenzy: %s, try frenzy in %i", tostring(inst.isFrenzy),
+        math.max(0, 30 - (GetTime() - inst.lastFrenzyTime)))
 end
 
 local function OnSave(inst, data)
@@ -232,29 +233,29 @@ local function fn()
     end
 
     inst:AddComponent("locomotor")
-	inst.components.locomotor.runspeed = 6
-	local sg = require "stategraphs/SGlizardman"
-	inst:SetStateGraph("SGlizardman")
+    inst.components.locomotor.runspeed = 6
+    local sg = require "stategraphs/SGlizardman"
+    inst:SetStateGraph("SGlizardman")
 
-	local brain = require "brains/lizardmanbrain"
-	inst:SetBrain(brain)
+    local brain = require "brains/lizardmanbrain"
+    inst:SetBrain(brain)
 
-	inst:AddComponent("knownlocations")
+    inst:AddComponent("knownlocations")
 
-	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(680)
+    inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(680)
 
-	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(45)
-	inst.components.combat:SetAttackPeriod(2.5)
-	inst.components.combat:SetRetargetFunction(2, Retarget)
-	inst.components.combat:SetRange(3)
-	inst.components.combat.battlecryenabled = false
+    inst:AddComponent("combat")
+    inst.components.combat:SetDefaultDamage(45)
+    inst.components.combat:SetAttackPeriod(2.5)
+    inst.components.combat:SetRetargetFunction(2, Retarget)
+    inst.components.combat:SetRange(3)
+    inst.components.combat.battlecryenabled = false
 
-	inst:AddComponent("lootdropper")
-	inst.components.lootdropper:SetChanceLootTable("lizardman")
+    inst:AddComponent("lootdropper")
+    inst.components.lootdropper:SetChanceLootTable("lizardman")
 
-	inst:AddComponent("inspectable")
+    inst:AddComponent("inspectable")
     --inst:AddComponent("sanityaura")
     inst:AddComponent("inventory")
 
@@ -262,7 +263,7 @@ local function fn()
     --inst.components.trader:SetAcceptTest(ShouldAcceptItem)
     --inst.components.trader.onaccept = OnGetItemFromPlayer
     --inst.components.trader.deleteitemonaccept = true
-    
+
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.LIZARDMAN }, { FOODGROUP.LIZARDMAN })
     inst.components.eater:SetCanEatHorrible()
@@ -272,7 +273,7 @@ local function fn()
 
     inst:AddComponent("sleeper")
     inst:AddComponent("colouradder")
-    
+
     MakeMediumFreezableCharacter(inst, "body")
     MakeMediumBurnableCharacter(inst, "body")
 
@@ -296,17 +297,17 @@ end
 
 --range attack--------------------------
 ----------------------------------------
-local function OnThrown(inst) 
-    inst:Show() 
+local function OnThrown(inst)
+    inst:Show()
     inst.AnimState:PlayAnimation("idle_loop")
 end
 
-local function OnHit(inst) 
+local function OnHit(inst)
     inst.AnimState:PlayAnimation("blast")
     inst:ListenForEvent("animover", function(inst) inst:Remove() end)
 end
 
-local function OnMiss(inst) 
+local function OnMiss(inst)
     inst.AnimState:PlayAnimation("disappear")
     inst:ListenForEvent("animover", function(inst) inst:Remove() end)
 end

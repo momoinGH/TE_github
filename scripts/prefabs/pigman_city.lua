@@ -813,7 +813,6 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
             for i, name in ipairs(STRINGS.CITYPIGNAMES["QUEEN"]) do
                 table.insert(names, name)
             end
-        
         else
             for i, name in ipairs(STRINGS.CITYPIGNAMES["UNISEX"]) do
                 table.insert(names, name)
@@ -1050,14 +1049,14 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
                     local hat = SpawnPrefab("beefalohat")
                     inst.components.inventory:GiveItem(hat)
                     inst.components.inventory:Equip(hat)
-					
-					inst.components.lootdropper:SetLoot({ "spear" })
+
+                    inst.components.lootdropper:SetLoot({ "spear" })
                 else
                     local axe = SpawnPrefab("halberd")
                     inst.components.inventory:GiveItem(axe)
                     inst.components.inventory:Equip(axe)
-					
-					inst.components.lootdropper:SetLoot({ "halberd" })
+
+                    inst.components.lootdropper:SetLoot({ "halberd" })
                 end
 
 
@@ -1192,7 +1191,6 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
             for i, name in ipairs(STRINGS.CITYPIGNAMES["QUEEN"]) do
                 table.insert(names, name)
             end
-        
         else
             for i, name in ipairs(STRINGS.CITYPIGNAMES["UNISEX"]) do
                 table.insert(names, name)

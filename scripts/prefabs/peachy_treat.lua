@@ -1,8 +1,8 @@
 local assets =
 {
-	Asset("IMAGE", "images/inventoryimages/peach.tex"),
-	Asset("ATLAS", "images/inventoryimages/peach.xml"),
-	Asset("ANIM", "anim/peach.zip"),
+    Asset("IMAGE", "images/inventoryimages/peach.tex"),
+    Asset("ATLAS", "images/inventoryimages/peach.xml"),
+    Asset("ANIM", "anim/peach.zip"),
 }
 
 local prefabs =
@@ -23,11 +23,11 @@ local function fn()
     inst.AnimState:SetBank("peach")
     inst.AnimState:PlayAnimation("idle", false)
 
-	local s = 1
-	inst.Transform:SetScale(s,s,s)
-	
-    MakeInventoryFloatable(inst)		
-	
+    local s = 1
+    inst.Transform:SetScale(s, s, s)
+
+    MakeInventoryFloatable(inst)
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -36,8 +36,8 @@ local function fn()
 
     inst:AddComponent("edible")
     inst.components.edible.hungervalue = 150
-	inst.components.edible.foodtype = FOODTYPE.PEACHY
-	inst.components.edible.healthvalue = 150
+    inst.components.edible.foodtype = FOODTYPE.PEACHY
+    inst.components.edible.healthvalue = 150
 
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = 10
@@ -45,10 +45,10 @@ local function fn()
     inst:AddComponent("tradable")
 
     inst:AddComponent("inspectable")
-	
+
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach.xml"
-	
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/peach.xml"
+
     MakeHauntableLaunchAndPerish(inst)
 
     return inst

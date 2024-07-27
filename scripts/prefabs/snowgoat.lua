@@ -17,11 +17,11 @@ local prefabs =
 
 local brain = require("brains/lightninggoatbrain")
 
-SetSharedLootTable( 'snowgoat',
-{
-    {'meat',              1.00},
-    {'goatmilk',          1.00},	
-})
+SetSharedLootTable('snowgoat',
+    {
+        { 'meat',     1.00 },
+        { 'goatmilk', 1.00 },
+    })
 
 local RETARGET_MUST_TAGS = { "_combat" }
 local RETARGET_CANT_TAGS = { "snowgoat", "wall" }
@@ -33,7 +33,7 @@ local function RetargetFn(inst)
             return inst.components.combat:CanTarget(guy)
         end
         return
-            -- Look for non-wall targets first
+        -- Look for non-wall targets first
             FindEntity(
                 inst,
                 TUNING.LIGHTNING_GOAT_TARGET_DIST,
@@ -73,7 +73,7 @@ end
 
 local function discharge(inst)
     inst:RemoveTag("charged")
-    inst.components.lootdropper:SetChanceLootTable('snowgoat') 
+    inst.components.lootdropper:SetChanceLootTable('snowgoat')
     inst.sg:GoToState("discharge")
     inst.AnimState:ClearBloomEffectHandle()
     inst.charged = false
@@ -100,7 +100,6 @@ local function OnAttacked(inst, data)
             if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
                 (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
                 not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
-
                 data.attacker.components.health:DoDelta(-TUNING.LIGHTNING_GOAT_DAMAGE, nil, inst.prefab, nil, inst)
                 if data.attacker:HasTag("player") then
                     data.attacker.sg:GoToState("electrocute")
@@ -114,7 +113,7 @@ local function OnAttacked(inst, data)
 end
 
 local function onspawnedforhunt(inst)
-	TheWorld:PushEvent("ms_sendlightningstrike", inst:GetPosition())
+    TheWorld:PushEvent("ms_sendlightningstrike", inst:GetPosition())
 end
 
 local function getstatus(inst)
@@ -140,16 +139,16 @@ local function fn()
     inst.AnimState:SetBank("lightning_goat")
     inst.AnimState:SetBuild("frostland_goat_build")
     inst.AnimState:PlayAnimation("idle_loop", true)
-	inst.AnimState:OverrideSymbol("lightning_goat_horn", "frostland_goat_horn", "lightning_goat_horn")
+    inst.AnimState:OverrideSymbol("lightning_goat_horn", "frostland_goat_horn", "lightning_goat_horn")
     inst.AnimState:Hide("fx")
 
     ------------------------------------------
 
     inst:AddTag("snowgoat")
     inst:AddTag("animal")
---    inst:AddTag("lightningrod")
- 	inst:AddTag("walrus")
-	inst:AddTag("houndfriend")	
+    --    inst:AddTag("lightningrod")
+    inst:AddTag("walrus")
+    inst:AddTag("houndfriend")
 
     --herdmember (from herdmember component) added to pristine state for optimization
     inst:AddTag("herdmember")
@@ -192,7 +191,7 @@ local function fn()
     ------------------------------------------
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable('snowgoat') 
+    inst.components.lootdropper:SetChanceLootTable('snowgoat')
 
     ------------------------------------------
 
@@ -220,7 +219,7 @@ local function fn()
     MakeMediumBurnableCharacter(inst, "lightning_goat_body")
     MakeMediumFreezableCharacter(inst, "lightning_goat_body")
 
-	inst:ListenForEvent("spawnedforhunt", onspawnedforhunt)
+    inst:ListenForEvent("spawnedforhunt", onspawnedforhunt)
 
     ------------------------------------------
 

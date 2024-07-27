@@ -1,8 +1,8 @@
 local function makefeather(name)
-    local assetname = "feather_"..name
+    local assetname = "feather_" .. name
     local assets =
     {
-        Asset("ANIM", "anim/"..assetname..".zip"),
+        Asset("ANIM", "anim/" .. assetname .. ".zip"),
     }
 
     local function fn()
@@ -17,11 +17,11 @@ local function makefeather(name)
         inst.AnimState:SetBank(assetname)
         inst.AnimState:SetBuild(assetname)
         inst.AnimState:PlayAnimation("idle")
-		
-        inst.pickupsound = "cloth"		
+
+        inst.pickupsound = "cloth"
 
         inst:AddTag("cattoy")
-        inst:AddTag("birdfeather")		
+        inst:AddTag("birdfeather")
 
         MakeInventoryFloatable(inst, "small", 0.05, 0.95)
 
@@ -45,14 +45,14 @@ local function makefeather(name)
         MakeHauntableLaunchAndIgnite(inst)
 
         inst:AddComponent("inventoryitem")
-if name == "thunder" then
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-		inst.caminho = "images/inventoryimages/hamletinventory.xml"
-end		
-if name == "chicken" then
-		inst.components.inventoryitem.atlasname = "map_icons/creepindedeepicon.xml"
-		inst.caminho = "map_icons/creepindedeepicon.xml"
-end
+        if name == "thunder" then
+            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
+            inst.caminho = "images/inventoryimages/hamletinventory.xml"
+        end
+        if name == "chicken" then
+            inst.components.inventoryitem.atlasname = "map_icons/creepindedeepicon.xml"
+            inst.caminho = "map_icons/creepindedeepicon.xml"
+        end
 
         inst.components.inventoryitem.nobounce = true
 
@@ -60,12 +60,12 @@ end
 
         return inst
     end
-    return Prefab( assetname, fn, assets)
+    return Prefab(assetname, fn, assets)
 end
 
 return makefeather("crow"),
     makefeather("robin"),
     makefeather("robin_winter"),
     makefeather("canary"),
-	makefeather("thunder"),
-	makefeather("chicken")	
+    makefeather("thunder"),
+    makefeather("chicken")

@@ -24,17 +24,16 @@ end)
 
 local function GoHomeAction(inst)
     local homePos = inst.components.knownlocations:GetLocation("home")
-    if homePos and 
-       not inst.components.combat.target then
+    if homePos and
+        not inst.components.combat.target then
         return BufferedAction(inst, nil, ACTIONS.WALKTO, nil, homePos, nil, 0.2)
     end
 end
 
 local function GetFaceTargetFn(inst)
-
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition() )
-    if (homePos and distsq(homePos, myPos) > 40*40) then
+    local myPos = Vector3(inst.Transform:GetWorldPosition())
+    if (homePos and distsq(homePos, myPos) > 40 * 40) then
         return
     end
 
@@ -45,33 +44,31 @@ local function GetFaceTargetFn(inst)
 end
 
 local function KeepFaceTargetFn(inst, target)
-    
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition() )
-    if (homePos and distsq(homePos, myPos) > 40*40) then
+    local myPos = Vector3(inst.Transform:GetWorldPosition())
+    if (homePos and distsq(homePos, myPos) > 40 * 40) then
         return false
     end
 
-    return inst:GetDistanceSqToInst(target) <= KEEP_FACE_DIST*KEEP_FACE_DIST and not target:HasTag("notarget")
+    return inst:GetDistanceSqToInst(target) <= KEEP_FACE_DIST * KEEP_FACE_DIST and not target:HasTag("notarget")
 end
 
 local function ShouldGoHome(inst)
-
     if (inst.components.follower and inst.components.follower.leader) then
         return false
     end
 
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition() )
+    local myPos = Vector3(inst.Transform:GetWorldPosition())
     local dist = homePos and distsq(homePos, myPos)
     if not dist then
         return
     end
-    return (dist > GO_HOME_DIST*GO_HOME_DIST) or (dist > 10*10 and inst.components.combat.target == nil)
+    return (dist > GO_HOME_DIST * GO_HOME_DIST) or (dist > 10 * 10 and inst.components.combat.target == nil)
 end
 
 local function shouldjumpattack(inst)
-    if  inst.sg:HasStateTag("leapattack") then
+    if inst.sg:HasStateTag("leapattack") then
         return true
     end
 
@@ -85,7 +82,7 @@ local function shouldjumpattack(inst)
                     return true
                 end
             else
-                print("JUMP TARGET WASN'T THERE ANYMORE?",target.prefab)
+                print("JUMP TARGET WASN'T THERE ANYMORE?", target.prefab)
                 inst.components.combat.target = nil
             end
         end
@@ -96,7 +93,7 @@ end
 local function dojumpAttack(inst)
     if inst.components.combat.target and not inst.sg:HasStateTag("leapattack") then
         local target = inst.components.combat.target
-        inst:PushEvent("doleapattack", {target=target})
+        inst:PushEvent("doleapattack", { target = target })
 
         inst:FacePoint(target.Transform:GetWorldPosition())
     end
@@ -104,29 +101,31 @@ end
 
 function HippopotamooseBrain:OnStart()
     local root = PriorityNode(
-    {
+        {
 
-        WhileNode( function() return shouldjumpattack(self.inst) end, "jumpattack",  
-            DoAction(self.inst, function() return dojumpAttack(self.inst) end, "jump", true)
-            ), 
-        IfNode( function() return self.inst.components.combat.target ~= nil end, "hastarget", AttackWall(self.inst)),
-        ChaseAndAttack(self.inst, MAX_CHASE_TIME),
+            WhileNode(function() return shouldjumpattack(self.inst) end, "jumpattack",
+                DoAction(self.inst, function() return dojumpAttack(self.inst) end, "jump", true)
+            ),
+            IfNode(function() return self.inst.components.combat.target ~= nil end, "hastarget", AttackWall(self.inst)),
+            ChaseAndAttack(self.inst, MAX_CHASE_TIME),
 
-        WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
-        WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
-            DoAction(self.inst, GoHomeAction, "Go Home", false )),
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
+                DoAction(self.inst, GoHomeAction, "Go Home", false)),
 
-        Follow(self.inst, function() return self.inst.components.follower and self.inst.components.follower.leader end, 
-            5, 7, 12, false),
-        IfNode(function() return self.inst:HasTag("hippopotamoose") and math.random() < 0.008 end, "wander",
-                Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, WANDER_DIST)),
-        IfNode(function() return not self.inst:HasTag("hippopotamoose") end, "face",
+            Follow(self.inst,
+                function() return self.inst.components.follower and self.inst.components.follower.leader end,
+                5, 7, 12, false),
+            IfNode(function() return self.inst:HasTag("hippopotamoose") and math.random() < 0.008 end, "wander",
+                Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                    WANDER_DIST)),
+            IfNode(function() return not self.inst:HasTag("hippopotamoose") end, "face",
                 FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn)),
-        StandStill(self.inst)
+            StandStill(self.inst)
 
 
-    }, .25)
-    
+        }, .25)
+
     self.bt = BT(self.inst, root)
 end
 

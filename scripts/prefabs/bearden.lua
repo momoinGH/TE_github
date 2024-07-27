@@ -7,27 +7,27 @@ local assets =
 
 local prefabs =
 {
-	"bear",
+    "bear",
 }
 
 local function ongohome(inst, child)
-	inst.AnimState:PlayAnimation("hit_bear")
-	inst.AnimState:PushAnimation("idle_bear")
+    inst.AnimState:PlayAnimation("hit_bear")
+    inst.AnimState:PushAnimation("idle_bear")
 end
 
 local function onhammered(inst, worker)
-	if inst.components.spawner ~= nil and inst.components.spawner:IsOccupied() then
+    if inst.components.spawner ~= nil and inst.components.spawner:IsOccupied() then
         inst.components.spawner:ReleaseChild()
     end
-	inst.components.lootdropper:DropLoot()
-	SpawnPrefab("collapse_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	inst.SoundEmitter:PlaySound("dontstarve/common/destroy_stone")
-	inst:Remove()
+    inst.components.lootdropper:DropLoot()
+    SpawnPrefab("collapse_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    inst.SoundEmitter:PlaySound("dontstarve/common/destroy_stone")
+    inst:Remove()
 end
 
 local function onhit(inst, worker)
-	inst.AnimState:PlayAnimation("hit_bear")
-	inst.AnimState:PushAnimation("idle_bear")
+    inst.AnimState:PlayAnimation("hit_bear")
+    inst.AnimState:PushAnimation("idle_bear")
 end
 
 local function OnStartDay(inst)
@@ -39,12 +39,11 @@ end
 
 local function spawncheckday(inst)
     inst.inittask = nil
-inst:WatchWorldState("startday", OnStartDay)
+    inst:WatchWorldState("startday", OnStartDay)
     if inst.components.spawner ~= nil and inst.components.spawner:IsOccupied() then
         if TheWorld.state.iscaveday or
             (inst.components.burnable ~= nil and inst.components.burnable:IsBurning()) then
             inst.components.spawner:ReleaseChild()
-
         end
     end
 end
@@ -64,40 +63,40 @@ local function oninit(inst)
 end
 
 local function onoccupied(inst, child)
-		inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/idle")  
+    inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dragoon/idle")
 end
 
 local function onvacate(inst, child)
-        if child ~= nil then
-            if child.components.health ~= nil then
-                child.components.health:SetPercent(1)
-            end
+    if child ~= nil then
+        if child.components.health ~= nil then
+            child.components.health:SetPercent(1)
         end
+    end
 end
 
 local function fn()
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	inst.entity:AddNetwork()
-	inst.entity:AddSoundEmitter()
-	MakeObstaclePhysics(inst, 1.5)
+    local inst = CreateEntity()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+    inst.entity:AddSoundEmitter()
+    MakeObstaclePhysics(inst, 1.5)
 
-	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetIcon("bearden.png")
+    local minimap = inst.entity:AddMiniMapEntity()
+    minimap:SetIcon("bearden.png")
 
     inst.AnimState:SetBank("merm_sw_house")
     inst.AnimState:SetBuild("wildbea_house")
     inst.AnimState:PlayAnimation("idle_bear")
-    inst.Transform:SetScale(1, 1, 1)	
-	inst.AnimState:OverrideSymbol("eyes", "dragoon_den", "")
---	inst.AnimState:SetAddColour(82 / 255, 115 / 255, 124 / 255, 255/255)	
+    inst.Transform:SetScale(1, 1, 1)
+    inst.AnimState:OverrideSymbol("eyes", "dragoon_den", "")
+    --	inst.AnimState:SetAddColour(82 / 255, 115 / 255, 124 / 255, 255/255)	
 
-	inst:AddTag("structure")
-	
---	inst.AnimState:SetMultColour(100/255, 100/255, 40/255, 1)	
+    inst:AddTag("structure")
 
-	inst.entity:SetPristine()
+    --	inst.AnimState:SetMultColour(100/255, 100/255, 40/255, 1)	
+
+    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
@@ -105,20 +104,20 @@ local function fn()
     inst:AddComponent("lootdropper")
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(nil)
-	inst.components.workable:SetOnFinishCallback(onhammered)
-	inst.components.workable:SetOnWorkCallback(onhit)
+    inst.components.workable:SetOnFinishCallback(onhammered)
+    inst.components.workable:SetOnWorkCallback(onhit)
 
-	inst:AddComponent("spawner")
-	WorldSettings_Spawner_SpawnDelay(inst, TUNING.TOTAL_DAY_TIME*1, true)	
-    inst.components.spawner:Configure("bear", TUNING.TOTAL_DAY_TIME*1)
+    inst:AddComponent("spawner")
+    WorldSettings_Spawner_SpawnDelay(inst, TUNING.TOTAL_DAY_TIME * 1, true)
+    inst.components.spawner:Configure("bear", TUNING.TOTAL_DAY_TIME * 1)
     inst.components.spawner.onoccupied = onoccupied
     inst.components.spawner.onvacate = onvacate
     inst.components.spawner:CancelSpawning()
 
-	inst:AddComponent("inspectable")
+    inst:AddComponent("inspectable")
 
-    inst.inittask = inst:DoTaskInTime(0, oninit)	
-	return inst
+    inst.inittask = inst:DoTaskInTime(0, oninit)
+    return inst
 end
 
 return Prefab("bearden", fn, assets, prefabs)

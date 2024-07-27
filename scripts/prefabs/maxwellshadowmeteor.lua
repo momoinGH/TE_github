@@ -32,7 +32,7 @@ local SMASHABLE_WORK_ACTIONS =
 }
 local SMASHABLE_TAGS = { "_combat", "_inventoryitem", "campfire" }
 for k, v in pairs(SMASHABLE_WORK_ACTIONS) do
-    table.insert(SMASHABLE_TAGS, k.."_workable")
+    table.insert(SMASHABLE_TAGS, k .. "_workable")
 end
 local NON_SMASHABLE_TAGS = { "INLIMBO", "playerghost" }
 
@@ -62,7 +62,7 @@ local function onexplode(inst)
             splash.Transform:SetPosition(x, y, z)
         end
     else
- --[[       local scorch = SpawnPrefab("burntground")
+        --[[       local scorch = SpawnPrefab("burntground")
         if scorch ~= nil then
             scorch.Transform:SetPosition(x, y, z)
             local scale = inst.size * 1.3
@@ -71,7 +71,8 @@ local function onexplode(inst)
 
 ]]
         local launched = {}
-        local ents = TheSim:FindEntities(x, y, z, inst.size * TUNING.METEOR_RADIUS, nil, NON_SMASHABLE_TAGS, SMASHABLE_TAGS)
+        local ents = TheSim:FindEntities(x, y, z, inst.size * TUNING.METEOR_RADIUS, nil, NON_SMASHABLE_TAGS,
+            SMASHABLE_TAGS)
         for i, v in ipairs(ents) do
             --V2C: things "could" go invalid if something earlier in the list
             --     removes something later in the list.
@@ -86,8 +87,8 @@ local function onexplode(inst)
                         --V2C: nil action for campfires
                         if (work_action == nil or SMASHABLE_WORK_ACTIONS[work_action.id]) and
                             (work_action ~= ACTIONS.DIG
-                            or (v.components.spawner == nil and
-                                v.components.childspawner == nil)) then
+                                or (v.components.spawner == nil and
+                                    v.components.childspawner == nil)) then
                             v.components.workable:WorkedBy(inst, inst.workdone or 20)
                         end
                     end
@@ -119,10 +120,8 @@ local function onexplode(inst)
                 end
             end
         end
-
-       
-        end
     end
+end
 
 local function dostrike(inst)
     inst.striketask = nil
@@ -134,8 +133,8 @@ local function dostrike(inst)
 end
 
 local warntime = 1
-local sizes = 
-{ 
+local sizes =
+{
     small = .7,
     medium = 1,
     large = 1.3,
@@ -175,10 +174,10 @@ local function SetSize(inst, sz, mod)
     if sz == "medium" then
         inst.loot =
         {
-            { prefab = "rocks", chance = TUNING.METEOR_CHANCE_INVITEM_OFTEN * mod },
-            { prefab = "rocks", chance = TUNING.METEOR_CHANCE_INVITEM_RARE * mod },
-            { prefab = "flint", chance = TUNING.METEOR_CHANCE_INVITEM_ALWAYS * mod },
-            { prefab = "flint", chance = TUNING.METEOR_CHANCE_INVITEM_VERYRARE * mod },
+            { prefab = "rocks",          chance = TUNING.METEOR_CHANCE_INVITEM_OFTEN * mod },
+            { prefab = "rocks",          chance = TUNING.METEOR_CHANCE_INVITEM_RARE * mod },
+            { prefab = "flint",          chance = TUNING.METEOR_CHANCE_INVITEM_ALWAYS * mod },
+            { prefab = "flint",          chance = TUNING.METEOR_CHANCE_INVITEM_VERYRARE * mod },
             { prefab = "moonrocknugget", chance = TUNING.METEOR_CHANCE_INVITEM_SOMETIMES * mod },
         }
     elseif sz == "large" then
@@ -206,7 +205,7 @@ local function SetSize(inst, sz, mod)
         else -- Don't check for chance or mod this one: we need to pick a boulder
             inst.loot =
             {
-	            { 
+                {
                     prefab = "moonrocknugget",
                     chance = TUNING.METEOR_CHANCE_INVITEM_SOMETIMES * mod
                 },
@@ -236,14 +235,14 @@ local function AutoSize(inst)
     inst:SetSize(rand <= .33 and "large" or (rand <= .67 and "medium" or "small"))
 end
 
-local function fn() 
+local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-    
+
     inst.Transform:SetTwoFaced()
 
     inst.AnimState:SetBank("meteor")

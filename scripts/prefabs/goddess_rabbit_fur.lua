@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/goddess_rabbit_fur.zip"),
-	Asset("ATLAS", "images/inventoryimages/goddess_rabbit_fur.xml")
+    Asset("ATLAS", "images/inventoryimages/goddess_rabbit_fur.xml")
 }
 
 local function fn()
@@ -13,10 +13,10 @@ local function fn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)	
-	
-	local s = 3
-	inst.Transform:SetScale(s,s,s)
+    MakeInventoryFloatable(inst)
+
+    local s = 3
+    inst.Transform:SetScale(s, s, s)
 
     inst.AnimState:SetBank("goddess_rabbit_fur")
     inst.AnimState:SetBuild("goddess_rabbit_fur")
@@ -28,15 +28,15 @@ local function fn()
         return inst
     end
 
-	inst:AddTag("goddess_rabbit_fur")
-	
+    inst:AddTag("goddess_rabbit_fur")
+
     inst:AddComponent("inspectable")
-	
-	inst:AddComponent("stackable")
+
+    inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_rabbit_fur.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_rabbit_fur.xml"
 
     MakeHauntableLaunch(inst)
 

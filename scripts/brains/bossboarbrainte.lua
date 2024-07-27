@@ -9,7 +9,7 @@ require "behaviours/standstill"
 require "giantutils"
 
 local BossBoarte = Class(Brain, function(self, inst)
-    Brain._ctor(self, inst)
+	Brain._ctor(self, inst)
 end)
 
 local SEE_DIST = 30
@@ -22,13 +22,13 @@ local wwcd = 12
 local gbcd = 12
 
 local function GetHomePos(inst)
-    local home = GetHome(inst)
-    return home ~= nil and home:GetPosition() or nil
+	local home = GetHome(inst)
+	return home ~= nil and home:GetPosition() or nil
 end
 
 local function GetWanderPoint(inst)
-    local target = inst.components.knownlocations:GetLocation("spawnpoint")
-    return target ~= nil and target:GetPosition() or nil
+	local target = inst.components.knownlocations:GetLocation("spawnpoint")
+	return target ~= nil and target:GetPosition() or nil
 end
 
 local function ShouldGroundBurn(inst)
@@ -52,29 +52,27 @@ end
 local function ShouldGroundSlam(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	return GetTime() - inst.lastGroundSlam > inst:CalculateGroundSlamCD()
-		and IsAnyPlayerInRange(x, y, z, 12, true) 
+		and IsAnyPlayerInRange(x, y, z, 12, true)
 end
 
 
 function BossBoarte:OnStart()
-    
-    local root = PriorityNode(
-    {
-		--WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst) ),
-		ChaseAndAttack(self.inst, CHASE_TIME, CHASE_DIST),
-		ParallelNode{
-            SequenceNode{
-                WaitNode(10),
-                ActionNode(function() self.inst:SetEvaded() end),
-            },
-            Wander(self.inst, GetWanderPoint, 5),
-        },
+	local root = PriorityNode(
+		{
+			--WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst) ),
+			ChaseAndAttack(self.inst, CHASE_TIME, CHASE_DIST),
+			ParallelNode {
+				SequenceNode {
+					WaitNode(10),
+					ActionNode(function() self.inst:SetEvaded() end),
+				},
+				Wander(self.inst, GetWanderPoint, 5),
+			},
 
-		StandStill(self.inst, function() return true end),
-    }, .25)
-    
-    self.bt = BT(self.inst, root)
-    
+			StandStill(self.inst, function() return true end),
+		}, .25)
+
+	self.bt = BT(self.inst, root)
 end
 
 return BossBoarte

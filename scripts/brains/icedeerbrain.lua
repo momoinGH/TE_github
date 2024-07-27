@@ -25,7 +25,7 @@ local MAX_CHASE_TIME = 6
 
 local function ResetData(inst)
     if TheWorld.components.deerherding ~= nil then
-       TheWorld.components.deerherding:SetHerdAlertTarget(inst, FindClosestPlayerToInst(inst, START_ALERT_DIST, true))
+        TheWorld.components.deerherding:SetHerdAlertTarget(inst, FindClosestPlayerToInst(inst, START_ALERT_DIST, true))
     end
 end
 
@@ -73,7 +73,7 @@ end
 
 local function GetGrazingAngle(inst)
     local offset = inst.components.knownlocations:GetLocation("herdoffset")
-    return GetRandomWithVariance(math.atan2(offset.z, offset.x), 66*DEGREES)
+    return GetRandomWithVariance(math.atan2(offset.z, offset.x), 66 * DEGREES)
 end
 
 local function IsHerdGrazing(self)
@@ -87,48 +87,50 @@ end)
 
 function IcedeerBrain:OnStart()
     local solomentality = PriorityNode(
-    {
-        WhileNode(function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
---        WhileNode(function() return self.inst.components.combat:HasTarget() end, "Flee", 
---            PriorityNode{
---                AttackWall(self.inst),
---                RunAway(self.inst, {fn=function(guy) return self.inst.components.combat:TargetIs(guy) end, tags={"player"}}, TUNING.DEER_ATTACKER_REMEMBER_DIST, TUNING.DEER_ATTACKER_REMEMBER_DIST),
---            }),
-        WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+        {
+            WhileNode(function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end,
+                "PanicHaunted", Panic(self.inst)),
+            --        WhileNode(function() return self.inst.components.combat:HasTarget() end, "Flee",
+            --            PriorityNode{
+            --                AttackWall(self.inst),
+            --                RunAway(self.inst, {fn=function(guy) return self.inst.components.combat:TargetIs(guy) end, tags={"player"}}, TUNING.DEER_ATTACKER_REMEMBER_DIST, TUNING.DEER_ATTACKER_REMEMBER_DIST),
+            --            }),
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            FaceEntity(self.inst, GetNonHerdingFaceTargetFn, KeepNonHerdingFaceTargetFn),
+            ChaseAndAttack(self.inst, MAX_CHASE_TIME),
+            BrainCommon.AnchorToSaltlick(self.inst),
+            --Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("nonherdhome") end, GetWanderDistFn),
+            Wander(self.inst),
 
-        FaceEntity(self.inst, GetNonHerdingFaceTargetFn, KeepNonHerdingFaceTargetFn),
-        ChaseAndAttack(self.inst, MAX_CHASE_TIME),		
-        BrainCommon.AnchorToSaltlick(self.inst),
-        --Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("nonherdhome") end, GetWanderDistFn),
-        Wander(self.inst),
-        
-    })
+        })
 
     local herdmentality = PriorityNode(
-    {
-        Leash(self.inst, GetLocationInHerd, HERD_KEEPUP_DIST, 5, true),
-        FaceEntity(self.inst, GetAlertTargetFn, KeepAlertTargetFn, 0.25),
-        WhileNode(function() return IsHerdGrazing(self) end, "Grazing",
-            SequenceNode{
-                WaitNode(2),
-                Wander(self.inst, GetGrazingLocation, 2, nil, GetGrazingAngle),
-            }
-        ),
-        Leash(self.inst, GetLocationInHerd, 2, 2, false)
-    })
+        {
+            Leash(self.inst, GetLocationInHerd, HERD_KEEPUP_DIST, 5, true),
+            FaceEntity(self.inst, GetAlertTargetFn, KeepAlertTargetFn, 0.25),
+            WhileNode(function() return IsHerdGrazing(self) end, "Grazing",
+                SequenceNode {
+                    WaitNode(2),
+                    Wander(self.inst, GetGrazingLocation, 2, nil, GetGrazingAngle),
+                }
+            ),
+            Leash(self.inst, GetLocationInHerd, 2, 2, false)
+        })
 
     local root =
-    PriorityNode(
-    {
-        FailIfSuccessDecorator(ActionNode(function() ResetData(self.inst) end, "Reset Data")),
+        PriorityNode(
+            {
+                FailIfSuccessDecorator(ActionNode(function() ResetData(self.inst) end, "Reset Data")),
 
-        WhileNode(function() return TheWorld.components.deerherding ~= nil and TheWorld.components.deerherding:IsActiveInHerd(self.inst) end, "Herd Mentality",
-            herdmentality
-        ),
-        solomentality,
+                WhileNode(
+                    function() return TheWorld.components.deerherding ~= nil and
+                        TheWorld.components.deerherding:IsActiveInHerd(self.inst) end, "Herd Mentality",
+                    herdmentality
+                ),
+                solomentality,
 
-        StandStill(self.inst),
-    },.25)
+                StandStill(self.inst),
+            }, .25)
 
     self.bt = BT(self.inst, root)
 end

@@ -31,7 +31,7 @@ local FX_MAP =
     ["mushtree_small"] = "mushroom_short",
     ["mushtree_medium"] = "mushroom_normal",
     ["mushtree_tall"] = "mushroom_tall",
-    ["mushtree_yelow"] = "mushtree_yelow",	
+    ["mushtree_yelow"] = "mushtree_yelow",
     ["mushtree_tall_webbed"] = "mushroom_webbed",
 }
 
@@ -66,8 +66,10 @@ end
 
 function Spooked:Spook(source)
     local t = GetTime()
-    local agefactor = self.inst.components.age ~= nil and math.min(1, self.inst.components.age:GetAge() / self.maxspookage) or 1
-    self.spookedlevel = math.min(self.maxspookedlevel + self.maxspookdelta, CalcSpooked(self, t) + agefactor * agefactor * self.maxspookdelta)
+    local agefactor = self.inst.components.age ~= nil and
+    math.min(1, self.inst.components.age:GetAge() / self.maxspookage) or 1
+    self.spookedlevel = math.min(self.maxspookedlevel + self.maxspookdelta,
+        CalcSpooked(self, t) + agefactor * agefactor * self.maxspookdelta)
     self.lastspooktime = t
 
     if source.monster then

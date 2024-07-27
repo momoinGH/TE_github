@@ -30,7 +30,7 @@ end
 local function dig_up(inst, chopper)
     if inst.components.pickable ~= nil and inst.components.pickable:CanBePicked() then
         inst.components.lootdropper:SpawnLootPrefab("berries")
-		inst.components.lootdropper:SpawnLootPrefab("berries")
+        inst.components.lootdropper:SpawnLootPrefab("berries")
     end
     inst.components.lootdropper:SpawnLootPrefab("dug_marshberry")
     inst:Remove()
@@ -78,7 +78,7 @@ local function CheckRegrow(inst)
         if inst.rain <= 0 then
             inst.components.pickable:Regen()
         end
-    end        
+    end
 end
 
 local function GetVerb()
@@ -97,7 +97,7 @@ local function OnLoad(inst, data)
 end
 
 local function DebugString(inst)
-    return(string.format("rain segs before regrow: %i", inst.rain))
+    return (string.format("rain segs before regrow: %i", inst.rain))
 end
 
 local function fn()
@@ -128,7 +128,7 @@ local function fn()
         return inst
     end
 
-    inst.AnimState:SetTime(math.random()*2)
+    inst.AnimState:SetTime(math.random() * 2)
 
     local color = 0.5 + math.random() * 0.5
     inst.AnimState:SetMultColour(color, color, color, 1)
@@ -144,7 +144,7 @@ local function fn()
         inst:DoPeriodicTask(TUNING.SEG_TIME, CheckRegrow)
         inst.rain = 0
     end
-    
+
     inst:AddComponent("lootdropper")
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.DIG)

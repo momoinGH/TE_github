@@ -5,7 +5,7 @@ local assets =
     Asset("ANIM", "anim/sign_mini.zip"),
     Asset("ATLAS_BUILD", "images/inventoryimages1.xml", 256),
     Asset("ATLAS_BUILD", "images/inventoryimages2.xml", 256),
-    Asset("ATLAS_BUILD", "images/inventoryimages3.xml", 256),	
+    Asset("ATLAS_BUILD", "images/inventoryimages3.xml", 256),
     Asset("ATLAS_BUILD", "images/inventoryimages/volcanoinventory.xml", 256),
     Asset("ATLAS_BUILD", "images/inventoryimages/hamletinventory.xml", 256),
 }
@@ -26,19 +26,20 @@ local prefabs_item =
     "minisign",
 }
 
-local function ondeploy(inst, pt)--, deployer)
-    local ent = SpawnPrefab("minisign", inst.linked_skinname, inst.skin_id )
+local function ondeploy(inst, pt) --, deployer)
+    local ent = SpawnPrefab("minisign", inst.linked_skinname, inst.skin_id)
 
     if inst.components.stackable ~= nil then
         inst.components.stackable:Get():Remove()
     else
-        ent.components.drawable:OnDrawn(inst.components.drawable:GetImage(), nil, inst.components.drawable:GetAtlas(), inst.components.drawable:GetBGImage(), inst.components.drawable:GetBGAtlas())
+        ent.components.drawable:OnDrawn(inst.components.drawable:GetImage(), nil, inst.components.drawable:GetAtlas(),
+            inst.components.drawable:GetBGImage(), inst.components.drawable:GetBGAtlas())
         ent._imagename:set(inst._imagename:value())
-		if inst.atlas ~= nil and inst.image ~= nil then
-		ent.atlas = inst.atlas
-		ent.image = inst.image
-       	ent.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(inst.atlas), inst.image..".tex")
-		end
+        if inst.atlas ~= nil and inst.image ~= nil then
+            ent.atlas = inst.atlas
+            ent.image = inst.image
+            ent.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(inst.atlas), inst.image .. ".tex")
+        end
         inst:Remove()
     end
 
@@ -46,19 +47,21 @@ local function ondeploy(inst, pt)--, deployer)
     ent.SoundEmitter:PlaySound("dontstarve/common/sign_craft")
 end
 
-local function dig_up(inst)--, worker)
+local function dig_up(inst) --, worker)
     local image = inst.components.drawable:GetImage()
     if image ~= nil then
-        local item = inst.components.lootdropper:SpawnLootPrefab("minisign_drawn", nil, inst.linked_skinname_drawn, inst.skin_id )
-        item.components.drawable:OnDrawn(image, nil, inst.components.drawable:GetAtlas(), inst.components.drawable:GetBGImage(), inst.components.drawable:GetBGAtlas())
+        local item = inst.components.lootdropper:SpawnLootPrefab("minisign_drawn", nil, inst.linked_skinname_drawn,
+            inst.skin_id)
+        item.components.drawable:OnDrawn(image, nil, inst.components.drawable:GetAtlas(),
+            inst.components.drawable:GetBGImage(), inst.components.drawable:GetBGAtlas())
         item._imagename:set(inst._imagename:value())
-		if inst.atlas ~= nil and inst.image ~= nil then
-       	item.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(inst.atlas), inst.image..".tex")
-		item.atlas = inst.atlas
-		item.image = inst.image
-		end
+        if inst.atlas ~= nil and inst.image ~= nil then
+            item.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(inst.atlas), inst.image .. ".tex")
+            item.atlas = inst.atlas
+            item.image = inst.image
+        end
     else
-        inst.components.lootdropper:SpawnLootPrefab("minisign_item", nil, inst.linked_skinname, inst.skin_id )
+        inst.components.lootdropper:SpawnLootPrefab("minisign_item", nil, inst.linked_skinname, inst.skin_id)
     end
     inst:Remove()
 end
@@ -77,26 +80,34 @@ end
 
 local function OnDrawnFn(inst, image, src, atlas, bgimage, bgatlas)
     if image ~= nil then
-    if src ~= nil and src.replica.inventoryitem ~= nil then atlas = src.replica.inventoryitem:GetAtlas()
-	if src.caminho then atlas = src.caminho			
-	elseif atlas and atlas == "images/inventoryimages1.xml" then atlas = "images/inventoryimages1.xml"
-	elseif atlas and atlas == "images/inventoryimages2.xml" then atlas = "images/inventoryimages2.xml"
-	elseif atlas and atlas == "images/inventoryimages3.xml" then atlas = "images/inventoryimages3.xml"	
-	else atlas = "images/inventoryimages/hamletinventory.xml" end				
-			inst.atlas = atlas
-			inst.image = image			
+        if src ~= nil and src.replica.inventoryitem ~= nil then
+            atlas = src.replica.inventoryitem:GetAtlas()
+            if src.caminho then
+                atlas = src.caminho
+            elseif atlas and atlas == "images/inventoryimages1.xml" then
+                atlas = "images/inventoryimages1.xml"
+            elseif atlas and atlas == "images/inventoryimages2.xml" then
+                atlas = "images/inventoryimages2.xml"
+            elseif atlas and atlas == "images/inventoryimages3.xml" then
+                atlas = "images/inventoryimages3.xml"
+            else
+                atlas = "images/inventoryimages/hamletinventory.xml"
+            end
+            inst.atlas = atlas
+            inst.image = image
         else
-            atlas = GetInventoryItemAtlas(image..".tex")	
+            atlas = GetInventoryItemAtlas(image .. ".tex")
         end
-       	inst.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(atlas), image..".tex")
-		inst.image = image
-		inst.atlas = atlas
-		inst.src = atlas		
+        inst.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(atlas), image .. ".tex")
+        inst.image = image
+        inst.atlas = atlas
+        inst.src = atlas
         if bgimage ~= nil then
-            inst.AnimState:OverrideSymbol("SWAP_SIGN_BG", bgatlas or GetInventoryItemAtlas(bgimage..".tex"), bgimage..".tex")
+            inst.AnimState:OverrideSymbol("SWAP_SIGN_BG", bgatlas or GetInventoryItemAtlas(bgimage .. ".tex"),
+                bgimage .. ".tex")
         else
             inst.AnimState:ClearOverrideSymbol("SWAP_SIGN_BG")
-        end		
+        end
         if inst:HasTag("sign") then
             inst.components.drawable:SetCanDraw(false)
             inst._imagename:set(src ~= nil and (src.drawnameoverride or src:GetBasicDisplayName()) or "")
@@ -106,9 +117,9 @@ local function OnDrawnFn(inst, image, src, atlas, bgimage, bgatlas)
         end
     else
         inst.AnimState:ClearOverrideSymbol("SWAP_SIGN")
-        inst.AnimState:ClearOverrideSymbol("SWAP_SIGN_BG")	
-		inst.atlas = nil
-		inst.image = nil
+        inst.AnimState:ClearOverrideSymbol("SWAP_SIGN_BG")
+        inst.atlas = nil
+        inst.image = nil
         if inst:HasTag("sign") then
             if not (inst.components.burnable ~= nil and inst.components.burnable:IsBurning()) then
                 inst.components.drawable:SetCanDraw(true)
@@ -116,7 +127,7 @@ local function OnDrawnFn(inst, image, src, atlas, bgimage, bgatlas)
             inst._imagename:set("")
         end
     end
-end	
+end
 
 local function getstatus(inst)
     return inst.components.drawable:GetImage() == nil
@@ -133,7 +144,8 @@ end
 --Runs on clients
 local function CanMouseThrough(inst)
     if not inst:HasTag("fire") and ThePlayer ~= nil and ThePlayer.components.playeractionpicker ~= nil then
-        local force_inspect = ThePlayer.components.playercontroller ~= nil and ThePlayer.components.playercontroller:IsControlPressed(CONTROL_FORCE_INSPECT)
+        local force_inspect = ThePlayer.components.playercontroller ~= nil and
+        ThePlayer.components.playercontroller:IsControlPressed(CONTROL_FORCE_INSPECT)
         local lmb, rmb = ThePlayer.components.playeractionpicker:DoGetMouseActions(inst:GetPosition(), inst)
         return IsLowPriorityAction(rmb, force_inspect)
             and IsLowPriorityAction(lmb, force_inspect)
@@ -153,12 +165,12 @@ local function OnSave(inst, data)
         inst._imagename:value() ~= STRINGS.NAMES[string.upper(inst.components.drawable:GetImage())] and
         inst._imagename:value() or
         nil
-		
-		if data ~= nil and data.atlas ~= nil and data.image ~= nil then
-		inst.atlas = data.atlas	
-		inst.image = data.image	
-		inst.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(inst.atlas), inst.image..".tex")	
-		end	
+
+    if data ~= nil and data.atlas ~= nil and data.image ~= nil then
+        inst.atlas = data.atlas
+        inst.image = data.image
+        inst.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(inst.atlas), inst.image .. ".tex")
+    end
 end
 
 local function OnLoad(inst, data)
@@ -171,30 +183,28 @@ local function OnLoad(inst, data)
             STRINGS.NAMES[string.upper(inst.components.drawable:GetImage())]
         ) or ""
     )
-		if data ~= nil and data.atlas ~= nil and data.image ~= nil then
-		inst.atlas = data.atlas	
-		inst.image = data.image	
-		inst.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(inst.atlas), inst.image..".tex")	
-		end
-		
-
+    if data ~= nil and data.atlas ~= nil and data.image ~= nil then
+        inst.atlas = data.atlas
+        inst.image = data.image
+        inst.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(inst.atlas), inst.image .. ".tex")
+    end
 end
 
 local function OnSave1(inst, data)
-		data.atlas = inst.atlas
-		data.image = inst.image			
+    data.atlas = inst.atlas
+    data.image = inst.image
 end
 
 local function OnLoad1(inst, data)
-		if data ~= nil and data.atlas ~= nil then
-		inst.atlas = data.atlas
-		end
-		if data ~= nil and data.image ~= nil then		
-		inst.image = data.image	
-		end
-		if inst.atlas ~= nil then
-		inst.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(inst.atlas), inst.image..".tex")	
-		end
+    if data ~= nil and data.atlas ~= nil then
+        inst.atlas = data.atlas
+    end
+    if data ~= nil and data.image ~= nil then
+        inst.image = data.image
+    end
+    if inst.atlas ~= nil then
+        inst.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(inst.atlas), inst.image .. ".tex")
+    end
 end
 
 
@@ -269,7 +279,7 @@ local function MakeItem(name, drawn)
         if drawn then
             inst.displaynamefn = displaynamefn
             inst.drawnameoverride = STRINGS.NAMES.MINISIGN
-            inst._imagename = net_string(inst.GUID, name.."._imagename")
+            inst._imagename = net_string(inst.GUID, name .. "._imagename")
             --Use planted inspect strings for drawn version
             inst:SetPrefabNameOverride("minisign")
         end
@@ -308,9 +318,9 @@ local function MakeItem(name, drawn)
         inst.components.fuel.fuelvalue = TUNING.MED_FUEL
 
         MakeHauntableLaunchAndIgnite(inst)
-		
-	    inst.OnSave = OnSave1
-		inst.OnLoad = OnLoad1	
+
+        inst.OnSave = OnSave1
+        inst.OnLoad = OnLoad1
 
         return inst
     end

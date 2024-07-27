@@ -3,7 +3,7 @@ local assets =
     --Asset("ANIM", "anim/arrow_indicator.zip"),
 }
 
-local prefabs = 
+local prefabs =
 {
     "commonfish",
 }
@@ -25,21 +25,21 @@ end
 local function OnFull(inst)
     --TODO: mark some for death
 end
-   
+
 local function fn(Sim)
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
-    inst.entity:AddNetwork()	
+    inst.entity:AddNetwork()
 
     inst:AddTag("herd")
-	
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst:AddComponent("herd")
     inst.components.herd:SetMemberTag("commonfish")
     inst.components.herd:SetGatherRange(40)
@@ -47,7 +47,7 @@ local function fn(Sim)
     inst.components.herd:SetOnEmptyFn(OnEmpty)
     inst.components.herd:SetOnFullFn(OnFull)
     inst.components.herd.maxsize = 6
-    
+
     inst:AddComponent("periodicspawner")
     inst.components.periodicspawner:SetRandomTimes(UW_TUNING.JELLYFISH_SPAWN_DELAY, UW_TUNING.JELLYFISH_SPAWN_VAR)
     inst.components.periodicspawner:SetPrefab("commonfish")
@@ -56,8 +56,8 @@ local function fn(Sim)
     inst.components.periodicspawner:SetDensityInRange(20, 6)
     inst.components.periodicspawner:Start()
     inst.components.periodicspawner:SetOnlySpawnOffscreen(true)
-    
+
     return inst
 end
 
-return Prefab( "underwater/commonfishschool", fn, assets, prefabs) 
+return Prefab("underwater/commonfishschool", fn, assets, prefabs)

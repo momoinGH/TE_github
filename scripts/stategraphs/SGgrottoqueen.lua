@@ -15,13 +15,13 @@ local events =
 
 local states =
 {
-    State{
+    State {
         name = "idle",
         tags = { "idle", "canrotate" },
 
         onenter = function(inst)
-                inst.Physics:Stop()
-                inst.AnimState:PlayAnimation("idle_loop")
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("idle_loop")
         end,
 
         timeline =
@@ -41,7 +41,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "walk_start",
         tags = { "moving", "canrotate" },
 
@@ -60,7 +60,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "walk",
         tags = { "moving", "canrotate" },
 
@@ -86,7 +86,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "walk_stop",
         tags = { "canrotate" },
 
@@ -105,7 +105,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "hit",
         tags = { "hit", "busy" },
 
@@ -132,7 +132,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "death",
         tags = { "busy" },
 
@@ -185,7 +185,7 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "spawnguards",
         tags = { "spawnguards", "busy", "nosleep", "nofreeze" },
 
@@ -245,7 +245,8 @@ local states =
                                 end
                             end
                         end
-                        table.remove(soldiers, closest).components.knownlocations:RememberLocation("queenoffset", Vector3(xoffs, 0, zoffs), false)
+                        table.remove(soldiers, closest).components.knownlocations:RememberLocation("queenoffset",
+                            Vector3(xoffs, 0, zoffs), false)
                     end
                 end
             end),

@@ -9,9 +9,9 @@ local function ondeploy(inst, pt, deployer)
 	local original_tile_type = map:GetTileAtPoint(pt:Get())
 	local x, y = map:GetTileCoordsAtPoint(pt:Get())
 	if x and y then
-		map:SetTile(x,y, inst.data.tile)
-		map:RebuildLayer( original_tile_type, x, y )
-		map:RebuildLayer( inst.data.tile, x, y )
+		map:SetTile(x, y, inst.data.tile)
+		map:RebuildLayer(original_tile_type, x, y)
+		map:RebuildLayer(inst.data.tile, x, y)
 	end
 
 	local minimap = TheWorld.minimap.MiniMap
@@ -42,7 +42,7 @@ local function make_turf(data)
 	assert(GROUND_lookup[data.tile] ~= nil)
 
 	local assets = {
---		Asset("ANIM", "anim/turf.zip"),
+		--		Asset("ANIM", "anim/turf.zip"),
 		Asset("ANIM", "anim/" .. data.anim .. ".zip"),
 		Asset("IMAGE", "images/inventoryimages/" .. data.invname .. ".tex"),
 		Asset("ATLAS", "images/inventoryimages/" .. data.invname .. ".xml"),
@@ -54,27 +54,27 @@ local function make_turf(data)
 		inst.entity:AddTransform()
 		inst.entity:AddAnimState()
 		inst.entity:AddNetwork()
-	
+
 		MakeInventoryPhysics(inst)
-	
+
 		inst:AddTag("groundtile")
 
 		inst.AnimState:SetBank(data.anim)
 		inst.AnimState:SetBuild(data.anim)
 		--inst.AnimState:PlayAnimation(data.anim)
 		inst.AnimState:PlayAnimation("idle")
-		
-		MakeInventoryFloatable(inst)			
-	
+
+		MakeInventoryFloatable(inst)
+
 		inst:AddTag("molebait")
 		--MakeDragonflyBait(inst, 3)
 
 		inst.entity:SetPristine()
-	
+
 		if not TheWorld.ismastersim then
 			return inst
 		end
-	
+
 		inst:AddComponent("stackable")
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
 
@@ -84,7 +84,7 @@ local function make_turf(data)
 		inst.components.inventoryitem.imagename = data.invname
 
 		inst.data = data
-	
+
 		inst:AddComponent("bait")
 
 		inst:AddComponent("fuel")
@@ -107,12 +107,12 @@ local function make_turf(data)
 end
 
 local turf = {
-	{name = "windyturf",	tile = GROUND.WINDY},
+	{ name = "windyturf", tile = GROUND.WINDY },
 }
 
 local prefabs = {}
 for k, v in ipairs(turf) do
-    table.insert(prefabs, make_turf(v))
+	table.insert(prefabs, make_turf(v))
 end
 
 return unpack(prefabs)

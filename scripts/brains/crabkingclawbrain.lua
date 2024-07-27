@@ -12,26 +12,26 @@ local LEASH_DIST = 6
 
 local function ShouldClamp(inst)
     if inst:IsValid() and not inst.sg:HasStateTag("busy") then
-        local x,y,z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x,y,z, 4.5,{"boat"})
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ents = TheSim:FindEntities(x, y, z, 4.5, { "boat" })
         if #ents > 0 then
-            for i=#ents, 1, -1 do               
-                if not ents[i]:IsValid() or ents[i].components.health and ents[i].components.health:IsDead() then                    
-                    table.remove(ents,i)
+            for i = #ents, 1, -1 do
+                if not ents[i]:IsValid() or ents[i].components.health and ents[i].components.health:IsDead() then
+                    table.remove(ents, i)
                 end
             end
         end
         if #ents > 0 then
-            inst:PushEvent("clamp",{target = ents[1]})
+            inst:PushEvent("clamp", { target = ents[1] })
         end
-    end 
+    end
     return nil
 end
 
 local function findboattoclamp(inst)
-    local x,y,z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x,y,z, 10,{"boat"})
-    if #ents>0 then
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, 10, { "boat" })
+    if #ents > 0 then
         return Vector3(ents[1].Transform:GetWorldPosition())
     end
 end
@@ -43,26 +43,28 @@ end)
 
 function CrabkingClawBrain:OnStart()
     local root = PriorityNode(
-    {
-       WhileNode(function() return not self.inst.sg:HasStateTag("clampped") end, "not clamping",
-        PriorityNode({
-            
-            Leash(self.inst, function() return self.inst.components.knownlocations:GetLocation("spawnpoint") end, LEASH_DIST, 5, false),
+        {
+            WhileNode(function() return not self.inst.sg:HasStateTag("clampped") end, "not clamping",
+                PriorityNode({
 
-            DoAction(self.inst, ShouldClamp, "clamp!"),
-            Leash(self.inst, function() return findboattoclamp(self.inst) end, 0, 0, false),
+                    Leash(self.inst, function() return self.inst.components.knownlocations:GetLocation("spawnpoint") end,
+                        LEASH_DIST, 5, false),
 
-            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("spawnpoint") end, WAMDER_DIST,
-                {
-                    minwalktime=0.5,
-                    randwalktime=0.5,
-                    minwaittime=1,
-                    randwaittime=5,
-                }
-            )                 
-        }, 0.2)),
-    }, 0.2)
-    
+                    DoAction(self.inst, ShouldClamp, "clamp!"),
+                    Leash(self.inst, function() return findboattoclamp(self.inst) end, 0, 0, false),
+
+                    Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("spawnpoint") end,
+                        WAMDER_DIST,
+                        {
+                            minwalktime = 0.5,
+                            randwalktime = 0.5,
+                            minwaittime = 1,
+                            randwaittime = 5,
+                        }
+                    )
+                }, 0.2)),
+        }, 0.2)
+
     self.bt = BT(self.inst, root)
 end
 

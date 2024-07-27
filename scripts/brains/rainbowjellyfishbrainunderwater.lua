@@ -10,22 +10,24 @@ end)
 
 
 function RainbowJellyfishBrain:OnInitializationComplete()
-      --self.inst.components.knownlocations:RememberLocation("home", Point(self.inst.Transform:GetWorldPosition()), true)
- end
+    --self.inst.components.knownlocations:RememberLocation("home", Point(self.inst.Transform:GetWorldPosition()), true)
+end
 
 function RainbowJellyfishBrain:OnStart()
     local migrationMgr = TheWorld.components.underwatermigration
 
     local root = PriorityNode(
-    {
-        WhileNode(function() return migrationMgr and migrationMgr:IsMigrationActive() end, "Migrating",
+        {
+            WhileNode(function() return migrationMgr and migrationMgr:IsMigrationActive() end, "Migrating",
                 PriorityNode({
                     Migrate(self.inst, function() return self.inst.components.knownlocations:GetLocation("migration") end),
-                    Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("migration") end, MAX_WANDER_DIST * 0.25)
+                    Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("migration") end,
+                        MAX_WANDER_DIST * 0.25)
                 }, 1)
             ),
-        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
-    }, 1)
+            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                MAX_WANDER_DIST)
+        }, 1)
     self.bt = BT(self.inst, root)
 end
 

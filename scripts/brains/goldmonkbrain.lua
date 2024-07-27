@@ -61,11 +61,11 @@ local ValidFoodsToPick =
 {
     "berries",
     "cave_banana",
-    "carrot",   
-    "sweet_potato",	
+    "carrot",
+    "sweet_potato",
     "red_cap",
     "blue_cap",
-    "green_cap", 
+    "green_cap",
 }
 
 local function ItemIsInList(item, list)
@@ -108,7 +108,7 @@ local function EatFoodAction(inst)
                 item.components.equippable.equipslot == EQUIPSLOTS.HEAD and
                 item.components.inventoryitem ~= nil and
                 item.components.inventoryitem.canbepickedup and
-                item:IsOnValidGround() and item.prefab ~= "goldnugget" and (item.prefab == "cave_banana" or item.prefab == "cave_banana_cooked" or item.prefab == "poop") then			
+                item:IsOnValidGround() and item.prefab ~= "goldnugget" and (item.prefab == "cave_banana" or item.prefab == "cave_banana_cooked" or item.prefab == "poop") then
                 return BufferedAction(inst, item, ACTIONS.PICKUP)
             end
         end
@@ -120,7 +120,7 @@ local function EatFoodAction(inst)
             item.components.inventoryitem ~= nil and
             item.components.inventoryitem.canbepickedup and
             inst.components.eater:CanEat(item) and
-                item:IsOnValidGround() and item.prefab ~= "goldnugget" and (item.prefab == "cave_banana" or item.prefab == "cave_banana_cooked" or item.prefab == "poop") then
+            item:IsOnValidGround() and item.prefab ~= "goldnugget" and (item.prefab == "cave_banana" or item.prefab == "cave_banana_cooked" or item.prefab == "poop") then
             return BufferedAction(inst, item, ACTIONS.PICKUP)
         end
     end
@@ -151,7 +151,7 @@ local function EatFoodAction(inst)
     for i, item in ipairs(ents) do
         if item.components.inventoryitem ~= nil and
             item.components.inventoryitem.canbepickedup and
-                item:IsOnValidGround() and item.prefab ~= "goldnugget" and (item.prefab == "cave_banana" or item.prefab == "cave_banana_cooked" or item.prefab == "poop") then
+            item:IsOnValidGround() and item.prefab ~= "goldnugget" and (item.prefab == "cave_banana" or item.prefab == "cave_banana_cooked" or item.prefab == "poop") then
             inst.curious = false
             if inst._curioustask ~= nil then
                 inst._curioustask:Cancel()
@@ -218,7 +218,7 @@ local function AnnoyLeader(inst)
             if v.components.container ~= nil and
                 v.components.container.canbeopened and
                 not v.components.container:IsOpen() and
-                v:GetDistanceSqToPoint(px, 0, pz) < 225--[[15 * 15]] then
+                v:GetDistanceSqToPoint(px, 0, pz) < 225 --[[15 * 15]] then
                 for k = 1, v.components.container.numslots do
                     local item = v.components.container.slots[k]
                     if item ~= nil then
@@ -273,56 +273,77 @@ local function EquipWeapon(inst, weapon)
 end
 
 function GoldMonkeyBrain:OnStart()
-    
     local root = PriorityNode(
-    {
-        WhileNode( function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
-        WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+        {
+            WhileNode(function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end,
+                "PanicHaunted", Panic(self.inst)),
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
 
-        --Monkeys go home when quakes start.
-        EventNode(self.inst, "gohome", 
-            DoAction(self.inst, GoHome)),
+            --Monkeys go home when quakes start.
+            EventNode(self.inst, "gohome",
+                DoAction(self.inst, GoHome)),
 
-        --In combat (with the player)... Should only ever use poop throwing.
-        RunAway(self.inst, "character", RUN_AWAY_DIST, STOP_RUN_AWAY_DIST, function(hunter) return ShouldRunFn(self.inst, hunter) end),
-        WhileNode(function() return self.inst.components.combat.target and self.inst.components.combat.target:HasTag("player") and self.inst.HasAmmo(self.inst) end, "Attack Player",
-            SequenceNode({
-                ActionNode(function() EquipWeapon(self.inst, self.inst.weaponitems.thrower) end, "Equip thrower"),
-                ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
-            })),
-        --Pick up poop to throw
-        WhileNode(function() return self.inst.components.combat.target and self.inst.components.combat.target:HasTag("player") and not self.inst.HasAmmo(self.inst) end, "Pick Up Poop", 
-            DoAction(self.inst, GetPoop)),
-        --Eat/ pick/ harvest foods.
-        WhileNode(function() return self.inst.components.combat.target and self.inst.components.combat.target:HasTag("player") or self.inst.components.combat.target == nil end, "Should Eat",
-            DoAction(self.inst, EatFoodAction)),
-        --Priority must be lower than poop pick up or it will never happen.
-        WhileNode(function() return self.inst.components.combat.target and self.inst.components.combat.target:HasTag("player") and not self.inst.HasAmmo(self.inst) end, "Leash to Player",
-        PriorityNode{
-            Leash(self.inst, function() if self.inst.components.combat.target then return self.inst.components.combat.target:GetPosition() end end, LEASH_MAX_DIST, LEASH_RETURN_DIST),
-            FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn)
-        }),
+            --In combat (with the player)... Should only ever use poop throwing.
+            RunAway(self.inst, "character", RUN_AWAY_DIST, STOP_RUN_AWAY_DIST,
+                function(hunter) return ShouldRunFn(self.inst, hunter) end),
+            WhileNode(
+                function() return self.inst.components.combat.target and
+                    self.inst.components.combat.target:HasTag("player") and self.inst.HasAmmo(self.inst) end,
+                "Attack Player",
+                SequenceNode({
+                    ActionNode(function() EquipWeapon(self.inst, self.inst.weaponitems.thrower) end, "Equip thrower"),
+                    ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
+                })),
+            --Pick up poop to throw
+            WhileNode(
+                function() return self.inst.components.combat.target and
+                    self.inst.components.combat.target:HasTag("player") and not self.inst.HasAmmo(self.inst) end,
+                "Pick Up Poop",
+                DoAction(self.inst, GetPoop)),
+            --Eat/ pick/ harvest foods.
+            WhileNode(
+                function() return self.inst.components.combat.target and
+                    self.inst.components.combat.target:HasTag("player") or self.inst.components.combat.target == nil end,
+                "Should Eat",
+                DoAction(self.inst, EatFoodAction)),
+            --Priority must be lower than poop pick up or it will never happen.
+            WhileNode(
+                function() return self.inst.components.combat.target and
+                    self.inst.components.combat.target:HasTag("player") and not self.inst.HasAmmo(self.inst) end,
+                "Leash to Player",
+                PriorityNode {
+                    Leash(self.inst, function() if self.inst.components.combat.target then return self.inst.components
+                            .combat.target:GetPosition() end end, LEASH_MAX_DIST, LEASH_RETURN_DIST),
+                    FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn)
+                }),
 
 
-        --In combat with everything else
-        WhileNode(function() return self.inst.components.combat.target ~= nil and not self.inst.components.combat.target:HasTag("player") end, "Attack NPC", --For everything else
-            SequenceNode({
-                ActionNode(function() EquipWeapon(self.inst, self.inst.weaponitems.hitter) end, "Equip hitter"),
-                ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
-            })),
+            --In combat with everything else
+            WhileNode(
+                function() return self.inst.components.combat.target ~= nil and
+                    not self.inst.components.combat.target:HasTag("player") end, "Attack NPC",                                                               --For everything else
+                SequenceNode({
+                    ActionNode(function() EquipWeapon(self.inst, self.inst.weaponitems.hitter) end, "Equip hitter"),
+                    ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
+                })),
 
-        
-        --Following
-        WhileNode(function() return self.inst.harassplayer end, "Annoy Leader", 
-            DoAction(self.inst, AnnoyLeader)),
-        Follow(self.inst, function() return self.inst.harassplayer end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),
-        
-        --Doing nothing
-        WhileNode(function() return self.inst.harassplayer  end, "Wander Around Leader", 
-            Wander(self.inst, function() if self.inst.harassplayer  then return self.inst.harassplayer:GetPosition() end end, MAX_FOLLOW_DIST)),
-        WhileNode(function() return not self.inst.harassplayer and not self.inst.components.combat.target end,
-        "Wander Around Home", Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST))
-    }, .25)
+
+            --Following
+            WhileNode(function() return self.inst.harassplayer end, "Annoy Leader",
+                DoAction(self.inst, AnnoyLeader)),
+            Follow(self.inst, function() return self.inst.harassplayer end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST,
+                MAX_FOLLOW_DIST),
+
+            --Doing nothing
+            WhileNode(function() return self.inst.harassplayer end, "Wander Around Leader",
+                Wander(self.inst,
+                    function() if self.inst.harassplayer then return self.inst.harassplayer:GetPosition() end end,
+                    MAX_FOLLOW_DIST)),
+            WhileNode(function() return not self.inst.harassplayer and not self.inst.components.combat.target end,
+                "Wander Around Home",
+                Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                    MAX_WANDER_DIST))
+        }, .25)
     self.bt = BT(self.inst, root)
 end
 

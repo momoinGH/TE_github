@@ -32,5 +32,8 @@ local function LightFn(bank_build, radius, falloff, intensity, color)
     end
 end
 
-return Prefab("quagmire_lamp_post", LightFn("quagmire_lamp_post", 3.5, 0.58, 0.75, 235), { Asset("ANIM", "anim/quagmire_lamp_post.zip") }),
-    Prefab("quagmire_lamp_short", LightFn("quagmire_lamp_short", 2, 0.58, 0.75, 200), { Asset("ANIM", "anim/quagmire_lamp_short.zip") })
+return
+    Prefab("quagmire_lamp_post", LightFn("quagmire_lamp_post", 3.5, 0.58, 0.75, 235),
+        { Asset("ANIM", "anim/quagmire_lamp_post.zip") }),
+    Prefab("quagmire_lamp_short", LightFn("quagmire_lamp_short", 2, 0.58, 0.75, 200),
+        { Asset("ANIM", "anim/quagmire_lamp_short.zip") })

@@ -13,7 +13,7 @@ local prefabs =
     "beefalowool",
 }
 
-local old = {"meat","meat","meat","meat","beefalowool"}
+local old = { "meat", "meat", "meat", "meat", "beefalowool" }
 
 local sounds =
 {
@@ -38,11 +38,11 @@ end
 
 local function FollowGrownBeefalo(inst)
     local nearest = FindEntity(inst, 30, function(guy)
-        return guy.components.leader
-            and guy.components.leader:CountFollowers() < 1
-    end,
-    {"beefalo", "herdmember"}, -- only follow herd beefalo (i.e. nondomesticated)
-    {"baby"}
+            return guy.components.leader
+                and guy.components.leader:CountFollowers() < 1
+        end,
+        { "beefalo", "herdmember" }, -- only follow herd beefalo (i.e. nondomesticated)
+        { "baby" }
     )
     if nearest and nearest.components.leader then
         nearest.components.leader:AddFollower(inst)
@@ -66,10 +66,10 @@ local function fn()
     inst.AnimState:SetBuild("beefalo_shaved_build")
     inst.AnimState:AddOverrideBuild("quagmire_beefalo_override_build")
     inst.AnimState:PlayAnimation("idle_loop", true)
-    inst.AnimState:Hide("HEAT")	
-	
-	inst.AnimState:OverrideSymbol("swap_saddle", "quagmire_beefalo_override_build", "")	
-	   
+    inst.AnimState:Hide("HEAT")
+
+    inst.AnimState:OverrideSymbol("swap_saddle", "quagmire_beefalo_override_build", "")
+
     inst:AddTag("beefalo")
     inst:AddTag("old")
     inst:AddTag("animal")
@@ -98,7 +98,7 @@ local function fn()
     inst.components.health:SetMaxHealth(TUNING.BABYBEEFALO_HEALTH)
 
     inst:AddComponent("lootdropper")
-	inst.components.lootdropper:SetLoot(old)
+    inst.components.lootdropper:SetLoot(old)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("sleeper")
@@ -121,8 +121,8 @@ local function fn()
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
     inst.components.locomotor.walkspeed = 2
     inst.components.locomotor.runspeed = 6
-	
-	
+
+
 
     MakeHauntablePanic(inst)
 

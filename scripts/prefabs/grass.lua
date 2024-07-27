@@ -4,7 +4,7 @@ local assets =
 {
     Asset("ANIM", "anim/grass.zip"),
     Asset("ANIM", "anim/grass1.zip"),
-	Asset("ANIM", "anim/grassgreen_build.zip"),	
+    Asset("ANIM", "anim/grassgreen_build.zip"),
     Asset("ANIM", "anim/grass_diseased_build.zip"),
     Asset("SOUND", "sound/common.fsb"),
 }
@@ -20,7 +20,7 @@ local prefabs =
     "cutgrass",
     "dug_grass",
     "disease_puff",
-    "diseaseflies",	
+    "diseaseflies",
     "spoiled_food",
     "grassgekko",
     "grasspartfx",
@@ -46,7 +46,6 @@ local function triggernearbymorph(inst, quick, range)
             not (v.components.worldsettingstimer:ActiveTimerExists("morphdelay") or
                 v.components.worldsettingstimer:ActiveTimerExists("morphing") or
                 v.components.worldsettingstimer:ActiveTimerExists("morphrelay")) then
-
             count = count + 1
 
             if canmorph(v) and math.random() < .75 then
@@ -67,18 +66,19 @@ local function triggernearbymorph(inst, quick, range)
 end
 
 local function dig_up(inst, worker)
-local pt = inst:GetPosition()
-local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.LAWN or tiletype == GROUND.FIELDS then
-if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
-local x, y, z = inst.Transform:GetWorldPosition()
-local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-local eles = TheSim:FindEntities(x,y,z, 40,{"guard"})
-for k,guardas in pairs(eles) do 
-if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat:SetTarget(worker) end
-end 
-end
-end
+    local pt = inst:GetPosition()
+    local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
+    if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.LAWN or tiletype == GROUND.FIELDS then
+        if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
+            local x, y, z = inst.Transform:GetWorldPosition()
+            local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
+            local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
+            for k, guardas in pairs(eles) do
+                if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat
+                        :SetTarget(worker) end
+            end
+        end
+    end
     if inst.components.pickable ~= nil and inst.components.lootdropper ~= nil then
         local withered = inst.components.witherable ~= nil and inst.components.witherable:IsWithered()
 
@@ -105,7 +105,7 @@ end
 
 local function makeemptyfn(inst)
     if not POPULATING and
-        (   inst.components.witherable ~= nil and
+        (inst.components.witherable ~= nil and
             inst.components.witherable:IsWithered() or
             inst.AnimState:IsCurrentAnimation("idle_dead")
         ) then
@@ -118,7 +118,7 @@ end
 
 local function makebarrenfn(inst, wasempty)
     if not POPULATING and
-        (   inst.components.witherable ~= nil and
+        (inst.components.witherable ~= nil and
             inst.components.witherable:IsWithered()
         ) then
         inst.AnimState:PlayAnimation(wasempty and "empty_to_dead" or "full_to_dead")
@@ -129,18 +129,19 @@ local function makebarrenfn(inst, wasempty)
 end
 
 local function onpickedfn(inst, picker)
-local pt = inst:GetPosition()
-local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.LAWN or tiletype == GROUND.FIELDS then
-if  picker and  picker:HasTag("player") and not picker:HasTag("sneaky") then
-local x, y, z = inst.Transform:GetWorldPosition()
-local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-local eles = TheSim:FindEntities(x,y,z, 40,{"guard"})
-for k,guardas in pairs(eles) do 
-if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat:SetTarget( picker) end
-end 
-end
-end
+    local pt = inst:GetPosition()
+    local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
+    if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.LAWN or tiletype == GROUND.FIELDS then
+        if picker and picker:HasTag("player") and not picker:HasTag("sneaky") then
+            local x, y, z = inst.Transform:GetWorldPosition()
+            local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
+            local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
+            for k, guardas in pairs(eles) do
+                if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat
+                        :SetTarget(picker) end
+            end
+        end
+    end
     inst.SoundEmitter:PlaySound("dontstarve/wilson/pickup_reeds")
     inst.AnimState:PlayAnimation("picking")
 
@@ -180,7 +181,8 @@ local function onmorphtimer(inst, data)
                 return
             end
         end
-        inst.components.worldsettingstimer:StartTimer("morphdelay", GetRandomWithVariance(TUNING.GRASSGEKKO_MORPH_DELAY, TUNING.GRASSGEKKO_MORPH_DELAY_VARIANCE))
+        inst.components.worldsettingstimer:StartTimer("morphdelay",
+            GetRandomWithVariance(TUNING.GRASSGEKKO_MORPH_DELAY, TUNING.GRASSGEKKO_MORPH_DELAY_VARIANCE))
         triggernearbymorph(inst, false)
     end
 end
@@ -188,7 +190,8 @@ end
 local function makemorphable(inst)
     if inst.components.worldsettingstimer == nil then
         inst:AddComponent("worldsettingstimer")
-        inst.components.worldsettingstimer:AddTimer("morphdelay", TUNING.GRASSGEKKO_MORPH_DELAY, TUNING.GRASSGEKKO_MORPH_ENABLED)
+        inst.components.worldsettingstimer:AddTimer("morphdelay", TUNING.GRASSGEKKO_MORPH_DELAY,
+            TUNING.GRASSGEKKO_MORPH_ENABLED)
         inst.components.worldsettingstimer:AddTimer("morphing", 1, TUNING.GRASSGEKKO_MORPH_ENABLED)
         inst.components.worldsettingstimer:AddTimer("morphrelay", FRAMES, TUNING.GRASSGEKKO_MORPH_ENABLED)
         inst:ListenForEvent("timerdone", onmorphtimer)
@@ -198,29 +201,31 @@ end
 local function ontransplantfn(inst)
     inst.components.pickable:MakeBarren()
     makemorphable(inst)
-    inst.components.worldsettingstimer:StartTimer("morphdelay", GetRandomWithVariance(TUNING.GRASSGEKKO_MORPH_DELAY, TUNING.GRASSGEKKO_MORPH_DELAY_VARIANCE))
-	
-	-- checks to turn into Tall Grass if on the right terrain
-	local map = TheWorld.Map
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local tiletype = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))	
-	
-	if tiletype == GROUND.PLAINS or tiletype == GROUND.RAINFOREST or tiletype == GROUND.DEEPRAINFOREST  then	
-		local newgrass = SpawnPrefab("grass_tall")
-		newgrass.Transform:SetPosition(x,y,z)
-if newgrass:HasTag("machetecut") then
-inst:RemoveTag("machetecut")
-end
-newgrass.components.workable:SetWorkAction(ACTIONS.DIG)
-newgrass.components.workable:SetWorkLeft(1)
-newgrass.components.timer:StartTimer("spawndelay", 60*8*4)
-newgrass.AnimState:PlayAnimation("picked",true)		
-		inst:Remove()
-	end	
+    inst.components.worldsettingstimer:StartTimer("morphdelay",
+        GetRandomWithVariance(TUNING.GRASSGEKKO_MORPH_DELAY, TUNING.GRASSGEKKO_MORPH_DELAY_VARIANCE))
+
+    -- checks to turn into Tall Grass if on the right terrain
+    local map = TheWorld.Map
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local tiletype = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
+
+    if tiletype == GROUND.PLAINS or tiletype == GROUND.RAINFOREST or tiletype == GROUND.DEEPRAINFOREST then
+        local newgrass = SpawnPrefab("grass_tall")
+        newgrass.Transform:SetPosition(x, y, z)
+        if newgrass:HasTag("machetecut") then
+            inst:RemoveTag("machetecut")
+        end
+        newgrass.components.workable:SetWorkAction(ACTIONS.DIG)
+        newgrass.components.workable:SetWorkLeft(1)
+        newgrass.components.timer:StartTimer("spawndelay", 60 * 8 * 4)
+        newgrass.AnimState:PlayAnimation("picked", true)
+        inst:Remove()
+    end
 end
 
 local function OnPreLoad(inst, data)
-    WorldSettings_Timer_PreLoad(inst, data, "morphdelay", TUNING.GRASSGEKKO_MORPH_DELAY + TUNING.GRASSGEKKO_MORPH_DELAY_VARIANCE)
+    WorldSettings_Timer_PreLoad(inst, data, "morphdelay",
+        TUNING.GRASSGEKKO_MORPH_DELAY + TUNING.GRASSGEKKO_MORPH_DELAY_VARIANCE)
     WorldSettings_Timer_PreLoad_Fix(inst, data, "morphdelay", 1)
     WorldSettings_Timer_PreLoad(inst, data, "morphing")
     WorldSettings_Timer_PreLoad_Fix(inst, data, "morphing", 1)
@@ -253,10 +258,10 @@ local function grass(name, stage)
         inst.AnimState:SetBuild("grass1")
         inst.AnimState:PlayAnimation("idle", true)
 
-        inst:AddTag("plant")		
+        inst:AddTag("plant")
         inst:AddTag("renewable")
-		inst:AddTag("silviculture") -- for silviculture book
-        inst:AddTag("grasss")		
+        inst:AddTag("silviculture") -- for silviculture book
+        inst:AddTag("grasss")
         --witherable (from witherable component) added to pristine state for optimization
         inst:AddTag("witherable")
 
@@ -291,12 +296,12 @@ local function grass(name, stage)
         inst:AddComponent("lootdropper")
         inst:AddComponent("inspectable")
 
-		if not GetGameModeProperty("disable_transplanting") then
-			inst:AddComponent("workable")
-			inst.components.workable:SetWorkAction(ACTIONS.DIG)
-			inst.components.workable:SetOnFinishCallback(dig_up)
-			inst.components.workable:SetWorkLeft(1)
-		end
+        if not GetGameModeProperty("disable_transplanting") then
+            inst:AddComponent("workable")
+            inst.components.workable:SetWorkAction(ACTIONS.DIG)
+            inst.components.workable:SetOnFinishCallback(dig_up)
+            inst.components.workable:SetWorkLeft(1)
+        end
         ---------------------
 
         MakeMediumBurnable(inst)
@@ -326,13 +331,13 @@ local function grassnova(name, stage)
         inst.MiniMapEntity:SetIcon("grassGreen.png")
 
         inst.AnimState:SetBank("grass")
-		inst.AnimState:SetBuild("grassgreen_build")
+        inst.AnimState:SetBuild("grassgreen_build")
         inst.AnimState:PlayAnimation("idle", true)
 
         inst:AddTag("plant")
         inst:AddTag("renewable")
-		inst:AddTag("silviculture") -- for silviculture book
-        inst:AddTag("grasss")		
+        inst:AddTag("silviculture") -- for silviculture book
+        inst:AddTag("grasss")
         --witherable (from witherable component) added to pristine state for optimization
         inst:AddTag("witherable")
 
@@ -367,12 +372,12 @@ local function grassnova(name, stage)
         inst:AddComponent("lootdropper")
         inst:AddComponent("inspectable")
 
-		if not GetGameModeProperty("disable_transplanting") then
-			inst:AddComponent("workable")
-			inst.components.workable:SetWorkAction(ACTIONS.DIG)
-			inst.components.workable:SetOnFinishCallback(dig_up)
-			inst.components.workable:SetWorkLeft(1)
-		end
+        if not GetGameModeProperty("disable_transplanting") then
+            inst:AddComponent("workable")
+            inst.components.workable:SetWorkAction(ACTIONS.DIG)
+            inst.components.workable:SetOnFinishCallback(dig_up)
+            inst.components.workable:SetWorkLeft(1)
+        end
         ---------------------
 
         MakeMediumBurnable(inst)
@@ -418,7 +423,7 @@ local function grasspart_fn()
     return inst
 end
 
-return  grass("grass", 0),
-		grassnova("grassnova", 0),
-		grass("depleted_grass", 1),
-		Prefab("grasspartfx", grasspart_fn, grasspart_assets)
+return grass("grass", 0),
+    grassnova("grassnova", 0),
+    grass("depleted_grass", 1),
+    Prefab("grasspartfx", grasspart_fn, grasspart_assets)

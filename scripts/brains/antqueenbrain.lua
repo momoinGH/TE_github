@@ -22,9 +22,9 @@ local function GoToState(inst, state)
 end
 
 local function InAvailableState(inst)
-    return inst.sg.currentstate.name ~= "taunt" and inst.sg.currentstate.name ~= "wake" and 
-           inst.sg.currentstate.name ~= "sleeping" and inst.sg.currentstate.name ~= "sleep" 
-           and not table.contains(inst.sg.currentstate.tags, "busy")
+    return inst.sg.currentstate.name ~= "taunt" and inst.sg.currentstate.name ~= "wake" and
+        inst.sg.currentstate.name ~= "sleeping" and inst.sg.currentstate.name ~= "sleep"
+        and not table.contains(inst.sg.currentstate.tags, "busy")
 end
 
 local function CanAttack(inst)
@@ -40,7 +40,7 @@ local function WakeUpFn(inst)
 end
 
 local function SleepFn(inst)
-	inst.components.combat.target = nil
+    inst.components.combat.target = nil
     GoToState(inst, "sleep")
 end
 
@@ -58,7 +58,7 @@ end
 local jump_attack_chance = { 0.9, 0.5, 0.25, }
 local function TryJumpAttack(inst)
     if inst.jump_attack_count < inst.max_jump_attack_count and CanAttack(inst) and not IsQuaking(inst) then
-        if math.random () < jump_attack_chance[inst.jump_attack_count + 1] then
+        if math.random() < jump_attack_chance[inst.jump_attack_count + 1] then
             return true
         end
     end
@@ -74,10 +74,9 @@ local function JumpAttack(inst)
 end
 
 local function TrySummonWarriors(inst)
-local invader = GetClosestInstWithTag("antmanwarrior", inst, 12)
+    local invader = GetClosestInstWithTag("antmanwarrior", inst, 12)
     if InAvailableState(inst) and not inst.components.health:IsDead() then
         if (not invader and not IsQuaking(inst)) or (inst.last_attack_time and GetTime() - inst.last_attack_time >= 60) then
-            
             if inst.components.combat.blanktask then
                 inst.components.combat.blanktask:Cancel()
             end
@@ -97,11 +96,12 @@ local function SummonWarriors(inst)
     inst.last_attack_time = GetTime()
 
     GoToState(inst, "summon_warriors")
-    SetCoolDown(inst, inst.min_combat_cooldown/2, inst.max_combat_cooldown/2)
+    SetCoolDown(inst, inst.min_combat_cooldown / 2, inst.max_combat_cooldown / 2)
 end
 
 local function TrySanityAttack(inst)
-    return inst.components.health:GetPercent() <= 0.75 and inst.sanity_attack_count < inst.max_sanity_attack_count and CanAttack(inst) and not TheWorld.components.quaker_interior:IsQuaking()
+    return inst.components.health:GetPercent() <= 0.75 and inst.sanity_attack_count < inst.max_sanity_attack_count and
+    CanAttack(inst) and not TheWorld.components.quaker_interior:IsQuaking()
 end
 
 local function SanityAttack(inst)
@@ -124,34 +124,37 @@ function AntQueenBrain:OnStart()
     --print(self.inst, "PigBrain:OnStart")
     local root =
         PriorityNode(
-        {
-            --TODO: check if we're already in combat in case the player put the queen to sleep
-            IfNode(function() return IsPlayerInVicinity(self.inst) and IsFirstEncounter(self.inst) and (self.inst.sg.currentstate.name == "sleeping" or self.inst.sg.currentstate.name == "sleep") end, "PlayerInVicinity",
-                DoAction(self.inst, function()
-                    if self.inst.components.combat.target == nil then
-                        self.inst.components.combat:SetTarget(GetPlayer())
-                        WakeUpFn(self.inst)
-                    end        
-                end, "WakingUp")),
+            {
+                --TODO: check if we're already in combat in case the player put the queen to sleep
+                IfNode(
+                    function() return IsPlayerInVicinity(self.inst) and IsFirstEncounter(self.inst) and
+                        (self.inst.sg.currentstate.name == "sleeping" or self.inst.sg.currentstate.name == "sleep") end,
+                    "PlayerInVicinity",
+                    DoAction(self.inst, function()
+                        if self.inst.components.combat.target == nil then
+                            self.inst.components.combat:SetTarget(GetPlayer())
+                            WakeUpFn(self.inst)
+                        end
+                    end, "WakingUp")),
 
-            IfNode(function() return not IsPlayerInVicinity2(self.inst) end, "PlayerInVicinity",
-                DoAction(self.inst, function()
-                        SleepFn(self.inst)      
-                end, "Sleep")),	
+                IfNode(function() return not IsPlayerInVicinity2(self.inst) end, "PlayerInVicinity",
+                    DoAction(self.inst, function()
+                        SleepFn(self.inst)
+                    end, "Sleep")),
 
-			
 
-            IfNode(function() return TrySummonWarriors(self.inst) end, "TrySummonWarriors",
-                DoAction(self.inst, SummonWarriors, "SummonWarriors", false)),
 
-            IfNode(function() return TryJumpAttack(self.inst) end, "TryJumpAttack",
-                DoAction(self.inst, JumpAttack, "JumpAttack", false)),
+                IfNode(function() return TrySummonWarriors(self.inst) end, "TrySummonWarriors",
+                    DoAction(self.inst, SummonWarriors, "SummonWarriors", false)),
 
-            IfNode(function() return TrySanityAttack(self.inst) end, "TrySanityAttack",
-                DoAction(self.inst, SanityAttack, "SanityAttack", false)),
+                IfNode(function() return TryJumpAttack(self.inst) end, "TryJumpAttack",
+                    DoAction(self.inst, JumpAttack, "JumpAttack", false)),
 
-        }, .25)
-    
+                IfNode(function() return TrySanityAttack(self.inst) end, "TrySanityAttack",
+                    DoAction(self.inst, SanityAttack, "SanityAttack", false)),
+
+            }, .25)
+
     self.bt = BT(self.inst, root)
 end
 

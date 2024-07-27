@@ -1,7 +1,7 @@
 local assets =
 {
-	Asset("ANIM", "anim/rowboat_basic.zip"),
-	Asset("ANIM", "anim/waxwell_shadowboat_build.zip"),
+    Asset("ANIM", "anim/rowboat_basic.zip"),
+    Asset("ANIM", "anim/waxwell_shadowboat_build.zip"),
 }
 
 local prefabs =
@@ -14,27 +14,23 @@ local prefabs =
 local brain = require "brains/shadowwaxwellbrain"
 
 local function OnWaterChange(inst, onwater)
-	inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/crocodog/emerge")
+    inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/crocodog/emerge")
 
-if onwater then
-local pegabarco = SpawnPrefab("shadowwaxwell_boat")
-inst:AddComponent("driver2")
-inst.components.driver2:OnMount(pegabarco)
-
-else
-if inst:HasTag("aquatic") and inst.components.driver2 then
-local barcoinv = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
-if barcoinv then barcoinv:Remove() end
-inst.components.driver2.vehicle:Remove()
-inst:RemoveComponent("rowboatwakespawner")
-inst:RemoveComponent("driver2")
-inst:RemoveTag("aquatic")
-inst.sg:GoToState("idle")
-end
-end
-
-
-
+    if onwater then
+        local pegabarco = SpawnPrefab("shadowwaxwell_boat")
+        inst:AddComponent("driver2")
+        inst.components.driver2:OnMount(pegabarco)
+    else
+        if inst:HasTag("aquatic") and inst.components.driver2 then
+            local barcoinv = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
+            if barcoinv then barcoinv:Remove() end
+            inst.components.driver2.vehicle:Remove()
+            inst:RemoveComponent("rowboatwakespawner")
+            inst:RemoveComponent("driver2")
+            inst:RemoveTag("aquatic")
+            inst.sg:GoToState("idle")
+        end
+    end
 end
 
 local function OnAttacked(inst, data)
@@ -84,7 +80,7 @@ local function spearfn(inst)
 
     inst.components.combat:SetDefaultDamage(TUNING.SHADOWWAXWELL_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNING.SHADOWWAXWELL_ATTACK_PERIOD)
-    inst.components.combat:SetRetargetFunction(2, retargetfn) --Look for leader's target.
+    inst.components.combat:SetRetargetFunction(2, retargetfn)  --Look for leader's target.
     inst.components.combat:SetKeepTargetFunction(keeptargetfn) --Keep attacking while leader is near.
 
     return inst
@@ -95,11 +91,11 @@ local function nodebrisdmg(inst, amount, overtime, cause, ignore_invincible, aff
 end
 
 local function OnEntityWake(inst)
-	inst.components.tiletracker:Start()
+    inst.components.tiletracker:Start()
 end
 
 local function OnEntitySleep(inst)
-inst.components.tiletracker:Stop()
+    inst.components.tiletracker:Stop()
 end
 
 local function MakeMinion(prefab, tool, hat, master_postinit)
@@ -107,7 +103,7 @@ local function MakeMinion(prefab, tool, hat, master_postinit)
     {
         Asset("ANIM", "anim/waxwell_shadow_mod.zip"),
         Asset("SOUND", "sound/maxwell.fsb"),
-        Asset("ANIM", "anim/"..tool..".zip"),
+        Asset("ANIM", "anim/" .. tool .. ".zip"),
     }
 
     local function fn()
@@ -180,16 +176,16 @@ local function MakeMinion(prefab, tool, hat, master_postinit)
         if master_postinit ~= nil then
             master_postinit(inst)
         end
-    inst:AddComponent("inventory")		
-    inst:AddComponent("tiletracker")
-	inst.components.tiletracker:SetOnWaterChangeFn(OnWaterChange)	
-	
-	
-	
-	inst.OnEntityWake = OnEntityWake
-	inst.OnEntitySleep = OnEntitySleep	
-	
-	
+        inst:AddComponent("inventory")
+        inst:AddComponent("tiletracker")
+        inst.components.tiletracker:SetOnWaterChangeFn(OnWaterChange)
+
+
+
+        inst.OnEntityWake = OnEntityWake
+        inst.OnEntitySleep = OnEntitySleep
+
+
         return inst
     end
 
@@ -234,13 +230,13 @@ local function MakeBuilder(prefab)
         if not TheWorld.ismastersim then
             return inst
         end
-		
+
         inst.pettype = prefab
         inst.OnBuiltFn = onbuilt
         return inst
-    end	
-	
-    return Prefab(prefab.."_builder", fn, nil, { prefab })
+    end
+
+    return Prefab(prefab .. "_builder", fn, nil, { prefab })
 end
 
 --------------------------------------------------------------------------
@@ -248,10 +244,10 @@ end
 return MakeMinion("shadowlumber", "swap_axe"),
     MakeMinion("shadowminer", "swap_pickaxe"),
     MakeMinion("shadowdigger", "swap_shovel"),
-	MakeMinion("shadowmower", "swap_machete"),
+    MakeMinion("shadowmower", "swap_machete"),
     MakeMinion("shadowduelist", "swap_nightmaresword_shadow", nil, spearfn),
     MakeBuilder("shadowlumber"),
     MakeBuilder("shadowminer"),
     MakeBuilder("shadowdigger"),
     MakeBuilder("shadowduelist"),
-	MakeBuilder("shadowmower")
+    MakeBuilder("shadowmower")

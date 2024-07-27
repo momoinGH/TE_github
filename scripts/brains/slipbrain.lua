@@ -37,7 +37,9 @@ end)
 
 local function GetTraderFn(inst)
     return inst.components.trader ~= nil
-        and FindEntity(inst, TRADE_DIST, function(target) return inst.components.trader:IsTryingToTradeWithMe(target) end, { "player" })
+        and
+        FindEntity(inst, TRADE_DIST, function(target) return inst.components.trader:IsTryingToTradeWithMe(target) end,
+            { "player" })
         or nil
 end
 
@@ -71,7 +73,8 @@ local function GoHomeAction(inst)
 end
 
 local function InvestigateAction(inst)
-    local investigatePos = inst.components.knownlocations ~= nil and inst.components.knownlocations:GetLocation("investigate") or nil
+    local investigatePos = inst.components.knownlocations ~= nil and
+    inst.components.knownlocations:GetLocation("investigate") or nil
     return investigatePos ~= nil and BufferedAction(inst, nil, ACTIONS.INVESTIGATE, nil, investigatePos, nil, 1) or nil
 end
 
@@ -86,30 +89,32 @@ end
 function SlipBrain:OnStart()
     local root =
         PriorityNode(
-        {
-            BrainCommon.PanicWhenScared(self.inst, .3),
-            WhileNode(function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
-            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
-            IfNode(function() return self.inst:HasTag("spider_hider") end, "IsHider",
-                UseShield(self.inst, DAMAGE_UNTIL_SHIELD, SHIELD_TIME, AVOID_PROJECTILE_ATTACKS, HIDE_WHEN_SCARED)),
-            AttackWall(self.inst),
-            ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME)),
-            DoAction(self.inst, function() return EatFoodAction(self.inst) end ),
-            Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),
-            IfNode(function() return self.inst.components.follower.leader ~= nil end, "HasLeader",
-                FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn )),
-            DoAction(self.inst, function() return InvestigateAction(self.inst) end ),
-            WhileNode(function() return TheWorld.state.iscaveday end, "IsDay",
-                    DoAction(self.inst, function() return GoHomeAction(self.inst) end ) ),
-            FaceEntity(self.inst, GetTraderFn, KeepTraderFn),
-            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
-        }, 1)
+            {
+                BrainCommon.PanicWhenScared(self.inst, .3),
+                WhileNode(function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end,
+                    "PanicHaunted", Panic(self.inst)),
+                WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+                IfNode(function() return self.inst:HasTag("spider_hider") end, "IsHider",
+                    UseShield(self.inst, DAMAGE_UNTIL_SHIELD, SHIELD_TIME, AVOID_PROJECTILE_ATTACKS, HIDE_WHEN_SCARED)),
+                AttackWall(self.inst),
+                ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME)),
+                DoAction(self.inst, function() return EatFoodAction(self.inst) end),
+                Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST,
+                    TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),
+                IfNode(function() return self.inst.components.follower.leader ~= nil end, "HasLeader",
+                    FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn)),
+                DoAction(self.inst, function() return InvestigateAction(self.inst) end),
+                WhileNode(function() return TheWorld.state.iscaveday end, "IsDay",
+                    DoAction(self.inst, function() return GoHomeAction(self.inst) end)),
+                FaceEntity(self.inst, GetTraderFn, KeepTraderFn),
+                Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                    MAX_WANDER_DIST)
+            }, 1)
     self.bt = BT(self.inst, root)
 end
 
 function SlipBrain:OnInitializationComplete()
     self.inst.components.knownlocations:RememberLocation("home", Point(self.inst.Transform:GetWorldPosition()))
-
 end
 
 return SlipBrain

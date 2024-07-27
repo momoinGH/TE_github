@@ -137,7 +137,7 @@ local function OnCookingStep(inst, multiplier)
         local chimneyfirevalue = multiplier >= 1 and true or false
         inst.oven._chimneyfire:set(chimneyfirevalue)
         if multiplier > 0 then
-        	inst.oven.AnimState:PlayAnimation("cooking_bake_small", true) -- TODO
+            inst.oven.AnimState:PlayAnimation("cooking_bake_small", true) -- TODO
         else
             inst.oven.AnimState:PlayAnimation("idle")
         end
@@ -153,7 +153,7 @@ local function GetContainer(inst)
 end
 
 local function SetDish(inst, doer, dish)
-if inst.components.specialstewer and dish then inst.components.specialstewer:StartWorking() end
+    if inst.components.specialstewer and dish then inst.components.specialstewer:StartWorking() end
     if inst.dish ~= nil and dish == nil then
         local overridebuild = "quagmire_" .. inst.dish.prefab
         inst.dish = nil
@@ -176,7 +176,7 @@ end
 local function OnDishTaken(inst)
     inst:SetDish(nil, nil)
     inst.components.specialstewer:ResetWork()
-	inst.SoundEmitter:KillSound("snd")
+    inst.SoundEmitter:KillSound("snd")
 end
 
 local function backfn()
@@ -214,11 +214,11 @@ end
 local function OnInstall(inst, target)
     local back = SpawnPrefab("oven_back")
     back.entity:SetParent(inst.entity)
-	back.Transform:SetPosition(0, -0.1, 0)
+    back.Transform:SetPosition(0, -0.1, 0)
     inst.entity:SetParent(target.entity)
 
     target:AddTag("specialstewer_dishtaker")
-    target:AddTag("oven")	
+    target:AddTag("oven")
     target.dish = nil
     inst.firepit = target
     target.oven = inst
@@ -286,7 +286,7 @@ local function itemfn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)
+    MakeInventoryFloatable(inst)
     inst.AnimState:SetBank("quagmire_oven")
     inst.AnimState:SetBuild("quagmire_oven")
     inst.AnimState:PlayAnimation("item")

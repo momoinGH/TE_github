@@ -8,7 +8,7 @@ local prefabs =
 {
     "spoiled_food",
 }
- 
+
 local function fn()
     local inst = CreateEntity()
 
@@ -23,8 +23,8 @@ local function fn()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("cattoy")
-	
-	MakeInventoryFloatable(inst, "small", 0.05, 0.95)
+
+    MakeInventoryFloatable(inst, "small", 0.05, 0.95)
 
     inst.entity:SetPristine()
 
@@ -68,8 +68,8 @@ local function fntropical()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("cattoy")
-	
-	MakeInventoryFloatable(inst, "small", 0.05, 0.95)
+
+    MakeInventoryFloatable(inst, "small", 0.05, 0.95)
 
     inst.entity:SetPristine()
 
@@ -87,7 +87,7 @@ local function fntropical()
 
     inst:AddComponent("inspectable")
 
-	
+
     inst:AddComponent("tradable")
 
     inst:AddComponent("perishable")
@@ -96,13 +96,13 @@ local function fntropical()
     inst.components.perishable.onperishreplacement = "spoiled_food"
 
     MakeHauntableLaunchAndPerish(inst)
-	
+
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
-	
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     return inst
 end
 
 return Prefab("butterflywings", fn, assets, prefabs),
-	   Prefab("butterfly_tropical_wings", fntropical, assets, prefabs)
+    Prefab("butterfly_tropical_wings", fntropical, assets, prefabs)

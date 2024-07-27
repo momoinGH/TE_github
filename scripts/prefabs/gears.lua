@@ -33,10 +33,10 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	
-	inst:AddComponent("fuel")
+
+    inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = 480
-    inst.components.fuel.fueltype = "REPARODEBARCO"	
+    inst.components.fuel.fueltype = "REPARODEBARCO"
 
     inst:AddComponent("bait")
 

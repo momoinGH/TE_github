@@ -25,24 +25,24 @@ local function SetModifiers(inst, owner, mods)
         owner.components.gfspellcaster.rechargeExternal:SetModifier(inst, mods.spellrecharge, inst._baseName .. "bonus")
     end
     if mods.movement and owner.components.locomotor ~= nil then
-        owner.components.locomotor:SetExternalSpeedMultiplier(inst, inst._baseName .. "bonus", mods.movement) 
+        owner.components.locomotor:SetExternalSpeedMultiplier(inst, inst._baseName .. "bonus", mods.movement)
     end
 end
 
 local function RemoveModifiers(inst, owner)
     if owner.components.combat ~= nil then
-        owner.components.combat.externaldamagemultipliers:RemoveModifier(inst, inst._baseName .. "bonus") 
+        owner.components.combat.externaldamagemultipliers:RemoveModifier(inst, inst._baseName .. "bonus")
     end
     if owner.components.gfspellcaster ~= nil then
-        owner.components.gfspellcaster.rechargeExternal:RemoveModifier(inst, inst._baseName .. "bonus") 
-        owner.components.gfspellcaster.spellPowerExternal:RemoveModifier(inst, inst._baseName .. "bonus") 
+        owner.components.gfspellcaster.rechargeExternal:RemoveModifier(inst, inst._baseName .. "bonus")
+        owner.components.gfspellcaster.spellPowerExternal:RemoveModifier(inst, inst._baseName .. "bonus")
     end
     if owner.components.locomotor ~= nil then
-        owner.components.locomotor:RemoveExternalSpeedMultiplier(inst, inst._baseName .. "bonus") 
+        owner.components.locomotor:RemoveExternalSpeedMultiplier(inst, inst._baseName .. "bonus")
     end
 end
 
-local preinitfns = 
+local preinitfns =
 {
     steel_wool = function(inst)
         inst:AddTag("fur")
@@ -101,7 +101,7 @@ local function WormSuitBuff(owner)
     owner.components.gfeffectable:PushEffect("worm_suit_buff")
 end
 
-local postinitfns = 
+local postinitfns =
 {
     steel_wool = function(inst)
         inst:AddComponent("insulator")
@@ -127,41 +127,44 @@ local postinitfns =
     end
 }
 
-local onequipfns = 
+local onequipfns =
 {
     steel_wool = function(inst, owner)
         OnEquip(inst, owner)
-        local mods = {damage = 1.1}
+        local mods = { damage = 1.1 }
         SetModifiers(inst, owner, mods)
     end,
 
     golden_chain = function(inst, owner)
         OnEquip(inst, owner)
-        local mods = {spellpower = 1.1}
+        local mods = { spellpower = 1.1 }
         SetModifiers(inst, owner, mods)
     end,
 
     moon_heavy = function(inst, owner)
         OnEquip(inst, owner)
-        local mods = {movement = 0.85}
+        local mods = { movement = 0.85 }
         SetModifiers(inst, owner, mods)
     end,
 
     leather_light = function(inst, owner)
         OnEquip(inst, owner)
-        local mods = {spellrecharge = 0.9}
+        local mods = { spellrecharge = 0.9 }
         SetModifiers(inst, owner, mods)
     end,
 
     grass_tunic = function(inst, owner)
         OnEquip(inst, owner)
-        local mods = {movement = 1.1}
+        local mods = { movement = 1.1 }
         SetModifiers(inst, owner, mods)
     end,
 
-    hypno_coat = function(inst, owner) 
+    hypno_coat = function(inst, owner)
         OnEquip(inst, owner)
-        if owner._hctask ~= nil then owner._hctask:Cancel() owner._hctask = nil end
+        if owner._hctask ~= nil then
+            owner._hctask:Cancel()
+            owner._hctask = nil
+        end
         if rawget(_G, "GF") ~= nil and owner.components.leader ~= nil then
             owner._hctask = owner:DoPeriodicTask(5, function(owner)
                 for follower, _ in pairs(owner.components.leader.followers) do
@@ -206,7 +209,7 @@ local onequipfns =
     end,
 }
 
-local onunequipfns = 
+local onunequipfns =
 {
     steel_wool = function(inst, owner)
         OnUnequip(inst, owner)
@@ -233,9 +236,12 @@ local onunequipfns =
         RemoveModifiers(inst, owner)
     end,
 
-    hypno_coat = function(inst, owner) 
+    hypno_coat = function(inst, owner)
         OnUnequip(inst, owner)
-        if owner._hctask ~= nil then owner._hctask:Cancel() owner._hctask = nil end
+        if owner._hctask ~= nil then
+            owner._hctask:Cancel()
+            owner._hctask = nil
+        end
     end,
 
     tusk_vest = function(inst, owner)
@@ -256,8 +262,8 @@ local onunequipfns =
 
 local function MakeArmor(name, data)
     local build = data.build
-    
-    local assets = 
+
+    local assets =
     {
         Asset("ANIM", "anim/" .. build .. ".zip"),
     }
@@ -270,8 +276,8 @@ local function MakeArmor(name, data)
         inst.entity:AddNetwork()
 
         MakeInventoryPhysics(inst)
-		MakeInventoryFloatable(inst)
-	
+        MakeInventoryFloatable(inst)
+
         inst.AnimState:SetBank(build)
         inst.AnimState:SetBuild(build)
         inst.AnimState:PlayAnimation("idle")
@@ -320,20 +326,20 @@ local function MakeArmor(name, data)
         return inst
     end
 
-    return Prefab("tfwp_".. name.. "_armor", common, assets)
+    return Prefab("tfwp_" .. name .. "_armor", common, assets)
 end
 
-local armor = 
+local armor =
 {
-    steel_wool = {build = "tfwp_steel_wool_armor", sound = "dontstarve/movement/foley/fur", armor = {1500, 0.85}},
-    golden_chain = {build = "tfwp_flint_armor", sound = "dontstarve/movement/foley/metalarmour", armor = {800, 0.5}},
-    moon_heavy = {build = "tfwp_moon_heavy_armor", sound = "dontstarve/movement/foley/marblearmour", armor = {2500, 0.95}},
-    leather_light = {build = "tfwp_leather_armor", sound = "dontstarve/movement/foley/fur", fueled = TUNING.TOTAL_DAY_TIME * 5},
-    grass_tunic = {build = "tfwp_grass_light_armor", sound = "dontstarve/movement/foley/grassarmour", fueled = TUNING.TOTAL_DAY_TIME * 5},
+    steel_wool = { build = "tfwp_steel_wool_armor", sound = "dontstarve/movement/foley/fur", armor = { 1500, 0.85 } },
+    golden_chain = { build = "tfwp_flint_armor", sound = "dontstarve/movement/foley/metalarmour", armor = { 800, 0.5 } },
+    moon_heavy = { build = "tfwp_moon_heavy_armor", sound = "dontstarve/movement/foley/marblearmour", armor = { 2500, 0.95 } },
+    leather_light = { build = "tfwp_leather_armor", sound = "dontstarve/movement/foley/fur", fueled = TUNING.TOTAL_DAY_TIME * 5 },
+    grass_tunic = { build = "tfwp_grass_light_armor", sound = "dontstarve/movement/foley/grassarmour", fueled = TUNING.TOTAL_DAY_TIME * 5 },
 
-    tusk_vest = {build = "tfwp_tusk_vest_armor", sound = "dontstarve/movement/foley/fur", fueled = TUNING.TOTAL_DAY_TIME * 5},
-    hypno_coat = {build = "tfwp_hypno_coat_armor", sound = "dontstarve/movement/foley/grassarmour", fueled = TUNING.TOTAL_DAY_TIME * 5},
-    worm_suit = {build = "tfwp_worm_suit_armor", sound = "dontstarve/movement/foley/shellarmour", armor = {1200, 0.4}},
+    tusk_vest = { build = "tfwp_tusk_vest_armor", sound = "dontstarve/movement/foley/fur", fueled = TUNING.TOTAL_DAY_TIME * 5 },
+    hypno_coat = { build = "tfwp_hypno_coat_armor", sound = "dontstarve/movement/foley/grassarmour", fueled = TUNING.TOTAL_DAY_TIME * 5 },
+    worm_suit = { build = "tfwp_worm_suit_armor", sound = "dontstarve/movement/foley/shellarmour", armor = { 1200, 0.4 } },
 }
 
 local ret = {}

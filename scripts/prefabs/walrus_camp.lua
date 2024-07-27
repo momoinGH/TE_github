@@ -50,24 +50,23 @@ local function UpdateLight(inst, on)
 end
 
 local function SetOccupied(inst, occupied)
-	local occupied = occupied
+    local occupied = occupied
     --print("SetOccupied", inst, occupied)
-	local map = TheWorld.Map
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))	
+    local map = TheWorld.Map
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     --print("OnIsWinter", inst)
-	if TheWorld.state.iswinter or ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then
-	occupied = true
-	else
-	occupied = false
-	end
+    if TheWorld.state.iswinter or ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then
+        occupied = true
+    else
+        occupied = false
+    end
 
     local anim = inst.AnimState
 
     inst.data.occupied = occupied
 
     if occupied then
-
         anim:SetBank("walrus_house")
         anim:SetBuild("walrus_house")
 
@@ -94,9 +93,9 @@ local function SetOccupied(inst, occupied)
 end
 
 local function UpdateCampOccupied(inst)
-local map = TheWorld.Map
-local x, y, z = inst.Transform:GetWorldPosition()
-local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
+    local map = TheWorld.Map
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     --print("UpdateCampOccupied", inst, inst:GetPosition())
     if inst.data.occupied then
         if not TheWorld.state.iswinter and ground ~= GROUND.WATER_MANGROVE and ground ~= GROUND.ANTFLOOR then
@@ -226,15 +225,15 @@ local function SpawnHuntingParty(inst, target, houndsonly)
     local leader = GetMember(inst, "walrus")
     if not houndsonly and not leader and CanSpawn(inst, "walrus") then
         leader = SpawnMember(inst, "walrus")
-        local x,y,z = GetSpawnPoint(inst)
-        transformsToSet[#transformsToSet + 1] = {inst = leader, x=x, y=y,z=z }
+        local x, y, z = GetSpawnPoint(inst)
+        transformsToSet[#transformsToSet + 1] = { inst = leader, x = x, y = y, z = z }
     end
 
     local companion = GetMember(inst, "little_walrus")
     if not houndsonly and not companion and CanSpawn(inst, "little_walrus") then
         companion = SpawnMember(inst, "little_walrus")
-        local x,y,z = GetSpawnPoint(inst)
-        transformsToSet[#transformsToSet + 1] = {inst = companion, x=x, y=y,z=z }
+        local x, y, z = GetSpawnPoint(inst)
+        transformsToSet[#transformsToSet + 1] = { inst = companion, x = x, y = y, z = z }
     end
 
     if companion and leader then
@@ -242,14 +241,13 @@ local function SpawnHuntingParty(inst, target, houndsonly)
     end
 
     local existing_hounds = GetMembers(inst, "icehound")
-    for i = 1,NUM_HOUNDS do
-	
+    for i = 1, NUM_HOUNDS do
         local hound = existing_hounds[i]
         if not hound and CanSpawn(inst, "icehound") then
             hound = SpawnMember(inst, "icehound")
             hound:AddTag("pet_hound")
-            local x,y,z = GetSpawnPoint(inst)
-            transformsToSet[#transformsToSet + 1] = {inst = hound, x=x, y=y,z=z }
+            local x, y, z = GetSpawnPoint(inst)
+            transformsToSet[#transformsToSet + 1] = { inst = hound, x = x, y = y, z = z }
             hound.sg:GoToState("idle")
         end
 
@@ -270,15 +268,15 @@ local function SpawnHuntingParty(inst, target, houndsonly)
         end
     end
 
-    for i,v in ipairs(transformsToSet) do
+    for i, v in ipairs(transformsToSet) do
         v.inst.Transform:SetPosition(v.x, v.y, v.z)
     end
 end
 
 local function CheckSpawnHuntingParty(inst, target, houndsonly)
-local map = TheWorld.Map
-local x, y, z = inst.Transform:GetWorldPosition()
-local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
+    local map = TheWorld.Map
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     if inst.data.occupied and TheWorld.state.iswinter or inst.data.occupied and ground == GROUND.WATER_MANGROVE or inst.data.occupied and ground == GROUND.ANTFLOOR then
         SpawnHuntingParty(inst, target, houndsonly)
         UpdateLight(inst, houndsonly) -- keep light on if hounds only, otherwise off
@@ -286,7 +284,7 @@ local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 end
 
 -- assign value to forward declared local above
-OnMemberNewTarget = function (inst, member, data)
+OnMemberNewTarget = function(inst, member, data)
     if member:IsNear(inst, AGGRO_SPAWN_PARTY_RADIUS) then
         CheckSpawnHuntingParty(inst, data.target, false)
     end
@@ -307,16 +305,16 @@ local function OnStartDay(inst)
 end
 
 local function OnIsWinter(inst)
-	local map = TheWorld.Map
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))	
+    local map = TheWorld.Map
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     --print("OnIsWinter", inst)
-if TheWorld.state.iswinter or ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then	
-    if inst:IsAsleep() then
-        UpdateCampOccupied(inst)
-        CheckSpawnHuntingParty(inst, nil, not TheWorld.state.isday)
+    if TheWorld.state.iswinter or ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then
+        if inst:IsAsleep() then
+            UpdateCampOccupied(inst)
+            CheckSpawnHuntingParty(inst, nil, not TheWorld.state.isday)
+        end
     end
-end	
 end
 
 local function OnSave(inst, data)
@@ -337,13 +335,13 @@ end
 
 local function OnLoad(inst, data)
     if data then
-    --children loaded by OnLoadPostPass
+        --children loaded by OnLoadPostPass
         if data.occupied ~= nil then
             SetOccupied(inst, data.occupied)
         end
 
         if data.regentimeremaining then
-            for k,v in pairs(data.regentimeremaining) do
+            for k, v in pairs(data.regentimeremaining) do
                 if v > 0 then
                     inst.components.worldsettingstimer:StartTimer(k, v)
                 end
@@ -354,22 +352,20 @@ end
 
 local function OnLoadPostPass(inst, newents, data)
     if data and data.children and #data.children > 0 then
-        for k,v in pairs(data.children) do
+        for k, v in pairs(data.children) do
             local child = newents[v]
             if child then
                 child = child.entity
                 TrackMember(inst, child)
             end
         end
-
     end
 end
 
-local WALRUS_MUST = {"walrus"}
+local WALRUS_MUST = { "walrus" }
 local function OnMegaFlare(inst, data)
     inst:DoTaskInTime(5 + (math.random() * 20), function()
-        if data.sourcept and TheWorld.Map:IsVisualGroundAtPoint(data.sourcept.x,data.sourcept.y,data.sourcept.z) then
-            
+        if data.sourcept and TheWorld.Map:IsVisualGroundAtPoint(data.sourcept.x, data.sourcept.y, data.sourcept.z) then
             local party_active = nil
             local engaged = nil
             local spawnpoint = nil
@@ -380,8 +376,8 @@ local function OnMegaFlare(inst, data)
                     if k:IsValid() then
                         party_active = true
 
-                        local x,y,z = k.Transform:GetWorldPosition()
-                        local players = FindPlayersInRange(x,y,z, 35)
+                        local x, y, z = k.Transform:GetWorldPosition()
+                        local players = FindPlayersInRange(x, y, z, 35)
                         if #players > 0 then
                             engaged = true
                         end
@@ -396,9 +392,9 @@ local function OnMegaFlare(inst, data)
             if not engaged and party_active then
                 local players = FindPlayersInRange(data.sourcept.x, data.sourcept.y, data.sourcept.z, 35)
 
-                --find a spot outside player vision of that player 
+                --find a spot outside player vision of that player
                 if #players > 0 then
-                    local offset = FindValidPositionByFan(math.random()*2*PI, 40, 32, function(testoffset)
+                    local offset = FindValidPositionByFan(math.random() * 2 * PI, 40, 32, function(testoffset)
                         local newpt = data.sourcept + testoffset
 
                         if TheWorld.Map:IsAboveGroundAtPoint(newpt.x, newpt.y, newpt.z) then
@@ -417,7 +413,7 @@ local function OnMegaFlare(inst, data)
 
             --ARE THERE OTHER WALRUS NEARBY ALREADY?
             if spawnpoint then
-                local ents = TheSim:FindEntities(data.sourcept.x,0,data.sourcept.z, 70, WALRUS_MUST)
+                local ents = TheSim:FindEntities(data.sourcept.x, 0, data.sourcept.z, 70, WALRUS_MUST)
                 if #ents > 0 then
                     spawnpoint = nil
                 end
@@ -426,8 +422,8 @@ local function OnMegaFlare(inst, data)
             -- SPAWN THEM IN
             if party_active and spawnpoint and not engaged and math.random() < 0.6 then
                 for k in pairs(inst.data.children) do
-                    local players = FindPlayersInRange(spawnpoint.x,spawnpoint.y,spawnpoint.z, 40)
-                    k.Transform:SetPosition(spawnpoint.x,spawnpoint.y,spawnpoint.z)
+                    local players = FindPlayersInRange(spawnpoint.x, spawnpoint.y, spawnpoint.z, 40)
+                    k.Transform:SetPosition(spawnpoint.x, spawnpoint.y, spawnpoint.z)
                     k.components.combat:SuggestTarget(players[1])
                     k:AddTag("flare_summoned")
                 end
@@ -456,7 +452,7 @@ local function create()
     inst.Light:SetFalloff(1)
     inst.Light:SetIntensity(.5)
     inst.Light:SetRadius(2)
-    inst.Light:SetColour(180/255, 195/255, 50/255)
+    inst.Light:SetColour(180 / 255, 195 / 255, 50 / 255)
 
     --inst:AddTag("tent")
     inst:AddTag("antlion_sinkhole_blocker")
@@ -490,14 +486,17 @@ local function create()
 
     inst.OnEntitySleep = OnEntitySleep
     inst.OnEntityWake = OnEntityWake
-	
+
     SetOccupied(inst, true)
-	inst:DoTaskInTime(1, function() OnIsWinter(inst) SetOccupied(inst, true) end)
+    inst:DoTaskInTime(1, function()
+        OnIsWinter(inst)
+        SetOccupied(inst, true)
+    end)
     inst:WatchWorldState("startday", OnIsWinter)
-	
---    SetOccupied(inst, TheWorld.state.iswinter)
---    inst:WatchWorldState("iswinter", OnIsWinter)	
-    inst:ListenForEvent("megaflare_detonated", function(src,data) OnMegaFlare(inst,data) end, TheWorld)
+
+    --    SetOccupied(inst, TheWorld.state.iswinter)
+    --    inst:WatchWorldState("iswinter", OnIsWinter)	
+    inst:ListenForEvent("megaflare_detonated", function(src, data) OnMegaFlare(inst, data) end, TheWorld)
 
     return inst
 end

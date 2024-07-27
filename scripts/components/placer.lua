@@ -15,7 +15,7 @@ local Placer = Class(function(self, inst)
     self.linked = {}
     self.offset = 1
 
-	self.hide_inv_icon = true
+    self.hide_inv_icon = true
 
     self.override_build_point_fn = nil
     self.override_testfn = nil
@@ -32,15 +32,16 @@ end
 
 function Placer:LinkEntity(ent, lightoverride)
     table.insert(self.linked, ent)
-	if lightoverride == nil or lightoverride > 0 then
-		ent.AnimState:SetLightOverride(lightoverride or 1)
-	end
+    if lightoverride == nil or lightoverride > 0 then
+        ent.AnimState:SetLightOverride(lightoverride or 1)
+    end
 end
 
 function Placer:GetDeployAction()
     if self.invobject ~= nil then
         self.selected_pos = self.inst:GetPosition()
-        local action = BufferedAction(self.builder, nil, ACTIONS.DEPLOY, self.invobject, self.selected_pos, nil, nil, nil, self.inst.Transform:GetRotation())
+        local action = BufferedAction(self.builder, nil, ACTIONS.DEPLOY, self.invobject, self.selected_pos, nil, nil, nil,
+            self.inst.Transform:GetRotation())
         table.insert(action.onsuccess, function() self.selected_pos = nil end)
         return action
     end
@@ -68,11 +69,13 @@ function Placer:OnUpdate(dt)
     elseif not TheInput:ControllerAttached() then
         local pt = self.selected_pos or TheInput:GetWorldPosition()
         if self.snap_to_tile then
-         if TheWorld.Map:GetTileCenterPoint(pt:Get()) ~= nil then self.inst.Transform:SetPosition(TheWorld.Map:GetTileCenterPoint(pt:Get())) else self.inst.Transform:SetPosition(math.floor(pt.x) + .5, 0, math.floor(pt.z) + .5) end
+            if TheWorld.Map:GetTileCenterPoint(pt:Get()) ~= nil then self.inst.Transform:SetPosition(TheWorld.Map
+                :GetTileCenterPoint(pt:Get())) else self.inst.Transform:SetPosition(math.floor(pt.x) + .5, 0,
+                    math.floor(pt.z) + .5) end
         elseif self.snap_to_meters then
             self.inst.Transform:SetPosition(math.floor(pt.x) + .5, 0, math.floor(pt.z) + .5)
-		elseif self.snaptogrid then
-			self.inst.Transform:SetPosition(math.floor(pt.x + .5), 0, math.floor(pt.z + .5))
+        elseif self.snaptogrid then
+            self.inst.Transform:SetPosition(math.floor(pt.x + .5), 0, math.floor(pt.z + .5))
         elseif self.snap_to_boat_edge then
             local boats = TheSim:FindEntities(pt.x, 0, pt.z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, self.BOAT_MUST_TAGS)
             local boat = GetClosest(self.inst, boats)
@@ -105,9 +108,9 @@ function Placer:OnUpdate(dt)
     elseif self.snap_to_meters then
         local x, y, z = ThePlayer.entity:LocalToWorldSpace(self.offset, 0, 0)
         self.inst.Transform:SetPosition(math.floor(x) + .5, 0, math.floor(z) + .5)
-	elseif self.snaptogrid then
-		local x, y, z = ThePlayer.entity:LocalToWorldSpace(self.offset, 0, 0)
-		self.inst.Transform:SetPosition(math.floor(x + .5), 0, math.floor(z + .5))
+    elseif self.snaptogrid then
+        local x, y, z = ThePlayer.entity:LocalToWorldSpace(self.offset, 0, 0)
+        self.inst.Transform:SetPosition(math.floor(x + .5), 0, math.floor(z + .5))
     elseif self.snap_to_boat_edge then
         local x, y, z = ThePlayer.entity:LocalToWorldSpace(self.offset, 0, 0)
         local boat = ThePlayer:GetCurrentPlatform()
@@ -126,8 +129,8 @@ function Placer:OnUpdate(dt)
             self.controllergroundoverridefn(self, ThePlayer, x, y, z)
         end
     elseif self.inst.parent == nil then
---        ThePlayer:AddChild(self.inst)
---        self.inst.Transform:SetPosition(self.offset, 0, 0) -- this will cause the object to be rotated to face the same direction as the player, which is not what we want, rotate the camera if you want to rotate the object
+        --        ThePlayer:AddChild(self.inst)
+        --        self.inst.Transform:SetPosition(self.offset, 0, 0) -- this will cause the object to be rotated to face the same direction as the player, which is not what we want, rotate the camera if you want to rotate the object
         local x, y, z = ThePlayer.entity:LocalToWorldSpace(self.offset, 0, 0)
         self.inst.Transform:SetPosition(x, y, z)
 
@@ -152,7 +155,7 @@ function Placer:OnUpdate(dt)
         self.onupdatetransform(self.inst)
     end
 
-	local was_mouse_blocked = self.mouse_blocked
+    local was_mouse_blocked = self.mouse_blocked
 
     self.can_build, self.mouse_blocked = self:TestCanBuild()
 
@@ -161,10 +164,10 @@ function Placer:OnUpdate(dt)
     end
 
     if self.builder ~= nil and was_mouse_blocked ~= self.mouse_blocked and self.hide_inv_icon then
-		self.builder:PushEvent(self.mouse_blocked and "onplacerhidden" or "onplacershown")
-	end
+        self.builder:PushEvent(self.mouse_blocked and "onplacerhidden" or "onplacershown")
+    end
 
-	local x, y, z = self.inst.Transform:GetWorldPosition()
+    local x, y, z = self.inst.Transform:GetWorldPosition()
     TriggerDeployHelpers(x, y, z, 64, self.recipe, self.inst)
 
     if self.can_build then

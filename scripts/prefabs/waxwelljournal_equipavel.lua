@@ -131,7 +131,10 @@ local function TrySpawnMinions(prefab, doer, pos)
 end
 
 local function _CheckMaxSanity(sanity, minionprefab)
-	return sanity ~= nil and sanity:GetPenaltyPercent() + (TUNING.SHADOWWAXWELL_SANITY_PENALTY[string.upper(minionprefab)] or 0) * NUM_MINIONS_PER_SPAWN <= TUNING.MAXIMUM_SANITY_PENALTY
+	return sanity ~= nil and
+	sanity:GetPenaltyPercent() +
+	(TUNING.SHADOWWAXWELL_SANITY_PENALTY[string.upper(minionprefab)] or 0) * NUM_MINIONS_PER_SPAWN <=
+	TUNING.MAXIMUM_SANITY_PENALTY
 end
 
 local function CheckMaxSanity(doer, minionprefab)
@@ -612,13 +615,13 @@ end
 --------------------------------------------------------------------------
 
 
-local function onequip(inst, owner) 
-    owner.AnimState:ClearOverrideSymbol("swap_object")
-    owner.AnimState:OverrideSymbol("book_closed","swap_book_maxwellte","book_closed")
+local function onequip(inst, owner)
+	owner.AnimState:ClearOverrideSymbol("swap_object")
+	owner.AnimState:OverrideSymbol("book_closed", "swap_book_maxwellte", "book_closed")
 end
 
-local function onunequip(inst, owner) 
-    owner.AnimState:ClearOverrideSymbol("swap_object")
+local function onunequip(inst, owner)
+	owner.AnimState:ClearOverrideSymbol("swap_object")
 end
 
 
@@ -681,9 +684,9 @@ local function fn()
 
 	inst:AddComponent("inventoryitem")
 	inst:AddComponent("equippable")
-    inst.components.equippable:SetOnEquip(onequip)
-    inst.components.equippable:SetOnUnequip(onunequip)
-	
+	inst.components.equippable:SetOnEquip(onequip)
+	inst.components.equippable:SetOnUnequip(onunequip)
+
 	inst:AddComponent("fueled")
 	inst.components.fueled.accepting = true
 	inst.components.fueled.fueltype = FUELTYPE.NIGHTMARE
@@ -702,8 +705,8 @@ local function fn()
 	inst:AddComponent("hauntable")
 	inst.components.hauntable.cooldown = TUNING.HAUNT_COOLDOWN_SMALL
 	inst.components.hauntable:SetOnHauntFn(OnHaunt)
-	
-	inst.components.spellbook:SelectSpell(4)	
+
+	inst.components.spellbook:SelectSpell(4)
 
 	inst._activetask = nil
 	inst._soundtasks = {}

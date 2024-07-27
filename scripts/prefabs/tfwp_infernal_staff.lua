@@ -42,63 +42,81 @@ local function t(e, p, q)
     local A = v * (1 + Lerp(0, w, z))
     return A
 end;
-local function B(e, p, q)
-    if e.components.weapon.isaltattacking then SpawnPrefab("infernalstaff_meteor_splashhit"):SetTarget(q) end
+local function B(inst, p, q)
+    if inst.components.weapon.isaltattacking then SpawnPrefab("infernalstaff_meteor_splashhit"):SetTarget(q) end
 end;
 local function C()
-    local e = CreateEntity()
-    e.entity:AddTransform()
-    e.entity:AddAnimState()
-    e.entity:AddSoundEmitter()
-    e.entity:AddNetwork()
-    MakeInventoryPhysics(e)
-    e.nameoverride = "fireballstaff"
-    e.AnimState:SetBank("fireballstaff")
-    e.AnimState:SetBuild("fireballstaff")
-    e.AnimState:PlayAnimation("idle")
-    e:AddTag("firestaff")
-    e:AddTag("magicweapon")
-    e:AddTag("pyroweapon")
-    e:AddTag("rangedweapon")
-    e:AddTag("rechargeable")
-    e:AddComponent("aoetargeting")
-    e.components.aoetargeting.reticule.reticuleprefab = "reticuleaoe"
-    e.components.aoetargeting.reticule.pingprefab = "reticuleaoeping"
-    e.components.aoetargeting.reticule.targetfn = h;
-    e.components.aoetargeting.reticule.validcolour = { 1, .75, 0, 1 }
-    e.components.aoetargeting.reticule.invalidcolour = { .5, 0, 0, 1 }
-    e.components.aoetargeting.reticule.ease = true;
-    e.components.aoetargeting.reticule.mouseenabled = true;
-    e.projectiledelay = c; e.entity:SetPristine()
-    if not TheWorld.ismastersim then return e end;
-    e.IsWorkableAllowed = function(self, D, E)
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
+
+    inst.nameoverride = "fireballstaff"
+
+    inst.AnimState:SetBank("fireballstaff")
+    inst.AnimState:SetBuild("fireballstaff")
+    inst.AnimState:PlayAnimation("idle")
+
+    inst:AddTag("firestaff")
+    inst:AddTag("magicweapon")
+    inst:AddTag("pyroweapon")
+    inst:AddTag("rangedweapon")
+    inst:AddTag("rechargeable")
+
+    inst:AddComponent("aoetargeting")
+    inst.components.aoetargeting.reticule.reticuleprefab = "reticuleaoe"
+    inst.components.aoetargeting.reticule.pingprefab = "reticuleaoeping"
+    inst.components.aoetargeting.reticule.targetfn = h;
+    inst.components.aoetargeting.reticule.validcolour = { 1, .75, 0, 1 }
+    inst.components.aoetargeting.reticule.invalidcolour = { .5, 0, 0, 1 }
+    inst.components.aoetargeting.reticule.ease = true;
+    inst.components.aoetargeting.reticule.mouseenabled = true;
+
+    inst.projectiledelay = c; inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then return inst end;
+
+    inst.IsWorkableAllowed = function(self, D, E)
         return D == ACTIONS.CHOP or D == ACTIONS.DIG and E:HasTag("stump") or
             D == ACTIONS.MINE
     end;
-    e.castsound = "dontstarve/common/lava_arena/spell/meteor"
-    e:AddComponent("aoespell")
-    e.components.aoespell:SetSpellFn(m)
-    e:AddComponent("equippable")
-    e.components.equippable:SetOnEquip(d)
-    e.components.equippable:SetOnUnequip(g)
-    e:AddComponent("inspectable")
-    e:AddComponent("inventoryitem")
-    e.components.inventoryitem.imagename = "fireballstaff"
-    e:AddComponent("recarregavel")
-    e.components.recarregavel:SetRechargeTime(TUNING.FORGE_ITEM_PACK.TFWP_INFERNAL_STAFF.COOLDOWN)
-    e:AddComponent("reticule_spawner")
-    e.components.reticule_spawner:Setup(unpack(TUNING.FORGE_ITEM_PACK.RET_DATA.tfwp_infernal_staff))
-    e:AddComponent("weapon")
-    e.components.weapon:SetDamage(TUNING.FORGE_ITEM_PACK.TFWP_INFERNAL_STAFF.DAMAGE)
-    e.components.weapon:SetOnAttack(B)
-    e.components.weapon:SetRange(10, 20)
-    e.components.weapon:SetProjectile("forge_fireball_projectile")
-    e.components.weapon:SetOnProjectileLaunch(o)
-    e.components.weapon:SetDamageType(DAMAGETYPES.MAGIC)
-    e.components.weapon:SetStimuli("fire")
-    e.components.weapon:SetAltAttack(TUNING.FORGE_ITEM_PACK.TFWP_INFERNAL_STAFF.ALT_DAMAGE.minimum, { 10, 20 }, nil,
+
+    inst.castsound = "dontstarve/common/lava_arena/spell/meteor"
+
+    inst:AddComponent("aoespell")
+    inst.components.aoespell:SetSpellFn(m)
+
+    inst:AddComponent("equippable")
+    inst.components.equippable:SetOnEquip(d)
+    inst.components.equippable:SetOnUnequip(g)
+
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.imagename = "fireballstaff"
+
+    inst:AddComponent("recarregavel")
+    inst.components.recarregavel:SetRechargeTime(TUNING.FORGE_ITEM_PACK.TFWP_INFERNAL_STAFF.COOLDOWN)
+
+    inst:AddComponent("reticule_spawner")
+    inst.components.reticule_spawner:Setup(unpack(TUNING.FORGE_ITEM_PACK.RET_DATA.tfwp_infernal_staff))
+
+    inst:AddComponent("weapon")
+    inst.components.weapon:SetDamage(TUNING.FORGE_ITEM_PACK.TFWP_INFERNAL_STAFF.DAMAGE)
+    inst.components.weapon:SetOnAttack(B)
+    inst.components.weapon:SetRange(10, 20)
+    inst.components.weapon:SetProjectile("forge_fireball_projectile")
+    inst.components.weapon:SetOnProjectileLaunch(o)
+    inst.components.weapon:SetDamageType(DAMAGETYPES.MAGIC)
+    inst.components.weapon:SetStimuli("fire")
+    inst.components.weapon:SetAltAttack(TUNING.FORGE_ITEM_PACK.TFWP_INFERNAL_STAFF.ALT_DAMAGE.minimum, { 10, 20 }, nil,
         DAMAGETYPES.MAGIC, t)
-    return e
+
+    return inst
 end;
 return
     CustomPrefab("tfwp_infernal_staff", C, a, b, nil, "images/inventoryimages.xml", "fireballstaff.tex",

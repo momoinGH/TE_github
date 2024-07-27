@@ -71,14 +71,14 @@ local function lavaarena_floorgratefn()
     inst.AnimState:Hide("Layer 25") -- lava effect
 
     inst._lavaspeed = net_tinybyte(inst.GUID, "lavaarena_floorgrate._lavaspeed", "lavaspeeddirty")
-	
+
     inst.entity:AddLight()
     inst.Light:SetFalloff(0.4)
     inst.Light:SetIntensity(.7)
     inst.Light:SetRadius(10)
-    inst.Light:SetColour(249/255, 130/255, 117/255)
-    inst.Light:Enable(true)	
-	
+    inst.Light:SetColour(249 / 255, 130 / 255, 117 / 255)
+    inst.Light:Enable(true)
+
     if not TheNet:IsDedicated() then
         inst.lava = CreateLavaEntity()
         inst.lava.entity:SetParent(inst.entity)

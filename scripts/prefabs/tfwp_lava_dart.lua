@@ -56,54 +56,68 @@ end;
 
 
 local function H()
-    local g = CreateEntity()
-    g.entity:AddTransform()
-    g.entity:AddAnimState()
-    g.entity:AddSoundEmitter()
-    g.entity:AddNetwork()
-    MakeInventoryPhysics(g)
-    g.nameoverride = "blowdart_lava"
-    g.AnimState:SetBank("blowdart_lava")
-    g.AnimState:SetBuild("blowdart_lava")
-    g.AnimState:PlayAnimation("idle")
-    g:AddTag("aoeblowdart_long")
-    g:AddTag("blowdart")
-    g:AddTag("rechargeable")
-    g:AddTag("sharp")
-    g:AddComponent("aoetargeting")
-    g.components.aoetargeting:SetAlwaysValid(true)
-    g.components.aoetargeting.reticule.reticuleprefab = "reticulelongmulti"
-    g.components.aoetargeting.reticule.pingprefab = "reticulelongmultiping"
-    g.components.aoetargeting.reticule.targetfn = j;
-    g.components.aoetargeting.reticule.mousetargetfn = k;
-    g.components.aoetargeting.reticule.updatepositionfn = s;
-    g.components.aoetargeting.reticule.validcolour = { 1, .75, 0, 1 }
-    g.components.aoetargeting.reticule.invalidcolour = { .5, 0, 0, 1 }
-    g.components.aoetargeting.reticule.ease = true;
-    g.components.aoetargeting.reticule.mouseenabled = true;
-    g.projectiledelay = e;
+    local inst = CreateEntity()
 
-    g.entity:SetPristine()
-    if not TheWorld.ismastersim then return g end;
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
 
-    g:AddComponent("aoespell")
-    g.components.aoespell:SetSpellFn(B)
-    g:AddComponent("equippable")
-    g.components.equippable:SetOnEquip(f)
-    g.components.equippable:SetOnUnequip(i)
-    g:AddComponent("inspectable")
-    g:AddComponent("inventoryitem")
-    g.components.inventoryitem.imagename = "blowdart_lava"
-    g:AddComponent("recarregavel")
-    g.components.recarregavel:SetRechargeTime(TUNING.FORGE_ITEM_PACK.TFWP_LAVA_DART.COOLDOWN)
-    g:AddComponent("weapon")
-    g.components.weapon:SetDamage(TUNING.FORGE_ITEM_PACK.TFWP_LAVA_DART.DAMAGE)
-    g.components.weapon:SetRange(10, 20)
-    g.components.weapon:SetProjectile("forgedarts_projectile")
-    g.components.weapon:SetDamageType(DAMAGETYPES.PHYSICAL)
-    g.components.weapon:SetAltAttack(TUNING.FORGE_ITEM_PACK.TFWP_LAVA_DART.FORGE_ITEM_PACKDARTS, { 10, 20 }, nil,
+    MakeInventoryPhysics(inst)
+
+    inst.nameoverride = "blowdart_lava"
+
+    inst.AnimState:SetBank("blowdart_lava")
+    inst.AnimState:SetBuild("blowdart_lava")
+    inst.AnimState:PlayAnimation("idle")
+
+    inst:AddTag("aoeblowdart_long")
+    inst:AddTag("blowdart")
+    inst:AddTag("rechargeable")
+    inst:AddTag("sharp")
+
+    inst:AddComponent("aoetargeting")
+    inst.components.aoetargeting:SetAlwaysValid(true)
+    inst.components.aoetargeting.reticule.reticuleprefab = "reticulelongmulti"
+    inst.components.aoetargeting.reticule.pingprefab = "reticulelongmultiping"
+    inst.components.aoetargeting.reticule.targetfn = j;
+    inst.components.aoetargeting.reticule.mousetargetfn = k;
+    inst.components.aoetargeting.reticule.updatepositionfn = s;
+    inst.components.aoetargeting.reticule.validcolour = { 1, .75, 0, 1 }
+    inst.components.aoetargeting.reticule.invalidcolour = { .5, 0, 0, 1 }
+    inst.components.aoetargeting.reticule.ease = true;
+    inst.components.aoetargeting.reticule.mouseenabled = true;
+
+    inst.projectiledelay = e;
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then return inst end;
+
+    inst:AddComponent("aoespell")
+    inst.components.aoespell:SetSpellFn(B)
+
+    inst:AddComponent("equippable")
+    inst.components.equippable:SetOnEquip(f)
+    inst.components.equippable:SetOnUnequip(i)
+
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.imagename = "blowdart_lava"
+
+    inst:AddComponent("recarregavel")
+    inst.components.recarregavel:SetRechargeTime(TUNING.FORGE_ITEM_PACK.TFWP_LAVA_DART.COOLDOWN)
+
+    inst:AddComponent("weapon")
+    inst.components.weapon:SetDamage(TUNING.FORGE_ITEM_PACK.TFWP_LAVA_DART.DAMAGE)
+    inst.components.weapon:SetRange(10, 20)
+    inst.components.weapon:SetProjectile("forgedarts_projectile")
+    inst.components.weapon:SetDamageType(DAMAGETYPES.PHYSICAL)
+    inst.components.weapon:SetAltAttack(TUNING.FORGE_ITEM_PACK.TFWP_LAVA_DART.FORGE_ITEM_PACKDARTS, { 10, 20 }, nil,
         DAMAGETYPES.PHYSICAL)
-    return g
+
+    return inst
 end;
 local I = 5;
 local function J()

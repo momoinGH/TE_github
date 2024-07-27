@@ -3,7 +3,7 @@ local assets =
 {
     Asset("ANIM", "anim/golden_obi.zip"),
     Asset("ANIM", "anim/blocker_sanity_fx.zip"),
-	Asset("MINIMAP_IMAGE", "obelisk"),
+    Asset("MINIMAP_IMAGE", "obelisk"),
 }
 
 local prefabs =
@@ -23,7 +23,7 @@ local UPDATE_OFFSET = 0 --used to stagger periodic updates across entities
 local PF_SHARED = {}
 
 local function AddSharedWall(pathfinder, x, z, inst)
-    local id = tostring(x)..","..tostring(z)
+    local id = tostring(x) .. "," .. tostring(z)
     if PF_SHARED[id] == nil then
         PF_SHARED[id] = { [inst] = true }
         pathfinder:AddWall(x, 0, z)
@@ -33,7 +33,7 @@ local function AddSharedWall(pathfinder, x, z, inst)
 end
 
 local function RemoveSharedWall(pathfinder, x, z, inst)
-    local id = tostring(x)..","..tostring(z)
+    local id = tostring(x) .. "," .. tostring(z)
     if PF_SHARED[id] ~= nil then
         PF_SHARED[id][inst] = nil
         if next(PF_SHARED[id]) ~= nil then
@@ -83,48 +83,48 @@ local function updatephysics(inst)
     inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.WORLD)
-	if not inst.conceal then
-		inst.Physics:CollidesWith(COLLISION.ITEMS)
-		if inst.active then
-			inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-		end
-	end
+    if not inst.conceal then
+        inst.Physics:CollidesWith(COLLISION.ITEMS)
+        if inst.active then
+            inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+        end
+    end
 end
 
 local function OnActiveStateChanged(inst)
-	inst.active = inst.active_queue
-	inst._ispathfinding:set(inst.active_queue and not inst.conceal)
-	updatephysics(inst)
+    inst.active = inst.active_queue
+    inst._ispathfinding:set(inst.active_queue and not inst.conceal)
+    updatephysics(inst)
 end
 
 local function OnConcealStateChanged(inst)
-	inst.conceal = inst.conceal_queued
-	if not inst.conceal then
-		LaunchAndClearArea(inst, COLLISION_SIZE, 0.5, 0.5, .2, COLLISION_SIZE)
-	end
+    inst.conceal = inst.conceal_queued
+    if not inst.conceal then
+        LaunchAndClearArea(inst, COLLISION_SIZE, 0.5, 0.5, .2, COLLISION_SIZE)
+    end
 
-	OnActiveStateChanged(inst)
+    OnActiveStateChanged(inst)
 end
 
 local function dotransition(inst)
-	inst.transition_task = nil
-	if inst.conceal ~= inst.conceal_queued then
-		if not inst.sg:HasStateTag("busy") then
-			if inst.conceal_queued then
-				inst.sg:GoToState("conceal", inst.active)
-			else
-				inst.sg:GoToState("reveal")
-			end
-		end
-	elseif inst.active ~= inst.active_queue and not inst.conceal_queued then
-		inst.sg:GoToState(inst.active_queue and "raise" or "lower")
-	end
+    inst.transition_task = nil
+    if inst.conceal ~= inst.conceal_queued then
+        if not inst.sg:HasStateTag("busy") then
+            if inst.conceal_queued then
+                inst.sg:GoToState("conceal", inst.active)
+            else
+                inst.sg:GoToState("reveal")
+            end
+        end
+    elseif inst.active ~= inst.active_queue and not inst.conceal_queued then
+        inst.sg:GoToState(inst.active_queue and "raise" or "lower")
+    end
 end
 
 local function refresh(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-	if inst.conceal or inst.conceal_queued then
-		-- nothing to do here
+    if inst.conceal or inst.conceal_queued then
+        -- nothing to do here
     elseif inst.active then
         inst.active_queue = false
         for i, v in ipairs(AllPlayers) do
@@ -133,46 +133,46 @@ local function refresh(inst)
                 ((v.components.sanity:IsSane() and inst.activeonsane) or (v.components.sanity:IsInsane() and not inst.activeonsane)) then
                 local p1x, p1y, p1z = v.Transform:GetWorldPosition()
                 if distsq(x, z, p1x, p1z) < FAR_DIST_SQ then
-			        inst.active_queue = true
+                    inst.active_queue = true
                     break
                 end
             end
         end
     else
-		inst.active_queue = false
+        inst.active_queue = false
         for i, v in ipairs(AllPlayers) do
             if not v:HasTag("notarget") and
                 v.components.sanity ~= nil and
                 ((v.components.sanity:IsSane() and inst.activeonsane) or (v.components.sanity:IsInsane() and not inst.activeonsane)) then
                 local p1x, p1y, p1z = v.Transform:GetWorldPosition()
                 if distsq(x, z, p1x, p1z) < NEAR_DIST_SQ then
-			        inst.active_queue = true
+                    inst.active_queue = true
                     break
                 end
             end
         end
     end
 
-	if (inst.conceal ~= inst.conceal_queued or inst.active_queue ~= inst.active) and inst.transition_task == nil then
-        inst.transition_task = inst:DoTaskInTime(math.random(), dotransition) 
-	end
+    if (inst.conceal ~= inst.conceal_queued or inst.active_queue ~= inst.active) and inst.transition_task == nil then
+        inst.transition_task = inst:DoTaskInTime(math.random(), dotransition)
+    end
 end
 
 local function AddRefreshTask(inst)
-	if inst._refreshtask == nil then
-		inst._refreshtask = inst:DoPeriodicTask(UPDATE_INTERVAL, refresh, UPDATE_OFFSET)
+    if inst._refreshtask == nil then
+        inst._refreshtask = inst:DoPeriodicTask(UPDATE_INTERVAL, refresh, UPDATE_OFFSET)
 
-		--Stagger updates for next spawned entity
-		UPDATE_OFFSET = UPDATE_OFFSET + FRAMES
-		if UPDATE_OFFSET > UPDATE_INTERVAL then
-			UPDATE_OFFSET = 0
-		end
-	end
+        --Stagger updates for next spawned entity
+        UPDATE_OFFSET = UPDATE_OFFSET + FRAMES
+        if UPDATE_OFFSET > UPDATE_INTERVAL then
+            UPDATE_OFFSET = 0
+        end
+    end
 end
 
 local function ConcealForMinigame(inst, conceal)
-	inst.conceal_queued = conceal or nil
-	inst.active_queue = false
+    inst.conceal_queued = conceal or nil
+    inst.active_queue = false
 end
 
 local function getstatus(inst)
@@ -202,11 +202,11 @@ local function commonfn(tags)
     inst.AnimState:PlayAnimation("idle_inactive")
 
     inst:AddTag("antlion_sinkhole_blocker")
-	for _, v in ipairs(tags) do
-		inst:AddTag(v)
-	end
+    for _, v in ipairs(tags) do
+        inst:AddTag(v)
+    end
 
-	updatephysics(inst)
+    updatephysics(inst)
 
     inst._pftable = nil
     inst._ispathfinding = net_bool(inst.GUID, "_ispathfinding", "onispathfindingdirty")
@@ -221,14 +221,14 @@ local function commonfn(tags)
     end
 
     inst.active = false
-	inst.active_queue = false
---    inst.conceal = nil
---    inst.conceal_queued = nil
-	
-	
-	
+    inst.active_queue = false
+    --    inst.conceal = nil
+    --    inst.conceal_queued = nil
+
+
+
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({"goldnugget", "goldnugget", "goldnugget", "goldnugget"})
+    inst.components.lootdropper:SetLoot({ "goldnugget", "goldnugget", "goldnugget", "goldnugget" })
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
@@ -238,35 +238,34 @@ local function commonfn(tags)
         function(inst, worker, workleft)
             local pt = Point(inst.Transform:GetWorldPosition())
             if workleft <= 0 then
-				SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
-				inst.SoundEmitter:PlaySound("dontstarve/wilson/rock_break")
+                SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+                inst.SoundEmitter:PlaySound("dontstarve/wilson/rock_break")
                 inst.components.lootdropper:DropLoot(pt)
                 inst:Remove()
-				
-			else
---			inst.AnimState:PlayAnimation("idle", true)
---			inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
+            else
+                --			inst.AnimState:PlayAnimation("idle", true)
+                --			inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
             end
         end)
-	
+
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = getstatus
 
     inst:SetStateGraph("SGnightmarerock")
 
-	AddRefreshTask(inst)
+    AddRefreshTask(inst)
 
-	inst.OnActiveStateChanged = OnActiveStateChanged
-	inst.OnConcealStateChanged = OnConcealStateChanged
+    inst.OnActiveStateChanged = OnActiveStateChanged
+    inst.OnConcealStateChanged = OnConcealStateChanged
 
-	inst.ConcealForMinigame = ConcealForMinigame
+    inst.ConcealForMinigame = ConcealForMinigame
 
     return inst
 end
 
 local function insanityrock()
-    local inst = commonfn({"insanityrock"})
+    local inst = commonfn({ "insanityrock" })
 
     inst.activeonsane = false
 
@@ -274,7 +273,7 @@ local function insanityrock()
 end
 
 local function sanityrock()
-    local inst = commonfn({"sanityrock"})
+    local inst = commonfn({ "sanityrock" })
 
     inst.activeonsane = true
 
@@ -282,4 +281,4 @@ local function sanityrock()
 end
 
 return Prefab("is_goldobi", insanityrock, assets, prefabs),
-       Prefab("s_goldobi", sanityrock, assets, prefabs)
+    Prefab("s_goldobi", sanityrock, assets, prefabs)

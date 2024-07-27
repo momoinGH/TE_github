@@ -1,6 +1,6 @@
 local function lightningdummyfn()
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
     inst.entity:AddNetwork()
     inst.entity:AddSoundEmitter()
 
@@ -19,5 +19,4 @@ local function lightningdummyfn()
     return inst
 end
 
-return Prefab( "gf_lightning_dummy", lightningdummyfn)
-    
+return Prefab("gf_lightning_dummy", lightningdummyfn)

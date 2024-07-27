@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/bat_leather.zip"),
-	--Asset("INV_IMAGE", "bat_leather"),
+    --Asset("INV_IMAGE", "bat_leather"),
 }
 
 local function fn()
@@ -39,8 +39,8 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"	
-	
+    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
     inst:AddComponent("edible")
     inst.components.edible.foodtype = FOODTYPE.HORRIBLE
 

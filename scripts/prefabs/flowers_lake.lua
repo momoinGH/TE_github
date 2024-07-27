@@ -13,15 +13,15 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-	inst:AddTag("goddess_flower")
-	inst:AddTag("flower")
-	
+    inst:AddTag("goddess_flower")
+    inst:AddTag("flower")
+
     inst.AnimState:SetBank("flowers_lake")
     inst.AnimState:SetBuild("flowers_lake")
     inst.AnimState:PlayAnimation("idle")
-	
-	local s = 0.4
-	inst.Transform:SetScale(s,s,s)
+
+    local s = 0.4
+    inst.Transform:SetScale(s, s, s)
 
     inst.entity:SetPristine()
 

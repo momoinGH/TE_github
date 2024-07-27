@@ -56,9 +56,9 @@ function SpellBook:SetOnCloseFn(fn)
 end
 
 function SpellBook:CanBeUsedBy(user)
-local livromagico = user.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-local liberado = false
-if livromagico and livromagico.prefab == "waxwelljournal" then liberado = true end
+	local livromagico = user.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+	local liberado = false
+	if livromagico and livromagico.prefab == "waxwelljournal" then liberado = true end
 
 	return liberado and (self.tag == nil or user:HasTag(self.tag)) and self.items ~= nil and #self.items > 0
 end

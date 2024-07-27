@@ -26,21 +26,23 @@ local function onextinguish(inst)
 end
 
 local function ontakefuel(inst)
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then
-inst.components.burnable:Extinguish()
-end	
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        inst.components.burnable:Extinguish()
+    end
     inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
 end
 
 local function updatefuelrate(inst)
-    inst.components.fueled.rate = TheWorld.state.israining and 1 + TUNING.CAMPFIRE_RAIN_RATE * TheWorld.state.precipitationrate or 1
+    inst.components.fueled.rate = TheWorld.state.israining and
+    1 + TUNING.CAMPFIRE_RAIN_RATE * TheWorld.state.precipitationrate or 1
 end
 
 local function onupdatefueled(inst)
     if inst.components.burnable ~= nil and inst.components.fueled ~= nil then
         updatefuelrate(inst)
-        inst.components.burnable:SetFXLevel(inst.components.fueled:GetCurrentSection(), inst.components.fueled:GetSectionPercent())
+        inst.components.burnable:SetFXLevel(inst.components.fueled:GetCurrentSection(),
+            inst.components.fueled:GetSectionPercent())
     end
 end
 
@@ -52,12 +54,12 @@ local function onfuelchange(newsection, oldsection, inst)
         inst.AnimState:PlayAnimation("dead")
         RemovePhysicsColliders(inst)
 
-		if inst.queued_charcoal then
-			SpawnPrefab("charcoal").Transform:SetPosition(inst.Transform:GetWorldPosition())
-			inst.queued_charcoal = nil
-		else
-			SpawnPrefab("ash").Transform:SetPosition(inst.Transform:GetWorldPosition())
-		end
+        if inst.queued_charcoal then
+            SpawnPrefab("charcoal").Transform:SetPosition(inst.Transform:GetWorldPosition())
+            inst.queued_charcoal = nil
+        else
+            SpawnPrefab("ash").Transform:SetPosition(inst.Transform:GetWorldPosition())
+        end
 
         inst.components.fueled.accepting = false
         inst:RemoveComponent("cooker")
@@ -75,10 +77,10 @@ local function onfuelchange(newsection, oldsection, inst)
 
         inst.components.propagator.propagaterange = PROPAGATE_RANGES[newsection]
         inst.components.propagator.heatoutput = HEAT_OUTPUTS[newsection]
-		
-		if newsection == inst.components.fueled.sections then
-			inst.queued_charcoal = not inst.disable_charcoal
-		end		
+
+        if newsection == inst.components.fueled.sections then
+            inst.queued_charcoal = not inst.disable_charcoal
+        end
     end
 end
 
@@ -86,10 +88,10 @@ local function onbuilt(inst)
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("idle", false)
     inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then
-inst.components.burnable:Extinguish()
-end	
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        inst.components.burnable:Extinguish()
+    end
 end
 
 local SECTION_STATUS =
@@ -116,17 +118,17 @@ local function OnHaunt(inst)
 end
 
 local function OnSave(inst, data)
-	data._has_debuffable = inst.components.debuffable ~= nil 
-    data.queued_charcoal = inst.queued_charcoal or nil	
+    data._has_debuffable = inst.components.debuffable ~= nil
+    data.queued_charcoal = inst.queued_charcoal or nil
 end
 
 local function OnPreLoad(inst, data)
-	if data ~= nil and data._has_debuffable then
-		inst:AddComponent("debuffable")
-	end
+    if data ~= nil and data._has_debuffable then
+        inst:AddComponent("debuffable")
+    end
     if data ~= nil and data.queued_charcoal then
         inst.queued_charcoal = true
-    end	
+    end
 end
 
 local function fn()
@@ -150,8 +152,8 @@ local function fn()
     --cooker (from cooker component) added to pristine state for optimization
     inst:AddTag("cooker")
 
-	-- for storytellingprop component
-	inst:AddTag("storytellingprop")
+    -- for storytellingprop component
+    inst:AddTag("storytellingprop")
 
     inst.entity:SetPristine()
 
@@ -205,8 +207,8 @@ local function fn()
     inst.components.hauntable.cooldown = TUNING.HAUNT_COOLDOWN_HUGE
     inst.components.hauntable:SetOnHauntFn(OnHaunt)
 
-	inst.OnSave = OnSave
-	inst.OnPreLoad = OnPreLoad
+    inst.OnSave = OnSave
+    inst.OnPreLoad = OnPreLoad
 
     return inst
 end

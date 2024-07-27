@@ -35,7 +35,7 @@ local KEEP_ALERT_DIST = 8
 
 local function ResetData(inst)
     if TheWorld.components.deerherding ~= nil then
-       TheWorld.components.deerherding:SetHerdAlertTarget(inst, FindClosestPlayerToInst(inst, START_ALERT_DIST, true))
+        TheWorld.components.deerherding:SetHerdAlertTarget(inst, FindClosestPlayerToInst(inst, START_ALERT_DIST, true))
     end
 end
 
@@ -83,7 +83,7 @@ end
 
 local function GetGrazingAngle(inst)
     local offset = inst.components.knownlocations:GetLocation("herdoffset")
-    return GetRandomWithVariance(math.atan2(offset.z, offset.x), 66*DEGREES)
+    return GetRandomWithVariance(math.atan2(offset.z, offset.x), 66 * DEGREES)
 end
 
 local function IsHerdGrazing(self)
@@ -97,14 +97,15 @@ end)
 
 function DeerBrain:OnStart()
     local root = PriorityNode(
-    {	
-		ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
-		FaceEntity(self.inst, GetNonHerdingFaceTargetFn, KeepNonHerdingFaceTargetFn),
-		Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW, MED_FOLLOW, MAX_FOLLOW, true),
-        WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
-        Wander(self.inst),
-        
-    })
+        {
+            ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
+            FaceEntity(self.inst, GetNonHerdingFaceTargetFn, KeepNonHerdingFaceTargetFn),
+            Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW, MED_FOLLOW,
+                MAX_FOLLOW, true),
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            Wander(self.inst),
+
+        })
 
     self.bt = BT(self.inst, root)
 end

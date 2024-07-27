@@ -1,44 +1,43 @@
 local WALK_SPEED = 4
 local RUN_SPEED = 7
-local	    JELLYFISH_DAMAGE = 5
+local JELLYFISH_DAMAGE = 5
 
 require("stategraphs/commonstates")
 
-local actionhandlers = 
+local actionhandlers =
 {
     ActionHandler(ACTIONS.EAT, "eat"),
     ActionHandler(ACTIONS.GOHOME, "action"),
 }
 
-local events=
+local events =
 {
     CommonHandlers.OnAttacked(),
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-    EventHandler("locomote", 
-        function(inst) 
+    EventHandler("locomote",
+        function(inst)
             if not inst.sg:HasStateTag("idle") and not inst.sg:HasStateTag("moving") then return end
-            
+
             if not inst.components.locomotor:WantsToMoveForward() then
                 if not inst.sg:HasStateTag("idle") then
-                        inst.sg:GoToState("idle")
+                    inst.sg:GoToState("idle")
                 end
             else
                 if not inst.sg:HasStateTag("moving") then
                     inst.sg:GoToState("swimming")
                 end
-            
             end
         end),
 }
 
-local states=
+local states =
 {
-    
-    State{
+
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
 
         onenter = function(inst, playanim)
             inst.Physics:Stop()
@@ -47,14 +46,14 @@ local states=
             else
                 inst.AnimState:PlayAnimation("idle")
             end
-			inst:DoTaskInTime(math.random(0,1), function(inst)
-			local x, y, z = inst.Transform:GetWorldPosition()			
-			local bubble = SpawnPrefab("bubble_fx_small")
-			bubble.Transform:SetPosition(x, y+2, z)	
-			end)			
+            inst:DoTaskInTime(math.random(0, 1), function(inst)
+                local x, y, z = inst.Transform:GetWorldPosition()
+                local bubble = SpawnPrefab("bubble_fx_small")
+                bubble.Transform:SetPosition(x, y + 2, z)
+            end)
         end,
 
-        events=
+        events =
         {
             EventHandler("animqueueover", function(inst)
                 if math.random() <= 0.25 then
@@ -66,44 +65,46 @@ local states=
         },
     },
 
-    State{
+    State {
         name = "shock",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("idle_shock")		
+            inst.AnimState:PlayAnimation("idle_shock")
         end,
 
-		timeline=
+        timeline =
         {
-            TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end),
-            TimeEvent(5*FRAMES, function(inst) 
-			local pclose = GetClosestInstWithTag("player", inst, 3)
-			if pclose and pclose.components.health then
-			pclose.components.health:DoDelta(-JELLYFISH_DAMAGE)
-			pclose.sg:GoToState("electrocute")
-			end	end),
+            TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/jellyfish/electric_water") end),
+            TimeEvent(5 * FRAMES, function(inst)
+                local pclose = GetClosestInstWithTag("player", inst, 3)
+                if pclose and pclose.components.health then
+                    pclose.components.health:DoDelta(-JELLYFISH_DAMAGE)
+                    pclose.sg:GoToState("electrocute")
+                end
+            end),
         },
-		
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "swimming",
-        tags = {"moving", "canrotate"},
-        
-       
-        onenter = function(inst, skippre) 
-            if skippre then 
+        tags = { "moving", "canrotate" },
+
+
+        onenter = function(inst, skippre)
+            if skippre then
                 inst.AnimState:PlayAnimation("run")
             else
                 inst.AnimState:PlayAnimation("run_pre")
                 inst.AnimState:PushAnimation("run")
-            end 
+            end
             inst.components.locomotor:WalkForward()
             --inst.sg:SetTimeout(2*math.random()+.5)
             if math.random() < 0.5 then
@@ -112,53 +113,52 @@ local states=
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/bubble_long")
             end
         end,
-        
-        onupdate= function(inst)
+
+        onupdate = function(inst)
             if not inst.components.locomotor:WantsToMoveForward() then
                 inst.sg:GoToState("idle", "run_pst")
             end
-        end,  
+        end,
 
-         events=
+        events =
         {
-             EventHandler("animover", function(inst)                   
-               inst.sg:GoToState("swimming", true)
-            end), 
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("swimming", true)
+            end),
 
-             EventHandler("animqueueover", function(inst)                   
-               inst.sg:GoToState("swimming", true)
+            EventHandler("animqueueover", function(inst)
+                inst.sg:GoToState("swimming", true)
             end)
-        },   
-      
-        
+        },
+
+
     },
 
-     State{
+    State {
         name = "death",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/death_murder")
             --inst.AnimState:PlayAnimation("death")
-            inst:Hide() 
+            inst:Hide()
             inst.Physics:Stop()
-            RemovePhysicsColliders(inst)        
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))  	
-			
+            RemovePhysicsColliders(inst)
+            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
         end,
 
-    }, 
-      
-    State{
+    },
+
+    State {
         name = "hit",
-        tags = {"busy", "hit"},
+        tags = { "busy", "hit" },
 
         onenter = function(inst, cb)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("hit")
         end,
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
@@ -167,6 +167,5 @@ local states=
 
 CommonStates.AddSleepStates(states)
 CommonStates.AddFrozenStates(states)
-  
-return StateGraph("jellyfishunderwater", states, events, "idle", actionhandlers)
 
+return StateGraph("jellyfishunderwater", states, events, "idle", actionhandlers)

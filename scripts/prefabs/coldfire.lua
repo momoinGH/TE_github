@@ -26,21 +26,23 @@ local function onextinguish(inst)
 end
 
 local function ontakefuel(inst)
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then
-inst.components.burnable:Extinguish()
-end	
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        inst.components.burnable:Extinguish()
+    end
     inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
 end
 
 local function updatefuelrate(inst)
-    inst.components.fueled.rate = TheWorld.state.israining and 1 + TUNING.COLDFIRE_RAIN_RATE * TheWorld.state.precipitationrate or 1
+    inst.components.fueled.rate = TheWorld.state.israining and
+    1 + TUNING.COLDFIRE_RAIN_RATE * TheWorld.state.precipitationrate or 1
 end
 
 local function onupdatefueled(inst)
     if inst.components.burnable ~= nil and inst.components.fueled ~= nil then
         updatefuelrate(inst)
-        inst.components.burnable:SetFXLevel(inst.components.fueled:GetCurrentSection(), inst.components.fueled:GetSectionPercent())
+        inst.components.burnable:SetFXLevel(inst.components.fueled:GetCurrentSection(),
+            inst.components.fueled:GetSectionPercent())
     end
 end
 
@@ -74,10 +76,10 @@ local function onbuilt(inst)
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("idle_loop", false)
     inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then
-inst.components.burnable:Extinguish()
-end		
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        inst.components.burnable:Extinguish()
+    end
 end
 
 local SECTION_STATUS =
@@ -104,13 +106,13 @@ local function OnHaunt(inst)
 end
 
 local function OnSave(inst, data)
-	data._has_debuffable = inst.components.debuffable ~= nil 
+    data._has_debuffable = inst.components.debuffable ~= nil
 end
 
 local function OnPreLoad(inst, data)
-	if data ~= nil and data._has_debuffable then
-		inst:AddComponent("debuffable")
-	end
+    if data ~= nil and data._has_debuffable then
+        inst:AddComponent("debuffable")
+    end
 end
 
 local function fn()
@@ -133,8 +135,8 @@ local function fn()
     inst:AddTag("blueflame")
     inst:AddTag("NPC_workable")
 
-	-- for storytellingprop component
-	inst:AddTag("storytellingprop")
+    -- for storytellingprop component
+    inst:AddTag("storytellingprop")
 
     MakeObstaclePhysics(inst, .3)
 
@@ -182,8 +184,8 @@ local function fn()
 
     inst:ListenForEvent("onbuilt", onbuilt)
 
-	inst.OnSave = OnSave
-	inst.OnPreLoad = OnPreLoad
+    inst.OnSave = OnSave
+    inst.OnPreLoad = OnPreLoad
 
     return inst
 end

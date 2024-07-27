@@ -23,17 +23,19 @@ local prefabs =
 
 local gnar_brain = require "brains/gnarwailunderwaterbrain"
 
-local gnarwail_loot_horn = {"fishmeat", "fishmeat", "fishmeat", "fishmeat", "gnarwail_horn"}
-local gnarwail_loot = {"fishmeat", "fishmeat", "fishmeat", "fishmeat"}
+local gnarwail_loot_horn = { "fishmeat", "fishmeat", "fishmeat", "fishmeat", "gnarwail_horn" }
+local gnarwail_loot = { "fishmeat", "fishmeat", "fishmeat", "fishmeat" }
 
 
 -- We try to leverage FindSwimmableOffset to identify a resurface location that is in the ocean and not under a boat.
 local function TryGnarwailResurface(gnarwail_instance, horn_position)
-    local resurface_radius = TUNING.MAX_WALKABLE_PLATFORM_RADIUS + TUNING.MAX_WALKABLE_PLATFORM_RADIUS + gnarwail_instance:GetPhysicsRadius(0)
+    local resurface_radius = TUNING.MAX_WALKABLE_PLATFORM_RADIUS + TUNING.MAX_WALKABLE_PLATFORM_RADIUS +
+    gnarwail_instance:GetPhysicsRadius(0)
     local emerge_offset = FindSwimmableOffset(Vector3(unpack(horn_position)), math.random() * PI * 2, resurface_radius)
     if emerge_offset then
         gnarwail_instance:ReturnToScene()
-        gnarwail_instance.Transform:SetPosition(horn_position[1] + emerge_offset.x, horn_position[2] + emerge_offset.y, horn_position[3] + emerge_offset.z)
+        gnarwail_instance.Transform:SetPosition(horn_position[1] + emerge_offset.x, horn_position[2] + emerge_offset.y,
+            horn_position[3] + emerge_offset.z)
         gnarwail_instance.sg:GoToState("emerge")
     else
         gnarwail_instance:DoTaskInTime(1, TryGnarwailResurface, horn_position)
@@ -41,10 +43,10 @@ local function TryGnarwailResurface(gnarwail_instance, horn_position)
 end
 
 local function horn_retreat(horn_inst, horn_broken, leak_size)
-if horn_broken then
-horn_inst.criatura:SetHornBroken(true)
-end
-horn_inst:Remove()
+    if horn_broken then
+        horn_inst.criatura:SetHornBroken(true)
+    end
+    horn_inst:Remove()
 end
 
 local function OnHornHit(horn_inst)
@@ -103,8 +105,8 @@ local function OnHornLoad(inst, data)
     end
 end
 
-local MUST_RETARGET_TAGS = {"_combat", "monster"}
-local MUST_NOT_RETARGET_TAGS = {"epic", "playermonster"}
+local MUST_RETARGET_TAGS = { "_combat", "monster" }
+local MUST_NOT_RETARGET_TAGS = { "epic", "playermonster" }
 local function RetargetFunction(inst)
     if inst:IsInLimbo() then
         return nil
@@ -116,9 +118,9 @@ local function GetStatus(inst)
     local has_leader = inst.components.follower.leader ~= nil
     local broken_horn = inst:HornIsBroken()
     return (has_leader and broken_horn and "BROKENHORN_FOLLOWER") or
-            (has_leader and "FOLLOWER") or
-            (broken_horn and "BROKENHORN") or
-            nil
+        (has_leader and "FOLLOWER") or
+        (broken_horn and "BROKENHORN") or
+        nil
 end
 
 local function ShouldAcceptItem(inst, item)
@@ -136,11 +138,12 @@ local function OnGetItemFromPlayer(inst, giver, item)
         giver:PushEvent("makefriend")
         giver.components.leader:AddFollower(inst)
 
-        inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger(inst) * TUNING.GNARWAIL.LOYALTY_PER_HUNGER)
+        inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger(inst) *
+        TUNING.GNARWAIL.LOYALTY_PER_HUNGER)
     end
 
     inst.components.eater:Eat(item, giver)
-    inst:PushEvent("onfedbyplayer", {food = item, feeder = giver})
+    inst:PushEvent("onfedbyplayer", { food = item, feeder = giver })
     if inst.components.sleeper:IsAsleep() then
         inst.components.sleeper:WakeUp()
     end
@@ -235,10 +238,10 @@ end
 
 local UP_VECTOR = Vector3(0, 1, 0)
 local SEPARATION_AMOUNT = 25.0
-local SEPARATION_MUST_NOT_TAGS = {"flying", "FX", "DECOR", "INLIMBO"}
-local SEPARATION_MUST_ONE_TAGS = {"blocker", "gnarwail"}
+local SEPARATION_MUST_NOT_TAGS = { "flying", "FX", "DECOR", "INLIMBO" }
+local SEPARATION_MUST_ONE_TAGS = { "blocker", "gnarwail" }
 local MAX_STEER_FORCE = 2.0
-local MAX_STEER_FORCE_SQ = MAX_STEER_FORCE*MAX_STEER_FORCE
+local MAX_STEER_FORCE_SQ = MAX_STEER_FORCE * MAX_STEER_FORCE
 local DESIRED_BOAT_DISTANCE = TUNING.MAX_WALKABLE_PLATFORM_RADIUS + 4
 local function GetFormationOffsetNormal(inst, leader, leader_platform, leader_velocity)
     if leader == nil or leader_platform == nil or leader.components.leader == nil then
@@ -259,7 +262,8 @@ local function GetFormationOffsetNormal(inst, leader, leader_platform, leader_ve
     -- separation steering --
     local separation_steering = Vector3(0, 0, 0)
     local mx, my, mz = inst.Transform:GetWorldPosition()
-    local separation_entities = TheSim:FindEntities(mx, my, mz, SEPARATION_AMOUNT, nil, SEPARATION_MUST_NOT_TAGS, SEPARATION_MUST_ONE_TAGS)
+    local separation_entities = TheSim:FindEntities(mx, my, mz, SEPARATION_AMOUNT, nil, SEPARATION_MUST_NOT_TAGS,
+        SEPARATION_MUST_ONE_TAGS)
     local separation_affecting_ents_count = 0
     for _, se in ipairs(separation_entities) do
         if se ~= inst then
@@ -280,7 +284,7 @@ local function GetFormationOffsetNormal(inst, leader, leader_platform, leader_ve
         separation_steering = recalculated_separation_steering
     end
     -- separation steering --
-    
+
     local desired_position_offset = mtlp_normal * (mtlp_length - DESIRED_BOAT_DISTANCE)
     return desired_position_offset + separation_steering
 end
@@ -349,28 +353,28 @@ end
 
 local function PlayAnimation(inst, anim_name, loop)
     inst.AnimState:PlayAnimation(anim_name, loop or false)
---    if inst._water_shadow ~= nil then
---        inst._water_shadow.AnimState:PlayAnimation(anim_name, loop or false)
---    end
+    --    if inst._water_shadow ~= nil then
+    --        inst._water_shadow.AnimState:PlayAnimation(anim_name, loop or false)
+    --    end
 end
 
 local function PushAnimation(inst, anim_name, loop)
     inst.AnimState:PushAnimation(anim_name, loop or false)
---    if inst._water_shadow ~= nil then
---        inst._water_shadow.AnimState:PushAnimation(anim_name, loop or false)
---    end
+    --    if inst._water_shadow ~= nil then
+    --        inst._water_shadow.AnimState:PushAnimation(anim_name, loop or false)
+    --    end
 end
 
 local function RemoveShadowOnDeath(inst, data)
---    if inst._water_shadow and inst._water_shadow:IsValid() then
---        inst._water_shadow:DoTaskInTime(inst.components.health.destroytime or 2, ErodeAway)
---    end
+    --    if inst._water_shadow and inst._water_shadow:IsValid() then
+    --        inst._water_shadow:DoTaskInTime(inst.components.health.destroytime or 2, ErodeAway)
+    --    end
 end
 
 local function UpdateShadowRotation(inst)
---    if inst._water_shadow then
---        inst._water_shadow.Transform:SetRotation(inst.Transform:GetRotation())
---    end
+    --    if inst._water_shadow then
+    --        inst._water_shadow.Transform:SetRotation(inst.Transform:GetRotation())
+    --    end
 end
 
 local function gnarwail()
@@ -380,12 +384,12 @@ local function gnarwail()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
- --   local phys = MakeGiantCharacterPhysics(inst, 100000, 1.25)
-	MakeObstaclePhysics(inst, 1.25)
+    --   local phys = MakeGiantCharacterPhysics(inst, 100000, 1.25)
+    MakeObstaclePhysics(inst, 1.25)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
---    inst.Physics:CollidesWith(COLLISION.ITEMS)
-	
+    --    inst.Physics:CollidesWith(COLLISION.ITEMS)
+
     inst.Physics:TEMPHACK_DisableSleepDeactivation() -- TODO @stevenm we need a better solution for the issue of gnarwails popping onto boats.
 
     inst.Transform:SetSixFaced()
@@ -393,24 +397,24 @@ local function gnarwail()
     inst.AnimState:SetBank("gnarwail")
     inst.AnimState:SetBuild("gnarwail_build")
     inst.AnimState:PlayAnimation("idle_loop", true)
-	
-	inst.AnimState:OverrideSymbol("cave_water", "gnarwail_build", "")
-	inst.AnimState:OverrideSymbol("leak_part", "gnarwail_build", "")
-	inst.AnimState:OverrideSymbol("ripple_test", "gnarwail_build", "")
-	inst.AnimState:OverrideSymbol("shadow_ripple", "gnarwail_build", "")
-	inst.AnimState:OverrideSymbol("splash", "gnarwail_build", "")
-	inst.AnimState:OverrideSymbol("water_line", "gnarwail_build", "")	
 
---    AddDefaultRippleSymbols(inst, true, false)
+    inst.AnimState:OverrideSymbol("cave_water", "gnarwail_build", "")
+    inst.AnimState:OverrideSymbol("leak_part", "gnarwail_build", "")
+    inst.AnimState:OverrideSymbol("ripple_test", "gnarwail_build", "")
+    inst.AnimState:OverrideSymbol("shadow_ripple", "gnarwail_build", "")
+    inst.AnimState:OverrideSymbol("splash", "gnarwail_build", "")
+    inst.AnimState:OverrideSymbol("water_line", "gnarwail_build", "")
+
+    --    AddDefaultRippleSymbols(inst, true, false)
 
     inst:AddTag("animal")
     inst:AddTag("gnarwail")
     inst:AddTag("hostile")
---    inst:AddTag("scarytoprey")
+    --    inst:AddTag("scarytoprey")
     inst:AddTag("scarytocookiecutters")
 
     inst.entity:SetPristine()
-	
+
     if not TheWorld.ismastersim then
         return inst
     end
@@ -424,17 +428,17 @@ local function gnarwail()
 
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(TUNING.GNARWAIL.DAMAGE)
---    inst.components.combat:SetRange(TUNING.GNARWAIL.TARGET_DISTANCE, TUNING.GNARWAIL.DAMAGE_RADIUS)
---    inst.components.combat:SetAreaDamage(TUNING.GNARWAIL.DAMAGE_RADIUS)
+    --    inst.components.combat:SetRange(TUNING.GNARWAIL.TARGET_DISTANCE, TUNING.GNARWAIL.DAMAGE_RADIUS)
+    --    inst.components.combat:SetAreaDamage(TUNING.GNARWAIL.DAMAGE_RADIUS)
     inst.components.combat:SetAttackPeriod(2)
     inst.components.combat:SetRetargetFunction(2, RetargetFunction)
 
     ------------------------------------------
 
-    inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
+    inst:AddComponent("locomotor")          -- locomotor must be constructed before the stategraph
     inst.components.locomotor.walkspeed = 0 --TUNING.GNARWAIL.WALK_SPEED
-    inst.components.locomotor.runspeed = 0 --TUNING.GNARWAIL.RUN_SPEED
---    inst.components.locomotor.pathcaps = { allowocean = true, ignoreLand = true }
+    inst.components.locomotor.runspeed = 0  --TUNING.GNARWAIL.RUN_SPEED
+    --    inst.components.locomotor.pathcaps = { allowocean = true, ignoreLand = true }
 
     ------------------------------------------
 
@@ -473,12 +477,12 @@ local function gnarwail()
     inst:AddComponent("timer")
 
     ------------------------------------------
-	
- --   inst:AddComponent("playerprox")
---    inst.components.playerprox:SetDist(8, 10 )
---    inst.components.playerprox:SetOnPlayerNear(function(inst) inst.sg:GoToState("emerge") end)
---    inst.components.playerprox:SetOnPlayerFar(function(inst) if not inst.sg:HasStateTag("hide") then inst.sg:GoToState("hide_pre") end end)
-	
+
+    --   inst:AddComponent("playerprox")
+    --    inst.components.playerprox:SetDist(8, 10 )
+    --    inst.components.playerprox:SetOnPlayerNear(function(inst) inst.sg:GoToState("emerge") end)
+    --    inst.components.playerprox:SetOnPlayerFar(function(inst) if not inst.sg:HasStateTag("hide") then inst.sg:GoToState("hide_pre") end end)
+
 
     MakeHauntablePanic(inst)
     MakeLargeFreezableCharacter(inst)
@@ -491,9 +495,9 @@ local function gnarwail()
     inst:SetBrain(gnar_brain)
 
     inst:ListenForEvent("attacked", OnAttacked)
---    inst:ListenForEvent("timerdone", OnTimerFinished)
---    inst:ListenForEvent("startfollowing", OnStartFollowingLeader)
---    inst:ListenForEvent("stopfollowing", OnStopFollowingLeader)
+    --    inst:ListenForEvent("timerdone", OnTimerFinished)
+    --    inst:ListenForEvent("startfollowing", OnStartFollowingLeader)
+    --    inst:ListenForEvent("stopfollowing", OnStopFollowingLeader)
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
@@ -509,87 +513,87 @@ local function gnarwail()
     if not POPULATING then
         inst:SetHornBroken(false)
     end
-	
-	inst.buraco2 = SpawnPrefab("gnarwailholefundo")
-	inst.buraco2.entity:SetParent(inst.entity)
-	inst.buraco2.Transform:SetPosition(0, -0.1, 0)	
---	inst.buraco2.AnimState:PlayAnimation("eyes_loop", true)
-	
-	inst.buraco1 = SpawnPrefab("gnarwailholefrente")
-	inst.buraco1.entity:SetParent(inst.entity)
-	inst.buraco1.Transform:SetPosition(0, 0.1, 0)		
+
+    inst.buraco2 = SpawnPrefab("gnarwailholefundo")
+    inst.buraco2.entity:SetParent(inst.entity)
+    inst.buraco2.Transform:SetPosition(0, -0.1, 0)
+    --	inst.buraco2.AnimState:PlayAnimation("eyes_loop", true)
+
+    inst.buraco1 = SpawnPrefab("gnarwailholefrente")
+    inst.buraco1.entity:SetParent(inst.entity)
+    inst.buraco1.Transform:SetPosition(0, 0.1, 0)
 
     return inst
 end
 
 local function fn1()
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
+    local inst = CreateEntity()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
+    local sound = inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
     anim:SetBank("gnarwil_den")
     anim:SetBuild("gnarwil_den")
     anim:PlayAnimation("frente", true)
-	inst.Transform:SetScale(0.8, 0.8, 0.8)
-	
-	inst:AddTag("FX")
+    inst.Transform:SetScale(0.8, 0.8, 0.8)
 
-	return inst
+    inst:AddTag("FX")
+
+    return inst
 end
 
 local function fn2()
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
+    local inst = CreateEntity()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
+    local sound = inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
 
     anim:SetBank("gnarwil_den")
     anim:SetBuild("gnarwil_den")
     anim:PlayAnimation("fundo", true)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(25)		
-	inst.Transform:SetScale(0.8, 0.8, 0.8)
-	
-	inst:AddTag("FX")
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
+    inst.AnimState:SetSortOrder(25)
+    inst.Transform:SetScale(0.8, 0.8, 0.8)
 
-	return inst
+    inst:AddTag("FX")
+
+    return inst
 end
 
 local function OnTimerDone(inst, data)
     if data.name == "spawndelay" then
-    local criatura = SpawnPrefab("gnarwailunderwater")
-    criatura.Transform:SetPosition(inst.Transform:GetWorldPosition())
-	inst:Remove()
+        local criatura = SpawnPrefab("gnarwailunderwater")
+        criatura.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        inst:Remove()
     end
 end
 
 local respawndays = 8
 
 local function fn3()
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
+    local inst = CreateEntity()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
+    local sound = inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
 
     anim:SetBank("gnarwil_den")
     anim:SetBuild("gnarwil_den")
     anim:PlayAnimation("fundo", true)
-	inst.Transform:SetScale(0.8, 0.8, 0.8)
-	MakeObstaclePhysics(inst, 1.25)	
-	
+    inst.Transform:SetScale(0.8, 0.8, 0.8)
+    MakeObstaclePhysics(inst, 1.25)
+
     inst.entity:SetPristine()
     if not TheWorld.ismastersim then
         return inst
     end
 
-    inst:AddComponent("inspectable")	
+    inst:AddComponent("inspectable")
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDone)
-	inst.components.timer:StartTimer("spawndelay", 60*8*respawndays)	
-	return inst
+    inst.components.timer:StartTimer("spawndelay", 60 * 8 * respawndays)
+    return inst
 end
 
 local function gnarwail_attack_horn()
@@ -607,11 +611,11 @@ local function gnarwail_attack_horn()
     horn_inst.AnimState:OverrideSymbol("ripple_test", "gnarwail_build", "")
     horn_inst.AnimState:OverrideSymbol("shadow_ripple", "gnarwail_build", "")
     horn_inst.AnimState:OverrideSymbol("splash", "gnarwail_build", "")
-    horn_inst.AnimState:OverrideSymbol("water_line", "gnarwail_build", "")	
+    horn_inst.AnimState:OverrideSymbol("water_line", "gnarwail_build", "")
     horn_inst.AnimState:PlayAnimation("attack", false)
     horn_inst.AnimState:PushAnimation("attack_idle", true)
 
---    horn_inst:SetPrefabNameOverride("GNARWAIL")
+    --    horn_inst:SetPrefabNameOverride("GNARWAIL")
 
     horn_inst:AddTag("gnarwail")
     horn_inst:AddTag("hostile")
@@ -631,7 +635,7 @@ local function gnarwail_attack_horn()
     horn_inst:ListenForEvent("attacked", OnHornHit)
 
     horn_inst:AddComponent("lootdropper")
-    horn_inst.components.lootdropper:SetLoot({"gnarwail_horn"})
+    horn_inst.components.lootdropper:SetLoot({ "gnarwail_horn" })
 
     horn_inst:AddComponent("inspectable")
     horn_inst.components.inspectable.nameoverride = "gnarwail"
@@ -639,7 +643,7 @@ local function gnarwail_attack_horn()
     horn_inst:AddComponent("hauntable")
     horn_inst.components.hauntable:SetHauntValue(TUNING.HAUNT_SMALL)
 
-    horn_inst._retreat_timer = horn_inst:DoTaskInTime(TUNING.GNARWAIL.HORN_RETREAT_TIME/2, EndHornAttack)
+    horn_inst._retreat_timer = horn_inst:DoTaskInTime(TUNING.GNARWAIL.HORN_RETREAT_TIME / 2, EndHornAttack)
 
     horn_inst.OnSave = OnHornSave
     horn_inst.OnLoad = OnHornLoad
@@ -650,8 +654,7 @@ local function gnarwail_attack_horn()
 end
 
 return Prefab("gnarwailunderwater", gnarwail, assets, prefabs),
-	   Prefab("gnarwailholefrente", fn1, assets, prefabs), 
-	   Prefab("gnarwailholefundo", fn2, assets, prefabs),
-	   Prefab("gnarwailholefundofinal", fn3, assets, prefabs),	   
-       Prefab("gnarwail_attack_hornunderwater", gnarwail_attack_horn, assets, attack_horn_prefabs)
-
+    Prefab("gnarwailholefrente", fn1, assets, prefabs),
+    Prefab("gnarwailholefundo", fn2, assets, prefabs),
+    Prefab("gnarwailholefundofinal", fn3, assets, prefabs),
+    Prefab("gnarwail_attack_hornunderwater", gnarwail_attack_horn, assets, attack_horn_prefabs)

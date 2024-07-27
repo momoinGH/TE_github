@@ -96,7 +96,7 @@ end
 
 local function CountPrefabs(names, prefabs)
 	local count = 0
-	for i,v in ipairs(prefabs) do
+	for i, v in ipairs(prefabs) do
 		local inc = names[v] or 0
 		count = count + inc
 	end
@@ -105,7 +105,7 @@ end
 
 local function CountPrefabsContaining(names, subs)
 	local count = 0
-	for k,v in pairs(names) do
+	for k, v in pairs(names) do
 		if string.find(k, subs) then
 			count = count + v
 		end
@@ -120,7 +120,7 @@ end
 
 local function CountCookedVeggie(names, tags)
 	local count = 0
-	for k,v in pairs(names) do
+	for k, v in pairs(names) do
 		if string.find(k, "_cooked") then
 			count = count + v
 		end
@@ -144,7 +144,7 @@ local function IsExclusiveTag(tags, tag)
 	if not tags[tag] then
 		return false
 	end
-	for k,v in pairs(tags) do
+	for k, v in pairs(tags) do
 		if k ~= tag then
 			return false
 		end
@@ -154,7 +154,7 @@ end
 
 local function TotalCount(tags)
 	local count = 0
-	for _,v in pairs(tags) do
+	for _, v in pairs(tags) do
 		count = count + v
 	end
 	return count
@@ -164,15 +164,15 @@ local preparedFoods = {
 	bread = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 3 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 4 and TotalCount(names) == 4)
+				(tags.flour and tags.flour >= 4 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 6, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 2, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"snack", "bread"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 2, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "snack", "bread" },
+		tags = { "salty" },
 		hunger = 20,
 		sanity = 5,
 		health = 5,
@@ -183,18 +183,18 @@ local preparedFoods = {
 		oldname = "meatballs",
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and names.foliage and names.foliage >= 2 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 2 and tags.smallmeat and tags.smallmeat >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 3 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 1 and tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3)
+				(tags.smallmeat and tags.smallmeat >= 1 and names.foliage and names.foliage >= 2 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 2 and tags.smallmeat and tags.smallmeat >= 1 and TotalCount(names) == 3) or
+				(tags.smallmeat and tags.smallmeat >= 3 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 1 and tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"meat", "snack"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "meat", "snack" },
+		tags = { "salty" },
 		hunger = 62.5,
 		sanity = 5.0,
 		health = 3.0,
@@ -204,18 +204,18 @@ local preparedFoods = {
 	meat_skewers = {
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 2 and names.twigs and names.twigs >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 3 and names.twigs and names.twigs >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 2 and names.garlic and names.garlic >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 2 and names.onion and names.onion >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 2 and tags.mushroom and tags.mushroom >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 4)
+				(tags.smallmeat and tags.smallmeat >= 3 and names.twigs and names.twigs >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 2 and names.garlic and names.garlic >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 2 and names.onion and names.onion >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 2 and tags.mushroom and tags.mushroom >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"snack", "meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "snack", "meat" },
+		tags = { "salty" },
 		hunger = 40.0,
 		sanity = 3.0,
 		health = 15.0,
@@ -225,18 +225,18 @@ local preparedFoods = {
 	stone_soup = {
 		test = function(cooker, names, tags)
 			return (CountBerries(names) >= 1 and names.foliage and names.foliage >= 1 and names.rocks and names.rocks >= 1 and TotalCount(names) == 3) or
-			(names.foliage and names.foliage >= 1 and names.potato and names.potato >= 1 and names.rocks and names.rocks >= 1 and TotalCount(names) == 3) or
-			(tags.mushroom and tags.mushroom >= 1 and names.potato and names.potato >= 1 and names.rocks and names.rocks >= 1 and TotalCount(names) == 3) or
-			(CountBerries(names) >= 1 and names.potato and names.potato >= 1 and names.rocks and names.rocks >= 1 and TotalCount(names) == 3) or
-			(names.foliage and names.foliage >= 1 and tags.mushroom and tags.mushroom >= 1 and names.rocks and names.rocks >= 1 and TotalCount(names) == 3)
+				(names.foliage and names.foliage >= 1 and names.potato and names.potato >= 1 and names.rocks and names.rocks >= 1 and TotalCount(names) == 3) or
+				(tags.mushroom and tags.mushroom >= 1 and names.potato and names.potato >= 1 and names.rocks and names.rocks >= 1 and TotalCount(names) == 3) or
+				(CountBerries(names) >= 1 and names.potato and names.potato >= 1 and names.rocks and names.rocks >= 1 and TotalCount(names) == 3) or
+				(names.foliage and names.foliage >= 1 and tags.mushroom and tags.mushroom >= 1 and names.rocks and names.rocks >= 1 and TotalCount(names) == 3)
 		end,
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"snack", "soup"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "snack", "soup" },
+		tags = { "salty" },
 		hunger = 15.0,
 		sanity = -10.0,
 		health = -2.0,
@@ -246,18 +246,18 @@ local preparedFoods = {
 	croquette = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 1 and tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 1 and names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3)
+				(tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 1 and tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
+				(tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3) or
+				(tags.flour and tags.flour >= 1 and names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"snack", "veggie"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "snack", "veggie" },
+		tags = { "salty" },
 		hunger = 30.0,
 		sanity = 5.0,
 		health = 10.0,
@@ -267,18 +267,18 @@ local preparedFoods = {
 	roasted_veggies = {
 		test = function(cooker, names, tags)
 			return (tags.mushroom and tags.mushroom >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
-			(tags.mushroom and tags.mushroom >= 2 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 1 and names.potato and names.potato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
-			(names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3)
+				(tags.mushroom and tags.mushroom >= 2 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 1 and names.potato and names.potato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
+				(names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"oven", "grill"},
-		cravings = {"veggie"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven", "grill" },
+		cravings = { "veggie" },
+		tags = { "salty" },
 		hunger = 25.0,
 		sanity = 10.0,
 		health = 3.0,
@@ -288,18 +288,18 @@ local preparedFoods = {
 	meatloaf = {
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 2 and tags.smallmeat and tags.smallmeat >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and names.foliage and names.foliage >= 2 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 1 and tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 3 and TotalCount(names) == 3)
+				(names.carrot and names.carrot >= 2 and tags.smallmeat and tags.smallmeat >= 1 and TotalCount(names) == 3) or
+				(tags.smallmeat and tags.smallmeat >= 1 and names.foliage and names.foliage >= 2 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 1 and tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
+				(tags.smallmeat and tags.smallmeat >= 3 and TotalCount(names) == 3)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "meat" },
+		tags = { "salty" },
 		hunger = 45.0,
 		sanity = 5.0,
 		health = 3.0,
@@ -309,18 +309,18 @@ local preparedFoods = {
 	carrot_soup = {
 		test = function(cooker, names, tags)
 			return (names.carrot and names.carrot >= 3 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 2 and names.garlic and names.garlic >= 1 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 4 and TotalCount(names) == 4) or
-			(names.carrot and names.carrot >= 3 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(names.carrot and names.carrot >= 2 and names.garlic and names.garlic >= 1 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 4 and TotalCount(names) == 4) or
+				(names.carrot and names.carrot >= 3 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"veggie", "snack", "soup"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "veggie", "snack", "soup" },
+		tags = { "salty" },
 		hunger = 35.0,
 		sanity = 3.0,
 		health = 15.0,
@@ -330,18 +330,18 @@ local preparedFoods = {
 	fish_pie = {
 		test = function(cooker, names, tags)
 			return (names.carrot and names.carrot >= 1 and tags.flour and tags.flour >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 1 and tags.fish and tags.fish >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 1 and names.onion and names.onion >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 1 and tags.fish and tags.fish >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 3)
+				(tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3) or
+				(tags.flour and tags.flour >= 1 and tags.fish and tags.fish >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3) or
+				(tags.flour and tags.flour >= 1 and names.onion and names.onion >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3) or
+				(tags.flour and tags.flour >= 1 and tags.fish and tags.fish >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 3)
 		end,
 		platetype = "plate",
 		priority = 12,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"fish"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "fish" },
+		tags = { "salty" },
 		hunger = 35.0,
 		sanity = 5.0,
 		health = 10.0,
@@ -351,17 +351,17 @@ local preparedFoods = {
 	fish_and_chips = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and tags.fish and tags.fish >= 2 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 2 and names.potato and names.potato >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and names.potato and names.potato >= 2 and tags.fish and tags.fish >= 1 and TotalCount(names) == 4)
+				(tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and tags.fish and tags.fish >= 2 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 2 and names.potato and names.potato >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 1 and names.potato and names.potato >= 2 and tags.fish and tags.fish >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 12,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 12, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 2, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 3, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"fish"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 12, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 2, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 3, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "fish" },
+		tags = { "salty" },
 		hunger = 25.0,
 		sanity = -3.0,
 		health = 0.0,
@@ -371,18 +371,18 @@ local preparedFoods = {
 	meat_pie = {
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 1 and tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.onion and names.onion >= 1 and TotalCount(names) == 3)
+				(names.carrot and names.carrot >= 1 and tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and TotalCount(names) == 3) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 3) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.onion and names.onion >= 1 and TotalCount(names) == 3)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 12, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 2, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 3, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 12, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 2, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 3, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "meat" },
+		tags = { "salty" },
 		hunger = 55.0,
 		sanity = 3.0,
 		health = 10.0,
@@ -392,16 +392,16 @@ local preparedFoods = {
 	chips = {
 		test = function(cooker, names, tags)
 			return (names.potato and names.potato >= 3 and TotalCount(names) == 3) or
-			(names.potato and names.potato >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
-			(names.potato and names.potato >= 3 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(names.potato and names.potato >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
+				(names.potato and names.potato >= 3 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 6, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 2, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"veggie", "snack"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 2, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "veggie", "snack" },
+		tags = { "salty" },
 		hunger = 20.0,
 		sanity = 2.0,
 		health = 1.0,
@@ -411,18 +411,18 @@ local preparedFoods = {
 	slider = {
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 2 and tags.flour and tags.flour >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 2 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 3)
+				(tags.smallmeat and tags.smallmeat >= 2 and tags.flour and tags.flour >= 1 and TotalCount(names) == 3) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 2 and TotalCount(names) == 3) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 3)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 12, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 2, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 3, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"bread", "snack", "meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 12, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 2, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 3, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "bread", "snack", "meat" },
+		tags = { "salty" },
 		hunger = 20,
 		sanity = 5,
 		health = 5,
@@ -433,18 +433,18 @@ local preparedFoods = {
 		oldname = "jam",
 		test = function(cooker, names, tags)
 			return (CountBerries(names) >= 3 and TotalCount(names) == 3) or
-			(CountBerries(names) >= 4 and TotalCount(names) == 4) or
-			(CountBerries(names) >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 3) or
-			(CountBerries(names) >= 3 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4) or
-			(CountBerries(names) >= 2 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4)
+				(CountBerries(names) >= 4 and TotalCount(names) == 4) or
+				(CountBerries(names) >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 3) or
+				(CountBerries(names) >= 3 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4) or
+				(CountBerries(names) >= 2 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 0, coin2 = 1, coin3 = 0, coin4 = 0}, silver = {coin1 = 2, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"sweet", "snack"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 0, coin2 = 1, coin3 = 0, coin4 = 0 }, silver = { coin1 = 2, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "sweet", "snack" },
+		tags = { "salty" },
 		hunger = 20,
 		sanity = 5,
 		health = 5,
@@ -454,16 +454,16 @@ local preparedFoods = {
 	jelly_roll = {
 		test = function(cooker, names, tags)
 			return (CountBerries(names) >= 2 and tags.flour and tags.flour >= 1 and TotalCount(names) == 3) or
-			(CountBerries(names) >= 2 and tags.flour and tags.flour >= 2 and TotalCount(names) == 4) or
-			(CountBerries(names) >= 3 and tags.flour and tags.flour >= 1 and TotalCount(names) == 4)
+				(CountBerries(names) >= 2 and tags.flour and tags.flour >= 2 and TotalCount(names) == 4) or
+				(CountBerries(names) >= 3 and tags.flour and tags.flour >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 2, coin2 = 1, coin3 = 0, coin4 = 0}, silver = {coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"sweet"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 2, coin2 = 1, coin3 = 0, coin4 = 0 }, silver = { coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "sweet" },
+		tags = { "salty" },
 		hunger = 25.0,
 		sanity = 5.0,
 		health = 3.0,
@@ -473,17 +473,17 @@ local preparedFoods = {
 	carrot_cake = {
 		test = function(cooker, names, tags)
 			return (names.carrot and names.carrot >= 1 and tags.flour and tags.flour >= 2 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 2 and tags.flour and tags.flour >= 2 and TotalCount(names) == 4) or
-			(names.carrot and names.carrot >= 1 and tags.flour and tags.flour >= 2 and tags.dairy and tags.dairy >= 1 and TotalCount(names) == 4) or
-			(names.carrot and names.carrot >= 1 and tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4)
+				(names.carrot and names.carrot >= 2 and tags.flour and tags.flour >= 2 and TotalCount(names) == 4) or
+				(names.carrot and names.carrot >= 1 and tags.flour and tags.flour >= 2 and tags.dairy and tags.dairy >= 1 and TotalCount(names) == 4) or
+				(names.carrot and names.carrot >= 1 and tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 6, coin2 = 1, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 2, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 3, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"sweet"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 1, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 2, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 3, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "sweet" },
+		tags = { "salty" },
 		hunger = 30.0,
 		sanity = 10.0,
 		health = 8.0,
@@ -493,15 +493,15 @@ local preparedFoods = {
 	mashed_potatoes = {
 		test = function(cooker, names, tags)
 			return (names.garlic and names.garlic >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
-			(names.garlic and names.garlic >= 1 and names.potato and names.potato >= 3 and TotalCount(names) == 4)
+				(names.garlic and names.garlic >= 1 and names.potato and names.potato >= 3 and TotalCount(names) == 4)
 		end,
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 6, coin2 = 1, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 5, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 10, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"snack", "veggie"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 1, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 5, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 10, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "snack", "veggie" },
+		tags = { "salty" },
 		hunger = 45.0,
 		sanity = 0.0,
 		health = 0.0,
@@ -511,16 +511,16 @@ local preparedFoods = {
 	garlic_bread = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 2 and names.garlic and names.garlic >= 1 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 2 and names.garlic and names.garlic >= 2 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 3 and names.garlic and names.garlic >= 1 and TotalCount(names) == 4)
+				(tags.flour and tags.flour >= 2 and names.garlic and names.garlic >= 2 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 3 and names.garlic and names.garlic >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 6, coin2 = 1, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 5, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 10, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"snack", "bread"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 1, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 5, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 10, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "snack", "bread" },
+		tags = { "salty" },
 		hunger = 25.0,
 		sanity = -5.0,
 		health = 20.0,
@@ -530,18 +530,18 @@ local preparedFoods = {
 	tomato_soup = {
 		test = function(cooker, names, tags)
 			return (names.tomato and names.tomato >= 3 and TotalCount(names) == 3) or
-			(names.garlic and names.garlic >= 1 and names.tomato and names.tomato >= 2 and TotalCount(names) == 3) or
-			(tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 2 and TotalCount(names) == 3) or
-			(names.tomato and names.tomato >= 4 and TotalCount(names) == 4) or
-			(tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 3 and TotalCount(names) == 4)
+				(names.garlic and names.garlic >= 1 and names.tomato and names.tomato >= 2 and TotalCount(names) == 3) or
+				(tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 2 and TotalCount(names) == 3) or
+				(names.tomato and names.tomato >= 4 and TotalCount(names) == 4) or
+				(tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 3 and TotalCount(names) == 4)
 		end,
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 1, coin3 = 0, coin4 = 0}, silver = {coin1 = 6, coin2 = 5, coin3 = 0, coin4 = 0}, gold = {coin1 = 8, coin2 = 10, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"veggie", "soup", "snack"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 1, coin3 = 0, coin4 = 0 }, silver = { coin1 = 6, coin2 = 5, coin3 = 0, coin4 = 0 }, gold = { coin1 = 8, coin2 = 10, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "veggie", "soup", "snack" },
+		tags = { "salty" },
 		hunger = 35.0,
 		sanity = 5.0,
 		health = 15.0,
@@ -551,18 +551,18 @@ local preparedFoods = {
 	sausage = {
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and names.foliage and names.foliage >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 1 and tags.smallmeat and tags.smallmeat >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 3)
+				(tags.smallmeat and tags.smallmeat >= 1 and names.foliage and names.foliage >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
+				(tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 1 and tags.smallmeat and tags.smallmeat >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 3)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 8, coin2 = 1, coin3 = 0, coin4 = 0}, silver = {coin1 = 6, coin2 = 5, coin3 = 0, coin4 = 0}, gold = {coin1 = 8, coin2 = 10, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"snack", "meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 1, coin3 = 0, coin4 = 0 }, silver = { coin1 = 6, coin2 = 5, coin3 = 0, coin4 = 0 }, gold = { coin1 = 8, coin2 = 10, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "snack", "meat" },
+		tags = { "salty" },
 		hunger = 48.0,
 		sanity = 3.0,
 		health = 5.0,
@@ -572,16 +572,16 @@ local preparedFoods = {
 	candied_fish = {
 		test = function(cooker, names, tags)
 			return (tags.fish and tags.fish >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 3) or
-			(tags.fish and tags.fish >= 1 and names.syrup and names.syrup >= 2 and TotalCount(names) == 3) or
-			(tags.fish and tags.fish >= 2 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4)
+				(tags.fish and tags.fish >= 1 and names.syrup and names.syrup >= 2 and TotalCount(names) == 3) or
+				(tags.fish and tags.fish >= 2 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 12,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 2, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 4, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"snack", "fish"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 2, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 4, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "snack", "fish" },
+		tags = { "salty" },
 		hunger = 25.0,
 		sanity = 25.0,
 		health = -4.0,
@@ -591,15 +591,15 @@ local preparedFoods = {
 	stuffed_mushroom = {
 		test = function(cooker, names, tags)
 			return (names.garlic and names.garlic >= 1 and tags.mushroom and tags.mushroom >= 1 and names.onion and names.onion >= 1 and TotalCount(names) == 3) or
-			(names.garlic and names.garlic >= 1 and tags.mushroom and tags.mushroom >= 2 and names.onion and names.onion >= 1 and TotalCount(names) == 4)
+				(names.garlic and names.garlic >= 1 and tags.mushroom and tags.mushroom >= 2 and names.onion and names.onion >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 2, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 4, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"snack", "veggie"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 2, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 4, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "snack", "veggie" },
+		tags = { "salty" },
 		hunger = 30.0,
 		sanity = -2.0,
 		health = -2.0,
@@ -609,18 +609,18 @@ local preparedFoods = {
 	veggie_soup = {
 		test = function(cooker, names, tags)
 			return (tags.mushroom and tags.mushroom >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
-			(tags.mushroom and tags.mushroom >= 2 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 1 and names.potato and names.potato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
-			(names.potato and names.potato >= 2 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3)
+				(tags.mushroom and tags.mushroom >= 2 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 1 and names.potato and names.potato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
+				(names.potato and names.potato >= 2 and names.turnip and names.turnip >= 1 and TotalCount(names) == 3)
 		end,
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"veggie", "snack", "soup"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "veggie", "snack", "soup" },
+		tags = { "salty" },
 		hunger = 1.0,
 		sanity = 5.0,
 		health = 10.0,
@@ -631,18 +631,18 @@ local preparedFoods = {
 		oldname = "ratatouille",
 		test = function(cooker, names, tags)
 			return (names.carrot and names.carrot >= 1 and names.potato and names.potato >= 1 and names.tomato and names.tomato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4) or
-			(names.carrot and names.carrot >= 1 and names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and names.tomato and names.tomato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4) or
-			(tags.mushroom and tags.mushroom >= 1 and names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(names.carrot and names.carrot >= 1 and names.onion and names.onion >= 1 and names.tomato and names.tomato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
+				(names.carrot and names.carrot >= 1 and names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and names.tomato and names.tomato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4) or
+				(tags.mushroom and tags.mushroom >= 1 and names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(names.carrot and names.carrot >= 1 and names.onion and names.onion >= 1 and names.tomato and names.tomato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 2, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 4, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"veggie"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 2, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 4, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "veggie" },
+		tags = { "salty" },
 		hunger = 20,
 		sanity = 5,
 		health = 5,
@@ -652,18 +652,18 @@ local preparedFoods = {
 	bruschetta = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and names.tomato and names.tomato >= 2 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and names.tomato and names.tomato >= 2 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 2 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and tags.dairy and tags.dairy >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and tags.dairy and tags.dairy >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4)
+				(tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and names.tomato and names.tomato >= 2 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 2 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and tags.dairy and tags.dairy >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and tags.dairy and tags.dairy >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"veggie", "bread", "snack"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "veggie", "bread", "snack" },
+		tags = { "salty" },
 		hunger = 20.0,
 		sanity = 2.0,
 		health = 0.0,
@@ -673,18 +673,18 @@ local preparedFoods = {
 	meat_stew = {
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 4 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 2 and names.onion and names.onion >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 2 and names.potato and names.potato >= 2 and TotalCount(names) == 4) or
-			(names.carrot and names.carrot >= 2 and tags.smallmeat and tags.smallmeat >= 2 and TotalCount(names) == 4) or
-			(names.carrot and names.carrot >= 1 and tags.smallmeat and tags.smallmeat >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(tags.smallmeat and tags.smallmeat >= 2 and names.onion and names.onion >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 2 and names.potato and names.potato >= 2 and TotalCount(names) == 4) or
+				(names.carrot and names.carrot >= 2 and tags.smallmeat and tags.smallmeat >= 2 and TotalCount(names) == 4) or
+				(names.carrot and names.carrot >= 1 and tags.smallmeat and tags.smallmeat >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"meat", "soup"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "meat", "soup" },
+		tags = { "salty" },
 		hunger = 55.0,
 		sanity = 3.0,
 		health = 10.0,
@@ -694,18 +694,18 @@ local preparedFoods = {
 	hamburger = {
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 2 and names.foliage and names.foliage >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 3 and tags.flour and tags.flour >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 2 and tags.flour and tags.flour >= 2 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 2 and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(tags.smallmeat and tags.smallmeat >= 3 and tags.flour and tags.flour >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 2 and tags.flour and tags.flour >= 2 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 2 and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"bread", "meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "bread", "meat" },
+		tags = { "salty" },
 		hunger = 120.0,
 		sanity = -4.0,
 		health = -2.0,
@@ -715,18 +715,18 @@ local preparedFoods = {
 	fish_burger = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 2 and tags.fish and tags.fish >= 2 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 2 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and tags.fish and tags.fish >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 2 and names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 2 and tags.fish and tags.fish >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4)
+				(tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 2 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 1 and tags.fish and tags.fish >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 2 and names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 2 and tags.fish and tags.fish >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 12,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"fish", "bread"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "fish", "bread" },
+		tags = { "salty" },
 		hunger = 100.0,
 		sanity = -2.0,
 		health = 0.0,
@@ -736,18 +736,18 @@ local preparedFoods = {
 	mushroom_burger = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 2 and tags.mushroom and tags.mushroom >= 2 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 2 and tags.mushroom and tags.mushroom >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 2 and names.garlic and names.garlic >= 1 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 3 and TotalCount(names) == 4)
+				(tags.flour and tags.flour >= 2 and tags.mushroom and tags.mushroom >= 2 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 2 and tags.mushroom and tags.mushroom >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 2 and names.garlic and names.garlic >= 1 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 3 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"veggie", "bread"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "veggie", "bread" },
+		tags = { "salty" },
 		hunger = 80.0,
 		sanity = -6.0,
 		health = 0.0,
@@ -757,18 +757,18 @@ local preparedFoods = {
 	fish_steak = {
 		test = function(cooker, names, tags)
 			return (names.carrot and names.carrot >= 1 and names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(names.foliage and names.foliage >= 1 and names.potato and names.potato >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(names.foliage and names.foliage >= 1 and names.onion and names.onion >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
+				(names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(names.foliage and names.foliage >= 1 and names.potato and names.potato >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(names.foliage and names.foliage >= 1 and names.onion and names.onion >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 12,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"fish"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "fish" },
+		tags = { "salty" },
 		hunger = 35.0,
 		sanity = 5.0,
 		health = 10.0,
@@ -778,18 +778,18 @@ local preparedFoods = {
 	curry = {
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 1 and names.garlic and names.garlic >= 1 and tags.spice and tags.spice >= 2 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 2 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.spice and tags.spice >= 2 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and names.onion and names.onion >= 1 and tags.spice and tags.spice >= 2 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.spice and tags.spice >= 2 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
+				(tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 2 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.spice and tags.spice >= 2 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and names.onion and names.onion >= 1 and tags.spice and tags.spice >= 2 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.spice and tags.spice >= 2 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"soup", "meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "soup", "meat" },
+		tags = { "salty" },
 		hunger = 15.0,
 		sanity = 0.0,
 		health = 30.0,
@@ -799,17 +799,17 @@ local preparedFoods = {
 	spaghetti_and_meatballs = {
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.onion and names.onion >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4)
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.onion and names.onion >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"meat", "pasta"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "meat", "pasta" },
+		tags = { "salty" },
 		hunger = 150.0,
 		sanity = 3.0,
 		health = 3.0,
@@ -819,17 +819,17 @@ local preparedFoods = {
 	lasagna = {
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.onion and names.onion >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4)
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.onion and names.onion >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"pasta", "meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "pasta", "meat" },
+		tags = { "salty" },
 		hunger = 20,
 		sanity = 5,
 		health = 5,
@@ -839,18 +839,18 @@ local preparedFoods = {
 	jelly_sandwich = {
 		test = function(cooker, names, tags)
 			return (CountBerries(names) >= 2 and tags.flour and tags.flour >= 1 and TotalCount(names) == 3) or
-			(CountBerries(names) >= 1 and tags.flour and tags.flour >= 1 and names.syrup and names.syrup >= 1 and TotalCount(names) == 3) or
-			(CountBerries(names) >= 2 and tags.flour and tags.flour >= 2 and TotalCount(names) == 4) or
-			(CountBerries(names) >= 3 and tags.flour and tags.flour >= 1 and TotalCount(names) == 4) or
-			(CountBerries(names) >= 1 and tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4)
+				(CountBerries(names) >= 1 and tags.flour and tags.flour >= 1 and names.syrup and names.syrup >= 1 and TotalCount(names) == 3) or
+				(CountBerries(names) >= 2 and tags.flour and tags.flour >= 2 and TotalCount(names) == 4) or
+				(CountBerries(names) >= 3 and tags.flour and tags.flour >= 1 and TotalCount(names) == 4) or
+				(CountBerries(names) >= 1 and tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"snack", "bread"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "snack", "bread" },
+		tags = { "salty" },
 		hunger = 20.0,
 		sanity = 0.0,
 		health = 2.0,
@@ -860,18 +860,18 @@ local preparedFoods = {
 	poached_fish = {
 		test = function(cooker, names, tags)
 			return (names.carrot and names.carrot >= 1 and names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(names.foliage and names.foliage >= 1 and names.potato and names.potato >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(names.foliage and names.foliage >= 1 and tags.mushroom and tags.mushroom >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
+				(names.foliage and names.foliage >= 1 and names.potato and names.potato >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(names.foliage and names.foliage >= 1 and tags.mushroom and tags.mushroom >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(names.foliage and names.foliage >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 12,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"fish"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "fish" },
+		tags = { "salty" },
 		hunger = 35.0,
 		sanity = 10.0,
 		health = 5.0,
@@ -881,18 +881,18 @@ local preparedFoods = {
 	shepherds_pie = {
 		test = function(cooker, names, tags)
 			return (names.carrot and names.carrot >= 1 and tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and names.garlic and names.garlic >= 1 and names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and names.garlic and names.garlic >= 1 and names.potato and names.potato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
+				(tags.smallmeat and tags.smallmeat >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and names.garlic and names.garlic >= 1 and names.onion and names.onion >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and names.garlic and names.garlic >= 1 and names.potato and names.potato >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 2, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "meat" },
+		tags = { "salty" },
 		hunger = 50.0,
 		sanity = 2.0,
 		health = 2.0,
@@ -902,15 +902,15 @@ local preparedFoods = {
 	candy = {
 		test = function(cooker, names, tags)
 			return (names.syrup and names.syrup >= 3 and TotalCount(names) == 3) or
-			(names.syrup and names.syrup >= 4 and TotalCount(names) == 4)
+				(names.syrup and names.syrup >= 4 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 2, coin2 = 5, coin3 = 0, coin4 = 0}, silver = {coin1 = 6, coin2 = 5, coin3 = 0, coin4 = 0}, gold = {coin1 = 8, coin2 = 10, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"sweet"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 2, coin2 = 5, coin3 = 0, coin4 = 0 }, silver = { coin1 = 6, coin2 = 5, coin3 = 0, coin4 = 0 }, gold = { coin1 = 8, coin2 = 10, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "sweet" },
+		tags = { "salty" },
 		hunger = 15.0,
 		sanity = 0.0,
 		health = 30.0,
@@ -920,18 +920,18 @@ local preparedFoods = {
 	pudding = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 3) or
-			(CountBerries(names) >= 1 and tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 3 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 2 and tags.spice and tags.spice >= 1 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4)
+				(CountBerries(names) >= 1 and tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 3 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 2 and tags.spice and tags.spice >= 1 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 4, coin2 = 5, coin3 = 0, coin4 = 0}, silver = {coin1 = 2, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 4, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"sweet"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 5, coin3 = 0, coin4 = 0 }, silver = { coin1 = 2, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 4, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "sweet" },
+		tags = { "salty" },
 		hunger = 25.0,
 		sanity = 20.0,
 		health = -5.0,
@@ -941,16 +941,16 @@ local preparedFoods = {
 	waffles = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 3 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4)
+				(tags.flour and tags.flour >= 3 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 4, coin2 = 5, coin3 = 0, coin4 = 0}, silver = {coin1 = 2, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 4, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"sweet"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 5, coin3 = 0, coin4 = 0 }, silver = { coin1 = 2, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 4, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "sweet" },
+		tags = { "salty" },
 		hunger = 20,
 		sanity = 5,
 		health = 5,
@@ -960,16 +960,16 @@ local preparedFoods = {
 	berry_tart = {
 		test = function(cooker, names, tags)
 			return (CountBerries(names) >= 1 and tags.flour and tags.flour >= 1 and names.syrup and names.syrup >= 1 and TotalCount(names) == 3) or
-			(CountBerries(names) >= 2 and tags.flour and tags.flour >= 1 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4) or
-			(CountBerries(names) >= 1 and tags.flour and tags.flour >= 1 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4)
+				(CountBerries(names) >= 2 and tags.flour and tags.flour >= 1 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4) or
+				(CountBerries(names) >= 1 and tags.flour and tags.flour >= 1 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 6, coin2 = 5, coin3 = 0, coin4 = 0}, silver = {coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0}, gold = {coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"sweet"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 5, coin3 = 0, coin4 = 0 }, silver = { coin1 = 5, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 7, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "sweet" },
+		tags = { "salty" },
 		hunger = 15.0,
 		sanity = 5.0,
 		health = -1.0,
@@ -979,16 +979,16 @@ local preparedFoods = {
 	mac_n_cheese = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 2 and tags.dairy and tags.dairy >= 1 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 2 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 2 and tags.dairy and tags.dairy >= 2 and TotalCount(names) == 4)
+				(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 2 and TotalCount(names) == 3) or
+				(tags.flour and tags.flour >= 2 and tags.dairy and tags.dairy >= 2 and TotalCount(names) == 4)
 		end,
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 5, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 10, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 10, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"pasta", "cheese"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 5, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 10, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 10, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "pasta", "cheese" },
+		tags = { "salty" },
 		hunger = 30.0,
 		sanity = -5.0,
 		health = 0.0,
@@ -998,15 +998,15 @@ local preparedFoods = {
 	bagel_n_fish = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.onion and names.onion >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 4)
+				(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.onion and names.onion >= 1 and tags.fish and tags.fish >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 12,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 8, coin2 = 5, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 10, coin3 = 0, coin4 = 1}, gold = {coin1 = 9, coin2 = 10, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"snack", "fish", "bread"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 5, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 10, coin3 = 0, coin4 = 1 }, gold = { coin1 = 9, coin2 = 10, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "snack", "fish", "bread" },
+		tags = { "salty" },
 		hunger = 38.0,
 		sanity = -2.0,
 		health = 2.0,
@@ -1016,16 +1016,16 @@ local preparedFoods = {
 	grilled_cheese = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 2 and tags.dairy and tags.dairy >= 1 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 2 and TotalCount(names) == 3) or
-			(tags.flour and tags.flour >= 2 and tags.dairy and tags.dairy >= 2 and TotalCount(names) == 4)
+				(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 2 and TotalCount(names) == 3) or
+				(tags.flour and tags.flour >= 2 and tags.dairy and tags.dairy >= 2 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 5, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 10, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 10, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"snack", "bread", "cheese"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 5, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 10, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 10, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "snack", "bread", "cheese" },
+		tags = { "salty" },
 		hunger = 25.0,
 		sanity = 0.0,
 		health = -8.0,
@@ -1035,16 +1035,16 @@ local preparedFoods = {
 	cream_of_mushroom = {
 		test = function(cooker, names, tags)
 			return (tags.dairy and tags.dairy >= 1 and tags.mushroom and tags.mushroom >= 2 and TotalCount(names) == 3) or
-			(tags.dairy and tags.dairy >= 2 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 3) or
-			(tags.dairy and tags.dairy >= 2 and tags.mushroom and tags.mushroom >= 2 and TotalCount(names) == 4)
+				(tags.dairy and tags.dairy >= 2 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 3) or
+				(tags.dairy and tags.dairy >= 2 and tags.mushroom and tags.mushroom >= 2 and TotalCount(names) == 4)
 		end,
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 5, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 10, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 10, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"veggie", "snack", "soup", "cheese"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 5, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 10, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 10, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "veggie", "snack", "soup", "cheese" },
+		tags = { "salty" },
 		hunger = 20.0,
 		sanity = -7.0,
 		health = 7.0,
@@ -1054,18 +1054,18 @@ local preparedFoods = {
 	fish_stew = {
 		test = function(cooker, names, tags)
 			return (tags.fish and tags.fish >= 3 and TotalCount(names) == 3) or
-			(names.foliage and names.foliage >= 2 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3) or
-			(names.potato and names.potato >= 2 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3) or
-			(names.potato and names.potato >= 1 and tags.fish and tags.fish >= 2 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 2 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3)
+				(names.foliage and names.foliage >= 2 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3) or
+				(names.potato and names.potato >= 2 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3) or
+				(names.potato and names.potato >= 1 and tags.fish and tags.fish >= 2 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 2 and tags.fish and tags.fish >= 1 and TotalCount(names) == 3)
 		end,
 		platetype = "bowl",
 		priority = 12,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 8, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"soup", "fish"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "soup", "fish" },
+		tags = { "salty" },
 		hunger = 35.0,
 		sanity = 5.0,
 		health = 10.0,
@@ -1075,18 +1075,18 @@ local preparedFoods = {
 	pierogies = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 3) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 2 and names.potato and names.potato >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 2 and names.potato and names.potato >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 4, coin2 = 6, coin3 = 0, coin4 = 0}, silver = {coin1 = 4, coin2 = 11, coin3 = 0, coin4 = 0}, gold = {coin1 = 6, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"veggie", "cheese"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 6, coin3 = 0, coin4 = 0 }, silver = { coin1 = 4, coin2 = 11, coin3 = 0, coin4 = 0 }, gold = { coin1 = 6, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "veggie", "cheese" },
+		tags = { "salty" },
 		hunger = 20,
 		sanity = 5,
 		health = 5,
@@ -1096,17 +1096,17 @@ local preparedFoods = {
 	manicotti = {
 		test = function(cooker, names, tags)
 			return (tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and tags.dairy and tags.dairy >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and tags.dairy and tags.dairy >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 2 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4)
+				(tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and tags.dairy and tags.dairy >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 2 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 6, coin2 = 6, coin3 = 0, coin4 = 0}, silver = {coin1 = 6, coin2 = 11, coin3 = 0, coin4 = 0}, gold = {coin1 = 8, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"cheese", "pasta"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 6, coin3 = 0, coin4 = 0 }, silver = { coin1 = 6, coin2 = 11, coin3 = 0, coin4 = 0 }, gold = { coin1 = 8, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "cheese", "pasta" },
+		tags = { "salty" },
 		hunger = 35.0,
 		sanity = 10.0,
 		health = 10.0,
@@ -1116,18 +1116,18 @@ local preparedFoods = {
 	cheeseburger = {
 		test = function(cooker, names, tags)
 			return (tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and tags.dairy and tags.dairy >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.onion and names.onion >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.smallmeat and tags.smallmeat >= 2 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and TotalCount(names) == 4)
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.onion and names.onion >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.smallmeat and tags.smallmeat >= 2 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 6, coin2 = 6, coin3 = 0, coin4 = 0}, silver = {coin1 = 6, coin2 = 11, coin3 = 0, coin4 = 0}, gold = {coin1 = 8, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"meat", "cheese", "bread"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 6, coin3 = 0, coin4 = 0 }, silver = { coin1 = 6, coin2 = 11, coin3 = 0, coin4 = 0 }, gold = { coin1 = 8, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "meat", "cheese", "bread" },
+		tags = { "salty" },
 		hunger = 60.0,
 		sanity = -2.0,
 		health = -8.0,
@@ -1141,10 +1141,10 @@ local preparedFoods = {
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 6, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"pasta"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 6, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "pasta" },
+		tags = { "salty" },
 		hunger = 45.0,
 		sanity = 5.0,
 		health = 10.0,
@@ -1158,10 +1158,10 @@ local preparedFoods = {
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 6, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"soup", "veggie", "snack"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 6, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "soup", "veggie", "snack" },
+		tags = { "salty" },
 		hunger = 25.0,
 		sanity = -5.0,
 		health = 5.0,
@@ -1171,15 +1171,15 @@ local preparedFoods = {
 	breaded_cutlet = {
 		test = function(cooker, names, tags)
 			return (tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 2 and TotalCount(names) == 4)
+				(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 2 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 6, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 6, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "meat" },
+		tags = { "salty" },
 		hunger = 55.0,
 		sanity = 0.0,
 		health = 0.0,
@@ -1189,16 +1189,16 @@ local preparedFoods = {
 	creamy_fish = {
 		test = function(cooker, names, tags)
 			return (names.garlic and names.garlic >= 1 and tags.dairy and tags.dairy >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.dairy and tags.dairy >= 2 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.dairy and tags.dairy >= 1 and names.onion and names.onion >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(tags.dairy and tags.dairy >= 2 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.dairy and tags.dairy >= 1 and names.onion and names.onion >= 1 and tags.fish and tags.fish >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 12,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 8, coin2 = 6, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"fish"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 6, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "fish" },
+		tags = { "salty" },
 		hunger = 50.0,
 		sanity = 2.0,
 		health = 0.0,
@@ -1212,10 +1212,10 @@ local preparedFoods = {
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 4, coin2 = 10, coin3 = 0, coin4 = 0}, silver = {coin1 = 5, coin2 = 15, coin3 = 0, coin4 = 0}, gold = {coin1 = 7, coin2 = 20, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"cheese", "meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 10, coin3 = 0, coin4 = 0 }, silver = { coin1 = 5, coin2 = 15, coin3 = 0, coin4 = 0 }, gold = { coin1 = 7, coin2 = 20, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "cheese", "meat" },
+		tags = { "salty" },
 		hunger = 140.0,
 		sanity = 2.0,
 		health = -10.0,
@@ -1225,18 +1225,18 @@ local preparedFoods = {
 	pot_roast = {
 		test = function(cooker, names, tags)
 			return (tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.mushroom and tags.mushroom >= 1 and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and names.carrot and names.carrot >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and names.garlic and names.garlic >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and names.carrot and names.carrot >= 1 and tags.spice and tags.spice >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
+				(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and names.carrot and names.carrot >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.spice and tags.spice >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and names.garlic and names.garlic >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and names.carrot and names.carrot >= 1 and tags.spice and tags.spice >= 1 and names.turnip and names.turnip >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 4, coin2 = 10, coin3 = 0, coin4 = 0}, silver = {coin1 = 5, coin2 = 15, coin3 = 0, coin4 = 0}, gold = {coin1 = 7, coin2 = 20, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 10, coin3 = 0, coin4 = 0 }, silver = { coin1 = 5, coin2 = 15, coin3 = 0, coin4 = 0 }, gold = { coin1 = 7, coin2 = 20, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "meat" },
+		tags = { "salty" },
 		hunger = 150.0,
 		sanity = 0.0,
 		health = -6.0,
@@ -1246,18 +1246,18 @@ local preparedFoods = {
 	crab_cake = {
 		test = function(cooker, names, tags)
 			return (tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and names.onion and names.onion >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 2 and tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 2 and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(tags.crab and tags.crab >= 2 and tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and TotalCount(names) == 4) or
+				(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.crab and tags.crab >= 2 and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 13,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 4, coin2 = 10, coin3 = 0, coin4 = 0}, silver = {coin1 = 5, coin2 = 15, coin3 = 0, coin4 = 0}, gold = {coin1 = 7, coin2 = 20, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"snack"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 10, coin3 = 0, coin4 = 0 }, silver = { coin1 = 5, coin2 = 15, coin3 = 0, coin4 = 0 }, gold = { coin1 = 7, coin2 = 20, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "snack" },
+		tags = { "salty" },
 		hunger = 30.0,
 		sanity = 30.0,
 		health = 5.0,
@@ -1267,18 +1267,18 @@ local preparedFoods = {
 	turnip_cake = {
 		test = function(cooker, names, tags)
 			return (names.turnip and names.turnip >= 3 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 1 and names.turnip and names.turnip >= 2 and TotalCount(names) == 3) or
-			(names.onion and names.onion >= 1 and names.turnip and names.turnip >= 2 and TotalCount(names) == 3) or
-			(names.turnip and names.turnip >= 4 and TotalCount(names) == 4) or
-			(names.carrot and names.carrot >= 1 and names.turnip and names.turnip >= 3 and TotalCount(names) == 4)
+				(names.carrot and names.carrot >= 1 and names.turnip and names.turnip >= 2 and TotalCount(names) == 3) or
+				(names.onion and names.onion >= 1 and names.turnip and names.turnip >= 2 and TotalCount(names) == 3) or
+				(names.turnip and names.turnip >= 4 and TotalCount(names) == 4) or
+				(names.carrot and names.carrot >= 1 and names.turnip and names.turnip >= 3 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"snack", "veggie"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "snack", "veggie" },
+		tags = { "salty" },
 		hunger = 30.0,
 		sanity = 3.0,
 		health = 20.0,
@@ -1288,16 +1288,16 @@ local preparedFoods = {
 	steak_frites = {
 		test = function(cooker, names, tags)
 			return (tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and names.potato and names.potato >= 2 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and names.potato and names.potato >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and names.potato and names.potato >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and names.potato and names.potato >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 6, coin2 = 10, coin3 = 0, coin4 = 0}, silver = {coin1 = 2, coin2 = 16, coin3 = 0, coin4 = 0}, gold = {coin1 = 4, coin2 = 22, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 10, coin3 = 0, coin4 = 0 }, silver = { coin1 = 2, coin2 = 16, coin3 = 0, coin4 = 0 }, gold = { coin1 = 4, coin2 = 22, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "meat" },
+		tags = { "salty" },
 		hunger = 150.0,
 		sanity = 0.0,
 		health = 0.0,
@@ -1307,18 +1307,18 @@ local preparedFoods = {
 	shooter_sandwich = {
 		test = function(cooker, names, tags)
 			return (tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and TotalCount(names) == 4) or
+				(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 4) or
+				(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 6, coin2 = 10, coin3 = 0, coin4 = 0}, silver = {coin1 = 2, coin2 = 16, coin3 = 0, coin4 = 0}, gold = {coin1 = 4, coin2 = 22, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"meat", "bread"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 10, coin3 = 0, coin4 = 0 }, silver = { coin1 = 2, coin2 = 16, coin3 = 0, coin4 = 0 }, gold = { coin1 = 4, coin2 = 22, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "meat", "bread" },
+		tags = { "salty" },
 		hunger = 70.0,
 		sanity = 0.0,
 		health = 5.0,
@@ -1328,16 +1328,16 @@ local preparedFoods = {
 	bacon_wrapped_meat = {
 		test = function(cooker, names, tags)
 			return (tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.smallmeat and tags.smallmeat >= 2 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.smallmeat and tags.smallmeat >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.smallmeat and tags.smallmeat >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.smallmeat and tags.smallmeat >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.smallmeat and tags.smallmeat >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 8, coin2 = 10, coin3 = 0, coin4 = 0}, silver = {coin1 = 4, coin2 = 16, coin3 = 0, coin4 = 0}, gold = {coin1 = 6, coin2 = 22, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 10, coin3 = 0, coin4 = 0 }, silver = { coin1 = 4, coin2 = 16, coin3 = 0, coin4 = 0 }, gold = { coin1 = 6, coin2 = 22, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "meat" },
+		tags = { "salty" },
 		hunger = 160.0,
 		sanity = -5.0,
 		health = -10.0,
@@ -1347,18 +1347,18 @@ local preparedFoods = {
 	crab_roll = {
 		test = function(cooker, names, tags)
 			return (tags.crab and tags.crab >= 2 and tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and names.onion and names.onion >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 2 and tags.flour and tags.flour >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 2 and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 4)
+				(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and names.foliage and names.foliage >= 1 and names.onion and names.onion >= 1 and TotalCount(names) == 4) or
+				(tags.crab and tags.crab >= 2 and tags.flour and tags.flour >= 1 and names.tomato and names.tomato >= 1 and TotalCount(names) == 4) or
+				(tags.crab and tags.crab >= 2 and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 13,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 4, coin2 = 11, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 16, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 22, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"bread"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 11, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 16, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 22, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "bread" },
+		tags = { "salty" },
 		hunger = 20,
 		sanity = 5,
 		health = 5,
@@ -1368,18 +1368,18 @@ local preparedFoods = {
 	meat_wellington = {
 		test = function(cooker, names, tags)
 			return (tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 4) or
-			(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and TotalCount(names) == 4) or
+				(tags.bigmeat and tags.bigmeat >= 2 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 4) or
+				(tags.bigmeat and tags.bigmeat >= 1 and (not tags.monster or tags.monster <= 1) and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 4, coin2 = 10, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 16, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 22, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"meat"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 10, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 16, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 22, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "meat" },
+		tags = { "salty" },
 		hunger = 20,
 		sanity = 5,
 		health = 5,
@@ -1389,18 +1389,18 @@ local preparedFoods = {
 	crab_ravioli = {
 		test = function(cooker, names, tags)
 			return (tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and tags.mushroom and tags.mushroom >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and tags.dairy and tags.dairy >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.onion and names.onion >= 1 and TotalCount(names) == 4) or
-			(tags.crab and tags.crab >= 2 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and TotalCount(names) == 4)
+				(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and names.garlic and names.garlic >= 1 and tags.dairy and tags.dairy >= 1 and TotalCount(names) == 4) or
+				(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4) or
+				(tags.crab and tags.crab >= 1 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and names.onion and names.onion >= 1 and TotalCount(names) == 4) or
+				(tags.crab and tags.crab >= 2 and tags.flour and tags.flour >= 1 and tags.dairy and tags.dairy >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 13,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 6, coin2 = 11, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"cheese", "pasta"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 11, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "cheese", "pasta" },
+		tags = { "salty" },
 		hunger = 60.0,
 		sanity = 15.0,
 		health = 6.0,
@@ -1410,16 +1410,16 @@ local preparedFoods = {
 	caramel_cube = {
 		test = function(cooker, names, tags)
 			return (tags.dairy and tags.dairy >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 3) or
-			(tags.dairy and tags.dairy >= 1 and names.syrup and names.syrup >= 2 and TotalCount(names) == 3) or
-			(tags.dairy and tags.dairy >= 2 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4)
+				(tags.dairy and tags.dairy >= 1 and names.syrup and names.syrup >= 2 and TotalCount(names) == 3) or
+				(tags.dairy and tags.dairy >= 2 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 2, coin2 = 10, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 10, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 10, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"sweet"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 2, coin2 = 10, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 10, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 10, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "sweet" },
+		tags = { "salty" },
 		hunger = 25.0,
 		sanity = 30.0,
 		health = -5.0,
@@ -1433,10 +1433,10 @@ local preparedFoods = {
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 4, coin2 = 10, coin3 = 0, coin4 = 0}, silver = {coin1 = 4, coin2 = 11, coin3 = 0, coin4 = 0}, gold = {coin1 = 6, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"sweet", "bread"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 4, coin2 = 10, coin3 = 0, coin4 = 0 }, silver = { coin1 = 4, coin2 = 11, coin3 = 0, coin4 = 0 }, gold = { coin1 = 6, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "sweet", "bread" },
+		tags = { "salty" },
 		hunger = 20,
 		sanity = 5,
 		health = 5,
@@ -1450,10 +1450,10 @@ local preparedFoods = {
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 6, coin2 = 10, coin3 = 0, coin4 = 0}, silver = {coin1 = 6, coin2 = 11, coin3 = 0, coin4 = 0}, gold = {coin1 = 8, coin2 = 12, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"sweet"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 6, coin2 = 10, coin3 = 0, coin4 = 0 }, silver = { coin1 = 6, coin2 = 11, coin3 = 0, coin4 = 0 }, gold = { coin1 = 8, coin2 = 12, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "sweet" },
+		tags = { "salty" },
 		hunger = 20.0,
 		sanity = 35.0,
 		health = -6.0,
@@ -1467,10 +1467,10 @@ local preparedFoods = {
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 2, coin2 = 11, coin3 = 0, coin4 = 0}, silver = {coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0}, gold = {coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0}},
-		cookers = {"oven"},
-		cravings = {"cheese", "sweet"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 2, coin2 = 11, coin3 = 0, coin4 = 0 }, silver = { coin1 = 3, coin2 = 15, coin3 = 0, coin4 = 0 }, gold = { coin1 = 5, coin2 = 20, coin3 = 0, coin4 = 0 } },
+		cookers = { "oven" },
+		cravings = { "cheese", "sweet" },
+		tags = { "salty" },
 		hunger = 25.0,
 		sanity = 35.0,
 		health = -8.0,
@@ -1480,16 +1480,16 @@ local preparedFoods = {
 	potato_pancakes = {
 		test = function(cooker, names, tags)
 			return (names.potato and names.potato >= 3 and TotalCount(names) == 3) or
-			(names.onion and names.onion >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
-			(names.onion and names.onion >= 1 and names.potato and names.potato >= 3 and TotalCount(names) == 4)
+				(names.onion and names.onion >= 1 and names.potato and names.potato >= 2 and TotalCount(names) == 3) or
+				(names.onion and names.onion >= 1 and names.potato and names.potato >= 3 and TotalCount(names) == 4)
 		end,
 		platetype = "plate",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 8, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"snack", "veggie"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 8, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 4, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 6, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "snack", "veggie" },
+		tags = { "salty" },
 		hunger = 50.0,
 		sanity = 10.0,
 		health = 50.0,
@@ -1499,17 +1499,17 @@ local preparedFoods = {
 	potato_soup = {
 		test = function(cooker, names, tags)
 			return (names.potato and names.potato >= 3 and TotalCount(names) == 3) or
-			(names.potato and names.potato >= 4 and TotalCount(names) == 4) or
-			(names.potato and names.potato >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
-			(names.potato and names.potato >= 3 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
+				(names.potato and names.potato >= 4 and TotalCount(names) == 4) or
+				(names.potato and names.potato >= 2 and tags.spice and tags.spice >= 1 and TotalCount(names) == 3) or
+				(names.potato and names.potato >= 3 and tags.spice and tags.spice >= 1 and TotalCount(names) == 4)
 		end,
 		platetype = "bowl",
 		priority = 11,
 		foodtype = FOODTYPE.VEGGIE,
-		reward = {generic = {coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"pot"},
-		cravings = {"veggie", "snack", "soup"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "pot" },
+		cravings = { "veggie", "snack", "soup" },
+		tags = { "salty" },
 		hunger = 35.0,
 		sanity = 5.0,
 		health = 15.0,
@@ -1519,18 +1519,18 @@ local preparedFoods = {
 	fishball_skewers = {
 		test = function(cooker, names, tags)
 			return (tags.fish and tags.fish >= 2 and names.twigs and names.twigs >= 1 and TotalCount(names) == 3) or
-			(names.potato and names.potato >= 1 and tags.fish and tags.fish >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 3) or
-			(names.carrot and names.carrot >= 1 and tags.fish and tags.fish >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 3) or
-			(names.onion and names.onion >= 1 and tags.fish and tags.fish >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 3) or
-			(tags.fish and tags.fish >= 1 and names.turnip and names.turnip >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 3)
+				(names.potato and names.potato >= 1 and tags.fish and tags.fish >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 3) or
+				(names.carrot and names.carrot >= 1 and tags.fish and tags.fish >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 3) or
+				(names.onion and names.onion >= 1 and tags.fish and tags.fish >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 3) or
+				(tags.fish and tags.fish >= 1 and names.turnip and names.turnip >= 1 and names.twigs and names.twigs >= 1 and TotalCount(names) == 3)
 		end,
 		platetype = "plate",
 		priority = 12,
 		foodtype = FOODTYPE.MEAT,
-		reward = {generic = {coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0}, silver = {coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0}, gold = {coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0}},
-		cookers = {"grill"},
-		cravings = {"fish", "snack"},
-		tags = {"salty"},
+		reward = { generic = { coin1 = 10, coin2 = 0, coin3 = 0, coin4 = 0 }, silver = { coin1 = 7, coin2 = 1, coin3 = 0, coin4 = 0 }, gold = { coin1 = 9, coin2 = 2, coin3 = 0, coin4 = 0 } },
+		cookers = { "grill" },
+		cravings = { "fish", "snack" },
+		tags = { "salty" },
 		hunger = 35.0,
 		sanity = 3.0,
 		health = 25.0,
@@ -1539,7 +1539,7 @@ local preparedFoods = {
 	},
 }
 
-for k,v in pairs(preparedFoods) do
+for k, v in pairs(preparedFoods) do
 	v.name = k
 	v.weight = v.weight or 1
 	v.priority = v.priority or 0

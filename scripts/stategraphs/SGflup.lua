@@ -1,6 +1,6 @@
 require("stategraphs/commonstates")
 
-local	    FLUP_MELEEATTACK_RANGE = 2
+local FLUP_MELEEATTACK_RANGE = 2
 
 local actionhandlers =
 {
@@ -9,8 +9,8 @@ local actionhandlers =
 }
 
 local function doattackfn(inst, data)
-	local target = GetClosestInstWithTag("player", inst, 2)
-	local target2 = GetClosestInstWithTag("player", inst, 6)	
+    local target = GetClosestInstWithTag("player", inst, 2)
+    local target2 = GetClosestInstWithTag("player", inst, 6)
     if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
         if inst.sg:HasStateTag("ambusher") then
             inst.sg:GoToState("hidden_ambush_attack_pre")
@@ -22,7 +22,7 @@ local function doattackfn(inst, data)
     end
 end
 
-local events=
+local events =
 {
     EventHandler("doattack", doattackfn),
 
@@ -50,8 +50,10 @@ local events=
     EventHandler("locomote",
         function(inst)
             if not (inst.sg:HasStateTag("idle") and not
-                inst.sg:HasStateTag("moving")) or
-                inst.sg:HasStateTag("jumping") then return end
+                    inst.sg:HasStateTag("moving")) or
+                inst.sg:HasStateTag("jumping") then
+                return
+            end
 
             if not inst.components.locomotor:WantsToMoveForward() then
                 if not inst.sg:HasStateTag("idle") then
@@ -59,11 +61,11 @@ local events=
                 end
             else
                 if not inst.sg:HasStateTag("hopping") then
-					if inst.components.locomotor:WantsToRun() then
-						inst.sg:GoToState("aggressivehop")
-					else
-						inst.sg:GoToState("hop")
-					end
+                    if inst.components.locomotor:WantsToRun() then
+                        inst.sg:GoToState("aggressivehop")
+                    else
+                        inst.sg:GoToState("hop")
+                    end
                 end
             end
         end),
@@ -75,12 +77,12 @@ local events=
     end)
 }
 
-local states=
+local states =
 {
-    State{
+    State {
 
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
         onenter = function(inst, playanim)
             inst.Physics:Stop()
             if playanim then
@@ -89,45 +91,45 @@ local states=
             else
                 inst.AnimState:PlayAnimation("idle", true)
             end
-            inst.sg:SetTimeout(1*math.random()+.5)
+            inst.sg:SetTimeout(1 * math.random() + .5)
         end,
 
-        ontimeout= function(inst)
+        ontimeout = function(inst)
             if inst.components.locomotor:WantsToMoveForward() then
                 inst.sg:GoToState("hop")
             end
         end,
     },
 
-    State{
+    State {
         name = "action",
         onenter = function(inst, playanim)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("idle", true)
             inst:PerformBufferedAction()
         end,
-        events=
+        events =
         {
-            EventHandler("animover", function (inst)
+            EventHandler("animover", function(inst)
                 inst.sg:GoToState("idle")
             end),
         }
     },
 
-    State{
+    State {
         name = "aggressivehop",
-        tags = {"moving", "canrotate", "hopping", "running"},
+        tags = { "moving", "canrotate", "hopping", "running" },
 
-        timeline=
+        timeline =
         {
-            TimeEvent(4*FRAMES, function(inst)
+            TimeEvent(4 * FRAMES, function(inst)
                 inst.components.locomotor:RunForward()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/jump")
-            end ),
-            TimeEvent(15*FRAMES, function(inst)
+            end),
+            TimeEvent(15 * FRAMES, function(inst)
                 inst.Physics:Stop()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/land")
-            end ),
+            end),
         },
 
         onenter = function(inst)
@@ -137,15 +139,15 @@ local states=
             inst.AnimState:PushAnimation("jump_pst", false)
         end,
 
-        events=
+        events =
         {
-            EventHandler("animqueueover", function (inst) inst.sg:GoToState("idle") end),
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "hop",
-        tags = {"moving", "canrotate", "hopping"},
+        tags = { "moving", "canrotate", "hopping" },
 
 
         onenter = function(inst)
@@ -155,27 +157,27 @@ local states=
             inst.AnimState:PushAnimation("jump_pst", false)
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(4*FRAMES, function(inst)
+            TimeEvent(4 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/jump")
                 inst.components.locomotor:WalkForward()
-            end ),
-            TimeEvent(15*FRAMES, function(inst)
+            end),
+            TimeEvent(15 * FRAMES, function(inst)
                 inst.Physics:Stop()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/land")
-            end ),
+            end),
         },
 
-        events=
+        events =
         {
-            EventHandler("animqueueover", function (inst) inst.sg:GoToState("idle") end),
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "attack",
-        tags = {"attack"},
+        tags = { "attack" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
@@ -184,24 +186,24 @@ local states=
             inst.AnimState:PushAnimation("atk", false)
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/attack") end),
-            TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack() end),
+            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/attack") end),
+            TimeEvent(16 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
         },
 
-        events=
+        events =
         {
             EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "fall",
-        tags = {"busy"},
+        tags = { "busy" },
         onenter = function(inst)
-			inst.Physics:SetDamping(0)
-            inst.Physics:SetMotorVel(0,-20+math.random()*10,0)
+            inst.Physics:SetDamping(0)
+            inst.Physics:SetMotorVel(0, -20 + math.random() * 10, 0)
             inst.AnimState:PlayAnimation("fall_idle", true)
             inst.DynamicShadow:Enable(false)
             ChangeToInventoryPhysics(inst)
@@ -210,16 +212,16 @@ local states=
         onupdate = function(inst)
             local pt = Point(inst.Transform:GetWorldPosition())
             if pt.y < 2 then
-				inst.Physics:SetMotorVel(0,0,0)
+                inst.Physics:SetMotorVel(0, 0, 0)
             end
 
             if pt.y <= .1 then
                 pt.y = 0
 
                 inst.Physics:Stop()
-				inst.Physics:SetDamping(5)
-                inst.Physics:Teleport(pt.x,pt.y,pt.z)
-	            inst.DynamicShadow:Enable(true)
+                inst.Physics:SetDamping(5)
+                inst.Physics:Teleport(pt.x, pt.y, pt.z)
+                inst.DynamicShadow:Enable(true)
                 ChangeToCharacterPhysics(inst)
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/land")
                 inst.sg:GoToState("idle", "jump_pst")
@@ -233,9 +235,9 @@ local states=
         end,
     },
 
-    State{
+    State {
         name = "death",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/death")
@@ -246,9 +248,9 @@ local states=
         end,
     },
 
-    State{
+    State {
         name = "hide_pre",
-        tags = {"ambusher", "idle", "canrotate"},
+        tags = { "ambusher", "idle", "canrotate" },
 
         onenter = function(inst)
             inst.DynamicShadow:Enable(false)
@@ -269,15 +271,15 @@ local states=
         },
     },
 
-    State{
+    State {
         name = "hide_loop",
-        tags = {"idle", "ambusher", "invisible"},
+        tags = { "idle", "ambusher", "invisible" },
 
         onenter = function(inst)
             inst.DynamicShadow:Enable(false)
             ChangeToInventoryPhysics(inst)
             inst.Physics:Stop()
---            inst:Hide()
+            --            inst:Hide()
             inst.sg:SetTimeout(math.random() * 5 + 5)
         end,
 
@@ -292,9 +294,9 @@ local states=
         end,
     },
 
-    State{
+    State {
         name = "look_pre",
-        tags = {"ambusher", "invisible"},
+        tags = { "ambusher", "invisible" },
 
         onenter = function(inst)
             inst.DynamicShadow:Enable(false)
@@ -315,22 +317,22 @@ local states=
         },
     },
 
-    State{
+    State {
         name = "look_loop",
 
-        tags = {"ambusher", "invisible"},
+        tags = { "ambusher", "invisible" },
 
         onenter = function(inst)
             inst.DynamicShadow:Enable(false)
             ChangeToInventoryPhysics(inst)
             inst.Physics:Stop()
             local animnum = 1 --math.random(1,2)
-            inst.AnimState:PlayAnimation("look_loop"..animnum, true)
+            inst.AnimState:PlayAnimation("look_loop" .. animnum, true)
 
-            inst.blinktask = inst:DoTaskInTime(8*FRAMES, function()
+            inst.blinktask = inst:DoTaskInTime(8 * FRAMES, function()
                 inst.blinktask:Cancel()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/blink")
-                inst.blinktask = inst:DoPeriodicTask(59*FRAMES, function()
+                inst.blinktask = inst:DoPeriodicTask(59 * FRAMES, function()
                     inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/blink")
                 end)
             end)
@@ -353,9 +355,9 @@ local states=
         end,
     },
 
-    State{
+    State {
         name = "look_pst",
-        tags = {"ambusher", "invisible"},
+        tags = { "ambusher", "invisible" },
 
         onenter = function(inst)
             inst.DynamicShadow:Enable(false)
@@ -375,9 +377,9 @@ local states=
         },
     },
 
-    State{
+    State {
         name = "ground_pre",
-        tags = {"ambusher", "invisible", "idle"},
+        tags = { "ambusher", "invisible", "idle" },
 
         onenter = function(inst)
             inst.DynamicShadow:Enable(false)
@@ -397,9 +399,9 @@ local states=
         },
     },
 
-    State{
+    State {
         name = "ground_loop",
-        tags = {"ambusher", "invisible", "idle"},
+        tags = { "ambusher", "invisible", "idle" },
 
         onenter = function(inst)
             inst.DynamicShadow:Enable(false)
@@ -419,9 +421,9 @@ local states=
         end,
     },
 
-    State{
+    State {
         name = "ground_pst",
-        tags = {"ambusher", "invisible", "idle"},
+        tags = { "ambusher", "invisible", "idle" },
 
         onenter = function(inst)
             inst.DynamicShadow:Enable(false)
@@ -441,9 +443,9 @@ local states=
         },
     },
 
-    State{
+    State {
         name = "hidden_ambush_attack_pre",
-        tags = {"attack", "canrotate", "busy", "jumping"},
+        tags = { "attack", "canrotate", "busy", "jumping" },
 
         onenter = function(inst, cb)
             inst.DynamicShadow:Enable(false)
@@ -457,30 +459,30 @@ local states=
             ChangeToCharacterPhysics(inst)
         end,
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("ambush_attack") end),
         },
     },
 
-    State{
+    State {
         name = "ambush_attack_pre",
-        tags = {"attack", "canrotate", "busy", "jumping"},
+        tags = { "attack", "canrotate", "busy", "jumping" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("jump_atk_pre")
         end,
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("ambush_attack") end),
         },
     },
 
-    State{
+    State {
         name = "ambush_attack",
-        tags = {"attack", "canrotate", "busy", "jumping"},
+        tags = { "attack", "canrotate", "busy", "jumping" },
 
         onenter = function(inst, target)
             inst.components.locomotor:Stop()
@@ -498,13 +500,13 @@ local states=
 
         timeline =
         {
-            TimeEvent(0*FRAMES, function(inst) 
-                inst.Physics:SetMotorVelOverride(10,0,0)
+            TimeEvent(0 * FRAMES, function(inst)
+                inst.Physics:SetMotorVelOverride(10, 0, 0)
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/jump")
             end),
-            TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/attack") end),
-            TimeEvent(10*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
-            TimeEvent(17*FRAMES,
+            TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/attack") end),
+            TimeEvent(10 * FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+            TimeEvent(17 * FRAMES,
                 function(inst)
                     inst.Physics:ClearMotorVelOverride()
                     inst.components.locomotor:Stop()
@@ -512,15 +514,15 @@ local states=
                 end),
         },
 
-        events=
+        events =
         {
             EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "hit",
-        tags = {"busy", "hit", "canrotate"},
+        tags = { "busy", "hit", "canrotate" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
@@ -528,17 +530,17 @@ local states=
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/hurt")
         end,
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "sleep_hidden",
-        tags = {"ambusher", "busy", "sleeping"},
-        
-        onenter = function(inst) 
+        tags = { "ambusher", "busy", "sleeping" },
+
+        onenter = function(inst)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("look_pst")
             inst.DynamicShadow:Enable(false)
@@ -548,18 +550,18 @@ local states=
             inst.DynamicShadow:Enable(true)
         end,
 
-        events=
+        events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("sleeping_hidden") end ),        
+            EventHandler("animover", function(inst) inst.sg:GoToState("sleeping_hidden") end),
             EventHandler("onwakeup", function(inst) inst.sg:GoToState("wake_hidden") end),
         },
     },
 
-    State{
-            
+    State {
+
         name = "sleeping_hidden",
-        tags = {"ambusher", "busy", "sleeping"},
-        
+        tags = { "ambusher", "busy", "sleeping" },
+
         onenter = function(inst)
             inst.DynamicShadow:Enable(false)
         end,
@@ -567,19 +569,19 @@ local states=
         onexit = function(inst)
             inst.DynamicShadow:Enable(true)
         end,
-        events=
-        {   
-            EventHandler("animover", function(inst) inst.sg:GoToState("sleeping_hidden") end ),        
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("sleeping_hidden") end),
             EventHandler("onwakeup", function(inst) inst.sg:GoToState("wake_hidden") end),
         },
-    },       
+    },
 
-    State{
-            
+    State {
+
         name = "wake_hidden",
-        tags = {"ambusher", "busy", "waking"},
-        
-        onenter = function(inst) 
+        tags = { "ambusher", "busy", "waking" },
+
+        onenter = function(inst)
             inst.components.locomotor:StopMoving()
             if inst.components.sleeper and inst.components.sleeper:IsAsleep() then
                 inst.components.sleeper:WakeUp()
@@ -591,17 +593,18 @@ local states=
             inst.DynamicShadow:Enable(true)
         end,
 
-        events=
-        {   
-            EventHandler("animover", function(inst) inst.sg:GoToState("ground_pre") end ),        
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("ground_pre") end),
         },
     },
 }
 
 CommonStates.AddSleepStates(states,
-{
-    sleeptimeline = {TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/flup/sleep") end)},    
-})
+    {
+        sleeptimeline = { TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound(
+            "dontstarve_DLC002/creatures/flup/sleep") end) },
+    })
 
 CommonStates.AddFrozenStates(states)
 

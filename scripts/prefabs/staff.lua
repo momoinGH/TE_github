@@ -197,34 +197,34 @@ end
 require "prefabs/telebase"
 
 local function getrandomposition(caster, teleportee, target_in_ocean)
-	if target_in_ocean then
-		local pt = TheWorld.Map:FindRandomPointInOcean(20)
-		if pt ~= nil then
-			return pt
-		end
-		local from_pt = teleportee:GetPosition()
-		local offset = FindSwimmableOffset(from_pt, math.random() * 2 * PI, 90, 16)
-						or FindSwimmableOffset(from_pt, math.random() * 2 * PI, 60, 16)
-						or FindSwimmableOffset(from_pt, math.random() * 2 * PI, 30, 16)
-						or FindSwimmableOffset(from_pt, math.random() * 2 * PI, 15, 16)
-		if offset ~= nil then
-			return from_pt + offset
-		end
-		return teleportee:GetPosition()
-	else
-		local centers = {}
-		for i, node in ipairs(TheWorld.topology.nodes) do
-			if TheWorld.Map:IsPassableAtPoint(node.x, 0, node.y) and node.type ~= NODE_TYPE.SeparatedRoom then
-				table.insert(centers, {x = node.x, z = node.y})
-			end
-		end
-		if #centers > 0 then
-			local pos = centers[math.random(#centers)]
-			return Point(pos.x, 0, pos.z)
-		else
-			return caster:GetPosition()
-		end
-	end
+    if target_in_ocean then
+        local pt = TheWorld.Map:FindRandomPointInOcean(20)
+        if pt ~= nil then
+            return pt
+        end
+        local from_pt = teleportee:GetPosition()
+        local offset = FindSwimmableOffset(from_pt, math.random() * 2 * PI, 90, 16)
+            or FindSwimmableOffset(from_pt, math.random() * 2 * PI, 60, 16)
+            or FindSwimmableOffset(from_pt, math.random() * 2 * PI, 30, 16)
+            or FindSwimmableOffset(from_pt, math.random() * 2 * PI, 15, 16)
+        if offset ~= nil then
+            return from_pt + offset
+        end
+        return teleportee:GetPosition()
+    else
+        local centers = {}
+        for i, node in ipairs(TheWorld.topology.nodes) do
+            if TheWorld.Map:IsPassableAtPoint(node.x, 0, node.y) and node.type ~= NODE_TYPE.SeparatedRoom then
+                table.insert(centers, { x = node.x, z = node.y })
+            end
+        end
+        if #centers > 0 then
+            local pos = centers[math.random(#centers)]
+            return Point(pos.x, 0, pos.z)
+        else
+            return caster:GetPosition()
+        end
+    end
 end
 
 local function teleport_end(teleportee, locpos, loctarget)
@@ -286,17 +286,17 @@ local function teleport_start(teleportee, staff, caster, loctarget, target_in_oc
     local ground = TheWorld
 
     --V2C: Gotta do this RIGHT AWAY in case anything happens to loctarget or caster
-	local locpos
-	if not no_teleport then
-		locpos = (teleportee.components.teleportedoverride ~= nil and teleportee.components.teleportedoverride:GetDestPosition())
-			or (loctarget == nil and getrandomposition(caster, teleportee, target_in_ocean))
-			or (loctarget.teletopos ~= nil and loctarget:teletopos())
-			or loctarget:GetPosition()
+    local locpos
+    if not no_teleport then
+        locpos = (teleportee.components.teleportedoverride ~= nil and teleportee.components.teleportedoverride:GetDestPosition())
+            or (loctarget == nil and getrandomposition(caster, teleportee, target_in_ocean))
+            or (loctarget.teletopos ~= nil and loctarget:teletopos())
+            or loctarget:GetPosition()
 
-		if teleportee.components.locomotor ~= nil then
-			teleportee.components.locomotor:StopMoving()
-		end
-	end
+        if teleportee.components.locomotor ~= nil then
+            teleportee.components.locomotor:StopMoving()
+        end
+    end
 
     staff.components.finiteuses:Use(1)
 
@@ -306,22 +306,22 @@ local function teleport_start(teleportee, staff, caster, loctarget, target_in_oc
         return
     end
 
-	local is_teleporting_player
-	if not no_teleport then
-		if teleportee:HasTag("player") then
-			is_teleporting_player = true
-			teleportee.sg:GoToState("forcetele")
-			teleportee.mynetvarCameraMode:set(6)				
-		else
-			if teleportee.components.health ~= nil then
-				teleportee.components.health:SetInvincible(true)
-			end
-			if teleportee.DynamicShadow ~= nil then
-				teleportee.DynamicShadow:Enable(false)
-			end
-			teleportee:Hide()
-		end
-	end
+    local is_teleporting_player
+    if not no_teleport then
+        if teleportee:HasTag("player") then
+            is_teleporting_player = true
+            teleportee.sg:GoToState("forcetele")
+            teleportee.mynetvarCameraMode:set(6)
+        else
+            if teleportee.components.health ~= nil then
+                teleportee.components.health:SetInvincible(true)
+            end
+            if teleportee.DynamicShadow ~= nil then
+                teleportee.DynamicShadow:Enable(false)
+            end
+            teleportee:Hide()
+        end
+    end
 
     --#v2c hacky way to prevent lightning from igniting us
     local preventburning = teleportee.components.burnable ~= nil and not teleportee.components.burnable.burning
@@ -343,76 +343,78 @@ local function teleport_start(teleportee, staff, caster, loctarget, target_in_oc
 
     ground:PushEvent("ms_deltamoisture", TUNING.TELESTAFF_MOISTURE)
 
-if caster.components.driver then
-local barcoinv = caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
-if barcoinv and barcoinv.prefab == caster.components.driver.vehicle.prefab  then 
-local consumo = SpawnPrefab(caster.components.driver.vehicle.prefab)
-consumo.Transform:SetPosition(caster.components.driver.vehicle:GetPosition():Get())
-consumo.components.finiteuses.current = barcoinv.components.finiteuses.current
--------------------------transfere o conteudo do barco inventario para o barco do criado---------------------------------
-if barcoinv.components.container then
-local sailslot = barcoinv.components.container:GetItemInSlot(1)
-if sailslot then
-consumo.components.container:GiveItem(sailslot, 1)
-end
+    if caster.components.driver then
+        local barcoinv = caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
+        if barcoinv and barcoinv.prefab == caster.components.driver.vehicle.prefab then
+            local consumo = SpawnPrefab(caster.components.driver.vehicle.prefab)
+            consumo.Transform:SetPosition(caster.components.driver.vehicle:GetPosition():Get())
+            consumo.components.finiteuses.current = barcoinv.components.finiteuses.current
+            -------------------------transfere o conteudo do barco inventario para o barco do criado---------------------------------
+            if barcoinv.components.container then
+                local sailslot = barcoinv.components.container:GetItemInSlot(1)
+                if sailslot then
+                    consumo.components.container:GiveItem(sailslot, 1)
+                end
 
-local luzslot = barcoinv.components.container:GetItemInSlot(2)
-if luzslot and luzslot.prefab == "quackeringram" then luzslot.navio1 = nil end
-if luzslot then
-consumo.components.container:GiveItem(luzslot, 2)
-end
+                local luzslot = barcoinv.components.container:GetItemInSlot(2)
+                if luzslot and luzslot.prefab == "quackeringram" then luzslot.navio1 = nil end
+                if luzslot then
+                    consumo.components.container:GiveItem(luzslot, 2)
+                end
 
-local cargoslot1 = barcoinv.components.container:GetItemInSlot(3)
-if cargoslot1 then
-consumo.components.container:GiveItem(cargoslot1, 3)
-end
+                local cargoslot1 = barcoinv.components.container:GetItemInSlot(3)
+                if cargoslot1 then
+                    consumo.components.container:GiveItem(cargoslot1, 3)
+                end
 
-local cargoslot2 = barcoinv.components.container:GetItemInSlot(4)
-if cargoslot2 then
-consumo.components.container:GiveItem(cargoslot2, 4)
-end
+                local cargoslot2 = barcoinv.components.container:GetItemInSlot(4)
+                if cargoslot2 then
+                    consumo.components.container:GiveItem(cargoslot2, 4)
+                end
 
-local cargoslot3 = barcoinv.components.container:GetItemInSlot(5)
-if cargoslot3 then
-consumo.components.container:GiveItem(cargoslot3, 5)
-end
+                local cargoslot3 = barcoinv.components.container:GetItemInSlot(5)
+                if cargoslot3 then
+                    consumo.components.container:GiveItem(cargoslot3, 5)
+                end
 
-local cargoslot4 = barcoinv.components.container:GetItemInSlot(6)
-if cargoslot4 then
-consumo.components.container:GiveItem(cargoslot4, 6)
-end
+                local cargoslot4 = barcoinv.components.container:GetItemInSlot(6)
+                if cargoslot4 then
+                    consumo.components.container:GiveItem(cargoslot4, 6)
+                end
 
-local cargoslot5 = barcoinv.components.container:GetItemInSlot(7)
-if cargoslot5 then
-consumo.components.container:GiveItem(cargoslot5, 7)
-end
+                local cargoslot5 = barcoinv.components.container:GetItemInSlot(7)
+                if cargoslot5 then
+                    consumo.components.container:GiveItem(cargoslot5, 7)
+                end
 
-local cargoslot6 = barcoinv.components.container:GetItemInSlot(8)
-if cargoslot6 then
-consumo.components.container:GiveItem(cargoslot6, 8)
-end end
-----------------------------------------------------------------------------------------------------------------------
-barcoinv:Remove()
-end
-caster.components.driver.vehicle:Remove()
-caster:RemoveComponent("rowboatwakespawner")
-if caster.components.drownable ~= nil then caster.components.drownable.enabled = true end
-caster:RemoveComponent("driver")
-caster:RemoveTag("sail")
-caster:RemoveTag("surf")
-caster:RemoveTag("aquatic")
-caster.AnimState:SetLayer(LAYER_WORLD)
-caster.AnimState:SetSortOrder(0)
-if caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO):Remove() end
-end	
+                local cargoslot6 = barcoinv.components.container:GetItemInSlot(8)
+                if cargoslot6 then
+                    consumo.components.container:GiveItem(cargoslot6, 8)
+                end
+            end
+            ----------------------------------------------------------------------------------------------------------------------
+            barcoinv:Remove()
+        end
+        caster.components.driver.vehicle:Remove()
+        caster:RemoveComponent("rowboatwakespawner")
+        if caster.components.drownable ~= nil then caster.components.drownable.enabled = true end
+        caster:RemoveComponent("driver")
+        caster:RemoveTag("sail")
+        caster:RemoveTag("surf")
+        caster:RemoveTag("aquatic")
+        caster.AnimState:SetLayer(LAYER_WORLD)
+        caster.AnimState:SetSortOrder(0)
+        if caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then caster.components.inventory
+                :GetEquippedItem(EQUIPSLOTS.BARCO):Remove() end
+    end
 
-	if not no_teleport then
-		if is_teleporting_player then
-			teleportee.sg.statemem.teleport_task = teleportee:DoTaskInTime(3, teleport_continue, locpos, loctarget, staff)
-		else
-			teleport_continue(teleportee, locpos, loctarget, staff)
-		end
-	end
+    if not no_teleport then
+        if is_teleporting_player then
+            teleportee.sg.statemem.teleport_task = teleportee:DoTaskInTime(3, teleport_continue, locpos, loctarget, staff)
+        else
+            teleport_continue(teleportee, locpos, loctarget, staff)
+        end
+    end
 end
 
 local function teleport_targets_sort_fn(a, b)
@@ -422,23 +424,23 @@ end
 local TELEPORT_MUST_TAGS = { "locomotor" }
 local TELEPORT_CANT_TAGS = { "playerghost", "INLIMBO", "noteleport" }
 local function teleport_func(inst, target, pos, caster)
-	target = target or caster
+    target = target or caster
 
     local x, y, z = target.Transform:GetWorldPosition()
-	local target_in_ocean = target.components.locomotor ~= nil and target.components.locomotor:IsAquatic()
-	local no_teleport = target:HasTag("noteleport") --targetable by spell, but don't actually teleport
-	local loctarget
-	if not no_teleport then
-		loctarget = (target.components.minigame_participator ~= nil and target.components.minigame_participator:GetMinigame())
-				or (target.components.teleportedoverride ~= nil and target.components.teleportedoverride:GetDestTarget())
-				or (target.components.hitchable ~= nil and target:HasTag("hitched") and target.components.hitchable.hitched)
-				or nil
+    local target_in_ocean = target.components.locomotor ~= nil and target.components.locomotor:IsAquatic()
+    local no_teleport = target:HasTag("noteleport") --targetable by spell, but don't actually teleport
+    local loctarget
+    if not no_teleport then
+        loctarget = (target.components.minigame_participator ~= nil and target.components.minigame_participator:GetMinigame())
+            or (target.components.teleportedoverride ~= nil and target.components.teleportedoverride:GetDestTarget())
+            or (target.components.hitchable ~= nil and target:HasTag("hitched") and target.components.hitchable.hitched)
+            or nil
 
-		if loctarget == nil and not target_in_ocean then
-			loctarget = FindNearestActiveTelebase(x, y, z, nil, 1)
-		end
-	end
-	teleport_start(target, inst, caster, loctarget, target_in_ocean, no_teleport)
+        if loctarget == nil and not target_in_ocean then
+            loctarget = FindNearestActiveTelebase(x, y, z, nil, 1)
+        end
+    end
+    teleport_start(target, inst, caster, loctarget, target_in_ocean, no_teleport)
 end
 
 local function onhauntpurple(inst)
@@ -464,71 +466,73 @@ local function onblink(staff, pos, caster)
         end
     end
 
-if caster.components.driver then
-local barcoinv = caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
-if barcoinv and barcoinv.prefab == caster.components.driver.vehicle.prefab  then 
-local consumo = SpawnPrefab(caster.components.driver.vehicle.prefab)
-consumo.Transform:SetPosition(caster.components.driver.vehicle:GetPosition():Get())
-consumo.components.finiteuses.current = barcoinv.components.finiteuses.current
--------------------------transfere o conteudo do barco inventario para o barco do criado---------------------------------
-if barcoinv.components.container then
-local sailslot = barcoinv.components.container:GetItemInSlot(1)
-if sailslot then
-consumo.components.container:GiveItem(sailslot, 1)
-end
+    if caster.components.driver then
+        local barcoinv = caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
+        if barcoinv and barcoinv.prefab == caster.components.driver.vehicle.prefab then
+            local consumo = SpawnPrefab(caster.components.driver.vehicle.prefab)
+            consumo.Transform:SetPosition(caster.components.driver.vehicle:GetPosition():Get())
+            consumo.components.finiteuses.current = barcoinv.components.finiteuses.current
+            -------------------------transfere o conteudo do barco inventario para o barco do criado---------------------------------
+            if barcoinv.components.container then
+                local sailslot = barcoinv.components.container:GetItemInSlot(1)
+                if sailslot then
+                    consumo.components.container:GiveItem(sailslot, 1)
+                end
 
-local luzslot = barcoinv.components.container:GetItemInSlot(2)
-if luzslot and luzslot.prefab == "quackeringram" then luzslot.navio1 = nil end
-if luzslot then
-consumo.components.container:GiveItem(luzslot, 2)
-end
+                local luzslot = barcoinv.components.container:GetItemInSlot(2)
+                if luzslot and luzslot.prefab == "quackeringram" then luzslot.navio1 = nil end
+                if luzslot then
+                    consumo.components.container:GiveItem(luzslot, 2)
+                end
 
-local cargoslot1 = barcoinv.components.container:GetItemInSlot(3)
-if cargoslot1 then
-consumo.components.container:GiveItem(cargoslot1, 3)
-end
+                local cargoslot1 = barcoinv.components.container:GetItemInSlot(3)
+                if cargoslot1 then
+                    consumo.components.container:GiveItem(cargoslot1, 3)
+                end
 
-local cargoslot2 = barcoinv.components.container:GetItemInSlot(4)
-if cargoslot2 then
-consumo.components.container:GiveItem(cargoslot2, 4)
-end
+                local cargoslot2 = barcoinv.components.container:GetItemInSlot(4)
+                if cargoslot2 then
+                    consumo.components.container:GiveItem(cargoslot2, 4)
+                end
 
-local cargoslot3 = barcoinv.components.container:GetItemInSlot(5)
-if cargoslot3 then
-consumo.components.container:GiveItem(cargoslot3, 5)
-end
+                local cargoslot3 = barcoinv.components.container:GetItemInSlot(5)
+                if cargoslot3 then
+                    consumo.components.container:GiveItem(cargoslot3, 5)
+                end
 
-local cargoslot4 = barcoinv.components.container:GetItemInSlot(6)
-if cargoslot4 then
-consumo.components.container:GiveItem(cargoslot4, 6)
-end
+                local cargoslot4 = barcoinv.components.container:GetItemInSlot(6)
+                if cargoslot4 then
+                    consumo.components.container:GiveItem(cargoslot4, 6)
+                end
 
-local cargoslot5 = barcoinv.components.container:GetItemInSlot(7)
-if cargoslot5 then
-consumo.components.container:GiveItem(cargoslot5, 7)
-end
+                local cargoslot5 = barcoinv.components.container:GetItemInSlot(7)
+                if cargoslot5 then
+                    consumo.components.container:GiveItem(cargoslot5, 7)
+                end
 
-local cargoslot6 = barcoinv.components.container:GetItemInSlot(8)
-if cargoslot6 then
-consumo.components.container:GiveItem(cargoslot6, 8)
-end end
-----------------------------------------------------------------------------------------------------------------------
-barcoinv:Remove()
-end
-caster.components.driver.vehicle:Remove()
-caster:RemoveComponent("rowboatwakespawner")
-if caster.components.drownable ~= nil then caster.components.drownable.enabled = true end
-caster:RemoveComponent("driver")
-caster:RemoveTag("sail")
-caster:RemoveTag("surf")
-caster:RemoveTag("aquatic")
-caster.AnimState:SetLayer(LAYER_WORLD)
-caster.AnimState:SetSortOrder(0)
-if caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO):Remove() end
-end	
-	
-	
-    staff.components.finiteuses:Use(1) 
+                local cargoslot6 = barcoinv.components.container:GetItemInSlot(8)
+                if cargoslot6 then
+                    consumo.components.container:GiveItem(cargoslot6, 8)
+                end
+            end
+            ----------------------------------------------------------------------------------------------------------------------
+            barcoinv:Remove()
+        end
+        caster.components.driver.vehicle:Remove()
+        caster:RemoveComponent("rowboatwakespawner")
+        if caster.components.drownable ~= nil then caster.components.drownable.enabled = true end
+        caster:RemoveComponent("driver")
+        caster:RemoveTag("sail")
+        caster:RemoveTag("surf")
+        caster:RemoveTag("aquatic")
+        caster.AnimState:SetLayer(LAYER_WORLD)
+        caster.AnimState:SetSortOrder(0)
+        if caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then caster.components.inventory
+                :GetEquippedItem(EQUIPSLOTS.BARCO):Remove() end
+    end
+
+
+    staff.components.finiteuses:Use(1)
 end
 
 local function NoHoles(pt)
@@ -592,31 +596,31 @@ end
 
 local DESTSOUNDS =
 {
-    {   --magic
+    { --magic
         soundpath = "dontstarve/common/destroy_magic",
         ing = { "nightmarefuel", "livinglog" },
     },
-    {   --cloth
+    { --cloth
         soundpath = "dontstarve/common/destroy_clothing",
         ing = { "silk", "beefalowool" },
     },
-    {   --tool
+    { --tool
         soundpath = "dontstarve/common/destroy_tool",
         ing = { "twigs" },
     },
-    {   --gem
+    { --gem
         soundpath = "dontstarve/common/gem_shatter",
         ing = { "redgem", "bluegem", "greengem", "purplegem", "yellowgem", "orangegem" },
     },
-    {   --wood
+    { --wood
         soundpath = "dontstarve/common/destroy_wood",
         ing = { "log", "boards" },
     },
-    {   --stone
+    { --stone
         soundpath = "dontstarve/common/destroy_stone",
         ing = { "rocks", "cutstone" },
     },
-    {   --straw
+    { --straw
         soundpath = "dontstarve/common/destroy_straw",
         ing = { "cutgrass", "cutreeds" },
     },
@@ -667,7 +671,7 @@ local function SpawnLootPrefab(inst, lootprefab)
 
     loot.Transform:SetPosition(x, y, z)
 
-	loot:PushEvent("on_loot_dropped", {dropper = inst})
+    loot:PushEvent("on_loot_dropped", { dropper = inst })
 
     return loot
 end
@@ -680,7 +684,7 @@ local function destroystructure(staff, target)
     end
 
     local ingredient_percent =
-        (   (target.components.finiteuses ~= nil and target.components.finiteuses:GetPercent()) or
+        ((target.components.finiteuses ~= nil and target.components.finiteuses:GetPercent()) or
             (target.components.fueled ~= nil and target.components.inventoryitem ~= nil and target.components.fueled:GetPercent()) or
             (target.components.armor ~= nil and target.components.inventoryitem ~= nil and target.components.armor:GetPercent()) or
             1
@@ -751,7 +755,7 @@ local function destroystructure(staff, target)
         target.components.stewer:Harvest()
     end
 
-   	target:PushEvent("ondeconstructstructure", caster)
+    target:PushEvent("ondeconstructstructure", caster)
 
     if target.components.stackable ~= nil then
         --if it's stackable we only want to destroy one of them.
@@ -846,28 +850,28 @@ local function commonfn(colour, tags, hasskin, hasshadowlevel)
 
     inst.AnimState:SetBank("staffs")
     inst.AnimState:SetBuild("staffs")
-    inst.AnimState:PlayAnimation(colour.."staff")
-    inst.scrapbook_anim = colour.."staff"	
+    inst.AnimState:PlayAnimation(colour .. "staff")
+    inst.scrapbook_anim = colour .. "staff"
 
     if tags ~= nil then
         for i, v in ipairs(tags) do
             inst:AddTag(v)
         end
     end
-	
-	if hasshadowlevel then
-		--shadowlevel (from shadowlevel component) added to pristine state for optimization
-		inst:AddTag("shadowlevel")
-	end	
+
+    if hasshadowlevel then
+        --shadowlevel (from shadowlevel component) added to pristine state for optimization
+        inst:AddTag("shadowlevel")
+    end
 
     local floater_swap_data =
     {
         sym_build = "swap_staffs",
-        sym_name = "swap_"..colour.."staff",
+        sym_name = "swap_" .. colour .. "staff",
         bank = "staffs",
-        anim = colour.."staff"
+        anim = colour .. "staff"
     }
-    MakeInventoryFloatable(inst, "med", 0.1, {0.9, 0.4, 0.9}, true, -13, floater_swap_data)
+    MakeInventoryFloatable(inst, "med", 0.1, { 0.9, 0.4, 0.9 }, true, -13, floater_swap_data)
 
     inst.entity:SetPristine()
 
@@ -892,9 +896,10 @@ local function commonfn(colour, tags, hasskin, hasshadowlevel)
             local skin_build = inst:GetSkinBuild()
             if skin_build ~= nil then
                 owner:PushEvent("equipskinneditem", inst:GetSkinName())
-                owner.AnimState:OverrideItemSkinSymbol("swap_object", skin_build, "swap_"..colour.."staff", inst.GUID, "swap_staffs")
+                owner.AnimState:OverrideItemSkinSymbol("swap_object", skin_build, "swap_" .. colour .. "staff", inst
+                .GUID, "swap_staffs")
             else
-                owner.AnimState:OverrideSymbol("swap_object", "swap_staffs", "swap_"..colour.."staff")
+                owner.AnimState:OverrideSymbol("swap_object", "swap_staffs", "swap_" .. colour .. "staff")
             end
             owner.AnimState:Show("ARM_carry")
             owner.AnimState:Hide("ARM_normal")
@@ -902,17 +907,17 @@ local function commonfn(colour, tags, hasskin, hasshadowlevel)
         inst.components.equippable:SetOnUnequip(onunequip_skinned)
     else
         inst.components.equippable:SetOnEquip(function(inst, owner)
-            owner.AnimState:OverrideSymbol("swap_object", "swap_staffs", "swap_"..colour.."staff")
+            owner.AnimState:OverrideSymbol("swap_object", "swap_staffs", "swap_" .. colour .. "staff")
             owner.AnimState:Show("ARM_carry")
             owner.AnimState:Hide("ARM_normal")
         end)
         inst.components.equippable:SetOnUnequip(onunequip)
     end
-	
-	if hasshadowlevel then
-		inst:AddComponent("shadowlevel")
-		inst.components.shadowlevel:SetDefaultLevel(TUNING.STAFF_SHADOW_LEVEL)
-	end	
+
+    if hasshadowlevel then
+        inst:AddComponent("shadowlevel")
+        inst.components.shadowlevel:SetDefaultLevel(TUNING.STAFF_SHADOW_LEVEL)
+    end
 
     return inst
 end
@@ -946,7 +951,7 @@ local function red()
         anim = "redstaff"
     }
     inst.components.floater:SetBankSwapOnFloat(true, -9.5, floater_swap_data)
-    inst.components.floater:SetScale({0.85, 0.4, 0.85})
+    inst.components.floater:SetScale({ 0.85, 0.4, 0.85 })
 
     MakeHauntableLaunch(inst)
     AddHauntableCustomReaction(inst, onhauntred, true, false, true)
@@ -973,7 +978,7 @@ local function blue()
     inst.components.finiteuses:SetMaxUses(TUNING.ICESTAFF_USES)
     inst.components.finiteuses:SetUses(TUNING.ICESTAFF_USES)
 
-    inst.components.floater:SetScale({0.8, 0.4, 0.8})
+    inst.components.floater:SetScale({ 0.8, 0.4, 0.8 })
 
     MakeHauntableLaunch(inst)
     AddHauntableCustomReaction(inst, onhauntblue, true, false, true)
@@ -988,7 +993,7 @@ local function purple()
         return inst
     end
 
-    inst.fxcolour = {104/255,40/255,121/255}
+    inst.fxcolour = { 104 / 255, 40 / 255, 121 / 255 }
     inst.components.finiteuses:SetMaxUses(TUNING.TELESTAFF_USES)
     inst.components.finiteuses:SetUses(TUNING.TELESTAFF_USES)
     inst:AddComponent("spellcaster")
@@ -997,7 +1002,7 @@ local function purple()
     inst.components.spellcaster.canusefrominventory = true
     inst.components.spellcaster.canonlyuseonlocomotorspvp = true
 
-    inst.components.floater:SetScale({0.9, 0.4, 0.9})
+    inst.components.floater:SetScale({ 0.9, 0.4, 0.9 })
 
     MakeHauntableLaunch(inst)
     AddHauntableCustomReaction(inst, onhauntpurple, true, false, true)
@@ -1017,7 +1022,7 @@ local function yellow()
         return inst
     end
 
-    inst.fxcolour = {223/255, 208/255, 69/255}
+    inst.fxcolour = { 223 / 255, 208 / 255, 69 / 255 }
     inst.castsound = "dontstarve/common/staffteleport"
 
     inst:AddComponent("spellcaster")
@@ -1050,7 +1055,7 @@ local function green()
         return inst
     end
 
-    inst.fxcolour = {51/255,153/255,51/255}
+    inst.fxcolour = { 51 / 255, 153 / 255, 51 / 255 }
     inst:AddComponent("spellcaster")
     inst.components.spellcaster.canuseontargets = true
     inst.components.spellcaster.canonlyuseonrecipes = true
@@ -1077,7 +1082,7 @@ local function orange()
         return inst
     end
 
-    inst.fxcolour = {1, 145/255, 0}
+    inst.fxcolour = { 1, 145 / 255, 0 }
     inst.castsound = "dontstarve/common/staffteleport"
 
     inst:AddComponent("blinkstaff")
@@ -1111,7 +1116,7 @@ local function opal()
         return inst
     end
 
-    inst.fxcolour = {64/255, 64/255, 208/255}
+    inst.fxcolour = { 64 / 255, 64 / 255, 208 / 255 }
     inst.castsound = "dontstarve/common/staffteleport"
 
     inst:AddComponent("spellcaster")

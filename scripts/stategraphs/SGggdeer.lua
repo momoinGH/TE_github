@@ -82,7 +82,7 @@ local events =
 
 local states =
 {
-    State{
+    State {
         name = "idle",
         tags = { "idle", "canrotate" },
 
@@ -130,7 +130,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "alert",
         tags = { "idle", "canrotate" },
 
@@ -143,7 +143,7 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "idle_grazing",
         tags = { "idle", "canrotate" },
 
@@ -188,7 +188,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "growantler",
         tags = { "busy" },
 
@@ -224,8 +224,8 @@ local states =
             inst:ShowAntler()
         end,
     },
-    
-    State{
+
+    State {
         name = "knockoffantler",
         tags = { "busy" },
 
@@ -246,7 +246,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "magic_pre",
         tags = { "attack", "busy", "casting" },
 
@@ -293,7 +293,9 @@ local states =
                     if inst.sg.statemem.spells == nil and inst.sg.statemem.targets == nil then
                         inst.sg:GoToState("magic_pst", { fx = inst.sg.statemem.fx })
                     else
-                        inst.sg:GoToState("magic_loop", { fx = inst.sg.statemem.fx, spells = inst.sg.statemem.spells, targets = inst.sg.statemem.targets })
+                        inst.sg:GoToState("magic_loop",
+                            { fx = inst.sg.statemem.fx, spells = inst.sg.statemem.spells, targets = inst.sg.statemem
+                            .targets })
                     end
                 end
             end),
@@ -306,7 +308,7 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "magic_loop",
         tags = { "attack", "busy", "casting" },
 
@@ -345,7 +347,7 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "magic_pst",
         tags = { "attack", "busy", "casting" },
 
@@ -415,7 +417,7 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "unshackle",
         tags = { "busy" },
 
@@ -437,8 +439,8 @@ local states =
             EventHandler("animover", function(inst)
                 if inst.AnimState:AnimDone() then
                     if inst.gem ~= nil then
-                        local player--[[, rangesq]] = inst:GetNearestPlayer()
-                        LaunchAt(SpawnPrefab(inst.gem.."gem"), inst, player, 1, 4, .5)
+                        local player --[[, rangesq]] = inst:GetNearestPlayer()
+                        LaunchAt(SpawnPrefab(inst.gem .. "gem"), inst, player, 1, 4, .5)
                     end
                     local x, y, z = inst.Transform:GetWorldPosition()
                     local rot = inst.Transform:GetRotation()
@@ -457,7 +459,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "unshackle_pst",
         tags = { "busy" },
 
@@ -486,185 +488,185 @@ local states =
 }
 
 CommonStates.AddWalkStates(states,
-{
-    starttimeline =
     {
-        TimeEvent(0, function(inst)
-            DoChainIdleSound(inst, .5)
-            DoBellIdleSound(inst, .5)
-        end),
-    },
-    walktimeline =
-    {
-        TimeEvent(0, function(inst)
-            DoFootstep(inst)
-            DoChainIdleSound(inst)
-            DoBellIdleSound(inst)
-        end),
-        TimeEvent(6 * FRAMES, DoBellIdleSound),
-        TimeEvent(7 * FRAMES, DoFootstep),
-        TimeEvent(8 * FRAMES, DoChainIdleSound),
-        TimeEvent(9 * FRAMES, DoFootstep),
-        TimeEvent(10 * FRAMES, DoChainIdleSound),
-        TimeEvent(12 * FRAMES, DoBellIdleSound),
-        TimeEvent(17 * FRAMES, function(inst)
-            DoFootstep(inst)
-            DoBellIdleSound(inst)
-        end),
-        TimeEvent(18 * FRAMES, DoChainIdleSound),
-    },
-    endtimeline =
-    {
-        TimeEvent(3 * FRAMES, function(inst)
-            DoFootstep(inst, .5)
-            DoBellIdleSound(inst, .5)
-            DoChainIdleSound(inst, .5)
-        end),
-    },
-})
-CommonStates.AddRunStates(states,
-{
-    starttimeline =
-    {
-        TimeEvent(4 * FRAMES, DoBellSound),
-        TimeEvent(5 * FRAMES, DoChainSound),
-        TimeEvent(8 * FRAMES, DoFootstepRun),
-    },
-    runtimeline =
-    {
-        TimeEvent(0, DoFootstepRun),
-        TimeEvent(3 * FRAMES, DoBellSound),
-        TimeEvent(4 * FRAMES, DoChainSound),
-        TimeEvent(14 * FRAMES, DoFootstepRun),
-    },
-    endtimeline =
-    {
-        TimeEvent(FRAMES, function(inst)
-            DoChainSound(inst)
-            DoBellSound(inst)
-        end),
-        TimeEvent(2 * FRAMES, DoFootstep),
-        TimeEvent(4 * FRAMES, DoFootstep),
-    },
-})
-CommonStates.AddCombatStates(states,
-{
-    attacktimeline =
-    {
-        TimeEvent(0, DoBellSound),
-        TimeEvent(FRAMES, function(inst)
-            DoChainSound(inst, .6)
-        end),
-        TimeEvent(3 * FRAMES, function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/swish")
-        end),
-        TimeEvent(5 * FRAMES, function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/taunt")
-        end),
-        TimeEvent(11 * FRAMES, DoBellSound),
-        TimeEvent(12 * FRAMES, function(inst)
-            inst.components.combat:DoAttack(inst.sg.statemem.target)
-            DoChainSound(inst)
-        end),
-        TimeEvent(23 * FRAMES, DoFootstep),
-        TimeEvent(25 * FRAMES, DoFootstepRun),
-        TimeEvent(26 * FRAMES, function(inst)
-            DoBellSound(inst)
-            DoChainSound(inst)
-        end),
-        TimeEvent(28 * FRAMES, function(inst)
-            inst.sg:RemoveStateTag("busy")
-        end)
-    },
-    hittimeline =
-    {
-        TimeEvent(0, DoChainSound),
-        TimeEvent(FRAMES, DoBellSound),
-        TimeEvent(12 * FRAMES, function(inst)
-            if inst.gem == nil then
+        starttimeline =
+        {
+            TimeEvent(0, function(inst)
+                DoChainIdleSound(inst, .5)
+                DoBellIdleSound(inst, .5)
+            end),
+        },
+        walktimeline =
+        {
+            TimeEvent(0, function(inst)
                 DoFootstep(inst)
-            end
-        end),
-        TimeEvent(13 * FRAMES, function(inst)
-            if inst.gem == nil then
-                inst.sg:RemoveStateTag("busy")
-            end
-        end),
-        TimeEvent(14 * FRAMES, DoChainSound),
-        TimeEvent(18 * FRAMES, DoBellSound),
-        TimeEvent(22 * FRAMES, function(inst)
-            if inst.gem ~= nil then
-                inst.sg:RemoveStateTag("busy")
-            end
-        end),
-    },
-    deathtimeline =
+                DoChainIdleSound(inst)
+                DoBellIdleSound(inst)
+            end),
+            TimeEvent(6 * FRAMES, DoBellIdleSound),
+            TimeEvent(7 * FRAMES, DoFootstep),
+            TimeEvent(8 * FRAMES, DoChainIdleSound),
+            TimeEvent(9 * FRAMES, DoFootstep),
+            TimeEvent(10 * FRAMES, DoChainIdleSound),
+            TimeEvent(12 * FRAMES, DoBellIdleSound),
+            TimeEvent(17 * FRAMES, function(inst)
+                DoFootstep(inst)
+                DoBellIdleSound(inst)
+            end),
+            TimeEvent(18 * FRAMES, DoChainIdleSound),
+        },
+        endtimeline =
+        {
+            TimeEvent(3 * FRAMES, function(inst)
+                DoFootstep(inst, .5)
+                DoBellIdleSound(inst, .5)
+                DoChainIdleSound(inst, .5)
+            end),
+        },
+    })
+CommonStates.AddRunStates(states,
     {
-        TimeEvent(0, DoChainIdleSound),
-        TimeEvent(5 * FRAMES, function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/bodyfall_2")
-            DoBellIdleSound(inst)
-        end),
-        TimeEvent(15 * FRAMES, DoChainSound),
-        TimeEvent(20 * FRAMES, function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/hit")
-        end),
-        TimeEvent(23 * FRAMES, function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/bodyfall_2")
-            DoBellSound(inst)
-            if inst.gem ~= nil then
-                local pt = inst:GetPosition()
-                pt.y = 1
-                inst.AnimState:Hide("swap_antler")
-            elseif inst.hasantler ~= nil then
-                local pt = inst:GetPosition()
-                pt.y = 1
-                inst:SetAntlered(nil, false)
-                for i = 1, math.random(2) do
-                    inst.components.lootdropper:SpawnLootPrefab("boneshard", pt)
+        starttimeline =
+        {
+            TimeEvent(4 * FRAMES, DoBellSound),
+            TimeEvent(5 * FRAMES, DoChainSound),
+            TimeEvent(8 * FRAMES, DoFootstepRun),
+        },
+        runtimeline =
+        {
+            TimeEvent(0, DoFootstepRun),
+            TimeEvent(3 * FRAMES, DoBellSound),
+            TimeEvent(4 * FRAMES, DoChainSound),
+            TimeEvent(14 * FRAMES, DoFootstepRun),
+        },
+        endtimeline =
+        {
+            TimeEvent(FRAMES, function(inst)
+                DoChainSound(inst)
+                DoBellSound(inst)
+            end),
+            TimeEvent(2 * FRAMES, DoFootstep),
+            TimeEvent(4 * FRAMES, DoFootstep),
+        },
+    })
+CommonStates.AddCombatStates(states,
+    {
+        attacktimeline =
+        {
+            TimeEvent(0, DoBellSound),
+            TimeEvent(FRAMES, function(inst)
+                DoChainSound(inst, .6)
+            end),
+            TimeEvent(3 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/swish")
+            end),
+            TimeEvent(5 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/taunt")
+            end),
+            TimeEvent(11 * FRAMES, DoBellSound),
+            TimeEvent(12 * FRAMES, function(inst)
+                inst.components.combat:DoAttack(inst.sg.statemem.target)
+                DoChainSound(inst)
+            end),
+            TimeEvent(23 * FRAMES, DoFootstep),
+            TimeEvent(25 * FRAMES, DoFootstepRun),
+            TimeEvent(26 * FRAMES, function(inst)
+                DoBellSound(inst)
+                DoChainSound(inst)
+            end),
+            TimeEvent(28 * FRAMES, function(inst)
+                inst.sg:RemoveStateTag("busy")
+            end)
+        },
+        hittimeline =
+        {
+            TimeEvent(0, DoChainSound),
+            TimeEvent(FRAMES, DoBellSound),
+            TimeEvent(12 * FRAMES, function(inst)
+                if inst.gem == nil then
+                    DoFootstep(inst)
                 end
-            end
-        end),
-        TimeEvent(24 * FRAMES, DoChainSound),
+            end),
+            TimeEvent(13 * FRAMES, function(inst)
+                if inst.gem == nil then
+                    inst.sg:RemoveStateTag("busy")
+                end
+            end),
+            TimeEvent(14 * FRAMES, DoChainSound),
+            TimeEvent(18 * FRAMES, DoBellSound),
+            TimeEvent(22 * FRAMES, function(inst)
+                if inst.gem ~= nil then
+                    inst.sg:RemoveStateTag("busy")
+                end
+            end),
+        },
+        deathtimeline =
+        {
+            TimeEvent(0, DoChainIdleSound),
+            TimeEvent(5 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/bodyfall_2")
+                DoBellIdleSound(inst)
+            end),
+            TimeEvent(15 * FRAMES, DoChainSound),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/hit")
+            end),
+            TimeEvent(23 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/bodyfall_2")
+                DoBellSound(inst)
+                if inst.gem ~= nil then
+                    local pt = inst:GetPosition()
+                    pt.y = 1
+                    inst.AnimState:Hide("swap_antler")
+                elseif inst.hasantler ~= nil then
+                    local pt = inst:GetPosition()
+                    pt.y = 1
+                    inst:SetAntlered(nil, false)
+                    for i = 1, math.random(2) do
+                        inst.components.lootdropper:SpawnLootPrefab("boneshard", pt)
+                    end
+                end
+            end),
+            TimeEvent(24 * FRAMES, DoChainSound),
+        },
     },
-},
-{
-    hit = function(inst)
-        return inst.gem ~= nil and "hit_2" or "hit"
-    end,
-})
+    {
+        hit = function(inst)
+            return inst.gem ~= nil and "hit_2" or "hit"
+        end,
+    })
 
 CommonStates.AddFrozenStates(states)
 
 CommonStates.AddSleepExStates(states,
-{
-    starttimeline =
     {
-        TimeEvent(0, function(inst)
-            DoChainSound(inst)
-            DoBellSound(inst, .3)
-        end),
-        TimeEvent(9 * FRAMES, function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/bodyfall")
-            DoBellSound(inst, .5)
-        end),
-        TimeEvent(16 * FRAMES, DoChainSound),
-    },
-    sleeptimeline =
-    {
-        TimeEvent(9 * FRAMES, function(inst)
-            DoBellSound(inst, .2)
-        end),
-        TimeEvent(31 * FRAMES, function(inst)
-            DoBellIdleSound(inst, .2)
-        end),
-    },
-    waketimeline =
-    {
-        TimeEvent(2 * FRAMES, DoBellIdleSound),
-        TimeEvent(22 * FRAMES, DoChainSound),
-        TimeEvent(24 * FRAMES, DoBellSound),
-    },
-})
+        starttimeline =
+        {
+            TimeEvent(0, function(inst)
+                DoChainSound(inst)
+                DoBellSound(inst, .3)
+            end),
+            TimeEvent(9 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/together/deer/bodyfall")
+                DoBellSound(inst, .5)
+            end),
+            TimeEvent(16 * FRAMES, DoChainSound),
+        },
+        sleeptimeline =
+        {
+            TimeEvent(9 * FRAMES, function(inst)
+                DoBellSound(inst, .2)
+            end),
+            TimeEvent(31 * FRAMES, function(inst)
+                DoBellIdleSound(inst, .2)
+            end),
+        },
+        waketimeline =
+        {
+            TimeEvent(2 * FRAMES, DoBellIdleSound),
+            TimeEvent(22 * FRAMES, DoChainSound),
+            TimeEvent(24 * FRAMES, DoBellSound),
+        },
+    })
 
 return StateGraph("deer", states, events, "idle")

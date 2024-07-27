@@ -40,16 +40,16 @@ local blueprefabs =
 local brain = require("brains/goddessdeergembrain")
 
 SetSharedLootTable('goddess_deer2',
-{
-    {'meat',            	  	1.00},
-	{'smallmeat',         		1.00},
-	{'smallmeat',      	   		0.50},
-	{'gem_seeds',         		1.00},
-    {'gem_seeds',         		0.25},
-	{'gem_seeds',         		0.05},
-	{'gem_seeds',         		0.01},
-	{'goddess_fishingrod',      1.00},
-})
+    {
+        { 'meat',               1.00 },
+        { 'smallmeat',          1.00 },
+        { 'smallmeat',          0.50 },
+        { 'gem_seeds',          1.00 },
+        { 'gem_seeds',          0.25 },
+        { 'gem_seeds',          0.05 },
+        { 'gem_seeds',          0.01 },
+        { 'goddess_fishingrod', 1.00 },
+    })
 
 local function KeepTargetFn(inst, target)
     return inst.components.combat:CanTarget(target)
@@ -124,8 +124,8 @@ local function FindCastTargets(inst, target)
         --Single target for deer without keeper
         return target.components.health ~= nil
             and not (target.components.health:IsDead() or
-                    target:HasTag("playerghost") or
-                    target:HasTag("deergemresistance"))
+                target:HasTag("playerghost") or
+                target:HasTag("deergemresistance"))
             and target:IsNear(inst, TUNING.DEER_GEMMED_CAST_RANGE)
             and NoSpellOverlap(target.Transform:GetWorldPosition())
             and { target }
@@ -212,7 +212,8 @@ local function OnNewTarget(inst, data)
 end
 
 local function GemmedRetargetFn(inst)
-    return FindEntity(inst, 16, nil, { "player" }, { "playerghost", "INLIMBO", "abigail" } or { "playerghost", "INLIMBO" })
+    return FindEntity(inst, 16, nil, { "player" },
+        { "playerghost", "INLIMBO", "abigail" } or { "playerghost", "INLIMBO" })
 end
 
 local function SetEngaged(inst, engaged)
@@ -230,17 +231,17 @@ local function SetEngaged(inst, engaged)
 end
 
 local function leader(inst)
-	local Fountain = TheSim:FindFirstEntityWithTag("goddess_fountain_gem")
-	Fountain.components.leader:AddFollower(inst)
+    local Fountain = TheSim:FindFirstEntityWithTag("goddess_fountain_gem")
+    Fountain.components.leader:AddFollower(inst)
 end
 
 local function ondeath(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local a = math.random()
-	if a <= 0.25 then
-		inst.gem = SpawnPrefab("gem_flower1")
-		inst.gem.Transform:SetPosition(x, y, z)
-	end
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local a = math.random()
+    if a <= 0.25 then
+        inst.gem = SpawnPrefab("gem_flower1")
+        inst.gem.Transform:SetPosition(x, y, z)
+    end
 end
 
 local function common_fn(gem)
@@ -261,18 +262,18 @@ local function common_fn(gem)
     inst.AnimState:SetBank("deer")
     inst.AnimState:SetBuild("goddess_deer_build")
     inst.AnimState:PlayAnimation("idle_loop", true)
-	
-	inst.AnimState:OverrideSymbol("swap_neck_collar", "goddess_deer_build", "swap_neck")
-	inst.AnimState:OverrideSymbol("swap_antler_red", "goddess_deer_build", "swap_antler_blue")
-	
-	inst.AnimState:OverrideSymbol("deer_hair", "deer_build", "deer_hair_winter")	
-	inst.AnimState:OverrideSymbol("deer_chest", "deer_build", "deer_chest_winter")	
-	
-	inst.AnimState:Hide("CHAIN")
 
-	inst:AddTag("goddess_deer_gem")
+    inst.AnimState:OverrideSymbol("swap_neck_collar", "goddess_deer_build", "swap_neck")
+    inst.AnimState:OverrideSymbol("swap_antler_red", "goddess_deer_build", "swap_antler_blue")
+
+    inst.AnimState:OverrideSymbol("deer_hair", "deer_build", "deer_hair_winter")
+    inst.AnimState:OverrideSymbol("deer_chest", "deer_build", "deer_chest_winter")
+
+    inst.AnimState:Hide("CHAIN")
+
+    inst:AddTag("goddess_deer_gem")
     inst:AddTag("animal")
-	inst:AddTag("healthinfo")
+    inst:AddTag("healthinfo")
 
     inst.entity:SetPristine()
 
@@ -280,70 +281,70 @@ local function common_fn(gem)
         return inst
     end
 
-	inst.gem = gem
-	
+    inst.gem = gem
+
     inst:AddComponent("timer")
     inst:AddComponent("knownlocations")
-	
+
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.DEER_GEMMED_HEALTH*2)
+    inst.components.health:SetMaxHealth(TUNING.DEER_GEMMED_HEALTH * 2)
 
     inst:AddComponent("combat")
-    inst.components.combat:SetDefaultDamage(TUNING.DEER_GEMMED_DAMAGE*2)
+    inst.components.combat:SetDefaultDamage(TUNING.DEER_GEMMED_DAMAGE * 2)
     inst.components.combat.hiteffectsymbol = "deer_torso"
     inst.components.combat:SetRange(TUNING.DEER_ATTACK_RANGE)
     inst.components.combat:SetAttackPeriod(TUNING.DEER_ATTACK_PERIOD)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
     inst.components.combat:SetTarget(nil)
     inst.components.combat:SetHurtSound("dontstarve/creatures/together/deer/hit")
-	inst.components.combat:SetRetargetFunction(3, GemmedRetargetFn)
-	inst:ListenForEvent("attacked", OnAttacked)
-	SetEngaged(inst, false)
+    inst.components.combat:SetRetargetFunction(3, GemmedRetargetFn)
+    inst:ListenForEvent("attacked", OnAttacked)
+    SetEngaged(inst, false)
 
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(11)
-	inst.components.sleeper:SetSleepTest(GemmedShouldSleep)
-	inst.components.sleeper:SetWakeTest(GemmedShouldWake)
-	inst.components.sleeper.diminishingreturns = true
-	inst.components.sleeper.testperiod = 1
+    inst.components.sleeper:SetSleepTest(GemmedShouldSleep)
+    inst.components.sleeper:SetWakeTest(GemmedShouldWake)
+    inst.components.sleeper.diminishingreturns = true
+    inst.components.sleeper.testperiod = 1
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('goddess_deer2')
 
     inst:AddComponent("inspectable")
-	
-	inst:AddComponent("follower")
+
+    inst:AddComponent("follower")
 
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = TUNING.DEER_WALK_SPEED
     inst.components.locomotor.runspeed = TUNING.DEER_RUN_SPEED
-	
-	
-	inst.castduration = 4
-	inst.castcd = TUNING.DEER_FIRE_CAST_CD
+
+
+    inst.castduration = 4
+    inst.castcd = TUNING.DEER_FIRE_CAST_CD
 
     MakeHauntablePanic(inst)
-	
-	inst:ListenForEvent("death", ondeath)
+
+    inst:ListenForEvent("death", ondeath)
 
     SetupSounds(inst)
     inst:SetStateGraph("SGggdeer")
 
     inst:SetBrain(brain)
-	
-	inst.SetEngaged = SetEngaged
-	
-	inst.FindCastTargets = FindCastTargets
-	
-	inst.DoCast = DoCast
-	
-	inst:DoTaskInTime(0, leader)
-	
-	return inst
+
+    inst.SetEngaged = SetEngaged
+
+    inst.FindCastTargets = FindCastTargets
+
+    inst.DoCast = DoCast
+
+    inst:DoTaskInTime(0, leader)
+
+    return inst
 end
 
 local function fn()
     return common_fn()
 end
 
-return 	Prefab("goddess_deer_gem", fn, assets, prefabs)
+return Prefab("goddess_deer_gem", fn, assets, prefabs)

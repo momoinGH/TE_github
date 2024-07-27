@@ -6,89 +6,89 @@ local assets =
 local prefabs = {}
 
 local toploot = {
-    {"ruins_bat"},
-    {"ruinshat"},
-    {"cane"},
-    {"slurtlehat",},
+    { "ruins_bat" },
+    { "ruinshat" },
+    { "cane" },
+    { "slurtlehat", },
 
-    {"firestaff",},
+    { "firestaff", },
 
---    {"spellscroll_meteorfall", "spellscroll_meteorfall", "spellscroll_meteorfall", "spellscroll_meteorfall"},
---    {"spellscroll_chainlightning", "spellscroll_chainlightning", "spellscroll_chainlightning", "spellscroll_chainlightning"},
---    {"spellscroll_tranquility", "spellscroll_tranquility", "spellscroll_tranquility", "spellscroll_tranquility"},
+    --    {"spellscroll_meteorfall", "spellscroll_meteorfall", "spellscroll_meteorfall", "spellscroll_meteorfall"},
+    --    {"spellscroll_chainlightning", "spellscroll_chainlightning", "spellscroll_chainlightning", "spellscroll_chainlightning"},
+    --    {"spellscroll_tranquility", "spellscroll_tranquility", "spellscroll_tranquility", "spellscroll_tranquility"},
 
-    {"blowdart_pipe", "blowdart_pipe", "blowdart_pipe", "blowdart_pipe", "blowdart_pipe"},
+    { "blowdart_pipe", "blowdart_pipe", "blowdart_pipe", "blowdart_pipe", "blowdart_pipe" },
 }
 
 local midloot = {
     --mats
-    {"greengem"},
-    {"orangegem"},
-    {"yellowgem"},
+    { "greengem" },
+    { "orangegem" },
+    { "yellowgem" },
 
-    {"livinglog", "livinglog",},
-    {"tentaclespots", "tentaclespots",},
-    {"honeycomb", "honeycomb",},
-    {"pigskin", "pigskin", "pigskin", "pigskin",},
-    {"manrabbit_tail", "manrabbit_tail",},
-    {"gears", "gears", "gears",},
+    { "livinglog",      "livinglog", },
+    { "tentaclespots",  "tentaclespots", },
+    { "honeycomb",      "honeycomb", },
+    { "pigskin",        "pigskin",        "pigskin", "pigskin", },
+    { "manrabbit_tail", "manrabbit_tail", },
+    { "gears",          "gears",          "gears", },
 
     --equip
-    {"batbat",},
-    {"hambat"},
+    { "batbat", },
+    { "hambat" },
 
-    {"ruinshat",},
---    {"wizard_hat",},
-    {"footballhat", "footballhat",},
-    {"armormarble", "armormarble",},
+    { "ruinshat", },
+    --    {"wizard_hat",},
+    { "footballhat",    "footballhat", },
+    { "armormarble",    "armormarble", },
 
     --other
-    {"dug_berrybush", "dug_berrybush",},
-    {"gunpowder"},
+    { "dug_berrybush",  "dug_berrybush", },
+    { "gunpowder" },
 }
 
 local lowloot = {
     --mats
-    {"cutreeds", "cutreeds", "cutreeds", "cutreeds", "cutreeds", 
-        "cutreeds", "cutreeds", "cutreeds", "cutreeds", "cutreeds",},
-    {"goldnugget", "goldnugget", "goldnugget", "goldnugget", "goldnugget", "goldnugget",},
-    {"silk", "silk", "silk", "silk", "silk", "silk", "silk", "silk", "silk", "silk", "silk",},
+    { "cutreeds", "cutreeds", "cutreeds", "cutreeds", "cutreeds",
+        "cutreeds", "cutreeds", "cutreeds", "cutreeds", "cutreeds", },
+    { "goldnugget", "goldnugget", "goldnugget", "goldnugget", "goldnugget", "goldnugget", },
+    { "silk",       "silk",       "silk",       "silk",       "silk",       "silk",       "silk",  "silk",  "silk",  "silk",  "silk", },
 
     --equip
-    {"umbrella",},
-    
+    { "umbrella", },
+
     --food
-    {"honey", "honey", "honey", "honey", "honey", "honey", "honey", "honey", "honey", "honey", "honey",},
-    {"meat", "meat", "meat", "meat", "meat", "meat",},
-    {"watermelon", "watermelon", "watermelon",},
+    { "honey",      "honey",      "honey",      "honey",      "honey",      "honey",      "honey", "honey", "honey", "honey", "honey", },
+    { "meat",       "meat",       "meat",       "meat",       "meat",       "meat", },
+    { "watermelon", "watermelon", "watermelon", },
 }
 
-local essencesLoot = {"goldnugget", "goldnugget", "goldnugget", "goldnugget"}   --{ "essence_fire", "essence_ice", "essence_poison", "essence_lightning" }
+local essencesLoot = { "goldnugget", "goldnugget", "goldnugget", "goldnugget" } --{ "essence_fire", "essence_ice", "essence_poison", "essence_lightning" }
 
 local function GFSoftColourChange(inst, fc, sc, time, step)
-    if sc == nil then sc = {1, 1, 1, 1} end
+    if sc == nil then sc = { 1, 1, 1, 1 } end
     if time == nil then time = 1 end
     if step == nil or step > 1 then step = 0.1 end
-    local totalSteps = math.ceil (time / step)
+    local totalSteps = math.ceil(time / step)
     inst.AnimState:SetMultColour(sc[1], sc[2], sc[3], sc[4])
-    local dRed      = (fc[1] - sc[1]) / totalSteps
-    local dGreen    = (fc[2] - sc[2]) / totalSteps
-    local dBlue     = (fc[3] - sc[3]) / totalSteps
-    local dAlpha    = (fc[4] - sc[4]) / totalSteps
-    local deltaColor = {dRed, dGreen, dBlue, dAlpha}
-    local currStep = 0
+    local dRed       = (fc[1] - sc[1]) / totalSteps
+    local dGreen     = (fc[2] - sc[2]) / totalSteps
+    local dBlue      = (fc[3] - sc[3]) / totalSteps
+    local dAlpha     = (fc[4] - sc[4]) / totalSteps
+    local deltaColor = { dRed, dGreen, dBlue, dAlpha }
+    local currStep   = 0
     if inst._softColorTask ~= nil then inst._softColorTask:Cancel() end
 
     inst._softColorTask = inst:DoPeriodicTask(step, function(inst)
         if currStep <= totalSteps then
             --print(time)
-            inst.AnimState:SetMultColour(sc[1] + deltaColor[1] * currStep, 
-                sc[2] + deltaColor[2] * currStep, 
-                sc[3] + deltaColor[3] * currStep, 
+            inst.AnimState:SetMultColour(sc[1] + deltaColor[1] * currStep,
+                sc[2] + deltaColor[2] * currStep,
+                sc[3] + deltaColor[3] * currStep,
                 sc[4] + deltaColor[4] * currStep)
             currStep = currStep + 1
         else
-            inst._softColorTask:Cancel() 
+            inst._softColorTask:Cancel()
             inst._atask = nil
         end
     end, nil, deltaColor, totalSteps, currStep)
@@ -102,7 +102,7 @@ local function CreateShadow(inst)
     inst.shadow = obj
 end
 
-local function ResetRunes(inst) 
+local function ResetRunes(inst)
     inst.runesDone = 0
     if #(inst.runes) == 0 then return end
     for k, v in pairs(inst.runes) do
@@ -116,7 +116,6 @@ local function ResetRunes(inst)
 end
 
 local function OnRuneDone(inst)
-
     local function SpawnItem(inst, prefab)
         local obj = SpawnPrefab(prefab)
         if obj == nil then return end
@@ -128,11 +127,11 @@ local function OnRuneDone(inst)
             local zs = -math.sin(angle) * 2
             --[[column has big collision model, so we need to teleport items from its center,
             or they will collide with column and fall in one direction]]
-            obj.Physics:Teleport(x + xs, 2, z + zs) 
+            obj.Physics:Teleport(x + xs, 2, z + zs)
             obj.Physics:SetVel(halfspeed * xs, 0, halfspeed * zs)
         else
-            obj.Transform:SetPosition(x , y, z)
-        end  
+            obj.Transform:SetPosition(x, y, z)
+        end
     end
 
     inst.runesDone = inst.runesDone + 1
@@ -163,19 +162,18 @@ local function OnRuneDone(inst)
                 SpawnItem(inst, prefab)
             end
         end
-
     end
 end
 
 local function OnActivate(inst)
-    if not inst.cooldown then 
+    if not inst.cooldown then
         local x, y, z = inst.Transform:GetWorldPosition()
         local angle = math.random(360) * DEGREES
         local pt = {}
-        pt[1] =  { x = x + math.cos(angle) * 8,          z = z - math.sin(angle) * 8 }
-        pt[2] =  { x = x + math.cos(angle + 2,0944) * 8, z = z - math.sin(angle + 2,0944) * 8 }
-        pt[3] =  { x = x + math.cos(angle - 2,0944) * 8, z = z - math.sin(angle - 2,0944) * 8 }
-        local runeTypes = {"beast", "death", "sacrifice", "rich", "magic"}
+        pt[1] = { x = x + math.cos(angle) * 8, z = z - math.sin(angle) * 8 }
+        pt[2] = { x = x + math.cos(angle + 2, 0944) * 8, z = z - math.sin(angle + 2, 0944) * 8 }
+        pt[3] = { x = x + math.cos(angle - 2, 0944) * 8, z = z - math.sin(angle - 2, 0944) * 8 }
+        local runeTypes = { "beast", "death", "sacrifice", "rich", "magic" }
         for i = 1, 3 do
             local fx = SpawnPrefab("maxwell_smoke")
             fx.Transform:SetPosition(pt[i].x, y, pt[i].z)
@@ -184,14 +182,14 @@ local function OnActivate(inst)
             obj.Transform:SetRotation(math.random(360))
             local transparent = 0
             obj.AnimState:SetMultColour(0, 0, 0, transparent)
-            GFSoftColourChange(obj, {0, 0, 0, 1}, {0, 0, 0, 0}, 1, 0.1)
+            GFSoftColourChange(obj, { 0, 0, 0, 1 }, { 0, 0, 0, 0 }, 1, 0.1)
             obj:SetRune(table.remove(runeTypes, math.random(#runeTypes)), inst)
             table.insert(inst.runes, obj)
         end
     end
 
     inst.cooldown = true
-    inst.components.timer:StartTimer("cooldown", 2400)	
+    inst.components.timer:StartTimer("cooldown", 2400)
 end
 
 local function DeactivateOtherRunes(inst, rune)
@@ -208,7 +206,7 @@ local function fn_shadow()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-    
+
 
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetBank("column_angel")
@@ -216,14 +214,14 @@ local function fn_shadow()
     inst.AnimState:PlayAnimation("idle_normal")
     inst.AnimState:SetMultColour(0, 0, 0, 0.3)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(3)
+    inst.AnimState:SetSortOrder(3)
     inst.AnimState:SetRayTestOnBB(true)
 
     inst:AddTag("object_shadow")
     inst:AddTag("fx")
 
     inst.entity:SetPristine()
-    
+
     if not TheWorld.ismastersim then
         return inst
     end
@@ -276,7 +274,7 @@ local function fn()
     inst.entity:AddNetwork()
     inst.entity:AddPhysics()
     MakeObstaclePhysics(inst, 1)
-    MakeSnowCoveredPristine(inst)	
+    MakeSnowCoveredPristine(inst)
 
     inst.entity:AddMiniMapEntity()
     inst.MiniMapEntity:SetIcon("column_angel_mini.tex")
@@ -306,7 +304,7 @@ local function fn()
     inst.runesDone = 0
 
     inst:ListenForEvent("timerdone", function(inst, data)
-        if data.name == "cooldown" then 
+        if data.name == "cooldown" then
             ResetRunes(inst)
             inst.cooldown = false
             inst.components.activatable.inactive = true
@@ -324,5 +322,5 @@ local function fn()
     return inst
 end
 
-return  Prefab("column_angel", fn, assets, prefabs),
-        Prefab("column_angel_shadow", fn_shadow, assets, prefabs)
+return Prefab("column_angel", fn, assets, prefabs),
+    Prefab("column_angel_shadow", fn_shadow, assets, prefabs)

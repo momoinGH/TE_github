@@ -1,4 +1,3 @@
-
 local assets =
 {
     Asset("ANIM", "anim/boarlord.zip"),
@@ -8,13 +7,13 @@ local assets =
 --[[
 idle
 laugh2 (bate no escudo com ele aberto)
-laugh_pre 
+laugh_pre
 laugh_loop (bate no escudo com ele fechado)
 laugh_pst
 sleep_pre
 sleep_loop (dorme)
 sleep_pst
-yell_pre 
+yell_pre
 yell_loop (levanta e sacode a arma icitando briga)
 yell_pst
 ]]
@@ -26,9 +25,9 @@ local function fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
-	
+
     inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("boarlord.png")
+    inst.MiniMapEntity:SetIcon("boarlord.png")
 
     MakeObstaclePhysics(inst, 2, .5)
 
@@ -45,7 +44,7 @@ local function fn()
     inst:AddTag("antlion_sinkhole_blocker")
 
     inst:AddComponent("talker")
-	
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -53,10 +52,9 @@ local function fn()
     end
 
     inst:AddComponent("inspectable")
-	inst:AddComponent("store")
+    inst:AddComponent("store")
 
     return inst
 end
 
 return Prefab("lavaarena_boarlord", fn, assets, prefabs)
-

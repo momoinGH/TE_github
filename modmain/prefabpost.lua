@@ -57,10 +57,18 @@ end)
 ----------------------------------------------------------------------------------------------------
 -- 控制鸟生成逻辑
 
-local BIRD_TYPES
+local BIRD_TYPES, PickBird
+local function SpawnBirdBefore(self, spawnpoint)
+    local prefab = PickBird and PickBird(spawnpoint)
+    if prefab and not GLOBAL.Prefabs[prefab] then
+        return nil, true --有的鸟预制体不存在，可能没有定义，跳过旧方法防止报错
+    end
+end
+
 AddComponentPostInit("birdspawner", function(self)
     if not BIRD_TYPES then
-        BIRD_TYPES = Utils.ChainFindUpvalue(self.SpawnBird, "PickBird", "BIRD_TYPES")
+        PickBird = Utils.ChainFindUpvalue(self.SpawnBird, "PickBird")
+        BIRD_TYPES = PickBird and Utils.ChainFindUpvalue(PickBird, "BIRD_TYPES")
         if BIRD_TYPES then
             BIRD_TYPES[WORLD_TILES.OCEAN_COASTAL] = { "puffin", "cormorant" }
             BIRD_TYPES[WORLD_TILES.OCEAN_COASTAL_SHORE] = { "puffin", "cormorant" }
@@ -106,6 +114,8 @@ AddComponentPostInit("birdspawner", function(self)
             end
         end
     end
+
+    Utils.FnDecorator(self, "SpawnBird", SpawnBirdBefore)
 end)
 
 ----------------------------------------------------------------------------------------------------

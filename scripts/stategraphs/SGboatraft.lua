@@ -6,16 +6,15 @@ local events =
 local function SpawnFragment(inst, prefix, suffix, offset_x, offset_y, offset_z)
     local fragment = SpawnPrefab(prefix .. suffix)
     local pos_x, pos_y, pos_z = inst.Transform:GetWorldPosition()
-    fragment.Transform:SetPosition(pos_x + offset_x, pos_y + offset_y, pos_z + offset_z)   
+    fragment.Transform:SetPosition(pos_x + offset_x, pos_y + offset_y, pos_z + offset_z)
 
 
     if offset_y > 0 then
         local physics = fragment.Physics
-        if physics ~= nil then        
+        if physics ~= nil then
             physics:SetVel(0, -0.25, 0)
         end
     end
-
 end
 
 local states =
@@ -25,34 +24,34 @@ local states =
         name = "place",
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("turnoftides/common/together/boat/mast/place")
-            inst.SoundEmitter:PlaySound("turnoftides/common/together/water/splash/large",nil,.3)
+            inst.SoundEmitter:PlaySound("turnoftides/common/together/water/splash/large", nil, .3)
             inst.AnimState:PlayAnimation("run_loop")
         end,
 
         events =
-        {        
+        {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-        },                        
+        },
     },
 
     State
     {
         name = "idle",
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("run_loop", true)        
+            inst.AnimState:PlayAnimation("run_loop", true)
         end,
 
         events =
-        {        
+        {
             EventHandler("death", function(inst) inst.sg:GoToState("ready_to_snap") end),
-        },                        
+        },
     },
 
     State
     {
         name = "ready_to_snap",
-        onenter = function(inst)         
-            inst.sg:SetTimeout(0.75)               
+        onenter = function(inst)
+            inst.sg:SetTimeout(0.75)
         end,
 
         ontimeout = function(inst)
@@ -64,86 +63,86 @@ local states =
     State
     {
         name = "snapping",
-        onenter = function(inst)         
+        onenter = function(inst)
             local fx_boat_crackle = SpawnPrefab("fx_boat_crackle")
             fx_boat_crackle.Transform:SetPosition(inst.Transform:GetWorldPosition())
-            inst.AnimState:PlayAnimation("run_loop") 
-            inst.sg:SetTimeout(1)  
+            inst.AnimState:PlayAnimation("run_loop")
+            inst.sg:SetTimeout(1)
 
-            for k,v in ipairs(inst.components.walkableplatform:GetEntitiesOnPlatform()) do
+            for k, v in ipairs(inst.components.walkableplatform:GetEntitiesOnPlatform()) do
                 v:PushEvent("onpresink")
             end
         end,
 
         events =
-        {        
+        {
             EventHandler("animover", function(inst) inst.sg:GoToState("popping") end),
-        },   
+        },
 
         timeline =
         {
             TimeEvent(0 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/creak")                  
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/creak")
             end),
             TimeEvent(2 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .1})                  
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .1 })
             end),
             TimeEvent(17 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .2})                  
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .2 })
             end),
-            TimeEvent(32* FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .3})                  
+            TimeEvent(32 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .3 })
             end),
-            TimeEvent(39* FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .3})                  
+            TimeEvent(39 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .3 })
             end),
-            TimeEvent(39* FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/creak")                  
+            TimeEvent(39 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/creak")
             end),
             TimeEvent(51 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .4})                  
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .4 })
             end),
             TimeEvent(58 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .4})                  
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .4 })
             end),
             TimeEvent(60 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .5})                  
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .5 })
             end),
             TimeEvent(71 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .5})                  
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .5 })
             end),
             TimeEvent(75 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", {intensity= .6})                  
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .6 })
             end),
             TimeEvent(82 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", {intensity= .6})                  
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .6 })
             end),
-        },        
+        },
     },
-    
+
     State
     {
         name = "popping",
-        onenter = function(boat)         
+        onenter = function(boat)
             local fx_boat_crackle = SpawnPrefab("fx_boat_pop")
-            fx_boat_crackle.Transform:SetPosition(boat.Transform:GetWorldPosition())            
+            fx_boat_crackle.Transform:SetPosition(boat.Transform:GetWorldPosition())
         end,
 
         timeline =
         {
             TimeEvent(1 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", {intensity= 1})                 
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = 1 })
             end),
             TimeEvent(0 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/sink")
             end),
             TimeEvent(1 * FRAMES, function(inst)
-                inst.AnimState:PlayAnimation("run_loop")  
+                inst.AnimState:PlayAnimation("run_loop")
 
                 local mast_sinking = SpawnPrefab("boat_mast_sink_fx")
-                mast_sinking.Transform:SetPosition(inst.Transform:GetWorldPosition())              
+                mast_sinking.Transform:SetPosition(inst.Transform:GetWorldPosition())
 
-                for k,v in ipairs(inst.components.walkableplatform:GetEntitiesOnPlatform()) do
+                for k, v in ipairs(inst.components.walkableplatform:GetEntitiesOnPlatform()) do
                     v:PushEvent("onsink")
                 end
 
@@ -155,24 +154,23 @@ local states =
                 SpawnFragment(inst, "boatfragment", "05", -0.95, 0, 0.75)
                 SpawnFragment(inst, "boards", "", 2, 2, -2.25)
                 SpawnFragment(inst, "boards", "", -1.75, 2, -1.5)
-                SpawnFragment(inst, "boards", "", 1.25, 2, 1.25)                
-
+                SpawnFragment(inst, "boards", "", 1.25, 2, 1.25)
             end),
 
             TimeEvent(30 * FRAMES, function(inst)
                 inst:Remove()
             end),
             TimeEvent(110 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/water/sinking_item")                 
-            end),            
-        },               
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/water/sinking_item")
+            end),
+        },
 
         events =
         {
 
-        },                        
-    },     
-             
+        },
+    },
+
 }
 
 return StateGraph("boat", states, events, "idle")

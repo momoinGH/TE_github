@@ -23,7 +23,7 @@ local function SetUpAmbush(inst)
 end
 
 local function ShouldRun(inst, hunter)
---hunter.components.talker:Say("ok")
+    --hunter.components.talker:Say("ok")
     return not inst.sg:HasStateTag("jumping") and not inst.sg:HasStateTag("ambusher")
 end
 
@@ -32,23 +32,23 @@ local FlupBrain = Class(Brain, function(self, target)
 end)
 
 function FlupBrain:OnStart()
-
---	local clock = GetClock()
+    --	local clock = GetClock()
 
     local root = PriorityNode(
-    {
-        WhileNode(function() return not self.inst.components.combat.target end, "No Target",
-            Leash(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, HOME_LEASH_DIST, HOME_RETURN_DIST, true)),
-        DoAction(self.inst, SetUpAmbush, "Try Ambush"),
-        WhileNode(function() return self.inst.sg:HasStateTag("ambusher") end, "Lay In Wait",
-            StandStill(self.inst, function() return self.inst.sg:HasStateTag("ambusher") end, nil)),
-        RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP, function(target) return ShouldRun(self.inst, target) end ),		
-        ChaseAndAttack(self.inst, MAX_CHASE_TIME),
-        Wander(self.inst, function() return self.inst:GetPosition() end, MAX_WANDER_DIST),
-    }, .25)
+        {
+            WhileNode(function() return not self.inst.components.combat.target end, "No Target",
+                Leash(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                    HOME_LEASH_DIST, HOME_RETURN_DIST, true)),
+            DoAction(self.inst, SetUpAmbush, "Try Ambush"),
+            WhileNode(function() return self.inst.sg:HasStateTag("ambusher") end, "Lay In Wait",
+                StandStill(self.inst, function() return self.inst.sg:HasStateTag("ambusher") end, nil)),
+            RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP,
+                function(target) return ShouldRun(self.inst, target) end),
+            ChaseAndAttack(self.inst, MAX_CHASE_TIME),
+            Wander(self.inst, function() return self.inst:GetPosition() end, MAX_WANDER_DIST),
+        }, .25)
 
     self.bt = BT(self.inst, root)
-
 end
 
 return FlupBrain

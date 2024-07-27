@@ -16,10 +16,10 @@ local MAX_CHARGE_DIST = 60
 local SEE_FOOD_DIST = 15
 local SEE_STRUCTURE_DIST = 30
 
-local BASE_TAGS = {"structure"}
-local FOOD_TAGS = {"edible"}
-local STEAL_TAGS = {"structure"}
-local NO_TAGS = {"FX", "NOCLICK", "DECOR","INLIMBO", "burnt"}
+local BASE_TAGS = { "structure" }
+local FOOD_TAGS = { "edible" }
+local STEAL_TAGS = { "structure" }
+local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", "burnt" }
 
 
 local Ancient_hulkBrain = Class(Brain, function(self, inst)
@@ -27,17 +27,14 @@ local Ancient_hulkBrain = Class(Brain, function(self, inst)
 end)
 
 function Ancient_hulkBrain:OnStart()
-
-
     local root =
         PriorityNode(
-        {
-            ChaseAndAttack(self.inst, 60, 120, nil, nil, true),
-            Wander(self.inst, function() return self.inst:GetPosition() end, 20),
-        }, .25)
-    
+            {
+                ChaseAndAttack(self.inst, 60, 120, nil, nil, true),
+                Wander(self.inst, function() return self.inst:GetPosition() end, 20),
+            }, .25)
+
     self.bt = BT(self.inst, root)
-         
 end
 
 function Ancient_hulkBrain:OnInitializationComplete()

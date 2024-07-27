@@ -47,14 +47,14 @@ local STAGES = {
         name = "medium",
         animation = "med",
         showrock = true,
-        work = TUNING.ICE_MINE*0.67,
+        work = TUNING.ICE_MINE * 0.67,
         icecount = 2,
     },
     {
         name = "tall",
         animation = "full",
         showrock = true,
-        work = TUNING.ICE_MINE*0.67,
+        work = TUNING.ICE_MINE * 0.67,
         icecount = 3,
     },
 }
@@ -84,12 +84,12 @@ local function OnStageDirty(inst)
             if stagedata.name == "empty" then
                 inst._puddle.AnimState:PushAnimation("idle", true)
             end
-                        
-			if ismelt and not inst:IsAsleep() and not stagedata.isdriedup then
-				local fx = SpawnPrefab("ice_splash")
-				fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-				fx.AnimState:PlayAnimation(stagedata.animation)
-			end
+
+            if ismelt and not inst:IsAsleep() and not stagedata.isdriedup then
+                local fx = SpawnPrefab("ice_splash")
+                fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                fx.AnimState:PlayAnimation(stagedata.animation)
+            end
         end
     end
 end
@@ -100,7 +100,7 @@ local function SerializeStage(inst, stageindex, source)
     OnStageDirty(inst)
 end
 
-local DRYUP_CANT_FLAGS = {"locomotor", "FX"}
+local DRYUP_CANT_FLAGS = { "locomotor", "FX" }
 local function SetStage(inst, stage, source, snap_to_stage)
     if stage == inst.stage then
         return
@@ -110,47 +110,47 @@ local function SetStage(inst, stage, source, snap_to_stage)
     local targetstage = STAGE_INDICES[stage]
     if (source == "melt" or source == "work") then
         if currentstage and currentstage > targetstage then
-			if not snap_to_stage then
-				targetstage = currentstage - 1
-			end
+            if not snap_to_stage then
+                targetstage = currentstage - 1
+            end
         else
             return
         end
     elseif source == "grow" then
         if currentstage and currentstage < targetstage then
-			if not snap_to_stage then
-	            targetstage = currentstage + 1
-	        end
+            if not snap_to_stage then
+                targetstage = currentstage + 1
+            end
         else
             return
         end
-        
-		if inst.stage == "dryup" then
-			local x, y, z = inst.Transform:GetWorldPosition()
-			if #(TheSim:FindEntities(x, y, z, 1.1, nil, DRYUP_CANT_FLAGS)) > 0 then
-				return
-			end
-		end        
+
+        if inst.stage == "dryup" then
+            local x, y, z = inst.Transform:GetWorldPosition()
+            if #(TheSim:FindEntities(x, y, z, 1.1, nil, DRYUP_CANT_FLAGS)) > 0 then
+                return
+            end
+        end
     end
 
     -- otherwise just set the stage to the target!
     inst.stage = STAGES[targetstage].name
     SerializeStage(inst, targetstage, source)
 
-	if STAGES[targetstage].isdriedup then
-		if inst.remove_on_dryup then
-			inst.presists = false
-			if inst:IsAsleep() then
-				inst:Remove()
-			else
-				inst:DoTaskInTime(2, inst.Remove)
-			end
-		end
+    if STAGES[targetstage].isdriedup then
+        if inst.remove_on_dryup then
+            inst.presists = false
+            if inst:IsAsleep() then
+                inst:Remove()
+            else
+                inst:DoTaskInTime(2, inst.Remove)
+            end
+        end
 
-		inst:AddTag("CLASSIFIED")
-	elseif currentstage ~= nil and STAGES[currentstage].isdriedup then
-		inst:RemoveTag("CLASSIFIED")
-	end
+        inst:AddTag("CLASSIFIED")
+    elseif currentstage ~= nil and STAGES[currentstage].isdriedup then
+        inst:RemoveTag("CLASSIFIED")
+    end
 
     if STAGES[targetstage].showrock then
         inst.AnimState:PlayAnimation(STAGES[targetstage].animation)
@@ -170,12 +170,12 @@ local function SetStage(inst, stage, source, snap_to_stage)
 
     if inst.components.workable ~= nil then
         if source == "work" then
-			for i = currentstage, targetstage+1, -1 do
-				local pt = inst:GetPosition()
-				for i = 1, math.random(STAGES[i].icecount) do
-					inst.components.lootdropper:SpawnLootPrefab("ice", pt)
-				end
-			end
+            for i = currentstage, targetstage + 1, -1 do
+                local pt = inst:GetPosition()
+                for i = 1, math.random(STAGES[i].icecount) do
+                    inst.components.lootdropper:SpawnLootPrefab("ice", pt)
+                end
+            end
         end
         if STAGES[targetstage].work < 0 then
             inst.components.workable:SetWorkable(false)
@@ -187,7 +187,7 @@ end
 
 local function OnWorked(inst, worker, workleft)
     if workleft <= 0 then
-		local snap_to_stage = not (worker:HasTag("character") or worker:HasTag("shadowminion"))
+        local snap_to_stage = not (worker:HasTag("character") or worker:HasTag("shadowminion"))
         SetStage(inst, "empty", "work", snap_to_stage)
         if inst.stage == "empty" then
             inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/iceboulder_smash")
@@ -213,9 +213,9 @@ local function TryStageChange(inst)
     end
 
     local pct = TheWorld.state.seasonprogress
-	local map = TheWorld.Map
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
+    local map = TheWorld.Map
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     if TheWorld.state.isspring then
         SetStage(
             inst,
@@ -227,7 +227,7 @@ local function TryStageChange(inst)
         )
     elseif TheWorld.state.issummer then
         --if pct > .1 then
-            SetStage(inst, "dryup", "melt")
+        SetStage(inst, "dryup", "melt")
         --end
     elseif TheWorld.state.isautumn then
         SetStage(
@@ -240,9 +240,9 @@ local function TryStageChange(inst)
         )
     elseif TheWorld.state.iswinter or ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then
         --if pct > .1 then
-            SetStage(inst, "tall", "grow")
+        SetStage(inst, "tall", "grow")
         --end
-        end
+    end
 end
 
 local function DayEnd(inst)
@@ -263,7 +263,7 @@ local function StartFireMelt(inst)
 end
 
 local function StopFireMelt(inst)
-    if inst.firemelttask ~= nil then 
+    if inst.firemelttask ~= nil then
         inst.firemelttask:Cancel()
         inst.firemelttask = nil
     end
@@ -356,9 +356,9 @@ local function rock_ice_fn()
 
     -- Make sure we start at a good height for starting in a season when it shouldn't start as full
     inst:DoTaskInTime(0, function()
-	local map = TheWorld.Map
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))	
+        local map = TheWorld.Map
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
         if inst.stage then
             SetStage(inst, inst.stage)
         elseif TheWorld.state.isspring or TheWorld.state.iswinter or ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then
@@ -371,11 +371,11 @@ local function rock_ice_fn()
     end)
 
     -- Bias to changing towards end of seasons, these suckers have a lot of thermal momentum!
-    inst.threshold1 = Lerp(.4,.6,math.random())
-    inst.threshold2 = Lerp(.65,.85,math.random())
-    inst.threshold3 = Lerp(.9,1.1,math.random())
+    inst.threshold1 = Lerp(.4, .6, math.random())
+    inst.threshold2 = Lerp(.65, .85, math.random())
+    inst.threshold3 = Lerp(.9, 1.1, math.random())
 
-	inst.remove_on_dryup = nil
+    inst.remove_on_dryup = nil
 
     inst:ListenForEvent("firemelt", StartFireMelt)
     inst:ListenForEvent("stopfiremelt", StopFireMelt)

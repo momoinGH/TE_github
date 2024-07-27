@@ -1,6 +1,6 @@
 local assets =
 {
-	Asset("ANIM", "anim/merm_fisherman_house.zip"),
+    Asset("ANIM", "anim/merm_fisherman_house.zip"),
 }
 
 local prefabs =
@@ -134,12 +134,12 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
     MakeObstaclePhysics(inst, 1)
-	
-	inst.MiniMapEntity:SetIcon("mermhouse_fisher.png")
+
+    inst.MiniMapEntity:SetIcon("mermhouse_fisher.png")
 
     inst.AnimState:SetBank("merm_fisherman_house")
     inst.AnimState:SetBuild("merm_fisherman_house")
@@ -164,7 +164,7 @@ local function fn()
     inst.components.workable:SetOnWorkCallback(onhit)
 
     inst:AddComponent("childspawner")
-	inst.components.childspawner.childname = "mermfisher"
+    inst.components.childspawner.childname = "mermfisher"
     inst.components.childspawner:SetSpawnedFn(OnSpawned)
     inst.components.childspawner:SetGoHomeFn(OnGoHome)
     inst.components.childspawner:SetRegenPeriod(TUNING.TOTAL_DAY_TIME * 4)
@@ -209,12 +209,12 @@ local function fn1()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
     MakeObstaclePhysics(inst, 1)
-	
-	inst.MiniMapEntity:SetIcon("mermhouse_fisher.png")
+
+    inst.MiniMapEntity:SetIcon("mermhouse_fisher.png")
 
     inst.AnimState:SetBank("merm_fisherman_house")
     inst.AnimState:SetBuild("merm_fisherman_house")
@@ -239,13 +239,13 @@ local function fn1()
     inst.components.workable:SetOnWorkCallback(onhit)
 
     inst:AddComponent("childspawner")
-	inst.components.childspawner.childname = "mermfisher"
+    inst.components.childspawner.childname = "mermfisher"
     inst.components.childspawner:SetSpawnedFn(OnSpawned)
     inst.components.childspawner:SetGoHomeFn(OnGoHome)
     inst.components.childspawner:SetRegenPeriod(TUNING.TOTAL_DAY_TIME * 4)
     inst.components.childspawner:SetSpawnPeriod(10)
     inst.components.childspawner:SetMaxChildren(1)
---[[
+    --[[
     inst.components.childspawner.emergencychildname = "mermfisher"
     inst.components.childspawner:SetEmergencyRadius(TUNING.MERMHOUSE_EMERGENCY_RADIUS)
     inst.components.childspawner:SetMaxEmergencyChildren(TUNING.MERMHOUSE_EMERGENCY_MERMS)
@@ -263,7 +263,7 @@ local function fn1()
     inst:ListenForEvent("onignite", onignite)
     inst:ListenForEvent("burntup", onburntup)
     inst:ListenForEvent("onbuilt", onbuilt)
-	
+
     inst:AddComponent("inspectable")
 
     MakeSnowCovered(inst)
@@ -273,6 +273,7 @@ local function fn1()
 
     return inst
 end
-return Prefab( "mermfishhouse", fn, assets, prefabs),
-       Prefab( "mermfishhouse_crafted", fn1, assets, prefabs),
-       MakePlacer("common/mermfishhouse_crafted_placer", "merm_fisherman_house", "merm_fisherman_house", "idle", false, false, false)  
+return Prefab("mermfishhouse", fn, assets, prefabs),
+    Prefab("mermfishhouse_crafted", fn1, assets, prefabs),
+    MakePlacer("common/mermfishhouse_crafted_placer", "merm_fisherman_house", "merm_fisherman_house", "idle", false,
+        false, false)

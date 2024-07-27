@@ -105,7 +105,7 @@ end
 
 local function OnAreaChanged(inst, data)
     inst.components.playervision:SetNightmareVision(data ~= nil and data.tags ~= nil and
-    table.contains(data.tags, "Nightmare"))
+        table.contains(data.tags, "Nightmare"))
 end
 
 local PlayerVision = Class(function(self, inst)
@@ -250,8 +250,13 @@ function PlayerVision:PushForcedNightVision(source, priority, customcctable, ble
 
     local current = self.forcednightvisionstack[1]
 
-    table.insert(self.forcednightvisionstack, { source = source, priority = priority, cctable = customcctable, blend =
-    blend })
+    table.insert(self.forcednightvisionstack, {
+        source = source,
+        priority = priority,
+        cctable = customcctable,
+        blend =
+            blend
+    })
     table.sort(self.forcednightvisionstack, function(l, r) return l.priority > r.priority end)
 
     local new = self.forcednightvisionstack[1]

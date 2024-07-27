@@ -50,30 +50,29 @@ local function doonact(inst, soundprefix, onact)
         inst._activecount = 0
         inst.SoundEmitter:KillSound("sound")
     end
-    inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_"..soundprefix.."_ding")
+    inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_" .. soundprefix .. "_ding")
 end
 
 local function onbuiltsound(inst, soundprefix)
-    inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_"..soundprefix.."_place")
+    inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_" .. soundprefix .. "_place")
 end
 
 local function createmachine(level, name, soundprefix, sounddelay, techtree, mergeanims, onact)
-
-
-
-
     local function onturnon(inst)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado and inst.components.prototyper then
-	inst.components.prototyper.trees = require("techtree").Create({SCIENCE = 0,})
-	local fx = SpawnPrefab("shock_machines_fx")
-	if fx then local pt = inst:GetPosition() fx.Transform:SetPosition(pt.x, pt.y, pt.z) end 
-	if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-	return 
-	else
-	if inst.components.prototyper then inst.components.prototyper.trees = techtree end
-	end	
-	
+        local alagado = GetClosestInstWithTag("mare", inst, 10)
+        if alagado and inst.components.prototyper then
+            inst.components.prototyper.trees = require("techtree").Create({ SCIENCE = 0, })
+            local fx = SpawnPrefab("shock_machines_fx")
+            if fx then
+                local pt = inst:GetPosition()
+                fx.Transform:SetPosition(pt.x, pt.y, pt.z)
+            end
+            if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
+            return
+        else
+            if inst.components.prototyper then inst.components.prototyper.trees = techtree end
+        end
+
         if inst._activetask == nil and not inst:HasTag("burnt") then
             if mergeanims then
                 if inst.AnimState:IsCurrentAnimation("proximity_loop") then
@@ -95,13 +94,14 @@ local function createmachine(level, name, soundprefix, sounddelay, techtree, mer
                 inst.AnimState:PlayAnimation("proximity_loop", true)
             end
             if not inst.SoundEmitter:PlayingSound("idlesound") then
-                inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_"..soundprefix.."_idle_LP", "idlesound")
+                inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_" .. soundprefix .. "_idle_LP",
+                    "idlesound")
             end
         end
     end
 
     local function onturnoff(inst)
-        if inst._activetask == nil and not inst:HasTag("burnt") then 
+        if inst._activetask == nil and not inst:HasTag("burnt") then
             if mergeanims then
                 inst.AnimState:PushAnimation("proximity_pst")
             end
@@ -122,11 +122,11 @@ local function createmachine(level, name, soundprefix, sounddelay, techtree, mer
     end
 
     local function onactivate(inst)
-        if not inst:HasTag("burnt") then 
+        if not inst:HasTag("burnt") then
             inst.AnimState:PlayAnimation("use")
             inst.AnimState:PushAnimation("idle", false)
             if not inst.SoundEmitter:PlayingSound("sound") then
-                inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_"..soundprefix.."_run", "sound")
+                inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_" .. soundprefix .. "_run", "sound")
             end
             inst._activecount = inst._activecount + 1
             inst:DoTaskInTime(1.5, doonact, soundprefix, onact)
@@ -141,18 +141,17 @@ local function createmachine(level, name, soundprefix, sounddelay, techtree, mer
         inst.AnimState:PlayAnimation("place")
         inst.AnimState:PushAnimation("idle", false)
         inst:DoTaskInTime(sounddelay, onbuiltsound, soundprefix)
-        
-  		if name == "researchlab3" then
-	        AwardPlayerAchievement("build_researchlab3", data.builder)
-	    elseif name == "researchlab4" then
-	        AwardPlayerAchievement("build_researchlab4", data.builder)
-	    end
 
+        if name == "researchlab3" then
+            AwardPlayerAchievement("build_researchlab3", data.builder)
+        elseif name == "researchlab4" then
+            AwardPlayerAchievement("build_researchlab4", data.builder)
+        end
     end
 
     local assets =
     {
-        Asset("ANIM", "anim/"..name..".zip"),
+        Asset("ANIM", "anim/" .. name .. ".zip"),
     }
 
     local prefabs =
@@ -172,14 +171,14 @@ local function createmachine(level, name, soundprefix, sounddelay, techtree, mer
         MakeObstaclePhysics(inst, .4)
 
         inst.MiniMapEntity:SetPriority(5)
-        inst.MiniMapEntity:SetIcon(name..".png")
+        inst.MiniMapEntity:SetIcon(name .. ".png")
 
         inst.AnimState:SetBank(name)
         inst.AnimState:SetBuild(name)
         inst.AnimState:PlayAnimation("idle")
 
         inst:AddTag("structure")
-        inst:AddTag("level"..level)
+        inst:AddTag("level" .. level)
 
         --prototyper (from prototyper component) added to pristine state for optimization
         inst:AddTag("prototyper")

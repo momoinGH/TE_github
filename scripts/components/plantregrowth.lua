@@ -23,7 +23,7 @@ local moon_tree_mult =
 local TimeMultipliers = {
     ["evergreen"] = function()
         return TUNING.EVERGREEN_REGROWTH_TIME_MULT *
-        ((TheWorld.state.issummer and 2) or (TheWorld.state.iswinter and 0) or 1)
+            ((TheWorld.state.issummer and 2) or (TheWorld.state.iswinter and 0) or 1)
     end,
     ["evergreen_sparse"] = function()
         return TUNING.EVERGREEN_REGROWTH_TIME_MULT
@@ -146,7 +146,7 @@ PlantRegrowth.TimeMultipliers = TimeMultipliers
 
 function PlantRegrowth:ResetGrowthTime()
     self.nextregrowth = InternalTimes[self.inst.prefab] +
-    GetRandomWithVariance(self.regrowthrate, self.regrowthrate * 0.2)
+        GetRandomWithVariance(self.regrowthrate, self.regrowthrate * 0.2)
 end
 
 function PlantRegrowth:SetRegrowthRate(rate)

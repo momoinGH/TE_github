@@ -19,12 +19,6 @@ end
 --NOTE: this merge the max of this into DEPLOY_EXTRA_SPACING
 --		see EntityScript:SetDeploySmartRadius(radius)
 function Map:RegisterDeploySmartRadius(radius)
-	DEPLOY_EXTRA_SPACING = math.max(radius + DEPLOYSPACING_RADIUS[DEPLOYSPACING.LARGE] / 2, DEPLOY_EXTRA_SPACING)
-end
-
---NOTE: this merge the max of this into DEPLOY_EXTRA_SPACING
---		see EntityScript:SetDeploySmartRadius(radius)
-function Map:RegisterDeploySmartRadius(radius)
     DEPLOY_EXTRA_SPACING = math.max(radius + DEPLOYSPACING_RADIUS[DEPLOYSPACING.LARGE] / 2, DEPLOY_EXTRA_SPACING)
 end
 
@@ -110,9 +104,10 @@ function Map:IsTemporaryTileAtPoint(x, y, z)
 end
 
 function Map:IsOceanAtPoint(x, y, z, allow_boats)
-    return self:IsOceanTileAtPoint(x, y, z)                       -- Location is in the ocean tile range
-        and not self:IsVisualGroundAtPoint(x, y, z)               -- Location is NOT in the world overhang space
-        and (allow_boats or self:GetPlatformAtPoint(x, z) == nil)     -- The location either accepts boats, or is not the location of a boat
+    return self:IsOceanTileAtPoint(x, y, z)                   -- Location is in the ocean tile range
+        and not self:IsVisualGroundAtPoint(x, y, z)           -- Location is NOT in the world overhang space
+        and
+        (allow_boats or self:GetPlatformAtPoint(x, z) == nil) -- The location either accepts boats, or is not the location of a boat
 end
 
 function Map:IsValidTileAtPoint(x, y, z)
@@ -144,7 +139,7 @@ function Map:IsTerraformingBlockedByAnObject(tile_x, tile_y)
     local cx, _, cz = self:GetTileCenterPoint(tile_x, tile_y)
     for _, blocker in ipairs(TheSim:FindEntities(cx, 0, cz, TERRAFORM_EXTRA_SPACING, TERRAFORMBLOCKER_TAGS, TERRAFORMBLOCKER_IGNORE_TAGS)) do
         if blocker.entity:IsVisible() and
-                blocker:GetDistanceSqToPoint(cx, 0, cz) < blocker.terraform_extra_spacing * blocker.terraform_extra_spacing then
+            blocker:GetDistanceSqToPoint(cx, 0, cz) < blocker.terraform_extra_spacing * blocker.terraform_extra_spacing then
             return true
         end
     end
@@ -214,14 +209,15 @@ local HOLE_TAGS = { "groundhole" }
 local BLOCKED_ONEOF_TAGS = { "groundtargetblocker", "groundhole" }
 
 function Map:CanTillSoilAtPoint(x, y, z, ignore_tile_type)
-	return (ignore_tile_type and self:CanPlantAtPoint(x, y, z) or self:IsFarmableSoilAtPoint(x, y, z))
-			and self:IsDeployPointClear(Vector3(x, y, z), nil, GetFarmTillSpacing(), nil, nil, nil, TILLSOIL_IGNORE_TAGS)
+    return (ignore_tile_type and self:CanPlantAtPoint(x, y, z) or self:IsFarmableSoilAtPoint(x, y, z))
+        and self:IsDeployPointClear(Vector3(x, y, z), nil, GetFarmTillSpacing(), nil, nil, nil, TILLSOIL_IGNORE_TAGS)
 end
 
 function Map:IsPointNearHole(pt, range)
     range = range or .5
     for _, hole in ipairs(TheSim:FindEntities(pt.x, 0, pt.z, DEPLOY_EXTRA_SPACING + range, HOLE_TAGS)) do
-        local radius = (hole._groundhole_outerradius or hole:GetPhysicsRadius(0)) + (hole._groundhole_rangeoverride or range)
+        local radius = (hole._groundhole_outerradius or hole:GetPhysicsRadius(0)) +
+            (hole._groundhole_rangeoverride or range)
         local distsq = hole:GetDistanceSqToPoint(pt)
         if distsq < radius * radius then
             local hole_innerradius = hole._groundhole_innerradius
@@ -234,7 +230,8 @@ end
 function Map:IsGroundTargetBlocked(pt, range)
     range = range or .5
     for _, blocker in ipairs(TheSim:FindEntities(pt.x, 0, pt.z, math.max(DEPLOY_EXTRA_SPACING, MAX_GROUND_TARGET_BLOCKER_RADIUS) + range, nil, nil, BLOCKED_ONEOF_TAGS)) do
-        local radius = (blocker.ground_target_blocker_radius or blocker._groundhole_outerradius or blocker:GetPhysicsRadius(0)) + (blocker._groundhole_rangeoverride or range)
+        local radius = (blocker.ground_target_blocker_radius or blocker._groundhole_outerradius or blocker:GetPhysicsRadius(0)) +
+            (blocker._groundhole_rangeoverride or range)
         local distsq = blocker:GetDistanceSqToPoint(pt.x, 0, pt.z)
         if distsq < radius * radius then
             local blocker_innerradius = blocker._groundhole_innerradius
@@ -326,8 +323,11 @@ function Map:CanDeployAtPoint(pt, inst, mouseover)
     end
 
     return (mouseover == nil or mouseover:HasTag("player") or mouseover:HasTag("walkableplatform") or mouseover:HasTag("walkableperipheral"))
-        and self:IsPassableAtPointWithPlatformRadiusBias(x,y,z, false, false, TUNING.BOAT.NO_BUILD_BORDER_RADIUS, true)
-        and self:IsDeployPointClear(pt, inst, inst.replica.inventoryitem ~= nil and inst.replica.inventoryitem:DeploySpacingRadius() or DEPLOYSPACING_RADIUS[DEPLOYSPACING.DEFAULT])
+        and self:IsPassableAtPointWithPlatformRadiusBias(x, y, z, false, false, TUNING.BOAT.NO_BUILD_BORDER_RADIUS, true)
+        and
+        self:IsDeployPointClear(pt, inst,
+            inst.replica.inventoryitem ~= nil and inst.replica.inventoryitem:DeploySpacingRadius() or
+            DEPLOYSPACING_RADIUS[DEPLOYSPACING.DEFAULT])
 end
 
 function Map:CanDeployAtPointoriginal(pt, inst, mouseover)
@@ -417,8 +417,9 @@ function Map:CanDeployWalkablePeripheralAtPoint(pt, inst)
 end
 
 local function IsDockNearOtherOnOcean(other, pt, min_spacing_sq, min_spacing)
-	return IsNearOther(other, pt, min_spacing_sq, min_spacing)
-		and not TheWorld.Map:IsVisualGroundAtPoint(other.Transform:GetWorldPosition())  -- Throw out any tests for anything that's not in the ocean.
+    return IsNearOther(other, pt, min_spacing_sq, min_spacing)
+        and
+        not TheWorld.Map:IsVisualGroundAtPoint(other.Transform:GetWorldPosition()) -- Throw out any tests for anything that's not in the ocean.
 end
 
 function Map:HasAdjacentLandTile(tx, ty) -- Tile coordinates only.
@@ -439,13 +440,13 @@ function Map:CanDeployDockAtPoint(pt, inst, mouseover)
     end
 
     -- TILE_SCALE is the dimension of a tile; 1.0 is the approximate overhang, but we overestimate for safety.
-    local min_distance_from_entities = (TILE_SCALE/2) + 1.2
+    local min_distance_from_entities = (TILE_SCALE / 2) + 1.2
     local min_distance_from_boat = min_distance_from_entities + TUNING.MAX_WALKABLE_PLATFORM_RADIUS
 
     local boat_entities = TheSim:FindEntities(pt.x, 0, pt.z, min_distance_from_boat, WALKABLE_PLATFORM_TAGS)
     for _, v in ipairs(boat_entities) do
         if v.components.walkableplatform ~= nil and
-                math.sqrt(v:GetDistanceSqToPoint(pt.x, 0, pt.z)) <= (v.components.walkableplatform.platform_radius + min_distance_from_entities) then
+            math.sqrt(v:GetDistanceSqToPoint(pt.x, 0, pt.z)) <= (v.components.walkableplatform.platform_radius + min_distance_from_entities) then
             return false
         end
     end
@@ -470,7 +471,6 @@ function Map:IsOceanIceAtPoint(x, y, z)
     return tile == WORLD_TILES.OCEAN_ICE
 end
 
-
 function Map:CanDeployBoatAtPointInWater(pt, inst, mouseover, data)
     local tile = self:GetTileAtPoint(pt.x, pt.y, pt.z)
     if TileGroupManager:IsInvalidTile(tile) then
@@ -481,7 +481,8 @@ function Map:CanDeployBoatAtPointInWater(pt, inst, mouseover, data)
     local boat_extra_spacing = data.boat_extra_spacing
     local min_distance_from_land = data.min_distance_from_land
 
-    local entities = TheSim:FindEntities(pt.x, 0, pt.z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS + boat_radius + boat_extra_spacing, WALKABLE_PLATFORM_TAGS)
+    local entities = TheSim:FindEntities(pt.x, 0, pt.z,
+        TUNING.MAX_WALKABLE_PLATFORM_RADIUS + boat_radius + boat_extra_spacing, WALKABLE_PLATFORM_TAGS)
     for i, v in ipairs(entities) do
         local v_walkableplatform = v.components.walkableplatform
         if v_walkableplatform then
@@ -546,7 +547,7 @@ end
 
 function Map:IsSurroundedByWater(x, y, z, radius)
     radius = radius + 1 --add 1 to radius for map overhang, way cheaper than doing an IsVisualGround test
-    local num_edge_points = math.ceil((radius*2) / 4) - 1
+    local num_edge_points = math.ceil((radius * 2) / 4) - 1
 
     --test the corners first
     if not self:IsOceanTileAtPoint(x + radius, y, z + radius) then return false end
@@ -557,7 +558,7 @@ function Map:IsSurroundedByWater(x, y, z, radius)
     --if the radius is less than 1(2 after the +1), it won't have any edges to test and we can end the testing here.
     if num_edge_points == 0 then return true end
 
-    local dist = (radius*2) / (num_edge_points + 1)
+    local dist = (radius * 2) / (num_edge_points + 1)
     --test the edges next
     for i = 1, num_edge_points do
         local idist = dist * i
@@ -580,7 +581,7 @@ end
 
 function Map:IsSurroundedByLand(x, y, z, radius)
     radius = radius + 1 --add 1 to radius for map overhang, way cheaper than doing an IsVisualGround test
-    local num_edge_points = math.ceil((radius*2) / 4) - 1
+    local num_edge_points = math.ceil((radius * 2) / 4) - 1
 
     --test the corners first
     if not self:IsLandTileAtPoint(x + radius, y, z + radius) then return false end
@@ -591,7 +592,7 @@ function Map:IsSurroundedByLand(x, y, z, radius)
     --if the radius is less than 1(2 after the +1), it won't have any edges to test and we can end the testing here.
     if num_edge_points == 0 then return true end
 
-    local dist = (radius*2) / (num_edge_points + 1)
+    local dist = (radius * 2) / (num_edge_points + 1)
     --test the edges next
     for i = 1, num_edge_points do
         local idist = dist * i
@@ -615,15 +616,15 @@ end
 function Map:GetNearestPointOnWater(x, z, radius, iterations)
     local test_increment = radius / iterations
 
-    for i=1,iterations do
-        local test_x, test_z = 0,0
+    for i = 1, iterations do
+        local test_x, test_z = 0, 0
 
         test_x, test_z = x + test_increment * i, z + 0
         if self:InternalIsPointOnWater(test_x, test_z) then
             return true, test_x, test_z
         end
 
-        test_x, test_z = x +0, z + test_increment * i
+        test_x, test_z = x + 0, z + test_increment * i
         if self:InternalIsPointOnWater(test_x, test_z) then
             return true, test_x, test_z
         end
@@ -643,10 +644,10 @@ function Map:GetNearestPointOnWater(x, z, radius, iterations)
 end
 
 function Map:InternalIsPointOnWater(test_x, test_y, test_z)
-	if test_z == nil then -- to support passing in (x, z) instead of (x, y, x)
-		test_z = test_y
-		test_y = 0
-	end
+    if test_z == nil then -- to support passing in (x, z) instead of (x, y, x)
+        test_z = test_y
+        test_y = 0
+    end
     if self:IsVisualGroundAtPoint(test_x, test_y, test_z) or self:GetPlatformAtPoint(test_x, test_y, test_z) ~= nil then
         return false
     else
@@ -654,14 +655,15 @@ function Map:InternalIsPointOnWater(test_x, test_y, test_z)
     end
 end
 
-local WALKABLE_PLATFORM_TAGS = {"walkableplatform"}
+local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
 
 function Map:GetPlatformAtPoint(pos_x, pos_y, pos_z, extra_radius)
-	if pos_z == nil then -- to support passing in (x, z) instead of (x, y, x)
-		pos_z = pos_y
-		pos_y = 0
-	end
-    local entities = TheSim:FindEntities(pos_x, pos_y, pos_z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS + (extra_radius or 0), WALKABLE_PLATFORM_TAGS)
+    if pos_z == nil then -- to support passing in (x, z) instead of (x, y, x)
+        pos_z = pos_y
+        pos_y = 0
+    end
+    local entities = TheSim:FindEntities(pos_x, pos_y, pos_z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS + (extra_radius or 0),
+        WALKABLE_PLATFORM_TAGS)
     for i, v in ipairs(entities) do
         if v.components.walkableplatform and math.sqrt(v:GetDistanceSqToPoint(pos_x, 0, pos_z)) <= v.components.walkableplatform.platform_radius then
             return v
@@ -672,8 +674,8 @@ end
 
 function Map:FindRandomPointWithFilter(max_tries, filterfn)
     local w, h = self:GetSize()
-    w = w/2 * TILE_SCALE
-    h = h/2 * TILE_SCALE
+    w = w / 2 * TILE_SCALE
+    h = h / 2 * TILE_SCALE
     -- NOTES(JBK): w and h are now half width and half height sample from -w and +w
     while (max_tries > 0) do
         max_tries = max_tries - 1
@@ -733,8 +735,8 @@ function Map:GetRandomPointClustersForNodePrefix(prefixes, countpernode)
     for id, name in ipairs(topology.ids) do
         for _, prefix in ipairs(prefixes) do
             if name:sub(1, #prefix) == prefix then
-                local area =  topology.nodes[id]
-                table.insert(ret, {self:GetRandomPointsForSite(area.x, area.y, area.poly, countpernode)})
+                local area = topology.nodes[id]
+                table.insert(ret, { self:GetRandomPointsForSite(area.x, area.y, area.poly, countpernode) })
             end
         end
     end
@@ -743,54 +745,57 @@ function Map:GetRandomPointClustersForNodePrefix(prefixes, countpernode)
 end
 
 local function FindVisualNodeAtPoint_TestArea(map, pt_x, pt_z, on_land, r)
-	local best = {tile_type = WORLD_TILES.INVALID, render_layer = -1}
-	for _z = -1, 1 do
-		for _x = -1, 1 do
-			local x, z = pt_x + _x*r, pt_z + _z*r
+    local best = { tile_type = WORLD_TILES.INVALID, render_layer = -1 }
+    for _z = -1, 1 do
+        for _x = -1, 1 do
+            local x, z = pt_x + _x * r, pt_z + _z * r
 
-			local tile_type = map:GetTileAtPoint(x, 0, z)
-			if on_land == IsLandTile(tile_type) then
-				local tile_info = GetTileInfo(tile_type)
-				local render_layer = tile_info ~= nil and tile_info._render_layer or 0
-				if render_layer > best.render_layer then
-					best.tile_type = tile_type
-					best.render_layer = render_layer
-					best.x = x
-					best.z = z
-				end
-			end
-		end
-	end
+            local tile_type = map:GetTileAtPoint(x, 0, z)
+            if on_land == IsLandTile(tile_type) then
+                local tile_info = GetTileInfo(tile_type)
+                local render_layer = tile_info ~= nil and tile_info._render_layer or 0
+                if render_layer > best.render_layer then
+                    best.tile_type = tile_type
+                    best.render_layer = render_layer
+                    best.x = x
+                    best.z = z
+                end
+            end
+        end
+    end
 
-	return best.tile_type ~= WORLD_TILES.INVALID and best or nil
+    return best.tile_type ~= WORLD_TILES.INVALID and best or nil
 end
 
 -- !! NOTE: This function is fairly expensive!
 function Map:FindVisualNodeAtPoint(x, y, z, has_tag)
-	local on_land = self:IsVisualGroundAtPoint(x, 0, z)
+    local on_land = self:IsVisualGroundAtPoint(x, 0, z)
 
-	local best = FindVisualNodeAtPoint_TestArea(self, x, z, on_land, 0.95)
-				or FindVisualNodeAtPoint_TestArea(self, x, z, on_land, 1.25) -- this is the handle some of the corner case when there the player is really standing quite far into the water tile, but logically on land
-				or FindVisualNodeAtPoint_TestArea(self, x, z, on_land, 1.5)
+    local best = FindVisualNodeAtPoint_TestArea(self, x, z, on_land, 0.95)
+        or
+        FindVisualNodeAtPoint_TestArea(self, x, z, on_land, 1.25) -- this is the handle some of the corner case when there the player is really standing quite far into the water tile, but logically on land
+        or FindVisualNodeAtPoint_TestArea(self, x, z, on_land, 1.5)
 
-	local node_index = (on_land and best ~= nil) and self:GetNodeIdAtPoint(best.x, 0, best.z) or 0
-	if has_tag == nil then
-		return TheWorld.topology.nodes[node_index], node_index
-	else
-		local node = TheWorld.topology.nodes[node_index]
-		return ((node ~= nil and table.contains(node.tags, has_tag)) and node or nil), node_index
-	end
+    local node_index = (on_land and best ~= nil) and self:GetNodeIdAtPoint(best.x, 0, best.z) or 0
+    if has_tag == nil then
+        return TheWorld.topology.nodes[node_index], node_index
+    else
+        local node = TheWorld.topology.nodes[node_index]
+        return ((node ~= nil and table.contains(node.tags, has_tag)) and node or nil), node_index
+    end
 end
 
 function Map:IsInLunacyArea(x, y, z)
-	return (TheWorld.state.isalterawake and TheWorld.state.isnight) or self:FindVisualNodeAtPoint(x, y, z, "lunacyarea") ~= nil
+    return (TheWorld.state.isalterawake and TheWorld.state.isnight) or
+        self:FindVisualNodeAtPoint(x, y, z, "lunacyarea") ~= nil
 end
 
 function Map:CanCastAtPoint(pt, alwayspassable, allowwater, deployradius)
-	if alwayspassable or (self:IsPassableAtPoint(pt.x, 0, pt.z, allowwater) and not self:IsGroundTargetBlocked(pt)) then
-		return deployradius == nil or deployradius <= 0 or self:IsDeployPointClear(pt, nil, deployradius, nil, nil, nil, CAST_DEPLOY_IGNORE_TAGS)
-	end
-	return false
+    if alwayspassable or (self:IsPassableAtPoint(pt.x, 0, pt.z, allowwater) and not self:IsGroundTargetBlocked(pt)) then
+        return deployradius == nil or deployradius <= 0 or
+            self:IsDeployPointClear(pt, nil, deployradius, nil, nil, nil, CAST_DEPLOY_IGNORE_TAGS)
+    end
+    return false
 end
 
 function Map:IsTileLandNoDocks(tile)
@@ -822,16 +827,12 @@ function Map:IsAboveGroundInSquare(x, y, z, r, filterfn)
     return true
 end
 
-
-
-
-
 local GOOD_ARENA_SQUARE_SIZE = 6
 local IS_CLEAR_AREA_RADIUS = TILE_SCALE * GOOD_ARENA_SQUARE_SIZE
 local NO_PLAYER_RADIUS = 35
 ----------------------------------------------------------------------------------------
 -- Land
-local GOODARENAPOINTS_CACHE_SIZE_MIN = 50 -- 50 points are good enough for a good placement strategy.
+local GOODARENAPOINTS_CACHE_SIZE_MIN = 50  -- 50 points are good enough for a good placement strategy.
 local GOODARENAPOINTS_CACHE_SIZE_MAX = 100 -- Do not exceed hard limit for memory's sake.
 local GOODARENAPOINTS_ITERATIONS_PER_TICK = 20
 local GOODARENAPOINTS_TIME_PER_TICK = 0.1
@@ -844,12 +845,13 @@ function Map:ClearGoodArenaPoints()
     GoodArenaPoints = {}
     GoodArenaPoints_Count = 0
 end
+
 function Map:GetGoodArenaPoints()
     return GoodArenaPoints, GoodArenaPoints_Count
 end
 
-local BADARENA_CANT_TAGS = {"tree", "boulder", "spiderden", "okayforarena"}
-local BADARENA_ONEOF_TAGS = {"structure", "blocker", "plant", "antlion_sinkhole_blocker"}
+local BADARENA_CANT_TAGS = { "tree", "boulder", "spiderden", "okayforarena" }
+local BADARENA_ONEOF_TAGS = { "structure", "blocker", "plant", "antlion_sinkhole_blocker" }
 function Map:CheckForBadThingsInArena(pt, badthingsatspawnpoints)
     local x, y, z = pt.x, pt.y, pt.z
     if self:IsAboveGroundInSquare(x, y, z, GOOD_ARENA_SQUARE_SIZE, self.IsTileLandNoDocks) and not IsAnyPlayerInRange(x, y, z, NO_PLAYER_RADIUS) then
@@ -920,6 +922,7 @@ function Map:StartFindingGoodArenaPoints()
     end
     TheWorld._GoodArenaPoints_Task = TheWorld:DoPeriodicTask(GOODARENAPOINTS_TIME_PER_TICK, DoIteration)
 end
+
 function Map:StopFindingGoodArenaPoints()
     if TheWorld._GoodArenaPoints_Task ~= nil then
         TheWorld._GoodArenaPoints_Task:Cancel()
@@ -997,10 +1000,11 @@ function Map:FindBestSpawningPointForArena(CustomAllowTest, perfect_only, spawnp
 
     return x, y, z
 end
+
 -- Land
 ----------------------------------------------------------------------------------------
 -- Ocean
-local GOODOCEANARENAPOINTS_CACHE_SIZE_MIN = 50 -- 50 points are good enough for a good placement strategy.
+local GOODOCEANARENAPOINTS_CACHE_SIZE_MIN = 50  -- 50 points are good enough for a good placement strategy.
 local GOODOCEANARENAPOINTS_CACHE_SIZE_MAX = 100 -- Do not exceed hard limit for memory's sake.
 local GOODOCEANARENAPOINTS_ITERATIONS_PER_TICK = 10
 local GOODOCEANARENAPOINTS_TIME_PER_TICK = 0.2
@@ -1013,16 +1017,18 @@ function Map:ClearGoodOceanArenaPoints()
     GoodOceanArenaPoints = {}
     GoodOceanArenaPoints_Count = 0
 end
+
 function Map:GetGoodOceanArenaPoints()
     return GoodOceanArenaPoints, GoodOceanArenaPoints_Count
 end
 
-local BADOCEANARENA_CANT_TAGS = {"tree", "boulder", "spiderden", "okayforarena", "FX", "DECOR", "NOCLICK"}
-local BADOCEANARENA_ONEOF_TAGS = {"structure", "blocker", "antlion_sinkhole_blocker", "ignorewalkableplatforms"}
+local BADOCEANARENA_CANT_TAGS = { "tree", "boulder", "spiderden", "okayforarena", "FX", "DECOR", "NOCLICK" }
+local BADOCEANARENA_ONEOF_TAGS = { "structure", "blocker", "antlion_sinkhole_blocker", "ignorewalkableplatforms" }
 function Map:CheckForBadThingsInOceanArena(pt, badthingsatspawnpoints)
     local x, y, z = pt.x, pt.y, pt.z
     if self:IsAboveGroundInSquare(x, y, z, GOOD_ARENA_SQUARE_SIZE, self.IsTileOcean) and not IsAnyPlayerInRange(x, y, z, NO_PLAYER_RADIUS) then
-        local badthings = TheSim:FindEntities(x, y, z, IS_CLEAR_AREA_RADIUS, nil, BADOCEANARENA_CANT_TAGS, BADOCEANARENA_ONEOF_TAGS)
+        local badthings = TheSim:FindEntities(x, y, z, IS_CLEAR_AREA_RADIUS, nil, BADOCEANARENA_CANT_TAGS,
+            BADOCEANARENA_ONEOF_TAGS)
         local badthingscount = #badthings
         if badthingsatspawnpoints then
             badthingsatspawnpoints[pt] = badthingscount
@@ -1081,6 +1087,7 @@ function Map:StartFindingGoodOceanArenaPoints()
     end
     TheWorld._GoodOceanArenaPoints_Task = TheWorld:DoPeriodicTask(GOODOCEANARENAPOINTS_TIME_PER_TICK, DoIteration)
 end
+
 function Map:StopFindingGoodOceanArenaPoints()
     if TheWorld._GoodOceanArenaPoints_Task ~= nil then
         TheWorld._GoodOceanArenaPoints_Task:Cancel()
@@ -1138,9 +1145,10 @@ function Map:FindBestSpawningPointForOceanArena(CustomAllowTest, perfect_only, s
     local function IsValidSpawningPoint_Bridge(pt)
         return self:IsAboveGroundInSquare(pt.x, pt.y, pt.z, GOOD_ARENA_SQUARE_SIZE, self.IsTileOcean)
     end
-    
+
     for r = 5, 15, 5 do
-        local offset = FindWalkableOffset(pt, math.random() * TWOPI, r, 8, false, false, IsValidSpawningPoint_Bridge, true)
+        local offset = FindWalkableOffset(pt, math.random() * TWOPI, r, 8, false, false, IsValidSpawningPoint_Bridge,
+            true)
         if offset ~= nil then
             x = x + offset.x
             z = z + offset.z
@@ -1158,6 +1166,7 @@ function Map:FindBestSpawningPointForOceanArena(CustomAllowTest, perfect_only, s
 
     return x, y, z
 end
+
 -- Ocean
 ----------------------------------------------------------------------------------------
 

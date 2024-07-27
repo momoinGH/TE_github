@@ -11,14 +11,14 @@ local function OnEntityReplicated(inst)
 end
 
 local function MakePot(suffix, goop_suffix, numslots, tag)
-    local name = "pot"..suffix
+    local name = "pot" .. suffix
     local animname = "quagmire_" .. name
     local assets =
     {
         Asset("ANIM", "anim/quagmire_pot_hanger.zip"),
-        Asset("ANIM", "anim/"..animname..".zip"),
-        Asset("ANIM", "anim/quagmire_ui_pot_1x"..tostring(numslots)..".zip"),
-        Asset("INV_IMAGE", animname.."_overcooked"),
+        Asset("ANIM", "anim/" .. animname .. ".zip"),
+        Asset("ANIM", "anim/quagmire_ui_pot_1x" .. tostring(numslots) .. ".zip"),
+        Asset("INV_IMAGE", animname .. "_overcooked"),
     }
 
     local function fn()
@@ -30,11 +30,11 @@ local function MakePot(suffix, goop_suffix, numslots, tag)
         inst.entity:AddNetwork()
 
         MakeInventoryPhysics(inst)
-		MakeInventoryFloatable(inst)
+        MakeInventoryFloatable(inst)
         inst.AnimState:SetBank(animname)
         inst.AnimState:SetBuild(animname)
         inst.AnimState:PlayAnimation("idle")
-        inst.AnimState:OverrideSymbol("goop"..goop_suffix, "quagmire_pot_hanger", "goop"..goop_suffix)
+        inst.AnimState:OverrideSymbol("goop" .. goop_suffix, "quagmire_pot_hanger", "goop" .. goop_suffix)
         inst.AnimState:Hide("goop")
 
         inst:AddTag("quagmire_stewer")

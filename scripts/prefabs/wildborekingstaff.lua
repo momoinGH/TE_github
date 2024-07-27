@@ -11,17 +11,17 @@ local function onfinished(inst)
     inst:Remove()
 end
 
-local function onequip(inst, owner) 
+local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", -- Symbol to override.
-        "swap_pigkingstaff", -- Animation bank we will use to overwrite the symbol.
-        "swap_pigkingstaff") -- Symbol to overwrite it with.
-    owner.AnimState:Show("ARM_carry") 
-    owner.AnimState:Hide("ARM_normal") 
+        "swap_pigkingstaff",                      -- Animation bank we will use to overwrite the symbol.
+        "swap_pigkingstaff")                      -- Symbol to overwrite it with.
+    owner.AnimState:Show("ARM_carry")
+    owner.AnimState:Hide("ARM_normal")
 end
 
-local function onunequip(inst, owner) 
-    owner.AnimState:Hide("ARM_carry") 
-    owner.AnimState:Show("ARM_normal") 
+local function onunequip(inst, owner)
+    owner.AnimState:Hide("ARM_carry")
+    owner.AnimState:Show("ARM_normal")
 end
 
 local function LightningStrike(Target, n)
@@ -29,17 +29,17 @@ local function LightningStrike(Target, n)
         return
     end
 
-    local pos = Target:GetPosition() 
+    local pos = Target:GetPosition()
 
     TheWorld:PushEvent("ms_sendlightningstrike", pos)
-    if math.random()<0.1 then
+    if math.random() < 0.1 then
         TheWorld:PushEvent("ms_forceprecipitation", true)
     end
 
-    Target:DoTaskInTime(1, 
-        function ()
+    Target:DoTaskInTime(1,
+        function()
             LightningStrike(Target, (n or 5) - 1)
-        end)    
+        end)
 end
 
 local function MeteorStrike(Target, n)
@@ -47,9 +47,9 @@ local function MeteorStrike(Target, n)
         return
     end
     SpawnPrefab("shadowmeteor").Transform:SetPosition(Target:GetPosition():Get())
-    
-    Target:DoTaskInTime(1, 
-        function ()
+
+    Target:DoTaskInTime(1,
+        function()
             MeteorStrike(Target, (n or 5) - 1)
         end)
 end
@@ -65,7 +65,6 @@ local function Horror(Target)
 end
 
 function convert_rocks(inst, replacement)
-
     if inst:IsValid() and replacement ~= nil then
         local goop = SpawnPrefab(replacement)
         if goop ~= nil then
@@ -85,11 +84,9 @@ function convert_rocks(inst, replacement)
             end
         end
     end
-
 end
 
-
-function  UseStaff(inst, Target, pos)
+function UseStaff(inst, Target, pos)
     --print("using staff")
     if inst.prefab == "pigking" then
         Target = inst
@@ -108,7 +105,7 @@ function  UseStaff(inst, Target, pos)
     end
 
     if Target then
-        local hitfn = GetRandomItem({LightningStrike, MeteorStrike, Ignite})
+        local hitfn = GetRandomItem({ LightningStrike, MeteorStrike, Ignite })
         hitfn(Target)
         inst.components.finiteuses:Use(1)
 
@@ -119,31 +116,29 @@ function  UseStaff(inst, Target, pos)
     end
 
     if Target == nil then
-        local prefab = GetRandomItem({"wildbore"}) --, "acorn_sapling", "acorn_sapling","acorn_sapling","birchnutdrake", "acorn"})
+        local prefab = GetRandomItem({ "wildbore" }) --, "acorn_sapling", "acorn_sapling","acorn_sapling","birchnutdrake", "acorn"})
         local nut = SpawnPrefab(prefab)
         local cloud = SpawnPrefab("poopcloud")
         nut.Transform:SetPosition(pos:Get())
         cloud.Transform:SetPosition(pos:Get())
         inst.components.finiteuses:Use(1)
-		
-		local caster = inst.components.inventoryitem.owner
-		
-		
-		if nut.components.follower:GetLeader() == nil then
-		local comida = SpawnPrefab("Meat")
-		nut.components.trader:AcceptGift(caster, comida)
-		end		
-		
+
+        local caster = inst.components.inventoryitem.owner
+
+
+        if nut.components.follower:GetLeader() == nil then
+            local comida = SpawnPrefab("Meat")
+            nut.components.trader:AcceptGift(caster, comida)
+        end
     end
 
     return true
 end
 
-
 local function CanCast(doer, target, pos)
     return true
 
---[[
+    --[[
     if target == nil then
         return true
     end
@@ -176,12 +171,12 @@ local function init()
 
     inst:AddTag("staff")
 
-    if TheSim:GetGameID()=="DST" then
-        inst.entity:AddNetwork()        
+    if TheSim:GetGameID() == "DST" then
+        inst.entity:AddNetwork()
         if not TheWorld.ismastersim then
             return inst
-        end        
-        inst.entity:SetPristine()        
+        end
+        inst.entity:SetPristine()
         --MakeHauntableLaunch(inst)
     end
 
@@ -189,11 +184,11 @@ local function init()
     inst.components.weapon:SetDamage(30)
 
     inst:AddComponent("inspectable")
-    
+
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/pigkingstaff.xml"
     inst.components.inventoryitem.imagename = "pigkingstaff"
-    
+
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
@@ -202,16 +197,16 @@ local function init()
     inst:AddComponent("spellcaster")
     inst.components.spellcaster:SetSpellFn(UseStaff)
     inst.components.spellcaster.canuseontargets = true
-    --inst.components.spellcaster.canonlyuseonlocomotorspvp = true    
+    --inst.components.spellcaster.canonlyuseonlocomotorspvp = true
     inst.components.spellcaster.canusefrominventory = false
     inst.components.spellcaster.canuseonpoint = true
     inst.components.spellcaster.CanCast = CanCast
-   
+
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(20)
     inst.components.finiteuses:SetUses(20)
-    inst.components.finiteuses:SetOnFinished( onfinished )
-    
+    inst.components.finiteuses:SetOnFinished(onfinished)
+
     return inst
 end
 

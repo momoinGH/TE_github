@@ -8,7 +8,7 @@ local function onkillfx(inst, anim)
 end
 
 local function KillFX(inst)
-	inst:Remove()
+    inst:Remove()
 end
 
 local function TriggerFX(inst)
@@ -33,25 +33,25 @@ local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-	inst.entity:AddAnimState()
+    inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-	
+
     inst:AddTag("FX")
-	
-	inst.AnimState:SetBank("deer_fire_charge")
+
+    inst.AnimState:SetBank("deer_fire_charge")
     inst.AnimState:SetBuild("deer_fire_charge")
-	inst.AnimState:SetMultColour(0/255, 238/255, 0/255, 1)	
+    inst.AnimState:SetMultColour(0 / 255, 238 / 255, 0 / 255, 1)
     inst.AnimState:SetRayTestOnBB(true)
-	
-	inst.AnimState:PlayAnimation("pre")
-	inst.AnimState:PushAnimation("loop",true)
-	
-	inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+
+    inst.AnimState:PlayAnimation("pre")
+    inst.AnimState:PushAnimation("loop", true)
+
+    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-	
-	inst.AnimState:SetFinalOffset(8)
+
+    inst.AnimState:SetFinalOffset(8)
 
     inst.entity:SetPristine()
 
@@ -60,10 +60,10 @@ local function fn()
     end
 
     inst.persists = false
-	
-	inst.KillFX = KillFX
+
+    inst.KillFX = KillFX
     inst.OnKillFX = onkillfx
-	inst.TriggerFX = TriggerFX
+    inst.TriggerFX = TriggerFX
 
     return inst
 end

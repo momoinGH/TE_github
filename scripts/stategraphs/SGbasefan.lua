@@ -2,16 +2,16 @@ require("stategraphs/commonstates")
 
 local actionhandlers = {}
 
-local events = 
+local events =
 {
 }
 
-local states = 
+local states =
 {
     State
     {
         name = "turn_on",
-        tags = {"idle"},
+        tags = { "idle" },
 
         onenter = function(inst)
             -- inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/firesupressor_on")
@@ -27,7 +27,7 @@ local states =
     State
     {
         name = "turn_off",
-        tags = {"idle"},
+        tags = { "idle" },
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("deactivate")
@@ -42,7 +42,7 @@ local states =
     State
     {
         name = "idle_on",
-        tags = {"idle"},
+        tags = { "idle" },
 
         onenter = function(inst)
             --Start some loop sound
@@ -52,7 +52,7 @@ local states =
             inst.AnimState:PlayAnimation("idle_loop")
         end,
 
-        -- timeline = 
+        -- timeline =
         -- {
         --     TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/firesupressor_chuff") end)
         -- },
@@ -66,7 +66,7 @@ local states =
     State
     {
         name = "idle_off",
-        tags = {"idle"},
+        tags = { "idle" },
 
         onenter = function(inst)
             --Stop some loop sound
@@ -79,14 +79,14 @@ local states =
     State
     {
         name = "spin_up",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, data)
             inst.AnimState:PlayAnimation("launch_pre")
             inst.sg.statemem.data = data
         end,
 
-        events = 
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("shoot", inst.sg.statemem.data) end)
         },
@@ -95,23 +95,22 @@ local states =
     State
     {
         name = "spin_down",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, data)
             inst.AnimState:PlayAnimation("launch_pst")
-
         end,
 
-        events = 
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle_loop") end)
         },
     },
 
     State
-    {  
+    {
         name = "place",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, data)
             inst.AnimState:PlayAnimation("place")
@@ -120,19 +119,19 @@ local states =
 
         timeline = {},
 
-        events = 
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle_loop") end)
         },
     },
 
     State
-    {  
+    {
         name = "hit",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, data)
-            if inst.on then 
+            if inst.on then
                 inst.AnimState:PlayAnimation("hit_on")
             else
                 inst.AnimState:PlayAnimation("hit_off")
@@ -142,10 +141,10 @@ local states =
 
         timeline = {},
 
-        events = 
+        events =
         {
-            EventHandler("animover", function(inst) 
-                if inst.on then 
+            EventHandler("animover", function(inst)
+                if inst.on then
                     inst.sg:GoToState("idle_loop")
                 else
                     inst.sg:GoToState("idle_off")

@@ -1,20 +1,20 @@
 require "brains/spidermonkeybrain"
 require "stategraphs/SGspidermonkey"
 
-local assets = 
+local assets =
 {
     Asset("ANIM", "anim/spiderape_basics.zip"),
     Asset("ANIM", "anim/yeti_build.zip"),
     Asset("ANIM", "anim/spiderape_build.zip"),
 
-	Asset("SOUND", "sound/monkey.fsb"),
+    Asset("SOUND", "sound/monkey.fsb"),
 }
 
-SetSharedLootTable( "spiky_monkey",
-{
---    {"meat", 1.0},
---    {"meat", 1.0},
-})
+SetSharedLootTable("spiky_monkey",
+    {
+        --    {"meat", 1.0},
+        --    {"meat", 1.0},
+    })
 
 local targetDist = TUNING.SPIKY_MONKEY_TFC.TARGET_DIST
 local keepDistSq = TUNING.SPIKY_MONKEY_TFC.KEEP_TARGET_DIST * TUNING.SPIKY_MONKEY_TFC.KEEP_TARGET_DIST
@@ -22,29 +22,29 @@ local slamRadius = TUNING.SPIKY_MONKEY_TFC.SLAM_RADIUS
 local slamDamage = TUNING.SPIKY_MONKEY_TFC.SLAM_DAMAGE
 
 local function OnNewTarget(inst, data)
-	if inst.components.sleeper:IsAsleep() then
-		inst.components.sleeper:WakeUp()
-	end
+    if inst.components.sleeper:IsAsleep() then
+        inst.components.sleeper:WakeUp()
+    end
 end
 
 local function Retarget(inst)
-local player = GetClosestInstWithTag("player", inst, 70)
-if player and not inst:HasTag("nohat") then return inst.components.combat:SetTarget(player) end
-	return FindEntity(inst, targetDist, function(guy)
-		return  inst.components.combat:CanTarget(guy)
-	end, {"monster"}, {"FX", "NOCLICK", "INLIMBO"})
+    local player = GetClosestInstWithTag("player", inst, 70)
+    if player and not inst:HasTag("nohat") then return inst.components.combat:SetTarget(player) end
+    return FindEntity(inst, targetDist, function(guy)
+        return inst.components.combat:CanTarget(guy)
+    end, { "monster" }, { "FX", "NOCLICK", "INLIMBO" })
 end
 
 local function KeepTarget(inst, target)
-	return inst.components.combat:CanTarget(target) and inst:GetDistanceSqToInst(target) <= keepDistSq
+    return inst.components.combat:CanTarget(target) and inst:GetDistanceSqToInst(target) <= keepDistSq
 end
 
 local function OnAttacked(inst, data)
-    if data.attacker == nil and inst.components.combat:CanTarget(data.attacker) then 
-        return 
+    if data.attacker == nil and inst.components.combat:CanTarget(data.attacker) then
+        return
     end
 
-	inst.components.combat:SetTarget(data.attacker)
+    inst.components.combat:SetTarget(data.attacker)
 end
 
 local function OnAttackOther(inst, data)
@@ -54,16 +54,16 @@ end
 local function SlamAttack(inst)
     local notags = { "shadow", "playerghost", "INLIMBO", "NOCLICK", "FX" }
     local x, y, z = inst.Transform:GetWorldPosition()
-    for _, v in pairs(TheSim:FindEntities(x, y, z, slamRadius, {"_combat"}, notags)) do
-        if v ~= inst 
-            and v:IsValid() 
-            and v.entity:IsVisible() 
-            and v.components.combat ~= nil 
+    for _, v in pairs(TheSim:FindEntities(x, y, z, slamRadius, { "_combat" }, notags)) do
+        if v ~= inst
+            and v:IsValid()
+            and v.entity:IsVisible()
+            and v.components.combat ~= nil
         then
             v.components.combat:GetAttacked(inst, slamDamage)
             if v:HasTag("player") then
                 v.sg:GoToState("knockback", { knocker = inst, radius = 5 })
-            end 
+            end
         end
     end
     inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/grunt")
@@ -96,7 +96,7 @@ local function fn()
 
     inst:AddTag("character")
     inst:AddTag("scarytoprey")
-	inst:AddTag("Arena")
+    inst:AddTag("Arena")
 
     inst.entity:SetPristine()
 
@@ -105,29 +105,29 @@ local function fn()
     end
 
     inst:AddComponent("locomotor")
-	inst.components.locomotor.runspeed = TUNING.SPIKY_MONKEY_TFC.SPEED
+    inst.components.locomotor.runspeed = TUNING.SPIKY_MONKEY_TFC.SPEED
 
-	inst:SetStateGraph("SGspikymonkey_tfc")
-	inst:SetBrain(require "brains/spikymonkey_tfcbrain")
+    inst:SetStateGraph("SGspikymonkey_tfc")
+    inst:SetBrain(require "brains/spikymonkey_tfcbrain")
 
-	inst:AddComponent("knownlocations")
+    inst:AddComponent("knownlocations")
 
-	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(TUNING.SPIKY_MONKEY_TFC.HEALTH)
+    inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(TUNING.SPIKY_MONKEY_TFC.HEALTH)
 
-	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(TUNING.SPIKY_MONKEY_TFC.DAMAGE)
-	inst.components.combat:SetAttackPeriod(TUNING.SPIKY_MONKEY_TFC.ATTACK_PERIOD)
-	inst.components.combat:SetRetargetFunction(5, Retarget)
-	inst.components.combat:SetRange(TUNING.SPIKY_MONKEY_TFC.ATTACK_RANGE)
-	inst.components.combat.battlecryenabled = true
+    inst:AddComponent("combat")
+    inst.components.combat:SetDefaultDamage(TUNING.SPIKY_MONKEY_TFC.DAMAGE)
+    inst.components.combat:SetAttackPeriod(TUNING.SPIKY_MONKEY_TFC.ATTACK_PERIOD)
+    inst.components.combat:SetRetargetFunction(5, Retarget)
+    inst.components.combat:SetRange(TUNING.SPIKY_MONKEY_TFC.ATTACK_RANGE)
+    inst.components.combat.battlecryenabled = true
 
-	inst:AddComponent("lootdropper")
-	inst.components.lootdropper:SetChanceLootTable("spiky_monkey")
+    inst:AddComponent("lootdropper")
+    inst.components.lootdropper:SetChanceLootTable("spiky_monkey")
 
-	inst:AddComponent("inspectable")
+    inst:AddComponent("inspectable")
     inst:AddComponent("inventory")
-    
+
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
     inst.components.eater:SetCanEatHorrible()
@@ -135,7 +135,7 @@ local function fn()
     inst.components.eater.strongstomach = true
 
     inst:AddComponent("sleeper")
-    
+
     MakeMediumFreezableCharacter(inst, "body")
     MakeMediumBurnableCharacter(inst, "body")
 

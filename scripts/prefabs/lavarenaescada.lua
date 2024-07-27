@@ -1,6 +1,6 @@
 local assets =
 {
-Asset("ANIM", "anim/lavaarena_portal.zip"),
+    Asset("ANIM", "anim/lavaarena_portal.zip"),
 }
 
 local fx_assets =
@@ -41,9 +41,9 @@ local function OnActivate(inst, doer)
 end
 
 local function OnActivateByOther(inst, source, doer)
---    if not inst.sg:HasStateTag("open") then
---        inst.sg:GoToState("opening")
---    end
+    --    if not inst.sg:HasStateTag("open") then
+    --        inst.sg:GoToState("opening")
+    --    end
 end
 
 local function onaccept(inst, giver, item)
@@ -57,19 +57,19 @@ local function StartTravelSound(inst, doer)
 end
 
 local function onclose(inst)
-local invader = GetClosestInstWithTag("lavaarena_portal_activeanim", inst, 3)
-if invader then
-invader:Remove()
-end
+    local invader = GetClosestInstWithTag("lavaarena_portal_activeanim", inst, 3)
+    if invader then
+        invader:Remove()
+    end
 end
 
 local function onopen(inst)
-local invader = GetClosestInstWithTag("lavaarena_portal_activeanim", inst, 3)
-if not invader then
-local portaentrada = SpawnPrefab("lavaarena_portal_activeanim")
-local a, b, c = inst.Transform:GetWorldPosition()
-portaentrada.Transform:SetPosition(a, b, c)
-end
+    local invader = GetClosestInstWithTag("lavaarena_portal_activeanim", inst, 3)
+    if not invader then
+        local portaentrada = SpawnPrefab("lavaarena_portal_activeanim")
+        local a, b, c = inst.Transform:GetWorldPosition()
+        portaentrada.Transform:SetPosition(a, b, c)
+    end
 end
 
 local function fn()
@@ -79,9 +79,9 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
+
     inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("forge_portal.png")
+    inst.MiniMapEntity:SetIcon("forge_portal.png")
 
     inst.AnimState:SetBuild("lavaarena_portal")
     inst.AnimState:SetBank("lavaarena_portal")
@@ -104,11 +104,11 @@ local function fn()
         return inst
     end
 
-	inst:AddComponent("playerprox")
+    inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(10, 13)
     inst.components.playerprox:SetOnPlayerNear(onopen)
-    inst.components.playerprox:SetOnPlayerFar(onclose)	
-	
+    inst.components.playerprox:SetOnPlayerFar(onclose)
+
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
 
@@ -125,18 +125,17 @@ local function fn()
     inst.components.trader.acceptnontradable = true
     inst.components.trader.onaccept = onaccept
     inst.components.trader.deleteitemonaccept = false
-	
-inst:DoTaskInTime(1, function(inst)		
-for k,v in pairs(Ents) do
-if v ~= inst and v.prefab == "lavarenaescada" then
-inst.components.teleporter.targetTeleporter = v
-v.components.teleporter.targetTeleporter = inst
-end
-end
 
-end)
-	
-	
+    inst:DoTaskInTime(1, function(inst)
+        for k, v in pairs(Ents) do
+            if v ~= inst and v.prefab == "lavarenaescada" then
+                inst.components.teleporter.targetTeleporter = v
+                v.components.teleporter.targetTeleporter = inst
+            end
+        end
+    end)
+
+
     return inst
 end
 
@@ -147,9 +146,9 @@ local function fn1()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
-	inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("forge_portal.png")
+
+    inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon("forge_portal.png")
 
     inst.AnimState:SetBuild("lavaarena_portal")
     inst.AnimState:SetBank("lavaarena_portal")
@@ -172,11 +171,11 @@ local function fn1()
         return inst
     end
 
-	inst:AddComponent("playerprox")
+    inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(10, 13)
     inst.components.playerprox:SetOnPlayerNear(onopen)
-    inst.components.playerprox:SetOnPlayerFar(onclose)	
-	
+    inst.components.playerprox:SetOnPlayerFar(onclose)
+
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
 
@@ -193,8 +192,8 @@ local function fn1()
     inst.components.trader.acceptnontradable = true
     inst.components.trader.onaccept = onaccept
     inst.components.trader.deleteitemonaccept = false
-	
-	
+
+
     return inst
 end
 
@@ -210,19 +209,19 @@ local function activefx_fn()
     inst.AnimState:PlayAnimation("portal_pre")
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:OverrideMultColour(1, 1, 1, .6)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(6)
     inst.AnimState:SetFinalOffset(1)
 
-	inst:AddTag("lavaarena_portal_activeanim")
-	
+    inst:AddTag("lavaarena_portal_activeanim")
+
     inst.entity:AddLight()
     inst.Light:SetFalloff(0.4)
     inst.Light:SetIntensity(.7)
     inst.Light:SetRadius(3)
-    inst.Light:SetColour(249/255, 130/255, 117/255)
-    inst.Light:Enable(true)		
-	
+    inst.Light:SetColour(249 / 255, 130 / 255, 117 / 255)
+    inst.Light:Enable(true)
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -236,6 +235,6 @@ local function activefx_fn()
     return inst
 end
 
-return Prefab("lavaarena_portal_activeanim", activefx_fn, fx_assets), 
-Prefab("lavarenaescada", fn, assets),
-Prefab("lavarenaescada2", fn1, assets)
+return Prefab("lavaarena_portal_activeanim", activefx_fn, fx_assets),
+    Prefab("lavarenaescada", fn, assets),
+    Prefab("lavarenaescada2", fn1, assets)

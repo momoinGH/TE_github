@@ -29,7 +29,7 @@ local function onhit(inst)
             inst.AnimState:PushAnimation("proximity_loop", true)
             if not inst.SoundEmitter:PlayingSound("loop_sound") then
                 inst.SoundEmitter:PlaySound("turnoftides/common/together/seafaring_prototyper/LP", "loop_sound")
-            end            
+            end
         else
             inst.AnimState:PushAnimation("idle", false)
             inst.SoundEmitter:KillSound("loop_sound")
@@ -57,16 +57,19 @@ local function onload(inst, data)
 end
 
 local function onturnon(inst)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado and inst.components.prototyper then
-	inst.components.prototyper.trees = require("techtree").Create({SCIENCE = 0,})
-	local fx = SpawnPrefab("shock_machines_fx")
-	if fx then local pt = inst:GetPosition() fx.Transform:SetPosition(pt.x, pt.y, pt.z) end 
-	if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-	return 
-	else
-	if inst.components.prototyper then inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.SEAFARING_STATION end
-	end
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado and inst.components.prototyper then
+        inst.components.prototyper.trees = require("techtree").Create({ SCIENCE = 0, })
+        local fx = SpawnPrefab("shock_machines_fx")
+        if fx then
+            local pt = inst:GetPosition()
+            fx.Transform:SetPosition(pt.x, pt.y, pt.z)
+        end
+        if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
+        return
+    else
+        if inst.components.prototyper then inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.SEAFARING_STATION end
+    end
 
     if not inst:HasTag("burnt") then
         if inst.AnimState:IsCurrentAnimation("proximity_loop") or
@@ -76,12 +79,12 @@ local function onturnon(inst)
             inst.AnimState:PushAnimation("proximity_loop", true)
             if not inst.SoundEmitter:PlayingSound("loop_sound") then
                 inst.SoundEmitter:PlaySound("turnoftides/common/together/seafaring_prototyper/LP", "loop_sound")
-            end    
+            end
         else
             inst.AnimState:PlayAnimation("proximity_loop", true)
             if not inst.SoundEmitter:PlayingSound("loop_sound") then
                 inst.SoundEmitter:PlaySound("turnoftides/common/together/seafaring_prototyper/LP", "loop_sound")
-            end            
+            end
         end
     end
 end

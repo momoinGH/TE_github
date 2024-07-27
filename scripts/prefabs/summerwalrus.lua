@@ -12,25 +12,25 @@ local prefabs =
 {
     "meat",
     "blowdart_walrus", -- creature weapon
-    "blowdart_pipe", -- player loot
+    "blowdart_pipe",   -- player loot
     "walrushat",
     "walrus_tusk",
 }
 
 local brain = require "brains/walrusbrain"
 
-SetSharedLootTable( 'summerwalrus',
-{
-    {'meat',            1.00},
-    {'blowdart_pipe',   1.00},
---    {'walrushat',       0.25},
-    {'walrus_tusk',     0.50},
-})
+SetSharedLootTable('summerwalrus',
+    {
+        { 'meat',          1.00 },
+        { 'blowdart_pipe', 1.00 },
+        --    {'walrushat',       0.25},
+        { 'walrus_tusk',   0.50 },
+    })
 
-SetSharedLootTable( 'summerwalrus_wee_loot',
-{
-    {'meat',            1.0},
-})
+SetSharedLootTable('summerwalrus_wee_loot',
+    {
+        { 'meat', 1.0 },
+    })
 
 local function ShareTargetFn(dude)
     return dude:HasTag("walrus") and not dude.components.health:IsDead()
@@ -42,12 +42,12 @@ local function OnAttacked(inst, data)
 end
 
 local function Retarget(inst)
-    return FindEntity(inst, TUNING.WALRUS_TARGET_DIST, function(guy) 
-        return inst.components.combat:CanTarget(guy)
-    end,
-    nil,
-    {"hound","walrus"},
-    {"animal","character","monster"}
+    return FindEntity(inst, TUNING.WALRUS_TARGET_DIST, function(guy)
+            return inst.components.combat:CanTarget(guy)
+        end,
+        nil,
+        { "hound", "walrus" },
+        { "animal", "character", "monster" }
     )
 end
 
@@ -58,7 +58,7 @@ end
 local function DoReturn(inst)
     --print("DoReturn", inst)
     if inst.components.homeseeker and inst.components.homeseeker.home then
-        inst.components.homeseeker.home:PushEvent("onwenthome", {doer = inst})
+        inst.components.homeseeker.home:PushEvent("onwenthome", { doer = inst })
         inst:Remove()
     end
 end
@@ -66,7 +66,7 @@ end
 local function OnStopDay(inst)
     --print("OnStopDay", inst)
     if inst:IsAsleep() then
-        DoReturn(inst)  
+        DoReturn(inst)
     end
 end
 
@@ -95,7 +95,7 @@ local function EquipBlowdart(inst)
         blowdart.persists = false
         blowdart.components.inventoryitem:SetOnDroppedFn(inst.Remove)
         blowdart:AddComponent("equippable")
-        
+
         inst.components.inventory:Equip(blowdart)
     end
 end

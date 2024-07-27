@@ -12,59 +12,59 @@ local actionhandlers =
 
 local events =
 {
-	EventHandler("attacked", function(inst) 
-		if not inst.components.health:IsDead() 
-			and not inst.sg:HasStateTag("attack") 
-		then 
-			inst.sg:GoToState("hit") 
-		end 
+	EventHandler("attacked", function(inst)
+		if not inst.components.health:IsDead()
+			and not inst.sg:HasStateTag("attack")
+		then
+			inst.sg:GoToState("hit")
+		end
 	end),
 	EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-	EventHandler("doattack", function(inst, data) 
-		if not inst.components.health:IsDead() 
-			and (inst.sg:HasStateTag("hit") 
-			or not inst.sg:HasStateTag("busy")) 
-		then 
-			inst.sg:GoToState("attack", data.target) 
-		end 
+	EventHandler("doattack", function(inst, data)
+		if not inst.components.health:IsDead()
+			and (inst.sg:HasStateTag("hit")
+				or not inst.sg:HasStateTag("busy"))
+		then
+			inst.sg:GoToState("attack", data.target)
+		end
 	end),
-	EventHandler("docharge", function(inst, target) 
-		if not inst.components.health:IsDead() 
-			and (inst.sg:HasStateTag("hit") 
-			or not inst.sg:HasStateTag("busy")) 
-		then 
-			inst.sg:GoToState("charge", target) 
-		end 
+	EventHandler("docharge", function(inst, target)
+		if not inst.components.health:IsDead()
+			and (inst.sg:HasStateTag("hit")
+				or not inst.sg:HasStateTag("busy"))
+		then
+			inst.sg:GoToState("charge", target)
+		end
 	end),
 	EventHandler("freeze", function(inst) inst.sg:GoToState("frozen") end),
 	CommonHandlers.OnSleep(),
 	CommonHandlers.OnLocomote(true, false),
-    CommonHandlers.OnHop(),		
+	CommonHandlers.OnHop(),
 	--CommonHandlers.OnFreeze(),
 }
 
-local states=
+local states =
 {
 
-	State{
+	State {
 		name = "gohome",
-		tags = {"busy"},
+		tags = { "busy" },
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("attack_1")
 		end,
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst) 
-				inst.sg:GoToState("idle") 
+			EventHandler("animover", function(inst)
+				inst.sg:GoToState("idle")
 				inst:PerformBufferedAction()
 			end),
 		},
 	},
 
-	State{
+	State {
 		name = "idle",
-		tags = {"idle", "canrotate"},
+		tags = { "idle", "canrotate" },
 		onenter = function(inst, playanim)
 			--inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/idle")
 			inst.Physics:Stop()
@@ -74,20 +74,20 @@ local states=
 			else
 				inst.AnimState:PlayAnimation("idle_loop", true)
 			end
-			inst.sg:SetTimeout(2*math.random()+.5)
+			inst.sg:SetTimeout(2 * math.random() + .5)
 		end,
 
 		events =
-        {
-            EventHandler("animover", function(inst)
-                inst.sg:GoToState("idle")
-            end),
-        },
+		{
+			EventHandler("animover", function(inst)
+				inst.sg:GoToState("idle")
+			end),
+		},
 	},
 
-	State{
+	State {
 		name = "attack",
-		tags = {"attack", "busy"},
+		tags = { "attack", "busy" },
 
 		onenter = function(inst, target)
 			inst.sg.statemem.target = target
@@ -97,22 +97,22 @@ local states=
 			inst.AnimState:PlayAnimation("attack1")
 		end,
 
-		timeline=
+		timeline =
 		{
 			TimeEvent(12 * FRAMES, function(inst) --20 frames total
-				inst.components.combat:DoAttack(inst.sg.statemem.target) 	
-            end), 
+				inst.components.combat:DoAttack(inst.sg.statemem.target)
+			end),
 		},
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "charge", --11-26
-		tags = {"busy", "attack"},
+		tags = { "busy", "attack" },
 
 		onenter = function(inst, target)
 			inst.sg.statemem.target = target
@@ -126,37 +126,37 @@ local states=
 			inst.sg.statemem.chargeSpeed = 0
 		end,
 
-		timeline =  --33 frames total
+		timeline = --33 frames total
 		{
-			TimeEvent(18 * FRAMES, function(inst) 
+			TimeEvent(18 * FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/boaron/attack_2")
 				inst.sg.statemem.chargeSpeed = 50
-			end), 
-			
+			end),
+
 			TimeEvent(26 * FRAMES, function(inst)
 				inst.Physics:Stop()
-				inst.sg.statemem.chargeSpeed = 0 
+				inst.sg.statemem.chargeSpeed = 0
 				inst.chargeLastTime = GetTime()
-				inst.components.combat:DoAttack(inst.sg.statemem.target) 
-            end), 
+				inst.components.combat:DoAttack(inst.sg.statemem.target)
+			end),
 		},
 
 		onupdate = function(inst)
-			if inst.sg.statemem.chargeSpeed ~= 0 then 
+			if inst.sg.statemem.chargeSpeed ~= 0 then
 				inst.sg.statemem.chargeSpeed = inst.sg.statemem.chargeSpeed - 3
 				inst.Physics:SetMotorVel(inst.sg.statemem.chargeSpeed, 0, 0)
 			end
-		end, 
+		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "eat",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
 			inst.Physics:Stop()
@@ -164,23 +164,23 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/boaron/stun")
 		end,
 
-		timeline=
+		timeline =
 		{
 			--TimeEvent(14*FRAMES, function(inst) end), --inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/attack") end),
-			TimeEvent(2*FRAMES, function(inst) 
+			TimeEvent(2 * FRAMES, function(inst)
 				inst:PerformBufferedAction()
 			end),
 		},
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst)  inst.sg:GoToState("idle")  end),
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "hit",
-		tags = {"busy", "hit"},
+		tags = { "busy", "hit" },
 
 		onenter = function(inst, cb)
 			inst.Physics:Stop()
@@ -188,15 +188,15 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/boaron/hit")
 		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "taunt",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst, cb)
 			inst.Physics:Stop()
@@ -204,92 +204,92 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/boaron/taunt")
 		end,
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "death",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
 			inst.brain:Stop()
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/boaron/death")
 			inst.AnimState:PlayAnimation("death")
 			inst.Physics:Stop()
-			RemovePhysicsColliders(inst)            
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))            
+			RemovePhysicsColliders(inst)
+			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
 		end,
 
 	},
 
-	State{
-        name = "frozen",
-        tags = {"busy",  "frozen"},
+	State {
+		name = "frozen",
+		tags = { "busy", "frozen" },
 
 		onenter = function(inst)
 			inst.Physics:Stop()
-			inst.AnimState:PlayAnimation("fossilized") 
-        end,
+			inst.AnimState:PlayAnimation("fossilized")
+		end,
 
-        events=
-        {
-			EventHandler("animover", function(inst) inst.AnimState:SetPercent("fossilized", 0.99)  end ),
-			EventHandler("frozen", function(inst) inst.sg:GoToState("frozen")  end ),
-			EventHandler("onthaw", function(inst) inst.sg:GoToState("thaw")  end ),
-			EventHandler("unfreeze", function(inst) inst.sg:GoToState("hit")  end ),
-        },
+		events =
+		{
+			EventHandler("animover", function(inst) inst.AnimState:SetPercent("fossilized", 0.99) end),
+			EventHandler("frozen", function(inst) inst.sg:GoToState("frozen") end),
+			EventHandler("onthaw", function(inst) inst.sg:GoToState("thaw") end),
+			EventHandler("unfreeze", function(inst) inst.sg:GoToState("hit") end),
+		},
 	},
-	
-	State{
-        name = "thaw",
-        tags = {"busy",  "thawing"},
+
+	State {
+		name = "thaw",
+		tags = { "busy", "thawing" },
 
 		onenter = function(inst)
-			inst.AnimState:PlayAnimation("fossilized_shake", true) 
+			inst.AnimState:PlayAnimation("fossilized_shake", true)
 			inst.SoundEmitter:PlaySound("dontstarve/common/freezethaw", "thawing")
 		end,
 
-		onexit = function(inst) 
+		onexit = function(inst)
 			inst.SoundEmitter:KillSound("thawing")
 		end,
-		
-		events=
-        {
-            EventHandler("unfreeze", function(inst) inst.sg:GoToState("hit")  end ),
+
+		events =
+		{
+			EventHandler("unfreeze", function(inst) inst.sg:GoToState("hit") end),
 		},
-    },
+	},
 }
 
 CommonStates.AddSleepStates(states,
-{
-	sleeptimeline = {
-		TimeEvent(0, function(inst) 
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/boaron/sleep")
-		end),
-	},
-})
+	{
+		sleeptimeline = {
+			TimeEvent(0, function(inst)
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/boaron/sleep")
+			end),
+		},
+	})
 
 CommonStates.AddRunStates(states,
-{
-	starttimeline = 
-    {
-	    TimeEvent(0*FRAMES, function(inst) inst.Physics:Stop() end ),
-    },
-	runtimeline = {
-		    TimeEvent(0*FRAMES, function(inst) inst.Physics:Stop() end ),
-            TimeEvent(2*FRAMES, function(inst) 
-                inst.components.locomotor:RunForward()
-            end ),
-            TimeEvent(10*FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/peghook/step")
-                inst.Physics:Stop()
-            end ),
-	},
-})
+	{
+		starttimeline =
+		{
+			TimeEvent(0 * FRAMES, function(inst) inst.Physics:Stop() end),
+		},
+		runtimeline = {
+			TimeEvent(0 * FRAMES, function(inst) inst.Physics:Stop() end),
+			TimeEvent(2 * FRAMES, function(inst)
+				inst.components.locomotor:RunForward()
+			end),
+			TimeEvent(10 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/peghook/step")
+				inst.Physics:Stop()
+			end),
+		},
+	})
 
-CommonStates.AddHopStates(states, true, { pre = "run_pre", loop = "run_loop", pst = "run_pst"})
+CommonStates.AddHopStates(states, true, { pre = "run_pre", loop = "run_loop", pst = "run_pst" })
 
 return StateGraph("hattypiggy_tfc", states, events, "taunt", actionhandlers)

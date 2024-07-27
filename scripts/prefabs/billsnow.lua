@@ -27,20 +27,20 @@ local billsounds =
 	-- TODO: Put related audio here.
 }
 
-SetSharedLootTable( 'bill',
-{
-    {'meat',            1.00},
---    {'bill_quill',      1.00},
---    {'bill_quill',      1.00},
---    {'bill_quill',      0.33},
-})
+SetSharedLootTable('bill',
+	{
+		{ 'meat', 1.00 },
+		--    {'bill_quill',      1.00},
+		--    {'bill_quill',      1.00},
+		--    {'bill_quill',      0.33},
+	})
 
 function IsBillFood(item)
 	return item:HasTag("billfood")
 end
 
 local function KeepTarget(inst, target)
-    return inst.components.combat:CanTarget(target) and target:HasTag("player")
+	return inst.components.combat:CanTarget(target) and target:HasTag("player")
 end
 
 local function CanEat(inst, item)
@@ -48,9 +48,9 @@ local function CanEat(inst, item)
 end
 
 local function OnAttacked(inst, data)
-    local attacker = data and data.attacker
-    inst.components.combat:SetTarget(attacker)
-    inst.components.combat:ShareTarget(attacker, 20, function(dude) return dude:HasTag("platapine") end, 2)
+	local attacker = data and data.attacker
+	inst.components.combat:SetTarget(attacker)
+	inst.components.combat:ShareTarget(attacker, 20, function(dude) return dude:HasTag("platapine") end, 2)
 end
 
 local function fn(Sim)
@@ -60,36 +60,36 @@ local function fn(Sim)
 	local physics = inst.entity:AddPhysics()
 	local sound   = inst.entity:AddSoundEmitter()
 	local shadow  = inst.entity:AddDynamicShadow()
-    inst.entity:AddNetwork()
+	inst.entity:AddNetwork()
 
 	inst.letsGetReadyToTumble = false
 
 	shadow:SetSize(1, 0.75)
 	inst.Transform:SetFourFaced()
 
---	MakeAmphibiousCharacterPhysics(inst, 1, 0.5)
-	MakeCharacterPhysics(inst, 1, 0.5)	
---	MakePoisonableCharacter(inst)
+	--	MakeAmphibiousCharacterPhysics(inst, 1, 0.5)
+	MakeCharacterPhysics(inst, 1, 0.5)
+	--	MakePoisonableCharacter(inst)
 
 	anim:SetBank("bill")
 	anim:SetBuild("bill_agro_build")
 	anim:PlayAnimation("idle", true)
 
 	inst:AddTag("scarytoprey")
-    inst:AddTag("monster")
-    inst:AddTag("hostile")
-    inst:AddTag("platapine")
-    inst:AddTag("walrus")
-    inst:AddTag("houndfriend")	
-	
-    inst.entity:SetPristine()
+	inst:AddTag("monster")
+	inst:AddTag("hostile")
+	inst:AddTag("platapine")
+	inst:AddTag("walrus")
+	inst:AddTag("houndfriend")
+
+	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
 		return inst
-	end	
+	end
 
 	inst:AddComponent("locomotor")
-	
+
 	inst.components.locomotor.runspeed = BILL_RUN_SPEED
 
 	inst:AddComponent("health")
@@ -100,13 +100,14 @@ local function fn(Sim)
 	inst:AddComponent("sleeper")
 	inst:AddComponent("eater")
 	inst.components.eater:SetDiet({ FOODTYPE.VEGGIE }, { FOODTYPE.VEGGIE })
---	inst.components.eater:SetCanEatTestFn(CanEat)
+	--	inst.components.eater:SetCanEatTestFn(CanEat)
 
 	inst:AddComponent("knownlocations")
-	inst:DoTaskInTime(0, function() inst.components.knownlocations:RememberLocation("home", Point(inst.Transform:GetWorldPosition()), true) end)
-	
-	inst:AddComponent("lootdropper")	
-    inst.components.lootdropper:SetChanceLootTable('bill')
+	inst:DoTaskInTime(0,
+		function() inst.components.knownlocations:RememberLocation("home", Point(inst.Transform:GetWorldPosition()), true) end)
+
+	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetChanceLootTable('bill')
 
 	inst:AddComponent("combat")
 	inst.components.combat:SetDefaultDamage(BILL_DAMAGE)

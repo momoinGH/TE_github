@@ -10,23 +10,23 @@ local events =
     CommonHandlers.OnFreeze(),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("attacked",
-    	function(inst)
-    		if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then
-    			inst.sg:GoToState("hit")
-    		end
-    	end),
+        function(inst)
+            if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then
+                inst.sg:GoToState("hit")
+            end
+        end),
     EventHandler("doattack",
-    	function(inst, data)
-    		if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
-    			if inst.State == "above" then
-    				inst.sg:GoToState("attack", data.target)
-    			else
-    				inst.sg:GoToState("enter", "attack")
-    			end
-    		end
-    	end),
-    EventHandler("locomote", 
-        function(inst) 
+        function(inst, data)
+            if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+                if inst.State == "above" then
+                    inst.sg:GoToState("attack", data.target)
+                else
+                    inst.sg:GoToState("enter", "attack")
+                end
+            end
+        end),
+    EventHandler("locomote",
+        function(inst)
             if not inst.sg:HasStateTag("idle") and not inst.sg:HasStateTag("moving") then return end
 
             if inst.components.locomotor:WantsToMoveForward() then
@@ -50,10 +50,10 @@ local states =
     State
     {
         name = "enter",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, nextState)
-        	inst.attackUponSurfacing = (nextState == "attack")
+            inst.attackUponSurfacing = (nextState == "attack")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("enter")
             ---inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/emerge")
@@ -64,19 +64,20 @@ local states =
         events =
         {
             EventHandler("animover", function(inst)
-            	local nextState = "idle"
+                local nextState = "idle"
 
-            	if inst.attackUponSurfacing then
-            		nextState = "attack"
-            	end
+                if inst.attackUponSurfacing then
+                    nextState = "attack"
+                end
 
                 inst.sg:GoToState(nextState)
             end)
         },
-        
+
         timeline =
         {
-            TimeEvent(16* FRAMES,function (inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/emerge") end),
+            TimeEvent(16 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/giant_grub/emerge") end),
         },
 
     },
@@ -84,7 +85,7 @@ local states =
     State
     {
         name = "exit",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -93,37 +94,43 @@ local states =
 
         events =
         {
-            EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
                 inst:SetState("under")
                 inst.last_above_time = GetTime()
-                inst.sg:GoToState("idle") 
+                inst.sg:GoToState("idle")
             end)
         },
 
-        timeline = 
+        timeline =
         {
-            
-            TimeEvent(1* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/jump") end),
-            TimeEvent(22*FRAMES, function(inst) if not inst:HasTag("giantsnow") then inst.components.groundpounder:GroundPound() end end),
-            
-            TimeEvent(20* FRAMES, function(inst) 
+
+            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/giant_grub/jump") end),
+            TimeEvent(22 * FRAMES, function(inst) if not inst:HasTag("giantsnow") then inst.components.groundpounder
+                        :GroundPound() end end),
+
+            TimeEvent(20 * FRAMES, function(inst)
                 if inst.components.burnable:IsBurning() then
                     inst.components.burnable:Extinguish()
                 end
-                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/submerge") 
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/submerge")
             end),
 
-            TimeEvent(33* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
-            TimeEvent(39* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
-            TimeEvent(49* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
-            TimeEvent(54* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
+            TimeEvent(33 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
+            TimeEvent(39 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
+            TimeEvent(49 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
+            TimeEvent(54 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
         },
     },
 
     State
     {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
 
         onenter = function(inst, playanim)
             inst.Physics:Stop()
@@ -143,14 +150,14 @@ local states =
                 elseif inst.State == "under" then
                     inst.AnimState:PlayAnimation("idle_under", true)
                 end
-            end       
+            end
         end,
     },
 
     State
     {
         name = "walk_pre",
-        tags = {"moving", "canrotate"},
+        tags = { "moving", "canrotate" },
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("walk_pre")
@@ -169,7 +176,7 @@ local states =
     State
     {
         name = "walk",
-        tags = {"moving", "canrotate"},
+        tags = { "moving", "canrotate" },
 
         onenter = function(inst)
             inst.components.locomotor:WalkForward()
@@ -180,7 +187,7 @@ local states =
     State
     {
         name = "walk_pst",
-        tags = {"canrotate"},
+        tags = { "canrotate" },
 
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
@@ -201,53 +208,54 @@ local states =
         }
     },
 
-	State
-	{
-		name = "attack",
-		tags = {"attack", "busy"},
+    State
+    {
+        name = "attack",
+        tags = { "attack", "busy" },
 
-		onenter = function(inst, cb)
-			inst.Physics:Stop()
-			inst.components.combat:StartAttack()
-			inst.AnimState:PlayAnimation("action")
-		end,
+        onenter = function(inst, cb)
+            inst.Physics:Stop()
+            inst.components.combat:StartAttack()
+            inst.AnimState:PlayAnimation("action")
+        end,
 
-		timeline =
-		{
-			TimeEvent(4 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
-			-- TODO: Put in a custom sound for the GIANT GRUB attack later.
-			TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/attack") end),
-		},
+        timeline =
+        {
+            TimeEvent(4 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
+            -- TODO: Put in a custom sound for the GIANT GRUB attack later.
+            TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/giant_grub/attack") end),
+        },
 
-		events =
-		{
-			EventHandler("animover", function(inst, data) inst.sg:GoToState("idle") end),
-		}
-	},
+        events =
+        {
+            EventHandler("animover", function(inst, data) inst.sg:GoToState("idle") end),
+        }
+    },
 
-	State
-	{
-		name = "hit",
-		tags = {"busy", "hit"},
+    State
+    {
+        name = "hit",
+        tags = { "busy", "hit" },
 
-		onenter = function(inst)
-			inst.AnimState:PlayAnimation("hit")
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("hit")
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/hit")
-			inst.Physics:Stop()
-		end,
+            inst.Physics:Stop()
+        end,
 
-		events =
-		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-		},
-	},
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },
 
     State
     {
         name = "sleep",
-        tags = {"busy", "sleeping"},
+        tags = { "busy", "sleeping" },
 
-        onenter = function(inst) 
+        onenter = function(inst)
             inst.components.locomotor:StopMoving()
             if inst.State == "under" then
                 inst.AnimState:PlayAnimation("enter")
@@ -259,8 +267,8 @@ local states =
         end,
 
         events =
-        {   
-            EventHandler("animqueueover", function(inst) inst.sg:GoToState("sleeping") end),        
+        {
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("sleeping") end),
             EventHandler("onwakeup", function(inst) inst.sg:GoToState("wake") end),
         },
 
@@ -273,43 +281,45 @@ local states =
             end)
         }
     },
-        
+
     State
     {
         name = "sleeping",
-        tags = {"busy", "sleeping"},
+        tags = { "busy", "sleeping" },
 
-        onenter = function(inst) 
+        onenter = function(inst)
             inst.AnimState:PlayAnimation("sleep_loop")
         end,
 
         events =
-        {   
+        {
             EventHandler("animover", function(inst) inst.sg:GoToState("sleeping") end),
             EventHandler("onwakeup", function(inst) inst.sg:GoToState("wake") end),
         },
 
-       timeline =
+        timeline =
         {
 
-            TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/sleep_in") end),
-            TimeEvent(37 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/sleep_in") end),
+            TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/giant_grub/sleep_in") end),
+            TimeEvent(37 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/giant_grub/sleep_in") end),
 
             --TimeEvent(27*FRAMES, function(inst)
-               -- if not inst.SoundEmitter:PlayingSound("sleep") then
-               --     inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mole/sleep", "sleep")
-               -- end
-           --end),
-           -- TimeEvent(42*FRAMES, function(inst)
-                --inst.SoundEmitter:KillSound("sleep")
+            -- if not inst.SoundEmitter:PlayingSound("sleep") then
+            --     inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mole/sleep", "sleep")
+            -- end
+            --end),
+            -- TimeEvent(42*FRAMES, function(inst)
+            --inst.SoundEmitter:KillSound("sleep")
             --end),
         },
-    },        
+    },
 
     State
     {
         name = "wake",
-        tags = {"busy", "waking"},
+        tags = { "busy", "waking" },
 
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
@@ -332,24 +342,25 @@ local states =
         },
     },
 
-	State
-	{
-		name = "death",
-		tags = {"busy", "stunned"},
+    State
+    {
+        name = "death",
+        tags = { "busy", "stunned" },
 
-		onenter = function(inst)
-			inst.AnimState:PlayAnimation("death")
-			inst.Physics:Stop()
-			RemovePhysicsColliders(inst)
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
-		end,
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("death")
+            inst.Physics:Stop()
+            RemovePhysicsColliders(inst)
+            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+        end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(3 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/death") end),
+            TimeEvent(3 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/giant_grub/death") end),
         }
 
-	},
+    },
 }
 CommonStates.AddFrozenStates(states)
 

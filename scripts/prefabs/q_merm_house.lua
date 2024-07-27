@@ -18,7 +18,7 @@ local loot =
 {
     "boards",
     "cutstone",
-	"cutstone",
+    "cutstone",
     "salmon",
 }
 
@@ -143,7 +143,7 @@ local function fn()
     inst.MiniMapEntity:SetIcon("quagmire_merm_house.png")
 
     inst.AnimState:SetBank("gorge_merm_house")
-	inst.AnimState:SetBuild("gorge_merm_house")
+    inst.AnimState:SetBuild("gorge_merm_house")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("structure")
@@ -216,7 +216,7 @@ local function fn1()
     inst.MiniMapEntity:SetIcon("quagmire_merm_house.png")
 
     inst.AnimState:SetBank("gorge_merm_house")
-	inst.AnimState:SetBuild("gorge_merm_house")
+    inst.AnimState:SetBuild("gorge_merm_house")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("structure")
@@ -242,7 +242,7 @@ local function fn1()
     inst.components.childspawner:SetRegenPeriod(TUNING.TOTAL_DAY_TIME * 4)
     inst.components.childspawner:SetSpawnPeriod(20)
     inst.components.childspawner:SetMaxChildren(1)
---[[
+    --[[
     inst.components.childspawner.emergencychildname = "merm2"
     inst.components.childspawner:SetEmergencyRadius(TUNING.MERMHOUSE_EMERGENCY_RADIUS)
     inst.components.childspawner:SetMaxEmergencyChildren(TUNING.MERMHOUSE_EMERGENCY_MERMS)
@@ -259,7 +259,7 @@ local function fn1()
     MakeLargePropagator(inst)
     inst:ListenForEvent("onignite", onignite)
     inst:ListenForEvent("burntup", onburntup)
-	inst:ListenForEvent("onbuilt", onbuilt)
+    inst:ListenForEvent("onbuilt", onbuilt)
 
     inst:AddComponent("inspectable")
 
@@ -272,5 +272,5 @@ local function fn1()
 end
 
 return Prefab("quagmire_merm_house", fn, assets, prefabs),
-       Prefab("quagmire_merm_house_crafted", fn1, assets, prefabs),
-       MakePlacer("quagmire_merm_house_crafted_placer", "gorge_merm_house", "gorge_merm_house", "idle")
+    Prefab("quagmire_merm_house_crafted", fn1, assets, prefabs),
+    MakePlacer("quagmire_merm_house_crafted_placer", "gorge_merm_house", "gorge_merm_house", "idle")

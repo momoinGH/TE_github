@@ -30,9 +30,9 @@ end
 
 local function OnRemove(inst)
     inst._light:Remove()
-    if IsSteam() then -- Only Steam consoles will not get logs so this would be wasted memory for them.
+    if IsSteam() then                        -- Only Steam consoles will not get logs so this would be wasted memory for them.
         inst._JBK_DEBUG_TRACE = _TRACEBACK() -- FIXME(JBK): Remove this when no longer needed.
-    end	
+    end
 end
 
 -- These represent the boundaries between the ranges (relative to ambient, so ambient is always "0")
@@ -40,7 +40,7 @@ local relative_temperature_thresholds = { -30, -10, 10, 30 }
 
 local function GetRangeForTemperature(temp, ambient)
     local range = 1
-    for i,v in ipairs(relative_temperature_thresholds) do
+    for i, v in ipairs(relative_temperature_thresholds) do
         if temp > ambient + v then
             range = range + 1
         end
@@ -52,18 +52,18 @@ end
 local emitted_temperatures = { -10, 10, 25, 40, 60 }
 
 local function HeatFn(inst, observer)
-local temperaturaaual = TheWorld.state.temperature
-local ex, ey, ez = inst.Transform:GetWorldPosition()	
-local map = TheWorld.Map 
-local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))		
-local posicao1 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez+5))
-local posicao2 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez-5))
-local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex+5, ey, ez))
-local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex-5, ey, ez))
-if posicao == (GROUND.ANTFLOOR) or posicao1 == (GROUND.ANTFLOOR) or posicao2 == (GROUND.ANTFLOOR) or posicao3 == (GROUND.ANTFLOOR) or posicao4 == (GROUND.ANTFLOOR) or
-posicao == (GROUND.WATER_MANGROVE) or posicao1 == (GROUND.WATER_MANGROVE) or posicao2 == (GROUND.WATER_MANGROVE) or posicao3 == (GROUND.WATER_MANGROVE) or posicao4 == (GROUND.WATER_MANGROVE) then
-temperaturaaual = -20
-end	
+    local temperaturaaual = TheWorld.state.temperature
+    local ex, ey, ez = inst.Transform:GetWorldPosition()
+    local map = TheWorld.Map
+    local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
+    local posicao1 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez + 5))
+    local posicao2 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez - 5))
+    local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex + 5, ey, ez))
+    local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex - 5, ey, ez))
+    if posicao == (GROUND.ANTFLOOR) or posicao1 == (GROUND.ANTFLOOR) or posicao2 == (GROUND.ANTFLOOR) or posicao3 == (GROUND.ANTFLOOR) or posicao4 == (GROUND.ANTFLOOR) or
+        posicao == (GROUND.WATER_MANGROVE) or posicao1 == (GROUND.WATER_MANGROVE) or posicao2 == (GROUND.WATER_MANGROVE) or posicao3 == (GROUND.WATER_MANGROVE) or posicao4 == (GROUND.WATER_MANGROVE) then
+        temperaturaaual = -20
+    end
     local range = GetRangeForTemperature(inst.components.temperature:GetCurrent(), temperaturaaual)
     if range <= 2 then
         inst.components.heater:SetThermics(false, true)
@@ -93,7 +93,7 @@ local function UpdateImages(inst, range)
     inst.AnimState:PlayAnimation(tostring(range), true)
     inst.scrapbook_anim = tostring(range)
     local skinname = inst:GetSkinName()
-    inst.components.inventoryitem:ChangeImageName((skinname or "heat_rock")..tostring(range))
+    inst.components.inventoryitem:ChangeImageName((skinname or "heat_rock") .. tostring(range))
     if range == 5 then
         inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
         inst._light.Light:Enable(true)
@@ -118,25 +118,25 @@ local function AdjustLighting(inst, range, ambient)
         local relativetemp = inst.components.temperature:GetCurrent() - ambient
         local baseline = relativetemp - relative_temperature_thresholds[4]
         local brightline = relative_temperature_thresholds[4] + 20
-        inst._light.Light:SetIntensity( math.clamp(0.5 * baseline/brightline, 0, 0.5 ) )
+        inst._light.Light:SetIntensity(math.clamp(0.5 * baseline / brightline, 0, 0.5))
     else
         inst._light.Light:SetIntensity(0)
     end
 end
 
 local function TemperatureChange(inst, data)
-local ambient_temp = TheWorld.state.temperature
-local ex, ey, ez = inst.Transform:GetWorldPosition()	
-local map = TheWorld.Map 
-local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))		
-local posicao1 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez+5))
-local posicao2 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez-5))
-local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex+5, ey, ez))
-local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex-5, ey, ez))
-if posicao == (GROUND.ANTFLOOR) or posicao1 == (GROUND.ANTFLOOR) or posicao2 == (GROUND.ANTFLOOR) or posicao3 == (GROUND.ANTFLOOR) or posicao4 == (GROUND.ANTFLOOR) or
-posicao == (GROUND.WATER_MANGROVE) or posicao1 == (GROUND.WATER_MANGROVE) or posicao2 == (GROUND.WATER_MANGROVE) or posicao3 == (GROUND.WATER_MANGROVE) or posicao4 == (GROUND.WATER_MANGROVE) then
-ambient_temp = -20
-end		
+    local ambient_temp = TheWorld.state.temperature
+    local ex, ey, ez = inst.Transform:GetWorldPosition()
+    local map = TheWorld.Map
+    local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
+    local posicao1 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez + 5))
+    local posicao2 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez - 5))
+    local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex + 5, ey, ez))
+    local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex - 5, ey, ez))
+    if posicao == (GROUND.ANTFLOOR) or posicao1 == (GROUND.ANTFLOOR) or posicao2 == (GROUND.ANTFLOOR) or posicao3 == (GROUND.ANTFLOOR) or posicao4 == (GROUND.ANTFLOOR) or
+        posicao == (GROUND.WATER_MANGROVE) or posicao1 == (GROUND.WATER_MANGROVE) or posicao2 == (GROUND.WATER_MANGROVE) or posicao3 == (GROUND.WATER_MANGROVE) or posicao4 == (GROUND.WATER_MANGROVE) then
+        ambient_temp = -20
+    end
     local cur_temp = inst.components.temperature:GetCurrent()
     local range = GetRangeForTemperature(cur_temp, ambient_temp)
 
@@ -193,17 +193,17 @@ local function OnOwnerChange(inst)
         owner = nextowner
     end
 
-	if owner:HasTag("pocketdimension_container") or owner:HasTag("buried") then
-		inst._light.entity:SetParent(inst.entity)
-		if not inst._light:IsInLimbo() then
-			inst._light:RemoveFromScene()
-		end
-	else
-		inst._light.entity:SetParent(owner.entity)
-		if inst._light:IsInLimbo() then
-			inst._light:ReturnToScene()
-		end
-	end
+    if owner:HasTag("pocketdimension_container") or owner:HasTag("buried") then
+        inst._light.entity:SetParent(inst.entity)
+        if not inst._light:IsInLimbo() then
+            inst._light:RemoveFromScene()
+        end
+    else
+        inst._light.entity:SetParent(owner.entity)
+        if inst._light:IsInLimbo() then
+            inst._light:ReturnToScene()
+        end
+    end
 
     for k, v in pairs(inst._owners) do
         if k:IsValid() then
@@ -287,19 +287,19 @@ local function fn()
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
     inst.OnRemoveEntity = OnRemove
-inst:DoTaskInTime(0.1, function() 
-local ex, ey, ez = inst.Transform:GetWorldPosition()	
-local map = TheWorld.Map 
-local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))		
-local posicao1 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez+5))
-local posicao2 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez-5))
-local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex+5, ey, ez))
-local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex-5, ey, ez))
-if posicao == (GROUND.ANTFLOOR) or posicao1 == (GROUND.ANTFLOOR) or posicao2 == (GROUND.ANTFLOOR) or posicao3 == (GROUND.ANTFLOOR) or posicao4 == (GROUND.ANTFLOOR) or
-posicao == (GROUND.WATER_MANGROVE) or posicao1 == (GROUND.WATER_MANGROVE) or posicao2 == (GROUND.WATER_MANGROVE) or posicao3 == (GROUND.WATER_MANGROVE) or posicao4 == (GROUND.WATER_MANGROVE) then
-inst.components.temperature.current = -20
-end
-end)
+    inst:DoTaskInTime(0.1, function()
+        local ex, ey, ez = inst.Transform:GetWorldPosition()
+        local map = TheWorld.Map
+        local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
+        local posicao1 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez + 5))
+        local posicao2 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez - 5))
+        local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex + 5, ey, ez))
+        local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex - 5, ey, ez))
+        if posicao == (GROUND.ANTFLOOR) or posicao1 == (GROUND.ANTFLOOR) or posicao2 == (GROUND.ANTFLOOR) or posicao3 == (GROUND.ANTFLOOR) or posicao4 == (GROUND.ANTFLOOR) or
+            posicao == (GROUND.WATER_MANGROVE) or posicao1 == (GROUND.WATER_MANGROVE) or posicao2 == (GROUND.WATER_MANGROVE) or posicao3 == (GROUND.WATER_MANGROVE) or posicao4 == (GROUND.WATER_MANGROVE) then
+            inst.components.temperature.current = -20
+        end
+    end)
 
     return inst
 end
