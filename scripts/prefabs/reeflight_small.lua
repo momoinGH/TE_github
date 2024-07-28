@@ -1,7 +1,6 @@
-	
 local assets =
 {
-	Asset("ANIM", "anim/cave_exit_lightsource.zip"),
+    Asset("ANIM", "anim/cave_exit_lightsource.zip"),
 }
 
 local function OnEntityWake(inst)
@@ -19,7 +18,7 @@ local light_params =
         radius = 8,
         intensity = .85,
         falloff = .3,
-        colour = { 180/255, 195/255, 150/255 },
+        colour = { 180 / 255, 195 / 255, 150 / 255 },
         time = 2,
     },
 
@@ -28,7 +27,7 @@ local light_params =
         radius = 8,
         intensity = .6,
         falloff = .6,
-        colour = { 91/255, 164/255, 255/255 },
+        colour = { 91 / 255, 164 / 255, 255 / 255 },
         time = 4,
     },
 
@@ -46,7 +45,7 @@ local light_params =
         radius = 8,
         intensity = .6,
         falloff = .6,
-        colour = { 131/255, 194/255, 255/255 },
+        colour = { 131 / 255, 194 / 255, 255 / 255 },
         time = 4,
     },
 }
@@ -57,7 +56,7 @@ local light_phases = {}
 for k, v in pairs(light_params) do
     table.insert(light_phases, k)
     v.id = #light_phases
-    v.tint = { v.colour[1] * .5, v.colour[2] * .5, v.colour[3] * .5, 0--[[ alpha, zero for additive blending ]] }
+    v.tint = { v.colour[1] * .5, v.colour[2] * .5, v.colour[3] * .5, 0 --[[ alpha, zero for additive blending ]] }
 end
 
 local function pushparams(inst, params)
@@ -106,7 +105,8 @@ local function OnUpdateLight(inst, dt)
         inst._lighttask:Cancel()
         inst._lighttask = nil
     end
-    lerpparams(inst._currentlight, inst._startlight, inst._endlight, inst._endlight.time > 0 and inst._currentlight.time / inst._endlight.time or 1)
+    lerpparams(inst._currentlight, inst._startlight, inst._endlight,
+        inst._endlight.time > 0 and inst._currentlight.time / inst._endlight.time or 1)
     pushparams(inst, inst._currentlight)
 end
 
@@ -157,7 +157,8 @@ local function OnInit(inst)
     if TheWorld.ismastersim then
         inst:WatchWorldState("cavephase", OnCavePhase)
         inst:WatchWorldState("startfullmoon", OnFullMoon)
-        local params = light_params[TheWorld.state.iscavenight and TheWorld.state.isfullmoon and "fullmoon" or TheWorld.state.cavephase]
+        local params = light_params
+        [TheWorld.state.iscavenight and TheWorld.state.isfullmoon and "fullmoon" or TheWorld.state.cavephase]
         if params ~= nil then
             inst._lightphase:set(params.id)
         end
@@ -191,7 +192,7 @@ end
 
 
 local function normalfn()
-	local widthscale = 0.8
+    local widthscale = 0.8
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -204,8 +205,8 @@ local function normalfn()
     inst.AnimState:SetBuild("cave_exit_lightsource")
     inst.AnimState:PlayAnimation("idle_loop", false) -- the looping is annoying
     inst.AnimState:SetLightOverride(1)
-    inst.AnimState:SetMultColour(255/255,177/255,32/255,0)
---    inst.Transform:SetScale(2*widthscale, 2, 2*widthscale) -- Art is made small coz of flash weirdness, the giant stage was exporting strangely
+    inst.AnimState:SetMultColour(255 / 255, 177 / 255, 32 / 255, 0)
+    --    inst.Transform:SetScale(2*widthscale, 2, 2*widthscale) -- Art is made small coz of flash weirdness, the giant stage was exporting strangely
 
     inst:AddTag("NOCLICK")
     inst:AddTag("FX")
@@ -238,7 +239,7 @@ local function normalfn()
     inst._spawntask = nil
 
     inst:AddComponent("hideout")
-    inst.components.hideout:SetSpawnPeriod(5,4)
+    inst.components.hideout:SetSpawnPeriod(5, 4)
     inst.components.hideout:SetSpawnedFn(onspawned)
     inst.components.hideout:StopSpawning()
 
@@ -249,7 +250,7 @@ local function normalfn()
 end
 
 local function smallfn()
-	local widthscale = 0.4
+    local widthscale = 0.4
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -262,8 +263,8 @@ local function smallfn()
     inst.AnimState:SetBuild("cave_exit_lightsource")
     inst.AnimState:PlayAnimation("idle_loop", false) -- the looping is annoying
     inst.AnimState:SetLightOverride(1)
-    inst.AnimState:SetMultColour(255/255,177/255,32/255,0)
- --   inst.Transform:SetScale(2*widthscale, 2, 2*widthscale) -- Art is made small coz of flash weirdness, the giant stage was exporting strangely
+    inst.AnimState:SetMultColour(255 / 255, 177 / 255, 32 / 255, 0)
+    --   inst.Transform:SetScale(2*widthscale, 2, 2*widthscale) -- Art is made small coz of flash weirdness, the giant stage was exporting strangely
 
     inst:AddTag("NOCLICK")
     inst:AddTag("FX")
@@ -296,9 +297,9 @@ local function smallfn()
     inst._spawntask = nil
 
     inst:AddComponent("hideout")
-    inst.components.hideout:SetSpawnPeriod(5,4)
+    inst.components.hideout:SetSpawnPeriod(5, 4)
     inst.components.hideout:SetSpawnedFn(onspawned)
-    inst.components.hideout:StopSpawning()	
+    inst.components.hideout:StopSpawning()
 
     inst.OnEntitySleep = OnEntitySleep
     inst.OnEntityWake = OnEntityWake
@@ -307,4 +308,4 @@ local function smallfn()
 end
 
 return Prefab("reeflight_small", normalfn, assets),
-       Prefab("reeflight_tiny", smallfn, assets)
+    Prefab("reeflight_tiny", smallfn, assets)

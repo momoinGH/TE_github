@@ -4,7 +4,7 @@ local RuinsRespawner = require "prefabs/ruinsrespawner"
 local assets =
 {
     Asset("ANIM", "anim/bishop.zip"),
-	Asset("ANIM", "anim/goldbishop_build.zip"),
+    Asset("ANIM", "anim/goldbishop_build.zip"),
     Asset("ANIM", "anim/bishop_nightmare.zip"),
     Asset("SOUND", "sound/chess.fsb"),
     Asset("SCRIPT", "scripts/prefabs/clockwork_common.lua"),
@@ -30,28 +30,28 @@ local prefabs_nightmare =
 
 local brain = require "brains/bishopbrain"
 
-SetSharedLootTable( 'goldbishop',
-{
-    {'gears',       1.0},
-    {'purplegem',   1.0},
-    {'goldnugget',  1.0},
-    {'goldnugget',  1.0},
-    {'goldnugget',  1.0},
-})
+SetSharedLootTable('goldbishop',
+    {
+        { 'gears',      1.0 },
+        { 'purplegem',  1.0 },
+        { 'goldnugget', 1.0 },
+        { 'goldnugget', 1.0 },
+        { 'goldnugget', 1.0 },
+    })
 
 SetSharedLootTable('bishop',
-{
-    {'gears',       1.0},
-    {'gears',       1.0},
-    {'purplegem',   1.0},
-})
+    {
+        { 'gears',     1.0 },
+        { 'gears',     1.0 },
+        { 'purplegem', 1.0 },
+    })
 
 SetSharedLootTable('bishop_nightmare',
-{
-    {'purplegem',         1.0},
-    {'nightmarefuel',     0.6},
-    {'thulecite_pieces',  0.5},
-})
+    {
+        { 'purplegem',        1.0 },
+        { 'nightmarefuel',    0.6 },
+        { 'thulecite_pieces', 0.5 },
+    })
 
 local function ShouldSleep(inst)
     return clockwork_common.ShouldSleep(inst)
@@ -80,13 +80,13 @@ local function EquipWeapon(inst)
         weapon.entity:AddTransform()
         weapon:AddComponent("weapon")
         weapon.components.weapon:SetDamage(inst.components.combat.defaultdamage)
-        weapon.components.weapon:SetRange(inst.components.combat.attackrange, inst.components.combat.attackrange+4)
+        weapon.components.weapon:SetRange(inst.components.combat.attackrange, inst.components.combat.attackrange + 4)
         weapon.components.weapon:SetProjectile("bishop_charge")
         weapon:AddComponent("inventoryitem")
         weapon.persists = false
         weapon.components.inventoryitem:SetOnDroppedFn(inst.Remove)
         weapon:AddComponent("equippable")
-        
+
         inst.components.inventory:Equip(weapon)
     end
 end
@@ -204,9 +204,9 @@ local function bishop_nightmare_fn()
 end
 
 local function onruinsrespawn(inst, respawner)
-	if not respawner:IsAsleep() then
-		inst.sg:GoToState("ruinsrespawn")
-	end
+    if not respawner:IsAsleep() then
+        inst.sg:GoToState("ruinsrespawn")
+    end
 end
 
 return Prefab("goldbishop", bishop_fn, assets, prefabs)

@@ -44,7 +44,7 @@ local function checkregrow(inst)
         if inst.rain <= 0 then
             inst.components.pickable:Regen()
         end
-    end        
+    end
 end
 
 local function GetStatus(inst)
@@ -59,7 +59,7 @@ local function open(inst)
             inst.growtask:Cancel()
         end
         inst.growtask = inst:DoTaskInTime(3 + math.random() * 6, inst.opentaskfn)
-    end        
+    end
 end
 
 local function close(inst)
@@ -78,7 +78,7 @@ local function onregenfn(inst)
         open(inst)
     else
         inst.AnimState:PushAnimation("inground", false)
-        inst:DoTaskInTime(.25, function() inst.SoundEmitter:PlaySound("dontstarve/common/mushroom_down") end )
+        inst:DoTaskInTime(.25, function() inst.SoundEmitter:PlaySound("dontstarve/common/mushroom_down") end)
     end
 end
 
@@ -105,10 +105,10 @@ local switchtypes = { "_cap", "_cap_cooked", "_mushroom" }
 for i, v in ipairs(switchcolours) do
     for i2, v2 in ipairs(switchtypes) do
         local t = {}
-        switchtable[v..v2] = t
+        switchtable[v .. v2] = t
         for i3, v3 in ipairs(switchcolours) do
             if v ~= v3 then
-                table.insert(t, v3..v2)
+                table.insert(t, v3 .. v2)
             end
         end
     end
@@ -158,13 +158,13 @@ local function OnHauntMush(inst, haunter)
     end
     --#HAUNTFIX
     --if math.random() <= TUNING.HAUNT_CHANCE_VERYRARE then
-        --if inst.components.burnable ~= nil and not inst.components.burnable:IsBurning() and
-            --inst.components.pickable ~= nil and inst.components.pickable.canbepicked then
-            --inst.components.burnable:Ignite()
-            --inst.components.hauntable.hauntvalue = TUNING.HAUNT_MEDIUM
-            --inst.components.hauntable.cooldown_on_successful_haunt = false
-            --ret = true
-        --end
+    --if inst.components.burnable ~= nil and not inst.components.burnable:IsBurning() and
+    --inst.components.pickable ~= nil and inst.components.pickable.canbepicked then
+    --inst.components.burnable:Ignite()
+    --inst.components.hauntable.hauntvalue = TUNING.HAUNT_MEDIUM
+    --inst.components.hauntable.cooldown_on_successful_haunt = false
+    --ret = true
+    --end
     --end
     return ret
 end
@@ -180,7 +180,7 @@ local function mushcommonfn(data)
     inst.AnimState:SetBank("mushrooms")
     inst.AnimState:SetBuild("mushrooms")
     inst.AnimState:PlayAnimation(data.animname)
-    inst.scrapbook_anim = data.animname	
+    inst.scrapbook_anim = data.animname
     inst.AnimState:SetRayTestOnBB(true)
 
     inst.entity:SetPristine()
@@ -196,7 +196,7 @@ local function mushcommonfn(data)
 
     inst.opentaskfn = function()
         inst.AnimState:PlayAnimation("open_inground")
-        inst.AnimState:PushAnimation("open_"..data.animname)
+        inst.AnimState:PushAnimation("open_" .. data.animname)
         inst.AnimState:PushAnimation(data.animname, false)
         inst.SoundEmitter:PlaySound("dontstarve/common/mushroom_up")
         inst.growtask = nil
@@ -206,9 +206,9 @@ local function mushcommonfn(data)
     end
 
     inst.closetaskfn = function()
-        inst.AnimState:PlayAnimation("close_"..data.animname)
+        inst.AnimState:PlayAnimation("close_" .. data.animname)
         inst.AnimState:PushAnimation("inground", false)
-        inst:DoTaskInTime(.25, function() inst.SoundEmitter:PlaySound("dontstarve/common/mushroom_down") end )
+        inst:DoTaskInTime(.25, function() inst.SoundEmitter:PlaySound("dontstarve/common/mushroom_down") end)
         inst.growtask = nil
         if inst.components.pickable then
             inst.components.pickable.caninteractwith = false
@@ -252,9 +252,9 @@ local function mushcommonfn(data)
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetOnHauntFn(OnHauntMush)
 
-    inst:WatchWorldState("iscave"..data.open_time, OnIsOpenPhase)
+    inst:WatchWorldState("iscave" .. data.open_time, OnIsOpenPhase)
 
-    inst:DoPeriodicTask(TUNING.SEG_TIME, checkregrow, TUNING.SEG_TIME + math.random()*TUNING.SEG_TIME)        
+    inst:DoPeriodicTask(TUNING.SEG_TIME, checkregrow, TUNING.SEG_TIME + math.random() * TUNING.SEG_TIME)
 
     if data.open_time == TheWorld.state.cavephase then
         inst.AnimState:PlayAnimation(data.animname)
@@ -263,14 +263,14 @@ local function mushcommonfn(data)
         inst.AnimState:PlayAnimation("inground")
         inst.components.pickable.caninteractwith = false
     end
-	
-	inst:ListenForEvent("beginaporkalypse", function() 
-    local flor = SpawnPrefab(data.transform_prefab)
-	if flor then
-    flor.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst:Remove()
-	end
-	end, TheWorld)
+
+    inst:ListenForEvent("beginaporkalypse", function()
+        local flor = SpawnPrefab(data.transform_prefab)
+        if flor then
+            flor.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            inst:Remove()
+        end
+    end, TheWorld)
 
     return inst
 end
@@ -287,7 +287,8 @@ local function OnHauntCapOrCooked(inst, haunter)
                 new.components.stackable:SetStackSize(inst.components.stackable:StackSize())
             end
             if new.components.inventoryitem ~= nil and inst.components.inventoryitem ~= nil then
-                new.components.inventoryitem:InheritMoisture(inst.components.inventoryitem:GetMoisture(), inst.components.inventoryitem:IsWet())
+                new.components.inventoryitem:InheritMoisture(inst.components.inventoryitem:GetMoisture(),
+                    inst.components.inventoryitem:IsWet())
             end
             if new.components.perishable ~= nil and inst.components.perishable ~= nil then
                 new.components.perishable:SetPercent(inst.components.perishable:GetPercent())
@@ -315,8 +316,8 @@ local function capcommonfn(data)
 
     inst.AnimState:SetBank("mushrooms")
     inst.AnimState:SetBuild("mushrooms")
-    inst.AnimState:PlayAnimation(data.animname.."_cap")
-    inst.scrapbook_anim = data.animname.."_cap"	
+    inst.AnimState:PlayAnimation(data.animname .. "_cap")
+    inst.scrapbook_anim = data.animname .. "_cap"
 
     --cookable (from cookable component) added to pristine state for optimization
     inst:AddTag("cookable")
@@ -339,9 +340,10 @@ local function capcommonfn(data)
     MakeSmallBurnable(inst, TUNING.TINY_BURNTIME)
     MakeSmallPropagator(inst)
     inst:AddComponent("inventoryitem")
-	if data.name == "yelow_mushroom" then 
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"  	
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml" end
+    if data.name == "yelow_mushroom" then
+        inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+        inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+    end
 
     --this is where it gets interesting
     inst:AddComponent("edible")
@@ -360,7 +362,7 @@ local function capcommonfn(data)
     inst:ListenForEvent("spawnedfromhaunt", OnSpawnedFromHaunt)
 
     inst:AddComponent("cookable")
-    inst.components.cookable.product = data.pickloot.."_cooked"
+    inst.components.cookable.product = data.pickloot .. "_cooked"
 
     return inst
 end
@@ -376,9 +378,9 @@ local function cookedcommonfn(data)
 
     inst.AnimState:SetBank("mushrooms")
     inst.AnimState:SetBuild("mushrooms")
-    inst.AnimState:PlayAnimation(data.pickloot.."_cooked")
-    inst.scrapbook_anim = data.pickloot.."_cooked"
-	
+    inst.AnimState:PlayAnimation(data.pickloot .. "_cooked")
+    inst.scrapbook_anim = data.pickloot .. "_cooked"
+
     MakeInventoryFloatable(inst, "small", 0.05, 0.9)
 
     inst.entity:SetPristine()
@@ -398,9 +400,10 @@ local function cookedcommonfn(data)
     MakeSmallBurnable(inst, TUNING.TINY_BURNTIME)
     MakeSmallPropagator(inst)
     inst:AddComponent("inventoryitem")
-	if data.name == "yelow_mushroom" then 
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"  	
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml" end	
+    if data.name == "yelow_mushroom" then
+        inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+        inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+    end
 
     MakeHauntableLaunchAndPerish(inst)
     AddHauntableCustomReaction(inst, OnHauntCapOrCooked, true, false, true)
@@ -425,7 +428,7 @@ local function MakeMushroom(data)
     local prefabs =
     {
         data.pickloot,
-        data.pickloot.."_cooked",
+        data.pickloot .. "_cooked",
         "small_puff",
     }
 
@@ -447,8 +450,8 @@ local function MakeMushroom(data)
     end
 
     return Prefab(data.name, mushfn, mushassets, prefabs),
-           Prefab(data.pickloot, capfn, capassets, prefabs2),
-           Prefab(data.pickloot.."_cooked", cookedfn, cookedassets, prefabs2)
+        Prefab(data.pickloot, capfn, capassets, prefabs2),
+        Prefab(data.pickloot .. "_cooked", cookedfn, cookedassets, prefabs2)
 end
 
 local data =
@@ -494,22 +497,22 @@ local data =
     },]]
     {
         name = "yelow_mushroom",
-        animname="yelow",
-        pickloot="yelow_cap",
+        animname = "yelow",
+        pickloot = "yelow_cap",
         open_time = "day",
         sanity = -TUNING.SANITY_SMALL,
-        health= TUNING.HEALING_MED,
+        health = TUNING.HEALING_MED,
         hunger = TUNING.CALORIES_SMALL,
         cookedsanity = TUNING.SANITY_SMALL,
         cookedhealth = TUNING.HEALING_SMALL,
         cookedhunger = TUNING.CALORIES_SMALL,
         transform_prefab = "mushtree_yelow",
-    },	
+    },
 }
 
 local prefabs = {}
 
-for k,v in pairs(data) do
+for k, v in pairs(data) do
     local shroom, cap, cooked = MakeMushroom(v)
     table.insert(prefabs, shroom)
     table.insert(prefabs, cap)

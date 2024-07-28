@@ -1,6 +1,6 @@
 local assets =
 {
-	Asset("ANIM", "anim/fish.zip"),
+    Asset("ANIM", "anim/fish.zip"),
 }
 
 local prefabs =
@@ -9,14 +9,14 @@ local prefabs =
 }
 
 local function pouch(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	SpawnPrefab("goddess_pouch").Transform:SetPosition(x, y, z)
-	inst:DoTaskInTime(0.1, inst:Remove())
+    local x, y, z = inst.Transform:GetWorldPosition()
+    SpawnPrefab("goddess_pouch").Transform:SetPosition(x, y, z)
+    inst:DoTaskInTime(0.1, inst:Remove())
 end
 
 local function prepouch(inst)
-	inst:SpawnChild("goddess_sparklefx")
-	inst:DoTaskInTime(0.35, pouch)
+    inst:SpawnChild("goddess_sparklefx")
+    inst:DoTaskInTime(0.35, pouch)
 end
 local assets =
 {
@@ -55,9 +55,9 @@ local function commonfn(build, anim, loop, dryable, cookable)
 
     inst.build = build --This is used within SGwilson, sent from an event in fishingrod.lua
 
-	inst:DoTaskInTime(3, prepouch)
+    inst:DoTaskInTime(3, prepouch)
     MakeHauntableLaunchAndPerish(inst)
-	
+
     inst.data = {}
 
     return inst

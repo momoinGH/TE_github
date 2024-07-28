@@ -1,21 +1,21 @@
 local assets = { -- Asset("ANIM", "anim/store_items.zip"),
-Asset("ANIM", "anim/room_shelves.zip"), Asset("ANIM", "anim/pedestal_key.zip"),
-Asset("ATLAS_BUILD", "images/inventoryimages1.xml", 256), Asset("ATLAS_BUILD", "images/inventoryimages2.xml", 256),
-Asset("ATLAS_BUILD", "images/inventoryimages3.xml", 256),
-Asset("ATLAS_BUILD", "images/inventoryimages/volcanoinventory.xml", 256),
-Asset("ATLAS_BUILD", "images/inventoryimages/hamletinventory.xml", 256),
-Asset("ATLAS_BUILD", "images/inventoryimages/cookpotfoods_ham.xml", 256),
-Asset("ATLAS_BUILD", "images/inventoryimages/cookpotfoods_sw.xml", 256),
-Asset("ATLAS_BUILD", "images/inventoryimages/gw_bonestaff.xml", 256),
-Asset("ATLAS_BUILD", "images/inventoryimages/pig_figure.xml", 256)}
+    Asset("ANIM", "anim/room_shelves.zip"), Asset("ANIM", "anim/pedestal_key.zip"),
+    Asset("ATLAS_BUILD", "images/inventoryimages1.xml", 256), Asset("ATLAS_BUILD", "images/inventoryimages2.xml", 256),
+    Asset("ATLAS_BUILD", "images/inventoryimages3.xml", 256),
+    Asset("ATLAS_BUILD", "images/inventoryimages/volcanoinventory.xml", 256),
+    Asset("ATLAS_BUILD", "images/inventoryimages/hamletinventory.xml", 256),
+    Asset("ATLAS_BUILD", "images/inventoryimages/cookpotfoods_ham.xml", 256),
+    Asset("ATLAS_BUILD", "images/inventoryimages/cookpotfoods_sw.xml", 256),
+    Asset("ATLAS_BUILD", "images/inventoryimages/gw_bonestaff.xml", 256),
+    Asset("ATLAS_BUILD", "images/inventoryimages/pig_figure.xml", 256) }
 
 local prefabs = { --    "minisign_item",
---    "minisign_drawn",
-"shelf_slot"}
+    --    "minisign_drawn",
+    "shelf_slot" }
 
 local function smash(inst)
     --    if inst.components.lootdropper then
-    --        local interiorSpawner = GetWorld().components.interiorspawner 
+    --        local interiorSpawner = GetWorld().components.interiorspawner
     --        if interiorSpawner.current_interior then
     --            local originpt = interiorSpawner:getSpawnOrigin()
     --            local x, y, z = inst.Transform:GetWorldPosition()
@@ -69,8 +69,8 @@ local function SetImage(inst, ent, slot)
 
     if src ~= nil and src.components.inventoryitem ~= nil then
         image = ent.inv_image_bg and ent.inv_image_bg.image:sub(1, -5) or
-                    #(ent.components.inventoryitem.imagename or "") > 0 and ent.components.inventoryitem.imagename or
-                    ent.prefab
+            #(ent.components.inventoryitem.imagename or "") > 0 and ent.components.inventoryitem.imagename or
+            ent.prefab
     end
 
     if image ~= nil then
@@ -128,7 +128,6 @@ local function spawnchildren(inst)
             end
             table.insert(inst.shelves, object)
             if inst.shelfitems then
-
                 for index, set in pairs(inst.shelfitems) do
                     if set[1] == i then
                         local item = SpawnPrefab(set[2])
@@ -223,7 +222,6 @@ local function onload(inst, data)
 
         inst.AnimState:PlayAnimation(data.textura, true)
     end
-
 end
 
 local function onloadpostpass(inst, ents, data)
@@ -251,7 +249,6 @@ local function docurse(inst)
 end
 
 local function common(setsize, swp_img_list, locked, physics_round)
-
     local size = setsize or 6
     local inst = CreateEntity()
     inst.entity:AddNetwork()
@@ -327,7 +324,7 @@ local function wood()
     anim:PlayAnimation("wood", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{3, "cutgrass"}, {4, "cutgrass"}, {5, "cutgrass"}, {6, "cutgrass"}}
+    inst.shelfitems = { { 3, "cutgrass" }, { 4, "cutgrass" }, { 5, "cutgrass" }, { 6, "cutgrass" } }
     return inst
 end
 
@@ -337,7 +334,7 @@ local function wood2()
     anim:PlayAnimation("wood", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{3, "rocks"}, {4, "rocks"}, {5, "rocks"}, {6, "rocks"}}
+    inst.shelfitems = { { 3, "rocks" }, { 4, "rocks" }, { 5, "rocks" }, { 6, "rocks" } }
     return inst
 end
 
@@ -347,8 +344,8 @@ local function wood3()
     anim:PlayAnimation("wood", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{1, "trinket_giftshop_3"}, {2, "trinket_giftshop_3"}, {math.random(3, 4), "trinket_giftshop_3"},
-                       {5, "trinket_giftshop_3"}, {6, "trinket_giftshop_3"}}
+    inst.shelfitems = { { 1, "trinket_giftshop_3" }, { 2, "trinket_giftshop_3" }, { math.random(3, 4), "trinket_giftshop_3" },
+        { 5, "trinket_giftshop_3" }, { 6, "trinket_giftshop_3" } }
     return inst
 end
 
@@ -367,7 +364,7 @@ local function marble()
     anim:PlayAnimation("marble", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{3, "petals"}, {4, "petals"}, {5, "petals"}, {6, "petals"}}
+    inst.shelfitems = { { 3, "petals" }, { 4, "petals" }, { 5, "petals" }, { 6, "petals" } }
     return inst
 end
 
@@ -377,7 +374,7 @@ local function marble2()
     anim:PlayAnimation("marble", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{5, "trinket_20"}, {6, "trinket_14"}, {3, "trinket_4"}, {4, "trinket_2"}}
+    inst.shelfitems = { { 5, "trinket_20" }, { 6, "trinket_14" }, { 3, "trinket_4" }, { 4, "trinket_2" } }
     return inst
 end
 
@@ -387,7 +384,7 @@ local function glass()
     anim:PlayAnimation("glass", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{1, "trinket_1"}, {5, "trinket_2"}, {6, "trinket_3"}}
+    inst.shelfitems = { { 1, "trinket_1" }, { 5, "trinket_2" }, { 6, "trinket_3" } }
     return inst
 end
 
@@ -406,7 +403,7 @@ local function hutch()
     anim:PlayAnimation("hutch", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{3, "seeds"}, {4, "seeds"}, {5, "seeds"}, {6, "seeds"}}
+    inst.shelfitems = { { 3, "seeds" }, { 4, "seeds" }, { 5, "seeds" }, { 6, "seeds" } }
     return inst
 end
 
@@ -434,8 +431,8 @@ local function fridge()
     anim:PlayAnimation("fridge", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{1, "fishmeat_small"}, {2, "fishmeat_small"}, {3, "bird_egg"}, {4, "bird_egg"}, {5, "froglegs"},
-                       {6, "froglegs"}}
+    inst.shelfitems = { { 1, "fishmeat_small" }, { 2, "fishmeat_small" }, { 3, "bird_egg" }, { 4, "bird_egg" }, { 5, "froglegs" },
+        { 6, "froglegs" } }
     return inst
 end
 
@@ -456,7 +453,7 @@ local function midcentury2()
     anim:PlayAnimation("midcentury", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{5, "twigs"}, {6, "twigs"}, {3, "twigs"}, {4, "twigs"}}
+    inst.shelfitems = { { 5, "twigs" }, { 6, "twigs" }, { 3, "twigs" }, { 4, "twigs" } }
     return inst
 end
 
@@ -466,7 +463,7 @@ local function midcentury()
     anim:PlayAnimation("midcentury", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{1, "trinket_1"}, {5, "trinket_2"}, {6, "trinket_3"}}
+    inst.shelfitems = { { 1, "trinket_1" }, { 5, "trinket_2" }, { 6, "trinket_3" } }
     return inst
 end
 
@@ -512,7 +509,7 @@ local function pipe()
     anim:PlayAnimation("pipe", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{3, "strawhat"}, {5, "strawhat"}}
+    inst.shelfitems = { { 3, "strawhat" }, { 5, "strawhat" } }
     return inst
 end
 
@@ -540,16 +537,16 @@ local function floating()
     anim:PlayAnimation("floating", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-    inst.shelfitems = {{1, "petals"}, {2, "petals"}, {3, "petals"}, {4, "cutgrass"}, {5, "cutgrass"}, {6, "petals"}}
+    inst.shelfitems = { { 1, "petals" }, { 2, "petals" }, { 3, "petals" }, { 4, "cutgrass" }, { 5, "cutgrass" }, { 6, "petals" } }
     return inst
 end
 
 local function display()
     local escolha = {
-        [1] = {{1, "trinket_giftshop_1"}, {2, "trinket_giftshop_1"}, {3, "trinket_giftshop_1"}},
-        [2] = {{1, "trinket_giftshop_1"}, {3, "trinket_giftshop_1"}},
-        [3] = {{2, "trinket_giftshop_1"}, {3, "trinket_giftshop_1"}},
-        [4] = {{1, "trinket_giftshop_1"}, {2, "trinket_giftshop_1"}}
+        [1] = { { 1, "trinket_giftshop_1" }, { 2, "trinket_giftshop_1" }, { 3, "trinket_giftshop_1" } },
+        [2] = { { 1, "trinket_giftshop_1" }, { 3, "trinket_giftshop_1" } },
+        [3] = { { 2, "trinket_giftshop_1" }, { 3, "trinket_giftshop_1" } },
+        [4] = { { 1, "trinket_giftshop_1" }, { 2, "trinket_giftshop_1" } }
     }
     local inst = common(3, nil, nil, true)
     local anim = inst.AnimState
@@ -562,10 +559,10 @@ end
 
 local function display_metal()
     local escolha = {
-        [1] = {{1, "flint"}, {2, "rocks"}, {3, "flint"}},
-        [2] = {{1, "rocks"}, {2, "rocks"}, {3, "rocks"}},
-        [3] = {{1, "nitre"}, {2, "nitre"}, {3, "rocks"}},
-        [4] = {{1, "rocks"}, {2, "charcoal"}, {3, "charcoal"}}
+        [1] = { { 1, "flint" }, { 2, "rocks" }, { 3, "flint" } },
+        [2] = { { 1, "rocks" }, { 2, "rocks" }, { 3, "rocks" } },
+        [3] = { { 1, "nitre" }, { 2, "nitre" }, { 3, "rocks" } },
+        [4] = { { 1, "rocks" }, { 2, "charcoal" }, { 3, "charcoal" } }
     }
     local inst = display()
     local anim = inst.AnimState
@@ -586,7 +583,7 @@ local function OnTimerDone(inst, data)
             end
         end
         local x, y, z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x, 0, z, 2, {"deletashelf"})
+        local ents = TheSim:FindEntities(x, 0, z, 2, { "deletashelf" })
         for k, item in pairs(ents) do
             if item then
                 item:Remove()
@@ -609,7 +606,7 @@ local function OnTimerDonebonestaff(inst, data)
             end
         end
         local x, y, z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x, 0, z, 2, {"deletashelf"})
+        local ents = TheSim:FindEntities(x, 0, z, 2, { "deletashelf" })
         for k, item in pairs(ents) do
             if item then
                 item:Remove()
@@ -632,7 +629,7 @@ local function OnTimerDonebossboar(inst, data)
             end
         end
         local x, y, z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x, 0, z, 2, {"deletashelf"})
+        local ents = TheSim:FindEntities(x, 0, z, 2, { "deletashelf" })
         for k, item in pairs(ents) do
             if item then
                 item:Remove()
@@ -644,29 +641,28 @@ local function OnTimerDonebossboar(inst, data)
 end
 
 local function ruins()
-
     local escolha = {
-        [1] = {1, "redgem"},
-        [2] = {1, "bluegem"},
-        [3] = {1, "relic_1"},
-        [4] = {1, "relic_2"},
-        [5] = {1, "relic_3"},
-        [6] = {1, "redgem"},
-        [7] = {1, "bluegem"},
-        [8] = {1, "relic_1"},
-        [9] = {1, "relic_2"},
-        [10] = {1, "relic_3"},
-        [11] = {1, "redgem"},
-        [12] = {1, "bluegem"},
-        [13] = {1, "relic_1"},
-        [14] = {1, "relic_2"},
-        [15] = {1, "relic_3"},
-        [16] = {1, "nightsword"},
-        [17] = {1, "ruins_bat"},
-        [18] = {1, "ruinshat"},
-        [19] = {1, "orangestaff"},
-        [20] = {1, "armorruins"},
-        [21] = {1, "multitool_axe_pickaxe"}
+        [1] = { 1, "redgem" },
+        [2] = { 1, "bluegem" },
+        [3] = { 1, "relic_1" },
+        [4] = { 1, "relic_2" },
+        [5] = { 1, "relic_3" },
+        [6] = { 1, "redgem" },
+        [7] = { 1, "bluegem" },
+        [8] = { 1, "relic_1" },
+        [9] = { 1, "relic_2" },
+        [10] = { 1, "relic_3" },
+        [11] = { 1, "redgem" },
+        [12] = { 1, "bluegem" },
+        [13] = { 1, "relic_1" },
+        [14] = { 1, "relic_2" },
+        [15] = { 1, "relic_3" },
+        [16] = { 1, "nightsword" },
+        [17] = { 1, "ruins_bat" },
+        [18] = { 1, "ruinshat" },
+        [19] = { 1, "orangestaff" },
+        [20] = { 1, "armorruins" },
+        [21] = { 1, "multitool_axe_pickaxe" }
     }
 
     local size = 1
@@ -692,7 +688,7 @@ local function ruins()
     anim:SetBuild("room_shelves")
     anim:SetBank("bookcase")
     anim:PlayAnimation("ruins", false)
-    inst.shelfitems = {escolha[math.random(1, 21)]} -- escolha[math.random(1, 21)]
+    inst.shelfitems = { escolha[math.random(1, 21)] } -- escolha[math.random(1, 21)]
     inst.curse = docurse
     inst:AddTag("playercrafted")
 
@@ -725,7 +721,6 @@ local function ruins()
 
         spawnchildren(inst, nil)
         unlock(inst)
-
     end)
 
     inst.entity:SetPristine()
@@ -741,9 +736,8 @@ local function ruins()
 end
 
 local function bonestaff()
-
     local escolhabone = {
-        [1] = {1, "gw_bonestaff"}
+        [1] = { 1, "gw_bonestaff" }
     }
 
     local size = 1
@@ -768,7 +762,7 @@ local function bonestaff()
     anim:SetBuild("room_shelves")
     anim:SetBank("bookcase")
     anim:PlayAnimation("ruins", false)
-    inst.shelfitems = {escolhabone[math.random(1, 1)]}
+    inst.shelfitems = { escolhabone[math.random(1, 1)] }
     inst.curse = docurse
     inst:AddTag("playercrafted")
 
@@ -801,7 +795,6 @@ local function bonestaff()
 
         spawnchildren(inst, nil)
         unlock(inst)
-
     end)
 
     inst.entity:SetPristine()
@@ -818,7 +811,7 @@ end
 
 local function bossboar()
     local escolhaboss = {
-        [1] = {1, "pig_figure"}
+        [1] = { 1, "pig_figure" }
     }
     local size = 1
     local inst = CreateEntity()
@@ -842,7 +835,7 @@ local function bossboar()
     anim:SetBuild("room_shelves")
     anim:SetBank("bookcase")
     anim:PlayAnimation("ruins", false)
-    inst.shelfitems = {escolhaboss[1]}
+    inst.shelfitems = { escolhaboss[1] }
     inst.curse = docurse
     inst:AddTag("playercrafted")
 
@@ -875,7 +868,6 @@ local function bossboar()
 
         spawnchildren(inst, nil)
         unlock(inst)
-
     end)
 
     inst.entity:SetPristine()
@@ -910,35 +902,35 @@ local function queen_display_common(size, list)
 end
 
 local function queen_display1()
-    local inst = queen_display_common(1, {"SWAP_SIGN"})
+    local inst = queen_display_common(1, { "SWAP_SIGN" })
     local anim = inst.AnimState
     anim:PlayAnimation("lock19_east", false)
-    inst.shelfitems = {{1, "key_to_city"}}
+    inst.shelfitems = { { 1, "key_to_city" } }
     return inst
 end
 
 local function queen_display2()
-    local inst = queen_display_common(1, {"SWAP_SIGN"})
+    local inst = queen_display_common(1, { "SWAP_SIGN" })
     local anim = inst.AnimState
 
     anim:PlayAnimation("lock17_east", false)
-    inst.shelfitems = {{1, "trinket_giftshop_4"}}
+    inst.shelfitems = { { 1, "trinket_giftshop_4" } }
     return inst
 end
 
 local function queen_display3()
-    local inst = queen_display_common(1, {"SWAP_SIGN"})
+    local inst = queen_display_common(1, { "SWAP_SIGN" })
     local anim = inst.AnimState
 
     anim:PlayAnimation("lock12_west", false)
-    inst.shelfitems = {{1, "city_hammer"}}
+    inst.shelfitems = { { 1, "city_hammer" } }
     return inst
 end
 
 local function queen_display4()
-    local inst = queen_display_common(1, {"SWAP_SIGN"})
+    local inst = queen_display_common(1, { "SWAP_SIGN" })
     local anim = inst.AnimState
-    inst.shelfitems = {{1, "trinket_giftshop_3"}}
+    inst.shelfitems = { { 1, "trinket_giftshop_3" } }
     anim:PlayAnimation("lock12_west", false)
     return inst
 end
@@ -997,7 +989,5 @@ return Prefab("shelves_wood", wood, assets, prefabs), Prefab("shelves_wood2", wo
     Prefab("shelves_queen_display_2", queen_display2, assets, prefabs),
     Prefab("shelves_queen_display_3", queen_display3, assets, prefabs),
     Prefab("shelves_queen_display_4", queen_display4, assets, prefabs), Prefab("shelves_ruins", ruins, assets, prefabs),
-
     Prefab("shelves_bonestaff", bonestaff, assets, prefabs), Prefab("shelves_bossboar", bossboar, assets, prefabs),
-
     Prefab("pedestal_key", key, assets, prefabs)

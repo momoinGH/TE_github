@@ -10,12 +10,12 @@ end)
 
 function ElephantCactusBrain:OnStart()
 	local root = PriorityNode(
-	{
-		WhileNode(function() return self.inst.has_spike end, "Has Spike",
-			StandAndAttack(self.inst)),
+		{
+			WhileNode(function() return self.inst.has_spike end, "Has Spike",
+				StandAndAttack(self.inst)),
 
-	}, .25)
-	
+		}, .25)
+
 	self.bt = BT(self.inst, root)
 end
 

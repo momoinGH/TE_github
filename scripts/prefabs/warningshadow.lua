@@ -4,9 +4,9 @@ local assets =
 }
 
 local function shrink(inst, times, startsize, endsize)
-    inst.AnimState:SetMultColour(1,1,1,0.33)
+    inst.AnimState:SetMultColour(1, 1, 1, 0.33)
     inst.Transform:SetScale(startsize, startsize, startsize)
-    inst.components.colourtweener:StartTween({1,1,1,0.75}, times)
+    inst.components.colourtweener:StartTween({ 1, 1, 1, 0.75 }, times)
     inst.components.sizetweener:StartTween(.5, times, inst.Remove)
 end
 
@@ -31,10 +31,10 @@ local function fn()
     end
 
     inst.persists = false
-	
-	inst:AddComponent("sizetweener")
+
+    inst:AddComponent("sizetweener")
     inst:AddComponent("colourtweener")
-	inst.shrink = shrink
+    inst.shrink = shrink
 
     return inst
 end

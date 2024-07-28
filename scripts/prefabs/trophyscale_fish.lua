@@ -74,21 +74,22 @@ local function SetDigits(inst, weight)
 		weight = "00000"
 	elseif type(weight) == "number" then
 		local formatted = string.format("%06.2f", weight)
-		
+
 		-- Decimal point at ind 4
-		weight = string.sub(formatted, 1, 3)..string.sub(formatted, 5)
+		weight = string.sub(formatted, 1, 3) .. string.sub(formatted, 5)
 	end
 
-	for i=1,5 do
-		inst.AnimState:OverrideSymbol("column"..i, "scale_o_matic", "number"..string.sub(weight, i, i)..(DIGIT_COLORS[i] or "_black"))
+	for i = 1, 5 do
+		inst.AnimState:OverrideSymbol("column" .. i, "scale_o_matic",
+			"number" .. string.sub(weight, i, i) .. (DIGIT_COLORS[i] or "_black"))
 	end
 end
 
 local function onspawnitemfromdata(item, data)
 	if item ~= nil and data ~= nil then
-	if item.prefab == "oceanfish_small_12_inv" then
-	inst.Transform:SetScale(1.5, 1.5, 1.5)
-	end
+		if item.prefab == "oceanfish_small_12_inv" then
+			inst.Transform:SetScale(1.5, 1.5, 1.5)
+		end
 		if item.components.perishable ~= nil and data.perish_percent then
 			item.components.perishable:SetPercent(data.perish_percent or 1)
 		end
@@ -154,15 +155,18 @@ local function onnewtrophy(inst, data_old_and_new)
 
 		-- Delay makes sure digits aren't switched in the first few
 		-- frames of the animation before the spinning starts.
-		inst.task_setdigits = inst:DoTaskInTime(5*FRAMES, SetDigits, data_new.weight)
+		inst.task_setdigits = inst:DoTaskInTime(5 * FRAMES, SetDigits, data_new.weight)
 		bell_sound_param = math.clamp(data_new.weight / 1000, 0, 1)
 	end
 
 	inst.SoundEmitter:PlaySound(sounds.newtrophy, "new_trophy")
-	
-	inst.soundtask_playspin = inst:DoTaskInTime(sound_delay.spin*FRAMES, function() inst.SoundEmitter:PlaySound(sounds.spin, "spin_loop") end)
-	inst.soundtask_stopspin = inst:DoTaskInTime(sound_delay.spin_stop*FRAMES, function() inst.SoundEmitter:KillSound("spin_loop") end)
-	inst.soundtask_playbell = inst:DoTaskInTime(sound_delay.bell*FRAMES, function() inst.SoundEmitter:PlaySound(sounds.bell, "bell", bell_sound_param) end)
+
+	inst.soundtask_playspin = inst:DoTaskInTime(sound_delay.spin * FRAMES,
+		function() inst.SoundEmitter:PlaySound(sounds.spin, "spin_loop") end)
+	inst.soundtask_stopspin = inst:DoTaskInTime(sound_delay.spin_stop * FRAMES,
+		function() inst.SoundEmitter:KillSound("spin_loop") end)
+	inst.soundtask_playbell = inst:DoTaskInTime(sound_delay.bell * FRAMES,
+		function() inst.SoundEmitter:PlaySound(sounds.bell, "bell", bell_sound_param) end)
 
 	inst.components.trophyscale.accepts_items = false
 	inst.task_newtrophyweighed = inst:DoTaskInTime(inst.AnimState:GetCurrentAnimationLength() + FRAMES, function()
@@ -183,24 +187,24 @@ local function ondeconstructstructure(inst)
 end
 
 local function onhammered(inst, worker)
-    inst.components.lootdropper:DropLoot()
+	inst.components.lootdropper:DropLoot()
 
 	DropItem(inst, inst.components.trophyscale:GetItemData())
-    
-    local fx = SpawnPrefab("collapse_small")
+
+	local fx = SpawnPrefab("collapse_small")
 	local x, y, z = inst.Transform:GetWorldPosition()
-    fx.Transform:SetPosition(x, y, z)
-    fx:SetMaterial("wood")
+	fx.Transform:SetPosition(x, y, z)
+	fx:SetMaterial("wood")
 
 	if not inst:HasTag("burnt") then
 		SpawnPrefab("wave_splash").Transform:SetPosition(x, y + ONHAMMERED_SPLASH_Y_OFFSET, z)
 	end
 
-    inst:Remove()
+	inst:Remove()
 end
 
 local function onhit(inst)
-    if not inst:HasTag("burnt") and not (inst.AnimState:IsCurrentAnimation("placefish") or inst.AnimState:IsCurrentAnimation("replacefish")) then
+	if not inst:HasTag("burnt") and not (inst.AnimState:IsCurrentAnimation("placefish") or inst.AnimState:IsCurrentAnimation("replacefish")) then
 		if IsHoldingItem(inst) then
 			inst.AnimState:PlayAnimation("fish_hit")
 			inst.AnimState:PushAnimation("fish_idle", true)
@@ -213,7 +217,7 @@ local function onhit(inst)
 			local x, y, z = inst.Transform:GetWorldPosition()
 			SpawnPrefab("splash").Transform:SetPosition(x, y + ONHIT_SPLASH_Y_OFFSET, z)
 		end
-    end
+	end
 end
 
 local function onbuilt(inst)
@@ -223,11 +227,11 @@ local function onbuilt(inst)
 end
 
 local function onignite(inst)
-    DefaultBurnFn(inst)
+	DefaultBurnFn(inst)
 end
 
 local function onextinguish(inst)
-    DefaultExtinguishFn(inst)
+	DefaultExtinguishFn(inst)
 end
 
 local function onburnt(inst)
@@ -236,7 +240,7 @@ local function onburnt(inst)
 
 	DropItem(inst, inst.components.trophyscale.item_data)
 	inst.components.trophyscale:ClearItemData()
-    DefaultBurntStructureFn(inst)
+	DefaultBurntStructureFn(inst)
 end
 
 local function getdesc(inst, viewer)
@@ -248,30 +252,34 @@ local function getdesc(inst, viewer)
 		local data = inst.components.trophyscale.item_data
 
 		if data.prefab_override_owner ~= nil then
-			return subfmt(GetDescription(viewer, inst, "HAS_ITEM"), {weight = data.weight or "",
-				owner = STRINGS.UI.HUD.TROPHYSCALE_PREFAB_OVERRIDE_OWNER[data.prefab_override_owner] ~= nil and STRINGS.UI.HUD.TROPHYSCALE_PREFAB_OVERRIDE_OWNER[data.prefab_override_owner]
-				or STRINGS.UI.HUD.TROPHYSCALE_UNKNOWN_OWNER})
+			return subfmt(GetDescription(viewer, inst, "HAS_ITEM"), {
+				weight = data.weight or "",
+				owner = STRINGS.UI.HUD.TROPHYSCALE_PREFAB_OVERRIDE_OWNER[data.prefab_override_owner] ~= nil and
+					STRINGS.UI.HUD.TROPHYSCALE_PREFAB_OVERRIDE_OWNER[data.prefab_override_owner]
+					or STRINGS.UI.HUD.TROPHYSCALE_UNKNOWN_OWNER
+			})
 		else
 			local name = data.owner_userid == nil and STRINGS.UI.HUD.TROPHYSCALE_UNKNOWN_OWNER or data.owner_name
-			return data.owner_userid ~= nil and data.owner_userid == viewer.userid and subfmt(GetDescription(viewer, inst, "OWNER"), {weight = data.weight or "", owner = name or ""}) or
-				subfmt(GetDescription(viewer, inst, "HAS_ITEM"), {weight = data.weight or "", owner = name or ""})
+			return data.owner_userid ~= nil and data.owner_userid == viewer.userid and
+				subfmt(GetDescription(viewer, inst, "OWNER"), { weight = data.weight or "", owner = name or "" }) or
+				subfmt(GetDescription(viewer, inst, "HAS_ITEM"), { weight = data.weight or "", owner = name or "" })
 		end
 	end
-	
+
 	return GetDescription(viewer, inst) or nil
 end
 
 local function onsave(inst, data)
-    if inst:HasTag("burnt") or (inst.components.burnable ~= nil and inst.components.burnable:IsBurning()) then
-        data.burnt = true
-    end
+	if inst:HasTag("burnt") or (inst.components.burnable ~= nil and inst.components.burnable:IsBurning()) then
+		data.burnt = true
+	end
 end
 
 local function onload(inst, data)
-    if data ~= nil then
-        if data.burnt then
-            inst.components.burnable.onburnt(inst)
-        elseif IsHoldingItem(inst) then
+	if data ~= nil then
+		if data.burnt then
+			inst.components.burnable.onburnt(inst)
+		elseif IsHoldingItem(inst) then
 			inst.AnimState:PlayAnimation("fish_idle", true)
 
 			local item_data = inst.components.trophyscale.item_data
@@ -286,7 +294,7 @@ local function onload(inst, data)
 				end
 			end
 		end
-    end
+	end
 end
 
 local function fn()
@@ -361,10 +369,10 @@ local function fn()
 
 	inst:ListenForEvent("onbuilt", onbuilt)
 	inst:ListenForEvent("onnewtrophy", onnewtrophy)
-    inst:ListenForEvent("ondeconstructstructure", ondeconstructstructure)
+	inst:ListenForEvent("ondeconstructstructure", ondeconstructstructure)
 
 	return inst
 end
 
-return 	Prefab("trophyscale_fish", fn, assets, prefabs),
-		MakePlacer("trophyscale_fish_placer", "scale_o_matic", "scale_o_matic", "nofish_idle")
+return Prefab("trophyscale_fish", fn, assets, prefabs),
+	MakePlacer("trophyscale_fish_placer", "scale_o_matic", "scale_o_matic", "nofish_idle")

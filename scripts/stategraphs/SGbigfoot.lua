@@ -25,7 +25,7 @@ local states = {
 			EventHandler("animover", function(inst) inst.sg:GoToState("stomp_pst") end),
 		},
 		timeline = {
-			TimeEvent(5 * FRAMES, function(inst) 
+			TimeEvent(5 * FRAMES, function(inst)
 				inst:DoStep()
 				inst:SpawnPrint()
 			end),

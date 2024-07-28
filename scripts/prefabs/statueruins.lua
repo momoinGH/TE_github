@@ -1,4 +1,3 @@
-
 local RuinsRespawner = require "prefabs/ruinsrespawner"
 
 local assets =
@@ -25,10 +24,10 @@ local prefabs =
     "thulecite",
     "statue_transition",
     "statue_transition_2",
-	"ruins_statue_head",
-	"ruins_statue_head_nogem",
-	"ruins_statue_mage",
-	"ruins_statue_mage_nogem",
+    "ruins_statue_head",
+    "ruins_statue_head_nogem",
+    "ruins_statue_mage",
+    "ruins_statue_mage_nogem",
 }
 
 local gemlist =
@@ -42,11 +41,11 @@ local gemlist =
 }
 
 SetSharedLootTable('statue_ruins_no_gem',
-{
-    {'thulecite',     1.00},
-    {'nightmarefuel', 1.00},
-    {'thulecite',     0.05},
-})
+    {
+        { 'thulecite',     1.00 },
+        { 'nightmarefuel', 1.00 },
+        { 'thulecite',     0.05 },
+    })
 
 local MAX_LIGHT_ON_FRAME = 15
 local MAX_LIGHT_OFF_FRAME = 30
@@ -110,7 +109,8 @@ local function fade_to(inst, rad, instant)
         inst._lightframe:set(
             instant and
             (rad > 0 and MAX_LIGHT_ON_FRAME or MAX_LIGHT_OFF_FRAME) or
-            math.max(0, math.floor((radius - inst._lightradius0:value()) / (rad - inst._lightradius0:value()) * maxframe + .5))
+            math.max(0,
+                math.floor((radius - inst._lightradius0:value()) / (rad - inst._lightradius0:value()) * maxframe + .5))
         )
         OnLightDirty(inst)
     end
@@ -119,15 +119,15 @@ end
 local function ShowWorkState(inst, worker, workleft)
     --NOTE: worker is nil when called from ShowPhaseState
     inst.AnimState:PlayAnimation(
-        (   (workleft < TUNING.MARBLEPILLAR_MINE / 3 and "hit_low") or
+        ((workleft < TUNING.MARBLEPILLAR_MINE / 3 and "hit_low") or
             (workleft < TUNING.MARBLEPILLAR_MINE * 2 / 3 and "hit_med") or
             "idle_full"
-        )..(inst._suffix or ""),
+        ) .. (inst._suffix or ""),
         true
     )
 end
 
-local function OnWorkFinished(inst)--, worker)
+local function OnWorkFinished(inst) --, worker)
     inst.components.lootdropper:DropLoot(inst:GetPosition())
 
     local fx = SpawnAt("collapse_small", inst)
@@ -215,7 +215,7 @@ local function onload(inst, data)
 end
 
 local function OnDislodged(inst)
-    local nogem = SpawnPrefab(inst.prefab.."_nogem")
+    local nogem = SpawnPrefab(inst.prefab .. "_nogem")
     if nogem then
         nogem.Transform:SetPosition(inst.Transform:GetWorldPosition())
 
@@ -225,7 +225,7 @@ local function OnDislodged(inst)
 end
 
 local function CanBeDislodgedFn(inst)
-    return inst.components.workable and inst.components.workable.workleft >= TUNING.MARBLEPILLAR_MINE*(1/3)
+    return inst.components.workable and inst.components.workable.workleft >= TUNING.MARBLEPILLAR_MINE * (1 / 3)
 end
 
 local function commonfn(small)
@@ -306,34 +306,34 @@ end
 
 local function gem(small)
     local inst = commonfn(small)
-	
-    inst:AddTag("dislodgeable")	
+
+    inst:AddTag("dislodgeable")
 
     if not TheWorld.ismastersim then
         return inst
     end
 
     SetGemmed(inst, GetRandomItem(gemlist), small)
-	
 
 
-local gemas =
-{
-[1] = "greengem",
-[2] = "redgem",
-[3] = "bluegem",
-[4] = "yellowgem",
-[5] = "orangegem",
-[6] = "purplegem",
-}	
+
+    local gemas =
+    {
+        [1] = "greengem",
+        [2] = "redgem",
+        [3] = "bluegem",
+        [4] = "yellowgem",
+        [5] = "orangegem",
+        [6] = "purplegem",
+    }
 
 
-	
+
     inst:AddComponent("dislodgeable")
-	inst.components.dislodgeable:SetUp(inst.gemmed, 1)
-	inst.components.dislodgeable:SetDropFromSymbol("swap_gem")
-	inst.components.dislodgeable:SetOnDislodgedFn(OnDislodged)
-	inst.components.dislodgeable:SetCanBeDislodgedFn(CanBeDislodgedFn)	
+    inst.components.dislodgeable:SetUp(inst.gemmed, 1)
+    inst.components.dislodgeable:SetDropFromSymbol("swap_gem")
+    inst.components.dislodgeable:SetOnDislodgedFn(OnDislodged)
+    inst.components.dislodgeable:SetCanBeDislodgedFn(CanBeDislodgedFn)
 
     return inst
 end
@@ -352,17 +352,21 @@ end
 
 
 local function onruinsrespawn(inst, respawner)
-	if not respawner:IsAsleep() then
-		local fx = SpawnPrefab("statue_transition")
-		fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-	end
+    if not respawner:IsAsleep() then
+        local fx = SpawnPrefab("statue_transition")
+        fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    end
 end
 
 return Prefab("ruins_statue_head", function() return gem(true) end, assets, prefabs),
     Prefab("ruins_statue_head_nogem", function() return nogem(true) end, assets, prefabs),
     Prefab("ruins_statue_mage", function() return gem() end, assets, prefabs),
     Prefab("ruins_statue_mage_nogem", function() return nogem() end, assets, prefabs),
-    RuinsRespawner.Inst("ruins_statue_head", onruinsrespawn), RuinsRespawner.WorldGen("ruins_statue_head", onruinsrespawn),
-    RuinsRespawner.Inst("ruins_statue_head_nogem", onruinsrespawn), RuinsRespawner.WorldGen("ruins_statue_head_nogem", onruinsrespawn),
-    RuinsRespawner.Inst("ruins_statue_mage", onruinsrespawn), RuinsRespawner.WorldGen("ruins_statue_mage", onruinsrespawn),
-    RuinsRespawner.Inst("ruins_statue_mage_nogem", onruinsrespawn), RuinsRespawner.WorldGen("ruins_statue_mage_nogem", onruinsrespawn)
+    RuinsRespawner.Inst("ruins_statue_head", onruinsrespawn),
+    RuinsRespawner.WorldGen("ruins_statue_head", onruinsrespawn),
+    RuinsRespawner.Inst("ruins_statue_head_nogem", onruinsrespawn),
+    RuinsRespawner.WorldGen("ruins_statue_head_nogem", onruinsrespawn),
+    RuinsRespawner.Inst("ruins_statue_mage", onruinsrespawn),
+    RuinsRespawner.WorldGen("ruins_statue_mage", onruinsrespawn),
+    RuinsRespawner.Inst("ruins_statue_mage_nogem", onruinsrespawn),
+    RuinsRespawner.WorldGen("ruins_statue_mage_nogem", onruinsrespawn)

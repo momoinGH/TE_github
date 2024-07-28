@@ -20,32 +20,32 @@ local sounds =
 }
 
 SetSharedLootTable('snowwarg',
-{
-    {'monstermeat',             1.00},
-    {'monstermeat',             1.00},
-    {'monstermeat',             1.00},
-    {'monstermeat',             1.00},
-    {'monstermeat',             0.50},
-    {'monstermeat',             0.50},
-    {'snowwarg_spawner',        1.00},
-    {'houndstooth',             1.00},
-    {'houndstooth',             0.66},
-    {'houndstooth',             0.33},
-})
+    {
+        { 'monstermeat',      1.00 },
+        { 'monstermeat',      1.00 },
+        { 'monstermeat',      1.00 },
+        { 'monstermeat',      1.00 },
+        { 'monstermeat',      0.50 },
+        { 'monstermeat',      0.50 },
+        { 'snowwarg_spawner', 1.00 },
+        { 'houndstooth',      1.00 },
+        { 'houndstooth',      0.66 },
+        { 'houndstooth',      0.33 },
+    })
 
 local RETARGET_MUST_TAGS = { "character" }
-local RETARGET_CANT_TAGS = { "wall", "warg", "hound", "houndfriend", "walrus"}
+local RETARGET_CANT_TAGS = { "wall", "warg", "hound", "houndfriend", "walrus" }
 local function RetargetFn(inst)
     return not (inst.sg:HasStateTag("hidden") or inst.sg:HasStateTag("statue"))
         and FindEntity(
-                inst,
-                TUNING.WARG_TARGETRANGE,
-                function(guy)
-                    return inst.components.combat:CanTarget(guy)
-                end,
-                inst.sg:HasStateTag("intro_state") and RETARGET_MUST_TAGS or nil,
-                RETARGET_CANT_TAGS
-            )
+            inst,
+            TUNING.WARG_TARGETRANGE,
+            function(guy)
+                return inst.components.combat:CanTarget(guy)
+            end,
+            inst.sg:HasStateTag("intro_state") and RETARGET_MUST_TAGS or nil,
+            RETARGET_CANT_TAGS
+        )
         or nil
 end
 
@@ -67,21 +67,22 @@ local function OnAttacked(inst, data)
         end, TUNING.WARG_TARGETRANGE)
 end
 
-local TARGETS_MUST_TAGS = {"player"}
-local TARGETS_CANT_TAGS = {"playerghost"}
+local TARGETS_MUST_TAGS = { "player" }
+local TARGETS_CANT_TAGS = { "playerghost" }
 local function NumHoundsToSpawn(inst)
     local numHounds = TUNING.WARG_BASE_HOUND_AMOUNT
 
     local pt = Vector3(inst.Transform:GetWorldPosition())
-    local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, TUNING.WARG_NEARBY_PLAYERS_DIST, TARGETS_MUST_TAGS, TARGETS_CANT_TAGS)
-    for i,player in ipairs(ents) do
+    local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, TUNING.WARG_NEARBY_PLAYERS_DIST, TARGETS_MUST_TAGS,
+        TARGETS_CANT_TAGS)
+    for i, player in ipairs(ents) do
         local playerAge = player.components.age:GetAgeInDays()
-        local addHounds = math.clamp(Lerp(1, 4, playerAge/100), 1, 4)
+        local addHounds = math.clamp(Lerp(1, 4, playerAge / 100), 1, 4)
         numHounds = numHounds + addHounds
     end
     local numFollowers = inst.components.leader:CountFollowers()
-    local num = math.min(numFollowers+numHounds/2, numHounds) -- only spawn half the hounds per howl
-    num = (math.log(num)/0.4)+1 -- 0.4 is approx log(1.5)
+    local num = math.min(numFollowers + numHounds / 2, numHounds) -- only spawn half the hounds per howl
+    num = (math.log(num) / 0.4) + 1                           -- 0.4 is approx log(1.5)
 
     num = RoundToNearest(num, 1)
 
@@ -92,8 +93,8 @@ local function NoHoundsToSpawn(inst)
     return 0
 end
 
-local TOSSITEMS_MUST_TAGS = {"_inventoryitem"}
-local TOSSITEMS_CANT_TAGS ={ "locomotor", "INLIMBO" }
+local TOSSITEMS_MUST_TAGS = { "_inventoryitem" }
+local TOSSITEMS_CANT_TAGS = { "locomotor", "INLIMBO" }
 local function TossItems(inst, x, z, minradius, maxradius)
     for i, v in ipairs(TheSim:FindEntities(x, 0, z, maxradius + 3, TOSSITEMS_MUST_TAGS, TOSSITEMS_CANT_TAGS)) do
         local x1, y1, z1 = v.Transform:GetWorldPosition()
@@ -190,11 +191,11 @@ local function SpawnHounds(inst, radius_override)
 
     local num = inst:NumHoundsToSpawn()
     if inst.max_hound_spawns then
-        num = math.min(num,inst.max_hound_spawns)
+        num = math.min(num, inst.max_hound_spawns)
         inst.max_hound_spawns = inst.max_hound_spawns - num
     end
 
-	local forcemutate = inst:HasTag("lunar_aligned") or nil
+    local forcemutate = inst:HasTag("lunar_aligned") or nil
     local pt = inst:GetPosition()
     for i = 1, num do
         local hound = hounded:SummonSpawn(pt, radius_override)
@@ -228,7 +229,7 @@ local function MakeWarg(name, bank, build, prefabs, tag)
         table.insert(assets, Asset("ANIM", "anim/warg_actions.zip"))
     end
 
-    table.insert(assets, Asset("ANIM", "anim/"..build..".zip"))
+    table.insert(assets, Asset("ANIM", "anim/" .. build .. ".zip"))
 
     local function fn()
         local inst = CreateEntity()
@@ -250,7 +251,7 @@ local function MakeWarg(name, bank, build, prefabs, tag)
         inst:AddTag("scarytoprey")
         inst:AddTag("houndfriend")
         inst:AddTag("largecreature")
-		inst:AddTag("walrus")		
+        inst:AddTag("walrus")
 
         if tag ~= nil then
             inst:AddTag(tag)
@@ -260,7 +261,7 @@ local function MakeWarg(name, bank, build, prefabs, tag)
         inst.AnimState:SetBuild(build)
         inst.AnimState:PlayAnimation("idle_loop", true)
 
-		inst.SpawnHounds = SpawnHounds
+        inst.SpawnHounds = SpawnHounds
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
@@ -295,7 +296,7 @@ local function MakeWarg(name, bank, build, prefabs, tag)
         inst:AddComponent("sleeper")
 
         inst.NumHoundsToSpawn = NumHoundsToSpawn
-		inst.LaunchGooIcing = NoGooIcing
+        inst.LaunchGooIcing = NoGooIcing
 
         inst.sounds = sounds
 
@@ -305,10 +306,11 @@ local function MakeWarg(name, bank, build, prefabs, tag)
 
         inst:SetStateGraph("SGwarg")
 
-        MakeHauntableGoToState(inst, "howl", TUNING.HAUNT_CHANCE_OCCASIONAL, TUNING.HAUNT_COOLDOWN_MEDIUM, TUNING.HAUNT_CHANCE_LARGE)
+        MakeHauntableGoToState(inst, "howl", TUNING.HAUNT_CHANCE_OCCASIONAL, TUNING.HAUNT_COOLDOWN_MEDIUM,
+            TUNING.HAUNT_CHANCE_LARGE)
 
         inst:SetBrain(brain)
-		inst:SetPrefabNameOverride("warg")
+        inst:SetPrefabNameOverride("warg")
 
         return inst
     end

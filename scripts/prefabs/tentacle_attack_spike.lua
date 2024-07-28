@@ -60,7 +60,7 @@ local function fn()
         end
         local x, y, z = inst.Transform:GetWorldPosition()
         if y > 0.1 then
-            inst.Physics:SetMotorVelOverride(40, - inst.yspeed, 0)
+            inst.Physics:SetMotorVelOverride(40, -inst.yspeed, 0)
         end
     end)
 

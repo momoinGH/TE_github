@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/crabapple_tree_build.zip"),
-    Asset("ANIM", "anim/cave_banana_tree.zip"),	
+    Asset("ANIM", "anim/cave_banana_tree.zip"),
 }
 
 local prefabs_tree =
@@ -122,7 +122,7 @@ local function tree_fn()
     inst.entity:AddNetwork()
 
     MakeObstaclePhysics(inst, .25)
-	
+
     inst.entity:AddMiniMapEntity()
     inst.MiniMapEntity:SetIcon("crabapple_tree.png")
 
@@ -131,8 +131,8 @@ local function tree_fn()
     inst.AnimState:SetBank("cave_banana_tree")
     inst.AnimState:SetBuild("crabapple_tree_build")
     inst.AnimState:PlayAnimation("idle_loop", true)
-	
-	inst:AddTag("plant")
+
+    inst:AddTag("plant")
 
     inst.entity:SetPristine()
 
@@ -272,7 +272,7 @@ local function burnt_fn()
     inst.entity:AddNetwork()
 
     MakeObstaclePhysics(inst, .25)
-	
+
     inst.entity:AddMiniMapEntity()
     inst.MiniMapEntity:SetIcon("crabapple_tree_burnt.png")
 

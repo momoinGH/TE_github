@@ -41,7 +41,8 @@ local function ShouldAcceptItem(inst, item)
     elseif inst.components.eater:CanEat(item) then
         local foodtype = item.components.edible.foodtype
         if foodtype == FOODTYPE.MEAT or foodtype == FOODTYPE.HORRIBLE then
-            return inst.components.follower.leader == nil or inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
+            return inst.components.follower.leader == nil or
+            inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
         elseif foodtype == FOODTYPE.VEGGIE or foodtype == FOODTYPE.RAW then
             local last_eat_time = inst.components.eater:TimeSinceLastEating()
             return (last_eat_time == nil or
@@ -55,7 +56,6 @@ end
 
 local function OnGetItemFromPlayer(inst, giver, item)
     --I eat food
-
 end
 
 local function OnRefuseItem(inst, item)
@@ -80,7 +80,8 @@ end
 
 local function OnAttackedByDecidRoot(inst, attacker)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, { "_combat", "_health", "pig" }, { "werepig", "guard", "INLIMBO" })
+    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, { "_combat", "_health", "pig" },
+        { "werepig", "guard", "INLIMBO" })
     local num_helpers = 0
     for i, v in ipairs(ents) do
         if v ~= inst and not v.components.health:IsDead() then
@@ -114,7 +115,7 @@ local function OnAttacked(inst, data)
     local attacker = data.attacker
     inst:ClearBufferedAction()
 
-    if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then 
+    if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
         OnAttackedByDecidRoot(inst, attacker.owner)
     elseif attacker.prefab ~= "deciduous_root" and not attacker:HasTag("pigelite") then
         inst.components.combat:SetTarget(attacker)
@@ -122,7 +123,8 @@ local function OnAttacked(inst, data)
         if inst:HasTag("werepig") then
             inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, IsWerePig, MAX_TARGET_SHARES)
         elseif inst:HasTag("guard") then
-            inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, attacker:HasTag("pig") and IsGuardPig or IsPig, MAX_TARGET_SHARES)
+            inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST,
+                attacker:HasTag("pig") and IsGuardPig or IsPig, MAX_TARGET_SHARES)
         elseif not (attacker:HasTag("walrus") and attacker:HasTag("walrus")) then
             inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, IsNonWerePig, MAX_TARGET_SHARES)
         end
@@ -145,7 +147,8 @@ local function GuardRetargetFn(inst)
         inst
 
     if not defenseTarget.happy then
-        local invader = FindEntity(defenseTarget, SpringCombatMod(TUNING.PIG_GUARD_TARGET_DIST), nil, { "character" }, { "guard", "INLIMBO" })
+        local invader = FindEntity(defenseTarget, SpringCombatMod(TUNING.PIG_GUARD_TARGET_DIST), nil, { "character" },
+            { "guard", "INLIMBO" })
         if invader ~= nil and
             not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(invader)) and
             not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(invader)) then
@@ -169,7 +172,7 @@ local function GuardRetargetFn(inst)
         end
     end
 
-    local oneof_tags = {"player"}
+    local oneof_tags = { "player" }
 
     return FindEntity(defenseTarget, defendDist, nil, {}, { "INLIMBO" }, oneof_tags)
 end
@@ -187,10 +190,10 @@ local function GuardKeepTargetFn(inst, target)
     end
 
     local defendDist = not TheWorld.state.isday
-                    and home.components.burnable ~= nil
-                    and home.components.burnable:IsBurning()
-                    and home.components.burnable:GetLargestLightRadius()
-                    or SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
+        and home.components.burnable ~= nil
+        and home.components.burnable:IsBurning()
+        and home.components.burnable:GetLargestLightRadius()
+        or SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
     return target:IsNear(home, defendDist) and inst:IsNear(home, defendDist)
 end
 
@@ -222,15 +225,15 @@ local function guard()
 
     inst.AnimState:SetBank("werebeaver")
     inst.AnimState:SetBuild("polar_bear_guard")
-	
+
     inst.AnimState:PlayAnimation("idle_loop", true)
     inst.AnimState:Hide("hat")
 
     --Sneak these into pristine state for optimization
     inst:AddTag("_named")
     inst:AddTag("trader")
- 	inst:AddTag("walrus")
-	inst:AddTag("houndfriend")	
+    inst:AddTag("walrus")
+    inst:AddTag("houndfriend")
 
     inst:AddComponent("talker")
     inst.components.talker.fontsize = 35
@@ -238,7 +241,7 @@ local function guard()
     --inst.components.talker.colour = Vector3(133/255, 140/255, 167/255)
     inst.components.talker.offset = Vector3(0, -400, 0)
     inst.components.talker:MakeChatter()
-    inst.Transform:SetScale(1.8, 1.8, 1.8)	
+    inst.Transform:SetScale(1.8, 1.8, 1.8)
 
 
     inst.entity:SetPristine()
@@ -251,9 +254,9 @@ local function guard()
     inst:RemoveTag("_named")
 
     inst.components.talker.ontalk = ontalk
-    
-    inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED --5
+
+    inst:AddComponent("locomotor")                              -- locomotor must be constructed before the stategraph
+    inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED   --5
     inst.components.locomotor.walkspeed = TUNING.PIG_WALK_SPEED --3
 
     inst:AddComponent("bloomer")
@@ -329,30 +332,30 @@ local function guard()
 
     inst.components.sleeper:SetResistance(3)
 
-    inst.components.health:SetMaxHealth(TUNING.PIG_GUARD_HEALTH*3)
+    inst.components.health:SetMaxHealth(TUNING.PIG_GUARD_HEALTH * 3)
     inst.components.combat:SetDefaultDamage(TUNING.PIG_GUARD_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNING.PIG_GUARD_ATTACK_PERIOD)
     inst.components.combat:SetKeepTargetFunction(GuardKeepTargetFn)
     inst.components.combat:SetRetargetFunction(1, GuardRetargetFn)
     inst.components.combat:SetTarget(nil)
-    inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED*0.7
-    inst.components.locomotor.walkspeed = TUNING.PIG_WALK_SPEED*0.7
+    inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED * 0.7
+    inst.components.locomotor.walkspeed = TUNING.PIG_WALK_SPEED * 0.7
 
     inst.components.sleeper:SetSleepTest(GuardShouldSleep)
     inst.components.sleeper:SetWakeTest(DefaultWakeTest)
 
     inst.components.lootdropper:SetLoot({})
     inst.components.lootdropper:AddRandomLoot("meat", 3)
-    inst.components.lootdropper:AddRandomLoot("fish", 3)	
+    inst.components.lootdropper:AddRandomLoot("fish", 3)
     inst.components.lootdropper:AddRandomLoot("beefalowool", 1)
     inst.components.lootdropper.numrandomloot = 4
 
     inst.components.trader:Enable()
     inst.components.follower:SetLeader(nil)
 
-    inst:SetStateGraph("SGwildbeaver")	
-	inst:SetBrain(guardbrain)
-	
+    inst:SetStateGraph("SGwildbeaver")
+    inst:SetBrain(guardbrain)
+
     return inst
 end
 

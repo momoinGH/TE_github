@@ -4,9 +4,9 @@ local assets =
     Asset("ANIM", "anim/tree_leaf_normal.zip"),
     Asset("ANIM", "anim/tree_leaf_tall.zip"),
     Asset("ANIM", "anim/tree_leaf_monster.zip"),
-    Asset("ANIM", "anim/tree_leaf_trunk_build.zip"), --trunk build (winter leaves build)
-    Asset("ANIM", "anim/tree_leaf_green_build.zip"), --spring, summer leaves build
-    Asset("ANIM", "anim/tree_leaf_red_build.zip"), --autumn leaves build
+    Asset("ANIM", "anim/tree_leaf_trunk_build.zip"),  --trunk build (winter leaves build)
+    Asset("ANIM", "anim/tree_leaf_green_build.zip"),  --spring, summer leaves build
+    Asset("ANIM", "anim/tree_leaf_red_build.zip"),    --autumn leaves build
     Asset("ANIM", "anim/tree_leaf_orange_build.zip"), --autumn leaves build
     Asset("ANIM", "anim/tree_leaf_yellow_build.zip"), --autumn leaves build
     Asset("ANIM", "anim/tree_leaf_poison_build.zip"), --poison leaves build
@@ -43,115 +43,115 @@ local prefabs =
 local builds =
 {
     normal = { --Green
-        leavesbuild=nil,
-        prefab_name="deciduoustree",
-        normal_loot = {"log", "log"},
-        short_loot = {"log"},
-        tall_loot = {"log", "log", "log", "log"},
-        drop_acorns=false,
-        fx="green_leaves",
-        chopfx="green_leaves_chop",
-        shelter=true,
+        leavesbuild = nil,
+        prefab_name = "deciduoustree",
+        normal_loot = { "log", "log" },
+        short_loot = { "log" },
+        tall_loot = { "log", "log", "log", "log" },
+        drop_acorns = false,
+        fx = "green_leaves",
+        chopfx = "green_leaves_chop",
+        shelter = true,
     },
     barren = {
-        leavesbuild=nil,
-        prefab_name="deciduoustree",
-        normal_loot = {"log", "log"},
-        short_loot = {"log"},
-        tall_loot = {"log", "log", "log"},
-        drop_acorns=false,
-        fx=nil,
-        chopfx=nil,
-        shelter=false,
+        leavesbuild = nil,
+        prefab_name = "deciduoustree",
+        normal_loot = { "log", "log" },
+        short_loot = { "log" },
+        tall_loot = { "log", "log", "log" },
+        drop_acorns = false,
+        fx = nil,
+        chopfx = nil,
+        shelter = false,
     },
     red = {
-        leavesbuild=nil,
-        prefab_name="deciduoustree",
-        normal_loot = {"log", "log"},
-        short_loot = {"log"},
-        tall_loot = {"log", "log", "log", "acorn"},
-        drop_acorns=false,
-        fx="red_leaves",
-        chopfx="red_leaves_chop",
-        shelter=true,
+        leavesbuild = nil,
+        prefab_name = "deciduoustree",
+        normal_loot = { "log", "log" },
+        short_loot = { "log" },
+        tall_loot = { "log", "log", "log", "acorn" },
+        drop_acorns = false,
+        fx = "red_leaves",
+        chopfx = "red_leaves_chop",
+        shelter = true,
     },
     orange = {
-        leavesbuild=nil,
-        prefab_name="deciduoustree",
-        normal_loot = {"log", "log"},
-        short_loot = {"log"},
-        tall_loot = {"log", "log", "log", "acorn"},
-        drop_acorns=false,
-        fx="orange_leaves",
-        chopfx="orange_leaves_chop",
-        shelter=true,
+        leavesbuild = nil,
+        prefab_name = "deciduoustree",
+        normal_loot = { "log", "log" },
+        short_loot = { "log" },
+        tall_loot = { "log", "log", "log", "acorn" },
+        drop_acorns = false,
+        fx = "orange_leaves",
+        chopfx = "orange_leaves_chop",
+        shelter = true,
     },
     yellow = {
-        leavesbuild=nil,
-        prefab_name="deciduoustree",
-        normal_loot = {"log", "log"},
-        short_loot = {"log"},
-        tall_loot = {"log", "log", "log", "log"},
-        drop_acorns=false,
-        fx="yellow_leaves",
-        chopfx="yellow_leaves_chop",
-        shelter=true,
+        leavesbuild = nil,
+        prefab_name = "deciduoustree",
+        normal_loot = { "log", "log" },
+        short_loot = { "log" },
+        tall_loot = { "log", "log", "log", "log" },
+        drop_acorns = false,
+        fx = "yellow_leaves",
+        chopfx = "yellow_leaves_chop",
+        shelter = true,
     },
     poison = {
-        leavesbuild=nil,
-        prefab_name="deciduoustree",
-        normal_loot = {"livinglog", "log", "log"},
-        short_loot = {"livinglog", "log"},
-        tall_loot = {"livinglog", "log", "log", "log"},
-        drop_acorns=false,
-        fx="purple_leaves",
-        chopfx="purple_leaves_chop",
-        shelter=true,
+        leavesbuild = nil,
+        prefab_name = "deciduoustree",
+        normal_loot = { "livinglog", "log", "log" },
+        short_loot = { "livinglog", "log" },
+        tall_loot = { "livinglog", "log", "log", "log" },
+        drop_acorns = false,
+        fx = "purple_leaves",
+        chopfx = "purple_leaves_chop",
+        shelter = true,
     },
 }
 
 local function makeanims(stage)
     if stage == "monster" then
         return {
-            idle="idle_tall",
-            sway1="sway_loop_agro",
-            sway2="sway_loop_agro",
-            swayaggropre="sway_agro_pre",
-            swayaggro="sway_loop_agro",
-            swayaggropst="sway_agro_pst",
-            swayaggroloop="idle_loop_agro",
-            swayfx="swayfx_tall",
-            chop="chop_tall_monster",
-            fallleft="fallleft_tall_monster",
-            fallright="fallright_tall_monster",
-            stump="stump_tall_monster",
-            burning="burning_loop_tall",
-            burnt="burnt_tall",
-            chop_burnt="chop_burnt_tall",
-            idle_chop_burnt="idle_chop_burnt_tall",
+            idle = "idle_tall",
+            sway1 = "sway_loop_agro",
+            sway2 = "sway_loop_agro",
+            swayaggropre = "sway_agro_pre",
+            swayaggro = "sway_loop_agro",
+            swayaggropst = "sway_agro_pst",
+            swayaggroloop = "idle_loop_agro",
+            swayfx = "swayfx_tall",
+            chop = "chop_tall_monster",
+            fallleft = "fallleft_tall_monster",
+            fallright = "fallright_tall_monster",
+            stump = "stump_tall_monster",
+            burning = "burning_loop_tall",
+            burnt = "burnt_tall",
+            chop_burnt = "chop_burnt_tall",
+            idle_chop_burnt = "idle_chop_burnt_tall",
             dropleaves = "drop_leaves_tall",
             growleaves = "grow_leaves_tall",
         }
     else
         return {
-            idle="idle_"..stage,
-            sway1="sway1_loop_"..stage,
-            sway2="sway2_loop_"..stage,
-            swayaggropre="sway_agro_pre",
-            swayaggro="sway_loop_agro",
-            swayaggropst="sway_agro_pst",
-            swayaggroloop="idle_loop_agro",
-            swayfx="swayfx_"..stage,
-            chop="chop_"..stage,
-            fallleft="fallleft_"..stage,
-            fallright="fallright_"..stage,
-            stump="stump_"..stage,
-            burning="burning_loop_"..stage,
-            burnt="burnt_"..stage,
-            chop_burnt="chop_burnt_"..stage,
-            idle_chop_burnt="idle_chop_burnt_"..stage,
-            dropleaves = "drop_leaves_"..stage,
-            growleaves = "grow_leaves_"..stage,
+            idle = "idle_" .. stage,
+            sway1 = "sway1_loop_" .. stage,
+            sway2 = "sway2_loop_" .. stage,
+            swayaggropre = "sway_agro_pre",
+            swayaggro = "sway_loop_agro",
+            swayaggropst = "sway_agro_pst",
+            swayaggroloop = "idle_loop_agro",
+            swayfx = "swayfx_" .. stage,
+            chop = "chop_" .. stage,
+            fallleft = "fallleft_" .. stage,
+            fallright = "fallright_" .. stage,
+            stump = "stump_" .. stage,
+            burning = "burning_loop_" .. stage,
+            burnt = "burnt_" .. stage,
+            chop_burnt = "chop_burnt_" .. stage,
+            idle_chop_burnt = "idle_chop_burnt_" .. stage,
+            dropleaves = "drop_leaves_" .. stage,
+            growleaves = "grow_leaves_" .. stage,
         }
     end
 end
@@ -234,7 +234,7 @@ local function GrowLeavesFn(inst, monster, monsterout)
         return
     end
 
-    if inst.leaf_state == "barren" or inst.target_leaf_state == "barren" then 
+    if inst.leaf_state == "barren" or inst.target_leaf_state == "barren" then
         inst:RemoveEventCallback("animover", GrowLeavesFn)
         if inst.target_leaf_state == "barren" then
             inst.build = "barren"
@@ -342,7 +342,7 @@ local function SetShort(inst)
     if not inst.monster then
         inst.anims = short_anims
         if inst.components.workable ~= nil then
-           inst.components.workable:SetWorkLeft(TUNING.DECIDUOUS_CHOPS_SMALL)
+            inst.components.workable:SetWorkLeft(TUNING.DECIDUOUS_CHOPS_SMALL)
         end
         inst.components.lootdropper:SetLoot(GetBuild(inst).short_loot)
     end
@@ -395,9 +395,12 @@ end
 
 local growth_stages =
 {
-    { name = "short", time = function(inst) return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[1].base, TUNING.DECIDUOUS_GROW_TIME[1].random) end, fn = SetShort, growfn = GrowShort },
-    { name = "normal", time = function(inst) return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[2].base, TUNING.DECIDUOUS_GROW_TIME[2].random) end, fn = SetNormal, growfn = GrowNormal },
-    { name = "tall", time = function(inst) return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[3].base, TUNING.DECIDUOUS_GROW_TIME[3].random) end, fn = SetTall, growfn = GrowTall },
+    { name = "short",  time = function(inst) return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[1].base,
+            TUNING.DECIDUOUS_GROW_TIME[1].random) end,                                                                                                   fn = SetShort,  growfn = GrowShort },
+    { name = "normal", time = function(inst) return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[2].base,
+            TUNING.DECIDUOUS_GROW_TIME[2].random) end,                                                                                                   fn = SetNormal, growfn = GrowNormal },
+    { name = "tall",   time = function(inst) return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[3].base,
+            TUNING.DECIDUOUS_GROW_TIME[3].random) end,                                                                                                   fn = SetTall,   growfn = GrowTall },
     --{ name = "old", time = function(inst) return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[4].base, TUNING.DECIDUOUS_GROW_TIME[4].random) end, fn = SetOld, growfn = GrowOld },
 }
 
@@ -413,7 +416,7 @@ local function chop_tree(inst, chopper, chopsleft, numchops)
     SpawnLeafFX(inst, nil, true)
 
     -- Force update anims if monster
-    if inst.monster then 
+    if inst.monster then
         inst.anims = monster_anims
     end
     inst.AnimState:PlayAnimation(inst.anims.chop)
@@ -488,14 +491,17 @@ local function make_stump(inst)
     end
 
     if inst.components.timer ~= nil and not inst.components.timer:TimerExists("decay") then
-        inst.components.timer:StartTimer("decay", GetRandomWithVariance(TUNING.DECIDUOUS_REGROWTH.DEAD_DECAY_TIME, TUNING.DECIDUOUS_REGROWTH.DEAD_DECAY_TIME * .5))
+        inst.components.timer:StartTimer("decay",
+            GetRandomWithVariance(TUNING.DECIDUOUS_REGROWTH.DEAD_DECAY_TIME,
+                TUNING.DECIDUOUS_REGROWTH.DEAD_DECAY_TIME * .5))
     end
 end
 
 local FINDTREETOTRANSFORM_MUST_TAGS = { "birchnut" }
 local FINDTREETOTRANSFORM_CANT_TAGS = { "fire", "stump", "burnt", "monster", "FX", "NOCLICK", "DECOR", "INLIMBO" }
 local function chop_down_tree(inst, chopper)
-    local days_survived = chopper.components.age ~= nil and chopper.components.age:GetAgeInDays() or TheWorld.state.cycles
+    local days_survived = chopper.components.age ~= nil and chopper.components.age:GetAgeInDays() or
+    TheWorld.state.cycles
     if not inst.monster and inst.leaf_state ~= "barren" and inst.components.growable ~= nil and inst.components.growable.stage == 3 and days_survived >= TUNING.DECID_MONSTER_MIN_DAY then
         --print("Chance of making a monster")
         --winter should always be 0 (because barren trees can't become monsters), but is included in tuning values for consistency
@@ -681,7 +687,9 @@ local function OnBurnt(inst, immediate)
     end
 
     if inst.components.timer ~= nil and not inst.components.timer:TimerExists("decay") then
-        inst.components.timer:StartTimer("decay", GetRandomWithVariance(TUNING.DECIDUOUS_REGROWTH.DEAD_DECAY_TIME, TUNING.DECIDUOUS_REGROWTH.DEAD_DECAY_TIME * .5))
+        inst.components.timer:StartTimer("decay",
+            GetRandomWithVariance(TUNING.DECIDUOUS_REGROWTH.DEAD_DECAY_TIME,
+                TUNING.DECIDUOUS_REGROWTH.DEAD_DECAY_TIME * .5))
     end
 
     inst.AnimState:SetRayTestOnBB(true)
@@ -689,7 +697,8 @@ end
 
 local function OnAcornTask(inst)
     inst.acorntask = nil
-    inst.components.lootdropper:DropLoot(math.random() < .5 and inst:GetPosition() + TheCamera:GetRightVec() or inst:GetPosition() - TheCamera:GetRightVec())
+    inst.components.lootdropper:DropLoot(math.random() < .5 and inst:GetPosition() + TheCamera:GetRightVec() or
+    inst:GetPosition() - TheCamera:GetRightVec())
 end
 
 local function tree_burnt(inst)
@@ -745,7 +754,7 @@ end
 
 local function DoStartMonster(inst, starttimeoffset)
     if inst.components.workable ~= nil then
-       inst.components.workable:SetWorkLeft(TUNING.DECIDUOUS_CHOPS_MONSTER)
+        inst.components.workable:SetWorkLeft(TUNING.DECIDUOUS_CHOPS_MONSTER)
     end
     inst.AnimState:SetBank("tree_leaf_monster")
     inst.AnimState:PlayAnimation("transform_in")
@@ -914,14 +923,14 @@ local function OnEntityWake(inst)
     end
 
     if (inst._wasonfire or
-        (inst.components.burnable ~= nil and inst.components.burnable:IsBurning())) and
+            (inst.components.burnable ~= nil and inst.components.burnable:IsBurning())) and
         not inst:HasTag("burnt") then
         inst.sg:GoToState("empty")
         inst.AnimState:ClearOverrideSymbol("eye")
         inst.AnimState:ClearOverrideSymbol("mouth")
-        if not inst:HasTag("stump") then 
+        if not inst:HasTag("stump") then
             inst.AnimState:ClearOverrideSymbol("legs")
-            inst.AnimState:ClearOverrideSymbol("legs_mouseover") 
+            inst.AnimState:ClearOverrideSymbol("legs_mouseover")
         end
         inst.AnimState:SetBank("tree_leaf")
         OnBurnt(inst, true)
@@ -1050,7 +1059,7 @@ local function onload(inst, data)
                 DefaultBurntFn(inst)
             end
         elseif data.burnt then
-            inst._wasonfire = true--OnEntityWake will handle it actually doing burnt logic
+            inst._wasonfire = true --OnEntityWake will handle it actually doing burnt logic
         end
     end
 
@@ -1186,8 +1195,8 @@ local function OnHaunt(inst, haunter)
         return true
     elseif inst:HasTag("burnt") then
         return false
-    --#HAUNTFIX
-    --elseif inst.components.burnable ~= nil and
+        --#HAUNTFIX
+        --elseif inst.components.burnable ~= nil and
         --not inst.components.burnable:IsBurning() and
         --math.random() <= TUNING.HAUNT_CHANCE_VERYRARE then
         --inst.components.burnable:Ignite()
@@ -1235,7 +1244,7 @@ local function makefn(build, stage, data)
             inst.AnimState:OverrideSymbol("swap_leaves", GetBuild(inst).leavesbuild, "swap_leaves")
         end
 
-		inst:SetPrefabNameOverride(GetBuild(inst).prefab_name)
+        inst:SetPrefabNameOverride(GetBuild(inst).prefab_name)
 
         MakeSnowCoveredPristine(inst)
 
@@ -1268,10 +1277,10 @@ local function makefn(build, stage, data)
 
         MakeMediumPropagator(inst)
 
---        inst:AddComponent("plantregrowth")
---        inst.components.plantregrowth:SetRegrowthRate(TUNING.DECIDUOUS_REGROWTH.OFFSPRING_TIME)
---        inst.components.plantregrowth:SetProduct("acorn_sapling")
---        inst.components.plantregrowth:SetSearchTag("deciduoustree")
+        --        inst:AddComponent("plantregrowth")
+        --        inst.components.plantregrowth:SetRegrowthRate(TUNING.DECIDUOUS_REGROWTH.OFFSPRING_TIME)
+        --        inst.components.plantregrowth:SetProduct("acorn_sapling")
+        --        inst.components.plantregrowth:SetSearchTag("deciduoustree")
 
         inst:AddComponent("timer")
         inst:ListenForEvent("timerdone", OnTimerDone)
@@ -1371,8 +1380,8 @@ local function tree(name, build, stage, data)
 end
 
 return tree("snowdeciduoustree", "normal", 0),
-        tree("snowdeciduoustree_normal", "normal", 2),
-        tree("snowdeciduoustree_tall", "normal", 3),
-        tree("snowdeciduoustree_short", "normal", 1),
-        tree("snowdeciduoustree_burnt", "normal", 0, "burnt"),
-        tree("snowdeciduoustree_stump", "normal", 0, "stump")
+    tree("snowdeciduoustree_normal", "normal", 2),
+    tree("snowdeciduoustree_tall", "normal", 3),
+    tree("snowdeciduoustree_short", "normal", 1),
+    tree("snowdeciduoustree_burnt", "normal", 0, "burnt"),
+    tree("snowdeciduoustree_stump", "normal", 0, "stump")

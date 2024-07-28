@@ -1,52 +1,52 @@
 local assets =
 {
-    Asset("ANIM", "anim/sugarwood_seed.zip"),
-	
-	Asset( "IMAGE", "images/inventoryimages/sugarwood_seed.tex" ),
-	Asset( "ATLAS", "images/inventoryimages/sugarwood_seed.xml" ),
+	Asset("ANIM", "anim/sugarwood_seed.zip"),
+
+	Asset("IMAGE", "images/inventoryimages/sugarwood_seed.tex"),
+	Asset("ATLAS", "images/inventoryimages/sugarwood_seed.xml"),
 }
 
 local function growintotree(inst)
-    local tree = SpawnPrefab("sugarwood_short")
-	
-    if tree then
-        tree.Transform:SetPosition(inst.Transform:GetWorldPosition())
+	local tree = SpawnPrefab("sugarwood_short")
+
+	if tree then
+		tree.Transform:SetPosition(inst.Transform:GetWorldPosition())
 		tree.SoundEmitter:PlaySound("dontstarve/forest/treeGrow")
 		SpawnPrefab("purple_leaves_chop").Transform:SetPosition(inst.Transform:GetWorldPosition())
-        inst:Remove()
-    end
+		inst:Remove()
+	end
 end
 
 local function startgrowing(inst)
-    if not inst.components.timer:TimerExists("grow") then
-        local growtime = GetRandomWithVariance(360, 30)
+	if not inst.components.timer:TimerExists("grow") then
+		local growtime = GetRandomWithVariance(360, 30)
 
-        inst.components.timer:StartTimer("grow", growtime)
-    end
+		inst.components.timer:StartTimer("grow", growtime)
+	end
 end
 
 local function isburning(inst)
-    inst.components.timer:StopTimer("grow")
+	inst.components.timer:StopTimer("grow")
 end
 
 local function resumegrowing(inst)
-    if not inst.components.timer:TimerExists("grow") then
-        local growtime = GetRandomWithVariance(360, 30)
+	if not inst.components.timer:TimerExists("grow") then
+		local growtime = GetRandomWithVariance(360, 30)
 
-        inst.components.timer:StartTimer("grow", growtime)
-    end
+		inst.components.timer:StartTimer("grow", growtime)
+	end
 end
 
 local function ontimerdone(inst, data)
-    if data.name == "grow" then
-        growintotree(inst)
-    end
+	if data.name == "grow" then
+		growintotree(inst)
+	end
 end
 
 local function dig(inst, digger)
-    inst.components.lootdropper:SpawnLootPrefab("twigs")
-	
-    inst:Remove()
+	inst.components.lootdropper:SpawnLootPrefab("twigs")
+
+	inst:Remove()
 end
 
 local function fn()
@@ -68,7 +68,7 @@ local function fn()
 	end
 
 	inst:AddComponent("inspectable")
-	
+
 	inst:AddComponent("timer")
 
 	inst:AddComponent("lootdropper")
@@ -82,23 +82,23 @@ local function fn()
 	MakeSmallPropagator(inst)
 
 	MakeHauntableIgnite(inst)
-	
+
 	inst:ListenForEvent("timerdone", ontimerdone)
 	inst:ListenForEvent("onignite", isburning)
 	inst:ListenForEvent("onextinguish", resumegrowing)
-	
+
 	inst:DoTaskInTime(0, startgrowing)
 
 	return inst
 end
 
 local function ondeploy(inst, pt, deployer)
-	local sapling = SpawnPrefab("sugarwood_sapling") 
-	
-	if sapling then 
+	local sapling = SpawnPrefab("sugarwood_sapling")
+
+	if sapling then
 		deployer.SoundEmitter:PlaySound("dontstarve/common/plant")
-		sapling.Transform:SetPosition(pt.x, pt.y, pt.z) 
-	end 
+		sapling.Transform:SetPosition(pt.x, pt.y, pt.z)
+	end
 end
 
 local function seed_fn()
@@ -121,15 +121,15 @@ local function seed_fn()
 
 	inst:AddComponent("inspectable")
 
-    inst:AddComponent("inventoryitem")
+	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/sugarwood_seed.xml"
 
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
-	
+	inst:AddComponent("stackable")
+	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+
 	inst:AddComponent("deployable")
 	inst.components.deployable.ondeploy = ondeploy
-    inst.components.deployable:SetDeployMode(DEPLOYMODE.PLANT)
+	inst.components.deployable:SetDeployMode(DEPLOYMODE.PLANT)
 
 	MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
 	MakeSmallPropagator(inst)

@@ -1,25 +1,25 @@
 local assets =
 {
-    Asset("ANIM", "anim/peach_juice_bottle_green.zip"),
+	Asset("ANIM", "anim/peach_juice_bottle_green.zip"),
 	Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green.tex"),
 	Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green.xml"),
 }
 
-local assets1 = 
+local assets1 =
 {
 	Asset("ANIM", "anim/peach_juice_bottle_green.zip"),
 	Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green_most.tex"),
 	Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green_most.xml"),
 }
 
-local assets2 = 
+local assets2 =
 {
 	Asset("ANIM", "anim/peach_juice_bottle_green.zip"),
 	Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green_half.tex"),
 	Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green_half.xml"),
 }
 
-local assets3 = 
+local assets3 =
 {
 	Asset("ANIM", "anim/peach_juice_bottle_green.zip"),
 	Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green_less.tex"),
@@ -71,162 +71,162 @@ local function Less_EatFn(inst, eater)
 end
 
 local function full()
-    local inst = CreateEntity()
+	local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
-    
-    MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)		
-	
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddNetwork()
+
+	MakeInventoryPhysics(inst)
+	MakeInventoryFloatable(inst)
+
 	local s = 2
-	inst.Transform:SetScale(s,s,s)
+	inst.Transform:SetScale(s, s, s)
 
-    inst.AnimState:SetBank("peach_juice_bottle_green")
-    inst.AnimState:SetBuild("peach_juice_bottle_green")
-    inst.AnimState:PlayAnimation("idle")
+	inst.AnimState:SetBank("peach_juice_bottle_green")
+	inst.AnimState:SetBuild("peach_juice_bottle_green")
+	inst.AnimState:PlayAnimation("idle")
 
-    inst.entity:SetPristine()
+	inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	if not TheWorld.ismastersim then
+		return inst
+	end
 
-    MakeHauntableLaunch(inst)
-	
-    inst:AddComponent("inspectable")
-	
+	MakeHauntableLaunch(inst)
+
+	inst:AddComponent("inspectable")
+
 	inst:AddComponent("edible")
-    inst.components.edible.hungervalue = 35
+	inst.components.edible.hungervalue = 35
 	inst.components.edible.healthvalue = 15
 	inst.components.edible.sanityvalue = 5
 	inst.components.edible.foodtype = FOODTYPE.VEGGIE
 	inst.components.edible:SetOnEatenFn(Full_EatFn)
 
-    inst:AddComponent("inventoryitem")
+	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach_juice_bottle_green.xml"
 
 
-    return inst
+	return inst
 end
 
 local function most()
-    local inst = CreateEntity()
+	local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
-    
-    MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)		
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddNetwork()
 
-    inst.AnimState:SetBank("peach_juice_bottle_green")
-    inst.AnimState:SetBuild("peach_juice_bottle_green")
-    inst.AnimState:PlayAnimation("idle_most")
+	MakeInventoryPhysics(inst)
+	MakeInventoryFloatable(inst)
 
-    inst.entity:SetPristine()
+	inst.AnimState:SetBank("peach_juice_bottle_green")
+	inst.AnimState:SetBuild("peach_juice_bottle_green")
+	inst.AnimState:PlayAnimation("idle_most")
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	inst.entity:SetPristine()
 
-    MakeHauntableLaunch(inst)
-	
-    inst:AddComponent("inspectable")
-	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+
+	MakeHauntableLaunch(inst)
+
+	inst:AddComponent("inspectable")
+
 	inst:AddComponent("edible")
-    inst.components.edible.hungervalue = 35
+	inst.components.edible.hungervalue = 35
 	inst.components.edible.healthvalue = 15
 	inst.components.edible.sanityvalue = 5
 	inst.components.edible.foodtype = FOODTYPE.VEGGIE
 	inst.components.edible:SetOnEatenFn(Most_EatFn)
 
-    inst:AddComponent("inventoryitem")
+	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach_juice_bottle_green_most.xml"
 
-    return inst
+	return inst
 end
 
 local function half()
-    local inst = CreateEntity()
+	local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
-    
-    MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)		
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddNetwork()
 
-    inst.AnimState:SetBank("peach_juice_bottle_green")
-    inst.AnimState:SetBuild("peach_juice_bottle_green")
-    inst.AnimState:PlayAnimation("idle_half")
+	MakeInventoryPhysics(inst)
+	MakeInventoryFloatable(inst)
 
-    inst.entity:SetPristine()
+	inst.AnimState:SetBank("peach_juice_bottle_green")
+	inst.AnimState:SetBuild("peach_juice_bottle_green")
+	inst.AnimState:PlayAnimation("idle_half")
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	inst.entity:SetPristine()
 
-    MakeHauntableLaunch(inst)
-	
-    inst:AddComponent("inspectable")
-	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+
+	MakeHauntableLaunch(inst)
+
+	inst:AddComponent("inspectable")
+
 	inst:AddComponent("edible")
-    inst.components.edible.hungervalue = 35
+	inst.components.edible.hungervalue = 35
 	inst.components.edible.healthvalue = 15
 	inst.components.edible.sanityvalue = 5
 	inst.components.edible.foodtype = FOODTYPE.VEGGIE
 	inst.components.edible:SetOnEatenFn(Half_EatFn)
 
-    inst:AddComponent("inventoryitem")
+	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach_juice_bottle_green_half.xml"
 
-    return inst
+	return inst
 end
 
 local function less()
-    local inst = CreateEntity()
+	local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddNetwork()
 	inst.entity:AddSoundEmitter()
-    
-    MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("peach_juice_bottle_green")
-    inst.AnimState:SetBuild("peach_juice_bottle_green")
-    inst.AnimState:PlayAnimation("idle_less")
-	
-    MakeInventoryFloatable(inst)		
+	MakeInventoryPhysics(inst)
 
-    inst.entity:SetPristine()
+	inst.AnimState:SetBank("peach_juice_bottle_green")
+	inst.AnimState:SetBuild("peach_juice_bottle_green")
+	inst.AnimState:PlayAnimation("idle_less")
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	MakeInventoryFloatable(inst)
+
+	inst.entity:SetPristine()
+
+	if not TheWorld.ismastersim then
+		return inst
+	end
 
 	inst:AddTag("peachy")
-	
-    MakeHauntableLaunch(inst)
-	
-    inst:AddComponent("inspectable")
-	
+
+	MakeHauntableLaunch(inst)
+
+	inst:AddComponent("inspectable")
+
 	inst:AddComponent("edible")
-    inst.components.edible.hungervalue = 35
+	inst.components.edible.hungervalue = 35
 	inst.components.edible.healthvalue = 15
 	inst.components.edible.sanityvalue = 15
 	inst.components.edible.foodtype = FOODTYPE.VEGGIE
 	inst.components.edible:SetOnEatenFn(Less_EatFn)
 
-    inst:AddComponent("inventoryitem")
+	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach_juice_bottle_green_less.xml"
 
-    return inst
+	return inst
 end
 
-return	Prefab("peach_juice_bottle_green", full, assets),
-		Prefab("peach_juice_bottle_green_most", most, assets1),
-		Prefab("peach_juice_bottle_green_half", half, assets2),
-		Prefab("peach_juice_bottle_green_less", less, assets3)
+return Prefab("peach_juice_bottle_green", full, assets),
+	Prefab("peach_juice_bottle_green_most", most, assets1),
+	Prefab("peach_juice_bottle_green_half", half, assets2),
+	Prefab("peach_juice_bottle_green_less", less, assets3)

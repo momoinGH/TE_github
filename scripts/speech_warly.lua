@@ -1,5 +1,5 @@
-return{
-	ACTIONFAIL = 
+return {
+	ACTIONFAIL =
 	{
 		REPAIRBOAT =
 		{
@@ -17,29 +17,29 @@ return{
 			NOTALLOWED = "This is not the place for it.",
 		},
 		RUMMAGE =
-		{	
-			GENERIC = "I cannot right now.",	
+		{
+			GENERIC = "I cannot right now.",
 		},
-        COOK =
-        {
-            GENERIC = "I'm not quite ready yet.",
-            TOOFAR = "I'll need to get a little closer to cook with that.",
-        },
-        GIVE =
-        {
-            DEAD = "Oh dear...",
-            SLEEPING = "It's sleeping.",
-            BUSY = "Goodness, it seems busy.",
-        },
-        WRITE =
-        {
-            GENERIC = "Maybe later. My hands are covered in cooking oil.",
-        },
+		COOK =
+		{
+			GENERIC = "I'm not quite ready yet.",
+			TOOFAR = "I'll need to get a little closer to cook with that.",
+		},
+		GIVE =
+		{
+			DEAD = "Oh dear...",
+			SLEEPING = "It's sleeping.",
+			BUSY = "Goodness, it seems busy.",
+		},
+		WRITE =
+		{
+			GENERIC = "Maybe later. My hands are covered in cooking oil.",
+		},
 		TEACH =
-        {
-            KNOWN = "Ah. I already knew that.",
-            CANTLEARN = "That might be a bit beyond me.",
-        },
+		{
+			KNOWN = "Ah. I already knew that.",
+			CANTLEARN = "That might be a bit beyond me.",
+		},
 	},
 	ACTIONFAIL_GENERIC = "I cannot do that.",
 	ANNOUNCE_MAGIC_FAIL = "Sadly, I can not make it work.",
@@ -126,7 +126,7 @@ return{
 	ANNOUNCE_SOAKED = "I'm wetter than a dish rag!",
 	ANNOUNCE_THORNS = "Gah!",
 	ANNOUNCE_FAN_OUT = "It fell apart in my hands!",
-    ANNOUNCE_COMPASS_OUT = "Oh. I believe it broke.",
+	ANNOUNCE_COMPASS_OUT = "Oh. I believe it broke.",
 	ANNOUNCE_TOOL_SLIP = "Everything is slick...",
 	ANNOUNCE_TORCH_OUT = "Come back, light!",
 	ANNOUNCE_TRAP_WENT_OFF = "Darn!",
@@ -365,18 +365,18 @@ return{
 		},
 		CAVE_EXIT = "Thank goodness.",
 		CAVE_ENTRANCE = "I wonder what is underneath that?",
-        CAVE_ENTRANCE_RUINS = "What is within?",
-       
-       	CAVE_ENTRANCE_OPEN = 
-        {
-            GENERIC = "I wonder what is underneath that?",
-            OPEN = "Dare I?",
-        },
-        CAVE_EXIT = 
-        {
-            GENERIC = "Thank goodness.",
-            OPEN = "I should like to see the surface again.",
-        },
+		CAVE_ENTRANCE_RUINS = "What is within?",
+
+		CAVE_ENTRANCE_OPEN =
+		{
+			GENERIC = "I wonder what is underneath that?",
+			OPEN = "Dare I?",
+		},
+		CAVE_EXIT =
+		{
+			GENERIC = "Thank goodness.",
+			OPEN = "I should like to see the surface again.",
+		},
 
 		CAVE_FERN = "How does anything grow down here?",
 		CHARCOAL = "This, a grill and some meat and I'd have dinner.",
@@ -396,10 +396,10 @@ return{
 			BURNING = "This will only burn for so long before...",
 			GENERIC = "Weaponized food.",
 		},
-		COCONUT = 
+		COCONUT =
 		{
-		    GENERIC = "Its packaging is tough to open.",
-		    PLANTED = "Evidence of a coconut uneaten. Sigh.",
+			GENERIC = "Its packaging is tough to open.",
+			PLANTED = "Evidence of a coconut uneaten. Sigh.",
 		},
 		COCONUT_COOKED = "Could use rice and curry spices...",
 		COFFEE = "Magnifique!",
@@ -448,7 +448,7 @@ return{
 		COOKEDMEAT = "Could use a chimichurri sauce...",
 		COOKEDMONSTERMEAT = "Could use... uh... I don't even...",
 		COOKEDSMALLMEAT = "Could use sea salt...",
-		COOKPOT = 
+		COOKPOT =
 		{
 			BURNT = "Tragique.",
 			COOKING_LONG = "A masterpiece takes time.",
@@ -756,10 +756,10 @@ return{
 			GENERIC = "Gigantesque!",
 		},
 		JUNGLETREESEED =
-        {
-            GENERIC = "Cute, no?",
-            PLANTED = "Even cuter than the seed!",
-        },
+		{
+			GENERIC = "Cute, no?",
+			PLANTED = "Even cuter than the seed!",
+		},
 		KABOBS = "Opa!",
 		KILLERBEE =
 		{
@@ -813,7 +813,7 @@ return{
 		LOBSTER_DEAD = "One step closer to my mouth.",
 		LOBSTER_DEAD_COOKED = "Could use garlic-butter...",
 		LOCKEDWES = "I'll get you out, mon ami!",
-		
+
 		LOG =
 		{
 			BURNING = "Soon it won't be good for much.",
@@ -854,7 +854,7 @@ return{
 			GENERIC = "I am ever so glad I'm not a tree hugger.",
 		},
 		MAXWELL = "You! You... villain!",
-	    MAXWELLHEAD = "He must eat massive sandwiches.",
+		MAXWELLHEAD = "He must eat massive sandwiches.",
 		MAXWELLLIGHT = "A light is always welcome.",
 		MAXWELLLOCK = "But where is the key?",
 		MAXWELLPHONOGRAPH = "I wonder what is in his record collection?",
@@ -890,11 +890,11 @@ return{
 		MINOTAURCHEST = "I appreciate the attention to its aesthetic detail.",
 		MINOTAURHORN = "I wonder, if ground up into a powder...",
 		MOLE =
-		 {
-		 	ABOVEGROUND = "Are you spying on me?",
-		 	HELD = "Do you \"dig\" your new surroundings?",
-		 	UNDERGROUND = "Something dwells beneath.",
-		 },
+		{
+			ABOVEGROUND = "Are you spying on me?",
+			HELD = "Do you \"dig\" your new surroundings?",
+			UNDERGROUND = "Something dwells beneath.",
+		},
 		MOLEHAT = "Neat vision!",
 		MOLEHILL = "It is a nice hill, but I won't make a mountain of it.",
 		MONKEY = "A new species of irritation.",
@@ -912,7 +912,7 @@ return{
 		MOSQUITOSACK = "Ugh! It can only be filled with one thing.",
 		MOSQUITOSACK_YELLOW = "Ugh! It can only be filled with one thing.",
 		MOSQUITO_POISON = "You not only take, but you also give? Well, no thanks!",
-	    MOSSLING = "Looking for your momma? Apologies, but I hope you do not find her.",
+		MOSSLING = "Looking for your momma? Apologies, but I hope you do not find her.",
 		MOUND =
 		{
 			DUG = "What have I become?",
@@ -935,15 +935,15 @@ return{
 		NIGHTMAREFUEL = "Who in their right mind would want to fuel MORE nightmares?",
 		NIGHTMARELIGHT = "Am I crazy or is this light not helping my situation?",
 		NIGHTMARE_TIMEPIECE =
-		 {
-		 	CALM = "It appears that all is well.",
-		 	DAWN = "This nightmare is almost over!",
-		 	NOMAGIC = "Magicless.",
-		 	STEADY = "Steady on.",
-		 	WANING = "Subsiding.",
-		 	WARN = "I feel some magic coming on!",
-		 	WAXING = "Magic hour!",
-		 },
+		{
+			CALM = "It appears that all is well.",
+			DAWN = "This nightmare is almost over!",
+			NOMAGIC = "Magicless.",
+			STEADY = "Steady on.",
+			WANING = "Subsiding.",
+			WARN = "I feel some magic coming on!",
+			WAXING = "Magic hour!",
+		},
 		NIGHTSTICK = "I feel electric!",
 		NIGHTSWORD = "This thing slices like a dream!",
 		NITRE = "How curious.",
@@ -1048,14 +1048,14 @@ return{
 		POND_ALGAE = "I can't see the bottom...",
 		POOP = "The end result of a fine meal.",
 		PORTAL_SHIPWRECKED = "Looks like a rickety ride to someplace...",
-		PORTABLECOOKPOT = 
+		PORTABLECOOKPOT =
 		{
-            BURNT = "Nononononono whyyyyyyyyyyyyyyy!?",
-            COOKING_LONG = "The flavors need time to meld.",
-            COOKING_SHORT = "I threw that meal together!",
-            DONE = "Pickup! Oh, old habits...",
-            EMPTY = "I would never leave home without it!",
-        },
+			BURNT = "Nononononono whyyyyyyyyyyyyyyy!?",
+			COOKING_LONG = "The flavors need time to meld.",
+			COOKING_SHORT = "I threw that meal together!",
+			DONE = "Pickup! Oh, old habits...",
+			EMPTY = "I would never leave home without it!",
+		},
 		PORTABLECOOKPOT_ITEM = "What new culinary adventures shall we undertake, old friend?",
 		POTTEDFERN = "Nature. Tamed.",
 		POWCAKE = "I would not feed this to my worst enemies. Or would I...",
@@ -1656,87 +1656,87 @@ return{
 
 		--- 5C DLC ------------------------------------------------------------------------------------------------
 
-        ENCRUSTEDBOAT = "It's a bit wobbly.",
-        BABYOX = "Worry not, mon chou, I've no interest in veal today.",
-        BALLPHINHOUSE = "They're quite social creatures, no?",
-        DORSALFIN = "I'd imagine that hurt.",
-        NUBBIN = "No coral in sight. Perhaps later.",
-        CORALLARVE = "Bonjour, mon petit amie.",
-        RAINBOWJELLYFISH = "You might go well in a stew.",
-        RAINBOWJELLYFISH_PLANTED = "I see no reason to bother it.",
-        RAINBOWJELLYFISH_DEAD = "No sense letting it go to waste.",
-        RAINBOWJELLYFISH_COOKED = "You can really taste the \"rainbow\".",
-        RAINBOWJELLYJERKY = "The natural sea salt is a great flavor enhancer.",
-        WALL_ENFORCEDLIMESTONE = "Good and strong.",
-        WALL_ENFORCEDLIMESTONE_ITEM = "I could probably place this at sea without issue.",      
-        CROCODOG = "I am not on the menu!",
-        POISONCROCODOG = "Don't eat me! I'm not even cooked!",
-        WATERCROCODOG = "You look much too hungry!",       
-        QUACKENBEAK = "Imagine the meals it could've eaten with that thing!",
-        QUACKERINGRAM = "Excuse me everyone, out of my way, please.",
+		ENCRUSTEDBOAT = "It's a bit wobbly.",
+		BABYOX = "Worry not, mon chou, I've no interest in veal today.",
+		BALLPHINHOUSE = "They're quite social creatures, no?",
+		DORSALFIN = "I'd imagine that hurt.",
+		NUBBIN = "No coral in sight. Perhaps later.",
+		CORALLARVE = "Bonjour, mon petit amie.",
+		RAINBOWJELLYFISH = "You might go well in a stew.",
+		RAINBOWJELLYFISH_PLANTED = "I see no reason to bother it.",
+		RAINBOWJELLYFISH_DEAD = "No sense letting it go to waste.",
+		RAINBOWJELLYFISH_COOKED = "You can really taste the \"rainbow\".",
+		RAINBOWJELLYJERKY = "The natural sea salt is a great flavor enhancer.",
+		WALL_ENFORCEDLIMESTONE = "Good and strong.",
+		WALL_ENFORCEDLIMESTONE_ITEM = "I could probably place this at sea without issue.",
+		CROCODOG = "I am not on the menu!",
+		POISONCROCODOG = "Don't eat me! I'm not even cooked!",
+		WATERCROCODOG = "You look much too hungry!",
+		QUACKENBEAK = "Imagine the meals it could've eaten with that thing!",
+		QUACKERINGRAM = "Excuse me everyone, out of my way, please.",
 
-        --- DLC ------------------------------------------------------------------------------------------------    
+		--- DLC ------------------------------------------------------------------------------------------------
 
-        CAVIAR = "Eat it with a clamshell or the flavor will be ruined.",
-        CORMORANT = "The caviar delivery service.",
+		CAVIAR = "Eat it with a clamshell or the flavor will be ruined.",
+		CORMORANT = "The caviar delivery service.",
 
-        FISH3 = "It couldn't be any fresher!",
-        FISH4 = "How would you like to be a nice chowder?",
-        FISH5 = "Would you prefer to be scorched, or cracked?",
+		FISH3 = "It couldn't be any fresher!",
+		FISH4 = "How would you like to be a nice chowder?",
+		FISH5 = "Would you prefer to be scorched, or cracked?",
 
-        FISH3_COOKED = "Pan-fried grouper with pigeon peas! Delectable!",
-        FISH4_COOKED = "Ah, I should have saved the head for soup!",
-        FISH5_COOKED = "Sigh. It's not even seasoned.",
+		FISH3_COOKED = "Pan-fried grouper with pigeon peas! Delectable!",
+		FISH4_COOKED = "Ah, I should have saved the head for soup!",
+		FISH5_COOKED = "Sigh. It's not even seasoned.",
 
-        FISH_FARM = 
-        {
-        	EMPTY = "I'll have to sacrifice caviar ingredients for this.",
-			STOCKED = "Just think, market fresh fish every morning!",
-			ONEFISH = "Should I make a fish stew with thyme and onion?",
-			TWOFISH = "Oh! Boiled fish with celery and goat pepper?",
-			REDFISH = "Maybe a chowder with hot pepper and shrimp stock!",
-			BLUEFISH  = "Let the cook off begin!",
-        },
+		FISH_FARM =
+		{
+			EMPTY    = "I'll have to sacrifice caviar ingredients for this.",
+			STOCKED  = "Just think, market fresh fish every morning!",
+			ONEFISH  = "Should I make a fish stew with thyme and onion?",
+			TWOFISH  = "Oh! Boiled fish with celery and goat pepper?",
+			REDFISH  = "Maybe a chowder with hot pepper and shrimp stock!",
+			BLUEFISH = "Let the cook off begin!",
+		},
 
-        ROE = "I can make caviar with canapes!",
-        ROE_COOKED = "Could use a squeeze of fresh lemon.",
-        
-        SEA_YARD = 
-        {
-            ON = "Is my boat in need of a touch up?",
-            OFF = "Ah, I can't fix my boat right now.",
-            LOWFUEL = "It seems to be running low.",
-        },
-        SEA_CHIMINEA =
-        {
-            EMBERS = "Worryingly low.",
-            GENERIC = "Is this a fire hazard, or a boating hazard?",
-            HIGH = "Goodness! It's a grease fire!",
-            LOW = "Looks a bit dim.",
-            NORMAL = "It's burning steady.",
-            OUT = "I can't cook without a fire!",
-        }, 
+		ROE = "I can make caviar with canapes!",
+		ROE_COOKED = "Could use a squeeze of fresh lemon.",
 
-        TAR = "Adds a truly unique flavor to licorice.",
-        TAR_EXTRACTOR =
-        {
-            ON = "It's extracting tar quite vigorously!",
-            OFF = "I suppose I should turn it on.",
-            LOWFUEL = "It looks a bit peckish.",
-        },
-        TAR_POOL = "I think there's tar down there.",
+		SEA_YARD =
+		{
+			ON = "Is my boat in need of a touch up?",
+			OFF = "Ah, I can't fix my boat right now.",
+			LOWFUEL = "It seems to be running low.",
+		},
+		SEA_CHIMINEA =
+		{
+			EMBERS = "Worryingly low.",
+			GENERIC = "Is this a fire hazard, or a boating hazard?",
+			HIGH = "Goodness! It's a grease fire!",
+			LOW = "Looks a bit dim.",
+			NORMAL = "It's burning steady.",
+			OUT = "I can't cook without a fire!",
+		},
 
-        TARLAMP = "What a rustic delight!",
-        TARSUIT = "I hope there are no feathers around!",
-        TAR_TRAP = "The slowed pace gives you time to enjoy the scenery.",
+		TAR = "Adds a truly unique flavor to licorice.",
+		TAR_EXTRACTOR =
+		{
+			ON = "It's extracting tar quite vigorously!",
+			OFF = "I suppose I should turn it on.",
+			LOWFUEL = "It looks a bit peckish.",
+		},
+		TAR_POOL = "I think there's tar down there.",
 
-        TROPICALBOUILLABAISSE = "Such a decadent dish!",
+		TARLAMP = "What a rustic delight!",
+		TARSUIT = "I hope there are no feathers around!",
+		TAR_TRAP = "The slowed pace gives you time to enjoy the scenery.",
 
-        RESEARCHLAB5 = "Couldn't hurt to hit the books now and then.",
-        WATERCHEST1 = "I probably shouldn't keep perishables in it.",
-        QUACKENDRILL = "It's tres heavy!",
-        HARPOON = "Time to catch myself some dinner.",
-        MUSSEL_BED = "Imagine! Fresh mussels, whenever I desire!",
+		TROPICALBOUILLABAISSE = "Such a decadent dish!",
+
+		RESEARCHLAB5 = "Couldn't hurt to hit the books now and then.",
+		WATERCHEST1 = "I probably shouldn't keep perishables in it.",
+		QUACKENDRILL = "It's tres heavy!",
+		HARPOON = "Time to catch myself some dinner.",
+		MUSSEL_BED = "Imagine! Fresh mussels, whenever I desire!",
 	},
 	DESCRIBE_GENERIC = "It is what it is...",
 	DESCRIBE_SMOLDERING = "I fear that that is about to cook itself.",

@@ -24,7 +24,7 @@ local function ReviveAction(inst)
 end
 
 local function IsBroDead(inst)
-	return inst.bro and inst.bro.components.health and inst.bro.components.health:IsDead()
+    return inst.bro and inst.bro.components.health and inst.bro.components.health:IsDead()
 end
 
 local function IsBusy(inst)
@@ -62,20 +62,23 @@ local function GetWanderPoint(inst)
 end
 
 function RhinodrillBrain:OnStart()
-    
     local root = PriorityNode(
-    {
-		WhileNode(function() return self.inst.bro and self.inst.bro.sg and self.inst.bro:HasTag("corpse") and not self.inst.sg:HasStateTag("reviving") and not self.inst.sg:HasStateTag("knockback") end, "Reviving Bro", DoAction(self.inst, ReviveAction)),
-        WhileNode(function() return not IsBroDead(self.inst) and self.inst.cheer_ready and not IsBusy(self.inst) end, "Bro Cheering", MaintainDistance(self.inst, GetBro, CHEER_MIN_DISTANCE, CHEER_MAX_DISTANCE, StartCheer)),
-		ChaseAndAttack(self.inst, CHASE_TIME, CHASE_DIST),
-		ParallelNode{
-            SequenceNode{
-                WaitNode(5),
+        {
+            WhileNode(
+            function() return self.inst.bro and self.inst.bro.sg and self.inst.bro:HasTag("corpse") and
+                not self.inst.sg:HasStateTag("reviving") and not self.inst.sg:HasStateTag("knockback") end,
+                "Reviving Bro", DoAction(self.inst, ReviveAction)),
+            WhileNode(function() return not IsBroDead(self.inst) and self.inst.cheer_ready and not IsBusy(self.inst) end,
+                "Bro Cheering", MaintainDistance(self.inst, GetBro, CHEER_MIN_DISTANCE, CHEER_MAX_DISTANCE, StartCheer)),
+            ChaseAndAttack(self.inst, CHASE_TIME, CHASE_DIST),
+            ParallelNode {
+                SequenceNode {
+                    WaitNode(5),
+                },
+                Wander(self.inst, GetWanderPoint, 5),
             },
-            Wander(self.inst, GetWanderPoint, 5),
-        },		
-		StandStill(self.inst, function() return true end),
-    }, .25)
+            StandStill(self.inst, function() return true end),
+        }, .25)
     self.bt = BT(self.inst, root)
 end
 

@@ -1,8 +1,8 @@
 local assets =
 {
     Asset("ANIM", "anim/penguin_ice.zip"),
-	Asset("MINIMAP_IMAGE", "penguin"),
-	Asset("MINIMAP_IMAGE", "mutated_penguin"),
+    Asset("MINIMAP_IMAGE", "penguin"),
+    Asset("MINIMAP_IMAGE", "mutated_penguin"),
 }
 
 local SNOW_THRESH = 0.10
@@ -16,7 +16,7 @@ local function UpdateFade(inst, dframes)
             inst.fadetask:Cancel()
             inst.fadetask = nil
             if inst.queueremove then
-				inst:Remove()
+                inst:Remove()
             end
         end
     elseif inst.fadeval:value() > 0 then
@@ -39,13 +39,13 @@ local function OnIsFadedDirty(inst)
 end
 
 local function OnSnowLevel(inst, snowlevel)
-local ex, ey, ez = inst.Transform:GetWorldPosition()
-local map = TheWorld.Map
-local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
-if posicao == GROUND.WATER_MANGROVE or posicao == GROUND.ANTFLOOR then
-snowlevel = 1		
-end		
-		
+    local ex, ey, ez = inst.Transform:GetWorldPosition()
+    local map = TheWorld.Map
+    local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
+    if posicao == GROUND.WATER_MANGROVE or posicao == GROUND.ANTFLOOR then
+        snowlevel = 1
+    end
+
     if snowlevel > SNOW_THRESH then
         if inst.isfaded:value() then
             inst.isfaded:set(false)
@@ -59,11 +59,11 @@ end
 
 local function OnEntityWake(inst)
     inst:WatchWorldState("snowlevel", OnSnowLevel)
-local ex, ey, ez = inst.Transform:GetWorldPosition()
-local map = TheWorld.Map
-local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
-	
-    if TheWorld.state.snowlevel > SNOW_THRESH or posicao == GROUND.WATER_MANGROVE or posicao == GROUND.ANTFLOOR	then
+    local ex, ey, ez = inst.Transform:GetWorldPosition()
+    local map = TheWorld.Map
+    local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
+
+    if TheWorld.state.snowlevel > SNOW_THRESH or posicao == GROUND.WATER_MANGROVE or posicao == GROUND.ANTFLOOR then
         inst.isfaded:set(false)
         inst.fadeval:set(0)
     else
@@ -112,11 +112,11 @@ local function CreateIceFX()
 end
 
 local function QueueRemove(inst)
-	if inst:IsAsleep() or (inst.fadetask == nil and inst.isfaded:value()) then
-		inst:Remove()
-	else
-		inst.queueremove = true
-	end
+    if inst:IsAsleep() or (inst.fadetask == nil and inst.isfaded:value()) then
+        inst:Remove()
+    else
+        inst.queueremove = true
+    end
 end
 
 local function fn()
@@ -151,7 +151,7 @@ local function fn()
 
     inst:DoTaskInTime(0, OnInit)
 
-	inst.QueueRemove = QueueRemove
+    inst.QueueRemove = QueueRemove
 
     -- penguin spawner administers the ice fields
     inst.persists = false

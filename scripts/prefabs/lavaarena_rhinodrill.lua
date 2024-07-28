@@ -87,10 +87,10 @@ local function OnBuffLevelDirty(inst)
             inst.buff_fx.level = 0
             inst.buff_fx = nil
         end
-    if inst.task ~= nil then
-        inst.task:Cancel()
-        inst.task = nil
-    end		
+        if inst.task ~= nil then
+            inst.task:Cancel()
+            inst.task = nil
+        end
         if inst._bufflevel:value() > 0 then
             inst.buff_fx = CreatePulse()
             inst.buff_fx.entity:SetParent(inst.entity)
@@ -100,25 +100,26 @@ local function OnBuffLevelDirty(inst)
         fx.entity:SetParent(inst.entity)
         fx.entity:AddFollower()
         fx.Follower:FollowSymbol(inst.GUID, "head", 0, 0, 0)
-        fx.Transform:SetPosition(0, 0, 0)		
+        fx.Transform:SetPosition(0, 0, 0)
     end
 end
 
 local function SetBuffLevel(inst, level)
-print(inst.bro_stacks)
+    print(inst.bro_stacks)
     level = math.clamp(level, 0, 7)
     inst.bro_stacks = level
     if inst._bufflevel:value() ~= level then
-	inst.components.combat:SetDefaultDamage(75 + 25 * inst.bro_stacks)	
-    inst._bufflevel:set(level)
-    OnBuffLevelDirty(inst)
+        inst.components.combat:SetDefaultDamage(75 + 25 * inst.bro_stacks)
+        inst._bufflevel:set(level)
+        OnBuffLevelDirty(inst)
     end
 end
 
 --------------------------------------------------------------------------
 local function KnockbackOnHit(inst, target, radius, attack_knockback, strength_mult, force_land)
     if target.sg and target.sg.sg.states.knockback then
-        target:PushEvent("knockback", {knocker = inst, radius = radius, strengthmult = strength_mult, forcelanded = force_land})
+        target:PushEvent("knockback",
+            { knocker = inst, radius = radius, strengthmult = strength_mult, forcelanded = force_land })
     else
         Knockback(inst, target, radius, attack_knockback)
     end
@@ -136,11 +137,11 @@ local function DamagedTrigger(inst)
 end
 
 local function IsTrueDeath(inst)
-	if inst.bro and inst.bro.components.health and inst.bro.components.health:IsDead() then
-		return true, {inst.bro}
-	else
-		return nil, nil
-	end
+    if inst.bro and inst.bro.components.health and inst.bro.components.health:IsDead() then
+        return true, { inst.bro }
+    else
+        return nil, nil
+    end
 end
 
 local function CanBeRevivedBy(inst, reviver)
@@ -148,17 +149,17 @@ local function CanBeRevivedBy(inst, reviver)
 end
 
 local function ReTarget(inst)
-    local newtarget = FindEntity(inst, 50, 
-		function(guy)
-			return inst.components.combat:CanTarget(guy)
+    local newtarget = FindEntity(inst, 50,
+        function(guy)
+            return inst.components.combat:CanTarget(guy)
         end,
         { "player" },
         { "smallcreature", "playerghost", "shadow", "INLIMBO", "FX", "NOCLICK" }
     )
 
     if newtarget then
-		return newtarget
-	end
+        return newtarget
+    end
 end
 
 --------------------------------------------------------------------------
@@ -173,11 +174,11 @@ local function MakeRhinoDrill(name, alt)
         inst.entity:AddDynamicShadow()
         inst.entity:AddNetwork()
 
-		inst:SetPhysicsRadiusOverride(1)
-		MakeCharacterPhysics(inst, 400, inst.physicsradiusoverride)
-		inst.DynamicShadow:SetSize(2.75, 1.25)
-		inst.Transform:SetSixFaced()
-		inst.Transform:SetScale(1.15, 1.15, 1.15)		
+        inst:SetPhysicsRadiusOverride(1)
+        MakeCharacterPhysics(inst, 400, inst.physicsradiusoverride)
+        inst.DynamicShadow:SetSize(2.75, 1.25)
+        inst.Transform:SetSixFaced()
+        inst.Transform:SetScale(1.15, 1.15, 1.15)
 
         inst.AnimState:SetBank("rhinodrill")
         inst.AnimState:SetBuild("lavaarena_rhinodrill_basic")
@@ -195,15 +196,15 @@ local function MakeRhinoDrill(name, alt)
         inst:AddTag("hostile")
         inst:AddTag("nostun")
         inst:AddTag("largecreature")
-        inst:AddTag("fossilizable")		
+        inst:AddTag("fossilizable")
 
         inst._bufflevel = net_tinybyte(inst.GUID, "rhinodrill._bufflevel", "buffleveldirty")
         inst._camerafocus = net_bool(inst.GUID, "rhinodrill._camerafocus", "camerafocusdirty")
 
-	inst:AddComponent("revivablecorpse")
-    inst.components.revivablecorpse:SetCanBeRevivedByFn(CanBeRevivedBy)
-	inst.components.revivablecorpse:SetReviveHealthPercent(0.2)
-	inst.components.revivablecorpse:SetReviveSpeedMult(0.5)
+        inst:AddComponent("revivablecorpse")
+        inst.components.revivablecorpse:SetCanBeRevivedByFn(CanBeRevivedBy)
+        inst.components.revivablecorpse:SetReviveHealthPercent(0.2)
+        inst.components.revivablecorpse:SetReviveSpeedMult(0.5)
 
         inst.entity:SetPristine()
 
@@ -211,60 +212,60 @@ local function MakeRhinoDrill(name, alt)
             inst:ListenForEvent("buffleveldirty", OnBuffLevelDirty)
             return inst
         end
-	
-	inst:AddComponent("healthtrigger")
-	inst.components.healthtrigger:AddTrigger(0.2, DamagedTrigger)
-	inst:AddComponent("bloomer")
-	
-	inst:AddComponent("knownlocations")
-	
-	inst:AddComponent("locomotor")
-	inst.components.locomotor.runspeed = 7
 
-	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(12750)
-	inst.components.health.nofadeout = true
-	
-	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(150)
-	inst.components.combat:SetAttackPeriod(3)
-	inst.components.combat:SetRetargetFunction(5, ReTarget)
-	inst.components.combat:SetRange(4.5)
-	
-    inst:AddComponent("sanityaura")
-    inst:AddComponent("sleeper")
+        inst:AddComponent("healthtrigger")
+        inst.components.healthtrigger:AddTrigger(0.2, DamagedTrigger)
+        inst:AddComponent("bloomer")
 
-    ------------------------------------------
+        inst:AddComponent("knownlocations")
 
-    inst:AddComponent("inspectable")
+        inst:AddComponent("locomotor")
+        inst.components.locomotor.runspeed = 7
+
+        inst:AddComponent("health")
+        inst.components.health:SetMaxHealth(12750)
+        inst.components.health.nofadeout = true
+
+        inst:AddComponent("combat")
+        inst.components.combat:SetDefaultDamage(150)
+        inst.components.combat:SetAttackPeriod(3)
+        inst.components.combat:SetRetargetFunction(5, ReTarget)
+        inst.components.combat:SetRange(4.5)
+
+        inst:AddComponent("sanityaura")
+        inst:AddComponent("sleeper")
+
+        ------------------------------------------
+
+        inst:AddComponent("inspectable")
 
 
-	inst.attack_charge_ready = true
-    inst.cheer_ready = false
-	inst.bro_stacks = 0
-	inst.damagedtype = ""
-    inst.SetBuffLevel = SetBuffLevel
-	------------------------------------------
-	inst:DoTaskInTime(0, function(inst)
-		if inst.bro then
-			inst.IsTrueDeath = IsTrueDeath
-		end
-	end)
-	------------------------------------------
-	inst:DoTaskInTime(15, function(inst)
-        inst.cheer_ready = true
-    end)
-	------------------------------------------
-	inst.components.combat.onhitotherfn = OnHitOther
-	------------------------------------------
-    MakeHauntablePanic(inst)
-	MakeMediumBurnableCharacter(inst, "body")
+        inst.attack_charge_ready = true
+        inst.cheer_ready = false
+        inst.bro_stacks = 0
+        inst.damagedtype = ""
+        inst.SetBuffLevel = SetBuffLevel
+        ------------------------------------------
+        inst:DoTaskInTime(0, function(inst)
+            if inst.bro then
+                inst.IsTrueDeath = IsTrueDeath
+            end
+        end)
+        ------------------------------------------
+        inst:DoTaskInTime(15, function(inst)
+            inst.cheer_ready = true
+        end)
+        ------------------------------------------
+        inst.components.combat.onhitotherfn = OnHitOther
+        ------------------------------------------
+        MakeHauntablePanic(inst)
+        MakeMediumBurnableCharacter(inst, "body")
 
-	local sg = require "stategraphs/SGrhinodrill"
-    inst:SetStateGraph("SGrhinodrill")	
+        local sg = require "stategraphs/SGrhinodrill"
+        inst:SetStateGraph("SGrhinodrill")
 
-	local brain = require "brains/rhinodrillbrain"
-	inst:SetBrain(brain)
+        local brain = require "brains/rhinodrillbrain"
+        inst:SetBrain(brain)
 
         return inst
     end
@@ -302,15 +303,16 @@ local function MakeFossilizedBreakFX(side)
         return inst
     end
 
-    return Prefab(side:len() > 0 and ("rhinodrill_fossilized_break_fx_"..side) or "rhinodrill_fossilized_break_fx", fn, assets)
+    return Prefab(side:len() > 0 and ("rhinodrill_fossilized_break_fx_" .. side) or "rhinodrill_fossilized_break_fx", fn,
+        assets)
 end
 
 local function bros_fn(sim)
-        local inst = CreateEntity()
+    local inst = CreateEntity()
 
-        inst.entity:AddTransform()
-        inst.entity:AddAnimState()
-        inst.entity:AddNetwork()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
     ------------------------------------------
     if not TheWorld.ismastersim then
         return inst
@@ -341,24 +343,24 @@ local function fx_fn()
     inst.AnimState:PushAnimation("idle", false)
     inst.AnimState:PushAnimation("out", false)
     inst.Transform:SetSixFaced()
-	------------------------------------------
+    ------------------------------------------
     inst:AddTag("DECOR") --"FX" will catch mouseover
     inst:AddTag("NOCLICK")
-	------------------------------------------
+    ------------------------------------------
     inst.entity:SetPristine()
-	------------------------------------------
+    ------------------------------------------
     if not TheWorld.ismastersim then
         return inst
     end
-	------------------------------------------
-	inst.persists = false
-	------------------------------------------
-	inst:ListenForEvent("animqueueover", inst.Remove)
-	------------------------------------------
+    ------------------------------------------
+    inst.persists = false
+    ------------------------------------------
+    inst:ListenForEvent("animqueueover", inst.Remove)
+    ------------------------------------------
     return inst
 end
 
 return MakeRhinoDrill("rhinodrill"),
     MakeRhinoDrill("rhinodrill2", true),
-	Prefab("rhinodrillbros", bros_fn, assets, prefabs),
-	Prefab("rhinocebro_buff_fx", fx_fn)
+    Prefab("rhinodrillbros", bros_fn, assets, prefabs),
+    Prefab("rhinocebro_buff_fx", fx_fn)

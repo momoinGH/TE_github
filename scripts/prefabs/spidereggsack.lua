@@ -13,10 +13,10 @@ local prefabs =
 
 local function ondeploy(inst, pt)
     inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spider_egg_sack")
-	local den = SpawnPrefab("spiderden")
-	if den then
-		den.Transform:SetPosition(pt:Get())
-		--PreventCharacterCollisionsWithPlacedObjects(den)
+    local den = SpawnPrefab("spiderden")
+    if den then
+        den.Transform:SetPosition(pt:Get())
+        --PreventCharacterCollisionsWithPlacedObjects(den)
         inst.components.stackable:Get():Remove()
     end
 end
@@ -41,7 +41,7 @@ local function fn()
 
     inst:AddTag("cattoy")
 
-    MakeInventoryFloatable(inst, "med", 0.05, {0.85, 0.6, 0.85})
+    MakeInventoryFloatable(inst, "med", 0.05, { 0.85, 0.6, 0.85 })
 
     inst.scrapbook_specialinfo = "PLANTABLE_ON"
 
@@ -82,4 +82,5 @@ end
 
 return Prefab("spidereggsack", fn, assets, prefabs),
     --function MakePlacer(name, bank, build, anim, onground, snap, metersnap, scale, fixedcameraoffset, facing, postinit_fn, offset, onfailedplacement)
-    MakePlacer("spidereggsack_placer", "spider_cocoon", "spider_cocoon", "cocoon_small", nil, nil, nil, nil, nil, nil, placer_postinit)
+    MakePlacer("spidereggsack_placer", "spider_cocoon", "spider_cocoon", "cocoon_small", nil, nil, nil, nil, nil, nil,
+        placer_postinit)

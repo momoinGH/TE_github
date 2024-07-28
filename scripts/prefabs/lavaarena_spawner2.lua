@@ -33,14 +33,14 @@ local function CreateScratches()
 
     inst:AddTag("DECOR")
     inst:AddTag("NOCLICK")
---    inst.persists = false
+    --    inst.persists = false
 
     inst.AnimState:SetBank("lavaarena_spawner")
     inst.AnimState:SetBuild("lavaarena_spawner")
     inst.AnimState:PlayAnimation("idle_scratch")
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
---    inst.AnimState:SetSortOrder(7)
+    inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+    --    inst.AnimState:SetSortOrder(7)
 
     return inst
 end
@@ -54,13 +54,13 @@ local function CreateSpawnTooth(variation)
 
     inst:AddTag("FX")
     inst:AddTag("NOCLICK")
---    inst.persists = false
+    --    inst.persists = false
 
     inst.AnimState:SetBank("lavaarena_spawndecor")
     inst.AnimState:SetBuild("lavaarena_spawndecor")
     inst.AnimState:PlayAnimation("idle")
     if variation > 0 then
-        inst.AnimState:OverrideSymbol("spawntooth", "lavaarena_spawndecor", "spawntooth"..tostring(variation + 1))
+        inst.AnimState:OverrideSymbol("spawntooth", "lavaarena_spawndecor", "spawntooth" .. tostring(variation + 1))
     end
 
     return inst

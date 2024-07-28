@@ -12,7 +12,7 @@ local function KillFX(fx)
     if not fx.killed then
         fx.killed = true
 
-		local remaining = fx.AnimState:GetCurrentAnimationLength() - fx.AnimState:GetCurrentAnimationTime()
+        local remaining = fx.AnimState:GetCurrentAnimationLength() - fx.AnimState:GetCurrentAnimationTime()
         if remaining > 0 then
             local parent = fx.entity:GetParent()
             if parent ~= nil then
@@ -270,14 +270,14 @@ local function MakeGrill(name, size)
 
     local assets =
     {
-        Asset("ANIM", "anim/"..animname..".zip"),
+        Asset("ANIM", "anim/" .. animname .. ".zip"),
         Asset("ANIM", "anim/quagmire_pot_fire.zip"),
-        Asset("ANIM", "anim/quagmire_ui_pot_1x"..tostring(size)..".zip"),
+        Asset("ANIM", "anim/quagmire_ui_pot_1x" .. tostring(size) .. ".zip"),
     }
 
     local prefabs =
     {
-        name.."_item",
+        name .. "_item",
         "quagmire_food_plate_burnt",
     }
 
@@ -311,9 +311,9 @@ local function MakeGrill(name, size)
         -- inst.smoke = CreateSmoke()
 
 
-        inst._smoke = net_event(inst.GUID, name.."._smoke")
+        inst._smoke = net_event(inst.GUID, name .. "._smoke")
         -- inst._burnt = net_tinybyte(inst.GUID, name.."._burnt", "burntdirty")
-        inst._embers = net_tinybyte(inst.GUID, name.."._embers", "embersdirty")
+        inst._embers = net_tinybyte(inst.GUID, name .. "._embers", "embersdirty")
 
         inst.entity:SetPristine()
 
@@ -327,7 +327,7 @@ local function MakeGrill(name, size)
 
         if not TheWorld.ismastersim then
             inst.OnEntityReplicated = OnEntityReplicated
-            inst:ListenForEvent(name.."._smoke", OnGrillSmoke)
+            inst:ListenForEvent(name .. "._smoke", OnGrillSmoke)
             -- inst:ListenForEvent("burntdirty", OnBurntDirty)
             inst:ListenForEvent("embersdirty", OnEmbersDirty)
 
@@ -352,7 +352,7 @@ local function MakeGrill(name, size)
         inst.entity:AddNetwork()
 
         MakeInventoryPhysics(inst)
-		MakeInventoryFloatable(inst)
+        MakeInventoryFloatable(inst)
         inst.AnimState:SetBank(animname)
         inst.AnimState:SetBuild(animname)
         inst.AnimState:PlayAnimation("item")
@@ -377,7 +377,7 @@ local function MakeGrill(name, size)
     end
 
     table.insert(ret, Prefab(name, fn, assets, prefabs))
-    table.insert(ret, Prefab(name.."_item", itemfn, assets, prefabs_item))
+    table.insert(ret, Prefab(name .. "_item", itemfn, assets, prefabs_item))
 end
 
 MakeGrill("grill", 4)

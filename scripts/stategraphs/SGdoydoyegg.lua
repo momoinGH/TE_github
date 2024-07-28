@@ -2,7 +2,7 @@ require("stategraphs/commonstates")
 
 local actionhandlers = {}
 
-local events = 
+local events =
 {
 }
 
@@ -21,10 +21,10 @@ local function Hatch(inst)
 end
 
 local states =
-{   
-	State{
+{
+	State {
 		name = "land",
-		tags = {"busy", "egg"},
+		tags = { "busy", "egg" },
 
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("lay")
@@ -38,15 +38,15 @@ local states =
 		},
 	},
 
-	State{  
+	State {
 		name = "idle_full",
-		tags = {"idle", "egg"},
-		
+		tags = { "idle", "egg" },
+
 		onenter = function(inst)
 			local function doeffect(inst)
 				local fx = SpawnPrefab("moose_nest_fx")
 				fx.entity:SetParent(inst.entity)
-				fx.Transform:SetPosition(0,0.1,0)
+				fx.Transform:SetPosition(0, 0.1, 0)
 				if inst.fx_task then
 					inst.fx_task:Cancel()
 					inst.fx_task = nil
@@ -66,29 +66,28 @@ local states =
 				inst.fx_task:Cancel()
 				inst.fx_task = nil
 			end
-
-		end,   
+		end,
 	},
 
-	State{        
+	State {
 		name = "idle_empty",
-		tags = {"idle"},
-		
+		tags = { "idle" },
+
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("nest")
-			inst:MakeWorkable(false)        
-		end,        
+			inst:MakeWorkable(false)
+		end,
 	},
 
-	State{
+	State {
 		name = "hit",
-		tags = {"busy", "egg"},
+		tags = { "busy", "egg" },
 
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("hit")
 			local fx = SpawnPrefab("moose_nest_fx")
 			fx.entity:SetParent(inst.entity)
-			fx.Transform:SetPosition(0,0.1,0)
+			fx.Transform:SetPosition(0, 0.1, 0)
 			fx.AnimState:PlayAnimation("hit")
 		end,
 
@@ -97,17 +96,18 @@ local states =
 		},
 	},
 
-	State{
+	State {
 		name = "crack",
-		tags = {"busy", "egg"},
+		tags = { "busy", "egg" },
 
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("crack")
 		end,
 
-		timeline = 
+		timeline =
 		{
-			TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/lavae/egg_crack") end)
+			TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve/creatures/together/lavae/egg_crack") end)
 		},
 
 		events = {
@@ -115,23 +115,26 @@ local states =
 		},
 	},
 
-	State{
+	State {
 		name = "hatch",
-		tags = {"busy", "egg"},
+		tags = { "busy", "egg" },
 
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("hatch")
 		end,
 
-		timeline = 
+		timeline =
 		{
-			TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/lavae/egg_bounce") end),
-			TimeEvent(35*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/lavae/egg_bounce") end),
-			TimeEvent(50*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/lavae/egg_bounce") end),
-			TimeEvent(60*FRAMES, function(inst) 
-				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/egg_burst") 
+			TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve/creatures/together/lavae/egg_bounce") end),
+			TimeEvent(35 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve/creatures/together/lavae/egg_bounce") end),
+			TimeEvent(50 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve/creatures/together/lavae/egg_bounce") end),
+			TimeEvent(60 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/egg_burst")
 			end),
-			TimeEvent(60*FRAMES, function(inst) Hatch(inst) end)
+			TimeEvent(60 * FRAMES, function(inst) Hatch(inst) end)
 		},
 
 		events = {
@@ -139,5 +142,5 @@ local states =
 		},
 	},
 }
-	
+
 return StateGraph("doydoyegg", states, events, "land", actionhandlers)

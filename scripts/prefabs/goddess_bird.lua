@@ -1,14 +1,14 @@
 --[[
 birds.lua
 This assumes the bird already has a build, inventory icon, sounds and a feather_name prefab exists
-]]--
+]] --
 local brain = require "brains/birdbrain"
 
 local assets =
 {
     Asset("ANIM", "anim/goddess_bird_build.zip"),
-	Asset("ATLAS", "images/inventoryimages/goddess_bird.xml"),
-	Asset("IMAGE", "images/inventoryimages/goddess_bird.tex")
+    Asset("ATLAS", "images/inventoryimages/goddess_bird.xml"),
+    Asset("IMAGE", "images/inventoryimages/goddess_bird.tex")
 }
 
 local function ShouldSleep(inst)
@@ -16,27 +16,24 @@ local function ShouldSleep(inst)
 end
 
 local function OnAttacked(inst, data)
-    local x,y,z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x,y,z, 30, {'bird'})
-    
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, 30, { 'bird' })
+
     local num_friends = 0
     local maxnum = 5
-    for k,v in pairs(ents) do
+    for k, v in pairs(ents) do
         if v ~= inst then
             v:PushEvent("gohome")
             num_friends = num_friends + 1
         end
-        
+
         if num_friends > maxnum then
-            
-			return
+            return
         end
-        
     end
 end
 
 local function OnTrapped(inst, data)
-
     if data and data.trapper and data.trapper.settrapsymbols then
         data.trapper.settrapsymbols(inst.trappedbuild)
     end
@@ -51,27 +48,27 @@ local function SeedSpawnTest()
 end
 
 local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
-    local assets=
+    local assets =
     {
-	    Asset("ANIM", "anim/crow.zip"),
-	    Asset("ANIM", "anim/"..name.."_build.zip"),
-	    Asset("SOUND", "sound/birds.fsb")
+        Asset("ANIM", "anim/crow.zip"),
+        Asset("ANIM", "anim/" .. name .. "_build.zip"),
+        Asset("SOUND", "sound/birds.fsb")
     }
-	
-	local prefabs = 
-	{
-		"cookedsmallmeat",
-	}
-	
-	prefabs[2] = psprefab or "seeds"-- add the periodspawnprefab to "prefabs" list
-	
-	if loottable ~= nil then-- -- add all loot to "prefabs" list
-		for key, loot in pairs(loottable) do
-			key = tonumber(key)
-			prefabs[key+2] = loot[1]--key+2 is due to the fact that "prefabs" list already has 2 values in it
-		end
-	end
-    
+
+    local prefabs =
+    {
+        "cookedsmallmeat",
+    }
+
+    prefabs[2] = psprefab or "seeds" -- add the periodspawnprefab to "prefabs" list
+
+    if loottable ~= nil then      -- -- add all loot to "prefabs" list
+        for key, loot in pairs(loottable) do
+            key = tonumber(key)
+            prefabs[key + 2] = loot[1] --key+2 is due to the fact that "prefabs" list already has 2 values in it
+        end
+    end
+
     local function fn()
         local inst = CreateEntity()
 
@@ -95,30 +92,30 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
         inst.Physics:CollidesWith(COLLISION.WORLD)
         inst.Physics:SetSphere(1)
         inst.Physics:SetMass(1)
-		
-		MakeInventoryFloatable(inst)	
+
+        MakeInventoryFloatable(inst)
 
 
         inst:AddTag("bird")
         inst:AddTag(name)
         inst:AddTag("smallcreature")
-		
-		
-		--if inst.HasTag("phoenix")
-		--then
 
-		scale = scale or 1 
-		inst.flyawaydistance = 4
 
-        inst.Transform:SetTwoFaced()   
+        --if inst.HasTag("phoenix")
+        --then
+
+        scale = scale or 1
+        inst.flyawaydistance = 4
+
+        inst.Transform:SetTwoFaced()
         inst.AnimState:SetBank("crow")
         inst.AnimState:SetBuild("goddess_bird_build")
         inst.AnimState:PlayAnimation("idle")
-		inst.DynamicShadow:SetSize(scale, scale - 0.25)
+        inst.DynamicShadow:SetSize(scale, scale - 0.25)
         inst.DynamicShadow:Enable(false)
-		
-		inst.Transform:SetScale(scale, scale, scale)
-	
+
+        inst.Transform:SetScale(scale, scale, scale)
+
         MakeFeedablePetPristine(inst)
 
         if not TheWorld.ismastersim then
@@ -129,30 +126,30 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
 
         inst.sounds =
         {
-            takeoff = "dontstarve/birds/takeoff_"..soundname,
-            chirp = "dontstarve/birds/chirp_"..soundname,
+            takeoff = "dontstarve/birds/takeoff_" .. soundname,
+            chirp = "dontstarve/birds/chirp_" .. soundname,
             flyin = "dontstarve/birds/flyin",
         }
         inst.trappedbuild = "goddess_bird_build"
-        
+
         inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
         inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-	    inst.components.locomotor:SetTriggersCreep(false)
+        inst.components.locomotor:SetTriggersCreep(false)
         inst:SetStateGraph("SGbird")
 
-		if loottable ~= nil then
-			inst:AddComponent("lootdropper")
-			inst.components.lootdropper.numrandomloot = 1
-			for key, loot in pairs(loottable) do
-				inst.components.lootdropper:AddRandomLoot(loot[1], loot[2])--loot[1] is prefab, loot[2] is rarity
-			end
-		end
-		
+        if loottable ~= nil then
+            inst:AddComponent("lootdropper")
+            inst.components.lootdropper.numrandomloot = 1
+            for key, loot in pairs(loottable) do
+                inst.components.lootdropper:AddRandomLoot(loot[1], loot[2]) --loot[1] is prefab, loot[2] is rarity
+            end
+        end
+
         inst:AddComponent("occupier")
-        
+
         inst:AddComponent("eater")
-		inst.components.eater:SetDiet({ foodtype or FOODTYPE.SEEDS }, { foodtype or FOODTYPE.SEEDS })
-        
+        inst.components.eater:SetDiet({ foodtype or FOODTYPE.SEEDS }, { foodtype or FOODTYPE.SEEDS })
+
         inst:AddComponent("sleeper")
         inst.components.sleeper:SetSleepTest(ShouldSleep)
 
@@ -169,33 +166,33 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
         inst.components.combat.hiteffectsymbol = "crow_body"
         --inst.components.combat.canbeattackedfn = canbeattacked
         inst:AddComponent("health")
-		inst.components.health:SetMaxHealth(TUNING.BIRD_HEALTH)
-		inst.components.health.murdersound = "dontstarve/wilson/hit_animal"
-        
+        inst.components.health:SetMaxHealth(TUNING.BIRD_HEALTH)
+        inst.components.health.murdersound = "dontstarve/wilson/hit_animal"
+
         inst:AddComponent("inspectable")
-       
+
         inst:SetBrain(brain)
-        
-		
-		
-		
-		--fix this for phoenix---
+
+
+
+
+        --fix this for phoenix---
         MakeSmallBurnableCharacter(inst, "crow_body")
         MakeTinyFreezableCharacter(inst, "crow_body")
 
-		inst:AddComponent("hauntable")
+        inst:AddComponent("hauntable")
         inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
         inst:AddComponent("periodicspawner")
-		inst.components.periodicspawner:SetPrefab(psprefab or "seeds")--set to psprefab or "seeds"(it will be set to "seeds" if psprefab is nil)
+        inst.components.periodicspawner:SetPrefab(psprefab or "seeds") --set to psprefab or "seeds"(it will be set to "seeds" if psprefab is nil)
         inst.components.periodicspawner:SetDensityInRange(40, 2)
         inst.components.periodicspawner:SetMinimumSpacing(7)
-		inst.components.periodicspawner:SetSpawnTestFn( SeedSpawnTest )
+        inst.components.periodicspawner:SetSpawnTestFn(SeedSpawnTest)
 
         inst:ListenForEvent("ontrapped", OnTrapped)
 
         inst:ListenForEvent("attacked", OnAttacked)
 
-		local birdspawner = TheWorld.components.birdspawner
+        local birdspawner = TheWorld.components.birdspawner
         if birdspawner ~= nil then
             inst:ListenForEvent("onremove", birdspawner.StopTrackingFn)
             inst:ListenForEvent("enterlimbo", birdspawner.StopTrackingFn)
@@ -207,16 +204,16 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
 
         return inst
     end
-    
-    return Prefab("forest/animals/"..name, fn, assets, prefabs)
+
+    return Prefab("forest/animals/" .. name, fn, assets, prefabs)
 end
 
-return 
-	   makebird(
-				"goddess_bird", 
-				"canary",
-				{{"peach", .5}, {"smallmeat", .35}, {"goddess_feather", .1}},
-				"peach",
-				FOODTYPE.VEGGIE,
-				1
-				)
+return
+    makebird(
+        "goddess_bird",
+        "canary",
+        { { "peach", .5 }, { "smallmeat", .35 }, { "goddess_feather", .1 } },
+        "peach",
+        FOODTYPE.VEGGIE,
+        1
+    )

@@ -12,11 +12,11 @@ local events =
     CommonHandlers.OnDeath(),
 }
 
-local states=
+local states =
 {
-    State{
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
         onenter = function(inst, playanim)
             inst.Physics:Stop()
             if playanim then
@@ -27,32 +27,32 @@ local states=
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/idle")
             end
         end,
-        
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "taunt",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/taunt")
         end,
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "walk_start",
-        tags = {"moving", "canrotate"},
+        tags = { "moving", "canrotate" },
 
         onenter = function(inst)
             inst.components.rowboatwakespawner:StartSpawning()
@@ -65,14 +65,14 @@ local states=
         end,
 
         events =
-        {   
-            EventHandler("animover", function(inst) inst.sg:GoToState("walk") end ),        
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("walk") end),
         },
     },
 
-    State{
+    State {
         name = "walk",
-        tags = {"moving", "canrotate"},
+        tags = { "moving", "canrotate" },
 
         onenter = function(inst)
             inst.components.rowboatwakespawner:StartSpawning()
@@ -87,14 +87,14 @@ local states=
         end,
 
         -- events =
-        -- {   
-        --     EventHandler("animover", function(inst) inst.sg:GoToState("walk") end ),        
+        -- {
+        --     EventHandler("animover", function(inst) inst.sg:GoToState("walk") end ),
         -- },
     },
 
-    State{
+    State {
         name = "walk_stop",
-        tags = {"canrotate"},
+        tags = { "canrotate" },
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("walk_pst")
@@ -107,38 +107,43 @@ local states=
         end,
 
         events =
-        {   
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),        
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 }
 
 CommonStates.AddSleepStates(states,
-{
-    sleeptimeline = 
     {
-        TimeEvent( 0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/sleep") end),
-    }
-})
+        sleeptimeline =
+        {
+            TimeEvent(0 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/sleep") end),
+        }
+    })
 CommonStates.AddFrozenStates(states)
 CommonStates.AddCombatStates(states,
-{
-    attacktimeline = 
     {
-        TimeEvent( 0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/attack") end),
-        TimeEvent(11*FRAMES, function(inst) inst.components.combat:DoAttack() end),
-        TimeEvent(31*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon") end),
-    },
-    deathtimeline = 
-    {
-        TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/death") end),
-        TimeEvent(35*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/death_voice") end),
-        TimeEvent(72*FRAMES, function(inst)
---            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/sinking_bubbles")
---            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/sinking_parts")
-        end),
-    },
-})
+        attacktimeline =
+        {
+            TimeEvent(0 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/attack") end),
+            TimeEvent(11 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
+            TimeEvent(31 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon") end),
+        },
+        deathtimeline =
+        {
+            TimeEvent(10 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/death") end),
+            TimeEvent(35 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/death_voice") end),
+            TimeEvent(72 * FRAMES, function(inst)
+                --            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/sinking_bubbles")
+                --            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/sinking_parts")
+            end),
+        },
+    })
 
 
 return StateGraph("knightboat", states, events, "idle", actionhandlers)

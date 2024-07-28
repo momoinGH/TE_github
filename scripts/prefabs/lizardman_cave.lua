@@ -3,7 +3,7 @@ local assets =
     Asset("ANIM", "anim/lizardman_cave.zip"),
 }
 
-local prefabs = {"lizardman"}
+local prefabs = { "lizardman" }
 
 local function TryReleaseChild(inst, phase)
     if inst.components.spawner ~= nil and inst.components.spawner:IsOccupied() then
@@ -15,7 +15,7 @@ local function SpawnCheckCaveDay(inst)
     inst.inittask = nil
     if inst.components.spawner ~= nil and inst.components.spawner:IsOccupied() then
         --if not TheWorld.state.iscaveday then
-            inst.components.spawner:ReleaseChild()
+        inst.components.spawner:ReleaseChild()
         --end
     end
 end
@@ -53,7 +53,7 @@ local function fn()
     inst.MiniMapEntity:SetIcon("dragoon_den.png")
 
     MakeObstaclePhysics(inst, 1.0)
- 
+
     inst.AnimState:SetBank("dragoon_den")
     inst.AnimState:SetBuild("lizardman_c")
     inst.AnimState:PlayAnimation("idle")
@@ -87,7 +87,7 @@ local function fn2()
     inst.MiniMapEntity:SetIcon("dragoon_den.png")
 
     MakeObstaclePhysics(inst, 1.0)
- 
+
     inst.AnimState:SetBank("dragoon_den")
     inst.AnimState:SetBuild("lizardman_c")
     inst.AnimState:PlayAnimation("idle")
@@ -110,5 +110,5 @@ local function fn2()
     return inst
 end
 
-return  Prefab("lizardman_cave", fn, assets, prefabs),
-		Prefab("lizardman_cave2", fn2, assets, prefabs)
+return Prefab("lizardman_cave", fn, assets, prefabs),
+    Prefab("lizardman_cave2", fn2, assets, prefabs)

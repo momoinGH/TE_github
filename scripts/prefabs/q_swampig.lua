@@ -1,13 +1,13 @@
 local assets =
 {
-	Asset("ANIM", "anim/ds_pig_basic.zip"),
+    Asset("ANIM", "anim/ds_pig_basic.zip"),
     Asset("ANIM", "anim/ds_pig_actions.zip"),
     Asset("ANIM", "anim/ds_pig_attacks.zip"),
-	Asset("ANIM", "anim/ds_pig_charge.zip"),
-	Asset("ANIM", "anim/ds_pig_boat_jump.zip"),
+    Asset("ANIM", "anim/ds_pig_charge.zip"),
+    Asset("ANIM", "anim/ds_pig_boat_jump.zip"),
     Asset("ANIM", "anim/quagmire_swampig_build.zip"),
     Asset("ANIM", "anim/quagmire_swampig_extras.zip"),
-	Asset("SOUND", "sound/pig.fsb"),
+    Asset("SOUND", "sound/pig.fsb"),
 }
 
 local prefabs =
@@ -62,7 +62,8 @@ local function OnGetItemFromPlayer(inst, giver, item)
             elseif giver.components.leader ~= nil and not (inst:HasTag("guard") or giver:HasTag("monster")) then
                 giver:PushEvent("makefriend")
                 giver.components.leader:AddFollower(inst)
-                inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() * TUNING.PIG_LOYALTY_PER_HUNGER)
+                inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() *
+                TUNING.PIG_LOYALTY_PER_HUNGER)
                 inst.components.follower.maxfollowtime =
                     giver:HasTag("polite")
                     and TUNING.PIG_LOYALTY_MAXTIME + TUNING.PIG_LOYALTY_POLITENESS_MAXTIME_BONUS
@@ -107,7 +108,8 @@ end
 
 local function OnAttackedByDecidRoot(inst, attacker)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, { "_combat", "_health", "pig" }, { "werepig", "guard", "INLIMBO" })
+    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, { "_combat", "_health", "pig" },
+        { "werepig", "guard", "INLIMBO" })
     local num_helpers = 0
     for i, v in ipairs(ents) do
         if v ~= inst and not v.components.health:IsDead() then
@@ -141,7 +143,7 @@ local function OnAttacked(inst, data)
     local attacker = data.attacker
     inst:ClearBufferedAction()
 
-    if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then 
+    if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
         OnAttackedByDecidRoot(inst, attacker.owner)
     elseif attacker.prefab ~= "deciduous_root" then
         inst.components.combat:SetTarget(attacker)
@@ -149,7 +151,8 @@ local function OnAttacked(inst, data)
         if inst:HasTag("werepig") then
             inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, IsWerePig, MAX_TARGET_SHARES)
         elseif inst:HasTag("guard") then
-            inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, attacker:HasTag("pig") and IsGuardPig or IsPig, MAX_TARGET_SHARES)
+            inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST,
+                attacker:HasTag("pig") and IsGuardPig or IsPig, MAX_TARGET_SHARES)
         elseif not (attacker:HasTag("pig") and attacker:HasTag("guard")) then
             inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, IsNonWerePig, MAX_TARGET_SHARES)
         end
@@ -171,30 +174,30 @@ local function NormalRetargetFn(inst)
         return nil
     end
 
-	local exclude_tags = { "playerghost", "INLIMBO" , "NPC_contestant" }
-	if inst.components.follower.leader ~= nil then
-		table.insert(exclude_tags, "abigail")
-	end
-	if inst.components.minigame_spectator ~= nil then
-		table.insert(exclude_tags, "player") -- prevent spectators from auto-targeting webber
-	end
+    local exclude_tags = { "playerghost", "INLIMBO", "NPC_contestant" }
+    if inst.components.follower.leader ~= nil then
+        table.insert(exclude_tags, "abigail")
+    end
+    if inst.components.minigame_spectator ~= nil then
+        table.insert(exclude_tags, "player") -- prevent spectators from auto-targeting webber
+    end
 
-    local oneof_tags = {"monster","wonkey","pirate"}
+    local oneof_tags = { "monster", "wonkey", "pirate" }
     if not inst:HasTag("merm") then
         table.insert(oneof_tags, "merm")
     end
 
     return not inst:IsInLimbo()
         and FindEntity(
-                inst,
-                TUNING.PIG_TARGET_DIST,
-                function(guy)
-                    return guy:IsInLight() and inst.components.combat:CanTarget(guy)
-                end,
-                RETARGET_MUST_TAGS, -- see entityreplica.lua
-                exclude_tags,
-                oneof_tags
-            )
+            inst,
+            TUNING.PIG_TARGET_DIST,
+            function(guy)
+                return guy:IsInLight() and inst.components.combat:CanTarget(guy)
+            end,
+            RETARGET_MUST_TAGS,     -- see entityreplica.lua
+            exclude_tags,
+            oneof_tags
+        )
         or nil
 end
 
@@ -370,9 +373,9 @@ end
 
 local function WerepigKeepTargetFn(inst, target)
     return inst.components.combat:CanTarget(target)
-           and not target:HasTag("werepig")
-           and not target:HasTag("wereplayer")
-           and not (target.sg ~= nil and target.sg:HasStateTag("transform"))
+        and not target:HasTag("werepig")
+        and not target:HasTag("wereplayer")
+        and not (target.sg ~= nil and target.sg:HasStateTag("transform"))
 end
 
 local function IsNearMoonBase(inst, dist)
@@ -383,15 +386,15 @@ end
 local function MoonpigRetargetFn(inst)
     return IsNearMoonBase(inst, TUNING.MOONPIG_AGGRO_DIST)
         and FindEntity(
-                inst,
-                TUNING.PIG_TARGET_DIST,
-                function(guy)
-                    return inst.components.combat:CanTarget(guy)
-                        and not (guy.sg ~= nil and guy.sg:HasStateTag("transform"))
-                end,
-                { "_combat" }, --See entityreplica.lua (re: "_combat" tag)
-                { "werepig", "alwaysblock", "wereplayer", "moonbeast" }
-            )
+            inst,
+            TUNING.PIG_TARGET_DIST,
+            function(guy)
+                return inst.components.combat:CanTarget(guy)
+                    and not (guy.sg ~= nil and guy.sg:HasStateTag("transform"))
+            end,
+            { "_combat" },     --See entityreplica.lua (re: "_combat" tag)
+            { "werepig", "alwaysblock", "wereplayer", "moonbeast" }
+        )
         or nil
 end
 
@@ -422,8 +425,8 @@ local function SetWerePig(inst)
 
     inst.components.combat:SetDefaultDamage(TUNING.WEREPIG_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNING.WEREPIG_ATTACK_PERIOD)
-    inst.components.locomotor.runspeed = TUNING.WEREPIG_RUN_SPEED 
-    inst.components.locomotor.walkspeed = TUNING.WEREPIG_WALK_SPEED 
+    inst.components.locomotor.runspeed = TUNING.WEREPIG_RUN_SPEED
+    inst.components.locomotor.walkspeed = TUNING.WEREPIG_WALK_SPEED
 
     inst.components.sleeper:SetSleepTest(WerepigSleepTest)
     inst.components.sleeper:SetWakeTest(WerepigWakeTest)
@@ -494,7 +497,7 @@ local function common(moonbeast)
     inst:AddTag("scarytoprey")
     inst.AnimState:SetBank("pigman")
     inst.AnimState:PlayAnimation("idle_loop", true)
---    inst.AnimState:Hide("hat")
+    --    inst.AnimState:Hide("hat")
 
     --Sneak these into pristine state for optimization
     inst:AddTag("_named")
@@ -535,8 +538,8 @@ local function common(moonbeast)
         inst.components.talker.ontalk = ontalk
     end
 
-    inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED --5
+    inst:AddComponent("locomotor")                              -- locomotor must be constructed before the stategraph
+    inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED   --5
     inst.components.locomotor.walkspeed = TUNING.PIG_WALK_SPEED --3
 
     inst:AddComponent("bloomer")
@@ -594,7 +597,7 @@ local function common(moonbeast)
         inst.components.trader.onrefuse = OnRefuseItem
         inst.components.trader.deleteitemonaccept = false
     end
-    
+
     ------------------------------------------
 
     inst:AddComponent("sanityaura")
@@ -626,52 +629,52 @@ end
 
 pigtorso =
 {
-[1] = "pig_torso1",
-[2] = "pig_torso2",
-[3] = "pig_torso3",
-[4] = "pig_torso4",
-[5] = "pig_torso5",
-[6] = "pig_torso6",
-[7] = "pig_torso7",
-[8] = "pig_torso8",
-[9] = "pig_torso9",
-[10] = "pig_torso10",
+    [1] = "pig_torso1",
+    [2] = "pig_torso2",
+    [3] = "pig_torso3",
+    [4] = "pig_torso4",
+    [5] = "pig_torso5",
+    [6] = "pig_torso6",
+    [7] = "pig_torso7",
+    [8] = "pig_torso8",
+    [9] = "pig_torso9",
+    [10] = "pig_torso10",
 }
 
 pighead =
 {
-[1] = "pig_head1",
-[2] = "pig_head2",
-[3] = "pig_head3",
-[4] = "pig_head4",
-[5] = "pig_head5",
-[6] = "pig_head6",
-[7] = "pig_head7",
-[8] = "pig_head8",
-[9] = "pig_head9",
-[10] = "pig_head10",
+    [1] = "pig_head1",
+    [2] = "pig_head2",
+    [3] = "pig_head3",
+    [4] = "pig_head4",
+    [5] = "pig_head5",
+    [6] = "pig_head6",
+    [7] = "pig_head7",
+    [8] = "pig_head8",
+    [9] = "pig_head9",
+    [10] = "pig_head10",
 }
 
 pigarm =
 {
-[1] = "pig_arm",
-[2] = "pig_arm1",
-[3] = "pig_arm2",
+    [1] = "pig_arm",
+    [2] = "pig_arm1",
+    [3] = "pig_arm2",
 }
 
 pigear =
 {
-[1] = "pig_ear",
-[2] = "pig_ear1",
-[3] = "pig_ear2",
+    [1] = "pig_ear",
+    [2] = "pig_ear1",
+    [3] = "pig_ear2",
 }
 
 swaphat =
 {
-[1] = "swap_hat",
-[2] = "swap_hat1",
-[3] = "swap_hat2",
-[4] = "swap_hat3",
+    [1] = "swap_hat",
+    [2] = "swap_hat1",
+    [3] = "swap_hat2",
+    [4] = "swap_hat3",
 }
 
 local function normal()
@@ -684,18 +687,18 @@ local function normal()
     -- boat hopping setup
     inst.components.locomotor:SetAllowPlatformHopping(true)
     inst:AddComponent("embarker")
-    inst:AddComponent("drownable")	
-	
+    inst:AddComponent("drownable")
+
     inst.build = builds[math.random(#builds)]
     inst.AnimState:SetBuild(inst.build)
     inst.components.werebeast:SetOnNormalFn(SetNormalPig)
-	
+
     inst.AnimState:OverrideSymbol("pig_arm", inst.build, pigarm[1])
     inst.AnimState:OverrideSymbol("pig_ear", inst.build, pigear[math.random(1, 3)])
     inst.AnimState:OverrideSymbol("pig_head", inst.build, pighead[math.random(1, 10)])
     inst.AnimState:OverrideSymbol("pig_torso", inst.build, pigtorso[math.random(1, 10)])
     inst.AnimState:OverrideSymbol("swap_hat", inst.build, swaphat[math.random(1, 4)])
-	
+
     SetNormalPig(inst)
     return inst
 end
@@ -770,8 +773,8 @@ local function moon()
 
     inst.components.combat:SetDefaultDamage(TUNING.WEREPIG_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNING.WEREPIG_ATTACK_PERIOD)
-    inst.components.locomotor.runspeed = TUNING.WEREPIG_RUN_SPEED 
-    inst.components.locomotor.walkspeed = TUNING.WEREPIG_WALK_SPEED 
+    inst.components.locomotor.runspeed = TUNING.WEREPIG_RUN_SPEED
+    inst.components.locomotor.walkspeed = TUNING.WEREPIG_WALK_SPEED
 
     inst.components.sleeper:SetSleepTest(WerepigSleepTest)
     inst.components.sleeper:SetWakeTest(WerepigWakeTest)

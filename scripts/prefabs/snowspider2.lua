@@ -11,20 +11,19 @@ local prefabs =
     "monstermeat",
     "silk",
     "spider_web_spit",
-	"snowspider_spike2",
+    "snowspider_spike2",
 }
 
 local brain = require "brains/spiderbrain"
 
 local function ShouldAcceptItem(inst, item, giver)
-
     local in_inventory = inst.components.inventoryitem.owner ~= nil
     if in_inventory and not inst.components.eater:CanEat(item) then
         return false, "SPIDERNOHAT"
     end
 
     return (giver:HasTag("spiderwhisperer") and inst.components.eater:CanEat(item)) or
-           (item.components.equippable ~= nil and item.components.equippable.equipslot == EQUIPSLOTS.HEAD)
+        (item.components.equippable ~= nil and item.components.equippable.equipslot == EQUIPSLOTS.HEAD)
 end
 
 local SPIDER_TAGS = { "spider" }
@@ -32,7 +31,7 @@ local SPIDER_IGNORE_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 local function GetOtherSpiders(inst, radius, tags)
     tags = tags or SPIDER_TAGS
     local x, y, z = inst.Transform:GetWorldPosition()
-    
+
     local spiders = TheSim:FindEntities(x, y, z, radius, nil, SPIDER_IGNORE_TAGS, tags)
     local valid_spiders = {}
 
@@ -46,7 +45,6 @@ local function GetOtherSpiders(inst, radius, tags)
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
-
     if inst.components.eater:CanEat(item) then
         inst.components.eater:Eat(item)
 
@@ -61,7 +59,6 @@ local function OnGetItemFromPlayer(inst, giver, item)
             inst.components.combat:SetTarget(nil)
         elseif giver.components.leader ~= nil and
             inst.components.follower ~= nil then
-            
             if giver.components.minigame_participator == nil then
                 giver:PushEvent("makefriend")
                 giver.components.leader:AddFollower(inst)
@@ -97,7 +94,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
 
                     if effectdone then
                         maxSpiders = maxSpiders - 1
-    
+
                         if v.components.sleeper:IsAsleep() then
                             v.components.sleeper:WakeUp()
                         end
@@ -105,7 +102,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
                 end
             end
         end
-    -- I also wear hats
+        -- I also wear hats
     elseif item.components.equippable ~= nil and item.components.equippable.equipslot == EQUIPSLOTS.HEAD then
         local current = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
         if current ~= nil then
@@ -126,9 +123,8 @@ end
 local function HasFriendlyLeader(inst, target)
     local leader = inst.components.follower.leader
     local target_leader = (target.components.follower ~= nil) and target.components.follower.leader or nil
-    
-    if leader ~= nil and target_leader ~= nil then
 
+    if leader ~= nil and target_leader ~= nil then
         if target_leader.components.inventoryitem then
             target_leader = target_leader.components.inventoryitem:GetGrandOwner()
             -- Don't attack followers if their follow object has no owner
@@ -138,14 +134,13 @@ local function HasFriendlyLeader(inst, target)
         end
 
         local PVP_enabled = TheNet:GetPVPEnabled()
-        return leader == target or (target_leader ~= nil 
-                and (target_leader == leader or (target_leader:HasTag("player") 
-                and not PVP_enabled))) or
-                (target.components.domesticatable and target.components.domesticatable:IsDomesticated() 
+        return leader == target or (target_leader ~= nil
+                and (target_leader == leader or (target_leader:HasTag("player")
+                    and not PVP_enabled))) or
+            (target.components.domesticatable and target.components.domesticatable:IsDomesticated()
                 and not PVP_enabled) or
-                (target.components.saltlicker and target.components.saltlicker.salted
+            (target.components.saltlicker and target.components.saltlicker.salted
                 and not PVP_enabled)
-    
     elseif target_leader ~= nil and target_leader.components.inventoryitem then
         -- Don't attack webber's chester
         target_leader = target_leader.components.inventoryitem:GetGrandOwner()
@@ -168,7 +163,7 @@ local function FindTarget(inst, radius)
                     and inst.components.combat:CanTarget(guy)
                     and not (inst.components.follower ~= nil and inst.components.follower.leader == guy)
                     and not HasFriendlyLeader(inst, guy)
-                    and not (inst.components.follower.leader ~= nil and inst.components.follower.leader:HasTag("player") 
+                    and not (inst.components.follower.leader ~= nil and inst.components.follower.leader:HasTag("player")
                         and guy:HasTag("player") and not TheNet:GetPVPEnabled())
             end,
             TARGET_MUST_TAGS,
@@ -178,7 +173,9 @@ local function FindTarget(inst, radius)
 end
 
 local function NormalRetarget(inst)
-    return FindTarget(inst, inst.components.knownlocations:GetLocation("investigate") ~= nil and TUNING.SPIDER_INVESTIGATETARGET_DIST or TUNING.SPIDER_TARGET_DIST)
+    return FindTarget(inst,
+        inst.components.knownlocations:GetLocation("investigate") ~= nil and TUNING.SPIDER_INVESTIGATETARGET_DIST or
+        TUNING.SPIDER_TARGET_DIST)
 end
 
 local function WarriorRetarget(inst)
@@ -186,12 +183,12 @@ local function WarriorRetarget(inst)
 end
 
 local function keeptargetfn(inst, target)
-   return target ~= nil
+    return target ~= nil
         and target.components.combat ~= nil
         and target.components.health ~= nil
         and not target.components.health:IsDead()
         and not (inst.components.follower ~= nil and
-                (inst.components.follower.leader == target or inst.components.follower:IsLeaderSame(target)))
+            (inst.components.follower.leader == target or inst.components.follower:IsLeaderSame(target)))
 end
 
 local function BasicWakeCheck(inst)
@@ -240,11 +237,11 @@ local function OnEntitySleep(inst)
 end
 
 
-local SPIDERDEN_TAGS = {"spiderden"}
+local SPIDERDEN_TAGS = { "spiderden" }
 local function SummonFriends(inst, attacker)
-    local radius = (inst.prefab == "spider" or inst.prefab == "spider_warrior") and 
-                    SpringCombatMod(TUNING.SPIDER_SUMMON_WARRIORS_RADIUS) or
-                    TUNING.SPIDER_SUMMON_WARRIORS_RADIUS
+    local radius = (inst.prefab == "spider" or inst.prefab == "spider_warrior") and
+        SpringCombatMod(TUNING.SPIDER_SUMMON_WARRIORS_RADIUS) or
+        TUNING.SPIDER_SUMMON_WARRIORS_RADIUS
 
     local den = GetClosestInstWithTag(SPIDERDEN_TAGS, inst, radius)
 
@@ -276,7 +273,7 @@ end
 
 local function SetHappyFace(inst, is_happy)
     if is_happy then
-        inst.AnimState:OverrideSymbol("face", "spider_warrior_build", "happy_face")    
+        inst.AnimState:OverrideSymbol("face", "spider_warrior_build", "happy_face")
     else
         inst.AnimState:ClearOverrideSymbol("face")
     end
@@ -333,11 +330,11 @@ local function OnWakeUp(inst)
 end
 
 local function CalcSanityAura(inst, observer)
-    if observer:HasTag("spiderwhisperer") or inst.bedazzled or 
-    (inst.components.follower.leader ~= nil and inst.components.follower.leader:HasTag("spiderwhisperer")) then
+    if observer:HasTag("spiderwhisperer") or inst.bedazzled or
+        (inst.components.follower.leader ~= nil and inst.components.follower.leader:HasTag("spiderwhisperer")) then
         return 0
     end
-    
+
     return inst.components.sanityaura.aura
 end
 
@@ -357,18 +354,18 @@ local function MakeWeapon(inst)
     if inst.components.inventory ~= nil then
         local weapon = CreateEntity()
         weapon.entity:AddTransform()
-        
+
         MakeInventoryPhysics(weapon)
-        
+
         weapon:AddComponent("weapon")
         weapon.components.weapon:SetDamage(TUNING.SPIDER_SPITTER_DAMAGE_RANGED)
         weapon.components.weapon:SetRange(inst.components.combat.attackrange, inst.components.combat.attackrange + 4)
         weapon.components.weapon:SetProjectile("spider_web_spit")
-        
+
         weapon:AddComponent("inventoryitem")
         weapon.persists = false
         weapon.components.inventoryitem:SetOnDroppedFn(weapon.Remove)
-        
+
         weapon:AddComponent("equippable")
         inst.weapon = weapon
         inst.components.inventory:Equip(inst.weapon)
@@ -416,9 +413,9 @@ local function create_common(bank, build, tag, common_init)
     inst:AddTag("spider")
     inst:AddTag("drop_inventory_pickup")
     inst:AddTag("drop_inventory_murder")
- 	inst:AddTag("walrus")
-	inst:AddTag("houndfriend")
-	
+    inst:AddTag("walrus")
+    inst:AddTag("houndfriend")
+
     if tag ~= nil then
         inst:AddTag(tag)
     end
@@ -430,9 +427,9 @@ local function create_common(bank, build, tag, common_init)
     inst.AnimState:SetBuild("ds_spidersnow2")
     inst.AnimState:PlayAnimation("idle")
 
-	if common_init ~= nil then
-		common_init(inst)
-	end
+    if common_init ~= nil then
+        common_init(inst)
+    end
 
     inst.entity:SetPristine()
 
@@ -445,7 +442,7 @@ local function create_common(bank, build, tag, common_init)
 
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
-    inst.components.locomotor:SetSlowMultiplier( 1 )
+    inst.components.locomotor:SetSlowMultiplier(1)
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
     -- boat hopping setup
@@ -453,7 +450,7 @@ local function create_common(bank, build, tag, common_init)
 
     inst:AddComponent("embarker")
     inst:AddComponent("drownable")
-	
+
     inst:SetStateGraph("SGspider")
 
     inst:AddComponent("lootdropper")
@@ -481,7 +478,7 @@ local function create_common(bank, build, tag, common_init)
     ------------------
 
     inst:AddComponent("sleeper")
-	inst.components.sleeper.watchlight = true
+    inst.components.sleeper.watchlight = true
     inst.components.sleeper:SetResistance(2)
     inst.components.sleeper:SetSleepTest(ShouldSleep)
     inst.components.sleeper:SetWakeTest(ShouldWake)
@@ -509,35 +506,35 @@ local function create_common(bank, build, tag, common_init)
     inst.components.trader.onaccept = OnGetItemFromPlayer
     inst.components.trader.onrefuse = OnRefuseItem
     inst.components.trader.deleteitemonaccept = false
-	
+
     ------------------
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/novositens.xml"
-	inst.caminho = "images/inventoryimages/novositens.xml"	
+    inst.caminho = "images/inventoryimages/novositens.xml"
     inst.components.inventoryitem.nobounce = true
     inst.components.inventoryitem.canbepickedup = false
     inst.components.inventoryitem.canbepickedupalive = true
-	
+
     ------------------
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura
-	
+
     ------------------
     inst:AddComponent("debuffable")
     ------------------
-    
+
     MakeFeedableSmallLivestock(inst, TUNING.SPIDER_PERISH_TIME)
     MakeHauntablePanic(inst)
 
     inst:SetBrain(brain)
 
     inst:ListenForEvent("attacked", OnAttacked)
-    
+
     inst:ListenForEvent("startleashing", OnStartLeashing)
     inst:ListenForEvent("stopleashing", OnStopLeashing)
-    
+
     inst:ListenForEvent("ontrapped", OnTrapped)
     inst:ListenForEvent("oneat", OnEat)
 
@@ -558,12 +555,12 @@ local function create_common(bank, build, tag, common_init)
     return inst
 end
 
-local variations = {1, 2, 3, 4, 5}
+local variations = { 1, 2, 3, 4, 5 }
 
 local function DoSpikeAttack(inst, pt)
     local x, y, z = pt:Get()
     local inital_r = 1
-    
+
     x = GetRandomWithVariance(x, inital_r)
     z = GetRandomWithVariance(z, inital_r)
 
@@ -573,27 +570,26 @@ local function DoSpikeAttack(inst, pt)
     local dtheta = PI * 2 / num
     local thetaoffset = math.random() * PI * 2
     local delaytoggle = 0
-    
+
     for i = 1, num do
-        
         local r = 1.1 + math.random() * 1.75
         local theta = i * dtheta + math.random() * dtheta * 0.8 + dtheta * 0.2
         local x1 = x + r * math.cos(theta)
         local z1 = z + r * math.sin(theta)
-        
+
         if TheWorld.Map:IsVisualGroundAtPoint(x1, 0, z1) and not TheWorld.Map:IsPointNearHole(Vector3(x1, 0, z1)) then
             local spike = SpawnPrefab("snowspider_spike2")
             spike.Transform:SetPosition(x1, 0, z1)
             spike:SetOwner(inst)
             if variations[i + 1] ~= 1 then
-                spike.AnimState:OverrideSymbol("spike01", "spiderfrost2", "spike0"..tostring(variations[i + 1]))
+                spike.AnimState:OverrideSymbol("spike01", "spiderfrost2", "spike0" .. tostring(variations[i + 1]))
             end
         end
     end
 end
 
 local function spider_moon_common_init(inst)
-	inst.Transform:SetScale(1.25, 1.25, 1.25)
+    inst.Transform:SetScale(1.25, 1.25, 1.25)
 end
 
 local function create_moon()
@@ -603,7 +599,7 @@ local function create_moon()
         return inst
     end
 
-	inst.DoSpikeAttack = DoSpikeAttack
+    inst.DoSpikeAttack = DoSpikeAttack
 
     inst.components.health:SetMaxHealth(TUNING.SPIDER_MOON_HEALTH)
 

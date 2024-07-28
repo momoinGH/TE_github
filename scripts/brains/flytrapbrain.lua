@@ -8,7 +8,7 @@ require "behaviours/doaction"
 require "behaviours/standstill"
 
 local FlytrapBrain = Class(Brain, function(self, inst)
-	Brain._ctor(self, inst)
+    Brain._ctor(self, inst)
 end)
 
 local SEE_FOOD_DIST = 10
@@ -29,21 +29,18 @@ local function EatFoodAction(inst)
 end
 
 function FlytrapBrain:OnStart()
-	
-	local root = PriorityNode(
-	{
-		WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst) ),
+    local root = PriorityNode(
+        {
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            DoAction(self.inst, function() return EatFoodAction(self.inst) end),
 
-		DoAction(self.inst, function() return EatFoodAction(self.inst) end ),
-		
-		ChaseAndAttack(self.inst, 10),
-        StandStill(self.inst),
-		--Wander(self.inst, function() return self.inst:GetPosition() end, 15),
+            ChaseAndAttack(self.inst, 10),
+            StandStill(self.inst),
+            --Wander(self.inst, function() return self.inst:GetPosition() end, 15),
 
-	}, .25)
-	
-	self.bt = BT(self.inst, root)
-	
+        }, .25)
+
+    self.bt = BT(self.inst, root)
 end
 
 return FlytrapBrain

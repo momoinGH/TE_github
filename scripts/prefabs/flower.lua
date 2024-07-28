@@ -13,7 +13,7 @@ local prefabs =
 
 local DAYLIGHT_SEARCH_RANGE = 30
 
-local names = {"f1","f2","f3","f4","f5","f6","f7","f8","f9","f10"}
+local names = { "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10" }
 local ROSE_NAME = "rose"
 local ROSE_CHANCE = 0.01
 
@@ -41,18 +41,19 @@ local function onload(inst, data)
 end
 
 local function onpickedfn(inst, picker)
-local pt = inst:GetPosition()
-local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.LAWN or tiletype == GROUND.FIELDS then
-if  picker and  picker:HasTag("player") and not picker:HasTag("sneaky") then
-local x, y, z = inst.Transform:GetWorldPosition()
-local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-local eles = TheSim:FindEntities(x,y,z, 40,{"guard"})
-for k,guardas in pairs(eles) do 
-if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat:SetTarget( picker) end
-end 
-end
-end
+    local pt = inst:GetPosition()
+    local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
+    if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.LAWN or tiletype == GROUND.FIELDS then
+        if picker and picker:HasTag("player") and not picker:HasTag("sneaky") then
+            local x, y, z = inst.Transform:GetWorldPosition()
+            local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
+            local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
+            for k, guardas in pairs(eles) do
+                if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat
+                        :SetTarget(picker) end
+            end
+        end
+    end
 
 
 
@@ -84,23 +85,23 @@ end
 
 local FINDLIGHT_MUST_TAGS = { "daylight", "lightsource" }
 local function DieInDarkness(inst)
-    local x,y,z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x,0,z, TUNING.DAYLIGHT_SEARCH_RANGE, FINDLIGHT_MUST_TAGS)
-    for i,v in ipairs(ents) do
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, 0, z, TUNING.DAYLIGHT_SEARCH_RANGE, FINDLIGHT_MUST_TAGS)
+    for i, v in ipairs(ents) do
         local lightrad = v.Light:GetCalculatedRadius() * .7
-        if v:GetDistanceSqToPoint(x,y,z) < lightrad * lightrad then
+        if v:GetDistanceSqToPoint(x, y, z) < lightrad * lightrad then
             --found light
             return
         end
     end
     --in darkness
     inst:Remove()
-    SpawnPrefab("flower_withered").Transform:SetPosition(x,y,z)
+    SpawnPrefab("flower_withered").Transform:SetPosition(x, y, z)
 end
 
 local function OnIsCaveDay(inst, isday)
     if isday then
-        inst:DoTaskInTime(5.0 + math.random()*5.0, DieInDarkness)
+        inst:DoTaskInTime(5.0 + math.random() * 5.0, DieInDarkness)
     end
 end
 
@@ -120,7 +121,7 @@ local function commonfn(isplanted)
     inst.AnimState:SetBank("flowers")
     inst.AnimState:SetBuild("flowers")
     inst.AnimState:SetRayTestOnBB(true)
-    inst.scrapbook_anim = "f1"	
+    inst.scrapbook_anim = "f1"
 
     inst:AddTag("flower")
     inst:AddTag("cattoy")
@@ -138,7 +139,7 @@ local function commonfn(isplanted)
     inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
     inst.components.pickable:SetUp("petals", 10)
     inst.components.pickable.onpickedfn = onpickedfn
-	inst.components.pickable.remove_when_picked = true
+    inst.components.pickable.remove_when_picked = true
     inst.components.pickable.quickpick = true
     inst.components.pickable.wildfirestarter = true
 
@@ -154,8 +155,8 @@ local function commonfn(isplanted)
     end
     MakeSmallPropagator(inst)
 
-	inst:AddComponent("halloweenmoonmutable")
-	inst.components.halloweenmoonmutable:SetPrefabMutated("moonbutterfly_sapling")
+    inst:AddComponent("halloweenmoonmutable")
+    inst.components.halloweenmoonmutable:SetPrefabMutated("moonbutterfly_sapling")
 
     if TheWorld:HasTag("cave") then
         inst:WatchWorldState("iscaveday", OnIsCaveDay)
@@ -169,42 +170,42 @@ local function commonfn(isplanted)
     --------SaveLoad
     inst.OnSave = onsave
     inst.OnLoad = onload
-	
-	inst:ListenForEvent("beginaporkalypse", function() 
-    local flor = SpawnPrefab("flower_evil")
-	if flor then
-    flor.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst:Remove()
-	end
-	end, TheWorld)
-		
-	inst:DoTaskInTime(0.2, function(inst) 
-	local map = TheWorld.Map
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-	if ground == GROUND.RAINFOREST or ground == GROUND.DEEPRAINFOREST or ground == GROUND.GASJUNGLE then
-    local flor = SpawnPrefab("flower_rainforest")
-	if flor then
-    flor.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst:Remove()
-	end
-	end 
-	end)	
-	
-	inst:DoTaskInTime(0.4, function(inst) 
-	local map = TheWorld.Map
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-	if ground ~= GROUND.RAINFOREST and ground ~= GROUND.DEEPRAINFOREST and ground ~= GROUND.GASJUNGLE then
-	if TheWorld.components.aporkalypse and TheWorld.components.aporkalypse.aporkalypse_active == true then
-    local flor = SpawnPrefab("flower_evil")
-	if flor then
-    flor.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst:Remove()
-	end
-	end 
-	end
-	end)	
+
+    inst:ListenForEvent("beginaporkalypse", function()
+        local flor = SpawnPrefab("flower_evil")
+        if flor then
+            flor.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            inst:Remove()
+        end
+    end, TheWorld)
+
+    inst:DoTaskInTime(0.2, function(inst)
+        local map = TheWorld.Map
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
+        if ground == GROUND.RAINFOREST or ground == GROUND.DEEPRAINFOREST or ground == GROUND.GASJUNGLE then
+            local flor = SpawnPrefab("flower_rainforest")
+            if flor then
+                flor.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                inst:Remove()
+            end
+        end
+    end)
+
+    inst:DoTaskInTime(0.4, function(inst)
+        local map = TheWorld.Map
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
+        if ground ~= GROUND.RAINFOREST and ground ~= GROUND.DEEPRAINFOREST and ground ~= GROUND.GASJUNGLE then
+            if TheWorld.components.aporkalypse and TheWorld.components.aporkalypse.aporkalypse_active == true then
+                local flor = SpawnPrefab("flower_evil")
+                if flor then
+                    flor.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                    inst:Remove()
+                end
+            end
+        end
+    end)
 
     return inst
 end
@@ -243,5 +244,5 @@ function plantedflowerfn()
 end
 
 return Prefab("flower", plainfn, assets, prefabs),
-       Prefab("flower_rose", rosefn, assets, prefabs),
-       Prefab("planted_flower", plantedflowerfn, assets, prefabs)
+    Prefab("flower_rose", rosefn, assets, prefabs),
+    Prefab("planted_flower", plantedflowerfn, assets, prefabs)

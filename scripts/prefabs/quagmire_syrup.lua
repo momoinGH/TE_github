@@ -16,7 +16,7 @@ local function fn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)	
+    MakeInventoryFloatable(inst)
 
     inst.AnimState:SetBuild("quagmire_syrup")
     inst.AnimState:SetBank("quagmire_syrup")
@@ -32,7 +32,7 @@ local function fn()
     end
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.imagename = "quagmire_syrup"	
+    inst.components.inventoryitem.imagename = "quagmire_syrup"
 
     inst:AddComponent("stackable")
 

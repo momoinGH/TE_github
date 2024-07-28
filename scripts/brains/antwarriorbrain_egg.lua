@@ -6,10 +6,10 @@ end)
 
 function AntWarriorBrain_Egg:OnStart()
     local root = PriorityNode(
-    {
+        {
 
-    }, .25)
-    
+        }, .25)
+
     self.bt = BT(self.inst, root)
 end
 

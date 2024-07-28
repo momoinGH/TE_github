@@ -3,7 +3,7 @@ local brain = require("brains/crittersbrain")
 local WAKE_TO_FOLLOW_DISTANCE = 6
 local SLEEP_NEAR_LEADER_DISTANCE = 5
 
-local HUNGRY_PERISH_PERCENT = 0.5 -- matches stale tag
+local HUNGRY_PERISH_PERCENT = 0.5   -- matches stale tag
 local STARVING_PERISH_PERCENT = 0.2 -- matches spoiked tag
 
 local function IsLeaderSleeping(inst)
@@ -11,30 +11,34 @@ local function IsLeaderSleeping(inst)
 end
 
 local function ShouldWakeUp(inst)
-    return (DefaultWakeTest(inst) and not IsLeaderSleeping(inst)) or not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE)
+    return (DefaultWakeTest(inst) and not IsLeaderSleeping(inst)) or
+    not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE)
 end
 
 local function ShouldSleep(inst)
-    return (DefaultSleepTest(inst) 
+    return (DefaultSleepTest(inst)
             or IsLeaderSleeping(inst))
-            and inst.components.follower:IsNearLeader(SLEEP_NEAR_LEADER_DISTANCE)
+        and inst.components.follower:IsNearLeader(SLEEP_NEAR_LEADER_DISTANCE)
 end
 
 local function oneat(inst, food)
+    -- minigame around feeding, if fed at the right time, its max hunger goes up, if left too long, its max hunger goes down
+    local perish = inst.components.perishable:GetPercent()
+    local is_wellfed = inst.components.crittertraits:IsDominantTrait("wellfed")
+    if perish <= STARVING_PERISH_PERCENT then
+        inst.components.perishable.perishtime = math.max(
+        inst.components.perishable.perishtime - TUNING.CRITTER_HUNGERTIME_DELTA,
+            is_wellfed and TUNING.CRITTER_DOMINANTTRAIT_HUNGERTIME_MIN or TUNING.CRITTER_HUNGERTIME_MIN)
+    elseif perish <= HUNGRY_PERISH_PERCENT then
+        inst.components.perishable.perishtime = math.min(
+        inst.components.perishable.perishtime + TUNING.CRITTER_HUNGERTIME_DELTA,
+            is_wellfed and TUNING.CRITTER_DOMINANTTRAIT_HUNGERTIME_MAX or TUNING.CRITTER_HUNGERTIME_MAX)
+    else
+        if is_wellfed and inst.components.perishable.perishtime < TUNING.CRITTER_DOMINANTTRAIT_HUNGERTIME_MIN then
+            inst.components.perishable.perishtime = TUNING.CRITTER_DOMINANTTRAIT_HUNGERTIME_MIN
+        end
+    end
 
-	-- minigame around feeding, if fed at the right time, its max hunger goes up, if left too long, its max hunger goes down
-	local perish = inst.components.perishable:GetPercent()
-	local is_wellfed = inst.components.crittertraits:IsDominantTrait("wellfed")
-	if perish <= STARVING_PERISH_PERCENT then
-		inst.components.perishable.perishtime = math.max(inst.components.perishable.perishtime - TUNING.CRITTER_HUNGERTIME_DELTA, is_wellfed and TUNING.CRITTER_DOMINANTTRAIT_HUNGERTIME_MIN or TUNING.CRITTER_HUNGERTIME_MIN)
-	elseif perish <= HUNGRY_PERISH_PERCENT then
-		inst.components.perishable.perishtime = math.min(inst.components.perishable.perishtime + TUNING.CRITTER_HUNGERTIME_DELTA, is_wellfed and TUNING.CRITTER_DOMINANTTRAIT_HUNGERTIME_MAX or TUNING.CRITTER_HUNGERTIME_MAX)
-	else
-		if is_wellfed and inst.components.perishable.perishtime < TUNING.CRITTER_DOMINANTTRAIT_HUNGERTIME_MIN then
-			inst.components.perishable.perishtime = TUNING.CRITTER_DOMINANTTRAIT_HUNGERTIME_MIN
-		end
-	end
-	
     inst.components.perishable:SetPercent(1)
     inst.components.perishable:StartPerishing()
 end
@@ -55,15 +59,15 @@ end
 
 local function IsAffectionate(inst)
     return (inst.components.perishable == nil or inst.components.perishable:GetPercent() > STARVING_PERISH_PERCENT)
-            or false
+        or false
 end
 
 local function IsPlayful(inst)
-	return IsAffectionate(inst)
+    return IsAffectionate(inst)
 end
 
 local function IsSuperCute(inst)
-	return true
+    return true
 end
 
 -------------------------------------------------------------------------------
@@ -95,10 +99,10 @@ end
 local function MakeCritter(name, animname, face, diet, flying, data)
     local assets =
     {
-	    Asset("ANIM", "anim/"..animname.."_build.zip"),
-	    Asset("ANIM", "anim/"..animname.."_basic.zip"),
-	    Asset("ANIM", "anim/"..animname.."_emotes.zip"),
-	    Asset("ANIM", "anim/"..animname.."_traits.zip"),
+        Asset("ANIM", "anim/" .. animname .. "_build.zip"),
+        Asset("ANIM", "anim/" .. animname .. "_basic.zip"),
+        Asset("ANIM", "anim/" .. animname .. "_emotes.zip"),
+        Asset("ANIM", "anim/" .. animname .. "_traits.zip"),
     }
 
     local function fn()
@@ -123,7 +127,7 @@ local function MakeCritter(name, animname, face, diet, flying, data)
         end
 
         inst.AnimState:SetBank("goddess_hound")
-        inst.AnimState:SetBuild(animname.."_build")
+        inst.AnimState:SetBuild(animname .. "_build")
         inst.AnimState:PlayAnimation("idle_loop")
 
         if flying then
@@ -145,7 +149,7 @@ local function MakeCritter(name, animname, face, diet, flying, data)
             MakeCharacterPhysics(inst, 1, .5)
         end
 
-		inst.Physics:SetDontRemoveOnSleep(true) -- critters dont really go do entitysleep as it triggers a teleport to near the owner, so no point in hitting the physics engine.
+        inst.Physics:SetDontRemoveOnSleep(true) -- critters dont really go do entitysleep as it triggers a teleport to near the owner, so no point in hitting the physics engine.
 
         inst:AddTag("critter")
         inst:AddTag("companion")
@@ -166,18 +170,18 @@ local function MakeCritter(name, animname, face, diet, flying, data)
             return inst
         end
 
-		inst.favoritefood = data.favoritefood
+        inst.favoritefood = data.favoritefood
 
         inst.GetPeepChance = GetPeepChance
         inst.IsAffectionate = IsAffectionate
         inst.IsSuperCute = IsSuperCute
         inst.IsPlayful = IsPlayful
-        
-		inst.playmatetags = {"critter"}
-		if data ~= nil and data.playmatetags ~= nil then
-			inst.playmatetags = JoinArrays(inst.playmatetags, data.playmatetags)
-		end
-	
+
+        inst.playmatetags = { "critter" }
+        if data ~= nil and data.playmatetags ~= nil then
+            inst.playmatetags = JoinArrays(inst.playmatetags, data.playmatetags)
+        end
+
         inst:AddComponent("inspectable")
 
         inst:AddComponent("follower")
@@ -262,11 +266,11 @@ local function MakeBuilder(prefab)
         return inst
     end
 
-    return Prefab(prefab.."_builder", fn, nil, { prefab })
+    return Prefab(prefab .. "_builder", fn, nil, { prefab })
 end
 -------------------------------------------------------------------------------
 
 local standard_diet = { FOODGROUP.OMNI }
 
-return MakeCritter("critter_goddess_puppy", "goddess_hound", 4, standard_diet, false, {favoritefood="monsterlasagna"}),
-       MakeBuilder("critter_goddess_puppy")
+return MakeCritter("critter_goddess_puppy", "goddess_hound", 4, standard_diet, false, { favoritefood = "monsterlasagna" }),
+    MakeBuilder("critter_goddess_puppy")

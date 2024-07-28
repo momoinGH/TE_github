@@ -56,9 +56,9 @@ local function OnActivate(inst, doer)
 end
 
 local function OnActivateByOther(inst, source, doer)
---    if not inst.sg:HasStateTag("open") then
---        inst.sg:GoToState("opening")
---    end
+    --    if not inst.sg:HasStateTag("open") then
+    --        inst.sg:GoToState("opening")
+    --    end
 end
 
 local function onaccept(inst, giver, item)
@@ -72,19 +72,19 @@ local function StartTravelSound(inst, doer)
 end
 
 local function onclose(inst)
-local invader = GetClosestInstWithTag("quagmire_portal_activeanim", inst, 3)
-if invader then
-invader:Remove()
-end
+    local invader = GetClosestInstWithTag("quagmire_portal_activeanim", inst, 3)
+    if invader then
+        invader:Remove()
+    end
 end
 
 local function onopen(inst)
-local invader = GetClosestInstWithTag("quagmire_portal_activeanim", inst, 3)
-if not invader then
-local portaentrada = SpawnPrefab("quagmire_portal_activeanim")
-local a, b, c = inst.Transform:GetWorldPosition()
-portaentrada.Transform:SetPosition(a, b, c)
-end
+    local invader = GetClosestInstWithTag("quagmire_portal_activeanim", inst, 3)
+    if not invader then
+        local portaentrada = SpawnPrefab("quagmire_portal_activeanim")
+        local a, b, c = inst.Transform:GetWorldPosition()
+        portaentrada.Transform:SetPosition(a, b, c)
+    end
 end
 
 
@@ -122,9 +122,9 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
+
     inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("gorge_portal.png")
+    inst.MiniMapEntity:SetIcon("gorge_portal.png")
 
     inst.AnimState:SetBuild("quagmire_portal")
     inst.AnimState:SetBank("quagmire_portal")
@@ -138,7 +138,7 @@ local function fn()
 
     if not TheNet:IsDedicated() then
         CreateDropShadow(inst)
-    end	
+    end
     --trader, alltrader (from trader component) added to pristine state for optimization	
     inst:AddTag("trader")
     inst:AddTag("alltrader")
@@ -151,11 +151,11 @@ local function fn()
         return inst
     end
 
-	inst:AddComponent("playerprox")
+    inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(10, 13)
     inst.components.playerprox:SetOnPlayerNear(onopen)
-    inst.components.playerprox:SetOnPlayerFar(onclose)	
-	
+    inst.components.playerprox:SetOnPlayerFar(onclose)
+
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
 
@@ -172,18 +172,17 @@ local function fn()
     inst.components.trader.acceptnontradable = true
     inst.components.trader.onaccept = onaccept
     inst.components.trader.deleteitemonaccept = false
-	
-inst:DoTaskInTime(1, function(inst)		
-for k,v in pairs(Ents) do
-if v ~= inst and v.prefab == "gorge_portal" then
-inst.components.teleporter.targetTeleporter = v
-v.components.teleporter.targetTeleporter = inst
-end
-end
 
-end)
-	
-		
+    inst:DoTaskInTime(1, function(inst)
+        for k, v in pairs(Ents) do
+            if v ~= inst and v.prefab == "gorge_portal" then
+                inst.components.teleporter.targetTeleporter = v
+                v.components.teleporter.targetTeleporter = inst
+            end
+        end
+    end)
+
+
     return inst
 end
 --[[
@@ -260,20 +259,20 @@ local function activefx_fn()
     inst.AnimState:SetBank("quagmire_portal_fx")
     inst.AnimState:PlayAnimation("portal_pre")
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:OverrideMultColour(1, 1, 1, 1)	
+    inst.AnimState:OverrideMultColour(1, 1, 1, 1)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(6)
     inst.AnimState:SetFinalOffset(1)
 
-	inst:AddTag("quagmire_portal_activeanim")
-	
-	inst.entity:AddLight()
+    inst:AddTag("quagmire_portal_activeanim")
+
+    inst.entity:AddLight()
     inst.Light:SetFalloff(0.4)
     inst.Light:SetIntensity(.7)
     inst.Light:SetRadius(3)
-    inst.Light:SetColour(249/255, 130/255, 117/255)
-    inst.Light:Enable(true)	
-	
+    inst.Light:SetColour(249 / 255, 130 / 255, 117 / 255)
+    inst.Light:Enable(true)
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -312,7 +311,7 @@ local function bubblefx_fn()
 end
 ]]
 
-return Prefab("quagmire_portal_activeanim", activefx_fn, fx_assets), 
-	Prefab("gorge_portal", fn, assets)
-	--Prefab("gorge_portal1", fn1, assets)
-	--Prefab("quagmire_portal_bubblefx", bubblefx_fn, fx_bubble_assets)
+return Prefab("quagmire_portal_activeanim", activefx_fn, fx_assets),
+    Prefab("gorge_portal", fn, assets)
+--Prefab("gorge_portal1", fn1, assets)
+--Prefab("quagmire_portal_bubblefx", bubblefx_fn, fx_bubble_assets)

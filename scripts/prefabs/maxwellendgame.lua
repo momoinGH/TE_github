@@ -1,7 +1,7 @@
-assets = 
+assets =
 {
-	Asset("ANIM", "anim/maxwell_endgame.zip"),
-	Asset("SOUND", "sound/maxwell.fsb"),
+    Asset("ANIM", "anim/maxwell_endgame.zip"),
+    Asset("SOUND", "sound/maxwell.fsb"),
 }
 --[[
 local function createconversationline(line)
@@ -43,23 +43,23 @@ local SPEECH =
             sound = nil, --if there's an extra sound, the sound that will play
         },
         {
-            string = nil, 
-            wait = 0.5, 
-            anim = "smoke", 
-            sound = "dontstarve/common/destroy_metal", 
+            string = nil,
+            wait = 0.5,
+            anim = "smoke",
+            sound = "dontstarve/common/destroy_metal",
         },
         {
-            string = "Go set one.", 
-            wait = 2, 
-            anim = nil, 
-            sound = nil, 
+            string = "Go set one.",
+            wait = 2,
+            anim = nil,
+            sound = nil,
         },
         {
-            string = "Goodbye", 
+            string = "Goodbye",
             wait = 1,
             anim = nil,
             sound = "dontstarve/common/destroy_metal",
-        },    
+        },
     },
 
     INTRO =
@@ -143,7 +143,7 @@ local SPEECH =
         },
     },
 
-    PHONOGRAPHOFF = 
+    PHONOGRAPHOFF =
     {
         voice = "dontstarve/maxwell/talk_LP_world6",
         idleanim= "idle_loop",
@@ -164,10 +164,10 @@ local SPEECH =
             anim = nil,
             sound = nil,
         },
-    },  
+    },
 
     TELEPORTFAIL =
-    {       
+    {
         delay = 4,
         voice = "dontstarve/maxwell/talk_LP_world6",
         idleanim= "idle_loop",
@@ -188,7 +188,7 @@ local SPEECH =
             anim = nil,
             sound = nil,
         },
-    },    
+    },
 
 }
 for k,v in ipairs(STRINGS.MAXWELL_ADVENTUREINTROS.LEVEL_6.CONVERSATION) do
@@ -219,7 +219,7 @@ local function activateintrospeech(inst)
             conv_index = math.min( table.getn(SPEECH), conv_index + 1 )
             inst.components.maxwelltalker.speech = conv_index
         end
-    end)    
+    end)
 end
 
 
@@ -228,7 +228,7 @@ local function OnHit(inst, attacker)
     if doer then
         local pos = Vector3( doer.Transform:GetWorldPosition() )
         TheWorld:PushEvent("ms_sendlightningstrike", pos)
-        
+
         if doer.components.combat then
 			doer.components.combat:GetAttacked(nil, TUNING.UNARMED_DAMAGE)
 		end
@@ -240,15 +240,15 @@ local function OnHit(inst, attacker)
 			end
 		end
     end
-    
+
     inst.components.maxwelltalker.speech = "HIT"
-    
+
     if inst.components.maxwelltalker:IsTalking() then
         inst.components.maxwelltalker:StopTalking()
     end
-    
+
     inst.task = inst:StartThread(function() inst.components.maxwelltalker:DoTalk(inst) end)
-    
+
 end
 
 local function phonographon(inst)
@@ -262,7 +262,7 @@ end
 local function phonographoff(inst)
     if inst.components.maxwelltalker then
         if inst.components.maxwelltalker:IsTalking() then inst.components.maxwelltalker:StopTalking() end
-        inst.components.maxwelltalker.speech = "PHONOGRAPHOFF"  
+        inst.components.maxwelltalker.speech = "PHONOGRAPHOFF"
         inst.task = inst:StartThread(function() inst.components.maxwelltalker:DoTalk(inst) end)
     end
 end
@@ -291,29 +291,30 @@ local function teleportfail(inst)
                 conv_index = math.min( table.getn(SPEECH), conv_index + 1 )
                 inst.components.maxwelltalker.speech = conv_index
             end
-        end)  
+        end)
     end
 end
 ]]
 local function fn()
     local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
+    local sound = inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
 
     MakeObstaclePhysics(inst, 1.5)
 
     anim:SetBank("maxwellthrone")
     anim:SetBuild("maxwell_endgame")
-	anim:PlayAnimation("death")
---	inst.AnimState:Pause()
---	inst.AnimState:SetPercent("death" , 0.33)
-	inst:Hide()
-	inst:DoTaskInTime(2.6, function()
-	inst:Show() end)
-	
---[[
+    anim:PlayAnimation("death")
+    --	inst.AnimState:Pause()
+    --	inst.AnimState:SetPercent("death" , 0.33)
+    inst:Hide()
+    inst:DoTaskInTime(2.6, function()
+        inst:Show()
+    end)
+
+    --[[
     inst:AddComponent("talker")
     inst.components.talker.fontsize = 40
     inst.components.talker.font = TALKINGFONT
@@ -330,8 +331,8 @@ local function fn()
 
     if not TheWorld.ismastersim then
         return inst
-    end	
---[[	
+    end
+    --[[	
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(12, 15)
     inst.components.playerprox:SetOnPlayerNear(activateintrospeech)
@@ -351,7 +352,7 @@ local function fn()
     inst.components.combat.onhitfn = OnHit
 ]]
 
-	return inst
+    return inst
 end
 
-return Prefab("characters/maxwellendgame", fn, assets) 
+return Prefab("characters/maxwellendgame", fn, assets)

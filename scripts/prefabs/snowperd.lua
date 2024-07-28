@@ -110,11 +110,11 @@ local function fn()
 
     inst:AddTag("character")
     inst:AddTag("berrythief")
- 	inst:AddTag("walrus")
-	inst:AddTag("houndfriend")	
---    if IsSpecialEventActive(SPECIAL_EVENTS.YOTG) then
-        inst:AddTag("perd")
---    end
+    inst:AddTag("walrus")
+    inst:AddTag("houndfriend")
+    --    if IsSpecialEventActive(SPECIAL_EVENTS.YOTG) then
+    inst:AddTag("perd")
+    --    end
 
     inst.entity:SetPristine()
 
@@ -161,18 +161,18 @@ local function fn()
     inst.OnSave = OnSave
     inst.OnLoadPostPass = OnLoadPostPass
 
---    if IsSpecialEventActive(SPECIAL_EVENTS.YOTG) then
-        inst:AddComponent("timer")
+    --    if IsSpecialEventActive(SPECIAL_EVENTS.YOTG) then
+    inst:AddComponent("timer")
 
-        inst.components.eater:SetOnEatFn(OnEat)
-        inst.components.lootdropper:SetLootSetupFn(lootsetfn)
+    inst.components.eater:SetOnEatFn(OnEat)
+    inst.components.lootdropper:SetLootSetupFn(lootsetfn)
 
-        inst.DropOffering = DropOffering
+    inst.DropOffering = DropOffering
 
-        inst.seekshrine = true
-        inst:ListenForEvent("attacked", OnAttacked)
---    end
-	inst:SetPrefabNameOverride("perd")
+    inst.seekshrine = true
+    inst:ListenForEvent("attacked", OnAttacked)
+    --    end
+    inst:SetPrefabNameOverride("perd")
 
     return inst
 end

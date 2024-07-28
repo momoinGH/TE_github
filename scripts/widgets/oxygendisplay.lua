@@ -1,6 +1,5 @@
 local function Oxygen_display(self)
     if 1 == 1 then -- self.owner:HasTag("musha") then
-
         local OxygenBadge = GLOBAL.require "widgets/oxygenbadge"
         self.oxygen = self:AddChild(OxygenBadge(self.owner))
         self.owner.oxygenbadge = self.oxygen
@@ -9,7 +8,8 @@ local function Oxygen_display(self)
         local badge_stomach = self.stomach:GetPosition()
         local badge_brain = self.brain:GetPosition()
         local badge_heart = self.heart:GetPosition()
-		self.oxygen:SetPosition(badge_brain.x + badge_stomach.x - badge_heart.x, badge_brain.y + badge_stomach.y - badge_heart.y, 0)
+        self.oxygen:SetPosition(badge_brain.x + badge_stomach.x - badge_heart.x,
+            badge_brain.y + badge_stomach.y - badge_heart.y, 0)
         -- local AlwaysOnStatus = false
         -- for k, v in ipairs(GLOBAL.KnownModIndex:GetModsToLoad()) do
         --     local Mod = GLOBAL.KnownModIndex:GetModInfo(v).name

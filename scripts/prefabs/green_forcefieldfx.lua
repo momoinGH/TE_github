@@ -1,6 +1,6 @@
 local assets =
 {
-   Asset("ANIM", "anim/green_forcefield.zip"),
+    Asset("ANIM", "anim/green_forcefield.zip"),
 }
 
 local MAX_LIGHT_FRAME = 6

@@ -1,15 +1,15 @@
 local function makeassetlist(name)
     return {
-        Asset("ANIM", "anim/"..name..".zip")
+        Asset("ANIM", "anim/" .. name .. ".zip")
     }
 end
 
 local function makefn(name, collide)
     return function()
-    	local inst = CreateEntity()
+        local inst = CreateEntity()
 
-    	inst.entity:AddTransform()
-    	inst.entity:AddAnimState()
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
         inst.entity:AddNetwork()
 
         if collide then

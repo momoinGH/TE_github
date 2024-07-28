@@ -21,15 +21,15 @@ local function onhammered(inst, worker)
 end
 
 local function onhit(inst, worker)
-        if inst.components.childspawner ~= nil then
-            inst.components.childspawner:ReleaseAllChildren(worker)
-        end
-        inst.AnimState:PlayAnimation("hit")
-        inst.AnimState:PushAnimation("idle", true)
+    if inst.components.childspawner ~= nil then
+        inst.components.childspawner:ReleaseAllChildren(worker)
+    end
+    inst.AnimState:PlayAnimation("hit")
+    inst.AnimState:PushAnimation("idle", true)
 end
 
 local function StartSpawning(inst)
-    if  inst.components.childspawner ~= nil then
+    if inst.components.childspawner ~= nil then
         inst.components.childspawner:StartSpawning()
         inst.AnimState:Show("flag")
         inst.AnimState:PlayAnimation("flagup")
@@ -45,20 +45,20 @@ local function StopSpawning(inst)
 end
 
 local function OnSpawned(inst, child)
-        inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
-        if  inst.components.childspawner ~= nil and
-            inst.components.childspawner:CountChildrenOutside() >= 1 and
-            child.components.combat.target == nil then
-            StartSpawning(inst)
-        end
+    inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
+    if inst.components.childspawner ~= nil and
+        inst.components.childspawner:CountChildrenOutside() >= 1 and
+        child.components.combat.target == nil then
+        StartSpawning(inst)
+    end
 end
 
 local function OnGoHome(inst, child)
-        inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
-        if inst.components.childspawner ~= nil and
-            inst.components.childspawner:CountChildrenOutside() < 1 then
-            StartSpawning(inst)
-        end
+    inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
+    if inst.components.childspawner ~= nil and
+        inst.components.childspawner:CountChildrenOutside() < 1 then
+        StartSpawning(inst)
+    end
 end
 
 
@@ -92,7 +92,7 @@ local function fn()
     end
 
     inst:AddComponent("lootdropper")
-    
+
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(2)
@@ -118,4 +118,3 @@ local function fn()
 end
 
 return Prefab("mermwatchtowerunderwater", fn, assets, prefabs)
-

@@ -38,18 +38,20 @@ end)
 
 function MammothBrain:OnStart()
     local root = PriorityNode(
-    {
-        WhileNode(function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
-        WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
-        ChaseAndAttack(self.inst, MAX_CHASE_TIME),
-        SequenceNode{
-            FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn, 0.5),
---            RunAway(self.inst, ShouldRunAway, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)
-        },
-        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
-        BrainCommon.AnchorToSaltlick(self.inst),
-        Wander(self.inst)
-    }, .25)
+        {
+            WhileNode(
+            function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end,
+                "PanicHaunted", Panic(self.inst)),
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            ChaseAndAttack(self.inst, MAX_CHASE_TIME),
+            SequenceNode {
+                FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn, 0.5),
+                --            RunAway(self.inst, ShouldRunAway, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)
+            },
+            FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+            BrainCommon.AnchorToSaltlick(self.inst),
+            Wander(self.inst)
+        }, .25)
 
     self.bt = BT(self.inst, root)
 end

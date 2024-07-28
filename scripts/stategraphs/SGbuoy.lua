@@ -1,24 +1,24 @@
-local actionhandlers = 
+local actionhandlers =
 {
 }
 
-local events=
+local events =
 {
 }
 
-local states=
+local states =
 {
-	State{
+	State {
 		name = "idle",
 
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("idle", true)
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(23*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/bouy_bell") end),
-			TimeEvent(77*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/bouy_bell") end)
+			TimeEvent(23 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/bouy_bell") end),
+			TimeEvent(77 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/bouy_bell") end)
 		},
 
 		events =
@@ -27,7 +27,7 @@ local states=
 		},
 	},
 
-	State{
+	State {
 		name = "hit",
 
 		onenter = function(inst)
@@ -41,7 +41,7 @@ local states=
 		},
 	},
 
-	State{
+	State {
 		name = "place",
 
 		onenter = function(inst)

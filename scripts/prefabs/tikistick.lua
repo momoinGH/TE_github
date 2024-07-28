@@ -1,15 +1,15 @@
 local pig_assets =
 {
-	Asset("ANIM", "anim/tiki_stick.zip")
+    Asset("ANIM", "anim/tiki_stick.zip")
 }
 
 local pig_prefabs =
 {
-	"flies",
-	"pigskin",
-	"twigs",
-	"collapse_small",
-	"tikimask",
+    "flies",
+    "pigskin",
+    "twigs",
+    "collapse_small",
+    "tikimask",
 }
 
 local function OnFinish(inst)
@@ -19,15 +19,15 @@ local function OnFinish(inst)
     local fx = SpawnPrefab("collapse_small")
     fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
     fx:SetMaterial("wood")
---    if TheWorld.state.isfullmoon then
---        inst.components.lootdropper:SpawnLootPrefab("nightmarefuel")
---    end
+    --    if TheWorld.state.isfullmoon then
+    --        inst.components.lootdropper:SpawnLootPrefab("nightmarefuel")
+    --    end
     inst.components.lootdropper:DropLoot()
     inst:Remove()
 end
 
-local function OnWorked(inst) 
-    if not inst:HasTag("burnt") then 
+local function OnWorked(inst)
+    if not inst:HasTag("burnt") then
         inst.AnimState:PlayAnimation("hit")
         inst.AnimState:PushAnimation(inst.awake and "idle_awake" or "idle_asleep")
     end
@@ -72,11 +72,11 @@ end
 local function OnHaunt(inst, haunter)
     --#HAUNTFIX
     --if math.random() <= TUNING.HAUNT_CHANCE_OCCASIONAL and
-        --inst.components.workable ~= nil and
-        --inst.components.workable:CanBeWorked() then
-        --inst.components.workable:WorkedBy(haunter, 1)
-        --inst.components.hauntable.hauntvalue = TUNING.HAUNT_SMALL
-        --return true
+    --inst.components.workable ~= nil and
+    --inst.components.workable:CanBeWorked() then
+    --inst.components.workable:WorkedBy(haunter, 1)
+    --inst.components.hauntable.hauntvalue = TUNING.HAUNT_SMALL
+    --return true
     --else
     if not (inst.awake or inst:HasTag("burnt")) then
         inst.awake = true
@@ -98,10 +98,10 @@ local function create_common(bankandbuild)
     inst.entity:AddNetwork()
 
     inst:AddTag("structure")
-    inst:AddTag("chewable")  -- for werebeaver
+    inst:AddTag("chewable") -- for werebeaver
 
-	inst.AnimState:SetBank("pig_head")
-	inst.AnimState:SetBuild("tiki_stick")
+    inst.AnimState:SetBank("pig_head")
+    inst.AnimState:SetBuild("tiki_stick")
     inst.AnimState:PlayAnimation("idle_asleep")
 
     inst.entity:SetPristine()
@@ -146,7 +146,7 @@ local function create_pighead()
         return inst
     end
 
-	inst.components.lootdropper:SetLoot({"tikimask", "twigs", "twigs"})
+    inst.components.lootdropper:SetLoot({ "tikimask", "twigs", "twigs" })
 
     return inst
 end

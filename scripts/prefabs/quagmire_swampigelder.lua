@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/quagmire_elderswampig.zip"),
-	Asset("SOUND", "sound/pig.fsb"),
+    Asset("SOUND", "sound/pig.fsb"),
 }
 
 --[[
@@ -11,7 +11,7 @@ sleep_loop
 sleep_pst
 
 
-local sounds = 
+local sounds =
 {
 	wake = "dontstarve/quagmire/creature/swamppig_elder/sleep_out",
 	trade = "dontstarve/quagmire/creature/swamppig_elder/talk",
@@ -19,26 +19,26 @@ local sounds =
 }]]
 
 local function onnear(inst)
-	if not inst.AnimState:IsCurrentAnimation("sleep_pst") and not inst.AnimState:IsCurrentAnimation("idle") then
-		--inst.SoundEmitter:PlaySound(inst.sounds.wake)
-		
-		local strid = math.random(#STRINGS.ELDERPIG_TALK_GREETING)
-		inst.components.talker:Say(STRINGS.ELDERPIG_TALK_GREETING[strid])
-		inst.SoundEmitter:PlaySound("dontstarve/quagmire/creature/swamppig_elder/sleep_out")
-		inst.SoundEmitter:PlaySound("dontstarve/quagmire/creature/swamppig_elder/talk")
-		inst.AnimState:PlayAnimation("sleep_pst")
-		inst.AnimState:PushAnimation("idle", true)
-	end
+    if not inst.AnimState:IsCurrentAnimation("sleep_pst") and not inst.AnimState:IsCurrentAnimation("idle") then
+        --inst.SoundEmitter:PlaySound(inst.sounds.wake)
+
+        local strid = math.random(#STRINGS.ELDERPIG_TALK_GREETING)
+        inst.components.talker:Say(STRINGS.ELDERPIG_TALK_GREETING[strid])
+        inst.SoundEmitter:PlaySound("dontstarve/quagmire/creature/swamppig_elder/sleep_out")
+        inst.SoundEmitter:PlaySound("dontstarve/quagmire/creature/swamppig_elder/talk")
+        inst.AnimState:PlayAnimation("sleep_pst")
+        inst.AnimState:PushAnimation("idle", true)
+    end
 end
 
 local function onfar(inst)
-	--inst.SoundEmitter:PlaySound(inst.sounds.sleep)
-	
-	local strid = math.random(#STRINGS.ELDERPIG_TALK_FARWELL)
-	inst.components.talker:Say(STRINGS.ELDERPIG_TALK_FARWELL[strid])
-	inst.SoundEmitter:PlaySound("dontstarve/quagmire/creature/swamppig_elder/sleep_in")
-	inst.AnimState:PlayAnimation("sleep_pre")
-	inst.AnimState:PushAnimation("sleep_loop", true)
+    --inst.SoundEmitter:PlaySound(inst.sounds.sleep)
+
+    local strid = math.random(#STRINGS.ELDERPIG_TALK_FARWELL)
+    inst.components.talker:Say(STRINGS.ELDERPIG_TALK_FARWELL[strid])
+    inst.SoundEmitter:PlaySound("dontstarve/quagmire/creature/swamppig_elder/sleep_in")
+    inst.AnimState:PlayAnimation("sleep_pre")
+    inst.AnimState:PushAnimation("sleep_loop", true)
 end
 
 local function fn()
@@ -48,14 +48,14 @@ local function fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
-	
+
     inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("pigelder.png")
-    inst.MiniMapEntity:SetPriority(1)	
-	
-	inst.Transform:SetFourFaced()
+    inst.MiniMapEntity:SetIcon("pigelder.png")
+    inst.MiniMapEntity:SetPriority(1)
+
+    inst.Transform:SetFourFaced()
     inst.Transform:SetScale(1.3, 1.3, 1.3)
-	
+
     MakeObstaclePhysics(inst, 2, .5)
 
     inst.MiniMapEntity:SetPriority(1)
@@ -67,12 +67,12 @@ local function fn()
     inst.AnimState:SetBank("quagmire_elderswampig")
     inst.AnimState:SetBuild("quagmire_elderswampig")
     inst.AnimState:PlayAnimation("sleep_loop", true)
-	
-	inst:AddComponent("talker")
+
+    inst:AddComponent("talker")
     inst.components.talker.fontsize = 35
     inst.components.talker.font = TALKINGFONT
     inst.components.talker.offset = Vector3(0, -600, 0)
-    inst.components.talker:MakeChatter()	
+    inst.components.talker:MakeChatter()
 
     inst:AddTag("antlion_sinkhole_blocker")
 
@@ -83,14 +83,14 @@ local function fn()
     end
 
     inst:AddComponent("inspectable")
-	inst:AddComponent("store")
-	
-	inst:AddComponent("playerprox")
-    inst.components.playerprox:SetDist(8,9)
-    inst.components.playerprox:SetOnPlayerFar(onfar)
-	inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst:AddComponent("store")
 
-	inst.sounds = sounds	
+    inst:AddComponent("playerprox")
+    inst.components.playerprox:SetDist(8, 9)
+    inst.components.playerprox:SetOnPlayerFar(onfar)
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+
+    inst.sounds = sounds
 
     return inst
 end

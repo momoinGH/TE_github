@@ -64,13 +64,15 @@ local function PlayAnim(proxy, fxanim, instance_page)
     inst.AnimState:PlayAnimation(fxanim)
     inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 
-    inst.SoundEmitter:PlaySound("dontstarve/common/lava_arena/spawn", nil, ScaleVolume(instance_count[instance_page], 10, .5))
+    inst.SoundEmitter:PlaySound("dontstarve/common/lava_arena/spawn", nil,
+        ScaleVolume(instance_count[instance_page], 10, .5))
 
     inst:ListenForEvent("animover", inst.Remove)
 end
 
 local function SpawnSmokeFx(inst)
-    SpawnPrefab("lavaarena_creature_teleport_smoke_fx_"..tostring(math.random(3))).Transform:SetPosition(inst.Transform:GetWorldPosition())
+    SpawnPrefab("lavaarena_creature_teleport_smoke_fx_" .. tostring(math.random(3))).Transform:SetPosition(inst
+    .Transform:GetWorldPosition())
 end
 
 local function makespawnfx(instance_page, name, fxanim)
@@ -143,7 +145,8 @@ local function PlayDecor(proxy, anims, instance_page)
     end
 
     local count = instance_count[proxy.instance_page]
-    inst.SoundEmitter:PlaySound("dontstarve/common/lava_arena/spawner_decor", nil, ScaleVolume(instance_count[instance_page], 18, .5))
+    inst.SoundEmitter:PlaySound("dontstarve/common/lava_arena/spawner_decor", nil,
+        ScaleVolume(instance_count[instance_page], 18, .5))
 
     inst:ListenForEvent("animqueueover", inst.Remove)
 end
@@ -185,7 +188,8 @@ end
 
 return makespawnfx(1, "lavaarena_creature_teleport_small_fx", "spawn_small"),
     makespawnfx(1, "lavaarena_creature_teleport_medium_fx", "spawn_medium"),
-    makespawndecorfx(2, "lavaarena_spawnerdecor_fx_small", { "spark_small_pre", "spark_small_loop", "spark_small_loop", "spark_small_pst" }),
+    makespawndecorfx(2, "lavaarena_spawnerdecor_fx_small",
+        { "spark_small_pre", "spark_small_loop", "spark_small_loop", "spark_small_pst" }),
     makespawndecorfx(3, "lavaarena_spawnerdecor_fx_1", { "spark_1_pre", "spark_1_pst" }),
     makespawndecorfx(3, "lavaarena_spawnerdecor_fx_2", { "spark_2_pre", "spark_2_pst" }),
     makespawndecorfx(3, "lavaarena_spawnerdecor_fx_3", { "spark_3_pre", "spark_3_pst" })

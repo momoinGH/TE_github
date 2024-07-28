@@ -1,38 +1,38 @@
 require("stategraphs/commonstates")
 
-local actionhandlers = 
+local actionhandlers =
 {
-    ActionHandler(ACTIONS.GOHOME, "gohome"),
-    ActionHandler(ACTIONS.EAT, "eat"),
-    ActionHandler(ACTIONS.PICKUP, "pickup"),
-    ActionHandler(ACTIONS.EQUIP, "pickup"),
-    ActionHandler(ACTIONS.TAKEITEM, "pickup"),
-	ActionHandler(ACTIONS.MINE, "mine"),	
+	ActionHandler(ACTIONS.GOHOME, "gohome"),
+	ActionHandler(ACTIONS.EAT, "eat"),
+	ActionHandler(ACTIONS.PICKUP, "pickup"),
+	ActionHandler(ACTIONS.EQUIP, "pickup"),
+	ActionHandler(ACTIONS.TAKEITEM, "pickup"),
+	ActionHandler(ACTIONS.MINE, "mine"),
 }
 
 
-local events=
+local events =
 {
 	CommonHandlers.OnSleep(),
-	CommonHandlers.OnLocomote(false,true),
+	CommonHandlers.OnLocomote(false, true),
 	CommonHandlers.OnAttacked(true),
 	CommonHandlers.OnAttack(),
 	CommonHandlers.OnFreeze(),
 	CommonHandlers.OnDeath(),
 }
 
-local states=
+local states =
 {
 
-	State{
+	State {
 
 		name = "idle",
-		tags = {"idle", "canrotate"},
+		tags = { "idle", "canrotate" },
 		onenter = function(inst, playanim)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("idle", true)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/balphin/idle_swim")
-            inst.sg:SetTimeout(4 + math.random()*3)
+			inst.sg:SetTimeout(4 + math.random() * 3)
 		end,
 
 		ontimeout = function(inst)
@@ -40,32 +40,33 @@ local states=
 		end,
 	},
 
-	State{
+	State {
 
 		name = "flip",
-		tags = {"busy", "canrotate"},
+		tags = { "busy", "canrotate" },
 		onenter = function(inst, playanim)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("jump")
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/balphin/emerge")
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/water_emerge_sml") end),
+			TimeEvent(7 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve_DLC002/creatures/seacreature_movement/water_emerge_sml") end),
 		},
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst) 
+			EventHandler("animover", function(inst)
 				inst.sg:GoToState("idle")
 			end),
 		},
 	},
 
-	State{
+	State {
 		name = "walk_start",
-		tags = {"moving", "canrotate"},
+		tags = { "moving", "canrotate" },
 
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("walk_pre")
@@ -73,13 +74,13 @@ local states=
 
 		events =
 		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("walk") end ),        
+			EventHandler("animover", function(inst) inst.sg:GoToState("walk") end),
 		},
 	},
 
-	State{
+	State {
 		name = "walk",
-		tags = {"moving", "canrotate"},
+		tags = { "moving", "canrotate" },
 
 		onenter = function(inst)
 			inst.components.locomotor:WalkForward()
@@ -89,18 +90,20 @@ local states=
 				inst.AnimState:PlayAnimation("leap")
 			end
 		end,
-		timeline=
+		timeline =
 		{
-			TimeEvent(21*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml") end),
-			TimeEvent(48*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml") end),
+			TimeEvent(21 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml") end),
+			TimeEvent(48 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml") end),
 		},
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("walk") end ),
+			EventHandler("animover", function(inst) inst.sg:GoToState("walk") end),
 		},
 	},
 
-	State{
+	State {
 		name = "leap",
 		tags = {},
 		onenter = function(inst)
@@ -108,30 +111,32 @@ local states=
 		end,
 	},
 
-	State{
+	State {
 		name = "walk_stop",
-		tags = {"canrotate"},
+		tags = { "canrotate" },
 
 		onenter = function(inst)
 			inst.components.locomotor:StopMoving()
 			inst.AnimState:PlayAnimation("walk_pst")
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml") end),
-			TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/balphin/emerge") end),
+			TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml") end),
+			TimeEvent(9 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve_DLC002/creatures/balphin/emerge") end),
 		},
 
-		events=
-		{   
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),        
+		events =
+		{
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "death",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/balphin/death")
@@ -141,25 +146,25 @@ local states=
 
 	},
 
-	State{
+	State {
 		name = "hit",
-		tags = {"busy", "hit"},
+		tags = { "busy", "hit" },
 
 		onenter = function(inst, cb)
-			inst.AnimState:SetOrientation(ANIM_ORIENTATION.Default )
+			inst.AnimState:SetOrientation(ANIM_ORIENTATION.Default)
 			inst.AnimState:PlayAnimation("hit")
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/balphin/hit")
 		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "attack",
-		tags = {"attack", "busy"},
+		tags = { "attack", "busy" },
 
 		onenter = function(inst, target)
 			inst.sg.statemem.target = target
@@ -172,20 +177,20 @@ local states=
 		onexit = function(inst)
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+			TimeEvent(16 * FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
 		},
 
-		events=
+		events =
 		{
-			EventHandler("animqueueover",  function(inst) inst.sg:GoToState("idle") end),
+			EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "taunt",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
 			inst.Physics:Stop()
@@ -193,22 +198,22 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/balphin/taunt")
 		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 }
 
-CommonStates.AddSleepStates(states, 
-{
-	sleeptimeline = 
+CommonStates.AddSleepStates(states,
 	{
-		TimeEvent(1, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/balphin/sleep") end)
-	},
-})
+		sleeptimeline =
+		{
+			TimeEvent(1, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/balphin/sleep") end)
+		},
+	})
 
 CommonStates.AddFrozenStates(states)
 CommonStates.AddSimpleActionState(states, "gohome", "idle", 4 * FRAMES, { "busy" })
-  
+
 return StateGraph("ballphin", states, events, "idle", actionhandlers)

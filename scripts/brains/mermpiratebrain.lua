@@ -5,24 +5,24 @@ require "behaviours/panic"
 require "behaviours/chattynode"
 require "behaviours/follow"
 
-local BrainCommon = require "brains/braincommon"
+local BrainCommon         = require "brains/braincommon"
 
-local SEE_PLAYER_DIST = 5
-local SEE_FOOD_DIST = 2
-local MAX_WANDER_DIST = 5
-local MAX_CHASE_TIME = 10
-local MAX_CHASE_DIST = 5
-local RUN_AWAY_DIST = 0.5
-local STOP_RUN_AWAY_DIST = 1
-local fishtime = 1000
+local SEE_PLAYER_DIST     = 5
+local SEE_FOOD_DIST       = 2
+local MAX_WANDER_DIST     = 5
+local MAX_CHASE_TIME      = 10
+local MAX_CHASE_DIST      = 5
+local RUN_AWAY_DIST       = 0.5
+local STOP_RUN_AWAY_DIST  = 1
+local fishtime            = 1000
 
 local MIN_FOLLOW_DIST     = 4
 local TARGET_FOLLOW_DIST  = 4
 local MAX_FOLLOW_DIST     = 7
 
-local AVOID_PLAYER_DIST = 3
-local AVOID_PLAYER_STOP = 6
-local STOP_RUN_DIST = 8
+local AVOID_PLAYER_DIST   = 3
+local AVOID_PLAYER_STOP   = 6
+local STOP_RUN_DIST       = 8
 
 local SEE_TREE_DIST       = 15
 local KEEP_CHOPPING_DIST  = 10
@@ -38,7 +38,7 @@ local SEE_THRONE_DISTANCE = 50
 local FACETIME_BASE       = 2
 local FACETIME_RAND       = 2
 
-local MermPirateBrain = Class(Brain, function(self, inst)
+local MermPirateBrain     = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
@@ -48,7 +48,8 @@ local function EatFoodAction(inst)
         target = inst.components.inventory:FindItem(function(item) return inst.components.eater:CanEat(item) end)
     end
     if target == nil then
-        target = FindEntity(inst, SEE_FOOD_DIST, function(item) return inst.components.eater:CanEat(item) end, { "edible_VEGGIE" }, { "INLIMBO" })
+        target = FindEntity(inst, SEE_FOOD_DIST, function(item) return inst.components.eater:CanEat(item) end,
+            { "edible_VEGGIE" }, { "INLIMBO" })
         --check for scary things near the food
         if target ~= nil and GetClosestInstWithTag("scarytoprey", target, SEE_PLAYER_DIST) ~= nil then
             target = nil
@@ -56,7 +57,8 @@ local function EatFoodAction(inst)
     end
     if target ~= nil then
         local act = BufferedAction(inst, target, ACTIONS.EAT)
-        act.validfn = function() return target.components.inventoryitem == nil or target.components.inventoryitem.owner == nil or target.components.inventoryitem.owner == inst end
+        act.validfn = function() return target.components.inventoryitem == nil or
+            target.components.inventoryitem.owner == nil or target.components.inventoryitem.owner == inst end
         return act
     end
 end
@@ -65,27 +67,26 @@ local function FindFoodAction(inst)
     if inst.sg:HasStateTag("busy") then
         return
     end
-	
-	
-	local x, y, z = inst.Transform:GetWorldPosition()	
-	local WALKABLE_PLATFORM_TAGS = {"walkableplatform"}
-	local plataforma = false
-    local entities = TheSim:FindEntities(x, y, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS , WALKABLE_PLATFORM_TAGS)
+
+
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
+    local plataforma = false
+    local entities = TheSim:FindEntities(x, y, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, WALKABLE_PLATFORM_TAGS)
     for i, v in ipairs(entities) do
-    local walkable_platform = v.components.walkableplatform            
-    if walkable_platform ~= nil then  
-	plataforma = true
+        local walkable_platform = v.components.walkableplatform
+        if walkable_platform ~= nil then
+            plataforma = true
+        end
     end
+    local pt = Vector3(x, y, z)
+
+    if not TheWorld.Map:IsVisualGroundAtPoint(x, y, z) then
+        if inst and inst.components.health and plataforma == false and inst.sg:HasStateTag("moving") then inst
+                .components.health:Kill() end
     end
-	local pt=Vector3(x,y,z)	
-	
-    if not TheWorld.Map:IsVisualGroundAtPoint(x, y, z) then		
-	
-	if inst and inst.components.health and plataforma == false and inst.sg:HasStateTag("moving") then	inst.components.health:Kill() end
-	
-	end
-	
-	
+
+
     if inst.components.inventory ~= nil and inst.components.eater ~= nil then
         local target = inst.components.inventory:FindItem(function(item) return inst.components.eater:CanEat(item) end)
         if target ~= nil then
@@ -106,7 +107,7 @@ local function FindFoodAction(inst)
             return item:GetTimeAlive() >= 8
                 and item.prefab ~= "mandrake"
                 and item.components.edible ~= nil
- --               and (not noveggie or item.components.edible.foodtype == FOODTYPE.MEAT)
+                --               and (not noveggie or item.components.edible.foodtype == FOODTYPE.MEAT)
                 and TheWorld.Map:IsPassableAtPoint(item.Transform:GetWorldPosition())
                 and inst.components.eater:CanEat(item)
         end,
@@ -123,7 +124,7 @@ local function FindFoodAction(inst)
                 and item.components.shelf.itemonshelf ~= nil
                 and item.components.shelf.cantakeitem
                 and item.components.shelf.itemonshelf.components.edible ~= nil
---                and (not noveggie or item.components.shelf.itemonshelf.components.edible.foodtype == FOODTYPE.MEAT)
+                --                and (not noveggie or item.components.shelf.itemonshelf.components.edible.foodtype == FOODTYPE.MEAT)
                 and TheWorld.Map:IsPassableAtPoint(item.Transform:GetWorldPosition())
                 and inst.components.eater:CanEat(item.components.shelf.itemonshelf)
         end,
@@ -155,7 +156,7 @@ local function GetFaceTargetFn(inst)
     end
     local shouldface = inst.components.follower.leader or FindClosestPlayerToInst(inst, SEE_PLAYER_DIST, true)
     if shouldface and not inst.components.timer:TimerExists("facetime") then
-        inst.components.timer:StartTimer("facetime", FACETIME_BASE + math.random()*FACETIME_RAND)
+        inst.components.timer:StartTimer("facetime", FACETIME_BASE + math.random() * FACETIME_RAND)
     end
     return shouldface
 end
@@ -163,8 +164,9 @@ end
 local function KeepFaceTargetFn(inst, target)
     if inst.components.timer:TimerExists("dontfacetime") then
         return nil
-    end    
-    local keepface = (inst.components.follower.leader and inst.components.follower.leader == target) or (target:IsValid() and inst:IsNear(target, SEE_PLAYER_DIST)) 
+    end
+    local keepface = (inst.components.follower.leader and inst.components.follower.leader == target) or
+    (target:IsValid() and inst:IsNear(target, SEE_PLAYER_DIST))
     if not keepface then
         inst.components.timer:StopTimer("facetime")
     end
@@ -187,7 +189,7 @@ local function KeepChoppingAction(inst)
         or (inst.components.follower.leader ~= nil and
             inst:IsNear(inst.components.follower.leader, KEEP_CHOPPING_DIST))
         or FindDeciduousTreeMonster(inst) ~= nil
-    
+
     return keep_chopping
 end
 
@@ -210,7 +212,7 @@ local function FindTreeToChopAction(inst)
         else
             target = FindDeciduousTreeMonster(inst) or target
         end
-        
+
         return BufferedAction(inst, target, ACTIONS.CHOP)
     end
 end
@@ -221,15 +223,15 @@ end
 
 local function KeepMiningAction(inst)
     local keep_mining = (inst.components.follower.leader ~= nil and
-            inst:IsNear(inst.components.follower.leader, KEEP_MINING_DIST))
-    
+        inst:IsNear(inst.components.follower.leader, KEEP_MINING_DIST))
+
     return keep_mining
 end
 
 local function StartMiningCondition(inst)
     local mine_condition = (inst.components.follower.leader ~= nil and
-            inst.components.follower.leader.sg ~= nil and
-            inst.components.follower.leader.sg:HasStateTag("mining"))
+        inst.components.follower.leader.sg ~= nil and
+        inst.components.follower.leader.sg:HasStateTag("mining"))
 
     return mine_condition
 end
@@ -249,15 +251,15 @@ end
 
 local function KeepHammeringAction(inst)
     local keep_hammering = (inst.components.follower.leader ~= nil and
-            inst:IsNear(inst.components.follower.leader, KEEP_HAMMERING_DIST))
-    
+        inst:IsNear(inst.components.follower.leader, KEEP_HAMMERING_DIST))
+
     return keep_hammering
 end
 
 local function StartHammeringCondition(inst)
     local hammer_condition = (inst.components.follower.leader ~= nil and
-            inst.components.follower.leader.sg ~= nil and
-            inst.components.follower.leader.sg:HasStateTag("hammering"))
+        inst.components.follower.leader.sg ~= nil and
+        inst.components.follower.leader.sg:HasStateTag("hammering"))
 
     return hammer_condition
 end
@@ -296,83 +298,96 @@ local function IsHomeOnFire(inst)
 end
 
 local function Fish(inst)
-    local pond = FindEntity(inst, 20, nil, {"fishable"})
-    local oceanfish = FindEntity(inst, 8, nil, {"walkableplatform"})
-	
-	fishtime = fishtime + 1
-	
+    local pond = FindEntity(inst, 20, nil, { "fishable" })
+    local oceanfish = FindEntity(inst, 8, nil, { "walkableplatform" })
+
+    fishtime = fishtime + 1
+
     if pond and not inst.sg:HasStateTag("fishing") and fishtime >= 100 then
-	fishtime = 0
-    return BufferedAction(inst, pond, ACTIONS.FISH1)
+        fishtime = 0
+        return BufferedAction(inst, pond, ACTIONS.FISH1)
     end
     if oceanfish and not inst.sg:HasStateTag("fishing") and fishtime >= 100 then
-	local distancia = oceanfish:GetDistanceSqToInst(inst)
-	if distancia > 6 then
---	inst:ForceFacePoint(pos.x, pos.y, pos.z)
-	fishtime = 0
-    return BufferedAction(inst, pond, ACTIONS.FISH1)
-	end
-    end	
+        local distancia = oceanfish:GetDistanceSqToInst(inst)
+        if distancia > 6 then
+            --	inst:ForceFacePoint(pos.x, pos.y, pos.z)
+            fishtime = 0
+            return BufferedAction(inst, pond, ACTIONS.FISH1)
+        end
+    end
 end
 
 function MermPirateBrain:OnStart(inst)
     local IsThreatened = --When the fisherman has a combat target
-    PriorityNode(
-    {
-            ChattyNode(self.inst, "PIG_TALK_FIND_MEAT",
-                DoAction(self.inst, FindFoodAction )),
-        WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
---        RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
---        RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true),				
-				
-				
-       WhileNode(function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
-        WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
-        WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
-            ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST))),
-        WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() end, "Dodge",
-            RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
-        WhileNode( function() return IsHomeOnFire(self.inst) end, "HomeOnFire", Panic(self.inst)),
-        WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
-            DoAction(self.inst, GoHomeAction, "Go Home", true)),
-        DoAction(self.inst, EatFoodAction, "Eat Food"),
-        ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
-		  Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),	
---        IfNode(function() return self.inst.components.follower.leader ~= nil end, "HasLeader",
---            ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
---                FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn ))),		  
---        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
-        ChattyNode(self.inst, STRINGS.MERM_TALK_FISH,
-           DoAction(self.inst, Fish, "Fish Action")),
-        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST),
-    }, 0.25)
+        PriorityNode(
+            {
+                ChattyNode(self.inst, "PIG_TALK_FIND_MEAT",
+                    DoAction(self.inst, FindFoodAction)),
+                WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+                --        RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
+                --        RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true),				
+
+
+                WhileNode(
+                function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end,
+                    "PanicHaunted", Panic(self.inst)),
+                WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+                WhileNode(
+                    function() return self.inst.components.combat.target == nil or
+                        not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+                    ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST))),
+                WhileNode(
+                    function() return self.inst.components.combat.target ~= nil and
+                        self.inst.components.combat:InCooldown() end, "Dodge",
+                    RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST,
+                        STOP_RUN_AWAY_DIST)),
+                WhileNode(function() return IsHomeOnFire(self.inst) end, "HomeOnFire", Panic(self.inst)),
+                WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
+                    DoAction(self.inst, GoHomeAction, "Go Home", true)),
+                DoAction(self.inst, EatFoodAction, "Eat Food"),
+                ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
+                    Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST,
+                        TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
+                --        IfNode(function() return self.inst.components.follower.leader ~= nil end, "HasLeader",
+                --            ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
+                --                FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn ))),		
+                --        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+                ChattyNode(self.inst, STRINGS.MERM_TALK_FISH,
+                    DoAction(self.inst, Fish, "Fish Action")),
+                Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                    MAX_WANDER_DIST),
+            }, 0.25)
 
     local IsIdle =
-    PriorityNode(
-    {
-        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST),
-    }, 0.25)
+        PriorityNode(
+            {
+                Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                    MAX_WANDER_DIST),
+            }, 0.25)
 
     local root = PriorityNode(
-    {
+        {
 
-        WhileNode(function() return self.inst.components.combat.target ~= nil and not self.inst.sg:HasStateTag("fishing") end, "Is Threatened", IsThreatened),
-        
+            WhileNode(
+            function() return self.inst.components.combat.target ~= nil and not self.inst.sg:HasStateTag("fishing") end,
+                "Is Threatened", IsThreatened),
+
             ChattyNode(self.inst, "PIG_TALK_FIND_MEAT",
-                DoAction(self.inst, FindFoodAction )),
+                DoAction(self.inst, FindFoodAction)),
 
-        ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
-		  Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),	
---        IfNode(function() return self.inst.components.follower.leader ~= nil end, "HasLeader",
---            ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
---                FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn ))),				
-				
-        ChattyNode(self.inst, STRINGS.MERM_TALK_FISH,
-           DoAction(self.inst, Fish, "Fish Action")),
+            ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
+                Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST,
+                    TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
+            --        IfNode(function() return self.inst.components.follower.leader ~= nil end, "HasLeader",
+            --            ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
+            --                FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn ))),				
 
-        WhileNode(function() return not self.inst.sg:HasStateTag("fishing") end, "Is Idle", IsIdle),
-    }, 0.25)
-    
+            ChattyNode(self.inst, STRINGS.MERM_TALK_FISH,
+                DoAction(self.inst, Fish, "Fish Action")),
+
+            WhileNode(function() return not self.inst.sg:HasStateTag("fishing") end, "Is Idle", IsIdle),
+        }, 0.25)
+
     self.bt = BT(self.inst, root)
 end
 

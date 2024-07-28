@@ -13,7 +13,7 @@ local prefabs =
 
 local DAYLIGHT_SEARCH_RANGE = 30
 
-local names = {"f1","f2","f3","f4","f5","f6","f7","f8","f9","f10"}
+local names = { "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10" }
 local ROSE_NAME = "rose"
 local ROSE_CHANCE = 0.01
 
@@ -50,9 +50,9 @@ local function onpickedfn(inst, picker)
         picker:PushEvent("thorns")
     end
 
-	if not inst.planted then
-		TheWorld:PushEvent("beginregrowth", inst)
-	end
+    if not inst.planted then
+        TheWorld:PushEvent("beginregrowth", inst)
+    end
 
     inst:Remove()
 end
@@ -66,56 +66,56 @@ local function testfortransformonload(inst)
 end
 
 local function DieInDarkness(inst)
-    local x,y,z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x,0,z, DAYLIGHT_SEARCH_RANGE, { "daylight", "lightsource" })
-    for i,v in ipairs(ents) do
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, 0, z, DAYLIGHT_SEARCH_RANGE, { "daylight", "lightsource" })
+    for i, v in ipairs(ents) do
         local lightrad = v.Light:GetCalculatedRadius() * .7
-        if v:GetDistanceSqToPoint(x,y,z) < lightrad * lightrad then
+        if v:GetDistanceSqToPoint(x, y, z) < lightrad * lightrad then
             --found light
             return
         end
     end
     --in darkness
     inst:Remove()
-    SpawnPrefab("flower_withered").Transform:SetPosition(x,y,z)
+    SpawnPrefab("flower_withered").Transform:SetPosition(x, y, z)
 end
 
 local function OnIsCaveDay(inst, isday)
     if isday then
-        inst:DoTaskInTime(5.0 + math.random()*5.0, DieInDarkness)
+        inst:DoTaskInTime(5.0 + math.random() * 5.0, DieInDarkness)
     end
 end
 
 local function OnBurnt(inst)
-	if not inst.planted then
-		TheWorld:PushEvent("beginregrowth", inst)
-	end
+    if not inst.planted then
+        TheWorld:PushEvent("beginregrowth", inst)
+    end
     DefaultBurntFn(inst)
 end
 
 local function kill_plant(inst)
-	inst:Remove()
+    inst:Remove()
 end
 
 local function magic(inst)
-	if inst.wither == nil then
-		inst.wither = inst:SpawnChild("goddess_sparklefx")
-		inst.wither.Transform:SetPosition(0, 0, 0)
-	end
+    if inst.wither == nil then
+        inst.wither = inst:SpawnChild("goddess_sparklefx")
+        inst.wither.Transform:SetPosition(0, 0, 0)
+    end
 end
 
 local function endmagic(inst)
-	if inst.wither ~= nil then
-		inst.wither:Remove()
-		inst.wither = nil
-	end
+    if inst.wither ~= nil then
+        inst.wither:Remove()
+        inst.wither = nil
+    end
 end
-	
+
 local function wilt(inst)
-	local x,y,z = inst.Transform:GetWorldPosition()
-	inst.wither = SpawnPrefab("deer_flower_withered")
-	inst.wither.Transform:SetPosition(x,y,z)
-	inst:DoTaskInTime(0, kill_plant)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    inst.wither = SpawnPrefab("deer_flower_withered")
+    inst.wither.Transform:SetPosition(x, y, z)
+    inst:DoTaskInTime(0, kill_plant)
 end
 
 local function fn()
@@ -131,8 +131,8 @@ local function fn()
 
     inst:AddTag("flower")
     inst:AddTag("cattoy")
-	inst:AddTag("deer_flower")
-	inst:AddTag("goddess_flower")
+    inst:AddTag("deer_flower")
+    inst:AddTag("goddess_flower")
 
     inst.entity:SetPristine()
 
@@ -157,10 +157,10 @@ local function fn()
     --inst.components.transformer.transformPrefab = "flower_evil"
 
     MakeSmallBurnable(inst)
-    inst.components.burnable:SetOnBurntFn(OnBurnt)	
+    inst.components.burnable:SetOnBurntFn(OnBurnt)
 
     MakeSmallPropagator(inst)
-	
+
     if TheWorld:HasTag("cave") then
         inst:WatchWorldState("iscaveday", OnIsCaveDay)
     end
@@ -173,10 +173,10 @@ local function fn()
     --------SaveLoad
     inst.OnSave = onsave
     inst.OnLoad = onload
-	
-	inst:DoTaskInTime(4, wilt)
-	inst:DoTaskInTime(0, magic)
-	inst:DoTaskInTime(0.7, endmagic)
+
+    inst:DoTaskInTime(4, wilt)
+    inst:DoTaskInTime(0, magic)
+    inst:DoTaskInTime(0.7, endmagic)
 
     return inst
 end
@@ -210,5 +210,5 @@ function plantedflowerfn()
 end
 
 return Prefab("deer_flower", fn, assets, prefabs),
-       Prefab("deer_flower_rose", rosefn, assets, prefabs),
-       Prefab("planted_deer_flower", plantedflowerfn, assets, prefabs)
+    Prefab("deer_flower_rose", rosefn, assets, prefabs),
+    Prefab("planted_deer_flower", plantedflowerfn, assets, prefabs)

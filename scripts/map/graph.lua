@@ -16,8 +16,8 @@ local function GenerateBermudaTriangles(root, entities, width, height)
 
     local function checkTriangle(tile, x, y, points)
         if tile ~= WORLD_TILES.OCEAN_SWELL
-        and tile ~= WORLD_TILES.OCEAN_DEEP
-		then
+            and tile ~= WORLD_TILES.OCEAN_DEEP
+        then
             return false
         end
         for i = 1, #points, 1 do

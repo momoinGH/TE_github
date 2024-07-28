@@ -21,7 +21,8 @@ local function EatFoodAction(inst)
         target = inst.components.inventory:FindItem(function(item) return inst.components.eater:CanEat(item) end)
     end
     if target == nil then
-        target = FindEntity(inst, SEE_FOOD_DIST, function(item) return inst.components.eater:CanEat(item) end, { "edible_VEGGIE" }, { "INLIMBO" })
+        target = FindEntity(inst, SEE_FOOD_DIST, function(item) return inst.components.eater:CanEat(item) end,
+            { "edible_VEGGIE" }, { "INLIMBO" })
         --check for scary things near the food
         if target ~= nil and GetClosestInstWithTag("scarytoprey", target, SEE_PLAYER_DIST) ~= nil then
             target = nil
@@ -29,7 +30,8 @@ local function EatFoodAction(inst)
     end
     if target ~= nil then
         local act = BufferedAction(inst, target, ACTIONS.EAT)
-        act.validfn = function() return target.components.inventoryitem == nil or target.components.inventoryitem.owner == nil or target.components.inventoryitem.owner == inst end
+        act.validfn = function() return target.components.inventoryitem == nil or
+            target.components.inventoryitem.owner == nil or target.components.inventoryitem.owner == inst end
         return act
     end
 end
@@ -75,20 +77,20 @@ end
 
 function GoatBrain:OnStart()
     local root = PriorityNode(
-    {
---        WhileNode(function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
---        WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
---        WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
---            ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST))),
---        WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() end, "Dodge",
---            RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
---        WhileNode( function() return IsHomeOnFire(self.inst) end, "HomeOnFire", Panic(self.inst)),
---        WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
---            DoAction(self.inst, GoHomeAction, "Go Home", true)),
---        DoAction(self.inst, EatFoodAction, "Eat Food"),
-        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
---        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST),
-    }, .25)
+        {
+            --        WhileNode(function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
+            --        WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            --        WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+            --            ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST))),
+            --        WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() end, "Dodge",
+            --            RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
+            --        WhileNode( function() return IsHomeOnFire(self.inst) end, "HomeOnFire", Panic(self.inst)),
+            --        WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
+            --            DoAction(self.inst, GoHomeAction, "Go Home", true)),
+            --        DoAction(self.inst, EatFoodAction, "Eat Food"),
+            FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+            --        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST),
+        }, .25)
 
     self.bt = BT(self.inst, root)
 end

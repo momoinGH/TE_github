@@ -1,6 +1,6 @@
 require("stategraphs/commonstates")
 
-local events = 
+local events =
 {
     CommonHandlers.OnAttack(),
     CommonHandlers.OnAttacked(),
@@ -10,11 +10,11 @@ local events =
 
 local actionhandlers = {}
 
-local states = 
+local states =
 {
-    State{
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
 
         onenter = function(inst, playanim)
             inst.Physics:Stop()
@@ -23,7 +23,7 @@ local states =
 
         events =
         {
-            EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
                 if math.random() < 0.75 then
                     inst.sg:GoToState("waves")
                 else
@@ -33,20 +33,22 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "waves",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("shake")
             inst.AnimState:PushAnimation("idle", false)
         end,
 
-        timeline = 
+        timeline =
         {
-            TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/shake") end),
-            TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/shake") end),
-            TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/shake") end),
+            TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/shake") end),
+            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/quacken/shake") end),
+            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/quacken/shake") end),
         },
 
         events =
@@ -55,42 +57,42 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "spawn",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, playanim)
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/tentacle_emerge")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("enter")
         end,
-        
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "despawn",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, playanim)
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/tentacle_submerge")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("exit")
         end,
-        
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst) inst:Remove() end),
         },
     },
 
-	State{
+    State {
         name = "death",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("exit")
             if inst.components.lootdropper then
@@ -99,24 +101,24 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "hit",
-        tags = {"busy", "hit"},
-        
+        tags = { "busy", "hit" },
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("hit")
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/hit")
         end,
-        
+
         events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
-    	name = "attack",
-    	tags = {"busy", "attack", "canrotate"},
+    State {
+        name = "attack",
+        tags = { "busy", "attack", "canrotate" },
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("attack")
@@ -125,18 +127,18 @@ local states =
 
         timeline =
         {
-			TimeEvent(17*FRAMES, function(inst) 
-                inst.components.combat:DoAttack() 
+            TimeEvent(17 * FRAMES, function(inst)
+                inst.components.combat:DoAttack()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/attack")
             end),
-            TimeEvent(20*FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
+            TimeEvent(20 * FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
         },
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
-	},
+    },
 }
 
 return StateGraph("krakententacleunderwater", states, events, "idle", actionhandlers)

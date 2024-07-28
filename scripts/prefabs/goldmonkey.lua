@@ -1,14 +1,13 @@
-
 local assets =
 {
     Asset("ANIM", "anim/kiki_basic.zip"),
     Asset("ANIM", "anim/kiki_nightmare_skin.zip"),
-	Asset("ANIM", "anim/golden_monkey.zip"),	
+    Asset("ANIM", "anim/golden_monkey.zip"),
     Asset("SOUND", "sound/monkey.fsb"),
-	Asset("ANIM", "anim/tikiman.zip"),	
+    Asset("ANIM", "anim/tikiman.zip"),
     Asset("ANIM", "anim/hat_bee.zip"),
     Asset("ANIM", "anim/tiki_mask.zip"),
-	
+
 }
 
 local prefabs =
@@ -32,22 +31,22 @@ local SHARE_TARGET_DIST = 40
 
 local LOOT = { "smallmeat", "cave_banana" }
 SetSharedLootTable('monkey',
-{
-    {'smallmeat',     1.0},
-    {'cave_banana',   1.0},
-    {'beardhair',     1.0},
-    {'nightmarefuel', 0.5},
-})
+    {
+        { 'smallmeat',     1.0 },
+        { 'cave_banana',   1.0 },
+        { 'beardhair',     1.0 },
+        { 'nightmarefuel', 0.5 },
+    })
 
 local function UpdateFace(inst)
-	local c = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-	if not c then
-		local mask = SpawnPrefab("tikimask")
-		if mask then 
-			inst.components.inventory:Equip(mask)
-			inst.AnimState:Show("hat")
-		end
-	end
+    local c = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+    if not c then
+        local mask = SpawnPrefab("tikimask")
+        if mask then
+            inst.components.inventory:Equip(mask)
+            inst.AnimState:Show("hat")
+        end
+    end
 end
 
 local function SetHarassPlayer(inst, player)
@@ -122,7 +121,6 @@ local function EquipWeapons(inst)
         hitter:AddComponent("equippable")
         inst.components.inventory:GiveItem(hitter)
         inst.weaponitems.hitter = hitter
-
     end
 end
 
@@ -172,7 +170,7 @@ local function OnAttacked2(inst, data)
             v.task = v:DoTaskInTime(math.random(55, 65), _ForgetTarget) --Forget about target after a minute
         end
     end
---	UpdateFace(inst)	
+    --	UpdateFace(inst)	
 end
 
 local function IsBanana(item)
@@ -181,7 +179,7 @@ end
 
 local function FindTargetOfInterest(inst)
     if not inst.curious then
-        return 
+        return
     end
 
     if inst.harassplayer == nil and inst.components.combat.target == nil then
@@ -205,23 +203,24 @@ end
 local function retargetfn(inst)
     return inst:HasTag("nightmare")
         and FindEntity(
-                inst,
-                20,
-                function(guy)
-                    return inst.components.combat:CanTarget(guy)
-                end,
-                { "_combat" }, --see entityreplica.lua
-                { "playerghost" },
-                { "character", "monster" }
-            )
+            inst,
+            20,
+            function(guy)
+                return inst.components.combat:CanTarget(guy)
+            end,
+            { "_combat" },     --see entityreplica.lua
+            { "playerghost" },
+            { "character", "monster" }
+        )
         or nil
 end
 
 local function retargetfntikiman(inst)
-	local newtarget = FindEntity(inst, 20, function(guy)
-		return (guy:HasTag("character") or guy:HasTag("monster")) and not guy:HasTag("tiki") and inst.components.combat:CanTarget(guy)
-		end)
-	return newtarget
+    local newtarget = FindEntity(inst, 20, function(guy)
+        return (guy:HasTag("character") or guy:HasTag("monster")) and not guy:HasTag("tiki") and
+        inst.components.combat:CanTarget(guy)
+    end)
+    return newtarget
 end
 
 
@@ -320,7 +319,6 @@ local function TestNightmareArea(inst, area)
     if (TheWorld.state.isnightmarewild or TheWorld.state.isnightmaredawn)
         and inst.components.areaaware:CurrentlyInTag("Nightmare")
         and not inst:HasTag("nightmare") then
-
         DoFx(inst)
         SetNightmareMonkey(inst)
     elseif (not TheWorld.state.isnightmarewild and not TheWorld.state.isnightmaredawn)
@@ -334,7 +332,6 @@ local function TestNightmarePhase(inst, phase)
     if (phase == "wild" or phase == "dawn")
         and inst.components.areaaware:CurrentlyInTag("Nightmare")
         and not inst:HasTag("nightmare") then
-
         DoFx(inst)
         SetNightmareMonkey(inst)
     elseif (phase ~= "wild" and phase ~= "dawn")
@@ -364,7 +361,7 @@ local function fn()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()   
+    inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
 
@@ -381,7 +378,7 @@ local function fn()
     inst:AddTag("cavedweller")
     inst:AddTag("monkey")
     inst:AddTag("animal")
-    inst:AddTag("tiki")	
+    inst:AddTag("tiki")
 
     inst.entity:SetPristine()
 
@@ -394,7 +391,7 @@ local function fn()
     MakeMediumBurnableCharacter(inst)
     MakeMediumFreezableCharacter(inst)
 
---    inst:AddComponent("bloomer")
+    --    inst:AddComponent("bloomer")
 
     inst:AddComponent("inventory")
 
@@ -403,7 +400,7 @@ local function fn()
     inst:AddComponent("thief")
 
     inst:AddComponent("locomotor")
-    inst.components.locomotor:SetSlowMultiplier( 1 )
+    inst.components.locomotor:SetSlowMultiplier(1)
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = false }
     inst.components.locomotor.walkspeed = TUNING.MONKEY_MOVE_SPEED
@@ -414,14 +411,14 @@ local function fn()
     inst.components.combat:SetRetargetFunction(1, retargetfn)
 
     inst.components.combat:SetKeepTargetFunction(shouldKeepTarget)
-    inst.components.combat:SetDefaultDamage(0)  --This doesn't matter, monkey uses weapon damage
+    inst.components.combat:SetDefaultDamage(0) --This doesn't matter, monkey uses weapon damage
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.MONKEY_HEALTH)
 
     inst:AddComponent("periodicspawner")
     inst.components.periodicspawner:SetPrefab("goldnugget")
-    inst.components.periodicspawner:SetRandomTimes(200,400)
+    inst.components.periodicspawner:SetRandomTimes(200, 400)
     inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(15)
     inst.components.periodicspawner:Start()
@@ -437,7 +434,7 @@ local function fn()
     inst.components.sleeper.sleeptestfn = NocturnalSleepTest
     inst.components.sleeper.waketestfn = NocturnalWakeTest
 
---    inst:AddComponent("areaaware")
+    --    inst:AddComponent("areaaware")
 
     inst:SetBrain(brain)
     inst:SetStateGraph("SGmonkey")
@@ -456,8 +453,8 @@ local function fn()
     inst:ListenForEvent("onpickupitem", OnPickup)
     inst:ListenForEvent("attacked", OnAttacked)
 
---    inst:WatchWorldState("nightmarephase", TestNightmarePhase)
---    inst:ListenForEvent("changearea", TestNightmareArea)
+    --    inst:WatchWorldState("nightmarephase", TestNightmarePhase)
+    --    inst:ListenForEvent("changearea", TestNightmareArea)
 
     MakeHauntablePanic(inst)
     AddHauntableCustomReaction(inst, OnCustomHaunt, true, false, true)
@@ -477,33 +474,33 @@ local function fn2()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()   
+    inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
 
     inst.DynamicShadow:SetSize(2, 1.25)
 
     inst.Transform:SetSixFaced()
-	inst.Transform:SetScale(1.25,1.25,1.25)
+    inst.Transform:SetScale(1.25, 1.25, 1.25)
 
     MakeCharacterPhysics(inst, 10, 0.25)
 
     inst.AnimState:SetBank("kiki")
-	inst.AnimState:SetBuild("tikiman")
-    inst.AnimState:PlayAnimation("idle_loop", true)	
-	
-	inst.AnimState:OverrideSymbol("swap_hat", "tiki_mask", "swap_hat")
-	inst.AnimState:Show("HAT")
---	owner.AnimState:Hide("HAT_HAIR")
---	owner.AnimState:Show("HAIR_NOHAT")
---	owner.AnimState:Show("HAIR")
---	owner.AnimState:Show("HEAD")
---	owner.AnimState:Hide("HEAD_HAIR")	
+    inst.AnimState:SetBuild("tikiman")
+    inst.AnimState:PlayAnimation("idle_loop", true)
+
+    inst.AnimState:OverrideSymbol("swap_hat", "tiki_mask", "swap_hat")
+    inst.AnimState:Show("HAT")
+    --	owner.AnimState:Hide("HAT_HAIR")
+    --	owner.AnimState:Show("HAIR_NOHAT")
+    --	owner.AnimState:Show("HAIR")
+    --	owner.AnimState:Show("HEAD")
+    --	owner.AnimState:Hide("HEAD_HAIR")	
 
     inst:AddTag("cavedweller")
     inst:AddTag("monkey")
-	inst:AddTag("animal")
-	inst:AddTag("tiki")
+    inst:AddTag("animal")
+    inst:AddTag("tiki")
 
     inst.entity:SetPristine()
 
@@ -516,7 +513,7 @@ local function fn2()
     MakeMediumBurnableCharacter(inst)
     MakeMediumFreezableCharacter(inst)
 
---    inst:AddComponent("bloomer")
+    --    inst:AddComponent("bloomer")
 
     inst:AddComponent("inventory")
 
@@ -525,7 +522,7 @@ local function fn2()
     inst:AddComponent("thief")
 
     inst:AddComponent("locomotor")
-    inst.components.locomotor:SetSlowMultiplier( 1 )
+    inst.components.locomotor:SetSlowMultiplier(1)
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = false }
     inst.components.locomotor.walkspeed = TUNING.MONKEY_MOVE_SPEED
@@ -536,14 +533,14 @@ local function fn2()
     inst.components.combat:SetRetargetFunction(1, retargetfntikiman)
 
     inst.components.combat:SetKeepTargetFunction(shouldKeepTarget)
-    inst.components.combat:SetDefaultDamage(0)  --This doesn't matter, monkey uses weapon damage
+    inst.components.combat:SetDefaultDamage(0) --This doesn't matter, monkey uses weapon damage
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.MONKEY_HEALTH)
 
     inst:AddComponent("periodicspawner")
     inst.components.periodicspawner:SetPrefab("poop")
-    inst.components.periodicspawner:SetRandomTimes(200,400)
+    inst.components.periodicspawner:SetRandomTimes(200, 400)
     inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(15)
     inst.components.periodicspawner:Start()
@@ -559,7 +556,7 @@ local function fn2()
     inst.components.sleeper.sleeptestfn = NocturnalSleepTest
     inst.components.sleeper.waketestfn = NocturnalWakeTest
 
---    inst:AddComponent("areaaware")
+    --    inst:AddComponent("areaaware")
 
     inst:SetBrain(brain)
     inst:SetStateGraph("SGmonkey")
@@ -578,8 +575,8 @@ local function fn2()
     inst:ListenForEvent("onpickupitem", OnPickup)
     inst:ListenForEvent("attacked", OnAttacked2)
 
---    inst:WatchWorldState("nightmarephase", TestNightmarePhase)
---    inst:ListenForEvent("changearea", TestNightmareArea)
+    --    inst:WatchWorldState("nightmarephase", TestNightmarePhase)
+    --    inst:ListenForEvent("changearea", TestNightmareArea)
 
     MakeHauntablePanic(inst)
     AddHauntableCustomReaction(inst, OnCustomHaunt, true, false, true)
@@ -589,11 +586,11 @@ local function fn2()
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
-	
---	inst:DoTaskInTime(0.5, UpdateFace)	
+
+    --	inst:DoTaskInTime(0.5, UpdateFace)	
 
     return inst
 end
 
 return Prefab("goldmonkey", fn, assets, prefabs),
-	   Prefab("tikiman", fn2, assets, prefabs)
+    Prefab("tikiman", fn2, assets, prefabs)

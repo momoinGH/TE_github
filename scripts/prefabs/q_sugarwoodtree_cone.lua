@@ -20,14 +20,15 @@ local function ondeploy(inst, pt, deployer)
     local played_sound = false
     for i, v in ipairs(ents) do
         local chill_chance =
-            v:GetDistanceSqToPoint(pt:Get()) < TUNING.LEIF_PINECONE_CHILL_CLOSE_RADIUS * TUNING.LEIF_PINECONE_CHILL_CLOSE_RADIUS and
+            v:GetDistanceSqToPoint(pt:Get()) <
+            TUNING.LEIF_PINECONE_CHILL_CLOSE_RADIUS * TUNING.LEIF_PINECONE_CHILL_CLOSE_RADIUS and
             TUNING.LEIF_PINECONE_CHILL_CHANCE_CLOSE or
             TUNING.LEIF_PINECONE_CHILL_CHANCE_FAR
 
         if math.random() < chill_chance then
             if v.components.sleeper ~= nil then
                 v.components.sleeper:GoToSleep(1000)
-                AwardPlayerAchievement( "pacify_forest", deployer )
+                AwardPlayerAchievement("pacify_forest", deployer)
             end
         elseif not played_sound then
             v.SoundEmitter:PlaySound("dontstarve/creatures/leif/taunt_VO")
@@ -47,10 +48,10 @@ local cones = {}
 local function addcone(name, spawn_prefab, bank, build, anim, winter_tree)
     local assets =
     {
-        Asset("ANIM", "anim/"..build..".zip"),
+        Asset("ANIM", "anim/" .. build .. ".zip"),
     }
     if bank ~= build then
-        table.insert("ANIM", "anim/"..bank..".zip")
+        table.insert("ANIM", "anim/" .. bank .. ".zip")
     end
 
     local prefabs =
@@ -99,7 +100,7 @@ local function addcone(name, spawn_prefab, bank, build, anim, winter_tree)
         MakeSmallPropagator(inst)
 
         inst:AddComponent("inventoryitem")
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+        inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
         MakeHauntableLaunchAndIgnite(inst)
 
@@ -120,7 +121,7 @@ local function addcone(name, spawn_prefab, bank, build, anim, winter_tree)
     end
 
     table.insert(cones, Prefab(name, fn, assets, prefabs))
-    table.insert(cones, MakePlacer(name.."_placer", bank, build, anim))
+    table.insert(cones, MakePlacer(name .. "_placer", bank, build, anim))
 end
 
 addcone("cottontree_cone", "cottontree_sapling", "sugarwoodtree_cone", "sugarwoodtree_cone", "idle_planted")

@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/quagmire_rubble.zip"),
-	Asset("ANIM", "anim/quagmire_pebble_crab.zip"),
+    Asset("ANIM", "anim/quagmire_pebble_crab.zip"),
 }
 
 local brain = require "brains/pebblecrabbrain"
@@ -15,21 +15,21 @@ local function ShouldSleep(inst)
 end
 
 local function gosleep(inst)
-	inst:PushEvent("gotosleep")
+    inst:PushEvent("gotosleep")
 end
 
 local function wakeup(inst)
-	inst:PushEvent("onwakeup")
+    inst:PushEvent("onwakeup")
 end
 
 local function OnIsDay(inst)
     if not TheWorld.state.isday then
-		inst:DoTaskInTime(2.5 + 2 * math.random(), gosleep)
-	--	inst:PushEvent("gotosleep")
-	else
-		inst:DoTaskInTime(0, wakeup)
-	--	inst:PushEvent("onwakeup")
-	end
+        inst:DoTaskInTime(2.5 + 2 * math.random(), gosleep)
+        --	inst:PushEvent("gotosleep")
+    else
+        inst:DoTaskInTime(0, wakeup)
+        --	inst:PushEvent("onwakeup")
+    end
 end
 
 local function crab()
@@ -55,7 +55,7 @@ local function crab()
     inst:AddTag("smallcreature")
     inst:AddTag("canbetrapped")
     inst:AddTag("cattoy")
-    inst:AddTag("crab") 	
+    inst:AddTag("crab")
 
     inst.entity:SetPristine()
 
@@ -64,42 +64,42 @@ local function crab()
     end
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.RABBIT_HEALTH)	
-	
+    inst.components.health:SetMaxHealth(TUNING.RABBIT_HEALTH)
+
     inst:AddComponent("eater")
-    inst.components.eater:SetDiet({ FOODTYPE.VEGGIE }, { FOODTYPE.VEGGIE })	
-	
-	inst:AddComponent("locomotor")
+    inst.components.eater:SetDiet({ FOODTYPE.VEGGIE }, { FOODTYPE.VEGGIE })
+
+    inst:AddComponent("locomotor")
     inst.components.locomotor.runspeed = 1
     inst.components.locomotor.walkspeed = 1
-	
-	inst:AddComponent("knownlocations")
-	
-	inst:SetStateGraph("SGpebblecrab")
-	
-	inst:AddComponent("homeseeker")
-	
-    inst:AddComponent("lootdropper")
-	inst.components.lootdropper:SetLoot({"quagmire_crabmeat"})
-	
---	inst:WatchWorldState("isday", OnIsDay)
 
---	inst:DoTaskInTime(0, OnIsDay)
-	
+    inst:AddComponent("knownlocations")
+
+    inst:SetStateGraph("SGpebblecrab")
+
+    inst:AddComponent("homeseeker")
+
+    inst:AddComponent("lootdropper")
+    inst.components.lootdropper:SetLoot({ "quagmire_crabmeat" })
+
+    --	inst:WatchWorldState("isday", OnIsDay)
+
+    --	inst:DoTaskInTime(0, OnIsDay)
+
     inst:SetBrain(brain)
 
-	inst:AddComponent("inspectable")
-	
-	inst:AddComponent("inventoryitem")
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.nobounce = true
     inst.components.inventoryitem.canbepickedup = false
     inst.components.inventoryitem.canbepickedupalive = true
     inst.components.inventoryitem:SetSinks(true)
     inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
-	inst.caminho = "images/inventoryimages2.xml"
+    inst.caminho = "images/inventoryimages2.xml"
 
     MakeFeedableSmallLivestock(inst, TUNING.RABBIT_PERISH_TIME, nil)
-	
+
     return inst
 end
 

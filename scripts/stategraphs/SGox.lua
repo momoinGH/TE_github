@@ -1,6 +1,6 @@
 require("stategraphs/commonstates")
 
-local actionhandlers = 
+local actionhandlers =
 {
     --ActionHandler(ACTIONS.PICKUP, "doshortaction"),
     --ActionHandler(ACTIONS.EAT, "eat"),
@@ -9,41 +9,46 @@ local actionhandlers =
 }
 
 
-local events=
+local events =
 {
     CommonHandlers.OnStep(),
-    CommonHandlers.OnLocomote(true,true),
+    CommonHandlers.OnLocomote(true, true),
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
 
-    EventHandler("doattack", function(inst, data) if not inst.components.health:IsDead() then inst.sg:GoToState("attack", data.target) end end),
+    EventHandler("doattack",
+        function(inst, data) if not inst.components.health:IsDead() then inst.sg:GoToState("attack", data.target) end end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-    EventHandler("attacked", function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),    
+    EventHandler("attacked",
+        function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("attack") then inst.sg
+                    :GoToState("hit") end end),
     EventHandler("heardhorn", function(inst, data)
         if inst.components.health:GetPercent() > 0
-           and not inst.sg:HasStateTag("attack")
-           and data and data.musician then
+            and not inst.sg:HasStateTag("attack")
+            and data and data.musician then
             inst:FacePoint(Vector3(data.musician.Transform:GetWorldPosition()))
             inst.sg:GoToState("bellow")
         end
-    end),    
-    EventHandler("loseloyalty", function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("shake") end end),    
-    
+    end),
+    EventHandler("loseloyalty",
+        function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("attack") then inst.sg
+                    :GoToState("shake") end end),
+
 }
 
-local states=
+local states =
 {
-    State{
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
-        
+        tags = { "idle", "canrotate" },
+
         onenter = function(inst, pushanim)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("idle_loop", true)
-            inst.sg:SetTimeout(2 + 2*math.random())
+            inst.sg:SetTimeout(2 + 2 * math.random())
         end,
-        
-        ontimeout=function(inst)
+
+        ontimeout = function(inst)
             local herd = inst.components.herdmember and inst.components.herdmember:GetHerd()
             if not inst:HasTag("baby") and herd and herd.components.mood and herd.components.mood:IsInMood() then
                 if math.random() < .5 then
@@ -63,39 +68,39 @@ local states=
             end
         end,
     },
-    
-    State{
+
+    State {
         name = "shake",
-        tags = {"canrotate"},
-        
+        tags = { "canrotate" },
+
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("shake")
         end,
-       
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
-    
-    State{
+
+    State {
         name = "bellow",
-        tags = {"canrotate"},
-        
+        tags = { "canrotate" },
+
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("bellow")
             inst.SoundEmitter:PlaySound(inst.sounds.grunt)
         end,
-       
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
-    
-    State{
+
+    State {
         name = "matingcall",
         tags = {},
         onenter = function(inst)
@@ -103,52 +108,52 @@ local states=
             inst.AnimState:PlayAnimation("mating_taunt1")
             inst.SoundEmitter:PlaySound(inst.sounds.mating_call)
         end,
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
-    
-    State{
+
+    State {
         name = "tailswish",
         tags = {},
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("mating_taunt2")
         end,
-        
-        timeline=
+
+        timeline =
         {
-            TimeEvent(22*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.tail_swish) end),
-            TimeEvent(32*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.tail_swish) end),
+            TimeEvent(22 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.tail_swish) end),
+            TimeEvent(32 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.tail_swish) end),
         },
-        
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
-    
-    State{
-        name="graze",
-        tags = {"idle", "canrotate"},
-        
+
+    State {
+        name = "graze",
+        tags = { "idle", "canrotate" },
+
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("graze_loop", true)
-            inst.sg:SetTimeout(5+math.random()*5)
+            inst.sg:SetTimeout(5 + math.random() * 5)
         end,
-        
-        ontimeout= function(inst)
+
+        ontimeout = function(inst)
             inst.sg:GoToState("idle")
         end,
 
     },
-    
-    State{
+
+    State {
         name = "alert",
-        tags = {"idle", "canrotate"},
-        
+        tags = { "idle", "canrotate" },
+
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
             inst.SoundEmitter:PlaySound(inst.sounds.curious)
@@ -156,53 +161,53 @@ local states=
             inst.AnimState:PushAnimation("alert_idle", true)
         end,
     },
-    
-    State{
+
+    State {
         name = "attack",
-        tags = {"attack", "busy"},
-        
-        onenter = function(inst, target)    
-			inst.sg.statemem.target = target
+        tags = { "attack", "busy" },
+
+        onenter = function(inst, target)
+            inst.sg.statemem.target = target
             inst.SoundEmitter:PlaySound(inst.sounds.angry)
             inst.components.combat:StartAttack()
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("atk_pre")
             inst.AnimState:PushAnimation("atk", false)
         end,
-        
-        
-        timeline=
+
+
+        timeline =
         {
-            TimeEvent( 6*FRAMES, function(inst)
+            TimeEvent(6 * FRAMES, function(inst)
                 inst.components.combat:DoAttack(inst.sg.statemem.target)
                 inst.SoundEmitter:PlaySound(inst.sounds.attack_whoosh)
             end),
         },
-        
-        events=
+
+        events =
         {
             EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
-    },    
-    
-    State{
-        name = "death",
-        tags = {"busy"},
-        
-        onenter = function(inst)
-			inst.SoundEmitter:PlaySound(inst.sounds.death)
-            inst.AnimState:PlayAnimation("death")
-            inst.Physics:Stop()
-            RemovePhysicsColliders(inst)            
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))            
-        end,
-        
     },
 
-    State{
+    State {
+        name = "death",
+        tags = { "busy" },
+
+        onenter = function(inst)
+            inst.SoundEmitter:PlaySound(inst.sounds.death)
+            inst.AnimState:PlayAnimation("death")
+            inst.Physics:Stop()
+            RemovePhysicsColliders(inst)
+            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+        end,
+
+    },
+
+    State {
         name = "emerge",
-        tags = {"canrotate", "busy"},
-        
+        tags = { "canrotate", "busy" },
+
         onenter = function(inst)
             -- local is_moving = inst.sg:HasStateTag("moving")
             -- local is_running = inst.sg:HasStateTag("running")
@@ -218,14 +223,14 @@ local states=
             inst.AnimState:PlayAnimation("emerge")
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent( 8*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.emerge) end),
+            TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.emerge) end),
         },
-       
-        events=
+
+        events =
         {
-            EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
                 inst.AnimState:PlayAnimation("idle_loop")
                 inst.AnimState:SetBank("ox")
                 inst.sg:GoToState("idle")
@@ -237,10 +242,10 @@ local states=
         end,
     },
 
-    State{
+    State {
         name = "submerge",
-        tags = {"canrotate", "busy"},
-        
+        tags = { "canrotate", "busy" },
+
         onenter = function(inst)
             local should_move = inst.components.locomotor:WantsToMoveForward()
             local should_run = inst.components.locomotor:WantsToRun()
@@ -254,14 +259,14 @@ local states=
             inst.AnimState:PlayAnimation("submerge")
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.submerge) end),
+            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.submerge) end),
         },
-       
-        events=
+
+        events =
         {
-            EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
                 -- inst.AnimState:SetBank("ox")
                 inst.sg:GoToState("idle")
             end),
@@ -276,32 +281,31 @@ local states=
 CommonStates.AddWalkStates(
     states,
     {
-        walktimeline = 
-        { 
-            TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.walksound) end),
-            TimeEvent(40*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.walksound) end),
+        walktimeline =
+        {
+            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.walksound) end),
+            TimeEvent(40 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.walksound) end),
         }
     })
-    
+
 CommonStates.AddRunStates(
     states,
     {
-        runtimeline = 
-        { 
-            TimeEvent( 5*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.walksound) end),
+        runtimeline =
+        {
+            TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.walksound) end),
         }
     })
 
-CommonStates.AddSimpleState(states,"hit", "hit")
+CommonStates.AddSimpleState(states, "hit", "hit")
 CommonStates.AddFrozenStates(states)
 
 CommonStates.AddSleepStates(states,
-{
-    sleeptimeline = 
     {
-        TimeEvent( 0*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.sleep) end)
-    },
-})
-    
-return StateGraph("ox", states, events, "idle", actionhandlers)
+        sleeptimeline =
+        {
+            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.sleep) end)
+        },
+    })
 
+return StateGraph("ox", states, events, "idle", actionhandlers)

@@ -9,17 +9,18 @@ end)
 
 
 function JellyfishBrain:OnInitializationComplete()
-      self.inst.components.knownlocations:RememberLocation("home", Point(self.inst.Transform:GetWorldPosition()), true)
- end
+    self.inst.components.knownlocations:RememberLocation("home", Point(self.inst.Transform:GetWorldPosition()), true)
+end
 
 function JellyfishBrain:OnStart()
---    local clock = GetClock()
---    local seasonmgr = GetSeasonManager()
-    
+    --    local clock = GetClock()
+    --    local seasonmgr = GetSeasonManager()
+
     local root = PriorityNode(
-    {
-        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
-    }, .25)
+        {
+            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                MAX_WANDER_DIST)
+        }, .25)
     self.bt = BT(self.inst, root)
 end
 

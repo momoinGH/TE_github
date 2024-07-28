@@ -2,7 +2,7 @@
 --Created by ksaab
 --feel free to use it
 
-local assets=
+local assets =
 {
 	Asset("ANIM", "anim/lavaarena_turtillus_basic.zip"),
 }
@@ -14,14 +14,14 @@ local prefabs =
 	"slurtlehat"
 }
 
-SetSharedLootTable( "spiky_turtle",
-{
---	{"meat",   1.0},
---	{"meat",   1.0},
---	{"meat",   1.0},
---	{"slurtle_shellpieces", 1.0},
---	{"slurtlehat", 0.2},
-})
+SetSharedLootTable("spiky_turtle",
+	{
+		--	{"meat",   1.0},
+		--	{"meat",   1.0},
+		--	{"meat",   1.0},
+		--	{"slurtle_shellpieces", 1.0},
+		--	{"slurtlehat", 0.2},
+	})
 
 local targetDist = TUNING.SPIKY_TURTLE_TFC.TARGET_DIST
 local keepTargetDistSq = TUNING.SPIKY_TURTLE_TFC.KEEPDIST * TUNING.SPIKY_TURTLE_TFC.KEEPDIST
@@ -39,11 +39,11 @@ local function OnTimerDone(inst, data)
 end
 
 local function retargetfn(inst)
-local player = GetClosestInstWithTag("player", inst, 70)
-if player and not inst:HasTag("nohat") then return inst.components.combat:SetTarget(player) end
-	local notags = {"player", "smallcreature", "FX", "NOCLICK", "INLIMBO", "wall", "turtle", "structure"}
+	local player = GetClosestInstWithTag("player", inst, 70)
+	if player and not inst:HasTag("nohat") then return inst.components.combat:SetTarget(player) end
+	local notags = { "player", "smallcreature", "FX", "NOCLICK", "INLIMBO", "wall", "turtle", "structure" }
 	return FindEntity(inst, targetDist, function(guy)
-		return  inst.components.combat:CanTarget(guy)
+		return inst.components.combat:CanTarget(guy)
 	end, nil, notags)
 end
 
@@ -52,8 +52,8 @@ local function KeepTarget(inst, target)
 end
 
 local function OnAttacked(inst, data)
-	if not inst.components.timer:TimerExists("slide") 
-		and not inst.canSlide 
+	if not inst.components.timer:TimerExists("slide")
+		and not inst.canSlide
 		and not inst.sg:HasStateTag("slide")
 	then
 		inst.components.timer:StartTimer("slide", 15)
@@ -70,11 +70,11 @@ local function SlideTask(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local notags = { "turtle", "shadow", "playerghost", "INLIMBO", "NOCLICK", "FX" }
 	local damage = TUNING.SPIKY_TURTLE_TFC.SLIDEDAMAGE
-	for _, v in pairs(TheSim:FindEntities(x, y, z, TUNING.SPIKY_TURTLE_TFC.SLIDE_RADIUS, {"_combat"}, notags)) do
-		if v ~= inst 
-			and v:IsValid() 
-			and v.entity:IsVisible() 
-			and v.components.combat ~= nil 
+	for _, v in pairs(TheSim:FindEntities(x, y, z, TUNING.SPIKY_TURTLE_TFC.SLIDE_RADIUS, { "_combat" }, notags)) do
+		if v ~= inst
+			and v:IsValid()
+			and v.entity:IsVisible()
+			and v.components.combat ~= nil
 			and not table.contains(inst.slidehitted, v)
 		then
 			table.insert(inst.slidehitted, v)
@@ -112,12 +112,12 @@ local function fn(Sim)
 	inst:AddTag("turtle")
 	inst:AddTag("flippable")
 	inst:AddTag("Arena")
-	
+
 	inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	if not TheWorld.ismastersim then
+		return inst
+	end
 
 	inst:AddComponent("knownlocations")
 
@@ -171,7 +171,7 @@ local function fn(Sim)
 	inst:ListenForEvent("timerdone", OnTimerDone)
 
 	MakeLargeFreezableCharacter(inst, "body")
-    MakeMediumBurnableCharacter(inst, "body")
+	MakeMediumBurnableCharacter(inst, "body")
 
 	inst.debugstringfn = GetDebugString
 

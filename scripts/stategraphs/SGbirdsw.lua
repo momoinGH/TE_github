@@ -44,51 +44,49 @@ local events =
 
 local states =
 {
-    State{
+    State {
         name = "idle",
         tags = { "idle", "canrotate" },
 
         onenter = function(inst, pushanim)
             inst.Physics:Stop()
-		
-local map = TheWorld.Map
-local x, y, z = inst.Transform:GetWorldPosition()
-local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
+
+            local map = TheWorld.Map
+            local x, y, z = inst.Transform:GetWorldPosition()
+            local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
 
-local WALKABLE_PLATFORM_TAGS = {"walkableplatform"}
-local plataforma = false
-local pos_x, pos_y, pos_z = inst.Transform:GetWorldPosition()
-local entities = TheSim:FindEntities(x, 0, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, WALKABLE_PLATFORM_TAGS)
-for i, v in ipairs(entities) do
-local walkable_platform = v.components.walkableplatform
-if walkable_platform and walkable_platform.radius == nil then walkable_platform.radius = 4 end    
-if walkable_platform ~= nil then  
-local platform_x, platform_y, platform_z = v.Transform:GetWorldPosition()
-local distance_sq = VecUtil_LengthSq(x - platform_x, z - platform_z)
-if distance_sq <= walkable_platform.radius * walkable_platform.radius then plataforma = true end
-end
-end	
+            local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
+            local plataforma = false
+            local pos_x, pos_y, pos_z = inst.Transform:GetWorldPosition()
+            local entities = TheSim:FindEntities(x, 0, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, WALKABLE_PLATFORM_TAGS)
+            for i, v in ipairs(entities) do
+                local walkable_platform = v.components.walkableplatform
+                if walkable_platform and walkable_platform.radius == nil then walkable_platform.radius = 4 end
+                if walkable_platform ~= nil then
+                    local platform_x, platform_y, platform_z = v.Transform:GetWorldPosition()
+                    local distance_sq = VecUtil_LengthSq(x - platform_x, z - platform_z)
+                    if distance_sq <= walkable_platform.radius * walkable_platform.radius then plataforma = true end
+                end
+            end
 
 
-	
-if ground == GROUND.OCEAN_COASTAL or
-ground == GROUND.OCEAN_COASTAL_SHORE or
-ground == GROUND.OCEAN_SWELL or
-ground == GROUND.OCEAN_ROUGH or
-ground == GROUND.OCEAN_BRINEPOOL or
-ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-ground == GROUND.OCEAN_HAZARDOUS then
 
-if inst:HasTag("seagull")  and not plataforma then
-inst.AnimState:SetBank("seagull_water")
-end
+            if ground == GROUND.OCEAN_COASTAL or
+                ground == GROUND.OCEAN_COASTAL_SHORE or
+                ground == GROUND.OCEAN_SWELL or
+                ground == GROUND.OCEAN_ROUGH or
+                ground == GROUND.OCEAN_BRINEPOOL or
+                ground == GROUND.OCEAN_BRINEPOOL_SHORE or
+                ground == GROUND.OCEAN_HAZARDOUS then
+                if inst:HasTag("seagull") and not plataforma then
+                    inst.AnimState:SetBank("seagull_water")
+                end
 
-if inst:HasTag("cormorant") and not plataforma then
-inst.AnimState:SetBank("cormorant_water")
-end
-
-end					
+                if inst:HasTag("cormorant") and not plataforma then
+                    inst.AnimState:SetBank("cormorant_water")
+                end
+            end
             if pushanim then
                 if type(pushanim) == "string" then
                     inst.AnimState:PlayAnimation(pushanim)
@@ -117,10 +115,10 @@ end
         end,
     },
 
-    State{
+    State {
         name = "death",
         tags = { "busy" },
-        
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
@@ -129,7 +127,7 @@ end
         end,
     },
 
-    State{
+    State {
         name = "caw",
         tags = { "idle" },
 
@@ -146,7 +144,7 @@ end
         end,
     },
 
-    State{
+    State {
         name = "distress_pre",
         tags = { "busy" },
         onenter = function(inst)
@@ -161,7 +159,7 @@ end
         },
     },
 
-    State{
+    State {
         name = "distress",
         tags = { "busy" },
 
@@ -184,7 +182,7 @@ end
         },
     },
 
-    State{
+    State {
         name = "glide",
         tags = { "idle", "flight" },
 
@@ -208,7 +206,7 @@ end
                 inst.Physics:Teleport(x, 0, z)
                 inst.AnimState:PlayAnimation("land")
                 inst.DynamicShadow:Enable(true)
-                if inst.sounds.land then 
+                if inst.sounds.land then
                     inst.SoundEmitter:PlaySound(inst.sounds.land)
                 end
                 inst.sg:GoToState("idle", true)
@@ -220,7 +218,7 @@ end
         end,
     },
 
-    State{
+    State {
         name = "switch",
         tags = { "idle" },
 
@@ -237,7 +235,7 @@ end
         },
     },
 
-    State{
+    State {
         name = "peck",
 
         onenter = function(inst)
@@ -258,7 +256,7 @@ end
         end,
     },
 
-    State{
+    State {
         name = "flyaway",
         tags = { "flight", "busy" },
 
@@ -283,7 +281,7 @@ end
                 inst.Physics:SetMotorVel(math.random() * 4 - 2, math.random() * 5 + 15, math.random() * 4 - 2)
             else
                 inst.AnimState:PushAnimation("takeoff_diagonal_loop", true)
-                inst.Physics:SetMotorVel(math.random() * 8 + 8, math.random() * 5 + 15,math.random() * 4 - 2)
+                inst.Physics:SetMotorVel(math.random() * 8 + 8, math.random() * 5 + 15, math.random() * 4 - 2)
             end
         end,
 
@@ -295,11 +293,11 @@ end
         },
     },
 
-    State{
+    State {
         name = "hop",
         tags = { "moving", "canrotate", "hopping" },
 
-        onenter = function(inst) 
+        onenter = function(inst)
             inst.AnimState:PlayAnimation("hop")
             inst.Physics:SetMotorVel(5, 0, 0)
         end,
@@ -313,14 +311,13 @@ end
 
         events =
         {
-            EventHandler("animover", function(inst)	
-		
+            EventHandler("animover", function(inst)
                 inst.sg:GoToState("idle")
             end),
         },
     },
 
-    State{
+    State {
         name = "hit",
         tags = { "busy" },
 
@@ -337,12 +334,13 @@ end
         events =
         {
             EventHandler("animover", function(inst)
-                inst.sg:GoToState(inst.components.burnable ~= nil and inst.components.burnable:IsBurning() and "distress_pre" or "idle")
+                inst.sg:GoToState(inst.components.burnable ~= nil and inst.components.burnable:IsBurning() and
+                "distress_pre" or "idle")
             end),
         },
     },
 
-    State{
+    State {
         name = "fall",
         tags = { "busy" },
 
@@ -362,7 +360,7 @@ end
         end,
     },
 
-    State{
+    State {
         name = "trapped",
         tags = { "busy" },
 
@@ -377,11 +375,11 @@ end
         end,
     },
 
-    State{
+    State {
         name = "stunned",
         tags = { "busy" },
 
-        onenter = function(inst) 
+        onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("stunned_loop", true)
             inst.sg:SetTimeout(GetRandomWithVariance(6, 2))
@@ -404,5 +402,5 @@ end
 
 CommonStates.AddSleepStates(states)
 CommonStates.AddFrozenStates(states)
-    
+
 return StateGraph("birdsw", states, events, "glide")

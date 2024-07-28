@@ -68,7 +68,7 @@ local function sapling_fn(build, anim, growprefab, tag, fireproof, overrideloot)
         inst:AddComponent("inspectable")
 
         inst:AddComponent("lootdropper")
-        inst.components.lootdropper:SetLoot(overrideloot or {"twigs"})
+        inst.components.lootdropper:SetLoot(overrideloot or { "twigs" })
 
         inst:AddComponent("workable")
         inst.components.workable:SetWorkAction(ACTIONS.DIG)
@@ -91,4 +91,6 @@ local function sapling_fn(build, anim, growprefab, tag, fireproof, overrideloot)
     return fn
 end
 
-return Prefab("cottontree_sapling", sapling_fn("sugarwoodtree_cone", "idle_planted", "quagmire_sugarwoodtree_small", "sugarwood", true), pinecone_assets, pinecone_prefabs)
+return Prefab("cottontree_sapling",
+    sapling_fn("sugarwoodtree_cone", "idle_planted", "quagmire_sugarwoodtree_small", "sugarwood", true), pinecone_assets,
+    pinecone_prefabs)

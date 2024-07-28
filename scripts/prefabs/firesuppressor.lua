@@ -67,7 +67,7 @@ local function TurnOff(inst, instant)
     inst.on = false
     inst.components.firedetector:Deactivate()
 
-    if not inst:HasTag("fueldepleted") then 
+    if not inst:HasTag("fueldepleted") then
         local randomizedStartTime = POPULATING
         inst:DoTaskInTime(0, inst.components.firedetector:ActivateEmergencyMode(randomizedStartTime)) -- this can be called from onload, so make sure everything is set up first
     end
@@ -79,14 +79,17 @@ local function TurnOff(inst, instant)
 end
 
 local function TurnOn(inst, instant)
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then
-local fx = SpawnPrefab("shock_machines_fx")
-if fx then local pt = inst:GetPosition() fx.Transform:SetPosition(pt.x, pt.y, pt.z) end 
-if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-inst.on = false
-return 
-end
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        local fx = SpawnPrefab("shock_machines_fx")
+        if fx then
+            local pt = inst:GetPosition()
+            fx.Transform:SetPosition(pt.x, pt.y, pt.z)
+        end
+        if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
+        inst.on = false
+        return
+    end
     inst.on = true
     local isemergency = inst.components.firedetector:IsEmergency()
     if not isemergency then
@@ -95,18 +98,24 @@ end
         SetWarningLevelLight(inst, 0)
     end
     inst.components.fueled:StartConsuming()
-    inst.sg:GoToState(instant and "idle_on" or (inst.sg:HasStateTag("light") and "turn_on_light" or "turn_on"), isemergency == true--[[must not be nil]])
+    inst.sg:GoToState(instant and "idle_on" or (inst.sg:HasStateTag("light") and "turn_on_light" or "turn_on"),
+        isemergency == true --[[must not be nil]])
 end
 
 --Called from stategraph
 local function LaunchProjectile(inst, targetpos)
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then 
-local fx = SpawnPrefab("shock_machines_fx")
-if fx then local pt = inst:GetPosition() fx.Transform:SetPosition(pt.x, pt.y, pt.z) end 
-if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-inst.on = false
-TurnOff(inst) return end
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        local fx = SpawnPrefab("shock_machines_fx")
+        if fx then
+            local pt = inst:GetPosition()
+            fx.Transform:SetPosition(pt.x, pt.y, pt.z)
+        end
+        if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
+        inst.on = false
+        TurnOff(inst)
+        return
+    end
     local x, y, z = inst.Transform:GetWorldPosition()
 
     local projectile = SpawnPrefab("snowball")
@@ -161,7 +170,7 @@ local function OnFuelEmpty(inst)
 end
 
 local function OnAddFuel(inst)
-	inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/machine_fuel")
+    inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/machine_fuel")
     if inst.on == false then
         inst.components.machine:TurnOn()
     end
@@ -204,12 +213,12 @@ end
 
 local function getstatus(inst, viewer)
     --if inst.on then
-        return inst.components.fueled ~= nil
-            and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= .25
-            and "LOWFUEL"
-            or "ON"
+    return inst.components.fueled ~= nil
+        and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= .25
+        and "LOWFUEL"
+        or "ON"
     --else
-        --return "OFF"
+    --return "OFF"
     --end
 end
 
@@ -381,7 +390,7 @@ local function fn()
     inst.LaunchProjectile = LaunchProjectile
     inst:SetStateGraph("SGfiresuppressor")
 
-    inst.OnSave = onsave 
+    inst.OnSave = onsave
     inst.OnLoad = onload
     --inst.OnLoadPostPass = OnLoadPostPass
     inst.OnEntitySleep = OnEntitySleep
@@ -495,4 +504,5 @@ end
 
 return Prefab("firesuppressor", fn, assets, prefabs),
     Prefab("firesuppressor_glow", glow_fn, glow_assets),
-    MakePlacer("firesuppressor_placer", "firefighter_placement", "firefighter_placement", "idle", true, nil, nil, PLACER_SCALE, nil, nil, placer_postinit_fn)
+    MakePlacer("firesuppressor_placer", "firefighter_placement", "firefighter_placement", "idle", true, nil, nil,
+        PLACER_SCALE, nil, nil, placer_postinit_fn)

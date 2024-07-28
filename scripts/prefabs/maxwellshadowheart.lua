@@ -47,7 +47,7 @@ local function fn()
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem:SetOnDroppedFn(ondropped)
     inst.components.inventoryitem:SetOnPutInInventoryFn(onpickup)
-	inst.components.inventoryitem.imagename = "shadowheart"
+    inst.components.inventoryitem.imagename = "shadowheart"
 
     inst:AddComponent("inspectable")
     inst:AddComponent("tradable")

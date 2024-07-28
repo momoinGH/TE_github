@@ -15,9 +15,9 @@ local prefabs =
     "poop",
 }
 
-local loot_summer = {"meat","meat","meat","meat","meat","beefalowool","beefalowool","beefalowool"}
-local loot_winter = {"meat","meat","meat","meat","meat","beefalowool","beefalowool","beefalowool"}
-local loot_fire = {"meat","meat","meat","meat","meat","beefalowool","beefalowool","beefalowool"}
+local loot_summer = { "meat", "meat", "meat", "meat", "meat", "beefalowool", "beefalowool", "beefalowool" }
+local loot_winter = { "meat", "meat", "meat", "meat", "meat", "beefalowool", "beefalowool", "beefalowool" }
+local loot_fire = { "meat", "meat", "meat", "meat", "meat", "beefalowool", "beefalowool", "beefalowool" }
 
 local WAKE_TO_RUN_DISTANCE = 10
 local SLEEP_NEAR_ENEMY_DISTANCE = 14
@@ -69,17 +69,17 @@ local function create_base(build)
     inst:AddTag("animal")
     inst:AddTag("largecreature")
     inst:AddTag("houndfriend")
- 	inst:AddTag("walrus")		
+    inst:AddTag("walrus")
 
     inst.AnimState:SetBank("koalefant")
     inst.AnimState:SetBuild("koalefant_mamoth_build")
     inst.AnimState:PlayAnimation("idle_loop", true)
-	
---	inst.AnimState:OverrideSymbol("beefalo_eye", "koalefant_mamoth_build", "beefalo_eye")
---	inst.AnimState:OverrideSymbol("beefalo_headbase", "koalefant_mamoth_build", "beefalo_headbase")
---	inst.AnimState:OverrideSymbol("beefalo_body", "koalefant_mamoth_build", "beefalo_body")
---	inst.AnimState:OverrideSymbol("beefalo_facebase", "koalefant_mamoth_build", "beefalo_facebase")		
-	
+
+    --	inst.AnimState:OverrideSymbol("beefalo_eye", "koalefant_mamoth_build", "beefalo_eye")
+    --	inst.AnimState:OverrideSymbol("beefalo_headbase", "koalefant_mamoth_build", "beefalo_headbase")
+    --	inst.AnimState:OverrideSymbol("beefalo_body", "koalefant_mamoth_build", "beefalo_body")
+    --	inst.AnimState:OverrideSymbol("beefalo_facebase", "koalefant_mamoth_build", "beefalo_facebase")		
+
 
     inst.entity:SetPristine()
 

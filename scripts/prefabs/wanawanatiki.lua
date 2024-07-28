@@ -12,8 +12,8 @@ local assets =
     Asset("ANIM", "anim/werepig_actions.zip"),
     Asset("ANIM", "anim/pig_token.zip"),
     Asset("SOUND", "sound/pig.fsb"),
-	Asset("ANIM", "anim/wanawana_build.zip"),	
-	Asset("ANIM", "anim/hat_peagawkfeather.zip"),
+    Asset("ANIM", "anim/wanawana_build.zip"),
+    Asset("ANIM", "anim/hat_peagawkfeather.zip"),
 }
 
 local PIG_TOKEN_PREFAB = "pig_token"
@@ -33,8 +33,8 @@ local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
 
 local function GetPigToken(inst)
-	local token = next(inst.components.inventory:GetItemByName(PIG_TOKEN_PREFAB, 1))
-	return token
+    local token = next(inst.components.inventory:GetItemByName(PIG_TOKEN_PREFAB, 1))
+    return token
 end
 
 local function ontalk(inst, script)
@@ -54,7 +54,8 @@ local function ShouldAcceptItem(inst, item)
     elseif inst.components.eater:CanEat(item) then
         local foodtype = item.components.edible.foodtype
         if foodtype == FOODTYPE.MEAT or foodtype == FOODTYPE.HORRIBLE then
-            return inst.components.follower.leader == nil or inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
+            return inst.components.follower.leader == nil or
+            inst.components.follower:GetLoyaltyPercent() <= TUNING.PIG_FULL_LOYALTY_PERCENT
         elseif foodtype == FOODTYPE.VEGGIE or foodtype == FOODTYPE.RAW then
             local last_eat_time = inst.components.eater:TimeSinceLastEating()
             return (last_eat_time == nil or
@@ -70,14 +71,14 @@ local function OnGetItemFromPlayer(inst, giver, item)
     --I eat food
     if item.components.edible ~= nil then
         --meat makes us friends (unless I'm a guard)
-        if (    item.components.edible.foodtype == FOODTYPE.MEAT or
+        if (item.components.edible.foodtype == FOODTYPE.MEAT or
                 item.components.edible.foodtype == FOODTYPE.HORRIBLE
             ) and
             item.components.inventoryitem ~= nil and
-            (   --make sure it didn't drop due to pockets full
+            ( --make sure it didn't drop due to pockets full
                 item.components.inventoryitem:GetGrandOwner() == inst or
                 --could be merged into a stack
-                (   not item:IsValid() and
+                (not item:IsValid() and
                     inst.components.inventory:FindItem(function(obj)
                         return obj.prefab == item.prefab
                             and obj.components.stackable ~= nil
@@ -86,14 +87,14 @@ local function OnGetItemFromPlayer(inst, giver, item)
             ) then
             if inst.components.combat:TargetIs(giver) then
                 inst.components.combat:SetTarget(nil)
-            elseif giver.components.leader ~= nil and not (inst:HasTag("guard") or giver:HasTag("monster") or 
-                   giver:HasTag("merm") or (giver.components.inventory and giver.components.inventory:EquipHasTag("merm")) ) then
-
-				if giver.components.minigame_participator == nil then
-	                giver:PushEvent("makefriend")
-	                giver.components.leader:AddFollower(inst)
-				end
-                inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() * TUNING.PIG_LOYALTY_PER_HUNGER)
+            elseif giver.components.leader ~= nil and not (inst:HasTag("guard") or giver:HasTag("monster") or
+                    giver:HasTag("merm") or (giver.components.inventory and giver.components.inventory:EquipHasTag("merm"))) then
+                if giver.components.minigame_participator == nil then
+                    giver:PushEvent("makefriend")
+                    giver.components.leader:AddFollower(inst)
+                end
+                inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() *
+                TUNING.PIG_LOYALTY_PER_HUNGER)
                 inst.components.follower.maxfollowtime =
                     giver:HasTag("polite")
                     and TUNING.PIG_LOYALTY_MAXTIME + TUNING.PIG_LOYALTY_POLITENESS_MAXTIME_BONUS
@@ -138,7 +139,8 @@ end
 
 local function OnAttackedByDecidRoot(inst, attacker)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, { "_combat", "_health", "pig" }, { "werepig", "guard", "INLIMBO" })
+    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, { "_combat", "_health", "pig" },
+        { "werepig", "guard", "INLIMBO" })
     local num_helpers = 0
     for i, v in ipairs(ents) do
         if v ~= inst and not v.components.health:IsDead() then
@@ -172,7 +174,7 @@ local function OnAttacked(inst, data)
     local attacker = data.attacker
     inst:ClearBufferedAction()
 
-    if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then 
+    if attacker.prefab == "deciduous_root" and attacker.owner ~= nil then
         OnAttackedByDecidRoot(inst, attacker.owner)
     elseif attacker.prefab ~= "deciduous_root" and not attacker:HasTag("pigelite") then
         inst.components.combat:SetTarget(attacker)
@@ -180,7 +182,8 @@ local function OnAttacked(inst, data)
         if inst:HasTag("werepig") then
             inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, IsWerePig, MAX_TARGET_SHARES)
         elseif inst:HasTag("guard") then
-            inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, attacker:HasTag("pig") and IsGuardPig or IsPig, MAX_TARGET_SHARES)
+            inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST,
+                attacker:HasTag("pig") and IsGuardPig or IsPig, MAX_TARGET_SHARES)
         elseif not (attacker:HasTag("pig") and attacker:HasTag("guard")) then
             inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, IsNonWerePig, MAX_TARGET_SHARES)
         end
@@ -197,31 +200,31 @@ local builds = { "pig_build", "pigspotted_build" }
 local guardbuilds = { "wanawana_build" }
 
 local function NormalRetargetFn(inst)
-	local exclude_tags = { "playerghost", "INLIMBO", "tiki" }
-	if inst.components.follower.leader ~= nil then
-		table.insert(exclude_tags, "abigail")
-	end
-	if inst.components.minigame_spectator ~= nil then
-		table.insert(exclude_tags, "player") -- prevent spectators from auto-targeting webber
-	end
+    local exclude_tags = { "playerghost", "INLIMBO", "tiki" }
+    if inst.components.follower.leader ~= nil then
+        table.insert(exclude_tags, "abigail")
+    end
+    if inst.components.minigame_spectator ~= nil then
+        table.insert(exclude_tags, "player") -- prevent spectators from auto-targeting webber
+    end
 
-    local must_tags = {"monster"}
+    local must_tags = { "monster" }
     if not inst.components.inventory:EquipHasTag("merm") then
         table.insert(must_tags, "merm")
     end
 
     return not inst:IsInLimbo()
         and FindEntity(
-                inst,
-                TUNING.PIG_TARGET_DIST,
-                function(guy)
-                    return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
-                        and inst.components.combat:CanTarget(guy)
-                end,
-                { "_combat" }, -- see entityreplica.lua
-                exclude_tags,
-                must_tags
-            )
+            inst,
+            TUNING.PIG_TARGET_DIST,
+            function(guy)
+                return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
+                    and inst.components.combat:CanTarget(guy)
+            end,
+            { "_combat" },     -- see entityreplica.lua
+            exclude_tags,
+            must_tags
+        )
         or nil
 end
 
@@ -248,47 +251,48 @@ local function SuggestTreeTarget(inst, data)
 end
 
 local function OnItemGet(inst, data)
-	if data.item ~= nil and data.item.prefab == PIG_TOKEN_PREFAB then
+    if data.item ~= nil and data.item.prefab == PIG_TOKEN_PREFAB then
         inst.AnimState:OverrideSymbol("pig_belt", "pig_token", "pig_belt")
-		--inst.AnimState:Show("belt")
-	end
+        --inst.AnimState:Show("belt")
+    end
 end
 
 local function OnItemLose(inst, data)
-	if not inst.components.inventory:Has(PIG_TOKEN_PREFAB, 1) then
-		inst.AnimState:ClearOverrideSymbol("pig_belt")
-		--inst.AnimState:Hide("belt")
-	end
+    if not inst.components.inventory:Has(PIG_TOKEN_PREFAB, 1) then
+        inst.AnimState:ClearOverrideSymbol("pig_belt")
+        --inst.AnimState:Hide("belt")
+    end
 end
 
 local function SetupPigToken(inst)
-	if not IsSpecialEventActive(SPECIAL_EVENTS.YOTP) then
-		return -- todo: remove this once post-yotp gameplay is done
-	end
+    if not IsSpecialEventActive(SPECIAL_EVENTS.YOTP) then
+        return -- todo: remove this once post-yotp gameplay is done
+    end
 
-	if not inst._pigtokeninitialized then
-		inst._pigtokeninitialized = true
-		if math.random() <= (IsSpecialEventActive(SPECIAL_EVENTS.YOTP) and TUNING.PIG_TOKEN_CHANCE_YOTP or TUNING.PIG_TOKEN_CHANCE) then
-			inst.components.inventory:GiveItem(SpawnPrefab(PIG_TOKEN_PREFAB))
-		end
-	end
+    if not inst._pigtokeninitialized then
+        inst._pigtokeninitialized = true
+        if math.random() <= (IsSpecialEventActive(SPECIAL_EVENTS.YOTP) and TUNING.PIG_TOKEN_CHANCE_YOTP or TUNING.PIG_TOKEN_CHANCE) then
+            inst.components.inventory:GiveItem(SpawnPrefab(PIG_TOKEN_PREFAB))
+        end
+    end
 end
 
 local function ReplacePigToken(inst)
-	if not IsSpecialEventActive(SPECIAL_EVENTS.YOTP) then
-		return -- todo: remove this once post-yotp gameplay is done
-	end
+    if not IsSpecialEventActive(SPECIAL_EVENTS.YOTP) then
+        return -- todo: remove this once post-yotp gameplay is done
+    end
 
-	if inst._pigtokeninitialized then
-		local item = GetPigToken(inst)
-		local should_get_item = math.random() <= (IsSpecialEventActive(SPECIAL_EVENTS.YOTP) and TUNING.PIG_TOKEN_CHANCE_YOTP or TUNING.PIG_TOKEN_CHANCE)
-		if item ~= nil and not should_get_item then
-			inst.components.inventory:RemoveItem(item, true)
-			item:Remove()
-		elseif item == nil and should_get_item then
-			inst.components.inventory:GiveItem(SpawnPrefab(PIG_TOKEN_PREFAB))
-		end
-	end
+    if inst._pigtokeninitialized then
+        local item = GetPigToken(inst)
+        local should_get_item = math.random() <=
+        (IsSpecialEventActive(SPECIAL_EVENTS.YOTP) and TUNING.PIG_TOKEN_CHANCE_YOTP or TUNING.PIG_TOKEN_CHANCE)
+        if item ~= nil and not should_get_item then
+            inst.components.inventory:RemoveItem(item, true)
+            item:Remove()
+        elseif item == nil and should_get_item then
+            inst.components.inventory:GiveItem(SpawnPrefab(PIG_TOKEN_PREFAB))
+        end
+    end
 end
 
 local function SetNormalPig(inst)
@@ -333,7 +337,8 @@ local function GuardRetargetFn(inst)
         inst
 
     if not defenseTarget.happy then
-        local invader = FindEntity(defenseTarget, SpringCombatMod(TUNING.PIG_GUARD_TARGET_DIST), nil, { "character" }, { "guard", "INLIMBO" , "tiki"})
+        local invader = FindEntity(defenseTarget, SpringCombatMod(TUNING.PIG_GUARD_TARGET_DIST), nil, { "character" },
+            { "guard", "INLIMBO", "tiki" })
         if invader ~= nil and
             not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(invader)) and
             not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(invader)) then
@@ -357,7 +362,7 @@ local function GuardRetargetFn(inst)
         end
     end
 
-    local must_tags = {"monster"}
+    local must_tags = { "monster" }
     if not inst.components.inventory:EquipHasTag("merm") then
         table.insert(must_tags, "merm")
     end
@@ -378,10 +383,10 @@ local function GuardKeepTargetFn(inst, target)
     end
 
     local defendDist = not TheWorld.state.isday
-                    and home.components.burnable ~= nil
-                    and home.components.burnable:IsBurning()
-                    and home.components.burnable:GetLargestLightRadius()
-                    or SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
+        and home.components.burnable ~= nil
+        and home.components.burnable:IsBurning()
+        and home.components.burnable:GetLargestLightRadius()
+        or SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
     return target:IsNear(home, defendDist) and inst:IsNear(home, defendDist)
 end
 
@@ -398,7 +403,7 @@ local guardbrain = require "brains/pigguardbrain"
 local function SetGuardPig(inst)
     inst:RemoveTag("werepig")
     inst:AddTag("guard")
-	inst:AddTag("tiki")	
+    inst:AddTag("tiki")
     inst:SetBrain(guardbrain)
     inst:SetStateGraph("SGpig")
     inst.AnimState:SetBuild(inst.build)
@@ -442,9 +447,9 @@ end
 
 local function WerepigKeepTargetFn(inst, target)
     return inst.components.combat:CanTarget(target)
-           and not target:HasTag("werepig")
-           and not target:HasTag("wereplayer")
-           and not (target.sg ~= nil and target.sg:HasStateTag("transform"))
+        and not target:HasTag("werepig")
+        and not target:HasTag("wereplayer")
+        and not (target.sg ~= nil and target.sg:HasStateTag("transform"))
 end
 
 local function IsNearMoonBase(inst, dist)
@@ -455,15 +460,15 @@ end
 local function MoonpigRetargetFn(inst)
     return IsNearMoonBase(inst, TUNING.MOONPIG_AGGRO_DIST)
         and FindEntity(
-                inst,
-                TUNING.PIG_TARGET_DIST,
-                function(guy)
-                    return inst.components.combat:CanTarget(guy)
-                        and not (guy.sg ~= nil and guy.sg:HasStateTag("transform"))
-                end,
-                { "_combat" }, --See entityreplica.lua (re: "_combat" tag)
-                { "werepig", "alwaysblock", "wereplayer", "moonbeast" }
-            )
+            inst,
+            TUNING.PIG_TARGET_DIST,
+            function(guy)
+                return inst.components.combat:CanTarget(guy)
+                    and not (guy.sg ~= nil and guy.sg:HasStateTag("transform"))
+            end,
+            { "_combat" },     --See entityreplica.lua (re: "_combat" tag)
+            { "werepig", "alwaysblock", "wereplayer", "moonbeast" }
+        )
         or nil
 end
 
@@ -494,8 +499,8 @@ local function SetWerePig(inst)
 
     inst.components.combat:SetDefaultDamage(TUNING.WEREPIG_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNING.WEREPIG_ATTACK_PERIOD)
-    inst.components.locomotor.runspeed = TUNING.WEREPIG_RUN_SPEED 
-    inst.components.locomotor.walkspeed = TUNING.WEREPIG_WALK_SPEED 
+    inst.components.locomotor.runspeed = TUNING.WEREPIG_RUN_SPEED
+    inst.components.locomotor.walkspeed = TUNING.WEREPIG_WALK_SPEED
 
     inst.components.sleeper:SetSleepTest(WerepigSleepTest)
     inst.components.sleeper:SetWakeTest(WerepigWakeTest)
@@ -526,7 +531,7 @@ end
 
 local function OnSave(inst, data)
     data.build = inst.build
-	data._pigtokeninitialized = inst._pigtokeninitialized
+    data._pigtokeninitialized = inst._pigtokeninitialized
 end
 
 local function OnLoad(inst, data)
@@ -535,7 +540,7 @@ local function OnLoad(inst, data)
         if not inst.components.werebeast:IsInWereState() then
             inst.AnimState:SetBuild(inst.build)
         end
-		inst._pigtokeninitialized = data._pigtokeninitialized
+        inst._pigtokeninitialized = data._pigtokeninitialized
     end
 end
 
@@ -565,7 +570,7 @@ local function common(moonbeast)
 
     inst:AddTag("character")
     inst:AddTag("pig")
-	inst:AddTag("tiki")	
+    inst:AddTag("tiki")
     inst:AddTag("scarytoprey")
     inst.AnimState:SetBank("pigman")
     inst.AnimState:PlayAnimation("idle_loop", true)
@@ -609,14 +614,14 @@ local function common(moonbeast)
     if not moonbeast then
         inst.components.talker.ontalk = ontalk
 
-		inst._pig_token_prefab = PIG_TOKEN_PREFAB
-		inst:ListenForEvent("onvacatehome", ReplacePigToken)
-		inst:ListenForEvent("itemget", OnItemGet)
-		inst:ListenForEvent("itemlose", OnItemLose)
+        inst._pig_token_prefab = PIG_TOKEN_PREFAB
+        inst:ListenForEvent("onvacatehome", ReplacePigToken)
+        inst:ListenForEvent("itemget", OnItemGet)
+        inst:ListenForEvent("itemlose", OnItemLose)
     end
 
-    inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED --5
+    inst:AddComponent("locomotor")                              -- locomotor must be constructed before the stategraph
+    inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED   --5
     inst.components.locomotor.walkspeed = TUNING.PIG_WALK_SPEED --3
 
     inst:AddComponent("bloomer")
@@ -674,7 +679,7 @@ local function common(moonbeast)
         inst.components.trader.onrefuse = OnRefuseItem
         inst.components.trader.deleteitemonaccept = false
     end
-    
+
     ------------------------------------------
 
     inst:AddComponent("sanityaura")
@@ -700,7 +705,7 @@ local function common(moonbeast)
 
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("newcombattarget", OnNewTarget)
-	
+
     return inst
 end
 
@@ -722,13 +727,13 @@ local function normal()
     inst.components.werebeast:SetOnNormalFn(SetNormalPig)
     SetNormalPig(inst)
 
-	inst:DoTaskInTime(0, SetupPigToken)
+    inst:DoTaskInTime(0, SetupPigToken)
     return inst
 end
 
 local function guard()
     local inst = common(false)
-	inst:AddTag("tiki")
+    inst:AddTag("tiki")
 
     if not TheWorld.ismastersim then
         return inst
@@ -742,9 +747,9 @@ local function guard()
     inst.AnimState:SetBuild(inst.build)
     inst.components.werebeast:SetOnNormalFn(SetGuardPig)
     SetGuardPig(inst)
-	
-	inst.AnimState:OverrideSymbol("swap_hat", "peagawkfeatherhat", "swap_hat")	
-	
+
+    inst.AnimState:OverrideSymbol("swap_hat", "peagawkfeatherhat", "swap_hat")
+
     return inst
 end
 
@@ -800,8 +805,8 @@ local function moon()
 
     inst.components.combat:SetDefaultDamage(TUNING.WEREPIG_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNING.WEREPIG_ATTACK_PERIOD)
-    inst.components.locomotor.runspeed = TUNING.WEREPIG_RUN_SPEED 
-    inst.components.locomotor.walkspeed = TUNING.WEREPIG_WALK_SPEED 
+    inst.components.locomotor.runspeed = TUNING.WEREPIG_RUN_SPEED
+    inst.components.locomotor.walkspeed = TUNING.WEREPIG_WALK_SPEED
 
     inst.components.sleeper:SetSleepTest(WerepigSleepTest)
     inst.components.sleeper:SetWakeTest(WerepigWakeTest)

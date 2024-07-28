@@ -1,6 +1,6 @@
 require("stategraphs/commonstates")
 
-local actionhandlers = 
+local actionhandlers =
 {
 	ActionHandler(ACTIONS.EAT, "eat_loop"),
 	ActionHandler(ACTIONS.PICKUP, "action"),
@@ -8,14 +8,14 @@ local actionhandlers =
 	ActionHandler(ACTIONS.PICK, "action"),
 }
 
-local events=
+local events =
 {
 	CommonHandlers.OnSleep(),
 	CommonHandlers.OnFreeze(),
 	CommonHandlers.OnAttacked(),
 	CommonHandlers.OnDeath(),
-    CommonHandlers.OnHop(),		
-	CommonHandlers.OnLocomote(false,true),
+	CommonHandlers.OnHop(),
+	CommonHandlers.OnLocomote(false, true),
 }
 
 local function ShouldStopSpin(inst)
@@ -23,42 +23,42 @@ local function ShouldStopSpin(inst)
 end
 
 local function LightningStrike(inst)
-	local rad = math.random(0,3)
+	local rad = math.random(0, 3)
 	local angle = math.random() * 2 * PI
 	local offset = Vector3(rad * math.cos(angle), 0, -rad * math.sin(angle))
 
 	local pos = inst:GetPosition() + offset
 
---	GetWorld().components.seasonmanager:DoLightningStrike(pos)
---	GetSeasonManager():StartPrecip()
+	--	GetWorld().components.seasonmanager:DoLightningStrike(pos)
+	--	GetSeasonManager():StartPrecip()
 end
 
-local states=
-{   
+local states =
+{
 
-	State{
-		
+	State {
+
 		name = "idle",
-		tags = {"idle", "canrotate"},
+		tags = { "idle", "canrotate" },
 		onenter = function(inst, playanim)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("idle")
 			if inst.sounds.idle then
 				inst.SoundEmitter:PlaySound(inst.sounds.idle)
 			end
-		end,        
-	  
-		events=
+		end,
+
+		events =
 		{
-			EventHandler("animover", function(inst) 
-				inst.sg:GoToState("idle") 
+			EventHandler("animover", function(inst)
+				inst.sg:GoToState("idle")
 			end),
 		},
 	},
-	
-	State{
+
+	State {
 		name = "idle_water",
-		tags = {"busy", "invisible"},
+		tags = { "busy", "invisible" },
 		onenter = function(inst)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("idle")
@@ -69,28 +69,28 @@ local states=
 		onexit = function(inst)
 			inst:RemoveTag("notarget")
 		end,
-	  
-		events=
+
+		events =
 		{
 			EventHandler("animover", function(inst)
 				inst.sg:GoToState("idle_water")
 			end),
 		},
-	},	
+	},
 
-	State{
+	State {
 		name = "action",
-		tags = {"busy"},
-		
+		tags = { "busy" },
+
 		onenter = function(inst)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("eat", false)
-			inst.sg:SetTimeout(math.random()*2+1)
+			inst.sg:SetTimeout(math.random() * 2 + 1)
 		end,
-		
-		timeline=
+
+		timeline =
 		{
-			TimeEvent(10*FRAMES, function(inst)
+			TimeEvent(10 * FRAMES, function(inst)
 				inst:PerformBufferedAction()
 				inst.sg:RemoveStateTag("busy")
 				inst.brain:ForceUpdate()
@@ -104,14 +104,14 @@ local states=
 		},
 
 		ontimeout = function(inst)
-			inst.sg:GoToState("idle") 
+			inst.sg:GoToState("idle")
 		end,
 	},
 
-	State{
+	State {
 		name = "eat_loop",
-		tags = {"busy"},
-		
+		tags = { "busy" },
+
 		onenter = function(inst)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("eat", false)
@@ -119,39 +119,38 @@ local states=
 
 		events =
 		{
-			EventHandler("animqueueover", function(inst) 
-				inst:PerformBufferedAction()  
-				inst.sg:GoToState("idle") 
+			EventHandler("animqueueover", function(inst)
+				inst:PerformBufferedAction()
+				inst.sg:GoToState("idle")
 			end)
 		},
 
-		timeline = 
+		timeline =
 		{
-			TimeEvent( 1*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.eat_pre) end),
-			TimeEvent(11*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.swallow) end),
+			TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.eat_pre) end),
+			TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.swallow) end),
 		},
 	},
 
-	State{
+	State {
 		name = "hatch",
-		tags = {"busy"},
-		
-		onenter = function(inst)
-			local angle = math.random()*2*PI
-			local speed = GetRandomWithVariance(3, 2)
-			inst.Physics:SetMotorVel(speed*math.cos(angle), 0, speed*math.sin(angle))
-			inst.AnimState:PlayAnimation("hatch")
---			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/doy_doy/hatch")
-			inst.SoundEmitter:PlaySound(inst.sounds.hatch)
+		tags = { "busy" },
 
+		onenter = function(inst)
+			local angle = math.random() * 2 * PI
+			local speed = GetRandomWithVariance(3, 2)
+			inst.Physics:SetMotorVel(speed * math.cos(angle), 0, speed * math.sin(angle))
+			inst.AnimState:PlayAnimation("hatch")
+			--			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/doy_doy/hatch")
+			inst.SoundEmitter:PlaySound(inst.sounds.hatch)
 		end,
 
 		timeline =
 		{
-			TimeEvent(20*FRAMES, function(inst) inst.Physics:SetMotorVel(0,0,0) end),
+			TimeEvent(20 * FRAMES, function(inst) inst.Physics:SetMotorVel(0, 0, 0) end),
 		},
-		
-		events=
+
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
@@ -160,15 +159,15 @@ local states=
 
 CommonStates.AddFrozenStates(states)
 CommonStates.AddWalkStates(states, {
-	walktimeline = 
-	{ 
-		TimeEvent(0*FRAMES, function(inst) 
+	walktimeline =
+	{
+		TimeEvent(0 * FRAMES, function(inst)
 			if inst:HasTag("baby") then
 				-- PlayFootstep(inst)
 				-- inst.components.locomotor:WalkForward()
 			end
 		end),
-		TimeEvent(1*FRAMES, function(inst)
+		TimeEvent(1 * FRAMES, function(inst)
 			if inst:HasTag("baby") then
 				-- inst.components.locomotor:RunForward()
 				inst.SoundEmitter:PlaySound(inst.sounds.jump)
@@ -177,34 +176,33 @@ CommonStates.AddWalkStates(states, {
 	}
 }, nil, true)
 CommonStates.AddCombatStates(states,
-{
-	attacktimeline = 
 	{
-		TimeEvent(20*FRAMES, function(inst)
-			inst.components.combat:DoAttack(inst.sg.statemem.target, nil, nil, "electric")
-		end),
-		TimeEvent(22*FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
-	},
+		attacktimeline =
+		{
+			TimeEvent(20 * FRAMES, function(inst)
+				inst.components.combat:DoAttack(inst.sg.statemem.target, nil, nil, "electric")
+			end),
+			TimeEvent(22 * FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
+		},
 
-	deathtimeline = 
+		deathtimeline =
+		{
+			TimeEvent(FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.death) end)
+		},
+	})
+CommonStates.AddSleepStates(states,
 	{
-		TimeEvent(FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.death) end)
-	},
-})
-CommonStates.AddSleepStates(states, 
-{
-	starttimeline =
-	{
-	},
-	sleeptimeline = 
-	{
-	},
-	waketimeline =
-	{
-	}
-})
+		starttimeline =
+		{
+		},
+		sleeptimeline =
+		{
+		},
+		waketimeline =
+		{
+		}
+	})
 
-CommonStates.AddHopStates(states, true, { pre = "walk_pre", loop = "walk_loop", pst = "walk_pst"})
-	
+CommonStates.AddHopStates(states, true, { pre = "walk_pre", loop = "walk_loop", pst = "walk_pst" })
+
 return StateGraph("doydoybaby", states, events, "idle", actionhandlers)
-

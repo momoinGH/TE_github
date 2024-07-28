@@ -10,7 +10,7 @@ local PeagawkBushBrain = Class(Brain, function(self, inst)
 end)
 
 local function TransformAction(inst)
-    local hunter = FindEntity(inst, SEE_PLAYER_DIST, nil, {'scarytoprey'}, {'notarget'} )
+    local hunter = FindEntity(inst, SEE_PLAYER_DIST, nil, { 'scarytoprey' }, { 'notarget' })
 
     if hunter == nil then
         return BufferedAction(inst, nil, ACTIONS.PEAGAWK_TRANSFORM)
@@ -18,12 +18,11 @@ local function TransformAction(inst)
 end
 
 function PeagawkBushBrain:OnStart()
-    
     local root = PriorityNode(
-    {
-        DoAction(self.inst, TransformAction, "Transform To Animal", true)
-    }, .25)
-    
+        {
+            DoAction(self.inst, TransformAction, "Transform To Animal", true)
+        }, .25)
+
     self.bt = BT(self.inst, root)
 end
 

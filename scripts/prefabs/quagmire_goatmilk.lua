@@ -1,6 +1,6 @@
 local assets =
 {
-    Asset("ANIM", "anim/quagmire_goatmilk.zip"),
+	Asset("ANIM", "anim/quagmire_goatmilk.zip"),
 }
 
 local function MakeMilk()
@@ -13,13 +13,13 @@ local function MakeMilk()
 
 		MakeInventoryPhysics(inst)
 		MakeInventoryFloatable(inst)
-		
+
 		inst.AnimState:SetBuild("quagmire_goatmilk")
 		inst.AnimState:SetBank("quagmire_goatmilk")
 		inst.AnimState:PlayAnimation("idle")
-		
+
 		inst:AddTag("catfood")
-		inst:AddTag("quagmire_stewable")		
+		inst:AddTag("quagmire_stewable")
 
 		inst.entity:SetPristine()
 
@@ -30,7 +30,7 @@ local function MakeMilk()
 		inst:AddComponent("edible")
 		inst.components.edible.healthvalue = TUNING.HEALING_SMALL
 		inst.components.edible.hungervalue = TUNING.CALORIES_MED
-		
+
 		inst:AddComponent("perishable")
 		inst.components.perishable:SetPerishTime(TUNING.PERISH_FASTISH)
 		inst.components.perishable:StartPerishing()
@@ -39,9 +39,9 @@ local function MakeMilk()
 		inst:AddComponent("tradable")
 
 		inst:AddComponent("inspectable")
-		
+
 		inst:AddComponent("inventoryitem")
-		
+
 		inst:AddComponent("stackable")
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
 
@@ -49,7 +49,7 @@ local function MakeMilk()
 
 		return inst
 	end
-	
+
 	return Prefab("quagmire_goatmilk", fn, assets, prefabs)
 end
 

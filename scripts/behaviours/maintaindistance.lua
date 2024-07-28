@@ -1,11 +1,12 @@
-MaintainDistance = Class(BehaviourNode, function(self, inst, find_avoidance_object_fn, min_distance, max_distance, on_within_distance_fn)
-    BehaviourNode._ctor(self, "MaintainDistance")
-    self.inst = inst
-    self.min_distance = min_distance or 6
-    self.max_distance = max_distance or 8
-    self.find_avoidance_object_fn = find_avoidance_object_fn
-    self.on_within_distance_fn = on_within_distance_fn
-end)
+MaintainDistance = Class(BehaviourNode,
+    function(self, inst, find_avoidance_object_fn, min_distance, max_distance, on_within_distance_fn)
+        BehaviourNode._ctor(self, "MaintainDistance")
+        self.inst = inst
+        self.min_distance = min_distance or 6
+        self.max_distance = max_distance or 8
+        self.find_avoidance_object_fn = find_avoidance_object_fn
+        self.on_within_distance_fn = on_within_distance_fn
+    end)
 
 function MaintainDistance:__tostring()
     return string.format("target %s", tostring(self.inst.components.combat.target))
@@ -22,7 +23,7 @@ function MaintainDistance:CheckDistance(distance_to_avoided_object_sq)
     if distance_to_avoided_object_sq > max_distance * max_distance then
         return false, self.max_distance
     elseif distance_to_avoided_object_sq < min_distance * min_distance then
-        return false, self.min_distance 
+        return false, self.min_distance
     else
         return true
     end
@@ -55,7 +56,8 @@ function MaintainDistance:Visit()
                 end
             else
                 local angle_to_avoided_object = self.inst:GetAngleToPoint(avoided_object_pos) * DEGREES
-                local offset_pos = Point(offset * math.cos(angle_to_avoided_object), 0, offset * math.sin(angle_to_avoided_object))
+                local offset_pos = Point(offset * math.cos(angle_to_avoided_object), 0,
+                    offset * math.sin(angle_to_avoided_object))
                 local target_pos = avoided_object_pos + offset_pos
                 self.inst.components.locomotor:GoToPoint(avoided_object_pos + offset_pos, nil, true)
             end

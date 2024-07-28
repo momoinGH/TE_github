@@ -9,7 +9,7 @@ local assets =
 
 local prefabs =
 {
-	
+
 }
 
 
@@ -19,9 +19,9 @@ local function dig_up_stump(inst, chopper)
 end
 
 local function attack(inst)
-    if inst.components.childspawner ~= nil then
-        inst.components.childspawner:ReleaseAllChildren()
-    end
+	if inst.components.childspawner ~= nil then
+		inst.components.childspawner:ReleaseAllChildren()
+	end
 end
 
 local function chop_down_burnt_tree(inst, chopper)
@@ -36,7 +36,7 @@ local function chop_down_burnt_tree(inst, chopper)
 	inst.components.lootdropper:DropLoot()
 end
 
-local burnt_highlight_override = {.5,.5,.5}
+local burnt_highlight_override = { .5, .5, .5 }
 local function OnBurnt(inst, imm)
 	local function changes()
 		if inst.components.burnable then
@@ -60,12 +60,12 @@ local function OnBurnt(inst, imm)
 	if imm then
 		changes()
 	else
-		inst:DoTaskInTime( 0.5, changes)
+		inst:DoTaskInTime(0.5, changes)
 	end
 	inst.AnimState:PlayAnimation("burnt_tall", true)
 	--inst.AnimState:SetRayTestOnBB(true);
 	inst:AddTag("burnt")
-    inst.MiniMapEntity:SetIcon("mangrove_burnt.png")
+	inst.MiniMapEntity:SetIcon("mangrove_burnt.png")
 	inst.highlight_override = burnt_highlight_override
 end
 
@@ -87,15 +87,15 @@ local function inspect_tree(inst)
 end
 
 local function OnIgnite(inst)
-    if inst.components.childspawner ~= nil then
-        inst.components.childspawner:ReleaseAllChildren()
-    end
+	if inst.components.childspawner ~= nil then
+		inst.components.childspawner:ReleaseAllChildren()
+	end
 end
 
 local function chop_tree(inst, chopper, chops)
-    if inst.components.childspawner ~= nil then
-        inst.components.childspawner:ReleaseAllChildren(chopper, "killerbee")
-    end
+	if inst.components.childspawner ~= nil then
+		inst.components.childspawner:ReleaseAllChildren(chopper, "killerbee")
+	end
 
 	if chopper and chopper.components.beaverness and chopper.isbeavermode and chopper.isbeavermode:value() then
 		inst.SoundEmitter:PlaySound("dontstarve/characters/woodie/beaver_chop_tree")
@@ -113,7 +113,7 @@ local function chop_down_tree(inst, chopper)
 	inst:RemoveComponent("propagator")
 	MakeSmallPropagator(inst)
 	inst:RemoveComponent("workable")
-    inst:RemoveComponent("childspawner")	
+	inst:RemoveComponent("childspawner")
 	inst:RemoveTag("shelter")
 	inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
 	local pt = Vector3(inst.Transform:GetWorldPosition())
@@ -139,7 +139,7 @@ local function chop_down_tree(inst, chopper)
 	inst.components.workable:SetWorkLeft(1)
 
 	inst:AddTag("stump")
-    inst.MiniMapEntity:SetIcon("mangrove_stump.png")	
+	inst.MiniMapEntity:SetIcon("mangrove_stump.png")
 	inst:AddTag("NOCLICK")
 	inst:DoTaskInTime(2, function() inst:RemoveTag("NOCLICK") end)
 end
@@ -161,7 +161,6 @@ local function onsave(inst, data)
 	if inst:HasTag("stump") then
 		data.stump = true
 	end
-
 end
 
 local function onload(inst, data)
@@ -199,7 +198,6 @@ local function OnEntitySleep(inst)
 end
 
 local function OnEntityWake(inst)
-
 	if not inst:HasTag("burnt") and not inst:HasTag("fire") then
 		if not inst.components.burnable then
 			if inst:HasTag("stump") then
@@ -229,17 +227,17 @@ local function OnEntityWake(inst)
 end
 
 local function SeasonalSpawnChanges(inst, season)
-    if inst.components.childspawner ~= nil then
-        if season == SEASONS.SPRING then
-            inst.components.childspawner:SetRegenPeriod(TUNING.BEEHIVE_REGEN_TIME / TUNING.SPRING_COMBAT_MOD)
-            inst.components.childspawner:SetSpawnPeriod(TUNING.BEEHIVE_RELEASE_TIME / TUNING.SPRING_COMBAT_MOD)
-            inst.components.childspawner:SetMaxChildren(TUNING.BEEHIVE_BEES * TUNING.SPRING_COMBAT_MOD)
-        else
-            inst.components.childspawner:SetRegenPeriod(TUNING.BEEHIVE_REGEN_TIME)
-            inst.components.childspawner:SetSpawnPeriod(TUNING.BEEHIVE_RELEASE_TIME)
-            inst.components.childspawner:SetMaxChildren(TUNING.BEEHIVE_BEES)
-        end
-    end
+	if inst.components.childspawner ~= nil then
+		if season == SEASONS.SPRING then
+			inst.components.childspawner:SetRegenPeriod(TUNING.BEEHIVE_REGEN_TIME / TUNING.SPRING_COMBAT_MOD)
+			inst.components.childspawner:SetSpawnPeriod(TUNING.BEEHIVE_RELEASE_TIME / TUNING.SPRING_COMBAT_MOD)
+			inst.components.childspawner:SetMaxChildren(TUNING.BEEHIVE_BEES * TUNING.SPRING_COMBAT_MOD)
+		else
+			inst.components.childspawner:SetRegenPeriod(TUNING.BEEHIVE_REGEN_TIME)
+			inst.components.childspawner:SetSpawnPeriod(TUNING.BEEHIVE_RELEASE_TIME)
+			inst.components.childspawner:SetMaxChildren(TUNING.BEEHIVE_BEES)
+		end
+	end
 end
 
 local function makefn(build, stage, data)
@@ -253,7 +251,7 @@ local function makefn(build, stage, data)
 
 		inst:SetPhysicsRadiusOverride(2.35)
 
-		MakeWaterObstaclePhysics(inst, 1.2, 2, 1.25)		
+		MakeWaterObstaclePhysics(inst, 1.2, 2, 1.25)
 
 		local minimap = inst.entity:AddMiniMapEntity()
 		minimap:SetIcon("tree_mangrovebee.png")
@@ -265,30 +263,30 @@ local function makefn(build, stage, data)
 		inst:AddTag("shelter")
 		inst:AddTag("gustable")
 		inst:AddTag("mudacamada")
-		inst:AddTag("ignorewalkableplatforms")	
-		inst:AddTag("plant")		
+		inst:AddTag("ignorewalkableplatforms")
+		inst:AddTag("plant")
 
 		anim:SetBuild("tree_mangrove_build")
-		inst.AnimState:OverrideSymbol("leaves", "tree_mangrovebee_build", "leaves")	
+		inst.AnimState:OverrideSymbol("leaves", "tree_mangrovebee_build", "leaves")
 		anim:SetBank("tree_mangrove")
 		local color = 0.5 + math.random() * 0.5
 		anim:SetMultColour(color, color, color, 1)
-		
-        inst:SetPrefabNameOverride("tree_mangrove")		
-		
-		PushSway(inst)		
-		
+
+		inst:SetPrefabNameOverride("tree_mangrove")
+
+		PushSway(inst)
+
 		inst.entity:SetPristine()
 
-   		if not TheWorld.ismastersim then
-        	return inst
-    	end
+		if not TheWorld.ismastersim then
+			return inst
+		end
 
 		-------------------
 		MakeLargeBurnable(inst)
 		inst.components.burnable:SetFXLevel(5)
 		inst.components.burnable:SetOnBurntFn(tree_burnt)
-		inst.components.burnable:SetOnIgniteFn(OnIgnite)		
+		inst.components.burnable:SetOnIgniteFn(OnIgnite)
 
 		MakeLargePropagator(inst)
 
@@ -302,7 +300,7 @@ local function makefn(build, stage, data)
 		inst.components.workable:SetWorkAction(ACTIONS.CHOP)
 		inst.components.workable:SetOnWorkCallback(chop_tree)
 		inst.components.workable:SetOnFinishCallback(chop_down_tree_leif)
-		inst.components.workable:SetWorkLeft(TUNING.EVERGREEN_CHOPS_TALL)		
+		inst.components.workable:SetWorkLeft(TUNING.EVERGREEN_CHOPS_TALL)
 
 
 
@@ -312,24 +310,24 @@ local function makefn(build, stage, data)
 
 
 
-    inst:AddComponent("childspawner")
-    inst.components.childspawner:SetRegenPeriod(TUNING.BEEHIVE_REGEN_TIME)
-    inst.components.childspawner:SetSpawnPeriod(TUNING.BEEHIVE_RELEASE_TIME)	
-    inst.components.childspawner.childname = "bee"
-    SeasonalSpawnChanges(inst, TheWorld.state.season)
-    inst:WatchWorldState("season", SeasonalSpawnChanges)
-    inst.components.childspawner.emergencychildname = "bee"
-	inst.components.childspawner.wateronly = true	
-    inst.components.childspawner.emergencychildrenperplayer = 1
-    inst.components.childspawner:SetMaxEmergencyChildren(TUNING.BEEHIVE_EMERGENCY_BEES)
-    inst.components.childspawner:SetEmergencyRadius(TUNING.BEEHIVE_EMERGENCY_RADIUS)
+		inst:AddComponent("childspawner")
+		inst.components.childspawner:SetRegenPeriod(TUNING.BEEHIVE_REGEN_TIME)
+		inst.components.childspawner:SetSpawnPeriod(TUNING.BEEHIVE_RELEASE_TIME)
+		inst.components.childspawner.childname = "bee"
+		SeasonalSpawnChanges(inst, TheWorld.state.season)
+		inst:WatchWorldState("season", SeasonalSpawnChanges)
+		inst.components.childspawner.emergencychildname = "bee"
+		inst.components.childspawner.wateronly = true
+		inst.components.childspawner.emergencychildrenperplayer = 1
+		inst.components.childspawner:SetMaxEmergencyChildren(TUNING.BEEHIVE_EMERGENCY_BEES)
+		inst.components.childspawner:SetEmergencyRadius(TUNING.BEEHIVE_EMERGENCY_RADIUS)
 
 		-------------------
 		inst:AddComponent("lootdropper")
-		inst.components.lootdropper:SetLoot({"log","log", "twigs", "honey", "honey", "honey", "honeycomb" })
+		inst.components.lootdropper:SetLoot({ "log", "log", "twigs", "honey", "honey", "honey", "honeycomb" })
 		---------------------
 		--PushSway(inst)
-		inst.AnimState:SetTime(math.random()*2)
+		inst.AnimState:SetTime(math.random() * 2)
 
 		---------------------
 
@@ -339,11 +337,11 @@ local function makefn(build, stage, data)
 		MakeSnowCovered(inst, .01)
 
 
-		if data =="burnt"  then
+		if data == "burnt" then
 			OnBurnt(inst)
 		end
 
-		if data =="stump"  then
+		if data == "stump" then
 			inst:RemoveComponent("burnable")
 			MakeSmallBurnable(inst)
 			inst:RemoveComponent("workable")
@@ -355,8 +353,8 @@ local function makefn(build, stage, data)
 			inst:AddTag("stump")
 			inst.MiniMapEntity:SetIcon("mangrove_stump.png")
 		end
-		
-		
+
+
 		inst.OnEntitySleep = OnEntitySleep
 		inst.OnEntityWake = OnEntityWake
 
@@ -371,5 +369,5 @@ local function tree(name, build, stage, data)
 end
 
 return tree("tree_mangrovebee", "normal", 0),
-		tree("mangrovetreebee_burnt", "normal", 0, "burnt"),
-		tree("mangrovetreebee_stump", "normal", 0, "stump")
+	tree("mangrovetreebee_burnt", "normal", 0, "burnt"),
+	tree("mangrovetreebee_stump", "normal", 0, "stump")

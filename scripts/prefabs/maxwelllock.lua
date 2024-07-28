@@ -2,14 +2,14 @@ local PopupDialogScreen = require "screens/popupdialog"
 
 local assets =
 {
-	Asset("ANIM", "anim/diviningrod.zip"),
+    Asset("ANIM", "anim/diviningrod.zip"),
     Asset("SOUND", "sound/common.fsb"),
     Asset("ANIM", "anim/diviningrod_maxwell.zip")
 }
 
-local prefabs = 
+local prefabs =
 {
---    "diviningrodstart",
+    --    "diviningrodstart",
 }
 
 local function OnUnlock(inst, key, doer)
@@ -21,23 +21,23 @@ local function OnLock(inst, doer)
 end
 
 local function fn(Sim)
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
+    local inst = CreateEntity()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
     local sound = inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
+    inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
-    
+
     anim:SetBank("diviningrod")
     anim:SetBuild("diviningrod_maxwell")
     anim:PlayAnimation("activate_loop", true)
- 
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
- 
+
     inst:AddComponent("inspectable")
 
     inst:AddTag("maxwelllock")
@@ -50,4 +50,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab( "common/maxwelllock", fn, assets, prefabs) 
+return Prefab("common/maxwelllock", fn, assets, prefabs)

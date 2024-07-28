@@ -7,17 +7,17 @@ local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-	inst.entity:AddAnimState()
+    inst.entity:AddAnimState()
     inst.entity:AddLight()
     inst.entity:AddNetwork()
-	
+
     inst:AddTag("FX")
-	
-	inst.AnimState:SetBank("wind_flakes")
+
+    inst.AnimState:SetBank("wind_flakes")
     inst.AnimState:SetBuild("wind_flakes")
     inst.AnimState:SetRayTestOnBB(true)
-	
-	inst.AnimState:PlayAnimation("pre", false)
+
+    inst.AnimState:PlayAnimation("pre", false)
     inst.AnimState:PushAnimation("loop", true)
 
     inst.Light:SetIntensity(0.75)

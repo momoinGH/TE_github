@@ -9,7 +9,7 @@ local prefabs =
     "nightmarefuel",
 }
 
-local names = {"f1","f2","f3","f4","f5","f6","f7","f8"}
+local names = { "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8" }
 
 local function onsave(inst, data)
     data.anim = inst.animname
@@ -50,7 +50,7 @@ local function fn()
     inst.animname = names[math.random(#names)]
     inst.AnimState:PlayAnimation(inst.animname)
 
-    inst:AddComponent("inspectable") 
+    inst:AddComponent("inspectable")
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aura = -TUNING.SANITYAURA_SMALL
@@ -59,7 +59,7 @@ local function fn()
     inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
     inst.components.pickable:SetUp("petals_evil", 10)
     inst.components.pickable.onpickedfn = onpickedfn
-	inst.components.pickable.remove_when_picked = true
+    inst.components.pickable.remove_when_picked = true
     inst.components.pickable.quickpick = true
     inst.components.pickable.wildfirestarter = true
 
@@ -71,16 +71,16 @@ local function fn()
     MakeHauntableIgnite(inst)
 
     --------SaveLoad
-    inst.OnSave = onsave 
-    inst.OnLoad = onload 
-	
-	inst:ListenForEvent("endaporkalypse", function() 
-    local flor = SpawnPrefab("flower")
-	if flor then
-    flor.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst:Remove()
-	end
-	end, TheWorld)
+    inst.OnSave = onsave
+    inst.OnLoad = onload
+
+    inst:ListenForEvent("endaporkalypse", function()
+        local flor = SpawnPrefab("flower")
+        if flor then
+            flor.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            inst:Remove()
+        end
+    end, TheWorld)
 
     return inst
 end

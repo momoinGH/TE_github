@@ -68,7 +68,7 @@ return {
           visible = true,
           properties = {}
         },
-			
+
         {
           name = "",
           type = "goldnugget",
@@ -91,8 +91,8 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
-			
+        },
+
         {
           name = "",
           type = "debris_2",

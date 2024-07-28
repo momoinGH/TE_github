@@ -1,4 +1,3 @@
-
 --MUSHTREE_SPORE_BLUE = "spore_tall"
 --MUSHTREE_SPORE_RED = "spore_medium"
 --MUSHTREE_SPORE_GREEN = "spore_small"
@@ -32,8 +31,8 @@ local data =
     yeloow =
     { --yellow
         build = "mushroom_spore_yelo",
-        lightcolour = {255/255, 255/255, 0/255},
-    },	
+        lightcolour = { 255 / 255, 255 / 255, 0 / 255 },
+    },
 }
 
 local brain = require "brains/sporebrain"
@@ -51,20 +50,21 @@ local function depleted(inst)
     end
 end
 
-local SPORE_TAGS = {"spore"}
+local SPORE_TAGS = { "spore" }
 local function checkforcrowding(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local spores = TheSim:FindEntities(x,y,z, TUNING.MUSHSPORE_MAX_DENSITY_RAD, SPORE_TAGS)
+    local spores = TheSim:FindEntities(x, y, z, TUNING.MUSHSPORE_MAX_DENSITY_RAD, SPORE_TAGS)
     if #spores > TUNING.MUSHSPORE_MAX_DENSITY then
         inst.components.perishable:SetPercent(0)
     else
-        inst.crowdingtask = inst:DoTaskInTime(TUNING.MUSHSPORE_DENSITY_CHECK_TIME + math.random()*TUNING.MUSHSPORE_DENSITY_CHECK_VAR, checkforcrowding)
+        inst.crowdingtask = inst:DoTaskInTime(
+        TUNING.MUSHSPORE_DENSITY_CHECK_TIME + math.random() * TUNING.MUSHSPORE_DENSITY_CHECK_VAR, checkforcrowding)
     end
 end
 
 local function onpickup(inst)
     --These last longer when held
-    inst.components.perishable:SetLocalMultiplier( TUNING.SEG_TIME * 3/ TUNING.PERISH_SLOW )
+    inst.components.perishable:SetLocalMultiplier(TUNING.SEG_TIME * 3 / TUNING.PERISH_SLOW)
     if inst.crowdingtask ~= nil then
         inst.crowdingtask:Cancel()
         inst.crowdingtask = nil
@@ -91,7 +91,8 @@ local function ondropped(inst)
     end
 
     if inst.crowdingtask == nil then
-        inst.crowdingtask = inst:DoTaskInTime(TUNING.MUSHSPORE_DENSITY_CHECK_TIME + math.random()*TUNING.MUSHSPORE_DENSITY_CHECK_VAR, checkforcrowding)
+        inst.crowdingtask = inst:DoTaskInTime(
+        TUNING.MUSHSPORE_DENSITY_CHECK_TIME + math.random() * TUNING.MUSHSPORE_DENSITY_CHECK_VAR, checkforcrowding)
     end
 end
 
@@ -102,7 +103,6 @@ local function onload(inst)
 end
 
 local function makespore(data)
-
     local function onworked(inst, worker)
         if worker.components.inventory ~= nil then
             worker.components.inventory:GiveItem(inst, nil, inst:GetPosition())
@@ -110,32 +110,32 @@ local function makespore(data)
         end
     end
 
-	local function fn()
+    local function fn()
         local inst = CreateEntity()
 
         inst.entity:AddTransform()
         inst.entity:AddAnimState()
         inst.entity:AddSoundEmitter()
-    	inst.entity:AddDynamicShadow()
+        inst.entity:AddDynamicShadow()
         inst.entity:AddLight()
         inst.entity:AddNetwork()
 
-    	MakeCharacterPhysics(inst, 1, .5)
+        MakeCharacterPhysics(inst, 1, .5)
 
         inst.AnimState:SetBuild(data.build)
         inst.AnimState:SetBank("mushroom_spore")
         inst.AnimState:PlayAnimation("flight_cycle", true)
-        inst.scrapbook_anim = "flight_cycle"		
+        inst.scrapbook_anim = "flight_cycle"
 
         inst.DynamicShadow:Enable(false)
 
-	    inst.Light:SetColour(unpack(data.lightcolour))
-	    inst.Light:SetIntensity(0.75)
-	    inst.Light:SetFalloff(0.5)
-	    inst.Light:SetRadius(2)
-	    inst.Light:Enable(false)
+        inst.Light:SetColour(unpack(data.lightcolour))
+        inst.Light:SetIntensity(0.75)
+        inst.Light:SetFalloff(0.5)
+        inst.Light:SetRadius(2)
+        inst.Light:Enable(false)
 
-	    inst.DynamicShadow:SetSize(.8, .5)
+        inst.DynamicShadow:SetSize(.8, .5)
 
         inst:AddTag("show_spoilage")
         inst:AddTag("spore")
@@ -149,20 +149,20 @@ local function makespore(data)
         inst:AddComponent("inspectable")
 
         inst:AddComponent("knownlocations")
-		inst:AddComponent("tradable")
+        inst:AddComponent("tradable")
 
-	    inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-	    inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-	    inst.components.locomotor:SetTriggersCreep(false)
-	    inst.components.locomotor.walkspeed = 2
+        inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
+        inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+        inst.components.locomotor:SetTriggersCreep(false)
+        inst.components.locomotor.walkspeed = 2
 
         inst:AddComponent("inventoryitem")
-		
-		if data.build == "mushroom_spore_yelo" then
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"  	
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"		
-		end
-		
+
+        if data.build == "mushroom_spore_yelo" then
+            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+        end
+
         inst.components.inventoryitem.canbepickedup = false
 
         inst:AddComponent("workable")
@@ -197,21 +197,21 @@ local function makespore(data)
         inst:ListenForEvent("onputininventory", onpickup)
         inst:ListenForEvent("ondropped", ondropped)
 
-	    inst:SetStateGraph("SGspore")
-	    inst:SetBrain(brain)
+        inst:SetStateGraph("SGspore")
+        inst:SetBrain(brain)
 
         -- note: the first check is faster, because this might be from dropping a stack
-        inst.crowdingtask = inst:DoTaskInTime(1 + math.random()*TUNING.MUSHSPORE_DENSITY_CHECK_VAR, checkforcrowding)
+        inst.crowdingtask = inst:DoTaskInTime(1 + math.random() * TUNING.MUSHSPORE_DENSITY_CHECK_VAR, checkforcrowding)
 
         inst.OnLoad = onload
 
         return inst
-	end
+    end
 
-	return fn
+    return fn
 end
 
 return --Prefab(MUSHTREE_SPORE_BLUE, makespore(data.tall), assets),
-    --Prefab(MUSHTREE_SPORE_RED, makespore(data.medium), assets),
-    --Prefab(MUSHTREE_SPORE_GREEN, makespore(data.small), assets),
-    Prefab(MUSHTREE_SPORE_YELLOW, makespore(data.yeloow), assets)	
+--Prefab(MUSHTREE_SPORE_RED, makespore(data.medium), assets),
+--Prefab(MUSHTREE_SPORE_GREEN, makespore(data.small), assets),
+    Prefab(MUSHTREE_SPORE_YELLOW, makespore(data.yeloow), assets)

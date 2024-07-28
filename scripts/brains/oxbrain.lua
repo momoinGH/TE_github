@@ -30,7 +30,7 @@ local function GetFaceTargetFn(inst)
 end
 
 local function KeepFaceTargetFn(inst, target)
-    return inst:GetDistanceSqToInst(target) <= KEEP_FACE_DIST*KEEP_FACE_DIST and not target:HasTag("notarget")
+    return inst:GetDistanceSqToInst(target) <= KEEP_FACE_DIST * KEEP_FACE_DIST and not target:HasTag("notarget")
 end
 
 local function GetWanderDistFn(inst)
@@ -42,9 +42,9 @@ local function GetWanderDistFn(inst)
 end
 
 local function GoHomeAction(inst)
-    if inst.components.homeseeker and 
-       inst.components.homeseeker.home and 
-       inst.components.homeseeker.home:IsValid() then
+    if inst.components.homeseeker and
+        inst.components.homeseeker.home and
+        inst.components.homeseeker.home:IsValid() then
         return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
     end
 end
@@ -59,23 +59,25 @@ end
 
 function OxBrain:OnStart()
     local root = PriorityNode(
-    {
---       WhileNode( function() 
---                local tile = self.inst.components.tiletracker.tile
---                return tile == GROUND.OCEAN_MEDIUM or tile == GROUND.OCEAN_DEEP or tile == GROUND.OCEAN_SHALLOW
---            end, "intheocean",  
---            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, WANDER_DIST_NIGHT)),
+        {
+            --       WhileNode( function()
+            --                local tile = self.inst.components.tiletracker.tile
+            --                return tile == GROUND.OCEAN_MEDIUM or tile == GROUND.OCEAN_DEEP or tile == GROUND.OCEAN_SHALLOW
+            --            end, "intheocean",
+            --            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, WANDER_DIST_NIGHT)),
 
-        WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
-		IfNode( function() return self.inst.components.combat.target ~= nil end, "hastarget", AttackWall(self.inst)),
-        ChaseAndAttack(self.inst, MAX_CHASE_TIME),
-        Follow(self.inst, function() return self.inst.components.follower and self.inst.components.follower.leader end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, false),
-        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
-        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, GetWanderDistFn)
-    }, .25)
-    
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            IfNode(function() return self.inst.components.combat.target ~= nil end, "hastarget", AttackWall(self.inst)),
+            ChaseAndAttack(self.inst, MAX_CHASE_TIME),
+            Follow(self.inst,
+                function() return self.inst.components.follower and self.inst.components.follower.leader end,
+                MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, false),
+            FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                GetWanderDistFn)
+        }, .25)
+
     self.bt = BT(self.inst, root)
-    
 end
 
 return OxBrain

@@ -22,10 +22,10 @@ local function MakeSap(name, fresh)
         inst.AnimState:SetBank("quagmire_sap")
         inst.AnimState:PlayAnimation(fresh and "idle" or "idle_spoiled")
 
-		inst:AddTag("honeyed")
-		inst:AddTag("sweetener")
+        inst:AddTag("honeyed")
+        inst:AddTag("sweetener")
 
-		MakeInventoryFloatable(inst, "med", nil, 0.8)
+        MakeInventoryFloatable(inst, "med", nil, 0.8)
 
         inst.entity:SetPristine()
 
@@ -33,25 +33,25 @@ local function MakeSap(name, fresh)
             return inst
         end
 
---    inst:AddComponent("edible")
---    inst.components.edible.healthvalue = TUNING.HEALING_SMALL
---    inst.components.edible.hungervalue = TUNING.CALORIES_TINY
+        --    inst:AddComponent("edible")
+        --    inst.components.edible.healthvalue = TUNING.HEALING_SMALL
+        --    inst.components.edible.hungervalue = TUNING.CALORIES_TINY
 
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+        inst:AddComponent("stackable")
+        inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
-    inst:AddComponent("tradable")
+        inst:AddComponent("tradable")
 
-    inst:AddComponent("inspectable")
+        inst:AddComponent("inspectable")
 
-    inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
-    inst.components.perishable:StartPerishing()
-    inst.components.perishable.onperishreplacement = "spoiled_food"
+        inst:AddComponent("perishable")
+        inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
+        inst.components.perishable:StartPerishing()
+        inst.components.perishable.onperishreplacement = "spoiled_food"
 
-    inst:AddComponent("inventoryitem")
+        inst:AddComponent("inventoryitem")
 
-    MakeHauntableLaunchAndPerish(inst)
+        MakeHauntableLaunchAndPerish(inst)
 
         return inst
     end

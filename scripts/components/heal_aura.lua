@@ -1,11 +1,97 @@
-function a(b)return b.components.health~=nil and not b.components.health:IsDead()end;
+function a(b)
+    return b.components.health ~= nil and not b.components.health:IsDead()
+end;
+
 local function c(d)
-local e=GetTime()-d.components.combat.lastwasattackedtime;
-d:AddTag("_isinheals")if e>3 and not(d.sg and d.sg:HasStateTag("hiding"))then d.components.sleeper:AddSleepiness(10,3)end end;
-local f=Class(function(self,g)self.inst=g;self.range=15;self.range=TUNING.FORGE_ITEM_PACK.TFWP_HEALING_STAFF.RANGE;self.duration=TUNING.FORGE_ITEM_PACK.TFWP_HEALING_STAFF.DURATION;self.heal_rate=TUNING.FORGE_ITEM_PACK.TFWP_HEALING_STAFF.HEAL_RATE;self.cache={}local h=function()self:Stop()end;self.inst:DoTaskInTime(0,g.StartUpdatingComponent,self)self.inst:DoTaskInTime(self.duration,h)end)function f:OnUpdate(i)local j,k,l=self.inst.Transform:GetWorldPosition()local m=TheSim:FindEntities(j,0,l,self.range,nil,{"fossilized"})or{}for k,b in pairs(m)do if not self.cache[b]and a(b)then self.cache[b]=true;self:OnEntEnter(b)end end;for b,k in pairs(self.cache)do local n=b:GetPosition()if not a(b)or distsq(n.x,n.z,j,l)>self.range*self.range then self:OnEntLeave(b)end end end;
-function f:OnEntEnter(b)
+    local e = GetTime() - d.components.combat.lastwasattackedtime;
+    d:AddTag("_isinheals")
+    if e > 3 and not (d.sg and d.sg:HasStateTag("hiding")) then
+        d.components.sleeper:AddSleepiness(10, 3)
+    end
+end;
 
-if b.components.fossilizable and b.components.fossilizable:IsFossilized()then self.cache[b]=nil;return end;
 
+local HealAura = Class(function(self, g)
+    self.inst = g;
+    self.range = 15;
+    self.range = TUNING.FORGE_ITEM_PACK.TFWP_HEALING_STAFF.RANGE;
+    self.duration = TUNING.FORGE_ITEM_PACK.TFWP_HEALING_STAFF.DURATION;
+    self.heal_rate = TUNING.FORGE_ITEM_PACK.TFWP_HEALING_STAFF.HEAL_RATE;
+    self.cache = {}
 
-if b.components.colourfader then b.components.colourfader:StartFade({0,0.3,0.1},.35)end;if(b:HasTag("player")or b:HasTag("companion"))and b.components.debuffable~=nil and b.components.debuffable:IsEnabled()and not(b.components.health~=nil and b.components.health:IsDead())and not b:HasTag("playerghost")then b.components.debuffable:AddDebuff("healingcircle_regenbuff","healingcircle_regenbuff")b.components.debuffable.debuffs["healingcircle_regenbuff"].inst.heal_value=self.heal_rate*b.components.debuffable.debuffs["healingcircle_regenbuff"].inst.tick_rate;b.components.debuffable.debuffs["healingcircle_regenbuff"].inst.caster=self.caster;if b.components.debuffable:HasDebuff("scorpeon_dot")then b.components.debuffable:RemoveDebuff("scorpeon_dot")end elseif b.components.sleeper and not(b:HasTag("player")or b:HasTag("companion"))and not b.healingcircle_sleeptask then b.healingcircle_sleeptask=b:DoPeriodicTask(1/10,c)b.sleep_start=GetTime()end end;function f:OnEntLeave(b)if not self.cache[b]then return end;if b:HasTag("_isinheals")then b:RemoveTag("_isinheals")end;if b.components.colourfader then b.components.colourfader:StartFade({0,0,0},.35)end;if b.components.debuffable~=nil and b.components.debuffable:IsEnabled()and b.components.debuffable:HasDebuff("healingcircle_regenbuff")and not(b.components.health~=nil and b.components.health:IsDead())and not b:HasTag("playerghost")and b:HasTag("player")then b.components.debuffable:RemoveDebuff("healingcircle_regenbuff")elseif b.components.sleeper and not b:HasTag("player")and b.healingcircle_sleeptask then b.healingcircle_sleeptask:Cancel()b.healingcircle_sleeptask=nil end;self.cache[b]=nil end;function f:Stop()self.inst:StopUpdatingComponent(self)for b,k in pairs(self.cache)do self:OnEntLeave(b)end end;f.OnRemoveEntity=f.Stop;f.OnRemoveFromEntity=f.Stop;return f
+    local h = function() self:Stop() end;
+
+    self.inst:DoTaskInTime(0, g.StartUpdatingComponent, self)
+    self.inst:DoTaskInTime(self.duration, h)
+end)
+
+function HealAura:OnUpdate(i)
+    local x, y, z = self.inst.Transform:GetWorldPosition()
+    for _, v in pairs(TheSim:FindEntities(x, 0, z, self.range, nil, { "fossilized" })) do
+        if not self.cache[v] and a(v) then
+            self.cache[v] = true;
+            self:OnEntEnter(v)
+        end
+    end;
+
+    for b, _ in pairs(self.cache) do
+        local n = b:GetPosition()
+        if not a(b) or distsq(n.x, n.z, x, z) > self.range * self.range then self:OnEntLeave(b) end
+    end
+end;
+
+function HealAura:OnEntEnter(target)
+    if target.components.fossilizable and target.components.fossilizable:IsFossilized() then
+        self.cache[target] = nil;
+        return
+    end
+
+    if target.components.colourfader then target.components.colourfader:StartFade({ 0, 0.3, 0.1 }, .35) end;
+    if (target:HasTag("player") or target:HasTag("companion")) and target.components.debuffable ~= nil and target.components.debuffable:IsEnabled() and not (target.components.health ~= nil and target.components.health:IsDead()) and not target:HasTag("playerghost") then
+        target.components.debuffable:AddDebuff("healingcircle_regenbuff", "healingcircle_regenbuff")
+        target.components.debuffable.debuffs["healingcircle_regenbuff"].inst.heal_value = self.heal_rate *
+            target.components.debuffable.debuffs["healingcircle_regenbuff"].inst.tick_rate;
+        target.components.debuffable.debuffs["healingcircle_regenbuff"].inst.caster =
+            self.caster;
+        if target.components.debuffable:HasDebuff("scorpeon_dot") then
+            target.components.debuffable:RemoveDebuff(
+                "scorpeon_dot")
+        end
+    elseif target.components.sleeper and not (target:HasTag("player") or target:HasTag("companion")) and not target.healingcircle_sleeptask then
+        target.healingcircle_sleeptask = target:DoPeriodicTask(1 / 10, c)
+        target.sleep_start = GetTime()
+    end
+end;
+
+function HealAura:OnEntLeave(target)
+    if not self.cache[target] then return end;
+    if target:HasTag("_isinheals") then target:RemoveTag("_isinheals") end;
+    if target.components.colourfader then
+        target.components.colourfader:StartFade({ 0, 0, 0 }, .35)
+    end;
+    if target.components.debuffable ~= nil
+        and target.components.debuffable:IsEnabled()
+        and target.components.debuffable:HasDebuff("healingcircle_regenbuff")
+        and not (target.components.health ~= nil and target.components.health:IsDead())
+        and not target:HasTag("playerghost")
+        and target:HasTag("player")
+    then
+        target.components.debuffable:RemoveDebuff("healingcircle_regenbuff")
+    elseif target.components.sleeper and not target:HasTag("player") and target.healingcircle_sleeptask then
+        target.healingcircle_sleeptask:Cancel()
+        target.healingcircle_sleeptask = nil
+    end;
+    self.cache[target] = nil
+end;
+
+function HealAura:Stop()
+    self.inst:StopUpdatingComponent(self)
+    for b, k in pairs(self.cache) do
+        self:OnEntLeave(b)
+    end
+end;
+
+HealAura.OnRemoveEntity = HealAura.Stop;
+HealAura.OnRemoveFromEntity = HealAura.Stop;
+
+return HealAura

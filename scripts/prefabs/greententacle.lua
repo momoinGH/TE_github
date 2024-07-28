@@ -9,19 +9,19 @@ local prefabs =
     "green_scale",
 }
 
-SetSharedLootTable( 'greententacle',
-{
-    {'monstermeat',   1.0},
-    {'monstermeat',   1.0},
-    {'snakeskin', 0.5},
-    {'tentaclespots', 0.05},
-})
+SetSharedLootTable('greententacle',
+    {
+        { 'monstermeat',   1.0 },
+        { 'monstermeat',   1.0 },
+        { 'snakeskin',     0.5 },
+        { 'tentaclespots', 0.05 },
+    })
 
 local function retargetfn(inst)
     return FindEntity(
         inst,
         20,
-        function(guy) 
+        function(guy)
             return guy.prefab ~= inst.prefab
                 and guy.entity:IsVisible()
                 and not guy.components.health:IsDead()
@@ -108,7 +108,7 @@ local function fn()
     inst.AnimState:SetBuild("gretacle")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddTag("monster")    
+    inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("wet")
     inst:AddTag("WORM_DANGER")

@@ -32,88 +32,88 @@ end
 
 local function AnimatePigStatue(target)
     local x, y, z = target.Transform:GetWorldPosition()
-    local notags = {"player", "playerghost", "INLIMBO", "NOCLICK", "FX" }
+    local notags = { "player", "playerghost", "INLIMBO", "NOCLICK", "FX" }
     local ents = TheSim:FindEntities(x, 0, z, 40, nil, notags)
     for k, v in pairs(ents) do
-        if v.components.burnable ~= nil 
-            and not v.components.burnable:IsBurning() 
-            and v.components.fueled == nil 
+        if v.components.burnable ~= nil
+            and not v.components.burnable:IsBurning()
+            and v.components.fueled == nil
         then
             v.components.burnable:Ignite(true)
-        end   
+        end
     end
 
     local obj = SpawnPrefab("bossboar")
---    obj:Hide()
---    TemporarilyRemovePhysics(obj, 15)
-if obj then
-    obj.Transform:SetPosition(x, y, z)
-end
-	target:Remove()
+    --    obj:Hide()
+    --    TemporarilyRemovePhysics(obj, 15)
+    if obj then
+        obj.Transform:SetPosition(x, y, z)
+    end
+    target:Remove()
 end
 
 local zombies = {
-    grass = {"grassgekko"},
-	greengrass = {"grassgekko"},
-    dug_grass = {"grassgekko"},
-    pigskin = {"pigman"},
-    manrabbit_tail = {"bunnyman"},
-    snakeskin = {"snake"},
-    venomgland = {"snake"},	
-    flower = {"butterfly"},
-    butterflywings = {"butterfly"},
-    petals = {"butterfly"},
-    spidergland = {"spider"},
-    silk = {"spider"},
-    tentaclespots = {"tentacle"},
-    molehat = {"mole"},
-    wormlight = {"worm"},
-    coontail = {"catcoon"},
-    catcoonhat = {"catcoon"},
-    gears = {"knight"},
-    batwing = {"bat"},
-    monstermeat = {"hound"},
-    houndstooth = {"hound"},
-    rope = {"snake"},
-    livinglog = {"leif"},
-    flower_evil = {"butterfly"},
-    slurtlehat = {"slurtle"},
-    froglegs = {"frog"},
-    lightninggoathorn = {"lightninggoat"},
-    trunk_summer = {"koalefant_summer"},
-    trunk_winter = {"koalefant_winter"},
-    fish = {"merm"},
-    earmuffshat = {"rabbit"},
-    stinger = {"bee"},
-    walrus_tusk = {"walrus"},
+    grass = { "grassgekko" },
+    greengrass = { "grassgekko" },
+    dug_grass = { "grassgekko" },
+    pigskin = { "pigman" },
+    manrabbit_tail = { "bunnyman" },
+    snakeskin = { "snake" },
+    venomgland = { "snake" },
+    flower = { "butterfly" },
+    butterflywings = { "butterfly" },
+    petals = { "butterfly" },
+    spidergland = { "spider" },
+    silk = { "spider" },
+    tentaclespots = { "tentacle" },
+    molehat = { "mole" },
+    wormlight = { "worm" },
+    coontail = { "catcoon" },
+    catcoonhat = { "catcoon" },
+    gears = { "knight" },
+    batwing = { "bat" },
+    monstermeat = { "hound" },
+    houndstooth = { "hound" },
+    rope = { "snake" },
+    livinglog = { "leif" },
+    flower_evil = { "butterfly" },
+    slurtlehat = { "slurtle" },
+    froglegs = { "frog" },
+    lightninggoathorn = { "lightninggoat" },
+    trunk_summer = { "koalefant_summer" },
+    trunk_winter = { "koalefant_winter" },
+    fish = { "merm" },
+    earmuffshat = { "rabbit" },
+    stinger = { "bee" },
+    walrus_tusk = { "walrus" },
     pig_figure = AnimatePigStatue,
-	rocks = {"rock1"},
-	flint = {"rock1"},
-	goldnugget = {"rock2"},
-	obsidian = {"rock_obsidian"},	
-	beaverskin = {"wildbeaver"},
-	nitre = {"rock1"},
-	spoiled_food = {"meat"},
-	meat = {"hound"},
-	cutgrass = {"grass"},
-	smallmeat = {"rabbit"},
-	twigs = {"sapling"},
-	mosquitosack = {"mosquito"},
-	honey = {"bee"},
-	pandaskin = {"panda"},
-	chitin = {"scorpion"},
-	vine = {"mean_flytrap"},
-	weevole_carapace = {"weevole"},
-	
+    rocks = { "rock1" },
+    flint = { "rock1" },
+    goldnugget = { "rock2" },
+    obsidian = { "rock_obsidian" },
+    beaverskin = { "wildbeaver" },
+    nitre = { "rock1" },
+    spoiled_food = { "meat" },
+    meat = { "hound" },
+    cutgrass = { "grass" },
+    smallmeat = { "rabbit" },
+    twigs = { "sapling" },
+    mosquitosack = { "mosquito" },
+    honey = { "bee" },
+    pandaskin = { "panda" },
+    chitin = { "scorpion" },
+    vine = { "mean_flytrap" },
+    weevole_carapace = { "weevole" },
+
 }
 
 local function createpower(staff, target, pos)
-	local doer = staff.components.inventoryitem.owner
-	if target then
-    local x, y, z = target.Transform:GetWorldPosition()
-	pos = Vector3(x, y, z)
-	end
-	
+    local doer = staff.components.inventoryitem.owner
+    if target then
+        local x, y, z = target.Transform:GetWorldPosition()
+        pos = Vector3(x, y, z)
+    end
+
     for k, ent in pairs(TheSim:FindEntities(pos.x, pos.y, pos.z, 4, nil, { "playerghost", "INLIMBO", "NOCLICK", "FX" })) do
         local zmb = zombies[ent.prefab]
         if ent:HasTag("playerghost") then
@@ -126,7 +126,7 @@ local function createpower(staff, target, pos)
             if type(zmb) == "function" then
                 zmb(ent)
             else
-                local newCreature 
+                local newCreature
                 if #zmb > 1 then
                     newCreature = SpawnPrefab(zmb[1])
                 else
@@ -146,17 +146,17 @@ local function createpower(staff, target, pos)
             ent.components.hauntable:DoHaunt(doer)
         end
     end
-	
+
     if staff.components.finiteuses ~= nil then
         staff.components.finiteuses:Use(1)
-    end	
+    end
 
-    return true	
+    return true
 end
 
 
 local function cancreatepower(doer, target, pos)
-return true
+    return true
 end
 
 local function fn()
@@ -185,7 +185,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/gw_bonestaff.xml"
-	inst.caminho = "images/inventoryimages/gw_bonestaff.xml"
+    inst.caminho = "images/inventoryimages/gw_bonestaff.xml"
 
     inst:AddComponent("inspectable")
 
@@ -197,13 +197,13 @@ local function fn()
     inst.components.finiteuses:SetMaxUses(30)
     inst.components.finiteuses:SetUses(30)
     inst.components.finiteuses:SetOnFinished(inst.Remove)
-	
+
     inst:AddComponent("spellcaster")
     inst.components.spellcaster.canuseonpoint = true
-    inst.components.spellcaster.canuseontargets = true	
-    inst.components.spellcaster.canuseonpoint_water = true	
+    inst.components.spellcaster.canuseontargets = true
+    inst.components.spellcaster.canuseonpoint_water = true
     inst.components.spellcaster:SetSpellFn(createpower)
-    inst.components.spellcaster:SetCanCastFn(cancreatepower)	
+    inst.components.spellcaster:SetCanCastFn(cancreatepower)
 
 
     MakeHauntableLaunch(inst)
@@ -301,7 +301,7 @@ local function proj_fn()
     inst:AddTag("FX")
     inst:AddTag("projectile")
 
-    inst._killtail = net_event(inst.GUID, "staff_proj.killtail") 
+    inst._killtail = net_event(inst.GUID, "staff_proj.killtail")
     inst:ListenForEvent("staff_proj.killtail", StopTail)
 
     if not TheNet:IsDedicated() then

@@ -23,46 +23,46 @@ local function OnTimerDone(inst, data)
 end
 
 local function OnDropped(inst)
-	inst.components.trap:Set()
+    inst.components.trap:Set()
 end
 
 local function OnPickup(inst)
-	inst.components.trap:Reset()
+    inst.components.trap:Reset()
 end
 
 local Trap = Class(function(self, inst)
-    self.inst = inst
-    self.bait = nil
-    self.issprung = false
+        self.inst = inst
+        self.bait = nil
+        self.issprung = false
 
-    self.isset = false
-    self.range = 1.5
-    self.targettag = "smallcreature"
-    self.checkperiod = .75
-    self.onharvest = nil
-    self.onbaited = nil
-    self.onspring = nil
-    self.task = nil
+        self.isset = false
+        self.range = 1.5
+        self.targettag = "smallcreature"
+        self.checkperiod = .75
+        self.onharvest = nil
+        self.onbaited = nil
+        self.onspring = nil
+        self.task = nil
 
-	if inst.components.timer == nil then
-		inst:AddComponent("timer")
-	end
-	inst:ListenForEvent("timerdone", OnTimerDone)
-	inst:ListenForEvent("ondropped", OnDropped)
-	inst:ListenForEvent("onpickup", OnPickup)
-end,
-nil,
-{
-    bait = oncanbait,
-    isset = oncanbait,
-    issprung = onissprung,
-})
+        if inst.components.timer == nil then
+            inst:AddComponent("timer")
+        end
+        inst:ListenForEvent("timerdone", OnTimerDone)
+        inst:ListenForEvent("ondropped", OnDropped)
+        inst:ListenForEvent("onpickup", OnPickup)
+    end,
+    nil,
+    {
+        bait = oncanbait,
+        isset = oncanbait,
+        issprung = onissprung,
+    })
 
 function Trap:OnRemoveFromEntity()
     self:StopUpdating()
     self.inst:RemoveEventCallback("timerdone", OnTimerDone)
-	self.inst:RemoveEventCallback("ondropped", OnDropped)
-	self.inst:RemoveEventCallback("onpickup", OnPickup)
+    self.inst:RemoveEventCallback("ondropped", OnDropped)
+    self.inst:RemoveEventCallback("onpickup", OnPickup)
     --self.inst:RemoveComponent("timer")
     self.inst:RemoveTag("canbait")
     self.inst:RemoveTag("trapsprung")
@@ -83,25 +83,25 @@ function Trap:GetDebugString()
         "IDLE!"
 
     if self.bait ~= nil then
-        str = str.." Bait:"..tostring(self.bait)
+        str = str .. " Bait:" .. tostring(self.bait)
     end
 
     if self.target ~= nil then
-        str = str.." Target:"..tostring(self.target)
+        str = str .. " Target:" .. tostring(self.target)
     end
 
     if self.lootprefabs ~= nil and #self.lootprefabs > 0 then
-        str = str.." Loot:"
+        str = str .. " Loot:"
         for i, v in ipairs(self.lootprefabs) do
-            str = str.." "..v
+            str = str .. " " .. v
         end
     end
 
     if self.numsouls ~= nil then
-        str = str.." Souls:"..self.numsouls
+        str = str .. " Souls:" .. self.numsouls
     end
     if self.starvednumsouls ~= nil then
-        str = str.." Starved Souls:"..self.starvednumsouls
+        str = str .. " Starved Souls:" .. self.starvednumsouls
     end
 
     return str
@@ -111,7 +111,7 @@ function Trap:SetOnBaitedFn(fn)
     self.onbaited = fn
 end
 
-function Trap:IsFree() 
+function Trap:IsFree()
     return self.bait == nil
 end
 
@@ -128,7 +128,7 @@ function Trap:Reset(sprung)
     self.isset = false
     self.issprung = sprung == true
     self.lootprefabs = nil
-	self.lootdata = nil
+    self.lootdata = nil
     self.numsouls = nil
     self.starvednumsouls = nil
     self:RemoveBait()
@@ -158,7 +158,8 @@ end
 
 function Trap:StartUpdate()
     if self.task == nil then
-        self.task = self.inst:DoPeriodicTask(self.checkperiod, _OnUpdate, (.5 + math.random() * .5) * self.checkperiod, self)
+        self.task = self.inst:DoPeriodicTask(self.checkperiod, _OnUpdate, (.5 + math.random() * .5) * self.checkperiod,
+            self)
     end
 end
 
@@ -189,7 +190,7 @@ function Trap:OnUpdate(dt)
             self.target = guy
             self:StopUpdating()
             self.inst:PushEvent("springtrap")
-            self.target:PushEvent("trapped", {trap = self.inst})
+            self.target:PushEvent("trapped", { trap = self.inst })
         end
     end
 end
@@ -231,7 +232,7 @@ function Trap:StartStarvation()
         self.target.components.perishable ~= nil and
         self.target.components.perishable.perishremainingtime or
         TUNING.TOTAL_DAY_TIME * 2
-    
+
     self.starvedlootprefabs =
         self.target.components.lootdropper ~= nil and
         self.target.components.lootdropper:GenerateLoot() or
@@ -247,7 +248,7 @@ end
 
 local BAIT_TAGS = { "molebait" }
 for k, v in pairs(FOODTYPE) do
-    table.insert(BAIT_TAGS, "edible_"..v)
+    table.insert(BAIT_TAGS, "edible_" .. v)
 end
 
 local INLIMBO_TAGS = { "INLIMBO" }
@@ -264,36 +265,42 @@ function Trap:DoSpring()
         end
 
         if self.target.components.inventoryitem ~= nil and self.target.components.inventoryitem.trappable then
-		    if self.target.prefab == "lobster" then self.lootprefabs = { "lobster_land" } 
-			elseif self.target.prefab == "wobster_sheller" then self.lootprefabs = { "wobster_sheller_land" } 
-			elseif self.target.prefab == "wobster_moonglass" then self.lootprefabs = { "wobster_moonglass_land" } else
-            self.lootprefabs = { self.target.prefab }
-			end
-			self.lootdata = self.target.settrapdata ~= nil and self.target.settrapdata(self.target) or nil
+            if self.target.prefab == "lobster" then
+                self.lootprefabs = { "lobster_land" }
+            elseif self.target.prefab == "wobster_sheller" then
+                self.lootprefabs = { "wobster_sheller_land" }
+            elseif self.target.prefab == "wobster_moonglass" then
+                self.lootprefabs = { "wobster_moonglass_land" }
+            else
+                self.lootprefabs = { self.target.prefab }
+            end
+            self.lootdata = self.target.settrapdata ~= nil and self.target.settrapdata(self.target) or nil
             self.numsouls = nil
-            self.starvednumsouls = wortox_soul_common.HasSoul(self.target) and wortox_soul_common.GetNumSouls(self.target) or nil
+            self.starvednumsouls = wortox_soul_common.HasSoul(self.target) and
+            wortox_soul_common.GetNumSouls(self.target) or nil
         elseif self.target.components.lootdropper ~= nil and self.target.components.lootdropper.trappable then
             self.lootprefabs = self.target.components.lootdropper:GenerateLoot() or nil
-			self.lootdata = nil
-            self.numsouls = wortox_soul_common.HasSoul(self.target) and wortox_soul_common.GetNumSouls(self.target) or nil
+            self.lootdata = nil
+            self.numsouls = wortox_soul_common.HasSoul(self.target) and wortox_soul_common.GetNumSouls(self.target) or
+            nil
             self.starvednumsouls = nil
-		else
-			self.lootprefabs = nil
-			self.lootdata = nil
-			self.numsouls = nil
-			self.starvednumsouls = nil
+        else
+            self.lootprefabs = nil
+            self.lootdata = nil
+            self.numsouls = nil
+            self.starvednumsouls = nil
         end
 
         self:StartStarvation()
 
         if self.lootprefabs ~= nil then
             self.target:PushEvent("ontrapped", { trapper = self.inst, bait = self.bait })
-            ProfileStatsAdd("trapped_"..self.target.prefab)
+            ProfileStatsAdd("trapped_" .. self.target.prefab)
             self.target:Remove()
         end
     else
         self.lootprefabs = nil
-		self.lootdata = nil
+        self.lootdata = nil
         self.numsouls = nil
         self.starvednumsouls = nil
     end
@@ -339,9 +346,10 @@ function Trap:Harvest(doer)
     if self.issprung then
         --Cache these because trap may become invalid in callbacks
         local pos = self.inst:GetPosition()
-        local timeintrap = self.inst.components.timer ~= nil and self.inst.components.timer:GetTimeElapsed("foodspoil") or 0
+        local timeintrap = self.inst.components.timer ~= nil and self.inst.components.timer:GetTimeElapsed("foodspoil") or
+        0
 
-        self.inst:PushEvent("harvesttrap", {doer = doer})
+        self.inst:PushEvent("harvesttrap", { doer = doer })
         if self.onharvest ~= nil then
             self.onharvest(self.inst)
         end
@@ -352,9 +360,9 @@ function Trap:Harvest(doer)
             for i, v in ipairs(self.lootprefabs) do
                 local loot = SpawnPrefab(v)
                 if loot ~= nil then
-					if loot.restoredatafromtrap ~= nil then
-						loot:restoredatafromtrap(self.lootdata)
-					end
+                    if loot.restoredatafromtrap ~= nil then
+                        loot:restoredatafromtrap(self.lootdata)
+                    end
                     if inventory ~= nil then
                         inventory:GiveItem(loot, nil, pos)
                     else
@@ -368,18 +376,18 @@ function Trap:Harvest(doer)
         end
 
         if self.numsouls ~= nil then
-			if doer ~= nil then
-	            doer:PushEvent("harvesttrapsouls", { numsouls = self.numsouls, pos = pos })
-			else
-	            TheWorld:PushEvent("starvedtrapsouls", { numsouls = self.numsouls, trap = self.inst })
-			end
+            if doer ~= nil then
+                doer:PushEvent("harvesttrapsouls", { numsouls = self.numsouls, pos = pos })
+            else
+                TheWorld:PushEvent("starvedtrapsouls", { numsouls = self.numsouls, trap = self.inst })
+            end
         end
 
         if self.inst:IsValid() then
             if self.inst.components.finiteuses == nil or self.inst.components.finiteuses:GetUses() > 0 then
-				self:Set()
-			else
-				self:Reset()
+                self:Set()
+            else
+                self:Reset()
             end
         end
     end
@@ -428,19 +436,19 @@ end
 
 function Trap:OnSave()
     return
-    {
-        sprung = self.issprung or nil,
-        isset = self.isset or nil,
-        bait = self.bait ~= nil and self.bait.GUID or nil,
-        loot = self.lootprefabs,
-        souls = self.numsouls,
-        starvedsouls = self.starvednumsouls,
-        starvedloot = self.starvedlootprefabs,
-        lootdata = self.lootdata,        
-    },
-    {
-        self.bait ~= nil and self.bait.GUID or nil,
-    }
+        {
+            sprung = self.issprung or nil,
+            isset = self.isset or nil,
+            bait = self.bait ~= nil and self.bait.GUID or nil,
+            loot = self.lootprefabs,
+            souls = self.numsouls,
+            starvedsouls = self.starvednumsouls,
+            starvedloot = self.starvedlootprefabs,
+            lootdata = self.lootdata,
+        },
+        {
+            self.bait ~= nil and self.bait.GUID or nil,
+        }
 end
 
 function Trap:OnLoad(data)
@@ -460,9 +468,9 @@ function Trap:OnLoad(data)
         (type(data.starvedloot) == "string" and { data.starvedloot }) or
         (type(data.starvedloot) == "table" and data.starvedloot) or
         { "spoiled_food" }
-    
+
     self.lootdata = data and data.lootdata
-    
+
     if self.isset then
         self:StartUpdate()
     elseif self.issprung then

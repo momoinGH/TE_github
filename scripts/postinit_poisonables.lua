@@ -1,7 +1,7 @@
 --[[
 	Lootdropper Postinit
 
-	Allows one to add and remove named functions that are called when a 
+	Allows one to add and remove named functions that are called when a
 	loot item is spawned.
 --]]
 AddComponentPostInit("lootdropper", function(self, inst)
@@ -21,23 +21,17 @@ AddComponentPostInit("lootdropper", function(self, inst)
 	self.SpawnLootPrefab = function(_self, lootprefab, pt)
 		local loot = _self.old_SpawnLootPrefabVB(_self, lootprefab, pt)
 		if loot and _self.loot_postinits then
-			for i,loot_postinit in ipairs(_self.loot_postinits) do
+			for i, loot_postinit in ipairs(_self.loot_postinits) do
 				loot = loot_postinit(_self, loot)
 			end
 		end
 		return loot
-		
-		
-		
-		
-		
-		
 	end
 end)
 
 
 HookInitPoisonable = function(player)
-    if player.components.poisonable == nil then
+	if player.components.poisonable == nil then
 		player:AddComponent("poisonable")
 	end
 end

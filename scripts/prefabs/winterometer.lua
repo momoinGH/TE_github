@@ -11,30 +11,34 @@ local prefabs =
 }
 
 local function DoCheckTemp(inst)
-local alagado = GetClosestInstWithTag("mare", inst, 10)
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
 
-if alagado then 
-inst.AnimState:SetPercent("meter", math.random())
-if math.random() > 0.90 then
-local fx = SpawnPrefab("shock_machines_fx")
-if fx then local pt = inst:GetPosition() fx.Transform:SetPosition(pt.x, pt.y, pt.z) end 
-if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-end
-else 
-    if not inst:HasTag("burnt") then
-        inst.AnimState:SetPercent("meter", 1 - math.clamp(TheWorld.state.temperature, 0, TUNING.OVERHEAT_TEMP) / TUNING.OVERHEAT_TEMP)
+    if alagado then
+        inst.AnimState:SetPercent("meter", math.random())
+        if math.random() > 0.90 then
+            local fx = SpawnPrefab("shock_machines_fx")
+            if fx then
+                local pt = inst:GetPosition()
+                fx.Transform:SetPosition(pt.x, pt.y, pt.z)
+            end
+            if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
+        end
+    else
+        if not inst:HasTag("burnt") then
+            inst.AnimState:SetPercent("meter",
+                1 - math.clamp(TheWorld.state.temperature, 0, TUNING.OVERHEAT_TEMP) / TUNING.OVERHEAT_TEMP)
+        end
     end
-end	
 end
 
 local function StartCheckTemp(inst)
-    if inst.task == nil and not inst:HasTag("burnt") then 
+    if inst.task == nil and not inst:HasTag("burnt") then
         inst.task = inst:DoPeriodicTask(2, DoCheckTemp, 0)
     end
 end
 
 local function onhammered(inst, worker)
-    if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() then 
+    if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() then
         inst.components.burnable:Extinguish()
     end
     inst.components.lootdropper:DropLoot()
@@ -45,7 +49,7 @@ local function onhammered(inst, worker)
 end
 
 local function onhit(inst)
-    if not inst:HasTag("burnt") then 
+    if not inst:HasTag("burnt") then
         if inst.task ~= nil then
             inst.task:Cancel()
             inst.task = nil
@@ -85,20 +89,20 @@ local function onload(inst, data)
 end
 
 local function OnEntityWake(inst)
-if inst.task then
-inst.task:Cancel()
-inst.task = nil
-end
-if inst.task == nil and not inst:HasTag("burnt") then
-   inst.task = inst:DoPeriodicTask(2, DoCheckTemp, 0)
-end
+    if inst.task then
+        inst.task:Cancel()
+        inst.task = nil
+    end
+    if inst.task == nil and not inst:HasTag("burnt") then
+        inst.task = inst:DoPeriodicTask(2, DoCheckTemp, 0)
+    end
 end
 
 local function OnEntitySleep(inst)
-if inst.task then
-inst.task:Cancel()
-inst.task = nil
-end
+    if inst.task then
+        inst.task:Cancel()
+        inst.task = nil
+    end
 end
 
 local function fn()
@@ -135,11 +139,11 @@ local function fn()
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(4)
     inst.components.workable:SetOnFinishCallback(onhammered)
-    inst.components.workable:SetOnWorkCallback(onhit)       
+    inst.components.workable:SetOnWorkCallback(onhit)
     MakeSnowCovered(inst)
 
     inst:ListenForEvent("onbuilt", onbuilt)
---    inst:ListenForEvent("animover", StartCheckTemp)
+    --    inst:ListenForEvent("animover", StartCheckTemp)
 
     MakeSmallBurnable(inst, nil, nil, true)
     MakeSmallPropagator(inst)
@@ -149,12 +153,12 @@ local function fn()
 
     inst:ListenForEvent("burntup", makeburnt)
 
---    StartCheckTemp(inst)
+    --    StartCheckTemp(inst)
 
     MakeHauntableWork(inst)
-	
-	inst.OnEntitySleep = OnEntitySleep
-	inst.OnEntityWake = OnEntityWake		
+
+    inst.OnEntitySleep = OnEntitySleep
+    inst.OnEntityWake = OnEntityWake
 
     return inst
 end

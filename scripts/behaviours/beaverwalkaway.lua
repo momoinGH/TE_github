@@ -42,11 +42,11 @@ function BeaverWalkAway:GetRunAngle(pt, hp)
 
     local radius = 6
 
-    local result_offset, result_angle, deflected = FindWalkableOffset(pt, angle*DEGREES, radius, 8, true, false) -- try avoiding walls
+    local result_offset, result_angle, deflected = FindWalkableOffset(pt, angle * DEGREES, radius, 8, true, false) -- try avoiding walls
     if result_angle == nil then
-        result_offset, result_angle, deflected = FindWalkableOffset(pt, angle*DEGREES, radius, 8, true, true) -- ok don't try to avoid walls, but at least avoid water
+        result_offset, result_angle, deflected = FindWalkableOffset(pt, angle * DEGREES, radius, 8, true, true)  -- ok don't try to avoid walls, but at least avoid water
         if result_angle == nil then
-            return angle -- ok whatever, just run
+            return angle                                                                                         -- ok whatever, just run
         end
     end
 
@@ -60,7 +60,8 @@ end
 
 function BeaverWalkAway:Visit()
     if self.status == READY then
-        self.hunter = FindEntity(self.inst, self.see_dist, self.hunterfn, self.huntertags, self.hunternotags, self.hunteroneoftags)
+        self.hunter = FindEntity(self.inst, self.see_dist, self.hunterfn, self.huntertags, self.hunternotags,
+            self.hunteroneoftags)
 
         if self.hunter ~= nil and self.shouldrunfn ~= nil and not self.shouldrunfn(self.hunter) then
             self.hunter = nil

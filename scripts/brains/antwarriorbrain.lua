@@ -13,11 +13,11 @@ require "behaviours/leash"
 local MAX_CHASE_TIME = 40
 
 local function HasValidHome(inst)
-    return inst.components.homeseeker and 
-       inst.components.homeseeker.home and 
-       not inst.components.homeseeker.home:HasTag("fire") and
-       not inst.components.homeseeker.home:HasTag("burnt") and
-       inst.components.homeseeker.home:IsValid()
+    return inst.components.homeseeker and
+        inst.components.homeseeker.home and
+        not inst.components.homeseeker.home:HasTag("fire") and
+        not inst.components.homeseeker.home:HasTag("burnt") and
+        inst.components.homeseeker.home:IsValid()
 end
 
 local function GetHomePos(inst)
@@ -31,7 +31,7 @@ end
 
 local function translationfn(inst)
     local player = GetClosestInstWithTag("player", inst, 30)
-    if player:HasTag("antlingual") then        
+    if player:HasTag("antlingual") then
         return true
     else
         return false
@@ -39,7 +39,7 @@ local function translationfn(inst)
 end
 
 local function makechatpackage(speech)
-return {
+    return {
         chatlines = speech,
         untranslated = STRINGS.ANT_TALK_UNTRANSLATED,
         translationfn = translationfn
@@ -66,14 +66,13 @@ end)
 
 function AntWarriorBrain:OnStart()
     local root = PriorityNode(
-    {
-        WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst) ),
-        
-        ChaseAndAttack(self.inst, MAX_CHASE_TIME),
-        Wander(self.inst, GetWanderPoint, 20),
+        {
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            ChaseAndAttack(self.inst, MAX_CHASE_TIME),
+            Wander(self.inst, GetWanderPoint, 20),
 
-    }, .1)
-    
+        }, .1)
+
     self.bt = BT(self.inst, root)
 end
 

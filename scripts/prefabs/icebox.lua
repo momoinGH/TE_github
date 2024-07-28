@@ -12,15 +12,18 @@ local prefabs =
 }
 
 local function onopen(inst)
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then 
-local fx = SpawnPrefab("shock_machines_fx")
-if fx then local pt = inst:GetPosition() fx.Transform:SetPosition(pt.x, pt.y, pt.z) end 
-if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-	inst:RemoveTag("fridge")
-else
-	inst:AddTag("fridge")
-end
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        local fx = SpawnPrefab("shock_machines_fx")
+        if fx then
+            local pt = inst:GetPosition()
+            fx.Transform:SetPosition(pt.x, pt.y, pt.z)
+        end
+        if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
+        inst:RemoveTag("fridge")
+    else
+        inst:AddTag("fridge")
+    end
     inst.AnimState:PlayAnimation("open")
     inst.SoundEmitter:PlaySound("dontstarve/common/icebox_open")
 end
@@ -94,7 +97,7 @@ local function fn()
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(2)
     inst.components.workable:SetOnFinishCallback(onhammered)
-    inst.components.workable:SetOnWorkCallback(onhit) 
+    inst.components.workable:SetOnWorkCallback(onhit)
 
     inst:ListenForEvent("onbuilt", onbuilt)
     MakeSnowCovered(inst)

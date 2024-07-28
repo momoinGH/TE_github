@@ -15,14 +15,14 @@ local prefabs =
 
 local SCIENCE_STAGES =
 {
-    { time = 2, anim = "cooking_loop1", fire_anim = "fire1"},
-    { time = 2, anim = "cooking_loop2", fire_anim = "fire1"},
-    { time = 2, anim = "cooking_loop3", pre_anim = "cooking_loop3_pre", fire_pre_anim = "fire3_pre", fire_anim = "fire3"},
+    { time = 2, anim = "cooking_loop1", fire_anim = "fire1" },
+    { time = 2, anim = "cooking_loop2", fire_anim = "fire1" },
+    { time = 2, anim = "cooking_loop3", pre_anim = "cooking_loop3_pre", fire_pre_anim = "fire3_pre", fire_anim = "fire3" },
 }
 
-local EXPERIMENT_RESULTS = 
+local EXPERIMENT_RESULTS =
 {
-    halloween_experiment_bravery = 
+    halloween_experiment_bravery =
     {
         halloweenpotion_bravery_small = 2,
         halloweenpotion_bravery_large = 1,
@@ -54,12 +54,12 @@ local EXPERIMENT_RESULTS =
 
 local NUM_TO_SPAWN =
 {
-	halloweenpotion_moon = { [1] = 0.5, [2] = 0.3, [3] = 0.2 },
+    halloweenpotion_moon = { [1] = 0.5, [2] = 0.3, [3] = 0.2 },
 }
 
 for _, v in pairs(EXPERIMENT_RESULTS) do
     for k, _ in pairs(v) do
-		table.insert(prefabs, k)
+        table.insert(prefabs, k)
     end
 end
 
@@ -82,16 +82,19 @@ local function StartMakingScience(inst, doer, recipe)
 end
 
 local function onturnon(inst)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado and inst.components.prototyper then
-	inst.components.prototyper.trees = require("techtree").Create({SCIENCE = 0,})
-	local fx = SpawnPrefab("shock_machines_fx")
-	if fx then local pt = inst:GetPosition() fx.Transform:SetPosition(pt.x, pt.y, pt.z) end 
-	if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-	return 
-	else
-	if inst.components.prototyper then inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.MADSCIENCE end
-	end	
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado and inst.components.prototyper then
+        inst.components.prototyper.trees = require("techtree").Create({ SCIENCE = 0, })
+        local fx = SpawnPrefab("shock_machines_fx")
+        if fx then
+            local pt = inst:GetPosition()
+            fx.Transform:SetPosition(pt.x, pt.y, pt.z)
+        end
+        if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
+        return
+    else
+        if inst.components.prototyper then inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.MADSCIENCE end
+    end
 
     if inst.components.madsciencelab ~= nil and not inst:HasTag("burnt") and not inst.components.madsciencelab:IsMakingScience() then
         if not (inst.AnimState:IsCurrentAnimation("hit") or inst.AnimState:IsCurrentAnimation("hit") or inst.AnimState:IsCurrentAnimation("place")) then
@@ -147,7 +150,7 @@ local function OnInactive(inst)
         PlayAnimation(inst, "idle", true)
         MakePrototyper(inst)
         RemoveFireFx(inst)
-    end 
+    end
 end
 
 local function OnFireFXOver(firefx)
@@ -161,33 +164,35 @@ end
 local function OnStageStarted(inst, stage)
     inst:RemoveComponent("prototyper")
 
-    if SCIENCE_STAGES[stage].pre_anim then 
+    if SCIENCE_STAGES[stage].pre_anim then
         PlayAnimation(inst, SCIENCE_STAGES[stage].pre_anim)
     end
     PushAnimation(inst, SCIENCE_STAGES[stage].anim, true)
 
     inst.SoundEmitter:KillSound("loop")
-    inst.SoundEmitter:PlaySound("dontstarve/halloween_2018/madscience_machine/cooking_LP", "loop", stage / #SCIENCE_STAGES)
+    inst.SoundEmitter:PlaySound("dontstarve/halloween_2018/madscience_machine/cooking_LP", "loop",
+        stage / #SCIENCE_STAGES)
 
     RemoveFireFx(inst)
     MakeFireFx(inst)
-    if SCIENCE_STAGES[stage].fire_pre_anim then 
+    if SCIENCE_STAGES[stage].fire_pre_anim then
         inst._firefx.AnimState:PlayAnimation(SCIENCE_STAGES[stage].fire_pre_anim)
     end
     inst._firefx.AnimState:PushAnimation(SCIENCE_STAGES[stage].fire_anim, true)
 end
 
 local function OnScienceWasMade(inst, experiement_id)
-	local result = EXPERIMENT_RESULTS[experiement_id] ~= nil and weighted_random_choice(EXPERIMENT_RESULTS[experiement_id]) or nil
-	if result ~= nil then
-		local weights = NUM_TO_SPAWN[result]
-		local num_to_spawn = weights ~= nil and weighted_random_choice(weights) or 1
+    local result = EXPERIMENT_RESULTS[experiement_id] ~= nil and
+    weighted_random_choice(EXPERIMENT_RESULTS[experiement_id]) or nil
+    if result ~= nil then
+        local weights = NUM_TO_SPAWN[result]
+        local num_to_spawn = weights ~= nil and weighted_random_choice(weights) or 1
 
-		local x, y, z = inst.Transform:GetWorldPosition()
-		for i=1,num_to_spawn do
-			LaunchAt(SpawnPrefab(result), inst, FindClosestPlayer(x, y, z, true), 1, 2.5, 1)
-		end
-	end
+        local x, y, z = inst.Transform:GetWorldPosition()
+        for i = 1, num_to_spawn do
+            LaunchAt(SpawnPrefab(result), inst, FindClosestPlayer(x, y, z, true), 1, 2.5, 1)
+        end
+    end
 
     PlayAnimation(inst, "cooking_finish")
     inst.SoundEmitter:KillSound("loop")
@@ -254,11 +259,11 @@ local function fn()
     inst.Light:SetRadius(2)
     inst.Light:SetFalloff(1.5)
     inst.Light:SetIntensity(.5)
-    inst.Light:SetColour(250/255,180/255,50/255)
-   -- inst.Light:EnableClientModulation(true)
+    inst.Light:SetColour(250 / 255, 180 / 255, 50 / 255)
+    -- inst.Light:EnableClientModulation(true)
 
     inst:AddTag("structure")
-	inst:AddTag("madsciencelab")
+    inst:AddTag("madsciencelab")
 
     inst.AnimState:SetBank("madscience_lab")
     inst.AnimState:SetBuild("madscience_lab")
@@ -281,7 +286,7 @@ local function fn()
 
     inst._glow = SpawnPrefab("madscience_lab_glow")
     inst._glow.entity:SetParent(inst.entity)
-	inst.highlightchildren = { inst._glow }
+    inst.highlightchildren = { inst._glow }
 
     inst._firefx = nil
 
@@ -415,12 +420,12 @@ local function dummy_fn()
 
     inst.entity:SetPristine()
     if not TheWorld.ismastersim then
-		return inst
-	end
+        return inst
+    end
 
     inst.persists = false
-	inst:DoTaskInTime(0, inst.Remove)
-	return inst
+    inst:DoTaskInTime(0, inst.Remove)
+    return inst
 end
 
 

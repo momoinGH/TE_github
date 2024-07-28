@@ -21,7 +21,7 @@ local function fn()
 
     inst.scaley = math.random(6, 8) * 0.1
     inst.Transform:SetScale(1, inst.scaley, 1)
-    
+
     inst:AddTag("FX")
     inst:AddTag("NOCLICK")
 
@@ -32,4 +32,4 @@ local function fn()
     return inst
 end
 
-return  Prefab("gf_lightningfx", fn, assets, prefabs)
+return Prefab("gf_lightningfx", fn, assets, prefabs)

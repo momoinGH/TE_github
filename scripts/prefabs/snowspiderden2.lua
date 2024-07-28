@@ -21,15 +21,15 @@ local prefabs =
 }
 
 SetSharedLootTable('snow_spider_hole',
-{
-    {"rocks",           1.00},
-    {"rock_ice",       	1.00},
-    {"silk",            1.00},
-    {"silk",  			1.00},
-    {"silk",  			0.50},
-    {"spidergland",     0.25},
-    {"silk",            0.50},
-})
+    {
+        { "rocks",       1.00 },
+        { "rock_ice",    1.00 },
+        { "silk",        1.00 },
+        { "silk",        1.00 },
+        { "silk",        0.50 },
+        { "spidergland", 0.25 },
+        { "silk",        0.50 },
+    })
 
 local SMALL = 1
 local MEDIUM = 2
@@ -37,8 +37,8 @@ local LARGE = 3
 
 local function set_stage(inst, workleft, play_grow_sound)
     local new_stage = (workleft * 4 <= TUNING.MOONSPIDERDEN.WORK and SMALL)
-            or (workleft * 2 <= TUNING.MOONSPIDERDEN.WORK and MEDIUM)
-            or LARGE
+        or (workleft * 2 <= TUNING.MOONSPIDERDEN.WORK and MEDIUM)
+        or LARGE
 
     inst.components.childspawner:SetMaxChildren(TUNING.MOONSPIDERDEN.SPIDERS[new_stage])
     inst.components.childspawner:SetMaxEmergencyChildren(TUNING.MOONSPIDERDEN.EMERGENCY_WARRIORS[new_stage])
@@ -200,7 +200,8 @@ end
 
 local function on_load(inst, data)
     if data ~= nil and data.sleeping_work_regen ~= nil then
-        local new_work_amount = math.min(inst.components.workable.maxwork, inst.components.workable.workleft + data.sleeping_work_regen)
+        local new_work_amount = math.min(inst.components.workable.maxwork,
+            inst.components.workable.workleft + data.sleeping_work_regen)
         inst.components.workable:SetWorkLeft(new_work_amount)
         set_stage(inst, new_work_amount, true)
 
@@ -230,7 +231,8 @@ local function on_wake(inst)
         local work_regen_during_sleep = math.floor((time_since_sleep / TUNING.MOONSPIDERDEN.WORK_REGENTIME) + 0.5)
 
         if work_regen_during_sleep > 0 then
-            local new_work_amount = math.min(inst.components.workable.maxwork, inst.components.workable.workleft + work_regen_during_sleep)
+            local new_work_amount = math.min(inst.components.workable.maxwork,
+                inst.components.workable.workleft + work_regen_during_sleep)
             inst.components.workable:SetWorkLeft(new_work_amount)
 
             set_stage(inst, new_work_amount, true)

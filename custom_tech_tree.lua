@@ -22,26 +22,26 @@ III. Add a recipe:
 IV. Add text constants (you can support a few languages if you like):
 	STRINGS.UI.CRAFTING.YOUR_TREE_NAME_ONE = "You need a <custom structure name> to make it."
 --]]
-_G=GLOBAL
+_G = GLOBAL
 local TechTree = require("techtree")
 
-if _G.rawget(_G,"AddNewTechTree") then --Make compatible with other mods.
+if _G.rawget(_G, "AddNewTechTree") then --Make compatible with other mods.
 	AddNewTechTree = _G.AddNewTechTree --adding to the env of the mod.
 	return
 end
 
 --Prepare variables. Save existing environment.
 
-local db = {} -- db.MAGIC == 0
-local db_new_techs = {} -- Only new trees, e.g. db_new_techs.NEWTREE == 0
-local db_new_classified = {} --e.g.  db_new_classified.NEWTREE == "custom_NEWTREE_level"
-local db_new_builder_name = {} -- e.g. db_new_builder_name.NEWTREE == "builder.accessible_tech_trees.NEWTREE"
+local db = {}                     -- db.MAGIC == 0
+local db_new_techs = {}           -- Only new trees, e.g. db_new_techs.NEWTREE == 0
+local db_new_classified = {}      --e.g.  db_new_classified.NEWTREE == "custom_NEWTREE_level"
+local db_new_builder_name = {}    -- e.g. db_new_builder_name.NEWTREE == "builder.accessible_tech_trees.NEWTREE"
 
-for k,v in pairs(_G.TECH.NONE) do --initialize (copy)
+for k, v in pairs(_G.TECH.NONE) do --initialize (copy)
 	db[k] = 0
 end
 if TUNING.PROTOTYPER_TREES then --just for sure
-	for k,v in pairs(TUNING.PROTOTYPER_TREES.SCIENCEMACHINE) do
+	for k, v in pairs(TUNING.PROTOTYPER_TREES.SCIENCEMACHINE) do
 		db[k] = 0
 	end
 end
@@ -56,7 +56,7 @@ end
 --Custom little hack instrument.
 local getupvalue, setupvalue, getinfo = _G.debug.getupvalue, _G.debug.setupvalue, _G.debug.getinfo
 local function inject_local(fn, local_fn_name)
-	print("INJECT... Trying to find",local_fn_name)
+	print("INJECT... Trying to find", local_fn_name)
 	local info = getinfo(fn, "u")
 	local nups = info and info.nups
 	for i = 1, nups do
@@ -65,7 +65,7 @@ local function inject_local(fn, local_fn_name)
 			return val, i
 		end
 	end
-	print("CRITICAL ERROR: Can't find variable "..tostring(upvalue_name).."!")
+	print("CRITICAL ERROR: Can't find variable " .. tostring(upvalue_name) .. "!")
 end
 
 
@@ -78,18 +78,18 @@ local function AddNewTechConstants(newtree_name)
 	_G.TECH.NONE[newtree_name] = 0
 	_G.TECH.LOST[newtree_name] = 10
 	if TUNING.PROTOTYPER_TREES then
-		for k,tbl in pairs(TUNING.PROTOTYPER_TREES) do
+		for k, tbl in pairs(TUNING.PROTOTYPER_TREES) do
 			tbl[newtree_name] = 0
 		end
 	end
 end
 
-local TECH_LEVELS = {'_ONE','_TWO','_THREE','_FOUR','_FIVE'} -- e.g. NEWTREE_ONE
-local saved_tech_names = {} --for text hint in GetHintTextForRecipe
-local function AddTechLevel(newtree_name, level) 
+local TECH_LEVELS = { '_ONE', '_TWO', '_THREE', '_FOUR', '_FIVE' } -- e.g. NEWTREE_ONE
+local saved_tech_names = {}                                  --for text hint in GetHintTextForRecipe
+local function AddTechLevel(newtree_name, level)
 	level = level or 1
 	local level_name
-	if TECH_LEVELS[level] then 
+	if TECH_LEVELS[level] then
 		level_name = newtree_name .. TECH_LEVELS[level]
 	else
 		level_name = newtree_name .. "_" .. tostring(level)
@@ -99,11 +99,11 @@ local function AddTechLevel(newtree_name, level)
 		saved_tech_names[newtree_name] = {}
 	end
 	saved_tech_names[newtree_name][level] = level_name
-	_G.TECH[level_name] = {[newtree_name] = level} --for using in recipes
+	_G.TECH[level_name] = { [newtree_name] = level } --for using in recipes
 	--for using in new crafting structures:
 	if TUNING.PROTOTYPER_TREES then
 		local new_tree = {} --make new instance
-		for k,v in pairs(db) do --copy old data to new instance
+		for k, v in pairs(db) do --copy old data to new instance
 			new_tree[k] = v
 		end
 		new_tree[newtree_name] = level --> make structure useful
@@ -124,7 +124,7 @@ function prototyper:TurnOn(doer, ...)
 	if doer.task_custom_tech then
 		doer.task_custom_tech:Cancel()
 	end
-	doer.task_custom_tech = doer:DoTaskInTime(1.5,function(player)
+	doer.task_custom_tech = doer:DoTaskInTime(1.5, function(player)
 		local trees_changed = false
 		local tech_tree = player.components.builder.accessible_tech_trees
 		for tech_name, _ in pairs(db_new_techs) do
@@ -134,30 +134,26 @@ function prototyper:TurnOn(doer, ...)
 			end
 		end
 		if trees_changed then
-			player:PushEvent("techtreechange", {level = tech_tree})
+			player:PushEvent("techtreechange", { level = tech_tree })
 			player.replica.builder:SetTechTrees(tech_tree)
 		end
 		player.task_custom_tech = nil
 	end)
-	return old_TurnOn(self,doer, ...)
+	return old_TurnOn(self, doer, ...)
 end
-
-
 
 --3) components/builder_replica has Setters and Getters for each tree's intrinsic bonuses, these are called later in recipepopup
 
 local replica = _G.require "components/builder_replica"
 local old_SetTechTrees = replica.SetTechTrees
-function replica:SetTechTrees(techlevels,...)
+function replica:SetTechTrees(techlevels, ...)
 	if self.classified ~= nil then
-		for tech_name,v in pairs(db_new_techs) do
-			self.classified[db_new_classified[tech_name] ]:set(techlevels[tech_name] or 0)
+		for tech_name, v in pairs(db_new_techs) do
+			self.classified[db_new_classified[tech_name]]:set(techlevels[tech_name] or 0)
 		end
 	end
-	return old_SetTechTrees(self,techlevels,...)
+	return old_SetTechTrees(self, techlevels, ...)
 end
-
-
 
 --4) KnowsRecipe explicitly checks each tree in both builder and builder_replica
 
@@ -169,7 +165,7 @@ end
 
 AddClassPostConstruct("components/prototyper", function(this) --increase table used by :GetTechTrees function.
 	this.trees = {}
-	for k,v in pairs(db) do --db is already prepared for copying.
+	for k, v in pairs(db) do                                  --db is already prepared for copying.
 		this.trees[k] = v
 	end
 end)
@@ -184,11 +180,11 @@ local function PlayerClassifiedHack()
 	local RegisterNetListeners_fn = inject_local(_G.Prefabs.player_classified.fn, "RegisterNetListeners")
 	local OnTechTreesDirty_fn_old, var_num = inject_local(RegisterNetListeners_fn, "OnTechTreesDirty")
 	local OnTechTreesDirty_fn_new = function(inst)
-		for tech_name,v in pairs(db_new_techs) do
-			if inst[db_new_classified[tech_name] ] == nil then
-				print("error: inst."..db_new_classified[tech_name].." == nil")
+		for tech_name, v in pairs(db_new_techs) do
+			if inst[db_new_classified[tech_name]] == nil then
+				print("error: inst." .. db_new_classified[tech_name] .. " == nil")
 			else
-				inst.techtrees[tech_name] = inst[db_new_classified[tech_name] ]:value()
+				inst.techtrees[tech_name] = inst[db_new_classified[tech_name]]:value()
 			end
 		end
 		return OnTechTreesDirty_fn_old(inst)
@@ -196,18 +192,18 @@ local function PlayerClassifiedHack()
 	setupvalue(RegisterNetListeners_fn, var_num, OnTechTreesDirty_fn_new)
 end
 local player_classified_hacked = false
-AddPrefabPostInit("world",function(w)
+AddPrefabPostInit("world", function(w)
 	if not player_classified_hacked then
 		player_classified_hacked = true
 		PlayerClassifiedHack()
 	end
 end)
 
---Create network variables. 
+--Create network variables.
 local net_tinybyte = _G.net_tinybyte
-AddPrefabPostInit("player_classified",function(inst) --print("ADDPREFABPOSTINIT player_classified")
-	for tech_name,v in pairs(db_new_techs) do
-		inst[db_new_classified[tech_name] ] = net_tinybyte(inst.GUID, db_new_builder_name[tech_name], "techtreesdirty")
+AddPrefabPostInit("player_classified", function(inst) --print("ADDPREFABPOSTINIT player_classified")
+	for tech_name, v in pairs(db_new_techs) do
+		inst[db_new_classified[tech_name]] = net_tinybyte(inst.GUID, db_new_builder_name[tech_name], "techtreesdirty")
 	end
 end)
 
@@ -215,9 +211,9 @@ end)
 
 --7) recipe, self.level.NEWTREE = self.level.NEWTREE or 0 needs to be added, could be done by overriding Recipe._ctor, or doing an AddClassPostConstruct (maybe? the recipe.lua file doesn't return the class though, so maybe not)
 
-AddPrefabPostInit("world",function(w) --Fixing all recipes. Just for sure.
+AddPrefabPostInit("world", function(w) --Fixing all recipes. Just for sure.
 	for rec_name, recipe in pairs(_G.AllRecipes) do
-		for tree_name,_ in pairs(db_new_techs) do
+		for tree_name, _ in pairs(db_new_techs) do
 			recipe.level[tree_name] = recipe.level[tree_name] or 0
 		end
 	end
@@ -237,7 +233,7 @@ local save_hint_recipe
 do
 	local recipepopup = _G.require "widgets/recipepopup"
 	local RecipePopup_Refresh_fn = recipepopup.Refresh
-	local old_GetHintTextForRecipe, num_var = inject_local(RecipePopup_Refresh_fn,"GetHintTextForRecipe")
+	local old_GetHintTextForRecipe, num_var = inject_local(RecipePopup_Refresh_fn, "GetHintTextForRecipe")
 	if old_GetHintTextForRecipe then
 		setupvalue(RecipePopup_Refresh_fn, num_var, function(player, recipe)
 			save_hint_recipe = recipe
@@ -246,15 +242,15 @@ do
 	end
 end
 
---Here we can use the link. 
+--Here we can use the link.
 local CRAFTING = _G.STRINGS.UI.CRAFTING --See STRINGS.UI.CRAFTING.NEEDSCIENCEMACHINE
-AddClassPostConstruct("widgets/recipepopup",function(self)
+AddClassPostConstruct("widgets/recipepopup", function(self)
 	local old_SetString = self.teaser.SetString
 	function self.teaser:SetString(str)
 		--print("Show text",str,tostring(save_hint_recipe))
-		if str == "Text not found." and save_hint_recipe ~= nil  then --Probably custom recipe
+		if str == "Text not found." and save_hint_recipe ~= nil then --Probably custom recipe
 			local custom_tech, custom_level
-			for tech_name, _ in pairs(db_new_techs) do --Check if it's really custom.
+			for tech_name, _ in pairs(db_new_techs) do          --Check if it's really custom.
 				custom_level = save_hint_recipe.level[tech_name]
 				if custom_level > 0 then
 					custom_tech = tech_name
@@ -262,10 +258,10 @@ AddClassPostConstruct("widgets/recipepopup",function(self)
 				end
 			end
 			if custom_tech then
-				str = CRAFTING[saved_tech_names[custom_tech][custom_level] ] or str
+				str = CRAFTING[saved_tech_names[custom_tech][custom_level]] or str
 			end
 		end
-		return old_SetString(self,str)
+		return old_SetString(self, str)
 	end
 end)
 
@@ -273,10 +269,10 @@ end)
 
 --Main function of the lib.
 function AddNewTechTree(newtree_name, num_levels)
-	UpdateDB(newtree_name) --update local tables
+	UpdateDB(newtree_name)         --update local tables
 	AddNewTechConstants(newtree_name) --_G.TECH.NEWTREE
 	num_levels = num_levels or 1
-	for i = 1, num_levels do --_G.TECH.NEWTREE_ONE and TUNING.PROTOTYPER_TREES.NEWTREE_ONE, two, three etc.
+	for i = 1, num_levels do       --_G.TECH.NEWTREE_ONE and TUNING.PROTOTYPER_TREES.NEWTREE_ONE, two, three etc.
 		AddTechLevel(newtree_name, i)
 	end
 end

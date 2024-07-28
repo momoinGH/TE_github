@@ -34,26 +34,28 @@ local function onextinguish(inst)
 end
 
 local function ontakefuel(inst)
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then
-inst.components.burnable:Extinguish()
-end	
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        inst.components.burnable:Extinguish()
+    end
     inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
-	if inst.components.specialstewer then 
-    if inst.components.installations and inst.components.installations:IsInstalled() then
-	inst.components.specialstewer:StartWorking() 
-    end	 
-	end
+    if inst.components.specialstewer then
+        if inst.components.installations and inst.components.installations:IsInstalled() then
+            inst.components.specialstewer:StartWorking()
+        end
+    end
 end
 
 local function updatefuelrate(inst)
-    inst.components.fueled.rate = TheWorld.state.israining and 1 + TUNING.FIREPIT_RAIN_RATE * TheWorld.state.precipitationrate or 1
+    inst.components.fueled.rate = TheWorld.state.israining and
+    1 + TUNING.FIREPIT_RAIN_RATE * TheWorld.state.precipitationrate or 1
 end
 
 local function onupdatefueled(inst)
     if inst.components.burnable ~= nil and inst.components.fueled ~= nil then
         updatefuelrate(inst)
-        inst.components.burnable:SetFXLevel(inst.components.fueled:GetCurrentSection(), inst.components.fueled:GetSectionPercent())
+        inst.components.burnable:SetFXLevel(inst.components.fueled:GetCurrentSection(),
+            inst.components.fueled:GetSectionPercent())
     end
 end
 
@@ -85,10 +87,10 @@ local function onbuilt(inst)
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("idle", false)
     inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then
-inst.components.burnable:Extinguish()
-end	
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        inst.components.burnable:Extinguish()
+    end
 end
 
 local function OnHaunt(inst, haunter)
@@ -98,8 +100,8 @@ local function OnHaunt(inst, haunter)
         inst.components.fueled:DoDelta(TUNING.MED_FUEL)
         inst.components.hauntable.hauntvalue = TUNING.HAUNT_SMALL
         return true
-    --#HAUNTFIX
-    --elseif math.random() <= TUNING.HAUNT_CHANCE_HALF and
+        --#HAUNTFIX
+        --elseif math.random() <= TUNING.HAUNT_CHANCE_HALF and
         --inst.components.workable ~= nil and
         --inst.components.workable:CanBeWorked() then
         --inst.components.workable:WorkedBy(haunter, 1)
@@ -125,7 +127,7 @@ local installables =
 }
 
 local function CanInstall(prefab)
-    for _,v in ipairs(installables) do
+    for _, v in ipairs(installables) do
         if prefab == v then
             return true
         end
@@ -138,9 +140,9 @@ local function OnInstall(inst, target)
 end
 
 local function OnPreLoad(inst, data)
-	if data ~= nil and data._has_debuffable then
-		inst:AddComponent("debuffable")
-	end
+    if data ~= nil and data._has_debuffable then
+        inst:AddComponent("debuffable")
+    end
     if data and data.installed and data.specialstewer then
         local obj = inst.components.installations:Install(data.installation)
         inst.components.specialstewer:OnLoad(data.specialstewer)
@@ -148,14 +150,14 @@ local function OnPreLoad(inst, data)
             local dish = SpawnSaveRecord(data.dish)
             inst:SetDish(nil, dish)
         end
---        if data.container then
---            inst.components.container:OnLoad(data.container)
---        end
+        --        if data.container then
+        --            inst.components.container:OnLoad(data.container)
+        --        end
     end
 end
 
 local function OnSave(inst, data)
-	data._has_debuffable = inst.components.debuffable ~= nil
+    data._has_debuffable = inst.components.debuffable ~= nil
     if inst.components.installations and inst.components.installations:IsInstalled() then
         data.installed = true
         data.installation = inst.components.installations.installation.prefab
@@ -163,9 +165,9 @@ local function OnSave(inst, data)
         if inst.components.shelf then
             data.dish = inst.dish and inst.dish:GetSaveRecord() or nil
         end
---        if inst.components.container then
---            data.container = inst.components.container:OnSave()
---        end
+        --        if inst.components.container then
+        --            data.container = inst.components.container:OnSave()
+        --        end
     end
 end
 
@@ -209,9 +211,9 @@ local function fn()
 
     --cooker (from cooker component) added to pristine state for optimization
     inst:AddTag("cooker")
-	
-	-- for storytellingprop component
-	inst:AddTag("storytellingprop")	
+
+    -- for storytellingprop component
+    inst:AddTag("storytellingprop")
 
     if TheNet:GetServerGameMode() == "quagmire" then
         inst:AddTag("installations")
@@ -274,7 +276,7 @@ local function fn()
     inst.components.fueled:InitializeFuelLevel(TUNING.FIREPIT_FUEL_START)
 
     inst:AddComponent("storytellingprop")
-	
+
     -----------------------------
     if TheNet:GetServerGameMode() == "quagmire" then
         event_server_data("quagmire", "prefabs/firepit").master_postinit(inst, OnPrefabOverrideDirty, OnRadiusDirty)
@@ -291,8 +293,8 @@ local function fn()
     inst.components.installations:SetUp(CanInstall, OnInstall)
 
     inst:AddComponent("container")
-	inst:AddComponent("stewer")	
---    inst.components.container:WidgetSetup(inst.prefab)
+    inst:AddComponent("stewer")
+    --    inst.components.container:WidgetSetup(inst.prefab)
     inst.components.container.canbeopened = false
 
     inst:AddComponent("specialstewer")
@@ -308,12 +310,12 @@ local function fn()
 
     inst.OnSave = OnSave
     inst.OnPreLoad = OnPreLoad
-	
-    inst.restart_firepit = function( inst )
+
+    inst.restart_firepit = function(inst)
         local fuel_percent = inst.components.fueled:GetPercent()
         inst.components.fueled:MakeEmpty()
-        inst.components.fueled:SetPercent( fuel_percent )
-    end	
+        inst.components.fueled:SetPercent(fuel_percent)
+    end
 
     return inst
 end

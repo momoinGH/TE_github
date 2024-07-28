@@ -60,32 +60,36 @@ end
 
 function GoatmumBrain:OnStart(inst)
     local root = PriorityNode(
-    {
---        WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
---        RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
---        RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true),				
-				
-				
-       WhileNode(function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
-        WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
---        WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
---            ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST))),
---        WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() end, "Dodge",
---            RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
-        WhileNode( function() return IsHomeOnFire(self.inst) end, "HomeOnFire", Panic(self.inst)),
-        WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
-        DoAction(self.inst, GoHomeAction, "Go Home", true)),
---        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
-        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST),
-    }, 0.25)
+        {
+            --        WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            --        RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
+            --        RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true),				
+
+
+            WhileNode(
+            function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end,
+                "PanicHaunted", Panic(self.inst)),
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            --        WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+            --            ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST))),
+            --        WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() end, "Dodge",
+            --            RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
+            WhileNode(function() return IsHomeOnFire(self.inst) end, "HomeOnFire", Panic(self.inst)),
+            WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
+                DoAction(self.inst, GoHomeAction, "Go Home", true)),
+            --        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                MAX_WANDER_DIST),
+        }, 0.25)
 
     local IsIdle =
-    PriorityNode(
-    {
-        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST),
-    }, 0.25)
+        PriorityNode(
+            {
+                Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                    MAX_WANDER_DIST),
+            }, 0.25)
 
-   
+
     self.bt = BT(self.inst, root)
 end
 

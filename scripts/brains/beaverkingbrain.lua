@@ -27,31 +27,30 @@ end)
 3. * If PlayerClose and CanJump and NoPigsAround then Jump
 4. * If PlayerClose and CanCast then WalkAway
 5. * if Player is not Close and CanCast then Cast
-6. * panic    
+6. * panic
 
 ]]
 
 function beaverkingbrain:GetTargets()
     --return FindEntities(self.inst, 10, nil, nil, { "notarget", "INLIMBO" }, { "player" })
     local x, y, z = self.inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SEE_PLAYER_DIST, { "player" }, {"playerghost"})    
+    local ents = TheSim:FindEntities(x, y, z, SEE_PLAYER_DIST, { "player" }, { "playerghost" })
     return ents or {}
 end
 
 function beaverkingbrain:GetPigs()
     --return FindEntities(self.inst, 10, nil, nil, { "notarget", "INLIMBO" }, { "player" })
     local x, y, z = self.inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SEE_PLAYER_DIST, { "wildbeaverguard" })    
+    local ents = TheSim:FindEntities(x, y, z, SEE_PLAYER_DIST, { "wildbeaverguard" })
     return ents or {}
 end
 
 function beaverkingbrain:GetAllPigs()
     --return FindEntities(self.inst, 10, nil, nil, { "notarget", "INLIMBO" }, { "player" })
     local x, y, z = self.inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SEE_PLAYER_DIST, { "wildbeaverguard" })    
+    local ents = TheSim:FindEntities(x, y, z, SEE_PLAYER_DIST, { "wildbeaverguard" })
     return ents or {}
 end
-
 
 function beaverkingbrain:ArePigsClose()
     return
@@ -65,17 +64,17 @@ end
 
 function beaverkingbrain:IsPlayerClose()
     return
-        FindEntity(self.inst, CLOSE_DIST, nil, { "player" }, { "notarget", "INLIMBO", "playerghost" }) ~=nil
+        FindEntity(self.inst, CLOSE_DIST, nil, { "player" }, { "notarget", "INLIMBO", "playerghost" }) ~= nil
 end
 
 function beaverkingbrain:CanCast()
-    return 
-        not self.inst.sg:HasStateTag("busy") and 
-        not self.inst.CannotCast 
+    return
+        not self.inst.sg:HasStateTag("busy") and
+        not self.inst.CannotCast
 end
 
 function beaverkingbrain:CanJump()
-    return 
+    return
         not self.inst.sg:HasStateTag("busy") and
         not self.inst.CannotJump and
         (not self:ArePigsClose() or self:FarAwayFromHome())
@@ -102,90 +101,90 @@ function beaverkingbrain:FarAwayFromHome()
         self.inst:GetPosition():Dist(self.homepos) > MAX_DIST_TO_HOME - 1
 end
 
-
 function beaverkingbrain:OnStart()
     self.inst.__brain = self
-    local root = 
-    PriorityNode({
+    local root =
+        PriorityNode({
 
-        -- If Ping King is lying on the ground then his brain is turned off
-        WhileNode(function() return not self:BrainIsOn() end, "BrainOff", 
-            ActionNode(function () end)),
+            -- If Ping King is lying on the ground then his brain is turned off
+            WhileNode(function() return not self:BrainIsOn() end, "BrainOff",
+                ActionNode(function() end)),
 
-        --------------------------- GOING HOME PART ----------------------------------
+            --------------------------- GOING HOME PART ----------------------------------
 
-        -- We have gone too far away from home. Running back
-        WhileNode(function() return self:TooFarAwayFromHome() end, "",
-            ChattyNode(self.inst, {""},
-                ActionNode(function ( ... )
-                    --print("Pig King is going home!")
-                    self.inst.components.locomotor:GoToPoint(self.homepos, nil, true)
-                end))),
-
-
-        -- Sitting down (we just came home)
-        WhileNode(function() return not self:IsPlayerNearby() and self:IsOnThePlace() end, "",
-            ChattyNode(self.inst, {""},
-                ActionNode(function ()
-                    --print("Pig King is sitting down!")
-                    self.inst.sg:GoToState("sitdown")
-                end))),
-
-        -- Going home
-        WhileNode(function() return not self:IsPlayerNearby() and not self:IsOnThePlace() end, "",
-            ChattyNode(self.inst, {""},
-                ActionNode(function ( ... )
-                    --print("Pig King is going home!")
-                    --print(self.homepos)
-                    self.inst.components.locomotor:GoToPoint(self.homepos, nil, false)
-                end))),
+            -- We have gone too far away from home. Running back
+            WhileNode(function() return self:TooFarAwayFromHome() end, "",
+                ChattyNode(self.inst, { "" },
+                    ActionNode(function(...)
+                        --print("Pig King is going home!")
+                        self.inst.components.locomotor:GoToPoint(self.homepos, nil, true)
+                    end))),
 
 
-        --------------------------- FIGHT PART STARTS HERE ---------------------------
+            -- Sitting down (we just came home)
+            WhileNode(function() return not self:IsPlayerNearby() and self:IsOnThePlace() end, "",
+                ChattyNode(self.inst, { "" },
+                    ActionNode(function()
+                        --print("Pig King is sitting down!")
+                        self.inst.sg:GoToState("sitdown")
+                    end))),
 
-        -- Jumping 
-        --    if player is close 
-        --       and it is possible to jump 
-        --       and there are no pigs around
-        WhileNode(function() return self:IsPlayerClose() and self:CanJump() end, "",
-            ChattyNode(self.inst, {"Step back"},
-                ActionNode(function ( ... )
-                    self.inst.sg:GoToState("pound")
-                    self.inst.CannotJump = true
-                    self.inst:DoTaskInTime(10, function (inst)
-                        inst.CannotJump = nil
-                    end)                    
-                end))),
+            -- Going home
+            WhileNode(function() return not self:IsPlayerNearby() and not self:IsOnThePlace() end, "",
+                ChattyNode(self.inst, { "" },
+                    ActionNode(function(...)
+                        --print("Pig King is going home!")
+                        --print(self.homepos)
+                        self.inst.components.locomotor:GoToPoint(self.homepos, nil, false)
+                    end))),
 
 
-        -- Walking away from player because 
-        -- we don't want to cast it too close to player
-        WhileNode(function() return self:IsPlayerClose() and self:CanCast() end, "",
-            ChattyNode(self.inst, {"Step back"},
-                BeaverWalkAway(self.inst, "player", CLOSE_DIST+1, CLOSE_DIST+1))),
+            --------------------------- FIGHT PART STARTS HERE ---------------------------
 
-        -- Casting spell
-        --    if it is possible now
-        --    and player is not too close
---        WhileNode(function() return not self:IsPlayerClose() and self:CanCast() end, "",
---            ChattyNode(self.inst, {"Cast"},
---                ActionNode(function ( ... )
---                    self.inst.sg:GoToState("cast")
---                    self.inst.CannotCast = true
---                    self.inst:DoTaskInTime(10, function (inst)
---                        inst.CannotCast = nil
---                    end)
---                end))),
+            -- Jumping
+            --    if player is close
+            --       and it is possible to jump
+            --       and there are no pigs around
+            WhileNode(function() return self:IsPlayerClose() and self:CanJump() end, "",
+                ChattyNode(self.inst, { "Step back" },
+                    ActionNode(function(...)
+                        self.inst.sg:GoToState("pound")
+                        self.inst.CannotJump = true
+                        self.inst:DoTaskInTime(10, function(inst)
+                            inst.CannotJump = nil
+                        end)
+                    end))),
 
-        -- If nothing else works, then at least we can panic 
-        BeaverKingPanic(self.inst)
 
-    },.25)
+            -- Walking away from player because
+            -- we don't want to cast it too close to player
+            WhileNode(function() return self:IsPlayerClose() and self:CanCast() end, "",
+                ChattyNode(self.inst, { "Step back" },
+                    BeaverWalkAway(self.inst, "player", CLOSE_DIST + 1, CLOSE_DIST + 1))),
+
+            -- Casting spell
+            --    if it is possible now
+            --    and player is not too close
+            --        WhileNode(function() return not self:IsPlayerClose() and self:CanCast() end, "",
+            --            ChattyNode(self.inst, {"Cast"},
+            --                ActionNode(function ( ... )
+            --                    self.inst.sg:GoToState("cast")
+            --                    self.inst.CannotCast = true
+            --                    self.inst:DoTaskInTime(10, function (inst)
+            --                        inst.CannotCast = nil
+            --                    end)
+            --                end))),
+
+            -- If nothing else works, then at least we can panic
+            BeaverKingPanic(self.inst)
+
+        }, .25)
     self.bt = BT(self.inst, root)
 end
 
 function beaverkingbrain:OnInitializationComplete()
-    self.inst.components.knownlocations:RememberLocation("spawnpoint", Point(self.inst.Transform:GetWorldPosition()), true)
+    self.inst.components.knownlocations:RememberLocation("spawnpoint", Point(self.inst.Transform:GetWorldPosition()),
+        true)
     self.homepos = self.inst.components.knownlocations:GetLocation("spawnpoint")
 end
 

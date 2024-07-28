@@ -50,7 +50,7 @@ end
 
 local function OnAttacked(inst, data)
     inst.components.combat:SetTarget(data.attacker)
---    inst.components.combat:ShareTarget(data.attacker, 12, ShareTargetFn, 3)
+    --    inst.components.combat:ShareTarget(data.attacker, 12, ShareTargetFn, 3)
 end
 
 local function ValidShedAntlerTarget(inst, other)
@@ -64,7 +64,7 @@ end
 
 local function OnShedAntler(inst, other)
     if ValidShedAntlerTarget(inst, other) then
-        inst.components.lootdropper:SpawnLootPrefab("deer_antler"..tostring(inst.hasantler))
+        inst.components.lootdropper:SpawnLootPrefab("deer_antler" .. tostring(inst.hasantler))
         if not (inst.components.health:IsDead() or inst.sg:HasStateTag("busy")) then
             inst.sg:GoToState("knockoffantler")
         end
@@ -78,7 +78,6 @@ end
 local function OnCollide(inst, other)
     if ValidShedAntlerTarget(inst, other) and
         Vector3(inst.Physics:GetVelocity()):LengthSq() >= 60 then
-
         inst:DoTaskInTime(2 * FRAMES, OnShedAntler, other)
     end
 end
@@ -86,7 +85,7 @@ end
 local function ShowAntler(inst)
     if inst.hasantler ~= nil then
         inst.AnimState:Show("swap_antler")
-        inst.AnimState:OverrideSymbol("swap_antler_red", "deer_build", "swap_antler"..tostring(inst.hasantler))
+        inst.AnimState:OverrideSymbol("swap_antler_red", "deer_build", "swap_antler" .. tostring(inst.hasantler))
     else
         inst.AnimState:Hide("swap_antler")
     end
@@ -176,7 +175,8 @@ end
 local SPELL_OVERLAP_MIN = 3
 local SPELL_OVERLAP_MAX = 6
 local function NoSpellOverlap(x, y, z, r)
-    return #TheSim:FindEntities(x, 0, z, r or SPELL_OVERLAP_MIN, nil, nil, { "deer_ice_circle", "deer_fire_circle" }) <= 0
+    return #TheSim:FindEntities(x, 0, z, r or SPELL_OVERLAP_MIN, nil, nil, { "deer_ice_circle", "deer_fire_circle" }) <=
+    0
 end
 
 --Hard limit target list size since casting does multiple passes it
@@ -186,8 +186,8 @@ local function FindCastTargets(inst, target)
         --Single target for deer without keeper
         return target.components.health ~= nil
             and not (target.components.health:IsDead() or
-                    target:HasTag("playerghost") or
-                    target:HasTag("deergemresistance"))
+                target:HasTag("playerghost") or
+                target:HasTag("deergemresistance"))
             and target:IsNear(inst, TUNING.DEER_GEMMED_CAST_RANGE)
             and NoSpellOverlap(target.Transform:GetWorldPosition())
             and { target }
@@ -316,7 +316,8 @@ local function OnGotCommander(inst, data)
         inst.components.entitytracker:ForgetEntity("keeper")
         inst.components.entitytracker:TrackEntity("keeper", data.commander)
 
-        inst.components.knownlocations:RememberLocation("keeperoffset", inst:GetPosition() - data.commander:GetPosition(), false)
+        inst.components.knownlocations:RememberLocation("keeperoffset", inst:GetPosition() - data.commander:GetPosition(),
+            false)
         inst:AddTag("notaunt")
     end
 end
@@ -479,7 +480,7 @@ local function common_fn(gem)
     MakeMediumFreezableCharacter(inst, "deer_torso")
     inst.components.freezable:SetResistance(1)
     inst.components.freezable:SetDefaultWearOffTime(TUNING.DEER_FIRE_FREEZE_WEAR_OFF_TIME)
-        --NOTE: no diminishing returns
+    --NOTE: no diminishing returns
     MakeHauntablePanic(inst)
 
     ------------------------------------------

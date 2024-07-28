@@ -51,9 +51,9 @@ local function OnActivate(inst, doer)
 end
 
 local function OnActivateByOther(inst, source, doer)
---    if not inst.sg:HasStateTag("open") then
---        inst.sg:GoToState("opening")
---    end
+    --    if not inst.sg:HasStateTag("open") then
+    --        inst.sg:GoToState("opening")
+    --    end
 end
 
 local function onaccept(inst, giver, item)
@@ -67,19 +67,19 @@ local function StartTravelSound(inst, doer)
 end
 
 local function onclose(inst)
-local invader = GetClosestInstWithTag("maxwell_portal_activeanim", inst, 3)
-if invader then
-invader:Remove()
-end
+    local invader = GetClosestInstWithTag("maxwell_portal_activeanim", inst, 3)
+    if invader then
+        invader:Remove()
+    end
 end
 
 local function onopen(inst)
-local invader = GetClosestInstWithTag("maxwell_portal_activeanim", inst, 3)
-if not invader then
-local portaentrada = SpawnPrefab("maxwell_portal_activeanim")
-local a, b, c = inst.Transform:GetWorldPosition()
-portaentrada.Transform:SetPosition(a, b, c)
-end
+    local invader = GetClosestInstWithTag("maxwell_portal_activeanim", inst, 3)
+    if not invader then
+        local portaentrada = SpawnPrefab("maxwell_portal_activeanim")
+        local a, b, c = inst.Transform:GetWorldPosition()
+        portaentrada.Transform:SetPosition(a, b, c)
+    end
 end
 
 local function fn()
@@ -111,11 +111,11 @@ local function fn()
         return inst
     end
 
-	inst:AddComponent("playerprox")
+    inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(10, 13)
     inst.components.playerprox:SetOnPlayerNear(onopen)
-    inst.components.playerprox:SetOnPlayerFar(onclose)	
-	
+    inst.components.playerprox:SetOnPlayerFar(onclose)
+
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
 
@@ -132,7 +132,7 @@ local function fn()
     inst.components.trader.acceptnontradable = true
     inst.components.trader.onaccept = onaccept
     inst.components.trader.deleteitemonaccept = false
-	
+
     return inst
 end
 
@@ -152,8 +152,8 @@ local function activefx_fn()
     inst.AnimState:SetSortOrder(6)
     inst.AnimState:SetFinalOffset(1)
 
-	inst:AddTag("maxwell_portal_activeanim")
-	
+    inst:AddTag("maxwell_portal_activeanim")
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then

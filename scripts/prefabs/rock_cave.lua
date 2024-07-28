@@ -1,12 +1,12 @@
 local assets =
 {
-	Asset("ANIM", "anim/rock_antcave.zip"),
+    Asset("ANIM", "anim/rock_antcave.zip"),
 }
 
 local prefabs =
 {
-	"rocks",
-	"flint",
+    "rocks",
+    "flint",
 }
 
 local function OnWork(inst, worker, workleft)
@@ -14,7 +14,7 @@ local function OnWork(inst, worker, workleft)
         local pt = inst:GetPosition()
         SpawnPrefab("rock_break_fx").Transform:SetPosition(pt:Get())
         inst.components.lootdropper:DropLoot(pt)
-		
+
         if inst.showCloudFXwhenRemoved then
             local fx = SpawnPrefab("collapse_small")
             fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -30,18 +30,18 @@ local function OnWork(inst, worker, workleft)
     end
 end
 
-SetSharedLootTable( 'rockcave',
-{
-	{"rocks", 1.0},
-	{"rocks", 1.0},
-	{"flint", 0.5},
-	{"flint", 0.25},
-	{"rocks", 0.25},
-})
+SetSharedLootTable('rockcave',
+    {
+        { "rocks", 1.0 },
+        { "rocks", 1.0 },
+        { "flint", 0.5 },
+        { "flint", 0.25 },
+        { "rocks", 0.25 },
+    })
 
 local function baserock2_fn()
-local inst = CreateEntity()
-local anim = "full"
+    local inst = CreateEntity()
+    local anim = "full"
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
@@ -50,10 +50,10 @@ local anim = "full"
 
     MakeObstaclePhysics(inst, 1)
 
---	inst.MiniMapEntity:SetIcon("minimap_rock_charcoal.png")
-	
-	inst.AnimState:SetBank("rock")
-	inst.AnimState:SetBuild("rock_antcave")
+    --	inst.MiniMapEntity:SetIcon("minimap_rock_charcoal.png")
+
+    inst.AnimState:SetBank("rock")
+    inst.AnimState:SetBuild("rock_antcave")
     if type(anim) == "table" then
         for i, v in ipairs(anim) do
             if i == 1 then
@@ -69,27 +69,27 @@ local anim = "full"
     MakeSnowCoveredPristine(inst)
 
     inst:AddTag("boulder")
-	
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
-    inst:AddComponent("lootdropper") 
+    inst:AddComponent("lootdropper")
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
     inst.components.workable:SetWorkLeft(TUNING.ROCKS_MINE)
     inst.components.workable:SetOnWorkCallback(OnWork)
-	
-	inst.components.lootdropper:SetChanceLootTable('rockcave')
+
+    inst.components.lootdropper:SetChanceLootTable('rockcave')
 
     local color = 0.5 + math.random() * 0.5
     inst.AnimState:SetMultColour(color, color, color, 1)
 
     inst:AddComponent("inspectable")
---    inst.components.inspectable.nameoverride = "ROCK"
+    --    inst.components.inspectable.nameoverride = "ROCK"
     MakeSnowCovered(inst)
 
     MakeHauntableWork(inst)

@@ -1,15 +1,15 @@
 local assets =
 {
     Asset("ANIM", "anim/ds_rabbit_basic.zip"),
-	Asset("ANIM", "anim/goddess_rabbit.zip"),
+    Asset("ANIM", "anim/goddess_rabbit.zip"),
     Asset("ANIM", "anim/beard_monster.zip"),
     Asset("ANIM", "anim/rabbit_winter_build.zip"),
     Asset("SOUND", "sound/rabbit.fsb"),
-	Asset("INV_IMAGE", "beard_monster" ),
-	Asset("INV_IMAGE", "rabbit_winter" ),
-	
-	Asset("ATLAS", "images/inventoryimages/goddess_rabbit_live.xml"),
-	Asset("IMAGE", "images/inventoryimages/goddess_rabbit_live.tex"),
+    Asset("INV_IMAGE", "beard_monster"),
+    Asset("INV_IMAGE", "rabbit_winter"),
+
+    Asset("ATLAS", "images/inventoryimages/goddess_rabbit_live.xml"),
+    Asset("IMAGE", "images/inventoryimages/goddess_rabbit_live.tex"),
 }
 
 local prefabs =
@@ -20,7 +20,7 @@ local prefabs =
     "beardhair",
     "monstermeat",
     "nightmarefuel",
-	"goddess_rabbit_fur"
+    "goddess_rabbit_fur"
 }
 
 local rabbitsounds =
@@ -50,22 +50,24 @@ end
 
 local function IsCrazyGuy(guy)
     local sanity = guy ~= nil and guy.replica.sanity or nil
-    return sanity ~= nil and sanity:GetPercentNetworked() <= (guy:HasTag("dappereffects") and TUNING.DAPPER_BEARDLING_SANITY or TUNING.BEARDLING_SANITY)
+    return sanity ~= nil and
+    sanity:GetPercentNetworked() <=
+    (guy:HasTag("dappereffects") and TUNING.DAPPER_BEARDLING_SANITY or TUNING.BEARDLING_SANITY)
 end
 
 local function SetRabbitLoot(lootdropper)
-	lootdropper:SetLoot(nil)
-	lootdropper:AddRandomLoot("goddess_rabbit_fur", .33)
-	lootdropper:AddRandomLoot("smallmeat", .64)
-	lootdropper.numrandomloot = 1
+    lootdropper:SetLoot(nil)
+    lootdropper:AddRandomLoot("goddess_rabbit_fur", .33)
+    lootdropper:AddRandomLoot("smallmeat", .64)
+    lootdropper.numrandomloot = 1
 end
 
 local function SetBeardlingLoot(lootdropper)
-	lootdropper:SetLoot(nil)
-	lootdropper:AddRandomLoot("beardhair", .5)
-	lootdropper:AddRandomLoot("monstermeat", 1)
-	lootdropper:AddRandomLoot("nightmarefuel", 1)
-	lootdropper.numrandomloot = 1
+    lootdropper:SetLoot(nil)
+    lootdropper:AddRandomLoot("beardhair", .5)
+    lootdropper:AddRandomLoot("monstermeat", 1)
+    lootdropper:AddRandomLoot("nightmarefuel", 1)
+    lootdropper.numrandomloot = 1
 end
 
 local function MakeInventoryRabbit(inst)
@@ -299,8 +301,8 @@ local function fn()
     inst.components.inventoryitem.nobounce = true
     inst.components.inventoryitem.canbepickedup = false
     inst.components.inventoryitem.canbepickedupalive = true
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_rabbit_live.xml"
-	inst.components.inventoryitem.imagename = "images/inventoryimages/goddess_rabbit_live.tex"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_rabbit_live.xml"
+    inst.components.inventoryitem.imagename = "images/inventoryimages/goddess_rabbit_live.tex"
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura

@@ -53,7 +53,7 @@ local WORK_ACTIONS =
 }
 local TARGET_TAGS = { "_combat" }
 for k, v in pairs(WORK_ACTIONS) do
-    table.insert(TARGET_TAGS, k.."_workable")
+    table.insert(TARGET_TAGS, k .. "_workable")
 end
 local function destroystuff(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -91,7 +91,7 @@ local states =
     State
     {
         name = "empty",
-        tags = {"idle", "empty"},
+        tags = { "idle", "empty" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -102,7 +102,7 @@ local states =
     State
     {
         name = "idle",
-        tags = {"idle"},
+        tags = { "idle" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -121,7 +121,7 @@ local states =
     State
     {
         name = "spawn",
-        tags = {"moving", "canrotate"},
+        tags = { "moving", "canrotate" },
 
         onenter = function(inst)
             inst.components.locomotor:RunForward()
@@ -139,7 +139,7 @@ local states =
     State
     {
         name = "despawn",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -157,7 +157,7 @@ local states =
     State
     {
         name = "walk_start",
-        tags = {"moving", "canrotate"},
+        tags = { "moving", "canrotate" },
 
         onenter = function(inst)
             inst.sg:GoToState("walk")
@@ -167,7 +167,7 @@ local states =
     State
     {
         name = "walk",
-        tags = {"moving", "canrotate"},
+        tags = { "moving", "canrotate" },
 
         onenter = function(inst)
             inst.components.locomotor:WalkForward()
@@ -177,7 +177,7 @@ local states =
 
         timeline =
         {
-            TimeEvent(5*FRAMES, destroystuff),
+            TimeEvent(5 * FRAMES, destroystuff),
         },
 
         events =
@@ -191,7 +191,7 @@ local states =
     State
     {
         name = "walk_stop",
-        tags = {"canrotate"},
+        tags = { "canrotate" },
 
         onenter = function(inst)
             inst.sg:GoToState("idle")
@@ -201,7 +201,7 @@ local states =
     State
     {
         name = "run_start",
-        tags = {"moving", "running", "canrotate"},
+        tags = { "moving", "running", "canrotate" },
 
         onenter = function(inst)
             inst.components.locomotor:RunForward()
@@ -210,7 +210,7 @@ local states =
 
         timeline =
         {
-            TimeEvent(5*FRAMES, destroystuff),
+            TimeEvent(5 * FRAMES, destroystuff),
         },
 
         events =
@@ -224,7 +224,7 @@ local states =
     State
     {
         name = "run",
-        tags = {"moving", "running", "canrotate"},
+        tags = { "moving", "running", "canrotate" },
 
         onenter = function(inst)
             inst.components.locomotor:RunForward()
@@ -233,7 +233,7 @@ local states =
 
         timeline =
         {
-            TimeEvent(5*FRAMES, destroystuff),
+            TimeEvent(5 * FRAMES, destroystuff),
         },
 
         events =
@@ -247,7 +247,7 @@ local states =
     State
     {
         name = "run_stop",
-        tags = {"idle"},
+        tags = { "idle" },
 
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
@@ -256,7 +256,7 @@ local states =
 
         timeline =
         {
-            TimeEvent(5*FRAMES, destroystuff),
+            TimeEvent(5 * FRAMES, destroystuff),
         },
 
         events =

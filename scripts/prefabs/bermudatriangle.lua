@@ -1,10 +1,10 @@
 require "stategraphs/SGbermudatriangle"
 
-local assets=
+local assets =
 {
-	Asset("ANIM", "anim/bermudatriangle.zip"),
-	Asset("ANIM", "anim/teleporter_worm.zip"),
-	Asset("ANIM", "anim/teleporter_worm_build.zip"),
+    Asset("ANIM", "anim/bermudatriangle.zip"),
+    Asset("ANIM", "anim/teleporter_worm.zip"),
+    Asset("ANIM", "anim/teleporter_worm_build.zip"),
     Asset("SOUND", "sound/common.fsb"),
 }
 
@@ -35,7 +35,7 @@ local function OnActivate(inst, doer, target)
 
         local other = inst.components.teleporter.targetTeleporter
         if other ~= nil then
-            DeleteCloseEntsWithTag({"WORM_DANGER"}, other, 15)
+            DeleteCloseEntsWithTag({ "WORM_DANGER" }, other, 15)
         end
 
         if doer.components.talker ~= nil then
@@ -80,31 +80,32 @@ local function StartTravelSound(inst, doer)
 end
 
 local function OnSave(inst, data)
-	if inst.disable_sanity_drain then
-		data.disable_sanity_drain = true
-	end
+    if inst.disable_sanity_drain then
+        data.disable_sanity_drain = true
+    end
 end
 
 local function OnLoad(inst, data)
-	if data ~= nil and data.disable_sanity_drain then
-		inst.disable_sanity_drain = true
-	end
+    if data ~= nil and data.disable_sanity_drain then
+        inst.disable_sanity_drain = true
+    end
 end
 
 local CHECK_FOR_BOATS_PERIOD = 0.5
 
 local BOAT_INTERACT_DISTANCE = 6.0
-local BOAT_INTERACT_DISTANCE_LEAVE_SQ = (BOAT_INTERACT_DISTANCE + MAX_PHYSICS_RADIUS) * (BOAT_INTERACT_DISTANCE + MAX_PHYSICS_RADIUS)
+local BOAT_INTERACT_DISTANCE_LEAVE_SQ = (BOAT_INTERACT_DISTANCE + MAX_PHYSICS_RADIUS) *
+(BOAT_INTERACT_DISTANCE + MAX_PHYSICS_RADIUS)
 
 local BOAT_WAKE_COUNT = 3
 local BOAT_WAKE_TIME_PER = 1.5
 local BOAT_WAKE_SPEED_MIN_THRESHOLD = 3.5
 
-local BOAT_MUST_TAGS = {"boat",}
+local BOAT_MUST_TAGS = { "boat", }
 
-local TELEPORTBOAT_ITEM_MUST_TAGS = {"_inventoryitem",}
-local TELEPORTBOAT_ITEM_CANT_TAGS = {"FX", "NOCLICK", "DECOR", "INLIMBO",}
-local TELEPORTBOAT_BLOCKER_CANT_TAGS = {"FX", "NOCLICK", "DECOR", "INLIMBO", "_inventoryitem", "bermudatriangle",}
+local TELEPORTBOAT_ITEM_MUST_TAGS = { "_inventoryitem", }
+local TELEPORTBOAT_ITEM_CANT_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", }
+local TELEPORTBOAT_BLOCKER_CANT_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", "_inventoryitem", "bermudatriangle", }
 
 local function DoBoatWake(boat, isfirst)
     if boat.components.boatphysics == nil then
@@ -116,7 +117,8 @@ local function DoBoatWake(boat, isfirst)
         return
     end
 
-    local boatradius = boat:GetSafePhysicsRadius() + 3 -- Add a small offset so the wave does not hit the boat it came from.
+    local boatradius = boat:GetSafePhysicsRadius() +
+    3                                                  -- Add a small offset so the wave does not hit the boat it came from.
 
     local x, y, z = boat.Transform:GetWorldPosition()
     local velx_n, velz_n = boat.components.boatphysics:GetNormalizedVelocities()
@@ -162,7 +164,7 @@ local function CheckForBoatsTick(inst)
     if exit.components.entitytracker:GetEntity("blocker") ~= nil then
         return
     end
-    
+
     local sx, sy, sz = inst.Transform:GetWorldPosition()
     local boat
     local boats = TheSim:FindEntities(sx, sy, sz, BOAT_INTERACT_DISTANCE, BOAT_MUST_TAGS)
@@ -177,9 +179,9 @@ local function CheckForBoatsTick(inst)
     end
 
     local boatradius = boat:GetSafePhysicsRadius()
-    
+
     local ex, ey, ez = exit.Transform:GetWorldPosition()
-    
+
     local velx_n, velz_n = 0, 0
     if boat.components.boatphysics then
         velx_n, velz_n = boat.components.boatphysics:GetNormalizedVelocities()
@@ -222,7 +224,8 @@ local function CheckForBoatsTick(inst)
     --SpawnPrefab("oceanwhirlportal_splash").Transform:SetPosition(sx, sy, sz)
     --SpawnPrefab("oceanwhirlportal_splash").Transform:SetPosition(ex, ey, ez)
 
-    local item_ents = TheSim:FindEntities(ex, ey, ez, boatradius, TELEPORTBOAT_ITEM_MUST_TAGS, TELEPORTBOAT_ITEM_CANT_TAGS)
+    local item_ents = TheSim:FindEntities(ex, ey, ez, boatradius, TELEPORTBOAT_ITEM_MUST_TAGS,
+        TELEPORTBOAT_ITEM_CANT_TAGS)
     boat.Physics:Teleport(ex, ey, ez)
     if boat.boat_item_collision then
         -- NOTES(JBK): This must also teleport or it will fling items off of it in a comical fashion from the physics constraint it has.
@@ -248,7 +251,7 @@ local function CheckForBoatsTick(inst)
         for player, _ in pairs(players) do
             player:PushEvent("wormholetravel", WORMHOLETYPE.OCEANWHIRLPORTAL) --Event for playing local travel sound
             if player.components.sanity ~= nil and not player:HasTag("nowormholesanityloss") and not inst.disable_sanity_drain then
-               player.components.sanity:DoDelta(-TUNING.SANITY_MED)
+                player.components.sanity:DoDelta(-TUNING.SANITY_MED)
             end
         end
         if inst:GetDistanceSqToInst(exit) > PLAYER_CAMERA_SHOULD_SNAP_DISTANCE_SQ then
@@ -281,19 +284,19 @@ local function fn()
     inst.AnimState:PlayAnimation("idle_loop", true)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
 
-	inst.Transform:SetScale(1.3, 1.3, 1.3)
-	
+    inst.Transform:SetScale(1.3, 1.3, 1.3)
+
     --trader, alltrader (from trader component) added to pristine state for optimization
     inst:AddTag("bermudatriangle")
-	inst:AddTag("trader")
+    inst:AddTag("trader")
     inst:AddTag("alltrader")
-	inst:AddTag("ignorewalkableplatforms")
+    inst:AddTag("ignorewalkableplatforms")
 
     inst:AddTag("antlion_sinkhole_blocker")
-	
-	inst:AddTag("hamletteleport")
+
+    inst:AddTag("hamletteleport")
 
     inst.entity:SetPristine()
 
@@ -301,7 +304,7 @@ local function fn()
         return inst
     end
 
-	inst:SetStateGraph("SGbermudatriangle")
+    inst:SetStateGraph("SGbermudatriangle")
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = GetStatus
@@ -316,11 +319,12 @@ local function fn()
     inst.components.teleporter.onActivate = OnActivate
     inst.components.teleporter.onActivateByOther = OnActivateByOther
     inst.components.teleporter.offset = 0
-	
+
     inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
     inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
     inst:AddComponent("entitytracker")
-    inst._check_for_boats_task = inst:DoPeriodicTask(CHECK_FOR_BOATS_PERIOD, CheckForBoatsTick, CHECK_FOR_BOATS_PERIOD * math.random())
+    inst._check_for_boats_task = inst:DoPeriodicTask(CHECK_FOR_BOATS_PERIOD, CheckForBoatsTick,
+        CHECK_FOR_BOATS_PERIOD * math.random())
 
     inst:AddComponent("inventory")
 
@@ -329,8 +333,8 @@ local function fn()
     inst.components.trader.onaccept = onaccept
     inst.components.trader.deleteitemonaccept = false
 
-	inst.OnSave = OnSave
-	inst.OnLoad = OnLoad
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
 
     return inst
 end

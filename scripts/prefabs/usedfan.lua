@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/usedfan.zip"),
-	Asset("ATLAS", "images/inventoryimages/usedfan.xml")
+    Asset("ATLAS", "images/inventoryimages/usedfan.xml")
 }
 
 local function fn()
@@ -18,10 +18,10 @@ local function fn()
     inst.AnimState:SetBuild("usedfan")
     inst.AnimState:PlayAnimation("idle")
 
-    MakeInventoryFloatable(inst)		
-	
-	local s = 1.25
-	inst.Transform:SetScale(s,s,s)
+    MakeInventoryFloatable(inst)
+
+    local s = 1.25
+    inst.Transform:SetScale(s, s, s)
 
     inst.entity:SetPristine()
 
@@ -32,7 +32,7 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/usedfan.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/usedfan.xml"
 
     MakeHauntableLaunch(inst)
 

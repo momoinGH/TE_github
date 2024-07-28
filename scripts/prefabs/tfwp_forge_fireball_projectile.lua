@@ -1,36 +1,191 @@
-local a={Asset("ANIM","anim/fireball_2_fx.zip"),Asset("ANIM","anim/deer_fire_charge.zip")}local b={Asset("ANIM","anim/lavaarena_heal_projectile.zip")}local function c(d,e,f)local g=SpawnPrefab("forge_fireball_hit_fx").Transform:SetPosition(d.Transform:GetWorldPosition())d:Remove()g:ListenForEvent("animover",g.Remove)end;
-local function h(d,e,f)local g=SpawnPrefab("fireball_cast_fx").Transform:SetPosition(d.Transform:GetWorldPosition())g:ListenForEvent("animover",g.Remove)end;
-local function i(j,k,l,m,n)local d=CreateEntity()d:AddTag("FX")d:AddTag("NOCLICK")d.entity:SetCanSleep(false)d.persists=false;
-d.entity:AddTransform()d.entity:AddAnimState()MakeInventoryPhysics(d)d.Physics:ClearCollisionMask()d.AnimState:SetBank(j)d.AnimState:SetBuild(k)d.AnimState:PlayAnimation("disappear")if m~=nil then d.AnimState:SetAddColour(unpack(m))end;
-if n~=nil then d.AnimState:SetMultColour(unpack(n))end;
-if l>0 then d.AnimState:SetLightOverride(l)end;
-d.AnimState:SetFinalOffset(-1)d:ListenForEvent("animover",d.Remove)d.OnLoad=d.Remove;
-return d end;
-local function o(d,j,k,p,l,m,n,q,r)local s,t,u=d.Transform:GetWorldPosition()for v,w in pairs(r)do v:ForceFacePoint(s,t,u)end;
-if d.entity:IsVisible()then local v=i(j,k,l,m,n)local x=d.Transform:GetRotation()v.Transform:SetRotation(x)x=x*DEGREES;
-local y=math.random()*2*PI;
-local z=math.random()*.2+.2;
-local A=math.cos(y)*z;
-local B=math.sin(y)*z;
-v.Transform:SetPosition(s+math.sin(x)*A,t+B,u+math.cos(x)*A)v.Physics:SetMotorVel(p*(.2+math.random()*.3),0,0)r[v]=true;
-d:ListenForEvent("onremove",function(v)r[v]=nil end,v)v:ListenForEvent("onremove",function(d)v.Transform:SetRotation(v.Transform:GetRotation()+math.random()*30-15)end,d)end end;
-local function C(D,j,k,p,l,m,n,q)local E={Asset("ANIM","anim/"..k..".zip")}local F=q~=nil and{q}or nil;
-local function G()local d=CreateEntity()d.entity:AddTransform()d.entity:AddAnimState()d.entity:AddNetwork()MakeInventoryPhysics(d)RemovePhysicsColliders(d)d.AnimState:SetBank(j)d.AnimState:SetBuild(k)d.AnimState:PlayAnimation("idle_loop",true)if m~=nil then d.AnimState:SetAddColour(unpack(m))end;
-if n~=nil then d.AnimState:SetMultColour(unpack(n))end;
-if l>0 then d.AnimState:SetLightOverride(l)end;
-d.AnimState:SetFinalOffset(-1)d:AddTag("projectile")if not TheNet:IsDedicated()then d:DoPeriodicTask(0,o,nil,j,k,p,l,m,n,q,{})end;
-d.entity:SetPristine()if not TheWorld.ismastersim then return d end;
-d.persists=false;
-d:AddComponent("projectile")d.components.projectile:SetSpeed(p)d.components.projectile:SetHoming(true)d.components.projectile:SetHitDist(0.5)d.components.projectile.onhit=function(d,e,f)SpawnPrefab(q).Transform:SetPosition(d.Transform:GetWorldPosition())d:Remove()end;
-d.components.projectile:SetOnMissFn(d.Remove)d.components.projectile:SetStimuli("fire")d.OnLoad=d.Remove;
-return d end;
-return Prefab(D,G,E,F)end;
-local function H()local d=CreateEntity()d.entity:AddTransform()d.entity:AddAnimState()d.entity:AddSoundEmitter()d.entity:AddNetwork()d.AnimState:SetBank("fireball_fx")d.AnimState:SetBuild("deer_fire_charge")d.AnimState:PlayAnimation("blast")d.AnimState:SetBloomEffectHandle("shaders/anim.ksh")d.AnimState:SetLightOverride(1)d.AnimState:SetFinalOffset(-1)d:AddTag("FX")d:AddTag("NOCLICK")d.entity:SetPristine()d.persists=false;
-d:ListenForEvent("animover",d.Remove)d.OnLoad=d.Remove;
-return d end;
-local function I()local d=CreateEntity()d.entity:AddTransform()d.entity:AddAnimState()d.entity:AddSoundEmitter()d.entity:AddNetwork()d.AnimState:SetBank("lavaarena_heal_projectile")d.AnimState:SetBuild("lavaarena_heal_projectile")d.AnimState:PlayAnimation("hit")d.AnimState:SetAddColour(0,.1,.05,0)d.AnimState:SetFinalOffset(-1)d:AddTag("FX")d:AddTag("NOCLICK")d.entity:SetPristine()d.persists=false;
-d:ListenForEvent("animover",d.Remove)d.OnLoad=d.Remove;
-return d end;
-return C("forge_fireball_projectile","fireball_fx","fireball_2_fx",15,1,nil,nil,"forge_fireball_hit_fx"),C("forge_blossom_projectile","lavaarena_heal_projectile","lavaarena_heal_projectile",15,0,{0,.2,.1,0},nil,"forge_blossom_hit_fx"),
-Prefab("forge_fireball_hit_fx",H,a),
-Prefab("forge_blossom_hit_fx",I,b),C("forge_fireball_projectile_fast","fireball_fx","fireball_2_fx",30,1,nil,nil,"forge_fireball_hit_fx")
+local a = { Asset("ANIM", "anim/fireball_2_fx.zip"), Asset("ANIM", "anim/deer_fire_charge.zip") }
+local b = { Asset("ANIM", "anim/lavaarena_heal_projectile.zip") }
+
+local function c(d, e, f)
+    local g = SpawnPrefab("forge_fireball_hit_fx").Transform:SetPosition(d.Transform:GetWorldPosition())
+    d:Remove()
+    g:ListenForEvent("animover", g.Remove)
+end;
+
+local function h(d, e, f)
+    local g = SpawnPrefab("fireball_cast_fx").Transform:SetPosition(d.Transform:GetWorldPosition())
+    g:ListenForEvent("animover", g.Remove)
+end;
+
+local function i(j, k, light, addColour, multColour)
+    local inst = CreateEntity()
+
+    inst:AddTag("FX")
+    inst:AddTag("NOCLICK")
+
+    inst.entity:SetCanSleep(false)
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+
+    MakeInventoryPhysics(inst)
+
+    inst.Physics:ClearCollisionMask()
+
+    inst.AnimState:SetBank(j)
+    inst.AnimState:SetBuild(k)
+    inst.AnimState:PlayAnimation("disappear")
+    if addColour ~= nil then
+        inst.AnimState:SetAddColour(unpack(addColour))
+    end;
+    if multColour ~= nil then
+        inst.AnimState:SetMultColour(unpack(multColour))
+    end;
+    if light > 0 then
+        inst.AnimState:SetLightOverride(light)
+    end;
+    inst.AnimState:SetFinalOffset(-1)
+
+    inst:ListenForEvent("animover", inst.Remove)
+
+    inst.persists = false
+
+    return inst
+end;
+local function o(d, j, k, p, l, m, n, q, r)
+    local s, t, u = d.Transform:GetWorldPosition()
+    for v, w in pairs(r) do v:ForceFacePoint(s, t, u) end;
+    if d.entity:IsVisible() then
+        local v = i(j, k, l, m, n)
+        local rotation = d.Transform:GetRotation()
+        v.Transform:SetRotation(rotation)
+        rotation = rotation * DEGREES;
+        local y = math.random() * 2 * PI;
+        local z = math.random() * .2 + .2;
+        local A = math.cos(y) * z;
+        local B = math.sin(y) * z;
+        v.Transform:SetPosition(s + math.sin(rotation) * A, t + B, u + math.cos(rotation) * A)
+        v.Physics:SetMotorVel(p * (.2 + math.random() * .3), 0, 0)
+        r[v] = true;
+        d:ListenForEvent("onremove", function(v) r[v] = nil end, v)
+        v:ListenForEvent("onremove", function(d)
+            v.Transform:SetRotation(v.Transform:GetRotation() + math.random() * 30 - 15)
+        end, d)
+    end
+end;
+
+local function MakeProjectile(D, j, k, speed, light, addColour, multColour, q)
+    local E = { Asset("ANIM", "anim/" .. k .. ".zip") }
+    local F = q ~= nil and { q } or nil;
+    local function fn()
+        local inst = CreateEntity()
+
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
+        inst.entity:AddNetwork()
+
+        MakeInventoryPhysics(inst)
+
+        RemovePhysicsColliders(inst)
+
+        inst.AnimState:SetBank(j)
+        inst.AnimState:SetBuild(k)
+        inst.AnimState:PlayAnimation("idle_loop", true)
+
+        if addColour ~= nil then
+            inst.AnimState:SetAddColour(unpack(addColour))
+        end;
+        if multColour ~= nil then
+            inst.AnimState:SetMultColour(unpack(multColour))
+        end;
+        if light > 0 then
+            inst.AnimState:SetLightOverride(light)
+        end;
+        inst.AnimState:SetFinalOffset(-1)
+
+        inst:AddTag("projectile")
+
+        if not TheNet:IsDedicated() then
+            inst:DoPeriodicTask(0, o, nil, j, k, speed, light, addColour, multColour, q, {})
+        end;
+
+        inst.entity:SetPristine()
+
+        if not TheWorld.ismastersim then
+            return inst
+        end;
+
+        inst.persists = false;
+
+        inst:AddComponent("projectile")
+        inst.components.projectile:SetSpeed(speed)
+        inst.components.projectile:SetHoming(true)
+        inst.components.projectile:SetHitDist(0.5)
+        inst.components.projectile.onhit = function(inst, e, f)
+            SpawnPrefab(q).Transform:SetPosition(inst.Transform:GetWorldPosition())
+            inst:Remove()
+        end;
+
+        inst.components.projectile:SetOnMissFn(inst.Remove)
+        inst.components.projectile:SetStimuli("fire")
+
+        return inst
+    end;
+    return Prefab(D, fn, E, F)
+end;
+local function H()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    inst.AnimState:SetBank("fireball_fx")
+    inst.AnimState:SetBuild("deer_fire_charge")
+    inst.AnimState:PlayAnimation("blast")
+    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+    inst.AnimState:SetLightOverride(1)
+    inst.AnimState:SetFinalOffset(-1)
+
+    inst:AddTag("FX")
+    inst:AddTag("NOCLICK")
+
+    inst.entity:SetPristine()
+
+    inst.persists = false;
+
+    inst:ListenForEvent("animover", inst.Remove)
+
+    return inst
+end;
+local function I()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    inst.AnimState:SetBank("lavaarena_heal_projectile")
+    inst.AnimState:SetBuild("lavaarena_heal_projectile")
+    inst.AnimState:PlayAnimation("hit")
+    inst.AnimState:SetAddColour(0, .1, .05, 0)
+    inst.AnimState:SetFinalOffset(-1)
+
+    inst:AddTag("FX")
+    inst:AddTag("NOCLICK")
+
+    inst.entity:SetPristine()
+
+    inst.persists = false;
+
+    inst:ListenForEvent("animover", inst.Remove)
+
+    return inst
+end
+
+return
+    MakeProjectile("forge_fireball_projectile", "fireball_fx", "fireball_2_fx", 15, 1, nil, nil, "forge_fireball_hit_fx"),
+    MakeProjectile("forge_blossom_projectile", "lavaarena_heal_projectile", "lavaarena_heal_projectile", 15, 0,
+        { 0, .2, .1, 0 }, nil,
+        "forge_blossom_hit_fx"),
+    Prefab("forge_fireball_hit_fx", H, a),
+    Prefab("forge_blossom_hit_fx", I, b),
+    MakeProjectile("forge_fireball_projectile_fast", "fireball_fx", "fireball_2_fx", 30, 1, nil, nil,
+        "forge_fireball_hit_fx")

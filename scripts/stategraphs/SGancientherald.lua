@@ -1,106 +1,105 @@
 require("stategraphs/commonstates")
 
 function SpawnRandomInRange(inst, prefab, min_count, max_count, radius, offset_y)
-	
-	local objs = {}
-	offset_y = offset_y or 0
+    local objs = {}
+    offset_y = offset_y or 0
 
-	local player = GetClosestInstWithTag("player", inst, 40)
-	if not player or player.components.health:IsDead() then
-		return {}
-	end
+    local player = GetClosestInstWithTag("player", inst, 40)
+    if not player or player.components.health:IsDead() then
+        return {}
+    end
 
-	local pt = Vector3(player.Transform:GetWorldPosition())
+    local pt = Vector3(player.Transform:GetWorldPosition())
 
-	local count = math.random(min_count, max_count)
+    local count = math.random(min_count, max_count)
 
-	local function getrandomoffset()
-	    local theta = math.random() * 2 * PI
-		local offset = FindWalkableOffset(pt, theta, radius, 12, true)
-		if offset then
-			return pt+offset
-		end
-	end
+    local function getrandomoffset()
+        local theta = math.random() * 2 * PI
+        local offset = FindWalkableOffset(pt, theta, radius, 12, true)
+        if offset then
+            return pt + offset
+        end
+    end
 
-	for i=1, count do
-		local spawn_pt = getrandomoffset()
-		if spawn_pt then
-			if offset_y then
-				spawn_pt.y = spawn_pt.y + offset_y
-			end
+    for i = 1, count do
+        local spawn_pt = getrandomoffset()
+        if spawn_pt then
+            if offset_y then
+                spawn_pt.y = spawn_pt.y + offset_y
+            end
 
-			local obj = nil
-			if type(prefab) == "table" then
-				obj = SpawnPrefab(prefab[math.random(1, #prefab)])
-			else
-				obj = SpawnPrefab(prefab)
-			end
+            local obj = nil
+            if type(prefab) == "table" then
+                obj = SpawnPrefab(prefab[math.random(1, #prefab)])
+            else
+                obj = SpawnPrefab(prefab)
+            end
 
-			if obj.Physics then
-				obj.Physics:Teleport(spawn_pt:Get())
-			else
-				obj.Transform:SetPosition(spawn_pt.x, spawn_pt.y, spawn_pt.z)
-			end
+            if obj.Physics then
+                obj.Physics:Teleport(spawn_pt:Get())
+            else
+                obj.Transform:SetPosition(spawn_pt.x, spawn_pt.y, spawn_pt.z)
+            end
 
-			if obj.components.combat then
-				obj.components.combat:SuggestTarget(player)
-			end
+            if obj.components.combat then
+                obj.components.combat:SuggestTarget(player)
+            end
 
-			obj:AddTag("aporkalypse_cleanup")
-			table.insert(objs, obj)
-		end
-	end
+            obj:AddTag("aporkalypse_cleanup")
+            table.insert(objs, obj)
+        end
+    end
 
-	return objs
+    return objs
 end
 
 function SpawnFireRain(inst)
-	local objs = SpawnRandomInRange(inst, "firerain", 1, 4, 6)
-			
-	for k,v in pairs(objs) do
-		v:StartStep()
-	end	
+    local objs = SpawnRandomInRange(inst, "firerain", 1, 4, 6)
+
+    for k, v in pairs(objs) do
+        v:StartStep()
+    end
 end
 
 function SpawnGhosts(inst)
-	SpawnRandomInRange(inst,"pigghost", 4, 6, 10) --pigghost
+    SpawnRandomInRange(inst, "pigghost", 4, 6, 10) --pigghost
 end
 
 function SpawnNightmares(inst)
-	local nightmares = SpawnRandomInRange(inst, { "nightmarebeak", "crawlingnightmare"}, 2, 4, 10)
+    local nightmares = SpawnRandomInRange(inst, { "nightmarebeak", "crawlingnightmare" }, 2, 4, 10)
 
-	for k,nightmare in pairs(nightmares) do
-		nightmare:AddTag("aporkalypse_cleanup")
-	end
+    for k, nightmare in pairs(nightmares) do
+        nightmare:AddTag("aporkalypse_cleanup")
+    end
 end
 
 function SpawnFrogRain(inst)
-	local function cancelrain()
-		if inst.frograintask then
-			inst.frograintask:Cancel()
-			inst.frograintask = nil
-		end
-	end
+    local function cancelrain()
+        if inst.frograintask then
+            inst.frograintask:Cancel()
+            inst.frograintask = nil
+        end
+    end
 
-	cancelrain()
+    cancelrain()
 
-	local count = 0
-	local max = 5
+    local count = 0
+    local max = 5
 
-	inst.frograintask = inst:DoPeriodicTask(0.2, 
-		function() 
-			local objs = SpawnRandomInRange(inst, "frog_poison", 1, 4, 8, 35)
-			
-			for k,v in pairs(objs) do
-				v.sg:GoToState("fall")
-			end
+    inst.frograintask = inst:DoPeriodicTask(0.2,
+        function()
+            local objs = SpawnRandomInRange(inst, "frog_poison", 1, 4, 8, 35)
 
-			count = count + 1
-			if count >= max then
-				cancelrain()
-			end
-		end
-	)
+            for k, v in pairs(objs) do
+                v.sg:GoToState("fall")
+            end
+
+            count = count + 1
+            if count >= max then
+                cancelrain()
+            end
+        end
+    )
 end
 
 local function startaura(inst)
@@ -112,8 +111,8 @@ local function stopaura(inst)
 end
 
 
-local function setfires(x,y,z, rad)
-    for i, v in ipairs(TheSim:FindEntities(x, 0, z, rad, nil, { "laser", "DECOR", "INLIMBO" })) do 
+local function setfires(x, y, z, rad)
+    for i, v in ipairs(TheSim:FindEntities(x, 0, z, rad, nil, { "laser", "DECOR", "INLIMBO" })) do
         if v.components.burnable then
             v.components.burnable:Ignite()
         end
@@ -123,9 +122,9 @@ end
 local function DoDamage(inst, rad)
     local targets = {}
     local x, y, z = inst.Transform:GetWorldPosition()
-  
-    setfires(x,y,z, rad)
-    for i, v in ipairs(TheSim:FindEntities(x, 0, z, rad, nil, { "laser", "DECOR", "INLIMBO" })) do  --  { "_combat", "pickable", "campfire", "CHOP_workable", "HAMMER_workable", "MINE_workable", "DIG_workable" }
+
+    setfires(x, y, z, rad)
+    for i, v in ipairs(TheSim:FindEntities(x, 0, z, rad, nil, { "laser", "DECOR", "INLIMBO" })) do --  { "_combat", "pickable", "campfire", "CHOP_workable", "HAMMER_workable", "MINE_workable", "DIG_workable" }
         if not targets[v] and v:IsValid() and not v:IsInLimbo() and not (v.components.health ~= nil and v.components.health:IsDead()) and not v:HasTag("laser_immune") then
             local vradius = 0
             if v.Physics then
@@ -139,25 +138,25 @@ local function DoDamage(inst, rad)
                     local work_action = v.components.workable:GetWorkAction()
                     --V2C: nil action for campfires
                     isworkable =
-                        (   work_action == nil and v:HasTag("campfire")) or
-                        
-                            (   work_action == ACTIONS.CHOP or
-                                work_action == ACTIONS.HAMMER or
-                                work_action == ACTIONS.MINE or
-                                work_action == ACTIONS.DIG
-                            )
+                        (work_action == nil and v:HasTag("campfire")) or
+
+                        (work_action == ACTIONS.CHOP or
+                            work_action == ACTIONS.HAMMER or
+                            work_action == ACTIONS.MINE or
+                            work_action == ACTIONS.DIG
+                        )
                 end
                 if isworkable then
                     targets[v] = true
-                    v:DoTaskInTime(0.6, function() 
+                    v:DoTaskInTime(0.6, function()
                         if v.components.workable then
-                            v.components.workable:Destroy(inst) 
-                            local vx,vy,vz = v.Transform:GetWorldPosition()
-                            v:DoTaskInTime(0.3, function() setfires(vx,vy,vz,1) end)
+                            v.components.workable:Destroy(inst)
+                            local vx, vy, vz = v.Transform:GetWorldPosition()
+                            v:DoTaskInTime(0.3, function() setfires(vx, vy, vz, 1) end)
                         end
-                     end)
+                    end)
                     if v:IsValid() and v:HasTag("stump") then
-                       -- v:Remove()
+                        -- v:Remove()
                     end
                 elseif v.components.pickable ~= nil
                     and v.components.pickable:CanBePicked()
@@ -174,7 +173,6 @@ local function DoDamage(inst, rad)
                             targets[loot] = true
                         end
                     end
-
                 elseif v.components.health then
                     inst.components.combat:DoAttack(v)
                     if v:IsValid() then
@@ -194,7 +192,7 @@ local function DoDamage(inst, rad)
                                 end
                             end
                         end
-                    end                   
+                    end
                 end
                 if v:IsValid() and v.AnimState then
                     SpawnPrefab("laserhit"):SetTarget(v)
@@ -204,17 +202,17 @@ local function DoDamage(inst, rad)
     end
 end
 
-local events=
+local events =
 {
     CommonHandlers.OnLocomote(false, true),
     CommonHandlers.OnAttack(),
-    EventHandler("startaura",  function(inst) startaura(inst) end),
+    EventHandler("startaura", function(inst) startaura(inst) end),
     EventHandler("stopaura", function(inst) stopaura(inst) end),
-    EventHandler("attacked", function(inst)  
-            if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then  
-                inst.sg:GoToState("hit") 
-            end 
-        end),
+    EventHandler("attacked", function(inst)
+        if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then
+            inst.sg:GoToState("hit")
+        end
+    end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
 }
 
@@ -227,52 +225,53 @@ local states =
     State
     {
         name = "idle",
-        tags = {"idle", "canrotate", "canslide"},
+        tags = { "idle", "canrotate", "canslide" },
         onenter = function(inst)
             inst.AnimState:PlayAnimation(getidleanim(inst), true)
         end,
     },
-    
+
     State
     {
         name = "appear",
-        tags = {"busy"},
+        tags = { "busy" },
         onenter = function(inst)
             inst.AnimState:PlayAnimation("appear")
             inst.SoundEmitter:PlaySound("dontstarve/ghost/ghost_howl")
             TheMixer:PushMix("shadow")
-
         end,
-        
-        timeline=
+
+        timeline =
         {
-            TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/appear") end),
+            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/boss/ancient_herald/appear") end),
         },
-        
-        events=
+
+        events =
         {
-            EventHandler("animover", function(inst, data) 
-                inst.sg:GoToState("idle") 
+            EventHandler("animover", function(inst, data)
+                inst.sg:GoToState("idle")
             end)
         },
-        
-    },    
+
+    },
 
     State
     {
         name = "taunt",
-        tags = {"busy"},
+        tags = { "busy" },
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/taunt") end),
+            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/boss/ancient_herald/taunt") end),
         },
-        
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst, data) inst.sg:GoToState("idle") end)
         },
@@ -281,33 +280,33 @@ local states =
     State
     {
         name = "summon",
-        tags = {"busy"},
+        tags = { "busy" },
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("summon")
         end,
-        
-        timeline=
+
+        timeline =
         {
-            TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/summon") end),
-            TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/summon_2d") end),
-            TimeEvent(30*FRAMES, function(inst)
-			
-			local tipo = math.random(1, 4)
-			if tipo == 1 then
-			SpawnGhosts(inst)			
-			elseif tipo == 2 then
-			SpawnFireRain(inst)
-			elseif tipo == 3 then
-			SpawnFrogRain(inst)
-			else
-			SpawnNightmares(inst)
-			end
-			
+            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/boss/ancient_herald/summon") end),
+            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/boss/ancient_herald/summon_2d") end),
+            TimeEvent(30 * FRAMES, function(inst)
+                local tipo = math.random(1, 4)
+                if tipo == 1 then
+                    SpawnGhosts(inst)
+                elseif tipo == 2 then
+                    SpawnFireRain(inst)
+                elseif tipo == 3 then
+                    SpawnFrogRain(inst)
+                else
+                    SpawnNightmares(inst)
+                end
             end)
         },
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst, data) inst.sg:GoToState("idle") end)
         },
@@ -315,44 +314,49 @@ local states =
 }
 
 CommonStates.AddCombatStates(states,
-{
-    
-    attacktimeline =
     {
-        TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/attack") end),
-        TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/attack_2d") end),
-        TimeEvent(20*FRAMES, function(inst)
-            local ring = SpawnPrefab("laser_ring")
-            ring.Transform:SetPosition(inst.Transform:GetWorldPosition())
-            ring.Transform:SetScale(1.1, 1.1, 1.1)
-            DoDamage(inst, 6)
-        end)
-    },
-    hittimeline = 
-    {
-        TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/hit") end),
-    },
-    deathtimeline = 
-    {
-        TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/death") end),
-        TimeEvent(32*FRAMES, function(inst) 
-		--inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition())) 
 
-        end),
+        attacktimeline =
+        {
+            TimeEvent(0 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/attack") end),
+            TimeEvent(1 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/attack_2d") end),
+            TimeEvent(20 * FRAMES, function(inst)
+                local ring = SpawnPrefab("laser_ring")
+                ring.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                ring.Transform:SetScale(1.1, 1.1, 1.1)
+                DoDamage(inst, 6)
+            end)
+        },
+        hittimeline =
+        {
+            TimeEvent(0 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/hit") end),
+        },
+        deathtimeline =
+        {
+            TimeEvent(0 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/death") end),
+            TimeEvent(32 * FRAMES, function(inst)
+                --inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            end),
+        },
     },
-},
 
-{
-    attack = "attack",
-})
+    {
+        attack = "attack",
+    })
 
 CommonStates.AddWalkStates(states,
-{
-    walktimeline = 
     {
-        TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/breath_in") end),
-        TimeEvent(17*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/breath_out") end),   
-    }
-})
-    
+        walktimeline =
+        {
+            TimeEvent(0 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/breath_in") end),
+            TimeEvent(17 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/breath_out") end),
+        }
+    })
+
 return StateGraph("ancient_herald", states, events, "idle")

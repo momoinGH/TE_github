@@ -19,29 +19,29 @@ return
 			NOTALLOWED = "Thet don't b'longin'thar.",
 		},
 		RUMMAGE =
-		{	
-			GENERIC = "No need! Yarrr!",	
+		{
+			GENERIC = "No need! Yarrr!",
 		},
-        COOK =
-        {
-            GENERIC = "This be not th'time fer cookin'!",
-            TOOFAR = "'Tis leagues away!",
-        },
-        GIVE =
-        {
-            DEAD = "It be dead.",
-            SLEEPING = "It be sleepin'.",
-            BUSY = "It be ignorin' ol'Woodlegs!",
-        },
-        WRITE =
-        {
-            GENERIC = "Alls I can write be an \"X\"!",
-        },
+		COOK =
+		{
+			GENERIC = "This be not th'time fer cookin'!",
+			TOOFAR = "'Tis leagues away!",
+		},
+		GIVE =
+		{
+			DEAD = "It be dead.",
+			SLEEPING = "It be sleepin'.",
+			BUSY = "It be ignorin' ol'Woodlegs!",
+		},
+		WRITE =
+		{
+			GENERIC = "Alls I can write be an \"X\"!",
+		},
 		TEACH =
-        {
-            KNOWN = "Arrrr.",
-            CANTLEARN = "Yarrrrrr!",
-        },
+		{
+			KNOWN = "Arrrr.",
+			CANTLEARN = "Yarrrrrr!",
+		},
 	},
 	ACTIONFAIL_GENERIC = "Me can'ts be doin' thet.",
 	ANNOUNCE_MAGIC_FAIL = "Thet's not fer this land!",
@@ -372,10 +372,10 @@ return
 			BURNING = "Surprise! 'Tis explodin' fruit!",
 			GENERIC = "Packs a fruit punch!",
 		},
-		COCONUT = 
+		COCONUT =
 		{
-		    GENERIC = "Aye, me favorite tree fruit.",
-		    PLANTED = "Tis a fruit no more!",
+			GENERIC = "Aye, me favorite tree fruit.",
+			PLANTED = "Tis a fruit no more!",
 		},
 		COCONUT_COOKED = "'Tis even better cooked o'er a fire.",
 		COFFEE = "Arrr thet be th'real treasure.",
@@ -528,7 +528,7 @@ return
 		EGGPLANT_SEEDS = "Seeds, see?",
 		ELEPHANTCACTUS = "Woodlegs be wary.",
 		ELEPHANTCACTUS_ACTIVE = "'Tis a dangerous plant!",
-		ELEPHANTCACTUS_STUMP = "Th'fiendish plant is gatherin' its energy ta attack again!",		
+		ELEPHANTCACTUS_STUMP = "Th'fiendish plant is gatherin' its energy ta attack again!",
 		EVERGREEN =
 		{
 			BURNING = "Yer usefulness is running out.",
@@ -729,10 +729,10 @@ return
 			GENERIC = "Thet tree be hidin' all kinds o'treasures.",
 		},
 		JUNGLETREESEED =
-        {
-            GENERIC = "Ye might grow in ta a new leg fer me.",
-            PLANTED = "Meybe sev'ral legs!",
-        },
+		{
+			GENERIC = "Ye might grow in ta a new leg fer me.",
+			PLANTED = "Meybe sev'ral legs!",
+		},
 		KABOBS = "All food be piratin' food!",
 		KILLERBEE =
 		{
@@ -1610,89 +1610,89 @@ return
 		WRECK = "Rest well, ye weary seafarer.",
 		CALIFORNIAROLL = "Them be fancy fish treats.",
 
-	--- 5C DLC ------------------------------------------------------------------------------------------------
+		--- 5C DLC ------------------------------------------------------------------------------------------------
 
-        ENCRUSTEDBOAT = "A vessel'o th'sea, t'be sure.",
-        BABYOX = "Ye ain'tna land lubber, is ya? Nah!",
-        BALLPHINHOUSE = "They be at home on th'sea, jus' like ol'Woodlegs!",
-        DORSALFIN = "Th'fin o'a sea beast.",
-        NUBBIN = "N'ta hair t'be seen.",
-        CORALLARVE = "Not th'most intimidatin' sea monster!",
-        RAINBOWJELLYFISH = "Aye, thet b'a jellyfish.",
-        RAINBOWJELLYFISH_PLANTED = "Th'sea b'full'o colors!",
-        RAINBOWJELLYFISH_DEAD = "'Tis gon' belly up!",
-        RAINBOWJELLYFISH_COOKED = "Now Woodlegs' belly'll soon b'full'o colors!",
-        RAINBOWJELLYJERKY = "Fit fer'a king!",
-        WALL_ENFORCEDLIMESTONE = "Wall'o'th'sea!",
-        WALL_ENFORCEDLIMESTONE_ITEM = "A wall t'be.",
-        CROCODOG = "A mangy reptile!",
-        POISONCROCODOG = "A mighty poison infests thet one!",
-        WATERCROCODOG = "A terr'ble fido, t'be sure!",
-        QUACKENBEAK = "Twas a mighty maw on thet one.",
-        QUACKERINGRAM = "Tis time fer a quackerin'!",
+		ENCRUSTEDBOAT = "A vessel'o th'sea, t'be sure.",
+		BABYOX = "Ye ain'tna land lubber, is ya? Nah!",
+		BALLPHINHOUSE = "They be at home on th'sea, jus' like ol'Woodlegs!",
+		DORSALFIN = "Th'fin o'a sea beast.",
+		NUBBIN = "N'ta hair t'be seen.",
+		CORALLARVE = "Not th'most intimidatin' sea monster!",
+		RAINBOWJELLYFISH = "Aye, thet b'a jellyfish.",
+		RAINBOWJELLYFISH_PLANTED = "Th'sea b'full'o colors!",
+		RAINBOWJELLYFISH_DEAD = "'Tis gon' belly up!",
+		RAINBOWJELLYFISH_COOKED = "Now Woodlegs' belly'll soon b'full'o colors!",
+		RAINBOWJELLYJERKY = "Fit fer'a king!",
+		WALL_ENFORCEDLIMESTONE = "Wall'o'th'sea!",
+		WALL_ENFORCEDLIMESTONE_ITEM = "A wall t'be.",
+		CROCODOG = "A mangy reptile!",
+		POISONCROCODOG = "A mighty poison infests thet one!",
+		WATERCROCODOG = "A terr'ble fido, t'be sure!",
+		QUACKENBEAK = "Twas a mighty maw on thet one.",
+		QUACKERINGRAM = "Tis time fer a quackerin'!",
 
-        --- DLC ------------------------------------------------------------------------------------------------    
+		--- DLC ------------------------------------------------------------------------------------------------
 
-        CAVIAR = "Snooty landlubb'rin' eats!",
-        CORMORANT = "A most foul seabird!",
+		CAVIAR = "Snooty landlubb'rin' eats!",
+		CORMORANT = "A most foul seabird!",
 
-        FISH3 = "Ye got thet look t'ya.",
-        FISH4 = "Don't ye b'starin' at ol'Woodlegs!",
-        FISH5 = "Inta th'pot w'ya.",
+		FISH3 = "Ye got thet look t'ya.",
+		FISH4 = "Don't ye b'starin' at ol'Woodlegs!",
+		FISH5 = "Inta th'pot w'ya.",
 
-        FISH3_COOKED = "Ready fer m'gullet.",
-        FISH4_COOKED = "Down th'hatch!",
-        FISH5_COOKED = "Th'bread'n'butter'o'th'sea!",
+		FISH3_COOKED = "Ready fer m'gullet.",
+		FISH4_COOKED = "Down th'hatch!",
+		FISH5_COOKED = "Th'bread'n'butter'o'th'sea!",
 
-        FISH_FARM = 
-        {
-        	EMPTY = "Nary a fish in sight!",
-			STOCKED = "Th'fish b'growin', aye.",
-			ONEFISH = "Tharr be a bite!",
-			TWOFISH = "More fish fer ol'Woodlegs!",
-			REDFISH = "They b'ready fer a cookin'!",
-			BLUEFISH  = "Thet be a netful!",
-        },
-        
-        ROE = "Egg'o'th'fish.",
-        ROE_COOKED = "Roast egg'o'th'fish.",
-        
-        SEA_YARD = 
-        {
-            ON = "Thet'll give Sea Legs a leg up! Harr!",
-            OFF = "Who'll take care'a ol'Sea Legs now?",
-            LOWFUEL = "Thar be near no wind in them sails!",
-        },
-        SEA_CHIMINEA =
-        {
-            EMBERS = "Thet needs a stokin'.",
-            GENERIC = "Prote'tion frum th'waves.",
-            HIGH = "Burnin' bright, aye!",
-            LOW = "Tis a wee bit low.",
-            NORMAL = "Th'bitter cold'll not get Woodlegs, na!",
-            OUT = "It be out... Like a light!",
-        }, 
+		FISH_FARM =
+		{
+			EMPTY    = "Nary a fish in sight!",
+			STOCKED  = "Th'fish b'growin', aye.",
+			ONEFISH  = "Tharr be a bite!",
+			TWOFISH  = "More fish fer ol'Woodlegs!",
+			REDFISH  = "They b'ready fer a cookin'!",
+			BLUEFISH = "Thet be a netful!",
+		},
 
-        TAR = "Tis a m'ghty sticky sludge!",
-        TAR_EXTRACTOR =
-        {
-            ON = "Tis workin'up a mighty sweat!",
-            OFF = "Ain't doin' nuthin'!",
-            LOWFUEL = "Thet b'lookin' mor'n a tad low.",
-        },
-        TAR_POOL = "There be sludgy treasure down ther'.",
+		ROE = "Egg'o'th'fish.",
+		ROE_COOKED = "Roast egg'o'th'fish.",
 
-        TARLAMP = "Looks like a wee boat!",
-        TARSUIT = "Y'arr, cov'r me in tarr!",
-        TAR_TRAP = "Ol' Woodlegs' pegs'd get stuck f'sure!",
+		SEA_YARD =
+		{
+			ON = "Thet'll give Sea Legs a leg up! Harr!",
+			OFF = "Who'll take care'a ol'Sea Legs now?",
+			LOWFUEL = "Thar be near no wind in them sails!",
+		},
+		SEA_CHIMINEA =
+		{
+			EMBERS = "Thet needs a stokin'.",
+			GENERIC = "Prote'tion frum th'waves.",
+			HIGH = "Burnin' bright, aye!",
+			LOW = "Tis a wee bit low.",
+			NORMAL = "Th'bitter cold'll not get Woodlegs, na!",
+			OUT = "It be out... Like a light!",
+		},
 
-        TROPICALBOUILLABAISSE = "Tis a'hearty fish soup!",
-        
-        RESEARCHLAB5 = "Thet b'fer tinkerin' on th'waves!",
-        WATERCHEST1 = "Woodlegs' treasure, buried at sea!",
-        QUACKENDRILL = "Thar b'a drill.",
-        HARPOON = "T'whales cow'r in fear 'fore ol'Woodlegs!",
-        MUSSEL_BED = "Ye'll b'returned t'th'sea.",
+		TAR = "Tis a m'ghty sticky sludge!",
+		TAR_EXTRACTOR =
+		{
+			ON = "Tis workin'up a mighty sweat!",
+			OFF = "Ain't doin' nuthin'!",
+			LOWFUEL = "Thet b'lookin' mor'n a tad low.",
+		},
+		TAR_POOL = "There be sludgy treasure down ther'.",
+
+		TARLAMP = "Looks like a wee boat!",
+		TARSUIT = "Y'arr, cov'r me in tarr!",
+		TAR_TRAP = "Ol' Woodlegs' pegs'd get stuck f'sure!",
+
+		TROPICALBOUILLABAISSE = "Tis a'hearty fish soup!",
+
+		RESEARCHLAB5 = "Thet b'fer tinkerin' on th'waves!",
+		WATERCHEST1 = "Woodlegs' treasure, buried at sea!",
+		QUACKENDRILL = "Thar b'a drill.",
+		HARPOON = "T'whales cow'r in fear 'fore ol'Woodlegs!",
+		MUSSEL_BED = "Ye'll b'returned t'th'sea.",
 	},
 	DESCRIBE_GENERIC = "Tis a... somethin'er tother.",
 	DESCRIBE_SMOLDERING = "Tis like ta catch fire.",

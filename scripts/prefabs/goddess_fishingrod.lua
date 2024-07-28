@@ -2,33 +2,33 @@ local assets =
 {
     Asset("ANIM", "anim/fishingrod.zip"),
     Asset("ANIM", "anim/swap_fishingrod.zip"),
-	Asset("ATLAS", "images/inventoryimages/goddess_fishingrod.xml"),
+    Asset("ATLAS", "images/inventoryimages/goddess_fishingrod.xml"),
 }
 
 local function glow(inst)
-	if inst.magic == nil then
-		inst.magic = inst:SpawnChild("goddess_lantern_fire")
-		inst.magic.Light:Enable(false)
-		inst.magic.Transform:SetPosition(0, 0.5, 0)
-		local s = 0.5
-		inst.magic.Transform:SetScale(s,s,s)
-	end
+    if inst.magic == nil then
+        inst.magic = inst:SpawnChild("goddess_lantern_fire")
+        inst.magic.Light:Enable(false)
+        inst.magic.Transform:SetPosition(0, 0.5, 0)
+        local s = 0.5
+        inst.magic.Transform:SetScale(s, s, s)
+    end
 end
 
 local function unglow(inst)
-	if inst.magic ~= nil then
-		inst.magic:Remove()
-		inst.magic = nil
-	end
+    if inst.magic ~= nil then
+        inst.magic:Remove()
+        inst.magic = nil
+    end
 end
 
-local function onequip (inst, owner)
+local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", "swap_fishingrod", "swap_fishingrod")
     owner.AnimState:OverrideSymbol("fishingline", "swap_fishingrod", "fishingline")
     owner.AnimState:OverrideSymbol("FX_fishing", "swap_fishingrod", "FX_fishing")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
-	owner:AddTag("windy5")
+    owner:AddTag("windy5")
 end
 
 local function onunequip(inst, owner)
@@ -36,7 +36,7 @@ local function onunequip(inst, owner)
     owner.AnimState:Show("ARM_normal")
     owner.AnimState:ClearOverrideSymbol("fishingline")
     owner.AnimState:ClearOverrideSymbol("FX_fishing")
-	owner:RemoveTag("windy5")
+    owner:RemoveTag("windy5")
 end
 
 local function onfished(inst)
@@ -54,7 +54,7 @@ local function fn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)	
+    MakeInventoryFloatable(inst)
 
     inst.AnimState:SetBank("fishingrod")
     inst.AnimState:SetBuild("fishingrod")
@@ -85,18 +85,18 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_fishingrod.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_fishingrod.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 
     MakeHauntableLaunch(inst)
-	
-	inst:DoTaskInTime(0, glow)
-	
-	inst:ListenForEvent("ondropped", glow)
-	inst:ListenForEvent("onputininventory", unglow)
+
+    inst:DoTaskInTime(0, glow)
+
+    inst:ListenForEvent("ondropped", glow)
+    inst:ListenForEvent("onputininventory", unglow)
 
     return inst
 end

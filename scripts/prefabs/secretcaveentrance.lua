@@ -36,9 +36,9 @@ local function OnActivate(inst, doer)
 end
 
 local function OnActivateByOther(inst, source, doer)
---    if not inst.sg:HasStateTag("open") then
---        inst.sg:GoToState("opening")
---    end
+    --    if not inst.sg:HasStateTag("open") then
+    --        inst.sg:GoToState("opening")
+    --    end
 end
 
 local function onaccept(inst, giver, item)
@@ -59,8 +59,8 @@ local function fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
-	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetIcon( "vamp_bat_cave.png" )
+    local minimap = inst.entity:AddMiniMapEntity()
+    minimap:SetIcon("vamp_bat_cave.png")
 
     inst.AnimState:SetBuild("vamp_bat_entrance")
     inst.AnimState:SetBank("vampbat_den")
@@ -77,7 +77,7 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
 
@@ -94,18 +94,17 @@ local function fn()
     inst.components.trader.acceptnontradable = true
     inst.components.trader.onaccept = onaccept
     inst.components.trader.deleteitemonaccept = false
-	
-	inst:DoTaskInTime(1, function(inst)		
-	for k,v in pairs(Ents) do
-	if v ~= inst and v.prefab == "secretcaveentrance" then
-	inst.components.teleporter.targetTeleporter = v
-	v.components.teleporter.targetTeleporter = inst
-	end
-	end
 
-end)
-	
-	
+    inst:DoTaskInTime(1, function(inst)
+        for k, v in pairs(Ents) do
+            if v ~= inst and v.prefab == "secretcaveentrance" then
+                inst.components.teleporter.targetTeleporter = v
+                v.components.teleporter.targetTeleporter = inst
+            end
+        end
+    end)
+
+
     return inst
 end
 

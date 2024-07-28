@@ -23,13 +23,13 @@ local sounds =
     sleep = "dontstarve_DLC003/creatures/boss/roc/attack_3",
     growl = "dontstarve/creatures/hound/pant",
     howl = "dontstarve/creatures/hound/pant",
-    hurt = "dontstarve_DLC003/creatures/boss/roc/attack_3",	
+    hurt = "dontstarve_DLC003/creatures/boss/roc/attack_3",
 }
 
 SetSharedLootTable('otter',
-{
-    {'monstermeat', 1.000},
-})
+    {
+        { 'monstermeat', 1.000 },
+    })
 
 
 local WAKE_TO_FOLLOW_DISTANCE = 8
@@ -41,7 +41,8 @@ local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 local FREEZABLE_TAGS = { "freezable" }
 
 local function ShouldWakeUp(inst)
-    return DefaultWakeTest(inst) or (inst.components.follower and inst.components.follower.leader and not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE))
+    return DefaultWakeTest(inst) or
+    (inst.components.follower and inst.components.follower.leader and not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE))
 end
 
 local function ShouldSleep(inst)
@@ -59,7 +60,6 @@ local function OnNewTarget(inst, data)
 end
 
 local function retargetfn(inst)
-
     return nil
 end
 
@@ -184,13 +184,12 @@ end
 
 local function CanMutateFromCorpse(inst)
     if not TUNING.SPAWN_MUTATED_HOUNDS then return false end
-	if (inst.components.amphibiouscreature == nil or not inst.components.amphibiouscreature.in_water)
-		and math.random() <= TUNING.MUTATEDHOUND_SPAWN_CHANCE then
-
-		local x, y, z = inst.Transform:GetWorldPosition()
-		return TheWorld.Map:IsInLunacyArea(x, y, z)
-	end
-	return false
+    if (inst.components.amphibiouscreature == nil or not inst.components.amphibiouscreature.in_water)
+        and math.random() <= TUNING.MUTATEDHOUND_SPAWN_CHANCE then
+        local x, y, z = inst.Transform:GetWorldPosition()
+        return TheWorld.Map:IsInLunacyArea(x, y, z)
+    end
+    return false
 end
 
 local function OnReelingIn(inst, doer)
@@ -202,12 +201,12 @@ local function OnReelingIn(inst, doer)
     end
 end
 
-local function geteatchance(inst,target)
+local function geteatchance(inst, target)
     return 0.3
 end
 
 local function fncommon(bank, build, morphlist, custombrain, tag, data)
-	data = data or {}
+    data = data or {}
 
     local inst = CreateEntity()
 
@@ -220,15 +219,15 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     MakeCharacterPhysics(inst, 10, .5)
 
     inst.DynamicShadow:SetSize(2.5, 1.5)
---    inst.Transform:SetFourFaced()
-	inst.Transform:SetSixFaced()
-	inst.Physics:ClearCollidesWith(COLLISION.BOAT_LIMITS)
+    --    inst.Transform:SetFourFaced()
+    inst.Transform:SetSixFaced()
+    inst.Physics:ClearCollidesWith(COLLISION.BOAT_LIMITS)
 
     inst:AddTag("scarytoprey")
     inst:AddTag("scarytooceanprey")
     inst:AddTag("otter")
- 	inst:AddTag("walrus")
-	inst:AddTag("houndfriend")	
+    inst:AddTag("walrus")
+    inst:AddTag("houndfriend")
     inst:AddTag("canbestartled")
 
     if tag ~= nil then
@@ -247,7 +246,7 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
         return inst
     end
 
-	inst._CanMutateFromCorpse = data.canmutatefn
+    inst._CanMutateFromCorpse = data.canmutatefn
 
     inst.sounds = sounds
 
@@ -257,14 +256,14 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst:SetStateGraph("SGotter")
 
     if data.amphibious then
-		inst:AddComponent("embarker")
---		inst.components.embarker.embark_speed = inst.components.locomotor.runspeed
---        inst.components.embarker.antic = true
+        inst:AddComponent("embarker")
+        --		inst.components.embarker.embark_speed = inst.components.locomotor.runspeed
+        --        inst.components.embarker.antic = true
 
-	    inst.components.locomotor:SetAllowPlatformHopping(true)
+        inst.components.locomotor:SetAllowPlatformHopping(true)
 
-		inst:AddComponent("amphibiouscreature")
-		inst.components.amphibiouscreature:SetBanks(bank, bank.."_water")
+        inst:AddComponent("amphibiouscreature")
+        inst.components.amphibiouscreature:SetBanks(bank, bank .. "_water")
         inst.components.amphibiouscreature:SetEnterWaterFn(
             function(inst)
                 inst.landspeed = inst.components.locomotor.runspeed
@@ -282,8 +281,8 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
                 end
             end)
 
-		inst.components.locomotor.pathcaps = { allowocean = true }
-	end
+        inst.components.locomotor.pathcaps = { allowocean = true }
+    end
 
 
 
@@ -314,31 +313,31 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst:AddComponent("knownlocations")
     inst:AddComponent("timer")
 
-        inst:AddComponent("eater")
-        inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })
-        inst.components.eater:SetCanEatHorrible()
-        inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
+    inst:AddComponent("eater")
+    inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })
+    inst.components.eater:SetCanEatHorrible()
+    inst.components.eater:SetStrongStomach(true)     -- can eat monster meat!
 
-        inst:AddComponent("sleeper")
-        inst.components.sleeper:SetResistance(3)
-        inst.components.sleeper.testperiod = GetRandomWithVariance(6, 2)
-        inst.components.sleeper:SetSleepTest(ShouldSleep)
-        inst.components.sleeper:SetWakeTest(ShouldWakeUp)
-        inst:ListenForEvent("newcombattarget", OnNewTarget)
+    inst:AddComponent("sleeper")
+    inst.components.sleeper:SetResistance(3)
+    inst.components.sleeper.testperiod = GetRandomWithVariance(6, 2)
+    inst.components.sleeper:SetSleepTest(ShouldSleep)
+    inst.components.sleeper:SetWakeTest(ShouldWakeUp)
+    inst:ListenForEvent("newcombattarget", OnNewTarget)
 
-            MakeHauntablePanic(inst)
+    MakeHauntablePanic(inst)
 
     inst:AddComponent("oceanfishable")
     inst.components.oceanfishable.onreelinginfn = OnReelingIn
     inst.components.oceanfishable.max_run_speed = TUNING.SQUID_RUNSPEED
     inst.components.oceanfishable:StrugglingSetup(nil, TUNING.SQUID_RUNSPEED, TUNING.SQUID_FISHABLE_STAMINA)
-	inst.components.oceanfishable.catch_distance = -1
+    inst.components.oceanfishable.catch_distance = -1
 
 
     inst:WatchWorldState("stopday", OnStopDay)
     inst.OnEntitySleep = OnEntitySleep
-	
-    inst.geteatchance = geteatchance	
+
+    inst.geteatchance = geteatchance
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
@@ -352,7 +351,7 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
 end
 
 local function fndefault()
-    local inst = fncommon("otter_basics", "otter_build", nil, nil, nil, {amphibious = true})
+    local inst = fncommon("otter_basics", "otter_build", nil, nil, nil, { amphibious = true })
 
     if not TheWorld.ismastersim then
         return inst

@@ -3,8 +3,8 @@ local assets =
     Asset("ANIM", "anim/blow_dart.zip"),
     Asset("ANIM", "anim/swap_blowdart.zip"),
     Asset("ANIM", "anim/swap_blowdart_pipe.zip"),
-	Asset("ANIM", "anim/swap_blowdart_flup.zip"),
-    Asset("ANIM", "anim/blow_dart_sw.zip"),	
+    Asset("ANIM", "anim/swap_blowdart_flup.zip"),
+    Asset("ANIM", "anim/blow_dart_sw.zip"),
 }
 
 local prefabs =
@@ -53,7 +53,7 @@ local function common(anim, tags, removephysicscolliders)
     inst.AnimState:SetBank("blow_dart_sw")
     inst.AnimState:SetBuild("blow_dart_sw")
     inst.AnimState:PlayAnimation(anim)
-    inst.scrapbook_anim = anim	
+    inst.scrapbook_anim = anim
 
     inst:AddTag("blowdart")
     inst:AddTag("sharp")
@@ -74,7 +74,7 @@ local function common(anim, tags, removephysicscolliders)
         RemovePhysicsColliders(inst)
     end
 
-    MakeInventoryFloatable(inst, "small", 0.05, {0.75, 0.5, 0.75})
+    MakeInventoryFloatable(inst, "small", 0.05, { 0.75, 0.5, 0.75 })
 
     inst.entity:SetPristine()
 
@@ -111,28 +111,28 @@ end
 
 ---------------------------------------------------------------------------
 local function poisonthrown(inst)
-	inst.AnimState:PlayAnimation("dart_poison")
+    inst.AnimState:PlayAnimation("dart_poison")
 end
 
 local function poisonattack(inst, attacker, target, projectile)
-if target and target.components.poisonable == nil then
-target:AddComponent("poisonable")
-end
+    if target and target.components.poisonable == nil then
+        target:AddComponent("poisonable")
+    end
 
-if	target and target:HasTag("player") then
-local corpo = target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-local cabeca = target.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-if corpo and corpo.prefab == "armor_seashell" then return end
-if cabeca and cabeca.prefab == "oxhat" then return end
-end	
-	
-target.components.poisonable:SetPoison(-4, 5, 120)
+    if target and target:HasTag("player") then
+        local corpo = target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+        local cabeca = target.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+        if corpo and corpo.prefab == "armor_seashell" then return end
+        if cabeca and cabeca.prefab == "oxhat" then return end
+    end
 
-	if target.components.combat then
-		target.components.combat:SuggestTarget(attacker)
-	end
-	-- this was commented out as the attack with the spear will do an attacked event. The poison itself doesn't need a second one pushed
-	--target:PushEvent("attacked", {attacker = attacker, damage = 0, projectile = projectile})
+    target.components.poisonable:SetPoison(-4, 5, 120)
+
+    if target.components.combat then
+        target.components.combat:SuggestTarget(attacker)
+    end
+    -- this was commented out as the attack with the spear will do an attacked event. The poison itself doesn't need a second one pushed
+    --target:PushEvent("attacked", {attacker = attacker, damage = 0, projectile = projectile})
 end
 
 local function poison()
@@ -144,30 +144,30 @@ local function poison()
 
     MakeInventoryPhysics(inst)
 
-	inst.AnimState:SetBank("blow_dart_sw")
+    inst.AnimState:SetBank("blow_dart_sw")
     inst.AnimState:SetBuild("blow_dart_sw")
     inst.AnimState:PlayAnimation("idle_poison")
     inst.scrapbook_anim = "idle_poison"
 
     inst:AddTag("blowdart")
     inst:AddTag("sharp")
-	inst:AddTag("aquatic")
+    inst:AddTag("aquatic")
     --projectile (from projectile component) added to pristine state for optimization
     inst:AddTag("projectile")
 
     RemovePhysicsColliders(inst)
-	
-    MakeInventoryFloatable(inst, "small", 0.05, {0.75, 0.5, 0.75})	
-	
+
+    MakeInventoryFloatable(inst, "small", 0.05, { 0.75, 0.5, 0.75 })
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	local swap_data = {sym_build = "swap_blowdart", bank = "blow_dart", anim = "idle_yellow"}
+
+    local swap_data = { sym_build = "swap_blowdart", bank = "blow_dart", anim = "idle_yellow" }
     inst.components.floater:SetBankSwapOnFloat(true, -4, swap_data)
-	
+
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(0)
     inst.components.weapon:SetRange(8, 10)
@@ -181,9 +181,9 @@ local function poison()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
-	
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     inst:AddComponent("stackable")
 
     inst:AddComponent("equippable")
@@ -193,25 +193,25 @@ local function poison()
 
     MakeHauntableLaunch(inst)
 
-	inst.components.weapon:SetOnAttack(poisonattack)
-	inst.components.projectile:SetOnThrownFn(poisonthrown)
-	
-	return inst
+    inst.components.weapon:SetOnAttack(poisonattack)
+    inst.components.projectile:SetOnThrownFn(poisonthrown)
+
+    return inst
 end
 
 
 local function flupequip(inst, owner)
-	owner.AnimState:OverrideSymbol("swap_object", "swap_blowdart_flup", "swap_blowdart_flup")
-	owner.AnimState:Show("ARM_carry")
-	owner.AnimState:Hide("ARM_normal")
+    owner.AnimState:OverrideSymbol("swap_object", "swap_blowdart_flup", "swap_blowdart_flup")
+    owner.AnimState:Show("ARM_carry")
+    owner.AnimState:Hide("ARM_normal")
 end
 
 local function flupthrown(inst)
-	inst.AnimState:PlayAnimation("dart_flup")
+    inst.AnimState:PlayAnimation("dart_flup")
 end
 
 local function flup()
-	local inst = CreateEntity()
+    local inst = CreateEntity()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -219,30 +219,30 @@ local function flup()
 
     MakeInventoryPhysics(inst)
 
-	inst.AnimState:SetBank("blow_dart_sw")
+    inst.AnimState:SetBank("blow_dart_sw")
     inst.AnimState:SetBuild("blow_dart_sw")
     inst.AnimState:PlayAnimation("idle_flup")
     inst.scrapbook_anim = "idle_flup"
 
     inst:AddTag("blowdart")
     inst:AddTag("sharp")
-	inst:AddTag("aquatic")
+    inst:AddTag("aquatic")
     --projectile (from projectile component) added to pristine state for optimization
     inst:AddTag("projectile")
-	inst:AddTag("flupdart")
+    inst:AddTag("flupdart")
 
     RemovePhysicsColliders(inst)
 
-    MakeInventoryFloatable(inst, "small", 0.05, {0.75, 0.5, 0.75})
-	
+    MakeInventoryFloatable(inst, "small", 0.05, { 0.75, 0.5, 0.75 })
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-	
-    inst.components.floater:SetBankSwapOnFloat(true, -4, {sym_build = "swap_blowdart_flup"})
-	
+
+    inst.components.floater:SetBankSwapOnFloat(true, -4, { sym_build = "swap_blowdart_flup" })
+
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(0)
     inst.components.weapon:SetRange(8, 10)
@@ -256,20 +256,20 @@ local function flup()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
-	
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     inst:AddComponent("stackable")
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
     inst.components.equippable.equipstack = true
-	
-	inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
-	inst.components.equippable:SetOnEquip(flupequip)
-	inst.components.weapon:SetDamage(20)
-	inst.components.projectile:SetOnThrownFn(flupthrown)
+
+    inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
+    inst.components.equippable:SetOnEquip(flupequip)
+    inst.components.weapon:SetDamage(20)
+    inst.components.projectile:SetOnThrownFn(flupthrown)
 
     MakeHauntableLaunch(inst)
 
@@ -278,4 +278,4 @@ end
 
 -------------------------------------------------------------------------------
 return Prefab("blowdart_flup", flup, assets, prefabs),
-	   Prefab("blowdart_poison", poison, assets, prefabs)
+    Prefab("blowdart_poison", poison, assets, prefabs)

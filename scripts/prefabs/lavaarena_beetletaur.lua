@@ -23,7 +23,8 @@ local prefabs =
 --------------------------------------------------------------------------
 local function KnockbackOnHit(inst, target, radius, attack_knockback, strength_mult, force_land)
     if target.sg and target.sg.sg.states.knockback then
-        target:PushEvent("knockback", {knocker = inst, radius = radius, strengthmult = strength_mult, forcelanded = force_land})
+        target:PushEvent("knockback",
+            { knocker = inst, radius = radius, strengthmult = strength_mult, forcelanded = force_land })
     else
         Knockback(inst, target, radius, attack_knockback)
     end
@@ -36,7 +37,9 @@ local function OnHitOther(inst, target)
 end
 
 local function CanDestroyObject(inst, object)
-    return object and object:IsValid() and object.components.workable and object.components.workable:CanBeWorked() and object.components.workable.action ~= ACTIONS.DIG and object.components.workable.action ~= ACTIONS.NET and not inst.recentlycharged[object]
+    return object and object:IsValid() and object.components.workable and object.components.workable:CanBeWorked() and
+    object.components.workable.action ~= ACTIONS.DIG and object.components.workable.action ~= ACTIONS.NET and
+    not inst.recentlycharged[object]
 end
 
 local function ClearRecentlyCharged(inst, object)
@@ -52,7 +55,7 @@ local function OnDestroyObject(inst, object)
     end
 end
 
-local DESTROY_OBJECT_DELAY = 2*FRAMES
+local DESTROY_OBJECT_DELAY = 2 * FRAMES
 local function OnCollideDestroyObject(inst, object)
     if CanDestroyObject(inst, object) then
         inst:DoTaskInTime(DESTROY_OBJECT_DELAY, OnDestroyObject, object)
@@ -130,7 +133,7 @@ local function CreatePulse(bufftype)
     ------------------------------------------
     inst:ListenForEvent("animover", OnPulseAnimOver)
     if bufftype == 1 then
-        inst.task = inst:DoTaskInTime(4*FRAMES, OnPulseDelay, "defend_fx_pre")
+        inst.task = inst:DoTaskInTime(4 * FRAMES, OnPulseDelay, "defend_fx_pre")
     else
         inst.AnimState:PlayAnimation("attack_fx3_pre")
     end
@@ -233,7 +236,7 @@ end
 local function AttackModeTrigger(inst)
     inst.components.healthtrigger:RemoveTrigger(0.9)
     inst.modes.guard = false
-    inst.modes.attack = true 
+    inst.modes.attack = true
     inst.attacks.combo = 2
     inst.attacks.tantrum = true
     inst.guard_timer = inst:DoTaskInTime(12, function(inst)
@@ -260,17 +263,17 @@ local function InfiniteComboTrigger(inst)
 end
 
 local function ReTarget(inst)
-    local newtarget = FindEntity(inst, 50, 
-		function(guy)
-			return inst.components.combat:CanTarget(guy)
+    local newtarget = FindEntity(inst, 50,
+        function(guy)
+            return inst.components.combat:CanTarget(guy)
         end,
         { "player" },
         { "smallcreature", "playerghost", "shadow", "INLIMBO", "FX", "NOCLICK" }
     )
 
     if newtarget then
-		return newtarget
-	end
+        return newtarget
+    end
 end
 
 --------------------------------------------------------------------------
@@ -322,53 +325,53 @@ local function fn()
 
     inst.EnableCameraFocus = EnableCameraFocus
 
-	inst:AddComponent("locomotor")
-	inst.components.locomotor.runspeed = 10
-	inst.components.locomotor.walkspeed = 4
-	
-	inst:AddComponent("knownlocations")	
+    inst:AddComponent("locomotor")
+    inst.components.locomotor.runspeed = 10
+    inst.components.locomotor.walkspeed = 4
 
-	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(42500)
-	
-	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(200)
-	inst.components.combat:SetAttackPeriod(2)
-	inst.components.combat:SetRetargetFunction(5, ReTarget)
-	inst.components.combat:SetRange(3)
-	
+    inst:AddComponent("knownlocations")
+
+    inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(42500)
+
+    inst:AddComponent("combat")
+    inst.components.combat:SetDefaultDamage(200)
+    inst.components.combat:SetAttackPeriod(2)
+    inst.components.combat:SetRetargetFunction(5, ReTarget)
+    inst.components.combat:SetRange(3)
+
     inst:AddComponent("sanityaura")
     inst:AddComponent("sleeper")
-	
-   inst:AddComponent("inspectable")	
-   
- 	inst.attacks = {body_slam = true, combo = 0, uppercut = false, tantrum = false, buff = false}
-    inst.modes = {attack = false, guard = true}
+
+    inst:AddComponent("inspectable")
+
+    inst.attacks = { body_slam = true, combo = 0, uppercut = false, tantrum = false, buff = false }
+    inst.modes = { attack = false, guard = true }
     inst.attack_body_slam_ready = true
     inst.is_guarding = false
     inst.avoid_heal_auras = true
-	------------------------------------------
-	inst:AddComponent("healthtrigger")
+    ------------------------------------------
+    inst:AddComponent("healthtrigger")
     inst.components.healthtrigger:AddTrigger(0.9, AttackModeTrigger)
     inst.components.healthtrigger:AddTrigger(0.8, AttackAndGuardModeTrigger)
     inst.components.healthtrigger:AddTrigger(0.5, Combo2Trigger)
     inst.components.healthtrigger:AddTrigger(0.25, InfiniteComboTrigger)
-	------------------------------------------
-	inst.recentlycharged = {}
+    ------------------------------------------
+    inst.recentlycharged = {}
     inst.Physics:SetCollisionCallback(OnCollideDestroyObject)
-	------------------------------------------
-	inst.components.combat.battlecryenabled = false 
-	inst.components.combat.onhitotherfn = OnHitOther
-	------------------------------------------
+    ------------------------------------------
+    inst.components.combat.battlecryenabled = false
+    inst.components.combat.onhitotherfn = OnHitOther
+    ------------------------------------------
     MakeHauntablePanic(inst)
-	MakeMediumBurnableCharacter(inst, "body")  
-	
-	local sg = require "stategraphs/SGbeetletaur"
-    inst:SetStateGraph("SGbeetletaur")	
-	
+    MakeMediumBurnableCharacter(inst, "body")
 
-	local brain = require "brains/beetletaurbrain"
-	inst:SetBrain(brain)	
+    local sg = require "stategraphs/SGbeetletaur"
+    inst:SetStateGraph("SGbeetletaur")
+
+
+    local brain = require "brains/beetletaurbrain"
+    inst:SetBrain(brain)
 
     return inst
 end
@@ -410,7 +413,8 @@ local function MakeFossilizedBreakFX(anim, side, interrupted)
         return inst
     end
 
-    return Prefab("beetletaur_"..anim..(side:len() > 0 and ("_"..side) or "")..(interrupted and "_alt" or ""), fn, assets)
+    return Prefab("beetletaur_" .. anim .. (side:len() > 0 and ("_" .. side) or "") .. (interrupted and "_alt" or ""), fn,
+        assets)
 end
 
 return Prefab("beetletaur", fn, assets, prefabs),

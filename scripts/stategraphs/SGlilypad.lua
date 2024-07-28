@@ -14,11 +14,11 @@ local function SpawnFragment(lp, prefix, offset_x, offset_y, offset_z, ignite)
         end
     end
 
-	if ignite then
-		fragment.components.burnable:Ignite()
-	end
+    if ignite then
+        fragment.components.burnable:Ignite()
+    end
 
-	return fragment
+    return fragment
 end
 
 local states =
@@ -28,7 +28,7 @@ local states =
         name = "place",
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("turnoftides/common/together/boat/place")
-            inst.SoundEmitter:PlaySound("turnoftides/common/together/water/splash/large",nil,.3)
+            inst.SoundEmitter:PlaySound("turnoftides/common/together/water/splash/large", nil, .3)
             inst.AnimState:PlayAnimation("big_idle")
         end,
 
@@ -70,10 +70,10 @@ local states =
         onenter = function(inst)
             local fx_boat_crackle = SpawnPrefab("fx_boat_crackle")
             fx_boat_crackle.Transform:SetPosition(inst.Transform:GetWorldPosition())
-            inst.AnimState:PlayAnimation("big_splash") 
+            inst.AnimState:PlayAnimation("big_splash")
             inst.sg:SetTimeout(1)
 
-            for k,v in pairs(inst.components.walkableplatform:GetEntitiesOnPlatform()) do
+            for k, v in pairs(inst.components.walkableplatform:GetEntitiesOnPlatform()) do
                 v:PushEvent("onpresink")
             end
         end,
@@ -89,37 +89,37 @@ local states =
                 inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/creak")
             end),
             TimeEvent(2 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .1})
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .1 })
             end),
             TimeEvent(17 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .2})
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .2 })
             end),
-            TimeEvent(32* FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .3})
+            TimeEvent(32 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .3 })
             end),
-            TimeEvent(39* FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .3})
+            TimeEvent(39 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .3 })
             end),
-            TimeEvent(39* FRAMES, function(inst)
+            TimeEvent(39 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/creak")
             end),
             TimeEvent(51 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .4})
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .4 })
             end),
             TimeEvent(58 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .4})
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .4 })
             end),
             TimeEvent(60 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .5})
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .5 })
             end),
             TimeEvent(71 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",{intensity= .5})
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .5 })
             end),
             TimeEvent(75 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", {intensity= .6})
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .6 })
             end),
             TimeEvent(82 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", {intensity= .6})
+                inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = .6 })
             end),
         },
     },
@@ -130,17 +130,17 @@ local states =
         onenter = function(inst)
             local fx_boat_crackle = SpawnPrefab("fx_boat_pop")
             fx_boat_crackle.Transform:SetPosition(inst.Transform:GetWorldPosition())
-            inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", {intensity= 1})
+            inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage", { intensity = 1 })
             inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/sink")
 
             local ignitefragments = inst.activefires > 0
             local locus_point = Vector3(inst.Transform:GetWorldPosition())
 
             inst:Remove()
-            SpawnFragment(locus_point, "boards",  2.75,  0, 0.5, ignitefragments)
-            SpawnFragment(locus_point, "boards",  0.25,  0, -2.8, ignitefragments)
-            SpawnFragment(locus_point, "boards", -2.5,   0, -0.25, ignitefragments)
-            SpawnFragment(locus_point, "boards", -0.95,  0, 0.75, ignitefragments)
+            SpawnFragment(locus_point, "boards", 2.75, 0, 0.5, ignitefragments)
+            SpawnFragment(locus_point, "boards", 0.25, 0, -2.8, ignitefragments)
+            SpawnFragment(locus_point, "boards", -2.5, 0, -0.25, ignitefragments)
+            SpawnFragment(locus_point, "boards", -0.95, 0, 0.75, ignitefragments)
         end,
     },
 }

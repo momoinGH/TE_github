@@ -17,31 +17,31 @@ end
 local ATTACK_RADIUS = 0.5
 
 local function shouldhit(inst, target)
-	-- not casting spider
+    -- not casting spider
     if inst.spider == target then
-		return false
-	end
+        return false
+    end
 
-	-- other player's and their followers
-	if inst.spider_leader_isplayer and not TheNet:GetPVPEnabled() 
-		and (target:HasTag("player") or (target.components.follower ~= nil and target.components.follower.leader ~= nil and target.components.follower.leader:HasTag("player"))) then
-		return false
-	end
+    -- other player's and their followers
+    if inst.spider_leader_isplayer and not TheNet:GetPVPEnabled()
+        and (target:HasTag("player") or (target.components.follower ~= nil and target.components.follower.leader ~= nil and target.components.follower.leader:HasTag("player"))) then
+        return false
+    end
 
-	-- if the spider has a leader, check if the target is on the same team
+    -- if the spider has a leader, check if the target is on the same team
     if inst.spider_leader ~= nil then
         return not (inst.spider_leader == target or (target.components.follower ~= nil and target.components.follower.leader == inst.spider_leader))
     end
-	
-	return not target:HasTag("spider_snow")
+
+    return not target:HasTag("spider_snow")
 end
 
 local RETARGET_MUST_TAGS = { "_combat" }
 local RETARGET_CANT_TAGS = { "flying", "shadow", "ghost", "FX", "NOCLICK", "DECOR", "INLIMBO", "playerghost" }
 
 local function DoAttack(inst)
-	local attacker = (inst.spider ~= nil and inst.spider:IsValid()) and inst.spider or inst
-	local old_damage = attacker.components.combat.defaultdamage
+    local attacker = (inst.spider ~= nil and inst.spider:IsValid()) and inst.spider or inst
+    local old_damage = attacker.components.combat.defaultdamage
 
     attacker.components.combat.ignorehitrange = true
     attacker.components.combat:SetDefaultDamage(TUNING.SPIDER_MOON_SPIKE_DAMAGE)
@@ -59,43 +59,43 @@ local function DoAttack(inst)
 end
 
 local function KillSpike(inst)
-	if not inst.killed then
-		if inst.attack_task ~= nil then
-			inst.attack_task:Cancel()
-			inst.attack_task = nil
-			inst:Remove()
-		else
-			inst.killed = true
+    if not inst.killed then
+        if inst.attack_task ~= nil then
+            inst.attack_task:Cancel()
+            inst.attack_task = nil
+            inst:Remove()
+        else
+            inst.killed = true
 
-			if inst.lifespan_task ~= nil then
-				inst.lifespan_task:Cancel()
-				inst.lifespan_task = nil
-			end
+            if inst.lifespan_task ~= nil then
+                inst.lifespan_task:Cancel()
+                inst.lifespan_task = nil
+            end
 
-			inst.AnimState:PlayAnimation("spike_pst")
-			DoAttack(inst)
+            inst.AnimState:PlayAnimation("spike_pst")
+            DoAttack(inst)
             inst.SoundEmitter:PlaySound("turnoftides/creatures/together/spider_moon/break")
-			inst:DoTaskInTime(inst.AnimState:GetCurrentAnimationLength() + 2 * FRAMES, inst.Remove)
-		end
-	end
+            inst:DoTaskInTime(inst.AnimState:GetCurrentAnimationLength() + 2 * FRAMES, inst.Remove)
+        end
+    end
 end
 
 local function StartAttack(inst)
-	inst.attack_task = nil
+    inst.attack_task = nil
 
     inst.AnimState:PlayAnimation("spike_pre")
-    inst.SoundEmitter:PlaySoundWithParams("turnoftides/creatures/together/spider_moon/spike", {intensity= math.random()})
+    inst.SoundEmitter:PlaySoundWithParams("turnoftides/creatures/together/spider_moon/spike", { intensity = math.random() })
     inst.AnimState:PushAnimation("spike_loop")
 
     inst.lifespan_task = inst:DoTaskInTime(2 + math.random() * 0.5, KillSpike)
 
-	DoAttack(inst)
+    DoAttack(inst)
 end
 
 local function SetOwner(inst, spider)
-	inst.spider = spider
-	inst.spider_leader = spider.components.follower ~= nil and spider.components.follower.leader or nil
-	inst.spider_leader_isplayer = inst.spider_leader ~= nil and inst.spider_leader:HasTag("player")
+    inst.spider = spider
+    inst.spider_leader = spider.components.follower ~= nil and spider.components.follower.leader or nil
+    inst.spider_leader_isplayer = inst.spider_leader ~= nil and inst.spider_leader:HasTag("player")
 end
 
 local function fn()
@@ -127,11 +127,11 @@ local function fn()
 
     inst.persists = false
 
-	inst.KillSpike = function() KillSpike(inst) end
+    inst.KillSpike = function() KillSpike(inst) end
 
-	inst.attack_task = inst:DoTaskInTime(math.random() * 0.25, StartAttack)
+    inst.attack_task = inst:DoTaskInTime(math.random() * 0.25, StartAttack)
 
-	inst.SetOwner = SetOwner
+    inst.SetOwner = SetOwner
 
     return inst
 end

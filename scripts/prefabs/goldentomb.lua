@@ -1,29 +1,29 @@
 local assets =
 {
-	Asset("ANIM", "anim/golden_tomb.zip"),
+    Asset("ANIM", "anim/golden_tomb.zip"),
     Asset("SOUND", "sound/monkey.fsb"),
 }
 
 local prefabs =
 {
     "goldmonkey",
-	"goldnugget",
+    "goldnugget",
     "collapse_small",
 }
 
-SetSharedLootTable( 'goldentomb',
-{
-	{'goldnugget',1.0},
-	{'goldnugget',1.0},
-	{'goldnugget',1.0},
-	{'goldnugget',1.0},
-	{'goldnugget',1.0},
-	{'goldnugget',1.0},
-	{'goldnugget',1.0},
-	{'goldnugget',1.0},
-	{'goldnugget',1.0},
-	{'goldnugget',1.0},
-})
+SetSharedLootTable('goldentomb',
+    {
+        { 'goldnugget', 1.0 },
+        { 'goldnugget', 1.0 },
+        { 'goldnugget', 1.0 },
+        { 'goldnugget', 1.0 },
+        { 'goldnugget', 1.0 },
+        { 'goldnugget', 1.0 },
+        { 'goldnugget', 1.0 },
+        { 'goldnugget', 1.0 },
+        { 'goldnugget', 1.0 },
+        { 'goldnugget', 1.0 },
+    })
 
 local function shake(inst)
     local anim = ((math.random() > .5) and "move1") or "move2"
@@ -54,23 +54,23 @@ local function onhit(inst, worker)
 end
 
 local function ReturnChildren(inst)
-	for k,child in pairs(inst.components.childspawner.childrenoutside) do
-		if child.components.homeseeker then
-			child.components.homeseeker:GoHome()
-		end
-		child:PushEvent("gohome")
-	end
+    for k, child in pairs(inst.components.childspawner.childrenoutside) do
+        if child.components.homeseeker then
+            child.components.homeseeker:GoHome()
+        end
+        child:PushEvent("gohome")
+    end
 
     if not inst.task then
-        inst.task = inst:DoTaskInTime(math.random(60, 120), function() 
-            inst.task = nil 
+        inst.task = inst:DoTaskInTime(math.random(60, 120), function()
+            inst.task = nil
             inst:PushEvent("safetospawn")
         end)
     end
 end
 
 local function OnIgniteFn(inst)
-	--inst.AnimState:PlayAnimation("shake", true)
+    --inst.AnimState:PlayAnimation("shake", true)
     inst.shake:Cancel()
     inst.shake = nil
     if inst.components.childspawner then
@@ -86,12 +86,12 @@ local function ongohome(inst, child)
 end
 
 local function fn()
-	local inst = CreateEntity()
-    inst.entity:AddNetwork()	
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local shadow = inst.entity:AddDynamicShadow()
-	shadow:SetSize( 1.5, .75 )
+    local inst = CreateEntity()
+    inst.entity:AddNetwork()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
+    local shadow = inst.entity:AddDynamicShadow()
+    shadow:SetSize(1.5, .75)
     inst.entity:AddSoundEmitter()
     --MakeObstaclePhysics( inst, 1)
 
@@ -101,24 +101,24 @@ local function fn()
     anim:SetBank("walrus_house")
     anim:SetBuild("golden_tomb")
     anim:PlayAnimation("idle", true)
-	
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
-    end	
+    end
 
-	inst:AddComponent( "childspawner" )
-	inst.components.childspawner:SetRegenPeriod(1200)
-	inst.components.childspawner:SetSpawnPeriod(30)
-	inst.components.childspawner:SetMaxChildren(1)
-	inst.components.childspawner:StartRegen()
-	inst.components.childspawner.childname = "goldmonkey"
+    inst:AddComponent("childspawner")
+    inst.components.childspawner:SetRegenPeriod(1200)
+    inst.components.childspawner:SetSpawnPeriod(30)
+    inst.components.childspawner:SetMaxChildren(1)
+    inst.components.childspawner:StartRegen()
+    inst.components.childspawner.childname = "goldmonkey"
     inst.components.childspawner:StartSpawning()
     inst.components.childspawner.ongohome = ongohome
     inst.components.childspawner:SetSpawnedFn(shake)
 
-	inst:AddComponent("lootdropper")
+    inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('goldentomb')
 
     inst:AddComponent("workable")
@@ -129,8 +129,8 @@ local function fn()
 
     inst:AddComponent("inspectable")
 
-    inst.shake = inst:DoPeriodicTask(GetRandomWithVariance(10, 3), shake )
-	return inst
+    inst.shake = inst:DoPeriodicTask(GetRandomWithVariance(10, 3), shake)
+    return inst
 end
 
-return Prefab( "cave/objects/goldentomb", fn, assets, prefabs) 
+return Prefab("cave/objects/goldentomb", fn, assets, prefabs)

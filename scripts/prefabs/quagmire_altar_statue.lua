@@ -2,7 +2,7 @@ require "prefabutil"
 
 local prefabs =
 {
-	"collapse_small",
+    "collapse_small",
 }
 
 local function onhammered(inst, worker)
@@ -29,7 +29,7 @@ end
 local function MakeStatue(name, build_bank, anim, save_rotation, physics_rad)
     local assets =
     {
-        Asset("ANIM", "anim/"..build_bank..".zip"),
+        Asset("ANIM", "anim/" .. build_bank .. ".zip"),
     }
 
     local function fn()
@@ -58,15 +58,15 @@ local function MakeStatue(name, build_bank, anim, save_rotation, physics_rad)
         end
 
         inst:AddComponent("inspectable")
-		
-    inst:AddComponent("lootdropper")
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.MINE)
-    inst.components.workable:SetWorkLeft(6)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-    inst.components.workable:SetOnWorkCallback(onhit) 
 
-    inst:ListenForEvent("onbuilt", onbuilt)		
+        inst:AddComponent("lootdropper")
+        inst:AddComponent("workable")
+        inst.components.workable:SetWorkAction(ACTIONS.MINE)
+        inst.components.workable:SetWorkLeft(6)
+        inst.components.workable:SetOnFinishCallback(onhammered)
+        inst.components.workable:SetOnWorkCallback(onhit)
+
+        inst:ListenForEvent("onbuilt", onbuilt)
 
         if save_rotation then
             inst:AddComponent("savedrotation")

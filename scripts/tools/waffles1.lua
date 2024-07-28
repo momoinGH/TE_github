@@ -22,14 +22,15 @@ CAMERASHAKE, ShakeAllCameras = _G.CAMERASHAKE, _G.ShakeAllCameras
 
 SpawnPrefab, ErodeAway, FindEntity = _G.SpawnPrefab, _G.ErodeAway, _G.FindEntity
 KnownModIndex, Vector3, Remap = _G.KnownModIndex, _G.Vector3, _G.Remap
-COMMAND_PERMISSION, BufferedAction, SendRPCToServer, RPC = _G.COMMAND_PERMISSION, _G.BufferedAction, _G.SendRPCToServer, _G.RPC
+COMMAND_PERMISSION, BufferedAction, SendRPCToServer, RPC = _G.COMMAND_PERMISSION, _G.BufferedAction, _G.SendRPCToServer,
+	_G.RPC
 COLLISION = _G.COLLISION
 
 AllPlayers = _G.AllPlayers
 
 FULL_CHARACTERLIST = {}
-for _,t in pairs({ _G.DST_CHARACTERLIST, _G.MODCHARACTERLIST }) do
-	for _,v in pairs(t) do table.insert(FULL_CHARACTERLIST, v) end
+for _, t in pairs({ _G.DST_CHARACTERLIST, _G.MODCHARACTERLIST }) do
+	for _, v in pairs(t) do table.insert(FULL_CHARACTERLIST, v) end
 end
 
 scheduler = _G.scheduler
@@ -67,10 +68,10 @@ local dummyfn = function() end
 local Tools =
 {
 	-- 1. Система --
-	
-	GetPath = function(root, path)		
+
+	GetPath = function(root, path)
 		local t = root
-		for _,v in pairs(cutpath(path)) do
+		for _, v in pairs(cutpath(path)) do
 			if t[v] == nil then
 				t[v] = {}
 			end
@@ -78,16 +79,16 @@ local Tools =
 		end
 		return t
 	end,
-				
+
 	-- 2. Игровой процесс --
-	
+
 	Valid = function(inst)
 		return inst ~= nil and inst:IsValid()
 	end,
-	
+
 	ReturnChild = function(root, path)
 		local t = root
-		for _,v in pairs(cutpath(path)) do
+		for _, v in pairs(cutpath(path)) do
 			if type(t) ~= "table" then
 				return
 			end
@@ -98,70 +99,71 @@ local Tools =
 		end
 		return t
 	end,
-	
+
 	AddChild = function(inst, child)
 		inst:AddChild(child)
 		child.entity:SetParent(nil)
 		return child
 	end,
-		
+
 	DoHauntFlick = function(inst, time)
 		inst.AnimState:SetHaunted(true)
 		inst:DoTaskInTime(time or 1, function()
 			inst.AnimState:SetHaunted(false)
 		end)
 	end,
-		
---	PushFakeShadow = function(inst, time, ...)
---		local function ReturnToNormal()
---			if inst.DynamicShadowFake ~= nil then
---				inst.DynamicShadowFake:Remove()
---				inst.DynamicShadowFake = nil
---			end
---			inst.DynamicShadow:Enable(true)
---		end
---					
---		local shadow = SpawnPrefab("dynamicshadow")
---		shadow:Hook(inst, ...)
---			
---		ReturnToNormal()
---		inst.DynamicShadow:Enable(false)
---		inst.DynamicShadowFake = shadow
---		
---		inst:DoTaskInTime(time or 1, ReturnToNormal)
---	end,
-		
+
+	--	PushFakeShadow = function(inst, time, ...)
+	--		local function ReturnToNormal()
+	--			if inst.DynamicShadowFake ~= nil then
+	--				inst.DynamicShadowFake:Remove()
+	--				inst.DynamicShadowFake = nil
+	--			end
+	--			inst.DynamicShadow:Enable(true)
+	--		end
+	--					
+	--		local shadow = SpawnPrefab("dynamicshadow")
+	--		shadow:Hook(inst, ...)
+	--			
+	--		ReturnToNormal()
+	--		inst.DynamicShadow:Enable(false)
+	--		inst.DynamicShadowFake = shadow
+	--		
+	--		inst:DoTaskInTime(time or 1, ReturnToNormal)
+	--	end,
+
 	SpawnBundle = function(prefab, data)
 		local bundle = SpawnPrefab(prefab)
 		bundle.components.unwrappable:WrapItems(data)
-		
-		for _,v in pairs(data) do
+
+		for _, v in pairs(data) do
 			v:Remove()
 		end
-		
+
 		return bundle
 	end,
-		
+
 	PlayCharacterSound = function(inst, name)
-		inst.SoundEmitter:PlaySound((inst.talker_path_override or "dontstarve/characters/")..(inst.soundsname or inst.prefab).."/"..name)
+		inst.SoundEmitter:PlaySound((inst.talker_path_override or "dontstarve/characters/") ..
+		(inst.soundsname or inst.prefab) .. "/" .. name)
 	end,
-		
+
 	-- 3. Утилиты --
-	
+
 	ReplicateDummyFn = function(root, fn, rep, ...)
 		local save = nil
 		if root ~= nil then
 			save = root[fn]
 			root[fn] = dummyfn
 		end
-			
+
 		rep(...)
-				
+
 		if save ~= nil then
 			root[fn] = save
 		end
 	end,
-		
+
 	SequenceFn = function(root, fn, exp)
 		local old = root[fn]
 		root[fn] = function(self, ...)
@@ -169,14 +171,14 @@ local Tools =
 			return exp(#data > 1 and data or data[1], ...)
 		end
 	end,
-	
+
 	ReplaceFn = function(root, fn, replace)
 		if replace ~= nil then
-			root["__"..fn] = root[fn]
+			root["__" .. fn] = root[fn]
 			root[fn] = replace
-		elseif root["__"..fn] ~= nil then
-			root[fn] = root["__"..fn]
-			root["__"..fn] = nil
+		elseif root["__" .. fn] ~= nil then
+			root[fn] = root["__" .. fn]
+			root["__" .. fn] = nil
 		end
 	end,
 }

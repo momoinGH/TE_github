@@ -1,7 +1,7 @@
 require "stategraphs/SGwobster"
 require "stategraphs/SGwobsterland"
 
-local sheller_assets =
+local sheller_assets            =
 {
     Asset("ANIM", "anim/wobster.zip"),
     Asset("ANIM", "anim/lobster_water.zip"),
@@ -9,15 +9,15 @@ local sheller_assets =
     Asset("INV_IMAGE", "wobster_sheller_land"),
 }
 
-local lobster_assets =
+local lobster_assets            =
 {
-	Asset("ANIM", "anim/lobster_build.zip"),
-	Asset("ANIM", "anim/lobster_build_color.zip"),
-	Asset("ANIM", "anim/lobster.zip"),
+    Asset("ANIM", "anim/lobster_build.zip"),
+    Asset("ANIM", "anim/lobster_build_color.zip"),
+    Asset("ANIM", "anim/lobster.zip"),
     Asset("ANIM", "anim/lobster_water.zip"),
 }
 
-local moonglass_assets =
+local moonglass_assets          =
 {
     Asset("ANIM", "anim/wobster.zip"),
     Asset("ANIM", "anim/lobster_water.zip"),
@@ -25,78 +25,78 @@ local moonglass_assets =
     Asset("INV_IMAGE", "wobster_moonglass_land"),
 }
 
-local dead_assets =
+local dead_assets               =
 {
     Asset("ANIM", "anim/wobster.zip"),
     Asset("ANIM", "anim/lobster_sheller.zip"),
     Asset("INV_IMAGE", "wobster_sheller_dead"),
 }
 
-local cooked_assets =
+local cooked_assets             =
 {
     Asset("ANIM", "anim/wobster.zip"),
     Asset("ANIM", "anim/lobster_sheller.zip"),
     Asset("INV_IMAGE", "wobster_sheller_dead_cooked"),
 }
 
-local ocean_prefabs =
+local ocean_prefabs             =
 {
     "ocean_splash_small1",
     "wobster_sheller_land",
-    "lobster_land",	
+    "lobster_land",
 }
 
-local moonglass_ocean_prefabs =
+local moonglass_ocean_prefabs   =
 {
     "ocean_splash_small1",
     "wobster_moonglass_land",
 }
 
-local land_prefabs =
+local land_prefabs              =
 {
     "lobster_dead",
-	"lobster_dead_cooked",
+    "lobster_dead_cooked",
     "wobster_sheller_dead",
     "wobster_sheller_dead_cooked",
 }
 
-local moonglass_land_prefabs =
+local moonglass_land_prefabs    =
 {
     "moonglass",
 }
 
-local dead_prefabs =
+local dead_prefabs              =
 {
     "spoiled_fish",
     "wobster_sheller_dead_cooked",
 }
 
-local cooked_prefabs =
+local cooked_prefabs            =
 {
     "spoiled_fish",
 }
 
-local brain_water = require "brains/wobsterbrain"
-local brain_land = require "brains/wobsterlandbrain"
+local brain_water               = require "brains/wobsterbrain"
+local brain_land                = require "brains/wobsterlandbrain"
 
 local SWIMMING_COLLISION_MASK   = COLLISION.GROUND
-                                + COLLISION.LAND_OCEAN_LIMITS
-                                + COLLISION.OBSTACLES
-                                + COLLISION.SMALLOBSTACLES
+    + COLLISION.LAND_OCEAN_LIMITS
+    + COLLISION.OBSTACLES
+    + COLLISION.SMALLOBSTACLES
 local PROJECTILE_COLLISION_MASK = COLLISION.GROUND
 
 local function on_projectile_landed(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    
+
     if TheWorld.Map:IsPassableAtPoint(x, y, z) then
-        local wobster = SpawnPrefab(inst.fish_def.prefab.."_land")
+        local wobster = SpawnPrefab(inst.fish_def.prefab .. "_land")
         wobster.Transform:SetPosition(x, y, z)
         wobster.Transform:SetRotation(inst.Transform:GetRotation())
         wobster.components.inventoryitem:SetLanded(true, false)
 
-		if inst.components.weighable ~= nil and wobster.components.weighable ~= nil then
-			wobster.components.weighable:CopyWeighable(inst.components.weighable)
-		end
+        if inst.components.weighable ~= nil and wobster.components.weighable ~= nil then
+            wobster.components.weighable:CopyWeighable(inst.components.weighable)
+        end
 
         inst:Remove()
     else
@@ -111,9 +111,9 @@ local function on_projectile_landed(inst)
 
         SpawnPrefab("splash").Transform:SetPosition(x, y, z)
 
-		if inst.components.weighable ~= nil then
-			inst.components.weighable:SetPlayerAsOwner(nil)
-		end
+        if inst.components.weighable ~= nil then
+            inst.components.weighable:SetPlayerAsOwner(nil)
+        end
     end
 end
 
@@ -151,12 +151,13 @@ local function set_on_rod(inst, rod)
     end
 end
 
-local function 	SetupWeighable(inst)
+local function SetupWeighable(inst)
     inst.components.weighable.type = TROPHYSCALE_TYPES.FISH
     inst.components.weighable:Initialize(inst.fish_def.weight_min, inst.fish_def.weight_max)
 
-	local _weight_scale = math.random()
-    inst.components.weighable:SetWeight(Lerp(inst.fish_def.weight_min, inst.fish_def.weight_max, _weight_scale*_weight_scale*_weight_scale))
+    local _weight_scale = math.random()
+    inst.components.weighable:SetWeight(Lerp(inst.fish_def.weight_min, inst.fish_def.weight_max,
+        _weight_scale * _weight_scale * _weight_scale))
 end
 
 local function base_water_wobster(build_name, fish_def)
@@ -184,7 +185,7 @@ local function base_water_wobster(build_name, fish_def)
     inst:AddTag("oceanfishable")
     inst:AddTag("oceanfishinghookable")
     inst:AddTag("swimming")
-    inst:AddTag("lobster")	
+    inst:AddTag("lobster")
     inst.AnimState:SetBank("lobster_water")
     inst.AnimState:SetBuild(build_name)
     inst.AnimState:PlayAnimation("idle")
@@ -200,7 +201,7 @@ local function base_water_wobster(build_name, fish_def)
     inst.fish_def = fish_def
 
     inst:AddComponent("weighable")
-	SetupWeighable(inst)
+    SetupWeighable(inst)
 
     inst:AddComponent("locomotor")
     inst.components.locomotor:EnableGroundSpeedMultiplier(false)
@@ -212,15 +213,16 @@ local function base_water_wobster(build_name, fish_def)
     inst.components.oceanfishable.makeprojectilefn = on_make_projectile
     inst.components.oceanfishable.onreelinginfn = on_reeling_in
     inst.components.oceanfishable.onsetrodfn = set_on_rod
-    inst.components.oceanfishable:StrugglingSetup(TUNING.WOBSTER.SPEED.SWIM, TUNING.WOBSTER.SPEED.GROUND, TUNING.WOBSTER.FISHABLE_STAMINA)
+    inst.components.oceanfishable:StrugglingSetup(TUNING.WOBSTER.SPEED.SWIM, TUNING.WOBSTER.SPEED.GROUND,
+        TUNING.WOBSTER.FISHABLE_STAMINA)
     inst.components.oceanfishable.catch_distance = TUNING.OCEAN_FISHING.FISHING_CATCH_DIST
 
     inst:AddComponent("knownlocations")
-	
-	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.nobounce = true
-	inst.components.inventoryitem.canbepickedup = false
-	inst.components.inventoryitem.nosink = true	
+
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.nobounce = true
+    inst.components.inventoryitem.canbepickedup = false
+    inst.components.inventoryitem.nosink = true
 
     inst:SetStateGraph("SGwobster")
     inst:SetBrain(brain_water)
@@ -231,7 +233,7 @@ end
 local WOBSTER_FISH_DEF =
 {
     prefab = "wobster_sheller",
-    loot = {"wobster_sheller_dead"},
+    loot = { "wobster_sheller_dead" },
     lures = TUNING.OCEANFISH_LURE_PREFERENCE.WOBSTER,
     weight_min = 153.67,
     weight_max = 307.34,
@@ -240,7 +242,7 @@ local WOBSTER_FISH_DEF =
 local LOBSTER_FISH_DEF =
 {
     prefab = "lobster",
-    loot = {"lobster_dead"},
+    loot = { "lobster_dead" },
     lures = TUNING.OCEANFISH_LURE_PREFERENCE.WOBSTER,
     weight_min = 153.67,
     weight_max = 307.34,
@@ -253,7 +255,7 @@ end
 local MOONGLASS_WOBSTER_FISH_DEF =
 {
     prefab = "wobster_moonglass",
-    loot = {"moonglass"},
+    loot = { "moonglass" },
     lures = TUNING.OCEANFISH_LURE_PREFERENCE.WOBSTER,
     weight_min = 112.06,
     weight_max = 224.12,
@@ -262,7 +264,7 @@ local MOONGLASS_WOBSTER_FISH_DEF =
 local function moonglass_water()
     local inst = base_water_wobster("lobster_moonglass", MOONGLASS_WOBSTER_FISH_DEF)
     inst:AddTag("lunar_aligned")
-    return inst        
+    return inst
 end
 
 local function play_cooked_sound(inst)
@@ -286,7 +288,7 @@ local function on_ground_wobster_landed(inst)
             ocean_wobster.components.weighable:CopyWeighable(inst.components.weighable)
             inst.components.weighable:SetPlayerAsOwner(nil)
         end
-		
+
         SpawnPrefab("splash").Transform:SetPosition(x, y, z)
 
         inst:Remove()
@@ -304,12 +306,12 @@ local function on_ground_lobster_landed(inst)
     else
         local ocean_wobster = SpawnPrefab("lobster")
         ocean_wobster.Transform:SetPosition(x, y, z)
---        ocean_wobster.Transform:SetRotation(inst.Transform:GetRotation())
---        if inst.components.weighable ~= nil and ocean_wobster.components.weighable ~= nil then
---            ocean_wobster.components.weighable:CopyWeighable(inst.components.weighable)
---            inst.components.weighable:SetPlayerAsOwner(nil)
---        end
-		
+        --        ocean_wobster.Transform:SetRotation(inst.Transform:GetRotation())
+        --        if inst.components.weighable ~= nil and ocean_wobster.components.weighable ~= nil then
+        --            ocean_wobster.components.weighable:CopyWeighable(inst.components.weighable)
+        --            inst.components.weighable:SetPlayerAsOwner(nil)
+        --        end
+
         SpawnPrefab("splash").Transform:SetPosition(x, y, z)
 
         inst:Remove()
@@ -367,9 +369,9 @@ local function base_land_wobster(build_name, nameoverride, fish_def, fadeout, co
     inst:AddTag("prey")
     inst:AddTag("smallcreature")
     inst:AddTag("whackable")
-	inst:AddTag("smalloceancreature")
-    inst:AddTag("stunnedbybomb")	
-	
+    inst:AddTag("smalloceancreature")
+    inst:AddTag("stunnedbybomb")
+
 
     if cook_product ~= nil then
         --cookable (from cookable component) added to pristine state for optimization
@@ -384,7 +386,7 @@ local function base_land_wobster(build_name, nameoverride, fish_def, fadeout, co
     MakeSmallPerishableCreaturePristine(inst)
 
     inst.entity:SetPristine()
-	
+
     if not TheWorld.ismastersim then
         return inst
     end
@@ -409,7 +411,7 @@ local function base_land_wobster(build_name, nameoverride, fish_def, fadeout, co
     inst.components.lootdropper:SetLoot(inst.fish_def.loot)
 
     inst:AddComponent("weighable")
-	SetupWeighable(inst)
+    SetupWeighable(inst)
 
     if cook_product ~= nil then
         inst:AddComponent("cookable")
@@ -568,12 +570,12 @@ local function enter_water_lobster(inst)
 
     local ocean_wobster = SpawnPrefab("lobster")
     ocean_wobster.Transform:SetPosition(ix, iy, iz)
---    ocean_wobster.sg:GoToState("hop_pst")
+    --    ocean_wobster.sg:GoToState("hop_pst")
 
---    if inst.components.weighable ~= nil and ocean_wobster.components.weighable ~= nil then
---        ocean_wobster.components.weighable:CopyWeighable(inst.components.weighable)
---        inst.components.weighable:SetPlayerAsOwner(nil)
---    end
+    --    if inst.components.weighable ~= nil and ocean_wobster.components.weighable ~= nil then
+    --        ocean_wobster.components.weighable:CopyWeighable(inst.components.weighable)
+    --        inst.components.weighable:SetPlayerAsOwner(nil)
+    --    end
 
     inst:Remove()
 end
@@ -608,9 +610,9 @@ local function lobster_land()
     inst:AddTag("prey")
     inst:AddTag("smallcreature")
     inst:AddTag("whackable")
-	inst:AddTag("smalloceancreature")
+    inst:AddTag("smalloceancreature")
     inst:AddTag("stunnedbybomb")
-	
+
     inst:AddTag("cookable")
 
     --weighable_fish (from weighable component) added to pristine state for optimization
@@ -619,7 +621,7 @@ local function lobster_land()
     MakeSmallPerishableCreaturePristine(inst)
 
     inst.entity:SetPristine()
-	
+
     if not TheWorld.ismastersim then
         return inst
     end
@@ -641,10 +643,10 @@ local function lobster_land()
     inst:AddComponent("murderable")
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({"lobster_dead"})
+    inst.components.lootdropper:SetLoot({ "lobster_dead" })
 
     inst:AddComponent("weighable")
-	SetupWeighable(inst)
+    SetupWeighable(inst)
 
     inst:AddComponent("cookable")
     inst.components.cookable.product = "lobster_dead_cooked"
@@ -671,17 +673,16 @@ local function lobster_land()
     MakeHauntableLaunchAndPerish(inst)
 
     inst:ListenForEvent("on_landed", on_ground_lobster_landed)
---    inst:ListenForEvent("on_loot_dropped", on_dropped_as_loot)
+    --    inst:ListenForEvent("on_loot_dropped", on_dropped_as_loot)
 
     inst._enter_water = enter_water_lobster
 
     inst:SetStateGraph("SGwobsterlandsw")
     inst:SetBrain(brain_land)
-	
-    MakeSmallPerishableCreature(inst, TUNING.WOBSTER.SURVIVE_TIME)	
+
+    MakeSmallPerishableCreature(inst, TUNING.WOBSTER.SURVIVE_TIME)
 
     return inst
-
 end
 
 local function lobster_water()
@@ -709,8 +710,8 @@ local function lobster_water()
     inst:AddTag("oceanfishable")
     inst:AddTag("oceanfishinghookable")
     inst:AddTag("swimming")
-	inst:AddTag("lobster")
-    inst:AddTag("lobsterrede")	
+    inst:AddTag("lobster")
+    inst:AddTag("lobsterrede")
 
     inst.AnimState:SetBank("lobster")
     inst.AnimState:SetBuild("lobster_build")
@@ -728,7 +729,7 @@ local function lobster_water()
     inst.fish_def = LOBSTER_FISH_DEF
 
     inst:AddComponent("weighable")
-	SetupWeighable(inst)
+    SetupWeighable(inst)
 
     inst:AddComponent("locomotor")
     inst.components.locomotor:EnableGroundSpeedMultiplier(false)
@@ -740,13 +741,14 @@ local function lobster_water()
     inst.components.oceanfishable.makeprojectilefn = on_make_projectile
     inst.components.oceanfishable.onreelinginfn = on_reeling_in
     inst.components.oceanfishable.onsetrodfn = set_on_rod
-    inst.components.oceanfishable:StrugglingSetup(TUNING.WOBSTER.SPEED.SWIM, TUNING.WOBSTER.SPEED.GROUND, TUNING.WOBSTER.FISHABLE_STAMINA)
+    inst.components.oceanfishable:StrugglingSetup(TUNING.WOBSTER.SPEED.SWIM, TUNING.WOBSTER.SPEED.GROUND,
+        TUNING.WOBSTER.FISHABLE_STAMINA)
     inst.components.oceanfishable.catch_distance = TUNING.OCEAN_FISHING.FISHING_CATCH_DIST
-	
-	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.nobounce = true
-	inst.components.inventoryitem.canbepickedup = false
-	inst.components.inventoryitem.nosink = true
+
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.nobounce = true
+    inst.components.inventoryitem.canbepickedup = false
+    inst.components.inventoryitem.nosink = true
 
     inst:AddComponent("knownlocations")
 
@@ -757,10 +759,10 @@ local function lobster_water()
 end
 
 return Prefab("wobster_sheller_land", wobster_land, sheller_assets, land_prefabs),
-        Prefab("wobster_moonglass_land", moonglass_land, moonglass_assets, moonglass_land_prefabs),
-        Prefab("wobster_sheller", wobster_water, sheller_assets, ocean_prefabs),
-        Prefab("wobster_moonglass", moonglass_water, moonglass_assets, moonglass_ocean_prefabs),
-        Prefab("wobster_sheller_dead", lobster_dead_fn, dead_assets, dead_prefabs),
-        Prefab("wobster_sheller_dead_cooked", lobster_dead_cooked_fn, cooked_assets, cooked_prefabs),
-		Prefab("lobster_land", lobster_land, lobster_assets, land_prefabs),
-		Prefab("lobster", lobster_water, lobster_assets, ocean_prefabs)
+    Prefab("wobster_moonglass_land", moonglass_land, moonglass_assets, moonglass_land_prefabs),
+    Prefab("wobster_sheller", wobster_water, sheller_assets, ocean_prefabs),
+    Prefab("wobster_moonglass", moonglass_water, moonglass_assets, moonglass_ocean_prefabs),
+    Prefab("wobster_sheller_dead", lobster_dead_fn, dead_assets, dead_prefabs),
+    Prefab("wobster_sheller_dead_cooked", lobster_dead_cooked_fn, cooked_assets, cooked_prefabs),
+    Prefab("lobster_land", lobster_land, lobster_assets, land_prefabs),
+    Prefab("lobster", lobster_water, lobster_assets, ocean_prefabs)

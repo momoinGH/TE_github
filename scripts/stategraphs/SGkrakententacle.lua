@@ -1,6 +1,6 @@
 require("stategraphs/commonstates")
 
-local events = 
+local events =
 {
     CommonHandlers.OnAttack(),
     CommonHandlers.OnAttacked(),
@@ -10,17 +10,18 @@ local events =
 
 local actionhandlers = {}
 
-function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive, random_angle)
-	wavePrefab = wavePrefab or "rogue_wave"
-	totalAngle = math.clamp(totalAngle, 1, 360)
+function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
+                      random_angle)
+    wavePrefab = wavePrefab or "rogue_wave"
+    totalAngle = math.clamp(totalAngle, 1, 360)
 
     local pos = inst:GetPosition()
     local startAngle = (random_angle and math.random(-180, 180)) or inst.Transform:GetRotation()
-    local anglePerWave = totalAngle/(numWaves - 1)
+    local anglePerWave = totalAngle / (numWaves - 1)
 
-	if totalAngle == 360 then
-		anglePerWave = totalAngle/numWaves
-	end
+    if totalAngle == 360 then
+        anglePerWave = totalAngle / numWaves
+    end
 
     --[[
     local debug_offset = Vector3(2 * math.cos(startAngle*DEGREES), 0, -2 * math.sin(startAngle*DEGREES)):Normalize()
@@ -33,40 +34,38 @@ function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initial
     for i = 0, numWaves - 1 do
         local wave = SpawnPrefab(wavePrefab)
 
-        local angle = (startAngle - (totalAngle/2)) + (i * anglePerWave)
+        local angle = (startAngle - (totalAngle / 2)) + (i * anglePerWave)
         local rad = initialOffset or (inst.Physics and inst.Physics:GetRadius()) or 0.0
         local total_rad = rad + wave.Physics:GetRadius() + 0.1
-        local offset = Vector3(math.cos(angle*DEGREES),0, -math.sin(angle*DEGREES)):Normalize()
+        local offset = Vector3(math.cos(angle * DEGREES), 0, -math.sin(angle * DEGREES)):Normalize()
         local wavepos = pos + (offset * total_rad)
 
---        if inst:GetIsOnWater(wavepos:Get()) then
-	        wave.Transform:SetPosition(wavepos:Get())
+        --        if inst:GetIsOnWater(wavepos:Get()) then
+        wave.Transform:SetPosition(wavepos:Get())
 
-	        local speed = waveSpeed or 6
-	        wave.Transform:SetRotation(angle)
-	        wave.Physics:SetMotorVel(speed, 0, 0)
-	        wave.idle_time = idleTime or 5
+        local speed = waveSpeed or 6
+        wave.Transform:SetRotation(angle)
+        wave.Physics:SetMotorVel(speed, 0, 0)
+        wave.idle_time = idleTime or 5
 
-	        if instantActive then
-	        	wave.sg:GoToState("idle")
-	        end
+        if instantActive then
+            wave.sg:GoToState("idle")
+        end
 
-	        if wave.soundtidal then
+        if wave.soundtidal then
 
-	        end
---        else
---        	wave:Remove()
---        end
+        end
+        --        else
+        --        	wave:Remove()
+        --        end
     end
 end
 
-
-
-local states = 
+local states =
 {
-    State{
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
 
         onenter = function(inst, playanim)
             inst.Physics:Stop()
@@ -75,7 +74,7 @@ local states =
 
         events =
         {
-            EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
                 if math.random() < 0.75 then
                     inst.sg:GoToState("waves")
                 else
@@ -85,21 +84,23 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "waves",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("shake")
             inst.AnimState:PushAnimation("idle", false)
---			SpawnWavesSW(inst, math.random(1,2), 360, math.random(6,7), nil, nil, 2, true, true)
+            --			SpawnWavesSW(inst, math.random(1,2), 360, math.random(6,7), nil, nil, 2, true, true)
         end,
 
-        timeline = 
+        timeline =
         {
-            TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/shake") end),
-            TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/shake") end),
-            TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/shake") end),
+            TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/shake") end),
+            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/quacken/shake") end),
+            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/quacken/shake") end),
         },
 
         events =
@@ -108,42 +109,42 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "spawn",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, playanim)
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/tentacle_emerge")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("enter")
         end,
-        
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "despawn",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, playanim)
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/tentacle_submerge")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("exit")
         end,
-        
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst) inst:Remove() end),
         },
     },
 
-	State{
+    State {
         name = "death",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("exit")
             if inst.components.lootdropper then
@@ -152,24 +153,24 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "hit",
-        tags = {"busy", "hit"},
-        
+        tags = { "busy", "hit" },
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("hit")
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/hit")
         end,
-        
+
         events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
-    	name = "attack",
-    	tags = {"busy", "attack", "canrotate"},
+    State {
+        name = "attack",
+        tags = { "busy", "attack", "canrotate" },
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("attack")
@@ -178,18 +179,18 @@ local states =
 
         timeline =
         {
-			TimeEvent(17*FRAMES, function(inst) 
-                inst.components.combat:DoAttack() 
+            TimeEvent(17 * FRAMES, function(inst)
+                inst.components.combat:DoAttack()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/attack")
             end),
-            TimeEvent(20*FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
+            TimeEvent(20 * FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
         },
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
-	},
+    },
 }
 
 return StateGraph("krakententacle", states, events, "idle", actionhandlers)

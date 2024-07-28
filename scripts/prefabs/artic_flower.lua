@@ -8,16 +8,16 @@ local prefabs =
     "petals",
 }
 
-local names = {"f1","f2","f3","f4","f5","f6","f7","f8","f9","f10"}
+local names = { "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10" }
 
 local function onsave(inst, data)
     data.anim = inst.animname
 end
 
 local function onload(inst, data)
-	inst.animname = data ~= nil and data.animname or nil	
-	if inst.animname == nil then inst.animname = names[math.random(#names)] end
-	inst.AnimState:PlayAnimation(inst.animname)
+    inst.animname = data ~= nil and data.animname or nil
+    if inst.animname == nil then inst.animname = names[math.random(#names)] end
+    inst.AnimState:PlayAnimation(inst.animname)
 end
 
 local function onpickedfn(inst, picker)
@@ -35,9 +35,9 @@ local function onpickedfn(inst, picker)
 end
 
 local function OnBurnt(inst)
---	if not inst.planted then
---		TheWorld:PushEvent("beginregrowth", inst)
---	end
+    --	if not inst.planted then
+    --		TheWorld:PushEvent("beginregrowth", inst)
+    --	end
     DefaultBurntFn(inst)
 end
 
@@ -52,13 +52,13 @@ local function fn()
     inst.AnimState:SetBuild("arctic_flowers")
     inst.AnimState:SetRayTestOnBB(true)
     if inst.animname == nil then inst.animname = names[math.random(#names)] end
-	inst.AnimState:PlayAnimation(inst.animname)
-	inst.Transform:SetScale(1.7, 1.7, 1.7)
+    inst.AnimState:PlayAnimation(inst.animname)
+    inst.Transform:SetScale(1.7, 1.7, 1.7)
 
     inst:AddTag("flower")
     inst:AddTag("cattoy")
-	
-	inst:SetPrefabNameOverride("flower")	
+
+    inst:SetPrefabNameOverride("flower")
 
     inst.entity:SetPristine()
 
@@ -81,7 +81,7 @@ local function fn()
 
     --------SaveLoad
     inst.OnSave = onsave
-    inst.OnLoad = onload	
+    inst.OnLoad = onload
 
     return inst
 end

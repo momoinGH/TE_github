@@ -212,17 +212,17 @@ return {
           visible = true,
           properties = {}
         },
---        {
---          name = "",
---          type = "pig_ruins_torch",
---          shape = "rectangle",
---          x = 257,
---          y = 257,
---          width = 0,
---          height = 0,
---          visible = true,
---          properties = {}
---        },
+        --        {
+        --          name = "",
+        --          type = "pig_ruins_torch",
+        --          shape = "rectangle",
+        --          x = 257,
+        --          y = 257,
+        --          width = 0,
+        --          height = 0,
+        --          visible = true,
+        --          properties = {}
+        --        },
         {
           name = "",
           type = "archive_sound_area",

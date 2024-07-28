@@ -7,15 +7,15 @@ local ANGLE_VARIANCE = 10
 
 local assets =
 {
-	Asset("ANIM", "anim/tumbleweed.zip"),
-    Asset("ANIM", "anim/dungball_build.zip"),    
+    Asset("ANIM", "anim/tumbleweed.zip"),
+    Asset("ANIM", "anim/dungball_build.zip"),
     Asset("ANIM", "anim/snowball_build.zip"),
 }
 
-local prefabs = 
+local prefabs =
 {
-	"cutgrass",
-	"twigs",
+    "cutgrass",
+    "twigs",
     "rocks",
     "flint",
     "snowitem",
@@ -24,16 +24,15 @@ local prefabs =
 local SFX_COOLDOWN = 5
 
 local function onpickup(inst, owner)
-	if owner and owner.components.inventory then
-		if inst.owner and inst.owner.components.childspawner then 
-			inst:PushEvent("pickedup")
-		end
+    if owner and owner.components.inventory then
+        if inst.owner and inst.owner.components.childspawner then
+            inst:PushEvent("pickedup")
+        end
 
-		local item = nil
-		for i, v in ipairs(inst.loot) do
-
+        local item = nil
+        for i, v in ipairs(inst.loot) do
             if inst.components.lootdropper then
-               inst.components.lootdropper:SpawnLootPrefab(v)
+                inst.components.lootdropper:SpawnLootPrefab(v)
             end
             --[[
 			item = SpawnPrefab(v)
@@ -47,7 +46,7 @@ local function onpickup(inst, owner)
                 end
             end
             ]]
-    	end
+        end
     end
     inst.AnimState:PlayAnimation("break")
     inst.DynamicShadow:Enable(false)
@@ -58,13 +57,13 @@ end
 local function MakeLoot(inst)
     local possible_loot =
     {
-        {chance = 1,   item = "cutgrass"},
-        {chance = 1,   item = "twigs"},
-        {chance = 10,   item = "rocks"},        
-        {chance = 10,   item = "flint"},
-        {chance = 1,   item = "seeds"},
-        {chance = 5,   item = "snowitem"},
-        {chance = 0.1, item = "relic1"},
+        { chance = 1,   item = "cutgrass" },
+        { chance = 1,   item = "twigs" },
+        { chance = 10,  item = "rocks" },
+        { chance = 10,  item = "flint" },
+        { chance = 1,   item = "seeds" },
+        { chance = 5,   item = "snowitem" },
+        { chance = 0.1, item = "relic1" },
     }
     local totalchance = 0
     for m, n in ipairs(possible_loot) do
@@ -81,7 +80,7 @@ local function MakeLoot(inst)
     local next_chance = nil
     local num_loots = 2
     while num_loots > 0 do
-        next_chance = math.random()*totalchance
+        next_chance = math.random() * totalchance
         next_loot = nil
         next_aggro = nil
         for m, n in ipairs(possible_loot) do
@@ -94,14 +93,13 @@ local function MakeLoot(inst)
         end
         if next_loot ~= nil then
             table.insert(inst.loot, next_loot)
-            if next_aggro then 
+            if next_aggro then
                 table.insert(inst.lootaggro, true)
             else
                 table.insert(inst.lootaggro, false)
             end
             num_loots = num_loots - 1
         end
-
     end
 end
 
@@ -136,11 +134,11 @@ local function onburnt(inst)
 
     inst.AnimState:PlayAnimation("move_pst")
     inst.AnimState:PushAnimation("idle")
-    inst.bouncepst1 = inst:DoTaskInTime(4*FRAMES, function(inst)
+    inst.bouncepst1 = inst:DoTaskInTime(4 * FRAMES, function(inst)
         inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/tumbleweed_bounce")
         inst.bouncepst1 = nil
     end)
-    inst.bouncepst2 = inst:DoTaskInTime(10*FRAMES, function(inst)
+    inst.bouncepst2 = inst:DoTaskInTime(10 * FRAMES, function(inst)
         inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/tumbleweed_bounce")
         inst.bouncepst2 = nil
     end)
@@ -148,7 +146,7 @@ local function onburnt(inst)
     inst:DoTaskInTime(1.2, function(inst)
         local ash = SpawnPrefab("ash")
         ash.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        
+
         if inst.components.stackable then
             ash.components.stackable.stacksize = inst.components.stackable.stacksize
         end
@@ -167,23 +165,23 @@ local function OnEntityWake(inst)
 end
 
 local function fn(Sim)
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
+    local inst = CreateEntity()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
     local sound = inst.entity:AddSoundEmitter()
     local shadow = inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
-	
+
     inst.Transform:SetFourFaced()
-    shadow:SetSize( 1.7, .8 )
+    shadow:SetSize(1.7, .8)
 
     anim:SetBank("tumbleweed")
     anim:SetBuild("snowball_build")
     anim:PlayAnimation("idle")
-    
-    inst:AddTag("snowball") 
 
-	local phys = inst.entity:AddPhysics()
+    inst:AddTag("snowball")
+
+    local phys = inst.entity:AddPhysics()
     phys:SetMass(1)
     phys:SetFriction(1)
     phys:SetDamping(5)
@@ -196,12 +194,12 @@ local function fn(Sim)
     phys:CollidesWith(COLLISION.GIANTS)
     phys:SetCapsule(0.5, 1)
 
-	inst.entity:SetPristine()
+    inst.entity:SetPristine()
 
-	if not TheWorld.ismastersim then
-		return inst
-	end
-	
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
     inst:AddComponent("inspectable")
 
     inst:AddComponent("lootdropper")
@@ -215,13 +213,13 @@ local function fn(Sim)
     MakeLoot(inst)
 
     MakeSmallPropagator(inst)
-    inst.components.propagator.flashpoint = 5 + math.random()*3
+    inst.components.propagator.flashpoint = 5 + math.random() * 3
     inst.components.propagator.propagaterange = 5
 
-   	inst.OnEntityWake = OnEntityWake
-   	inst.OnEntitySleep = OnEntitySleep  
+    inst.OnEntityWake = OnEntityWake
+    inst.OnEntitySleep = OnEntitySleep
 
     return inst
 end
 
-return Prefab( "badlands/objects/snowbigball", fn, assets, prefabs) 
+return Prefab("badlands/objects/snowbigball", fn, assets, prefabs)

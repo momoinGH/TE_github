@@ -1,4 +1,3 @@
-
 local fx_bubble_assets =
 {
     Asset("ANIM", "anim/quagmire_portalbubbles_fx.zip"),
@@ -57,9 +56,9 @@ local function OnActivate(inst, doer)
 end
 
 local function OnActivateByOther(inst, source, doer)
---    if not inst.sg:HasStateTag("open") then
---        inst.sg:GoToState("opening")
---    end
+    --    if not inst.sg:HasStateTag("open") then
+    --        inst.sg:GoToState("opening")
+    --    end
 end
 
 local function onaccept(inst, giver, item)
@@ -73,19 +72,19 @@ local function StartTravelSound(inst, doer)
 end
 
 local function onclose(inst)
-local invader = GetClosestInstWithTag("quagmire_portal_activefx", inst, 3)
-if invader then
-invader:Remove()
-end
+    local invader = GetClosestInstWithTag("quagmire_portal_activefx", inst, 3)
+    if invader then
+        invader:Remove()
+    end
 end
 
 local function onopen(inst)
-local invader = GetClosestInstWithTag("quagmire_portal_activefx", inst, 3)
-if not invader then
-local portaentrada = SpawnPrefab("quagmire_portal_activefx")
-local a, b, c = inst.Transform:GetWorldPosition()
-portaentrada.Transform:SetPosition(a, b, c)
-end
+    local invader = GetClosestInstWithTag("quagmire_portal_activefx", inst, 3)
+    if not invader then
+        local portaentrada = SpawnPrefab("quagmire_portal_activefx")
+        local a, b, c = inst.Transform:GetWorldPosition()
+        portaentrada.Transform:SetPosition(a, b, c)
+    end
 end
 
 
@@ -133,10 +132,10 @@ local function fn()
     inst.AnimState:SetFinalOffset(2)
 
     inst.Transform:SetEightFaced()
-	
+
     if not TheNet:IsDedicated() then
         CreateDropShadow(inst)
-    end	
+    end
     --trader, alltrader (from trader component) added to pristine state for optimization
     inst:AddTag("trader")
     inst:AddTag("alltrader")
@@ -149,28 +148,28 @@ local function fn()
         return inst
     end
 
---	inst:AddComponent("playerprox")
---    inst.components.playerprox:SetDist(10, 13)
---    inst.components.playerprox:SetOnPlayerNear(onopen)
---    inst.components.playerprox:SetOnPlayerFar(onclose)	
-	
+    --	inst:AddComponent("playerprox")
+    --    inst.components.playerprox:SetDist(10, 13)
+    --    inst.components.playerprox:SetOnPlayerNear(onopen)
+    --    inst.components.playerprox:SetOnPlayerFar(onclose)	
+
     inst:AddComponent("inspectable")
---    inst.components.inspectable:RecordViews()
+    --    inst.components.inspectable:RecordViews()
 
---    inst:AddComponent("teleporter")
---    inst.components.teleporter.onActivate = OnActivate
---    inst.components.teleporter.onActivateByOther = OnActivateByOther
---    inst.components.teleporter.offset = 0
---    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
---    inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
+    --    inst:AddComponent("teleporter")
+    --    inst.components.teleporter.onActivate = OnActivate
+    --    inst.components.teleporter.onActivateByOther = OnActivateByOther
+    --    inst.components.teleporter.offset = 0
+    --    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
+    --    inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
 
---    inst:AddComponent("inventory")
+    --    inst:AddComponent("inventory")
 
---    inst:AddComponent("trader")
---    inst.components.trader.acceptnontradable = true
---    inst.components.trader.onaccept = onaccept
---    inst.components.trader.deleteitemonaccept = false
-	
+    --    inst:AddComponent("trader")
+    --    inst.components.trader.acceptnontradable = true
+    --    inst.components.trader.onaccept = onaccept
+    --    inst.components.trader.deleteitemonaccept = false
+
     return inst
 end
 
@@ -185,13 +184,13 @@ local function activefx_fn()
     inst.AnimState:SetBank("quagmire_portal_fx")
     inst.AnimState:PlayAnimation("portal_pre")
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:OverrideMultColour(1, 1, 1, 1)	
+    inst.AnimState:OverrideMultColour(1, 1, 1, 1)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(6)
     inst.AnimState:SetFinalOffset(1)
 
-	inst:AddTag("quagmire_portal_activefx")
-	
+    inst:AddTag("quagmire_portal_activefx")
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -215,7 +214,7 @@ local function bubblefx_fn()
     inst.AnimState:SetBuild("quagmire_portalbubbles_fx")
     inst.AnimState:SetBank("quagmire_portalbubbles_fx")
     inst.AnimState:PlayAnimation("idle")
---    inst:Hide()
+    --    inst:Hide()
 
     inst.entity:SetPristine()
 
@@ -228,5 +227,5 @@ local function bubblefx_fn()
     return inst
 end
 
-return Prefab("quagmire_portal_activefx", activefx_fn, fx_assets), 
-	Prefab("quagmire_portal", fn, assets), Prefab("quagmire_portal_bubblefx", bubblefx_fn, fx_bubble_assets)
+return Prefab("quagmire_portal_activefx", activefx_fn, fx_assets),
+    Prefab("quagmire_portal", fn, assets), Prefab("quagmire_portal_bubblefx", bubblefx_fn, fx_bubble_assets)

@@ -17,17 +17,19 @@ local LobsterBrain = Class(Brain, function(self, inst)
 end)
 
 local function GoHomeAction(inst)
-    if inst.components.homeseeker and 
-       inst.components.homeseeker.home and 
-       inst.components.homeseeker.home:IsValid() and
-	   inst.sg:HasStateTag("trapped") == false then
+    if inst.components.homeseeker and
+        inst.components.homeseeker.home and
+        inst.components.homeseeker.home:IsValid() and
+        inst.sg:HasStateTag("trapped") == false then
         return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME)
     end
 end
 
 local function EatFoodAction(inst)
-    local notags = {"FX", "NOCLICK", "DECOR","INLIMBO", "planted"}
-    local target = FindEntity(inst, SEE_BAIT_DIST, function(item) return inst.components.eater:CanEat(item) and item.components.bait and not (item.components.inventoryitem and item.components.inventoryitem:IsHeld()) end, nil, notags )
+    local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO", "planted" }
+    local target = FindEntity(inst, SEE_BAIT_DIST,
+        function(item) return inst.components.eater:CanEat(item) and item.components.bait and
+            not (item.components.inventoryitem and item.components.inventoryitem:IsHeld()) end, nil, notags)
     if target then
         local act = BufferedAction(inst, target, ACTIONS.EAT)
         act.validfn = function() return not (target.components.inventoryitem and target.components.inventoryitem:IsHeld()) end
@@ -37,21 +39,21 @@ end
 
 
 function LobsterBrain:OnStart()
-    
     local root = PriorityNode(
-    {
-        WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
-        RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
-        RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true),
-        EventNode(self.inst, "gohome", 
-            DoAction(self.inst, GoHomeAction, "go home", true )),
-         WhileNode(function() return TheWorld.state.isday end, "IsDay",
-            DoAction(self.inst, GoHomeAction, "go home", true )),
-        WhileNode(function() return TheWorld.state.isspring end, "IsSpring",
-            DoAction(self.inst, GoHomeAction, "go home", true )),
-        DoAction(self.inst, EatFoodAction),
-        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
-    }, .25)
+        {
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
+            RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true),
+            EventNode(self.inst, "gohome",
+                DoAction(self.inst, GoHomeAction, "go home", true)),
+            WhileNode(function() return TheWorld.state.isday end, "IsDay",
+                DoAction(self.inst, GoHomeAction, "go home", true)),
+            WhileNode(function() return TheWorld.state.isspring end, "IsSpring",
+                DoAction(self.inst, GoHomeAction, "go home", true)),
+            DoAction(self.inst, EatFoodAction),
+            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,
+                MAX_WANDER_DIST)
+        }, .25)
     self.bt = BT(self.inst, root)
 end
 

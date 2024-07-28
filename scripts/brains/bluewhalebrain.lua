@@ -12,8 +12,8 @@ local KEEP_FACE_DIST = 20
 
 local LEASH_RETURN_DIST = 5
 local LEASH_MAX_DIST = 10
-local	    WHALE_BLUE_FOLLOW_TIME = 60
-local	    WHALE_BLUE_CHASE_DIST = 30
+local WHALE_BLUE_FOLLOW_TIME = 60
+local WHALE_BLUE_CHASE_DIST = 30
 
 local wander_times =
 {
@@ -39,40 +39,40 @@ local BlueWhaleBrain = Class(Brain, function(self, inst)
 end)
 
 function BlueWhaleBrain:OnInitializationComplete()
-    self.inst.components.knownlocations:RememberLocation("home", Point(self.inst.Transform:GetWorldPosition()), true)
+	self.inst.components.knownlocations:RememberLocation("home", Point(self.inst.Transform:GetWorldPosition()), true)
 end
 
 function BlueWhaleBrain:OnStart()
-local map = TheWorld.Map
-local x, y, z = self.inst.Transform:GetWorldPosition()
-local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
+	local map = TheWorld.Map
+	local x, y, z = self.inst.Transform:GetWorldPosition()
+	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
 	local root = PriorityNode(
-	{
-		SequenceNode{
-            ConditionNode(function() 
-	            if ground == GROUND.OCEAN_COASTAL then
-	            	self.inst.hitshallow = true
-	            end
-	            return ground == GROUND.OCEAN_COASTAL or self.inst.hitshallow
-	        end, "HitShallow"),
+		{
+			SequenceNode {
+				ConditionNode(function()
+					if ground == GROUND.OCEAN_COASTAL then
+						self.inst.hitshallow = true
+					end
+					return ground == GROUND.OCEAN_COASTAL or self.inst.hitshallow
+				end, "HitShallow"),
 
-            ParallelNodeAny {
-                WaitNode(15+math.random()*2),
-                Leash(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, LEASH_MAX_DIST, LEASH_RETURN_DIST),
-            },
-            DoAction(self.inst, function() self.inst.hitshallow = nil end ),
-        },
+				ParallelNodeAny {
+					WaitNode(15 + math.random() * 2),
+					Leash(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, LEASH_MAX_DIST, LEASH_RETURN_DIST),
+				},
+				DoAction(self.inst, function() self.inst.hitshallow = nil end),
+			},
 
-		ChaseAndAttack(self.inst, WHALE_BLUE_FOLLOW_TIME, WHALE_BLUE_CHASE_DIST),
-		SequenceNode{
-			FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn, 0.5),
-			RunAway(self.inst, "character", RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)
-		},
-		FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
-		Wander(self.inst, nil, nil, wander_times)
-	}, .25)
-	
+			ChaseAndAttack(self.inst, WHALE_BLUE_FOLLOW_TIME, WHALE_BLUE_CHASE_DIST),
+			SequenceNode {
+				FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn, 0.5),
+				RunAway(self.inst, "character", RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)
+			},
+			FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+			Wander(self.inst, nil, nil, wander_times)
+		}, .25)
+
 	self.bt = BT(self.inst, root)
 end
 

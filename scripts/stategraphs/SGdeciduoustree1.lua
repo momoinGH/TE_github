@@ -1,13 +1,13 @@
-local states=
+local states =
 {
 
-    State{
+    State {
         name = "gnash_pre",
-        tags = {"gnash"},
+        tags = { "gnash" },
         onenter = function(inst, data)
             if data and data.push ~= nil and data.skippre ~= nil then
                 if inst.monster and data.skippre == false then
-                    if data.push then 
+                    if data.push then
                         inst.AnimState:PushAnimation(inst.anims.swayaggropre, false)
                     else
                         inst.AnimState:PlayAnimation(inst.anims.swayaggropre, false)
@@ -25,17 +25,17 @@ local states=
                 end
             end
         end,
-        
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("gnash") end),
             EventHandler("animqueueover", function(inst) inst.sg:GoToState("gnash") end),
-        }        
+        }
     },
 
-    State{
+    State {
         name = "gnash",
-        tags = {"gnash"},
+        tags = { "gnash" },
         onenter = function(inst, push)
             if inst.monster then
                 inst.AnimState:PushAnimation(inst.anims.swayaggro, false)
@@ -44,20 +44,20 @@ local states=
                 inst.sg:GoToState("empty")
             end
         end,
-        
-        events=
+
+        events =
         {
             EventHandler("animqueueover", function(inst)
                 if inst.monster then
                     inst.sg:GoToState("gnash_pst")
                 else
-                    inst.sg:GoToState("empty")     
+                    inst.sg:GoToState("empty")
                 end
             end)
-        }        
+        }
     },
 
-    State{
+    State {
         name = "gnash_pst",
         tags = {},
         onenter = function(inst, push)
@@ -67,24 +67,24 @@ local states=
                 inst.sg:GoToState("empty")
             end
         end,
-        
-        events=
+
+        events =
         {
             EventHandler("animqueueover", function(inst)
                 if inst.monster then
                     if math.random() <= .4 then
-                        inst.sg:GoToState("gnash_pre", {push=false, skippre=false})
+                        inst.sg:GoToState("gnash_pre", { push = false, skippre = false })
                     else
                         inst.sg:GoToState("gnash_idle")
                     end
                 else
-                    inst.sg:GoToState("empty")     
+                    inst.sg:GoToState("empty")
                 end
             end)
-        }        
+        }
     },
 
-    State{
+    State {
         name = "chop_pst",
         tags = {},
         onenter = function(inst, push)
@@ -94,26 +94,26 @@ local states=
                 inst.sg:GoToState("empty")
             end
         end,
-        
-        events=
+
+        events =
         {
             EventHandler("animqueueover", function(inst)
                 if inst.monster then
                     if math.random() <= .6 then
-                        inst.sg:GoToState("gnash_pre", {push=false, skippre=false})
+                        inst.sg:GoToState("gnash_pre", { push = false, skippre = false })
                     else
                         inst.sg:GoToState("gnash_idle")
                     end
                 else
-                    inst.sg:GoToState("empty")     
+                    inst.sg:GoToState("empty")
                 end
             end)
-        }        
+        }
     },
-    
-    State{
+
+    State {
         name = "gnash_idle",
-        tags = {"idle"},
+        tags = { "idle" },
         onenter = function(inst)
             if inst.monster then
                 if math.random() < .4 then
@@ -124,15 +124,15 @@ local states=
                 inst.sg:GoToState("empty")
             end
         end,
-        
-        events=
+
+        events =
         {
-            EventHandler("animqueueover", function(inst) 
+            EventHandler("animqueueover", function(inst)
                 if inst.monster then
                     if inst.components.deciduoustreeupdater and not inst.components.deciduoustreeupdater.monster_target and not inst.components.deciduoustreeupdater.last_monster_target then
                         inst.sg:GoToState("gnash_idle")
                     else
-                        inst.sg:GoToState("gnash_pre", {push=false, skippre=false})  
+                        inst.sg:GoToState("gnash_pre", { push = false, skippre = false })
                     end
                 else
                     inst.sg:GoToState("empty")
@@ -141,50 +141,50 @@ local states=
         },
     },
 
-    State{
+    State {
         name = "burning_pre",
-        tags = {"busy", "burning"},
+        tags = { "busy", "burning" },
         onenter = function(inst)
             inst.AnimState:PushAnimation("sway_agro_pre", false)
         end,
-        events=
+        events =
         {
             EventHandler("animqueueover", function(inst) inst.sg:GoToState("burning") end),
         }
     },
 
-    State{
+    State {
         name = "burning",
-        tags = {"busy", "burning"},
+        tags = { "busy", "burning" },
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/decidous/hurt_fire")
             inst.AnimState:PlayAnimation("sway_loop_agro", false)
         end,
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("burning_pst") end),
         }
     },
 
-    State{
+    State {
         name = "burning_pst",
-        tags = {"busy", "burning"},
+        tags = { "busy", "burning" },
         onenter = function(inst)
             inst.AnimState:PlayAnimation("sway_agro_pst", false)
         end,
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("burning_pre") end),
         }
     },
-    
-	State{
+
+    State {
         name = "empty",
         onenter = function(inst)
-            inst.Sway(inst)        
+            inst.Sway(inst)
         end,
     },
-} 
+}
 
 
 return StateGraph("deciduoustree", states, {}, "empty")

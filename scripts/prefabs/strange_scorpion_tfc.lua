@@ -2,7 +2,7 @@
 --Created by ksaab
 --feel free to use it
 
-local assets=
+local assets =
 {
 	Asset("ANIM", "anim/lavaarena_peghook_basic.zip"),
 	Asset("ANIM", "anim/lavaarena_hits_splash.zip"),
@@ -14,12 +14,12 @@ local prefabs =
 	"meat",
 }
 
-SetSharedLootTable( "strange_scorpion",
-{
---	{"meat",   1.0},
---	{"meat",   1.0},
---	{"meat",   1.0},
-})
+SetSharedLootTable("strange_scorpion",
+	{
+		--	{"meat",   1.0},
+		--	{"meat",   1.0},
+		--	{"meat",   1.0},
+	})
 
 local targetDist = TUNING.STRANGE_SCORPION_TFC.TARGET_DIST
 local keepDist = TUNING.STRANGE_SCORPION_TFC.KEEPDIST
@@ -46,10 +46,10 @@ local function OnTimerDone(inst, data)
 end
 
 local function retargetfn(inst)
-local player = GetClosestInstWithTag("player", inst, 70)
-if player and inst:HasTag("Arena") then return inst.components.combat:SetTarget(player) end
+	local player = GetClosestInstWithTag("player", inst, 70)
+	if player and inst:HasTag("Arena") then return inst.components.combat:SetTarget(player) end
 	local dist = targetDist
-	local notags = {"smallcreature", "FX", "NOCLICK", "INLIMBO"}
+	local notags = { "smallcreature", "FX", "NOCLICK", "INLIMBO" }
 	return FindEntity(inst, dist, function(guy)
 		return inst.components.combat:CanTarget(guy)
 	end, nil, notags)
@@ -75,13 +75,13 @@ local function DoSpread(inst)
 	local notags = { "smallcreature", "scorpion", "shadow", "playerghost", "INLIMBO", "NOCLICK", "FX" }
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local hits = 0
-	for _, v in pairs(TheSim:FindEntities(x, y, z, spitRange, {"_combat"}, notags)) do
-		if v ~= inst 
-			and v:IsValid() 
-			and v.entity:IsVisible() 
-			and v.components.combat ~= nil 
+	for _, v in pairs(TheSim:FindEntities(x, y, z, spitRange, { "_combat" }, notags)) do
+		if v ~= inst
+			and v:IsValid()
+			and v.entity:IsVisible()
+			and v.components.combat ~= nil
 		then
-			inst.components.combat:DoAttack(v) 
+			inst.components.combat:DoAttack(v)
 			hits = hits + 1
 			if hits >= spreadTargets then break end
 		end
@@ -100,45 +100,46 @@ local function SpitChargeTask(inst)
 end
 
 local function EquipWeapons(inst)
-    if inst.components.inventory ~= nil and not inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
-        local mass = CreateEntity()
-        mass.name = "scorpspit"
-        --[[Non-networked entity]]
-        mass.entity:AddTransform()
-        mass:AddComponent("weapon")
-        mass.components.weapon:SetDamage(spitDamage)
-        mass.components.weapon:SetRange(TUNING.STRANGE_SCORPION_TFC.SPITRANGE, TUNING.STRANGE_SCORPION_TFC.SPITRANGE + 2)
-        mass.components.weapon:SetProjectile("strange_scorpion_massproj_tfc")
-        mass:AddComponent("inventoryitem")
-        mass.persists = false
-        mass.components.inventoryitem:SetOnDroppedFn(mass.Remove)
-        mass:AddComponent("equippable")
-        mass:AddTag("spit")
+	if inst.components.inventory ~= nil and not inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
+		local mass = CreateEntity()
+		mass.name = "scorpspit"
+		--[[Non-networked entity]]
+		mass.entity:AddTransform()
+		mass:AddComponent("weapon")
+		mass.components.weapon:SetDamage(spitDamage)
+		mass.components.weapon:SetRange(TUNING.STRANGE_SCORPION_TFC.SPITRANGE, TUNING.STRANGE_SCORPION_TFC.SPITRANGE + 2)
+		mass.components.weapon:SetProjectile("strange_scorpion_massproj_tfc")
+		mass:AddComponent("inventoryitem")
+		mass.persists = false
+		mass.components.inventoryitem:SetOnDroppedFn(mass.Remove)
+		mass:AddComponent("equippable")
+		mass:AddTag("spit")
 
-        inst.components.inventory:GiveItem(mass)
+		inst.components.inventory:GiveItem(mass)
 		inst.massweapon = mass
-		
-		local spit = CreateEntity()
-        spit.name = "scorpspit"
-        --[[Non-networked entity]]
-        spit.entity:AddTransform()
-        spit:AddComponent("weapon")
-        spit.components.weapon:SetDamage(spitDamage)
-        spit.components.weapon:SetRange(TUNING.STRANGE_SCORPION_TFC.SPITRANGE, TUNING.STRANGE_SCORPION_TFC.SPITRANGE + 2)
-        spit.components.weapon:SetProjectile("strange_scorpion_proj_tfc")
-        spit:AddComponent("inventoryitem")
-        spit.persists = false
-        spit.components.inventoryitem:SetOnDroppedFn(spit.Remove)
-        spit:AddComponent("equippable")
-        spit:AddTag("spit")
 
-        inst.components.inventory:GiveItem(spit)
-        inst.weapon = spit
-    end
+		local spit = CreateEntity()
+		spit.name = "scorpspit"
+		--[[Non-networked entity]]
+		spit.entity:AddTransform()
+		spit:AddComponent("weapon")
+		spit.components.weapon:SetDamage(spitDamage)
+		spit.components.weapon:SetRange(TUNING.STRANGE_SCORPION_TFC.SPITRANGE, TUNING.STRANGE_SCORPION_TFC.SPITRANGE + 2)
+		spit.components.weapon:SetProjectile("strange_scorpion_proj_tfc")
+		spit:AddComponent("inventoryitem")
+		spit.persists = false
+		spit.components.inventoryitem:SetOnDroppedFn(spit.Remove)
+		spit:AddComponent("equippable")
+		spit:AddTag("spit")
+
+		inst.components.inventory:GiveItem(spit)
+		inst.weapon = spit
+	end
 end
 
 local function GetDebugString(inst)
-	return string.format("spit %s, spread %i", tostring(GetTime() - inst.components.combat.lastrangeattacktime > rangeRecharge), 
+	return string.format("spit %s, spread %i",
+		tostring(GetTime() - inst.components.combat.lastrangeattacktime > rangeRecharge),
 		inst.spitCharge)
 end
 
@@ -169,9 +170,9 @@ local function fn(Sim)
 
 	inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	if not TheWorld.ismastersim then
+		return inst
+	end
 
 	inst:AddComponent("knownlocations")
 
@@ -222,7 +223,7 @@ local function fn(Sim)
 	MakeLargeFreezableCharacter(inst, "body")
 	MakeMediumBurnableCharacter(inst, "body")
 	EquipWeapons(inst)
-	
+
 	inst.spitCharge = 5
 	inst._sctask = inst:DoPeriodicTask(5, SpitChargeTask)
 	inst.canSpread = false
@@ -242,12 +243,12 @@ local function OnProjectileHit(inst, other)
 	SpawnPrefab("strange_scorpion_splash_tfc").Transform:SetPosition(x, y, z)
 	inst.SoundEmitter:PlaySound("dontstarve/impacts/lava_arena/poison_drop")
 	local notags = { "scorpion", "shadow", "playerghost", "INLIMBO", "NOCLICK", "FX" }
-	for _, ent in pairs (TheSim:FindEntities(x, y, z, splashRadius, 
-		{"_combat"}, notags)) 
+	for _, ent in pairs(TheSim:FindEntities(x, y, z, splashRadius,
+		{ "_combat" }, notags))
 	do
-		if ent:IsValid() 
-			and ent.entity:IsVisible() 
-			and ent.components.combat ~= nil 
+		if ent:IsValid()
+			and ent.entity:IsVisible()
+			and ent.components.combat ~= nil
 		then
 			ent.components.combat:GetAttacked(inst.components.complexprojectile.attacker, splashDamage)
 			if ent.components.pinnable ~= nil and stickySpit then
@@ -261,162 +262,162 @@ local function OnProjectileHit(inst, other)
 			end
 			-------------------------------
 			-- other:DoTaskInTime(10, function(other) -- 10 — длительность действия яда
-				-- if other._poisontask ~= nil then
-					-- other._poisontask:Cancel()
-					-- other._poisontask = nil
-				-- end
+			-- if other._poisontask ~= nil then
+			-- other._poisontask:Cancel()
+			-- other._poisontask = nil
+			-- end
 			-- end
 			-- other._poisontask = DoPeriodicTask(1, function(other) -- 1 — раз в сколько секнуд будет тикать яд, модно указывать дробные значения
-				-- other.components.health:DoDelta(-10) -- 10 — урон, ачисло должно быть отрицательным, иначе будет хилить
-				-- --для спецэффекта раскомментить строку и вписать название префаба
-				-- --SpawnPrefab("Тут имя спецэффекта для яда").Transform:SetPosition(other.Transform:GetWorldPosition())
+			-- other.components.health:DoDelta(-10) -- 10 — урон, ачисло должно быть отрицательным, иначе будет хилить
+			-- --для спецэффекта раскомментить строку и вписать название префаба
+			-- --SpawnPrefab("Тут имя спецэффекта для яда").Transform:SetPosition(other.Transform:GetWorldPosition())
 			-- end)
 			-------------------------------
 			--end
 		end
 	end
-	
-	RemovePhysicsColliders(inst) 
+
+	RemovePhysicsColliders(inst)
 	inst.AnimState:PlayAnimation("blast", false)
 	inst:ListenForEvent("animover", inst.Remove)
 end
 
 local function projectilefn()
-    local inst = CreateEntity()
+	local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddPhysics()
-    inst.entity:AddNetwork()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddPhysics()
+	inst.entity:AddNetwork()
 
-    inst.Physics:SetMass(1)
-    inst.Physics:SetFriction(10)
-    inst.Physics:SetDamping(5)
-    inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
-    inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.GROUND)
+	inst.Physics:SetMass(1)
+	inst.Physics:SetFriction(10)
+	inst.Physics:SetDamping(5)
+	inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
+	inst.Physics:ClearCollisionMask()
+	inst.Physics:CollidesWith(COLLISION.GROUND)
 	inst.Physics:SetCapsule(0.02, 0.02)
-	
+
 	inst.Transform:SetScale(0.7, 0.7, 0.7)
 
-    inst.AnimState:SetBank("gooball_fx")
-    inst.AnimState:SetBuild("gooball_fx")
-    inst.AnimState:PlayAnimation("idle_loop", true)
+	inst.AnimState:SetBank("gooball_fx")
+	inst.AnimState:SetBuild("gooball_fx")
+	inst.AnimState:PlayAnimation("idle_loop", true)
 	inst.AnimState:SetMultColour(0, 1, 0.3, 1)
 
 	inst.entity:SetPristine()
-	
+
 	inst:AddTag("_projectile")
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	if not TheWorld.ismastersim then
+		return inst
+	end
 
-    inst.Physics:SetCollisionCallback(OnProjectileHit)
+	inst.Physics:SetCollisionCallback(OnProjectileHit)
 
-    inst.persists = false
+	inst.persists = false
 
-    inst:AddComponent("locomotor")
-    inst:AddComponent("complexprojectile")
+	inst:AddComponent("locomotor")
+	inst:AddComponent("complexprojectile")
 	inst.components.complexprojectile:SetHorizontalSpeed(40)
 	inst.components.complexprojectile:SetOnHit(OnProjectileHit)
 	inst.components.complexprojectile:SetLaunchOffset(Vector3(2, 4, 2))
 	inst.components.complexprojectile.usehigharc = false
-	
+
 	inst._lifeTask = inst:DoTaskInTime(10, inst.Remove)
 
-    return inst
+	return inst
 end
 
 --mass projectile--------------------------
 -------------------------------------------
 local function massprojectilefn()
-    local inst = CreateEntity()
+	local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddPhysics()
-    inst.entity:AddNetwork()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddPhysics()
+	inst.entity:AddNetwork()
 
-    inst.Physics:SetMass(1)
-    inst.Physics:SetFriction(10)
-    inst.Physics:SetDamping(5)
-    inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
-    inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.GROUND)
-    --inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-    --inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+	inst.Physics:SetMass(1)
+	inst.Physics:SetFriction(10)
+	inst.Physics:SetDamping(5)
+	inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
+	inst.Physics:ClearCollisionMask()
+	inst.Physics:CollidesWith(COLLISION.GROUND)
+	--inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+	--inst.Physics:CollidesWith(COLLISION.CHARACTERS)
 	inst.Physics:SetCapsule(0.02, 0.02)
-	
+
 	inst.Transform:SetScale(0.7, 0.7, 0.7)
 
-    inst.AnimState:SetBank("gooball_fx")
-    inst.AnimState:SetBuild("gooball_fx")
-    inst.AnimState:PlayAnimation("idle_loop", true)
+	inst.AnimState:SetBank("gooball_fx")
+	inst.AnimState:SetBuild("gooball_fx")
+	inst.AnimState:PlayAnimation("idle_loop", true)
 	inst.AnimState:SetMultColour(0, 1, 0.3, 1)
 
 	inst.entity:SetPristine()
-	
+
 	inst:AddTag("_projectile")
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	if not TheWorld.ismastersim then
+		return inst
+	end
 
-    inst.Physics:SetCollisionCallback(OnProjectileHit)
+	inst.Physics:SetCollisionCallback(OnProjectileHit)
 
-    inst.persists = false
+	inst.persists = false
 
-    inst:AddComponent("locomotor")
-    inst:AddComponent("complexprojectile")
+	inst:AddComponent("locomotor")
+	inst:AddComponent("complexprojectile")
 	inst.components.complexprojectile:SetHorizontalSpeed(20)
-    inst.components.complexprojectile:SetGravity(-35)
+	inst.components.complexprojectile:SetGravity(-35)
 	inst.components.complexprojectile:SetOnHit(OnProjectileHit)
 	--inst.components.complexprojectile:SetGravity(-15)
 	inst.components.complexprojectile:SetLaunchOffset(Vector3(0, 4, 0))
 	--inst.components.complexprojectile.usehigharc = false
-	
+
 	inst._lifeTask = inst:DoTaskInTime(10, inst.Remove)
 
-    return inst
+	return inst
 end
 
 --splash-------------------
 ---------------------------
 local function splashfn()
-    local inst = CreateEntity()
+	local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
-	
+
 	inst.Transform:SetScale(0.5, 0.5, 0.5)
 
-    inst.AnimState:SetBank("lavaarena_hits_splash")
-    inst.AnimState:SetBuild("lavaarena_hits_splash")
-    inst.AnimState:PlayAnimation("aoe_hit")
-    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
+	inst.AnimState:SetBank("lavaarena_hits_splash")
+	inst.AnimState:SetBuild("lavaarena_hits_splash")
+	inst.AnimState:PlayAnimation("aoe_hit")
+	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+	inst.AnimState:SetLayer(LAYER_BACKGROUND)
 	inst.AnimState:SetSortOrder(3)
 	inst.AnimState:SetMultColour(0, 1, 0.3, 1)
 
-    inst:AddTag("FX")
-    inst:AddTag("NOCLICK")
+	inst:AddTag("FX")
+	inst:AddTag("NOCLICK")
 
-    --inst:AddComponent("bloomer")
-    --inst.components.bloomer:PushBloom("fx", "shaders/anim.ksh", -2)
+	--inst:AddComponent("bloomer")
+	--inst.components.bloomer:PushBloom("fx", "shaders/anim.ksh", -2)
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	if not TheWorld.ismastersim then
+		return inst
+	end
 
 	inst.persists = false
 	inst:ListenForEvent("animover", inst.Remove)
-	
-    return inst
+
+	return inst
 end
 
 return Prefab("strange_scorpion_tfc", fn, assets, prefabs),

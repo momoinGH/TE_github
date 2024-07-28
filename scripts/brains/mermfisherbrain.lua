@@ -311,11 +311,11 @@ function MermFisherBrain:OnStart(inst)
                     ChattyNode(self.inst, STRINGS.MERM_TALK_PANIC,
                         Panic(self.inst)
                     )),
-                    ChattyNode(self.inst, STRINGS.MERM_TALK_GO_HOME,
-                        RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP)
+                ChattyNode(self.inst, STRINGS.MERM_TALK_GO_HOME,
+                    RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP)
                 ),
-                    ChattyNode(self.inst, STRINGS.MERM_TALK_GO_HOME,
-                        RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true)
+                ChattyNode(self.inst, STRINGS.MERM_TALK_GO_HOME,
+                    RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true)
                 ),
                 -- RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
                 -- RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, nil, true),
@@ -340,7 +340,7 @@ function MermFisherBrain:OnStart(inst)
                     )),
                 WhileNode(function() return ShouldGoHome(self.inst) end, "ShouldGoHome",
                     DoAction(self.inst, GoHomeAction, "Go Home", true)),
-                    DoAction(self.inst, EatFoodAction, "Eat Food"),
+                DoAction(self.inst, EatFoodAction, "Eat Food"),
                 ChattyNode(self.inst, STRINGS.MERM_TALK_FOLLOWWILSON,
                     Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST,
                         TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
@@ -368,8 +368,9 @@ function MermFisherBrain:OnStart(inst)
                 function() return self.inst.components.combat.target ~= nil and not self.inst.sg:HasStateTag("fishing") end,
                 "Is Threatened", IsThreatened),
             ChattyNode(self.inst, STRINGS.MERM_TALK_RUNAWAY,
-				RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
-				
+                RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST,
+                    STOP_RUN_AWAY_DIST)),
+
             ChattyNode(self.inst, STRINGS.MERM_TALK_FIND_FOOD,
                 DoAction(self.inst, FindFoodAction)),
 

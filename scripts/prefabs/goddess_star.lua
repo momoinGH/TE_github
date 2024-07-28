@@ -44,7 +44,7 @@ local function pulse_light(inst)
     local s = math.abs(math.sin(PI * (timealive + inst._pulseoffs) * 0.05))
     local rad = Lerp(11, 12, s)
     local intentsity = Lerp(0.8, 0.7, s)
-    local falloff = Lerp(0.8, 0.7, s) 
+    local falloff = Lerp(0.8, 0.7, s)
     inst.Light:SetFalloff(falloff)
     inst.Light:SetIntensity(intentsity)
     inst.Light:SetRadius(rad)
@@ -63,80 +63,80 @@ local function ShouldAcceptItem(inst, item)
 end
 
 local function stargone(inst)
-	if inst.spell ~= nil then
-		inst.spell:Remove()
-		inst.spell = nil
-	end
+    if inst.spell ~= nil then
+        inst.spell:Remove()
+        inst.spell = nil
+    end
 end
 
 local function depleted(inst)
-	inst:RemoveComponent("heater")
-	inst:RemoveComponent("fueled")
-	if inst.components.cooker ~= nil then
-		inst:RemoveComponent("cooker")
-	end
+    inst:RemoveComponent("heater")
+    inst:RemoveComponent("fueled")
+    if inst.components.cooker ~= nil then
+        inst:RemoveComponent("cooker")
+    end
 end
 
 local function OnGetItem(inst, giver, item)
-	if item.components.edible ~= nil and not item:HasTag("magicpowder") then
-		local refreshee = item.prefab
-		local x, y, z = inst.Transform:GetWorldPosition()
-		if inst.spell == nil then
-			inst.spell = inst:SpawnChild("goddess_sparklefx")
-			inst.spell.Transform:SetPosition(0, 2, 0)
-		end
-		inst.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")
-		SpawnPrefab(refreshee).Transform:SetPosition(x , y + 2, z)
-		inst:DoTaskInTime(0.75, stargone)
-	end
-	if item:HasTag("magicpowder") then
-		if TheWorld.state.iswinter then	
-			giver.components.talker:Say("It seems to be a lot warmer now, bet I could cook on it.")
-			inst:AddComponent("heater")
+    if item.components.edible ~= nil and not item:HasTag("magicpowder") then
+        local refreshee = item.prefab
+        local x, y, z = inst.Transform:GetWorldPosition()
+        if inst.spell == nil then
+            inst.spell = inst:SpawnChild("goddess_sparklefx")
+            inst.spell.Transform:SetPosition(0, 2, 0)
+        end
+        inst.SoundEmitter:PlaySound("dontstarve/wilson/equip_item_gold")
+        SpawnPrefab(refreshee).Transform:SetPosition(x, y + 2, z)
+        inst:DoTaskInTime(0.75, stargone)
+    end
+    if item:HasTag("magicpowder") then
+        if TheWorld.state.iswinter then
+            giver.components.talker:Say("It seems to be a lot warmer now, bet I could cook on it.")
+            inst:AddComponent("heater")
             inst.components.heater.heat = 100
-			inst:AddComponent("fueled")
-			inst.components.fueled:InitializeFuelLevel(60)
-			inst.components.fueled:SetDepletedFn(depleted)
-			inst.components.fueled:StartConsuming()
-			inst:AddComponent("cooker")
-		elseif TheWorld.state.issummer then	
-			giver.components.talker:Say("It seems to be a lot cooler now.")
-			inst:AddComponent("heater")
-			inst.components.heater.heat = -100
+            inst:AddComponent("fueled")
+            inst.components.fueled:InitializeFuelLevel(60)
+            inst.components.fueled:SetDepletedFn(depleted)
+            inst.components.fueled:StartConsuming()
+            inst:AddComponent("cooker")
+        elseif TheWorld.state.issummer then
+            giver.components.talker:Say("It seems to be a lot cooler now.")
+            inst:AddComponent("heater")
+            inst.components.heater.heat = -100
             inst.components.heater:SetThermics(false, true)
-			inst:AddComponent("fueled")
-			inst.components.fueled:InitializeFuelLevel(60)
-			inst.components.fueled:SetDepletedFn(depleted)
-			inst.components.fueled:StartConsuming()
-		else
-			local a = math.random()
-			if a > 0.50 then
-				giver.components.talker:Say("It seems to be a lot cooler now.")
-				inst:AddComponent("heater")
-				inst.components.heater.heat = -100
-				inst.components.heater:SetThermics(false, true)
-				inst:AddComponent("fueled")
-				inst.components.fueled:InitializeFuelLevel(60)
-				inst.components.fueled:SetDepletedFn(depleted)
-				inst.components.fueled:StartConsuming()
-			else
-				giver.components.talker:Say("It seems to be warmer now, bet I could cook on it.")
-				inst:AddComponent("heater")
-				inst.components.heater.heat = 100
-				inst:AddComponent("fueled")
-				inst.components.fueled:InitializeFuelLevel(60)
-				inst.components.fueled:SetDepletedFn(depleted)
-				inst.components.fueled:StartConsuming()
-				inst:AddComponent("cooker")
-			end
-		end
-	end
+            inst:AddComponent("fueled")
+            inst.components.fueled:InitializeFuelLevel(60)
+            inst.components.fueled:SetDepletedFn(depleted)
+            inst.components.fueled:StartConsuming()
+        else
+            local a = math.random()
+            if a > 0.50 then
+                giver.components.talker:Say("It seems to be a lot cooler now.")
+                inst:AddComponent("heater")
+                inst.components.heater.heat = -100
+                inst.components.heater:SetThermics(false, true)
+                inst:AddComponent("fueled")
+                inst.components.fueled:InitializeFuelLevel(60)
+                inst.components.fueled:SetDepletedFn(depleted)
+                inst.components.fueled:StartConsuming()
+            else
+                giver.components.talker:Say("It seems to be warmer now, bet I could cook on it.")
+                inst:AddComponent("heater")
+                inst.components.heater.heat = 100
+                inst:AddComponent("fueled")
+                inst.components.fueled:InitializeFuelLevel(60)
+                inst.components.fueled:SetDepletedFn(depleted)
+                inst.components.fueled:StartConsuming()
+                inst:AddComponent("cooker")
+            end
+        end
+    end
 end
 
 local function makestafflight(name, is_hot, anim, colour, idles, is_fx)
     local assets =
     {
-        Asset("ANIM", "anim/"..anim..".zip"),
+        Asset("ANIM", "anim/" .. anim .. ".zip"),
     }
 
     local PlayRandomStarIdle = #idles > 1 and function(inst)
@@ -167,7 +167,7 @@ local function makestafflight(name, is_hot, anim, colour, idles, is_fx)
 
         inst.AnimState:SetBank(anim)
         inst.AnimState:SetBuild(anim)
-		inst.AnimState:SetMultColour(144/255, 238/255, 144/255, 1)		
+        inst.AnimState:SetMultColour(144 / 255, 238 / 255, 144 / 255, 1)
         inst.AnimState:PlayAnimation("appear")
         if #idles == 1 then
             inst.AnimState:PushAnimation(idles[1], true)
@@ -184,11 +184,11 @@ local function makestafflight(name, is_hot, anim, colour, idles, is_fx)
             inst.AnimState:SetFinalOffset(1)
         else
             MakeInventoryPhysics(inst)
-			MakeInventoryFloatable(inst)	
+            MakeInventoryFloatable(inst)
 
             inst.no_wet_prefix = true
         end
-		
+
         inst.SoundEmitter:PlaySound("dontstarve/common/staff_coldlight_LP", "staff_star_loop")
 
         inst.entity:SetPristine()
@@ -224,10 +224,10 @@ local function makestafflight(name, is_hot, anim, colour, idles, is_fx)
             inst:ListenForEvent("animover", PlayRandomStarIdle)
         end
 
-		inst:AddComponent("trader")
-		inst.components.trader:SetAcceptTest(ShouldAcceptItem)
-		inst.components.trader.onaccept = OnGetItem
-		
+        inst:AddComponent("trader")
+        inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+        inst.components.trader.onaccept = OnGetItem
+
         return inst
     end
 

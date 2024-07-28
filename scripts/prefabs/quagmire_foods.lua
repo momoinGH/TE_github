@@ -17,7 +17,7 @@ local function MakePreparedFood(data)
         inst.entity:AddNetwork()
 
         MakeInventoryPhysics(inst)
-		MakeInventoryFloatable(inst)	
+        MakeInventoryFloatable(inst)
         local anim = "preparedfood_gorge"
 
         inst.AnimState:SetBank("preparedfood_gorge")
@@ -33,7 +33,7 @@ local function MakePreparedFood(data)
         end
 
         if data.tags then
-            for i,v in pairs(data.tags) do
+            for i, v in pairs(data.tags) do
                 inst:AddTag(v)
             end
         end
@@ -78,7 +78,7 @@ local function MakePreparedFood(data)
         inst:AddComponent("snackrificable")
         inst.components.snackrificable:SetUp(
             data.worth or 1,
-            data.cravings or {"bread"}
+            data.cravings or { "bread" }
         )
 
         MakeSmallBurnable(inst)
@@ -87,12 +87,12 @@ local function MakePreparedFood(data)
         AddHauntableCustomReaction(inst, function(inst, haunter)
             --#HAUNTFIX
             --if math.random() <= TUNING.HAUNT_CHANCE_SUPERRARE then
-                --if inst.components.burnable and not inst.components.burnable:IsBurning() then
-                    --inst.components.burnable:Ignite()
-                    --inst.components.hauntable.hauntvalue = TUNING.HAUNT_MEDIUM
-                    --inst.components.hauntable.cooldown_on_successful_haunt = false
-                    --return true
-                --end
+            --if inst.components.burnable and not inst.components.burnable:IsBurning() then
+            --inst.components.burnable:Ignite()
+            --inst.components.hauntable.hauntvalue = TUNING.HAUNT_MEDIUM
+            --inst.components.hauntable.cooldown_on_successful_haunt = false
+            --return true
+            --end
             --end
             return false
         end, true, false, true)
@@ -115,7 +115,7 @@ end
 local prefs = {}
 
 local foods = require("gorge_foods")
-for k,v in pairs(foods) do
+for k, v in pairs(foods) do
     table.insert(prefs, MakePreparedFood(v))
 end
 

@@ -267,7 +267,7 @@ end
 
 function Temperature:GetMoisturePenalty()
     return self.inst.components.moisture ~= nil and
-    -Lerp(0, self.maxmoisturepenalty, self.inst.components.moisture:GetMoisturePercent()) or 0
+        -Lerp(0, self.maxmoisturepenalty, self.inst.components.moisture:GetMoisturePercent()) or 0
 end
 
 local UPDATE_SPAWNLIGHT_ONEOF_TAGS = { "HASHEATER", "spawnlight" }
@@ -372,11 +372,10 @@ function Temperature:OnUpdate(dt, applyhealthdelta)
             self.hayfever = 0
         end
         if mascara and mascara.prefab == "gasmaskhat" or mascara and mascara.prefab == "gashat" or fan then
-            if self.hayfever > 0 then 
-                self.hayfever = self.hayfever - 1 
+            if self.hayfever > 0 then
+                self.hayfever = self.hayfever - 1
             end
         else
-
             if not self.inst:HasTag("wereplayer") and not self.inst:HasTag("plantkin") then
                 self.hayfever = self.hayfever + 1
             end
@@ -450,7 +449,7 @@ function Temperature:OnUpdate(dt, applyhealthdelta)
         self.rate = owner:HasTag("lowcool") and -.5 * TUNING.WARM_DEGREES_PER_SEC or -TUNING.WARM_DEGREES_PER_SEC
     else
         local sleepingbag_ambient_temp = self.inst.sleepingbag ~= nil and
-        self.inst.sleepingbag.components.sleepingbag.ambient_temp
+            self.inst.sleepingbag.components.sleepingbag.ambient_temp
         if sleepingbag_ambient_temp then
             ambient_temperature = sleepingbag_ambient_temp
         end
