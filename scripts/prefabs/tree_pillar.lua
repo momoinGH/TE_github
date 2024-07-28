@@ -1,7 +1,6 @@
 local CANOPY_SHADOW_DATA = require("prefabs/canopyshadows")
 
 local prefabs =
-local prefabs =
 {
     "glowfly",
 }
@@ -162,7 +161,7 @@ local function fn(Sim)
 
     -- THIS WAS COMMENTED OUT BECAUSE THE ROC WAS BUMPING INTO IT. BUT I'M NOT SURE WHY IT WAS SET THAT WAY TO BEGIN WITH.
     --inst.Physics:SetCollisionGroup(COLLISION.GROUND)
-    trans:SetScale(1,1,1)
+    trans:SetScale(1 ,1, 1)
     
     inst:AddTag("shadecanopysmall") --防止自燃、过热和玻璃雨的标签，同超平均巨树
     inst:AddTag("tree_pillar")
@@ -211,8 +210,6 @@ local function fn(Sim)
     inst:WatchWorldState("isnight", spawncocoons)
     inst:WatchWorldState("isdusk", spawncocoons)
 
-
-    return inst
     inst.components.playerprox:SetOnPlayerNear(OnNear)
 
 	inst:WatchWorldState("isday", spawncocoons)
