@@ -238,7 +238,7 @@ local function OnLightningStrike(inst)
         return
     end
 
-    local num_small_items = math.random(NUM_DROP_SMALL_ITEMS_MIN, NUM_DROP_SMALL_ITEMS_MAX)
+    local num_small_items = math.random(NUM_DROP_SMALL_ITEMS_MIN_LIGHTNING, NUM_DROP_SMALL_ITEMS_MAX_LIGHTNING)
     local items_to_drop = {}
 
     for i = 1, num_small_items do
@@ -362,7 +362,7 @@ local function fn()
     inst.entity:SetAABB(60, 20)
 
     inst:AddTag("cocoon_home")
-    inst:AddTag("shadecanopy")
+    inst:AddTag("shadecanopysmall") --防止自燃、过热和玻璃雨的标签，同超平均巨树
 
     inst.MiniMapEntity:SetIcon("oceantree_pillar.png")
 
@@ -434,7 +434,7 @@ local function fn()
 
     --------------------
     inst:AddComponent("lightningblocker")
-    inst.components.lightningblocker:SetBlockRange(TUNING.SHADE_CANOPY_RANGE)
+    inst.components.lightningblocker:SetBlockRange(TUNING.SHADE_CANOPY_RANGE_SMALL)
     inst.components.lightningblocker:SetOnLightningStrike(OnLightningStrike)
 
     inst:ListenForEvent("on_collide", OnCollide)

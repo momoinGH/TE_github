@@ -1,6 +1,6 @@
 local CANOPY_SHADOW_DATA = require("prefabs/canopyshadows")
 
-local prefabs = 
+local prefabs =
 {
     "glowfly",
 }
@@ -33,7 +33,7 @@ if TheWorld.state.iswinter then
                     local suboffset = FindWalkableOffset(newpoint,angle, range, 10)
                     local cocoon = SpawnPrefab("glowfly_cocoon")
                     local spawnpt = newpoint + suboffset
-                    cocoon.Physics:Teleport(spawnpt.x,spawnpt.y,spawnpt.z)                    
+                    cocoon.Physics:Teleport(spawnpt.x,spawnpt.y,spawnpt.z)
 --                    cocoon:AddTag("cocoonspawn")
 --                    cocoon.forceCocoon(cocoon)     
                 end
@@ -48,7 +48,7 @@ local function OnFar(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         local testset = {}
         for player,i in pairs(inst.players)do
-            testset[player] = true        
+            testset[player] = true
         end
 
         for i,player in ipairs(FindPlayersInRangeSq(x, y, z, MAX*MAX))do
@@ -63,7 +63,7 @@ local function OnFar(inst)
                    player.treepillar = player.treepillar - 1
                    if player.treepillar == 0 then
 --                       player:PushEvent("onchangecanopyzone", false)
-					   player:RemoveTag("mostraselva") 
+					   player:RemoveTag("mostraselva")
                    end
                 end
                 inst.players[player] = nil
@@ -85,7 +85,7 @@ local function OnNear(inst,player)
     player.treepillar = player.treepillar + 1
     if player.treepillar == 1 then
 --        player:PushEvent("onchangecanopyzone", true)
-		player:AddTag("mostraselva") 
+		player:AddTag("mostraselva")
     end
 end
 
@@ -131,7 +131,22 @@ local function removecanopy(inst)
             end
         end
     end
-    inst._hascanopy:set(false)    
+    inst._hascanopy:set(false)
+end
+
+local function OnLightningStrike(inst)
+    if inst._lightning_drop_task ~= nil then
+        return
+    end
+
+    local num_small_items = math.random(NUM_DROP_SMALL_ITEMS_MIN_LIGHTNING, NUM_DROP_SMALL_ITEMS_MAX_LIGHTNING)
+    local items_to_drop = {}
+
+    for i = 1, num_small_items do
+        table.insert(items_to_drop, small_ram_products[math.random(1, #small_ram_products)])
+    end
+
+    inst._lightning_drop_task = inst:DoTaskInTime(20*FRAMES, DropLightningItems, items_to_drop)
 end
 
 local function fn(Sim)
@@ -146,7 +161,9 @@ local function fn(Sim)
     -- THIS WAS COMMENTED OUT BECAUSE THE ROC WAS BUMPING INTO IT. BUT I'M NOT SURE WHY IT WAS SET THAT WAY TO BEGIN WITH.
     --inst.Physics:SetCollisionGroup(COLLISION.GROUND)
     trans:SetScale(1,1,1)
-    inst:AddTag("tree_pillar")    
+    
+    inst:AddTag("shadecanopysmall") --防止自燃、过热和玻璃雨的标签，同超平均巨树
+    inst:AddTag("tree_pillar")
 
 	local minimap = inst.entity:AddMiniMapEntity()
 	minimap:SetIcon( "pillar_tree.png" )
@@ -155,44 +172,47 @@ local function fn(Sim)
 	anim:SetBuild("pillar_tree")   -- art files
 
     anim:PlayAnimation("idle",true)
-	
-	
+
+
     if not TheNet:IsDedicated() then
         inst:AddComponent("distancefade")
         inst.components.distancefade:Setup(15,25)
     end
-    
+
     inst._hascanopy = net_bool(inst.GUID, "oceantree_pillar._hascanopy", "hascanopydirty")
-    inst._hascanopy:set(true)    
-    inst:DoTaskInTime(0, function()    
+    inst._hascanopy:set(true)
+    inst:DoTaskInTime(0, function()
         inst.canopy_data = CANOPY_SHADOW_DATA.spawnshadow(inst, math.floor(TUNING.SHADE_CANOPY_RANGE_SMALL/4), true)
     end)
 
     inst:ListenForEvent("hascanopydirty", function()
-                if not inst._hascanopy:value() then 
-                    removecanopyshadow(inst) 
+                if not inst._hascanopy:value() then
+                    removecanopyshadow(inst)
                 end
-        end)	
-	
+        end)
+
 
 	inst.entity:SetPristine()
-	
+
     if not TheWorld.ismastersim then
 		return inst
-	end 	
-	
+	end
+
     inst:AddComponent("inspectable")
-	
+
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(MIN, MAX)
     inst.components.playerprox:SetOnPlayerFar(OnFar)
-    inst.components.playerprox:SetOnPlayerNear(OnNear)	
-	
+    inst.components.playerprox:SetOnPlayerNear(OnNear)
+
 	inst:WatchWorldState("isday", spawncocoons)
 	inst:WatchWorldState("isnight",spawncocoons)
 	inst:WatchWorldState("isdusk", spawncocoons)
-	
-    
+
+    inst:AddComponent("lightningblocker")
+    inst.components.lightningblocker:SetBlockRange(TUNING.SHADE_CANOPY_RANGE_SMALL)
+    inst.components.lightningblocker:SetOnLightningStrike(OnLightningStrike)
+
    return inst
 end
 

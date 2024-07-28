@@ -8,7 +8,7 @@ local assets =
 	Asset("SCRIPT", "scripts/prefabs/canopyshadows.lua"),
 }
 
-local prefabs = 
+local prefabs =
 {
     "glowfly",
 }
@@ -54,7 +54,7 @@ local function OnFar(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         local testset = {}
         for player,i in pairs(inst.players)do
-            testset[player] = true        
+            testset[player] = true
         end
 
         for i,player in ipairs(FindPlayersInRangeSq(x, y, z, MAX*MAX))do
@@ -69,7 +69,7 @@ local function OnFar(inst)
                    player.treepillar = player.treepillar - 1
                    if player.treepillar == 0 then
 --                       player:PushEvent("onchangecanopyzone", false)
-					   player:RemoveTag("mostraselva") 
+					   player:RemoveTag("mostraselva")
                    end
                 end
                 inst.players[player] = nil
@@ -91,7 +91,7 @@ local function OnNear(inst,player)
     player.treepillar = player.treepillar + 1
     if player.treepillar == 1 then
 --        player:PushEvent("onchangecanopyzone", true)
-		player:AddTag("mostraselva") 
+		player:AddTag("mostraselva")
     end
 end
 
@@ -137,7 +137,7 @@ local function removecanopy(inst)
             end
         end
     end
-    inst._hascanopy:set(false)    
+    inst._hascanopy:set(false)
 end
 
 local OCEANTREENUT_BLOCKER_TAGS = { "tree" }
@@ -155,7 +155,7 @@ local function DropItems(inst)
     local spawn_x, spawn_z
 
         spawn_x, spawn_z = x + math.cos(theta) * dist, z + math.sin(theta) * dist
-    
+
     item.Transform:SetPosition(spawn_x, DROPPED_ITEMS_SPAWN_HEIGHT, spawn_z)
 
     if #inst.items_to_drop <= 1 then
@@ -185,11 +185,11 @@ local function SpawnMissingVines(inst)
     local num_existing_vines = ents ~= nil and #ents or 0
 
 --    print("FOUND VINES", num_existing_vines)
-    if num_existing_vines < TUNING.OCEANTREE_VINE_DROP_MAX+ math.random(1,2)-1  then 
+    if num_existing_vines < TUNING.OCEANTREE_VINE_DROP_MAX+ math.random(1,2)-1  then
 
         local num_new_vines = math.random(1,2)
         local radius_variance = MAX - NEW_VINES_SPAWN_RADIUS_MIN
-		local tipo = 
+		local tipo =
 		     {
 		     [1] = "hanging_vinefixo",
 		     [2] = "grabbing_vinefixo",
@@ -236,6 +236,20 @@ local function OnPhaseChanged(inst, phase)
 inst:DoTaskInTime(0.65, SpawnMissingVines)
 end
 
+local function OnLightningStrike(inst)
+    if inst._lightning_drop_task ~= nil then
+        return
+    end
+
+    local num_small_items = math.random(NUM_DROP_SMALL_ITEMS_MIN_LIGHTNING, NUM_DROP_SMALL_ITEMS_MAX_LIGHTNING)
+    local items_to_drop = {}
+
+    for i = 1, num_small_items do
+        table.insert(items_to_drop, small_ram_products[math.random(1, #small_ram_products)])
+    end
+
+    inst._lightning_drop_task = inst:DoTaskInTime(20*FRAMES, DropLightningItems, items_to_drop)
+end
 
 local function fn(Sim)
 	local inst = CreateEntity()
@@ -249,7 +263,9 @@ local function fn(Sim)
     -- THIS WAS COMMENTED OUT BECAUSE THE ROC WAS BUMPING INTO IT. BUT I'M NOT SURE WHY IT WAS SET THAT WAY TO BEGIN WITH.
     --inst.Physics:SetCollisionGroup(COLLISION.GROUND)
     trans:SetScale(1,1,1)
-    inst:AddTag("tree_pillar")    
+    
+    inst:AddTag("shadecanopysmall") --防止自燃、过热和玻璃雨的标签，同超平均巨树
+    inst:AddTag("tree_pillar")
 
 	local minimap = inst.entity:AddMiniMapEntity()
 	minimap:SetIcon( "pillar_tree.png" )
@@ -258,69 +274,69 @@ local function fn(Sim)
 	anim:SetBuild("pillar_tree")   -- art files
 
     anim:PlayAnimation("idle",true)
-	inst.Transform:SetScale(0.8, 0.8, 0.8)	
-	
+	inst.Transform:SetScale(0.8, 0.8, 0.8)
+
     MakeInventoryFloatable(inst, "large", 0.8, {2, 1.5, 2})
-    inst.components.floater.bob_percent = 0	
-	
+    inst.components.floater.bob_percent = 0
+
     local land_time = (POPULATING and math.random()*5*FRAMES) or 0
     inst:DoTaskInTime(land_time, function(inst)
         inst.components.floater:OnLandedServer()
-    end)	
-	
+    end)
+
     if not TheNet:IsDedicated() then
         inst:AddComponent("distancefade")
         inst.components.distancefade:Setup(15,25)
     end
-    
+
     inst._hascanopy = net_bool(inst.GUID, "oceantree_pillar._hascanopy", "hascanopydirty")
-    inst._hascanopy:set(true)    
-    inst:DoTaskInTime(0, function()    
+    inst._hascanopy:set(true)
+    inst:DoTaskInTime(0, function()
         inst.canopy_data = CANOPY_SHADOW_DATA.spawnshadow(inst, math.floor(TUNING.SHADE_CANOPY_RANGE_SMALL/4), true)
     end)
 
     inst:ListenForEvent("hascanopydirty", function()
-                if not inst._hascanopy:value() then 
-                    removecanopyshadow(inst) 
+                if not inst._hascanopy:value() then
+                    removecanopyshadow(inst)
                 end
-        end)	
-	
+        end)
+
 
 	inst.entity:SetPristine()
-	
+
     if not TheWorld.ismastersim then
 		return inst
-	end 	
-	
+	end
+
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "glowfly"
-    inst.components.childspawner:SetRegenPeriod(60)  
+    inst.components.childspawner:SetRegenPeriod(60)
     inst.components.childspawner:SetSpawnPeriod(30)
     inst.components.childspawner:SetMaxChildren(2)
 	inst.components.childspawner.wateronly = true
     inst.components.childspawner:StartSpawning()
-	
 
-	
-	
     inst:AddComponent("inspectable")
-	
+
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(MIN, MAX)
     inst.components.playerprox:SetOnPlayerFar(OnFar)
-    inst.components.playerprox:SetOnPlayerNear(OnNear)	
+    inst.components.playerprox:SetOnPlayerNear(OnNear)
 
     inst:ListenForEvent("on_collide", OnCollide)
-    inst:ListenForEvent("phasechanged", function(src, phase) OnPhaseChanged(inst,phase) end, TheWorld)	
-	
-    
+    inst:ListenForEvent("phasechanged", function(src, phase) OnPhaseChanged(inst,phase) end, TheWorld)
+
+    inst:AddComponent("lightningblocker")
+    inst.components.lightningblocker:SetBlockRange(TUNING.SHADE_CANOPY_RANGE_SMALL)
+    inst.components.lightningblocker:SetOnLightningStrike(OnLightningStrike)
+
    return inst
 end
 
 local function fn2(Sim)
 	local inst = CreateEntity()
     inst.entity:AddNetwork()
-	inst.entity:AddTransform()  
+	inst.entity:AddTransform()
 	inst.persists = false
     return inst
 end
