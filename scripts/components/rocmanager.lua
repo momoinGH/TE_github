@@ -85,7 +85,7 @@ function Rocmanager:ShouldSpawn()
 					local tile = ground.Map:GetTileAtPoint(px, py, pz)
 					if tile ~= GROUND.IMPASSABLE or tile ~= GROUND.INVALID then
 						local pt = Vector3(v.Transform:GetWorldPosition())
-						local angle = math.random() * 2 * PI
+						local angle = math.random() * TWOPI
 						local offset = Vector3(SPAWNDIST * math.cos(angle), 0, -SPAWNDIST * math.sin(angle))
 						local roc = SpawnPrefab("roc")
 						roc.Transform:SetPosition(pt.x + offset.x, 0, pt.z + offset.z)

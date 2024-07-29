@@ -179,7 +179,8 @@ return Class(function(self, inst)
                     contadordovulcao = contadordovulcao + 1
                     if contadordovulcao > TheWorld.state.remainingdaysinseason then
                         if vulcaonojogo and vulcaonojogo ~= 10 and not vulcaonojogo.sg:HasStateTag("atacando") then
-                            vulcaonojogo.sg:GoToState("erupt") end
+                            vulcaonojogo.sg:GoToState("erupt")
+                        end
                         --print(vulcaonojogo)
                         contadordovulcao = 0
                         local chuvadefogo
@@ -337,7 +338,7 @@ return Class(function(self, inst)
         --    end
 
         return
-        bird    --_worldstate.iswinter and bird == "wave_shimmer" and "wave_shimmer_med" or _worldstate.issummer and bird == "wave_shimmer" and "wave_shimmer_deep" or bird
+            bird --_worldstate.iswinter and bird == "wave_shimmer" and "wave_shimmer_med" or _worldstate.issummer and bird == "wave_shimmer" and "wave_shimmer_deep" or bird
     end
 
     local function AutoRemoveTarget(inst, target)
@@ -498,7 +499,7 @@ return Class(function(self, inst)
             return not _groundcreep:OnCreep(spawnpoint:Get())
         end
 
-        local theta = math.random() * 2 * PI
+        local theta = math.random() * TWOPI
         local radius = 2 + math.random() * 25
         local resultoffset = FindValidPositionByFan(theta, radius, 12, TestSpawnPoint)
 

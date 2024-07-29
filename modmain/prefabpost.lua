@@ -1,5 +1,14 @@
 local Utils = require("tropical_utils/utils")
 
+-- 太长的单独写一个文件了
+modimport "modmain/components/locomotor"
+modimport "modmain/components/birdspawner"
+modimport "modmain/components/map"
+modimport "modmain/components/playervision"
+modimport "modmain/components/temperature"
+
+modimport "modmain/prefabs/oceanfishdef"
+
 -- TODO 可以换个写法吗？
 local function AoeSpellCastSpellBefore(self)
     if self.inst.components.reticule_spawner then
@@ -53,97 +62,11 @@ AddComponentPostInit("areaaware", function(self)
     Utils.FnDecorator(self, "CurrentlyInTag", AreaAwareCurrentlyInTagBefore)
 end)
 
-
-----------------------------------------------------------------------------------------------------
--- 控制鸟生成逻辑
-
-local BIRD_TYPES, PickBird
-local function SpawnBirdBefore(self, spawnpoint)
-    local prefab = PickBird and PickBird(spawnpoint)
-    if prefab and not GLOBAL.Prefabs[prefab] then
-        return nil, true --有的鸟预制体不存在，可能没有定义，跳过旧方法防止报错
-    end
-end
-
-AddComponentPostInit("birdspawner", function(self)
-    if not BIRD_TYPES then
-        PickBird = Utils.ChainFindUpvalue(self.SpawnBird, "PickBird")
-        BIRD_TYPES = PickBird and Utils.ChainFindUpvalue(PickBird, "BIRD_TYPES")
-        if BIRD_TYPES then
-            BIRD_TYPES[WORLD_TILES.OCEAN_COASTAL] = { "puffin", "cormorant" }
-            BIRD_TYPES[WORLD_TILES.OCEAN_COASTAL_SHORE] = { "puffin", "cormorant" }
-            BIRD_TYPES[WORLD_TILES.OCEAN_SWELL] = { "puffin", "cormorant", "seagullwater" }
-            BIRD_TYPES[WORLD_TILES.OCEAN_ROUGH] = { "puffin", "seagullwater", "cormorant" }
-            BIRD_TYPES[WORLD_TILES.OCEAN_BRINEPOOL] = { "puffin", "seagullwater" }
-            BIRD_TYPES[WORLD_TILES.OCEAN_BRINEPOOL_SHORE] = { "puffin" }
-            BIRD_TYPES[WORLD_TILES.OCEAN_HAZARDOUS] = { "puffin", "seagullwater" }
-
-            BIRD_TYPES[WORLD_TILES.RAINFOREST] = { "toucan_hamlet", "kingfisher", "parrot_blue", "kingfisher_swarm",
-                "toucan_hamlet_swarm", "parrot_blue_swarm" }
-            BIRD_TYPES[WORLD_TILES.DEEPRAINFOREST] = { "toucan_hamlet", "parrot_blue", "kingfisher", "kingfisher_swarm",
-                "toucan_hamlet_swarm", "parrot_blue_swarm" }
-            BIRD_TYPES[WORLD_TILES.GASJUNGLE] = { "parrot_blue", "parrot_blue_swarm" }
-            BIRD_TYPES[WORLD_TILES.FOUNDATION] = { "quagmire_pigeon", "crow", "pigeon_swarm" }
-            BIRD_TYPES[WORLD_TILES.FIELDS] = { "robin", "crow" }
-            BIRD_TYPES[WORLD_TILES.SUBURB] = { "robin", "crow", "quagmire_pigeon", "pigeon_swarm" }
-            BIRD_TYPES[WORLD_TILES.PAINTED] = { "kingfisher", "crow", "kingfisher_swarm" }
-            BIRD_TYPES[WORLD_TILES.PLAINS] = { "robin", "crow", "kingfisher", "kingfisher_swarm" }
-
-            BIRD_TYPES[WORLD_TILES.TIDALMARSH] = { "toucan" }
-            BIRD_TYPES[WORLD_TILES.MAGMAFIELD] = { "toucan" }
-            BIRD_TYPES[WORLD_TILES.MEADOW] = { "parrot", "toucan", "parrot_pirate" }
-            BIRD_TYPES[WORLD_TILES.BEACH] = { "toucan" }
-            BIRD_TYPES[WORLD_TILES.JUNGLE] = { "parrot", "parrot_pirate" }
-            BIRD_TYPES[WORLD_TILES.QUAGMIRE_PEATFOREST] = { "quagmire_pigeon", "pigeon_swarm" }
-            BIRD_TYPES[WORLD_TILES.QUAGMIRE_PARKFIELD] = { "quagmire_pigeon", "pigeon_swarm" }
-            BIRD_TYPES[WORLD_TILES.QUAGMIRE_PARKSTONE] = { "quagmire_pigeon", "pigeon_swarm" }
-            BIRD_TYPES[WORLD_TILES.QUAGMIRE_GATEWAY] = { "quagmire_pigeon", "pigeon_swarm" }
-            BIRD_TYPES[WORLD_TILES.QUAGMIRE_SOIL] = { "quagmire_pigeon", "pigeon_swarm" }
-            BIRD_TYPES[WORLD_TILES.QUAGMIRE_CITYSTONE] = { "quagmire_pigeon", "pigeon_swarm" }
-            BIRD_TYPES[WORLD_TILES.IMPASSABLE] = {} --不生成鸟
-            BIRD_TYPES[WORLD_TILES.INVALID] = {}    --不生成鸟
-            BIRD_TYPES[WORLD_TILES.WATER_MANGROVE] = { "robin_winter" }
-            BIRD_TYPES[WORLD_TILES.ANTFLOOR] = { "robin_winter" }
-            BIRD_TYPES[WORLD_TILES.WINDY] = { "goddess_bird" }
-
-            if KnownModIndex:IsModEnabled("workshop-1289779251") then --樱花林
-                BIRD_TYPES[WORLD_TILES.CHERRY] = { "catbird", "crow" }
-                BIRD_TYPES[WORLD_TILES.CHERRY2] = { "chaffinch", "robin" }
-                BIRD_TYPES[WORLD_TILES.CHERRY3] = { "catbird" }
-                BIRD_TYPES[WORLD_TILES.CHERRY4] = { "chaffinch" }
-            end
-        end
-    end
-
-    Utils.FnDecorator(self, "SpawnBird", SpawnBirdBefore)
-end)
-
-----------------------------------------------------------------------------------------------------
-local NOT_PASSABLE_TILES = {
-    [WORLD_TILES.OCEAN_SWELL] = true,
-    [WORLD_TILES.OCEAN_BRINEPOOL] = true,
-    [WORLD_TILES.OCEAN_BRINEPOOL_SHORE] = true,
-    [WORLD_TILES.OCEAN_HAZARDOUS] = true,
-    [WORLD_TILES.OCEAN_ROUGH] = true,
-    [WORLD_TILES.OCEAN_COASTAL_SHORE] = true,
-    [WORLD_TILES.OCEAN_WATERLOG] = true,
-    [WORLD_TILES.OCEAN_COASTAL] = true
-}
-
-local function IsPassableAtPointBefore(self, x, y, z)
-    return { false }, NOT_PASSABLE_TILES[TheWorld.Map:GetTileAtPoint(x, y, z)]
-end
-
-require "components/map"
-Utils.FnDecorator(Map, "IsPassableAtPoint", IsPassableAtPointBefore)
-
-
 ----------------------------------------------------------------------------------------------------
 
-local function DeployableCanDeployBefore(self, pt)
-    local tile = TheWorld.Map:GetTileAtPoint(pt:Get())
+local function IsSpecialTile(tile)
     local isCave = TheWorld:HasTag("cave")
-    return { false }, tile == GROUND.UNDERWATER_SANDY
+    return tile == GROUND.UNDERWATER_SANDY
         or tile == GROUND.UNDERWATER_ROCKY
         or (isCave and (tile == GROUND.BEACH
             or tile == GROUND.MAGMAFIELD
@@ -153,6 +76,11 @@ local function DeployableCanDeployBefore(self, pt)
             or tile == GROUND.ANTFLOOR
             or tile == GROUND.WATER_MANGROVE
         ))
+end
+
+local function DeployableCanDeployBefore(self, pt)
+    local tile = TheWorld.Map:GetTileAtPoint(pt:Get())
+    return { false }, IsSpecialTile(tile)
 end
 
 AddComponentPostInit("deployable", function(self)
@@ -188,7 +116,6 @@ AddComponentPostInit("flotsamgenerator", function(self)
     if not flotsam_prefabs then
         flotsam_prefabs = Utils.ChainFindUpvalue(self.SpawnFlotsam, "PickFlotsam", "flotsam_prefabs")
         if flotsam_prefabs then
-            print("获取到了吗")
             flotsam_prefabs["waterygrave"] = 1
             flotsam_prefabs["redbarrel"] = 1
             flotsam_prefabs["luggagechest_spawner"] = 1
@@ -239,3 +166,94 @@ NAUGHTY_VALUE["mandrakeman"] = 3
 NAUGHTY_VALUE["peagawk"] = 3
 NAUGHTY_VALUE["zeb"] = 2
 NAUGHTY_VALUE["chicken"] = 3
+
+
+----------------------------------------------------------------------------------------------------
+AddComponentPostInit("plantregrowth", function(self)
+    self.TimeMultipliers["mushtree_yelow"] = function()
+        return TUNING.MUSHTREE_REGROWTH_TIME_MULT * ((not TheWorld.state.autumn and 0) or 1)
+    end
+end)
+
+----------------------------------------------------------------------------------------------------
+-- 地震组件quaker不好覆盖，这里判断如果是地震生成的物品就直接删除
+
+local function CheckIsQUaker(inst)
+    if not inst.persists and inst.shadow and inst.updatetask then --地震生成的，根据quaker组件的SpawnDebris函数进行判断
+        local x, _, z = inst.Transform:GetWorldPosition()
+        local tile = TheWorld.Map:GetTileAtPoint(x, 0, z)
+        if IsSpecialTile(tile) then
+            inst:Remove()
+        end
+    end
+end
+
+for _, v in ipairs({
+    "rocks",
+    "rabbit",
+    "mole",
+    "carrat",
+    "flint",
+    "goldnugget",
+    "nitre",
+    "redgem",
+    "bluegem",
+    "marble",
+    "moonglass",
+    "rock_avocado_fruit",
+}) do
+    AddPrefabPostInit(v, function(inst)
+        if not TheWorld.ismastersim then return end
+
+        inst:ListenForEvent("startfalling", CheckIsQUaker)
+    end)
+end
+
+----------------------------------------------------------------------------------------------------
+
+local FX_MAP
+AddComponentPostInit("spooked", function(self)
+    if not FX_MAP then
+        FX_MAP = Utils.ChainFindUpvalue(self.Spook, "FX_MAP")
+        if FX_MAP then
+            FX_MAP["mushtree_yelow"] = "mushtree_yelow"
+        end
+    end
+end)
+
+----------------------------------------------------------------------------------------------------
+local function DoSpringBefore(self)
+    if self.target
+        and self.target:IsValid()
+        and not self.target:IsInLimbo()
+        and not (self.target.components.health ~= nil and self.target.components.health:IsDead())
+        and self.target.components.inventoryitem ~= nil
+        and self.target.components.inventoryitem.trappable
+    then
+        local old = self.target.prefab
+        self.target.prefab = old == "lobster" and "lobster_land"
+            or old == "wobster_sheller" and "wobster_sheller_land"
+            or old == "wobster_moonglass" and "wobster_moonglass_land"
+    end
+end
+
+AddComponentPostInit("trap", function(self)
+    Utils.FnDecorator(self, "DoSpring", DoSpringBefore)
+end)
+
+Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
+    local val = next(retTab)
+    if val > TUNING.WILDFIRE_THRESHOLD then
+        -- 防野火
+        if #TheSim:FindEntities(x, 0, z, 20, { "blows_air" }) > 0 then
+            return { TUNING.WILDFIRE_THRESHOLD }
+        end
+
+        local player = FindClosestPlayerInRangeSq(x, 0, z, 400)
+        if player and player.components.areaaware and player.components.areaaware:CurrentlyInTag("frost") then
+            return { TUNING.WILDFIRE_THRESHOLD }
+        end
+    end
+
+    return retTab
+end)

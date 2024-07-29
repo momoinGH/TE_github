@@ -75,7 +75,7 @@ local function spawnperd(inst)
     if inst:IsValid() then
         local perd = SpawnPrefab("perd")
         local x, y, z = inst.Transform:GetWorldPosition()
-        local angle = math.random() * 2 * PI
+        local angle = math.random() * TWOPI
         perd.Transform:SetPosition(x + math.cos(angle), 0, z + math.sin(angle))
         perd.sg:GoToState("appear")
         perd.components.homeseeker:SetHome(inst)
@@ -92,8 +92,10 @@ local function onpickedfn(inst, picker)
             local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
             local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
             for k, guardas in pairs(eles) do
-                if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat
-                        :SetTarget(picker) end
+                if guardas.components.combat and guardas.components.combat.target == nil then
+                    guardas.components.combat
+                        :SetTarget(picker)
+                end
             end
         end
     end
@@ -151,7 +153,7 @@ local function makefullfn(inst)
     if inst.components.pickable ~= nil then
         if inst.components.pickable:CanBePicked() then
             berries = inst.components.pickable.cycles_left ~= nil and
-            inst.components.pickable.cycles_left / inst.components.pickable.max_cycles or 1
+                inst.components.pickable.cycles_left / inst.components.pickable.max_cycles or 1
         elseif inst.components.pickable:IsBarren() then
             anim = "dead"
         end

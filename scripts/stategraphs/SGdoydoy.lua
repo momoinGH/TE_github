@@ -127,8 +127,10 @@ local states =
 
 		timeline =
 		{
-			TimeEvent(22 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve_DLC002/creatures/doy_doy/swallow") end),
+			TimeEvent(22 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC002/creatures/doy_doy/swallow")
+			end),
 		},
 
 		events =
@@ -186,7 +188,7 @@ local states =
 		tags = { "busy" },
 
 		onenter = function(inst)
-			local angle = math.random() * 2 * PI
+			local angle = math.random() * TWOPI
 			local speed = GetRandomWithVariance(3, 2)
 			inst.Physics:SetMotorVel(speed * math.cos(angle), 0, speed * math.sin(angle))
 			inst.AnimState:PlayAnimation("hatch")
@@ -349,8 +351,10 @@ local states =
 
 		timeline =
 		{
-			TimeEvent(14 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve_DLC002/creatures/doy_doy/mating_dance_LP", "mating_dance_LP") end),
+			TimeEvent(14 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC002/creatures/doy_doy/mating_dance_LP", "mating_dance_LP")
+			end),
 		},
 
 		events =

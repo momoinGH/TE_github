@@ -22,7 +22,7 @@ local function OnUnwrapped(inst, pos, doer)
             item.Transform:SetPosition(pt:Get())
 
             if item.Physics ~= nil then
-                local angle = math.random() * 2 * PI
+                local angle = math.random() * TWOPI
                 local speed = math.random() * 2
 
                 item.Physics:SetVel(speed * math.cos(angle), GetRandomWithVariance(8, 4), speed * math.sin(angle))

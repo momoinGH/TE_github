@@ -20,7 +20,7 @@ local function RebuildTile(inst)
 end
 
 local function GetSpawnPoint(pt)
-    local theta = math.random() * 2 * PI
+    local theta = math.random() * TWOPI
     local radius = SPAWN_DIST
 
     local offset = FindWalkableOffset(pt, theta, radius, 12, true)

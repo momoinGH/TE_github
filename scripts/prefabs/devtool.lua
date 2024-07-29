@@ -68,7 +68,7 @@ local function GetPoints(pt)
     local radius = 0.5
     for i = 1, 2 do
         local theta = 0
-        local circ = 2 * PI * radius
+        local circ = TWOPI * radius
         local numPoints = math.ceil(circ * .25)
         for p = 1, numPoints do
             if not points[i] then
@@ -77,7 +77,7 @@ local function GetPoints(pt)
             local offset = Vector3(radius * math.cos(theta), 0, -radius * math.sin(theta))
             local point = pt + offset
             table.insert(points[i], point)
-            theta = theta - (2 * PI / numPoints)
+            theta = theta - (TWOPI / numPoints)
         end
         radius = radius + 1.5
     end

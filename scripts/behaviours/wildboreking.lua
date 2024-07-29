@@ -1,6 +1,6 @@
 local function TryFindSpotForMinion(player, dist)
     local x1, y1, z1 = player.Transform:GetWorldPosition()
-    local angle = math.random() * 2 * PI
+    local angle = math.random() * TWOPI
     local x2, y2, z2 =
         x1 + math.cos(angle) * dist,
         y1,
@@ -50,8 +50,8 @@ local function OnTossItems(inst)
         table.insert(items, "lucky_goldnugget")
     end
 
-    local angle = math.random() * 2 * PI
-    local delta = 2 * PI / (numgold + numprops + 1) --purposely leave a random gap
+    local angle = math.random() * TWOPI
+    local delta = TWOPI / (numgold + numprops + 1) --purposely leave a random gap
     local variance = delta * .4
     while #items > 0 do
         local item = SpawnPrefab(table.remove(items, math.random(#items)))

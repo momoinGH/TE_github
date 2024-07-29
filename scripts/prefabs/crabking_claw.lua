@@ -87,9 +87,9 @@ end
 
 local function teleport_override_fn(inst)
     local pt = inst.components.knownlocations ~= nil and inst.components.knownlocations:GetLocation("spawnpoint") or
-    inst:GetPosition()
-    local offset = FindSwimmableOffset(pt, math.random() * 2 * PI, 3, 8, true, false) or
-        FindSwimmableOffset(pt, math.random() * 2 * PI, 8, 8, true, false)
+        inst:GetPosition()
+    local offset = FindSwimmableOffset(pt, math.random() * TWOPI, 3, 8, true, false) or
+        FindSwimmableOffset(pt, math.random() * TWOPI, 8, 8, true, false)
     if offset ~= nil then
         pt = pt + offset
     end

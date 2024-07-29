@@ -1,5 +1,3 @@
-local PopupDialogScreen = require "screens/popupdialog"
-
 local assets =
 {
     Asset("ANIM", "anim/diviningrod.zip"),
@@ -7,30 +5,23 @@ local assets =
     Asset("ANIM", "anim/diviningrod_maxwell.zip")
 }
 
-local prefabs =
-{
-    --    "diviningrodstart",
-}
-
-local function OnUnlock(inst, key, doer)
-
-end
-
 local function OnLock(inst, doer)
     inst.AnimState:PlayAnimation("idle_empty")
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
+
     MakeInventoryPhysics(inst)
 
-    anim:SetBank("diviningrod")
-    anim:SetBuild("diviningrod_maxwell")
-    anim:PlayAnimation("activate_loop", true)
+    inst.AnimState:SetBank("diviningrod")
+    inst.AnimState:SetBuild("diviningrod_maxwell")
+    inst.AnimState:PlayAnimation("activate_loop", true)
 
     inst.entity:SetPristine()
 
@@ -43,11 +34,10 @@ local function fn(Sim)
     inst:AddTag("maxwelllock")
 
     inst:AddComponent("lock")
-    inst.components.lock.locktype = "maxwell"
-    inst.components.lock:SetOnUnlockedFn(OnUnlock)
+    inst.components.lock.locktype = LOCKTYPE.MAXWELL
     inst.components.lock:SetOnLockedFn(OnLock)
 
     return inst
 end
 
-return Prefab("common/maxwelllock", fn, assets, prefabs)
+return Prefab("common/maxwelllock", fn, assets)

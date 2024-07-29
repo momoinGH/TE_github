@@ -149,7 +149,7 @@ local function DoPlantBloom(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local map = TheWorld.Map
     local offset = FindValidPositionByFan(
-        math.random() * 2 * PI,
+        math.random() * TWOPI,
         math.random() * 3,
         8,
         function(offset)

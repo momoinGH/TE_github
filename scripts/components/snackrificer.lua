@@ -41,7 +41,7 @@ end
 
 local function OnCoinDrop(inst, doer, coin)
     local rad = 1 + math.random() * 2
-    local theta = math.random() * 2 * PI
+    local theta = math.random() * TWOPI
     local vec = Vector3(math.cos(theta) - math.sin(theta), 0, math.cos(theta) + math.sin(theta))
     local offset = Vector3(vec.x * rad, 20, vec.z * rad)
 

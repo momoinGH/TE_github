@@ -1,27 +1,42 @@
-local a = {
+local assets = {
     Asset("ANIM", "anim/spear_lance.zip"),
-    Asset("ANIM", "anim/swap_spear_lance.zip") }
-local b = { "reticuleaoesmall", "reticuleaoesmallping", "reticuleaoesmallhostiletarget", "weaponsparks_fx",
-    "weaponsparks_thrusting", "forgespear_fx", "superjump_fx" }
-local function c(d, e)
-    e.AnimState:OverrideSymbol("swap_object", "swap_spear_lance", "swap_spear_lance")
-    e.AnimState:Show("ARM_carry")
-    e.AnimState:Hide("ARM_normal")
-end; local function f(d, e)
-    e.AnimState:Hide("ARM_carry")
-    e.AnimState:Show("ARM_normal")
+    Asset("ANIM", "anim/swap_spear_lance.zip")
+}
+
+local prefabs = {
+    "reticuleaoesmall",
+    "reticuleaoesmallping",
+    "reticuleaoesmallhostiletarget",
+    "weaponsparks_fx",
+    "weaponsparks_thrusting",
+    "forgespear_fx",
+    "superjump_fx",
+}
+
+local function OnEquip(inst, owner)
+    owner.AnimState:OverrideSymbol("swap_object", "swap_spear_lance", "swap_spear_lance")
+    owner.AnimState:Show("ARM_carry")
+    owner.AnimState:Hide("ARM_normal")
 end;
+local function OnUnequip(inst, owner)
+    owner.AnimState:Hide("ARM_carry")
+    owner.AnimState:Show("ARM_normal")
+end;
+
 local function targetfn()
-    local h = ThePlayer;
-    local i = TheWorld.Map;
-    local j = Vector3()
+    local pos = Vector3()
     for k = 5, 0, -.25 do
-        j.x, j.y, j.z = h.entity:LocalToWorldSpace(k, 0, 0)
-        if i:IsPassableAtPoint(j:Get()) and not i:IsGroundTargetBlocked(j) then return j end
+        pos.x, pos.y, pos.z = ThePlayer.entity:LocalToWorldSpace(k, 0, 0)
+        if TheWorld.Map:IsPassableAtPoint(pos:Get()) and not TheWorld.Map:IsGroundTargetBlocked(pos) then
+            return pos
+        end
     end;
-    return j
+    return pos
 end;
-local function l(d, m, j) m:PushEvent("combat_superjump", { targetpos = j, weapon = d }) end;
+
+local function Spell(inst, doer, pos)
+    doer:PushEvent("combat_superjump", { targetpos = pos, weapon = inst })
+end;
 
 local function OnLeapt(inst, doer, startingpos, targetpos)
     if inst.components.weapon and inst.components.weapon:HasAltAttack() then
@@ -42,8 +57,8 @@ local function OnLeapt(inst, doer, startingpos, targetpos)
     inst.components.recarregavel:StartRecharge()
 end;
 
-local function o(d, p, q)
-    if not d.components.weapon.isaltattacking then
+local function OnAttack(inst, p, q)
+    if not inst.components.weapon.isaltattacking then
         SpawnPrefab("weaponsparks_fx"):SetPosition(p, q)
     else
         SpawnPrefab("forgespear_fx"):SetTarget(q)
@@ -89,15 +104,15 @@ local function fn()
     end;
 
     inst:AddComponent("aoespell")
-    inst.components.aoespell:SetSpellFn(l)
+    inst.components.aoespell:SetSpellFn(Spell)
 
     inst:AddComponent("aoeweapon_leap")
     inst.components.aoeweapon_leap:SetStimuli("explosive")
     inst.components.aoeweapon_leap:SetOnLeaptFn(OnLeapt)
 
     inst:AddComponent("equippable")
-    inst.components.equippable:SetOnEquip(c)
-    inst.components.equippable:SetOnUnequip(f)
+    inst.components.equippable:SetOnEquip(OnEquip)
+    inst.components.equippable:SetOnUnequip(OnUnequip)
 
     inst:AddComponent("inspectable")
 
@@ -115,7 +130,7 @@ local function fn()
 
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(TUNING.FORGE_ITEM_PACK.TFWP_SPEAR_LANCE.DAMAGE)
-    inst.components.weapon:SetOnAttack(o)
+    inst.components.weapon:SetOnAttack(OnAttack)
     inst.components.weapon:SetDamageType(DAMAGETYPES.PHYSICAL)
     inst.components.weapon:SetAltAttack(TUNING.FORGE_ITEM_PACK.TFWP_SPEAR_LANCE.ALT_DAMAGE,
         TUNING.FORGE_ITEM_PACK.TFWP_SPEAR_LANCE.ALT_RADIUS, nil, DAMAGETYPES.PHYSICAL)
@@ -123,5 +138,5 @@ local function fn()
     return inst
 end;
 return
-    CustomPrefab("tfwp_spear_lance", fn, a, b, nil, "images/inventoryimages.xml", "spear_lance.tex",
+    CustomPrefab("tfwp_spear_lance", fn, assets, prefabs, nil, "images/inventoryimages.xml", "spear_lance.tex",
         TUNING.FORGE_ITEM_PACK.TFWP_SPEAR_LANCE, "swap_spear_lance", "common_hand")

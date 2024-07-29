@@ -71,12 +71,12 @@ function FindValidPositionByFan(start_angle, radius, attempts, test_fn)
     attempts = attempts or 8
     radius = radius or 1 --adicionei pra ve se nao da crash
 
-    local attempt_angle = (2 * PI) / attempts
+    local attempt_angle = (TWOPI) / attempts
     local tmp_angles = {}
     for i = 0, attempts - 1 do
         local a = i * attempt_angle
         if a > PI then
-            a = a - (2 * PI)
+            a = a - (TWOPI)
         end
         table.insert(tmp_angles, a)
     end
@@ -93,7 +93,7 @@ function FindValidPositionByFan(start_angle, radius, attempts, test_fn)
 
     for i, attempt in ipairs(angles) do
         local check_angle = theta + attempt
-        if check_angle > 2 * PI then check_angle = check_angle - 2 * PI end
+        if check_angle > TWOPI then check_angle = check_angle - TWOPI end
 
         local offset = Vector3(radius * math.cos(check_angle), 0, -radius * math.sin(check_angle))
 
@@ -143,7 +143,7 @@ end
 
 local function findDirectionToDive(inst, target)
     local pt = inst:GetPosition()
-    local angle = math.random() * 2 * PI
+    local angle = math.random() * TWOPI
     if target then
         angle = target:GetAngleToPoint(pt.x, pt.y, pt.z) * DEGREES - PI
         --        print("CALCING ANGLE",angle, target.prefab)

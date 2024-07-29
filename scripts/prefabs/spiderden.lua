@@ -92,11 +92,11 @@ local function temperaturetick(inst, sleeper)
         if inst.is_cooling then
             if sleeper.components.temperature:GetCurrent() > TUNING.SLEEP_TARGET_TEMP_TENT then
                 sleeper.components.temperature:SetTemperature(sleeper.components.temperature:GetCurrent() -
-                TUNING.SLEEP_TEMP_PER_TICK)
+                    TUNING.SLEEP_TEMP_PER_TICK)
             end
         elseif sleeper.components.temperature:GetCurrent() < TUNING.SLEEP_TARGET_TEMP_TENT then
             sleeper.components.temperature:SetTemperature(sleeper.components.temperature:GetCurrent() +
-            TUNING.SLEEP_TEMP_PER_TICK)
+                TUNING.SLEEP_TEMP_PER_TICK)
         end
     end
 end
@@ -233,7 +233,7 @@ end
 local function SpawnQueen(inst, should_duplicate)
     local map = TheWorld.Map
     local x, y, z = inst.Transform:GetWorldPosition()
-    local offs = FindValidPositionByFan(math.random() * 2 * PI, 1.25, 5, function(offset)
+    local offs = FindValidPositionByFan(math.random() * TWOPI, 1.25, 5, function(offset)
         local x1 = x + offset.x
         local z1 = z + offset.z
         return map:IsPassableAtPoint(x1, 0, z1)

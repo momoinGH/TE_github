@@ -82,7 +82,7 @@ local function NumHoundsToSpawn(inst)
     end
     local numFollowers = inst.components.leader:CountFollowers()
     local num = math.min(numFollowers + numHounds / 2, numHounds) -- only spawn half the hounds per howl
-    num = (math.log(num) / 0.4) + 1                           -- 0.4 is approx log(1.5)
+    num = (math.log(num) / 0.4) + 1                               -- 0.4 is approx log(1.5)
 
     num = RoundToNearest(num, 1)
 
@@ -110,7 +110,7 @@ local function TossItems(inst, x, z, minradius, maxradius)
                 x1 = x + dx * range
                 z1 = z + dz * range
             else
-                local angle = 2 * PI * math.random()
+                local angle = TWOPI * math.random()
                 x1 = x + math.cos(angle) * range
                 z1 = z + math.sin(angle) * range
             end

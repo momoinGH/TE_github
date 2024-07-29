@@ -42,7 +42,7 @@ local FREEZABLE_TAGS = { "freezable" }
 
 local function ShouldWakeUp(inst)
     return DefaultWakeTest(inst) or
-    (inst.components.follower and inst.components.follower.leader and not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE))
+        (inst.components.follower and inst.components.follower.leader and not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE))
 end
 
 local function ShouldSleep(inst)
@@ -89,7 +89,7 @@ end
 local function GetReturnPos(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local rad = 2
-    local angle = math.random() * 2 * PI
+    local angle = math.random() * TWOPI
     return x + rad * math.cos(angle), y, z - rad * math.sin(angle)
 end
 
@@ -316,7 +316,7 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })
     inst.components.eater:SetCanEatHorrible()
-    inst.components.eater:SetStrongStomach(true)     -- can eat monster meat!
+    inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
 
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)

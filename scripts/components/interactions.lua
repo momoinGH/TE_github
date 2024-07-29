@@ -73,15 +73,15 @@ function Interactions:BoatDismount(jumper, pt)
 				local x, y, z = consumo.Transform:GetWorldPosition()
 				if not TheWorld.Map:IsOceanAtPoint(x, y, z, false) then
 					local posifinal = Vector3(consumo.Transform:GetWorldPosition())
-					local destino = FindSwimmableOffset(posifinal, math.random() * 2 * PI, 2, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 4, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 6, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 8, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 12, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 14, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 16, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 20, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 18, 6)
+					local destino = FindSwimmableOffset(posifinal, math.random() * TWOPI, 2, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 4, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 6, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 8, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 12, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 14, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 16, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 20, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 18, 6)
 					if destino then
 						consumo.Transform:SetPosition(x + destino.x, y + destino.y, z + destino.z)
 					end
@@ -157,15 +157,15 @@ function Interactions:BoatDismount2(jumper)
 				local x, y, z = consumo.Transform:GetWorldPosition()
 				if not TheWorld.Map:IsOceanAtPoint(x, y, z, false) then
 					local posifinal = Vector3(consumo.Transform:GetWorldPosition())
-					local destino = FindSwimmableOffset(posifinal, math.random() * 2 * PI, 2, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 4, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 6, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 8, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 12, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 14, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 16, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 20, 6) or
-						FindSwimmableOffset(posifinal, math.random() * 2 * PI, 18, 6)
+					local destino = FindSwimmableOffset(posifinal, math.random() * TWOPI, 2, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 4, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 6, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 8, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 12, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 14, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 16, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 20, 6) or
+						FindSwimmableOffset(posifinal, math.random() * TWOPI, 18, 6)
 					if destino then
 						consumo.Transform:SetPosition(x + destino.x, y + destino.y, z + destino.z)
 					end
@@ -283,7 +283,7 @@ function Interactions:Jump(jumper)
 			jumper.Transform:SetRotation(jumper.old_rotation)
 		end
 
-		local x3 = math.cos(angle) * actdist + x2 -- destination
+		local x3 = math.cos(angle) * actdist + x2  -- destination
 		local z3 = -math.sin(angle) * actdist + z2 -- destination
 		local x4 = math.cos(angle) * (actdist / 2) + x2 -- midpoint
 		local z4 = -math.sin(angle) * (actdist / 2) + z2 -- midpoint
@@ -342,7 +342,7 @@ function Interactions:Jump(jumper)
 		end
 
 		local local_passable = TheWorld.Map:IsPassableAtPoint(x3, 0, z3) and TheWorld.Map:IsPassableAtPoint(x5, 0, z5) and
-		TheWorld.Map:IsPassableAtPoint(x6, 0, z6) and TheWorld.Map:IsPassableAtPoint(x7, 0, z7)
+			TheWorld.Map:IsPassableAtPoint(x6, 0, z6) and TheWorld.Map:IsPassableAtPoint(x7, 0, z7)
 
 		if obstacle then
 			if jumper.components.talker then
@@ -425,7 +425,7 @@ function Interactions:Push(victim)
 				victim.components.combat:SetTarget(self.inst)
 				victim.components.combat:ShareTarget(self.inst, 15, function(dude)
 					return dude.prefab and victim.prefab and dude.prefab == victim.prefab and
-					not (dude.components.follower and dude.components.follower.leader == self.inst)
+						not (dude.components.follower and dude.components.follower.leader == self.inst)
 				end, 1)
 
 				if leader and leader.followers then

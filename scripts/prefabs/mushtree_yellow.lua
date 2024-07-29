@@ -41,7 +41,7 @@ local function onspawnfn(inst, spawn)
     local pos = inst:GetPosition()
     spawn.components.knownlocations:RememberLocation("home", pos)
     local radius = spawn:GetPhysicsRadius(0) + inst:GetPhysicsRadius(0)
-    local offset = FindWalkableOffset(pos, math.random() * 2 * PI, radius, 8)
+    local offset = FindWalkableOffset(pos, math.random() * TWOPI, radius, 8)
     if offset ~= nil then
         spawn.Physics:Teleport(pos.x + offset.x, 0, pos.z + offset.z)
     else
@@ -131,12 +131,33 @@ end
 
 local growth_stages =
 {
-    { name = "short",  time = function(inst) return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[1].base,
-            TUNING.EVERGREEN_GROW_TIME[1].random) end,                                                                                                   fn = SetShort,  growfn = GrowShort },
-    { name = "normal", time = function(inst) return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[2].base,
-            TUNING.EVERGREEN_GROW_TIME[2].random) end,                                                                                                   fn = SetNormal, growfn = GrowNormal },
-    { name = "tall",   time = function(inst) return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[3].base,
-            TUNING.EVERGREEN_GROW_TIME[3].random) end,                                                                                                   fn = SetTall,   growfn = GrowTall },
+    {
+        name = "short",
+        time = function(inst)
+            return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[1].base,
+                TUNING.EVERGREEN_GROW_TIME[1].random)
+        end,
+        fn = SetShort,
+        growfn = GrowShort
+    },
+    {
+        name = "normal",
+        time = function(inst)
+            return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[2].base,
+                TUNING.EVERGREEN_GROW_TIME[2].random)
+        end,
+        fn = SetNormal,
+        growfn = GrowNormal
+    },
+    {
+        name = "tall",
+        time = function(inst)
+            return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[3].base,
+                TUNING.EVERGREEN_GROW_TIME[3].random)
+        end,
+        fn = SetTall,
+        growfn = GrowTall
+    },
 }
 
 local data =
@@ -275,7 +296,7 @@ local function onentitywake(inst)
         inst.components.periodicspawner:Start()
         if inst._sporetime < 0 then
             inst.components.periodicspawner:LongUpdate(math.random() *
-            (inst.components.periodicspawner.target_time - GetTime()))
+                (inst.components.periodicspawner.target_time - GetTime()))
         else
             local target_time = inst.components.periodicspawner.target_time
             if inst._sporetime < target_time then

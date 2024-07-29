@@ -20,7 +20,7 @@ local function GetSpawnPoint(inst)
     --print("GetSpawnPoint", inst, inst:GetPosition())
     local x, y, z = inst.Transform:GetWorldPosition()
     local rad = 2
-    local angle = math.random() * 2 * PI
+    local angle = math.random() * TWOPI
     --print("    ", Vector3(x + rad * math.cos(angle), y, z - rad * math.sin(angle)))
     return x + rad * math.cos(angle), y, z - rad * math.sin(angle)
 end

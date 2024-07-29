@@ -94,7 +94,7 @@ return Class(function(self, inst)
 		if not TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
 			pt = FindNearbyLand(pt, 1) or pt
 		end
-		local offset = FindWalkableOffset(pt, math.random() * 2 * PI, HASSLER_SPAWN_DIST, 12, true)
+		local offset = FindWalkableOffset(pt, math.random() * TWOPI, HASSLER_SPAWN_DIST, 12, true)
 		if offset ~= nil then
 			offset.x = offset.x + pt.x
 			offset.z = offset.z + pt.z
@@ -397,8 +397,9 @@ return Class(function(self, inst)
 			s = s .. "DORMANT " .. _timetospawn
 		elseif _timetospawn > 0 then
 			s = s ..
-			string.format("%s Bearger is coming in %2.2f (next warning in %2.2f), target number: %d, current number: %d",
-				_warning and "WARNING" or "WAITING", _timetospawn, _timetonextwarningsound, _targetNum, _numSpawned)
+				string.format(
+					"%s Bearger is coming in %2.2f (next warning in %2.2f), target number: %d, current number: %d",
+					_warning and "WARNING" or "WAITING", _timetospawn, _timetonextwarningsound, _targetNum, _numSpawned)
 		else
 			s = s .. string.format("SPAWNING!!!")
 		end

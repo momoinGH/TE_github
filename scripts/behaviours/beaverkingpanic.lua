@@ -17,7 +17,7 @@ function BeaverKingPanic:Visit()
             local Pigs = self.inst.__brain:GetPigs()
             if #Targets > 0 and #Pigs < 2 then
                 local x1, y1, z1 = self.inst.Transform:GetWorldPosition()
-                local angle = math.random() * 2 * PI
+                local angle = math.random() * TWOPI
                 local x2, y2, z2 =
                     x1 + math.cos(angle) * 22,
                     y1,

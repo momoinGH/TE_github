@@ -9,7 +9,7 @@ return Class(function(self, inst)
     --[[ Dependencies ]]
     --------------------------------------------------------------------------
     local HUNT_SPAWN_DIST = 40
-    local HUNT_COOLDOWN = 10     -- 576
+    local HUNT_COOLDOWN = 10         -- 576
     local HUNT_COOLDOWNDEVIATION = 5 --144
     local HUNT_ALTERNATE_BEAST_CHANCE_MIN = 0.05
     local HUNT_ALTERNATE_BEAST_CHANCE_MAX = 0.33
@@ -227,7 +227,7 @@ return Class(function(self, inst)
     local function GetNextSpawnAngle(pt, direction, radius)
         --print("Hunter:GetNextSpawnAngle", tostring(pt), radius)
 
-        local base_angle = direction or math.random() * 2 * PI
+        local base_angle = direction or math.random() * TWOPI
         local deviation = math.random(-TRACK_ANGLE_DEVIATION, TRACK_ANGLE_DEVIATION) * DEGREES
 
         local start_angle = base_angle + deviation
@@ -576,15 +576,15 @@ return Class(function(self, inst)
         local str = ""
         for i, hunt in ipairs(_activehunts) do
             str = str ..
-            " Cooldown: " ..
-            (hunt.cooldowntime and string.format("%2.2f", math.max(1, hunt.cooldowntime - GetTime())) or "-")
+                " Cooldown: " ..
+                (hunt.cooldowntime and string.format("%2.2f", math.max(1, hunt.cooldowntime - GetTime())) or "-")
             if hunt.trackspawned ~= nil then
                 str = str ..
-                " Track # " ..
-                tostring(hunt.trackspawned) ..
-                "/" ..
-                tostring(hunt.numtrackstospawn) ..
-                (hunt.ambush_track_num ~= nil and (" ambush at " .. tostring(hunt.ambush_track_num)) or "")
+                    " Track # " ..
+                    tostring(hunt.trackspawned) ..
+                    "/" ..
+                    tostring(hunt.numtrackstospawn) ..
+                    (hunt.ambush_track_num ~= nil and (" ambush at " .. tostring(hunt.ambush_track_num)) or "")
             end
             if not hunt.lastdirt then
                 str = str .. " No last dirt."

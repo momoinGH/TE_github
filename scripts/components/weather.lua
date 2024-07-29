@@ -142,7 +142,7 @@ return Class(function(self, inst)
     local DRY_THRESHOLD = TUNING.MOISTURE_DRY_THRESHOLD
     local WET_THRESHOLD = TUNING.MOISTURE_WET_THRESHOLD
     local MIN_WETNESS = 0
-    local MAX_WETNESS = 100
+    local MAX_WETNESS = TUNING.MAX_WETNESS
     local MIN_WETNESS_RATE = 0
     local MAX_WETNESS_RATE = .75
     local MIN_DRYING_RATE = 0
@@ -179,7 +179,7 @@ return Class(function(self, inst)
         autumn = .25,
         winter = 0,
         spring = .25,
-        summer = .5,
+        summer = .2,
     }
 
     --------------------------------------------------------------------------
@@ -199,9 +199,9 @@ return Class(function(self, inst)
     local _temperature = TUNING.STARTING_TEMP
 
     --Precipiation
-    local _rainsound = false
-    local _treerainsound = false
-    local _umbrellarainsound = false
+    local _rainsound = nil
+    local _treerainsound = nil
+    local _umbrellarainsound = nil
     local _barriersound = false
     local _barriernorainsound = false
     local _seasonprogress = 0
@@ -253,51 +253,76 @@ return Class(function(self, inst)
     --------------------------------------------------------------------------
 
     local function StartAmbientRainSound(intensity)
-        if not _rainsound then
-            _rainsound = true
-            _world.SoundEmitter:PlaySound(
-            _preciptype:value() == PRECIP_TYPES.lunarhail and "rifts3/lunarhail/lunar_rainAMB" or "dontstarve/AMB/rain",
-                "rain")
+        local sound =
+            _preciptype:value() == PRECIP_TYPES.lunarhail and
+            "rifts3/lunarhail/lunar_rainAMB" or
+            "dontstarve/AMB/rain"
+
+        if _rainsound ~= sound then
+            if _rainsound then
+                _world.SoundEmitter:KillSound("rain")
+            end
+            _rainsound = sound
+            _world.SoundEmitter:PlaySound(sound, "rain")
         end
         _world.SoundEmitter:SetParameter("rain", "intensity", intensity)
     end
 
     local function StopAmbientRainSound()
         if _rainsound then
-            _rainsound = false
+            _rainsound = nil
             _world.SoundEmitter:KillSound("rain")
         end
     end
 
     local function StartTreeRainSound(intensity)
-        if not _treerainsound then
-            _treerainsound = true
-            TheFocalPoint.SoundEmitter:PlaySound(
-            _preciptype:value() == PRECIP_TYPES.lunarhail and "rifts3/lunarhail/lunarhail_on_tree" or
-            "dontstarve_DLC001/common/rain_on_tree", "treerainsound")
+        local sound =
+            _preciptype:value() == PRECIP_TYPES.lunarhail and
+            "rifts3/lunarhail/lunarhail_on_tree" or
+            "dontstarve_DLC001/common/rain_on_tree"
+
+        if _treerainsound ~= sound then
+            if _treerainsound then
+                TheFocalPoint.SoundEmitter:KillSound("treerainsound")
+            end
+            _treerainsound = sound
+            TheFocalPoint.SoundEmitter:PlaySound(sound, "treerainsound")
         end
         TheFocalPoint.SoundEmitter:SetParameter("treerainsound", "intensity", intensity)
     end
 
     local function StopTreeRainSound()
         if _treerainsound then
-            _treerainsound = false
+            _treerainsound = nil
             TheFocalPoint.SoundEmitter:KillSound("treerainsound")
         end
     end
 
     local function StartUmbrellaRainSound()
-        if not _umbrellarainsound then
-            _umbrellarainsound = true
-            TheFocalPoint.SoundEmitter:PlaySound(
-            _preciptype:value() == PRECIP_TYPES.lunarhail and "rifts3/lunarhail/hail_on_umbrella" or
-            "dontstarve/rain/rain_on_umbrella", "umbrellarainsound")
+        local umbrella = _activatedplayer.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+        local sound =
+            umbrella and umbrella:HasTag("metal") and
+            (_preciptype:value() == PRECIP_TYPES.lunarhail and
+                "meta4/winona_teleumbrella/hail_on_teleumbrella" or
+                "meta4/winona_teleumbrella/rain_on_teleumbrella"
+            ) or
+            (_preciptype:value() == PRECIP_TYPES.lunarhail and
+                "rifts3/lunarhail/hail_on_umbrella" or
+                "dontstarve/rain/rain_on_umbrella"
+            )
+
+        if _umbrellarainsound ~= sound then
+            if _umbrellarainsound then
+                TheFocalPoint.SoundEmitter:KillSound("umbrellarainsound")
+            end
+            _umbrellarainsound = sound
+            TheFocalPoint.SoundEmitter:PlaySound(sound, "umbrellarainsound")
         end
     end
 
     local function StopUmbrellaRainSound()
         if _umbrellarainsound then
-            _umbrellarainsound = false
+            _umbrellarainsound = nil
             TheFocalPoint.SoundEmitter:KillSound("umbrellarainsound")
         end
     end
@@ -452,8 +477,9 @@ return Class(function(self, inst)
             return 1 - dynrange
         end
         local p = 1 -
-        math.min(
-        math.max((_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value()), 0), 1)
+            math.min(
+                math.max((_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value()),
+                    0), 1)
         if _preciptype:value() ~= PRECIP_TYPES.none then
             p = easing.inQuad(p, 0, 1, 1)
         end
@@ -501,7 +527,7 @@ return Class(function(self, inst)
                 --It rains less in the middle of summer
                 local p = 1 - math.sin(PI * data.progress)
                 _moisturerateval = MOISTURE_RATES.MIN[_season] +
-                p * (MOISTURE_RATES.MAX[_season] - MOISTURE_RATES.MIN[_season])
+                    p * (MOISTURE_RATES.MAX[_season] - MOISTURE_RATES.MIN[_season])
                 _moisturerateoffset = 0
             end
 
@@ -607,7 +633,7 @@ return Class(function(self, inst)
     end or nil
 
     local LIGHTNINGSTRIKE_CANT_TAGS = { "playerghost", "INLIMBO" }
-    local LIGHTNINGSTRIKE_ONEOF_TAGS = { "lightningrod", "lightningtarget", "blows_air" }
+    local LIGHTNINGSTRIKE_ONEOF_TAGS = { "lightningrod", "lightningtarget", "lightningblocker", "blows_air" }
     local LIGHTNINGSTRIKE_SEARCH_RANGE = 40
     local OnSendLightningStrike = _ismastersim and function(src, pos)
         local closest_generic = nil
@@ -619,6 +645,8 @@ return Class(function(self, inst)
         local blockers = nil
         for _, v in pairs(ents) do
             -- Track any blockers we find, since we redirect the strike position later,
+            -- and might redirect it into their block range.
+            --###
             local interior = v:HasTag("blows_air")
             if interior then return end
             local is_blocker = v.components.lightningblocker ~= nil
@@ -989,23 +1017,23 @@ return Class(function(self, inst)
                 StopAmbientRainSound()
             end
         end
-
-
+        --###
         local nevenailha = 0
         local nevetropical = 1
         local chuvatropical = 0
-        local map = TheWorld.Map
         if _snowfx then
             if _activatedplayer and _activatedplayer.components.areaaware and _activatedplayer.components.areaaware:CurrentlyInTag("frost") then
                 nevenailha = 10
             end
-
-            if (TUNING.tropical.kindofworld ~= 15) or (_activatedplayer and _activatedplayer.components.areaaware and (_activatedplayer.components.areaaware:CurrentlyInTag("tropical") or _activatedplayer.components.areaaware:CurrentlyInTag("hamlet") or _activatedplayer.components.areaaware:CurrentlyInTag("ForceDisconnected"))) then
+            if (TUNING.tropical.kindofworld ~= 15) or (_activatedplayer and _activatedplayer.components.areaaware
+                    and (_activatedplayer.components.areaaware:CurrentlyInTag("tropical")
+                        or _activatedplayer.components.areaaware:CurrentlyInTag("hamlet")
+                        or _activatedplayer.components.areaaware:CurrentlyInTag("ForceDisconnected")))
+            then
                 nevetropical = 0
                 chuvatropical = 20 * preciprate
             end
         end
-        --Update precipitation effects
         --Update precipitation effects
         if _preciptype:value() == PRECIP_TYPES.rain then
             if _hasfx then
@@ -1062,10 +1090,16 @@ return Class(function(self, inst)
         end
         SetWithPeriodicSync(_snowlevel, snowlevel, SNOW_LEVEL_SYNC_PERIOD, _ismastersim)
         if _snowlevel:value() > 0 and (_temperature < 0 or _wetness:value() < 5) then
-            if (TUNING.tropical.kindofworld ~= 15) or (_activatedplayer and _activatedplayer.components.areaaware and (_activatedplayer.components.areaaware:CurrentlyInTag("tropical") or _activatedplayer.components.areaaware:CurrentlyInTag("hamlet") or _activatedplayer.components.areaaware:CurrentlyInTag("ForceDisconnected"))) then
+            --###
+            if (TUNING.tropical.kindofworld ~= 15) or (_activatedplayer and _activatedplayer.components.areaaware
+                    and (_activatedplayer.components.areaaware:CurrentlyInTag("tropical")
+                        or _activatedplayer.components.areaaware:CurrentlyInTag("hamlet")
+                        or _activatedplayer.components.areaaware:CurrentlyInTag("ForceDisconnected"))
+                )
+            then
                 SetGroundOverlay(GROUND_OVERLAYS.puddles, _wetness:value() * 3 / 100) -- wetness goes from 0-100	
             else
-                SetGroundOverlay(GROUND_OVERLAYS.snow, _snowlevel:value() * 3) -- snowlevel goes from 0-1
+                SetGroundOverlay(GROUND_OVERLAYS.snow, _snowlevel:value() * 3)        -- snowlevel goes from 0-1
             end
         else
             SetGroundOverlay(GROUND_OVERLAYS.puddles, _wetness:value() * 3 / 100) -- wetness goes from 0-100
@@ -1116,7 +1150,7 @@ return Class(function(self, inst)
 
                         local x, y, z = target.Transform:GetWorldPosition()
                         local radius = 2 + math.random() * 8
-                        local theta = math.random() * 2 * PI
+                        local theta = math.random() * TWOPI
                         local pos = Vector3(x + radius * math.cos(theta), y, z + radius * math.sin(theta))
                         _world:PushEvent("ms_sendlightningstrike", pos)
                     else

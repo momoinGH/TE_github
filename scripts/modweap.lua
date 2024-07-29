@@ -1,7 +1,7 @@
 require "class"
 require "util"
-CustomPrefab = Class(Prefab, function(self, name, b, c, d, e, atlas, image, h, swap_build, j)
-    Prefab._ctor(self, name, b, c, d, e)
+CustomPrefab = Class(Prefab, function(self, name, fn, assets, deps, force_path_search, atlas, image, h, swap_build, j)
+    Prefab._ctor(self, name, fn, assets, deps, force_path_search)
     self.name = name;
     self.atlas = atlas and resolvefilepath(atlas) or resolvefilepath("images/inventoryimages.xml")
     self.imagefn = type(image) == "function" and image or nil;

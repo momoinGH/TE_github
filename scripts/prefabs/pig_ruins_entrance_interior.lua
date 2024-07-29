@@ -153,7 +153,7 @@ local function createroom(inst)
 	local widepilars = false
 	local roompheromonestone = false --RUINS_3 vira true
 	local criaturas = false
-	local doorvines = false      --precisa adicionar função
+	local doorvines = false       --precisa adicionar função
 	if numexits == 1 then criaturas = true end
 	if numexits ~= 1 and math.random() < 0.3 then criaturas = true end
 
@@ -2162,9 +2162,9 @@ end
 			}
 
 			local offsets = { { -depth / 5, -width / 5 },
-				{ depth / 5, -width / 5 },
+				{ depth / 5,  -width / 5 },
 				{ -depth / 5, width / 5 },
-				{ depth / 5, width / 5 } }
+				{ depth / 5,  width / 5 } }
 
 			for i = 1, math.random(1, 3) do
 				local rand = 1
@@ -2207,7 +2207,7 @@ end
 		elseif speartraps[math.random(1, 5)] == "walltrap" then
 			local angle = 0
 			local traps = 14
-			local anglestep = (2 * PI) / traps
+			local anglestep = (TWOPI) / traps
 			local radius = 4
 			for i = 1, traps do
 				local offset = Vector3(radius * math.cos(angle), 0, -radius * math.sin(angle))
@@ -2223,7 +2223,7 @@ end
 
 			angle = 0
 			traps = 24
-			anglestep = (2 * PI) / traps
+			anglestep = (TWOPI) / traps
 			radius = 5
 			for i = 1, traps do
 				local offset = Vector3(radius * math.cos(angle), 0, -radius * math.sin(angle))
@@ -3192,7 +3192,8 @@ end
 			if southexitopen then
 				local part = SpawnPrefab("pig_ruins_pressure_plate")
 				if part ~= nil then
-					part.Transform:SetPosition(x + depth / 6 * 2 + (math.random() * 2 - 1), 0, z + (math.random() * 2 - 1))
+					part.Transform:SetPosition(x + depth / 6 * 2 + (math.random() * 2 - 1), 0,
+						z + (math.random() * 2 - 1))
 					part:AddTag("trap_dart")
 					if part.components.health ~= nil then
 						part.components.health:SetPercent(1)
@@ -5838,6 +5839,6 @@ return Prefab("pig_ruins_floor", SpawnPiso1, assets),
 	Prefab("createdoortraproom", doortraproom, assets),
 	Prefab("createtreasuresecret", treasureroom1, assets),
 	Prefab("createtreasurerelictruffle", treasureroom2, assets), --ruins 1
-	Prefab("createtreasurerelicsow", treasureroom3, assets),   --ruins 2
+	Prefab("createtreasurerelicsow", treasureroom3, assets),  --ruins 2
 	Prefab("createtreasureaporkalypse", treasureroom4, assets), --ruins 5
-	Prefab("createtreasureendswell", treasureroom5, assets)    --ruins 5
+	Prefab("createtreasureendswell", treasureroom5, assets)   --ruins 5

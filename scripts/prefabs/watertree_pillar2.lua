@@ -136,7 +136,7 @@ local function DropItems(inst)
     local item = SpawnPrefab(item_to_spawn)
 
     local dist = DROP_ITEMS_DIST_MIN + DROP_ITEMS_DIST_VARIANCE * math.random()
-    local theta = math.random() * 2 * PI
+    local theta = math.random() * TWOPI
 
     local spawn_x, spawn_z
 
@@ -189,7 +189,7 @@ local function OnCollide(inst, data)
     local boat_physics = data.other.components.boatphysics
     if boat_physics ~= nil then
         local hit_velocity = math.floor(math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity) /
-        boat_physics.max_velocity + 0.5)
+            boat_physics.max_velocity + 0.5)
 
         if hit_velocity > 0.8 then
             inst:DoTaskInTime(0, function()
@@ -218,7 +218,7 @@ local function DropLightningItems(inst, items)
 
     for i, item_prefab in ipairs(items) do
         local dist = DROP_ITEMS_DIST_MIN + DROP_ITEMS_DIST_VARIANCE * math.random()
-        local theta = 2 * PI * math.random()
+        local theta = TWOPI * math.random()
 
         inst:DoTaskInTime(i * 5 * FRAMES, function(inst2)
             local item = SpawnPrefab(item_prefab)
@@ -320,7 +320,7 @@ local function OnPhaseChanged(inst, phase)
                 local offset = nil
                 local count = 0
                 while offset == nil and count < 10 do
-                    local angle = 2 * PI * math.random()
+                    local angle = TWOPI * math.random()
                     local radius = math.random() * (TUNING.SHADE_CANOPY_RANGE - 4)
                     offset = { x = math.cos(angle) * radius, y = 0, z = math.sin(angle) * radius }
                     count = count + 1

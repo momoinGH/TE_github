@@ -19,7 +19,7 @@ function Throwable:GetThrowPoint()
 	local pos = owner:GetPosition()
 
 	for r = self.throwdistance_controller, 1, -1 do
-		local numtries = 2 * PI * r
+		local numtries = TWOPI * r
 		pt = FindValidPositionByFan(rotation, r, numtries, function() return true end) --TODO: #BDOIG Might not need to be walkable?
 		if pt then
 			return pt + pos
@@ -66,7 +66,7 @@ function Throwable:Throw(pt, thrower)
 	local distance = pos:Dist(pt)
 	local totarget = pt - pos
 	local angle = math.atan2(totarget.z, totarget.x) +
-	(math.random() * self.random_angle - (self.random_angle * 0.5)) * DEGREES
+		(math.random() * self.random_angle - (self.random_angle * 0.5)) * DEGREES
 	local time_to_target = distance / self.speed
 
 	local Viy = ((grav * 0.5 * (time_to_target ^ 2)) + yOffset) / time_to_target
@@ -77,7 +77,7 @@ function Throwable:Throw(pt, thrower)
 	end
 
 	local dir = Vector3((time_to_target * self.speed) * math.cos(angle), 0, (time_to_target * self.speed) *
-	math.sin(angle))
+		math.sin(angle))
 
 	local thrownpt = thrower:GetPosition() + dir
 

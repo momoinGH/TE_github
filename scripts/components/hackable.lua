@@ -561,7 +561,7 @@ function Hackable:DropProduct(shear_mult)
 					local pt = Point(self.inst.Transform:GetWorldPosition())
 					loot.Transform:SetPosition(pt.x, pt.y, pt.z)
 
-					local angle = math.random() * 2 * PI
+					local angle = math.random() * TWOPI
 					local speed = math.random()
 					loot.Physics:SetVel(speed * math.cos(angle), GetRandomWithVariance(12, 3), speed * math.sin(angle))
 					--picker.components.inventory:GiveItem(loot, nil, Vector3(TheSim:GetScreenPos(self.inst.Transform:GetWorldPosition())))

@@ -21,7 +21,7 @@ local function spawncocoons(inst)
             local jogador = GetClosestInstWithTag("player", inst, 20)
             local pt = inst:GetPosition()
             local range = 5 + math.random() * 10
-            local angle = math.random() * 2 * PI
+            local angle = math.random() * TWOPI
             local offset = FindWalkableOffset(pt, angle, range, 10)
 
             if offset then
@@ -29,7 +29,7 @@ local function spawncocoons(inst)
                 if jogador then
                     for i = 1, math.random(6, 10) do
                         range = math.random() * 8
-                        angle = math.random() * 2 * PI
+                        angle = math.random() * TWOPI
                         local suboffset = FindWalkableOffset(newpoint, angle, range, 10)
                         local cocoon = SpawnPrefab("glowfly_cocoon")
                         local spawnpt = newpoint + suboffset
@@ -147,7 +147,7 @@ local function OnLightningStrike(inst)
         table.insert(items_to_drop, small_ram_products[math.random(1, #small_ram_products)])
     end
 
-    inst._lightning_drop_task = inst:DoTaskInTime(20*FRAMES, DropLightningItems, items_to_drop)
+    inst._lightning_drop_task = inst:DoTaskInTime(20 * FRAMES, DropLightningItems, items_to_drop)
 end
 
 local function fn(Sim)
@@ -161,15 +161,15 @@ local function fn(Sim)
 
     -- THIS WAS COMMENTED OUT BECAUSE THE ROC WAS BUMPING INTO IT. BUT I'M NOT SURE WHY IT WAS SET THAT WAY TO BEGIN WITH.
     --inst.Physics:SetCollisionGroup(COLLISION.GROUND)
-    trans:SetScale(1 ,1, 1)
-    
+    trans:SetScale(1, 1, 1)
+
     inst:AddTag("shadecanopysmall") --防止自燃、过热和玻璃雨的标签，同超平均巨树
     inst:AddTag("tree_pillar")
 
     local minimap = inst.entity:AddMiniMapEntity()
     minimap:SetIcon("pillar_tree.png")
 
-    anim:SetBank("pillar_tree") -- flash animation .fla
+    anim:SetBank("pillar_tree")  -- flash animation .fla
     anim:SetBuild("pillar_tree") -- art files
 
     anim:PlayAnimation("idle", true)
@@ -212,15 +212,15 @@ local function fn(Sim)
 
     inst.components.playerprox:SetOnPlayerNear(OnNear)
 
-	inst:WatchWorldState("isday", spawncocoons)
-	inst:WatchWorldState("isnight",spawncocoons)
-	inst:WatchWorldState("isdusk", spawncocoons)
+    inst:WatchWorldState("isday", spawncocoons)
+    inst:WatchWorldState("isnight", spawncocoons)
+    inst:WatchWorldState("isdusk", spawncocoons)
 
     inst:AddComponent("lightningblocker")
     inst.components.lightningblocker:SetBlockRange(TUNING.SHADE_CANOPY_RANGE_SMALL)
     inst.components.lightningblocker:SetOnLightningStrike(OnLightningStrike)
 
-   return inst
+    return inst
 end
 
 return Prefab("cave/monsters/tree_pillar", fn, assets, prefabs)

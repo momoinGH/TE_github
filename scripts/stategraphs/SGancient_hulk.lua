@@ -28,7 +28,7 @@ local function teleport(inst)
     end
 
 
-    local theta = math.random() * 2 * PI
+    local theta = math.random() * TWOPI
 
     local offset = nil
     while not offset do
@@ -49,7 +49,7 @@ local function launchprojectile(inst, dir)
 
     local offset = nil
 
-    offset = FindWalkableOffset(pt, theta, 6 + math.random() * 6, 12, true)   --12
+    offset = FindWalkableOffset(pt, theta, 6 + math.random() * 6, 12, true) --12
 
     if offset then
         pt.x = pt.x + offset.x
@@ -191,8 +191,10 @@ local states =
         timeline =
         {
             ----start---
-            TimeEvent(46 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/start") end),
+            TimeEvent(46 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/start")
+            end),
             -----------gears loop--------------------
             TimeEvent(0 * FRAMES, function(inst)
                 inst.SoundEmitter:SetParameter("gears", "intensity", 0.2)
@@ -212,58 +214,108 @@ local states =
             end),
 
             ---------------electric--------------------
-            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro") end),
-            TimeEvent(4 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5) end),
-            TimeEvent(24 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro") end),
-            TimeEvent(27 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5) end),
-            TimeEvent(36 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro") end),
-            TimeEvent(39 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5) end),
-            TimeEvent(42 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro") end),
-            TimeEvent(65 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5) end),
-            TimeEvent(83 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro") end),
-            TimeEvent(86 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5) end),
-            TimeEvent(103 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro") end),
-            TimeEvent(106 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .25) end),
-            TimeEvent(113 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .25) end),
+            TimeEvent(1 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro")
+            end),
+            TimeEvent(4 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5)
+            end),
+            TimeEvent(24 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro")
+            end),
+            TimeEvent(27 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5)
+            end),
+            TimeEvent(36 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro")
+            end),
+            TimeEvent(39 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5)
+            end),
+            TimeEvent(42 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro")
+            end),
+            TimeEvent(65 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5)
+            end),
+            TimeEvent(83 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro")
+            end),
+            TimeEvent(86 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5)
+            end),
+            TimeEvent(103 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro")
+            end),
+            TimeEvent(106 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .25)
+            end),
+            TimeEvent(113 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .25)
+            end),
             ---------------green lights--------------------
-            TimeEvent(6 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/arm/active") end),
-            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/arm/active") end),
-            TimeEvent(12 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/arm/active", nil, .5) end),
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/arm/active") end),
-            TimeEvent(40 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/head/active") end),
-            TimeEvent(44 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/head/active") end),
-            TimeEvent(54 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/leg/active") end),
-            TimeEvent(56 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/leg/active") end),
-            TimeEvent(58 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/leg/active") end),
-            TimeEvent(60 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/leg/active") end),
+            TimeEvent(6 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/arm/active")
+            end),
+            TimeEvent(10 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/arm/active")
+            end),
+            TimeEvent(12 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/arm/active", nil, .5)
+            end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/arm/active")
+            end),
+            TimeEvent(40 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/head/active")
+            end),
+            TimeEvent(44 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/head/active")
+            end),
+            TimeEvent(54 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/leg/active")
+            end),
+            TimeEvent(56 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/leg/active")
+            end),
+            TimeEvent(58 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/leg/active")
+            end),
+            TimeEvent(60 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/leg/active")
+            end),
             -------------step---------------
-            TimeEvent(37 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step") end),
-            TimeEvent(101 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step") end),
+            TimeEvent(37 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step")
+            end),
+            TimeEvent(101 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step")
+            end),
             -------------servo---------------
             TimeEvent(28 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySoundWithParams("dontstarve_DLC003/creatures/enemy/metal_robot/leg/servo",
@@ -286,8 +338,10 @@ local states =
                     { intensity = math.random() })
             end),
             -------------tanut---------------
-            TimeEvent(106 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/taunt") end),
+            TimeEvent(106 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/taunt")
+            end),
 
         },
 
@@ -332,10 +386,14 @@ local states =
 
         timeline =
         {
-            TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/dig") end),
-            TimeEvent(22 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/drag") end),
+            TimeEvent(8 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/dig")
+            end),
+            TimeEvent(22 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/drag")
+            end),
             TimeEvent(15 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
         },
 
@@ -387,21 +445,35 @@ local states =
             ----gears loop_---
             TimeEvent(17 * FRAMES, function(inst) inst.SoundEmitter:KillSound("gears") end),
             ----death voice----
-            TimeEvent(17 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/death") end),
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/taunt") end),
+            TimeEvent(17 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/death")
+            end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/taunt")
+            end),
             ---- explode---
-            TimeEvent(61 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/explode", nil, .5) end),
-            TimeEvent(67 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/explode", nil, .6) end),
-            TimeEvent(77 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/explode", nil, .7) end),
-            TimeEvent(79 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/explode", nil, .6) end),
-            TimeEvent(82 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/explode") end),
+            TimeEvent(61 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/explode", nil, .5)
+            end),
+            TimeEvent(67 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/explode", nil, .6)
+            end),
+            TimeEvent(77 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/explode", nil, .7)
+            end),
+            TimeEvent(79 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/explode", nil, .6)
+            end),
+            TimeEvent(82 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/explode")
+            end),
 
             TimeEvent(81 * FRAMES, function(inst)
                 --                    local player = GetClosestInstWithTag("player", inst, SHAKE_DIST)
@@ -454,13 +526,19 @@ local states =
         timeline =
         {
             ---teleport---
-            TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/teleport_out") end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/teleport_out")
+            end),
             -------------step---------------
-            TimeEvent(9 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .25) end),
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .25) end),
+            TimeEvent(9 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .25)
+            end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .25)
+            end),
         },
     },
 
@@ -491,14 +569,22 @@ local states =
                     { intensity = math.random() })
             end),
             ----steps---
-            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .15) end),
-            TimeEvent(16 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .25) end),
-            TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .25) end),
-            TimeEvent(39 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step") end),
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .15)
+            end),
+            TimeEvent(16 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .25)
+            end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .25)
+            end),
+            TimeEvent(39 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step")
+            end),
             ----------gears loop--------------
             TimeEvent(19 * FRAMES, function(inst)
                 inst.SoundEmitter:SetParameter("gears", "intensity", .2)
@@ -543,13 +629,19 @@ local states =
 
         timeline =
         {
-            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/teleport_in") end),
+            TimeEvent(0 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/teleport_in")
+            end),
             -----------step---------------
-            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5) end),
-            TimeEvent(19 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5) end),
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5)
+            end),
+            TimeEvent(19 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5)
+            end),
             TimeEvent(16 * FRAMES, function(inst)
                 TheMixer:PushMix("boom")
             end),
@@ -588,32 +680,56 @@ local states =
         timeline =
         {
             -----rust----
-            TimeEvent(16 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5) end),
-            TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5) end),
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5) end),
-            TimeEvent(22 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5) end),
+            TimeEvent(16 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5)
+            end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5)
+            end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5)
+            end),
+            TimeEvent(22 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5)
+            end),
             -----bomb ting----
-            TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting") end),
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting") end),
-            TimeEvent(22 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting") end),
-            TimeEvent(24 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting") end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting")
+            end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting")
+            end),
+            TimeEvent(22 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting")
+            end),
+            TimeEvent(24 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting")
+            end),
             ----electro-----
-            TimeEvent(12 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5) end),
-            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5) end),
-            TimeEvent(19 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5) end),
-            TimeEvent(23 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5) end),
+            TimeEvent(12 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5)
+            end),
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5)
+            end),
+            TimeEvent(19 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5)
+            end),
+            TimeEvent(23 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5)
+            end),
         },
     },
 
@@ -630,14 +746,22 @@ local states =
 
         timeline =
         { ---mine shoot---
-            TimeEvent(4 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/mine_shot") end),
-            TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/mine_shot") end),
-            TimeEvent(12 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/mine_shot") end),
-            TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/mine_shot") end),
+            TimeEvent(4 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/mine_shot")
+            end),
+            TimeEvent(8 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/mine_shot")
+            end),
+            TimeEvent(12 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/mine_shot")
+            end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/mine_shot")
+            end),
 
 
             TimeEvent(1 * FRAMES, function(inst)
@@ -683,23 +807,39 @@ local states =
         timeline =
         {
             -----rust----
-            TimeEvent(6 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5) end),
-            TimeEvent(9 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5) end),
-            TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5) end),
-            TimeEvent(17 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5) end),
+            TimeEvent(6 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5)
+            end),
+            TimeEvent(9 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5)
+            end),
+            TimeEvent(11 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5)
+            end),
+            TimeEvent(17 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/rust", nil, .5)
+            end),
             -----bomb ting----
-            TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting") end),
-            TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting") end),
-            TimeEvent(13 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting") end),
-            TimeEvent(19 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting") end),
+            TimeEvent(8 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting")
+            end),
+            TimeEvent(11 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting")
+            end),
+            TimeEvent(13 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting")
+            end),
+            TimeEvent(19 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/hulk_metal_robot/ting")
+            end),
             -----------servo---------------
             TimeEvent(11 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySoundWithParams("dontstarve_DLC003/creatures/enemy/metal_robot/leg/servo",
@@ -746,8 +886,10 @@ local states =
                 inst.ShootProjectile(inst, inst.lobtarget)
             end),
 
-            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/laser_pre") end),
+            TimeEvent(0 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/laser_pre")
+            end),
             TimeEvent(30 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySoundWithParams("dontstarve_DLC003/creatures/enemy/metal_robot/laser",
                     { intensity = math.random() })
@@ -787,16 +929,26 @@ local states =
         timeline =
         {
             -------------step---------------
-            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5) end),
-            TimeEvent(68 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5) end),
-            TimeEvent(70 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5) end),
-            TimeEvent(82 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5) end),
-            TimeEvent(90 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5) end),
+            TimeEvent(10 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5)
+            end),
+            TimeEvent(68 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5)
+            end),
+            TimeEvent(70 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5)
+            end),
+            TimeEvent(82 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5)
+            end),
+            TimeEvent(90 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/leg/step", nil, .5)
+            end),
 
             -----------servo---------------
             TimeEvent(11 * FRAMES, function(inst)

@@ -526,8 +526,8 @@ local function GetRidOfTheBall(inst)
         ball:Remove()
     elseif ball then
         local pos = inst:GetPosition()
-        local offset, _, _ = FindWalkableOffset(inst:GetPosition(), math.random() * 2 * PI, math.random() * 5 + 5, 8,
-            true, false)                                                                                             -- try to avoid walls
+        local offset, _, _ = FindWalkableOffset(inst:GetPosition(), math.random() * TWOPI, math.random() * 5 + 5, 8,
+            true, false) -- try to avoid walls
         if offset then
             --inst.components.talker:Say("casa")
             local x, y, z = inst.Transform:GetWorldPosition()
@@ -545,7 +545,7 @@ local function GetRidOfTheBall(inst)
             bomba.Transform:SetPosition(x, y, z)
             bomba.components.finiteuses.current = ball.components.finiteuses.current
             bomba.components.complexprojectile:Launch(
-            pos + Vector3(math.random(-4, 4), math.random(-4, 4), math.random(-4, 4)), inst)
+                pos + Vector3(math.random(-4, 4), math.random(-4, 4), math.random(-4, 4)), inst)
             ball:Remove()
         end
         -- doer, target, action, invobject, pos, recipe, distance, rotation
@@ -562,8 +562,10 @@ local function AssistPlayer(inst)
     if inst.CanThrowItems then
         --If I have stuff in my inventory, throw it towards the player.
         if inst.components.inventory then
-            local throwable = inst.components.inventory:FindItem(function(item) return not inst.components.eater:CanEat(
-                item) and not item.components.fertilizer end)
+            local throwable = inst.components.inventory:FindItem(function(item)
+                return not inst.components.eater:CanEat(
+                    item) and not item.components.fertilizer
+            end)
             if throwable then
                 --Add throwable component, remove when it is picked up again.
                 if not throwable.components.throwable then
@@ -657,8 +659,10 @@ function PrimeapeBrain:OnStart()
             RunAway(self.inst, "character", RUN_AWAY_DIST, STOP_RUN_AWAY_DIST,
                 function(hunter) return ShouldRunFn(self.inst, hunter) end),
             WhileNode(
-                function() return self.inst.components.combat.target and
-                    self.inst.components.combat.target:HasTag("player") and self.inst.HasAmmo(self.inst) end,
+                function()
+                    return self.inst.components.combat.target and
+                        self.inst.components.combat.target:HasTag("player") and self.inst.HasAmmo(self.inst)
+                end,
                 "Attack Player",
                 SequenceNode({
                     ActionNode(function() EquipWeapon(self.inst, self.inst.weaponitems.thrower) end, "Equip thrower"),
@@ -666,32 +670,44 @@ function PrimeapeBrain:OnStart()
                 })),
             --Pick up poop to throw
             WhileNode(
-                function() return self.inst.components.combat.target and
-                    self.inst.components.combat.target:HasTag("player") and not self.inst.HasAmmo(self.inst) end,
+                function()
+                    return self.inst.components.combat.target and
+                        self.inst.components.combat.target:HasTag("player") and not self.inst.HasAmmo(self.inst)
+                end,
                 "Pick Up Poop",
                 DoAction(self.inst, GetPoop)),
             --Eat/ pick/ harvest foods.
             WhileNode(
-                function() return self.inst.components.combat.target and
-                    self.inst.components.combat.target:HasTag("player") or self.inst.components.combat.target == nil end,
+                function()
+                    return self.inst.components.combat.target and
+                        self.inst.components.combat.target:HasTag("player") or self.inst.components.combat.target == nil
+                end,
                 "Should Eat",
                 DoAction(self.inst, EatFoodAction)),
             --Priority must be lower than poop pick up or it will never happen.
             WhileNode(
-                function() return self.inst.components.combat.target and
-                    self.inst.components.combat.target:HasTag("player") and not self.inst.HasAmmo(self.inst) end,
+                function()
+                    return self.inst.components.combat.target and
+                        self.inst.components.combat.target:HasTag("player") and not self.inst.HasAmmo(self.inst)
+                end,
                 "Leash to Player",
                 PriorityNode {
-                    Leash(self.inst, function() if self.inst.components.combat.target then return self.inst.components
-                            .combat.target:GetPosition() end end, LEASH_MAX_DIST, LEASH_RETURN_DIST),
+                    Leash(self.inst, function()
+                        if self.inst.components.combat.target then
+                            return self.inst.components
+                                .combat.target:GetPosition()
+                        end
+                    end, LEASH_MAX_DIST, LEASH_RETURN_DIST),
                     FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn)
                 }),
 
 
             --In combat with everything else
             WhileNode(
-                function() return self.inst.components.combat.target ~= nil and
-                    not self.inst.components.combat.target:HasTag("player") end, "Attack NPC",                                                               --For everything else
+                function()
+                    return self.inst.components.combat.target ~= nil and
+                        not self.inst.components.combat.target:HasTag("player")
+                end, "Attack NPC",                                                             --For everything else
                 SequenceNode({
                     ActionNode(function() EquipWeapon(self.inst, self.inst.weaponitems.hitter) end, "Equip hitter"),
                     ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),

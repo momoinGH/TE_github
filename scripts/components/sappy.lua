@@ -61,12 +61,12 @@ function Sappy:FlingItem(loot, pt, bouncedcb)
 
 		if loot.Physics ~= nil then
 			local angle = self.flingtargetpos ~= nil and
-			GetRandomWithVariance(self.inst:GetAngleToPoint(self.flingtargetpos), self.flingtargetvariance or 0) *
-			DEGREES or math.random() * 2 * PI
+				GetRandomWithVariance(self.inst:GetAngleToPoint(self.flingtargetpos), self.flingtargetvariance or 0) *
+				DEGREES or math.random() * TWOPI
 			local speed = math.random() * 2
 			if loot:IsAsleep() then
 				local radius = .5 * speed +
-				(self.inst.Physics ~= nil and loot:GetPhysicsRadius(1) + self.inst:GetPhysicsRadius(1) or 0)
+					(self.inst.Physics ~= nil and loot:GetPhysicsRadius(1) + self.inst:GetPhysicsRadius(1) or 0)
 				loot.Transform:SetPosition(
 					pt.x + math.cos(angle) * radius,
 					0,

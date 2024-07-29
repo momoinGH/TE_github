@@ -3171,14 +3171,14 @@ local function SpawnReward(inst, reward, lootdropper, pt, delay)
 
 				if item.components.inventoryitem and not item.components.health then
 					local pt = Vector3(inst.Transform:GetWorldPosition()) +
-					Vector3(2 * math.cos(spawnangle), 3, 2 * math.sin(spawnangle))
+						Vector3(2 * math.cos(spawnangle), 3, 2 * math.sin(spawnangle))
 					inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/slotmachine_reward")
 					item.Transform:SetPosition(pt:Get())
 					item.Physics:SetVel(sp * math.cos(angle), math.random() * 2 + 9, sp * math.sin(angle))
 					--	item.components.inventoryitem:OnStartFalling()
 				else
 					local pt = Vector3(inst.Transform:GetWorldPosition()) +
-					Vector3(2 * math.cos(spawnangle), 0, 2 * math.sin(spawnangle))
+						Vector3(2 * math.cos(spawnangle), 0, 2 * math.sin(spawnangle))
 					pt = pt + Vector3(sp * math.cos(angle), 0, sp * math.sin(angle))
 					item.Transform:SetPosition(pt:Get())
 					SpawnPrefab("collapse_small").Transform:SetPosition(pt:Get())
@@ -3229,7 +3229,7 @@ local function DoneSpinning(inst)
 	end
 
 	for i = 1, cnt do
-		local offset, check_angle, deflected = FindWalkableOffset(pos, math.random() * 2 * PI, radius, 8, true, false) -- try to avoid walls
+		local offset, check_angle, deflected = FindWalkableOffset(pos, math.random() * TWOPI, radius, 8, true, false) -- try to avoid walls
 		if offset then
 			if treasure then
 				-- print("Slot machine treasure "..tostring(treasure))

@@ -206,17 +206,12 @@ local function fn()
         end
 
     inst:AddComponent("thief")
-    --inst.components.thief:SetOnStolenFn(OnStolen)
-    --inst.components.thief:SetDropDistance(10.0)
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.PIG_HEALTH)
     inst:AddComponent("inventory")
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({ "bandithat", "banditmap" })
-
-    --    inst:AddComponent("sleeper")
-    --    inst.components.sleeper.onlysleepsfromitems = true
 
     inst:AddComponent("inspectable")
     MakeMediumFreezableCharacter(inst, "pig_torso")

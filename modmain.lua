@@ -1,36 +1,7 @@
-local Recipe = GLOBAL.Recipe
-local Ingredient = GLOBAL.Ingredient
-local RECIPETABS = GLOBAL.RECIPETABS
-local STRINGS = GLOBAL.STRINGS
-local TUNING = GLOBAL.TUNING
-local ACTIONS = GLOBAL.ACTIONS
-local require = GLOBAL.require
-local TheInput = GLOBAL.TheInput
-local ThePlayer = GLOBAL.ThePlayer
-local IsServer = GLOBAL.TheNet:GetIsServer()
-local Inv = require "widgets/inventorybar"
-local containers = GLOBAL.require "containers"
-local TheWorld = GLOBAL.TheWorld
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
-
-_G = GLOBAL; require, rawget, getmetatable, unpack = _G.require, _G.rawget, _G.getmetatable, _G.unpack
-TheNet = _G.TheNet; IsServer, IsDedicated = TheNet:GetIsServer(), TheNet:IsDedicated()
-TheSim = _G.TheSim
-STRINGS = _G.STRINGS
-RECIPETABS, TECH, AllRecipes, GetValidRecipe = _G.RECIPETABS, _G.TECH, _G.AllRecipes, _G.GetValidRecipe
-EQUIPSLOTS, FRAMES, FOODTYPE, FUELTYPE = _G.EQUIPSLOTS, _G.FRAMES, _G.FOODTYPE, _G.FUELTYPE
-
-State, TimeEvent, EventHandler = _G.State, _G.TimeEvent, _G.EventHandler
-ACTIONS, ActionHandler = _G.ACTIONS, _G.ActionHandler
-CAMERASHAKE, ShakeAllCameras = _G.CAMERASHAKE, _G.ShakeAllCameras
-
-SpawnPrefab, ErodeAway, FindEntity = _G.SpawnPrefab, _G.ErodeAway, _G.FindEntity
-KnownModIndex, Vector3, Remap = _G.KnownModIndex, _G.Vector3, _G.Remap
-COMMAND_PERMISSION, BufferedAction, SendRPCToServer, RPC = _G.COMMAND_PERMISSION, _G.BufferedAction, _G.SendRPCToServer,
-	_G.RPC
-COLLISION = _G.COLLISION
-
-AllPlayers = _G.AllPlayers
+_G = GLOBAL
+local containers = GLOBAL.require "containers"
+IsServer, IsDedicated = TheNet:GetIsServer(), TheNet:IsDedicated()
 
 PrefabFiles =
 {
@@ -666,7 +637,7 @@ GLOBAL.TUNING.tropical = {
 	removedark                   = GetModConfigData("removedark"),
 	aporkalypse                  = GetModConfigData("aporkalypse"),
 	multiplayerportal            = GetModConfigData("startlocation"),
-	greenmod                     = GLOBAL.KnownModIndex:IsModEnabled("workshop-1418878027"),
+	greenmod                     = KnownModIndex:IsModEnabled("workshop-1418878027"),
 	kindofworld                  = GetModConfigData("kindofworld"),
 	volcaniceruption             = GetModConfigData("volcaniceruption"),
 	forge                        = GetModConfigData("forge"),
@@ -676,15 +647,19 @@ GLOBAL.TUNING.tropical = {
 	bosslife                     = GetModConfigData("bosslife"),
 }
 
-
-
 table.insert(PrefabFiles, "deco_util")
 table.insert(PrefabFiles, "deco_util2")
 table.insert(PrefabFiles, "deco_swinging_light")
 table.insert(PrefabFiles, "deco_lightglow")
 table.insert(PrefabFiles, "pig_shop_spears")
 
-if GetModConfigData("pigcity1") ~= 5 or GetModConfigData("pigcity2") ~= 5 or GetModConfigData("kindofworld") == 5 or GetModConfigData("frost_island") ~= 5 or GetModConfigData("enableallprefabs") == true or GetModConfigData("hamletcaves_shipwreckedworld") == 1 then
+if GetModConfigData("pigcity1") ~= 5
+	or GetModConfigData("pigcity2") ~= 5
+	or GetModConfigData("kindofworld") == 5
+	or GetModConfigData("frost_island") ~= 5
+	or GetModConfigData("enableallprefabs") == true
+	or GetModConfigData("hamletcaves_shipwreckedworld") == 1
+then
 	table.insert(PrefabFiles, "topiary")
 	table.insert(PrefabFiles, "lawnornaments")
 	table.insert(PrefabFiles, "hedge")
@@ -1132,6 +1107,25 @@ if GetModConfigData("gorgeisland") and GetModConfigData("kindofworld") == 15 or 
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/quagmirefoods.tex"))
 end
 
+
+----------------------------------------------------------------------------------------------------
+
+modimport "modmain/tuning"
+modimport "modmain/language"
+modimport "modmain/character"
+modimport "modmain/ui"
+modimport "modmain/prefabpost"
+modimport "modmain/playernet"
+modimport "modmain/actions"
+modimport "modmain/componentactions"
+modimport "modmain/sg"
+modimport "modmain/recipes"
+modimport "modmain/rpc"
+modimport "modmain/input"
+
+
+
+
 modimport("main/assets")
 
 -- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "limpets_cooked.tex")
@@ -1262,8 +1256,6 @@ GLOBAL.seabeach_amount = {
 	doydoy = 0,
 }
 ---------------------------- new recipe tab for obsidian tools ---------------------
-local _G = GLOBAL
-local require = _G.require
 local TechTree = require("techtree")
 table.insert(TechTree.AVAILABLE_TECH, "OBSIDIAN")
 table.insert(TechTree.AVAILABLE_TECH, "CITY")
@@ -3157,16 +3149,6 @@ function params.rowboat.itemtestfn(container, item, slot)
 end
 
 function params.armouredboat.itemtestfn(container, item, slot)
-	if slot == 1 and (item:HasTag("sail") or item.prefab == "trawlnet") then
-		return true
-	elseif slot == 2 and (item.prefab == "tarlamp" or item.prefab == "boat_lantern" or item.prefab == "boat_torch" or item.prefab == "quackeringram" or item.prefab == "boatcannon" or item.prefab == "woodlegs_boatcannon") then
-		return true
-	else
-		return false
-	end
-end
-
-function params.raft_old.itemtestfn(container, item, slot)
 	if slot == 1 and (item:HasTag("sail") or item.prefab == "trawlnet") then
 		return true
 	elseif slot == 2 and (item.prefab == "tarlamp" or item.prefab == "boat_lantern" or item.prefab == "boat_torch" or item.prefab == "quackeringram" or item.prefab == "boatcannon" or item.prefab == "woodlegs_boatcannon") then
@@ -5663,17 +5645,3 @@ GLOBAL.ACTIONS.JUMPIN.strfn = function(act)
 	return Oldstrfnjumpin(act)
 end
 
-----------------------------------------------------------------------------------------------------
-
-modimport "modmain/tuning"
-modimport "modmain/language"
-modimport "modmain/character"
-modimport "modmain/ui"
-modimport "modmain/prefabpost"
-modimport "modmain/playernet"
-modimport "modmain/actions"
-modimport "modmain/componentactions"
-modimport "modmain/sg"
-modimport "modmain/recipes"
-modimport "modmain/rpc"
-modimport "modmain/input"

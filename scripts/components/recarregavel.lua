@@ -1,4 +1,4 @@
-local a = Class(function(self, b)
+local Recarregavel = Class(function(self, b)
     self.inst = b;
     self.recharge = 255;
     self.rechargetime = -2;
@@ -33,11 +33,11 @@ local a = Class(function(self, b)
     end)
 end)
 
-function a:SetRechargeTime(d) self.maxrechargetime = d end;
+function Recarregavel:SetRechargeTime(d) self.maxrechargetime = d end;
 
-function a:SetOnReadyFn(e) self.onready = e end;
+function Recarregavel:SetOnReadyFn(e) self.onready = e end;
 
-function a:RecalculateRate()
+function Recarregavel:RecalculateRate()
     if self.owner ~= nil then
         self.cooldownrate = 1 + self.owner.components.buffable:GetBuffData("cooldown_mult")
         if self.updatetask ~= nil and self.inst.replica ~= nil and self.inst.replica.inventoryitem ~= nil then
@@ -46,7 +46,7 @@ function a:RecalculateRate()
     end
 end;
 
-function a:FinishRecharge()
+function Recarregavel:FinishRecharge()
     if self.updatetask ~= nil then
         self.updatetask:Cancel()
         self.updatetask = nil
@@ -59,12 +59,12 @@ function a:FinishRecharge()
         { percent = self.recharge and self.recharge / 180, overtime = false })
 end;
 
-function a:Update()
+function Recarregavel:Update()
     self.recharge = self.recharge + 180 * FRAMES / (self.rechargetime * (self.pickup and 1 or self.cooldownrate))
     if self.recharge >= 180 then self:FinishRecharge() end
 end;
 
-function a:StartRecharge()
+function Recarregavel:StartRecharge()
     self.isready = false;
     if self.inst.components.aoetargeting then
         self.inst.components.aoetargeting:SetEnabled(false)
@@ -81,9 +81,9 @@ function a:StartRecharge()
     end)
 end;
 
-function a:GetPercent() return self.recharge and self.recharge / 180, false end; function a:GetRechargeTime() return self
-    .pickup and 1 or self.maxrechargetime * self.cooldownrate end; function a:GetDebugString() return string.format(
+function Recarregavel:GetPercent() return self.recharge and self.recharge / 180, false end; function Recarregavel:GetRechargeTime() return self
+    .pickup and 1 or self.maxrechargetime * self.cooldownrate end; function Recarregavel:GetDebugString() return string.format(
     "recharge: %2.2f, rechargetime: %2.2f, cooldownrate: %2.2f", self.recharge, self:GetRechargeTime(), self
     .cooldownrate) end;
 
-return a
+return Recarregavel

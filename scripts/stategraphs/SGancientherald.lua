@@ -14,7 +14,7 @@ function SpawnRandomInRange(inst, prefab, min_count, max_count, radius, offset_y
     local count = math.random(min_count, max_count)
 
     local function getrandomoffset()
-        local theta = math.random() * 2 * PI
+        local theta = math.random() * TWOPI
         local offset = FindWalkableOffset(pt, theta, radius, 12, true)
         if offset then
             return pt + offset
@@ -243,8 +243,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/ancient_herald/appear") end),
+            TimeEvent(0 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/ancient_herald/appear")
+            end),
         },
 
         events =
@@ -267,8 +269,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/ancient_herald/taunt") end),
+            TimeEvent(0 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/ancient_herald/taunt")
+            end),
         },
 
         events =
@@ -288,10 +292,14 @@ local states =
 
         timeline =
         {
-            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/ancient_herald/summon") end),
-            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/ancient_herald/summon_2d") end),
+            TimeEvent(0 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/ancient_herald/summon")
+            end),
+            TimeEvent(1 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/ancient_herald/summon_2d")
+            end),
             TimeEvent(30 * FRAMES, function(inst)
                 local tipo = math.random(1, 4)
                 if tipo == 1 then

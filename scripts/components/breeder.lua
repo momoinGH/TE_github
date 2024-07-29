@@ -123,7 +123,7 @@ function Breeder:summonpredator()
             --  local ptp = spawn_pt:Get()
             local radius = 30
             local base = spawn_pt
-            local theta = math.random() * 2 * PI
+            local theta = math.random() * TWOPI
             local offset = Vector3(0, 0, 0)
 
             --联机服务端ThePlayer恒nil

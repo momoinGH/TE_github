@@ -150,7 +150,7 @@ local function DropItems(inst)
     local item = SpawnPrefab(item_to_spawn)
 
     local dist = DROP_ITEMS_DIST_MIN + DROP_ITEMS_DIST_VARIANCE * math.random()
-    local theta = math.random() * 2 * PI
+    local theta = math.random() * TWOPI
 
     local spawn_x, spawn_z
 
@@ -208,7 +208,7 @@ local function OnCollide(inst, data)
     local boat_physics = data.other.components.boatphysics
     if boat_physics ~= nil then
         local hit_velocity = math.floor(math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity) /
-        boat_physics.max_velocity + 0.5)
+            boat_physics.max_velocity + 0.5)
 
         if hit_velocity > 0.8 then
             inst:DoTaskInTime(0, function()
@@ -247,7 +247,7 @@ local function OnLightningStrike(inst)
         table.insert(items_to_drop, small_ram_products[math.random(1, #small_ram_products)])
     end
 
-    inst._lightning_drop_task = inst:DoTaskInTime(20*FRAMES, DropLightningItems, items_to_drop)
+    inst._lightning_drop_task = inst:DoTaskInTime(20 * FRAMES, DropLightningItems, items_to_drop)
 end
 
 local function fn(Sim)
@@ -261,15 +261,15 @@ local function fn(Sim)
 
     -- THIS WAS COMMENTED OUT BECAUSE THE ROC WAS BUMPING INTO IT. BUT I'M NOT SURE WHY IT WAS SET THAT WAY TO BEGIN WITH.
     --inst.Physics:SetCollisionGroup(COLLISION.GROUND)
-    trans:SetScale(1 ,1 ,1)
-    
+    trans:SetScale(1, 1, 1)
+
     inst:AddTag("shadecanopysmall") --防止自燃、过热和玻璃雨的标签，同超平均巨树
     inst:AddTag("tree_pillar")
 
     local minimap = inst.entity:AddMiniMapEntity()
     minimap:SetIcon("pillar_tree.png")
 
-    anim:SetBank("pillar_tree") -- flash animation .fla
+    anim:SetBank("pillar_tree")  -- flash animation .fla
     anim:SetBuild("pillar_tree") -- art files
 
     anim:PlayAnimation("idle", true)
@@ -323,13 +323,13 @@ local function fn(Sim)
     inst.components.playerprox:SetOnPlayerNear(OnNear)
 
     inst:ListenForEvent("on_collide", OnCollide)
-    inst:ListenForEvent("phasechanged", function(src, phase) OnPhaseChanged(inst,phase) end, TheWorld)
+    inst:ListenForEvent("phasechanged", function(src, phase) OnPhaseChanged(inst, phase) end, TheWorld)
 
     inst:AddComponent("lightningblocker")
     inst.components.lightningblocker:SetBlockRange(TUNING.SHADE_CANOPY_RANGE_SMALL)
     inst.components.lightningblocker:SetOnLightningStrike(OnLightningStrike)
 
-   return inst
+    return inst
 end
 
 local function fn2(Sim)

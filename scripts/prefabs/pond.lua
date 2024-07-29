@@ -9,12 +9,12 @@ local assets =
 local prefabs =
 {
     "marsh_plant",
-	"pondfish",
-	"pondeel",
+    "pondfish",
+    "pondeel",
     "frog",
     "mosquito",
     "nitre",
-    "nitre_formation",	
+    "nitre_formation",
 }
 
 local function SpawnNitreFormations(inst)
@@ -31,7 +31,7 @@ local function SpawnNitreFormations(inst)
             local radius = math.sqrt(math.random()) * 1.25 + 0.25
             table.insert(inst.nitreformations, {
                 math.cos(theta) * radius, 0, math.sin(theta) * radius, -- offset
-                math.random(1, 3) -- animation
+                math.random(1, 3)                                      -- animation
             })
         end
     end
@@ -76,16 +76,16 @@ local function SpawnPlants(inst)
     if inst.plants == nil then
         inst.plants = {}
         for i = 1, math.random(2, 4) do
-            local theta = math.random() * 2 * PI
+            local theta = math.random() * TWOPI
             table.insert(inst.plants,
-            {
-                offset =
                 {
-                    math.sin(theta) * 1.9 + math.random() * .3,
-                    0,
-                    math.cos(theta) * 2.1 + math.random() * .3,
-                },
-            })
+                    offset =
+                    {
+                        math.sin(theta) * 1.9 + math.random() * .3,
+                        0,
+                        math.cos(theta) * 2.1 + math.random() * .3,
+                    },
+                })
         end
     end
 
@@ -119,9 +119,9 @@ local function DespawnPlants(inst)
 end
 
 local function OnSnowLevel(inst, snowlevel)
-	local map = TheWorld.Map
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
+    local map = TheWorld.Map
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
     if snowlevel > .02 or ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then
         if not inst.frozen then
@@ -142,7 +142,7 @@ local function OnSnowLevel(inst, snowlevel)
         end
     elseif inst.frozen then
         inst.frozen = false
-        inst.AnimState:PlayAnimation("idle"..inst.pondtype, true)
+        inst.AnimState:PlayAnimation("idle" .. inst.pondtype, true)
         inst.components.childspawner:StartSpawning()
         inst.components.fishable:Unfreeze()
 
@@ -152,7 +152,7 @@ local function OnSnowLevel(inst, snowlevel)
         inst.Physics:CollidesWith(COLLISION.ITEMS)
         inst.Physics:CollidesWith(COLLISION.CHARACTERS)
         inst.Physics:CollidesWith(COLLISION.GIANTS)
-		
+
         SpawnPlants(inst)
 
         inst.components.watersource.available = true
@@ -164,7 +164,7 @@ end
 
 local function OnSave(inst, data)
     data.plants = inst.plants
-    data.nitreformations = inst.nitreformations	
+    data.nitreformations = inst.nitreformations
 end
 
 local function OnLoad(inst, data)
@@ -205,16 +205,16 @@ local function commonfn(pondtype)
 
     inst.AnimState:SetBuild("marsh_tile")
     inst.AnimState:SetBank("marsh_tile")
-    inst.AnimState:PlayAnimation("idle"..pondtype, true)
+    inst.AnimState:PlayAnimation("idle" .. pondtype, true)
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
 
-    inst.MiniMapEntity:SetIcon("pond"..pondtype..".png")
+    inst.MiniMapEntity:SetIcon("pond" .. pondtype .. ".png")
 
     -- From watersource component
     inst:AddTag("watersource")
-    inst:AddTag("pond")	
+    inst:AddTag("pond")
     inst:AddTag("antlion_sinkhole_blocker")
     inst:AddTag("birdblocker")
 
@@ -249,7 +249,7 @@ local function commonfn(pondtype)
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
 
     inst:AddComponent("watersource")
-	
+
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
 
@@ -270,13 +270,12 @@ local function OnIsDay(inst, isday)
         inst.components.childspawner:StopSpawning()
         ReturnChildren(inst)
     elseif not TheWorld.state.iswinter then
-	
-	local map = TheWorld.Map
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-	if ground ~= GROUND.WATER_MANGROVE and ground ~= GROUND.ANTFLOOR then	
-        inst.components.childspawner:StartSpawning()
-	end	
+        local map = TheWorld.Map
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
+        if ground ~= GROUND.WATER_MANGROVE and ground ~= GROUND.ANTFLOOR then
+            inst.components.childspawner:StartSpawning()
+        end
     end
 end
 
@@ -300,7 +299,8 @@ local function pondmos()
     if TUNING.MOSQUITO_POND_CHILDREN.max == 0 then
         inst.components.childspawner:SetMaxChildren(0)
     else
-        inst.components.childspawner:SetMaxChildren(math.random(TUNING.MOSQUITO_POND_CHILDREN.min, TUNING.MOSQUITO_POND_CHILDREN.max))
+        inst.components.childspawner:SetMaxChildren(math.random(TUNING.MOSQUITO_POND_CHILDREN.min,
+            TUNING.MOSQUITO_POND_CHILDREN.max))
     end
 
     WorldSettings_ChildSpawner_SpawnPeriod(inst, TUNING.MOSQUITO_POND_SPAWN_TIME, TUNING.MOSQUITO_POND_ENABLED)
@@ -308,7 +308,7 @@ local function pondmos()
     if not TUNING.MOSQUITO_POND_ENABLED then
         inst.components.childspawner.childreninside = 0
     end
-	
+
     inst.components.childspawner:StartRegen()
     inst.components.childspawner.childname = "mosquito"
     inst.components.fishable:AddFish("pondfish")
@@ -320,7 +320,7 @@ local function pondmos()
     inst.OnPreLoad = OnPreLoadMosquito
 
     return inst
-end 
+end
 
 local function pondfrog()
     local inst = commonfn("")
@@ -334,7 +334,8 @@ local function pondfrog()
     if TUNING.FROG_POND_CHILDREN.max == 0 then
         inst.components.childspawner:SetMaxChildren(0)
     else
-        inst.components.childspawner:SetMaxChildren(math.random(TUNING.FROG_POND_CHILDREN.min, TUNING.FROG_POND_CHILDREN.max))
+        inst.components.childspawner:SetMaxChildren(math.random(TUNING.FROG_POND_CHILDREN.min,
+            TUNING.FROG_POND_CHILDREN.max))
     end
 
     WorldSettings_ChildSpawner_SpawnPeriod(inst, TUNING.FROG_POND_SPAWN_TIME, TUNING.FROG_POND_ENABLED)
@@ -342,7 +343,7 @@ local function pondfrog()
     if not TUNING.FROG_POND_ENABLED then
         inst.components.childspawner.childreninside = 0
     end
-	
+
     inst.components.childspawner:StartRegen()
     inst.components.childspawner.childname = "frog"
     inst.components.fishable:AddFish("pondfish")
@@ -363,12 +364,12 @@ local function PlayBubble(inst)
     inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/bubble")
 end
 
-local NITRE_FORMATION_MUST_TAGS = {"nitre_formation",}
+local NITRE_FORMATION_MUST_TAGS = { "nitre_formation", }
 local function SetBackToNormal_Cave(inst)
     inst.AnimState:PushAnimation("splash_cave", true)
     inst.AnimState:PushAnimation("idle_cave", true)
     inst.SoundEmitter:PlaySound("turnoftides/common/together/water/splash/small")
-    
+
     inst.components.workable:SetWorkable(false)
 
     inst.components.childspawner:StartSpawning()
@@ -423,7 +424,7 @@ local function OnAcidLevelDelta_Cave(inst, data)
                 PlayBubble(inst)
             end
         end
-    --else
+        --else
         -- No change.
     end
 end

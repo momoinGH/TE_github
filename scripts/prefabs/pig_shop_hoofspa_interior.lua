@@ -43,7 +43,7 @@ end
 local function ReceiveItem(teleporter, item)
 	if item.Transform ~= nil then
 		local x, y, z = teleporter.inst.Transform:GetWorldPosition()
-		local angle = math.random() * 2 * PI
+		local angle = math.random() * TWOPI
 
 		if item.Physics ~= nil then
 			item.Physics:Stop()

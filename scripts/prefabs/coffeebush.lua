@@ -59,7 +59,7 @@ local function spawnperd(inst)
     if inst:IsValid() then
         local perd = SpawnPrefab("perd")
         local x, y, z = inst.Transform:GetWorldPosition()
-        local angle = math.random() * 2 * PI
+        local angle = math.random() * TWOPI
         perd.Transform:SetPosition(x + math.cos(angle), 0, z + math.sin(angle))
         perd.sg:GoToState("appear")
         perd.components.homeseeker:SetHome(inst)

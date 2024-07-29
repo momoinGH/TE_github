@@ -232,7 +232,7 @@ local function OnActivateMinigame(inst)
 
     local x, y, z = inst.Transform:GetWorldPosition()
     inst.locked_obelisks = TheSim:FindEntities(x, y, z, TUNING.PIG_MINIGAME_ARENA_RADIUS, nil, nil,
-        { "sanityrock", "insanityrock" })                                                                                        -- musttags, canttags, mustoneoftags
+        { "sanityrock", "insanityrock" }) -- musttags, canttags, mustoneoftags
     for _, obelisk in ipairs(inst.locked_obelisks) do
         obelisk:ConcealForMinigame(true)
     end
@@ -266,7 +266,7 @@ local function IsAreaSafeForMinigame(inst, giver)
 
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, TUNING.PIG_MINIGAME_ARENA_RADIUS * 2, nil, { "player" },
-        { "hostile", "monster" })                                                                                         -- musttags, canttags, mustoneoftags
+        { "hostile", "monster" }) -- musttags, canttags, mustoneoftags
     if #ents > 0 then
         return false
     end
@@ -328,8 +328,8 @@ local function OnTossGameItems(inst)
         table.insert(items, "lucky_goldnugget")
     end
     inst._minigame_gold_tossed = inst._minigame_gold_tossed + numgold
-    local angle = math.random() * 2 * PI
-    local delta = 2 * PI / (numgold + numprops + 1) --purposely leave a random gap
+    local angle = math.random() * TWOPI
+    local delta = TWOPI / (numgold + numprops + 1) --purposely leave a random gap
     local variance = delta * .4
     while #items > 0 do
         local item = SpawnPrefab(table.remove(items, math.random(#items)))
@@ -354,7 +354,7 @@ local function GetMinigameScore(inst)
         end
 
         local player_gold_percent = inst._minigame_gold_tossed > 0 and (1 - num_pig_gold / inst._minigame_gold_tossed) or
-        0
+            0
 
         inst._minigame_score = player_gold_percent >= TUNING.PIG_MINIGAME_SCORE_GREAT and 4
             or player_gold_percent >= TUNING.PIG_MINIGAME_SCORE_GOOD and 3

@@ -1783,7 +1783,7 @@ function FN.GetSpawnPoint(pos, radius, attempts)
     radius = radius or 30
     attempts = attempts and attempts / 2 or 6 --对半分
 
-    local theta = math.random() * 2 * PI
+    local theta = math.random() * TWOPI
     local offset = FindWalkableOffset(pos, theta, radius, attempts, true)
     if not offset then
         --每次失败后取对角会好点
@@ -1919,7 +1919,7 @@ function FN.ReleaseChild(child, parent, data)
         x, y, z = overridespawnlocation(parent)
     else
         local rad = .5 + parent:GetPhysicsRadius(0) + child:GetPhysicsRadius(0)
-        local start_angle = math.random() * 2 * PI
+        local start_angle = math.random() * TWOPI
 
         local offset = FindWalkableOffset(Vector3(x, 0, z), start_angle, rad, 8, false, true, NoHoles, spawnInWater,
             spawnOnBoats)
@@ -2220,7 +2220,7 @@ function FN.SpawnLootPrefab(inst, lootprefab)
     local x, y, z = inst.Transform:GetWorldPosition()
 
     if loot.Physics ~= nil then
-        local angle = math.random() * 2 * PI
+        local angle = math.random() * TWOPI
         loot.Physics:SetVel(2 * math.cos(angle), 10, 2 * math.sin(angle))
 
         if inst.Physics ~= nil then

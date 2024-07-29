@@ -353,7 +353,7 @@ return Class(function(self, inst)
 				return TheWorld.Map:IsAboveGroundAtPoint(x, y, z, true) and NoHoles(pt)
 			end
 
-			local offset = FindValidPositionByFan(math.random() * 2 * PI, radius_override, 12, OceanSpawnPoint)
+			local offset = FindValidPositionByFan(math.random() * TWOPI, radius_override, 12, OceanSpawnPoint)
 			if offset ~= nil then
 				offset.x = offset.x + pt.x
 				offset.z = offset.z + pt.z
@@ -363,7 +363,7 @@ return Class(function(self, inst)
 			if not TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
 				pt = FindNearbyLand(pt, 1) or pt
 			end
-			local offset = FindWalkableOffset(pt, math.random() * 2 * PI, radius_override, 12, true, true, NoHoles)
+			local offset = FindWalkableOffset(pt, math.random() * TWOPI, radius_override, 12, true, true, NoHoles)
 			if offset ~= nil then
 				offset.x = offset.x + pt.x
 				offset.z = offset.z + pt.z

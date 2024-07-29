@@ -88,14 +88,14 @@ local WALL_RADIUS = 20
 
 local function GetDirections()
 	return {
-		{ x = 1, z = 0 },
-		{ x = 0, z = 1 },
+		{ x = 1,  z = 0 },
+		{ x = 0,  z = 1 },
 		{ x = -1, z = 0 },
-		{ x = 0, z = -1 },
-		{ x = 1, z = -1 },
+		{ x = 0,  z = -1 },
+		{ x = 1,  z = -1 },
 		{ x = -1, z = 1 },
 		{ x = -1, z = -1 },
-		{ x = 1, z = 1 },
+		{ x = 1,  z = 1 },
 	}
 end
 
@@ -144,7 +144,7 @@ local function FindTreeSeeds(inst)
 
 	if target ~= nil then
 		local radius = math.random(3, SEE_FOOD_DIST)
-		local theta = math.random() * 2 * PI
+		local theta = math.random() * TWOPI
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local x1 = x + radius * math.cos(theta)
 		local z1 = z - radius * math.sin(theta)
@@ -230,10 +230,10 @@ end
 local function KeepChoppingAction(inst)
 	local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 	local keep_chop = inst.components.follower.leader and
-	inst.components.follower.leader:GetDistanceSqToInst(inst) <= KEEP_CHOPPING_DIST * KEEP_CHOPPING_DIST
+		inst.components.follower.leader:GetDistanceSqToInst(inst) <= KEEP_CHOPPING_DIST * KEEP_CHOPPING_DIST
 	local target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
 		return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-		item.components.workable.action == ACTIONS.CHOP
+			item.components.workable.action == ACTIONS.CHOP
 	end, nil, notags)
 	if inst.tree_target ~= nil then target = inst.tree_target end
 
@@ -243,7 +243,7 @@ end
 local function StartChoppingCondition(inst)
 	local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 	local start_chop = inst.components.follower.leader and inst.components.follower.leader.sg and
-	inst.components.follower.leader.sg:HasStateTag("chopping")
+		inst.components.follower.leader.sg:HasStateTag("chopping")
 	local target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
 		return item.components.workable and item.components.workable.action == ACTIONS.CHOP
 	end, nil, notags)
@@ -256,12 +256,14 @@ end
 local function FindTreeToChopAction(inst)
 	local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 	local target = FindEntity(inst, SEE_TREE_DIST,
-		function(item) return item.components.workable and item.components.workable.action == ACTIONS.CHOP and
-			not item:HasTag("machetecut") end)
+		function(item)
+			return item.components.workable and item.components.workable.action == ACTIONS.CHOP and
+				not item:HasTag("machetecut")
+		end)
 	if target then
 		local decid_monst_target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
 			return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-			item.components.workable.action == ACTIONS.CHOP
+				item.components.workable.action == ACTIONS.CHOP
 		end, nil, notags)
 		if decid_monst_target ~= nil then
 			target = decid_monst_target
@@ -276,14 +278,14 @@ end
 
 local function KeepHackingAction(inst)
 	local keep_hack = inst.components.follower.leader and
-	inst.components.follower.leader:GetDistanceSqToInst(inst) <= KEEP_CHOPPING_DIST * KEEP_CHOPPING_DIST
+		inst.components.follower.leader:GetDistanceSqToInst(inst) <= KEEP_CHOPPING_DIST * KEEP_CHOPPING_DIST
 	return keep_hack
 end
 
 local function StartHackingCondition(inst)
 	local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 	local start_chop = inst.components.follower.leader and inst.components.follower.leader.sg and
-	inst.components.follower.leader.sg:HasStateTag("chopping")
+		inst.components.follower.leader.sg:HasStateTag("chopping")
 	local target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
 		return item.components.workable and item.components.workable.action == ACTIONS.HACK
 	end, nil, notags)
@@ -295,8 +297,10 @@ end
 local function FindBushToHackAction(inst)
 	local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 	local target = FindEntity(inst, SEE_TREE_DIST,
-		function(item) return item.components.workable and item.components.workable.action == ACTIONS.HACK and
-			item:HasTag("machetecut") end, nil, notags)
+		function(item)
+			return item.components.workable and item.components.workable.action == ACTIONS.HACK and
+				item:HasTag("machetecut")
+		end, nil, notags)
 	if target then
 		return BufferedAction(inst, target, ACTIONS.HACK)
 	end
@@ -395,23 +399,31 @@ function PandaBrain:OnStart()
 					Panic(self.inst)),
 				ChattyNode(self.inst, "WILDBEAVER_TALK_FIGHT",
 					WhileNode(
-						function() return self.inst.components.combat.target == nil or
-							not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+						function()
+							return self.inst.components.combat.target == nil or
+								not self.inst.components.combat:InCooldown()
+						end, "AttackMomentarily",
 						ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST))),
 				WhileNode(
-					function() return GetLeader(self.inst) and GetLeader(self.inst).components.pinnable and
-						GetLeader(self.inst).components.pinnable:IsStuck() end, "Leader Phlegmed",
+					function()
+						return GetLeader(self.inst) and GetLeader(self.inst).components.pinnable and
+							GetLeader(self.inst).components.pinnable:IsStuck()
+					end, "Leader Phlegmed",
 					DoAction(self.inst, RescueLeaderAction, "Rescue Leader", true)),
 				WhileNode(
-					function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() and
-						math.random(1, 4) > 1 end, "Dodge",
+					function()
+						return self.inst.components.combat.target and self.inst.components.combat:InCooldown() and
+							math.random(1, 4) > 1
+					end, "Dodge",
 					RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST,
 						STOP_RUN_AWAY_DIST)),
 
 
 				WhileNode(
-					function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() and
-						math.random(1, 10) == 1 end, "Mind",
+					function()
+						return self.inst.components.combat.target and self.inst.components.combat:InCooldown() and
+							math.random(1, 10) == 1
+					end, "Mind",
 					DoAction(self.inst, function() return MindcontrolAction(self.inst) end)),
 
 

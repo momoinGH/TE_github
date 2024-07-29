@@ -99,7 +99,7 @@ local function GetSpawnPoint(pt)
             not TheWorld.Map:IsPassableAtPoint(spawnpoint:Get()) and IsNotNextToLand(spawnpoint)
     end
 
-    local theta = math.random() * 2 * PI
+    local theta = math.random() * TWOPI
     local radius = 24 + math.random(-1, 1) * 4
     local resultoffset = FindValidPositionByFan(theta, radius, 12, TestSpawnPoint)
 

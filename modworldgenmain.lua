@@ -1,7 +1,8 @@
+GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
+
 --level.overrides.has_ocean = false
 local SIZE_VARIATION = 3
 --boarmound
-local require = GLOBAL.require
 require("map/lockandkey")
 require("map/tasks")
 require("map/rooms")
@@ -9,11 +10,6 @@ require("map/terrain")
 require("map/level")
 require("map/room_functions")
 local blockersets = require("map/blockersets")
-local LOCKS = GLOBAL.LOCKS
-local KEYS = GLOBAL.KEYS
-local GROUND = GLOBAL.GROUND
-local LEVELTYPE = GLOBAL.LEVELTYPE
-local LOCKS_KEYS = GLOBAL.LOCKS_KEYS
 
 modimport 'tileadder.lua'
 AddTiles()
@@ -404,7 +400,6 @@ if GetModConfigData("kindofworld") == 5 then
 			["plains_pogs_ruin"] = 1,
 			["rainforest_ruins"] = 1 + tamanho,
 			["BG_painted_base"] = 1 + tamanho,
-			["BG_rainforest_base"] = 1 + tamanho,
 
 			["battleground_head"] = 1,
 			["battleground_claw"] = 1,
@@ -726,7 +721,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .11 * preenchimento,          -- .22, --.26
+			distributepercent = .11 * preenchimento, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -750,7 +745,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .11 * preenchimento,          -- .22, --.26
+			distributepercent = .11 * preenchimento, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -774,7 +769,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .11 * preenchimento,          -- .22, --.26
+			distributepercent = .11 * preenchimento, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -798,7 +793,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .11 * preenchimento,          -- .22, --.26
+			distributepercent = .11 * preenchimento, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -822,7 +817,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .11 * preenchimento,          -- .22, --.26
+			distributepercent = .11 * preenchimento, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -894,7 +889,7 @@ if GetModConfigData("kindofworld") == 5 then
 				["pig_ruins_head"] = math.max(0, 2 - math.random(0, 20)),
 				["pig_ruins_artichoke"] = math.max(0, 2 - math.random(0, 20)),
 			},
-			distributepercent = 0.125 * preenchimento,          --.3
+			distributepercent = 0.125 * preenchimento, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 3, --4,
@@ -934,7 +929,7 @@ if GetModConfigData("kindofworld") == 5 then
 				end,
 			},
 
-			distributepercent = 0.125 * preenchimento,           --.3
+			distributepercent = 0.125 * preenchimento, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -974,7 +969,7 @@ if GetModConfigData("kindofworld") == 5 then
 				["pig_ruins_entrance_5"] = 1,
 			},
 
-			distributepercent = 0.125 * preenchimento,           --.3
+			distributepercent = 0.125 * preenchimento, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -1047,7 +1042,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.GASJUNGLE,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.225 * preenchimento,          --.45
+			distributepercent = 0.225 * preenchimento, --.45
 			distributeprefabs =
 			{
 				rainforesttree_rot = 4,
@@ -1075,7 +1070,7 @@ if GetModConfigData("kindofworld") == 5 then
 		contents = {
 			countstaticlayouts = {
 				["pig_ruins_entrance_4"] = 1 },
-			distributepercent = 0.225 * preenchimento,          --.45
+			distributepercent = 0.225 * preenchimento, --.45
 			distributeprefabs =
 			{
 				rainforesttree_rot = 4,
@@ -1105,7 +1100,7 @@ if GetModConfigData("kindofworld") == 5 then
 				["pig_ruins_head"] = 1,
 				["pig_ruins_artichoke"] = 1,
 			},
-			distributepercent = 0.25 * preenchimento,          --.45
+			distributepercent = 0.25 * preenchimento, --.45
 			distributeprefabs =
 			{
 				rainforesttree_rot = 2,
@@ -1139,7 +1134,7 @@ if GetModConfigData("kindofworld") == 5 then
 		contents = {
 			countstaticlayouts = {
 				["pig_ruins_entrance_3"] = 1 },
-			distributepercent = 0.25 * preenchimento,          --.45
+			distributepercent = 0.25 * preenchimento, --.45
 			distributeprefabs =
 			{
 				rainforesttree_rot = 2,
@@ -1173,7 +1168,7 @@ if GetModConfigData("kindofworld") == 5 then
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
 			countstaticlayouts = { ["pig_ruins_entrance_1"] = 1 },
-			distributepercent = 0.125 * preenchimento,          --.3
+			distributepercent = 0.125 * preenchimento, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -1207,7 +1202,7 @@ if GetModConfigData("kindofworld") == 5 then
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
 			countstaticlayouts = { ["pig_ruins_entrance_2"] = 1 },
-			distributepercent = 0.125 * preenchimento,          --.3
+			distributepercent = 0.125 * preenchimento, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -1241,7 +1236,7 @@ if GetModConfigData("kindofworld") == 5 then
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
 			countstaticlayouts = { ["pig_ruins_exit_1"] = 1 },
-			distributepercent = 0.125 * preenchimento,          --.3
+			distributepercent = 0.125 * preenchimento, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -1275,7 +1270,7 @@ if GetModConfigData("kindofworld") == 5 then
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
 			countstaticlayouts = { ["pig_ruins_exit_2"] = 1, ["nettlegrove"] = 1, },
-			distributepercent = 0.125 * preenchimento,          --.3
+			distributepercent = 0.125 * preenchimento, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -1308,7 +1303,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.125 * preenchimento,          --.3
+			distributepercent = 0.125 * preenchimento, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -1341,7 +1336,7 @@ if GetModConfigData("kindofworld") == 5 then
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
 			countstaticlayouts = { ["mandraketown"] = 1 },
-			distributepercent = 0.125 * preenchimento,          --.3
+			distributepercent = 0.125 * preenchimento, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -1372,7 +1367,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.125 * preenchimento,          --.3
+			distributepercent = 0.125 * preenchimento, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -1404,7 +1399,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.125 * preenchimento,          --.3
+			distributepercent = 0.125 * preenchimento, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -1436,7 +1431,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.PAINTED,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .075 * preenchimento,                         --.26
+			distributepercent = .075 * preenchimento, --.26
 			distributeprefabs =
 			{
 				tubertree = 1,
@@ -1462,7 +1457,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.RAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha", "StagehandGarden", "Terrarium_Spawner", "StatueHarp_HedgeSpawner", "CharlieStage_Spawner" },
 		contents = {
-			distributepercent = .19 * preenchimento,          --.5
+			distributepercent = .19 * preenchimento, --.5
 			distributeprefabs =
 			{
 				rainforesttree = 0.6, --1.4,
@@ -1492,7 +1487,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.RAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.175 * preenchimento,          -- .5
+			distributepercent = 0.175 * preenchimento, -- .5
 			distributeprefabs =
 			{
 				rainforesttree = .5, --.7,
@@ -1519,7 +1514,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.RAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = .175 * preenchimento,         -- .5
+			distributepercent = .175 * preenchimento, -- .5
 			distributeprefabs =
 			{
 				rainforesttree = .5, --.7,
@@ -1552,7 +1547,7 @@ if GetModConfigData("kindofworld") == 5 then
 				["lilypad"] = 1, --math.random(4,8),										
 			},
 
-			distributepercent = .25 * preenchimento,          -- .3				
+			distributepercent = .25 * preenchimento, -- .3				
 
 			distributeprefabs =
 			{
@@ -1575,7 +1570,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.RAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = .075 * preenchimento,          -- .3
+			distributepercent = .075 * preenchimento, -- .3
 			distributeprefabs =
 			{
 				rainforesttree = .7,
@@ -1606,7 +1601,7 @@ if GetModConfigData("kindofworld") == 5 then
 				["roc_nest"] = 1,
 				["roc_cave"] = 1,
 			},
-			distributepercent = .05 * preenchimento,                         --.26
+			distributepercent = .05 * preenchimento, --.26
 			distributeprefabs =
 			{
 				rock1 = 0.1,
@@ -1634,7 +1629,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.ROCKY,
 		tags = { "hamlet" },
 		contents = {
-			distributepercent = .05 * preenchimento,                         --.26
+			distributepercent = .05 * preenchimento, --.26
 			distributeprefabs =
 			{
 				rock1 = 0.1,
@@ -1661,7 +1656,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .125 * preenchimento,          --.22, --.26
+			distributepercent = .125 * preenchimento, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -1695,7 +1690,7 @@ if GetModConfigData("kindofworld") == 5 then
 				["pig_ruins_nocanopy"] = 1,
 				["pig_ruins_nocanopy_2"] = 1,
 			},
-			distributepercent = .125 * preenchimento,          --.22, --.26
+			distributepercent = .125 * preenchimento, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -1730,7 +1725,7 @@ if GetModConfigData("kindofworld") == 5 then
 				["pig_ruins_nocanopy_3"] = 1,
 				["pugalisk_fountain"] = 1,
 			},
-			distributepercent = .125 * preenchimento,          --.22, --.26
+			distributepercent = .125 * preenchimento, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -1768,7 +1763,7 @@ if GetModConfigData("kindofworld") == 5 then
 				["pig_ruins_nocanopy_3"] = 1,
 				["pig_ruins_nocanopy_4"] = 1,
 			},
-			distributepercent = .125 * preenchimento,          --.22, --.26
+			distributepercent = .125 * preenchimento, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -1802,7 +1797,7 @@ if GetModConfigData("kindofworld") == 5 then
 				["pig_ruins_nocanopy_4"] = 1,
 				["pig_ruins_nocanopy"] = 1,
 			},
-			distributepercent = .125 * preenchimento,          --.22, --.26
+			distributepercent = .125 * preenchimento, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -1832,7 +1827,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .075 * preenchimento,          -- .15, -- .3
+			distributepercent = .075 * preenchimento, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -1859,7 +1854,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .125 * preenchimento,          -- .15, -- .3
+			distributepercent = .125 * preenchimento, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -1886,7 +1881,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .125 * preenchimento,          -- .15, -- .3
+			distributepercent = .125 * preenchimento, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -1914,7 +1909,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .125 * preenchimento,          -- .15, -- .3
+			distributepercent = .125 * preenchimento, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -1939,7 +1934,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .125 * preenchimento,          -- .15, -- .3
+			distributepercent = .125 * preenchimento, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -2170,7 +2165,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.FIELDS,
 		tags = { "ExitPiece", "hamlet" },
 		contents = {
-			distributepercent = 0.03 * preenchimento,  --0.1
+			distributepercent = 0.03 * preenchimento, --0.1
 			distributeprefabs =
 			{
 				--	grass = 0.05,
@@ -2323,7 +2318,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.RAINFOREST,
 		tags = { "ExitPiece", "hamlet", "folha" },
 		contents = {
-			distributepercent = .19 * preenchimento,          --.5
+			distributepercent = .19 * preenchimento, --.5
 			distributeprefabs =
 			{
 				rainforesttree = 0.6, --1.4,
@@ -2349,7 +2344,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.PAINTED,
 		tags = { "ExitPiece", "hamlet" },
 		contents = {
-			distributepercent = .075 * preenchimento,                         --.26
+			distributepercent = .075 * preenchimento, --.26
 			distributeprefabs =
 			{
 				tubertree = 1,
@@ -2374,7 +2369,7 @@ if GetModConfigData("kindofworld") == 5 then
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "hamlet" },
 		contents = {
-			distributepercent = .125 * preenchimento,          --.22, --.26
+			distributepercent = .125 * preenchimento, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -3141,7 +3136,6 @@ if GetModConfigData("kindofworld") == 5 then
 				gnatmound = 0.1,
 				rocks = 0.1,
 				nitre = 0.1,
-				flint = 0.05,
 				iron = 0.3,
 				--            thunderbirdnest = 0.1,
 				sedimentpuddle = 0.2,
@@ -3171,7 +3165,6 @@ if GetModConfigData("kindofworld") == 5 then
 				gnatmound = 0.1,
 				rocks = 0.1,
 				nitre = 0.1,
-				flint = 0.05,
 				iron = 0.3,
 				--            thunderbirdnest = 0.1,
 				sedimentpuddle = 0.2,
@@ -3200,7 +3193,6 @@ if GetModConfigData("kindofworld") == 5 then
 				gnatmound = 0.1,
 				rocks = 0.1,
 				nitre = 0.1,
-				flint = 0.05,
 				iron = 0.3,
 				--            thunderbirdnest = 0.1,
 				sedimentpuddle = 0.2,
@@ -3231,7 +3223,6 @@ if GetModConfigData("kindofworld") == 5 then
 				gnatmound = 0.1,
 				rocks = 0.1,
 				nitre = 0.1,
-				flint = 0.05,
 				iron = 0.3,
 				--            thunderbirdnest = 0.1,
 				sedimentpuddle = 0.2,
@@ -3266,7 +3257,6 @@ if GetModConfigData("kindofworld") == 5 then
 				gnatmound = 0.1,
 				rocks = 0.1,
 				nitre = 0.1,
-				flint = 0.05,
 				iron = 0.3,
 				--            thunderbirdnest = 0.1,
 				sedimentpuddle = 0.2,
@@ -3532,7 +3522,6 @@ if GetModConfigData("kindofworld") == 5 then
 				yelow_mushroom = 0.9,
 
 				stalagmite = 0.5,
-				pillar_cave = 0.1,
 				spiderhole = 0.05,
 
 				pillar_cave = 0.05,
@@ -3561,7 +3550,6 @@ if GetModConfigData("kindofworld") == 5 then
 				yelow_mushroom = 0.9,
 
 				stalagmite = 1.5,
-				pillar_cave = 0.2,
 				spiderhole = 0.4,
 
 				pillar_cave = 0.05,
@@ -3589,7 +3577,6 @@ if GetModConfigData("kindofworld") == 5 then
 				mushtree_yelow = 9.0,
 				yelow_mushroom = 0.9,
 
-				pillar_cave = 0.2,
 				spiderhole = 0.4,
 				stalagmite = 0.2,
 				pillar_cave = 0.5,
@@ -3618,7 +3605,6 @@ if GetModConfigData("kindofworld") == 5 then
 				yelow_mushroom = 0.9,
 
 				stalagmite = 0.5,
-				pillar_cave = 0.5,
 				spiderhole = 0.01,
 
 				pillar_cave = 0.05,
@@ -3647,7 +3633,6 @@ if GetModConfigData("kindofworld") == 5 then
 				yelow_mushroom = 0.9,
 
 				stalagmite = 3.5,
-				pillar_cave = 1.0,
 				spiderhole = 0.15,
 
 				pillar_cave = 0.05,
@@ -3676,7 +3661,6 @@ if GetModConfigData("kindofworld") == 5 then
 				yelow_mushroom = 0.9,
 
 				stalagmite = 1.5,
-				pillar_cave = 0.05,
 				spiderhole = 0.45,
 
 				pillar_cave = 0.05,
@@ -3743,7 +3727,6 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -3778,7 +3761,6 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -3801,7 +3783,6 @@ if GetModConfigData("kindofworld") == 5 then
 			distributepercent = .2,
 			distributeprefabs =
 			{
-				cavelight = 0.05,
 				cavelight_small = 0.05,
 
 				grass = 0.1,
@@ -3821,7 +3802,6 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -3841,7 +3821,6 @@ if GetModConfigData("kindofworld") == 5 then
 			distributepercent = .25,
 			distributeprefabs =
 			{
-				cavelight = 0.05,
 				cavelight_small = 0.05,
 
 				mushtree_small = 5.0,
@@ -3857,7 +3836,6 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -3901,7 +3879,6 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -3940,7 +3917,6 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -3973,7 +3949,6 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -5074,7 +5049,6 @@ if GetModConfigData("kindofworld") == 5 then
 				magmarock = 1,
 				magmarock_gold = 0.2,
 				iron_boulder = 0.6,
-				bubble_vent = 0.01,
 				rock_cave = 0.5,
 				quagmire_salmom_alive = 0.05,
 				dogfish_under = 0.1,
@@ -5106,7 +5080,6 @@ if GetModConfigData("kindofworld") == 5 then
 				magmarock_gold = 0.2,
 				iron_ore = 0.03,
 				iron_boulder = 0.8,
-				bubble_vent = 0.01,
 				rock_cave = 0.5,
 				quagmire_salmom_alive = 0.05,
 				dogfish_under = 0.1,
@@ -6293,10 +6266,10 @@ elseif GetModConfigData("kindofworld") == 20 then
 			"waterplant",
 		},
 		contents = {
-			countprefabs =
-			{
-				messagebottle1 = 20,
-			},
+			-- countprefabs =
+			-- {
+			-- 	messagebottle1 = 20,
+			-- },
 
 			distributepercent = 0.01,
 			distributeprefabs =
@@ -6908,7 +6881,6 @@ else
 			distributepercent = 0.12,
 			distributeprefabs =
 			{
-				rock_ice = 1,
 				rock2 = 0.2,
 				rock_moon = 0.2,
 				rock_ice = 0.2,
@@ -6937,7 +6909,6 @@ else
 			distributepercent = 0.12,
 			distributeprefabs =
 			{
-				rock_ice = 1,
 				rock1 = 0.4,
 				rock2 = 0.8,
 				rock_moon = 0.2,
@@ -6956,7 +6927,7 @@ else
 		colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
 		value = GROUND.WATER_MANGROVE,
 		tags = { "RoadPoison", "frost" },
-		tags = { "RoadPoison" },
+		-- tags = { "RoadPoison" },
 		internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
 		random_node_entrance_weight = 0,
 		contents = {
@@ -7030,7 +7001,6 @@ else
 			{
 				pond = 0.2,
 				snow_dune = 0.2,
-				evergreen = 1,
 				--			sapling_moon = 1,
 				ground_twigs = 1,
 				snowberrybush = 1,
@@ -7130,7 +7100,7 @@ else
 		tags = { "RoadPoison", "frost" },
 		--					type = GLOBAL.NODE_TYPE.SeparatedRoom,	
 		contents = {
-			distributepercent = .38,          --.5
+			distributepercent = .38, --.5
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -7163,9 +7133,6 @@ else
 		tags = { "RoadPoison", "frost" },
 		type = GLOBAL.NODE_TYPE.SeparatedRoom,
 		contents = {
-			countprefabs =
-			{
-			},
 			distributepercent = 0.17,
 			distributeprefabs =
 			{
@@ -7921,7 +7888,6 @@ else
 				bush_vine = 0.2,
 				snakeden = 0.2,
 				flower_evil = 0.4,
-				blue_mushroom = 0.01,
 				mangrovespawner = 0.5,
 				Grasswaterspawner = 0.4,
 				blue_mushroom = 0.01,
@@ -7981,7 +7947,6 @@ else
 				bush_vine = 0.3,
 				snakeden = 0.2,
 				reeds = 0.35,
-				poisonmist = 0.2,
 				tentacle = 0.40,
 				flupspawner = 0.30,
 				poisonmist = 0.2,
@@ -8145,7 +8110,7 @@ else
 			distributepercent = .2,
 			distributeprefabs =
 			{
-				sugarwood_tall = 0.5,          --nitre
+				sugarwood_tall = 0.5, --nitre
 				--					                    quagmire_pond_salt = .1,
 				flower = 0.112,
 				carrot_planted = 0.05,
@@ -8178,7 +8143,7 @@ else
 			distributepercent = .2,
 			distributeprefabs =
 			{
-				sugarwood_normal = 0.5,          --nitre
+				sugarwood_normal = 0.5, --nitre
 				--					                    quagmire_pond_salt = .1,
 				quagmire_spotspice_shrub = 0.1,
 			},
@@ -8206,7 +8171,6 @@ else
 				quagmire_spotspice_shrub = 0.1,
 				rock1 = 0.3,
 				rock2 = 0.3,
-				rocks = 0.3,
 				rock_moon = 0.1,
 				rock_flintless = 0.2,
 				rocks = 0.1,
@@ -8236,7 +8200,6 @@ else
 				quagmire_spotspice_shrub = 0.1,
 				rock1 = 0.3,
 				rock2 = 0.3,
-				rocks = 0.3,
 				rock_moon = 0.1,
 				rock_flintless = 0.2,
 				rocks = 0.1,
@@ -8264,7 +8227,6 @@ else
 				quagmire_spotspice_shrub = 0.1,
 				rock1 = 0.3,
 				rock2 = 0.3,
-				rocks = 0.3,
 				rock_moon = 0.1,
 				rock_flintless = 0.2,
 				rocks = 0.1,
@@ -8402,7 +8364,7 @@ else
 			distributepercent = .6,
 			distributeprefabs =
 			{
-				sugarwood_short = 0.5,          --nitre
+				sugarwood_short = 0.5, --nitre
 				cave_fern = 0.112,
 				turnip_planted = 0.05,
 				flint = 0.05,
@@ -8430,7 +8392,7 @@ else
 			distributepercent = .6,
 			distributeprefabs =
 			{
-				sugarwood_normal = 0.5,          --nitre
+				sugarwood_normal = 0.5, --nitre
 				cave_fern = 0.112,
 				turnip_planted = 0.05,
 				flint = 0.05,
@@ -8460,7 +8422,7 @@ else
 			distributepercent = .3,
 			distributeprefabs =
 			{
-				saplingnova = 0.1,          --nitre
+				saplingnova = 0.1, --nitre
 				--										twiggytree = 0.2,
 				--										cave_fern=0.112,
 				carrot_planted = 0.05,
@@ -8487,7 +8449,7 @@ else
 			distributepercent = .3,
 			distributeprefabs =
 			{
-				saplingnova = 0.1,          --nitre
+				saplingnova = 0.1, --nitre
 				--										twiggytree = 0.2,
 				--										cave_fern=0.112,
 				carrot_planted = 0.05,
@@ -8658,7 +8620,7 @@ else
 				["roc_nest"] = 1,
 				["roc_cave"] = 1,
 			},
-			distributepercent = .15,                         --.26
+			distributepercent = .15, --.26
 			distributeprefabs =
 			{
 				rock1 = 0.1,
@@ -8688,7 +8650,7 @@ else
 		value = GROUND.ROCKY,
 		tags = { "hamlet" },
 		contents = {
-			distributepercent = .15,                         --.26
+			distributepercent = .15, --.26
 			distributeprefabs =
 			{
 				rock1 = 0.1,
@@ -12329,7 +12291,7 @@ else
 		value = GROUND.FIELDS,
 		tags = { "ExitPiece", "hamlet" },
 		contents = {
-			distributepercent = 0.06,  --0.1
+			distributepercent = 0.06, --0.1
 			distributeprefabs =
 			{
 				--	grass = 0.05,
@@ -12352,7 +12314,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -12376,7 +12338,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -12401,7 +12363,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -12426,7 +12388,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -12451,7 +12413,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -12476,7 +12438,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -12501,7 +12463,7 @@ else
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
 			--					countstaticlayouts={["CaveEntrance"]=1},
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -12526,7 +12488,7 @@ else
 		value = GROUND.PAINTED,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .15,                         --.26
+			distributepercent = .15, --.26
 			distributeprefabs =
 			{
 				tubertree = 1,
@@ -12552,7 +12514,7 @@ else
 		value = GROUND.GASJUNGLE,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.45,          --.45
+			distributepercent = 0.45, --.45
 			distributeprefabs =
 			{
 				rainforesttree_rot = 4,
@@ -12578,7 +12540,7 @@ else
 		value = GROUND.GASJUNGLE,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.45,          --.45
+			distributepercent = 0.45, --.45
 			distributeprefabs =
 			{
 				rainforesttree_rot = 4,
@@ -12612,7 +12574,7 @@ else
 				["pig_ruins_head"] = 1,
 				["pig_ruins_artichoke"] = 1,
 			},
-			distributepercent = 0.5,          --.45
+			distributepercent = 0.5, --.45
 			distributeprefabs =
 			{
 				rainforesttree_rot = 2,
@@ -12644,7 +12606,7 @@ else
 		value = GROUND.RAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha", "StagehandGarden", "Terrarium_Spawner", "StatueHarp_HedgeSpawner", "CharlieStage_Spawner" },
 		contents = {
-			distributepercent = .38,          --.5
+			distributepercent = .38, --.5
 			distributeprefabs =
 			{
 				rainforesttree = 0.6, --1.4,
@@ -12675,7 +12637,7 @@ else
 		value = GROUND.RAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = .35,         -- .5
+			distributepercent = .35, -- .5
 			distributeprefabs =
 			{
 				rainforesttree = .5, --.7,
@@ -12703,7 +12665,7 @@ else
 		value = GROUND.RAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = .35,         -- .5
+			distributepercent = .35, -- .5
 			distributeprefabs =
 			{
 				rainforesttree = .5, --.7,
@@ -12761,7 +12723,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 3, --4,
@@ -12827,7 +12789,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.25,           --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -12884,7 +12846,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -12912,7 +12874,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -12939,7 +12901,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -12968,7 +12930,7 @@ else
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
 			countstaticlayouts = { ["nettlegrove"] = 1 },
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -12998,7 +12960,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -13028,7 +12990,7 @@ else
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
 			countstaticlayouts = { ["mandraketown"] = 1 },
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -13057,7 +13019,7 @@ else
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
 			countstaticlayouts = { ["pig_ruins_entrance_5"] = GetModConfigData("pigruins") },
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -13081,7 +13043,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -13112,7 +13074,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "Chester_Eyebone", "hamlet" },
 		contents = {
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -13132,7 +13094,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -13166,7 +13128,7 @@ else
 				["pig_ruins_nocanopy"] = 1,
 				["pig_ruins_nocanopy_2"] = 1,
 			},
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -13199,7 +13161,7 @@ else
 			countstaticlayouts = {
 				["pugalisk_fountain"] = 1,
 			},
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -13235,7 +13197,7 @@ else
 				["pig_ruins_nocanopy_3"] = 1,
 				["pig_ruins_nocanopy_4"] = 1,
 			},
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -13269,7 +13231,7 @@ else
 				["pig_ruins_nocanopy_4"] = 1,
 				["pig_ruins_nocanopy"] = 1,
 			},
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -13299,7 +13261,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .15,          -- .15, -- .3
+			distributepercent = .15, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -13326,7 +13288,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .25,          -- .15, -- .3
+			distributepercent = .25, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -13350,7 +13312,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .25,          -- .15, -- .3
+			distributepercent = .25, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -13374,7 +13336,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .25,          -- .15, -- .3
+			distributepercent = .25, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -13397,7 +13359,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison", "hamlet" },
 		contents = {
-			distributepercent = .25,          -- .15, -- .3
+			distributepercent = .25, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -13554,7 +13516,7 @@ else
 		value = GROUND.FIELDS,
 		tags = { "ExitPiece" },
 		contents = {
-			distributepercent = 0.06,  --0.1
+			distributepercent = 0.06, --0.1
 			distributeprefabs =
 			{
 				--	grass = 0.05,
@@ -13577,7 +13539,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -13601,7 +13563,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -13626,7 +13588,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -13651,7 +13613,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -13676,7 +13638,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -13701,7 +13663,7 @@ else
 		value = GROUND.DIRT,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -13726,7 +13688,7 @@ else
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
 			--					countstaticlayouts={["CaveEntrance"]=1},
-			distributepercent = .22,          -- .22, --.26
+			distributepercent = .22, -- .22, --.26
 			distributeprefabs =
 			{
 				rainforesttree = 0.1,
@@ -13751,7 +13713,7 @@ else
 		value = GROUND.PAINTED,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .15,                         --.26
+			distributepercent = .15, --.26
 			distributeprefabs =
 			{
 				tubertree = 1,
@@ -13777,7 +13739,7 @@ else
 		value = GROUND.GASJUNGLE,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			distributepercent = 0.45,          --.45
+			distributepercent = 0.45, --.45
 			distributeprefabs =
 			{
 				rainforesttree_rot = 4,
@@ -13803,7 +13765,7 @@ else
 		value = GROUND.GASJUNGLE,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			distributepercent = 0.45,          --.45
+			distributepercent = 0.45, --.45
 			distributeprefabs =
 			{
 				rainforesttree_rot = 4,
@@ -13838,7 +13800,7 @@ else
 				["pig_ruins_head"] = 1,
 				["pig_ruins_artichoke"] = 1,
 			},
-			distributepercent = 0.5,          --.45
+			distributepercent = 0.5, --.45
 			distributeprefabs =
 			{
 				rainforesttree_rot = 2,
@@ -13870,7 +13832,7 @@ else
 		value = GROUND.RAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha", "StagehandGarden", "Terrarium_Spawner", "StatueHarp_HedgeSpawner", "CharlieStage_Spawner" },
 		contents = {
-			distributepercent = .38,          --.5
+			distributepercent = .38, --.5
 			distributeprefabs =
 			{
 				rainforesttree = 0.6, --1.4,
@@ -13901,7 +13863,7 @@ else
 		value = GROUND.RAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			distributepercent = .35,         -- .5
+			distributepercent = .35, -- .5
 			distributeprefabs =
 			{
 				rainforesttree = .5, --.7,
@@ -13929,7 +13891,7 @@ else
 		value = GROUND.RAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			distributepercent = .35,         -- .5
+			distributepercent = .35, -- .5
 			distributeprefabs =
 			{
 				rainforesttree = .5, --.7,
@@ -13987,7 +13949,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 3, --4,
@@ -14015,10 +13977,12 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			countstaticlayouts = { ["nettlegrove"] = function()
-				if math.random(1, 10) > 7 then return 1 end
-				return 0
-			end },
+			countstaticlayouts = {
+				["nettlegrove"] = function()
+					if math.random(1, 10) > 7 then return 1 end
+					return 0
+				end
+			},
 			distributepercent = 0.25,
 			distributeprefabs =
 			{
@@ -14051,7 +14015,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			distributepercent = 0.25,           --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -14108,7 +14072,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -14136,7 +14100,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -14163,7 +14127,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -14192,7 +14156,7 @@ else
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
 			countstaticlayouts = { ["nettlegrove"] = 1 },
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -14222,7 +14186,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -14252,7 +14216,7 @@ else
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
 			countstaticlayouts = { ["mandraketown"] = 1 },
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -14281,7 +14245,7 @@ else
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
 			countstaticlayouts = { ["pig_ruins_entrance_5"] = GetModConfigData("pigruins") },
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -14305,7 +14269,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			distributepercent = 0.25,          --.3
+			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
 				rainforesttree = 4,
@@ -14336,7 +14300,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -14356,7 +14320,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -14390,7 +14354,7 @@ else
 				["pig_ruins_nocanopy"] = 1,
 				["pig_ruins_nocanopy_2"] = 1,
 			},
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -14423,7 +14387,7 @@ else
 			countstaticlayouts = {
 				["pugalisk_fountain"] = 1,
 			},
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -14459,7 +14423,7 @@ else
 				["pig_ruins_nocanopy_3"] = 1,
 				["pig_ruins_nocanopy_4"] = 1,
 			},
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -14493,7 +14457,7 @@ else
 				["pig_ruins_nocanopy_4"] = 1,
 				["pig_ruins_nocanopy"] = 1,
 			},
-			distributepercent = .25,          --.22, --.26
+			distributepercent = .25, --.22, --.26
 			distributeprefabs =
 			{
 				clawpalmtree = 0.5,
@@ -14523,7 +14487,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .15,          -- .15, -- .3
+			distributepercent = .15, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -14550,7 +14514,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .25,          -- .15, -- .3
+			distributepercent = .25, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -14574,7 +14538,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .25,          -- .15, -- .3
+			distributepercent = .25, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -14598,7 +14562,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .25,          -- .15, -- .3
+			distributepercent = .25, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -14621,7 +14585,7 @@ else
 		value = GROUND.PLAINS,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .25,          -- .15, -- .3
+			distributepercent = .25, -- .15, -- .3
 			distributeprefabs =
 			{
 				clawpalmtree = .25,
@@ -14936,10 +14900,10 @@ else
 			distributepercent = 0.4,
 			distributeprefabs =
 			{
-				fireflies = 0.02,                         --was 0.2,
-				tree_forest = 3,                          --was 4,
+				fireflies = 0.02, --was 0.2,
+				tree_forest = 3, --was 4,
 				rock1 = 0.05,
-				rock2 = 0.1,                              --was .05
+				rock2 = 0.1, --was .05
 				--grassnova = 1, --was .05
 				--saplingnova = .8,
 				berrybush2 = .1,
@@ -14950,7 +14914,7 @@ else
 				flower = 0.75,
 				grass_tall = 1,
 				flint = 0.1,
-				spider_ape_tree = .1,          --was .01
+				spider_ape_tree = .1, --was .01
 				marsh_bush = 1,
 				snake_hole = 0.1,
 				--wildborehouse = 0.03, --was 0.015,
@@ -14967,7 +14931,7 @@ else
 		tags = { "ExitPiece", "RoadPoison", "tropical" },
 		contents = {
 			countstaticlayouts = meadow_fairy_rings,
-			distributepercent = .4,          --.1, --lowered from .2
+			distributepercent = .4, --.1, --lowered from .2
 			distributeprefabs =
 			{
 				flint = 0.01,
@@ -14989,7 +14953,7 @@ else
 		tags = { "ExitPiece", "RoadPoison", "tropical" },
 		contents = {
 			countstaticlayouts = meadow_fairy_rings,
-			distributepercent = .4,          --was .1,
+			distributepercent = .4, --was .1,
 			distributeprefabs =
 			{
 				--    ox = .5, --was 1,
@@ -15007,11 +14971,11 @@ else
 		tags = { "ExitPiece", "RoadPoison", "tropical" },
 		contents = {
 			countstaticlayouts = meadow_fairy_rings,
-			distributepercent = .5,          --.1, --lowered from .2
+			distributepercent = .5, --.1, --lowered from .2
 			distributeprefabs =
 			{
 				flower = .5,
-				beehive = .05,          --was .4
+				beehive = .05, --was .4
 				grassnova = .4,
 				rocks = .05,
 				mandrake_planted = 0.005,
@@ -15025,16 +14989,16 @@ else
 		tags = { "ExitPiece", "RoadPoison", "tropical" },
 		contents = {
 			countstaticlayouts = meadow_fairy_rings,
-			distributepercent = .4,          --.1, --lowered from .2
+			distributepercent = .4, --.1, --lowered from .2
 			distributeprefabs =
 			{
-				flint = 0.05,                        --was .01
-				grassnova = 3,                       --was .4,
+				flint = 0.05,   --was .01
+				grassnova = 3,  --was .4,
 				--ox = 3,
-				sweet_potato_planted = 0.1,          --was .05,
+				sweet_potato_planted = 0.1, --was .05,
 				rock_flintless = 0.01,
 				flower = 0.15,
-				beehive = 0.2,          -- lowered from 1
+				beehive = 0.2, -- lowered from 1
 				wasphive = 0.05,
 			},
 		}
@@ -15046,7 +15010,7 @@ else
 		tags = { "ExitPiece", "RoadPoison", "tropical" },
 		contents = {
 			countstaticlayouts = meadow_fairy_rings,
-			distributepercent = .35,          --was .1
+			distributepercent = .35, --was .1
 			distributeprefabs =
 			{
 				sweet_potato_planted = 1,
@@ -15086,10 +15050,10 @@ else
 				grassnova = 3,
 				--saplingnova = 1,
 				flower = .5,
-				beehive = .1,          --was 1,
+				beehive = .1, --was 1,
 				wasphive = 0.003,
 				sweet_potato_planted = 0.3,
-				wasphive = 0.01,          --was 0.001
+				wasphive = 0.01, --was 0.001
 			},
 		}
 	})
@@ -15099,7 +15063,7 @@ else
 		value = GROUND.MEADOW,
 		tags = { "ExitPiece", "RoadPoison", "tropical" },
 		contents = {
-			distributepercent = .4,          --was .2
+			distributepercent = .4, --was .2
 			distributeprefabs =
 			{
 				spiderden = .1,
@@ -15117,14 +15081,14 @@ else
 		tags = { "ExitPiece", "RoadPoison", "tropical" },
 		contents = {
 
-			distributepercent = .4,          --was .1,
+			distributepercent = .4, --was .1,
 			distributeprefabs =
 			{
 				rock_flintless = 1,
 				rocks = 1,
 				rock1 = 1,
 				rock2 = 1,
-				grassnova = 4,          --was 2
+				grassnova = 4, --was 2
 				flower = 1,
 			},
 		}
@@ -15162,12 +15126,12 @@ else
 			distributepercent = .3,
 			distributeprefabs =
 			{
-				magmarock = 2,          --nitre
+				magmarock = 2, --nitre
 				magmarock_gold = 1,
 				rock1 = .25,
-				rock2 = .25,          --gold
+				rock2 = .25, --gold
 				rocks = .25,
-				flint = 0.5,          -- lowered from 3
+				flint = 0.5, -- lowered from 3
 				spiderden = .1,
 				-- saplingnova = 1.0,
 			},
@@ -15184,11 +15148,11 @@ else
 			{
 				magmarock_gold = 2,
 				magmarock = 2,
-				rock1 = .2,          --nitre
+				rock1 = .2, --nitre
 				--rock2 = 2, --gold
 				rock_flintless = 1,
-				rocks = .25,          --was 0.5
-				flint = 0.1,          -- lowered from 3
+				rocks = .25, --was 0.5
+				flint = 0.1, -- lowered from 3
 				-- rock_ice = 1,
 				--tallbirdnest= --2, --.1,
 				spiderden = .1,
@@ -15214,10 +15178,10 @@ else
 				magmarock = 1,
 				magmarock_gold = 1,
 				--rock1 = 2, --nitre
-				rock2 = 1,          --gold
+				rock2 = 1, --gold
 				rock_flintless = 2,
 				rocks = .25,
-				flint = 1,          -- lowered from 3
+				flint = 1, -- lowered from 3
 				-- rock_ice = 1,
 				--tallbirdnest= --2, --.1,
 				spiderden = .1,
@@ -15354,11 +15318,11 @@ else
 			{
 				magmarock = 1,
 				magmarock_gold = 1,
-				rock1 = 0.1,          --nitre
-				rock2 = 0.1,          --gold
+				rock1 = 0.1, --nitre
+				rock2 = 0.1, --gold
 				rock_flintless = 0.4,
 				rocks = 0.4,
-				flint = 0.2,         -- lowered from 3
+				flint = 0.2, -- lowered from 3
 				--  tallbirdnest= .2, --.1,
 				--					                    dragoonden= 0.7,
 				saplingnova = .3,
@@ -15514,15 +15478,15 @@ else
 			{
 				magmarock = 2,
 				magmarock_gold = 1,
-				rock1 = 2,          --nitre
-				rock2 = 2,          --gold
+				rock1 = 2, --nitre
+				rock2 = 2, --gold
 				rock_flintless = 2,
 				rocks = 1,
 				rock_moon = 0.1,
-				flint = 1,                 -- lowered from 3
+				flint = 1, -- lowered from 3
 				-- rock_ice = 1,
-				tallbirdnest = .2,         --.1,
-				spiderden = 1.5,           --.5,
+				tallbirdnest = .2, --.1,
+				spiderden = 1.5, --.5,
 				saplingnova = .5,
 
 			},
@@ -15922,12 +15886,12 @@ else
 				jungletree = .05,
 				marsh_bush = .05,
 				tidalpool = 0.2,
-				reeds = 2,          --was 4
+				reeds = 2, --was 4
 				spiderden = .01,
 				green_mushroom = 1.02,
-				mermhouse = 0.1,          --was 0.04
+				mermhouse = 0.1, --was 0.04
 				mermfishhouse = 0.05,
-				poisonhole = 1,           --was 2
+				poisonhole = 1, --was 2
 				--seaweed_planted = 0.5,
 				fishinhole = .1,
 				flupspawner_dense = 1,
@@ -16009,13 +15973,13 @@ else
 				rock_limpet = .05,
 				crabhole = .2,
 				palmtree = .3,
-				rocks = .03,                             --trying
-				rock1 = .1,                              --trying
+				rocks = .03, --trying
+				rock1 = .1, --trying
 				--rock2 = .2,
-				beehive = .01,                           --was .05,
+				beehive = .01, --was .05,
 				--flower = .04, --trying
-				grassnova = .2,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .2, --trying
+				saplingnova = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -16033,24 +15997,24 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
-			distributepercent = .3,          --upped from .05
+			distributepercent = .3, --upped from .05
 			distributeprefabs =
 			{
 				seashell_beached = .25,
 				rock_limpet = .05,
-				crabhole = .1,                              --was 0.2
+				crabhole = .1, --was 0.2
 				palmtree = .3,
-				rocks = .03,                                --trying
+				rocks = .03, --trying
 				rock1 = .05,
-				rock_flintless = .1,                        --trying
+				rock_flintless = .1, --trying
 				--beehive = .05, --trying
 				--flower = .04, --trying
-				grassnova = .5,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .5, --trying
+				saplingnova = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
-				sandhill = .1,                        --was .6,
+				sandhill = .1, --was .6,
 				crate = .025,
 			},
 
@@ -16068,15 +16032,15 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
-			distributepercent = .3,          --lowered from .3
+			distributepercent = .3, --lowered from .3
 			distributeprefabs =
 			{
 				seashell_beached = 0.125,
-				grassnova = .3,                           --down from 3
-				saplingnova = .1,                         --lowered from 15
+				grassnova = .3, --down from 3
+				saplingnova = .1, --lowered from 15
 				--flower = 0.05,
 				rock_limpet = .02,
-				crabhole = .015,                         --was .03
+				crabhole = .015, --was .03
 				palmtree = .1,
 				rocks = .003,
 				beehive = .003,
@@ -16104,15 +16068,15 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
-			distributepercent = .3,          --lowered from .3
+			distributepercent = .3, --lowered from .3
 			distributeprefabs =
 			{
 				seashell_beached = 0.125,
-				grassnova = .3,                           --down from 3
-				saplingnova = .1,                         --lowered from 15
+				grassnova = .3, --down from 3
+				saplingnova = .1, --lowered from 15
 				--flower = 0.05,
 				rock_limpet = .02,
-				crabhole = .015,                         --was .03
+				crabhole = .015, --was .03
 				palmtree = .1,
 				rocks = .003,
 				beehive = .003,
@@ -16141,7 +16105,7 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
 			countstaticlayouts = { ["x_spot"] = 1 },
-			distributepercent = .3,          --lowered from .3
+			distributepercent = .3, --lowered from .3
 			distributeprefabs =
 			{
 				seashell_beached = 0.125,
@@ -16181,19 +16145,19 @@ else
 			distributeprefabs =
 			{
 				seashell_beached = 0.025,
-				grassnova = .1,                            --was .3
-				saplingnova = .05,                         --was .15
+				grassnova = .1, --was .3
+				saplingnova = .05, --was .15
 				--flower = 0.05,
 				rock_limpet = .02,
 				--crabhole = .015, --was .03
 				palmtree = .1,
 				rocks = .003,
 				--beehive = .003,
-				flint = .01,                         --was .02,
+				flint = .01, --was .02,
 				sandhill = .05,
 				--rock2 = .01,
 				goldnugget = .007,
-				dubloon = .01,                         -- this should be relatively high on this island
+				dubloon = .01, -- this should be relatively high on this island
 				skeleton = .025,
 				wildborehouse = .005,
 			},
@@ -16236,13 +16200,13 @@ else
 				rock_limpet = .05,
 				crabhole = .2,
 				palmtree = .3,
-				rocks = .03,                             --trying
-				rock1 = .1,                              --trying
+				rocks = .03, --trying
+				rock1 = .1, --trying
 				--rock2 = .2,
-				beehive = .01,                           --was .05,
+				beehive = .01, --was .05,
 				--flower = .04, --trying
-				grassnova = .2,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .2, --trying
+				saplingnova = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -16265,11 +16229,11 @@ else
 			distributeprefabs =
 			{
 				flower_evil = 0.2,
-				jungletree = 1,        --one palm tree
-				fireflies = 1,         -- results in an empty beach because these only show at night
+				jungletree = 1, --one palm tree
+				fireflies = 1, -- results in an empty beach because these only show at night
 				flower = .4,
-				bambootree = 0.5,      --one palm tree
-				bush_vine = 0.2,       --one palm tree
+				bambootree = 0.5, --one palm tree
+				bush_vine = 0.2, --one palm tree
 				--sandhill = .5,
 			},
 			countprefabs = {
@@ -16293,7 +16257,7 @@ else
 			distributeprefabs =
 			{
 				flower_evil = 0.5,
-				fireflies = 1,         -- results in an empty beach because these only show at night
+				fireflies = 1, -- results in an empty beach because these only show at night
 				flower = .3,
 				sandhill = .5,
 				palmtree = 1, --one palm tree
@@ -16318,7 +16282,7 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
-			distributepercent = .1,          -- just copied this whole thing from EvilFlowerPatch in terrain_grass
+			distributepercent = .1, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
 			distributeprefabs =
 			{
 				flower_evil = 0.05,
@@ -16359,7 +16323,7 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
-			distributepercent = .2,          -- just copied this whole thing from EvilFlowerPatch in terrain_grass
+			distributepercent = .2, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
 			distributeprefabs =
 			{
 				saplingnova = 0.25,
@@ -16378,7 +16342,7 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
-			distributepercent = .2,          -- just copied this whole thing from EvilFlowerPatch in terrain_grass
+			distributepercent = .2, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
 			distributeprefabs =
 			{
 				saplingnova = 0.25,
@@ -16398,24 +16362,24 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
-			distributepercent = .3,          --Up from .025
+			distributepercent = .3, --Up from .025
 			distributeprefabs =
 			{
 				seashell_beached = 0.025,
-				rock_limpet = .05,                       --reducing from .2 (everything is so low here)
+				rock_limpet = .05, --reducing from .2 (everything is so low here)
 				crabhole = .2,
 				palmtree = .3,
-				rocks = .03,                         --trying
-				rock1 = .1,                          --trying
-				beehive = .1,                        --was .5
+				rocks = .03, --trying
+				rock1 = .1, --trying
+				beehive = .1, --was .5
 				wasphive = .05,
 				--flower = .04, --trying
-				grassnova = .4,                          --trying
-				saplingnova = .4,                        --trying
+				grassnova = .4, --trying
+				saplingnova = .4, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
-				sandhill = .4,                        --was .04
+				sandhill = .4, --was .04
 			},
 
 		}
@@ -16473,7 +16437,7 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 
 		contents = {
-			distributepercent = .2,          --was .1
+			distributepercent = .2, --was .1
 			distributeprefabs =
 			{
 				grassnova = 1.5,
@@ -16579,17 +16543,17 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
-			distributepercent = .1,          --Lowered a bit
+			distributepercent = .1, --Lowered a bit
 			distributeprefabs =
 			{
 				seashell_beached = 0.0025,
-				rock_limpet = .005,                       --reducing from .03 (everything is so low here)
+				rock_limpet = .005, --reducing from .03 (everything is so low here)
 				crabhole = .002,
 				palmtree = .3,
-				rocks = .003,                            --trying
-				beehive = .005,                          --trying
-				grassnova = .3,                          --trying
-				saplingnova = .2,                        --trying
+				rocks = .003, --trying
+				beehive = .005, --trying
+				grassnova = .3, --trying
+				saplingnova = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -16603,11 +16567,11 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
-			distributepercent = .5,          --was .1
+			distributepercent = .5, --was .1
 			distributeprefabs =
 			{
-				beehive = .1,                        --was .5
-				flower = 2,                          --was 1
+				beehive = .1, --was .5
+				flower = 2, --was 1
 				palmtree = .3,
 				rock1 = .1,
 				grassnova = .2,
@@ -16625,17 +16589,17 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
-			distributepercent = .1,          --Lowered a bit
+			distributepercent = .1, --Lowered a bit
 			distributeprefabs =
 			{
 				seashell_beached = 0.0025,
 				crabhole = .002,
 				palmtree = .3,
-				rocks = .003,                            --trying
-				beehive = .0025,                         --trying
+				rocks = .003, --trying
+				beehive = .0025, --trying
 				--flower = 0.04, --trying
-				grassnova = .3,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .3, --trying
+				saplingnova = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -16650,17 +16614,17 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
-			distributepercent = .1,          --Lowered a bit
+			distributepercent = .1, --Lowered a bit
 			distributeprefabs =
 			{
 				seashell_beached = 0.0025,
 				rock_limpet = 0.01,
 				palmtree = .3,
-				rocks = .003,                            --trying
-				beehive = .005,                          --trying
+				rocks = .003, --trying
+				beehive = .005, --trying
 				--flower = 0.04, --trying
-				grassnova = .3,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .3, --trying
+				saplingnova = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -16675,17 +16639,17 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
 			countstaticlayouts = { ["slotmachine"] = 1 }, --adds 1 per room
-			distributepercent = .1,                   --Lowered a bit
+			distributepercent = .1,              --Lowered a bit
 			distributeprefabs =
 			{
 				seashell_beached = 0.025,
 				rock_limpet = 0.01,
 				palmtree = .3,
-				rocks = .003,                            --trying
-				beehive = .005,                          --trying
+				rocks = .003, --trying
+				beehive = .005, --trying
 				--flower = 0.04, --trying
-				grassnova = .3,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .3, --trying
+				saplingnova = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -16712,16 +16676,16 @@ else
 				crabhole = .2,
 				palmtree = .3,
 				rocks = .03,
-				rock1 = .025,                        --was .1,
+				rock1 = .025, --was .1,
 				--rock2 = .05, --was .2,
 				beehive = .02,
 				--flower = .04,
-				grassnova = .3,                        --was .2,
+				grassnova = .3, --was .2,
 				saplingnova = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
-				sandhill = .1,                        --was .6,
+				sandhill = .1, --was .6,
 				wildborehouse = .05,
 			},
 
@@ -16746,16 +16710,16 @@ else
 				crabhole = .2,
 				palmtree = .3,
 				rocks = .03,
-				rock1 = .025,                        --was .1,
+				rock1 = .025, --was .1,
 				--rock2 = .05, --was .2,
 				beehive = .02,
 				--flower = .04,
-				grassnova = .3,                        --was .2,
+				grassnova = .3, --was .2,
 				saplingnova = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
-				sandhill = .1,                        --was .6,
+				sandhill = .1, --was .6,
 				wildborehouse = .05,
 			},
 
@@ -16780,16 +16744,16 @@ else
 				crabhole = .2,
 				palmtree = .3,
 				rocks = .03,
-				rock1 = .025,                        --was .1,
+				rock1 = .025, --was .1,
 				--rock2 = .05, --was .2,
 				beehive = .02,
 				--flower = .04,
-				grassnova = .3,                        --was .2,
+				grassnova = .3, --was .2,
 				saplingnova = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
-				sandhill = .1,                        --was .6,
+				sandhill = .1, --was .6,
 				wildborehouse = .05,
 			},
 
@@ -16853,8 +16817,8 @@ else
 				flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .8,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
@@ -16950,9 +16914,9 @@ else
 			distributeprefabs =
 			{
 				fireflies = 0.2,
-				jungletree = 2,               --was 3
-				berrybush2 = .05,             --was .01,
-				berrybush2_snake = .05,       --was .01,
+				jungletree = 2, --was 3
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
@@ -16986,19 +16950,19 @@ else
 			{
 				fireflies = 1,
 				--palmtree = 0.5,
-				jungletree = 1,                  --was 3
+				jungletree = 1, --was 3
 				rock1 = 0.05,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = 1,
 				bambootree = 0.5,
-				spiderden = .05,          --was .001
+				spiderden = .05, --was .001
 				bush_vine = 0.6,
 				snake_hole = 0.1,
-				pond = 0.1,          --was 6
+				pond = 0.1, --was 6
 
 
 			},
@@ -17024,14 +16988,14 @@ else
 				flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .8,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = 0.75,
 				bambootree = 1,
-				spiderden = .01,          --was .001
+				spiderden = .01, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 			},
@@ -17047,15 +17011,15 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .4,          -- lowered from 1.0
+			distributepercent = .4, -- lowered from 1.0
 			distributeprefabs =
 			{
 				fireflies = 0.2,
-				jungletree = 1,          --lowered from 6
+				jungletree = 1, --lowered from 6
 				rock2 = 0.05,
 				flint = 0.05,
-				berrybush2 = .05,          --was .01,
-				berrybush2_snake = .05,    --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
@@ -17085,7 +17049,7 @@ else
 				end
 			},
 
-			distributepercent = .2,          --was .1
+			distributepercent = .2, --was .1
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -17094,13 +17058,13 @@ else
 				rock1 = 0.03,
 				primeapebarrel = 0.1,
 				flint = 0.03,
-				grassnova = .03,          --was .05
+				grassnova = .03, --was .05
 				red_mushroom = .07,
 				green_mushroom = .07,
 				blue_mushroom = .07,
 				flower = 0.75,
 				bambootree = .5,
-				wasphive = 0.125,          --was 0.5
+				wasphive = 0.125, --was 0.5
 				spiderden = 0.1,
 			},
 		}
@@ -17116,29 +17080,29 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.3,          --was 0.2
+			distributepercent = 0.3, --was 0.2
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.5, --lowered this from 6
 				jungletree = 3,
-				rock1 = 0.05,          --was .01
-				rock2 = 0.1,           --was .05
-				flint = 0.1,           --was 0.03,
+				rock1 = 0.05, --was .01
+				rock2 = 0.1, --was .05
+				flint = 0.1, --was 0.03,
 				--grassnova = .01, --was .05
 				--saplingnova = .8,
-				berrybush2 = .09,          -- was .0003
+				berrybush2 = .09, -- was .0003
 				berrybush2_snake = 0.01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = 1,                   --was 0.75,
+				flower = 1, --was 0.75,
 				bambootree = 1,
-				bush_vine = .2,               -- was 1
-				snake_hole = 0.01,            -- was 0.1
-				primeapebarrel = .1,          --was .05,
+				bush_vine = .2, -- was 1
+				snake_hole = 0.01, -- was 0.1
+				primeapebarrel = .1, --was .05,
 				cave_banana_tree = 0.005,
-				spiderden = .05,              --was .01,
+				spiderden = .05, --was .01,
 				--wildborehouse = 0.25,										
 			},
 		}
@@ -17150,26 +17114,26 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
 			countstaticlayouts = { ["skull_isle2"] = 1 }, --adds 1 per room
-			distributepercent = .1,                   --Lowered a bit
+			distributepercent = .1,              --Lowered a bit
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				jungletree = 3,
-				rock1 = 0.05,              --was .01
-				rock2 = 0.1,               --was .05
-				flint = 0.1,               --was 0.03,
-				berrybush2 = .09,          -- was .0003
+				rock1 = 0.05, --was .01
+				rock2 = 0.1, --was .05
+				flint = 0.1, --was 0.03,
+				berrybush2 = .09, -- was .0003
 				berrybush2_snake = 0.01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = 1,                   --was 0.75,
+				flower = 1, --was 0.75,
 				bambootree = 1,
-				bush_vine = .2,               -- was 1
-				snake_hole = 0.01,            -- was 0.1
-				primeapebarrel = .1,          --was .05,
+				bush_vine = .2, -- was 1
+				snake_hole = 0.01, -- was 0.1
+				primeapebarrel = .1, --was .05,
 				cave_banana_tree = 0.005,
-				spiderden = .05,              --was .01,									
+				spiderden = .05, --was .01,									
 			},
 
 		}
@@ -17180,22 +17144,22 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
 			countstaticlayouts = { ["doydoyf"] = 1 }, --adds 1 per room
-			distributepercent = .1,               --Lowered a bit
+			distributepercent = .1,          --Lowered a bit
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				jungletree = 3,
-				rock1 = 0.05,              --was .01
-				rock2 = 0.1,               --was .05
-				flint = 0.1,               --was 0.03,
-				berrybush2 = .09,          -- was .0003
+				rock1 = 0.05, --was .01
+				rock2 = 0.1, --was .05
+				flint = 0.1, --was 0.03,
+				berrybush2 = .09, -- was .0003
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = 1,                            --was 0.75,
+				flower = 1, --was 0.75,
 				bambootree = 1,
-				bush_vine = .2,                        -- was 1
-				spiderden = 0,                         --was .01,										
+				bush_vine = .2, -- was 1
+				spiderden = 0, --was .01,										
 			},
 
 		}
@@ -17214,22 +17178,22 @@ else
 			{
 				fireflies = 0.2,
 				--palmtree = .05,
-				jungletree = 2,          --.6,
+				jungletree = 2, --.6,
 				rock1 = 0.05,
 				rock2 = 0.05,
 				rocks = .3,
-				flint = .1,                --dropped
+				flint = .1, --dropped
 				--saplingnova = .8,
-				berrybush2 = .05,          --was .03
+				berrybush2 = .05, --was .03
 				berrybush2_snake = 0.01,
 				--grassnova = 1,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = .5,             --was 0.75
+				flower = .5, --was 0.75
 				bambootree = 1,
-				bush_vine = .2,          -- was 1
-				snake_hole = 0.01,       -- was 0.1
+				bush_vine = .2, -- was 1
+				snake_hole = 0.01, -- was 0.1
 				spiderden = 0.05,
 				--wildborehouse = 0.25,
 			},
@@ -17245,7 +17209,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.3,          -- upped from 0.15
+			distributepercent = 0.3, -- upped from 0.15
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -17253,15 +17217,15 @@ else
 				jungletree = .6,
 				rock_flintless = 0.05,
 				-- rock2 = 0.05, --gold rock
-				flint = .1,          --dropped
+				flint = .1, --dropped
 				--grassnova = .6, --raised from 05
 				--saplingnova = .8,
-				berrybush2 = .05,          --was .03
+				berrybush2 = .05, --was .03
 				berrybush2_snake = 0.01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = 2,          --was 0.75,
+				flower = 2, --was 0.75,
 				bambootree = 1,
 				bush_vine = 1,
 				snake_hole = 0.1,
@@ -17283,11 +17247,11 @@ else
 			distributepercent = 0.4,
 			distributeprefabs =
 			{
-				fireflies = 0.02,                         --was 0.2,
+				fireflies = 0.02, --was 0.2,
 				--palmtree = 0.05,
-				jungletree = 3,                           --was 4,
+				jungletree = 3, --was 4,
 				rock1 = 0.05,
-				rock2 = 0.1,                              --was .05
+				rock2 = 0.1, --was .05
 				--grassnova = 1, --was .05
 				--saplingnova = .8,
 				berrybush2 = .1,
@@ -17298,7 +17262,7 @@ else
 				flower = 0.75,
 				bambootree = 1,
 				flint = 0.1,
-				spiderden = .1,          --was .01
+				spiderden = .1, --was .01
 				bush_vine = 1,
 				snake_hole = 0.1,
 				--wildborehouse = 0.03, --was 0.015,
@@ -17317,7 +17281,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.3,          --lowered from 0.4
+			distributepercent = 0.3, --lowered from 0.4
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -17327,8 +17291,8 @@ else
 				--rock2 = 0.05, --gold rock
 				--grassnova = 1, --was .05
 				--saplingnova = .8,
-				berrybush2 = .1,                  --was .05,
-				berrybush2_snake = 0.03,          --was 0.01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = 0.03, --was 0.01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
@@ -17349,24 +17313,24 @@ else
 		value = GROUND.JUNGLE,
 		tags = { "RoadPoison", "tropical" },
 		contents = {
-			distributepercent = 0.5,          ---was 0.75
+			distributepercent = 0.5, ---was 0.75
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 2,          --lowered from 6
+				jungletree = 2, --lowered from 6
 				rock1 = 0.05,
 				rock2 = 0.05,
 				--grassnova = .02, --was .05
 				--saplingnova = .8,
-				berrybush2 = .06,                --was .03,
-				berrybush2_snake = .02,          --was .01,
+				berrybush2 = .06, --was .03,
+				berrybush2_snake = .02, --was .01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
 				flower = 0.75,
 				bambootree = 1,
-				spiderden = .05,          --was .01,
+				spiderden = .05, --was .01,
 				bush_vine = 2,
 				snake_hole = 0.1,
 				--wildborehouse = 0.03, --was 0.015,
@@ -17389,19 +17353,19 @@ else
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 4,          --was 6
+				jungletree = 4, --was 6
 				rock1 = 0.05,
 				rock2 = 0.05,
 				--grassnova = .02, --was .05
 				--saplingnova = .8,
-				berrybush2 = .6,                 --was .03
-				berrybush2_snake = .03,          --was .01,
+				berrybush2 = .6, --was .03
+				berrybush2_snake = .03, --was .01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
 				flower = 0.75,
 				bambootree = 1,
-				spiderden = .05,         --was .01
+				spiderden = .05, --was .01
 				bush_vine = 1,
 				snake_hole = 0.1,
 				--wildborehouse = 0.15, --was 0.015,
@@ -17418,21 +17382,21 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.6,          --was 0.75
+			distributepercent = 0.6, --was 0.75
 			distributeprefabs =
 			{
 				fireflies = 0.2,
-				jungletree = 2,                  --was 6
+				jungletree = 2, --was 6
 				rock_flintless = 0.05,
-				berrybush2 = .06,                --was .03,
-				berrybush2_snake = .02,          --was .01,
+				berrybush2 = .06, --was .03,
+				berrybush2_snake = .02, --was .01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
 				flower = 0.75,
-				bambootree = 1,           -- was 1
-				spiderden = .05,          --was .01
-				bush_vine = 0.8,          -- was 1
+				bambootree = 1, -- was 1
+				spiderden = .05, --was .01
+				bush_vine = 0.8, -- was 1
 				snake_hole = 0.1,
 			},
 			countprefabs =
@@ -17459,8 +17423,8 @@ else
 				flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .8,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
@@ -17483,24 +17447,24 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 2,          --was 3
+				jungletree = 2, --was 3
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = .025,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = 1,
 				bambootree = 0.5,
-				spiderden = .05,          --was .001
+				spiderden = .05, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 				--pond = 1, --frog pond
@@ -17521,7 +17485,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.5,          --lowered from .5
+			distributepercent = 0.5, --lowered from .5
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -17531,8 +17495,8 @@ else
 				rock2 = 0.05,
 				--grassnova = 1, --was .05
 				--saplingnova = .8,
-				berrybush2 = .1,                 --was .05,
-				berrybush2_snake = .05,          --was 0.01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = .05, --was 0.01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
@@ -17543,7 +17507,7 @@ else
 				bush_vine = 1,
 				snake_hole = 0.1,
 				--wildborehouse = 0.015,
-				primeapebarrel = .2,          --was .05,
+				primeapebarrel = .2, --was .05,
 				cave_banana_tree = 0.01,
 			},
 		}
@@ -17587,7 +17551,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .4,          --was .5,
+			distributepercent = .4, --was .5,
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -17597,14 +17561,14 @@ else
 				-- flint=0.05,
 				--grassnova = .025,
 				--saplingnova = .04,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = 0.1,
-				bambootree = 1,           --was .5,
-				spiderden = .05,          --was .001,
+				bambootree = 1, --was .5,
+				spiderden = .05, --was .001,
 				bush_vine = .04,
 				snake_hole = 0.1,
 
@@ -17623,14 +17587,14 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .3,          --was .5
+			distributepercent = .3, --was .5
 			distributeprefabs =
 			{
 				fireflies = 0.2,
-				jungletree = 2,                --was .4,
-				rock1 = 0.125,                 --was 0.5,
-				rock2 = 0.125,                 --was 0.5,
-				primeapebarrel = .04,          --was .8,
+				jungletree = 2, --was .4,
+				rock1 = 0.125, --was 0.5,
+				rock2 = 0.125, --was 0.5,
+				primeapebarrel = .04, --was .8,
 				skeleton = .1,
 				flint = 0.5,
 				--grassnova = .75,
@@ -17668,13 +17632,13 @@ else
 			{
 				fireflies = 0.5,
 				--palmtree = 0.05,
-				jungletree = 3,          --was 3
+				jungletree = 3, --was 3
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = .025,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .06,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .06, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
@@ -17683,7 +17647,7 @@ else
 				spiderden = 0.5,
 				bush_vine = 0.2,
 				snake_hole = 0.1,
-				beehive = 1.5,          --was 3,
+				beehive = 1.5, --was 3,
 				wasphive = 2,
 
 			},
@@ -17699,7 +17663,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.5,          --was 0.75
+			distributepercent = 0.5, --was 0.75
 			distributeprefabs =
 			{
 				fireflies = 1,
@@ -17709,18 +17673,18 @@ else
 				--rock2 = 0.05, --gold rock
 				--grassnova = .05,
 				--saplingnova = .8,
-				berrybush2 = .75,                --was 0.3
-				berrybush2_snake = .04,          --was .01,
+				berrybush2 = .75, --was 0.3
+				berrybush2_snake = .04, --was .01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
 				flower = 1.5,
-				bambootree = 1,           --was 1
-				spiderden = .05,          --was .5,
-				bush_vine = 0.8,          --was 1
+				bambootree = 1, --was 1
+				spiderden = .05, --was .5,
+				bush_vine = 0.8, --was 1
 				snake_hole = 0.1,
 				--wildborehouse = 0.03, --was 0.015,
-				beehive = .01,          --was 2,
+				beehive = .01, --was 2,
 			},
 		}
 	})
@@ -17734,7 +17698,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -17744,14 +17708,14 @@ else
 				--flint=0.05,
 				--grassnova = 1, --was .4,
 				--saplingnova = .3,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .07,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .07, --was .01,
 				red_mushroom = 3,
 				green_mushroom = 3,
 				blue_mushroom = 2,
 				flower = 0.7,
 				bambootree = 0.5,
-				spiderden = .05,         --was .001
+				spiderden = .05, --was .001
 				bush_vine = .5,
 				snake_hole = 0.1,
 
@@ -17774,21 +17738,21 @@ else
 				fireflies = 0.2,
 				--palmtree = 0.05,
 				jungletree = 6,
-				rock1 = 1,           --was 3
-				rock2 = .5,          --was 2
+				rock1 = 1, --was 3
+				rock2 = .5, --was 2
 				rock_flintless = 2,
 				rocks = 3,
 				--flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .07,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .07, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = .9,
 				bambootree = 0.5,
-				spiderden = .05,          --was .001
+				spiderden = .05, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 			},
@@ -17804,24 +17768,24 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 2,          --was 3
+				jungletree = 2, --was 3
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = 5,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = .2,
 				bambootree = 0.5,
-				spiderden = .05,          --was .001
+				spiderden = .05, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 			},
@@ -17837,18 +17801,18 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 1.5,          --was 3
+				jungletree = 1.5, --was 3
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
 				saplingnova = 6,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
@@ -17870,28 +17834,28 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 2,          --was 3
+				jungletree = 2, --was 3
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = .9,
 				bambootree = 0.5,
-				spiderden = .05,          --was .001
+				spiderden = .05, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 				flower_evil = 10,
-				wasphive = 0.25,          --just added
+				wasphive = 0.25, --just added
 			},
 
 		}
@@ -17916,8 +17880,8 @@ else
 				rocks = 0.4,
 				--grassnova = 0.5, --was .05
 				--saplingnova  = 8,
-				berrybush2 = .1,                 --was .05,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
 				green_mushroom = 0.03,
 				blue_mushroom = 0.02,
@@ -17949,7 +17913,7 @@ else
 			distributeprefabs =
 			{
 				--palmtree = 0.05,
-				jungletree = 5,          --was .5,
+				jungletree = 5, --was .5,
 				rock1 = 0.5,
 				rock2 = 0.5,
 				rocks = 0.4,
@@ -17959,7 +17923,7 @@ else
 				green_mushroom = 0.03,
 				blue_mushroom = 0.02,
 				flower = 0.2,
-				bambootree = 3,          --was 0.5,
+				bambootree = 3, --was 0.5,
 				flint = 0.001,
 				spiderden = 0.5,
 				bush_vine = 0.9,
@@ -18001,7 +17965,7 @@ else
 				bush_vine = 0.9,
 				snake_hole = 0.1,
 				--wildborehouse = 0.005,
-				primeapebarrel = .25,          --was .05,
+				primeapebarrel = .25, --was .05,
 				fireflies = 0.02,
 				cave_banana_tree = 0.02,
 			},
@@ -18019,7 +17983,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.4,          --was 0.2
+			distributepercent = 0.4, --was 0.2
 			distributeprefabs =
 			{
 				--palmtree = 0.05,
@@ -18029,8 +17993,8 @@ else
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
 				--saplingnova = .8,
-				berrybush2 = .1,                 --was .05,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = .05, --was .01,
 				flower = 0.2,
 				bambootree = 0.5,
 				flint = 0.001,
@@ -18038,7 +18002,7 @@ else
 				bush_vine = 0.9,
 				snake_hole = 0.1,
 				--wildborehouse = 0.05, --was 0.005,
-				primeapebarrel = .15,          --was .05,
+				primeapebarrel = .15, --was .05,
 				fireflies = 0.02,
 				cave_banana_tree = 0.01,
 			},
@@ -18068,8 +18032,8 @@ else
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
 				--saplingnova = .8,
-				berrybush2 = .1,                 --was .05,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
 				green_mushroom = 0.03,
 				blue_mushroom = 0.02,
@@ -18079,7 +18043,7 @@ else
 				bush_vine = 0.9,
 				snake_hole = 0.1,
 				--wildborehouse = 0.25,
-				primeapebarrel = .15,          --was .05,
+				primeapebarrel = .15, --was .05,
 				--pond = 0.05,
 				fireflies = 0.02,
 				cave_banana_tree = 0.01,
@@ -18109,8 +18073,8 @@ else
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
 				--saplingnova = .8,
-				berrybush2 = .1,                 --was .05,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
 				green_mushroom = 0.03,
 				blue_mushroom = 0.02,
@@ -18121,7 +18085,7 @@ else
 				bush_vine = 0.9,
 				snake_hole = 0.1,
 				--wildborehouse = 0.005,
-				primeapebarrel = .15,          --was .05,
+				primeapebarrel = .15, --was .05,
 				fireflies = 0.02,
 				cave_banana_tree = 0.01,
 			},
@@ -18135,23 +18099,23 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone", "tropical" },
 		contents = {
 			countstaticlayouts = { ["doydoym"] = 1 }, --adds 1 per room
-			distributepercent = .1,               --Lowered a bit
+			distributepercent = .1,          --Lowered a bit
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				jungletree = 3,
-				rock1 = 0.05,              --was .01
-				rock2 = 0.1,               --was .05
-				flint = 0.1,               --was 0.03,
-				berrybush2 = .09,          -- was .0003
+				rock1 = 0.05, --was .01
+				rock2 = 0.1, --was .05
+				flint = 0.1, --was 0.03,
+				berrybush2 = .09, -- was .0003
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = 1,                            --was 0.75,
+				flower = 1, --was 0.75,
 				bambootree = 1,
-				bush_vine = .2,                        -- was 1
-				primeapebarrel = .1,                   --was .05,
-				spiderden = 0,                         --was .01,											
+				bush_vine = .2, -- was 1
+				primeapebarrel = .1, --was .05,
+				spiderden = 0, --was .01,											
 			},
 
 		}
@@ -18166,24 +18130,24 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 1.5,          --was 3
+				jungletree = 1.5, --was 3
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = .9,
 				bambootree = 0.5,
-				spiderden = .05,         --was .001
+				spiderden = .05, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 				flower_evil = .001,
@@ -18208,13 +18172,13 @@ else
 				rock_limpet = .05,
 				crabhole = .2,
 				palmtree = .5,
-				rocks = .03,                             --trying
-				rock1 = .1,                              --trying
+				rocks = .03, --trying
+				rock1 = .1, --trying
 				--rock2 = .2,
-				beehive = .01,                           --was .05,
+				beehive = .01, --was .05,
 				--flower = .04, --trying
-				grassnova = .2,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .2, --trying
+				saplingnova = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -18263,7 +18227,7 @@ else
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
 			countstaticlayouts = meadow_fairy_rings,
-			distributepercent = .4,          --.1, --lowered from .2
+			distributepercent = .4, --.1, --lowered from .2
 			distributeprefabs =
 			{
 				flint = 0.01,
@@ -18285,7 +18249,7 @@ else
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
 			countstaticlayouts = meadow_fairy_rings,
-			distributepercent = .4,          --was .1,
+			distributepercent = .4, --was .1,
 			distributeprefabs =
 			{
 				--    ox = .5, --was 1,
@@ -18303,11 +18267,11 @@ else
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
 			countstaticlayouts = meadow_fairy_rings,
-			distributepercent = .5,          --.1, --lowered from .2
+			distributepercent = .5, --.1, --lowered from .2
 			distributeprefabs =
 			{
 				flower = .5,
-				beehive = .05,          --was .4
+				beehive = .05, --was .4
 				grassnova = .4,
 				rocks = .05,
 				mandrake_planted = 0.005,
@@ -18321,16 +18285,16 @@ else
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
 			countstaticlayouts = meadow_fairy_rings,
-			distributepercent = .4,          --.1, --lowered from .2
+			distributepercent = .4, --.1, --lowered from .2
 			distributeprefabs =
 			{
-				flint = 0.05,                        --was .01
-				grassnova = 3,                       --was .4,
+				flint = 0.05,   --was .01
+				grassnova = 3,  --was .4,
 				--ox = 3,
-				sweet_potato_planted = 0.1,          --was .05,
+				sweet_potato_planted = 0.1, --was .05,
 				rock_flintless = 0.01,
 				flower = 0.15,
-				beehive = 0.2,          -- lowered from 1
+				beehive = 0.2, -- lowered from 1
 				wasphive = 0.05,
 			},
 		}
@@ -18342,7 +18306,7 @@ else
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
 			countstaticlayouts = meadow_fairy_rings,
-			distributepercent = .35,          --was .1
+			distributepercent = .35, --was .1
 			distributeprefabs =
 			{
 				sweet_potato_planted = 1,
@@ -18382,10 +18346,10 @@ else
 				grassnova = 3,
 				--saplingnova = 1,
 				flower = .5,
-				beehive = .1,          --was 1,
+				beehive = .1, --was 1,
 				wasphive = 0.003,
 				sweet_potato_planted = 0.3,
-				wasphive = 0.01,          --was 0.001
+				wasphive = 0.01, --was 0.001
 			},
 		}
 	})
@@ -18395,7 +18359,7 @@ else
 		value = GROUND.MEADOW,
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
-			distributepercent = .4,          --was .2
+			distributepercent = .4, --was .2
 			distributeprefabs =
 			{
 				spiderden = .1,
@@ -18413,14 +18377,14 @@ else
 		tags = { "ExitPiece", "RoadPoison" },
 		contents = {
 
-			distributepercent = .4,          --was .1,
+			distributepercent = .4, --was .1,
 			distributeprefabs =
 			{
 				rock_flintless = 1,
 				rocks = 1,
 				rock1 = 1,
 				rock2 = 1,
-				grassnova = 4,          --was 2
+				grassnova = 4, --was 2
 				flower = 1,
 			},
 		}
@@ -18458,12 +18422,12 @@ else
 			distributepercent = .3,
 			distributeprefabs =
 			{
-				magmarock = 2,          --nitre
+				magmarock = 2, --nitre
 				magmarock_gold = 1,
 				rock1 = .25,
-				rock2 = .25,          --gold
+				rock2 = .25, --gold
 				rocks = .25,
-				flint = 0.5,          -- lowered from 3
+				flint = 0.5, -- lowered from 3
 				spiderden = .1,
 				-- saplingnova = 1.0,
 			},
@@ -18480,11 +18444,11 @@ else
 			{
 				magmarock_gold = 2,
 				magmarock = 2,
-				rock1 = .2,          --nitre
+				rock1 = .2, --nitre
 				--rock2 = 2, --gold
 				rock_flintless = 1,
-				rocks = .25,          --was 0.5
-				flint = 0.1,          -- lowered from 3
+				rocks = .25, --was 0.5
+				flint = 0.1, -- lowered from 3
 				-- rock_ice = 1,
 				--tallbirdnest= --2, --.1,
 				spiderden = .1,
@@ -18510,10 +18474,10 @@ else
 				magmarock = 1,
 				magmarock_gold = 1,
 				--rock1 = 2, --nitre
-				rock2 = 1,          --gold
+				rock2 = 1, --gold
 				rock_flintless = 2,
 				rocks = .25,
-				flint = 1,          -- lowered from 3
+				flint = 1, -- lowered from 3
 				-- rock_ice = 1,
 				--tallbirdnest= --2, --.1,
 				spiderden = .1,
@@ -18650,11 +18614,11 @@ else
 			{
 				magmarock = 1,
 				magmarock_gold = 1,
-				rock1 = 0.1,          --nitre
-				rock2 = 0.1,          --gold
+				rock1 = 0.1, --nitre
+				rock2 = 0.1, --gold
 				rock_flintless = 0.4,
 				rocks = 0.4,
-				flint = 0.2,         -- lowered from 3
+				flint = 0.2, -- lowered from 3
 				--  tallbirdnest= .2, --.1,
 				--					                    dragoonden= 0.7,
 				saplingnova = .3,
@@ -18810,15 +18774,15 @@ else
 			{
 				magmarock = 2,
 				magmarock_gold = 1,
-				rock1 = 2,          --nitre
-				rock2 = 2,          --gold
+				rock1 = 2, --nitre
+				rock2 = 2, --gold
 				rock_flintless = 2,
 				rocks = 1,
 				rock_moon = 0.1,
-				flint = 1,                 -- lowered from 3
+				flint = 1, -- lowered from 3
 				-- rock_ice = 1,
-				tallbirdnest = .2,         --.1,
-				spiderden = 1.5,           --.5,
+				tallbirdnest = .2, --.1,
+				spiderden = 1.5, --.5,
 				saplingnova = .5,
 
 			},
@@ -19220,12 +19184,12 @@ else
 				jungletree = .05,
 				marsh_bush = .05,
 				tidalpool = 0.2,
-				reeds = 2,          --was 4
+				reeds = 2, --was 4
 				spiderden = .01,
 				green_mushroom = 1.02,
-				mermhouse = 0.1,          --was 0.04
+				mermhouse = 0.1, --was 0.04
 				mermfishhouse = 0.05,
-				poisonhole = 1,           --was 2
+				poisonhole = 1, --was 2
 				--seaweed_planted = 0.5,
 				fishinhole = .1,
 				flupspawner_dense = 1,
@@ -19249,13 +19213,13 @@ else
 				rock_limpet = .05,
 				crabhole = .2,
 				palmtree = .3,
-				rocks = .03,                             --trying
-				rock1 = .1,                              --trying
+				rocks = .03, --trying
+				rock1 = .1, --trying
 				--rock2 = .2,
-				beehive = .01,                           --was .05,
+				beehive = .01, --was .05,
 				--flower = .04, --trying
-				grassnova = .2,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .2, --trying
+				saplingnova = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -19273,24 +19237,24 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .3,          --upped from .05
+			distributepercent = .3, --upped from .05
 			distributeprefabs =
 			{
 				seashell_beached = .25,
 				rock_limpet = .05,
-				crabhole = .1,                              --was 0.2
+				crabhole = .1, --was 0.2
 				palmtree = .3,
-				rocks = .03,                                --trying
+				rocks = .03, --trying
 				rock1 = .05,
-				rock_flintless = .1,                        --trying
+				rock_flintless = .1, --trying
 				--beehive = .05, --trying
 				--flower = .04, --trying
-				grassnova = .5,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .5, --trying
+				saplingnova = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
-				sandhill = .1,                        --was .6,
+				sandhill = .1, --was .6,
 				crate = .025,
 			},
 
@@ -19308,15 +19272,15 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .3,          --lowered from .3
+			distributepercent = .3, --lowered from .3
 			distributeprefabs =
 			{
 				seashell_beached = 0.125,
-				grassnova = .3,                           --down from 3
-				saplingnova = .1,                         --lowered from 15
+				grassnova = .3, --down from 3
+				saplingnova = .1, --lowered from 15
 				--flower = 0.05,
 				rock_limpet = .02,
-				crabhole = .015,                         --was .03
+				crabhole = .015, --was .03
 				palmtree = .1,
 				rocks = .003,
 				beehive = .003,
@@ -19344,15 +19308,15 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .3,          --lowered from .3
+			distributepercent = .3, --lowered from .3
 			distributeprefabs =
 			{
 				seashell_beached = 0.125,
-				grassnova = .3,                           --down from 3
-				saplingnova = .1,                         --lowered from 15
+				grassnova = .3, --down from 3
+				saplingnova = .1, --lowered from 15
 				--flower = 0.05,
 				rock_limpet = .02,
-				crabhole = .015,                         --was .03
+				crabhole = .015, --was .03
 				palmtree = .1,
 				rocks = .003,
 				beehive = .003,
@@ -19381,7 +19345,7 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
 			countstaticlayouts = { ["x_spot"] = 1 },
-			distributepercent = .3,          --lowered from .3
+			distributepercent = .3, --lowered from .3
 			distributeprefabs =
 			{
 				seashell_beached = 0.125,
@@ -19421,19 +19385,19 @@ else
 			distributeprefabs =
 			{
 				seashell_beached = 0.025,
-				grassnova = .1,                            --was .3
-				saplingnova = .05,                         --was .15
+				grassnova = .1, --was .3
+				saplingnova = .05, --was .15
 				--flower = 0.05,
 				rock_limpet = .02,
 				--crabhole = .015, --was .03
 				palmtree = .1,
 				rocks = .003,
 				--beehive = .003,
-				flint = .01,                         --was .02,
+				flint = .01, --was .02,
 				sandhill = .05,
 				--rock2 = .01,
 				goldnugget = .007,
-				dubloon = .01,                         -- this should be relatively high on this island
+				dubloon = .01, -- this should be relatively high on this island
 				skeleton = .025,
 				wildborehouse = .005,
 			},
@@ -19476,13 +19440,13 @@ else
 				rock_limpet = .05,
 				crabhole = .2,
 				palmtree = .3,
-				rocks = .03,                             --trying
-				rock1 = .1,                              --trying
+				rocks = .03, --trying
+				rock1 = .1, --trying
 				--rock2 = .2,
-				beehive = .01,                           --was .05,
+				beehive = .01, --was .05,
 				--flower = .04, --trying
-				grassnova = .2,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .2, --trying
+				saplingnova = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -19505,11 +19469,11 @@ else
 			distributeprefabs =
 			{
 				flower_evil = 0.2,
-				jungletree = 1,        --one palm tree
-				fireflies = 1,         -- results in an empty beach because these only show at night
+				jungletree = 1, --one palm tree
+				fireflies = 1, -- results in an empty beach because these only show at night
 				flower = .4,
-				bambootree = 0.5,      --one palm tree
-				bush_vine = 0.2,       --one palm tree
+				bambootree = 0.5, --one palm tree
+				bush_vine = 0.2, --one palm tree
 				--sandhill = .5,
 			},
 			countprefabs = {
@@ -19533,7 +19497,7 @@ else
 			distributeprefabs =
 			{
 				flower_evil = 0.5,
-				fireflies = 1,         -- results in an empty beach because these only show at night
+				fireflies = 1, -- results in an empty beach because these only show at night
 				flower = .3,
 				sandhill = .5,
 				palmtree = 1, --one palm tree
@@ -19558,7 +19522,7 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .1,          -- just copied this whole thing from EvilFlowerPatch in terrain_grass
+			distributepercent = .1, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
 			distributeprefabs =
 			{
 				flower_evil = 0.05,
@@ -19599,7 +19563,7 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .2,          -- just copied this whole thing from EvilFlowerPatch in terrain_grass
+			distributepercent = .2, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
 			distributeprefabs =
 			{
 				saplingnova = 0.25,
@@ -19618,7 +19582,7 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .2,          -- just copied this whole thing from EvilFlowerPatch in terrain_grass
+			distributepercent = .2, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
 			distributeprefabs =
 			{
 				saplingnova = 0.25,
@@ -19638,24 +19602,24 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .3,          --Up from .025
+			distributepercent = .3, --Up from .025
 			distributeprefabs =
 			{
 				seashell_beached = 0.025,
-				rock_limpet = .05,                       --reducing from .2 (everything is so low here)
+				rock_limpet = .05, --reducing from .2 (everything is so low here)
 				crabhole = .2,
 				palmtree = .3,
-				rocks = .03,                         --trying
-				rock1 = .1,                          --trying
-				beehive = .1,                        --was .5
+				rocks = .03, --trying
+				rock1 = .1, --trying
+				beehive = .1, --was .5
 				wasphive = .05,
 				--flower = .04, --trying
-				grassnova = .4,                          --trying
-				saplingnova = .4,                        --trying
+				grassnova = .4, --trying
+				saplingnova = .4, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
-				sandhill = .4,                        --was .04
+				sandhill = .4, --was .04
 			},
 
 		}
@@ -19713,7 +19677,7 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone" },
 
 		contents = {
-			distributepercent = .2,          --was .1
+			distributepercent = .2, --was .1
 			distributeprefabs =
 			{
 				grassnova = 1.5,
@@ -19819,17 +19783,17 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .1,          --Lowered a bit
+			distributepercent = .1, --Lowered a bit
 			distributeprefabs =
 			{
 				seashell_beached = 0.0025,
-				rock_limpet = .005,                       --reducing from .03 (everything is so low here)
+				rock_limpet = .005, --reducing from .03 (everything is so low here)
 				crabhole = .002,
 				palmtree = .3,
-				rocks = .003,                            --trying
-				beehive = .005,                          --trying
-				grassnova = .3,                          --trying
-				saplingnova = .2,                        --trying
+				rocks = .003, --trying
+				beehive = .005, --trying
+				grassnova = .3, --trying
+				saplingnova = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -19843,11 +19807,11 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .5,          --was .1
+			distributepercent = .5, --was .1
 			distributeprefabs =
 			{
-				beehive = .1,                        --was .5
-				flower = 2,                          --was 1
+				beehive = .1, --was .5
+				flower = 2, --was 1
 				palmtree = .3,
 				rock1 = .1,
 				grassnova = .2,
@@ -19865,17 +19829,17 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .1,          --Lowered a bit
+			distributepercent = .1, --Lowered a bit
 			distributeprefabs =
 			{
 				seashell_beached = 0.0025,
 				crabhole = .002,
 				palmtree = .3,
-				rocks = .003,                            --trying
-				beehive = .0025,                         --trying
+				rocks = .003, --trying
+				beehive = .0025, --trying
 				--flower = 0.04, --trying
-				grassnova = .3,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .3, --trying
+				saplingnova = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -19890,17 +19854,17 @@ else
 		value = GROUND.BEACH,
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
-			distributepercent = .1,          --Lowered a bit
+			distributepercent = .1, --Lowered a bit
 			distributeprefabs =
 			{
 				seashell_beached = 0.0025,
 				rock_limpet = 0.01,
 				palmtree = .3,
-				rocks = .003,                            --trying
-				beehive = .005,                          --trying
+				rocks = .003, --trying
+				beehive = .005, --trying
 				--flower = 0.04, --trying
-				grassnova = .3,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .3, --trying
+				saplingnova = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -19915,17 +19879,17 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
 			countstaticlayouts = { ["slotmachine"] = 1 }, --adds 1 per room
-			distributepercent = .1,                   --Lowered a bit
+			distributepercent = .1,              --Lowered a bit
 			distributeprefabs =
 			{
 				seashell_beached = 0.025,
 				rock_limpet = 0.01,
 				palmtree = .3,
-				rocks = .003,                            --trying
-				beehive = .005,                          --trying
+				rocks = .003, --trying
+				beehive = .005, --trying
 				--flower = 0.04, --trying
-				grassnova = .3,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .3, --trying
+				saplingnova = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -19952,16 +19916,16 @@ else
 				crabhole = .2,
 				palmtree = .3,
 				rocks = .03,
-				rock1 = .025,                        --was .1,
+				rock1 = .025, --was .1,
 				--rock2 = .05, --was .2,
 				beehive = .02,
 				--flower = .04,
-				grassnova = .3,                        --was .2,
+				grassnova = .3, --was .2,
 				saplingnova = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
-				sandhill = .1,                        --was .6,
+				sandhill = .1, --was .6,
 				wildborehouse = .05,
 			},
 
@@ -19986,16 +19950,16 @@ else
 				crabhole = .2,
 				palmtree = .3,
 				rocks = .03,
-				rock1 = .025,                        --was .1,
+				rock1 = .025, --was .1,
 				--rock2 = .05, --was .2,
 				beehive = .02,
 				--flower = .04,
-				grassnova = .3,                        --was .2,
+				grassnova = .3, --was .2,
 				saplingnova = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
-				sandhill = .1,                        --was .6,
+				sandhill = .1, --was .6,
 				wildborehouse = .05,
 			},
 
@@ -20020,16 +19984,16 @@ else
 				crabhole = .2,
 				palmtree = .3,
 				rocks = .03,
-				rock1 = .025,                        --was .1,
+				rock1 = .025, --was .1,
 				--rock2 = .05, --was .2,
 				beehive = .02,
 				--flower = .04,
-				grassnova = .3,                        --was .2,
+				grassnova = .3, --was .2,
 				saplingnova = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
-				sandhill = .1,                        --was .6,
+				sandhill = .1, --was .6,
 				wildborehouse = .05,
 			},
 
@@ -20093,8 +20057,8 @@ else
 				flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .8,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
@@ -20190,9 +20154,9 @@ else
 			distributeprefabs =
 			{
 				fireflies = 0.2,
-				jungletree = 2,               --was 3
-				berrybush2 = .05,             --was .01,
-				berrybush2_snake = .05,       --was .01,
+				jungletree = 2, --was 3
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
@@ -20226,19 +20190,19 @@ else
 			{
 				fireflies = 1,
 				--palmtree = 0.5,
-				jungletree = 1,                  --was 3
+				jungletree = 1, --was 3
 				rock1 = 0.05,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = 1,
 				bambootree = 0.5,
-				spiderden = .05,          --was .001
+				spiderden = .05, --was .001
 				bush_vine = 0.6,
 				snake_hole = 0.1,
-				pond = 0.1,          --was 6
+				pond = 0.1, --was 6
 
 
 			},
@@ -20264,14 +20228,14 @@ else
 				flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .8,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = 0.75,
 				bambootree = 1,
-				spiderden = .01,          --was .001
+				spiderden = .01, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 			},
@@ -20287,15 +20251,15 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .4,          -- lowered from 1.0
+			distributepercent = .4, -- lowered from 1.0
 			distributeprefabs =
 			{
 				fireflies = 0.2,
-				jungletree = 1,          --lowered from 6
+				jungletree = 1, --lowered from 6
 				rock2 = 0.05,
 				flint = 0.05,
-				berrybush2 = .05,          --was .01,
-				berrybush2_snake = .05,    --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
@@ -20325,7 +20289,7 @@ else
 				end
 			},
 
-			distributepercent = .2,          --was .1
+			distributepercent = .2, --was .1
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -20334,13 +20298,13 @@ else
 				rock1 = 0.03,
 				primeapebarrel = 0.1,
 				flint = 0.03,
-				grassnova = .03,          --was .05
+				grassnova = .03, --was .05
 				red_mushroom = .07,
 				green_mushroom = .07,
 				blue_mushroom = .07,
 				flower = 0.75,
 				bambootree = .5,
-				wasphive = 0.125,          --was 0.5
+				wasphive = 0.125, --was 0.5
 				spiderden = 0.1,
 			},
 		}
@@ -20356,29 +20320,29 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.3,          --was 0.2
+			distributepercent = 0.3, --was 0.2
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.5, --lowered this from 6
 				jungletree = 3,
-				rock1 = 0.05,          --was .01
-				rock2 = 0.1,           --was .05
-				flint = 0.1,           --was 0.03,
+				rock1 = 0.05, --was .01
+				rock2 = 0.1, --was .05
+				flint = 0.1, --was 0.03,
 				--grassnova = .01, --was .05
 				--saplingnova = .8,
-				berrybush2 = .09,          -- was .0003
+				berrybush2 = .09, -- was .0003
 				berrybush2_snake = 0.01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = 1,                   --was 0.75,
+				flower = 1, --was 0.75,
 				bambootree = 1,
-				bush_vine = .2,               -- was 1
-				snake_hole = 0.01,            -- was 0.1
-				primeapebarrel = .1,          --was .05,
+				bush_vine = .2, -- was 1
+				snake_hole = 0.01, -- was 0.1
+				primeapebarrel = .1, --was .05,
 				cave_banana_tree = 0.005,
-				spiderden = .05,              --was .01,
+				spiderden = .05, --was .01,
 				--wildborehouse = 0.25,										
 			},
 		}
@@ -20390,26 +20354,26 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
 			countstaticlayouts = { ["skull_isle2"] = 1 }, --adds 1 per room
-			distributepercent = .1,                   --Lowered a bit
+			distributepercent = .1,              --Lowered a bit
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				jungletree = 3,
-				rock1 = 0.05,              --was .01
-				rock2 = 0.1,               --was .05
-				flint = 0.1,               --was 0.03,
-				berrybush2 = .09,          -- was .0003
+				rock1 = 0.05, --was .01
+				rock2 = 0.1, --was .05
+				flint = 0.1, --was 0.03,
+				berrybush2 = .09, -- was .0003
 				berrybush2_snake = 0.01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = 1,                   --was 0.75,
+				flower = 1, --was 0.75,
 				bambootree = 1,
-				bush_vine = .2,               -- was 1
-				snake_hole = 0.01,            -- was 0.1
-				primeapebarrel = .1,          --was .05,
+				bush_vine = .2, -- was 1
+				snake_hole = 0.01, -- was 0.1
+				primeapebarrel = .1, --was .05,
 				cave_banana_tree = 0.005,
-				spiderden = .05,              --was .01,									
+				spiderden = .05, --was .01,									
 			},
 
 		}
@@ -20420,22 +20384,22 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
 			countstaticlayouts = { ["doydoyf"] = 1 }, --adds 1 per room
-			distributepercent = .1,               --Lowered a bit
+			distributepercent = .1,          --Lowered a bit
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				jungletree = 3,
-				rock1 = 0.05,              --was .01
-				rock2 = 0.1,               --was .05
-				flint = 0.1,               --was 0.03,
-				berrybush2 = .09,          -- was .0003
+				rock1 = 0.05, --was .01
+				rock2 = 0.1, --was .05
+				flint = 0.1, --was 0.03,
+				berrybush2 = .09, -- was .0003
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = 1,                            --was 0.75,
+				flower = 1, --was 0.75,
 				bambootree = 1,
-				bush_vine = .2,                        -- was 1
-				spiderden = 0,                         --was .01,										
+				bush_vine = .2, -- was 1
+				spiderden = 0, --was .01,										
 			},
 
 		}
@@ -20454,22 +20418,22 @@ else
 			{
 				fireflies = 0.2,
 				--palmtree = .05,
-				jungletree = 2,          --.6,
+				jungletree = 2, --.6,
 				rock1 = 0.05,
 				rock2 = 0.05,
 				rocks = .3,
-				flint = .1,                --dropped
+				flint = .1, --dropped
 				--saplingnova = .8,
-				berrybush2 = .05,          --was .03
+				berrybush2 = .05, --was .03
 				berrybush2_snake = 0.01,
 				--grassnova = 1,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = .5,             --was 0.75
+				flower = .5, --was 0.75
 				bambootree = 1,
-				bush_vine = .2,          -- was 1
-				snake_hole = 0.01,       -- was 0.1
+				bush_vine = .2, -- was 1
+				snake_hole = 0.01, -- was 0.1
 				spiderden = 0.05,
 				--wildborehouse = 0.25,
 			},
@@ -20485,7 +20449,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.3,          -- upped from 0.15
+			distributepercent = 0.3, -- upped from 0.15
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -20493,15 +20457,15 @@ else
 				jungletree = .6,
 				rock_flintless = 0.05,
 				-- rock2 = 0.05, --gold rock
-				flint = .1,          --dropped
+				flint = .1, --dropped
 				--grassnova = .6, --raised from 05
 				--saplingnova = .8,
-				berrybush2 = .05,          --was .03
+				berrybush2 = .05, --was .03
 				berrybush2_snake = 0.01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = 2,          --was 0.75,
+				flower = 2, --was 0.75,
 				bambootree = 1,
 				bush_vine = 1,
 				snake_hole = 0.1,
@@ -20523,11 +20487,11 @@ else
 			distributepercent = 0.4,
 			distributeprefabs =
 			{
-				fireflies = 0.02,                         --was 0.2,
+				fireflies = 0.02, --was 0.2,
 				--palmtree = 0.05,
-				jungletree = 3,                           --was 4,
+				jungletree = 3, --was 4,
 				rock1 = 0.05,
-				rock2 = 0.1,                              --was .05
+				rock2 = 0.1, --was .05
 				--grassnova = 1, --was .05
 				--saplingnova = .8,
 				berrybush2 = .1,
@@ -20538,7 +20502,7 @@ else
 				flower = 0.75,
 				bambootree = 1,
 				flint = 0.1,
-				spiderden = .1,          --was .01
+				spiderden = .1, --was .01
 				bush_vine = 1,
 				snake_hole = 0.1,
 				--wildborehouse = 0.03, --was 0.015,
@@ -20557,7 +20521,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.3,          --lowered from 0.4
+			distributepercent = 0.3, --lowered from 0.4
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -20567,8 +20531,8 @@ else
 				--rock2 = 0.05, --gold rock
 				--grassnova = 1, --was .05
 				--saplingnova = .8,
-				berrybush2 = .1,                  --was .05,
-				berrybush2_snake = 0.03,          --was 0.01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = 0.03, --was 0.01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
@@ -20589,24 +20553,24 @@ else
 		value = GROUND.JUNGLE,
 		tags = { "RoadPoison" },
 		contents = {
-			distributepercent = 0.5,          ---was 0.75
+			distributepercent = 0.5, ---was 0.75
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 2,          --lowered from 6
+				jungletree = 2, --lowered from 6
 				rock1 = 0.05,
 				rock2 = 0.05,
 				--grassnova = .02, --was .05
 				--saplingnova = .8,
-				berrybush2 = .06,                --was .03,
-				berrybush2_snake = .02,          --was .01,
+				berrybush2 = .06, --was .03,
+				berrybush2_snake = .02, --was .01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
 				flower = 0.75,
 				bambootree = 1,
-				spiderden = .05,          --was .01,
+				spiderden = .05, --was .01,
 				bush_vine = 2,
 				snake_hole = 0.1,
 				--wildborehouse = 0.03, --was 0.015,
@@ -20629,19 +20593,19 @@ else
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 4,          --was 6
+				jungletree = 4, --was 6
 				rock1 = 0.05,
 				rock2 = 0.05,
 				--grassnova = .02, --was .05
 				--saplingnova = .8,
-				berrybush2 = .6,                 --was .03
-				berrybush2_snake = .03,          --was .01,
+				berrybush2 = .6, --was .03
+				berrybush2_snake = .03, --was .01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
 				flower = 0.75,
 				bambootree = 1,
-				spiderden = .05,         --was .01
+				spiderden = .05, --was .01
 				bush_vine = 1,
 				snake_hole = 0.1,
 				--wildborehouse = 0.15, --was 0.015,
@@ -20658,21 +20622,21 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.6,          --was 0.75
+			distributepercent = 0.6, --was 0.75
 			distributeprefabs =
 			{
 				fireflies = 0.2,
-				jungletree = 2,                  --was 6
+				jungletree = 2, --was 6
 				rock_flintless = 0.05,
-				berrybush2 = .06,                --was .03,
-				berrybush2_snake = .02,          --was .01,
+				berrybush2 = .06, --was .03,
+				berrybush2_snake = .02, --was .01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
 				flower = 0.75,
-				bambootree = 1,           -- was 1
-				spiderden = .05,          --was .01
-				bush_vine = 0.8,          -- was 1
+				bambootree = 1, -- was 1
+				spiderden = .05, --was .01
+				bush_vine = 0.8, -- was 1
 				snake_hole = 0.1,
 			},
 			countprefabs =
@@ -20699,8 +20663,8 @@ else
 				flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .8,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
@@ -20723,24 +20687,24 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 2,          --was 3
+				jungletree = 2, --was 3
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = .025,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = 1,
 				bambootree = 0.5,
-				spiderden = .05,          --was .001
+				spiderden = .05, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 				--pond = 1, --frog pond
@@ -20761,7 +20725,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.5,          --lowered from .5
+			distributepercent = 0.5, --lowered from .5
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -20771,8 +20735,8 @@ else
 				rock2 = 0.05,
 				--grassnova = 1, --was .05
 				--saplingnova = .8,
-				berrybush2 = .1,                 --was .05,
-				berrybush2_snake = .05,          --was 0.01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = .05, --was 0.01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
@@ -20783,7 +20747,7 @@ else
 				bush_vine = 1,
 				snake_hole = 0.1,
 				--wildborehouse = 0.015,
-				primeapebarrel = .2,          --was .05,
+				primeapebarrel = .2, --was .05,
 				cave_banana_tree = 0.01,
 			},
 		}
@@ -20827,7 +20791,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .4,          --was .5,
+			distributepercent = .4, --was .5,
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -20837,14 +20801,14 @@ else
 				-- flint=0.05,
 				--grassnova = .025,
 				--saplingnova = .04,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = 0.1,
-				bambootree = 1,           --was .5,
-				spiderden = .05,          --was .001,
+				bambootree = 1, --was .5,
+				spiderden = .05, --was .001,
 				bush_vine = .04,
 				snake_hole = 0.1,
 
@@ -20863,14 +20827,14 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .3,          --was .5
+			distributepercent = .3, --was .5
 			distributeprefabs =
 			{
 				fireflies = 0.2,
-				jungletree = 2,                --was .4,
-				rock1 = 0.125,                 --was 0.5,
-				rock2 = 0.125,                 --was 0.5,
-				primeapebarrel = .04,          --was .8,
+				jungletree = 2, --was .4,
+				rock1 = 0.125, --was 0.5,
+				rock2 = 0.125, --was 0.5,
+				primeapebarrel = .04, --was .8,
 				skeleton = .1,
 				flint = 0.5,
 				--grassnova = .75,
@@ -20908,13 +20872,13 @@ else
 			{
 				fireflies = 0.5,
 				--palmtree = 0.05,
-				jungletree = 3,          --was 3
+				jungletree = 3, --was 3
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = .025,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .06,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .06, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
@@ -20923,7 +20887,7 @@ else
 				spiderden = 0.5,
 				bush_vine = 0.2,
 				snake_hole = 0.1,
-				beehive = 1.5,          --was 3,
+				beehive = 1.5, --was 3,
 				wasphive = 2,
 
 			},
@@ -20939,7 +20903,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.5,          --was 0.75
+			distributepercent = 0.5, --was 0.75
 			distributeprefabs =
 			{
 				fireflies = 1,
@@ -20949,18 +20913,18 @@ else
 				--rock2 = 0.05, --gold rock
 				--grassnova = .05,
 				--saplingnova = .8,
-				berrybush2 = .75,                --was 0.3
-				berrybush2_snake = .04,          --was .01,
+				berrybush2 = .75, --was 0.3
+				berrybush2_snake = .04, --was .01,
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
 				flower = 1.5,
-				bambootree = 1,           --was 1
-				spiderden = .05,          --was .5,
-				bush_vine = 0.8,          --was 1
+				bambootree = 1, --was 1
+				spiderden = .05, --was .5,
+				bush_vine = 0.8, --was 1
 				snake_hole = 0.1,
 				--wildborehouse = 0.03, --was 0.015,
-				beehive = .01,          --was 2,
+				beehive = .01, --was 2,
 			},
 		}
 	})
@@ -20974,7 +20938,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
@@ -20984,14 +20948,14 @@ else
 				--flint=0.05,
 				--grassnova = 1, --was .4,
 				--saplingnova = .3,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .07,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .07, --was .01,
 				red_mushroom = 3,
 				green_mushroom = 3,
 				blue_mushroom = 2,
 				flower = 0.7,
 				bambootree = 0.5,
-				spiderden = .05,         --was .001
+				spiderden = .05, --was .001
 				bush_vine = .5,
 				snake_hole = 0.1,
 
@@ -21014,21 +20978,21 @@ else
 				fireflies = 0.2,
 				--palmtree = 0.05,
 				jungletree = 6,
-				rock1 = 1,           --was 3
-				rock2 = .5,          --was 2
+				rock1 = 1, --was 3
+				rock2 = .5, --was 2
 				rock_flintless = 2,
 				rocks = 3,
 				--flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .07,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .07, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = .9,
 				bambootree = 0.5,
-				spiderden = .05,          --was .001
+				spiderden = .05, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 			},
@@ -21044,24 +21008,24 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 2,          --was 3
+				jungletree = 2, --was 3
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = 5,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = .2,
 				bambootree = 0.5,
-				spiderden = .05,          --was .001
+				spiderden = .05, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 			},
@@ -21077,18 +21041,18 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 1.5,          --was 3
+				jungletree = 1.5, --was 3
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
 				saplingnova = 6,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
@@ -21110,28 +21074,28 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 2,          --was 3
+				jungletree = 2, --was 3
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = .9,
 				bambootree = 0.5,
-				spiderden = .05,          --was .001
+				spiderden = .05, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 				flower_evil = 10,
-				wasphive = 0.25,          --just added
+				wasphive = 0.25, --just added
 			},
 
 		}
@@ -21156,8 +21120,8 @@ else
 				rocks = 0.4,
 				--grassnova = 0.5, --was .05
 				--saplingnova  = 8,
-				berrybush2 = .1,                 --was .05,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
 				green_mushroom = 0.03,
 				blue_mushroom = 0.02,
@@ -21189,7 +21153,7 @@ else
 			distributeprefabs =
 			{
 				--palmtree = 0.05,
-				jungletree = 5,          --was .5,
+				jungletree = 5, --was .5,
 				rock1 = 0.5,
 				rock2 = 0.5,
 				rocks = 0.4,
@@ -21199,7 +21163,7 @@ else
 				green_mushroom = 0.03,
 				blue_mushroom = 0.02,
 				flower = 0.2,
-				bambootree = 3,          --was 0.5,
+				bambootree = 3, --was 0.5,
 				flint = 0.001,
 				spiderden = 0.5,
 				bush_vine = 0.9,
@@ -21241,7 +21205,7 @@ else
 				bush_vine = 0.9,
 				snake_hole = 0.1,
 				--wildborehouse = 0.005,
-				primeapebarrel = .25,          --was .05,
+				primeapebarrel = .25, --was .05,
 				fireflies = 0.02,
 				cave_banana_tree = 0.02,
 			},
@@ -21259,7 +21223,7 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = 0.4,          --was 0.2
+			distributepercent = 0.4, --was 0.2
 			distributeprefabs =
 			{
 				--palmtree = 0.05,
@@ -21269,8 +21233,8 @@ else
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
 				--saplingnova = .8,
-				berrybush2 = .1,                 --was .05,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = .05, --was .01,
 				flower = 0.2,
 				bambootree = 0.5,
 				flint = 0.001,
@@ -21278,7 +21242,7 @@ else
 				bush_vine = 0.9,
 				snake_hole = 0.1,
 				--wildborehouse = 0.05, --was 0.005,
-				primeapebarrel = .15,          --was .05,
+				primeapebarrel = .15, --was .05,
 				fireflies = 0.02,
 				cave_banana_tree = 0.01,
 			},
@@ -21308,8 +21272,8 @@ else
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
 				--saplingnova = .8,
-				berrybush2 = .1,                 --was .05,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
 				green_mushroom = 0.03,
 				blue_mushroom = 0.02,
@@ -21319,7 +21283,7 @@ else
 				bush_vine = 0.9,
 				snake_hole = 0.1,
 				--wildborehouse = 0.25,
-				primeapebarrel = .15,          --was .05,
+				primeapebarrel = .15, --was .05,
 				--pond = 0.05,
 				fireflies = 0.02,
 				cave_banana_tree = 0.01,
@@ -21349,8 +21313,8 @@ else
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
 				--saplingnova = .8,
-				berrybush2 = .1,                 --was .05,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .1, --was .05,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
 				green_mushroom = 0.03,
 				blue_mushroom = 0.02,
@@ -21361,7 +21325,7 @@ else
 				bush_vine = 0.9,
 				snake_hole = 0.1,
 				--wildborehouse = 0.005,
-				primeapebarrel = .15,          --was .05,
+				primeapebarrel = .15, --was .05,
 				fireflies = 0.02,
 				cave_banana_tree = 0.01,
 			},
@@ -21375,23 +21339,23 @@ else
 		tags = { "RoadPoison", "Chester_Eyebone" },
 		contents = {
 			countstaticlayouts = { ["doydoym"] = 1 }, --adds 1 per room
-			distributepercent = .1,               --Lowered a bit
+			distributepercent = .1,          --Lowered a bit
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				jungletree = 3,
-				rock1 = 0.05,              --was .01
-				rock2 = 0.1,               --was .05
-				flint = 0.1,               --was 0.03,
-				berrybush2 = .09,          -- was .0003
+				rock1 = 0.05, --was .01
+				rock2 = 0.1, --was .05
+				flint = 0.1, --was 0.03,
+				berrybush2 = .09, -- was .0003
 				red_mushroom = .03,
 				green_mushroom = .02,
 				blue_mushroom = .02,
-				flower = 1,                            --was 0.75,
+				flower = 1, --was 0.75,
 				bambootree = 1,
-				bush_vine = .2,                        -- was 1
-				primeapebarrel = .1,                   --was .05,
-				spiderden = 0,                         --was .01,											
+				bush_vine = .2, -- was 1
+				primeapebarrel = .1, --was .05,
+				spiderden = 0, --was .01,											
 			},
 
 		}
@@ -21406,24 +21370,24 @@ else
 			{
 				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
 			},
-			distributepercent = .5,          --was 0.35
+			distributepercent = .5, --was 0.35
 			distributeprefabs =
 			{
 				fireflies = 0.2,
 				--palmtree = 0.05,
-				jungletree = 1.5,          --was 3
+				jungletree = 1.5, --was 3
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
 				--saplingnova = .4,
-				berrybush2 = .05,                --was .01,
-				berrybush2_snake = .05,          --was .01,
+				berrybush2 = .05, --was .01,
+				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
 				green_mushroom = .04,
 				blue_mushroom = .04,
 				flower = .9,
 				bambootree = 0.5,
-				spiderden = .05,         --was .001
+				spiderden = .05, --was .001
 				bush_vine = 1,
 				snake_hole = 0.1,
 				flower_evil = .001,
@@ -21448,13 +21412,13 @@ else
 				rock_limpet = .05,
 				crabhole = .2,
 				palmtree = .5,
-				rocks = .03,                             --trying
-				rock1 = .1,                              --trying
+				rocks = .03, --trying
+				rock1 = .1, --trying
 				--rock2 = .2,
-				beehive = .01,                           --was .05,
+				beehive = .01, --was .05,
 				--flower = .04, --trying
-				grassnova = .2,                          --trying
-				saplingnova = .2,                        --trying
+				grassnova = .2, --trying
+				saplingnova = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -27287,10 +27251,13 @@ else
 					table.insert(level.tasks, "task_underwaterlavarock")
 					table.insert(level.tasks, "task_underwatermagmafield")
 					table.insert(level.tasks, "task_underwaterwatercoral")
-					if GetModConfigData("Shipwrecked") ~= 5 or GetModConfigData("enableallprefabs") == true then table
-							.insert(level.tasks, "UnderwaterExit1") end
+					if GetModConfigData("Shipwrecked") ~= 5 or GetModConfigData("enableallprefabs") == true then
+						table
+							.insert(level.tasks, "UnderwaterExit1")
+					end
 					if GetModConfigData("Hamlet") ~= 5 or GetModConfigData("kindofworld") == 5 or GetModConfigData("enableallprefabs") == true then
-						table.insert(level.tasks, "UnderwaterExit2") end
+						table.insert(level.tasks, "UnderwaterExit2")
+					end
 				end
 			end
 

@@ -100,7 +100,6 @@ local function fn(Sim)
 	inst:AddComponent("sleeper")
 	inst:AddComponent("eater")
 	inst.components.eater:SetDiet({ FOODTYPE.VEGGIE }, { FOODTYPE.VEGGIE })
-	--	inst.components.eater:SetCanEatTestFn(CanEat)
 
 	inst:AddComponent("knownlocations")
 	inst:DoTaskInTime(0,

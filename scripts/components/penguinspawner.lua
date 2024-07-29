@@ -1,4 +1,4 @@
-local MIN_SPAWN_DIST = 40
+local MIN_SPAWN_DIST = PLAYER_CAMERA_SEE_DISTANCE
 local LAND_CHECK_RADIUS = 6
 local WATER_CHECK_RADIUS = 2
 
@@ -20,7 +20,7 @@ return Class(function(self, inst)
     self.inst = inst
 
     --Private
-    local _colonies = {} -- existing colonies
+    local _colonies = {}  -- existing colonies
     local _maxColonySize = 12
     local _totalBirds = 0 -- current number of birds alive
     local _flockSize = TUNING.PENGUINS_FLOCK_SIZE
@@ -30,7 +30,7 @@ return Class(function(self, inst)
 
     local _maxColonies = TUNING.PENGUINS_MAX_COLONIES
     local _maxPenguins = _flockSize *
-    (TUNING.PENGUINS_MAX_COLONIES + TUNING.PENGUINS_MAX_COLONIES_BUFFER)                               -- max simultaneous penguins
+        (TUNING.PENGUINS_MAX_COLONIES + TUNING.PENGUINS_MAX_COLONIES_BUFFER) -- max simultaneous penguins
     local _spawnInterval = TUNING.PENGUINS_SPAWN_INTERVAL
 
     local _numBoulders = TUNING.PENGUINS_DEFAULT_NUM_BOULDERS
@@ -248,14 +248,14 @@ end
         -- Find good spot far enough away from the other colonies
         radius = SEARCH_RADIUS
         while not newFlock.rookery and radius > 30 do
-            newFlock.rookery = FindValidPositionByFan(math.random() * PI * 2.0, radius, 32, testfn)
+            newFlock.rookery = FindValidPositionByFan(math.random() * PI2, radius, 32, testfn)
             radius = radius - 10
         end
 
         if newFlock.rookery then
             newFlock.rookery = newFlock.rookery + loc
             newFlock.is_mutated = TheWorld.Map:IsInLunacyArea(newFlock.rookery.x, 0, newFlock.rookery.z) and
-            TUNING.SPAWN_MOON_PENGULLS
+                TUNING.SPAWN_MOON_PENGULLS
             newFlock.ice = SpawnPrefab("penguin_ice")
             newFlock.ice.Transform:SetPosition(newFlock.rookery:Get())
             newFlock.ice.spawner = self
@@ -302,21 +302,20 @@ end
 
     local function TryToSpawnFlockForPlayer(playerdata)
         --print("---------:", TheWorld.state.season, TheWorld.state.remainingdaysinseason)
+        --###控制企鹅生成条件
         local frostisland = false
-        if playerdata.player and playerdata.player.components.areaaware and playerdata.player.components.areaaware:CurrentlyInTag("frost") then
-            frostisland = true
-        end
 
-        if playerdata.player and playerdata.player.components.areaaware and playerdata.player.components.areaaware:CurrentlyInTag("hamlet") then
-            return
-        end
-
-        if playerdata.player and playerdata.player.components.areaaware and playerdata.player.components.areaaware:CurrentlyInTag("tropical") then
-            return
-        end
-
-        if playerdata.player and playerdata.player.components.areaaware and playerdata.player.components.areaaware:CurrentlyInTag("ForceDisconnected") then
-            return
+        local player = playerdata.player
+        if player and player.components.areaaware then
+            if player.components.areaaware:CurrentlyInTag("hamlet")
+                or player.components.areaaware:CurrentlyInTag("tropical")
+                or player.components.areaaware:CurrentlyInTag("ForceDisconnected")
+            then
+                return
+            end
+            if player.components.areaaware:CurrentlyInTag("frost") then
+                frostisland = true
+            end
         end
 
         if frostisland == false then
@@ -462,6 +461,7 @@ end
 
     if _spawnInterval > 0 then
         self.inst:DoTaskInTime(_checktime / math.max(#_activeplayers, 1), function() TryToSpawnFlock() end)
+        --###
         self.inst:DoTaskInTime(1, iniciodaneve)
     end
 

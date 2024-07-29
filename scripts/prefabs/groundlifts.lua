@@ -10,7 +10,7 @@ local function Teleport(c, d, e, f, g)
         local r = math.sqrt(p)
         q = math.atan2(o / r, n / r) + (math.random() * 20 - 10) * DEGREES
     else
-        q = 2 * PI * math.random()
+        q = TWOPI * math.random()
     end;
     local s, t = math.sin(q), math.cos(q)
     local u = e + math.random()

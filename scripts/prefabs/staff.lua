@@ -203,10 +203,10 @@ local function getrandomposition(caster, teleportee, target_in_ocean)
             return pt
         end
         local from_pt = teleportee:GetPosition()
-        local offset = FindSwimmableOffset(from_pt, math.random() * 2 * PI, 90, 16)
-            or FindSwimmableOffset(from_pt, math.random() * 2 * PI, 60, 16)
-            or FindSwimmableOffset(from_pt, math.random() * 2 * PI, 30, 16)
-            or FindSwimmableOffset(from_pt, math.random() * 2 * PI, 15, 16)
+        local offset = FindSwimmableOffset(from_pt, math.random() * TWOPI, 90, 16)
+            or FindSwimmableOffset(from_pt, math.random() * TWOPI, 60, 16)
+            or FindSwimmableOffset(from_pt, math.random() * TWOPI, 30, 16)
+            or FindSwimmableOffset(from_pt, math.random() * TWOPI, 15, 16)
         if offset ~= nil then
             return from_pt + offset
         end
@@ -404,8 +404,10 @@ local function teleport_start(teleportee, staff, caster, loctarget, target_in_oc
         caster:RemoveTag("aquatic")
         caster.AnimState:SetLayer(LAYER_WORLD)
         caster.AnimState:SetSortOrder(0)
-        if caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then caster.components.inventory
-                :GetEquippedItem(EQUIPSLOTS.BARCO):Remove() end
+        if caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then
+            caster.components.inventory
+                :GetEquippedItem(EQUIPSLOTS.BARCO):Remove()
+        end
     end
 
     if not no_teleport then
@@ -527,8 +529,10 @@ local function onblink(staff, pos, caster)
         caster:RemoveTag("aquatic")
         caster.AnimState:SetLayer(LAYER_WORLD)
         caster.AnimState:SetSortOrder(0)
-        if caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then caster.components.inventory
-                :GetEquippedItem(EQUIPSLOTS.BARCO):Remove() end
+        if caster.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO) then
+            caster.components.inventory
+                :GetEquippedItem(EQUIPSLOTS.BARCO):Remove()
+        end
     end
 
 
@@ -558,7 +562,7 @@ local function blinkstaff_reticuletargetfn()
     end
     rotation = rotation * DEGREES
     for r = 13, 1, -1 do
-        local numtries = 2 * PI * r
+        local numtries = TWOPI * r
         local offset = FindWalkableOffset(pos, rotation, r, numtries, false, true, NoHoles)
         if offset ~= nil then
             pos.x = pos.x + offset.x
@@ -577,7 +581,7 @@ local function onhauntorange(inst)
         local target = FindEntity(inst, 20, nil, ORANGEHAUNT_MUST_TAGS, ORANGEHAUNT_CANT_TAGS)
         if target ~= nil then
             local pos = target:GetPosition()
-            local start_angle = math.random() * 2 * PI
+            local start_angle = math.random() * TWOPI
             local offset = FindWalkableOffset(pos, start_angle, math.random(8, 12), 16, false, true, NoHoles)
             if offset ~= nil then
                 pos.x = pos.x + offset.x
@@ -657,7 +661,7 @@ local function SpawnLootPrefab(inst, lootprefab)
     local x, y, z = inst.Transform:GetWorldPosition()
 
     if loot.Physics ~= nil then
-        local angle = math.random() * 2 * PI
+        local angle = math.random() * TWOPI
         loot.Physics:SetVel(2 * math.cos(angle), 10, 2 * math.sin(angle))
 
         if inst.Physics ~= nil then
@@ -807,7 +811,7 @@ end
 local function onhauntlight(inst)
     if math.random() <= TUNING.HAUNT_CHANCE_RARE then
         local pos = inst:GetPosition()
-        local start_angle = math.random() * 2 * PI
+        local start_angle = math.random() * TWOPI
         local offset = FindWalkableOffset(pos, start_angle, math.random(3, 12), 60, false, true, NoHoles)
         if offset ~= nil then
             createlight(inst, nil, pos + offset)
@@ -897,7 +901,7 @@ local function commonfn(colour, tags, hasskin, hasshadowlevel)
             if skin_build ~= nil then
                 owner:PushEvent("equipskinneditem", inst:GetSkinName())
                 owner.AnimState:OverrideItemSkinSymbol("swap_object", skin_build, "swap_" .. colour .. "staff", inst
-                .GUID, "swap_staffs")
+                    .GUID, "swap_staffs")
             else
                 owner.AnimState:OverrideSymbol("swap_object", "swap_staffs", "swap_" .. colour .. "staff")
             end

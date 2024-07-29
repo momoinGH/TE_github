@@ -80,7 +80,7 @@ function Dislodgeable:Dislodge(dislodger)
             local loot = SpawnPrefab(self.product)
             loot.Transform:SetPosition(pt.x, pt.y, pt.z)
             if loot.Physics then
-                local angle = math.random() * 2 * PI
+                local angle = math.random() * TWOPI
                 local speed = 1
                 speed = speed * math.random()
                 loot.Physics:SetVel(speed * math.cos(angle), GetRandomWithVariance(8, 4), speed * math.sin(angle))

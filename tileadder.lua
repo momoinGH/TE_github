@@ -1,14 +1,3 @@
---Reqs---------------------------
-local _G = GLOBAL
-local require = GLOBAL.require
-local Asset = _G.Asset
-local error = _G.error
-local unpack = _G.unpack
-local GROUND = _G.GROUND
-local GROUND_NAMES = _G.GROUND_NAMES
-local GROUND_FLOORING = _G.GROUND_FLOORING
-local resolvefilepath = _G.resolvefilepath
-local softresolvefilepath = _G.softresolvefilepath
 require 'map/terrain'
 local tiledefs = require 'worldtiledefs'
 modimport 'tiledescription.lua'
@@ -137,30 +126,37 @@ function AddTiles()
         end
 
         local chk = true
-        local numid = minStartID
+        local tile_id = minStartID
         local j = 1
         while chk do
             chk = false
             for _, val2 in pairs(tiledefs.ground) do
-                if val2[1] == numid or (is_multiworlds_enabled and numid >= 50 and numid < 68) then
-                    print(numid, "is reserved, incrementing...")
-                    numid = numid + 1
+                if val2[1] == tile_id or (is_multiworlds_enabled and tile_id >= 50 and tile_id < 68) then
+                    print(tile_id, "is reserved, incrementing...")
+                    tile_id = tile_id + 1
                     chk = true
                 end
             end
         end
 
-        if numid >= GROUND.UNDERGROUND then
-            return error(("Numerical id %d is out of limits"):format(numid, GROUND.UNDERGROUND), 3)
+        if tile_id >= GROUND.UNDERGROUND then
+            return error(("Numerical id %d is out of limits"):format(tile_id, GROUND.UNDERGROUND), 3)
         end
 
-        print("lowest founded value:", numid)
+        print("lowest founded value:", tile_id)
         ------------------------------------------------------
 
-        GROUND[string.upper(tilename)] = numid
-        WORLD_TILES[string.upper(tilename)] = numid
-        GROUND_NAMES[numid] = tilename
-        GROUND_FLOORING[numid] = data.isfloor
+        GROUND[string.upper(tilename)] = tile_id
+        WORLD_TILES[string.upper(tilename)] = tile_id
+        GROUND_NAMES[tile_id] = tilename
+        GROUND_FLOORING[tile_id] = data.isfloor
+
+        if data.hard then --不能种植
+            GROUND_HARD[tile_id] = true
+        end
+        if data.cannotbedug then --不能用草叉挖掉
+            TERRAFORM_IMMUNE[tile_id] = true
+        end
 
         mapspecs = mapspecs or {}
 
@@ -195,9 +191,9 @@ function AddTiles()
         end
 
         if layer then
-            table.insert(tiledefs.ground, layer, { numid, realMapspecs })
+            table.insert(tiledefs.ground, layer, { tile_id, realMapspecs })
         else
-            table.insert(tiledefs.ground, { numid, realMapspecs })
+            table.insert(tiledefs.ground, { tile_id, realMapspecs })
         end
         table.insert(tiledefs.assets, Asset("IMAGE", realMapspecs.noise_texture))
         table.insert(tiledefs.assets, Asset("IMAGE", GroundImage(realMapspecs.name)))
@@ -269,3 +265,5 @@ function AddMinimap()
         end
     end)
 end
+
+----------------------------------------------------------------------------------------------------

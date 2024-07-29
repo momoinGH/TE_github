@@ -53,7 +53,7 @@ local function setupHomeAndMigrationDestination(jelly, migrationPos, teleport)
         jelly.components.knownlocations:RememberLocation("home", Vector3(jelly.Transform:GetWorldPosition()))
     end
 
-    local offset = FindSwimmableOffset(migrationPos, math.random() * 2 * PI, math.random(2, 25), 4)
+    local offset = FindSwimmableOffset(migrationPos, math.random() * TWOPI, math.random(2, 25), 4)
 
     -- tell them about their new destination
     if offset then

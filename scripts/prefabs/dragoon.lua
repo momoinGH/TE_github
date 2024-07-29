@@ -60,7 +60,7 @@ end
 
 local function KeepTarget(inst, target)
 	return inst.components.combat:CanTarget(target) and
-	inst:GetDistanceSqToInst(target) <= (DRAGOON_KEEP_TARGET_DIST * DRAGOON_KEEP_TARGET_DIST)
+		inst:GetDistanceSqToInst(target) <= (DRAGOON_KEEP_TARGET_DIST * DRAGOON_KEEP_TARGET_DIST)
 end
 
 local function OnAttacked(inst, data)
@@ -78,7 +78,7 @@ local function GetReturnPos(inst)
 	local rad = 2
 	local pos = inst:GetPosition()
 	trace("GetReturnPos", inst, pos)
-	local angle = math.random() * 2 * PI
+	local angle = math.random() * TWOPI
 	pos = pos + Point(rad * math.cos(angle), 0, -rad * math.sin(angle))
 	trace("    ", pos)
 	return pos:Get()

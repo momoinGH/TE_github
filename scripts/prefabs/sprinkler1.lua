@@ -39,7 +39,7 @@ end
 local function spawndrop(inst)
 	local drop = SpawnPrefab("raindrop")
 	local pt = Vector3(inst.Transform:GetWorldPosition())
-	local angle = math.random() * 2 * PI
+	local angle = math.random() * TWOPI
 	local dist = math.random() * RANGE
 	local offset = Vector3(dist * math.cos(angle), 0, -dist * math.sin(angle))
 	drop.Transform:SetPosition(pt.x + offset.x, 0, pt.z + offset.z)

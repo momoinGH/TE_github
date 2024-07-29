@@ -77,7 +77,7 @@ local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
 local function ShouldWakeUp(inst)
     return DefaultWakeTest(inst) or
-    (inst.components.follower and inst.components.follower.leader and not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE))
+        (inst.components.follower and inst.components.follower.leader and not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE))
 end
 
 local function ShouldSleep(inst)
@@ -117,7 +117,7 @@ end
 
 local function KeepTarget(inst, target)
     local shouldkeep = inst.components.combat:CanTarget(target) and
-    (not inst:HasTag("pet_hound") or inst:IsNear(target, HOUND_FOLLOWER_TARGET_KEEP))
+        (not inst:HasTag("pet_hound") or inst:IsNear(target, HOUND_FOLLOWER_TARGET_KEEP))
     return shouldkeep
 end
 
@@ -138,7 +138,7 @@ local function GetReturnPos(inst)
     local rad = 2
     local pos = inst:GetPosition()
     trace("GetReturnPos", inst, pos)
-    local angle = math.random() * 2 * PI
+    local angle = math.random() * TWOPI
     pos = pos + Point(rad * math.cos(angle), 0, -rad * math.sin(angle))
     trace("    ", pos)
     return pos:Get()

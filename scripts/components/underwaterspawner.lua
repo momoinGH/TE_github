@@ -1553,7 +1553,7 @@ return Class(function(self, inst)
 	local function testforgnarwail(comp, spawnpoint)
 		local ents = TheSim:FindEntities(spawnpoint.x, spawnpoint.y, spawnpoint.z, GNARWAIL_TEST_RADIUS, { "eel" })
 		if #ents < 2 and math.random() < GNARWAIL_SPAWN_CHANCE then
-			local offset = FindWalkableOffset(spawnpoint, math.random() * 2 * PI, GNARWAIL_SPAWN_RADIUS)
+			local offset = FindWalkableOffset(spawnpoint, math.random() * TWOPI, GNARWAIL_SPAWN_RADIUS)
 			if offset then
 				comp.inst:DoTaskInTime(GetRandomMinMax(GNARWAIL_TIMING[1], GNARWAIL_TIMING[2]), function()
 					local gnarwail = SpawnPrefab("sea_eel")
@@ -1592,7 +1592,7 @@ return Class(function(self, inst)
 	local function PickSchool(spawnpoint)
 		if PESODOGRUPO[TheWorld.state.season] ~= nil then
 			local school_choices = PESODOGRUPO[TheWorld.state.season]
-			[TheWorld.Map:GetTileAtPoint(spawnpoint.x, spawnpoint.y, spawnpoint.z)]
+				[TheWorld.Map:GetTileAtPoint(spawnpoint.x, spawnpoint.y, spawnpoint.z)]
 			local schooltype = school_choices and weighted_random_choice(school_choices) or nil
 			return schooltype ~= nil and CRIATURAS[schooltype] or nil
 		end
@@ -1642,7 +1642,7 @@ return Class(function(self, inst)
 			return PickSchool(pt + offset) and not TheWorld.Map:IsOceanAtPoint((pt + offset):Get())
 		end
 		local SPAWN_DIST = 23
-		local theta = math.random() * 2 * PI
+		local theta = math.random() * TWOPI
 		local resultoffset = FindValidPositionByFan(theta, SPAWN_DIST, 12, TestSpawnPoint)
 			or FindValidPositionByFan(theta, SPAWN_DIST, 12, TestSpawnPoint)
 			or FindValidPositionByFan(theta, SPAWN_DIST, 12, TestSpawnPoint)
@@ -1742,9 +1742,9 @@ return Class(function(self, inst)
 			local percent_ocean = 1
 			TheWorld.Map:CalcPercentOceanTilesAtPoint(pt.x, pt.y, pt.z, 25)
 			str = (str == nil and "" or "\n") ..
-			tostring(k) ..
-			" in " .. string.format("%.2f", GetTaskRemaining(t)) ..
-			" ocean = " .. string.format("%.2f", percent_ocean) .. "%"
+				tostring(k) ..
+				" in " .. string.format("%.2f", GetTaskRemaining(t)) ..
+				" ocean = " .. string.format("%.2f", percent_ocean) .. "%"
 		end
 		return str or "no scheduled tasks"
 	end

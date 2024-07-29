@@ -269,7 +269,7 @@ local function UpdateTail(inst)
         local rot = inst.Transform:GetRotation()
         tail.Transform:SetRotation(rot)
         rot = rot * DEGREES
-        local offsangle = math.random() * 2 * PI
+        local offsangle = math.random() * TWOPI
         local offsradius = math.random() * .2 --+ .2
         local hoffset = math.cos(offsangle) * offsradius
         tail.Transform:SetPosition(x + math.sin(rot) * hoffset, y, z + math.cos(rot) * hoffset)

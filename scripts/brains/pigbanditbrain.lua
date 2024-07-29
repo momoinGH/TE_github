@@ -21,7 +21,7 @@ local function FindRandomOffscreenPoint(inst)
 
     local pt = Vector3(inst.Transform:GetWorldPosition())
 
-    local theta = math.random() * 2 * PI
+    local theta = math.random() * TWOPI
     local radius = OFFSET
 
     local offset = FindWalkableOffset(pt, theta, radius, 12, true) --12
@@ -90,8 +90,10 @@ local function OincNearby(inst)
     local pt = Vector3(x, y, z)
 
     if not TheWorld.Map:IsVisualGroundAtPoint(x, y, z) then
-        if inst and inst.components.health and plataforma == false and inst.sg:HasStateTag("moving") then inst
-                .components.health:Kill() end
+        if inst and inst.components.health and plataforma == false and inst.sg:HasStateTag("moving") then
+            inst
+                .components.health:Kill()
+        end
     end
     return FindEntity(inst, SEE_STOLEN_ITEM_DIST,
         function(item)
@@ -104,7 +106,7 @@ local function OincNearby(inst)
                 item.components.inventoryitem.canbepickedup and
                 item:IsOnValidGround() and
                 not item:HasTag("trap") and
-                item:HasTag("oinc")     -- bandits only steal money
+                item:HasTag("oinc") -- bandits only steal money
             return isValidPickupItem
         end)
 end
@@ -137,20 +139,26 @@ function PigBanditBrain:OnStart()
                 WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire",
                     ChattyNode(self.inst, STRINGS.PIG_TALK_PANICFIRE, Panic(self.inst))),
                 WhileNode(
-                    function() return (self.inst.attacked or (self.inst.components.inventory:NumItems() > 1 and not OincNearby(self.inst))) and
-                        not self.inst.sg:HasStateTag("busy") end, "run off with prize",
+                    function()
+                        return (self.inst.attacked or (self.inst.components.inventory:NumItems() > 1 and not OincNearby(self.inst))) and
+                            not self.inst.sg:HasStateTag("busy")
+                    end, "run off with prize",
                     DoAction(self.inst, GoHomeAction, "disappear", true)),
 
                 WhileNode(function() return not self.inst.attacked end, "run off with prize",
                     DoAction(self.inst, PickupAction, "searching for prize", true)),
                 ChattyNode(self.inst, STRINGS.BANDIT_TALK_FIGHT,
                     WhileNode(
-                        function() return self.inst.components.combat.target == nil or
-                            not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+                        function()
+                            return self.inst.components.combat.target == nil or
+                                not self.inst.components.combat:InCooldown()
+                        end, "AttackMomentarily",
                         ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST))),
                 RunAway(self.inst,
-                    function(guy) return guy:HasTag("pig") and guy.components.combat and
-                        guy.components.combat.target == self.inst end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST),
+                    function(guy)
+                        return guy:HasTag("pig") and guy.components.combat and
+                            guy.components.combat.target == self.inst
+                    end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST),
                 Wander(self.inst, GetPlayerPos, MAX_WANDER_DIST)
             }, .5)
 

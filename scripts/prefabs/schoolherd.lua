@@ -1,4 +1,4 @@
-local FISH_DATA = require("prefabs/oceanfishdef1")
+local FISH_DATA = require("prefabs/oceanfishdef")
 
 local function AddMember(inst, member)
     inst:ListenForEvent("entitysleep", function() inst.checkforremoval(inst) end, member)
@@ -39,9 +39,9 @@ local function updateposfn(inst)
     end
 
     local currentpos = inst.components.knownlocations:GetLocation("nav" .. inst.currentnav) or
-    inst.components.knownlocations:GetLocation("nav1")
+        inst.components.knownlocations:GetLocation("nav1")
     for k, v in pairs(inst.components.herd.members) do
-        local angle = math.random() * 2 * PI
+        local angle = math.random() * TWOPI
         local dist = math.sqrt(math.random()) * 8
         local herd_offset = Vector3(currentpos.x + math.cos(angle) * dist, currentpos.y,
             currentpos.z + math.sin(angle) * dist)
@@ -64,7 +64,7 @@ local function setupnavs(inst)
                 inst.components.knownlocations:RememberLocation("nav" .. i, origin)
             else
                 local dist = math.sqrt(math.random()) * (data and data.herdwandermin or 15) +
-                (data and (data.herdwandermax - data.herdwandermin) or 15)
+                    (data and (data.herdwandermax - data.herdwandermin) or 15)
                 local swim_offset = FindSwimmableOffset(origin, math.random() * PI * 2, dist, triesmax, true, nil, nil,
                     true)
                 if swim_offset then

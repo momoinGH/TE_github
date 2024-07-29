@@ -285,6 +285,9 @@ end
 function d_ground(ground, pt)
 end
 
+require("debugcommands");
+d_ground(WORLD_TILES.BEARGRUG, ConsoleWorldPosition());
+
 ---不知道有啥用，但是角色会有一个从全黑到正常的过渡动画
 function d_portalfx()
 end

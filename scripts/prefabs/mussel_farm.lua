@@ -30,7 +30,7 @@ MUSSEL_CATCH_MED = 3
 MUSSEL_CATCH_LARGE = 6
 
 local function getnewpoint(pt)
-	local theta = math.random() * 2 * PI
+	local theta = math.random() * TWOPI
 	local radius = 6 + math.random() * 6
 
 	local result_offset = FindValidPositionByFan(theta, radius, 12, function(offset)

@@ -128,11 +128,11 @@ end
 function FN.IsDefaultScreen()
     return FN.IsHUDScreen()
         -- 非幽灵
-        and inst and not inst:HasTag("playerghost")
+        and ThePlayer and not ThePlayer:HasTag("playerghost")
         -- 非打字
-        and not inst.HUD:IsChatInputScreenOpen() and not inst.HUD.writeablescreen
+        and not ThePlayer.HUD:IsChatInputScreenOpen() and not ThePlayer.HUD.writeablescreen
         -- 非制作栏搜索
-        and not inst.HUD:HasInputFocus()
+        and not ThePlayer.HUD:HasInputFocus()
     --非骑行
     --and not (ThePlayer.replica.rider and ThePlayer.replica.rider:IsRiding())
 end
@@ -194,6 +194,13 @@ function FN.MergeFn(...)
             v(...)
         end
     end
+end
+
+function FN.AppendKVArray(orig, addition)
+    for k, v in pairs(addition) do
+        orig[k] = v
+    end
+    return orig
 end
 
 local enablemods

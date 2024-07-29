@@ -245,7 +245,7 @@ function GetSpawnPoint(inst, pt)
     --        return
     --    end
 
-    local theta = math.random() * 2 * PI
+    local theta = math.random() * TWOPI
     local radius = OFF_SCREENDIST
 
     local offset = FindWalkableOffset(pt, theta, radius, 12, true)

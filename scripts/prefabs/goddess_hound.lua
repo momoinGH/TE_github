@@ -12,7 +12,7 @@ end
 
 local function ShouldWakeUp(inst)
     return (DefaultWakeTest(inst) and not IsLeaderSleeping(inst)) or
-    not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE)
+        not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE)
 end
 
 local function ShouldSleep(inst)
@@ -27,11 +27,11 @@ local function oneat(inst, food)
     local is_wellfed = inst.components.crittertraits:IsDominantTrait("wellfed")
     if perish <= STARVING_PERISH_PERCENT then
         inst.components.perishable.perishtime = math.max(
-        inst.components.perishable.perishtime - TUNING.CRITTER_HUNGERTIME_DELTA,
+            inst.components.perishable.perishtime - TUNING.CRITTER_HUNGERTIME_DELTA,
             is_wellfed and TUNING.CRITTER_DOMINANTTRAIT_HUNGERTIME_MIN or TUNING.CRITTER_HUNGERTIME_MIN)
     elseif perish <= HUNGRY_PERISH_PERCENT then
         inst.components.perishable.perishtime = math.min(
-        inst.components.perishable.perishtime + TUNING.CRITTER_HUNGERTIME_DELTA,
+            inst.components.perishable.perishtime + TUNING.CRITTER_HUNGERTIME_DELTA,
             is_wellfed and TUNING.CRITTER_DOMINANTTRAIT_HUNGERTIME_MAX or TUNING.CRITTER_HUNGERTIME_MAX)
     else
         if is_wellfed and inst.components.perishable.perishtime < TUNING.CRITTER_DOMINANTTRAIT_HUNGERTIME_MIN then
@@ -230,7 +230,7 @@ end
 
 -------------------------------------------------------------------------------
 local function builder_onbuilt(inst, builder)
-    local theta = math.random() * 2 * PI
+    local theta = math.random() * TWOPI
     local pt = builder:GetPosition()
     local radius = 1
     local offset = FindWalkableOffset(pt, theta, radius, 6, true)
@@ -272,5 +272,6 @@ end
 
 local standard_diet = { FOODGROUP.OMNI }
 
-return MakeCritter("critter_goddess_puppy", "goddess_hound", 4, standard_diet, false, { favoritefood = "monsterlasagna" }),
+return
+    MakeCritter("critter_goddess_puppy", "goddess_hound", 4, standard_diet, false, { favoritefood = "monsterlasagna" }),
     MakeBuilder("critter_goddess_puppy")

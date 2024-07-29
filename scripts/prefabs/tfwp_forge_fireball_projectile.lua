@@ -55,7 +55,7 @@ local function o(d, j, k, p, l, m, n, q, r)
         local rotation = d.Transform:GetRotation()
         v.Transform:SetRotation(rotation)
         rotation = rotation * DEGREES;
-        local y = math.random() * 2 * PI;
+        local y = math.random() * TWOPI;
         local z = math.random() * .2 + .2;
         local A = math.cos(y) * z;
         local B = math.sin(y) * z;

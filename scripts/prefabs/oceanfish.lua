@@ -1,4 +1,4 @@
-local FISH_DATA                 = require("prefabs/oceanfishdef1")
+local FISH_DATA                 = require("prefabs/oceanfishdef")
 
 local easing                    = require("easing")
 
@@ -346,7 +346,7 @@ local function water_common(data)
 	inst.components.oceanfishable.onreelinginfn = OnReelingIn
 	inst.components.oceanfishable.onsetrodfn = OnSetRod
 	inst.components.oceanfishable:StrugglingSetup(inst.components.locomotor.walkspeed, inst.components.locomotor
-	.runspeed, data.stamina or TUNING.OCEANFISH.FISHABLE_STAMINA)
+		.runspeed, data.stamina or TUNING.OCEANFISH.FISHABLE_STAMINA)
 	inst.components.oceanfishable.catch_distance = TUNING.OCEAN_FISHING.FISHING_CATCH_DIST
 
 	inst:AddComponent("eater")

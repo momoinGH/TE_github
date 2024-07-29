@@ -23,7 +23,7 @@ function Thrower:GetThrowPoint()
 	local pos = owner:GetPosition()
 
 	for r = self.range, 1, -1 do
-		local numtries = 2 * PI * r
+		local numtries = TWOPI * r
 		pt = FindValidPositionByFan(rotation, r, numtries, function() return true end) --TODO: #BDOIG Might not need to be walkable?
 		if pt then
 			return pt + pos

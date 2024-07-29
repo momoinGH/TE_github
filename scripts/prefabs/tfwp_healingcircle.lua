@@ -33,7 +33,7 @@ local function Fn()
                         table.insert(inst.blooms, ent)
                     end)
             elseif i >= 2 and i < 7 then
-                local j = (i - 1) / 5 * 2 * PI;
+                local j = (i - 1) / 5 * TWOPI;
                 local k = inst.components.heal_aura.range / 2;
                 local pos = FindWalkableOffset(h, j, k, 2, true, true)
                 if pos ~= nil then
@@ -48,7 +48,7 @@ local function Fn()
                         end)
                 end
             elseif i >= 7 then
-                local j = (i - 5) / 9 * 2 * PI;
+                local j = (i - 5) / 9 * TWOPI;
                 local k = inst.components.heal_aura.range;
                 local pos = FindWalkableOffset(h, j, k, 2, true, true)
                 if pos ~= nil then

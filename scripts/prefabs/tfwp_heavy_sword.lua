@@ -46,66 +46,66 @@ local function B(e, C, n)
     C:PushEvent("combat_parry",
         { direction = e:GetAngleToPoint(n), duration = e.components.parryweapon.duration, weapon = e })
 end;
-local function D(e, C) e.components.recarregavel:StartRecharge() end; local function E(e)
+local function OnPreParry(e, C) e.components.recarregavel:StartRecharge() end; local function E(e)
     SpawnPrefab("superjump_fx")
         :SetTarget(e)
 end;
-local function F()
-    local e = CreateEntity()
-    e.entity:AddTransform()
-    e.entity:AddAnimState()
-    e.entity:AddNetwork()
-    MakeInventoryPhysics(e)
-    e.nameoverride = "lavaarena_heavyblade"
-    e.AnimState:SetBank("sword_buster")
-    e.AnimState:SetBuild("sword_buster")
-    e.AnimState:PlayAnimation("idle")
-    e:AddTag("parryweapon")
-    e:AddTag("rechargeable")
-    e:AddComponent("aoetargeting")
-    e.components.aoetargeting:SetAlwaysValid(true)
-    e.components.aoetargeting.reticule.reticuleprefab = "reticulearc"
-    e.components.aoetargeting.reticule.pingprefab = "reticulearcping"
-    e.components.aoetargeting.reticule.targetfn = c;
-    e.components.aoetargeting.reticule.mousetargetfn = d;
-    e.components.aoetargeting.reticule.updatepositionfn = m;
-    e.components.aoetargeting.reticule.validcolour = { 1, .75, 0, 1 }
-    e.components.aoetargeting.reticule.invalidcolour = { .5, 0, 0, 1 }
-    e.components.aoetargeting.reticule.ease = true;
-    e.components.aoetargeting.reticule.mouseenabled = true;
-    e.entity:SetPristine()
+local function fn()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+    MakeInventoryPhysics(inst)
+    inst.nameoverride = "lavaarena_heavyblade"
+    inst.AnimState:SetBank("sword_buster")
+    inst.AnimState:SetBuild("sword_buster")
+    inst.AnimState:PlayAnimation("idle")
+    inst:AddTag("parryweapon")
+    inst:AddTag("rechargeable")
+    inst:AddComponent("aoetargeting")
+    inst.components.aoetargeting:SetAlwaysValid(true)
+    inst.components.aoetargeting.reticule.reticuleprefab = "reticulearc"
+    inst.components.aoetargeting.reticule.pingprefab = "reticulearcping"
+    inst.components.aoetargeting.reticule.targetfn = c;
+    inst.components.aoetargeting.reticule.mousetargetfn = d;
+    inst.components.aoetargeting.reticule.updatepositionfn = m;
+    inst.components.aoetargeting.reticule.validcolour = { 1, .75, 0, 1 }
+    inst.components.aoetargeting.reticule.invalidcolour = { .5, 0, 0, 1 }
+    inst.components.aoetargeting.reticule.ease = true;
+    inst.components.aoetargeting.reticule.mouseenabled = true;
+    inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then return e end;
+    if not TheWorld.ismastersim then return inst end;
 
-    e:AddComponent("aoespell")
-    e.components.aoespell:SetSpellFn(B)
-    e:AddComponent("equippable")
-    e.components.equippable:SetOnEquip(v)
-    e.components.equippable:SetOnUnequip(x)
-    e:AddComponent("helmsplitter")
-    e.components.helmsplitter:SetOnHelmSplitFn(E)
-    e.components.helmsplitter.damage = TUNING.FORGE_ITEM_PACK.TFWP_HEAVY_SWORD.HELMSPLIT_DAMAGE;
-    e:AddComponent("inspectable")
-    e:AddComponent("inventoryitem")
-    e.components.inventoryitem.imagename = "lavaarena_heavyblade"
+    inst:AddComponent("aoespell")
+    inst.components.aoespell:SetSpellFn(B)
+    inst:AddComponent("equippable")
+    inst.components.equippable:SetOnEquip(v)
+    inst.components.equippable:SetOnUnequip(x)
+    inst:AddComponent("helmsplitter")
+    inst.components.helmsplitter:SetOnHelmSplitFn(E)
+    inst.components.helmsplitter.damage = TUNING.FORGE_ITEM_PACK.TFWP_HEAVY_SWORD.HELMSPLIT_DAMAGE;
+    inst:AddComponent("inspectable")
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.imagename = "lavaarena_heavyblade"
     --e.components.inventoryitem.atlasname = "images/tfwp_inventoryimgs.xml"
-    e:AddComponent("parryweapon")
-    e.components.parryweapon.duration = TUNING.FORGE_ITEM_PACK.TFWP_HEAVY_SWORD.PARRY_DURATION;
-    e.components.parryweapon:SetOnParryStartFn(D)
-    e:AddComponent("recarregavel")
-    e.components.recarregavel:SetRechargeTime(TUNING.FORGE_ITEM_PACK.TFWP_HEAVY_SWORD.COOLDOWN / 20)
-    e:AddComponent("reticule_spawner")
-    e.components.reticule_spawner:Setup(unpack(TUNING.FORGE_ITEM_PACK.RET_DATA.tfwp_heavy_sword))
-    e:AddComponent("weapon")
-    e.components.weapon:SetDamage(TUNING.FORGE_ITEM_PACK.TFWP_HEAVY_SWORD.DAMAGE)
-    e.components.weapon:SetDamageType(DAMAGETYPES.PHYSICAL)
+    inst:AddComponent("parryweapon")
+    inst.components.parryweapon.duration = TUNING.FORGE_ITEM_PACK.TFWP_HEAVY_SWORD.PARRY_DURATION;
+    inst.components.parryweapon:SetOnPreParryFn(OnPreParry)
+    inst:AddComponent("recarregavel")
+    inst.components.recarregavel:SetRechargeTime(TUNING.FORGE_ITEM_PACK.TFWP_HEAVY_SWORD.COOLDOWN / 20)
+    inst:AddComponent("reticule_spawner")
+    inst.components.reticule_spawner:Setup(unpack(TUNING.FORGE_ITEM_PACK.RET_DATA.tfwp_heavy_sword))
+    inst:AddComponent("weapon")
+    inst.components.weapon:SetDamage(TUNING.FORGE_ITEM_PACK.TFWP_HEAVY_SWORD.DAMAGE)
+    inst.components.weapon:SetDamageType(DAMAGETYPES.PHYSICAL)
 
     --e:AddComponent("finiteuses")
     --e.components.finiteuses:SetMaxUses(TUNING.TFWP_HEAVY_SWORD.USES)
     --e.components.finiteuses:SetUses(TUNING.TFWP_HEAVY_SWORD.USES)
     --e.components.finiteuses:SetOnFinished(e.Remove)
-    return e
+    return inst
 end;
 
-return CustomPrefab("tfwp_heavy_sword", F, a, b, nil, "images/inventoryimages.xml", "lavaarena_heavyblade.tex",
+return CustomPrefab("tfwp_heavy_sword", fn, a, b, nil, "images/inventoryimages.xml", "lavaarena_heavyblade.tex",
     TUNING.FORGE_ITEM_PACK.TFWP_HEAVY_SWORD, "swap_sword_buster", "common_hand")
