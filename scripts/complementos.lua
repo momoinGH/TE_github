@@ -1,40 +1,3 @@
-local Recipe = GLOBAL.Recipe
-local Ingredient = GLOBAL.Ingredient
-local RECIPETABS = GLOBAL.RECIPETABS
-local STRINGS = GLOBAL.STRINGS
-local TUNING = GLOBAL.TUNING
-local ACTIONS = GLOBAL.ACTIONS
-local require = GLOBAL.require
-local TheInput = GLOBAL.TheInput
-local ThePlayer = GLOBAL.ThePlayer
-local IsServer = GLOBAL.TheNet:GetIsServer()
-local Inv = require "widgets/inventorybar"
-local containers = GLOBAL.require "containers"
-local TheWorld = GLOBAL.TheWorld
-
-_G = GLOBAL; require, rawget, getmetatable, unpack = _G.require, _G.rawget, _G.getmetatable, _G.unpack
-TheNet = _G.TheNet; IsServer, IsDedicated = TheNet:GetIsServer(), TheNet:IsDedicated()
-TheSim = _G.TheSim
-STRINGS = _G.STRINGS
-RECIPETABS, TECH, AllRecipes, GetValidRecipe = _G.RECIPETABS, _G.TECH, _G.AllRecipes, _G.GetValidRecipe
-EQUIPSLOTS, FRAMES, FOODTYPE, FUELTYPE = _G.EQUIPSLOTS, _G.FRAMES, _G.FOODTYPE, _G.FUELTYPE
-
-State, TimeEvent, EventHandler = _G.State, _G.TimeEvent, _G.EventHandler
-ACTIONS, ActionHandler = _G.ACTIONS, _G.ActionHandler
-CAMERASHAKE, ShakeAllCameras = _G.CAMERASHAKE, _G.ShakeAllCameras
-
-SpawnPrefab, ErodeAway, FindEntity = _G.SpawnPrefab, _G.ErodeAway, _G.FindEntity
-KnownModIndex, Vector3, Remap = _G.KnownModIndex, _G.Vector3, _G.Remap
-COMMAND_PERMISSION, BufferedAction, SendRPCToServer, RPC = _G.COMMAND_PERMISSION, _G.BufferedAction, _G.SendRPCToServer,
-    _G.RPC
-COLLISION = _G.COLLISION
-
-AllPlayers = _G.AllPlayers
-
-
--- Usados no portal the forge: lavaarena_spawner, quagmire_key, lavarenainside
-modimport "scripts/tuning.lua"
-
 AddMinimapAtlas("map_icons/hamleticon.xml")
 --configurar idioma
 
@@ -671,10 +634,12 @@ local function d(b)
                     _G.TUNING.FORGE_ITEM_PACK[c].DURABILITY.CONSUMPTION_NORMAL)
             end;
 
-            if _G.TUNING.FORGE_ITEM_PACK[c].DURABILITY.CONSUMPTION_SPECIAL then b.components.finiteuses:SetConsumption(
-                ACTIONS.CASTAOE,
+            if _G.TUNING.FORGE_ITEM_PACK[c].DURABILITY.CONSUMPTION_SPECIAL then
+                b.components.finiteuses:SetConsumption(
+                    ACTIONS.CASTAOE,
                     _G.TUNING.FORGE_ITEM_PACK[c].DURABILITY.AMOUNT *
-                    _G.TUNING.FORGE_ITEM_PACK[c].DURABILITY.CONSUMPTION_SPECIAL / 100) end
+                    _G.TUNING.FORGE_ITEM_PACK[c].DURABILITY.CONSUMPTION_SPECIAL / 100)
+            end
         end
     else
         print("Cannot find tunning for " .. c)
@@ -698,8 +663,10 @@ local f = { "tfwp_lava_dart", "tfwp_lava_hammer", "tfwp_spear_gung", "tfwp_heali
     "tfwp_summon_book" }
 for i, j in ipairs(f) do AddPrefabPostInit(j, d) end;
 modimport("scripts/modweab.lua")
-_G.ACTIONS.CASTAOE.strfn = function(k) return k.invobject ~= nil and
-    string.upper(k.invobject.nameoverride ~= nil and k.invobject.nameoverride or k.invobject.prefab) or nil end;
+_G.ACTIONS.CASTAOE.strfn = function(k)
+    return k.invobject ~= nil and
+        string.upper(k.invobject.nameoverride ~= nil and k.invobject.nameoverride or k.invobject.prefab) or nil
+end;
 
 STRINGS.NAMES.TFWP_LAVA_DART = STRINGS.NAMES.BLOWDART_LAVA;
 STRINGS.NAMES.TFWP_DRAGON_DART = STRINGS.NAMES.BLOWDART_LAVA2;

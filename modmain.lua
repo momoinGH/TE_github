@@ -1122,7 +1122,7 @@ modimport "modmain/sg"
 modimport "modmain/recipes"
 modimport "modmain/rpc"
 modimport "modmain/input"
-
+modimport "modmain/modwiki"
 
 
 
@@ -5604,24 +5604,8 @@ end
 modimport "tileadder.lua"
 modimport("scripts/ham_fx.lua")
 
-
---modimport("scripts/Languages/stringsEU.lua")
-modimport("scripts/Languages/stringscomplement.lua")
-modimport("scripts/Languages/stringscreeps.lua")
-modimport("scripts/Languages/wurt_quotes.lua")
-
 modimport("scripts/actions.lua")
---[[
---configurar idioma
-if GetModConfigData("set_idioma") ~= nil then
-if GetModConfigData("set_idioma") == "strings"
-  then
 
-  else
-
-end
-end]]
-modimport("scripts/Languages/" .. GetModConfigData("set_idioma") .. ".lua")
 ---------------------
 modimport("scripts/cooking_tropical")
 modimport("scripts/standardcomponents")
@@ -5644,4 +5628,3 @@ GLOBAL.ACTIONS.JUMPIN.strfn = function(act)
 	end
 	return Oldstrfnjumpin(act)
 end
-

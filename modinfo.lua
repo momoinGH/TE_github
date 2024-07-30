@@ -66,21 +66,21 @@ end
 configuration_options =
 {
 	{
-		name = "set_idioma",
+		name = "language",
 		label = en_zh_zht("Language/Idioma", "选择语言", "選擇語言"),
 		hover = "EN/PT/ZH/IT/RU/ES/KR/HU/FR",
-		default = en_zh_zht("stringsEU", "stringsCh"),
+		default = en_zh_zht("en", "zh"),
 		options =
 		{
-			{ description = "English", data = "stringsEU" },
-			{ description = "Português", data = "stringsPT" },
-			{ description = "中文", data = "stringsCh" },
-			{ description = "Italian", data = "stringsIT" },
-			{ description = "Russian", data = "stringsRU" },
-			{ description = "Spanish", data = "stringsSP" },
-			{ description = "한국어", data = "stringsKO" },
-			{ description = "Magyar", data = "stringsHUN" },
-			{ description = "Français", data = "stringsFR" },
+			{ description = "English", data = "en" },
+			{ description = "Português", data = "pt" },
+			{ description = "中文", data = "zh" },
+			{ description = "Italian", data = "it" },
+			{ description = "Russian", data = "ru" },
+			{ description = "Spanish", data = "sp" },
+			{ description = "한국어", data = "ko" },
+			{ description = "Magyar", data = "hun" },
+			{ description = "Français", data = "fr" },
 		},
 	},
 
