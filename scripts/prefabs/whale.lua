@@ -104,13 +104,13 @@ local function OnSave(inst, data)
 end
 
 local function KeepTargetBlue(inst, target)
-	return distsq(Vector3(target.Transform:GetWorldPosition()), Vector3(inst.Transform:GetWorldPosition())) <
-	WHALE_BLUE_CHASE_DIST * WHALE_BLUE_CHASE_DIST
+	return distsq(Vector3(target.Transform:GetWorldPosition()), inst:GetPosition()) <
+		WHALE_BLUE_CHASE_DIST * WHALE_BLUE_CHASE_DIST
 end
 
 local function KeepTargetWhite(inst, target)
-	return distsq(Vector3(target.Transform:GetWorldPosition()), Vector3(inst.Transform:GetWorldPosition())) <
-	WHALE_WHITE_CHASE_DIST * WHALE_WHITE_CHASE_DIST
+	return distsq(Vector3(target.Transform:GetWorldPosition()), inst:GetPosition()) <
+		WHALE_WHITE_CHASE_DIST * WHALE_WHITE_CHASE_DIST
 end
 
 local function RetargetWhite(inst)

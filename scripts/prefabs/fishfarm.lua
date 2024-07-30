@@ -1,4 +1,3 @@
-require "prefabutil"
 require "tuning"
 
 local assets =
@@ -152,7 +151,7 @@ local function onload(inst, data)
 end
 
 local function spawnSign(inst)
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     --pt.x = pt.x+1
     inst.sign_prefab = SpawnPrefab("fish_farm_sign")
     inst.sign_prefab.Transform:SetPosition(pt.x, 0, pt.z)

@@ -15,16 +15,11 @@ local function onunequip(inst, owner)
     owner:RemoveTag("has_antsuit")
 end
 
-local function onperish(inst)
-    inst:Remove()
-end
-
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-    --    MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("antsuit")
     inst.AnimState:SetBuild("antsuit")
@@ -45,7 +40,6 @@ local function fn(Sim)
     inst:AddComponent("armor")
     inst.components.armor:InitCondition(TUNING.ARMORWOOD, TUNING.ARMORWOOD_ABSORPTION)
 
-
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
     inst.components.equippable.insulated = true
@@ -54,13 +48,12 @@ local function fn(Sim)
     inst.components.equippable:SetOnUnequip(onunequip)
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
     inst.components.fueled:InitializeFuelLevel(TUNING.RAINCOAT_PERISHTIME)
-    inst.components.fueled:SetDepletedFn(onperish)
+    inst.components.fueled:SetDepletedFn(inst.Remove)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
 
     return inst
 end

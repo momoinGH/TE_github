@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
     Asset("ANIM", "anim/ice_box.zip"),

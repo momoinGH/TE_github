@@ -17,7 +17,7 @@ local function fn(Sim)
 
 	MakeInventoryPhysics(inst)
 	--	MakeInventoryFloatable(inst, "idle_water", "idle")
-	--    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.MEDIUM, TUNING.WINDBLOWN_SCALE_MAX.MEDIUM)
+
 
 	MakeInventoryFloatable(inst)
 
@@ -50,7 +50,7 @@ local function fn(Sim)
 	inst.components.perishable.onperishreplacement = "spoiled_food"
 
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 	return inst
 end

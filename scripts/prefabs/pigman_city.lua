@@ -110,7 +110,7 @@ end
 
 local function spawndesk(inst, spawndesk)
     if spawndesk then
-        local desklocation = Vector3(inst.Transform:GetWorldPosition())
+        local desklocation = inst:GetPosition()
         if inst.desklocation then
             desklocation = inst.desklocation
         end
@@ -119,7 +119,7 @@ local function spawndesk(inst, spawndesk)
         inst:AddComponent("homeseeker")
         inst.components.homeseeker:SetHome(inst.desk)
     else
-        inst.desklocation = Vector3(inst.Transform:GetWorldPosition())
+        inst.desklocation = inst:GetPosition()
         if inst.desk then
             inst.desk:Remove()
             inst.desk = nil
@@ -693,7 +693,7 @@ end
 local function throwcrackers(inst)
     local cracker = SpawnPrefab("firecrackers")
     inst.components.inventory:GiveItem(cracker)
-    local pos = Vector3(inst.Transform:GetWorldPosition())
+    local pos = inst:GetPosition()
     local start_angle = inst.Transform:GetRotation()
     local radius = 5
     local attempts = 12
@@ -1385,7 +1385,7 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
             inst:AddComponent("fixer")
         end
 
-        inst:DoTaskInTime(0, function() inst.desklocation = Vector3(inst.Transform:GetWorldPosition()) end)
+        inst:DoTaskInTime(0, function() inst.desklocation = inst:GetPosition() end)
 
         TheWorld:ListenForEvent("enterroom",
             function(data) shopkeeper_speech(inst, getSpeechType(inst, STRINGS.CITY_PIG_SHOPKEEPER_GREETING)) end) --  getSpeechType(inst,speech) -- [math.random(1,#STRINGS.CITY_PIG_SHOPKEEPER_GREETING)]

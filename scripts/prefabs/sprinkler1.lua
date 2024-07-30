@@ -38,7 +38,7 @@ end
 
 local function spawndrop(inst)
 	local drop = SpawnPrefab("raindrop")
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local angle = math.random() * TWOPI
 	local dist = math.random() * RANGE
 	local offset = Vector3(dist * math.cos(angle), 0, -dist * math.sin(angle))
@@ -416,7 +416,7 @@ local function RotateToTarget(inst, dest)
 end
 
 local function CreatePipes(inst)
-	local P0 = Vector3(inst.Transform:GetWorldPosition())
+	local P0 = inst:GetPosition()
 	local P1 = GetValidWaterPointNearby(P0)
 
 	local totalDist = P1:Dist(P0)
@@ -586,7 +586,7 @@ local function fn()
 	--[[
 	inst:DoTaskInTime(0.1,
 		function()
-		local P0 = Vector3(inst.Transform:GetWorldPosition())
+		local P0 = inst:GetPosition()
 		local P1 = GetValidWaterPointNearby(P0)
 		if P1 == nil then return end
 			if not inst.pipes or (#inst.pipes < 1) then
@@ -608,7 +608,7 @@ local function OnHit(inst, dist)
 	inst:Remove()
 end
 
-require "prefabutil"
+
 
 return Prefab("sprinkler1", fn, assets, prefabs),
 	MakePlacer("common/sprinkler1_placer", "sprinkler_placement", "sprinkler_placement", "idle", true, nil, nil, 1.4, nil,

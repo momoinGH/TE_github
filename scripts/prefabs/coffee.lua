@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local Assets =
 {
 	Asset("ANIM", "anim/coffee.zip"),
@@ -57,7 +55,7 @@ local function cooked(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 	inst:AddComponent("stackable")
 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM

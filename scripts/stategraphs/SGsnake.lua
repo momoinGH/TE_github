@@ -7,38 +7,42 @@ local actionhandlers =
 	ActionHandler(ACTIONS.GOHOME, "gohome"),
 }
 
-local events=
+local events =
 {
-	EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
+	EventHandler("attacked",
+		function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg
+					:GoToState("hit") end end),
 	EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-	EventHandler("doattack", function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then inst.sg:GoToState("attack", data.target) end end),
+	EventHandler("doattack",
+		function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+				inst.sg:GoToState("attack", data.target) end end),
 	CommonHandlers.OnSleep(),
-	CommonHandlers.OnLocomote(true,false),
+	CommonHandlers.OnLocomote(true, false),
 	CommonHandlers.OnFreeze(),
 }
 
-local states=
+local states =
 {
 
-	State{
+	State {
 		name = "gohome",
-		tags = {"busy"},
+		tags = { "busy" },
 		onenter = function(inst, playanim)
 			inst.AnimState:PlayAnimation("atk_pre")
 		end,
-		
-		events=
+
+		events =
 		{
-			EventHandler("animover", function(inst) 
-				inst.sg:GoToState("idle") 
+			EventHandler("animover", function(inst)
+				inst.sg:GoToState("idle")
 				inst:PerformBufferedAction()
 			end),
 		},
 	},
 
-	State{
+	State {
 		name = "idle",
-		tags = {"idle", "canrotate", "nopredict"},
+		tags = { "idle", "canrotate", "nopredict" },
 		onenter = function(inst, playanim)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/idle")
 			inst.Physics:Stop()
@@ -48,15 +52,15 @@ local states=
 			else
 				inst.AnimState:PlayAnimation("idle", true)
 			end
-			inst.sg:SetTimeout(2*math.random()+.5)
+			inst.sg:SetTimeout(2 * math.random() + .5)
 		end,
 
 	},
 
-	
-	State{
+
+	State {
 		name = "attack",
-		tags = {"attack", "busy", "nopredict"},
+		tags = { "attack", "busy", "nopredict" },
 
 		onenter = function(inst, target)
 			inst.sg.statemem.target = target
@@ -68,44 +72,44 @@ local states=
 			inst.AnimState:PushAnimation("atk_pst", false)
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(8*FRAMES, function(inst) 
-				if inst.components.combat.target then 
-					inst:ForceFacePoint(inst.components.combat.target:GetPosition()) 
-				end 
-			end),
-
-			TimeEvent(14*FRAMES, function(inst) 
-				if inst.components.combat.target then 
-					inst:ForceFacePoint(inst.components.combat.target:GetPosition()) 
-				end 
-				inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/attack") 
-			end),
-
-			TimeEvent(20*FRAMES, function(inst) 
-				if inst.components.combat.target then 
-					inst:ForceFacePoint(inst.components.combat.target:GetPosition()) 
-				end 
-			end),
-
-			TimeEvent(27*FRAMES, function(inst) 
-				inst.components.combat:DoAttack(inst.sg.statemem.target) 
-				if inst.components.combat.target then 
+			TimeEvent(8 * FRAMES, function(inst)
+				if inst.components.combat.target then
 					inst:ForceFacePoint(inst.components.combat.target:GetPosition())
-				end 
+				end
+			end),
+
+			TimeEvent(14 * FRAMES, function(inst)
+				if inst.components.combat.target then
+					inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+				end
+				inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/attack")
+			end),
+
+			TimeEvent(20 * FRAMES, function(inst)
+				if inst.components.combat.target then
+					inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+				end
+			end),
+
+			TimeEvent(27 * FRAMES, function(inst)
+				inst.components.combat:DoAttack(inst.sg.statemem.target)
+				if inst.components.combat.target then
+					inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+				end
 			end),
 		},
 
-		events=
+		events =
 		{
 			EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "eat",
-		tags = {"busy", "nopredict"},
+		tags = { "busy", "nopredict" },
 
 		onenter = function(inst, cb)
 			inst.Physics:Stop()
@@ -115,22 +119,22 @@ local states=
 			inst.AnimState:PushAnimation("atk_pst", false)
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/attack") end),
-			TimeEvent(24*FRAMES, function(inst) if inst:PerformBufferedAction() then inst.components.combat:SetTarget(nil) end end),
+			TimeEvent(14 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/attack") end),
+			TimeEvent(24 * FRAMES, function(inst) if inst:PerformBufferedAction() then inst.components.combat:SetTarget(nil) end end),
 		},
 
-		events=
+		events =
 		{
-			EventHandler("animqueueover", function(inst)  inst.sg:GoToState("taunt")  end),
+			EventHandler("animqueueover", function(inst) inst.sg:GoToState("taunt") end),
 		},
 	},
 
-	State{
+	State {
 		name = "spit",
-		tags = {"busy", "nopredict"},
-		
+		tags = { "busy", "nopredict" },
+
 		onenter = function(inst)
 			-- print("snake spit")
 			if ((inst.target ~= inst and not inst.target:HasTag("fire")) or inst.target == inst) and not (inst.recently_frozen) then
@@ -142,7 +146,6 @@ local states=
 				inst.AnimState:PushAnimation("atk_pst", false)
 
 				inst.components.propagator:StartSpreading()
-
 			else
 				-- print("no spit")
 				inst:ClearBufferedAction()
@@ -153,43 +156,45 @@ local states=
 		onexit = function(inst)
 			-- print("spit onexit")
 			if inst.last_target and inst.last_target ~= inst then
-				inst.num_targets_vomited = inst.last_target.components.stackable and inst.num_targets_vomited + inst.last_target.components.stackable:StackSize() or inst.num_targets_vomited + 1
+				inst.num_targets_vomited = inst.last_target.components.stackable and
+				inst.num_targets_vomited + inst.last_target.components.stackable:StackSize() or
+				inst.num_targets_vomited + 1
 				inst.last_target_spit_time = GetTime()
 			end
 			--inst.Transform:SetFourFaced()
-			-- if inst.vomitfx then 
-				-- inst.vomitfx:Remove() 
+			-- if inst.vomitfx then
+			-- inst.vomitfx:Remove()
 			-- end
 			-- inst.vomitfx = nil
 			-- inst.SoundEmitter:KillSound("vomitrumble")
 
 			inst.components.propagator:StopSpreading()
 		end,
-		
-		events=
+
+		events =
 		{
-			EventHandler("animqueueover", function(inst) 
+			EventHandler("animqueueover", function(inst)
 				-- print("spit animqueueover")
 				inst.sg:GoToState("idle")
 			end),
 		},
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(2*FRAMES, function(inst) 
+			TimeEvent(2 * FRAMES, function(inst)
 				-- print("spit timeline")
 				inst:PerformBufferedAction()
 				inst.last_target = inst.target
 				inst.target = nil
-				inst.spit_interval = math.random(20,30)
+				inst.spit_interval = math.random(20, 30)
 				inst.last_spit_time = GetTime()
 			end),
 		},
 	},
-	
-	State{
+
+	State {
 		name = "hit",
-		tags = {"busy", "hit", "nopredict"},
+		tags = { "busy", "hit", "nopredict" },
 
 		onenter = function(inst, cb)
 			inst.Physics:Stop()
@@ -197,15 +202,15 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/hurt")
 		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "taunt",
-		tags = {"busy", "nopredict"},
+		tags = { "busy", "nopredict" },
 
 		onenter = function(inst, cb)
 			inst.Physics:Stop()
@@ -213,47 +218,48 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/taunt")
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/taunt") end),
+			TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/taunt") end),
 		},
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "death",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/death")
 			inst.AnimState:PlayAnimation("death")
 			inst.Physics:Stop()
-			RemovePhysicsColliders(inst)            
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))            
+			RemovePhysicsColliders(inst)
+			inst.components.lootdropper:DropLoot(inst:GetPosition())
 		end,
 
 	},
 }
 
 CommonStates.AddSleepStates(states,
-{
-	sleeptimeline = {
-		TimeEvent(30*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/sleep") end),
-	},
-})
+	{
+		sleeptimeline = {
+			TimeEvent(30 * FRAMES,
+				function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/sleep") end),
+		},
+	})
 
 
 CommonStates.AddRunStates(states,
-{
-	runtimeline = {
-		TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/move") end),
-		TimeEvent(4, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/move") end),
-	},
-})
+	{
+		runtimeline = {
+			TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/move") end),
+			TimeEvent(4, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/move") end),
+		},
+	})
 CommonStates.AddFrozenStates(states)
 
 

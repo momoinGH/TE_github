@@ -48,7 +48,7 @@ local function BecomeRabbit(inst)
 		inst.components.sanityaura.aura = 0
 		inst.components.inventoryitem:ChangeImageName("crab")
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 		inst.sounds = crabbitsounds
 	end
 end
@@ -65,7 +65,7 @@ local function BecomeBeardling(inst)
 		inst.iscrab = false
 		inst.components.inventoryitem:ChangeImageName("crabbit_beardling")
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 		inst.sounds = beardsounds
 	end
 end
@@ -196,7 +196,7 @@ local function fn(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 	inst.components.inventoryitem.nobounce = true
 	inst.components.inventoryitem.canbepickedup = false
 	--inst.components.inventoryitem:SetOnDroppedFn(ondrop) Done in MakeFeedablePet

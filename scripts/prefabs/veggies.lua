@@ -86,8 +86,13 @@ VEGGIES =
         nil,
         FOODTYPE.BERRY,
         nil,
-        { lure_data = TUNING.OCEANFISHING_LURE.BERRY, single_use = true, build = "oceanfishing_lure_mis", symbol =
-        "hook_berries" }),
+        {
+            lure_data = TUNING.OCEANFISHING_LURE.BERRY,
+            single_use = true,
+            build = "oceanfishing_lure_mis",
+            symbol =
+            "hook_berries"
+        }),
 
     berries_juicy = MakeVegStats(0, TUNING.CALORIES_SMALL, TUNING.HEALING_TINY, TUNING.PERISH_TWO_DAY, 0,
         TUNING.CALORIES_MEDSMALL, TUNING.HEALING_SMALL, TUNING.PERISH_ONE_DAY, 0,
@@ -95,8 +100,13 @@ VEGGIES =
         nil,
         FOODTYPE.BERRY,
         nil,
-        { lure_data = TUNING.OCEANFISHING_LURE.BERRY, single_use = true, build = "oceanfishing_lure_mis", symbol =
-        "hook_juiceberries" }),
+        {
+            lure_data = TUNING.OCEANFISHING_LURE.BERRY,
+            single_use = true,
+            build = "oceanfishing_lure_mis",
+            symbol =
+            "hook_juiceberries"
+        }),
 
     fig = MakeVegStats(0, TUNING.CALORIES_SMALL, 0, TUNING.PERISH_FAST, 0,
         TUNING.CALORIES_MEDSMALL, TUNING.HEALING_TINY, TUNING.PERISH_SUPERFAST, 0,
@@ -104,8 +114,13 @@ VEGGIES =
         nil,
         FOODTYPE.BERRY,
         nil,
-        { lure_data = TUNING.OCEANFISHING_LURE.BERRY, single_use = true, build = "oceanfishing_lure_mis", symbol =
-        "hook_fig" }),
+        {
+            lure_data = TUNING.OCEANFISHING_LURE.BERRY,
+            single_use = true,
+            build = "oceanfishing_lure_mis",
+            symbol =
+            "hook_fig"
+        }),
 
     cactus_meat = MakeVegStats(0, TUNING.CALORIES_SMALL, -TUNING.HEALING_SMALL, TUNING.PERISH_MED, -TUNING.SANITY_TINY,
         TUNING.CALORIES_SMALL, TUNING.HEALING_TINY, TUNING.PERISH_MED, TUNING.SANITY_MED),
@@ -118,8 +133,15 @@ VEGGIES =
     kelp = MakeVegStats(0, TUNING.CALORIES_TINY, -TUNING.HEALING_TINY, TUNING.PERISH_MED, -TUNING.SANITY_SMALL,
         TUNING.CALORIES_TINY, 0, TUNING.PERISH_MED, -TUNING.SANITY_TINY,
         { "med", nil, 0.7 }, { "med", nil, 0.65 },
-        { build = "meat_rack_food_tot", hunger = TUNING.CALORIES_TINY, health = TUNING.HEALING_TINY, sanity = TUNING
-        .SANITY_SMALL, perish = TUNING.PERISH_PRESERVED, time = TUNING.DRY_SUPERFAST }),
+        {
+            build = "meat_rack_food_tot",
+            hunger = TUNING.CALORIES_TINY,
+            health = TUNING.HEALING_TINY,
+            sanity = TUNING
+                .SANITY_SMALL,
+            perish = TUNING.PERISH_PRESERVED,
+            time = TUNING.DRY_SUPERFAST
+        }),
 
 
     tomato = MakeVegStats(COMMON, TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_FAST, 0,
@@ -163,8 +185,13 @@ VEGGIES =
         nil,
         FOODTYPE.BERRY,
         nil,
-        { lure_data = TUNING.OCEANFISHING_LURE.BERRY, single_use = true, build = "oceanfishing_lure_mis", symbol =
-        "hook_berries" }),
+        {
+            lure_data = TUNING.OCEANFISHING_LURE.BERRY,
+            single_use = true,
+            build = "oceanfishing_lure_mis",
+            symbol =
+            "hook_berries"
+        }),
     turnip = MakeVegStats(COMMON, TUNING.CALORIES_MED, TUNING.HEALING_TINY, TUNING.PERISH_SLOW, 0,
         TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_MED, 0),
 
@@ -505,23 +532,18 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("inventoryitem")
         if name == "aloe" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-            inst.caminho = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "radish" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-            inst.caminho = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "gooseberry" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "blueberries" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-            inst.caminho = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "turnip" then inst.components.inventoryitem.imagename = "quagmire_seeds_5" end
         if name == "wheat" then inst.components.inventoryitem.imagename = "quagmire_seeds_1" end
@@ -553,8 +575,13 @@ local function MakeVeggie(name, has_seeds)
         inst.components.deployable.ondeploy = OnDeploy
 
         inst:AddComponent("oceanfishingtackle")
-        inst.components.oceanfishingtackle:SetupLure({ build = "oceanfishing_lure_mis", symbol = "hook_seeds", single_use = true, lure_data =
-        TUNING.OCEANFISHING_LURE.SEED })
+        inst.components.oceanfishingtackle:SetupLure({
+            build = "oceanfishing_lure_mis",
+            symbol = "hook_seeds",
+            single_use = true,
+            lure_data =
+                TUNING.OCEANFISHING_LURE.SEED
+        })
 
         MakeSmallBurnable(inst)
         MakeSmallPropagator(inst)
@@ -662,27 +689,21 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("inventoryitem")
         if name == "aloe" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-            inst.caminho = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "radish" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-            inst.caminho = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "gooseberry" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "blueberries" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "wheat" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/novositens.xml"
-            inst.caminho = "images/inventoryimages/novositens.xml"
         end
         if name == "turnip" then inst.components.inventoryitem.imagename = "quagmire_turnip" end
 
@@ -802,23 +823,18 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("inventoryitem")
         if name == "aloe" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-            inst.caminho = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "radish" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-            inst.caminho = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "gooseberry" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "blueberries" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "wheat" then inst.components.inventoryitem.imagename = "quagmire_wheat_cooked" end
         if name == "turnip" then inst.components.inventoryitem.imagename = "quagmire_turnip_cooked" end
@@ -885,23 +901,18 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("inventoryitem")
         if name == "aloe" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-            inst.caminho = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "radish" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-            inst.caminho = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "gooseberry" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "blueberries" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
 
         MakeSmallBurnable(inst)
@@ -964,23 +975,18 @@ local function MakeVeggie(name, has_seeds)
         inst.components.inventoryitem:SetSinks(true)
         if name == "aloe" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "radish" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "turnip" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/novositens.xml"
-            inst.caminho = "images/inventoryimages/novositens.xml"
         end
         if name == "wheat" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/novositens.xml"
-            inst.caminho = "images/inventoryimages/novositens.xml"
         end
 
         inst:AddComponent("equippable")
@@ -1065,15 +1071,12 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("inventoryitem")
         if name == "aloe" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "radish" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
 
         inst.components.inventoryitem.cangoincontainer = false

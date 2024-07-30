@@ -5,19 +5,19 @@
 require("stategraphs/commonstates")
 
 local function ToggleOffPhysics(inst)
-    inst.sg.statemem.isphysicstoggle = true
-    inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.WORLD)
+	inst.sg.statemem.isphysicstoggle = true
+	inst.Physics:ClearCollisionMask()
+	inst.Physics:CollidesWith(COLLISION.WORLD)
 end
 
 local function ToggleOnPhysics(inst)
-    inst.sg.statemem.isphysicstoggle = nil
-    inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.WORLD)
-    inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-    inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
-    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    inst.Physics:CollidesWith(COLLISION.GIANTS)
+	inst.sg.statemem.isphysicstoggle = nil
+	inst.Physics:ClearCollisionMask()
+	inst.Physics:CollidesWith(COLLISION.WORLD)
+	inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+	inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+	inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+	inst.Physics:CollidesWith(COLLISION.GIANTS)
 end
 
 local actionhandlers =
@@ -28,46 +28,46 @@ local actionhandlers =
 
 local events =
 {
-	EventHandler("attacked", function(inst) 
-		if not inst.components.health:IsDead() 
-			and not inst.sg:HasStateTag("attack") 
-			and not inst.sg:HasStateTag("shield") 
+	EventHandler("attacked", function(inst)
+		if not inst.components.health:IsDead()
+			and not inst.sg:HasStateTag("attack")
+			and not inst.sg:HasStateTag("shield")
 			and not inst.sg:HasStateTag("hit")
-		then 
+		then
 			if not inst.sg:HasStateTag("flip") then
-				inst.sg:GoToState("hit") 
+				inst.sg:GoToState("hit")
 			else
-				inst.sg:GoToState("flipped_hit") 
+				inst.sg:GoToState("flipped_hit")
 			end
-		end 
+		end
 	end),
 	EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-	EventHandler("doattack", function(inst, data) 
-		if not inst.components.health:IsDead() 
+	EventHandler("doattack", function(inst, data)
+		if not inst.components.health:IsDead()
 			or not inst.sg:HasStateTag("busy")
-		then 
-			inst.sg:GoToState("attack", data.target) 
-		end 
-	end),
-	EventHandler("entershield", function(inst) 
-		if not inst.components.health:IsDead() and 
-			not inst.sg:HasStateTag("slide") 
 		then
-			inst.sg:GoToState("shield") 
+			inst.sg:GoToState("attack", data.target)
+		end
+	end),
+	EventHandler("entershield", function(inst)
+		if not inst.components.health:IsDead() and
+			not inst.sg:HasStateTag("slide")
+		then
+			inst.sg:GoToState("shield")
 		end
 	end),
 	EventHandler("exitshield", function(inst)
-		if not inst.components.health:IsDead() then 
-			inst.sg:GoToState("shield_end") 
+		if not inst.components.health:IsDead() then
+			inst.sg:GoToState("shield_end")
 		end
 	end),
 	EventHandler("goslide", function(inst)
-		if not inst.components.health:IsDead() 
-			and not inst.sg:HasStateTag("shield") 
+		if not inst.components.health:IsDead()
+			and not inst.sg:HasStateTag("shield")
 		then
-			inst.sg:GoToState("slide_pre") 
+			inst.sg:GoToState("slide_pre")
 		else
-			inst.sg:GoToState("slide_pre", true) 
+			inst.sg:GoToState("slide_pre", true)
 		end
 	end),
 	EventHandler("freeze", function(inst) inst.sg:GoToState("frozen") end),
@@ -76,28 +76,28 @@ local events =
 	--CommonHandlers.OnFreeze(),
 }
 
-local states=
+local states =
 {
 
-	State{
+	State {
 		name = "gohome",
-		tags = {"busy"},
+		tags = { "busy" },
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("attack2_pre")
 		end,
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst) 
-				inst.sg:GoToState("idle") 
+			EventHandler("animover", function(inst)
+				inst.sg:GoToState("idle")
 				inst:PerformBufferedAction()
 			end),
 		},
-	}, 
+	},
 
-	State{
+	State {
 		name = "idle",
-		tags = {"idle", "canrotate"},
+		tags = { "idle", "canrotate" },
 		onenter = function(inst, playanim)
 			--inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/idle")
 			inst.Physics:Stop()
@@ -107,20 +107,20 @@ local states=
 			else
 				inst.AnimState:PlayAnimation("idle_loop", true)
 			end
-			inst.sg:SetTimeout(2*math.random()+.5)
+			inst.sg:SetTimeout(2 * math.random() + .5)
 		end,
 
 		events =
-        {
-            EventHandler("animover", function(inst)
-                inst.sg:GoToState("idle")
-            end),
-        },
+		{
+			EventHandler("animover", function(inst)
+				inst.sg:GoToState("idle")
+			end),
+		},
 	},
 
-	State{
+	State {
 		name = "attack",
-		tags = {"attack", "busy"},
+		tags = { "attack", "busy" },
 
 		onenter = function(inst, target)
 			inst.sg.statemem.target = target
@@ -131,9 +131,9 @@ local states=
 			inst.AnimState:PlayAnimation("attack1", false)
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(12*FRAMES, function(inst) 
+			TimeEvent(12 * FRAMES, function(inst)
 				--turtle doesn't deal damage to the target
 				--instead, it damages all enemies around
 				--attacks look pretty good
@@ -141,11 +141,11 @@ local states=
 				local notags = { "turtle", "shadow", "playerghost", "INLIMBO", "NOCLICK", "FX" }
 				local x, y, z = inst.Transform:GetWorldPosition()
 				local damage = TUNING.SPIKY_TURTLE_TFC.DAMAGE
-				for _, v in pairs(TheSim:FindEntities(x, y, z, dist, {"_combat"}, notags)) do
-					if v ~= inst 
-						and v:IsValid() 
-						and v.entity:IsVisible() 
-						and v.components.combat ~= nil 
+				for _, v in pairs(TheSim:FindEntities(x, y, z, dist, { "_combat" }, notags)) do
+					if v ~= inst
+						and v:IsValid()
+						and v.entity:IsVisible()
+						and v.components.combat ~= nil
 					then
 						v.components.combat:GetAttacked(inst, damage)
 					end
@@ -155,15 +155,15 @@ local states=
 			end),
 		},
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "slide_pre",
-		tags = {"busy", "attack", "slide"},
+		tags = { "busy", "attack", "slide" },
 
 		onenter = function(inst, noanim)
 			inst.canSlide = false
@@ -177,21 +177,21 @@ local states=
 			end
 		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("slide") end),
 		},
 	},
 
-	State{
+	State {
 		name = "slide",
-		tags = {"busy", "attack", "slide"},
+		tags = { "busy", "attack", "slide" },
 
 		onenter = function(inst)
 			inst.components.health:SetAbsorptionAmount(0.95)
 			--inst.brain:Stop()
 			ToggleOffPhysics(inst)
-			local notags = {"smallcreature", "FX", "NOCLICK", "INLIMBO", "wall", "turtle", "structure"}
+			local notags = { "smallcreature", "FX", "NOCLICK", "INLIMBO", "wall", "turtle", "structure" }
 			local target = FindEntity(inst, 30, function(guy)
 				return inst.components.combat:CanTarget(guy)
 			end, nil, notags)
@@ -215,11 +215,11 @@ local states=
 
 		onupdate = function(inst)
 			local dtime = GetTime() - inst.sg.statemem.starttime
-			local speed 
+			local speed
 			if dtime < 1 then
 				speed = 25 * dtime
 			else
-				speed = 25 * (2 - dtime) 
+				speed = 25 * (2 - dtime)
 			end
 			inst.Physics:SetMotorVel(speed, 0, 0)
 		end,
@@ -246,24 +246,24 @@ local states=
 		end,
 	},
 
-	State{
+	State {
 		name = "slide_pst",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("attack2_pst", false)
 		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "eat",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
 			inst.Physics:Stop()
@@ -271,23 +271,23 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/grunt")
 		end,
 
-		timeline=
+		timeline =
 		{
 			--TimeEvent(14*FRAMES, function(inst) end), --inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/attack") end),
-			TimeEvent(15*FRAMES, function(inst) 
+			TimeEvent(15 * FRAMES, function(inst)
 				inst:PerformBufferedAction()
 			end),
 		},
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst)  inst.sg:GoToState("idle")  end),
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "hit",
-		tags = {"busy", "hit"},
+		tags = { "busy", "hit" },
 
 		onenter = function(inst, cb)
 			inst.Physics:Stop()
@@ -295,15 +295,15 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/hit2")
 		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "flipped",
-		tags = {"busy", "flip"},
+		tags = { "busy", "flip" },
 
 		onenter = function(inst, time)
 			inst.Physics:Stop()
@@ -318,55 +318,55 @@ local states=
 			inst.sg:GoToState("flipped_pst")
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(10 * FRAMES, function(inst) 
+			TimeEvent(10 * FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/shell_impact")
 			end),
 		},
-		
+
 	},
 
-	State{
+	State {
 		name = "flipped_pst",
-		tags = {"busy", "flip"},
+		tags = { "busy", "flip" },
 
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("flip_pst")
 			--inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/hit2")
 		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(47 * FRAMES, function(inst) 
+			TimeEvent(47 * FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/step")
 			end),
 		},
 	},
 
-	State{
+	State {
 		name = "flipped_hit",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("flip_hit")
 			--inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/hit2")
 		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "taunt",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst, cb)
 			inst.Physics:Stop()
@@ -374,33 +374,33 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/taunt")
 		end,
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
-        name = "shield",
-        tags = {"busy", "shield"},
+	State {
+		name = "shield",
+		tags = { "busy", "shield" },
 
-        onenter = function(inst)
+		onenter = function(inst)
 			inst.components.health:SetAbsorptionAmount(TUNING.SPIKY_TURTLE_TFC.SHIELDED_DAMAGE_REDUCTION)
 			inst.components.timer:PauseTimer("slide")
 			inst.Physics:Stop()
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/hide_pre")
-            inst.AnimState:PlayAnimation("hide_pre")
-            inst.AnimState:PushAnimation("hide_idle")
-        end,
+			inst.AnimState:PlayAnimation("hide_pre")
+			inst.AnimState:PushAnimation("hide_idle")
+		end,
 
-        onexit = function(inst)
+		onexit = function(inst)
 			inst.components.health:SetAbsorptionAmount(0)
 			inst.components.timer:ResumeTimer("slide")
 		end,
-		
-		events=
+
+		events =
 		{
-			EventHandler("attacked", function(inst) 
+			EventHandler("attacked", function(inst)
 				if inst.components.timer:TimerExists("slide") then
 					inst.components.timer:SetTimeLeft("slide", inst.components.timer:GetTimeLeft("slide") - 1)
 					if inst.components.timer:GetTimeLeft("slide") == 0 then
@@ -408,103 +408,103 @@ local states=
 					end
 				end
 				inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/hit")
-				inst.AnimState:PlayAnimation("hide_hit") 
+				inst.AnimState:PlayAnimation("hide_hit")
 				inst.AnimState:PushAnimation("hide_idle")
 			end),
 		},
-    },
+	},
 
-    State{
-        name = "shield_end",
-        tags = {"busy", "shield", "exitshield"},
+	State {
+		name = "shield_end",
+		tags = { "busy", "shield", "exitshield" },
 
 		onenter = function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/hide_pst")
-            inst.AnimState:PlayAnimation("hide_pst", false)
-        end,
+			inst.AnimState:PlayAnimation("hide_pst", false)
+		end,
 
-        events=
-        {
-            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end ),
-        },
-    },
+		events =
+		{
+			EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+		},
+	},
 
-	State{
+	State {
 		name = "death",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
-if inst.brain then inst.brain:Stop() end
+			if inst.brain then inst.brain:Stop() end
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/death")
 			inst.AnimState:PlayAnimation("death")
 			inst.Physics:Stop()
-			RemovePhysicsColliders(inst)            
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))            
+			RemovePhysicsColliders(inst)
+			inst.components.lootdropper:DropLoot(inst:GetPosition())
 		end,
 
 	},
 
-	State{
-        name = "frozen",
-        tags = {"busy",  "frozen"},
+	State {
+		name = "frozen",
+		tags = { "busy", "frozen" },
 
 		onenter = function(inst)
 			inst.Physics:Stop()
-			inst.AnimState:PlayAnimation("fossilized") 
-        end,
+			inst.AnimState:PlayAnimation("fossilized")
+		end,
 
-        events=
-        {
-			EventHandler("animover", function(inst) inst.AnimState:SetPercent("fossilized", 0.99)  end ),
-			EventHandler("frozen", function(inst) inst.sg:GoToState("frozen")  end ),
-			EventHandler("onthaw", function(inst) inst.sg:GoToState("thaw")  end ),
-			EventHandler("unfreeze", function(inst) inst.sg:GoToState("idle")  end ),
-        },
+		events =
+		{
+			EventHandler("animover", function(inst) inst.AnimState:SetPercent("fossilized", 0.99) end),
+			EventHandler("frozen", function(inst) inst.sg:GoToState("frozen") end),
+			EventHandler("onthaw", function(inst) inst.sg:GoToState("thaw") end),
+			EventHandler("unfreeze", function(inst) inst.sg:GoToState("idle") end),
+		},
 	},
-	
-	State{
-        name = "thaw",
-        tags = {"busy",  "thawing"},
+
+	State {
+		name = "thaw",
+		tags = { "busy", "thawing" },
 
 		onenter = function(inst)
-			inst.AnimState:PlayAnimation("fossilized_shake", true) 
+			inst.AnimState:PlayAnimation("fossilized_shake", true)
 			inst.SoundEmitter:PlaySound("dontstarve/common/freezethaw", "thawing")
 		end,
 
-		onexit = function(inst) 
+		onexit = function(inst)
 			inst.SoundEmitter:KillSound("thawing")
 		end,
-		
-		events=
-        {
-            EventHandler("unfreeze", function(inst) inst.sg:GoToState("idle")  end ),
+
+		events =
+		{
+			EventHandler("unfreeze", function(inst) inst.sg:GoToState("idle") end),
 		},
-    },
+	},
 }
 
 CommonStates.AddSleepStates(states,
-{
-	sleeptimeline = {
-		TimeEvent(15*FRAMES, function(inst) 
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/sleep")
-		end),
-	},
-})
+	{
+		sleeptimeline = {
+			TimeEvent(15 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/sleep")
+			end),
+		},
+	})
 
 
 CommonStates.AddWalkStates(states,
-{
-	walktimeline = {
-		TimeEvent(2*FRAMES, function(inst) 
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/step")
-		end),
-		TimeEvent(14*FRAMES, function(inst) 
-			if math.random() > 0.8 then 
-				inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/shell_walk")
-			end
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/step")
-		end), 
-	},
-})
+	{
+		walktimeline = {
+			TimeEvent(2 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/step")
+			end),
+			TimeEvent(14 * FRAMES, function(inst)
+				if math.random() > 0.8 then
+					inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/shell_walk")
+				end
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/turtillus/step")
+			end),
+		},
+	})
 
 return StateGraph("spikyturtle_tfc", states, events, "taunt", actionhandlers)

@@ -1,8 +1,4 @@
 local brain = require "brains/ancientheraldbrain"
-require "stategraphs/SGancientherald"
-
-local ANCIENT_HERALD_HEALTH = 8000 * TUNING.tropical.bosslife
-local ANCIENT_HERALD_DAMAGE = 50
 
 local assets =
 {
@@ -17,34 +13,13 @@ local prefabs =
     "armorvortexcloak_blueprint",
 }
 
-local TARGET_DIST = 30
-
 local function CalcSanityAura(inst, observer)
-    if inst.components.combat.target then
-        return -TUNING.SANITYAURA_HUGE
-    else
-        return -TUNING.SANITYAURA_LARGE
-    end
-
-    return 0
+    return inst.components.combat.target and -TUNING.SANITYAURA_HUGE or -TUNING.SANITYAURA_LARGE
 end
-
-local function RetargetFn(inst)
-    return FindEntity(inst, TARGET_DIST, function(guy)
-        return inst.components.combat:CanTarget(guy)
-            and not guy:HasTag("prey")
-            and not guy:HasTag("smallcreature")
-            and guy.components.combat.target == inst
-        --               and (inst.components.knownlocations:GetLocation("targetbase") == nil
-        --			   or guy.components.combat.target == inst)
-    end)
-end
-
 
 local function KeepTargetFn(inst, target)
     return inst.components.combat:CanTarget(target)
 end
-
 
 local function OnAttacked(inst, data)
     inst.components.combat:SetTarget(data.attacker)
@@ -64,34 +39,30 @@ local function oncollide(inst, other)
     end)
 end
 
-local loot = {}
+SetSharedLootTable('ancientherald', {
+    { 'ancient_remnant',            1.00 },
+    { 'ancient_remnant',            1.00 },
+    { 'ancient_remnant',            1.00 },
+    { 'ancient_remnant',            1.00 },
+    { 'ancient_remnant',            1.00 },
+    { 'nightmarefuel',              1.00 },
+    { 'nightmarefuel',              1.00 },
+    { 'nightmarefuel',              0.33 },
 
-SetSharedLootTable('ancientherald',
-    {
-        { 'ancient_remnant',            1.00 },
-        { 'ancient_remnant',            1.00 },
-        { 'ancient_remnant',            1.00 },
-        { 'ancient_remnant',            1.00 },
-        { 'ancient_remnant',            1.00 },
-        { 'nightmarefuel',              1.00 },
-        { 'nightmarefuel',              1.00 },
-        { 'nightmarefuel',              0.33 },
+    { 'armorvortexcloak_blueprint', 1 },
+})
 
-        { 'armorvortexcloak_blueprint', 1 },
-    })
-
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
-    local shadow = inst.entity:AddDynamicShadow()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
 
-    local s = 1.25
-    inst.Transform:SetScale(s, s, s)
-    -- shadow:SetSize( 6, 3.5 )
-    trans:SetSixFaced()
+    inst.Transform:SetScale(1.25, 1.25, 1.25)
+    inst.Transform:SetSixFaced()
 
     MakeCharacterPhysics(inst, 1000, .5)
 
@@ -106,9 +77,9 @@ local function fn(Sim)
     --    inst:AddTag("notarget")
     inst:AddTag("ancient_herald")
 
-    anim:SetBank("ancient_spirit")
-    anim:SetBuild("ancient_spirit")
-    anim:PlayAnimation("idle", true)
+    inst.AnimState:SetBank("ancient_spirit")
+    inst.AnimState:SetBuild("ancient_spirit")
+    inst.AnimState:PlayAnimation("idle", true)
 
     inst.entity:SetPristine()
 
@@ -130,15 +101,14 @@ local function fn(Sim)
 
     ------------------
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(ANCIENT_HERALD_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.ANCIENT_HERALD_HEALTH)
 
     ------------------
 
     inst:AddComponent("combat")
-    inst.components.combat:SetDefaultDamage(ANCIENT_HERALD_DAMAGE)
+    inst.components.combat:SetDefaultDamage(TUNING.ANCIENT_HERALD_DAMAGE)
     inst.components.combat:SetAttackPeriod(2)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
-    inst.components.combat:SetRetargetFunction(3, RetargetFn)
     ------------------------------------------
 
     inst:AddComponent("lootdropper")
@@ -154,18 +124,13 @@ local function fn(Sim)
 
     inst:ListenForEvent("attacked", OnAttacked)
 
-    inst.sg:GoToState("appear")
+    inst:AddComponent("knownlocations")
 
-    inst:DoTaskInTime(0, function()
-        inst.home_pos = Point(inst.Transform:GetWorldPosition())
-    end)
+    inst:ListenForEvent("endaporkalypse", function()
+        inst:Remove()
+    end, TheWorld)
 
-    inst:ListenForEvent("endaporkalypse",
-        function()
-            inst:Remove()
-        end, TheWorld)
-
-
+    -- TODO 似乎是技能冷却的，能用timer代替吗
     inst.summon_time = GetTime()
     inst.taunt_time = GetTime()
 

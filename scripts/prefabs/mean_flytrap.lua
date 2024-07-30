@@ -1,8 +1,6 @@
 require "brains/flytrapbrain"
 require "stategraphs/SGflytrap"
 
-local trace = function() end
-
 local FLYTRAP_CHILD_HEALTH = 250
 local FLYTRAP_CHILD_DAMAGE = 15
 local FLYTRAP_CHILD_SPEED = 4
@@ -46,24 +44,7 @@ SetSharedLootTable('mean_flytrap',
 		{ 'nectar_pod', 0.3 },
 	})
 
-local WAKE_TO_FOLLOW_DISTANCE = 8
 local SHARE_TARGET_DIST = 30
-
-local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
-
-local function ShouldWakeUp(inst)
-	return TheWorld.state.isnight
-		or (inst.components.combat and inst.components.combat.target)
-		or (inst.components.burnable and inst.components.burnable:IsBurning())
-		or (inst.components.follower and inst.components.follower.leader)
-end
-
-local function ShouldSleep(inst)
-	return TheWorld.state.isday
-		and not (inst.components.combat and inst.components.combat.target)
-		and not (inst.components.burnable and inst.components.burnable:IsBurning())
-		and not (inst.components.follower and inst.components.follower.leader)
-end
 
 local function OnNewTarget(inst, data)
 	if inst.components.sleeper and inst.components.sleeper:IsAsleep() then
@@ -82,8 +63,8 @@ end
 
 local function KeepTarget(inst, target)
 	return inst.components.combat:CanTarget(target) and
-	inst:GetDistanceSqToInst(target) <= (FLYTRAP_KEEP_TARGET_DIST * FLYTRAP_KEEP_TARGET_DIST) and
-	not target:HasTag("aquatic")
+		inst:GetDistanceSqToInst(target) <= (FLYTRAP_KEEP_TARGET_DIST * FLYTRAP_KEEP_TARGET_DIST) and
+		not target:HasTag("aquatic")
 end
 
 local function OnAttacked(inst, data)
@@ -101,13 +82,6 @@ local function DoReturn(inst)
 	--print("DoReturn", inst)
 	if inst.components.homeseeker then
 		inst.components.homeseeker:ForceGoHome()
-	end
-end
-
-local function OnDay(inst)
-	--print("OnNight", inst)
-	if inst:IsAsleep() then
-		DoReturn(inst)
 	end
 end
 
@@ -232,11 +206,13 @@ end
 
 local function fn(Sim)
 	local inst = CreateEntity()
+
 	local trans = inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
 	local physics = inst.entity:AddPhysics()
 	local sound = inst.entity:AddSoundEmitter()
 	local shadow = inst.entity:AddDynamicShadow()
+
 	shadow:SetSize(2.5, 1.5)
 	inst.Transform:SetFourFaced()
 	inst.entity:AddNetwork()

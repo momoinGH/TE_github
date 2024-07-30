@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
 	Asset("ANIM", "anim/icemachine.zip"),
@@ -26,7 +24,7 @@ local function spawnice(inst)
 	inst:RemoveEventCallback("animover", spawnice)
 
 	local ice = SpawnPrefab("ice")
-	local pt = Vector3(inst.Transform:GetWorldPosition()) + Vector3(0, 2, 0)
+	local pt = inst:GetPosition() + Vector3(0, 2, 0)
 	ice.Transform:SetPosition(pt:Get())
 	local down = TheCamera:GetDownVec()
 	local angle = math.atan2(down.z, down.x) + (math.random() * 60) * DEGREES

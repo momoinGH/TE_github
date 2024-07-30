@@ -98,10 +98,10 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "LIVINGARTIFACT"
+    inst.components.fueled.fueltype = FUELTYPE.LIVINGARTIFACT
     inst.components.fueled:InitializeFuelLevel(300)
     inst.components.fueled:SetDepletedFn(inst.Remove)
 

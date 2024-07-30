@@ -58,7 +58,7 @@ local function checkforcrowding(inst)
         inst.components.perishable:SetPercent(0)
     else
         inst.crowdingtask = inst:DoTaskInTime(
-        TUNING.MUSHSPORE_DENSITY_CHECK_TIME + math.random() * TUNING.MUSHSPORE_DENSITY_CHECK_VAR, checkforcrowding)
+            TUNING.MUSHSPORE_DENSITY_CHECK_TIME + math.random() * TUNING.MUSHSPORE_DENSITY_CHECK_VAR, checkforcrowding)
     end
 end
 
@@ -92,7 +92,7 @@ local function ondropped(inst)
 
     if inst.crowdingtask == nil then
         inst.crowdingtask = inst:DoTaskInTime(
-        TUNING.MUSHSPORE_DENSITY_CHECK_TIME + math.random() * TUNING.MUSHSPORE_DENSITY_CHECK_VAR, checkforcrowding)
+            TUNING.MUSHSPORE_DENSITY_CHECK_TIME + math.random() * TUNING.MUSHSPORE_DENSITY_CHECK_VAR, checkforcrowding)
     end
 end
 
@@ -160,7 +160,6 @@ local function makespore(data)
 
         if data.build == "mushroom_spore_yelo" then
             inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-            inst.caminho = "images/inventoryimages/volcanoinventory.xml"
         end
 
         inst.components.inventoryitem.canbepickedup = false

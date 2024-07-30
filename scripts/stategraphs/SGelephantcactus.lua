@@ -2,20 +2,20 @@ require("stategraphs/commonstates")
 
 local ELEPHANTCACTUS_REGROW_PERIOD = 2
 
-local events=
+local events =
 {
 	EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-	EventHandler("doattack", function(inst) 
-		if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then 
+	EventHandler("doattack", function(inst)
+		if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
 			inst.sg:GoToState("attack_pre")
 		end
 	end),
 
 	-- CommonHandlers.OnDeath(),
 
-	EventHandler("attacked", function(inst) 
+	EventHandler("attacked", function(inst)
 		if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then
-			inst.sg:GoToState("hit") 
+			inst.sg:GoToState("hit")
 		end
 	end),
 
@@ -26,11 +26,11 @@ local events=
 	end)
 }
 
-local states=
+local states =
 {
-	State{
+	State {
 		name = "idle",
-		tags = {"idle", "canrotate"},
+		tags = { "idle", "canrotate" },
 		onenter = function(inst)
 			if inst.has_spike then
 				inst.AnimState:PlayAnimation("idle_spike")
@@ -38,43 +38,44 @@ local states=
 				inst.AnimState:PlayAnimation("idle")
 			end
 		end,
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
-	
-	State{
+
+	State {
 		name = "death",
-		tags = {"busy"},
-		
+		tags = { "busy" },
+
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("death")
 			-- inst.AnimState:PushAnimation("idle_dead")
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+			inst.components.lootdropper:DropLoot(inst:GetPosition())
 		end,
 
-		timeline = 
+		timeline =
 		{
-			TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/volcano_cactus/death") end),
+			TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve_DLC002/creatures/volcano_cactus/death") end),
 		},
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst)
 				local active = SpawnPrefab("elephantcactus_stump")
-				if active then 
+				if active then
 					active.Transform:SetPosition(inst.Transform:GetWorldPosition())
 					inst:Remove()
 				end
 			end),
 		},
 	},
-		
-	State{
+
+	State {
 		name = "hit",
-		tags = {"hit"},
-		
+		tags = { "hit" },
+
 		onenter = function(inst)
 			if inst.AnimState:IsCurrentAnimation("idle_spike") then
 				inst.AnimState:PlayAnimation("hit_spike")
@@ -82,8 +83,8 @@ local states=
 				inst.AnimState:PlayAnimation("hit")
 			end
 		end,
-		
-		events=
+
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
@@ -92,17 +93,18 @@ local states=
 	State
 	{
 		name = "attack_pre",
-		tags = {"attack", "canrotate"},
+		tags = { "attack", "canrotate" },
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("attack_pre")
 		end,
 
-		timeline = 
+		timeline =
 		{
-			TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/volcano_cactus/attack_pre") end),
+			TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve_DLC002/creatures/volcano_cactus/attack_pre") end),
 		},
-		
-		events=
+
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("attack") end),
 		},
@@ -111,20 +113,20 @@ local states=
 	State
 	{
 		name = "attack",
-		tags = {"attack", "canrotate"},
+		tags = { "attack", "canrotate" },
 
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("attack")
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/volcano_cactus/attack")
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(2*FRAMES, function(inst) 
+			TimeEvent(2 * FRAMES, function(inst)
 				if inst.components.combat then
 					inst.components.combat:StartAttack()
 					if inst.components.combat.target and not inst.components.combat.target:HasTag("armaduradecacto") then
-					inst.components.combat:DoAttack()
+						inst.components.combat:DoAttack()
 					end
 					inst.has_spike = false
 					inst.components.timer:StartTimer("SPIKE", ELEPHANTCACTUS_REGROW_PERIOD)
@@ -132,7 +134,7 @@ local states=
 			end),
 		},
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
@@ -141,18 +143,20 @@ local states=
 	State
 	{
 		name = "grow_spike",
-		tags = {"busy"},
+		tags = { "busy" },
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("grow_spike")
 		end,
 
-		timeline = 
+		timeline =
 		{
-			TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/volcano_cactus/grow_pre") end),
-			TimeEvent(28*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/volcano_cactus/grow_spike") end),
+			TimeEvent(12 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve_DLC002/creatures/volcano_cactus/grow_pre") end),
+			TimeEvent(28 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+				"dontstarve_DLC002/creatures/volcano_cactus/grow_spike") end),
 		},
-		
-		events=
+
+		events =
 		{
 			EventHandler("animover", function(inst)
 				inst.sg:GoToState("idle")
@@ -163,12 +167,12 @@ local states=
 	State
 	{
 		name = "dead_to_empty",
-		tags = {"busy"},
+		tags = { "busy" },
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("dead_to_empty")
 		end,
-		
-		events=
+
+		events =
 		{
 			EventHandler("animover", function(inst)
 				inst.sg:GoToState("grow_spike")
@@ -176,6 +180,5 @@ local states=
 		},
 	},
 }
-	
-return StateGraph("elephantcactus", states, events, "idle")
 
+return StateGraph("elephantcactus", states, events, "idle")

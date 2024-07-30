@@ -217,7 +217,7 @@ local function check_spawn_snake(inst)
         if invader then
             if math.random() > 0.75 then
                 local perd = SpawnPrefab("snake")
-                local spawnpos = Vector3(inst.Transform:GetWorldPosition())
+                local spawnpos = inst:GetPosition()
                 spawnpos = spawnpos + TheCamera:GetDownVec()
                 perd.Transform:SetPosition(spawnpos:Get())
                 shake(inst)

@@ -72,7 +72,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(OnEquip)
@@ -81,7 +81,7 @@ local function fn()
     inst.components.equippable.walkspeedmult = 1.3
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
     inst.components.fueled:InitializeFuelLevel(480 * 3)
     --inst.components.fueled:SetDepletedFn(onwornout)
 

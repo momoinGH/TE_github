@@ -82,8 +82,7 @@ local function onmerge(inst)
     inst.refreshart(inst)
     inst.AnimState:PlayAnimation("merge")
     inst.AnimState:PushAnimation("idle", true)
-    local pos = Vector3(inst.Transform:GetWorldPosition())
-    TheWorld:PushEvent("ms_sendlightningstrike", pos)
+    TheWorld:PushEvent("ms_sendlightningstrike", inst:GetPosition())
     SpawnPrefab("laserhit"):SetTarget(inst)
 
     if inst.head == 1 and inst.arms > 1 and inst.legs > 1 and inst.spine == 1 then
@@ -162,17 +161,8 @@ local function OnAttacked(inst, data)
     fx.Transform:SetPosition(x, y + 1, z)
 end
 
-local function GetStatus(inst)
-
-end
-
 local function OnSave(inst, data)
-    local refs = {}
-
-    if inst.hits then
-        data.hits = inst.hits
-    end
-
+    data.hits = inst.hits
     data.head = inst.head
     data.spine = inst.spine
     data.arms = inst.arms
@@ -181,10 +171,7 @@ end
 
 local function OnLoad(inst, data)
     if data then
-        if data.hits then
-            inst.hits = data.hits
-        end
-
+        inst.hits = data.hits or inst.hits
         inst.head = data.head
         inst.spine = data.spine
         inst.arms = data.arms
@@ -203,33 +190,39 @@ local function OnLoadPostPass(inst, data)
     end
 end
 
-local function commonfn(Sim)
+local function OnWorked(inst, worker, workleft)
+    OnAttacked(inst, { attacker = worker })
+    inst.components.workable:SetWorkLeft(1)
+    inst:PushEvent("attacked")
+end
+
+local function commonfn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
+    inst.entity:AddLight()
     inst.entity:AddNetwork()
 
     inst.Transform:SetFourFaced()
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("metal_spider.png")
+    inst.MiniMapEntity:SetIcon("metal_spider.png")
 
     MakeObstaclePhysics(inst, 2)
 
     inst:AddTag("lightningrod")
-
     inst:AddTag("laser_immune")
     inst:AddTag("ancient_robot")
     inst:AddTag("mech")
     inst:AddTag("monster")
     inst:AddTag("ancient_robots_assembly")
 
-    anim:SetBank("metal_hulk_merge")
-    anim:SetBuild("metal_hulk_merge")
-    anim:PlayAnimation("idle", true)
+    inst.AnimState:SetBank("metal_hulk_merge")
+    inst.AnimState:SetBuild("metal_hulk_merge")
+    inst.AnimState:PlayAnimation("idle", true)
 
-    inst.entity:AddLight()
     inst.Light:SetIntensity(.6)
     inst.Light:SetRadius(5)
     inst.Light:SetFalloff(3)
@@ -247,27 +240,17 @@ local function commonfn(Sim)
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
     inst.components.workable:SetWorkLeft(1)
-    inst.components.workable:SetOnWorkCallback(
-        function(inst, worker, workleft)
-            OnAttacked(inst, { attacker = worker })
-            inst.components.workable:SetWorkLeft(1)
-            inst:PushEvent("attacked")
-        end)
+    inst.components.workable:SetOnWorkCallback(OnWorked)
 
     inst:AddComponent("inspectable")
-    inst.components.inspectable.getstatus = GetStatus
 
     inst:AddComponent("knownlocations")
 
     inst:AddComponent("lootdropper")
 
     inst.lightningpriority = 1
-    inst:ListenForEvent("lightningstrike", OnLightning)
-    inst:ListenForEvent("merge", onmerge)
-
     inst.UPDATETIME = UPDATETIME
     inst.hits = 0
-
     inst.head = 0
     inst.spine = 0
     inst.arms = 0
@@ -277,11 +260,13 @@ local function commonfn(Sim)
 
     refreshart(inst)
 
+    --  inst:ListenForEvent("beginaporkalypse", function(world) OnLightning(inst) end, GetWorld())
+    inst:ListenForEvent("lightningstrike", OnLightning)
+    inst:ListenForEvent("merge", onmerge)
+
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
     inst.OnLoadPostPass = OnLoadPostPass
-
-    --  inst:ListenForEvent("beginaporkalypse", function(world) OnLightning(inst) end, GetWorld())
 
     return inst
 end

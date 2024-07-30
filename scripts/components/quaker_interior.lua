@@ -1,8 +1,8 @@
 local quakelevels =
 {
 	pillarshake =
-	{                                                            -- quake during tentacle pillar death throes
-		prequake = -3,                                           --the warning before the quake
+	{                                                             -- quake during tentacle pillar death throes
+		prequake = -3,                                            --the warning before the quake
 		quaketime = function() return GetRandomWithVariance(1, .5) end, --how long the quake lasts
 		debrispersecond = function() return math.random(5, 6) end, --how much debris falls every second
 		debrisbreakchance = 0.75,
@@ -249,10 +249,10 @@ local function UpdateShadowSize(inst, height)
 end
 
 local function GiveDebrisShadow(inst)
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local x, y, z = inst.Transform:GetWorldPosition()
 	inst.shadow = SpawnPrefab("warningshadow")
 	UpdateShadowSize(inst, 35)
-	inst.shadow.Transform:SetPosition(pt.x, 0, pt.z)
+	inst.shadow.Transform:SetPosition(x, 0, z)
 end
 
 function Quaker_Interior:GetDebris()
@@ -338,7 +338,7 @@ local function grounddetection_update(inst)
 
 		local ents = TheSim:FindEntities(pt.x, 0, pt.z, 2, nil, { 'INLIMBO', 'smashable' })
 		for k, v in pairs(ents) do
-			if v and v.components.combat and not v.components.combat.debris_immune and v ~= inst then -- quakes shouldn't break the set dressing
+			if v and v.components.combat and not v:HasTag("quaker_immune") and v ~= inst then -- quakes shouldn't break the set dressing
 				v.components.combat:GetAttacked(inst, 20, nil)
 			end
 		end
@@ -360,9 +360,9 @@ local function grounddetection_update(inst)
 			--spawn break effect
 			inst.entity:AddSoundEmitter()
 			inst.SoundEmitter:PlaySound("dontstarve/common/stone_drop")
-			local pt = Vector3(inst.Transform:GetWorldPosition())
+			local x, y, z = inst.Transform:GetWorldPosition()
 			local breaking = SpawnPrefab("ground_chunks_breaking")
-			breaking.Transform:SetPosition(pt.x, 0, pt.z)
+			breaking.Transform:SetPosition(x, 0, z)
 			inst:Remove()
 		end
 	end
@@ -404,7 +404,7 @@ function Quaker_Interior:MiniQuake(rad, num, duration, target)
 	self.inst:DoTaskInTime(duration, function() self.inst.SoundEmitter:KillSound("miniearthquake") end)
 end
 
-function Quaker_Interior:SetNextQuakes(setting)   -- turn off the periodic quaking.
+function Quaker_Interior:SetNextQuakes(setting) -- turn off the periodic quaking.
 	self.doNextQuakes = setting
 end
 

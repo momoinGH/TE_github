@@ -153,7 +153,7 @@ local function FindMoneyAction(inst)
             return false
         end
         -- local itempos = Vector3(item.Transform:GetWorldPosition())
-        -- local instpos = Vector3(inst.Transform:GetWorldPosition())
+        -- local instpos = inst:GetPosition()
         --and TheWorld.Pathfinder:IsClear(itempos.x, itempos.y, itempos.z, instpos.x, instpos.y, instpos.z,  {ignorewalls = false})
         return item.prefab == "oinc" or item.prefab == "oinc10"
     end)
@@ -262,9 +262,7 @@ local function shouldPanic(inst)
     if inst.components.combat.target then
         local threat = inst.components.combat.target
         if threat then
-            local myPos = Vector3(inst.Transform:GetWorldPosition())
-            local threatPos = Vector3(threat.Transform:GetWorldPosition())
-            local dist = distsq(threatPos, myPos)
+            local dist = inst:GetDistanceSqToInst(threat)
             if dist < FAR_ENOUGH * FAR_ENOUGH then
                 if dist > STOP_RUN_AWAY_DIST * STOP_RUN_AWAY_DIST then
                     return true
@@ -279,8 +277,7 @@ end
 
 local function ShouldGoHome(inst)
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition())
-    return (homePos and distsq(homePos, myPos) > GO_HOME_DIST * GO_HOME_DIST)
+    return (homePos and distsq(homePos, inst:GetPosition()) > GO_HOME_DIST * GO_HOME_DIST)
 end
 
 local function inCityLimits(inst)

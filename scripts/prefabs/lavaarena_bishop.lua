@@ -198,7 +198,7 @@ local function OnWaterChange(inst, onwater)
     --   local splash = SpawnPrefab("splash_water")
     local splash = SpawnPrefab("frogsplash")
 
-    local ent_pos = Vector3(inst.Transform:GetWorldPosition())
+    local ent_pos = inst:GetPosition()
     splash.Transform:SetPosition(ent_pos.x, ent_pos.y, ent_pos.z)
 
     if inst.sg then

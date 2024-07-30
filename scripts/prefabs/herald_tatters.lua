@@ -12,7 +12,7 @@ local function fn()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
 
-    --MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst:AddTag("ancient_remnant")
 
@@ -38,7 +38,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("fuel")
     inst.components.fuel.fueltype = FUELTYPE.ANCIENT_REMNANT

@@ -116,7 +116,7 @@ local function getregentimefn(inst)
 	if inst.components.pickable then
 		local num_cycles_passed = math.min(inst.components.pickable.max_cycles - inst.components.pickable.cycles_left, 0)
 		return TUNING.BERRY_REGROW_TIME + TUNING.BERRY_REGROW_INCREASE * num_cycles_passed +
-		math.random() * TUNING.BERRY_REGROW_VARIANCE
+			math.random() * TUNING.BERRY_REGROW_VARIANCE
 	else
 		return TUNING.BERRY_REGROW_TIME
 	end

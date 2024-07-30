@@ -109,7 +109,7 @@ local function makefish_med(bank, build, inventoryimage, dryablesymbol)
 		inst:AddComponent("appeasement")
 		inst.components.appeasement.appeasementvalue = APPEASEMENT_SMALL
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 		return inst
 	end
@@ -160,7 +160,7 @@ local function makefish_med(bank, build, inventoryimage, dryablesymbol)
 		inst:AddComponent("appeasement")
 		inst.components.appeasement.appeasementvalue = APPEASEMENT_SMALL
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 		--		MakeInventoryFloatable(inst, "idle_water", "dead")
 		inst.AnimState:PlayAnimation("dead")
@@ -228,7 +228,7 @@ local function makefish_med1(bank, build, inventoryimage, dryablesymbol)
 		inst:AddComponent("appeasement")
 		inst.components.appeasement.appeasementvalue = APPEASEMENT_SMALL
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 		return inst
 	end
@@ -278,7 +278,7 @@ local function makefish_med1(bank, build, inventoryimage, dryablesymbol)
 		inst:AddComponent("appeasement")
 		inst.components.appeasement.appeasementvalue = APPEASEMENT_SMALL
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 		--		MakeInventoryFloatable(inst, "idle_water", "dead")
 		inst.AnimState:PlayAnimation("dead")
@@ -364,7 +364,7 @@ local function spoiledfn()
 
 	inst:RemoveComponent("appeasement")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 	return inst
 end
@@ -417,7 +417,7 @@ local function cookedfn()
 	inst.data = {}
 	inst:AddComponent("bait")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 	return inst
 end
@@ -481,7 +481,7 @@ local function fish_raw_fn()
 
 	inst:AddComponent("bait")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 	return inst
 end
@@ -546,7 +546,6 @@ local function quagmire_crabmeat_fn()
 
 	inst:AddComponent("bait")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
-	inst.caminho = "images/inventoryimages2.xml"
 
 	return inst
 end
@@ -600,7 +599,6 @@ local function quagmire_crabmeat_cooked_fn()
 	inst.data = {}
 	inst:AddComponent("bait")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
-	inst.caminho = "images/images/inventoryimages2.xml"
 
 	return inst
 end
@@ -652,7 +650,7 @@ local function lobster_dead_fn()
 	inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 	--   inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 	return inst
 end
@@ -703,7 +701,7 @@ local function lobster_dead_cooked_fn()
 	inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 	--   inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 	return inst
 end

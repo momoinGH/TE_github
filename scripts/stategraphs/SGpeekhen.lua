@@ -1,6 +1,6 @@
 require("stategraphs/commonstates")
 
-local actionhandlers = 
+local actionhandlers =
 {
     ActionHandler(ACTIONS.EAT, "eat"),
     ActionHandler(ACTIONS.PICK, "pick"),
@@ -11,7 +11,7 @@ local actionhandlers =
     end),
 }
 
-local events=
+local events =
 {
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
@@ -19,35 +19,35 @@ local events=
     CommonHandlers.OnAttacked(),
     CommonHandlers.OnDeath(),
 
-    EventHandler("flyaway", function(inst) 
-        if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then 
-            inst.sg:GoToState("flyaway") 
-        end 
-    end),
-
-    EventHandler("onignite", function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("distress_pre") end end),
-
-    EventHandler("locomote", 
-    function(inst) 
-        if (not inst.sg:HasStateTag("idle") and not inst.sg:HasStateTag("moving")) then return end
-        
-        if not inst.components.locomotor:WantsToMoveForward() or inst.components.combat.target then
-            if not inst.sg:HasStateTag("idle") then
-                inst.sg:GoToState("idle")
-            end
-        else
-            if not inst.sg:HasStateTag("hopping") then
-                inst.sg:GoToState("hop")
-            end
+    EventHandler("flyaway", function(inst)
+        if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then
+            inst.sg:GoToState("flyaway")
         end
     end),
+
+    EventHandler("onignite",
+        function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("distress_pre") end end),
+    EventHandler("locomote",
+        function(inst)
+            if (not inst.sg:HasStateTag("idle") and not inst.sg:HasStateTag("moving")) then return end
+
+            if not inst.components.locomotor:WantsToMoveForward() or inst.components.combat.target then
+                if not inst.sg:HasStateTag("idle") then
+                    inst.sg:GoToState("idle")
+                end
+            else
+                if not inst.sg:HasStateTag("hopping") then
+                    inst.sg:GoToState("hop")
+                end
+            end
+        end),
 }
 
-local states=
+local states =
 {
-    State{
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
         onenter = function(inst, pushanim)
             inst.Physics:Stop()
             if pushanim then
@@ -58,134 +58,138 @@ local states=
             else
                 inst.AnimState:PlayAnimation("idle", true)
             end
-            inst.sg:SetTimeout(3 + math.random()*1)
+            inst.sg:SetTimeout(3 + math.random() * 1)
         end,
-        
-        ontimeout= function(inst)
+
+        ontimeout = function(inst)
             if inst.bufferedaction and inst.bufferedaction.action == ACTIONS.EAT then
                 inst.sg:GoToState("eat")
             else
                 local r = math.random()
                 if r < .75 then
                     inst.sg:GoToState("idle")
-                else 
+                else
                     if inst.components.combat.target then
                         inst.sg:GoToState("taunt")
                     else
-                       inst.sg:GoToState("caw")
-                    end    
+                        inst.sg:GoToState("caw")
+                    end
                 end
             end
         end,
     },
-    
-    State{
+
+    State {
         name = "death",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))   
-            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/death")         
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
+            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/death")
         end,
     },
 
-    State{
+    State {
         name = "taunt",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
         end,
-        
-        timeline=
+
+        timeline =
         {
-            TimeEvent(FRAMES*0, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/taunt") end)
+            TimeEvent(FRAMES * 0, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/taunt") end)
         },
-        
-        events=
+
+        events =
         {
             EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
-    },    
-    
-    State{
+    },
+
+    State {
         name = "caw",
-        tags = {"idle"},
-        onenter= function(inst)
+        tags = { "idle" },
+        onenter = function(inst)
             inst.AnimState:PlayAnimation("caw")
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(FRAMES*0, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/squack") end)
+            TimeEvent(FRAMES * 0, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC001/creatures/buzzard/squack") end)
         },
 
-        events=
+        events =
         {
-            EventHandler("animover", function(inst) if math.random() < .5 then inst.sg:GoToState("caw") else inst.sg:GoToState("idle") end end ),
+            EventHandler("animover", function(inst) if math.random() < .5 then inst.sg:GoToState("caw") else inst.sg
+                        :GoToState("idle") end end),
         },
     },
 
-    State{
+    State {
         name = "distress_pre",
-        tags = {"busy"},
-        onenter= function(inst)
+        tags = { "busy" },
+        onenter = function(inst)
             inst.AnimState:PlayAnimation("flap_pre")
         end,
-        events=
+        events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("distress") end ),
+            EventHandler("animover", function(inst) inst.sg:GoToState("distress") end),
         },
     },
-    
-    State{
+
+    State {
         name = "distress",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("flap_loop")
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(FRAMES*0, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/squack") end)
+            TimeEvent(FRAMES * 0, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC001/creatures/buzzard/squack") end)
         },
 
-        events=
+        events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("distress") end ),
-            EventHandler("onextinguish", function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("idle", "flap_post") end end ),
+            EventHandler("animover", function(inst) inst.sg:GoToState("distress") end),
+            EventHandler("onextinguish", function(inst) if inst.components.health:GetPercent() > 0 then inst.sg
+                        :GoToState("idle", "flap_post") end end),
         },
     },
-    
-    State{
+
+    State {
         name = "glide",
-        tags = {"idle", "flying", "busy"},
-        onenter= function(inst)
+        tags = { "idle", "flying", "busy" },
+        onenter = function(inst)
             inst.AnimState:PlayAnimation("glide", true)
-            inst.Physics:SetMotorVelOverride(0,-15,0)
-            inst.flapSound = inst:DoPeriodicTask(6*FRAMES, 
-                function(inst) 
-                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/flap") 
+            inst.Physics:SetMotorVelOverride(0, -15, 0)
+            inst.flapSound = inst:DoPeriodicTask(6 * FRAMES,
+                function(inst)
+                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/flap")
                 end)
         end,
-        
-        onupdate= function(inst)
-            inst.Physics:SetMotorVelOverride(0,-15,0)
-            local pt = Point(inst.Transform:GetWorldPosition())            
+
+        onupdate = function(inst)
+            inst.Physics:SetMotorVelOverride(0, -15, 0)
+            local pt = Point(inst.Transform:GetWorldPosition())
             if pt.y <= .1 then
                 inst.Physics:ClearMotorVelOverride()
                 pt.y = 0
                 inst.Physics:Stop()
-                inst.Physics:Teleport(pt.x,pt.y,pt.z)
+                inst.Physics:Teleport(pt.x, pt.y, pt.z)
                 inst.AnimState:PlayAnimation("land")
                 inst.DynamicShadow:Enable(true)
                 if inst.sg.statemem.target then
-                    inst.sg:GoToState("kill", {target = inst.sg.statemem.target})
+                    inst.sg:GoToState("kill", { target = inst.sg.statemem.target })
                 else
                     inst.sg:GoToState("idle", true)
                 end
@@ -204,12 +208,12 @@ local states=
                 inst.Transform:SetPosition(pos:Get())
             end
             inst.components.knownlocations:RememberLocation("landpoint", inst:GetPosition())
-        end, 
-    }, 
+        end,
+    },
 
-    State{
+    State {
         name = "kill",
-        tags = {"busy", "canrotate"},
+        tags = { "busy", "canrotate" },
         onenter = function(inst, data)
             inst.AnimState:PushAnimation("atk", false)
             if data and data.target:HasTag("prey") then
@@ -218,40 +222,40 @@ local states=
         end,
 
         timeline =
-        {                
-            TimeEvent(15*FRAMES, function(inst) 
+        {
+            TimeEvent(15 * FRAMES, function(inst)
                 if inst.sg.statemem.target then
-                    inst:FacePoint(inst.sg.statemem.target:GetPosition()) 
+                    inst:FacePoint(inst.sg.statemem.target:GetPosition())
                 end
             end),
-            TimeEvent(27*FRAMES, function(inst)
+            TimeEvent(27 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/attack")
                 local target = inst.sg.statemem.target
                 if target and inst:GetPosition():Dist(target:GetPosition()) < TUNING.BUZZARD_ATTACK_RANGE and
-                inst.components.combat:CanAttack(target) then
-                    target.components.health:Kill() 
+                    inst.components.combat:CanAttack(target) then
+                    target.components.health:Kill()
                 end
             end)
         },
 
-        events = 
+        events =
         {
             EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end)
         },
     },
 
-    State{
+    State {
         name = "eat",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("peck")
         end,
-        
-        events=
+
+        events =
         {
-            EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
                 if math.random() < .3 then
                     inst:PerformBufferedAction()
                 end
@@ -261,20 +265,20 @@ local states=
                 end
             end),
         },
-    },    
+    },
 
-    State{
+    State {
         name = "pick",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("peck")
         end,
-        
-        events=
+
+        events =
         {
-            EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
                 inst:PerformBufferedAction()
                 inst.sg:GoToState("idle")
                 if inst.brain then
@@ -282,20 +286,20 @@ local states=
                 end
             end),
         },
-    },   
+    },
 
-    State{
+    State {
         name = "flyaway",
-        tags = {"flying", "busy", "canrotate"},
+        tags = { "flying", "busy", "canrotate" },
         onenter = function(inst)
             inst.Physics:Stop()
-            inst.sg:SetTimeout(.1+math.random()*.2)
+            inst.sg:SetTimeout(.1 + math.random() * .2)
             inst.sg.statemem.vert = math.random() > .5
-                       
+
             if inst.components.periodicspawner and math.random() <= TUNING.CROW_LEAVINGS_CHANCE then
                 inst.components.periodicspawner:TrySpawn()
             end
-            
+
             if inst.sg.statemem.vert then
                 inst.AnimState:PlayAnimation("takeoff_vertical_pre")
             else
@@ -304,18 +308,18 @@ local states=
 
             inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/flyout")
         end,
-        
-        ontimeout= function(inst)
+
+        ontimeout = function(inst)
             if inst.sg.statemem.vert then
                 inst.AnimState:PushAnimation("takeoff_vertical_loop", true)
-                inst.Physics:SetMotorVel(-2 + math.random()*4,15+math.random()*5,-2 + math.random()*4)
+                inst.Physics:SetMotorVel(-2 + math.random() * 4, 15 + math.random() * 5, -2 + math.random() * 4)
             else
                 inst.AnimState:PushAnimation("takeoff_diagonal_loop", true)
-                local x = 8+ math.random()*8
-                inst.Physics:SetMotorVel(x,15+math.random()*5,-2 + math.random()*4)
+                local x = 8 + math.random() * 8
+                inst.Physics:SetMotorVel(x, 15 + math.random() * 5, -2 + math.random() * 4)
             end
         end,
-        
+
         timeline =
         {
             TimeEvent(2, function(inst)
@@ -329,112 +333,111 @@ local states=
         }
     },
 
-    State{
+    State {
         name = "hop",
-        tags = {"moving", "canrotate", "hopping"},
-        
-        onenter = function(inst) 
+        tags = { "moving", "canrotate", "hopping" },
+
+        onenter = function(inst)
             inst.AnimState:PlayAnimation("hop")
             inst.components.locomotor:WalkForward()
-            inst.sg:SetTimeout(2*math.random()+.5)
+            inst.sg:SetTimeout(2 * math.random() + .5)
         end,
 
-        onupdate= function(inst)
+        onupdate = function(inst)
             if not inst.components.locomotor:WantsToMoveForward() then
                 inst.sg:GoToState("idle")
             end
         end,
-        
-        timeline=
+
+        timeline =
         {
-            TimeEvent(8*FRAMES, function(inst) 
+            TimeEvent(8 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/hurt")
 
-                inst.Physics:Stop() 
+                inst.Physics:Stop()
             end),
         },
-        
-        ontimeout= function(inst)
+
+        ontimeout = function(inst)
             inst.sg:GoToState("hop")
         end,
     },
-    
-    State{
+
+    State {
         name = "hit",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("hit")
             inst.Physics:Stop()
-            local pt = Vector3(inst.Transform:GetWorldPosition())
+            local pt = inst:GetPosition()
             if pt.y > 1 then
                 inst.sg:GoToState("fall")
             end
         end,
 
-        events=
+        events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
-    },    
+    },
 
-    State{
+    State {
         name = "fall",
-        tags = {"busy"},
+        tags = { "busy" },
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("fall_loop", true)
         end,
-        
+
         onupdate = function(inst)
-            local pt = Vector3(inst.Transform:GetWorldPosition())
+            local pt = inst:GetPosition()
             if pt.y <= .2 then
                 pt.y = 0
                 inst.Physics:Stop()
-                inst.Physics:Teleport(pt.x,pt.y,pt.z)
+                inst.Physics:Teleport(pt.x, pt.y, pt.z)
                 inst.DynamicShadow:Enable(true)
                 inst.sg:GoToState("stunned")
             end
         end,
-    },    
-    
-    State{
+    },
+
+    State {
         name = "stunned",
-        tags = {"busy"},
-        
-        onenter = function(inst) 
+        tags = { "busy" },
+
+        onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("stunned_loop", true)
-            inst.sg:SetTimeout(GetRandomWithVariance(6, 2) )
+            inst.sg:SetTimeout(GetRandomWithVariance(6, 2))
             if inst.components.inventoryitem then
                 inst.components.inventoryitem.canbepickedup = true
             end
         end,
-        
+
         onexit = function(inst)
             if inst.components.inventoryitem then
                 inst.components.inventoryitem.canbepickedup = false
             end
         end,
-        
+
         ontimeout = function(inst) inst.sg:GoToState("flyaway") end,
-    },    
+    },
 }
 
 CommonStates.AddCombatStates(states,
-{
-    attacktimeline = 
     {
-        TimeEvent(15*FRAMES, function(inst)
-            inst.components.combat:DoAttack(inst.sg.statemem.target)
-            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/attack")
-        end),
-        TimeEvent(20*FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
-    },
-})
+        attacktimeline =
+        {
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.components.combat:DoAttack(inst.sg.statemem.target)
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/buzzard/attack")
+            end),
+            TimeEvent(20 * FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
+        },
+    })
 
 CommonStates.AddSleepStates(states)
 CommonStates.AddFrozenStates(states)
-    
-return StateGraph("peekhen", states, events, "idle", actionhandlers)
 
+return StateGraph("peekhen", states, events, "idle", actionhandlers)

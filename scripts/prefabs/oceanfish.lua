@@ -764,7 +764,6 @@ local function inv_common(fish_def)
 
 	if fish_def.oceanbuild then
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
 	end
 
 	inst:AddComponent("perishable")

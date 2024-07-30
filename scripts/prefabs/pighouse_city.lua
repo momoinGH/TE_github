@@ -1,6 +1,3 @@
-require "prefabutil"
-require "recipes"
-
 local PIGHOUSE_CITY_RESPAWNTIME = 480 * 3
 
 local assets =
@@ -228,8 +225,10 @@ end
             local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
             local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
             for k, guardas in pairs(eles) do
-                if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat
-                        :SetTarget(worker) end
+                if guardas.components.combat and guardas.components.combat.target == nil then
+                    guardas.components.combat
+                        :SetTarget(worker)
+                end
             end
         end
     end

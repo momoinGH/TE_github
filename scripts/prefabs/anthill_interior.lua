@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
 	Asset("ANIM", "anim/pisohamlet.zip"),
@@ -8,26 +6,15 @@ local assets =
 	Asset("ANIM", "anim/maparuina.zip"),
 }
 
-local function getlocationoutofcenter(dist, hole, random, invert)
-	local pos = (math.random() * ((dist / 2) - (hole / 2))) + hole / 2
-	if invert or (random and math.random() < 0.5) then
-		pos = pos * -1
-	end
-	return pos
-end
 
 local function createroom(inst)
 	--------------------------------------------------inicio da criacao---------------------------------------
-
-	local x = 0
+	if TheWorld.components.contador then
+		TheWorld.components.contador:Increment(1)
+	end
+	local x = TheWorld.components.contador:GetX()
 	local y = 0
-	local z = 0
-	if TheWorld.components.contador then TheWorld.components.contador:Increment(1) end
-	local numerounico = TheWorld.components.contador.count
-
-	x = TheWorld.components.contador:GetX()
-	y = 0
-	z = TheWorld.components.contador:GetZ()
+	local z = TheWorld.components.contador:GetZ()
 
 	---------------------------cria a parede inicio------------------------------------------------------------------	
 	local tipodemuro = "wall_tigerpond"
@@ -59,9 +46,6 @@ local function createroom(inst)
 	if part ~= nil then
 		part.Transform:SetPosition(x - 3.8, 0, z)
 		part.Transform:SetRotation(0)
-		if part.components.health ~= nil then
-			part.components.health:SetPercent(1)
-		end
 	end
 
 	------------------------piso-------------------------------------------------------------------------------
@@ -69,17 +53,11 @@ local function createroom(inst)
 		local part = SpawnPrefab("anthill_floor2")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 4, 0, z)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 	else
 		local part = SpawnPrefab("anthill_floor")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 4, 0, z)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 	end
 	---------------------------------itens de dentro-------------------------------------------------------------------------
@@ -160,9 +138,6 @@ local function createroom(inst)
 			if part ~= nil then
 				part.Transform:SetPosition(x + getOffsetBackX(), 0, z + getOffsetLhsZ())
 				part.Transform:SetRotation(-90)
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 
@@ -172,9 +147,6 @@ local function createroom(inst)
 			if part ~= nil then
 				part.Transform:SetPosition(x + getOffsetBackX(), 0, z + getOffsetRhsZ())
 				part.Transform:SetRotation(-90)
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 
@@ -183,9 +155,6 @@ local function createroom(inst)
 			if part ~= nil then
 				part.Transform:SetPosition(x + getOffsetFrontX(), 0, z + getOffsetLhsZ())
 				part.Transform:SetRotation(-90)
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 
@@ -194,9 +163,6 @@ local function createroom(inst)
 			if part ~= nil then
 				part.Transform:SetPosition(x + getOffsetFrontX(), 0, z + getOffsetRhsZ())
 				part.Transform:SetRotation(-90)
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 	end
@@ -211,9 +177,6 @@ local function createroom(inst)
 		local part = SpawnPrefab("maze_anthill_queen")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 3, 0, z + 3)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 	end
 
@@ -222,37 +185,25 @@ local function createroom(inst)
 	end
 
 	if salaaleatoria == 1 then
-		local part = SpawnPrefab("antcombhome")
+		local part = SpawnPrefab("antcombhomecave")
 		if part ~= nil then
 			part.Transform:SetPosition(x + getOffsetBackX(), 0, z + getOffsetLhsZ())
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
-		local part = SpawnPrefab("antcombhome")
+		local part = SpawnPrefab("antcombhomecave")
 		if part ~= nil then
 			part.Transform:SetPosition(x + getOffsetBackX(), 0, z + getOffsetRhsZ())
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		--[[	
 	local part = SpawnPrefab("antman")
 	if part ~= nil then
 	part.Transform:SetPosition(x , 0, z)
-	if part.components.health ~= nil then
-	part.components.health:SetPercent(1)
-	end
 	end	
 	
 	local part = SpawnPrefab("antman")
 	if part ~= nil then
 	part.Transform:SetPosition(x , 0, z)
-	if part.components.health ~= nil then
-	part.components.health:SetPercent(1)
-	end
 	end
 	
 ]]
@@ -263,36 +214,24 @@ local function createroom(inst)
 	local part = SpawnPrefab("antman")
 	if part ~= nil then
 	part.Transform:SetPosition(x , 0, z)
-	if part.components.health ~= nil then
-	part.components.health:SetPercent(1)
-	end
 	end	
 	
 	local part = SpawnPrefab("antman")
 	if part ~= nil then
 	part.Transform:SetPosition(x , 0, z)
-	if part.components.health ~= nil then
-	part.components.health:SetPercent(1)
-	end
 	end
 ]]
 	end
 
 	if salaaleatoria == 3 then
-		local part = SpawnPrefab("antcombhome")
+		local part = SpawnPrefab("antcombhomecave")
 		if part ~= nil then
 			part.Transform:SetPosition(x + getOffsetBackX(), 0, z + getOffsetLhsZ())
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
-		local part = SpawnPrefab("antcombhome")
+		local part = SpawnPrefab("antcombhomecave")
 		if part ~= nil then
 			part.Transform:SetPosition(x + getOffsetBackX(), 0, z + getOffsetLhsZ())
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 
@@ -300,34 +239,22 @@ local function createroom(inst)
 	local part = SpawnPrefab("antman")
 	if part ~= nil then
 	part.Transform:SetPosition(x , 0, z)
-	if part.components.health ~= nil then
-	part.components.health:SetPercent(1)
-	end
 	end
 	
 	local part = SpawnPrefab("antman")
 	if part ~= nil then
 	part.Transform:SetPosition(x , 0, z)
-	if part.components.health ~= nil then
-	part.components.health:SetPercent(1)
-	end
 	end
 ]]
 
 		local part = SpawnPrefab("antchest")
 		if part ~= nil then
 			part.Transform:SetPosition(x + getOffsetBackX(), 0, z + getOffsetLhsZ())
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("antchest")
 		if part ~= nil then
 			part.Transform:SetPosition(x + getOffsetBackX(), 0, z + getOffsetRhsZ())
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 	end
 	-------------------------------------adiciona soldados e lanterna na sala da rainha-------------------
@@ -337,9 +264,6 @@ for i=1,math.random(2, 4) do
 	local part = SpawnPrefab("antman_warrior")
 	if part ~= nil then
 	part.Transform:SetPosition(x , 0, z)
-	if part.components.health ~= nil then
-	part.components.health:SetPercent(1)
-	end
 	end
 end	
 ]]
@@ -349,9 +273,6 @@ end
 			if part ~= nil then
 				part.Transform:SetPosition(x + getlocationoutofcenter(depth * 0.65, 5, true), 0,
 					z + getlocationoutofcenter(width * 0.65, 5, true))
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 	end
@@ -362,9 +283,6 @@ end
 			if part ~= nil then
 				part.Transform:SetPosition(x + getlocationoutofcenter(depth * 0.65, 3, true), 0,
 					z + getlocationoutofcenter(width * 0.65, 3, true))
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 
@@ -373,9 +291,6 @@ end
 			if part ~= nil then
 				part.Transform:SetPosition(x + depth * 0.65 * math.random() - depth * 0.65 / 2, 0,
 					z + width * 0.65 * math.random() - width * 0.65 / 2)
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 
@@ -384,9 +299,6 @@ end
 			if part ~= nil then
 				part.Transform:SetPosition(x + depth * 0.65 * math.random() - depth * 0.65 / 2, 0,
 					z + width * 0.65 * math.random() - width * 0.65 / 2)
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 
@@ -398,18 +310,12 @@ end
 				if part ~= nil then
 					part.Transform:SetPosition(x - depth / 2, 0, z + getlocationoutofcenter(width * 0.65, 3, true))
 					part.Transform:SetRotation(-90)
-					if part.components.health ~= nil then
-						part.components.health:SetPercent(1)
-					end
 				end
 			elseif choice == 2 then
 				local part = SpawnPrefab("deco_cave_ceiling_drip_2")
 				if part ~= nil then
 					part.Transform:SetPosition(x - depth / 2, 0, z + getlocationoutofcenter(width * 0.65, 3, true))
 					part.Transform:SetRotation(-90)
-					if part.components.health ~= nil then
-						part.components.health:SetPercent(1)
-					end
 				end
 			elseif choice == 3 then
 				if math.random() < 0.5 then
@@ -417,18 +323,12 @@ end
 					if part ~= nil then
 						part.Transform:SetPosition(x + getlocationoutofcenter(depth * 0.65, 3, true), 0, z - width / 2)
 						part.Transform:SetRotation(-90)
-						if part.components.health ~= nil then
-							part.components.health:SetPercent(1)
-						end
 					end
 				else
 					local part = SpawnPrefab("deco_cave_honey_drip_side_1")
 					if part ~= nil then
 						part.Transform:SetPosition(x + getlocationoutofcenter(depth * 0.65, 3, true), 0, z + width / 2)
 						part.Transform:SetRotation(180)
-						if part.components.health ~= nil then
-							part.components.health:SetPercent(1)
-						end
 					end
 				end
 			elseif choice == 4 then
@@ -437,18 +337,12 @@ end
 					if part ~= nil then
 						part.Transform:SetPosition(x + getlocationoutofcenter(depth * 0.65, 3, true), 0, z - width / 2)
 						part.Transform:SetRotation(-90)
-						if part.components.health ~= nil then
-							part.components.health:SetPercent(1)
-						end
 					end
 				else
 					local part = SpawnPrefab("deco_cave_honey_drip_side_2")
 					if part ~= nil then
 						part.Transform:SetPosition(x + getlocationoutofcenter(depth * 0.65, 3, true), 0, z + width / 2)
 						part.Transform:SetRotation(180)
-						if part.components.health ~= nil then
-							part.components.health:SetPercent(1)
-						end
 					end
 				end
 			end
@@ -462,63 +356,42 @@ end
 		if part ~= nil then
 			part.Transform:SetPosition(x - depth / 2, 0, z - width / 2)
 			part.Transform:SetRotation(-90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("deco_hive_cornerbeam")
 		if part ~= nil then
 			part.Transform:SetPosition(x - depth / 2, 0, z + width / 2)
 			part.Transform:SetRotation(180)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("deco_hive_pillar_side")
 		if part ~= nil then
 			part.Transform:SetPosition(x + depth / 2, 0, z - width / 2)
 			part.Transform:SetRotation(-90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("deco_hive_pillar_side")
 		if part ~= nil then
 			part.Transform:SetPosition(x + depth / 2, 0, z + width / 2)
 			part.Transform:SetRotation(180)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("deco_hive_floor_trim")
 		if part ~= nil then
 			part.Transform:SetPosition(x + depth / 2, 0, z - width / 4)
 			part.Transform:SetRotation(-90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("deco_hive_floor_trim")
 		if part ~= nil then
 			part.Transform:SetPosition(x + depth / 2, 0, z)
 			part.Transform:SetRotation(-90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("deco_hive_floor_trim")
 		if part ~= nil then
 			part.Transform:SetPosition(x + depth / 2, 0, z + width / 4)
 			part.Transform:SetRotation(-90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 	end
 
@@ -529,9 +402,6 @@ end
 			if part ~= nil then
 				part.Transform:SetPosition(x - depth / 2 * 0.65 * math.random(), 0,
 					z + getlocationoutofcenter(width * 0.65, 3, true))
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 
@@ -540,9 +410,6 @@ end
 			if part ~= nil then
 				part.Transform:SetPosition(x - depth / 2 * 0.65 * math.random(), 0,
 					z + getlocationoutofcenter(width * 0.65, 3, true))
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 
@@ -551,9 +418,6 @@ end
 			if part ~= nil then
 				part.Transform:SetPosition(x - depth / 2 * 0.65 * math.random(), 0,
 					z + getlocationoutofcenter(width * 0.65, 3, true))
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 
@@ -562,9 +426,6 @@ end
 			if part ~= nil then
 				part.Transform:SetPosition(x + depth * 0.65 * math.random() - depth * 0.65 / 2, 0,
 					z + width * 0.65 * math.random() - width * 0.65 / 2)
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 
@@ -573,9 +434,6 @@ end
 			if part ~= nil then
 				part.Transform:SetPosition(x + depth * 0.65 * math.random() - depth * 0.65 / 2, 0,
 					z + width * 0.65 * math.random() - width * 0.65 / 2)
-				if part.components.health ~= nil then
-					part.components.health:SetPercent(1)
-				end
 			end
 		end
 
@@ -587,18 +445,12 @@ end
 				if part ~= nil then
 					part.Transform:SetPosition(x - depth / 2, 0, z + getlocationoutofcenter(width * 0.65, 3, true))
 					part.Transform:SetRotation(-90)
-					if part.components.health ~= nil then
-						part.components.health:SetPercent(1)
-					end
 				end
 			elseif choice == 2 then
 				local part = SpawnPrefab("deco_cave_ceiling_drip_2")
 				if part ~= nil then
 					part.Transform:SetPosition(x - depth / 2, 0, z + getlocationoutofcenter(width * 0.65, 3, true))
 					part.Transform:SetRotation(-90)
-					if part.components.health ~= nil then
-						part.components.health:SetPercent(1)
-					end
 				end
 			elseif choice == 3 then
 				if math.random() < 0.5 then
@@ -606,18 +458,12 @@ end
 					if part ~= nil then
 						part.Transform:SetPosition(x + getlocationoutofcenter(depth * 0.65, 3, true), 0, z - width / 2)
 						part.Transform:SetRotation(-90)
-						if part.components.health ~= nil then
-							part.components.health:SetPercent(1)
-						end
 					end
 				else
 					local part = SpawnPrefab("deco_cave_honey_drip_side_1")
 					if part ~= nil then
 						part.Transform:SetPosition(x + getlocationoutofcenter(depth * 0.65, 3, true), 0, z + width / 2)
 						part.Transform:SetRotation(180)
-						if part.components.health ~= nil then
-							part.components.health:SetPercent(1)
-						end
 					end
 				end
 			elseif choice == 4 then
@@ -626,18 +472,12 @@ end
 					if part ~= nil then
 						part.Transform:SetPosition(x + getlocationoutofcenter(depth * 0.65, 3, true), 0, z - width / 2)
 						part.Transform:SetRotation(-90)
-						if part.components.health ~= nil then
-							part.components.health:SetPercent(1)
-						end
 					end
 				else
 					local part = SpawnPrefab("deco_cave_honey_drip_side_2")
 					if part ~= nil then
 						part.Transform:SetPosition(x + getlocationoutofcenter(depth * 0.65, 3, true), 0, z + width / 2)
 						part.Transform:SetRotation(180)
-						if part.components.health ~= nil then
-							part.components.health:SetPercent(1)
-						end
 					end
 				end
 			end
@@ -652,9 +492,6 @@ end
 	local part = SpawnPrefab("antman_warrior")
 	if part ~= nil then
 	part.Transform:SetPosition(x , 0, z)
-	if part.components.health ~= nil then
-	part.components.health:SetPercent(1)
-	end
 	end
 	end	
 ]]
@@ -666,402 +503,252 @@ end
 		local part = SpawnPrefab("antqueen")
 		if part ~= nil then
 			part.Transform:SetPosition(x, 0, z)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("ant_cave_lantern")
 		if part ~= nil then
 			part.Transform:SetPosition(x - depth / 2, 0, z)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("ant_cave_lantern")
 		if part ~= nil then
 			part.Transform:SetPosition(x - depth / 2, 0, z + (depth / 2) - 2)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("ant_cave_lantern")
 		if part ~= nil then
 			part.Transform:SetPosition(x - depth / 2, 0, z + (-depth / 2) + 2)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("ant_cave_lantern")
 		if part ~= nil then
 			part.Transform:SetPosition(x, 0, z + (depth / 2) + 1)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("ant_cave_lantern")
 		if part ~= nil then
 			part.Transform:SetPosition(x, 0, z + (-depth / 2) - 1)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		-- Gross
 		local part = SpawnPrefab("throne_wall_large")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 1, 0, z + 2.25)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 2.2, 0, z + 2.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 1.9, 0, z + 3)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 1.6, 0, z + 3.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 1.3, 0, z + 4)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 1, 0, z + 4.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 0.7, 0, z + 5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 0.4, 0, z + 5.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 0.1, 0, z + 6)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 0.4, 0, z + 6)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 3.25, 0, z + 1.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 3, 0, z + 2)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.75, 0, z + 2.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.5, 0, z + 3)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.25, 0, z + 3.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2, 0, z + 4)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 1.75, 0, z + 4.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 1.5, 0, z + 5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 1.25, 0, z + 5.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 1, 0, z + 6)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 3.25, 0, z + 1)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 3.25, 0, z + 0.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 3.25, 0, z)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 3.25, 0, z - 0.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 3.25, 0, z - 1)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 3.25, 0, z - 1.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 3, 0, z - 2)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.75, 0, z - 2.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.5, 0, z - 3)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.25, 0, z - 3.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2, 0, z - 4)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 1.75, 0, z - 4.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 1.5, 0, z - 5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 1.25, 0, z - 5.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 1, 0, z - 6)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall_large")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 1.5, 0, z - 2.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 2, 0, z - 3)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 1.75, 0, z - 3.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 1.5, 0, z - 4)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 1.25, 0, z - 4.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 1, 0, z - 5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 0.75, 0, z - 5.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x, 0, z - 6)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 
 		local part = SpawnPrefab("throne_wall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 0.5, 0, z - 6)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
 		end
 	end
 
@@ -1084,8 +771,9 @@ end
 
 
 ---------------------------------pisos---------------------------------------------------------------------------
-local function SpawnPiso1(inst)
+local function SpawnPiso1()
 	local inst = CreateEntity()
+
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
@@ -1113,37 +801,9 @@ local function SpawnPiso1(inst)
 	return inst
 end
 
-local function SpawnPiso2(inst)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("pisohamlet")
-	inst.AnimState:SetBuild("pisohamlet")
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(5)
-	inst.AnimState:SetScale(3.8, 3.8, 3.8)
-	inst.AnimState:PlayAnimation("antcave_floor")
-
-	inst:AddTag("NOCLICK")
-	inst:AddTag("NOBLOCK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("caveinterior")
-	inst:AddTag("pisoanthillrainha")
-	inst:AddTag("terremoto")
-	inst:AddTag("canbuild")
-	inst:AddTag("blows_air")
-
-	--    inst:DoPeriodicTask( math.random(20, 40), function(inst) maintainantpop(inst) end )
-	return inst
-end
-
 local function SpawnPiso6(inst)
 	local inst = CreateEntity()
+
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
@@ -1156,21 +816,20 @@ local function SpawnPiso6(inst)
 	inst.AnimState:SetSortOrder(10)
 	inst.AnimState:SetScale(1.2, 1.2, 1.2)
 	inst.AnimState:PlayAnimation("idleant") -- or ground_ruins_slab_blue
+
 	inst:AddTag("NOCLICK")
 	inst:AddTag("NOBLOCK")
 
 	inst:DoTaskInTime(0.5, function(inst)
-		local piso = GetClosestInstWithTag("pisoanthill", inst, 25)
-		if not piso then inst:Remove() end
+		if not GetClosestInstWithTag("pisoanthill", inst, 25) then inst:Remove() end
 	end)
-
-
 
 	return inst
 end
 
-local function SpawnPiso6a(inst)
+local function SpawnPiso6a()
 	local inst = CreateEntity()
+
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
@@ -1183,16 +842,20 @@ local function SpawnPiso6a(inst)
 	inst.AnimState:SetSortOrder(10)
 	inst.AnimState:SetScale(1.2, 1.2, 1.2)
 	inst.AnimState:PlayAnimation("idleinicioant")
+
 	inst:AddTag("NOCLICK")
 	inst:AddTag("NOBLOCK")
+
 	return inst
 end
 
-local function wall_common(build)
+local function wall_common()
 	local inst = CreateEntity()
+
 	inst.entity:AddTransform()
 	inst.entity:AddNetwork()
 	inst.entity:AddAnimState()
+
 	inst.AnimState:SetBank("wallhamletant")
 	inst.AnimState:SetBuild("wallhamletant")
 	inst.AnimState:PlayAnimation("antcave_wall_rock", true)
@@ -1225,53 +888,35 @@ local function OnActivate(inst, doer)
 			local piso = GetClosestInstWithTag("pisoanthill", alvo, 20)
 			local piso2 = GetClosestInstWithTag("pisoanthillrainha", alvo, 20)
 
-
-
-
 			if piso then
 				if inst.diadomonstro and inst.diadomonstro ~= TheWorld.state.cycles or not inst.diadomonstro then
 					inst.diadomonstro = TheWorld.state.cycles
 
 					local x, y, z = piso.Transform:GetWorldPosition()
-
-
-
 					local bicho = math.random(1, 9)
-
 					if bicho < 6 then
 						for i = 1, math.random(2, 3) do
 							local part = SpawnPrefab("antman")
 							if part ~= nil then
 								part.Transform:SetPosition(x + math.random(0, 7), y, z + math.random(-4, 4))
-								if part.components.health ~= nil then
-									part.components.health:SetPercent(1)
-								end
 							end
 						end
 					end
-
 
 					if bicho == 6 then
 						for i = 1, math.random(1, 2) do
 							local part = SpawnPrefab("giantgrub")
 							if part ~= nil then
 								part.Transform:SetPosition(x + math.random(0, 7), y, z + math.random(-4, 4))
-								if part.components.health ~= nil then
-									part.components.health:SetPercent(1)
-								end
 							end
 						end
 					end
-
 
 					if bicho == 7 or bicho == 8 then
 						for i = 1, math.random(2, 3) do
 							local part = SpawnPrefab("antman")
 							if part ~= nil then
 								part.Transform:SetPosition(x + math.random(0, 7), y, z + math.random(-4, 4))
-								if part.components.health ~= nil then
-									part.components.health:SetPercent(1)
-								end
 							end
 						end
 
@@ -1280,9 +925,6 @@ local function OnActivate(inst, doer)
 							local part = SpawnPrefab("giantgrub")
 							if part ~= nil then
 								part.Transform:SetPosition(x + math.random(0, 7), y, z + math.random(-4, 4))
-								if part.components.health ~= nil then
-									part.components.health:SetPercent(1)
-								end
 							end
 						end
 					end
@@ -1299,9 +941,6 @@ local function OnActivate(inst, doer)
 						local part = SpawnPrefab("antman_warrior")
 						if part ~= nil then
 							part.Transform:SetPosition(x + math.random(0, 7), y, z + math.random(-4, 4))
-							if part.components.health ~= nil then
-								part.components.health:SetPercent(1)
-							end
 						end
 					end
 				end
@@ -1329,8 +968,6 @@ local function OnActivateexterior(inst, doer)
 	end
 end
 
-
-
 local function OnActivateByOther(inst, source, doer)
 	--    if not inst.sg:HasStateTag("open") then
 	--        inst.sg:GoToState("opening")
@@ -1343,7 +980,6 @@ local function onaccept(inst, giver, item)
 end
 
 local function StartTravelSound(inst, doer)
-
 end
 
 local function turnoff(inst, light)
@@ -1671,22 +1307,21 @@ local function fnescadabaixo()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
+	inst.entity:AddMiniMapEntity()
 	inst.entity:AddNetwork()
-
-	local minimap = inst.entity:AddMiniMapEntity()
 
 	inst.AnimState:SetBank("ant_cave_door")
 	inst.AnimState:SetBuild("ant_cave_door")
 	inst.AnimState:PlayAnimation("south")
 	--    inst.AnimState:SetLayer(LAYER_BACKGROUND)
 	--    inst.AnimState:SetSortOrder(3)
+
 	inst.dooranimclosed = nil
 	inst.timechanger = nil
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
 	inst:AddTag("hamletteleport")
-
 	inst:AddTag("antlion_sinkhole_blocker")
 
 	inst.entity:SetPristine()
@@ -1707,6 +1342,7 @@ local function fnescadabaixo()
 	inst.components.teleporter.onActivate = OnActivate
 	inst.components.teleporter.onActivateByOther = OnActivateByOther
 	inst.components.teleporter.offset = 0
+
 	inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
 	inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
 
@@ -1728,9 +1364,8 @@ local function fnescadaesquerda()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
+	inst.entity:AddMiniMapEntity()
 	inst.entity:AddNetwork()
-
-	local minimap = inst.entity:AddMiniMapEntity()
 
 	inst.AnimState:SetBank("ant_cave_door")
 	inst.AnimState:SetBuild("ant_cave_door")
@@ -1785,9 +1420,8 @@ local function fnescadadireita()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
+	inst.entity:AddMiniMapEntity()
 	inst.entity:AddNetwork()
-
-	local minimap = inst.entity:AddMiniMapEntity()
 
 	inst.AnimState:SetBank("ant_cave_door")
 	inst.AnimState:SetBuild("ant_cave_door")
@@ -1837,9 +1471,8 @@ local function fnescadaqueen()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
+	inst.entity:AddMiniMapEntity()
 	inst.entity:AddNetwork()
-
-	local minimap = inst.entity:AddMiniMapEntity()
 
 	inst.AnimState:SetBank("entrance")
 	inst.AnimState:SetBuild("ant_queen_entrance")
@@ -1881,13 +1514,15 @@ local function fnescadaqueen()
 	return inst
 end
 
-local function normalroom()
+local function CommonRoom(tipodesala)
 	local inst = CreateEntity()
+
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
 	inst.entity:AddMiniMapEntity()
+
 	inst.AnimState:SetBuild("palace")
 	inst.AnimState:SetBank("palace")
 	inst.AnimState:PlayAnimation("idle", true)
@@ -1896,99 +1531,34 @@ local function normalroom()
 	inst.AnimState:SetSortOrder(1)
 	inst.AnimState:SetFinalOffset(2)
 
-	inst.tipodesala = 0
+	inst.tipodesala = tipodesala
+
 	inst:AddTag("vulcano_part")
 	inst:AddTag("antlion_sinkhole_blocker")
+
 	createroom(inst)
+
 	return inst
+end
+
+local function normalroom()
+	return CommonRoom(0)
 end
 
 local function normalroominicio()
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-	inst.entity:AddMiniMapEntity()
-	inst.AnimState:SetBuild("palace")
-	inst.AnimState:SetBank("palace")
-	inst.AnimState:PlayAnimation("idle", true)
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(1)
-	inst.AnimState:SetFinalOffset(2)
-
-	inst.tipodesala = 8
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
-	createroom(inst)
-	return inst
+	return CommonRoom(8)
 end
 
 local function comumroom()
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-	inst.entity:AddMiniMapEntity()
-	inst.AnimState:SetBuild("palace")
-	inst.AnimState:SetBank("palace")
-	inst.AnimState:PlayAnimation("idle", true)
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(1)
-	inst.AnimState:SetFinalOffset(2)
-
-	inst.tipodesala = 1
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
-	createroom(inst)
-	return inst
+	return CommonRoom(1)
 end
 
 local function chamberroom()
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-	inst.entity:AddMiniMapEntity()
-	inst.AnimState:SetBuild("palace")
-	inst.AnimState:SetBank("palace")
-	inst.AnimState:PlayAnimation("idle", true)
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(1)
-	inst.AnimState:SetFinalOffset(2)
-
-	inst.tipodesala = 2
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
-	createroom(inst)
-	return inst
+	return CommonRoom(2)
 end
 
 local function saladarainharoom()
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-	inst.entity:AddMiniMapEntity()
-	inst.AnimState:SetBuild("palace")
-	inst.AnimState:SetBank("palace")
-	inst.AnimState:PlayAnimation("idle", true)
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(1)
-	inst.AnimState:SetFinalOffset(2)
-
-	inst.tipodesala = 3
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
-	createroom(inst)
-	return inst
+	return CommonRoom(3)
 end
 
 return Prefab("createanthilldefaltroom", normalroom, assets),
@@ -1998,7 +1568,7 @@ return Prefab("createanthilldefaltroom", normalroom, assets),
 	Prefab("createanthillqueenroom", saladarainharoom, assets),
 
 	Prefab("anthill_floor", SpawnPiso1, assets),
-	Prefab("anthill_floor2", SpawnPiso2, assets),
+	Prefab("anthill_floor2", SpawnPiso1, assets),
 	Prefab("wallinterioranthill", wall_common, assets),
 	Prefab("mapaant", SpawnPiso6, assets),
 	Prefab("mapainicioant", SpawnPiso6a, assets),

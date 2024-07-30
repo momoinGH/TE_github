@@ -30,7 +30,7 @@ local function makefn(name, frame)
 
 		inst:AddComponent("inventoryitem")
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 		anim:SetBuild("teleportato_shipwrecked_parts")
 

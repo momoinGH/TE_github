@@ -38,49 +38,49 @@ local function mature(inst)
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("redgem", nil, 3)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst:AddTag("redg")
 		elseif rnd <= 40 then
 			inst.AnimState:OverrideSymbol("swap_grown", "gem", "blue")
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("bluegem", nil, 3)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst:AddTag("blueg")
 		elseif rnd <= 50 then
 			inst.AnimState:OverrideSymbol("swap_grown", "gem", "orange")
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("orangegem", nil, 2)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst:AddTag("orangeg")
 		elseif rnd <= 60 then
 			inst.AnimState:OverrideSymbol("swap_grown", "gem", "green")
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("greengem", nil, 2)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst:AddTag("greeng")
 		elseif rnd <= 70 then
 			inst.AnimState:OverrideSymbol("swap_grown", "gem", "yellow")
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("yellowgem", nil, 2)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst:AddTag("yellowg")
 		elseif rnd <= 85 then
 			inst.AnimState:OverrideSymbol("swap_grown", "gem", "opal")
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("mixed_gem")
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst:AddTag("mixedg")
 		else
 			inst.AnimState:OverrideSymbol("swap_grown", "gem", "purple")
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("purplegem", nil, 2)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst:AddTag("purpleg")
 		end
 	end)
@@ -134,7 +134,7 @@ local function tree_onload(inst, data)
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("redgem", nil, 3)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst.Light:Enable(true)
 			inst:AddTag("redg")
 		end
@@ -144,7 +144,7 @@ local function tree_onload(inst, data)
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("bluegem", nil, 3)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst.Light:Enable(true)
 			inst:AddTag("blueg")
 		end
@@ -154,7 +154,7 @@ local function tree_onload(inst, data)
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("orangegem", nil, 2)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst.Light:Enable(true)
 			inst:AddTag("orangeg")
 		end
@@ -164,7 +164,7 @@ local function tree_onload(inst, data)
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("greengem", nil, 2)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst.Light:Enable(true)
 			inst:AddTag("greeng")
 		end
@@ -174,7 +174,7 @@ local function tree_onload(inst, data)
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("purplegem", nil, 2)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst.Light:Enable(true)
 			inst:AddTag("purpleg")
 		end
@@ -184,7 +184,7 @@ local function tree_onload(inst, data)
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("yellowgem", nil, 2)
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst.Light:Enable(true)
 			inst:AddTag("yellowg")
 		end
@@ -194,7 +194,7 @@ local function tree_onload(inst, data)
 			inst:AddComponent("pickable")
 			inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 			inst.components.pickable:SetUp("mixed_gem")
-			inst.components.pickable.onpickedfn = onpickedfn
+			inst.components.pickable.remove_when_picked = true
 			inst.Light:Enable(true)
 			inst:AddTag("mixedg")
 		end

@@ -385,7 +385,7 @@ function decofn(build, bank, animframe, data, assets, prefabs)
             if not inst.childrenspawned then
                 for i, child in ipairs(data.children) do
                     local childprop = SpawnPrefab(child)
-                    local pt = Vector3(inst.Transform:GetWorldPosition())
+                    local pt = inst:GetPosition()
                     childprop.Transform:SetPosition(pt.x, pt.y, pt.z)
                     childprop.Transform:SetRotation(inst.Transform:GetRotation())
                     if not inst.decochildrenToRemove then
@@ -565,7 +565,7 @@ function decofn(build, bank, animframe, data, assets, prefabs)
                 if not inst:HasTag("INTERIOR_LIMBO") then
                     inst:DoTaskInTime(1,
                         function()
-                            local pt = Vector3(inst.Transform:GetWorldPosition())
+                            local pt = inst:GetPosition()
                             local torches = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "wall_torch" },
                                 { "INTERIOR_LIMBO" })
                             local closedoors = false
@@ -591,7 +591,7 @@ function decofn(build, bank, animframe, data, assets, prefabs)
 
             inst:ListenForEvent("fire_lit", function()
                 local opendoors = true
-                local pt = Vector3(inst.Transform:GetWorldPosition())
+                local pt = inst:GetPosition()
                 local torches = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "wall_torch" }, { "INTERIOR_LIMBO" })
 
                 for i, torch in ipairs(torches) do
@@ -601,7 +601,7 @@ function decofn(build, bank, animframe, data, assets, prefabs)
                 end
 
                 if opendoors then
-                    local pt = Vector3(inst.Transform:GetWorldPosition())
+                    local pt = inst:GetPosition()
                     local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
                     for i, ent in ipairs(ents) do
                         if ent:HasTag("lockable_door") then
@@ -724,15 +724,18 @@ return
     Prefab("deco_cave_ceiling_trim",
         decofn("interior_wall_decals_batcave", "interior_wall_decals_cave", "ceiling_trim_1"), assets, prefabs),
     Prefab("deco_cave_ceiling_trim_2",
-        decofn("interior_wall_decals_batcave", "interior_wall_decals_cave", "ceiling_trim_2", { decal = true, background = 3 }),
+        decofn("interior_wall_decals_batcave", "interior_wall_decals_cave", "ceiling_trim_2",
+            { decal = true, background = 3 }),
         assets, prefabs),
     Prefab("deco_cave_ceiling_trim_3",
         decofn("interior_wall_decals_batcave", "interior_wall_decals_cave", "ceiling_trim_3"), assets, prefabs),
     Prefab("deco_cave_floor_trim",
-        decofn("interior_wall_decals_batcave", "interior_wall_decals_cave", "floor_trim_1", { decal = true, background = 3 }),
+        decofn("interior_wall_decals_batcave", "interior_wall_decals_cave", "floor_trim_1",
+            { decal = true, background = 3 }),
         assets, prefabs),
     Prefab("deco_cave_floor_trim_2",
-        decofn("interior_wall_decals_batcave", "interior_wall_decals_cave", "floor_trim_2", { decal = true, background = 3 }),
+        decofn("interior_wall_decals_batcave", "interior_wall_decals_cave", "floor_trim_2",
+            { decal = true, background = 3 }),
         assets, prefabs),
     Prefab("deco_cave_floor_trim_front",
         decofn("interior_wall_decals_batcave", "interior_wall_decals_cave", "floor_trim_3"), assets, prefabs),
@@ -740,12 +743,23 @@ return
         assets, prefabs),
     Prefab("deco_cave_bat_burrow",
         decofn("interior_wall_decals_batcave", "interior_wall_decals_cave", "bat_burrow",
-            { decal = true, physics = "pond_physics", prefabname = "deco_cave_bat_burrow", minimapicon =
-            "vamp_cave_burrow.png" }), assets, prefabs),
+            {
+                decal = true,
+                physics = "pond_physics",
+                prefabname = "deco_cave_bat_burrow",
+                minimapicon =
+                "vamp_cave_burrow.png"
+            }), assets, prefabs),
     Prefab("grotto_pillar_bug",
         decofn("interior_wall_grottogub_cave", "interior_wall_grottogub_cave", "pillar_front",
-            { decal = true, physics = "big_post_physics", workable = true, minimapicon = "grotto_pillar_bug.png", scale =
-            "alto" }), assets, prefabs),
+            {
+                decal = true,
+                physics = "big_post_physics",
+                workable = true,
+                minimapicon = "grotto_pillar_bug.png",
+                scale =
+                "alto"
+            }), assets, prefabs),
 
     --ANT HIVE
     Prefab("deco_hive_beam_room",
@@ -770,13 +784,15 @@ return
     Prefab("deco_hive_debris", decofn("interior_wall_decals_antcave", "interior_wall_decals_antcave", "rock_debris"),
         assets, prefabs),
     Prefab("deco_cave_honey_drip_1",
-        decofn("interior_wall_decals_antcave", "interior_wall_decals_antcave", "honey_wall_1", { decal = true, background = 3 }),
+        decofn("interior_wall_decals_antcave", "interior_wall_decals_antcave", "honey_wall_1",
+            { decal = true, background = 3 }),
         assets, prefabs),
     Prefab("deco_cave_ceiling_drip_2",
         decofn("interior_wall_decals_antcave", "interior_wall_decals_antcave", "honey_floor_1",
             { decal = true, background = 3 }), assets, prefabs),
     Prefab("deco_cave_honey_drip_side_1",
-        decofn("interior_wall_decals_antcave", "interior_wall_decals_antcave", "honey_wall_2", { decal = true, background = 3 }),
+        decofn("interior_wall_decals_antcave", "interior_wall_decals_antcave", "honey_wall_2",
+            { decal = true, background = 3 }),
         assets, prefabs),
     Prefab("deco_cave_honey_drip_side_2",
         decofn("interior_wall_decals_antcave", "interior_wall_decals_antcave", "honey_floor_2",
@@ -806,25 +822,32 @@ return
         decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "vines_3", { decal = true, background = 2 }),
         assets, prefabs),
     Prefab("deco_ruins_pigking_relief",
-        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_king", { decal = true, background = 1 }),
+        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_king",
+            { decal = true, background = 1 }),
         assets, prefabs),
     Prefab("deco_ruins_pigman_relief2",
-        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_happy", { decal = true, background = 1 }),
+        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_happy",
+            { decal = true, background = 1 }),
         assets, prefabs),
     Prefab("deco_ruins_pigqueen_relief",
-        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_queen", { decal = true, background = 1 }),
+        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_queen",
+            { decal = true, background = 1 }),
         assets, prefabs),
     Prefab("deco_ruins_pigman_relief1",
-        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_confused", { decal = true, background = 1 }),
+        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_confused",
+            { decal = true, background = 1 }),
         assets, prefabs),
     Prefab("deco_ruins_pigman_relief3",
-        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_surprise", { decal = true, background = 1 }),
+        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_surprise",
+            { decal = true, background = 1 }),
         assets, prefabs),
     Prefab("deco_ruins_pigman_relief_side",
-        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_sidewall", { decal = true, background = 1 }),
+        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_sidewall",
+            { decal = true, background = 1 }),
         assets, prefabs),
     Prefab("deco_ruins_pigman_relief4",
-        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_head", { decal = true, background = 1 }),
+        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_head",
+            { decal = true, background = 1 }),
         assets, prefabs),
     Prefab("deco_ruins_cornerbeam",
         decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "pillar_corner",
@@ -834,9 +857,10 @@ return
             { decal = true, background = 3, tags = { "cornerpost" } }), assets, prefabs),
     Prefab("deco_ruins_corner_tree",
         decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "giant_roots",
-            { decal = true, background = 3, physics = "tree_physics" }), assets, prefabs),                                                                                                        -- , minimapicon="pig_ruins_tree_roots_int.png"
+            { decal = true, background = 3, physics = "tree_physics" }), assets, prefabs), -- , minimapicon="pig_ruins_tree_roots_int.png"
     Prefab("deco_ruins_beam_heavy",
-        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "pillar_side_lg", { decal = true, background = 3 }),
+        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "pillar_side_lg",
+            { decal = true, background = 3 }),
         assets, prefabs),
     Prefab("deco_ruins_beam",
         decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "pillar_front", { decal = true }), assets,
@@ -849,7 +873,8 @@ return
         decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "pillar_broken",
             { decal = true, physics = "post_physics", minimapicon = "pig_ruins_pillar.png" }), assets, prefabs),
     Prefab("deco_ruins_beam_broken",
-        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "pillar_broken", { decal = true, background = 3 }),
+        decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "pillar_broken",
+            { decal = true, background = 3 }),
         assets, prefabs),
     Prefab("deco_ruins_wallstrut",
         decofn("interior_wall_decals_ruins", "interior_wall_decals_ruins", "support_side", { decal = true }), assets,
@@ -860,7 +885,8 @@ return
 
     -- THE BLUE RUINS ART
     Prefab("deco_ruins_pigking_relief_blue",
-        decofn("interior_wall_decals_ruins_blue", "interior_wall_decals_ruins", "relief_king", { decal = true, background = 1 }),
+        decofn("interior_wall_decals_ruins_blue", "interior_wall_decals_ruins", "relief_king",
+            { decal = true, background = 1 }),
         assets, prefabs),
     Prefab("deco_ruins_pigman_relief2_blue",
         decofn("interior_wall_decals_ruins_blue", "interior_wall_decals_ruins", "relief_happy",
@@ -878,7 +904,8 @@ return
         decofn("interior_wall_decals_ruins_blue", "interior_wall_decals_ruins", "relief_sidewall",
             { decal = true, background = 1 }), assets, prefabs),
     Prefab("deco_ruins_pigman_relief4_blue",
-        decofn("interior_wall_decals_ruins_blue", "interior_wall_decals_ruins", "relief_head", { decal = true, background = 1 }),
+        decofn("interior_wall_decals_ruins_blue", "interior_wall_decals_ruins", "relief_head",
+            { decal = true, background = 1 }),
         assets, prefabs),
     Prefab("deco_ruins_cornerbeam_blue",
         decofn("interior_wall_decals_ruins_blue", "interior_wall_decals_ruins", "pillar_corner",

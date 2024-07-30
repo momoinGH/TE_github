@@ -33,7 +33,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     MakeHauntableLaunchAndSmash(inst)
 
     return inst
@@ -66,7 +66,7 @@ local function fn1()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     MakeHauntableLaunchAndSmash(inst)
 
     return inst
@@ -99,7 +99,7 @@ local function fn2()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     MakeHauntableLaunchAndSmash(inst)
 
     return inst
@@ -132,7 +132,7 @@ local function fn3()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     MakeHauntableLaunchAndSmash(inst)
 
     return inst
@@ -165,7 +165,7 @@ local function fn4()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     MakeHauntableLaunchAndSmash(inst)
 
     return inst
@@ -198,7 +198,7 @@ local function fn5()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     MakeHauntableLaunchAndSmash(inst)
 
     return inst
@@ -232,7 +232,7 @@ local function fn6()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     MakeHauntableLaunchAndSmash(inst)
 
     return inst
@@ -267,7 +267,7 @@ local function fn7()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     MakeHauntableLaunchAndSmash(inst)
 
     return inst
@@ -301,7 +301,7 @@ local function fn8()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     MakeHauntableLaunchAndSmash(inst)
 
     return inst

@@ -58,7 +58,7 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     return inst
 end
@@ -109,7 +109,7 @@ local function cookedfn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     return inst
 end
@@ -160,7 +160,7 @@ local function bloomfn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     return inst
 end
@@ -212,7 +212,7 @@ local function cookedbloomfn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     return inst
 end

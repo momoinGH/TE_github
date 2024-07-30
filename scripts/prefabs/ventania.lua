@@ -34,7 +34,7 @@ local function chop_down_tree(inst, chopper)
 	inst:RemoveComponent("workable")
 	inst:RemoveTag("shelter")
 	inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local hispos = Vector3(chopper.Transform:GetWorldPosition())
 
 	local he_right = (hispos - pt):Dot(TheCamera:GetRightVec()) > 0
@@ -252,11 +252,13 @@ local function OnInit(inst)
 		---------------------------se arvore ta cortada nao faz nada-------------------------------------------
 		if palmtree:HasTag("stump") then palmtree:DoTaskInTime(5.5, function(inst) palmtree:AddTag("palmtree") end) end
 		---------------------------se arvore ta queimada nao balanca mas pode derrubar-------------------------------------------
-		if palmtree:HasTag("burnt") then palmtree:DoTaskInTime(5.5,
+		if palmtree:HasTag("burnt") then
+			palmtree:DoTaskInTime(5.5,
 				function(inst)
 					palmtree:AddTag("palmtree")
 					if math.random() > 0.98 then chop_down_burnt_tree(palmtree, inst) end
-				end) end
+				end)
+		end
 		---------------------------balanca arvore normal-------------------------------------------
 		if not palmtree:HasTag("burnt") and not palmtree:HasTag("stump") then
 			palmtree.AnimState:PlayAnimation(palmtree.anims.blown_pre, false)
@@ -290,15 +292,19 @@ local function OnInit(inst)
 	if twiggytreesw then
 		twiggytreesw:RemoveTag("twiggytreesw")
 		---------------------------se arvore ta cortada nao faz nada-------------------------------------------
-		if twiggytreesw:HasTag("stump") then twiggytreesw:DoTaskInTime(5.5,
-				function(inst) twiggytreesw:AddTag("twiggytreesw") end) end
+		if twiggytreesw:HasTag("stump") then
+			twiggytreesw:DoTaskInTime(5.5,
+				function(inst) twiggytreesw:AddTag("twiggytreesw") end)
+		end
 
 		---------------------------se arvore ta queimada nao balanca mas pode derrubar-------------------------------------------
-		if twiggytreesw:HasTag("burnt") then twiggytreesw:DoTaskInTime(5.5,
+		if twiggytreesw:HasTag("burnt") then
+			twiggytreesw:DoTaskInTime(5.5,
 				function(inst)
 					twiggytreesw:AddTag("twiggytreesw")
 					if math.random() > 0.98 then chop_down_burnt_tree(twiggytreesw, inst) end
-				end) end
+				end)
+		end
 		---------------------------balanca arvore normal-------------------------------------------
 		if not twiggytreesw:HasTag("burnt") and not twiggytreesw:HasTag("stump") then
 			twiggytreesw.AnimState:PlayAnimation(twiggytreesw.anims.blown_pre, false)
@@ -332,8 +338,10 @@ local function OnInit(inst)
 	if bambootree and bambootree:HasTag("machetecut") then
 		bambootree:RemoveTag("bambootree")
 		---------------------------se bambootree ta cortada nao faz nada-------------------------------------------
-		if bambootree.components.workable.action == ACTIONS.DIG then bambootree:DoTaskInTime(5.5,
-				function(inst) bambootree:AddTag("bambootree") end) end
+		if bambootree.components.workable.action == ACTIONS.DIG then
+			bambootree:DoTaskInTime(5.5,
+				function(inst) bambootree:AddTag("bambootree") end)
+		end
 		---------------------------balanca arvore normal-------------------------------------------
 		if bambootree.components.workable.action == ACTIONS.HACK then
 			bambootree.AnimState:PlayAnimation("blown_pre", false)
@@ -370,8 +378,10 @@ local function OnInit(inst)
 	if bush_vine and bush_vine:HasTag("machetecut") then
 		bush_vine:RemoveTag("bush_vine")
 		---------------------------se bush_vine ta cortada nao faz nada-------------------------------------------
-		if bush_vine.components.workable.action == ACTIONS.DIG then bush_vine:DoTaskInTime(5.5,
-				function(inst) bush_vine:AddTag("bush_vine") end) end
+		if bush_vine.components.workable.action == ACTIONS.DIG then
+			bush_vine:DoTaskInTime(5.5,
+				function(inst) bush_vine:AddTag("bush_vine") end)
+		end
 		---------------------------balanca arvore normal-------------------------------------------
 		if bush_vine.components.workable.action == ACTIONS.HACK then
 			bush_vine.AnimState:PlayAnimation("blown_pre", false)
@@ -408,8 +418,10 @@ local function OnInit(inst)
 	if grasss then
 		grasss:RemoveTag("grasss")
 		---------------------------se grasss ta cortada nao faz nada-------------------------------------------
-		if not grasss.components.pickable:CanBePicked() then grasss:DoTaskInTime(5.5,
-				function(inst) grasss:AddTag("grasss") end) end
+		if not grasss.components.pickable:CanBePicked() then
+			grasss:DoTaskInTime(5.5,
+				function(inst) grasss:AddTag("grasss") end)
+		end
 		---------------------------balanca arvore normal-------------------------------------------
 		if grasss.components.pickable:CanBePicked() then
 			grasss.AnimState:PlayAnimation("blown_pre", false)
@@ -444,8 +456,10 @@ local function OnInit(inst)
 	if saplingsw then
 		saplingsw:RemoveTag("saplingsw")
 		---------------------------se saplingsw ta cortada nao faz nada-------------------------------------------
-		if not saplingsw.components.pickable:CanBePicked() then saplingsw:DoTaskInTime(5.5,
-				function(inst) saplingsw:AddTag("saplingsw") end) end
+		if not saplingsw.components.pickable:CanBePicked() then
+			saplingsw:DoTaskInTime(5.5,
+				function(inst) saplingsw:AddTag("saplingsw") end)
+		end
 		---------------------------balanca arvore normal-------------------------------------------
 		if saplingsw.components.pickable:CanBePicked() then
 			saplingsw.AnimState:PlayAnimation("blown_pre", false)

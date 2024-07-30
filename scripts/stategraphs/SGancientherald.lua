@@ -347,7 +347,7 @@ CommonStates.AddCombatStates(states,
             TimeEvent(0 * FRAMES,
                 function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/ancient_herald/death") end),
             TimeEvent(32 * FRAMES, function(inst)
-                --inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+                --inst.components.lootdropper:DropLoot(inst:GetPosition())
             end),
         },
     },
@@ -367,4 +367,4 @@ CommonStates.AddWalkStates(states,
         }
     })
 
-return StateGraph("ancient_herald", states, events, "idle")
+return StateGraph("ancient_herald", states, events, "appear")

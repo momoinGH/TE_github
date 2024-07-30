@@ -13,7 +13,7 @@ local function fn()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
 
-    -- MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst.AnimState:SetBank("conch")
     inst.AnimState:SetBuild("conch")
@@ -33,7 +33,7 @@ local function fn()
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     return inst
 end

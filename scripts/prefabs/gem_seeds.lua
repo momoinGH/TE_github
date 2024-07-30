@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local Assets =
 {
 	Asset("ATLAS", "images/inventoryimages/gem_seeds.xml"),

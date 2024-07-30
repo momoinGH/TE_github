@@ -1,5 +1,3 @@
-require "stategraphs/SGadultflytrap"
-
 local assets =
 {
     Asset("ANIM", "anim/venus_flytrap_lg_build.zip"),
@@ -10,6 +8,7 @@ local assets =
 
 local prefabs =
 {
+    "mean_flytrap",
     "plantmeat",
     "venus_stalk",
     "vine",
@@ -45,7 +44,7 @@ local function grownplant(inst)
 end
 
 local function StartGrowTask(inst, time)
-    time = time or math.random() * (480 * 2) + (480 * 2)
+    time = time or math.random() * TUNING.ADULT_FLYTRAP_GROW_TIME + TUNING.ADULT_FLYTRAP_GROW_TIME
 
     if inst.growtask then
         inst.growtask:Cancel()

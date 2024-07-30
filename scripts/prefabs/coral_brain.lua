@@ -16,7 +16,7 @@ local function fn()
 
 	MakeInventoryPhysics(inst)
 	--    MakeInventoryFloatable(inst, "idle_water", "idle")
-	--    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.HEAVY, TUNING.WINDBLOWN_SCALE_MAX.HEAVY)
+
 
 	inst.AnimState:SetBank("brain_coral")
 	inst.AnimState:SetBuild("brain_coral")
@@ -47,7 +47,7 @@ local function fn()
 	inst.components.perishable.onperishreplacement = "spoiled_food"
 
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 	return inst
 end

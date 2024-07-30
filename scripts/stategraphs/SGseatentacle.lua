@@ -1,16 +1,17 @@
 require("stategraphs/commonstates")
 
-local events=
+local events =
 {
-    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("hit") and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
+    EventHandler("attacked",
+        function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("hit") and not inst.sg:HasStateTag("attack") then
+                inst.sg:GoToState("hit") end end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     CommonHandlers.OnFreeze(),
-    EventHandler("newcombattarget", function(inst,data)
-
-            if inst.sg:HasStateTag("idle") and data.target then
-                inst.sg:GoToState("taunt")
-            end
-        end)
+    EventHandler("newcombattarget", function(inst, data)
+        if inst.sg:HasStateTag("idle") and data.target then
+            inst.sg:GoToState("taunt")
+        end
+    end)
 }
 
 local function OnEntitySleep(inst)
@@ -46,18 +47,18 @@ local function StopRumbleSound(inst)
     end
 end
 
-local states=
+local states =
 {
 
 
-    State{
+    State {
         name = "rumble",
-        tags = {"idle", "invisible"},
+        tags = { "idle", "invisible" },
         onenter = function(inst)
             StartRumbleSound(inst, 0)
             inst.AnimState:PlayAnimation("ground_pre")
             inst.AnimState:PushAnimation("ground_loop", true)
-            inst.sg:SetTimeout(GetRandomWithVariance(10, 5) )
+            inst.sg:SetTimeout(GetRandomWithVariance(10, 5))
         end,
         ontimeout = function(inst)
             inst.AnimState:PushAnimation("ground_pst", false)
@@ -67,23 +68,23 @@ local states=
         onexit = StopRumbleSound,
     },
 
-    State{
+    State {
         name = "idle",
-        tags = {"idle", "invisible"},
+        tags = { "idle", "invisible" },
         onenter = function(inst)
             inst.AnimState:PushAnimation("ground_loop", true)
-            inst.sg:SetTimeout(GetRandomWithVariance(10, 5) )
+            inst.sg:SetTimeout(GetRandomWithVariance(10, 5))
             inst.SoundEmitter:KillAllSounds()
         end,
 
         ontimeout = function(inst)
-			inst.sg:GoToState("rumble")
+            inst.sg:GoToState("rumble")
         end,
     },
 
-    State{
+    State {
         name = "taunt",
-        tags = {"taunting"},
+        tags = { "taunting" },
         onenter = function(inst)
             StartRumbleSound(inst, 0)
 
@@ -98,52 +99,51 @@ local states=
                 inst.AnimState:PlayAnimation("breach_pst")
                 inst.sg:GoToState("idle")
             end
-
         end,
         onexit = StopRumbleSound,
     },
 
-    State{
-        name ="attack_pre",
-        tags = {"attack"},
+    State {
+        name = "attack_pre",
+        tags = { "attack" },
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_emerge")
             inst.components.combat:StartAttack()
             inst.AnimState:PlayAnimation("atk_pre")
             StartRumbleSound(inst, 1)
         end,
-        events=
+        events =
         {
             EventHandler("animover", function(inst)
                 inst.sg.statemem.keeprumblesound = true
                 inst.sg:GoToState("attack")
             end),
         },
-        timeline=
+        timeline =
         {
-            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_emerge_VO") end),
+            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_emerge_VO") end),
         },
         onexit = StopRumbleSound,
     },
 
-    State{
+    State {
         name = "attack",
-        tags = {"attack"},
+        tags = { "attack" },
         onenter = function(inst)
             inst.AnimState:PlayAnimation("atk_loop")
             inst.AnimState:PushAnimation("atk_idle", false)
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_attack") end),
-			TimeEvent(7*FRAMES, function(inst) inst.components.combat:DoAttack() end),
-            TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_attack") end),
-            TimeEvent(17*FRAMES, function(inst) inst.components.combat:DoAttack() end),
-            TimeEvent(18*FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
+            TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_attack") end),
+            TimeEvent(7 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
+            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_attack") end),
+            TimeEvent(17 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
+            TimeEvent(18 * FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
         },
 
-        events=
+        events =
         {
             EventHandler("animqueueover", function(inst)
                 inst.sg.statemem.keeprumblesound = true
@@ -157,41 +157,44 @@ local states=
         onexit = StopRumbleSound,
     },
 
-    State{
-        name ="attack_post",
+    State {
+        name = "attack_post",
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_disappear")
             inst.AnimState:PlayAnimation("atk_pst")
         end,
-        events=
+        events =
         {
-            EventHandler("animover", function(inst) inst.SoundEmitter:KillAllSounds() inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst)
+                inst.SoundEmitter:KillAllSounds()
+                inst.sg:GoToState("idle")
+            end),
         },
         onexit = StopRumbleSound,
     },
 
 
-	State{
+    State {
         name = "death",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_death_VO")
             inst.AnimState:PlayAnimation("death")
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_splat") end),
+            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_splat") end),
         },
     },
 
 
-    State{
+    State {
         name = "hit",
-        tags = {"busy", "hit"},
+        tags = { "busy", "hit" },
 
         onenter = function(inst)
             --inst.SoundEmitter:PlaySound("dontstarve/pig/grunt")
@@ -199,7 +202,7 @@ local states=
             inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_hurt_VO")
         end,
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("attack") end),
         },
@@ -210,4 +213,3 @@ local states=
 CommonStates.AddFrozenStates(states)
 
 return StateGraph("seatentacle", states, events, "idle")
-

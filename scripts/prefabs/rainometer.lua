@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local function onhammered(inst, worker)
     if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() then
         inst.components.burnable:Extinguish()

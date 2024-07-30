@@ -16,8 +16,11 @@ local events =
 	EventHandler("attacked",
 		function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("hit") end end),
 	EventHandler("doattack",
-		function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
-				inst.sg:GoToState("attack", data.target) end end),
+		function(inst, data)
+			if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+				inst.sg:GoToState("attack", data.target)
+			end
+		end),
 	EventHandler("death", function(inst) inst.sg:GoToState("death") end),
 	EventHandler("locomote",
 		function(inst)
@@ -151,8 +154,10 @@ local states =
 		{
 			TimeEvent(4 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
 			-- TODO: Put in a custom sound for the BILL attack later.
-			TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve_DLC003/creatures/enemy/platapine_bill/attack") end),
+			TimeEvent(0 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC003/creatures/enemy/platapine_bill/attack")
+			end),
 		},
 
 		events =
@@ -238,8 +243,8 @@ local states =
 			inst.AnimState:PlayAnimation("death")
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst)
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
-			-- inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+			inst.components.lootdropper:DropLoot(inst:GetPosition())
+			-- inst.components.lootdropper:DropLoot(inst:GetPosition())
 			-- inst.components.inventory:DropEverything(false, false)
 		end,
 	},

@@ -222,7 +222,7 @@ local function OnHit(inst, dist)
 	inst:Remove()
 end
 
-require "prefabutil"
+
 
 return Prefab("basefan", fn, assets, prefabs),
 	MakePlacer("common/basefan_placer", "sprinkler_placement", "sprinkler_placement", "idle", true, nil, nil, 1.55)

@@ -478,7 +478,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOUBLE_UMBRELLAHAT = "The second umbrella ke
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOY = "I feel oddly protective of this dumb bird."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYBABY = "What a cute little, uh, thing."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYEGG = "Maybe I should have let it hatch."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYEGG_COOKED = "A controlled chemical reaction has made this egg matter more nutritious."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYEGG_COOKED =
+"A controlled chemical reaction has made this egg matter more nutritious."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYEGG_CRACKED = "Oh well. I'm sure there are lots more!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYFEATHER = "Soft AND endangered!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYNEST = "It's for doydoy eggs, dummy."
@@ -1016,7 +1017,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PACKIM = "I bet I could pack'im full of stuf
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PACKIM_FISHBONE = "This seems like something I should carry around."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMLEAF = "I'm fond of these fronds."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMLEAF_HUT = "Shade, sweet shade."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMLEAF_UMBRELLA = "My hair looks good wet... it's when it dries that's the problem."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMLEAF_UMBRELLA =
+"My hair looks good wet... it's when it dries that's the problem."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMTREE_BURNING = "What a waste of wood."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMTREE_BURNT = "I feel like I could have prevented that."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMTREE_CHOPPED = "Take that, nature!"
@@ -1656,7 +1658,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_BASE_PARTIAL = "Soon, the invent
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_BOX = "This may control the polarity of the whole universe."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_CRANK = "Tough enough to handle the most intense experiments."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_HAMLET_BASE = "Looks like a job for a Gentleman Scientist!"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_HAMLET_BOX = "I could explain the science behind it, but I don't want to."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_HAMLET_BOX =
+"I could explain the science behind it, but I don't want to."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_HAMLET_CRANK = "I'll find a use for it."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_HAMLET_POTATO = "I haven't seen a lot of those around."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_HAMLET_RING = "It's pulsating with science."

@@ -10,7 +10,7 @@ local function fn(Sim)
     local anim = inst.entity:AddAnimState()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
     inst.entity:AddNetwork()
 
 
@@ -71,7 +71,7 @@ local function fncooked(Sim)
     inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
 
     anim:SetBank("lotus")

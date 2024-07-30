@@ -40,8 +40,7 @@ local function ShouldGoHome(inst)
     end
 
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition())
-    return (homePos and distsq(homePos, myPos) > GO_HOME_DIST * GO_HOME_DIST)
+    return (homePos and distsq(homePos, inst:GetPosition()) > GO_HOME_DIST * GO_HOME_DIST)
 end
 
 function KnightBoatBrain:OnStart()

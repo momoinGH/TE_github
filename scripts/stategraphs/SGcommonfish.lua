@@ -167,7 +167,7 @@ local states =
         events =
         {
             EventHandler("animover", function(inst)
-                --			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+                --			inst.components.lootdropper:DropLoot(inst:GetPosition())
                 local prefabs = inst.components.lootdropper:GenerateLoot()
                 for k, v in pairs(prefabs) do
                     if v then SpawnPrefab(v).Transform:SetPosition(inst.Transform:GetWorldPosition()) end

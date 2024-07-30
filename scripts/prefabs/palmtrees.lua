@@ -13,8 +13,8 @@ local day_time = seg_time * day_segs
 local PALMTREE_GROW_TIME =
 {
 	{ base = 1.5 * day_time, random = 0.5 * day_time }, --tall to short
-	{ base = 5 * day_time, random = 2 * day_time }, --short to normal
-	{ base = 5 * day_time, random = 2 * day_time }, --normal to tall
+	{ base = 5 * day_time,   random = 2 * day_time }, --short to normal
+	{ base = 5 * day_time,   random = 2 * day_time }, --normal to tall
 }
 
 local PALMTREE_CHOPS = "a"
@@ -41,7 +41,8 @@ local prefabs =
 
 SetSharedLootTable('palmtree_short', { { "log", 1.0 }, { "palmleaf", 1.0 } })
 SetSharedLootTable('palmtree_normal', { { "log", 1.0 }, { "log", 1.0 }, { "palmleaf", 1.0 }, { "coconut", 1.0 } })
-SetSharedLootTable('palmtree_tall', { { "log", 1.0 }, { "log", 1.0 }, { "coconut", 1.0 }, { "coconut", 0.33 }, { "palmleaf", 1.0 } })
+SetSharedLootTable('palmtree_tall',
+	{ { "log", 1.0 }, { "log", 1.0 }, { "coconut", 1.0 }, { "coconut", 0.33 }, { "palmleaf", 1.0 } })
 
 local builds =
 {
@@ -275,18 +276,54 @@ end
 
 local growth_stages =
 {
-	{ name = "short", time = function(inst) return GetRandomWithVariance(PALMTREE_GROW_TIME[1].base,
-			PALMTREE_GROW_TIME[1].random) end,                                                                                         fn = function(
-		inst) SetShort(inst) end,                                                                                                                                               growfn = function(
-		inst) GrowShort(inst) end,                                                                                                                                                                                            leifscale = .7 },
-	{ name = "normal", time = function(inst) return GetRandomWithVariance(PALMTREE_GROW_TIME[2].base,
-			PALMTREE_GROW_TIME[2].random) end,                                                                                         fn = function(
-		inst) SetNormal(inst) end,                                                                                                                                              growfn = function(
-		inst) GrowNormal(inst) end,                                                                                                                                                                                           leifscale = 1 },
-	{ name = "tall", time = function(inst) return GetRandomWithVariance(PALMTREE_GROW_TIME[3].base,
-			PALMTREE_GROW_TIME[3].random) end,                                                                                         fn = function(
-		inst) SetTall(inst) end,                                                                                                                                                growfn = function(
-		inst) GrowTall(inst) end,                                                                                                                                                                                             leifscale = 1.25 },
+	{
+		name = "short",
+		time = function(inst)
+			return GetRandomWithVariance(PALMTREE_GROW_TIME[1].base,
+				PALMTREE_GROW_TIME[1].random)
+		end,
+		fn = function(
+			inst)
+			SetShort(inst)
+		end,
+		growfn = function(
+			inst)
+			GrowShort(inst)
+		end,
+		leifscale = .7
+	},
+	{
+		name = "normal",
+		time = function(inst)
+			return GetRandomWithVariance(PALMTREE_GROW_TIME[2].base,
+				PALMTREE_GROW_TIME[2].random)
+		end,
+		fn = function(
+			inst)
+			SetNormal(inst)
+		end,
+		growfn = function(
+			inst)
+			GrowNormal(inst)
+		end,
+		leifscale = 1
+	},
+	{
+		name = "tall",
+		time = function(inst)
+			return GetRandomWithVariance(PALMTREE_GROW_TIME[3].base,
+				PALMTREE_GROW_TIME[3].random)
+		end,
+		fn = function(
+			inst)
+			SetTall(inst)
+		end,
+		growfn = function(
+			inst)
+			GrowTall(inst)
+		end,
+		leifscale = 1.25
+	},
 	--{name="old", time = function(inst) return GetRandomWithVariance(TUNING.EVERGREEN_GROW_TIME[4].base, TUNING.EVERGREEN_GROW_TIME[4].random) end, fn = function(inst) SetOld(inst) end, growfn = function(inst) GrowOld(inst) end },
 }
 
@@ -341,7 +378,7 @@ local function chop_tree(inst, chopper, chops)
 	inst.AnimState:PushAnimation(inst.anims.sway1, true)
 
 	--tell any nearby leifs to wake up
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, LEIF_REAWAKEN_RADIUS, { "treeguard" })
 	for k, v in pairs(ents) do
 		if v.components.sleeper and v.components.sleeper:IsAsleep() then
@@ -371,7 +408,7 @@ local function chop_down_tree(inst, chopper)
 	inst:RemoveComponent("workable")
 	inst:RemoveTag("shelter")
 	inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local hispos = Vector3(chopper.Transform:GetWorldPosition())
 
 	local he_right = (hispos - pt):Dot(TheCamera:GetRightVec()) > 0
@@ -479,7 +516,7 @@ local function tree_burnt(inst)
 	OnBurnt(inst)
 	inst.pineconetask = inst:DoTaskInTime(10,
 		function()
-			local pt = Vector3(inst.Transform:GetWorldPosition())
+			local pt = inst:GetPosition()
 			if math.random(0, 1) == 1 then
 				pt = pt + TheCamera:GetRightVec()
 			else

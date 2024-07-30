@@ -251,8 +251,10 @@ local function fn()
     inst:AddComponent("knownlocations")
 
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:ListenForEvent("wingdown", OnWingDown)
     inst:ListenForEvent("attacked", OnAttacked)
@@ -280,7 +282,7 @@ end
 
 local function dodive(inst)
     local bat = SpawnPrefab("vampirebat")
-    local spawn_pt = Vector3(inst.Transform:GetWorldPosition())
+    local spawn_pt = inst:GetPosition()
     if bat and spawn_pt then
         local x, y, z = spawn_pt:Get()
         bat.Transform:SetPosition(x, y + 30, z)

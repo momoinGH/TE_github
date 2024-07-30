@@ -137,8 +137,8 @@ local function KeepTarget(inst, target)
 		and inst.components.herdmember:GetHerd().components.mood:IsInMood() then
 		local herd = inst.components.herdmember and inst.components.herdmember:GetHerd()
 		if herd and herd.components.mood and herd.components.mood:IsInMood() then
-			return distsq(Vector3(herd.Transform:GetWorldPosition()), Vector3(inst.Transform:GetWorldPosition())) <
-			OX_CHASE_DIST * OX_CHASE_DIST
+			return distsq(Vector3(herd.Transform:GetWorldPosition()), inst:GetPosition()) <
+				OX_CHASE_DIST * OX_CHASE_DIST
 		end
 	end
 
@@ -175,7 +175,7 @@ end
 local function OnPooped(inst, poop)
 	local heading_angle = -(inst.Transform:GetRotation()) + 180
 
-	local pos = Vector3(inst.Transform:GetWorldPosition())
+	local pos = inst:GetPosition()
 	pos.x = pos.x + (math.cos(heading_angle * DEGREES))
 	pos.y = pos.y + 0.9
 	pos.z = pos.z + (math.sin(heading_angle * DEGREES))

@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local cooking = require("cooking")
 
 local assets =
@@ -24,9 +22,9 @@ local prefabs =
 for k, v in pairs(cooking.recipes.portablecookpot) do
     table.insert(prefabs, v.name)
 
-	if v.overridebuild then
-        table.insert(assets, Asset("ANIM", "anim/"..v.overridebuild..".zip"))
-	end
+    if v.overridebuild then
+        table.insert(assets, Asset("ANIM", "anim/" .. v.overridebuild .. ".zip"))
+    end
 end
 
 local prefabs_item =
@@ -41,14 +39,14 @@ local function ChangeToItem(inst)
     if inst.components.container ~= nil then
         inst.components.container:DropEverything()
     end
-    
+
     local item = SpawnPrefab("portablecookpot_item", inst.linked_skinname, inst.skin_id)
     item.Transform:SetPosition(inst.Transform:GetWorldPosition())
     item.AnimState:PlayAnimation("collapse")
     item.SoundEmitter:PlaySound("dontstarve/common/together/portable/cookpot/collapse")
 end
 
-local function onhammered(inst)--, worker)
+local function onhammered(inst) --, worker)
     if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() then
         inst.components.burnable:Extinguish()
     end
@@ -65,7 +63,7 @@ local function onhammered(inst)--, worker)
     inst:Remove()
 end
 
-local function onhit(inst)--, worker)
+local function onhit(inst) --, worker)
     if not inst:HasTag("burnt") then
         if inst.components.stewer:IsCooking() then
             inst.AnimState:PlayAnimation("hit_cooking")
@@ -99,15 +97,21 @@ local function startcookfn(inst)
 end
 
 local function onopen(inst)
-local alagado = GetClosestInstWithTag("mare", inst, 10)
-if alagado then 
-local fx = SpawnPrefab("shock_machines_fx")
-if fx then local pt = inst:GetPosition() fx.Transform:SetPosition(pt.x, pt.y, pt.z) end 
-if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-if inst.components.container then inst.components.container:DropEverything() inst.components.container:Close() end
-inst.AnimState:PlayAnimation("idle_empty")
-return
-end
+    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    if alagado then
+        local fx = SpawnPrefab("shock_machines_fx")
+        if fx then
+            local pt = inst:GetPosition()
+            fx.Transform:SetPosition(pt.x, pt.y, pt.z)
+        end
+        if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
+        if inst.components.container then
+            inst.components.container:DropEverything()
+            inst.components.container:Close()
+        end
+        inst.AnimState:PlayAnimation("idle_empty")
+        return
+    end
     if not inst:HasTag("burnt") then
         inst.AnimState:PlayAnimation("cooking_pre_loop")
         inst.SoundEmitter:KillSound("snd")
@@ -117,7 +121,7 @@ end
 end
 
 local function onclose(inst)
-    if not inst:HasTag("burnt") then 
+    if not inst:HasTag("burnt") then
         if not inst.components.stewer:IsCooking() then
             inst.AnimState:PlayAnimation("idle_empty")
             inst.SoundEmitter:KillSound("snd")
@@ -175,14 +179,14 @@ local function donecookfn(inst)
 end
 
 local function continuedonefn(inst)
-    if not inst:HasTag("burnt") then 
+    if not inst:HasTag("burnt") then
         inst.AnimState:PlayAnimation("idle_full")
         ShowProduct(inst)
     end
 end
 
 local function continuecookfn(inst)
-    if not inst:HasTag("burnt") then 
+    if not inst:HasTag("burnt") then
         inst.AnimState:PlayAnimation("cooking_loop", true)
         inst.Light:Enable(true)
         inst.SoundEmitter:KillSound("snd")
@@ -217,7 +221,7 @@ local function onload(inst, data)
     end
 end
 
-local function OnDismantle(inst)--, doer)
+local function OnDismantle(inst) --, doer)
     ChangeToItem(inst)
     inst:Remove()
 end
@@ -259,7 +263,7 @@ local function fn()
     inst.Light:SetRadius(.6)
     inst.Light:SetFalloff(1)
     inst.Light:SetIntensity(.5)
-    inst.Light:SetColour(235/255,62/255,12/255)
+    inst.Light:SetColour(235 / 255, 62 / 255, 12 / 255)
 
     inst.DynamicShadow:SetSize(2, 1)
 
@@ -273,7 +277,7 @@ local function fn()
     inst.AnimState:SetBuild("portable_cook_pot")
     inst.AnimState:PlayAnimation("idle_empty")
     inst.scrapbook_anim = "idle_empty"
-	
+
     inst:SetPrefabNameOverride("portablecookpot_item")
 
     inst.entity:SetPristine()
@@ -299,7 +303,7 @@ local function fn()
     inst.components.container.onopenfn = onopen
     inst.components.container.onclosefn = onclose
     inst.components.container.skipclosesnd = true
-    inst.components.container.skipopensnd = true    
+    inst.components.container.skipopensnd = true
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = getstatus
@@ -319,7 +323,7 @@ local function fn()
     inst.components.burnable:SetFXLevel(2)
     inst.components.burnable:SetOnBurntFn(OnBurnt)
 
-    inst.OnSave = onsave 
+    inst.OnSave = onsave
     inst.OnLoad = onload
 
     return inst
@@ -330,7 +334,7 @@ end
 ---------------------------------------------------------------
 
 local function ondeploy(inst, pt, deployer)
-    local pot = SpawnPrefab("portablecookpot", inst.linked_skinname, inst.skin_id )
+    local pot = SpawnPrefab("portablecookpot", inst.linked_skinname, inst.skin_id)
     if pot ~= nil then
         pot.Physics:SetCollides(false)
         pot.Physics:Teleport(pt.x, 0, pt.z)
@@ -357,7 +361,7 @@ local function itemfn()
     inst.AnimState:SetBuild("portable_cook_pot")
     inst.AnimState:PlayAnimation("idle_ground")
     inst.scrapbook_anim = "idle_ground"
-	
+
     inst:AddTag("portableitem")
 
     MakeInventoryFloatable(inst, "med", 0.1, 0.8)

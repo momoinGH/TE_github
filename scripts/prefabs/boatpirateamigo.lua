@@ -1,5 +1,3 @@
-require "prefabutil"
-
 --The test to see if a boat can be built in a certain position is defined in the builder component Builder:CanBuildAtPoint
 local assets =
 {
@@ -124,7 +122,7 @@ local function fn()
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 	inst.components.equippable.equipslot = EQUIPSLOTS.BARCO
 	inst.components.inventoryitem.cangoincontainer = false
 	inst.components.inventoryitem.canbepickedup = false

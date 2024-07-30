@@ -171,10 +171,10 @@ end
 
 local function KeepChoppingAction(inst)
     local keep_chop = inst.components.follower.leader and
-    inst.components.follower.leader:GetDistanceSqToInst(inst) <= KEEP_CHOPPING_DIST * KEEP_CHOPPING_DIST
+        inst.components.follower.leader:GetDistanceSqToInst(inst) <= KEEP_CHOPPING_DIST * KEEP_CHOPPING_DIST
     local target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
         return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-        item.components.workable.action == ACTIONS.CHOP
+            item.components.workable.action == ACTIONS.CHOP
     end)
     if inst.tree_target ~= nil then target = inst.tree_target end
 
@@ -183,10 +183,10 @@ end
 
 local function StartChoppingCondition(inst)
     local start_chop = inst.components.follower.leader and inst.components.follower.leader.sg and
-    inst.components.follower.leader.sg:HasStateTag("chopping")
+        inst.components.follower.leader.sg:HasStateTag("chopping")
     local target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
         return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-        item.components.workable.action == ACTIONS.CHOP
+            item.components.workable.action == ACTIONS.CHOP
     end)
     if inst.tree_target ~= nil then target = inst.tree_target end
 
@@ -200,7 +200,7 @@ local function FindTreeToChopAction(inst)
     if target then
         local decid_monst_target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
             return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-            item.components.workable.action == ACTIONS.CHOP
+                item.components.workable.action == ACTIONS.CHOP
         end)
         if decid_monst_target ~= nil then
             target = decid_monst_target
@@ -306,9 +306,7 @@ local function shouldPanic(inst)
     if inst.components.combat.target then
         local threat = inst.components.combat.target
         if threat then
-            local myPos = Vector3(inst.Transform:GetWorldPosition())
-            local threatPos = Vector3(threat.Transform:GetWorldPosition())
-            local dist = distsq(threatPos, myPos)
+            local dist = inst:GetDistanceSqToInst(threat)
             if dist < FAR_ENOUGH * FAR_ENOUGH then
                 if dist > STOP_RUN_AWAY_DIST * STOP_RUN_AWAY_DIST then
                     return true
@@ -341,8 +339,7 @@ end
 
 local function ShouldGoHome(inst)
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition())
-    return (homePos and distsq(homePos, myPos) > GO_HOME_DIST * GO_HOME_DIST)
+    return (homePos and distsq(homePos, inst:GetPosition()) > GO_HOME_DIST * GO_HOME_DIST)
 end
 
 local function inCityLimits(inst)
@@ -466,8 +463,10 @@ function CityPigBrain:OnStart()
     local day = WhileNode(function() return TheWorld.state.isday end, "IsDay",
         PriorityNode {
             -- start of day, shopkeeper needs to go back this their desk
-            WhileNode(function() return self.inst:HasTag("shopkeep") and not self.inst:HasTag("atdesk") and
-                    not self.inst.changestock end, "shopkeeper opening",
+            WhileNode(function()
+                    return self.inst:HasTag("shopkeep") and not self.inst:HasTag("atdesk") and
+                        not self.inst.changestock
+                end, "shopkeeper opening",
                 DoAction(self.inst, ShopkeeperSitAtDesk, "SitAtDesk", true)),
 
             ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_FIND_MEAT),
@@ -500,8 +499,10 @@ function CityPigBrain:OnStart()
             IfNode(function() return self.inst:HasTag("shopkeep") or self.inst:HasTag("pigqueen") end, "shopkeeper closing",
                 Wander(self.inst, GetNoLeaderHomePos, MAX_WANDER_DIST)),
 
-            IfNode(function() return not self.inst:HasTag("guard") and
-                    not (TheWorld.components.aporkalypse and TheWorld.components.aporkalypse.fiesta_active == true) end, "gohome",
+            IfNode(function()
+                    return not self.inst:HasTag("guard") and
+                        not (TheWorld.components.aporkalypse and TheWorld.components.aporkalypse.fiesta_active == true)
+                end, "gohome",
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_GO_HOME),
                     DoAction(self.inst, GoHomeAction, "go home", true))),
 
@@ -509,8 +510,10 @@ function CityPigBrain:OnStart()
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_FIND_LIGHT),
                     FindLight(self.inst))),
 
-            IfNode(function() return not self.inst:HasTag("guard") and
-                    not (TheWorld.components.aporkalypse and TheWorld.components.aporkalypse.fiesta_active == true) end, "panic",
+            IfNode(function()
+                    return not self.inst:HasTag("guard") and
+                        not (TheWorld.components.aporkalypse and TheWorld.components.aporkalypse.fiesta_active == true)
+                end, "panic",
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_PANIC),
                     Panic(self.inst))),
         }, 1)
@@ -550,8 +553,10 @@ function CityPigBrain:OnStart()
 
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_FLEE),
                     RunAway(self.inst,
-                        function(guy) return guy:HasTag("pig") and guy.components.combat and
-                            guy.components.combat.target == self.inst end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
+                        function(guy)
+                            return guy:HasTag("pig") and guy.components.combat and
+                                guy.components.combat.target == self.inst
+                        end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST)),
 
                 IfNode(function() return self.inst.poop_tip and not self.inst.tipping end, "poop_tip",
                     DoAction(self.inst, PoopTip, "poop_tip", true)),
@@ -560,7 +565,7 @@ function CityPigBrain:OnStart()
                 IfNode(function()
                         local alvo = GetClosestInstWithTag("player", self.inst, 10)
                         return self.inst.components.homeseeker and self.inst.components.homeseeker.home and
-                        self.inst.components.homeseeker.home:HasTag("paytax") and alvo
+                            self.inst.components.homeseeker.home:HasTag("paytax") and alvo
                     end, "pay_taxpre",
                     DoAction(self.inst, PayTaxpre, "pay_taxpre", true)
                 ),

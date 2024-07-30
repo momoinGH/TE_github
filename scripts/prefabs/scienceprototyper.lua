@@ -1,5 +1,3 @@
-require "prefabutil"
-
 function Default_PlayAnimation(inst, anim, loop)
     inst.AnimState:PlayAnimation(anim, loop)
 end

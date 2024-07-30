@@ -254,40 +254,34 @@ local function shopkeeper_speech(inst, speech)
 end
 
 local function SetImage(inst, ent)
-    local src = ent
-    local image = nil
-
-    if src ~= nil and src.components.inventoryitem ~= nil then
-        image = src.prefab
-        if src.components.inventoryitem.imagename then
-            image = src.components.inventoryitem.imagename
-        end
-    end
-
+    local image = ent and ent.components.inventoryitem and ent.replica.inventoryitem:GetImage()
     if image ~= nil then
-        local texname = image .. ".tex"
-
-
-        local atlas = src.replica.inventoryitem:GetAtlas()
-
-        if ent.caminho then
-            atlas = ent.caminho
-        elseif atlas and atlas == "images/inventoryimages1.xml" then
-            atlas = "images/inventoryimages1.xml"
-        elseif atlas and atlas == "images/inventoryimages2.xml" then
-            atlas = "images/inventoryimages2.xml"
-        elseif atlas and atlas == "images/inventoryimages3.xml" then
-            atlas = "images/inventoryimages3.xml"
-        else
-            atlas = "images/inventoryimages/hamletinventory.xml"
+        local atlas = FunctionOrValue(ent.drawatlasoverride, ent, inst) or ent.components.inventoryitem.atlasname
+        if atlas ~= nil then
+            atlas = resolvefilepath_soft(atlas) --需要找到路径，例如../mods/PigmanTribe/images/inventoryimages/ptribe_upgrade.xml
         end
+        inst.AnimState:OverrideSymbol("SWAP_SIGN", atlas or GetInventoryItemAtlas(image), image)
 
-        if (image == "waffles_plate_generic") then
-            inst.AnimState:OverrideSymbol("SWAP_SIGN", "images/inventoryimages2.xml", "waffles.tex")
-        else
-            inst.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(atlas), texname)
-        end
-        --inst.AnimState:OverrideSymbol("SWAP_SIGN", "store_items", image)
+        -- local atlas = src.replica.inventoryitem:GetAtlas()
+
+        -- if ent.caminho then
+        --     atlas = ent.caminho
+        -- elseif atlas and atlas == "images/inventoryimages1.xml" then
+        --     atlas = "images/inventoryimages1.xml"
+        -- elseif atlas and atlas == "images/inventoryimages2.xml" then
+        --     atlas = "images/inventoryimages2.xml"
+        -- elseif atlas and atlas == "images/inventoryimages3.xml" then
+        --     atlas = "images/inventoryimages3.xml"
+        -- else
+        --     atlas = "images/inventoryimages/hamletinventory.xml"
+        -- end
+
+        -- if (image == "waffles_plate_generic") then
+        --     inst.AnimState:OverrideSymbol("SWAP_SIGN", "images/inventoryimages2.xml", "waffles.tex")
+        -- else
+        --     inst.AnimState:OverrideSymbol("SWAP_SIGN", resolvefilepath(atlas), texname)
+        -- end
+        -- --inst.AnimState:OverrideSymbol("SWAP_SIGN", "store_items", image)
         inst.imagename = image
     else
         inst.imagename = ""

@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local easing = require("easing")
 
 local assets =

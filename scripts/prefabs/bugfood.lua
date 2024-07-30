@@ -30,7 +30,7 @@ local function jellybug_raw()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst.AnimState:SetBank("jellybug")
     inst.AnimState:SetBuild("jellybug")
@@ -70,7 +70,7 @@ local function jellybug_raw()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
@@ -90,7 +90,7 @@ local function jellybug_cooked()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst.AnimState:SetBank("jellybug_cooked")
     inst.AnimState:SetBuild("jellybug_cooked")
@@ -130,7 +130,7 @@ local function jellybug_cooked()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
@@ -150,7 +150,7 @@ local function slugbug_raw()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst.AnimState:SetBank("slugbug")
     inst.AnimState:SetBuild("slugbug")
@@ -189,7 +189,7 @@ local function slugbug_raw()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
@@ -206,7 +206,7 @@ local function slugbug_cooked()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst.AnimState:SetBank("slugbug_cooked")
     inst.AnimState:SetBuild("slugbug_cooked")
@@ -241,7 +241,7 @@ local function slugbug_cooked()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)

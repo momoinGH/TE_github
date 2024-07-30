@@ -1,4 +1,3 @@
-require "prefabutil"
 local assets =
 {
     Asset("ANIM", "anim/teatree_nut.zip"),
@@ -169,7 +168,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("deployable")
     inst.components.deployable.CanDeploy = test_ground
@@ -226,7 +225,7 @@ local function cooked()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     return inst
 end

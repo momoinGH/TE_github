@@ -6,8 +6,11 @@ local DISTANCE_RANGE = 20
 local events =
 {
     EventHandler("attacked",
-        function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("hit") and not inst.sg:HasStateTag("attack") then
-                inst.sg:GoToState("hit") end end),
+        function(inst)
+            if not inst.components.health:IsDead() and not inst.sg:HasStateTag("hit") and not inst.sg:HasStateTag("attack") then
+                inst.sg:GoToState("hit")
+            end
+        end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     CommonHandlers.OnFreeze(),
     EventHandler("newcombattarget", function(inst, data)
@@ -231,7 +234,7 @@ local states =
             inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_death_VO")
             inst.AnimState:PlayAnimation("death")
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
         events =

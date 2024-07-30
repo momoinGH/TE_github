@@ -115,8 +115,8 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		local sp = math.random() * 3 + 2
 
 		local chest = SpawnPrefab("octopuschest")
-		local pt = Vector3(inst.Transform:GetWorldPosition()) +
-		Vector3(2 * math.cos(spawnangle), 2, 2 * math.sin(spawnangle))
+		local pt = inst:GetPosition() +
+			Vector3(2 * math.cos(spawnangle), 2, 2 * math.sin(spawnangle))
 		chest.Transform:SetPosition(pt:Get())
 		chest.Physics:SetVel(sp * math.cos(angle), math.random() * 2 + 9, sp * math.sin(angle))
 		--		chest.components.inventoryitem:OnStartFalling()
@@ -235,7 +235,7 @@ local function fn(Sim)
 	inst.components.trader:SetAcceptTest(
 		function(inst, item)
 			return (item.components.tradable.goldvalue and item.components.tradable.goldvalue > 0) or
-			chestloot[item.prefab] ~= nil
+				chestloot[item.prefab] ~= nil
 		end)
 
 	inst.components.trader.onaccept = OnGetItemFromPlayer

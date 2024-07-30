@@ -1,4 +1,3 @@
-require "prefabutil"
 local brain = require "brains/chesterbrain"
 require "stategraphs/SGRo_Bin"
 

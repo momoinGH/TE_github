@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
 	Asset("ANIM", "anim/tar_extractor.zip"),
@@ -32,7 +30,7 @@ local function spawnTarProp(inst)
 	inst.task_spawn = nil
 	local tar = SpawnPrefab("tar")
 
-	local pt = Vector3(inst.Transform:GetWorldPosition()) + Vector3(0, 4.5, 0)
+	local pt = inst:GetPosition() + Vector3(0, 4.5, 0)
 
 	local right = TheCamera:GetRightVec()
 	local offset = 1.3
@@ -72,7 +70,7 @@ local function onBuilt(inst)
 	inst.AnimState:PushAnimation("idle", true)
 
 	local range = 1
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local tarpits = TheSim:FindEntities(pt.x, pt.y, pt.z, range, { "tar source" }, nil)
 	for i, tarpit in ipairs(tarpits) do
 		if tarpit.components.inspectable then
@@ -115,7 +113,7 @@ end
 
 local function onRemove(inst, worker)
 	local range = 1
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local tarpits = TheSim:FindEntities(pt.x, pt.y, pt.z, range, { "tar source" }, nil)
 	for i, tarpit in ipairs(tarpits) do
 		if tarpit.components.inspectable and tarpit.components.inspectable.inspectdisabled == true then

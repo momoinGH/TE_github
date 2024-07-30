@@ -83,10 +83,10 @@ end
 
 local function speed(inst)
     if not inst.startpos then
-        inst.startpos = Vector3(inst.Transform:GetWorldPosition())
+        inst.startpos = inst:GetPosition()
         inst.starttime = GetTime()
         inst.speedtask = inst:DoPeriodicTask(FRAMES, function()
-            local pt = Vector3(inst.Transform:GetWorldPosition())
+            local pt = inst:GetPosition()
             local dif = distsq(pt.x, pt.z, inst.startpos.x, inst.startpos.z)
             print("DIST", dif, GetTime() - inst.starttime)
         end)
@@ -160,7 +160,7 @@ end
 
 local function ReticuleTargetFn(inst)
     local range = 7
-    local pos = Vector3(inst.Transform:GetWorldPosition())
+    local pos = inst:GetPosition()
 
     local dir = Vector3()
     dir.x = TheInput:GetAnalogControlValue(CONTROL_MOVE_RIGHT) - TheInput:GetAnalogControlValue(CONTROL_MOVE_LEFT)
@@ -324,7 +324,7 @@ local function fn()
 
     inst.sinkloot = function()
         local ignitefragments = inst.activefires > 0
-        local locus_point = Vector3(inst.Transform:GetWorldPosition())
+        local locus_point = inst:GetPosition()
         local num_loot = 3
         for i = 1, num_loot do
             local r = math.sqrt(math.random()) * (TUNING.BOAT.RADIUS - 2) + 1.5

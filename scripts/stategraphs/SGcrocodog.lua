@@ -9,12 +9,19 @@ local actionhandlers =
 local events =
 {
     EventHandler("attacked",
-        function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg
-                    :GoToState("hit") end end),
+        function(inst)
+            if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then
+                inst.sg
+                    :GoToState("hit")
+            end
+        end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("doattack",
-        function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
-                inst.sg:GoToState("attack", data.target) end end),
+        function(inst, data)
+            if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+                inst.sg:GoToState("attack", data.target)
+            end
+        end),
 
     EventHandler("locomote", function(inst)
         local is_moving = inst.sg:HasStateTag("moving")
@@ -101,8 +108,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/crocodog/shake") end),
+            TimeEvent(8 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/crocodog/shake")
+            end),
         },
 
         events =
@@ -130,17 +139,23 @@ local states =
                     inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/crocodog/bark")
                 end
             end),
-            TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/crocodog/bite") end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/crocodog/bite")
+            end),
             TimeEvent(20 * FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
 
         events =
         {
-            EventHandler("animqueueover", function(inst) if math.random() < .1 then
+            EventHandler("animqueueover", function(inst)
+                if math.random() < .1 then
                     inst.components.combat:SetTarget(nil)
                     inst.sg:GoToState("taunt")
-                else inst.sg:GoToState("idle", "atk_pst") end end),
+                else
+                    inst.sg:GoToState("idle", "atk_pst")
+                end
+            end),
         },
     },
 
@@ -157,16 +172,22 @@ local states =
 
         timeline =
         {
-            TimeEvent(14 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/crocodog/bite") end),
+            TimeEvent(14 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/crocodog/bite")
+            end),
         },
 
         events =
         {
-            EventHandler("animqueueover", function(inst) if inst:PerformBufferedAction() then
+            EventHandler("animqueueover", function(inst)
+                if inst:PerformBufferedAction() then
                     inst.components.combat:SetTarget(nil)
                     inst.sg:GoToState("taunt")
-                else inst.sg:GoToState("idle", "atk_pst") end end),
+                else
+                    inst.sg:GoToState("idle", "atk_pst")
+                end
+            end),
         },
     },
 
@@ -203,8 +224,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/crocodog/taunt") end),
+            TimeEvent(5 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/crocodog/taunt")
+            end),
         },
 
         events =
@@ -222,7 +245,7 @@ local states =
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
 
             --			local sm = GetSeasonManager()
             --			if inst:HasTag("enable_shake") and sm:IsGreenSeason() and sm:GetPercentSeason() > 0.25 then

@@ -342,7 +342,6 @@ local function capcommonfn(data)
     inst:AddComponent("inventoryitem")
     if data.name == "yelow_mushroom" then
         inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-        inst.caminho = "images/inventoryimages/volcanoinventory.xml"
     end
 
     --this is where it gets interesting
@@ -402,7 +401,6 @@ local function cookedcommonfn(data)
     inst:AddComponent("inventoryitem")
     if data.name == "yelow_mushroom" then
         inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-        inst.caminho = "images/inventoryimages/volcanoinventory.xml"
     end
 
     MakeHauntableLaunchAndPerish(inst)

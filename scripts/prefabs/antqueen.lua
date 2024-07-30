@@ -14,6 +14,10 @@ local prefabs =
     "warningshadow",
     "throne_wall_large",
     "throne_wall",
+    "pigcrownhat",
+    "royal_jelly",
+    "chitin",
+    "honey",
 }
 
 local loot =
@@ -38,7 +42,7 @@ local loot =
     --"bundlewrap_blueprint",
 }
 
-local ANTQUEEN_HEALTH = 16000 * TUNING.tropical.bosslife
+local brain = require "brains/antqueenbrain"
 
 local spawn_positions =
 {
@@ -79,18 +83,6 @@ local function WarriorKilled(inst)
     end
 end
 
-local function OnLoad(inst, data)
-    if data and data.currentstate then
-        inst.sg:GoToState(data.currentstate)
-    end
-    --    inst.warrior_count = data.warrior_count
-end
-
-local function OnSave(inst, data)
-    data.currentstate = inst.sg.currentstate.name
-    --    data.warrior_count = inst.warrior_count or 0
-end
-
 local function OnAttacked(inst, data)
     if inst.components.combat and inst.components.combat.target == nil then
         inst.components.combat.target = data.attacker
@@ -102,8 +94,10 @@ local function OnAttacked(inst, data)
     local eles = TheSim:FindEntities(x, y, z, 30, { "ant" })
     if attacker then
         for k, guardas in pairs(eles) do
-            if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat
-                    :SetTarget(attacker) end
+            if guardas.components.combat and guardas.components.combat.target == nil then
+                guardas.components.combat
+                    :SetTarget(attacker)
+            end
         end
     end
 end
@@ -112,21 +106,54 @@ local function NormalShouldSleep(inst)
     return false
 end
 
+local PHASES = { {
+    hp = 0.75,
+    fn = function(inst)
+        inst.summon_count = 4
+        inst.min_combat_cooldown = 3
+        inst.max_combat_cooldown = 5
+    end
+}, {
+    hp = 0.5,
+    fn = function(inst)
+        inst.max_sanity_attack_count = 3
+        inst.max_jump_attack_count = 3
+        inst.min_combat_cooldown = 1
+        inst.max_combat_cooldown = 3
+    end
+}, {
+    hp = 0.25,
+    function(inst)
+        inst.min_combat_cooldown = 1
+        inst.max_combat_cooldown = 1
+    end
+} }
+
+local function OnLoad(inst, data)
+    local healthpct = inst.components.health:GetPercent()
+    for _, v in ipairs(PHASES) do
+        if healthpct <= v.hp then
+            v.fn(inst)
+        end
+    end
+end
+
 local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+
     inst.entity:AddNetwork()
 
-    trans:SetScale(0.9, 0.9, 0.9)
+    inst.Transform:SetScale(0.9, 0.9, 0.9)
 
     MakeObstaclePhysics(inst, 2)
     --    MakePoisonableCharacter(inst)
 
-    anim:SetBank("crick_crickantqueen")
-    anim:SetBuild("crickant_queen_basics")
-    anim:AddOverrideBuild("throne")
+    inst.AnimState:SetBank("crick_crickantqueen")
+    inst.AnimState:SetBuild("crickant_queen_basics")
+    inst.AnimState:AddOverrideBuild("throne")
 
     inst:AddTag("antqueen")
 
@@ -136,6 +163,17 @@ local function fn()
         return inst
     end
 
+    -- Used in SGantqueen
+    inst.jump_count = 1
+    inst.jump_attack_count = 0
+    inst.max_jump_attack_count = 3
+    inst.sanity_attack_count = 0
+    inst.max_sanity_attack_count = 2
+    inst.summon_count = 3
+    inst.current_summon_count = 0
+    inst.min_combat_cooldown = 5
+    inst.max_combat_cooldown = 7
+
     inst:AddComponent("locomotor")
 
     inst:AddComponent("sleeper")
@@ -144,28 +182,14 @@ local function fn()
 
     inst:AddComponent("combat")
     inst.components.combat.canattack = false
-    --    inst.components.combat.debris_immune = true
 
-    inst.components.combat:SetOnHit(function()
-        local health_percent = inst.components.health:GetPercent()
-
-        if health_percent <= 0.75 and health_percent > 0.5 then
-            inst.summon_count = 4
-            inst.min_combat_cooldown = 3
-            inst.max_combat_cooldown = 5
-        elseif health_percent <= 0.5 and health_percent > 0.25 then
-            inst.max_sanity_attack_count = 3
-            inst.max_jump_attack_count = 3
-            inst.min_combat_cooldown = 1
-            inst.max_combat_cooldown = 3
-        elseif health_percent <= 0.25 then
-            inst.min_combat_cooldown = 1
-            inst.max_combat_cooldown = 1
-        end
-    end)
+    inst:AddComponent("healthtrigger")
+    for _, v in ipairs(PHASES) do
+        inst.components.healthtrigger:AddTrigger(v.hp, v.fn)
+    end
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(ANTQUEEN_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.ANTQUEEN_HEALTH)
     inst.components.health:StartRegen(1, 4)
 
     inst:AddComponent("lootdropper")
@@ -173,85 +197,65 @@ local function fn()
 
     inst:AddComponent("inspectable")
 
-    -- Used in SGantqueen
-    inst.jump_count = 1
-    inst.jump_attack_count = 0
-    inst.max_jump_attack_count = 3
-
-    inst.sanity_attack_count = 0
-    inst.max_sanity_attack_count = 2
-
-    inst.summon_count = 3
-    inst.current_summon_count = 0
-
-    inst.min_combat_cooldown = 5
-    inst.max_combat_cooldown = 7
-
     MakeLargeFreezableCharacter(inst, "pig_torso")
 
     --    inst.warrior_count = 0
     inst.SpawnWarrior = SpawnWarrior
-    inst.WarriorKilled = function() WarriorKilled(inst) end
-    inst:ListenForEvent("attacked", OnAttacked)
+    inst.WarriorKilled = WarriorKilled
+
 
     inst:SetStateGraph("SGantqueen")
-    local brain = require "brains/antqueenbrain"
+
     inst:SetBrain(brain)
 
-    inst.OnSave = OnSave
+    inst:ListenForEvent("attacked", OnAttacked)
+
     inst.OnLoad = OnLoad
 
     return inst
 end
 
 local function make_throne_fn(size)
-    local function fn()
+    return function()
         local inst = CreateEntity()
-        local trans = inst.entity:AddTransform()
+        inst.entity:AddTransform()
 
         inst:AddTag("throne_wall")
         MakeObstaclePhysics(inst, size)
 
         return inst
     end
-
-    return fn
 end
 
 local function makethronewall(name, physics_size, assets, prefabs)
     return Prefab("common/objects/" .. name, make_throne_fn(physics_size), assets, prefabs)
 end
 
-
 local respawndays = 80 --revive em 8 dias
 
 local function OnTimerDone(inst, data)
     if data.name == "spawndelay" then
-        local slipstor = SpawnPrefab("antqueen")
-        slipstor.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        inst:Remove()
+        ReplacePrefab(inst, "antqueen")
     end
 end
 
 
 local function fnrespawnquenn()
     local inst = CreateEntity()
-    inst.entity:AddNetwork()
-
-    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
+        --Not meant for client!
+        inst:DoTaskInTime(0, inst.Remove)
         return inst
     end
 
     inst.entity:AddTransform()
-    --[[Non-networked entity]]
-
     inst:AddTag("CLASSIFIED")
 
     inst:AddComponent("timer")
-    inst:ListenForEvent("timerdone", OnTimerDone)
     inst.components.timer:StartTimer("spawndelay", 60 * 8 * respawndays)
+
+    inst:ListenForEvent("timerdone", OnTimerDone)
 
     return inst
 end

@@ -27,7 +27,7 @@ local function setanim(inst)
 end
 
 local function workcallback(inst, worker, workleft)
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	if workleft <= 0 then
 		-- figure out which side to drop the loot
 		local hispos = Vector3(worker.Transform:GetWorldPosition())

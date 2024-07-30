@@ -94,7 +94,7 @@ local DOYDOY_BABY_GROW_TIME = total_day_time * 2 --time to grow up
 local DOYDOY_TEEN_HEALTH = 75
 local DOYDOY_TEEN_WALK_SPEED = 1.5
 local DOYDOY_TEEN_SCALE = 0.8
-local DOYDOY_TEEN_GROW_TIME = total_day_time * 1  --time to grow up
+local DOYDOY_TEEN_GROW_TIME = total_day_time * 1 --time to grow up
 
 
 local babyloot = { "smallmeat", "doydoyfeather" }
@@ -197,8 +197,8 @@ end
 
 local growth_stages =
 {
-	{ name = "baby", time = GetBabyGrowTime, fn = SetBaby },
-	{ name = "teen", time = GetTeenGrowTime, fn = SetTeen },
+	{ name = "baby",  time = GetBabyGrowTime, fn = SetBaby },
+	{ name = "teen",  time = GetTeenGrowTime, fn = SetTeen },
 	{ name = "grown", time = GetTeenGrowTime, fn = SetFullyGrown },
 }
 
@@ -292,7 +292,7 @@ local function commonfn(Sim)
 	inst:AddComponent("talker")
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 	inst.components.inventoryitem.nobounce = true
 	inst.components.inventoryitem.canbepickedup = false

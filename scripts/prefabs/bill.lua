@@ -47,10 +47,10 @@ local function UpdateAggro(inst)
 	local player = GetClosestInstWithTag("player", inst, 7)
 
 	if player then
-		local instPosition = Vector3(inst.Transform:GetWorldPosition())
+		local instPosition = inst:GetPosition()
 		local playerPosition = Vector3(player.Transform:GetWorldPosition())
 		inst.lotusTheifNearby = (distsq(playerPosition, instPosition) < (BILL_TARGET_DIST * BILL_TARGET_DIST)) and
-		player.components.inventory:FindItem(IsBillFood)
+			player.components.inventory:FindItem(IsBillFood)
 
 		-- If the threat level changes then modify the build.
 		if inst.lotusTheifNearby then

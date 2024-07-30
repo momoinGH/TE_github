@@ -25,7 +25,7 @@ local function commonfn()
     inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryPhysics(inst)
-    --MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.MEDIUM, TUNING.WINDBLOWN_SCALE_MAX.MEDIUM)
+
 
     inst:AddTag("smallmeat")
     inst:AddTag("fishmeat")
@@ -86,7 +86,7 @@ local function defaultfn()
     inst.components.edible.sanityvalue = -TUNING.SANITY_SMALL
 
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("cookable")
     inst.components.cookable.product = "froglegs_poison_cooked"
@@ -111,7 +111,7 @@ local function cookedfn()
     inst.components.perishable:SetPerishTime(TUNING.PERISH_MED)
 
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     return inst
 end

@@ -24,7 +24,7 @@ local function SpawnPuppet(inst, name)
     local puppet = SpawnPrefab("maxwellendgame")
 
     if puppet then
-        local pt = Vector3(inst.Transform:GetWorldPosition())
+        local pt = inst:GetPosition()
         puppet.Transform:SetPosition(pt.x, pt.y + 0.1, pt.z)
         puppet.persists = false
     end

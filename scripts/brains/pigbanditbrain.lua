@@ -19,7 +19,7 @@ local function FindRandomOffscreenPoint(inst)
     local OFFSET = 70
     --local x,y,z = inst.Transform:GetWorldPosition()
 
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
 
     local theta = math.random() * TWOPI
     local radius = OFFSET
@@ -126,9 +126,9 @@ end)
 local function GetPlayerPos(inst)
     local invader = GetClosestInstWithTag("player", inst, 40)
     if invader then
-        return Vector3(invader.Transform:GetWorldPosition())
+        return invader:GetPosition()
     else
-        return Vector3(inst.Transform:GetWorldPosition())
+        return inst:GetPosition()
     end
 end
 

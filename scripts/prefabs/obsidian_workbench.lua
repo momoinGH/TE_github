@@ -1,4 +1,3 @@
-require "prefabutil"
 require "recipe"
 require "modutil"
 

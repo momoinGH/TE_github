@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
     Asset("ANIM", "anim/sign_mini.zip"),
@@ -145,7 +143,7 @@ end
 local function CanMouseThrough(inst)
     if not inst:HasTag("fire") and ThePlayer ~= nil and ThePlayer.components.playeractionpicker ~= nil then
         local force_inspect = ThePlayer.components.playercontroller ~= nil and
-        ThePlayer.components.playercontroller:IsControlPressed(CONTROL_FORCE_INSPECT)
+            ThePlayer.components.playercontroller:IsControlPressed(CONTROL_FORCE_INSPECT)
         local lmb, rmb = ThePlayer.components.playeractionpicker:DoGetMouseActions(inst:GetPosition(), inst)
         return IsLowPriorityAction(rmb, force_inspect)
             and IsLowPriorityAction(lmb, force_inspect)

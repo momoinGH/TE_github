@@ -1,0 +1,1151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="b5">
+	<folder id="0" name="cocoon">
+		<file id="0" name="cocoon/cocoon-0.png" width="96" height="316" pivot_x="0.564844" pivot_y="0.887421" />
+		<file id="1" name="cocoon/cocoon-1.png" width="152" height="156" pivot_x="0.516776" pivot_y="1.00978" />
+	</folder>
+	<folder id="1" name="grotto_bug_lamp01">
+		<file id="0" name="grotto_bug_lamp01/grotto_bug_lamp01-0.png" width="100" height="344" pivot_x="0.5035" pivot_y="0.102253" />
+		<file id="1" name="grotto_bug_lamp01/grotto_bug_lamp01-1.png" width="188" height="420" pivot_x="0.554122" pivot_y="0.0614286" />
+		<file id="2" name="grotto_bug_lamp01/grotto_bug_lamp01-2.png" width="112" height="296" pivot_x="0.660045" pivot_y="0.155068" />
+	</folder>
+	<folder id="2" name="glow">
+		<file id="0" name="glow/glow-0.png" width="252" height="252" pivot_x="0.5" pivot_y="0.500198" />
+	</folder>
+	<entity id="0" name="grotto_bug_lamp">
+		<animation id="0" name="idle" length="1400">
+			<mainline>
+				<key id="0" time="0">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="0" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="0" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="0" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="0" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="0" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="0" z_index="1" />
+				</key>
+				<key id="1" time="34">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="1" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="1" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="1" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="1" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="1" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="1" z_index="1" />
+				</key>
+				<key id="2" time="67">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="2" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="2" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="2" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="2" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="2" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="2" z_index="1" />
+				</key>
+				<key id="3" time="100">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="3" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="3" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="3" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="3" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="3" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="3" z_index="1" />
+				</key>
+				<key id="4" time="134">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="4" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="4" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="4" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="4" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="4" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="4" z_index="1" />
+				</key>
+				<key id="5" time="167">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="5" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="5" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="5" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="5" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="5" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="5" z_index="1" />
+				</key>
+				<key id="6" time="200">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="6" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="6" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="6" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="6" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="6" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="6" z_index="1" />
+				</key>
+				<key id="7" time="234">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="7" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="7" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="7" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="7" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="7" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="7" z_index="1" />
+				</key>
+				<key id="8" time="267">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="8" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="8" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="8" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="8" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="8" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="8" z_index="1" />
+				</key>
+				<key id="9" time="300">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="9" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="9" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="9" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="9" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="9" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="9" z_index="1" />
+				</key>
+				<key id="10" time="334">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="10" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="10" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="10" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="10" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="10" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="10" z_index="1" />
+				</key>
+				<key id="11" time="367">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="11" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="11" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="11" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="11" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="11" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="11" z_index="1" />
+				</key>
+				<key id="12" time="400">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="12" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="12" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="12" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="12" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="12" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="12" z_index="1" />
+				</key>
+				<key id="13" time="434">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="13" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="13" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="13" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="13" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="13" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="13" z_index="1" />
+				</key>
+				<key id="14" time="467">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="14" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="14" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="14" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="14" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="14" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="14" z_index="1" />
+				</key>
+				<key id="15" time="500">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="15" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="15" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="15" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="15" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="15" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="15" z_index="1" />
+				</key>
+				<key id="16" time="534">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="16" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="16" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="16" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="16" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="16" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="16" z_index="1" />
+				</key>
+				<key id="17" time="567">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="17" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="17" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="17" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="17" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="17" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="17" z_index="1" />
+				</key>
+				<key id="18" time="600">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="18" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="18" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="18" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="18" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="18" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="18" z_index="1" />
+				</key>
+				<key id="19" time="634">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="19" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="19" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="19" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="19" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="19" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="19" z_index="1" />
+				</key>
+				<key id="20" time="667">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="20" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="20" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="20" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="20" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="20" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="20" z_index="1" />
+				</key>
+				<key id="21" time="700">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="21" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="21" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="21" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="21" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="21" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="21" z_index="1" />
+				</key>
+				<key id="22" time="734">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="22" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="22" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="22" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="22" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="22" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="22" z_index="1" />
+				</key>
+				<key id="23" time="767">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="23" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="23" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="23" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="23" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="23" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="23" z_index="1" />
+				</key>
+				<key id="24" time="800">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="24" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="24" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="24" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="24" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="24" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="24" z_index="1" />
+				</key>
+				<key id="25" time="834">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="25" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="25" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="25" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="25" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="25" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="25" z_index="1" />
+				</key>
+				<key id="26" time="867">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="26" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="26" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="26" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="26" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="26" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="26" z_index="1" />
+				</key>
+				<key id="27" time="900">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="27" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="27" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="27" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="27" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="27" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="27" z_index="1" />
+				</key>
+				<key id="28" time="934">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="28" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="28" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="28" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="28" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="28" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="28" z_index="1" />
+				</key>
+				<key id="29" time="967">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="29" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="29" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="29" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="29" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="29" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="29" z_index="1" />
+				</key>
+				<key id="30" time="1000">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="30" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="30" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="30" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="30" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="30" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="30" z_index="1" />
+				</key>
+				<key id="31" time="1034">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="31" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="31" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="31" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="31" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="31" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="31" z_index="1" />
+				</key>
+				<key id="32" time="1067">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="32" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="32" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="32" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="32" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="32" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="32" z_index="1" />
+				</key>
+				<key id="33" time="1100">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="33" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="33" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="33" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="33" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="33" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="33" z_index="1" />
+				</key>
+				<key id="34" time="1134">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="34" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="34" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="34" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="34" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="34" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="34" z_index="1" />
+				</key>
+				<key id="35" time="1167">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="35" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="35" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="35" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="35" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="35" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="35" z_index="1" />
+				</key>
+				<key id="36" time="1201">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="36" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="36" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="36" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="36" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="36" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="36" z_index="1" />
+				</key>
+				<key id="37" time="1234">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="37" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="37" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="37" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="37" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="37" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="37" z_index="1" />
+				</key>
+				<key id="38" time="1267">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="38" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="38" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="38" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="38" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="38" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="38" z_index="1" />
+				</key>
+				<key id="39" time="1301">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="39" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="39" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="39" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="39" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="39" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="39" z_index="1" />
+				</key>
+				<key id="40" time="1334">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="40" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="40" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="40" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="40" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="40" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="40" z_index="1" />
+				</key>
+				<key id="41" time="1367">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="41" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="41" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="41" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="41" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="41" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="41" z_index="1" />
+				</key>
+				<key id="42" time="1401">
+					<object_ref id="0" name="glow" abs_x="0" abs_y="0" abs_pivot_x="0.5" abs_pivot_y="0.500198" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="0" key="42" z_index="6" />
+					<object_ref id="1" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.516776" abs_pivot_y="1.00978" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="1" key="42" z_index="5" />
+					<object_ref id="2" name="cocoon" abs_x="0" abs_y="0" abs_pivot_x="0.564844" abs_pivot_y="0.887421" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="2" key="42" z_index="4" />
+					<object_ref id="3" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.660045" abs_pivot_y="0.155068" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="3" key="42" z_index="3" />
+					<object_ref id="4" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.5035" abs_pivot_y="0.102253" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="4" key="42" z_index="2" />
+					<object_ref id="5" name="grotto_bug_lamp01" abs_x="0" abs_y="0" abs_pivot_x="0.554122" abs_pivot_y="0.0614286" abs_angle="0" abs_scale_x="1" abs_scale_y="1" abs_a="1" timeline="5" key="42" z_index="1" />
+				</key>
+			</mainline>
+			<timeline id="0" name="glow">
+				<key id="0" time="0" spin="1">
+					<object folder="2" file="0" x="-66" y="456.1" scale_x="1.33331" scale_y="1.33331" angle="0" />
+				</key>
+				<key id="1" time="34" spin="-1">
+					<object folder="2" file="0" x="-66.1" y="456.1" scale_x="1.33328" scale_y="1.33328" angle="359.999" />
+				</key>
+				<key id="2" time="67" spin="-1">
+					<object folder="2" file="0" x="-66.15" y="456.15" scale_x="1.33328" scale_y="1.33328" angle="359.993" />
+				</key>
+				<key id="3" time="100" spin="-1">
+					<object folder="2" file="0" x="-66.3" y="456.15" scale_x="1.33327" scale_y="1.33327" angle="359.981" />
+				</key>
+				<key id="4" time="134" spin="-1">
+					<object folder="2" file="0" x="-66.5" y="456.15" scale_x="1.33325" scale_y="1.33325" angle="359.965" />
+				</key>
+				<key id="5" time="167" spin="-1">
+					<object folder="2" file="0" x="-66.75" y="456.1" scale_x="1.33325" scale_y="1.33325" angle="359.946" />
+				</key>
+				<key id="6" time="200" spin="-1">
+					<object folder="2" file="0" x="-67.05" y="456.2" scale_x="1.33322" scale_y="1.33322" angle="359.734" />
+				</key>
+				<key id="7" time="234" spin="-1">
+					<object folder="2" file="0" x="-67.45" y="456.25" scale_x="1.33322" scale_y="1.33322" angle="359.705" />
+				</key>
+				<key id="8" time="267" spin="-1">
+					<object folder="2" file="0" x="-67.85" y="456.2" scale_x="1.33318" scale_y="1.33318" angle="359.484" />
+				</key>
+				<key id="9" time="300" spin="-1">
+					<object folder="2" file="0" x="-68.35" y="456.25" scale_x="1.33316" scale_y="1.33316" angle="359.446" />
+				</key>
+				<key id="10" time="334" spin="-1">
+					<object folder="2" file="0" x="-68.9" y="456.2" scale_x="1.33313" scale_y="1.33313" angle="359.216" />
+				</key>
+				<key id="11" time="367" spin="-1">
+					<object folder="2" file="0" x="-69.5" y="456.2" scale_x="1.3331" scale_y="1.3331" angle="358.981" />
+				</key>
+				<key id="12" time="400" spin="-1">
+					<object folder="2" file="0" x="-70.15" y="456.25" scale_x="1.33305" scale_y="1.33305" angle="358.743" />
+				</key>
+				<key id="13" time="434" spin="-1">
+					<object folder="2" file="0" x="-70.8" y="456.15" scale_x="1.33316" scale_y="1.33316" angle="358.495" />
+				</key>
+				<key id="14" time="467" spin="-1">
+					<object folder="2" file="0" x="-71.6" y="456.2" scale_x="1.33302" scale_y="1.33302" angle="358.247" />
+				</key>
+				<key id="15" time="500" spin="-1">
+					<object folder="2" file="0" x="-72.25" y="456.2" scale_x="1.33303" scale_y="1.33303" angle="358.189" />
+				</key>
+				<key id="16" time="534" spin="-1">
+					<object folder="2" file="0" x="-72.95" y="456.2" scale_x="1.33304" scale_y="1.33304" angle="357.949" />
+				</key>
+				<key id="17" time="567" spin="-1">
+					<object folder="2" file="0" x="-73.55" y="456.15" scale_x="1.33303" scale_y="1.33303" angle="357.713" />
+				</key>
+				<key id="18" time="600" spin="-1">
+					<object folder="2" file="0" x="-74.05" y="456.15" scale_x="1.33304" scale_y="1.33304" angle="357.482" />
+				</key>
+				<key id="19" time="634" spin="-1">
+					<object folder="2" file="0" x="-74.55" y="456.15" scale_x="1.33304" scale_y="1.33304" angle="357.445" />
+				</key>
+				<key id="20" time="667" spin="-1">
+					<object folder="2" file="0" x="-74.95" y="456.2" scale_x="1.33301" scale_y="1.33301" angle="357.225" />
+				</key>
+				<key id="21" time="700" spin="-1">
+					<object folder="2" file="0" x="-75.25" y="456.2" scale_x="1.33305" scale_y="1.33305" angle="357.196" />
+				</key>
+				<key id="22" time="734" spin="-1">
+					<object folder="2" file="0" x="-75.55" y="456.2" scale_x="1.33302" scale_y="1.33302" angle="356.986" />
+				</key>
+				<key id="23" time="767" spin="-1">
+					<object folder="2" file="0" x="-75.75" y="456.15" scale_x="1.33304" scale_y="1.33304" angle="356.969" />
+				</key>
+				<key id="24" time="800" spin="-1">
+					<object folder="2" file="0" x="-75.95" y="456.2" scale_x="1.33304" scale_y="1.33304" angle="356.956" />
+				</key>
+				<key id="25" time="834" spin="-1">
+					<object folder="2" file="0" x="-76" y="456.2" scale_x="1.33304" scale_y="1.33304" angle="356.949" />
+				</key>
+				<key id="26" time="867" spin="-1">
+					<object folder="2" file="0" x="-76" y="456.1" scale_x="1.3333" scale_y="1.3333" angle="356.789" />
+				</key>
+				<key id="27" time="900" spin="1">
+					<object folder="2" file="0" x="-75.9" y="456.15" scale_x="1.33305" scale_y="1.33305" angle="356.952" />
+				</key>
+				<key id="28" time="934" spin="1">
+					<object folder="2" file="0" x="-75.7" y="456.15" scale_x="1.33301" scale_y="1.33301" angle="356.972" />
+				</key>
+				<key id="29" time="967" spin="1">
+					<object folder="2" file="0" x="-75.3" y="456.1" scale_x="1.33304" scale_y="1.33304" angle="357.193" />
+				</key>
+				<key id="30" time="1000" spin="1">
+					<object folder="2" file="0" x="-74.8" y="456.1" scale_x="1.33303" scale_y="1.33303" angle="357.238" />
+				</key>
+				<key id="31" time="1034" spin="1">
+					<object folder="2" file="0" x="-74.05" y="456.15" scale_x="1.33303" scale_y="1.33303" angle="357.485" />
+				</key>
+				<key id="32" time="1067" spin="1">
+					<object folder="2" file="0" x="-73.2" y="456.1" scale_x="1.33302" scale_y="1.33302" angle="357.745" />
+				</key>
+				<key id="33" time="1100" spin="1">
+					<object folder="2" file="0" x="-72.15" y="456.05" scale_x="1.33304" scale_y="1.33304" angle="358.206" />
+				</key>
+				<key id="34" time="1134" spin="1">
+					<object folder="2" file="0" x="-71" y="456.1" scale_x="1.33316" scale_y="1.33316" angle="358.473" />
+				</key>
+				<key id="35" time="1167" spin="1">
+					<object folder="2" file="0" x="-69.75" y="456.05" scale_x="1.33306" scale_y="1.33306" angle="358.968" />
+				</key>
+				<key id="36" time="1201" spin="1">
+					<object folder="2" file="0" x="-68.7" y="456.05" scale_x="1.33311" scale_y="1.33311" angle="359.241" />
+				</key>
+				<key id="37" time="1234" spin="1">
+					<object folder="2" file="0" x="-67.85" y="456.05" scale_x="1.33317" scale_y="1.33317" angle="359.498" />
+				</key>
+				<key id="38" time="1267" spin="1">
+					<object folder="2" file="0" x="-67.15" y="456" scale_x="1.33317" scale_y="1.33317" angle="359.74" />
+				</key>
+				<key id="39" time="1301" spin="1">
+					<object folder="2" file="0" x="-66.65" y="456.05" scale_x="1.33321" scale_y="1.33321" angle="359.965" />
+				</key>
+				<key id="40" time="1334" spin="1">
+					<object folder="2" file="0" x="-66.35" y="456" scale_x="1.33324" scale_y="1.33324" angle="359.99" />
+				</key>
+				<key id="41" time="1367" spin="1">
+					<object folder="2" file="0" x="-66.1" y="456" scale_x="1.33328" scale_y="1.33328" angle="359.993" />
+				</key>
+				<key id="42" time="1401" spin="1">
+					<object folder="2" file="0" x="-66.1" y="456" scale_x="1.33328" scale_y="1.33328" angle="359.993" />
+				</key>
+			</timeline>
+			<timeline id="1" name="cocoon_0">
+				<key id="0" time="0" spin="1">
+					<object folder="0" file="1" x="-68.2" y="535.45" scale_x="1" scale_y="1" angle="0" />
+				</key>
+				<key id="1" time="34" spin="-1">
+					<object folder="0" file="1" x="-68.2" y="535.45" scale_x="1" scale_y="1" angle="359.997" />
+				</key>
+				<key id="2" time="67" spin="-1">
+					<object folder="0" file="1" x="-68.25" y="535.45" scale_x="1" scale_y="1" angle="359.991" />
+				</key>
+				<key id="3" time="100" spin="-1">
+					<object folder="0" file="1" x="-68.35" y="535.45" scale_x="0.999985" scale_y="0.999985" angle="359.98" />
+				</key>
+				<key id="4" time="134" spin="-1">
+					<object folder="0" file="1" x="-68.45" y="535.45" scale_x="0.999985" scale_y="0.999985" angle="359.964" />
+				</key>
+				<key id="5" time="167" spin="-1">
+					<object folder="0" file="1" x="-68.65" y="535.45" scale_x="0.99997" scale_y="0.99997" angle="359.945" />
+				</key>
+				<key id="6" time="200" spin="-1">
+					<object folder="0" file="1" x="-68.85" y="535.45" scale_x="0.999965" scale_y="0.999965" angle="359.733" />
+				</key>
+				<key id="7" time="234" spin="-1">
+					<object folder="0" file="1" x="-69" y="535.5" scale_x="0.999968" scale_y="0.999968" angle="359.704" />
+				</key>
+				<key id="8" time="267" spin="-1">
+					<object folder="0" file="1" x="-69.25" y="535.5" scale_x="0.999934" scale_y="0.999934" angle="359.483" />
+				</key>
+				<key id="9" time="300" spin="-1">
+					<object folder="0" file="1" x="-69.5" y="535.45" scale_x="0.999925" scale_y="0.999925" angle="359.446" />
+				</key>
+				<key id="10" time="334" spin="-1">
+					<object folder="0" file="1" x="-69.8" y="535.45" scale_x="0.999911" scale_y="0.999911" angle="359.216" />
+				</key>
+				<key id="11" time="367" spin="-1">
+					<object folder="0" file="1" x="-70.15" y="535.5" scale_x="0.999883" scale_y="0.999883" angle="358.981" />
+				</key>
+				<key id="12" time="400" spin="-1">
+					<object folder="0" file="1" x="-70.5" y="535.5" scale_x="0.999875" scale_y="0.999875" angle="358.743" />
+				</key>
+				<key id="13" time="434" spin="-1">
+					<object folder="0" file="1" x="-70.85" y="535.45" scale_x="0.999918" scale_y="0.999918" angle="358.494" />
+				</key>
+				<key id="14" time="467" spin="-1">
+					<object folder="0" file="1" x="-71.35" y="535.45" scale_x="0.999812" scale_y="0.999812" angle="358.247" />
+				</key>
+				<key id="15" time="500" spin="-1">
+					<object folder="0" file="1" x="-71.7" y="535.45" scale_x="0.999828" scale_y="0.999828" angle="358.19" />
+				</key>
+				<key id="16" time="534" spin="-1">
+					<object folder="0" file="1" x="-72.1" y="535.5" scale_x="0.999817" scale_y="0.999817" angle="357.949" />
+				</key>
+				<key id="17" time="567" spin="-1">
+					<object folder="0" file="1" x="-72.45" y="535.5" scale_x="0.999819" scale_y="0.999819" angle="357.714" />
+				</key>
+				<key id="18" time="600" spin="-1">
+					<object folder="0" file="1" x="-72.7" y="535.45" scale_x="0.99982" scale_y="0.99982" angle="357.483" />
+				</key>
+				<key id="19" time="634" spin="-1">
+					<object folder="0" file="1" x="-72.95" y="535.45" scale_x="0.999819" scale_y="0.999819" angle="357.445" />
+				</key>
+				<key id="20" time="667" spin="-1">
+					<object folder="0" file="1" x="-73.15" y="535.45" scale_x="0.999813" scale_y="0.999813" angle="357.226" />
+				</key>
+				<key id="21" time="700" spin="-1">
+					<object folder="0" file="1" x="-73.35" y="535.45" scale_x="0.999837" scale_y="0.999837" angle="357.198" />
+				</key>
+				<key id="22" time="734" spin="-1">
+					<object folder="0" file="1" x="-73.5" y="535.45" scale_x="0.99981" scale_y="0.99981" angle="356.988" />
+				</key>
+				<key id="23" time="767" spin="-1">
+					<object folder="0" file="1" x="-73.65" y="535.45" scale_x="0.999842" scale_y="0.999842" angle="356.97" />
+				</key>
+				<key id="24" time="800" spin="-1">
+					<object folder="0" file="1" x="-73.8" y="535.45" scale_x="0.999823" scale_y="0.999823" angle="356.957" />
+				</key>
+				<key id="25" time="834" spin="-1">
+					<object folder="0" file="1" x="-73.8" y="535.45" scale_x="0.999815" scale_y="0.999815" angle="356.949" />
+				</key>
+				<key id="26" time="867" spin="-1">
+					<object folder="0" file="1" x="-73.75" y="535.45" scale_x="0.999999" scale_y="0.999999" angle="356.788" />
+				</key>
+				<key id="27" time="900" spin="1">
+					<object folder="0" file="1" x="-73.7" y="535.45" scale_x="0.999827" scale_y="0.999827" angle="356.953" />
+				</key>
+				<key id="28" time="934" spin="1">
+					<object folder="0" file="1" x="-73.55" y="535.5" scale_x="0.999823" scale_y="0.999823" angle="356.973" />
+				</key>
+				<key id="29" time="967" spin="1">
+					<object folder="0" file="1" x="-73.35" y="535.45" scale_x="0.999826" scale_y="0.999826" angle="357.193" />
+				</key>
+				<key id="30" time="1000" spin="1">
+					<object folder="0" file="1" x="-73.05" y="535.5" scale_x="0.999802" scale_y="0.999802" angle="357.239" />
+				</key>
+				<key id="31" time="1034" spin="1">
+					<object folder="0" file="1" x="-72.65" y="535.5" scale_x="0.999818" scale_y="0.999818" angle="357.485" />
+				</key>
+				<key id="32" time="1067" spin="1">
+					<object folder="0" file="1" x="-72.2" y="535.55" scale_x="0.999813" scale_y="0.999813" angle="357.745" />
+				</key>
+				<key id="33" time="1100" spin="1">
+					<object folder="0" file="1" x="-71.65" y="535.55" scale_x="0.999819" scale_y="0.999819" angle="358.206" />
+				</key>
+				<key id="34" time="1134" spin="1">
+					<object folder="0" file="1" x="-70.95" y="535.5" scale_x="0.999912" scale_y="0.999912" angle="358.473" />
+				</key>
+				<key id="35" time="1167" spin="1">
+					<object folder="0" file="1" x="-70.3" y="535.5" scale_x="0.999857" scale_y="0.999857" angle="358.967" />
+				</key>
+				<key id="36" time="1201" spin="1">
+					<object folder="0" file="1" x="-69.7" y="535.5" scale_x="0.999889" scale_y="0.999889" angle="359.241" />
+				</key>
+				<key id="37" time="1234" spin="1">
+					<object folder="0" file="1" x="-69.2" y="535.45" scale_x="0.999916" scale_y="0.999916" angle="359.498" />
+				</key>
+				<key id="38" time="1267" spin="1">
+					<object folder="0" file="1" x="-68.8" y="535.5" scale_x="0.999919" scale_y="0.999919" angle="359.74" />
+				</key>
+				<key id="39" time="1301" spin="1">
+					<object folder="0" file="1" x="-68.5" y="535.5" scale_x="0.999939" scale_y="0.999939" angle="359.966" />
+				</key>
+				<key id="40" time="1334" spin="1">
+					<object folder="0" file="1" x="-68.3" y="535.5" scale_x="0.999969" scale_y="0.999969" angle="359.99" />
+				</key>
+				<key id="41" time="1367" spin="1">
+					<object folder="0" file="1" x="-68.2" y="535.45" scale_x="0.999985" scale_y="0.999985" angle="359.994" />
+				</key>
+				<key id="42" time="1401" spin="1">
+					<object folder="0" file="1" x="-68.2" y="535.45" scale_x="0.999985" scale_y="0.999985" angle="359.994" />
+				</key>
+			</timeline>
+			<timeline id="2" name="cocoon_1">
+				<key id="0" time="0" spin="1">
+					<object folder="0" file="0" x="-62.2" y="772.5" scale_x="1" scale_y="1" angle="0" />
+				</key>
+				<key id="1" time="34" spin="1">
+					<object folder="0" file="0" x="-62.2" y="772.5" scale_x="1" scale_y="1" angle="0.000437132" />
+				</key>
+				<key id="2" time="67" spin="-1">
+					<object folder="0" file="0" x="-62.25" y="772.4" scale_x="1" scale_y="1" angle="0" />
+				</key>
+				<key id="3" time="100" spin="1">
+					<object folder="0" file="0" x="-62.35" y="772.35" scale_x="1" scale_y="1.00002" angle="0.000437159" />
+				</key>
+				<key id="4" time="134" spin="1">
+					<object folder="0" file="0" x="-62.5" y="772.2" scale_x="1" scale_y="1.00002" angle="0.000437179" />
+				</key>
+				<key id="5" time="167" spin="1">
+					<object folder="0" file="0" x="-62.65" y="772" scale_x="1" scale_y="1.00003" angle="0.000437292" />
+				</key>
+				<key id="6" time="200" spin="1">
+					<object folder="0" file="0" x="-62.85" y="771.75" scale_x="0.999985" scale_y="1.00003" angle="0.000437479" />
+				</key>
+				<key id="7" time="234" spin="1">
+					<object folder="0" file="0" x="-63.1" y="771.4" scale_x="0.999985" scale_y="1.00003" angle="0.000874738" />
+				</key>
+				<key id="8" time="267" spin="1">
+					<object folder="0" file="0" x="-63.35" y="771.05" scale_x="0.999985" scale_y="1.00006" angle="0.000875278" />
+				</key>
+				<key id="9" time="300" spin="1">
+					<object folder="0" file="0" x="-63.7" y="770.75" scale_x="0.999985" scale_y="1.00008" angle="0.00175004" />
+				</key>
+				<key id="10" time="334" spin="1">
+					<object folder="0" file="0" x="-64.05" y="770.3" scale_x="0.999985" scale_y="1.00009" angle="0.0017507" />
+				</key>
+				<key id="11" time="367" spin="1">
+					<object folder="0" file="0" x="-64.4" y="769.8" scale_x="0.999985" scale_y="1.00012" angle="0.00218905" />
+				</key>
+				<key id="12" time="400" spin="1">
+					<object folder="0" file="0" x="-64.85" y="769.25" scale_x="0.999979" scale_y="1.00014" angle="0.0966132" />
+				</key>
+				<key id="13" time="434" spin="-1">
+					<object folder="0" file="0" x="-65.3" y="768.65" scale_x="0.999983" scale_y="1.00016" angle="0.0127019" />
+				</key>
+				<key id="14" time="467" spin="-1">
+					<object folder="0" file="0" x="-65.8" y="768" scale_x="0.999967" scale_y="1.00016" angle="0.00789551" />
+				</key>
+				<key id="15" time="500" spin="1">
+					<object folder="0" file="0" x="-66.3" y="767.4" scale_x="0.999969" scale_y="1.00021" angle="0.0100893" />
+				</key>
+				<key id="16" time="534" spin="1">
+					<object folder="0" file="0" x="-66.7" y="766.8" scale_x="0.999949" scale_y="1.00024" angle="0.106713" />
+				</key>
+				<key id="17" time="567" spin="-1">
+					<object folder="0" file="0" x="-67.1" y="766.4" scale_x="0.999952" scale_y="1.00024" angle="0.0153726" />
+				</key>
+				<key id="18" time="600" spin="1">
+					<object folder="0" file="0" x="-67.45" y="766" scale_x="0.999939" scale_y="1.00027" angle="0.0175719" />
+				</key>
+				<key id="19" time="634" spin="1">
+					<object folder="0" file="0" x="-67.75" y="765.5" scale_x="0.999926" scale_y="1.00027" angle="0.0197635" />
+				</key>
+				<key id="20" time="667" spin="1">
+					<object folder="0" file="0" x="-68" y="765.25" scale_x="0.999921" scale_y="1.00029" angle="0.115517" />
+				</key>
+				<key id="21" time="700" spin="1">
+					<object folder="0" file="0" x="-68.25" y="764.95" scale_x="0.999923" scale_y="1.0003" angle="0.117271" />
+				</key>
+				<key id="22" time="734" spin="1">
+					<object folder="0" file="0" x="-68.4" y="764.7" scale_x="0.999925" scale_y="1.00032" angle="0.11815" />
+				</key>
+				<key id="23" time="767" spin="1">
+					<object folder="0" file="0" x="-68.55" y="764.6" scale_x="0.999911" scale_y="1.00032" angle="0.119031" />
+				</key>
+				<key id="24" time="800" spin="1">
+					<object folder="0" file="0" x="-68.65" y="764.4" scale_x="0.999913" scale_y="1.00034" angle="0.120347" />
+				</key>
+				<key id="25" time="834" spin="-1">
+					<object folder="0" file="0" x="-68.75" y="764.35" scale_x="0.999913" scale_y="1.00032" angle="0.120344" />
+				</key>
+				<key id="26" time="867" spin="-1">
+					<object folder="0" file="0" x="-68.55" y="764.25" scale_x="0.999995" scale_y="1.00038" angle="0.105501" />
+				</key>
+				<key id="27" time="900" spin="1">
+					<object folder="0" file="0" x="-68.5" y="764.35" scale_x="0.999913" scale_y="1.00032" angle="0.120343" />
+				</key>
+				<key id="28" time="934" spin="-1">
+					<object folder="0" file="0" x="-68.35" y="764.55" scale_x="0.999911" scale_y="1.00032" angle="0.119468" />
+				</key>
+				<key id="29" time="967" spin="-1">
+					<object folder="0" file="0" x="-68.1" y="764.9" scale_x="0.999924" scale_y="1.0003" angle="0.117271" />
+				</key>
+				<key id="30" time="1000" spin="-1">
+					<object folder="0" file="0" x="-67.7" y="765.25" scale_x="0.999935" scale_y="1.00029" angle="0.114636" />
+				</key>
+				<key id="31" time="1034" spin="-1">
+					<object folder="0" file="0" x="-67.3" y="765.95" scale_x="0.999939" scale_y="1.00025" angle="0.0171309" />
+				</key>
+				<key id="32" time="1067" spin="1">
+					<object folder="0" file="0" x="-66.7" y="766.6" scale_x="0.999935" scale_y="1.00024" angle="0.107155" />
+				</key>
+				<key id="33" time="1100" spin="-1">
+					<object folder="0" file="0" x="-66" y="767.45" scale_x="0.999922" scale_y="1.00018" angle="0.00878006" />
+				</key>
+				<key id="34" time="1134" spin="1">
+					<object folder="0" file="0" x="-65.25" y="768.3" scale_x="0.999953" scale_y="1.00015" angle="0.0131421" />
+				</key>
+				<key id="35" time="1167" spin="-1">
+					<object folder="0" file="0" x="-64.4" y="769.4" scale_x="0.999924" scale_y="1.00008" angle="0.00218989" />
+				</key>
+				<key id="36" time="1201" spin="-1">
+					<object folder="0" file="0" x="-63.7" y="770.3" scale_x="0.999924" scale_y="1.00003" angle="0.0013135" />
+				</key>
+				<key id="37" time="1234" spin="-1">
+					<object folder="0" file="0" x="-63.15" y="771.05" scale_x="0.999924" scale_y="0.999985" angle="0.000875078" />
+				</key>
+				<key id="38" time="1267" spin="-1">
+					<object folder="0" file="0" x="-62.65" y="771.6" scale_x="0.999924" scale_y="0.999954" angle="2.26811e-007" />
+				</key>
+				<key id="39" time="1301" spin="1">
+					<object folder="0" file="0" x="-62.3" y="772.05" scale_x="0.999939" scale_y="0.999954" angle="0.000874371" />
+				</key>
+				<key id="40" time="1334" spin="-1">
+					<object folder="0" file="0" x="-62.1" y="772.3" scale_x="0.999939" scale_y="0.999939" angle="0.000437159" />
+				</key>
+				<key id="41" time="1367" spin="-1">
+					<object folder="0" file="0" x="-62.05" y="772.3" scale_x="0.999969" scale_y="0.999969" angle="0.000437145" />
+				</key>
+				<key id="42" time="1401" spin="1">
+					<object folder="0" file="0" x="-62.05" y="772.3" scale_x="0.999969" scale_y="0.999969" angle="0.000437145" />
+				</key>
+			</timeline>
+			<timeline id="3" name="grotto_bug_lamp01_0">
+				<key id="0" time="0" spin="1">
+					<object folder="1" file="2" x="64.75" y="632.2" scale_x="0.999942" scale_y="0.999942" angle="30.2587" />
+				</key>
+				<key id="1" time="34" spin="1">
+					<object folder="1" file="2" x="64.7" y="632.25" scale_x="0.998485" scale_y="0.998459" angle="30.3018" />
+				</key>
+				<key id="2" time="67" spin="1">
+					<object folder="1" file="2" x="64.8" y="632.2" scale_x="0.998448" scale_y="0.998447" angle="30.3072" />
+				</key>
+				<key id="3" time="100" spin="1">
+					<object folder="1" file="2" x="64.85" y="632.15" scale_x="0.998408" scale_y="0.998398" angle="30.3158" />
+				</key>
+				<key id="4" time="134" spin="1">
+					<object folder="1" file="2" x="64.95" y="632.1" scale_x="0.998362" scale_y="0.998342" angle="30.3282" />
+				</key>
+				<key id="5" time="167" spin="1">
+					<object folder="1" file="2" x="65.05" y="632.1" scale_x="0.998294" scale_y="0.998257" angle="30.3449" />
+				</key>
+				<key id="6" time="200" spin="1">
+					<object folder="1" file="2" x="65.25" y="632" scale_x="0.998205" scale_y="0.998162" angle="30.4578" />
+				</key>
+				<key id="7" time="234" spin="1">
+					<object folder="1" file="2" x="65.4" y="632" scale_x="0.998113" scale_y="0.998028" angle="30.4804" />
+				</key>
+				<key id="8" time="267" spin="1">
+					<object folder="1" file="2" x="65.6" y="631.9" scale_x="0.997995" scale_y="0.997901" angle="30.6957" />
+				</key>
+				<key id="9" time="300" spin="1">
+					<object folder="1" file="2" x="65.9" y="631.8" scale_x="0.997862" scale_y="0.997745" angle="30.8191" />
+				</key>
+				<key id="10" time="334" spin="1">
+					<object folder="1" file="2" x="66.1" y="631.7" scale_x="0.997726" scale_y="0.997561" angle="30.8532" />
+				</key>
+				<key id="11" time="367" spin="1">
+					<object folder="1" file="2" x="66.4" y="631.6" scale_x="0.997558" scale_y="0.99739" angle="31.0788" />
+				</key>
+				<key id="12" time="400" spin="1">
+					<object folder="1" file="2" x="66.75" y="631.45" scale_x="0.997387" scale_y="0.997168" angle="31.2125" />
+				</key>
+				<key id="13" time="434" spin="1">
+					<object folder="1" file="2" x="67.1" y="631.25" scale_x="0.998677" scale_y="0.998428" angle="31.4522" />
+				</key>
+				<key id="14" time="467" spin="1">
+					<object folder="1" file="2" x="67.55" y="631.1" scale_x="0.997469" scale_y="0.997162" angle="31.5898" />
+				</key>
+				<key id="15" time="500" spin="1">
+					<object folder="1" file="2" x="67.9" y="630.95" scale_x="0.997689" scale_y="0.997349" angle="31.8253" />
+				</key>
+				<key id="16" time="534" spin="1">
+					<object folder="1" file="2" x="68.25" y="630.75" scale_x="0.997881" scale_y="0.99751" angle="31.9627" />
+				</key>
+				<key id="17" time="567" spin="1">
+					<object folder="1" file="2" x="68.55" y="630.65" scale_x="0.9981" scale_y="0.997704" angle="32.1901" />
+				</key>
+				<key id="18" time="600" spin="1">
+					<object folder="1" file="2" x="68.75" y="630.55" scale_x="0.998264" scale_y="0.997816" angle="32.318" />
+				</key>
+				<key id="19" time="634" spin="1">
+					<object folder="1" file="2" x="69" y="630.45" scale_x="0.998412" scale_y="0.997948" angle="32.3493" />
+				</key>
+				<key id="20" time="667" spin="1">
+					<object folder="1" file="2" x="69.2" y="630.4" scale_x="0.998542" scale_y="0.998055" angle="32.5646" />
+				</key>
+				<key id="21" time="700" spin="1">
+					<object folder="1" file="2" x="69.4" y="630.3" scale_x="0.998653" scale_y="0.998179" angle="32.5864" />
+				</key>
+				<key id="22" time="734" spin="1">
+					<object folder="1" file="2" x="69.55" y="630.25" scale_x="0.998739" scale_y="0.998223" angle="32.6988" />
+				</key>
+				<key id="23" time="767" spin="1">
+					<object folder="1" file="2" x="69.6" y="630.2" scale_x="0.998818" scale_y="0.998299" angle="32.7137" />
+				</key>
+				<key id="24" time="800" spin="1">
+					<object folder="1" file="2" x="69.75" y="630.2" scale_x="0.998853" scale_y="0.998336" angle="32.7234" />
+				</key>
+				<key id="25" time="834" spin="1">
+					<object folder="1" file="2" x="69.75" y="630.1" scale_x="0.998889" scale_y="0.998361" angle="32.7301" />
+				</key>
+				<key id="26" time="867" spin="1">
+					<object folder="1" file="2" x="69.7" y="630.15" scale_x="1.00041" scale_y="0.999927" angle="32.8356" />
+				</key>
+				<key id="27" time="900" spin="-1">
+					<object folder="1" file="2" x="69.65" y="630.15" scale_x="0.998873" scale_y="0.998362" angle="32.7277" />
+				</key>
+				<key id="28" time="934" spin="-1">
+					<object folder="1" file="2" x="69.55" y="630.2" scale_x="0.998802" scale_y="0.998286" angle="32.7116" />
+				</key>
+				<key id="29" time="967" spin="-1">
+					<object folder="1" file="2" x="69.35" y="630.3" scale_x="0.998672" scale_y="0.998161" angle="32.5905" />
+				</key>
+				<key id="30" time="1000" spin="-1">
+					<object folder="1" file="2" x="69.1" y="630.4" scale_x="0.99849" scale_y="0.998023" angle="32.4595" />
+				</key>
+				<key id="31" time="1034" spin="-1">
+					<object folder="1" file="2" x="68.75" y="630.55" scale_x="0.99823" scale_y="0.997803" angle="32.2233" />
+				</key>
+				<key id="32" time="1067" spin="-1">
+					<object folder="1" file="2" x="68.3" y="630.75" scale_x="0.997955" scale_y="0.997572" angle="31.9763" />
+				</key>
+				<key id="33" time="1100" spin="-1">
+					<object folder="1" file="2" x="67.8" y="630.95" scale_x="0.997589" scale_y="0.997276" angle="31.8124" />
+				</key>
+				<key id="34" time="1134" spin="-1">
+					<object folder="1" file="2" x="67.2" y="631.15" scale_x="0.998672" scale_y="0.998432" angle="31.4697" />
+				</key>
+				<key id="35" time="1167" spin="-1">
+					<object folder="1" file="2" x="66.5" y="631.4" scale_x="0.997139" scale_y="0.99696" angle="31.091" />
+				</key>
+				<key id="36" time="1201" spin="-1">
+					<object folder="1" file="2" x="66.05" y="631.6" scale_x="0.997107" scale_y="0.996947" angle="30.8376" />
+				</key>
+				<key id="37" time="1234" spin="-1">
+					<object folder="1" file="2" x="65.5" y="631.8" scale_x="0.997077" scale_y="0.996985" angle="30.6903" />
+				</key>
+				<key id="38" time="1267" spin="-1">
+					<object folder="1" file="2" x="65.15" y="631.95" scale_x="0.997061" scale_y="0.996992" angle="30.4597" />
+				</key>
+				<key id="39" time="1301" spin="-1">
+					<object folder="1" file="2" x="64.9" y="632.05" scale_x="0.997038" scale_y="0.996996" angle="30.336" />
+				</key>
+				<key id="40" time="1334" spin="-1">
+					<object folder="1" file="2" x="64.75" y="632.1" scale_x="0.997012" scale_y="0.996995" angle="30.3181" />
+				</key>
+				<key id="41" time="1367" spin="-1">
+					<object folder="1" file="2" x="64.65" y="632.15" scale_x="0.998475" scale_y="0.998458" angle="30.3056" />
+				</key>
+				<key id="42" time="1401" spin="1">
+					<object folder="1" file="2" x="64.65" y="632.15" scale_x="0.998475" scale_y="0.998458" angle="30.3056" />
+				</key>
+			</timeline>
+			<timeline id="4" name="grotto_bug_lamp01_1">
+				<key id="0" time="0" spin="1">
+					<object folder="1" file="0" x="0" y="-2" scale_x="1" scale_y="1" angle="0" />
+				</key>
+				<key id="1" time="34" spin="1">
+					<object folder="1" file="0" x="0" y="-2" scale_x="1" scale_y="1" angle="0" />
+				</key>
+				<key id="2" time="67" spin="1">
+					<object folder="1" file="0" x="0" y="-2" scale_x="1" scale_y="1" angle="0" />
+				</key>
+				<key id="3" time="100" spin="1">
+					<object folder="1" file="0" x="0" y="-2" scale_x="1" scale_y="1" angle="0.000437132" />
+				</key>
+				<key id="4" time="134" spin="1">
+					<object folder="1" file="0" x="0" y="-2" scale_x="1" scale_y="1" angle="0.000437132" />
+				</key>
+				<key id="5" time="167" spin="1">
+					<object folder="1" file="0" x="0" y="-2" scale_x="1" scale_y="1" angle="0.000874264" />
+				</key>
+				<key id="6" time="200" spin="1">
+					<object folder="1" file="0" x="0" y="-2" scale_x="1" scale_y="1" angle="0.0013114" />
+				</key>
+				<key id="7" time="234" spin="1">
+					<object folder="1" file="0" x="0" y="-2" scale_x="1" scale_y="1" angle="0.0013114" />
+				</key>
+				<key id="8" time="267" spin="1">
+					<object folder="1" file="0" x="0" y="-2" scale_x="1" scale_y="1" angle="0.00174853" />
+				</key>
+				<key id="9" time="300" spin="1">
+					<object folder="1" file="0" x="0" y="-2" scale_x="1" scale_y="1" angle="0.00262279" />
+				</key>
+				<key id="10" time="334" spin="1">
+					<object folder="1" file="0" x="0" y="-2.05" scale_x="1" scale_y="1" angle="0.00305992" />
+				</key>
+				<key id="11" time="367" spin="1">
+					<object folder="1" file="0" x="0" y="-2.05" scale_x="1" scale_y="1" angle="0.00349706" />
+				</key>
+				<key id="12" time="400" spin="1">
+					<object folder="1" file="0" x="-0.05" y="-2.05" scale_x="1" scale_y="1" angle="0.00437132" />
+				</key>
+				<key id="13" time="434" spin="1">
+					<object folder="1" file="0" x="-0.05" y="-2.05" scale_x="1" scale_y="1" angle="0.0205452" />
+				</key>
+				<key id="14" time="467" spin="-1">
+					<object folder="1" file="0" x="-0.1" y="-2.05" scale_x="1" scale_y="0.999985" angle="0.0109285" />
+				</key>
+				<key id="15" time="500" spin="1">
+					<object folder="1" file="0" x="-0.15" y="-2.1" scale_x="1" scale_y="1" angle="0.016611" />
+				</key>
+				<key id="16" time="534" spin="1">
+					<object folder="1" file="0" x="-0.15" y="-2.1" scale_x="1" scale_y="1" angle="0.0205452" />
+				</key>
+				<key id="17" time="567" spin="1">
+					<object folder="1" file="0" x="-0.1" y="-2.05" scale_x="1" scale_y="1.00002" angle="0.0249161" />
+				</key>
+				<key id="18" time="600" spin="1">
+					<object folder="1" file="0" x="-0.1" y="-2.05" scale_x="1" scale_y="1.00002" angle="0.0288503" />
+				</key>
+				<key id="19" time="634" spin="1">
+					<object folder="1" file="0" x="-0.1" y="-2.05" scale_x="1" scale_y="1.00001" angle="0.125893" />
+				</key>
+				<key id="20" time="667" spin="1">
+					<object folder="1" file="0" x="-0.15" y="-2.05" scale_x="1" scale_y="1.00001" angle="0.128953" />
+				</key>
+				<key id="21" time="700" spin="1">
+					<object folder="1" file="0" x="-0.15" y="-2.05" scale_x="1" scale_y="1.00003" angle="0.131574" />
+				</key>
+				<key id="22" time="734" spin="1">
+					<object folder="1" file="0" x="-0.15" y="-2.05" scale_x="1" scale_y="1.00003" angle="0.133322" />
+				</key>
+				<key id="23" time="767" spin="1">
+					<object folder="1" file="0" x="-0.15" y="-2.05" scale_x="1" scale_y="1.00003" angle="0.135071" />
+				</key>
+				<key id="24" time="800" spin="1">
+					<object folder="1" file="0" x="-0.15" y="-2.05" scale_x="1" scale_y="1.00003" angle="0.136382" />
+				</key>
+				<key id="25" time="834" spin="1">
+					<object folder="1" file="0" x="-0.15" y="-2.05" scale_x="1" scale_y="1.00003" angle="0.136819" />
+				</key>
+				<key id="26" time="867" spin="1">
+					<object folder="1" file="0" x="-0.2" y="-2" scale_x="1" scale_y="1.00002" angle="0.173539" />
+				</key>
+				<key id="27" time="900" spin="-1">
+					<object folder="1" file="0" x="-0.25" y="-2.05" scale_x="1" scale_y="1.00003" angle="0.136819" />
+				</key>
+				<key id="28" time="934" spin="-1">
+					<object folder="1" file="0" x="-0.25" y="-2.05" scale_x="1" scale_y="1.00003" angle="0.135071" />
+				</key>
+				<key id="29" time="967" spin="-1">
+					<object folder="1" file="0" x="-0.25" y="-2.05" scale_x="1" scale_y="1.00003" angle="0.132448" />
+				</key>
+				<key id="30" time="1000" spin="-1">
+					<object folder="1" file="0" x="-0.25" y="-2.05" scale_x="1" scale_y="1.00003" angle="0.128077" />
+				</key>
+				<key id="31" time="1034" spin="-1">
+					<object folder="1" file="0" x="-0.25" y="-2.05" scale_x="1" scale_y="1.00002" angle="0.0288503" />
+				</key>
+				<key id="32" time="1067" spin="-1">
+					<object folder="1" file="0" x="-0.2" y="-2.1" scale_x="1" scale_y="1.00002" angle="0.0227305" />
+				</key>
+				<key id="33" time="1100" spin="-1">
+					<object folder="1" file="0" x="-0.2" y="-2.1" scale_x="1" scale_y="1" angle="0.0148625" />
+				</key>
+				<key id="34" time="1134" spin="1">
+					<object folder="1" file="0" x="-0.15" y="-2.05" scale_x="1" scale_y="1.00002" angle="0.0222934" />
+				</key>
+				<key id="35" time="1167" spin="-1">
+					<object folder="1" file="0" x="-0.15" y="-2.05" scale_x="1" scale_y="1.00002" angle="0.00393413" />
+				</key>
+				<key id="36" time="1201" spin="-1">
+					<object folder="1" file="0" x="-0.15" y="-2.05" scale_x="1" scale_y="1.00002" angle="0.00305988" />
+				</key>
+				<key id="37" time="1234" spin="-1">
+					<object folder="1" file="0" x="-0.1" y="-1.95" scale_x="1" scale_y="1" angle="0.00174853" />
+				</key>
+				<key id="38" time="1267" spin="-1">
+					<object folder="1" file="0" x="-0.1" y="-1.95" scale_x="1" scale_y="1" angle="0.000874264" />
+				</key>
+				<key id="39" time="1301" spin="-1">
+					<object folder="1" file="0" x="-0.05" y="-1.95" scale_x="1" scale_y="1" angle="0.000437132" />
+				</key>
+				<key id="40" time="1334" spin="-1">
+					<object folder="1" file="0" x="0" y="-1.95" scale_x="1" scale_y="1" angle="0" />
+				</key>
+				<key id="41" time="1367" spin="1">
+					<object folder="1" file="0" x="0" y="-1.95" scale_x="1" scale_y="1" angle="0" />
+				</key>
+				<key id="42" time="1401" spin="1">
+					<object folder="1" file="0" x="0" y="-1.95" scale_x="1" scale_y="1" angle="0" />
+				</key>
+			</timeline>
+			<timeline id="5" name="grotto_bug_lamp01_2">
+				<key id="0" time="0" spin="-1">
+					<object folder="1" file="1" x="-7.25" y="282.1" scale_x="0.999978" scale_y="0.999978" angle="336.969" />
+				</key>
+				<key id="1" time="34" spin="-1">
+					<object folder="1" file="1" x="-7.25" y="282.15" scale_x="0.998761" scale_y="0.998761" angle="336.963" />
+				</key>
+				<key id="2" time="67" spin="-1">
+					<object folder="1" file="1" x="-7.2" y="282.15" scale_x="0.998737" scale_y="0.998737" angle="336.96" />
+				</key>
+				<key id="3" time="100" spin="-1">
+					<object folder="1" file="1" x="-7.3" y="282.1" scale_x="0.998707" scale_y="0.998707" angle="336.957" />
+				</key>
+				<key id="4" time="134" spin="-1">
+					<object folder="1" file="1" x="-7.3" y="282.1" scale_x="0.998638" scale_y="0.998638" angle="336.951" />
+				</key>
+				<key id="5" time="167" spin="-1">
+					<object folder="1" file="1" x="-7.4" y="282.15" scale_x="0.998582" scale_y="0.998582" angle="336.943" />
+				</key>
+				<key id="6" time="200" spin="-1">
+					<object folder="1" file="1" x="-7.45" y="282.1" scale_x="0.998511" scale_y="0.998511" angle="336.934" />
+				</key>
+				<key id="7" time="234" spin="-1">
+					<object folder="1" file="1" x="-7.55" y="282.1" scale_x="0.998419" scale_y="0.998419" angle="336.924" />
+				</key>
+				<key id="8" time="267" spin="-1">
+					<object folder="1" file="1" x="-7.65" y="282.1" scale_x="0.998282" scale_y="0.998282" angle="336.911" />
+				</key>
+				<key id="9" time="300" spin="-1">
+					<object folder="1" file="1" x="-7.75" y="282.15" scale_x="0.998177" scale_y="0.998177" angle="336.71" />
+				</key>
+				<key id="10" time="334" spin="-1">
+					<object folder="1" file="1" x="-7.8" y="282.15" scale_x="0.998012" scale_y="0.998012" angle="336.694" />
+				</key>
+				<key id="11" time="367" spin="-1">
+					<object folder="1" file="1" x="-7.95" y="282.15" scale_x="0.997858" scale_y="0.997858" angle="336.677" />
+				</key>
+				<key id="12" time="400" spin="-1">
+					<object folder="1" file="1" x="-8.1" y="282.2" scale_x="0.997694" scale_y="0.997694" angle="336.47" />
+				</key>
+				<key id="13" time="434" spin="-1">
+					<object folder="1" file="1" x="-8.2" y="282.15" scale_x="0.998752" scale_y="0.998752" angle="336.416" />
+				</key>
+				<key id="14" time="467" spin="1">
+					<object folder="1" file="1" x="-8.35" y="282.2" scale_x="0.997686" scale_y="0.997686" angle="336.416" />
+				</key>
+				<key id="15" time="500" spin="-1">
+					<object folder="1" file="1" x="-8.55" y="282.2" scale_x="0.997871" scale_y="0.997871" angle="336.198" />
+				</key>
+				<key id="16" time="534" spin="-1">
+					<object folder="1" file="1" x="-8.6" y="282.2" scale_x="0.998018" scale_y="0.998018" angle="336.17" />
+				</key>
+				<key id="17" time="567" spin="-1">
+					<object folder="1" file="1" x="-8.7" y="282.2" scale_x="0.998155" scale_y="0.998155" angle="335.956" />
+				</key>
+				<key id="18" time="600" spin="-1">
+					<object folder="1" file="1" x="-8.85" y="282.2" scale_x="0.998261" scale_y="0.998261" angle="335.933" />
+				</key>
+				<key id="19" time="634" spin="-1">
+					<object folder="1" file="1" x="-8.9" y="282.2" scale_x="0.998362" scale_y="0.998362" angle="335.914" />
+				</key>
+				<key id="20" time="667" spin="-1">
+					<object folder="1" file="1" x="-9.05" y="282.2" scale_x="0.998446" scale_y="0.998446" angle="335.709" />
+				</key>
+				<key id="21" time="700" spin="-1">
+					<object folder="1" file="1" x="-9.05" y="282.25" scale_x="0.998531" scale_y="0.998531" angle="335.694" />
+				</key>
+				<key id="22" time="734" spin="-1">
+					<object folder="1" file="1" x="-9.15" y="282.2" scale_x="0.998577" scale_y="0.998577" angle="335.681" />
+				</key>
+				<key id="23" time="767" spin="-1">
+					<object folder="1" file="1" x="-9.15" y="282.25" scale_x="0.998646" scale_y="0.998646" angle="335.673" />
+				</key>
+				<key id="24" time="800" spin="-1">
+					<object folder="1" file="1" x="-9.25" y="282.25" scale_x="0.998669" scale_y="0.998669" angle="335.666" />
+				</key>
+				<key id="25" time="834" spin="-1">
+					<object folder="1" file="1" x="-9.25" y="282.25" scale_x="0.998708" scale_y="0.998708" angle="335.663" />
+				</key>
+				<key id="26" time="867" spin="-1">
+					<object folder="1" file="1" x="-9.25" y="282.1" scale_x="0.999973" scale_y="0.999973" angle="335.52" />
+				</key>
+				<key id="27" time="900" spin="1">
+					<object folder="1" file="1" x="-9.3" y="282.15" scale_x="0.998708" scale_y="0.998708" angle="335.663" />
+				</key>
+				<key id="28" time="934" spin="1">
+					<object folder="1" file="1" x="-9.25" y="282.1" scale_x="0.998625" scale_y="0.998625" angle="335.671" />
+				</key>
+				<key id="29" time="967" spin="1">
+					<object folder="1" file="1" x="-9.1" y="282.15" scale_x="0.998532" scale_y="0.998532" angle="335.685" />
+				</key>
+				<key id="30" time="1000" spin="1">
+					<object folder="1" file="1" x="-9" y="282.1" scale_x="0.998381" scale_y="0.998381" angle="335.704" />
+				</key>
+				<key id="31" time="1034" spin="1">
+					<object folder="1" file="1" x="-8.95" y="282.15" scale_x="0.998227" scale_y="0.998227" angle="335.916" />
+				</key>
+				<key id="32" time="1067" spin="1">
+					<object folder="1" file="1" x="-8.75" y="282.15" scale_x="0.998017" scale_y="0.998017" angle="335.945" />
+				</key>
+				<key id="33" time="1100" spin="1">
+					<object folder="1" file="1" x="-8.6" y="282.2" scale_x="0.997772" scale_y="0.997772" angle="336.169" />
+				</key>
+				<key id="34" time="1134" spin="1">
+					<object folder="1" file="1" x="-8.3" y="282.15" scale_x="0.998741" scale_y="0.998741" angle="336.217" />
+				</key>
+				<key id="35" time="1167" spin="1">
+					<object folder="1" file="1" x="-8" y="282.2" scale_x="0.99751" scale_y="0.99751" angle="336.448" />
+				</key>
+				<key id="36" time="1201" spin="1">
+					<object folder="1" file="1" x="-7.85" y="282.2" scale_x="0.997497" scale_y="0.997497" angle="336.679" />
+				</key>
+				<key id="37" time="1234" spin="1">
+					<object folder="1" file="1" x="-7.6" y="282.15" scale_x="0.997516" scale_y="0.997516" angle="336.712" />
+				</key>
+				<key id="38" time="1267" spin="1">
+					<object folder="1" file="1" x="-7.45" y="282.15" scale_x="0.997525" scale_y="0.997525" angle="336.926" />
+				</key>
+				<key id="39" time="1301" spin="1">
+					<object folder="1" file="1" x="-7.35" y="282.15" scale_x="0.997532" scale_y="0.997532" angle="336.945" />
+				</key>
+				<key id="40" time="1334" spin="1">
+					<object folder="1" file="1" x="-7.25" y="282.15" scale_x="0.997531" scale_y="0.997531" angle="336.957" />
+				</key>
+				<key id="41" time="1367" spin="1">
+					<object folder="1" file="1" x="-7.25" y="282.05" scale_x="0.998751" scale_y="0.998751" angle="336.96" />
+				</key>
+				<key id="42" time="1401" spin="1">
+					<object folder="1" file="1" x="-7.25" y="282.05" scale_x="0.998751" scale_y="0.998751" angle="336.96" />
+				</key>
+			</timeline>
+		</animation>
+	</entity>
+</spriter_data>

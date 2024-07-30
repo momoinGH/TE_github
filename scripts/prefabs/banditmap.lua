@@ -176,7 +176,7 @@ local function messagebottlefn(Sim)
 	inst:AddComponent("inspectable")
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst:AddComponent("waterproofer")
 	inst.components.waterproofer:SetEffectiveness(0)
@@ -191,8 +191,8 @@ end
 
 local function onfinishcallback(inst, worker)
 	-- figure out which side to drop the loot
-	local pt = Vector3(inst.Transform:GetWorldPosition())
-	local hispos = Vector3(worker.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
+	local hispos = worker:GetPosition()
 
 	local he_right = ((hispos - pt):Dot(TheCamera:GetRightVec()) > 0)
 

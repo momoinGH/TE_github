@@ -12,7 +12,7 @@ local function fn(Sim)
 
     MakeInventoryPhysics(inst)
     --    MakeInventoryFloatable(inst, "idle_water", "idle")
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.HEAVY, TUNING.WINDBLOWN_SCALE_MAX.HEAVY)
+
 
     inst.AnimState:SetBuild("cork")
     inst.AnimState:SetBank("cork")
@@ -55,7 +55,7 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     return inst
 end

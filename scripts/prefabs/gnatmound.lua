@@ -24,7 +24,7 @@ SetSharedLootTable('gnatmound',
     })
 
 local function onworked(inst)
-    inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+    inst.components.lootdropper:DropLoot(inst:GetPosition())
     SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst.SoundEmitter:PlaySound("dontstarve/common/destroy_stone")
     inst:Remove()
@@ -32,7 +32,7 @@ end
 
 local function onhit(inst)
     if inst.components.workable.workleft == 4 or inst.components.workable.workleft == 2 or inst.components.workable.workleft == 0 then
-        inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+        inst.components.lootdropper:DropLoot(inst:GetPosition())
         inst.SoundEmitter:PlaySound("dontstarve/common/destroy_stone")
         if inst.components.childspawner then
             inst.components.childspawner:ReleaseAllChildren()

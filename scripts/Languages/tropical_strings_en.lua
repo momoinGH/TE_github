@@ -8055,4 +8055,4 @@ STRINGS.NAMES.SLAW = "Fennel Slaw"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SLAW = "..."
 
 
-modimport("scripts/languages/tropical_modwiki_eu2.lua")
+modimport("scripts/languages/tropical_modwiki_en2.lua")

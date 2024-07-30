@@ -148,7 +148,7 @@ local function common()
     inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
-    -- MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.MEDIUM, TUNING.WINDBLOWN_SCALE_MAX.MEDIUM)
+
 
     inst.AnimState:SetBank("coconut")
     inst.AnimState:SetBuild("coconut")
@@ -284,7 +284,7 @@ local function raw()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 
     inst.OnSave = OnSave
@@ -306,7 +306,7 @@ local function cooked()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst.components.edible.foodstate = "COOKED"
     inst.components.edible.hungervalue = TUNING.CALORIES_TINY
@@ -334,7 +334,7 @@ local function halved()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     -- MakeInventoryFloatable(inst, "chopped_water", "chopped")
     inst.components.edible.hungervalue = TUNING.CALORIES_TINY / 2

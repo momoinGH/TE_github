@@ -177,8 +177,10 @@ local function fn()
 	inst:AddComponent("knownlocations")
 
 	inst:DoTaskInTime(1 * FRAMES,
-		function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-				true) end)
+		function()
+			inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+				true)
+		end)
 
 	MakeMediumBurnableCharacter(inst, "ray_face")
 	MakeMediumFreezableCharacter(inst, "ray_face")

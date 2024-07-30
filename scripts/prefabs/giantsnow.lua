@@ -64,7 +64,7 @@ local function CanBeAttacked(inst, attacker)
 end
 
 local function Retarget(inst)
-	local instPos = Vector3(inst.Transform:GetWorldPosition())
+	local instPos = inst:GetPosition()
 	local entsNearby = TheSim:FindEntities(instPos.x, instPos.y, instPos.z, SEE_VICTIM_DIST)
 	local playerIsPossibleTarget = false
 

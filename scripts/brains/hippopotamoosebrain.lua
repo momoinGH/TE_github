@@ -32,8 +32,7 @@ end
 
 local function GetFaceTargetFn(inst)
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition())
-    if (homePos and distsq(homePos, myPos) > 40 * 40) then
+    if (homePos and distsq(homePos, inst:GetPosition()) > 40 * 40) then
         return
     end
 
@@ -45,8 +44,7 @@ end
 
 local function KeepFaceTargetFn(inst, target)
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition())
-    if (homePos and distsq(homePos, myPos) > 40 * 40) then
+    if (homePos and distsq(homePos, inst:GetPosition()) > 40 * 40) then
         return false
     end
 
@@ -59,8 +57,7 @@ local function ShouldGoHome(inst)
     end
 
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition())
-    local dist = homePos and distsq(homePos, myPos)
+    local dist = homePos and distsq(homePos, inst:GetPosition())
     if not dist then
         return
     end

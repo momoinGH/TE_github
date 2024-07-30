@@ -31,7 +31,7 @@ local function onpickedfn(inst)
 end
 
 local function testForGrowth(inst)
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
 
 	if not TheWorld.state.iswinter and (tile == GROUND.DEEPRAINFOREST or tile == GROUND.RAINFOREST) then

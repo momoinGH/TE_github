@@ -65,7 +65,7 @@ local function raw()
     inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
     --    MakeInventoryFloatable(inst, "idle_water", "idle")
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst.AnimState:SetBank("roe")
     inst.AnimState:SetBuild("roe")
@@ -96,7 +96,7 @@ local function raw()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERFAST)
@@ -129,7 +129,7 @@ local function cooked()
     MakeInventoryPhysics(inst)
     --    MakeInventoryFloatable(inst, "cooked_water", "cooked")
 
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst.AnimState:SetBank("roe")
     inst.AnimState:SetBuild("roe")
@@ -162,7 +162,7 @@ local function cooked()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERFAST)

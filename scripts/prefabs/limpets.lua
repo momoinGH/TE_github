@@ -18,7 +18,7 @@ local function commonfn()
     inst.AnimState:SetBuild("limpets")
 
     MakeInventoryPhysics(inst)
-    -- MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst:AddTag("smallmeat")
     inst:AddTag("packimfood")
@@ -69,7 +69,7 @@ local function defaultfn()
     inst.components.edible.sanityvalue = -TUNING.SANITY_SMALL
 
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("cookable")
     inst.components.cookable.product = "limpets_cooked"
@@ -95,7 +95,7 @@ local function cookedfn()
     inst.components.perishable:SetPerishTime(TUNING.PERISH_MED)
 
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     return inst
 end

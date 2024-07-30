@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
     Asset("ANIM", "anim/firepit.zip"),
@@ -48,7 +46,7 @@ end
 
 local function updatefuelrate(inst)
     inst.components.fueled.rate = TheWorld.state.israining and
-    1 + TUNING.FIREPIT_RAIN_RATE * TheWorld.state.precipitationrate or 1
+        1 + TUNING.FIREPIT_RAIN_RATE * TheWorld.state.precipitationrate or 1
 end
 
 local function onupdatefueled(inst)

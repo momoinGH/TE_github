@@ -6,9 +6,7 @@ local assets =
     Asset("ANIM", "anim/cloak_fx.zip"), -- wait for modify
 }
 
-local ARMORVOID = 855
-local ARMORVOIDFUEL = ARMORVOID / 45 * TUNING.LARGE_FUEL
-local ARMORVOID_ABSORPTION = 1
+
 
 local function setsoundparam(inst)
     local param = Remap(inst.components.armor.condition, 0, inst.components.armor.maxcondition, 0, 1)
@@ -24,10 +22,14 @@ local function spawnwisp(owner)
         end
 
         local armadura = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-        if armadura and armadura:HasTag("void_cloak") and armadura.components.armor.condition <= 0 then armadura
-                .components.armor:SetAbsorption(0) end
-        if armadura and armadura:HasTag("void_cloak") and armadura.components.armor.condition > 0 then armadura
-                .components.armor:SetAbsorption(1) end
+        if armadura and armadura:HasTag("void_cloak") and armadura.components.armor.condition <= 0 then
+            armadura
+                .components.armor:SetAbsorption(0)
+        end
+        if armadura and armadura:HasTag("void_cloak") and armadura.components.armor.condition > 0 then
+            armadura
+                .components.armor:SetAbsorption(1)
+        end
     end
 end
 
@@ -156,9 +158,10 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddSoundEmitter()
     inst.entity:AddAnimState()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
-    MakeInventoryPhysics(inst)
 
+    MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("armor_void_cloak")
     inst.AnimState:SetBuild("armor_void_cloak")
@@ -175,44 +178,42 @@ local function fn()
 
     inst.entity:SetPristine()
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("armor_void_cloak.png")
+    inst.MiniMapEntity:SetIcon("armor_void_cloak.png")
 
     if not TheWorld.ismastersim then
-        inst.OnEntityReplicated = function(inst) inst.replica.container:WidgetSetup("piggyback") end
         return inst
     end
 
     inst:AddComponent("inspectable")
+
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
     inst.components.inventoryitem.cangoincontainer = false
+
     inst.foleysound = "dontstarve_DLC003/common/crafted/vortex_armour/foley"
 
-    local container = inst:AddComponent("container")
-    container:WidgetSetup("piggyback")
+    inst:AddComponent("container")
+    inst.components.container:WidgetSetup("piggyback")
 
-    local armor = inst:AddComponent("armor")
-    armor:InitCondition(ARMORVOID, ARMORVOID_ABSORPTION)
-    --armor:SetImmuneTags({"shadow"})
+    inst:AddComponent("armor")
+    inst.components.armor:InitCondition(TUNING.ARMORVOIDCLOAK, TUNING.ARMORVOIDCLOAK_ABSORPTION)
     inst.components.armor.ontakedamage = OnTakeDamage
 
-    local fueled = inst:AddComponent("fueled")
-    fueled:InitializeFuelLevel(ARMORVOIDFUEL)
-    fueled.fueltype = FUELTYPE.NIGHTMARE -- 燃料是噩梦燃料
-    fueled.secondaryfueltype = FUELTYPE.ANCIENT_REMNANT
-    fueled.ontakefuelfn = ontakefuel
-    fueled.accepting = true
+    inst:AddComponent("fueled")
+    inst.components.fueled:InitializeFuelLevel(TUNING.ARMORVOIDCLOAK_FUEL)
+    inst.components.fueled.fueltype = FUELTYPE.NIGHTMARE -- 燃料是噩梦燃料
+    inst.components.fueled.secondaryfueltype = FUELTYPE.ANCIENT_REMNANT
+    inst.components.fueled.ontakefuelfn = ontakefuel
+    inst.components.fueled.accepting = true
 
-    local planardefense = inst:AddComponent("planardefense")
-    planardefense:SetBaseDefense(TUNING.ARMOR_VOIDCLOTH_PLANAR_DEF) --虚空长袍的位面防御
+    inst:AddComponent("planardefense")
+    inst.components.planardefense:SetBaseDefense(TUNING.ARMOR_VOIDCLOTH_PLANAR_DEF) --虚空长袍的位面防御
 
-    local damagetyperesist = inst:AddComponent("damagetyperesist")
-    damagetyperesist:AddResist("shadow_aligned", inst, TUNING.ARMOR_VOIDCLOTH_SHADOW_RESIST) --虚空长袍的10%暗影阵营减伤
+    inst:AddComponent("damagetyperesist")
+    inst.components.damagetyperesist:AddResist("shadow_aligned", inst, TUNING.ARMOR_VOIDCLOTH_SHADOW_RESIST) --虚空长袍的10%暗影阵营减伤
 
-    local shadowlevel = inst:AddComponent("shadowlevel")
-    shadowlevel:SetDefaultLevel(TUNING.ARMOR_VOIDCLOTH_SHADOW_LEVEL) --虚空长袍的老麦3级暗影之力
+    inst:AddComponent("shadowlevel")
+    inst.components.shadowlevel:SetDefaultLevel(TUNING.ARMOR_VOIDCLOTH_SHADOW_LEVEL) --虚空长袍的老麦3级暗影之力
 
     SetupEquippable(inst)
     --inst.components.equippable.dapperness = TUNING.CRAZINESS_MED
@@ -226,6 +227,7 @@ end
 
 local function fxfn()
     local inst = CreateEntity()
+
     inst.entity:AddNetwork()
     inst.entity:AddTransform()
     inst.entity:AddSoundEmitter()
@@ -242,7 +244,7 @@ local function fxfn()
     end
     inst.AnimState:Show("fx" .. math.random(1, 14))
 
-    inst:ListenForEvent("animover", function() inst:Remove() end)
+    inst:ListenForEvent("animover", inst.Remove)
 
     return inst
 end

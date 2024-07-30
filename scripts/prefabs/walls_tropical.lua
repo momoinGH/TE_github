@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local function OnIsPathFindingDirty(inst)
     if inst._ispathfinding:value() then
         if inst._pfpos == nil and inst:GetCurrentPlatform() == nil then
@@ -101,7 +99,7 @@ local function onload(inst, data)
             return coord
         end
 
-        local pt = Vector3(inst.Transform:GetWorldPosition())
+        local pt = inst:GetPosition()
         pt.x = normalize(pt.x)
         pt.z = normalize(pt.z)
         inst.Transform:SetPosition(pt.x, pt.y, pt.z)
@@ -188,8 +186,10 @@ function MakeWallType(data)
                 local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
                 local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
                 for k, guardas in pairs(eles) do
-                    if guardas.components.combat and guardas.components.combat.target == nil then guardas.components
-                            .combat:SetTarget(worker) end
+                    if guardas.components.combat and guardas.components.combat.target == nil then
+                        guardas.components
+                            .combat:SetTarget(worker)
+                    end
                 end
             end
         end
@@ -249,10 +249,14 @@ function MakeWallType(data)
 
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
-        if data.name == "enforcedlimestone" then inst.components.inventoryitem.atlasname =
-            "images/inventoryimages/volcanoinventory.xml" end
-        if data.name == "limestone" then inst.components.inventoryitem.atlasname =
-            "images/inventoryimages/volcanoinventory.xml" end
+        if data.name == "enforcedlimestone" then
+            inst.components.inventoryitem.atlasname =
+            "images/inventoryimages/volcanoinventory.xml"
+        end
+        if data.name == "limestone" then
+            inst.components.inventoryitem.atlasname =
+            "images/inventoryimages/volcanoinventory.xml"
+        end
 
         if not item_floats then
             inst.components.inventoryitem:SetSinks(true)

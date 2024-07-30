@@ -103,8 +103,7 @@ local function SpawnPredatorPrefab(inst)
         end
     end
 
-    local pt = Vector3(inst.Transform:GetWorldPosition())
-    local predators = TheSim:FindEntities(pt.x, pt.y, pt.z, 10, { "crocodog", "swordfish" }, nil)
+    local predators = TheSim:FindEntities(x, y, z, 10, { "crocodog", "swordfish" }, nil)
 
     if #predators > 2 then
         return nil

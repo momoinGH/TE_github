@@ -43,8 +43,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/taunt") end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/taunt")
+            end),
         },
 
         events =
@@ -74,12 +76,18 @@ local states =
 
         timeline =
         {
-            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/atk_2_fly") end),
-            TimeEvent(7 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/atk_2_VO") end),
-            TimeEvent(21 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/land") end),
+            TimeEvent(1 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/atk_2_fly")
+            end),
+            TimeEvent(7 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/atk_2_VO")
+            end),
+            TimeEvent(21 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/land")
+            end),
             TimeEvent(24 * FRAMES, function(inst) TheWorld.components.quaker_interior:ForceQuake("queenattack", inst) end),
         },
 
@@ -116,12 +124,18 @@ local states =
 
         timeline =
         {
-            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/atk_1_rumble") end),
-            TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/atk_1_pre") end),
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/atk_1") end),
+            TimeEvent(1 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/atk_1_rumble")
+            end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/atk_1_pre")
+            end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/atk_1")
+            end),
             TimeEvent(20 * FRAMES, function(inst) inst.SpawnWarrior(inst) end),
         },
     },
@@ -144,10 +158,14 @@ local states =
 
         timeline =
         {
-            TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/atk_3_breath_in") end),
-            TimeEvent(22 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/insane_LP", "insane") end),
+            TimeEvent(5 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/atk_3_breath_in")
+            end),
+            TimeEvent(22 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/insane_LP", "insane")
+            end),
             TimeEvent(25 * FRAMES, function(inst) TheWorld:PushEvent("antqueenbattle") end),
             TimeEvent(25 * FRAMES, function(inst)
                 local pt = inst:GetPosition()
@@ -201,7 +219,7 @@ local states =
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
             local player = GetClosestInstWithTag("player", inst, 100)
             TheWorld.components.quaker_interior.alvo = player
         end,
@@ -209,24 +227,42 @@ local states =
         timeline =
         {
 
-            TimeEvent(6 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/death") end),
-            TimeEvent(6 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .2) end),
-            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .3) end),
-            TimeEvent(14 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .4) end),
-            TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .5) end),
-            TimeEvent(22 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .6) end),
-            TimeEvent(26 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .7) end),
-            TimeEvent(28 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/explode") end),
-            TimeEvent(43 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/antqueen/land") end),
+            TimeEvent(6 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/death")
+            end),
+            TimeEvent(6 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .2)
+            end),
+            TimeEvent(10 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .3)
+            end),
+            TimeEvent(14 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .4)
+            end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .5)
+            end),
+            TimeEvent(22 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .6)
+            end),
+            TimeEvent(26 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/explode", nil, .7)
+            end),
+            TimeEvent(28 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/explode")
+            end),
+            TimeEvent(43 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/antqueen/land")
+            end),
             TimeEvent(1 * FRAMES, function(inst)
                 inst:DoTaskInTime(2, function()
                     local throne = SpawnPrefab("antqueen_throne")

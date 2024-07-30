@@ -53,7 +53,7 @@ local function fn(Sim)
     inst.entity:AddAnimState()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
     inst.entity:AddNetwork()
 
     inst.AnimState:SetBank("waterdrop")
@@ -80,7 +80,7 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("deployable")
     inst.components.deployable.CanDeploy = test_ground

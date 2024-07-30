@@ -69,8 +69,10 @@ local function fn(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })

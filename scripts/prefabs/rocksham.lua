@@ -164,7 +164,7 @@ SetSharedLootTable('antqueen_throne',
 
 local function triggerdarts(inst)
 	print("TRIGGER DARTS!")
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "dartthrower" }, { "INTERIOR_LIMBO" })
 	for i, ent in ipairs(ents) do
 		if ent.shoot then

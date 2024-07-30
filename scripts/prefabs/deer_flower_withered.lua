@@ -5,10 +5,6 @@ local assets =
 
 local names = { "wf1", "wf2", "wf3" }
 
-local function onpickedfn(inst, picker)
-    inst:Remove()
-end
-
 local function onsave(inst, data)
     data.anim = inst.animname
 end
@@ -47,7 +43,7 @@ local function fn()
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
     inst.components.pickable:SetUp("cutgrass", 10)
-    inst.components.pickable.onpickedfn = onpickedfn
+    inst.components.pickable.remove_when_picked = true
     inst.components.pickable.quickpick = true
     inst.components.pickable.wildfirestarter = true
 

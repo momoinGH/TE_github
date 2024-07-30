@@ -3,8 +3,11 @@ require("stategraphs/commonstates")
 local events =
 {
     EventHandler("attacked",
-        function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("hit") and not inst.sg:HasStateTag("attack") then
-                inst.sg:GoToState("hit") end end),
+        function(inst)
+            if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("hit") and not inst.sg:HasStateTag("attack") then
+                inst.sg:GoToState("hit")
+            end
+        end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     CommonHandlers.OnFreeze(),
     EventHandler("newcombattarget", function(inst, data)
@@ -26,10 +29,14 @@ local states =
 
         timeline =
         {
-            TimeEvent(9 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/breath_out") end),
-            TimeEvent(35 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/breath_in") end),
+            TimeEvent(9 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/breath_out")
+            end),
+            TimeEvent(35 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/breath_in")
+            end),
         },
 
         events =
@@ -47,8 +54,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/taunt") end),
+            TimeEvent(10 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/taunt")
+            end),
 
         },
         events =
@@ -88,8 +97,10 @@ local states =
                 end
             end),
 
-            TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/attack_pre") end),
+            TimeEvent(5 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/attack_pre")
+            end),
 
             TimeEvent(14 * FRAMES, function(inst)
                 if inst.components.combat.target then
@@ -126,15 +137,19 @@ local states =
         onenter = function(inst)
             inst.AnimState:PlayAnimation("death")
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
         timeline =
         {
-            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/death_pre", nil, .5) end),
-            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/death") end),
+            TimeEvent(1 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/death_pre", nil, .5)
+            end),
+            TimeEvent(10 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/venus_flytrap/4/death")
+            end),
         },
         events =
         {
@@ -172,16 +187,26 @@ local states =
 
         timeline =
         {
-            TimeEvent(5 * FRAMES, function(inst) inst.Transform:SetScale(inst.start_scale + (inst.inc_scale * 1),
-                    inst.start_scale + (inst.inc_scale * 1), inst.start_scale + (inst.inc_scale * 1)) end),
-            TimeEvent(10 * FRAMES, function(inst) inst.Transform:SetScale(inst.start_scale + (inst.inc_scale * 2),
-                    inst.start_scale + (inst.inc_scale * 2), inst.start_scale + (inst.inc_scale * 2)) end),
-            TimeEvent(15 * FRAMES, function(inst) inst.Transform:SetScale(inst.start_scale + (inst.inc_scale * 3),
-                    inst.start_scale + (inst.inc_scale * 3), inst.start_scale + (inst.inc_scale * 3)) end),
-            TimeEvent(20 * FRAMES, function(inst) inst.Transform:SetScale(inst.start_scale + (inst.inc_scale * 4),
-                    inst.start_scale + (inst.inc_scale * 4), inst.start_scale + (inst.inc_scale * 4)) end),
-            TimeEvent(25 * FRAMES, function(inst) inst.Transform:SetScale(inst.start_scale + (inst.inc_scale * 5),
-                    inst.start_scale + (inst.inc_scale * 5), inst.start_scale + (inst.inc_scale * 5)) end),
+            TimeEvent(5 * FRAMES, function(inst)
+                inst.Transform:SetScale(inst.start_scale + (inst.inc_scale * 1),
+                    inst.start_scale + (inst.inc_scale * 1), inst.start_scale + (inst.inc_scale * 1))
+            end),
+            TimeEvent(10 * FRAMES, function(inst)
+                inst.Transform:SetScale(inst.start_scale + (inst.inc_scale * 2),
+                    inst.start_scale + (inst.inc_scale * 2), inst.start_scale + (inst.inc_scale * 2))
+            end),
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.Transform:SetScale(inst.start_scale + (inst.inc_scale * 3),
+                    inst.start_scale + (inst.inc_scale * 3), inst.start_scale + (inst.inc_scale * 3))
+            end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.Transform:SetScale(inst.start_scale + (inst.inc_scale * 4),
+                    inst.start_scale + (inst.inc_scale * 4), inst.start_scale + (inst.inc_scale * 4))
+            end),
+            TimeEvent(25 * FRAMES, function(inst)
+                inst.Transform:SetScale(inst.start_scale + (inst.inc_scale * 5),
+                    inst.start_scale + (inst.inc_scale * 5), inst.start_scale + (inst.inc_scale * 5))
+            end),
         },
 
         events =

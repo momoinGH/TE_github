@@ -10,7 +10,7 @@ local function fn(Sim)
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.HEAVY, TUNING.WINDBLOWN_SCALE_MAX.HEAVY)
+
 
     inst.AnimState:SetBank("limestone")
     inst.AnimState:SetBuild("limestone")
@@ -37,7 +37,7 @@ local function fn(Sim)
     inst.components.repairer.healthrepairvalue = TUNING.REPAIR_CUTSTONE_HEALTH
 
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     return inst
 end

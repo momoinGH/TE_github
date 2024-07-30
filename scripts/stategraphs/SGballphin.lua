@@ -52,8 +52,10 @@ local states =
 
 		timeline =
 		{
-			TimeEvent(7 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve_DLC002/creatures/seacreature_movement/water_emerge_sml") end),
+			TimeEvent(7 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC002/creatures/seacreature_movement/water_emerge_sml")
+			end),
 		},
 
 		events =
@@ -92,10 +94,14 @@ local states =
 		end,
 		timeline =
 		{
-			TimeEvent(21 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml") end),
-			TimeEvent(48 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml") end),
+			TimeEvent(21 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml")
+			end),
+			TimeEvent(48 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml")
+			end),
 		},
 		events =
 		{
@@ -122,10 +128,14 @@ local states =
 
 		timeline =
 		{
-			TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml") end),
-			TimeEvent(9 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve_DLC002/creatures/balphin/emerge") end),
+			TimeEvent(1 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC002/creatures/seacreature_movement/water_swimbreach_sml")
+			end),
+			TimeEvent(9 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC002/creatures/balphin/emerge")
+			end),
 		},
 
 		events =
@@ -141,7 +151,7 @@ local states =
 		onenter = function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/balphin/death")
 			inst.AnimState:PlayAnimation("death")
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+			inst.components.lootdropper:DropLoot(inst:GetPosition())
 		end,
 
 	},

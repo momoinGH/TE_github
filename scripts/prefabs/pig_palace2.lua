@@ -1,6 +1,3 @@
-require "prefabutil"
-require "recipes"
-
 local assets =
 {
     --    Asset("ANIM", "anim/palace2.zip"),

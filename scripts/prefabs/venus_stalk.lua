@@ -42,7 +42,7 @@ local function flytrapstalk(inst)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("tradable")
     inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT

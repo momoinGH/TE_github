@@ -184,8 +184,10 @@ local function fn2(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })
@@ -254,8 +256,10 @@ local function fn3(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })
@@ -324,8 +328,10 @@ local function fn4(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })
@@ -394,8 +400,10 @@ local function fn5(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })
@@ -534,8 +542,10 @@ local function fn7(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })
@@ -604,8 +614,10 @@ local function fn8(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })
@@ -674,8 +686,10 @@ local function fn9(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })
@@ -744,8 +758,10 @@ local function fn10(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })

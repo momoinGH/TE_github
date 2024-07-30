@@ -78,7 +78,7 @@ local function onnear(inst)
 end
 
 local function changetococoon(inst, forced)
-	local pos = Vector3(inst.Transform:GetWorldPosition())
+	local pos = inst:GetPosition()
 	local bug = SpawnPrefab("glowfly_cocoon")
 	if bug then
 		bug.Transform:SetPosition(pos.x, pos.y, pos.z)
@@ -347,7 +347,7 @@ local function fn(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
 	inst.components.inventoryitem:SetOnPutInInventoryFn(OnPickedUp)
@@ -421,7 +421,7 @@ local function fn(Sim)
 end
 
 local function spawnRabidBeetle(inst)
-	local pos = Vector3(inst.Transform:GetWorldPosition())
+	local pos = inst:GetPosition()
 	local bug = SpawnPrefab("rabid_beetle")
 	if bug then
 		bug.Transform:SetPosition(pos.x, pos.y, pos.z)

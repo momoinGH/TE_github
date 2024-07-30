@@ -165,7 +165,7 @@ local states =
             inst.Physics:Stop()
             SetAbovePhysics(inst)
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
     },

@@ -96,7 +96,7 @@ local function workcallback(inst, worker, workleft)
 	inst.components.lootdropper:AddRandomLoot("purplegem", 0.001)
 
 	-- figure out which side to drop the loot
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local hispos = Vector3(worker.Transform:GetWorldPosition())
 
 	local he_right = ((hispos - pt):Dot(TheCamera:GetRightVec()) > 0)
@@ -141,7 +141,7 @@ local function onwake(inst, israining)
 		if math.random() < SAND_DEPLETE_CHANCE and inst.components.workable.workleft > 0 then
 			-- the rain made this sandhill shrink
 			inst.components.workable.workleft = inst.components.workable.workleft -
-			math.random(0, inst.components.workable.workleft)
+				math.random(0, inst.components.workable.workleft)
 			startregen(inst)
 		end
 	end

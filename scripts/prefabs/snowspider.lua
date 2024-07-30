@@ -488,7 +488,6 @@ local function create_common(bank, build, tag, common_init)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/novositens.xml"
-    inst.caminho = "images/inventoryimages/novositens.xml"
     inst.components.inventoryitem.nobounce = true
     inst.components.inventoryitem.canbepickedup = false
     inst.components.inventoryitem.canbepickedupalive = true

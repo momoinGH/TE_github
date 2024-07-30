@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
 }

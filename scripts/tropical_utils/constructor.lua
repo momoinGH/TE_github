@@ -562,6 +562,7 @@ end
 --             fueleduses = true, --是否可填充耐久
 --             fueledtype2 = "CHEMICAL", --耐久度类型
 --             fueltype = "BURNABLE", --燃料类型
+--             fuelvalue=180, --燃料值
 --             sewable = true, --是否可用缝纫包修复
 --             perishable = 960, --新鲜值，会转换为腐烂天数
 --             notes = { shadow_aligned = true }, --月亮或暗影阵营
@@ -580,6 +581,7 @@ end
 --             stewer = true, -- 可以烹饪
 --             activatable = "CALM", --激活类型，对于可交互的物品的交互操作，例如伯尼可以安抚，胡萝卜可以右键旋转，空芯树桩可以洗劫
 --             burnable = true, --是否可燃
+--             pickable=true, --是否可采集
 --         },
 --     }
 -- })

@@ -1,4 +1,4 @@
-require "prefabutil"
+
 
 local assets = { Asset("ANIM", "anim/ant_chest.zip"), Asset("ANIM", "anim/ant_chest_honey_build.zip"),
     Asset("ANIM", "anim/ant_chest_nectar_build.zip"), Asset("ANIM", "anim/ant_chest_pollen_build.zip"),
@@ -57,36 +57,9 @@ local function onhit(inst, worker)
     end
 end
 
-local function setworkable(inst)
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot(loot)
-
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(3)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-    inst.components.workable:SetOnWorkCallback(onhit)
-end
-
-local function setworkable1(inst)
-    inst:AddComponent("lootdropper")
-    -- inst.components.lootdropper:SetLoot(loot)
-
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(3)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-    inst.components.workable:SetOnWorkCallback(onhit)
-end
-
 local function onbuilt(inst)
-    --	inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("close")
-    inst.AnimState:PushAnimation("closed")
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/cork_chest/place")
-    -- if inst.prefab == "honeychest" then
-    -- 	inst.honeyWasLoaded = true
-    -- end
 end
 
 local function converttocollapsed(inst, droploot, burnt)
@@ -130,7 +103,7 @@ local function shouldcollapse(inst)
             local stackable = v.components.stackable
             if stackable then
                 overstacks = overstacks +
-                math.ceil(stackable:StackSize() / (stackable.originalmaxsize or stackable.maxsize))
+                    math.ceil(stackable:StackSize() / (stackable.originalmaxsize or stackable.maxsize))
                 if overstacks >= TUNING.COLLAPSED_CHEST_EXCESS_STACKS_THRESHOLD then
                     return true
                 end
@@ -244,7 +217,7 @@ local function RefreshAntChestBuild(inst)
     -- inst.MiniMapEntity:SetIcon(prefix .. (buildIdx > 0 and "_" .. buildName[buildIdx] or "") .. ".png") -- "antchest_honey.png" etc.
 end
 
-local function fn(Sim)
+local function Common(icon, bank, build, widget)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -254,10 +227,10 @@ local function fn(Sim)
     inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
 
-    inst.MiniMapEntity:SetIcon("ant_chest.png")
+    inst.MiniMapEntity:SetIcon(icon)
 
-    inst.AnimState:SetBank("ant_chest")
-    inst.AnimState:SetBuild("ant_chest")
+    inst.AnimState:SetBank(bank)
+    inst.AnimState:SetBuild(build)
     inst.AnimState:PlayAnimation("closed", true)
 
     inst:AddTag("structure")
@@ -266,20 +239,24 @@ local function fn(Sim)
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
-        inst.OnEntityReplicated = function(inst)
-            inst.replica.container:WidgetSetup("antchest")
-        end
         return inst
     end
 
     inst:AddComponent("inspectable")
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("antchest")
+    inst.components.container:WidgetSetup(widget)
     inst.components.container.onopenfn = onopen
     inst.components.container.onclosefn = onclose
 
-    setworkable(inst)
+    inst:AddComponent("lootdropper")
+    inst.components.lootdropper:SetLoot(loot)
+
+    inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+    inst.components.workable:SetWorkLeft(3)
+    inst.components.workable:SetOnFinishCallback(onhammered)
+    inst.components.workable:SetOnWorkCallback(onhit)
 
     inst:AddComponent("preserver")
     inst.components.preserver:SetPerishRateMultiplier(0)
@@ -288,84 +265,36 @@ local function fn(Sim)
 
     MakeSmallPropagator(inst)
 
-    inst:ListenForEvent("itemget", function()
-        RefreshAntChestBuild(inst)
-    end)
-    inst:ListenForEvent("itemlose", function()
-        RefreshAntChestBuild(inst)
-    end)
-    inst:DoTaskInTime(0.01, function()
-        LoadHoneyFirstTime(inst)
-    end)
+    inst:DoTaskInTime(0, LoadHoneyFirstTime)
 
-    inst.OnSave = onsave
-    inst.OnLoad = onload
-
-    return inst
-end
-
-local function fn1(Sim)
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
-    inst.entity:AddNetwork()
-    MakeInventoryPhysics(inst)
-
-    inst.MiniMapEntity:SetIcon("honey_chest.png")
-
-    inst.AnimState:SetBank("honey_chest")
-    inst.AnimState:SetBuild("honey_chest")
-    inst.AnimState:PlayAnimation("closed", true)
-
-    inst:AddTag("structure")
-    inst:AddTag("chest")
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        inst.OnEntityReplicated = function(inst)
-            inst.replica.container:WidgetSetup("antchest")
-        end
-        return inst
-    end
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("container")
-    inst.components.container:WidgetSetup("honeychest")
-    inst.components.container.onopenfn = onopen
-    inst.components.container.onclosefn = onclose
-
-    setworkable1(inst)
-
-    inst:AddComponent("preserver")
-    inst.components.preserver:SetPerishRateMultiplier(0)
-
+    inst:ListenForEvent("itemget", RefreshAntChestBuild)
+    inst:ListenForEvent("itemlose", RefreshAntChestBuild)
     inst:ListenForEvent("onbuilt", onbuilt)
 
-    local upgradeable = inst:AddComponent("upgradeable")
-    upgradeable.upgradetype = UPGRADETYPES.CHEST
-    upgradeable:SetOnUpgradeFn(OnUpgrade)
-
-    MakeSnowCovered(inst, .01)
-
-    MakeSmallPropagator(inst)
-
-    inst:ListenForEvent("itemget", function()
-        RefreshAntChestBuild(inst)
-    end)
-    inst:ListenForEvent("itemlose", function()
-        RefreshAntChestBuild(inst)
-    end)
-
     inst.OnSave = onsave
     inst.OnLoad = onload
 
     return inst
 end
 
-return Prefab("common/antchest", fn, assets), Prefab("common/honeychest", fn1, assets),
+local function fn()
+    return Common("ant_chest.png", "ant_chest", "ant_chest", "antchest")
+end
+
+local function fn1()
+    local inst = Common("honey_chest.png", "honey_chest", "honey_chest", "honeychest")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("upgradeable")
+    inst.components.upgradeable.upgradetype = UPGRADETYPES.CHEST
+    inst.components.upgradeable:SetOnUpgradeFn(OnUpgrade)
+
+    return inst
+end
+
+return Prefab("common/antchest", fn, assets),
+    Prefab("common/honeychest", fn1, assets),
     MakePlacer("common/honeychest_placer", "honey_chest", "honey_chest", "closed")

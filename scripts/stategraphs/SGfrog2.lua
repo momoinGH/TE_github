@@ -31,8 +31,12 @@ local events =
 {
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("doattack",
-        function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then inst.sg
-                    :GoToState("attack") end end),
+        function(inst)
+            if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then
+                inst.sg
+                    :GoToState("attack")
+            end
+        end),
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
     CommonHandlers.OnHop(),
@@ -293,7 +297,7 @@ local states =
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
     },

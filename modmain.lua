@@ -3,6 +3,7 @@ _G = GLOBAL
 local containers = GLOBAL.require "containers"
 IsServer, IsDedicated = TheNet:GetIsServer(), TheNet:IsDedicated()
 
+
 PrefabFiles =
 {
 	"sparkle_fx",
@@ -266,6 +267,193 @@ PrefabFiles =
 	"pollen_item",
 }
 
+Assets =
+{
+	Asset("ANIM", "anim/pigman_tribe.zip"), --图鉴wiki默认动画
+
+	--Asset("SOUNDPACKAGE", "sound/volcano.fev"),
+	--Asset("SOUND", "sound/volcano.fsb"),
+	--Asset("SOUND", "sound/boats.fsb"),
+	--Asset("SOUND", "sound/creatures.fsb"),
+	--Asset("SOUND", "sound/slot_machine.fsb"),
+	--Asset("SOUND", "sound/waves.fsb"),
+	--LOD SOUND FILE
+	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC002.fev"),
+	Asset("SOUNDPACKAGE", "sound/sw_character.fev"),
+	Asset("SOUND", "sound/dontstarve_shipwreckedSFX.fsb"),
+	Asset("SOUND", "sound/sw_character.fsb"),
+	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"),
+	Asset("SOUND", "sound/DLC003_sfx.fsb"),
+	Asset("IMAGE", "images/fog_cloud.tex"),
+	--Asset("SOUND", "sound/amb_stream_SW.fsb"),
+	--NEW SOUND FILE
+	--Asset("SOUNDPACKAGE", "sound/volcano_new.fev"),
+	--Asset("SOUND", "sound/volcano_new.fsb"),
+	--Asset("SOUNDPACKAGE", "sound/tropical.fev"),
+	--Asset("SOUND", "sound/tropical.fsb"),
+
+	Asset("IMAGE", "images/barco.tex"),
+	Asset("ATLAS", "images/barco.xml"),
+
+	Asset("ATLAS", "images/inventoryimages/volcanoinventory.xml"),
+	Asset("IMAGE", "images/inventoryimages/volcanoinventory.tex"),
+
+	Asset("ATLAS", "images/inventoryimages/novositens.xml"),
+	Asset("IMAGE", "images/inventoryimages/novositens.tex"),
+
+	Asset("ANIM", "anim/player_actions_paddle.zip"),
+	Asset("ANIM", "anim/player_actions_speargun.zip"),
+	Asset("ANIM", "anim/player_actions_tap.zip"),
+	Asset("ANIM", "anim/player_actions_panning.zip"),
+	Asset("ANIM", "anim/player_actions_hand_lens.zip"),
+	Asset("ANIM", "anim/player_mount_actions_speargun.zip"),
+	Asset("ANIM", "anim/walani_paddle.zip"),
+	Asset("ANIM", "anim/player_boat_death.zip"),
+	Asset("ANIM", "anim/player_sneeze.zip"),
+	Asset("ANIM", "anim/des_sail.zip"),
+	Asset("ANIM", "anim/player_actions_trawl.zip"),
+	Asset("ANIM", "anim/player_actions_machete.zip"),
+	Asset("ANIM", "anim/player_actions_shear.zip"),
+	Asset("ANIM", "anim/player_actions_cropdust.zip"),
+	Asset("ANIM", "anim/ripple_build.zip"),
+	Asset("ATLAS", "images/fx4te.xml"),
+	Asset("IMAGE", "images/fx4te.tex"),
+	Asset("ANIM", "anim/boat_health.zip"),
+	Asset("ANIM", "anim/player_actions_telescope.zip"),
+	Asset("ANIM", "anim/pig_house_old.zip"),
+
+	Asset("ANIM", "anim/parrot_pirate_intro.zip"),
+	Asset("ANIM", "anim/parrot_pirate.zip"),
+
+
+	Asset("ANIM", "anim/pig_house_sale.zip"),
+
+
+	Asset("ANIM", "anim/fish2.zip"),
+	Asset("ANIM", "anim/fish3.zip"),
+	Asset("ANIM", "anim/fish4.zip"),
+	Asset("ANIM", "anim/fish5.zip"),
+	Asset("ANIM", "anim/fish6.zip"),
+	Asset("ANIM", "anim/fish7.zip"),
+	Asset("ANIM", "anim/coi.zip"),
+	Asset("ANIM", "anim/ballphinocean.zip"),
+	Asset("ANIM", "anim/dogfishocean.zip"),
+	Asset("ANIM", "anim/goldfish.zip"),
+	Asset("ANIM", "anim/salmon.zip"),
+	Asset("ANIM", "anim/sharxocean.zip"),
+	Asset("ANIM", "anim/swordfishjocean.zip"),
+	Asset("ANIM", "anim/swordfishjocean2.zip"),
+	Asset("ANIM", "anim/mecfish.zip"),
+	Asset("ANIM", "anim/whaleblueocean.zip"),
+	Asset("ANIM", "anim/kingfisher_build.zip"),
+	Asset("ANIM", "anim/parrot_blue_build.zip"),
+	Asset("ANIM", "anim/toucan_hamlet_build.zip"),
+	Asset("ANIM", "anim/toucan_build.zip"),
+	Asset("ANIM", "anim/parrot_build.zip"),
+	Asset("ANIM", "anim/parrot_pirate_build.zip"),
+	Asset("ANIM", "anim/cormorant_build.zip"),
+	Asset("ANIM", "anim/seagull_build.zip"),
+	Asset("ANIM", "anim/quagmire_pigeon_build.zip"),
+	Asset("ANIM", "anim/skeletons.zip"),
+	Asset("ANIM", "anim/fish2.zip"),
+	Asset("ANIM", "anim/oceanfish_small.zip"),
+	Asset("ANIM", "anim/oceanfish_small_1.zip"),
+	Asset("ANIM", "anim/oceanfish_small_2.zip"),
+	Asset("ANIM", "anim/oceanfish_small_3.zip"),
+	Asset("ANIM", "anim/oceanfish_small_4.zip"),
+	Asset("ANIM", "anim/oceanfish_small_5.zip"),
+	Asset("ANIM", "anim/oceanfish_small_6.zip"),
+	Asset("ANIM", "anim/oceanfish_small_7.zip"),
+	Asset("ANIM", "anim/oceanfish_small_8.zip"),
+	Asset("ANIM", "anim/oceanfish_medium.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_1.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_2.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_3.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_4.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_5.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_6.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_7.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_8.zip"),
+	Asset("IMAGE", "levels/textures/outro.tex"),
+	Asset("IMAGE", "levels/textures/ground_noise_water_deep.tex"),
+
+	Asset("IMAGE", "images/inventoryimages/hamletinventory.tex"),
+	Asset("ATLAS", "images/inventoryimages/hamletinventory.xml"),
+
+	Asset("ATLAS", "map_icons/hamleticon.xml"),
+	Asset("IMAGE", "map_icons/hamleticon.tex"),
+	Asset("ATLAS", "map_icons/creepindedeepicon.xml"),
+	Asset("IMAGE", "map_icons/creepindedeepicon.tex"),
+	Asset("ANIM", "anim/butterflymuffin.zip"),
+	Asset("IMAGE", "images/tfwp_inventoryimgs.tex"),
+	Asset("ATLAS", "images/tfwp_inventoryimgs.xml"),
+	--Asset("SOUNDPACKAGE", "sound/Hamlet.fev"),
+	--Asset("SOUND", "sound/Hamlet.fsb"),
+
+
+	Asset("IMAGE", "images/names_wilbur.tex"),
+	Asset("ATLAS", "images/names_wilbur.xml"),
+	Asset("IMAGE", "images/names_woodlegs.tex"),
+	Asset("ATLAS", "images/names_woodlegs.xml"),
+	Asset("IMAGE", "images/names_walani.tex"),
+	Asset("ATLAS", "images/names_walani.xml"),
+
+
+	Asset("ATLAS", "images/tabs.xml"),
+	Asset("IMAGE", "images/tabs.tex"),
+	Asset("IMAGE", "images/turfs/turf01-9.tex"),
+	Asset("ATLAS", "images/turfs/turf01-9.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-10.tex"),
+	Asset("ATLAS", "images/turfs/turf01-10.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-11.tex"),
+	Asset("ATLAS", "images/turfs/turf01-11.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-12.tex"),
+	Asset("ATLAS", "images/turfs/turf01-12.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-13.tex"),
+	Asset("ATLAS", "images/turfs/turf01-13.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-14.tex"),
+	Asset("ATLAS", "images/turfs/turf01-14.xml"),
+	Asset("ANIM", "anim/vagner_over.zip"),
+	Asset("ANIM", "anim/leaves_canopy2.zip"),
+
+	Asset("ANIM", "anim/mushroom_tree_yelow.zip"),
+	Asset("ANIM", "anim/speedicon.zip"),
+
+	Asset("IMAGE", "images/cookbook/cookbook_sw.tex"),
+	Asset("ATLAS", "images/cookbook/cookbook_sw.xml"),
+	Asset("IMAGE", "images/cookbook/cookbook_ham.tex"),
+	Asset("ATLAS", "images/cookbook/cookbook_ham.xml"),
+	Asset("IMAGE", "images/inventoryimages/cookpotfoods_sw.tex"),
+	Asset("ATLAS", "images/inventoryimages/cookpotfoods_sw.xml"),
+	Asset("IMAGE", "images/inventoryimages/cookpotfoods_ham.tex"),
+	Asset("ATLAS", "images/inventoryimages/cookpotfoods_ham.xml"),
+
+}
+
+----------------------------------------------------------------------------------------------------
+
+modimport "modmain/tuning"
+modimport "modmain/language"
+modimport "modmain/containers"
+modimport "modmain/character"
+modimport "modmain/ui"
+modimport "modmain/prefabpost"
+modimport "modmain/playernet"
+modimport "modmain/actions"
+modimport "modmain/componentactions"
+modimport "modmain/sg"
+modimport "modmain/recipes"
+modimport "modmain/rpc"
+modimport "modmain/input"
+modimport "modmain/modwiki"
+
+----------------------------------------------------------------------------------------------------
+
 if GetModConfigData("whirlpools") then
 	table.insert(PrefabFiles, "whirlpool")
 end
@@ -521,7 +709,6 @@ table.insert(PrefabFiles, "spider_monkey_herd")
 table.insert(PrefabFiles, "spider_ape")
 table.insert(PrefabFiles, "spider_ape_tree")
 table.insert(PrefabFiles, "trapslug")
-table.insert(PrefabFiles, "antman2")
 table.insert(PrefabFiles, "fennel")
 table.insert(PrefabFiles, "pig_palace2")
 table.insert(PrefabFiles, "pig_palace2_interior")
@@ -619,33 +806,6 @@ table.insert(PrefabFiles, "whale")
 table.insert(PrefabFiles, "whale_carcass")
 table.insert(PrefabFiles, "knightboat")
 table.insert(PrefabFiles, "poisonmistparticle")
-
-GLOBAL.TUNING.tropical = {
-	wind                         = GetModConfigData("wind"),
-	hail                         = GetModConfigData("hail"),
-	hamworld                     = GetModConfigData("kindofworld"),
-	bramble                      = GetModConfigData("bramble"),
-	roc                          = GetModConfigData("roc"),
-	megarandomCompatibilityWater = GetModConfigData("megarandomCompatibilityWater"),
-	disableWater                 = GetModConfigData("Disable_Water"),
-	springflood                  = GetModConfigData("flood"),
-	sealnado                     = GetModConfigData("sealnado"),
-	waves                        = GetModConfigData("Waves"),
-	hamlet                       = GetModConfigData("Hamlet"),
-	shipwrecked                  = GetModConfigData("Shipwrecked"),
-	tropicalshards               = GetModConfigData("tropicalshards"),
-	removedark                   = GetModConfigData("removedark"),
-	aporkalypse                  = GetModConfigData("aporkalypse"),
-	multiplayerportal            = GetModConfigData("startlocation"),
-	greenmod                     = KnownModIndex:IsModEnabled("workshop-1418878027"),
-	kindofworld                  = GetModConfigData("kindofworld"),
-	volcaniceruption             = GetModConfigData("volcaniceruption"),
-	forge                        = GetModConfigData("forge"),
-	fog                          = GetModConfigData("fog"),
-	hayfever                     = GetModConfigData("hayfever"),
-	disembarkation               = GetModConfigData("automatic_disembarkation"),
-	bosslife                     = GetModConfigData("bosslife"),
-}
 
 table.insert(PrefabFiles, "deco_util")
 table.insert(PrefabFiles, "deco_util2")
@@ -831,7 +991,6 @@ if GetModConfigData("Hamlet") ~= 5 or GetModConfigData("startlocation") == 15 or
 	table.insert(PrefabFiles, "anthill_stalactite")
 	table.insert(PrefabFiles, "antchest")
 	table.insert(PrefabFiles, "corkchest")
-	table.insert(PrefabFiles, "antcombhome")
 	table.insert(PrefabFiles, "antcombhomecave")
 	table.insert(PrefabFiles, "giantgrub")
 	table.insert(PrefabFiles, "antqueen")
@@ -901,175 +1060,9 @@ if GetModConfigData("Hamlet") ~= 5 or GetModConfigData("startlocation") == 15 or
 	table.insert(PrefabFiles, "cloudpuff")
 end
 
-Assets =
-{
-	--Asset("SOUNDPACKAGE", "sound/volcano.fev"),
-	--Asset("SOUND", "sound/volcano.fsb"),
-	--Asset("SOUND", "sound/boats.fsb"),
-	--Asset("SOUND", "sound/creatures.fsb"),
-	--Asset("SOUND", "sound/slot_machine.fsb"),
-	--Asset("SOUND", "sound/waves.fsb"),
-	--LOD SOUND FILE
-	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC002.fev"),
-	Asset("SOUNDPACKAGE", "sound/sw_character.fev"),
-	Asset("SOUND", "sound/dontstarve_shipwreckedSFX.fsb"),
-	Asset("SOUND", "sound/sw_character.fsb"),
-	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"),
-	Asset("SOUND", "sound/DLC003_sfx.fsb"),
-	Asset("IMAGE", "images/fog_cloud.tex"),
-	--Asset("SOUND", "sound/amb_stream_SW.fsb"),
-	--NEW SOUND FILE
-	--Asset("SOUNDPACKAGE", "sound/volcano_new.fev"),
-	--Asset("SOUND", "sound/volcano_new.fsb"),
-	--Asset("SOUNDPACKAGE", "sound/tropical.fev"),
-	--Asset("SOUND", "sound/tropical.fsb"),
 
-	Asset("IMAGE", "images/barco.tex"),
-	Asset("ATLAS", "images/barco.xml"),
-
-	Asset("ATLAS", "images/inventoryimages/volcanoinventory.xml"),
-	Asset("IMAGE", "images/inventoryimages/volcanoinventory.tex"),
-
-	Asset("ATLAS", "images/inventoryimages/novositens.xml"),
-	Asset("IMAGE", "images/inventoryimages/novositens.tex"),
-
-	Asset("ANIM", "anim/player_actions_paddle.zip"),
-	Asset("ANIM", "anim/player_actions_speargun.zip"),
-	Asset("ANIM", "anim/player_actions_tap.zip"),
-	Asset("ANIM", "anim/player_actions_panning.zip"),
-	Asset("ANIM", "anim/player_actions_hand_lens.zip"),
-	Asset("ANIM", "anim/player_mount_actions_speargun.zip"),
-	Asset("ANIM", "anim/walani_paddle.zip"),
-	Asset("ANIM", "anim/player_boat_death.zip"),
-	Asset("ANIM", "anim/player_sneeze.zip"),
-	Asset("ANIM", "anim/des_sail.zip"),
-	Asset("ANIM", "anim/player_actions_trawl.zip"),
-	Asset("ANIM", "anim/player_actions_machete.zip"),
-	Asset("ANIM", "anim/player_actions_shear.zip"),
-	Asset("ANIM", "anim/player_actions_cropdust.zip"),
-	Asset("ANIM", "anim/ripple_build.zip"),
-	Asset("ATLAS", "images/fx4te.xml"),
-	Asset("IMAGE", "images/fx4te.tex"),
-	Asset("ANIM", "anim/boat_health.zip"),
-	Asset("ANIM", "anim/player_actions_telescope.zip"),
-	Asset("ANIM", "anim/pig_house_old.zip"),
-
-	Asset("ANIM", "anim/parrot_pirate_intro.zip"),
-	Asset("ANIM", "anim/parrot_pirate.zip"),
-
-
-	Asset("ANIM", "anim/pig_house_sale.zip"),
-
-
-	Asset("ANIM", "anim/fish2.zip"),
-	Asset("ANIM", "anim/fish3.zip"),
-	Asset("ANIM", "anim/fish4.zip"),
-	Asset("ANIM", "anim/fish5.zip"),
-	Asset("ANIM", "anim/fish6.zip"),
-	Asset("ANIM", "anim/fish7.zip"),
-	Asset("ANIM", "anim/coi.zip"),
-	Asset("ANIM", "anim/ballphinocean.zip"),
-	Asset("ANIM", "anim/dogfishocean.zip"),
-	Asset("ANIM", "anim/goldfish.zip"),
-	Asset("ANIM", "anim/salmon.zip"),
-	Asset("ANIM", "anim/sharxocean.zip"),
-	Asset("ANIM", "anim/swordfishjocean.zip"),
-	Asset("ANIM", "anim/swordfishjocean2.zip"),
-	Asset("ANIM", "anim/mecfish.zip"),
-	Asset("ANIM", "anim/whaleblueocean.zip"),
-	Asset("ANIM", "anim/kingfisher_build.zip"),
-	Asset("ANIM", "anim/parrot_blue_build.zip"),
-	Asset("ANIM", "anim/toucan_hamlet_build.zip"),
-	Asset("ANIM", "anim/toucan_build.zip"),
-	Asset("ANIM", "anim/parrot_build.zip"),
-	Asset("ANIM", "anim/parrot_pirate_build.zip"),
-	Asset("ANIM", "anim/cormorant_build.zip"),
-	Asset("ANIM", "anim/seagull_build.zip"),
-	Asset("ANIM", "anim/quagmire_pigeon_build.zip"),
-	Asset("ANIM", "anim/skeletons.zip"),
-	Asset("ANIM", "anim/fish2.zip"),
-	Asset("ANIM", "anim/oceanfish_small.zip"),
-	Asset("ANIM", "anim/oceanfish_small_1.zip"),
-	Asset("ANIM", "anim/oceanfish_small_2.zip"),
-	Asset("ANIM", "anim/oceanfish_small_3.zip"),
-	Asset("ANIM", "anim/oceanfish_small_4.zip"),
-	Asset("ANIM", "anim/oceanfish_small_5.zip"),
-	Asset("ANIM", "anim/oceanfish_small_6.zip"),
-	Asset("ANIM", "anim/oceanfish_small_7.zip"),
-	Asset("ANIM", "anim/oceanfish_small_8.zip"),
-	Asset("ANIM", "anim/oceanfish_medium.zip"),
-	Asset("ANIM", "anim/oceanfish_medium_1.zip"),
-	Asset("ANIM", "anim/oceanfish_medium_2.zip"),
-	Asset("ANIM", "anim/oceanfish_medium_3.zip"),
-	Asset("ANIM", "anim/oceanfish_medium_4.zip"),
-	Asset("ANIM", "anim/oceanfish_medium_5.zip"),
-	Asset("ANIM", "anim/oceanfish_medium_6.zip"),
-	Asset("ANIM", "anim/oceanfish_medium_7.zip"),
-	Asset("ANIM", "anim/oceanfish_medium_8.zip"),
-	Asset("IMAGE", "levels/textures/outro.tex"),
-	Asset("IMAGE", "levels/textures/ground_noise_water_deep.tex"),
-
-	Asset("IMAGE", "images/inventoryimages/hamletinventory.tex"),
-	Asset("ATLAS", "images/inventoryimages/hamletinventory.xml"),
-
-	Asset("ATLAS", "map_icons/hamleticon.xml"),
-	Asset("IMAGE", "map_icons/hamleticon.tex"),
-	Asset("ATLAS", "map_icons/creepindedeepicon.xml"),
-	Asset("IMAGE", "map_icons/creepindedeepicon.tex"),
-	Asset("ANIM", "anim/butterflymuffin.zip"),
-	Asset("IMAGE", "images/tfwp_inventoryimgs.tex"),
-	Asset("ATLAS", "images/tfwp_inventoryimgs.xml"),
-	--Asset("SOUNDPACKAGE", "sound/Hamlet.fev"),
-	--Asset("SOUND", "sound/Hamlet.fsb"),
-
-
-	Asset("IMAGE", "images/names_wilbur.tex"),
-	Asset("ATLAS", "images/names_wilbur.xml"),
-	Asset("IMAGE", "images/names_woodlegs.tex"),
-	Asset("ATLAS", "images/names_woodlegs.xml"),
-	Asset("IMAGE", "images/names_walani.tex"),
-	Asset("ATLAS", "images/names_walani.xml"),
-
-
-	Asset("ATLAS", "images/tabs.xml"),
-	Asset("IMAGE", "images/tabs.tex"),
-	Asset("IMAGE", "images/turfs/turf01-9.tex"),
-	Asset("ATLAS", "images/turfs/turf01-9.xml"),
-
-	Asset("IMAGE", "images/turfs/turf01-10.tex"),
-	Asset("ATLAS", "images/turfs/turf01-10.xml"),
-
-	Asset("IMAGE", "images/turfs/turf01-11.tex"),
-	Asset("ATLAS", "images/turfs/turf01-11.xml"),
-
-	Asset("IMAGE", "images/turfs/turf01-12.tex"),
-	Asset("ATLAS", "images/turfs/turf01-12.xml"),
-
-	Asset("IMAGE", "images/turfs/turf01-13.tex"),
-	Asset("ATLAS", "images/turfs/turf01-13.xml"),
-
-	Asset("IMAGE", "images/turfs/turf01-14.tex"),
-	Asset("ATLAS", "images/turfs/turf01-14.xml"),
-	Asset("ANIM", "anim/vagner_over.zip"),
-	Asset("ANIM", "anim/leaves_canopy2.zip"),
-
-	Asset("ANIM", "anim/mushroom_tree_yelow.zip"),
-	Asset("ANIM", "anim/speedicon.zip"),
-
-	Asset("IMAGE", "images/cookbook/cookbook_sw.tex"),
-	Asset("ATLAS", "images/cookbook/cookbook_sw.xml"),
-	Asset("IMAGE", "images/cookbook/cookbook_ham.tex"),
-	Asset("ATLAS", "images/cookbook/cookbook_ham.xml"),
-	Asset("IMAGE", "images/inventoryimages/cookpotfoods_sw.tex"),
-	Asset("ATLAS", "images/inventoryimages/cookpotfoods_sw.xml"),
-	Asset("IMAGE", "images/inventoryimages/cookpotfoods_ham.tex"),
-	Asset("ATLAS", "images/inventoryimages/cookpotfoods_ham.xml"),
-
-}
 
 AddMinimapAtlas("map_icons/creepindedeepicon.xml")
-
-
 
 if GetModConfigData("gorgeisland") and GetModConfigData("kindofworld") == 15 or GetModConfigData("enableallprefabs") == true then
 	table.insert(PrefabFiles, "quagmire_mealingstone")
@@ -1108,21 +1101,7 @@ if GetModConfigData("gorgeisland") and GetModConfigData("kindofworld") == 15 or 
 end
 
 
-----------------------------------------------------------------------------------------------------
 
-modimport "modmain/tuning"
-modimport "modmain/language"
-modimport "modmain/character"
-modimport "modmain/ui"
-modimport "modmain/prefabpost"
-modimport "modmain/playernet"
-modimport "modmain/actions"
-modimport "modmain/componentactions"
-modimport "modmain/sg"
-modimport "modmain/recipes"
-modimport "modmain/rpc"
-modimport "modmain/input"
-modimport "modmain/modwiki"
 
 
 
@@ -1529,6 +1508,9 @@ GLOBAL.FUELTYPE.REPARODEBARCO = "REPARODEBARCO"
 GLOBAL.FUELTYPE.LIVINGARTIFACT = "LIVINGARTIFACT"
 GLOBAL.FUELTYPE.ANCIENT_REMNANT = "ANCIENT_REMNANT" -- Runar: 在modmain太炸裂了
 GLOBAL.MATERIALS.SANDBAG = "sandbag"
+
+-- TODO 定义新的FUELTYPE需要给图鉴一个图片
+-- FUELTYPE_SUBICON_LOOKUP
 
 GLOBAL.TOOLACTIONS["HACK"] = true
 GLOBAL.TOOLACTIONS["SHEAR"] = true
@@ -3085,8 +3067,6 @@ params["corkboat"] = rowboatslot
 params["smelter"] = smelter
 params["corkchest"] = corkchest
 params["thatchpack"] = thatchpack
-
-modimport("main/containers")
 
 function params.smelter.itemtestfn(container, item, slot)
 	if slot == 1 and (item:HasTag("iron") or item.prefab == "iron" or item.prefab == "goldnugget" or item.prefab == "gold_dust" or item.prefab == "flint" or item.prefab == "nitre" or item.prefab == "dubloon" or item.prefab == "obsidian" or item.prefab == "magnifying_glass" or item.prefab == "goldpan" or item.prefab == "ballpein_hammer" or item.prefab == "shears" or item.prefab == "candlehat") then

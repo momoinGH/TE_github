@@ -116,8 +116,8 @@ local function KeepTarget(inst, target)
     local home = inst.components.homeseeker and inst.components.homeseeker.home
 
     if home then
-        return distsq(Vector3(home.Transform:GetWorldPosition()), Vector3(inst.Transform:GetWorldPosition())) <
-        MAX_CHASEAWAY_DIST * MAX_CHASEAWAY_DIST
+        return distsq(Vector3(home.Transform:GetWorldPosition()), inst:GetPosition()) <
+            MAX_CHASEAWAY_DIST * MAX_CHASEAWAY_DIST
     else
         return true
     end
@@ -134,7 +134,7 @@ local function IsInCharacterList(name)
 end
 
 local function OnMonkeyDeath(inst, data)
-    if data.inst:HasTag("monkey") then  -- A monkey died!
+    if data.inst:HasTag("monkey") then        -- A monkey died!
         if IsInCharacterList(data.cause) then -- And it was the player! Run home!
             -- Drop all items, go home
             inst:DoTaskInTime(math.random(), function()

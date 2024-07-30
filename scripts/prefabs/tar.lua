@@ -114,7 +114,7 @@ local function fn(Sim)
     inst:AddTag("aquatic")
 
 
-    --MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst.AnimState:SetBank("tar_trap")
     inst.AnimState:SetBuild("tar_trap")
@@ -184,7 +184,7 @@ local function itemfn(Sim)
     inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst:AddTag("tar")
     inst:AddTag("TAR_fueled")
@@ -219,7 +219,7 @@ local function itemfn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("deployable")
     inst.components.deployable.ondeploy = ondeploy

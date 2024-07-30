@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
     Asset("ANIM", "anim/ruins_light_beam.zip"),
@@ -36,7 +34,7 @@ local function trigger(inst)
         range = 4
     end
 
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, range, { "dartthrower" }, { "INTERIOR_LIMBO" })
     for i, ent in ipairs(ents) do
         if ent.shoot then

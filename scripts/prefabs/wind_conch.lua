@@ -55,7 +55,7 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst.hornbuild = "swap_wind_conch"
     inst.hornsymbol = "swap_horn"

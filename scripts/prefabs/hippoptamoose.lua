@@ -48,7 +48,7 @@ local SHARE_TARGET_DIST = 40
 
 local function ShouldSleep(inst)
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition())
+    local myPos = inst:GetPosition()
     if not (homePos and distsq(homePos, myPos) <= SLEEP_DIST_FROMHOME * SLEEP_DIST_FROMHOME)
         or (inst.components.combat and inst.components.combat.target)
         or (inst.components.burnable and inst.components.burnable:IsBurning())
@@ -61,7 +61,7 @@ end
 
 local function ShouldWake(inst)
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition())
+    local myPos = inst:GetPosition()
     if (homePos and distsq(homePos, myPos) > SLEEP_DIST_FROMHOME * SLEEP_DIST_FROMHOME)
         or (inst.components.combat and inst.components.combat.target)
         or (inst.components.burnable and inst.components.burnable:IsBurning())
@@ -92,8 +92,8 @@ local function KeepTarget(inst, target)
         and inst.components.herdmember:GetHerd().components.mood:IsInMood() then
         local herd = inst.components.herdmember and inst.components.herdmember:GetHerd()
         if herd and herd.components.mood and herd.components.mood:IsInMood() then
-            return distsq(Vector3(herd.Transform:GetWorldPosition()), Vector3(inst.Transform:GetWorldPosition())) <
-            TUNING.BEEFALO_CHASE_DIST * TUNING.BEEFALO_CHASE_DIST
+            return distsq(Vector3(herd.Transform:GetWorldPosition()), inst:GetPosition()) <
+                TUNING.BEEFALO_CHASE_DIST * TUNING.BEEFALO_CHASE_DIST
         end
     end
     return true
@@ -307,8 +307,10 @@ local function MakeMoose(nightmare)
     inst:SetStateGraph("SGhippopotamoose")
 
     inst:DoTaskInTime(2 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     MakeLargeBurnableCharacter(inst, "swap_fire")
     MakeMediumFreezableCharacter(inst, "spring")

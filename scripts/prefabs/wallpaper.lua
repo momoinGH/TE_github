@@ -358,7 +358,7 @@ local function fn(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_wall_checkered_metal"
 	inst.OnBuilt = function(inst, builder) paintwall(inst) end
@@ -400,7 +400,7 @@ local function fn1(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_wall_circles"
 	inst.OnBuilt = function(inst, builder) paintwall(inst) end
@@ -442,7 +442,7 @@ local function fn2(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_wall_marble"
 	inst.OnBuilt = function(inst, builder) paintwall(inst) end
@@ -484,7 +484,7 @@ local function fn3(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_wall_sunflower"
 	inst.OnBuilt = function(inst, builder) paintwall(inst) end
@@ -526,7 +526,7 @@ local function fn4(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_wall_woodwall"
 	inst.OnBuilt = function(inst, builder) paintwall(inst) end
@@ -568,7 +568,7 @@ local function fn5(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "wall_mayorsoffice_whispy"
 	inst.OnBuilt = function(inst, builder) paintwall(inst) end
@@ -610,7 +610,7 @@ local function fn5a(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_wall_plain_rog"
 	inst.OnBuilt = function(inst, builder) paintwall(inst) end
@@ -652,7 +652,7 @@ local function fn5b(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_wall_plain_rog"
 	inst.OnBuilt = function(inst, builder) paintwall(inst) end
@@ -694,7 +694,7 @@ local function fn6(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "harlequin_panel"
 	inst.OnBuilt = function(inst, builder) paintwall2(inst) end
@@ -736,7 +736,7 @@ local function fn7(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_wall_fullwall_moulding"
 	inst.OnBuilt = function(inst, builder) paintwall2(inst) end
@@ -778,7 +778,7 @@ local function fn8(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_wall_floraltrim2"
 	inst.OnBuilt = function(inst, builder) paintwall2(inst) end
@@ -820,7 +820,7 @@ local function fn9(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_wall_upholstered"
 	inst.OnBuilt = function(inst, builder) paintwall2(inst) end
@@ -862,7 +862,7 @@ local function fn10(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "floor_cityhall"
 	inst.OnBuilt = function(inst, builder) paintfloor(inst) end
@@ -904,7 +904,7 @@ local function fn11(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "noise_woodfloor"
 	inst.OnBuilt = function(inst, builder) paintfloor(inst) end
@@ -946,7 +946,7 @@ local function fn12(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_floor_checker"
 	inst.OnBuilt = function(inst, builder) paintfloor(inst) end
@@ -988,7 +988,7 @@ local function fn13(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_floor_herringbone"
 	inst.OnBuilt = function(inst, builder) paintfloor(inst) end
@@ -1030,7 +1030,7 @@ local function fn14(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_floor_hexagon"
 	inst.OnBuilt = function(inst, builder) paintfloor(inst) end
@@ -1072,7 +1072,7 @@ local function fn15(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_floor_octagon"
 	inst.OnBuilt = function(inst, builder) paintfloor(inst) end
@@ -1114,7 +1114,7 @@ local function fn16(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_floor_sheetmetal"
 	inst.OnBuilt = function(inst, builder) paintfloor(inst) end
@@ -1156,7 +1156,7 @@ local function fn17(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_floor_woodmetal"
 	inst.OnBuilt = function(inst, builder) paintfloor(inst) end
@@ -1198,7 +1198,7 @@ local function fn18(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_floor_hoof_curvy"
 	inst.OnBuilt = function(inst, builder) paintfloor(inst) end
@@ -1240,7 +1240,7 @@ local function fn19(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
 	inst.textura = "shop_floor_woodpaneling2"
 	inst.OnBuilt = function(inst, builder) paintfloor(inst) end

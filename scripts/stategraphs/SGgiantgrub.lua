@@ -76,8 +76,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(16 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/giant_grub/emerge") end),
+            TimeEvent(16 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/giant_grub/emerge")
+            end),
         },
 
     },
@@ -104,10 +106,16 @@ local states =
         timeline =
         {
 
-            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/giant_grub/jump") end),
-            TimeEvent(22 * FRAMES, function(inst) if not inst:HasTag("giantsnow") then inst.components.groundpounder
-                        :GroundPound() end end),
+            TimeEvent(1 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/giant_grub/jump")
+            end),
+            TimeEvent(22 * FRAMES, function(inst)
+                if not inst:HasTag("giantsnow") then
+                    inst.components.groundpounder
+                        :GroundPound()
+                end
+            end),
 
             TimeEvent(20 * FRAMES, function(inst)
                 if inst.components.burnable:IsBurning() then
@@ -116,14 +124,22 @@ local states =
                 inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/submerge")
             end),
 
-            TimeEvent(33 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
-            TimeEvent(39 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
-            TimeEvent(49 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
-            TimeEvent(54 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
+            TimeEvent(33 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/giant_grub/dig")
+            end),
+            TimeEvent(39 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/giant_grub/dig")
+            end),
+            TimeEvent(49 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/giant_grub/dig")
+            end),
+            TimeEvent(54 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/giant_grub/dig")
+            end),
         },
     },
 
@@ -223,8 +239,10 @@ local states =
         {
             TimeEvent(4 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
             -- TODO: Put in a custom sound for the GIANT GRUB attack later.
-            TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/giant_grub/attack") end),
+            TimeEvent(2 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/giant_grub/attack")
+            end),
         },
 
         events =
@@ -300,10 +318,14 @@ local states =
         timeline =
         {
 
-            TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/giant_grub/sleep_in") end),
-            TimeEvent(37 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/giant_grub/sleep_in") end),
+            TimeEvent(11 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/giant_grub/sleep_in")
+            end),
+            TimeEvent(37 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/giant_grub/sleep_in")
+            end),
 
             --TimeEvent(27*FRAMES, function(inst)
             -- if not inst.SoundEmitter:PlayingSound("sleep") then
@@ -351,13 +373,15 @@ local states =
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
         timeline =
         {
-            TimeEvent(3 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/giant_grub/death") end),
+            TimeEvent(3 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/giant_grub/death")
+            end),
         }
 
     },

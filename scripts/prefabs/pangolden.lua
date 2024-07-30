@@ -44,8 +44,8 @@ local function Retarget(inst)
 end
 
 local function KeepTarget(inst, target)
-    return distsq(Vector3(target.Transform:GetWorldPosition()), Vector3(inst.Transform:GetWorldPosition())) <
-    PANGOLDEN_CHASE_DIST * PANGOLDEN_CHASE_DIST
+    return distsq(Vector3(target.Transform:GetWorldPosition()), inst:GetPosition()) <
+        PANGOLDEN_CHASE_DIST * PANGOLDEN_CHASE_DIST
 end
 
 local function OnNewTarget(inst, data)

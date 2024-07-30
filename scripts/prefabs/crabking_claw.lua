@@ -56,7 +56,7 @@ local function clamp(inst)
     if inst.boat and inst.boat.components.health and not inst.boat.components.health:IsDead() then
         inst.boat.components.health:DoDelta(-TUNING.CRABKING_CLAW_BOATDAMAGE)
         ShakeAllCameras(CAMERASHAKE.VERTICAL, 0.3, 0.03, 0.5, inst.boat, inst.boat:GetPhysicsRadius(4))
-        local pos = Vector3(inst.Transform:GetWorldPosition())
+        local pos = inst:GetPosition()
         local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 3, nil, CLAMPDAMAGE_CANT_TAGS)
 
         for i, v in pairs(ents) do

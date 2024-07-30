@@ -8,11 +8,6 @@ local prefabs =
     "asparagus",
 }
 
-local function onpickedfn(inst)
-    inst:Remove()
-end
-
-
 local function fn(Sim)
     --Asparagus you eat is defined in veggies.lua
     local inst = CreateEntity()
@@ -41,7 +36,7 @@ local function fn(Sim)
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
     inst.components.pickable:SetUp("asparagus", 10)
-    inst.components.pickable.onpickedfn = onpickedfn
+    inst.components.pickable.remove_when_picked = true
 
     inst.components.pickable.quickpick = true
 

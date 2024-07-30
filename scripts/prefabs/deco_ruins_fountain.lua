@@ -11,9 +11,9 @@ local prefabs =
 local function ShouldAcceptItem(inst, item)
     if not inst:HasTag("vortex") then
         local can_accept = item.components.currency or item.prefab == "goldnugget" or item.prefab == "dubloon" or
-        item.prefab == "oinc" or item.prefab == "oinc10" or
-        item.prefab ==
-        "oinc100"                                                                                                                                                                              --and (Prefabs[seed_name] or item.prefab == "seeds" or item.components.edible.foodtype == "MEAT")
+            item.prefab == "oinc" or item.prefab == "oinc10" or
+            item.prefab ==
+            "oinc100" --and (Prefabs[seed_name] or item.prefab == "seeds" or item.components.edible.foodtype == "MEAT")
 
         return can_accept
     else
@@ -93,7 +93,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
                 inst.SoundEmitter:PlaySound("turnoftides/common/together/water/splash/small")
                 for k = 1, gems do
                     local nug = SpawnPrefab("purplegem")
-                    local pt = Vector3(inst.Transform:GetWorldPosition()) + Vector3(0, 4.5, 0)
+                    local pt = inst:GetPosition() + Vector3(0, 4.5, 0)
 
                     nug.Transform:SetPosition(pt:Get())
                     local down = TheCamera:GetDownVec()

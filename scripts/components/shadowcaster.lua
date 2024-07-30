@@ -10,7 +10,7 @@ function unshadow(guid, data)
 	end
 end
 
-function shadow(guid)
+function inst.DynamicShadow(guid)
 	local inst = Ents[guid]
 
 	if inst and inst:HasTag("player") then
@@ -61,7 +61,7 @@ function Shadowcaster:OnUpdate(dt)
 
 	for i, ent in ipairs(ents) do
 		if not self.effected[ent.GUID] then
-			local r, g, b, a = shadow(ent.GUID)
+			local r, g, b, a = inst.DynamicShadow(ent.GUID)
 			self.effected[ent.GUID] = { shadowed = true, r = r, g = g, b = b, a = a }
 		end
 	end

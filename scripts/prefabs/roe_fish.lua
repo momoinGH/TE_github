@@ -439,7 +439,7 @@ local function MakeFish(name, has_seeds)
 		inst:AddComponent("inspectable")
 		inst:AddComponent("inventoryitem")
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 		inst.AnimState:PlayAnimation("idle")
 		inst.components.edible.healthvalue = TUNING.HEALING_TINY / 2
@@ -572,7 +572,7 @@ local function MakeFish(name, has_seeds)
 		inst:AddComponent("inspectable")
 		inst:AddComponent("inventoryitem")
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 		---------------------
 
@@ -645,7 +645,7 @@ local function MakeFish(name, has_seeds)
 		inst:AddComponent("inspectable")
 		inst:AddComponent("inventoryitem")
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 		--inst.components.inventoryitem:ChangeImageName("fishtropical_cooked")
 
 		inst:AddComponent("tradable")

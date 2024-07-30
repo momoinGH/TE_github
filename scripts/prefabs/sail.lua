@@ -225,10 +225,10 @@ local function sail_fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
     inst.components.fueled:SetDepletedFn(sail_perish)
     inst.components.fueled:InitializeFuelLevel(SAIL_PERISH_TIME)
 
@@ -270,10 +270,10 @@ local function clothsail_fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
     inst.components.fueled:SetDepletedFn(sail_perish)
     inst.components.fueled:InitializeFuelLevel(CLOTH_SAIL_PERISH_TIME)
 
@@ -315,10 +315,10 @@ local function snakeskinsail_fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
     inst.components.fueled:SetDepletedFn(sail_perish)
     inst.components.fueled:InitializeFuelLevel(SNAKESKIN_SAIL_PERISH_TIME)
 
@@ -360,10 +360,10 @@ local function feathersail_fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
     inst.components.fueled:SetDepletedFn(sail_perish)
     inst.components.fueled:InitializeFuelLevel(FEATHER_SAIL_PERISH_TIME)
 
@@ -406,7 +406,7 @@ local function ironwind_fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("fueled")
     inst.components.fueled:SetDepletedFn(sail_perish)
@@ -453,7 +453,7 @@ local function woodlegssail_fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeSmallPropagator(inst)
@@ -493,10 +493,10 @@ local function albatros_fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
     inst.components.fueled:SetDepletedFn(sail_perish)
     inst.components.fueled:InitializeFuelLevel(CLOTH_SAIL_PERISH_TIME)
 

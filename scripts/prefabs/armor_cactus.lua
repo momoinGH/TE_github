@@ -3,14 +3,13 @@ local assets =
 	Asset("ANIM", "anim/armor_cactus.zip"),
 }
 
-local ARMORCACTUS = 450
-local ARMORCACTUS_ABSORPTION = .8
 local ARMORCACTUS_DMG = 34 / 2
 
 local function OnBlocked(owner, data)
 	if (data.weapon == nil or (not data.weapon:HasTag("projectile") and data.weapon.projectile == nil))
 		and data.attacker and data.attacker.components.combat and data.stimuli ~= "thorns" and not data.attacker:HasTag("thorny")
-		and (data.attacker.components.combat == nil or (data.attacker.components.combat.defaultdamage > 0)) then
+		and (data.attacker.components.combat == nil or (data.attacker.components.combat.defaultdamage > 0))
+	then
 		data.attacker.components.combat:GetAttacked(owner, ARMORCACTUS_DMG, nil, "thorns")
 		if owner.SoundEmitter ~= nil then
 			owner.SoundEmitter:PlaySound("dontstarve_DLC002/common/armour/cactus")
@@ -38,13 +37,13 @@ end
 
 local function fn()
 	local inst = CreateEntity()
-	inst.entity:AddNetwork()
 
 	inst.entity:AddTransform()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddAnimState()
+	inst.entity:AddNetwork()
+
 	MakeInventoryPhysics(inst)
-	--	MakeInventoryFloatable(inst, "idle_water", "anim")
 
 	inst.AnimState:SetBank("armor_cactus")
 	inst.AnimState:SetBuild("armor_cactus")
@@ -61,24 +60,22 @@ local function fn()
 	end
 
 	inst:AddComponent("inspectable")
+
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
 
 	inst:AddComponent("armor")
-	inst.components.armor:InitCondition(ARMORCACTUS, ARMORCACTUS_ABSORPTION)
+	inst.components.armor:InitCondition(TUNING.ARMORCACTUS, TUNING.ARMORCACTUS_ABSORPTION)
 
 	inst:AddComponent("equippable")
 	inst.components.equippable.equipslot = EQUIPSLOTS.BODY
 	-- inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED
-
 	inst.components.equippable:SetOnEquip(onequip)
 	inst.components.equippable:SetOnUnequip(onunequip)
 
 	MakeHauntableLaunch(inst)
 
-	inst._onblocked = function(owner, data) OnBlocked(owner, data) end
-
+	inst._onblocked = OnBlocked
 
 	return inst
 end

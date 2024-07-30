@@ -1,3 +1,30 @@
+TUNING.tropical = {
+    wind                         = GetModConfigData("wind"),
+    hail                         = GetModConfigData("hail"),
+    hamworld                     = GetModConfigData("kindofworld"),
+    bramble                      = GetModConfigData("bramble"),
+    roc                          = GetModConfigData("roc"),
+    megarandomCompatibilityWater = GetModConfigData("megarandomCompatibilityWater"),
+    disableWater                 = GetModConfigData("Disable_Water"),
+    springflood                  = GetModConfigData("flood"),
+    sealnado                     = GetModConfigData("sealnado"),
+    waves                        = GetModConfigData("Waves"),
+    hamlet                       = GetModConfigData("Hamlet"),
+    shipwrecked                  = GetModConfigData("Shipwrecked"),
+    tropicalshards               = GetModConfigData("tropicalshards"),
+    removedark                   = GetModConfigData("removedark"),
+    aporkalypse                  = GetModConfigData("aporkalypse"),
+    multiplayerportal            = GetModConfigData("startlocation"),
+    greenmod                     = KnownModIndex:IsModEnabled("workshop-1418878027"),
+    kindofworld                  = GetModConfigData("kindofworld"),
+    volcaniceruption             = GetModConfigData("volcaniceruption"),
+    forge                        = GetModConfigData("forge"),
+    fog                          = GetModConfigData("fog"),
+    hayfever                     = GetModConfigData("hayfever"),
+    disembarkation               = GetModConfigData("automatic_disembarkation"),
+    bosslife                     = GetModConfigData("bosslife"),
+}
+
 TUNING.TFWP_SPEAR_GUNG =
 {
     USES = 200,
@@ -207,3 +234,44 @@ TUNING.ADULT_FLYTRAP_DAMAGE = 30
 TUNING.ADULT_FLYTRAP_ATTACK_PERIOD = 5
 TUNING.ADULT_FLYTRAP_ATTACK_DIST = 4
 TUNING.ADULT_FLYTRAP_STOPATTACK_DIST = 6
+TUNING.ADULT_FLYTRAP_GROW_TIME = 480 * 2
+
+TUNING.ANCIENT_HERALD_HEALTH = 8000 * TUNING.tropical.bosslife
+TUNING.ANCIENT_HERALD_DAMAGE = 50
+
+TUNING.ANCIENT_HULK_HEALTH = 8000 * TUNING.tropical.bosslife
+TUNING.ANCIENT_HULK_DAMAGE = 200
+TUNING.ANCIENT_HULK_MINE_DAMAGE = 100
+TUNING.ANCIENT_HULK_MELEE_RANGE = 5.5
+TUNING.ANCIENT_HULK_ATTACK_RANGE = 5.5
+
+TUNING.ANTQUEEN_HEALTH = 16000 * TUNING.tropical.bosslife
+
+TUNING.ARMORCACTUS = 450
+TUNING.ARMORCACTUS_ABSORPTION = .8
+
+TUNING.ARMORLIMESTONE = 150 * 5.5
+TUNING.ARMORLIMESTONE_ABSORPTION = .70
+TUNING.ARMORLIMESTONE_SLOW = 0.90
+
+TUNING.ARMORMETAL = 150 * 8
+TUNING.ARMORMETAL_ABSORPTION = .85
+TUNING.ARMORMETAL_SLOW = 0.90
+
+TUNING.ARMORSEASHELL = TUNING.DEFAULT_CHARACTER_HEALTH * 5
+TUNING.ARMORSEASHELL_ABSORPTION = 0.75
+
+TUNING.ARMOR_SNAKESKIN_FUEL = 480 * 8
+
+TUNING.ARMORVOIDCLOAK = 855
+TUNING.ARMORVOIDCLOAK_FUEL = TUNING.ARMORVOIDCLOAK / 45 * TUNING.LARGE_FUEL
+TUNING.ARMORVOIDCLOAK_ABSORPTION = 1
+
+TUNING.ARMORVORTEX = 450
+TUNING.ARMORVORTEXFUEL = ARMORVORTEX / 45 * TUNING.LARGE_FUEL
+TUNING.ARMORVORTEX_ABSORPTION = 1
+
+TUNING.ARMOR_WEEVOLE = TUNING.DEFAULT_CHARACTER_HEALTH * 6
+TUNING.ARMOR_WEEVOLE_ABSORPTION = .65
+
+TUNING.ARMOR_WINDBREAKER_FUEL = 4800

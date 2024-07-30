@@ -14,8 +14,7 @@ end
 
 local function ShouldGoHome(inst)
     local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition())
-    return (homePos and distsq(homePos, myPos) > GO_HOME_DIST * GO_HOME_DIST) and not inst:HasTag("up")
+    return (homePos and distsq(homePos, inst:GetPosition()) > GO_HOME_DIST * GO_HOME_DIST) and not inst:HasTag("up")
 end
 
 local GrabbingvineBrain = Class(Brain, function(self, inst)
@@ -46,10 +45,7 @@ local function GoEatFood(inst)
         end
         if target and not target:IsInLimbo() then
             inst.foodtarget = target
-            local targetpos = Vector3(target.Transform:GetWorldPosition())
-            local myPos = Vector3(inst.Transform:GetWorldPosition())
-
-            if targetpos and distsq(targetpos, myPos) > EAT_DIST * EAT_DIST then
+            if targetpos and inst:GetDistanceSqToInst(target) > EAT_DIST * EAT_DIST then
                 return BufferedAction(inst, nil, ACTIONS.WALKTO, nil, targetpos, nil, 0.2)
             else
                 return BufferedAction(inst, target, ACTIONS.EAT)
@@ -65,8 +61,10 @@ function GrabbingvineBrain:OnStart()
     local root = PriorityNode(
         {
             WhileNode(
-                function() return ((self.inst.foodtarget and not self.inst.foodtarget:IsInLimbo()) or FoodNear(self.inst)) and
-                    not self.inst:HasTag("up") end, "GoEatFood",
+                function()
+                    return ((self.inst.foodtarget and not self.inst.foodtarget:IsInLimbo()) or FoodNear(self.inst)) and
+                        not self.inst:HasTag("up")
+                end, "GoEatFood",
                 DoAction(self.inst, function() return GoEatFood(self.inst) end, "eat food", true)),
             WhileNode(function() return not self.inst:HasTag("up") end, "StandAndAttack",
                 StandAndAttack(self.inst)),

@@ -39,8 +39,12 @@ local events =
         end
     end),
     EventHandler("doattack",
-        function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then inst.sg
-                    :GoToState("attack") end end),
+        function(inst)
+            if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then
+                inst.sg
+                    :GoToState("attack")
+            end
+        end),
     EventHandler("death", function(inst)
         if inst:HasTag("cocoon") then
             inst.sg:GoToState("cocoon_death")
@@ -68,7 +72,7 @@ local events =
 
 
 local function spawnRabidBeetle(inst)
-    local pos = Vector3(inst.Transform:GetWorldPosition())
+    local pos = inst:GetPosition()
 
     local bug = SpawnPrefab("rabid_beetle")
     if bug then
@@ -98,7 +102,7 @@ local states =
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
             if inst.components.lootdropper then
-                inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+                inst.components.lootdropper:DropLoot(inst:GetPosition())
             end
         end,
 
@@ -261,7 +265,7 @@ local states =
 
             RemovePhysicsColliders(inst)
             if inst.components.lootdropper then
-                inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+                inst.components.lootdropper:DropLoot(inst:GetPosition())
             end
         end,
 

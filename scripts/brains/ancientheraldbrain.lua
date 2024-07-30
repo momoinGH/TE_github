@@ -16,11 +16,7 @@ local SUMMON_COOLDOWN = 15
 local TAUNT_COOLDOWN = 100
 
 local function GetHomePos(inst)
-    if inst.home_pos then
-        return inst.home_pos
-    end
-
-    return Point(inst.Transform:GetWorldPosition())
+    return inst.components.knownlocations:GetLocation("spawnpoint")
 end
 
 local function ShoudSummonEntities(inst)
@@ -71,13 +67,19 @@ function AncientHeraldBrain:OnStart()
                     DoAction(self.inst, function() PerformSummon(self.inst) end)),
 
                 WhileNode(
-                    function() return self.inst.components.combat.target == nil or
-                        not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
+                    function()
+                        return self.inst.components.combat.target == nil or
+                            not self.inst.components.combat:InCooldown()
+                    end, "AttackMomentarily",
                     ChaseAndAttack(self.inst, CHASE_TIME, CHASE_DIST)),
                 Wander(self.inst, GetHomePos, CHASE_DIST),
             }, 1)
 
     self.bt = BT(self.inst, root)
+end
+
+function AncientHeraldBrain:OnInitializationComplete()
+    self.inst.components.knownlocations:RememberLocation("spawnpoint", self.inst:GetPosition())
 end
 
 return AncientHeraldBrain

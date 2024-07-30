@@ -63,27 +63,50 @@ local function onBuilt(inst)
     inst.onbuilt = true
 end
 
+-- local function SetImage(inst, ent, slot)
+--     local src = ent
+--     local image = nil
+
+--     if src ~= nil and src.components.inventoryitem ~= nil then
+--         image = ent.inv_image_bg and ent.inv_image_bg.image:sub(1, -5) or
+--             #(ent.components.inventoryitem.imagename or "") > 0 and ent.components.inventoryitem.imagename or
+--             ent.prefab
+--     end
+
+--     if image ~= nil then
+--         local texname = image .. ".tex"
+--         local atlas = src.replica.inventoryitem:GetAtlas()
+--         if not inst:HasTag("playercrafted") then
+--             if ent.components.perishable then
+--                 ent.components.perishable:StopPerishing()
+--             end
+--         end
+--         atlas = ent.caminho or GetInventoryItemAtlas(texname)
+--         inst.AnimState:OverrideSymbol(slot, resolvefilepath(atlas), texname)
+--         inst.imagename = src ~= nil or ""
+--     else
+--         inst.imagename = ""
+--         inst.AnimState:ClearOverrideSymbol(slot)
+--     end
+-- end
+
 local function SetImage(inst, ent, slot)
-    local src = ent
     local image = nil
 
-    if src ~= nil and src.components.inventoryitem ~= nil then
-        image = ent.inv_image_bg and ent.inv_image_bg.image:sub(1, -5) or
-            #(ent.components.inventoryitem.imagename or "") > 0 and ent.components.inventoryitem.imagename or
-            ent.prefab
+    if ent.shelfart then
+        image = ent.shelfart .. ".tex"
+    elseif ent ~= nil and ent.replica.inventoryitem ~= nil then
+        image = ent.replica.inventoryitem:GetImage()
     end
 
     if image ~= nil then
-        local texname = image .. ".tex"
-        local atlas = src.replica.inventoryitem:GetAtlas()
-        if not inst:HasTag("playercrafted") then
-            if ent.components.perishable then
-                ent.components.perishable:StopPerishing()
-            end
+        --mod物品drawatlasoverride或atlasname至少指定一个
+        local atlas = FunctionOrValue(ent.drawatlasoverride, ent, inst) or ent.components.inventoryitem.atlasname
+        if atlas ~= nil then
+            atlas = resolvefilepath_soft(atlas) --需要找到路径，例如../mods/PigmanTribe/images/inventoryimages/ptribe_upgrade.xml
         end
-        atlas = ent.caminho or GetInventoryItemAtlas(texname)
-        inst.AnimState:OverrideSymbol(slot, resolvefilepath(atlas), texname)
-        inst.imagename = src ~= nil or ""
+        inst.AnimState:OverrideSymbol(slot, atlas or GetInventoryItemAtlas(image), image)
+        inst.imagename = image
     else
         inst.imagename = ""
         inst.AnimState:ClearOverrideSymbol(slot)
@@ -243,7 +266,7 @@ end
 local function docurse(inst)
     if math.random() < 0.3 then
         local ghost = SpawnPrefab("pigghost")
-        local pt = Vector3(inst.Transform:GetWorldPosition())
+        local pt = inst:GetPosition()
         ghost.Transform:SetPosition(pt.x, pt.y, pt.z)
     end
 end

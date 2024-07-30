@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local function plant(inst, growtime)
     local sapling = SpawnPrefab(inst._spawn_prefab or "pinecone_sapling")
     sapling:StartGrowing()

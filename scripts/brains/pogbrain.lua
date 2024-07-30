@@ -47,11 +47,13 @@ local function EatFoodAction(inst)
     if not target then
         local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO", "aquatic" }
         target = FindEntity(inst, POG_SEE_FOOD,
-            function(item) return inst.components.eater:CanEat(item) and not item:HasTag("poisonous") and
-                item:IsOnValidGround() and item:GetTimeAlive() > POG_EAT_DELAY end, nil, notags)
+            function(item)
+                return inst.components.eater:CanEat(item) and not item:HasTag("poisonous") and
+                    item:IsOnValidGround() and item:GetTimeAlive() > POG_EAT_DELAY
+            end, nil, notags)
 
-        local pt = Vector3(inst.Transform:GetWorldPosition())
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, POG_SEE_FOOD, { "pog" })
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ents = TheSim:FindEntities(x, y, z, POG_SEE_FOOD, { "pog" })
         for i, ent in ipairs(ents) do
             -- if another nearby pog is already going to this food, maybe go after it?
             if ((ent.components.locomotor.bufferedaction and ent.components.locomotor.bufferedaction.target and ent.components.locomotor.bufferedaction.target == target) or
@@ -99,8 +101,8 @@ local function barkatfriend(inst)
 end
 
 local function ransack(inst)
-    local pt = Vector3(inst.Transform:GetWorldPosition())
-    local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, POG_SEE_FOOD, { "structure" })
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, POG_SEE_FOOD, { "structure" })
     local containers = {}
     for i, ent in ipairs(ents) do
         if ent.components.container then
@@ -123,14 +125,11 @@ local function harassPlayer(inst)
     if target then
         local item = nil
 
-        local p_pt = Vector3(target.Transform:GetWorldPosition())
-        local m_pt = Vector3(inst.Transform:GetWorldPosition())
-
         if target then
             item = target.components.inventory:FindItem(function(item) return inst.components.eater:CanEat(item) end)
         end
 
-        if item and distsq(p_pt, m_pt) < FOLLOWPLAYER_DIST * FOLLOWPLAYER_DIST then --  and not (target and target.components.driver and target.components.driver:GetIsDriving()) then
+        if item and inst:GetDistanceSqToInst(target) < FOLLOWPLAYER_DIST * FOLLOWPLAYER_DIST then --  and not (target and target.components.driver and target.components.driver:GetIsDriving()) then
             return target
         end
     end
@@ -151,8 +150,10 @@ function PogBrain:OnStart()
                 DoAction(self.inst, function() return EatFoodAction(self.inst) end, "Eat", true),
 
                 IfNode(
-                    function() return TheWorld.components.aporkalypse and
-                        TheWorld.components.aporkalypse.aporkalypse_active == true end, "AporkalypseActive",
+                    function()
+                        return TheWorld.components.aporkalypse and
+                            TheWorld.components.aporkalypse.aporkalypse_active == true
+                    end, "AporkalypseActive",
                     DoAction(self.inst, function() SuggestTarget(self.inst) end)),
 
                 ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),

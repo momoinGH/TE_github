@@ -142,8 +142,10 @@ local states =
 
 		timeline =
 		{
-			TimeEvent(14 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve_DLC002/creatures/dragoon/attack_strike") end),
+			TimeEvent(14 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC002/creatures/dragoon/attack_strike")
+			end),
 			TimeEvent(24 * FRAMES, function(inst) if inst:PerformBufferedAction() then inst.components.combat:SetTarget(nil) end end),
 		},
 
@@ -180,8 +182,8 @@ local states =
 
 			if inst.last_target and inst.last_target ~= inst then
 				inst.num_targets_vomited = inst.last_target.components.stackable and
-				inst.num_targets_vomited + inst.last_target.components.stackable:StackSize() or
-				inst.num_targets_vomited + 1
+					inst.num_targets_vomited + inst.last_target.components.stackable:StackSize() or
+					inst.num_targets_vomited + 1
 				inst.last_target_spit_time = GetTime()
 			end
 			--inst.Transform:SetFourFaced()
@@ -267,7 +269,7 @@ local states =
 			inst.AnimState:PlayAnimation("death")
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst)
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+			inst.components.lootdropper:DropLoot(inst:GetPosition())
 		end,
 
 	},

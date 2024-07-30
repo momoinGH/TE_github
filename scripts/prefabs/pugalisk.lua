@@ -61,8 +61,10 @@ local function redirecthealth(inst, amount, overtime, cause, ignore_invincible)
         fx.Transform:SetPosition(pt.x, pt.y + 2 + math.random() * 2, pt.z)
 
         inst:PushEvent("dohitanim")
-        if inst.host.components.health then inst.host.components.health:DoDelta(amount, overtime, cause,
-                ignore_invincible, nil, true) end
+        if inst.host.components.health then
+            inst.host.components.health:DoDelta(amount, overtime, cause,
+                ignore_invincible, nil, true)
+        end
         inst.host:PushEvent("attacked")
     end
 end
@@ -623,7 +625,7 @@ local function onfinishcallback(inst, worker)
 
     if worker then
         -- figure out which side to drop the loot
-        local pt = Vector3(inst.Transform:GetWorldPosition())
+        local pt = inst:GetPosition()
         local hispos = Vector3(worker.Transform:GetWorldPosition())
 
         local he_right = ((hispos - pt):Dot(TheCamera:GetRightVec()) > 0)

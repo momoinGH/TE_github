@@ -71,7 +71,6 @@ local function EatFishAction(inst)
                     end
                 end
             end
-            local squidpos = Vector3(inst.Transform:GetWorldPosition())
             --           local herd = inst.components.herdmember:GetHerd()
             --           if herd and #fish > 0 then
             --               for k,v in pairs(herd.components.herd.members) do

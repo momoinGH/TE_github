@@ -1,6 +1,3 @@
-require "prefabutil"
-require "recipes"
-
 local assets =
 {
     Asset("ANIM", "anim/pig_shop.zip"),
@@ -251,7 +248,7 @@ local function spawn_shop(inst)
         if inst.forcespawn then
             local spawn = inst.forcespawn
 
-            local pt = Vector3(inst.Transform:GetWorldPosition())
+            local pt = inst:GetPosition()
             -- local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 3, {"structure"})
             if spawn then -- and  #ents == 0
                 --print("SPAWNING",spawn)
@@ -288,7 +285,7 @@ local function spawn_shop(inst)
                 total = total + spawn_list[i][2]
                 if choice <= total then
                     local spawn = spawn_list[i][1]
-                    local pt = Vector3(inst.Transform:GetWorldPosition())
+                    local pt = inst:GetPosition()
                     local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 3, { "structure" })
 
                     if spawn and #ents == 0 then
@@ -625,7 +622,8 @@ local function makehouse(name, build, bank, data)
 end
 
 return
-    makeshop("pig_shop_deli", "pig_shop_deli", nil, { indestructable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
+    makeshop("pig_shop_deli", "pig_shop_deli", nil,
+        { indestructable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
     makeshop("pig_shop_general", "pig_shop_general", nil,
         { indestructable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
     makeshop("pig_shop_hoofspa", "pig_shop_hoofspa", nil,
@@ -644,7 +642,8 @@ return
         { indestructable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
     makeshop("pig_shop_hatshop", "pig_shop_millinery", nil,
         { indestructable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    makeshop("pig_shop_bank", "pig_shop_bank", nil, { indestructable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
+    makeshop("pig_shop_bank", "pig_shop_bank", nil,
+        { indestructable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
     makeshop("pig_shop_tinker", "pig_shop_tinker", nil,
         { indestructable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
     makeshop("pig_shop_cityhall", "pig_cityhall", "pig_cityhall",

@@ -72,7 +72,7 @@ local TARGETS_CANT_TAGS = { "playerghost" }
 local function NumHoundsToSpawn(inst)
     local numHounds = TUNING.WARG_BASE_HOUND_AMOUNT
 
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, TUNING.WARG_NEARBY_PLAYERS_DIST, TARGETS_MUST_TAGS,
         TARGETS_CANT_TAGS)
     for i, player in ipairs(ents) do

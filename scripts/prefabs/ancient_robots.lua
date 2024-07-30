@@ -1,12 +1,11 @@
-require "brains/ancientrobotbrain"
-require "stategraphs/SGAncientRobot"
-
 local UPDATETIME = 5
 
 local ROBOT_TARGET_DIST = 15
 local ROBOT_RIBS_DAMAGE = 34
 local ROBOT_RIBS_HEALTH = 1000
 local ROBOT_LEG_DAMAGE = 34 * 2
+
+local brain = require "brains/ancientrobotbrain"
 
 local assets =
 {
@@ -50,16 +49,16 @@ local function removemoss(inst)
     end
 end
 
+local ATTACK_MUST_TAGS = { "_health", "_combat" }
+local ATTACK_CANT_TAGS = { "playerghost", "INLIMBO", "ancient_robot", "wall" }
 local function Retarget(inst)
     return FindEntity(inst, ROBOT_TARGET_DIST, function(guy)
-        return not guy:HasTag("ancient_robot") and
-            inst.components.combat:CanTarget(guy) and
-            not guy:HasTag("wall")
-    end)
+        return inst.components.combat:CanTarget(guy)
+    end, ATTACK_MUST_TAGS, ATTACK_CANT_TAGS)
 end
 
 local function KeepTarget(inst, target)
-    return true
+    return inst.components.combat:CanTarget(target)
 end
 
 local function periodicupdate(inst)
@@ -94,10 +93,6 @@ local function OnAttacked(inst, data)
     local fx = SpawnPrefab("sparks_green_fx")
     local x, y, z = inst.Transform:GetWorldPosition()
     fx.Transform:SetPosition(x, y + 1, z)
-end
-
-local function GetStatus(inst)
-
 end
 
 local function OnSave(inst, data)
@@ -168,22 +163,29 @@ local function mergeaction(act)
     end
 end
 
-local function ribsfn(Sim)
+local function OnWorked(inst, worker, workleft)
+    OnAttacked(inst, { attacker = worker })
+    inst.components.workable:SetWorkLeft(1)
+    inst:PushEvent("attacked")
+end
+
+local function ribsfn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
+    inst.entity:AddDynamicShadow()
+    inst.entity:AddLight()
     inst.entity:AddNetwork()
 
     inst.Transform:SetFourFaced()
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("metal_spider.png")
+    inst.MiniMapEntity:SetIcon("metal_spider.png")
 
     MakeCharacterPhysics(inst, 100, 2)
 
-    local shadow = inst.entity:AddDynamicShadow()
-    shadow:SetSize(6, 2)
+    inst.DynamicShadow:SetSize(6, 2)
 
     inst.AnimState:SetBank("metal_spider")
     inst.AnimState:SetBuild("metal_spider")
@@ -197,7 +199,6 @@ local function ribsfn(Sim)
     inst:AddTag("beam_attack")
     inst:AddTag("robot_ribs")
 
-    inst.entity:AddLight()
     inst.Light:SetIntensity(.6)
     inst.Light:SetRadius(5)
     inst.Light:SetFalloff(3)
@@ -221,27 +222,19 @@ local function ribsfn(Sim)
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
     inst.components.workable:SetWorkLeft(1)
-    inst.components.workable:SetOnWorkCallback(
-        function(inst, worker, workleft)
-            OnAttacked(inst, { attacker = worker })
-            inst.components.workable:SetWorkLeft(1)
-            inst:PushEvent("attacked")
-        end)
+    inst.components.workable:SetOnWorkCallback(OnWorked)
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('anchientrobot')
 
     inst:AddComponent("inspectable")
-    inst.components.inspectable.getstatus = GetStatus
 
     inst:AddComponent("knownlocations")
 
     inst.lightningpriority = 1
-
     inst.periodicupdate = periodicupdate
     inst.UPDATETIME = UPDATETIME
     inst.hits = 0
-
     inst.special_action = mergeaction
     inst.removemoss = removemoss
 
@@ -249,7 +242,7 @@ local function ribsfn(Sim)
     inst.components.locomotor.walkspeed = 2
     inst.components.locomotor.runspeed = 2
 
-    local brain = require "brains/ancientrobotbrain"
+
     inst:SetBrain(brain)
     inst:SetStateGraph("SGAncientRobot")
 
@@ -267,6 +260,7 @@ local function ribsfn(Sim)
     end
 
     inst:ListenForEvent("lightningstrike", OnLightning)
+
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
     inst.OnLoadPostPass = OnLoadPostPass
@@ -276,13 +270,15 @@ end
 
 local function armfn(Sim)
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
+    inst.entity:AddLight()
     inst.entity:AddNetwork()
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("metal_claw.png")
+    inst.MiniMapEntity:SetIcon("metal_claw.png")
 
     inst.Transform:SetSixFaced()
     MakeCharacterPhysics(inst, 100, 2)
@@ -301,7 +297,6 @@ local function armfn(Sim)
     inst:AddTag("IsSixFaced")
     inst:AddTag("noeightfaced")
 
-    inst.entity:AddLight()
     inst.Light:SetIntensity(.6)
     inst.Light:SetRadius(5)
     inst.Light:SetFalloff(3)
@@ -330,24 +325,17 @@ local function armfn(Sim)
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
     inst.components.workable:SetWorkLeft(1)
-    inst.components.workable:SetOnWorkCallback(
-        function(inst, worker, workleft)
-            OnAttacked(inst, { attacker = worker })
-            inst.components.workable:SetWorkLeft(1)
-            inst:PushEvent("attacked")
-        end)
+    inst.components.workable:SetOnWorkCallback(OnWorked)
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('anchientrobot')
 
     inst:AddComponent("inspectable")
-    inst.components.inspectable.getstatus = GetStatus
 
     inst:AddComponent("knownlocations")
 
-    --  inst:ListenForEvent("attacked", OnAttacked)
+
     inst.lightningpriority = 1
-    inst:ListenForEvent("lightningstrike", OnLightning)
 
     --  MakeLargeFreezableCharacter(inst, "beefalo_body")
 
@@ -362,7 +350,6 @@ local function armfn(Sim)
     inst.components.locomotor.walkspeed = 3
     inst.components.locomotor.runspeed = 3
 
-    local brain = require "brains/ancientrobotbrain"
     inst:SetBrain(brain)
     inst:SetStateGraph("SGAncientRobot")
 
@@ -379,26 +366,34 @@ local function armfn(Sim)
         hulk.arms = hulk.arms + 1
     end
 
+    --  inst:ListenForEvent("attacked", OnAttacked)
+    inst:ListenForEvent("lightningstrike", OnLightning)
+
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
     inst.OnLoadPostPass = OnLoadPostPass
+
     return inst
 end
 
 
 local function legfn(Sim)
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
+    inst.entity:AddDynamicShadow()
+    inst.entity:AddLight()
     inst.entity:AddNetwork()
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("metal_leg.png")
+    inst.MiniMapEntity:SetIcon("metal_leg.png")
 
     inst.Transform:SetSixFaced()
-    local shadow = inst.entity:AddDynamicShadow()
-    shadow:SetSize(4, 2)
+
+    inst.DynamicShadow:SetSize(4, 2)
+
     MakeCharacterPhysics(inst, 100, 2)
 
     inst.AnimState:SetBank("metal_leg")
@@ -416,7 +411,6 @@ local function legfn(Sim)
     inst:AddTag("IsSixFaced")
     inst:AddTag("noeightfaced")
 
-    inst.entity:AddLight()
     inst.Light:SetIntensity(.6)
     inst.Light:SetRadius(5)
     inst.Light:SetFalloff(3)
@@ -440,24 +434,16 @@ local function legfn(Sim)
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
     inst.components.workable:SetWorkLeft(1)
-    inst.components.workable:SetOnWorkCallback(
-        function(inst, worker, workleft)
-            OnAttacked(inst, { attacker = worker })
-            inst.components.workable:SetWorkLeft(1)
-            inst:PushEvent("attacked")
-        end)
+    inst.components.workable:SetOnWorkCallback(OnWorked)
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('anchientrobot')
 
     inst:AddComponent("inspectable")
-    inst.components.inspectable.getstatus = GetStatus
 
     inst:AddComponent("knownlocations")
 
     inst.lightningpriority = 1
-    inst:ListenForEvent("lightningstrike", OnLightning)
-
     inst.periodicupdate = periodicupdate
     inst.UPDATETIME = UPDATETIME
     inst.hits = 0
@@ -469,7 +455,6 @@ local function legfn(Sim)
     inst.components.locomotor.walkspeed = 4
     inst.components.locomotor.runspeed = 4
 
-    local brain = require "brains/ancientrobotbrain"
     inst:SetBrain(brain)
     inst:SetStateGraph("SGAncientRobot")
 
@@ -486,6 +471,8 @@ local function legfn(Sim)
         hulk.legs = hulk.legs + 1
     end
 
+    inst:ListenForEvent("lightningstrike", OnLightning)
+
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
     inst.OnLoadPostPass = OnLoadPostPass
@@ -494,19 +481,22 @@ local function legfn(Sim)
 end
 
 
-local function headfn(Sim)
+local function headfn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
+    inst.entity:AddDynamicShadow()
+    inst.entity:AddLight()
     inst.entity:AddNetwork()
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("metal_head.png")
+    inst.MiniMapEntity:SetIcon("metal_head.png")
 
     inst.Transform:SetSixFaced()
-    local shadow = inst.entity:AddDynamicShadow()
-    shadow:SetSize(4, 2)
+
+    inst.DynamicShadow:SetSize(4, 2)
+
     MakeCharacterPhysics(inst, 100, 2)
 
     inst.AnimState:SetBank("metal_head")
@@ -523,7 +513,6 @@ local function headfn(Sim)
     inst:AddTag("IsSixFaced")
     inst:AddTag("noeightfaced")
 
-    inst.entity:AddLight()
     inst.Light:SetIntensity(.6)
     inst.Light:SetRadius(5)
     inst.Light:SetFalloff(3)
@@ -547,18 +536,12 @@ local function headfn(Sim)
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
     inst.components.workable:SetWorkLeft(1)
-    inst.components.workable:SetOnWorkCallback(
-        function(inst, worker, workleft)
-            OnAttacked(inst, { attacker = worker })
-            inst.components.workable:SetWorkLeft(1)
-            inst:PushEvent("attacked")
-        end)
+    inst.components.workable:SetOnWorkCallback(OnWorked)
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('anchientrobot')
 
     inst:AddComponent("inspectable")
-    inst.components.inspectable.getstatus = GetStatus
 
     inst:AddComponent("knownlocations")
 
@@ -576,8 +559,6 @@ local function headfn(Sim)
     inst.components.locomotor.walkspeed = 4
     inst.components.locomotor.runspeed = 4
 
-
-    local brain = require "brains/ancientrobotbrain"
     inst:SetBrain(brain)
     inst:SetStateGraph("SGAncientRobot")
 

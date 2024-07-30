@@ -70,7 +70,7 @@ local function item_commonfn(bank, build, masterfn)
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "dragoonheart"
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("tradable")
     inst:AddComponent("vasedecoration")

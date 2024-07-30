@@ -19,18 +19,19 @@ end
 
 local function fn()
     local inst = CreateEntity()
+
     inst.entity:AddNetwork()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
+
     inst.AnimState:SetBank("armor_windbreaker")
     inst.AnimState:SetBuild("armor_windbreaker")
+    inst.AnimState:PlayAnimation("anim")
 
     inst.foleysound = "dontstarve_DLC002/common/foley/windbreaker"
 
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
-
-    inst.AnimState:PlayAnimation("anim")
 
     inst.entity:SetPristine()
 
@@ -42,7 +43,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
@@ -51,9 +52,9 @@ local function fn()
     inst.components.equippable:SetOnUnequip(onunequip)
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
-    inst.components.fueled:InitializeFuelLevel(4800)
-    inst.components.fueled:SetDepletedFn(onperish)
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
+    inst.components.fueled:InitializeFuelLevel(TUNING.ARMOR_WINDBREAKER_FUEL)
+    inst.components.fueled:SetDepletedFn(inst.Remove)
 
     inst:AddComponent("waterproofer")
     inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL)

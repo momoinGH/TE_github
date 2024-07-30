@@ -20,7 +20,7 @@ local function fn(Sim)
     MakeInventoryPhysics(inst)
     inst.entity:AddNetwork()
     MakeInventoryFloatable(inst)
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.MEDIUM, TUNING.WINDBLOWN_SCALE_MAX.MEDIUM)
+
     --	inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
 
     inst.AnimState:SetBank("gold_dust")
@@ -43,7 +43,7 @@ local function fn(Sim)
     inst:AddComponent("stackable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("bait")
     inst:AddTag("molebait")

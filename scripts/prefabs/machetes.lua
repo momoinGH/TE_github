@@ -162,7 +162,7 @@ local function normal(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 	inst.components.inventoryitem:SetOnDroppedFn(ondropped)
 
 	inst:DoTaskInTime(0, ondropped)
@@ -222,7 +222,7 @@ local function golden(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 	inst.components.inventoryitem:SetOnDroppedFn(ondropped)
 
 	inst:DoTaskInTime(0, ondropped)
@@ -331,7 +331,7 @@ local function obsidian(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 	inst.AnimState:SetBuild("machete_obsidian")
 	inst.AnimState:SetBank("machete_obsidian")
 
@@ -429,7 +429,7 @@ local function glass(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-	inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 	--inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 2.5 / TUNING.GOLDENTOOLFACTOR)
 	inst.components.inventoryitem:SetOnDroppedFn(ondropped)
 

@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
     Asset("ANIM", "anim/madscience_lab.zip"),
@@ -183,7 +181,7 @@ end
 
 local function OnScienceWasMade(inst, experiement_id)
     local result = EXPERIMENT_RESULTS[experiement_id] ~= nil and
-    weighted_random_choice(EXPERIMENT_RESULTS[experiement_id]) or nil
+        weighted_random_choice(EXPERIMENT_RESULTS[experiement_id]) or nil
     if result ~= nil then
         local weights = NUM_TO_SPAWN[result]
         local num_to_spawn = weights ~= nil and weighted_random_choice(weights) or 1

@@ -105,7 +105,7 @@ end
 local function UpdateRunSpeed(inst)
     local rod = (inst.components.oceanfishable ~= nil and inst.components.oceanfishable:GetRod()) or nil
     local check_tension = rod ~= nil and
-    math.abs(anglediff(inst.Transform:GetRotation(), inst:GetAngleToPoint(rod.Transform:GetWorldPosition()))) > 90
+        math.abs(anglediff(inst.Transform:GetRotation(), inst:GetAngleToPoint(rod.Transform:GetWorldPosition()))) > 90
     local tension_mod = check_tension and (1 - math.min(0.8, rod.components.oceanfishingrod:GetTensionRating()))
         or 1
 
@@ -968,7 +968,7 @@ local states =
 
                     local theta = rotation * DEGREES
                     local offset = Vector3(math.cos(theta), 0, -math.sin(theta))
-                    local pos = Vector3(inst.Transform:GetWorldPosition()) + offset
+                    local pos = inst:GetPosition() + offset
                     wake.Transform:SetPosition(pos.x, pos.y, pos.z)
 
                     wake.Transform:SetRotation(rotation - 90)
@@ -1086,7 +1086,7 @@ CommonStates.AddAmphibiousCreatureHopStates(states,
         swimming_clear_collision_frame = 9 * FRAMES,
     },
     nil, -- anims
-    { -- timeline
+    {    -- timeline
         hop_pre =
         {
             TimeEvent(0, function(inst)

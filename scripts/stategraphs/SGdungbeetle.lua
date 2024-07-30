@@ -429,7 +429,7 @@ local states =
 			inst.AnimState:PlayAnimation("death")
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst)
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+			inst.components.lootdropper:DropLoot(inst:GetPosition())
 		end,
 
 		timeline =
@@ -672,8 +672,10 @@ local states =
 
 		timeline =
 		{
-			TimeEvent(3 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve_DLC003/creatures/dungbeetle/breath_out") end),
+			TimeEvent(3 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC003/creatures/dungbeetle/breath_out")
+			end),
 		},
 	},
 
@@ -690,8 +692,10 @@ local states =
 
 		timeline =
 		{
-			TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve_DLC003/creatures/dungbeetle/breath_out") end),
+			TimeEvent(5 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC003/creatures/dungbeetle/breath_out")
+			end),
 		}
 	},
 

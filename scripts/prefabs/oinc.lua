@@ -30,7 +30,6 @@ local function fn(Sim)
 
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
-    --	MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.MEDIUM, TUNING.WINDBLOWN_SCALE_MAX.MEDIUM)
 
     inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 
@@ -68,7 +67,7 @@ local function fn(Sim)
     inst.components.waterproofer.effectiveness = 0
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     return inst
 end

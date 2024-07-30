@@ -182,7 +182,7 @@ end
 
 local function DoAreaEffect(inst, knockout)
     inst.SoundEmitter:PlaySound("dontstarve/creatures/mandrake/death")
-    local pos = Vector3(inst.Transform:GetWorldPosition())
+    local pos = inst:GetPosition()
     local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, MANDRAKE_SLEEP_RANGE)
     for k, v in pairs(ents) do
         if v.components.sleeper then

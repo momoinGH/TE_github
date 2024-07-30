@@ -87,7 +87,7 @@ local function onspawnweevole(inst)
 end
 
 local function weevolenesttest(inst)
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 12, { "grass_tall" })
 	local weevoleents = TheSim:FindEntities(pt.x, pt.y, pt.z, 12, { "weevole_infested" })
 
@@ -123,7 +123,7 @@ end
 local function spawnweevole(inst, target)
 	local weevole = inst.components.childspawner:SpawnChild()
 	if weevole then
-		local spawnpos = Vector3(inst.Transform:GetWorldPosition())
+		local spawnpos = inst:GetPosition()
 		spawnpos = spawnpos + TheCamera:GetDownVec()
 		weevole.Transform:SetPosition(spawnpos:Get())
 		if weevole and target and weevole.components.combat then

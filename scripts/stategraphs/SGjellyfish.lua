@@ -71,8 +71,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/jellyfish/electric_water") end),
+            TimeEvent(2 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/jellyfish/electric_water")
+            end),
             -- momo说别电人了
             -- TimeEvent(5*FRAMES, function(inst)
             -- local pclose = GetClosestInstWithTag("player", inst, 3)
@@ -139,7 +141,7 @@ local states =
             inst:Hide()
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
     },

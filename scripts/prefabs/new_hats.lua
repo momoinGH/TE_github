@@ -127,7 +127,7 @@ local function MakeHat(name, bankparam, prefabnameparam)
 
         inst:AddComponent("inventoryitem")
         inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-        inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
         inst:AddComponent("inspectable")
 
@@ -225,7 +225,7 @@ local function MakeHat(name, bankparam, prefabnameparam)
         end
 
         inst:AddComponent("fueled")
-        inst.components.fueled.fueltype = "USAGE"
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
         inst.components.fueled:InitializeFuelLevel(TUNING.RAINHAT_PERISHTIME)
         inst.components.fueled:SetDepletedFn(generic_perish)
 
@@ -348,7 +348,7 @@ local function MakeHat(name, bankparam, prefabnameparam)
 
         inst:AddComponent("inventoryitem")
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
         inst:AddComponent("inspectable")
 
@@ -362,7 +362,7 @@ local function MakeHat(name, bankparam, prefabnameparam)
         inst.components.equippable:SetOnUnequip(onunequip)
 
         inst:AddComponent("fueled")
-        inst.components.fueled.fueltype = "USAGE"
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
         inst.components.fueled:InitializeFuelLevel(2400)
         inst.components.fueled:SetDepletedFn(generic_perish)
 
@@ -385,7 +385,7 @@ local function MakeHat(name, bankparam, prefabnameparam)
         inst.components.equippable.walkspeedmult = 1.25
 
         inst:AddComponent("fueled")
-        inst.components.fueled.fueltype = "USAGE"
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
         inst.components.fueled:InitializeFuelLevel(48 * 30)
         inst.components.fueled:SetDepletedFn(generic_perish)
 
@@ -506,7 +506,7 @@ local function MakeHat(name, bankparam, prefabnameparam)
 
         inst:AddComponent("inventoryitem")
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
         inst:AddComponent("tradable")
 
         inst:AddComponent("equippable")

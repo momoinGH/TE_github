@@ -59,4 +59,4 @@ local states =
     },
 }
 
-return StateGraph("antlarva", states, events, "idle", actionhandlers)
+return StateGraph("antlarva", states, events, "land", actionhandlers)

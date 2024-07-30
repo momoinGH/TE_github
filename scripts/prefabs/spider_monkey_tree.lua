@@ -19,8 +19,8 @@ local day_time = seg_time * day_segs
 local JUNGLETREE_GROW_TIME =
 {
     { base = 4.5 * day_time, random = 0.5 * day_time }, --tall to short
-    { base = 8 * day_time, random = 5 * day_time }, --short to normal
-    { base = 8 * day_time, random = 5 * day_time }, --normal to tall
+    { base = 8 * day_time,   random = 5 * day_time },   --short to normal
+    { base = 8 * day_time,   random = 5 * day_time },   --normal to tall
 }
 
 local JUNGLETREE_CHOPS_SMALL = 5
@@ -196,7 +196,7 @@ local function SetStage(inst, stage)
     end
 
     --    inst.components.upgradeable:SetStage(stage)
-    inst.stage = stage   -- track here, as growable component may go away
+    inst.stage = stage -- track here, as growable component may go away
 end
 
 local function SetShort(inst)
@@ -263,18 +263,54 @@ end
 
 local growth_stages =
 {
-    { name = "short",  time = function(inst) return GetRandomWithVariance(JUNGLETREE_GROW_TIME[1].base,
-            JUNGLETREE_GROW_TIME[1].random) end,                                                                                             fn = function(
-        inst) SetShort(inst) end,                                                                                                                                                     growfn = function(
-        inst) GrowShort(inst) end,                                                                                                                                                                                                  leifscale = .7 },
-    { name = "normal", time = function(inst) return GetRandomWithVariance(JUNGLETREE_GROW_TIME[2].base,
-            JUNGLETREE_GROW_TIME[2].random) end,                                                                                             fn = function(
-        inst) SetNormal(inst) end,                                                                                                                                                    growfn = function(
-        inst) GrowNormal(inst) end,                                                                                                                                                                                                 leifscale = 1 },
-    { name = "tall",   time = function(inst) return GetRandomWithVariance(JUNGLETREE_GROW_TIME[3].base,
-            JUNGLETREE_GROW_TIME[3].random) end,                                                                                             fn = function(
-        inst) SetTall(inst) end,                                                                                                                                                      growfn = function(
-        inst) GrowTall(inst) end,                                                                                                                                                                                                   leifscale = 1.25 },
+    {
+        name = "short",
+        time = function(inst)
+            return GetRandomWithVariance(JUNGLETREE_GROW_TIME[1].base,
+                JUNGLETREE_GROW_TIME[1].random)
+        end,
+        fn = function(
+            inst)
+            SetShort(inst)
+        end,
+        growfn = function(
+            inst)
+            GrowShort(inst)
+        end,
+        leifscale = .7
+    },
+    {
+        name = "normal",
+        time = function(inst)
+            return GetRandomWithVariance(JUNGLETREE_GROW_TIME[2].base,
+                JUNGLETREE_GROW_TIME[2].random)
+        end,
+        fn = function(
+            inst)
+            SetNormal(inst)
+        end,
+        growfn = function(
+            inst)
+            GrowNormal(inst)
+        end,
+        leifscale = 1
+    },
+    {
+        name = "tall",
+        time = function(inst)
+            return GetRandomWithVariance(JUNGLETREE_GROW_TIME[3].base,
+                JUNGLETREE_GROW_TIME[3].random)
+        end,
+        fn = function(
+            inst)
+            SetTall(inst)
+        end,
+        growfn = function(
+            inst)
+            GrowTall(inst)
+        end,
+        leifscale = 1.25
+    },
 }
 
 local function IsDefender(child)
@@ -321,7 +357,7 @@ local function chop_tree(inst, chopper, chops)
     inst.AnimState:PushAnimation(inst.anims.sway1, true)
 
     -- tell any nearby leifs to wake up
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, PALMTREEGUARD_REAWAKEN_RADIUS, { "treeguard" })
     for k, v in pairs(ents) do
         if v.components.sleeper and v.components.sleeper:IsAsleep() then
@@ -341,7 +377,7 @@ local function chop_down_tree(inst, chopper)
     --    inst:RemoveComponent("blowinwindgust")
     inst:RemoveTag("gustable")
     inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     local hispos = Vector3(chopper.Transform:GetWorldPosition())
 
     local he_right = (hispos - pt):Dot(TheCamera:GetRightVec()) > 0
@@ -386,7 +422,7 @@ local function tree_burnt(inst)
     inst.MiniMapEntity:SetIcon("tree_rainforest_burnt.png")
     inst.pineconetask = inst:DoTaskInTime(10,
         function()
-            local pt = Vector3(inst.Transform:GetWorldPosition())
+            local pt = inst:GetPosition()
             if math.random(0, 1) == 1 then
                 pt = pt + TheCamera:GetRightVec()
             else
@@ -400,7 +436,7 @@ end
 
 local function dropCritter(inst, prefab)
     local snake = SpawnPrefab(prefab)
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
 
     if math.random(0, 1) == 1 then
         pt = pt + (TheCamera:GetRightVec() * ((math.random() * 1) + 1))

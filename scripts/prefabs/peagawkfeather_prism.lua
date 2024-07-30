@@ -11,7 +11,7 @@ local function fn(Sim)
     inst.entity:AddPhysics()
     inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
-    --MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.MEDIUM, TUNING.WINDBLOWN_SCALE_MAX.MEDIUM)
+
 
     inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 
@@ -37,7 +37,7 @@ local function fn(Sim)
     inst:AddComponent("stackable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("bait")
     inst:AddTag("molebait")

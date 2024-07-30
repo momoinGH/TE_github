@@ -44,7 +44,7 @@ local function fullfn()
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
 	MakeMediumBurnable(inst)
 	MakeMediumPropagator(inst)

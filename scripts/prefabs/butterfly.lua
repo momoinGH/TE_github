@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
     Asset("ANIM", "anim/butterfly_basic.zip"),
@@ -225,7 +223,7 @@ local function fntropical()
     inst:AddComponent("stackable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     inst.components.inventoryitem.canbepickedup = false
     inst.components.inventoryitem.canbepickedupalive = true
     inst.components.inventoryitem.nobounce = true

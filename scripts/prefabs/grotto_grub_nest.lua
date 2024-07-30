@@ -1,6 +1,3 @@
-require "prefabutil"
-require "recipes"
-
 local ROOM_TINY_WIDTH             = 15
 local ROOM_TINY_DEPTH             = 10
 

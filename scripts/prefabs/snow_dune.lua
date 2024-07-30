@@ -104,7 +104,7 @@ local function workcallback(inst, worker, workleft)
 	inst.components.lootdropper:AddRandomLoot("nightmarefuel", 0.001)
 
 	-- figure out which side to drop the loot
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local hispos = Vector3(worker.Transform:GetWorldPosition())
 
 	local he_right = ((hispos - pt):Dot(TheCamera:GetRightVec()) > 0)

@@ -96,7 +96,6 @@ local function crab()
     inst.components.inventoryitem.canbepickedupalive = true
     inst.components.inventoryitem:SetSinks(true)
     inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
-    inst.caminho = "images/inventoryimages2.xml"
 
     MakeFeedableSmallLivestock(inst, TUNING.RABBIT_PERISH_TIME, nil)
 

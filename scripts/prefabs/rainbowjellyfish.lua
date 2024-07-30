@@ -72,7 +72,7 @@ local function defaultfn(sim)
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     inst:AddComponent("perishable")
 
     inst:AddComponent("tradable")
@@ -134,16 +134,18 @@ local function swapColor(inst, light)
     if inst.ispink then
         inst.ispink = false
         inst.isgreen = true
-        inst.components.lighttweener:StartTween(light, Lerp(0, var.radius, percent), nil, nil, { 0 / 255, 180 / 255, 255 /
-        255 }, 4, swapColor)
+        inst.components.lighttweener:StartTween(light, Lerp(0, var.radius, percent), nil, nil,
+            { 0 / 255, 180 / 255, 255 /
+            255 }, 4, swapColor)
     elseif inst.isgreen then
         inst.isgreen = false
         inst.components.lighttweener:StartTween(light, Lerp(0, var.radius, percent), nil, nil,
             { 240 / 255, 230 / 255, 100 / 255 }, 4, swapColor)
     else
         inst.ispink = true
-        inst.components.lighttweener:StartTween(light, Lerp(0, var.radius, percent), nil, nil, { 251 / 255, 30 / 255, 30 /
-        255 }, 4, swapColor)
+        inst.components.lighttweener:StartTween(light, Lerp(0, var.radius, percent), nil, nil,
+            { 251 / 255, 30 / 255, 30 /
+            255 }, 4, swapColor)
     end
 end
 
@@ -169,7 +171,8 @@ end
 
 local function light_start(inst)
     local spell = inst.components.spell
-    inst.components.lighttweener:StartTween(inst.light, spell.variables.radius, 0.8, 0.5, { 251 / 255, 30 / 255, 30 / 255 },
+    inst.components.lighttweener:StartTween(inst.light, spell.variables.radius, 0.8, 0.5,
+        { 251 / 255, 30 / 255, 30 / 255 },
         0)
     inst.ispink = true
     inst.components.lighttweener:StartTween(inst.light, nil, nil, nil, { 0 / 255, 180 / 255, 255 / 255 }, 4, swapColor)
@@ -245,7 +248,7 @@ local function deadfn(sim)
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     inst:AddComponent("perishable")
 
     inst:AddComponent("tradable")
@@ -307,7 +310,7 @@ local function cookedfn(sim)
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     inst:AddComponent("perishable")
 
     inst:AddComponent("tradable")
@@ -357,7 +360,7 @@ local function driedfn(sim)
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     inst:AddComponent("perishable")
 
     inst:AddComponent("tradable")

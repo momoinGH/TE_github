@@ -1,4 +1,3 @@
-require "prefabutil"
 require "tuning"
 
 local assets =
@@ -48,7 +47,7 @@ local function getnewpoint(pt)
 end
 
 local function movetonewhome(inst, child)
-	local pos = Vector3(inst.Transform:GetWorldPosition())
+	local pos = inst:GetPosition()
 	local spawn_point = getnewpoint(pos)
 
 	if spawn_point then

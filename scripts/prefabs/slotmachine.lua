@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local internalloot =
 {
 	["snaketrap"] =
@@ -2331,14 +2329,14 @@ local function SpawnReward(inst, reward, lootdropper, pt, delay)
 				local item = SpawnPrefab(k)
 
 				if item.components.inventoryitem and not item.components.health then
-					local pt = Vector3(inst.Transform:GetWorldPosition()) +
+					local pt = inst:GetPosition() +
 						Vector3(2 * math.cos(spawnangle), 3, 2 * math.sin(spawnangle))
 					inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/slotmachine_reward")
 					item.Transform:SetPosition(pt:Get())
 					item.Physics:SetVel(sp * math.cos(angle), math.random() * 2 + 9, sp * math.sin(angle))
 					--	item.components.inventoryitem:OnStartFalling()
 				else
-					local pt = Vector3(inst.Transform:GetWorldPosition()) +
+					local pt = inst:GetPosition() +
 						Vector3(2 * math.cos(spawnangle), 0, 2 * math.sin(spawnangle))
 					pt = pt + Vector3(sp * math.cos(angle), 0, sp * math.sin(angle))
 					item.Transform:SetPosition(pt:Get())

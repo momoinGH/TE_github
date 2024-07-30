@@ -22,7 +22,7 @@ local function onequip(inst, owner)
 
     if owner.components.health then
         owner.components.health.fire_damage_scale = owner.components.health.fire_damage_scale -
-        TUNING.ARMORDRAGONFLY_FIRE_RESIST
+            TUNING.ARMORDRAGONFLY_FIRE_RESIST
     end
 end
 
@@ -33,7 +33,7 @@ local function onunequip(inst, owner)
 
     if owner.components.health then
         owner.components.health.fire_damage_scale = owner.components.health.fire_damage_scale +
-        TUNING.ARMORDRAGONFLY_FIRE_RESIST
+            TUNING.ARMORDRAGONFLY_FIRE_RESIST
     end
 end
 
@@ -43,8 +43,9 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddSoundEmitter()
     inst.entity:AddAnimState()
-    MakeInventoryPhysics(inst)
     inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("armor_obsidian")
     inst.AnimState:SetBuild("armor_obsidian")
@@ -63,24 +64,18 @@ local function fn()
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
-
-    --   inst:AddComponent("waterproofer")
-    --   inst.components.waterproofer:SetEffectiveness(0)
-    --   inst.no_wet_prefix = true
 
     inst:AddComponent("armor")
     inst.components.armor:InitCondition(TUNING.ARMORDRAGONFLY, TUNING.ARMORDRAGONFLY_ABSORPTION)
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
-
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 
     MakeHauntableLaunch(inst)
 
-    inst._onblocked = function(owner, data) OnBlocked(owner, data) end
+    inst._onblocked = OnBlocked
 
     return inst
 end

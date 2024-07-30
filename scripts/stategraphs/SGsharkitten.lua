@@ -2,25 +2,29 @@ require("stategraphs/commonstates")
 
 local actionhandlers =
 {
-	ActionHandler(ACTIONS.EAT, "eat"),
+    ActionHandler(ACTIONS.EAT, "eat"),
     ActionHandler(ACTIONS.GOHOME, "action"),
 }
 
-local events=
+local events =
 {
-    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
+    EventHandler("attacked",
+        function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg
+                    :GoToState("hit") end end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-    EventHandler("doattack", function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then inst.sg:GoToState("attack", data.target) end end),
+    EventHandler("doattack",
+        function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+                inst.sg:GoToState("attack", data.target) end end),
     CommonHandlers.OnSleep(),
-    CommonHandlers.OnLocomote(false,true),
+    CommonHandlers.OnLocomote(false, true),
     CommonHandlers.OnFreeze(),
 }
 
-local states=
+local states =
 {
-    State{
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
         onenter = function(inst, playanim)
             --inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/idle", "idle")
             inst.Physics:Stop()
@@ -30,17 +34,17 @@ local states=
             else
                 inst.AnimState:PlayAnimation("idle", true)
             end
-            inst.sg:SetTimeout(2*math.random()+.5)
+            inst.sg:SetTimeout(2 * math.random() + .5)
         end,
-        
+
         onexit = function(inst, playanim)
             inst.SoundEmitter:KillSound("idle")
         end,
     },
 
-    State{
+    State {
         name = "attack",
-        tags = {"attack", "busy"},
+        tags = { "attack", "busy" },
 
         onenter = function(inst, target)
             inst.sg.statemem.target = target
@@ -50,23 +54,28 @@ local states=
             inst.AnimState:PushAnimation("atk", false)
         end,
 
-        timeline=
+        timeline =
         {
 
-            TimeEvent( 5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/attack_voice") end),
-			TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/attack_bite") end),
-            TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+            TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/tiger_kitten/attack_voice") end),
+            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/tiger_kitten/attack_bite") end),
+            TimeEvent(16 * FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
 
-        events=
+        events =
         {
-            EventHandler("animqueueover", function(inst) if math.random() < .333 then inst.components.combat:SetTarget(nil) inst.sg:GoToState("taunt") else inst.sg:GoToState("idle", "atk_pst") end end),
+            EventHandler("animqueueover", function(inst) if math.random() < .333 then
+                    inst.components.combat:SetTarget(nil)
+                    inst.sg:GoToState("taunt")
+                else inst.sg:GoToState("idle", "atk_pst") end end),
         },
     },
 
-	State{
+    State {
         name = "eat",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
@@ -75,76 +84,82 @@ local states=
             inst.AnimState:PushAnimation("eat_pst", false)
         end,
 
-		timeline=
+        timeline =
         {
-            TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/attack_bite") end),
-            TimeEvent(11*FRAMES, function(inst) inst:PerformBufferedAction() end),
+            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/tiger_kitten/attack_bite") end),
+            TimeEvent(11 * FRAMES, function(inst) inst:PerformBufferedAction() end),
         },
 
-        events=
+        events =
         {
             EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "hit",
-        tags = {"busy", "hit"},
+        tags = { "busy", "hit" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("hit")
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent( 0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/hit_bodyfall") end),
-            TimeEvent( 5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/hit_voice") end),
+            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/tiger_kitten/hit_bodyfall") end),
+            TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/tiger_kitten/hit_voice") end),
         },
 
-        events=
+        events =
         {
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-	State{
-		name = "taunt",
-        tags = {"busy"},
+    State {
+        name = "taunt",
+        tags = { "busy" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
         end,
 
-		timeline=
+        timeline =
         {
-			TimeEvent(13*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/taunt") end),
-			TimeEvent(24*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/taunt") end),
+            TimeEvent(13 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/tiger_kitten/taunt") end),
+            TimeEvent(24 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/tiger_kitten/taunt") end),
         },
 
-        events=
+        events =
         {
-            EventHandler("animover", function(inst) if math.random() < .333 then inst.sg:GoToState("taunt") else inst.sg:GoToState("idle") end end),
+            EventHandler("animover", function(inst) if math.random() < .333 then inst.sg:GoToState("taunt") else inst.sg
+                        :GoToState("idle") end end),
         },
     },
 
-    State{
+    State {
         name = "death",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/death_A")
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
     },
 
-    State{
+    State {
         name = "action",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -153,44 +168,48 @@ local states=
 
         events =
         {
-			EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
                 inst:PerformBufferedAction()
-                inst.sg:GoToState("idle") 
+                inst.sg:GoToState("idle")
             end),
         },
     },
 }
 
 CommonStates.AddSleepStates(states,
-{
-	sleeptimeline = {
-        --TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/sleep") end),
-	},
-})
+    {
+        sleeptimeline = {
+            --TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/sleep") end),
+        },
+    })
 
 CommonStates.AddWalkStates(states,
-{
-    walktimeline = {
-        TimeEvent(5*FRAMES, function(inst) 
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_voice")
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_bounce")
-        end),
-        TimeEvent(20*FRAMES, function(inst) 
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_voice")
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_bounce")
-        end),
-    },    
-})
+    {
+        walktimeline = {
+            TimeEvent(5 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_voice")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_bounce")
+            end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_voice")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_bounce")
+            end),
+        },
+    })
 
 CommonStates.AddRunStates(states,
-{
-    runtimeline = {
-         TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_voice") end),
-         TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_bounce") end),
-         TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_bounce") end),
-		 TimeEvent(31*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_bounce") end),
-	},
-})
+    {
+        runtimeline = {
+            TimeEvent(0,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_voice") end),
+            TimeEvent(0 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_bounce") end),
+            TimeEvent(16 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_bounce") end),
+            TimeEvent(31 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_kitten/walk_bounce") end),
+        },
+    })
 
 CommonStates.AddFrozenStates(states)
 

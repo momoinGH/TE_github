@@ -4,10 +4,6 @@ local assets =
     --Asset("INV_IMAGE", "metalplatehat"),
 }
 
-local ARMORMETAL = 150 * 8
-local ARMORMETAL_ABSORPTION = .85
-local ARMORMETAL_SLOW = 0.90
-
 local function OnBlocked(owner)
     if owner.SoundEmitter ~= nil then
         owner.SoundEmitter:PlaySound("dontstarve/wilson/hit_armour")
@@ -24,18 +20,20 @@ local function onunequip(inst, owner)
     inst:RemoveEventCallback("blocked", OnBlocked, owner)
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
+
     MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("armor_metalplate")
     inst.AnimState:SetBuild("armor_metalplate")
     inst.AnimState:PlayAnimation("anim")
 
-    inst:AddTag("metal")
+    inst:AddTag("metal") --控制角色移动音效的
 
     inst.foleysound = "dontstarve_DLC003/movement/iron_armor/foley_player"
 
@@ -51,15 +49,14 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("armor")
-    inst.components.armor:InitCondition(ARMORMETAL, ARMORMETAL_ABSORPTION)
+    inst.components.armor:InitCondition(TUNING.ARMORMETAL, TUNING.ARMORMETAL_ABSORPTION)
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
-    inst.components.equippable.walkspeedmult = ARMORMETAL_SLOW
-
+    inst.components.equippable.walkspeedmult = TUNING.ARMORMETAL_SLOW
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 

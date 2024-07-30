@@ -8,14 +8,9 @@ local prefabs =
     "aloe",
 }
 
-local function onpickedfn(inst)
-    inst:Remove()
-end
-
-
-local function fn(Sim)
-    --Aloe you eat is defined in veggies.lua
+local function fn()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
@@ -38,9 +33,8 @@ local function fn(Sim)
 
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
-    inst.components.pickable:SetUp("aloe", 10)
-    inst.components.pickable.onpickedfn = onpickedfn
-
+    inst.components.pickable:SetUp("aloe")
+    inst.components.pickable.remove_when_picked = true
     inst.components.pickable.quickpick = true
 
     MakeSmallBurnable(inst)
@@ -49,4 +43,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/aloe_planted", fn, assets)
+return Prefab("common/inventory/aloe_planted", fn, assets, prefabs)

@@ -1,4 +1,3 @@
-require "prefabutil"
 local assets =
 {
     Asset("ANIM", "anim/seaweed_seed.zip"),
@@ -97,7 +96,7 @@ local function fnseaweed(sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     return inst
 end

@@ -48,14 +48,14 @@ local function staff_fn()
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
     inst.components.fueled:InitializeFuelLevel(4800)
     inst.components.fueled:SetDepletedFn(onfinished)
 

@@ -1,4 +1,3 @@
-require "prefabutil"
 --itens valem 3x mais seu valor de combustao e capacidade dobrada de armazenamento
 local assets =
 {
@@ -44,7 +43,7 @@ end
 
 local function updatefuelrate(inst)
     inst.components.fueled.rate = TheWorld.state.israining and
-    1 + TUNING.FIREPIT_RAIN_RATE * TheWorld.state.precipitationrate or 1
+        1 + TUNING.FIREPIT_RAIN_RATE * TheWorld.state.precipitationrate or 1
 end
 
 local function onupdatefueled(inst)

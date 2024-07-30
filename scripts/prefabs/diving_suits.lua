@@ -4,10 +4,6 @@ local assets =
     Asset("ANIM", "anim/diving_suit_winter.zip"),
 }
 
-local function onperish(inst)
-    inst:Remove()
-end
-
 local function onequip(inst, owner)
     owner:AddTag("nadador")
     owner.AnimState:OverrideSymbol("swap_body", inst.prefab, "swap_body")
@@ -70,9 +66,9 @@ local function create_summer()
     inst:AddTag("clothing")
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
     inst.components.fueled:InitializeFuelLevel(TUNING.TRUNKVEST_PERISHTIME)
-    inst.components.fueled:SetDepletedFn(onperish)
+    inst.components.fueled:SetDepletedFn(inst.Remove)
 
     inst:AddComponent("oxygenapparatus")
 
@@ -135,9 +131,9 @@ local function create_winter()
     inst:AddTag("clothing") -- 适配六格
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
     inst.components.fueled:InitializeFuelLevel(TUNING.TRUNKVEST_PERISHTIME)
-    inst.components.fueled:SetDepletedFn(onperish)
+    inst.components.fueled:SetDepletedFn(inst.Remove)
 
     inst:AddComponent("oxygenapparatus")
 

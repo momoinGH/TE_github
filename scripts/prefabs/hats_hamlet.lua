@@ -732,7 +732,7 @@ local function MakeHat(name)
 
     local function stopusingbush(inst, data)
         local hat = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) or
-        nil
+            nil
         if hat ~= nil and data.statename ~= "hide" then
             hat.components.useableitem:StopUsingItem()
         end
@@ -841,7 +841,7 @@ local function MakeHat(name)
         -- check for the armor_snurtleshell pairing achievement
         if owner:HasTag("player") then
             local equipped_body = owner.components.inventory ~= nil and
-            owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) or nil
+                owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) or nil
             if equipped_body ~= nil and equipped_body.prefab == "armorsnurtleshell" then
                 AwardPlayerAchievement("snail_armour_set", owner)
             end
@@ -1138,14 +1138,14 @@ local function MakeHat(name)
         inst.components.equippable:SetOnUnequip(bat_onunequip)
 
         inst:AddComponent("fueled")
-        inst.components.fueled.fueltype = "USAGE"
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
         inst.components.fueled:InitializeFuelLevel(TUNING.MOLEHAT_PERISHTIME)
         inst.components.fueled:SetDepletedFn(bat_perish)
         inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
         inst.components.fueled.accepting = true
 
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
         inst:AddTag("no_sewing")
         inst:AddTag("venting")
@@ -1497,11 +1497,11 @@ local function MakeHat(name)
         inst.components.equippable.dapperness = TUNING.DAPPERNESS_LARGE
 
         inst:AddComponent("fueled")
-        inst.components.fueled.fueltype = "USAGE"
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
         inst.components.fueled:InitializeFuelLevel(PEAGAWKHAT_PERISHTIME)
         inst.components.fueled:SetDepletedFn(generic_perish)
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
         return inst
     end
 
@@ -1594,13 +1594,13 @@ local function MakeHat(name)
         inst.components.armor.ontakedamage = antmask_ontakedamage
 
         inst:AddComponent("fueled")
-        inst.components.fueled.fueltype = "USAGE"
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
         inst.components.fueled:InitializeFuelLevel(4800)
         inst.components.fueled:SetDepletedFn(generic_perish)
         inst.components.fueled:SetUpdateFn(antmask_onupdate)
 
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
         return inst
     end
 
@@ -1614,7 +1614,7 @@ local function MakeHat(name)
         inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED_LARGE
         inst:AddTag("pigcrown")
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
         return inst
     end
 
@@ -1627,12 +1627,12 @@ local function MakeHat(name)
 
         inst.components.equippable.dapperness = TUNING.DAPPERNESS_SMALL
         inst:AddComponent("fueled")
-        inst.components.fueled.fueltype = "USAGE"
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
         inst.components.fueled:InitializeFuelLevel(BANDITHAT_PERISHTIME)
         inst.components.fueled:SetDepletedFn(generic_perish)
         inst:AddTag("sneaky")
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
         return inst
     end
@@ -1647,7 +1647,7 @@ local function MakeHat(name)
 
         inst.components.equippable.dapperness = TUNING.DAPPERNESS_SMALL
         inst:AddComponent("fueled")
-        inst.components.fueled.fueltype = "USAGE"
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
         inst.components.fueled:InitializeFuelLevel(PITHHAT_PERISHTIME)
         inst.components.fueled:SetDepletedFn(generic_perish)
 
@@ -1662,7 +1662,7 @@ local function MakeHat(name)
         inst:AddComponent("waterproofer")
         inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_MED)
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
         return inst
     end
 
@@ -1680,11 +1680,11 @@ local function MakeHat(name)
         inst.components.equippable:SetOnEquip(opentop_onequip)
 
         inst:AddComponent("fueled")
-        inst.components.fueled.fueltype = "USAGE"
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
         inst.components.fueled:InitializeFuelLevel(GASMASK_PERISHTIME)
         inst.components.fueled:SetDepletedFn(generic_perish)
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
         return inst
     end
 
@@ -1709,7 +1709,7 @@ local function MakeHat(name)
         inst.components.equippable.dapperness = TUNING.DAPPERNESS_SMALL
 
         inst:AddComponent("fueled")
-        inst.components.fueled.fueltype = "USAGE"
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
         inst.components.fueled:InitializeFuelLevel(THUNDERHAT_PERISHTIME)
         inst.components.fueled:SetDepletedFn(generic_perish)
 
@@ -1717,7 +1717,7 @@ local function MakeHat(name)
         inst.components.equippable:SetOnUnequip(thunder_unequip)
 
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
         inst:ListenForEvent("lightningstrike",
             function(inst, data) inst.components.fueled:DoDelta(-inst.components.fueled.maxfuel * 0.05) end)
@@ -1741,7 +1741,7 @@ local function MakeHat(name)
 
         inst.components.armor:InitCondition(ARMOR_KNIGHT, ARMOR_KNIGHT_ABSORPTION)
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
         return inst
     end
 
@@ -1849,7 +1849,7 @@ local function MakeHat(name)
         inst.components.fueled.ontakefuelfn = candle_takefuel
         inst.components.fueled.accepting = true
         inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
         inst._light = nil
         inst.OnRemoveEntity = candle_onremove

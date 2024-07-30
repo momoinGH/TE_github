@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local Assets =
 {
 	Asset("ANIM", "anim/peach_pit.zip"),

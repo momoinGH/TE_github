@@ -1,4 +1,3 @@
-require "prefabutil"
 local assets =
 {
     Asset("ANIM", "anim/bramble_bulb.zip"),
@@ -16,7 +15,7 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     MakeInventoryPhysics(inst)
-    --   MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.MEDIUM, TUNING.WINDBLOWN_SCALE_MAX.MEDIUM)
+
 
     inst.AnimState:SetBank("bramble_bulb")
     inst.AnimState:SetBuild("bramble_bulb")
@@ -56,7 +55,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     --    inst.OnSave = OnSave
     --    inst.OnLoad = OnLoad

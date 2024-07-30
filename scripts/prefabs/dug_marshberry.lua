@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local function make_plantable(data)
     local assets =
     {
@@ -88,7 +86,8 @@ local plantables =
 local prefabs = {}
 for i, v in ipairs(plantables) do
     table.insert(prefabs, make_plantable(v))
-    table.insert(prefabs, MakePlacer("dug_" .. v.name .. "_placer", v.bank or v.name, v.build or v.name, v.anim or "idle"))
+    table.insert(prefabs,
+        MakePlacer("dug_" .. v.name .. "_placer", v.bank or v.name, v.build or v.name, v.anim or "idle"))
 end
 
 return unpack(prefabs)

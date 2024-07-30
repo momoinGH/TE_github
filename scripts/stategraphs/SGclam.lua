@@ -151,7 +151,7 @@ local states =
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
             if TheWorld:HasTag("cave") then
                 local tamanhodomapa = (TheWorld.Map:GetSize()) * 2 - 2
                 local map = TheWorld.Map

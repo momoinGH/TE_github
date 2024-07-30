@@ -7,57 +7,59 @@ local actionhandlers =
 }
 
 if rawget(_G, "GF") ~= nil then
-    table.insert(actionhandlers, 
-        ActionHandler(ACTIONS.GFCASTSPELL, function(inst)
-            local act = inst:GetBufferedAction()
-            return act.spell ~= nil and "cast" or "idle"
-        end))
+	table.insert(actionhandlers,
+		ActionHandler(ACTIONS.GFCASTSPELL, function(inst)
+			local act = inst:GetBufferedAction()
+			return act.spell ~= nil and "cast" or "idle"
+		end))
 end
 
 
 local events =
 {
-	EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("attack") or math.random() <= 0.2) then inst.sg:GoToState("hit") end end),
+	EventHandler("attacked",
+		function(inst) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("attack") or math.random() <= 0.2) then
+				inst.sg:GoToState("hit") end end),
 	EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-	EventHandler("doattack", function(inst, data) 
-		if not inst.components.health:IsDead() 
-			and (inst.sg:HasStateTag("hit") 
-			or not inst.sg:HasStateTag("busy")) 
-		then 
+	EventHandler("doattack", function(inst, data)
+		if not inst.components.health:IsDead()
+			and (inst.sg:HasStateTag("hit")
+				or not inst.sg:HasStateTag("busy"))
+		then
 			if inst:IsNear(data.target, 3) then
-				inst.sg:GoToState("attack", data.target) 
+				inst.sg:GoToState("attack", data.target)
 			else
-				inst.sg:GoToState("spit_attack", data.target) 
+				inst.sg:GoToState("spit_attack", data.target)
 			end
-		end 
+		end
 	end),
 	CommonHandlers.OnSleep(),
 	CommonHandlers.OnLocomote(true, false),
 	CommonHandlers.OnFreeze(),
 }
 
-local states=
+local states =
 {
 
-	State{
+	State {
 		name = "gohome",
-		tags = {"busy"},
+		tags = { "busy" },
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("run_pst")
 		end,
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst) 
-				inst.sg:GoToState("idle") 
+			EventHandler("animover", function(inst)
+				inst.sg:GoToState("idle")
 				inst:PerformBufferedAction()
 			end),
 		},
 	},
 
-	State{
+	State {
 		name = "idle",
-		tags = {"idle", "canrotate"},
+		tags = { "idle", "canrotate" },
 		onenter = function(inst, playanim)
 			--inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/idle")
 			inst.Physics:Stop()
@@ -67,14 +69,14 @@ local states=
 			else
 				inst.AnimState:PlayAnimation("idle_loop", true)
 			end
-			inst.sg:SetTimeout(2*math.random()+.5)
+			inst.sg:SetTimeout(2 * math.random() + .5)
 		end,
 
 	},
 
-	State{
+	State {
 		name = "attack",
-		tags = {"attack", "busy"},
+		tags = { "attack", "busy" },
 
 		onenter = function(inst, target)
 			inst.sg.statemem.target = target
@@ -84,27 +86,27 @@ local states=
 			inst.AnimState:PlayAnimation("attack", false)
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(8*FRAMES, function(inst) 
-				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then 
-					inst:ForceFacePoint(inst.sg.statemem.target:GetPosition()) 
-				end 
+			TimeEvent(8 * FRAMES, function(inst)
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst:ForceFacePoint(inst.sg.statemem.target:GetPosition())
+				end
 			end),
-			TimeEvent(18*FRAMES, function(inst) 
+			TimeEvent(18 * FRAMES, function(inst)
 				inst.components.combat:DoAttack(inst.sg.statemem.target)
 			end),
 		},
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "cast",
-		tags = {"attack", "busy"},
+		tags = { "attack", "busy" },
 
 		onenter = function(inst, target)
 			inst.Physics:Stop()
@@ -112,22 +114,22 @@ local states=
 			inst.AnimState:PlayAnimation("spit", false)
 		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(18 * FRAMES, function(inst) 
+			TimeEvent(18 * FRAMES, function(inst)
 				inst:PerformBufferedAction()
 			end),
 		},
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "spit_attack",
-		tags = {"attack", "busy"},
+		tags = { "attack", "busy" },
 
 		onenter = function(inst, target)
 			inst.sg.statemem.target = target
@@ -137,19 +139,19 @@ local states=
 			end
 			inst.components.combat:StartAttack()
 			inst.AnimState:PlayAnimation("spit", false)
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/snapper/spit")  
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/snapper/spit")
 		end,
 
 		onexit = function(inst)
-            if inst.components.inventory then
-                inst.components.inventory:Unequip(EQUIPSLOTS.HANDS)
-            end
-        end,
+			if inst.components.inventory then
+				inst.components.inventory:Unequip(EQUIPSLOTS.HANDS)
+			end
+		end,
 
-		timeline=
+		timeline =
 		{
-			TimeEvent(15*FRAMES, function(inst)
-				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then 
+			TimeEvent(15 * FRAMES, function(inst)
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
 					inst:ForceFacePoint(inst.sg.statemem.target:GetPosition())
 				end
 				if inst.weapon and inst.weapon.components.weapon.stimuli == "electric" then
@@ -160,42 +162,42 @@ local states=
 			end),
 		},
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "eat",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("attack")
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/snapper/attack") 
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/snapper/attack")
 		end,
 
-		timeline=
+		timeline =
 		{
 			--TimeEvent(14*FRAMES, function(inst) end), --inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/attack") end),
-			TimeEvent(15*FRAMES, function(inst) 
+			TimeEvent(15 * FRAMES, function(inst)
 				if inst:PerformBufferedAction() then
-					inst.components.combat:SetTarget(nil) 
+					inst.components.combat:SetTarget(nil)
 					inst.starvationLevel = 0
-				end 
+				end
 			end),
 		},
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst)  inst.sg:GoToState("idle")  end),
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "hit",
-		tags = {"busy", "hit"},
+		tags = { "busy", "hit" },
 
 		onenter = function(inst, cb)
 			inst.Physics:Stop()
@@ -204,60 +206,60 @@ local states=
 			--inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/hurt")
 		end,
 
-		events=
+		events =
 		{
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "taunt",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst, cb)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("taunt")
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/snapper/taunt") 
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/snapper/taunt")
 		end,
 
-		events=
+		events =
 		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
-	State{
+	State {
 		name = "death",
-		tags = {"busy"},
+		tags = { "busy" },
 
 		onenter = function(inst)
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/snapper/death") 
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/snapper/death")
 			inst.AnimState:PlayAnimation("death")
 			inst.Physics:Stop()
-			RemovePhysicsColliders(inst)            
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))            
+			RemovePhysicsColliders(inst)
+			inst.components.lootdropper:DropLoot(inst:GetPosition())
 		end,
 
 	},
 }
 
 CommonStates.AddSleepStates(states,
-{
-	sleeptimeline = {
-		TimeEvent(30*FRAMES, function(inst) 
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/snapper/sleep") 
-		end),
-	},
-})
+	{
+		sleeptimeline = {
+			TimeEvent(30 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/snapper/sleep")
+			end),
+		},
+	})
 
 
 CommonStates.AddRunStates(states,
-{
-	runtimeline = {
-		TimeEvent(0, function(inst) end), -- inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/move") end),
-		TimeEvent(4, function(inst) end), --inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/move") end),
-	},
-})
+	{
+		runtimeline = {
+			TimeEvent(0, function(inst) end), -- inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/move") end),
+			TimeEvent(4, function(inst) end), --inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/snake/move") end),
+		},
+	})
 CommonStates.AddFrozenStates(states)
 
 

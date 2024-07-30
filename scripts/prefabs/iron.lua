@@ -19,7 +19,7 @@ local function fn(Sim)
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     MakeInventoryPhysics(inst)
-    --    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.HEAVY, TUNING.WINDBLOWN_SCALE_MAX.HEAVY)
+
     inst.entity:AddNetwork()
 
     inst.AnimState:SetBank("iron_ore")
@@ -51,7 +51,7 @@ local function fn(Sim)
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("bait")
 

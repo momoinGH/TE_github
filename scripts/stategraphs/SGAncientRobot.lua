@@ -166,7 +166,7 @@ local function SpawnLaser(inst)
     local yt = inst.sg.statemem.targetpos.y
     local zt = inst.sg.statemem.targetpos.z
 
-    local dist = math.sqrt(inst:GetDistanceSqToPoint(Vector3(xt, yt, zt))) - 3     --  math.sqrt( ) ) - 2
+    local dist = math.sqrt(inst:GetDistanceSqToPoint(Vector3(xt, yt, zt))) - 3 --  math.sqrt( ) ) - 2
 
     local angle = (inst:GetAngleToPoint(xt, yt, zt) + 90) * DEGREES
 
@@ -279,7 +279,7 @@ local events =
                         inst.wantstodeactivate = nil
                         inst:RemoveTag("dormant")
                         inst:PushEvent("shock")
-                        inst.lifetime = 20     --120
+                        inst.lifetime = 20 --120
                         if not inst.updatetask then
                             inst.updatetask = inst:DoPeriodicTask(inst.UPDATETIME, inst.periodicupdate)
                         end
@@ -1150,7 +1150,7 @@ local states =
 
             TimeEvent(23 * FRAMES, function(inst)
                 if inst:HasTag("lightning_taunt") then
-                    local pos = Vector3(inst.Transform:GetWorldPosition())
+                    local pos = inst:GetPosition()
                     --                    TheWorld:PushEvent("ms_sendlightningstrike", pos)
                     SpawnPrefab("lightning").Transform:SetPosition(pos:Get())
                     --                        GetPlayer().SoundEmitter:PlaySound("dontstarve/rain/thunder_close")
@@ -1448,7 +1448,7 @@ local states =
         onenter = function(inst, target)
             inst.components.locomotor:Stop()
             inst.AnimState:PlayAnimation("atk_pre")
-            inst.sg.statemem.startpos = Vector3(inst.Transform:GetWorldPosition())
+            inst.sg.statemem.startpos = inst:GetPosition()
             inst.sg.statemem.targetpos = Vector3(target.Transform:GetWorldPosition())
         end,
 
@@ -1480,8 +1480,10 @@ local states =
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("leap_attack",
-                    { startpos = inst.sg.statemem.startpos, targetpos = inst.sg.statemem.targetpos }) end),
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("leap_attack",
+                    { startpos = inst.sg.statemem.startpos, targetpos = inst.sg.statemem.targetpos })
+            end),
         },
     },
 
@@ -1531,7 +1533,7 @@ local states =
 
         onupdate = function(inst)
             local percent = inst.AnimState:GetCurrentAnimationTime() /
-            inst.AnimState:GetCurrentAnimationLength()                                                    -- substitui o inst.AnimState:GetPercent()
+                inst.AnimState:GetCurrentAnimationLength() -- substitui o inst.AnimState:GetPercent()
             local xdiff = inst.sg.statemem.targetpos.x - inst.sg.statemem.startpos.x
             local zdiff = inst.sg.statemem.targetpos.z - inst.sg.statemem.startpos.z
 
@@ -1672,7 +1674,7 @@ local states =
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
     },
 }

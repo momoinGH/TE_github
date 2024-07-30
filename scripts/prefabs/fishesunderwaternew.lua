@@ -244,8 +244,10 @@ local function fnmedio1()
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -310,8 +312,10 @@ local function fnmedio2()
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -376,8 +380,10 @@ local function fnmedio3()
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -442,8 +448,10 @@ local function fnmedio4()
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -508,8 +516,10 @@ local function fnmedio5()
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -574,8 +584,10 @@ local function fnmedio6()
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -640,8 +652,10 @@ local function fnmedio7()
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -706,8 +720,10 @@ local function fnmedio8()
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -772,8 +788,10 @@ local function fn1(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -838,8 +856,10 @@ local function fn2(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -904,8 +924,10 @@ local function fn3(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -970,8 +992,10 @@ local function fn4(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -1036,8 +1060,10 @@ local function fn5(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -1102,8 +1128,10 @@ local function fn6(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -1168,8 +1196,10 @@ local function fn7(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -1234,8 +1264,10 @@ local function fn8(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
@@ -1300,8 +1332,10 @@ local function fn9(Sim)
 
     inst:AddComponent("knownlocations")
     inst:DoTaskInTime(1 * FRAMES,
-        function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
-                true) end)
+        function()
+            inst.components.knownlocations:RememberLocation("home", inst:GetPosition(),
+                true)
+        end)
 
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })

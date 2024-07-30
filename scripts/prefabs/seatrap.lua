@@ -104,7 +104,7 @@ local function seafn(Sim)
 	inst.components.inventoryitem:SetOnDroppedFn(ondropped)
 
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 	inst.no_wet_prefix = true
 
 	inst:SetStateGraph("SGseatrap")

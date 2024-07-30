@@ -95,7 +95,7 @@ local function FleeAction(inst)
     while search_for_point do
         local rad = math.random(10, 25)
         local angle = math.random(360)
-        pos = Vector3(inst.Transform:GetWorldPosition()) + Vector3(rad*math.cos(angle), 0, rad*math.sin(angle))
+        pos = inst:GetPosition() + Vector3(rad * math.cos(angle), 0, rad * math.sin(angle))
         
         if IsValidGround(pos) then
             search_for_point = false

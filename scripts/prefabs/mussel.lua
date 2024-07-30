@@ -44,7 +44,7 @@ local function raw()
 	inst:AddComponent("inspectable")
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 	inst:AddComponent("perishable")
 	inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERFAST)
 	inst.components.perishable:StartPerishing()
@@ -100,7 +100,7 @@ local function cooked()
 	inst:AddComponent("inspectable")
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 	inst:AddComponent("perishable")
 	inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERFAST)
 	inst.components.perishable:StartPerishing()

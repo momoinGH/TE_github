@@ -6,7 +6,7 @@ local TEMPODAMOEDA = 480
 
 local function SpawnDubloon(inst)
     local dubloon = SpawnPrefab("dubloon")
-    local pt = Vector3(inst.Transform:GetWorldPosition()) + Vector3(0, 2, 0)
+    local pt = inst:GetPosition() + Vector3(0, 2, 0)
 
     dubloon.Transform:SetPosition(pt:Get())
     --    local angle = inst.Transform:GetRotation()*(PI/180)

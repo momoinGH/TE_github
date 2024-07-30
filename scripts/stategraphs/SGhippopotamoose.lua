@@ -96,14 +96,22 @@ local states =
 
         timeline =
         {
-            TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/hippo/out") end),
-            TimeEvent(26 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/hippo/in") end),
-            TimeEvent(46 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/hippo/out") end),
-            TimeEvent(57 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/hippo/in") end),
+            TimeEvent(11 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/hippo/out")
+            end),
+            TimeEvent(26 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/hippo/in")
+            end),
+            TimeEvent(46 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/hippo/out")
+            end),
+            TimeEvent(57 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/hippo/in")
+            end),
 
 
         },
@@ -136,8 +144,10 @@ local states =
         timeline =
         {
             TimeEvent(16 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
-            TimeEvent(13 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/hippo/leap_attack") end),
+            TimeEvent(13 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/hippo/leap_attack")
+            end),
 
         },
 
@@ -155,14 +165,16 @@ local states =
         onenter = function(inst, target)
             inst.components.locomotor:Stop()
             inst.AnimState:PlayAnimation("jump_atk_pre")
-            inst.sg.statemem.startpos = Vector3(inst.Transform:GetWorldPosition())
+            inst.sg.statemem.startpos = inst:GetPosition()
             inst.sg.statemem.targetpos = Vector3(target.Transform:GetWorldPosition())
         end,
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("leap_attack",
-                    { startpos = inst.sg.statemem.startpos, targetpos = inst.sg.statemem.targetpos }) end),
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("leap_attack",
+                    { startpos = inst.sg.statemem.startpos, targetpos = inst.sg.statemem.targetpos })
+            end),
         },
     },
 
@@ -205,8 +217,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(4 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/hippo/leap_attack") end),
+            TimeEvent(4 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/hippo/leap_attack")
+            end),
             ---TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_out") end ),
         },
 
@@ -262,10 +276,14 @@ local states =
 
         timeline =
         {
-            TimeEvent(7 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/hippo/huff_in") end),
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/hippo/huff_out") end),
+            TimeEvent(7 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/hippo/huff_in")
+            end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/hippo/huff_out")
+            end),
         },
 
         events =
@@ -293,10 +311,14 @@ local states =
         timeline =
         {
 
-            TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/hippo/taunt") end),
-            TimeEvent(29 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/hippo/attack") end),
+            TimeEvent(11 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/hippo/taunt")
+            end),
+            TimeEvent(29 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/hippo/attack")
+            end),
             --    TimeEvent(15*FRAMES,  function(inst) inst.SoundEmitter:PlaySound(inst.effortsound) end ),
             --    TimeEvent(27*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.soundpath .. "voice") end ),
         },
@@ -472,7 +494,7 @@ CommonStates.AddRunStates(states, {
                 end
             else
                 if inst:HasTag("wavemaker") then
-                    SpawnWaves(inst, 6, 360, 2, "wave_ripple")     -- initialOffset, idleTime, instantActive, random_angle)
+                    SpawnWaves(inst, 6, 360, 2, "wave_ripple") -- initialOffset, idleTime, instantActive, random_angle)
                 end
             end
             inst.Physics:Stop()

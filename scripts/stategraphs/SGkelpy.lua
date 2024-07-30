@@ -20,8 +20,12 @@ local events =
         function(inst, data) if not inst.components.health:IsDead() then inst.sg:GoToState("attack", data.target) end end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("attacked",
-        function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("attack") then inst.sg
-                    :GoToState("hit") end end),
+        function(inst)
+            if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("attack") then
+                inst.sg
+                    :GoToState("hit")
+            end
+        end),
 
 }
 
@@ -144,7 +148,7 @@ local states =
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
     },

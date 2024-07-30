@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local wall_prefabs =
 {
     "collapse_small",

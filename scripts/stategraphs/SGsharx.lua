@@ -2,23 +2,27 @@ require("stategraphs/commonstates")
 
 local actionhandlers =
 {
-	ActionHandler(ACTIONS.EAT, "eat"),
+    ActionHandler(ACTIONS.EAT, "eat"),
 }
 
-local events=
+local events =
 {
-    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
+    EventHandler("attacked",
+        function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg
+                    :GoToState("hit") end end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-    EventHandler("doattack", function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then inst.sg:GoToState("attack", data.target) end end),
-    
+    EventHandler("doattack",
+        function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+                inst.sg:GoToState("attack", data.target) end end),
+
     EventHandler("locomote", function(inst)
         local is_moving = inst.sg:HasStateTag("moving")
         local is_running = inst.sg:HasStateTag("running")
-        
+
         local is_idling = inst.sg:HasStateTag("idle")
-        local can_run = true 
-        local can_walk = true 
-        
+        local can_run = true
+        local can_walk = true
+
         local should_move = inst.components.locomotor:WantsToMoveForward()
         local should_run = inst.components.locomotor:WantsToRun()
         if is_moving and not should_move then
@@ -39,12 +43,12 @@ local events=
     CommonHandlers.OnFreeze(),
 }
 
-local states=
+local states =
 {
 
-    State{
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
         onenter = function(inst, playanim)
             -- inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/panting")
             inst.Physics:Stop()
@@ -54,21 +58,21 @@ local states=
             else
                 inst.AnimState:PlayAnimation("idle", true)
             end
-            inst.sg:SetTimeout(2*math.random()+.5)
+            inst.sg:SetTimeout(2 * math.random() + .5)
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/panting") end),
+            TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/panting") end),
         },
 
     },
 
 
 
-    State{
+    State {
         name = "attack",
-        tags = {"attack", "busy"},
+        tags = { "attack", "busy" },
 
         onenter = function(inst, target)
             inst.sg.statemem.target = target
@@ -78,22 +82,25 @@ local states=
             inst.AnimState:PushAnimation("atk", false)
         end,
 
-        timeline=
+        timeline =
         {
 
-			TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/attack") end),
-            TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+            TimeEvent(14 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/attack") end),
+            TimeEvent(16 * FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
 
-        events=
+        events =
         {
-            EventHandler("animqueueover", function(inst) if math.random() < .333 then inst.components.combat:SetTarget(nil) inst.sg:GoToState("taunt") else inst.sg:GoToState("idle", "atk_pst") end end),
+            EventHandler("animqueueover", function(inst) if math.random() < .333 then
+                    inst.components.combat:SetTarget(nil)
+                    inst.sg:GoToState("taunt")
+                else inst.sg:GoToState("idle", "atk_pst") end end),
         },
     },
 
-	State{
+    State {
         name = "eat",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
@@ -102,57 +109,60 @@ local states=
             inst.AnimState:PushAnimation("atk", false)
         end,
 
-		timeline=
+        timeline =
         {
-			TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/attack") end),
+            TimeEvent(14 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/attack") end),
         },
 
-        events=
+        events =
         {
-			EventHandler("animqueueover", function(inst) if inst:PerformBufferedAction() then inst.components.combat:SetTarget(nil) inst.sg:GoToState("taunt") else inst.sg:GoToState("idle", "atk_pst") end end),
+            EventHandler("animqueueover", function(inst) if inst:PerformBufferedAction() then
+                    inst.components.combat:SetTarget(nil)
+                    inst.sg:GoToState("taunt")
+                else inst.sg:GoToState("idle", "atk_pst") end end),
         },
     },
 
-	State{
-		name = "hit",
-        tags = {"busy", "hit"},
+    State {
+        name = "hit",
+        tags = { "busy", "hit" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("hit")
         end,
 
-        events=
+        events =
         {
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
 
-    State{
+    State {
         name = "taunt",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/taunt")
-
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(13*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/taunt") end),
-            TimeEvent(24*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/taunt") end),
+            TimeEvent(13 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/taunt") end),
+            TimeEvent(24 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/taunt") end),
         },
 
-        events=
+        events =
         {
-            EventHandler("animover", function(inst) if math.random() < .333 then inst.sg:GoToState("taunt") else inst.sg:GoToState("idle") end end),
+            EventHandler("animover", function(inst) if math.random() < .333 then inst.sg:GoToState("taunt") else inst.sg
+                        :GoToState("idle") end end),
         },
     },
 
---[[
+    --[[
 	State{
 		name = "taunt",
         tags = {"busy"},
@@ -162,7 +172,7 @@ local states=
             inst.AnimState:PlayAnimation("taunt")
         end,
 
-		timeline= 
+		timeline=
         {
 			TimeEvent(13*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/bark") end),
 			TimeEvent(24*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/bark") end),
@@ -174,67 +184,64 @@ local states=
         },
     },
 ]]
-    State{
+    State {
         name = "death",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
-			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/death")
+            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/death")
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
-            RemovePhysicsColliders(inst)            
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
-
-			
+            RemovePhysicsColliders(inst)
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
     },
 
-    State{
-            
+    State {
+
         name = "run",
-        tags = {"moving", "running", "canrotate"},
-        
-        onenter = function(inst) 
+        tags = { "moving", "running", "canrotate" },
+
+        onenter = function(inst)
             local emergeDist = 7
-            local emerge = false 
-            if inst.components.combat.target and inst.components.combat.target:IsValid() then 
-                if inst:IsNear(inst.components.combat.target, emergeDist) then 
-                    emerge = true 
-                end 
-            end 
+            local emerge = false
+            if inst.components.combat.target and inst.components.combat.target:IsValid() then
+                if inst:IsNear(inst.components.combat.target, emergeDist) then
+                    emerge = true
+                end
+            end
 
             inst.components.locomotor:RunForward()
 
-            if emerge then 
+            if emerge then
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/sharx/growl")
                 inst.AnimState:PlayAnimation("run_loop")
-
-            else 
+            else
                 inst.AnimState:PlayAnimation("run_water_loop")
-            end 
+            end
         end,
-        
-        events=
-        {   
-            EventHandler("animover", function(inst) inst.sg:GoToState("run") end ),        
-        },
-          
-    }, 
 
-     State{
-            
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("run") end),
+        },
+
+    },
+
+    State {
+
         name = "walk",
-        tags = {"moving", "canrotate"},
-        
-        onenter = function(inst) 
+        tags = { "moving", "canrotate" },
+
+        onenter = function(inst)
             inst.components.locomotor:WalkForward()
             inst.AnimState:PlayAnimation("run_water_loop")
         end,
-        
-        events=
-        {   
-            EventHandler("animover", function(inst) inst.sg:GoToState("walk") end ),        
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("walk") end),
         },
     }
 }
@@ -243,4 +250,3 @@ CommonStates.AddFrozenStates(states)
 CommonStates.AddSleepStates(states)
 
 return StateGraph("sharx", states, events, "idle", actionhandlers)
-

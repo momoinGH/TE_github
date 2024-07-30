@@ -14,7 +14,7 @@ local function onunequip(inst, owner)
     owner:RemoveTag("stronggrip")
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -27,7 +27,9 @@ local function fn(Sim)
     inst.AnimState:SetBank("armor_lifejacket")
     inst.AnimState:SetBuild("armor_lifejacket")
     inst.AnimState:PlayAnimation("anim")
+
     inst.foleysound = "dontstarve_DLC002/common/foley/life_jacket"
+
     MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
@@ -37,26 +39,19 @@ local function fn(Sim)
     end
 
     inst:AddComponent("inspectable")
+
     inst:AddComponent("flotationdevice")
     inst.components.flotationdevice.onpreventdrowningdamagefn = inst.Remove
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
     inst.components.inventoryitem.keepondeath = true
-
-    --inst:AddComponent("fuel")
-    -- inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
 
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeSmallPropagator(inst)
 
-    --inst:AddComponent("armor")
-    --inst.components.armor:InitCondition(TUNING.ARMORWOOD, TUNING.ARMORWOOD_ABSORPTION)
-
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
-
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
     return inst

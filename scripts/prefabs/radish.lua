@@ -10,10 +10,6 @@ local prefabs =
 	"radish",
 }
 
-local function onpickedfn(inst)
-	inst:Remove()
-end
-
 
 local function fn(Sim)
 	--Radish you eat is defined in veggies.lua
@@ -39,7 +35,7 @@ local function fn(Sim)
 	inst:AddComponent("pickable")
 	inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
 	inst.components.pickable:SetUp("radish", 10)
-	inst.components.pickable.onpickedfn = onpickedfn
+	inst.components.pickable.remove_when_picked = true
 
 	inst.components.pickable.quickpick = true
 
@@ -74,7 +70,7 @@ local function fn2(Sim)
 	inst:AddComponent("pickable")
 	inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
 	inst.components.pickable:SetUp("turnip", 10)
-	inst.components.pickable.onpickedfn = onpickedfn
+	inst.components.pickable.remove_when_picked = true
 
 	inst.components.pickable.quickpick = true
 

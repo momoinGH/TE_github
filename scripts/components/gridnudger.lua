@@ -29,10 +29,10 @@ function Gridnudger:fixposition()
         return coord
     end
 
-    local pt = Vector3(inst.Transform:GetWorldPosition())
-    pt.x = normalize(pt.x)
-    pt.z = normalize(pt.z)
-    inst.Transform:SetPosition(pt.x, pt.y, pt.z)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    x = normalize(x)
+    z = normalize(z)
+    inst.Transform:SetPosition(x, y, z)
     if inst.setobstical then
         inst.setobstical(inst)
     end

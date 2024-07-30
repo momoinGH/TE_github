@@ -28,7 +28,7 @@ end
 local function workcallback(inst, worker, workleft)
 	if workleft <= 0 then
 		-- figure out which side to drop the loot
-		local pt = Vector3(inst.Transform:GetWorldPosition())
+		local pt = inst:GetPosition()
 		local hispos = Vector3(worker.Transform:GetWorldPosition())
 
 		local he_right = ((hispos - pt):Dot(TheCamera:GetRightVec()) > 0)
@@ -50,10 +50,6 @@ local function sectioncallback(newsection, oldsection, inst)
 	print("section callback", newsection, oldsection)
 	inst.components.workable:SetWorkLeft(newsection)
 	setanim(inst)
-end
-
-local function onperish(inst)
-	inst:Remove()
 end
 
 local function onupdate(inst)
@@ -104,7 +100,7 @@ local function sandcastlefn(Sim)
 	inst.components.fueled.fueltype = "NONE"
 	inst.components.fueled.accepting = false
 	inst.components.fueled:InitializeFuelLevel(SANDCASTLE_PERISHTIME)
-	inst.components.fueled:SetDepletedFn(onperish)
+	inst.components.fueled:SetDepletedFn(inst.Remove)
 	inst.components.fueled:SetSections(#anims)
 	inst.components.fueled:SetSectionCallback(sectioncallback)
 	inst.components.fueled:SetUpdateFn(onupdate)

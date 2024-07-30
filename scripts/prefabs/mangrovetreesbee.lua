@@ -116,7 +116,7 @@ local function chop_down_tree(inst, chopper)
 	inst:RemoveComponent("childspawner")
 	inst:RemoveTag("shelter")
 	inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local hispos = Vector3(chopper.Transform:GetWorldPosition())
 
 	local he_right = (hispos - pt):Dot(TheCamera:GetRightVec()) > 0

@@ -19,7 +19,7 @@ local prefabs =
 local function DoTurnOffSound(inst, owner)
     inst._soundtask = nil
     (owner ~= nil and owner:IsValid() and owner.SoundEmitter or inst.SoundEmitter):PlaySound(
-    "dontstarve_DLC002/common/bottlelantern_turnoff")
+        "dontstarve_DLC002/common/bottlelantern_turnoff")
 end
 
 local function PlayTurnOffSound(inst)
@@ -305,7 +305,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst.components.inventoryitem:SetOnDroppedFn(ondropped)
     inst.components.inventoryitem:SetOnPutInInventoryFn(turnoff)

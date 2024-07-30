@@ -1,10 +1,9 @@
-local DEBUG_MODE = BRANCH == "dev"
+local assets = {
+    Asset("ANIM", "anim/armor_vortex_cloak.zip"),
+    Asset("ANIM", "anim/cloak_fx.zip")
+}
 
-local assets = { Asset("ANIM", "anim/armor_vortex_cloak.zip"), Asset("ANIM", "anim/cloak_fx.zip") }
 
-local ARMORVORTEX = 450
-local ARMORVORTEXFUEL = ARMORVORTEX / 45 * TUNING.LARGE_FUEL
-local ARMORVORTEX_ABSORPTION = 1
 
 local function setsoundparam(inst)
     local param = Remap(inst.components.armor.condition, 0, inst.components.armor.maxcondition, 0, 1)
@@ -76,10 +75,6 @@ local function ondrop(inst, owner)
     inst.components.container.canbeopened = true
 end
 
-local function nofuel(inst)
-
-end
-
 local function ontakefuel(inst)
     if inst.components.armor.condition and inst.components.armor.condition < 0 then
         inst.components.armor:SetCondition(0)
@@ -137,6 +132,7 @@ local function fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
+
     MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("armor_vortex_cloak")
@@ -158,18 +154,13 @@ local function fn()
     minimap:SetIcon("armor_vortex_cloak.png")
 
     if not TheWorld.ismastersim then
-        if inst.replica.container then
-            inst.OnEntityReplicated = function(inst)
-                inst.replica.container:WidgetSetup("armorvortexcloak")
-            end
-        end
         return inst
     end
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
     inst.components.inventoryitem.cangoincontainer = false
     inst.components.inventoryitem.canonlygoinpocket = true
     inst.components.inventoryitem:SetOnDroppedFn(ondrop)
@@ -179,14 +170,14 @@ local function fn()
     container:WidgetSetup("armorvortexcloak")
 
     local armor = inst:AddComponent("armor")
-    armor:InitCondition(ARMORVORTEX, ARMORVORTEX_ABSORPTION)
+    armor:InitCondition(TUNING.ARMORVORTEX, TUNING.ARMORVORTEX_ABSORPTION)
     armor:SetKeepOnFinished(true)
     armor:SetImmuneTags({ "shadow" })
     inst.components.armor.ontakedamage = OnTakeDamage
 
     local fueled = inst:AddComponent("fueled")
-    fueled:InitializeFuelLevel(ARMORVORTEXFUEL) -- Runar: 原来的燃值是充场面的，现在是等效燃值
-    fueled.fueltype = FUELTYPE.NIGHTMARE        -- 燃料是噩梦燃料
+    fueled:InitializeFuelLevel(TUNING.ARMORVORTEXFUEL) -- Runar: 原来的燃值是充场面的，现在是等效燃值
+    fueled.fueltype = FUELTYPE.NIGHTMARE               -- 燃料是噩梦燃料
     fueled.secondaryfueltype = FUELTYPE.ANCIENT_REMNANT
     fueled.ontakefuelfn = ontakefuel
     fueled.accepting = true

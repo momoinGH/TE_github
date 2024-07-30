@@ -100,7 +100,7 @@ local function GetTarget(inst)
 
     if not target and inst:GetBufferedAction() then
         target = (inst:GetBufferedAction().target and inst:GetBufferedAction().target:GetPosition()) or
-        inst:GetBufferedAction().pos
+            inst:GetBufferedAction().pos
     end
 
     --Returns a position
@@ -264,7 +264,7 @@ local function OnWaterChange(inst, onwater)
     --   local splash = SpawnPrefab("splash_water")
     --local splash = SpawnPrefab("frogsplash")	
 
-    --    local ent_pos = Vector3(inst.Transform:GetWorldPosition())
+    --    local ent_pos = inst:GetPosition()
     --    splash.Transform:SetPosition(ent_pos.x, ent_pos.y, ent_pos.z)
 end
 
@@ -373,10 +373,10 @@ local function fn()
     end)
     inst:ListenForEvent("death", OnDeadTiger)
 
-    inst.CanRun = true  --Can do charge attack
-    inst.CanFly = false --Can do leap attack
-    inst.podeFeed = false -- Can do feed  anim
-    inst.podeFeed = false -- Can do feed  anim
+    inst.CanRun = true     --Can do charge attack
+    inst.CanFly = false    --Can do leap attack
+    inst.podeFeed = false  -- Can do feed  anim
+    inst.podeFeed = false  -- Can do feed  anim
     inst.podeTaunt = false -- Can do taunt  anim
 
 

@@ -1,15 +1,13 @@
 require "stategraphs/SGantlarva"
 
+local prefabs = {
+	"antman"
+}
+
 local assets =
 {
 	Asset("ANIM", "anim/ant_larva.zip"),
 }
-
-local prefabs =
-{
-}
-
-
 
 local function spawnant(inst)
 	local ant = SpawnPrefab("antman")
@@ -17,20 +15,17 @@ local function spawnant(inst)
 	ant.Transform:SetPosition(pt.x, pt.y, pt.z)
 end
 
-local function OnHit(inst, dist)
-	inst.sg:GoToState("land")
-end
-
-local function larava_fn()
+local function fn()
 	local inst = CreateEntity()
-	inst.entity:AddNetwork()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
 
-	local physics = inst.entity:AddPhysics()
-	physics:SetMass(1)
-	physics:SetCapsule(0.2, 0.2)
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddPhysics()
+	inst.entity:AddNetwork()
+
+	inst.Physics:SetMass(1)
+	inst.Physics:SetCapsule(0.2, 0.2)
 	inst.Physics:SetFriction(10)
 	inst.Physics:SetDamping(5)
 	inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
@@ -41,11 +36,8 @@ local function larava_fn()
 	inst.Physics:CollidesWith(COLLISION.CHARACTERS)
 	inst.Physics:CollidesWith(COLLISION.GIANTS)
 
-
-
-
-	anim:SetBank("ant_larva")
-	anim:SetBuild("ant_larva")
+	inst.AnimState:SetBank("ant_larva")
+	inst.AnimState:SetBuild("ant_larva")
 
 	inst.entity:SetPristine()
 
@@ -53,19 +45,18 @@ local function larava_fn()
 		return inst
 	end
 
-	inst.persists = false
-
 	inst:AddComponent("locomotor")
+
 	inst:AddComponent("complexprojectile")
-	inst.components.complexprojectile:SetOnHit(OnHit)
 	inst.components.complexprojectile.yOffset = 2.5
 
 	inst.SpawnAnt = spawnant
 
 	inst:SetStateGraph("SGantlarva")
-	inst:DoTaskInTime(0.5, OnHit)
+
+	inst.persists = false
 
 	return inst
 end
-require "prefabutil"
-return Prefab("antlarva", larava_fn, assets)
+
+return Prefab("antlarva", fn, assets, prefabs)

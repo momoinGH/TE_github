@@ -1,5 +1,5 @@
 require "prefabs/roe_fish"
-require "prefabutil"
+
 require "tuning"
 
 local assets =

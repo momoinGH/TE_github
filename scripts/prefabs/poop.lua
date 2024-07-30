@@ -1,16 +1,16 @@
 local assets =
 {
     Asset("ANIM", "anim/poop.zip"),
-	Asset("SCRIPT", "scripts/prefabs/fertilizer_nutrient_defs.lua"),	
-	Asset("ANIM", "anim/monkey_projectile.zip"),
-	Asset("ANIM", "anim/swap_poop.zip"),	
+    Asset("SCRIPT", "scripts/prefabs/fertilizer_nutrient_defs.lua"),
+    Asset("ANIM", "anim/monkey_projectile.zip"),
+    Asset("ANIM", "anim/swap_poop.zip"),
 }
 
 local prefabs =
 {
     "flies",
     "poopcloud",
-    "gridplacer_farmablesoil",	
+    "gridplacer_farmablesoil",
 }
 
 local FERTILIZER_DEFS = require("prefabs/fertilizer_nutrient_defs").FERTILIZER_DEFS
@@ -38,8 +38,8 @@ local function OnDropped(inst)
     if inst.flies == nil then
         inst.flies = inst:SpawnChild("flies")
     end
-	
-	inst.x, inst.y, inst.z = inst.Transform:GetWorldPosition()
+
+    inst.x, inst.y, inst.z = inst.Transform:GetWorldPosition()
 end
 
 local function OnPickup(inst, player, pos)
@@ -47,48 +47,48 @@ local function OnPickup(inst, player, pos)
         inst.flies:Remove()
         inst.flies = nil
     end
-if inst:HasTag("podepegar") then -- print("1") 
-inst:RemoveTag("podepegar")
+    if inst:HasTag("podepegar") then -- print("1")
+        inst:RemoveTag("podepegar")
 
-	local x,y,z = player.Transform:GetWorldPosition()
-	local radius = 20
-	local ents = TheSim:FindEntities(x,y,z, radius, {"city_pig"}, {"guard"})
+        local x, y, z = player.Transform:GetWorldPosition()
+        local radius = 20
+        local ents = TheSim:FindEntities(x, y, z, radius, { "city_pig" }, { "guard" })
 
-	local closest_pig = nil
-	for _, pig in pairs(ents) do
---	print(pig)
-		if pig.components.citypossession then
-			closest_pig = pig
-			break
-		end
-	end
+        local closest_pig = nil
+        for _, pig in pairs(ents) do
+            --	print(pig)
+            if pig.components.citypossession then
+                closest_pig = pig
+                break
+            end
+        end
 
-	if closest_pig then
---	print("3")
-		closest_pig.poop_tip = true
-	end
-end
+        if closest_pig then
+            --	print("3")
+            closest_pig.poop_tip = true
+        end
+    end
 end
 
 local function OnPickup2(inst)
-	
+
 end
 
 local function OnHitPoop(inst, attacker, target)
     local other = SpawnPrefab("poop_splat")
-	local pt = inst:GetPosition()
+    local pt = inst:GetPosition()
     other.Transform:SetPosition(pt:Get())
-	inst.SoundEmitter:PlaySound("dontstarve/creatures/monkey/poopsplat")
-	if target and target:HasTag("bird") then 
-	target:DoTaskInTime(0.1, function(target) target.sg:GoToState("stunned") end)
-	end
+    inst.SoundEmitter:PlaySound("dontstarve/creatures/monkey/poopsplat")
+    if target and target:HasTag("bird") then
+        target:DoTaskInTime(0.1, function(target) target.sg:GoToState("stunned") end)
+    end
     inst:Remove()
 end
 
-local function OnEquip(inst, owner) 
+local function OnEquip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", "swap_poop", "swap_poop")
-    owner.AnimState:Show("ARM_carry") 
-    owner.AnimState:Hide("ARM_normal") 
+    owner.AnimState:Show("ARM_carry")
+    owner.AnimState:Hide("ARM_normal")
 end
 
 local function OnUnequip(inst, owner)
@@ -97,19 +97,19 @@ local function OnUnequip(inst, owner)
 end
 
 local function onthrown(inst, attacker, target)
---	if attacker and attacker.prefab == "wilbur" then
+    --	if attacker and attacker.prefab == "wilbur" then
     inst.AnimState:SetBank("monkey_projectile")
     inst.AnimState:SetBuild("monkey_projectile")
     inst.AnimState:PlayAnimation("idle", true)
     inst.components.weapon:SetDamage(10)
-	inst.Physics:ClearCollisionMask() 
-	inst.Physics:CollidesWith(COLLISION.GROUND)	
---	else
---    local x, y, z = inst.Transform:GetWorldPosition()	
---	local merda = SpawnPrefab("poop")
---	merda.Transform:SetPosition(x, y , z)
---    inst:Remove()
---	end
+    inst.Physics:ClearCollisionMask()
+    inst.Physics:CollidesWith(COLLISION.GROUND)
+    --	else
+    --    local x, y, z = inst.Transform:GetWorldPosition()	
+    --	local merda = SpawnPrefab("poop")
+    --	merda.Transform:SetPosition(x, y , z)
+    --    inst:Remove()
+    --	end
 end
 
 local function GetFertilizerKey(inst)
@@ -136,9 +136,9 @@ local function fn()
 
     MakeInventoryFloatable(inst, "med", 0.1, 0.73)
     MakeDeployableFertilizerPristine(inst)
-	inst:AddTag("pooptocompact")	
+    inst:AddTag("pooptocompact")
     inst:AddTag("fertilizerresearchable")
-	
+
     inst.GetFertilizerKey = GetFertilizerKey
 
     inst.entity:SetPristine()
@@ -153,9 +153,9 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst:AddComponent("stackable")
-	
+
     inst:AddComponent("fertilizerresearchable")
-    inst.components.fertilizerresearchable:SetResearchFn(fertilizerresearchfn)	
+    inst.components.fertilizerresearchable:SetResearchFn(fertilizerresearchfn)
 
     inst:AddComponent("fertilizer")
     inst.components.fertilizer.fertilizervalue = TUNING.POOP_FERTILIZE
@@ -205,8 +205,8 @@ local function fn1()
 
     MakeInventoryFloatable(inst)
 
-	inst:AddTag("thrown")
-	inst:AddTag("projectile")
+    inst:AddTag("thrown")
+    inst:AddTag("projectile")
 
     inst.entity:SetPristine()
 
@@ -217,26 +217,26 @@ local function fn1()
     inst.AnimState:PushAnimation("idle", false)
 
     inst:AddComponent("inspectable")
-	
-	inst:AddComponent("equippable")
-	inst.components.equippable:SetOnEquip(OnEquip)
-	inst.components.equippable:SetOnUnequip(OnUnequip)
-	inst.components.equippable.equipstack = true
-	
+
+    inst:AddComponent("equippable")
+    inst.components.equippable:SetOnEquip(OnEquip)
+    inst.components.equippable:SetOnUnequip(OnUnequip)
+    inst.components.equippable.equipstack = true
+
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(0)
-    inst.components.weapon:SetRange(8, 10)	
+    inst.components.weapon:SetRange(8, 10)
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+
     inst:AddComponent("stackable")
-	
-	inst:AddComponent("projectile")
-	inst.components.projectile:SetSpeed(20)
-	inst.components.projectile.hitdist = 0.5
-	inst.components.projectile:SetOnHitFn(OnHitPoop)
-	inst.components.projectile:SetOnThrownFn(onthrown)	
+
+    inst:AddComponent("projectile")
+    inst.components.projectile:SetSpeed(20)
+    inst.components.projectile.hitdist = 0.5
+    inst.components.projectile:SetOnHitFn(OnHitPoop)
+    inst.components.projectile:SetOnThrownFn(onthrown)
 
     inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.MED_FUEL
@@ -246,4 +246,4 @@ local function fn1()
 end
 
 return Prefab("poop", fn, assets, prefabs),
-		Prefab("poop2", fn1, assets, prefabs)
+    Prefab("poop2", fn1, assets, prefabs)

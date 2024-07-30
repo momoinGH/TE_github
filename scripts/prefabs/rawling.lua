@@ -99,8 +99,6 @@ local function fn(Sim)
 	--	inst.components.floatable:SetOnHitLandFn(onhitground)
 	--	inst.components.floatable:SetOnHitWaterFn(onhitground)
 
-	--	MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.MEDIUM, TUNING.WINDBLOWN_SCALE_MAX.MEDIUM)
-
 	inst:AddComponent("talker")
 	inst.components.talker.fontsize = 28
 	inst.components.talker.font = TALKINGFONT
@@ -121,7 +119,7 @@ local function fn(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 	inst.components.inventoryitem:SetOnPutInInventoryFn(onputininventory)
 	inst.components.inventoryitem.bouncesound = "dontstarve_DLC002/common/monkey_ball/bounce"
 

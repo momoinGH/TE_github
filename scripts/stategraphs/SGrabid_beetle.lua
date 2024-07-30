@@ -2,16 +2,20 @@ require("stategraphs/commonstates")
 
 local actionhandlers =
 {
-	ActionHandler(ACTIONS.EAT, "eat"),
+    ActionHandler(ACTIONS.EAT, "eat"),
 }
 
-local events=
+local events =
 {
-    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
+    EventHandler("attacked",
+        function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg
+                    :GoToState("hit") end end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-    EventHandler("doattack", function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then inst.sg:GoToState("attack", data.target) end end),
+    EventHandler("doattack",
+        function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+                inst.sg:GoToState("attack", data.target) end end),
     CommonHandlers.OnSleep(),
-    CommonHandlers.OnLocomote(true,false),
+    CommonHandlers.OnLocomote(true, false),
     CommonHandlers.OnFreeze(),
 }
 
@@ -23,12 +27,12 @@ local function get_loco_state(inst, override, default)
     return anim
 end
 
-local states=
+local states =
 {
 
-    State{
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
         onenter = function(inst, playanim)
             ----inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/pant")
             inst.Physics:Stop()
@@ -38,16 +42,16 @@ local states=
             else
                 inst.AnimState:PlayAnimation("idle", true)
             end
-            inst.sg:SetTimeout(2*math.random()+.5)
+            inst.sg:SetTimeout(2 * math.random() + .5)
         end,
 
     },
 
 
 
-    State{
+    State {
         name = "attack",
-        tags = {"attack", "busy"},
+        tags = { "attack", "busy" },
 
         onenter = function(inst, target)
             inst.sg.statemem.target = target
@@ -56,24 +60,29 @@ local states=
             inst.AnimState:PlayAnimation("atk")
         end,
 
-        timeline=
+        timeline =
         {
 
-			TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/rabid_beetle/whip") end),
-            TimeEvent(12*FRAMES, function (inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/rabid_beetle/attack") end),
-                -- body
-            TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+            TimeEvent(9 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/rabid_beetle/whip") end),
+            TimeEvent(12 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/rabid_beetle/attack") end),
+            -- body
+            TimeEvent(16 * FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
 
-        events=
+        events =
         {
-            EventHandler("animover", function(inst) if math.random() < .333 then inst.components.combat:SetTarget(nil) inst.sg:GoToState("taunt") else inst.sg:GoToState("idle") end end),
+            EventHandler("animover", function(inst) if math.random() < .333 then
+                    inst.components.combat:SetTarget(nil)
+                    inst.sg:GoToState("taunt")
+                else inst.sg:GoToState("idle") end end),
         },
     },
 
-	State{
+    State {
         name = "eat",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
@@ -82,104 +91,108 @@ local states=
             inst.AnimState:PlayAnimation("atk")
         end,
 
-		timeline=
+        timeline =
         {
-			---TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/bite") end),
+            ---TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/bite") end),
         },
 
-        events=
+        events =
         {
-			EventHandler("animover", function(inst) if inst:PerformBufferedAction() then inst.components.combat:SetTarget(nil) inst.sg:GoToState("taunt") else inst.sg:GoToState("idle") end end),
+            EventHandler("animover", function(inst) if inst:PerformBufferedAction() then
+                    inst.components.combat:SetTarget(nil)
+                    inst.sg:GoToState("taunt")
+                else inst.sg:GoToState("idle") end end),
         },
     },
 
-	State{
-		name = "hit",
-        tags = {"busy", "hit"},
+    State {
+        name = "hit",
+        tags = { "busy", "hit" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("hit")
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/rabid_beetle/hurt")
-
         end,
 
-        events=
+        events =
         {
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-	State{
-		name = "taunt",
-        tags = {"busy"},
+    State {
+        name = "taunt",
+        tags = { "busy" },
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
         end,
 
-		timeline=
+        timeline =
         {
-			TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/rabid_beetle/taunt") end),
-			--TimeEvent(24*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/bark") end),
+            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/rabid_beetle/taunt") end),
+            --TimeEvent(24*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/bark") end),
         },
 
-        events=
+        events =
         {
-			EventHandler("animover", function(inst) if math.random() < .333 then inst.sg:GoToState("taunt") else inst.sg:GoToState("idle") end end),
+            EventHandler("animover", function(inst) if math.random() < .333 then inst.sg:GoToState("taunt") else inst.sg
+                        :GoToState("idle") end end),
         },
     },
 
-    State{
+    State {
         name = "death",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
-			inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/rabid_beetle/death")
+            inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/rabid_beetle/death")
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
-            RemovePhysicsColliders(inst)            
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))            
+            RemovePhysicsColliders(inst)
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
     },
 
 
 
--- RUN STATES FOR LOOPING SOUND
-    State{
+    -- RUN STATES FOR LOOPING SOUND
+    State {
         name = "run_start",
-        tags = {"moving", "running", "canrotate"},
-            
-        onenter = function(inst) 
+        tags = { "moving", "running", "canrotate" },
+
+        onenter = function(inst)
             inst.components.locomotor:RunForward()
-            inst.AnimState:PlayAnimation("run_pre")            
+            inst.AnimState:PlayAnimation("run_pre")
         end,
 
-        events=
-        {   
-            EventHandler("animover", function(inst) inst.sg:GoToState("run") end ),        
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("run") end),
         },
-            
-     },
-    
 
-     State{
-            
+    },
+
+
+    State {
+
         name = "run",
-        tags = {"moving", "running", "canrotate"},
-        
-        onenter = function(inst) 
+        tags = { "moving", "running", "canrotate" },
+
+        onenter = function(inst)
             inst.components.locomotor:RunForward()
             inst.AnimState:PlayAnimation("run_loop")
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/rabid_beetle/run_LP", "runsound")
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/rabid_beetle/talk_LP", "talksound")
         end,
-        
-        events=
-        {   
-            EventHandler("animover", function(inst) inst.sg:GoToState("run") end ),        
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("run") end),
         },
 
         onexit = function(inst)
@@ -188,50 +201,49 @@ local states=
         end,
 
     },
-        
-    State{
-        
+
+    State {
+
         name = "run_stop",
-        tags = {"idle"},
-        
-        onenter = function(inst) 
+        tags = { "idle" },
+
+        onenter = function(inst)
             inst.components.locomotor:StopMoving()
 
-           -- local should_softstop = (type(softstop) == "function" and softstop(inst)) or softstop
+            -- local should_softstop = (type(softstop) == "function" and softstop(inst)) or softstop
 
 
             inst.AnimState:PushAnimation("run_pst")
-
         end,
-        
-        events=
-        {   
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),        
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
 
-    State{
+    State {
         name = "fall",
-        tags = {"busy"},
+        tags = { "busy" },
         onenter = function(inst)
             inst.Physics:SetDamping(0)
-            inst.Physics:SetMotorVel(0,-20+math.random()*10,0)
+            inst.Physics:SetMotorVel(0, -20 + math.random() * 10, 0)
             inst.AnimState:PlayAnimation("idle", true)
         end,
-        
+
         onupdate = function(inst)
             local pt = Point(inst.Transform:GetWorldPosition())
             if pt.y < 2 then
-                inst.Physics:SetMotorVel(0,0,0)
+                inst.Physics:SetMotorVel(0, 0, 0)
             end
-            
+
             if pt.y <= .1 then
-                pt.y = 0                
+                pt.y = 0
                 inst.Physics:Stop()
                 inst.Physics:SetDamping(5)
-                inst.Physics:Teleport(pt.x,pt.y,pt.z)
-               -- inst.DynamicShadow:Enable(true)
+                inst.Physics:Teleport(pt.x, pt.y, pt.z)
+                -- inst.DynamicShadow:Enable(true)
                 inst.SoundEmitter:PlaySound("dontstarve/frog/splat")
                 inst.sg:GoToState("idle")
             end
@@ -242,20 +254,20 @@ local states=
             pt.y = 0
             inst.Transform:SetPosition(pt:Get())
         end,
-    }, 
+    },
 
-    State{
+    State {
         name = "hatch",
-        tags = {"busy"},
+        tags = { "busy" },
         onenter = function(inst, playanim)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("emerge")
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/rabid_beetle/taunt")
         end,
-        
-        events=
-        {   
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),        
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
@@ -263,15 +275,15 @@ local states=
 }
 
 CommonStates.AddSleepStates(states,
-{
-	sleeptimeline = {
-        --TimeEvent(30*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/sleep") end),
-	},
-})
+    {
+        sleeptimeline = {
+            --TimeEvent(30*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/sleep") end),
+        },
+    })
 
 --[[
 CommonStates.AddRunStates(states,
-{ 
+{
 	runtimeline = {
 		TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/growl") end),
 		TimeEvent(0*FRAMES, PlayFootstep ),
@@ -284,4 +296,3 @@ CommonStates.AddFrozenStates(states)
 
 
 return StateGraph("rabid_beetle", states, events, "taunt", actionhandlers)
-

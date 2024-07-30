@@ -32,7 +32,7 @@ end
 local function SpawnRoBin(inst, spawn_pt, spawnevent)
     --    print("ro_bin_gizzard_stone - SpawnRoBin")
 
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     --    print("    near", pt)
     if not spawn_pt then
         spawn_pt = GetSpawnPoint(pt)
@@ -211,7 +211,7 @@ local function fn(Sim)
     inst.fixtask = inst:DoTaskInTime(0, function()
         if not inst.robinspawned then
             inst.robinspawned = true
-            local pt = Vector3(inst.Transform:GetWorldPosition())
+            local pt = inst:GetPosition()
             SpawnRoBin(inst, pt, true)
         end
     end)

@@ -155,7 +155,7 @@ local function workable(file, anim, action, loot, lootmax, minimap, eightfaced)
         inst:AddComponent("pickable")
         inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
         inst.components.pickable:SetUp(type(loot) ~= "table" and loot or "cutgrass")
-        inst.components.pickable.onpickedfn = onpickedfn
+        inst.components.pickable.remove_when_picked = true
     end
 
     inst:AddComponent("inspectable")
@@ -223,7 +223,7 @@ end
 local function chop_down_tree(inst, chopper)
     inst:RemoveComponent("workable")
     inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
 
     inst.components.lootdropper:DropLoot()
 

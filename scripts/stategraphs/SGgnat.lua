@@ -91,7 +91,7 @@ local states =
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
             inst.SoundEmitter:KillSound("move")
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/gnat/death")
         end,
@@ -181,8 +181,10 @@ local states =
         timeline =
         {
 
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/gnat/attack") end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/gnat/attack")
+            end),
         },
 
         events =
@@ -213,8 +215,10 @@ local states =
                 inst.components.combat:DoAttack(inst.sg.statemem.target)
             end),
 
-            TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/gnat/attack") end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/gnat/attack")
+            end),
 
         },
 

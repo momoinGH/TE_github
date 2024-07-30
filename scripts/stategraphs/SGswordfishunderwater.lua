@@ -1,9 +1,8 @@
-
 require("stategraphs/commonstates")
 
-local actionhandlers = 
+local actionhandlers =
 {
-   -- ActionHandler(ACTIONS.EAT, "eat"),
+    -- ActionHandler(ACTIONS.EAT, "eat"),
     --ActionHandler(ACTIONS.GOHOME, "action"),
 }
 
@@ -12,24 +11,24 @@ local function GoToLocoState(inst, state)
     if inst:IsLocoState(state) then
         return true
     end
-    inst.sg:GoToState("goto"..string.lower(state), {endstate = inst.sg.currentstate.name})
+    inst.sg:GoToState("goto" .. string.lower(state), { endstate = inst.sg.currentstate.name })
 end
 
-local events=
+local events =
 {
-   CommonHandlers.OnSleep(),
-   CommonHandlers.OnFreeze(),
+    CommonHandlers.OnSleep(),
+    CommonHandlers.OnFreeze(),
 
-   EventHandler("locomote", 
-        function(inst) 
+    EventHandler("locomote",
+        function(inst)
             if not inst.sg:HasStateTag("idle") and not inst.sg:HasStateTag("moving") then return end
-            
+
             if not inst.components.locomotor:WantsToMoveForward() then
                 if not inst.sg:HasStateTag("idle") then
                     if not inst.sg:HasStateTag("running") then
                         inst.sg:GoToState("idle")
                     end
-                        inst.sg:GoToState("idle")
+                    inst.sg:GoToState("idle")
                 end
             elseif inst.components.locomotor:WantsToRun() then
                 if not inst.sg:HasStateTag("running") then
@@ -43,29 +42,33 @@ local events=
         end),
 
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
-    EventHandler("doattack", function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then inst.sg:GoToState("attack", data.target) end end),
+    EventHandler("attacked",
+        function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg
+                    :GoToState("hit") end end),
+    EventHandler("doattack",
+        function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+                inst.sg:GoToState("attack", data.target) end end),
 }
 
-local states=
+local states =
 {
-    State{
+    State {
         name = "gotobelow",
-        tags = {"busy"},
+        tags = { "busy" },
         onenter = function(inst, data)
---            inst.AnimState:PlayAnimation("submerge")
+            --            inst.AnimState:PlayAnimation("submerge")
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dogfish/water_submerge_med")
             inst.Physics:Stop()
             inst.sg.statemem.endstate = data.endstate
         end,
 
         onexit = function(inst)
---            inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
---            inst.Transform:SetNoFaced()
+            --            inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+            --            inst.Transform:SetNoFaced()
             inst:SetLocoState("below")
         end,
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst)
                 inst.sg:GoToState(inst.sg.statemem.endstate)
@@ -73,24 +76,23 @@ local states=
         },
     },
 
-    State{
+    State {
         name = "gotoabove",
-        tags = {"busy"},
+        tags = { "busy" },
         onenter = function(inst, data)
             inst.Physics:Stop()
---            inst.AnimState:SetOrientation(ANIM_ORIENTATION.Default)
---            inst.Transform:SetFourFaced()
---            inst.AnimState:PlayAnimation("emerge")
+            --            inst.AnimState:SetOrientation(ANIM_ORIENTATION.Default)
+            --            inst.Transform:SetFourFaced()
+            --            inst.AnimState:PlayAnimation("emerge")
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dogfish/water_emerge_med")
             inst.sg.statemem.endstate = data.endstate
-
         end,
 
         onexit = function(inst)
             inst:SetLocoState("above")
         end,
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst)
                 inst.sg:GoToState(inst.sg.statemem.endstate)
@@ -98,56 +100,56 @@ local states=
         },
     },
 
-    State{       
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
         onenter = function(inst, playanim)
             inst.Physics:Stop()
             local anim = "fishmed"
             if inst.IsLocoState(inst, "above") then
                 anim = "fishmed"
             end
-			
-			inst:DoTaskInTime(math.random(0,1), function(inst)
-			local x, y, z = inst.Transform:GetWorldPosition()			
-			local bubble = SpawnPrefab("bubble_fx_small")
-			bubble.Transform:SetPosition(x, y+2, z)	
-			end)						
-			
+
+            inst:DoTaskInTime(math.random(0, 1), function(inst)
+                local x, y, z = inst.Transform:GetWorldPosition()
+                local bubble = SpawnPrefab("bubble_fx_small")
+                bubble.Transform:SetPosition(x, y + 2, z)
+            end)
+
 
             if playanim then
                 inst.AnimState:PlayAnimation(playanim)
                 inst.AnimState:PushAnimation(anim, true)
             else
                 inst.AnimState:PlayAnimation(anim, true)
-            end                                
+            end
         end,
     },
 
-    State{
+    State {
         name = "eat",
-        
+
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("fishmed", true)
-            inst.sg:SetTimeout(2+math.random()*4)
+            inst.sg:SetTimeout(2 + math.random() * 4)
         end,
-        
+
         ontimeout = function(inst)
             inst:PerformBufferedAction()
             inst.sg:GoToState("idle")
         end,
-    },  
-    
-    State{
+    },
+
+    State {
         name = "swimming",
-        tags = {"moving", "canrotate", "swimming"},
-        
+        tags = { "moving", "canrotate", "swimming" },
+
         onenter = function(inst)
-                inst.AnimState:PlayAnimation("fishmed", true)
-                inst.components.locomotor:WalkForward()
+            inst.AnimState:PlayAnimation("fishmed", true)
+            inst.components.locomotor:WalkForward()
         end,
-        
+
         onupdate = function(inst)
             if not inst.components.locomotor:WantsToMoveForward() then
                 inst.sg:GoToState("idle")
@@ -155,192 +157,193 @@ local states=
         end,
     },
 
-    State{
+    State {
         name = "run",
-        tags = {"moving", "running", "canrotate"},
-        
+        tags = { "moving", "running", "canrotate" },
+
         onenter = function(inst)
-                inst.AnimState:PlayAnimation("fishmed", true)
-                inst.components.locomotor:RunForward()
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dogfish/water_swimemerged_med_LP", "run")
+            inst.AnimState:PlayAnimation("fishmed", true)
+            inst.components.locomotor:RunForward()
+            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dogfish/water_swimemerged_med_LP", "run")
         end,
 
         onexit = function(inst)
             inst.SoundEmitter:KillSound("run")
         end,
-    },    
-    
-	State{
+    },
+
+    State {
         name = "death",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("death")
-            inst.SoundEmitter:PlaySound("volcan/Dogfish/death")			
+            inst.SoundEmitter:PlaySound("volcan/Dogfish/death")
             inst.Physics:Stop()
-            RemovePhysicsColliders(inst)                    
+            RemovePhysicsColliders(inst)
         end,
-		
-		events=
+
+        events =
         {
-            EventHandler("animover", function(inst) 
-			inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
-			inst:Remove() end),
-        },  
+            EventHandler("animover", function(inst)
+                inst.components.lootdropper:DropLoot(inst:GetPosition())
+                inst:Remove()
+            end),
+        },
     },
-	
-	State{
+
+    State {
         name = "dead",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("dead", true)
-			
-			inst.Transform:SetFourFaced()
-			local angle = inst.Transform:GetRotation()
-			inst.Transform:SetRotation(angle)
-			inst:Remove()		
-			
+
+            inst.Transform:SetFourFaced()
+            local angle = inst.Transform:GetRotation()
+            inst.Transform:SetRotation(angle)
+            inst:Remove()
         end,
     },
-	
-    State{
+
+    State {
         name = "hit",
-        tags = {"busy", "hit"},
+        tags = { "busy", "hit" },
 
         onenter = function(inst, cb)
-                inst.Physics:Stop()
-                inst.AnimState:PlayAnimation("hit")
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/swordfish/hit")
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("hit")
+            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/swordfish/hit")
         end,
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "attack",
-        tags = {"attack", "busy"},
+        tags = { "attack", "busy" },
 
         onenter = function(inst, target)
-                inst.sg.statemem.target = target
-                inst.Physics:Stop()
-                inst.components.combat:StartAttack()
-                inst.AnimState:PlayAnimation("atk_pre")
-                inst.AnimState:PushAnimation("atk", false)
+            inst.sg.statemem.target = target
+            inst.Physics:Stop()
+            inst.components.combat:StartAttack()
+            inst.AnimState:PlayAnimation("atk_pre")
+            inst.AnimState:PushAnimation("atk", false)
         end,
 
         timeline =
         {
-            TimeEvent( 2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/swordfish/attack_pre") end),
-            TimeEvent( 6*FRAMES, function(inst)
-                if inst.components.combat.target then 
-                    inst:ForceFacePoint(inst.components.combat.target:GetPosition()) 
-                end 
+            TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/swordfish/attack_pre") end),
+            TimeEvent(6 * FRAMES, function(inst)
+                if inst.components.combat.target then
+                    inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+                end
             end),
-            TimeEvent(11*FRAMES, function(inst)
-                if inst.components.combat.target then 
-                    inst:ForceFacePoint(inst.components.combat.target:GetPosition()) 
-                end 
+            TimeEvent(11 * FRAMES, function(inst)
+                if inst.components.combat.target then
+                    inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+                end
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/swordfish/attack")
---                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/swordfish_sword")
+                --                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/swordfish_sword")
             end),
-            TimeEvent(16*FRAMES, function(inst)
-                if inst.components.combat.target then 
-                    inst:ForceFacePoint(inst.components.combat.target:GetPosition()) 
-                end 
+            TimeEvent(16 * FRAMES, function(inst)
+                if inst.components.combat.target then
+                    inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+                end
                 inst.components.combat:DoAttack(inst.sg.statemem.target)
             end),
         },
 
         events =
         {
-            EventHandler("animqueueover",  function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "sleep",
-        tags = {"busy", "sleeping"},
+        tags = { "busy", "sleeping" },
 
         onenter = function(inst)
-                inst.components.locomotor:StopMoving()
-                inst.AnimState:PlayAnimation("sleep_pre")
+            inst.components.locomotor:StopMoving()
+            inst.AnimState:PlayAnimation("sleep_pre")
         end,
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("sleeping") end ),
+            EventHandler("animover", function(inst) inst.sg:GoToState("sleeping") end),
             EventHandler("onwakeup", function(inst) inst.sg:GoToState("wake") end),
         },
     },
 
-    State{
+    State {
 
         name = "sleeping",
-        tags = {"busy", "sleeping"},
+        tags = { "busy", "sleeping" },
 
         onenter = function(inst)
-                inst.AnimState:PlayAnimation("sleep_loop")
+            inst.AnimState:PlayAnimation("sleep_loop")
         end,
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("sleeping") end ),
+            EventHandler("animover", function(inst) inst.sg:GoToState("sleeping") end),
             EventHandler("onwakeup", function(inst) inst.sg:GoToState("wake") end),
         },
     },
 
-    State{
+    State {
         name = "wake",
-        tags = {"busy", "waking"},
+        tags = { "busy", "waking" },
 
         onenter = function(inst)
-                inst.components.locomotor:StopMoving()
-                inst.AnimState:PlayAnimation("sleep_pst")
-                if inst.components.sleeper and inst.components.sleeper:IsAsleep() then
-                    inst.components.sleeper:WakeUp()
-                end
+            inst.components.locomotor:StopMoving()
+            inst.AnimState:PlayAnimation("sleep_pst")
+            if inst.components.sleeper and inst.components.sleeper:IsAsleep() then
+                inst.components.sleeper:WakeUp()
+            end
         end,
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "frozen",
-        tags = {"busy", "frozen"},
+        tags = { "busy", "frozen" },
 
         onenter = function(inst)
-                inst.components.locomotor:StopMoving()
-                inst.AnimState:PlayAnimation("frozen", true)
-                inst.SoundEmitter:PlaySound("dontstarve/common/freezecreature")
-                inst.AnimState:OverrideSymbol("swap_frozen", "frozen", "frozen")
+            inst.components.locomotor:StopMoving()
+            inst.AnimState:PlayAnimation("frozen", true)
+            inst.SoundEmitter:PlaySound("dontstarve/common/freezecreature")
+            inst.AnimState:OverrideSymbol("swap_frozen", "frozen", "frozen")
         end,
 
         onexit = function(inst)
             inst.AnimState:ClearOverrideSymbol("swap_frozen")
         end,
 
-        events=
+        events =
         {
-            EventHandler("onthaw", function(inst) inst.sg:GoToState("thaw") end ),
+            EventHandler("onthaw", function(inst) inst.sg:GoToState("thaw") end),
         },
     },
 
-    State{
+    State {
         name = "thaw",
-        tags = {"busy", "thawing"},
+        tags = { "busy", "thawing" },
 
         onenter = function(inst)
-                inst.components.locomotor:StopMoving()
-                inst.AnimState:PlayAnimation("frozen_loop_pst", true)
-                inst.SoundEmitter:PlaySound("dontstarve/common/freezethaw", "thawing")
-                inst.AnimState:OverrideSymbol("swap_frozen", "frozen", "frozen")
+            inst.components.locomotor:StopMoving()
+            inst.AnimState:PlayAnimation("frozen_loop_pst", true)
+            inst.SoundEmitter:PlaySound("dontstarve/common/freezethaw", "thawing")
+            inst.AnimState:OverrideSymbol("swap_frozen", "frozen", "frozen")
         end,
 
         onexit = function(inst)
@@ -356,10 +359,10 @@ local states=
                 else
                     inst.sg:GoToState("idle")
                 end
-            end ),
+            end),
         },
     },
 }
 
-  
+
 return StateGraph("swordfishunderwater", states, events, "idle", actionhandlers)

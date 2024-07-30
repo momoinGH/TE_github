@@ -1,4 +1,3 @@
-require "prefabutil"
 local assets =
 {
     Asset("ANIM", "anim/jungletreeseed.zip"),
@@ -265,7 +264,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("deployable")
     inst.components.deployable.CanDeploy = test_ground
@@ -326,7 +325,7 @@ local function fn1()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("deployable")
     inst.components.deployable.CanDeploy = test_ground
@@ -387,7 +386,7 @@ local function fn2()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("deployable")
     inst.components.deployable.CanDeploy = test_ground

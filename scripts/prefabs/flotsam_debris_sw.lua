@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
     Asset("ANIM", "anim/flotsam_armoured_build.zip"),
@@ -21,7 +19,7 @@ local function onhammered(inst)
     local fx = SpawnPrefab("collapse_small")
     fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
     fx:SetMaterial("wood")
-    --	inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+    --	inst.components.lootdropper:DropLoot(inst:GetPosition())
     inst:Remove()
 end
 

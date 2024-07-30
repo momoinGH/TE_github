@@ -384,7 +384,7 @@ function decofn(build, bank, animframe, data, assets, prefabs)
             if not inst.childrenspawned then
                 for i, child in ipairs(data.children) do
                     local childprop = SpawnPrefab(child)
-                    local pt = Vector3(inst.Transform:GetWorldPosition())
+                    local pt = inst:GetPosition()
                     childprop.Transform:SetPosition(pt.x, pt.y, pt.z)
                     childprop.Transform:SetRotation(inst.Transform:GetRotation())
                     if not inst.decochildrenToRemove then
@@ -558,7 +558,7 @@ function decofn(build, bank, animframe, data, assets, prefabs)
                 if not inst:HasTag("INTERIOR_LIMBO") then
                     inst:DoTaskInTime(1,
                         function()
-                            local pt = Vector3(inst.Transform:GetWorldPosition())
+                            local pt = inst:GetPosition()
                             local torches = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "wall_torch" },
                                 { "INTERIOR_LIMBO" })
                             local closedoors = false
@@ -584,7 +584,7 @@ function decofn(build, bank, animframe, data, assets, prefabs)
 
             inst:ListenForEvent("fire_lit", function()
                 local opendoors = true
-                local pt = Vector3(inst.Transform:GetWorldPosition())
+                local pt = inst:GetPosition()
                 local torches = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "wall_torch" }, { "INTERIOR_LIMBO" })
 
                 for i, torch in ipairs(torches) do
@@ -594,7 +594,7 @@ function decofn(build, bank, animframe, data, assets, prefabs)
                 end
 
                 if opendoors then
-                    local pt = Vector3(inst.Transform:GetWorldPosition())
+                    local pt = inst:GetPosition()
                     local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
                     for i, ent in ipairs(ents) do
                         if ent:HasTag("lockable_door") then

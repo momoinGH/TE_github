@@ -3,7 +3,7 @@ require("stategraphs/commonstates")
 local actionhandlers =
 {
     ActionHandler(ACTIONS.GOHOME, "burrow"),
-    ActionHandler(ACTIONS.EAT, "eat"),    
+    ActionHandler(ACTIONS.EAT, "eat"),
     --ActionHandler(ACTIONS.BUILDHOME, "buildhome"),
 }
 
@@ -16,21 +16,21 @@ local events =
 
     EventHandler("entershield", function(inst, data)
         inst.sg:GoToState("burrow_sheild")
-    end),  
+    end),
     EventHandler("exitshield", function(inst, data)
         inst.sg:GoToState("emerge")
-    end),        
+    end),
     EventHandler("fly_in", function(inst, data)
         inst.sg:GoToState("enter_loop")
     end),
     EventHandler("attacked", function(inst)
         if not inst.components.health:IsDead() then
             if not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("shielding") then -- don't interrupt attack
-                inst.sg:GoToState("hit") -- can still attack
+                inst.sg:GoToState("hit")                                                       -- can still attack
             end
         end
     end),
-    EventHandler("doattack", function(inst, data) 
+    EventHandler("doattack", function(inst, data)
         if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
             inst.sg:GoToState(
                 data.target:IsValid()
@@ -43,8 +43,8 @@ local events =
     end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     CommonHandlers.OnFreeze(),
-    CommonHandlers.OnHop(),	
-    EventHandler("locomote", function(inst) 
+    CommonHandlers.OnHop(),
+    EventHandler("locomote", function(inst)
         if not inst.sg:HasStateTag("busy") then
             local is_moving = inst.sg:HasStateTag("moving")
             local wants_to_move = inst.components.locomotor:WantsToMoveForward()
@@ -63,9 +63,9 @@ local events =
 
 local states =
 {
-    State{
+    State {
         name = "death",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/death")
@@ -73,70 +73,74 @@ local states =
             inst.AnimState:PushAnimation("dead")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))            
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
     },
 
-    State{
+    State {
         name = "premoving",
-        tags = {"moving", "canrotate"},
+        tags = { "moving", "canrotate" },
 
         onenter = function(inst)
             inst.components.locomotor:WalkForward()
             inst.AnimState:PlayAnimation("walk_pre")
         end,
 
-        timeline=
+        timeline =
         {
         },
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("moving") end),
         },
     },
 
-    State{
+    State {
         name = "moving",
-        tags = {"moving", "canrotate"},
+        tags = { "moving", "canrotate" },
 
         onenter = function(inst)
             inst.components.locomotor:WalkForward()
             inst.AnimState:PushAnimation("walk_loop")
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/walk") end),         
-            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/walk") end),
-            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/walk") end),
-         },
+            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/weevole/walk") end),
+            TimeEvent(3 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/weevole/walk") end),
+            TimeEvent(6 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/weevole/walk") end),
+        },
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("moving") end),
         },
     },
 
-    State{
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
 
         --ontimeout = function(inst)
         --    inst.sg:GoToState("taunt")
         --end,
- 
-        timeline=
+
+        timeline =
         {
-           
-            TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/idle") end),
-         },
+
+            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/weevole/idle") end),
+        },
 
         onenter = function(inst, start_anim)
             inst.Physics:Stop()
-        --    if math.random() < .3 then
-        --        inst.sg:SetTimeout(math.random()*2 + 2)
-        --    end
+            --    if math.random() < .3 then
+            --        inst.sg:SetTimeout(math.random()*2 + 2)
+            --    end
 
             if start_anim then
                 inst.AnimState:PlayAnimation(start_anim)
@@ -151,17 +155,17 @@ local states =
             EventHandler("animover", function(inst)
                 if math.random() < 0.01 then
                     inst.sg:GoToState("taunt")
-                else  
+                else
                     inst.sg:GoToState("idle")
                 end
             end),
-        },        
+        },
     },
 
 
-    State{
+    State {
         name = "burrow_sheild",
-        tags = {"busy","shielding"},
+        tags = { "busy", "shielding" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -170,8 +174,8 @@ local states =
 
         timeline =
         {
-            TimeEvent(9 * FRAMES, function(inst) 
-                inst.DynamicShadow:Enable(false) 
+            TimeEvent(9 * FRAMES, function(inst)
+                inst.DynamicShadow:Enable(false)
                 inst.sg:AddStateTag("invisible")
                 if inst.components.burnable:IsBurning() then
                     inst.components.burnable:Extinguish()
@@ -179,10 +183,10 @@ local states =
             end),
         },
     },
-    
-    State{
+
+    State {
         name = "burrow",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -191,31 +195,31 @@ local states =
 
         timeline =
         {
-            TimeEvent(5 * FRAMES, function(inst) 
+            TimeEvent(5 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/burrow", "move")
             end),
 
-            TimeEvent(9 * FRAMES, function(inst) 
-                inst.DynamicShadow:Enable(false) 
+            TimeEvent(9 * FRAMES, function(inst)
+                inst.DynamicShadow:Enable(false)
                 inst.sg:AddStateTag("invisible")
-			end),
+            end),
         },
 
         events =
         {
             EventHandler("animover", function(inst)
-				inst:PerformBufferedAction()
+                inst:PerformBufferedAction()
             end),
         },
 
         onexit = function(inst)
-            inst.SoundEmitter:KillSound("move")        
-        end,        
+            inst.SoundEmitter:KillSound("move")
+        end,
     },
-	
-    State{
+
+    State {
         name = "emerge",
-        tags = {"busy", "invisible"},
+        tags = { "busy", "invisible" },
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/burrow", "move")
@@ -223,24 +227,24 @@ local states =
             inst.AnimState:PlayAnimation("unburrow")
             inst.AnimState:SetDeltaTimeMultiplier(GetRandomWithVariance(.9, .2))
 
-			if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
-			    inst:ForceFacePoint(inst.components.combat.target:GetPosition())
-			end
+            if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+                inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+            end
         end,
 
-		onexit = function(inst)
+        onexit = function(inst)
             inst.SoundEmitter:KillSound("move")
-			inst.AnimState:SetDeltaTimeMultiplier(1)
-			inst.DynamicShadow:Enable(true)
-		end,
+            inst.AnimState:SetDeltaTimeMultiplier(1)
+            inst.DynamicShadow:Enable(true)
+        end,
 
-		timeline=
+        timeline =
         {
-            TimeEvent(0, function(inst) 
-				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
-					inst:ForceFacePoint(inst.components.combat.target:GetPosition())
-				end
-			end),
+            TimeEvent(0, function(inst)
+                if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+                    inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+                end
+            end),
             TimeEvent(32 * FRAMES, function(inst) inst.DynamicShadow:Enable(true) end),
         },
 
@@ -249,36 +253,36 @@ local states =
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
-	
-    State{
+
+    State {
         name = "taunt",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
 
-			if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
-			    inst:ForceFacePoint(inst.components.combat.target:GetPosition())
-			end
-
+            if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+                inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+            end
         end,
 
-         timeline=
+        timeline =
         {
-            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/taunt") end),         
-            
-         },
+            TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/weevole/taunt") end),
 
-        events=
+        },
+
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
-    },    
+    },
 
-    State{
+    State {
         name = "enter_loop",
-        tags = {"flight", "busy"},
+        tags = { "flight", "busy" },
         onenter = function(inst)
             inst.Physics:Stop()
 
@@ -286,32 +290,32 @@ local states =
 
             inst.DynamicShadow:Enable(false)
             inst.components.health:SetInvincible(true)
-            local x,y,z = inst.Transform:GetWorldPosition()
-            inst.Transform:SetPosition(x,15,z)
+            local x, y, z = inst.Transform:GetWorldPosition()
+            inst.Transform:SetPosition(x, 15, z)
         end,
 
         onexit = function(inst)
-			if not inst.sg.statemem.onground then
-				local pt = Point(inst.Transform:GetWorldPosition())
-				pt.y = 0
-				inst.Physics:Stop()
-				inst.Physics:Teleport(pt.x,pt.y,pt.z)
-				inst.DynamicShadow:Enable(true)
-				inst.components.health:SetInvincible(false)
-			end
+            if not inst.sg.statemem.onground then
+                local pt = Point(inst.Transform:GetWorldPosition())
+                pt.y = 0
+                inst.Physics:Stop()
+                inst.Physics:Teleport(pt.x, pt.y, pt.z)
+                inst.DynamicShadow:Enable(true)
+                inst.components.health:SetInvincible(false)
+            end
         end,
 
-        onupdate= function(inst)
-            inst.Physics:SetMotorVel(0,-10+math.random()*2,0)
+        onupdate = function(inst)
+            inst.Physics:SetMotorVel(0, -10 + math.random() * 2, 0)
             local pt = Point(inst.Transform:GetWorldPosition())
 
             if pt.y <= .1 or inst:IsAsleep() then
                 pt.y = 0
                 inst.Physics:Stop()
-                inst.Physics:Teleport(pt.x,pt.y,pt.z)
+                inst.Physics:Teleport(pt.x, pt.y, pt.z)
                 inst.DynamicShadow:Enable(true)
                 inst.components.health:SetInvincible(false)
-				inst.sg.statemem.onground = true
+                inst.sg.statemem.onground = true
                 inst.sg:GoToState("enter_pst")
             end
         end,
@@ -321,33 +325,32 @@ local states =
 
     },
 
-    State{
+    State {
         name = "enter_pst",
-        tags = {"busy"},
+        tags = { "busy" },
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("land")
         end,
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "eat",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("eat_pre")
         end,
-        
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst)
-
                 if inst:PerformBufferedAction() then
                     inst.sg:GoToState("eat_loop")
                 else
@@ -355,27 +358,27 @@ local states =
                 end
             end),
         },
-    },  
-    
-    State{
+    },
+
+    State {
         name = "eat_loop",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("eat_loop", true)
-            inst.sg:SetTimeout(1+math.random()*1)
+            inst.sg:SetTimeout(1 + math.random() * 1)
         end,
-        
+
         ontimeout = function(inst)
             inst.sg:GoToState("idle", "eat_pst")
-        end,       
-    },  
+        end,
+    },
 
 
-    State{
+    State {
         name = "attack",
-        tags = {"attack", "busy"},
+        tags = { "attack", "busy" },
 
         onenter = function(inst, target)
             inst.Physics:Stop()
@@ -384,22 +387,23 @@ local states =
             inst.sg.statemem.target = target
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(25*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
-            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/attack") end),
+            TimeEvent(25 * FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+            TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC003/creatures/enemy/weevole/attack") end),
 
         },
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "leap_attack",
-        tags = {"attack", "canrotate", "busy", "jumping"},
+        tags = { "attack", "canrotate", "busy", "jumping" },
 
         onenter = function(inst, target)
             inst.Physics:Stop()
@@ -410,9 +414,9 @@ local states =
             inst.AnimState:PlayAnimation("leap_attack")
             inst.sg.statemem.target = target
 
-			if target ~= nil and target:IsValid() then
-				inst:ForceFacePoint(target:GetPosition())
-			end
+            if target ~= nil and target:IsValid() then
+                inst:ForceFacePoint(target:GetPosition())
+            end
         end,
 
         onexit = function(inst)
@@ -424,51 +428,51 @@ local states =
 
         timeline =
         {
-            TimeEvent(7*FRAMES, function(inst) 
+            TimeEvent(7 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/fly_LP", "buzz")
             end),
-            TimeEvent(17*FRAMES, function(inst) 
+            TimeEvent(17 * FRAMES, function(inst)
                 inst.SoundEmitter:KillSound("buzz")
                 inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/idle")
             end),
 
-            TimeEvent(11*FRAMES, function(inst) 
-				inst.Physics:SetMotorVelOverride(20,0,0)
-			end),
-            TimeEvent(18*FRAMES, function(inst) 
-				inst.components.combat:DoAttack(inst.sg.statemem.target)
-			end),
-            TimeEvent(19*FRAMES, function(inst) 
-				inst.Physics:ClearMotorVelOverride()
-	            inst.Physics:Stop()
-			end),
+            TimeEvent(11 * FRAMES, function(inst)
+                inst.Physics:SetMotorVelOverride(20, 0, 0)
+            end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.components.combat:DoAttack(inst.sg.statemem.target)
+            end),
+            TimeEvent(19 * FRAMES, function(inst)
+                inst.Physics:ClearMotorVelOverride()
+                inst.Physics:Stop()
+            end),
         },
 
-        events=
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
         },
     },
 
-    State{
+    State {
         name = "hit",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/hit")
             inst.AnimState:PlayAnimation("hit")
-            inst.Physics:Stop()            
+            inst.Physics:Stop()
         end,
 
-        events=
+        events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "buildhome",
-        tags = {"busy", "jumping"},
+        tags = { "busy", "jumping" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -476,16 +480,19 @@ local states =
             inst.AnimState:PushAnimation("taunt", false)
         end,
 
-		onexit = function(inst)
+        onexit = function(inst)
             --inst:ClearBufferedAction()
-		end,
+        end,
 
         timeline =
         {
-            TimeEvent(27*FRAMES, function(inst) inst:PerformBufferedAction() inst:ClearBufferedAction() end),
-		},
+            TimeEvent(27 * FRAMES, function(inst)
+                inst:PerformBufferedAction()
+                inst:ClearBufferedAction()
+            end),
+        },
 
-        events=
+        events =
         {
             EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
@@ -493,6 +500,6 @@ local states =
 }
 
 CommonStates.AddFrozenStates(states)
-CommonStates.AddHopStates(states, true, { pre = "fly", loop = "fly", pst = "land"})
+CommonStates.AddHopStates(states, true, { pre = "fly", loop = "fly", pst = "land" })
 
 return StateGraph("weevole", states, events, "emerge", actionhandlers)

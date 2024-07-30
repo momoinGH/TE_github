@@ -46,8 +46,6 @@ local function fn()
         return inst
     end
 
-    --MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.HEAVY, TUNING.WINDBLOWN_SCALE_MAX.HEAVY)
-
     inst:AddComponent("edible")
     inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
     inst.components.edible.hungervalue = 1
@@ -60,7 +58,7 @@ local function fn()
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.MOONGLASS_CHARGED_PERISH_TIME)

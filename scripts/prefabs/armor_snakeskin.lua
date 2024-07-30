@@ -1,12 +1,7 @@
-require "prefabutil"
 local assets =
 {
     Asset("ANIM", "anim/armor_snakeskin.zip"),
 }
-
-local function onperish(inst)
-    inst:Remove()
-end
 
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "armor_snakeskin", "swap_body")
@@ -45,7 +40,6 @@ local function fn()
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "armor_snakeskin"
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
@@ -55,9 +49,9 @@ local function fn()
     inst.components.equippable.insulated = true
 
     inst:AddComponent("fueled")
-    inst.components.fueled.fueltype = "USAGE"
-    inst.components.fueled:InitializeFuelLevel(480 * 8)
-    inst.components.fueled:SetDepletedFn(onperish)
+    inst.components.fueled.fueltype = FUELTYPE.USAGE
+    inst.components.fueled:InitializeFuelLevel(TUNING.ARMOR_SNAKESKIN_FUEL)
+    inst.components.fueled:SetDepletedFn(inst.Remove)
 
     inst:AddComponent("waterproofer")
     inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_HUGE)

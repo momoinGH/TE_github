@@ -80,10 +80,6 @@ local function CanDeployWall(pt, item)
 	return TheWorld.Map:CanDeployWallAtPoint(pt, item)
 end
 
-local function GetFreeWallPos(inst)
-	local pt = Vector3(inst.Transform:GetWorldPosition())
-end
-
 local WALL_RADIUS = 20
 
 local function GetDirections()

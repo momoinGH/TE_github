@@ -14,7 +14,7 @@ end
 
 local function teleport(inst)
     inst.teleporttime = nil
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
 
 
     if inst.components.combat.target then
@@ -24,7 +24,7 @@ local function teleport(inst)
     local tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
     if tile == GROUND.IMPASSABLE or tile == GROUND.INVALID or tile == GROUND.OCEAN_COASTAL or tile == GROUND.OCEAN_COASTAL_SHORE or tile == GROUND.OCEAN_SWELL or tile == GROUND.OCEAN_ROUGH or tile == GROUND.OCEAN_BRINEPOOL or tile == GROUND.OCEAN_BRINEPOOL_SHORE or tile == GROUND.OCEAN_WATERLOG or tile == GROUND.OCEAN_HAZARDOUS then
         print("1111")
-        pt = Vector3(inst.Transform:GetWorldPosition())
+        pt = inst:GetPosition()
     end
 
 
@@ -43,7 +43,7 @@ local function teleport(inst)
 end
 
 local function launchprojectile(inst, dir)
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
 
     local theta = dir - (PI / 6) + (PI / 3 * math.random())
 
@@ -62,7 +62,7 @@ end
 local function spawnburns(inst, rad, startangle, endangle, num)
     startangle = startangle * DEGREES
     endangle = endangle * DEGREES
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     local down = TheCamera:GetDownVec()
     local angle = math.atan2(down.z, down.x)
 
@@ -863,7 +863,7 @@ local states =
             else
                 local angle = inst.Transform:GetRotation() * DEGREES
                 local offset = Vector3(15 * math.cos(angle), 0, -15 * math.sin(angle))
-                local pt = Vector3(inst.Transform:GetWorldPosition())
+                local pt = inst:GetPosition()
 
                 inst.lobtarget = Vector3(pt.x + offset.x, pt.y + offset.y, pt.z + offset.z)
             end
@@ -1098,7 +1098,7 @@ local states =
                 inst.components.groundpounder.numRings = 4
                 --                GetPlayer().components.playercontroller:ShakeCamera(inst, "FULL", 0.7, 0.02, 2, 40)
                 inst.components.groundpounder:GroundPound()
-                local pt = Vector3(inst.Transform:GetWorldPosition())
+                local pt = inst:GetPosition()
                 TheWorld:DoTaskInTime(0.6, function() inst.spawnbarrier(inst, pt) end)
                 local fx = SpawnPrefab("metal_hulk_ring_fx")
                 fx.Transform:SetPosition(pt.x, pt.y, pt.z)

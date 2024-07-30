@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
     Asset("ANIM", "anim/bullkelp.zip"),
@@ -24,7 +22,7 @@ local function ReplaceOnPickup(inst, pickupguy, src_pos)
     root.Transform:SetPosition(inst.Transform:GetWorldPosition())
     pickupguy.components.inventory:GiveItem(root) --, nil, src_pos)
     inst:Remove()
-    return true                                -- true because inst was removed
+    return true                                   -- true because inst was removed
 end
 
 local function fn()

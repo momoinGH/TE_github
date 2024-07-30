@@ -30,8 +30,8 @@ local SEE_PUDDLE_DIST = 15
 
 local function getPuddle(inst)
     if not inst.puddle or inst.puddle.stage < 1 then
-        local pt = Vector3(inst.Transform:GetWorldPosition())
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, SEE_PUDDLE_DIST, { "sedimentpuddle" })
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ents = TheSim:FindEntities(x, y, z, SEE_PUDDLE_DIST, { "sedimentpuddle" })
 
         local stage = -1
         local puddles = {}
@@ -57,9 +57,9 @@ end
 local function gethome(inst)
     getPuddle(inst)
     if inst.puddle then
-        return Vector3(inst.puddle.Transform:GetWorldPosition())
+        return inst.puddle:GetPosition()
     else
-        return Vector3(inst.Transform:GetWorldPosition())
+        return inst:GetPosition()
     end
 end
 
@@ -81,8 +81,10 @@ end
 local function EatFoodAction(inst)
     local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO", "aquatic" }
     local target = FindEntity(inst, SEE_FOOD_DIST,
-        function(item) return inst.components.eater:CanEat(item) and item:IsOnValidGround() and
-            item:GetTimeAlive() > SPIDER_EAT_DELAY end, nil, notags)
+        function(item)
+            return inst.components.eater:CanEat(item) and item:IsOnValidGround() and
+                item:GetTimeAlive() > SPIDER_EAT_DELAY
+        end, nil, notags)
     if target then
         return BufferedAction(inst, target, ACTIONS.EAT)
     end
@@ -108,8 +110,10 @@ function Pangolden:OnStart()
 
                     DoAction(self.inst, function() return drink(self.inst) end, "drink"),
 
-                    Follow(self.inst, function() return self.inst.components.follower and
-                        self.inst.components.follower.leader end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, false),
+                    Follow(self.inst, function()
+                        return self.inst.components.follower and
+                            self.inst.components.follower.leader
+                    end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, false),
                     Wander(self.inst, function() return gethome(self.inst) end, WANDER_DIST)
                 }),
         }, .25)

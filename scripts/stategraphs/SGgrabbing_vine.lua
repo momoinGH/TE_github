@@ -13,8 +13,12 @@ local events =
 
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("doattack",
-        function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then inst.sg
-                    :GoToState("attack") end end),
+        function(inst)
+            if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then
+                inst.sg
+                    :GoToState("attack")
+            end
+        end),
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
 
@@ -146,8 +150,10 @@ local states =
             TimeEvent(7 * FRAMES, function(inst)
                 inst.components.locomotor:WalkForward()
             end),
-            TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/grabbing_vine/move") end),
+            TimeEvent(11 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/grabbing_vine/move")
+            end),
 
             TimeEvent(29 * FRAMES, function(inst)
                 inst.Physics:Stop()
@@ -179,10 +185,14 @@ local states =
 
         timeline =
         {
-            TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/grabbing_vine/attack_pre") end),
-            TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/grabbing_vine/attack") end),
+            TimeEvent(8 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/grabbing_vine/attack_pre")
+            end),
+            TimeEvent(11 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/grabbing_vine/attack")
+            end),
             TimeEvent(15 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
         },
 
@@ -202,7 +212,7 @@ local states =
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
     },
@@ -218,14 +228,22 @@ local states =
 
         timeline =
         {
-            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/grabbing_vine/eat_drop") end),
-            TimeEvent(12 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/grabbing_vine/eat") end),
-            TimeEvent(24 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/grabbing_vine/eat_up") end),
-            TimeEvent(21 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/grabbing_vine/eat_drop") end),
+            TimeEvent(1 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/grabbing_vine/eat_drop")
+            end),
+            TimeEvent(12 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/grabbing_vine/eat")
+            end),
+            TimeEvent(24 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/grabbing_vine/eat_up")
+            end),
+            TimeEvent(21 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/grabbing_vine/eat_drop")
+            end),
             TimeEvent(13 * FRAMES, function(inst) inst:PerformBufferedAction() end),
 
         },

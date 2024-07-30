@@ -134,7 +134,7 @@ local states =
             inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/sink")
 
             local ignitefragments = inst.activefires > 0
-            local locus_point = Vector3(inst.Transform:GetWorldPosition())
+            local locus_point = inst:GetPosition()
 
             inst:Remove()
             SpawnFragment(locus_point, "boards", 2.75, 0, 0.5, ignitefragments)

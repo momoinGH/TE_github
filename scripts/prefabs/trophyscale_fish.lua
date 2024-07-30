@@ -1,5 +1,3 @@
-require "prefabutil"
-
 local assets =
 {
 	Asset("ANIM", "anim/scale_o_matic.zip"),

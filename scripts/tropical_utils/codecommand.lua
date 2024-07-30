@@ -429,6 +429,10 @@ function EntityScript:GetSkinName() end
 function SpawnPrefab(name, skin, skin_id, creator)
 end
 
+--- 在指定对象的位置上生成新的对象并删除原来的对象
+function ReplacePrefab(original_inst, name, skin, skin_id, creator)
+end
+
 --- 根据GetSaveRecord的数据复原对象，inventory、container等组件都会调用SpawnSaveRecord来还原对象，该操作还会加载对象或组件保存的数据
 function SpawnSaveRecord(saved, newents) end
 
@@ -939,6 +943,8 @@ BufferedAction = Class(function(self, doer, target, action, invobject, pos, reci
 end)
 
 Ingredient = Class(function(self, ingredienttype, amount, atlas, deconstruct, imageoverride) end)
+
+StateGraph = Class(function(self, name, states, events, defaultstate, actionhandlers) end)
 
 --- 可以重定向一些音效，替换源码里的音效为自己的音效
 --- RemapSoundEvent("dontstarve/characters/champion/talk_LP", "champion/champion/talk_LP")

@@ -1,4 +1,4 @@
---require "prefabutil"
+--
 local pinecone_assets =
 {
     Asset("ANIM", "anim/clawling.zip"),

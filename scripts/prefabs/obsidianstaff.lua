@@ -92,7 +92,7 @@ local function commonfn(colour, tags, hasskin)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
 
     inst:AddComponent("tradable")
 
@@ -144,7 +144,7 @@ end
 local function spawngaze(inst, pos, target)
     local rotation = pos
     local beam = SpawnPrefab("gaze_beam2")
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     local angle = rotation * DEGREES
     inst.radius = inst.radius + 3
     beam.Transform:SetScale(0.2 + 0.053 * inst.radius, 0.2 + 0.053 * inst.radius, 0.2 + 0.053 * inst.radius)
@@ -233,7 +233,7 @@ local function bone()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-    inst.caminho = "images/inventoryimages/hamletinventory.xml"
+
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(function(inst, owner)

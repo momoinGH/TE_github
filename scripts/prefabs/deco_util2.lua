@@ -608,7 +608,7 @@ function decofn(build, bank, animframe, data, assets, prefabs)
                 if not inst:HasTag("INTERIOR_LIMBO") then
                     inst:DoTaskInTime(1,
                         function()
-                            local pt = Vector3(inst.Transform:GetWorldPosition())
+                            local pt = inst:GetPosition()
                             local torches = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "wall_torch" },
                                 { "INTERIOR_LIMBO" })
                             local closedoors = false
@@ -634,7 +634,7 @@ function decofn(build, bank, animframe, data, assets, prefabs)
 
             inst:ListenForEvent("fire_lit", function()
                 local opendoors = true
-                local pt = Vector3(inst.Transform:GetWorldPosition())
+                local pt = inst:GetPosition()
                 local torches = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "wall_torch" }, { "INTERIOR_LIMBO" })
 
                 for i, torch in ipairs(torches) do
@@ -644,7 +644,7 @@ function decofn(build, bank, animframe, data, assets, prefabs)
                 end
 
                 if opendoors then
-                    local pt = Vector3(inst.Transform:GetWorldPosition())
+                    local pt = inst:GetPosition()
                     local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
                     for i, ent in ipairs(ents) do
                         if ent:HasTag("lockable_door") then
@@ -1028,13 +1028,16 @@ return
 
     ------------------------------deco_florist----------------
     Prefab("deco_florist_vines1",
-        decofn("interior_wall_decals_florist", "interior_wall_decals_florist", "vines_1", { decal = true, background = 2 }),
+        decofn("interior_wall_decals_florist", "interior_wall_decals_florist", "vines_1",
+            { decal = true, background = 2 }),
         assets, prefabs),
     Prefab("deco_florist_vines2",
-        decofn("interior_wall_decals_florist", "interior_wall_decals_florist", "vines_2", { decal = true, background = 2 }),
+        decofn("interior_wall_decals_florist", "interior_wall_decals_florist", "vines_2",
+            { decal = true, background = 2 }),
         assets, prefabs),
     Prefab("deco_florist_vines3",
-        decofn("interior_wall_decals_florist", "interior_wall_decals_florist", "vines_3", { decal = true, background = 2 }),
+        decofn("interior_wall_decals_florist", "interior_wall_decals_florist", "vines_3",
+            { decal = true, background = 2 }),
         assets, prefabs),
     Prefab("deco_florist_hangingplant1", decofn("ceiling_decor", "ceiling_decor", "plant1_idle", { loopanim = true }),
         assets, prefabs),

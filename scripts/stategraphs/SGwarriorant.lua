@@ -1,22 +1,22 @@
 require("stategraphs/commonstates")
 
-local actionhandlers = 
+local actionhandlers =
 {
     ActionHandler(ACTIONS.GOHOME, "gohome"),
 }
 
-local events=
+local events =
 {
     CommonHandlers.OnStep(),
-    CommonHandlers.OnLocomote(true,true),
+    CommonHandlers.OnLocomote(true, true),
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
     CommonHandlers.OnAttack(),
-	CommonHandlers.OnHop(),	
+    CommonHandlers.OnHop(),
     CommonHandlers.OnAttacked(true),
     CommonHandlers.OnDeath(),
-    EventHandler("doaction", 
-        function(inst, data) 
+    EventHandler("doaction",
+        function(inst, data)
             if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
                 if data.action == ACTIONS.CHOP then
                     inst.sg:GoToState("chop", data.target)
@@ -25,86 +25,86 @@ local events=
         end),
 }
 
-local states=
+local states =
 {
-    State{
-        name= "funnyidle",
-        tags = {"idle"},
-        
+    State {
+        name = "funnyidle",
+        tags = { "idle" },
+
         onenter = function(inst)
-			inst.Physics:Stop()
-           
+            inst.Physics:Stop()
+
             --inst.SoundEmitter:PlaySound("dontstarve/pig/oink")
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/crickant/hunger")
             inst.AnimState:PlayAnimation("idle_angry")
         end,
-        
-        events=
+
+        events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
-        },        
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
     },
-    
-    State{
-        name= "alert",
-        tags = {"idle","canrotate"},
-        
+
+    State {
+        name = "alert",
+        tags = { "idle", "canrotate" },
+
         onenter = function(inst)
             inst.Physics:Stop()
 
-            inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/crickant/alert_LP","alert")
-            inst:DoTaskInTime(2.5,function() inst.SoundEmitter:KillSound("alert")  end)
+            inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/crickant/alert_LP", "alert")
+            inst:DoTaskInTime(2.5, function() inst.SoundEmitter:KillSound("alert") end)
         end,
-        onexit = function(inst)    
+        onexit = function(inst)
             inst.SoundEmitter:KillSound("alert")
         end
     },
 
     State {
-		name = "frozen",
-		tags = {"busy"},
-		
+        name = "frozen",
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.AnimState:PlayAnimation("frozen")
             inst.Physics:Stop()
             --inst.components.highlight:SetAddColour(Vector3(82/255, 115/255, 124/255))
         end,
     },
-    
-    State{
+
+    State {
         name = "death",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/crickant/death")
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
     },
-    
-    State{
-		name = "abandon",
-		tags = {"busy"},
-		
-		onenter = function(inst, leader)
-			inst.Physics:Stop()
-			inst.AnimState:PlayAnimation("abandon")
+
+    State {
+        name = "abandon",
+        tags = { "busy" },
+
+        onenter = function(inst, leader)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("abandon")
             inst:FacePoint(Vector3(leader.Transform:GetWorldPosition()))
-		end,
-		
+        end,
+
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
-    
-    
-    State{
+
+
+    State {
         name = "attack",
-        tags = {"attack", "busy"},
-        
+        tags = { "attack", "busy" },
+
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/crickant/attack")
             inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh")
@@ -112,97 +112,102 @@ local states=
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("atk2")
         end,
-        
-        timeline=
+
+        timeline =
         {
-            TimeEvent(13*FRAMES, function(inst) inst.components.combat:DoAttack() inst.sg:RemoveStateTag("attack") inst.sg:RemoveStateTag("busy") end),
+            TimeEvent(13 * FRAMES, function(inst)
+                inst.components.combat:DoAttack()
+                inst.sg:RemoveStateTag("attack")
+                inst.sg:RemoveStateTag("busy")
+            end),
         },
-        
-        events=
+
+        events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
-    
-    State{
+
+    State {
         name = "hit",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/crickant/hit")
             inst.AnimState:PlayAnimation("hit")
             inst.Physics:Stop()
         end,
-        
-        events=
+
+        events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "hatch",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("hatch")
         end,
-        
-        events=
+
+        events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
-    State{
+    State {
         name = "transform",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.AnimState:SetBank("antman_egg")
             inst.AnimState:SetBuild("antman_guard_build")
             inst.AnimState:AddOverrideBuild("antman_egghatch")
 
             inst.AnimState:PlayAnimation("eggify")
-            inst.Physics:Stop()            
+            inst.Physics:Stop()
         end,
-        
-        events=
+
+        events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
-        },        
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
     },
 }
 
 CommonStates.AddWalkStates(states,
-{
-	walktimeline = {
-		TimeEvent(0*FRAMES, PlayFootstep ),
-		TimeEvent(12*FRAMES, PlayFootstep ),
-	},
-})
+    {
+        walktimeline = {
+            TimeEvent(0 * FRAMES, PlayFootstep),
+            TimeEvent(12 * FRAMES, PlayFootstep),
+        },
+    })
 CommonStates.AddRunStates(states,
-{
-	runtimeline = {
-		TimeEvent(0*FRAMES, PlayFootstep ),
-		TimeEvent(10*FRAMES, PlayFootstep ),
-	},
-})
+    {
+        runtimeline = {
+            TimeEvent(0 * FRAMES, PlayFootstep),
+            TimeEvent(10 * FRAMES, PlayFootstep),
+        },
+    })
 
 CommonStates.AddSleepStates(states,
-{
-	sleeptimeline = 
-	{
-		TimeEvent(35*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/crickant/sleep") end ),
-	},
-})
+    {
+        sleeptimeline =
+        {
+            TimeEvent(35 * FRAMES,
+                function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/crickant/sleep") end),
+        },
+    })
 
-CommonStates.AddIdle(states,"funnyidle")
-CommonStates.AddSimpleState(states,"refuse", "pig_reject", {"busy"})
+CommonStates.AddIdle(states, "funnyidle")
+CommonStates.AddSimpleState(states, "refuse", "pig_reject", { "busy" })
 CommonStates.AddFrozenStates(states)
-CommonStates.AddHopStates(states, true, { pre = "walk_pre", loop = "walk_loop", pst = "walk_pst"})
+CommonStates.AddHopStates(states, true, { pre = "walk_pre", loop = "walk_loop", pst = "walk_pst" })
 
-CommonStates.AddSimpleActionState(states,"pickup", "pig_pickup", 10*FRAMES, {"busy"})
-CommonStates.AddSimpleActionState(states, "gohome", "pig_pickup", 4*FRAMES, {"busy"})
-    
+CommonStates.AddSimpleActionState(states, "pickup", "pig_pickup", 10 * FRAMES, { "busy" })
+CommonStates.AddSimpleActionState(states, "gohome", "pig_pickup", 4 * FRAMES, { "busy" })
+
 return StateGraph("warriorant", states, events, "idle", actionhandlers)

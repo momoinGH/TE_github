@@ -39,7 +39,7 @@ local JUNGLETREE_CHOPS_NORMAL = 10
 local JUNGLETREE_CHOPS_TALL = 15
 local CLAWPALMTREE_GROW_TIME =
 {
-	{ base = 8 * day_time, random = 0.5 * day_time }, --tall to short
+	{ base = 8 * day_time,  random = 0.5 * day_time }, --tall to short
 	{ base = 12 * day_time, random = 5 * day_time }, --short to normal
 	{ base = 12 * day_time, random = 5 * day_time }, --normal to tall
 }
@@ -49,7 +49,7 @@ local builds =
 	normal = {
 		file = "claw_tree_build",
 		prefab_name = "clawpalmtree",
-		normal_loot = { "cork", "cork", "clawpalmtree_cone" },                    -- "jungletreeseed"
+		normal_loot = { "cork", "cork", "clawpalmtree_cone" },                      -- "jungletreeseed"
 		short_loot = { "cork" },
 		tall_loot = { "cork", "cork", "cork", "clawpalmtree_cone", "clawpalmtree_cone" }, -- "jungletreeseed", "jungletreeseed"
 	},
@@ -259,18 +259,54 @@ end
 
 local growth_stages =
 {
-	{ name = "short", time = function(inst) return GetRandomWithVariance(CLAWPALMTREE_GROW_TIME[1].base,
-			CLAWPALMTREE_GROW_TIME[1].random) end,                                                                                             fn = function(
-		inst) SetShort(inst) end,                                                                                                                                                       growfn = function(
-		inst) GrowShort(inst) end,                                                                                                                                                                                                    leifscale = .7 },
-	{ name = "normal", time = function(inst) return GetRandomWithVariance(CLAWPALMTREE_GROW_TIME[2].base,
-			CLAWPALMTREE_GROW_TIME[2].random) end,                                                                                             fn = function(
-		inst) SetNormal(inst) end,                                                                                                                                                      growfn = function(
-		inst) GrowNormal(inst) end,                                                                                                                                                                                                   leifscale = 1 },
-	{ name = "tall", time = function(inst) return GetRandomWithVariance(CLAWPALMTREE_GROW_TIME[3].base,
-			CLAWPALMTREE_GROW_TIME[3].random) end,                                                                                             fn = function(
-		inst) SetTall(inst) end,                                                                                                                                                        growfn = function(
-		inst) GrowTall(inst) end,                                                                                                                                                                                                     leifscale = 1.25 },
+	{
+		name = "short",
+		time = function(inst)
+			return GetRandomWithVariance(CLAWPALMTREE_GROW_TIME[1].base,
+				CLAWPALMTREE_GROW_TIME[1].random)
+		end,
+		fn = function(
+			inst)
+			SetShort(inst)
+		end,
+		growfn = function(
+			inst)
+			GrowShort(inst)
+		end,
+		leifscale = .7
+	},
+	{
+		name = "normal",
+		time = function(inst)
+			return GetRandomWithVariance(CLAWPALMTREE_GROW_TIME[2].base,
+				CLAWPALMTREE_GROW_TIME[2].random)
+		end,
+		fn = function(
+			inst)
+			SetNormal(inst)
+		end,
+		growfn = function(
+			inst)
+			GrowNormal(inst)
+		end,
+		leifscale = 1
+	},
+	{
+		name = "tall",
+		time = function(inst)
+			return GetRandomWithVariance(CLAWPALMTREE_GROW_TIME[3].base,
+				CLAWPALMTREE_GROW_TIME[3].random)
+		end,
+		fn = function(
+			inst)
+			SetTall(inst)
+		end,
+		growfn = function(
+			inst)
+			GrowTall(inst)
+		end,
+		leifscale = 1.25
+	},
 }
 
 
@@ -290,7 +326,7 @@ local function chop_tree(inst, chopper, chops)
 	inst.AnimState:PushAnimation(inst.anims.sway1, true)
 
 	--tell any nearby leifs to wake up
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, PALMTREEGUARD_REAWAKEN_RADIUS, { "treeguard" })
 	for k, v in pairs(ents) do
 		if v.components.sleeper and v.components.sleeper:IsAsleep() then
@@ -310,7 +346,7 @@ local function chop_down_tree(inst, chopper)
 	--	inst:RemoveComponent("blowinwindgust")
 	inst:RemoveTag("gustable")
 	inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 	local hispos = Vector3(chopper.Transform:GetWorldPosition())
 
 	local he_right = (hispos - pt):Dot(TheCamera:GetRightVec()) > 0
@@ -427,7 +463,7 @@ local function tree_burnt(inst)
 	OnBurnt(inst)
 	inst.pineconetask = inst:DoTaskInTime(10,
 		function()
-			local pt = Vector3(inst.Transform:GetWorldPosition())
+			local pt = inst:GetPosition()
 			if math.random(0, 1) == 1 then
 				pt = pt + TheCamera:GetRightVec()
 			else
@@ -440,7 +476,7 @@ end
 
 local function dropCritter(inst, prefab)
 	local snake = SpawnPrefab(prefab)
-	local pt = Vector3(inst.Transform:GetWorldPosition())
+	local pt = inst:GetPosition()
 
 	if math.random(0, 1) == 1 then
 		pt = pt + (TheCamera:GetRightVec() * ((math.random() * 1) + 1))
@@ -661,7 +697,7 @@ end
 
 --local function dropBurr(inst)
 --	local burr = SpawnPrefab("burr")
---	local pt = Vector3(inst.Transform:GetWorldPosition())
+--	local pt = inst:GetPosition()
 
 --	if math.random(0, 1) == 1 then
 --		pt = pt + (TheCamera:GetRightVec()*((math.random()*1)+1))

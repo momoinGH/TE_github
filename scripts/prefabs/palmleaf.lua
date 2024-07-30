@@ -11,7 +11,7 @@ local function fn(Sim)
     inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
     -- MakeInventoryFloatable(inst, "idle_water", "idle")
-    -- MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.LIGHT, TUNING.WINDBLOWN_SCALE_MAX.LIGHT)
+
 
     inst.AnimState:SetBank("palmleaf")
     inst.AnimState:SetBuild("palmleaf")
@@ -48,7 +48,7 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-    inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+
     return inst
 end
 

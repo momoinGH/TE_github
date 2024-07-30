@@ -18,7 +18,7 @@ local function GetVerb()
 end
 
 local function OnInvestigated(inst, doer)
-    local pt = Vector3(inst.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
     --print("dirtpile - OnInvestigated", pt)
 
     local hunter = TheWorld.components.whalehunter

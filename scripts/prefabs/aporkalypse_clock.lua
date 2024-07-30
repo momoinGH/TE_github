@@ -30,28 +30,24 @@ local function set_rotation(inst, angle)
 	inst.Transform:SetRotation(angle + 90)
 end
 
-local function common_clock_fn()
-	local inst = CreateEntity()
-	inst.entity:AddNetwork()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-
-	anim:SetOrientation(ANIM_ORIENTATION.OnGround)
-	anim:SetLayer(LAYER_BACKGROUND)
-
-	inst:AddTag("OnFloor")
-
-	return inst
-end
-
 local function make_clock_fn(bank, build, sort_order, mult, speed)
 	local function fn()
-		local inst = common_clock_fn()
+		local inst = CreateEntity()
+
+		inst.entity:AddTransform()
+		inst.entity:AddAnimState()
+		inst.entity:AddNetwork()
+
+		inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+		inst.AnimState:SetLayer(LAYER_BACKGROUND)
+
 		inst.AnimState:SetSortOrder(3)
 		inst.AnimState:SetFinalOffset(sort_order)
 		inst.AnimState:SetBank(bank)
 		inst.AnimState:SetBuild(build)
 		inst.AnimState:PlayAnimation("off_idle")
+
+		inst:AddTag("OnFloor")
 
 		inst.entity:SetPristine()
 
@@ -91,17 +87,14 @@ local function SpawnChildren(inst)
 		marker:AddTag("INTERIOR_LIMBO")
 	end
 
-
-	for i, v in ipairs(clock_prefabs) do
+	for _, v in ipairs(clock_prefabs) do
 		local clock = inst:SpawnChild(v)
 		if inLimbo then
 			clock:AddTag("INTERIOR_LIMBO")
 		end
 		clock.OnRemoveEntity = function(self)
-			print("A clock was removed!")
-			for i, v in ipairs(inst.clocks) do
+			for _, v in ipairs(inst.clocks) do
 				if v == self then
-					print("removing it from our clocks!")
 					table.remove(inst.clocks, i)
 					return
 				end
@@ -250,12 +243,12 @@ local function make_master_fn()
 
 	inst:DoTaskInTime(0.02, function()
 		inst:ListenForEvent("clocktick", function(world, data)
-			local total_time = (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME
 			local aporkalypse = TheWorld.components.aporkalypse
 
 			local time_left_till_aporkalypse = aporkalypse and
-			math.max(aporkalypse:GetBeginDate() - (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME,
-				0) or 0
+				math.max(
+					aporkalypse:GetBeginDate() - (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME,
+					0) or 0
 			--			print("time_left:",time_left_till_aporkalypse	)
 
 			if inst.rewind then
@@ -264,14 +257,15 @@ local function make_master_fn()
 						aporkalypse:EndAporkalypse()
 					end
 					time_left_till_aporkalypse = aporkalypse and
-					math.max(
-					aporkalypse:GetBeginDate() - (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME, 0) or
-					0
+						math.max(
+							aporkalypse:GetBeginDate() -
+							(TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME, 0) or
+						0
 					-- I'd like to use dt but update for season-switch can mess with it bigtime				
 					local dt = -1 * math.clamp(data.time, 0, 2 * TheSim:GetTickTime())
 					time_left_till_aporkalypse = time_left_till_aporkalypse - inst.rewind_mult * dt * 250
 					aporkalypse:ScheduleAporkalypse((TheWorld.state.cycles + TheWorld.state.time) * TUNING
-					.TOTAL_DAY_TIME + time_left_till_aporkalypse)
+						.TOTAL_DAY_TIME + time_left_till_aporkalypse)
 				end
 			end
 
@@ -356,8 +350,8 @@ local function make_rewind_plate()
 			inst.aporkalypse_clock:StartRewind()
 		end
 
-		local pt = Vector3(inst.Transform:GetWorldPosition())
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 50, nil, { "INTERIOR_LIMBO" })
 		for i, ent in ipairs(ents) do
 			if ent:HasTag("lockable_door") then
 				ent:PushEvent("close")
@@ -370,8 +364,8 @@ local function make_rewind_plate()
 			inst.aporkalypse_clock:StopRewind()
 		end
 
-		local pt = Vector3(inst.Transform:GetWorldPosition())
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 50, nil, { "INTERIOR_LIMBO" })
 		for i, ent in ipairs(ents) do
 			if ent:HasTag("lockable_door") then
 				ent:PushEvent("open")
@@ -420,8 +414,8 @@ local function make_fastforward_plate()
 			inst.aporkalypse_clock:StartRewind()
 		end
 
-		local pt = Vector3(inst.Transform:GetWorldPosition())
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 50, nil, { "INTERIOR_LIMBO" })
 		for i, ent in ipairs(ents) do
 			if ent:HasTag("lockable_door") then
 				ent:PushEvent("close")
@@ -434,8 +428,8 @@ local function make_fastforward_plate()
 			inst.aporkalypse_clock:StopRewind()
 		end
 
-		local pt = Vector3(inst.Transform:GetWorldPosition())
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 50, nil, { "INTERIOR_LIMBO" })
 		for i, ent in ipairs(ents) do
 			if ent:HasTag("lockable_door") then
 				ent:PushEvent("open")
@@ -472,18 +466,19 @@ end
 
 local function make_marker()
 	local inst = CreateEntity()
+
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
 	inst.entity:AddNetwork()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
 
-	anim:SetBuild("porkalypse_clock_marker")
-	anim:SetBank("clock_marker")
-	anim:PlayAnimation("idle")
-
-	anim:SetOrientation(ANIM_ORIENTATION.OnGround)
+	inst.AnimState:SetBuild("porkalypse_clock_marker")
+	inst.AnimState:SetBank("clock_marker")
+	inst.AnimState:PlayAnimation("idle")
+	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
 	inst.AnimState:SetLayer(LAYER_BACKGROUND)
 	inst.AnimState:SetSortOrder(3)
 	inst.AnimState:SetFinalOffset(0)
+
 	return inst
 end
 
