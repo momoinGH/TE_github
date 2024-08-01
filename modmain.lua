@@ -440,6 +440,7 @@ Assets =
 
 modimport "modmain/tuning"
 modimport "modmain/language"
+modimport "modmain/assets"
 modimport "modmain/containers"
 modimport "modmain/character"
 modimport "modmain/ui"
@@ -1100,13 +1101,6 @@ if GetModConfigData("gorgeisland") and GetModConfigData("kindofworld") == 15 or 
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/quagmirefoods.xml"))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/quagmirefoods.tex"))
 end
-
-
-
-
-
-
-modimport("main/assets")
 
 -- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "limpets_cooked.tex")
 -- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "limpets.tex")

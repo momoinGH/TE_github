@@ -9,37 +9,41 @@ local function en_zh_zht(en, zh, zht)
 end
 
 name = en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond","热带体验 | 海难哈姆雷特生态：来自域外","船難哈姆雷特生態：來自域外")
-description = en_zh_zht(
-	"\nversion：3.79" ..
-	"\nAttention: We added a complement to this mod." ..
-	"\nIn it will have several changes to improve the experience of the game." ..
-	"\nVisit only the main mod page and download." ..
-	"\nTropical Experience| Complement",
+description = en_zh_zht([[
+version：3.79
+Attention: We added a complement to this mod.
+In it will have several changes to improve the experience of the game.
+Visit only the main mod page and download.
+Tropical Experience| Complement",
 
-	"\n版本：3.79" ..
-	"\n注意：我们为此模组添加了一些内容补充" ..
-	"\n其中包含了多项改进游戏体验的玩法变化，请访问此模组创意工坊进行下载" ..
-	"\n多种生态群系体验 | 补充内容" ..
-	"\n添加饥荒单机版的海难DLC、哈姆雷特DLC内容" ..
-	"\n\n集成多个生态群系模组内容：" ..
-	"\n冰霜岛屿与冰霜洞穴 - 灵感来源永不妥协(Uncompromising Mode)" ..
-	"\n海底世界(Creeps in the Deeps)" ..
-	"\n绿色世界(Green World)" ..
-	"\n大风平原(Windy Plains)" ..
-	"\n\n兼容樱花林(Cherry Forest)",
+版本：3.79
+注意：我们为此模组添加了一些内容补充
+其中包含了多项改进游戏体验的玩法变化，请访问此模组创意工坊进行下载
+多种生态群系体验 | 补充内容
+添加饥荒单机版的海难DLC、哈姆雷特DLC内容
 
-	"\n版本：3.79" ..
-	"\n注意：我們爲此模組添加了一些內容補充" ..
-	"\n其中包含了多項改進遊戲體驗的玩法變化，請訪問此模組創意工坊進行下載" ..
-	"\n多種生態羣系體驗 | 補充內容" ..
-	"\n添加饑荒單機版的海難DLC、哈姆雷特DLC內容" ..
-	"\n\n集成多個生態羣系模組內容：" ..
-	"\n冰霜島嶼與冰霜洞穴 - 靈感來源永不妥協(Uncompromising Mode)" ..
-	"\n海底世界(Creeps in the Deeps)" ..
-	"\n綠色世界(Green World)" ..
-	"\n大風平原(Windy Plains)" ..
-	"\n\n兼容櫻花林(Cherry Forest)"
-)
+集成多个生态群系模组内容：
+冰霜岛屿与冰霜洞穴 - 灵感来源永不妥协(Uncompromising Mode)
+海底世界(Creeps in the Deeps)
+绿色世界(Green World)
+大风平原(Windy Plains)
+
+兼容樱花林(Cherry Forest)",
+
+版本：3.79
+注意：我們爲此模組添加了一些內容補充
+其中包含了多項改進遊戲體驗的玩法變化，請訪問此模組創意工坊進行下載
+多種生態羣系體驗 | 補充內容
+添加饑荒單機版的海難DLC、哈姆雷特DLC內容
+
+集成多個生態羣系模組內容：
+冰霜島嶼與冰霜洞穴 - 靈感來源永不妥協(Uncompromising Mode)
+海底世界(Creeps in the Deeps)
+綠色世界(Green World)
+大風平原(Windy Plains)
+
+兼容櫻花林(Cherry Forest)
+]])
 
 author = "Vagner da Rocha Santos."
 version = "3.79"

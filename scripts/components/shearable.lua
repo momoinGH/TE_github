@@ -52,7 +52,7 @@ end
 function Shearable:IsActionValid(action, right)
     local is_valid = self:CanShear()
 
-    return is_valid and action == ACTIONS.SHEAR
+    return is_valid
 end
 
 return Shearable

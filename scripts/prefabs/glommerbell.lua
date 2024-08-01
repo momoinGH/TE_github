@@ -19,12 +19,15 @@ local function OnPutInInv(inst, owner)
 	if owner.prefab == "mole" or owner.prefab == "krampus" then
 		inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/glommer_bell")
 		OnPlayed(inst, owner)
-		if inst.components.finiteuses then inst.components.finiteuses:Use() end
+		if inst.components.finiteuses then
+			inst.components.finiteuses:Use()
+		end
 	end
 end
 
 local function fn()
 	local inst = CreateEntity()
+
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
