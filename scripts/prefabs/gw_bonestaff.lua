@@ -109,11 +109,7 @@ local zombies = {
 
 local function createpower(staff, target, pos)
     local doer = staff.components.inventoryitem.owner
-    if target then
-        local x, y, z = target.Transform:GetWorldPosition()
-        pos = Vector3(x, y, z)
-    end
-
+    pos = target and target:GetPosition() or pos
     for k, ent in pairs(TheSim:FindEntities(pos.x, pos.y, pos.z, 4, nil, { "playerghost", "INLIMBO", "NOCLICK", "FX" })) do
         local zmb = zombies[ent.prefab]
         if ent:HasTag("playerghost") then
@@ -165,11 +161,15 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
+
     MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("bonestaff")
     inst.AnimState:SetBuild("bonestaff")
     inst.AnimState:PlayAnimation("idle")
+
+    --weapon (from weapon component) added to pristine state for optimization
+    inst:AddTag("weapon")
 
     inst.entity:SetPristine()
 

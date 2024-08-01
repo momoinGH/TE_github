@@ -47,12 +47,7 @@ local FAR_ENOUGH = 40
 local BIG_NUMBER = 9999
 
 local function getSpeechType(inst, speech)
-    local line = speech.DEFAULT
-
-    --    if inst.talkertype and speech[inst.talkertype] then
-    --        line = speech[inst.talkertype]
-    --    end
-    return line
+    return speech.DEFAULT
 end
 
 

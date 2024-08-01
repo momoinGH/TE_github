@@ -36,17 +36,14 @@ local function SortAfter(a, b, filter_name)
 	SortRecipe(a, b, filter_name, 1)
 end
 
---SW
 AddRecipeFilter({ name = "NAUTICAL", atlas = tab_atlas, image = "tab_nautical.tex" })
-AddRecipeFilter({ name = "OBSIDIAN", atlas = tab_atlas, image = "tab_volcano.tex" })
---HaM
 AddRecipeFilter({ name = "LEGACY", atlas = tab_atlas, image = "tab_archaeology.tex" })
-AddRecipeFilter({ name = "INTERIOR", atlas = tab_atlas, image = "tab_home_decor.tex" })
-AddRecipeFilter({ name = "CITY", atlas = tab_atlas, image = "tab_city.tex" })
---Forge
---AddRecipeFilter({ name = "FORGE", atlas = tab_atlas, image = "tab_forge.tex" })
---Gorge
-AddRecipeFilter({ name = "GORGE", atlas = tab_atlas, image = "tab_gorge.tex" })
+-- 这几个靠近科技站才有物品，平常一直都是空的，不需要额外的过滤器
+-- AddRecipeFilter({ name = "OBSIDIAN", atlas = tab_atlas, image = "tab_volcano.tex" })
+-- AddRecipeFilter({ name = "INTERIOR", atlas = tab_atlas, image = "tab_home_decor.tex" })
+-- AddRecipeFilter({ name = "CITY", atlas = tab_atlas, image = "tab_city.tex" })
+-- AddRecipeFilter({ name = "FORGE", atlas = tab_atlas, image = "tab_forge.tex" })
+-- AddRecipeFilter({ name = "GORGE", atlas = tab_atlas, image = "tab_gorge.tex" })
 
 if GetModConfigData("frost_island") ~= 5 then
 	AddRecipe2("wildbeaver_house",

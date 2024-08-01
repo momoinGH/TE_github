@@ -5787,7 +5787,7 @@ AddStategraphState("wilson_client", macacorunstart)
 AddStategraphState("wilson_client", macacorun)
 ]]
 local JUMPIN = GLOBAL.Action({ priority = 10, ghost_valid = true, encumbered_valid = true, invalid_hold_action = true })
-JUMPIN.str = (GLOBAL.STRINGS.ACTIONS.JUMPIN)
+JUMPIN.str = STRINGS.ACTIONS.JUMPIN
 JUMPIN.id = "JUMPIN"
 JUMPIN.fn = function(act)
     if act.doer ~= nil and
