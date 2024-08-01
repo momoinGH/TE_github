@@ -8,15 +8,15 @@ local function en_zh_zht(en, zh, zht)
 	end -- 英文
 end
 
-name = en_zh_zht("Tropical Experience Return of Them", "热带体验：海难哈姆雷特联机版生态", "熱帶體驗：船難哈姆雷特連線版生態")
+name = en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond","热带体验 | 海难哈姆雷特生态：来自域外","船難哈姆雷特生態：來自域外")
 description = en_zh_zht(
-	"\nversion：3.78" ..
+	"\nversion：3.79" ..
 	"\nAttention: We added a complement to this mod." ..
 	"\nIn it will have several changes to improve the experience of the game." ..
 	"\nVisit only the main mod page and download." ..
 	"\nTropical Experience| Complement",
 
-	"\n版本：3.78" ..
+	"\n版本：3.79" ..
 	"\n注意：我们为此模组添加了一些内容补充" ..
 	"\n其中包含了多项改进游戏体验的玩法变化，请访问此模组创意工坊进行下载" ..
 	"\n多种生态群系体验 | 补充内容" ..
@@ -28,7 +28,7 @@ description = en_zh_zht(
 	"\n大风平原(Windy Plains)" ..
 	"\n\n兼容樱花林(Cherry Forest)",
 
-	"\n版本：3.78" ..
+	"\n版本：3.79" ..
 	"\n注意：我們爲此模組添加了一些內容補充" ..
 	"\n其中包含了多項改進遊戲體驗的玩法變化，請訪問此模組創意工坊進行下載" ..
 	"\n多種生態羣系體驗 | 補充內容" ..
@@ -42,7 +42,7 @@ description = en_zh_zht(
 )
 
 author = "Vagner da Rocha Santos."
-version = "3.78"
+version = "3.79"
 forumthread = ""
 api_version = 10
 priority = -20
