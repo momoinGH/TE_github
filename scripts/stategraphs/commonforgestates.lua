@@ -146,7 +146,7 @@ CommonForgeStates.AddIdle = function(states, funny_idle_state, anim_override, ti
                 end
 
                 local anim = (anim_override == nil and "idle_loop") or
-                (type(anim_override) ~= "function" and anim_override) or anim_override(inst)
+                    (type(anim_override) ~= "function" and anim_override) or anim_override(inst)
 
                 if pushanim then
                     if type(pushanim) == "string" then
@@ -315,7 +315,7 @@ CommonForgeStates.AddKnockbackState = function(states, timeline, anim, fns, igno
                 end
                 local k = distsq < rangesq and .3 * distsq / rangesq - 1 or -.7
                 inst.sg.statemem.speed = (data.strengthmult or 1) * 12 * k /
-                ((ignoremass and 50 or inst.Physics:GetMass()) / 50)
+                    ((ignoremass and 50 or inst.Physics:GetMass()) / 50)
                 inst.sg.statemem.dspeed = 0
                 if drot > 90 then
                     inst.sg.statemem.reverse = true
@@ -334,7 +334,7 @@ CommonForgeStates.AddKnockbackState = function(states, timeline, anim, fns, igno
                 if inst.sg.statemem.speed < 0 then
                     inst.sg.statemem.dspeed = inst.sg.statemem.dspeed + .075
                     inst.Physics:SetMotorVel(
-                    inst.sg.statemem.reverse and -inst.sg.statemem.speed or inst.sg.statemem.speed, 0, 0)
+                        inst.sg.statemem.reverse and -inst.sg.statemem.speed or inst.sg.statemem.speed, 0, 0)
                 else
                     if not (fns and fns.anim) then
                         inst.AnimState:PlayAnimation("stun_pst")

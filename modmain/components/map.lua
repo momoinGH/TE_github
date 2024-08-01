@@ -1,26 +1,11 @@
 local Utils = require("tropical_utils/utils")
 require "components/map"
 
-local NOT_PASSABLE_TILES = {
-    [WORLD_TILES.OCEAN_SWELL] = true,
-    [WORLD_TILES.OCEAN_BRINEPOOL] = true,
-    [WORLD_TILES.OCEAN_BRINEPOOL_SHORE] = true,
-    [WORLD_TILES.OCEAN_HAZARDOUS] = true,
-    [WORLD_TILES.OCEAN_ROUGH] = true,
-    [WORLD_TILES.OCEAN_COASTAL_SHORE] = true,
-    [WORLD_TILES.OCEAN_WATERLOG] = true,
-    [WORLD_TILES.OCEAN_COASTAL] = true
-}
-
 Utils.FnDecorator(Map, "IsPassableAtPoint", function(self, x, y, z)
     if #TheSim:FindEntities(x, y, z, 30, { "blows_air" }) > 0
         or #TheSim:FindEntities(x, y, z, 1.2, { "boat" }) > 0
     then
         return { true }, true
-    end
-
-    if NOT_PASSABLE_TILES[TheWorld.Map:GetTileAtPoint(x, y, z)] then
-        return { false }, true
     end
 end)
 

@@ -25,6 +25,7 @@ local function fn()
     inst.AnimState:SetBuild("antsuit")
     inst.AnimState:PlayAnimation("anim")
 
+    MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
 
     inst:AddTag("needssewing")

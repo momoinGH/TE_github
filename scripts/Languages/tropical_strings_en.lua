@@ -1,22 +1,29 @@
-STRINGS.CHARACTER_ABOUTME.wilbur                                                = "哦哦啊哈！"
-STRINGS.CHARACTER_ABOUTME.woodlegs                                              = "\"不要介意我的卑鄙。吼吼吼吼！\""
-STRINGS.CHARACTER_ABOUTME.walani                                                = "如果我起不来请原谅我。我也不想这样。"
+STRINGS.CHARACTERS.WOODLEGS                                                     = require "speech_woodlegs"
+STRINGS.CHARACTERS.WALANI                                                       = require "speech_walani"
 
-STRINGS.CHARACTER_DESCRIPTIONS.wilbur                                           = "*不会说话\n*走的时候慢,跑的时候快\n*是个猴子"
-STRINGS.CHARACTER_DESCRIPTIONS.woodlegs                                         = "*可以嗅到宝藏\n*海腿号的船长\n*海盗"
-STRINGS.CHARACTER_DESCRIPTIONS.walani                                           = "*喜欢冲浪\n*干燥的快\n*是个相当冷艳的女孩"
+STRINGS.CHARACTER_ABOUTME.walani                                                = "Forgive me if I don't get up. I don't want to."
+STRINGS.CHARACTER_ABOUTME.woodlegs                                              = "Don't ye mind th'scurvy. Yarr-harr-harr!"
+STRINGS.CHARACTER_ABOUTME.wilbur                                                = "Can't talk Slow as biped, fast as quadruped Is a monkey"
 
-STRINGS.CHARACTER_NAMES.wilbur                                                  = "威尔伯"
-STRINGS.CHARACTER_NAMES.woodlegs                                                = "伍德莱格"
-STRINGS.CHARACTER_NAMES.walani                                                  = "瓦拉尼"
+STRINGS.CHARACTER_DESCRIPTIONS.woodlegs                                         = "*Has his lucky hat\n*Has his lucky cutlass\n*Pirate"
+STRINGS.CHARACTER_DESCRIPTIONS.wilbur                                           = "*Can't talk\n*Slow as biped, but fast as quadruped\n*Is a monkey"
+STRINGS.CHARACTER_DESCRIPTIONS.walani                                           = "*Loves surfing\n*Dries off quickly\n*Is a pretty chill gal"
 
-STRINGS.CHARACTER_QUOTES.wilbur                                                 = "\"哦哦啊哈！\""
-STRINGS.CHARACTER_QUOTES.woodlegs                                               = "\"不要介意我的卑鄙。吼吼吼吼！\""
-STRINGS.CHARACTER_QUOTES.walani                                                 = "\"如果我起不来请原谅我。我也不想这样。\""
+STRINGS.CHARACTER_NAMES.woodlegs                                                = "Woodlegs"
+STRINGS.CHARACTER_NAMES.wilbur                                                  = "Wilbur"
+STRINGS.CHARACTER_NAMES.walani                                                  = "Walani"
 
-STRINGS.CHARACTER_TITLES.wilbur                                                 = "猴王"
-STRINGS.CHARACTER_TITLES.woodlegs                                               = "海盗船长"
-STRINGS.CHARACTER_TITLES.walani                                                 = "稳如泰山"
+STRINGS.CHARACTER_QUOTES.walani                                                 = "\"Forgive me if I don't get up. I don't want to.\""
+STRINGS.CHARACTER_QUOTES.woodlegs                                               = "\"Don't ye mind th'scurvy. Yarr-harr-harr!\""
+STRINGS.CHARACTER_QUOTES.wilbur                                                 = "\"Ooo ooa oah ah!\""
+
+STRINGS.CHARACTER_SURVIVABILITY.wilbur                                          = "Slim"
+STRINGS.CHARACTER_SURVIVABILITY.woodlegs                                        = "Grim"
+STRINGS.CHARACTER_SURVIVABILITY.walani                                          = "Slim"
+
+STRINGS.CHARACTER_TITLES.walani                                                 = "The Unperturbable"
+STRINGS.CHARACTER_TITLES.woodlegs                                               = "The Pirate Captain"
+STRINGS.CHARACTER_TITLES.wilbur                                                 = "The Monkey King"
 -----------------------------UI -----------------------------
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL                                            = "Nautical"
 STRINGS.UI.CRAFTING_FILTERS.OBSIDIAN                                            = "Volcano"
@@ -32,6 +39,18 @@ STRINGS.UI.COOKBOOK.TEA                                                         
 STRINGS.UI.COOKBOOK.ICEDTEA                                                     = "It cools the body/Provide acceleration effect"
 STRINGS.UI.COOKBOOK.NETTLELOSANGE                                               = " Protects you from pollen"
 STRINGS.UI.COOKBOOK.MEATED_NETTLE                                               = " Protects you from pollen"
+
+STRINGS.UI.MODSSCREEN.MOD_DEPENDENCIES_TITLE = "Dependencies Required"
+STRINGS.UI.MODSSCREEN.MOD_HAS_DEPENDENCIES =
+"%s requires other mods to run, it will subscribe and enable these if you enable this mod:"
+STRINGS.UI.MODSSCREEN.MOD_DEPENDENTS_TITLE = "Required By Other Mods"
+STRINGS.UI.MODSSCREEN.MOD_HAS_DEPENDENTS =
+"%s is required for other mods to run, if you disable this mod these mods will be disabled:"
+STRINGS.UI.MODSSCREEN.DISABLE_ALL = "Disable All"
+STRINGS.UI.MODSSCREEN.CANCEL = "Cancel"
+STRINGS.UI.MODSSCREEN.REQUIRED_MODS_DOWNLOADING_TITLE = "Required Mods Are Downloading"
+STRINGS.UI.MODSSCREEN.REQUIRED_MODS_DOWNLOADING =
+"The game has not finished downloading required mods.\nEither wait until the mods have finished downloading, or disable mods which have dependencies."
 ----------------------------- TAB -----------------------------
 STRINGS.TABS.OBSIDIANTAB                                                        = "Volcanic"
 STRINGS.TABS.NAUTICALTAB                                                        = "Nautical"
@@ -42,6 +61,22 @@ STRINGS.TABS.GODDESSTAB                                                         
 STRINGS.TABS.GORGE                                                              = "GORGE"
 
 ----------------------------- Name of Things -----------------------------
+STRINGS.NAMES.WILBUR                                                            = "Wilbur"
+STRINGS.NAMES.WOODLEGS                                                          = "Woodlegs"
+STRINGS.NAMES.WALANI                                                            = "Walani"
+STRINGS.NAMES.TFWP_LAVA_DART                                                    = STRINGS.NAMES.BLOWDART_LAVA;
+STRINGS.NAMES.TFWP_DRAGON_DART                                                  = STRINGS.NAMES.BLOWDART_LAVA2;
+STRINGS.NAMES.TFWP_INFERNAL_STAFF                                               = STRINGS.NAMES.FIREBALLSTAFF;
+STRINGS.NAMES.TFWP_HEALING_STAFF                                                = STRINGS.NAMES.HEALINGSTAFF;
+STRINGS.NAMES.TFWP_LAVA_HAMMER                                                  = STRINGS.NAMES.HAMMER_MJOLNIR;
+STRINGS.NAMES.TFWP_SPEAR_GUNG                                                   = STRINGS.NAMES.SPEAR_GUNGNIR;
+STRINGS.NAMES.TFWP_SPEAR_LANCE                                                  = STRINGS.NAMES.SPEAR_LANCE;
+STRINGS.NAMES.RILEDLUCY                                                         = STRINGS.NAMES.LAVAARENA_LUCY;
+STRINGS.NAMES.TFWP_CONTROL_BOOK                                                 = STRINGS.NAMES.BOOK_FOSSIL;
+STRINGS.NAMES.TFWP_SUMMON_BOOK                                                  = STRINGS.NAMES.BOOK_ELEMENTAL;
+STRINGS.NAMES.LUCY                                                              = "Lucy the axe"
+STRINGS.NAMES.TFWP_FIRE_BOMB                                                    = STRINGS.NAMES.LAVAARENA_FIREBOMB;
+STRINGS.NAMES.TFWP_HEAVY_SWORD                                                  = STRINGS.NAMES.LAVAARENA_HEAVYBLADE;
 STRINGS.NAMES.QUACKENDRILL                                                      = "Quacken Drill"
 STRINGS.NAMES.RENO_ANTIQUITIES_BEEFALO                                          = "Beefalo Mounting"
 STRINGS.NAMES.CLOSED_CHEST                                                      = "关的箱子装饰"
@@ -2348,8 +2383,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWINGING_LIGHT_FLORAL_BULB                  
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_PLANTHOLDER_DRACEANA                   = "A fancy way to hold a fancy plant."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT                                        = "Is that how I got here?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_HATSHOP                            = {
-	BURNING = "The hats are on fire!",
-	GENERIC = "A place to hang your hat.",
+    BURNING = "The hats are on fire!",
+    GENERIC = "A place to hang your hat.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVA_POND_ROCK2                             = "As gneiss a place as any."
@@ -2362,9 +2397,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TAR_EXTRACTOR_ON                            
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_ANTIQUITIES_BEEFALO                    = "He looks unhappy."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAT_LEATHER                                 = "Is the bat hide-ing in there?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDER_MONKEY                               = {
-	DEAD = "That's that.",
-	SLEEPING = "I don't want to wake it.",
-	GENERIC = "That thing is rather large!",
+    DEAD = "That's that.",
+    SLEEPING = "I don't want to wake it.",
+    GENERIC = "That thing is rather large!",
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER                                  = "Wildbeaver."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CHESTER_EYEBONE_GENERIC                     = "It's looking at me."
@@ -2377,8 +2412,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTABLECOOKPOT                             
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MEAN_FLYTRAP_SLEEPING                       = "Sleep well, horrible plant."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PARSNIP_GIANT                        = "Parsnip Giant."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_ROYALGUARD_RICH                         = {
-	SLEEPING = "不那么令人生畏了，是吧？",
-	GENERIC = "请不要逮捕我。",
+    SLEEPING = "不那么令人生畏了，是吧？",
+    GENERIC = "请不要逮捕我。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FARMPLOT_BURNT                              = "I don't think anything will grow in a pile of ash."
@@ -2400,9 +2435,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.RESURRECTIONSTATUE_GENERIC                  
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMHEAD_BURNT                              = "Burnt merm flesh somehow smells even worse."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MEAN_FLYTRAP_GENERIC                        = "Plants shouldn't move! That's just science!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TOUCAN_HAMLET                               = {
-	DEAD = "死掉了。",
-	SLEEPING = "睡觉中。",
-	GENERIC = "这只鸟儿有一个灵巧的大嘴。",
+    DEAD = "死掉了。",
+    SLEEPING = "睡觉中。",
+    GENERIC = "这只鸟儿有一个灵巧的大嘴。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.UNDERWATER_ENTRANCE_CLOSED_CAVE             = "堵住了。"
@@ -2433,8 +2468,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINOMETER_BURNT                            
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVARENACHEST                               = "Treasure Chest"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_WINDY                                  = "the ground of a windy plain."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_COLLECTOR                            = {
-	SLEEPING = "He's taking a nap.",
-	GENERIC = "Accepts stinger, silk, mosquitosack, chitin, venus_stalk, venomgland, spidergland and lotus_flower",
+    SLEEPING = "He's taking a nap.",
+    GENERIC = "Accepts stinger, silk, mosquitosack, chitin, venus_stalk, venomgland, spidergland and lotus_flower",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COLDFIRE_GENERIC                            = "Sure beats darkness."
@@ -2442,8 +2477,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ICE_DEER                                    
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIGHTNING_ROD_CHARGED                       = "The power is mine!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RABID_BEETLE_DEAD                           = "A late beetle."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_GUARD                                   = {
-	SLEEPING = "不那么令人生畏了，是吧？",
-	GENERIC = "请不要逮捕我。",
+    SLEEPING = "不那么令人生畏了，是吧？",
+    GENERIC = "请不要逮捕我。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ELEPHANTCACTUS_STUMP                        = "It'll sprout pokers again eventually."
@@ -2459,8 +2494,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.HARPOON                                     
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SOLOFISH                                    = "It has that wet-dog smell."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_PLAINS                                 = "It's a chunk of ground."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_DELI                               = {
-	BURNING = "餐馆烧起来了！",
-	GENERIC = "我要点一整个豪华套餐。",
+    BURNING = "餐馆烧起来了！",
+    GENERIC = "我要点一整个豪华套餐。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMWORKERHOUSE                             = "很简陋。"
@@ -2492,12 +2527,12 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWEET_POTATO                                
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUTATOR_TROPICAL                            = "Mutator Tropical Spider."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.INTERIOR_WALL_CIRCLES                       = "Pretty paper on a wall."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_BANK                               = {
-	BURNING = "银行着火了！",
-	GENERIC = "我绝对不会买股票的。",
+    BURNING = "银行着火了！",
+    GENERIC = "我绝对不会买股票的。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VOLCANICDETECTOR                            = {
-	"This should help to prepare us.",
+    "This should help to prepare us.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIGERSHARKPOOL                              = "There is a strange shark in this pond."
@@ -2512,8 +2547,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.INTERIOR_WALL_PEAGAWK                       
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSHTREE_MEDIUM_BLOOM                       = "I'm mildly offended by this."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEACH_PIT                                   = "They contain high levels of cyanide."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CITY_LAMP                                   = {
-	ON = "Lusterless.",
-	GENERIC = "Plain fire. No science involved.",
+    ON = "Lusterless.",
+    GENERIC = "Plain fire. No science involved.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COOKPOT_BURNT                               = "The pot got cooked."
@@ -2529,7 +2564,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SCORPION_GENERIC                            
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDERB1                                    = "Spider"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_PLANTHOLDER_FANCY                      = "That's fancy."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_FARMER                               = {
-	"他采购草和树枝。\t",
+    "他采购草和树枝。\t",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VOLCANO                                     = "My scientific know-how tells me that's a perfectly safe mountain!"
@@ -2540,10 +2575,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILBUR_CROWN                                
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTQUEEN                                    = "The Queen regn-ant."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.NETTLELOSANGE                               = "Innocuous inoculation."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BURR_SAPLING                                = {
-	PICKED = "It'll grow back.",
-	WITHERED = "Not doing so good.",
-	BURNING = "It's burning!",
-	GENERIC = "Looks like it grows burrs.",
+    PICKED = "It'll grow back.",
+    WITHERED = "Not doing so good.",
+    BURNING = "It's burning!",
+    GENERIC = "Looks like it grows burrs.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TUBER_CROP                                  = "Too bad tuber."
@@ -2568,10 +2603,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.VAMPIRE_BAT_WING                            
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_13_INV                      = "水里的齿轮！"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DRAGOONSPIT                                 = "It's SPITacularly disgusting!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLETREE                                  = {
-	BURNT = "可惜了。",
-	CHOPPED = "就剩一点木头。",
-	BURNING = "它烧着了！",
-	GENERIC = "典型的热带丛林树木。",
+    BURNT = "可惜了。",
+    CHOPPED = "就剩一点木头。",
+    BURNING = "它烧着了！",
+    GENERIC = "典型的热带丛林树木。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.NETTLE_WITHERED                             = "It really doesn't like this dirt."
@@ -2597,10 +2632,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.RUG_WEB                                     
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEBASE_VALID                              = "It's ready to go."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_PAINTED                                = "It's a chunk of ground."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOOTREE                                  = {
-	BURNT = "I feel like I could have prevented that.",
-	CHOPPED = "Take that, nature!",
-	BURNING = "Bye bye, bamboo.",
-	GENERIC = "Looks pretty sturdy.",
+    BURNT = "I feel like I could have prevented that.",
+    CHOPPED = "Take that, nature!",
+    BURNING = "Bye bye, bamboo.",
+    GENERIC = "Looks pretty sturdy.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_TORCH_WALL                        = "A few sticks or logs will brighten this up."
@@ -2616,8 +2651,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_FIN                                   
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ICEMAKER_OUT                                = "It needs more fuel."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SANITYROCK_ACTIVE                           = "That's a CRAZY looking rock!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOPKEEPER                              = {
-	SLEEPING = "是有关财富的美梦吗？",
-	GENERIC = "店主您好。",
+    SLEEPING = "是有关财富的美梦吗？",
+    GENERIC = "店主您好。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COLDFIRE_HIGH                               = "That fire is getting out of hand!"
@@ -2716,7 +2751,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAGMAROCK_GOLD                              
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORKLAND_INTRO_SUITCASE                     = "I don't want to lug that luggage around."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VOLCANO_ALTAR_OPEN                          = "The altar is open and ready to accept offerings!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_BANKER                               = {
-	"他采购宝石。",
+    "他采购宝石。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KILLERBEE_HELD                              = "This seems dangerous."
@@ -2745,10 +2780,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.HALBERD                                     
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUBBLETEA                                   = "..."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHELVES_WALLMOUNT                           = "A place to put stuff."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TEATREE                                     = {
-	BURNT = "烧掉了。",
-	CHOPPED = "砍掉了。",
-	BURNING = "小树正在燃烧！",
-	GENERIC = "多么可爱的树。",
+    BURNT = "烧掉了。",
+    CHOPPED = "砍掉了。",
+    BURNING = "小树正在燃烧！",
+    GENERIC = "多么可爱的树。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUR_PLANT                                   = "It's so alluring."
@@ -2845,7 +2880,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARX                                       
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ICEROCKBEARGER                              = "Frozen Bearger."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYEGG                                   = "Maybe I should have let it hatch."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALL_TOTEM                                  = {
-	"I must build it.",
+    "I must build it.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_ACADEMY_DOOR_ENTRADA               = "Door"
@@ -2906,9 +2941,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.COLDFIREPIT_OUT                             
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TAR_TRAP                                    = "Who's cleaning that up, I wonder?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_BAIXO                        = "Pig Ruins Door"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VAMPIREBAT                                  = {
-	DEAD = "I feel a bit safer.",
-	SLEEPING = "Hopefully it won't get up again.",
-	GENERIC = "I'd prefer to keep all of my blood.",
+    DEAD = "I feel a bit safer.",
+    SLEEPING = "Hopefully it won't get up again.",
+    GENERIC = "I'd prefer to keep all of my blood.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BIGFISHINGROD                               = "To catch a big fish, you need a big rod."
@@ -2924,10 +2959,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANCIENT_ROBOT_CLAW                          
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PHEROMONESTONE                              = "A nasaltelepathical bug communicator."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_LAMP_2EMBROIDERED                      = "A fancy lamp."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TEATREE_PIKO_NEST                           = {
-	BURNT = "烧掉了。",
-	CHOPPED = "砍掉了。",
-	BURNING = "小树正在燃烧！",
-	GENERIC = "多么可爱的树啊。",
+    BURNT = "烧掉了。",
+    CHOPPED = "砍掉了。",
+    BURNING = "小树正在燃烧！",
+    GENERIC = "多么可爱的树啊。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VOLCANOSTAFF                                = "The label says \"Keep out of reach of children.\""
@@ -2936,15 +2971,15 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FULL_BOTTLE_GREEN_MILK                      
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PILLAR_DOOR                                 = "I hope that bat is dead."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.INTERIOR_WALL_ROPE                          = "I'm 'knot' going to say anything bad about it."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_CITYHALL_PLAYER                    = {
-	BURNING = "不！我的办公室！",
-	GENERIC = "猪儿们都要给我交税。",
+    BURNING = "不！我的办公室！",
+    GENERIC = "猪儿们都要给我交税。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ADULT_FLYTRAP_SLEEPING                      = "Shhh. It's sleeping."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAVE_ENTRANCE_HAM3                          = "Cave Entrance."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGHOUSE_CITY                               = {
-	BURNING = "That house is on fire!",
-	GENERIC = "Both a house, and a home.",
+    BURNING = "That house is on fire!",
+    GENERIC = "Both a house, and a home.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAMPFIRE_LOW                                = "The fire's getting a bit low."
@@ -2979,9 +3014,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANDRAKE_DEAD                               
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALL_WOOD_GENERIC                           = "Pointy!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT                               = "This looks... sort of boat-like..."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BILLSNOW                                    = {
-	DEAD = "哈哈，它死了。",
-	SLEEPING = "好，它睡着了。",
-	GENERIC = "一个像灌木丛的小生物。",
+    DEAD = "哈哈，它死了。",
+    SLEEPING = "好，它睡着了。",
+    GENERIC = "一个像灌木丛的小生物。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEAGAWK_DEAD                                = "Dead-eyed."
@@ -2997,9 +3032,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_PLANTHOLDER_ZZ                         
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_MINION                               = "This is Wildbore King's guardian."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.REEDS_PICKED                                = "I picked all the useful reeds."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FROG_POISON                                 = {
-	DEAD = "Lifeless.",
-	SLEEPING = "Looks like it's hibernating.",
-	GENERIC = "A pernicious amphibian.",
+    DEAD = "Lifeless.",
+    SLEEPING = "Looks like it's hibernating.",
+    GENERIC = "A pernicious amphibian.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VINE                                        = "Maybe I can tie stuff up with this."
@@ -3017,8 +3052,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.CANDLEHAT                                   
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TREE_MANGROVE                               = "I wonder if it's getting enough water?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BISHOPB                                     = "Bishop"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_TINKER                             = {
-	BURNING = "那座塔楼正在燃烧！",
-	GENERIC = "有什么新奇的东西呢？",
+    BURNING = "那座塔楼正在燃烧！",
+    GENERIC = "有什么新奇的东西呢？",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDER_TROPICAL                             = "Spider Tropical."
@@ -3056,11 +3091,11 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.STATUEGLOMMER_GENERIC                       
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIFEPLANT                                   = "Sure likes looking at itself."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHELVES_GLASS                               = "A place to put stuff."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIKO_ORANGE                                 = {
-	"它有点关于坚果的工作",
-	"它有点疯疯癫癫的。",
-	DEAD = "我有点难过。",
-	SLEEPING = "可能在做关于树的梦。",
-	GENERIC = "由于某些原因我想要喝茶。",
+    "它有点关于坚果的工作",
+    "它有点疯疯癫癫的。",
+    DEAD = "我有点难过。",
+    SLEEPING = "可能在做关于树的梦。",
+    GENERIC = "由于某些原因我想要喝茶。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONUT_PLANTED                             = "It doesn't need my help to grow anymore."
@@ -3121,8 +3156,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WINDOW_TALL_CURTAIN                         
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVA_POND_ROCK5                             = "As gneiss a place as any."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHADOWWAXWELL_BOAT                          = "一艘船，由暗影能量所构成。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_PRODUCE                            = {
-	BURNING = "The food is on fire!",
-	GENERIC = "There's fresh produce in there.",
+    BURNING = "The food is on fire!",
+    GENERIC = "There's fresh produce in there.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALL_PIG_RUINS                              = "It's an old wall."
@@ -3149,10 +3184,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FROG_WATER                                  
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VEGGIE_SOUP                                 = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ICEROCKLEIF                                 = "Frozen Creature."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMTREE                                    = {
-	GENERIC = "How tropical.",
-	CHOPPED = "Take that, nature!",
-	BURNING = "What a waste of wood.",
-	BURNT = "I feel like I could have prevented that.",
+    GENERIC = "How tropical.",
+    CHOPPED = "Take that, nature!",
+    BURNING = "What a waste of wood.",
+    BURNT = "I feel like I could have prevented that.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTQUEEN_THRONE                             = "I should break that. For science."
@@ -3190,8 +3225,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIDAL_PLANT                                 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_CHAIR_MASSAGER                         = "I don't trust it."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURNIP_PLANTED                              = "Turnip Plant."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGHOUSE_MINE                               = {
-	BURNING = "The mine is on fire!",
-	GENERIC = "I have no quarry with them.",
+    BURNING = "The mine is on fire!",
+    GENERIC = "I have no quarry with them.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAVE_ENTRANCE_FROST                         = "Cave Entrance."
@@ -3251,13 +3286,13 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MARSH_BUSH_PICKED                           
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_WALLORNAMENT_PHOTO                     = "Who's that kid?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKYHAT                                    = "Does it make me look scurvy... I mean scary!?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_FLORIST                            = {
-	BURNING = "The flowers are burning!",
-	GENERIC = "A garden variety shop.",
+    BURNING = "The flowers are burning!",
+    GENERIC = "A garden variety shop.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_ENTRANCE3                         = {
-	LOCKED = "你休想把我拒之门外！",
-	GENERIC = "看起来是一场冒险。",
+    LOCKED = "你休想把我拒之门外！",
+    GENERIC = "看起来是一场冒险。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_PIGMAN_RELIEF_DART3               = "它的艺术价值让它非常具有诱惑力。"
@@ -3302,14 +3337,14 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_HUNTER_SLEEPING                      
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MARSH_TREE_CHOPPED                          = "Not so spiky now!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_FISH_FARM                             = "鱼儿鱼儿快长大。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RELIC_2                                     = {
-	SUNKEN = "It's green and submarine.",
-	GENERIC = "The relic of an ancient culture.",
+    SUNKEN = "It's green and submarine.",
+    GENERIC = "The relic of an ancient culture.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTLER                                      = "For the bird."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH3_COOKED                                = "That fish is fin-ished."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIKIMAN                                     = {
-	"So they do have a brain after all...",
+    "So they do have a brain after all...",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DISARMING_KIT                               = "A trap for traps!"
@@ -3403,8 +3438,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ZEB_GENERIC                                 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_14_INV                      = "游动的黄金！"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALKINGSTICK                                = "Perfect for a gentleman scientist."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGHOUSE_FARM                               = {
-	BURNING = "That farm is on fire!",
-	GENERIC = "It's a peaceful life.",
+    BURNING = "That farm is on fire!",
+    GENERIC = "It's a peaceful life.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEACH_JUICE_BOTTLE_GREEN                    = "Full bottle of refreshing peach juice."
@@ -3412,7 +3447,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_FIGURE                              
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEG_LEG                                     = "I can perform amputations if anyone'd like to wear it for real."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEARL_AMULET                                = "当我戴上这个的时候，我的肺部感到“轻盈”。。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_MINER                                = {
-	"他采购石头。",
+    "他采购石头。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOATMETAL_ITEM                              = "最坚固的船！"
@@ -3421,7 +3456,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_CAVE                                   
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HEDGE_LAYERED_ITEM                          = "It needs to be on the ground to work."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RELIC_4_GENERIC                             = "A regal relic."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_ERUDITE                              = {
-	"他采购噩梦燃料。",
+    "他采购噩梦燃料。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEARDEN                                     = "Bear Cave."
@@ -3456,19 +3491,19 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.EVERGREEN_BURNING                           
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORKLAND_INTRO_FLAGS                        = "It guess it raised some red flags."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GW_RUNE_RICH                                = "It looks rich."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_MAYOR                                = {
-	SLEEPING = "Typical. Sleeping on the job.",
-	GENERIC = "Accepts Goldnugget.",
+    SLEEPING = "Typical. Sleeping on the job.",
+    GENERIC = "Accepts Goldnugget.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANHELM                                = {
-	"This should protect me.",
+    "This should protect me.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_FOUNTAIN                            = "Such a nice fountain."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ADULT_FLYTRAP                               = {
-	DEAD = "Bereft of life.",
-	SLEEPING = "Shhh. It's sleeping.",
-	GENERIC = "Science could not have done this.",
+    DEAD = "Bereft of life.",
+    SLEEPING = "Shhh. It's sleeping.",
+    GENERIC = "Science could not have done this.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_FLIPPABLE                              = "You never know what you'll find under a rock."
@@ -3510,8 +3545,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWINGING_LIGHT_BASIC_BULB                   
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_PIE                                    = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WHALE_TRACK                                 = "Whale, ho!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_GUARD_TOWER2                            = {
-	BURNING = "瞭望塔烧着了！",
-	GENERIC = "它惊人的顽强。",
+    BURNING = "瞭望塔烧着了！",
+    GENERIC = "它惊人的顽强。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMFISHHOUSE                               = "Who would live here?"
@@ -3529,9 +3564,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_TORCH_SIDEWALL_BLUE               
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONUT_COOKED                              = "Now I just need a cake."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HIPPOPOTAMOOSE                              = "Large and pointy-headed."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGEON                                      = {
-	DEAD = "It has passed.",
-	SLEEPING = "It's fast asleep.",
-	GENERIC = "It's only carrying a couple diseases.",
+    DEAD = "It has passed.",
+    SLEEPING = "It's fast asleep.",
+    GENERIC = "It's only carrying a couple diseases.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_STEAK                                  = "安抚天空之兽的贡品。"
@@ -3539,7 +3574,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIRATIHATITATOR_GENERIC                     
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.INTERIOR_FLOOR_HOOF_CURVY                   = "Totally floored."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRAB_CAKE                                   = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHADYGLASSES                                = {
-	"These are so cool!",
+    "These are so cool!",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_FLORIST_DOOR_ENTRADA               = "Door"
@@ -3557,7 +3592,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH6                                       
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUG_NETTLE                                  = "Science says this needs dirt, fast!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PICKED                                      = "It'll grow back."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_HUNTER                               = {
-	"他采购狗牙和蜂刺。",
+    "他采购狗牙和蜂刺。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_QUEEN                                   = "She looks bossy."
@@ -3572,8 +3607,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIZZA                                       
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAVE_ENTRANCE_ROC                           = "一个洞口！"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.UNDERWATER_EXIT                             = "还好有这个，不然我都不知道我能不能游上去。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_GUARD_TOWER_PALACE2                     = {
-	BURNING = "瞭望塔烧着了！",
-	GENERIC = "坚固又美观。",
+    BURNING = "瞭望塔烧着了！",
+    GENERIC = "坚固又美观。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_VOLCANO                                = "Volcano-y turf."
@@ -3594,7 +3629,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.NIGHTMARE_TIMEPIECE_WARN                    
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MEATED_NETTLE                               = "Meated Nettle prevent sneeze ."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KINGFISHER_GENERIC                          = "What a pointy bill!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SUMMERWALRUS                                = {
-	"He looks like he's enjoying his vacation.",
+    "He looks like he's enjoying his vacation.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COI                                         = "一条金色的小鱼。"
@@ -3608,8 +3643,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.DRAGOON                                     
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_CHAIR_CORNER                           = "Someone could sit on that."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.THUNDERBIRD                                 = "A shocking sight!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_WEAPONS                            = {
-	BURNING = "The weapons are on fire!",
-	GENERIC = "Instruments of destruction.",
+    BURNING = "The weapons are on fire!",
+    GENERIC = "Instruments of destruction.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SURFBOARD                                   = "If I was on my surfboard I could catch you.."
@@ -3619,8 +3654,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_17_INV                      
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_CHAIR_OTTOMAN                          = "Seat. Foot rest. The ottoman has many uses."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CANDY                                       = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_ROYALGUARD_RICH_2                       = {
-	SLEEPING = "不那么令人生畏了，是吧？",
-	GENERIC = "请不要逮捕我。",
+    SLEEPING = "不那么令人生畏了，是吧？",
+    GENERIC = "请不要逮捕我。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CITY_LAMP2                                  = "喜庆的氛围！"
@@ -3647,10 +3682,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUAGMIRE_CRATE_GRILL_SMALL                  
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEACH_TREE1                                 = "Such a lonely peach."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.INSANITYROCK_ACTIVE                         = "TAKE THAT, SANE SELF!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HEDGE                                       = {
-	BURNT = "Glad that's over with.",
-	SHAVEABLE = "It looks like it could use a shave.",
-	BURNING = "It's burning.",
-	GENERIC = "It's been neatly kept.",
+    BURNT = "Glad that's over with.",
+    SHAVEABLE = "It looks like it could use a shave.",
+    BURNING = "It's burning.",
+    GENERIC = "It's been neatly kept.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDERB2                                    = "Spider"
@@ -3676,9 +3711,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO2                                
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_3                = "还没张开。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAC_N_CHEESE                                = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SCORPION                                    = {
-	DEAD = "It's dead. Good.",
-	SLEEPING = "Now'd be a good time to smush it.",
-	GENERIC = "That better not be poisonous.",
+    DEAD = "It's dead. Good.",
+    SLEEPING = "Now'd be a good time to smush it.",
+    GENERIC = "That better not be poisonous.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_PIGMAN_RELIEF_RIGHTSIDE_DART      = "它的艺术价值让它非常具有诱惑力。"
@@ -3700,10 +3735,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FIRESUPPRESSOR_OFF                          
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLETREESEED_PLANTED                      = "It will grow into a nice jungle tree."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORAL_BRAIN                                 = "Food for thought."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TREE_FOREST_DEEP                            = {
-	BURNT = "烧完了。",
-	CHOPPED = "木头剩一点了。",
-	BURNING = "烧着了。",
-	GENERIC = "这里林子里的树。",
+    BURNT = "烧完了。",
+    CHOPPED = "木头剩一点了。",
+    BURNING = "烧着了。",
+    GENERIC = "这里林子里的树。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPORE_MEDIUM_INV                            = "I'll keep a little light in my pocket."
@@ -3719,22 +3754,22 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ICEDTEA                                     
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FETTUCCINE                                  = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COMMONFISH                                  = "这里用不了渔网，得想其他办法捕到它们。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_MECHANIC                             = {
-	"他采购木板，绳子，石砖和莎草纸",
+    "他采购木板，绳子，石砖和莎草纸",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FROGLEGS_POISON                             = "It looks poisonous."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BED4                                        = "An even nicer bed"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GLOWFLY                                     = {
-	DEAD = "Lights out forever.",
-	COCOON = "Snug as a bug.",
-	SLEEPING = "Out like a light.",
-	GENERIC = "A light aflight.",
+    DEAD = "Lights out forever.",
+    COCOON = "Snug as a bug.",
+    SLEEPING = "Out like a light.",
+    GENERIC = "A light aflight.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LILYPAD                                     = "It's full of science. I can tell."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_GENERAL                            = {
-	BURNING = "That shop is on fire!",
-	GENERIC = "A common store full of common goods.",
+    BURNING = "That shop is on fire!",
+    GENERIC = "A common store full of common goods.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_IDOL                              = "These ruins have been ruined."
@@ -3743,8 +3778,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BED6                                        
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVER_KING                                 = "它应该统治着这一片。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_7                = "总算见到了，这种开花的鱼。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONUT                                     = {
-	PLANTED = "It doesn't need my help to grow anymore.",
-	GENERIC = "It requires a large nut hacker.",
+    PLANTED = "It doesn't need my help to grow anymore.",
+    GENERIC = "It requires a large nut hacker.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMFISHERGUARD                             = "他有一柄锋利的鱼叉！"
@@ -3758,9 +3793,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERBISQUE_SW                            
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OVEN_ITEM                                   = "内部燃烧用具。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURNIP_OVERSIZED_WAXED                      = "打过蜡的巨型芜菁。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASS_TALL                                  = {
-	BURNING = "A grass fire!",
-	PICKED = "Looks like I got it all.",
-	GENERIC = "It's too tough to pick with my hands.",
+    BURNING = "A grass fire!",
+    PICKED = "Looks like I got it all.",
+    GENERIC = "It's too tough to pick with my hands.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRISTALED_TREE_SHORT                        = "Cristaled Tree Short."
@@ -3775,17 +3810,17 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_ANTCAVE                                
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEAWEED                                     = "A weed. Of the sea."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEEFALO_SLEEPING                            = "These guys are really heavy sleepers."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.NETTLE                                      = {
-	EMPTY = "I'm sure it will grow back.",
-	DEFAULT = "This plant's strong odor clears my sinuses.",
+    EMPTY = "I'm sure it will grow back.",
+    DEFAULT = "This plant's strong odor clears my sinuses.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.UW_CORAL_GREEN                              = "这东西让我想起小时候在奶奶家见到的。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT_PIRATE                               = "I try not to eat anything with a name."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TOODARK                                     = "It's too dark to see!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAWNORNAMENT                                = {
-	BURNT = "好了，现在没了。",
-	BURNING = "接招吧！无聊的装饰品！",
-	GENERIC = "一点装饰品。",
+    BURNT = "好了，现在没了。",
+    BURNING = "接招吧！无聊的装饰品！",
+    GENERIC = "一点装饰品。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.JELLY_SANDWICH                              = "安抚天空之兽的贡品。"
@@ -3821,8 +3856,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.UNDERSEAROCK_FLINTLESS_LOW                  
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEAWEED_COOKED                              = "Crispy."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BERRYBUSH_GENERIC                           = "Red berries taste the best."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_ROYALGUARD                           = {
-	SLEEPING = "Not so intimidating now, are you?",
-	GENERIC = "Please don't arrest me.",
+    SLEEPING = "Not so intimidating now, are you?",
+    GENERIC = "Please don't arrest me.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_HATSHOP_DOOR_ENTRADA               = "Door"
@@ -3860,14 +3895,14 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_GIFTSHOP_3                          
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RO_BIN                                      = "Carryin' bird."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COMPASS_GENERIC                             = "Which way am I facing?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GOLDMONKEY                                  = {
-	"It's glorious!",
+    "It's glorious!",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORAL_BRAIN_ROCKUNDERWATER                  = "我想知道它在密谋些什么..."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MALBATROSSAIL                               = "This should really transform my boating experience.."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GEOTHERMAL_VENT                             = "或许我可以利用这些喷出的热水煮熟食物。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WANAWANATIKI                                = {
-	"He looks like the leader.",
+    "He looks like the leader.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_LAMP_GOTHIC                            = "A fancy lamp."
@@ -3884,8 +3919,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_CRANK                        
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOWER_RAINFOREST                           = "It smells vaguely tolerable."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TALLBIRDNEST_GENERIC                        = "That's quite an egg!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_ROYALGUARD_3                         = {
-	SLEEPING = "不那么令人生畏了，是吧？",
-	GENERIC = "统领大人的薪水也和他们一样吗？",
+    SLEEPING = "不那么令人生畏了，是吧？",
+    GENERIC = "统领大人的薪水也和他们一样吗？",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSHTREE_TALL_GENERIC                       = "That mushroom got too big for its own good."
@@ -3894,9 +3929,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAXWELLSHADOWHEART                          
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAWNORNAMENT_3                              = "It's beautiful"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POACHED_FISH                                = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MEAN_FLYTRAP                                = {
-	DEAD = "Cadaverous.",
-	SLEEPING = "Sleep well, horrible plant.",
-	GENERIC = "Plants shouldn't move! That's just science!",
+    DEAD = "Cadaverous.",
+    SLEEPING = "Sleep well, horrible plant.",
+    GENERIC = "Plants shouldn't move! That's just science!",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH7_COOKED                                = "最好还是吃掉吧。"
@@ -3919,9 +3954,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.REEF_JELLYFISH                              
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTQUEEN_CHAMBERS                           = "That looks important."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOWER_CAVE_TRIPLE                          = "Science makes it glow."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTMAN2                                     = {
-	DEAD = "灭虫成功。",
-	SLEEPING = "一只虫子在睡觉，一直在睡觉。",
-	GENERIC = "好大一只虫子！",
+    DEAD = "灭虫成功。",
+    SLEEPING = "一只虫子在睡觉，一直在睡觉。",
+    GENERIC = "好大一只虫子！",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POLLEN_COOKED                               = "彻底熟了的花粉。"
@@ -3941,7 +3976,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_19_INV                      
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FENNEL_PLANTED                              = "一种香料作物。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GALINHEIRO                                  = "Chicken House."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIKIHEAD                                    = {
-	"Give gold or gems to it!",
+    "Give gold or gems to it!",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CREAMY_FISH                                 = "安抚天空之兽的贡品。"
@@ -4010,8 +4045,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_SURFBOARD                             
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_PALACE2                                 = "一家渔具商店。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DART                              = "很尖锐。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUNGPILE                                    = {
-	PICKED = "Dung and dung.",
-	GENERIC = "It's a pile of dung.",
+    PICKED = "Dung and dung.",
+    GENERIC = "It's a pile of dung.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRILL_SMALL_ITEM                            = "用来烤小块儿的肉。"
@@ -4033,22 +4068,22 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_QUEEN                                
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPORE_TALL_INV                              = "I'll keep a little light in my pocket."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POT_SMALL                                   = "我们来做饭吧。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_ANTIQUITIES                        = {
-	BURNING = "别！",
-	GENERIC = "惊人的魔法材料。",
+    BURNING = "别！",
+    GENERIC = "惊人的魔法材料。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PLAYERHOUSE_ROOM_METAL_CIMA                 = "具有工业气息。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TREE_FOREST                                 = {
-	BURNT = "烧完了。",
-	CHOPPED = "木头剩一点了。",
-	BURNING = "烧着了。",
-	GENERIC = "这里林子里的树。",
+    BURNT = "烧完了。",
+    CHOPPED = "木头剩一点了。",
+    BURNING = "烧着了。",
+    GENERIC = "这里林子里的树。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SUNKEN_BOAT_TRINKET_4                       = "Scientific!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_ENTRANCE                          = {
-	LOCKED = "You can't keep science out for long!",
-	GENERIC = "Looks like an adventure to be had.",
+    LOCKED = "You can't keep science out for long!",
+    GENERIC = "Looks like an adventure to be had.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TFWP_CONTROL_BOOK                           = "极寒，任我驱使。"
@@ -4061,8 +4096,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH4_ALIVE                                 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEPLETED_GRASS_GENERIC                      = "It's probably a tuft of grass."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PLAYERHOUSE_ROOM_PEAGANK_CIMA               = "这扇门后面是一片森林吗？"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_ENTRANCE5                         = {
-	LOCKED = "你休想把我拒之门外！",
-	GENERIC = "看起来是一场冒险。",
+    LOCKED = "你休想把我拒之门外！",
+    GENERIC = "看起来是一场冒险。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANDRAKE_PICKED                             = "Stop following me!"
@@ -4093,15 +4128,15 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MIXED_GEM                                   
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_HOOFSPA_GENERIC                    = "I could use a fix-me-up."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER1_COOKED                        = "A delicacy."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_STOREOWNER                           = {
-	"她采购修剪下的碎叶",
+    "她采购修剪下的碎叶",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNOWMAN                                     = "Snowman."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOOTREE_BURNING                          = "Bye bye, bamboo."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ZEB                                         = {
-	DEAD = "Deceased.",
-	SLEEPING = "Nap time!",
-	GENERIC = "Giddy up.",
+    DEAD = "Deceased.",
+    SLEEPING = "Nap time!",
+    GENERIC = "Giddy up.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWBAIT                                      = "钓起热带鱼的最好选择。"
@@ -4112,9 +4147,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.POT_HANGER_ITEM                             
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORKLAND_INTRO_BALLOON                      = "That bursts my balloon."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOG_BURNING                                 = "That's some hot wood!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTMAN                                      = {
-	DEAD = "Exterminated.",
-	SLEEPING = "An bug at rest will stay at rest.",
-	GENERIC = "What a huge bug!",
+    DEAD = "Exterminated.",
+    SLEEPING = "An bug at rest will stay at rest.",
+    GENERIC = "What a huge bug!",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORALLARVE                                  = "That's a baby coral reef."
@@ -4123,28 +4158,28 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVARENAESCADA                              
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAMPFIRE_EMBERS                             = "I should put something on the fire before it goes out."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_FLOWER                              = "These flowers attract all sorts of butterflies."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_BEAUTICIAN                           = {
-	SLEEPING = "She's getting her beauty sleep.",
-	GENERIC = "What a beauty...",
+    SLEEPING = "She's getting her beauty sleep.",
+    GENERIC = "What a beauty...",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHRIMP                                      = "一只扭动的小虾。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMB1                                      = "Merm"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CROW_GENERIC                                = "Creepy!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_USHER                                = {
-	"他采购蜂蜜，冰淇淋，南瓜饼，华夫饼，浆果和烤熟的浆果。",
+    "他采购蜂蜜，冰淇淋，南瓜饼，华夫饼，浆果和烤熟的浆果。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMB                                       = "Merm"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_ENCRUSTED_BUILD                     = "Boat Debris."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WEEVOLE_CARAPACE                            = "I'll be careful with this carapace."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GOLDENTOMB                                  = {
-	"How shiny!",
+    "How shiny!",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CHICKEN                                     = {
-	DEAD = "It's extremely not-alive.",
-	SLEEPING = "It's conked out.",
-	GENERIC = "It's a little chicken.",
+    DEAD = "It's extremely not-alive.",
+    SLEEPING = "It's conked out.",
+    GENERIC = "It's a little chicken.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BED5                                        = "Gothic... maybe"
@@ -4152,9 +4187,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAXWELLSTATUAFULL                           
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VOLCANO_ALTAR_GENERIC                       = "It appears to be closed."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPONGE                                      = "这玩意儿有很强的吸水性。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RABID_BEETLE                                = {
-	DEAD = "A late beetle.",
-	SLEEPING = "In a slumber.",
-	GENERIC = "Looks deranged.",
+    DEAD = "A late beetle.",
+    SLEEPING = "In a slumber.",
+    GENERIC = "Looks deranged.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MEATRACK_DRYINGINRAIN                       = "Meat takes even longer to dry in rain."
@@ -4164,7 +4199,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANCIENT_HULK                                
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_ROYALGUARD_2_SLEEPING                = "I guess he doesn't really want to keep his job."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TROPICAL_FISH                               = "What a tropical looking fish."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIKO                                        = {
-	"它有点疯疯癫癫的。",
+    "它有点疯疯癫癫的。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEACH_TREE3                                 = "Three is plenty."
@@ -4181,7 +4216,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.GLOWFLY_DEAD                                
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNOW_CASTLE                                 = "Snow Castle."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HEDGE_BLOCK_ITEM                            = "It's a wall of trees."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIKIFIRE                                    = {
-	"I'll let the firemaster fuel it.",
+    "I'll let the firemaster fuel it.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_ESQUERDAVINE                 = "Pig Ruins Door Vined"
@@ -4240,34 +4275,34 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT_BLUE_GENERIC                         
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TREE_FORESTSEED                             = "它会长成很好的丛林树。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMNOBLEHOUSE                              = "我猜这里一定住着一位身份不同的鱼人。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SUMMERIGLOO                                 = {
-	EMPTY = "It's not the holiday season.",
-	GENERIC = "Look's like its time for some fun in the sun!",
+    EMPTY = "It's not the holiday season.",
+    GENERIC = "Look's like its time for some fun in the sun!",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEAD_SWORDFISH                              = "I better not run with this."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TEEPEE                                      = {
-	"They won't let me in.",
+    "They won't let me in.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGHOUSE_MINE_GENERIC                       = "I have no quarry with them."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_DELI_DOOR_SAIDA                    = "Door"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BILL_DEAD                                   = "Haha. It's dead."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWPLUS_BANANA_TREE                          = {
-	"It grows bananas, what more can be said?",
+    "It grows bananas, what more can be said?",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT_BLUE                                 = {
-	DEAD = "An ex-parrot.",
-	SLEEPING = "It's just resting.",
-	GENERIC = "An azure bird.",
+    DEAD = "An ex-parrot.",
+    SLEEPING = "It's just resting.",
+    GENERIC = "An azure bird.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BANANARANG                                  = {
-	"It's healthy for me.",
+    "It's healthy for me.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALL_TOTEM_ITEM                             = {
-	"Lets get stacking!",
+    "Lets get stacking!",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_BATTLEGROUND                           = "I won the match?"
@@ -4288,11 +4323,11 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMB2                                      
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_ANTIQUITIES_DOOR_ENTRADA           = "Door"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SANDBAGSMALL                                = "This should keep the water out."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_FLORIST                              = {
-	"她采购花瓣。",
+    "她采购花瓣。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.IS_GOLDOBI                                  = {
-	"I wish I could mine it.",
+    "I wish I could mine it.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_CHECKEREDLAWN                          = "This turf is so beautiful!"
@@ -4301,9 +4336,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROBIN_WINTER_GENERIC                        
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAND_CASTLE_SAND                            = "It's a sandcastle, in the sand!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HAMLET_TO_DST                               = "Portal to Together."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PLAYERHOUSE_CITY                            = {
-	FORSALE = "谁想住在这里呢？",
-	GENERIC = "家，甜蜜的家。",
-	BURNT = "我希望保险公司会赔偿。",
+    FORSALE = "谁想住在这里呢？",
+    GENERIC = "家，甜蜜的家。",
+    BURNT = "我希望保险公司会赔偿。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUTTERFLY_TROPICAL_WINGS                    = "Butterfly Tropical Wings."
@@ -4327,8 +4362,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVAARENA_SPECTATOR3                        
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SCORPION_DEAD                               = "It's dead. Good."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HOMESIGN_GENERIC                            = "It says \"You are here.\""
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_GUARD_TOWER_PALACE                      = {
-	BURNING = "The tower is on fire!",
-	GENERIC = "It's surprisingly sturdy.",
+    BURNING = "The tower is on fire!",
+    GENERIC = "It's surprisingly sturdy.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAVE_EXIT_HAM1                              = "Cave Exit."
@@ -4346,7 +4381,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FARM_PLANT_RADISH                           
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOOTREE_CHOPPED                          = "Take that, nature!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_GENERAL_DOOR_ENTRADA               = "Door"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIKIMASK                                    = {
-	"How cultural!",
+    "How cultural!",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.JELLYBUG                                    = "Beans. With legs."
@@ -4359,10 +4394,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_ESQUERDA                     
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_MARBLE_CORNERBEAM                      = "Adds some fancy stability."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_HOOFSPA_BURNING                    = "That spa is on fire!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOOTREEBIG                               = {
-	BURNT = "I feel like I could have prevented that.",
-	CHOPPED = "Take that, nature!",
-	BURNING = "Bye bye, bamboo.",
-	GENERIC = "Looks pretty sturdy.",
+    BURNT = "I feel like I could have prevented that.",
+    CHOPPED = "Take that, nature!",
+    BURNING = "Bye bye, bamboo.",
+    GENERIC = "Looks pretty sturdy.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RUG_SQUARE                                  = "Kind of square."
@@ -4374,7 +4409,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SLIPSTOR                                    
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNOWSPIDERDEN                               = "Frost Spiderden."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_LIGHT_LOW                              = "The lava's crusting over."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GOLDBISHOP                                  = {
-	"They don't look friendly.",
+    "They don't look friendly.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OINCPILE49                                  = "Oinc Pile."
@@ -4390,9 +4425,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BILL_SLEEPING                               
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RADISH_OVERSIZED_ROTTEN                     = "Radish Oversized Rotten."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OINCPILE42                                  = "Oinc Pile."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BILL                                        = {
-	DEAD = "Haha. It's dead.",
-	SLEEPING = "Good. It's sleeping.",
-	GENERIC = "A spinny spiney sort.",
+    DEAD = "Haha. It's dead.",
+    SLEEPING = "Good. It's sleeping.",
+    GENERIC = "A spinny spiney sort.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GOLDENMACHETE                               = "Hack in style!"
@@ -4440,8 +4475,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.VOLCANO_SHRUB                               
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CONCH                                       = "Conch"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_BOWTIE                              = "Are bowties even cool anymore?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_ARCANE                             = {
-	BURNING = "The knowledge is burning!",
-	GENERIC = "This could put a twinkle in my eye.",
+    BURNING = "The knowledge is burning!",
+    GENERIC = "This could put a twinkle in my eye.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RADISH                                      = "It looks radishing."
@@ -4473,32 +4508,32 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_SHADOWBOAT                            
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISHBALL_SKEWERS                            = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.INVENTORYGRAVE                              = "There was someone here before me!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_GUARD_TOWER                             = {
-	BURNING = "The tower is on fire!",
-	GENERIC = "It's surprisingly sturdy.",
+    BURNING = "The tower is on fire!",
+    GENERIC = "It's surprisingly sturdy.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRISTALED_TREE_TALL2                        = "Cristaled Tree Tall."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEACH_TREE5                                 = "It needs peach fertiliser to be reborn."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RELIC_3                                     = {
-	SUNKEN = "I'll have to fish it out.",
-	GENERIC = "Looks valuable.",
+    SUNKEN = "I'll have to fish it out.",
+    GENERIC = "Looks valuable.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEATARO                                     = "Seataro"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GEM_FLOWER                                  = "I should give it fertiliser at night."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANCIENT_ROBOT_RIBS                          = "All that iron should be mine."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RECONSTRUCTION_PROJECT                      = {
-	RUBBLE = "It's seen better days.",
-	SCAFFOLD = "This could use a coat of paint.",
+    RUBBLE = "It's seen better days.",
+    SCAFFOLD = "This could use a coat of paint.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_FOLLOWER                             = "You're part of my entourage."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROBIN_GENERIC                               = "Does that mean winter is gone?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUNGBEETLE                                  = {
-	DEAD = "Dung for.",
-	SLEEPING = "She's pooped.",
-	UNDUNGED = "She needs to get her dung together.",
-	GENERIC = "She's on a roll.",
+    DEAD = "Dung for.",
+    SLEEPING = "She's pooped.",
+    UNDUNGED = "She needs to get her dung together.",
+    GENERIC = "She's on a roll.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_FOUNTAINETTE                        = "I can place a fountain wherever I wish."
@@ -4506,9 +4541,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLUP                                        
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_LIGHT_NORMAL                           = "Nice and comfy."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPORE_YELLOW                                = "Yellow Spore"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KINGFISHER                                  = {
-	DEAD = "Perished.",
-	SLEEPING = "In a slumber.",
-	GENERIC = "What a pointy bill!",
+    DEAD = "Perished.",
+    SLEEPING = "In a slumber.",
+    GENERIC = "What a pointy bill!",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_STAR                                = "It will restore the freshness of my perishables."
@@ -4519,7 +4554,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FULL_BOTTLE_GREEN                           
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_FARM_TWOFISH                           = "The fish are still multiplying."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNOWSPIDERDEN2                              = "Frost Spiderden."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WTENTACLE                                   = {
-	"I don't think I should eat this.",
+    "I don't think I should eat this.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_STATUE                              = "She knows how to use the fan better than I do."
@@ -4528,7 +4563,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEACHY_POOP                                 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GW_BONESTAFF                                = "Dark energy pulses around it."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MARSHBERRY                                  = "It is a spiky berry bush."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_HATMAKER                             = {
-	"她采购蜘蛛丝。",
+    "她采购蜘蛛丝。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TFWP_WORM_SUIT_ARMOR                        = "Definetly awful!"
@@ -4554,10 +4589,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHELVES_CRATES                              
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KINGFISHER_SLEEPING                         = "In a slumber."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GLOMMERFLOWER_DEAD                          = "The petals droop and shimmer in the light."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CLAWPALMTREE                                = {
-	BURNT = "真是糟糕。",
-	CHOPPED = "坐上去很舒适。",
-	BURNING = "烧起来了！",
-	GENERIC = "我在树的巨掌之下。",
+    BURNT = "真是糟糕。",
+    CHOPPED = "坐上去很舒适。",
+    BURNING = "烧起来了！",
+    GENERIC = "我在树的巨掌之下。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MONKEYBALL                                  = "I have a strange desire to name it after myself."
@@ -4567,9 +4602,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRUSTY_SHOOTER                              
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINFORESTTREE_ROT                          = "De-blight-ful."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COLDFIRE_LOW                                = "The fire's getting a bit low."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTMAN_WARRIOR                              = {
-	DEAD = "灭虫成功。",
-	SLEEPING = "这虫子一在睡觉。",
-	GENERIC = "战斗方向特化的蚂蚁！",
+    DEAD = "灭虫成功。",
+    SLEEPING = "这虫子一在睡觉。",
+    GENERIC = "战斗方向特化的蚂蚁！",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSSEL_FARM                                 = "I wonder if they are from Brussels."
@@ -4587,8 +4622,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TAR                                         
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_FLORIST_GENERIC                    = "A garden variety shop."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGGOLEM                                    = "那个守卫石像活过来了！"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_ACADEMY                            = {
-	BURNING = "The museum is on fire!",
-	GENERIC = "I can smell the history.",
+    BURNING = "The museum is on fire!",
+    GENERIC = "I can smell the history.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_POTATO                       = "Seems like it was made with a purpose in mind."
@@ -4602,18 +4637,18 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PLANT_NORMAL_GENERIC                        
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SYRUP                                       = "增加一点甜味。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.EG_PLANT                                    = "It doesn't look like an egg."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRABAPPLE_TREE                              = {
-	BURNT = "坏了。",
-	CHOPPED = "以后没得吃了。",
-	BURNING = "烧起来了！",
-	GENERIC = "飘香的树。",
+    BURNT = "坏了。",
+    CHOPPED = "以后没得吃了。",
+    BURNING = "烧起来了！",
+    GENERIC = "飘香的树。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BATHAT                                      = "A hat, made of bat."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVAE_PET_CONTENT                           = "It seems happy."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUGGAGECHEST                                = "It looks like a premier steamer trunk."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_ENTRANCE4                         = {
-	LOCKED = "你休想把我拒之门外！",
-	GENERIC = "看起来是一场冒险。",
+    LOCKED = "你休想把我拒之门外！",
+    GENERIC = "看起来是一场冒险。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_WALLORNAMENT_FULLLENGTH_MIRROR         = "Now I can look at my gentlemanly figure."
@@ -4637,16 +4672,16 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORAL_PIECES                                
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ROWBOAT                               = "It runs on elbow grease."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TEENBIRD_HUNGRY                             = "I'd better find it some food."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGHOUSE_CITY2                              = {
-	BURNING = "That house is on fire!",
-	GENERIC = "Both a house, and a home.",
+    BURNING = "That house is on fire!",
+    GENERIC = "Both a house, and a home.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMHOUSE_FISHER                            = "Doesn't smell very good."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVAPONDBIG                                 = "A bit hot for my tastes."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEAGAWK                                     = {
-	DEAD = "Dead-eyed.",
-	SLEEPING = "It's getting some shut-eye.",
-	GENERIC = "That bush is alive!",
+    DEAD = "Dead-eyed.",
+    SLEEPING = "It's getting some shut-eye.",
+    GENERIC = "That bush is alive!",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MESSAGEBOTTLEEMPTY1                         = "Just an empty bottle."
@@ -4681,7 +4716,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREGUARD                               
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CACTUS_GENERIC                              = "Sharp but delicious."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_ROYALGUARD_SLEEPING                  = "Not so intimidating now, are you?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.NIGHTMAREBOAT                               = {
-	"Thats one scary boat.",
+    "Thats one scary boat.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.INTERIOR_FLOOR_OCTAGON                      = "Geometric ton of flooring."
@@ -4733,16 +4768,16 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PLANT_NORMAL_WITHERED                       
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FIRETWISTER                                 = "The fire lives."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGHOUSE_LIGHTSOUT                          = "Come ON! I know you're home!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIKISTICK                                   = {
-	"For scaring off intruders.",
+    "For scaring off intruders.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_RABBIT_FUR                          = "Fluffy green fur."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RO_BIN_GIZZARD_STONE                        = "How does this even happen?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINFORESTTREE                              = {
-	BURNT = "Burnt up.",
-	CHOPPED = "Not sure what it is. I'm stumped.",
-	BURNING = "It's done for.",
-	GENERIC = "A tropical tree.",
+    BURNT = "Burnt up.",
+    CHOPPED = "Not sure what it is. I'm stumped.",
+    BURNING = "It's done for.",
+    GENERIC = "A tropical tree.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SMALLBIRD_STARVING                          = "It must be starving."
@@ -4756,9 +4791,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FABRIC                                      
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_MARBLE                                 = "Adds some fancy stability."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEAGAWK_BUSH                                = "Look! An iris bush."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FROG_POISON2                                = {
-	DEAD = "死掉了。",
-	SLEEPING = "看起来像是冬眠了。",
-	GENERIC = "一只有毒的两栖生物。",
+    DEAD = "死掉了。",
+    SLEEPING = "看起来像是冬眠了。",
+    GENERIC = "一只有毒的两栖生物。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FARMPLOT_NEEDSFERTILIZER                    = "I think it needs to be fertilized."
@@ -4772,9 +4807,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_STOREOWNER_GENERIC                   
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_ROYALGUARD_GENERIC                   = "Please don't arrest me."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RUG_BRAID                                   = "It's a rug."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEEKHEN                                     = {
-	DEAD = "Lifeless.",
-	SLEEPING = "It's dormant.",
-	GENERIC = "Are they even the same species?",
+    DEAD = "Lifeless.",
+    SLEEPING = "It's dormant.",
+    GENERIC = "Are they even the same species?",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVAE_EGG_CRACKED_COLD                      = "I don't think that egg is warm enough."
@@ -4793,7 +4828,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_LAMP_ORB                               
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.INTERIOR_WALL_FLORAL                        = "Some fancy stuff put on a wall."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_HAMLET_POTATO                   = "I haven't seen a lot of those around."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WATERTENTACLE                               = {
-	"There could be more.",
+    "There could be more.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONADE_BURNING                            = "This seems dangerous."
@@ -4806,8 +4841,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROC_NEST_EGG1                               
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ENCRUSTEDBOAT                         = "A mere shell of a ship."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.EVERGREEN_GENERIC                           = "It's all piney."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RELIC_1                                     = {
-	SUNKEN = "Ancient litter.",
-	GENERIC = "A priceless piece of history.",
+    SUNKEN = "Ancient litter.",
+    GENERIC = "A priceless piece of history.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_BEACH                                  = "Sandy ground."
@@ -4847,7 +4882,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAND                                        
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEAWEED_PLANTED                             = "Is that what passes for food around here?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BIRDCAGE_GENERIC                            = "I should put a bird in it."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_PROFESSOR                            = {
-	"他采购遗迹物品",
+    "他采购遗迹物品",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_WALLORNAMENT_EMBROIDERY_HOOP           = "How cozy."
@@ -4978,9 +5013,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.COLUMN_ANGEL                                
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WATERDROP                                   = "Water you think it does?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.INTERIOR_FLOOR_HERRINGBONE                  = "Stone cold floor."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNAPDRAGON                                  = {
-	DEAD = "It's extremely not-alive.",
-	SLEEPING = "Torpid.",
-	GENERIC = "Well I'm not rooting for you.",
+    DEAD = "It's extremely not-alive.",
+    SLEEPING = "Torpid.",
+    GENERIC = "Well I'm not rooting for you.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTER_LAND                                = "That wascal is sleeping."
@@ -4992,10 +5027,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PITHHAT                                     
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KRAKENCHEST                                 = "To the victor, the spoils."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.STRANGE_SCORPION_TFC                        = "Scorpion."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TREE_FOREST_ROT                             = {
-	BURNT = "烧完了。",
-	CHOPPED = "木头剩一点了。",
-	BURNING = "烧着了。",
-	GENERIC = "有点吓人。",
+    BURNT = "烧完了。",
+    CHOPPED = "木头剩一点了。",
+    BURNING = "烧着了。",
+    GENERIC = "有点吓人。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HEATROCK_GENERIC                            = "I could manipulate its temperature."
@@ -5005,7 +5040,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PLAYER_HOUSE_MANOR                          
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SMASHINGPOT                                 = "That pot looks smashing!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_CHAIR_HORNED                           = "A spiky seat."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCTOPUS                                     = {
-	"These guys sure are lazy.",
+    "These guys sure are lazy.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_LAWN                                   = "It's a chunk of ground."
@@ -5028,8 +5063,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PUGALISK_FOUNTAIN                           
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GALLERY_DOOR_WEST                           = "Door"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER                                = "A lovely science flower."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_HOOFSPA                            = {
-	BURNING = "That spa is on fire!",
-	GENERIC = "I could use a fix-me-up.",
+    BURNING = "That spa is on fire!",
+    GENERIC = "I could use a fix-me-up.",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWORDFISHUNDERWATER                         = "我觉得我应该离这东西远点。"
@@ -5060,7 +5095,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROC_ROBIN_EGG                               
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RESEARCHLAB4_BURNT                          = "Fire doesn't really solve naming issues..."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RELIC_BROKEN                                = "Nothing to work with here."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCTOHOUSE                                   = {
-	"How do they even fit through the door?",
+    "How do they even fit through the door?",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROOTTRUNK_CHILD                             = "It rooted out all my things!"
@@ -5127,8 +5162,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_PROFESSOR_SLEEPING                   
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRILL_ITEM                                  = "“烤”问利器。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_PIGMAN_RELIEF_DART3_BLUE          = "它的艺术价值让它非常具有诱惑力。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_ENTRANCE2                         = {
-	LOCKED = "你休想把我拒之门外！",
-	GENERIC = "看起来是一场冒险。",
+    LOCKED = "你休想把我拒之门外！",
+    GENERIC = "看起来是一场冒险。",
 
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TALLBIRDEGG_CRACKED_LONG                    = "I have a feeling this is going to take a while..."
@@ -5887,10 +5922,10 @@ STRINGS.CHARACTERS.WILLOW.DESCRIBE.ENCRUSTEDBOAT            = "Crumbly."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.VENOMGLAND               = "Gross! I wish I had gloves."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.FISH_MED                 = "Time to chuck it in the fire!"
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.BAMBOOTREE               = {
-	BURNT = "Aww, can I burn it again?",
-	BURNING = "Aww, can I burn it again?",
-	CHOPPED = "It'll come back.",
-	GENERIC = "Kindling!",
+    BURNT = "Aww, can I burn it again?",
+    BURNING = "Aww, can I burn it again?",
+    CHOPPED = "It'll come back.",
+    GENERIC = "Kindling!",
 }
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.TROPICAL_FISH            = "Such pretty colors."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.WRECK                    = "Someone has regrets."
@@ -6213,10 +6248,10 @@ STRINGS.CHARACTERS.WENDY.DESCRIBE.SEAGULLWATER              = "As if it weren't 
 STRINGS.CHARACTERS.WENDY.DESCRIBE.WATERYGRAVE               = "I'm not above raiding a grave for loot."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.JUNGLETREE_BURNT          = "I should probably step back."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.BAMBOOTREE                = {
-	CHOPPED = "I've won this round.",
-	GENERIC = "I can bend it to my will.",
-	BURNING = "So it goes.",
-	BURNT = "So it goes.",
+    CHOPPED = "I've won this round.",
+    GENERIC = "I can bend it to my will.",
+    BURNING = "So it goes.",
+    BURNT = "So it goes.",
 
 }
 STRINGS.CHARACTERS.WENDY.DESCRIBE.BURIEDTREASURE            = "Dead people's stuff."
@@ -6584,10 +6619,10 @@ STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.WOODLEGS1 = "This is Woodlegs"
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.THATCHPACK = "Wolfgang can carry more on powerful shoulders!"
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.CORMORANT = "Bird smells like fish eggs."
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.BAMBOOTREE = {
-	GENERIC = "I will harvest you soon, mighty plant!",
-	BURNING = "Is not very mighty now.",
-	BURNT = "Is not very mighty now.",
-	CHOPPED = "I hope is fast growing.",
+    GENERIC = "I will harvest you soon, mighty plant!",
+    BURNING = "Is not very mighty now.",
+    BURNT = "Is not very mighty now.",
+    CHOPPED = "I hope is fast growing.",
 
 }
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.PARROT = "Chatty bird!"
@@ -7065,10 +7100,10 @@ STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.BOTTLELANTERN = "A portable source of i
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.ROWBOAT = "My vessel for marine research."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.SNAKE = "Stay back, serpent!"
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.BAMBOOTREE = {
-	GENERIC = "Bamboo is among the fastest growing plants in the world.",
-	CHOPPED = "Shall we see how fast it regenerates?",
-	BURNT = "Pity",
-	BURNING = "Pity",
+    GENERIC = "Bamboo is among the fastest growing plants in the world.",
+    CHOPPED = "Shall we see how fast it regenerates?",
+    BURNT = "Pity",
+    BURNING = "Pity",
 
 }
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.WATERYGRAVE = "I wonder how long it's been drifting at sea?"
@@ -7199,10 +7234,10 @@ STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.PORTO_CARGOBOAT = "A boat fit for a long 
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.DRAGOONSPIT = "I wish I could spit fire..."
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.DOYDOYBABY = "I honor you, young warrior of the DoyDoys."
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.BAMBOOTREE = {
-	BURNT = "Your hollow sorcery could not save you from fire.",
-	BURNING = "Your hollow sorcery could not save you from fire.",
-	GENERIC = "What sorcery is this? Wood that is hollow?",
-	CHOPPED = "You could not hack it!",
+    BURNT = "Your hollow sorcery could not save you from fire.",
+    BURNING = "Your hollow sorcery could not save you from fire.",
+    GENERIC = "What sorcery is this? Wood that is hollow?",
+    CHOPPED = "You could not hack it!",
 
 }
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.FLAMEGEYSER = "The ground belches fire!"
@@ -7701,10 +7736,10 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.DUG_ELEPHANTCACTUS = "I'd better not run wit
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.BUSH_VINE = "These have taken over the island."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.DOYDOYBABY = "Now there will be more of them."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.BAMBOOTREE = {
-	BURNT = "It will not be returning.",
-	GENERIC = "It can grow through just about anything.",
-	CHOPPED = "It needs time to replenish.",
-	BURNING = "It will not be returning.",
+    BURNT = "It will not be returning.",
+    GENERIC = "It can grow through just about anything.",
+    CHOPPED = "It needs time to replenish.",
+    BURNING = "It will not be returning.",
 
 }
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.BOATREPAIRKIT = "It will hold off my vessel's inevitable decay."
@@ -7786,8 +7821,8 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.CRATE = "Perhaps I could pry it open."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.COCONUT_HALVED = "Now there's one for each of us."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.ROE_COOKED = "Not the kind of eggs we're used to."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.SHARKITTENSPAWNER = {
-	GENERIC = "Maybe some kitties will come out and play?",
-	INACTIVE = "Bland sand.",
+    GENERIC = "Maybe some kitties will come out and play?",
+    INACTIVE = "Bland sand.",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.POISONCROCODOG = "Leave us alone!"
@@ -7820,8 +7855,8 @@ STRINGS.CHARACTERS.WEBBER.DESCRIBE.WRECK = "A reminder to respect the sea."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.PORTO_WOODLEGSBOAT = "Ready for the open seas!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.LOBSTER_LAND = "This meat wears armor!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.ROCK_LIMPET = {
-	GENERIC = "It's covered in limpets.",
-	PICKED = "All gone.",
+    GENERIC = "It's covered in limpets.",
+    PICKED = "All gone.",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.MESSAGEBOTTLEEMPTY1 = "We wish it was filled with soda pop."
@@ -7897,17 +7932,17 @@ STRINGS.CHARACTERS.WEBBER.DESCRIBE.JUNGLETREE = "Not a bad tree."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.STUNGRAY = "Aren't you cute! Hey, what's that smell..."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.VOLCANO_SHRUB = "I think it's speaking to me."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.BUSH_VINE = {
-	BURNT = "All burned up.",
-	GENERIC = "It's a nice bush.",
-	CHOPPED = "We took it all.",
+    BURNT = "All burned up.",
+    GENERIC = "It's a nice bush.",
+    CHOPPED = "We took it all.",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.MUSSELBOUILLABAISE = "About as appetizing as they get."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.LIMESTONE = "So bumpy!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.RAINBOWJELLYFISH_PLANTED = "You look really nice!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.MUSSEL_FARM = {
-	GENERIC = "Yuck.",
-	STICKPLANTED = "Is it done yet?",
+    GENERIC = "Yuck.",
+    STICKPLANTED = "Is it done yet?",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.TAR = "Eww! It's stuck in our fur!"
@@ -7942,10 +7977,10 @@ STRINGS.CHARACTERS.WEBBER.DESCRIBE.OBSIDIAN_WORKBENCH = "We forge the fire items
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.MERMFISHHOUSE = "Can I come in?"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.BAMBOO = "Such a useful stick-type thing."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.COFFEEBUSH = {
-	WITHERED = "The bean bush looks sad.",
-	BARREN = "No more mean beans.",
-	GENERIC = "It's covered in the happy beans.",
-	PICKED = "We took them all.",
+    WITHERED = "The bean bush looks sad.",
+    BARREN = "No more mean beans.",
+    GENERIC = "It's covered in the happy beans.",
+    PICKED = "We took them all.",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.COFFEE = "Bitter."
@@ -8001,12 +8036,12 @@ STRINGS.CHARACTERS.WEBBER.DESCRIBE.DUG_COFFEEBUSH = "With a little love it could
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.DRAGOONDEN = "Maybe we'll leave that alone."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.OX_FLUTE = "It's just begging to be played!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.SEA_CHIMINEA = {
-	GENERIC = "We used coral to corral the fire!",
-	OUT = "Fire's gone!",
-	LOW = "The fire's kinda low.",
-	NORMAL = "The fire's burning alright.",
-	EMBERS = "It's not very hot.",
-	HIGH = "Woah! It's so hot!",
+    GENERIC = "We used coral to corral the fire!",
+    OUT = "Fire's gone!",
+    LOW = "The fire's kinda low.",
+    NORMAL = "The fire's burning alright.",
+    EMBERS = "It's not very hot.",
+    HIGH = "Woah! It's so hot!",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.FISH5_COOKED = "Mmm, smells good!"
@@ -8014,26 +8049,26 @@ STRINGS.CHARACTERS.WEBBER.DESCRIBE.FISH3_COOKED = "He likes the fish heads. I do
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.BURIEDTREASURE = "Treasure, treasure, treasure!!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.FISH3 = "Haha! What a silly face."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.BAMBOOTREE = {
-	BURNING = "It's bamburning!",
-	CHOPPED = "It has a bamboo-boo.",
-	GENERIC = "Cute little bamboo.",
-	BURNT = "It's bamburnt.",
+    BURNING = "It's bamburning!",
+    CHOPPED = "It has a bamboo-boo.",
+    GENERIC = "Cute little bamboo.",
+    BURNT = "It's bamburnt.",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.FISH_FARM = {
-	STOCKED = "We drew the sign ourself.",
-	TWOFISH = "Fish friends!",
-	EMPTY = "No fishies.",
-	BLUEFISH = "A whole school! Let's give them homework.",
-	ONEFISH = "A fish! It looks lonely.",
-	REDFISH = "So many fish!",
+    STOCKED = "We drew the sign ourself.",
+    TWOFISH = "Fish friends!",
+    EMPTY = "No fishies.",
+    BLUEFISH = "A whole school! Let's give them homework.",
+    ONEFISH = "A fish! It looks lonely.",
+    REDFISH = "So many fish!",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.TAR_POOL = "There must be a way to get that tar out."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.TAR_EXTRACTOR = {
-	OFF = "It's off right now.",
-	ON = "It's running real good!",
-	LOWFUEL = "It's running out of juice.",
+    OFF = "It's off right now.",
+    ON = "It's running real good!",
+    LOWFUEL = "It's running out of juice.",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.COCONADE = "We should throw this very much far away from ourselves."
@@ -8105,19 +8140,19 @@ STRINGS.CHARACTERS.WEBBER.DESCRIBE.VOLCANOSTAFF = "The volcano does our bidding!
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.TWISTER = "Nature hates us!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.ANTIDOTE = "This is medicine?"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.OBSIDIANFIREPIT = {
-	GENERIC = "We made the fire stones into a fire home!",
-	OUT = "Well, that's done. But not forever!",
-	LOW = "The fire's getting a touch low.",
-	NORMAL = "The toastiest of fires.",
-	EMBERS = "We should put something on the fire before it goes out.",
-	HIGH = "That fire is huge!",
+    GENERIC = "We made the fire stones into a fire home!",
+    OUT = "Well, that's done. But not forever!",
+    LOW = "The fire's getting a touch low.",
+    NORMAL = "The toastiest of fires.",
+    EMBERS = "We should put something on the fire before it goes out.",
+    HIGH = "That fire is huge!",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.PALMTREE = {
-	BURNING = "What a senseless waste of firewood.",
-	CHOPPED = "Goodbye, Tree of Palms.",
-	GENERIC = "This tree has presents!",
-	BURNT = "It's dropped its last coconut.",
+    BURNING = "What a senseless waste of firewood.",
+    CHOPPED = "Goodbye, Tree of Palms.",
+    GENERIC = "This tree has presents!",
+    BURNT = "It's dropped its last coconut.",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.SWEET_POTATO_COOKED = "Orange foodmush."
@@ -8144,9 +8179,9 @@ STRINGS.CHARACTERS.WEBBER.DESCRIBE.BOTTLELANTERN = "Hey in there, thanks for the
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.SANDBAG_ITEM = "Remember to lift with your legs... all eight of them!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.WOODLEGSBOATAMIGO = "Ready for the open seas!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.SEA_YARD = {
-	OFF = "It won't work again until we fuel it.",
-	ON = "It's making the boats feel better!",
-	LOWFUEL = "We gotta fill it up soon.",
+    OFF = "It won't work again until we fuel it.",
+    ON = "It's making the boats feel better!",
+    LOWFUEL = "We gotta fill it up soon.",
 
 }
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.RAFT = "Do we think this is sturdy enough?"
@@ -8204,10 +8239,10 @@ STRINGS.CHARACTERS.WX78.DESCRIBE.SEASHELL_BEACHED = "Just some stupid seashell."
 STRINGS.CHARACTERS.WX78.DESCRIBE.OX_FLUTE = "I hear a storm a-coming."
 STRINGS.CHARACTERS.WX78.DESCRIBE.GW_RUNE_MAGIC = "INTERPRETATION: GEMS."
 STRINGS.CHARACTERS.WX78.DESCRIBE.BAMBOOTREE = {
-	GENERIC = "Kindling!",
-	BURNING = "Aww, can I burn it again?",
-	BURNT = "Aww, can I burn it again?",
-	CHOPPED = "It'll come back.",
+    GENERIC = "Kindling!",
+    BURNING = "Aww, can I burn it again?",
+    BURNT = "Aww, can I burn it again?",
+    CHOPPED = "It'll come back.",
 
 }
 STRINGS.CHARACTERS.WX78.DESCRIBE.AXEOBSIDIAN = "Such an axe! It cuts AND burns?!"
@@ -8570,10 +8605,10 @@ STRINGS.CHARACTERS.WOODIE.DESCRIBE.GOLDENMACHETE = "I don't want to scuff it up.
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.SEATRAP = "C'mon, swim inside! It's cozy in there!"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.SNAKESKIN = "Leathery."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.BAMBOOTREE = {
-	BURNING = "Aww, can I burn it again?",
-	BURNT = "Aww, can I burn it again?",
-	CHOPPED = "It'll come back.",
-	GENERIC = "Kindling!",
+    BURNING = "Aww, can I burn it again?",
+    BURNT = "Aww, can I burn it again?",
+    CHOPPED = "It'll come back.",
+    GENERIC = "Kindling!",
 
 }
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.TURF_JUNGLE = "The ground is boring."
@@ -8808,33 +8843,70 @@ STRINGS.CHARACTERS.WOODIE.DESCRIBE.JELLYFISH_COOKED = "It actually looks edible.
 
 
 ----------------------------- ACTIONS -----------------------------
-STRINGS.ACTIONS.HACK             = "Hack"
-STRINGS.ACTIONS.BOATMOUNT        = "Boat Mount"
-STRINGS.ACTIONS.BOATREPAIR       = "Boat Repair"
-STRINGS.ACTIONS.BOATDISMOUNT     = "Boat Dismount"
-STRINGS.ACTIONS.STICK            = "Stick"
-STRINGS.ACTIONS.JUMPIN.HAMLET    = "Enter"
-STRINGS.ACTIONS.LANTERNOFF       = "Turn Off"
-STRINGS.ACTIONS.LANTERNON        = "Turn On"
-STRINGS.ACTIONS.BOATCANNON       = "Shoot"
-STRINGS.ACTIONS.RETRIEVE         = "Get"
-STRINGS.ACTIONS.GIVE2            = "Give"
-STRINGS.ACTIONS.GAS              = "Gas"
-STRINGS.ACTIONS.INVESTIGATEGLASS = "Investigate"
-STRINGS.ACTIONS.TIRO             = "Shoot"
-STRINGS.ACTIONS.OPENTUNA         = "Open"
-STRINGS.ACTIONS.PAINT            = "Paint"
-STRINGS.ACTIONS.DISLODGE         = "Dislodge"
-STRINGS.ACTIONS.SMELT            = "Smelt"
-STRINGS.ACTIONS.HARVEST1         = "Havest"
-STRINGS.ACTIONS.PAN              = "Pan"
-STRINGS.ACTIONS.SETUPITEM        = "安装"
-STRINGS.ACTIONS.TAPSUGARTREE     = "凿树"
-STRINGS.ACTIONS.COLLECTSAP       = "采集树液"
-STRINGS.ACTIONS.STOREOPEN        = "交易"
-STRINGS.ACTIONS.SNACKRIFICE      = "献贡"
-STRINGS.ACTIONS.SHOP             = "购买"
-STRINGS.ACTIONS.INVESTIGATE      = "调查"
+STRINGS.ACTIONS.HACK              = "Hack"
+STRINGS.ACTIONS.BOATMOUNT         = "Boat Mount"
+STRINGS.ACTIONS.BOATREPAIR        = "Boat Repair"
+STRINGS.ACTIONS.BOATDISMOUNT      = "Boat Dismount"
+STRINGS.ACTIONS.STICK             = "Stick"
+STRINGS.ACTIONS.JUMPIN.HAMLET     = "Enter"
+STRINGS.ACTIONS.DESACTIVATESAIL   = "Turn Off"
+STRINGS.ACTIONS.LANTERNON         = "Turn On"
+STRINGS.ACTIONS.BOATCANNON        = "Shoot"
+STRINGS.ACTIONS.RETRIEVE          = "Get"
+STRINGS.ACTIONS.GIVE2             = "Give"
+STRINGS.ACTIONS.GAS               = "Gas"
+STRINGS.ACTIONS.INVESTIGATEGLASS  = "Investigate"
+STRINGS.ACTIONS.TIRO              = "Shoot"
+STRINGS.ACTIONS.OPENTUNA          = "Open"
+STRINGS.ACTIONS.PAINT             = "Paint"
+STRINGS.ACTIONS.DISLODGE          = "Dislodge"
+STRINGS.ACTIONS.SMELT             = "Smelt"
+STRINGS.ACTIONS.HARVEST1          = "Havest"
+STRINGS.ACTIONS.PAN               = "Pan"
+STRINGS.ACTIONS.SETUPITEM         = "安装"
+STRINGS.ACTIONS.TAPSUGARTREE      = "凿树"
+STRINGS.ACTIONS.COLLECTSAP        = "采集树液"
+STRINGS.ACTIONS.STOREOPEN         = "交易"
+STRINGS.ACTIONS.SNACKRIFICE       = "献贡"
+STRINGS.ACTIONS.SHOP              = "购买"
+STRINGS.ACTIONS.INVESTIGATE       = "调查"
+STRINGS.ACTIONS.LAVASPIT          = "Spit"
+STRINGS.ACTIONS.DEPLOY_AI         = "Deploy AI"
+STRINGS.ACTIONS.FLUP_HIDE         = "FLUP_HIDE"
+STRINGS.ACTIONS.FISH1             = "FISH1"
+STRINGS.ACTIONS.TIGERSHARK_FEED   = "Tigershark Feed"
+STRINGS.ACTIONS.MATE              = "Mate"
+STRINGS.ACTIONS.CRAB_HIDE         = "Crab Hide"
+STRINGS.ACTIONS.HIDECRAB          = "Hide"
+STRINGS.ACTIONS.SHOWCRAB          = "Emerge"
+STRINGS.ACTIONS.THROW             = "Throw"
+STRINGS.ACTIONS.PEAGAWK_TRANSFORM = "Peagank Transform"
+STRINGS.ACTIONS.MANUALEXTINGUISH  = "Manualextinguish"
+STRINGS.ACTIONS.SPECIAL_ACTION    = "Special Actions"
+STRINGS.ACTIONS.SPECIAL_ACTION2   = "Special Actions2"
+STRINGS.ACTIONS.LAUNCH_THROWABLE  = "Launch Throwable"
+STRINGS.ACTIONS.INFEST            = "Infest"
+STRINGS.ACTIONS.DIGDUNG           = "Digdung"
+STRINGS.ACTIONS.MOUNTDUNG         = "Mountdung"
+STRINGS.ACTIONS.BARK              = "Bark"
+STRINGS.ACTIONS.RANSACK           = "Ransack"
+STRINGS.ACTIONS.CUREPOISON        = "Curepoison"
+STRINGS.ACTIONS.USEDOOR           = "Usedoor"
+STRINGS.ACTIONS.FIX               = "Fix"
+STRINGS.ACTIONS.STOCK             = "Stock"
+STRINGS.ACTIONS.COMPACTPOOP       = "Compact Poop"
+STRINGS.ACTIONS.MEAL              = "Meal"
+STRINGS.ACTIONS.INSTALL           = "Install"
+STRINGS.ACTIONS.GIVE_DISH         = "Put"
+STRINGS.ACTIONS.SNACKRIFICE       = "Snackrifice"
+STRINGS.ACTIONS.REPLATE           = "Replate"
+STRINGS.ACTIONS.FILLED            = "Fill"
+STRINGS.ACTIONS.KILLSOFTLY        = "屠宰"
+STRINGS.ACTIONS.MILK              = "Milk"
+
+
+
+
 
 ----------------------------------------------------------------------
 
@@ -9367,11 +9439,11 @@ STRINGS.ANTNAMES                                 = {}
 for i = 1, 100 do
     table.insert(STRINGS.ANTNAMES, "Drone #" .. math.random(1, 1000000))
 end
-STRINGS.CITY_PIG_TALK_GIVE_REWARD = {
+STRINGS.CITY_PIG_TALK_GIVE_REWARD              = {
     DEFAULT = { "A WORTHY JOB. TAKE THEE REWARD", "'TIS NOBLE JOB THEE DO", "A FINE JOB" },
 }
 
-STRINGS.CITY_PIG_TALK_FIND_LIGHT = {
+STRINGS.CITY_PIG_TALK_FIND_LIGHT               = {
     DEFAULT = { "ONCE MORE UNTO THE LIGHT!", "WHEREFORE ART LIGHT?", "WHEREFORE IS'T SUN?", "FREINDS, PIGGIES, UNPIGGIES, LEND ME YOUR LIGHT" },
     pigman_beautician = { "I AM TOO MUCH I' THE DARK", "'TIS DARK!", "WHEREFORE ART THE LIGHT?" },
     pigman_mechanic = { "IS'T DARK! IS'T SCARY!", "THAT WAY MADNESS LIES!", },
@@ -9390,7 +9462,7 @@ STRINGS.CITY_PIG_TALK_FIND_LIGHT = {
     pigman_hunter = { "BRING'ST BACK THE LIGHT!", "IS'T DARK! IS'T SCARY!" },
 
 }
-STRINGS.CITY_PIG_TALK_FIGHT = {
+STRINGS.CITY_PIG_TALK_FIGHT                    = {
     DEFAULT = { "AVAST!", "TO THINE DEATH!", "RAAAWR!", "I BITE MY HOOF AT THEE!" },
     pigman_beautician = { "DIE-EST NOW!", "ME KILL THEE", "TO THY DEATH!" },
     pigman_mechanic = { "I HAMMER THEE!", "HIT, HAMMER! HIT!", "I DESTROY THEE!" },
@@ -9407,7 +9479,7 @@ STRINGS.CITY_PIG_TALK_FIGHT = {
     pigman_professor = { "BE DONE-EST WITH THEE!", "WILL NOT YOU GO?!!", "OUT DAMNED UNPIG!" },
     pigman_hunter = { "I ATTACK-ETH THEE!", "GET THOU AWAY FROM HERE!", "YOU MOST NOT WELCOME!" },
 }
-STRINGS.CITY_PIG_TALK_HELP_CHOP_WOOD = {
+STRINGS.CITY_PIG_TALK_HELP_CHOP_WOOD           = {
     DEFAULT = { "TAKETH THAT TREE!", "I SMASH-ETH YON TREE!", "I PUNCH-ETH TREE!" },
     pigman_beautician = { "I SHALL CHOP-ETH!", "YON TREE NEEDS CHOPPIN'!", },
     pigman_mechanic = { "SHALL I COMPARE TREE TO SUMMER'S DAY?", "WORK-ETH, WORK-ETH, WORK-ETH", },
@@ -9426,12 +9498,12 @@ STRINGS.CITY_PIG_TALK_HELP_CHOP_WOOD = {
     pigman_professor = { "WITH MINE LAST BREATH I CHOP AT THEE!", "CHOP'T CHOP'T", "HAVE AT THEE TREE" },
     pigman_hunter = { "THUS FALL THE TREE", "I BID THEE FALL!", "I WIN!" },
 }
-STRINGS.LIZARDMAN_TALK_FRENZY = { "ME ANGRY.", "WANT KILL!" }
+STRINGS.LIZARDMAN_TALK_FRENZY                  = { "ME ANGRY.", "WANT KILL!" }
 
-STRINGS.NAMES.TRIDENT_SW = "trident"
+STRINGS.NAMES.TRIDENT_SW                       = "trident"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRIDENT_SW = "I wonder how old this artifact is?"
 
-STRINGS.CITY_PIG_TALK_PAYTAX = {
+STRINGS.CITY_PIG_TALK_PAYTAX                   = {
     DEFAULT = { "TAKETH THINE TAX", "NEED'ST THOU MINE TAX", "TAKEST THOU MINE TAX", "MANY THANKS UNTO YOU, UNPIG MAYOR" },
     pigman_beautician = { "TAKETH THINE TAX", "NEED'ST THOU MINE TAX", "TAKEST THOU MINE TAX", "MANY THANKS UNTO YOU, UNPIG MAYOR" },
     pigman_mechanic = { "TAKETH THINE TAX", "NEED'ST THOU MINE TAX", "TAKEST THOU MINE TAX", "MANY THANKS UNTO YOU, UNPIG MAYOR" },
@@ -9449,7 +9521,7 @@ STRINGS.CITY_PIG_TALK_PAYTAX = {
     pigman_hunter = { "TAKETH THINE TAX", "NEED'ST THOU MINE TAX", "TAKEST THOU MINE TAX", "MANY THANKS UNTO YOU, UNPIG MAYOR" },
 }
 
-STRINGS.CITY_PIG_TALK_STAYOUT                = {
+STRINGS.CITY_PIG_TALK_STAYOUT                  = {
     DEFAULT = { "太讨厌了！", "滚出去，坏蛋！", "你该死！", "我唾弃你, 恶棍！" },
     pigman_beautician = { "MOST UNWELCOME", "AWAY, YOU CUR！", "BE'ST THEE GONE！", "FIE ON THEE, VILLAIN！" },
     pigman_mechanic = { "MOST UNWELCOME", "AWAY, YOU CUR！", "BE'ST THEE GONE！", "FIE ON THEE, VILLAIN！" },
@@ -9466,7 +9538,7 @@ STRINGS.CITY_PIG_TALK_STAYOUT                = {
     pigman_professor = { "MOST UNWELCOME", "AWAY, YOU CUR！", "BE'ST THEE GONE！", "FIE ON THEE, VILLAIN！" },
     pigman_hunter = { "MOST UNWELCOME", "AWAY, YOU CUR！", "BE'ST THEE GONE！", "FIE ON THEE, VILLAIN！" },
 }
-STRINGS.CITY_PIG_TALK_DAILYGIFT              = {
+STRINGS.CITY_PIG_TALK_DAILYGIFT                = {
     DEFAULT = { "WARE FOR ART THOU", "THY HUMBL'ST PIGGY SERVANT", "REMEMBER'ST ME", "GIFT FOR'ST YOU", "WITH MINE HUMBLEST GRATITUDE", "TAKEST THEE MINE GIFT, YOUR MAJESTY" },
     pigman_beautician = { "WARE FOR ART THOU", "THY HUMBL'ST PIGGY SERVANT", "REMEMBER'ST ME", "GIFT FOR'ST YOU", "WITH MINE HUMBLEST GRATITUDE", "TAKEST THEE MINE GIFT, YOUR MAJESTY" },
     pigman_mechanic = { "WARE FOR ART THOU", "THY HUMBL'ST PIGGY SERVANT", "REMEMBER'ST ME", "GIFT FOR'ST YOU", "WITH MINE HUMBLEST GRATITUDE", "TAKEST THEE MINE GIFT, YOUR MAJESTY" },
@@ -9483,7 +9555,7 @@ STRINGS.CITY_PIG_TALK_DAILYGIFT              = {
     pigman_professor = { "WARE FOR ART THOU", "THY HUMBL'ST PIGGY SERVANT", "REMEMBER'ST ME", "GIFT FOR'ST YOU", "WITH MINE HUMBLEST GRATITUDE", "TAKEST THEE MINE GIFT, YOUR MAJESTY" },
     pigman_hunter = { "WARE FOR ART THOU", "THY HUMBL'ST PIGGY SERVANT", "REMEMBER'ST ME", "GIFT FOR'ST YOU", "WITH MINE HUMBLEST GRATITUDE", "TAKEST THEE MINE GIFT, YOUR MAJESTY" },
 }
-STRINGS.STORE                                = {
+STRINGS.STORE                                  = {
     UI = {
         LASTPAGE = "返回",
         NEXTPAGE = "下一个",
@@ -9491,7 +9563,7 @@ STRINGS.STORE                                = {
     }
 }
 
-STRINGS.CITY_PIG_TALK_FIND_LIGHT             = {
+STRINGS.CITY_PIG_TALK_FIND_LIGHT               = {
     DEFAULT = { "把光找回来！", "光在哪里？", "太阳在哪儿？", "朋友，小猪，非猪人，给我借个火。" },
     pigman_beautician = { "我受不了了，太黑了。", "变黑了！", "什么地方有光？" },
     pigman_mechanic = { "是黑暗！是恐惧！", "多么疯狂的谎言！", },
@@ -9511,7 +9583,7 @@ STRINGS.CITY_PIG_TALK_FIND_LIGHT             = {
     pigman_hunter = { "请把光带回来！", "是黑暗！是恐惧！" },
 
 }
-STRINGS.CITY_PIG_TALK_FIESTA                 = {
+STRINGS.CITY_PIG_TALK_FIESTA                   = {
     DEFAULT = { "HUZZAH！ HOORAY", "TIS SWINE FIESTA DAYS！", "BAD GUYS GO-ETH AWAY", "PIGGIES COME OUT-ETH TO PLAY！" },
     pigman_beautician = { "HUZZAH！ HOORAY", "TIS SWINE FIESTA DAYS！", "BAD GUYS GO-ETH AWAY", "PIGGIES COME OUT-ETH TO PLAY！" },
     pigman_mechanic = { "HUZZAH！ HOORAY", "TIS SWINE FIESTA DAYS！", "BAD GUYS GO-ETH AWAY", "PIGGIES COME OUT-ETH TO PLAY！" },
@@ -9528,7 +9600,7 @@ STRINGS.CITY_PIG_TALK_FIESTA                 = {
     pigman_professor = { "HUZZAH！ HOORAY", "TIS SWINE FIESTA DAYS！", "BAD GUYS GO-ETH AWAY", "PIGGIES COME OUT-ETH TO PLAY！" },
     pigman_hunter = { "HUZZAH！ HOORAY", "TIS SWINE FIESTA DAYS！", "BAD GUYS GO-ETH AWAY", "PIGGIES COME OUT-ETH TO PLAY！" },
 }
-STRINGS.CITY_PIG_TALK_REFUSE_GIFT            = {
+STRINGS.CITY_PIG_TALK_REFUSE_GIFT              = {
     DEFAULT = { "你有货物吗？我可以付钱。" },
     pigman_beautician = { "你有羽毛吗？", "你有鸟儿的羽毛吗？", "你有漂亮的羽毛吗？", "卖给我羽毛。" },
     pigman_mechanic = { "你有木板吗？", "你有绳子吗？", "我要买你那些精炼的东西。", "你有精炼货物吗？" },
@@ -9545,7 +9617,7 @@ STRINGS.CITY_PIG_TALK_REFUSE_GIFT            = {
     pigman_professor = { "你有遗物吗？", "我要古代的宝贝。", "我可以为你的遗物付钱。" },
     pigman_hunter = { "你有狗牙吗？", "能卖给我针刺吗？", "我收购狗牙。" },
 }
-STRINGS.CITY_PIG_TALK_APORKALYPSE_REWARD     = {
+STRINGS.CITY_PIG_TALK_APORKALYPSE_REWARD       = {
     DEFAULT = { "THOU SAVETH US！", "TAKEST THOU REWARD！", "THOU IS'T GOOD！", "APORKALYPSE 'TIS DONE！" },
     pigman_beautician = { "THOU SAVETH US！", "TAKEST THOU REWARD！", "THOU IS'T GOOD！", "APORKALYPSE 'TIS DONE！" },
     pigman_mechanic = { "THOU SAVETH US！", "TAKEST THOU REWARD！", "THOU IS'T GOOD！", "APORKALYPSE 'TIS DONE！" },
@@ -9562,16 +9634,16 @@ STRINGS.CITY_PIG_TALK_APORKALYPSE_REWARD     = {
     pigman_professor = { "THOU SAVETH US！", "TAKEST THOU REWARD！", "THOU IS'T GOOD！", "APORKALYPSE 'TIS DONE！" },
     pigman_hunter = { "THOU SAVETH US！", "TAKEST THOU REWARD！", "THOU IS'T GOOD！", "APORKALYPSE 'TIS DONE！" },
 }
-STRINGS.ELDERPIG_TALK_FARWELL                =
+STRINGS.ELDERPIG_TALK_FARWELL                  =
 {
     "...",
     "...zzZzz...",
     "...呼—噜...",
     "鳞...鳞片...",
 }
-STRINGS.MERM_TALK_GO_HOME                    = { "和鱼儿睡觉", "沃特~沃特~弗洛特。", "鱼儿朋友。不是食物。",
+STRINGS.MERM_TALK_GO_HOME                      = { "和鱼儿睡觉", "沃特~沃特~弗洛特。", "鱼儿朋友。不是食物。",
     "瓦鲁特~格洛~格洛皮~弗洛特。" }
-STRINGS.WILDBEAVER_NAMES                     = {
+STRINGS.WILDBEAVER_NAMES                       = {
     "凯斯特",
     "卢卡斯",
     "罗根",
@@ -9586,12 +9658,12 @@ STRINGS.WILDBEAVER_NAMES                     = {
     "伊利亚",
 }
 
-STRINGS.WILDBEAVER_TALK_FOLLOW = {
+STRINGS.WILDBEAVER_TALK_FOLLOW                 = {
     "你听见我说的了吗？",
     "让我们筑起一道堤坝！",
     "我们需要更多木材！",
 }
-STRINGS.MERM_TALK_RUNAWAY      = { "切线！", "弗罗皮~格洛普~格罗普！", "坏东西！坏东西！", "格洛普！格罗皮~格罗普！", "保护鱼儿！",
+STRINGS.MERM_TALK_RUNAWAY                      = { "切线！", "弗罗皮~格洛普~格罗普！", "坏东西！坏东西！", "格洛普！格罗皮~格罗普！", "保护鱼儿！",
     "格拉特~格拉特~弗罗普！" }
 
 
@@ -9683,3 +9755,6 @@ STRINGS.BORE_TALK_PANIC           = { "NOOOOO!", "TOO DARK! TOO DARK!", "AAAAAAA
 STRINGS.BORE_TALK_PANICFIRE       = { "HOT HOT HOT!", "OWWWWW!", "IT BURNS!" }
 STRINGS.BORE_TALK_FIND_MEAT       = { "ME HUNGRY!", "YUM!", "I EAT FOOD!", "TIME FOR FOOD!" }
 STRINGS.BORE_TALK_GO_HOME         = { "HOME TIME!", "HOME! HOME!" }
+
+
+

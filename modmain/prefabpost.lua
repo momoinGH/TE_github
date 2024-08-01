@@ -83,7 +83,18 @@ local function DeployableCanDeployBefore(self, pt)
     return { false }, IsSpecialTile(tile)
 end
 
+local function ForceDeploy(self, pt, deployer)
+    if self.ondeploy ~= nil then
+        self.ondeploy(self.inst, pt, deployer)
+    end
+    -- self.inst is removed during ondeploy
+    deployer:PushEvent("deployitem", { prefab = self.inst.prefab })
+    return true
+end
+
 AddComponentPostInit("deployable", function(self)
+    self.ForceDeploy = ForceDeploy
+
     Utils.FnDecorator(self, "CanDeploy", DeployableCanDeployBefore)
 end)
 
@@ -256,4 +267,16 @@ Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
     end
 
     return retTab
+end)
+
+
+AddPrefabPostInit("saltrock", function(inst)
+    if not TheWorld.ismastersim then return end
+
+    inst:AddComponent("mealable")
+    inst.components.mealable:SetType("salt")
+end)
+
+AddPrefabPostInit("spice_salt", function(inst)
+    inst:AddTag("salty")
 end)

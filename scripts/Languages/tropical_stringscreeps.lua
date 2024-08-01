@@ -644,7 +644,7 @@ GLOBAL.STRINGS.MERM_KING_TALK_HUNGER_FULL                                 = "Hav
 GLOBAL.STRINGS.ACTIONS.COLLECTSAP                                         = "Collect Sap"
 GLOBAL.STRINGS.ACTIONS.TAPSUGARTREE                                       = "Tap Tree"
 GLOBAL.STRINGS.ACTIONS.SETUPITEM                                          = "Install"
-GLOBAL.STRINGS.ACTIONS.SLAUGHTER                                          = "Slaughter"
+GLOBAL.STRINGS.ACTIONS.KILLSOFTLY                                         = "Slaughter"
 
 STRINGS.NAMES.FLOUR                                                       = "Flour"
 STRINGS.NAMES.SAPTREE                                                     = "Sugarwood Tree"

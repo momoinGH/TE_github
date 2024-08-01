@@ -306,44 +306,22 @@ AddRecipe2("peachy_poop", { Ingredient("guano", 6), Ingredient("peach", 6, "imag
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
 -- New Action (Extrafillable)
 
-AddAction("FILLED", "Fill", function(act)
-	return act.target ~= nil
-		and act.invobject ~= nil
-		and act.invobject.components.extrafillable ~= nil
-		and act.target:HasTag("goddess_fountain")
-		and act.invobject.components.extrafillable:Fill()
-end)
+
 
 AddStategraphActionHandler("wilson", ActionHandler(GLOBAL.ACTIONS.FILLED, "dolongaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(GLOBAL.ACTIONS.FILLED, "dolongaction"))
 
-AddComponentAction("USEITEM", "extrafillable", function(inst, doer, target, actions)
-	if target:HasTag("goddess_fountain") then
-		table.insert(actions, ACTIONS.FILLED)
-	end
-end)
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
 -- New Action (Milker)
 
-AddAction("MILK", "Milk", function(act)
-	return act.target ~= nil
-		and act.invobject ~= nil
-		and act.invobject.components.milker ~= nil
-		and act.target:HasTag("goddess_deer")
-		and act.target:HasTag("windy4")
-		and act.target:HasTag("milkable")
-		and act.invobject.components.milker:Fill()
-end)
+
 
 AddStategraphActionHandler("wilson", ActionHandler(GLOBAL.ACTIONS.MILK, "dolongaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(GLOBAL.ACTIONS.MILK, "dolongaction"))
 
-AddComponentAction("USEITEM", "milker", function(inst, doer, target, actions)
-	if target:HasTag("goddess_deer") and target:HasTag("windy4") then
-		table.insert(actions, ACTIONS.MILK)
-	end
-end)
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Mod Action (give) [too lazy to make new component for goddess item repair]

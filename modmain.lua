@@ -1,6 +1,6 @@
-GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
+-- setmetatable(env, { __index = function(t, k) return rawget(GLOBAL, k) end })
 _G = GLOBAL
-local containers = GLOBAL.require "containers"
+local containers = require "containers"
 IsServer, IsDedicated = TheNet:GetIsServer(), TheNet:IsDedicated()
 
 
@@ -437,7 +437,6 @@ Assets =
 }
 
 ----------------------------------------------------------------------------------------------------
-
 modimport "modmain/tuning"
 modimport "modmain/language"
 modimport "modmain/assets"
@@ -453,7 +452,6 @@ modimport "modmain/recipes"
 modimport "modmain/rpc"
 modimport "modmain/input"
 modimport "modmain/modwiki"
-
 ----------------------------------------------------------------------------------------------------
 
 if GetModConfigData("whirlpools") then
@@ -928,20 +926,6 @@ if GetModConfigData("frost_island") ~= 5 and GetModConfigData("kindofworld") ~= 
 	table.insert(PrefabFiles, "rock_ice_frost_spawner")
 	table.insert(PrefabFiles, "snowwarg_spawner")
 end
---[[
-if (GetModConfigData("frost_island") == 15 or GetModConfigData("frost_island") == 25) and GetModConfigData("kindofworld") ~= 5 then
-table.insert(PrefabFiles,"lavarenainside")
-table.insert(PrefabFiles,"teleportato2")
-table.insert(PrefabFiles,"telebase")
-
-
-table.insert(PrefabFiles,"quest")
-table.insert(PrefabFiles,"maxwellinside")	
-table.insert(PrefabFiles,"maxwellportal")
-table.insert(PrefabFiles,"maxwellthrone")
-
-end
-]]
 
 table.insert(PrefabFiles, "chicken")
 table.insert(PrefabFiles, "peekhen")
@@ -1062,8 +1046,6 @@ if GetModConfigData("Hamlet") ~= 5 or GetModConfigData("startlocation") == 15 or
 	table.insert(PrefabFiles, "cloudpuff")
 end
 
-
-
 AddMinimapAtlas("map_icons/creepindedeepicon.xml")
 
 if GetModConfigData("gorgeisland") and GetModConfigData("kindofworld") == 15 or GetModConfigData("enableallprefabs") == true then
@@ -1102,94 +1084,6 @@ if GetModConfigData("gorgeisland") and GetModConfigData("kindofworld") == 15 or 
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/quagmirefoods.tex"))
 end
 
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "limpets_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "limpets.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "coconut_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "coconut_halved.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "coffeebeans.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "coffeebeans_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "sweet_potato.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "sweet_potatos_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish_med.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "dead_swordfish.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish_raw.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish_med_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "quagmire_crabmeat.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "quagmire_crabmeat_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "lobster_land.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "lobster_dead.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "lobster_dead_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish_dogfish.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "mussel_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "mussel.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "shark_fin.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "crab.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "seaweed.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "seaweed_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "seaweed_dried.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "doydoyegg.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "dorsalfin.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "jellyfish.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "jellyfish_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "jellyfish_dead.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "jellyjerky.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish2.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish2_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish3.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish3_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish4.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish4_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish5.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish5_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish6.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish6_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish7.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "fish7_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "salmon.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "salmon_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "coi.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "coi_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "snowitem.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "roe.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "roe_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "seataro.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "seataro_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "blueberries.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "blueberries_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "seacucumber.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "seacucumber_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "gooseberry.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "gooseberry_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "quagmire_mushrooms.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "quagmire_mushrooms_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "oceanfish_small_61_inv.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "oceanfish_small_61_inv_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "oceanfish_small_71_inv.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "oceanfish_small_71_inv_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "oceanfish_small_81_inv.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "oceanfish_small_81_inv_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/volcanoinventory.xml", "butterfly_tropical_wings.tex")
-
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "jellybug.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "jellybug_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "slugbug.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "slugbug_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "cutnettle.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "radish.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "radish_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "asparagus.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "asparagus_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "aloe.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "aloe_cooked.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "piko_orange.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "snake_bone.tex")
-
-
--- 斗篷相关
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "armorvortexcloak.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "armorvoidcloak.tex")
--- RegisterInventoryItemAtlas("images/inventoryimages/hamletinventory.xml", "ancient_remnant.tex")
-
 ------------------------------------------------
 --Start of Tile Adder. Copy this code to your modworldgenmain.lua for use.
 --See tiledescription.lua and tileadder.lua for more details.
@@ -1197,36 +1091,11 @@ AddMinimap()
 --End if Tile Adder.
 ------------------volcano-------------------
 modimport("scripts/tools/waffles1")
---[[
-AddPrefabPostInit("world", function(inst)
-    local Map = getmetatable(inst.Map).__index
-
-    Waffles1.SequenceFn(Map, "IsPassableAtPoint", function(passable, x, y, z)
-        if passable then
-            return true
-        end
-		
-local ground = GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(x, y, z))
-	if (ground == GROUND.OCEAN_COASTAL or ground == GROUND.OCEAN_COASTAL_SHORE or ground == GROUND.OCEAN_SWELL or ground == GROUND.OCEAN_ROUGH or ground == GROUND.OCEAN_BRINEPOOL or ground == GROUND.OCEAN_BRINEPOOL_SHORE or ground == GROUND.OCEAN_HAZARDOUS) then		
-	return true
-	end
-        return #TheSim:FindEntities(x, y, z, 22, { "alt_tile" }) > 0
-    end)
-
-    Waffles1.SequenceFn(Map, "GetTileCenterPoint", function(pos)
-        if pos ~= nil then
-            return unpack(pos)
-        end
-        return 0, 0, 0
-    end)
-end)
-]]
-
 
 ---------------dodoy
-GLOBAL.doydoy_mate_time = 2
-GLOBAL.doydoy_total_limit = 20
-GLOBAL.seabeach_amount = {
+_G.doydoy_mate_time = 2
+_G.doydoy_total_limit = 20
+_G.seabeach_amount = {
 	doydoy = 0,
 }
 ---------------------------- new recipe tab for obsidian tools ---------------------
@@ -1278,41 +1147,6 @@ for k, v in pairs(TUNING.PROTOTYPER_TREES) do
 end
 
 
-TUNING.PROTOTYPER_TREES.OBSIDIAN_ONE = TechTree.Create({
-	OBSIDIAN = 1,
-})
-TUNING.PROTOTYPER_TREES.OBSIDIAN_TWO = TechTree.Create({
-	OBSIDIAN = 2,
-})
-
-TUNING.PROTOTYPER_TREES.CITY_ONE = TechTree.Create({
-	CITY = 1,
-})
-TUNING.PROTOTYPER_TREES.CITY_TWO = TechTree.Create({
-	CITY = 2,
-})
-
-TUNING.PROTOTYPER_TREES.HOME_ONE = TechTree.Create({
-	HOME = 1,
-})
-TUNING.PROTOTYPER_TREES.HOME_TWO = TechTree.Create({
-	HOME = 2,
-})
-
-TUNING.PROTOTYPER_TREES.GODDESS_ONE = TechTree.Create({
-	GODDESS = 1,
-})
-TUNING.PROTOTYPER_TREES.GODDESS_TWO = TechTree.Create({
-	GODDESS = 2,
-})
-TUNING.PROTOTYPER_TREES.GORGE_ONE = TechTree.Create({
-	GORGE = 1,
-})
-TUNING.PROTOTYPER_TREES.GORGE_TWO = TechTree.Create({
-	GORGE = 2,
-})
-
-
 for i, v in pairs(_G.AllRecipes) do
 	if v.level.OBSIDIAN == nil then
 		v.level.OBSIDIAN = 0
@@ -1332,7 +1166,7 @@ for i, v in pairs(_G.AllRecipes) do
 end
 
 
-GLOBAL.RECIPETABS['OBSIDIANTAB'] = {
+RECIPETABS['OBSIDIANTAB'] = {
 	str = "OBSIDIANTAB",
 	sort = 90,
 	icon = "tab_volcano.tex",
@@ -1343,15 +1177,15 @@ GLOBAL.RECIPETABS['OBSIDIANTAB'] = {
 AddPrototyperDef("obsidian_workbench",
 	{ action_str = "OBSIDIANTAB", icon_image = "tab_volcano.tex", icon_atlas = "images/tabs.xml", is_crafting_station = true })
 
-GLOBAL.RECIPETABS['CITY'] = { str = "CITY", sort = 91, icon = "tab_city.tex", icon_atlas = "images/tabs.xml", crafting_station = true }
+RECIPETABS['CITY'] = { str = "CITY", sort = 91, icon = "tab_city.tex", icon_atlas = "images/tabs.xml", crafting_station = true }
 AddPrototyperDef("key_to_city",
 	{ action_str = "CITY", icon_image = "tab_city.tex", icon_atlas = "images/tabs.xml", is_crafting_station = true })
 
-GLOBAL.RECIPETABS['HOME'] = { str = "HOME", sort = 92, icon = "tab_home_decor.tex", icon_atlas = "images/tabs.xml", crafting_station = true }
+RECIPETABS['HOME'] = { str = "HOME", sort = 92, icon = "tab_home_decor.tex", icon_atlas = "images/tabs.xml", crafting_station = true }
 AddPrototyperDef("wallrenovation",
 	{ action_str = "HOME", icon_image = "tab_home_decor.tex", icon_atlas = "images/tabs.xml", is_crafting_station = true })
 
-GLOBAL.RECIPETABS['GODDESSTAB'] = {
+RECIPETABS['GODDESSTAB'] = {
 	str = "GODDESSTAB",
 	sort = 93,
 	icon = "windyfan1.tex",
@@ -1362,7 +1196,7 @@ GLOBAL.RECIPETABS['GODDESSTAB'] = {
 AddPrototyperDef("goddess_shrine",
 	{ action_str = "GODDESSTAB", icon_image = "windyfan1.tex", icon_atlas = "images/inventoryimages/windyfan1.xml", is_crafting_station = true })
 
-GLOBAL.RECIPETABS['GORGE'] = { str = "GORGE", sort = 94, icon = "tab_portal_key.tex", icon_atlas = "images/tabs.xml", crafting_station = true }
+RECIPETABS['GORGE'] = { str = "GORGE", sort = 94, icon = "tab_portal_key.tex", icon_atlas = "images/tabs.xml", crafting_station = true }
 AddPrototyperDef("quagmire_portal_key",
 	{ action_str = "GORGE", icon_image = "tab_portal_key.tex", icon_atlas = "images/tabs.xml", is_crafting_station = true })
 
@@ -1378,7 +1212,7 @@ local function AddBigFooter(inst)
 		end
 
 		if bell_statue then
-			local statueglommer_fn = GLOBAL.Prefabs["statueglommer"].fn
+			local statueglommer_fn = Prefabs["statueglommer"].fn
 			local OnInit, OnInit_index = DX_GetUpvalue(statueglommer_fn, "OnInit")
 			local OnWorked, OnWorked_index = DX_GetUpvalue(statueglommer_fn, "OnWorked")
 			local OnLoadWorked, OnLoadWorked_index = DX_GetUpvalue(statueglommer_fn, "OnLoadWorked")
@@ -1429,10 +1263,9 @@ end
 
 AddPrefabPostInit("world", AddBigFooter)
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+----------------------------------------------------------------------------------------------------------------------------------------------
 AddPrefabPostInit("forest", function(inst)
-	if GLOBAL.TheWorld.ismastersim then
+	if TheWorld.ismastersim then
 		inst:AddComponent("parrotspawner")
 		inst:AddComponent("economy")
 		inst:AddComponent("shadowmanager")
@@ -1482,7 +1315,7 @@ AddPrefabPostInit("world", AddBigFooter)
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 AddPrefabPostInit("cave", function(inst)
-	if GLOBAL.TheWorld.ismastersim then
+	if TheWorld.ismastersim then
 		inst:AddComponent("roottrunkinventory")
 		inst:AddComponent("quaker_interior")
 		inst:AddComponent("economy")
@@ -1497,24 +1330,24 @@ end)
 
 ----------------------------------------------------Thanks EvenMr for this code------------SLOT EXTRA PARA BARCO-----------------------------------------------------------------------------------------------------------------------------
 
-GLOBAL.EQUIPSLOTS.BARCO = "barco"
-GLOBAL.FUELTYPE.TAR = "TAR"
-GLOBAL.FUELTYPE.REPARODEBARCO = "REPARODEBARCO"
-GLOBAL.FUELTYPE.LIVINGARTIFACT = "LIVINGARTIFACT"
-GLOBAL.FUELTYPE.ANCIENT_REMNANT = "ANCIENT_REMNANT" -- Runar: 在modmain太炸裂了
-GLOBAL.MATERIALS.SANDBAG = "sandbag"
+EQUIPSLOTS.BARCO = "barco"
+FUELTYPE.TAR = "TAR"
+FUELTYPE.REPARODEBARCO = "REPARODEBARCO"
+FUELTYPE.LIVINGARTIFACT = "LIVINGARTIFACT"
+FUELTYPE.ANCIENT_REMNANT = "ANCIENT_REMNANT" -- Runar: 在modmain太炸裂了
+MATERIALS.SANDBAG = "sandbag"
 
 -- TODO 定义新的FUELTYPE需要给图鉴一个图片
 -- FUELTYPE_SUBICON_LOOKUP
 
-GLOBAL.TOOLACTIONS["HACK"] = true
-GLOBAL.TOOLACTIONS["SHEAR"] = true
-GLOBAL.TOOLACTIONS["PAN"] = true
-GLOBAL.TOOLACTIONS["INVESTIGATEGLASS"] = true
-GLOBAL.FUELTYPE.CORK = "CORK"
+TOOLACTIONS["HACK"] = true
+TOOLACTIONS["SHEAR"] = true
+TOOLACTIONS["PAN"] = true
+TOOLACTIONS["INVESTIGATEGLASS"] = true
+FUELTYPE.CORK = "CORK"
 
-GLOBAL.MATERIALS.LIMESTONE = "limestone"
-GLOBAL.MATERIALS.ENFORCEDLIMESTONE = "enforcedlimestone"
+MATERIALS.LIMESTONE = "limestone"
+MATERIALS.ENFORCEDLIMESTONE = "enforcedlimestone"
 
 --[[
 AddClassPostConstruct("widgets/inventorybar", function(self)
@@ -1524,7 +1357,7 @@ AddClassPostConstruct("widgets/inventorybar", function(self)
 
     function self:ScaleInv()
 		slot_num = #self.equipslotinfo
-		if not (TheInput:ControllerAttached() or GLOBAL.GetGameModeProperty("no_avatar_popup")) then
+		if not (TheInput:ControllerAttached() or GetGameModeProperty("no_avatar_popup")) then
 			slot_num = slot_num + 1
 		end
 		local inv_scale = 0.98 + 0.06 * slot_num
@@ -1582,7 +1415,7 @@ local function getval(fn, path)
 	for entry in path:gmatch("[^%.]+") do
 		local i = 1
 		while true do
-			local name, value = GLOBAL.debug.getupvalue(val, i)
+			local name, value = debug.getupvalue(val, i)
 			if name == entry then
 				val = value
 				break
@@ -1603,7 +1436,7 @@ local function setval(fn, path, new)
 		i = 1
 		prev = val
 		while true do
-			local name, value = GLOBAL.debug.getupvalue(val, i)
+			local name, value = debug.getupvalue(val, i)
 			if name == entry then
 				val = value
 				break
@@ -1613,7 +1446,7 @@ local function setval(fn, path, new)
 			i = i + 1
 		end
 	end
-	GLOBAL.debug.setupvalue(prev, i, new)
+	debug.setupvalue(prev, i, new)
 end
 
 local GROUND_OCEAN_COLOR = -- Color for the main island ground tiles
@@ -1642,12 +1475,12 @@ local COASTAL_OCEAN_COLOR2 =
 
 
 local hackpath = "OnFilesLoaded.OnUpdatePurchaseStateComplete.DoResetAction.DoGenerateWorld.DoInitGame"
-local OldLoad = GLOBAL.Profile.Load
-function GLOBAL.Profile:Load(fn)
+local OldLoad = Profile.Load
+function Profile:Load(fn)
 	local initfn = getval(fn, hackpath)
 	setval(fn, hackpath, function(savedata, profile)
-		GLOBAL.global("currentworld")
-		GLOBAL.currentworld = savedata.map.prefab
+		global("currentworld")
+		currentworld = savedata.map.prefab
 		if savedata.map.prefab == "forest" then
 			local tbl = getval(initfn, "GroundTiles")
 			---------------BEGIN----------------
@@ -1659,7 +1492,7 @@ function GLOBAL.Profile:Load(fn)
 			-- underground_layers -> tbl.underground
 			-- Remember to load the assets in modmain.lua
 			--[[			
-			GLOBAL.table.insert(tbl.ground, 20, {GROUND.QUAGMIRE_GATEWAY,      {
+			table.insert(tbl.ground, 20, {GROUND.QUAGMIRE_GATEWAY,      {
 			name = "grass3",
 			noise_texture = "levels/textures/quagmire_gateway_noise.tex",
 			runsound="dontstarve/movement/run_woods",
@@ -1670,7 +1503,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR			
 			}})
 			
-			GLOBAL.table.insert(tbl.ground, 28, {GROUND.QUAGMIRE_CITYSTONE,    {
+			table.insert(tbl.ground, 28, {GROUND.QUAGMIRE_CITYSTONE,    {
 			name = "cave",
 			noise_texture = "levels/textures/quagmire_citystone_noise.tex",
 			runsound="dontstarve/movement/run_dirt",
@@ -1681,7 +1514,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR			
 			}})
 			
-			GLOBAL.table.insert(tbl.ground, 30, {GROUND.QUAGMIRE_PARKFIELD,    {
+			table.insert(tbl.ground, 30, {GROUND.QUAGMIRE_PARKFIELD,    {
 			name = "deciduous",
 			noise_texture = "levels/textures/quagmire_parkfield_noise.tex",
 			runsound="dontstarve/movement/run_carpet",
@@ -1692,7 +1525,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR			
 			}})
 			
-			GLOBAL.table.insert(tbl.ground, 28, {GROUND.QUAGMIRE_PARKSTONE,    {
+			table.insert(tbl.ground, 28, {GROUND.QUAGMIRE_PARKSTONE,    {
 			name = "cave",
 			noise_texture = "levels/textures/quagmire_parkstone_noise.tex",
 			runsound="dontstarve/movement/run_dirt",
@@ -1703,7 +1536,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR			
 			}})
 			
-			GLOBAL.table.insert(tbl.ground, 30, {GROUND.QUAGMIRE_SOIL,         {
+			table.insert(tbl.ground, 30, {GROUND.QUAGMIRE_SOIL,         {
 			name = "carpet",
 			noise_texture = "levels/textures/quagmire_soil_noise.tex",
 			runsound="dontstarve/movement/run_mud",
@@ -1714,7 +1547,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR			
 			}})
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.QUAGMIRE_PEATFOREST,   {
+			table.insert(tbl.ground, 25, {GROUND.QUAGMIRE_PEATFOREST,   {
 			name = "grass2",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1726,7 +1559,7 @@ function GLOBAL.Profile:Load(fn)
 			}})
 ]]
 			--[[	
-			GLOBAL.table.insert(tbl.ground, 10, {GROUND.OCEAN_COASTAL,   {
+			table.insert(tbl.ground, 10, {GROUND.OCEAN_COASTAL,   {
 			name = "water_mangrove",
 			noise_texture = "levels/textures/noise_water_mangrove.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1739,7 +1572,7 @@ function GLOBAL.Profile:Load(fn)
 			wavetint = {0.8,   0.9,    1},	
 			}})		
 	
-			GLOBAL.table.insert(tbl.ground, 10, {GROUND.OCEAN_COASTAL_SHORE,   {
+			table.insert(tbl.ground, 10, {GROUND.OCEAN_COASTAL_SHORE,   {
 			name = "water_mangrove",
 			noise_texture = "levels/textures/noise_water_mangrove.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1752,7 +1585,7 @@ function GLOBAL.Profile:Load(fn)
 			wavetint = {0.8,   0.9,    1},	
 			}})					
 			
-			GLOBAL.table.insert(tbl.ground, 10, {GROUND.OCEAN_SWELL,   {
+			table.insert(tbl.ground, 10, {GROUND.OCEAN_SWELL,   {
 			name = "water_mangrove",
 			noise_texture = "levels/textures/noise_water_mangrove.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1765,7 +1598,7 @@ function GLOBAL.Profile:Load(fn)
 			wavetint = {0.65,  0.84,   0.94},	
 			}})	
 
-			GLOBAL.table.insert(tbl.ground, 10, {GROUND.OCEAN_BRINEPOOL,   {
+			table.insert(tbl.ground, 10, {GROUND.OCEAN_BRINEPOOL,   {
 			name = "water_mangrove",
 			noise_texture = "levels/textures/noise_water_mangrove.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1778,7 +1611,7 @@ function GLOBAL.Profile:Load(fn)
 			wavetint = {0.65,  0.92,   0.94},	
 			}})	
 				
-			GLOBAL.table.insert(tbl.ground, 10, {GROUND.OCEAN_BRINEPOOL_SHORE,   {
+			table.insert(tbl.ground, 10, {GROUND.OCEAN_BRINEPOOL_SHORE,   {
 			name = "water_mangrove",
 			noise_texture = "levels/textures/noise_water_mangrove.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1792,7 +1625,7 @@ function GLOBAL.Profile:Load(fn)
 			}})	
 
 
-			GLOBAL.table.insert(tbl.ground, 10, {GROUND.OCEAN_ROUGH	,   {
+			table.insert(tbl.ground, 10, {GROUND.OCEAN_ROUGH	,   {
 			name = "water_mangrove",
 			noise_texture = "levels/textures/noise_water_mangrove.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1806,7 +1639,7 @@ function GLOBAL.Profile:Load(fn)
 			}})		
 
 
-			GLOBAL.table.insert(tbl.ground, 10, {GROUND.OCEAN_HAZARDOUS	,   {
+			table.insert(tbl.ground, 10, {GROUND.OCEAN_HAZARDOUS	,   {
 			name = "water_mangrove",
 			noise_texture = "levels/textures/noise_water_mangrove.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1820,7 +1653,7 @@ function GLOBAL.Profile:Load(fn)
 			}})				
 ]]
 			--[[			
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.MAGMAFIELD,   {
+			table.insert(tbl.ground, 25, {GROUND.MAGMAFIELD,   {
 			name = "magmafield",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1831,7 +1664,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})			
 			
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.JUNGLE,   {
+			table.insert(tbl.ground, 25, {GROUND.JUNGLE,   {
 			name = "jungle",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1842,7 +1675,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})				
 			
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.ASH,   {
+			table.insert(tbl.ground, 25, {GROUND.ASH,   {
 			name = "ash",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1853,7 +1686,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})					
 			
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.VOLCANO,   {
+			table.insert(tbl.ground, 25, {GROUND.VOLCANO,   {
 			name = "volcano",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1865,7 +1698,7 @@ function GLOBAL.Profile:Load(fn)
 			}})				
 			
 			
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.TIDALMARSH,   {
+			table.insert(tbl.ground, 25, {GROUND.TIDALMARSH,   {
 			name = "tidalmarsh",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1876,7 +1709,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})	
 			
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.MEADOW,   {
+			table.insert(tbl.ground, 25, {GROUND.MEADOW,   {
 			name = "meadow",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1888,7 +1721,7 @@ function GLOBAL.Profile:Load(fn)
 			}})				
 			
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.SNAKESKINFLOOR,   {
+			table.insert(tbl.ground, 25, {GROUND.SNAKESKINFLOOR,   {
 			name = "snakeskinfloor",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1899,7 +1732,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})	
 			
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.PLAINS,   {
+			table.insert(tbl.ground, 25, {GROUND.PLAINS,   {
 			name = "plains",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1910,7 +1743,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})	
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.DEEPRAINFOREST,   {
+			table.insert(tbl.ground, 25, {GROUND.DEEPRAINFOREST,   {
 			name = "deeprainforest",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1921,7 +1754,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})				
 	
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.RAINFOREST,   {
+			table.insert(tbl.ground, 25, {GROUND.RAINFOREST,   {
 			name = "rainforest",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1932,7 +1765,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})	
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.PAINTED,   {
+			table.insert(tbl.ground, 25, {GROUND.PAINTED,   {
 			name = "painted",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1943,7 +1776,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})				
 			
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.GASJUNGLE,   {
+			table.insert(tbl.ground, 25, {GROUND.GASJUNGLE,   {
 			name = "gasjungle",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1954,7 +1787,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})				
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.FIELDS,   {
+			table.insert(tbl.ground, 25, {GROUND.FIELDS,   {
 			name = "fields",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1965,7 +1798,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})	
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.CHECKEREDLAWN,   {
+			table.insert(tbl.ground, 25, {GROUND.CHECKEREDLAWN,   {
 			name = "checkeredlawn",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1976,7 +1809,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})		
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.SUBURB,   {
+			table.insert(tbl.ground, 25, {GROUND.SUBURB,   {
 			name = "suburb",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1987,7 +1820,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})	
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.BEARDRUG,   {
+			table.insert(tbl.ground, 25, {GROUND.BEARDRUG,   {
 			name = "beardrug",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -1998,7 +1831,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})				
 			
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.FOUNDATION,   {
+			table.insert(tbl.ground, 25, {GROUND.FOUNDATION,   {
 			name = "foundation",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -2009,7 +1842,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})	
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.COBBLEROAD,   {
+			table.insert(tbl.ground, 25, {GROUND.COBBLEROAD,   {
 			name = "cobbleroad",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -2020,7 +1853,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})				
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.ANTFLOOR,   {
+			table.insert(tbl.ground, 25, {GROUND.ANTFLOOR,   {
 			name = "antfloor",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -2031,7 +1864,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})	
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.BATFLOOR,   {
+			table.insert(tbl.ground, 25, {GROUND.BATFLOOR,   {
 			name = "batfloor",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -2042,7 +1875,7 @@ function GLOBAL.Profile:Load(fn)
 			colors=GROUND_OCEAN_COLOR
 			}})				
 
-			GLOBAL.table.insert(tbl.ground, 25, {GROUND.PIGRUINS,   {
+			table.insert(tbl.ground, 25, {GROUND.PIGRUINS,   {
 			name = "pigruins",
 			noise_texture = "levels/textures/quagmire_peatforest_noise.tex",
 			runsound="dontstarve/movement/run_marsh",
@@ -2055,7 +1888,7 @@ function GLOBAL.Profile:Load(fn)
 ]]
 
 			if GetModConfigData("kindofworld") == 6 then --nunca acontece
-				GLOBAL.table.insert(tbl.ground, 10, { GROUND.OCEAN_COASTAL_SHORE, {
+				table.insert(tbl.ground, 10, { GROUND.OCEAN_COASTAL_SHORE, {
 					name = "water_mangrove",
 					noise_texture = "levels/textures/ground_noise_water_deep.tex",
 					runsound = "dontstarve/movement/run_marsh",
@@ -2068,7 +1901,7 @@ function GLOBAL.Profile:Load(fn)
 					wavetint = { 0.8, 0.9, 1 },
 				} })
 
-				GLOBAL.table.insert(tbl.ground, 10, { GROUND.OCEAN_COASTAL, {
+				table.insert(tbl.ground, 10, { GROUND.OCEAN_COASTAL, {
 					name = "water_mangrove",
 					noise_texture = "levels/textures/ground_noise_water_deep.tex",
 					runsound = "dontstarve/movement/run_marsh",
@@ -2081,7 +1914,7 @@ function GLOBAL.Profile:Load(fn)
 					wavetint = { 0.8, 0.9, 1 },
 				} })
 
-				GLOBAL.table.insert(tbl.ground, 10, { GROUND.OCEAN_SWELL, {
+				table.insert(tbl.ground, 10, { GROUND.OCEAN_SWELL, {
 					name = "water_mangrove",
 					noise_texture = "levels/textures/ground_noise_water_deep.tex",
 					runsound = "dontstarve/movement/run_marsh",
@@ -2094,7 +1927,7 @@ function GLOBAL.Profile:Load(fn)
 					wavetint = { 0.8, 0.9, 1 },
 				} })
 
-				GLOBAL.table.insert(tbl.ground, 10, { GROUND.OCEAN_ROUGH, {
+				table.insert(tbl.ground, 10, { GROUND.OCEAN_ROUGH, {
 					name = "water_mangrove",
 					noise_texture = "levels/textures/ground_noise_water_deep.tex",
 					runsound = "dontstarve/movement/run_marsh",
@@ -2107,7 +1940,7 @@ function GLOBAL.Profile:Load(fn)
 					wavetint = { 0.8, 0.9, 1 },
 				} })
 
-				GLOBAL.table.insert(tbl.ground, 10, { GROUND.OCEAN_BRINEPOOL, {
+				table.insert(tbl.ground, 10, { GROUND.OCEAN_BRINEPOOL, {
 					name = "water_mangrove",
 					noise_texture = "levels/textures/ground_noise_water_deep.tex",
 					runsound = "dontstarve/movement/run_marsh",
@@ -2120,7 +1953,7 @@ function GLOBAL.Profile:Load(fn)
 					wavetint = { 0.8, 0.9, 1 },
 				} })
 
-				GLOBAL.table.insert(tbl.ground, 10, { GROUND.OCEAN_BRINEPOOL_SHORE, {
+				table.insert(tbl.ground, 10, { GROUND.OCEAN_BRINEPOOL_SHORE, {
 					name = "water_mangrove",
 					noise_texture = "levels/textures/ground_noise_water_deep.tex",
 					runsound = "dontstarve/movement/run_marsh",
@@ -2133,7 +1966,7 @@ function GLOBAL.Profile:Load(fn)
 					wavetint = { 0.8, 0.9, 1 },
 				} })
 
-				GLOBAL.table.insert(tbl.ground, 10, { GROUND.OCEAN_HAZARDOUS, {
+				table.insert(tbl.ground, 10, { GROUND.OCEAN_HAZARDOUS, {
 					name = "water_mangrove",
 					noise_texture = "levels/textures/ground_noise_water_deep.tex",
 					runsound = "dontstarve/movement/run_marsh",
@@ -2146,7 +1979,7 @@ function GLOBAL.Profile:Load(fn)
 					wavetint = { 0.8, 0.9, 1 },
 				} })
 
-				GLOBAL.table.insert(tbl.ground, 10, { GROUND.OCEAN_WATERLOG, {
+				table.insert(tbl.ground, 10, { GROUND.OCEAN_WATERLOG, {
 					name = "water_mangrove",
 					noise_texture = "levels/textures/ground_noise_water_deep.tex",
 					runsound = "dontstarve/movement/run_marsh",
@@ -2181,13 +2014,13 @@ end
 
 --[[
 ---------------------------------color cube by EvenMr  --------------------------------------------------------------
-local resolvefilepath=GLOBAL.resolvefilepath
+local resolvefilepath=resolvefilepath
 if 1 == 2 then --GetModConfigData("colourcube") then
 	table.insert( Assets, Asset("IMAGE","images/colour_cubes/pork_cold_bloodmoon_cc.tex") )
 
 	AddComponentPostInit("colourcube", function(self)
-		if GLOBAL.currentworld == "forest" then
-			for _,v in pairs(GLOBAL.TheWorld.event_listeners["playerdeactivated"][GLOBAL.TheWorld]) do
+		if currentworld == "forest" then
+			for _,v in pairs(TheWorld.event_listeners["playerdeactivated"][TheWorld]) do
 				if getval(v,"OnOverrideCCTable") then
 				print("color")
 					setval(v, "OnOverrideCCTable.UpdateAmbientCCTable.SEASON_COLOURCUBES",{
@@ -2236,14 +2069,14 @@ AddClassPostConstruct("widgets/healthbadge", function(inst)
 			(self.owner.replica.hunger ~= nil and self.owner.replica.hunger:IsStarving()) or
 			(self.owner.replica.health ~= nil and self.owner.replica.health:IsTakingFireDamage()) or
 			(self.owner.IsBeaverStarving ~= nil and self.owner:IsBeaverStarving()) or
-			GLOBAL.next(self.corrosives) ~= nil
+			next(self.corrosives) ~= nil
 
 		local small_down = self.owner.components.poisonable and self.owner.components.poisonable.dmg < 0
 
 		-- Show the up-arrow when we're sleeping (but not in a straw roll: that doesn't heal us)
 		local up = not down and
 			((self.owner.player_classified ~= nil and self.owner.player_classified.issleephealing:value()) or
-				GLOBAL.next(self.hots) ~= nil or
+				next(self.hots) ~= nil or
 				(self.owner.replica.inventory ~= nil and self.owner.replica.inventory:EquipHasTag("regen"))
 			) and
 			self.owner.replica.health ~= nil and self.owner.replica.health:IsHurt()
@@ -2252,7 +2085,7 @@ AddClassPostConstruct("widgets/healthbadge", function(inst)
 			(down and "arrow_loop_decrease_most") or
 			((not up and small_down) and "arrow_loop_decrease") or
 			(not up and "neutral") or
-			(GLOBAL.next(self.hots) ~= nil and "arrow_loop_increase_most") or
+			(next(self.hots) ~= nil and "arrow_loop_increase_most") or
 			"arrow_loop_increase"
 
 		if self.arrowdir ~= anim then
@@ -2319,8 +2152,8 @@ function self:SetCondition(amount)
 
     if self.condition <= 0 then
         self.condition = 0
-        GLOBAL.ProfileStatsSet("armor_broke_"..self.inst.prefab, true)
-        GLOBAL.ProfileStatsSet("armor", self.inst.prefab)
+        ProfileStatsSet("armor_broke_"..self.inst.prefab, true)
+        ProfileStatsSet("armor", self.inst.prefab)
 
         if self.onfinished ~= nil then
             self.onfinished()
@@ -2338,10 +2171,10 @@ end)
 -----------------------------Treasure Reveal by EvenMr----------------------------
 local function OnRevealTreasureDirty(inst)
 	local m = math
-	if inst._parent ~= nil and inst._parent.HUD and GLOBAL.TheCamera then
+	if inst._parent ~= nil and inst._parent.HUD and TheCamera then
 		inst._parent.HUD.controls:ShowMap()
-		local map = GLOBAL.TheWorld.minimap.MiniMap
-		local ang = GLOBAL.TheCamera:GetHeading()
+		local map = TheWorld.minimap.MiniMap
+		local ang = TheCamera:GetHeading()
 		local zoom = map:GetZoom()
 		local posx, _, posy = inst._parent.Transform:GetWorldPosition()
 		posx = m.modf(inst.revealtreasure:value() / 65536) - 16384 - posx
@@ -2354,38 +2187,38 @@ local function OnRevealTreasureDirty(inst)
 end
 
 AddPrefabPostInit("player_classified", function(inst)
-	inst.revealtreasure = GLOBAL.net_uint(inst.GUID, "messagebottle1.reveal", "revealtreasuredirty")
+	inst.revealtreasure = net_uint(inst.GUID, "messagebottle1.reveal", "revealtreasuredirty")
 	inst:ListenForEvent("revealtreasuredirty", OnRevealTreasureDirty)
 end)
 
 if GetModConfigData("kindofworld") == 20 then
 	AddPrefabPostInit("rocks", function(inst)
-		GLOBAL.MakeInventoryFloatable(inst, "small", 0.15)
-		if GLOBAL.TheWorld.ismastersim then
+		MakeInventoryFloatable(inst, "small", 0.15)
+		if TheWorld.ismastersim then
 			if inst.components.inventoryitem ~= nil then
 				inst.components.inventoryitem:SetSinks(false)
 			end
 		end
 	end)
 	AddPrefabPostInit("nitre", function(inst)
-		GLOBAL.MakeInventoryFloatable(inst, "small", 0.15)
-		if GLOBAL.TheWorld.ismastersim then
+		MakeInventoryFloatable(inst, "small", 0.15)
+		if TheWorld.ismastersim then
 			if inst.components.inventoryitem ~= nil then
 				inst.components.inventoryitem:SetSinks(false)
 			end
 		end
 	end)
 	AddPrefabPostInit("flint", function(inst)
-		GLOBAL.MakeInventoryFloatable(inst, "small", 0.15)
-		if GLOBAL.TheWorld.ismastersim then
+		MakeInventoryFloatable(inst, "small", 0.15)
+		if TheWorld.ismastersim then
 			if inst.components.inventoryitem ~= nil then
 				inst.components.inventoryitem:SetSinks(false)
 			end
 		end
 	end)
 	AddPrefabPostInit("goldnugget", function(inst)
-		GLOBAL.MakeInventoryFloatable(inst, "small", 0.15)
-		if GLOBAL.TheWorld.ismastersim then
+		MakeInventoryFloatable(inst, "small", 0.15)
+		if TheWorld.ismastersim then
 			if inst.components.inventoryitem ~= nil then
 				inst.components.inventoryitem:SetSinks(false)
 			end
@@ -2393,8 +2226,8 @@ if GetModConfigData("kindofworld") == 20 then
 	end)
 
 	AddPrefabPostInit("moonrocknugget", function(inst)
-		GLOBAL.MakeInventoryFloatable(inst, "small", 0.15)
-		if GLOBAL.TheWorld.ismastersim then
+		MakeInventoryFloatable(inst, "small", 0.15)
+		if TheWorld.ismastersim then
 			if inst.components.inventoryitem ~= nil then
 				inst.components.inventoryitem:SetSinks(false)
 			end
@@ -2402,8 +2235,8 @@ if GetModConfigData("kindofworld") == 20 then
 	end)
 
 	AddPrefabPostInit("moonglass", function(inst)
-		GLOBAL.MakeInventoryFloatable(inst, "small", 0.15)
-		if GLOBAL.TheWorld.ismastersim then
+		MakeInventoryFloatable(inst, "small", 0.15)
+		if TheWorld.ismastersim then
 			if inst.components.inventoryitem ~= nil then
 				inst.components.inventoryitem:SetSinks(false)
 			end
@@ -2411,8 +2244,8 @@ if GetModConfigData("kindofworld") == 20 then
 	end)
 
 	AddPrefabPostInit("moonrockseed", function(inst)
-		GLOBAL.MakeInventoryFloatable(inst, "small", 0.15)
-		if GLOBAL.TheWorld.ismastersim then
+		MakeInventoryFloatable(inst, "small", 0.15)
+		if TheWorld.ismastersim then
 			if inst.components.inventoryitem ~= nil then
 				inst.components.inventoryitem:SetSinks(false)
 			end
@@ -2450,7 +2283,7 @@ local heavybonus = 0.35
 local driftspeed = 2
 --[[
 local function getspeedbonus(inst)
-local namao = inst.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
+local namao = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 local remo = false
 local sailbonus
 if namao and namao.prefab == "oar_driftwood" or namao and namao.prefab == "oar" then
@@ -2516,7 +2349,7 @@ local function getspeedbonus(inst)
 
 
 	local wind_speed = 1
-	local vento = GLOBAL.GetClosestInstWithTag("vento", inst, 10)
+	local vento = GetClosestInstWithTag("vento", inst, 10)
 	if vento then
 		local wind = vento.Transform:GetRotation() + 180
 		local windangle = inst.Transform:GetRotation() - wind
@@ -2533,7 +2366,7 @@ local function getspeedbonus(inst)
 				windproofness = 0
 			end
 		end
-		local windfactor = 0.4 * windproofness * velocidadedovento * math.cos(windangle * GLOBAL.DEGREES) + 1.0
+		local windfactor = 0.4 * windproofness * velocidadedovento * math.cos(windangle * DEGREES) + 1.0
 		wind_speed = math.max(0.1, windfactor)
 	end
 
@@ -2573,7 +2406,7 @@ AddComponentPostInit("locomotor", function(self)
 	local OldUpdate = self.OnUpdate
 	function self:OnUpdate(dt)
 		OldUpdate(self, dt)
-		local math = GLOBAL.math
+		local math = math
 
 		if self.inst:HasTag("aquatic") and self.inst:HasTag("player") and self.inst.replica.inventory
 			and self.inst.replica.inventory:IsHeavyLifting() and not self.driftangle then
@@ -2586,7 +2419,7 @@ AddComponentPostInit("locomotor", function(self)
 					if self.dest and self.dest:IsValid() then
 						local destpos_x, destpos_y, destpos_z = self.dest:GetPoint()
 						local mypos_x, mypos_y, mypos_z = self.inst.Transform:GetWorldPosition()
-						local dsq = GLOBAL.distsq(destpos_x, destpos_z, mypos_x, mypos_z)
+						local dsq = distsq(destpos_x, destpos_z, mypos_x, mypos_z)
 						if dsq <= .25 then
 							speed_mult = math.max(.33, math.sqrt(dsq))
 						end
@@ -2604,7 +2437,7 @@ AddComponentPostInit("locomotor", function(self)
 			if self.dest and self.dest:IsValid() then
 				local destpos_x, destpos_y, destpos_z = self.dest:GetPoint()
 				local mypos_x, mypos_y, mypos_z = self.inst.Transform:GetWorldPosition()
-				local dsq = GLOBAL.distsq(destpos_x, destpos_z, mypos_x, mypos_z)
+				local dsq = distsq(destpos_x, destpos_z, mypos_x, mypos_z)
 				if dsq <= .25 then
 					speed_mult = math.max(.33, math.sqrt(dsq))
 				end
@@ -2623,7 +2456,7 @@ AddComponentPostInit("locomotor", function(self)
 			end
 
 			self.inst.Physics:SetMotorVel((desired_speed * speed_mult + driftx) * extramult, 0, drifty * extramult)
-			if GLOBAL.StopUpdatingComponents[self] == self.inst then
+			if StopUpdatingComponents[self] == self.inst then
 				self:StartUpdatingInternal()
 			end
 		end
@@ -2632,7 +2465,7 @@ AddComponentPostInit("locomotor", function(self)
 	local OldStop = self.Stop
 	function self:Stop(sgparam)
 		OldStop(self, sgparam)
-		if self.driftangle and self.inst:HasTag("aquatic") and self.inst:HasTag("player") and GLOBAL.StopUpdatingComponents[self] == self.inst then
+		if self.driftangle and self.inst:HasTag("aquatic") and self.inst:HasTag("player") and StopUpdatingComponents[self] == self.inst then
 			self:StartUpdatingInternal()
 		end
 	end
@@ -2692,7 +2525,7 @@ AddClassPostConstruct("widgets/containerwidget", function(self)
 			self.isboat = true
 			self.boatbadge:Show()
 			self.inst:ListenForEvent("percentusedchange", BoatState, container)
-			if GLOBAL.TheWorld.ismastersim then
+			if TheWorld.ismastersim then
 				container:PushEvent("percentusedchange",
 					{ percent = container.replica.inventoryitem.classified.percentused:value() / 100 })
 			else
@@ -2717,7 +2550,7 @@ local function deepval(fn, name, member, depth)
 	depth = depth or 20
 	local i = 1
 	while true do
-		local n, v = GLOBAL.debug.getupvalue(fn, i)
+		local n, v = debug.getupvalue(fn, i)
 		if v == nil then
 			return
 		elseif n == name and (not member or v[member]) then
@@ -3189,10 +3022,10 @@ if GetModConfigData("disable_snow_effects") == true then
 					if data and data.snowlevel
 					then
 						local newlevel = data.snowlevel <= 0 and data.snowlevel or 0
-						GLOBAL.TheWorld.Map:SetOverlayLerp(newlevel)
+						TheWorld.Map:SetOverlayLerp(newlevel)
 					end
 				end,
-				GLOBAL.TheWorld
+				TheWorld
 			)
 		end
 	)
@@ -3237,20 +3070,20 @@ AddPrefabPostInit("container_classified", containerhack)
 AddClassPostConstruct("widgets/controls", function(self)
 	local Widget = require("widgets/widget")
 	self.containerroot_bottom = self:AddChild(Widget(""))
-	self.containerroot_bottom:SetHAnchor(GLOBAL.ANCHOR_MIDDLE)
-	self.containerroot_bottom:SetVAnchor(GLOBAL.ANCHOR_BOTTOM)
-	self.containerroot_bottom:SetScaleMode(GLOBAL.SCALEMODE_PROPORTIONAL)
-	self.containerroot_bottom:SetMaxPropUpscale(GLOBAL.MAX_HUD_SCALE)
+	self.containerroot_bottom:SetHAnchor(ANCHOR_MIDDLE)
+	self.containerroot_bottom:SetVAnchor(ANCHOR_BOTTOM)
+	self.containerroot_bottom:SetScaleMode(SCALEMODE_PROPORTIONAL)
+	self.containerroot_bottom:SetMaxPropUpscale(MAX_HUD_SCALE)
 	self.containerroot_bottom:MoveToBack()
 	self.containerroot_bottom = self.containerroot_bottom:AddChild(Widget("contaierroot_bottom"))
-	local scale = GLOBAL.TheFrontEnd:GetHUDScale()
+	local scale = TheFrontEnd:GetHUDScale()
 	self.containerroot_bottom:SetScale(scale, scale, scale)
 	self.containerroot_bottom:Hide()
 
 	local OldSetHUDSize = self.SetHUDSize
 	function self:SetHUDSize()
 		OldSetHUDSize(self)
-		local scale = GLOBAL.TheFrontEnd:GetHUDScale()
+		local scale = TheFrontEnd:GetHUDScale()
 		self.containerroot_bottom:SetScale(scale, scale, scale)
 	end
 
@@ -3294,13 +3127,13 @@ AddComponentPostInit("frograin",function(self)
 local function GetSpawnPoint(pt)
 local function TestSpawnPoint(offset)
 local spawnpoint = pt + offset
-return GLOBAL.TheWorld.Map:IsPassableAtPoint(spawnpoint:Get())
-and GLOBAL.TheWorld.Map:IsAboveGroundAtPoint(spawnpoint:Get())
+return TheWorld.Map:IsPassableAtPoint(spawnpoint:Get())
+and TheWorld.Map:IsAboveGroundAtPoint(spawnpoint:Get())
 end
 
-local theta = GLOBAL.math.random() * 2 * GLOBAL.PI
-local radius = GLOBAL.math.random() * TUNING.FROG_RAIN_SPAWN_RADIUS
-local resultoffset = GLOBAL.FindValidPositionByFan(theta, radius, 12, TestSpawnPoint)
+local theta = math.random() * 2 * PI
+local radius = math.random() * TUNING.FROG_RAIN_SPAWN_RADIUS
+local resultoffset = FindValidPositionByFan(theta, radius, 12, TestSpawnPoint)
 
 if resultoffset ~= nil then
 return pt + resultoffset
@@ -3329,7 +3162,7 @@ local function OnPoisonOverDirty(inst)
 end
 
 AddPrefabPostInit("player_classified", function(inst)
-	inst.poisonover = GLOBAL.net_bool(inst.GUID, "poison.poisonover", "poisonoverdirty")
+	inst.poisonover = net_bool(inst.GUID, "poison.poisonover", "poisonoverdirty")
 	inst:ListenForEvent("poisonoverdirty", OnPoisonOverDirty)
 end)
 --[[
@@ -3396,9 +3229,9 @@ local function CraftMonkeyString()
     return str
 end
 
-local CraftOooh = getval(GLOBAL.GetSpecialCharacterString, "CraftOooh")
-local wilton_sayings = getval(GLOBAL.GetSpecialCharacterString, "wilton_sayings")
-GLOBAL.GetSpecialCharacterString = function(character)
+local CraftOooh = getval(GetSpecialCharacterString, "CraftOooh")
+local wilton_sayings = getval(GetSpecialCharacterString, "wilton_sayings")
+GetSpecialCharacterString = function(character)
     if character == nil then
         return nil
     end
@@ -3416,7 +3249,7 @@ end
 AddPrefabPostInitAny(function(inst)
 	if inst.prefab == "skeleton" or inst.prefab == "skeleton_player" then
 		local function ondropped(inst)
-			local map = GLOBAL.TheWorld.Map
+			local map = TheWorld.Map
 			local x, y, z = inst.Transform:GetWorldPosition()
 			if x and y and z then
 				local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
@@ -3437,7 +3270,7 @@ AddPrefabPostInitAny(function(inst)
 	end
 
 	if inst.prefab == "ash" then
-		if GLOBAL.TheWorld.ismastersim then
+		if TheWorld.ismastersim then
 			inst:AddComponent("fertilizer")
 		end
 	end
@@ -3483,7 +3316,7 @@ AddPrefabPostInitAny(function(inst)
 
 	if inst.prefab == "sewing_tape" then
 		inst:AddTag("boatrepairkit")
-		if GLOBAL.TheWorld.ismastersim then
+		if TheWorld.ismastersim then
 			inst:AddComponent("interactions")
 		end
 	end
@@ -3495,7 +3328,7 @@ AddPrefabPostInitAny(function(inst)
 
 	if inst.prefab == "spider_warrior" then
 		inst:DoTaskInTime(0.5, function(inst)
-			local map = GLOBAL.TheWorld.Map
+			local map = TheWorld.Map
 			local x, y, z = inst.Transform:GetWorldPosition()
 			if x and y and z then
 				local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
@@ -3514,7 +3347,7 @@ AddPrefabPostInitAny(function(inst)
 	-----mostra neve--------------
 	if inst:HasTag("SnowCovered") then
 		local function mostraneve(inst)
-			local map = GLOBAL.TheWorld.Map
+			local map = TheWorld.Map
 			local x, y, z = inst.Transform:GetWorldPosition()
 			if x and y and z then
 				local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
@@ -3528,7 +3361,7 @@ AddPrefabPostInitAny(function(inst)
 
 	--------------negocia com porcos------------------
 	if inst.prefab == "houndstooth" or inst.prefab == "gunpowder" or inst.prefab == "boards" or inst.prefab == "mosquitosack" or inst.prefab == "nightmarefuel" or inst.prefab == "stinger" or inst.prefab == "spear" or inst.prefab == "spear_wathgrithr" then
-		if GLOBAL.TheWorld.ismastersim then
+		if TheWorld.ismastersim then
 			inst:AddComponent("tradable")
 		end
 	end
@@ -3542,7 +3375,7 @@ AddPrefabPostInitAny(function(inst)
 	------------------------koalefant_summer se transforma no chao de neve-----------------
 	if inst.prefab == "koalefant_summer" then
 		local function ondropped(inst)
-			local map = GLOBAL.TheWorld.Map
+			local map = TheWorld.Map
 			local x, y, z = inst.Transform:GetWorldPosition()
 			if x and y and z then
 				local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
@@ -3566,7 +3399,7 @@ AddPrefabPostInitAny(function(inst)
 	--[[
 if inst.prefab == "firehound" or inst.prefab == "hound" or inst.prefab == "icehound" then
 local function ondropped(inst)
-if GLOBAL.TheWorld.components.aporkalypse and GLOBAL.TheWorld.components.aporkalypse.aporkalypse_active == true then
+if TheWorld.components.aporkalypse and TheWorld.components.aporkalypse.aporkalypse_active == true then
 inst:DoTaskInTime(0.5, function(inst)
 inst:SetPrefabName("mutatedhound")
 --inst:Remove()
@@ -3574,9 +3407,9 @@ inst:SetPrefabName("mutatedhound")
 --inst.AnimState:SetBuild("hound_mutated")
 end)
 else
-local map = GLOBAL.TheWorld.Map
+local map = TheWorld.Map
 local x, y, z = inst.Transform:GetWorldPosition()
-for i, node in ipairs(GLOBAL.TheWorld.topology.nodes) do
+for i, node in ipairs(TheWorld.topology.nodes) do
 if TheSim:WorldPointInPoly(x, z, node.poly) then
 
 
@@ -3584,7 +3417,7 @@ if node.tags ~= nil and table.contains(node.tags, "hamlet") then
 local bolha = SpawnPrefab("vampirebat")
 if bolha then
 bolha.Transform:SetPosition(x, y, z)
-local atacado = GLOBAL.GetClosestInstWithTag("player", bolha, 40)
+local atacado = GetClosestInstWithTag("player", bolha, 40)
 if atacado then
 bolha.components.combat:SuggestTarget(atacado)
 end
@@ -3597,7 +3430,7 @@ if node.tags ~= nil and table.contains(node.tags, "frost") and inst.prefab ~= "i
 local bolha = SpawnPrefab("icehound")
 if bolha then
 bolha.Transform:SetPosition(x, y, z)
-local atacado = GLOBAL.GetClosestInstWithTag("player", bolha, 40)
+local atacado = GetClosestInstWithTag("player", bolha, 40)
 if atacado then
 bolha.components.combat:SuggestTarget(atacado)
 end
@@ -3612,7 +3445,7 @@ if inst.prefab == "hound" then
 local bolha = SpawnPrefab("icehound")
 if bolha then
 bolha.Transform:SetPosition(x, y, z)
-local atacado = GLOBAL.GetClosestInstWithTag("player", bolha, 40)
+local atacado = GetClosestInstWithTag("player", bolha, 40)
 if atacado then
 bolha.components.combat:SuggestTarget(atacado)
 end
@@ -3624,7 +3457,7 @@ if inst.prefab == "firehound" then
 local bolha = SpawnPrefab("poisoncrocodog")
 if bolha then
 bolha.Transform:SetPosition(x, y, z)
-local atacado = GLOBAL.GetClosestInstWithTag("player", bolha, 40)
+local atacado = GetClosestInstWithTag("player", bolha, 40)
 if atacado then
 bolha.components.combat:SuggestTarget(atacado)
 end
@@ -3637,7 +3470,7 @@ if inst.prefab == "icehound" then
 local bolha = SpawnPrefab("watercrocodog")
 if bolha then
 bolha.Transform:SetPosition(x, y, z)
-local atacado = GLOBAL.GetClosestInstWithTag("player", bolha, 40)
+local atacado = GetClosestInstWithTag("player", bolha, 40)
 if atacado then
 bolha.components.combat:SuggestTarget(atacado)
 end
@@ -3656,12 +3489,12 @@ end
 	------------------------------------------------------
 	if inst.prefab == "mole" or inst.prefab == "rabbit" then
 		local function ondropped(inst)
-			local map = GLOBAL.TheWorld.Map
+			local map = TheWorld.Map
 			local x, y, z = inst.Transform:GetWorldPosition()
 			if x and y and z then
 				local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-				if (ground == GROUND.UNDERWATER_ROCKY) or (ground == GROUND.UNDERWATER_SANDY) or (ground == GROUND.PAINTED and GLOBAL.TheWorld:HasTag("cave")) or (ground == GROUND.MAGMAFIELD and GLOBAL.TheWorld:HasTag("cave")) or (ground == GROUND.BEACH and GLOBAL.TheWorld:HasTag("cave")) then
+				if (ground == GROUND.UNDERWATER_ROCKY) or (ground == GROUND.UNDERWATER_SANDY) or (ground == GROUND.PAINTED and TheWorld:HasTag("cave")) or (ground == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground == GROUND.BEACH and TheWorld:HasTag("cave")) then
 					inst:DoTaskInTime(0.1, function(inst)
 						inst:Remove()
 					end)
@@ -3675,12 +3508,12 @@ end
 
 	if inst.prefab == "worm" then
 		local function ondropped(inst)
-			local map = GLOBAL.TheWorld.Map
+			local map = TheWorld.Map
 			local x, y, z = inst.Transform:GetWorldPosition()
 			if x and y and z then
 				local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-				if (ground == GROUND.UNDERWATER_ROCKY) or (ground == GROUND.UNDERWATER_SANDY) or (ground == GROUND.PAINTED and GLOBAL.TheWorld:HasTag("cave")) or (ground == GROUND.MAGMAFIELD and GLOBAL.TheWorld:HasTag("cave")) or (ground == GROUND.BEACH and GLOBAL.TheWorld:HasTag("cave")) then
+				if (ground == GROUND.UNDERWATER_ROCKY) or (ground == GROUND.UNDERWATER_SANDY) or (ground == GROUND.PAINTED and TheWorld:HasTag("cave")) or (ground == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground == GROUND.BEACH and TheWorld:HasTag("cave")) then
 					inst:DoTaskInTime(0.1, function(inst)
 						local bolha = SpawnPrefab("seatentacle")
 						if bolha then
@@ -3713,7 +3546,7 @@ end
 		or inst.prefab == "lightrays" then
 		local function OnTimerDone(inst, data)
 			if data.name == "vaiembora" then
-				local invader = GLOBAL.GetClosestInstWithTag("player", inst, 25)
+				local invader = GetClosestInstWithTag("player", inst, 25)
 				if not invader then
 					inst:Remove()
 				else
@@ -3724,7 +3557,7 @@ end
 
 		inst:AddTag("tropicalspawner")
 
-		if GLOBAL.TheWorld.ismastersim then
+		if TheWorld.ismastersim then
 			inst:AddComponent("timer")
 			inst:ListenForEvent("timerdone", OnTimerDone)
 			inst.components.timer:StartTimer("vaiembora", 80 + math.random() * 80)
@@ -3755,80 +3588,80 @@ end)
 local function OnDirtyEventCameraStuff(inst) -- this is called on client, if the server does inst.mynetvarCameraMode:set(...)
 	local val = inst.mynetvarCameraMode:value()
 	local fasedodia = "night"
-	if GLOBAL.TheWorld.state.isday then fasedodia = "day" end
-	if GLOBAL.TheWorld.state.isdusk then fasedodia = "dusk" end
-	if GLOBAL.TheWorld.state.isnight then fasedodia = "night" end
+	if TheWorld.state.isday then fasedodia = "day" end
+	if TheWorld.state.isdusk then fasedodia = "dusk" end
+	if TheWorld.state.isnight then fasedodia = "night" end
 	if val == 1 then -- for jumping(OnActive) function
-		GLOBAL.TheCamera.controllable = false
-		GLOBAL.TheCamera.cutscene = true
-		GLOBAL.TheCamera.headingtarget = 0
-		GLOBAL.TheCamera.distancetarget = 20 + GetModConfigData("housewallajust")
-		GLOBAL.TheCamera.targetoffset = Vector3(-2.3, 1.7, 0)
+		TheCamera.controllable = false
+		TheCamera.cutscene = true
+		TheCamera.headingtarget = 0
+		TheCamera.distancetarget = 20 + GetModConfigData("housewallajust")
+		TheCamera.targetoffset = Vector3(-2.3, 1.7, 0)
 	elseif val == 2 then
-		GLOBAL.TheCamera:SetDistance(12)
+		TheCamera:SetDistance(12)
 	elseif val == 3 then
-		GLOBAL.TheCamera:SetDefault()
-		GLOBAL.TheCamera:SetTarget(GLOBAL.TheFocalPoint)
+		TheCamera:SetDefault()
+		TheCamera:SetTarget(TheFocalPoint)
 	elseif val == 4 then --for player prox
-		GLOBAL.TheCamera.controllable = false
-		GLOBAL.TheCamera.cutscene = true
-		GLOBAL.TheCamera.headingtarget = 0
-		GLOBAL.TheCamera.distancetarget = 21.5 + GetModConfigData("housewallajust")
-		GLOBAL.TheCamera:SetTarget(GLOBAL.GetClosestInstWithTag("shopinterior", inst, 30))
-		GLOBAL.TheCamera.targetoffset = Vector3(2, 1.5, 0)
-		GLOBAL.TheWorld:PushEvent("underwatercave", "night")
-		if not GLOBAL.GetClosestInstWithTag("casadojogador", inst, 30) then
-			GLOBAL.TheFocalPoint.SoundEmitter:PlaySound("dontstarve_DLC003/amb/inside/store", "storemusic")
+		TheCamera.controllable = false
+		TheCamera.cutscene = true
+		TheCamera.headingtarget = 0
+		TheCamera.distancetarget = 21.5 + GetModConfigData("housewallajust")
+		TheCamera:SetTarget(GetClosestInstWithTag("shopinterior", inst, 30))
+		TheCamera.targetoffset = Vector3(2, 1.5, 0)
+		TheWorld:PushEvent("underwatercave", "night")
+		if not GetClosestInstWithTag("casadojogador", inst, 30) then
+			TheFocalPoint.SoundEmitter:PlaySound("dontstarve_DLC003/amb/inside/store", "storemusic")
 		end
 	elseif val == 5 then --for player prox
-		GLOBAL.TheCamera.controllable = false
-		GLOBAL.TheCamera.cutscene = true
-		GLOBAL.TheCamera.headingtarget = 0
-		local alvodacamera = GLOBAL.GetClosestInstWithTag("caveinterior", inst, 30)
+		TheCamera.controllable = false
+		TheCamera.cutscene = true
+		TheCamera.headingtarget = 0
+		local alvodacamera = GetClosestInstWithTag("caveinterior", inst, 30)
 		if alvodacamera then
-			GLOBAL.TheCamera:SetTarget(alvodacamera)
+			TheCamera:SetTarget(alvodacamera)
 		end
 		if alvodacamera and alvodacamera:HasTag("pisodaruina") then
-			GLOBAL.TheCamera.distancetarget = 25 + GetModConfigData("housewallajust")
-			GLOBAL.TheCamera.targetoffset = Vector3(6, 1.5, 0)
-			GLOBAL.TheWorld:PushEvent("underwatercave", "night")
-			GLOBAL.TheFocalPoint.SoundEmitter:PlaySound("dontstarve_DLC003/amb/inside/ruins", "storemusic")
+			TheCamera.distancetarget = 25 + GetModConfigData("housewallajust")
+			TheCamera.targetoffset = Vector3(6, 1.5, 0)
+			TheWorld:PushEvent("underwatercave", "night")
+			TheFocalPoint.SoundEmitter:PlaySound("dontstarve_DLC003/amb/inside/ruins", "storemusic")
 		elseif alvodacamera and alvodacamera:HasTag("pisogalleryinteriorpalace") then
-			GLOBAL.TheCamera.distancetarget = 21.5 + GetModConfigData("housewallajust")
-			GLOBAL.TheCamera.targetoffset = Vector3(3, 1.5, 0)
+			TheCamera.distancetarget = 21.5 + GetModConfigData("housewallajust")
+			TheCamera.targetoffset = Vector3(3, 1.5, 0)
 		elseif alvodacamera and alvodacamera:HasTag("pisoanthill") then
-			GLOBAL.TheCamera.distancetarget = 27 + GetModConfigData("housewallajust")
-			GLOBAL.TheCamera.targetoffset = Vector3(5, 1.5, 0)
-			GLOBAL.TheWorld:PushEvent("underwatercave", "night")
+			TheCamera.distancetarget = 27 + GetModConfigData("housewallajust")
+			TheCamera.targetoffset = Vector3(5, 1.5, 0)
+			TheWorld:PushEvent("underwatercave", "night")
 		else
-			GLOBAL.TheCamera.distancetarget = 27 + GetModConfigData("housewallajust")
-			GLOBAL.TheCamera.targetoffset = Vector3(5, 1.5, 0)
-			GLOBAL.TheWorld:PushEvent("underwatercave", "night")
+			TheCamera.distancetarget = 27 + GetModConfigData("housewallajust")
+			TheCamera.targetoffset = Vector3(5, 1.5, 0)
+			TheWorld:PushEvent("underwatercave", "night")
 		end
 	elseif val == 6 then --for player prox
-		GLOBAL.TheCamera:SetDefault()
-		GLOBAL.TheCamera:SetTarget(GLOBAL.TheFocalPoint)
+		TheCamera:SetDefault()
+		TheCamera:SetTarget(TheFocalPoint)
 
 		local fasedodia = "night"
-		if GLOBAL.TheWorld.state.isday then fasedodia = "day" end
-		if GLOBAL.TheWorld.state.isdusk then fasedodia = "dusk" end
-		if GLOBAL.TheWorld.state.isnight then fasedodia = "night" end
-		GLOBAL.TheWorld:PushEvent("underwatercaveexit", fasedodia)
-		GLOBAL.TheFocalPoint.SoundEmitter:KillSound("storemusic")
+		if TheWorld.state.isday then fasedodia = "day" end
+		if TheWorld.state.isdusk then fasedodia = "dusk" end
+		if TheWorld.state.isnight then fasedodia = "night" end
+		TheWorld:PushEvent("underwatercaveexit", fasedodia)
+		TheFocalPoint.SoundEmitter:KillSound("storemusic")
 	elseif val == 7 then --for player prox
-		GLOBAL.TheCamera.controllable = false
-		GLOBAL.TheCamera.cutscene = true
-		GLOBAL.TheCamera.headingtarget = 0
-		GLOBAL.TheCamera.distancetarget = 28 + GetModConfigData("housewallajust")
-		GLOBAL.TheCamera:SetTarget(GLOBAL.GetClosestInstWithTag("pisointeriorpalace", inst, 30))
-		GLOBAL.TheCamera.targetoffset = Vector3(5, 1.5, 0)
+		TheCamera.controllable = false
+		TheCamera.cutscene = true
+		TheCamera.headingtarget = 0
+		TheCamera.distancetarget = 28 + GetModConfigData("housewallajust")
+		TheCamera:SetTarget(GetClosestInstWithTag("pisointeriorpalace", inst, 30))
+		TheCamera.targetoffset = Vector3(5, 1.5, 0)
 	elseif val == 8 then --for player prox
-		GLOBAL.TheCamera.controllable = false
-		GLOBAL.TheCamera.cutscene = true
-		GLOBAL.TheCamera.headingtarget = 0
-		GLOBAL.TheCamera.distancetarget = 25 + GetModConfigData("housewallajust")
-		GLOBAL.TheCamera:SetTarget(GLOBAL.GetClosestInstWithTag("pisointerioruins", inst, 30)) --inst = GLOBAL.ThePlayer
-		GLOBAL.TheCamera.targetoffset = Vector3(6, 1.5, 0)
+		TheCamera.controllable = false
+		TheCamera.cutscene = true
+		TheCamera.headingtarget = 0
+		TheCamera.distancetarget = 25 + GetModConfigData("housewallajust")
+		TheCamera:SetTarget(GetClosestInstWithTag("pisointerioruins", inst, 30)) --inst = ThePlayer
+		TheCamera.targetoffset = Vector3(6, 1.5, 0)
 	end
 	-- Use val and do client related stuff
 end
@@ -3849,16 +3682,16 @@ end
 
 
 local function OnPlayerSpawn(inst)
-	inst.mynetvarCameraMode = GLOBAL.net_tinybyte(inst.GUID, "BakuStuffNetStuff", "DirtyEventCameraStuff")
+	inst.mynetvarCameraMode = net_tinybyte(inst.GUID, "BakuStuffNetStuff", "DirtyEventCameraStuff")
 	inst.mynetvarCameraMode:set(0)
 	inst:DoTaskInTime(0, RegisterListenersCameraStuff)
 
 	inst:DoTaskInTime(0.5, function(inst)
-		if GLOBAL.GetClosestInstWithTag("shopinterior", inst, 30) then
+		if GetClosestInstWithTag("shopinterior", inst, 30) then
 			inst.mynetvarCameraMode:set(4)
-		elseif GLOBAL.GetClosestInstWithTag("caveinterior", inst, 30) then
+		elseif GetClosestInstWithTag("caveinterior", inst, 30) then
 			inst.mynetvarCameraMode:set(5)
-		elseif GLOBAL.GetClosestInstWithTag("pisointeriorpalace", inst, 30) then
+		elseif GetClosestInstWithTag("pisointeriorpalace", inst, 30) then
 			inst.mynetvarCameraMode:set(7)
 		else
 			inst.mynetvarCameraMode:set(6)
@@ -3884,7 +3717,7 @@ AddComponentPostInit("focalpoint",function(self)
     local old_CameraUpdate = self.CameraUpdate
     local function new_CameraUpdate(self,dt,...)
    local parent = self.inst.entity:GetParent()
-    if parent ~= nil and GLOBAL.next(self.targets) ~= nil then
+    if parent ~= nil and next(self.targets) ~= nil then
         local toremove2 = {}
         for source, sourcetbl in pairs(self.targets) do
             if not source:IsNear(self.inst, 50) and source:HasTag("blows_air")  then--if not source:IsNear(self.inst, 50) and source:HasTag("interiorcamera")  then--and not source:HasTag("centerroomglow") then
@@ -3892,7 +3725,7 @@ AddComponentPostInit("focalpoint",function(self)
             end
         end
          for i, v in ipairs(toremove2) do
-            self:StopFocusSource(GLOBAL.unpack(toremove2))
+            self:StopFocusSource(unpack(toremove2))
         end
 
     end
@@ -3905,7 +3738,7 @@ end)
 ]]
 ----umidade interior------
 
-local Sheltered = GLOBAL.require("components/sheltered")
+local Sheltered = require("components/sheltered")
 local SHELTERED_MUST_TAGS = { "shelter" }
 local SHELTERED_CANT_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", "stump", "burnt" }
 local SHADECANOPY_MUST_TAGS = { "shadecanopy" }
@@ -3948,8 +3781,8 @@ end
 
 ------rain effect---------------
 AddSimPostInit(function()
-	GLOBAL.EmitterManager.old_updatefuncs = { snow = nil, rain = nil, pollen = nil }
-	local old_PostUpdate = GLOBAL.EmitterManager.PostUpdate
+	EmitterManager.old_updatefuncs = { snow = nil, rain = nil, pollen = nil }
+	local old_PostUpdate = EmitterManager.PostUpdate
 	local function new_PostUpdate(self, ...)
 		for inst, data in pairs(self.awakeEmitters.infiniteLifetimes) do
 			if inst.prefab == "pollen" or inst.prefab == "snow" or inst.prefab == "rain" then
@@ -3957,7 +3790,7 @@ AddSimPostInit(function()
 					self.old_updatefuncs[inst.prefab] = data.updateFunc
 				end
 				local pt = inst:GetPosition()
-				local ents = GLOBAL.TheSim:FindEntities(pt.x, pt.y, pt.z, 40, { "blows_air" })
+				local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 40, { "blows_air" })
 				if #ents > 0 then
 					data.updateFunc = function() end -- empty function
 				else
@@ -3970,19 +3803,19 @@ AddSimPostInit(function()
 			return old_PostUpdate(self, ...)
 		end
 	end
-	GLOBAL.EmitterManager.PostUpdate = new_PostUpdate
+	EmitterManager.PostUpdate = new_PostUpdate
 end)
 
 
 
 ------darkness---------------
 AddPlayerPostInit(function(inst)
-	if GLOBAL.TheNet:GetIsServer() then
+	if TheNet:GetIsServer() then
 		inst.findpigruinstask = inst:DoPeriodicTask(2, function()
 			local pt = inst:GetPosition()
-			local interior = GLOBAL.TheSim:FindEntities(pt.x, pt.y, pt.z, 40, { "pisodaruina" })
+			local interior = TheSim:FindEntities(pt.x, pt.y, pt.z, 40, { "pisodaruina" })
 			if #interior > 0 and inst.LightWatcher ~= nil then
-				local thresh = GLOBAL.TheSim:GetLightAtPoint(10000, 10000, 10000)
+				local thresh = TheSim:GetLightAtPoint(10000, 10000, 10000)
 				inst.LightWatcher:SetLightThresh(0.075 + thresh)
 				inst.LightWatcher:SetDarkThresh(0.05 + thresh)
 			else
@@ -3996,12 +3829,12 @@ end)
 
 if GetModConfigData("aporkalypse") == true then
 	local function bloodmoon(self)
-		local luavermelha = GLOBAL.require "widgets/bloodmoon"
+		local luavermelha = require "widgets/bloodmoon"
 		self.luadesangue = self:AddChild(luavermelha(self.owner))
 		--	local badge_brain = self.brain:GetPosition()
 		local AlwaysOnStatus = false
-		for k, v in ipairs(GLOBAL.KnownModIndex:GetModsToLoad()) do
-			local Mod = GLOBAL.KnownModIndex:GetModInfo(v).name
+		for k, v in ipairs(KnownModIndex:GetModsToLoad()) do
+			local Mod = KnownModIndex:GetModInfo(v).name
 			if Mod == "Combined Status" then
 				AlwaysOnStatus = true
 			end
@@ -4019,12 +3852,12 @@ end
 ------------------------------------coofee badge ----------------------------------------------
 
 local function bloodmoon(self)
-	local luavermelha = GLOBAL.require "widgets/bloodmoon"
+	local luavermelha = require "widgets/bloodmoon"
 	self.luadesangue = self:AddChild(luavermelha(self.owner))
 	--	local badge_brain = self.brain:GetPosition()
 	local AlwaysOnStatus = false
-	for k, v in ipairs(GLOBAL.KnownModIndex:GetModsToLoad()) do
-		local Mod = GLOBAL.KnownModIndex:GetModInfo(v).name
+	for k, v in ipairs(KnownModIndex:GetModsToLoad()) do
+		local Mod = KnownModIndex:GetModInfo(v).name
 		if Mod == "Combined Status" then
 			AlwaysOnStatus = true
 		end
@@ -4040,14 +3873,14 @@ AddClassPostConstruct("widgets/uiclock", bloodmoon)
 
 
 local function speedicon(self)
-	local iconedevelocidade = GLOBAL.require "widgets/speedicon"
+	local iconedevelocidade = require "widgets/speedicon"
 	self.velocidadeativa = self:AddChild(iconedevelocidade(self.owner))
 	self.owner.velocidadeativa = self.velocidadeativa
 
 	-- local badge_brain = self.brain:GetPosition()
 	local AlwaysOnStatus = false
-	for k, v in ipairs(GLOBAL.KnownModIndex:GetModsToLoad()) do
-		local Mod = GLOBAL.KnownModIndex:GetModInfo(v).name
+	for k, v in ipairs(KnownModIndex:GetModsToLoad()) do
+		local Mod = KnownModIndex:GetModInfo(v).name
 		if Mod == "Combined Status" then
 			AlwaysOnStatus = true
 		end
@@ -4064,14 +3897,14 @@ AddClassPostConstruct("widgets/statusdisplays", speedicon)
 
 
 ---------------------------------------------------------------------------------------Raft and logboat---------------------------------------------------
-STRINGS = GLOBAL.STRINGS
-RECIPETABS = GLOBAL.RECIPETABS
-Recipe = GLOBAL.Recipe
-Ingredient = GLOBAL.Ingredient
-TECH = GLOBAL.TECH
-DEPLOYSPACING = GLOBAL.DEPLOYSPACING
-DEPLOYSPACING_RADIUS = GLOBAL.DEPLOYSPACING_RADIUS
-TheSim = GLOBAL.TheSim
+STRINGS = STRINGS
+RECIPETABS = RECIPETABS
+Recipe = Recipe
+Ingredient = Ingredient
+TECH = TECH
+DEPLOYSPACING = DEPLOYSPACING
+DEPLOYSPACING_RADIUS = DEPLOYSPACING_RADIUS
+TheSim = TheSim
 --[[
 AddComponentPostInit("boatphysics",function(self,inst)
     self.sizespeedmultiplier=1
@@ -4089,7 +3922,7 @@ end)
 
 AddSimPostInit(function()
     local WALKABLE_PLATFORM_TAGS={"walkableplatform"}
-    GLOBAL.Map.GetPlatformAtPoint=function(self,pos_x,pos_y, pos_z)
+    Map.GetPlatformAtPoint=function(self,pos_x,pos_y, pos_z)
         if pos_z == nil then
             pos_z = pos_y
             pos_y = 0
@@ -4103,7 +3936,7 @@ AddSimPostInit(function()
         end
         return nil
     end
-    GLOBAL.Map.IsPassableAtPointWithPlatformRadiusBias=function(self,x, y, z, allow_water, exclude_boats, platform_radius_bias, ignore_land_overhang)
+    Map.IsPassableAtPointWithPlatformRadiusBias=function(self,x, y, z, allow_water, exclude_boats, platform_radius_bias, ignore_land_overhang)
         local valid_tile = self:IsAboveGroundAtPoint(x, y, z, allow_water) or ((not ignore_land_overhang) and self:IsVisualGroundAtPoint(x,y,z) or false)
         if not allow_water and not valid_tile then
             if not exclude_boats then
@@ -4113,7 +3946,7 @@ AddSimPostInit(function()
 					if v.components.walkableplatform~=nil and v.components.walkableplatform.radius == nil then v.components.walkableplatform.radius = 4 end
                     if walkable_platform~=nil and math.sqrt(v:GetDistanceSqToPoint(x, 0, z))<=(walkable_platform.radius+platform_radius_bias) then
                         local platform_x, platform_y, platform_z = v.Transform:GetWorldPosition()
-                        local distance_sq = GLOBAL.VecUtil_LengthSq(x - platform_x, z - platform_z)
+                        local distance_sq = VecUtil_LengthSq(x - platform_x, z - platform_z)
                         return distance_sq <= walkable_platform.radius * walkable_platform.radius
                     end
                 end
@@ -4122,7 +3955,7 @@ AddSimPostInit(function()
         end
         return valid_tile
     end
-    GLOBAL.Map.CanDeployAtPointInWater=function(self,pt, inst, mouseover, data)
+    Map.CanDeployAtPointInWater=function(self,pt, inst, mouseover, data)
         local tile = self:GetTileAtPoint(pt.x, pt.y, pt.z)
         if tile == GROUND.IMPASSABLE or tile == GROUND.INVALID then
             return false
@@ -4262,11 +4095,11 @@ PLANT_DEFS.radish.weight_data                  = { 361.51, 506.04, .28 }
 PLANT_DEFS.wheat.weight_data                   = { 361.51, 506.04, .28 }
 PLANT_DEFS.turnip.weight_data                  = { 361.51, 506.04, .28 }
 
-PLANT_DEFS.sweet_potato.pictureframeanim       = { anim = "emote_happycheer", time = 12 * GLOBAL.FRAMES }
-PLANT_DEFS.aloe.pictureframeanim               = { anim = "emote_happycheer", time = 12 * GLOBAL.FRAMES }
-PLANT_DEFS.radish.pictureframeanim             = { anim = "emote_happycheer", time = 12 * GLOBAL.FRAMES }
-PLANT_DEFS.wheat.pictureframeanim              = { anim = "emote_happycheer", time = 12 * GLOBAL.FRAMES }
-PLANT_DEFS.turnip.pictureframeanim             = { anim = "emote_happycheer", time = 12 * GLOBAL.FRAMES }
+PLANT_DEFS.sweet_potato.pictureframeanim       = { anim = "emote_happycheer", time = 12 * FRAMES }
+PLANT_DEFS.aloe.pictureframeanim               = { anim = "emote_happycheer", time = 12 * FRAMES }
+PLANT_DEFS.radish.pictureframeanim             = { anim = "emote_happycheer", time = 12 * FRAMES }
+PLANT_DEFS.wheat.pictureframeanim              = { anim = "emote_happycheer", time = 12 * FRAMES }
+PLANT_DEFS.turnip.pictureframeanim             = { anim = "emote_happycheer", time = 12 * FRAMES }
 
 PLANT_DEFS.sweet_potato.prefab                 = "farm_plant_sweet_potato"
 PLANT_DEFS.aloe.prefab                         = "farm_plant_aloe"
@@ -4793,17 +4626,17 @@ AddComponentPostInit("builder", function(self)
 		local recipe = AllRecipes[recname]
 		if recipe then
 			for k, v in pairs(recipe.character_ingredients) do
-				if v.type == GLOBAL.CHARACTER_INGREDIENT.HEALTH then
+				if v.type == CHARACTER_INGREDIENT.HEALTH then
 					--Don't die from crafting!
 					local delta = math.min(math.max(0, self.inst.components.health.currenthealth - 1), v.amount)
 					self.inst:PushEvent("consumehealthcost")
 					self.inst.components.health:DoDelta(-delta, false, "builder", true, nil, true)
-				elseif v.type == GLOBAL.CHARACTER_INGREDIENT.MAX_HEALTH then
+				elseif v.type == CHARACTER_INGREDIENT.MAX_HEALTH then
 					self.inst:PushEvent("consumehealthcost")
 					self.inst.components.health:DeltaPenalty(v.amount)
-				elseif v.type == GLOBAL.CHARACTER_INGREDIENT.SANITY then
+				elseif v.type == CHARACTER_INGREDIENT.SANITY then
 					self.inst.components.sanity:DoDelta(-v.amount)
-				elseif v.type == GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY then
+				elseif v.type == CHARACTER_INGREDIENT.MAX_SANITY then
 					--[[
                     Because we don't have any maxsanity restoring items we want to be more careful
                     with how we remove max sanity. Because of that, this is not handled here.
@@ -5067,21 +4900,21 @@ AddComponentPostInit("builder", function(self)
 
 	function self:MakeRecipeAtPoint(recipe, pt, rot, skin)
 		----------------------------------------------------------
-		if recipe.product == "sprinkler1" and (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.FARMING_SOIL) then
+		if recipe.product == "sprinkler1" and (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.FARMING_SOIL) then
 			return
 				self:MakeRecipe(recipe, pt, rot, skin)
 		end
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_SANDY) then return false end                          --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_ROCKY) then return false end                          --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BEACH and GLOBAL.TheWorld:HasTag("cave")) then return false end  --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.MAGMAFIELD and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.PAINTED and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BATTLEGROUND and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.PEBBLEBEACH and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_SANDY) then return false end                   --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_ROCKY) then return false end                   --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BEACH and TheWorld:HasTag("cave")) then return false end  --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) then return false end --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.PAINTED and TheWorld:HasTag("cave")) then return false end --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BATTLEGROUND and TheWorld:HasTag("cave")) then return false end --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) then return false end --adicionado por vagner
 		if recipe.placer ~= nil and
 			--        self:KnowsRecipe(recipe.name) and
 			self:IsBuildBuffered(recipe.name) and
-			GLOBAL.TheWorld.Map:CanDeployRecipeAtPoint(pt, recipe, rot) then
+			TheWorld.Map:CanDeployRecipeAtPoint(pt, recipe, rot) then
 			self:MakeRecipe(recipe, pt, rot, skin)
 		end
 	end
@@ -5170,16 +5003,16 @@ AddClassPostConstruct("components/builder_replica", function(self)
 	end
 
 	function self:CanBuildAtPoint(pt, recipe, rot)
-		if recipe.product == "sprinkler1" and (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.FARMING_SOIL) then return true end
+		if recipe.product == "sprinkler1" and (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.FARMING_SOIL) then return true end
 
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_SANDY) then return false end                          --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_ROCKY) then return false end                          --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BEACH and GLOBAL.TheWorld:HasTag("cave")) then return false end  --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.MAGMAFIELD and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.PAINTED and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BATTLEGROUND and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
-		if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.PEBBLEBEACH and GLOBAL.TheWorld:HasTag("cave")) then return false end --adicionado por vagner
-		return GLOBAL.TheWorld.Map:CanDeployRecipeAtPoint(pt, recipe, rot)
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_SANDY) then return false end                   --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.UNDERWATER_ROCKY) then return false end                   --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BEACH and TheWorld:HasTag("cave")) then return false end  --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) then return false end --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.PAINTED and TheWorld:HasTag("cave")) then return false end --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.BATTLEGROUND and TheWorld:HasTag("cave")) then return false end --adicionado por vagner
+		if (TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) then return false end --adicionado por vagner
+		return TheWorld.Map:CanDeployRecipeAtPoint(pt, recipe, rot)
 	end
 end)
 
@@ -5326,7 +5159,7 @@ AddClassPostConstruct("components/playercontroller", function(self)
 				GetClosestInstWithTag("barcoapto", self.inst, 0.5)
 		end
 
-		if platform == nil and (platform_for_velocity_calculation == nil or GLOBAL.TheWorld.Map:IsOceanAtPoint(target_x, 0, target_z)) then
+		if platform == nil and (platform_for_velocity_calculation == nil or TheWorld.Map:IsOceanAtPoint(target_x, 0, target_z)) then
 			return
 		end
 
@@ -5386,7 +5219,7 @@ AddClassPostConstruct("components/embarker", function(self)
 			local embarkable_radius = 0.1
 			local alvo = GetClosestInstWithTag("barcoapto", self.inst, 6) or self.inst.Transform:GetWorldPosition()
 			local embarkable_x, embarkable_y, embarkable_z = alvo.Transform:GetWorldPosition()
-			local embark_x, embark_z = GLOBAL.VecUtil_Normalize(embarker_x - embarkable_x, embarker_z - embarkable_z)
+			local embark_x, embark_z = VecUtil_Normalize(embarker_x - embarkable_x, embarker_z - embarkable_z)
 			return embarkable_x + embark_x * embarkable_radius, embarkable_z + embark_z * embarkable_radius
 		else
 			local x, z = (self.disembark_x or self.last_embark_x), (self.disembark_z or self.last_embark_z)
@@ -5481,20 +5314,20 @@ AddCreatureScanDataDefinition("thunderbird", "taser_ham", 2)
 --[[
 if GetModConfigData("kindofworld") == 5 then
 function HamletcloudPostInit()
-if not TheNet:IsDedicated() and GLOBAL.TheWorld and GLOBAL.TheWorld.WaveComponent then
-GLOBAL.TheWorld.Map:SetUndergroundFadeHeight(0)
-GLOBAL.TheWorld.Map:SetTransparentOcean(false)
-GLOBAL.TheWorld.Map:AlwaysDrawWaves(true)
-GLOBAL.TheWorld.WaveComponent:SetWaveTexture(GLOBAL.resolvefilepath("images/fog_cloud.tex"))	
+if not TheNet:IsDedicated() and TheWorld and TheWorld.WaveComponent then
+TheWorld.Map:SetUndergroundFadeHeight(0)
+TheWorld.Map:SetTransparentOcean(false)
+TheWorld.Map:AlwaysDrawWaves(true)
+TheWorld.WaveComponent:SetWaveTexture(resolvefilepath("images/fog_cloud.tex"))	
 local scale = 1
-local map_width, map_height = GLOBAL.TheWorld.Map:GetSize()
-GLOBAL.TheWorld.WaveComponent:SetWaveParams(13.5, 2.5, -1)
-GLOBAL.TheWorld.WaveComponent:Init(map_width, map_height)
-GLOBAL.TheWorld.WaveComponent:SetWaveSize(80 * scale, 3.5 * scale)
-GLOBAL.TheWorld.WaveComponent:SetWaveMotion(3, 0.5, 0.25)
+local map_width, map_height = TheWorld.Map:GetSize()
+TheWorld.WaveComponent:SetWaveParams(13.5, 2.5, -1)
+TheWorld.WaveComponent:Init(map_width, map_height)
+TheWorld.WaveComponent:SetWaveSize(80 * scale, 3.5 * scale)
+TheWorld.WaveComponent:SetWaveMotion(3, 0.5, 0.25)
 
-if GLOBAL.TheWorld.ismastersim then
-GLOBAL.TheWorld:AddComponent("cloudpuffmanager")
+if TheWorld.ismastersim then
+TheWorld:AddComponent("cloudpuffmanager")
 end
 
 end
@@ -5508,11 +5341,11 @@ end
 
 if GetModConfigData("kindofworld") == 5 then
 	function HamletcloudPostInit()
-		local World = GLOBAL.TheWorld
+		local World = TheWorld
 		if not TheNet:IsDedicated() and World and World.WaveComponent then
 			World.Map:SetUndergroundFadeHeight(0)
 			World.Map:AlwaysDrawWaves(true)
-			World.WaveComponent:SetWaveTexture(GLOBAL.resolvefilepath("images/fog_cloud.tex"))
+			World.WaveComponent:SetWaveTexture(resolvefilepath("images/fog_cloud.tex"))
 			local scale = 1
 			local map_width, map_height = World.Map:GetSize()
 			World.WaveComponent:SetWaveParams(13.5, 2.5, -1)
@@ -5579,7 +5412,6 @@ end
 modimport "tileadder.lua"
 modimport("scripts/ham_fx.lua")
 
-modimport("scripts/actions.lua")
 
 ---------------------
 modimport("scripts/cooking_tropical")
@@ -5589,17 +5421,8 @@ modimport("scripts/standardcomponents")
 
 
 Waffles1.GetPath(_G, "STRINGS/ACTIONS/JUMPIN").USE = Waffles1.ReturnChild(STRINGS, "ACTIONS/USEITEM") or "Use"
-
 Waffles1.GetPath(_G, "ACTIONS/JUMPIN").strfn = function(act)
 	return act.doer ~= nil and act.doer:HasTag("playerghost") and "HAUNT"
 		or act.target ~= nil and act.target:HasTag("stairs") and "USE"
 		or nil
-end
-
-local Oldstrfnjumpin = ACTIONS.JUMPIN.strfn
-GLOBAL.ACTIONS.JUMPIN.strfn = function(act)
-	if act.target ~= nil and act.target:HasTag("hamletteleport") then
-		return "HAMLET"
-	end
-	return Oldstrfnjumpin(act)
 end

@@ -395,12 +395,33 @@ end
 
 local growth_stages =
 {
-    { name = "short",  time = function(inst) return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[1].base,
-            TUNING.DECIDUOUS_GROW_TIME[1].random) end,                                                                                                   fn = SetShort,  growfn = GrowShort },
-    { name = "normal", time = function(inst) return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[2].base,
-            TUNING.DECIDUOUS_GROW_TIME[2].random) end,                                                                                                   fn = SetNormal, growfn = GrowNormal },
-    { name = "tall",   time = function(inst) return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[3].base,
-            TUNING.DECIDUOUS_GROW_TIME[3].random) end,                                                                                                   fn = SetTall,   growfn = GrowTall },
+    {
+        name = "short",
+        time = function(inst)
+            return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[1].base,
+                TUNING.DECIDUOUS_GROW_TIME[1].random)
+        end,
+        fn = SetShort,
+        growfn = GrowShort
+    },
+    {
+        name = "normal",
+        time = function(inst)
+            return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[2].base,
+                TUNING.DECIDUOUS_GROW_TIME[2].random)
+        end,
+        fn = SetNormal,
+        growfn = GrowNormal
+    },
+    {
+        name = "tall",
+        time = function(inst)
+            return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[3].base,
+                TUNING.DECIDUOUS_GROW_TIME[3].random)
+        end,
+        fn = SetTall,
+        growfn = GrowTall
+    },
     --{ name = "old", time = function(inst) return GetRandomWithVariance(TUNING.DECIDUOUS_GROW_TIME[4].base, TUNING.DECIDUOUS_GROW_TIME[4].random) end, fn = SetOld, growfn = GrowOld },
 }
 
@@ -501,7 +522,7 @@ local FINDTREETOTRANSFORM_MUST_TAGS = { "birchnut" }
 local FINDTREETOTRANSFORM_CANT_TAGS = { "fire", "stump", "burnt", "monster", "FX", "NOCLICK", "DECOR", "INLIMBO" }
 local function chop_down_tree(inst, chopper)
     local days_survived = chopper.components.age ~= nil and chopper.components.age:GetAgeInDays() or
-    TheWorld.state.cycles
+        TheWorld.state.cycles
     if not inst.monster and inst.leaf_state ~= "barren" and inst.components.growable ~= nil and inst.components.growable.stage == 3 and days_survived >= TUNING.DECID_MONSTER_MIN_DAY then
         --print("Chance of making a monster")
         --winter should always be 0 (because barren trees can't become monsters), but is included in tuning values for consistency
@@ -698,7 +719,7 @@ end
 local function OnAcornTask(inst)
     inst.acorntask = nil
     inst.components.lootdropper:DropLoot(math.random() < .5 and inst:GetPosition() + TheCamera:GetRightVec() or
-    inst:GetPosition() - TheCamera:GetRightVec())
+        inst:GetPosition() - TheCamera:GetRightVec())
 end
 
 local function tree_burnt(inst)

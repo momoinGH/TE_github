@@ -12,14 +12,14 @@ local function IsMinigameItem(inst)
 end
 
 local function onattackfn(inst)
-inst:DoTaskInTime(6*FRAMES, function(inst)	
-local prop = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-if prop ~= nil and not inst.components.health:IsDead() then
-	inst.sg:GoToState("attackevent") 
-	else
-	inst.sg:GoToState("attack")
-	end
-end)	
+    inst:DoTaskInTime(6 * FRAMES, function(inst)
+        local prop = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+        if prop ~= nil and not inst.components.health:IsDead() then
+            inst.sg:GoToState("attackevent")
+        else
+            inst.sg:GoToState("attack")
+        end
+    end)
 end
 
 local actionhandlers =
@@ -44,10 +44,10 @@ local events =
     CommonHandlers.OnAttack(),
     CommonHandlers.OnAttacked(true),
     CommonHandlers.OnDeath(),
-	CommonHandlers.OnHop(),
-	CommonHandlers.OnSink(),
-	EventHandler("doattack", onattackfn),
-	
+    CommonHandlers.OnHop(),
+    CommonHandlers.OnSink(),
+    EventHandler("doattack", onattackfn),
+
     EventHandler("transformnormal", function(inst)
         if not inst.components.health:IsDead() then
             inst.sg:GoToState("transformNormal")
@@ -58,8 +58,8 @@ local events =
             inst.sg:GoToState("chop", data.target)
         end
     end),
-	
-EventHandler("locomote", function(inst)
+
+    EventHandler("locomote", function(inst)
         local can_run = true
         local can_walk = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) == nil
 
@@ -82,9 +82,9 @@ EventHandler("locomote", function(inst)
     end),
     EventHandler("attacked", function(inst, data)
         if not inst.components.health:IsDead() and
-            (   inst.sg:HasStateTag("frozen") or
-                (   (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("caninterrupt")) and
-                    (   data ~= nil and
+            (inst.sg:HasStateTag("frozen") or
+                ((not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("caninterrupt")) and
+                    (data ~= nil and
                         data.weapon ~= nil and
                         data.weapon:HasTag("propweapon") or
                         (inst.sg.mem.last_hit_time or 0) + TUNING.PIG_ELITE_HIT_RECOVERY < GetTime()
@@ -94,19 +94,19 @@ EventHandler("locomote", function(inst)
             inst.sg:GoToState("hit")
         end
     end),
-	
+
     EventHandler("knockback", function(inst, data)
         if not inst.components.health:IsDead() then
             inst.sg:GoToState("knockback", data)
         end
     end),
-	
+
     EventHandler("pickprop", function(inst, data)
         if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
             inst.sg:GoToState("pickprop", data.prop)
         end
     end),
-	
+
     EventHandler("diveitem", function(inst, data)
         if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) and data.item ~= nil and data.item:IsValid() and not data.item:IsInLimbo() and inst:IsNear(data.item, GOLD_DIVE_RANGE) then
             if not inst.sg:HasStateTag("nodive") then
@@ -122,7 +122,7 @@ EventHandler("locomote", function(inst)
         if inst.sg:HasStateTag("idle") and not inst.components.health:IsDead() then
             inst.sg:GoToState("endpose_pre")
         end
-    end),	
+    end),
 }
 
 
@@ -163,7 +163,7 @@ end
 
 local states =
 {
-    State{
+    State {
         name = "funnyidle",
         tags = { "idle" },
 
@@ -195,7 +195,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "run_start",
         tags = { "moving", "running", "canrotate" },
 
@@ -214,7 +214,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "run",
         tags = { "moving", "running", "canrotate" },
 
@@ -261,7 +261,7 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "run_stop",
         tags = { "idle" },
 
@@ -288,24 +288,24 @@ local states =
                 end
             end),
         },
-    },	
-	
+    },
 
-    State{
+
+    State {
         name = "caifora",
         tags = { "endpose", "busy", "nofreeze", "nosleep", "noattack", "jumping" },
         --jumping tag to disable brain activity
 
         onenter = function(inst)
-			inst.components.locomotor:Stop()
+            inst.components.locomotor:Stop()
             inst.components.inventory:DropItem(inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS))
-            inst.AnimState:PlayAnimation("idletopose"..inst.sg.mem.variation)
+            inst.AnimState:PlayAnimation("idletopose" .. inst.sg.mem.variation)
             inst.sg:SetTimeout(
                 (inst.sg.mem.variation == "1" and 19 * FRAMES) or
                 (inst.sg.mem.variation == "2" and 18 * FRAMES) or
                 (inst.sg.mem.variation == "3" and 14 * FRAMES) or
                 15 * FRAMES)
-            inst.Physics:SetMass(POSING_MASS)				
+            inst.Physics:SetMass(POSING_MASS)
             inst.AnimState:AddOverrideBuild("player_superjump")
             inst.AnimState:PushAnimation("superjump_pre")
             inst.AnimState:PushAnimation("superjump", false)
@@ -330,12 +330,12 @@ local states =
         },
 
         onexit = function(inst)
---            local x, y, z = inst.Transform:GetWorldPosition()
---            ToggleOnAllObjectCollisionsAt(inst, x, z)
+            --            local x, y, z = inst.Transform:GetWorldPosition()
+            --            ToggleOnAllObjectCollisionsAt(inst, x, z)
         end,
     },
-	
-    State{
+
+    State {
         name = "death",
         tags = { "busy" },
 
@@ -348,7 +348,7 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "abandon",
         tags = { "busy" },
 
@@ -368,7 +368,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "transformNormal",
         tags = { "transform", "busy", "sleeping" },
 
@@ -403,7 +403,7 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "attack",
         tags = { "attack", "busy" },
 
@@ -432,7 +432,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "chop",
         tags = { "chopping" },
 
@@ -456,7 +456,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "eat",
         tags = { "busy" },
 
@@ -480,7 +480,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "hit",
         tags = { "busy" },
 
@@ -501,7 +501,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "dropitem",
         tags = { "busy" },
 
@@ -524,21 +524,21 @@ local states =
             end),
         },
     },
-	
-    State{
+
+    State {
         name = "appear_start",
         tags = { "busy", "nofreeze", "nosleep", "noattack", "jumping" },
 
         onenter = function(inst, data)
             inst.AnimState:PlayAnimation(inst.sg.mem.variation == "3" and "side_lob" or "front_lob")
-            inst.AnimState:PushAnimation("pose"..inst.sg.mem.variation.."_pre", false)
+            inst.AnimState:PushAnimation("pose" .. inst.sg.mem.variation .. "_pre", false)
             inst.SoundEmitter:PlaySound("dontstarve/movement/twirl_LP", "twirl")
-			
-			local x, y, z = inst.Transform:GetWorldPosition()
-			local dest = Vector3(x + math.random(-3,3), 0, z + math.random(-3,3))
-			local strtbl = "PIG_ELITE_INTRO"
-			local strid = 1
-			
+
+            local x, y, z = inst.Transform:GetWorldPosition()
+            local dest = Vector3(x + math.random(-3, 3), 0, z + math.random(-3, 3))
+            local strtbl = "PIG_ELITE_INTRO"
+            local strid = 1
+
             if data ~= nil then
                 if dest ~= nil then
                     ToggleOffAllObjectCollisions(inst)
@@ -567,8 +567,8 @@ local states =
                 if inst.sg.mem.isobstaclepassthrough then
                     inst.Physics:ClearMotorVelOverride()
                     inst.Physics:Stop()
---                    local x, y, z = inst.Transform:GetWorldPosition()
---                    ToggleOnAllObjectCollisionsAt(inst, x, z)
+                    --                    local x, y, z = inst.Transform:GetWorldPosition()
+                    --                    ToggleOnAllObjectCollisionsAt(inst, x, z)
                 end
                 inst.sg:RemoveStateTag("jumping")
             end),
@@ -596,8 +596,8 @@ local states =
             if inst.sg.mem.isobstaclepassthrough then
                 inst.Physics:ClearMotorVelOverride()
                 inst.Physics:Stop()
---                local x, y, z = inst.Transform:GetWorldPosition()
---                ToggleOnAllObjectCollisionsAt(inst, x, z)
+                --                local x, y, z = inst.Transform:GetWorldPosition()
+                --                ToggleOnAllObjectCollisionsAt(inst, x, z)
             end
             inst.SoundEmitter:KillSound("twirl")
             if not inst.sg.statemem.posing then
@@ -606,14 +606,14 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "appear",
         tags = { "intropose", "busy", "nofreeze", "nosleep", "noattack", "jumping" },
         --jumping tag to disable brain activity
 
         onenter = function(inst)
             inst.components.locomotor:Stop()
-            inst.AnimState:PlayAnimation("pose"..inst.sg.mem.variation.."_loop", true)
+            inst.AnimState:PlayAnimation("pose" .. inst.sg.mem.variation .. "_loop", true)
             inst.Physics:SetMass(POSING_MASS)
         end,
 
@@ -636,10 +636,10 @@ local states =
         onexit = function(inst)
             inst.Physics:SetMass(DEFAULT_MASS)
         end,
-    },	
+    },
 
 
-    State{
+    State {
         name = "knockback",
         tags = { "knockback", "busy", "nosleep", "nofreeze", "jumping" },
 
@@ -656,7 +656,10 @@ local states =
                         pos.y = TUNING.KNOCKBACK_DROP_ITEM_HEIGHT_HIGH
                         local dropped = inst.components.inventory:DropItem(item, true, true, pos)
                         if dropped ~= nil then
-                            dropped:PushEvent("knockbackdropped", { owner = inst, knocker = data.knocker, delayinteraction = TUNING.KNOCKBACK_DELAY_INTERACTION_HIGH, delayplayerinteraction = TUNING.KNOCKBACK_DELAY_PLAYER_INTERACTION_HIGH })
+                            dropped:PushEvent("knockbackdropped",
+                                { owner = inst, knocker = data.knocker, delayinteraction = TUNING
+                                .KNOCKBACK_DELAY_INTERACTION_HIGH, delayplayerinteraction = TUNING
+                                .KNOCKBACK_DELAY_PLAYER_INTERACTION_HIGH })
                         end
                     end
                     if item == nil or not item:HasTag("propweapon") then
@@ -666,7 +669,10 @@ local states =
                             pos.y = TUNING.KNOCKBACK_DROP_ITEM_HEIGHT_LOW
                             item = inst.components.inventory:DropItem(item, false, true, pos)
                             if item ~= nil then
-                                item:PushEvent("knockbackdropped", { owner = inst, knocker = data.knocker, delayinteraction = TUNING.KNOCKBACK_DELAY_INTERACTION_LOW, delayplayerinteraction = TUNING.KNOCKBACK_DELAY_PLAYER_INTERACTION_LOW })
+                                item:PushEvent("knockbackdropped",
+                                    { owner = inst, knocker = data.knocker, delayinteraction = TUNING
+                                    .KNOCKBACK_DELAY_INTERACTION_LOW, delayplayerinteraction = TUNING
+                                    .KNOCKBACK_DELAY_PLAYER_INTERACTION_LOW })
                             end
                         end
                     end
@@ -676,7 +682,8 @@ local states =
                     local distsq = inst:GetDistanceSqToPoint(x, y, z)
                     local rangesq = data.radius * data.radius
                     local rot = inst.Transform:GetRotation()
-                    local rot1 = distsq > 0 and inst:GetAngleToPoint(x, y, z) or data.knocker.Transform:GetRotation() + 180
+                    local rot1 = distsq > 0 and inst:GetAngleToPoint(x, y, z) or
+                    data.knocker.Transform:GetRotation() + 180
                     local drot = math.abs(rot - rot1)
                     while drot > 180 do
                         drot = math.abs(drot - 360)
@@ -701,7 +708,8 @@ local states =
                 inst.sg.statemem.speed = inst.sg.statemem.speed + inst.sg.statemem.dspeed
                 if inst.sg.statemem.speed < 0 then
                     inst.sg.statemem.dspeed = inst.sg.statemem.dspeed + .075
-                    inst.Physics:SetMotorVel(inst.sg.statemem.reverse and -inst.sg.statemem.speed or inst.sg.statemem.speed, 0, 0)
+                    inst.Physics:SetMotorVel(
+                    inst.sg.statemem.reverse and -inst.sg.statemem.speed or inst.sg.statemem.speed, 0, 0)
                 else
                     inst.sg.statemem.speed = nil
                     inst.sg.statemem.dspeed = nil
@@ -736,9 +744,9 @@ local states =
                 inst.Physics:Stop()
             end
         end,
-    },	
-	
-    State{
+    },
+
+    State {
         name = "attackevent",
         tags = { "propattack", "attack", "busy" },
 
@@ -787,9 +795,9 @@ local states =
                 inst.sg.statemem.smashed.prop:PushEvent("propsmashed", inst.sg.statemem.smashed.pos)
             end
         end,
-    },	
+    },
 
-    State{
+    State {
         name = "pickprop",
         tags = { "busy", "caninterrupt" },
 
@@ -831,9 +839,9 @@ local states =
             end),
         },
     },
-	
-	
-    State{
+
+
+    State {
         name = "dive",
         tags = { "busy", "jumping", "nosleep", "nofreeze" },
 
@@ -877,7 +885,7 @@ local states =
                     inst.Physics:ClearMotorVelOverride()
                     inst.Physics:Stop()
                     inst.Physics:Teleport(inst.Transform:GetWorldPosition())
---                    ToggleOnCharacterCollisions(inst)
+                    --                    ToggleOnCharacterCollisions(inst)
                     inst.sg.statemem.speedmult = false
                 end
             end
@@ -929,45 +937,45 @@ local states =
                 inst.Physics:Stop()
                 inst.Physics:Teleport(inst.Transform:GetWorldPosition())
             end
---            ToggleOnCharacterCollisions(inst)
+            --            ToggleOnCharacterCollisions(inst)
             inst.SoundEmitter:KillSound("slide")
         end,
-    },	
-}	
-	
+    },
+}
+
 
 CommonStates.AddWalkStates(states,
-{
-    walktimeline =
     {
-        TimeEvent(0, PlayFootstep),
-        TimeEvent(12 * FRAMES, PlayFootstep),
-    },
-})
+        walktimeline =
+        {
+            TimeEvent(0, PlayFootstep),
+            TimeEvent(12 * FRAMES, PlayFootstep),
+        },
+    })
 
 CommonStates.AddRunStates(states,
-{
-    runtimeline =
     {
-        TimeEvent(0, PlayFootstep),
-        TimeEvent(10 * FRAMES, PlayFootstep),
-    },
-})
+        runtimeline =
+        {
+            TimeEvent(0, PlayFootstep),
+            TimeEvent(10 * FRAMES, PlayFootstep),
+        },
+    })
 
 CommonStates.AddSleepStates(states,
-{
-    sleeptimeline =
     {
-        TimeEvent(35 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/pig/sleep") end),
-    },
-})
+        sleeptimeline =
+        {
+            TimeEvent(35 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/pig/sleep") end),
+        },
+    })
 
-CommonStates.AddIdle(states,"funnyidle")
+CommonStates.AddIdle(states, "funnyidle")
 CommonStates.AddSimpleState(states, "refuse", "pig_reject", { "busy" })
 CommonStates.AddFrozenStates(states)
 CommonStates.AddSimpleActionState(states, "pickup", "pig_pickup", 10 * FRAMES, { "busy" })
 CommonStates.AddSimpleActionState(states, "gohome", "pig_pickup", 4 * FRAMES, { "busy" })
-CommonStates.AddHopStates(states, true, { pre = "boat_jump_pre", loop = "boat_jump_loop", pst = "boat_jump_pst"})
+CommonStates.AddHopStates(states, true, { pre = "boat_jump_pre", loop = "boat_jump_loop", pst = "boat_jump_pst" })
 CommonStates.AddSinkAndWashAshoreStates(states)
 CommonStates.AddIpecacPoopState(states)
 

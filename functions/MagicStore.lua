@@ -21,20 +21,7 @@ if GLOBAL.TheNet:GetIsClient() then AddModRPCHandler("ServerStore", "Purchased",
 if GLOBAL.TheNet:GetIsClient() then AddModRPCHandler("ServerStore", "ShutStore", function() end) end
 
 ----------------------------------------------------------------------------------------------------
---[API]AddAction(id, str, fn)
-----------------------------------------------------------------------------------------------------
-AddAction("STOREOPEN", "Trade", function(act)
-    if act.target.components.store == nil then return false end
 
-    if act.target.components.store:CanOpen(act.doer) then
-        act.target.components.store:OpenStore(act.doer)
-    end
-
-    act.doer._isopening:set(true)
-    act.doer._isopening:set_local(true)
-    act.target.NetEvt_Requested:push()
-    return true
-end)
 AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.STOREOPEN, "doshortaction"))
 AddStategraphActionHandler("wilson_client", GLOBAL.ActionHandler(GLOBAL.ACTIONS.STOREOPEN, "doshortaction"))
 
