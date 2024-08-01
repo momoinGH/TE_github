@@ -8054,5 +8054,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.POI = "..."
 STRINGS.NAMES.SLAW = "Fennel Slaw"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SLAW = "..."
 
+STRINGS.NAMES.TRIDENT_SW = "trident"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRIDENT_SW = "I wonder how old this artifact is?"
 
 modimport("scripts/languages/tropical_modwiki_en2.lua")

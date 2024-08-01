@@ -259,7 +259,7 @@ local miscInventoryItems = {
 	"peach_juice_bottle_green_half", "peach_juice_bottle_green_less", "peach_juice_bottle_green_most", "peach_kabobs",
 	"peach_pit", "peach_pop", "peach_smoothie", "pearl", "pearl_amulet", "pigkingstaff", "pig_figure", "placeholder",
 	"potion_bottle_green", "rainforesttree_cone", "sand", "seagrass_chunk", "sea_cucumber", "sea_petals", "shadyglasses",
-	"shrimp_tail", "snorkel", "sponge_piece", "sugarwood_seed", "tikimask", "trident", "usedfan", "volcanoinventory",
+	"shrimp_tail", "snorkel", "sponge_piece", "sugarwood_seed", "tikimask", "usedfan", "volcanoinventory",
 	"windyfan", "windyfan1", "windyturf",
 } -- unconfirmed
 for _, item in ipairs(miscInventoryItems) do

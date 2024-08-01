@@ -265,6 +265,7 @@ PrefabFiles =
 
 	"walls_tropical",
 	"pollen_item",
+	"trident_sw",
 }
 
 Assets =
