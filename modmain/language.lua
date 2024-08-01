@@ -2,7 +2,7 @@ local language = string.lower(GetModConfigData("language"))
 
 --英文版本兜底，不使用的台词不应该添加
 modimport("scripts/languages/tropical_strings_en")
--- modimport("scripts/languages/tropical_strings_" .. language) --TODO
+modimport("scripts/languages/tropical_strings_" .. language) --TODO
 modimport("scripts/languages/tropical_stringscreeps")
 modimport("scripts/languages/tropical_wurt_quotes")
 
