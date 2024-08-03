@@ -60,7 +60,7 @@ local function fn(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(UW_TUNING.CLAM_HEALTH)
+	inst.components.health:SetMaxHealth(TUNING.CLAM_HEALTH)
 
 	inst:AddComponent("combat")
 

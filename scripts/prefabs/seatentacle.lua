@@ -25,7 +25,7 @@ local function retargetfn(inst)
     return FindEntity(inst, TUNING.TENTACLE_ATTACK_DIST, function(guy)
         if guy.components.combat and guy.components.health and not guy.components.health:IsDead() then
             return (guy.components.combat.target == inst or guy:HasTag("character") or guy:HasTag("monster") or guy:HasTag("animal")) and
-            not guy:HasTag("prey") and not (guy.prefab == inst.prefab)
+                not guy:HasTag("prey") and not (guy.prefab == inst.prefab)
         end
     end)
 end
@@ -57,7 +57,7 @@ end
 local function OnHitOther(inst, data)
     local target = data.target
 
-    if target and target.components.inventory and math.random() <= UW_TUNING.SEATENTACLE_THIEF_CHANCE then
+    if target and target.components.inventory and math.random() <= TUNING.SEATENTACLE_THIEF_CHANCE then
         local equipped_items = {}
 
         for k, v in pairs(target.components.inventory.equipslots) do

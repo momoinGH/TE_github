@@ -28,7 +28,6 @@ local function fn(Sim)
 
     inst:AddTag("antlion_sinkhole_blocker")
     inst:AddTag("entrada_submersa")
-    inst:AddTag("teleportapracaverna")
 
     inst.entity:SetPristine()
 
@@ -79,7 +78,6 @@ local function fn1(Sim)
 
     inst:AddTag("antlion_sinkhole_blocker")
     inst:AddTag("entrada_submersa")
-    inst:AddTag("teleportapracaverna")
 
     inst.entity:SetPristine()
 
@@ -130,7 +128,6 @@ local function fn2(Sim)
 
     inst:AddTag("antlion_sinkhole_blocker")
     inst:AddTag("entrada_submersa")
-    inst:AddTag("teleportapracaverna")
 
     inst.entity:SetPristine()
 

@@ -1,10 +1,10 @@
-local a = {
+local assets = {
     Asset("ANIM", "anim/blowdart_lava.zip"),
     Asset("ANIM", "anim/swap_blowdart_lava.zip") }
 
 local b = { Asset("ANIM", "anim/lavaarena_blowdart_attacks.zip") }
 
-local c = { "forgedarts_projectile", "forgedarts_projectile_alt", "reticulelongmulti", "reticulelongmultiping" }
+local prefabs = { "forgedarts_projectile", "forgedarts_projectile_alt", "reticulelongmulti", "reticulelongmultiping" }
 
 local d = { "weaponsparks_piercing" }
 
@@ -55,7 +55,7 @@ local function B(g, C, t)
 end;
 
 
-local function H()
+local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -92,7 +92,15 @@ local function H()
 
     inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then return inst end;
+    if not TheWorld.ismastersim then
+        return inst
+    end;
+
+    inst:AddComponent("finiteuses")
+    inst.components.finiteuses:SetMaxUses(800)
+    inst.components.finiteuses:SetUses(800)
+    inst.components.finiteuses:SetOnFinished(inst.Remove)
+    inst.components.finiteuses:SetConsumption(ACTIONS.CASTAOE, 800 * 0.5 / 100)
 
     inst:AddComponent("aoespell")
     inst.components.aoespell:SetSpellFn(B)
@@ -107,15 +115,14 @@ local function H()
     inst.components.inventoryitem.imagename = "blowdart_lava"
 
     inst:AddComponent("recarregavel")
-    inst.components.recarregavel:SetRechargeTime(TUNING.FORGE_ITEM_PACK.TFWP_LAVA_DART.COOLDOWN)
+    inst.components.recarregavel:SetRechargeTime(18)
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.FORGE_ITEM_PACK.TFWP_LAVA_DART.DAMAGE)
+    inst.components.weapon:SetDamage(30)
     inst.components.weapon:SetRange(10, 20)
     inst.components.weapon:SetProjectile("forgedarts_projectile")
     inst.components.weapon:SetDamageType(DAMAGETYPES.PHYSICAL)
-    inst.components.weapon:SetAltAttack(TUNING.FORGE_ITEM_PACK.TFWP_LAVA_DART.FORGE_ITEM_PACKDARTS, { 10, 20 }, nil,
-        DAMAGETYPES.PHYSICAL)
+    inst.components.weapon:SetAltAttack(20, { 10, 20 }, nil, DAMAGETYPES.PHYSICAL)
 
     return inst
 end;
@@ -197,7 +204,7 @@ end;
 local function T() return Q(false) end;
 local function U() return Q(true) end;
 return
-    CustomPrefab("tfwp_lava_dart", H, a, c, nil, "images/inventoryimages.xml", "blowdart_lava.tex",
+    CustomPrefab("tfwp_lava_dart", fn, assets, prefabs, nil, "images/inventoryimages.xml", "blowdart_lava.tex",
         TUNING.FORGE_ITEM_PACK.TFWP_LAVA_DART, "swap_blowdart_lava", "common_hand"),
     Prefab("forgedarts_projectile", T, b, d),
     Prefab("forgedarts_projectile_alt", U, b, d)

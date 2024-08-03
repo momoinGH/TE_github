@@ -96,7 +96,7 @@ end
 
 local function oneaten(inst, eater)
     if eater and eater.components.oxygen then
-        --		eater.components.oxygen:DoDelta(UW_TUNING.BUBBLE_OXYGEN_AMOUNT)
+        --		eater.components.oxygen:DoDelta(TUNING.BUBBLE_OXYGEN_AMOUNT)
         eater:AddTag("respire")
     end
 end

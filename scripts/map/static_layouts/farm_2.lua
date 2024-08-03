@@ -745,7 +745,7 @@ return {
         },
         {
           name = "",
-          type = "saplingnova",
+          type = "sapling",
           shape = "rectangle",
           x = 304,
           y = 223,
@@ -756,7 +756,7 @@ return {
         },
         {
           name = "",
-          type = "saplingnova",
+          type = "sapling",
           shape = "rectangle",
           x = 240,
           y = 223,
@@ -767,7 +767,7 @@ return {
         },
         {
           name = "",
-          type = "saplingnova",
+          type = "sapling",
           shape = "rectangle",
           x = 80,
           y = 224,
@@ -778,7 +778,7 @@ return {
         },
         {
           name = "",
-          type = "saplingnova",
+          type = "sapling",
           shape = "rectangle",
           x = 208,
           y = 223,
@@ -789,7 +789,7 @@ return {
         },
         {
           name = "",
-          type = "saplingnova",
+          type = "sapling",
           shape = "rectangle",
           x = 272,
           y = 223,
@@ -800,7 +800,7 @@ return {
         },
         {
           name = "",
-          type = "saplingnova",
+          type = "sapling",
           shape = "rectangle",
           x = 175,
           y = 224,
@@ -811,7 +811,7 @@ return {
         },
         {
           name = "",
-          type = "saplingnova",
+          type = "sapling",
           shape = "rectangle",
           x = 143,
           y = 223,
@@ -822,7 +822,7 @@ return {
         },
         {
           name = "",
-          type = "saplingnova",
+          type = "sapling",
           shape = "rectangle",
           x = 112,
           y = 223,

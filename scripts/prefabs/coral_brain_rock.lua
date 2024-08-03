@@ -177,9 +177,11 @@ local function fn()
 	inst.AnimState:SetBank("brain_coral_rock")
 	inst.AnimState:SetBuild("brain_coral_rock")
 	inst.AnimState:PlayAnimation("idle_full", true)
+
 	inst:AddTag("mudacamada")
 	inst:AddTag("aquatic")
 	inst:AddTag("ignorewalkableplatforms")
+	inst:AddTag("quebraonda")
 
 	inst.entity:SetPristine()
 

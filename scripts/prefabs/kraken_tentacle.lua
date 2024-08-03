@@ -48,6 +48,7 @@ local function fn()
     inst:AddTag("nowaves")
     inst:AddTag("epic")
     inst:AddTag("noteleport")
+    inst:AddTag("quebraonda")
 
     if not TheWorld.ismastersim then
         return inst

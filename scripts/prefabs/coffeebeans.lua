@@ -1,4 +1,3 @@
-require "tuning"
 
 local function MakeVegStats(seedweight, hunger, health, perish_time, sanity, cooked_hunger, cooked_health,
                             cooked_perish_time, cooked_sanity)

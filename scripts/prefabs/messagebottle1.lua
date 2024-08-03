@@ -4,113 +4,53 @@ local assets =
 	Asset("MINIMAP_IMAGE", "messageBottle"),
 }
 
-local function onunwrapped(inst, pos, doer)
-	local davez = nil
+
+-- TODO 看看能不能优化掉这个文件
+
+local function getrevealtargetpos(inst, doer)
+    local davez = nil
+	local map = TheWorld.Map
 	local x, y, z
 	for k, v in pairs(Ents) do
-		if v.prefab == "kraken" and v.revelado == nil then
+		if (v.prefab == "kraken" and v.revelado == nil)
+			or (v.prefab == "octopusking" and v.revelado == nil)
+		then
 			v.revelado = true
 			davez = v
+			break
 		end
 	end
-	if davez and davez.prefab == "kraken" then
+	if davez then
 		x, y, z = davez.Transform:GetWorldPosition()
-		x = math.floor(x)
-		z = math.floor(z)
-		doer:DoTaskInTime(0, function()
-			doer.player_classified.MapExplorer:RevealArea(x, 0, z)
-			doer.components.inventory:GiveItem(SpawnPrefab("messagebottleempty1"))
-		end)
-
-		if doer.player_classified.revealtreasure then
-			local val = (x + 16384) * 65536 + (z + 16384)
-			doer.player_classified.revealtreasure:set_local(val)
-			doer.player_classified.revealtreasure:set(val)
-		end
-		print(davez)
-		print(x)
-		print(z)
-		inst:Remove()
-		return
-	end
-
-	for k, v in pairs(Ents) do
-		if v.prefab == "octopusking" and v.revelado == nil then
-			v.revelado = true
-			davez = v
-		end
-	end
-	if davez and davez.prefab == "octopusking" then
-		x, y, z = davez.Transform:GetWorldPosition()
-		x = math.floor(x)
-		z = math.floor(z)
-
-		doer:DoTaskInTime(0, function()
-			doer.player_classified.MapExplorer:RevealArea(x, 0, z)
-			doer.components.inventory:GiveItem(SpawnPrefab("messagebottleempty1"))
-		end)
-
-		if doer.player_classified.revealtreasure then
-			local val = (x + 16384) * 65536 + (z + 16384)
-			doer.player_classified.revealtreasure:set_local(val)
-			doer.player_classified.revealtreasure:set(val)
-		end
-		print(davez)
-		print(x)
-		print(z)
-		inst:Remove()
-		return
-	end
-
-
-	local map = TheWorld.Map
-	local x, y
-	local sx, sy = map:GetSize()
-
-	repeat
-		x = math.random(-sx, sx)
-		y = math.random(-sy, sy)
-		local tile = map:GetTileAtPoint(x, 0, y)
-	until
-		tile ~= GROUND.IMPASSABLE and
-		tile ~= GROUND.OCEAN_COASTAL and
-		tile ~= GROUND.OCEAN_COASTAL_SHORE and
-		tile ~= GROUND.OCEAN_SWELL and
-		tile ~= GROUND.OCEAN_ROUGH and
-		tile ~= GROUND.OCEAN_BRINEPOOL and
-		tile ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-		tile ~= GROUND.OCEAN_WATERLOG and
-		tile ~= GROUND.OCEAN_HAZARDOUS
-
-	SpawnPrefab("buriedtreasure").Transform:SetPosition(x, 0, y)
-
-	doer:DoTaskInTime(0, function()
-		doer.player_classified.MapExplorer:RevealArea(x, 0, y)
 		doer.components.inventory:GiveItem(SpawnPrefab("messagebottleempty1"))
-	end)
-
-	if doer.player_classified.revealtreasure then
-		local val = (x + 16384) * 65536 + (y + 16384)
-		doer.player_classified.revealtreasure:set_local(val)
-		doer.player_classified.revealtreasure:set(val)
-		print(x)
-		print(y)
+		return Vector3(math.floor(x), 0, math.floor(z))
 	end
 
-	inst:Remove()
+	local sx, sy = TheWorld.Map:GetSize()
+
+	for i = 1, 500 do
+		x = math.random(-sx, sx)
+		z = math.random(-sy, sy)
+		if map:IsAboveGroundAtPoint(x, 0, z) then
+			break
+		end
+	end
+
+	SpawnPrefab("buriedtreasure").Transform:SetPosition(x, 0, z)
+	return Vector3(x, 0, z)
 end
 
 local function messagebottlefn(Sim)
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
 	inst.entity:AddNetwork()
 
 	MakeInventoryPhysics(inst)
 	MakeInventoryFloatable(inst)
 
-	anim:SetBank("messagebottle")
-	anim:SetBuild("messagebottle")
+	inst.AnimState:SetBank("messagebottle")
+	inst.AnimState:SetBuild("messagebottle")
 	inst.AnimState:PlayAnimation("idle", true)
 
 	local minimap = inst.entity:AddMiniMapEntity()
@@ -140,8 +80,9 @@ local function messagebottlefn(Sim)
 
 	--minimap:SetIcon("messageBottle.png")
 
-	inst:AddComponent("unwrappable")
-	inst.components.unwrappable:SetOnUnwrappedFn(onunwrapped)
+	inst:AddComponent("mapspotrevealer")
+	inst.components.mapspotrevealer:SetGetTargetFn(getrevealtargetpos)
+	inst.components.mapspotrevealer.postreveal = inst.Remove
 
 	return inst
 end

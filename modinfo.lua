@@ -88,7 +88,7 @@ configuration_options =
 		},
 	},
 
-
+	
 	title(en_zh_zht("《KIND OF WORLD》", "《世界种类》", "《世界種類》")),
 
 	{

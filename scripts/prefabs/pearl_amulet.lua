@@ -59,11 +59,11 @@ local function fn()
 
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = "MAGIC"
-    inst.components.fueled:InitializeFuelLevel(UW_TUNING.PEARL_AMULET_FUEL)
+    inst.components.fueled:InitializeFuelLevel(TUNING.PEARL_AMULET_FUEL)
     inst.components.fueled:SetDepletedFn(function() inst:Remove() end)
 
     inst:AddComponent("oxygensupplier")
-    inst.components.oxygensupplier:SetSupplyRate(UW_TUNING.PEARL_AMULET_RATE)
+    inst.components.oxygensupplier:SetSupplyRate(TUNING.PEARL_AMULET_RATE)
 
     return inst
 end

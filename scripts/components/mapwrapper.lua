@@ -249,7 +249,7 @@ function MapWrapper:OnUpdate(dt)
 
 	local is_inrange = function(range)
 		return (math.abs(tx) < range) or (math.abs(w - tx) < range) or (math.abs(ty) < range) or
-		(math.abs(h - ty) < range)
+			(math.abs(h - ty) < range)
 	end
 	if not self.inst:HasTag("aquatic") then return end
 	--if self.state ~= STATE_WAIT then print(string.format("%d (%d, %d) - (%d, %d)\n\t(%4.2f, %4.2f, %4.2f)\n", self.state, tx, ty, w, h, x, y, z)) end

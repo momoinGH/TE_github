@@ -237,7 +237,7 @@ end
 function OnDead(inst)
 	local x, y, z = inst.Transform:GetLocalPosition()
 
-	if seabeach_amount.doydoy < 3 then
+	if SEABEACH_AMOUNT.doydoy < 3 then
 		local tamanhodomapa = (TheWorld.Map:GetSize()) * 2 - 2
 		local map = TheWorld.Map
 		local x
@@ -337,11 +337,11 @@ local function commonfn(Sim)
 	--	MakeFeedablePet(inst, total_day_time, OnInventory, OnDropped)
 
 	--数量统计
-	seabeach_amount.doydoy = seabeach_amount.doydoy + 1
+	SEABEACH_AMOUNT.doydoy = SEABEACH_AMOUNT.doydoy + 1
 
 	inst:ListenForEvent("onremove", function(inst, data)
-		if seabeach_amount.doydoy > 0 then
-			seabeach_amount.doydoy = seabeach_amount.doydoy - 1
+		if SEABEACH_AMOUNT.doydoy > 0 then
+			SEABEACH_AMOUNT.doydoy = SEABEACH_AMOUNT.doydoy - 1
 		end
 	end)
 
@@ -455,7 +455,7 @@ local function adultfn(Sim)
 	inst:SetBrain(brain)
 
 	inst:AddComponent("named")
-	if math.fmod(seabeach_amount.doydoy, 2) == 0 then
+	if math.fmod(SEABEACH_AMOUNT.doydoy, 2) == 0 then
 		inst:AddTag("daddy")
 		inst.components.named:SetName("Doydoy(M)")
 	else

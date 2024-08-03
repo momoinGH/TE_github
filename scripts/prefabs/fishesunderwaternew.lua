@@ -235,7 +235,7 @@ local function fnmedio1()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -303,7 +303,7 @@ local function fnmedio2()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -371,7 +371,7 @@ local function fnmedio3()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -439,7 +439,7 @@ local function fnmedio4()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -507,7 +507,7 @@ local function fnmedio5()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -575,7 +575,7 @@ local function fnmedio6()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -643,7 +643,7 @@ local function fnmedio7()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -711,7 +711,7 @@ local function fnmedio8()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -779,7 +779,7 @@ local function fn1(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -847,7 +847,7 @@ local function fn2(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -915,7 +915,7 @@ local function fn3(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -983,7 +983,7 @@ local function fn4(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -1051,7 +1051,7 @@ local function fn5(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -1119,7 +1119,7 @@ local function fn6(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -1187,7 +1187,7 @@ local function fn7(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -1255,7 +1255,7 @@ local function fn8(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 
@@ -1323,7 +1323,7 @@ local function fn9(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
 

@@ -214,10 +214,12 @@ local function makefn(fadeout)
         updatevis(inst)
 
         inst:DoTaskInTime(0,
-            function(inst) if TheWorld.components.aporkalypse and TheWorld.components.aporkalypse.aporkalypse_active == true then
+            function(inst)
+                if TheWorld.components.aporkalypse and TheWorld.components.aporkalypse.aporkalypse_active == true then
                     inst:Hide()
                     inst.Light:Enable(false)
-                end end)
+                end
+            end)
 
         return inst
     end

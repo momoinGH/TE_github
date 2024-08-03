@@ -331,3 +331,8 @@ AddComponentAction("USEITEM", "milker", function(inst, doer, target, actions)
         table.insert(actions, ACTIONS.MILK)
     end
 end)
+
+
+AddComponentAction("SCENE", "store", function(inst, doer, actions)
+    table.insert(actions, ACTIONS.STOREOPEN)
+end)

@@ -18,8 +18,7 @@ local function OnLoad(inst, data)
 end
 
 local function DoShineFlick(inst)
-	Waffles1.DoHauntFlick(inst, math.random() * 0.65)
-	inst:DoTaskInTime(math.random(3), DoShineFlick)
+	inst.AnimState:SetHaunted(true)
 end
 
 local function OnActivateByOther(inst, source, doer)
@@ -35,17 +34,6 @@ local function ExitOnActivateByOther(inst, other, doer)
 	if doer ~= nil
 		and doer.sg ~= nil and not doer:HasTag("playerghost") then
 		doer.sg.statemem.teleportarrivestate = "jumpout_ceiling"
-	end
-end
-
-local function ChainPlayerprox(inst, near) --currently doesn't work
-	local link = inst.components.teleporter.targetTeleporter
-	if Waffles1.Valid(link) and not link:IsAsleep() then
-		if near then
-			link.components.playerprox.onnear(link, true)
-		else
-			link.components.playerprox.onfar(link, true)
-		end
 	end
 end
 
@@ -229,18 +217,8 @@ local function entrance()
 		--	while true do	
 		local x = -1600
 		local z = -1800
-		--		if not IsNearBasement(x, 0, z) then  ------------------------------------------- retirar IsNearBasement
+
 		basement_position = { x, 0, z }
-		--			break
-		--		else
-		--			tries = tries + 1
-		--			if tries > 50 then
-		--				TheNet:Announce("Failed to find valid position for basement.")
-		--				Waffles1.DespawnRecipe(inst, true)
-		--				return
-		--			end
-		--		end
-		--	end
 
 		inst.exit = SpawnPrefab("lavarenaescada2")
 		inst.exit.Transform:SetPosition(unpack(basement_position))

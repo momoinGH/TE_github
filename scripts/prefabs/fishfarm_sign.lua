@@ -1,7 +1,5 @@
 require "prefabs/roe_fish"
 
-require "tuning"
-
 local assets =
 {
     Asset("ANIM", "anim/fish_farm_sign.zip"),

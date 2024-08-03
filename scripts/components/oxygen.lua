@@ -173,8 +173,8 @@ function Oxygen:DoDelta(delta, overtime)
 	end
 
 	-- Running out of oxygen!
-	if (newpercent > UW_TUNING.OXYGEN_THRESH) ~= (oldpercent > UW_TUNING.OXYGEN_THRESH) then
-		if newpercent <= UW_TUNING.OXYGEN_THRESH then
+	if (newpercent > TUNING.OXYGEN_THRESH) ~= (oldpercent > TUNING.OXYGEN_THRESH) then
+		if newpercent <= TUNING.OXYGEN_THRESH then
 			self.inst:PushEvent("runningoutofoxygen")
 		end
 	end
@@ -195,7 +195,7 @@ function Oxygen:Recalc(dt)
 		return
 	end
 
-	local loss_delta = UW_TUNING.OXYGEN_LOSS_RATE
+	local loss_delta = TUNING.OXYGEN_LOSS_RATE
 	local oxygen_supply = self.oxygen_supply or 0
 
 	-- Oxygen suppliers items
@@ -208,12 +208,12 @@ function Oxygen:Recalc(dt)
 	if equipamento5 and equipamento5.prefab == "pearl_amulet" then oxygen_supply = oxygen_supply + 8 end
 
 
-	local supply_delta = oxygen_supply * UW_TUNING.OXYGEN_AIRINESS
+	local supply_delta = oxygen_supply * TUNING.OXYGEN_AIRINESS
 
 	-- Oxygen supplying / removing environmental objects / monsters
 	local aura_delta = 0
 	local x, y, z = self.inst.Transform:GetWorldPosition()
-	local ents = TheSim:FindEntities(x, y, z, UW_TUNING.OXYGEN_EFFECT_RANGE, { "oxygen_aura" })
+	local ents = TheSim:FindEntities(x, y, z, TUNING.OXYGEN_EFFECT_RANGE, { "oxygen_aura" })
 	for k, v in pairs(ents) do
 		if v.components.oxygenaura and v ~= self.inst then
 			local distsq = self.inst:GetDistanceSqToInst(v)

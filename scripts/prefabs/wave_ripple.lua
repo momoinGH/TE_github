@@ -59,6 +59,8 @@ local function oncollidewave(inst)
         barril.components.workable:WorkedBy(barril, 1)
         splash(inst)
     end
+
+    --TODO 能换成碰撞检测来实现吗
     local outros = GetClosestInstWithTag("quebraonda", inst, 2)
     if outros then splash(inst) end
 

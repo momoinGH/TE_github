@@ -48,7 +48,7 @@ local function fn(Sim)
     inst.components.herd.maxsize = 3
 
     inst:AddComponent("periodicspawner")
-    inst.components.periodicspawner:SetRandomTimes(UW_TUNING.JELLYFISH_SPAWN_DELAY, UW_TUNING.JELLYFISH_SPAWN_VAR)
+    inst.components.periodicspawner:SetRandomTimes(TUNING.JELLYFISH_SPAWN_DELAY, TUNING.JELLYFISH_SPAWN_VAR)
     inst.components.periodicspawner:SetPrefab("reef_jellyfish")
     inst.components.periodicspawner:SetOnSpawnFn(OnSpawned)
     inst.components.periodicspawner:SetSpawnTestFn(CanSpawn)

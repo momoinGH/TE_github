@@ -452,6 +452,7 @@ local function OnInit(inst)
 
 
 	----------------saplingsw--------------------------------------------
+	-- TODO 原本是加在树苗上标签，希望直接查找树苗，等待替换掉
 	local saplingsw = GetClosestInstWithTag("saplingsw", inst, 40)
 	if saplingsw then
 		saplingsw:RemoveTag("saplingsw")

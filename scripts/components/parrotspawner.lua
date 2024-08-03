@@ -1,16 +1,6 @@
 --------------------------------------------------------------------------
 --[[ BirdSpawner class definition ]]
 --------------------------------------------------------------------------
-function GetMoney(inventory)
-    local money = 0
-
-    local hasoincs, oincamount = inventory:Has("oinc", 0)
-    local hasoinc10s, oinc10amount = inventory:Has("oinc10", 0)
-    local hasoinc100s, oinc100amount = inventory:Has("oinc100", 0)
-
-    money = oincamount + (oinc10amount * 10) + (oinc100amount * 100)
-    return money
-end
 
 return Class(function(self, inst)
     assert(TheWorld.ismastersim, "BirdSpawner should not exist on client")
@@ -284,7 +274,7 @@ return Class(function(self, inst)
 
     local function ToggleUpdate(force)
         for i, v in ipairs(_activeplayers) do
-            if v.components.inventory and GetMoney(v.components.inventory) >= 2 and math.random() > 0.6 then
+            if v.components.inventory and v.components.inventory:GetMoney() >= 2 and math.random() > 0.6 then
                 local pt = v:GetPosition()
                 if (TUNING.tropical.hamlet ~= 5 or TUNING.tropical.kindofworld == 5) and TUNING.tropical.kindofworld ~= 10 then
                     local map = TheWorld.Map

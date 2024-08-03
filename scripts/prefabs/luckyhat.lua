@@ -3,46 +3,51 @@ local assets =
     Asset("ANIM", "anim/hat_woodlegs.zip"),
 }
 
-local function treasure(x, y, inst)
-    local equippable = inst.components.equippable
-    if equippable ~= nil and equippable:IsEquipped() then
-        local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
-        if owner ~= nil then
-            if not owner:HasTag("player") then owner = GetClosestInstWithTag("player", inst, 30) end
-            if owner then
-                local map = TheWorld.Map
-                local x, y
-                local sx, sy = map:GetSize()
+local function treasure(_, _, inst)
+    local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
 
-                repeat
-                    x = math.random(-sx, sx)
-                    y = math.random(-sy, sy)
-                    local tile = map:GetTileAtPoint(x, 0, y)
-                until
-                    tile ~= GROUND.IMPASSABLE and
-                    tile ~= GROUND.OCEAN_COASTAL and
-                    tile ~= GROUND.OCEAN_COASTAL_SHORE and
-                    tile ~= GROUND.OCEAN_SWELL and
-                    tile ~= GROUND.OCEAN_ROUGH and
-                    tile ~= GROUND.OCEAN_BRINEPOOL and
-                    tile ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                    tile ~= GROUND.OCEAN_WATERLOG and
-                    tile ~= GROUND.OCEAN_HAZARDOUS
+    if not owner or not inst.components.equippable or not inst.components.equippable:IsEquipped() then
+        return
+    end
 
-                SpawnPrefab("buriedtreasure").Transform:SetPosition(x, 0, y)
+    local player
+    if owner:HasTag("player") then
+        player = owner
+    else
+        local x, y, z = inst.Transform:GetWorldPosition()
+        player = FindClosestPlayerInRangeSq(x, y, z, 900)
+    end
 
-                owner:DoTaskInTime(0, function()
-                    owner.player_classified.MapExplorer:RevealArea(x, 0, y)
-                end)
+    if not player then return end
 
-                if owner.player_classified.revealtreasure then
-                    local val = (x + 16384) * 65536 + (y + 16384)
-                    owner.player_classified.revealtreasure:set_local(val)
-                    owner.player_classified.revealtreasure:set(val)
-                end
-                owner.components.talker:Say(GetString(owner, "ANNOUNCE_TREASURE"))
-            end
+
+    local map = TheWorld.Map
+    local x, z
+    local sx, sy = map:GetSize()
+
+    for i = 1, 500 do
+        x = math.random(-sx, sx)
+        z = math.random(-sy, sy)
+        if map:IsAboveGroundAtPoint(x, 0, z) then
+            break
         end
+    end
+
+    SpawnPrefab("buriedtreasure").Transform:SetPosition(x, 0, z)
+
+    if player == owner and player.player_classified ~= nil then
+        -- 如果玩家正在装备，就打开地图提示一下
+        if self.open_map_on_reveal then
+            player.player_classified.revealmapspot_worldx:set(x)
+            player.player_classified.revealmapspot_worldz:set(z)
+            player.player_classified.revealmapspotevent:push()
+        end
+
+        player:DoStaticTaskInTime(4 * FRAMES, function()
+            player.player_classified.MapExplorer:RevealArea(x, 0, z, true, true)
+        end)
+    elseif player.components.talker then
+        player.components.talker:Say(GetString(player, "ANNOUNCE_TREASURE"))
     end
 end
 

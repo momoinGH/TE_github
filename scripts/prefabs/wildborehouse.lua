@@ -275,11 +275,11 @@ local function fn(Sim)
     end)
 
     --	--数量统计
-    --	seabeach_amount.wildborehouse = seabeach_amount.wildborehouse + 1
+    --	SEABEACH_AMOUNT.wildborehouse = SEABEACH_AMOUNT.wildborehouse + 1
     --	
     --	inst:ListenForEvent("onremove", function(inst, data)
-    --		if seabeach_amount.wildborehouse > 0 then
-    --			seabeach_amount.wildborehouse = seabeach_amount.wildborehouse - 1
+    --		if SEABEACH_AMOUNT.wildborehouse > 0 then
+    --			SEABEACH_AMOUNT.wildborehouse = SEABEACH_AMOUNT.wildborehouse - 1
     --		end
     --	end)
 

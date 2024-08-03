@@ -1,4 +1,5 @@
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
+_G = GLOBAL
 
 --level.overrides.has_ocean = false
 local SIZE_VARIATION = 3
@@ -1462,7 +1463,7 @@ if GetModConfigData("kindofworld") == 5 then
 			{
 				rainforesttree = 0.6, --1.4,
 				grass_tall = .5,
-				saplingnova = .6,
+				sapling = .6,
 				flower_rainforest = 0.1,
 				flower = 0.05,
 				dungpile = 0.03,
@@ -1492,7 +1493,7 @@ if GetModConfigData("kindofworld") == 5 then
 			{
 				rainforesttree = .5, --.7,
 				grass_tall = 0.5,
-				saplingnova = .6,
+				sapling = .6,
 				flower_rainforest = 0.1,
 				flower = 0.05,
 				--	randomrelic = 0.008,
@@ -1519,7 +1520,7 @@ if GetModConfigData("kindofworld") == 5 then
 			{
 				rainforesttree = .5, --.7,
 				grass_tall = 0.5,
-				saplingnova = .6,
+				sapling = .6,
 				flower_rainforest = 0.1,
 				flower = 0.05,
 				--	randomrelic = 0.008,
@@ -1575,7 +1576,7 @@ if GetModConfigData("kindofworld") == 5 then
 			{
 				rainforesttree = .7,
 				grass_tall = 0.5,
-				saplingnova = .6,
+				sapling = .6,
 				flower_rainforest = 0.1,
 				flower = 0.05,
 				--	randomrelic = 0.008,
@@ -1661,7 +1662,7 @@ if GetModConfigData("kindofworld") == 5 then
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -1695,7 +1696,7 @@ if GetModConfigData("kindofworld") == 5 then
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -1730,7 +1731,7 @@ if GetModConfigData("kindofworld") == 5 then
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -1768,7 +1769,7 @@ if GetModConfigData("kindofworld") == 5 then
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -1802,7 +1803,7 @@ if GetModConfigData("kindofworld") == 5 then
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -2323,7 +2324,7 @@ if GetModConfigData("kindofworld") == 5 then
 			{
 				rainforesttree = 0.6, --1.4,
 				grass_tall = .5,
-				saplingnova = .6,
+				sapling = .6,
 				flower_rainforest = 0.1,
 				flower = 0.05,
 				dungpile = 0.03,
@@ -2374,7 +2375,7 @@ if GetModConfigData("kindofworld") == 5 then
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -2829,7 +2830,7 @@ if GetModConfigData("kindofworld") == 5 then
 				deep_jungle_fern_noise_plant2 = 1,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -2865,7 +2866,7 @@ if GetModConfigData("kindofworld") == 5 then
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -2906,7 +2907,7 @@ if GetModConfigData("kindofworld") == 5 then
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -2943,7 +2944,7 @@ if GetModConfigData("kindofworld") == 5 then
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -2981,7 +2982,7 @@ if GetModConfigData("kindofworld") == 5 then
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -3019,7 +3020,7 @@ if GetModConfigData("kindofworld") == 5 then
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -3057,7 +3058,7 @@ if GetModConfigData("kindofworld") == 5 then
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -3100,7 +3101,7 @@ if GetModConfigData("kindofworld") == 5 then
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -3283,7 +3284,7 @@ if GetModConfigData("kindofworld") == 5 then
 				grotto_pillar_bug = 0.1,
 				rock_flippable = 0.3,
 				rock_antcave = 0.7,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				rock_flintless = 1.0,
 				rock_flintless_med = 1.0,
 				rock_flintless_low = 1.0,
@@ -3322,7 +3323,7 @@ if GetModConfigData("kindofworld") == 5 then
 				grotto_pillar_bug = 0.1,
 				rock_flippable = 0.3,
 				rock_antcave = 0.7,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				rock_flintless = 1.0,
 				rock_flintless_med = 1.0,
 				rock_flintless_low = 1.0,
@@ -3360,7 +3361,7 @@ if GetModConfigData("kindofworld") == 5 then
 				rock_flippable = 0.3,
 				rock_antcave = 0.7,
 				antcombhomecave = 0.15,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				guano = 0.27,
 				goldnugget = .05,
 				flint = 0.05,
@@ -3400,7 +3401,7 @@ if GetModConfigData("kindofworld") == 5 then
 				ant_cave_lantern = 0.1,
 				rock_flippable = 0.7,
 				rock_antcave = 0.3,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				deco_cave_ceiling_drip_2 = 0.1,
 			},
 			countprefabs =
@@ -3462,7 +3463,7 @@ if GetModConfigData("kindofworld") == 5 then
 				grotto_pillar_bug = 0.08,
 				rock_flippable = 0.3,
 				rock_antcave = 0.7,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				deco_cave_ceiling_drip_2 = 0.1,
 			},
 			countprefabs =
@@ -3488,7 +3489,7 @@ if GetModConfigData("kindofworld") == 5 then
 				grotto_pillar_bug = 0.08,
 				rock_flippable = 0.3,
 				rock_antcave = 0.7,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				deco_cave_ceiling_drip_2 = 0.1,
 			},
 			countprefabs =
@@ -3786,7 +3787,7 @@ if GetModConfigData("kindofworld") == 5 then
 				cavelight_small = 0.05,
 
 				grass = 0.1,
-				saplingnova = 0.1,
+				sapling = 0.1,
 				twiggytree = 0.04,
 
 				mushtree_small = 5.0,
@@ -3863,7 +3864,7 @@ if GetModConfigData("kindofworld") == 5 then
 			distributeprefabs =
 			{
 				grass = 0.1,
-				saplingnova = 0.1,
+				sapling = 0.1,
 				twiggytree = 0.04,
 
 				mushtree_small = 5.0,
@@ -3974,7 +3975,7 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_cave_double = 0.05,
 				flower_cave_triple = 0.05,
 
-				saplingnova = 1,
+				sapling = 1,
 				grass_tall = 3,
 				ox = 0.5,
 				teatree = 0.8,
@@ -3998,7 +3999,7 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_cave_double = 0.05,
 				flower_cave_triple = 0.05,
 
-				saplingnova = 1,
+				sapling = 1,
 				grass_tall = 3,
 				ox = 0.5,
 				teatree = 0.8,
@@ -4027,7 +4028,7 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_cave_double = 0.05,
 				flower_cave_triple = 0.05,
 
-				saplingnova = 1,
+				sapling = 1,
 				grass_tall = 3,
 				ox = 0.5,
 				teatree = 0.8,
@@ -4057,7 +4058,7 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_cave_double = 0.05,
 				flower_cave_triple = 0.05,
 
-				saplingnova = 1,
+				sapling = 1,
 				grass_tall = 3,
 				ox = 0.5,
 				teatree = 0.8,
@@ -4081,7 +4082,7 @@ if GetModConfigData("kindofworld") == 5 then
 				flower_cave_double = 0.05,
 				flower_cave_triple = 0.05,
 
-				saplingnova = 1,
+				sapling = 1,
 				grass_tall = 3,
 				ox = 0.5,
 				teatree = 0.8,
@@ -5945,7 +5946,7 @@ if GetModConfigData("kindofworld") == 5 then
 			distributepercent = 0.25,
 			distributeprefabs = {
 				grass = 2,
-				saplingnova = 2,
+				sapling = 2,
 				green_mushroom = 3,
 				blue_mushroom = 3,
 				flower = 1,
@@ -6941,7 +6942,7 @@ else
 			distributeprefabs =
 			{
 				marsh_bush = 0.5,
-				saplingnova = 0.5,
+				sapling = 0.5,
 				rock_ice = 0.3,
 				pond = 0.2,
 				snow_dune = 0.2,
@@ -7584,7 +7585,7 @@ else
 			{
 				distributepercent = 0.3,
 				distributeprefabs = {
-					saplingnova = 0.2,
+					sapling = 0.2,
 					tree_forest_deep = 0.5,
 					bambootree = 1,
 					bambootreebig = 1,
@@ -7612,7 +7613,7 @@ else
 			{
 				distributepercent = 0.3,
 				distributeprefabs = {
-					saplingnova = 0.2,
+					sapling = 0.2,
 					tree_forest_deep = 0.5,
 					bambootree = 1,
 					bambootreebig = 1,
@@ -7639,7 +7640,7 @@ else
 			{
 				distributepercent = 0.3,
 				distributeprefabs = {
-					saplingnova = 0.2,
+					sapling = 0.2,
 					--tree_forest_deep = 0.5,
 					bambootree = 1,
 					bambootreebig = 1,
@@ -7689,7 +7690,7 @@ else
 			{
 				distributepercent = 0.3,
 				distributeprefabs = {
-					saplingnova = 0.2,
+					sapling = 0.2,
 					tree_forest_deep = 0.5,
 					bambootree = 1,
 					bambootreebig = 1,
@@ -7720,7 +7721,7 @@ else
 			distributepercent = .4,
 			distributeprefabs =
 			{
-				saplingnova = 0.2,
+				sapling = 0.2,
 				tree_forest_deep = 0.4,
 				bambootree = 1,
 				bambootreebig = 1,
@@ -7741,7 +7742,7 @@ else
 			distributepercent = .4,
 			distributeprefabs =
 			{
-				saplingnova = 0.2,
+				sapling = 0.2,
 				tree_forest_deep = 0.4,
 				bambootree = 1,
 				bambootreebig = 1,
@@ -7760,7 +7761,7 @@ else
 			{
 				distributepercent = 0.3,
 				distributeprefabs = {
-					saplingnova = 0.2,
+					sapling = 0.2,
 					tree_forest_deep = 0.5,
 					bambootree = 1,
 					bambootreebig = 1,
@@ -8374,7 +8375,7 @@ else
 				red_mushroom = .004,
 				rabbithole = 0.01,
 				gravestone = 0.01,
-				saplingnova = 0.15,
+				sapling = 0.15,
 				rock1 = 0.008,
 				rock2 = 0.008,
 			},
@@ -8402,7 +8403,7 @@ else
 				red_mushroom = .004,
 				rabbithole = 0.01,
 				gravestone = 0.01,
-				saplingnova = 0.15,
+				sapling = 0.15,
 				rock1 = 0.008,
 				rock2 = 0.008,
 			},
@@ -8422,7 +8423,7 @@ else
 			distributepercent = .3,
 			distributeprefabs =
 			{
-				saplingnova = 0.1, --nitre
+				sapling = 0.1, --nitre
 				--										twiggytree = 0.2,
 				--										cave_fern=0.112,
 				carrot_planted = 0.05,
@@ -8449,7 +8450,7 @@ else
 			distributepercent = .3,
 			distributeprefabs =
 			{
-				saplingnova = 0.1, --nitre
+				sapling = 0.1, --nitre
 				--										twiggytree = 0.2,
 				--										cave_fern=0.112,
 				carrot_planted = 0.05,
@@ -12611,7 +12612,7 @@ else
 			{
 				rainforesttree = 0.6, --1.4,
 				grass_tall = .5,
-				saplingnova = .6,
+				sapling = .6,
 				flower_rainforest = 0.1,
 				flower = 0.05,
 				dungpile = 0.03,
@@ -12642,7 +12643,7 @@ else
 			{
 				rainforesttree = .5, --.7,
 				grass_tall = 0.5,
-				saplingnova = .6,
+				sapling = .6,
 				flower_rainforest = 0.1,
 				flower = 0.05,
 				--	randomrelic = 0.008,
@@ -12670,7 +12671,7 @@ else
 			{
 				rainforesttree = .5, --.7,
 				grass_tall = 0.5,
-				saplingnova = .6,
+				sapling = .6,
 				flower_rainforest = 0.1,
 				flower = 0.05,
 				--	randomrelic = 0.008,
@@ -13099,7 +13100,7 @@ else
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -13133,7 +13134,7 @@ else
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -13166,7 +13167,7 @@ else
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -13202,7 +13203,7 @@ else
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -13236,7 +13237,7 @@ else
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -13837,7 +13838,7 @@ else
 			{
 				rainforesttree = 0.6, --1.4,
 				grass_tall = .5,
-				saplingnova = .6,
+				sapling = .6,
 				flower_rainforest = 0.1,
 				flower = 0.05,
 				dungpile = 0.03,
@@ -13868,7 +13869,7 @@ else
 			{
 				rainforesttree = .5, --.7,
 				grass_tall = 0.5,
-				saplingnova = .6,
+				sapling = .6,
 				flower_rainforest = 0.1,
 				flower = 0.05,
 				--	randomrelic = 0.008,
@@ -13896,7 +13897,7 @@ else
 			{
 				rainforesttree = .5, --.7,
 				grass_tall = 0.5,
-				saplingnova = .6,
+				sapling = .6,
 				flower_rainforest = 0.1,
 				flower = 0.05,
 				--	randomrelic = 0.008,
@@ -14325,7 +14326,7 @@ else
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -14359,7 +14360,7 @@ else
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -14392,7 +14393,7 @@ else
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -14428,7 +14429,7 @@ else
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -14462,7 +14463,7 @@ else
 			{
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				dungpile = 0.03,
 				peagawk = 0.01,
@@ -14820,7 +14821,7 @@ else
 			distributepercent = .2,
 			distributeprefabs =
 			{
-				saplingnova = 0.25,
+				sapling = 0.25,
 				grass = .5,
 				palmtree = .1,
 				wildborehouse = .05,
@@ -14905,7 +14906,7 @@ else
 				rock1 = 0.05,
 				rock2 = 0.1, --was .05
 				--grassnova = 1, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1,
 				berrybush2_snake = 0.04,
 				red_mushroom = .03,
@@ -15033,7 +15034,7 @@ else
 					                    pond_mos = .8,
 					                    grassnova = .5,
 					                    flower = .3,
-					                    saplingnova = .2,
+					                    sapling = .2,
 					                    sweet_potato_planted = .1,
 					                },
 					            }
@@ -15048,7 +15049,7 @@ else
 			distributeprefabs =
 			{
 				grassnova = 3,
-				--saplingnova = 1,
+				--sapling = 1,
 				flower = .5,
 				beehive = .1, --was 1,
 				wasphive = 0.003,
@@ -15068,7 +15069,7 @@ else
 			{
 				spiderden = .1,
 				grassnova = 1,
-				--saplingnova = .8,
+				--sapling = .8,
 				--ox = .5,
 				flower = .5,
 			},
@@ -15103,7 +15104,7 @@ else
 			distributeprefabs =
 			{
 				grassnova = .8,
-				--saplingnova = .8,
+				--sapling = .8,
 				sweet_potato_planted = 0.05,
 				rocks = 0.003,
 				rock_flintless = 0.01,
@@ -15133,7 +15134,7 @@ else
 				rocks = .25,
 				flint = 0.5, -- lowered from 3
 				spiderden = .1,
-				-- saplingnova = 1.0,
+				-- sapling = 1.0,
 			},
 		}
 	})
@@ -15156,7 +15157,7 @@ else
 				-- rock_ice = 1,
 				--tallbirdnest= --2, --.1,
 				spiderden = .1,
-				--saplingnova = 0.5,
+				--sapling = 0.5,
 
 			},
 
@@ -15185,7 +15186,7 @@ else
 				-- rock_ice = 1,
 				--tallbirdnest= --2, --.1,
 				spiderden = .1,
-				saplingnova = 0.5,
+				sapling = 0.5,
 			},
 
 			countprefabs =
@@ -15210,7 +15211,7 @@ else
 				rock2 = 1,
 				rocks = 25,
 				tallbirdnest = 0.08,
-				saplingnova = 1.5,
+				sapling = 1.5,
 				spiderden = .1,
 			},
 		}
@@ -15231,11 +15232,11 @@ else
 				--rock_ice = .75,
 				rocks = .25,
 				flint = 1.5,
-				saplingnova = .05,
+				sapling = .05,
 				blue_mushroom = .002,
 				green_mushroom = .002,
 				red_mushroom = .002,
-				saplingnova = .5,
+				sapling = .5,
 				spiderden = .1,
 			},
 		}
@@ -15255,7 +15256,7 @@ else
 				rock2 = 2,
 				rocks = .25,
 				flint = 0.,
-				-- saplingnova = .5,
+				-- sapling = .5,
 				spiderden = .1,
 			},
 
@@ -15325,7 +15326,7 @@ else
 				flint = 0.2, -- lowered from 3
 				--  tallbirdnest= .2, --.1,
 				--					                    dragoonden= 0.7,
-				saplingnova = .3,
+				sapling = .3,
 
 			},
 			countprefabs =
@@ -15354,7 +15355,7 @@ else
 				rock_moon = 0.1,
 				goldnugget = .25,
 				tallbirdnest = .2,
-				saplingnova = .5,
+				sapling = .5,
 				spiderden = .1,
 			},
 		}
@@ -15379,7 +15380,7 @@ else
 				rock_moon = 0.1,
 				goldnugget = .25,
 				tallbirdnest = .2,
-				saplingnova = .5,
+				sapling = .5,
 				spiderden = .1,
 			},
 			countprefabs =
@@ -15408,7 +15409,7 @@ else
 				tallbirdnest = .1,
 				rock_moon = 0.1,
 				rock_moon = 2,
-				-- saplingnova = .5,
+				-- sapling = .5,
 				--spiderden= .1,
 			},
 		}
@@ -15430,7 +15431,7 @@ else
 				rock_moon = 0.1,
 				rock_flintless = 1,
 				tallbirdnest = .25,
-				--saplingnova = .5,
+				--sapling = .5,
 				spiderden = .1,
 			},
 		}
@@ -15455,7 +15456,7 @@ else
 				rock_flintless = 1,
 				rock_moon = 0.1,
 				jungletree = 0.5,
-				saplingnova = 2,
+				sapling = 2,
 				spiderden = .15,
 			},
 
@@ -15487,7 +15488,7 @@ else
 				-- rock_ice = 1,
 				tallbirdnest = .2, --.1,
 				spiderden = 1.5, --.5,
-				saplingnova = .5,
+				sapling = .5,
 
 			},
 		}
@@ -15979,7 +15980,7 @@ else
 				beehive = .01, --was .05,
 				--flower = .04, --trying
 				grassnova = .2, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -16010,7 +16011,7 @@ else
 				--beehive = .05, --trying
 				--flower = .04, --trying
 				grassnova = .5, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -16021,7 +16022,7 @@ else
 			countprefabs =
 			{
 				flint = 1,
-				saplingnova = 1,
+				sapling = 1,
 			}
 
 		}
@@ -16037,7 +16038,7 @@ else
 			{
 				seashell_beached = 0.125,
 				grassnova = .3, --down from 3
-				saplingnova = .1, --lowered from 15
+				sapling = .1, --lowered from 15
 				--flower = 0.05,
 				rock_limpet = .02,
 				crabhole = .015, --was .03
@@ -16056,7 +16057,7 @@ else
 				--seashell_beached = 1, --one seashell
 				--coconut = 1, --one coconut
 				--mandrake =0.05,
-				saplingnova = 3,
+				sapling = 3,
 				grassnova = 3,
 				--sandhill = .05,
 			}
@@ -16073,7 +16074,7 @@ else
 			{
 				seashell_beached = 0.125,
 				grassnova = .3, --down from 3
-				saplingnova = .1, --lowered from 15
+				sapling = .1, --lowered from 15
 				--flower = 0.05,
 				rock_limpet = .02,
 				crabhole = .015, --was .03
@@ -16092,7 +16093,7 @@ else
 				--seashell_beached = 1, --one seashell
 				--coconut = 1, --one coconut
 				--mandrake =0.05,
-				saplingnova = 6,
+				sapling = 6,
 				grassnova = 6,
 				--sandhill = .05,
 			}
@@ -16110,7 +16111,7 @@ else
 			{
 				seashell_beached = 0.125,
 				--grassnova = .3, --down from 3
-				--saplingnova = .1, --lowered from 15
+				--sapling = .1, --lowered from 15
 				--flower = 0.05,
 				rock_limpet = .02,
 				-- crabhole = .015, --was .03
@@ -16129,7 +16130,7 @@ else
 				--seashell_beached = 1, --one seashell
 				--coconut = 1, --one coconut
 				--mandrake =0.05,
-				--saplingnova = 3,
+				--sapling = 3,
 				--grassnova = 3,
 				--sandhill = .05,
 			}
@@ -16146,7 +16147,7 @@ else
 			{
 				seashell_beached = 0.025,
 				grassnova = .1, --was .3
-				saplingnova = .05, --was .15
+				sapling = .05, --was .15
 				--flower = 0.05,
 				rock_limpet = .02,
 				--crabhole = .015, --was .03
@@ -16206,7 +16207,7 @@ else
 				beehive = .01, --was .05,
 				--flower = .04, --trying
 				grassnova = .2, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -16326,7 +16327,7 @@ else
 			distributepercent = .2, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
 			distributeprefabs =
 			{
-				saplingnova = 0.25,
+				sapling = 0.25,
 				grassnova = .5,
 				palmtree = .1,
 				wildborehouse = .05,
@@ -16345,7 +16346,7 @@ else
 			distributepercent = .2, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
 			distributeprefabs =
 			{
-				saplingnova = 0.25,
+				sapling = 0.25,
 				grassnova = .5,
 				palmtree = .1,
 				wildborehouse = .05,
@@ -16375,7 +16376,7 @@ else
 				wasphive = .05,
 				--flower = .04, --trying
 				grassnova = .4, --trying
-				saplingnova = .4, --trying
+				sapling = .4, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -16395,7 +16396,7 @@ else
 			{
 				rock_limpet = 0.005,
 				crabhole = 1,
-				saplingnova = .2,
+				sapling = .2,
 				palmtree = .75,
 				grassnova = .5,
 				--flower=.1,
@@ -16422,7 +16423,7 @@ else
 				sandhill = 1.5,
 				grassnova = 1,
 				seashell_beached = .5,
-				saplingnova = 1,
+				sapling = 1,
 				rock1 = .5,
 				rock_limpet = 0.1,
 				wildborehouse = .05,
@@ -16461,7 +16462,7 @@ else
 			distributepercent = .1,
 			distributeprefabs =
 			{
-				saplingnova = 1,
+				sapling = 1,
 				crabhole = .5,
 				palmtree = 1,
 				rock_limpet = 0.1,
@@ -16507,7 +16508,7 @@ else
 				rock1 = 1,
 				grassnova = 1,
 				seashell = 1,
-				saplingnova = .5,
+				sapling = .5,
 				flint = .05,
 				seashell_beached = .25,
 				wildborehouse = .05,
@@ -16529,7 +16530,7 @@ else
 				palmtree = 1,
 				grassnova = 1,
 				rocks = 0.5,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				flint = .05,
 				seashell_beached = .25,
 				wildborehouse = .025,
@@ -16553,7 +16554,7 @@ else
 				rocks = .003, --trying
 				beehive = .005, --trying
 				grassnova = .3, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -16575,7 +16576,7 @@ else
 				palmtree = .3,
 				rock1 = .1,
 				grassnova = .2,
-				saplingnova = .1,
+				sapling = .1,
 				seashell_beached = .025,
 				rock_limpet = 0.01,
 				flint = .05,
@@ -16599,7 +16600,7 @@ else
 				beehive = .0025, --trying
 				--flower = 0.04, --trying
 				grassnova = .3, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -16624,7 +16625,7 @@ else
 				beehive = .005, --trying
 				--flower = 0.04, --trying
 				grassnova = .3, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -16649,7 +16650,7 @@ else
 				beehive = .005, --trying
 				--flower = 0.04, --trying
 				grassnova = .3, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -16681,7 +16682,7 @@ else
 				beehive = .02,
 				--flower = .04,
 				grassnova = .3, --was .2,
-				saplingnova = .2,
+				sapling = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
@@ -16715,7 +16716,7 @@ else
 				beehive = .02,
 				--flower = .04,
 				grassnova = .3, --was .2,
-				saplingnova = .2,
+				sapling = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
@@ -16749,7 +16750,7 @@ else
 				beehive = .02,
 				--flower = .04,
 				grassnova = .3, --was .2,
-				saplingnova = .2,
+				sapling = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
@@ -16782,7 +16783,7 @@ else
 				rock1 = .1,
 				beehive = .01,
 				grassnova = .2,
-				saplingnova = .2,
+				sapling = .2,
 				flint = .05,
 				sandhill = .6,
 				seashell_beached = .02,
@@ -16816,7 +16817,7 @@ else
 				rock1 = 0.05,
 				flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -16987,7 +16988,7 @@ else
 				rock1 = 0.05,
 				flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -17090,7 +17091,7 @@ else
 				rock2 = 0.1, --was .05
 				flint = 0.1, --was 0.03,
 				--grassnova = .01, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .09, -- was .0003
 				berrybush2_snake = 0.01,
 				red_mushroom = .03,
@@ -17183,7 +17184,7 @@ else
 				rock2 = 0.05,
 				rocks = .3,
 				flint = .1, --dropped
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05, --was .03
 				berrybush2_snake = 0.01,
 				--grassnova = 1,
@@ -17219,7 +17220,7 @@ else
 				-- rock2 = 0.05, --gold rock
 				flint = .1, --dropped
 				--grassnova = .6, --raised from 05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05, --was .03
 				berrybush2_snake = 0.01,
 				red_mushroom = .03,
@@ -17253,7 +17254,7 @@ else
 				rock1 = 0.05,
 				rock2 = 0.1, --was .05
 				--grassnova = 1, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1,
 				berrybush2_snake = 0.04,
 				red_mushroom = .03,
@@ -17290,7 +17291,7 @@ else
 				rock1 = 0.05,
 				--rock2 = 0.05, --gold rock
 				--grassnova = 1, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = 0.03, --was 0.01,
 				red_mushroom = .03,
@@ -17322,7 +17323,7 @@ else
 				rock1 = 0.05,
 				rock2 = 0.05,
 				--grassnova = .02, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .06, --was .03,
 				berrybush2_snake = .02, --was .01,
 				red_mushroom = .03,
@@ -17357,7 +17358,7 @@ else
 				rock1 = 0.05,
 				rock2 = 0.05,
 				--grassnova = .02, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .6, --was .03
 				berrybush2_snake = .03, --was .01,
 				red_mushroom = .03,
@@ -17422,7 +17423,7 @@ else
 				rock1 = 0.05,
 				flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -17456,7 +17457,7 @@ else
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = .025,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -17494,7 +17495,7 @@ else
 				rock1 = 0.05,
 				rock2 = 0.05,
 				--grassnova = 1, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = .05, --was 0.01,
 				red_mushroom = .03,
@@ -17560,7 +17561,7 @@ else
 				rock1 = 0.05,
 				-- flint=0.05,
 				--grassnova = .025,
-				--saplingnova = .04,
+				--sapling = .04,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -17598,7 +17599,7 @@ else
 				skeleton = .1,
 				flint = 0.5,
 				--grassnova = .75,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .1,
 				berrybush2_snake = .02,
 				red_mushroom = .06,
@@ -17636,7 +17637,7 @@ else
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = .025,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .06, --was .01,
 				red_mushroom = .06,
@@ -17672,7 +17673,7 @@ else
 				rock_flintless = 0.05,
 				--rock2 = 0.05, --gold rock
 				--grassnova = .05,
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .75, --was 0.3
 				berrybush2_snake = .04, --was .01,
 				red_mushroom = .03,
@@ -17707,7 +17708,7 @@ else
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = 1, --was .4,
-				--saplingnova = .3,
+				--sapling = .3,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .07, --was .01,
 				red_mushroom = 3,
@@ -17744,7 +17745,7 @@ else
 				rocks = 3,
 				--flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .07, --was .01,
 				red_mushroom = .06,
@@ -17777,7 +17778,7 @@ else
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = 5,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -17810,7 +17811,7 @@ else
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
-				saplingnova = 6,
+				sapling = 6,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -17843,7 +17844,7 @@ else
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -17879,7 +17880,7 @@ else
 				rock2 = 0.5,
 				rocks = 0.4,
 				--grassnova = 0.5, --was .05
-				--saplingnova  = 8,
+				--sapling  = 8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
@@ -17918,7 +17919,7 @@ else
 				rock2 = 0.5,
 				rocks = 0.4,
 				--grassnova = 0.6, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				red_mushroom = 0.05,
 				green_mushroom = 0.03,
 				blue_mushroom = 0.02,
@@ -17952,7 +17953,7 @@ else
 				--palmtree = 0.05,
 				jungletree = 5,
 				--grassnova = 0.6, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05,
 				berrybush2_snake = 0.01,
 				red_mushroom = 0.05,
@@ -17992,7 +17993,7 @@ else
 				rock2 = 0.05,
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = .05, --was .01,
 				flower = 0.2,
@@ -18031,7 +18032,7 @@ else
 				rock2 = 0.05,
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
@@ -18072,7 +18073,7 @@ else
 				rock2 = 0.05,
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
@@ -18139,7 +18140,7 @@ else
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -18178,7 +18179,7 @@ else
 				beehive = .01, --was .05,
 				--flower = .04, --trying
 				grassnova = .2, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -18329,7 +18330,7 @@ else
 					                    pond_mos = .8,
 					                    grassnova = .5,
 					                    flower = .3,
-					                    saplingnova = .2,
+					                    sapling = .2,
 					                    sweet_potato_planted = .1,
 					                },
 					            }
@@ -18344,7 +18345,7 @@ else
 			distributeprefabs =
 			{
 				grassnova = 3,
-				--saplingnova = 1,
+				--sapling = 1,
 				flower = .5,
 				beehive = .1, --was 1,
 				wasphive = 0.003,
@@ -18364,7 +18365,7 @@ else
 			{
 				spiderden = .1,
 				grassnova = 1,
-				--saplingnova = .8,
+				--sapling = .8,
 				--ox = .5,
 				flower = .5,
 			},
@@ -18399,7 +18400,7 @@ else
 			distributeprefabs =
 			{
 				grassnova = .8,
-				--saplingnova = .8,
+				--sapling = .8,
 				sweet_potato_planted = 0.05,
 				rocks = 0.003,
 				rock_flintless = 0.01,
@@ -18429,7 +18430,7 @@ else
 				rocks = .25,
 				flint = 0.5, -- lowered from 3
 				spiderden = .1,
-				-- saplingnova = 1.0,
+				-- sapling = 1.0,
 			},
 		}
 	})
@@ -18452,7 +18453,7 @@ else
 				-- rock_ice = 1,
 				--tallbirdnest= --2, --.1,
 				spiderden = .1,
-				--saplingnova = 0.5,
+				--sapling = 0.5,
 
 			},
 
@@ -18481,7 +18482,7 @@ else
 				-- rock_ice = 1,
 				--tallbirdnest= --2, --.1,
 				spiderden = .1,
-				saplingnova = 0.5,
+				sapling = 0.5,
 			},
 
 			countprefabs =
@@ -18506,7 +18507,7 @@ else
 				rock2 = 1,
 				rocks = 25,
 				tallbirdnest = 0.08,
-				saplingnova = 1.5,
+				sapling = 1.5,
 				spiderden = .1,
 			},
 		}
@@ -18527,11 +18528,11 @@ else
 				--rock_ice = .75,
 				rocks = .25,
 				flint = 1.5,
-				saplingnova = .05,
+				sapling = .05,
 				blue_mushroom = .002,
 				green_mushroom = .002,
 				red_mushroom = .002,
-				saplingnova = .5,
+				sapling = .5,
 				spiderden = .1,
 			},
 		}
@@ -18551,7 +18552,7 @@ else
 				rock2 = 2,
 				rocks = .25,
 				flint = 0.,
-				-- saplingnova = .5,
+				-- sapling = .5,
 				spiderden = .1,
 			},
 
@@ -18621,7 +18622,7 @@ else
 				flint = 0.2, -- lowered from 3
 				--  tallbirdnest= .2, --.1,
 				--					                    dragoonden= 0.7,
-				saplingnova = .3,
+				sapling = .3,
 
 			},
 			countprefabs =
@@ -18650,7 +18651,7 @@ else
 				rock_moon = 0.1,
 				goldnugget = .25,
 				tallbirdnest = .2,
-				saplingnova = .5,
+				sapling = .5,
 				spiderden = .1,
 			},
 		}
@@ -18675,7 +18676,7 @@ else
 				rock_moon = 0.1,
 				goldnugget = .25,
 				tallbirdnest = .2,
-				saplingnova = .5,
+				sapling = .5,
 				spiderden = .1,
 			},
 			countprefabs =
@@ -18704,7 +18705,7 @@ else
 				tallbirdnest = .1,
 				rock_moon = 0.1,
 				rock_moon = 2,
-				-- saplingnova = .5,
+				-- sapling = .5,
 				--spiderden= .1,
 			},
 		}
@@ -18726,7 +18727,7 @@ else
 				rock_moon = 0.1,
 				rock_flintless = 1,
 				tallbirdnest = .25,
-				--saplingnova = .5,
+				--sapling = .5,
 				spiderden = .1,
 			},
 		}
@@ -18751,7 +18752,7 @@ else
 				rock_flintless = 1,
 				rock_moon = 0.1,
 				jungletree = 0.5,
-				saplingnova = 2,
+				sapling = 2,
 				spiderden = .15,
 			},
 
@@ -18783,7 +18784,7 @@ else
 				-- rock_ice = 1,
 				tallbirdnest = .2, --.1,
 				spiderden = 1.5, --.5,
-				saplingnova = .5,
+				sapling = .5,
 
 			},
 		}
@@ -19219,7 +19220,7 @@ else
 				beehive = .01, --was .05,
 				--flower = .04, --trying
 				grassnova = .2, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -19250,7 +19251,7 @@ else
 				--beehive = .05, --trying
 				--flower = .04, --trying
 				grassnova = .5, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -19261,7 +19262,7 @@ else
 			countprefabs =
 			{
 				flint = 1,
-				saplingnova = 1,
+				sapling = 1,
 			}
 
 		}
@@ -19277,7 +19278,7 @@ else
 			{
 				seashell_beached = 0.125,
 				grassnova = .3, --down from 3
-				saplingnova = .1, --lowered from 15
+				sapling = .1, --lowered from 15
 				--flower = 0.05,
 				rock_limpet = .02,
 				crabhole = .015, --was .03
@@ -19296,7 +19297,7 @@ else
 				--seashell_beached = 1, --one seashell
 				--coconut = 1, --one coconut
 				--mandrake =0.05,
-				saplingnova = 3,
+				sapling = 3,
 				grassnova = 3,
 				--sandhill = .05,
 			}
@@ -19313,7 +19314,7 @@ else
 			{
 				seashell_beached = 0.125,
 				grassnova = .3, --down from 3
-				saplingnova = .1, --lowered from 15
+				sapling = .1, --lowered from 15
 				--flower = 0.05,
 				rock_limpet = .02,
 				crabhole = .015, --was .03
@@ -19332,7 +19333,7 @@ else
 				--seashell_beached = 1, --one seashell
 				--coconut = 1, --one coconut
 				--mandrake =0.05,
-				saplingnova = 6,
+				sapling = 6,
 				grassnova = 6,
 				--sandhill = .05,
 			}
@@ -19350,7 +19351,7 @@ else
 			{
 				seashell_beached = 0.125,
 				--grassnova = .3, --down from 3
-				--saplingnova = .1, --lowered from 15
+				--sapling = .1, --lowered from 15
 				--flower = 0.05,
 				rock_limpet = .02,
 				-- crabhole = .015, --was .03
@@ -19369,7 +19370,7 @@ else
 				--seashell_beached = 1, --one seashell
 				--coconut = 1, --one coconut
 				--mandrake =0.05,
-				--saplingnova = 3,
+				--sapling = 3,
 				--grassnova = 3,
 				--sandhill = .05,
 			}
@@ -19386,7 +19387,7 @@ else
 			{
 				seashell_beached = 0.025,
 				grassnova = .1, --was .3
-				saplingnova = .05, --was .15
+				sapling = .05, --was .15
 				--flower = 0.05,
 				rock_limpet = .02,
 				--crabhole = .015, --was .03
@@ -19446,7 +19447,7 @@ else
 				beehive = .01, --was .05,
 				--flower = .04, --trying
 				grassnova = .2, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -19566,7 +19567,7 @@ else
 			distributepercent = .2, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
 			distributeprefabs =
 			{
-				saplingnova = 0.25,
+				sapling = 0.25,
 				grassnova = .5,
 				palmtree = .1,
 				wildborehouse = .05,
@@ -19585,7 +19586,7 @@ else
 			distributepercent = .2, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
 			distributeprefabs =
 			{
-				saplingnova = 0.25,
+				sapling = 0.25,
 				grassnova = .5,
 				palmtree = .1,
 				wildborehouse = .05,
@@ -19615,7 +19616,7 @@ else
 				wasphive = .05,
 				--flower = .04, --trying
 				grassnova = .4, --trying
-				saplingnova = .4, --trying
+				sapling = .4, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -19635,7 +19636,7 @@ else
 			{
 				rock_limpet = 0.005,
 				crabhole = 1,
-				saplingnova = .2,
+				sapling = .2,
 				palmtree = .75,
 				grassnova = .5,
 				--flower=.1,
@@ -19662,7 +19663,7 @@ else
 				sandhill = 1.5,
 				grassnova = 1,
 				seashell_beached = .5,
-				saplingnova = 1,
+				sapling = 1,
 				rock1 = .5,
 				rock_limpet = 0.1,
 				wildborehouse = .05,
@@ -19701,7 +19702,7 @@ else
 			distributepercent = .1,
 			distributeprefabs =
 			{
-				saplingnova = 1,
+				sapling = 1,
 				crabhole = .5,
 				palmtree = 1,
 				rock_limpet = 0.1,
@@ -19747,7 +19748,7 @@ else
 				rock1 = 1,
 				grassnova = 1,
 				seashell = 1,
-				saplingnova = .5,
+				sapling = .5,
 				flint = .05,
 				seashell_beached = .25,
 				wildborehouse = .05,
@@ -19769,7 +19770,7 @@ else
 				palmtree = 1,
 				grassnova = 1,
 				rocks = 0.5,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				flint = .05,
 				seashell_beached = .25,
 				wildborehouse = .025,
@@ -19793,7 +19794,7 @@ else
 				rocks = .003, --trying
 				beehive = .005, --trying
 				grassnova = .3, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -19815,7 +19816,7 @@ else
 				palmtree = .3,
 				rock1 = .1,
 				grassnova = .2,
-				saplingnova = .1,
+				sapling = .1,
 				seashell_beached = .025,
 				rock_limpet = 0.01,
 				flint = .05,
@@ -19839,7 +19840,7 @@ else
 				beehive = .0025, --trying
 				--flower = 0.04, --trying
 				grassnova = .3, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -19864,7 +19865,7 @@ else
 				beehive = .005, --trying
 				--flower = 0.04, --trying
 				grassnova = .3, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -19889,7 +19890,7 @@ else
 				beehive = .005, --trying
 				--flower = 0.04, --trying
 				grassnova = .3, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .002, --trying
 				flint = .05,
 				sandhill = .055,
@@ -19921,7 +19922,7 @@ else
 				beehive = .02,
 				--flower = .04,
 				grassnova = .3, --was .2,
-				saplingnova = .2,
+				sapling = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
@@ -19955,7 +19956,7 @@ else
 				beehive = .02,
 				--flower = .04,
 				grassnova = .3, --was .2,
-				saplingnova = .2,
+				sapling = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
@@ -19989,7 +19990,7 @@ else
 				beehive = .02,
 				--flower = .04,
 				grassnova = .3, --was .2,
-				saplingnova = .2,
+				sapling = .2,
 				--fireflies = .02,
 				--spiderden = .03,
 				flint = .25,
@@ -20022,7 +20023,7 @@ else
 				rock1 = .1,
 				beehive = .01,
 				grassnova = .2,
-				saplingnova = .2,
+				sapling = .2,
 				flint = .05,
 				sandhill = .6,
 				seashell_beached = .02,
@@ -20056,7 +20057,7 @@ else
 				rock1 = 0.05,
 				flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -20227,7 +20228,7 @@ else
 				rock1 = 0.05,
 				flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -20330,7 +20331,7 @@ else
 				rock2 = 0.1, --was .05
 				flint = 0.1, --was 0.03,
 				--grassnova = .01, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .09, -- was .0003
 				berrybush2_snake = 0.01,
 				red_mushroom = .03,
@@ -20423,7 +20424,7 @@ else
 				rock2 = 0.05,
 				rocks = .3,
 				flint = .1, --dropped
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05, --was .03
 				berrybush2_snake = 0.01,
 				--grassnova = 1,
@@ -20459,7 +20460,7 @@ else
 				-- rock2 = 0.05, --gold rock
 				flint = .1, --dropped
 				--grassnova = .6, --raised from 05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05, --was .03
 				berrybush2_snake = 0.01,
 				red_mushroom = .03,
@@ -20493,7 +20494,7 @@ else
 				rock1 = 0.05,
 				rock2 = 0.1, --was .05
 				--grassnova = 1, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1,
 				berrybush2_snake = 0.04,
 				red_mushroom = .03,
@@ -20530,7 +20531,7 @@ else
 				rock1 = 0.05,
 				--rock2 = 0.05, --gold rock
 				--grassnova = 1, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = 0.03, --was 0.01,
 				red_mushroom = .03,
@@ -20562,7 +20563,7 @@ else
 				rock1 = 0.05,
 				rock2 = 0.05,
 				--grassnova = .02, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .06, --was .03,
 				berrybush2_snake = .02, --was .01,
 				red_mushroom = .03,
@@ -20597,7 +20598,7 @@ else
 				rock1 = 0.05,
 				rock2 = 0.05,
 				--grassnova = .02, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .6, --was .03
 				berrybush2_snake = .03, --was .01,
 				red_mushroom = .03,
@@ -20662,7 +20663,7 @@ else
 				rock1 = 0.05,
 				flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -20696,7 +20697,7 @@ else
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = .025,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -20734,7 +20735,7 @@ else
 				rock1 = 0.05,
 				rock2 = 0.05,
 				--grassnova = 1, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = .05, --was 0.01,
 				red_mushroom = .03,
@@ -20800,7 +20801,7 @@ else
 				rock1 = 0.05,
 				-- flint=0.05,
 				--grassnova = .025,
-				--saplingnova = .04,
+				--sapling = .04,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -20838,7 +20839,7 @@ else
 				skeleton = .1,
 				flint = 0.5,
 				--grassnova = .75,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .1,
 				berrybush2_snake = .02,
 				red_mushroom = .06,
@@ -20876,7 +20877,7 @@ else
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = .025,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .06, --was .01,
 				red_mushroom = .06,
@@ -20912,7 +20913,7 @@ else
 				rock_flintless = 0.05,
 				--rock2 = 0.05, --gold rock
 				--grassnova = .05,
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .75, --was 0.3
 				berrybush2_snake = .04, --was .01,
 				red_mushroom = .03,
@@ -20947,7 +20948,7 @@ else
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = 1, --was .4,
-				--saplingnova = .3,
+				--sapling = .3,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .07, --was .01,
 				red_mushroom = 3,
@@ -20984,7 +20985,7 @@ else
 				rocks = 3,
 				--flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .07, --was .01,
 				red_mushroom = .06,
@@ -21017,7 +21018,7 @@ else
 				rock1 = 0.05,
 				--flint=0.05,
 				--grassnova = 5,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -21050,7 +21051,7 @@ else
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
-				saplingnova = 6,
+				sapling = 6,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -21083,7 +21084,7 @@ else
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -21119,7 +21120,7 @@ else
 				rock2 = 0.5,
 				rocks = 0.4,
 				--grassnova = 0.5, --was .05
-				--saplingnova  = 8,
+				--sapling  = 8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
@@ -21158,7 +21159,7 @@ else
 				rock2 = 0.5,
 				rocks = 0.4,
 				--grassnova = 0.6, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				red_mushroom = 0.05,
 				green_mushroom = 0.03,
 				blue_mushroom = 0.02,
@@ -21192,7 +21193,7 @@ else
 				--palmtree = 0.05,
 				jungletree = 5,
 				--grassnova = 0.6, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .05,
 				berrybush2_snake = 0.01,
 				red_mushroom = 0.05,
@@ -21232,7 +21233,7 @@ else
 				rock2 = 0.05,
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = .05, --was .01,
 				flower = 0.2,
@@ -21271,7 +21272,7 @@ else
 				rock2 = 0.05,
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
@@ -21312,7 +21313,7 @@ else
 				rock2 = 0.05,
 				rocks = 0.04,
 				--grassnova = 0.6, --was .05
-				--saplingnova = .8,
+				--sapling = .8,
 				berrybush2 = .1, --was .05,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = 0.05,
@@ -21379,7 +21380,7 @@ else
 				rock1 = 0.05,
 				--flint = 0.05,
 				--grassnova = .025,
-				--saplingnova = .4,
+				--sapling = .4,
 				berrybush2 = .05, --was .01,
 				berrybush2_snake = .05, --was .01,
 				red_mushroom = .06,
@@ -21418,7 +21419,7 @@ else
 				beehive = .01, --was .05,
 				--flower = .04, --trying
 				grassnova = .2, --trying
-				saplingnova = .2, --trying
+				sapling = .2, --trying
 				--fireflies = .02, --trying
 				--spiderden = .03, --trying
 				flint = .05,
@@ -21486,7 +21487,7 @@ else
 				deep_jungle_fern_noise_plant2 = 1,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -21522,7 +21523,7 @@ else
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -21563,7 +21564,7 @@ else
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -21600,7 +21601,7 @@ else
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -21638,7 +21639,7 @@ else
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -21676,7 +21677,7 @@ else
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -21714,7 +21715,7 @@ else
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -21757,7 +21758,7 @@ else
 				deep_jungle_fern_noise_plant2 = 0.5,
 				clawpalmtree = 0.5,
 				grass_tall = 1,
-				saplingnova = .3,
+				sapling = .3,
 				flower = 0.05,
 				peagawk = 0.01,
 				rock_flippable = 0.08,
@@ -21943,7 +21944,7 @@ else
 				pillar_cave_rock = 0.1,
 				rock_flippable = 0.3,
 				rock_antcave = 0.7,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				rock_flintless = 1.0,
 				rock_flintless_med = 1.0,
 				rock_flintless_low = 1.0,
@@ -21979,7 +21980,7 @@ else
 				pillar_cave_rock = 0.1,
 				rock_flippable = 0.3,
 				rock_antcave = 0.7,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				rock_flintless = 1.0,
 				rock_flintless_med = 1.0,
 				rock_flintless_low = 1.0,
@@ -22015,7 +22016,7 @@ else
 				rock_flippable = 0.3,
 				rock_antcave = 0.7,
 				antcombhomecave = 0.15,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				guano = 0.27,
 				goldnugget = .05,
 				flint = 0.05,
@@ -22051,7 +22052,7 @@ else
 				ant_cave_lantern = 0.1,
 				rock_flippable = 0.7,
 				rock_antcave = 0.3,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				deco_cave_ceiling_drip_2 = 0.1,
 			},
 			countprefabs =
@@ -22106,7 +22107,7 @@ else
 				pillar_cave_rock = 0.1,
 				rock_flippable = 0.3,
 				rock_antcave = 0.7,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				deco_cave_ceiling_drip_2 = 0.1,
 			},
 			countprefabs =
@@ -22132,7 +22133,7 @@ else
 				pillar_cave_rock = 0.1,
 				rock_flippable = 0.3,
 				rock_antcave = 0.7,
-				saplingnova = 0.2,
+				sapling = 0.2,
 				deco_cave_ceiling_drip_2 = 0.1,
 			},
 			countprefabs =
@@ -22433,7 +22434,7 @@ else
 				cavelight_small = 0.05,
 
 				grass = 0.1,
-				saplingnova = 0.1,
+				sapling = 0.1,
 				twiggytree = 0.04,
 
 				mushtree_small = 5.0,
@@ -22513,7 +22514,7 @@ else
 			distributeprefabs =
 			{
 				grass = 0.1,
-				saplingnova = 0.1,
+				sapling = 0.1,
 				twiggytree = 0.04,
 
 				mushtree_small = 5.0,
@@ -22627,7 +22628,7 @@ else
 				flower_cave_double = 0.05,
 				flower_cave_triple = 0.05,
 
-				saplingnova = 1,
+				sapling = 1,
 				grass_tall = 3,
 				ox = 0.5,
 				teatree = 0.8,
@@ -22651,7 +22652,7 @@ else
 				flower_cave_double = 0.05,
 				flower_cave_triple = 0.05,
 
-				saplingnova = 1,
+				sapling = 1,
 				grass_tall = 3,
 				ox = 0.5,
 				teatree = 0.8,
@@ -22680,7 +22681,7 @@ else
 				flower_cave_double = 0.05,
 				flower_cave_triple = 0.05,
 
-				saplingnova = 1,
+				sapling = 1,
 				grass_tall = 3,
 				ox = 0.5,
 				teatree = 0.8,
@@ -22710,7 +22711,7 @@ else
 				flower_cave_double = 0.05,
 				flower_cave_triple = 0.05,
 
-				saplingnova = 1,
+				sapling = 1,
 				grass_tall = 3,
 				ox = 0.5,
 				teatree = 0.8,
@@ -22734,7 +22735,7 @@ else
 				flower_cave_double = 0.05,
 				flower_cave_triple = 0.05,
 
-				saplingnova = 1,
+				sapling = 1,
 				grass_tall = 3,
 				ox = 0.5,
 				teatree = 0.8,
@@ -26259,7 +26260,7 @@ else
 			distributepercent = 0.25,
 			distributeprefabs = {
 				grass = 2,
-				saplingnova = 2,
+				sapling = 2,
 				green_mushroom = 3,
 				blue_mushroom = 3,
 				flower = 1,

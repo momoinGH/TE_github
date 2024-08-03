@@ -62,7 +62,6 @@ local function fn(Sim)
     inst.components.waterproofer.effectiveness = 0
 
     inst:AddComponent("bait")
-    inst.oincvalue = 10
 
     inst:AddComponent("tradable")
     inst:AddComponent("inventoryitem")

@@ -1,6 +1,6 @@
-require "tuning"
-local PLANT_DEFS = require("prefabs/farm_plant_defs").PLANT_DEFS
 
+require("prefabs/tropical_farm_plant_defs") --modmain里新增的数据好像会清空，这里再加一次
+local PLANT_DEFS = require("prefabs/farm_plant_defs").PLANT_DEFS
 local function MakeVegStats(seedweight, hunger, health, perish_time, sanity, cooked_hunger, cooked_health,
                             cooked_perish_time, cooked_sanity, float_settings, cooked_float_settings, dryable,
                             secondary_foodtype, halloweenmoonmutable_settings, lure_data)
@@ -425,6 +425,11 @@ local function MakeVeggie(name, has_seeds)
         table.insert(prefabs, name .. "_oversized_waxed")
         table.insert(prefabs, name .. "_oversized_rotten")
         table.insert(prefabs, "splash_green")
+
+        if not (PLANT_DEFS[name] and PLANT_DEFS[name].build) then
+            print("缺少", name, PLANT_DEFS[name], PLANT_DEFS[name] and PLANT_DEFS[name].build)
+            print(PLANT_DEFS.wheat)
+        end
 
         table.insert(assets_oversized, Asset("ANIM", "anim/" .. PLANT_DEFS[name].build .. ".zip"))
     end

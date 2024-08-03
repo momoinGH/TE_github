@@ -141,6 +141,7 @@ local function reef_fn(Sim)
 	inst.AnimState:SetBuild("coral_rock")
 
 	inst:AddTag("aquatic")
+	inst:AddTag("quebraonda")
 	inst:AddTag("mudacamada")
 	inst:AddTag("ignorewalkableplatforms")
 

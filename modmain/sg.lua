@@ -4297,3 +4297,57 @@ AddComponentPostInit("fueled", function(self)
     end
 end)
 
+
+AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(ACTIONS.STOREOPEN, "doshortaction"))
+AddStategraphActionHandler("wilson_client", GLOBAL.ActionHandler(ACTIONS.STOREOPEN, "doshortaction"))
+
+
+AddStategraphEvent("wilson", EventHandler("tfwp_critical", function(inst, data)
+    if not inst.components.health:IsDead()
+        and data.weapon ~= nil
+        and data.weapon:IsValid()
+        and data.target ~= nil
+        and data.target:IsValid()
+        and data.weapon == inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+    then
+        inst.sg:GoToState("tfwp_critical", data)
+    end
+end))
+
+AddStategraphState("wilson", State {
+    name = "tfwp_critical",
+    tags = { "doing", "busy", "nointerrupt", "nopredict" }, --ноинтеррапт защищает от прерывания при получении урона
+
+    onenter = function(inst, data)
+        inst.components.locomotor:Stop()
+
+        --inst.AnimState:PlayAnimation("atk_leap_pre")
+        inst.AnimState:PlayAnimation("atk_leap", false)
+
+        inst.sg.statemem.weapon = data.weapon
+        inst.sg.statemem.target = data.target
+    end,
+
+    events =
+    {
+        EventHandler("animover", function(inst)
+            inst.sg:GoToState("idle")
+        end),
+        EventHandler("unequip", function(inst)
+            inst.sg:GoToState("idle")
+        end)
+    },
+
+    timeline =
+    {
+        TimeEvent(15 * FRAMES, function(inst)
+            local weapon = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+            if weapon and weapon == inst.sg.statemem.weapon then
+                weapon:DoCriticalHit(inst, inst.sg.statemem.target)
+            end
+        end),
+        TimeEvent(21 * FRAMES, function(inst)
+            inst.sg:RemoveStateTag("busy")
+        end)
+    }
+})

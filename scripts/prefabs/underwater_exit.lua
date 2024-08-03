@@ -28,7 +28,6 @@ local function fn(Sim)
 
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddTag("teleportaprafloresta")
     inst:AddTag("vent")
     inst:AddTag("underwater")
 
@@ -38,7 +37,7 @@ local function fn(Sim)
     inst.components.bubbleblower:SetBubbleRate(5)
 
     inst:AddComponent("oxygenaura")
-    inst.components.oxygenaura:SetAura(UW_TUNING.GEOTHERMAL_VENT_AIR * 0.5)
+    inst.components.oxygenaura:SetAura(TUNING.GEOTHERMAL_VENT_AIR * 0.5)
 
     inst.entity:SetPristine()
 
@@ -99,7 +98,7 @@ local function fn1(Sim)
     inst.components.bubbleblower:SetBubbleRate(5)
 
     inst:AddComponent("oxygenaura")
-    inst.components.oxygenaura:SetAura(UW_TUNING.GEOTHERMAL_VENT_AIR * 0.5)
+    inst.components.oxygenaura:SetAura(TUNING.GEOTHERMAL_VENT_AIR * 0.5)
 
     inst.entity:SetPristine()
 
@@ -175,7 +174,7 @@ local function fn2(Sim)
     inst.components.bubbleblower:SetBubbleRate(5)
 
     inst:AddComponent("oxygenaura")
-    inst.components.oxygenaura:SetAura(UW_TUNING.GEOTHERMAL_VENT_AIR * 0.5)
+    inst.components.oxygenaura:SetAura(TUNING.GEOTHERMAL_VENT_AIR * 0.5)
 
     inst.entity:SetPristine()
 

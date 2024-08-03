@@ -12,7 +12,6 @@ local assets =
 
 local prefabs =
 {
-    "levelx_vest",
 }
 
 
@@ -176,12 +175,6 @@ local function fn()
 
     --    inst:AddComponent("waterproofer")
     --    inst.components.waterproofer:SetEffectiveness(0)
-
-    -- inst:AddComponent("container")
-    -- inst.components.container:WidgetSetup("levelx_vest")
-
-
-
 
     inst:AddComponent("insulator")
     --	inst.components.insulator:SetWinter()

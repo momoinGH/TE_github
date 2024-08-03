@@ -1,43 +1,6 @@
-----------------------------------------------------------------------------------------------------
-table.insert(Assets, Asset("ANIM", "anim/button.zip"))
-table.insert(Assets, Asset("IMAGE", "images/store.tex"))
-table.insert(Assets, Asset("ATLAS", "images/store.xml"))
-table.insert(Assets, Asset("IMAGE", "images/store_soldout.tex"))
-table.insert(Assets, Asset("ATLAS", "images/store_soldout.xml"))
-table.insert(Assets, Asset("ATLAS", "images/buttongorge.xml"))
-table.insert(Assets, Asset("IMAGE", "images/buttongorge.tex"))
-
-----------------------------------------------------------------------------------------------------
-local StoreScreen = GLOBAL.require "screens/storescreen"
-local ModStoreData = GLOBAL.require "ModStoreData"
+local StoreScreen = require "screens/storescreen"
+local ModStoreData = require "ModStoreData"
 local CoinsPrefab, GoodsPrefab = ModStoreData.CoinsPrefab, ModStoreData.GoodsPrefab
-
-----------------------------------------------------------------------------------------------------
---[API]AddModRPCHandler(namespace, name, fn)
-----------------------------------------------------------------------------------------------------
-if GLOBAL.TheNet:GetIsClient() then AddModRPCHandler("ServerStore", "Requested", function() end) end
-if GLOBAL.TheNet:GetIsClient() then AddModRPCHandler("ServerStore", "OpenStore", function() end) end
-if GLOBAL.TheNet:GetIsClient() then AddModRPCHandler("ServerStore", "Purchased", function() end) end
-if GLOBAL.TheNet:GetIsClient() then AddModRPCHandler("ServerStore", "ShutStore", function() end) end
-
-----------------------------------------------------------------------------------------------------
-
-AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.STOREOPEN, "doshortaction"))
-AddStategraphActionHandler("wilson_client", GLOBAL.ActionHandler(GLOBAL.ACTIONS.STOREOPEN, "doshortaction"))
-
-----------------------------------------------------------------------------------------------------
---[API]AddComponentAction(actiontype, component, fn)
-----------------------------------------------------------------------------------------------------
-AddComponentAction("SCENE", "store", function(inst, doer, actions)
-    table.insert(actions, GLOBAL.ACTIONS.STOREOPEN)
-end)
-
-----------------------------------------------------------------------------------------------------
---[API]AddPlayerPostInit(fn)
-----------------------------------------------------------------------------------------------------
-AddPlayerPostInit(function(inst)
-    inst._isopening = GLOBAL.net_bool(inst.GUID, "IsOpening", "Store_IsOpening")
-end)
 
 ----------------------------------------------------------------------------------------------------
 local function AtlasTextureFinder(moneyprefab)
@@ -204,21 +167,21 @@ end
 --[API]AddPrefabPostInit(prefab, fn)
 ----------------------------------------------------------------------------------------------------
 AddPrefabPostInit("lavaarena_boarlord", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction1
@@ -236,21 +199,21 @@ AddPrefabPostInit("lavaarena_boarlord", function(inst)
 end)
 
 AddPrefabPostInit("lavaarena_spectator4", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction2
@@ -268,21 +231,21 @@ AddPrefabPostInit("lavaarena_spectator4", function(inst)
 end)
 
 AddPrefabPostInit("lavaarena_spectator2", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction3
@@ -300,21 +263,21 @@ AddPrefabPostInit("lavaarena_spectator2", function(inst)
 end)
 
 AddPrefabPostInit("lavaarena_spectator3", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction5
@@ -332,21 +295,21 @@ AddPrefabPostInit("lavaarena_spectator3", function(inst)
 end)
 
 AddPrefabPostInit("lavaarena_spectator1", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction4
@@ -364,21 +327,21 @@ AddPrefabPostInit("lavaarena_spectator1", function(inst)
 end)
 
 AddPrefabPostInit("quagmire_goatkid", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction3
@@ -396,21 +359,21 @@ AddPrefabPostInit("quagmire_goatkid", function(inst)
 end)
 
 AddPrefabPostInit("quagmire_trader_merm", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction4
@@ -428,21 +391,21 @@ AddPrefabPostInit("quagmire_trader_merm", function(inst)
 end)
 
 AddPrefabPostInit("quagmire_trader_merm2", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction4
@@ -460,21 +423,21 @@ AddPrefabPostInit("quagmire_trader_merm2", function(inst)
 end)
 
 AddPrefabPostInit("quagmire_trader_merm3", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction4
@@ -492,21 +455,21 @@ AddPrefabPostInit("quagmire_trader_merm3", function(inst)
 end)
 
 AddPrefabPostInit("quagmire_goatkid2", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction3
@@ -524,21 +487,21 @@ AddPrefabPostInit("quagmire_goatkid2", function(inst)
 end)
 
 AddPrefabPostInit("quagmire_goatmum", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction2
@@ -556,21 +519,21 @@ AddPrefabPostInit("quagmire_goatmum", function(inst)
 end)
 
 AddPrefabPostInit("quagmire_swampigelder", function(inst)
-    inst._goodslist = GLOBAL.net_bytearray(inst.GUID, "GoodsList")
-    inst._countlist = GLOBAL.net_bytearray(inst.GUID, "CountList")
-    inst._spoillist = GLOBAL.net_bytearray(inst.GUID, "SpoilList")
-    inst._ratiolist = GLOBAL.net_bytearray(inst.GUID, "RatioList")
-    inst._stocklist = GLOBAL.net_bytearray(inst.GUID, "StockList")
-    inst._moneylist = GLOBAL.net_bytearray(inst.GUID, "MoneyList")
-    inst._pricelist = GLOBAL.net_bytearray(inst.GUID, "PriceList")
-    inst._disctlist = GLOBAL.net_bytearray(inst.GUID, "DisctList")
+    inst._goodslist = net_bytearray(inst.GUID, "GoodsList")
+    inst._countlist = net_bytearray(inst.GUID, "CountList")
+    inst._spoillist = net_bytearray(inst.GUID, "SpoilList")
+    inst._ratiolist = net_bytearray(inst.GUID, "RatioList")
+    inst._stocklist = net_bytearray(inst.GUID, "StockList")
+    inst._moneylist = net_bytearray(inst.GUID, "MoneyList")
+    inst._pricelist = net_bytearray(inst.GUID, "PriceList")
+    inst._disctlist = net_bytearray(inst.GUID, "DisctList")
 
     inst.goodsinfo = {}
-    inst.NetEvt_Requested = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Requested")
-    inst.NetEvt_OpenStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_OpenStore")
-    inst.NetEvt_Purchased = GLOBAL.net_event(inst.GUID, "Store_NetEvt_Purchased")
-    inst.NetEvt_ShutStore = GLOBAL.net_event(inst.GUID, "Store_NetEvt_ShutStore")
-    inst.NetEvt_AdminPush = GLOBAL.net_event(inst.GUID, "Store_NetEvt_AdminPush")
+    inst.NetEvt_Requested = net_event(inst.GUID, "Store_NetEvt_Requested")
+    inst.NetEvt_OpenStore = net_event(inst.GUID, "Store_NetEvt_OpenStore")
+    inst.NetEvt_Purchased = net_event(inst.GUID, "Store_NetEvt_Purchased")
+    inst.NetEvt_ShutStore = net_event(inst.GUID, "Store_NetEvt_ShutStore")
+    inst.NetEvt_AdminPush = net_event(inst.GUID, "Store_NetEvt_AdminPush")
 
     inst.Requested = RequestedFunction
     inst.OpenStore = OpenStoreFunction4

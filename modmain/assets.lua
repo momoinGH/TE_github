@@ -1,11 +1,180 @@
--- # PrefabFiles
--- ## Hamlet Plus
-table.insert(PrefabFiles, "collapsedchest_tro")
+Assets =
+{
+	Asset("ANIM", "anim/pigman_tribe.zip"), --图鉴wiki默认动画
 
--- # Assets
--- ## Hamlet Plus
-table.insert(Assets, Asset("IMAGE", "images/ui/honeychest.tex"))
-table.insert(Assets, Asset("ATLAS", "images/ui/honeychest.xml"))
+	--Asset("SOUNDPACKAGE", "sound/volcano.fev"),
+	--Asset("SOUND", "sound/volcano.fsb"),
+	--Asset("SOUND", "sound/boats.fsb"),
+	--Asset("SOUND", "sound/creatures.fsb"),
+	--Asset("SOUND", "sound/slot_machine.fsb"),
+	--Asset("SOUND", "sound/waves.fsb"),
+	--LOD SOUND FILE
+	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC002.fev"),
+	Asset("SOUNDPACKAGE", "sound/sw_character.fev"),
+	Asset("SOUND", "sound/dontstarve_shipwreckedSFX.fsb"),
+	Asset("SOUND", "sound/sw_character.fsb"),
+	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"),
+	Asset("SOUND", "sound/DLC003_sfx.fsb"),
+	Asset("IMAGE", "images/fog_cloud.tex"),
+	--Asset("SOUND", "sound/amb_stream_SW.fsb"),
+	--NEW SOUND FILE
+	--Asset("SOUNDPACKAGE", "sound/volcano_new.fev"),
+	--Asset("SOUND", "sound/volcano_new.fsb"),
+	--Asset("SOUNDPACKAGE", "sound/tropical.fev"),
+	--Asset("SOUND", "sound/tropical.fsb"),
+
+	Asset("IMAGE", "images/barco.tex"),
+	Asset("ATLAS", "images/barco.xml"),
+
+	Asset("ATLAS", "images/inventoryimages/volcanoinventory.xml"),
+	Asset("IMAGE", "images/inventoryimages/volcanoinventory.tex"),
+
+	Asset("ATLAS", "images/inventoryimages/novositens.xml"),
+	Asset("IMAGE", "images/inventoryimages/novositens.tex"),
+
+	Asset("ANIM", "anim/player_actions_paddle.zip"),
+	Asset("ANIM", "anim/player_actions_speargun.zip"),
+	Asset("ANIM", "anim/player_actions_tap.zip"),
+	Asset("ANIM", "anim/player_actions_panning.zip"),
+	Asset("ANIM", "anim/player_actions_hand_lens.zip"),
+	Asset("ANIM", "anim/player_mount_actions_speargun.zip"),
+	Asset("ANIM", "anim/walani_paddle.zip"),
+	Asset("ANIM", "anim/player_boat_death.zip"),
+	Asset("ANIM", "anim/player_sneeze.zip"),
+	Asset("ANIM", "anim/des_sail.zip"),
+	Asset("ANIM", "anim/player_actions_trawl.zip"),
+	Asset("ANIM", "anim/player_actions_machete.zip"),
+	Asset("ANIM", "anim/player_actions_shear.zip"),
+	Asset("ANIM", "anim/player_actions_cropdust.zip"),
+	Asset("ANIM", "anim/ripple_build.zip"),
+	Asset("ATLAS", "images/fx4te.xml"),
+	Asset("IMAGE", "images/fx4te.tex"),
+	Asset("ANIM", "anim/boat_health.zip"),
+	Asset("ANIM", "anim/player_actions_telescope.zip"),
+	Asset("ANIM", "anim/pig_house_old.zip"),
+	Asset("ANIM", "anim/parrot_pirate_intro.zip"),
+	Asset("ANIM", "anim/parrot_pirate.zip"),
+	Asset("ANIM", "anim/pig_house_sale.zip"),
+	Asset("ANIM", "anim/fish2.zip"),
+	Asset("ANIM", "anim/fish3.zip"),
+	Asset("ANIM", "anim/fish4.zip"),
+	Asset("ANIM", "anim/fish5.zip"),
+	Asset("ANIM", "anim/fish6.zip"),
+	Asset("ANIM", "anim/fish7.zip"),
+	Asset("ANIM", "anim/coi.zip"),
+	Asset("ANIM", "anim/ballphinocean.zip"),
+	Asset("ANIM", "anim/dogfishocean.zip"),
+	Asset("ANIM", "anim/goldfish.zip"),
+	Asset("ANIM", "anim/salmon.zip"),
+	Asset("ANIM", "anim/sharxocean.zip"),
+	Asset("ANIM", "anim/swordfishjocean.zip"),
+	Asset("ANIM", "anim/swordfishjocean2.zip"),
+	Asset("ANIM", "anim/mecfish.zip"),
+	Asset("ANIM", "anim/whaleblueocean.zip"),
+	Asset("ANIM", "anim/kingfisher_build.zip"),
+	Asset("ANIM", "anim/parrot_blue_build.zip"),
+	Asset("ANIM", "anim/toucan_hamlet_build.zip"),
+	Asset("ANIM", "anim/toucan_build.zip"),
+	Asset("ANIM", "anim/parrot_build.zip"),
+	Asset("ANIM", "anim/parrot_pirate_build.zip"),
+	Asset("ANIM", "anim/cormorant_build.zip"),
+	Asset("ANIM", "anim/seagull_build.zip"),
+	Asset("ANIM", "anim/quagmire_pigeon_build.zip"),
+	Asset("ANIM", "anim/skeletons.zip"),
+	Asset("ANIM", "anim/fish2.zip"),
+	Asset("ANIM", "anim/oceanfish_small.zip"),
+	Asset("ANIM", "anim/oceanfish_small_1.zip"),
+	Asset("ANIM", "anim/oceanfish_small_2.zip"),
+	Asset("ANIM", "anim/oceanfish_small_3.zip"),
+	Asset("ANIM", "anim/oceanfish_small_4.zip"),
+	Asset("ANIM", "anim/oceanfish_small_5.zip"),
+	Asset("ANIM", "anim/oceanfish_small_6.zip"),
+	Asset("ANIM", "anim/oceanfish_small_7.zip"),
+	Asset("ANIM", "anim/oceanfish_small_8.zip"),
+	Asset("ANIM", "anim/oceanfish_medium.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_1.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_2.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_3.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_4.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_5.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_6.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_7.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_8.zip"),
+	Asset("IMAGE", "levels/textures/outro.tex"),
+	Asset("IMAGE", "levels/textures/ground_noise_water_deep.tex"),
+
+	Asset("IMAGE", "images/inventoryimages/hamletinventory.tex"),
+	Asset("ATLAS", "images/inventoryimages/hamletinventory.xml"),
+
+	Asset("ATLAS", "map_icons/hamleticon.xml"),
+	Asset("IMAGE", "map_icons/hamleticon.tex"),
+	Asset("ATLAS", "map_icons/creepindedeepicon.xml"),
+	Asset("IMAGE", "map_icons/creepindedeepicon.tex"),
+	Asset("ANIM", "anim/butterflymuffin.zip"),
+	Asset("IMAGE", "images/tfwp_inventoryimgs.tex"),
+	Asset("ATLAS", "images/tfwp_inventoryimgs.xml"),
+	--Asset("SOUNDPACKAGE", "sound/Hamlet.fev"),
+	--Asset("SOUND", "sound/Hamlet.fsb"),
+
+
+	Asset("IMAGE", "images/names_wilbur.tex"),
+	Asset("ATLAS", "images/names_wilbur.xml"),
+	Asset("IMAGE", "images/names_woodlegs.tex"),
+	Asset("ATLAS", "images/names_woodlegs.xml"),
+	Asset("IMAGE", "images/names_walani.tex"),
+	Asset("ATLAS", "images/names_walani.xml"),
+
+
+	Asset("ATLAS", "images/tabs.xml"),
+	Asset("IMAGE", "images/tabs.tex"),
+	Asset("IMAGE", "images/turfs/turf01-9.tex"),
+	Asset("ATLAS", "images/turfs/turf01-9.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-10.tex"),
+	Asset("ATLAS", "images/turfs/turf01-10.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-11.tex"),
+	Asset("ATLAS", "images/turfs/turf01-11.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-12.tex"),
+	Asset("ATLAS", "images/turfs/turf01-12.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-13.tex"),
+	Asset("ATLAS", "images/turfs/turf01-13.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-14.tex"),
+	Asset("ATLAS", "images/turfs/turf01-14.xml"),
+	Asset("ANIM", "anim/vagner_over.zip"),
+	Asset("ANIM", "anim/leaves_canopy2.zip"),
+
+	Asset("ANIM", "anim/mushroom_tree_yelow.zip"),
+	Asset("ANIM", "anim/speedicon.zip"),
+
+	Asset("IMAGE", "images/cookbook/cookbook_sw.tex"),
+	Asset("ATLAS", "images/cookbook/cookbook_sw.xml"),
+	Asset("IMAGE", "images/cookbook/cookbook_ham.tex"),
+	Asset("ATLAS", "images/cookbook/cookbook_ham.xml"),
+	Asset("IMAGE", "images/inventoryimages/cookpotfoods_sw.tex"),
+	Asset("ATLAS", "images/inventoryimages/cookpotfoods_sw.xml"),
+	Asset("IMAGE", "images/inventoryimages/cookpotfoods_ham.tex"),
+	Asset("ATLAS", "images/inventoryimages/cookpotfoods_ham.xml"),
+
+	Asset("IMAGE", "images/ui/honeychest.tex"),
+	Asset("ATLAS", "images/ui/honeychest.xml"),
+
+	Asset("ANIM", "anim/button.zip"),
+	Asset("IMAGE", "images/store.tex"),
+	Asset("ATLAS", "images/store.xml"),
+	Asset("IMAGE", "images/store_soldout.tex"),
+	Asset("ATLAS", "images/store_soldout.xml"),
+	Asset("ATLAS", "images/buttongorge.xml"),
+	Asset("IMAGE", "images/buttongorge.tex"),
+}
+
+if GetModConfigData("gorgeisland") and GetModConfigData("kindofworld") == 15 or GetModConfigData("enableallprefabs") == true then
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/quagmirefoods.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/quagmirefoods.tex"))
+end
 
 -- # Inventory item atlas register
 local dictInventoryItems = {
@@ -266,6 +435,9 @@ for _, item in ipairs(miscInventoryItems) do
 	RegisterInventoryItemAtlas(resolvefilepath("images/inventoryimages/" .. item .. ".xml"), item .. ".tex")
 end
 
+AddMinimapAtlas("map_icons/creepindedeepicon.xml")
+AddMinimapAtlas("map_icons/hamleticon.xml")
+----------------------------------------------------------------------------------------------------
 
 RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "bread.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "gorge_meatballs.tex")
@@ -341,3 +513,246 @@ RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "syrup.te
 RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "flour.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "sap.tex")
 RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "quagmire_goatmilk.tex")
+
+
+if GetModConfigData("windyplains") then
+	table.insert(Assets, Asset("IMAGE", "levels/textures/noise_windy.tex"))
+	table.insert(Assets, Asset("IMAGE", "levels/textures/mini_noise_windy.tex"))
+	table.insert(Assets, Asset("IMAGE", "levels/tiles/windy.tex"))
+	table.insert(Assets, Asset("FILE", "levels/tiles/windy.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/map_icons/goddess_statue.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/map_icons/goddess_statue.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/map_icons/goddess_statue2.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/map_icons/goddess_statue2.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/map_icons/goddess_statue3.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/map_icons/goddess_statue3.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/map_icons/goddess_fountain.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/map_icons/goddess_fountain.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/map_icons/goddess_shrine.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/map_icons/goddess_shrine.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/windyfan1.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/windyfan1.xml"))
+	table.insert(Assets, Asset("ANIM", "anim/windyfan.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/swap_windyfan.zip"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/peach.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/peach.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/forbidden_fruit.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/forbidden_fruit.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/goddess_flute.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/goddess_flute.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/goddess_staff.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/goddess_staff.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/peachy_poop.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/peachy_poop.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/goddess_butterfly.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/goddess_butterfly.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/cutgreengrass.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/cutgreengrass.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/magicpowder.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/magicpowder.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/goddess_figure.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/goddess_figure.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/goddess_tori.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/goddess_tori.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/map_icons/goddess_gate.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/map_icons/goddess_gate.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/map_icons/peach.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/map_icons/peach.xml"))
+	table.insert(Assets, Asset("ANIM", "anim/goddess_bird_build.zip"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/goddess_bird.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/goddess_bird.tex"))
+	table.insert(Assets, Asset("ANIM", "anim/goddess_feather.zip"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/goddess_feather.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/goddess_feather.tex"))
+	table.insert(Assets, Asset("ANIM", "anim/goddess_deer_build.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/goddess_lantern.zip"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/goddess_lantern.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/goddess_lantern.tex"))
+	table.insert(Assets, Asset("ANIM", "anim/goddess_fountain_gem.zip"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/goddess_fountainette.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/goddess_fountainette.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/goddess_rabbit_live.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/goddess_rabbit_live.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/less_bottle_green_milk.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/less_bottle_green_milk.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green_less.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green_less.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green_most.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green_most.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green_most.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green_most.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green_half.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green_half.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green_less.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green_less.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/bottle_green_youghurt.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/bottle_green_youghurt.xml"))
+	RegisterInventoryItemAtlas("images/inventoryimages/peach.xml", "peach.tex")
+	RegisterInventoryItemAtlas("images/inventoryimages/grilled_peach.xml", "grilled_peach.tex")
+	RegisterInventoryItemAtlas("images/inventoryimages/magicpowder.xml", "magicpowder.tex")
+	-- RegisterInventoryItemAtlas("images/inventoryimages/peachy_meatloaf.xml", "peachy_meatloaf.tex")
+	RegisterInventoryItemAtlas("images/inventoryimages/peach_juice_bottle_green.xml", "peach_juice_bottle_green.tex")
+	RegisterInventoryItemAtlas("images/inventoryimages/full_bottle_green.xml", "full_bottle_green.tex")
+	RegisterInventoryItemAtlas("images/inventoryimages/less_bottle_green_milk.xml", "less_bottle_green_milk.tex")
+	RegisterInventoryItemAtlas("images/inventoryimages/half_bottle_green_milk.xml", "half_bottle_green_milk.tex")
+	RegisterInventoryItemAtlas("images/inventoryimages/full_bottle_green_milk.xml", "full_bottle_green_milk.tex")
+
+	AddMinimapAtlas("images/map_icons/goddess_statue.xml")
+	AddMinimapAtlas("images/map_icons/goddess_statue2.xml")
+	AddMinimapAtlas("images/map_icons/goddess_statue3.xml")
+	AddMinimapAtlas("images/map_icons/goddess_fountain.xml")
+	AddMinimapAtlas("images/map_icons/goddess_shrine.xml")
+	AddMinimapAtlas("images/map_icons/goddess_gate.xml")
+	AddMinimapAtlas("images/map_icons/peach.xml")
+end
+
+if GetModConfigData("underwater") then
+	table.insert(Assets, Asset("ANIM", "anim/oxygen_meter_player.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/hunger_ghost.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/squidunderwater.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/jellyfish.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/sandstone_boulder.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/vent.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/fish_fillet.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/commonfish.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/sand.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/pearl.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/iron_ore.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/lavastone.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/clam.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/sea_eel.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/sunken_chest.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/kelp.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/wormplant.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/decorative_shell.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/coral_orange.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/sponge.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/fish_n_chips.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/fish_gazpacho.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/sponge_cake.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/tuna_muffin.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/sea_cucumber.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/jelly_cap.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/shrimp.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/diving_suit_summer.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/diving_suit_winter.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/tentacle_sushi.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/flower_sushi.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/fish_sushi.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/shrimp_tail.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/jelly_lantern.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/seagrass_chunk.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/underwater_entrance.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/underwater_exit.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/coral_orange_ground.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/coral_blue_ground.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/coral_green_ground.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/snorkel.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/seajelly.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/coral_cluster.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/uw_flowers.zip"))
+	table.insert(Assets, Asset("ANIM", "anim/sea_petals.zip"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/creepindedeepinventory.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/creepindedeepinventory.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/minimap/iron_boulder.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/minimap/iron_boulder.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/minimap/seagrass.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/minimap/seagrass.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/minimap/kelp.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/minimap/kelp.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/minimap/vent.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/minimap/vent.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/minimap/entrance_open.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/minimap/entrance_open.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/minimap/entrance_closed.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/minimap/entrance_closed.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/minimap/orange_coral.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/minimap/orange_coral.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/minimap/clam.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/minimap/clam.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/minimap/sponge.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/minimap/sponge.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/minimap/wormplant.tex"))
+	table.insert(Assets, Asset("ATLAS", "images/minimap/wormplant.xml"))
+	table.insert(Assets, Asset("SOUNDPACKAGE", "sound/citd.fev"))
+	table.insert(Assets, Asset("SOUND", "sound/citd.fsb"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/placeholder.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/diving_suit_summer.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/diving_suit_winter.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/snorkel.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/sponge_piece.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/fish_fillet.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/fish_fillet_cooked.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/bubble_item.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/sand.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/pearl.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/iron_ore.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/lavastone.xml"))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/fish_n_chips.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/sponge_cake.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/fish_gazpacho.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/tuna_muffin.xml" ))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/sea_cucumber.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/jelly_cap.xml"))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/tentacle_sushi.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/fish_sushi.xml" ))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/flower_sushi.xml" ))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/shrimp_tail.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/jelly_lantern.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/seagrass_chunk.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/cut_orange_coral.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/cut_blue_coral.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/cut_green_coral.xml"))
+	--table.insert(Assets, Asset("ATLAS", "images/inventoryimages/food/seajelly.xml" ))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/coral_cluster.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/pearl_amulet.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/flare.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/sea_petals.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/creepindeep_cuisine.xml"))
+
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/placeholder.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/diving_suit_summer.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/diving_suit_winter.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/snorkel.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/sponge_piece.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/fish_fillet.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/fish_fillet_cooked.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/bubble_item.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/sand.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/pearl.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/iron_ore.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/lavastone.tex"))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/fish_n_chips.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/sponge_cake.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/fish_gazpacho.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/tuna_muffin.tex" ))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/sea_cucumber.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/jelly_cap.tex"))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/tentacle_sushi.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/fish_sushi.tex" ))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/flower_sushi.tex" ))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/shrimp_tail.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/jelly_lantern.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/seagrass_chunk.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/cut_orange_coral.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/cut_blue_coral.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/cut_green_coral.tex"))
+	--table.insert(Assets, Asset("IMAGE", "images/inventoryimages/food/seajelly.tex" ))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/coral_cluster.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/pearl_amulet.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/flare.tex"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/sea_petals.tex"))
+    table.insert(Assets, Asset("IMAGE", "images/inventoryimages/creepindeep_cuisine.tex"))
+	
+	-- Add minimap atlas
+	AddMinimapAtlas("images/minimap/iron_boulder.xml")
+	AddMinimapAtlas("images/minimap/seagrass.xml")
+	AddMinimapAtlas("images/minimap/kelp.xml")
+	AddMinimapAtlas("images/minimap/vent.xml")
+	AddMinimapAtlas("images/minimap/entrance_open.xml")
+	AddMinimapAtlas("images/minimap/entrance_closed.xml")
+	AddMinimapAtlas("images/minimap/orange_coral.xml")
+	AddMinimapAtlas("images/minimap/clam.xml")
+	AddMinimapAtlas("images/minimap/sponge.xml")
+	AddMinimapAtlas("images/minimap/wormplant.xml")
+end

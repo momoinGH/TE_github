@@ -64,8 +64,7 @@ local function fn(Sim)
 
 
     inst:AddComponent("bait")
-    inst.oincvalue = 100
-
+    
     inst:AddComponent("tradable")
 
     return inst

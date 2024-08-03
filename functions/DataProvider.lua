@@ -15,7 +15,9 @@ local StoreStructures = {} -- 所有商店
 --[FUNC] 用于ServerStore的相关函数
 ----------------------------------------------------------------------------------------------------
 AddPrefabPostInitAny(function(inst)
-    if inst and inst:HasTag("serverstore") then table.insert(StoreStructures, inst) end
+    if inst:HasTag("serverstore") then
+        table.insert(StoreStructures, inst)
+    end
 end)
 
 local function PrepareGoodsData()
@@ -1431,7 +1433,7 @@ end
 --[API]AddModRPCHandler(namespace, name, fn)
 ---在找不到其他回调函数的时候 使用本地的回调函数
 ----------------------------------------------------------------------------------------------------
-if not GLOBAL.TheNet:GetIsClient() and not GLOBAL.MOD_RPC_HANDLERS["ServerStore"] then
+if not GLOBAL.MOD_RPC_HANDLERS["ServerStore"] then
     AddModRPCHandler("ServerStore", "Requested", ClientRequested)
     AddModRPCHandler("ServerStore", "OpenStore", ClientOpenStore)
     AddModRPCHandler("ServerStore", "Purchased", ClientPurchased)

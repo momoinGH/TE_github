@@ -75,12 +75,12 @@ local function fn(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(UW_TUNING.SEA_EEL_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.SEA_EEL_HEALTH)
 
     inst:AddComponent("combat")
     inst.components.combat:SetRange(3.5)
-    inst.components.combat:SetAttackPeriod(UW_TUNING.SEA_EEL_ATTACK_PERIOD)
-    inst.components.combat:SetDefaultDamage(UW_TUNING.SEA_EEL_DAMAGE)
+    inst.components.combat:SetAttackPeriod(TUNING.SEA_EEL_ATTACK_PERIOD)
+    inst.components.combat:SetDefaultDamage(TUNING.SEA_EEL_DAMAGE)
     inst.components.combat:SetRetargetFunction(3, Retarget)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
 

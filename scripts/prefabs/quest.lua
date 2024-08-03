@@ -18,17 +18,32 @@ end
 
 local function fn()
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
 	MakeInventoryPhysics(inst)
 	inst.entity:AddNetwork()
 
 	TheFrontEnd:PushScreen(PopupDialogScreen("Decision", "Can you help me?",
-		{ { text = "yes", cb = function() if TheWorld.ismastersim then quest1(inst) else SendModRPCToServer(
-				MOD_RPC["volcanomod"]["quest1"], inst) end end },
-			{ text = "no", cb = function() if TheWorld.ismastersim then quest2(inst) else SendModRPCToServer(
-					MOD_RPC["volcanomod"]["quest2"], inst) end end } }))
+		{ {
+			text = "yes",
+			cb = function()
+				if TheWorld.ismastersim then
+					quest1(inst)
+				else
+					SendModRPCToServer(MOD_RPC["volcanomod"]["quest1"], inst)
+				end
+			end
+		}, {
+			text = "no",
+			cb = function()
+				if TheWorld.ismastersim then
+					quest2(inst)
+				else
+					SendModRPCToServer(MOD_RPC["volcanomod"]["quest2"], inst)
+				end
+			end
+		} }))
 
 	inst.entity:SetPristine()
 

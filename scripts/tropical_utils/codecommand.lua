@@ -31,7 +31,7 @@ end
 
 ---FindClosestPlayerInRangeSq 根据距离的平方查找玩家
 ---@param rangesq number 查找范围的平方，这个值要跟距离的平方比较
----@param isalive boolean 是否要求玩家存活
+---@param isalive boolean|nil 是否要求玩家存活
 ---@return table|nil,number|nil 查找到的玩家，该玩家与指定位置的距离，如果没找到两个值都为nil
 function FindClosestPlayerInRangeSq(x, y, z, rangesq, isalive)
 end
@@ -679,7 +679,8 @@ ThePlayer.fx.AnimState:SetSortOrder(1);
 ThePlayer.fx.AnimState:SetFinalOffset(0);
 
 ThePlayer.fx.AnimState:SetLayer(LAYER_BACKGROUND);
-
+-- 可以让物品一闪一闪的
+inst.AnimState:SetHaunted(true)
 ------------------------------------------------------------------------------------------------------------------------
 -- 14. physics.lua
 
@@ -949,3 +950,7 @@ StateGraph = Class(function(self, name, states, events, defaultstate, actionhand
 --- 可以重定向一些音效，替换源码里的音效为自己的音效
 --- RemapSoundEvent("dontstarve/characters/champion/talk_LP", "champion/champion/talk_LP")
 env.RemapSoundEvent = function(name, new_name) end
+
+
+-- 判断某个mod是否启用
+KnownModIndex:IsModEnabled("workshop-1289779251")

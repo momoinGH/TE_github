@@ -70,7 +70,8 @@ local function fn()
     inst:AddTag("structure")
     inst:AddTag("nowaves")
     inst:AddTag("ignorewalkableplatforms")
-
+    inst:AddTag("quebraonda")
+    
     MakeWaterObstaclePhysics(inst, 0.3, 2, 1.25)
 
     inst.entity:SetPristine()

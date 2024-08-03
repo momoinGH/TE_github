@@ -114,39 +114,32 @@ local tesouroescondidoham =
 }
 
 
-local function onunwrapped(inst, pos, doer)
+local function onunwrapped(inst, doer)
 	local map = TheWorld.Map
-	local x, y
+	local x, z
 	local sx, sy = map:GetSize()
 
-	repeat
+	for i = 1, 500 do
 		x = math.random(-sx, sx)
-		y = math.random(-sy, sy)
-		local tile = map:GetTileAtPoint(x, 0, y)
-	until
-		tile ~= GROUND.IMPASSABLE and
-		tile ~= GROUND.OCEAN_COASTAL and
-		tile ~= GROUND.OCEAN_COASTAL_SHORE and
-		tile ~= GROUND.OCEAN_SWELL and
-		tile ~= GROUND.OCEAN_ROUGH and
-		tile ~= GROUND.OCEAN_BRINEPOOL and
-		tile ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-		tile ~= GROUND.OCEAN_HAZARDOUS
-
-	SpawnPrefab("bandittreasure").Transform:SetPosition(x, 0, y)
-
-	doer:DoTaskInTime(0, function()
-		doer.player_classified.MapExplorer:RevealArea(x, 0, y)
-		doer.components.inventory:GiveItem(SpawnPrefab("papyrus"))
-	end)
-
-	if doer.player_classified.revealtreasure then
-		local val = (x + 16384) * 65536 + (y + 16384)
-		doer.player_classified.revealtreasure:set_local(val)
-		doer.player_classified.revealtreasure:set(val)
+		z = math.random(-sy, sy)
+		if map:IsAboveGroundAtPoint(x, 0, z) then
+			break
+		end
 	end
 
-	inst:Remove()
+	SpawnPrefab("bandittreasure").Transform:SetPosition(x, 0, z)
+
+	return Vector3(x, 0, z)
+end
+
+local function turn_empty(inst, targetpos)
+	local inventory = inst.components.inventoryitem:GetContainer() -- Also returns inventory component
+
+	local empty_bottle = ReplacePrefab(inst, "papyrus")
+
+	if inventory ~= nil then
+		inventory:GiveItem(empty_bottle)
+	end
 end
 
 local function messagebottlefn(Sim)
@@ -183,8 +176,10 @@ local function messagebottlefn(Sim)
 
 	inst.no_wet_prefix = true
 
-	inst:AddComponent("unwrappable")
-	inst.components.unwrappable:SetOnUnwrappedFn(onunwrapped)
+	inst:AddComponent("mapspotrevealer")
+	inst.components.mapspotrevealer:SetGetTargetFn(onunwrapped)
+
+	inst:ListenForEvent("on_reveal_map_spot_pst", turn_empty)
 
 	return inst
 end

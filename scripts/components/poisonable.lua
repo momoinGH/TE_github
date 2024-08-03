@@ -28,9 +28,6 @@ function Poisonable:SetPoison(dmg, interval, duration)
 	self.duration = self.startDuration
 	if not self.updating then
 		self.inst:StartUpdatingComponent(self)
-		if self.inst.components.lootdropper then
-			self.inst.components.lootdropper:SetLootPostInit("poisoned", SpoilLoot)
-		end
 	end
 
 	if self.inst.player_classified then
@@ -50,9 +47,6 @@ end
 function Poisonable:WearOff()
 	self:ResetValues()
 	self.inst:StopUpdatingComponent(self)
-	if self.updating and self.inst.components.lootdropper then
-		self.inst.components.lootdropper:RemoveLootPostInit("poisoned")
-	end
 	self.updating = false
 
 	--remove poisonfx

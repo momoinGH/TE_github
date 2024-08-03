@@ -51,7 +51,7 @@ local function fn()
 	inst.components.bubbleblower:SetBubbleRate(6)
 
 	inst:AddComponent("oxygenaura")
-	inst.components.oxygenaura:SetAura(UW_TUNING.GEOTHERMAL_VENT_AIR)
+	inst.components.oxygenaura:SetAura(TUNING.GEOTHERMAL_VENT_AIR)
 
 	inst.entity:SetPristine()
 
@@ -64,7 +64,7 @@ local function fn()
 	inst:AddComponent("cooker")
 
 	inst:AddComponent("heater")
-	inst.components.heater.heat = UW_TUNING.GEOTHERMAL_VENT_HEAT
+	inst.components.heater.heat = TUNING.GEOTHERMAL_VENT_HEAT
 
 	inst:DoTaskInTime(0, function()
 		inst.components.lighttweener:StartTween(inst.Light, 3, .9, 0.9, { 0.9, 0.1, 0.1 }, 0)

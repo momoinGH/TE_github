@@ -12,6 +12,11 @@ Utils.FnDecorator(ACTIONS.JUMPIN, "strfn", function(act)
     end
 end)
 
+ACTIONS.CASTAOE.strfn = function(act)
+    return act.invobject ~= nil and
+        string.upper(act.invobject.nameoverride ~= nil and act.invobject.nameoverride or act.invobject.prefab) or nil
+end;
+
 Constructor.AddAction(nil, "STOREOPEN", STRINGS.ACTIONS.STOREOPEN, function(act)
     if act.target.components.store == nil then return false end
 

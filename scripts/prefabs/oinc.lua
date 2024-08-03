@@ -22,6 +22,7 @@ end
 
 local function fn(Sim)
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
@@ -46,7 +47,6 @@ local function fn(Sim)
     end
 
     inst:AddComponent("bait")
-    inst.oincvalue = 1
 
     inst:AddComponent("tradable")
 
