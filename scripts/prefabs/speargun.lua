@@ -116,6 +116,7 @@ local function commonfn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
     inst:AddComponent("stackable")
 
@@ -143,6 +144,10 @@ local function poisonfn(Sim)
 
     inst.AnimState:SetBuild("speargun_poison")
     inst.AnimState:SetBank("speargun")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
 
     inst.components.weapon:SetOnAttack(poisonattack)
     inst.components.equippable:SetOnEquip(onequippoison)
@@ -173,6 +178,11 @@ local function obsidianfn(Sim)
 
     inst.AnimState:SetBuild("speargun_obsidian")
     inst.AnimState:SetBank("speargun_obsidian")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
     inst.components.equippable:SetOnEquip(onequipobsidian)
 
     inst.components.weapon:SetOnAttack(fireattack)

@@ -9,40 +9,20 @@ local assets =
 	Asset("ANIM", "anim/snake_scaly_build.zip"),
 }
 
+local brain = require "brains/snakebrain"
+
 local prefabs =
 {
-
 }
 
-local WAKE_TO_FOLLOW_DISTANCE = 8
-local SLEEP_NEAR_HOME_DISTANCE = 10
 local SHARE_TARGET_DIST = 30
-local HOME_TELEPORT_DIST = 30
 
-local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
-
-local function ShouldWakeUp(inst)
-	return not TheWorld.state.iscaveday
-		or (inst.components.combat and inst.components.combat.target)
-		or (inst.components.homeseeker and inst.components.homeseeker:HasHome())
-		or (inst.components.burnable and inst.components.burnable:IsBurning())
-		or (inst.components.follower and inst.components.follower.leader)
-end
-
-local function ShouldSleep(inst)
-	return TheWorld.state.iscaveday
-		and not (inst.components.combat and inst.components.combat.target)
-		and not (inst.components.homeseeker and inst.components.homeseeker:HasHome())
-		and not (inst.components.burnable and inst.components.burnable:IsBurning())
-		and not (inst.components.follower and inst.components.follower.leader)
-end
 
 local function OnNewTarget(inst, data)
 	if inst.components.sleeper:IsAsleep() then
 		inst.components.sleeper:WakeUp()
 	end
 end
-
 
 local function retargetfn(inst)
 	local dist = TUNING.SPIDER_TARGET_DIST
@@ -54,8 +34,8 @@ end
 
 local function KeepTarget(inst, target)
 	return inst.components.combat:CanTarget(target) and
-	inst:GetDistanceSqToInst(target) <= (TUNING.SPIDER_TARGET_DIST * TUNING.SPIDER_TARGET_DIST * 4 * 4) and
-	not target:HasTag("aquatic")
+		inst:GetDistanceSqToInst(target) <= (TUNING.SPIDER_TARGET_DIST * TUNING.SPIDER_TARGET_DIST * 4 * 4) and
+		not target:HasTag("aquatic")
 end
 
 local function OnAttacked(inst, data)
@@ -88,14 +68,6 @@ local function DoReturn(inst)
 	end
 end
 
-local function OnDay(inst)
-	--print("OnNight", inst)
-	if inst:IsAsleep() then
-		DoReturn(inst)
-	end
-end
-
-
 local function OnEntitySleep(inst)
 	--print("OnEntitySleep", inst)
 	if TheWorld.state.iscaveday then
@@ -107,19 +79,19 @@ local function SanityAura(inst, observer)
 	if observer.prefab == "webber" then
 		return 0
 	end
-
 	return -TUNING.SANITYAURA_SMALL
 end
 
 local function fn()
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local physics = inst.entity:AddPhysics()
-	local sound = inst.entity:AddSoundEmitter()
-	local shadow = inst.entity:AddDynamicShadow()
+
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddPhysics()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddDynamicShadow()
 	inst.entity:AddNetwork()
-	--shadow:SetSize( 2.5, 1.5 )
+
 	inst.Transform:SetFourFaced()
 
 	inst:AddTag("scarytoprey")
@@ -130,9 +102,9 @@ local function fn()
 
 	MakeCharacterPhysics(inst, 10, .5)
 
-	anim:SetBank("snake")
-	anim:SetBuild("snake_build")
-	anim:PlayAnimation("idle")
+	inst.AnimState:SetBank("snake")
+	inst.AnimState:SetBuild("snake_build")
+	inst.AnimState:PlayAnimation("idle")
 	--inst.AnimState:SetRayTestOnBB(true)
 
 	inst.entity:SetPristine()
@@ -145,9 +117,9 @@ local function fn()
 
 	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
 	inst.components.locomotor.runspeed = 3
+
 	inst:SetStateGraph("SGsnake")
 
-	local brain = require "brains/snakebrain"
 	inst:SetBrain(brain)
 
 	inst:AddComponent("follower")
@@ -161,7 +133,6 @@ local function fn()
 	inst:AddComponent("health")
 	inst.components.health:SetMaxHealth(150)
 	--inst.components.health.poison_damage_scale = 0 -- immune to poison
-
 
 	inst:AddComponent("combat")
 	inst.components.combat:SetDefaultDamage(10)
@@ -185,17 +156,10 @@ local function fn()
 
 	inst:AddComponent("sleeper")
 	inst.components.sleeper:SetNocturnal(true)
-	--inst.components.sleeper:SetResistance(1)
-	-- inst.components.sleeper.testperiod = GetRandomWithVariance(6, 2)
-	-- inst.components.sleeper:SetSleepTest(ShouldSleep)
-	-- inst.components.sleeper:SetWakeTest(ShouldWakeUp)
-	inst:ListenForEvent("newcombattarget", OnNewTarget)
 
-	-- inst:ListenForEvent( "dusktime", function() OnNight( inst ) end, GetWorld())
-	-- inst:ListenForEvent( "nighttime", function() OnNight( inst ) end, GetWorld())
-	-- inst:ListenForEvent( "daytime", function() OnDay( inst ) end, GetWorld())
 	inst.OnEntitySleep = OnEntitySleep
 
+	inst:ListenForEvent("newcombattarget", OnNewTarget)
 	inst:ListenForEvent("attacked", OnAttacked)
 	inst:ListenForEvent("onattackother", OnAttackOther)
 
@@ -204,6 +168,10 @@ end
 
 local function commonfn()
 	local inst = fn()
+
+	if not TheWorld.ismastersim then
+		return inst
+	end
 
 	MakeMediumBurnableCharacter(inst, "body")
 	MakeMediumFreezableCharacter(inst, "body")
@@ -229,22 +197,6 @@ local function poisonfn()
 	MakeMediumFreezableCharacter(inst, "body")
 	inst.components.burnable.flammability = TUNING.SPIDER_FLAMMABILITY
 	return inst
-end
-
-local function OnWaterChange(inst, onwater)
-	if onwater then
-		inst.onwater = true
-		inst.sg:GoToState("submerge")
-		inst.DynamicShadow:Enable(false)
-		--        inst.components.locomotor.walkspeed = 3
-	else
-		if inst.onwater then
-			inst.sg:GoToState("emerge")
-		end
-		inst.onwater = false
-		inst.DynamicShadow:Enable(true)
-		--        inst.components.locomotor.walkspeed = 4
-	end
 end
 
 return Prefab("snake", commonfn, assets, prefabs),

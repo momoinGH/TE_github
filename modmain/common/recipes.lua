@@ -18,7 +18,6 @@ end
 
 TECH.NONE.OBSIDIAN = 0
 TECH.OBSIDIAN_ONE = { OBSIDIAN = 1 }
-TECH.OBSIDIAN_TWO = { OBSIDIAN = 2 }
 
 TECH.NONE.CITY = 0
 TECH.CITY_ONE = { CITY = 1 }
@@ -432,9 +431,7 @@ AddRecipe2("glassmachete", { Ingredient("twigs", 2), Ingredient("moonglass", 4) 
     { atlas = h_atlas, nounlock = true }, { "CRAFTING_STATION" })
 
 --OBSIDIAN--
-AddRecipe2("axeobsidian",
-    { Ingredient("axe", 1), Ingredient("obsidian", 2, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true }, { "OBSIDIAN" })
+
 AddRecipe2("obsidianmachete",
     { Ingredient("machete", 1, v_atlas), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
     TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true }, { "OBSIDIAN" })
@@ -444,9 +441,7 @@ AddRecipe2("spear_obsidian",
 AddRecipe2("volcanostaff",
     { Ingredient("firestaff", 1), Ingredient("obsidian", 4, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
     TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("armorobsidian",
-    { Ingredient("armorwood", 1), Ingredient("obsidian", 5, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true }, { "OBSIDIAN" })
+
 AddRecipe2("obsidianbomb",
     { Ingredient("coconade", 3, v_atlas), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
     TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true, numtogive = 3 }, { "OBSIDIAN" })
@@ -1971,8 +1966,6 @@ SortAfter("turf_beach", "turf_volcano", "DECOR")
 --SortAfter("obsidianaxe", "obsidianmachete", "CRAFTING_STATION")
 --SortAfter("spear_obsidian", "obsidianaxe", "CRAFTING_STATION")
 --SortAfter("volcanostaff", "spear_obsidian", "CRAFTING_STATION")
---SortAfter("armorobsidian", "volcanostaff", "CRAFTING_STATION")
---SortAfter("obsidiancoconade", "armorobsidian", "CRAFTING_STATION")
 --SortAfter("wind_conch", "obsidiancoconade", "CRAFTING_STATION")
 --SortAfter("windstaff", "wind_conch", "CRAFTING_STATION")
 SortAfter("woodlegs_boatcannon", "obsidianbomb", "OBSIDIAN")

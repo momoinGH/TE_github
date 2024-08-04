@@ -16,15 +16,17 @@ end
 
 local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
     inst.Transform:SetTwoFaced()
+
     inst.entity:AddNetwork()
 
-    anim:SetBank("meteorimpact")
-    anim:SetBuild("meteor_impact")
-    anim:PlayAnimation("idle_loop")
-    anim:SetFinalOffset(-1)
+    inst.AnimState:SetBank("meteorimpact")
+    inst.AnimState:SetBuild("meteor_impact")
+    inst.AnimState:PlayAnimation("idle_loop")
+    inst.AnimState:SetFinalOffset(-1)
+    
     inst:AddTag("fx")
 
     inst.entity:SetPristine()

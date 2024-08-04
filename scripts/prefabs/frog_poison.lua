@@ -1,6 +1,3 @@
-require "brains/frog2brain"
-require "stategraphs/SGfrog2"
-
 local assets =
 {
 	Asset("ANIM", "anim/frog.zip"),
@@ -16,6 +13,8 @@ local prefabs =
 	"venomgland",
 	"froglegs_poison",
 }
+
+local brain = require "brains/frog2brain"
 
 local sounds = {
 	base = {
@@ -151,7 +150,7 @@ local function fn()
 	inst:AddComponent("knownlocations")
 	inst:AddComponent("inspectable")
 
-	local brain = require "brains/frog2brain"
+
 	inst:SetBrain(brain)
 	inst:SetStateGraph("SGfrog2")
 

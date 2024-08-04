@@ -9,8 +9,7 @@ local function OnBlocked(owner, data)
         owner.SoundEmitter:PlaySound("dontstarve_DLC002/common/armour/obsidian")
     end
     if (data.weapon == nil or (not data.weapon:HasTag("projectile") and data.weapon.projectile == nil))
-        and data.attacker and data.attacker.components.burnable
-        and (data.attacker.components.combat == nil or (data.attacker.components.combat.defaultdamage > 0)) then
+        and data.attacker and data.attacker.components.burnable then
         data.attacker.components.burnable:Ignite()
     end
 end
@@ -21,8 +20,7 @@ local function onequip(inst, owner)
     inst:ListenForEvent("attacked", inst._onblocked, owner)
 
     if owner.components.health then
-        owner.components.health.fire_damage_scale = owner.components.health.fire_damage_scale -
-            TUNING.ARMORDRAGONFLY_FIRE_RESIST
+        owner.components.health.externalfiredamagemultipliers:SetModifier(inst, 0)
     end
 end
 
@@ -32,8 +30,7 @@ local function onunequip(inst, owner)
     inst:RemoveEventCallback("attacked", inst._onblocked, owner)
 
     if owner.components.health then
-        owner.components.health.fire_damage_scale = owner.components.health.fire_damage_scale +
-            TUNING.ARMORDRAGONFLY_FIRE_RESIST
+        owner.components.health.externalfiredamagemultipliers:RemoveModifier(inst)
     end
 end
 
@@ -62,6 +59,7 @@ local function fn()
     end
 
     inst:AddComponent("inspectable")
+
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 

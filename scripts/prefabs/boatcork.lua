@@ -97,6 +97,8 @@ local function fn()
 	inst.entity:AddPhysics()
 	inst.Physics:SetCylinder(0.25, 2)
 
+	inst:AddComponent("walkableplatform")
+
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
@@ -109,9 +111,11 @@ local function fn()
 	inst.replica.container:WidgetSetup("rowboat")
 	--------------------------------------------------------------------------	
 	inst:AddComponent("interactions")
+
 	inst:AddComponent("edible")
 	inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
 	inst.components.edible.hungervalue = 2
+
 	inst:AddComponent("tradable")
 
 	inst:AddComponent("inspectable")
@@ -136,7 +140,6 @@ local function fn()
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
 	inst.components.inventoryitem.cangoincontainer = false
 	inst.components.inventoryitem.canbepickedup = false
 	inst:ListenForEvent("itemget", equipaItem)

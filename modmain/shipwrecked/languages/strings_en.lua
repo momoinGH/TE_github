@@ -1,0 +1,92 @@
+STRINGS.NAMES.ARMOROBSIDIAN = "Obsidian Armour"
+
+
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOROBSIDIAN = "I'm a genius."
+
+
+
+
+STRINGS.RECIPE_DESC.ARMOROBSIDIAN = "Hot to the touch."
+
+
+
+
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.ARMOROBSIDIAN = "Hit me and BURN!"
+
+
+
+
+
+STRINGS.CHARACTERS.WENDY.DESCRIBE.ARMOROBSIDIAN = "Is it wise to don a suit of fire stone?"
+
+
+
+
+
+
+
+
+
+STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.ARMOROBSIDIAN = "Is cheap trick, but Wolfgang like!"
+
+
+
+
+
+
+
+
+
+
+STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.ARMOROBSIDIAN = "Be careful, it's sharp!"
+
+
+
+
+
+
+
+
+
+
+STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.ARMOROBSIDIAN = "Come at me now, fiends!"
+
+
+
+
+
+
+
+
+
+
+
+STRINGS.CHARACTERS.WAXWELL.DESCRIBE.ARMOROBSIDIAN = "I've bent the flame to my will."
+
+
+
+
+
+
+
+
+
+STRINGS.CHARACTERS.WEBBER.DESCRIBE.ARMOROBSIDIAN = "Our enemies will feel the heat!"
+
+
+
+
+
+
+
+STRINGS.CHARACTERS.WX78.DESCRIBE.ARMOROBSIDIAN = "Hit me and BURN!"
+
+
+
+
+
+
+
+
+
+STRINGS.CHARACTERS.WOODIE.DESCRIBE.ARMOROBSIDIAN = "Hit me and BURN!"

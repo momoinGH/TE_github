@@ -1,91 +1,121 @@
-table.insert(PrefabFiles, "roc")
-table.insert(PrefabFiles, "roc_leg")
-table.insert(PrefabFiles, "roc_head")
-table.insert(PrefabFiles, "roc_tail")
-table.insert(PrefabFiles, "hippo_antler")
-table.insert(PrefabFiles, "hippoherd")
-table.insert(PrefabFiles, "hippoptamoose")
-table.insert(PrefabFiles, "lillypad")
-table.insert(PrefabFiles, "lotus")
-table.insert(PrefabFiles, "lotus_flower1")
-table.insert(PrefabFiles, "bill")
-table.insert(PrefabFiles, "bill_quill")
-table.insert(PrefabFiles, "reeds_water")
-table.insert(PrefabFiles, "topiary")
-table.insert(PrefabFiles, "lawnornaments")
-table.insert(PrefabFiles, "hedge")
-table.insert(PrefabFiles, "clippings")
-table.insert(PrefabFiles, "city_lamp")
-table.insert(PrefabFiles, "hamlet_cones")
-table.insert(PrefabFiles, "securitycontract")
-table.insert(PrefabFiles, "city_hammer")
-table.insert(PrefabFiles, "magnifying_glass")
-table.insert(PrefabFiles, "pigbandit")
-table.insert(PrefabFiles, "banditmap")
-table.insert(PrefabFiles, "pig_shop")
-table.insert(PrefabFiles, "pig_shop_produce_interior")
-table.insert(PrefabFiles, "pig_shop_hoofspa_interior")
-table.insert(PrefabFiles, "pig_shop_general_interior")
-table.insert(PrefabFiles, "pig_shop_florist_interior")
-table.insert(PrefabFiles, "pig_shop_deli_interior")
-table.insert(PrefabFiles, "pig_shop_academy_interior")
-table.insert(PrefabFiles, "pig_shop_cityhall_interior")
-table.insert(PrefabFiles, "pig_shop_cityhall_player_interior")
-table.insert(PrefabFiles, "pig_shop_hatshop_interior")
-table.insert(PrefabFiles, "pig_shop_weapons_interior")
-table.insert(PrefabFiles, "pig_shop_bank_interior")
-table.insert(PrefabFiles, "pig_shop_arcane_interior")
-table.insert(PrefabFiles, "pig_shop_antiquities_interior")
-table.insert(PrefabFiles, "pig_shop_tinker_interior")
-table.insert(PrefabFiles, "pig_palace_interior")
-table.insert(PrefabFiles, "pig_palace")
-table.insert(PrefabFiles, "pigman_shopkeeper_desk")
-table.insert(PrefabFiles, "shop_pedestals")
-table.insert(PrefabFiles, "deed")
-table.insert(PrefabFiles, "playerhouse_city_interior")
-table.insert(PrefabFiles, "playerhouse_city_interior2")
-table.insert(PrefabFiles, "shelf")
-table.insert(PrefabFiles, "shelf_slot")
-table.insert(PrefabFiles, "trinkets_giftshop")
-table.insert(PrefabFiles, "key_to_city")
-table.insert(PrefabFiles, "wallpaper")
-table.insert(PrefabFiles, "player_house_kits")
-table.insert(PrefabFiles, "player_house")
-table.insert(PrefabFiles, "pigman_city")
-table.insert(PrefabFiles, "pighouse_city")
-table.insert(PrefabFiles, "pig_guard_tower")
-table.insert(PrefabFiles, "armor_metal")
-table.insert(PrefabFiles, "reconstruction_project")
-table.insert(PrefabFiles, "water_spray")
-table.insert(PrefabFiles, "water_pipe")
-table.insert(PrefabFiles, "sprinkler1")
-table.insert(PrefabFiles, "alloy")
-table.insert(PrefabFiles, "smelter")
-table.insert(PrefabFiles, "halberd")
-table.insert(PrefabFiles, "oinc")
-table.insert(PrefabFiles, "oinc10")
-table.insert(PrefabFiles, "oinc100")
-table.insert(PrefabFiles, "porklandintro")
-table.insert(PrefabFiles, "rainforesttrees")
-table.insert(PrefabFiles, "rainforesttree_sapling")
-table.insert(PrefabFiles, "meteor_impact")
-table.insert(PrefabFiles, "tuber")
-table.insert(PrefabFiles, "tubertrees")
-table.insert(PrefabFiles, "pangolden")
-table.insert(PrefabFiles, "thunderbird")
-table.insert(PrefabFiles, "thunderbirdnest")
-table.insert(PrefabFiles, "ancient_robots")
-table.insert(PrefabFiles, "ancient_hulk")
-table.insert(PrefabFiles, "ancient_herald")
-table.insert(PrefabFiles, "armor_vortex_cloak")
-table.insert(PrefabFiles, "living_artifact")
-table.insert(PrefabFiles, "rock_basalt")
-table.insert(PrefabFiles, "ancient_robots_assembly")
-table.insert(PrefabFiles, "laser_ring")
-table.insert(PrefabFiles, "laser")
-table.insert(PrefabFiles, "iron")
+PrefabFiles = {
+    "boatcork",
+    "frog_poison",
+    -- "frog_poison2",
+    "oxherd",
+    "oxherd",
+    "grass_tall",
+    "deep_jungle_fern_noise",
+    "vampirebatcave",
+    "vampirebatcave_interior",
+    "vampitecave_deco",
+    "roc_cave_entrance",
+    "roc_cave_interior",
 
-table.insert(PrefabFiles, "pheromonestone")
+  
+  
+  
+
+    ------------------------------------------------------------------------------------------------
+
+    "roc_leg",
+    "roc_head",
+    "roc_tail",
+    "hippo_antler",
+    "hippoherd",
+    "hippoptamoose",
+    "lillypad",
+    "lotus",
+    "lotus_flower1",
+    "bill",
+    "bill_quill",
+    "reeds_water",
+    "topiary",
+    "lawnornaments",
+    "hedge",
+    "clippings",
+    "city_lamp",
+    "hamlet_cones",
+    "securitycontract",
+    "city_hammer",
+    "magnifying_glass",
+    "pigbandit",
+    "banditmap",
+    "pig_shop",
+    "pig_shop_produce_interior",
+    "pig_shop_hoofspa_interior",
+    "pig_shop_general_interior",
+    "pig_shop_florist_interior",
+    "pig_shop_deli_interior",
+    "pig_shop_academy_interior",
+    "pig_shop_cityhall_interior",
+    "pig_shop_cityhall_player_interior",
+    "pig_shop_hatshop_interior",
+    "pig_shop_weapons_interior",
+    "pig_shop_bank_interior",
+    "pig_shop_arcane_interior",
+    "pig_shop_antiquities_interior",
+    "pig_shop_tinker_interior",
+    "pig_palace_interior",
+    "pig_palace",
+    "pigman_shopkeeper_desk",
+    "shop_pedestals",
+    "deed",
+    "playerhouse_city_interior",
+    "playerhouse_city_interior2",
+    "shelf",
+    "shelf_slot",
+    "trinkets_giftshop",
+    "key_to_city",
+    "wallpaper",
+    "player_house_kits",
+    "player_house",
+    "pigman_city",
+    "pighouse_city",
+    "pig_guard_tower",
+    "armor_metal",
+    "reconstruction_project",
+    "water_spray",
+    "water_pipe",
+    "sprinkler1",
+    "alloy",
+    "smelter",
+    "halberd",
+    "oinc",
+    "oinc10",
+    "oinc100",
+    "porklandintro",
+    "rainforesttrees",
+    "rainforesttree_sapling",
+    "meteor_impact",
+    "tuber",
+    "tubertrees",
+    "pangolden",
+    "thunderbird",
+    "thunderbirdnest",
+    "ancient_robots",
+    "ancient_hulk",
+    "ancient_herald",
+    "armor_vortex_cloak",
+    "living_artifact",
+    "rock_basalt",
+    "ancient_robots_assembly",
+    "laser_ring",
+    "laser",
+    "iron",
+    "pheromonestone",
+}
+
+
+
+
+
+
+
+
+
+
+
 
 if GetModConfigData("luajit") then
     table.insert(PrefabFiles, "pig_ruins_maze_old")

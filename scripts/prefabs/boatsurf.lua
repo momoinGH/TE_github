@@ -60,12 +60,16 @@ local function fn()
 	local inst = CreateEntity()
 
 	inst.entity:AddTransform()
-	inst.Transform:SetFourFaced()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
+	inst.entity:AddPhysics()
+	inst.entity:AddNetwork()
+
+	inst.Transform:SetFourFaced()
+
 	inst.overridebuild = "raft_surfboard_build"
 	inst.banc = "raft"
-	inst.entity:AddNetwork()
+
 	--	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
 	--	inst.AnimState:SetSortOrder(0)
 
@@ -84,8 +88,10 @@ local function fn()
 	inst:AddTag("ignorewalkableplatforms")
 	inst:AddTag("pegabarco")
 
-	inst.entity:AddPhysics()
+
 	inst.Physics:SetCylinder(0.25, 2)
+
+	inst:AddComponent("walkableplatform")
 
 	inst.entity:SetPristine()
 

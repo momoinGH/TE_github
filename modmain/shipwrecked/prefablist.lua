@@ -1,94 +1,221 @@
-table.insert(PrefabFiles, "boatraft_old")
-table.insert(PrefabFiles, "boatlog_old")
-table.insert(PrefabFiles, "crate")
-table.insert(PrefabFiles, "dragoon")
-table.insert(PrefabFiles, "dragoonfire")
-table.insert(PrefabFiles, "dragoonspit")
-table.insert(PrefabFiles, "dragoonden")
-table.insert(PrefabFiles, "dragoonheart")
-table.insert(PrefabFiles, "volcano_shrub")
-table.insert(PrefabFiles, "flamegeyser")
-table.insert(PrefabFiles, "rock_obsidian")
-table.insert(PrefabFiles, "magma_rocks")
-table.insert(PrefabFiles, "obsidian_workbench")
-table.insert(PrefabFiles, "obsidianfirepit")
-table.insert(PrefabFiles, "obsidianfirefire")
-table.insert(PrefabFiles, "elephantcactus")
-table.insert(PrefabFiles, "coffeebush")
-table.insert(PrefabFiles, "coffeebeans")
-table.insert(PrefabFiles, "coffee")
-table.insert(PrefabFiles, "lavaerupt")
-table.insert(PrefabFiles, "volcano")
-table.insert(PrefabFiles, "woodlegs_cage")
-table.insert(PrefabFiles, "woodlegs_key1")
-table.insert(PrefabFiles, "woodlegs_key2")
-table.insert(PrefabFiles, "woodlegs_key3")
-table.insert(PrefabFiles, "woodlegs1")
-table.insert(PrefabFiles, "woodlegsghost")
-table.insert(PrefabFiles, "woodlegs_unlock")
-table.insert(PrefabFiles, "vulcano")
-table.insert(PrefabFiles, "escadadovulcao")
---table.insert(PrefabFiles,"mermfisher")
-table.insert(PrefabFiles, "flup")
-table.insert(PrefabFiles, "flupegg")
-table.insert(PrefabFiles, "tidalpool")
-table.insert(PrefabFiles, "poisonhole")
-table.insert(PrefabFiles, "tigershark")
-table.insert(PrefabFiles, "tigersharkshadow")
-table.insert(PrefabFiles, "volcanofog")
-table.insert(PrefabFiles, "flupspawner")
-table.insert(PrefabFiles, "jungletrees")
-table.insert(PrefabFiles, "jungletreeseed")
-table.insert(PrefabFiles, "bambootree")
-table.insert(PrefabFiles, "bamboo")
-table.insert(PrefabFiles, "wildbore")
-table.insert(PrefabFiles, "wildborehouse")
-table.insert(PrefabFiles, "doydoy")
-table.insert(PrefabFiles, "doydoy_mating_fx")
-table.insert(PrefabFiles, "doydoyegg")
-table.insert(PrefabFiles, "doydoyfeather")
-table.insert(PrefabFiles, "doydoyherd")
-table.insert(PrefabFiles, "doydoynest")
-table.insert(PrefabFiles, "livingjungletree")
-table.insert(PrefabFiles, "doydoy_spawner")
-table.insert(PrefabFiles, "berrybush2_snake")
-table.insert(PrefabFiles, "lavapondbig")
-table.insert(PrefabFiles, "bigfoot")
-table.insert(PrefabFiles, "glommerbell")
-table.insert(PrefabFiles, "sweet_potato")
-table.insert(PrefabFiles, "doydoyfan")
-table.insert(PrefabFiles, "sand_castle")
-table.insert(PrefabFiles, "sandhill")
-table.insert(PrefabFiles, "sand")
-table.insert(PrefabFiles, "seashell")
-table.insert(PrefabFiles, "seashell_beached")
-table.insert(PrefabFiles, "rock_limpet")
-table.insert(PrefabFiles, "limpets")
-table.insert(PrefabFiles, "palmleaf")
-table.insert(PrefabFiles, "palmleafhut")
-table.insert(PrefabFiles, "palmtrees")
-table.insert(PrefabFiles, "coconut")
-table.insert(PrefabFiles, "crab")
-table.insert(PrefabFiles, "crabhole")
-table.insert(PrefabFiles, "treeguard")
-table.insert(PrefabFiles, "treeguard_coconut")
-table.insert(PrefabFiles, "warningshadow")
-table.insert(PrefabFiles, "slotmachine")
-table.insert(PrefabFiles, "sharkitten")
-table.insert(PrefabFiles, "sharkittenspawner")
-table.insert(PrefabFiles, "bush_vine")
-table.insert(PrefabFiles, "primeapebarrel")
-table.insert(PrefabFiles, "monkeyball")
-table.insert(PrefabFiles, "shark_gills")
-table.insert(PrefabFiles, "primeape")
-table.insert(PrefabFiles, "icemaker")
-table.insert(PrefabFiles, "tigereye")
-table.insert(PrefabFiles, "packim")
-table.insert(PrefabFiles, "packim_fishbone")
+PrefabFiles = {
+  "axeobsidian",
+  "armor_obsidian",
+  "meteor_impact",
+  "dug_cofeecactus",
+  "snake",
+  "snake_hole",
+  "snakeskin",
+  "harpoon",
+  "new_hats",
+  "parrot_pirate",
+  "dubloon",
+  "seagull",
+  "toucan",
+  "mosquitopoison",
+  "cormorant",
+  "chiminea",
+  "sea_chiminea",
+  "chimineafire",
+  "armor_seashell",
+  "ox_horn",
+  "ox",
+  "oxherd",
+  "knightboat",
+  "knightboat_cannonshot",
+  "boatrow",
+  "rowboat_wake", --trail do rowboat
+  "blubber",
+  "fish_med",
+  "solofish",
+  "boatrepairkit",
+  "sandbag",
+  "cutlass",
+  "luggarechestspawn",
+  "porto",
+  "porto2",
+  "buriedtreasure",
+  "windtrail",
+  "windswirl",
+  "ventania",
+  "sail",
+  "boattorch",
+  "boatlantern",
+  "boatcannon",
+  "woodlegs_boatcannon",
+  "quackeringram",
+  "quackenbeak",
+  "quackendrill",
+  "quackering_wave",
+  "quackering_wake",
+  "trawlnet",
+  "boatsurf",
+  "boatsurfothers",
+  "boatpirate",
+  "boatpirateamigo",
+  "turbine_blades",
+  "buoy",
+  "armor_lifejacket",
+  "luckyhat",
+  "telescope",
+  "thatchpack",
+  "parrot",
+  "seagullwater",
+  "seaweed_stalk",
+  "corallarve",
+  "nubbin",
+  "coconade",
+  "piratepack",
+  "ox_flute",
+  "blubbersuit",
+  "tarsuit",
+  "tarlamp",
+  "waterchest",
+  "mussel_bed",
+  "mussel_stick",
+  "messagebottle1",
+  "bottlelantern",
+  "researchlab5",
+  "roe",
+  "roe_fish",
+  "fishfarm",
+  "fishfarm_sign",
+  "mussel_farm",
+  "tar_extractor",
+  "seatrap",
+  "hail",
+  "spearlauncher",
+  "speargun",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ------------------------------------------------------------------------------------------------
+  "boatraft_old",
+  "boatlog_old",
+  "crate",
+  "dragoon",
+  "dragoonfire",
+  "dragoonspit",
+  "dragoonden",
+  "dragoonheart",
+  "volcano_shrub",
+  "flamegeyser",
+  "rock_obsidian",
+  "magma_rocks",
+  "obsidian_workbench",
+  "obsidianfirepit",
+  "obsidianfirefire",
+  "elephantcactus",
+  "coffeebush",
+  "coffeebeans",
+  "coffee",
+  "lavaerupt",
+  "volcano",
+  "woodlegs_cage",
+  "woodlegs_key1",
+  "woodlegs_key2",
+  "woodlegs_key3",
+  "woodlegs1",
+  "woodlegsghost",
+  "woodlegs_unlock",
+  "vulcano",
+  "escadadovulcao",
+  --table.insert(PrefabFiles,"mermfisher",
+  "flup",
+  "flupegg",
+  "tidalpool",
+  "poisonhole",
+  "tigershark",
+  "tigersharkshadow",
+  "volcanofog",
+  "flupspawner",
+  "jungletrees",
+  "jungletreeseed",
+  "bambootree",
+  "bamboo",
+  "wildbore",
+  "wildborehouse",
+  "doydoy",
+  "doydoy_mating_fx",
+  "doydoyegg",
+  "doydoyfeather",
+  "doydoyherd",
+  "doydoynest",
+  "livingjungletree",
+  "doydoy_spawner",
+  "berrybush2_snake",
+  "lavapondbig",
+  "bigfoot",
+  "glommerbell",
+  "sweet_potato",
+  "doydoyfan",
+  "sand_castle",
+  "sandhill",
+  "sand",
+  "seashell",
+  "seashell_beached",
+  "rock_limpet",
+  "limpets",
+  "palmleaf",
+  "palmleafhut",
+  "palmtrees",
+  "coconut",
+  "crab",
+  "crabhole",
+  "treeguard",
+  "treeguard_coconut",
+  "warningshadow",
+  "slotmachine",
+  "sharkitten",
+  "sharkittenspawner",
+  "bush_vine",
+  "primeapebarrel",
+  "monkeyball",
+  "shark_gills",
+  "primeape",
+  "icemaker",
+  "tigereye",
+  "packim",
+  "packim_fishbone",
+}
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------
+
 
 if TUNING.tropical.sealnado then
-    table.insert(PrefabFiles, "twister")
-    table.insert(PrefabFiles, "twister_spawner")
-    table.insert(PrefabFiles, "twister_seal")
-    table.insert(PrefabFiles, "twister_tornado")
+  table.insert(PrefabFiles, "twister")
+  table.insert(PrefabFiles, "twister_spawner")
+  table.insert(PrefabFiles, "twister_seal")
+  table.insert(PrefabFiles, "twister_tornado")
 end

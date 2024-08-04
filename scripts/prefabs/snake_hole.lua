@@ -130,7 +130,7 @@ local function OnIsSpring(inst, isspring)
         --It is no long spring, and we're in spring mode,
         --so start normal mode transition timer
         inst.springtask = inst:DoTaskInTime(
-        math.random(TUNING.MIN_RABBIT_HOLE_TRANSITION_TIME, TUNING.MAX_RABBIT_HOLE_TRANSITION_TIME), SetNormalMode)
+            math.random(TUNING.MIN_RABBIT_HOLE_TRANSITION_TIME, TUNING.MAX_RABBIT_HOLE_TRANSITION_TIME), SetNormalMode)
     end
 
     if watchrain then

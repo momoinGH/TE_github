@@ -72,7 +72,6 @@ local function make_plantable(data)
 
         inst.entity:AddTransform()
         inst.entity:AddAnimState()
-        --inst.entity:AddSoundEmitter()
         inst.entity:AddNetwork()
 
         MakeInventoryPhysics(inst)
@@ -100,6 +99,7 @@ local function make_plantable(data)
 
         inst:AddComponent("inspectable")
         inst.components.inspectable.nameoverride = data.inspectoverride or ("dug_" .. data.name)
+        
         inst:AddComponent("inventoryitem")
 
         if data.name == "nettle" then

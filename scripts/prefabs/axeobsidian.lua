@@ -5,24 +5,12 @@ local assets =
     Asset("ANIM", "anim/swap_axe_obsidian.zip"),
 }
 
-local OBSIDIANTOOLFACTOR = 2.5
-
-local function onfinished(inst)
-    inst:Remove()
-end
-
 local function ObsidianToolAttack(inst, attacker, target)
     inst.components.obsidiantool:Use(attacker, target)
     local charge, maxcharge = inst.components.obsidiantool:GetCharge()
     local dano = Lerp(0, 1, charge / maxcharge)
     target.components.combat:GetAttacked(attacker, attacker.components.combat:CalcDamage(target, inst, dano), inst,
         "FIRE")
-
-    -- if charge == maxcharge then
-    --     if target.components.burnable then
-    --         target.components.burnable:Ignite()
-    --     end
-    -- end
 end
 
 local function ObsidianToolHitWater(inst)
@@ -122,8 +110,9 @@ local function MakeObsidianTool(inst)
     inst.components.heater:SetThermics(true, false)
 end
 
-local function obsidianfn(Sim)
+local function obsidianfn()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
@@ -136,6 +125,7 @@ local function obsidianfn(Sim)
 
     inst:AddTag("sharp")
     inst:AddTag("axe")
+
     MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
@@ -145,21 +135,20 @@ local function obsidianfn(Sim)
     end
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(27)
-    inst.components.weapon.attackwear = 1 / OBSIDIANTOOLFACTOR
+    inst.components.weapon:SetDamage(TUNING.AXEOBSIDIAN_DAMAGE)
+    inst.components.weapon.attackwear = 0.4
+    inst.components.weapon:SetOnAttack(ObsidianToolAttack)
 
     inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(250)
-    inst.components.finiteuses:SetUses(250)
+    inst.components.finiteuses:SetMaxUses(TUNING.AXEOBSIDIAN_USES)
+    inst.components.finiteuses:SetUses(TUNING.AXEOBSIDIAN_USES)
     inst.components.finiteuses:SetConsumption(ACTIONS.CHOP, 1)
     inst.components.finiteuses:SetOnFinished(inst.Remove)
 
     inst:AddComponent("inspectable")
-    inst:AddComponent("waterproofer")
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequipobsidian)
@@ -172,25 +161,18 @@ local function obsidianfn(Sim)
     inst.components.obsidiantool.tool_type = "axe"
     inst.components.obsidiantool.maxcharge = 75
     inst.components.obsidiantool.onchargedelta = ChangeObsidianLight
-    inst:ListenForEvent("equipped", ManageObsidianLight)
-    inst:ListenForEvent("onputininventory", ManageObsidianLight)
-    inst:ListenForEvent("ondropped", ManageObsidianLight)
 
-    if inst.components.weapon then
-        if inst.components.weapon.onattack then
-
-        else
-            inst.components.weapon:SetOnAttack(ObsidianToolAttack)
-        end
-    end
 
     inst:AddComponent("temperature")
     MakeObsidianTool(inst)
 
+    MakeHauntableLaunch(inst)
+
     inst:ListenForEvent("floater_startfloating", ObsidianToolHitWater)
     inst:ListenForEvent("percentusedchange", PercentChanged)
-
-    MakeHauntableLaunch(inst)
+    inst:ListenForEvent("equipped", ManageObsidianLight)
+    inst:ListenForEvent("onputininventory", ManageObsidianLight)
+    inst:ListenForEvent("ondropped", ManageObsidianLight)
 
     return inst
 end

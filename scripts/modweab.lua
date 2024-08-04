@@ -495,12 +495,8 @@ AddComponentPostInit("equippable", function(self)
         aj(self, ae)
     end
 end)
-
 AddClassPostConstruct("components/inventoryitem_replica", function(self)
-    self.can_altattack_fn = function()
-        return true
-    end;
-
+    self.can_altattack_fn = function() return true end;
     function self:SetIsAltAttacking(aa)
         self.classified.isaltattacking:set(aa)
     end;
@@ -513,10 +509,22 @@ AddClassPostConstruct("components/inventoryitem_replica", function(self)
         if self.inst.components.weapon then
             return self.inst.components.weapon.altattackrange
         elseif self.classified ~= nil then
-            return math.max(0,
-                self.classified.altattackrange:value())
+            return math.max(0, self.classified.altattackrange:value())
         else
             return self:AttackRange()
+        end
+    end;
+
+    function self:SetAltAttackCheck(ak)
+        if ak and type(ak) == "function" then
+            self.can_altattack_fn = ak
+        end
+    end;
+
+    function self:CanAltAttack()
+        if self.classified.isaltattacking:value() then
+            return self.inst.components.weapon and self.components.weapon:CanAltAttack() or
+                self.can_altattack_fn(self.inst)
         end
     end;
 

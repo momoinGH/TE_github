@@ -1993,7 +1993,7 @@ STRINGS.NAMES.ESCADADOVULCAO2                                                   
 STRINGS.NAMES.JELLYFISH_COOKED                                                  = "Cooked Jellyfish"
 STRINGS.NAMES.INVENTORYWATERYGRAVE                                              = "Watery Grave"
 STRINGS.NAMES.HARPOON                                                           = "Harpoon"
-STRINGS.NAMES.ARMOROBSIDIAN                                                     = "Obsidian Armour"
+
 STRINGS.NAMES.ANTHILL_DOOR_BAIXO                                                = "Door"
 STRINGS.NAMES.BUGREPELLENT                                                      = "Bug B'Gone"
 STRINGS.NAMES.DECO_RUINS_CORNERBEAM_HEAVY_BLUE                                  = "遗迹角柱重型蓝"
@@ -4420,7 +4420,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTCOMBHOMECAVEWARRIOR                      
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAFT_OLD                                    = "This looks adequate."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BED2                                        = "You could sleep here"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_RAFT_OLD                              = "This looks adequate."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOROBSIDIAN                               = "I'm a genius."
+
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BILL_SLEEPING                               = "Good. It's sleeping."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RADISH_OVERSIZED_ROTTEN                     = "Radish Oversized Rotten."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OINCPILE42                                  = "Oinc Pile."
@@ -5336,7 +5336,7 @@ STRINGS.RECIPE_DESC.SAIL_STICK                                                  
 STRINGS.RECIPE_DESC.PIG_ACADEMY_ENTRANCE                                        = "All adventurers need to defend themselves."
 STRINGS.RECIPE_DESC.SHARK_TEETHHAT                                              = "Look formidable on the seas."
 STRINGS.RECIPE_DESC.ORGANIC_DOOR                                                = "It just grew that way."
-STRINGS.RECIPE_DESC.ARMOROBSIDIAN                                               = "Hot to the touch."
+
 STRINGS.RECIPE_DESC.WINDOW_ROUND_BURLAP                                         = "Simple natural light."
 STRINGS.RECIPE_DESC.HEDGE_BLOCK_ITEM                                            = "For Squares."
 STRINGS.RECIPE_DESC.RUG_SQUARE                                                  = "Compact and fringed."
@@ -5869,7 +5869,7 @@ STRINGS.CHARACTERS.WILLOW.DESCRIBE.OBSIDIANFIREPIT          = "I could watch it 
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.AERODYNAMICHAT           = "Brisk movement snuffs fires."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.GRASSNOVA                = "It's a flammable tuft of grass."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.COCONUT_HALVED           = "Aha! Now you're food!"
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.ARMOROBSIDIAN            = "Hit me and BURN!"
+
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.BALLPHINHOUSE            = "It's the castle of the bouncy things... A bouncy castle."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.SOLOFISH                 = "It doesn't seem very smart."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.RESEARCHLAB5             = "Can things burn at sea?"
@@ -6392,7 +6392,7 @@ STRINGS.CHARACTERS.WENDY.DESCRIBE.PARROT                    = "Is it my ears, or
 STRINGS.CHARACTERS.WENDY.DESCRIBE.SEAWEED                   = "Even the sea is infested by weeds."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.SLIPSTOR                  = "A big, furry monster"
 STRINGS.CHARACTERS.WENDY.DESCRIBE.TURBINE_BLADES            = "No longer turning."
-STRINGS.CHARACTERS.WENDY.DESCRIBE.ARMOROBSIDIAN             = "Is it wise to don a suit of fire stone?"
+
 STRINGS.CHARACTERS.WENDY.DESCRIBE.MUSSEL_FARM               = "They don't look that tough to me."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.WATERCROCODOG             = "A damp death awaits me..."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.SLOTMACHINE               = "Ah, this seems a sensible test of fate."
@@ -6552,7 +6552,7 @@ STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.POISONHOLE = "Cowardly hole!"
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.DOYDOYEGG = "Eat raw, good for mighty muscles!"
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.QUACKENBEAK = "Wolfgang is very proud of bird souvenir!"
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.SNAKE_HOLE = "This is bush. Of vines."
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.ARMOROBSIDIAN = "Is cheap trick, but Wolfgang like!"
+
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.ROE_COOKED = "Little eggs is stink less now."
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.SEAGULL = "It has large mouth. Like me!"
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.QUACKENDRILL = "Wolfgang will punch bottom of ocean!"
@@ -6962,7 +6962,7 @@ STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.MESSAGEBOTTLEEMPTY1 = "I do like when t
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.TIGERSHARKSHADOW = "The shadow of the beast!"
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.JELLYJERKY = "What an inventive preserve."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.WOODLEGS_CAGE = "How did you get in there, scruffy sir?"
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.ARMOROBSIDIAN = "Be careful, it's sharp!"
+
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.VOLCANO_SHRUB = "You look ashen."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.FISH3 = "Part of the Epinephelinae family.."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.TURF_SNAKESKINFLOOR = "The ground. You step on it."
@@ -7381,7 +7381,7 @@ STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.SHARD_SWORD = "The pen is mightier."
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.QUACKENBEAK = "The remains of a thrilling battle."
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.POISONHOLE = "The ground belches with sickness!"
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.VINE = "What can you do for me?"
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.ARMOROBSIDIAN = "Come at me now, fiends!"
+
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.TIGERSHARK = "Take me to Valhalla, devil of the sea!"
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.BOAT_TORCH = "The night sea is alight!"
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.WATERCROCODOG = "My, what big teeth you have!"
@@ -7589,7 +7589,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.TIGERSHARKSHADOW = "The shadow of the beast!
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.SHARD_BEAK = "An instrument of deconstruction."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.PALMLEAF = "Now I just need servants to fan my glorious self!"
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.WILDBORE = "I'll easily dispose of that swinish brute."
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.ARMOROBSIDIAN = "I've bent the flame to my will."
+
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.ARMOR_SNAKESKIN = "Quite dapper!"
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.COTTONTREE = "Very soft."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.WOODLEGSBOATAMIGO = "A seaworthy vessel if ever there was one!"
@@ -7906,7 +7906,7 @@ STRINGS.CHARACTERS.WEBBER.DESCRIBE.WOODLEGS_KEY2 = "This key's probably worth mo
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.DEPLETED_BAMBOOTREE = "Come back, bamboos."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.PORTO_ENCRUSTEDBOAT = "Ready to set sail!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.QUACKENDRILL = "It might help us find more tar."
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.ARMOROBSIDIAN = "Our enemies will feel the heat!"
+
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.ROCK_OBSIDIAN = "This rock is pretty tough."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.TURF_MEADOW = "Some ground that we dug up."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.SHARX = "Sh...Sh...SHARK!!!!!"
@@ -8310,7 +8310,7 @@ STRINGS.CHARACTERS.WX78.DESCRIBE.PEG_LEG = "I haven't pegged down what this does
 STRINGS.CHARACTERS.WX78.DESCRIBE.DOYDOY = "There is no spark behind its eyes."
 STRINGS.CHARACTERS.WX78.DESCRIBE.DOYDOYEGG_COOKED = "Cooking this dumb egg was smart of me."
 STRINGS.CHARACTERS.WX78.DESCRIBE.MUSSEL_COOKED = "The fire opens their shells."
-STRINGS.CHARACTERS.WX78.DESCRIBE.ARMOROBSIDIAN = "Hit me and BURN!"
+
 STRINGS.CHARACTERS.WX78.DESCRIBE.OXBABY = "You may be small, but you smell big."
 STRINGS.CHARACTERS.WX78.DESCRIBE.ARMOR_SNAKESKIN = "This coat makes me feel dangerous."
 STRINGS.CHARACTERS.WX78.DESCRIBE.OBSIDIAN_WORKBENCH = "Fire items can be forged here!"
@@ -8813,7 +8813,7 @@ STRINGS.CHARACTERS.WOODIE.DESCRIBE.WHALE_CARCASS_BLUE = "It's starting to spoil.
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.FISH_RAW_SMALL_COOKED = "Fish and fire go well together."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.TUNACAN = "Aw, but I like mine with Ballphin!"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.ARMOR_SNAKESKIN = "This coat makes me feel dangerous."
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.ARMOROBSIDIAN = "Hit me and BURN!"
+
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.ELEPHANTCACTUS = "Don't rub up against me!"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.OBSIDIANBOMB = "I get more \"boom\" for my buck with obsidian."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.HARPOON = "You could throw an axe just as good, hey"
@@ -9757,4 +9757,5 @@ STRINGS.BORE_TALK_FIND_MEAT       = { "ME HUNGRY!", "YUM!", "I EAT FOOD!", "TIME
 STRINGS.BORE_TALK_GO_HOME         = { "HOME TIME!", "HOME! HOME!" }
 
 
-
+modimport "modmain/common/languages/stringscreeps"
+modimport "modmain/common/languages/wurt_quotes"
