@@ -49,7 +49,7 @@ end
 
 local function OnUnwrapped(inst, pos, doer)
     inst.AnimState:PlayAnimation("unwrapped")
-    inst:DoTaskInTime(0.5, function() inst:Remove() end)
+    inst:DoTaskInTime(0.5, inst.Remove)
 end
 
 local function GetIndexFromKitNames(name)

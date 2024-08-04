@@ -92,7 +92,7 @@ local function fn()
 	inst:AddComponent("fueled")
 	inst.components.fueled.fueltype = FUELTYPE.USAGE
 	inst.components.fueled:InitializeFuelLevel(TUNING.HAT_SNORKEL_PERISHTIME)
-	inst.components.fueled:SetDepletedFn(function() inst:Remove() end)
+	inst.components.fueled:SetDepletedFn(inst.Remove)
 
 	-- Oxygen
 	inst:AddComponent("oxygenapparatus")

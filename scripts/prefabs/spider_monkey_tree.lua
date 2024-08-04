@@ -110,7 +110,7 @@ local function chop_down_burnt_tree(inst, chopper)
     inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
     inst.AnimState:PlayAnimation(inst.anims.chop_burnt)
     RemovePhysicsColliders(inst)
-    inst:ListenForEvent("animover", function() inst:Remove() end)
+    inst:ListenForEvent("animover", inst.Remove)
     inst.components.lootdropper:SpawnLootPrefab("charcoal")
     inst.components.lootdropper:DropLoot()
     if inst.pineconetask then

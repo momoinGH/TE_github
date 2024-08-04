@@ -10,7 +10,7 @@ local SEE_FOOD_DIST = 15
 local SEE_STRUCTURE_DIST = 30
 
 local BASE_TAGS = { "structure" }
-local FOOD_TAGS = { "edible" }
+local FOOD_TAGS = { "edible" } --TODO 食物没有该标签
 local STEAL_TAGS = { "structure" }
 local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", "AQUATIC" }
 

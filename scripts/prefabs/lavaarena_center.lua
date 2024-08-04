@@ -1006,7 +1006,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de aranhas-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "spider" })
-		local aranhas = tostring(GetTableSize(ents)) + inst.spider or 0
+		local aranhas = tostring(GetTableSize(ents)) + (inst.spider or 0)
 		inst.components.talker:Say("Enemies Left " .. aranhas .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.spider > 16 then inst.spiderwave = 1 elseif inst.spider > 7 then inst.spiderwave = 2 elseif inst.spider > 1 then inst.spiderwave = 3 else inst.spiderwave = 4 end
@@ -1091,7 +1091,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de cachorros-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "hound" })
-		local cachorros = tostring(GetTableSize(ents)) + inst.hound or 0
+		local cachorros = tostring(GetTableSize(ents)) + (inst.hound or 0)
 		inst.components.talker:Say("Enemies Left " .. cachorros .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.hound > 21 then inst.houndwave = 1 elseif inst.hound > 14 then inst.houndwave = 2 elseif inst.hound > 7 then inst.houndwave = 3 else inst.houndwave = 4 end
@@ -1175,7 +1175,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de mutantes-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "merm" })
-		local mutantes = tostring(GetTableSize(ents)) + inst.merm or 0
+		local mutantes = tostring(GetTableSize(ents)) + (inst.merm or 0)
 		inst.components.talker:Say("Enemies Left " .. mutantes .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.merm > 11 then inst.mermwave = 1 elseif inst.merm > 5 then inst.mermwave = 2 elseif inst.merm > 1 then inst.mermwave = 3 else inst.mermwave = 4 end
@@ -1260,7 +1260,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de porcodomato-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local porcodomato = tostring(GetTableSize(ents)) + inst.boar or 0
+		local porcodomato = tostring(GetTableSize(ents)) + (inst.boar or 0)
 		inst.components.talker:Say("Enemies Left " .. porcodomato .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.boar > 16 then inst.boarwave = 1 elseif inst.boar > 14 then inst.boarwave = 2 elseif inst.boar > 6 then inst.boarwave = 3 elseif inst.boar > 2 then inst.boarwave = 4 else inst.boarwave = 5 end
@@ -1344,7 +1344,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de cavalos-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local cavalos = tostring(GetTableSize(ents)) + inst.knight or 0
+		local cavalos = tostring(GetTableSize(ents)) +( inst.knight or 0)
 		inst.components.talker:Say("Enemies Left " .. cavalos .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.knight > 20 then inst.knightwave = 1 elseif inst.knight > 18 then inst.knightwave = 2 elseif inst.knight > 14 then inst.knightwave = 3 elseif inst.knight > 12 then inst.knightwave = 4 elseif inst.knight > 8 then inst.knightwave = 5 elseif inst.knight > 6 then inst.knightwave = 6 elseif inst.knight > 2 then inst.knightwave = 7 else inst.knightwave = 8 end
@@ -1426,7 +1426,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de lagarto-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local lagarto = tostring(GetTableSize(ents)) + inst.lizard or 0
+		local lagarto = tostring(GetTableSize(ents)) + (inst.lizard or 0)
 		inst.components.talker:Say("Enemies Left " .. lagarto .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.lizard > 20 then inst.lizardwave = 1 elseif inst.lizard > 18 then inst.lizardwave = 2 elseif inst.lizard > 14 then inst.lizardwave = 3 elseif inst.lizard > 13 then inst.lizardwave = 4 elseif inst.lizard > 8 then inst.lizardwave = 5 elseif inst.lizard > 6 then inst.lizardwave = 6 elseif inst.lizard > 1 then inst.lizardwave = 7 else inst.lizardwave = 8 end
@@ -1511,7 +1511,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de bossboarunit-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local bossboarunit = tostring(GetTableSize(ents)) + inst.bossboar or 0
+		local bossboarunit = tostring(GetTableSize(ents)) + (inst.bossboar or 0)
 		inst.components.talker:Say("Enemies Left " .. bossboarunit .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.bossboar > 20 then inst.bossboarwave = 1 elseif inst.bossboar > 18 then inst.bossboarwave = 2 elseif inst.bossboar > 14 then inst.bossboarwave = 3 elseif inst.bossboar > 13 then inst.bossboarwave = 4 elseif inst.bossboar > 8 then inst.bossboarwave = 5 elseif inst.bossboar > 6 then inst.bossboarwave = 6 elseif inst.bossboar > 2 then inst.bossboarwave = 7 elseif inst.bossboar > 1 then inst.bossboarwave = 8 else inst.bossboarwave = 9 end
@@ -1596,7 +1596,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de rhinocebrosunit-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local rhinocebrosunit = tostring(GetTableSize(ents)) + inst.rhinocebros or 0
+		local rhinocebrosunit = tostring(GetTableSize(ents)) + (inst.rhinocebros or 0)
 		inst.components.talker:Say("Enemies Left " .. rhinocebrosunit .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.rhinocebros > 20 then inst.rhinocebroswave = 1 elseif inst.rhinocebros > 18 then inst.rhinocebroswave = 2 elseif inst.rhinocebros > 14 then inst.rhinocebroswave = 3 elseif inst.rhinocebros > 13 then inst.rhinocebroswave = 4 elseif inst.rhinocebros > 8 then inst.rhinocebroswave = 5 elseif inst.rhinocebros > 6 then inst.rhinocebroswave = 6 elseif inst.rhinocebros > 2 then inst.rhinocebroswave = 7 elseif inst.rhinocebros > 1 then inst.rhinocebroswave = 8 else inst.rhinocebroswave = 9 end
@@ -1682,7 +1682,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de beetletaurunit-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local beetletaurunit = tostring(GetTableSize(ents)) + inst.beetletaur or 0
+		local beetletaurunit = tostring(GetTableSize(ents)) + (inst.beetletaur or 0)
 		inst.components.talker:Say("Enemies Left " .. beetletaurunit .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.beetletaur > 20 then inst.beetletaurwave = 1 elseif inst.beetletaur > 18 then inst.beetletaurwave = 2 elseif inst.beetletaur > 14 then inst.beetletaurwave = 3 elseif inst.beetletaur > 13 then inst.beetletaurwave = 4 elseif inst.beetletaur > 8 then inst.beetletaurwave = 5 elseif inst.beetletaur > 6 then inst.beetletaurwave = 6 elseif inst.beetletaur > 2 then inst.beetletaurwave = 7 elseif inst.beetletaur > 1 then inst.beetletaurwave = 8 else inst.beetletaurwave = 9 end

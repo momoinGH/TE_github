@@ -12,8 +12,6 @@ local MAX_CHARGE_DIST = 60
 
 local DO_ACTIONS_DISTANCE = 30
 
-local FOOD_TAGS = {"edible"}
-local NO_TAGS = {"FX", "NOCLICK", "DECOR", "INLIMBO", "kittenchow"}
 
 local GO_HOME_DIST = 10
 

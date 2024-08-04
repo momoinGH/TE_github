@@ -212,9 +212,9 @@ AddTask("GREENSWAMP_TASK_FOREST_ISLAND",
 
 local function LevelPreInitBoth(level)
 	if level.location == "forest" then
-		if GetModConfigData("kindofworld") == 10 or GetModConfigData("greenworld") == 15 then
+		if TUNING.tropical.only_shipwrecked or TUNING.tropical.greenworld == 15 then
 			table.insert(level.tasks, "GREENSWAMP_TASK_FOREST_ISLAND")
-		elseif GetModConfigData("kindofworld") ~= 20 then --não adiciona no Sea World
+		elseif not TUNING.tropical.only_sea then --não adiciona no Sea World
 			table.insert(level.tasks, "GREENSWAMP_TASK_FOREST")
 		end
 	end

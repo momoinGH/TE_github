@@ -3,11 +3,10 @@ local GROUND = GLOBAL.GROUND
 local Layouts = require("map/layouts").Layouts
 local StaticLayout = require("map/static_layout")
 
-Layouts["tigersharkarea"] = StaticLayout.Get("map/static_layouts/tigersharkarea",
-	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
-	})
+Layouts["tigersharkarea"] = StaticLayout.Get("map/static_layouts/tigersharkarea", {
+	start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
+	fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
+})
 
 Layouts["CoffeeBushBunch"] = StaticLayout.Get("map/static_layouts/coffeebushbunch",
 	{

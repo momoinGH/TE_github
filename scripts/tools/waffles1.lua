@@ -5,7 +5,7 @@ _G = GLOBAL; require, rawget, getmetatable, unpack = _G.require, _G.rawget, _G.g
 
 -- Ссылки и сокращения --
 
-TheNet = _G.TheNet; IsServer, IsDedicated = TheNet:GetIsServer(), TheNet:IsDedicated()
+TheNet = _G.TheNet;
 TheSim = _G.TheSim
 
 AddPrefabPostInit("world", function(inst)
@@ -145,7 +145,7 @@ local Tools =
 
 	PlayCharacterSound = function(inst, name)
 		inst.SoundEmitter:PlaySound((inst.talker_path_override or "dontstarve/characters/") ..
-		(inst.soundsname or inst.prefab) .. "/" .. name)
+			(inst.soundsname or inst.prefab) .. "/" .. name)
 	end,
 
 	-- 3. Утилиты --
@@ -207,51 +207,3 @@ Waffles1.AddCharacterQuotes = function(path, key, quotes)
 		end
 	end
 end
-
---Waffles1.AddPrefabStrings = function(prefab, name, recipe_desc)
---	local t = Waffles1.GetPath(_G, "STRINGS")
---	Waffles1.GetPath(t, "NAMES")[prefab:upper()] = name
---	if recipe_desc ~= nil then
---		Waffles1.GetPath(t, "RECIPE_DESC")[prefab:upper()] = recipe_desc
---	end
---end
-
--- 2. Игровой процесс --
-
---Waffles1.DespawnRecipe = function(inst, isbuilder)
---	local staff = SpawnPrefab("greenstaff")
---	staff.persists = false
---		
---	if staff.components.spellcaster ~= nil then
---		local x, y, z = inst.Transform:GetWorldPosition()
---		local not_ingredients = table.invert(TheSim:FindEntities(x, y, z, 3, { "_inventoryitem" }))
---		if isbuilder then
---			inst.prefab = inst.prefab.."_builder"
---		end
---		staff.components.spellcaster.spell(staff, inst)
---
---		local ingredients = {}
---		for _,v in pairs(TheSim:FindEntities(x, y, z, 3, { "_inventoryitem" })) do
---			if not_ingredients[v] == nil then
---				table.insert(ingredients, v)
---			end
---		end
---
---		if #ingredients > 0 then
---			Waffles1.SpawnBundle("gift", ingredients).Transform:SetPosition(x, y, z)
---		end
---	end
---	
---	if staff:IsValid() then
---		staff:Remove()
---	end
---	if inst:IsValid() then
---		inst:Remove()
---	end
---end
-
--- Префабы --
-
---for _,v in pairs({ "dynamicshadow" }) do
---	table.insert(PrefabFiles, v)
---end

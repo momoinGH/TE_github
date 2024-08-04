@@ -314,7 +314,7 @@ function RocController:OnUpdate(dt)
 					if headdistsq > HEAD_ATTACK_DIST * HEAD_ATTACK_DIST then
 						self.head_vel = math.min(self.head_vel + (self.head_acc * dt), self.head_vel_max)
 					else
-						if self.target:HasTag("isinventoryitem") or self.target:HasTag("player") then
+						if self.target:HasTag("_inventoryitem") or self.target:HasTag("player") then
 							if self.target:HasTag("player") and not self.target.sg:HasStateTag("cower") then
 								self.target:PushEvent("cower")
 							end

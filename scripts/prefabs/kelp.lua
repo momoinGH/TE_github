@@ -34,7 +34,7 @@ local function chop_down_tree(inst, chopper)
                 kelpy.sg:GoToState("spawn")
             end
         end
-        inst:DoTaskInTime(2, function() inst:Remove() end)
+        inst:DoTaskInTime(2, inst.Remove)
     else
         inst.AnimState:PlayAnimation("cutdireita")
         inst.components.lootdropper:DropLoot(pt + TheCamera:GetRightVec())
@@ -47,7 +47,7 @@ local function chop_down_tree(inst, chopper)
             end
         end
 
-        inst:DoTaskInTime(2, function() inst:Remove() end)
+        inst:DoTaskInTime(2, inst.Remove)
     end
 end
 

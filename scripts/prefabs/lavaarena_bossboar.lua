@@ -353,7 +353,7 @@ local function fnBurst()
 	inst.StartBurst = StartBurst
 	inst.striketask = nil
 
-	inst:DoTaskInTime(3, function() inst:Remove() end)
+	inst:DoTaskInTime(3, inst.Remove)
 
 	return inst
 end

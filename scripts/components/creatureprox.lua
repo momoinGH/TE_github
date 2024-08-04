@@ -14,7 +14,7 @@ local function DoTest(inst)
         local musthave = { "animal", "character" }
 
         if component.inventorytrigger then
-            musthave = { "isinventoryitem", "monster", "animal", "character", "meat" }
+            musthave = { "_inventoryitem", "monster", "animal", "character", "meat" }
         end
 
         local nothave = { "INTERIOR_LIMBO", "snake", "scorpion", "shadowcreature" }

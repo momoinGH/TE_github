@@ -108,7 +108,7 @@ local function onunequip(inst, owner)
         inst.task = nil
     end
     owner.components.hunger:SetRate(inst.prev_hungerrate or TUNING.WILSON_HUNGER_RATE)
-    owner.components.thirst:SetRate(inst.prev_thirstrate or 5 / 30)
+    owner.components.thirst:SetRate(inst.prev_thirstrate or (5 / 30))
     owner:RemoveEventCallback("cantbuild", giveitems)
 
     --owner.components.combat.areahitrange = nil

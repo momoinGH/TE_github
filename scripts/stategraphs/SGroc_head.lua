@@ -37,7 +37,7 @@ end
 local function DoGrab(inst)                                      
     local controller = inst.controller
 
-    if controller.target and controller.target:HasTag("isinventoryitem") then
+    if controller.target and controller.target:HasTag("_inventoryitem") then
         controller:EatSomething(controller.target)   
     elseif controller.target:HasTag("player") then  
         local dist = inst:GetDistanceSqToInst(controller.target) 

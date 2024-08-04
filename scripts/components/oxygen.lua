@@ -36,35 +36,6 @@ function Oxygen:OnLoad(data)
 	end
 end
 
---[[
-
-function Oxygen:OnSave()
-	local data = {}
-	data.current = self.current
-	
-	if self.max ~= 100 then
-		data.max = self.max
-	end
-	
-	return data
-end
-
-function Oxygen:OnLoad(data)
-	
-	if data.max then
-		self.max = data.max
-	end
-	
-	if data.current then
-        self.current = self.max --data.current
-		
-		if self.current <= 0 then
-			self.current = 0.001
-		end
-	end
-end
-]]
-
 function Oxygen:GetCurrent()
 	return self.current
 end
@@ -130,7 +101,7 @@ function Oxygen:DoDelta(delta, overtime)
 	end
 
 	-- No oxygen loss if you don't breathe
-	--	if self.inst:HasTag("robot") or self.inst:HasTag("waterbreather") then
+	--	if self.inst:HasTag("batteryuser") or self.inst:HasTag("waterbreather") then
 	--		return
 	--	end
 
@@ -242,7 +213,7 @@ function Oxygen:Recalc(dt)
 	end
 
 	-- No oxygen loss if you don't breathe
-	--	if self.inst:HasTag("robot") or self.inst:HasTag("waterbreather") then
+	--	if self.inst:HasTag("batteryuser") or self.inst:HasTag("waterbreather") then
 	--		self.rate = 0
 	--		return
 	--	end

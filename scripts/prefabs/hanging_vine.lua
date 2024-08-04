@@ -143,7 +143,7 @@ local function patchfn(Sim)
     local trans = inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst:DoTaskInTime(0, function() if not inst.spawnedchildren then spawnvines(inst) end end)
-    --inst:DoTaskInTime(0, function() inst:Remove() end)
+    --inst:DoTaskInTime(0,inst.Remove)
     inst.OnSave = onsave
     inst.OnLoad = onload
     inst.spawnNewVine = spawnNewVine
@@ -155,7 +155,7 @@ local function patchfn2(Sim)
     local trans = inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst:DoTaskInTime(0, function() if not inst.spawnedchildren then spawnvines2(inst) end end)
-    --inst:DoTaskInTime(0, function() inst:Remove() end)
+    --inst:DoTaskInTime(0,inst.Remove)
     inst.OnSave = onsave
     inst.OnLoad = onload
     inst.spawnNewVine = spawnNewVine
@@ -174,7 +174,7 @@ end
 local function finished(inst)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/grabbing_vine/drop")
     inst.AnimState:PlayAnimation("death", false)
-    inst:DoTaskInTime(1.5, function() inst:Remove() end)
+    inst:DoTaskInTime(1.5, inst.Remove)
 end
 
 local function commonfn(Sim)

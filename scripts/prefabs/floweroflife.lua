@@ -129,7 +129,7 @@ end
 
 local function OnHaunt(inst)
 	inst.AnimState:PlayAnimation("burnt", true)
-	inst:DoTaskInTime(2, function() inst:Remove() end)
+	inst:DoTaskInTime(2, inst.Remove)
 
 
 	return true
@@ -279,7 +279,7 @@ local function sparklefn(Sim)
 	inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 	inst:DoTaskInTime(0, function() onspawn(inst) end)
 
-	inst.OnEntitySleep = function() inst:Remove() end
+	inst.OnEntitySleep = inst.Remove
 
 	inst.persists = false
 

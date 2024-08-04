@@ -1,8 +1,10 @@
 -- 修改原版配方，贴图不同的保留
 local foods = require("preparedfoods")
 -- foods.butterflymuffin.test = function(cooker, names, tags) return (names.butterflywings or names.moonbutterflywings or names.butterfly_tropical_wings) and not tags.meat and tags.veggie and tags.veggie >= 0.5 end
-foods.californiaroll.test = function(cooker, names, tags) return ((names.kelp or 0) + (names.kelp_cooked or 0) + (names.kelp_dried or 0) + (names.seaweed or 0)) ==
-    2 and (tags.fish and tags.fish >= 1) end
+foods.californiaroll.test = function(cooker, names, tags)
+    return ((names.kelp or 0) + (names.kelp_cooked or 0) + (names.kelp_dried or 0) + (names.seaweed or 0)) ==
+        2 and (tags.fish and tags.fish >= 1)
+end
 -- foods.lobsterbisque.test = function(cooker, names, tags) return (names.wobster_sheller_land or names.lobster_dead or names.lobster_dead_cooked or names.lobster_land) and tags.frozen end
 -- foods.lobsterdinner.test = function(cooker, names, tags) return (names.wobster_sheller_land or names.lobster_dead or names.lobster_dead_cooked or names.lobster_land) and names.butter and (tags.meat and tags.meat >= 1.0) and (tags.fish and tags.fish >= 1.0) and not tags.frozen end
 

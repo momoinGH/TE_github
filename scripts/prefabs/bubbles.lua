@@ -29,7 +29,7 @@ local function fx()
     inst:AddTag("FX")
     inst.persists = false
 
-    inst:DoTaskInTime(4, function() inst:Remove() end)
+    inst:DoTaskInTime(4, inst.Remove)
     --    inst:ListenForEvent("animover", inst:Remove())
 
     return inst
@@ -52,7 +52,7 @@ local function fx_small()
     inst:AddTag("FX")
     inst.persists = false
 
-    inst:DoTaskInTime(4, function() inst:Remove() end)
+    inst:DoTaskInTime(4, inst.Remove)
     --    inst:ListenForEvent("animover", inst:Remove())
 
     return inst
@@ -67,7 +67,7 @@ local function onfloated(inst)
     inst.persists = false
     inst.AnimState:PlayAnimation("bubble_float")
     inst.stopfloating(inst)
-    inst:DoTaskInTime(4, function() inst:Remove() end)
+    inst:DoTaskInTime(4, inst.Remove)
     --    inst:ListenForEvent("animover", inst:Remove())
 end
 
@@ -211,8 +211,7 @@ local function fn1(Sim)
     anim:SetBank("bubbles")
     anim:SetOrientation(ANIM_ORIENTATION.OnGround)
     anim:PlayAnimation("corentemarinha", true)
-    local animado
-    math.random(1, 3)
+    local animado = math.random(1, 3)
     if animado == 2 then anim:PlayAnimation("corentemarinha2", true) end
     if animado == 3 then anim:PlayAnimation("corentemarinha3", true) end
 

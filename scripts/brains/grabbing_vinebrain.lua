@@ -24,7 +24,7 @@ end)
 
 local function FoodNear(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 5, { "edible" })
+    local ents = TheSim:FindEntities(x, y, z, 5, { "edible" }) --TODO 食物没有该标签
 
     for i = #ents, 1, -1 do
         if not ents[i] or ents[i]:IsInLimbo() or not inst.components.eater:AbleToEat(ents[i]) then

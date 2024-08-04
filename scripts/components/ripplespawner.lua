@@ -24,7 +24,7 @@ function Ripplespawner:spawnripple(inst)
 
         ripple.Transform:SetPosition(x, y, z)
         if not inst:HasTag("largecreature") then
-            if inst:HasTag("isinventoryitem") then
+            if inst:HasTag("_inventoryitem") then
                 ripple.Transform:SetScale(0.65, 0.65, 0.65)
             else
                 ripple.Transform:SetScale(0.75, 0.75, 0.75)
@@ -57,7 +57,7 @@ function Ripplespawner:OnUpdate(dt)
 
     if self.range > 0 then
         ents = TheSim:FindEntities(x, y, z, self.range, nil, { "flying", "INLIMBO" },
-            { "flower", "plant", "monster", "animal", "character", "isinventoryitem", "tree", "structure" })
+            { "flower", "plant", "monster", "animal", "character", "_inventoryitem", "tree", "structure" })
     end
 
     local templist = {}

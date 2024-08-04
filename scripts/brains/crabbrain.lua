@@ -29,8 +29,10 @@ end
 local function EatFoodAction(inst)
     local notags = { "FX", "NOCLICK", "DECOR", "INLIMBO", "planted", "aquatic" }
     local target = FindEntity(inst, SEE_BAIT_DIST,
-        function(item) return inst.components.eater:CanEat(item) and item.components.bait and
-            not (item.components.inventoryitem and item.components.inventoryitem:IsHeld()) end, nil, notags)
+        function(item)
+            return inst.components.eater:CanEat(item) and item.components.bait and
+                not (item.components.inventoryitem and item.components.inventoryitem:IsHeld())
+        end, nil, notags)
 
     if target and target.prefab ~= "ice" then
         local act = BufferedAction(inst, target, ACTIONS.EAT)
@@ -54,11 +56,9 @@ function CrabBrain:OnStart()
         {
             WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
             --RunAway(self.inst, "scarytopr1ey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
-            ParallelNode
-            {
+            ParallelNode {
                 RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST),
-                SequenceNode
-                {
+                SequenceNode {
                     WaitNode(5),
                     IfNode(function() return IsDangerClose(self.inst) end, "DangerClose", DoAction(self.inst, TryHide, "Hide")),
                 },

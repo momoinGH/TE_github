@@ -442,21 +442,22 @@ local function MakeHat(name, bankparam, prefabnameparam)
         owner.AnimState:Hide("HAIR_NOHAT")
         owner.AnimState:Hide("HAIR")
 
-        --		local builder = owner.components.builder
-        --		if builder then
-        --		builder:GiveAllRecipes()
         owner:AddTag("brainjelly")
-        --		end	
+
+        inst._onbuilt = function(owner) inst.components.finiteuses:Use() end
+        inst:ListenForEvent("builditem", inst._onbuilt, owner)
+        inst:ListenForEvent("buildstructure", inst._onbuilt, owner)
     end
 
     local function brainjelly_onunequip(inst, owner)
         onunequip(inst, owner)
-        --		local builder = owner.components.builder
-        --		if builder then
-        --		builder:GiveAllRecipes()
-        --		builder.brainjelly = false
         owner:RemoveTag("brainjelly")
-        --		end	
+
+        if inst._onbuilt then
+            inst:RemoveEventCallback("builditem", inst._onbuilt, owner)
+            inst:RemoveEventCallback("buildstructure", inst._onbuilt, owner)
+            inst._onbuilt = nil
+        end
     end
 
     local function brainjelly()
@@ -468,10 +469,12 @@ local function MakeHat(name, bankparam, prefabnameparam)
             return inst
         end
 
+        inst._onbuilt = nil
+
         inst:AddComponent("finiteuses")
         inst.components.finiteuses:SetMaxUses(4)
         inst.components.finiteuses:SetPercent(1)
-        inst.components.finiteuses.onfinished = function() inst:Remove() end
+        inst.components.finiteuses.onfinished = inst.Remove
 
         inst.components.equippable:SetOnEquip(brainjelly_onequip)
         inst.components.equippable:SetOnUnequip(brainjelly_onunequip)

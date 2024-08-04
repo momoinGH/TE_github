@@ -184,7 +184,7 @@ local function sandhillfn(Sim)
 	inst:AddComponent("activatable")
 	inst.components.activatable.inactive = false
 	inst.components.activatable.getverb = function() return "SAND" end
-	inst.components.activatable.OnActivate = function() inst:Remove() end
+	inst.components.activatable.OnActivate = inst.Remove
 
 	return inst
 end

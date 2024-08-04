@@ -1,0 +1,524 @@
+Assets =
+{
+	Asset("ANIM", "anim/pigman_tribe.zip"), --图鉴wiki默认动画
+
+	--Asset("SOUNDPACKAGE", "sound/volcano.fev"),
+	--Asset("SOUND", "sound/volcano.fsb"),
+	--Asset("SOUND", "sound/boats.fsb"),
+	--Asset("SOUND", "sound/creatures.fsb"),
+	--Asset("SOUND", "sound/slot_machine.fsb"),
+	--Asset("SOUND", "sound/waves.fsb"),
+	--LOD SOUND FILE
+	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC002.fev"),
+	Asset("SOUNDPACKAGE", "sound/sw_character.fev"),
+	Asset("SOUND", "sound/dontstarve_shipwreckedSFX.fsb"),
+	Asset("SOUND", "sound/sw_character.fsb"),
+	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"),
+	Asset("SOUND", "sound/DLC003_sfx.fsb"),
+	Asset("IMAGE", "images/fog_cloud.tex"),
+	--Asset("SOUND", "sound/amb_stream_SW.fsb"),
+	--NEW SOUND FILE
+	--Asset("SOUNDPACKAGE", "sound/volcano_new.fev"),
+	--Asset("SOUND", "sound/volcano_new.fsb"),
+	--Asset("SOUNDPACKAGE", "sound/tropical.fev"),
+	--Asset("SOUND", "sound/tropical.fsb"),
+
+	Asset("IMAGE", "images/barco.tex"),
+	Asset("ATLAS", "images/barco.xml"),
+
+	Asset("ATLAS", "images/inventoryimages/volcanoinventory.xml"),
+	Asset("IMAGE", "images/inventoryimages/volcanoinventory.tex"),
+
+	Asset("ATLAS", "images/inventoryimages/novositens.xml"),
+	Asset("IMAGE", "images/inventoryimages/novositens.tex"),
+
+	Asset("ANIM", "anim/player_actions_paddle.zip"),
+	Asset("ANIM", "anim/player_actions_speargun.zip"),
+	Asset("ANIM", "anim/player_actions_tap.zip"),
+	Asset("ANIM", "anim/player_actions_panning.zip"),
+	Asset("ANIM", "anim/player_actions_hand_lens.zip"),
+	Asset("ANIM", "anim/player_mount_actions_speargun.zip"),
+	Asset("ANIM", "anim/walani_paddle.zip"),
+	Asset("ANIM", "anim/player_boat_death.zip"),
+	Asset("ANIM", "anim/player_sneeze.zip"),
+	Asset("ANIM", "anim/des_sail.zip"),
+	Asset("ANIM", "anim/player_actions_trawl.zip"),
+	Asset("ANIM", "anim/player_actions_machete.zip"),
+	Asset("ANIM", "anim/player_actions_shear.zip"),
+	Asset("ANIM", "anim/player_actions_cropdust.zip"),
+	Asset("ANIM", "anim/ripple_build.zip"),
+	Asset("ATLAS", "images/fx4te.xml"),
+	Asset("IMAGE", "images/fx4te.tex"),
+	Asset("ANIM", "anim/boat_health.zip"),
+	Asset("ANIM", "anim/player_actions_telescope.zip"),
+	Asset("ANIM", "anim/pig_house_old.zip"),
+	Asset("ANIM", "anim/parrot_pirate_intro.zip"),
+	Asset("ANIM", "anim/parrot_pirate.zip"),
+	Asset("ANIM", "anim/pig_house_sale.zip"),
+	Asset("ANIM", "anim/fish2.zip"),
+	Asset("ANIM", "anim/fish3.zip"),
+	Asset("ANIM", "anim/fish4.zip"),
+	Asset("ANIM", "anim/fish5.zip"),
+	Asset("ANIM", "anim/fish6.zip"),
+	Asset("ANIM", "anim/fish7.zip"),
+	Asset("ANIM", "anim/coi.zip"),
+	Asset("ANIM", "anim/ballphinocean.zip"),
+	Asset("ANIM", "anim/dogfishocean.zip"),
+	Asset("ANIM", "anim/goldfish.zip"),
+	Asset("ANIM", "anim/salmon.zip"),
+	Asset("ANIM", "anim/sharxocean.zip"),
+	Asset("ANIM", "anim/swordfishjocean.zip"),
+	Asset("ANIM", "anim/swordfishjocean2.zip"),
+	Asset("ANIM", "anim/mecfish.zip"),
+	Asset("ANIM", "anim/whaleblueocean.zip"),
+	Asset("ANIM", "anim/kingfisher_build.zip"),
+	Asset("ANIM", "anim/parrot_blue_build.zip"),
+	Asset("ANIM", "anim/toucan_hamlet_build.zip"),
+	Asset("ANIM", "anim/toucan_build.zip"),
+	Asset("ANIM", "anim/parrot_build.zip"),
+	Asset("ANIM", "anim/parrot_pirate_build.zip"),
+	Asset("ANIM", "anim/cormorant_build.zip"),
+	Asset("ANIM", "anim/seagull_build.zip"),
+	Asset("ANIM", "anim/quagmire_pigeon_build.zip"),
+	Asset("ANIM", "anim/skeletons.zip"),
+	Asset("ANIM", "anim/fish2.zip"),
+	Asset("ANIM", "anim/oceanfish_small.zip"),
+	Asset("ANIM", "anim/oceanfish_small_1.zip"),
+	Asset("ANIM", "anim/oceanfish_small_2.zip"),
+	Asset("ANIM", "anim/oceanfish_small_3.zip"),
+	Asset("ANIM", "anim/oceanfish_small_4.zip"),
+	Asset("ANIM", "anim/oceanfish_small_5.zip"),
+	Asset("ANIM", "anim/oceanfish_small_6.zip"),
+	Asset("ANIM", "anim/oceanfish_small_7.zip"),
+	Asset("ANIM", "anim/oceanfish_small_8.zip"),
+	Asset("ANIM", "anim/oceanfish_medium.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_1.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_2.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_3.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_4.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_5.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_6.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_7.zip"),
+	Asset("ANIM", "anim/oceanfish_medium_8.zip"),
+	Asset("IMAGE", "levels/textures/outro.tex"),
+	Asset("IMAGE", "levels/textures/ground_noise_water_deep.tex"),
+
+	Asset("IMAGE", "images/inventoryimages/hamletinventory.tex"),
+	Asset("ATLAS", "images/inventoryimages/hamletinventory.xml"),
+
+	Asset("ATLAS", "map_icons/hamleticon.xml"),
+	Asset("IMAGE", "map_icons/hamleticon.tex"),
+	Asset("ATLAS", "map_icons/creepindedeepicon.xml"),
+	Asset("IMAGE", "map_icons/creepindedeepicon.tex"),
+	Asset("ANIM", "anim/butterflymuffin.zip"),
+	Asset("IMAGE", "images/tfwp_inventoryimgs.tex"),
+	Asset("ATLAS", "images/tfwp_inventoryimgs.xml"),
+	--Asset("SOUNDPACKAGE", "sound/Hamlet.fev"),
+	--Asset("SOUND", "sound/Hamlet.fsb"),
+
+
+	Asset("IMAGE", "images/names_wilbur.tex"),
+	Asset("ATLAS", "images/names_wilbur.xml"),
+	Asset("IMAGE", "images/names_woodlegs.tex"),
+	Asset("ATLAS", "images/names_woodlegs.xml"),
+	Asset("IMAGE", "images/names_walani.tex"),
+	Asset("ATLAS", "images/names_walani.xml"),
+
+
+	Asset("ATLAS", "images/tabs.xml"),
+	Asset("IMAGE", "images/tabs.tex"),
+	Asset("IMAGE", "images/turfs/turf01-9.tex"),
+	Asset("ATLAS", "images/turfs/turf01-9.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-10.tex"),
+	Asset("ATLAS", "images/turfs/turf01-10.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-11.tex"),
+	Asset("ATLAS", "images/turfs/turf01-11.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-12.tex"),
+	Asset("ATLAS", "images/turfs/turf01-12.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-13.tex"),
+	Asset("ATLAS", "images/turfs/turf01-13.xml"),
+
+	Asset("IMAGE", "images/turfs/turf01-14.tex"),
+	Asset("ATLAS", "images/turfs/turf01-14.xml"),
+	Asset("ANIM", "anim/vagner_over.zip"),
+	Asset("ANIM", "anim/leaves_canopy2.zip"),
+
+	Asset("ANIM", "anim/mushroom_tree_yelow.zip"),
+	Asset("ANIM", "anim/speedicon.zip"),
+
+	Asset("IMAGE", "images/cookbook/cookbook_sw.tex"),
+	Asset("ATLAS", "images/cookbook/cookbook_sw.xml"),
+	Asset("IMAGE", "images/cookbook/cookbook_ham.tex"),
+	Asset("ATLAS", "images/cookbook/cookbook_ham.xml"),
+	Asset("IMAGE", "images/inventoryimages/cookpotfoods_sw.tex"),
+	Asset("ATLAS", "images/inventoryimages/cookpotfoods_sw.xml"),
+	Asset("IMAGE", "images/inventoryimages/cookpotfoods_ham.tex"),
+	Asset("ATLAS", "images/inventoryimages/cookpotfoods_ham.xml"),
+
+	Asset("IMAGE", "images/ui/honeychest.tex"),
+	Asset("ATLAS", "images/ui/honeychest.xml"),
+
+	Asset("ANIM", "anim/button.zip"),
+	Asset("IMAGE", "images/store.tex"),
+	Asset("ATLAS", "images/store.xml"),
+	Asset("IMAGE", "images/store_soldout.tex"),
+	Asset("ATLAS", "images/store_soldout.xml"),
+	Asset("ATLAS", "images/buttongorge.xml"),
+	Asset("IMAGE", "images/buttongorge.tex"),
+}
+
+if TUNING.tropical.gorgeisland and TUNING.tropical.kindofworld == 15 or GetModConfigData("enableallprefabs") == true then
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/quagmirefoods.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/quagmirefoods.tex"))
+end
+
+-- # Inventory item atlas register
+local dictInventoryItems = {
+	hamletinventory = {
+		"accomplishment_shrine", "aerodynamichat", "algae", "alloy", "aloe", "aloe_cooked", "aloe_seeds",
+		"ancient_remnant", "antchest", "antivenom", "antler", "antmaskhat", "antsuit", "armor_lifeJacket",
+		"armor_metalplate", "armor_snakeskin", "armor_snakeskin_scaly", "armor_weevole", "armor_windbreaker",
+		"armorcactus", "armorlimestone", "armorobsidian", "armorseashell", "armorvoidcloak", "armorvortexcloak",
+		"armouredboat", "asparagussoup_yotp", "bag", "ballpein_hammer", "ballphinhouse", "bamboo", "bananas",
+		"bananas_cooked", "bandithat", "banditmap", "basefan", "bat_leather", "bathat", "bell1", "bill_quill",
+		"bioluminescence", "bisque", "blowdart_flup", "blowdart_poison", "blubber", "blubbersuit", "blunderbuss",
+		"blunderbuss_loaded", "boat_lantern", "boat_lantern_off", "boat_torch", "boat_torch_off", "boatcannon",
+		"boatrepairkit", "bonestaff", "book_meteor", "bottlelantern", "bottlelantern_off", "brainjellyhat",
+		"bramble_bulb", "bucket", "bugrepellent", "buoy", "burr", "butterfly_tropical", "butterflymuffin_sw",
+		"butterflywings_tropical", "candlehat", "captainhat", "cargoboat", "caviar", "chiminea", "chitin", "city_hammer",
+		"city_lamp", "clawpalmtree_sapling", "clippings", "clothes", "clothsail", "coconade", "coconut", "coconut_cooked",
+		"coconut_halved", "coffee", "coffeebeans", "coffeebeans_cooked", "coi", "coi_cooked", "conch",
+		"construction_permit", "coral", "coral_brain", "corallarve", "cork", "cork_bat", "corkboatitem", "corkchest",
+		"cormorant", "cost-1", "cost-10", "cost-100", "cost-2", "cost-20", "cost-200", "cost-3", "cost-30", "cost-300",
+		"cost-4", "cost-40", "cost-400", "cost-5", "cost-50", "cost-500", "cost-nil", "crab", "crabbit_beardling",
+		"curtain_door", "cutgrass_green", "cutlass", "cutnettle", "dead_swordfish", "deed", "demolition_permit",
+		"disarming_kit", "disguisehat", "dorsalfin", "double_umbrellahat", "doydoy", "doydoy_baby", "doydoy_teen",
+		"doydoyegg", "doydoyegg_cooked", "doydoyfeather", "doydoynest", "dragonpie_yotp", "dragoonden", "dragoonheart",
+		"dubloon", "dug_bambooTree", "dug_bush_vine", "dug_cactus", "dug_coffeebush", "dug_elephantcactus",
+		"dug_grass_green", "dug_nettle", "earring", "encrustedboat", "eyebrella", "fabric", "feather_thunder",
+		"feathersail", "feijoada", "feijoada_yotp", "fish3", "fish3_cooked", "fish4", "fish4_cooked", "fish5",
+		"fish5_cooked", "fish_dogfish", "fish_farm", "fish_med_cooked", "fish_raw", "fish_raw_small",
+		"fishtropical_cooked", "frogglebunwich_yotp", "froglegs_poison", "froglegs_poison_cooked", "gashat", "gasmaskhat",
+		"glowfly", "gogglesarmorhat", "gogglesheathat", "gogglesnormalhat", "gogglesshoothat", "gold_dust",
+		"goldenmachete", "goldpan", "gummy_cake", "gummy_cake_yotp", "hail_ice", "halberd", "hardshell_tacos",
+		"hardshell_tacos_yotp", "harpoon", "hayfeverhat", "health_down", "health_max", "hippo_antler", "hogusporkusator",
+		"honeyham_yotp", "honeynuggets_yotp", "icedtea", "icedtea_yotp", "icegem", "icemaker", "infused_iron",
+		"interior_floor_check", "interior_floor_gardenstone", "interior_floor_geometrictiles",
+		"interior_floor_herringbone", "interior_floor_hexagon", "interior_floor_hoof_curvy", "interior_floor_marble",
+		"interior_floor_octagon", "interior_floor_plaid_tile", "interior_floor_shag_carpet", "interior_floor_sheet_metal",
+		"interior_floor_transitional", "interior_floor_wood", "interior_floor_woodpanels",
+		"interior_wall_checkered_metal", "interior_wall_circles", "interior_wall_floral",
+		"interior_wall_fullwall_moulding", "interior_wall_harlequin", "interior_wall_marble",
+		"interior_wall_mayorsoffice", "interior_wall_peagawk", "interior_wall_plain_rog", "interior_wall_rope",
+		"interior_wall_sunflower", "interior_wall_upholstered", "interior_wall_wood", "iron", "iron_door", "ironwind",
+		"jellyJerky", "jellybug", "jellybug_cooked", "jellyfish", "jellyfish_cooked", "jellyfish_dead", "jellyopop",
+		"jungleTreeSeed", "key_to_city", "kingfisher", "limestone", "limpets", "limpets_cooked", "living_artifact",
+		"lobster", "lobster_dead", "lobster_dead_cooked", "log_rainforest", "log_tropical", "lograft", "lotus_flower1",
+		"lotus_flower1_cooked", "machete", "magic_seal", "magnifying_glass", "meatballs_yotp", "metalplatehat",
+		"monkeyball", "monsterlasagna_yotp", "mosquito_yellow", "mosquitosack_yellow", "mussel", "mussel_bed",
+		"mussel_cooked", "mussel_stick", "musselbouillabaise", "mysterymeat", "nectar_pod", "needlespear",
+		"nettlelosange", "nettlelosange_yotp", "nubbin", "obsidian", "obsidianaxe", "obsidiancoconade", "obsidianfirepit",
+		"obsidianmachete", "oinc", "oinc10", "oinc100", "organic_door", "ox_flute", "ox_horn", "oxhat", "packim_fishbone",
+		"packim_fishbone_dead", "palmleaf", "palmleaf_hut", "palmleaf_umbrella", "parrot", "parrot_blue", "parrot_pirate",
+		"peagawkfeather", "peagawkfeatherhat", "pedestal_key", "peg_leg", "perogies_yotp", "pheromonestone",
+		"pig_guard_tower", "pig_scepter", "pig_shop_antiquities", "pig_shop_arcane", "pig_shop_bank",
+		"pig_shop_cityhall_player", "pig_shop_deli", "pig_shop_florist", "pig_shop_general", "pig_shop_hatshop",
+		"pig_shop_hoofspa", "pig_shop_produce", "pig_shop_tinker", "pig_shop_weapons", "pigcrownhat", "pigeon",
+		"pighouse_city", "piko", "piko_orange", "pillar_door", "piratehat", "piratepack", "piratihatitator", "pithhat",
+		"plate_door", "player_house_brick", "player_house_brick_craft", "player_house_cottage",
+		"player_house_cottage_craft", "player_house_gothic", "player_house_gothic_craft", "player_house_manor",
+		"player_house_manor_craft", "player_house_tudor", "player_house_tudor_craft", "player_house_turret",
+		"player_house_turret_craft", "player_house_villa", "player_house_villa_craft", "playerhouse_city", "poisonbalm",
+		"pollen", "porkland_entrance", "primeapebarrel", "pugalisk_skull", "pumpkincookie_yotp", "quackenbeak",
+		"quackendrill", "quackeringram", "rabid_beetle", "radish", "radish_cooked", "radish_seeds", "raft",
+		"rainbowjellyfish", "rainbowjellyfish_cooked", "rainbowjellyfish_dead", "ratatouille_yotp", "rawling",
+		"record_01", "record_02", "record_03", "relic_1", "relic_2", "relic_3", "relic_4", "relic_5",
+		"reno_antiquities_beefalo", "reno_antiquities_wallfish", "reno_chair_bench", "reno_chair_chaise",
+		"reno_chair_classic", "reno_chair_corner", "reno_chair_footrest", "reno_chair_horned", "reno_chair_lounge",
+		"reno_chair_massager", "reno_chair_ottoman", "reno_chair_rocking", "reno_chair_stuffed", "reno_cornerbeam_marble",
+		"reno_cornerbeam_millinery", "reno_cornerbeam_round", "reno_cornerbeam_wood", "reno_doors_plate",
+		"reno_lamp_2embroidered", "reno_lamp_2fringes", "reno_lamp_2upturns", "reno_lamp_adjustable",
+		"reno_lamp_bellshade", "reno_lamp_candelabra", "reno_lamp_ceramic", "reno_lamp_crystals", "reno_lamp_downbridge",
+		"reno_lamp_edison", "reno_lamp_elizabethan", "reno_lamp_festivetree", "reno_lamp_fringe", "reno_lamp_glass",
+		"reno_lamp_gothic", "reno_lamp_hoofspa", "reno_lamp_orb", "reno_lamp_rightangles", "reno_lamp_spool",
+		"reno_lamp_stainglass", "reno_lamp_upturn", "reno_light_basic_bulb", "reno_light_basic_metal",
+		"reno_light_chandalier_candles", "reno_light_derby", "reno_light_floral_bloomer", "reno_light_floral_bulb",
+		"reno_light_floral_scallop", "reno_light_pendant_cherries", "reno_light_rope_1", "reno_light_rope_2",
+		"reno_light_tophat", "reno_plantholder_basic", "reno_plantholder_birdcage", "reno_plantholder_bonsai",
+		"reno_plantholder_dishgarden", "reno_plantholder_draceana", "reno_plantholder_fancy", "reno_plantholder_fern",
+		"reno_plantholder_fernstand", "reno_plantholder_marble", "reno_plantholder_orchid", "reno_plantholder_palm",
+		"reno_plantholder_philodendron", "reno_plantholder_pitchers", "reno_plantholder_plantpet",
+		"reno_plantholder_terrarium", "reno_plantholder_traps", "reno_plantholder_winterfeasttreeofsadness",
+		"reno_plantholder_wip", "reno_plantholder_xerographica", "reno_plantholder_zz", "reno_rug_beard",
+		"reno_rug_braid", "reno_rug_catcoon", "reno_rug_crime", "reno_rug_fur", "reno_rug_hedgehog", "reno_rug_hoofprint",
+		"reno_rug_metal", "reno_rug_nailbed", "reno_rug_octagon", "reno_rug_oval", "reno_rug_porcupuss",
+		"reno_rug_rectangle", "reno_rug_round", "reno_rug_rubbermat", "reno_rug_square", "reno_rug_swirl",
+		"reno_rug_tiles", "reno_rug_web", "reno_rug_wormhole", "reno_shelves_adjustable", "reno_shelves_aframe",
+		"reno_shelves_basic", "reno_shelves_cinderblocks", "reno_shelves_crates", "reno_shelves_floating",
+		"reno_shelves_fridge", "reno_shelves_glass", "reno_shelves_hattree", "reno_shelves_hutch",
+		"reno_shelves_industrial", "reno_shelves_ladder", "reno_shelves_marble", "reno_shelves_midcentury",
+		"reno_shelves_pallet", "reno_shelves_pipe", "reno_shelves_wallmount", "reno_shelves_wood", "reno_tab_chairs",
+		"reno_tab_columns", "reno_tab_doors", "reno_tab_floors", "reno_tab_hanginglamps", "reno_tab_homekits",
+		"reno_tab_lamps", "reno_tab_ornaments", "reno_tab_plantholders", "reno_tab_rugs", "reno_tab_shelves",
+		"reno_tab_tables", "reno_tab_wallpaper", "reno_tab_windows", "reno_table_banker", "reno_table_chess",
+		"reno_table_crate", "reno_table_diy", "reno_table_raw", "reno_table_round", "reno_wallornament_axe",
+		"reno_wallornament_black_cat", "reno_wallornament_cape", "reno_wallornament_embroidery_hoop",
+		"reno_wallornament_fulllength_mirror", "reno_wallornament_gears_art", "reno_wallornament_hunt",
+		"reno_wallornament_mosaic", "reno_wallornament_no_smoking", "reno_wallornament_periodic_table",
+		"reno_wallornament_photo", "reno_wallornament_wreath", "reno_window_greenhouse", "reno_window_large_square",
+		"reno_window_large_square_curtain", "reno_window_round_burlap", "reno_window_small_peaked",
+		"reno_window_small_peaked_curtain", "reno_window_tall", "reno_window_tall_curtain", "researchlab5", "ro_bin_gem",
+		"ro_bin_gem_closed", "roc_egg", "roc_egg_cold", "roc_egg_hot", "rockwall", "roe", "roe_cooked", "roottrunk",
+		"roottrunk_child", "round_door", "rowboat", "sail", "sail_stick", "sand", "sand_castle", "sandbag_item",
+		"sandbagsmall_item", "sanity_down", "sanity_max", "sea_chiminea", "sea_yard", "seagull", "seasack", "seashell",
+		"seatrap", "seaweed", "seaweed_cooked", "seaweed_dried", "seaweed_stalk", "securitycontract", "shark_fin",
+		"shark_gills", "shark_teethhat", "shark_tooth", "sharkfinsoup", "shears", "shipwrecked_entrance", "shop_trinket",
+		"silvernecklace", "skull_wallace", "skull_waverly", "skull_wilbur", "skull_wilton", "skull_winnie", "slugbug",
+		"slugbug_cooked", "smelter", "snake", "snake_bone", "snake_scaly", "snakebonesoup", "snakebonesoup_yotp",
+		"snakeoil", "snakeskin", "snakeskin_scaly", "snakeskinhat", "snakeskinhat_scaly", "snakeskinsail",
+		"snakeskinsail_scaly", "spear_launcher", "spear_launcher_obsidian", "spear_launcher_poison",
+		"spear_launcher_spear", "spear_launcher_wathgrithr", "spear_obsidian", "spear_poison", "spicyvegstinger",
+		"spicyvegstinger_yotp", "sprinkler1", "steamedhamsandwich", "steamedhamsandwich_yotp", "stone_door", "stopwatch",
+		"stuffedeggplant_yotp", "stunrod", "sunken_boat_trinket_1", "sunken_boat_trinket_2", "sunken_boat_trinket_3",
+		"sunken_boat_trinket_4", "sunken_boat_trinket_5", "supertelescope", "surfboard_item", "sweet_potato",
+		"sweet_potato_cooked", "sweet_potato_seeds", "sweetpotatosouffle", "tar", "tar_extractor", "tarlamp", "tarsuit",
+		"tea", "tea_yotp", "teatree_nut", "teatree_nut_cooked", "telebrella", "teleportato_hamlet_base",
+		"teleportato_hamlet_box", "teleportato_hamlet_crank", "teleportato_hamlet_potato", "teleportato_hamlet_ring",
+		"teleportato_sw_base", "teleportato_sw_box", "teleportato_sw_crank", "teleportato_sw_potato",
+		"teleportato_sw_ring", "telescope", "telipad", "thatchpack", "thorns_marsh", "thumper", "thunderhat", "tigereye",
+		"toucan", "toucan_hamlet", "tracker", "tracker_open", "trawlnet", "waterdrop",
+	},
+	volcanoinventory = {
+		"aloe_oversized", "aloe_oversized_waxed", "antidote", "armor_seashell", "axeobsidian", "ballphinocean",
+		"beaverskin", "bed0", "bed1", "bed2", "bed3", "bed4", "bed5", "bed6", "bed7", "bed8", "blueberries",
+		"blueberries_cooked", "boarbattle", "boatmetal_item", "book_meteor1", "bossboarbattle", "bundled_structure",
+		"butterfly_tropical_wings", "cottontree_cone", "dogfishocean", "doydoyfan", "fennel", "fennel_cooked", "fish2",
+		"fish2_cooked", "fish6", "fish6_cooked", "fish7", "fish7_cooked", "fish_med", "fruityjuice", "glass_shards",
+		"goldenbar", "goldfish", "gooseberry", "gooseberry_cooked", "hedge_block", "hedge_cone", "hedge_layered",
+		"houndbattle", "knightbattle", "lizardbattle", "lobster_land", "lobsterunderwater", "lograft_old", "luckyhat",
+		"malbatrossail", "maxwellphonograph", "maxwellstatuebracod", "maxwellstatuebracoe", "maxwellstatuecabeca",
+		"maxwellstatuecorpo", "mecfish", "mermbattle", "messagebottle1", "messagebottleempty1", "mosquitopoison",
+		"obsidianbomb", "oceanfish_small_10_inv", "oceanfish_small_11_inv", "oceanfish_small_12_inv",
+		"oceanfish_small_13_inv", "oceanfish_small_14_inv", "oceanfish_small_15_inv", "oceanfish_small_16_inv",
+		"oceanfish_small_17_inv", "oceanfish_small_18_inv", "oceanfish_small_19_inv", "oceanfish_small_20_inv",
+		"oceanfish_small_21_inv", "oceanfish_small_61_inv", "oceanfish_small_71_inv", "oceanfish_small_81_inv",
+		"oceanfish_small_91_inv", "ox_wool", "pandahouse", "pandaskin", "peagawkfeather_prism", "poop2", "porto",
+		"porto_armouredboat", "porto_ballphinhouse", "porto_buoy", "porto_cargoboat", "porto_encrustedboat",
+		"porto_fish_farm", "porto_lograft", "porto_lograft_old", "porto_raft", "porto_raft_old", "porto_researchlab5",
+		"porto_rowboat", "porto_sea_chiminea", "porto_sea_yard", "porto_surfboard", "porto_tar_extractor",
+		"porto_waterchest1", "porto_woodlegsboat", "radish_oversized", "radish_oversized_waxed", "raft_old",
+		"rhinocebrosbattle", "salmon", "salmon_cooked", "sap", "sap_spoiled", "sapbucket", "seacucumber",
+		"seacucumber_cooked", "seagullwater", "seataro", "seataro_cooked", "shadowmower_builder", "shard_beak",
+		"shard_sword", "sharxocean", "snowitem", "spiderbattle", "spore_yellow", "stonebar", "surfboard", "surfboarditem",
+		"swbait", "sweet_potato_oversized", "sweet_potato_oversized_waxed", "swineclopsbattle", "swordfishjocean",
+		"swordfishjocean2", "tfwp_crystal_crown_hat", "tfwp_dragon_dart", "tfwp_fire_bomb", "tfwp_flower_headband_hat",
+		"tfwp_healing_staff", "tfwp_lava_dart", "tfwp_lava_hammer", "tfwp_luxury_nox_helm_hat", "tfwp_spear_gung",
+		"tfwp_spear_lance", "tfwp_summon_book", "tfwp_wizard_crown_hat", "tfwp_woven_garland_hat",
+		"tree_forest_deep_seed", "tree_forest_rot_seed", "tree_forestseed", "trinket_giftshop_1", "trinket_giftshop_3",
+		"trinket_giftshop_4", "tropical_fish", "tropicalbouillabaisse", "tuber_bloom_crop", "tuber_bloom_crop_cooked",
+		"tuber_crop", "tuber_crop_cooked", "tunacan", "turbine_blades", "turf_ash", "turf_beach", "turf_checkeredlawn",
+		"turf_cobbleroad", "turf_deeprainforest", "turf_fields", "turf_foundation", "turf_gasjungle", "turf_jungle",
+		"turf_magmafield", "turf_meadow", "turf_pigruins", "turf_quagmire_parkfield", "turf_rainforest",
+		"turf_snakeskinfloor", "turf_suburb", "turf_tidalmarsh", "turf_volcano", "turf_windy", "venomgland",
+		"venus_stalk", "vine", "volcanostaff", "walkingstick", "wall_enforcedlimestone_item", "wall_limestone_item",
+		"waterchest1", "watercress", "watercress_cooked", "weevole_carapace", "whaleblueocean", "wildbeaver_house",
+		"wildborehouse", "wind_conch", "woodlegs_boatcannon", "woodlegs_key1", "woodlegs_key2", "woodlegs_key3",
+		"woodlegsboat", "woodlegssail", "yelow_cap", "yelow_cap_cooked",
+	},
+	cookpotfoods_ham = {
+		"bubbletea", "frenchonionsoup", "lotuschips", "meated_nettle", "poi", "slaw",
+	},
+	creepindedeepinventory = {
+		"armor_lifejacket", "dug_bambootree", "fish_raw_small_cooked", "hat_submarine", "jellyjerky", "jungletreeseed",
+		"mussel_bed_underwater", "waterchest",
+	}, -- unconfirmed
+	quagmirefoods = {
+		"bacon_wrapped_meat_plate_generic", "bacon_wrapped_meat_plate_gold", "bacon_wrapped_meat_plate_silver",
+		"bacon_wrapped_meat", "bagel_n_fish_plate_generic", "bagel_n_fish_plate_gold", "bagel_n_fish_plate_silver",
+		"bagel_n_fish", "berry_tart_plate_generic", "berry_tart_plate_gold", "berry_tart_plate_silver", "berry_tart",
+		"bread_plate_generic", "bread_plate_gold", "bread_plate_silver", "bread", "breaded_cutlet_plate_generic",
+		"breaded_cutlet_plate_gold", "breaded_cutlet_plate_silver", "breaded_cutlet", "bruschetta_plate_generic",
+		"bruschetta_plate_gold", "bruschetta_plate_silver", "bruschetta", "candied_fish_plate_generic",
+		"candied_fish_plate_gold", "candied_fish_plate_silver", "candied_fish", "candy_plate_generic", "candy_plate_gold",
+		"candy_plate_silver", "candy", "caramel_cube_plate_generic", "caramel_cube_plate_gold",
+		"caramel_cube_plate_silver", "caramel_cube", "carrot_cake_plate_generic", "carrot_cake_plate_gold",
+		"carrot_cake_plate_silver", "carrot_cake", "carrot_soup_bowl_generic", "carrot_soup_bowl_gold",
+		"carrot_soup_bowl_silver", "carrot_soup", "cheeseburger_plate_generic", "cheeseburger_plate_gold",
+		"cheeseburger_plate_silver", "cheeseburger", "cheesecake_plate_generic", "cheesecake_plate_gold",
+		"cheesecake_plate_silver", "cheesecake", "chips_plate_generic", "chips_plate_gold", "chips_plate_silver", "chips",
+		"crab_cake_plate_generic", "crab_cake_plate_gold", "crab_cake_plate_silver", "crab_cake",
+		"crab_ravioli_plate_generic", "crab_ravioli_plate_gold", "crab_ravioli_plate_silver", "crab_ravioli",
+		"crab_roll_plate_generic", "crab_roll_plate_gold", "crab_roll_plate_silver", "crab_roll",
+		"cream_of_mushroom_bowl_generic", "cream_of_mushroom_bowl_gold", "cream_of_mushroom_bowl_silver",
+		"cream_of_mushroom", "creamy_fish_plate_generic", "creamy_fish_plate_gold", "creamy_fish_plate_silver",
+		"creamy_fish", "croquette_plate_generic", "croquette_plate_gold", "croquette_plate_silver", "croquette",
+		"curry_bowl_generic", "curry_bowl_gold", "curry_bowl_silver", "curry", "fettuccine_plate_generic",
+		"fettuccine_plate_gold", "fettuccine_plate_silver", "fettuccine", "fish_and_chips_plate_generic",
+		"fish_and_chips_plate_gold", "fish_and_chips_plate_silver", "fish_and_chips", "fish_burger_plate_generic",
+		"fish_burger_plate_gold", "fish_burger_plate_silver", "fish_burger", "fish_pie_plate_generic",
+		"fish_pie_plate_gold", "fish_pie_plate_silver", "fish_pie", "fish_steak_plate_generic", "fish_steak_plate_gold",
+		"fish_steak_plate_silver", "fish_steak", "fish_stew_bowl_generic", "fish_stew_bowl_gold", "fish_stew_bowl_silver",
+		"fish_stew", "fishball_skewers_plate_generic", "fishball_skewers_plate_gold", "fishball_skewers_plate_silver",
+		"fishball_skewers", "flour", "garlic_bread_plate_generic", "garlic_bread_plate_gold", "garlic_bread_plate_silver",
+		"garlic_bread", "gorge_jam_plate_generic", "gorge_jam_plate_gold", "gorge_jam_plate_silver",
+		"gorge_meatballs_plate_generic", "gorge_meatballs_plate_gold", "gorge_meatballs_plate_silver",
+		"gorge_ratatouille_bowl_generic", "gorge_ratatouille_bowl_gold", "gorge_ratatouille_bowl_silver",
+		"grilled_cheese_plate_generic", "grilled_cheese_plate_gold", "grilled_cheese_plate_silver", "grilled_cheese",
+		"hamburger_plate_generic", "hamburger_plate_gold", "hamburger_plate_silver", "hamburger", "jam_plate_generic",
+		"jam_plate_gold", "jam_plate_silver", "jam", "jelly_roll_plate_generic", "jelly_roll_plate_gold",
+		"jelly_roll_plate_silver", "jelly_roll", "jelly_sandwich_plate_generic", "jelly_sandwich_plate_gold",
+		"jelly_sandwich_plate_silver", "jelly_sandwich", "lasagna_plate_generic", "lasagna_plate_gold",
+		"lasagna_plate_silver", "lasagna", "mac_n_cheese_bowl_generic", "mac_n_cheese_bowl_gold",
+		"mac_n_cheese_bowl_silver", "mac_n_cheese", "manicotti_plate_generic", "manicotti_plate_gold",
+		"manicotti_plate_silver", "manicotti", "mashed_potatoes_bowl_generic", "mashed_potatoes_bowl_gold",
+		"mashed_potatoes_bowl_silver", "mashed_potatoes", "meat_pie_plate_generic", "meat_pie_plate_gold",
+		"meat_pie_plate_silver", "meat_pie", "meat_skewers_plate_generic", "meat_skewers_plate_gold",
+		"meat_skewers_plate_silver", "meat_skewers", "meat_stew_bowl_generic", "meat_stew_bowl_gold",
+		"meat_stew_bowl_silver", "meat_stew", "meat_wellington_plate_generic", "meat_wellington_plate_gold",
+		"meat_wellington_plate_silver", "meat_wellington", "meatballs_plate_generic", "meatballs_plate_gold",
+		"meatballs_plate_silver", "meatloaf_plate_generic", "meatloaf_plate_gold", "meatloaf_plate_silver", "meatloaf",
+		"mushroom_burger_plate_generic", "mushroom_burger_plate_gold", "mushroom_burger_plate_silver", "mushroom_burger",
+		"onion_soup_bowl_generic", "onion_soup_bowl_gold", "onion_soup_bowl_silver", "onion_soup",
+		"pierogies_plate_generic", "pierogies_plate_gold", "pierogies_plate_silver", "pierogies", "pizza_plate_generic",
+		"pizza_plate_gold", "pizza_plate_silver", "pizza", "poached_fish_plate_generic", "poached_fish_plate_gold",
+		"poached_fish_plate_silver", "poached_fish", "pot_roast_plate_generic", "pot_roast_plate_gold",
+		"pot_roast_plate_silver", "pot_roast", "potato_pancakes_plate_generic", "potato_pancakes_plate_gold",
+		"potato_pancakes_plate_silver", "potato_pancakes", "potato_soup_bowl_generic", "potato_soup_bowl_gold",
+		"potato_soup_bowl_silver", "potato_soup", "pudding_plate_generic", "pudding_plate_gold", "pudding_plate_silver",
+		"pudding", "ratatouille_bowl_generic", "ratatouille_bowl_gold", "ratatouille_bowl_silver",
+		"roasted_veggies_plate_generic", "roasted_veggies_plate_gold", "roasted_veggies_plate_silver", "roasted_veggies",
+		"sap", "sausage_plate_generic", "sausage_plate_gold", "sausage_plate_silver", "sausage", "scone_plate_generic",
+		"scone_plate_gold", "scone_plate_silver", "scone", "shepherds_pie_plate_generic", "shepherds_pie_plate_gold",
+		"shepherds_pie_plate_silver", "shepherds_pie", "shooter_sandwich_plate_generic", "shooter_sandwich_plate_gold",
+		"shooter_sandwich_plate_silver", "shooter_sandwich", "slider_plate_generic", "slider_plate_gold",
+		"slider_plate_silver", "slider", "spaghetti_and_meatballs_plate_generic", "spaghetti_and_meatballs_plate_gold",
+		"spaghetti_and_meatballs_plate_silver", "spaghetti_and_meatballs", "steak_frites_plate_generic",
+		"steak_frites_plate_gold", "steak_frites_plate_silver", "steak_frites", "stone_soup_bowl_generic",
+		"stone_soup_bowl_gold", "stone_soup_bowl_silver", "stone_soup", "stuffed_mushroom_plate_generic",
+		"stuffed_mushroom_plate_gold", "stuffed_mushroom_plate_silver", "stuffed_mushroom", "syrup",
+		"tomato_soup_bowl_generic", "tomato_soup_bowl_gold", "tomato_soup_bowl_silver", "tomato_soup",
+		"trifle_plate_generic", "trifle_plate_gold", "trifle_plate_silver", "trifle", "turnip_cake_plate_generic",
+		"turnip_cake_plate_gold", "turnip_cake_plate_silver", "turnip_cake", "veggie_soup_bowl_generic",
+		"veggie_soup_bowl_gold", "veggie_soup_bowl_silver", "veggie_soup", "waffles_plate_generic", "waffles_plate_gold",
+		"waffles_plate_silver",
+	}, -- unconfirmed
+}
+for atlas, imageTab in pairs(dictInventoryItems) do
+	for _, image in ipairs(imageTab) do
+		RegisterInventoryItemAtlas(resolvefilepath("images/inventoryimages/" .. atlas .. ".xml"), image .. ".tex")
+	end
+end
+
+local miscInventoryItems = {
+	"bottle_green_youghurt", "bubble_item", "caramel_peach", "clawpalmtree_cone", "coral_cluster", "cutgreengrass",
+	"cut_blue_coral", "cut_green_coral", "cut_orange_coral", "diving_suit_summer", "diving_suit_winter",
+	"empty_bottle_green", "fish_fillet", "fish_fillet_cooked", "flare", "flower_bottle", "forbidden_fruit",
+	"full_bottle_green", "full_bottle_green_dirty", "full_bottle_green_milk", "full_bottle_green_youghurt", "gem_seeds",
+	"glass_bomb", "goddess_bar", "goddess_bell", "goddess_bird", "goddess_bowtie", "goddess_butterfly",
+	"goddess_butterflywings", "goddess_feather", "goddess_figure", "goddess_fishingrod", "goddess_flute",
+	"goddess_fountainette", "goddess_goggles", "goddess_hat", "goddess_lantern", "goddess_pouch", "goddess_rabbit_fur",
+	"goddess_rabbit_live", "goddess_ribbon", "goddess_staff", "goddess_sword", "goddess_tea", "goddess_tori",
+	"grilled_peach", "gw_bonestaff", "half_bottle_green_milk", "hamletinventory", "iron_ore", "jelly_cap",
+	"jelly_lantern", "lavastone", "less_bottle_green_milk", "magicpowder", "meated_nettle", "mixed_gem", "novositens",
+	"obsidianhelm", "peach", "peachy_meatloaf", "peachy_poop", "peach_custard", "peach_juice_bottle_green",
+	"peach_juice_bottle_green_half", "peach_juice_bottle_green_less", "peach_juice_bottle_green_most", "peach_kabobs",
+	"peach_pit", "peach_pop", "peach_smoothie", "pearl", "pearl_amulet", "pigkingstaff", "pig_figure", "placeholder",
+	"potion_bottle_green", "rainforesttree_cone", "sand", "seagrass_chunk", "sea_cucumber", "sea_petals", "shadyglasses",
+	"shrimp_tail", "snorkel", "sponge_piece", "sugarwood_seed", "tikimask", "usedfan", "volcanoinventory",
+	"windyfan", "windyfan1", "windyturf",
+} -- unconfirmed
+for _, item in ipairs(miscInventoryItems) do
+	RegisterInventoryItemAtlas(resolvefilepath("images/inventoryimages/" .. item .. ".xml"), item .. ".tex")
+end
+
+AddMinimapAtlas("map_icons/creepindedeepicon.xml")
+AddMinimapAtlas("map_icons/hamleticon.xml")
+----------------------------------------------------------------------------------------------------
+
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "bread.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "gorge_meatballs.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "meat_skewers.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "stone_soup.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "croquette.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "roasted_veggies.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "meatloaf.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "carrot_soup.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "fish_pie.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "fish_and_chips.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "meat_pie.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "chips.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "slider.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "gorge_jam.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "jelly_roll.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "carrot_cake.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "mashed_potatoes.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "garlic_bread.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "tomato_soup.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "sausage.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "candied_fish.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "stuffed_mushroom.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "veggie_soup.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "gorge_ratatouille.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "bruschetta.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "meat_stew.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "hamburger.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "fish_burger.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "mushroom_burger.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "fish_steak.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "curry.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "spaghetti_and_meatballs.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "lasagna.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "jelly_sandwich.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "poached_fish.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "shepherds_pie.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "candy.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "pudding.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "waffles.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "berry_tart.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "mac_n_cheese.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "bagel_n_fish.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "grilled_cheese.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "cream_of_mushroom.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "fish_stew.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "pierogies.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "manicotti.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "cheeseburger.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "fettuccine.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "onion_soup.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "breaded_cutlet.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "creamy_fish.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "pizza.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "pot_roast.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "crab_cake.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "turnip_cake.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "steak_frites.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "shooter_sandwich.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "bacon_wrapped_meat.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "crab_roll.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "meat_wellington.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "crab_ravioli.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "caramel_cube.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "scone.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "trifle.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "cheesecake.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "potato_pancakes.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "potato_soup.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "fishball_skewers.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "quagmire_spotspice_ground.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "syrup.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "flour.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "sap.tex")
+RegisterInventoryItemAtlas("images/inventoryimages/quagmirefoods.xml", "quagmire_goatmilk.tex")
+
+
+
+if TUNING.tropical.greenworld ~= 0 then
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/pig_figure.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/pig_figure.xml"))
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/gw_bonestaff.xml"))
+	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/gw_bonestaff.xml"))
+end

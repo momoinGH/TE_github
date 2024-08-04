@@ -1,6 +1,8 @@
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
 _G = GLOBAL
 
+modimport "modmain/gentuning"
+
 --level.overrides.has_ocean = false
 local SIZE_VARIATION = 3
 --boarmound
@@ -10,14 +12,12 @@ require("map/rooms")
 require("map/terrain")
 require("map/level")
 require("map/room_functions")
-local blockersets = require("map/blockersets")
 
 modimport 'tileadder.lua'
 AddTiles()
 modimport("scripts/tools/spawnutil.lua")
 modimport("scripts/map/graph.lua")
 modimport "scripts/init_static_layouts.lua"
-
 
 local MapTags = { "frost", "hamlet", "tropical", "underwater", "folha" }
 
@@ -250,7 +250,7 @@ local meadow_fairy_rings =
 local LIVINGJUNGLETREE_CHANCE = 0.9
 
 -- vai ate 6077
-if GetModConfigData("kindofworld") == 5 then
+if TUNING.tropical.only_hamlet then
 	-------------------------------------------------------Hamlet task exclusivas ilha inicial---------------------------------	
 
 	local tamanho = GetModConfigData("continentsize")
@@ -5980,7 +5980,7 @@ if GetModConfigData("kindofworld") == 5 then
 	-----------------------------------------------------
 	local function LevelPreInit(level)
 		if level.location == "cave" and GetModConfigData("togethercaves_hamletworld") == 0 then
-			if not GetModConfigData("underwater") then
+			if not TUNING.tropical.underwater then
 				level.tasks = {}
 				level.numoptionaltasks = 0
 				level.set_pieces = {}
@@ -5988,7 +5988,7 @@ if GetModConfigData("kindofworld") == 5 then
 		end
 
 		-----------------------------underwater----------------------------------------
-		if GetModConfigData("underwater") then
+		if TUNING.tropical.underwater then
 			if level.location == "cave" then
 				level.overrides.keep_disconnected_tiles = true
 				table.insert(level.tasks, "separavulcao")
@@ -6017,7 +6017,7 @@ if GetModConfigData("kindofworld") == 5 then
 
 
 		-----------------------------hamlet caves----------------------------------------
-		if GetModConfigData("hamletcaves_hamletworld") == 1 then
+		if TUNING.tropical.hamlet_caves then
 			if level.location == "cave" then
 				level.overrides.keep_disconnected_tiles = true
 				table.insert(level.tasks, "separavulcao")
@@ -6144,14 +6144,14 @@ if GetModConfigData("kindofworld") == 5 then
 			taskset.set_pieces["CaveEntrance"] = { count = 10, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins", "Pigtopia" } }
 		end
 
-		if GetModConfigData("hamletcaves_hamletworld") == 1 then
+		if TUNING.tropical.hamlet_caves then
 			taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks = { "plains", "plains_ruins" } }
 			taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks = { "Deep_rainforest", "Deep_rainforest_2", "painted_sands" } }
 			taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks = { "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
 		end
 		taskset.location = "forest"
 
-		if GetModConfigData("tropicalshards") ~= 0 then
+		if TUNING.tropical.tropicalshards ~= 0 then
 			taskset.set_pieces["hamlet_exit"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
 		end
 	end
@@ -6166,7 +6166,7 @@ if GetModConfigData("kindofworld") == 5 then
 		start_node = "PorklandPortalRoom",
 	})
 	---------------------------a partir daqui o mod volcano biome normal------------------------------------
-elseif GetModConfigData("kindofworld") == 20 then
+elseif TUNING.tropical.only_sea then
 	AddStartLocation("OceanWorld", {
 		name = "OceanWorld",
 		location = "forest",
@@ -8822,10 +8822,8 @@ else
 		region_id = "hamlet10",
 		room_tags = { "RoadPoison", "hamlet" },
 		room_choices = {
-			["city_base"] = 1,
 			["city_base_1_set"] = 1,
 			["city_base"] = 1,
-
 		},
 		room_bg = GROUND.SUBURB,
 		background_room = "BG_suburb_base",
@@ -8854,7 +8852,6 @@ else
 		region_id = "hamlet12",
 		room_tags = { "RoadPoison", "hamlet" },
 		room_choices = {
-			["city_base"] = 1,
 			["city_base_2_set"] = 1,
 			["city_base"] = 1,
 		},
@@ -8884,7 +8881,6 @@ else
 		keys_given = {},
 		region_id = "hamlet13",
 		room_choices = {
-			["BG_rainforest_base"] = math.random(2, 3),
 			["plains_tallgrass"] = math.random(1, 2),
 			["plains_pogs"] = math.random(0, 2),
 			["rainforest_ruins"] = math.random(2, 3),
@@ -9236,7 +9232,6 @@ else
 		keys_given = { KEYS.ISLAND8 },
 		region_id = "island3",
 		room_choices = {
-			["BG_rainforest_base"] = math.random(2, 3),
 			["plains_tallgrass"] = math.random(1, 2),
 			["plains_pogs"] = math.random(0, 2),
 			["rainforest_ruins"] = math.random(2, 3),
@@ -9604,7 +9599,6 @@ else
 		locks = { LOCKS.TIER1 },
 		keys_given = { KEYS.ROCKS, KEYS.GOLD, KEYS.TIER2 },
 		room_choices = {
-			["MAINBG_rainforest_base"] = math.random(2, 3),
 			["MAINplains_tallgrass"] = math.random(1, 2),
 			["MAINplains_pogs"] = math.random(0, 2),
 			["MAINrainforest_ruins"] = math.random(2, 3),
@@ -9807,7 +9801,6 @@ else
 			keys_given = { KEYS.FUNGUS },
 			region_id = "island2",
 			room_choices = {
-				["JungleNoBerry"] = 1,
 				["TidalSharkHome"] = 1,
 				["JungleNoBerry"] = 1,
 			},
@@ -9996,7 +9989,7 @@ else
 		colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 	})
 	------------------------------------------------------------SW islands tasks----------------------------------------------------------------------
-	if GetModConfigData("Shipwrecked") == 15 or GetModConfigData("kindofworld") == 10 then
+	if GetModConfigData("Shipwrecked") == 15 or TUNING.tropical.only_shipwrecked then
 		AddTask("TROPICAL6", {
 			locks = {},
 			keys_given = {},
@@ -10176,7 +10169,6 @@ else
 			keys_given = {},
 			region_id = "tropical12",
 			room_choices = {
-				["JungleNoBerry"] = 1,
 				["TidalSharkHome"] = 1,
 				["JungleNoBerry"] = 1,
 			},
@@ -10270,7 +10262,7 @@ else
 		})
 	end
 
-	if GetModConfigData("kindofworld") == 10 then
+	if TUNING.tropical.only_shipwrecked then
 		AddTask("HomeIslandVerySmall", {
 			locks = {},
 			keys_given = {},
@@ -10909,7 +10901,6 @@ else
 		})
 
 		AddTask("ThemeMarshCity", {
-			locks = LOCKS.ISLAND3,
 			locks = {},
 			keys_given = {},
 			region_id = "ship45",
@@ -11599,7 +11590,6 @@ else
 			locks = { LOCKS.KILLERBEES, LOCKS.TIER3 },
 			keys_given = { KEYS.HONEY, KEYS.TIER3 },
 			room_choices = {
-				["MAINJungleNoBerry"] = 1,
 				["MAINTidalSharkHome"] = 1,
 				["MAINJungleNoBerry"] = 1,
 			},
@@ -11688,7 +11678,7 @@ else
 
 
 
-	if GetModConfigData("Shipwrecked") == 25 or GetModConfigData("kindofworld") == 10 then
+	if GetModConfigData("Shipwrecked") == 25 or TUNING.tropical.only_shipwrecked then
 		AddTask("A_MISTO39", {
 			locks = {},
 			keys_given = { KEYS.MUSHROOM, KEYS.RABBIT, KEYS.AREA, KEYS.CAVERN, KEYS.SINKHOLE, KEYS.PASSAGE },
@@ -12023,7 +12013,6 @@ else
 			keys_given = { KEYS.RED },
 			region_id = "island2",
 			room_choices = {
-				["JungleNoBerry"] = 1,
 				["TidalSharkHome"] = 1,
 				["JungleNoBerry"] = 1,
 			},
@@ -13019,7 +13008,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
 		contents = {
-			countstaticlayouts = { ["pig_ruins_entrance_5"] = GetModConfigData("pigruins") },
+			countstaticlayouts = { ["pig_ruins_entrance_5"] = TUNING.tropical.pigruins and 1 or 0 },
 			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
@@ -13062,7 +13051,7 @@ else
 
 			countprefabs =
 			{
-				maze_anthillentradarainha = GetModConfigData("anthill"),
+				maze_anthillentradarainha = TUNING.tropical.anthill and 1 or 0,
 				underwater_entrance2 = 1,
 			},
 
@@ -14245,7 +14234,7 @@ else
 		value = GROUND.DEEPRAINFOREST,
 		tags = { "ExitPiece", "RoadPoison", "folha" },
 		contents = {
-			countstaticlayouts = { ["pig_ruins_entrance_5"] = GetModConfigData("pigruins") },
+			countstaticlayouts = { ["pig_ruins_entrance_5"] = TUNING.tropical.pigruins and 1 or 0 },
 			distributepercent = 0.25, --.3
 			distributeprefabs =
 			{
@@ -14288,7 +14277,7 @@ else
 
 			countprefabs =
 			{
-				maze_anthillentradarainha = GetModConfigData("anthill"),
+				maze_anthillentradarainha = TUNING.tropical.anthill and 1 or 0,
 				underwater_entrance2 = 1,
 			},
 
@@ -15052,7 +15041,6 @@ else
 				--sapling = 1,
 				flower = .5,
 				beehive = .1, --was 1,
-				wasphive = 0.003,
 				sweet_potato_planted = 0.3,
 				wasphive = 0.01, --was 0.001
 			},
@@ -15232,7 +15220,6 @@ else
 				--rock_ice = .75,
 				rocks = .25,
 				flint = 1.5,
-				sapling = .05,
 				blue_mushroom = .002,
 				green_mushroom = .002,
 				red_mushroom = .002,
@@ -15407,7 +15394,6 @@ else
 				flint = 1,
 				goldnugget = 1,
 				tallbirdnest = .1,
-				rock_moon = 0.1,
 				rock_moon = 2,
 				-- sapling = .5,
 				--spiderden= .1,
@@ -15667,7 +15653,7 @@ else
 		value = GROUND.BEARDRUG,
 		tags = { "RoadPoison", "tropical" },
 		contents = {
-			countstaticlayouts = { ["volcano_altar"] = GetModConfigData("forge"), },
+			countstaticlayouts = { ["volcano_altar"] = TUNING.tropical.forge, },
 			distributepercent = .1,
 			distributeprefabs =
 			{
@@ -15692,7 +15678,7 @@ else
 		value = GROUND.BEARDRUG,
 		tags = { "RoadPoison", "tropical" },
 		contents = {
-			countstaticlayouts = { ["lava_arena"] = GetModConfigData("forge"), },
+			countstaticlayouts = { ["lava_arena"] = TUNING.tropical.forge, },
 			distributepercent = .1,
 			distributeprefabs =
 			{
@@ -15774,7 +15760,6 @@ else
 			{
 				--mermfishhouse = 5,
 				tidalpool = 2,
-				poisonhole = 8,
 				mermfishhouse = 2,
 				reeds = 3,
 				--										mermhouse = 2,
@@ -15930,7 +15915,6 @@ else
 			{
 				--mermfishhouse = 5,
 				tidalpool = 2,
-				poisonhole = 8,
 				mermfishhouse = 2,
 				reeds = 3,
 				--										mermhouse = 2,
@@ -16260,7 +16244,6 @@ else
 				flower_evil = 0.5,
 				fireflies = 1, -- results in an empty beach because these only show at night
 				flower = .3,
-				sandhill = .5,
 				palmtree = 1, --one palm tree
 				crabhole = 0.3, --one palm tree
 				sandhill = .05,
@@ -16853,7 +16836,6 @@ else
 			{
 				--sweet_potato_planted = 0.5,
 				grassnova = 1,
-				rocks = .2,
 				--beehive = 0.003,
 				rocks = 0.003,
 				rock_flintless = 0.01,
@@ -17055,7 +17037,6 @@ else
 			{
 				fireflies = 0.2,
 				jungletree = 1,
-				rock1 = 0.03,
 				rock1 = 0.03,
 				primeapebarrel = 0.1,
 				flint = 0.03,
@@ -17344,10 +17325,6 @@ else
 		value = GROUND.JUNGLE,
 		tags = { "Chester_Eyebone", "RoadPoison", "tropical" },
 		contents = {
-			countstaticlayouts =
-			{
-				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
-			},
 			countstaticlayouts = { ["BerryBushBunch"] = 1 }, --adds 1 per room
 			distributepercent = 0.35,
 			distributeprefabs =
@@ -18348,7 +18325,6 @@ else
 				--sapling = 1,
 				flower = .5,
 				beehive = .1, --was 1,
-				wasphive = 0.003,
 				sweet_potato_planted = 0.3,
 				wasphive = 0.01, --was 0.001
 			},
@@ -18528,7 +18504,6 @@ else
 				--rock_ice = .75,
 				rocks = .25,
 				flint = 1.5,
-				sapling = .05,
 				blue_mushroom = .002,
 				green_mushroom = .002,
 				red_mushroom = .002,
@@ -18703,7 +18678,6 @@ else
 				flint = 1,
 				goldnugget = 1,
 				tallbirdnest = .1,
-				rock_moon = 0.1,
 				rock_moon = 2,
 				-- sapling = .5,
 				--spiderden= .1,
@@ -18963,7 +18937,7 @@ else
 		value = GROUND.BEARDRUG,
 		tags = { "RoadPoison" },
 		contents = {
-			countstaticlayouts = { ["volcano_altar"] = GetModConfigData("forge"), },
+			countstaticlayouts = { ["volcano_altar"] = TUNING.tropical.forge, },
 			distributepercent = .1,
 			distributeprefabs =
 			{
@@ -18989,7 +18963,7 @@ else
 		value = GROUND.BEARDRUG,
 		tags = { "RoadPoison" },
 		contents = {
-			countstaticlayouts = { ["lava_arena"] = GetModConfigData("forge"), },
+			countstaticlayouts = { ["lava_arena"] = TUNING.tropical.forge, },
 			distributepercent = .1,
 			distributeprefabs =
 			{
@@ -19072,7 +19046,6 @@ else
 			{
 				--mermfishhouse = 5,
 				tidalpool = 2,
-				poisonhole = 8,
 				mermfishhouse = 2,
 				reeds = 3,
 				--										mermhouse = 2,
@@ -19500,7 +19473,6 @@ else
 				flower_evil = 0.5,
 				fireflies = 1, -- results in an empty beach because these only show at night
 				flower = .3,
-				sandhill = .5,
 				palmtree = 1, --one palm tree
 				crabhole = 0.3, --one palm tree
 				sandhill = .05,
@@ -20093,7 +20065,6 @@ else
 			{
 				--sweet_potato_planted = 0.5,
 				grassnova = 1,
-				rocks = .2,
 				--beehive = 0.003,
 				rocks = 0.003,
 				rock_flintless = 0.01,
@@ -20295,7 +20266,6 @@ else
 			{
 				fireflies = 0.2,
 				jungletree = 1,
-				rock1 = 0.03,
 				rock1 = 0.03,
 				primeapebarrel = 0.1,
 				flint = 0.03,
@@ -20584,10 +20554,6 @@ else
 		value = GROUND.JUNGLE,
 		tags = { "Chester_Eyebone", "RoadPoison" },
 		contents = {
-			countstaticlayouts =
-			{
-				["LivingJungleTree"] = function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end
-			},
 			countstaticlayouts = { ["BerryBushBunch"] = 1 }, --adds 1 per room
 			distributepercent = 0.35,
 			distributeprefabs =
@@ -21784,7 +21750,6 @@ else
 			distributeprefabs =
 			{
 				goldnugget = .05,
-				flint = 0.05,
 				stalagmite_tall = 0.4,
 				stalagmite_tall_med = 0.4,
 				stalagmite_tall_low = 0.4,
@@ -21814,7 +21779,6 @@ else
 			distributeprefabs =
 			{
 				goldnugget = .05,
-				flint = 0.05,
 				stalagmite_tall = 0.4,
 				stalagmite_tall_med = 0.4,
 				stalagmite_tall_low = 0.4,
@@ -21843,7 +21807,6 @@ else
 			distributeprefabs =
 			{
 				goldnugget = .05,
-				flint = 0.05,
 				stalagmite_tall = 0.4,
 				stalagmite_tall_med = 0.4,
 				stalagmite_tall_low = 0.4,
@@ -21874,7 +21837,6 @@ else
 			{
 				cave_fern = 0.5,
 				goldnugget = .05,
-				flint = 0.05,
 				stalagmite_tall = 0.4,
 				stalagmite_tall_med = 0.4,
 				stalagmite_tall_low = 0.4,
@@ -21909,7 +21871,6 @@ else
 			{
 				cave_fern = 0.5,
 				goldnugget = .05,
-				flint = 0.05,
 				stalagmite_tall = 0.4,
 				stalagmite_tall_med = 0.4,
 				stalagmite_tall_low = 0.4,
@@ -22159,11 +22120,8 @@ else
 			{
 				mushtree_yelow = 9.0,
 				yelow_mushroom = 0.9,
-
 				stalagmite = 0.5,
-				pillar_cave = 0.1,
 				spiderhole = 0.05,
-
 				pillar_cave = 0.05,
 				cavelight = 0.6,
 				--			poisonmist = 8,
@@ -22190,7 +22148,6 @@ else
 				yelow_mushroom = 0.9,
 
 				stalagmite = 1.5,
-				pillar_cave = 0.2,
 				spiderhole = 0.4,
 
 				pillar_cave = 0.05,
@@ -22218,7 +22175,6 @@ else
 				mushtree_yelow = 9.0,
 				yelow_mushroom = 0.9,
 
-				pillar_cave = 0.2,
 				spiderhole = 0.4,
 				stalagmite = 0.2,
 				pillar_cave = 0.05,
@@ -22247,7 +22203,6 @@ else
 				yelow_mushroom = 0.9,
 
 				stalagmite = 0.5,
-				pillar_cave = 0.5,
 				spiderhole = 0.01,
 
 				pillar_cave = 0.05,
@@ -22276,7 +22231,6 @@ else
 				yelow_mushroom = 0.9,
 
 				stalagmite = 3.5,
-				pillar_cave = 1.0,
 				spiderhole = 0.15,
 
 				pillar_cave = 0.5,
@@ -22305,7 +22259,6 @@ else
 				yelow_mushroom = 0.9,
 
 				stalagmite = 1.5,
-				pillar_cave = 0.05,
 				spiderhole = 0.45,
 
 				pillar_cave = 0.05,
@@ -22372,7 +22325,6 @@ else
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -22407,7 +22359,6 @@ else
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -22430,9 +22381,7 @@ else
 			distributepercent = .2,
 			distributeprefabs =
 			{
-				cavelight = 0.05,
 				cavelight_small = 0.05,
-
 				grass = 0.1,
 				sapling = 0.1,
 				twiggytree = 0.04,
@@ -22450,7 +22399,6 @@ else
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -22470,7 +22418,6 @@ else
 			distributepercent = .25,
 			distributeprefabs =
 			{
-				cavelight = 0.05,
 				cavelight_small = 0.05,
 
 				mushtree_small = 5.0,
@@ -22486,7 +22433,6 @@ else
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -22530,7 +22476,6 @@ else
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -22569,7 +22514,6 @@ else
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -22602,7 +22546,6 @@ else
 				flower_rainforest = 4,
 				berrybush_juicy = 2,
 				cavelight = 0.6,
-				deep_jungle_fern_noise = 4,
 				deep_jungle_fern_noise = 2,
 				jungle_border_vine = 2,
 				fireflies = 0.2,
@@ -24277,7 +24220,7 @@ else
 		colour = { r = 0.3, g = 0.3, b = 0.3, a = 0.9 },
 	})
 	---------------------------------------------------------------------------------------------------------------
-	if GetModConfigData("kindofworld") == 10 and GetModConfigData("togethercaves_shipwreckedworld") == 0 then
+	if TUNING.tropical.only_shipwrecked and GetModConfigData("togethercaves_shipwreckedworld") == 0 then
 		AddTask("separavulcao", {
 			locks = {
 				LOCKS.NONE,
@@ -25362,7 +25305,6 @@ else
 				magmarock = 1,
 				magmarock_gold = 0.2,
 				iron_boulder = 0.6,
-				bubble_vent = 0.01,
 				rock_cave = 0.5,
 				quagmire_salmom_alive = 0.05,
 				dogfish_under = 0.1,
@@ -25394,7 +25336,6 @@ else
 				magmarock_gold = 0.2,
 				iron_ore = 0.03,
 				iron_boulder = 0.8,
-				bubble_vent = 0.01,
 				rock_cave = 0.5,
 				quagmire_salmom_alive = 0.05,
 				dogfish_under = 0.1,
@@ -26309,7 +26250,6 @@ else
 			crosslink_factor = 2,
 			cove_room_chance = 1,
 			cove_room_max_edges = 2,
-			colour = { r = .5, g = 0.6, b = .080, a = .10 },
 			colour = { r = 1, g = 0.4, b = 0.4, a = 0.1 },
 		})
 
@@ -26390,7 +26330,7 @@ else
 	end
 
 	----------------------------------------------------------------------------------
-	if GetModConfigData("kindofworld") == 10 then
+	if TUNING.tropical.only_shipwrecked then
 		AddStartLocation("tropicalexperience", {
 			name = "tropicalexperience",
 			location = "forest",
@@ -26415,19 +26355,19 @@ else
 				table.insert(level.tasks, "vulcaonacaverna4")
 
 
-				if GetModConfigData("frost_islandworld") == 10 then
+				if TUNING.tropical.frost_island == 10 then
 					table.insert(level.tasks, "frostcavedivide")
 					table.insert(level.tasks, "Frostcavetask")
 					table.insert(level.tasks, "frostExitRoom")
 				end
 
-				if GetModConfigData("frost_islandworld") == 15 then
+				if TUNING.tropical.frost_island == 15 then
 					--table.insert(level.tasks, "frostcavedivide")
 					--table.insert(level.tasks, "Frostcavetask")
 					--table.insert(level.tasks, "frostExitRoom")
 				end
 
-				if GetModConfigData("underwater") then
+				if TUNING.tropical.underwater then
 					table.insert(level.tasks, "underwaterdivide")
 					table.insert(level.tasks, "UnderwaterStart")
 					table.insert(level.tasks, "SandyBiome")
@@ -26451,7 +26391,7 @@ else
 				end
 
 				-----------------------------hamlet caves----------------------------------------
-				if GetModConfigData("hamletcaves_shipwreckedworld") == 1 then
+				if TUNING.tropical.hamlet_caves then
 					table.insert(level.tasks, "separahamcave")
 					table.insert(level.tasks, "HamMudWorld")
 					table.insert(level.tasks, "HamMudCave")
@@ -26580,7 +26520,7 @@ else
 
 
 
-			if GetModConfigData("Shipwreckedworld_plus") == true then
+			if TUNING.tropical.shipwrecked_plus then
 				--table.insert(taskset.tasks, "MISTO_eldorado")
 				--table.insert(taskset.tasks, "MISTO_tikitribe")
 				--table.insert(taskset.tasks, "MISTO_walrusvacation")
@@ -26599,7 +26539,7 @@ else
 			--table.insert(taskset.tasks, "pantano")
 			--end
 
-			if GetModConfigData("frost_islandworld") == 10 then
+			if TUNING.tropical.frost_island == 10 then
 				table.insert(taskset.tasks, "FrostIsland_Wildbeaver")
 				table.insert(taskset.tasks, "FrostIsland_Beach")
 				table.insert(taskset.tasks, "FrostIsland_deciduoustree")
@@ -26610,7 +26550,7 @@ else
 				table.insert(taskset.tasks, "FrostIsland_icelake")
 			end
 
-			if GetModConfigData("frost_islandworld") == 15 then
+			if TUNING.tropical.frost_island == 15 then
 				table.insert(taskset.tasks, "FrostIsland_Wildbeaver")
 				table.insert(taskset.tasks, "FrostIsland_Beach")
 				table.insert(taskset.tasks, "FrostIsland_deciduoustree")
@@ -26635,7 +26575,7 @@ else
 			end
 			----------------------------------------------------------------------
 			--------------------underwater--------------------------------------------
-			if GetModConfigData("underwater") then
+			if TUNING.tropical.underwater then
 				table.insert(taskset.tasks, "EntranceToReef")
 			end
 			-----------------------------cherry forest-----------------------------------------------------
@@ -26774,7 +26714,7 @@ else
 				}
 			end
 
-			if GetModConfigData("tropicalshards") ~= 0 then
+			if TUNING.tropical.tropicalshards ~= 0 then
 				taskset.set_pieces["sw_exit"] = {
 					count = 1,
 					tasks = {
@@ -26860,7 +26800,7 @@ else
 				}
 			end
 
-			if GetModConfigData("hamletcaves_shipwreckedworld") == 1 then
+			if TUNING.tropical.hamlet_caves then
 				taskset.set_pieces["cave_entranceham1"] = {
 					count = 1,
 					tasks = {
@@ -27142,8 +27082,8 @@ else
 
 		AddTaskSetPreInitAny(TasksetPreInit)
 	else
-		if GetModConfigData("startlocation") == 5 then
-			if GetModConfigData("tropicalshards") == 30 then
+		if TUNING.tropical.multiplayerportal == 5 then
+			if TUNING.tropical.tropicalshards == 30 then
 				AddStartLocation("tropicalexperience", {
 					name = "tropicalexperience",
 					location = "forest",
@@ -27160,7 +27100,7 @@ else
 			end
 		end
 
-		if GetModConfigData("startlocation") == 10 then
+		if TUNING.tropical.multiplayerportal == 10 then
 			AddStartLocation("tropicalexperience", {
 				name = "tropicalexperience",
 				location = "forest",
@@ -27169,7 +27109,7 @@ else
 			})
 		end
 
-		if GetModConfigData("startlocation") == 15 then
+		if TUNING.tropical.multiplayerportal == 15 then
 			AddStartLocation("tropicalexperience", {
 				name = "tropicalexperience",
 				location = "forest",
@@ -27188,7 +27128,7 @@ else
 
 
 
-				if GetModConfigData("hamlet_caves") == 1 then
+				if TUNING.tropical.hamlet_caves then
 					table.insert(level.tasks, "separahamcave")
 					table.insert(level.tasks, "HamMudWorld")
 					table.insert(level.tasks, "HamMudCave")
@@ -27214,7 +27154,7 @@ else
 
 
 
-				if GetModConfigData("Volcano") == true and GetModConfigData("Shipwrecked") ~= 5 or GetModConfigData("tropicalshards") == 30 then
+				if GetModConfigData("Volcano") == true and GetModConfigData("Shipwrecked") ~= 5 or TUNING.tropical.tropicalshards == 30 then
 					table.insert(level.tasks, "vulcaonacaverna")
 					table.insert(level.tasks, "vulcaonacaverna1")
 					table.insert(level.tasks, "vulcaonacaverna2")
@@ -27222,20 +27162,20 @@ else
 					table.insert(level.tasks, "vulcaonacaverna4")
 				end
 
-				if GetModConfigData("frost_island") == 10 then
+				if TUNING.tropical.frost_island == 10 then
 					table.insert(level.tasks, "frostcavedivide")
 					table.insert(level.tasks, "Frostcavetask")
 					table.insert(level.tasks, "frostExitRoom")
 				end
 
-				if GetModConfigData("frost_island") == 15 then
+				if TUNING.tropical.frost_island == 15 then
 					--table.insert(level.tasks, "frostcavedivide")
 					--table.insert(level.tasks, "Frostcavetask")
 					--table.insert(level.tasks, "frostExitRoom")
 				end
 
 				table.insert(level.tasks, "underwaterdivide")
-				if GetModConfigData("underwater") then
+				if TUNING.tropical.underwater then
 					table.insert(level.tasks, "UnderwaterStart")
 					table.insert(level.tasks, "SandyBiome")
 					table.insert(level.tasks, "ReefBiome")
@@ -27256,7 +27196,7 @@ else
 						table
 							.insert(level.tasks, "UnderwaterExit1")
 					end
-					if GetModConfigData("Hamlet") ~= 5 or GetModConfigData("kindofworld") == 5 or GetModConfigData("enableallprefabs") == true then
+					if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.only_hamlet or GetModConfigData("enableallprefabs") == true then
 						table.insert(level.tasks, "UnderwaterExit2")
 					end
 				end
@@ -27274,7 +27214,7 @@ else
 			if taskset.location ~= "forest" then return end
 			taskset.tasks = {}
 
-			if GetModConfigData("startlocation") == 5 then
+			if TUNING.tropical.multiplayerportal == 5 then
 				table.insert(taskset.tasks, "Make a pick")
 
 				if GetModConfigData("Together") ~= 20 then
@@ -27285,7 +27225,7 @@ else
 				}
 			end
 
-			if GetModConfigData("startlocation") == 10 then
+			if TUNING.tropical.multiplayerportal == 10 then
 				table.insert(taskset.tasks, "iniciosw")
 				table.insert(taskset.tasks, "iniciosw2")
 
@@ -27294,7 +27234,7 @@ else
 				}
 			end
 
-			if GetModConfigData("startlocation") == 15 then
+			if TUNING.tropical.multiplayerportal == 15 then
 				table.insert(taskset.tasks, "inicioham")
 				table.insert(taskset.tasks, "inicioham2")
 
@@ -27356,7 +27296,7 @@ else
 
 
 			---------------------Main Land------------------------	
-			if GetModConfigData("pigcity1") == 10 then
+			if TUNING.tropical.hamlet_pigcity1 == 10 then
 				table.insert(taskset.tasks, "XPigcity")
 				table.insert(taskset.tasks, "XPigcityside1")
 				table.insert(taskset.tasks, "XPigcityside2")
@@ -27365,7 +27305,7 @@ else
 			end
 
 			------------continent----------------------
-			if GetModConfigData("pigcity1") == 15 then
+			if TUNING.tropical.hamlet_pigcity1 == 15 then
 				table.insert(taskset.tasks, "MPigcity")
 				table.insert(taskset.tasks, "MPigcityside1")
 				table.insert(taskset.tasks, "MPigcityside2")
@@ -27374,14 +27314,14 @@ else
 			end
 
 			--------------island-------------------------
-			if GetModConfigData("pigcity1") == 20 then
+			if TUNING.tropical.hamlet_pigcity1 == 20 then
 				table.insert(taskset.tasks, "Pigcity")
 				table.insert(taskset.tasks, "Deep_rainforest_4")
 			end
 
 
 			---------------------Main Land------------------------	
-			if GetModConfigData("pigcity2") == 10 then
+			if TUNING.tropical.hamlet_pigcity2 == 10 then
 				table.insert(taskset.tasks, "XPigcity2")
 				table.insert(taskset.tasks, "XPigcity2side1")
 				table.insert(taskset.tasks, "XPigcity2side2")
@@ -27391,7 +27331,7 @@ else
 			end
 
 			------------continent----------------------
-			if GetModConfigData("pigcity2") == 15 then
+			if TUNING.tropical.hamlet_pigcity2 == 15 then
 				table.insert(taskset.tasks, "M_BLANK1")
 				table.insert(taskset.tasks, "MDeep_rainforestC")
 				--table.insert(taskset.tasks, "MPigcity2")
@@ -27403,17 +27343,17 @@ else
 			end
 
 			--------------island-------------------------
-			if GetModConfigData("pigcity2") == 20 then
+			if TUNING.tropical.hamlet_pigcity2 == 20 then
 				table.insert(taskset.tasks, "Pigcity2")
 				table.insert(taskset.tasks, "Deep_rainforest_3")
 			end
 
-			if GetModConfigData("pinacle") == 1 then
+			if TUNING.tropical.pinacle then
 				table.insert(taskset.tasks, "pincale")
 			end
 
 
-			if GetModConfigData("gorgeisland") == 1 then
+			if TUNING.tropical.gorgeisland then
 				table.insert(taskset.tasks, "gorgeisland")
 				table.insert(taskset.tasks, "quagmirepink")
 				table.insert(taskset.tasks, "quagmireblue")
@@ -27422,7 +27362,7 @@ else
 			end
 
 
-			if GetModConfigData("frost_island") == 10 then
+			if TUNING.tropical.frost_island == 10 then
 				table.insert(taskset.tasks, "FrostIsland_Wildbeaver")
 				table.insert(taskset.tasks, "FrostIsland_Beach")
 				table.insert(taskset.tasks, "FrostIsland_deciduoustree")
@@ -27433,7 +27373,7 @@ else
 				table.insert(taskset.tasks, "FrostIsland_icelake")
 			end
 
-			if GetModConfigData("frost_island") == 15 then
+			if TUNING.tropical.frost_island == 15 then
 				table.insert(taskset.tasks, "FrostIsland_Wildbeaver")
 				table.insert(taskset.tasks, "FrostIsland_Beach")
 				table.insert(taskset.tasks, "FrostIsland_deciduoustree")
@@ -27444,7 +27384,7 @@ else
 				table.insert(taskset.tasks, "FrostIsland_icelake")
 			end
 
-			if GetModConfigData("Shipwrecked_plus") == true then
+			if TUNING.tropical.shipwrecked_plus then
 				--table.insert(taskset.tasks, "MISTO_eldorado")
 				--table.insert(taskset.tasks, "MISTO_tikitribe")
 				--table.insert(taskset.tasks, "MISTO_walrusvacation")
@@ -27633,7 +27573,7 @@ else
 				table.insert(taskset.tasks, "GiantTrees")
 			end
 
-			if GetModConfigData("underwater") then
+			if TUNING.tropical.underwater then
 				table.insert(taskset.tasks, "EntranceToReef")
 			end
 
@@ -27791,7 +27731,7 @@ else
 				}
 			end
 
-			if GetModConfigData("Together") == 20 and GetModConfigData("gorgeisland") == 1 then
+			if GetModConfigData("Together") == 20 and TUNING.tropical.gorgeisland then
 				taskset.set_pieces["mermtrader3setmainland"] = { count = 1, tasks = { "Make a pick", "MDig that rock", "MGreat Plains", "MSqueltch", "MBeeeees!", "MSpeak to the king", "MForest hunters", "MBadlands", "MFor a nice walk", "MLightning Bluff" } }
 			end
 
@@ -27823,17 +27763,17 @@ else
 
 			-----------------------------------portais para outro mundo 4 camadas---------------------------
 
-			if GetModConfigData("Together") == 10 and GetModConfigData("tropicalshards") ~= 0 then
+			if GetModConfigData("Together") == 10 and TUNING.tropical.tropicalshards ~= 0 then
 				taskset.set_pieces["sw_entrance"] = { count = 1, tasks = { "Make a pick", "XDig that rock", "XGreat Plains", "XSqueltch", "XBeeeees!", "XSpeak to the king", "XForest hunters", "XBadlands", "XFor a nice walk", "XLightning Bluff" } }
 				taskset.set_pieces["hamlet_entrance"] = { count = 1, tasks = { "Make a pick", "XDig that rock", "XGreat Plains", "XSqueltch", "XBeeeees!", "XSpeak to the king", "XForest hunters", "XBadlands", "XFor a nice walk", "XLightning Bluff" } }
 			end
 
-			if GetModConfigData("Together") == 15 and GetModConfigData("tropicalshards") ~= 0 then
+			if GetModConfigData("Together") == 15 and TUNING.tropical.tropicalshards ~= 0 then
 				taskset.set_pieces["sw_entrance"] = { count = 1, tasks = { "Make a pick", "MDig that rock", "MGreat Plains", "MSqueltch", "MBeeeees!", "MSpeak to the king", "MForest hunters", "MBadlands", "MFor a nice walk", "MLightning Bluff" } }
 				taskset.set_pieces["hamlet_entrance"] = { count = 1, tasks = { "Make a pick", "MDig that rock", "MGreat Plains", "MSqueltch", "MBeeeees!", "MSpeak to the king", "MForest hunters", "MBadlands", "MFor a nice walk", "MLightning Bluff" } }
 			end
 
-			if GetModConfigData("Together") == 20 and GetModConfigData("tropicalshards") ~= 0 then
+			if GetModConfigData("Together") == 20 and TUNING.tropical.tropicalshards ~= 0 then
 				taskset.set_pieces["sw_entrance"] = { count = 1, tasks = { "Make a pick", "Dig that rock", "Great Plains", "Squeltch", "Beeeees!", "Speak to the king", "Forest hunters", "Badlands", "For a nice walk", "Lightning Bluff" } }
 				taskset.set_pieces["hamlet_entrance"] = { count = 1, tasks = { "Make a pick", "Dig that rock", "Great Plains", "Squeltch", "Beeeees!", "Speak to the king", "Forest hunters", "Badlands", "For a nice walk", "Lightning Bluff" } }
 			end
@@ -27845,32 +27785,32 @@ else
 
 			--------------------------------
 
-			if GetModConfigData("Shipwrecked") == 10 and GetModConfigData("tropicalshards") ~= 0 then
+			if GetModConfigData("Shipwrecked") == 10 and TUNING.tropical.tropicalshards ~= 0 then
 				taskset.set_pieces["sw_exit"] = { count = 1, tasks = { "MISTO6", "MISTO7", "MISTO8", "MISTO9", "MISTO11", "MISTO14", "MISTO15", "MISTO16", "MISTO17", "MISTO20", "MISTO26", "MISTO27", "MISTO28", "MISTO38", "MISTO39", "MISTO43", "MISTO45", "MISTO50", "MISTO51" } }
 			end
 
-			if GetModConfigData("Shipwrecked") == 15 and GetModConfigData("tropicalshards") ~= 0 then
+			if GetModConfigData("Shipwrecked") == 15 and TUNING.tropical.tropicalshards ~= 0 then
 				taskset.set_pieces["sw_exit"] = { count = 1, tasks = { "TROPICAL6", "TROPICAL7", "TROPICAL8", "TROPICAL9", "TROPICAL11", "TROPICAL14", "TROPICAL15", "TROPICAL16", "TROPICAL17", "TROPICAL20", "TROPICAL26", "TROPICAL27", "TROPICAL28", "TROPICAL38", "TROPICAL39", "TROPICAL43", "TROPICAL45", "TROPICAL50", "TROPICAL51" } }
 			end
 
-			if GetModConfigData("Shipwrecked") == 20 and GetModConfigData("tropicalshards") ~= 0 then
+			if GetModConfigData("Shipwrecked") == 20 and TUNING.tropical.tropicalshards ~= 0 then
 				taskset.set_pieces["sw_exit"] = { count = 1, tasks = { "XISTO6", "XISTO7", "XISTO8", "XISTO9", "XISTO11", "XISTO14", "XISTO15", "XISTO16", "XISTO17", "XISTO20", "XISTO26", "XISTO27", "XISTO28", "XISTO38", "XISTO39", "XISTO43", "XISTO45", "XISTO50", "XISTO51" } }
 			end
 
-			if GetModConfigData("Shipwrecked") == 25 and GetModConfigData("tropicalshards") ~= 0 then
+			if GetModConfigData("Shipwrecked") == 25 and TUNING.tropical.tropicalshards ~= 0 then
 				taskset.set_pieces["sw_exit"] = { count = 1, tasks = { "A_MISTO6", "A_MISTO7", "A_MISTO8", "A_MISTO9", "A_MISTO11", "A_MISTO14", "A_MISTO15", "A_MISTO16", "A_MISTO17", "A_MISTO20", "A_MISTO26", "A_MISTO27", "A_MISTO28", "A_MISTO38", "A_MISTO39", "A_MISTO43", "A_MISTO45", "A_MISTO50", "A_MISTO51" } }
 			end
 
 			-----------------------------
-			if GetModConfigData("Hamlet") == 20 and GetModConfigData("tropicalshards") ~= 0 then
+			if GetModConfigData("Hamlet") == 20 and TUNING.tropical.tropicalshards ~= 0 then
 				taskset.set_pieces["hamlet_exit"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
 			end
 
-			if GetModConfigData("Hamlet") == 15 and GetModConfigData("tropicalshards") ~= 0 then
+			if GetModConfigData("Hamlet") == 15 and TUNING.tropical.tropicalshards ~= 0 then
 				taskset.set_pieces["hamlet_exit"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
 			end
 
-			if GetModConfigData("Hamlet") == 10 and GetModConfigData("tropicalshards") ~= 0 then
+			if GetModConfigData("Hamlet") == 10 and TUNING.tropical.tropicalshards ~= 0 then
 				taskset.set_pieces["hamlet_exit"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }
 			end
 			----------------------------------------wormhole para ilha do outro dlc---------------------------------------
@@ -27903,19 +27843,19 @@ else
 				taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks = { "Mplains_ruins", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins", "MEdge_of_the_unknown_2", "MDeep_rainforest_2" } }
 			end
 			--------------------------------------------------cave entrances hamlet----------------------------------------------------
-			if GetModConfigData("Hamlet") == 20 and GetModConfigData("hamlet_caves") == 1 then
+			if GetModConfigData("Hamlet") == 20 and TUNING.tropical.hamlet_caves then
 				taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
 				taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
 				taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
 			end
 
-			if GetModConfigData("Hamlet") == 15 and GetModConfigData("hamlet_caves") == 1 then
+			if GetModConfigData("Hamlet") == 15 and TUNING.tropical.hamlet_caves then
 				taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
 				taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
 				taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
 			end
 
-			if GetModConfigData("Hamlet") == 10 and GetModConfigData("hamlet_caves") == 1 then
+			if GetModConfigData("Hamlet") == 10 and TUNING.tropical.hamlet_caves then
 				taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }
 				taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }
 				taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }
@@ -27936,7 +27876,7 @@ else
 
 
 
-			if GetModConfigData("monkeyisland") == 1 then
+			if TUNING.tropical.monkeyisland then
 				taskset.ocean_population = {
 					"OceanCoastalShore",
 					"OceanCoastal_TE",
@@ -27963,10 +27903,10 @@ else
 	end
 end
 
-if GetModConfigData("windyplains") ~= 5 then
+if TUNING.tropical.windyplains ~= 5 then
 	modimport "scripts/map/windyworldgen.lua"
 end
 
-if GetModConfigData("greenworld") ~= 5 then
+if TUNING.tropical.greenworld ~= 5 then
 	modimport "scripts/map/greenworldgen.lua"
 end

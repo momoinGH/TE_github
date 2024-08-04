@@ -130,10 +130,6 @@ local function SetImageFromName(inst, name, slot)
     end
 end
 
-local function displaynamefn(inst)
-    return "whatever"
-end
-
 local function spawnchildren(inst)
     if not inst.childrenspawned then
         inst.shelves = {}

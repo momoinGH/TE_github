@@ -201,11 +201,11 @@ local HAM_FX =
 	},
 }
 
-GLOBAL.require("fx")
+require("fx")
 
-if GLOBAL.package.loaded.fx then
+if package.loaded.fx then
 	for k, v in pairs(HAM_FX) do
-		table.insert(GLOBAL.package.loaded.fx, v)
+		table.insert(package.loaded.fx, v)
 		table.insert(Assets, Asset("ANIM", "anim/" .. v.build .. ".zip"))
 	end
 end

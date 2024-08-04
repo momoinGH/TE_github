@@ -25,7 +25,7 @@ end)
 local SEE_FOOD_DIST = 15
 
 local ONE_TAGS = { "edible", "eyebush" }
-local FOOD_TAGS = { "edible" }
+local FOOD_TAGS = { "edible" } --TODO 食物没有该标签
 local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
 local function IsThreatened(inst)

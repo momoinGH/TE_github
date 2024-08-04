@@ -18,7 +18,7 @@ local function UpdateFade(inst, dframes)
             if inst.queueremove then
                 local x, y, z = inst.Transform:GetWorldPosition()
                 local ents = TheSim:FindEntities(x, y, z, 15, nil, { "flying", "INLIMBO" },
-                    { "plant", "monster", "animal", "character", "isinventoryitem", "tree", "structure" })
+                    { "plant", "monster", "animal", "character", "_inventoryitem", "tree", "structure" })
                 for k, item in pairs(ents) do
                     if item.rippletask then
                         item.rippletask:Cancel()

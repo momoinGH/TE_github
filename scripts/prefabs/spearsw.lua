@@ -249,12 +249,43 @@ local function ChangeObsidianLight(inst, old, new)
 end
 
 local function ManageObsidianLight(inst)
-	local cur, max = inst.components.obsidiantool:GetCharge()
-	if cur / max >= inst.components.obsidiantool.yellow_threshold then
-		SpawnObsidianLight(inst)
-	else
-		RemoveObsidianLight(inst)
+    local cur, max = inst.components.obsidiantool:GetCharge()
+    if cur / max >= inst.components.obsidiantool.yellow_threshold then
+        SpawnObsidianLight(inst)
+    else
+        RemoveObsidianLight(inst)
+    end
+end
+
+local relative_temperature_thresholds = { -30, -10, 10, 30 }
+local function GetRangeForTemperature(temp, ambient)
+	local range = 1
+	for i, v in ipairs(relative_temperature_thresholds) do
+		if temp > ambient + v then
+			range = range + 1
+		end
 	end
+	return range
+end
+local emitted_temperatures = { -10, 10, 25, 40, 60 }
+local function HeatFn(inst, observer)
+	local range = GetRangeForTemperature(inst.components.temperature:GetCurrent(), TheWorld.state.temperature)
+	return emitted_temperatures[range]
+end
+
+local function MakeObsidianTool(inst)
+	inst:AddTag("heatrock")
+
+	inst.components.temperature.inherentinsulation = TUNING.INSULATION_MED
+	inst.components.temperature.inherentsummerinsulation = TUNING.INSULATION_LARGE * 2
+	inst.components.temperature:IgnoreTags("heatrock")
+
+	inst:AddComponent("heater")
+	inst.components.heater.heatfn = HeatFn
+	inst.components.heater.equippedheatfn = HeatFn
+	inst.components.heater.carriedheatfn = HeatFn
+	inst.components.heater.carriedheatmultiplier = TUNING.HEAT_ROCK_CARRIED_BONUS_HEAT_FACTOR
+	inst.components.heater:SetThermics(true, false)
 end
 
 local function obsidianfn(Sim)
