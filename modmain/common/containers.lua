@@ -31,7 +31,7 @@ local function DefaultItemTestFn(container, item, slot)
 end
 
 local function SyrupItemTestFn(container, item, slot)
-	return (item.prefab == "syrup" or item.prefab == "sap" or item.prefab == "wetgoop") and
+	return (item.prefab == "syrup" or item.prefab == "quagmire_sap" or item.prefab == "wetgoop") and
 		not container.inst:HasTag("burnt")
 end
 

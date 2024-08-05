@@ -249,12 +249,12 @@ local function ChangeObsidianLight(inst, old, new)
 end
 
 local function ManageObsidianLight(inst)
-    local cur, max = inst.components.obsidiantool:GetCharge()
-    if cur / max >= inst.components.obsidiantool.yellow_threshold then
-        SpawnObsidianLight(inst)
-    else
-        RemoveObsidianLight(inst)
-    end
+	local cur, max = inst.components.obsidiantool:GetCharge()
+	if cur / max >= inst.components.obsidiantool.yellow_threshold then
+		SpawnObsidianLight(inst)
+	else
+		RemoveObsidianLight(inst)
+	end
 end
 
 local relative_temperature_thresholds = { -30, -10, 10, 30 }

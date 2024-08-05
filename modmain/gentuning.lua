@@ -9,30 +9,30 @@ local function Ternary(a, b, c)
 end
 
 TUNING.tropical = {
-    wind                         = GetModConfigData("wind"),                             --飓风
-    hail                         = GetModConfigData("hail"),                             --冰雹
-    kindofworld                  = kindofworld,                                          --世界类型
-    windyplains                  = GetModConfigData("windyplains"),                      --大风平原
-    gorgeisland                  = kindofworld == 15 and GetModConfigData("gorgeisland"), --暴食
+    wind                         = GetModConfigData("wind"),                                  --飓风
+    hail                         = GetModConfigData("hail"),                                  --冰雹
+    kindofworld                  = kindofworld,                                               --世界类型
+    windyplains                  = GetModConfigData("windyplains"),                           --大风平原
+    quagmire                     = kindofworld == 15 and GetModConfigData("gorgeisland"),     --暴食
     greenworld                   = kindofworld == 15 and GetModConfigData("greenworld") or 5, --绿色世界
-    only_hamlet                  = kindofworld == 5,                                     --仅哈姆雷特世界
-    only_shipwrecked             = kindofworld == 10,                                    --仅海难世界
-    only_sea                     = kindofworld == 20,                                    --仅海洋世界
-    underwater                   = kindofworld == 15 and GetModConfigData("underwater"), --海底世界
-    monkeyisland                 = GetModConfigData("monkeyisland"),                     --月亮码头
-    megarandomCompatibilityWater = GetModConfigData("megarandomCompatibilityWater"),     --兼容超级随机世界生成
-    springflood                  = GetModConfigData("flood"),                            --洪水
-    waves                        = GetModConfigData("Waves"),                            --海浪
-    tropicalshards               = GetModConfigData("tropicalshards"),                   --多层世界服务器
-    removedark                   = GetModConfigData("removedark"),                       --移除黑暗
-    aporkalypse                  = GetModConfigData("aporkalypse"),                      --大灾变
-    multiplayerportal            = GetModConfigData("startlocation"),                    --出生模式
+    only_hamlet                  = kindofworld == 5,                                          --仅哈姆雷特世界
+    only_shipwrecked             = kindofworld == 10,                                         --仅海难世界
+    only_sea                     = kindofworld == 20,                                         --仅海洋世界
+    underwater                   = kindofworld == 15 and GetModConfigData("underwater"),      --海底世界
+    monkeyisland                 = GetModConfigData("monkeyisland"),                          --月亮码头
+    megarandomCompatibilityWater = GetModConfigData("megarandomCompatibilityWater"),          --兼容超级随机世界生成
+    springflood                  = GetModConfigData("flood"),                                 --洪水
+    waves                        = GetModConfigData("Waves"),                                 --海浪
+    tropicalshards               = GetModConfigData("tropicalshards"),                        --多层世界服务器
+    removedark                   = GetModConfigData("removedark"),                            --移除黑暗
+    aporkalypse                  = GetModConfigData("aporkalypse"),                           --大灾变
+    multiplayerportal            = GetModConfigData("startlocation"),                         --出生模式
     greenmod                     = KnownModIndex:IsModEnabled("workshop-1418878027"),
-    forge                        = GetModConfigData("forge"),                            --熔炉竞技场
-    fog                          = GetModConfigData("fog"),                              --迷雾
-    hayfever                     = GetModConfigData("hayfever"),                         --花粉症
-    disembarkation               = GetModConfigData("automatic_disembarkation"),         --自动离船
-    bosslife                     = GetModConfigData("bosslife"),                         --巨兽生命值
+    lavaarena                    = GetModConfigData("forge"),                                 --熔炉竞技场
+    fog                          = GetModConfigData("fog"),                                   --迷雾
+    hayfever                     = GetModConfigData("hayfever"),                              --花粉症
+    disembarkation               = GetModConfigData("automatic_disembarkation"),              --自动离船
+    bosslife                     = GetModConfigData("bosslife"),                              --巨兽生命值
 }
 --哈姆雷特
 TUNING.tropical.hamlet = TUNING.tropical.only_hamlet or (kindofworld == 15 and GetModConfigData("Hamlet") ~= 5)

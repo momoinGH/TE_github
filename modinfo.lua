@@ -855,10 +855,10 @@ configuration_options =
 			"It will generate the forge arena inside volcano. (will only affects custom and shipwrecked world)",
 			"将在火山内生成熔炉竞技场\n灵感来自官方的熔炉(ReForged)模组\n（仅影响自定义世界和海难世界）",
 			"將在火山內生成熔爐競技場\n靈感來自官方的熔爐(ReForged)模組\n（僅影響自定義世界和船難世界）"),
-		default = 1,
+		default = true,
 		options = {
-			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = 1, hover = en_zh_zht("Will generate the forge arena", "启用熔炉竞技场生成", "啟用熔爐競技場生成") },
-			{ description = en_zh_zht("Disabled", "禁用"), data = 0, hover = en_zh_zht("Will not generate the forge arena", "禁用熔炉竞技场生成", "禁用熔爐競技場生成") },
+			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = true, hover = en_zh_zht("Will generate the forge arena", "启用熔炉竞技场生成", "啟用熔爐競技場生成") },
+			{ description = en_zh_zht("Disabled", "禁用"), data = false, hover = en_zh_zht("Will not generate the forge arena", "禁用熔炉竞技场生成", "禁用熔爐競技場生成") },
 		},
 	},
 

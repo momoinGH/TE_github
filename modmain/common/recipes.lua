@@ -117,7 +117,7 @@ AddIngredientValues({ "syrup" }, { sweetener = 2 }, true, false)
 --AddIngredientValues({"tomato", "potato", "turnip", "garlic", "onion"}, {veggie=1}, true, false)
 AddIngredientValues({ "quagmire_flour" }, { flour = 1 }, true, false)
 AddIngredientValues({ "rocks" }, { rocks = 1 }, true, false)
-AddIngredientValues({ "sap" }, {}, true, false)
+AddIngredientValues({ "quagmire_sap" }, {}, true, false)
 AddIngredientValues({ "quagmire_goatmilk" }, { dairy = 1 }, true, false)
 UpdateCookingIngredientTags({ "red_cap", "green_cap", "blue_cap" }, { mushroom = 1 })
 UpdateCookingIngredientTags({ "smallmeat", "smallmeat_dried", "drumstick", "froglegs" }, { smallmeat = 1 })
@@ -215,7 +215,7 @@ if TUNING.tropical.shipwrecked_plus then
         TECH.SCIENCE_TWO, { placer = "pandahouse_placer", atlas = v_atlas }, { "STRUCTURES" })
 end
 
-if TUNING.tropical.gorgeisland or TUNING.tropical.shipwrecked_plus then
+if TUNING.tropical.quagmire or TUNING.tropical.shipwrecked_plus then
     AddRecipe2("galinheiro",
         { Ingredient("seeds", 6), Ingredient("boards", 4), Ingredient("feather_chicken", 2, cm_atlas) },
         TECH.SCIENCE_TWO, { placer = "galinheiro_placer", atlas = cm_atlas }, { "STRUCTURES" })

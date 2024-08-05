@@ -1,5 +1,3 @@
-require "brains/snakebrain"
-require "stategraphs/SGsnake2"
 
 local trace = function() end
 
@@ -309,7 +307,7 @@ local function fn(Sim)
 
 	MakeMediumFreezableCharacter(inst, "hound_body")
 
-	inst:SetStateGraph("SGsnake2")
+	inst:SetStateGraph("SGsnake_amphibious")
 
 	local brain = require "brains/snakebrain"
 	inst:SetBrain(brain)

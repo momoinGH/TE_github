@@ -460,50 +460,9 @@ local wallprefabs = {}
 --NOTE: Stacksize is now set in the actual recipe for the item.
 local walldata =
 {
-    -- { name = MATERIALS.STONE,       material = "stone", tags = { "stone" },          loot = "rocks",            maxloots = 2, maxhealth = TUNING.STONEWALL_HEALTH, buildsound = "dontstarve/common/place_structure_stone" },
-    -- { name = MATERIALS.STONE .. "_2", material = "stone", tags = { "stone" },        loot = "rocks",            maxloots = 2, maxhealth = TUNING.STONEWALL_HEALTH, buildsound = "dontstarve/common/place_structure_stone" },
-    -- { name = MATERIALS.WOOD,        material = "wood",  tags = { "wood" },           loot = "log",              maxloots = 2, maxhealth = TUNING.WOODWALL_HEALTH,  flammable = true,                                      buildsound = "dontstarve/common/place_structure_wood" },
-    -- { name = MATERIALS.HAY,         material = "straw", tags = { "grass" },          loot = "cutgrass",         maxloots = 2, maxhealth = TUNING.HAYWALL_HEALTH,   flammable = true,                                      buildsound = "dontstarve/common/place_structure_straw" },
-    { name = "ruins",             material = "stone", tags = { "stone", "ruins" }, loot = "thulecite_pieces", maxloots = 2, maxhealth = TUNING.RUINSWALL_HEALTH, buildsound = "dontstarve/common/place_structure_stone" },
-    { name = "ruins_2",           material = "stone", tags = { "stone", "ruins" }, loot = "thulecite_pieces", maxloots = 2, maxhealth = TUNING.RUINSWALL_HEALTH, buildsound = "dontstarve/common/place_structure_stone" },
-    -- {
-    --     name = MATERIALS.MOONROCK,
-    --     material = "stone",
-    --     tags = { "stone", "moonrock" },
-    --     loot = "moonrocknugget",
-    --     maxloots = 2,
-    --     maxwork = TUNING.MOONROCKWALL_WORK,
-    --     maxhealth = TUNING.MOONROCKWALL_HEALTH,
-    --     playerdamagemod = TUNING.MOONROCKWALL_PLAYERDAMAGEMOD,
-    --     buildsound = "dontstarve/common/place_structure_stone",
-    -- },
-    -- {
-    --     name = MATERIALS.DREADSTONE,
-    --     material = "stone",
-    --     tags = { "stone", "dreadstone" },
-    --     loot = "dreadstone",
-    --     maxloots = 2,
-    --     maxwork = TUNING.DREADSTONEWALL_WORK,
-    --     maxhealth = TUNING.DREADSTONEWALL_HEALTH,
-    --     playerdamagemod = TUNING.DREADSTONEWALL_PLAYERDAMAGEMOD,
-    --     repairhealth = TUNING.REPAIR_DREADSTONE_HEALTH * 4,
-    --     buildsound = "dontstarve/common/place_structure_stone",
-    -- },
-    -- {
-    --     name = "scrap",
-    --     material = "stone",
-    --     tags = { "stone", "scrap" },
-    --     loot = "wagpunk_bits",
-    --     maxloots = 1,
-    --     maxwork = TUNING.SCRAPWALL_WORK,
-    --     maxhealth = TUNING.SCRAPWALL_HEALTH,
-    --     playerdamagemod = TUNING.SCRAPWALL_PLAYERDAMAGEMOD,
-    --     repairhealth = TUNING.REPAIR_SCRAP_HEALTH * 4,
-    --     buildsound = "dontstarve/common/place_structure_stone",
-    -- },
-    { name = "enforcedlimestone", material = "stone", tags = { "stone" },          loot = "coral",            maxloots = 1, maxhealth = 750,                     buildsound = "dontstarve/common/place_structure_stone" },
-    { name = "limestone",         material = "stone", tags = { "stone" },          loot = "coral",            maxloots = 2, maxhealth = 500,                     buildsound = "dontstarve/common/place_structure_stone" },
-    { name = "pig_ruins",         material = "stone", tags = { "stone" },          loot = "rocks",            maxloots = 2, maxhealth = 500,                     buildsound = "dontstarve/common/place_structure_stone" },
+    { name = "enforcedlimestone", material = "stone", tags = { "stone" }, loot = "coral", maxloots = 1, maxhealth = 750, buildsound = "dontstarve/common/place_structure_stone" },
+    { name = "limestone",         material = "stone", tags = { "stone" }, loot = "coral", maxloots = 2, maxhealth = 500, buildsound = "dontstarve/common/place_structure_stone" },
+    { name = "pig_ruins",         material = "stone", tags = { "stone" }, loot = "rocks", maxloots = 2, maxhealth = 500, buildsound = "dontstarve/common/place_structure_stone" },
 }
 for i, v in ipairs(walldata) do
     local wall, item, placer = MakeWallType(v)

@@ -179,30 +179,6 @@ local function KeepTarget(inst, target)
             inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP))
 end
 
-local function IsNearMoonBase(inst, dist)
-    local moonbase = inst.components.entitytracker:GetEntity("moonbase")
-    return moonbase == nil or inst:IsNear(moonbase, dist)
-end
-
-local function moon_retargetfn(inst)
-    return IsNearMoonBase(inst, TUNING.MOONHOUND_AGGRO_DIST)
-        and FindEntity(
-            inst,
-            TUNING.HOUND_FOLLOWER_TARGET_DIST,
-            function(guy)
-                return inst.components.combat:CanTarget(guy)
-            end,
-            nil,
-            { "wall", "houndmound", "hound", "houndfriend", "moonbeast" }
-        )
-        or nil
-end
-
-local function moon_keeptargetfn(inst, target)
-    return IsNearMoonBase(inst, TUNING.MOONHOUND_RETURN_DIST)
-        and inst.components.combat:CanTarget(target)
-        and inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP)
-end
 
 local function OnAttacked(inst, data)
     inst.components.combat:SetTarget(data.attacker)
@@ -484,42 +460,9 @@ local function fncommon(bank, build, morphlist, custombrain, tag)
     return inst
 end
 
-local function fndefault()
-    local inst = fncommon("hound", "hound", { "firehound", "icehound" })
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    MakeMediumFreezableCharacter(inst, "hound_body")
-    MakeMediumBurnableCharacter(inst, "hound_body")
-
-    return inst
-end
 
 local function PlayFireExplosionSound(inst)
     inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/firehound_explo")
-end
-
-local function fnfire()
-    local inst = fncommon("hound", "hound_red", { "hound", "icehound" })
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    MakeMediumFreezableCharacter(inst, "hound_body")
-    inst.components.freezable:SetResistance(4) --because fire
-
-    inst.components.combat:SetDefaultDamage(TUNING.FIREHOUND_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.FIREHOUND_ATTACK_PERIOD)
-    inst.components.locomotor.runspeed = TUNING.FIREHOUND_SPEED
-    inst.components.health:SetMaxHealth(TUNING.FIREHOUND_HEALTH)
-    inst.components.lootdropper:SetChanceLootTable('hound_fire')
-
-    inst:ListenForEvent("death", PlayFireExplosionSound)
-
-    return inst
 end
 
 local function DoIceExplosion(inst)
@@ -539,73 +482,6 @@ local function DoIceExplosion(inst)
     inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/icehound_explo")
 end
 
-local function fncold()
-    local inst = fncommon("hound", "hound_ice", { "firehound", "hound" })
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    MakeMediumBurnableCharacter(inst, "hound_body")
-
-    inst.components.combat:SetDefaultDamage(TUNING.ICEHOUND_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.ICEHOUND_ATTACK_PERIOD)
-    inst.components.locomotor.runspeed = TUNING.ICEHOUND_SPEED
-    inst.components.health:SetMaxHealth(TUNING.ICEHOUND_HEALTH)
-    inst.components.lootdropper:SetChanceLootTable('hound_cold')
-
-    inst:ListenForEvent("death", DoIceExplosion)
-
-    return inst
-end
-
-local function OnMoonPetrify(inst)
-    if not inst.components.health:IsDead() and (not inst.sg:HasStateTag("busy") or inst:IsAsleep()) then
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local rot = inst.Transform:GetRotation()
-        inst:Remove()
-        local gargoyle = SpawnPrefab(gargoyles[math.random(#gargoyles)])
-        gargoyle.Transform:SetPosition(x, y, z)
-        gargoyle.Transform:SetRotation(rot)
-        gargoyle:Petrify()
-    end
-end
-
-local function OnMoonTransformed(inst, data)
-    if data.old.prefab ~= "hound" then
-        SpawnPrefab("small_puff").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    end
-    inst.sg:GoToState("taunt")
-end
-
-local function fnmoon()
-    local inst = fncommon("hound", "hound", nil, moonbrain, "moonbeast")
-
-    inst:SetPrefabNameOverride("hound")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    MakeMediumFreezableCharacter(inst, "hound_body")
-    MakeMediumBurnableCharacter(inst, "hound_body")
-
-    inst.components.freezable:SetDefaultWearOffTime(TUNING.MOONHOUND_FREEZE_WEAR_OFF_TIME)
-
-    inst.components.combat:SetDefaultDamage(TUNING.MOONHOUND_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.MOONHOUND_ATTACK_PERIOD)
-    inst.components.combat:SetRetargetFunction(3, moon_retargetfn)
-    inst.components.combat:SetKeepTargetFunction(moon_keeptargetfn)
-    inst.components.locomotor.runspeed = TUNING.MOONHOUND_SPEED
-    inst.components.health:SetMaxHealth(TUNING.MOONHOUND_HEALTH)
-
-    inst:AddComponent("entitytracker")
-
-    inst:ListenForEvent("moonpetrify", OnMoonPetrify)
-    inst:ListenForEvent("moontransformed", OnMoonTransformed)
-
-    return inst
-end
 
 local function OnClaySave(inst, data)
     data.reanimated = not inst.sg:HasStateTag("statue") or nil
@@ -621,49 +497,6 @@ local function OnClayUpdateOffset(inst, offset)
     inst.leader_offset = offset
 end
 
-local function fnclay()
-    local inst = fncommon("clayhound", "clayhound", nil, nil, "clay")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    MakeMediumFreezableCharacter(inst, "hound_body")
-
-    inst.components.lootdropper:SetChanceLootTable('clayhound')
-
-    inst.OnSave = OnClaySave
-    inst.OnLoad = nil
-    inst.OnPreLoad = OnClayPreLoad
-    inst.OnUpdateOffset = OnClayUpdateOffset
-
-    return inst
-end
-
-local function fnfiredrop()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    MakeLargeBurnable(inst, 6 + math.random() * 6)
-    MakeLargePropagator(inst)
-
-    --Remove the default handlers that toggle persists flag
-    inst.components.burnable:SetOnIgniteFn(nil)
-    inst.components.burnable:SetOnExtinguishFn(inst.Remove)
-    inst.components.burnable:Ignite()
-
-    return inst
-end
 
 local function fndefaultb()
     local inst = fncommon("hound", "hound", { "firehound", "icehound" })

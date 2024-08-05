@@ -781,12 +781,14 @@ end
 AddComponentPostInit("embarker", function(self)
     Utils.FnDecorator(self, "GetEmbarkPosition", function(self)
         if self.embarkable ~= nil and self.embarkable:IsValid() then
-            local x, _, z = self.inst.Transform:GetWorldPosition()
-            local embarkable_radius = 0.1
-            local alvo = GetClosestInstWithTag("barcoapto", self.inst, 6) or self.inst.Transform:GetWorldPosition()
-            local embarkable_x, embarkable_y, embarkable_z = alvo.Transform:GetWorldPosition()
-            local embark_x, embark_z = VecUtil_Normalize(x - embarkable_x, z - embarkable_z)
-            return embarkable_x + embark_x * embarkable_radius, embarkable_z + embark_z * embarkable_radius
+            local alvo = GetClosestInstWithTag("barcoapto", self.inst, 6)
+            if alvo then
+                local x, _, z = self.inst.Transform:GetWorldPosition()
+                local embarkable_radius = 0.1
+                local embarkable_x, embarkable_y, embarkable_z = alvo.Transform:GetWorldPosition()
+                local embark_x, embark_z = VecUtil_Normalize(x - embarkable_x, z - embarkable_z)
+                return { embarkable_x + embark_x * embarkable_radius, embarkable_z + embark_z * embarkable_radius }, true
+            end
         end
     end)
 end)

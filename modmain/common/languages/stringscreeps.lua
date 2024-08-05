@@ -649,7 +649,6 @@ GLOBAL.STRINGS.ACTIONS.KILLSOFTLY                                         = "Sla
 STRINGS.NAMES.FLOUR                                                       = "Flour"
 STRINGS.NAMES.SAPTREE                                                     = "Sugarwood Tree"
 STRINGS.NAMES.SAPBUCKET                                                   = "Sapbucket"
-STRINGS.NAMES.SAP                                                         = "Sap"
 STRINGS.NAMES.SYRUP                                                       = "Syrup"
 STRINGS.NAMES.BREAD                                                       = "Bread"
 STRINGS.NAMES.CHIPS                                                       = "Chips"

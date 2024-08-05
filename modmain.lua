@@ -39,7 +39,7 @@ local function Modimport(dirc)
 	if PrefabFiles and #PrefabFiles > 0 then
 		ALL_PREFAB_FILES = ArrayUnion(ALL_PREFAB_FILES, PrefabFiles)
 	end
-	GLOBAL.PrefabFiles = {}
+	PrefabFiles = {}
 end
 
 -- 默认
@@ -48,9 +48,13 @@ Modimport("common")
 if TUNING.tropical.windyplains ~= 5 then
 	Modimport("windy")
 end
--- 海洋、海底
-if TUNING.tropical.only_sea or TUNING.tropical.underwater then
+-- 海洋
+if TUNING.tropical.only_sea then
 	Modimport("sea")
+end
+-- 海底
+if TUNING.tropical.underwater then
+	Modimport("underwater")
 end
 -- 哈姆雷特
 if TUNING.tropical.hamlet then
@@ -65,8 +69,8 @@ if TUNING.tropical.shipwrecked_plus then
 	Modimport("shipwrecked_plus")
 end
 -- 熔炉竞技场
-if TUNING.tropical.forge then
-	Modimport("forge")
+if TUNING.tropical.lavaarena then
+	Modimport("lavaarena")
 	modimport("scripts/complementos.lua")
 end
 -- 绿色世界
@@ -78,8 +82,8 @@ if TUNING.tropical.frost_island ~= 5 then
 	Modimport("frostisland")
 end
 -- 暴食
-if TUNING.tropical.gorgeisland then
-	Modimport("gorgeisland")
+if TUNING.tropical.quagmire then
+	Modimport("quagmire")
 end
 
 PrefabFiles = ALL_PREFAB_FILES

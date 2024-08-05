@@ -107,7 +107,7 @@ return {
           visible = true,
           properties = {}
         },
-		
+
         {
           name = "",
           type = "quagmire_trader_merm3",
@@ -118,7 +118,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
+        },
 
         {
           name = "",
@@ -203,7 +203,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
+        },
         {
           name = "",
           type = "rabbit",
@@ -247,7 +247,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
+        },
         {
           name = "",
           type = "quagmire_mealingstone",
@@ -258,7 +258,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
+        },
 
         {
           name = "",
@@ -1155,7 +1155,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_tall",
+          type = "cottontree_tall",
           shape = "rectangle",
           x = 2013,
           y = 1309,
@@ -1166,7 +1166,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 2077,
           y = 992,
@@ -1177,7 +1177,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 2130,
           y = 929,
@@ -1188,7 +1188,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_tall",
+          type = "cottontree_tall",
           shape = "rectangle",
           x = 2161,
           y = 1048,
@@ -1199,7 +1199,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 2213,
           y = 871,
@@ -1210,7 +1210,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 2394,
           y = 851,
@@ -1221,7 +1221,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 2404,
           y = 959,
@@ -1243,7 +1243,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 2369,
           y = 1048,
@@ -1254,7 +1254,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_tall",
+          type = "cottontree_tall",
           shape = "rectangle",
           x = 2344,
           y = 1193,
@@ -1265,7 +1265,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 2258,
           y = 1287,
@@ -1276,7 +1276,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_short",
+          type = "cottontree_small",
           shape = "rectangle",
           x = 2232,
           y = 1324,
@@ -1287,7 +1287,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 2214,
           y = 1473,
@@ -1298,7 +1298,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 2273,
           y = 1428,
@@ -1309,7 +1309,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_tall",
+          type = "cottontree_tall",
           shape = "rectangle",
           x = 2136,
           y = 1456,
@@ -1320,7 +1320,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_short",
+          type = "cottontree_small",
           shape = "rectangle",
           x = 2041,
           y = 1500,
@@ -1331,7 +1331,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 1933,
           y = 1431,
@@ -1353,7 +1353,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 2014,
           y = 1063,
@@ -1507,7 +1507,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 1959,
           y = 1122,
@@ -1518,7 +1518,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 1961,
           y = 1250,
@@ -1529,7 +1529,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_tall",
+          type = "cottontree_tall",
           shape = "rectangle",
           x = 2012,
           y = 1122,
@@ -1540,7 +1540,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_short",
+          type = "cottontree_small",
           shape = "rectangle",
           x = 2016,
           y = 1250,
@@ -1551,7 +1551,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 2388,
           y = 1110,
@@ -1562,7 +1562,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_normal",
+          type = "cottontree_normal",
           shape = "rectangle",
           x = 1907,
           y = 1251,
@@ -1573,7 +1573,7 @@ return {
         },
         {
           name = "",
-          type = "sugarwood_tall",
+          type = "cottontree_tall",
           shape = "rectangle",
           x = 1905,
           y = 1123,
@@ -2148,7 +2148,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-		 },
+        },
         {
           name = "",
           type = "rabbit",
@@ -2525,8 +2525,8 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },	
-			
+        },
+
         {
           name = "",
           type = "evergreen_sparse",
@@ -4456,7 +4456,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-		},
+        },
         {
           name = "",
           type = "quagmire_rubble_carriage",
@@ -4742,7 +4742,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },	  
+        },
         {
           name = "",
           type = "quagmire_swampigelder",
@@ -4754,7 +4754,7 @@ return {
           visible = true,
           properties = {}
         },
-		
+
         {
           name = "",
           type = "quagmire_swampig_house_rubble",
@@ -5208,7 +5208,7 @@ return {
           visible = true,
           properties = {}
         },
-		
+
         {
           name = "",
           type = "evergreen",
@@ -5505,49 +5505,49 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         {
           name = "",
           type = "evergreen",

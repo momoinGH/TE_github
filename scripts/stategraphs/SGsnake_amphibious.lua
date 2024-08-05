@@ -352,4 +352,4 @@ CommonStates.AddRunStates(states,
 CommonStates.AddFrozenStates(states)
 
 
-return StateGraph("snake2", states, events, "taunt", actionhandlers)
+return StateGraph("snake_amphibious", states, events, "taunt", actionhandlers)

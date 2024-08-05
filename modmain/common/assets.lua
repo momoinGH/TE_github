@@ -171,7 +171,7 @@ Assets =
 	Asset("IMAGE", "images/buttongorge.tex"),
 }
 
-if TUNING.tropical.gorgeisland and TUNING.tropical.kindofworld == 15 or GetModConfigData("enableallprefabs") == true then
+if TUNING.tropical.quagmire and TUNING.tropical.kindofworld == 15 or GetModConfigData("enableallprefabs") == true then
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/quagmirefoods.xml"))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/quagmirefoods.tex"))
 end
@@ -311,7 +311,7 @@ local dictInventoryItems = {
 		"porto_fish_farm", "porto_lograft", "porto_lograft_old", "porto_raft", "porto_raft_old", "porto_researchlab5",
 		"porto_rowboat", "porto_sea_chiminea", "porto_sea_yard", "porto_surfboard", "porto_tar_extractor",
 		"porto_waterchest1", "porto_woodlegsboat", "radish_oversized", "radish_oversized_waxed", "raft_old",
-		"rhinocebrosbattle", "salmon", "salmon_cooked", "sap", "sap_spoiled", "sapbucket", "seacucumber",
+		"rhinocebrosbattle", "salmon", "salmon_cooked", "sap_spoiled", "sapbucket", "seacucumber",
 		"seacucumber_cooked", "seagullwater", "seataro", "seataro_cooked", "shadowmower_builder", "shard_beak",
 		"shard_sword", "sharxocean", "snowitem", "spiderbattle", "spore_yellow", "stonebar", "surfboard", "surfboarditem",
 		"swbait", "sweet_potato_oversized", "sweet_potato_oversized_waxed", "swineclopsbattle", "swordfishjocean",
@@ -391,7 +391,7 @@ local dictInventoryItems = {
 		"potato_soup_bowl_silver", "potato_soup", "pudding_plate_generic", "pudding_plate_gold", "pudding_plate_silver",
 		"pudding", "ratatouille_bowl_generic", "ratatouille_bowl_gold", "ratatouille_bowl_silver",
 		"roasted_veggies_plate_generic", "roasted_veggies_plate_gold", "roasted_veggies_plate_silver", "roasted_veggies",
-		"sap", "sausage_plate_generic", "sausage_plate_gold", "sausage_plate_silver", "sausage", "scone_plate_generic",
+		 "sausage_plate_generic", "sausage_plate_gold", "sausage_plate_silver", "sausage", "scone_plate_generic",
 		"scone_plate_gold", "scone_plate_silver", "scone", "shepherds_pie_plate_generic", "shepherds_pie_plate_gold",
 		"shepherds_pie_plate_silver", "shepherds_pie", "shooter_sandwich_plate_generic", "shooter_sandwich_plate_gold",
 		"shooter_sandwich_plate_silver", "shooter_sandwich", "slider_plate_generic", "slider_plate_gold",

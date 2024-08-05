@@ -1,8 +1,8 @@
 local assets =
 {
-	Asset("ANIM", "anim/trident_sw.zip"),
-	Asset("ANIM", "anim/swap_trident_sw.zip"),
-	--Asset("INV_IMAGE", "trident_sw"),
+    Asset("ANIM", "anim/trident_sw.zip"),
+    Asset("ANIM", "anim/swap_trident_sw.zip"),
+    --Asset("INV_IMAGE", "trident_sw"),
 }
 
 local prefabs =
@@ -11,7 +11,7 @@ local prefabs =
 }
 
 local TRIDENT_SW_DAMAGE = TUNING.SPEAR_DAMAGE
-local TRIDENT_SW_OCEAN_DAMAGE = TUNING.SPEAR_DAMAGE*3
+local TRIDENT_SW_OCEAN_DAMAGE = TUNING.SPEAR_DAMAGE * 3
 
 local function trident_damage_calculation(inst, attacker, target)
     local is_over_ground = TheWorld.Map:IsVisualGroundAtPoint(attacker:GetPosition():Get())
@@ -27,7 +27,7 @@ local function on_uses_finished(inst)
 end
 
 local function onfinished(inst)
-	inst:Remove()
+    inst:Remove()
 end
 
 local function OnEquip(inst, owner)
@@ -41,35 +41,35 @@ local function OnUnequip(inst, owner)
     owner.AnimState:Show("ARM_normal")
 end
 
-local FLOATER_SWAP_DATA = {sym_build = "swap_trident_sw"}
+local FLOATER_SWAP_DATA = { sym_build = "swap_trident_sw" }
 
 local function fn()
-	local inst = CreateEntity()
+    local inst = CreateEntity()
 
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddNetwork()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
 
-	MakeInventoryPhysics(inst)
+    MakeInventoryPhysics(inst)
 
     inst:AddTag("pointy")
     inst:AddTag("sharp")
     inst:AddTag("weapon")
 
     inst.AnimState:SetBank("trident_sw")
-	inst.AnimState:SetBuild("trident_sw")
-	inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetBuild("trident_sw")
+    inst.AnimState:PlayAnimation("idle")
 
-    MakeInventoryFloatable(inst, "med", 0.05, {1.1, 0.5, 1.1}, true, -9, FLOATER_SWAP_DATA)
+    MakeInventoryFloatable(inst, "med", 0.05, { 1.1, 0.5, 1.1 }, true, -9, FLOATER_SWAP_DATA)
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     --inst.scrapbook_weapondamage = { TRIDENT_SW.DAMAGE, TRIDENT_SW.OCEAN_DAMAGE }
-	
+
     -------
 
     inst:AddComponent("weapon")
@@ -78,9 +78,9 @@ local function fn()
     -------
 
     inst:AddComponent("finiteuses")
-	inst.components.finiteuses:SetMaxUses(TUNING.SPEAR_USES)
-	inst.components.finiteuses:SetUses(TUNING.SPEAR_USES)
-	
+    inst.components.finiteuses:SetMaxUses(TUNING.SPEAR_USES)
+    inst.components.finiteuses:SetUses(TUNING.SPEAR_USES)
+
     inst.components.finiteuses:SetOnFinished(on_uses_finished)
 
     -------
@@ -113,7 +113,7 @@ local function fn()
 
     MakeHauntableLaunch(inst)
 
-	return inst
+    return inst
 end
 
-return Prefab( "trident_sw", fn, assets)
+return Prefab("trident_sw", fn, assets)

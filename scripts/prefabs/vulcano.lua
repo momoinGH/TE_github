@@ -432,7 +432,7 @@ local function entrance()
 				end
 			end
 			-----------------------SPAWN-----------------------------------------
-			if TUNING.tropical.forge == 1 then
+			if TUNING.tropical.lavaarena then
 				local part = SpawnPrefab("lavaarena_entrance")
 				if part ~= nil then
 					part.Transform:SetPosition(x - 170, 0, z + 170)

@@ -54,5 +54,5 @@ local function MakeSap(name, fresh)
 	return Prefab(name, fn, assets, fresh and prefabs or nil)
 end
 
-return MakeSap("sap", true),
-	MakeSap("sap_spoiled", false)
+return MakeSap("quagmire_sap", true),
+	MakeSap("quagmire_sap_spoiled", false)

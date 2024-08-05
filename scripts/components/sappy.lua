@@ -141,7 +141,7 @@ function Sappy:MakeSappy(level, rotten)
 	if rotten then
 		self.inst.AnimState:OverrideSymbol("swap_sapbucket", "quagmire_sapbucket",
 			"swap_sapbucket_" .. BUCKET_LEVELS[level] .. "_spoiled")
-		self.sap = "sap_spoiled"
+		self.sap = "quagmire_sap_spoiled"
 
 		if self.inst.flies == nil then
 			self.inst.flies = self.inst:SpawnChild("flies")
@@ -149,7 +149,7 @@ function Sappy:MakeSappy(level, rotten)
 	else
 		self.inst.AnimState:OverrideSymbol("swap_sapbucket", "quagmire_sapbucket",
 			"swap_sapbucket_" .. BUCKET_LEVELS[level])
-		self.sap = "sap"
+		self.sap = "quagmire_sap"
 	end
 
 	self.has_sap = true

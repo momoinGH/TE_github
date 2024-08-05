@@ -3,7 +3,6 @@ PrefabFiles = {
     "frog_poison",
     -- "frog_poison2",
     "oxherd",
-    "oxherd",
     "grass_tall",
     "deep_jungle_fern_noise",
     "vampirebatcave",
@@ -11,10 +10,72 @@ PrefabFiles = {
     "vampitecave_deco",
     "roc_cave_entrance",
     "roc_cave_interior",
-
-  
-  
-  
+    "seataro_planted",
+    "cork",
+    "corkbat",
+    "hats_hamlet",
+    "sedimentpuddle",
+    "snake_amphibious",
+    "bramble",
+    "bramble_bulb",
+    "dungball",
+    "dungbeetle",
+    "dungpile",
+    "chitin",
+    "birds_ham",
+    "blunderbuss",
+    "cloudpuff",
+    "rug",
+    "shears",
+    "gold_dust",
+    "goldpan",
+    "nectar_pod",
+    "poisonbalm",
+    "basefan",
+    "birdwhistle",
+    "lavapool",
+    "pugalisk_skull",
+    "herald_tatters",
+    "infused_iron",
+    "hogusporkusator",
+    "pigbanditexit",
+    "vampirebat",
+    "aporkalypse_clock",
+    "hanging_vine",
+    "grabbing_vine",
+    "poisonbubble",
+    "tunacan",
+    "edgefog",
+    "shadowwaxwell_boat",
+    "wave_ripple",
+    "ashfx",
+    "firerain",
+    "lavapool",
+    "roc_nest",
+    "glowfly",
+    "rabid_beetle",
+    "pig_scepter",
+    "roc_robin_egg",
+    "ro_bin_gizzard_stone",
+    "ro_bin",
+    "gnatmound",
+    "gnat",
+    "fabric",
+    "spider_monkey_tree",
+    "spider_monkey",
+    "spider_monkey_herd",
+    "peagawkfeather_prism",
+    "wreck",
+    "fishinhole",
+    "poisonmistparticle",
+    "deco_swinging_light",
+    "deco_lightglow",
+    "chicken",
+    "peekhen",
+    "peekhenspawner",
+    "snapdragon",
+    "snapdragonherd",
+    "zeb",
 
     ------------------------------------------------------------------------------------------------
 
@@ -104,17 +165,104 @@ PrefabFiles = {
     "laser",
     "iron",
     "pheromonestone",
+    "anthill_interior",
+    "anthill_lamp",
+    "anthill_stalactite",
+    "antchest",
+    "corkchest",
+    "antcombhomecave",
+    "giantgrub",
+    "antqueen",
+    "rocksham",
+    "deco_ruins_fountain",
+
+    "pig_ruins_entrance_interior",
+    "pig_ruins_entrance",
+    "pig_ruins_dart_statue",
+    "pig_ruins_dart",
+    "pig_ruins_creeping_vines",
+    "pig_ruins_pressure_plate",
+    "pig_ruins_spear_trap",
+    "smashingpot",
+    "pig_ruins_light_beam",
+    "littlehammer",
+    "relics",
+    "gascloud",
+    "bugrepellent",
+
+    "teatree_nut",
+    "teatrees",
+    "piko",
+    "clawpalmtrees",
+    "clawpalmtree_sapling",
+    "bugfood",
+    "rock_flippable",
+    "peagawkfeather",
+    "peagawk",
+    "aloe",
+    "pog",
+    "weevole",
+    "weevole_carapace",
+    "armor_weevole",
+    "pugalisk",
+    "pugalisk_trap_door",
+    "pugalisk_ruins_pillar",
+    "pugalisk_fountain",
+    "waterdrop",
+    "floweroflife",
+    "gaze_beam",
+    "snake_bone",
+    "mandrakehouse",
+    "mandrakeman",
+
+    "jungle_border_vine",
+    "light_rays_ham",
+    "nettle",
+    "nettle_plant",
+    "rainforesttrees",
+    "rainforesttree_sapling",
+    "tree_pillar",
+    "flower_rainforest",
+    "pig_ruins_torch",
+    "mean_flytrap",
+    "radish",
+    "adult_flytrap",
+    "antman_warrior_egg",
+    "antman_warrior",
+    "antman",
+    "antlarva",
+    "anthill",
+    "antsuit",
+    "venus_stalk",
+    "walkingstick",
+    "cloudpuff",
+    "seatarospawner",
+    "scorpion",
+    "anthillcave",
+    "anthill_cavelamp",
+    "froglegs_poison",
+    "cave_entrance_ham",
+    "preparedfoods_tro",
+    "bonestaff",
+    "spider_ape",
+    "spider_ape_tree",
+    "peagawk_prism",
+    "city_lamp2",
+    "pig_guard_tower2",
+    "wall_spawn_city",
+    "deco_util",
+    "deco_util2",
+
+
+
+
+
+
+
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
 
 
 if GetModConfigData("luajit") then
@@ -126,76 +274,3 @@ else
         table.insert(PrefabFiles, "pig_ruins_maze")
     end
 end
-
-table.insert(PrefabFiles, "anthill_interior")
-table.insert(PrefabFiles, "anthill_lamp")
-table.insert(PrefabFiles, "anthill_stalactite")
-table.insert(PrefabFiles, "antchest")
-table.insert(PrefabFiles, "corkchest")
-table.insert(PrefabFiles, "antcombhomecave")
-table.insert(PrefabFiles, "giantgrub")
-table.insert(PrefabFiles, "antqueen")
-table.insert(PrefabFiles, "rocksham")
-table.insert(PrefabFiles, "deco_ruins_fountain")
-
-table.insert(PrefabFiles, "pig_ruins_entrance_interior")
-table.insert(PrefabFiles, "pig_ruins_entrance")
-table.insert(PrefabFiles, "pig_ruins_dart_statue")
-table.insert(PrefabFiles, "pig_ruins_dart")
-table.insert(PrefabFiles, "pig_ruins_creeping_vines")
-table.insert(PrefabFiles, "pig_ruins_pressure_plate")
-table.insert(PrefabFiles, "pig_ruins_spear_trap")
-table.insert(PrefabFiles, "smashingpot")
-table.insert(PrefabFiles, "pig_ruins_light_beam")
-table.insert(PrefabFiles, "littlehammer")
-table.insert(PrefabFiles, "relics")
-table.insert(PrefabFiles, "gascloud")
-table.insert(PrefabFiles, "bugrepellent")
-
-
-table.insert(PrefabFiles, "teatree_nut")
-table.insert(PrefabFiles, "teatrees")
-table.insert(PrefabFiles, "piko")
-table.insert(PrefabFiles, "clawpalmtrees")
-table.insert(PrefabFiles, "clawpalmtree_sapling")
-table.insert(PrefabFiles, "bugfood")
-table.insert(PrefabFiles, "rock_flippable")
-table.insert(PrefabFiles, "peagawkfeather")
-table.insert(PrefabFiles, "peagawk")
-table.insert(PrefabFiles, "aloe")
-table.insert(PrefabFiles, "pog")
-table.insert(PrefabFiles, "weevole")
-table.insert(PrefabFiles, "weevole_carapace")
-table.insert(PrefabFiles, "armor_weevole")
-table.insert(PrefabFiles, "pugalisk")
-table.insert(PrefabFiles, "pugalisk_trap_door")
-table.insert(PrefabFiles, "pugalisk_ruins_pillar")
-table.insert(PrefabFiles, "pugalisk_fountain")
-table.insert(PrefabFiles, "waterdrop")
-table.insert(PrefabFiles, "floweroflife")
-table.insert(PrefabFiles, "gaze_beam")
-table.insert(PrefabFiles, "snake_bone")
-table.insert(PrefabFiles, "mandrakehouse")
-table.insert(PrefabFiles, "mandrakeman")
-
-table.insert(PrefabFiles, "jungle_border_vine")
-table.insert(PrefabFiles, "light_rays_ham")
-table.insert(PrefabFiles, "nettle")
-table.insert(PrefabFiles, "nettle_plant")
-table.insert(PrefabFiles, "rainforesttrees")
-table.insert(PrefabFiles, "rainforesttree_sapling")
-table.insert(PrefabFiles, "tree_pillar")
-table.insert(PrefabFiles, "flower_rainforest")
-table.insert(PrefabFiles, "pig_ruins_torch")
-table.insert(PrefabFiles, "mean_flytrap")
-table.insert(PrefabFiles, "radish")
-table.insert(PrefabFiles, "adult_flytrap")
-table.insert(PrefabFiles, "antman_warrior_egg")
-table.insert(PrefabFiles, "antman_warrior")
-table.insert(PrefabFiles, "antman")
-table.insert(PrefabFiles, "antlarva")
-table.insert(PrefabFiles, "anthill")
-table.insert(PrefabFiles, "antsuit")
-table.insert(PrefabFiles, "venus_stalk")
-table.insert(PrefabFiles, "walkingstick")
-table.insert(PrefabFiles, "cloudpuff")

@@ -86,13 +86,18 @@ PrefabFiles = {
   "hail",
   "spearlauncher",
   "speargun",
-
-
-
-
-
-
-
+  "armor_cactus",
+  "seasack",
+  "magic_seal",
+  "wind_conch",
+  "sail_stick",
+  "armor_windbreaker",
+  "vine",
+  "lavapool",
+  "obsidian",
+  "armor_limestone",
+  "bermudatriangle",
+  "dragoonegg", --jogo da erro de memoria se tirar
 
 
 
@@ -202,10 +207,103 @@ PrefabFiles = {
   "tigereye",
   "packim",
   "packim_fishbone",
+
+
+
+  "poisonbubble",
+  "tunacan",
+  "edgefog",
+  "shadowwaxwell_boat",
+  "wave_ripple",
+
+  "ashfx",
+  "firerain",
+  "lavapool",
+  "mermhouse_fisher",
+  "fabric",
+  "coral",
+
+  "seaweed_planted",
+  "seaweed",
+  "wreck",
+  "fishinhole",
+  "octopusking",
+  "kraken_tentacle",
+  "kraken_projectile",
+  "kraken",
+  "solofish",
+  "swordfish",
+  "sharx",
+  "stungray",
+  "redbarrel",
+  "lobsterhole",
+  "mussel",
+  "bioluminescence",
+  "rawling",
+  "coral_brain_rock",
+  "coral_brain",
+  "limestone",
+  "shark_fin",
+  "rainbowjellyfish",
+  "rainbowjellyfish_planted",
+  "sea_yard",
+  "sea_yard_arms_fx",
+  "tar",
+  "tar_pool",
+  "bioluminescence_spawner",
+  "ballphin",
+  "ballphinhouse",
+  "dorsalfin",
+  "ballphinpod",
+  "jellyfish",
+  "jellyfish_planted",
+  "crocodog_spawner",
+  "crocodog",
+  "whale",
+  "whale_carcass",
+  "jungletreeguard",
+  "jungletreeguard_snake",
+  -- "ox_wool", --水牛毛
+  -- "conch", --海螺
+  "krakenchest",
+  "spearsw",
+  "rookwater",
+  "whaletrack",
+  "panda",
+  "pandaskin",
+  "pandatree",
+  "floodsw",
+  "galinheiro",
+  "palmleaf_umbrella",
+  "blowdart_sw",
+  "piratihatitator",
+  "walls_tropical",
+  "trident_sw",
+  "boatraft",
+  "tigersharkpool",
+  "tigersharktorch",
+  "volcanostaff",
+  "armor_snakeskin",
+  "mangrovetrees",
+  "mangrovetreesbee",
+  "grass_water",
+  "kraken_jellyfish",
+  "kraken_spawner",
+  "pirateghost",
+  "waterygrave",
+  "armouredboat",
+  "cargoboat",
+  "flotsam_debris_sw",
+  "encrustedboat",
+
+
+
+
+
+
+
+
 }
-
-
-
 
 
 

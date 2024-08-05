@@ -451,4 +451,5 @@ local function fn()
     return inst
 end
 
+-- TODO 重新定义了一个水中木，这个有什么特别的吗
 return Prefab("watertree_pillar2", fn, assets, prefabs)

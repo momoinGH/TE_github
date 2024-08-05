@@ -176,4 +176,5 @@ local function fn()
     return inst
 end
 
+-- TODO 有啥特点
 return Prefab("boarmound", fn, assets, prefabs)

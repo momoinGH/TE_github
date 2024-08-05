@@ -70,14 +70,16 @@ local function fn()
 	inst.Transform:SetFourFaced()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
+	inst.entity:AddPhysics()
+	inst.entity:AddNetwork()
+
 	inst.overridebuild = "rowboat_cargo_build"
 	inst.banc = "rowboat"
-	inst.entity:AddNetwork()
-	--	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-	--	inst.AnimState:SetSortOrder(0)
 
 	MakeWaterObstaclePhysics(inst, 0.5, 2, 1.25)
 
+	--	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+	--	inst.AnimState:SetSortOrder(0)
 	inst.AnimState:SetBuild("rowboat_cargo_build")
 	inst.AnimState:SetBank("rowboat")
 	inst.AnimState:PlayAnimation("run_loop", true)
@@ -90,7 +92,8 @@ local function fn()
 	inst:AddTag("aquatic")
 	inst:AddTag("ignorewalkableplatforms")
 
-	inst.entity:AddPhysics()
+	inst:AddComponent("walkableplatform")
+
 	inst.Physics:SetCylinder(0.25, 2)
 
 	inst.entity:SetPristine()

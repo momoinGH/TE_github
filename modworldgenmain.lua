@@ -15653,7 +15653,7 @@ else
 		value = GROUND.BEARDRUG,
 		tags = { "RoadPoison", "tropical" },
 		contents = {
-			countstaticlayouts = { ["volcano_altar"] = TUNING.tropical.forge, },
+			countstaticlayouts = { ["volcano_altar"] = TUNING.tropical.lavaarena and 1 or 0, },
 			distributepercent = .1,
 			distributeprefabs =
 			{
@@ -15678,7 +15678,7 @@ else
 		value = GROUND.BEARDRUG,
 		tags = { "RoadPoison", "tropical" },
 		contents = {
-			countstaticlayouts = { ["lava_arena"] = TUNING.tropical.forge, },
+			countstaticlayouts = { ["lava_arena"] = TUNING.tropical.lavaarena and 1 or 0, },
 			distributepercent = .1,
 			distributeprefabs =
 			{
@@ -18937,7 +18937,7 @@ else
 		value = GROUND.BEARDRUG,
 		tags = { "RoadPoison" },
 		contents = {
-			countstaticlayouts = { ["volcano_altar"] = TUNING.tropical.forge, },
+			countstaticlayouts = { ["volcano_altar"] = TUNING.tropical.lavaarena and 1 or 0, },
 			distributepercent = .1,
 			distributeprefabs =
 			{
@@ -18963,7 +18963,7 @@ else
 		value = GROUND.BEARDRUG,
 		tags = { "RoadPoison" },
 		contents = {
-			countstaticlayouts = { ["lava_arena"] = TUNING.tropical.forge, },
+			countstaticlayouts = { ["lava_arena"] = TUNING.tropical.lavaarena and 1 or 0, },
 			distributepercent = .1,
 			distributeprefabs =
 			{
@@ -27353,7 +27353,7 @@ else
 			end
 
 
-			if TUNING.tropical.gorgeisland then
+			if TUNING.tropical.quagmire then
 				table.insert(taskset.tasks, "gorgeisland")
 				table.insert(taskset.tasks, "quagmirepink")
 				table.insert(taskset.tasks, "quagmireblue")
@@ -27731,7 +27731,7 @@ else
 				}
 			end
 
-			if GetModConfigData("Together") == 20 and TUNING.tropical.gorgeisland then
+			if GetModConfigData("Together") == 20 and TUNING.tropical.quagmire then
 				taskset.set_pieces["mermtrader3setmainland"] = { count = 1, tasks = { "Make a pick", "MDig that rock", "MGreat Plains", "MSqueltch", "MBeeeees!", "MSpeak to the king", "MForest hunters", "MBadlands", "MFor a nice walk", "MLightning Bluff" } }
 			end
 
