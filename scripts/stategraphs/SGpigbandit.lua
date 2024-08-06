@@ -26,8 +26,7 @@ local events =
 
 local states =
 {
-    State
-    {
+    State {
         name = "funnyidle",
         tags = { "idle" },
 
@@ -60,8 +59,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "frozen",
         tags = { "busy" },
 
@@ -71,8 +69,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "death",
         tags = { "busy" },
 
@@ -85,8 +82,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "attack",
         tags = { "attack", "busy" },
 
@@ -113,8 +109,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "eat",
         tags = { "busy" },
 
@@ -134,8 +129,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "hit",
         tags = { "busy", "evade" },
 
@@ -159,8 +153,7 @@ local states =
         },
     },
     --[[
-    State
-    {
+    State{
         name = "hit", --evade
         tags = {"busy", "evade","no_stun"},
 
@@ -177,8 +170,7 @@ local states =
         },
     },
 ]]
-    State
-    {
+    State {
         name = "evade_loop",
         tags = { "busy", "evade", "no_stun" },
 
@@ -208,8 +200,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "evade_pst",
         tags = { "busy", "evade", "no_stun" },
 
@@ -235,8 +226,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "disappear",
         tags = { "doing", "busy" },
 
@@ -259,8 +249,7 @@ local states =
     },
 
 
-    State
-    {
+    State {
         name = "pickup",
         tags = { "busy" },
 

@@ -18,8 +18,11 @@ local events =
     EventHandler("attacked",
         function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("hit") end end),
     EventHandler("doattack",
-        function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
-                inst.sg:GoToState("attack", data.target) end end),
+        function(inst, data)
+            if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+                inst.sg:GoToState("attack", data.target)
+            end
+        end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("trapped", function(inst) inst.sg:GoToState("trapped") end),
     EventHandler("locomote",
@@ -48,8 +51,7 @@ local events =
 
 local states =
 {
-    State
-    {
+    State {
         name = "look",
         tags = { "idle", "canrotate" },
 
@@ -88,8 +90,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "idle",
         tags = { "idle", "canrotate" },
 
@@ -116,8 +117,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "attack",
         tags = { "attack" },
 
@@ -139,8 +139,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "action",
 
         onenter = function(inst, playanim)
@@ -155,8 +154,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "ascendtree",
 
         onenter = function(inst, playanim)
@@ -173,8 +171,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "descendtree",
 
         onenter = function(inst, playanim)
@@ -190,8 +187,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "eat",
 
         onenter = function(inst)
@@ -207,8 +203,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "pickup",
 
         onenter = function(inst)
@@ -226,8 +221,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "pickup_pst",
 
         onenter = function(inst)
@@ -242,8 +236,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "hop",
         tags = { "moving", "canrotate", "hopping" },
 
@@ -272,8 +265,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "run",
         tags = { "moving", "running", "canrotate" },
 
@@ -297,8 +289,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "death",
         tags = { "busy" },
 
@@ -312,8 +303,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "fall",
         tags = { "busy", "stunned" },
 
@@ -348,8 +338,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "stunned",
         tags = { "busy", "stunned" },
 
@@ -371,8 +360,7 @@ local states =
         ontimeout = function(inst) inst.sg:GoToState("idle") end,
     },
 
-    State
-    {
+    State {
         name = "trapped",
         tags = { "busy", "trapped" },
 
@@ -386,8 +374,7 @@ local states =
         ontimeout = function(inst) inst.sg:GoToState("idle") end,
     },
 
-    State
-    {
+    State {
         name = "hit",
         tags = { "busy" },
 

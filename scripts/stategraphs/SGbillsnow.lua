@@ -40,8 +40,7 @@ local events =
 
 local states =
 {
-	State
-	{
+	State {
 		name = "surface",
 		tags = { "surface", "canrotate" },
 
@@ -56,8 +55,7 @@ local states =
 		}
 	},
 
-	State
-	{
+	State {
 		name = "idle",
 		tags = { "idle", "canrotate" },
 
@@ -72,8 +70,7 @@ local states =
 		end,
 	},
 
-	State
-	{
+	State {
 		name = "run",
 		tags = { "moving", "running", "canrotate" },
 
@@ -100,8 +97,7 @@ local states =
 		}
 	},
 
-	State
-	{
+	State {
 		name = "run_loop",
 		tags = { "moving", "running", "canrotate" },
 
@@ -139,8 +135,7 @@ local states =
 		}
 	},
 
-	State
-	{
+	State {
 		name = "attack",
 		tags = { "attack" },
 
@@ -166,8 +161,7 @@ local states =
 		}
 	},
 
-	State
-	{
+	State {
 		name = "eat",
 
 		onenter = function(inst)
@@ -181,8 +175,7 @@ local states =
 		},
 	},
 
-	State
-	{
+	State {
 		name = "eat_pst",
 
 		onenter = function(inst)
@@ -198,8 +191,7 @@ local states =
 		end,
 	},
 
-	State
-	{
+	State {
 		name = "hit",
 		tags = { "busy" },
 
@@ -216,8 +208,7 @@ local states =
 		},
 	},
 
-	State
-	{
+	State {
 		name = "threaten",
 		tags = { "busy" },
 
@@ -233,8 +224,7 @@ local states =
 		},
 	},
 
-	State
-	{
+	State {
 		name = "death",
 		tags = { "busy", "stunned" },
 

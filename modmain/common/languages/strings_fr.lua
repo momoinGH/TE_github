@@ -1366,7 +1366,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALL_ENFORCEDLIMESTONE = "J'ai payé le prix
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALL_ENFORCEDLIMESTONE_ITEM = "Il faut construire ça dans l'eau."
 ----------------------------- ACTIONS -----------------------------
 STRINGS.ACTIONS.HACK = "Tailler"
-STRINGS.ACTIONS.BOATMOUNT = "Monter sur le bateau"
 STRINGS.ACTIONS.BOATREPAIR = "Réparer le bateau"
 STRINGS.ACTIONS.BOATDISMOUNT = "Descendre du bateau"
 STRINGS.ACTIONS.STICK = "Planter le bâton"

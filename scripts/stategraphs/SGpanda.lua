@@ -540,8 +540,7 @@ local function onentersleeping(inst)
 	inst.AnimState:PlayAnimation("sleep_loop")
 end
 
-table.insert(states, State
-	{
+table.insert(states, State{
 		name = "sleep",
 		tags = { "busy", "sleeping" },
 
@@ -564,8 +563,7 @@ table.insert(states, State
 		},
 	})
 
-table.insert(states, State
-	{
+table.insert(states, State{
 		name = "sleeping",
 		tags = { "busy", "sleeping" },
 
@@ -580,8 +578,7 @@ table.insert(states, State
 		},
 	})
 
-table.insert(states, State
-	{
+table.insert(states, State{
 		name = "wake",
 		tags = { "busy", "waking" },
 

@@ -4,12 +4,12 @@ local actionhandlers = {}
 
 local events =
 {
-    EventHandler("putoutfire", function(inst, data) 
+    EventHandler("putoutfire", function(inst, data)
         if inst.components.machine:IsOn() then
             if inst.sg:HasStateTag("idle") then
-                inst.sg:GoToState("spin_up", {firePos = data.firePos})
+                inst.sg:GoToState("spin_up", { firePos = data.firePos })
             elseif inst.sg:HasStateTag("shooting") then
-                inst.sg:GoToState("shoot", {firePos = data.firePos})
+                inst.sg:GoToState("shoot", { firePos = data.firePos })
             end
         end
     end)
@@ -17,10 +17,9 @@ local events =
 
 local states =
 {
-    State
-    {
+    State {
         name = "turn_on",
-        tags = {"idle"},
+        tags = { "idle" },
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/sprinkler/on")
@@ -33,10 +32,9 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "turn_off",
-        tags = {"idle"},
+        tags = { "idle" },
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/sprinkler/off")
@@ -49,10 +47,9 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "idle_on",
-        tags = {"idle"},
+        tags = { "idle" },
 
         onenter = function(inst)
             --Start some loop sound
@@ -73,10 +70,9 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "idle_off",
-        tags = {"idle"},
+        tags = { "idle" },
 
         onenter = function(inst)
             --Stop some loop sound
@@ -85,10 +81,9 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "spin_up",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, data)
             inst.AnimState:PlayAnimation("launch_pre")
@@ -101,28 +96,27 @@ local states =
         },
     },
 
-    State
-    {  
+    State {
         name = "shoot",
-        tags = {"busy", "shooting"},
+        tags = { "busy", "shooting" },
 
         onenter = function(inst, data)
             inst.AnimState:PlayAnimation("launch", true)
             inst.sg.statemem.firePos = data.firePos
             -- inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/firesupressor_spin")
-            --Play some sound 
+            --Play some sound
         end,
 
         timeline =
         {
             -- TimeEvent(6*FRAMES,
-            -- function(inst) 
+            -- function(inst)
             --     inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/firesupressor_shoot")
             -- end),
 
-            TimeEvent(8*FRAMES,
-            function(inst)
-            end)
+            TimeEvent(8 * FRAMES,
+                function(inst)
+                end)
         },
 
         events =
@@ -131,10 +125,9 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "spin_down",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, data)
             inst.AnimState:PlayAnimation("launch_pst")
@@ -147,10 +140,9 @@ local states =
         },
     },
 
-    State
-    {  
+    State {
         name = "place",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, data)
             inst.AnimState:PlayAnimation("place")
@@ -166,26 +158,25 @@ local states =
         },
     },
 
-    State
-    {  
+    State {
         name = "hit",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst, data)
-            if inst.on then 
+            if inst.on then
                 inst.AnimState:PlayAnimation("hit_on")
             else
                 inst.AnimState:PlayAnimation("hit_off")
             end
-            --Play some sound 
+            --Play some sound
         end,
 
         timeline = {},
 
         events =
         {
-            EventHandler("animover", function(inst) 
-                if inst.on then 
+            EventHandler("animover", function(inst)
+                if inst.on then
                     inst.sg:GoToState("idle_on")
                 else
                     inst.sg:GoToState("idle_off")

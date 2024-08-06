@@ -54,8 +54,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -108,8 +106,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -137,8 +133,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -163,8 +157,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -212,8 +204,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -245,8 +235,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -277,8 +265,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -309,8 +295,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -342,8 +326,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -377,8 +359,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -412,8 +392,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -446,8 +424,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -482,8 +458,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -510,8 +484,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -545,8 +517,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -579,8 +549,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -613,8 +581,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -648,8 +614,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -682,8 +646,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -718,8 +680,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -754,8 +714,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -783,8 +741,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -812,8 +768,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -847,8 +801,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -881,8 +833,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -916,8 +866,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -952,8 +900,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -982,8 +928,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -1018,8 +962,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -1048,8 +990,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -1076,8 +1016,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -1112,8 +1050,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -1141,8 +1077,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -1174,8 +1108,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -1208,8 +1140,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -1241,8 +1171,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -1275,8 +1203,6 @@ local internalloot =
 
 		random_loot =
 		{
-			redgem = 1,
-			bluegem = 1,
 			papyrus = 1,
 			tunacan = 1,
 			blueprint = 1,
@@ -2284,14 +2210,9 @@ local actions =
 
 	slot_spiderattack = { treasure = "slot_spiderattack", },
 	slot_mosquitoattack = { treasure = "slot_mosquitoattack", },
-	slot_snakeattack = { treasure = "slot_snakeattack", },
 	slot_monkeysurprise = { treasure = "slot_monkeysurprise", },
 	slot_poisonsnakes = { treasure = "slot_poisonsnakes", },
 	slot_hounds = { treasure = "slot_hounds", },
-
-
-	slot_snakeattack = { treasure = "slot_snakeattack", },
-	slot_snakeattack = { treasure = "slot_snakeattack", },
 	slot_snakeattack = { treasure = "slot_snakeattack", },
 
 }

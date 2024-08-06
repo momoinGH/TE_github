@@ -2,9 +2,7 @@ local Utils = require("tropical_utils/utils")
 require "components/map"
 
 Utils.FnDecorator(Map, "IsPassableAtPoint", function(self, x, y, z)
-    if #TheSim:FindEntities(x, y, z, 30, { "blows_air" }) > 0
-        or #TheSim:FindEntities(x, y, z, 1.2, { "boat" }) > 0
-    then
+    if #TheSim:FindEntities(x, y, z, 30, { "blows_air" }) > 0 then
         return { true }, true
     end
 end)

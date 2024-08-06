@@ -1048,7 +1048,10 @@ local function timechange(inst)
 end
 
 local function settimechange(inst)
-	inst:AddComponent("lighttweener")
+	if not inst.components.lighttweener then
+		inst:AddComponent("lighttweener")
+	end
+
 	inst.components.lighttweener:StartTween(inst.entity:AddLight(), lights.day.rad, lights.day.intensity,
 		lights.day.falloff, { lights.day.color[1], lights.day.color[2], lights.day.color[3] }, 0)
 	inst.Light:Enable(true)

@@ -9,6 +9,8 @@ modimport "modmain/common/components/temperature"
 modimport "modmain/common/components/inventory"
 modimport "modmain/common/components/builder"
 modimport "modmain/common/components/inventoryitem"
+modimport "modmain/common/components/walkableplatformplayer"
+
 
 modimport "modmain/common/prefabs/oceanfishdef"
 
@@ -116,9 +118,7 @@ local function DrownableShouldDrownBefore(self)
     end
 
     local x, y, z = self.inst.Transform:GetWorldPosition()
-    if #TheSim:FindEntities(x, y, z, 30, { "blows_air" }) > 0
-        or #TheSim:FindEntities(x, y, z, 1, { "boat" }) > 0
-    then
+    if #TheSim:FindEntities(x, y, z, 30, { "blows_air" }) > 0 then
         return { false }, true
     end
 end
@@ -529,9 +529,6 @@ AddPrefabPostInitAny(function(inst)
 end)
 
 ----------------------------------------------------------------------------------------------------
-local function PlayerGetCurrentPlatformAfter(retTab, inst)
-    return next(retTab) and retTab or { GetClosestInstWithTag("barcoapto", inst, 0.5) } --玩家海难小船
-end
 
 AddPlayerPostInit(function(inst)
     inst._isopening = GLOBAL.net_bool(inst.GUID, "IsOpening", "Store_IsOpening")
@@ -543,8 +540,6 @@ AddPlayerPostInit(function(inst)
     if inst.components.infestable == nil then
         inst:AddComponent("infestable")
     end
-
-    Utils.FnDecorator(inst, "GetCurrentPlatform", nil, PlayerGetCurrentPlatformAfter)
 
     if TheNet:GetIsServer() then
         inst.findpigruinstask = inst:DoPeriodicTask(2, function()
@@ -778,17 +773,18 @@ end
 
 ----------------------------------------------------------------------------------------------------
 ----- sai pulando automaticamente do barco cliente outra parte dentro de locomotor ----------------
+-- 直接让玩家跳到海难小船中心位置，天才！
 AddComponentPostInit("embarker", function(self)
     Utils.FnDecorator(self, "GetEmbarkPosition", function(self)
-        if self.embarkable ~= nil and self.embarkable:IsValid() then
-            local alvo = GetClosestInstWithTag("barcoapto", self.inst, 6)
-            if alvo then
-                local x, _, z = self.inst.Transform:GetWorldPosition()
-                local embarkable_radius = 0.1
-                local embarkable_x, embarkable_y, embarkable_z = alvo.Transform:GetWorldPosition()
-                local embark_x, embark_z = VecUtil_Normalize(x - embarkable_x, z - embarkable_z)
-                return { embarkable_x + embark_x * embarkable_radius, embarkable_z + embark_z * embarkable_radius }, true
-            end
+        local boat = self.embarkable
+        if boat ~= nil and boat:IsValid() and boat:HasTag("shipwrecked_boat") then
+            local x, _, z = self.inst.Transform:GetWorldPosition()
+            local embarkable_radius = 0.1
+            local embarkable_x, embarkable_y, embarkable_z = boat.Transform:GetWorldPosition()
+            local embark_x, embark_z = VecUtil_Normalize(x - embarkable_x, z - embarkable_z)
+            return { embarkable_x + embark_x * embarkable_radius, embarkable_z + embark_z * embarkable_radius }, true
         end
     end)
 end)
+
+----------------------------------------------------------------------------------------------------

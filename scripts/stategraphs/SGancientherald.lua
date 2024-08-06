@@ -222,8 +222,7 @@ end
 
 local states =
 {
-    State
-    {
+    State{
         name = "idle",
         tags = { "idle", "canrotate", "canslide" },
         onenter = function(inst)
@@ -231,8 +230,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State{
         name = "appear",
         tags = { "busy" },
         onenter = function(inst)
@@ -258,8 +256,7 @@ local states =
 
     },
 
-    State
-    {
+    State{
         name = "taunt",
         tags = { "busy" },
         onenter = function(inst)
@@ -281,8 +278,7 @@ local states =
         },
     },
 
-    State
-    {
+    State{
         name = "summon",
         tags = { "busy" },
         onenter = function(inst)

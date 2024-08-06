@@ -88,8 +88,7 @@ end
 
 local states =
 {
-    State
-    {
+    State {
         name = "empty",
         tags = { "idle", "empty" },
 
@@ -99,8 +98,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "idle",
         tags = { "idle" },
 
@@ -118,8 +116,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "spawn",
         tags = { "moving", "canrotate" },
 
@@ -136,8 +133,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "despawn",
         tags = { "busy" },
 
@@ -154,8 +150,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "walk_start",
         tags = { "moving", "canrotate" },
 
@@ -164,8 +159,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "walk",
         tags = { "moving", "canrotate" },
 
@@ -188,8 +182,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "walk_stop",
         tags = { "canrotate" },
 
@@ -198,8 +191,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "run_start",
         tags = { "moving", "running", "canrotate" },
 
@@ -221,8 +213,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "run",
         tags = { "moving", "running", "canrotate" },
 
@@ -244,8 +235,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "run_stop",
         tags = { "idle" },
 

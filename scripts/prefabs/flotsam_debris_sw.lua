@@ -344,7 +344,7 @@ local function fn6(build)
 
     return inst
 end
-
+-- 残骸
 return Prefab("flotsam_armoured_build", fn, assets, prefabs),
     Prefab("flotsam_cargo_build", fn1, assets, prefabs),
     Prefab("flotsam_bamboo_build", fn2, assets, prefabs),

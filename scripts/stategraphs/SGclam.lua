@@ -13,8 +13,7 @@ local events =
 
 local states =
 {
-    State
-    {
+    State {
         name = "idle",
         tags = { "idle", "canrotate" },
 
@@ -28,8 +27,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "funnyidle",
         tags = { "idle", "canrotate" },
 

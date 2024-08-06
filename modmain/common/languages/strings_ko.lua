@@ -1326,7 +1326,6 @@ STRINGS.NAMES.MERM2 = "Merm"
 --------------store---------
 --------------actions-------
 STRINGS.ACTIONS.HACK = "베기"
-STRINGS.ACTIONS.BOATMOUNT = "배에 탑승하기"
 STRINGS.ACTIONS.BOATREPAIR = "배 수리하기"
 STRINGS.ACTIONS.BOATDISMOUNT = "배에서 내리기"
 STRINGS.ACTIONS.STICK = "꽂기"

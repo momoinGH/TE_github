@@ -8,8 +8,7 @@ local events =
 
 local states =
 {
-    State
-    {
+    State {
         name = "turn_on",
         tags = { "idle" },
 
@@ -24,8 +23,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "turn_off",
         tags = { "idle" },
 
@@ -39,8 +37,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "idle_on",
         tags = { "idle" },
 
@@ -63,8 +60,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "idle_off",
         tags = { "idle" },
 
@@ -76,8 +72,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "spin_up",
         tags = { "busy" },
 
@@ -92,8 +87,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "spin_down",
         tags = { "busy" },
 
@@ -107,8 +101,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "place",
         tags = { "busy" },
 
@@ -125,8 +118,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "hit",
         tags = { "busy" },
 

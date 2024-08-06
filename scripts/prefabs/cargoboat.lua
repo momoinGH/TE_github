@@ -88,11 +88,12 @@ local function fn()
 	minimap:SetIcon("cargo.png")
 
 	inst:AddTag("boatsw")
-	inst:AddTag("barcoapto")
 	inst:AddTag("aquatic")
 	inst:AddTag("ignorewalkableplatforms")
 
+	inst.walksound = "wood"
 	inst:AddComponent("walkableplatform")
+	inst.doplatformcamerazoom = net_bool(inst.GUID, "doplatformcamerazoom", "doplatformcamerazoomdirty")
 
 	inst.Physics:SetCylinder(0.25, 2)
 

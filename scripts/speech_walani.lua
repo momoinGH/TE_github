@@ -145,12 +145,6 @@ return {
 	},
 	DESCRIBE =
 	{
-		BERRYBUSH =
-		{
-			GENERIC = "How lush!",
-			PICKED = "Thanks for the snack, dude.",
-			WITHERED = "I can nurse it back to health.",
-		},
 		INVENTORYGRAVE = "Surf that big wave in the sky, dude.",
 		INVENTORYMOUND = "Surf that big wave in the sky, dude.",
 		ACCOMPLISHMENT_SHRINE = "Well, that looks like a lot of busywork.",
@@ -192,7 +186,6 @@ return {
 		},
 		AXE = "I could cut trees with this... But I'd rather not.",
 		BABYBEEFALO = "Growing up is a trap... don't do it!",
-		BABYOX = "Stay young forever!",
 		BACKPACK = "To haul my stuff around.",
 		BACONEGGS = "Turn that frown upside down!",
 		BALLPHIN = "My surfing buddies!",
@@ -278,7 +271,6 @@ return {
 		BLUBBER = "If I had enough of this I could surf in any weather!",
 		BLUBBERSUIT = "Gross, but effective.",
 		BOARDS = "Not much surf in these boards.",
-		BOATCANNON = "Can't we find a peaceful solution?",
 		BOATREPAIRKIT = "Surfboard maintenance is essential!",
 		BOAT_LANTERN = "Night-surfing. I love it!",
 		BOAT_TORCH = "Night-surfing. I love it!",
@@ -475,7 +467,6 @@ return {
 		FEATHERSAIL = "For smooth and swift sailing!",
 		FEATHER_CROW = "A real softy.",
 		FEATHER_ROBIN = "I'm tickled by the color of this.",
-		FEATHER_ROBIN_WINTER = "A portable reminder of the beauty of nature.",
 		FEM_PUPPET = "Bummer.",
 		FERTILIZER = "Ground food.",
 		FIREFLIES =

@@ -1,5 +1,9 @@
 PrefabFiles =
 {
+    "shipwrecked_boat",
+    "shipwrecked_boat_placer",
+    "shipwrecked_boat_placer2",
+
     "turfesvolcanobiome",
     "venom_gland",
     "machetes",
@@ -103,6 +107,7 @@ PrefabFiles =
     "wildbore_minion",
     "wildborekingstaff",
     "wildboreking_spawner",
+
 
 }
 

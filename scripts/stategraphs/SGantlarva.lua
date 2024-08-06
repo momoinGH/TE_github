@@ -10,8 +10,7 @@ local events =
 
 local states =
 {
-    State
-    {
+    State {
         name = "idle",
         tags = { "idle", "canrotate" },
 
@@ -20,8 +19,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "land",
         tags = { "moving", "canrotate" },
 
@@ -37,8 +35,7 @@ local states =
         }
     },
 
-    State
-    {
+    State{
         name = "spawn",
         tags = { "busy" },
 

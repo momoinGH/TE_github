@@ -17,7 +17,7 @@ local function OnWaterChange(inst, onwater)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/crocodog/emerge")
 
     if onwater then
-        local pegabarco = SpawnPrefab("shadowwaxwell_boat")
+        local pegabarco = SpawnPrefab("shadowwaxwellboat")
         inst:AddComponent("driver2")
         inst.components.driver2:OnMount(pegabarco)
     else

@@ -630,7 +630,7 @@ AddRecipe2("boatrepairkit", { Ingredient("boards", 2), Ingredient("stinger", 2),
 if TUNING.tropical.only_shipwrecked or GetModConfigData("raftlog") then
     AddRecipe2("porto_lograft_old", { Ingredient("log", 6), Ingredient("cutgrass", 4) }, TECH.NONE, { atlas = v_atlas },
         { "NAUTICAL" })
-    AddRecipe2("porto_raft_old", { Ingredient("bamboo", 4, v_atlas), Ingredient("vine", 3, v_atlas) }, TECH.NONE,
+    AddRecipe2("porto_raft", { Ingredient("bamboo", 4, v_atlas), Ingredient("vine", 3, v_atlas) }, TECH.NONE,
         { atlas = v_atlas }, { "NAUTICAL" })
 else
     AddRecipe2("porto_lograft", { Ingredient("log", 6), Ingredient("cutgrass", 4) }, TECH.NONE, { atlas = v_atlas },

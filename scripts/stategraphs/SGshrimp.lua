@@ -20,8 +20,7 @@ local events =
 
 local states =
 {
-    State --idle anim
-    {
+    State {
         name = "idle",
         tags = { "idle", "canrotate", "canslide" },
         onenter = function(inst)
@@ -35,8 +34,7 @@ local states =
     },
 
     -- walking anim
-    State
-    {
+    State {
         name = "walk",
         tags = { "walk", "canrotate", "canslide", "walking" },
         onenter = function(inst)
@@ -56,8 +54,7 @@ local states =
     },
 
     -- floating anim
-    State
-    {
+    State {
         name = "float",
         tags = { "float", "canrotate", "canslide", "floating" },
         onenter = function(inst)
@@ -75,8 +72,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "jump",
         tags = { "canrotate", "canslide", "jumping" },
         onenter = function(inst)
@@ -95,8 +91,7 @@ local states =
 
     },
 
-    State
-    {
+    State {
         name = "run",
         tags = { "run", "canslide", "running", "busy" }, --"canrotate"
         onenter = function(inst)
@@ -131,8 +126,7 @@ local states =
 
 
     -- Death anim
-    State
-    {
+    State {
         name = "death",
         tags = { "busy" },
 

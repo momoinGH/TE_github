@@ -2,25 +2,26 @@ require("stategraphs/commonstates")
 
 local events = {} --apparently stategraphs need this table.
 
-local states=
+local states =
 {
 
-	State
-	{
+	State {
 		name = "rise",
-		tags = {"rising"},
+		tags = { "rising" },
 
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("appear")
 		end,
 
-        timeline=
-        {
-            TimeEvent(5*FRAMES, function(inst)
-            	if inst.soundrise then inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/rogue_waves/"..inst.soundrise) end
-            	if inst.soundloop then inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/rogue_waves/"..inst.soundloop, inst.soundloop) end
-            end),
-        },
+		timeline =
+		{
+			TimeEvent(5 * FRAMES, function(inst)
+				if inst.soundrise then inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/rogue_waves/" ..
+					inst.soundrise) end
+				if inst.soundloop then inst.SoundEmitter:PlaySound(
+					"dontstarve_DLC002/common/rogue_waves/" .. inst.soundloop, inst.soundloop) end
+			end),
+		},
 
 		events =
 		{
@@ -30,10 +31,9 @@ local states=
 		},
 	},
 
-	State
-	{
+	State {
 		name = "idle",
-		tags = {"idle"},
+		tags = { "idle" },
 
 		onenter = function(inst)
 			inst:activate_collision()
@@ -44,25 +44,23 @@ local states=
 		events =
 		{
 			EventHandler("animover", function(inst)
-				
-				if inst.waitingtolower then 
+				if inst.waitingtolower then
 					inst.sg:GoToState("lower")
 				else
 					inst.AnimState:PlayAnimation("idle", false)
-				end 
+				end
 			end)
 		},
 
 		ontimeout = function(inst)
 			--inst.sg:GoToState("lower")
-			inst.waitingtolower = true 
+			inst.waitingtolower = true
 		end,
 	},
 
-	State
-	{
+	State {
 		name = "lower",
-		tags = {"lowering"},
+		tags = { "lowering" },
 
 		onenter = function(inst)
 			inst.AnimState:Resume()
@@ -73,10 +71,10 @@ local states=
 			end
 		end,
 
-		events = 
+		events =
 		{
-			EventHandler("animover", function(inst) 
-				inst:Remove() 
+			EventHandler("animover", function(inst)
+				inst:Remove()
 			end)
 		},
 	},

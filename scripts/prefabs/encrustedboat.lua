@@ -87,7 +87,6 @@ local function fn()
 	minimap:SetIcon("encrustedboat.png")
 
 	inst:AddTag("boatsw")
-	inst:AddTag("barcoapto")
 	inst:AddTag("aquatic")
 	inst:AddTag("ignorewalkableplatforms")
 

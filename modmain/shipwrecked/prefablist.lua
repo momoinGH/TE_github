@@ -23,7 +23,6 @@ PrefabFiles = {
   "oxherd",
   "knightboat",
   "knightboat_cannonshot",
-  "boatrow",
   "rowboat_wake", --trail do rowboat
   "blubber",
   "fish_med",
@@ -32,8 +31,6 @@ PrefabFiles = {
   "sandbag",
   "cutlass",
   "luggarechestspawn",
-  "porto",
-  "porto2",
   "buriedtreasure",
   "windtrail",
   "windswirl",
@@ -49,9 +46,7 @@ PrefabFiles = {
   "quackering_wave",
   "quackering_wake",
   "trawlnet",
-  "boatsurf",
   "boatsurfothers",
-  "boatpirate",
   "boatpirateamigo",
   "turbine_blades",
   "buoy",
@@ -213,7 +208,6 @@ PrefabFiles = {
   "poisonbubble",
   "tunacan",
   "edgefog",
-  "shadowwaxwell_boat",
   "wave_ripple",
 
   "ashfx",
@@ -291,10 +285,7 @@ PrefabFiles = {
   "kraken_spawner",
   "pirateghost",
   "waterygrave",
-  "armouredboat",
-  "cargoboat",
   "flotsam_debris_sw",
-  "encrustedboat",
 
 
 

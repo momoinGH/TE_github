@@ -47,8 +47,7 @@ local events =
 
 local states =
 {
-    State
-    {
+    State {
         name = "enter",
         tags = { "busy" },
 
@@ -84,8 +83,7 @@ local states =
 
     },
 
-    State
-    {
+    State {
         name = "exit",
         tags = { "busy" },
 
@@ -143,8 +141,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "idle",
         tags = { "idle", "canrotate" },
 
@@ -170,8 +167,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "walk_pre",
         tags = { "moving", "canrotate" },
 
@@ -189,8 +185,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "walk",
         tags = { "moving", "canrotate" },
 
@@ -200,8 +195,7 @@ local states =
         end,
     },
 
-    State
-    {
+    State {
         name = "walk_pst",
         tags = { "canrotate" },
 
@@ -224,8 +218,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "attack",
         tags = { "attack", "busy" },
 
@@ -251,8 +244,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "hit",
         tags = { "busy", "hit" },
 
@@ -268,8 +260,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "sleep",
         tags = { "busy", "sleeping" },
 
@@ -300,8 +291,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "sleeping",
         tags = { "busy", "sleeping" },
 
@@ -338,8 +328,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "wake",
         tags = { "busy", "waking" },
 
@@ -364,8 +353,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "death",
         tags = { "busy", "stunned" },
 

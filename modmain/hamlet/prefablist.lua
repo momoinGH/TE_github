@@ -1,5 +1,4 @@
 PrefabFiles = {
-    "boatcork",
     "frog_poison",
     -- "frog_poison2",
     "oxherd",
@@ -46,7 +45,6 @@ PrefabFiles = {
     "poisonbubble",
     "tunacan",
     "edgefog",
-    "shadowwaxwell_boat",
     "wave_ripple",
     "ashfx",
     "firerain",

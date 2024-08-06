@@ -501,8 +501,6 @@ AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.COMPACTPOOP, "doshort
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.COMPACTPOOP, "doshortaction"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.DESACTIVATESAIL, "doshortaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.DESACTIVATESAIL, "doshortaction"))
-AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BOATMOUNT, "jumponboatstart_pre"))
-AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATMOUNT, "jumponboatstart_pre"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BOATREPAIR, "dolongaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATREPAIR, "dolongaction"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.OPENTUNA, "dolongaction"))
@@ -1263,7 +1261,7 @@ local surfando = State { name = "surfando",
     onenter = function(inst)
         local action = inst:GetBufferedAction()
         inst.components.locomotor:Stop()
-        inst.AnimState:PlayAnimation("surf_loop")
+        inst.AnimState:PlayAnimation("surf_loop") --冲浪板
     end,
 
     timeline =
@@ -2060,7 +2058,7 @@ AddStategraphState("wilson", State {
         )
     }
 })
-
+-- 移动、划船
 AddStategraphState("wilson", State {
     name = "run",
     tags = { "moving", "running", "canrotate", "sailing" },
@@ -2109,7 +2107,7 @@ AddStategraphState("wilson", State {
             elseif inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) and inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS).prefab == "oar" then
                 anim = "row_medium"
             else
-                anim = "row_loop"
+                anim = "row_loop" --划船
             end
         elseif anim == "run" then
             if inst:HasTag("wilbur") and inst.timeinmotion and inst.timeinmotion > 75 and not inst.replica.rider:IsRiding() and not inst.replica.inventory:IsHeavyLifting() and not inst:IsCarefulWalking() and not inst.sg:HasStateTag("jumping") then

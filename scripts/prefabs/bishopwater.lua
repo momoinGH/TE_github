@@ -289,12 +289,5 @@ local function bishop_fn2()
     return inst
 end
 
-
-local function onruinsrespawn(inst, respawner)
-    if not respawner:IsAsleep() then
-        inst.sg:GoToState("ruinsrespawn")
-    end
-end
-
 return Prefab("bishopwater", bishop_fn, assets, prefabs),
     Prefab("bishopwaterfixo", bishop_fn2, assets, prefabs)

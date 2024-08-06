@@ -1340,7 +1340,6 @@ STRINGS.NAMES.SHARK_GILLS = "Shark Gills"
 
 --------------actions-------
 STRINGS.ACTIONS.HACK = "Cortar"
-STRINGS.ACTIONS.BOATMOUNT = "Subir no barco"
 STRINGS.ACTIONS.BOATREPAIR = "Reparar o barco"
 STRINGS.ACTIONS.BOATDISMOUNT = "Descer do barco"
 STRINGS.ACTIONS.STICK = "Graveto"

@@ -1,0 +1,66 @@
+local Utils = require("tropical_utils/utils")
+
+-- 海难小船
+local function UpdateBoatInPlayer(inst)
+    local boat = inst:GetCurrentPlatform()
+    if not boat or not boat:HasTag("shipwrecked_boat") then --考虑到玩家闪现出船
+        if inst.shipwreckedBoatTask then
+            inst.shipwreckedBoatTask:Cancel()
+            inst.shipwreckedBoatTask = nil
+        end
+        return
+    end
+
+    -- if not inst.AnimState:IsCurrentAnimation("idle_loop") then
+    --     inst.AnimState:PlayAnimation("idle_loop", true)
+    -- end
+end
+
+local function SetPlayerCenter(inst, platform)
+    if platform:IsValid() then
+        inst.Physics:Stop()
+        inst.components.locomotor:Stop()
+        inst.Transform:SetPosition(platform.Transform:GetWorldPosition())
+        inst.shipwreckedBoatTask = inst:DoPeriodicTask(0, UpdateBoatInPlayer)
+    end
+end
+
+-- 跳上船
+local function GetOnPlatformBefore(self, platform)
+    if not platform:HasTag("shipwrecked_boat") then return end
+
+    if TheWorld.ismastersim then
+        self.inst:DoTaskInTime(0.5, SetPlayerCenter, platform)
+        -- platform.Follower:FollowSymbol(self.inst.GUID, "foot") --船动人就会动，会导致一直移动
+        if platform.components.container then
+            platform.components.container.canbeopened = true
+            if not platform.components.container:IsOpen() then
+                platform.components.container:Open(self.inst)
+            end
+        end
+    else
+        -- TODO 如果开启了延迟补偿，强制关闭。因为延迟补偿会让船的运动变得很奇怪，或者客机发送rpc让船移动？
+        if Profile:GetMovementPredictionEnabled() then
+            Profile:SetMovementPredictionEnabled(false)
+            self.inst:EnableMovementPrediction(false)
+        end
+    end
+end
+
+local function GetOffPlatform(self)
+    if TheWorld.ismastersim then
+        if self.inst.shipwreckedBoatTask then
+            self.inst.shipwreckedBoatTask:Cancel()
+            self.inst.shipwreckedBoatTask = nil
+        end
+
+        if self.platform and self.platform:IsValid() and self.platform.components.container then
+            self.platform.components.container.canbeopened = false
+        end
+    end
+end
+
+AddClassPostConstruct("components/walkableplatformplayer", function(self)
+    Utils.FnDecorator(self, "GetOnPlatform", GetOnPlatformBefore)
+    Utils.FnDecorator(self, "GetOffPlatform", GetOffPlatform)
+end)

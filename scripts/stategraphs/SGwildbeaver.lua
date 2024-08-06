@@ -230,8 +230,12 @@ local states =
 
 		onenter = function(inst)
 			inst.Physics:Stop()
-			if TheWorld.state.isdusk then inst.AnimState:PlayAnimation("idle_walk_pst") else inst.AnimState
-					:PlayAnimation("run_pst") end
+			if TheWorld.state.isdusk then
+				inst.AnimState:PlayAnimation("idle_walk_pst")
+			else
+				inst.AnimState
+					:PlayAnimation("run_pst")
+			end
 		end,
 
 		events =
@@ -537,71 +541,68 @@ local function onentersleeping(inst)
 	inst.AnimState:PlayAnimation("sleep_loop")
 end
 
-table.insert(states, State
+table.insert(states, State {
+	name = "sleep",
+	tags = { "busy", "sleeping" },
+
+	onenter = function(inst)
+		if inst.components.locomotor ~= nil then
+			inst.components.locomotor:StopMoving()
+		end
+		inst.AnimState:PlayAnimation("dozy")
+		-- if fns ~= nil and fns.onsleep ~= nil then
+		--     fns.onsleep(inst)
+		-- end
+	end,
+
+	timeline = nil,
+
+	events =
 	{
-		name = "sleep",
-		tags = { "busy", "sleeping" },
+		EventHandler("animover", sleeponanimover),
+		EventHandler("onwakeup", onwakeup),
+	},
+})
 
-		onenter = function(inst)
-			if inst.components.locomotor ~= nil then
-				inst.components.locomotor:StopMoving()
-			end
-			inst.AnimState:PlayAnimation("dozy")
-			-- if fns ~= nil and fns.onsleep ~= nil then
-			--     fns.onsleep(inst)
-			-- end
-		end,
+table.insert(states, State {
+	name = "sleeping",
+	tags = { "busy", "sleeping" },
 
-		timeline = nil,
+	onenter = onentersleeping,
 
-		events =
-		{
-			EventHandler("animover", sleeponanimover),
-			EventHandler("onwakeup", onwakeup),
-		},
-	})
+	timeline = nil,
 
-table.insert(states, State
+	events =
 	{
-		name = "sleeping",
-		tags = { "busy", "sleeping" },
+		EventHandler("animover", sleeponanimover),
+		EventHandler("onwakeup", onwakeup),
+	},
+})
 
-		onenter = onentersleeping,
+table.insert(states, State {
+	name = "wake",
+	tags = { "busy", "waking" },
 
-		timeline = nil,
+	onenter = function(inst)
+		if inst.components.locomotor ~= nil then
+			inst.components.locomotor:StopMoving()
+		end
+		inst.AnimState:PlayAnimation("wakeup")
+		if inst.components.sleeper ~= nil and inst.components.sleeper:IsAsleep() then
+			inst.components.sleeper:WakeUp()
+		end
+		-- if fns ~= nil and fns.onwake ~= nil then
+		--     fns.onwake(inst)
+		-- end
+	end,
 
-		events =
-		{
-			EventHandler("animover", sleeponanimover),
-			EventHandler("onwakeup", onwakeup),
-		},
-	})
+	timeline = nil,
 
-table.insert(states, State
+	events =
 	{
-		name = "wake",
-		tags = { "busy", "waking" },
-
-		onenter = function(inst)
-			if inst.components.locomotor ~= nil then
-				inst.components.locomotor:StopMoving()
-			end
-			inst.AnimState:PlayAnimation("wakeup")
-			if inst.components.sleeper ~= nil and inst.components.sleeper:IsAsleep() then
-				inst.components.sleeper:WakeUp()
-			end
-			-- if fns ~= nil and fns.onwake ~= nil then
-			--     fns.onwake(inst)
-			-- end
-		end,
-
-		timeline = nil,
-
-		events =
-		{
-			EventHandler("animover", idleonanimover),
-		},
-	})
+		EventHandler("animover", idleonanimover),
+	},
+})
 
 --CommonStates.AddIdle(states, "funnyidle")
 CommonStates.AddFrozenStates(states)

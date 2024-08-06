@@ -77,63 +77,42 @@ AddComponentAction("SCENE", "mystery", function(inst, doer, actions, right)
 end)
 
 
-AddComponentAction(
-    "SCENE",
-    "interactions",
-    function(inst, doer, actions, right)
-        local equipamento = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-        --local rightrect = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-        --  and doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS).components.reticule ~= nil or nil
-        if right then
-            if equipamento and equipamento:HasTag("boatrepairkit") and doer:HasTag("aquatic") then
-                table.insert(actions, GLOBAL.ACTIONS.BOATREPAIR)
-                return
-            end
-
-            if inst:HasTag("boatsw") and not inst:HasTag("ocupado") and
-                not (doer.replica.rider:IsRiding() or
-                    doer:HasTag("bonked"))
-            then
-                table.insert(actions, GLOBAL.ACTIONS.BOATMOUNT)
-            end
-        end
-
-        if not right then
-            if inst:HasTag("boatsw") and not inst:HasTag("ocupado") and
-                not (doer.replica.rider:IsRiding() or
-                    doer:HasTag("bonked"))
-            then
-                table.insert(actions, GLOBAL.ACTIONS.BOATMOUNT)
-            end
-
-
-
-            if inst.prefab == "surfboard" and not inst:HasTag("ocupado") and not doer.replica.inventory:IsFull() then
-                table.insert(actions, GLOBAL.ACTIONS.RETRIEVE)
-                return
-            end
-
-            if inst.prefab == "corkboat" and not inst:HasTag("ocupado") and not doer.replica.inventory:IsFull() then
-                table.insert(actions, GLOBAL.ACTIONS.RETRIEVE)
-                return
-            end
-
-            if inst.prefab == "fish_farm" then
-                table.insert(actions, GLOBAL.ACTIONS.RETRIEVE)
-                return
-            end
-
-            if inst:HasTag("wallhousehamlet") and equipamento and equipamento:HasTag("hameletwallpaper") then
-                table.insert(actions, GLOBAL.ACTIONS.PAINT)
-                return
-            end
-
-            if inst:HasTag("pisohousehamlet") and equipamento and equipamento:HasTag("hameletfloor") then
-                table.insert(actions, GLOBAL.ACTIONS.PAINT)
-                return
-            end
+AddComponentAction("SCENE", "interactions", function(inst, doer, actions, right)
+    local equipamento = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
+    --local rightrect = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
+    --  and doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS).components.reticule ~= nil or nil
+    if right then
+        if equipamento and equipamento:HasTag("boatrepairkit") and doer:HasTag("aquatic") then
+            table.insert(actions, GLOBAL.ACTIONS.BOATREPAIR)
+            return
         end
     end
+
+    if not right then
+        ---------------------------------
+        -- TODO 删掉
+        if inst.prefab == "surfboard" and not inst:HasTag("ocupado") and not doer.replica.inventory:IsFull() then
+            table.insert(actions, GLOBAL.ACTIONS.RETRIEVE)
+            return
+        end
+
+        if inst.prefab == "fish_farm" then
+            table.insert(actions, GLOBAL.ACTIONS.RETRIEVE)
+            return
+        end
+        ---------------------------------
+
+        if inst:HasTag("wallhousehamlet") and equipamento and equipamento:HasTag("hameletwallpaper") then
+            table.insert(actions, GLOBAL.ACTIONS.PAINT)
+            return
+        end
+
+        if inst:HasTag("pisohousehamlet") and equipamento and equipamento:HasTag("hameletfloor") then
+            table.insert(actions, GLOBAL.ACTIONS.PAINT)
+            return
+        end
+    end
+end
 )
 
 AddComponentAction(
@@ -329,4 +308,15 @@ end)
 
 AddComponentAction("SCENE", "store", function(inst, doer, actions)
     table.insert(actions, ACTIONS.STOREOPEN)
+end)
+
+-- 可以收回小船
+AddComponentAction("SCENE", "portablestructure", function(inst, doer, actions, right) --TODO right不能用，一直为nil，是哪里覆盖把right弄丢了吗
+    if not inst:HasTag("fire")
+        and inst:HasTag("boat")
+        and (not inst.replica.container or not inst.replica.container:IsOpenedBy(doer))
+        and doer:GetCurrentPlatform() ~= inst
+    then
+        table.insert(actions, ACTIONS.RETRIEVE)
+    end
 end)

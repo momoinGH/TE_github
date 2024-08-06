@@ -1320,7 +1320,6 @@ STRINGS.NAMES.LAVAPONDBIG1 = "Big lava pool"
 --------------store---------
 --------------actions-------
 STRINGS.ACTIONS.HACK = "Felvágás"
-STRINGS.ACTIONS.BOATMOUNT = "Beszállás"
 STRINGS.ACTIONS.BOATREPAIR = "Hajó javítása"
 STRINGS.ACTIONS.BOATDISMOUNT = "Kiszállás"
 STRINGS.ACTIONS.STICK = "Bot"

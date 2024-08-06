@@ -1370,7 +1370,6 @@ STRINGS.NAMES.MERM2 = "Мэрм" --DTR
 
 --------------actions-------
 STRINGS.ACTIONS.HACK = "Кромсать"
-STRINGS.ACTIONS.BOATMOUNT = "Сесть на"
 STRINGS.ACTIONS.BOATREPAIR = "Починить лодку"
 STRINGS.ACTIONS.BOATDISMOUNT = "Выйти"
 STRINGS.ACTIONS.STICK = "Разместить палку"

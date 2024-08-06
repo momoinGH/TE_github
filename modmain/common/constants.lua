@@ -1,3 +1,5 @@
+local Utils = require("tropical_utils/utils")
+
 --渡渡鸟数量控制
 _G.SEABEACH_AMOUNT = {
     doydoy = 0,
@@ -23,4 +25,7 @@ TOOLACTIONS["PAN"] = true
 TOOLACTIONS["INVESTIGATEGLASS"] = true
 
 
-
+Utils.FnDecorator(GLOBAL, "PlayFootstep", function(inst)
+    local boat = inst:GetCurrentPlatform()
+    return nil, boat and boat:HasTag("shipwrecked_boat") --海难小船时不播放走路音效
+end)

@@ -25,8 +25,7 @@ local events =
 
 local states =
 {
-    State
-    {
+    State {
         name = "idle",
         tags = { "idle", "canrotate", "canslide" },
         onenter = function(inst)

@@ -1313,7 +1313,6 @@ STRINGS.NAMES.MERM2 = "Merm"
 --------------store---------
 --------------actions-------
 STRINGS.ACTIONS.HACK = "Taglia"
-STRINGS.ACTIONS.BOATMOUNT = "Sali a bordo"
 STRINGS.ACTIONS.BOATREPAIR = "Ripara"
 STRINGS.ACTIONS.BOATDISMOUNT = "Boat Dismount"
 STRINGS.ACTIONS.STICK = "Bastone"

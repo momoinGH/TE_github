@@ -237,20 +237,6 @@ local function fn()
 
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("antqueenbattle", function() inst:SetAporkalypse(true) end, TheWorld)
-    --    inst:ListenForEvent("endaporkalypse", function()
-    --        if inst:HasTag("aporkalypse_cleanup") then
-    --            if not inst:IsInLimbo() then
-    --                TransformToNormal(inst)
-    --            end
-    --        else
-    --            inst:SetAporkalypse(false)
-    --        end
-    --    end, TheWorld)
-    --    inst:ListenForEvent("exitlimbo", function(inst)
-    --        if inst:HasTag("aporkalypse_cleanup") and not GetAporkalypse():IsActive() then
-    --            TransformToNormal(inst)
-    --        end
-    --    end)
     inst:ListenForEvent("beginaporkalypse", function()
         inst.Light:Enable(true)
         inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")

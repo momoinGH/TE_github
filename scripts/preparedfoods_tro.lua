@@ -842,7 +842,7 @@ for tabIdx, foodTab in pairs(foods_tro) do
         foodDef.floater = foodDef.floater or { "small", 0.05, 0.7 }
         foodDef.mod = true
         -- foodDef.cookbook_tex = foodName..".tex"
-        foodDef.cookbook_atlas = cookbook_atlas[tabIdx] or "images/inventoryimages/" .. foodName .. ".xml"
+        foodDef.cookbook_atlas = cookbook_atlas[tabIdx] or ("images/inventoryimages/" .. foodName .. ".xml")
         foodDef.atlasname = foodDef.atlasname or inventoryitem_atlas[tabIdx] or
         "images/inventoryimages/" .. foodName .. ".xml"
         if foodDef.oneatenfn then

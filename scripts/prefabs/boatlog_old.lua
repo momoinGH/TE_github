@@ -73,7 +73,6 @@ local function fn()
 	minimap:SetIcon("lograft.png")
 
 	inst:AddTag("boatsw")
-	inst:AddTag("barcoapto")
 	inst:AddTag("aquatic")
 	inst:AddTag("ignorewalkableplatforms")
 
@@ -86,10 +85,6 @@ local function fn()
 		return inst
 	end
 
-	-------------------adiciona container------------------------------------
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("lograft_old")
-	inst.replica.container:WidgetSetup("lograft_old")
 	--------------------------------------------------------------------------		
 	inst:AddComponent("interactions")
 	inst:AddComponent("edible")

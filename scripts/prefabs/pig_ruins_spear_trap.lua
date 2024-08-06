@@ -291,10 +291,10 @@ local function fn(Sim)
         OnKilled(inst)
     end
     inst.canshear = function(inst)
-            return true
-        end,
+        return true
+    end
 
-        inst:SetStateGraph("SGspear_trap")
+    inst:SetStateGraph("SGspear_trap")
 
     MakeSmallBurnable(inst)
     inst.components.burnable.disabled = true

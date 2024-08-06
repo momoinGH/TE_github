@@ -187,7 +187,6 @@ return
 		},
 		AXE = "I be axe'n th'questions 'round here!",
 		BABYBEEFALO = "Yer cute fer dumb, hairy meat.",
-		BABYOX = "'Tis lubbable how ye don't lub th'land.",
 		BACKPACK = "I be packin' now.",
 		BACONEGGS = "Th'most important meal o'th'day!",
 		BALLPHIN = "These devil's really have a ball.",

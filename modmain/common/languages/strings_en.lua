@@ -396,7 +396,7 @@ STRINGS.NAMES.RUG_FUR                                                           
 STRINGS.NAMES.RABID_BEETLE                                                      = "Rabid Beetle"
 STRINGS.NAMES.DECO_RUINS_PIGMAN_RELIEF4_BLUE                                    = "遗迹猪人浮雕4带帽猪头蓝"
 STRINGS.NAMES.TURF_MOSS                                                         = "Mossy Turf"
-STRINGS.NAMES.SHADOWWAXWELL_BOAT                                                = "暗影船"
+STRINGS.NAMES.SHADOWWAXWELLBOAT                                                = "暗影船"
 STRINGS.NAMES.VAMPIRE_BAT_WING                                                  = "Batilisk Wing?"
 STRINGS.NAMES.PIG_RUINS_ENTRANCE                                                = "Ruinous Entrance"
 STRINGS.NAMES.PIG_RUINS_WALL_VINES_WEST                                         = "遗迹藤蔓挂墙左"
@@ -3154,7 +3154,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.DRAGOONDEN                                  
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RELIC_3_SUNKEN                              = "I'll have to fish it out."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WINDOW_TALL_CURTAIN                         = "It's a window. That's tall."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVA_POND_ROCK5                             = "As gneiss a place as any."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHADOWWAXWELL_BOAT                          = "一艘船，由暗影能量所构成。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHADOWWAXWELLBOAT                           = "一艘船，由暗影能量所构成。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_PRODUCE                            = {
     BURNING = "The food is on fire!",
     GENERIC = "There's fresh produce in there.",
@@ -8844,7 +8844,6 @@ STRINGS.CHARACTERS.WOODIE.DESCRIBE.JELLYFISH_COOKED = "It actually looks edible.
 
 ----------------------------- ACTIONS -----------------------------
 STRINGS.ACTIONS.HACK              = "Hack"
-STRINGS.ACTIONS.BOATMOUNT         = "Boat Mount"
 STRINGS.ACTIONS.BOATREPAIR        = "Boat Repair"
 STRINGS.ACTIONS.BOATDISMOUNT      = "Boat Dismount"
 STRINGS.ACTIONS.STICK             = "Stick"

@@ -834,7 +834,7 @@ end
 
 
 local function ondeployshadowboat(inst, pt, deployer)
-    local boat = SpawnPrefab("shadowwaxwell_boat")
+    local boat = SpawnPrefab("shadowwaxwellboat")
     if boat ~= nil then
         boat.Physics:SetCollides(false)
         boat.Physics:Teleport(pt.x, 0, pt.z)
@@ -914,8 +914,5 @@ return Prefab("porto_raft", fnraft, assets, prefabs),
     MakePlacer("porto_shadowboat_placer", "rowboat", "waxwell_shadowboat_build", "run_loop", false, false, false),
     --Prefab( "shadowboatitem", fnshadowboatitem, assets, prefabs),
     --MakePlacer( "shadowboatitem_placer", "rowboat", "waxwell_shadowboat_build", "run_loop", false, false, false),
-
-    Prefab("porto_raft_old", fnraftold, assets, prefabs),
-    MakePlacer("porto_raft_old_placer", "raft", "raft_build", "run_loop", false, false, false),
     Prefab("porto_lograft_old", fnlograftold, assets, prefabs),
     MakePlacer("porto_lograft_old_placer", "raft", "raft_log_build", "run_loop", false, false, false)

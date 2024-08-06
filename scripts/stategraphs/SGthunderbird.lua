@@ -35,11 +35,19 @@ local events =
     end),
 
     EventHandler("attacked",
-        function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("transform") then inst.sg
-                    :GoToState("hit") end end),
+        function(inst)
+            if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("transform") then
+                inst.sg
+                    :GoToState("hit")
+            end
+        end),
     EventHandler("doattack",
-        function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("transform") then inst.sg
-                    :GoToState("attack") end end),
+        function(inst)
+            if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("transform") then
+                inst.sg
+                    :GoToState("attack")
+            end
+        end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
 }
 
@@ -181,8 +189,7 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "pickup",
 
         onenter = function(inst)
@@ -199,8 +206,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "pickup_pst",
 
         onenter = function(inst)
