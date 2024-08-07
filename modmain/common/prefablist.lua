@@ -108,6 +108,7 @@ PrefabFiles =
     "wildborekingstaff",
     "wildboreking_spawner",
 
+    "buffs_tro", -- (Food) Buffs
 
 }
 

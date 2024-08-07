@@ -1,10 +1,6 @@
-
-
-local assets = { Asset("ANIM", "anim/ant_chest.zip"), Asset("ANIM", "anim/ant_chest_honey_build.zip"),
-    Asset("ANIM", "anim/ant_chest_nectar_build.zip"), Asset("ANIM", "anim/ant_chest_pollen_build.zip"),
-    Asset("ANIM", "anim/ant_chest_royal_build.zip"), Asset("ANIM", "anim/honey_chest.zip"),
-    Asset("ANIM", "anim/honey_chest_honey_build.zip"), Asset("ANIM", "anim/honey_chest_nectar_build.zip"),
-    Asset("ANIM", "anim/honey_chest_pollen_build.zip"), Asset("ANIM", "anim/honey_chest_royal_build.zip") }
+local assets = { Asset("ANIM", "anim/ant_chest.zip"), Asset("ANIM", "anim/ant_chest_override_symbols.zip") }
+-- 还不会如何把overridesymbols打包到一个anim中，如果有想法可以参考原版mighty_gym
+-- 打包好后需要更改213行的build
 
 local prefabs = { "collapse_small", "lavaarena_creature_teleport_small_fx" }
 
@@ -203,8 +199,8 @@ local function RefreshAntChestBuild(inst)
     local prefix = inst.prefab:sub(1, -6) .. "_" .. inst.prefab:sub(-5)
     -- local prefix = inst.prefab == "antchest" and "ant_chest" or "honey_chest"
     local buildIdx = 0
-    local itemPrefab = { "nectar_pod", "pollen_item", "honey", "royal_jelly", "medal_withered_royaljelly" } -- Priority: Low -> High
-    local buildName = { "nectar", "pollen", "honey", "royal", "royal" }
+    local itemPrefab = { "nectar_pod", "pollen_item", "honey", "royal_jelly" } -- Priority: Low -> High
+    -- local buildName = { "nectar", "pollen", "honey", "royal" }
     for _, item in pairs(container.slots) do
         for idx, prf in ipairs(itemPrefab) do
             if item.prefab == prf then
@@ -213,8 +209,17 @@ local function RefreshAntChestBuild(inst)
             end
         end
     end
-    inst.AnimState:SetBuild(prefix .. (buildIdx > 0 and "_" .. buildName[buildIdx] .. "_build" or "")) -- "ant_chest_honey_build" etc.
+    if buildIdx > 0 then -- 只需要更换通道symbol
+	    inst.AnimState:OverrideSymbol("box01", "honeychest", "box_" .. itemPrefab[buildIdx])
+        -- build "honeychest" 实际在 "anim/ant_chest_override_sybols.zip" 里，只是用文件名打包不起来，打包时叫 "honeychest.zip" ，玄学ktools
+    else
+        inst.AnimState:ClearOverrideSymbol("box01")
+    end
     -- inst.MiniMapEntity:SetIcon(prefix .. (buildIdx > 0 and "_" .. buildName[buildIdx] or "") .. ".png") -- "antchest_honey.png" etc.
+end
+
+local function hide_ground(inst)
+    inst.AnimState:HideSymbol("ground01")
 end
 
 local function Common(icon, bank, build, widget)
@@ -265,8 +270,6 @@ local function Common(icon, bank, build, widget)
 
     MakeSmallPropagator(inst)
 
-    inst:DoTaskInTime(0, LoadHoneyFirstTime)
-
     inst:ListenForEvent("itemget", RefreshAntChestBuild)
     inst:ListenForEvent("itemlose", RefreshAntChestBuild)
     inst:ListenForEvent("onbuilt", onbuilt)
@@ -278,15 +281,25 @@ local function Common(icon, bank, build, widget)
 end
 
 local function fn()
-    return Common("ant_chest.png", "ant_chest", "ant_chest", "antchest")
-end
-
-local function fn1()
-    local inst = Common("honey_chest.png", "honey_chest", "honey_chest", "honeychest")
+    local inst = Common("ant_chest.png", "ant_chest", "ant_chest", "antchest")
 
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst:DoTaskInTime(0, LoadHoneyFirstTime)
+
+    return inst
+end
+
+local function fn1()
+    local inst = Common("honey_chest.png", "ant_chest", "ant_chest", "honeychest")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    hide_ground(inst)
 
     inst:AddComponent("upgradeable")
     inst.components.upgradeable.upgradetype = UPGRADETYPES.CHEST
@@ -296,5 +309,5 @@ local function fn1()
 end
 
 return Prefab("common/antchest", fn, assets),
-    Prefab("common/honeychest", fn1, assets),
-    MakePlacer("common/honeychest_placer", "honey_chest", "honey_chest", "closed")
+    Prefab("common/honeychest", fn1, assets), -- 代码层面区分野生和建造蜜箱不难，多写一个prefab实在是没有必要
+    MakePlacer("common/honeychest_placer", "ant_chest", "ant_chest", "closed", nil, nil, nil, nil, nil, nil, hide_ground)

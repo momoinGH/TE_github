@@ -5,15 +5,10 @@ local params = containers.params
 
 ------ 蜜箱
 local antchest_preservation = {
-	-- bee = true,
-	-- killerbee = true,
-	-- honeycomb = true,
-	-- beeswax = true,
 	honey = true,
 	royal_jelly = true,
 	nectar_pod = true,
 	pollen_item = true,
-	medal_withered_royaljelly = true, --能力勋章凋零蜂王浆
 }
 local function antchestitemtestfn(container, item, slot)
 	return antchest_preservation[item.prefab]
@@ -180,65 +175,45 @@ end
 params.armorvortexcloak = {
 	widget =
 	{
-		slotpos =
-		{
-			Vector3(-162, -186, 0),
-			Vector3(-162, -111, 0),
-			Vector3(-162, -36, 0),
-			Vector3(-162, 39, 0),
-			Vector3(-162, 114, 0),
-			Vector3(-87, -186, 0),
-			Vector3(-87, -111, 0),
-			Vector3(-87, -36, 0),
-			Vector3(-87, 39, 0),
-			Vector3(-87, 114, 0),
-		},
+		slotpos = {},
 		animbank = "ui_krampusbag_2x5",
 		animbuild = "ui_krampusbag_2x5",
-		bgimage = nil,
-		bgatlas = nil,
 		pos = Vector3(-5, -60, 0),
-		--side_align_tip = 160,
-		--isboat = true,
 	},
 	issidewidget = true,
 	type = "pack",
 	openlimit = 1,
 }
+for y = 0, 4 do
+    for x = 0, 1 do
+        table.insert(params.armorvortexcloak.widget.slotpos, Vector3(75 * x - 162, 75 * y - 186, 0))
+    end
+end
 
 
 
 ----------------------------------------------------------------------------------------------------
-params.trawlnetdropped = {
+params.trawlnetdropped = params.treasurechest
+----------------------------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------------------------
+params.corkchest = {
 	widget =
 	{
-		slotpos =
-		{
-			Vector3(0, -75, 0),
-			Vector3(-75, -75, 0),
-			Vector3(75, -75, 0),
-			Vector3(0, 75, 0),
-			Vector3(-75, 75, 0),
-			Vector3(75, 75, 0),
-			Vector3(0, 0, 0),
-			Vector3(-75, 0, 0),
-			Vector3(75, 0, 0),
-		},
-
-
-		animbank = "ui_chest_3x3",
-		animbuild = "ui_chest_3x3",
-		bgimage = nil,
-		bgatlas = nil,
-		pos = Vector3(0, 200, 0)
+		slotpos = {},
+		animbank = "ui_cookpot_1x4",
+		animbuild = "ui_cookpot_1x4",
+		pos = Vector3(80, 80, 0),
 	},
-	issidewidget = false,
 	type = "chest",
 }
+for i = 3, 0, -1 do
+    table.insert(params.corkchest.widget.slotpos, Vector3(0, 75 * i - 135, 0))
+end
+
 ----------------------------------------------------------------------------------------------------
 
-
-----------------------------------------------------------------------------------------------------
 
 local SMELTER_PREFABS = {
 	iron = true,
@@ -255,84 +230,49 @@ local SMELTER_PREFABS = {
 	candlehat = true,
 }
 
-params.smelter = {
-	widget =
-	{
-		slotpos =
-		{
-			Vector3(0, -135, 0),
-			Vector3(0, -60, 0),
-			Vector3(0, 15, 0),
-			Vector3(0, 90, 0),
-		},
-		animbank = "ui_cookpot_1x4",
-		animbuild = "ui_cookpot_1x4",
-		bgimage = nil,
-		bgatlas = nil,
-		pos = Vector3(80, 80, 0),
-		--	isboat = true,
-	},
-	issidewidget = false,
-	type = "cookpot",
-}
+params.smelter = deepcopy(params.corkchest)
+params.smelter.acceptsstacks = false
 
+-- local melting = require("melting")
 function params.smelter.itemtestfn(container, item, slot)
 	return item:HasTag("iron") or SMELTER_PREFABS[item.prefab]
+    -- return melting.isAttribute(item.prefab) -- 热带冒险已经改好炼钢炉了，预留
 end
 
 ----------------------------------------------------------------------------------------------------
-params.corkchest = {
-	widget =
-	{
-		slotpos =
-		{
-			Vector3(0, -135, 0),
-			Vector3(0, -60, 0),
-			Vector3(0, 15, 0),
-			Vector3(0, 90, 0),
-		},
-		animbank = "ui_cookpot_1x4",
-		animbuild = "ui_cookpot_1x4",
-		bgimage = nil,
-		bgatlas = nil,
-		pos = Vector3(80, 80, 0),
-		--	isboat = true,
-	},
-	issidewidget = false,
-	type = "chest",
+params.thatchpack = deepcopy(params.corkchest)
+params.thatchpack.issidewidget = true
+----------------------------------------------------------------------------------------------------
+local CARGOBOAT_SLOT2_PREFABS = {
+	tarlamp = true,
+	boat_lantern = true,
+	boat_torch = true,
+	quackeringram = true,
+	boatcannon = true,
+	woodlegs_boatcannon = true,
 }
 
-----------------------------------------------------------------------------------------------------
-
-params.thatchpack = {
-	widget =
-	{
-		slotpos =
-		{
-			Vector3(0, -135, 0),
-			Vector3(0, -60, 0),
-			Vector3(0, 15, 0),
-			Vector3(0, 90, 0),
-		},
-		animbank = "ui_cookpot_1x4",
-		animbuild = "ui_cookpot_1x4",
-		bgimage = nil,
-		bgatlas = nil,
-		pos = Vector3(-60, -60, 0),
-		--	isboat = true,
-	},
-	issidewidget = true,
-	type = "pack",
-}
-----------------------------------------------------------------------------------------------------
-local function BoatItemTestFn(container, item, slot)
-	if slot == 1 then
-		return item:HasTag("sail") or item.prefab == "trawlnet"
-	elseif slot == 2 then
-		return CARGOBOAT_SLOT2_PREFABS[item.prefab]
-	else
-		return slot ~= nil --如果是Shift+左键的话没有slot，因为不知道会加到哪个槽里，拒绝添加
-	end
+local function BoatItemTestFn(container, item, slot) -- 兼容shift存入动作的testfn
+    if slot then
+        if slot == 1 and not container:GetItemInSlot(slot) then
+            return (item:HasTag("sail") or item.prefab == "trawlnet") or false
+        elseif slot == 2 and not container:GetItemInSlot(slot) then
+            return CARGOBOAT_SLOT2_PREFABS[item.prefab] or false
+        else
+            local slotitem = container:GetItemInSlot(slot)
+            if slotitem then
+                if slotitem.prefab == item.prefab then
+                    return slotitem.components.stackable and not slotitem.components.stackable:IsFull() or false
+                else
+                    return false
+                end
+            else
+                return true
+            end
+        end
+    else
+        return true
+    end
 end
 
 local shipwrecked_boat_slotbg =
@@ -366,40 +306,18 @@ params.rowboat = {
 		animbuild = "boat_hud_row",
 		pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
 	},
+    usespecificslotsforitems = true,
 	type = "chest",
+	itemtestfn = BoatItemTestFn
 }
-
-params.rowboat.itemtestfn = BoatItemTestFn
 
 ----------------------------------------------------------------------------------------------------
 params.armouredboat = params.rowboat
-params.armouredboat.itemtestfn = BoatItemTestFn
 ----------------------------------------------------------------------------------------------------
 params.corkboat = params.rowboat
-params.corkboat.itemtestfn = BoatItemTestFn
 ----------------------------------------------------------------------------------------------------
 params.shadowwaxwellboat = params.rowboat
-params.shadowwaxwellboat.itemtestfn = BoatItemTestFn
 ----------------------------------------------------------------------------------------------------
-local CARGOBOAT_SLOT2_PREFABS = {
-	tarlamp = true,
-	boat_lantern = true,
-	boat_torch = true,
-	quackeringram = true,
-	boatcannon = true,
-	woodlegs_boatcannon = true,
-}
-
-local function BoatItemTestFn(container, item, slot)
-	if slot == 1 then
-		return item:HasTag("sail") or item.prefab == "trawlnet"
-	elseif slot == 2 then
-		return CARGOBOAT_SLOT2_PREFABS[item.prefab]
-	else
-		return slot ~= nil --如果是Shift+左键的话没有slot，因为不知道会加到哪个槽里，拒绝添加
-	end
-end
-
 params.cargoboat = {
 	widget =
 	{
@@ -419,16 +337,14 @@ params.cargoboat = {
 
 		animbank = "boat_hud_cargo",
 		animbuild = "boat_hud_cargo",
-		bgimage = nil,
-		bgatlas = nil,
 		pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
 		isboat = true,
 	},
-	issidewidget = false,
+    usespecificslotsforitems = true,
 	type = "chest",
+	itemtestfn = BoatItemTestFn,
 }
 
-params.cargoboat.itemtestfn = BoatItemTestFn
 ----------------------------------------------------------------------------------------------------
 params.encrustedboat = {
 	widget =
@@ -445,10 +361,11 @@ params.encrustedboat = {
 		animbuild = "boat_hud_encrusted",
 		pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
 	},
+    usespecificslotsforitems = true,
 	type = "chest",
+	itemtestfn = BoatItemTestFn,
 }
 
-params.encrustedboat.itemtestfn = BoatItemTestFn
 ----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
@@ -466,14 +383,11 @@ params.woodlegsboat = {
 
 		animbank = "boat_hud_encrusted",
 		animbuild = "boat_hud_encrusted",
-		bgimage = nil,
-		bgatlas = nil,
 		pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
 	},
-	issidewidget = false,
+    usespecificslotsforitems = true,
 	type = "chest",
+	itemtestfn = BoatItemTestFn,
 }
-
-params.woodlegsboat.itemtestfn = BoatItemTestFn
 
 ----------------------------------------------------------------------------------------------------
