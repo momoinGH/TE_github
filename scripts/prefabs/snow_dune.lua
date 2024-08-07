@@ -88,7 +88,7 @@ local function workcallback(inst, worker, workleft)
 	inst.components.lootdropper:AddRandomLoot("feather_robin", 0.01)
 	inst.components.lootdropper:AddRandomLoot("feather_robin_winter", 0.01)
 
-	inst.components.lootdropper:AddRandomLoot("venom_gland", 0.001)
+	inst.components.lootdropper:AddRandomLoot("venomgland", 0.001)
 	inst.components.lootdropper:AddRandomLoot("coconut", 0.001)
 	inst.components.lootdropper:AddRandomLoot("crab", 0.001)
 	inst.components.lootdropper:AddRandomLoot("snake", 0.001)

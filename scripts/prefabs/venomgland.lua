@@ -17,7 +17,7 @@ local function oneat(inst, eater)
     end
 
     if eater.components.health then
-        eater.components.health:DoDelta(-dmg, nil, "venom_gland")
+        eater.components.health:DoDelta(-dmg, nil, "venomgland")
     end
 end
 

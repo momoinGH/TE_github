@@ -1,4 +1,5 @@
 PrefabFiles = {
+  "grassnova",
   "axeobsidian",
   "armor_obsidian",
   "meteor_impact",

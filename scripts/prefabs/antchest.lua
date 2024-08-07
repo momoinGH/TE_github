@@ -1,12 +1,15 @@
-
-
-local assets = { Asset("ANIM", "anim/ant_chest.zip"), Asset("ANIM", "anim/ant_chest_honey_build.zip"),
-    Asset("ANIM", "anim/ant_chest_nectar_build.zip"), Asset("ANIM", "anim/ant_chest_pollen_build.zip"),
-    Asset("ANIM", "anim/ant_chest_royal_build.zip"), Asset("ANIM", "anim/honey_chest.zip"),
-    Asset("ANIM", "anim/honey_chest_honey_build.zip"), Asset("ANIM", "anim/honey_chest_nectar_build.zip"),
-    Asset("ANIM", "anim/honey_chest_pollen_build.zip"), Asset("ANIM", "anim/honey_chest_royal_build.zip") }
-
-local prefabs = { "collapse_small", "lavaarena_creature_teleport_small_fx" }
+local assets = {
+    Asset("ANIM", "anim/ant_chest.zip"),
+    Asset("ANIM", "anim/ant_chest_honey_build.zip"),
+    Asset("ANIM", "anim/ant_chest_nectar_build.zip"),
+    Asset("ANIM", "anim/ant_chest_pollen_build.zip"),
+    Asset("ANIM", "anim/ant_chest_royal_build.zip"),
+    Asset("ANIM", "anim/honey_chest.zip"),
+    Asset("ANIM", "anim/honey_chest_honey_build.zip"),
+    Asset("ANIM", "anim/honey_chest_nectar_build.zip"),
+    Asset("ANIM", "anim/honey_chest_pollen_build.zip"),
+    Asset("ANIM", "anim/honey_chest_royal_build.zip"),
+}
 
 local loot = { "chitin", "chitin", "chitin", "beeswax", "honey", "honey", "rocks" -- "flint",
 }

@@ -6,9 +6,6 @@ local assets =
 	Asset("ANIM", "anim/wallhamletcity2.zip"),
 }
 
-local BASEMENT_SHADE = 0.5
-local TAMANHODOMAPA = 1
-
 local function OnSave(inst, data)
 	data.entrada = inst.entrada
 	data.wallpaper = inst.wallpaper
@@ -106,38 +103,8 @@ local function OnActivateByOther(inst, source, doer)
 	end
 end
 
-local function ExitOnActivateByOther(inst, other, doer)
-	if doer ~= nil
-		and doer.sg ~= nil and not doer:HasTag("playerghost") then
-		doer.sg.statemem.teleportarrivestate = "idle"
-	end
-end
-
 local function PlayTravelSound(inst, doer)
 	inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_close")
-end
-
-local function ReceiveItem(teleporter, item)
-	if item.Transform ~= nil then
-		local x, y, z = teleporter.inst.Transform:GetWorldPosition()
-		local angle = math.random() * TWOPI
-
-		if item.Physics ~= nil then
-			item.Physics:Stop()
-			if teleporter.inst:IsAsleep() then
-				local radius = teleporter.inst:GetPhysicsRadius(0) + math.random()
-				item.Physics:Teleport(x + math.cos(angle) * radius, 0, z - math.sin(angle) * radius)
-			else
-				TemporarilyRemovePhysics(item, 1)
-				local speed = 2 + math.random() * .5 + teleporter.inst:GetPhysicsRadius(0)
-				item.Physics:Teleport(x, 4, z)
-				item.Physics:SetVel(speed * math.cos(angle), -1, speed * math.sin(angle))
-			end
-		else
-			local radius = 2 + math.random()
-			item.Transform:SetPosition(x + math.cos(angle) * radius, 0, z - math.sin(angle) * radius)
-		end
-	end
 end
 
 local function OnMouseOver(inst)
@@ -155,32 +122,11 @@ local function OnActivate(inst, doer)
 	end
 end
 
-local function TakeLightSteps(light, value)
-	local function LightToggle(light)
-		light.level = (light.level or 0) + value
-		if (value > 0 and light.level <= 1) or (value < 0 and light.level > 0) then
-			light.Light:SetRadius(light.level)
-			light.lighttoggle = light:DoTaskInTime(2 * FRAMES, LightToggle)
-		elseif value < 0 then
-			light.Light:Enable(false)
-			light:Hide()
-		end
-		light.AnimState:SetScale(light.level, 1)
-	end
-	if light.lighttoggle ~= nil then
-		light.lighttoggle:Cancel()
-	end
-	light.lighttoggle = light:DoTaskInTime(2 * FRAMES, LightToggle)
-end
-
 local function OnAccept(inst, giver, item)
 	inst.components.inventory:DropItem(item)
 	inst.components.teleporter:Activate(item)
 end
 
-local function IsNearBasement(x, y, z)
-	return #TheSim:FindEntities(x, 0, z, 100, { "alt_tile" }) > 0
-end
 
 local function entrance()
 	local inst = CreateEntity()
@@ -236,17 +182,10 @@ local function entrance()
 	inst.components.trader.onaccept = OnAccept
 	inst.components.trader.deleteitemonaccept = false
 
-
-	--		if inst.components.teleporter.targetTeleporter ~= nil then
-	--		inst:RemoveEventCallback("onbuilt", OnBuilt)
-	--		return
-	--	end
 	if inst.entrada == nil then
 		local x = 0
-		local y = 0
 		local z = 0
 		if TheWorld.components.contador then TheWorld.components.contador:Increment(1) end
-		local numerounico = TheWorld.components.contador.count
 
 		x = TheWorld.components.contador:GetX()
 		y = 0
@@ -254,11 +193,7 @@ local function entrance()
 
 		inst.exit = SpawnPrefab("playerhouse_city_door_saida")
 		inst.exit.Transform:SetPosition(x + 5.2, 0, z + 0.5)
-		---------------------------cria a parede inicio------------------------------------------------------------------	
-		local tipodemuro = "wall_tigerpond"
-		---------------------------cria a parede inicio -------------------------------------
 		---------------------------parade dos aposento------------------------------------------------------------------	
-		local y = 0
 
 		x, z = math.floor(x) + 0.5, math.floor(z) + 0.5 --matching with normal walls
 		inst.Transform:SetPosition(x, 0, z)
@@ -272,11 +207,11 @@ local function entrance()
 			end
 		end
 
-
+		--生成一圈不可见墙体，防止玩家走出小房子
 		local count = 0
 		for _, v in pairs(POS) do
 			count = count + 1
-			local part = SpawnPrefab(tipodemuro)
+			local part = SpawnPrefab("wall_tigerpond")
 			part.Transform:SetPosition(x + v.x, 0, z + v.z)
 		end
 
@@ -415,14 +350,6 @@ local function entrance()
 		--------------------------------------------cria o piso e itens fim -------------------------------------------------------	
 
 
-
-
-
-
-
-
-
-
 		inst:DoTaskInTime(1, function(inst)
 			local portaentrada = SpawnPrefab("playerhouse_city")
 			local a, b, c = inst.Transform:GetWorldPosition()
@@ -510,19 +437,14 @@ local function SpawnPiso1(inst)
 	return inst
 end
 
-local function SpawnPiso2(inst)
+local function SpawnPiso2()
 	local inst = CreateEntity()
+
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
 
-	--	inst.AnimState:SetBank("pisohamlet")
-	--	inst.AnimState:SetBuild("pisohamlet")
-	--	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	--	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	--	inst.AnimState:SetSortOrder(5)
-	--	inst.Transform:SetScale(0.3, 0.3, 0.3)
 	inst.AnimState:PlayAnimation("noise_woodfloor")
 
 	inst:AddTag("NOBLOCK")
@@ -535,21 +457,23 @@ local function SpawnPiso2(inst)
 		return inst
 	end
 
-	inst.persists = false
-
 	inst:AddComponent("prototyper")
 	inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.HOME_TWO
 	inst.components.prototyper.onturnoff = OnTurnOff
 	inst.components.prototyper.onturnon = OnTurnOn
 
+	inst.persists = false
+
 	return inst
 end
 
-local function wall_common(build)
+local function wall_common()
 	local inst = CreateEntity()
+
 	inst.entity:AddTransform()
 	inst.entity:AddNetwork()
 	inst.entity:AddAnimState()
+
 	inst.AnimState:SetBank("wallhamletcity1")
 	inst.AnimState:SetBuild("wallhamletcity1")
 	inst.AnimState:PlayAnimation("shop_wall_woodwall", true)
@@ -650,7 +574,7 @@ local function fnescada()
 	inst:AddTag("guard_entrance")
 	inst:AddTag("hamletteleport")
 	inst:AddTag("liberado")
-
+	inst:AddTag("NOBLOCK")
 	inst:AddTag("antlion_sinkhole_blocker")
 
 	inst.entity:SetPristine()

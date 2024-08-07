@@ -3,18 +3,17 @@ PrefabFiles =
     "shipwrecked_boat",
     "shipwrecked_boat_placer",
     "shipwrecked_boat_placer2",
-
     "turfesvolcanobiome",
-    "venom_gland",
+    "venomgland",
     "machetes",
     "antidote",
     "splash_water",
     "debris", --debris_1, debris_2, debris_3, debris_4 espalhar na praia
 
-    "twister_defogo",
+    "firetwister",
     "twister_tornadodefogo",
-    "firetwister_spawner",
-    "fire_twister_seal",
+    -- "firetwister_spawner", --火豹卷生成器
+    "firetwister_seal",
     "walani",   --角色
     "wilbur",   --角色
     "woodlegs", --角色
@@ -27,7 +26,7 @@ PrefabFiles =
     "watercress",
     "pinkman",
     "piggolem",
-    "turfshamlet",
+
 
     "boatmetal",
     --"bird_swarm",
@@ -105,10 +104,8 @@ PrefabFiles =
     "crabapple_tree",
     "wildboreking",
     "wildbore_minion",
-    "wildborekingstaff",
+    "pigkingstaff",
     "wildboreking_spawner",
-
-
 }
 
 if GetModConfigData("whirlpools") then

@@ -248,5 +248,6 @@ local function fn()
     return inst
 end
 
-return Prefab("shard_sword", fnshard_sword, assets), Prefab("shard_beak", fnshard_beak, assets),
+return Prefab("shard_sword", fnshard_sword, assets),
+    Prefab("shard_beak", fnshard_beak, assets),
     Prefab("glass_shards", fn, assets)

@@ -4,15 +4,6 @@ local assets =
     Asset("ANIM", "anim/pig_house_sale.zip"),
 }
 
-local function OnRemoved(inst, owner)
-    --[[
-    local target = nil
-    target = owner.components.inventory:FindItem(function(item) return item:HasTag("ant_translator") end)
-    if not target then
-        owner:RemoveTag("antlingual")
-    end
-    ]]
-end
 
 local function ondeploy(inst, pt)
     local casa = SpawnPrefab("playerhouse_city_entrance")
@@ -20,8 +11,9 @@ local function ondeploy(inst, pt)
     inst:Remove()
 end
 
-local function makefn(inst)
+local function makefn()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
@@ -32,6 +24,8 @@ local function makefn(inst)
     inst.AnimState:SetBank("deed")
     inst.AnimState:SetBuild("deed")
     inst.AnimState:PlayAnimation("idle")
+
+    inst:AddTag("deploykititem") --影响放置时提示文本
 
     inst.entity:SetPristine()
 
@@ -54,7 +48,6 @@ local function makefn(inst)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-
     inst.components.inventoryitem.foleysound = "dontstarve/movement/foley/jewlery"
 
     return inst

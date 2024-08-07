@@ -5,10 +5,6 @@ local params = containers.params
 
 ------ 蜜箱
 local antchest_preservation = {
-	-- bee = true,
-	-- killerbee = true,
-	-- honeycomb = true,
-	-- beeswax = true,
 	honey = true,
 	royal_jelly = true,
 	nectar_pod = true,
@@ -180,62 +176,25 @@ end
 params.armorvortexcloak = {
 	widget =
 	{
-		slotpos =
-		{
-			Vector3(-162, -186, 0),
-			Vector3(-162, -111, 0),
-			Vector3(-162, -36, 0),
-			Vector3(-162, 39, 0),
-			Vector3(-162, 114, 0),
-			Vector3(-87, -186, 0),
-			Vector3(-87, -111, 0),
-			Vector3(-87, -36, 0),
-			Vector3(-87, 39, 0),
-			Vector3(-87, 114, 0),
-		},
+		slotpos = {},
 		animbank = "ui_krampusbag_2x5",
 		animbuild = "ui_krampusbag_2x5",
-		bgimage = nil,
-		bgatlas = nil,
 		pos = Vector3(-5, -60, 0),
-		--side_align_tip = 160,
-		--isboat = true,
 	},
 	issidewidget = true,
 	type = "pack",
 	openlimit = 1,
 }
-
-
+for y = 0, 4 do
+	for x = 0, 1 do
+		table.insert(params.armorvortexcloak.widget.slotpos, Vector3(75 * x - 162, 75 * y - 186, 0))
+	end
+end
 
 ----------------------------------------------------------------------------------------------------
-params.trawlnetdropped = {
-	widget =
-	{
-		slotpos =
-		{
-			Vector3(0, -75, 0),
-			Vector3(-75, -75, 0),
-			Vector3(75, -75, 0),
-			Vector3(0, 75, 0),
-			Vector3(-75, 75, 0),
-			Vector3(75, 75, 0),
-			Vector3(0, 0, 0),
-			Vector3(-75, 0, 0),
-			Vector3(75, 0, 0),
-		},
 
+params.trawlnetdropped = params.treasurechest
 
-		animbank = "ui_chest_3x3",
-		animbuild = "ui_chest_3x3",
-		bgimage = nil,
-		bgatlas = nil,
-		pos = Vector3(0, 200, 0)
-	},
-	issidewidget = false,
-	type = "chest",
-}
-----------------------------------------------------------------------------------------------------
 
 
 ----------------------------------------------------------------------------------------------------
