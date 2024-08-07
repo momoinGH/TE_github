@@ -106,6 +106,9 @@ PrefabFiles =
     "wildbore_minion",
     "pigkingstaff",
     "wildboreking_spawner",
+
+    "buffs_tro", -- (Food) Buffs
+
 }
 
 if GetModConfigData("whirlpools") then
