@@ -7,31 +7,24 @@ local prefabs = { "collapse_small", "lavaarena_creature_teleport_small_fx" }
 local loot = { "chitin", "chitin", "chitin", "beeswax", "honey", "honey", "rocks" -- "flint",
 }
 
-local function UpdateNameFn(inst)
+local function UpdateNameFn(inst) -- 升级后更新显示名
     if inst.components.upgradeable.upgradetype == nil then
         return subfmt(STRINGS.NAMES.UPDATEDCHEST, { container = STRINGS.NAMES[inst.prefab:upper()] })
     end
 end
 
 local function onopen(inst)
-    if not inst:HasTag("burnt") then
-        inst.AnimState:PushAnimation("open", false)
-        inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/honey_chest/open")
-    end
+    inst.AnimState:PushAnimation("open", false)
+    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/honey_chest/open")
 end
 
 local function onclose(inst)
-    if not inst:HasTag("burnt") then
-        inst.AnimState:PlayAnimation("close", true)
-        inst.AnimState:PushAnimation("closed", true)
-        inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/honey_chest/close")
-    end
+    inst.AnimState:PlayAnimation("close", true)
+    inst.AnimState:PushAnimation("closed", true)
+    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/honey_chest/close")
 end
 
-local function onhammered(inst, worker)
-    if inst:HasTag("fire") and inst.components.burnable then
-        inst.components.burnable:Extinguish()
-    end
+local function onhammered(inst, worker) -- 常规破坏后
     inst.components.lootdropper:DropLoot()
     if inst.components.container then
         inst.components.container:DropEverything()
@@ -41,24 +34,17 @@ local function onhammered(inst, worker)
     inst:Remove()
 end
 
-local function onhit(inst, worker)
-    if not inst:HasTag("burnt") then
-        inst.AnimState:PlayAnimation("hit")
-        inst.AnimState:PushAnimation("closed", true)
-        inst.SoundEmitter:PlaySound("waterlogged1/common/use_figjam")
-        if inst.components.container then
-            inst.components.container:DropEverything()
-            inst.components.container:Close()
-        end
+local function onhit(inst, worker) -- 常规受击
+    inst.AnimState:PlayAnimation("hit")
+    inst.AnimState:PushAnimation("closed", true)
+    inst.SoundEmitter:PlaySound("waterlogged1/common/use_figjam")
+    if inst.components.container then
+        inst.components.container:DropEverything()
+        inst.components.container:Close()
     end
 end
 
-local function onbuilt(inst)
-    inst.AnimState:PushAnimation("close")
-    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/cork_chest/place")
-end
-
-local function converttocollapsed(inst, droploot, burnt)
+local function converttocollapsed(inst, droploot) -- 升级后转化废墟
     local x, y, z = inst.Transform:GetWorldPosition()
     if droploot then
         local fx = SpawnPrefab("collapse_small")
@@ -76,21 +62,18 @@ local function converttocollapsed(inst, droploot, burnt)
 
     local pile = SpawnPrefab("collapsed_honeychest")
     pile.Transform:SetPosition(x, y, z)
-    pile:SetChest(inst, burnt)
 end
 
-local function Upgrade_onhit(inst, worker)
-    if not inst:HasTag("burnt") then
-        if inst.components.container then
-            inst.components.container:DropEverything(nil, true)
-            inst.components.container:Close()
-        end
-        inst.AnimState:PlayAnimation("hit")
-        inst.AnimState:PushAnimation("closed", false)
+local function Upgrade_onhit(inst, worker) -- 升级后受击
+    if inst.components.container then
+        inst.components.container:DropEverything(nil, true)
+        inst.components.container:Close()
     end
+    inst.AnimState:PlayAnimation("hit")
+    inst.AnimState:PushAnimation("closed", false)
 end
 
-local function shouldcollapse(inst)
+local function shouldcollapse(inst) -- 可转化为废墟
     if inst.components.container and inst.components.container.infinitestacksize then
         --NOTE: should already have called DropEverything(nil, true) (worked or burnt or deconstructed)
         --      so everything remaining counts as an "overstack"
@@ -109,7 +92,7 @@ local function shouldcollapse(inst)
     return false
 end
 
-local function Upgrade_onhammered(inst, worker)
+local function Upgrade_onhammered(inst, worker) -- 升级后被破坏
     if shouldcollapse(inst) then
         if TheWorld.Map:IsPassableAtPoint(inst.Transform:GetWorldPosition()) then
             inst.components.container:DropEverythingUpToMaxStacks(TUNING.COLLAPSED_CHEST_MAX_EXCESS_STACKS_DROPS)
@@ -131,7 +114,7 @@ local function Upgrade_onhammered(inst, worker)
     onhammered(inst, worker)
 end
 
-local function Upgrade_onrestoredfromcollapsed(inst)
+local function Upgrade_onrestoredfromcollapsed(inst) -- 从废墟中修复
     -- inst.AnimState:PlayAnimation("rebuild")
     inst.AnimState:PushAnimation("closed", false)
     -- if inst.skin_place_sound then
@@ -162,11 +145,8 @@ local function OnUpgrade(inst, performer, upgraded_from_item)
 end
 
 local function onsave(inst, data)
-    if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() or inst:HasTag("burnt") then
-        data.burnt = true
-    end
-    if inst.honeyWasLoaded then
-        data.honeyWasLoaded = inst.honeyWasLoaded
+    if inst.IsNatural then
+        data.IsNatural = inst.IsNatural
     end
 end
 
@@ -174,27 +154,31 @@ local function onload(inst, data)
     if inst.components.upgradeable ~= nil and inst.components.upgradeable.numupgrades > 0 then
         OnUpgrade(inst)
     end
-    if data ~= nil and data.burnt and inst.components.burnable ~= nil then
-        inst.components.burnable.onburnt(inst)
+    if data and data.IsNatural then
+        inst.IsNatural = data.IsNatural
     end
-    if data and data.honeyWasLoaded then
-        inst.honeyWasLoaded = data.honeyWasLoaded
-    end
+    inst.components.container:WidgetSetup(inst.IsNatural == false and "honeychest" or "antchest")
 end
 
-local function LoadHoneyFirstTime(inst)
-    if not inst.honeyWasLoaded then
-        inst.honeyWasLoaded = true
+local function funcLoadHoneyFirstTime(inst) -- 野生初次加载时生成蜂蜜
+    if inst.IsNatural == nil then
         if inst.components.container then
             for i = 1, 9 do
-                local single1 = SpawnPrefab("honey")
-                inst.components.container:GiveItem(single1, i)
+                inst.components.container:GiveItem(SpawnPrefab("honey"), i)
             end
         end
     end
+    inst.IsNatural = true
 end
 
-local function RefreshAntChestBuild(inst)
+local function NaturalPostInit(inst) -- 野生后装配
+    if inst.IsNatural == nil or inst.IsNatural == true then
+        inst.components.container:WidgetSetup("antchest")
+        inst:DoTaskInTime(0, funcLoadHoneyFirstTime)
+    end
+end
+
+local function ChangeAntChestSymbol(inst) -- 切换通道
     local container = inst.components.container
     local prefix = inst.prefab:sub(1, -6) .. "_" .. inst.prefab:sub(-5)
     -- local prefix = inst.prefab == "antchest" and "ant_chest" or "honey_chest"
@@ -218,11 +202,27 @@ local function RefreshAntChestBuild(inst)
     -- inst.MiniMapEntity:SetIcon(prefix .. (buildIdx > 0 and "_" .. buildName[buildIdx] or "") .. ".png") -- "antchest_honey.png" etc.
 end
 
-local function hide_ground(inst)
+local function hide_ground(inst) -- 隐藏建造的岩石通道
     inst.AnimState:HideSymbol("ground01")
 end
 
-local function Common(icon, bank, build, widget)
+local function ArtificialPostInit(inst) -- 建造后装配
+    if inst.IsNatural == nil or inst.IsNatural == false then
+        inst.IsNatural = false
+        inst.AnimState:PlayAnimation("close")
+        inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/cork_chest/place")
+
+        inst.components.container:WidgetSetup("honeychest")
+
+        hide_ground(inst)
+
+        inst:AddComponent("upgradeable")
+        inst.components.upgradeable.upgradetype = UPGRADETYPES.CHEST
+        inst.components.upgradeable:SetOnUpgradeFn(OnUpgrade)
+    end
+end
+
+local function Common(icon, bank, build)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -250,12 +250,10 @@ local function Common(icon, bank, build, widget)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup(widget)
     inst.components.container.onopenfn = onopen
     inst.components.container.onclosefn = onclose
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot(loot)
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
@@ -270,9 +268,9 @@ local function Common(icon, bank, build, widget)
 
     MakeSmallPropagator(inst)
 
-    inst:ListenForEvent("itemget", RefreshAntChestBuild)
-    inst:ListenForEvent("itemlose", RefreshAntChestBuild)
-    inst:ListenForEvent("onbuilt", onbuilt)
+    inst:ListenForEvent("itemget", ChangeAntChestSymbol)
+    inst:ListenForEvent("itemlose", ChangeAntChestSymbol)
+    inst:ListenForEvent("onbuilt", ArtificialPostInit)
 
     inst.OnSave = onsave
     inst.OnLoad = onload
@@ -281,33 +279,30 @@ local function Common(icon, bank, build, widget)
 end
 
 local function fn()
-    local inst = Common("ant_chest.png", "ant_chest", "ant_chest", "antchest")
+    local inst = Common("ant_chest.png", "ant_chest", "ant_chest")
 
     if not TheWorld.ismastersim then
         return inst
     end
 
-    inst:DoTaskInTime(0, LoadHoneyFirstTime)
+    inst.components.lootdropper:SetLoot(loot)
+    NaturalPostInit(inst)
 
     return inst
 end
 
 local function fn1()
-    local inst = Common("honey_chest.png", "ant_chest", "ant_chest", "honeychest")
+    local inst = Common("honey_chest.png", "ant_chest", "ant_chest")
 
     if not TheWorld.ismastersim then
         return inst
     end
 
-    hide_ground(inst)
-
-    inst:AddComponent("upgradeable")
-    inst.components.upgradeable.upgradetype = UPGRADETYPES.CHEST
-    inst.components.upgradeable:SetOnUpgradeFn(OnUpgrade)
+    ArtificialPostInit(inst)
 
     return inst
 end
 
 return Prefab("common/antchest", fn, assets),
-    Prefab("common/honeychest", fn1, assets), -- 代码层面区分野生和建造蜜箱不难，多写一个prefab实在是没有必要
+    Prefab("common/honeychest", fn1, assets),
     MakePlacer("common/honeychest_placer", "ant_chest", "ant_chest", "closed", nil, nil, nil, nil, nil, nil, hide_ground)
