@@ -291,6 +291,8 @@ local dictInventoryItems = {
 		"teleportato_sw_base", "teleportato_sw_box", "teleportato_sw_crank", "teleportato_sw_potato",
 		"teleportato_sw_ring", "telescope", "telipad", "thatchpack", "thorns_marsh", "thumper", "thunderhat", "tigereye",
 		"toucan", "toucan_hamlet", "tracker", "tracker_open", "trawlnet", "waterdrop",
+		-- for recipe, not inv item
+		"honeychest",
 	},
 	volcanoinventory = {
 		"aloe_oversized", "aloe_oversized_waxed", "antidote", "armor_seashell", "axeobsidian", "ballphinocean",
