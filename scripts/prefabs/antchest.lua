@@ -194,7 +194,7 @@ local function ChangeAntChestSymbol(inst) -- 切换通道
         end
     end
     if buildIdx > 0 then -- 只需要更换通道symbol
-	    inst.AnimState:OverrideSymbol("box01", "honeychest", "box_" .. itemPrefab[buildIdx])
+        inst.AnimState:OverrideSymbol("box01", "honeychest", "box_" .. itemPrefab[buildIdx])
         -- build "honeychest" 实际在 "anim/ant_chest_override_sybols.zip" 里，只是用文件名打包不起来，打包时叫 "honeychest.zip" ，玄学ktools
     else
         inst.AnimState:ClearOverrideSymbol("box01")

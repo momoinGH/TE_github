@@ -4,17 +4,34 @@ Constructor.SetEnv(env)
 
 -- Runar: 未定义的优先级，没有的话碎布加燃料会有问题
 ACTIONS.ADDFUEL.priority = 1
-ACTIONS.GIVE.priority = 0
+ACTIONS.GIVE.priority    = 0
 
-STRINGS.ACTIONS.JUMPIN.USE = STRINGS.ACTIONS.USEITEM
-ACTIONS.JUMPIN.strfn = function(act)
-    if act.target ~= nil and act.target:HasTag("hamletteleport") then
-        return "HAMLET"
+Utils.FnDecorator(ACTIONS.JUMPIN, "strfn", function(act)
+    if act.target ~= nil then
+        if act.target:HasTag("hamletteleport") then
+            return { "HAMLET" }, true
+        elseif act.target:HasTag("stairs") then
+            return { "USE" }, true
+        end
     end
-    return act.doer ~= nil and act.doer:HasTag("playerghost") and "HAUNT"
-        or act.target ~= nil and act.target:HasTag("stairs") and "USE"
-        or nil
-end
+end)
+
+-- 进入哈姆雷特小房子
+Utils.FnDecorator(ACTIONS.JUMPIN, "fn", function(act)
+    if act.doer ~= nil and
+        act.doer.sg ~= nil and
+        act.doer.sg.currentstate.name == "jumpin_pre" then
+        if act.target ~= nil and
+            act.target.components.teleporter ~= nil and
+            act.target.components.teleporter:IsActive()
+            and act.target:HasTag("hamletteleport")
+        then
+            act.doer.sg:GoToState("hamletteleport", { teleporter = act.target })
+            return { true }, true
+        end
+    end
+end)
+
 
 ACTIONS.CASTAOE.strfn = function(act)
     return act.invobject ~= nil and
@@ -1027,29 +1044,6 @@ Constructor.AddAction({ priority = 10, mount_valid = true },
             act.invobject:RemoveTag("ligado")
         end
         return true
-    end
-)
-
--- TODO 能优化掉吗？
-Constructor.AddAction({ priority = 10, ghost_valid = true, encumbered_valid = true, invalid_hold_action = true },
-    "JUMPIN",
-    STRINGS.ACTIONS.JUMPIN,
-    function(act)
-        if act.doer ~= nil and
-            act.doer.sg ~= nil and
-            act.doer.sg.currentstate.name == "jumpin_pre" then
-            if act.target ~= nil and
-                act.target.components.teleporter ~= nil and
-                act.target.components.teleporter:IsActive() then
-                if act.target:HasTag("hamletteleport") and not act.doer:HasTag("playerghost") then
-                    act.doer.sg:GoToState("hamletteleport", { teleporter = act.target })
-                else
-                    act.doer.sg:GoToState("jumpin", { teleporter = act.target })
-                end
-                return true
-            end
-            act.doer.sg:GoToState("idle")
-        end
     end
 )
 

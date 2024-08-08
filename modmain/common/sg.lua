@@ -2066,7 +2066,10 @@ AddStategraphState("wilson", State {
         ConfigureRunState(inst)
         inst.components.locomotor:RunForward()
 
-        if inst:HasTag("aquatic") and inst.components.rowboatwakespawner then
+        local boat = inst:GetCurrentPlatform()
+        local inBoat = boat and boat:HasTag("shipwrecked_boat")
+
+        if (inBoat or inst:HasTag("aquatic")) and inst.components.rowboatwakespawner then
             inst.components.rowboatwakespawner:StartSpawning()
 
             local barco = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
@@ -2095,7 +2098,7 @@ AddStategraphState("wilson", State {
 
         local anim = GetRunStateAnim(inst)
 
-        if inst:HasTag("aquatic") then
+        if inBoat or inst:HasTag("aquatic") then
             if inst.replica.inventory:IsHeavyLifting() then
                 anim = "heavy_idle"
             elseif inst:HasTag("surf") then

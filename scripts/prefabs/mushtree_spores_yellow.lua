@@ -1,7 +1,3 @@
---MUSHTREE_SPORE_BLUE = "spore_tall"
---MUSHTREE_SPORE_RED = "spore_medium"
---MUSHTREE_SPORE_GREEN = "spore_small"
-MUSHTREE_SPORE_YELLOW = "spore_yellow"
 
 local assets =
 {
@@ -13,21 +9,6 @@ local assets =
 
 local data =
 {
-    --[[small =
-    { --Green
-        build = "mushroom_spore",
-        lightcolour = {146/255, 225/255, 146/255},
-    },
-    medium =
-    { --Red
-        build = "mushroom_spore_red",
-        lightcolour = {197/255, 126/255, 126/255},
-    },
-    tall =
-    { --Blue
-        build = "mushroom_spore_blue",
-        lightcolour = {111/255, 111/255, 227/255},
-    },]]
     yeloow =
     { --yellow
         build = "mushroom_spore_yelo",
@@ -210,7 +191,4 @@ local function makespore(data)
     return fn
 end
 
-return --Prefab(MUSHTREE_SPORE_BLUE, makespore(data.tall), assets),
---Prefab(MUSHTREE_SPORE_RED, makespore(data.medium), assets),
---Prefab(MUSHTREE_SPORE_GREEN, makespore(data.small), assets),
-    Prefab(MUSHTREE_SPORE_YELLOW, makespore(data.yeloow), assets)
+return Prefab("spore_yellow", makespore(data.yeloow), assets)

@@ -191,7 +191,7 @@ local function poisonfn()
 
 	inst:AddComponent("poisonous")
 
-	--inst.components.lootdropper:AddChanceLoot("venom_gland", 0.25)
+	--inst.components.lootdropper:AddChanceLoot("venomgland", 0.25)
 
 	MakeMediumBurnableCharacter(inst, "body")
 	MakeMediumFreezableCharacter(inst, "body")

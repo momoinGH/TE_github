@@ -1,4 +1,6 @@
 PrefabFiles = {
+    "grassnova",
+    "turfshamlet",
     "frog_poison",
     -- "frog_poison2",
     "oxherd",
@@ -74,7 +76,8 @@ PrefabFiles = {
     "snapdragon",
     "snapdragonherd",
     "zeb",
-
+    "tigersharkpool",
+    "krakenchest",
     ------------------------------------------------------------------------------------------------
 
     "roc_leg",

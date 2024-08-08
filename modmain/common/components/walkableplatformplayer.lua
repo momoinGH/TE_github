@@ -1,27 +1,12 @@
 local Utils = require("tropical_utils/utils")
 
 -- 海难小船
-local function UpdateBoatInPlayer(inst)
-    local boat = inst:GetCurrentPlatform()
-    if not boat or not boat:HasTag("shipwrecked_boat") then --考虑到玩家闪现出船
-        if inst.shipwreckedBoatTask then
-            inst.shipwreckedBoatTask:Cancel()
-            inst.shipwreckedBoatTask = nil
-        end
-        return
-    end
-
-    -- if not inst.AnimState:IsCurrentAnimation("idle_loop") then
-    --     inst.AnimState:PlayAnimation("idle_loop", true)
-    -- end
-end
 
 local function SetPlayerCenter(inst, platform)
     if platform:IsValid() then
         inst.Physics:Stop()
         inst.components.locomotor:Stop()
         inst.Transform:SetPosition(platform.Transform:GetWorldPosition())
-        inst.shipwreckedBoatTask = inst:DoPeriodicTask(0, UpdateBoatInPlayer)
     end
 end
 
@@ -47,13 +32,8 @@ local function GetOnPlatformBefore(self, platform)
     end
 end
 
-local function GetOffPlatform(self)
+local function GetOffPlatformBefore(self)
     if TheWorld.ismastersim then
-        if self.inst.shipwreckedBoatTask then
-            self.inst.shipwreckedBoatTask:Cancel()
-            self.inst.shipwreckedBoatTask = nil
-        end
-
         if self.platform and self.platform:IsValid() and self.platform.components.container then
             self.platform.components.container.canbeopened = false
         end
@@ -62,5 +42,5 @@ end
 
 AddClassPostConstruct("components/walkableplatformplayer", function(self)
     Utils.FnDecorator(self, "GetOnPlatform", GetOnPlatformBefore)
-    Utils.FnDecorator(self, "GetOffPlatform", GetOffPlatform)
+    Utils.FnDecorator(self, "GetOffPlatform", GetOffPlatformBefore)
 end)

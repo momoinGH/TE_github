@@ -2,7 +2,7 @@ require("constants")
 
 local StaticLayout = require("map/static_layout")
 
-
+-- TODO 把源文件覆盖了？
 
 local ruins_areas =
 {

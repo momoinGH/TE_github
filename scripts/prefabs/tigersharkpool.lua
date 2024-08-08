@@ -37,9 +37,9 @@ end
 
 local sizes =
 {
-    { anim = "small_idle", rad = 2.0, plantcount = 2, plantrad = 1.6 },
-    { anim = "med_idle", rad = 2.6, plantcount = 3, plantrad = 2.5 },
-    { anim = "big_idle", rad = 14.4, plantcount = 8, plantrad = 7.0 },
+    { anim = "small_idle", rad = 2.0,  plantcount = 2, plantrad = 1.6 },
+    { anim = "med_idle",   rad = 2.6,  plantcount = 3, plantrad = 2.5 },
+    { anim = "big_idle",   rad = 14.4, plantcount = 8, plantrad = 7.0 },
 }
 --{anim="big_idle", rad=2.7, plantcount=4, plantrad=2.9},
 
@@ -378,33 +378,13 @@ local function pondflup()
     return inst
 end
 
-local function pondmos()
-    local inst = commonfn("_mos")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.components.childspawner.childname = "frog"
-    inst.components.fishable:AddFish("fish")
-
-    inst.planttype = "marsh_plant"
-    inst.dayspawn = false
-    inst.task = inst:DoTaskInTime(0, OnInit)
-    inst:WatchWorldState("startday", OnIsDay)
-
-    return inst
-end
-
 local function wall_tigerpond()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
-    inst.entity:AddAnimState()
+    -- inst.entity:AddAnimState()
     inst.entity:AddNetwork()
 
-    inst.Transform:SetEightFaced()
-
-    inst:AddTag("blocker")
     local phys = inst.entity:AddPhysics()
     phys:SetMass(0)
     phys:SetCollisionGroup(COLLISION.WORLD)
@@ -415,13 +395,12 @@ local function wall_tigerpond()
     phys:CollidesWith(COLLISION.FLYERS)
     phys:SetCapsule(0.5, 50)
 
-    --   inst.AnimState:SetBank("wall")
-    --   inst.AnimState:SetBuild("wall_stone")
-    --   inst.AnimState:PlayAnimation("half")
-
     inst:AddTag("NOCLICK")
+    inst:AddTag("blocker")
+    -- inst:AddTag("NOBLOCK") --根据情况添加，对象会保存记录
 
     return inst
 end
 
-return Prefab("wall_tigerpond", wall_tigerpond), Prefab("tigersharkpool", pondflup, assets, prefabs)
+return Prefab("wall_tigerpond", wall_tigerpond),
+    Prefab("tigersharkpool", pondflup, assets, prefabs)

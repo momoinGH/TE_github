@@ -1,7 +1,3 @@
---[[
-    Prefabs for 3 different mushtrees
---]]
-
 local TREESTATES =
 {
     BLOOMING = "bloom",
@@ -162,47 +158,6 @@ local growth_stages =
 
 local data =
 {
-    --[[small =
-    { --Green
-        bank = "mushroom_tree_small",
-        build = "mushroom_tree_small",
-        season = SEASONS.SPRING,
-        bloom_build = "mushroom_tree_small_bloom",
-        spore = "spore_small",
-        icon = "mushroom_tree_small.png",
-        loot = { "log", "green_cap" },
-        work = TUNING.MUSHTREE_CHOPS_SMALL,
-        lightradius = 1,
-        lightcolour = { 146/255, 225/255, 146/255 },
-    },
-    medium =
-    { --Red
-        bank = "mushroom_tree_med",
-        build = "mushroom_tree_med",
-        season = SEASONS.SUMMER,
-        bloom_build = "mushroom_tree_med_bloom",
-        spore = "spore_medium",
-        icon = "mushroom_tree_med.png",
-        loot = { "log", "red_cap" },
-        work = TUNING.MUSHTREE_CHOPS_MEDIUM,
-        lightradius = 1.25,
-        lightcolour = { 197/255, 126/255, 126/255 },
-    },
-    tall =
-    { --Blue
-        bank = "mushroom_tree",
-        build = "mushroom_tree_tall",
-        season = SEASONS.WINTER,
-        bloom_build = "mushroom_tree_tall_bloom",
-        spore = "spore_tall",
-        icon = "mushroom_tree.png",
-        loot = { "log", "log", "blue_cap" },
-        work = TUNING.MUSHTREE_CHOPS_TALL,
-        lightradius = 1.5,
-        lightcolour = { 111/255, 111/255, 227/255 },
-        webbable = true,
-    },]]
-
     yelow =
     { --yelow
         bank = "mushroom_tree_yelow",
@@ -616,9 +571,6 @@ function treeset(name, data, build, bloombuild)
     local prefabs =
     {
         "log",
-        --"blue_cap",
-        --"green_cap",
-        --"red_cap",
         "yelow_cap",
         "charcoal",
         "ash",
@@ -635,9 +587,6 @@ function treeset(name, data, build, bloombuild)
     table.insert(treeprefabs, Prefab(name .. "_bloom_burntfx", makeburntfx(name, data, true), { bloombuildasset }))
 end
 
---treeset("mushtree_tall", data.tall, "anim/mushroom_tree_tall.zip", "anim/mushroom_tree_tall_bloom.zip")
---treeset("mushtree_medium", data.medium, "anim/mushroom_tree_med.zip", "anim/mushroom_tree_med_bloom.zip")
---treeset("mushtree_small", data.small, "anim/mushroom_tree_small.zip", "anim/mushroom_tree_small_bloom.zip")
 treeset("mushtree_yelow", data.yelow, "anim/mushroom_tree_yelow.zip", "anim/mushroom_tree_yelow.zip")
 
 return unpack(treeprefabs)
