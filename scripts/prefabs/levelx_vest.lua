@@ -129,16 +129,8 @@ local function fn()
     --    inst:AddTag("waterproofer")
 
     inst.entity:SetPristine()
-    inst.OnEntityReplicated = function(inst)
-        inst.replica.container:WidgetSetup("krampus_sack")
-    end
 
     -- if not TheWorld.ismastersim then
-    -- inst:DoTaskInTime(0, function ()
-    -- if  inst.replica.container ~= nil then
-    -- inst.replica.container:WidgetSetup("krampus_sack")
-    -- end
-    -- end)
     -- return inst
     -- end
 

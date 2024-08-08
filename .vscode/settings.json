@@ -1,16 +1,7 @@
 {
     "Lua.diagnostics.disable": [
-        "undefined-global",
-        "lowercase-global",
         "undefined-field",
-        "redundant-parameter",
-        "undefined-doc-name",
-        "empty-block",
-        "param-type-mismatch",
-        "return-type-mismatch",
-        "cast-local-type",
-        "inject-field",
         "need-check-nil",
-        "deprecated"
+        "inject-field"
     ]
 }

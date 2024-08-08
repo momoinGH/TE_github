@@ -796,7 +796,6 @@ local CANT_PICK_TILES = {
     [GROUND.SUBURB] = true,
     [GROUND.FOUNDATION] = true,
     [GROUND.COBBLEROAD] = true,
-    [GROUND.LAWN] = true,
     [GROUND.FIELDS] = true
 }
 
@@ -864,7 +863,7 @@ end
 local function changeonperishreplacement(inst)
     local owner = inst.components.inventoryitem:GetContainer()
     inst.components.perishable.onperishreplacement = owner and owner.inst.prefab == "icebox" and "iced" .. inst.prefab or
-    "spoiled_food"
+        "spoiled_food"
 end
 
 AddPrefabPostInitAny(function(inst)
@@ -876,3 +875,6 @@ AddPrefabPostInitAny(function(inst)
         inst.components.inventoryitem:SetOnDroppedFn(changeonperishreplacement)
     end
 end)
+
+
+----------------------------------------------------------------------------------------------------

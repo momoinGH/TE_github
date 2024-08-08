@@ -1,25 +1,25 @@
 local function DoTest(inst)
-    local component = inst.components.creatureprox
-    if component and component.enabled and not inst:HasTag("INTERIOR_LIMBO") then
+    local creatureprox = inst.components.creatureprox
+    if creatureprox and creatureprox.enabled and not inst:HasTag("INTERIOR_LIMBO") then
         local x, y, z = inst.Transform:GetWorldPosition()
 
         local range = nil
 
-        if component.isclose then
-            range = component.far
+        if creatureprox.isclose then
+            range = creatureprox.far
         else
-            range = component.near
+            range = creatureprox.near
         end
 
         local musthave = { "animal", "character" }
 
-        if component.inventorytrigger then
+        if creatureprox.inventorytrigger then
             musthave = { "_inventoryitem", "monster", "animal", "character", "meat" }
         end
 
         local nothave = { "INTERIOR_LIMBO", "snake", "scorpion", "shadowcreature" }
         local ents
-        if component.all then
+        if creatureprox.all then
             ents = TheSim:FindEntities(x, y, z, range, nil)
         else
             ents = TheSim:FindEntities(x, y, z, range, nil, nothave, musthave)
@@ -27,31 +27,31 @@ local function DoTest(inst)
         local close = nil
 
         for i = #ents, 1, -1 do
-            if ents[i] == inst or (component.testfn and not component.testfn(ents[i])) then
+            if ents[i] == inst or (creatureprox.testfn and not creatureprox.testfn(ents[i])) then
                 table.remove(ents, i)
             end
         end
 
         if #ents > 0 and inst then
             close = true
-            if component.inproxfn then
+            if creatureprox.inproxfn then
                 for i, ent in ipairs(ents) do
-                    component.inproxfn(inst, ent)
+                    creatureprox.inproxfn(inst, ent)
                 end
             end
         end
-        if component.isclose ~= close then
-            component.isclose = close
-            if component.isclose and component.onnear then
-                component.onnear(inst, ents)
+        if creatureprox.isclose ~= close then
+            creatureprox.isclose = close
+            if creatureprox.isclose and creatureprox.onnear then
+                creatureprox.onnear(inst, ents)
             end
 
-            if not component.isclose and component.onfar then
-                component.onfar(inst)
+            if not creatureprox.isclose and creatureprox.onfar then
+                creatureprox.onfar(inst)
             end
         end
-        if component.piggybackfn then
-            component.piggybackfn(inst)
+        if creatureprox.piggybackfn then
+            creatureprox.piggybackfn(inst)
         end
     end
 end

@@ -13,6 +13,10 @@ local assets = {
     Asset("ANIM", "anim/rowboat_build.zip"),
     Asset("ANIM", "anim/pirate_boat_build.zip"),
     Asset("ANIM", "anim/pirate_boat_placer.zip"),
+
+    Asset("ANIM", "anim/raft_basic.zip"),
+    Asset("ANIM", "anim/raft_build.zip"),
+    Asset("ANIM", "anim/boat_hud_raft.zip"),
 }
 
 local sounds = {
@@ -130,10 +134,10 @@ local function InstantlyBreakBoat(inst)
     for player_on_platform in pairs(inst.components.walkableplatform:GetPlayersOnPlatform()) do
         player_on_platform:PushEvent("onpresink")
     end
+
+    SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+
     inst:sinkloot()
-    if inst.postsinkfn then
-        inst:postsinkfn()
-    end
     inst:Remove()
 end
 
@@ -228,22 +232,8 @@ local function OnDismantle(inst, doer)
     end
 end
 
-local function OnItemGet(inst)
-    local sailslot = inst.components.container:GetItemInSlot(1)
-    if sailslot ~= nil then
-        inst.AnimState:OverrideSymbol(sailslot.symboltooverride, sailslot.build, sailslot.symbol)
-        sailslot.navio = inst --TODO 可以通过组件获取，不需要单独设置变量
-    end
-
-    local luzslot = inst.components.container:GetItemInSlot(2)
-    if luzslot ~= nil then
-        inst.AnimState:OverrideSymbol(luzslot.symboltooverride, luzslot.build, luzslot.symbol)
-        luzslot.navio = inst
-    end
-end
-
-local function OnLoad(inst, data)
-    OnItemGet(inst)
+local function GetSpecificSlotForItemBefore(self, item)
+    print("获取槽")
 end
 
 ---fn
@@ -357,9 +347,10 @@ local function common(minimap, bank, build, loots, data)
     inst:AddComponent("boatdrifter")
     inst:AddComponent("savedrotation")
 
-    local health = inst:AddComponent("health")
+    inst:AddComponent("health")
     inst.components.health:SetMaxHealth(data.health or TUNING.BOAT.HEALTH)
-    health.nofadeout = true
+    inst.components.health.nofadeout = true
+
     --TODO 死亡时生成残骸 flotsam_debris_sw.lua
 
     if loots then
@@ -379,6 +370,7 @@ local function common(minimap, bank, build, loots, data)
         inst.components.container.canbeopened = false
     end
 
+    inst:AddComponent("shipwreckedboat")
 
     -- inst:SetStateGraph(data.stategraph or "SGboat")
 
@@ -395,11 +387,9 @@ local function common(minimap, bank, build, loots, data)
     inst.sounds = sounds
 
     inst.sinkloot = sinkloot
-
-    inst:ListenForEvent("itemget", OnItemGet)
-
-    inst.OnLoad = OnLoad
     inst.OnLoadPostPass = OnLoadPostPass
+
+    inst:ListenForEvent("death", InstantlyBreakBoat)
 
     return inst
 end
@@ -580,6 +570,50 @@ local function shadowwaxwellboat_fn()
     return inst
 end
 
+local raft_old_loots = {
+    "vine", "bamboo", "bamboo"
+}
+local raft_old_prefabs = {
+    "shipwrecked_boat_player_collision", "vine", "bamboo"
+}
+
+local function raft_old_fn()
+    return common("raft.png", "raft", "raft_build", raft_old_loots, { health = 150 })
+end
+
+local lograft_old_loots = {
+    "log", "log", "log", "cutgrass", "cutgrass"
+}
+
+local lograft_old_prefabs = {
+    "shipwrecked_boat_player_collision", "log", "cutgrass"
+}
+
+local function lograft_old_fn()
+    return common("lograft.png", "raft", "raft_log_build", lograft_old_loots, { health = 150 })
+end
+
+local woodlegsboatamigo_loots = {
+    "log"
+}
+
+local woodlegsboatamigo_prefabs = {
+    "shipwrecked_boat_player_collision", "log"
+}
+
+local function woodlegsboatamigo_fn()
+    local inst = common("woodlegsboat.png", "rowboat", "pirate_boat_build", woodlegsboatamigo_loots,
+        { health = 150, container = "woodlegsboatamigo" })
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.components.health:SetInvincible(true)
+
+    return inst
+end
+
 return Prefab("shipwrecked_boat_player_collision", boat_player_collision_fn),
     Prefab("armouredboat", armouredboat_fn, assets, armouredboat_prefabs),
     Prefab("corkboat", corkboat_fn, assets, corkboat_prefabs),
@@ -588,4 +622,7 @@ return Prefab("shipwrecked_boat_player_collision", boat_player_collision_fn),
     Prefab("rowboat", rowboat_fn, assets, rowboat_prefabs),
     Prefab("surfboard", surfboard_fn, assets, surfboard_prefabs),
     Prefab("woodlegsboat", woodlegsboat_fn, assets, woodlegsboat_prefabs),
-    Prefab("shadowwaxwellboat", shadowwaxwellboat_fn, assets, shadowwaxwellboat_prefabs)
+    Prefab("shadowwaxwellboat", shadowwaxwellboat_fn, assets, shadowwaxwellboat_prefabs),
+    Prefab("raft_old", raft_old_fn, assets, raft_old_prefabs),
+    Prefab("lograft_old", lograft_old_fn, assets, lograft_old_prefabs),
+    Prefab("woodlegsboatamigo", woodlegsboatamigo_fn, assets, woodlegsboatamigo_prefabs)

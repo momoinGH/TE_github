@@ -1,16 +1,3 @@
-local assets =
-{
-    Asset("ANIM", "anim/tarlamp.zip"),
-    Asset("ANIM", "anim/swap_tarlamp.zip"),
-    Asset("ANIM", "anim/swap_tarlamp_boat.zip"),
-}
-
-
-local prefabs =
-{
-    "tarlampfire",
-}
-
 local function DoTurnOffSound(inst, owner)
     inst._soundtask = nil
     (owner ~= nil and owner:IsValid() and owner.SoundEmitter or inst.SoundEmitter):PlaySound(
@@ -69,7 +56,7 @@ local function turnon(inst)
         local owner = inst.components.inventoryitem.owner
 
         if inst._light == nil then
-            inst._light = SpawnPrefab("tarlampfire")
+            inst._light = SpawnPrefab("lanternlight")
             inst._light._lantern = inst
             inst:ListenForEvent("onremove", onremovelight, inst._light)
             fuelupdate(inst)
@@ -270,45 +257,6 @@ local function ontakefuel(inst)
     end
 end
 
---------------------------------------------------------------------------
-
-local function OnLightWake(inst)
-    if not inst.SoundEmitter:PlayingSound("loop") then
-        inst.SoundEmitter:PlaySound("dontstarve/wilson/lantern_LP", "loop")
-    end
-end
-
-local function OnLightSleep(inst)
-    inst.SoundEmitter:KillSound("loop")
-end
-
---------------------------------------------------------------------------
-
-local function tarlampfirefn()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddLight()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    inst:AddTag("FX")
-
-    inst.Light:SetColour(197 / 255, 197 / 255, 50 / 255)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.persists = false
-
-    inst.OnEntityWake = OnLightWake
-    inst.OnEntitySleep = OnLightSleep
-
-    return inst
-end
 
 local function liga(inst)
     if not inst.components.fueled:IsEmpty() then
@@ -317,7 +265,7 @@ local function liga(inst)
         local owner = inst.components.inventoryitem.owner
 
         if inst._light == nil then
-            inst._light = SpawnPrefab("tarlampfire")
+            inst._light = SpawnPrefab("lanternlight")
             inst._light._lantern = inst
             inst:ListenForEvent("onremove", onremovelight, inst._light)
             fuelupdate(inst)
@@ -368,28 +316,29 @@ local function mudasimbolo(inst)
     end
 end
 
-local function fn()
+
+local function common(bank, build, swapbuild, symbol)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-    inst.build = "swap_tarlamp_boat"
-    inst.symbol = "swap_lantern"
+
+    inst.build = swapbuild
+    inst.symbol = symbol
     inst.symboltooverride = "swap_lantern"
-    inst.navio = nil
+
+    inst.AnimState:SetBank(bank)
+    inst.AnimState:SetBuild(build)
+    inst.AnimState:PlayAnimation("idle_off")
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("tarlamp")
-    inst.AnimState:SetBuild("tarlamp")
-    inst.AnimState:PlayAnimation("idle_off")
-
     inst:AddTag("boatlight")
-    inst:AddTag("aquatic")
     inst:AddTag("light")
     inst:AddTag("tarlamp")
+    inst:AddTag("shipwrecked_boat_head")
 
     inst.entity:SetPristine()
 
@@ -398,47 +347,22 @@ local function fn()
     end
 
     inst:AddComponent("inspectable")
-    inst:AddComponent("interactions")
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+    inst.components.inventoryitem:SetOnDroppedFn(ondropped)
+    inst.components.inventoryitem:SetOnPutInInventoryFn(turnoff)
 
-
-    -----------------------------------
     inst:AddComponent("lighter")
-    -----------------------------------
 
     inst:AddComponent("burnable")
     inst.components.burnable.canlight = false
     inst.components.burnable.fxprefab = nil
 
-    inst.components.inventoryitem:SetOnDroppedFn(ondropped)
-    inst.components.inventoryitem:SetOnPutInInventoryFn(turnoff)
-
     inst:AddComponent("heater")
     inst.components.heater.equippedheat = 5
 
-    inst:AddComponent("equippable")
-
-    inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.LIGHTER_DAMAGE)
-    inst.components.weapon:SetAttackCallback(
-        function(attacker, target)
-            if target.components.burnable then
-                if math.random() < TUNING.LIGHTER_ATTACK_IGNITE_PERCENT * target.components.burnable.flammability then
-                    target.components.burnable:Ignite()
-                end
-            end
-        end
-    )
-
     inst:AddComponent("fueled")
-
-    inst:AddComponent("machine")
-    inst.components.machine.turnonfn = turnon
-    inst.components.machine.turnofffn = turnoff
-    inst.components.machine.cooldowntime = 0
-
     inst.components.fueled.fueltype = "TAR"
     inst.components.fueled:InitializeFuelLevel(TUNING.TORCH_FUEL)
     inst.components.fueled:SetDepletedFn(nofuel)
@@ -446,6 +370,11 @@ local function fn()
     inst.components.fueled:SetTakeFuelFn(ontakefuel)
     --    inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
     inst.components.fueled.accepting = true
+
+    inst:AddComponent("machine")
+    inst.components.machine.turnonfn = turnon
+    inst.components.machine.turnofffn = turnoff
+    inst.components.machine.cooldowntime = 0
 
     inst._light = nil
 
@@ -468,5 +397,23 @@ local function fn()
     return inst
 end
 
-return Prefab("tarlamp", fn, assets, prefabs),
-    Prefab("tarlampfire", tarlampfirefn)
+----------------------------------------------------------------------------------------------------
+
+local tarlamp_assets =
+{
+    Asset("ANIM", "anim/tarlamp.zip"),
+    Asset("ANIM", "anim/swap_tarlamp.zip"),
+    Asset("ANIM", "anim/swap_tarlamp_boat.zip"),
+}
+
+
+local tarlamp_prefabs =
+{
+    "lanternlight",
+}
+
+local function tarlamp_fn()
+    return common("tarlamp", "tarlamp", "swap_tarlamp_boat", "swap_lantern")
+end
+
+return Prefab("tarlamp", tarlamp_fn, tarlamp_assets, tarlamp_prefabs)

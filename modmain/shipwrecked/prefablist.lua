@@ -1,4 +1,5 @@
 PrefabFiles = {
+  "tropical_boat_lamps",
   "grassnova",
   "axeobsidian",
   "armor_obsidian",
@@ -36,7 +37,6 @@ PrefabFiles = {
   "windtrail",
   "windswirl",
   "ventania",
-  "sail",
   "boattorch",
   "boatlantern",
   "boatcannon",
@@ -48,7 +48,6 @@ PrefabFiles = {
   "quackering_wake",
   "trawlnet",
   "boatsurfothers",
-  "boatpirateamigo",
   "turbine_blades",
   "buoy",
   "armor_lifejacket",
@@ -65,7 +64,6 @@ PrefabFiles = {
   "ox_flute",
   "blubbersuit",
   "tarsuit",
-  "tarlamp",
   "waterchest",
   "mussel_bed",
   "mussel_stick",
@@ -94,30 +92,6 @@ PrefabFiles = {
   "armor_limestone",
   "bermudatriangle",
   "dragoonegg", --jogo da erro de memoria se tirar
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  ------------------------------------------------------------------------------------------------
-  "boatraft_old",
-  "boatlog_old",
   "crate",
   "dragoon",
   "dragoonfire",

@@ -3,6 +3,18 @@
 --使用案例及最新版：https://n77a3mjegs.feishu.cn/docx/K9bUdpb5Qo85j2xo8XkcOsU1nuh?from=from_copylink
 --这个文件不会被调用，单纯写一些源码的注解，虽然删了更节省体积，不过我相信也许会对其他moder有些帮助，而且全局函数在一些编译器下会提供代码补全功能
 
+TUNING = {}
+
+function Class(base, _ctor, props) end
+function CreateEntity(name) end
+function MakeInventoryPhysics(inst, mass, rad) end
+function MakeCharacterPhysics(inst, mass, rad) end
+function MakeInventoryFloatable(inst, size, offset, scale, swap_bank, float_index, swap_data) end
+function MakeSmallBurnable(inst, time, offset, structure, sym) end
+function MakeSmallPropagator(inst) end
+function MakeHauntableLaunch(inst, chance, speed, cooldown, haunt_value) end
+Asset = Class( function(self, type, file, param) end)
+
 
 Prefab = Class(function(self, name, fn, assets, deps, force_path_search)
 end)

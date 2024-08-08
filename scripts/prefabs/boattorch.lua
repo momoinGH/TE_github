@@ -175,6 +175,8 @@ local function fn()
 
     inst:AddTag("light")
     inst:AddTag("boatlight")
+    inst:AddTag("shipwrecked_boat_head")
+
     MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()

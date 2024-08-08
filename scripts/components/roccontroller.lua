@@ -199,7 +199,7 @@ function RocController:GetTarget()
 
 					local tile = ground.Map:GetTileAtPoint(x, y, z)
 
-					if tile ~= GROUND.FOUNDATION and tile ~= GROUND.COBBLEROAD and tile ~= GROUND.LAWN and tile ~= GROUND.LILYPOND then --  tile ~= GROUND.FIELDS and
+					if tile ~= GROUND.FOUNDATION and tile ~= GROUND.COBBLEROAD and tile ~= GROUND.LILYPOND then --  tile ~= GROUND.FIELDS and
 						table.insert(sorted, { ent, ent:GetDistanceSqToInst(self.head) })
 					end
 				end

@@ -27,7 +27,7 @@ function RowboatWakeSpawner:OnUpdate(dt)
     if self.spawning then
         self.timeSinceSpawn = self.timeSinceSpawn + dt
         if self.timeSinceSpawn > self.spawnPeriod then
-            local wake = SpawnPrefab("rowboat_wake")
+            local wake = SpawnPrefab("rowboat_wake") --定时生成浪花特效
             local x, y, z = self.inst.Transform:GetWorldPosition()
             wake.Transform:SetPosition(x, y, z)
             wake.Transform:SetRotation(self.inst.Transform:GetRotation())

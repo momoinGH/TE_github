@@ -13,7 +13,7 @@ local speedupattr = {
     },
     icedtea = {
         mult = 23 / 18, -- 咖啡的1/3
-        duration = 80, -- 咖啡的1/3
+        duration = 80,  -- 咖啡的1/3
     },
 }
 
@@ -38,9 +38,10 @@ local function speedup_extend(inst, target, followsymbol, followoffset, data)
         inst.components.timer:StartTimer("buffover", speedupattr[data.debuffkey].duration)
         if target.components.locomotor then
             target.components.locomotor:RemoveExternalSpeedMultiplier(target, "speedup_tro")
-            target.components.locomotor:SetExternalSpeedMultiplier(target, "speedup_tro", speedupattr[data.debuffkey].mult)
+            target.components.locomotor:SetExternalSpeedMultiplier(target, "speedup_tro",
+                speedupattr[data.debuffkey].mult)
         end
-        inst._debuffkey_tro = data.debuffkey    
+        inst._debuffkey_tro = data.debuffkey
     elseif data.debuffkey == inst._debuffkey_tro then
         inst.components.timer:StopTimer("buffover")
         inst.components.timer:StartTimer("buffover", speedupattr[data.debuffkey].duration)

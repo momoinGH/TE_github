@@ -379,20 +379,22 @@ Constructor.AddAction({ priority = 8, rmb = true, distance = 25, mount_valid = f
             act.doer:DoTaskInTime(0.5, function(inst) act.doer:RemoveTag("deleidotiro") end)
 
 
-            local equipamento = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
-            local canhao = equipamento.replica.container:GetItemInSlot(2)
+            local boat = act.doer:GetCurrentPlatform()
+            local item = boat
+                and boat:HasTag("shipwrecked_boat")
+                and boat.replica.container
+                and boat.replica.container:GetItemInSlot(2)
+            if not item then return true end
+
             ----------------posiciona pra sair no canhao-----------------------
             local angle = act.doer:GetRotation()
             local dist = 1.5
             local offset = Vector3(dist * math.cos(angle * DEGREES), 0, -dist * math.sin(angle * DEGREES))
             local x, y, z = act.doer.Transform:GetWorldPosition()
-            local x1, y1, z1
             local pos
             if act.target then
-                x1, y1, z1 = act.target:GetPosition():Get()
                 pos = act.target:GetPosition()
             else
-                x1, y1, z1 = act:GetActionPoint():Get()
                 pos = act:GetActionPoint()
             end
 
@@ -402,27 +404,27 @@ Constructor.AddAction({ priority = 8, rmb = true, distance = 25, mount_valid = f
 
             -------------------------------------------------------
 
-            if canhao and canhao.prefab == "woodlegs_boatcannon" then
-                if equipamento and canhao then canhao.components.finiteuses:Use(1) end
+            if item.prefab == "woodlegs_boatcannon" then
+                if item then item.components.finiteuses:Use(1) end
                 local bomba = SpawnPrefab("cannonshotobsidian")
                 bomba.Transform:SetPosition(x, y + 1.5, z)
                 bomba.components.complexprojectile:Launch(pos)
                 act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
             else
-                if equipamento and canhao and act.doer.prefab ~= "woodlegs" then
-                    canhao.components.finiteuses:Use(1)
+                if act.doer.prefab ~= "woodlegs" then
+                    item.components.finiteuses:Use(1)
                     local bomba = SpawnPrefab("cannonshot")
                     bomba.Transform:SetPosition(x, y + 1.5, z)
                     bomba.components.complexprojectile:Launch(pos)
                     act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
-                elseif equipamento and equipamento.prefab == "woodlegsboat" and canhao and act.doer.prefab == "woodlegs" then
+                elseif boat.prefab == "woodlegsboat" and act.doer.prefab == "woodlegs" then
                     local bomba = SpawnPrefab("cannonshot")
                     bomba.components.explosive.explosivedamage = 50
                     bomba.Transform:SetPosition(x, y + 1.5, z)
                     bomba.components.complexprojectile:Launch(pos)
                     act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
-                elseif equipamento and canhao then
-                    canhao.components.finiteuses:Use(1)
+                else
+                    item.components.finiteuses:Use(1)
                     local bomba = SpawnPrefab("cannonshot")
                     bomba.Transform:SetPosition(x, y + 1.5, z)
                     bomba.components.complexprojectile:Launch(pos)
@@ -467,8 +469,9 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 1, mount_valid = f
     "BOATREPAIR",
     STRINGS.ACTIONS.BOATREPAIR,
     function(act)
-        if act.doer ~= nil and act.doer:HasTag("aquatic") and act.invobject ~= nil and act.invobject:HasTag("boatrepairkit") then
-            local boat = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
+        if act.doer:HasTag("aquatic") and act.invobject:HasTag("boatrepairkit") then
+            local platform = act.doer:GetCurrentPlatform()
+            local boat = platform and platform:HasTag("shipwrecked_boat") and platform or nil
             local boat2 = act.doer.components.driver.vehicle
             if boat and boat2 then
                 if boat2.components.finiteuses and boat.components.armor.condition and boat2.components.finiteuses.current + 150 >= boat2.components.finiteuses.total then
@@ -501,7 +504,6 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 1, mount_valid = f
         end
 
 
-
         if
             act.doer ~= nil and act.target ~= nil and act.doer:HasTag("player") and act.target.components.interactions and
             act.target:HasTag("shipwrecked_boat")
@@ -512,6 +514,7 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 1, mount_valid = f
                 if act.target.components.finiteuses.current + 150 >= act.target.components.finiteuses.total then
                     act.target.components.finiteuses.current = act.target.components.finiteuses.total
                     local gastabarco = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)                      -------armadura
+
                     if gastabarco then gastabarco.components.armor.condition = act.target.components.finiteuses.current end ---------armadura
                     if equipamento.components.finiteuses then
                         equipamento.components.finiteuses:Use(1)

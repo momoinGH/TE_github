@@ -423,9 +423,6 @@ local function create_chester()
     if not TheWorld.ismastersim then
         inst._clientshadowmorphed = false
         inst:ListenForEvent("onisshadowchesterdirty", OnIsShadowChesterDirty)
-        inst.OnEntityReplicated = function(inst)
-            inst.replica.container:WidgetSetup("chester")
-        end
         return inst
     end
 

@@ -4,12 +4,6 @@ local prefabs =
     "quagmire_burnt_ingredients",
 }
 
-local function OnEntityReplicated(inst)
-    if inst.replica.container ~= nil then
-        inst.replica.container:WidgetSetup(inst.prefab)
-    end
-end
-
 local function MakePot(suffix, goop_suffix, numslots, tag)
     local name = "pot" .. suffix
     local animname = "quagmire_" .. name
@@ -47,8 +41,6 @@ local function MakePot(suffix, goop_suffix, numslots, tag)
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
-            inst.OnEntityReplicated = OnEntityReplicated
-
             return inst
         end
 

@@ -80,9 +80,6 @@ local function fn3(Sim)
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst)
-			inst.replica.container:WidgetSetup("chester")
-		end
 		return inst
 	end
 

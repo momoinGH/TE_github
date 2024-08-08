@@ -1622,8 +1622,6 @@ AddStategraphState("wilson", State {
             inst.components.inventory:DropEverything(true)
         end
 
-
-
         if inst.components.driver then
             if inst.components.driver.vehicle then inst.components.driver.vehicle:Remove() end
             inst.AnimState:SetSortOrder(0)
@@ -2058,6 +2056,7 @@ AddStategraphState("wilson", State {
         )
     }
 })
+
 -- 移动、划船
 AddStategraphState("wilson", State {
     name = "run",
@@ -2069,30 +2068,11 @@ AddStategraphState("wilson", State {
         local boat = inst:GetCurrentPlatform()
         local inBoat = boat and boat:HasTag("shipwrecked_boat")
 
-        if (inBoat or inst:HasTag("aquatic")) and inst.components.rowboatwakespawner then
-            inst.components.rowboatwakespawner:StartSpawning()
-
-            local barco = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "ironwind" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/boatpropellor_lp", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "sail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_cloth", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "clothsail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_cloth", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "snakeskinsail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_snakeskin", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "feathersail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_feather", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "woodlegssail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_sealegs", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "malbatrossail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_sealegs", "sailmove")
+        if inBoat then
+            local sail = boat.components.container and boat.components.container:GetItemInSlot(1)
+            local move_sound = sail and sail.components.shipwreckedboatparts.move_sound
+            if move_sound then
+                inst.SoundEmitter:PlaySound(move_sound, "sailmove")
             end
         end
 
@@ -3253,36 +3233,14 @@ AddStategraphState("wilson_client", State {
         ConfigureRunState(inst)
         inst.components.locomotor:RunForward()
 
-        --if inst:HasTag("wilbur") then
-        --inst.AnimState:SetBank("wilbur_run")
-        --inst.AnimState:SetBuild("wilbur_run")
-        --inst.Transform:SetSixFaced()
-        --end
+        local boat = inst:GetCurrentPlatform()
+        local inBoat = boat and boat:HasTag("shipwrecked_boat")
 
-        if inst:HasTag("aquatic") and inst.components.rowboatwakespawner then
-            inst.components.rowboatwakespawner:StartSpawning()
-
-            local barco = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "ironwind" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/boatpropellor_lp", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "sail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_cloth", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "clothsail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_cloth", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "snakeskinsail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_snakeskin", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "feathersail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_feather", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "woodlegssail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_sealegs", "sailmove")
-            end
-            if barco and barco.replica.container and barco.replica.container:GetItemInSlot(1) and barco.replica.container:GetItemInSlot(1).prefab == "malbatrossail" then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sail_LP_sealegs", "sailmove")
+        if inBoat then
+            local sail = boat.components.container and boat.components.container:GetItemInSlot(1)
+            local move_sound = sail and sail.components.shipwreckedboatparts.move_sound
+            if move_sound then
+                inst.SoundEmitter:PlaySound(move_sound, "sailmove")
             end
         end
 

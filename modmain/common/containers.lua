@@ -185,16 +185,10 @@ params.armorvortexcloak = {
 	openlimit = 1,
 }
 for y = 0, 4 do
-    for x = 0, 1 do
-        table.insert(params.armorvortexcloak.widget.slotpos, Vector3(75 * x - 162, 75 * y - 186, 0))
-    end
+	for x = 0, 1 do
+		table.insert(params.armorvortexcloak.widget.slotpos, Vector3(75 * x - 162, 75 * y - 186, 0))
+	end
 end
-
-
-
-----------------------------------------------------------------------------------------------------
-params.trawlnetdropped = params.treasurechest
-----------------------------------------------------------------------------------------------------
 
 
 ----------------------------------------------------------------------------------------------------
@@ -209,7 +203,7 @@ params.corkchest = {
 	type = "chest",
 }
 for i = 3, 0, -1 do
-    table.insert(params.corkchest.widget.slotpos, Vector3(0, 75 * i - 135, 0))
+	table.insert(params.corkchest.widget.slotpos, Vector3(0, 75 * i - 135, 0))
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -236,43 +230,21 @@ params.smelter.acceptsstacks = false
 -- local melting = require("melting")
 function params.smelter.itemtestfn(container, item, slot)
 	return item:HasTag("iron") or SMELTER_PREFABS[item.prefab]
-    -- return melting.isAttribute(item.prefab) -- 热带冒险已经改好炼钢炉了，预留
+	-- return melting.isAttribute(item.prefab) -- 热带冒险已经改好炼钢炉了，预留
 end
 
 ----------------------------------------------------------------------------------------------------
 params.thatchpack = deepcopy(params.corkchest)
 params.thatchpack.issidewidget = true
 ----------------------------------------------------------------------------------------------------
-local CARGOBOAT_SLOT2_PREFABS = {
-	tarlamp = true,
-	boat_lantern = true,
-	boat_torch = true,
-	quackeringram = true,
-	boatcannon = true,
-	woodlegs_boatcannon = true,
-}
-
-local function BoatItemTestFn(container, item, slot) -- 兼容shift存入动作的testfn
-    if slot then
-        if slot == 1 and not container:GetItemInSlot(slot) then
-            return (item:HasTag("sail") or item.prefab == "trawlnet") or false
-        elseif slot == 2 and not container:GetItemInSlot(slot) then
-            return CARGOBOAT_SLOT2_PREFABS[item.prefab] or false
-        else
-            local slotitem = container:GetItemInSlot(slot)
-            if slotitem then
-                if slotitem.prefab == item.prefab then
-                    return slotitem.components.stackable and not slotitem.components.stackable:IsFull() or false
-                else
-                    return false
-                end
-            else
-                return true
-            end
-        end
-    else
-        return true
-    end
+local function BoatItemTestFn(container, item, slot)
+	if slot == 1 then
+		return item:HasTag("shipwrecked_boat_tail")
+	elseif slot == 2 then
+		return item:HasTag("shipwrecked_boat_head")
+	else
+		return true
+	end
 end
 
 local shipwrecked_boat_slotbg =
@@ -306,7 +278,7 @@ params.rowboat = {
 		animbuild = "boat_hud_row",
 		pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
 	},
-    usespecificslotsforitems = true,
+	usespecificslotsforitems = true,
 	type = "chest",
 	itemtestfn = BoatItemTestFn
 }
@@ -340,7 +312,7 @@ params.cargoboat = {
 		pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
 		isboat = true,
 	},
-    usespecificslotsforitems = true,
+	usespecificslotsforitems = true,
 	type = "chest",
 	itemtestfn = BoatItemTestFn,
 }
@@ -361,12 +333,11 @@ params.encrustedboat = {
 		animbuild = "boat_hud_encrusted",
 		pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
 	},
-    usespecificslotsforitems = true,
+	usespecificslotsforitems = true,
 	type = "chest",
 	itemtestfn = BoatItemTestFn,
 }
 
-----------------------------------------------------------------------------------------------------
 
 ----------------------------------------------------------------------------------------------------
 params.woodlegsboat = {
@@ -380,14 +351,19 @@ params.woodlegsboat = {
 		},
 
 		slotbg = shipwrecked_boat_slotbg,
-
 		animbank = "boat_hud_encrusted",
 		animbuild = "boat_hud_encrusted",
 		pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
 	},
-    usespecificslotsforitems = true,
+	usespecificslotsforitems = true,
 	type = "chest",
 	itemtestfn = BoatItemTestFn,
 }
 
 ----------------------------------------------------------------------------------------------------
+
+params.woodlegsboatamigo = params.woodlegsboat
+
+----------------------------------------------------------------------------------------------------
+
+params.trawlnetdropped = params.treasurechest
