@@ -357,6 +357,9 @@ AddRecipe2("quagmire_seedpacket_7",		{Ingredient("quagmire_coin1", 1)},	TECH.GOR
 AddRecipe2("quagmire_seedpacket_mix",	{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
 
 
+AddRecipe2("quagmire_lamp_post",        {Ingredient("lantern", 1), Ingredient("cutstone", 1), Ingredient("transistor", 1)}, TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_lamp_post_placer"},  {"GORGE"})
+AddRecipe2("quagmire_lamp_short",       {Ingredient("lantern", 1), Ingredient("cutstone", 1), Ingredient("transistor", 1)}, TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_lamp_short_placer",},{"GORGE"})
+
 
 --TURFS--
 --Sw
