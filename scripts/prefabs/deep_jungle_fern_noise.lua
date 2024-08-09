@@ -114,5 +114,5 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("forest/objects/deep_jungle_fern_noise_plant", plantfn, assets, prefabs),
-    Prefab("forest/objects/deep_jungle_fern_noise_plant2", fn, assets, prefabs)
+return Prefab("deep_jungle_fern_noise_plant", plantfn, assets, prefabs),
+    Prefab("deep_jungle_fern_noise_plant2", fn, assets, prefabs)

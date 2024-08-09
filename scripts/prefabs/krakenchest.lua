@@ -452,7 +452,7 @@ local function fn5(Sim)
 	return inst
 end
 
-return Prefab("common/octopuschest", fn1, assets),
+return Prefab("octopuschest", fn1, assets),
 	Prefab("common/krakenchest", fn, assets),
 	Prefab("common/luggagechest", fn2, assets),
 	Prefab("common/lavarenachest", fn3, assets),

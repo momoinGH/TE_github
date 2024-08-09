@@ -83,4 +83,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/monsters/clam", fn, assets, prefabs)
+return Prefab("clam", fn, assets, prefabs)

@@ -196,4 +196,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/devtool", fn, assets)
+return Prefab("devtool", fn, assets)

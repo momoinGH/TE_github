@@ -107,8 +107,10 @@ local function onhammered(inst, worker)
             local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
             local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
             for k, guardas in pairs(eles) do
-                if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat
-                        :SetTarget(worker) end
+                if guardas.components.combat and guardas.components.combat.target == nil then
+                    guardas.components.combat
+                        :SetTarget(worker)
+                end
             end
         end
     end
@@ -223,5 +225,5 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/objects/city_lamp", fn, assets),
+return Prefab("city_lamp", fn, assets),
     MakePlacer("common/city_lamp_placer", "lamp_post", "lamp_post2_city_build", "idle", nil, nil, nil, nil, nil)

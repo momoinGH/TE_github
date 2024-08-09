@@ -48,4 +48,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/inventory/ancient_remnant", fn, assets)
+return Prefab("ancient_remnant", fn, assets)

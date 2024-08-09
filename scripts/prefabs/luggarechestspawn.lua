@@ -139,4 +139,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/luggagechest_spawner", fn, nil, prefabs)
+return Prefab("luggagechest_spawner", fn, nil, prefabs)

@@ -73,4 +73,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/objects/teepee", fn, assets, prefabs)
+return Prefab("teepee", fn, assets, prefabs)

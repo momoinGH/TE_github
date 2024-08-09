@@ -1,4 +1,3 @@
-
 local assets =
 {
 	Asset("ANIM", "anim/musselfarm.zip"),
@@ -335,4 +334,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("common/objects/mussel_farm", fn, assets, prefabs)
+return Prefab("mussel_farm", fn, assets, prefabs)

@@ -85,4 +85,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("underwater/objects/geothermal_vent", fn, assets, prefabs)
+return Prefab("geothermal_vent", fn, assets, prefabs)

@@ -133,4 +133,4 @@ local function fn()
     return inst
 end
 
-return Prefab("cave/objects/goldentomb", fn, assets, prefabs)
+return Prefab("goldentomb", fn, assets, prefabs)

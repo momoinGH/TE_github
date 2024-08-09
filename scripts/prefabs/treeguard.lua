@@ -194,4 +194,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/treeguard", fn, assets, prefabs)
+return Prefab("treeguard", fn, assets, prefabs)

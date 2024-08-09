@@ -111,4 +111,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/monsters/sea_eel", fn, assets)
+return Prefab("sea_eel", fn, assets)

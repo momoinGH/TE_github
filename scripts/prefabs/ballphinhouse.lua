@@ -211,5 +211,5 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/objects/ballphinhouse", fn, assets, prefabs),
+return Prefab("ballphinhouse", fn, assets, prefabs),
     MakePlacer("common/ballphinhouse_placer", "ballphin_house", "ballphin_house", "idle", false, false, false)

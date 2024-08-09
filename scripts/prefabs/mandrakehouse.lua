@@ -168,5 +168,5 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/objects/mandrakehouse", fn, assets, prefabs)
+return Prefab("mandrakehouse", fn, assets, prefabs)
 --MakePlacer("common/rabbithouse_placer", "rabbithouse", "rabbit_house", "idle")

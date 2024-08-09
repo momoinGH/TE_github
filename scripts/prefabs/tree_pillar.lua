@@ -223,4 +223,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("cave/monsters/tree_pillar", fn, assets, prefabs)
+return Prefab("tree_pillar", fn, assets, prefabs)

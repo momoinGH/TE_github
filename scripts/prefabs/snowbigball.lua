@@ -222,4 +222,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("badlands/objects/snowbigball", fn, assets, prefabs)
+return Prefab("snowbigball", fn, assets, prefabs)

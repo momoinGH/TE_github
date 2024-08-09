@@ -245,5 +245,5 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/objects/octohouse", fn, assets, prefabs),
+return Prefab("octohouse", fn, assets, prefabs),
     MakePlacer("common/octohouse_placer", "pig_house", "pig_house", "idle")

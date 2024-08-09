@@ -195,4 +195,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/objects/woodlegs_cage", fn, assets, prefabs)
+return Prefab("woodlegs_cage", fn, assets, prefabs)

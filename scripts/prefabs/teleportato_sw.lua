@@ -99,8 +99,13 @@ local function PowerUp(inst)
 	inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_idle_LP", "teleportato_idle")
 end
 
-local partSymbols = { teleportato_sw_ring = "RING", teleportato_sw_crank = "CRANK", teleportato_sw_box = "BOX", teleportato_sw_potato =
-"POTATO" }
+local partSymbols = {
+	teleportato_sw_ring = "RING",
+	teleportato_sw_crank = "CRANK",
+	teleportato_sw_box = "BOX",
+	teleportato_sw_potato =
+	"POTATO"
+}
 
 local function TestForPowerUp(inst)
 	local allParts = true
@@ -249,4 +254,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/objects/teleportato_sw_base", fn, assets, prefabs)
+return Prefab("teleportato_sw_base", fn, assets, prefabs)

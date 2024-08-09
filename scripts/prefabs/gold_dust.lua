@@ -53,4 +53,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/gold_dust", fn, assets)
+return Prefab("gold_dust", fn, assets)

@@ -264,5 +264,5 @@ local function shadowfn(Sim)
 	return inst
 end
 
-return Prefab("common/shipwrecked/firerain", firerainfn, assets, prefabs),
+return Prefab("firerain", firerainfn, assets, prefabs),
 	Prefab("common/shipwrecked/firerainshadow", shadowfn, assets, prefabs)

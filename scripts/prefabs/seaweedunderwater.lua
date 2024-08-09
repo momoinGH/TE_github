@@ -122,4 +122,4 @@ local function fn(Sim)
 end
 
 
-return Prefab("underwater/objects/seaweedunderwater", fn, assets)
+return Prefab("seaweedunderwater", fn, assets)

@@ -42,4 +42,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/bioluminescence_spawner", fn, {}, prefabs)
+return Prefab("bioluminescence_spawner", fn, {}, prefabs)

@@ -177,5 +177,5 @@ local function cooked()
     return inst
 end
 
-return Prefab("shipwrecked/roe", raw, assets, prefabs),
-    Prefab("shipwrecked/roe_cooked", cooked, assets, prefabs)
+return Prefab("roe", raw, assets, prefabs),
+    Prefab("roe_cooked", cooked, assets, prefabs)

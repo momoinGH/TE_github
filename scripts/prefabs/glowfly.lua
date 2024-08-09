@@ -514,5 +514,5 @@ local function fn2(Sim)
 	return inst
 end
 
-return Prefab("forest/monsters/glowfly", fn, assets, prefabs),
+return Prefab("glowfly", fn, assets, prefabs),
 	Prefab("forest/monsters/glowfly_cocoon", fn2, assets, prefabs)

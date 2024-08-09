@@ -148,4 +148,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/objects/poisonhole", fn, assets, prefabs)
+return Prefab("poisonhole", fn, assets, prefabs)

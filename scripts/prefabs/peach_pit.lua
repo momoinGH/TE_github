@@ -78,5 +78,5 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/peach_pit", fn, Assets),
+return Prefab("peach_pit", fn, Assets),
 	MakePlacer("common/peach_pit_placer", "peach_pit", "peach", "picked")

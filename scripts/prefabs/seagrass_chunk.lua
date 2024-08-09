@@ -40,4 +40,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/seagrass_chunk", fn, assets)
+return Prefab("seagrass_chunk", fn, assets)

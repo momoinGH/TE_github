@@ -55,4 +55,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/boatrepairkit", fn, assets)
+return Prefab("boatrepairkit", fn, assets)

@@ -45,7 +45,7 @@ local function makefn(name, frame)
 end
 
 local function TeleportatoPart(name, frame)
-	return Prefab("common/inventory/" .. name, makefn(name, frame), makeassetlist())
+	return Prefab("" .. name, makefn(name, frame), makeassetlist())
 end
 
 return TeleportatoPart("teleportato_sw_ring", "ring"),

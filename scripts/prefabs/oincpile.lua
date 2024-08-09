@@ -359,8 +359,8 @@ local function fnfree(Sim)
     return inst
 end
 
-return Prefab("forest/monsters/oincpile52", fn, assets, prefabs),
-    Prefab("forest/monsters/oincpile46", fn46, assets, prefabs),
-    Prefab("forest/monsters/oincpile49", fn49, assets, prefabs),
-    Prefab("forest/monsters/oincpile42", fn42, assets, prefabs),
-    Prefab("forest/monsters/oincpilefree", fnfree, assets, prefabs)
+return Prefab("oincpile52", fn, assets, prefabs),
+    Prefab("oincpile46", fn46, assets, prefabs),
+    Prefab("oincpile49", fn49, assets, prefabs),
+    Prefab("oincpile42", fn42, assets, prefabs),
+    Prefab("oincpilefree", fnfree, assets, prefabs)

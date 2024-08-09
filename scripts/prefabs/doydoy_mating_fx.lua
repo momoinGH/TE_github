@@ -42,4 +42,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("fx/doydoy_mate_fx", fn, assets)
+return Prefab("doydoy_mate_fx", fn, assets)

@@ -112,4 +112,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/inventory/goddess_goggles", fn, assets, prefabs)
+return Prefab("goddess_goggles", fn, assets, prefabs)

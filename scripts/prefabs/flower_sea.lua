@@ -235,6 +235,6 @@ local function triple()
 end
 
 
-return Prefab("underwater/objects/flower_sea", single, assets, prefabs),
+return Prefab("flower_sea", single, assets, prefabs),
 	Prefab("underwater/objects/flower_sea_double", double, assets, prefabs),
 	Prefab("underwater/objects/flower_sea_triple", triple, assets, prefabs)

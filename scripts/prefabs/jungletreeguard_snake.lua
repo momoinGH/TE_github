@@ -139,5 +139,5 @@ local function fn2()
 	return inst
 end
 
-return Prefab("common/inventory/jungletreeguard_snake", fn, assets, prefabs),
+return Prefab("jungletreeguard_snake", fn, assets, prefabs),
 	Prefab("common/inventory/snakefall", fn2, assets, prefabs)

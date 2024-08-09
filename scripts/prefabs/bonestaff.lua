@@ -117,4 +117,4 @@ local function bone()
     return inst
 end
 
-return Prefab("common/inventory/bonestaff", bone, assets, prefabs)
+return Prefab("bonestaff", bone, assets, prefabs)

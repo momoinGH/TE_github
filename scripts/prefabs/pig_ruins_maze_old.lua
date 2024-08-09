@@ -1654,9 +1654,9 @@ print(vagner[18].numexits)
 
                     if vagner[2].esquerda < 2 then
                         vagner[2].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[2].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[2].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[2]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -1668,9 +1668,9 @@ print(vagner[18].numexits)
 
                     if vagner[2].direita < 2 then
                         vagner[2].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[2].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[2].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[2]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -1713,9 +1713,9 @@ print(vagner[18].numexits)
 
                     if vagner[3].esquerda < 3 then
                         vagner[3].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[3].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[3].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[3]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -1727,9 +1727,9 @@ print(vagner[18].numexits)
 
                     if vagner[3].direita < 3 then
                         vagner[3].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[3].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[3].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[3]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -1772,9 +1772,9 @@ print(vagner[18].numexits)
 
                     if vagner[4].esquerda < 4 then
                         vagner[4].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[4].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[4].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[4]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -1786,9 +1786,9 @@ print(vagner[18].numexits)
 
                     if vagner[4].direita < 4 then
                         vagner[4].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[4].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[4].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[4]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -1831,9 +1831,9 @@ print(vagner[18].numexits)
 
                     if vagner[5].esquerda < 5 then
                         vagner[5].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[5].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[5].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[5]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -1845,9 +1845,9 @@ print(vagner[18].numexits)
 
                     if vagner[5].direita < 5 then
                         vagner[5].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[5].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[5].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[5]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -1890,9 +1890,9 @@ print(vagner[18].numexits)
 
                     if vagner[6].esquerda < 6 then
                         vagner[6].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[6].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[6].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[6]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -1904,9 +1904,9 @@ print(vagner[18].numexits)
 
                     if vagner[6].direita < 6 then
                         vagner[6].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[6].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[6].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[6]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -1992,9 +1992,9 @@ print(vagner[18].numexits)
 
                     if vagner[2].esquerda < 2 then
                         vagner[2].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[2].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[2].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[2]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2006,9 +2006,9 @@ print(vagner[18].numexits)
 
                     if vagner[2].direita < 2 then
                         vagner[2].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[2].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[2].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[2]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2051,9 +2051,9 @@ print(vagner[18].numexits)
 
                     if vagner[3].esquerda < 3 then
                         vagner[3].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[3].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[3].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[3]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2065,9 +2065,9 @@ print(vagner[18].numexits)
 
                     if vagner[3].direita < 3 then
                         vagner[3].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[3].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[3].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[3]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2110,9 +2110,9 @@ print(vagner[18].numexits)
 
                     if vagner[4].esquerda < 4 then
                         vagner[4].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[4].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[4].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[4]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2124,9 +2124,9 @@ print(vagner[18].numexits)
 
                     if vagner[4].direita < 4 then
                         vagner[4].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[4].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[4].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[4]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2169,9 +2169,9 @@ print(vagner[18].numexits)
 
                     if vagner[5].esquerda < 5 then
                         vagner[5].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[5].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[5].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[5]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2183,9 +2183,9 @@ print(vagner[18].numexits)
 
                     if vagner[5].direita < 5 then
                         vagner[5].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[5].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[5].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[5]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2228,9 +2228,9 @@ print(vagner[18].numexits)
 
                     if vagner[6].esquerda < 6 then
                         vagner[6].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[6].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[6].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[6]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2242,9 +2242,9 @@ print(vagner[18].numexits)
 
                     if vagner[6].direita < 6 then
                         vagner[6].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[6].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[6].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[6]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2287,9 +2287,9 @@ print(vagner[18].numexits)
 
                     if vagner[7].esquerda < 7 then
                         vagner[7].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[7].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[7].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[7]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2301,9 +2301,9 @@ print(vagner[18].numexits)
 
                     if vagner[7].direita < 7 then
                         vagner[7].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[7].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[7].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[7]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2346,9 +2346,9 @@ print(vagner[18].numexits)
 
                     if vagner[8].esquerda < 8 then
                         vagner[8].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[8].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[8].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[8]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2360,9 +2360,9 @@ print(vagner[18].numexits)
 
                     if vagner[8].direita < 8 then
                         vagner[8].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[8].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[8].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[8]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2405,9 +2405,9 @@ print(vagner[18].numexits)
 
                     if vagner[9].esquerda < 9 then
                         vagner[9].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[9].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[9].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[9]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2419,9 +2419,9 @@ print(vagner[18].numexits)
 
                     if vagner[9].direita < 9 then
                         vagner[9].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[9].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[9].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[9]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2452,9 +2452,9 @@ print(vagner[18].numexits)
 
                     if vagner[10].baixo < 10 then
                         vagner[10].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[10].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[10].baixo].saidacima.components.teleporter.targetTeleporter = vagner[10]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -2466,9 +2466,9 @@ print(vagner[18].numexits)
 
                     if vagner[10].esquerda < 10 then
                         vagner[10].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[10].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[10].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[10]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2480,9 +2480,9 @@ print(vagner[18].numexits)
 
                     if vagner[10].direita < 10 then
                         vagner[10].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[10].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[10].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[10]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2513,9 +2513,9 @@ print(vagner[18].numexits)
 
                     if vagner[11].baixo < 11 then
                         vagner[11].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[11].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[11].baixo].saidacima.components.teleporter.targetTeleporter = vagner[11]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -2527,9 +2527,9 @@ print(vagner[18].numexits)
 
                     if vagner[11].esquerda < 11 then
                         vagner[11].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[11].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[11].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[11]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2541,9 +2541,9 @@ print(vagner[18].numexits)
 
                     if vagner[11].direita < 11 then
                         vagner[11].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[11].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[11].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[11]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2574,9 +2574,9 @@ print(vagner[18].numexits)
 
                     if vagner[12].baixo < 12 then
                         vagner[12].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[12].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[12].baixo].saidacima.components.teleporter.targetTeleporter = vagner[12]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -2588,9 +2588,9 @@ print(vagner[18].numexits)
 
                     if vagner[12].esquerda < 12 then
                         vagner[12].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[12].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[12].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[12]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2602,9 +2602,9 @@ print(vagner[18].numexits)
 
                     if vagner[12].direita < 12 then
                         vagner[12].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[12].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[12].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[12]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2635,9 +2635,9 @@ print(vagner[18].numexits)
 
                     if vagner[13].baixo < 13 then
                         vagner[13].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[13].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[13].baixo].saidacima.components.teleporter.targetTeleporter = vagner[13]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -2649,9 +2649,9 @@ print(vagner[18].numexits)
 
                     if vagner[13].esquerda < 13 then
                         vagner[13].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[13].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[13].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[13]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2663,9 +2663,9 @@ print(vagner[18].numexits)
 
                     if vagner[13].direita < 13 then
                         vagner[13].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[13].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[13].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[13]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2696,9 +2696,9 @@ print(vagner[18].numexits)
 
                     if vagner[14].baixo < 14 then
                         vagner[14].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[14].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[14].baixo].saidacima.components.teleporter.targetTeleporter = vagner[14]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -2710,9 +2710,9 @@ print(vagner[18].numexits)
 
                     if vagner[14].esquerda < 14 then
                         vagner[14].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[14].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[14].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[14]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2724,9 +2724,9 @@ print(vagner[18].numexits)
 
                     if vagner[14].direita < 14 then
                         vagner[14].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[14].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[14].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[14]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2757,9 +2757,9 @@ print(vagner[18].numexits)
 
                     if vagner[15].baixo < 15 then
                         vagner[15].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[15].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[15].baixo].saidacima.components.teleporter.targetTeleporter = vagner[15]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -2771,9 +2771,9 @@ print(vagner[18].numexits)
 
                     if vagner[15].esquerda < 15 then
                         vagner[15].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[15].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[15].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[15]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2785,9 +2785,9 @@ print(vagner[18].numexits)
 
                     if vagner[15].direita < 15 then
                         vagner[15].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[15].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[15].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[15]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2818,9 +2818,9 @@ print(vagner[18].numexits)
 
                     if vagner[16].baixo < 16 then
                         vagner[16].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[16].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[16].baixo].saidacima.components.teleporter.targetTeleporter = vagner[16]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -2832,9 +2832,9 @@ print(vagner[18].numexits)
 
                     if vagner[16].esquerda < 16 then
                         vagner[16].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[16].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[16].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[16]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2846,9 +2846,9 @@ print(vagner[18].numexits)
 
                     if vagner[16].direita < 16 then
                         vagner[16].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[16].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[16].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[16]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2879,9 +2879,9 @@ print(vagner[18].numexits)
 
                     if vagner[17].baixo < 17 then
                         vagner[17].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[17].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[17].baixo].saidacima.components.teleporter.targetTeleporter = vagner[17]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -2893,9 +2893,9 @@ print(vagner[18].numexits)
 
                     if vagner[17].esquerda < 17 then
                         vagner[17].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[17].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[17].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[17]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2907,9 +2907,9 @@ print(vagner[18].numexits)
 
                     if vagner[17].direita < 17 then
                         vagner[17].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[17].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[17].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[17]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -2940,9 +2940,9 @@ print(vagner[18].numexits)
 
                     if vagner[18].baixo < 18 then
                         vagner[18].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[18].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[18].baixo].saidacima.components.teleporter.targetTeleporter = vagner[18]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -2954,9 +2954,9 @@ print(vagner[18].numexits)
 
                     if vagner[18].esquerda < 18 then
                         vagner[18].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[18].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[18].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[18]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -2968,9 +2968,9 @@ print(vagner[18].numexits)
 
                     if vagner[18].direita < 18 then
                         vagner[18].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[18].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[18].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[18]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3001,9 +3001,9 @@ print(vagner[18].numexits)
 
                     if vagner[19].baixo < 19 then
                         vagner[19].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[19].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[19].baixo].saidacima.components.teleporter.targetTeleporter = vagner[19]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -3015,9 +3015,9 @@ print(vagner[18].numexits)
 
                     if vagner[19].esquerda < 19 then
                         vagner[19].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[19].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[19].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[19]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3029,9 +3029,9 @@ print(vagner[18].numexits)
 
                     if vagner[19].direita < 19 then
                         vagner[19].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[19].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[19].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[19]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3062,9 +3062,9 @@ print(vagner[18].numexits)
 
                     if vagner[20].baixo < 20 then
                         vagner[20].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[20].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[20].baixo].saidacima.components.teleporter.targetTeleporter = vagner[20]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -3076,9 +3076,9 @@ print(vagner[18].numexits)
 
                     if vagner[20].esquerda < 20 then
                         vagner[20].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[20].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[20].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[20]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3090,9 +3090,9 @@ print(vagner[18].numexits)
 
                     if vagner[20].direita < 20 then
                         vagner[20].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[20].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[20].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[20]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3123,9 +3123,9 @@ print(vagner[18].numexits)
 
                     if vagner[21].baixo < 21 then
                         vagner[21].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[21].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[21].baixo].saidacima.components.teleporter.targetTeleporter = vagner[21]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -3137,9 +3137,9 @@ print(vagner[18].numexits)
 
                     if vagner[21].esquerda < 21 then
                         vagner[21].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[21].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[21].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[21]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3151,9 +3151,9 @@ print(vagner[18].numexits)
 
                     if vagner[21].direita < 21 then
                         vagner[21].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[21].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[21].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[21]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3184,9 +3184,9 @@ print(vagner[18].numexits)
 
                     if vagner[22].baixo < 22 then
                         vagner[22].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[22].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[22].baixo].saidacima.components.teleporter.targetTeleporter = vagner[22]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -3198,9 +3198,9 @@ print(vagner[18].numexits)
 
                     if vagner[22].esquerda < 22 then
                         vagner[22].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[22].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[22].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[22]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3212,9 +3212,9 @@ print(vagner[18].numexits)
 
                     if vagner[22].direita < 22 then
                         vagner[22].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[22].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[22].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[22]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3245,9 +3245,9 @@ print(vagner[18].numexits)
 
                     if vagner[23].baixo < 23 then
                         vagner[23].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[23].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[23].baixo].saidacima.components.teleporter.targetTeleporter = vagner[23]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -3259,9 +3259,9 @@ print(vagner[18].numexits)
 
                     if vagner[23].esquerda < 23 then
                         vagner[23].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[23].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[23].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[23]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3273,9 +3273,9 @@ print(vagner[18].numexits)
 
                     if vagner[23].direita < 23 then
                         vagner[23].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[23].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[23].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[23]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3306,9 +3306,9 @@ print(vagner[18].numexits)
 
                     if vagner[24].baixo < 24 then
                         vagner[24].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[24].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[24].baixo].saidacima.components.teleporter.targetTeleporter = vagner[24]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -3320,9 +3320,9 @@ print(vagner[18].numexits)
 
                     if vagner[24].esquerda < 24 then
                         vagner[24].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[24].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[24].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[24]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3334,9 +3334,9 @@ print(vagner[18].numexits)
 
                     if vagner[24].direita < 24 then
                         vagner[24].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[24].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[24].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[24]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3423,9 +3423,9 @@ print(vagner[18].numexits)
 
                     if vagner[2].esquerda < 2 then
                         vagner[2].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[2].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[2].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[2]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3437,9 +3437,9 @@ print(vagner[18].numexits)
 
                     if vagner[2].direita < 2 then
                         vagner[2].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[2].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[2].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[2]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3482,9 +3482,9 @@ print(vagner[18].numexits)
 
                     if vagner[3].esquerda < 3 then
                         vagner[3].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[3].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[3].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[3]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3496,9 +3496,9 @@ print(vagner[18].numexits)
 
                     if vagner[3].direita < 3 then
                         vagner[3].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[3].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[3].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[3]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3541,9 +3541,9 @@ print(vagner[18].numexits)
 
                     if vagner[4].esquerda < 4 then
                         vagner[4].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[4].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[4].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[4]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3555,9 +3555,9 @@ print(vagner[18].numexits)
 
                     if vagner[4].direita < 4 then
                         vagner[4].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[4].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[4].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[4]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3600,9 +3600,9 @@ print(vagner[18].numexits)
 
                     if vagner[5].esquerda < 5 then
                         vagner[5].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[5].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[5].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[5]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3614,9 +3614,9 @@ print(vagner[18].numexits)
 
                     if vagner[5].direita < 5 then
                         vagner[5].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[5].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[5].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[5]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3631,72 +3631,216 @@ print(vagner[18].numexits)
             if trap == true then return "pig_ruins_door_cima" end
             if math.random() < 0.2 then return "pig_ruins_door_cimaescondida" end
             if inst.entradadaruina == 0 then return "pig_ruins_door_cima" end
-            if inst.entradadaruina == 1 then if math.random() < 0.3 then return "pig_ruins_door_cimavine" else return
-                    "pig_ruins_door_cima" end end
-            if inst.entradadaruina == 2 then if math.random() < 0.6 then return "pig_ruins_door_cimavine" else return
-                    "pig_ruins_door_cima" end end
-            if inst.entradadaruina == 3 then if math.random() < 0.3 then return "pig_ruins_door_cimavine" else return
-                    "pig_ruins_door_cima" end end
-            if inst.entradadaruina == 4 then if math.random() < 0.4 then return "pig_ruins_door_cimavine" else return
-                    "pig_ruins_door_cima" end end
-            if inst.entradadaruina == 5 then if math.random() < 0.6 then return "pig_ruins_door_cimavine" else return
-                    "pig_ruins_door_cima" end end
-            if inst.entradadaruina == 6 then if math.random() < 0.5 then return "pig_ruins_door_cimavine" else return
-                    "pig_ruins_door_cima" end end
+            if inst.entradadaruina == 1 then
+                if math.random() < 0.3 then
+                    return "pig_ruins_door_cimavine"
+                else
+                    return
+                    "pig_ruins_door_cima"
+                end
+            end
+            if inst.entradadaruina == 2 then
+                if math.random() < 0.6 then
+                    return "pig_ruins_door_cimavine"
+                else
+                    return
+                    "pig_ruins_door_cima"
+                end
+            end
+            if inst.entradadaruina == 3 then
+                if math.random() < 0.3 then
+                    return "pig_ruins_door_cimavine"
+                else
+                    return
+                    "pig_ruins_door_cima"
+                end
+            end
+            if inst.entradadaruina == 4 then
+                if math.random() < 0.4 then
+                    return "pig_ruins_door_cimavine"
+                else
+                    return
+                    "pig_ruins_door_cima"
+                end
+            end
+            if inst.entradadaruina == 5 then
+                if math.random() < 0.6 then
+                    return "pig_ruins_door_cimavine"
+                else
+                    return
+                    "pig_ruins_door_cima"
+                end
+            end
+            if inst.entradadaruina == 6 then
+                if math.random() < 0.5 then
+                    return "pig_ruins_door_cimavine"
+                else
+                    return
+                    "pig_ruins_door_cima"
+                end
+            end
         end
 
         local function portacomvinhabaixo(inst, trap)
             if trap == true then return "pig_ruins_door_baixo" end
             if math.random() < 0.2 then return "pig_ruins_door_baixoescondida" end
             if inst.entradadaruina == 0 then return "pig_ruins_door_baixo" end
-            if inst.entradadaruina == 1 then if math.random() < 0.3 then return "pig_ruins_door_baixovine" else return
-                    "pig_ruins_door_baixo" end end
-            if inst.entradadaruina == 2 then if math.random() < 0.6 then return "pig_ruins_door_baixovine" else return
-                    "pig_ruins_door_baixo" end end
-            if inst.entradadaruina == 3 then if math.random() < 0.3 then return "pig_ruins_door_baixovine" else return
-                    "pig_ruins_door_baixo" end end
-            if inst.entradadaruina == 4 then if math.random() < 0.4 then return "pig_ruins_door_baixovine" else return
-                    "pig_ruins_door_baixo" end end
-            if inst.entradadaruina == 5 then if math.random() < 0.6 then return "pig_ruins_door_baixovine" else return
-                    "pig_ruins_door_baixo" end end
-            if inst.entradadaruina == 6 then if math.random() < 0.5 then return "pig_ruins_door_baixovine" else return
-                    "pig_ruins_door_baixo" end end
+            if inst.entradadaruina == 1 then
+                if math.random() < 0.3 then
+                    return "pig_ruins_door_baixovine"
+                else
+                    return
+                    "pig_ruins_door_baixo"
+                end
+            end
+            if inst.entradadaruina == 2 then
+                if math.random() < 0.6 then
+                    return "pig_ruins_door_baixovine"
+                else
+                    return
+                    "pig_ruins_door_baixo"
+                end
+            end
+            if inst.entradadaruina == 3 then
+                if math.random() < 0.3 then
+                    return "pig_ruins_door_baixovine"
+                else
+                    return
+                    "pig_ruins_door_baixo"
+                end
+            end
+            if inst.entradadaruina == 4 then
+                if math.random() < 0.4 then
+                    return "pig_ruins_door_baixovine"
+                else
+                    return
+                    "pig_ruins_door_baixo"
+                end
+            end
+            if inst.entradadaruina == 5 then
+                if math.random() < 0.6 then
+                    return "pig_ruins_door_baixovine"
+                else
+                    return
+                    "pig_ruins_door_baixo"
+                end
+            end
+            if inst.entradadaruina == 6 then
+                if math.random() < 0.5 then
+                    return "pig_ruins_door_baixovine"
+                else
+                    return
+                    "pig_ruins_door_baixo"
+                end
+            end
         end
 
         local function portacomvinhaesquerda(inst, trap)
             if trap == true then return "pig_ruins_door_esquerda" end
             if math.random() < 0.2 then return "pig_ruins_door_esquerdaescondida" end
             if inst.entradadaruina == 0 then return "pig_ruins_door_esquerda" end
-            if inst.entradadaruina == 1 then if math.random() < 0.3 then return "pig_ruins_door_esquerdavine" else return
-                    "pig_ruins_door_esquerda" end end
-            if inst.entradadaruina == 2 then if math.random() < 0.6 then return "pig_ruins_door_esquerdavine" else return
-                    "pig_ruins_door_esquerda" end end
-            if inst.entradadaruina == 3 then if math.random() < 0.3 then return "pig_ruins_door_esquerdavine" else return
-                    "pig_ruins_door_esquerda" end end
-            if inst.entradadaruina == 4 then if math.random() < 0.4 then return "pig_ruins_door_esquerdavine" else return
-                    "pig_ruins_door_esquerda" end end
-            if inst.entradadaruina == 5 then if math.random() < 0.6 then return "pig_ruins_door_esquerdavine" else return
-                    "pig_ruins_door_esquerda" end end
-            if inst.entradadaruina == 6 then if math.random() < 0.5 then return "pig_ruins_door_esquerdavine" else return
-                    "pig_ruins_door_esquerda" end end
+            if inst.entradadaruina == 1 then
+                if math.random() < 0.3 then
+                    return "pig_ruins_door_esquerdavine"
+                else
+                    return
+                    "pig_ruins_door_esquerda"
+                end
+            end
+            if inst.entradadaruina == 2 then
+                if math.random() < 0.6 then
+                    return "pig_ruins_door_esquerdavine"
+                else
+                    return
+                    "pig_ruins_door_esquerda"
+                end
+            end
+            if inst.entradadaruina == 3 then
+                if math.random() < 0.3 then
+                    return "pig_ruins_door_esquerdavine"
+                else
+                    return
+                    "pig_ruins_door_esquerda"
+                end
+            end
+            if inst.entradadaruina == 4 then
+                if math.random() < 0.4 then
+                    return "pig_ruins_door_esquerdavine"
+                else
+                    return
+                    "pig_ruins_door_esquerda"
+                end
+            end
+            if inst.entradadaruina == 5 then
+                if math.random() < 0.6 then
+                    return "pig_ruins_door_esquerdavine"
+                else
+                    return
+                    "pig_ruins_door_esquerda"
+                end
+            end
+            if inst.entradadaruina == 6 then
+                if math.random() < 0.5 then
+                    return "pig_ruins_door_esquerdavine"
+                else
+                    return
+                    "pig_ruins_door_esquerda"
+                end
+            end
         end
 
         local function portacomvinhadireita(inst, trap)
             if trap == true then return "pig_ruins_door_direita" end
             if math.random() < 0.2 then return "pig_ruins_door_direitaescondida" end
             if inst.entradadaruina == 0 then return "pig_ruins_door_direita" end
-            if inst.entradadaruina == 1 then if math.random() < 0.3 then return "pig_ruins_door_direitavine" else return
-                    "pig_ruins_door_direita" end end
-            if inst.entradadaruina == 2 then if math.random() < 0.6 then return "pig_ruins_door_direitavine" else return
-                    "pig_ruins_door_direita" end end
-            if inst.entradadaruina == 3 then if math.random() < 0.3 then return "pig_ruins_door_direitavine" else return
-                    "pig_ruins_door_direita" end end
-            if inst.entradadaruina == 4 then if math.random() < 0.4 then return "pig_ruins_door_direitavine" else return
-                    "pig_ruins_door_direita" end end
-            if inst.entradadaruina == 5 then if math.random() < 0.6 then return "pig_ruins_door_direitavine" else return
-                    "pig_ruins_door_direita" end end
-            if inst.entradadaruina == 6 then if math.random() < 0.5 then return "pig_ruins_door_direitavine" else return
-                    "pig_ruins_door_direita" end end
+            if inst.entradadaruina == 1 then
+                if math.random() < 0.3 then
+                    return "pig_ruins_door_direitavine"
+                else
+                    return
+                    "pig_ruins_door_direita"
+                end
+            end
+            if inst.entradadaruina == 2 then
+                if math.random() < 0.6 then
+                    return "pig_ruins_door_direitavine"
+                else
+                    return
+                    "pig_ruins_door_direita"
+                end
+            end
+            if inst.entradadaruina == 3 then
+                if math.random() < 0.3 then
+                    return "pig_ruins_door_direitavine"
+                else
+                    return
+                    "pig_ruins_door_direita"
+                end
+            end
+            if inst.entradadaruina == 4 then
+                if math.random() < 0.4 then
+                    return "pig_ruins_door_direitavine"
+                else
+                    return
+                    "pig_ruins_door_direita"
+                end
+            end
+            if inst.entradadaruina == 5 then
+                if math.random() < 0.6 then
+                    return "pig_ruins_door_direitavine"
+                else
+                    return
+                    "pig_ruins_door_direita"
+                end
+            end
+            if inst.entradadaruina == 6 then
+                if math.random() < 0.5 then
+                    return "pig_ruins_door_direitavine"
+                else
+                    return
+                    "pig_ruins_door_direita"
+                end
+            end
         end
 
 
@@ -3793,8 +3937,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -3802,8 +3950,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[2].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -3847,9 +3999,9 @@ print(vagner[18].numexits)
 
                     if vagner[2].esquerda < 2 then
                         vagner[2].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[2].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[2].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[2]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3861,9 +4013,9 @@ print(vagner[18].numexits)
 
                     if vagner[2].direita < 2 then
                         vagner[2].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[2].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[2].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[2]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3879,8 +4031,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -3888,8 +4044,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[3].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -3933,9 +4093,9 @@ print(vagner[18].numexits)
 
                     if vagner[3].esquerda < 3 then
                         vagner[3].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[3].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[3].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[3]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -3947,9 +4107,9 @@ print(vagner[18].numexits)
 
                     if vagner[3].direita < 3 then
                         vagner[3].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[3].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[3].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[3]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -3965,8 +4125,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -3974,8 +4138,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[4].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4019,9 +4187,9 @@ print(vagner[18].numexits)
 
                     if vagner[4].esquerda < 4 then
                         vagner[4].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[4].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[4].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[4]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4033,9 +4201,9 @@ print(vagner[18].numexits)
 
                     if vagner[4].direita < 4 then
                         vagner[4].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[4].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[4].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[4]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -4051,8 +4219,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -4060,8 +4232,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[5].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4105,9 +4281,9 @@ print(vagner[18].numexits)
 
                     if vagner[5].esquerda < 5 then
                         vagner[5].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[5].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[5].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[5]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4119,9 +4295,9 @@ print(vagner[18].numexits)
 
                     if vagner[5].direita < 5 then
                         vagner[5].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[5].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[5].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[5]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -4137,8 +4313,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -4146,8 +4326,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[6].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4191,9 +4375,9 @@ print(vagner[18].numexits)
 
                     if vagner[6].esquerda < 6 then
                         vagner[6].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[6].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[6].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[6]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4205,9 +4389,9 @@ print(vagner[18].numexits)
 
                     if vagner[6].direita < 6 then
                         vagner[6].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[6].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[6].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[6]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -4224,8 +4408,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -4233,8 +4421,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[7].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4278,9 +4470,9 @@ print(vagner[18].numexits)
 
                     if vagner[7].esquerda < 7 then
                         vagner[7].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[7].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[7].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[7]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4292,9 +4484,9 @@ print(vagner[18].numexits)
 
                     if vagner[7].direita < 7 then
                         vagner[7].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[7].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[7].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[7]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -4310,8 +4502,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -4319,8 +4515,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[8].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4364,9 +4564,9 @@ print(vagner[18].numexits)
 
                     if vagner[8].esquerda < 8 then
                         vagner[8].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[8].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[8].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[8]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4378,9 +4578,9 @@ print(vagner[18].numexits)
 
                     if vagner[8].direita < 8 then
                         vagner[8].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[8].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[8].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[8]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -4396,8 +4596,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -4405,8 +4609,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[9].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4450,9 +4658,9 @@ print(vagner[18].numexits)
 
                     if vagner[9].esquerda < 9 then
                         vagner[9].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[9].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[9].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[9]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4464,9 +4672,9 @@ print(vagner[18].numexits)
 
                     if vagner[9].direita < 9 then
                         vagner[9].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[9].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[9].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[9]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -4482,8 +4690,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -4491,8 +4703,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[10].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4524,9 +4740,9 @@ print(vagner[18].numexits)
 
                     if vagner[10].baixo < 10 then
                         vagner[10].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[10].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[10].baixo].saidacima.components.teleporter.targetTeleporter = vagner[10]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -4538,9 +4754,9 @@ print(vagner[18].numexits)
 
                     if vagner[10].esquerda < 10 then
                         vagner[10].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[10].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[10].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[10]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4552,9 +4768,9 @@ print(vagner[18].numexits)
 
                     if vagner[10].direita < 10 then
                         vagner[10].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[10].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[10].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[10]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -4570,8 +4786,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -4579,8 +4799,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[11].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4612,9 +4836,9 @@ print(vagner[18].numexits)
 
                     if vagner[11].baixo < 11 then
                         vagner[11].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[11].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[11].baixo].saidacima.components.teleporter.targetTeleporter = vagner[11]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -4626,9 +4850,9 @@ print(vagner[18].numexits)
 
                     if vagner[11].esquerda < 11 then
                         vagner[11].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[11].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[11].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[11]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4640,9 +4864,9 @@ print(vagner[18].numexits)
 
                     if vagner[11].direita < 11 then
                         vagner[11].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[11].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[11].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[11]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -4658,8 +4882,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -4667,8 +4895,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[12].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4700,9 +4932,9 @@ print(vagner[18].numexits)
 
                     if vagner[12].baixo < 12 then
                         vagner[12].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[12].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[12].baixo].saidacima.components.teleporter.targetTeleporter = vagner[12]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -4714,9 +4946,9 @@ print(vagner[18].numexits)
 
                     if vagner[12].esquerda < 12 then
                         vagner[12].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[12].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[12].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[12]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4728,9 +4960,9 @@ print(vagner[18].numexits)
 
                     if vagner[12].direita < 12 then
                         vagner[12].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[12].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[12].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[12]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -4746,8 +4978,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -4755,8 +4991,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[13].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4788,9 +5028,9 @@ print(vagner[18].numexits)
 
                     if vagner[13].baixo < 13 then
                         vagner[13].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[13].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[13].baixo].saidacima.components.teleporter.targetTeleporter = vagner[13]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -4802,9 +5042,9 @@ print(vagner[18].numexits)
 
                     if vagner[13].esquerda < 13 then
                         vagner[13].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[13].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[13].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[13]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4816,9 +5056,9 @@ print(vagner[18].numexits)
 
                     if vagner[13].direita < 13 then
                         vagner[13].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[13].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[13].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[13]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -4834,8 +5074,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -4843,8 +5087,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[14].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4876,9 +5124,9 @@ print(vagner[18].numexits)
 
                     if vagner[14].baixo < 14 then
                         vagner[14].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[14].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[14].baixo].saidacima.components.teleporter.targetTeleporter = vagner[14]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -4890,9 +5138,9 @@ print(vagner[18].numexits)
 
                     if vagner[14].esquerda < 14 then
                         vagner[14].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[14].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[14].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[14]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4904,9 +5152,9 @@ print(vagner[18].numexits)
 
                     if vagner[14].direita < 14 then
                         vagner[14].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[14].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[14].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[14]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -4922,8 +5170,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -4931,8 +5183,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[15].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -4964,9 +5220,9 @@ print(vagner[18].numexits)
 
                     if vagner[15].baixo < 15 then
                         vagner[15].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[15].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[15].baixo].saidacima.components.teleporter.targetTeleporter = vagner[15]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -4978,9 +5234,9 @@ print(vagner[18].numexits)
 
                     if vagner[15].esquerda < 15 then
                         vagner[15].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[15].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[15].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[15]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -4992,9 +5248,9 @@ print(vagner[18].numexits)
 
                     if vagner[15].direita < 15 then
                         vagner[15].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[15].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[15].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[15]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5010,8 +5266,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5019,8 +5279,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[16].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -5052,9 +5316,9 @@ print(vagner[18].numexits)
 
                     if vagner[16].baixo < 16 then
                         vagner[16].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[16].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[16].baixo].saidacima.components.teleporter.targetTeleporter = vagner[16]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -5066,9 +5330,9 @@ print(vagner[18].numexits)
 
                     if vagner[16].esquerda < 16 then
                         vagner[16].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[16].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[16].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[16]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -5080,9 +5344,9 @@ print(vagner[18].numexits)
 
                     if vagner[16].direita < 16 then
                         vagner[16].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[16].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[16].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[16]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5098,8 +5362,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5107,8 +5375,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[17].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -5140,9 +5412,9 @@ print(vagner[18].numexits)
 
                     if vagner[17].baixo < 17 then
                         vagner[17].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[17].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[17].baixo].saidacima.components.teleporter.targetTeleporter = vagner[17]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -5154,9 +5426,9 @@ print(vagner[18].numexits)
 
                     if vagner[17].esquerda < 17 then
                         vagner[17].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[17].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[17].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[17]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -5168,9 +5440,9 @@ print(vagner[18].numexits)
 
                     if vagner[17].direita < 17 then
                         vagner[17].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[17].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[17].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[17]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5186,8 +5458,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5195,8 +5471,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[18].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -5228,9 +5508,9 @@ print(vagner[18].numexits)
 
                     if vagner[18].baixo < 18 then
                         vagner[18].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[18].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[18].baixo].saidacima.components.teleporter.targetTeleporter = vagner[18]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -5242,9 +5522,9 @@ print(vagner[18].numexits)
 
                     if vagner[18].esquerda < 18 then
                         vagner[18].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[18].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[18].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[18]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -5256,9 +5536,9 @@ print(vagner[18].numexits)
 
                     if vagner[18].direita < 18 then
                         vagner[18].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[18].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[18].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[18]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5274,8 +5554,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5283,8 +5567,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[19].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -5316,9 +5604,9 @@ print(vagner[18].numexits)
 
                     if vagner[19].baixo < 19 then
                         vagner[19].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[19].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[19].baixo].saidacima.components.teleporter.targetTeleporter = vagner[19]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -5330,9 +5618,9 @@ print(vagner[18].numexits)
 
                     if vagner[19].esquerda < 19 then
                         vagner[19].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[19].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[19].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[19]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -5344,9 +5632,9 @@ print(vagner[18].numexits)
 
                     if vagner[19].direita < 19 then
                         vagner[19].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[19].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[19].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[19]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5362,8 +5650,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5371,8 +5663,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[20].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -5404,9 +5700,9 @@ print(vagner[18].numexits)
 
                     if vagner[20].baixo < 20 then
                         vagner[20].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[20].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[20].baixo].saidacima.components.teleporter.targetTeleporter = vagner[20]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -5418,9 +5714,9 @@ print(vagner[18].numexits)
 
                     if vagner[20].esquerda < 20 then
                         vagner[20].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[20].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[20].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[20]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -5432,9 +5728,9 @@ print(vagner[18].numexits)
 
                     if vagner[20].direita < 20 then
                         vagner[20].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[20].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[20].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[20]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5450,8 +5746,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5459,8 +5759,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[21].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -5492,9 +5796,9 @@ print(vagner[18].numexits)
 
                     if vagner[21].baixo < 21 then
                         vagner[21].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[21].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[21].baixo].saidacima.components.teleporter.targetTeleporter = vagner[21]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -5506,9 +5810,9 @@ print(vagner[18].numexits)
 
                     if vagner[21].esquerda < 21 then
                         vagner[21].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[21].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[21].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[21]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -5520,9 +5824,9 @@ print(vagner[18].numexits)
 
                     if vagner[21].direita < 21 then
                         vagner[21].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[21].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[21].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[21]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5538,8 +5842,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5547,8 +5855,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[22].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -5580,9 +5892,9 @@ print(vagner[18].numexits)
 
                     if vagner[22].baixo < 22 then
                         vagner[22].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[22].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[22].baixo].saidacima.components.teleporter.targetTeleporter = vagner[22]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -5594,9 +5906,9 @@ print(vagner[18].numexits)
 
                     if vagner[22].esquerda < 22 then
                         vagner[22].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[22].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[22].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[22]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -5608,9 +5920,9 @@ print(vagner[18].numexits)
 
                     if vagner[22].direita < 22 then
                         vagner[22].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[22].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[22].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[22]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5626,8 +5938,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5635,8 +5951,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[23].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -5668,9 +5988,9 @@ print(vagner[18].numexits)
 
                     if vagner[23].baixo < 23 then
                         vagner[23].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[23].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[23].baixo].saidacima.components.teleporter.targetTeleporter = vagner[23]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -5682,9 +6002,9 @@ print(vagner[18].numexits)
 
                     if vagner[23].esquerda < 23 then
                         vagner[23].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[23].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[23].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[23]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -5696,9 +6016,9 @@ print(vagner[18].numexits)
 
                     if vagner[23].direita < 23 then
                         vagner[23].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[23].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[23].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[23]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5714,8 +6034,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5723,8 +6047,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[24].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -5756,9 +6084,9 @@ print(vagner[18].numexits)
 
                     if vagner[24].baixo < 24 then
                         vagner[24].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[24].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[24].baixo].saidacima.components.teleporter.targetTeleporter = vagner[24]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -5770,9 +6098,9 @@ print(vagner[18].numexits)
 
                     if vagner[24].esquerda < 24 then
                         vagner[24].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[24].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[24].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[24]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -5784,9 +6112,9 @@ print(vagner[18].numexits)
 
                     if vagner[24].direita < 24 then
                         vagner[24].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[24].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[24].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[24]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5802,8 +6130,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5811,8 +6143,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[25].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -5844,9 +6180,9 @@ print(vagner[18].numexits)
 
                     if vagner[25].baixo < 25 then
                         vagner[25].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[25].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[25].baixo].saidacima.components.teleporter.targetTeleporter = vagner[25]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -5858,9 +6194,9 @@ print(vagner[18].numexits)
 
                     if vagner[25].esquerda < 25 then
                         vagner[25].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[25].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[25].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[25]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -5872,9 +6208,9 @@ print(vagner[18].numexits)
 
                     if vagner[25].direita < 25 then
                         vagner[25].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[25].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[25].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[25]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5890,8 +6226,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5899,8 +6239,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[26].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -5932,9 +6276,9 @@ print(vagner[18].numexits)
 
                     if vagner[26].baixo < 26 then
                         vagner[26].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[26].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[26].baixo].saidacima.components.teleporter.targetTeleporter = vagner[26]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -5946,9 +6290,9 @@ print(vagner[18].numexits)
 
                     if vagner[26].esquerda < 26 then
                         vagner[26].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[26].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[26].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[26]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -5960,9 +6304,9 @@ print(vagner[18].numexits)
 
                     if vagner[26].direita < 26 then
                         vagner[26].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[26].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[26].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[26]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -5978,8 +6322,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -5987,8 +6335,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[27].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -6020,9 +6372,9 @@ print(vagner[18].numexits)
 
                     if vagner[27].baixo < 27 then
                         vagner[27].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[27].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[27].baixo].saidacima.components.teleporter.targetTeleporter = vagner[27]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -6034,9 +6386,9 @@ print(vagner[18].numexits)
 
                     if vagner[27].esquerda < 27 then
                         vagner[27].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[27].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[27].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[27]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -6048,9 +6400,9 @@ print(vagner[18].numexits)
 
                     if vagner[27].direita < 27 then
                         vagner[27].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[27].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[27].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[27]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -6066,8 +6418,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -6075,8 +6431,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[28].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -6108,9 +6468,9 @@ print(vagner[18].numexits)
 
                     if vagner[28].baixo < 28 then
                         vagner[28].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[28].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[28].baixo].saidacima.components.teleporter.targetTeleporter = vagner[28]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -6122,9 +6482,9 @@ print(vagner[18].numexits)
 
                     if vagner[28].esquerda < 28 then
                         vagner[28].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[28].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[28].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[28]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -6136,9 +6496,9 @@ print(vagner[18].numexits)
 
                     if vagner[28].direita < 28 then
                         vagner[28].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[28].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[28].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[28]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -6154,8 +6514,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -6163,8 +6527,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[29].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -6196,9 +6564,9 @@ print(vagner[18].numexits)
 
                     if vagner[29].baixo < 29 then
                         vagner[29].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[29].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[29].baixo].saidacima.components.teleporter.targetTeleporter = vagner[29]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -6210,9 +6578,9 @@ print(vagner[18].numexits)
 
                     if vagner[29].esquerda < 29 then
                         vagner[29].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[29].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[29].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[29]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -6224,9 +6592,9 @@ print(vagner[18].numexits)
 
                     if vagner[29].direita < 29 then
                         vagner[29].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[29].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[29].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[29]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -6242,8 +6610,12 @@ print(vagner[18].numexits)
                     elseif inst.prefab == "maze_pig_ruins_entrance6" then
                         SpawnPrefab("createoincpileroom")
                     elseif inst.prefab == "maze_pig_ruins_entrance4" then
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     elseif inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureaporkalypse")
                     end
@@ -6251,8 +6623,12 @@ print(vagner[18].numexits)
                     if inst.prefab == "maze_pig_ruins_entrance5" then
                         SpawnPrefab("createtreasureendswell")
                     else
-                        if math.random(1, 2) == 1 then SpawnPrefab("createtreasureroom") else SpawnPrefab(
-                            "createtreasuresecret") end
+                        if math.random(1, 2) == 1 then
+                            SpawnPrefab("createtreasureroom")
+                        else
+                            SpawnPrefab(
+                                "createtreasuresecret")
+                        end
                     end
                 elseif vagner[30].numexits > 1 and math.random(1, 8) < 3 then
                     SpawnPrefab("createdoortraproom")
@@ -6284,9 +6660,9 @@ print(vagner[18].numexits)
 
                     if vagner[30].baixo < 30 then
                         vagner[30].saidabaixo.components.teleporter.targetTeleporter = vagner[vagner[30].baixo]
-                        .saidacima
+                            .saidacima
                         vagner[vagner[30].baixo].saidacima.components.teleporter.targetTeleporter = vagner[30]
-                        .saidabaixo
+                            .saidabaixo
                     end
                 end
 
@@ -6298,9 +6674,9 @@ print(vagner[18].numexits)
 
                     if vagner[30].esquerda < 30 then
                         vagner[30].saidaesquerda.components.teleporter.targetTeleporter = vagner[vagner[30].esquerda]
-                        .saidadireita
+                            .saidadireita
                         vagner[vagner[30].esquerda].saidadireita.components.teleporter.targetTeleporter = vagner[30]
-                        .saidaesquerda
+                            .saidaesquerda
                     end
                 end
 
@@ -6312,9 +6688,9 @@ print(vagner[18].numexits)
 
                     if vagner[30].direita < 30 then
                         vagner[30].saidadireita.components.teleporter.targetTeleporter = vagner[vagner[30].direita]
-                        .saidaesquerda
+                            .saidaesquerda
                         vagner[vagner[30].direita].saidaesquerda.components.teleporter.targetTeleporter = vagner[30]
-                        .saidadireita
+                            .saidadireita
                     end
                 end
             end
@@ -6701,14 +7077,14 @@ end
 
 
 
-return Prefab("common/inventory/maze_pig_ruins_entrance", entrance),
-    Prefab("common/inventory/maze_pig_ruins_entrance2", entrance2),
-    Prefab("common/inventory/maze_pig_ruins_entrance3", entrance3),
-    Prefab("common/inventory/maze_pig_ruins_entrance4", entrance4),
-    Prefab("common/inventory/maze_pig_ruins_entrance5", entrance5),
-    Prefab("common/inventory/maze_pig_ruins_entrance6", entrance6),
-    Prefab("common/inventory/maze_pig_ruins_entrance_small", small),
-    Prefab("common/inventory/maze_cave_roc_entrance", caveroc),
-    Prefab("common/inventory/maze_anthill", anthill),
-    Prefab("common/inventory/maze_anthillentradarainha", anthill2),
-    Prefab("common/inventory/maze_anthill_queen", anthill_queen)
+return Prefab("maze_pig_ruins_entrance", entrance),
+    Prefab("maze_pig_ruins_entrance2", entrance2),
+    Prefab("maze_pig_ruins_entrance3", entrance3),
+    Prefab("maze_pig_ruins_entrance4", entrance4),
+    Prefab("maze_pig_ruins_entrance5", entrance5),
+    Prefab("maze_pig_ruins_entrance6", entrance6),
+    Prefab("maze_pig_ruins_entrance_small", small),
+    Prefab("maze_cave_roc_entrance", caveroc),
+    Prefab("maze_anthill", anthill),
+    Prefab("maze_anthillentradarainha", anthill2),
+    Prefab("maze_anthill_queen", anthill_queen)

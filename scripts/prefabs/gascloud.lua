@@ -134,4 +134,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("forest/common/gascloud", fn, assets, prefabs)
+return Prefab("gascloud", fn, assets, prefabs)

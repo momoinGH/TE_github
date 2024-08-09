@@ -96,4 +96,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("common/inventory/flupegg", fn, assets, prefabs)
+return Prefab("flupegg", fn, assets, prefabs)

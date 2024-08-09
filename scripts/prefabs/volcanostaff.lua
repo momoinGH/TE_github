@@ -134,4 +134,4 @@ local function volcanostaff()
     return inst
 end
 
-return Prefab("common/inventory/volcanostaff", volcanostaff, assets, prefabs)
+return Prefab("volcanostaff", volcanostaff, assets, prefabs)

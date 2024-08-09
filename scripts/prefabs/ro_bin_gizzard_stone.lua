@@ -221,4 +221,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/ro_bin_gizzard_stone", fn, assets)
+return Prefab("ro_bin_gizzard_stone", fn, assets)

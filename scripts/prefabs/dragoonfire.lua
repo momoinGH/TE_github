@@ -73,4 +73,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/shipwrecked/dragoonfire", fn, assets, prefabs)
+return Prefab("dragoonfire", fn, assets, prefabs)

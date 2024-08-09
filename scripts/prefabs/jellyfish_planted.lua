@@ -152,4 +152,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/jellyfish_planted", fn, assets, prefabs)
+return Prefab("jellyfish_planted", fn, assets, prefabs)

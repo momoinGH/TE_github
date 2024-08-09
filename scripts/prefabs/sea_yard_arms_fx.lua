@@ -38,4 +38,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("shipwrecked/sea_yard_arms_fx", fn, assets)
+return Prefab("sea_yard_arms_fx", fn, assets)

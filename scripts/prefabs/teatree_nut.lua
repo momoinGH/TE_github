@@ -230,6 +230,6 @@ local function cooked()
     return inst
 end
 
-return Prefab("common/inventory/teatree_nut", fn, assets, prefabs),
-    Prefab("common/inventory/teatree_nut_cooked", cooked, assets),
+return Prefab("teatree_nut", fn, assets, prefabs),
+    Prefab("teatree_nut_cooked", cooked, assets),
     MakePlacer("common/teatree_nut_placer", "teatree_nut", "teatree_nut", "idle_planted")

@@ -301,13 +301,13 @@ local function fn6(Sim)
     return inst
 end
 
-return Prefab("common/inventory/player_house_cottage_craft", fn, assets),
-    Prefab("common/inventory/player_house_villa_craft", fn1, assets),
-    Prefab("common/inventory/player_house_manor_craft", fn2, assets),
-    Prefab("common/inventory/player_house_tudor_craft", fn3, assets),
-    Prefab("common/inventory/player_house_gothic_craft", fn4, assets),
-    Prefab("common/inventory/player_house_brick_craft", fn5, assets),
-    Prefab("common/inventory/player_house_turret_craft", fn6, assets)
+return Prefab("player_house_cottage_craft", fn, assets),
+    Prefab("player_house_villa_craft", fn1, assets),
+    Prefab("player_house_manor_craft", fn2, assets),
+    Prefab("player_house_tudor_craft", fn3, assets),
+    Prefab("player_house_gothic_craft", fn4, assets),
+    Prefab("player_house_brick_craft", fn5, assets),
+    Prefab("player_house_turret_craft", fn6, assets)
 
 
 

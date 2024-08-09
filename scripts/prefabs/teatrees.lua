@@ -1347,11 +1347,11 @@ local function makefn1(build, stage, data)
 end
 
 local function tree(name, build, stage, data)
-    return Prefab("forest/objects/trees/" .. name, makefn(build, stage, data), assets, prefabs)
+    return Prefab("" .. name, makefn(build, stage, data), assets, prefabs)
 end
 
 local function tree1(name, build, stage, data)
-    return Prefab("forest/objects/trees/" .. name, makefn1(build, stage, data), assets, prefabs)
+    return Prefab("" .. name, makefn1(build, stage, data), assets, prefabs)
 end
 
 return tree("teatree", "normal", 0),

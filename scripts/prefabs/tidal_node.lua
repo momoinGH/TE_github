@@ -129,4 +129,4 @@ local function fn1(Sim)
 	return inst
 end
 
-return Prefab("underwater/objects/tidal_node", fn1, assets)
+return Prefab("tidal_node", fn1, assets)

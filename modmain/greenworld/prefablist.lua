@@ -1,14 +1,16 @@
-table.insert(PrefabFiles, "lavaarena_bossboar")
-table.insert(PrefabFiles, "lizardman_cave")
-table.insert(PrefabFiles, "lizardman")
-table.insert(PrefabFiles, "pig_figure.lua")
-table.insert(PrefabFiles, "gw_bonestaff")
-table.insert(PrefabFiles, "dug_marshberry")
-table.insert(PrefabFiles, "greententacle")
-table.insert(PrefabFiles, "marshberry")
-table.insert(PrefabFiles, "gw_yellow_lizardman")
-table.insert(PrefabFiles, "tentacle_attack_spike")
-table.insert(PrefabFiles, "gf_lightning_dummy")
-table.insert(PrefabFiles, "gf_lightningfx")
-table.insert(PrefabFiles, "gw_column_angel")
-table.insert(PrefabFiles, "gw_rune")
+PrefabFiles = {
+    "lavaarena_bossboar",
+    "lizardman_cave",
+    "lizardman",
+    "pig_figure.lua",
+    "gw_bonestaff",
+    "dug_marshberry",
+    "greententacle",
+    "marshberry",
+    "gw_yellow_lizardman",
+    "tentacle_attack_spike",
+    "gf_lightning_dummy",
+    "gf_lightningfx",
+    "gw_column_angel",
+    "gw_rune",
+}

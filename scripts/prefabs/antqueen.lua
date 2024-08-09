@@ -228,7 +228,7 @@ local function make_throne_fn(size)
 end
 
 local function makethronewall(name, physics_size, assets, prefabs)
-    return Prefab("common/objects/" .. name, make_throne_fn(physics_size), assets, prefabs)
+    return Prefab( name, make_throne_fn(physics_size), assets, prefabs)
 end
 
 local respawndays = 80 --revive em 8 dias
@@ -260,7 +260,7 @@ local function fnrespawnquenn()
     return inst
 end
 
-return Prefab("common/monsters/antqueen", fn, assets, prefabs),
+return Prefab("antqueen", fn, assets, prefabs),
     makethronewall("throne_wall", 0.25, assets, prefabs),
     makethronewall("throne_wall_large", 0.5, assets, prefabs),
     Prefab("antqueen_spawner", fnrespawnquenn, nil, prefabs)

@@ -234,4 +234,4 @@ local function create_scorpion(Sim)
     return inst
 end
 
-return Prefab("forest/monsters/scorpion", create_scorpion, assets, prefabs)
+return Prefab("scorpion", create_scorpion, assets, prefabs)

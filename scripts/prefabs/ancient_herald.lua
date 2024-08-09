@@ -137,4 +137,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/monsters/ancient_herald", fn, assets, prefabs)
+return Prefab("ancient_herald", fn, assets, prefabs)

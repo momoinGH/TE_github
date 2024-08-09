@@ -67,4 +67,4 @@ local function flytrapstalk(inst)
     return inst
 end
 
-return Prefab("common/inventory/venus_stalk", flytrapstalk, assets, plantmeatprefabs)
+return Prefab("venus_stalk", flytrapstalk, assets, plantmeatprefabs)

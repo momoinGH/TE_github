@@ -66,4 +66,4 @@ local function fn()
     return inst
 end
 
-return Prefab("anthill/items/anthill_cavelamp", fn, assets, prefabs)
+return Prefab("anthill_cavelamp", fn, assets, prefabs)

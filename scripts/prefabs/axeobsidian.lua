@@ -177,4 +177,4 @@ local function obsidianfn()
     return inst
 end
 
-return Prefab("common/inventory/axeobsidian", obsidianfn, assets)
+return Prefab("axeobsidian", obsidianfn, assets)

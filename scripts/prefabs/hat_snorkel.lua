@@ -103,4 +103,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("common/inventory/snorkel", fn, assets)
+return Prefab("snorkel", fn, assets)

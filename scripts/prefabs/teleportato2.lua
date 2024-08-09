@@ -1000,7 +1000,10 @@ end
 local function statusdabatalha(inst)
 	-- so aceita item se a arena nao estiver ativa
 	if inst.spider + inst.hound + inst.merm + inst.knight + inst.boar + inst.lizard + inst.bossboar + inst.rhinocebros + inst.beetletaur > 0 then
-		inst.components.trader:Disable() else inst.components.trader:Enable() end
+		inst.components.trader:Disable()
+	else
+		inst.components.trader:Enable()
+	end
 
 	if inst.arenaativa == 1 then
 		----------------exibe a contagem de aranhas-----------------------------
@@ -1091,7 +1094,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de cachorros-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "hound" })
-		local cachorros = tostring(GetTableSize(ents)) +( inst.hound or 0)
+		local cachorros = tostring(GetTableSize(ents)) + (inst.hound or 0)
 		inst.components.talker:Say("Enemies Left " .. cachorros .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.hound > 21 then inst.houndwave = 1 elseif inst.hound > 14 then inst.houndwave = 2 elseif inst.hound > 7 then inst.houndwave = 3 else inst.houndwave = 4 end
@@ -1260,7 +1263,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de porcodomato-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local porcodomato = tostring(GetTableSize(ents)) +( inst.boar or 0)
+		local porcodomato = tostring(GetTableSize(ents)) + (inst.boar or 0)
 		inst.components.talker:Say("Enemies Left " .. porcodomato .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.boar > 16 then inst.boarwave = 1 elseif inst.boar > 14 then inst.boarwave = 2 elseif inst.boar > 6 then inst.boarwave = 3 elseif inst.boar > 2 then inst.boarwave = 4 else inst.boarwave = 5 end
@@ -1682,7 +1685,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de beetletaurunit-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local beetletaurunit = tostring(GetTableSize(ents)) +( inst.beetletaur or 0)
+		local beetletaurunit = tostring(GetTableSize(ents)) + (inst.beetletaur or 0)
 		inst.components.talker:Say("Enemies Left " .. beetletaurunit .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.beetletaur > 20 then inst.beetletaurwave = 1 elseif inst.beetletaur > 18 then inst.beetletaurwave = 2 elseif inst.beetletaur > 14 then inst.beetletaurwave = 3 elseif inst.beetletaur > 13 then inst.beetletaurwave = 4 elseif inst.beetletaur > 8 then inst.beetletaurwave = 5 elseif inst.beetletaur > 6 then inst.beetletaurwave = 6 elseif inst.beetletaur > 2 then inst.beetletaurwave = 7 elseif inst.beetletaur > 1 then inst.beetletaurwave = 8 else inst.beetletaurwave = 9 end
@@ -1895,4 +1898,4 @@ inst:DoTaskInTime(0, oninit)
 	return inst
 end
 
-return Prefab("common/objects/teleportato2", fn, assets, prefabs)
+return Prefab("teleportato2", fn, assets, prefabs)

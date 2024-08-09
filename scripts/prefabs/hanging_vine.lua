@@ -227,7 +227,7 @@ local function commonfn(Sim)
     return inst
 end
 
-return Prefab("forest/animals/hanging_vine", commonfn, assets, prefabs),
-    Prefab("forest/objects/hanging_vine_patch", patchfn, assets, prefabs),
-    Prefab("forest/animals/hanging_vinefixo", commonfn, assets, prefabs),
-    Prefab("forest/objects/hanging_vine_patchfixo", patchfn2, assets, prefabs)
+return Prefab("hanging_vine", commonfn, assets, prefabs),
+    Prefab("hanging_vine_patch", patchfn, assets, prefabs),
+    Prefab("hanging_vinefixo", commonfn, assets, prefabs),
+    Prefab("hanging_vine_patchfixo", patchfn2, assets, prefabs)

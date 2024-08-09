@@ -265,7 +265,7 @@ local function fn3()
     return inst
 end
 
-return Prefab("common/underwater_entrance", fn, assets, prefabs),
-    Prefab("common/underwater_entrance1", fn1, assets, prefabs),
-    Prefab("common/underwater_entrance2", fn2, assets, prefabs),
-    Prefab("common/underwater_entrance3", fn3, assets, prefabs)
+return Prefab("underwater_entrance", fn, assets, prefabs),
+    Prefab("underwater_entrance1", fn1, assets, prefabs),
+    Prefab("underwater_entrance2", fn2, assets, prefabs),
+    Prefab("underwater_entrance3", fn3, assets, prefabs)

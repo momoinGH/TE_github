@@ -204,4 +204,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("forest/monsters/stungrayunderwater", fn, assets, prefabs)
+return Prefab("stungrayunderwater", fn, assets, prefabs)

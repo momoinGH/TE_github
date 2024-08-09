@@ -278,4 +278,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/monsters/firetwister", fn, assets, prefabs)
+return Prefab("firetwister", fn, assets, prefabs)

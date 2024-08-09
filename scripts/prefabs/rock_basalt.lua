@@ -84,4 +84,4 @@ local function basalt_fn(Sim)
 	return inst
 end
 
-return Prefab("forest/objects/rocks/rock_basalt", basalt_fn, basalt_assets, prefabs)
+return Prefab("rock_basalt", basalt_fn, basalt_assets, prefabs)

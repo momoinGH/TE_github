@@ -793,7 +793,7 @@ local function makefn(build, stage, data)
 end
 
 local function tree(name, build, stage, data)
-    return Prefab("jungle/objects/trees/" .. name, makefn(build, stage, data), assets, prefabs)
+    return Prefab(name, makefn(build, stage, data), assets, prefabs)
 end
 
 return tree("spider_ape_tree", "normal", 0),

@@ -221,7 +221,7 @@ local function fn(Sim)
 	inst.navio = nil
 
 	-- used for collision checks in boat.lua
-    inst:AddTag("quackeringram")
+	inst:AddTag("quackeringram")
 	inst:AddTag("shipwrecked_boat_head")
 
 	MakeInventoryFloatable(inst)
@@ -280,4 +280,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/quackeringram", fn, assets, prefabs)
+return Prefab("quackeringram", fn, assets, prefabs)

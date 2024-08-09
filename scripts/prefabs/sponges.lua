@@ -88,4 +88,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("underwater/objects/sponge", fn, assets, prefabs)
+return Prefab("sponge", fn, assets, prefabs)

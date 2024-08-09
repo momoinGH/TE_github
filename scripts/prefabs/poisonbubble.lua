@@ -138,7 +138,7 @@ function MakeBubble(name, level, loop)
 		end
 	end
 
-	return Prefab("common/fx/" .. name, myFn, assets)
+	return Prefab("" .. name, myFn, assets)
 end
 
 return MakeBubble("poisonbubble1"),

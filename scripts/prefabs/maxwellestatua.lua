@@ -215,7 +215,7 @@ local function fnp4()
     return inst
 end
 
-return Prefab("common/objects/maxwellestatua", fn, assets, prefabs),
-    Prefab("common/objects/maxwellstatuebracoe", fnp2, assets, prefabs),
-    Prefab("common/objects/maxwellstatuebracod", fnp3, assets, prefabs),
-    Prefab("common/objects/maxwellstatuecabeca", fnp4, assets, prefabs)
+return Prefab("maxwellestatua", fn, assets, prefabs),
+    Prefab("maxwellstatuebracoe", fnp2, assets, prefabs),
+    Prefab("maxwellstatuebracod", fnp3, assets, prefabs),
+    Prefab("maxwellstatuecabeca", fnp4, assets, prefabs)

@@ -150,4 +150,4 @@ local function hailfn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/hail_ice", hailfn, assets)
+return Prefab("hail_ice", hailfn, assets)

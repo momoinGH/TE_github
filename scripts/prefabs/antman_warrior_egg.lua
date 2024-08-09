@@ -130,4 +130,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("common/inventory/antman_warrior_egg", fn, assets, prefabs)
+return Prefab("antman_warrior_egg", fn, assets, prefabs)

@@ -8,7 +8,7 @@ local assets =
 -- TODO 看看能不能优化掉这个文件
 
 local function getrevealtargetpos(inst, doer)
-    local davez = nil
+	local davez = nil
 	local map = TheWorld.Map
 	local x, y, z
 	for k, v in pairs(Ents) do
@@ -122,5 +122,5 @@ local function emptybottlefn(Sim)
 	return inst
 end
 
-return Prefab("shipwrecked/objects/messagebottle1", messagebottlefn, assets),
+return Prefab("messagebottle1", messagebottlefn, assets),
 	Prefab("shipwrecked/objects/messagebottleempty1", emptybottlefn, assets)

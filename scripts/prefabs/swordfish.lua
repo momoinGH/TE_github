@@ -143,4 +143,4 @@ local function swordfishfn()
     return inst
 end
 
-return Prefab("ocean/objects/swordfish", swordfishfn, assets, prefabs)
+return Prefab("swordfish", swordfishfn, assets, prefabs)

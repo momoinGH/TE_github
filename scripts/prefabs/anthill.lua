@@ -107,6 +107,6 @@ local function fn()
     return inst
 end
 
-return Prefab("common/objects/anthill", fn, assets, prefabs),
-    Prefab("common/objects/anthill_exit_1", fn, assets, prefabs),
-    Prefab("common/objects/anthill_exit_2", fn, assets, prefabs)
+return Prefab("anthill", fn, assets, prefabs),
+    Prefab("anthill_exit_1", fn, assets, prefabs),
+    Prefab("anthill_exit_2", fn, assets, prefabs)

@@ -310,5 +310,5 @@ local function makeripple(speed)
 	return ripplefn
 end
 
-return Prefab("marsh/objects/sedimentpuddle", commonfn, assets, prefabs),
+return Prefab("sedimentpuddle", commonfn, assets, prefabs),
 	Prefab("marsh/objects/puddle_ripple_slow_fx", makeripple("slow"), assets, prefabs)

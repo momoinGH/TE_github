@@ -191,4 +191,4 @@ local function gravefn(Sim)
     return inst
 end
 
-return Prefab("shipwrecked/objects/waterygrave", gravefn, assets, prefabs)
+return Prefab("waterygrave", gravefn, assets, prefabs)

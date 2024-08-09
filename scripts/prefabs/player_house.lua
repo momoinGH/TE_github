@@ -249,7 +249,7 @@ local function makehousefn(name, build, bank, data)
 end
 
 local function makehouse(name, build, bank, data)
-    return Prefab("common/objects/" .. name, makehousefn(name, build, bank, data), assets, prefabs)
+    return Prefab("" .. name, makehousefn(name, build, bank, data), assets, prefabs)
 end
 
 return makehouse("playerhouse_city", "pig_house_sale", nil, { indestructable = true }),

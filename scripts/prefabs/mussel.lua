@@ -115,5 +115,5 @@ local function cooked()
 	return inst
 end
 
-return Prefab("common/inventory/mussel", raw, assets, prefabs),
+return Prefab("mussel", raw, assets, prefabs),
 	Prefab("common/inventory/mussel_cooked", cooked, assets)

@@ -303,5 +303,5 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("monsters/mean_flytrap", fn, assets, prefabs)
--- Prefab("monsters/deadsnake", fndefault, assets, prefabs),
+return Prefab("mean_flytrap", fn, assets, prefabs)
+-- Prefab("deadsnake", fndefault, assets, prefabs),

@@ -344,5 +344,5 @@ local function fn(Sim)
 end
 
 --Using old prefab names
-return Prefab("shipwrecked/sea_yard", fn, assets, prefabs),
+return Prefab("sea_yard", fn, assets, prefabs),
 	MakePlacer("shipwrecked/sea_yard_placer", "sea_yard", "sea_yard", "placer")

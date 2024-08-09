@@ -81,4 +81,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("underwater/objects/rotting_trunk", fn, assets)
+return Prefab("rotting_trunk", fn, assets)

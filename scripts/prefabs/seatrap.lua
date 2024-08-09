@@ -114,4 +114,4 @@ local function seafn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/seatrap", seafn, sea_assets)
+return Prefab("seatrap", seafn, sea_assets)

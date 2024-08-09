@@ -203,4 +203,4 @@ local function fn2(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/rainbowjellyfish_underwater", fn2, assets, prefabs)
+return Prefab("rainbowjellyfish_underwater", fn2, assets, prefabs)

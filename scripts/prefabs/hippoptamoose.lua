@@ -327,4 +327,4 @@ local function MakeMoose(nightmare)
     return inst
 end
 
-return Prefab("chessboard/hippopotamoose", function() return MakeMoose() end, assets, prefabs)
+return Prefab("hippopotamoose", function() return MakeMoose() end, assets, prefabs)

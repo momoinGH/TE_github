@@ -152,7 +152,7 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/objects/pigeon_swarm", fn, assets, prefabs),
-    Prefab("common/objects/kingfisher_swarm", fn, assets, prefabs),
-    Prefab("common/objects/toucan_hamlet_swarm", fn, assets, prefabs),
-    Prefab("common/objects/parrot_blue_swarm", fn, assets, prefabs)
+return Prefab("pigeon_swarm", fn, assets, prefabs),
+    Prefab("kingfisher_swarm", fn, assets, prefabs),
+    Prefab("toucan_hamlet_swarm", fn, assets, prefabs),
+    Prefab("parrot_blue_swarm", fn, assets, prefabs)

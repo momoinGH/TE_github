@@ -110,4 +110,4 @@ local function solofishfn()
     return inst
 end
 
-return Prefab("ocean/objects/solofish", solofishfn, assets, prefabs)
+return Prefab("solofish", solofishfn, assets, prefabs)

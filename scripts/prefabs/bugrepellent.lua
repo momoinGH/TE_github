@@ -101,4 +101,4 @@ local function commonfn()
     return inst
 end
 
-return Prefab("common/inventory/bugrepellent", commonfn, assets, prefabs)
+return Prefab("bugrepellent", commonfn, assets, prefabs)

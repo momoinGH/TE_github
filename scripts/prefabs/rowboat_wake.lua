@@ -36,4 +36,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/fx/rowboat_wake", fn, assets)
+return Prefab("rowboat_wake", fn, assets)

@@ -104,4 +104,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/objects/grotto_grub_nest", fn, assets, prefabs)
+return Prefab("grotto_grub_nest", fn, assets, prefabs)

@@ -74,4 +74,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/objects/anthillcave", fn, assets, prefabs)
+return Prefab("anthillcave", fn, assets, prefabs)

@@ -258,7 +258,7 @@ local function darts2(name, build, bank, anim, facing)
     return Prefab(name, makefn2(build, bank, anim, facing), assets, prefabs)
 end
 
-return Prefab("common/objects/pig_ruins_dart", fn, assets, prefabs),
+return Prefab("pig_ruins_dart", fn, assets, prefabs),
     darts("pig_ruins_pigman_relief_dart1", "interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_confused",
         "down"),
     darts("pig_ruins_pigman_relief_dart2", "interior_wall_decals_ruins", "interior_wall_decals_ruins", "relief_happy",

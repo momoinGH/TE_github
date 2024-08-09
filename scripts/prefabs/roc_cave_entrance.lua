@@ -325,5 +325,5 @@ end
 
 
 
-return Prefab("common/cave_entrance_roc", fn, assets, prefabs),
+return Prefab("cave_entrance_roc", fn, assets, prefabs),
 	Prefab("common/cave_exit_roc", exitfn, assets, prefabs)

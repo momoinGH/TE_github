@@ -37,4 +37,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/cut_orange_coral", fn, assets)
+return Prefab("cut_orange_coral", fn, assets)

@@ -299,5 +299,5 @@ local function fn2(Sim)
 	return inst
 end
 
-return Prefab("shipwrecked/objects/buriedtreasure", fn, assets, prefabs),
+return Prefab("buriedtreasure", fn, assets, prefabs),
 	Prefab("shipwrecked/objects/buriedtreasure2", fn2, assets, prefabs)

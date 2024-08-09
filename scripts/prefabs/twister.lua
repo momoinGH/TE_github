@@ -258,4 +258,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/monsters/twister", fn, assets, prefabs)
+return Prefab("twister", fn, assets, prefabs)

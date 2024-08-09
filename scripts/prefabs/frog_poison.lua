@@ -198,4 +198,4 @@ end
 	return inst
 end]]
 
-return Prefab("forest/animals/frog_poison", fn, assets, prefabs)
+return Prefab("frog_poison", fn, assets, prefabs)

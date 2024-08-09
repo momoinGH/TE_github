@@ -139,4 +139,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/obsidianbomb", fn, assets)
+return Prefab("obsidianbomb", fn, assets)

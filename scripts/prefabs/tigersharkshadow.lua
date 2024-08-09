@@ -88,4 +88,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("common/shipwrecked/tigersharkshadow", fn, assets, prefabs)
+return Prefab("tigersharkshadow", fn, assets, prefabs)

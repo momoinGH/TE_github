@@ -75,4 +75,4 @@ local function fn(Sim)
 end
 
 
-return Prefab("common/inventory/cork_bat", fn, basic_assets)
+return Prefab("cork_bat", fn, basic_assets)

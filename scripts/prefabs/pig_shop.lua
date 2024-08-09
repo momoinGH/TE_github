@@ -614,11 +614,11 @@ local function makehousefn(name, build, bank, data)
 end
 
 local function makeshop(name, build, bank, data)
-    return Prefab("common/objects/" .. name, makefn(name, build, bank, data), assets, prefabs)
+    return Prefab("" .. name, makefn(name, build, bank, data), assets, prefabs)
 end
 
 local function makehouse(name, build, bank, data)
-    return Prefab("common/objects/" .. name, makehousefn(name, build, bank, data), assets, prefabs)
+    return Prefab("" .. name, makehousefn(name, build, bank, data), assets, prefabs)
 end
 
 return
@@ -650,7 +650,7 @@ return
         { indestructable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
     makeshop("pig_shop_cityhall_player", "pig_cityhall", "pig_cityhall",
         { indestructable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    Prefab("common/objects/pig_shop_spawner", makespawnerfn, assets, spawnprefabs),
+    Prefab("pig_shop_spawner", makespawnerfn, assets, spawnprefabs),
     MakePlacer("common/pig_shop_deli_placer", "pig_shop", "pig_shop_deli", "idle"),
     MakePlacer("common/pig_shop_general_placer", "pig_shop", "pig_shop_general", "idle"),
     MakePlacer("common/pig_shop_hoofspa_placer", "pig_shop", "pig_shop_hoofspa", "idle"),

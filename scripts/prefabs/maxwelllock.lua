@@ -40,4 +40,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/maxwelllock", fn, assets)
+return Prefab("maxwelllock", fn, assets)
