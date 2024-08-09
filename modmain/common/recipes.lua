@@ -320,7 +320,7 @@ AddRecipe2("mermwatchtower", { Ingredient("boards", 5), Ingredient("tentaclespot
             return ground_tile and
                 (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
         end
-    }, { "CHARACTER" })
+    }, { "CHARACTER" })--[[
 AddRecipe2("offering_pot", { Ingredient("boards", 2), Ingredient("cutreeds", 2) }, TECH.NONE,
     {
         builder_tag = "merm_swampmaster_offeringpot",
@@ -389,7 +389,7 @@ AddRecipe2("merm_toolshed_upgraded",
             return ground_tile and
                 (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
         end
-    }, { "CHARACTER" })
+    }, { "CHARACTER" })]]
 --Maxwell
 AddRecipe2("porto_shadowboat",
     { Ingredient("papyrus", 3), Ingredient("nightmarefuel", 4), Ingredient(CHARACTER_INGREDIENT.SANITY, 60) }, TECH.NONE,
