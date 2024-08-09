@@ -346,6 +346,7 @@ local function common(minimap, bank, build, loots, data)
     inst:AddComponent("boatphysics")
     inst:AddComponent("boatdrifter")
     inst:AddComponent("savedrotation")
+    inst:AddComponent("tropical_noequipactivator")
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(data.health or TUNING.BOAT.HEALTH)

@@ -370,70 +370,39 @@ Constructor.AddAction({ priority = 4, distance = 20, encumbered_valid = true },
     end
 )
 
+-- 船炮开火
 Constructor.AddAction({ priority = 8, rmb = true, distance = 25, mount_valid = false },
     "BOATCANNON",
     STRINGS.ACTIONS.BOATCANNON,
     function(act)
-        if act.doer ~= nil and act.doer:HasTag("player") then
-            act.doer:AddTag("deleidotiro")
-            act.doer:DoTaskInTime(0.5, function(inst) act.doer:RemoveTag("deleidotiro") end)
+        local boat = act.doer:GetCurrentPlatform()
+        local item = boat
+            and boat:HasTag("shipwrecked_boat")
+            and boat.components.container
+            and boat.components.container:GetItemInSlot(2)
+        if not item then return true end --应该不可能
 
+        ----------------posiciona pra sair no canhao-----------------------
+        local angle = act.doer:GetRotation()
+        local dist = 1.5
+        local offset = Vector3(dist * math.cos(angle * DEGREES), 0, -dist * math.sin(angle * DEGREES))
+        local targetPos = act.target and act.target:GetPosition() or act:GetActionPoint()
+        local bombpos = act.doer:GetPosition() + offset
+        local x, y, z = bombpos:Get()
 
-            local boat = act.doer:GetCurrentPlatform()
-            local item = boat
-                and boat:HasTag("shipwrecked_boat")
-                and boat.replica.container
-                and boat.replica.container:GetItemInSlot(2)
-            if not item then return true end
+        -------------------------------------------------------
 
-            ----------------posiciona pra sair no canhao-----------------------
-            local angle = act.doer:GetRotation()
-            local dist = 1.5
-            local offset = Vector3(dist * math.cos(angle * DEGREES), 0, -dist * math.sin(angle * DEGREES))
-            local x, y, z = act.doer.Transform:GetWorldPosition()
-            local pos
-            if act.target then
-                pos = act.target:GetPosition()
-            else
-                pos = act:GetActionPoint()
-            end
-
-            local pt = Vector3(x, y, z)
-            local bombpos = pt + offset
-            local x, y, z = bombpos:Get()
-
-            -------------------------------------------------------
-
-            if item.prefab == "woodlegs_boatcannon" then
-                if item then item.components.finiteuses:Use(1) end
-                local bomba = SpawnPrefab("cannonshotobsidian")
-                bomba.Transform:SetPosition(x, y + 1.5, z)
-                bomba.components.complexprojectile:Launch(pos)
-                act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
-            else
-                if act.doer.prefab ~= "woodlegs" then
-                    item.components.finiteuses:Use(1)
-                    local bomba = SpawnPrefab("cannonshot")
-                    bomba.Transform:SetPosition(x, y + 1.5, z)
-                    bomba.components.complexprojectile:Launch(pos)
-                    act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
-                elseif boat.prefab == "woodlegsboat" and act.doer.prefab == "woodlegs" then
-                    local bomba = SpawnPrefab("cannonshot")
-                    bomba.components.explosive.explosivedamage = 50
-                    bomba.Transform:SetPosition(x, y + 1.5, z)
-                    bomba.components.complexprojectile:Launch(pos)
-                    act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
-                else
-                    item.components.finiteuses:Use(1)
-                    local bomba = SpawnPrefab("cannonshot")
-                    bomba.Transform:SetPosition(x, y + 1.5, z)
-                    bomba.components.complexprojectile:Launch(pos)
-                    act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
-                end
-            end
-
-            return true
+        local bomba = SpawnPrefab(item.prefab == "woodlegs_boatcannon" and "cannonshotobsidian" or "cannonshot")
+        if boat.prefab == "woodlegsboat" and act.doer.prefab == "woodlegs" then
+            bomba.components.explosive.explosivedamage = 50
+        else
+            item.components.finiteuses:Use(1)
         end
+        bomba.Transform:SetPosition(x, y + 1.5, z)
+        bomba.components.complexprojectile:Launch(targetPos)
+        act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
+
+        return true
     end
 )
 

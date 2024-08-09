@@ -8,7 +8,7 @@ end)
 AddComponentAction("SCENE", "hackable", function(inst, doer, actions, right)
     local equipamento = doer.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
     if not right then
-        if equipamento and equipamento:HasTag("machete") and not (doer.replica.rider:IsRiding() or doer:HasTag("bonked")) then --and equipamento.components.hackable then --and inst.components.hackable.canbehacked then
+        if equipamento and equipamento:HasTag("machete") and not (doer.replica.rider:IsRiding()) then --and equipamento.components.hackable then --and inst.components.hackable.canbehacked then
             table.insert(actions, ACTIONS.HACK1)
         end
     end
@@ -59,7 +59,7 @@ end)
 AddComponentAction("SCENE", "dislodgeable", function(inst, doer, actions, right)
     local equipamento = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
     if not right then
-        if equipamento and equipamento:HasTag("ballpein_hammer") and inst:HasTag("dislodgeable") and not (doer.replica.rider:IsRiding() or doer:HasTag("bonked")) then
+        if equipamento and equipamento:HasTag("ballpein_hammer") and inst:HasTag("dislodgeable") and not (doer.replica.rider:IsRiding()) then
             table.insert(actions, ACTIONS.DISLODGE)
             return
         end
@@ -70,7 +70,7 @@ end)
 AddComponentAction("SCENE", "mystery", function(inst, doer, actions, right)
     if not right then
         local equipamento = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-        if equipamento and equipamento:HasTag("magnifying_glass") and not (doer.replica.rider:IsRiding() or doer:HasTag("bonked")) then
+        if equipamento and equipamento:HasTag("magnifying_glass") and not (doer.replica.rider:IsRiding()) then
             table.insert(actions, ACTIONS.INVESTIGATEGLASS)
         end
     end
@@ -140,9 +140,16 @@ AddComponentAction(
     end)
 
 AddComponentAction("SCENE", "health", function(inst, doer, actions, right)
-    local containedsail = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO)
-    if right and doer:HasTag("aquatic") and containedsail and containedsail.replica.container and containedsail.replica.container:GetItemInSlot(2) ~= nil and containedsail.replica.container:GetItemInSlot(2):HasTag("boatcannon") and
-        not (doer.replica.rider:IsRiding() or doer.replica.inventory:IsHeavyLifting() or doer:HasTag("bonked") or doer:HasTag("deleidotiro")) then
+    local boat = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO)
+    if right
+        and doer:HasTag("aquatic")
+        and boat
+        and boat.replica.container
+        and boat.replica.container:GetItemInSlot(2) ~= nil
+        and boat.replica.container:GetItemInSlot(2):HasTag("boatcannon")
+        and not (doer.replica.rider:IsRiding()
+            or doer.replica.inventory:IsHeavyLifting())
+    then
         table.insert(actions, GLOBAL.ACTIONS.BOATCANNON)
     end
 
@@ -172,7 +179,7 @@ AddComponentAction("SCENE", "shopped", function(inst, doer, actions, right)
 end)
 
 AddComponentAction("POINT", "gasser", function(inst, doer, pos, actions, right)
-    if right and not (doer.replica.rider:IsRiding() or doer:HasTag("bonked")) then
+    if right and not (doer.replica.rider:IsRiding()) then
         table.insert(actions, ACTIONS.GAS)
     end
 end)
@@ -180,11 +187,29 @@ end)
 AddComponentAction("SCENE", "poisonable", function(inst, doer, actions, right)
     if right then
         local equipamento = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-        if equipamento and equipamento:HasTag("bugrepellent") and not (doer.replica.rider:IsRiding() or doer:HasTag("bonked")) then
+        if equipamento and equipamento:HasTag("bugrepellent") and not (doer.replica.rider:IsRiding()) then
             table.insert(actions, ACTIONS.GAS)
         end
     end
 end)
+
+AddComponentAction("POINT", "tropical_noequipactivator", function(inst, doer, pos, actions, right, target)
+    local boat = doer:GetCurrentPlatform()
+    if right
+        and boat
+        and boat:HasTag("shipwrecked_boat")
+        and boat.replica.container
+        and boat.replica.container:GetItemInSlot(2)
+        and boat.replica.container:GetItemInSlot(2):HasTag("boatcannon") -- 船炮
+        and not doer.replica.inventory:IsHeavyLifting()
+    then
+        -- 船炮开炮
+        table.insert(actions, ACTIONS.BOATCANNON)
+        return
+    end
+end)
+
+
 
 AddComponentAction("POINT", "equippable", function(inst, doer, pos, actions, right, target)
     local xjp, yjp, zjp = pos:Get()
@@ -199,16 +224,11 @@ AddComponentAction("POINT", "equippable", function(inst, doer, pos, actions, rig
         doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO).components.terraformer ~= nil or
         nil
 
-    local containedsail = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO)
-    if right and doer:HasTag("aquatic") and containedsail and containedsail.replica.container and containedsail.replica.container:GetItemInSlot(2) ~= nil and containedsail.replica.container:GetItemInSlot(2):HasTag("boatcannon") and
-        not (doer.replica.rider:IsRiding() or doer.replica.inventory:IsHeavyLifting() or doer:HasTag("bonked") or doer:HasTag("deleidotiro")) then
-        return table.insert(actions, GLOBAL.ACTIONS.BOATCANNON)
-    end
-
     if not right and rightrect == nil and terraformer == nil and doer:HasTag("aquatic") and
-        GLOBAL.TheWorld.Map:IsPassableAtPoint(pos:Get()) and not (doer.replica.rider:IsRiding() or doer:HasTag("bonked"))
+        GLOBAL.TheWorld.Map:IsPassableAtPoint(pos:Get()) and not (doer.replica.rider:IsRiding())
     then
         table.insert(actions, GLOBAL.ACTIONS.BOATDISMOUNT)
+        return
     end
 
 
@@ -217,6 +237,7 @@ AddComponentAction("POINT", "equippable", function(inst, doer, pos, actions, rig
         local planchadesurf = GLOBAL.TheWorld.Map:GetPlatformAtPoint(doer_x, doer_z)
         if planchadesurf and planchadesurf:HasTag("planchadesurf") then
             table.insert(actions, GLOBAL.ACTIONS.SURF)
+            return
         end
     end
 end)
@@ -309,7 +330,7 @@ end)
 
 -- 可以收回小船
 AddComponentAction("SCENE", "portablestructure",
-    function(inst, doer, actions, right)                                              --TODO right不能用，一直为nil，是哪里覆盖把right弄丢了吗
+    function(inst, doer, actions, right) --TODO right不能用，一直为nil，是哪里覆盖把right弄丢了吗
         if not inst:HasTag("fire")
             and inst:HasTag("boat")
             and (not inst.replica.container or not inst.replica.container:IsOpenedBy(doer))
