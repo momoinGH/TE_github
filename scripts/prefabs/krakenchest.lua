@@ -137,9 +137,6 @@ local function fn(Sim)
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst)
-			inst.replica.container:WidgetSetup("treasurechest")
-		end
 		return inst
 	end
 
@@ -188,9 +185,6 @@ local function fn1(Sim)
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst)
-			inst.replica.container:WidgetSetup("treasurechest")
-		end
 		return inst
 	end
 
@@ -250,9 +244,6 @@ local function fn2(Sim)
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst)
-			inst.replica.container:WidgetSetup("treasurechest")
-		end
 		return inst
 	end
 
@@ -309,9 +300,6 @@ local function fn3(Sim)
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst)
-			inst.replica.container:WidgetSetup("treasurechest")
-		end
 		return inst
 	end
 
@@ -385,9 +373,6 @@ local function fn4(Sim)
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst)
-			inst.replica.container:WidgetSetup("shadowchester")
-		end
 		return inst
 	end
 
@@ -436,9 +421,6 @@ local function fn5(Sim)
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst)
-			inst.replica.container:WidgetSetup("shadowchester")
-		end
 		return inst
 	end
 

@@ -55,6 +55,7 @@ local function fn(Sim)
 
     inst:AddTag("cannon")
     inst:AddTag("boatcannon")
+    inst:AddTag("shipwrecked_boat_head")
     MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()

@@ -126,9 +126,6 @@ local function create_ro_bin()
     inst.Transform:SetFourFaced()
 
     if not TheWorld.ismastersim then
-        inst.OnEntityReplicated = function(inst)
-            inst.replica.container:WidgetSetup("chester")
-        end
         return inst
     end
 

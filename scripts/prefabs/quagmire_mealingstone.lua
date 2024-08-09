@@ -109,9 +109,6 @@ local function fn()
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
-        inst:DoTaskInTime(0, function()
-            inst.replica.container:WidgetSetup("mealingstone")
-        end)
         return inst
     end
 

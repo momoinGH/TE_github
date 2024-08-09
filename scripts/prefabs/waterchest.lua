@@ -100,9 +100,6 @@ local function MakeChest(name, bank, build, indestructible, custom_postinit, pre
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
-            inst.OnEntityReplicated = function(inst)
-                if inst.replica.container then inst.replica.container:WidgetSetup("treasurechest") end
-            end
             return inst
         end
 

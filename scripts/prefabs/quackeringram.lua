@@ -221,7 +221,9 @@ local function fn(Sim)
 	inst.navio = nil
 
 	-- used for collision checks in boat.lua
-	inst:AddTag("quackeringram")
+    inst:AddTag("quackeringram")
+	inst:AddTag("shipwrecked_boat_head")
+
 	MakeInventoryFloatable(inst)
 
 	inst.entity:SetPristine()

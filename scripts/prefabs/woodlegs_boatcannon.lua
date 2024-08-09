@@ -86,6 +86,7 @@ local function fn(Sim)
 
     inst:AddTag("boatcannon")
     inst:AddTag("cannon")
+    inst:AddTag("shipwrecked_boat_head")
 
     inst.entity:SetPristine()
 

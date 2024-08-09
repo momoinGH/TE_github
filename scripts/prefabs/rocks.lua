@@ -166,7 +166,7 @@ SetSharedLootTable('rock_petrified_tree_old',
 local function OnWork(inst, worker, workleft)
     local pt = inst:GetPosition()
     local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-    if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.LAWN or tiletype == GROUND.FIELDS or tiletype == GROUND.CHECKEREDLAWN then
+    if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.FIELDS or tiletype == GROUND.CHECKEREDLAWN then
         if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
             local x, y, z = inst.Transform:GetWorldPosition()
             local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))

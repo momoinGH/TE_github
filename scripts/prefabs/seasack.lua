@@ -72,9 +72,6 @@ local function fn()
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
-        inst.OnEntityReplicated = function(inst)
-            inst.replica.container:WidgetSetup("icepack")
-        end
         return inst
     end
 

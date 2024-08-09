@@ -123,10 +123,6 @@ local function OnEntityReplicated(inst)
     if parent ~= nil then
         print("yes")
         AddHighlightChildren(inst, parent)
-        if parent.replica.container ~= nil then
-            print("Replica detected")
-            parent.replica.container:WidgetSetup(inst.prefab)
-        end
     end
 end
 

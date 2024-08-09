@@ -136,32 +136,29 @@ AddComponentAction(
         end
     end)
 
-AddComponentAction(
-    "SCENE",
-    "health",
-    function(inst, doer, actions, right)
-        local containedsail = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO)
-        if right and doer:HasTag("aquatic") and containedsail and containedsail.replica.container and containedsail.replica.container:GetItemInSlot(2) ~= nil and containedsail.replica.container:GetItemInSlot(2):HasTag("boatcannon") and
-            not (doer.replica.rider:IsRiding() or doer.replica.inventory:IsHeavyLifting() or doer:HasTag("bonked") or doer:HasTag("deleidotiro")) then
-            table.insert(actions, GLOBAL.ACTIONS.BOATCANNON)
-        end
+AddComponentAction("SCENE", "health", function(inst, doer, actions, right)
+    local containedsail = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO)
+    if right and doer:HasTag("aquatic") and containedsail and containedsail.replica.container and containedsail.replica.container:GetItemInSlot(2) ~= nil and containedsail.replica.container:GetItemInSlot(2):HasTag("boatcannon") and
+        not (doer.replica.rider:IsRiding() or doer.replica.inventory:IsHeavyLifting() or doer:HasTag("bonked") or doer:HasTag("deleidotiro")) then
+        table.insert(actions, GLOBAL.ACTIONS.BOATCANNON)
+    end
 
 
 
-        if not right and doer:HasTag("ironlord") and
+    if not right and doer:HasTag("ironlord") and
+        inst.replica.health ~= nil and not inst.replica.health:IsDead() and
+        inst.replica.combat ~= nil and inst.replica.combat:CanBeAttacked(doer) then
+        table.insert(actions, GLOBAL.ACTIONS.ATTACK)
+    end
+
+    if GLOBAL.TheWorld.ismastersim then
+        if right and doer:HasTag("ironlord") and not inst:HasTag("ironlord") and
             inst.replica.health ~= nil and not inst.replica.health:IsDead() and
             inst.replica.combat ~= nil and inst.replica.combat:CanBeAttacked(doer) then
-            table.insert(actions, GLOBAL.ACTIONS.ATTACK)
+            table.insert(actions, ACTIONS.TIRO)
         end
-
-        if GLOBAL.TheWorld.ismastersim then
-            if right and doer:HasTag("ironlord") and not inst:HasTag("ironlord") and
-                inst.replica.health ~= nil and not inst.replica.health:IsDead() and
-                inst.replica.combat ~= nil and inst.replica.combat:CanBeAttacked(doer) then
-                table.insert(actions, ACTIONS.TIRO)
-            end
-        end
-    end)
+    end
+end)
 
 AddComponentAction("SCENE", "shopped", function(inst, doer, actions, right)
     if not right then
@@ -308,12 +305,13 @@ AddComponentAction("SCENE", "store", function(inst, doer, actions)
 end)
 
 -- 可以收回小船
-AddComponentAction("SCENE", "portablestructure", function(inst, doer, actions, right) --TODO right不能用，一直为nil，是哪里覆盖把right弄丢了吗
-    if not inst:HasTag("fire")
-        and inst:HasTag("boat")
-        and (not inst.replica.container or not inst.replica.container:IsOpenedBy(doer))
-        and doer:GetCurrentPlatform() ~= inst
-    then
-        table.insert(actions, ACTIONS.RETRIEVE)
-    end
-end)
+AddComponentAction("SCENE", "portablestructure",
+    function(inst, doer, actions, right)                                              --TODO right不能用，一直为nil，是哪里覆盖把right弄丢了吗
+        if not inst:HasTag("fire")
+            and inst:HasTag("boat")
+            and (not inst.replica.container or not inst.replica.container:IsOpenedBy(doer))
+            and doer:GetCurrentPlatform() ~= inst
+        then
+            table.insert(actions, ACTIONS.RETRIEVE)
+        end
+    end)

@@ -398,7 +398,7 @@ local function ExtinguishfireAction(inst)
             local pt = inst:GetPosition()
             local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
 
-            if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.LAWN or tiletype == GROUND.FIELDS then
+            if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or  tiletype == GROUND.FIELDS then
                 target = ent
                 break
             end

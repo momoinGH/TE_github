@@ -5,7 +5,7 @@ _G.SEABEACH_AMOUNT = {
     doydoy = 0,
 }
 
-EQUIPSLOTS.BARCO = "barco"
+EQUIPSLOTS.BARCO = "barco" --TODO 待删
 
 -- TODO 定义新的FUELTYPE最好给图鉴一个图片
 -- FUELTYPE_SUBICON_LOOKUP

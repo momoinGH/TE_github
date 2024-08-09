@@ -3,6 +3,9 @@ PrefabFiles =
     "shipwrecked_boat",
     "shipwrecked_boat_placer",
     "shipwrecked_boat_placer2",
+    "sail",
+    "tropical_boat_lamps",
+
     "turfesvolcanobiome",
     "venomgland",
     "machetes",
@@ -117,11 +120,6 @@ end
 
 if TUNING.tropical.tropicalshards ~= 0 then
     table.insert(PrefabFiles, "porkland_sw_entrance")
-end
-
-if GetModConfigData("raftlog") then
-    table.insert(PrefabFiles, "boatraft_old")
-    table.insert(PrefabFiles, "boatlog_old")
 end
 
 ---------------lillypad biome------------------------
