@@ -1,6 +1,4 @@
-local assets = { Asset("ANIM", "anim/ant_chest.zip"), Asset("ANIM", "anim/ant_chest_override_symbols.zip") }
--- 还不会如何把overridesymbols打包到一个anim中，如果有想法可以参考原版mighty_gym
--- 打包好后需要更改213行的build
+local assets = { Asset("ANIM", "anim/ant_chest.zip") }
 
 local prefabs = { "collapse_small", "lavaarena_creature_teleport_small_fx" }
 
@@ -180,12 +178,9 @@ end
 
 local function ChangeAntChestSymbol(inst) -- 切换通道
     local container = inst.components.container
-    local prefix = inst.prefab:sub(1, -6) .. "_" .. inst.prefab:sub(-5)
-    -- local prefix = inst.prefab == "antchest" and "ant_chest" or "honey_chest"
     local buildIdx = 0
     local itemPrefab = { "nectar_pod", "pollen_item", "honey", "royal_jelly" } -- Priority: Low -> High
-    -- local buildName = { "nectar", "pollen", "honey", "royal" }
-    for _, item in pairs(container.slots) do
+    for _, item in ipairs(container:GetAllItems()) do
         for idx, prf in ipairs(itemPrefab) do
             if item.prefab == prf then
                 buildIdx = buildIdx > idx and buildIdx or idx
@@ -194,8 +189,7 @@ local function ChangeAntChestSymbol(inst) -- 切换通道
         end
     end
     if buildIdx > 0 then -- 只需要更换通道symbol
-        inst.AnimState:OverrideSymbol("box01", "honeychest", "box_" .. itemPrefab[buildIdx])
-        -- build "honeychest" 实际在 "anim/ant_chest_override_sybols.zip" 里，只是用文件名打包不起来，打包时叫 "honeychest.zip" ，玄学ktools
+	    inst.AnimState:OverrideSymbol("box01", "ant_chest", "box_" .. itemPrefab[buildIdx])
     else
         inst.AnimState:ClearOverrideSymbol("box01")
     end
@@ -303,6 +297,5 @@ local function fn1()
     return inst
 end
 
-return Prefab("common/antchest", fn, assets),
-    Prefab("common/honeychest", fn1, assets),
+return Prefab("common/antchest", fn, assets), Prefab("common/honeychest", fn1, assets),
     MakePlacer("common/honeychest_placer", "ant_chest", "ant_chest", "closed", nil, nil, nil, nil, nil, nil, hide_ground)

@@ -2,3 +2,5 @@
 .vscode/
 /test.lua
 /README.md
+todo.md
+.gitignore
