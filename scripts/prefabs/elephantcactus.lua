@@ -340,6 +340,6 @@ local function stumpfn(Sim)
 end
 
 -- you can find dug_elephantcactus in plantables.lua
-return Prefab("marsh/objects/elephantcactus", fn, assets, prefabs),
+return Prefab("elephantcactus", fn, assets, prefabs),
 	Prefab("marsh/objects/elephantcactus_active", activefn, assets, prefabs),
 	Prefab("marsh/objects/elephantcactus_stump", stumpfn, assets, prefabs)

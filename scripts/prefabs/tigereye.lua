@@ -44,4 +44,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/tigereye", fn, assets)
+return Prefab("tigereye", fn, assets)

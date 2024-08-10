@@ -286,5 +286,5 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/objects/wildborehouse", fn, assets, prefabs),
+return Prefab("wildborehouse", fn, assets, prefabs),
     MakePlacer("common/wildborehouse_placer", "pig_house_tropical", "pig_house_tropical", "idle")

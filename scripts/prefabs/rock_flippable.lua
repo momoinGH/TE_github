@@ -200,4 +200,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/objects/rock_flippable", fn, assets, prefabs)
+return Prefab("rock_flippable", fn, assets, prefabs)

@@ -89,5 +89,5 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/waterdrop", fn, assets),
+return Prefab("waterdrop", fn, assets),
     MakePlacer("common/waterdrop_placer", "lifeplant", "lifeplant", "idle_loop", nil, nil, nil, 2.5)

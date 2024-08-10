@@ -36,8 +36,12 @@ local function ondropped(inst)
         ground == GROUND.OCEAN_BRINEPOOL_SHORE or
         ground == GROUND.OCEAN_WATERLOG or
         ground == GROUND.OCEAN_HAZARDOUS then
-        if not plataforma then inst.AnimState:PlayAnimation("idle_water", true) else inst.AnimState:PlayAnimation("idle",
-                true) end
+        if not plataforma then
+            inst.AnimState:PlayAnimation("idle_water", true)
+        else
+            inst.AnimState:PlayAnimation("idle",
+                true)
+        end
     else
         inst.AnimState:PlayAnimation("idle", true)
     end
@@ -267,4 +271,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/obsidianbombactive", fn, assets)
+return Prefab("obsidianbombactive", fn, assets)

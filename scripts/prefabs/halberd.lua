@@ -77,4 +77,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/halberd", fn, assets)
+return Prefab("halberd", fn, assets)

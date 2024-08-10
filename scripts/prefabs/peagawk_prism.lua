@@ -25,7 +25,7 @@ local PEAGAWK_HEALTH = 50
 local PEAGAWK_ATTACK_PERIOD = 3
 local PEAGAWK_RUN_SPEED = 8
 local PEAGAWK_WALK_SPEED = 3
-local PEAGAWK_REGROW_TIME = 10  -- total_day_time*2,
+local PEAGAWK_REGROW_TIME = 10 -- total_day_time*2,
 local PEAGAWK_PICKTIMER = 180
 local PEAGAWK_PRISM_STOP_TIMER = 45
 local PEAGAWK_TAIL_FEATHERS_MAX = 7
@@ -226,7 +226,7 @@ local function fn()
     inst.components.eater:SetDiet({ FOODTYPE.VEGGIE }, { FOODTYPE.VEGGIE })
 
     inst:AddComponent("sleeper")
-    inst.components.sleeper:SetWakeTest(function() return true end)  --always wake up if we're asleep
+    inst.components.sleeper:SetWakeTest(function() return true end) --always wake up if we're asleep
 
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "pig_torso"
@@ -314,7 +314,7 @@ local function fn2()
     inst.components.eater:SetDiet({ FOODTYPE.VEGGIE }, { FOODTYPE.VEGGIE })
 
     inst:AddComponent("sleeper")
-    inst.components.sleeper:SetWakeTest(function() return true end)  --always wake up if we're asleep
+    inst.components.sleeper:SetWakeTest(function() return true end) --always wake up if we're asleep
 
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "pig_torso"
@@ -366,4 +366,4 @@ local function fn2()
 end
 
 return --Prefab( "forest/animals/peagawk", fn, assets, prefabs),
-    Prefab("forest/animals/peagawk_prism", fn2, assets, prefabs)
+    Prefab("peagawk_prism", fn2, assets, prefabs)

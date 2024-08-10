@@ -4,7 +4,15 @@
 --这个文件不会被调用，单纯写一些源码的注解，虽然删了更节省体积，不过我相信也许会对其他moder有些帮助，而且全局函数在一些编译器下会提供代码补全功能
 
 TUNING = {}
-
+GLOBAL ={}
+PI = math.pi
+PI2 = PI * 2
+TWOPI = PI2
+SQRT2 = math.sqrt(2)
+GOLDENANGLE = PI * (3 - math.sqrt(5))
+DEGREES = PI / 180
+RADIANS = 180 / PI
+FRAMES = 1 / 30
 function Class(base, _ctor, props) end
 function CreateEntity(name) end
 function MakeInventoryPhysics(inst, mass, rad) end
@@ -14,11 +22,11 @@ function MakeSmallBurnable(inst, time, offset, structure, sym) end
 function MakeSmallPropagator(inst) end
 function MakeHauntableLaunch(inst, chance, speed, cooldown, haunt_value) end
 Asset = Class( function(self, type, file, param) end)
-
-
-Prefab = Class(function(self, name, fn, assets, deps, force_path_search)
-end)
-
+Prefab = Class(function(self, name, fn, assets, deps, force_path_search)end)
+--- 函数，或者值本身，很好用
+function FunctionOrValue(func_or_val, ...) end
+modimport = function(modulename) end
+EntityScript = Class(function(self, entity) end)
 ------------------------------------------------------------------------------------------------------------------------
 --1. simutil.lua
 

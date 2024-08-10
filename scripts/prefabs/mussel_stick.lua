@@ -50,4 +50,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/mussel_stick", fn, assets)
+return Prefab("mussel_stick", fn, assets)

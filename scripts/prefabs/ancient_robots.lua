@@ -582,7 +582,7 @@ local function headfn()
     return inst
 end
 
-return Prefab("forest/animals/ancient_robot_ribs", ribsfn, assets, prefabs),
-    Prefab("forest/animals/ancient_robot_claw", armfn, assets, prefabs),
-    Prefab("forest/animals/ancient_robot_leg", legfn, assets, prefabs),
-    Prefab("forest/animals/ancient_robot_head", headfn, assets, prefabs)
+return Prefab("ancient_robot_ribs", ribsfn, assets, prefabs),
+    Prefab("ancient_robot_claw", armfn, assets, prefabs),
+    Prefab("ancient_robot_leg", legfn, assets, prefabs),
+    Prefab("ancient_robot_head", headfn, assets, prefabs)

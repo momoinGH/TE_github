@@ -73,4 +73,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/sunkenchest_spawner", fn, nil, prefabs)
+return Prefab("sunkenchest_spawner", fn, nil, prefabs)

@@ -64,4 +64,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("underwater/objects/bubble_vent", fn, assets)
+return Prefab("bubble_vent", fn, assets)

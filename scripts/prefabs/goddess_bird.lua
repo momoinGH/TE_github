@@ -62,7 +62,7 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
 
     prefabs[2] = psprefab or "seeds" -- add the periodspawnprefab to "prefabs" list
 
-    if loottable ~= nil then      -- -- add all loot to "prefabs" list
+    if loottable ~= nil then         -- -- add all loot to "prefabs" list
         for key, loot in pairs(loottable) do
             key = tonumber(key)
             prefabs[key + 2] = loot[1] --key+2 is due to the fact that "prefabs" list already has 2 values in it
@@ -205,7 +205,7 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
         return inst
     end
 
-    return Prefab("forest/animals/" .. name, fn, assets, prefabs)
+    return Prefab("" .. name, fn, assets, prefabs)
 end
 
 return

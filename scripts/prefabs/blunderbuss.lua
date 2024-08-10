@@ -175,5 +175,5 @@ local function projectile_fn()
     return inst
 end
 
-return Prefab("common/blunderbuss", fn, assets),
-    Prefab("common/gunpowder_projectile", projectile_fn, assets)
+return Prefab("blunderbuss", fn, assets),
+    Prefab("gunpowder_projectile", projectile_fn, assets)

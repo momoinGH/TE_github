@@ -51,4 +51,4 @@ end
 
 
 
-return Prefab("forest/objects/jungle_border_vine", plantfn, assets, prefabs)
+return Prefab("jungle_border_vine", plantfn, assets, prefabs)

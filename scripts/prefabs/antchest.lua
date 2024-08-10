@@ -189,7 +189,7 @@ local function ChangeAntChestSymbol(inst) -- 切换通道
         end
     end
     if buildIdx > 0 then -- 只需要更换通道symbol
-	    inst.AnimState:OverrideSymbol("box01", "ant_chest", "box_" .. itemPrefab[buildIdx])
+        inst.AnimState:OverrideSymbol("box01", "ant_chest", "box_" .. itemPrefab[buildIdx])
     else
         inst.AnimState:ClearOverrideSymbol("box01")
     end
@@ -297,5 +297,5 @@ local function fn1()
     return inst
 end
 
-return Prefab("common/antchest", fn, assets), Prefab("common/honeychest", fn1, assets),
+return Prefab("antchest", fn, assets), Prefab("honeychest", fn1, assets),
     MakePlacer("common/honeychest_placer", "ant_chest", "ant_chest", "closed", nil, nil, nil, nil, nil, nil, hide_ground)

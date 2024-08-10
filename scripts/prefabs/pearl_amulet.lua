@@ -68,4 +68,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/inventory/pearl_amulet", fn, assets)
+return Prefab("pearl_amulet", fn, assets)

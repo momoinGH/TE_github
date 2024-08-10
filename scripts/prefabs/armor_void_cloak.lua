@@ -249,5 +249,5 @@ local function fxfn()
     return inst
 end
 
-return Prefab("common/inventory/armorvoidcloak", fn, assets),
-    Prefab("common/inventory/armorvoidcloak_fx", fxfn, assets)
+return Prefab("armorvoidcloak", fn, assets),
+    Prefab("armorvoidcloak_fx", fxfn, assets)

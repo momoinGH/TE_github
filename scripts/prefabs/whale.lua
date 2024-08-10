@@ -360,6 +360,6 @@ local function create_bluefinal(sim)
 	return inst
 end
 
-return Prefab("forest/animals/whale_blue", create_blue, assets, prefabs),
+return Prefab("whale_blue", create_blue, assets, prefabs),
 	Prefab("forest/animals/whale_white", create_white, assets, prefabs),
 	Prefab("forest/animals/whale_bluefinal", create_bluefinal, assets, prefabs)

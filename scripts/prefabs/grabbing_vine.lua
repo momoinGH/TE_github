@@ -158,8 +158,10 @@ local function commonfn(Sim)
 	inst.components.combat:SetRetargetFunction(1, retargetfn)
 	inst.components.combat.canbeattackedfn = canbeattackedfn
 
-	inst.components.combat.onhitotherfn = function(inst, other, damage) inst.components.thief:StealItem(other, nil, nil,
-			true) end
+	inst.components.combat.onhitotherfn = function(inst, other, damage)
+		inst.components.thief:StealItem(other, nil, nil,
+			true)
+	end
 
 	inst:AddComponent("thief")
 
@@ -194,5 +196,5 @@ local function commonfn(Sim)
 	return inst
 end
 
-return Prefab("forest/animals/grabbing_vine", commonfn, assets, prefabs),
+return Prefab("grabbing_vine", commonfn, assets, prefabs),
 	Prefab("forest/animals/grabbing_vinefixo", commonfn, assets, prefabs)

@@ -181,4 +181,4 @@ local function fn()
     return inst
 end
 
-return Prefab("marsh/monsters/adult_flytrap", fn, assets, prefabs)
+return Prefab("adult_flytrap", fn, assets, prefabs)

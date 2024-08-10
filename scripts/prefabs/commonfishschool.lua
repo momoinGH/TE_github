@@ -60,4 +60,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("underwater/commonfishschool", fn, assets, prefabs)
+return Prefab("commonfishschool", fn, assets, prefabs)

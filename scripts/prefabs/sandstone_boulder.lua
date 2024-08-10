@@ -76,4 +76,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("underwater/objects/sandstone_boulder", fn, assets, prefabs)
+return Prefab("sandstone_boulder", fn, assets, prefabs)

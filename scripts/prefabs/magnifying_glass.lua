@@ -79,4 +79,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/magnifying_glass", fn, assets, prefabs)
+return Prefab("magnifying_glass", fn, assets, prefabs)

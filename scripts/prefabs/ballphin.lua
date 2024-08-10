@@ -66,7 +66,7 @@ local function KeepTarget(inst, target)
 		return inst.components.combat:CanTarget(target) and inst:GetDistanceSqToInst(target) <= (40 * 40)
 	else
 		return inst.components.combat:CanTarget(target) and
-		inst:GetDistanceSqToInst(target) <= (BALLPHIN_KEEP_TARGET_DIST * BALLPHIN_KEEP_TARGET_DIST)
+			inst:GetDistanceSqToInst(target) <= (BALLPHIN_KEEP_TARGET_DIST * BALLPHIN_KEEP_TARGET_DIST)
 	end
 end
 
@@ -254,5 +254,5 @@ local function fn1()
 	return inst
 end
 
-return Prefab("ocean/objects/ballphin", fn, assets, prefabs),
+return Prefab("ballphin", fn, assets, prefabs),
 	Prefab("ocean/objects/ballphin2", fn1, assets, prefabs)

@@ -73,4 +73,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("monsters/roc_leg", fn, assets, prefabs)
+return Prefab("roc_leg", fn, assets, prefabs)

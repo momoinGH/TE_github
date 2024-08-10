@@ -1000,7 +1000,10 @@ end
 local function statusdabatalha(inst)
 	-- so aceita item se a arena nao estiver ativa
 	if inst.spider + inst.hound + inst.merm + inst.knight + inst.boar + inst.lizard + inst.bossboar + inst.rhinocebros + inst.beetletaur > 0 then
-		inst.components.trader:Disable() else inst.components.trader:Enable() end
+		inst.components.trader:Disable()
+	else
+		inst.components.trader:Enable()
+	end
 
 	if inst.arenaativa == 1 then
 		----------------exibe a contagem de aranhas-----------------------------
@@ -1344,7 +1347,7 @@ local function statusdabatalha(inst)
 		----------------exibe a contagem de cavalos-----------------------------
 		local pt = inst:GetPosition()
 		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local cavalos = tostring(GetTableSize(ents)) +( inst.knight or 0)
+		local cavalos = tostring(GetTableSize(ents)) + (inst.knight or 0)
 		inst.components.talker:Say("Enemies Left " .. cavalos .. "")
 		-------------------libera a trava de entrada-----------------------
 		if inst.knight > 20 then inst.knightwave = 1 elseif inst.knight > 18 then inst.knightwave = 2 elseif inst.knight > 14 then inst.knightwave = 3 elseif inst.knight > 12 then inst.knightwave = 4 elseif inst.knight > 8 then inst.knightwave = 5 elseif inst.knight > 6 then inst.knightwave = 6 elseif inst.knight > 2 then inst.knightwave = 7 else inst.knightwave = 8 end
@@ -1895,4 +1898,4 @@ inst:DoTaskInTime(0, oninit)
 	return inst
 end
 
-return Prefab("common/objects/lavaarena_center", fn, assets, prefabs)
+return Prefab("lavaarena_center", fn, assets, prefabs)

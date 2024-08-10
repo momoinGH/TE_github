@@ -39,7 +39,7 @@ local function DoLightning(inst, target)
             local rad = math.random(4, 8)
             local angle = i * ((4 * PI) / LIGHTNING_COUNT)
             local pos = Vector3(target.Transform:GetWorldPosition()) +
-            Vector3(rad * math.cos(angle), 0, rad * math.sin(angle))
+                Vector3(rad * math.cos(angle), 0, rad * math.sin(angle))
             TheWorld:PushEvent("ms_sendlightningstrike", pos)
         end)
     end
@@ -97,7 +97,7 @@ local function fn()
     inst.components.eater:SetDiet({ FOODTYPE.VEGGIE }, { FOODTYPE.VEGGIE })
 
     inst:AddComponent("sleeper")
-    inst.components.sleeper:SetWakeTest(function() return true end)  --always wake up if we're asleep
+    inst.components.sleeper:SetWakeTest(function() return true end) --always wake up if we're asleep
 
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "pig_torso"
@@ -153,5 +153,5 @@ local function fx_fn()
     return inst
 end
 
-return Prefab("forest/animals/thunderbird", fn, assets, prefabs),
-    Prefab("forest/animals/thunderbird_fx", fx_fn, assets, prefabs)
+return Prefab("thunderbird", fn, assets, prefabs),
+    Prefab("thunderbird_fx", fx_fn, assets, prefabs)

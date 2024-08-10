@@ -112,5 +112,5 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("forest/monsters/vampirebatcave", fn, assets, prefabs),
-    Prefab("forest/monsters/vampirebatcave_entrance_roc", fn, assets, prefabs)
+return Prefab("vampirebatcave", fn, assets, prefabs),
+    Prefab("vampirebatcave_entrance_roc", fn, assets, prefabs)

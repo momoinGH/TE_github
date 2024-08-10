@@ -39,4 +39,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/crocodog_spawner", fn, nil, prefabs)
+return Prefab("crocodog_spawner", fn, nil, prefabs)

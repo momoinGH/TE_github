@@ -207,4 +207,4 @@ local function fncommon()
 end
 
 
-return Prefab("monsters/rabid_beetle", fncommon, assets, prefabs)
+return Prefab("rabid_beetle", fncommon, assets, prefabs)

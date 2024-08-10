@@ -686,8 +686,8 @@ local function corpsefn(Sim)
     return inst
 end
 
-return Prefab("common/monsters/pugalisk", fn, assets, prefabs),
-    Prefab("common/monsters/pugalisk_body", bodyfn, assets, prefabs),
-    Prefab("common/monsters/pugalisk_tail", tailfn, assets, prefabs),
-    Prefab("common/monsters/pugalisk_segment", segmentfn, assets, prefabs),
-    Prefab("common/monsters/pugalisk_corpse", corpsefn, assets, prefabs)
+return Prefab("pugalisk", fn, assets, prefabs),
+    Prefab("pugalisk_body", bodyfn, assets, prefabs),
+    Prefab("pugalisk_tail", tailfn, assets, prefabs),
+    Prefab("pugalisk_segment", segmentfn, assets, prefabs),
+    Prefab("pugalisk_corpse", corpsefn, assets, prefabs)

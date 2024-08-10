@@ -147,5 +147,5 @@ local function create_winter()
     return inst
 end
 
-return Prefab("common/inventory/diving_suit_summer", create_summer, assets),
-    Prefab("common/inventory/diving_suit_winter", create_winter, assets)
+return Prefab("diving_suit_summer", create_summer, assets),
+    Prefab("diving_suit_winter", create_winter, assets)

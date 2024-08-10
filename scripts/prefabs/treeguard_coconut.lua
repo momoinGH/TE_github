@@ -148,4 +148,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("common/inventory/treeguard_coconut", fn, assets, prefabs)
+return Prefab("treeguard_coconut", fn, assets, prefabs)

@@ -59,4 +59,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/fx/quackering_wave", fn, assets, prefabs)
+return Prefab("quackering_wave", fn, assets, prefabs)

@@ -156,4 +156,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/flare", fn, assets, prefabs)
+return Prefab("flare", fn, assets, prefabs)

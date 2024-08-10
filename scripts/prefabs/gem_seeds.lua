@@ -71,5 +71,5 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/gem_seeds", fn, Assets),
+return Prefab("gem_seeds", fn, Assets),
 	MakePlacer("common/gem_seeds_placer", "plant_normal", "plant_gem", "picked")

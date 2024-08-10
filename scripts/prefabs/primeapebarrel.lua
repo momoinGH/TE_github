@@ -233,6 +233,6 @@ local function fn1()
     return inst
 end
 
-return Prefab("cave/objects/primeapebarrel", fn, assets, prefabs),
-    Prefab("cave/objects/primeapebarrel_plus", fn1, assets, prefabs),
+return Prefab("primeapebarrel", fn, assets, prefabs),
+    Prefab("primeapebarrel_plus", fn1, assets, prefabs),
     MakePlacer("common/primeapebarrel_placer", "barrel_tropical", "monkey_barrel_tropical", "idle")

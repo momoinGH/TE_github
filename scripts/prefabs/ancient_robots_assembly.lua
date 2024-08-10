@@ -271,4 +271,4 @@ local function commonfn()
     return inst
 end
 
-return Prefab("forest/animals/ancient_robots_assembly", commonfn, assets, prefabs)
+return Prefab("ancient_robots_assembly", commonfn, assets, prefabs)

@@ -93,4 +93,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/jelly_lantern", fn, assets)
+return Prefab("jelly_lantern", fn, assets)

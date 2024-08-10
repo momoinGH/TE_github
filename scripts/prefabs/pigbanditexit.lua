@@ -341,4 +341,4 @@ local function fn2(Sim)
 end
 
 return Prefab("watertree_pillar3", fn, assets, prefabs),
-    Prefab("common/inventory/pigbanditexit", fn2, assets, prefabs)
+    Prefab("pigbanditexit", fn2, assets, prefabs)

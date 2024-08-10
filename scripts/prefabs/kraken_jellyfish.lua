@@ -85,4 +85,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/kraken_jellyfish", fn, assets, prefabs)
+return Prefab("kraken_jellyfish", fn, assets, prefabs)

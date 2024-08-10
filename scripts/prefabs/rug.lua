@@ -274,7 +274,7 @@ local function palace_corners()
 	return inst
 end
 
-return Prefab("marsh/objects/rug_round", round, assets, prefabs),
+return Prefab("rug_round", round, assets, prefabs),
 	Prefab("marsh/objects/rug_oval", oval, assets, prefabs),
 	Prefab("marsh/objects/rug_square", square, assets, prefabs),
 	Prefab("marsh/objects/rug_rectangle", rectangle, assets, prefabs),

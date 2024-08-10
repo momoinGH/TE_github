@@ -182,5 +182,5 @@ local function superfn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/telescope", normalfn, assets, prefabs),
+return Prefab("telescope", normalfn, assets, prefabs),
 	Prefab("common/inventory/supertelescope", superfn, assets, prefabs)

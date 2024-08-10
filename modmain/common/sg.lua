@@ -729,36 +729,7 @@ end
 
 ----------------------------------------permite pular do barco sem ter equipamento---------------------------------------------------------------------------
 
-AddComponentPostInit(
-    "playeractionpicker",
-    function(self)
-        local OldGetRightClickActions = self.GetRightClickActions
-        function self:GetRightClickActions(position, target, spellbook)
-            local boat = self.inst.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO)
-            local acts = OldGetRightClickActions(self, position, target, spellbook)
-            if #acts <= 0 and boat then
-                acts = self:GetPointActions(position, boat, true)
-            end
-            return acts
-        end
-    end
-)
 
-AddComponentPostInit(
-    "playeractionpicker",
-    function(self)
-        local OldGetLeftClickActions = self.GetLeftClickActions
-        function self:GetLeftClickActions(position, target)
-            local boat = self.inst.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO)
-            local acts = OldGetLeftClickActions(self, position, target)
-
-            if #acts <= 0 and boat and GLOBAL.TheWorld.Map:IsPassableAtPoint(position:Get()) then
-                acts = self:GetPointActions(position, boat, nil)
-            end
-            return acts
-        end
-    end
-)
 
 
 

@@ -346,5 +346,5 @@ local function whitefn(Sim)
 end
 
 
-return Prefab("common/objects/whale_carcass_blue", bluefn, assets, prefabs),
+return Prefab("whale_carcass_blue", bluefn, assets, prefabs),
 	Prefab("common/objects/whale_carcass_white", whitefn, assets, prefabs)

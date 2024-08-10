@@ -427,4 +427,4 @@ local function fnbaby(Sim)
 	return inst
 end
 
-return Prefab("forest/animals/ox", fn, assets, prefabs), Prefab("forest/animals/oxbaby", fnbaby, assets, prefabs)
+return Prefab("ox", fn, assets, prefabs), Prefab("oxbaby", fnbaby, assets, prefabs)

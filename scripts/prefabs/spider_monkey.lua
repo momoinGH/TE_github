@@ -300,4 +300,4 @@ local function fn()
     return inst
 end
 
-return Prefab("porkland/monsters/spider_monkey", fn, assets, prefabs)
+return Prefab("spider_monkey", fn, assets, prefabs)

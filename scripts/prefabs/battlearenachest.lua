@@ -111,4 +111,4 @@ local function fn3(Sim)
 	return inst
 end
 
-return Prefab("common/lavarenachest", fn3, assets)
+return Prefab("lavarenachest", fn3, assets)

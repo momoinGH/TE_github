@@ -111,7 +111,7 @@ local function Retarget(inst)
 
 	return FindEntity(inst, dist, function(guy)
 		return not guy:HasTag("piko") and inst.components.combat:CanTarget(guy) and guy.components.inventory and
-		(guy.components.inventory:NumItems() > 0)
+			(guy.components.inventory:NumItems() > 0)
 	end)
 end
 
@@ -514,5 +514,5 @@ local function orangefn()
 	return inst
 end
 
-return Prefab("forest/animals/piko", fn, assets, prefabs),
+return Prefab("piko", fn, assets, prefabs),
 	Prefab("forest/animals/piko_orange", orangefn, assets, prefabs)

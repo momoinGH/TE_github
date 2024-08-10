@@ -30,4 +30,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/fx/cloudpuff", fn, assets)
+return Prefab("cloudpuff", fn, assets)

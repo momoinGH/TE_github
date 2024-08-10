@@ -250,4 +250,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/objects/octopusking", fn, assets, prefabs)
+return Prefab("octopusking", fn, assets, prefabs)

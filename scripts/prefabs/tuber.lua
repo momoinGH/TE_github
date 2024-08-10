@@ -217,7 +217,7 @@ local function cookedbloomfn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/tuber_crop", fn, assets),
-    Prefab("common/inventory/tuber_crop_cooked", cookedfn, assets),
-    Prefab("common/inventory/tuber_bloom_crop", bloomfn, assets),
-    Prefab("common/inventory/tuber_bloom_crop_cooked", cookedbloomfn, assets)
+return Prefab("tuber_crop", fn, assets),
+    Prefab("tuber_crop_cooked", cookedfn, assets),
+    Prefab("tuber_bloom_crop", bloomfn, assets),
+    Prefab("tuber_bloom_crop_cooked", cookedbloomfn, assets)

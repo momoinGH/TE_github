@@ -144,4 +144,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("underwater/monsters/seatentacle", fn, assets, prefabs)
+return Prefab("seatentacle", fn, assets, prefabs)

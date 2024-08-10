@@ -1088,10 +1088,10 @@ local function markerfn()
 end
 
 
-return Prefab("common/monsters/ancient_hulk", fn, assets, prefabs),
-    Prefab("common/monsters/ancient_hulk_mine", minefn, assets, prefabs),
-    Prefab("common/monsters/ancient_hulk_orb", orbfn, assets, prefabs),
-    Prefab("common/monsters/ancient_hulk_orb_small", orbsmallfn, assets, prefabs),
-    Prefab("common/monsters/ancient_hulk_orb_charge", orbchargefn, assets, prefabs),
-    Prefab("common/monsters/ancient_hulk_marker", markerfn, assets, prefabs),
-    Prefab("common/monsters/ancient_hulk_orb_artefato", orbartefatofn, assets, prefabs)
+return Prefab("ancient_hulk", fn, assets, prefabs),
+    Prefab("ancient_hulk_mine", minefn, assets, prefabs),
+    Prefab("ancient_hulk_orb", orbfn, assets, prefabs),
+    Prefab("ancient_hulk_orb_small", orbsmallfn, assets, prefabs),
+    Prefab("ancient_hulk_orb_charge", orbchargefn, assets, prefabs),
+    Prefab("ancient_hulk_marker", markerfn, assets, prefabs),
+    Prefab("ancient_hulk_orb_artefato", orbartefatofn, assets, prefabs)

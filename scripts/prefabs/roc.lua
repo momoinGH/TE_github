@@ -139,4 +139,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("monsters/roc", fn, assets, prefabs)
+return Prefab("roc", fn, assets, prefabs)

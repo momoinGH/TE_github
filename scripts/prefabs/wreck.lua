@@ -246,4 +246,4 @@ local function wreckfn(Sim)
 	return inst
 end
 
-return Prefab("shipwrecked/obstacle/wreck", wreckfn, assets, prefabs)
+return Prefab("wreck", wreckfn, assets, prefabs)

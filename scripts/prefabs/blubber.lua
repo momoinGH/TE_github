@@ -55,4 +55,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/blubber", fn, assets)
+return Prefab("blubber", fn, assets)

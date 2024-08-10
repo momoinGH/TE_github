@@ -222,4 +222,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("forest/common/gnat", fn, assets, prefabs)
+return Prefab("gnat", fn, assets, prefabs)

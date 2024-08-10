@@ -45,5 +45,5 @@ local function bubblefn(Sim)
 	return inst
 end
 
-return Prefab("common/volcano/lava_erupt", eruptfn, erupt_assets),
+return Prefab("lava_erupt", eruptfn, erupt_assets),
 	Prefab("common/volcano/lava_bubbling", bubblefn, bubble_assets)

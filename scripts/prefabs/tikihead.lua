@@ -189,4 +189,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("cave/objects/tikihead", fn, assets, prefabs)
+return Prefab("tikihead", fn, assets, prefabs)

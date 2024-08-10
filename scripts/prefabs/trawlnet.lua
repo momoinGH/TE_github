@@ -439,5 +439,5 @@ local function dropped_net()
     return inst
 end
 
-return Prefab("common/inventory/trawlnet", net, net_assets, net_prefabs),
-    Prefab("common/inventory/trawlnetdropped", dropped_net, dropped_assets)
+return Prefab("trawlnet", net, net_assets, net_prefabs),
+    Prefab("trawlnetdropped", dropped_net, dropped_assets)

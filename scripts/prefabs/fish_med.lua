@@ -709,7 +709,7 @@ end
 local rawmed = makefish_med("dogfish", "fish_dogfish", "fish_dogfish", "dogfish")
 local rawsword = makefish_med1("swordfish", "fish_swordfish", "dead_swordfish", "swordfish")
 
-return Prefab("common/inventory/fish_med", rawmed, dogfish_assets, prefabs),
+return Prefab("fish_med", rawmed, dogfish_assets, prefabs),
 	Prefab("common/inventory/dead_swordfish", rawsword, swordfish_assets, prefabs),
 	Prefab("common/inventory/fish_raw", fish_raw_fn, raw_assets),
 	--	   Prefab( "common/inventory/spoiled_fish", spoiledfn,spoiledfish_assets),

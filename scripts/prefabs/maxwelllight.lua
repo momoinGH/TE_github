@@ -64,8 +64,12 @@ local function arealight()
 
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(8, 10)
-    inst.components.playerprox:SetOnPlayerNear(function() if not inst.components.burnable:IsBurning() then inst
-                .components.burnable:Ignite() end end)
+    inst.components.playerprox:SetOnPlayerNear(function()
+        if not inst.components.burnable:IsBurning() then
+            inst
+                .components.burnable:Ignite()
+        end
+    end)
     inst.components.playerprox:SetOnPlayerFar(extinguish)
     inst:AddComponent("named")
     inst.components.named:SetName(STRINGS.NAMES["MAXWELLLIGHT"])
@@ -87,5 +91,5 @@ local function spotlight()
     return inst
 end
 
-return Prefab("common/objects/maxwelllight", spotlight, assets, prefabs),
-    Prefab("common/objects/maxwelllight_area", arealight, assets, prefabs)
+return Prefab("maxwelllight", spotlight, assets, prefabs),
+    Prefab("maxwelllight_area", arealight, assets, prefabs)

@@ -78,4 +78,4 @@ local function fn(Sim)
 end
 
 
-return Prefab("common/inventory/city_hammer", fn, assets, prefabs)
+return Prefab("city_hammer", fn, assets, prefabs)

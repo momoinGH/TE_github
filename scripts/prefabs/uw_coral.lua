@@ -166,6 +166,6 @@ local function green()
 	return inst
 end
 
-return Prefab("underwater/objects/uw_coral", orange, assets, prefabs),
+return Prefab("uw_coral", orange, assets, prefabs),
 	Prefab("cave/objects/uw_coral_blue", blue, assets, prefabs),
 	Prefab("cave/objects/uw_coral_green", green, assets, prefabs)

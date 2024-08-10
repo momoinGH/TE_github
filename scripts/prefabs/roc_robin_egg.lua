@@ -197,4 +197,4 @@ local function commonfn()
     return inst
 end
 
-return Prefab("common/inventory/roc_robin_egg", commonfn, assets, prefabs)
+return Prefab("roc_robin_egg", commonfn, assets, prefabs)

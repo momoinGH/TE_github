@@ -26,7 +26,7 @@ local function fn()
     inst.AnimState:SetBuild("meteor_impact")
     inst.AnimState:PlayAnimation("idle_loop")
     inst.AnimState:SetFinalOffset(-1)
-    
+
     inst:AddTag("fx")
 
     inst.entity:SetPristine()
@@ -44,4 +44,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/fx/meteor_impact", fn, assets)
+return Prefab("meteor_impact", fn, assets)

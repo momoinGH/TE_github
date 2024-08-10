@@ -58,7 +58,7 @@ local function MakePreparedFood(data)
 		return inst
 	end
 
-	return Prefab("common/inventory/" .. data.name, fn, assets, prefabs)
+	return Prefab("" .. data.name, fn, assets, prefabs)
 end
 
 
@@ -68,8 +68,10 @@ local foods =
 {
 	sponge_cake =
 	{
-		test = function(cooker, names, tags) return tags.dairy and tags.sweetener and tags.sponge and tags.sponge and
-			not tags.meat end,
+		test = function(cooker, names, tags)
+			return tags.dairy and tags.sweetener and tags.sponge and tags.sponge and
+				not tags.meat
+		end,
 		priority = 0,
 		weight = 1,
 		health = 0,
@@ -93,8 +95,10 @@ local foods =
 
 	tuna_muffin =
 	{
-		test = function(cooker, names, tags) return tags.fish and tags.fish >= 1 and tags.sponge and tags.sponge >= 1 and
-			not tags.twigs end,
+		test = function(cooker, names, tags)
+			return tags.fish and tags.fish >= 1 and tags.sponge and tags.sponge >= 1 and
+				not tags.twigs
+		end,
 		priority = 5,
 		weight = 1,
 		health = 0,
@@ -106,8 +110,10 @@ local foods =
 
 	tentacle_sushi =
 	{
-		test = function(cooker, names, tags) return tags.tentacle and tags.tentacle and tags.sea_veggie and
-			tags.fish >= 0.5 and not tags.twigs end,
+		test = function(cooker, names, tags)
+			return tags.tentacle and tags.tentacle and tags.sea_veggie and
+				tags.fish >= 0.5 and not tags.twigs
+		end,
 		priority = 0,
 		weight = 1,
 		health = 35,
@@ -119,8 +125,10 @@ local foods =
 
 	flower_sushi =
 	{
-		test = function(cooker, names, tags) return tags.flower and tags.sea_veggie and tags.fish and tags.fish >= 1 and
-			not tags.twigs end,
+		test = function(cooker, names, tags)
+			return tags.flower and tags.sea_veggie and tags.fish and tags.fish >= 1 and
+				not tags.twigs
+		end,
 		priority = 0,
 		weight = 1,
 		health = 10,
@@ -132,8 +140,10 @@ local foods =
 
 	fish_sushi =
 	{
-		test = function(cooker, names, tags) return tags.tentacle and tags.veggie >= 1 and tags.fish and tags.fish >= 1 and
-			not tags.twigs end,
+		test = function(cooker, names, tags)
+			return tags.tentacle and tags.veggie >= 1 and tags.fish and tags.fish >= 1 and
+				not tags.twigs
+		end,
 		priority = 0,
 		weight = 1,
 		health = 5,
@@ -145,8 +155,10 @@ local foods =
 
 	seajelly =
 	{
-		test = function(cooker, names, tags) return tags.sea_jelly and tags.sea_jelly > 1 and names.saltrock and
-			names.saltrock > 1 and not tags.meat end,
+		test = function(cooker, names, tags)
+			return tags.sea_jelly and tags.sea_jelly > 1 and names.saltrock and
+				names.saltrock > 1 and not tags.meat
+		end,
 		priority = 0,
 		weight = 1,
 		health = 20,

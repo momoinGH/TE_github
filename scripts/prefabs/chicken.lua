@@ -49,8 +49,10 @@ local function OnAttacked(inst, data)
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
 		for k, guardas in pairs(eles) do
-			if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat
-					:SetTarget(data.attacker) end
+			if guardas.components.combat and guardas.components.combat.target == nil then
+				guardas.components.combat
+					:SetTarget(data.attacker)
+			end
 		end
 	end
 
@@ -181,4 +183,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("forest/animals/chicken", fn, assets, prefabs)
+return Prefab("chicken", fn, assets, prefabs)

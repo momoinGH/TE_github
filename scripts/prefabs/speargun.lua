@@ -190,6 +190,6 @@ local function obsidianfn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/speargun", commonfn, assets, prefabs),
-    Prefab("common/inventory/speargun_poison", poisonfn, assets, prefabs),
-    Prefab("common/inventory/obsidianspeargun", obsidianfn, assets, prefabs)
+return Prefab("speargun", commonfn, assets, prefabs),
+    Prefab("speargun_poison", poisonfn, assets, prefabs),
+    Prefab("obsidianspeargun", obsidianfn, assets, prefabs)

@@ -274,5 +274,5 @@ local function fn2()
     return inst
 end
 
-return Prefab("common/inventory/redbarrel", fn, assets, prefabs),
-    Prefab("common/inventory/redbarrelunderwater", fn2, assets, prefabs)
+return Prefab("redbarrel", fn, assets, prefabs),
+    Prefab("redbarrelunderwater", fn2, assets, prefabs)

@@ -133,4 +133,4 @@ local function rowboatfn(sim)
 end
 
 
-return Prefab("common/objects/octopus", rowboatfn, rowboatassets, prefabs)
+return Prefab("octopus", rowboatfn, rowboatassets, prefabs)

@@ -252,4 +252,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/characters/antman_warrior", fn, assets, prefabs)
+return Prefab("antman_warrior", fn, assets, prefabs)

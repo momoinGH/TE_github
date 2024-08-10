@@ -43,4 +43,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/jelly_cap", fn, assets)
+return Prefab("jelly_cap", fn, assets)

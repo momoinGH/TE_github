@@ -1,4 +1,3 @@
-
 local trace = function() end
 
 local SNAKE_SPEED = 3
@@ -111,8 +110,8 @@ end
 
 local function KeepTarget(inst, target)
 	return inst.components.combat:CanTarget(target) and
-	inst:GetDistanceSqToInst(target) <= (SNAKE_KEEP_TARGET_DIST * SNAKE_KEEP_TARGET_DIST) and
-	not target:HasTag("aquatic")
+		inst:GetDistanceSqToInst(target) <= (SNAKE_KEEP_TARGET_DIST * SNAKE_KEEP_TARGET_DIST) and
+		not target:HasTag("aquatic")
 end
 
 local function OnAttacked(inst, data)
@@ -384,7 +383,7 @@ local function amphibiousfn(Sim)
 end
 
 return --Prefab("monsters/snake", commonfn, assets, prefabs),
---	   Prefab("monsters/snake_poison", poisonfn, assets, prefabs),
---	   Prefab("monsters/snake_fire", firefn, assets, prefabs),
+--	   Prefab("snake_poison", poisonfn, assets, prefabs),
+--	   Prefab("snake_fire", firefn, assets, prefabs),
 	Prefab("monsters/snake_amphibious", amphibiousfn, assets, prefabs)
--- Prefab("monsters/deadsnake", fndefault, assets, prefabs),
+-- Prefab("deadsnake", fndefault, assets, prefabs),

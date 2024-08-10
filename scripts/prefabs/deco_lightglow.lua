@@ -167,4 +167,4 @@ local function swinglightobjectfn()
     return inst
 end
 
-return Prefab("marsh/objects/swinglightobject", swinglightobjectfn, assets, prefabs)
+return Prefab("swinglightobject", swinglightobjectfn, assets, prefabs)

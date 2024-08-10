@@ -658,8 +658,8 @@ local function sidewallbluefn(Sim)
     return inst
 end
 
-return Prefab("common/objects/pig_ruins_torch", pillarfn, assets, prefabs),
-    Prefab("common/objects/pig_ruins_torch_wall", wallfn, assets, prefabs),
-    Prefab("common/objects/pig_ruins_torch_sidewall", sidewallfn, assets, prefabs),
-    Prefab("common/objects/pig_ruins_torch_wall_blue", wallbluefn, assets, prefabs),
-    Prefab("common/objects/pig_ruins_torch_sidewall_blue", sidewallbluefn, assets, prefabs)
+return Prefab("pig_ruins_torch", pillarfn, assets, prefabs),
+    Prefab("pig_ruins_torch_wall", wallfn, assets, prefabs),
+    Prefab("pig_ruins_torch_sidewall", sidewallfn, assets, prefabs),
+    Prefab("pig_ruins_torch_wall_blue", wallbluefn, assets, prefabs),
+    Prefab("pig_ruins_torch_sidewall_blue", sidewallbluefn, assets, prefabs)

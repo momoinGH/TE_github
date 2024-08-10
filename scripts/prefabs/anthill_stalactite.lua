@@ -62,4 +62,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("anthill/items/rock_antcave", fn, assets, prefabs)
+return Prefab("rock_antcave", fn, assets, prefabs)

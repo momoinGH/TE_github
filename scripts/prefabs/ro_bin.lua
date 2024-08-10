@@ -193,4 +193,4 @@ local function create_ro_bin()
     return inst
 end
 
-return Prefab("common/ro_bin", create_ro_bin, assets, prefabs)
+return Prefab("ro_bin", create_ro_bin, assets, prefabs)

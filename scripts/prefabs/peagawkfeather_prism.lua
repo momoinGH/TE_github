@@ -46,4 +46,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/peagawkfeather_prism", fn, assets)
+return Prefab("peagawkfeather_prism", fn, assets)

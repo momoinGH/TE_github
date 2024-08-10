@@ -170,6 +170,6 @@ local function fn3()
     return inst
 end
 
-return Prefab("common/inventory/alloy", fn, assets),
-    Prefab("common/inventory/goldenbar", fn2, assets),
-    Prefab("common/inventory/stonebar", fn3, assets)
+return Prefab("alloy", fn, assets),
+    Prefab("goldenbar", fn2, assets),
+    Prefab("stonebar", fn3, assets)

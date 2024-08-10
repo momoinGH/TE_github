@@ -229,7 +229,7 @@ local function fn()
     inst.components.eater:SetDiet({ FOODTYPE.VEGGIE }, { FOODTYPE.VEGGIE })
 
     inst:AddComponent("sleeper")
-    inst.components.sleeper:SetWakeTest(function() return true end)  --always wake up if we're asleep
+    inst.components.sleeper:SetWakeTest(function() return true end) --always wake up if we're asleep
 
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "pig_torso"
@@ -371,5 +371,5 @@ local function fn2()
     return inst
 end
 ]]
-return Prefab("forest/animals/peagawk", fn, assets, prefabs)
+return Prefab("peagawk", fn, assets, prefabs)
 --Prefab( "forest/animals/peagawk_prism", fn2, assets, prefabs)

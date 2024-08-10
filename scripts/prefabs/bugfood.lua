@@ -251,7 +251,7 @@ local function slugbug_cooked()
     return inst
 end
 
-return Prefab("common/inventory/jellybug", jellybug_raw, assets.jellybug, prefabs.jellybug),
-    Prefab("common/inventory/jellybug_cooked", jellybug_cooked, assets.jellybug_cooked),
-    Prefab("common/inventory/slugbug", slugbug_raw, assets.slugbug, prefabs.slugbug),
-    Prefab("common/inventory/slugbug_cooked", slugbug_cooked, assets.slugbug_cooked)
+return Prefab("jellybug", jellybug_raw, assets.jellybug, prefabs.jellybug),
+    Prefab("jellybug_cooked", jellybug_cooked, assets.jellybug_cooked),
+    Prefab("slugbug", slugbug_raw, assets.slugbug, prefabs.slugbug),
+    Prefab("slugbug_cooked", slugbug_cooked, assets.slugbug_cooked)

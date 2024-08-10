@@ -47,4 +47,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/inventory/decorative_shell", fn, assets)
+return Prefab("decorative_shell", fn, assets)

@@ -1038,7 +1038,7 @@ local function pig_ruins_sow()
 	return inst
 end
 
-return Prefab("forest/objects/rocks/pig_ruins_head", pig_ruins_head, ruins_assets, prefabs),
+return Prefab("pig_ruins_head", pig_ruins_head, ruins_assets, prefabs),
 	Prefab("forest/objects/rocks/pig_ruins_pig", pig_ruins_pig, ruins_assets, prefabs),
 	Prefab("forest/objects/rocks/pig_ruins_ant", pig_ruins_ant, ruins_assets, prefabs),
 	Prefab("forest/objects/rocks/pig_ruins_idol", pig_ruins_idol, ruins_assets, prefabs),

@@ -386,7 +386,7 @@ local function makebirdex(name, feathername, takeoff_soundname, chirp_soundname,
 		return inst
 	end
 
-	return Prefab("forest/animals/" .. name, fn, assets, prefabs)
+	return Prefab("" .. name, fn, assets, prefabs)
 end
 
 local function makebird(name, soundname, feathername)

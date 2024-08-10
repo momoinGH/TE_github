@@ -262,4 +262,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("creatures/pog", fn, assets, prefabs)
+return Prefab("pog", fn, assets, prefabs)

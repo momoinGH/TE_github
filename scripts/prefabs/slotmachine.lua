@@ -2484,7 +2484,7 @@ local function CreateSlotMachine(name)
 		return inst
 	end
 
-	return Prefab("common/objects/slotmachine", InitFn, assets, prefabs)
+	return Prefab("slotmachine", InitFn, assets, prefabs)
 end
 
 return CreateSlotMachine()

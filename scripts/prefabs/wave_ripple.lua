@@ -32,7 +32,7 @@ local function splash(inst)
         local moisture = v.components.moisture
         if moisture ~= nil then
             local waterproofness = (v.components.inventory and math.min(v.components.inventory:GetWaterproofness(), 1)) or
-            0
+                0
             moisture:DoDelta(SPLASH_WETNESS * (1 - waterproofness))
 
             local entity_splash = SpawnPrefab("splash")
@@ -329,5 +329,5 @@ local function rogue(Sim)
     return inst
 end
 
-return Prefab("common/fx/wave_ripple", ripple, waveassets),
-    Prefab("common/fx/rogue_wave", rogue, rogueassets)
+return Prefab("wave_ripple", ripple, waveassets),
+    Prefab("rogue_wave", rogue, rogueassets)

@@ -548,6 +548,6 @@ local function fnwater()
     return inst
 end
 
-return Prefab("monsters/crocodog", fndefault, assets, prefabs),
-    Prefab("monsters/poisoncrocodog", fnpoison, assets, prefabs),
-    Prefab("monsters/watercrocodog", fnwater, assets, prefabs)
+return Prefab("crocodog", fndefault, assets, prefabs),
+    Prefab("poisoncrocodog", fnpoison, assets, prefabs),
+    Prefab("watercrocodog", fnwater, assets, prefabs)

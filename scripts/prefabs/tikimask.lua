@@ -73,4 +73,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/tikimask", fn or simple, assets, prefabs)
+return Prefab("tikimask", fn or simple, assets, prefabs)

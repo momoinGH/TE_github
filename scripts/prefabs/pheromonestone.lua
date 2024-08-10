@@ -57,4 +57,4 @@ local function makefn(inst)
     return inst
 end
 
-return Prefab("common/inventory/pheromonestone", makefn, assets)
+return Prefab("pheromonestone", makefn, assets)

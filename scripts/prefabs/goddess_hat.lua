@@ -113,4 +113,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/inventory/goddess_hat", fn, assets, prefabs)
+return Prefab("goddess_hat", fn, assets, prefabs)

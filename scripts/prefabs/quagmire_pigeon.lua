@@ -204,7 +204,7 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
         return inst
     end
 
-    return Prefab("forest/animals/" .. name, fn, assets, prefabs)
+    return Prefab("" .. name, fn, assets, prefabs)
 end
 
 return makebird("quagmire_pigeon", "quagmire_pigeon",

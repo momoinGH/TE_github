@@ -243,4 +243,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/bioluminescence", fn, assets, prefabs)
+return Prefab("bioluminescence", fn, assets, prefabs)

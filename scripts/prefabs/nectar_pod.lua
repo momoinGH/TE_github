@@ -84,4 +84,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/nectar_pod", fn, assets, prefabs)
+return Prefab("nectar_pod", fn, assets, prefabs)

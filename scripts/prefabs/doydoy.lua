@@ -468,5 +468,5 @@ local function adultfn(Sim)
 	return inst
 end
 
-return Prefab("common/monsters/doydoybaby", babyfn, assets_baby, prefabs_baby),
+return Prefab("doydoybaby", babyfn, assets_baby, prefabs_baby),
 	Prefab("common/monsters/doydoy", adultfn, assets, prefabs)

@@ -63,4 +63,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/inventory/bramble_bulb", fn, assets, prefabs)
+return Prefab("bramble_bulb", fn, assets, prefabs)

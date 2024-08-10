@@ -29,4 +29,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/fx/windswirl", fn, assets, nil)
+return Prefab("windswirl", fn, assets, nil)

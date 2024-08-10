@@ -77,4 +77,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/objects/woodlegs_cage_underwater", fn, assets, prefabs)
+return Prefab("woodlegs_cage_underwater", fn, assets, prefabs)

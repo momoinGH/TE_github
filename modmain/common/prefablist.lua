@@ -4,7 +4,7 @@ PrefabFiles =
     "shipwrecked_boat_placer",
     "shipwrecked_boat_placer2",
     "sail",
-    "tropical_boat_lamps",
+    "tropical_boatlamp",
 
     "turfesvolcanobiome",
     "venomgland",

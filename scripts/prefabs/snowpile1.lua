@@ -315,4 +315,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("forest/monsters/snowpile1", fn, assets, prefabs)
+return Prefab("snowpile1", fn, assets, prefabs)

@@ -696,11 +696,11 @@ local function makefn2(animset, setbuild, spawnList)
 end
 
 local function house(name, anim, build, spawnList, minimapicon)
-    return Prefab("common/objects/" .. name, makefn(anim, build, spawnList, minimapicon), assets, prefabs)
+    return Prefab("" .. name, makefn(anim, build, spawnList, minimapicon), assets, prefabs)
 end
 
 local function house2(name, anim, build, spawnList)
-    return Prefab("common/objects/" .. name, makefn2(anim, build, spawnList), assets, prefabs)
+    return Prefab("" .. name, makefn2(anim, build, spawnList), assets, prefabs)
 end
 
 return house("pighouse_city", nil, nil),

@@ -59,4 +59,4 @@ local function fn()
     return inst
 end
 
-return Prefab("common/objects/deer_flower_withered", fn, assets)
+return Prefab("deer_flower_withered", fn, assets)

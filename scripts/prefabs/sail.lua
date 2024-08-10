@@ -22,7 +22,7 @@ local function OnEquipped(inst, data)
     end
 end
 
-local function OnUnEquipped(inst,data)
+local function OnUnEquipped(inst, data)
     data.owner.AnimState:ClearOverrideSymbol(inst.symboltooverride, inst.build, inst.symbol)
     if inst.components.fueled then
         inst.components.fueled:StopConsuming()
@@ -181,10 +181,10 @@ local function malbatrossail_fn()
 end
 
 
-return Prefab("common/inventory/sail", sail_fn, sail_assets),
-    Prefab("common/inventory/clothsail", clothsail_fn, clothsail_assets),
-    Prefab("common/inventory/snakeskinsail", snakeskinsail_fn, snakeskinsail_assets),
-    Prefab("common/inventory/feathersail", feathersail_fn, feathersailassets),
-    Prefab("common/inventory/ironwind", ironwind_fn, ironwind_assets),
-    Prefab("common/inventory/woodlegssail", woodlegssail_fn, woodlegssail_assets),
-    Prefab("common/inventory/malbatrossail", malbatrossail_fn, malbatrossail_assets)
+return Prefab("sail", sail_fn, sail_assets),
+    Prefab("clothsail", clothsail_fn, clothsail_assets),
+    Prefab("snakeskinsail", snakeskinsail_fn, snakeskinsail_assets),
+    Prefab("feathersail", feathersail_fn, feathersailassets),
+    Prefab("ironwind", ironwind_fn, ironwind_assets),
+    Prefab("woodlegssail", woodlegssail_fn, woodlegssail_assets),
+    Prefab("malbatrossail", malbatrossail_fn, malbatrossail_assets)

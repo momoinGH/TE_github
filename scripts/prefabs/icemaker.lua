@@ -197,5 +197,5 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/objects/icemaker", fn, assets, prefabs),
+return Prefab("icemaker", fn, assets, prefabs),
 	MakePlacer("common/icemaker_placer", "icemachine", "icemachine", "idle_off")

@@ -151,6 +151,6 @@ local function fxfn()
     return inst
 end
 
-return Prefab("ocean/objects/whale_bubbles", bubblefn, assets, prefabs),
-    Prefab("ocean/fx/whale_bubbles_fx", fxfn, assets, prefabs),
-    Prefab("ocean/objects/whale_track", trackfn, assets, prefabs)
+return Prefab("whale_bubbles", bubblefn, assets, prefabs),
+    Prefab("whale_bubbles_fx", fxfn, assets, prefabs),
+    Prefab("whale_track", trackfn, assets, prefabs)

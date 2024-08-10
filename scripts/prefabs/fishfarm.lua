@@ -1,4 +1,3 @@
-
 local assets =
 {
     Asset("ANIM", "anim/fish_farm.zip"),
@@ -300,5 +299,5 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/objects/fish_farm", fn, assets, prefabs),
+return Prefab("fish_farm", fn, assets, prefabs),
     MakePlacer("common/fish_farm_placer", "fish_farm", "fish_farm", "idle")

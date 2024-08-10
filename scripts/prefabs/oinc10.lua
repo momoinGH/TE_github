@@ -71,4 +71,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/oinc10", fn, assets, prefabs)
+return Prefab("oinc10", fn, assets, prefabs)

@@ -37,4 +37,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/coral_cluster", fn, assets)
+return Prefab("coral_cluster", fn, assets)

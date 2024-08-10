@@ -174,6 +174,6 @@ local function fn2(Sim)
 
 	return inst
 end
-return Prefab("common/inventory/seacucumber_planted", fn, assets),
+return Prefab("seacucumber_planted", fn, assets),
 	Prefab("seacucumber_cooked", fn2, assets),
 	Prefab("seacucumber", fn1, assets, prefabs)

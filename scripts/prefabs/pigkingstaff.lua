@@ -210,4 +210,4 @@ local function init()
     return inst
 end
 
-return Prefab("common/inventory/pigkingstaff", init, assets)
+return Prefab("pigkingstaff", init, assets)

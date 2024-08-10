@@ -34,4 +34,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/fx/windtrail", fn, assets)
+return Prefab("windtrail", fn, assets)

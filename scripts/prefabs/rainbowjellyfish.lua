@@ -382,8 +382,8 @@ local function driedfn(sim)
     return inst
 end
 
-return Prefab("common/inventory/rainbowjellyfish", defaultfn, assets),
-    Prefab("common/inventory/rainbowjellyfish_dead", deadfn, assets),
-    Prefab("common/inventory/rainbowjellyfish_cooked", cookedfn, assets),
-    Prefab("common/inventory/rainbowjellyjerky", driedfn, assets),
-    Prefab("common/inventory/rainbowjellylight", lightfn, assets)
+return Prefab("rainbowjellyfish", defaultfn, assets),
+    Prefab("rainbowjellyfish_dead", deadfn, assets),
+    Prefab("rainbowjellyfish_cooked", cookedfn, assets),
+    Prefab("rainbowjellyjerky", driedfn, assets),
+    Prefab("rainbowjellylight", lightfn, assets)

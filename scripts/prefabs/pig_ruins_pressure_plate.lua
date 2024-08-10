@@ -219,4 +219,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/objects/pig_ruins_pressure_plate", fn, assets, prefabs)
+return Prefab("pig_ruins_pressure_plate", fn, assets, prefabs)

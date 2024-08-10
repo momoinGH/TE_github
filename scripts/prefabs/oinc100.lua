@@ -64,10 +64,10 @@ local function fn(Sim)
 
 
     inst:AddComponent("bait")
-    
+
     inst:AddComponent("tradable")
 
     return inst
 end
 
-return Prefab("common/inventory/oinc100", fn, assets, prefabs)
+return Prefab("oinc100", fn, assets, prefabs)

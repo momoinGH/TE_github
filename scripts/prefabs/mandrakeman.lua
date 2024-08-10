@@ -412,4 +412,4 @@ local function fn()
 end
 
 
-return Prefab("common/characters/mandrakeman", fn, assets, prefabs)
+return Prefab("mandrakeman", fn, assets, prefabs)

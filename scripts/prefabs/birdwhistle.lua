@@ -67,4 +67,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/antler", fn, assets)
+return Prefab("antler", fn, assets)

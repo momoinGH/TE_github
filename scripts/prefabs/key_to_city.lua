@@ -60,4 +60,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/key_to_city", fn, assets)
+return Prefab("key_to_city", fn, assets)

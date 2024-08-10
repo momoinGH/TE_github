@@ -141,4 +141,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("forest/animals/spider_monkey_herd", fn, assets, prefabs)
+return Prefab("spider_monkey_herd", fn, assets, prefabs)

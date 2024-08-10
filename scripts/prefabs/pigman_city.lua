@@ -1454,7 +1454,7 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
 end
 
 local function makepigman(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab)
-    return Prefab("common/objects/" .. name, makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab),
+    return Prefab("" .. name, makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab),
         assets, prefabs)
 end
 

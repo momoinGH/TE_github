@@ -143,4 +143,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/monsters/peekhen", fn, assets, prefabs)
+return Prefab("peekhen", fn, assets, prefabs)

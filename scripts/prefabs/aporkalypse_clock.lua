@@ -488,7 +488,7 @@ local function MakeClock(clock_num, mult, speed)
 	local build = "porkalypse_clock_0" .. clock_num
 	local sort_order = clock_num
 
-	return Prefab("common/objects/" .. name, make_clock_fn(bank, build, sort_order, mult, speed), assets)
+	return Prefab( name, make_clock_fn(bank, build, sort_order, mult, speed), assets)
 end
 
 return MakeClock(1, 1, 1),

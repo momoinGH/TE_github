@@ -77,4 +77,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/objects/fish_farm_sign", fn, assets, prefabs)
+return Prefab("fish_farm_sign", fn, assets, prefabs)

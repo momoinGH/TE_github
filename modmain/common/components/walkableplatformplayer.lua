@@ -37,7 +37,7 @@ end
 
 local function GetOffPlatformBefore(self)
     if TheWorld.ismastersim then
-        if self.platform and self.platform:IsValid() then
+        if self.platform and self.platform:IsValid() and self.platform:HasTag("shipwrecked_boat") then
             if self.platform.components.container then
                 self.platform.components.container.canbeopened = false
             end

@@ -1,5 +1,4 @@
 PrefabFiles = {
-  "tropical_boat_lamps",
   "grassnova",
   "axeobsidian",
   "armor_obsidian",
@@ -37,10 +36,7 @@ PrefabFiles = {
   "windtrail",
   "windswirl",
   "ventania",
-  "boattorch",
-  "boatlantern",
   "boatcannon",
-  "woodlegs_boatcannon",
   "quackeringram",
   "quackenbeak",
   "quackendrill",

@@ -37,4 +37,4 @@ local function fn()
     return inst
 end
 
-return Prefab("objects/turbine_blades", fn, assets)
+return Prefab("turbine_blades", fn, assets)

@@ -125,5 +125,5 @@ local function fncooked(Sim)
     return inst
 end
 
-return Prefab("common/inventory/lotus_flower1", fn, assets),
-    Prefab("common/inventory/lotus_flower1_cooked", fncooked, assets)
+return Prefab("lotus_flower1", fn, assets),
+    Prefab("lotus_flower1_cooked", fncooked, assets)

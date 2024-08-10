@@ -7,14 +7,14 @@ local assets =
 
 local firelevels =
 {
-    { anim = "level1", sound = "dontstarve/common/maxlight", radius = 1, intensity = .75, falloff = 1, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .1 },
-    { anim = "level2", sound = "dontstarve/common/maxlight", radius = 1.5, intensity = .8, falloff = .9, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .3 },
-    { anim = "level3", sound = "dontstarve/common/maxlight", radius = 2, intensity = .8, falloff = .8, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .6 },
-    { anim = "level4", sound = "dontstarve/common/maxlight", radius = 2.5, intensity = .9, falloff = .7, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = 1 },
-    { anim = "level1", sound = "dontstarve/common/maxlight", radius = 2, intensity = .75, falloff = .4, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .1 },
-    { anim = "level2", sound = "dontstarve/common/maxlight", radius = 3, intensity = .8, falloff = .4, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .3 },
-    { anim = "level3", sound = "dontstarve/common/maxlight", radius = 4, intensity = .8, falloff = .4, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .6 },
-    { anim = "level4", sound = "dontstarve/common/maxlight", radius = 6, intensity = .9, falloff = .4, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = 1 },
+    { anim = "level1", sound = "dontstarve/common/maxlight", radius = 1,   intensity = .75, falloff = 1,  colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .1 },
+    { anim = "level2", sound = "dontstarve/common/maxlight", radius = 1.5, intensity = .8,  falloff = .9, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .3 },
+    { anim = "level3", sound = "dontstarve/common/maxlight", radius = 2,   intensity = .8,  falloff = .8, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .6 },
+    { anim = "level4", sound = "dontstarve/common/maxlight", radius = 2.5, intensity = .9,  falloff = .7, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = 1 },
+    { anim = "level1", sound = "dontstarve/common/maxlight", radius = 2,   intensity = .75, falloff = .4, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .1 },
+    { anim = "level2", sound = "dontstarve/common/maxlight", radius = 3,   intensity = .8,  falloff = .4, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .3 },
+    { anim = "level3", sound = "dontstarve/common/maxlight", radius = 4,   intensity = .8,  falloff = .4, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = .6 },
+    { anim = "level4", sound = "dontstarve/common/maxlight", radius = 6,   intensity = .9,  falloff = .4, colour = { 207 / 255, 234 / 255, 245 / 255 }, soundintensity = 1 },
 }
 
 local function fn(Sim)
@@ -50,4 +50,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/fx/maxwelllight_flame", fn, assets)
+return Prefab("maxwelllight_flame", fn, assets)

@@ -510,7 +510,7 @@ local function fnobsidiantoollight()
 	return inst
 end
 
-return Prefab("common/inventory/spear_poison", poisonfn, assets),
+return Prefab("spear_poison", poisonfn, assets),
 	Prefab("common/inventory/spear_obsidian", obsidianfn, assets),
 	Prefab("common/inventory/needlespear", needlefn, assets),
 	Prefab("common/inventory/peg_leg", peglegfn, assets),

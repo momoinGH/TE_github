@@ -60,4 +60,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("common/inventory/ox_flute", fn, assets)
+return Prefab("ox_flute", fn, assets)
