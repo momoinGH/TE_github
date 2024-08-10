@@ -3,28 +3,68 @@
 --使用案例及最新版：https://n77a3mjegs.feishu.cn/docx/K9bUdpb5Qo85j2xo8XkcOsU1nuh?from=from_copylink
 --这个文件不会被调用，单纯写一些源码的注解，虽然删了更节省体积，不过我相信也许会对其他moder有些帮助，而且全局函数在一些编译器下会提供代码补全功能
 
-TUNING = {}
-GLOBAL ={}
-PI = math.pi
-PI2 = PI * 2
-TWOPI = PI2
-SQRT2 = math.sqrt(2)
-GOLDENANGLE = PI * (3 - math.sqrt(5))
-DEGREES = PI / 180
-RADIANS = 180 / PI
-FRAMES = 1 / 30
+STRINGS         = {}
+TheWorld        = {}
+ThePlayer       = {}
+
+TheCamera       = {}
+env             = {}
+TUNING          = {}
+GLOBAL          = {}
+ACTIONS         = {}
+EQUIPSLOTS      = {}
+COLLISION       = {}
+Prefabs         = {}
+GROUND          = {}
+WORLD_TILES     = {}
+GROUND_NAMES    = {}
+GROUND_FLOORING = {}
+Input           = {}
+PI              = math.pi
+PI2             = PI * 2
+TWOPI           = PI2
+SQRT2           = math.sqrt(2)
+GOLDENANGLE     = PI * (3 - math.sqrt(5))
+DEGREES         = PI / 180
+RADIANS         = 180 / PI
+FRAMES          = 1 / 30
 function Class(base, _ctor, props) end
+
+Vector3 = Class(function(self, x, y, z) end)
+Brain = Class(function(self) end)
+State = Class(function(self, args) end)
+EventHandler = Class(function(self, name, fn) end)
+TimeEvent = Class(function(self, time, fn) end)
 function CreateEntity(name) end
+
+-- This isn't for modders to use: see environment version added in InsertPostInitFunctions
+function GetModConfigData(optionname, modname, get_local_config) end
+
 function MakeInventoryPhysics(inst, mass, rad) end
+
+local ModIndex = Class(function(self) end)
+function ModIndex:GetModActualName(fancyname) end
+
 function MakeCharacterPhysics(inst, mass, rad) end
+
 function MakeInventoryFloatable(inst, size, offset, scale, swap_bank, float_index, swap_data) end
+
 function MakeSmallBurnable(inst, time, offset, structure, sym) end
+
 function MakeSmallPropagator(inst) end
+
+function PlayFootstep(inst, volume, ispredicted) end
+
 function MakeHauntableLaunch(inst, chance, speed, cooldown, haunt_value) end
-Asset = Class( function(self, type, file, param) end)
-Prefab = Class(function(self, name, fn, assets, deps, force_path_search)end)
+
+function FrameEvent(frame, fn) end
+
+RemapSoundEvent = function(name, new_name) end
+Asset = Class(function(self, type, file, param) end)
+Prefab = Class(function(self, name, fn, assets, deps, force_path_search) end)
 --- 函数，或者值本身，很好用
 function FunctionOrValue(func_or_val, ...) end
+
 modimport = function(modulename) end
 EntityScript = Class(function(self, entity) end)
 ------------------------------------------------------------------------------------------------------------------------
@@ -33,6 +73,8 @@ EntityScript = Class(function(self, entity) end)
 ---输出当前代码所在行信息，格式为所在文件+行数+函数名，例如：@scripts/components/weapon.lua:106 in OnAttack
 function CalledFrom()
 end
+
+function GetRandomWithVariance(baseval, randomval) end
 
 ---FindEntity 按条件寻找任意符合条件的实体，内部使用TheSim:FindEntities，如果没有符合条件的会返回nil
 ---@param fn function 在标签筛选后再使用函数进行判断
@@ -701,6 +743,9 @@ ThePlayer.fx.AnimState:SetFinalOffset(0);
 ThePlayer.fx.AnimState:SetLayer(LAYER_BACKGROUND);
 -- 可以让物品一闪一闪的
 inst.AnimState:SetHaunted(true)
+-- 获取对象当前的面向（相对摄像机）
+print(ThePlayer.AnimState:GetCurrentFacing())
+
 ------------------------------------------------------------------------------------------------------------------------
 -- 14. physics.lua
 
@@ -974,3 +1019,6 @@ env.RemapSoundEvent = function(name, new_name) end
 
 -- 判断某个mod是否启用
 KnownModIndex:IsModEnabled("workshop-1289779251")
+
+
+function IsSimPaused() end

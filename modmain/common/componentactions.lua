@@ -325,14 +325,25 @@ AddComponentAction("SCENE", "store", function(inst, doer, actions)
     table.insert(actions, ACTIONS.STOREOPEN)
 end)
 
--- 可以收回小船
-AddComponentAction("SCENE", "portablestructure",
-    function(inst, doer, actions, right) --TODO right不能用，一直为nil，是哪里覆盖把right弄丢了吗
-        if not inst:HasTag("fire")
-            and inst:HasTag("boat")
-            and (not inst.replica.container or not inst.replica.container:IsOpenedBy(doer))
-            and doer:GetCurrentPlatform() ~= inst
-        then
-            table.insert(actions, ACTIONS.RETRIEVE)
-        end
-    end)
+
+AddComponentAction("SCENE", "portablestructure", function(inst, doer, actions, right)
+    if right
+        and inst:HasTag("shipwrecked_boat")
+        and not inst:HasTag("fire")
+        and (not inst.replica.container or not inst.replica.container:IsOpenedBy(doer))
+        and doer:GetCurrentPlatform() ~= inst
+    then
+        -- 可以收回小船
+        table.insert(actions, ACTIONS.RETRIEVE)
+    end
+end)
+
+AddComponentAction("SCENE", "shipwreckedboat", function(inst, doer, actions, right)
+    if inst:HasTag("shipwrecked_boat")
+        and not inst:HasTag("fire")
+        and inst.GetBoatPlayer and not inst:GetBoatPlayer()
+    then
+        -- 海难小船登船
+        table.insert(actions, ACTIONS.BOATMOUNT)
+    end
+end)

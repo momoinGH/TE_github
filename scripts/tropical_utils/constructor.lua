@@ -192,7 +192,6 @@ end
 ---在增强游戏已有brain时使用，防止使用的brain被其他mod不小心初始化了
 ---@param requirePath string 调用require的参数
 ---@param initFn function|nil 如果原brain在构造器里初始化了一些属性，可以在该函数里初始化
----@return Brain brain
 function FN.CopyBrainFn(requirePath, initFn)
     local NewBrain = Class(Brain, function(self, inst)
         Brain._ctor(self, inst)
@@ -316,7 +315,7 @@ function FN.FullHelmOnUnEquip(inst, owner)
 end
 
 ---添加Actions，写个方法省事点，需要env
----@param data table
+---@param data table|nil
 ---@param id string
 ---@param str string|fn
 ---@param fn function

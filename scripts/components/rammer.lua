@@ -1,21 +1,17 @@
+-- 为小船船头锤服务，刷帧检测，虽然我觉得用Physics:SetCollisionCallback(OnCollide)回更好
 local Rammer = Class(function(self, inst)
     self.inst = inst
+
     self.minSpeed = 2.0
     self.cooldown = 0.0
     self.checkRadius = 3
     self.hitRadius = 1
-
     self.wasActive = false
-
     self.ramFilters = {}
-    self.onActivate = function() end
-    self.onDeactivate = function() end
-    self.onUpdate = function(dt) end
-    self.onRamTarget = function(target) end
-
-    if self.inst == nil then
-        error("Rammer Component needs to be initialized with a valid Entity instance!")
-    end
+    self.onActivate = nil
+    self.onDeactivate = nil
+    self.onUpdate = nil
+    self.onRamTarget = nil --当与目标相撞时
 
     self.inst:StartUpdatingComponent(self)
 end)
@@ -24,78 +20,41 @@ function Rammer:StartCooldown()
     self.cooldown = 5 * FRAMES
 end
 
+local function isInHitCone(self, boat, item)
+    if boat.Physics == nil or item.Physics == nil then
+        return false
+    end
+
+    local origin = self.inst:GetPosition()
+    local point = item:GetPosition()
+    local d = (point - origin):GetNormalized()
+    local maxDistance = self.hitRadius + boat.Physics:GetRadius() + item.Physics:GetRadius()
+
+    if d:LengthSq() > (maxDistance * maxDistance) then
+        return false
+    else
+        local v = Vector3(boat.Physics:GetVelocity()):GetNormalized()
+        local dot = v:Dot(d)
+        return dot > 0.75
+    end
+end
+
+local RAMMER_NO_TAGS = { "falling", "FX", "NOCLICK", "DECOR", "INLIMBO", "unramable" }
 function Rammer:CheckRamHit()
-    if self.inst == nil or self.inst:IsValid() == false then
-        print("Component instance is invalid!")
-        return
-    end
+    if not self.onRamTarget then return end
 
-    if self.onRamTarget == nil then
-        return
-    end
+    local boat = self.inst.components.shipwreckedboatparts:GetBoat()
+    if not boat then return end --不应该
 
-    local driver = self:FindDriver()
-
-    if driver == nil then
-        print("could not determine quackeringRam's driver, are you using a dev-teleport-boat?")
-        return
-    end
-
-    local driverVelocity = Vector3(driver.Physics:GetVelocity())
-
-    local function isInHitCone(item)
-        local origin = Vector3(self.inst.Transform:GetWorldPosition())
-        local point = Vector3(item.Transform:GetWorldPosition())
-
-        local d = (point - origin)
-        d = d:GetNormalized()
-
-        if driver == nil or driver.Physics == nil or item == nil or item.Physics == nil then
-            return false
-        end
-
-        local maxDistance = self.hitRadius + driver.Physics:GetRadius() + item.Physics:GetRadius()
-
-        local l = d:LengthSq()
-        if l > (maxDistance * maxDistance) then
-            return false
-        else
-            local v = driverVelocity:GetNormalized()
-            local dot = v:Dot(d)
-            return dot > 0.75
-        end
-    end
-
-    local yestags = {}
-    local notags = { "falling", "FX", "NOCLICK", "DECOR", "INLIMBO", "unramable" }
-
-    local pos = Vector3(self.inst.Transform:GetWorldPosition())
-    local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, driver.Physics:GetRadius() + self.hitRadius * 2, yestags,
-        notags)
-
-    for i = #ents, 1, -1 do
-        local item = ents[i]
-        local remove = false
-
-        if item.components.health and item.components.health.currenthealth <= 0 then
-            remove = true
-        end
-
-        local driver = self:FindDriver()
-
-        if not remove and item:HasTag("shadow") and driver.components.sanity and not driver.components.sanity:IsCrazy() then
-            remove = true
-        end
-
-        if remove then
-            table.remove(ents, i)
-        end
-    end
-
-    -- foreach entity, notify callback
-    for k, v in pairs(ents) do
-        if v ~= driver then -- avoid self-ramming
-            if isInHitCone(v) then
+    local x, y, z = boat.Transform:GetWorldPosition()
+    local driver = self.inst.components.shipwreckedboatparts:GetDriver()
+    for _, v in ipairs(TheSim:FindEntities(x, y, z, boat.Physics:GetRadius() + self.hitRadius * 2, nil, RAMMER_NO_TAGS)) do
+        if v ~= driver
+            and v ~= boat
+            and not IsEntityDead(v)
+            and (not v.components.inventoryitem or not v.components.inventoryitem:IsHeld())
+        then
+            if isInHitCone(self, boat, v) then
                 self.onRamTarget(self.inst, v)
             end
         end
@@ -106,53 +65,37 @@ function Rammer:OnUpdate(dt)
     local isActive = self:IsActive()
 
     -- toggle on/off callbacks
-    if isActive == true and self.wasActive == false then
-        self.onActivate()
-    elseif isActive == false and self.wasActive == true then
-        self.onDeactivate()
+    if isActive and not self.wasActive then
+        if self.onActivate then
+            self.onActivate(self.inst)
+        end
+    elseif not isActive and self.wasActive then
+        if self.onDeactivate then
+            self.onDeactivate(self.inst)
+        end
     end
 
     if isActive then
         self:CheckRamHit()
 
         if self.onUpdate ~= nil then
-            self.onUpdate(dt)
+            self.onUpdate(self.inst, dt)
         end
     end
-    --self:DebugRender()
 
-    if self.cooldown > 0.0 then
-        self.cooldown = self.cooldown - dt
-    elseif self.cooldown < 0.0 then
-        self.cooldown = 0.0
-    end
-
+    self.cooldown = math.max(0, self.cooldown - dt)
     self.wasActive = isActive
-end
-
-function Rammer:FindDriver()
-    local driver = nil
-    if self.inst == nil or self.inst:IsValid() == false then
-        return nil
-    end
-    if self.inst.navio1 ~= nil then
-        driver = self.inst.navio1
-        --print(""..self.inst.navio.prefab.."")
-    end
-
-
-    return driver
 end
 
 function Rammer:IsActive()
     -- TODO: consider storing the driver whenever it changes to avoid the constant lookup
-    local driver = self:FindDriver()
+    local boat = self.inst.components.shipwreckedboatparts:GetBoat()
 
-    if driver == nil then
+    if boat == nil then
         return false
     end
 
-    local v = Vector3(driver.Physics:GetVelocity())
+    local v = Vector3(boat.Physics:GetVelocity())
     local minSpeedSq = self.minSpeed * self.minSpeed
 
     return (v:LengthSq() >= minSpeedSq) and (self.cooldown <= 0.0)

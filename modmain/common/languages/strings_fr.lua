@@ -1375,6 +1375,7 @@ STRINGS.ACTIONS.LANTERNON = "Allumer"
 STRINGS.ACTIONS.BOATCANNON = "Tirez"
 STRINGS.ACTIONS.RETRIEVE = "Récupérer"
 STRINGS.ACTIONS.PEER = "Scruter"
+STRINGS.ACTIONS.BOATMOUNT = "Monter sur le bateau"
 
 ----------------------------- RAWLING -----------------------------
 STRINGS.NAMES.RAWLING = "Basket-boule"

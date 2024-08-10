@@ -40,16 +40,16 @@ STRINGS.UI.COOKBOOK.ICEDTEA                                                     
 STRINGS.UI.COOKBOOK.NETTLELOSANGE                                               = " Protects you from pollen"
 STRINGS.UI.COOKBOOK.MEATED_NETTLE                                               = " Protects you from pollen"
 
-STRINGS.UI.MODSSCREEN.MOD_DEPENDENCIES_TITLE = "Dependencies Required"
-STRINGS.UI.MODSSCREEN.MOD_HAS_DEPENDENCIES =
+STRINGS.UI.MODSSCREEN.MOD_DEPENDENCIES_TITLE                                    = "Dependencies Required"
+STRINGS.UI.MODSSCREEN.MOD_HAS_DEPENDENCIES                                      =
 "%s requires other mods to run, it will subscribe and enable these if you enable this mod:"
-STRINGS.UI.MODSSCREEN.MOD_DEPENDENTS_TITLE = "Required By Other Mods"
-STRINGS.UI.MODSSCREEN.MOD_HAS_DEPENDENTS =
+STRINGS.UI.MODSSCREEN.MOD_DEPENDENTS_TITLE                                      = "Required By Other Mods"
+STRINGS.UI.MODSSCREEN.MOD_HAS_DEPENDENTS                                        =
 "%s is required for other mods to run, if you disable this mod these mods will be disabled:"
-STRINGS.UI.MODSSCREEN.DISABLE_ALL = "Disable All"
-STRINGS.UI.MODSSCREEN.CANCEL = "Cancel"
-STRINGS.UI.MODSSCREEN.REQUIRED_MODS_DOWNLOADING_TITLE = "Required Mods Are Downloading"
-STRINGS.UI.MODSSCREEN.REQUIRED_MODS_DOWNLOADING =
+STRINGS.UI.MODSSCREEN.DISABLE_ALL                                               = "Disable All"
+STRINGS.UI.MODSSCREEN.CANCEL                                                    = "Cancel"
+STRINGS.UI.MODSSCREEN.REQUIRED_MODS_DOWNLOADING_TITLE                           = "Required Mods Are Downloading"
+STRINGS.UI.MODSSCREEN.REQUIRED_MODS_DOWNLOADING                                 =
 "The game has not finished downloading required mods.\nEither wait until the mods have finished downloading, or disable mods which have dependencies."
 ----------------------------- TAB -----------------------------
 STRINGS.TABS.OBSIDIANTAB                                                        = "Volcanic"
@@ -396,7 +396,7 @@ STRINGS.NAMES.RUG_FUR                                                           
 STRINGS.NAMES.RABID_BEETLE                                                      = "Rabid Beetle"
 STRINGS.NAMES.DECO_RUINS_PIGMAN_RELIEF4_BLUE                                    = "遗迹猪人浮雕4带帽猪头蓝"
 STRINGS.NAMES.TURF_MOSS                                                         = "Mossy Turf"
-STRINGS.NAMES.SHADOWWAXWELLBOAT                                                = "暗影船"
+STRINGS.NAMES.SHADOWWAXWELLBOAT                                                 = "暗影船"
 STRINGS.NAMES.VAMPIRE_BAT_WING                                                  = "Batilisk Wing?"
 STRINGS.NAMES.PIG_RUINS_ENTRANCE                                                = "Ruinous Entrance"
 STRINGS.NAMES.PIG_RUINS_WALL_VINES_WEST                                         = "遗迹藤蔓挂墙左"
@@ -8903,7 +8903,7 @@ STRINGS.ACTIONS.REPLATE           = "Replate"
 STRINGS.ACTIONS.FILLED            = "Fill"
 STRINGS.ACTIONS.KILLSOFTLY        = "屠宰"
 STRINGS.ACTIONS.MILK              = "Milk"
-
+STRINGS.ACTIONS.BOATMOUNT         = "Boat Mount"
 
 
 

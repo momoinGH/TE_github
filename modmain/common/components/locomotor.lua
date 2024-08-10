@@ -128,7 +128,7 @@ AddComponentPostInit("locomotor", function(self)
 
     if self.inst:HasTag("player") then --只在主机修改，如果开启了延迟补偿则不特殊处理，当做普通的船用
         Utils.FnDecorator(self, "SetMotorSpeed", PlayerSetMotorSpeedBefore)
-        Utils.FnDecorator(self, "CheckEdge", PlayerCheckEdgeBefore)
+        -- Utils.FnDecorator(self, "CheckEdge", PlayerCheckEdgeBefore)
         Utils.FnDecorator(self, "OnUpdate", PlayerOnUpdateBefore)
     end
 

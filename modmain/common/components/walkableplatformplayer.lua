@@ -42,6 +42,9 @@ local function GetOffPlatformBefore(self)
                 self.platform.components.container.canbeopened = false
             end
             self.platform.components.shipwreckedboat:OnPlayerDismounted(self.inst)
+            if self.platform.components.container then
+                self.platform.components.container:Close(self.inst)
+            end
         end
     end
 end

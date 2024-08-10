@@ -1,6 +1,7 @@
 local Badge = require "widgets/badge"
 local UIAnim = require "widgets/uianim"
 local Text = require "widgets/text"
+local Image = require "widgets/image"
 
 local BloodmoonBadge = Class(Badge, function(self, owner)
     Badge._ctor(self, "bloodmoon", owner)

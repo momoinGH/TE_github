@@ -4281,3 +4281,13 @@ AddStategraphState("wilson", State {
         end)
     }
 })
+
+-- 登船
+AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BOATMOUNT, function(inst, act)
+    local x, y, z = act.target.Transform:GetWorldPosition()
+    inst.components.locomotor:StartHopping(x, z, act.target)
+end))
+AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATMOUNT, function(inst, act)
+    local x, y, z = act.target.Transform:GetWorldPosition()
+    inst.components.locomotor:StartHopping(x, z, act.target)
+end))

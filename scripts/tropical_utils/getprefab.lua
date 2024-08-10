@@ -240,7 +240,7 @@ end
 
 ---恐惧周围单位，来自暗影秘典，默认只有有hauntable组件的生物会被恐惧
 ---@param targets table 要排除的对象表，键为对象
----@param data {radius, MUST_TAGS, NO_TAGS, ONE_OF_TAGS, panicTime,speedMulKey, speedMul,noPanicTargetFn}
+---@param data table {radius, MUST_TAGS, NO_TAGS, ONE_OF_TAGS, panicTime,speedMulKey, speedMul,noPanicTargetFn}
 ---{半径，必须标签，禁止标签，任意之一标签，恐惧时间，恐惧移速倍率影响的key，被恐惧后的移速倍率，对不能被恐惧对象的处理 返回true就记录targets表中}
 function FN.TryTrapTarget(inst, targets, data)
     local TARGET_RADIUS = Utils.GetVal(data, "radius", 6)
@@ -378,7 +378,7 @@ local function TimeoutRepel(inst, creatures, task)
 end
 
 ---击退其他单位，来自暗影编织者的护盾特效stalker_shield.lua
----@param data{pos, radius, MUST_TAGS, CANT_TAGS, damage}
+---@param data table {pos, radius, MUST_TAGS, CANT_TAGS, damage}
 function FN.StartRepel(inst, data)
     local pos = Utils.GetVal(data, "pos", inst:GetPosition())
     local radius = Utils.GetVal(data, "radius", 3)

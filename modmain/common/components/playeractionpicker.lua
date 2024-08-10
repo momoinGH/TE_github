@@ -60,7 +60,8 @@ local function GetNoEquipPointActions(self, pos, useitem, right, target)
     return sorted_acts
 end
 
-local function GetClickActionsAfter(retTab, self, position, right)
+-- 如果在海难船上的时候，POINT类型的action不需要手持什么东西
+local function NoEquipActivator(retTab, self, position, right)
     local acts = retTab[1]
 
     --追加的bufferedaction，这里第三个参数用于componentaction的inst参数，这里可以加判断修改第三个参数，
@@ -75,15 +76,46 @@ local function GetClickActionsAfter(retTab, self, position, right)
 end
 
 local function GetLeftClickActionsAfter(retTab, self, position)
-    return GetClickActionsAfter(retTab, self, position)
+    return NoEquipActivator(retTab, self, position)
+end
+
+local function RemoveBoat(inst, self)
+    if self.current_boat and self.current_boat:IsValid() then
+        self:UnregisterContainer(self.current_boat)
+    end
+
+    self.unregisterBoatTask = nil
+    self.current_boat = nil
+end
+
+local function GetRightClickActionsBefore(self, position, target)
+    -- 这部分代码主要是让玩家可以对海难船检查SCENE类型的componentaction，玩家可以收回船
+    -- 因为含有walkableplatform标签的目标不会调用GetSceneActions(target, true)
+    if target
+        and target:HasTag("walkableplatform")
+        and target:HasTag("shipwrecked_boat")
+    then
+        if self.unregisterBoatTask then
+            self.unregisterBoatTask:Cancel()
+            if self.current_boat and self.current_boat:IsValid() then
+                RemoveBoat(self.inst, self)
+            end
+        end
+
+        self.current_boat = target
+        self:RegisterContainer(target)
+        self.unregisterBoatTask = self.inst:DoTaskInTime(3, RemoveBoat, self)
+    end
 end
 
 local function GetRightClickActionsAfter(retTab, self, position)
-    return GetClickActionsAfter(retTab, self, position, true)
+    return NoEquipActivator(retTab, self, position, true)
 end
 
--- 如果在海难船上的时候，POINT类型的action不需要手持什么东西
 AddComponentPostInit("playeractionpicker", function(self)
+    self.current_boat = nil --鼠标悬停的海难小船
+    self.unregisterBoatTask = nil
+
     Utils.FnDecorator(self, "GetLeftClickActions", nil, GetLeftClickActionsAfter)
-    Utils.FnDecorator(self, "GetRightClickActions", nil, GetRightClickActionsAfter)
+    Utils.FnDecorator(self, "GetRightClickActions", GetRightClickActionsBefore, GetRightClickActionsAfter)
 end)

@@ -419,21 +419,6 @@ Constructor.AddAction({ priority = 9, rmb = true, distance = 20, mount_valid = f
     end
 )
 
--- 收回小船
-Constructor.AddAction({ priority = 11, rmb = true, distance = 4, mount_valid = false },
-    "RETRIEVE",
-    STRINGS.ACTIONS.RETRIEVE,
-    function(act)
-        if act.target.components.portablestructure
-            and act.target.components.walkableplatform
-            and not next(act.target.components.walkableplatform:GetPlayersOnPlatform()) --船上不能有玩家
-        then
-            act.target.components.portablestructure:Dismantle(act.doer)
-            return true
-        end
-    end
-)
-
 Constructor.AddAction({ priority = 10, rmb = true, distance = 1, mount_valid = false },
     "BOATREPAIR",
     STRINGS.ACTIONS.BOATREPAIR,
@@ -1160,4 +1145,27 @@ Constructor.AddAction(nil, "MILK", STRINGS.ACTIONS.MILK, function(act)
         and act.target:HasTag("milkable")
         and act.invobject.components.milker:Fill()
 end
+)
+
+-- 海难小船登船
+Constructor.AddAction({ priority = 10, distance = 4, mount_valid = false, encumbered_valid = true },
+    "BOATMOUNT",
+    STRINGS.ACTIONS.BOATMOUNT,
+    function(act) return true end --不需要state
+)
+
+
+-- 收回小船
+Constructor.AddAction({ priority = 100, rmb = true, distance = 4, mount_valid = false },
+    "RETRIEVE",
+    STRINGS.ACTIONS.RETRIEVE,
+    function(act)
+        if act.target.components.portablestructure
+            and act.target.components.walkableplatform
+            and not next(act.target.components.walkableplatform:GetPlayersOnPlatform()) --船上不能有玩家
+        then
+            act.target.components.portablestructure:Dismantle(act.doer)
+            return true
+        end
+    end
 )

@@ -2,6 +2,9 @@
     "Lua.diagnostics.disable": [
         "undefined-field",
         "need-check-nil",
-        "inject-field"
+        "inject-field",
+        "lowercase-global",
+        "deprecated",
+        "undefined-doc-name"
     ]
 }

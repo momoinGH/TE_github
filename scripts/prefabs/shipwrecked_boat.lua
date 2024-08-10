@@ -31,7 +31,10 @@ local sounds = {
 
 local BOAT_COLLISION_SEGMENT_COUNT = 20
 
-local RADIUS = 2 --太大会导致很容易拉着海带跑来跑去玩家还够不着，太小会导致玩家跳不上去
+--上船前的半径，太大会导致很容易拉着海带跑来跑去玩家还够不着，太小会导致玩家跳不上去
+--2这个值可以跳上船，但是下不来,需要覆盖locomotor的CheckEdge方法
+--0.2这个值可以跳下船，但是上不去，可以使用componentaction来实现上船，并且因为半径小，所以碰撞范围也小，而且保证不会有第二个玩家上船，是合适的选择
+local RADIUS = 0.2
 
 local function sinkloot(inst)
     if inst.components.lootdropper then
@@ -83,6 +86,15 @@ local function on_stop_steering(inst)
     if ThePlayer and ThePlayer.components.playercontroller ~= nil and ThePlayer.components.playercontroller.isclientcontrollerattached then
         inst.lastreticuleangle = nil
         inst.components.reticule:DestroyReticule()
+    end
+end
+
+--- 用于客机判断，船上是否有玩家，虽然主机也能用
+local function GetBoatPlayer(inst)
+    for _, v in ipairs(AllPlayers) do
+        if math.sqrt(v:GetDistanceSqToInst(inst)) <= RADIUS and v:GetCurrentPlatform() == inst then
+            return v
+        end
     end
 end
 
@@ -286,7 +298,7 @@ local function common(minimap, bank, build, loots, data)
     inst:AddComponent("walkableplatform")
     inst.components.walkableplatform.platform_radius = RADIUS
     --生成一圈碰撞墙，防止玩家上船的时候跳过头直接跳海里了
-    inst.components.walkableplatform.player_collision_prefab = "shipwrecked_boat_player_collision"
+    -- inst.components.walkableplatform.player_collision_prefab = "shipwrecked_boat_player_collision"
 
     inst:AddComponent("healthsyncer")
     inst.components.healthsyncer.max_health = data.health or TUNING.BOAT.HEALTH
@@ -307,6 +319,8 @@ local function common(minimap, bank, build, loots, data)
 
     inst.walksound = "wood"
     inst.doplatformcamerazoom = net_bool(inst.GUID, "doplatformcamerazoom", "doplatformcamerazoomdirty")
+
+    inst.GetBoatPlayer = GetBoatPlayer
 
     if not TheNet:IsDedicated() then
         inst:ListenForEvent("endsteeringreticule", function(inst2, event_data)
@@ -346,7 +360,6 @@ local function common(minimap, bank, build, loots, data)
     inst:AddComponent("boatphysics")
     inst:AddComponent("boatdrifter")
     inst:AddComponent("savedrotation")
-    inst:AddComponent("tropical_noequipactivator")
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(data.health or TUNING.BOAT.HEALTH)
@@ -460,7 +473,6 @@ local function boat_player_collision_fn()
     phys:CollidesWith(COLLISION.CHARACTERS)
     phys:CollidesWith(COLLISION.WORLD)
     phys:SetTriangleMesh(build_boat_collision_mesh(RADIUS + 0.1, 3)) --大了碰撞体积就大，小了跳船时容易掉海里
-
     inst:AddTag("NOBLOCK")
     inst:AddTag("NOCLICK")
 
