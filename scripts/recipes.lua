@@ -360,6 +360,18 @@ AddRecipe2("quagmire_seedpacket_mix",	{Ingredient("quagmire_coin1", 1)},	TECH.GO
 AddRecipe2("quagmire_lamp_post",        {Ingredient("lantern", 1), Ingredient("cutstone", 1), Ingredient("transistor", 1)}, TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_lamp_post_placer"},  {"GORGE"})
 AddRecipe2("quagmire_lamp_short",       {Ingredient("lantern", 1), Ingredient("cutstone", 1), Ingredient("transistor", 1)}, TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_lamp_short_placer",},{"GORGE"})
 
+AddRecipe2("quagmire_altar_statue1",  {Ingredient("redgem", 2), Ingredient("cutstone", 2)},    TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_altar_statue1_placer",},{"GORGE"})
+AddRecipe2("quagmire_altar_statue2",  {Ingredient("redgem", 2), Ingredient("cutstone", 1)},    TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_altar_statue2_placer",},{"GORGE"})
+AddRecipe2("quagmire_altar_queen",    {Ingredient("redgem", 2), Ingredient("purplegem", 1),
+                                       Ingredient("yellowgem", 1),Ingredient("cutstone", 4)},  TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_altar_queen_placer",},  {"GORGE"})
+AddRecipe2("quagmire_altar_bollard",  {Ingredient("cutstone", 1)},                             TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_altar_bollard_placer",},{"GORGE"})
+AddRecipe2("quagmire_altar_ivy",      {Ingredient("cutgrass", 2), Ingredient("cutstone", 1)},  TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_altar_ivy_placer",},    {"GORGE"})
+
+AddRecipe2("quagmire_park_fountain",  {Ingredient("purplegem", 1), Ingredient("cutstone", 1)}, TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_park_fountain_placer",},{"GORGE"})
+AddRecipe2("quagmire_park_angel",     {Ingredient("redgem", 1), Ingredient("cutstone", 2)},    TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_park_angel_placer",},   {"GORGE"})
+AddRecipe2("quagmire_park_angel2",    {Ingredient("redgem", 1), Ingredient("cutstone", 2)},    TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_park_angel2_placer",},  {"GORGE"})
+AddRecipe2("quagmire_park_urn",       {Ingredient("redgem", 1), Ingredient("cutstone", 2)},    TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_park_urn_placer",},     {"GORGE"})
+AddRecipe2("quagmire_park_obelisk",   {Ingredient("cutstone", 3)},                             TECH.GORGE_TWO, {atlas=g_atlas, nounlock=true, placer="quagmire_park_obelisk_placer",}, {"GORGE"})
 
 --TURFS--
 --Sw
