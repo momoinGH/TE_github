@@ -1,6 +1,7 @@
 --local cooking = require("smelting")
 local night_time = 60
 local BASE_COOK_TIME = night_time * .3333
+local smelting = require("smelting")
 
 local Melter = Class(function(self, inst)
 	self.inst = inst
@@ -21,7 +22,7 @@ local Melter = Class(function(self, inst)
 
 	-- stuff to make warly's special recipes possible
 	self.specialcookername = nil -- a special cookername to check first before falling back to cookername default
-	self.productcooker = nil     -- hold on to the cookername that is cooking the current product
+	self.productcooker = nil  -- hold on to the cookername that is cooking the current product
 
 	self.inst:AddTag("stewer")
 end)
@@ -45,20 +46,6 @@ local function dostew(inst)
 	if stewercmp.ondonecooking then
 		stewercmp.ondonecooking(inst)
 	end
-	--[[
-	if stewercmp.product ~= nil then
-		local cooker = stewercmp.productcooker or (stewercmp.cookername or stewercmp.inst.prefab)
-		local prep_perishtime = (cooking.recipes and cooking.recipes[cooker] and cooking.recipes[cooker][stewercmp.product] and cooking.recipes[cooker][stewercmp.product].perishtime) and cooking.recipes[cooker][stewercmp.product].perishtime or TUNING.PERISH_SUPERFAST
-		local prod_spoil = stewercmp.product_spoilage or 1
-		stewercmp.spoiltime = prep_perishtime * prod_spoil
-		stewercmp.spoiltargettime =  GetTime() + stewercmp.spoiltime
-		stewercmp.spoiltask = stewercmp.inst:DoTaskInTime(stewercmp.spoiltime, function(inst)
-			if inst.components.melter and inst.components.melter.onspoil then
-				inst.components.melter.onspoil(inst)
-			end
-		end)
-	end
-	]]
 	stewercmp.done = true
 	inst:AddTag("alloydone")
 	stewercmp.cooking = nil
@@ -79,17 +66,29 @@ function Melter:CanCook()
 	return self.inst.components.container ~= nil and self.inst.components.container:IsFull()
 end
 
+local function count_components(tbl) -- 临时放这
+    local lst = {}
+    for _, v in pairs(tbl) do
+        if not lst[v] then
+            lst[v] = 1
+        else
+            lst[v] = lst[v] + 1
+        end
+    end
+    return lst
+end
+
 function Melter:StartCooking()
 	if not self.done and not self.cooking then
-		if self.inst.components.container then
+		local container = self.inst.components.container
+		if container then
+
 			self.done = nil
 			self.cooking = true
 
 			if self.onstartcooking then
 				self.onstartcooking(self.inst)
 			end
-
-
 
 			local spoilage_total = 0
 			local spoilage_n = 0
@@ -98,91 +97,23 @@ function Melter:StartCooking()
 			self.product = "ash"
 
 			if self.inst.replica.container then
-				local um = self.inst.replica.container:GetItemInSlot(1)
-				local dois = self.inst.replica.container:GetItemInSlot(2)
-				local tres = self.inst.replica.container:GetItemInSlot(3)
-				local quatro = self.inst.replica.container:GetItemInSlot(4)
+				local item1 = self.inst.replica.container:GetItemInSlot(1) and
+					self.inst.replica.container:GetItemInSlot(1).prefab
+				local item2 = self.inst.replica.container:GetItemInSlot(2) and
+					self.inst.replica.container:GetItemInSlot(2).prefab
+				local item3 = self.inst.replica.container:GetItemInSlot(3) and
+					self.inst.replica.container:GetItemInSlot(3).prefab
+				local item4 = self.inst.replica.container:GetItemInSlot(4) and
+					self.inst.replica.container:GetItemInSlot(4).prefab
 
-				if self.inst.replica.container:GetItemInSlot(1) and self.inst.replica.container:GetItemInSlot(1).prefab == "flint" and
-					self.inst.replica.container:GetItemInSlot(2) and self.inst.replica.container:GetItemInSlot(2).prefab == "flint" and
-					self.inst.replica.container:GetItemInSlot(3) and self.inst.replica.container:GetItemInSlot(3).prefab == "flint" and
-					self.inst.replica.container:GetItemInSlot(4) and self.inst.replica.container:GetItemInSlot(4).prefab == "flint" then
-					self.product = "nitre"
+				local items = count_components({ item1, item2, item3, item4 })
+
+				local function getcount(item)
+					return items[item] and items[item] or 0
 				end
 
-				if
-					self.inst.replica.container:GetItemInSlot(1) and
-					(self.inst.replica.container:GetItemInSlot(1).prefab == "iron" or self.inst.replica.container:GetItemInSlot(1).prefab == "magnifying_glass" or self.inst.replica.container:GetItemInSlot(1).prefab == "goldpan" or self.inst.replica.container:GetItemInSlot(1).prefab == "ballpein_hammer" or self.inst.replica.container:GetItemInSlot(1).prefab == "shears" or self.inst.replica.container:GetItemInSlot(1).prefab == "candlehat") and
-
-
-					self.inst.replica.container:GetItemInSlot(2) and
-					(self.inst.replica.container:GetItemInSlot(2).prefab == "iron" or self.inst.replica.container:GetItemInSlot(2).prefab == "magnifying_glass" or self.inst.replica.container:GetItemInSlot(2).prefab == "goldpan" or self.inst.replica.container:GetItemInSlot(2).prefab == "ballpein_hammer" or self.inst.replica.container:GetItemInSlot(2).prefab == "shears" or self.inst.replica.container:GetItemInSlot(2).prefab == "candlehat") and
-
-					self.inst.replica.container:GetItemInSlot(3) and
-					(self.inst.replica.container:GetItemInSlot(3).prefab == "iron" or self.inst.replica.container:GetItemInSlot(3).prefab == "magnifying_glass" or self.inst.replica.container:GetItemInSlot(3).prefab == "goldpan" or self.inst.replica.container:GetItemInSlot(3).prefab == "ballpein_hammer" or self.inst.replica.container:GetItemInSlot(3).prefab == "shears" or self.inst.replica.container:GetItemInSlot(3).prefab == "candlehat") and
-
-					self.inst.replica.container:GetItemInSlot(4) and
-					(self.inst.replica.container:GetItemInSlot(4).prefab == "iron" or self.inst.replica.container:GetItemInSlot(4).prefab == "magnifying_glass" or self.inst.replica.container:GetItemInSlot(4).prefab == "goldpan" or self.inst.replica.container:GetItemInSlot(4).prefab == "ballpein_hammer" or self.inst.replica.container:GetItemInSlot(4).prefab == "shears" or self.inst.replica.container:GetItemInSlot(4).prefab == "candlehat") then
-					self.product = "alloy"
-				end
-
-				if self.inst.replica.container:GetItemInSlot(1) and (self.inst.replica.container:GetItemInSlot(1).prefab == "goldnugget" or self.inst.replica.container:GetItemInSlot(1).prefab == "dubloon") and
-					self.inst.replica.container:GetItemInSlot(2) and (self.inst.replica.container:GetItemInSlot(2).prefab == "goldnugget" or self.inst.replica.container:GetItemInSlot(2).prefab == "dubloon") and
-					self.inst.replica.container:GetItemInSlot(3) and (self.inst.replica.container:GetItemInSlot(3).prefab == "goldnugget" or self.inst.replica.container:GetItemInSlot(2).prefab == "dubloon") and
-					self.inst.replica.container:GetItemInSlot(4) and (self.inst.replica.container:GetItemInSlot(4).prefab == "goldnugget" or self.inst.replica.container:GetItemInSlot(2).prefab == "dubloon") then
-					self.product = "goldenbar"
-				end
-
-				if self.inst.replica.container:GetItemInSlot(1) and (self.inst.replica.container:GetItemInSlot(1).prefab == "nitre" or self.inst.replica.container:GetItemInSlot(1).prefab == "obsidian") and
-					self.inst.replica.container:GetItemInSlot(2) and (self.inst.replica.container:GetItemInSlot(2).prefab == "nitre" or self.inst.replica.container:GetItemInSlot(2).prefab == "obsidian") and
-					self.inst.replica.container:GetItemInSlot(3) and (self.inst.replica.container:GetItemInSlot(3).prefab == "nitre" or self.inst.replica.container:GetItemInSlot(3).prefab == "obsidian") and
-					self.inst.replica.container:GetItemInSlot(4) and (self.inst.replica.container:GetItemInSlot(4).prefab == "nitre" or self.inst.replica.container:GetItemInSlot(4).prefab == "obsidian") then
-					self.product = "gunpowder"
-				end
-
-				if self.inst.replica.container:GetItemInSlot(1) and (self.inst.replica.container:GetItemInSlot(1).prefab == "gold_dust") and
-					self.inst.replica.container:GetItemInSlot(2) and (self.inst.replica.container:GetItemInSlot(2).prefab == "gold_dust") and
-					self.inst.replica.container:GetItemInSlot(3) and (self.inst.replica.container:GetItemInSlot(3).prefab == "gold_dust") and
-					self.inst.replica.container:GetItemInSlot(4) and (self.inst.replica.container:GetItemInSlot(4).prefab == "gold_dust") then
-					self.product = "goldnugget"
-				end
+				self.product = smelting.getMeltProd(items) or self.product
 			end
-
-
-			--[[
-			for k,v in pairs (self.inst.components.container.slots) do
-				table.insert(ings, v.prefab)
-				if v.components.perishable then
-					spoilage_n = spoilage_n + 1
-					spoilage_total = spoilage_total + v.components.perishable:GetPercent()
-				end
-			end
-
-			self.product_spoilage = 1
-			if spoilage_total > 0 then
-				self.product_spoilage = spoilage_total / spoilage_n
-				self.product_spoilage = 1 - (1 - self.product_spoilage)*.5
-			end
-			
-			
-			local foundthespecial = false
-			local cooktime = 1
-			if self.specialcookername then
-				-- check special first
-				if cooking.ValidRecipe(self.specialcookername, ings) then
-					self.product, cooktime = cooking.CalculateRecipe(self.specialcookername, ings)
-					self.productcooker = self.specialcookername
-					foundthespecial = true
-				end
-			end
-
-			if not foundthespecial then
-				-- fallback to regular cooking
-				local cooker = self.cookername or self.inst.prefab
-				self.product, cooktime = cooking.CalculateRecipe(cooker, ings)
-				self.productcooker = cooker
-			end
- 			]]
 
 			local cooktime = 0.2
 			self.productcooker = self.inst.prefab

@@ -238,30 +238,19 @@ for i = 3, 0, -1 do
 end
 
 ----------------------------------------------------------------------------------------------------
+params.smelter = deepcopy(params.cookpot)
+params.smelter.widget.buttoninfo.text = STRINGS.ACTIONS.SMELT
 
-
-local SMELTER_PREFABS = {
-	iron = true,
-	goldnugget = true,
-	gold_dust = true,
-	flint = true,
-	nitre = true,
-	dubloon = true,
-	obsidian = true,
-	magnifying_glass = true,
-	goldpan = true,
-	ballpein_hammer = true,
-	shears = true,
-	candlehat = true,
-}
-
-params.smelter = deepcopy(params.corkchest)
-params.smelter.acceptsstacks = false
-
--- local melting = require("melting")
+local smelting = require("smelting")
 function params.smelter.itemtestfn(container, item, slot)
-	return item:HasTag("iron") or SMELTER_PREFABS[item.prefab]
-	-- return melting.isAttribute(item.prefab) -- 热带冒险已经改好炼钢炉了，预留
+	return smelting.isAttribute(item.prefab)
+end
+function params.smelter.widget.buttoninfo.fn(inst, doer)
+    if inst.components.container ~= nil then
+        BufferedAction(doer, inst, ACTIONS.SMELT):Do()
+    elseif inst.replica.container ~= nil and not inst.replica.container:IsBusy() then
+        SendRPCToServer(RPC.DoWidgetButtonAction, ACTIONS.SMELT.code, inst, ACTIONS.SMELT.mod_name)
+    end
 end
 
 ----------------------------------------------------------------------------------------------------
