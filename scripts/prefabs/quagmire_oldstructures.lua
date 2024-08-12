@@ -1,6 +1,14 @@
-local assets = {Asset("ANIM", "anim/quagmire_victorian_structures.zip"), Asset("ANIM", "anim/quagmire_rubble.zip")}
 
-local prefabs = {"collapse_small"}
+local assets =
+{
+	Asset("ANIM", "anim/quagmire_victorian_structures.zip"),
+	Asset("ANIM", "anim/quagmire_rubble.zip"),
+}
+
+local prefabs =
+{
+    "collapse_small",
+}
 
 local function onhammered(inst, worker)
     inst.components.lootdropper:DropLoot()
@@ -157,8 +165,7 @@ local function common_fn(name, anim, add_decor)
 
         inst:AddComponent("workable")
         print(inst.prefab)
-        if name == "bike" or name == "carriage" or name ==
-            "pubdoor" then
+        if name == "bike" or name == "carriage" or name == "pubdoor" then
             inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
             inst.components.workable:SetWorkLeft(3)
         else
@@ -184,29 +191,29 @@ local function MakeStrcuture(name, anim, add_decor)
     return Prefab("quagmire_rubble_" .. name, fn, assets, {"quagmire_old_rubble"})
 end
 
-return Prefab("quagmire_old_rubble", decorfn, assets), MakeStrcuture("bike", "penny_farthing"),
-    MakeStrcuture("carriage", "carriage"), MakeStrcuture("cathedral", "cathedral", true),
-    MakeStrcuture("chimney", "chimney", true), MakeStrcuture("chimney2", "chimney2", true),
-    MakeStrcuture("clock", "grandfather_clock", true), MakeStrcuture("clocktower", "clocktower", true),
-    MakeStrcuture("door", "door", true), MakeStrcuture("empty", nil, true), MakeStrcuture("house", "house", true),
-    MakeStrcuture("pubdoor", "pub_door", true), MakeStrcuture("roof", "roof", true),
+return Prefab("quagmire_old_rubble", decorfn, assets),
 
-    MakePlacer("quagmire_rubble_bike_placer", "quagmire_victorian_structures", "quagmire_victorian_structures",
-        "penny_farthing"),
-    MakePlacer("quagmire_rubble_carriage_placer", "quagmire_victorian_structures", "quagmire_victorian_structures",
-        "carriage"),
-    MakePlacer("quagmire_rubble_cathedral_placer", "quagmire_victorian_structures", "quagmire_victorian_structures",
-        "cathedral"),
-    MakePlacer("quagmire_rubble_chimney_placer", "quagmire_victorian_structures", "quagmire_victorian_structures",
-        "chimney"),
-    MakePlacer("quagmire_rubble_chimney2_placer", "quagmire_victorian_structures", "quagmire_victorian_structures",
-        "chimney2"),
-    MakePlacer("quagmire_rubble_clock_placer", "quagmire_victorian_structures", "quagmire_victorian_structures",
-        "grandfather_clock"),
-    MakePlacer("quagmire_rubble_clocktower_placer", "quagmire_victorian_structures", "quagmire_victorian_structures",
-        "clocktower"), MakePlacer("quagmire_rubble_door_placer", "quagmire_victorian_structures",
-        "quagmire_victorian_structures", "door"), MakePlacer("quagmire_rubble_house_placer",
-        "quagmire_victorian_structures", "quagmire_victorian_structures", "house"),
-    MakePlacer("quagmire_rubble_pubdoor_placer", "quagmire_victorian_structures", "quagmire_victorian_structures",
-        "pub_door"), MakePlacer("quagmire_rubble_roof_placer", "quagmire_victorian_structures",
-        "quagmire_victorian_structures", "roof")
+		MakeStrcuture("bike", "penny_farthing"),
+		MakeStrcuture("carriage", "carriage"),
+		MakeStrcuture("cathedral", "cathedral", true),
+		MakeStrcuture("chimney", "chimney", true),
+		MakeStrcuture("chimney2", "chimney2", true),
+		MakeStrcuture("clock", "grandfather_clock", true),
+		MakeStrcuture("clocktower", "clocktower", true),		
+		MakeStrcuture("door", "door", true),
+		MakeStrcuture("empty", nil, true),
+		MakeStrcuture("house", "house", true),
+		MakeStrcuture("pubdoor", "pub_door", true),
+		MakeStrcuture("roof", "roof", true),
+
+        MakePlacer("quagmire_rubble_bike_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "penny_farthing"),
+		MakePlacer("quagmire_rubble_carriage_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "carriage"),
+		MakePlacer("quagmire_rubble_cathedral_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "cathedral"),
+		MakePlacer("quagmire_rubble_chimney_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "chimney"),
+		MakePlacer("quagmire_rubble_chimney2_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "chimney2"),
+		MakePlacer("quagmire_rubble_clock_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "grandfather_clock"),
+		MakePlacer("quagmire_rubble_clocktower_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "clocktower"),
+		MakePlacer("quagmire_rubble_door_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "door"),
+		MakePlacer("quagmire_rubble_house_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "house"),
+		MakePlacer("quagmire_rubble_pubdoor_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "pub_door"),
+		MakePlacer("quagmire_rubble_roof_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "roof")
