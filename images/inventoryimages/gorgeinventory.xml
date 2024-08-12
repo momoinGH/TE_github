@@ -4,9 +4,9 @@
     <Elements>
         <Element name="quagmire_altar_bollard.tex" u1="0.12793" u2="0.250977" v1="0.74707" v2="0.870117"/>
         <Element name="quagmire_altar_ivy.tex" u1="0.12793" u2="0.250977" v1="0.62207" v2="0.745117"/>
-        <Element name="quagmire_altar_statue1.tex" u1="0.12793" u2="0.250977" v1="0.49707" v2="0.620117"/>
-        <Element name="quagmire_altar_statue2.tex" u1="0.12793" u2="0.250977" v1="0.37207" v2="0.495117"/>
-        <Element name="quagmire_altar_queen.tex" u1="0.12793" u2="0.250977" v1="0.24707" v2="0.370117"/>
+        <Element name="quagmire_altar_queen.tex" u1="0.12793" u2="0.250977" v1="0.49707" v2="0.620117"/>
+        <Element name="quagmire_altar_statue1.tex" u1="0.12793" u2="0.250977" v1="0.37207" v2="0.495117"/>
+        <Element name="quagmire_altar_statue2.tex" u1="0.12793" u2="0.250977" v1="0.24707" v2="0.370117"/>
         <Element name="quagmire_lamp_post.tex" u1="0.129883" u2="0.25293" v1="0.12207" v2="0.245117"/>
         <Element name="quagmire_lamp_short.tex" u1="0.25293" u2="0.375977" v1="0.74707" v2="0.870117"/>
         <Element name="quagmire_merm_house_crafted.tex" u1="0.254883" u2="0.37793" v1="0.875977" v2="0.999023"/>
@@ -24,11 +24,12 @@
         <Element name="quagmire_rubble_chimney2.tex" u1="0.629883" u2="0.75293" v1="0.750977" v2="0.874023"/>
         <Element name="quagmire_rubble_clock.tex" u1="0.754883" u2="0.87793" v1="0.750977" v2="0.874023"/>
         <Element name="quagmire_rubble_clocktower.tex" u1="0.37793" u2="0.500977" v1="0.625977" v2="0.749023"/>
-        <Element name="quagmire_rubble_house.tex" u1="0.37793" u2="0.500977" v1="0.500977" v2="0.624023"/>
-        <Element name="quagmire_rubble_pubdoor.tex" u1="0.37793" u2="0.500977" v1="0.375977" v2="0.499023"/>
-        <Element name="quagmire_rubble_roof.tex" u1="0.37793" u2="0.500977" v1="0.250977" v2="0.374023"/>
-        <Element name="quagmire_safe.tex" u1="0.379883" u2="0.50293" v1="0.125977" v2="0.249023"/>
-        <Element name="quagmire_swampig_house.tex" u1="0.379883" u2="0.50293" v1="0.000976563" v2="0.124023"/>
+        <Element name="quagmire_rubble_door.tex" u1="0.37793" u2="0.500977" v1="0.500977" v2="0.624023"/>
+        <Element name="quagmire_rubble_house.tex" u1="0.37793" u2="0.500977" v1="0.375977" v2="0.499023"/>
+        <Element name="quagmire_rubble_pubdoor.tex" u1="0.37793" u2="0.500977" v1="0.250977" v2="0.374023"/>
+        <Element name="quagmire_rubble_roof.tex" u1="0.379883" u2="0.50293" v1="0.125977" v2="0.249023"/>
+        <Element name="quagmire_safe.tex" u1="0.379883" u2="0.50293" v1="0.000976563" v2="0.124023"/>
+        <Element name="quagmire_swampig_house.tex" u1="0.504883" u2="0.62793" v1="0.625977" v2="0.749023"/>
         <Element name="turf_quagmire_citystone.tex" u1="0.000976563" u2="0.125977" v1="0.87207" v2="0.999023"/>
         <Element name="turf_quagmire_gateway.tex" u1="0.000976563" u2="0.125977" v1="0.743164" v2="0.870117"/>
         <Element name="turf_quagmire_parkfield.tex" u1="0.000976563" u2="0.125977" v1="0.614258" v2="0.741211"/>
@@ -36,7 +37,7 @@
         <Element name="turf_quagmire_peatforest.tex" u1="0.000976563" u2="0.125977" v1="0.356445" v2="0.483398"/>
         <Element name="turnip_oversized.tex" u1="0.000976563" u2="0.125977" v1="0.227539" v2="0.354492"/>
         <Element name="wheat.tex" u1="0.000976563" u2="0.12793" v1="0.0986328" v2="0.225586"/>
-        <Element name="wheat_cooked.tex" u1="0.504883" u2="0.62793" v1="0.625977" v2="0.749023"/>
+        <Element name="wheat_cooked.tex" u1="0.629883" u2="0.75293" v1="0.625977" v2="0.749023"/>
         <Element name="wheat_oversized.tex" u1="0.12793" u2="0.25293" v1="0.87207" v2="0.999023"/>
     </Elements>
     <StraightAlpha>false</StraightAlpha>

@@ -5,6 +5,73 @@ local assets =
 	Asset("ANIM", "anim/quagmire_rubble.zip"),
 }
 
+local prefabs =
+{
+    "collapse_small",
+}
+
+local function onhammered(inst, worker)
+    inst.components.lootdropper:DropLoot()
+    local fx = SpawnPrefab("collapse_small")
+    fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+	inst.SoundEmitter:PlaySound("dontstarve/common/destroy_stone")
+    fx:SetMaterial("stone")
+    inst:Remove()
+end
+
+local function onhit(inst, worker)
+    if inst.prefab == "quagmire_rubble_bike" then
+        inst.AnimState:PushAnimation("penny_farthing")
+    elseif inst.prefab == "quagmire_rubble_carriage" then
+        inst.AnimState:PushAnimation("carriage")
+    elseif inst.prefab == "quagmire_rubble_cathedral" then
+        inst.AnimState:PushAnimation("cathedral")
+    elseif inst.prefab == "quagmire_rubble_chimney" then
+        inst.AnimState:PushAnimation("chimney")
+	elseif inst.prefab == "quagmire_rubble_chimney2" then
+        inst.AnimState:PushAnimation("chimney2")	
+	elseif inst.prefab == "quagmire_rubble_clock" then
+        inst.AnimState:PushAnimation("grandfather_clock")
+	elseif inst.prefab == "quagmire_rubble_clocktower" then
+        inst.AnimState:PushAnimation("clocktower")	
+	elseif inst.prefab == "quagmire_rubble_door" then
+        inst.AnimState:PushAnimation("door")	
+	elseif inst.prefab == "quagmire_rubble_house" then
+        inst.AnimState:PushAnimation("house")	
+	elseif inst.prefab == "quagmire_rubble_pubdoor" then
+        inst.AnimState:PushAnimation("pub_door")	
+	elseif inst.prefab == "quagmire_rubble_roof" then
+        inst.AnimState:PushAnimation("roof")	
+    end
+end
+
+local function onbuilt(inst)
+    if inst.prefab == "quagmire_rubble_bike" then
+        inst.AnimState:PushAnimation("penny_farthing")
+    elseif inst.prefab == "quagmire_rubble_carriage" then
+        inst.AnimState:PushAnimation("carriage")
+    elseif inst.prefab == "quagmire_rubble_cathedral" then
+        inst.AnimState:PushAnimation("cathedral")
+    elseif inst.prefab == "quagmire_rubble_chimney" then
+        inst.AnimState:PushAnimation("chimney")
+	elseif inst.prefab == "quagmire_rubble_chimney2" then
+        inst.AnimState:PushAnimation("chimney2")	
+	elseif inst.prefab == "quagmire_rubble_clock" then
+        inst.AnimState:PushAnimation("grandfather_clock")
+	elseif inst.prefab == "quagmire_rubble_clocktower" then
+        inst.AnimState:PushAnimation("clocktower")	
+	elseif inst.prefab == "quagmire_rubble_door" then
+        inst.AnimState:PushAnimation("door")	
+	elseif inst.prefab == "quagmire_rubble_house" then
+        inst.AnimState:PushAnimation("house")	
+	elseif inst.prefab == "quagmire_rubble_pubdoor" then
+        inst.AnimState:PushAnimation("pub_door")	
+	elseif inst.prefab == "quagmire_rubble_roof" then
+        inst.AnimState:PushAnimation("roof")	
+    end
+end
+
+
 local function decorfn()
     local inst = CreateEntity()
 
@@ -68,6 +135,7 @@ local function common_fn(anim, add_decor)
 		inst.entity:AddAnimState()
 	end
 	inst.entity:AddNetwork()
+	inst.entity:AddSoundEmitter()
 
 	if anim ~= nil then
 		inst.AnimState:SetBank("quagmire_victorian_structures")
@@ -93,6 +161,18 @@ local function common_fn(anim, add_decor)
 
 	if anim ~= nil then
 		inst:AddComponent("inspectable")
+		
+		inst:AddComponent("lootdropper")
+        
+        inst:AddComponent("workable")
+        inst.components.workable:SetWorkAction(ACTIONS.MINE)
+        inst.components.workable:SetWorkLeft(6)
+        inst.components.workable:SetOnFinishCallback(onhammered)
+        inst.components.workable:SetOnWorkCallback(onhit)
+
+        inst:ListenForEvent("onbuilt", onbuilt)
+		
+		MakeHauntableWork(inst)
 	end
 
 	return inst
@@ -108,16 +188,28 @@ local function MakeStrcuture(name, anim, add_decor)
 end
 
 return Prefab("quagmire_old_rubble", decorfn, assets),
+
+		MakeStrcuture("bike", "penny_farthing"),
 		MakeStrcuture("carriage", "carriage"),
-		MakeStrcuture("empty", nil, true),
-		MakeStrcuture("clock", "grandfather_clock", true),
 		MakeStrcuture("cathedral", "cathedral", true),
-		MakeStrcuture("pubdoor", "pub_door", true),
-		--MakeStrcuture("door", "door", true),
-		MakeStrcuture("roof", "roof", true),
-		MakeStrcuture("clocktower", "clocktower", true),
-		MakeStrcuture("house", "house", true),
 		MakeStrcuture("chimney", "chimney", true),
 		MakeStrcuture("chimney2", "chimney2", true),
-		MakeStrcuture("bike", "penny_farthing")
+		MakeStrcuture("clock", "grandfather_clock", true),
+		MakeStrcuture("clocktower", "clocktower", true),		
+		MakeStrcuture("door", "door", true),
+		MakeStrcuture("empty", nil, true),
+		MakeStrcuture("house", "house", true),
+		MakeStrcuture("pubdoor", "pub_door", true),
+		MakeStrcuture("roof", "roof", true),
 
+        MakePlacer("quagmire_rubble_bike_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "bike"),
+		MakePlacer("quagmire_rubble_carriage_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "carriage"),
+		MakePlacer("quagmire_rubble_cathedral_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "cathedral"),
+		MakePlacer("quagmire_rubble_chimney_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "chimney"),
+		MakePlacer("quagmire_rubble_chimney2_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "chimney2"),
+		MakePlacer("quagmire_rubble_clock_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "clock"),
+		MakePlacer("quagmire_rubble_clocktower_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "clocktower"),
+		MakePlacer("quagmire_rubble_door_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "door"),
+		MakePlacer("quagmire_rubble_house_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "house"),
+		MakePlacer("quagmire_rubble_pubdoor_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "pubdoor"),
+		MakePlacer("quagmire_rubble_roof_placer", "quagmire_victorian_structures", "quagmire_victorian_structures", "roof")
