@@ -8,12 +8,6 @@ local assets =
 }
 
 local prefabs = { "collapse_small" }
---[[
-for k,v in pairs(cooking.recipes.cookpot) do
-	table.insert(prefabs, v.name)
-end
-]]
-
 
 local function onhammered(inst, worker)
 	if inst:HasTag("fire") and inst.components.burnable then
@@ -47,33 +41,9 @@ end
 local function ShowProduct(inst)
 	if not inst:HasTag("burnt") then
 		local product = inst.components.melter.product
-		if product == "dust" then
-			inst.AnimState:OverrideSymbol("swap_item", "ash", "ashes01")
-		end
-
-		if product == "alloy" then
-			inst.AnimState:OverrideSymbol("swap_item", "alloy", "alloy01")
-		end
-
-		if product == "goldenbar" then
-			inst.AnimState:OverrideSymbol("swap_item", "alloygold", "alloy01")
-		end
-
-		if product == "stonebar" then
-			inst.AnimState:OverrideSymbol("swap_item", "alloystone", "alloy01")
-		end
-
-		if product == "gunpowder" then
-			inst.AnimState:OverrideSymbol("swap_item", "gunpowder", "gunpowder01")
-		end
-
-		if product == "nitre" then
-			inst.AnimState:OverrideSymbol("swap_item", "nitre", "nitre01")
-		end
-
-		if product == "goldnugget" then
-			inst.AnimState:OverrideSymbol("swap_item", "gold_dust", "gold_dust01")
-		end
+		local smelting = require("smelting")
+		local build, symbol = smelting.getOverrideSymbol(product)
+		inst.AnimState:OverrideSymbol("swap_item", build or GetInventoryItemAtlas(product .. ".tex"), symbol or product .. ".tex")
 	end
 end
 
@@ -89,6 +59,29 @@ local function startcookfn(inst)
 	end
 end
 
+local animparams = { frame = 3, scale = .05, curframe = 0 }
+
+local function playJoggleAnim(inst)
+    if not inst:HasTag("burnt") then
+        local function stopJoggle(inst)
+            if inst._joggleTask then
+                inst._joggleTask:Cancel()
+                inst._joggleTask = nil
+                animparams.curframe = 0
+                inst.AnimState:SetScale(1, 1)
+            end
+        end
+        stopJoggle(inst)
+        inst._joggleTask = inst:DoPeriodicTask(0, function(inst)
+            inst.AnimState:SetScale(1 - animparams.scale * math.sin(math.pi / animparams.frame * animparams.curframe),
+                1 + animparams.scale * math.sin(math.pi / animparams.frame * animparams.curframe))
+            animparams.curframe = animparams.curframe + 1
+            if animparams.curframe > animparams.frame then
+                stopJoggle(inst)
+            end
+        end)
+    end
+end
 
 local function onopen(inst)
 	local alagado = GetClosestInstWithTag("mare", inst, 10)
@@ -111,9 +104,11 @@ local function onopen(inst)
 		inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/smelter/move_3", "open")
 		-- inst.SoundEmitter:PlaySound("dontstarve/common/cookingpot", "snd")
 	end
+	playJoggleAnim(inst)
 end
 
 local function onclose(inst)
+	playJoggleAnim(inst)
 	if inst.components.melter and inst.components.melter:CanCook() then
 		inst.components.melter:StartCooking()
 	end
@@ -355,5 +350,5 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("smelter", fn, assets, prefabs),
+return Prefab("common/smelter", fn, assets, prefabs),
 	MakePlacer("common/smetler_placer", "smelter", "smelter", "idle_empty")
