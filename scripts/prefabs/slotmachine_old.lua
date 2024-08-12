@@ -2688,7 +2688,7 @@ function SpawnTreasureLoot(name, lootdropper, pt, nexttreasure)
 
 		if nexttreasure and nexttreasure ~= nil then
 			--Spawn a bottle to the next treasure
-			local bottle = inst.components.lootdropper:SpawnLootPrefab("messagebottle")
+			local bottle = door.components.lootdropper:SpawnLootPrefab("messagebottle")
 			bottle.treasure = nexttreasure
 			--bottle:OnDrop() Handled by lootdropper/inventoryitem  now
 		end

@@ -58,8 +58,8 @@ end
 
 local function FindWarriorTargets(guy)
     return (guy:HasTag("character") or guy:HasTag("pig"))
-        and inst.components.combat:CanTarget(guy)
-        and not (inst.components.follower and inst.components.follower.leader == guy)
+        and door.components.combat:CanTarget(guy)
+        and not (door.components.follower and door.components.follower.leader == guy)
 end
 
 local function keeptargetfn(inst, target)

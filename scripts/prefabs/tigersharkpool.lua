@@ -290,7 +290,7 @@ local function commonfn(pondtype)
     inst.MiniMapEntity:SetIcon("tigerpool.png")
 
     inst:AddTag("watersource")
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst:AddTag("birdblocker")
 
     inst.no_wet_prefix = true
@@ -397,7 +397,7 @@ local function wall_tigerpond()
 
     inst:AddTag("NOCLICK")
     inst:AddTag("blocker")
-    -- inst:AddTag("NOBLOCK") --根据情况添加，对象会保存记录
+    inst:AddTag("NOBLOCK")
 
     return inst
 end

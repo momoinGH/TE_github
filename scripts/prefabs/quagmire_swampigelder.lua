@@ -74,7 +74,7 @@ local function fn()
     inst.components.talker.offset = Vector3(0, -600, 0)
     inst.components.talker:MakeChatter()
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 

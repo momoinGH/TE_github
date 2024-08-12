@@ -175,7 +175,7 @@ return Class(function(self, inst)
                         contadordovulcao = 0
                         local chuvadefogo
 
-                        local casa = GetClosestInstWithTag("blows_air", player, 30)
+                        local casa = GetClosestInstWithTag("interior_center", player, 30)
                         if not casa then
                             if math.random() <= 0.25 then
                                 chuvadefogo = SpawnPrefab("dragoonegg_falling")
@@ -208,7 +208,7 @@ return Class(function(self, inst)
 
                 if tempodohail <= 0 then
                     local a, b, c = player.Transform:GetWorldPosition()
-                    local casa = GetClosestInstWithTag("blows_air", player, 30)
+                    local casa = GetClosestInstWithTag("interior_center", player, 30)
                     if not casa then
                         local hail = SpawnPrefab("hail_ice")
                         hail.Transform:SetPosition(a + math.random(-15, 15), 35, c + math.random(-15, 15))
@@ -236,7 +236,7 @@ return Class(function(self, inst)
 
                 if tempodovento <= 0 then
                     local a, b, c = player.Transform:GetWorldPosition()
-                    local casa = GetClosestInstWithTag("blows_air", player, 30)
+                    local casa = GetClosestInstWithTag("interior_center", player, 30)
                     if not casa then
                         local vento = SpawnPrefab("ventania")
                         vento.Transform:SetPosition(a, b, c)
@@ -513,7 +513,7 @@ return Class(function(self, inst)
                 if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x + 6, spawnpoint.y, spawnpoint.z - 6) then return end
                 if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x - 6, spawnpoint.y, spawnpoint.z - 6) then return end
                 if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x + 6, spawnpoint.y, spawnpoint.z + 6) then return end
-                local casa = GetClosestInstWithTag("blows_air", player, 30)
+                local casa = GetClosestInstWithTag("interior_center", player, 30)
                 if casa then return end
 
                 local sandbags = TheSim:FindEntities(spawnpoint.x, spawnpoint.y, spawnpoint.z, 10, { "removealagamento" })

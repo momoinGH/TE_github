@@ -20,7 +20,7 @@ local function TurnOff(inst, instant)
 	inst.on = false
 	inst.components.fueled:StopConsuming()
 	inst:RemoveTag("prevents_hayfever")
-	inst:RemoveTag("blows_air")
+	inst:RemoveTag("interior_center")
 
 	if instant then
 		inst.sg:GoToState("idle_off")
@@ -45,7 +45,6 @@ local function TurnOn(inst, instant)
 	local randomizedStartTime = POPULATING
 	inst.components.fueled:StartConsuming()
 	inst:AddTag("prevents_hayfever")
-	--	inst:AddTag("blows_air")
 
 
 	if instant then

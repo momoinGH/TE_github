@@ -105,7 +105,7 @@ local function fn()
 	inst.MiniMapEntity:SetIcon("quagmire_pond_salt.png")
 
 	inst:AddTag("watersource")
-	inst:AddTag("antlion_sinkhole_blocker")
+
 	inst:AddTag("birdblocker")
 	inst:AddTag("saltwater")
 

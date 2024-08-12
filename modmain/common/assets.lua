@@ -105,6 +105,8 @@ Assets =
 
 	Asset("IMAGE", "images/inventoryimages/hamletinventory.tex"),
 	Asset("ATLAS", "images/inventoryimages/hamletinventory.xml"),
+	Asset("IMAGE", "images/inventoryimages/hamletinventory2.tex"),
+	Asset("ATLAS", "images/inventoryimages/hamletinventory2.xml"),
 
 	Asset("ATLAS", "map_icons/hamleticon.xml"),
 	Asset("IMAGE", "map_icons/hamleticon.tex"),

@@ -47,8 +47,6 @@ local function make_clock_fn(bank, build, sort_order, mult, speed)
 		inst.AnimState:SetBuild(build)
 		inst.AnimState:PlayAnimation("off_idle")
 
-		inst:AddTag("OnFloor")
-
 		inst.entity:SetPristine()
 
 		if not TheWorld.ismastersim then

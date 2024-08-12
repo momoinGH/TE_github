@@ -132,11 +132,6 @@ local function OnKilled(inst)
     debris.AnimState:PushAnimation("broken", true)
     debris.Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/speartrap_break")
-    if inst:HasTag("INTERIOR_LIMBO") then
-        local interiorSpawner = GetWorld().components.interiorspawner
-        local interior = interiorSpawner:getPropInterior(inst)
-        interiorSpawner:injectprefab(debris, interior)
-    end
 
     inst:Remove()
 end
@@ -148,11 +143,6 @@ local function burnt(inst)
     local debris = SpawnPrefab("pig_ruins_spear_trap_broken")
     debris.AnimState:PlayAnimation("burnt")
     debris.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    if inst:HasTag("INTERIOR_LIMBO") then
-        local interiorSpawner = GetWorld().components.interiorspawner
-        local interior = interiorSpawner:getPropInterior(inst)
-        interiorSpawner:injectprefab(debris, interior)
-    end
 
     inst:Remove()
 end

@@ -8,9 +8,10 @@ local Rammer = Class(function(self, inst)
     self.hitRadius = 1
     self.wasActive = false
     self.ramFilters = {}
-    self.onActivate = nil
-    self.onDeactivate = nil
-    self.onUpdate = nil
+    
+    self.onActivate = nil --当启用时
+    self.onDeactivate = nil --当禁用时
+    self.onUpdate = nil --启用时更新
     self.onRamTarget = nil --当与目标相撞时
 
     self.inst:StartUpdatingComponent(self)

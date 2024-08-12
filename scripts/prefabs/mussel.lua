@@ -116,4 +116,4 @@ local function cooked()
 end
 
 return Prefab("mussel", raw, assets, prefabs),
-	Prefab("common/inventory/mussel_cooked", cooked, assets)
+	Prefab("mussel_cooked", cooked, assets)

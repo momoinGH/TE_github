@@ -11,7 +11,7 @@ end
 local function OnPlayed(inst, musician)
     if musician then
         local a, b, c = musician.Transform:GetWorldPosition()
-        local casa = GetClosestInstWithTag("blows_air", musician, 30)
+        local casa = GetClosestInstWithTag("interior_center", musician, 30)
         if not casa then
             local vento = SpawnPrefab("ventania")
             vento.Transform:SetPosition(a, b, c)

@@ -21,9 +21,8 @@ local function SetAbovePhysics(inst)
 end
 
 
-print("检查action")
-print(ACTIONS.HIDECRAB)
-print(ACTIONS.SHOWCRAB)
+
+
 local actionhandlers =
 {
     ActionHandler(ACTIONS.EAT, "eat"),

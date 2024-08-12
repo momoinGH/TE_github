@@ -141,9 +141,6 @@ local function OnAccept(inst, giver, item)
 	inst.components.teleporter:Activate(item)
 end
 
-local function IsNearBasement(x, y, z)
-	return #TheSim:FindEntities(x, 0, z, 100, { "alt_tile" }) > 0
-end
 
 local function entrance()
 	local inst = CreateEntity()
@@ -166,8 +163,8 @@ local function entrance()
 
 	inst.MiniMapEntity:SetIcon("minimap_volcano_entrance.tex")
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst:SetDeployExtraSpacing(2.5)
 
@@ -751,9 +748,6 @@ local function SpawnPiso1(inst)
 	--inst.Transform:SetScale(2.82, 2.82, 2.82)
 
 	inst:AddTag("NOCLICK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("blows_air")
 
 	return inst
 end
@@ -779,9 +773,6 @@ local function SpawnPiso2(inst)
 	--inst.Transform:SetScale(2.82, 2.82, 2.82)
 
 	inst:AddTag("NOCLICK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("blows_air")
 
 	return inst
 end
@@ -807,9 +798,6 @@ local function SpawnPiso3(inst)
 	--inst.Transform:SetScale(2.82, 2.82, 2.82)
 
 	inst:AddTag("NOCLICK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("blows_air")
 
 	return inst
 end
@@ -835,9 +823,6 @@ local function SpawnPiso4(inst)
 	--inst.Transform:SetScale(2.82, 2.82, 2.82)
 
 	inst:AddTag("NOCLICK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("blows_air")
 
 	return inst
 end
@@ -867,7 +852,7 @@ local function wall_common()
 	inst.AnimState:PlayAnimation("idle")
 
 	inst:AddTag("NOCLICK")
-	inst:AddTag("vulcano_part")
+
 
 	inst.entity:SetPristine()
 
@@ -907,7 +892,7 @@ local function wall_common2()
 	inst.AnimState:PlayAnimation("idle_short")
 
 	inst:AddTag("NOCLICK")
-	inst:AddTag("vulcano_part")
+
 
 	inst.entity:SetPristine()
 

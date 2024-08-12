@@ -218,7 +218,7 @@ local function fn(Sim)
 	inst.AnimState:SetBuild("octopus")
 	inst.AnimState:PlayAnimation("idle", true)
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
 	inst:AddTag("ignorewalkableplatforms")
 	inst:AddTag("trader")
 

@@ -51,7 +51,7 @@ local function fn()
     inst:AddTag("altar")
     inst:AddTag("structure")
     inst:AddTag("stone")
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.AnimState:SetBank("workbench_obsidian")
     inst.AnimState:SetBuild("workbench_obsidian")

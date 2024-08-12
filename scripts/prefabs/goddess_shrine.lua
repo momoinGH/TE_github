@@ -116,7 +116,7 @@ local function fn()
 	end
 
 	inst:AddTag("goddess")
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst:AddComponent("prototyper")
 	inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.GODDESS_TWO

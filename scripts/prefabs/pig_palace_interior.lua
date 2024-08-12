@@ -1,6 +1,7 @@
+local InteriorSpawnerUtils = require("interiorspawnerutils")
+
 local assets =
 {
-	Asset("ANIM", "anim/pisohamlet.zip"),
 	Asset("ANIM", "anim/wallhamletpig.zip"),
 	Asset("ANIM", "anim/palace.zip"),
 	Asset("ANIM", "anim/pig_shop_doormats.zip"),
@@ -81,10 +82,6 @@ local function OnAccept(inst, giver, item)
 	inst.components.teleporter:Activate(item)
 end
 
-local function IsNearBasement(x, y, z)
-	return #TheSim:FindEntities(x, 0, z, 100, { "alt_tile" }) > 0
-end
-
 local function entrance()
 	local inst = CreateEntity()
 
@@ -106,8 +103,8 @@ local function entrance()
 
 	inst.MiniMapEntity:SetIcon("minimap_volcano_entrance.tex")
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst:SetDeployExtraSpacing(2.5)
 
@@ -196,7 +193,7 @@ local function entrance()
 			end
 
 			------------------------tipo de chão--------------------------------
-			local part = SpawnPrefab("pig_palace_floor")
+			local part = SpawnPrefab("interior_floor_marble_royal")
 			if part ~= nil then
 				part.Transform:SetPosition(x - 3.5, 0, z)
 				if part.components.health ~= nil then
@@ -824,7 +821,7 @@ local function entrance()
 				end
 			end
 			------------------------tipo de chão--------------------------------
-			local part = SpawnPrefab("pig_palace_gallery_floor") --"pig_palace_floor"
+			local part = SpawnPrefab("interior_floor_marble_royal_small") --"pig_palace_floor"
 			if part ~= nil then
 				part.Transform:SetPosition(x - 2.9, 0, z)
 				if part.components.health ~= nil then
@@ -1115,7 +1112,7 @@ local function entrance()
 				end
 			end
 			------------------------tipo de chão--------------------------------
-			local part = SpawnPrefab("pig_palace_shop_floor") --"pig_palace_floor"
+			local part = SpawnPrefab("interior_floor_marble_royal_small") --"pig_palace_floor"
 			if part ~= nil then
 				part.Transform:SetPosition(x - 2.2, 0, z)
 				if part.components.health ~= nil then
@@ -1133,7 +1130,9 @@ local function entrance()
 				end
 			end
 
-			local portasulgiftshop = SpawnPrefab("giftshop_door_south")
+			local portasulgiftshop = SpawnPrefab("house_city_exit_door")
+			portasulgiftshop.initData = { anim = "idle_giftshop" }
+			InteriorSpawnerUtils.InitHouseInteriorPrefab(portasulgiftshop, portasulgiftshop.initData)
 			if portasulgiftshop ~= nil then
 				portasulgiftshop.Transform:SetPosition(x + 10 / 2, 0, z)
 				if portasulgiftshop.components.health ~= nil then
@@ -1338,81 +1337,6 @@ local function entrance()
 	return inst
 end
 
----------------------------------pisos---------------------------------------------------------------------------
-local function SpawnPiso1(inst)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("pisohamlet")
-	inst.AnimState:SetBuild("pisohamlet")
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(5)
-	inst.AnimState:SetScale(3.8, 3.8, 3.8)
-	inst.AnimState:PlayAnimation("floor_marble_royal")
-	inst:AddTag("NOCLICK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("pisointeriorpalace")
-	inst:AddTag("terremoto")
-	inst:AddTag("blows_air")
-
-	return inst
-end
-
-
-local function SpawnPiso2(inst)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("pisohamlet")
-	inst.AnimState:SetBuild("pisohamlet")
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(5)
-	inst.AnimState:SetScale(5.5, 5.5, 5.5)
-	inst.AnimState:PlayAnimation("floor_marble_royal_small")
-	inst:AddTag("NOCLICK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("pisogalleryinteriorpalace")
-	inst:AddTag("caveinterior")
-	inst:AddTag("terremoto")
-	inst:AddTag("blows_air")
-
-	return inst
-end
-
-local function SpawnPiso3(inst)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("pisohamlet")
-	inst.AnimState:SetBuild("pisohamlet")
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(5)
-	inst.AnimState:SetScale(4.5, 4.5, 4.5)
-	inst.AnimState:PlayAnimation("floor_marble_royal_small")
-	inst:AddTag("NOCLICK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("shopinterior")
-	inst:AddTag("blows_air")
-
-	return inst
-end
-
-
 local function wall_common1(build)
 	local inst = CreateEntity()
 	inst.entity:AddTransform()
@@ -1534,10 +1458,10 @@ local function fnescada()
 	inst.AnimState:PlayAnimation("south")
 
 	inst:AddTag("trader")
-	inst:AddTag("hamletteleport")
+
 	inst:AddTag("alltrader")
 	inst:AddTag("guard_entrance")
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -1589,10 +1513,10 @@ local function fnpalaceesquerda()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
+
 	inst:AddTag("lockable_door")
 	inst:AddTag("door_east")
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -1644,10 +1568,10 @@ local function fngaleriaesquerda()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
+
 	inst:AddTag("lockable_door")
 	inst:AddTag("door_west")
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -1700,10 +1624,10 @@ local function fngaleriadireita()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
+
 	inst:AddTag("lockable_door")
 	inst:AddTag("door_east")
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -1725,60 +1649,6 @@ local function fngaleriadireita()
 	inst.components.teleporter.offset = 0
 	inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
 	inst:ListenForEvent("doneteleporting", OnDoneTeleportinggallery)
-
-	inst.OnSave = OnSave
-	inst.OnLoad = OnLoad
-
-	inst:AddComponent("inventory")
-
-	return inst
-end
-
-local function fnshopsul()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	local minimap = inst.entity:AddMiniMapEntity()
-
-	inst.AnimState:SetBank("pig_shop_doormats")
-	inst.AnimState:SetBuild("pig_shop_doormats")
-	inst.AnimState:PlayAnimation("idle_giftshop")
-	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-	--    inst.AnimState:SetSortOrder(3)
-	inst.Transform:SetRotation(-90)
-	inst.dooranimclosed = nil
-	inst.timechanger = nil
-
-	inst:AddTag("trader")
-	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("guard_entrance")
-	inst:AddTag("antlion_sinkhole_blocker")
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("trader")
-	inst.components.trader.acceptnontradable = true
-	inst.components.trader.onaccept = onaccept
-	inst.components.trader.deleteitemonaccept = false
-
-	inst:AddComponent("inspectable")
-	inst.components.inspectable:RecordViews()
-
-	inst:AddComponent("teleporter")
-	inst.components.teleporter.onActivate = OnActivate
-	inst.components.teleporter.onActivateByOther = OnActivateByOther
-	inst.components.teleporter.offset = 0
-	inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-	inst:ListenForEvent("doneteleporting", OnDoneTeleportingshop)
 
 	inst.OnSave = OnSave
 	inst.OnLoad = OnLoad
@@ -1810,10 +1680,10 @@ local function fnshopdireita()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
+
 	inst:AddTag("lockable_door")
 	inst:AddTag("door_east")
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -1865,9 +1735,6 @@ local function shadowfnsouth()
 end
 
 return Prefab("pig_palace_entrance", entrance),
-	Prefab("pig_palace_floor", SpawnPiso1, assets),
-	Prefab("pig_palace_gallery_floor", SpawnPiso2, assets),
-	Prefab("pig_palace_shop_floor", SpawnPiso3, assets),
 	Prefab("wallpalace", wall_common1, assets),
 	Prefab("wallshop", wall_common2, assets),
 	Prefab("wallgallery", wall_common3, assets),
@@ -1876,7 +1743,6 @@ return Prefab("pig_palace_entrance", entrance),
 	Prefab("palace_door_west", fnpalaceesquerda, assets),
 	Prefab("gallery_door_west", fngaleriaesquerda, assets),
 	Prefab("gallery_door_east", fngaleriadireita, assets),
-	Prefab("giftshop_door_south", fnshopsul, assets),
 	Prefab("giftshop_door_east", fnshopdireita, assets),
 
 	Prefab("prop_door_shadowpalace", shadowfnsouth, assets, prefabs)

@@ -6,6 +6,14 @@ function RoundBiasedUp(num, idp)
 end
 
 AddComponentPostInit("builder", function(self)
+    -- 对于配方的nounlock，如果我加上就会被分类到”模组物品“下，建筑可以正常建造，如果不加，被分类到“翻新”，但是无法正常建造，不过对于物品加不加都可以正常获得
+    -- 这里在建造前添加到配方中，使KnowsRecipe方法返回true，可以正常建造，其实我这里不知道该怎么写，只好覆盖了原方法，都是因为这个不支持placer
+    Utils.FnDecorator(self, "MakeRecipeAtPoint", function(self, recipe)
+        if not self:KnowsRecipe(recipe) and recipe.level.HOME and recipe.level.HOME == 2 then
+            self:AddRecipe(recipe.name)
+        end
+    end)
+
     --- 对消耗呼噜币的扣除
     Utils.FnDecorator(self, "RemoveIngredients", function(self, ingredients, recname, ...)
         local recipe = GetValidRecipe(recname)

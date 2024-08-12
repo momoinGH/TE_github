@@ -41,7 +41,7 @@ local function fn()
     inst.AnimState:SetBuild("boarlord")
     inst.AnimState:PlayAnimation("idle", true)
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst:AddComponent("talker")
 

@@ -83,8 +83,8 @@ local function fn()
     --trader, alltrader (from trader component) added to pristine state for optimization
     inst:AddTag("trader")
     inst:AddTag("alltrader")
-    inst:AddTag("hamletteleport")
-    inst:AddTag("antlion_sinkhole_blocker")
+
+
 
     inst.entity:SetPristine()
 
@@ -142,9 +142,9 @@ local function fn1()
     inst:AddTag("trader")
     inst:AddTag("alltrader")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst:AddTag("escadadovulcao2")
-    inst:AddTag("hamletteleport")
+
 
     inst.entity:SetPristine()
 

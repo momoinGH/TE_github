@@ -1,6 +1,5 @@
 local assets =
 {
-	Asset("ANIM", "anim/pisohamlet.zip"),
 	Asset("ANIM", "anim/wallhamletant.zip"),
 	Asset("ANIM", "anim/bat_cave_door.zip"),
 }
@@ -64,7 +63,7 @@ local function createroom(inst)
 	end
 
 	------------------------piso--------------------------------
-	local part = SpawnPrefab("roc_cave_floor")
+	local part = SpawnPrefab("interior_floor_batcave")
 	if part ~= nil then
 		part.Transform:SetPosition(x - 4.3, 0, z)
 		if part.components.health ~= nil then
@@ -429,32 +428,6 @@ local function createroom(inst)
 	inst:Remove()
 end
 
----------------------------------pisos---------------------------------------------------------------------------
-local function SpawnPiso1(inst)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("pisohamlet")
-	inst.AnimState:SetBuild("pisohamlet")
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(5)
-	inst.AnimState:SetScale(3.8, 3.8, 3.8)
-	inst.AnimState:PlayAnimation("batcave_floor")
-	inst:AddTag("caveinterior")
-
-	inst:AddTag("NOCLICK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("terremoto")
-	inst:AddTag("canbuild")
-	inst:AddTag("blows_air")
-
-	return inst
-end
 
 local function wall_common(build)
 	local inst = CreateEntity()
@@ -480,7 +453,7 @@ end
 
 local function OnActivate(inst, doer)
 	if doer:HasTag("player") then
-		doer.mynetvarCameraMode:set(3)
+		doer.mynetvarCameraMode:set(0)
 		--Sounds are triggered in player's stategraph
 	elseif inst.SoundEmitter ~= nil then
 
@@ -734,10 +707,10 @@ local function fnescadaentrada()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
+
 	inst:AddTag("timechange_anims")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -790,10 +763,10 @@ local function fnescadaentrada2()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
+
 	inst:AddTag("timechange_anims")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -847,9 +820,9 @@ local function fnescadacima()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst.entity:SetPristine()
 
@@ -904,9 +877,9 @@ local function fnescadabaixo()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst.entity:SetPristine()
 
@@ -961,9 +934,9 @@ local function fnescadaesquerda()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst.entity:SetPristine()
 
@@ -1018,9 +991,9 @@ local function fnescadadireita()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst.entity:SetPristine()
 
@@ -1066,8 +1039,8 @@ local function normalroom()
 	inst.AnimState:SetFinalOffset(2)
 
 	inst.tipodesala = 0
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	createroom(inst)
 	return inst
 end
@@ -1079,5 +1052,4 @@ return Prefab("createroccaveroom", normalroom, assets),
 	Prefab("roc_cave_door_baixo", fnescadabaixo, assets),
 	Prefab("roc_cave_door_esquerda", fnescadaesquerda, assets),
 	Prefab("roc_cave_door_direita", fnescadadireita, assets),
-	Prefab("roc_cave_floor", SpawnPiso1, assets),
 	Prefab("wallinteriorroc_cave", wall_common, assets)

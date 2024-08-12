@@ -49,7 +49,7 @@ local function fn()
     inst.AnimState:SetBuild("volcano")
     inst.AnimState:PlayAnimation("dormant_idle", true)
     inst:AddTag("vulcaomigrador")
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst.Transform:SetScale(0.5, 0.5, 0.5)
     inst.entity:AddLight()
     inst.Light:SetFalloff(0.4)
@@ -112,7 +112,7 @@ local function fn2()
     inst.AnimState:SetBank("vampbat_den")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 
@@ -210,7 +210,7 @@ local function fn3()
     inst:AddTag("trader")
     inst:AddTag("alltrader")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 

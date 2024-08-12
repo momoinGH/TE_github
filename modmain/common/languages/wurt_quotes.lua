@@ -1187,29 +1187,22 @@ STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_WEAPONS_DOOR_ENTRADA         = "Go to 
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_WEAPONS_DOOR_SAIDA           = "Go to different room, florp!"
 
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_PRODUCE_DOOR_ENTRATA         = "Go to different room, florp!"
-STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_PRODUCE_DOOR_SAIDA           = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_HOOFSPA_DOOR_ENTRATA         = "Go to different room, florp!"
-STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_HOOFSPA_DOOR_SAIDA           = "Go to different room, florp!"
 
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_HATSHOP_DOOR_ENTRADA         = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.HATSHOP_DOOR_SAIDA                    = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_GENERAL_DOOR_ENTRADA         = "Go to different room, florp!"
-STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_GENERAL_DOOR_SAIDA           = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_FLORIST_DOOR_ENTRADA         = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_FLORIST_DOOR_SAIDA           = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_DELI_DOOR_ENTRADA            = "Go to different room, florp!"
-STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_DELI_DOOR_SAIDA              = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_CITYHALL_PLAYER_DOOR_ENTRADA = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_CITYHALL_PLAYER_DOOR_SAIDA   = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_CITYHALL_DOOR_ENTRADA        = "Go to different room, florp!"
-STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_CITYHALL_DOOR_SAIDA          = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_BANK_DOOR_ENTRADA            = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_BANK_DOOR_SAIDA              = "Go to different room, florp!"
 
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOPARCANE_DOOR_ENTRADA           = "Go to different room, florp!"
-STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_ARCANE_DOOR_SAIDA            = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_ANTIQUITIES_DOOR_ENTRADA     = "Go to different room, florp!"
-STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_ANTIQUITIES_DOOR_SAIDA       = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIG_SHOP_ACADEMY_DOOR_ENTRADA         = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PALACE_DOOR_SAIDA                     = "Go to different room, florp!"
 
@@ -1232,7 +1225,6 @@ STRINGS.CHARACTERS.WURT.DESCRIBE.ANTHILL_DOOR_ESQUERDA                 = "Go to 
 STRINGS.CHARACTERS.WURT.DESCRIBE.ANTHILL_EXIT_1                        = "Can leave antfolk home here, florp."
 STRINGS.CHARACTERS.WURT.DESCRIBE.ANTHILL_EXIT_2                        = "Can leave antfolk home here, florp."
 
-STRINGS.CHARACTERS.WURT.DESCRIBE.ANTIQUITIES_DOOR_SAIDA                = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.ANTIQUITIES_DOOR_ENTRADA              = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.ROC_CAVE_DOOR_BAIXO                   = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.ROC_CAVE_DOOR_CIMA                    = "Go to different room, florp!"
@@ -1242,7 +1234,6 @@ STRINGS.CHARACTERS.WURT.DESCRIBE.ROC_CAVE_DOOR_ESQUERDA                = "Go to 
 STRINGS.CHARACTERS.WURT.DESCRIBE.ROPE                                  = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.ACADEMY_DOOR_ENTRADA                  = "Go to different room, florp!"
 
-STRINGS.CHARACTERS.WURT.DESCRIBE.ACADEMY_DOOR_SAIDA                    = "Go to different room, florp!"
 
 STRINGS.CHARACTERS.WURT.DESCRIBE.TREEGUARD                             = "Glargh! Roughsnacks tree is moving!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PALMTREE                              =
@@ -1311,7 +1302,7 @@ STRINGS.CHARACTERS.WURT.DESCRIBE.PIGMAN_MINION                         = "Glargh
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIGGUARD_MINION                       = "Glargh! Is very scary pig!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PIGKINGSTAFF                          = "Fake king have funny-looking stick, florp."
 STRINGS.CHARACTERS.WURT.DESCRIBE.WILDBOREKING                          = "He even less royal than other pigfolk, florp!"
-STRINGS.CHARACTERS.WURT.DESCRIBE.PLAYERHOUSE_CITY_DOOR_SAIDA           = "Go to different room, florp!"
+STRINGS.CHARACTERS.WURT.DESCRIBE.HOUSE_CITY_EXIT_DOOR                  = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.CORKBOATITEM                          = "Is faster than swimming, florp."
 STRINGS.CHARACTERS.WURT.DESCRIBE.CORKBOAT                              = "Is faster than swimming, florp."
 STRINGS.CHARACTERS.WURT.DESCRIBE.OCTOHOUSE                             = { "Look like nice place to live." }

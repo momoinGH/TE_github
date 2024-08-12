@@ -86,7 +86,7 @@ end
 local function onspawnitemfromdata(item, data)
 	if item ~= nil and data ~= nil then
 		if item.prefab == "oceanfish_small_12_inv" then
-			inst.Transform:SetScale(1.5, 1.5, 1.5)
+			door.Transform:SetScale(1.5, 1.5, 1.5)
 		end
 		if item.components.perishable ~= nil and data.perish_percent then
 			item.components.perishable:SetPercent(data.perish_percent or 1)

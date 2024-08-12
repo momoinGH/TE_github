@@ -38,8 +38,8 @@ end
 local sizes =
 {
     { anim = "small_idle", rad = 2.0, plantcount = 2, plantrad = 1.6 },
-    { anim = "med_idle", rad = 2.6, plantcount = 3, plantrad = 2.5 },
-    { anim = "big_idle", rad = 3.6, plantcount = 4, plantrad = 3.4 },
+    { anim = "med_idle",   rad = 2.6, plantcount = 3, plantrad = 2.5 },
+    { anim = "big_idle",   rad = 3.6, plantcount = 4, plantrad = 3.4 },
 }
 --{anim="big_idle", rad=2.7, plantcount=4, plantrad=2.9},
 
@@ -93,7 +93,7 @@ local function commonfn(pondtype)
     inst.MiniMapEntity:SetIcon("tidalpool.png")
 
     inst:AddTag("watersource")
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst:AddTag("birdblocker")
 
     inst.no_wet_prefix = true

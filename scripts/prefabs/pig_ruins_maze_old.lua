@@ -1,13 +1,3 @@
-local assets =
-{
-    Asset("ANIM", "anim/pisohamlet.zip"),
-    Asset("ANIM", "anim/palace.zip"),
-    Asset("ANIM", "anim/pig_shop_doormats.zip"),
-    Asset("ANIM", "anim/palace_door.zip"),
-    Asset("ANIM", "anim/interior_wall_decals_palace.zip"),
-    Asset("SOUND", "sound/hound.fsb"),
-    Asset("MINIMAP_IMAGE", "vamp_bat_cave"),
-}
 
 local vagner = {}
 local trapdoortag = false
@@ -1409,8 +1399,8 @@ local function fn()
     inst.AnimState:SetBank("pig_ruins_entrance")
     inst.AnimState:PlayAnimation("idle", true)
 
-    inst:AddTag("vulcano_part")
-    inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 
     inst.entity:SetPristine()

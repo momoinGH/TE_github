@@ -141,7 +141,7 @@ local function fn()
     inst.MiniMapEntity:SetIcon("lava_pond.png")
 
     inst:AddTag("lava")
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     --cooker (from cooker component) added to pristine state for optimization
     inst:AddTag("cooker")
@@ -222,7 +222,7 @@ local function fn1()
     inst.MiniMapEntity:SetIcon("lava_pond.png")
 
     inst:AddTag("lava")
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     --cooker (from cooker component) added to pristine state for optimization
     inst:AddTag("cooker")

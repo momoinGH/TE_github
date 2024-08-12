@@ -74,7 +74,7 @@ local function fn()
     inst:AddTag("trader")
     inst:AddTag("alltrader")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 
@@ -136,7 +136,7 @@ local function fn1()
     inst:AddTag("trader")
     inst:AddTag("alltrader")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 

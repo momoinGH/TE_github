@@ -14,6 +14,7 @@ modimport "modmain/common/components/playeractionpicker"
 
 
 modimport "modmain/common/prefabs/oceanfishdef"
+modimport "modmain/common/prefabs/allplayers"
 
 local function AddComponent(inst, name)
     if not inst.components[name] then
@@ -119,7 +120,7 @@ local function DrownableShouldDrownBefore(self)
     end
 
     local x, y, z = self.inst.Transform:GetWorldPosition()
-    if #TheSim:FindEntities(x, y, z, 30, { "blows_air" }) > 0 then
+    if #TheSim:FindEntities(x, y, z, 30, { "interior_center" }) > 0 then
         return { false }, true
     end
 end
@@ -266,7 +267,7 @@ Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
     local val = next(retTab)
     if val > TUNING.WILDFIRE_THRESHOLD then
         -- 防野火
-        if #TheSim:FindEntities(x, 0, z, 20, { "blows_air" }) > 0 then
+        if #TheSim:FindEntities(x, 0, z, 20, { "interior_center" }) > 0 then
             return { TUNING.WILDFIRE_THRESHOLD }
         end
 
@@ -311,6 +312,7 @@ AddPrefabPostInit("forest", function(inst)
     inst:AddComponent("economy")
     inst:AddComponent("shadowmanager")
     inst:AddComponent("contador")
+    inst:AddComponent("tropical_interiorspawner")
 
     if TUNING.tropical.sealnado then
         inst:AddComponent("twisterspawner")
@@ -361,6 +363,7 @@ AddPrefabPostInit("cave", function(inst)
     inst:AddComponent("quaker_interior")
     inst:AddComponent("economy")
     inst:AddComponent("contador")
+    inst:AddComponent("tropical_interiorspawner")
 end)
 
 ----------------------------------------------------------------------------------------------------
@@ -393,13 +396,7 @@ end
 
 
 
-----------------------------------------------------------------------------------------------------
 
-if TUNING.tropical.only_shipwrecked then
-    AddPlayerPostInit(function(inst)
-        inst:AddComponent("mapwrapper")
-    end)
-end
 
 ----------------------------------------------------------------------------------------------------
 
@@ -531,147 +528,17 @@ end)
 
 ----------------------------------------------------------------------------------------------------
 
-AddPlayerPostInit(function(inst)
-    inst._isopening = GLOBAL.net_bool(inst.GUID, "IsOpening", "Store_IsOpening")
-
-    if inst.components.shopper == nil then
-        inst:AddComponent("shopper")
-    end
-
-    if inst.components.infestable == nil then
-        inst:AddComponent("infestable")
-    end
-
-    if TheNet:GetIsServer() then
-        inst.findpigruinstask = inst:DoPeriodicTask(2, function()
-            local x, y, z = inst.Transform:GetWorldPosition()
-            if inst.LightWatcher ~= nil and #TheSim:FindEntities(x, y, z, 40, { "pisodaruina" }) > 0 then
-                local thresh = TheSim:GetLightAtPoint(10000, 10000, 10000)
-                inst.LightWatcher:SetLightThresh(0.075 + thresh)
-                inst.LightWatcher:SetDarkThresh(0.05 + thresh)
-            else
-                inst.LightWatcher:SetLightThresh(0.075)
-                inst.LightWatcher:SetDarkThresh(0.05)
-            end
-        end)
-    end
-
-    if not TheWorld.ismastersim then return end
-
-    inst:AddComponent("tropical_noequipactivator")
-end)
-
 ----------------------------------------------------------------------------------------------------
 
--- TODO 可能会卡视角，需要修复
-local function OnDirtyEventCameraStuff(inst) -- this is called on client, if the server does inst.mynetvarCameraMode:set(...)
-    local val = inst.mynetvarCameraMode:value()
 
-    if val == 1 then -- for jumping(OnActive) function
-        TheCamera.controllable = false
-        TheCamera.cutscene = true
-        TheCamera.headingtarget = 0
-        TheCamera.distancetarget = 20 + GetModConfigData("housewallajust")
-        TheCamera.targetoffset = Vector3(-2.3, 1.7, 0)
-    elseif val == 2 then
-        TheCamera:SetDistance(12)
-    elseif val == 3 then
-        TheCamera:SetDefault()
-        TheCamera:SetTarget(TheFocalPoint)
-    elseif val == 4 then --for player prox
-        TheCamera.controllable = false
-        TheCamera.cutscene = true
-        TheCamera.headingtarget = 0
-        TheCamera.distancetarget = 21.5 + GetModConfigData("housewallajust")
-        TheCamera:SetTarget(GetClosestInstWithTag("shopinterior", inst, 30))
-        TheCamera.targetoffset = Vector3(2, 1.5, 0)
-        TheWorld:PushEvent("underwatercave", "night")
-        if not GetClosestInstWithTag("casadojogador", inst, 30) then
-            TheFocalPoint.SoundEmitter:PlaySound("dontstarve_DLC003/amb/inside/store", "storemusic")
-        end
-    elseif val == 5 then --for player prox
-        TheCamera.controllable = false
-        TheCamera.cutscene = true
-        TheCamera.headingtarget = 0
-        local alvodacamera = GetClosestInstWithTag("caveinterior", inst, 30)
-        if alvodacamera then
-            TheCamera:SetTarget(alvodacamera)
-        end
-        if alvodacamera and alvodacamera:HasTag("pisodaruina") then
-            TheCamera.distancetarget = 25 + GetModConfigData("housewallajust")
-            TheCamera.targetoffset = Vector3(6, 1.5, 0)
-            TheWorld:PushEvent("underwatercave", "night")
-            TheFocalPoint.SoundEmitter:PlaySound("dontstarve_DLC003/amb/inside/ruins", "storemusic")
-        elseif alvodacamera and alvodacamera:HasTag("pisogalleryinteriorpalace") then
-            TheCamera.distancetarget = 21.5 + GetModConfigData("housewallajust")
-            TheCamera.targetoffset = Vector3(3, 1.5, 0)
-        elseif alvodacamera and alvodacamera:HasTag("pisoanthill") then
-            TheCamera.distancetarget = 27 + GetModConfigData("housewallajust")
-            TheCamera.targetoffset = Vector3(5, 1.5, 0)
-            TheWorld:PushEvent("underwatercave", "night")
-        else
-            TheCamera.distancetarget = 27 + GetModConfigData("housewallajust")
-            TheCamera.targetoffset = Vector3(5, 1.5, 0)
-            TheWorld:PushEvent("underwatercave", "night")
-        end
-    elseif val == 6 then --for player prox
-        TheCamera:SetDefault()
-        TheCamera:SetTarget(TheFocalPoint)
 
-        local fasedodia = "night"
-        if TheWorld.state.isday then fasedodia = "day" end
-        if TheWorld.state.isdusk then fasedodia = "dusk" end
-        if TheWorld.state.isnight then fasedodia = "night" end
-        TheWorld:PushEvent("underwatercaveexit", fasedodia)
-        TheFocalPoint.SoundEmitter:KillSound("storemusic")
-    elseif val == 7 then --for player prox
-        TheCamera.controllable = false
-        TheCamera.cutscene = true
-        TheCamera.headingtarget = 0
-        TheCamera.distancetarget = 28 + GetModConfigData("housewallajust")
-        TheCamera:SetTarget(GetClosestInstWithTag("pisointeriorpalace", inst, 30))
-        TheCamera.targetoffset = Vector3(5, 1.5, 0)
-    elseif val == 8 then --for player prox
-        TheCamera.controllable = false
-        TheCamera.cutscene = true
-        TheCamera.headingtarget = 0
-        TheCamera.distancetarget = 25 + GetModConfigData("housewallajust")
-        TheCamera:SetTarget(GetClosestInstWithTag("pisointerioruins", inst, 30)) --inst = ThePlayer
-        TheCamera.targetoffset = Vector3(6, 1.5, 0)
-    end
-    -- Use val and do client related stuff
-end
 
-local function RegisterListenersCameraStuff(inst)
-    -- check that the entity is the playing player
-    if inst.HUD ~= nil then
-        inst:ListenForEvent("DirtyEventCameraStuff", OnDirtyEventCameraStuff)
-    end
-end
-
-AddPlayerPostInit(function(inst)
-    inst.mynetvarCameraMode = net_tinybyte(inst.GUID, "BakuStuffNetStuff", "DirtyEventCameraStuff")
-    inst.mynetvarCameraMode:set(0)
-    inst:DoTaskInTime(0, RegisterListenersCameraStuff)
-
-    inst:DoTaskInTime(0.5, function(inst)
-        if GetClosestInstWithTag("shopinterior", inst, 30) then
-            inst.mynetvarCameraMode:set(4)
-        elseif GetClosestInstWithTag("caveinterior", inst, 30) then
-            inst.mynetvarCameraMode:set(5)
-        elseif GetClosestInstWithTag("pisointeriorpalace", inst, 30) then
-            inst.mynetvarCameraMode:set(7)
-        else
-            inst.mynetvarCameraMode:set(6)
-        end
-    end)
-end)
 
 ----------------------------------------------------------------------------------------------------
 local function ShelteredOnUpdateBefore(self)
     local x, y, z = self.inst.Transform:GetWorldPosition()
     if not self.mounted
-        and #TheSim:FindEntities(x, y, z, 40, { "blows_air" }) > 0
+        and #TheSim:FindEntities(x, y, z, 40, { "interior_center" }) > 0
     then
         self:SetSheltered(true)
         return nil, true
@@ -693,7 +560,7 @@ AddSimPostInit(function()
                     self.old_updatefuncs[inst.prefab] = data.updateFunc
                 end
                 local x, y, z = inst.Transform:GetWorldPosition()
-                if #TheSim:FindEntities(x, y, z, 40, { "blows_air" }) > 0 then
+                if #TheSim:FindEntities(x, y, z, 40, { "interior_center" }) > 0 then
                     data.updateFunc = function() end -- empty function
                 else
                     data.updateFunc = self.old_updatefuncs[inst.prefab] ~= nil and self.old_updatefuncs[inst.prefab] or
@@ -896,3 +763,5 @@ AddPrefabPostInit("gnarwail_attack_horn", function(inst)
 
     inst:DoTaskInTime(TUNING.GNARWAIL.HORN_RETREAT_TIME - 0.1, CheckHorn)
 end)
+
+----------------------------------------------------------------------------------------------------

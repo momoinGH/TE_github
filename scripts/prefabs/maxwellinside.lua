@@ -142,10 +142,6 @@ local function OnAccept(inst, giver, item)
 	inst.components.teleporter:Activate(item)
 end
 
-local function IsNearBasement(x, y, z)
-	return #TheSim:FindEntities(x, 0, z, 100, { "alt_tile" }) > 0
-end
-
 local function entrance()
 	local inst = CreateEntity()
 
@@ -167,8 +163,8 @@ local function entrance()
 
 	inst.MiniMapEntity:SetIcon("minimap_volcano_entrance.tex")
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst:SetDeployExtraSpacing(2.5)
 

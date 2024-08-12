@@ -1,29 +1,25 @@
-local assets = { -- Asset("ANIM", "anim/store_items.zip"),
-    Asset("ANIM", "anim/room_shelves.zip"), Asset("ANIM", "anim/pedestal_key.zip"),
-    Asset("ATLAS_BUILD", "images/inventoryimages1.xml", 256), Asset("ATLAS_BUILD", "images/inventoryimages2.xml", 256),
+local assets = {
+    -- Asset("ANIM", "anim/store_items.zip"),
+    Asset("ANIM", "anim/room_shelves.zip"),
+    Asset("ANIM", "anim/pedestal_key.zip"),
+    Asset("ATLAS_BUILD", "images/inventoryimages1.xml", 256),
+    Asset("ATLAS_BUILD", "images/inventoryimages2.xml", 256),
     Asset("ATLAS_BUILD", "images/inventoryimages3.xml", 256),
     Asset("ATLAS_BUILD", "images/inventoryimages/volcanoinventory.xml", 256),
     Asset("ATLAS_BUILD", "images/inventoryimages/hamletinventory.xml", 256),
     Asset("ATLAS_BUILD", "images/inventoryimages/cookpotfoods_ham.xml", 256),
     Asset("ATLAS_BUILD", "images/inventoryimages/cookpotfoods_sw.xml", 256),
     Asset("ATLAS_BUILD", "images/inventoryimages/gw_bonestaff.xml", 256),
-    Asset("ATLAS_BUILD", "images/inventoryimages/pig_figure.xml", 256) }
+    Asset("ATLAS_BUILD", "images/inventoryimages/pig_figure.xml", 256),
+}
 
-local prefabs = { --    "minisign_item",
+local prefabs = {
+    --    "minisign_item",
     --    "minisign_drawn",
-    "shelf_slot" }
+    "shelf_slot",
+}
 
 local function smash(inst)
-    --    if inst.components.lootdropper then
-    --        local interiorSpawner = GetWorld().components.interiorspawner
-    --        if interiorSpawner.current_interior then
-    --            local originpt = interiorSpawner:getSpawnOrigin()
-    --            local x, y, z = inst.Transform:GetWorldPosition()
-    --            local dropdir = Vector3(originpt.x - x, 0.0, originpt.z - z):GetNormalized()
-    --            inst.components.lootdropper.dropdir = dropdir
-    --            inst.components.lootdropper:DropLoot()
-    --        end
-    --    end
     SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
     if inst.SoundEmitter then
         inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
@@ -63,33 +59,6 @@ local function onBuilt(inst)
     inst.onbuilt = true
 end
 
--- local function SetImage(inst, ent, slot)
---     local src = ent
---     local image = nil
-
---     if src ~= nil and src.components.inventoryitem ~= nil then
---         image = ent.inv_image_bg and ent.inv_image_bg.image:sub(1, -5) or
---             #(ent.components.inventoryitem.imagename or "") > 0 and ent.components.inventoryitem.imagename or
---             ent.prefab
---     end
-
---     if image ~= nil then
---         local texname = image .. ".tex"
---         local atlas = src.replica.inventoryitem:GetAtlas()
---         if not inst:HasTag("playercrafted") then
---             if ent.components.perishable then
---                 ent.components.perishable:StopPerishing()
---             end
---         end
---         atlas = ent.caminho or GetInventoryItemAtlas(texname)
---         inst.AnimState:OverrideSymbol(slot, resolvefilepath(atlas), texname)
---         inst.imagename = src ~= nil or ""
---     else
---         inst.imagename = ""
---         inst.AnimState:ClearOverrideSymbol(slot)
---     end
--- end
-
 local function SetImage(inst, ent, slot)
     local image = nil
 
@@ -103,7 +72,7 @@ local function SetImage(inst, ent, slot)
         --mod物品drawatlasoverride或atlasname至少指定一个
         local atlas = FunctionOrValue(ent.drawatlasoverride, ent, inst) or ent.components.inventoryitem.atlasname
         if atlas ~= nil then
-            atlas = resolvefilepath_soft(atlas) --需要找到路径，例如../mods/PigmanTribe/images/inventoryimages/ptribe_upgrade.xml
+            atlas = resolvefilepath_soft(atlas) --需要找到路径，例如../mods/PigmanTribe/images/inventoryimages/upgrade.xml
         end
         inst.AnimState:OverrideSymbol(slot, atlas or GetInventoryItemAtlas(image), image)
         inst.imagename = image
@@ -244,19 +213,6 @@ local function onload(inst, data)
 end
 
 local function onloadpostpass(inst, ents, data)
-    --[[
-    inst.shelves = {}
-    if data and data.shelves and ents then
-        for i, v in ipairs(data.shelves)do
-		if ents and v and ents[v].entity then
-            local shelfer = ents[v].entity
-            if shelfer then
-                table.insert(inst.shelves, shelfer)
-            end
-		end	
-        end
-    end
-]]
 end
 
 local function docurse(inst)
@@ -267,42 +223,35 @@ local function docurse(inst)
     end
 end
 
-local function common(setsize, swp_img_list, locked, physics_round)
+local function common(setsize, swp_img_list, locked)
     local size = setsize or 6
+
     local inst = CreateEntity()
-    inst.entity:AddNetwork()
+
     inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
+    inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddPhysics()
+    inst.entity:AddNetwork()
 
-    if physics_round then
-        MakeObstaclePhysics(inst, .5)
-    else
-        --        MakeInteriorPhysics(inst, 1.6, 1, 0.2)
-        MakeInventoryPhysics(inst, 1.6, 1, 0.2)
-    end
+    MakeObstaclePhysics(inst, .5)
 
     --    inst.AnimState:SetOrientation(ANIM_ORIENTATION.RotatingBillboard)
     inst.Transform:SetTwoFaced()
 
-    -- inst:AddTag("NOCLICK")
     inst:AddTag("wallsection")
     inst:AddTag("furniture")
+    inst:AddTag("structure")
 
-    anim:SetBuild("room_shelves")
-    anim:SetBank("bookcase")
-    anim:PlayAnimation("wood", false)
+    inst.AnimState:SetBuild("room_shelves")
+    inst.AnimState:SetBank("bookcase")
+    inst.AnimState:PlayAnimation("wood", false)
 
     inst.Transform:SetRotation(-90)
 
+    inst.deploy_smart_radius = 0.2 --允许建造距离调小一点
+
     inst.imagename = nil
-
-    inst.SetImage = SetImage
-    inst.SetImageFromName = SetImageFromName
-
-    inst.swp_img_list = swp_img_list
-    inst.size = setsize or 6
     if swp_img_list then
         for i = 1, size do
             SetImageFromName(inst, nil, swp_img_list[i])
@@ -313,9 +262,16 @@ local function common(setsize, swp_img_list, locked, physics_round)
         end
     end
 
-    inst:ListenForEvent("onbuilt", function()
-        onBuilt(inst)
-    end)
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.swp_img_list = swp_img_list
+    inst.size = setsize or 6
+    inst.SetImage = SetImage
+    inst.SetImageFromName = SetImageFromName
 
     inst.OnSave = onsave
     inst.OnLoad = onload
@@ -333,6 +289,8 @@ local function common(setsize, swp_img_list, locked, physics_round)
             unlock(inst)
         end
     end)
+
+    inst:ListenForEvent("onbuilt", onBuilt)
 
     return inst
 end
@@ -989,24 +947,36 @@ local function key()
     return inst
 end
 
-return Prefab("shelves_wood", wood, assets, prefabs), Prefab("shelves_wood2", wood2, assets, prefabs),
-    Prefab("shelves_woodpalace", wood3, assets, prefabs), Prefab("shelves_basic", basic, assets, prefabs),
-    Prefab("shelves_marble", marble, assets, prefabs), Prefab("shelves_marble", marble2, assets, prefabs),
-    Prefab("shelves_glass", glass, assets, prefabs), Prefab("shelves_ladder", ladder, assets, prefabs),
-    Prefab("shelves_hutch", hutch, assets, prefabs), Prefab("shelves_industrial", industrial, assets, prefabs),
-    Prefab("shelves_adjustable", adjustable, assets, prefabs), Prefab("shelves_fridge", fridge, assets, prefabs),
+return Prefab("shelves_wood", wood, assets, prefabs),
+    Prefab("shelves_wood2", wood2, assets, prefabs),
+    Prefab("shelves_woodpalace", wood3, assets, prefabs),
+    Prefab("shelves_basic", basic, assets, prefabs),
+    Prefab("shelves_marble", marble, assets, prefabs),
+    Prefab("shelves_marble", marble2, assets, prefabs),
+    Prefab("shelves_glass", glass, assets, prefabs),
+    Prefab("shelves_ladder", ladder, assets, prefabs),
+    Prefab("shelves_hutch", hutch, assets, prefabs),
+    Prefab("shelves_industrial", industrial, assets, prefabs),
+    Prefab("shelves_adjustable", adjustable, assets, prefabs),
+    Prefab("shelves_fridge", fridge, assets, prefabs),
     Prefab("shelves_cinderblocks", cinderblocks, assets, prefabs),
     Prefab("shelves_midcentury", midcentury, assets, prefabs),
     Prefab("shelves_midcentury_weapon", midcentury2, assets, prefabs),
-    Prefab("shelves_wallmount", wallmount, assets, prefabs), Prefab("shelves_aframe", aframe, assets, prefabs),
-    Prefab("shelves_crates", crates, assets, prefabs), Prefab("shelves_hooks", hooks, assets, prefabs),
-    Prefab("shelves_pipe", pipe, assets, prefabs), Prefab("shelves_hattree", hattree, assets, prefabs),
-    Prefab("shelves_pallet", pallet, assets, prefabs), Prefab("shelves_floating", floating, assets, prefabs),
+    Prefab("shelves_wallmount", wallmount, assets, prefabs),
+    Prefab("shelves_aframe", aframe, assets, prefabs),
+    Prefab("shelves_crates", crates, assets, prefabs),
+    Prefab("shelves_hooks", hooks, assets, prefabs),
+    Prefab("shelves_pipe", pipe, assets, prefabs),
+    Prefab("shelves_hattree", hattree, assets, prefabs),
+    Prefab("shelves_pallet", pallet, assets, prefabs),
+    Prefab("shelves_floating", floating, assets, prefabs),
     Prefab("shelves_displaycase", display, assets, prefabs),
     Prefab("shelves_displaycase_metal", display_metal, assets, prefabs),
     Prefab("shelves_queen_display_1", queen_display1, assets, prefabs),
     Prefab("shelves_queen_display_2", queen_display2, assets, prefabs),
     Prefab("shelves_queen_display_3", queen_display3, assets, prefabs),
-    Prefab("shelves_queen_display_4", queen_display4, assets, prefabs), Prefab("shelves_ruins", ruins, assets, prefabs),
-    Prefab("shelves_bonestaff", bonestaff, assets, prefabs), Prefab("shelves_bossboar", bossboar, assets, prefabs),
+    Prefab("shelves_queen_display_4", queen_display4, assets, prefabs),
+    Prefab("shelves_ruins", ruins, assets, prefabs),
+    Prefab("shelves_bonestaff", bonestaff, assets, prefabs),
+    Prefab("shelves_bossboar", bossboar, assets, prefabs),
     Prefab("pedestal_key", key, assets, prefabs)

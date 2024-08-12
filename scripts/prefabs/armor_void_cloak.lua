@@ -42,8 +42,6 @@ end
 
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "armor_void_cloak", "swap_body")
-    owner.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/void_armour/equip_off")
-
 
     inst:ListenForEvent("blocked", inst.OnBlocked, owner)
     inst:ListenForEvent("attacked", inst.OnBlocked, owner)
@@ -188,12 +186,13 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
+    inst.components.inventoryitem.imagename = "armorvortexcloak"
     inst.components.inventoryitem.cangoincontainer = false
 
     inst.foleysound = "dontstarve_DLC003/common/crafted/vortex_armour/foley"
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("piggyback")
+    inst.components.container:WidgetSetup("armorvoidcloak")
 
     inst:AddComponent("armor")
     inst.components.armor:InitCondition(TUNING.ARMORVOIDCLOAK, TUNING.ARMORVOIDCLOAK_ABSORPTION)

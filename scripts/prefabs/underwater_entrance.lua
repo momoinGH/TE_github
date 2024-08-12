@@ -26,7 +26,7 @@ local function fn(Sim)
 
     inst.AnimState:PlayAnimation("idle_open")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst:AddTag("entrada_submersa")
 
     inst.entity:SetPristine()
@@ -76,7 +76,7 @@ local function fn1(Sim)
 
     inst.AnimState:PlayAnimation("idle_open")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst:AddTag("entrada_submersa")
 
     inst.entity:SetPristine()
@@ -126,7 +126,7 @@ local function fn2(Sim)
 
     inst.AnimState:PlayAnimation("idle_open")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst:AddTag("entrada_submersa")
 
     inst.entity:SetPristine()
@@ -225,7 +225,7 @@ local function fn3()
     inst:AddTag("trader")
     inst:AddTag("alltrader")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst.Transform:SetScale(0.3, 0.3, 0.3)
 
 

@@ -266,7 +266,7 @@ local function fn(Sim)
 
 
     inst:AddTag("structure")
-    inst:AddTag("hamletteleport")
+
 
     inst.entity:SetPristine()
 

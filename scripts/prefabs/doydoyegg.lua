@@ -107,4 +107,4 @@ end
 -- doydoyegg_cracked is really just here so old saves don't blow up
 return Prefab("doydoyegg", defaultfn, assets, prefabs),
 	--		Prefab( "common/inventory/doydoyegg_cracked", defaultfn, assets, prefabs),
-	Prefab("common/inventory/doydoyegg_cooked", cookedfn, assets, prefabs)
+	Prefab("doydoyegg_cooked", cookedfn, assets, prefabs)

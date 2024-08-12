@@ -425,7 +425,7 @@ local function makefn(name, build, bank, data)
         inst:AddTag(name)
 
         inst:AddTag("structure")
-        inst:AddTag("hamletteleport")
+
 
         inst.entity:SetPristine()
 
@@ -557,7 +557,7 @@ local function makehousefn(name, build, bank, data)
 
         inst:AddTag(name)
         inst:AddTag("structure")
-        inst:AddTag("hamletteleport")
+
 
         inst.entity:SetPristine()
 

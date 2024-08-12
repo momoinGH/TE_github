@@ -90,14 +90,6 @@ function Vineable:InitInteriorPrefab()
 end
 
 function Vineable:testevent(data)
-	--	local interior_spawner = GetWorld().components.interiorspawner
-	--	local door = data.door.components.door
-	--	if interior_spawner.doors[door.door_id] then
-	--		if interior_spawner.doors[door.door_id] == interior_spawner.doors[self.inst.components.door.door_id] or
-	--		   interior_spawner.doors[door.target_door_id] == interior_spawner.doors[self.inst.components.door.door_id] then
-	--
-	--		end
-	--	end
 end
 
 function Vineable:OnSave()

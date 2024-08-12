@@ -710,11 +710,11 @@ local rawmed = makefish_med("dogfish", "fish_dogfish", "fish_dogfish", "dogfish"
 local rawsword = makefish_med1("swordfish", "fish_swordfish", "dead_swordfish", "swordfish")
 
 return Prefab("fish_med", rawmed, dogfish_assets, prefabs),
-	Prefab("common/inventory/dead_swordfish", rawsword, swordfish_assets, prefabs),
-	Prefab("common/inventory/fish_raw", fish_raw_fn, raw_assets),
+	Prefab("dead_swordfish", rawsword, swordfish_assets, prefabs),
+	Prefab("fish_raw", fish_raw_fn, raw_assets),
 	--	   Prefab( "common/inventory/spoiled_fish", spoiledfn,spoiledfish_assets),
-	Prefab("common/inventory/fish_med_cooked", cookedfn, cooked_assets),
-	Prefab("common/inventory/quagmire_crabmeat", quagmire_crabmeat_fn, small_assets),
-	Prefab("common/inventory/quagmire_crabmeat_cooked", quagmire_crabmeat_cooked_fn, small_assets),
-	Prefab("common/inventory/lobster_dead", lobster_dead_fn, lobster_assets),
-	Prefab("common/inventory/lobster_dead_cooked", lobster_dead_cooked_fn, lobster_assets)
+	Prefab("fish_med_cooked", cookedfn, cooked_assets),
+	Prefab("quagmire_crabmeat", quagmire_crabmeat_fn, small_assets),
+	Prefab("quagmire_crabmeat_cooked", quagmire_crabmeat_cooked_fn, small_assets),
+	Prefab("lobster_dead", lobster_dead_fn, lobster_assets),
+	Prefab("lobster_dead_cooked", lobster_dead_cooked_fn, lobster_assets)

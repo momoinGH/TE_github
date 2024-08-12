@@ -185,7 +185,7 @@ end
 
 local function OnDoneTeleportingexit(inst, obj)
 	if obj and obj:HasTag("player") then
-		obj.mynetvarCameraMode:set(3)
+		obj.mynetvarCameraMode:set(0)
 	end
 end
 
@@ -291,7 +291,7 @@ local function exitfn(Sim)
 
 	local minimap = inst.entity:AddMiniMapEntity()
 	minimap:SetIcon("rock_batcave.png")
-	inst:AddTag("hamletteleport")
+
 
 	inst.entity:SetPristine()
 

@@ -1,6 +1,5 @@
 local assets =
 {
-	Asset("ANIM", "anim/pisohamlet.zip"),
 	Asset("ANIM", "anim/wallhamletant.zip"),
 	Asset("ANIM", "anim/bat_cave_door.zip"),
 }
@@ -26,8 +25,8 @@ local function entrance()
 	--    inst.AnimState:SetBank("palace")
 	--    inst.AnimState:PlayAnimation("idle", true)
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	--------------------------------------------------inicio da criacao---------------------------------------
 
@@ -81,7 +80,7 @@ local function entrance()
 	end
 
 	------------------------piso--------------------------------
-	local part = SpawnPrefab("vampirebatcave_floor")
+	local part = SpawnPrefab("interior_floor_batcave")
 	if part ~= nil then
 		part.Transform:SetPosition(x - 4.3, 0, z)
 		if part.components.health ~= nil then
@@ -379,33 +378,6 @@ local function entrance()
 	return inst
 end
 
----------------------------------pisos---------------------------------------------------------------------------
-local function SpawnPiso1(inst)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("pisohamlet")
-	inst.AnimState:SetBuild("pisohamlet")
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(5)
-	inst.AnimState:SetScale(3.8, 3.8, 3.8)
-	inst.AnimState:PlayAnimation("batcave_floor")
-	inst:AddTag("caveinterior")
-
-	inst:AddTag("NOCLICK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("terremoto")
-	inst:AddTag("canbuild")
-	inst:AddTag("blows_air")
-
-	return inst
-end
-
 local function wall_common(build)
 	local inst = CreateEntity()
 	inst.entity:AddTransform()
@@ -422,5 +394,4 @@ local function wall_common(build)
 end
 
 return Prefab("vampirebatcave_entrance", entrance),
-	Prefab("vampirebatcave_floor", SpawnPiso1, assets),
 	Prefab("wallinteriorvampirebatcave", wall_common, assets)

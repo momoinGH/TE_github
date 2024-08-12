@@ -172,7 +172,7 @@ local function wall_common(build)
 	inst.AnimState:OverrideShade(BASEMENT_SHADE)
 
 	inst:AddTag("NOCLICK")
-	inst:AddTag("vulcano_part")
+
 
 	inst.entity:SetPristine()
 
@@ -193,11 +193,6 @@ end
 
 local function wall2()
 	return wall_common("wall_wood")
-end
-
-
-local function IsNearBasement(x, y, z)
-	return #TheSim:FindEntities(x, 0, z, 100, { "alt_tile" }) > 0
 end
 
 local function entrance()
@@ -221,8 +216,8 @@ local function entrance()
 
 	inst.MiniMapEntity:SetIcon("minimap_volcano_entrance.tex")
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst:SetDeployExtraSpacing(2.5)
 
@@ -837,8 +832,8 @@ local function SpawnPiso(inst)
 	--inst.Transform:SetScale(2.82, 2.82, 2.82)
 
 	inst:AddTag("NOCLICK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
+
+
 
 	return inst
 end
