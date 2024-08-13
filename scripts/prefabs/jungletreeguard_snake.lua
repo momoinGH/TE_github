@@ -140,4 +140,4 @@ local function fn2()
 end
 
 return Prefab("jungletreeguard_snake", fn, assets, prefabs),
-	Prefab("common/inventory/snakefall", fn2, assets, prefabs)
+	Prefab("snakefall", fn2, assets, prefabs)

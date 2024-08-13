@@ -136,7 +136,7 @@ local function CreateBuildingBlocker()
 ]]
     inst:AddTag("NOCLICK")
     inst:AddTag("birdblocker")
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst:SetDeployExtraSpacing(DEPLOY_BLOCKER_RADIUS)
 
@@ -772,7 +772,7 @@ local function fn()
     inst:AddTag("wildboreking")
     inst:AddTag("king")
     inst:AddTag("trader")
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst:AddTag("prey") -- Pig King is not attackable by bosses
     inst:AddTag("houndfriend")
     inst:AddTag("wall")

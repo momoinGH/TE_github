@@ -1,17 +1,9 @@
-local assets =
-{
-	Asset("ANIM", "anim/pisohamlet.zip"),
-	Asset("ANIM", "anim/pig_shop_doormats.zip"),
-	Asset("ANIM", "anim/wallhamletcity2.zip"),
-}
 
-local BASEMENT_SHADE = 0.5
-local TAMANHODOMAPA = 1
+local InteriorSpawnerUtils = require("interiorspawnerutils")
 
 local function OnSave(inst, data)
 	data.entrada = inst.entrada
 end
-
 
 local function OnLoad(inst, data)
 	if data == nil then return end
@@ -27,38 +19,8 @@ local function OnActivateByOther(inst, source, doer)
 	end
 end
 
-local function ExitOnActivateByOther(inst, other, doer)
-	if doer ~= nil
-		and doer.sg ~= nil and not doer:HasTag("playerghost") then
-		doer.sg.statemem.teleportarrivestate = "idle"
-	end
-end
-
 local function PlayTravelSound(inst, doer)
 	inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_close")
-end
-
-local function ReceiveItem(teleporter, item)
-	if item.Transform ~= nil then
-		local x, y, z = teleporter.inst.Transform:GetWorldPosition()
-		local angle = math.random() * TWOPI
-
-		if item.Physics ~= nil then
-			item.Physics:Stop()
-			if teleporter.inst:IsAsleep() then
-				local radius = teleporter.inst:GetPhysicsRadius(0) + math.random()
-				item.Physics:Teleport(x + math.cos(angle) * radius, 0, z - math.sin(angle) * radius)
-			else
-				TemporarilyRemovePhysics(item, 1)
-				local speed = 2 + math.random() * .5 + teleporter.inst:GetPhysicsRadius(0)
-				item.Physics:Teleport(x, 4, z)
-				item.Physics:SetVel(speed * math.cos(angle), -1, speed * math.sin(angle))
-			end
-		else
-			local radius = 2 + math.random()
-			item.Transform:SetPosition(x + math.cos(angle) * radius, 0, z - math.sin(angle) * radius)
-		end
-	end
 end
 
 local function OnActivate(inst, doer)
@@ -97,8 +59,8 @@ local function entrance()
 
 	inst.MiniMapEntity:SetIcon("minimap_volcano_entrance.tex")
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst:SetDeployExtraSpacing(2.5)
 
@@ -142,7 +104,9 @@ local function entrance()
 		y = 0
 		z = TheWorld.components.contador:GetZ()
 
-		inst.exit = SpawnPrefab("antiquities_door_saida")
+		inst.exit = SpawnPrefab("house_city_exit_door")
+		inst.exit.initData = { anim = "idle_antiquities" }
+		InteriorSpawnerUtils.InitHouseInteriorPrefab(inst.exit, inst.exit.initData)
 		inst.exit.Transform:SetPosition(x + 5.2, 0, z + 0.5)
 		---------------------------cria a parede inicio------------------------------------------------------------------	
 		local tipodemuro = "wall_tigerpond"
@@ -172,7 +136,7 @@ local function entrance()
 
 
 		----------------parede do fundo---------------------------------------------
-		local part = SpawnPrefab("wallinteriorantiquities")
+		local part = SpawnPrefab("interior_wall_harlequin")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.8, 0, z)
 			part.Transform:SetRotation(180)
@@ -307,7 +271,7 @@ local function entrance()
 			end
 		end
 
-		local part = SpawnPrefab("window_round_curtains_nails")
+		local part = SpawnPrefab("window_round_curtains_nails_backwall")
 		if part ~= nil then
 			part.Transform:SetPosition(x, 0, z - 15 / 2)
 			if part.components.health ~= nil then
@@ -413,7 +377,7 @@ local function entrance()
 		end
 
 		------------------------portoes trancados--------------------------------
-		local part = SpawnPrefab("pig_shop_antiquities_floor")
+		local part = SpawnPrefab("interior_floor_wood")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.35, 0, z)
 			if part.components.health ~= nil then
@@ -428,12 +392,6 @@ local function entrance()
 
 
 		--------------------------------------------cria o piso e itens fim -------------------------------------------------------	
-
-
-
-
-
-
 
 
 
@@ -464,154 +422,6 @@ local function entrance()
 	return inst
 end
 
----------------------------------pisos---------------------------------------------------------------------------
-local function SpawnPiso1(inst)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
+return Prefab("pig_antiquities_entrance", entrance)
 
-	inst.AnimState:SetBank("pisohamlet")
-	inst.AnimState:SetBuild("pisohamlet")
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(5)
-	--	inst.AnimState:OverrideShade(BASEMENT_SHADE)
-	--tamanho do chao
-	inst.AnimState:SetScale(4.5, 4.5, 4.5)
-	inst.AnimState:PlayAnimation("noise_woodfloor")
-	--inst.Transform:SetRotation(45)
 
-	--inst.Transform:SetScale(2.82, 2.82, 2.82)
-
-	inst:AddTag("NOCLICK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("shopinterior")
-	inst:AddTag("blows_air")
-
-	return inst
-end
-
-local function wall_common(build)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddNetwork()
-	inst.entity:AddAnimState()
-	inst.AnimState:SetBank("wallhamletcity2")
-	inst.AnimState:SetBuild("wallhamletcity2")
-	inst.AnimState:PlayAnimation("harlequin_panel", true)
-	--	inst.Transform:SetTwoFaced()
-	--    inst.AnimState:SetOrientation(ANIM_ORIENTATION.RotatingBillboard)
-
-	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-	--    inst.AnimState:SetSortOrder( 3 )
-	inst.AnimState:SetScale(2.8, 2.8, 2.8)
-
-	return inst
-end
-
-----------------------------------------------------------entrada-----------------------------------------------------------------------------
-local function OnDoneTeleporting(inst, obj)
-	if obj and obj:HasTag("player") then
-		obj.mynetvarCameraMode:set(4)
-	end
-end
-
-local function OnActivate(inst, doer)
-	if doer:HasTag("player") then
-		ProfileStatsSet("wormhole_used", true)
-		doer.mynetvarCameraMode:set(6)
-		local other = inst.components.teleporter.targetTeleporter
-		if other ~= nil then
-			DeleteCloseEntsWithTag("WORM_DANGER", other, 15)
-		end
-
-		if doer.components.talker ~= nil then
-			doer.components.talker:ShutUp()
-		end
-		--Sounds are triggered in player's stategraph
-	elseif inst.SoundEmitter ~= nil then
-		inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_close")
-	end
-end
-
-local function OnActivateByOther(inst, source, doer)
-	--    if not inst.sg:HasStateTag("open") then
-	--        inst.sg:GoToState("opening")
-	--    end
-end
-
-local function onaccept(inst, giver, item)
-	inst.components.inventory:DropItem(item)
-	inst.components.teleporter:Activate(item)
-end
-
-local function StartTravelSound(inst, doer)
-	inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_close")
-	--    doer:PushEvent("wormholetravel", WORMHOLETYPE.WORM) --Event for playing local travel sound
-end
-
-local function OnHaunt(inst, haunter)
-	inst.components.teleporter:Activate(haunter)
-end
-
-local function fnescada()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetIcon("vamp_bat_cave.png")
-
-	inst.AnimState:SetBank("pig_shop_doormats")
-	inst.AnimState:SetBuild("pig_shop_doormats")
-	inst.AnimState:PlayAnimation("idle_antiquities")
-	inst.Transform:SetRotation(90)
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-
-	inst:AddTag("trader")
-	inst:AddTag("alltrader")
-	inst:AddTag("guard_entrance")
-	inst:AddTag("hamletteleport")
-
-	inst:AddTag("antlion_sinkhole_blocker")
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("trader")
-	inst.components.trader.acceptnontradable = true
-	inst.components.trader.onaccept = onaccept
-	inst.components.trader.deleteitemonaccept = false
-
-	inst:AddComponent("inspectable")
-	inst.components.inspectable:RecordViews()
-
-	inst:AddComponent("teleporter")
-	inst.components.teleporter.onActivate = OnActivate
-	inst.components.teleporter.onActivateByOther = OnActivateByOther
-	inst.components.teleporter.offset = 0
-	inst.components.teleporter.hamlet = true
-	inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-	inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-	inst:AddComponent("inventory")
-	inst:AddComponent("hauntable")
-	inst.components.hauntable:SetOnHauntFn(OnHaunt)
-
-	return inst
-end
-
-return Prefab("pig_antiquities_entrance", entrance),
-	Prefab("antiquities_door_saida", fnescada, assets),
-	Prefab("pig_shop_antiquities_floor", SpawnPiso1, assets),
-	Prefab("wallinteriorantiquities", wall_common, assets)

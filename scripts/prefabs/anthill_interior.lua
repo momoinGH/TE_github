@@ -1,6 +1,5 @@
 local assets =
 {
-	Asset("ANIM", "anim/pisohamlet.zip"),
 	Asset("ANIM", "anim/ant_cave_door.zip"),
 	Asset("ANIM", "anim/wallhamletant.zip"),
 	Asset("ANIM", "anim/maparuina.zip"),
@@ -50,12 +49,12 @@ local function createroom(inst)
 
 	------------------------piso-------------------------------------------------------------------------------
 	if inst.tipodesala == 2 then
-		local part = SpawnPrefab("anthill_floor2")
+		local part = SpawnPrefab("anthill_floor")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 4, 0, z)
 		end
 	else
-		local part = SpawnPrefab("anthill_floor")
+		local part = SpawnPrefab("interior_floor_antcave")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 4, 0, z)
 		end
@@ -769,38 +768,6 @@ local function maintainantpop(inst)
 	end
 end
 
-
----------------------------------pisos---------------------------------------------------------------------------
-local function SpawnPiso1()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("pisohamlet")
-	inst.AnimState:SetBuild("pisohamlet")
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(5)
-	inst.AnimState:SetScale(3.8, 3.8, 3.8)
-	inst.AnimState:PlayAnimation("antcave_floor")
-
-	inst:AddTag("NOCLICK")
-	inst:AddTag("NOBLOCK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("caveinterior")
-	inst:AddTag("pisoanthill")
-	inst:AddTag("terremoto")
-	inst:AddTag("canbuild")
-	inst:AddTag("blows_air")
-
-	--    inst:DoPeriodicTask( math.random(20, 40), function(inst) maintainantpop(inst) end )
-	return inst
-end
-
 local function SpawnPiso6(inst)
 	local inst = CreateEntity()
 
@@ -881,7 +848,7 @@ end
 
 local function OnActivate(inst, doer)
 	if doer:HasTag("player") then
-		doer.mynetvarCameraMode:set(3)
+		doer.mynetvarCameraMode:set(0)
 
 		local alvo = inst.components.teleporter.targetTeleporter
 		if alvo then
@@ -1194,10 +1161,10 @@ local function fnescadaentrada()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
+
 	inst:AddTag("timechange_anims")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -1267,9 +1234,9 @@ local function fnescadacima()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst.entity:SetPristine()
 
@@ -1324,8 +1291,8 @@ local function fnescadabaixo()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst.entity:SetPristine()
 
@@ -1380,9 +1347,9 @@ local function fnescadaesquerda()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst.entity:SetPristine()
 
@@ -1436,9 +1403,9 @@ local function fnescadadireita()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst.entity:SetPristine()
 
@@ -1485,9 +1452,9 @@ local function fnescadaqueen()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst.entity:SetPristine()
 
@@ -1536,8 +1503,8 @@ local function CommonRoom(tipodesala)
 
 	inst.tipodesala = tipodesala
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	createroom(inst)
 
@@ -1570,8 +1537,6 @@ return Prefab("createanthilldefaltroom", normalroom, assets),
 	Prefab("createanthillcomumroom", comumroom, assets),
 	Prefab("createanthillqueenroom", saladarainharoom, assets),
 
-	Prefab("anthill_floor", SpawnPiso1, assets),
-	Prefab("anthill_floor2", SpawnPiso1, assets),
 	Prefab("wallinterioranthill", wall_common, assets),
 	Prefab("mapaant", SpawnPiso6, assets),
 	Prefab("mapainicioant", SpawnPiso6a, assets),

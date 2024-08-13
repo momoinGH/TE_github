@@ -123,7 +123,7 @@ end
 ----------------------------------------------------------entrada-----------------------------------------------------------------------------
 local function OnDoneTeleporting(inst, obj)
     if obj and obj:HasTag("player") then
-        obj.mynetvarCameraMode:set(3)
+        obj.mynetvarCameraMode:set(0)
     end
 end
 
@@ -185,7 +185,7 @@ local function makefn(name, build_interiors, dungeonname)
 
         --inst:AddTag("structure")
         inst:AddTag("ruins_exit")
-        inst:AddTag("hamletteleport")
+
 
         inst.entity:SetPristine()
 
@@ -288,7 +288,7 @@ local function makefn2(name, build_interiors, dungeonname)
 
         --inst:AddTag("structure")
         inst:AddTag("ruins_exit")
-        inst:AddTag("hamletteleport")
+
 
         inst.entity:SetPristine()
 

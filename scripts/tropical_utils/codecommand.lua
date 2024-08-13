@@ -3,31 +3,33 @@
 --使用案例及最新版：https://n77a3mjegs.feishu.cn/docx/K9bUdpb5Qo85j2xo8XkcOsU1nuh?from=from_copylink
 --这个文件不会被调用，单纯写一些源码的注解，虽然删了更节省体积，不过我相信也许会对其他moder有些帮助，而且全局函数在一些编译器下会提供代码补全功能
 
-STRINGS         = {}
-TheWorld        = {}
-ThePlayer       = {}
-
-TheCamera       = {}
-env             = {}
-TUNING          = {}
-GLOBAL          = {}
-ACTIONS         = {}
-EQUIPSLOTS      = {}
-COLLISION       = {}
-Prefabs         = {}
-GROUND          = {}
-WORLD_TILES     = {}
-GROUND_NAMES    = {}
-GROUND_FLOORING = {}
-Input           = {}
-PI              = math.pi
-PI2             = PI * 2
-TWOPI           = PI2
-SQRT2           = math.sqrt(2)
-GOLDENANGLE     = PI * (3 - math.sqrt(5))
-DEGREES         = PI / 180
-RADIANS         = 180 / PI
-FRAMES          = 1 / 30
+STRINGS          = {}
+TheWorld         = {}
+Map              = {}
+ThePlayer        = {}
+DEPLOYMODE       = {}
+ANIM_ORIENTATION = {}
+TheCamera        = {}
+env              = {}
+TUNING           = {}
+GLOBAL           = {}
+ACTIONS          = {}
+EQUIPSLOTS       = {}
+COLLISION        = {}
+Prefabs          = {}
+GROUND           = {}
+WORLD_TILES      = {}
+GROUND_NAMES     = {}
+GROUND_FLOORING  = {}
+Input            = {}
+PI               = math.pi
+PI2              = PI * 2
+TWOPI            = PI2
+SQRT2            = math.sqrt(2)
+GOLDENANGLE      = PI * (3 - math.sqrt(5))
+DEGREES          = PI / 180
+RADIANS          = 180 / PI
+FRAMES           = 1 / 30
 function Class(base, _ctor, props) end
 
 Vector3 = Class(function(self, x, y, z) end)
@@ -58,6 +60,9 @@ function PlayFootstep(inst, volume, ispredicted) end
 function MakeHauntableLaunch(inst, chance, speed, cooldown, haunt_value) end
 
 function FrameEvent(frame, fn) end
+
+--- 根据小地图图标名获取atlas
+function GetMinimapAtlas(imagename) end
 
 RemapSoundEvent = function(name, new_name) end
 Asset = Class(function(self, type, file, param) end)
@@ -167,6 +172,7 @@ function CanEntitySeeInDark(inst)
 end
 
 --在沙尘暴中看见、是否能看见某个点、是否能看见某个对象...
+
 
 ---移除对象碰撞体积一段时间，没有Physics的对象会报错的（可惜没有把定时任务返回，让开发者随意控制）
 function TemporarilyRemovePhysics(obj, time)
@@ -742,7 +748,8 @@ ThePlayer.fx.AnimState:SetFinalOffset(0);
 
 ThePlayer.fx.AnimState:SetLayer(LAYER_BACKGROUND);
 -- 可以让物品一闪一闪的
-inst.AnimState:SetHaunted(true)
+door.AnimState:SetHaunted(true)
+
 -- 获取对象当前的面向（相对摄像机）
 print(ThePlayer.AnimState:GetCurrentFacing())
 
@@ -840,6 +847,10 @@ TheNet:IsDedicated() -- 判断是否是服务器
 
 ---装备耐久为0不消失，可修复
 function MakeForgeRepairable(inst, material, onbroken, onrepaired) end
+
+function MakeHauntableLaunchAndIgnite(inst, launchchance, ignitechance, speed, cooldown, launch_haunt_value,
+                                      ignite_haunt_value)
+end
 
 ------------------------------------------------------------------------------------------------------------------------
 -- 22. components/map.lua
@@ -969,7 +980,7 @@ RemoveRecipeFromFilter = function(recipe_name, filter_name) end
 ---@param ingredients table Ingredient组成的表
 ---@param tech table TECH常量
 ---@param config table|nil
----@param filters string|nil CRAFTING_FILTER_DEFS的name
+---@param filters table|nil CRAFTING_FILTER_DEFS的name
 AddRecipe2 = function(name, ingredients, tech, config, filters) end
 AddCharacterRecipe = function(name, ingredients, tech, config, extra_filters) end
 AddDeconstructRecipe = function(name, return_ingredients) end
@@ -1022,3 +1033,27 @@ KnownModIndex:IsModEnabled("workshop-1289779251")
 
 
 function IsSimPaused() end
+
+-- 小地图焦点重新回到玩家身上
+TheWorld.minimap.MiniMap:ResetOffset()
+-- 小地图显示某个区域
+TheWorld.minimap.MiniMap:ShowArea(x, 0, y, 8)
+-- 重置战争迷雾，要重新探图了
+TheWorld.minimap.MiniMap:ClearRevealedAreas()
+
+-- 世界坐标相对于小地图的位置
+TheWorld.minimap.MiniMap:WorldPosToMapPos(x, y, z)
+
+TheWorld.minimap.MiniMap:MapPosToWorldPos(x, y, z)
+
+-- 小地图缩放程度
+TheWorld.minimap.MiniMap:GetZoom()
+-- 小地图缩放，加减法，正数缩小，负数放大
+TheWorld.minimap.MiniMap:Zoom(-0.1)
+-- 小地图偏移
+TheWorld.minimap.MiniMap:Offset(4, 4)
+
+
+for k, v in pairs(getmetatable(ThePlayer.MiniMapEntity).__index) do
+    print(k, v);
+end;

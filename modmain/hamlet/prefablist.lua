@@ -1,4 +1,8 @@
 PrefabFiles = {
+    "swfishbait",
+    "construction_permit",
+    "deco_roomglow",
+    "tropical_housedoor",
     "grassnova",
     "turfshamlet",
     "frog_poison",
@@ -123,13 +127,12 @@ PrefabFiles = {
     "pigman_shopkeeper_desk",
     "shop_pedestals",
     "deed",
-    "playerhouse_city_interior",
+    "wallrenovation",
     "playerhouse_city_interior2",
     "shelf",
     "shelf_slot",
     "trinkets_giftshop",
     "key_to_city",
-    "wallpaper",
     "player_house_kits",
     "player_house",
     "pigman_city",
@@ -251,10 +254,19 @@ PrefabFiles = {
     "city_lamp2",
     "pig_guard_tower2",
     "wall_spawn_city",
-    "deco_util",
-    "deco_util2",
-
-
+    "deco",
+    "deco_windows",
+    "deco_table",
+    "deco_wall_ornament",
+    "deco_plantholder",
+    "deco_academy",
+    "deco_antiquities",
+    "deco_chair",
+    "deco_florist",
+    "deco_beam",
+    "deco_lamp",
+    "interior_texture_packages",
+    "deco_placers",
 
 
 

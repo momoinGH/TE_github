@@ -633,7 +633,7 @@ return Class(function(self, inst)
     end or nil
 
     local LIGHTNINGSTRIKE_CANT_TAGS = { "playerghost", "INLIMBO" }
-    local LIGHTNINGSTRIKE_ONEOF_TAGS = { "lightningrod", "lightningtarget", "lightningblocker", "blows_air" }
+    local LIGHTNINGSTRIKE_ONEOF_TAGS = { "lightningrod", "lightningtarget", "lightningblocker", "interior_center" }
     local LIGHTNINGSTRIKE_SEARCH_RANGE = 40
     local OnSendLightningStrike = _ismastersim and function(src, pos)
         local closest_generic = nil
@@ -647,7 +647,7 @@ return Class(function(self, inst)
             -- Track any blockers we find, since we redirect the strike position later,
             -- and might redirect it into their block range.
             --###
-            local interior = v:HasTag("blows_air")
+            local interior = v:HasTag("interior_center")
             if interior then return end
             local is_blocker = v.components.lightningblocker ~= nil
             if is_blocker then

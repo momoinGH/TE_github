@@ -33,7 +33,7 @@ end
 --------------------------------------do teleporter------------------------
 local function OnDoneTeleporting(inst, obj)
     if obj and obj:HasTag("player") then
-        obj.mynetvarCameraMode:set(3)
+        obj.mynetvarCameraMode:set(0)
     end
 end
 
@@ -86,7 +86,7 @@ local function fn(Sim)
     --inst:AddTag("structure")
     inst:AddTag("houndmound")
     inst:AddTag("batcave")
-    inst:AddTag("hamletteleport")
+
 
     inst.entity:SetPristine()
 

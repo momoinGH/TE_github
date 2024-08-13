@@ -34,8 +34,15 @@ TUNING.tropical = {
     disembarkation               = GetModConfigData("automatic_disembarkation"),              --自动离船
     bosslife                     = GetModConfigData("bosslife"),                              --巨兽生命值
 }
+--哈姆雷特洞穴
+TUNING.tropical.hamlet_caves = TUNING.tropical.only_hamlet and GetModConfigData("hamlet_caves")
+    or TUNING.tropical.only_shipwrecked and GetModConfigData("hamlet_caves2")
+    or kindofworld == 15 and GetModConfigData("hamlet_caves3")
+    or false
 --哈姆雷特
-TUNING.tropical.hamlet = TUNING.tropical.only_hamlet or (kindofworld == 15 and GetModConfigData("Hamlet") ~= 5)
+TUNING.tropical.hamlet = TUNING.tropical.hamlet_caves
+    or TUNING.tropical.only_hamlet
+    or (kindofworld == 15 and GetModConfigData("Hamlet") ~= 5)
 --峰顶
 TUNING.tropical.pinacle = TUNING.tropical.hamlet and GetModConfigData("pinacle")
 --蚁丘
@@ -51,11 +58,6 @@ TUNING.tropical.volcano = TUNING.tropical.shipwrecked and GetModConfigData("Volc
 TUNING.tropical.hamlet_pigcity1 = TUNING.tropical.hamlet and GetModConfigData("pigcity1") or 5
 --猪伯利皇城
 TUNING.tropical.hamlet_pigcity2 = TUNING.tropical.hamlet and GetModConfigData("pigcity2") or 5
---哈姆雷特洞穴
-TUNING.tropical.hamlet_caves = TUNING.tropical.only_hamlet and GetModConfigData("hamlet_caves")
-    or TUNING.tropical.only_shipwrecked and GetModConfigData("hamlet_caves2")
-    or kindofworld == 15 and GetModConfigData("hamlet_caves3")
-    or false
 --冰霜岛屿
 TUNING.tropical.frost_island = TUNING.tropical.only_shipwrecked and GetModConfigData("frost_island")
     or kindofworld == 15 and GetModConfigData("frost_island2")

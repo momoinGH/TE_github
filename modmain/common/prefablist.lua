@@ -1,5 +1,6 @@
 PrefabFiles =
 {
+    "interior_center",
     "shipwrecked_boat",
     "shipwrecked_boat_placer",
     "shipwrecked_boat_placer2",
@@ -171,13 +172,11 @@ if TUNING.tropical.hamlet_caves then
     table.insert(PrefabFiles, "pigman_shopkeeper_desk")
     table.insert(PrefabFiles, "shop_pedestals")
     table.insert(PrefabFiles, "deed")
-    table.insert(PrefabFiles, "playerhouse_city_interior")
     table.insert(PrefabFiles, "playerhouse_city_interior2")
     table.insert(PrefabFiles, "shelf")
     table.insert(PrefabFiles, "shelf_slot")
     table.insert(PrefabFiles, "trinkets_giftshop")
     table.insert(PrefabFiles, "key_to_city")
-    table.insert(PrefabFiles, "wallpaper")
     table.insert(PrefabFiles, "player_house_kits")
     table.insert(PrefabFiles, "player_house")
 

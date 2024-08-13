@@ -310,7 +310,7 @@ local function fn2()
     inst.Transform:SetScale(0.8, 0.8, 0.8)
 
     inst:AddTag("structure")
-    inst:AddTag("hamletteleport")
+
 
     inst.entity:SetPristine()
 

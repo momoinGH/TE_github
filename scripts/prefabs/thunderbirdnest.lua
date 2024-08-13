@@ -51,7 +51,7 @@ local function fn(Sim)
     inst.AnimState:SetBank("thunderbird_nest")
     inst.AnimState:PlayAnimation("orenest", false)
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 

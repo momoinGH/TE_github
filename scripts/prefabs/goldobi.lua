@@ -201,7 +201,7 @@ local function commonfn(tags)
     inst.AnimState:SetBuild("gold_obi")
     inst.AnimState:PlayAnimation("idle_inactive")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
     for _, v in ipairs(tags) do
         inst:AddTag(v)
     end

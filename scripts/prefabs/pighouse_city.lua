@@ -458,10 +458,10 @@ local function makefn(animset, setbuild, spawnList, minimapicon)
         inst.components.workable:SetOnFinishCallback(onhammered)
         inst.components.workable:SetOnWorkCallback(onhit)
 
-        if not inst.components.spawner then
-            inst:AddComponent("spawner")
-            WorldSettings_Spawner_SpawnDelay(inst, TUNING.TOTAL_DAY_TIME * 3, true)
-        end
+
+        inst:AddComponent("spawner")
+        WorldSettings_Spawner_SpawnDelay(inst, TUNING.TOTAL_DAY_TIME * 3, true)
+
         if spawnList then
             ConfigureSpawner(inst, spawnList)
         else
@@ -606,10 +606,10 @@ local function makefn2(animset, setbuild, spawnList)
         inst.components.workable:SetWorkLeft(4)
         inst.components.workable:SetOnFinishCallback(onhammered)
         inst.components.workable:SetOnWorkCallback(onhit)
-        if not inst.components.spawner then
-            inst:AddComponent("spawner")
-            WorldSettings_Spawner_SpawnDelay(inst, TUNING.TOTAL_DAY_TIME * 3, true)
-        end
+
+        inst:AddComponent("spawner")
+        WorldSettings_Spawner_SpawnDelay(inst, TUNING.TOTAL_DAY_TIME * 3, true)
+
         if spawnList then
             ConfigureSpawner(inst, spawnList)
         else
@@ -630,8 +630,7 @@ local function makefn2(animset, setbuild, spawnList)
             }
 
 
-            inst:AddComponent("spawner")
-            WorldSettings_Spawner_SpawnDelay(inst, TUNING.TOTAL_DAY_TIME * 3, true)
+
             inst.components.spawner:Configure(lista[math.random(1, 11)], PIGHOUSE_CITY_RESPAWNTIME, 1)
             inst.components.spawner.onoccupied = onoccupied
             inst.components.spawner.onvacate = onvacate

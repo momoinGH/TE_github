@@ -273,7 +273,7 @@ local function common(minimap, bank, build, loots, data)
 
     inst:AddTag("shipwrecked_boat")
     inst:AddTag("ignorewalkableplatforms")
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst:AddTag("boat")
     inst:AddTag("wood")
 

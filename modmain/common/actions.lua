@@ -8,30 +8,28 @@ ACTIONS.GIVE.priority    = 0
 
 Utils.FnDecorator(ACTIONS.JUMPIN, "strfn", function(act)
     if act.target ~= nil then
-        if act.target:HasTag("hamletteleport") then
-            return { "HAMLET" }, true
+        if act.target:HasTag("hamlet_houseexit") then
+            return { "LEAVE" }, true
+        elseif act.target:HasTag("hamlet_housedoor") then
+            return { "ENTER" }, true
         elseif act.target:HasTag("stairs") then
             return { "USE" }, true
         end
     end
 end)
 
--- 进入哈姆雷特小房子
-Utils.FnDecorator(ACTIONS.JUMPIN, "fn", function(act)
-    if act.doer ~= nil and
-        act.doer.sg ~= nil and
-        act.doer.sg.currentstate.name == "jumpin_pre" then
-        if act.target ~= nil and
-            act.target.components.teleporter ~= nil and
-            act.target.components.teleporter:IsActive()
-            and act.target:HasTag("hamletteleport")
-        then
-            act.doer.sg:GoToState("hamletteleport", { teleporter = act.target })
-            return { true }, true
-        end
-    end
-end)
-
+-- Utils.FnDecorator(ACTIONS.JUMPIN, "fn", function(act)
+--     if act.doer ~= nil
+--         and act.doer.sg ~= nil
+--         and act.target ~= nil
+--         and act.target:HasTag("hamlet_housedoor")
+--         and act.target.components.teleporter ~= nil
+--         and act.target.components.teleporter:IsActive()
+--     then
+--         act.doer.sg:GoToState("jumpin_interior", { teleporter = act.target })
+--         return { true }, true
+--     end
+-- end)
 
 ACTIONS.CASTAOE.strfn = function(act)
     return act.invobject ~= nil and
@@ -545,7 +543,7 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
             end
 
             if equipamento and equipamento:HasTag("shop_wall_checkered_metal") then
-                act.target.AnimState:SetBank("wallhamletcity1")
+                act.target.AnimState:SetBank("wallhamletcity")
                 act.target.AnimState:SetBuild("wallhamletcity1")
                 act.target.AnimState:PlayAnimation("shop_wall_checkered_metal", true)
                 act.target.wallpaper = "shop_wall_checkered_metal"
@@ -553,7 +551,7 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
             end
 
             if equipamento and equipamento:HasTag("shop_wall_circles") then
-                act.target.AnimState:SetBank("wallhamletcity1")
+                act.target.AnimState:SetBank("wallhamletcity")
                 act.target.AnimState:SetBuild("wallhamletcity1")
                 act.target.AnimState:PlayAnimation("shop_wall_circles", true)
                 act.target.wallpaper = "shop_wall_circles"
@@ -561,7 +559,7 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
             end
 
             if equipamento and equipamento:HasTag("shop_wall_marble") then
-                act.target.AnimState:SetBank("wallhamletcity1")
+                act.target.AnimState:SetBank("wallhamletcity")
                 act.target.AnimState:SetBuild("wallhamletcity1")
                 act.target.AnimState:PlayAnimation("shop_wall_marble", true)
                 act.target.wallpaper = "shop_wall_marble"
@@ -569,7 +567,7 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
             end
 
             if equipamento and equipamento:HasTag("shop_wall_sunflower") then
-                act.target.AnimState:SetBank("wallhamletcity1")
+                act.target.AnimState:SetBank("wallhamletcity")
                 act.target.AnimState:SetBuild("wallhamletcity1")
                 act.target.AnimState:PlayAnimation("shop_wall_sunflower", true)
                 act.target.wallpaper = "shop_wall_sunflower"
@@ -577,7 +575,7 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
             end
 
             if equipamento and equipamento:HasTag("shop_wall_woodwall") then
-                act.target.AnimState:SetBank("wallhamletcity1")
+                act.target.AnimState:SetBank("wallhamletcity")
                 act.target.AnimState:SetBuild("wallhamletcity1")
                 act.target.AnimState:PlayAnimation("shop_wall_woodwall", true)
                 act.target.wallpaper = "shop_wall_woodwall"
@@ -585,7 +583,7 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
             end
 
             if equipamento and equipamento:HasTag("wall_mayorsoffice_whispy") then
-                act.target.AnimState:SetBank("wallhamletcity1")
+                act.target.AnimState:SetBank("wallhamletcity")
                 act.target.AnimState:SetBuild("wallhamletcity1")
                 act.target.AnimState:PlayAnimation("wall_mayorsoffice_whispy", true)
                 act.target.wallpaper = "wall_mayorsoffice_whispy"
@@ -593,7 +591,7 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
             end
 
             if equipamento and equipamento:HasTag("harlequin_panel") then
-                act.target.AnimState:SetBank("wallhamletcity2")
+                act.target.AnimState:SetBank("wallhamletcity")
                 act.target.AnimState:SetBuild("wallhamletcity2")
                 act.target.AnimState:PlayAnimation("harlequin_panel", true)
                 act.target.wallpaper = "harlequin_panel"
@@ -601,7 +599,7 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
             end
 
             if equipamento and equipamento:HasTag("shop_wall_fullwall_moulding") then
-                act.target.AnimState:SetBank("wallhamletcity2")
+                act.target.AnimState:SetBank("wallhamletcity")
                 act.target.AnimState:SetBuild("wallhamletcity2")
                 act.target.AnimState:PlayAnimation("shop_wall_fullwall_moulding", true)
                 act.target.wallpaper = "shop_wall_fullwall_moulding"
@@ -609,7 +607,7 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
             end
 
             if equipamento and equipamento:HasTag("shop_wall_floraltrim2") then
-                act.target.AnimState:SetBank("wallhamletcity2")
+                act.target.AnimState:SetBank("wallhamletcity")
                 act.target.AnimState:SetBuild("wallhamletcity2")
                 act.target.AnimState:PlayAnimation("shop_wall_floraltrim2", true)
                 act.target.wallpaper = "shop_wall_floraltrim2"
@@ -617,7 +615,7 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
             end
 
             if equipamento and equipamento:HasTag("shop_wall_upholstered") then
-                act.target.AnimState:SetBank("wallhamletcity2")
+                act.target.AnimState:SetBank("wallhamletcity")
                 act.target.AnimState:SetBuild("wallhamletcity2")
                 act.target.AnimState:PlayAnimation("shop_wall_upholstered", true)
                 act.target.wallpaper = "shop_wall_upholstered"
@@ -1156,7 +1154,7 @@ Constructor.AddAction({ priority = 10, distance = 4, mount_valid = false, encumb
 
 
 -- 收回小船
-Constructor.AddAction({ priority = 100, rmb = true, distance = 4, mount_valid = false },
+Constructor.AddAction({ priority = 11, rmb = true, distance = 4, mount_valid = false },
     "RETRIEVE",
     STRINGS.ACTIONS.RETRIEVE,
     function(act)

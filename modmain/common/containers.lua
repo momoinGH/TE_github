@@ -387,3 +387,6 @@ params.woodlegsboatamigo = params.woodlegsboat
 ----------------------------------------------------------------------------------------------------
 
 params.trawlnetdropped = params.treasurechest
+----------------------------------------------------------------------------------------------------
+
+params.armorvoidcloak = params.piggyback

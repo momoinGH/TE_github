@@ -314,7 +314,7 @@ local function fn()
     inst.entity:AddNetwork()
 
     inst:AddTag("ignorewalkableplatforms")
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst:AddTag("boat")
     inst.sounds = sounds
     inst.walksound = "wood"

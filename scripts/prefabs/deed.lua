@@ -5,9 +5,10 @@ local assets =
 }
 
 
-local function ondeploy(inst, pt)
-    local casa = SpawnPrefab("playerhouse_city_entrance")
-    casa.Transform:SetPosition(pt:Get())
+local function ondeploy(inst, pt, deployer)
+    local house = SpawnPrefab("playerhouse_city")
+    house.Transform:SetPosition(pt:Get())
+    house:PushEvent("onbuilt", { builder = deployer, pos = pt })
     inst:Remove()
 end
 

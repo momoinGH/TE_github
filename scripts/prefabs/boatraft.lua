@@ -326,7 +326,7 @@ local function MakeBoat(name, radius)
         inst.entity:AddNetwork()
 
         inst:AddTag("ignorewalkableplatforms")
-        inst:AddTag("antlion_sinkhole_blocker")
+
         if name == "boat_raft_rot" then
             inst:AddTag("boat")
         else

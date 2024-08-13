@@ -81,4 +81,4 @@ local function fn2(Sim)
 end
 
 return Prefab("radish_planted", fn, assets),
-	Prefab("common/inventory/turnip_planted", fn2, assets)
+	Prefab("turnip_planted", fn2, assets)

@@ -183,9 +183,10 @@ WIKI_DATA.armor_snakeskin = {
     insulator_type = "winter",
     insulator = TUNING.INSULATION_SMALL,
 }
+-- TODO 图片被我弄没了
 WIKI_DATA.armorvoidcloak = {
     atlas = hamletinventory,
-    tex = "armorvoidcloak.tex",
+    tex = "armorvortexcloak.tex",
     bank = "armor_void_cloak",
     build = "armor_void_cloak",
     anim = "anim",

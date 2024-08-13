@@ -69,7 +69,7 @@ local function fn()
     inst.AnimState:SetBank("lavaarena_boaraudience1")
     inst.AnimState:PlayAnimation("idle_loop", true)
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
     inst:AddTag("porcao")
     inst.persists = false
 
@@ -110,7 +110,7 @@ local function fn1()
     inst.AnimState:SetBank("lavaarena_boaraudience1")
     inst.AnimState:PlayAnimation("idle_loop", true)
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 
@@ -146,7 +146,7 @@ local function fn2()
     inst.AnimState:SetBank("lavaarena_boaraudience1")
     inst.AnimState:PlayAnimation("idle_loop", true)
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 
@@ -181,7 +181,7 @@ local function fn3()
     inst.AnimState:SetBank("lavaarena_boaraudience1")
     inst.AnimState:PlayAnimation("idle_loop", true)
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 
@@ -216,7 +216,7 @@ local function fn4()
     inst.AnimState:SetBank("lavaarena_boaraudience1")
     inst.AnimState:PlayAnimation("idle_loop", true)
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 
@@ -334,7 +334,7 @@ local function populate_stand_client(inst)
                 fence.AnimState:Show("teeth2")
                 fence.AnimState:Show("teeth3")
             elseif z == 0 then
-                fence.AnimState:Show("banner1")                --fence.AnimState:Show("teeth1") fence.AnimState:Show("teeth2")
+                fence.AnimState:Show("banner1") --fence.AnimState:Show("teeth1") fence.AnimState:Show("teeth2")
             elseif z == 1 then
                 fence.AnimState:Show("teeth1")
                 fence.AnimState:Show("teeth4")

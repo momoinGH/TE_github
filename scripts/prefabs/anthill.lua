@@ -18,7 +18,7 @@ local prefabs             = {
 --------------------------------------do teleporter------------------------
 local function OnDoneTeleporting(inst, obj)
     if obj and obj:HasTag("player") then
-        obj.mynetvarCameraMode:set(3)
+        obj.mynetvarCameraMode:set(0)
     end
 end
 
@@ -74,7 +74,7 @@ local function fn()
 
     inst:AddTag("structure")
     inst:AddTag("anthill_outside")
-    inst:AddTag("hamletteleport")
+
 
     inst.entity:SetPristine()
 

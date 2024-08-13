@@ -1,15 +1,4 @@
-local assets =
-{
-	Asset("ANIM", "anim/pisohamlet.zip"),
-	Asset("ANIM", "anim/wallhamletpig.zip"),
-	Asset("ANIM", "anim/palace.zip"),
-	Asset("ANIM", "anim/pig_shop_doormats.zip"),
-	Asset("ANIM", "anim/palace_door.zip"),
-	Asset("ANIM", "anim/interior_wall_decals_palace.zip"),
-}
-
-local BASEMENT_SHADE = 0.5
-local TAMANHODOMAPA = 1
+local InteriorSpawnerUtils = require("interiorspawnerutils")
 
 local function OnSave(inst, data)
 	data.entrada = inst.entrada
@@ -30,40 +19,6 @@ local function OnActivateByOther(inst, source, doer)
 	end
 end
 
-local function ExitOnActivateByOther(inst, other, doer)
-	if doer ~= nil
-		and doer.sg ~= nil and not doer:HasTag("playerghost") then
-		doer.sg.statemem.teleportarrivestate = "idle"
-	end
-end
-
-local function PlayTravelSound(inst, doer)
-	inst.SoundEmitter:PlaySound("dontstarve/cave/rope_down")
-end
-
-local function ReceiveItem(teleporter, item)
-	if item.Transform ~= nil then
-		local x, y, z = teleporter.inst.Transform:GetWorldPosition()
-		local angle = math.random() * TWOPI
-
-		if item.Physics ~= nil then
-			item.Physics:Stop()
-			if teleporter.inst:IsAsleep() then
-				local radius = teleporter.inst:GetPhysicsRadius(0) + math.random()
-				item.Physics:Teleport(x + math.cos(angle) * radius, 0, z - math.sin(angle) * radius)
-			else
-				TemporarilyRemovePhysics(item, 1)
-				local speed = 2 + math.random() * .5 + teleporter.inst:GetPhysicsRadius(0)
-				item.Physics:Teleport(x, 4, z)
-				item.Physics:SetVel(speed * math.cos(angle), -1, speed * math.sin(angle))
-			end
-		else
-			local radius = 2 + math.random()
-			item.Transform:SetPosition(x + math.cos(angle) * radius, 0, z - math.sin(angle) * radius)
-		end
-	end
-end
-
 local function OnActivate(inst, doer)
 	if doer:HasTag("player") then
 		if doer.components.talker ~= nil then
@@ -72,24 +27,6 @@ local function OnActivate(inst, doer)
 	else
 		inst.SoundEmitter:PlaySound("dontstarve/cave/rope_up")
 	end
-end
-
-local function TakeLightSteps(light, value)
-	local function LightToggle(light)
-		light.level = (light.level or 0) + value
-		if (value > 0 and light.level <= 1) or (value < 0 and light.level > 0) then
-			light.Light:SetRadius(light.level)
-			light.lighttoggle = light:DoTaskInTime(2 * FRAMES, LightToggle)
-		elseif value < 0 then
-			light.Light:Enable(false)
-			light:Hide()
-		end
-		light.AnimState:SetScale(light.level, 1)
-	end
-	if light.lighttoggle ~= nil then
-		light.lighttoggle:Cancel()
-	end
-	light.lighttoggle = light:DoTaskInTime(2 * FRAMES, LightToggle)
 end
 
 local function OnAccept(inst, giver, item)
@@ -118,8 +55,8 @@ local function entrance()
 
 	inst.MiniMapEntity:SetIcon("minimap_volcano_entrance.tex")
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst:SetDeployExtraSpacing(2.5)
 
@@ -163,7 +100,9 @@ local function entrance()
 		y = 0
 		z = TheWorld.components.contador:GetZ()
 
-		inst.exit = SpawnPrefab("pig_shop_general_door_saida")
+		inst.exit = SpawnPrefab("house_city_exit_door")
+		inst.exit.initData = { anim = "idle_general" }
+		InteriorSpawnerUtils.InitHouseInteriorPrefab(inst.exit, inst.exit.initData)
 		inst.exit.Transform:SetPosition(x + 5.2, 0, z + 0.5)
 
 		---------------------------cria a parede inicio------------------------------------------------------------------	
@@ -194,7 +133,7 @@ local function entrance()
 
 
 		----------------parede do fundo---------------------------------------------
-		local part = SpawnPrefab("wallinteriorgeneral")
+		local part = SpawnPrefab("interior_wall_wood")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.8, 0, z)
 			part.Transform:SetRotation(180)
@@ -337,7 +276,7 @@ local function entrance()
 			end
 		end
 
-		local part = SpawnPrefab("window_round")
+		local part = SpawnPrefab("window_round_backwall")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2, 0, z - 15 / 2)
 			if part.components.health ~= nil then
@@ -353,7 +292,7 @@ local function entrance()
 			end
 		end
 
-		local part = SpawnPrefab("window_round")
+		local part = SpawnPrefab("window_round_backwall")
 		if part ~= nil then
 			part.Transform:SetPosition(x + 1.5, 0, z + 15 / 2)
 			part.Transform:SetRotation(90)
@@ -547,7 +486,7 @@ local function entrance()
 	
 ]]
 		------------------------portoes trancados--------------------------------
-		local part = SpawnPrefab("pig_shop_general_floor")
+		local part = SpawnPrefab("interior_floor_check")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.5, 0, z)
 			if part.components.health ~= nil then

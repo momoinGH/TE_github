@@ -1,6 +1,5 @@
 local assets =
 {
-	Asset("ANIM", "anim/pisohamlet.zip"),
 	Asset("ANIM", "anim/wallhamletpig.zip"),
 	Asset("ANIM", "anim/pig_shop_doormats.zip"),
 	Asset("ANIM", "anim/interior_wall_decals_ruins.zip"),
@@ -101,7 +100,7 @@ local function createroom(inst)
 
 	------------------------piso--------------------------------
 	if roomcolor == "_blue" then
-		local part = SpawnPrefab("pig_ruins_floor_blue")
+		local part = SpawnPrefab("interior_floor_ground_ruins_slab_blue")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 4, 0, z)
 			if part.components.health ~= nil then
@@ -109,7 +108,7 @@ local function createroom(inst)
 			end
 		end
 	else
-		local part = SpawnPrefab("pig_ruins_floor")
+		local part = SpawnPrefab("interior_floor_ground_ruins_slab")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 4, 0, z)
 			if part.components.health ~= nil then
@@ -3774,61 +3773,6 @@ end
 	inst:Remove()
 end
 
----------------------------------pisos---------------------------------------------------------------------------
-local function SpawnPiso1(inst)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("pisohamlet")
-	inst.AnimState:SetBuild("pisohamlet")
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(5)
-	inst.AnimState:SetScale(3.55, 3.55, 3.55)
-	inst.AnimState:PlayAnimation("ground_ruins_slab") -- or ground_ruins_slab_blue
-	inst:AddTag("NOCLICK")
-	inst:AddTag("NOBLOCK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("caveinterior")
-	inst:AddTag("pisodaruina")
-	inst:AddTag("terremoto")
-	inst:AddTag("canbuild")
-	inst:AddTag("blows_air")
-
-	return inst
-end
-
-local function SpawnPiso2(inst)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("pisohamlet")
-	inst.AnimState:SetBuild("pisohamlet")
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(5)
-	inst.AnimState:SetScale(3.55, 3.55, 3.55)
-	inst.AnimState:PlayAnimation("ground_ruins_slab_blue") -- or ground_ruins_slab_blue
-	inst:AddTag("NOCLICK")
-	inst:AddTag("NOBLOCK")
-	inst:AddTag("alt_tile")
-	inst:AddTag("vulcano_part")
-	inst:AddTag("caveinterior")
-	inst:AddTag("pisodaruina")
-	inst:AddTag("terremoto")
-	inst:AddTag("canbuild")
-	inst:AddTag("blows_air")
-
-	return inst
-end
-
 local function SpawnPiso3(inst)
 	local inst = CreateEntity()
 	inst.entity:AddTransform()
@@ -4004,7 +3948,7 @@ end
 
 local function OnActivate(inst, doer)
 	if doer:HasTag("player") then
-		doer.mynetvarCameraMode:set(3)
+		doer.mynetvarCameraMode:set(0)
 
 		local alvo = inst.components.teleporter.targetTeleporter
 		if alvo then
@@ -4464,9 +4408,9 @@ local function fnescadaentrada()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
+
 	inst:AddTag("timechange_anims")
-	inst:AddTag("antlion_sinkhole_blocker")
+
 	inst:AddTag("door_north")
 
 	inst.entity:SetPristine()
@@ -4535,8 +4479,8 @@ local function fnescadacima()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_north")
 
 	inst.entity:SetPristine()
@@ -4620,8 +4564,8 @@ local function fnescadabaixo()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_south")
 
 	inst.entity:SetPristine()
@@ -4705,8 +4649,8 @@ local function fnescadaesquerda()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_east")
 
 	inst.entity:SetPristine()
@@ -4790,8 +4734,8 @@ local function fnescadadireita()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_west")
 
 	inst.entity:SetPristine()
@@ -4862,8 +4806,8 @@ local function fnescadacimavine()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_north")
 
 	inst.entity:SetPristine()
@@ -4940,8 +4884,8 @@ local function fnescadabaixovine()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_south")
 
 	inst.entity:SetPristine()
@@ -5018,8 +4962,8 @@ local function fnescadaesquerdavine()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_east")
 
 	inst.entity:SetPristine()
@@ -5096,8 +5040,8 @@ local function fnescadadireitavine()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_west")
 
 	inst.entity:SetPristine()
@@ -5174,8 +5118,8 @@ local function fnescadacimaescondida()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_north")
 	inst:AddTag("escondida")
 
@@ -5268,8 +5212,8 @@ local function fnescadabaixoescondida()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_south")
 	inst:AddTag("escondida")
 
@@ -5363,8 +5307,8 @@ local function fnescadaesquerdaescondida()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_east")
 	inst:AddTag("escondida")
 
@@ -5458,8 +5402,8 @@ local function fnescadadireitaescondida()
 
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst:AddTag("door_west")
 	inst:AddTag("escondida")
 
@@ -5549,8 +5493,8 @@ local function normalroom()
 	inst.AnimState:SetFinalOffset(2)
 
 	inst.tipodesala = 0
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst.roomcolor = ""
 	if math.random() < 0.3 then inst.roomcolor = "_blue" end
 	createroom(inst)
@@ -5573,8 +5517,8 @@ local function normalroominicio()
 	inst.AnimState:SetFinalOffset(2)
 
 	inst.tipodesala = 8
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst.roomcolor = ""
 	if math.random() < 0.3 then inst.roomcolor = "_blue" end
 	createroom(inst)
@@ -5597,8 +5541,8 @@ local function treasureroom()
 	inst.AnimState:SetFinalOffset(2)
 
 	inst.tipodesala = 1
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst.roomcolor = ""
 	if math.random() < 0.3 then inst.roomcolor = "_blue" end
 	createroom(inst)
@@ -5622,8 +5566,8 @@ local function oincpileroom()
 
 	inst.tipodesala = 9
 	inst.treasuretype = "oincpile"
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst.roomcolor = ""
 	if math.random() < 0.3 then inst.roomcolor = "_blue" end
 	createroom(inst)
@@ -5647,8 +5591,8 @@ local function treasureroom1()
 
 	inst.tipodesala = 9
 	inst.treasuretype = "secret"
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst.roomcolor = ""
 	if math.random() < 0.3 then inst.roomcolor = "_blue" end
 	createroom(inst)
@@ -5675,8 +5619,8 @@ local function treasureroom2()
 	inst.relicsow = nil
 	inst.roomcolor = "_blue"
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	createroom(inst)
 	return inst
 end
@@ -5701,8 +5645,8 @@ local function treasureroom3()
 	inst.relicsow = true
 	inst.roomcolor = "_blue"
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	createroom(inst)
 	return inst
 end
@@ -5726,8 +5670,8 @@ local function treasureroom4()
 	inst.treasuretype = "aporkalypse_clock"
 	inst.roomcolor = "_blue"
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	createroom(inst)
 	return inst
 end
@@ -5751,8 +5695,8 @@ local function treasureroom5()
 	inst.treasuretype = "endswell"
 	inst.roomcolor = "_blue"
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	createroom(inst)
 	return inst
 end
@@ -5773,8 +5717,8 @@ local function pheromonestoneroom()
 	inst.AnimState:SetFinalOffset(2)
 
 	inst.tipodesala = 2
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst.roomcolor = ""
 	if math.random() < 0.3 then inst.roomcolor = "_blue" end
 	createroom(inst)
@@ -5797,18 +5741,17 @@ local function doortraproom()
 	inst.AnimState:SetFinalOffset(2)
 
 	inst.tipodesala = 3
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 	inst.roomcolor = ""
 	if math.random() < 0.3 then inst.roomcolor = "_blue" end
 	createroom(inst)
 	return inst
 end
 
-return Prefab("pig_ruins_floor", SpawnPiso1, assets),
+return
 	Prefab("wallinteriorpig_ruins", wall_common, assets),
 
-	Prefab("pig_ruins_floor_blue", SpawnPiso2, assets),
 	Prefab("wallinteriorpig_ruins_blue", wall_common1, assets),
 
 	Prefab("mapa", SpawnPiso3, assets),

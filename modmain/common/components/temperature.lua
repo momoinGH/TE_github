@@ -97,7 +97,7 @@ local function OnUpdate(self, dt, applyhealthdelta)
     end
     ----------------------ajusta temperatura da casa---------------------------
     if self.inst and self.inst:HasTag("player") then
-        local interior = GetClosestInstWithTag("blows_air", self.inst, 15)
+        local interior = GetClosestInstWithTag("interior_center", self.inst, 15)
         if interior and TheWorld.state.iswinter then
             ambient_temperature = TheWorld.state.temperature + 40
         elseif interior and TheWorld.state.issummer then
@@ -108,7 +108,7 @@ local function OnUpdate(self, dt, applyhealthdelta)
 
     -- TODO 花粉症的代码能不能专门写个组件
     self.hayfever = self.hayfever or 0
-    local interior = GetClosestInstWithTag("blows_air", self.inst, 15)
+    local interior = GetClosestInstWithTag("interior_center", self.inst, 15)
     if (TheWorld.state.issummer and self.inst and self.inst:HasTag("player") and TUNING.tropical.hayfever == 10 and (self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("hamlet") or interior)) or
         (TheWorld.state.issummer and self.inst and self.inst:HasTag("player") and TUNING.tropical.hayfever == 20 and (self.inst.components.areaaware and self.inst.components.areaaware:GetCurrentArea() ~= nil or interior)) then
         local mascara = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)

@@ -1,3 +1,9 @@
+local Utils = require("tropical_utils/utils")
+
+modimport "modmain/common/stategraphs/SGwilson"
+modimport "modmain/common/stategraphs/SGwilson_client"
+
+
 AddStategraphState("wilson", State {
     name = "jumponboatstart_pre",
     tags = { "doing", "busy", "nointerrupt" },
@@ -70,169 +76,6 @@ AddStategraphState("wilson_client", State {
         inst.sg:GoToState("idle")
     end,
 })
-
-
-local function ToggleOffPhysics(inst)
-    inst.sg.statemem.isphysicstoggle = true
-    inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.GROUND)
-end
-
-local function ToggleOnPhysics(inst)
-    inst.sg.statemem.isphysicstoggle = nil
-    inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.WORLD)
-    inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-    inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
-    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    inst.Physics:CollidesWith(COLLISION.GIANTS)
-end
-
-local hamletteleport = State {
-    name = "hamletteleport",
-    tags = { "doing", "busy", "canrotate", "nopredict", "nomorph" },
-
-    onenter = function(inst, data)
-        ToggleOffPhysics(inst)
-        inst.components.locomotor:Stop()
-
-        inst.sg.statemem.target = data.teleporter
-        inst.sg.statemem.heavy = inst.components.inventory:IsHeavyLifting()
-
-        if data.teleporter ~= nil and data.teleporter.components.teleporter ~= nil then
-            data.teleporter.components.teleporter:RegisterTeleportee(inst)
-        end
-
-        inst.AnimState:PlayAnimation("idle")
-
-        local pos = data ~= nil and data.teleporter and data.teleporter:GetPosition() or nil
-
-        local MAX_JUMPIN_DIST = 0
-        local MAX_JUMPIN_DIST_SQ = MAX_JUMPIN_DIST * MAX_JUMPIN_DIST
-        local MAX_JUMPIN_SPEED = 0
-
-        local dist
-        if pos ~= nil then
-            inst:ForceFacePoint(pos:Get())
-            local distsq = inst:GetDistanceSqToPoint(pos:Get())
-            if distsq <= .25 * .25 then
-                dist = 0
-                inst.sg.statemem.speed = 0
-            elseif distsq >= MAX_JUMPIN_DIST_SQ then
-                dist = MAX_JUMPIN_DIST
-                inst.sg.statemem.speed = MAX_JUMPIN_SPEED
-            else
-                dist = math.sqrt(distsq)
-                inst.sg.statemem.speed = MAX_JUMPIN_SPEED * dist / MAX_JUMPIN_DIST
-            end
-        else
-            inst.sg.statemem.speed = 0
-            dist = 0
-        end
-
-        inst.Physics:SetMotorVel(inst.sg.statemem.speed * .5, 0, 0)
-
-        inst.sg.statemem.teleportarrivestate = "idle"
-    end,
-
-    timeline =
-    {
-        TimeEvent(.5 * FRAMES, function(inst)
-            inst.Physics:SetMotorVel(inst.sg.statemem.speed * (inst.sg.statemem.heavy and .55 or .75), 0, 0)
-        end),
-        TimeEvent(1 * FRAMES, function(inst)
-            inst.Physics:SetMotorVel(
-                inst.sg.statemem.heavy and inst.sg.statemem.speed * .6 or inst.sg.statemem.speed, 0, 0)
-        end),
-
-        --Heavy lifting
-        TimeEvent(12 * FRAMES, function(inst)
-            if inst.sg.statemem.heavy then
-                inst.Physics:SetMotorVel(inst.sg.statemem.speed * .5, 0, 0)
-            end
-        end),
-        TimeEvent(13 * FRAMES, function(inst)
-            if inst.sg.statemem.heavy then
-                inst.Physics:SetMotorVel(inst.sg.statemem.speed * .4, 0, 0)
-            end
-        end),
-        TimeEvent(14 * FRAMES, function(inst)
-            if inst.sg.statemem.heavy then
-                inst.Physics:SetMotorVel(inst.sg.statemem.speed * .3, 0, 0)
-            end
-        end),
-
-        --Normal
-        TimeEvent(15 * FRAMES, function(inst)
-            if not inst.sg.statemem.heavy then
-                inst.Physics:Stop()
-            end
-
-            -- this is just hacked in here to make the sound play BEFORE the player hits the wormhole
-            if inst.sg.statemem.target ~= nil then
-                if inst.sg.statemem.target:IsValid() then
-                    inst.sg.statemem.target:PushEvent("starttravelsound", inst)
-                else
-                    inst.sg.statemem.target = nil
-                end
-            end
-        end),
-
-        --Heavy lifting
-        TimeEvent(20 * FRAMES, function(inst)
-            if inst.sg.statemem.heavy then
-                inst.Physics:Stop()
-            end
-        end),
-    },
-
-    events =
-    {
-        EventHandler("animover", function(inst)
-            if inst.AnimState:AnimDone() then
-                if inst.sg.statemem.target ~= nil and
-                    inst.sg.statemem.target:IsValid() and
-                    inst.sg.statemem.target.components.teleporter ~= nil then
-                    --Unregister first before actually teleporting
-                    inst.sg.statemem.target.components.teleporter:UnregisterTeleportee(inst)
-                    if inst.sg.statemem.target.components.teleporter:Activate(inst) then
-                        inst.sg.statemem.isteleporting = true
-                        inst.components.health:SetInvincible(true)
-                        if inst.components.playercontroller ~= nil then
-                            inst.components.playercontroller:Enable(false)
-                        end
-                        inst:Hide()
-                        inst.DynamicShadow:Enable(false)
-                        return
-                    end
-                end
-                inst.sg:GoToState("idle")
-            end
-        end),
-    },
-
-    onexit = function(inst)
-        if inst.sg.statemem.isphysicstoggle then
-            ToggleOnPhysics(inst)
-        end
-
-        if inst.sg.statemem.isteleporting then
-            inst.components.health:SetInvincible(false)
-            if inst.components.playercontroller ~= nil then
-                inst.components.playercontroller:Enable(true)
-            end
-            inst:Show()
-            inst.DynamicShadow:Enable(true)
-        elseif inst.sg.statemem.target ~= nil
-            and inst.sg.statemem.target:IsValid()
-            and inst.sg.statemem.target.components.teleporter ~= nil then
-            inst.sg.statemem.target.components.teleporter:UnregisterTeleportee(inst)
-        end
-    end,
-}
-
-AddStategraphState("wilson_client", hamletteleport)
-AddStategraphState("wilson", hamletteleport)
 
 
 AddStategraphState("spider", State {
@@ -460,7 +303,7 @@ end
 
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BLINK, function(inst, action)
     --		if inst:HasTag("aquatic") and inst:HasTag("soulstealer") then return false end
-    local interior = GetClosestInstWithTag("blows_air", inst, 30)
+    local interior = GetClosestInstWithTag("interior_center", inst, 30)
     if interior then return false end
     if TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(action:GetActionPoint():Get())) ~= GROUND.OCEAN_COASTAL and
         TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(action:GetActionPoint():Get())) ~= GROUND.OCEAN_COASTAL_SHORE and
@@ -478,7 +321,7 @@ end
 
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BLINK, function(inst, action)
     --		if inst:HasTag("aquatic") and inst:HasTag("soulstealer") then return false end
-    local interior = GetClosestInstWithTag("blows_air", inst, 30)
+    local interior = GetClosestInstWithTag("interior_center", inst, 30)
     if interior then return false end
     if TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(action:GetActionPoint():Get())) ~= GROUND.OCEAN_COASTAL and
         TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(action:GetActionPoint():Get())) ~= GROUND.OCEAN_COASTAL_SHORE and

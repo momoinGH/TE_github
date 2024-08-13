@@ -1,9 +1,5 @@
-local ANIM_ORIENTATION =
-{
-    Default = 0,
-    OnGround = 1,
-    RotatingBillboard = 0,
-}
+local InteriorSpawnerUtils = require("interiorspawnerutils")
+
 
 local DECO_RUINS_BEAM_WORK = 6
 
@@ -29,16 +25,6 @@ local function setScale(inst)
 end
 
 local function smash(inst)
-    if inst.components.lootdropper then
-        local interiorSpawner = TheWorld.components.interiorspawner
-        if interiorSpawner.current_interior then
-            local originpt = interiorSpawner:getSpawnOrigin()
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local dropdir = Vector3(originpt.x - x, 0.0, originpt.z - z):GetNormalized()
-            inst.components.lootdropper.dropdir = dropdir
-            inst.components.lootdropper:DropLoot()
-        end
-    end
     SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
     if inst.SoundEmitter then
         inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
@@ -156,9 +142,6 @@ local function onsave(inst, data)
     if inst.onbuilt then
         data.onbuilt = inst.onbuilt
     end
-    if inst.recipeproxy then
-        data.recipeproxy = inst.recipeproxy
-    end
     return references
 end
 
@@ -211,10 +194,6 @@ local function onload(inst, data)
     if data.onbuilt then
         setPlayerUncraftable(inst)
         inst.onbuilt = data.onbuilt
-    end
-
-    if data.recipeproxy then
-        inst.recipeproxy = data.recipeproxy
     end
 end
 
@@ -378,7 +357,6 @@ function decofn(build, bank, animframe, data, assets, prefabs)
         for i, tag in ipairs(tags) do
             inst:AddTag(tag)
         end
-        inst:AddTag("liberado")
 
         if data.children then
             if not inst.childrenspawned then
@@ -628,10 +606,6 @@ function decofn(build, bank, animframe, data, assets, prefabs)
             else
                 anim:PlayAnimation(animframe .. "_side")
             end
-        end
-
-        if data.recipeproxy then
-            inst.recipeproxy = data.recipeproxy
         end
 
         return inst

@@ -121,7 +121,7 @@ local function fn()
 	inst.MiniMapEntity:SetIcon("oasis.png")
 
 	inst:AddTag("birdblocker")
-	inst:AddTag("antlion_sinkhole_blocker")
+
 	inst:AddTag("goddess_fountain_gem")
 	inst:AddTag("goddess_fountain")
 

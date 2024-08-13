@@ -94,7 +94,7 @@ local function fn()
 
 	inst:AddTag("structure")
 	inst:AddTag("goddessportal")
-	inst:AddTag("antlion_sinkhole_blocker")
+
 	inst:AddTag("goddess_fountain")
 
 	inst.SoundEmitter:PlaySound("dontstarve/common/together/moondial/full_LP", "loop")

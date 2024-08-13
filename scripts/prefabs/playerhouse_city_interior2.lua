@@ -1,14 +1,8 @@
 local assets =
 {
-	Asset("ANIM", "anim/pisohamlet.zip"),
 	Asset("ANIM", "anim/pig_shop_doormats.zip"),
-	Asset("ANIM", "anim/wallhamletcity1.zip"),
-	Asset("ANIM", "anim/wallhamletcity2.zip"),
 	Asset("ANIM", "anim/portas.zip"),
 }
-
-local BASEMENT_SHADE = 0.5
-local TAMANHODOMAPA = 1
 
 local function OnSave(inst, data)
 	data.entrada = inst.entrada
@@ -23,61 +17,61 @@ local function OnLoad(inst, data)
 		inst.wallpaper = data.wallpaper
 
 		if inst.wallpaper == "shop_wall_checkered_metal" then
-			inst.AnimState:SetBank("wallhamletcity1")
+			inst.AnimState:SetBank("wallhamletcity")
 			inst.AnimState:SetBuild("wallhamletcity1")
 			inst.AnimState:PlayAnimation(inst.wallpaper, true)
 		end
 
 		if inst.wallpaper == "shop_wall_circles" then
-			inst.AnimState:SetBank("wallhamletcity1")
+			inst.AnimState:SetBank("wallhamletcity")
 			inst.AnimState:SetBuild("wallhamletcity1")
 			inst.AnimState:PlayAnimation(inst.wallpaper, true)
 		end
 
 		if inst.wallpaper == "shop_wall_marble" then
-			inst.AnimState:SetBank("wallhamletcity1")
+			inst.AnimState:SetBank("wallhamletcity")
 			inst.AnimState:SetBuild("wallhamletcity1")
 			inst.AnimState:PlayAnimation(inst.wallpaper, true)
 		end
 
 		if inst.wallpaper == "shop_wall_sunflower" then
-			inst.AnimState:SetBank("wallhamletcity1")
+			inst.AnimState:SetBank("wallhamletcity")
 			inst.AnimState:SetBuild("wallhamletcity1")
 			inst.AnimState:PlayAnimation(inst.wallpaper, true)
 		end
 
 		if inst.wallpaper == "shop_wall_woodwall" then
-			inst.AnimState:SetBank("wallhamletcity1")
+			inst.AnimState:SetBank("wallhamletcity")
 			inst.AnimState:SetBuild("wallhamletcity1")
 			inst.AnimState:PlayAnimation(inst.wallpaper, true)
 		end
 
 		if inst.wallpaper == "wall_mayorsoffice_whispy" then
-			inst.AnimState:SetBank("wallhamletcity1")
+			inst.AnimState:SetBank("wallhamletcity")
 			inst.AnimState:SetBuild("wallhamletcity1")
 			inst.AnimState:PlayAnimation(inst.wallpaper, true)
 		end
 
 		if inst.wallpaper == "harlequin_panel" then
-			inst.AnimState:SetBank("wallhamletcity2")
+			inst.AnimState:SetBank("wallhamletcity")
 			inst.AnimState:SetBuild("wallhamletcity2")
 			inst.AnimState:PlayAnimation(inst.wallpaper, true)
 		end
 
 		if inst.wallpaper == "shop_wall_fullwall_moulding" then
-			inst.AnimState:SetBank("wallhamletcity2")
+			inst.AnimState:SetBank("wallhamletcity")
 			inst.AnimState:SetBuild("wallhamletcity2")
 			inst.AnimState:PlayAnimation(inst.wallpaper, true)
 		end
 
 		if inst.wallpaper == "shop_wall_floraltrim2" then
-			inst.AnimState:SetBank("wallhamletcity2")
+			inst.AnimState:SetBank("wallhamletcity")
 			inst.AnimState:SetBuild("wallhamletcity2")
 			inst.AnimState:PlayAnimation(inst.wallpaper, true)
 		end
 
 		if inst.wallpaper == "shop_wall_upholstered" then
-			inst.AnimState:SetBank("wallhamletcity2")
+			inst.AnimState:SetBank("wallhamletcity")
 			inst.AnimState:SetBuild("wallhamletcity2")
 			inst.AnimState:PlayAnimation(inst.wallpaper, true)
 		end
@@ -179,10 +173,6 @@ local function OnAccept(inst, giver, item)
 	inst.components.teleporter:Activate(item)
 end
 
-local function IsNearBasement(x, y, z)
-	return #TheSim:FindEntities(x, 0, z, 100, { "alt_tile" }) > 0
-end
-
 local function entrance()
 	local inst = CreateEntity()
 
@@ -204,8 +194,8 @@ local function entrance()
 
 	inst.MiniMapEntity:SetIcon("minimap_volcano_entrance.tex")
 
-	inst:AddTag("vulcano_part")
-	inst:AddTag("antlion_sinkhole_blocker")
+
+
 
 	inst:SetDeployExtraSpacing(2.5)
 
@@ -253,7 +243,7 @@ local function entrance()
 		y = 0
 		z = TheWorld.components.contador:GetZ()
 
-		inst.exit = SpawnPrefab("playerhouse_city_door_saida")
+		inst.exit = SpawnPrefab("house_city_exit_door")
 		inst.exit.Transform:SetPosition(x + 5.2, 0, z + 0.5)
 		---------------------------cria a parede inicio------------------------------------------------------------------	
 		local tipodemuro = "wall_tigerpond"
@@ -382,7 +372,7 @@ local function entrance()
 			end
 		end
 
-		local part = SpawnPrefab("window_round_curtains_nails")
+		local part = SpawnPrefab("window_round_curtains_nails_backwall")
 		if part ~= nil then
 			part.Transform:SetPosition(x, 0, z + 15 / 2)
 			part.Transform:SetRotation(90)
@@ -534,11 +524,10 @@ local function fnescada1()
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
 	inst:AddTag("guard_entrance")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("liberado")
+
 	inst:AddTag("portadacasa")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -590,11 +579,10 @@ local function fnescada2()
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
 	inst:AddTag("guard_entrance")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("liberado")
+
 	inst:AddTag("portadacasa")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -647,11 +635,10 @@ local function fnescada3()
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
 	inst:AddTag("guard_entrance")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("liberado")
+
 	inst:AddTag("portadacasa")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -704,11 +691,10 @@ local function fnescada4()
 	inst:AddTag("trader")
 	inst:AddTag("alltrader")
 	inst:AddTag("guard_entrance")
-	inst:AddTag("hamletteleport")
-	inst:AddTag("liberado")
+
 	inst:AddTag("portadacasa")
 
-	inst:AddTag("antlion_sinkhole_blocker")
+
 
 	inst.entity:SetPristine()
 
@@ -828,7 +814,3 @@ return
 	Prefab("playerhouse_city_door_metal_cima", fnescada2, assets),
 	Prefab("playerhouse_city_door_pano_cima", fnescada3, assets),
 	Prefab("playerhouse_city_door_peagank_cima", fnescada4, assets)
---MakePlacerporta("common/stone_door_placer", 	"portas", "portas", "pedra", nil, nil, nil, 2),
---MakePlacerporta("common/iron_door_placer", 		"portas", "portas", "metal", nil, nil, nil, 2),
---MakePlacerporta("common/organic_door_placer", 	"portas", "portas", "pano", nil, nil, nil, 2),
---MakePlacerporta("common/curtain_door_placer", 	"portas", "portas", "peagank", nil, nil, nil, 2)

@@ -103,11 +103,6 @@ AddComponentAction("SCENE", "interactions", function(inst, doer, actions, right)
             table.insert(actions, GLOBAL.ACTIONS.PAINT)
             return
         end
-
-        if inst:HasTag("pisohousehamlet") and equipamento and equipamento:HasTag("hameletfloor") then
-            table.insert(actions, GLOBAL.ACTIONS.PAINT)
-            return
-        end
     end
 end
 )

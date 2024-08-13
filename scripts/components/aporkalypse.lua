@@ -19,14 +19,14 @@ local Aporkalypse = Class(function(self, inst)
 
 	self.inst:ListenForEvent("clocktick", function(inst, data)
 		local fiesta_elapsed = (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME -
-		self.fiesta_begin_date
+			self.fiesta_begin_date
 		if self.fiesta_duration - fiesta_elapsed < 0 and self.fiesta_active == true then self.fiesta_active = false end
 		if (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME >= self.begin_date and not self:IsActive() then
 			self:BeginAporkalypse()
 		end
 
 		local aporkalypse_duration = ((TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME - self.begin_date) /
-		TUNING.TOTAL_DAY_TIME
+			TUNING.TOTAL_DAY_TIME
 		if aporkalypse_duration >= 20 or TUNING.tropical.aporkalypse == false then
 			self:EndAporkalypse()
 		end
@@ -74,7 +74,7 @@ function Aporkalypse:OnLoad(data)
 		self.begin_date = data.begin_date
 	else
 		self.begin_date = (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME +
-		(120 * TUNING.TOTAL_DAY_TIME)
+			(120 * TUNING.TOTAL_DAY_TIME)
 	end
 
 	if data and data.aporkalypse_active then
@@ -155,7 +155,7 @@ function Aporkalypse:EndAporkalypse()
 	self:CancelHeraldCheck()
 
 	local aporkalypse_duration = ((TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME - self.begin_date) /
-	TUNING.TOTAL_DAY_TIME
+		TUNING.TOTAL_DAY_TIME
 	if aporkalypse_duration >= 2 then
 		self.fiesta_begin_date = TheWorld.state.cycles * TUNING.TOTAL_DAY_TIME
 		self:BeginFiesta()
@@ -165,7 +165,7 @@ function Aporkalypse:EndAporkalypse()
 
 	-- Schedule the next one!
 	self:ScheduleAporkalypse((TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME +
-	(120 * TUNING.TOTAL_DAY_TIME))
+		(120 * TUNING.TOTAL_DAY_TIME))
 	self.inst:PushEvent("endaporkalypse")
 end
 
@@ -184,7 +184,7 @@ end
 
 function Aporkalypse:SpawnBats()
 	for i, player in ipairs(AllPlayers) do
-		local interior = GetClosestInstWithTag("blows_air", player, 30)
+		local interior = GetClosestInstWithTag("interior_center", player, 30)
 		if not interior then
 			local x, y, z = player.Transform:GetWorldPosition()
 			local part = SpawnPrefab("circlingbat")
@@ -234,7 +234,7 @@ function Aporkalypse:ScheduleHeraldCheck()
 			for i, player in ipairs(AllPlayers) do
 				if player and not player.components.health:IsDead() then
 					local herald = GetClosestInstWithTag("ancient", player, 40)
-					local interior = GetClosestInstWithTag("blows_air", player, 40)
+					local interior = GetClosestInstWithTag("interior_center", player, 40)
 					if not interior then
 						if herald == nil then
 							local map = TheWorld.Map
@@ -279,7 +279,7 @@ end
 
 function Aporkalypse:IsNear()
 	return self.begin_date - (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME <
-	self.near_days * TUNING.TOTAL_DAY_TIME
+		self.near_days * TUNING.TOTAL_DAY_TIME
 end
 
 function Aporkalypse:GetBeginDate()

@@ -114,7 +114,7 @@ local function fn(bank, build, anim, minimap, isbackground)
         inst.AnimState:SetSortOrder(3)
     end
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 
@@ -257,7 +257,7 @@ local function fn_ham1(Sim)
 
     inst.AnimState:PlayAnimation("idle_open")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 
@@ -305,7 +305,7 @@ local function fn_ham2(Sim)
 
     inst.AnimState:PlayAnimation("idle_open")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 
@@ -353,7 +353,7 @@ local function fn_ham3(Sim)
 
     inst.AnimState:PlayAnimation("idle_open")
 
-    inst:AddTag("antlion_sinkhole_blocker")
+
 
     inst.entity:SetPristine()
 
