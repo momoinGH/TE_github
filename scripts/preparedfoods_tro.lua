@@ -404,7 +404,7 @@ local foods_tro = {
 
         lobsterbisque_sw = {
             test = function(cooker, names, tags)
-                return (names.lobster_dead or names.lobster_dead_cooked or names.lobster_land) and tags.frozen
+                return names.lobster_land and tags.frozen
             end,
             priority = 30,
             weight = 1,
@@ -414,8 +414,6 @@ local foods_tro = {
             perishtime = TUNING.PERISH_MED,
             sanity = TUNING.SANITY_SMALL,
             cooktime = 0.5,
-            potlevel = "high",
-            floater = { "med", 0.05, { 0.65, 0.6, 0.65 } },
             card_def = {
                 ingredients = { { "lobster_land", 1 }, { "ice", 3 } }
             }
@@ -423,8 +421,8 @@ local foods_tro = {
 
         lobsterdinner_sw = {
             test = function(cooker, names, tags)
-                return (names.lobster_dead or names.lobster_dead_cooked or names.lobster_land) and names.butter and
-                    (tags.meat == 1.0) and (tags.fish == 1.0) and not tags.frozen
+                return names.lobster_land and names.butter and (tags.meat and tags.meat <= 1) and
+                            (tags.fish and tags.fish <= 1) and not tags.frozen
             end,
             priority = 25,
             weight = 1,
@@ -434,8 +432,6 @@ local foods_tro = {
             perishtime = TUNING.PERISH_SLOW,
             sanity = TUNING.SANITY_HUGE,
             cooktime = 1,
-            potlevel = "high",
-            floater = { "med", 0.05, { 0.65, 0.6, 0.65 } },
             card_def = {
                 ingredients = { { "lobster_land", 1 }, { "butter", 1 }, { "carrot", 2 } }
             }
