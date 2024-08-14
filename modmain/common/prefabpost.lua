@@ -764,4 +764,24 @@ AddPrefabPostInit("gnarwail_attack_horn", function(inst)
     inst:DoTaskInTime(TUNING.GNARWAIL.HORN_RETREAT_TIME - 0.1, CheckHorn)
 end)
 
+
 ----------------------------------------------------------------------------------------------------
+-- 海难特色料理转化
+local function changeName(inst, ...)
+    inst.prefab = inst.prefab:sub(1, -4)
+    inst:RemoveEventCallback("onputininventory", changeName)
+end
+for _, v in ipairs({ "butterflymuffin_sw", "lobsterbisque_sw", "lobsterdinner_sw", }) do
+    AddPrefabPostInit(v, function(inst)
+        inst._old_prefab = inst.prefab
+        local old_oneat = inst.components.edible.oneaten
+        inst.components.edible:SetOnEatenFn(function(inst, eater, ...)
+            eater:PushEvent("learncookbookstats", inst._old_prefab or inst.prefab)
+            inst._old_prefab = nil
+            if old_oneat then
+                old_oneat(inst, eater, ...)
+            end
+        end)
+        inst:ListenForEvent("onputininventory", changeName)
+    end)
+end
