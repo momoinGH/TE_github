@@ -91,7 +91,7 @@ local function SpawnChildren(inst)
 			clock:AddTag("INTERIOR_LIMBO")
 		end
 		clock.OnRemoveEntity = function(self)
-			for _, v in ipairs(inst.clocks) do
+			for i, v in ipairs(inst.clocks) do
 				if v == self then
 					table.remove(inst.clocks, i)
 					return
@@ -486,7 +486,7 @@ local function MakeClock(clock_num, mult, speed)
 	local build = "porkalypse_clock_0" .. clock_num
 	local sort_order = clock_num
 
-	return Prefab( name, make_clock_fn(bank, build, sort_order, mult, speed), assets)
+	return Prefab(name, make_clock_fn(bank, build, sort_order, mult, speed), assets)
 end
 
 return MakeClock(1, 1, 1),

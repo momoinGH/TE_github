@@ -26,13 +26,13 @@ local function OnHaunt(inst, haunter)
     inst.components.teleporter:Activate(haunter)
 end
 
-local function OnSave(inst, data)
+local function OnHouseSave(inst, data)
     data.side = inst.side
     data.initData = inst.initData
     data.hamlet_houseexit = inst:HasTag("hamlet_houseexit") or nil
 end
 
-local function OnLoad(inst, data)
+local function OnHouseLoad(inst, data)
     if data == nil then return end
 
     inst.side = data.side
@@ -55,9 +55,21 @@ local function AbleToAcceptTest(inst, item)
     return false, "UN_CONSTRUCTION_PERMIT"
 end
 
+-- x是上下偏移，往下增大，z是左右偏移，往右增大
+local addprops = {
+    { name = "wallinteriorplayerhouse",      x_offset = -2.8, },
+    { name = "deco_roomglow" },
+    { name = "deco_antiquities_cornerbeam",  x_offset = -5,   z_offset = -15 / 2, },
+    { name = "deco_antiquities_cornerbeam",  x_offset = -5,   z_offset = 15 / 2,        animdata = { flip = true } },
+    { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,  z_offset = -15 / 2 - 0.3, },
+    { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,  z_offset = 15 / 2 + 0.3,  animdata = { flip = true } },
+    { name = "swinging_light_rope_1",        x_offset = -2,   y_offset = 1,             addtags = { "playercrafted" } },
+    { name = "playerhouse_city_floor",       x_offset = -2.4 },
+}
+
 local function onaccept(inst, giver, item)
     if item.prefab == "construction_permit" and not inst.components.teleporter.targetTeleporter then
-        if InteriorSpawnerUtils.SpawnNearHouseInterior(inst) then --应该没可能失败
+        if InteriorSpawnerUtils.SpawnNearHouseInterior(inst, addprops) then --应该没可能失败
             item:Remove()
         end
     else
@@ -66,58 +78,25 @@ local function onaccept(inst, giver, item)
 end
 
 local function common(bank, build, anim)
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    inst.AnimState:SetBank(bank)
-    inst.AnimState:SetBuild(build)
-    if anim then
-        inst.AnimState:PlayAnimation(anim)
-    end
-    inst.AnimState:SetSortOrder(0)
-    -- inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-
-    inst:AddTag("NOBLOCK")
-    inst:AddTag("trader")
-    inst:AddTag("hamlet_housedoor")
-
-    inst.entity:SetPristine()
+    local inst = InteriorSpawnerUtils.MakeBaseDoor(bank, build, anim, true)
 
     if not TheWorld.ismastersim then
         return inst
     end
 
-    inst.side = nil --门所在墙边
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("trader")
     inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
-    inst.components.trader.acceptnontradable = true
     inst.components.trader.onaccept = onaccept
-    inst.components.trader.deleteitemonaccept = false
 
-    inst:AddComponent("teleporter")
     inst.components.teleporter.onActivate = OnActivate
-    inst.components.teleporter.offset = 0
-    inst.components.teleporter.travelcameratime = 0
-    inst.components.teleporter.travelarrivetime = 0
+
     inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
 
-    inst:AddComponent("hauntable")
     inst.components.hauntable:SetOnHauntFn(OnHaunt)
-
-    inst.OnSave = OnSave
-    inst.OnLoad = OnLoad
 
     return inst
 end
 
-local function playerHouseExitDoorFn()
+local function house_city_exit_door_fn()
     local inst = common("pig_shop_doormats", "pig_shop_doormats", "idle_old")
     inst:AddTag("hamlet_houseexit")
     return inst
@@ -146,6 +125,7 @@ local function onhammered(inst, worker)
     inst:Remove()
 end
 
+-- teleporter会紫东阁保存传送目的地的门，但是还需要entitytracker来记录房间的中心位置
 local function MakeHouseDoor(name)
     local function fn()
         local inst = common("player_house_doors", "player_house_doors")
@@ -154,6 +134,7 @@ local function MakeHouseDoor(name)
             return inst
         end
 
+        inst.side = nil      --门所在墙边
         inst.playAnim = name --为了兼容，不能通过.prefab选择动画了，得单独存储
 
         inst:AddComponent("lootdropper")
@@ -171,6 +152,9 @@ local function MakeHouseDoor(name)
         end)
 
         inst:ListenForEvent("onbuilt", OnBuilt)
+
+        inst.OnSave = OnHouseSave
+        inst.OnLoad = OnHouseLoad
 
         return inst
     end
@@ -238,7 +222,12 @@ local function MakeHouseDoorPlacer(name, build, bank)
 end
 
 return
--- 室内门
+-- 出口门
+-- 不同门之间主要是动画、位置、旋转角度不同，这里合并成一个预制件，其他的做成可设置的属性，这样灵活度更高
+-- 动画：idle_old(默认)、idle_giftshop、idle_antiquities、idle_florist、idle_flag、idle_deli、idle_general、idle_hoofspa、idle_produce、idle_basic、idle_tinker
+    Prefab("house_city_exit_door", house_city_exit_door_fn, assets),
+
+    -- 室内门
     MakeHouseDoor("wood_door"),
     MakeHouseDoor("stone_door"),
     MakeHouseDoor("organic_door"),
@@ -254,10 +243,4 @@ return
     MakeHouseDoorPlacer("pillar_door", "player_house_doors", "player_house_doors"),
     MakeHouseDoorPlacer("curtain_door", "player_house_doors", "player_house_doors"),
     MakeHouseDoorPlacer("round_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("plate_door", "player_house_doors", "player_house_doors"),
-
-    -- 出口门
-    Prefab("house_city_exit_door", playerHouseExitDoorFn, assets)
-
--- 不同门之间主要是动画、位置、旋转角度不同，这里合并成一个预制件，其他的做成可设置的属性，这样灵活度更高
--- 动画：idle_old(默认)、idle_giftshop、idle_antiquities、idle_florist、idle_flag、idle_deli、idle_general、idle_hoofspa、idle_produce、idle_basic、idle_tinker
+    MakeHouseDoorPlacer("plate_door", "player_house_doors", "player_house_doors")

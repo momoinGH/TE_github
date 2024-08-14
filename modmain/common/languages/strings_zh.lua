@@ -4787,12 +4787,6 @@ STRINGS.NAMES.PISO                                            = "小火山地板
 STRINGS.NAMES.WALL_LIGHT_HOOFSPA                              = "水疗店墙灯"
 
 STRINGS.NAMES.WALLSHOP                                        = "商店墙纸"
-STRINGS.NAMES.WALLINTERIORANTHILL                             = "蚁穴墙纸"
-STRINGS.NAMES.WALLINTERIORPIG_RUINS                           = "猪遗迹房间墙纸"
-STRINGS.NAMES.WALLINTERIORPIG_RUINS_BLUE                      = "猪遗迹房间墙纸蓝"
-
-STRINGS.NAMES.WALLINTERIORROC_CAVE                            = "洞穴房间墙纸"
-STRINGS.NAMES.WALLINTERIORVAMPIREBATCAVE                      = "蝙蝠洞墙纸"
 
 STRINGS.NAMES.PINKMAN                                         = "粉猪人"
 

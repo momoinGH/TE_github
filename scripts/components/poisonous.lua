@@ -1,7 +1,7 @@
 local Poisonous = Class(function(self, inst)
 	self.inst = inst
 	self.poisontestfn = function(x, target)
-		return math.random() < 1
+		return true
 	end
 	self.dmg = nil
 	self.interval = nil

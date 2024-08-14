@@ -175,7 +175,7 @@ local function fn()
     inst.AnimState:Hide("boards")
 
     inst:AddTag("structure")
-    inst:AddTag("hamlet_housedoor")
+    inst:AddTag("interior_door")
 
     inst.entity:SetPristine()
 

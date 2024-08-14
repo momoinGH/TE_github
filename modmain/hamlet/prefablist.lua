@@ -1,8 +1,22 @@
 PrefabFiles = {
+    "hamlet_interior_wall",
+    "hamlet_interior_floor",
+    "hamlet_interior_antdoor",
+    "hamlet_interior_pigdoor",
+    "hamlet_interior_housedoor",
+    "pig_ruins_entrance_interior",
+    "hamlet_pig_ruins_entrance",
+
+
+
+
+
+
+
+
     "swfishbait",
     "construction_permit",
     "deco_roomglow",
-    "tropical_housedoor",
     "grassnova",
     "turfshamlet",
     "frog_poison",
@@ -12,7 +26,6 @@ PrefabFiles = {
     "deep_jungle_fern_noise",
     "vampirebatcave",
     "vampirebatcave_interior",
-    "vampitecave_deco",
     "roc_cave_entrance",
     "roc_cave_interior",
     "seataro_planted",
@@ -180,8 +193,7 @@ PrefabFiles = {
     "rocksham",
     "deco_ruins_fountain",
 
-    "pig_ruins_entrance_interior",
-    "pig_ruins_entrance",
+
     "pig_ruins_dart_statue",
     "pig_ruins_dart",
     "pig_ruins_creeping_vines",
@@ -265,7 +277,6 @@ PrefabFiles = {
     "deco_florist",
     "deco_beam",
     "deco_lamp",
-    "interior_texture_packages",
     "deco_placers",
 
 

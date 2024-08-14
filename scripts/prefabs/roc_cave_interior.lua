@@ -1,6 +1,5 @@
 local assets =
 {
-	Asset("ANIM", "anim/wallhamletant.zip"),
 	Asset("ANIM", "anim/bat_cave_door.zip"),
 }
 
@@ -53,7 +52,7 @@ local function createroom(inst)
 	end
 
 	----------------parede do fundo---------------------------------------------
-	local part = SpawnPrefab("wallinteriorroc_cave")
+	local part = SpawnPrefab("interior_wall_batcave_wall_rock")
 	if part ~= nil then
 		part.Transform:SetPosition(x - 3.8, 0, z)
 		part.Transform:SetRotation(0)
@@ -426,22 +425,6 @@ local function createroom(inst)
 
 	-----------------------------------------------------------------------------------------
 	inst:Remove()
-end
-
-
-local function wall_common(build)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddNetwork()
-	inst.entity:AddAnimState()
-	inst.AnimState:SetBank("wallhamletant")
-	inst.AnimState:SetBuild("wallhamletant")
-	inst.AnimState:PlayAnimation("batcave_wall_rock", true)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(7)
-	inst.AnimState:SetScale(4.5, 4.5, 4.5)
-
-	return inst
 end
 
 ----------------------------------------------------------entrada-----------------------------------------------------------------------------
@@ -1051,5 +1034,5 @@ return Prefab("createroccaveroom", normalroom, assets),
 	Prefab("roc_cave_door_cima", fnescadacima, assets),
 	Prefab("roc_cave_door_baixo", fnescadabaixo, assets),
 	Prefab("roc_cave_door_esquerda", fnescadaesquerda, assets),
-	Prefab("roc_cave_door_direita", fnescadadireita, assets),
-	Prefab("wallinteriorroc_cave", wall_common, assets)
+	Prefab("roc_cave_door_direita", fnescadadireita, assets)
+

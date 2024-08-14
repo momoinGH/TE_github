@@ -247,7 +247,6 @@ then
     table.insert(PrefabFiles, "deco_ruins_fountain")
 
     table.insert(PrefabFiles, "pig_ruins_entrance_interior")
-    table.insert(PrefabFiles, "pig_ruins_entrance")
     table.insert(PrefabFiles, "pig_ruins_dart_statue")
     table.insert(PrefabFiles, "pig_ruins_dart")
     table.insert(PrefabFiles, "pig_ruins_creeping_vines")

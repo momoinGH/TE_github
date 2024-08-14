@@ -1,8 +1,3 @@
-local assets =
-{
-	Asset("ANIM", "anim/wallhamletant.zip"),
-	Asset("ANIM", "anim/bat_cave_door.zip"),
-}
 
 local function getlocationoutofcenter(dist, hole, random, invert)
 	local pos = (math.random() * ((dist / 2) - (hole / 2))) + hole / 2
@@ -70,7 +65,7 @@ local function entrance()
 	end
 
 	----------------parede do fundo---------------------------------------------
-	local part = SpawnPrefab("wallinteriorvampirebatcave")
+	local part = SpawnPrefab("interior_wall_batcave_wall_rock")
 	if part ~= nil then
 		part.Transform:SetPosition(x - 3.8, 0, z)
 		part.Transform:SetRotation(0)
@@ -378,20 +373,5 @@ local function entrance()
 	return inst
 end
 
-local function wall_common(build)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddNetwork()
-	inst.entity:AddAnimState()
-	inst.AnimState:SetBank("wallhamletant")
-	inst.AnimState:SetBuild("wallhamletant")
-	inst.AnimState:PlayAnimation("batcave_wall_rock", true)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(7)
-	inst.AnimState:SetScale(4.5, 4.5, 4.5)
+return Prefab("vampirebatcave_entrance", entrance)
 
-	return inst
-end
-
-return Prefab("vampirebatcave_entrance", entrance),
-	Prefab("wallinteriorvampirebatcave", wall_common, assets)

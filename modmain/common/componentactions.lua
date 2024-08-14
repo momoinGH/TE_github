@@ -87,17 +87,6 @@ AddComponentAction("SCENE", "interactions", function(inst, doer, actions, right)
 
     if not right then
         ---------------------------------
-        -- TODO 删掉
-        if inst.prefab == "surfboard" and not inst:HasTag("ocupado") and not doer.replica.inventory:IsFull() then
-            table.insert(actions, GLOBAL.ACTIONS.RETRIEVE)
-            return
-        end
-
-        if inst.prefab == "fish_farm" then
-            table.insert(actions, GLOBAL.ACTIONS.RETRIEVE)
-            return
-        end
-        ---------------------------------
 
         if inst:HasTag("wallhousehamlet") and equipamento and equipamento:HasTag("hameletwallpaper") then
             table.insert(actions, GLOBAL.ACTIONS.PAINT)

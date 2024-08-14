@@ -2,7 +2,7 @@ local Utils = require("tropical_utils/utils")
 
 AddStategraphPostInit("wilson", function(sg)
     Utils.FnDecorator(sg.actionhandlers[ACTIONS.JUMPIN], "deststate", function(inst, act)
-        return { "jumpin_interior" }, act.target and act.target:HasTag("hamlet_housedoor")
+        return { "jumpin_interior" }, act.target and act.target:HasTag("interior_door")
     end)
 end)
 

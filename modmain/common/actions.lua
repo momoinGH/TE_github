@@ -10,26 +10,13 @@ Utils.FnDecorator(ACTIONS.JUMPIN, "strfn", function(act)
     if act.target ~= nil then
         if act.target:HasTag("hamlet_houseexit") then
             return { "LEAVE" }, true
-        elseif act.target:HasTag("hamlet_housedoor") then
+        elseif act.target:HasTag("interior_door") then
             return { "ENTER" }, true
         elseif act.target:HasTag("stairs") then
             return { "USE" }, true
         end
     end
 end)
-
--- Utils.FnDecorator(ACTIONS.JUMPIN, "fn", function(act)
---     if act.doer ~= nil
---         and act.doer.sg ~= nil
---         and act.target ~= nil
---         and act.target:HasTag("hamlet_housedoor")
---         and act.target.components.teleporter ~= nil
---         and act.target.components.teleporter:IsActive()
---     then
---         act.doer.sg:GoToState("jumpin_interior", { teleporter = act.target })
---         return { true }, true
---     end
--- end)
 
 ACTIONS.CASTAOE.strfn = function(act)
     return act.invobject ~= nil and

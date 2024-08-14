@@ -27,7 +27,7 @@ local function getanimname(inst)
         stage_string = "_open"
     end
 
-    return inst.facing .. stage_string
+    return inst.door_orientation .. stage_string
 end
 
 local function blockdoor(inst)
@@ -99,17 +99,7 @@ end
 local function setup(inst)
     blockdoor(inst)
 
-    if inst.door:HasTag("door_north") then
-        inst.facing = "north"
-    elseif inst.door:HasTag("door_south") then
-        inst.facing = "south"
-    elseif inst.door:HasTag("door_east") then
-        inst.facing = "east"
-    elseif inst.door:HasTag("door_west") then
-        inst.facing = "west"
-    end
-
-    if inst.facing ~= "south" then
+    if inst.door_orientation ~= "south" then
         inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
         inst.AnimState:SetSortOrder(3)
     end
@@ -128,7 +118,7 @@ local function makefn()
 
         --        inst.AnimState:SetOrientation(ANIM_ORIENTATION.RotatingBillboard)
 
-        inst.facing = "north"
+        inst.door_orientation = "north"
         inst.stage = 2
 
         anim:SetBank("pig_ruins_vines_door")
@@ -177,11 +167,11 @@ local function makewallfn(facing)
         inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
         inst.AnimState:SetSortOrder(3)
 
-        inst.facing = facing
+        inst.door_orientation = facing
 
         anim:SetBank("pig_ruins_vines_wall")
         anim:SetBuild("pig_ruins_vines_build")
-        inst.AnimState:PlayAnimation(inst.facing .. math.random(1, 15), true)
+        inst.AnimState:PlayAnimation(inst.door_orientation .. math.random(1, 15), true)
 
         return inst
     end

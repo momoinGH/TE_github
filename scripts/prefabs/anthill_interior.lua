@@ -1,7 +1,6 @@
 local assets =
 {
 	Asset("ANIM", "anim/ant_cave_door.zip"),
-	Asset("ANIM", "anim/wallhamletant.zip"),
 	Asset("ANIM", "anim/maparuina.zip"),
 }
 
@@ -41,7 +40,7 @@ local function createroom(inst)
 	end
 
 	----------------parede do fundo---------------------------------------------
-	local part = SpawnPrefab("wallinterioranthill")
+	local part = SpawnPrefab("interior_wall_antcave_wall_rock")
 	if part ~= nil then
 		part.Transform:SetPosition(x - 3.8, 0, z)
 		part.Transform:SetRotation(0)
@@ -93,10 +92,6 @@ local function createroom(inst)
 		defalt = false
 	end
 
-
-
-
-
 	local function getlocationoutofcenter(dist, hole, valor, invert)
 		local pos = (math.random() * ((dist / 2) - (hole / 2))) + hole / 2
 		if invert or (valor and math.random() < 0.5) then
@@ -105,9 +100,6 @@ local function createroom(inst)
 		return pos
 	end
 	------------------------------------adiciona para todos coisas dentro---------------------------------------------------------
-	local function getOffsetX()
-		return (math.random() * 7) - (7 / 2)
-	end
 
 	local function getOffsetBackX()
 		return (math.random(0, 0.3) * 7) - (7 / 2)
@@ -115,10 +107,6 @@ local function createroom(inst)
 
 	local function getOffsetFrontX()
 		return (math.random(0.7, 1.0) * 7) - (7 / 2)
-	end
-
-	local function getOffsetZ()
-		return (math.random() * 13) - (13 / 2)
 	end
 
 	local function getOffsetLhsZ()
@@ -194,32 +182,6 @@ local function createroom(inst)
 			part.Transform:SetPosition(x + getOffsetBackX(), 0, z + getOffsetRhsZ())
 		end
 
-		--[[	
-	local part = SpawnPrefab("antman")
-	if part ~= nil then
-	part.Transform:SetPosition(x , 0, z)
-	end	
-	
-	local part = SpawnPrefab("antman")
-	if part ~= nil then
-	part.Transform:SetPosition(x , 0, z)
-	end
-	
-]]
-	end
-
-	if salaaleatoria == 2 then
-		--[[
-	local part = SpawnPrefab("antman")
-	if part ~= nil then
-	part.Transform:SetPosition(x , 0, z)
-	end	
-	
-	local part = SpawnPrefab("antman")
-	if part ~= nil then
-	part.Transform:SetPosition(x , 0, z)
-	end
-]]
 	end
 
 	if salaaleatoria == 3 then
@@ -233,19 +195,6 @@ local function createroom(inst)
 			part.Transform:SetPosition(x + getOffsetBackX(), 0, z + getOffsetLhsZ())
 		end
 
-
-		--[[	
-	local part = SpawnPrefab("antman")
-	if part ~= nil then
-	part.Transform:SetPosition(x , 0, z)
-	end
-	
-	local part = SpawnPrefab("antman")
-	if part ~= nil then
-	part.Transform:SetPosition(x , 0, z)
-	end
-]]
-
 		local part = SpawnPrefab("antchest")
 		if part ~= nil then
 			part.Transform:SetPosition(x + getOffsetBackX(), 0, z + getOffsetLhsZ())
@@ -258,15 +207,6 @@ local function createroom(inst)
 	end
 	-------------------------------------adiciona soldados e lanterna na sala da rainha-------------------
 	if saladarainha then
-		--[[
-for i=1,math.random(2, 4) do
-	local part = SpawnPrefab("antman_warrior")
-	if part ~= nil then
-	part.Transform:SetPosition(x , 0, z)
-	end
-end	
-]]
-
 		for i = 1, math.random(2, 4) do
 			local part = SpawnPrefab("ant_cave_lantern")
 			if part ~= nil then
@@ -485,16 +425,6 @@ end
 		end
 	end
 	----------------------------------------Adiciona sala da rainha------
-	if pertodarainha then
-		--[[
-	for i=1,math.random(2, 5) do
-	local part = SpawnPrefab("antman_warrior")
-	if part ~= nil then
-	part.Transform:SetPosition(x , 0, z)
-	end
-	end	
-]]
-	end
 
 	if saladarainha then
 		comum = true
@@ -755,19 +685,6 @@ end
 end
 
 
-local function maintainantpop(inst)
-	local pt = inst:GetPosition()
-	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 60, { "giantgrub" })
-	local invader = GetClosestInstWithTag("player", inst, 20)
-	--		print (#ents)
-	if #ents < 1 and invader then
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local projectile = SpawnPrefab("giantgrub")
-		projectile.Transform:SetPosition(x + 4, y, z)
-		--	projectile.sg:GoToState("walk")		
-	end
-end
-
 local function SpawnPiso6(inst)
 	local inst = CreateEntity()
 
@@ -816,674 +733,6 @@ local function SpawnPiso6a()
 	return inst
 end
 
-local function wall_common()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddNetwork()
-	inst.entity:AddAnimState()
-
-	inst.AnimState:SetBank("wallhamletant")
-	inst.AnimState:SetBuild("wallhamletant")
-	inst.AnimState:PlayAnimation("antcave_wall_rock", true)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(7)
-	inst.AnimState:SetScale(4.5, 4.5, 4.5)
-
-	return inst
-end
-
-----------------------------------------------------------entrada-----------------------------------------------------------------------------
-local function OnDoneTeleporting(inst, obj)
-	if obj and obj:HasTag("player") then
-		obj.mynetvarCameraMode:set(5)
-	end
-end
-
-local function OnDoneTeleportingexit(inst, obj)
-	if obj and obj:HasTag("player") then
-		obj.mynetvarCameraMode:set(5)
-	end
-end
-
-local function OnActivate(inst, doer)
-	if doer:HasTag("player") then
-		doer.mynetvarCameraMode:set(0)
-
-		local alvo = inst.components.teleporter.targetTeleporter
-		if alvo then
-			local piso = GetClosestInstWithTag("pisoanthill", alvo, 20)
-			local piso2 = GetClosestInstWithTag("pisoanthillrainha", alvo, 20)
-
-			if piso then
-				if inst.diadomonstro and inst.diadomonstro ~= TheWorld.state.cycles or not inst.diadomonstro then
-					inst.diadomonstro = TheWorld.state.cycles
-
-					local x, y, z = piso.Transform:GetWorldPosition()
-					local bicho = math.random(1, 9)
-					if bicho < 6 then
-						for i = 1, math.random(2, 3) do
-							local part = SpawnPrefab("antman")
-							if part ~= nil then
-								part.Transform:SetPosition(x + math.random(0, 7), y, z + math.random(-4, 4))
-							end
-						end
-					end
-
-					if bicho == 6 then
-						for i = 1, math.random(1, 2) do
-							local part = SpawnPrefab("giantgrub")
-							if part ~= nil then
-								part.Transform:SetPosition(x + math.random(0, 7), y, z + math.random(-4, 4))
-							end
-						end
-					end
-
-					if bicho == 7 or bicho == 8 then
-						for i = 1, math.random(2, 3) do
-							local part = SpawnPrefab("antman")
-							if part ~= nil then
-								part.Transform:SetPosition(x + math.random(0, 7), y, z + math.random(-4, 4))
-							end
-						end
-
-
-						for i = 1, math.random(1, 1) do
-							local part = SpawnPrefab("giantgrub")
-							if part ~= nil then
-								part.Transform:SetPosition(x + math.random(0, 7), y, z + math.random(-4, 4))
-							end
-						end
-					end
-				end
-			end
-
-			if piso2 then
-				if inst.diadomonstro and inst.diadomonstro ~= TheWorld.state.cycles or not inst.diadomonstro then
-					inst.diadomonstro = TheWorld.state.cycles
-
-					local x, y, z = piso2.Transform:GetWorldPosition()
-
-					for i = 1, math.random(2, 5) do
-						local part = SpawnPrefab("antman_warrior")
-						if part ~= nil then
-							part.Transform:SetPosition(x + math.random(0, 7), y, z + math.random(-4, 4))
-						end
-					end
-				end
-			end
-		end
-	elseif inst.SoundEmitter ~= nil then
-	end
-end
-
-local function OnActivateexterior(inst, doer)
-	if doer:HasTag("player") then
-		ProfileStatsSet("wormhole_used", true)
-		doer.mynetvarCameraMode:set(6)
-		local other = inst.components.teleporter.targetTeleporter
-		if other ~= nil then
-			DeleteCloseEntsWithTag("WORM_DANGER", other, 15)
-		end
-
-		if doer.components.talker ~= nil then
-			doer.components.talker:ShutUp()
-		end
-		--Sounds are triggered in player's stategraph
-	elseif inst.SoundEmitter ~= nil then
-
-	end
-end
-
-local function OnActivateByOther(inst, source, doer)
-	--    if not inst.sg:HasStateTag("open") then
-	--        inst.sg:GoToState("opening")
-	--    end
-end
-
-local function onaccept(inst, giver, item)
-	inst.components.inventory:DropItem(item)
-	inst.components.teleporter:Activate(item)
-end
-
-local function StartTravelSound(inst, doer)
-end
-
-local function turnoff(inst, light)
-	if light then
-		light:Enable(false)
-	end
-end
-
-local lights =
-{
-	day = { rad = 3, intensity = 0.75, falloff = 0.5, color = { 1, 1, 1 } },
-	dusk = { rad = 2, intensity = 0.75, falloff = 0.5, color = { 1 / 1.8, 1 / 1.8, 1 / 1.8 } },
-	full = { rad = 2, intensity = 0.75, falloff = 0.5, color = { 0.8 / 1.8, 0.8 / 1.8, 1 / 1.8 } }
-}
-
-local phasefunctions =
-{
-	day = function(inst)
-		if not inst:IsInLimbo() then inst.Light:Enable(true) end
-		inst.components.lighttweener:StartTween(nil, lights.day.rad, lights.day.intensity, lights.day.falloff,
-			{ lights.day.color[1], lights.day.color[2], lights.day.color[3] }, 2)
-	end,
-
-	dusk = function(inst)
-		if not inst:IsInLimbo() then inst.Light:Enable(true) end
-		inst.components.lighttweener:StartTween(nil, lights.dusk.rad, lights.dusk.intensity, lights.dusk.falloff,
-			{ lights.dusk.color[1], lights.dusk.color[2], lights.dusk.color[3] }, 2)
-	end,
-
-	night = function(inst)
-		if TheWorld.state.moonphase == "full" then
-			inst.components.lighttweener:StartTween(nil, lights.full.rad, lights.full.intensity, lights.full.falloff,
-				{ lights.full.color[1], lights.full.color[2], lights.full.color[3] }, 4)
-		else
-			inst.components.lighttweener:StartTween(nil, 0, 0, 1, { 0, 0, 0 }, 6, turnoff)
-		end
-	end,
-}
-
-local function timechange(inst)
-	if TheWorld.state.isday then
-		if inst:HasTag("timechange_anims") then
-			inst.AnimState:PlayAnimation("to_day")
-			inst.AnimState:PushAnimation("day_loop", true)
-		end
-		if inst.Light then
-			phasefunctions["day"](inst)
-		end
-	elseif TheWorld.state.isnight then
-		if inst:HasTag("timechange_anims") then
-			inst.AnimState:PlayAnimation("to_night")
-			inst.AnimState:PushAnimation("night_loop", true)
-		end
-		if inst.Light then
-			phasefunctions["night"](inst)
-		end
-	elseif TheWorld.state.isdusk then
-		if inst:HasTag("timechange_anims") then
-			inst.AnimState:PlayAnimation("to_dusk")
-			inst.AnimState:PushAnimation("dusk_loop", true)
-		end
-		if inst.Light then
-			phasefunctions["dusk"](inst)
-		end
-	end
-end
-
-local function settimechange(inst)
-	if not inst.components.lighttweener then
-		inst:AddComponent("lighttweener")
-	end
-
-	inst.components.lighttweener:StartTween(inst.entity:AddLight(), lights.day.rad, lights.day.intensity,
-		lights.day.falloff, { lights.day.color[1], lights.day.color[2], lights.day.color[3] }, 0)
-	inst.Light:Enable(true)
-
-	inst:WatchWorldState("isday", timechange)
-	inst:WatchWorldState("isdusk", timechange)
-	inst:WatchWorldState("isnight", timechange)
-
-	inst.timechanger = true
-	timechange(inst)
-end
-
-local function opendoor(inst, instant)
-	inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/stone_door/slide")
-	if inst.prefab == "pig_ruins_door_cima" then
-		inst.AnimState:PlayAnimation("north_open")
-		inst.AnimState:PushAnimation("north")
-	end
-	if inst.prefab == "pig_ruins_door_baixo" then
-		inst.AnimState:PlayAnimation("south_open")
-		inst.AnimState:PushAnimation("south")
-	end
-	if inst.prefab == "pig_ruins_door_esquerda" then
-		inst.AnimState:PlayAnimation("east_open")
-		inst.AnimState:PushAnimation("east")
-	end
-	if inst.prefab == "pig_ruins_door_direita" then
-		inst.AnimState:PlayAnimation("west_open")
-		inst.AnimState:PushAnimation("west")
-	end
-
-	inst.dooranimclosed = nil
-	inst.components.teleporter.enabled = true
-end
-
-local function closedoor(inst, instant)
-	inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/stone_door/close")
-	if inst.prefab == "pig_ruins_door_cima" then
-		inst.AnimState:PlayAnimation("north_shut")
-		inst.AnimState:PushAnimation("north_closed")
-	end
-	if inst.prefab == "pig_ruins_door_baixo" then
-		inst.AnimState:PlayAnimation("south_shut")
-		inst.AnimState:PushAnimation("south_closed")
-	end
-	if inst.prefab == "pig_ruins_door_esquerda" then
-		inst.AnimState:PlayAnimation("east_shut")
-		inst.AnimState:PushAnimation("east_closed")
-	end
-	if inst.prefab == "pig_ruins_door_direita" then
-		inst.AnimState:PlayAnimation("west_shut")
-		inst.AnimState:PushAnimation("west_closed")
-	end
-	inst.dooranimclosed = true
-	inst.components.teleporter.enabled = false
-end
-
-local function OnSave(inst, data)
-	if inst.timechanger then
-		data.timechanger = true
-	end
-	if inst:HasTag("timechange_anims") then
-		data.timechange_anims = true
-	end
-	if inst:HasTag("lockable_door") then
-		data.lockable_door = true
-	end
-	if inst.dooranimclosed then
-		data.dooranimclosed = true
-	end
-	if inst:HasTag("guard_entrance") then
-		data.guard_entrance = true
-	end
-	if inst:HasTag("ruins_entrance") then
-		data.ruins_entrance = true
-	end
-end
-
-
-local function OnLoad(inst, data)
-	if data == nil then return end
-	if data.timechanger then
-		settimechange(inst)
-	end
-	if data.timechange_anims then
-		inst:AddTag("timechange_anims")
-		timechange(inst)
-	end
-	if data.lockable_door then
-		inst:AddTag("lockable_door")
-	end
-	if data.dooranimclosed then
-		if inst.prefab == "pig_ruins_door_cima" then
-			inst.AnimState:PushAnimation("north_closed")
-		end
-		if inst.prefab == "pig_ruins_door_baixo" then
-			inst.AnimState:PushAnimation("south_closed")
-		end
-		if inst.prefab == "pig_ruins_door_esquerda" then
-			inst.AnimState:PushAnimation("east_closed")
-		end
-		if inst.prefab == "pig_ruins_door_direita" then
-			inst.AnimState:PushAnimation("west_closed")
-		end
-	end
-	if data.guard_entrance then
-		inst:AddTag("guard_entrance")
-	end
-	if data.ruins_entrance then
-		inst:AddTag("ruins_entrance")
-	end
-end
-
-local function OnHaunt(inst, haunter)
-	inst.components.teleporter:Activate(haunter)
-end
-
-
-local function fnescadaentrada()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	local minimap = inst.entity:AddMiniMapEntity()
-
-	inst.AnimState:SetBank("ant_cave_door")
-	inst.AnimState:SetBuild("ant_cave_door")
-	inst.AnimState:PlayAnimation("day_loop")
-	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-	--    inst.AnimState:SetSortOrder(3)
-	inst.dooranimclosed = nil
-	inst.timechanger = nil
-
-
-	settimechange(inst)
-
-
-	inst:AddTag("trader")
-	inst:AddTag("alltrader")
-
-	inst:AddTag("timechange_anims")
-
-
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("trader")
-	inst.components.trader.acceptnontradable = true
-	inst.components.trader.onaccept = onaccept
-	inst.components.trader.deleteitemonaccept = false
-
-	inst:AddComponent("inspectable")
-	inst.components.inspectable:RecordViews()
-
-	inst:AddComponent("teleporter")
-	inst.components.teleporter.onActivate = OnActivateexterior
-	inst.components.teleporter.onActivateByOther = OnActivateByOther
-	inst.components.teleporter.offset = 0
-	inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-	inst:ListenForEvent("doneteleporting", OnDoneTeleportingexit)
-
-	inst:ListenForEvent("open", function() opendoor(inst) end)
-	inst:ListenForEvent("close", function() closedoor(inst) end)
-	inst.OnSave = OnSave
-	inst.OnLoad = OnLoad
-
-	inst:AddComponent("inventory")
-
-	inst:AddComponent("hauntable")
-	inst.components.hauntable:SetOnHauntFn(OnHaunt)
-
-	inst:DoTaskInTime(10, function(inst)
-		if inst.components.teleporter.targetTeleporter == nil then
-			for k, v in pairs(Ents) do
-				if v.prefab == "anthill" then
-					inst.components.teleporter.targetTeleporter = v
-				end
-			end
-		end
-	end)
-
-	return inst
-end
-
-local function fnescadacima()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	local minimap = inst.entity:AddMiniMapEntity()
-
-	inst.AnimState:SetBank("ant_cave_door")
-	inst.AnimState:SetBuild("ant_cave_door")
-	inst.AnimState:PlayAnimation("north")
-	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-	--    inst.AnimState:SetSortOrder(3)
-	inst.dooranimclosed = nil
-	inst.timechanger = nil
-
-
-	settimechange(inst)
-
-
-	inst:AddTag("trader")
-	inst:AddTag("alltrader")
-
-
-
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("trader")
-	inst.components.trader.acceptnontradable = true
-	inst.components.trader.onaccept = onaccept
-	inst.components.trader.deleteitemonaccept = false
-
-	inst:AddComponent("inspectable")
-	inst.components.inspectable:RecordViews()
-
-	inst:AddComponent("teleporter")
-	inst.components.teleporter.onActivate = OnActivate
-	inst.components.teleporter.onActivateByOther = OnActivateByOther
-	inst.components.teleporter.offset = 0
-	inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-	inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-	inst:ListenForEvent("open", function() opendoor(inst) end)
-	inst:ListenForEvent("close", function() closedoor(inst) end)
-	inst.OnSave = OnSave
-	inst.OnLoad = OnLoad
-
-	inst:AddComponent("inventory")
-
-	inst:AddComponent("hauntable")
-	inst.components.hauntable:SetOnHauntFn(OnHaunt)
-	return inst
-end
-
-local function fnescadabaixo()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("ant_cave_door")
-	inst.AnimState:SetBuild("ant_cave_door")
-	inst.AnimState:PlayAnimation("south")
-	--    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	--    inst.AnimState:SetSortOrder(3)
-
-	inst.dooranimclosed = nil
-	inst.timechanger = nil
-
-	inst:AddTag("trader")
-	inst:AddTag("alltrader")
-
-
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("trader")
-	inst.components.trader.acceptnontradable = true
-	inst.components.trader.onaccept = onaccept
-	inst.components.trader.deleteitemonaccept = false
-
-	inst:AddComponent("inspectable")
-	inst.components.inspectable:RecordViews()
-
-	inst:AddComponent("teleporter")
-	inst.components.teleporter.onActivate = OnActivate
-	inst.components.teleporter.onActivateByOther = OnActivateByOther
-	inst.components.teleporter.offset = 0
-
-	inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-	inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-	inst:ListenForEvent("open", function() opendoor(inst) end)
-	inst:ListenForEvent("close", function() closedoor(inst) end)
-	inst.OnSave = OnSave
-	inst.OnLoad = OnLoad
-
-	inst:AddComponent("inventory")
-
-	inst:AddComponent("hauntable")
-	inst.components.hauntable:SetOnHauntFn(OnHaunt)
-	return inst
-end
-
-local function fnescadaesquerda()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("ant_cave_door")
-	inst.AnimState:SetBuild("ant_cave_door")
-	inst.AnimState:PlayAnimation("east")
-	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-	--    inst.AnimState:SetSortOrder(3)
-	inst.dooranimclosed = nil
-	inst.timechanger = nil
-
-	inst:AddTag("trader")
-	inst:AddTag("alltrader")
-
-
-
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("trader")
-	inst.components.trader.acceptnontradable = true
-	inst.components.trader.onaccept = onaccept
-	inst.components.trader.deleteitemonaccept = false
-
-	inst:AddComponent("inspectable")
-	inst.components.inspectable:RecordViews()
-
-	inst:AddComponent("teleporter")
-	inst.components.teleporter.onActivate = OnActivate
-	inst.components.teleporter.onActivateByOther = OnActivateByOther
-	inst.components.teleporter.offset = 0
-	inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-	inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-	inst:ListenForEvent("open", function() opendoor(inst) end)
-	inst:ListenForEvent("close", function() closedoor(inst) end)
-	inst.OnSave = OnSave
-	inst.OnLoad = OnLoad
-
-	inst:AddComponent("inventory")
-
-	inst:AddComponent("hauntable")
-	inst.components.hauntable:SetOnHauntFn(OnHaunt)
-	return inst
-end
-
-local function fnescadadireita()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("ant_cave_door")
-	inst.AnimState:SetBuild("ant_cave_door")
-	inst.AnimState:PlayAnimation("west")
-	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-	--    inst.AnimState:SetSortOrder(3)
-	inst.dooranimclosed = nil
-	inst.timechanger = nil
-
-	inst:AddTag("trader")
-	inst:AddTag("alltrader")
-
-
-
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("trader")
-	inst.components.trader.acceptnontradable = true
-	inst.components.trader.onaccept = onaccept
-	inst.components.trader.deleteitemonaccept = false
-
-	inst:AddComponent("inspectable")
-	inst.components.inspectable:RecordViews()
-
-	inst:AddComponent("teleporter")
-	inst.components.teleporter.onActivate = OnActivate
-	inst.components.teleporter.onActivateByOther = OnActivateByOther
-	inst.components.teleporter.offset = 0
-	inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-	inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-	inst:AddComponent("inventory")
-
-	inst:AddComponent("hauntable")
-	inst.components.hauntable:SetOnHauntFn(OnHaunt)
-	return inst
-end
-
-local function fnescadaqueen()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("entrance")
-	inst.AnimState:SetBuild("ant_queen_entrance")
-	inst.AnimState:PlayAnimation("idle")
-	inst.dooranimclosed = nil
-	inst.timechanger = nil
-
-	inst:AddTag("trader")
-	inst:AddTag("alltrader")
-
-
-
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("trader")
-	inst.components.trader.acceptnontradable = true
-	inst.components.trader.onaccept = onaccept
-	inst.components.trader.deleteitemonaccept = false
-
-	inst:AddComponent("inspectable")
-	inst.components.inspectable:RecordViews()
-
-	inst:AddComponent("teleporter")
-	inst.components.teleporter.onActivate = OnActivate
-	inst.components.teleporter.onActivateByOther = OnActivateByOther
-	inst.components.teleporter.offset = 0
-	inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-	inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-	inst:AddComponent("inventory")
-
-	inst:AddComponent("hauntable")
-	inst.components.hauntable:SetOnHauntFn(OnHaunt)
-	return inst
-end
-
 local function CommonRoom(tipodesala)
 	local inst = CreateEntity()
 
@@ -1502,9 +751,6 @@ local function CommonRoom(tipodesala)
 	inst.AnimState:SetFinalOffset(2)
 
 	inst.tipodesala = tipodesala
-
-
-
 
 	createroom(inst)
 
@@ -1537,14 +783,5 @@ return Prefab("createanthilldefaltroom", normalroom, assets),
 	Prefab("createanthillcomumroom", comumroom, assets),
 	Prefab("createanthillqueenroom", saladarainharoom, assets),
 
-	Prefab("wallinterioranthill", wall_common, assets),
 	Prefab("mapaant", SpawnPiso6, assets),
-	Prefab("mapainicioant", SpawnPiso6a, assets),
-
-	Prefab("anthill_door_entrada", fnescadaentrada, assets),
-	Prefab("anthill_door_cima", fnescadacima, assets),
-	Prefab("anthill_door_baixo", fnescadabaixo, assets),
-	Prefab("anthill_door_esquerda", fnescadaesquerda, assets),
-	Prefab("anthill_door_direita", fnescadadireita, assets),
-
-	Prefab("anthill_door_queen", fnescadaqueen, assets)
+	Prefab("mapainicioant", SpawnPiso6a, assets)

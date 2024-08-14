@@ -7,17 +7,9 @@ FN.BASE_OFF = 1500 --小房子的初始z坐标，需要注意的是这个是小�
 FN.ROOM_SIZE = 60
 FN.ROW_COUNT = FN.BASE_OFF / FN.ROOM_SIZE * 2
 FN.SPAWN_ORIGIN = {
-    dx = { -6.5, 5.5 }, --上下
+    dx = { -5.5, 5.5 }, --上下
     dz = { -9, 8 }      --左右
 }
-
--- 房间边界
-function FN.getSpawnOrigin()
-    return {
-        dx = { -6.5, 5.5 }, --上下
-        dz = { -9, 8 }      --左右
-    }
-end
 
 --- 当房屋被摧毁时把屋内的掉落物扔出来
 --- 如果是remove就移除屋内道具，如果是敲毁就返还材料，只包括lootdropper和inventoryitem
@@ -74,7 +66,7 @@ function FN.SpawnWall(x, z)
     end
 end
 
----根据格式初始化室内装饰，并保存初始化数据
+---根据格式初始化室内装饰
 function FN.InitHouseInteriorPrefab(p, data)
     if data.children then
         p.tempChildrens = data.children
@@ -99,6 +91,18 @@ function FN.InitHouseInteriorPrefab(p, data)
             p.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
             -- p.AnimState:SetOrientation(ANIM_ORIENTATION.RotatingBillboard)
             p.AnimState:SetSortOrder(3)
+        end
+        if data.animdata.scale then
+            local scale = data.animdata.scale
+            local x, y
+            if type(scale) == "number" then
+                x = scale
+                y = scale
+            else
+                x = scale[1]
+                y = scale[2]
+            end
+            p.AnimState:SetScale(x, y)
         end
     end
 
@@ -148,16 +152,16 @@ function FN.SpawnHouseInteriorPrefabs(x, z, addprops, door)
 
         FN.InitHouseInteriorPrefab(p, data)
 
-        if data.init then
-            data.init(p, door)
-        end
-
         p.initData = {
             children = data.children,
             rotation = data.rotation,
             animdata = data.animdata,
             addtags = data.addtags
         }
+
+        if data.init then
+            data.init(p, door)
+        end
     end
 end
 
@@ -277,20 +281,8 @@ function FN.GetDoorRelativePosition(door)
     return centerPos and (door:GetPosition() - centerPos) or nil
 end
 
--- x是上下偏移，往下增大，z是左右偏移，往右增大
-local addprops = {
-    { name = "wallinteriorplayerhouse",      x_offset = -2.8, },
-    { name = "deco_roomglow" },
-    { name = "deco_antiquities_cornerbeam",  x_offset = -5,   z_offset = -15 / 2, },
-    { name = "deco_antiquities_cornerbeam",  x_offset = -5,   z_offset = 15 / 2,        animdata = { flip = true } },
-    { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,  z_offset = -15 / 2 - 0.3, },
-    { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,  z_offset = 15 / 2 + 0.3,  animdata = { flip = true } },
-    { name = "swinging_light_rope_1",        x_offset = -2,   y_offset = 1,             addtags = { "playercrafted" } },
-    { name = "playerhouse_city_floor",       x_offset = -2.4 },
-}
-
 --- 生成临近的新房间，用于房屋扩展许可证
-function FN.SpawnNearHouseInterior(door)
+function FN.SpawnNearHouseInterior(door, addprops)
     local center = door.components.entitytracker:GetEntity("interior_center")
     if center then return false end                    --不可能
     local dpos = FN.GetDoorRelativePosition(door)
@@ -339,5 +331,208 @@ function FN.SpawnNearHouseInterior(door)
     end
     return true
 end
+
+----------------------------------------------------------------------------------------------------
+
+local function DefaultDoorAbleToAcceptTest(inst, item)
+    return inst:HasTag("teleporter")
+end
+
+local function DefaultOnDoorAccept(inst, giver, item)
+    if not inst.components.teleporter:Activate(item)
+        and item.components.inventoryitem --一定有吧
+        and giver
+    then
+        -- 如果传送失败要物品丢出来，不然就跑世界原点了，不过无法传送的话一般也绕不过DefaultDoorAbleToAcceptTest
+        local rotation = inst:GetAngleToPoint(giver.Transform:GetWorldPosition())
+        local rot = rotation * DEGREES
+        local pos = inst:GetPosition()
+        local distance = math.min(math.sqrt(inst:GetDistanceSqToInst(giver)), 0.5)
+        local spawnPos = pos + Vector3(distance * math.cos(rot), 0, -distance * math.sin(rot))
+        item.Transform:SetPosition(spawnPos:Get())
+        item.components.inventoryitem:OnDropped()
+    end
+end
+
+local function OnDoorHaunt(inst, haunter)
+    inst.components.teleporter:Activate(haunter)
+end
+
+--- 虚空门的基础代码
+--- trader和hauntable用于传送物品，teleporter用来传送玩家
+--- teleporter可以保存传送目的地的门，entitytracker可以保存目的地小房间的中心点
+---@param bank string
+---@param build string
+---@param anim string
+---@param trader boolean|nil 是否可用于传送物品、交易
+---@param access_room boolean|nil 是否通向虚空小房间
+---@param minimap string|nil 小地图图标
+function FN.MakeBaseDoor(bank, build, anim, trader, access_room, minimap)
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    if minimap then
+        inst.entity:AddMiniMapEntity()
+        inst.MiniMapEntity:SetIcon(minimap)
+    end
+    if bank then
+        inst.AnimState:SetBank(bank)
+    end
+    if build then
+        inst.AnimState:SetBuild(build)
+    end
+    if anim then
+        inst.AnimState:PlayAnimation(anim)
+    end
+
+    inst.AnimState:SetSortOrder(0)
+    inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+
+    inst:AddTag("NOBLOCK")
+    inst:AddTag("interior_door")
+    if trader then
+        inst:AddTag("trader")
+        inst:AddTag("alltrader")
+    end
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("teleporter")
+    inst.components.teleporter.offset = 0
+    inst.components.teleporter.travelcameratime = 0
+    inst.components.teleporter.travelarrivetime = 0
+    -- inst.components.teleporter.onActivate = OnActivate
+
+    if trader then
+        inst:AddComponent("trader")
+        inst.components.trader.acceptnontradable = true
+        inst.components.trader.deleteitemonaccept = false
+        inst.components.trader:SetAbleToAcceptTest(DefaultDoorAbleToAcceptTest)
+        inst.components.trader.onaccept = DefaultOnDoorAccept
+
+        inst:AddComponent("hauntable")
+        inst.components.hauntable:SetOnHauntFn(OnDoorHaunt)
+    end
+
+    if access_room then
+        inst:AddComponent("entitytracker")
+    end
+
+    return inst
+end
+
+----------------------------------------------------------------------------------------------------
+
+local lights =
+{
+    day = { rad = 3, intensity = 0.75, falloff = 0.5, color = { 1, 1, 1 } },
+    dusk = { rad = 2, intensity = 0.75, falloff = 0.5, color = { 1 / 1.8, 1 / 1.8, 1 / 1.8 } },
+    full = { rad = 2, intensity = 0.75, falloff = 0.5, color = { 0.8 / 1.8, 0.8 / 1.8, 1 / 1.8 } }
+}
+
+local function turnoff(inst, light)
+    if light then
+        light:Enable(false)
+    end
+end
+
+local phasefunctions =
+{
+    day = function(inst)
+        if not inst:IsInLimbo() then inst.Light:Enable(true) end
+        inst.components.lighttweener:StartTween(nil, lights.day.rad, lights.day.intensity, lights.day.falloff,
+            { lights.day.color[1], lights.day.color[2], lights.day.color[3] }, 2)
+    end,
+
+    dusk = function(inst)
+        if not inst:IsInLimbo() then inst.Light:Enable(true) end
+        inst.components.lighttweener:StartTween(nil, lights.dusk.rad, lights.dusk.intensity, lights.dusk.falloff,
+            { lights.dusk.color[1], lights.dusk.color[2], lights.dusk.color[3] }, 2)
+    end,
+
+    night = function(inst)
+        if TheWorld.state.isfullmoon then
+            inst.components.lighttweener:StartTween(nil, lights.full.rad, lights.full.intensity, lights.full.falloff,
+                { lights.full.color[1], lights.full.color[2], lights.full.color[3] }, 4)
+        else
+            inst.components.lighttweener:StartTween(nil, 0, 0, 1, { 0, 0, 0 }, 6, turnoff)
+        end
+    end,
+}
+
+local function OnPhase(inst, phase)
+    if phase == "dusk" then
+        if inst:HasTag("timechange_anims") then
+            inst.AnimState:PlayAnimation("to_dusk")
+            inst.AnimState:PushAnimation("dusk_loop", true)
+        end
+    elseif phase == "night" then
+        if inst:HasTag("timechange_anims") then
+            inst.AnimState:PlayAnimation("to_night")
+            inst.AnimState:PushAnimation("night_loop", true)
+        end
+    elseif phase == "day" then
+        if inst:HasTag("timechange_anims") then
+            inst.AnimState:PlayAnimation("to_day")
+            inst.AnimState:PushAnimation("day_loop", true)
+        end
+    end
+    phasefunctions[phase](inst)
+end
+
+--- 让门的动画和光照随时段变化
+function FN.SetDoorTimeChange(inst)
+    inst:AddComponent("lighttweener")
+    inst.components.lighttweener:StartTween(inst.entity:AddLight(), lights.day.rad, lights.day.intensity,
+        lights.day.falloff, { lights.day.color[1], lights.day.color[2], lights.day.color[3] }, 0)
+    inst.Light:Enable(true)
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:WatchWorldState("phase", OnPhase)
+    OnPhase(inst, TheWorld.state.phase)
+end
+
+----------------------------------------------------------------------------------------------------
+
+local EAST  = { x = 1, y = 0, label = "east" }
+local WEST  = { x = -1, y = 0, label = "west" }
+local NORTH = { x = 0, y = 1, label = "north" }
+local SOUTH = { x = 0, y = -1, label = "south" }
+
+
+FN.DIR = {
+    EAST,
+    WEST,
+    NORTH,
+    SOUTH,
+}
+
+FN.DIR_OPPOSITE =
+{
+    WEST,
+    EAST,
+    SOUTH,
+    NORTH,
+}
+
+FN.DIR_OPPOSITE2 = {
+    NORTH = SOUTH,
+    SOUTH = NORTH,
+    EAST = WEST,
+    WEST = EAST
+}
 
 return FN
