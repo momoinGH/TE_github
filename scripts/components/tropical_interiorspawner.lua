@@ -1,7 +1,7 @@
 local InteriorSpawnerUtils = require("interiorspawnerutils")
 
 local BASE_OFF = InteriorSpawnerUtils.BASE_OFF
-local ROOM_SIZE = InteriorSpawnerUtils.ROOM_SIZE
+local ROOM_SIZE_MAX = InteriorSpawnerUtils.ROOM_SIZE_MAX
 local ROW_COUNT = InteriorSpawnerUtils.ROW_COUNT
 
 -- 虚空小房子计数器，计数会一直递增，即便前面生成的房子已经销毁
@@ -13,8 +13,8 @@ end)
 
 ---从地图左上角开始，从左到右，从上到下累积
 function InteriorSpawner:GetPos()
-    local x = (self.count % ROW_COUNT) * ROOM_SIZE - BASE_OFF
-    local z = BASE_OFF + math.ceil(self.count / ROW_COUNT) * ROOM_SIZE
+    local x = (self.count % ROW_COUNT) * ROOM_SIZE_MAX - BASE_OFF
+    local z = BASE_OFF + math.ceil(self.count / ROW_COUNT) * ROOM_SIZE_MAX
     self.count = self.count + 1
     return Vector3(x, 0, z)
 end

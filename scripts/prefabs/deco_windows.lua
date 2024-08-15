@@ -19,8 +19,23 @@ local function OnBuilt(inst)
     end
 end
 
+-- 检查朝向生成对应的光线
+local function SpawnLight(inst)
+    local bank = inst.components.tropical_saveanim.bank
+    local prefab = bank and string.match(bank, "_side$") and "window_round_light" or "window_round_light_backwall"
+
+    local light = SpawnPrefab(prefab)
+    light.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    local scale = FunctionOrValue(inst.components.tropical_saveanim.scale, inst)
+    if scale then
+        light.AnimState:SetScale(unpack(scale))
+    end
+end
+
 local function MasterInit(inst)
     inst:ListenForEvent("onbuilt", OnBuilt)
+
+    inst:DoTaskInTime(0, SpawnLight)
 end
 
 local function MakeWindow(name, build, bank, anim)
@@ -30,7 +45,6 @@ local function MakeWindow(name, build, bank, anim)
         dayevents = true,
         background = 3,
         curtains = true,
-        children = { "window_round_light_backwall" },
         tags = { "NOBLOCK", "wallsection" },
         onbuilt = true,
         masterInit = MasterInit,

@@ -145,7 +145,7 @@ end
 
 ---FindValidPositionByFan 以原点为圆心，扇形展开的方式查找任意一个可以行走的点
 function FindWalkableOffset(position, start_angle, radius, attempts, check_los, ignore_walls, customcheckfn, allow_water,
-                            allow_boats)
+    allow_boats)
 end
 
 ---海洋版本
@@ -164,7 +164,7 @@ end
 ---@param worker void 要执行动作的工人
 ---@param extra_filter function(worker, v, owner):boolean 过滤器
 function FindPickupableItem(owner, radius, furthestfirst, positionoverride, ignorethese, onlytheseprefabs, allowpickables,
-                            worker, extra_filter)
+    worker, extra_filter)
 end
 
 ---对象是否能在夜晚看见，会通过playervision组件检查或者是否已经装备含有nightvision标签的装备
@@ -626,6 +626,9 @@ function ConcatArrays(ret, ...) end
 --- 获取task的剩余执行时间，不存在时返回-1
 function GetTaskRemaining(task) end
 
+--- 返回最小值和最大值之间的一个浮点数
+function GetRandomMinMax(min, max) end
+
 ---循环数组，可以一直添加元素，溢出的部分会覆盖前面的
 RingBuffer()
 
@@ -849,8 +852,10 @@ TheNet:IsDedicated() -- 判断是否是服务器
 function MakeForgeRepairable(inst, material, onbroken, onrepaired) end
 
 function MakeHauntableLaunchAndIgnite(inst, launchchance, ignitechance, speed, cooldown, launch_haunt_value,
-                                      ignite_haunt_value)
+    ignite_haunt_value)
 end
+
+function MakeObstaclePhysics(inst, rad, height) end
 
 ------------------------------------------------------------------------------------------------------------------------
 -- 22. components/map.lua
@@ -878,7 +883,7 @@ TheWorld.Pathfinder:AddWall(x + 0.5, 0, z + 0.5);
 
 -- 制作placer，如果希望有吸附效果的placer，可以参考月亮虹吸器的，prefabs/moon_device.lua
 function MakePlacer(name, bank, build, anim, onground, snap, metersnap, scale, fixedcameraoffset, facing, postinit_fn,
-                    offset, onfailedplacement)
+    offset, onfailedplacement)
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -1016,7 +1021,7 @@ function IfThenDoWhileNode(ifcond, whilecond, name, node) end
 
 ----------------------------------------------------------------------------------------------------
 BufferedAction = Class(function(self, doer, target, action, invobject, pos, recipe, distance, forced, rotation,
-                                arrivedist)
+    arrivedist)
 end)
 
 Ingredient = Class(function(self, ingredienttype, amount, atlas, deconstruct, imageoverride) end)

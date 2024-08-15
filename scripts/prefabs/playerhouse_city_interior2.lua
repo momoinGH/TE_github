@@ -246,7 +246,7 @@ local function entrance()
 		inst.exit = SpawnPrefab("house_city_exit_door")
 		inst.exit.Transform:SetPosition(x + 5.2, 0, z + 0.5)
 		---------------------------cria a parede inicio------------------------------------------------------------------	
-		local tipodemuro = "wall_tigerpond"
+		local tipodemuro = "wall_invisible"
 		---------------------------cria a parede inicio -------------------------------------
 		---------------------------parade dos aposento------------------------------------------------------------------	
 		local y = 0
@@ -274,7 +274,7 @@ local function entrance()
 
 		----------------parede do fundo---------------------------------------------
 
-		local part = SpawnPrefab("wallinteriorplayerhouse")
+		local part = SpawnPrefab("interior_wall_wood")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.8, 0, z)
 			part.Transform:SetRotation(180)
@@ -743,7 +743,7 @@ end
 
 
 function MakePlacerporta(name, bank, build, anim, onground, snap, metersnap, scale, fixedcameraoffset, facing,
-						 postinit_fn, offset, onfailedplacement)
+	postinit_fn, offset, onfailedplacement)
 	local function fn()
 		local inst = CreateEntity()
 

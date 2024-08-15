@@ -32,39 +32,51 @@ local function OnIgniteFn(inst)
     end
 end
 
--- x是上下偏移，往下增大，z是左右偏移，往右增大
-local addprops = {
-    {
-        name = "house_city_exit_door",
-        x_offset = 4.7,
-        animdata = { anim = "idle_old", background = true },
-        init = function(inst, home)
-            inst.components.teleporter:Target(home)
-            home.components.teleporter:Target(inst)
-        end
-    },
-    { name = "wallinteriorplayerhouse",      x_offset = -2.8, },
-    { name = "deco_roomglow" },
-    { name = "shelves_cinderblocks",         x_offset = -4.5,   z_offset = -15 / 3.5 + 0.7,                                addtags = { "playercrafted" } },
-    { name = "deco_antiquities_wallfish",    x_offset = -5,     z_offset = 3.9,                                            addtags = { "playercrafted" } },
-    { name = "deco_antiquities_cornerbeam",  x_offset = -5,     z_offset = -15 / 2, },
-    { name = "deco_antiquities_cornerbeam",  x_offset = -5,     z_offset = 15 / 2,                                         animdata = { flip = true } },
-    { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,    z_offset = -15 / 2 - 0.3, },
-    { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,    z_offset = 15 / 2 + 0.3,                                   animdata = { flip = true } },
-    { name = "swinging_light_rope_1",        x_offset = -2,     y_offset = 1,                                              addtags = { "playercrafted" } },
-    { name = "charcoal",                     x_offset = -3,     z_offset = -2 },
-    { name = "charcoal",                     x_offset = 2,      z_offset = 3 },
+local function AddCraftTag(inst)
+    inst:AddTag("playercrafted")
+end
 
-    -- { name = "window_round_curtains_nails_backwall",  z_offset = 15 / 2, addtags = { "playercrafted" }, children = { "window_round_light" } },
-    { name = "window_round_backwall",        z_offset = 15 / 2, animdata = { flip = true, bank = "interior_window_side" }, addtags = { "playercrafted" }, children = { "window_round_light" } },
-    { name = "playerhouse_city_floor",       x_offset = -2.4 }
+local room = {
+    addprops = {
+        {
+            name = "house_city_exit_door",
+            x_offset = 4.7,
+            animdata = { anim = "idle_old", background = true },
+            key = "exit",
+        },
+        { name = "interior_wall_wood", x_offset = -2.8, },
+        { name = "deco_roomglow" },
+        { name = "shelves_cinderblocks", x_offset = -4.5, z_offset = -15 / 3.5 + 0.7, init = AddCraftTag },
+        { name = "deco_antiquities_wallfish", x_offset = -5, z_offset = 3.9, init = AddCraftTag },
+        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = -15 / 2, },
+        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = 15 / 2, animdata = { scale = { -1, 1 } } },
+        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = -15 / 2 - 0.3, },
+        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = 15 / 2 + 0.3, animdata = { scale = { -1, 1 } } },
+        { name = "swinging_light_rope_1", x_offset = -2, y_offset = 1, init = AddCraftTag },
+        { name = "charcoal", x_offset = -3, z_offset = -2 },
+        { name = "charcoal", x_offset = 2, z_offset = 3 },
+
+        -- { name = "window_round_curtains_nails_backwall",  z_offset = 15 / 2, init = AddCraftTag, children = { "window_round_light" } },
+        { name = "window_round_backwall", z_offset = 15 / 2, animdata = { scale = { -1, 1 }, bank = "interior_window_side" }, init = AddCraftTag },
+        { name = "playerhouse_city_floor", x_offset = -2.4 },
+        { name = "wallrenovation", x_offset = -2.5, z_offset = -5 },
+        { name = "wallrenovation", x_offset = -2.5 },
+        { name = "wallrenovation", x_offset = -2.5, z_offset = 5 },
+        { name = "wallrenovation", x_offset = 2.5, z_offset = -5 },
+        { name = "wallrenovation", x_offset = 2.5 },
+        { name = "wallrenovation", x_offset = 2.5, z_offset = 5 },
+    }
 }
 
 local function onbuilt(inst)
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("idle")
     inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
-    InteriorSpawnerUtils.SpawnHouseInterior(inst, addprops)
+
+    local doors, _, center = InteriorSpawnerUtils.CreateRoom(room)
+    inst.components.teleporter:Target(doors.exit)
+    doors.exit.components.teleporter:Target(inst)
+    center:AddTag("playercrafted")
 end
 
 local function OnRemove(inst)
@@ -151,15 +163,9 @@ local function onhammered(inst, worker)
 end
 
 local function fn()
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddLight()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
+    local inst = InteriorSpawnerUtils.MakeBaseDoor("pig_house_sale", "pig_house_sale", "idle", true, false, "pig_house_sale.png")
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("pig_house_sale.png")
+    inst.entity:AddLight()
 
     inst.Light:SetFalloff(1)
     inst.Light:SetIntensity(.5)
@@ -169,25 +175,15 @@ local function fn()
 
     MakeObstaclePhysics(inst, 1.25)
 
-    inst.AnimState:SetBuild("pig_house_sale")
-    inst.AnimState:SetBank("pig_house_sale")
-    inst.AnimState:PlayAnimation("idle", true)
     inst.AnimState:Hide("boards")
 
     inst:AddTag("structure")
-    inst:AddTag("interior_door")
-
-    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
-    inst:AddComponent("inspectable")
-
     inst:AddComponent("lootdropper")
-
-    inst:AddComponent("entitytracker")
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
@@ -207,14 +203,9 @@ local function fn()
     -- 控制玩家是否可以进房，只有买了之后才能进
     -- inst:AddComponent("door")
 
-    inst:AddComponent("teleporter")
     inst.components.teleporter.onActivate = OnActivate
     inst.components.teleporter.onActivateByOther = OnActivateByOther
-    inst.components.teleporter.offset = 0
-    inst.components.teleporter.travelcameratime = 0
-    inst.components.teleporter.travelarrivetime = 0
 
-    inst:AddComponent("trader")
     inst.components.trader:SetAcceptTest(ShouldAcceptItem)
     inst.components.trader.onaccept = OnGetItemFromPlayer
 

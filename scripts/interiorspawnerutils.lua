@@ -2,20 +2,42 @@
 
 local FN = {}
 
-FN.RADIUS = 12     --小房子半径
+FN.RADIUS = 16     --小房子半径
 FN.BASE_OFF = 1500 --小房子的初始z坐标，需要注意的是这个是小房子中心点的初始z坐标
-FN.ROOM_SIZE = 60
-FN.ROW_COUNT = FN.BASE_OFF / FN.ROOM_SIZE * 2
-FN.SPAWN_ORIGIN = {
-    dx = { -5.5, 5.5 }, --上下
-    dz = { -9, 8 }      --左右
+FN.ROOM_SIZE_MAX = 60
+FN.ROW_COUNT = FN.BASE_OFF / FN.ROOM_SIZE_MAX * 2
+
+FN.ROOM_SIZE = {
+    SMALL = {
+        dx = { -5, 5 }, --上下
+        dz = { -9, 8 }  --左右
+    },
+    MEDIUM = {
+        dx = { -8.5, 8.5 },  --上下
+        dz = { -12.5, 12.5 } --左右
+    },
 }
+
+function FN.GetRoomSizeId(room_size)
+    return room_size == FN.ROOM_SIZE.MEDIUM and 1
+        or 0
+end
+
+function FN.GetRoomSizeById(id)
+    return id == 1 and FN.ROOM_SIZE.MEDIUM
+        or FN.ROOM_SIZE.SMALL
+end
+
+function FN.GetCenterPosByHouse(house)
+    local door = house.components.teleporter and house.components.teleporter:GetTarget()
+    local center = door and door.components.entitytracker and door.components.entitytracker:GetEntity("interior_center")
+    return center and center:GetPosition()
+end
 
 --- 当房屋被摧毁时把屋内的掉落物扔出来
 --- 如果是remove就移除屋内道具，如果是敲毁就返还材料，只包括lootdropper和inventoryitem
 function FN.OnHouseDestroy(house, destroyer, isRemove)
-    local center = house.components.entitytracker and house.components.entitytracker:GetEntity("interior_center")
-    local centerPos = center and center:GetPosition()
+    local centerPos = FN.GetCenterPosByHouse(house)
     if not centerPos then return end
 
     local dis = FN.RADIUS
@@ -54,13 +76,14 @@ function FN.OnHouseDestroy(house, destroyer, isRemove)
 end
 
 --- 不可见墙，阻挡玩家移动
-function FN.SpawnWall(x, z)
-    local origin = FN.SPAWN_ORIGIN
-    for dx = origin.dx[1], origin.dx[2] do --因为两侧墙角度不一样，所以墙壁并不是对称的
-        for dz = origin.dz[1], origin.dz[2] do
-            if dx == origin.dx[1] or dx == origin.dx[2] or dz == origin.dz[1] or dz == origin.dz[2] then
-                local part = SpawnPrefab("wall_tigerpond")
-                part.Transform:SetPosition(x + dx + 0.5, 0, z + dz + 0.5)
+function FN.SpawnWall(x, z, size)
+    size = size or FN.ROOM_SIZE.SMALL
+    for dx = size.dx[1], size.dx[2] do --因为两侧墙角度不一样，所以墙壁并不是对称的
+        for dz = size.dz[1], size.dz[2] do
+            if dx == size.dx[1] or dx == size.dx[2] or dz == size.dz[1] or dz == size.dz[2] then
+                local part = SpawnPrefab("wall_invisible")
+                -- local part = SpawnPrefab("wall_stone") -- 测试阶段先用石墙
+                part.Transform:SetPosition(x + dx, 0, z + dz)
             end
         end
     end
@@ -68,29 +91,12 @@ end
 
 ---根据格式初始化室内装饰
 function FN.InitHouseInteriorPrefab(p, data)
-    if data.children then
-        p.tempChildrens = data.children
-    end
     if data.rotation then
         p.Transform:SetRotation(data.rotation)
     end
     if data.animdata then
         if data.animdata.flip then
             p.AnimState:SetScale(-1, 1)
-        end
-        if data.animdata.bank then
-            p.AnimState:SetBank(data.animdata.bank)
-        end
-        if data.animdata.build then
-            p.AnimState:SetBuild(data.animdata.build)
-        end
-        if data.animdata.anim then
-            p.AnimState:PlayAnimation(data.animdata.anim)
-        end
-        if data.animdata.background then
-            p.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-            -- p.AnimState:SetOrientation(ANIM_ORIENTATION.RotatingBillboard)
-            p.AnimState:SetSortOrder(3)
         end
         if data.animdata.scale then
             local scale = data.animdata.scale
@@ -113,67 +119,12 @@ function FN.InitHouseInteriorPrefab(p, data)
     end
 end
 
--- 初始化装饰物的子对象，只需初始化部分数据就行
-function FN.InitHouseInteriorPrefabChild(p, data)
-    if data.rotation then
-        p.Transform:SetRotation(data.rotation)
-    end
-    if data.animdata and data.animdata.flip then
-        p.AnimState:SetScale(-1, 1)
-    end
-end
-
 -- 清理目标区域的空间
 -- 虽然房子坐标是累增的，但是防止一些特殊情况，比如mod中途移除再添加导致count重新计数，或者其他mod也有小房子，房子生成位置冲突
 function FN.ClearSpace(x, z)
     for _, ent in ipairs(TheSim:FindEntities(x, 0, z, FN.RADIUS)) do
         ent:Remove()
     end
-end
-
----根据格式初始化室内装饰
-function FN.SpawnHouseInteriorPrefabs(x, z, addprops, door)
-    FN.ClearSpace(x, z)
-
-    -- 生成中心点
-    local center = SpawnPrefab("interior_center")
-    center.Transform:SetPosition(x, 0, z)
-    door.components.entitytracker:TrackEntity("interior_center", center)
-
-    FN.SpawnWall(x, z)
-
-    for _, data in ipairs(addprops) do
-        local p = SpawnPrefab(data.name)
-        -- print("生成" .. data.name, p, x + (data.x_offset or 0), z + (data.z_offset or 0))
-
-        if x and z and (data.x_offset or data.z_offset) then
-            p.Transform:SetPosition(x + (data.x_offset or 0), data.y_offset or 0, z + (data.z_offset or 0))
-        end
-
-        FN.InitHouseInteriorPrefab(p, data)
-
-        p.initData = {
-            children = data.children,
-            rotation = data.rotation,
-            animdata = data.animdata,
-            addtags = data.addtags
-        }
-
-        if data.init then
-            data.init(p, door)
-        end
-    end
-end
-
----生成室内小房子
----@param door Entity 门或者小房子，要求有entitytracker对象
----@param addprops table
-function FN.SpawnHouseInterior(door, addprops)
-    assert(door.components.entitytracker, "The door entity object must have entitytracker component")
-
-    local pos = TheWorld.components.tropical_interiorspawner:GetPos()
-    FN.SpawnHouseInteriorPrefabs(pos.x, pos.z, addprops, door)
-    return pos
 end
 
 function FN.GetHouseCenterPos(target)
@@ -249,11 +200,11 @@ function FN.TestBeam(target)
     end
 end
 
----传入hamletdoor组件对象，递归检测内部是否存在玩家
 local TNTERIOR_ONE_OF_TAGS = { "player", "hamlet_door" }
+--- 递归检测内部是否存在玩家
+---@param door Entity 外门
 function FN.InterioHasPlayer(door)
-    local center = door.components.entitytracker and door.components.entitytracker:GetEntity("interior_center")
-    local centerPos = center and center:GetPosition()
+    local centerPos = FN.GetCenterPosByHouse(door)
 
     if not centerPos then return false end
 
@@ -282,12 +233,12 @@ function FN.GetDoorRelativePosition(door)
 end
 
 --- 生成临近的新房间，用于房屋扩展许可证
-function FN.SpawnNearHouseInterior(door, addprops)
-    local center = door.components.entitytracker:GetEntity("interior_center")
-    if center then return false end                    --不可能
+function FN.SpawnNearHouseInterior(door, room)
+    if door.components.teleporter:GetTarget() then return false end --已经有了
     local dpos = FN.GetDoorRelativePosition(door)
-    if not dpos or not door.side then return false end --不可能
-    local pos = FN.SpawnHouseInterior(door, addprops)
+    if not dpos or not door.side then return false end              --不可能
+    local _, _, center = FN.CreateRoom(room)
+    local pos = center:GetPosition()
 
     -- 还要装一个对应的门
     local doorAnim, newDoorAnim
@@ -360,14 +311,14 @@ end
 
 --- 虚空门的基础代码
 --- trader和hauntable用于传送物品，teleporter用来传送玩家
---- teleporter可以保存传送目的地的门，entitytracker可以保存目的地小房间的中心点
+--- teleporter加在所有门上，可以关联传送目的地和判断房间是否已经创建；entitytracker加载虚空内的门上，保存当前所在房间的中心点
 ---@param bank string
 ---@param build string
 ---@param anim string
 ---@param trader boolean|nil 是否可用于传送物品、交易
----@param access_room boolean|nil 是否通向虚空小房间
+---@param interior_door boolean|nil 是否是虚空内部的生成的门，如果是则表示需要记录中心点对象
 ---@param minimap string|nil 小地图图标
-function FN.MakeBaseDoor(bank, build, anim, trader, access_room, minimap)
+function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -390,7 +341,6 @@ function FN.MakeBaseDoor(bank, build, anim, trader, access_room, minimap)
     end
 
     inst.AnimState:SetSortOrder(0)
-    inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
 
     inst:AddTag("NOBLOCK")
     inst:AddTag("interior_door")
@@ -424,7 +374,7 @@ function FN.MakeBaseDoor(bank, build, anim, trader, access_room, minimap)
         inst.components.hauntable:SetOnHauntFn(OnDoorHaunt)
     end
 
-    if access_room then
+    if interior_door then
         inst:AddComponent("entitytracker")
     end
 
@@ -512,6 +462,21 @@ local WEST  = { x = -1, y = 0, label = "west" }
 local NORTH = { x = 0, y = 1, label = "north" }
 local SOUTH = { x = 0, y = -1, label = "south" }
 
+function FN.GetNorth()
+    return NORTH
+end
+
+function FN.GetSouth()
+    return SOUTH
+end
+
+function FN.GetWest()
+    return WEST
+end
+
+function FN.GetEast()
+    return EAST
+end
 
 FN.DIR = {
     EAST,
@@ -528,11 +493,118 @@ FN.DIR_OPPOSITE =
     NORTH,
 }
 
-FN.DIR_OPPOSITE2 = {
-    NORTH = SOUTH,
-    SOUTH = NORTH,
-    EAST = WEST,
-    WEST = EAST
+function FN.GetOppositeFromDirection(direction)
+    if direction == NORTH then
+        return FN.GetSouth()
+    elseif direction == EAST then
+        return FN.GetWest()
+    elseif direction == SOUTH then
+        return FN.GetNorth()
+    else
+        return FN.GetEast()
+    end
+end
+
+-- 除了关键配置，基本都可省
+local newRoom = {
+    size = FN.ROOM_SIZE.SMALL,                 --房间大小，需要根据房间大小生成不可见墙体
+    addprops = {                               --房间内所有东西配置，包括地板、墙壁和房间门
+        {
+            name = "",                         --预制件名
+            x_offset = 0.5,                    --偏移，x上下偏移，往下增大
+            y_offset = 0.5,                    --偏移
+            z_offset = 0.5,                    --偏移，z左右偏移，往右增大
+            key = "exit",                      --对房间门生效，CreateRoom方法返回的表可以通过这个key获取到对应的门，同时用于连通不同房间的门
+            target_door = "",                  --如果需要不同房间的门相互连通，则需要配置target_door = key
+            init = function(inst, center) end, --生成后的初始化操作，第二个参数是中心点对象
+            animdata = {                       --该数据通过tropical_saveanim组件保存，因此建议给有该字段的预制件都添加该组件
+                bank = nil,                    --支持函数、字符串
+                build = nil,                   --支持函数、字符串
+                anim = nil,                    --支持函数、字符串
+                scale = { -1, 1 },             --支持函数、表
+                isloopplay = false,            --是否循环播放
+                isdelayset = false,            --加载时是否进入游戏再设置
+            }
+        }
+    },
 }
+
+---创建房间
+---@param room table 房间配置表
+---@return doors table 所有的房间门
+---@return door_map table 门的key的映射关系
+---@return center Entity
+function FN.CreateRoom(room)
+    local doors = {}
+    local door_map = {}
+    local x, y, z = TheWorld.components.tropical_interiorspawner:GetPos():Get()
+
+    -- 清除杂物，以防万一
+    FN.ClearSpace(x, z)
+
+    -- 生成中心点
+    local center = SpawnPrefab("interior_center")
+    center.Transform:SetPosition(x, 0, z)
+    center.room_size:set(FN.GetRoomSizeId(room.size))
+
+
+    --生成墙体
+    FN.SpawnWall(x, z, room.size)
+
+    --生产内部物品
+    for id, data in ipairs(room.addprops) do
+        local p = SpawnPrefab(data.name)
+
+        p.Transform:SetPosition(x + (data.x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))
+        -- print("创建内部对象", p, p:HasTag("interior_door"), data.key)
+        if p:HasTag("interior_door") then
+            assert(p.components.entitytracker, "只要是虚空房间里的门都应该有这个组件，用来记录自己所在房间的中心点")
+            p.components.entitytracker:TrackEntity("interior_center", center)
+            local key = data.key or id
+            doors[key] = p
+            door_map[key] = data.target_door
+        end
+
+        if data.animdata and p.components.tropical_saveanim then
+            local animdata = data.animdata
+            p.components.tropical_saveanim:Init(animdata.bank, animdata.build, animdata.anim, animdata.scale, animdata.isloopplay, animdata.isdelayset)
+        end
+
+        if data.init then
+            data.init(p, center)
+        end
+    end
+
+    return doors, door_map, center
+end
+
+---创建很多房间
+---@param rooms table 房间配置表
+---@return exits table 所有出口门，也就是未关联的房间门
+---@return door_map table 门的key的映射关系
+---@return centers table
+function FN.CreateRooms(rooms)
+    local doors = {}
+    local door_map = {}
+    local centers = {}
+    for _, room in ipairs(rooms) do
+        local d, map, center = FN.CreateRoom(room)
+        doors = MergeMaps(doors, d)
+        door_map = MergeMaps(door_map, map)
+        table.insert(centers, center)
+    end
+
+    -- 关联门
+    for key, door in pairs(doors) do
+        local target_door = door_map[key] and doors[door_map[key]]
+        print("构造门", key, door_map[key], door, target_door)
+        if target_door then
+            door.components.teleporter:Target(target_door)
+            target_door.components.teleporter:Target(door)
+        end
+    end
+
+    return doors, door_map, centers
+end
 
 return FN

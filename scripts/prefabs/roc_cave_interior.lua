@@ -26,7 +26,7 @@ local function createroom(inst)
 	z = TheWorld.components.contador:GetZ()
 
 	---------------------------cria a parede inicio------------------------------------------------------------------	
-	local tipodemuro = "wall_tigerpond"
+	local tipodemuro = "wall_invisible"
 	---------------------------cria a parede inicio -------------------------------------
 	---------------------------parade dos aposento------------------------------------------------------------------	
 	local y = 0
@@ -563,15 +563,15 @@ end
 
 local function opendoor(inst, instant)
 	inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/stone_door/slide")
-	if inst.prefab == "pig_ruins_door_cima" then
+	if inst.prefab == "pig_ruins_door" then
 		inst.AnimState:PlayAnimation("north_open")
 		inst.AnimState:PushAnimation("north")
 	end
-	if inst.prefab == "pig_ruins_door_baixo" then
+	if inst.prefab == "pig_ruins_door" then
 		inst.AnimState:PlayAnimation("south_open")
 		inst.AnimState:PushAnimation("south")
 	end
-	if inst.prefab == "pig_ruins_door_esquerda" then
+	if inst.prefab == "pig_ruins_door" then
 		inst.AnimState:PlayAnimation("east_open")
 		inst.AnimState:PushAnimation("east")
 	end
@@ -586,15 +586,15 @@ end
 
 local function closedoor(inst, instant)
 	inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/stone_door/close")
-	if inst.prefab == "pig_ruins_door_cima" then
+	if inst.prefab == "pig_ruins_door" then
 		inst.AnimState:PlayAnimation("north_shut")
 		inst.AnimState:PushAnimation("north_closed")
 	end
-	if inst.prefab == "pig_ruins_door_baixo" then
+	if inst.prefab == "pig_ruins_door" then
 		inst.AnimState:PlayAnimation("south_shut")
 		inst.AnimState:PushAnimation("south_closed")
 	end
-	if inst.prefab == "pig_ruins_door_esquerda" then
+	if inst.prefab == "pig_ruins_door" then
 		inst.AnimState:PlayAnimation("east_shut")
 		inst.AnimState:PushAnimation("east_closed")
 	end
@@ -641,13 +641,13 @@ local function OnLoad(inst, data)
 		inst:AddTag("lockable_door")
 	end
 	if data.dooranimclosed then
-		if inst.prefab == "pig_ruins_door_cima" then
+		if inst.prefab == "pig_ruins_door" then
 			inst.AnimState:PushAnimation("north_closed")
 		end
-		if inst.prefab == "pig_ruins_door_baixo" then
+		if inst.prefab == "pig_ruins_door" then
 			inst.AnimState:PushAnimation("south_closed")
 		end
-		if inst.prefab == "pig_ruins_door_esquerda" then
+		if inst.prefab == "pig_ruins_door" then
 			inst.AnimState:PushAnimation("east_closed")
 		end
 		if inst.prefab == "pig_ruins_door_direita" then
@@ -1035,4 +1035,3 @@ return Prefab("createroccaveroom", normalroom, assets),
 	Prefab("roc_cave_door_baixo", fnescadabaixo, assets),
 	Prefab("roc_cave_door_esquerda", fnescadaesquerda, assets),
 	Prefab("roc_cave_door_direita", fnescadadireita, assets)
-

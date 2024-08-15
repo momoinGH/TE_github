@@ -1,5 +1,6 @@
 PrefabFiles =
 {
+    "wall_invisible",
     "interior_center",
     "shipwrecked_boat",
     "shipwrecked_boat_placer",

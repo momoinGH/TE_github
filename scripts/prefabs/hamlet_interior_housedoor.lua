@@ -56,20 +56,22 @@ local function AbleToAcceptTest(inst, item)
 end
 
 -- x是上下偏移，往下增大，z是左右偏移，往右增大
-local addprops = {
-    { name = "wallinteriorplayerhouse",      x_offset = -2.8, },
-    { name = "deco_roomglow" },
-    { name = "deco_antiquities_cornerbeam",  x_offset = -5,   z_offset = -15 / 2, },
-    { name = "deco_antiquities_cornerbeam",  x_offset = -5,   z_offset = 15 / 2,        animdata = { flip = true } },
-    { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,  z_offset = -15 / 2 - 0.3, },
-    { name = "deco_antiquities_cornerbeam2", x_offset = 4.7,  z_offset = 15 / 2 + 0.3,  animdata = { flip = true } },
-    { name = "swinging_light_rope_1",        x_offset = -2,   y_offset = 1,             addtags = { "playercrafted" } },
-    { name = "playerhouse_city_floor",       x_offset = -2.4 },
+local room = {
+    addprops = {
+        { name = "interior_wall_wood", x_offset = -2.8, },
+        { name = "deco_roomglow" },
+        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = -15 / 2, },
+        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = 15 / 2, animdata = { scale = { -1, 1 } } },
+        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = -15 / 2 - 0.3, },
+        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = 15 / 2 + 0.3, animdata = { scale = { -1, 1 } } },
+        { name = "swinging_light_rope_1", x_offset = -2, y_offset = 1, addtags = { "playercrafted" } },
+        { name = "playerhouse_city_floor", x_offset = -2.4 },
+    }
 }
 
 local function onaccept(inst, giver, item)
     if item.prefab == "construction_permit" and not inst.components.teleporter.targetTeleporter then
-        if InteriorSpawnerUtils.SpawnNearHouseInterior(inst, addprops) then --应该没可能失败
+        if InteriorSpawnerUtils.SpawnNearHouseInterior(inst, room) then --应该没可能失败
             item:Remove()
         end
     else
@@ -77,8 +79,8 @@ local function onaccept(inst, giver, item)
     end
 end
 
-local function common(bank, build, anim)
-    local inst = InteriorSpawnerUtils.MakeBaseDoor(bank, build, anim, true)
+local function common(bank, build, anim, interior_door)
+    local inst = InteriorSpawnerUtils.MakeBaseDoor(bank, build, anim, true, interior_door)
 
     if not TheWorld.ismastersim then
         return inst
@@ -97,8 +99,13 @@ local function common(bank, build, anim)
 end
 
 local function house_city_exit_door_fn()
-    local inst = common("pig_shop_doormats", "pig_shop_doormats", "idle_old")
+    local inst = common("pig_shop_doormats", "pig_shop_doormats", "idle_old", true)
     inst:AddTag("hamlet_houseexit")
+
+    inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+    -- p.AnimState:SetOrientation(ANIM_ORIENTATION.RotatingBillboard)
+    inst.AnimState:SetSortOrder(3)
+
     return inst
 end
 
@@ -125,7 +132,7 @@ local function onhammered(inst, worker)
     inst:Remove()
 end
 
--- teleporter会紫东阁保存传送目的地的门，但是还需要entitytracker来记录房间的中心位置
+-- teleporter会紫东阁保存传送目的地的门
 local function MakeHouseDoor(name)
     local function fn()
         local inst = common("player_house_doors", "player_house_doors")

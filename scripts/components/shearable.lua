@@ -1,3 +1,4 @@
+--- 可以拿剪刀剪
 local Shearable = Class(function(self, inst)
     self.inst = inst
 end)

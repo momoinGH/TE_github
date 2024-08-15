@@ -1,20 +1,24 @@
-local a = {
+local assets = {
     Asset("ANIM", "anim/blowdart_lava2.zip"),
     Asset("ANIM", "anim/swap_blowdart_lava2.zip") }
-local b = { Asset("ANIM", "anim/lavaarena_blowdart_attacks.zip") }
-local c = { "moltendarts_projectile", "moltendarts_projectile_explosive", "reticulelong", "reticulelongping" }
-local d = { "weaponsparks_piercing" }
-local e = { "explosivehit" }
+local projectile_assets = { Asset("ANIM", "anim/lavaarena_blowdart_attacks.zip") }
+local prefabs = { "moltendarts_projectile", "moltendarts_projectile_explosive", "reticulelong", "reticulelongping" }
+local projectile_prefabs = { "weaponsparks_piercing" }
+local explosive_prefabs = { "explosivehit" }
 local f = 4 * FRAMES;
+
 local function g(h, i)
     i.AnimState:OverrideSymbol("swap_object", "swap_blowdart_lava2", "swap_blowdart_lava2")
     i.AnimState:Show("ARM_carry")
     i.AnimState:Hide("ARM_normal")
-end; local function j(h, i)
+end;
+local function j(h, i)
     i.AnimState:Hide("ARM_carry")
     i.AnimState:Show("ARM_normal")
 end;
-local function k() return Vector3(ThePlayer.entity:LocalToWorldSpace(6.5, 0, 0)) end;
+local function k()
+    return Vector3(ThePlayer.entity:LocalToWorldSpace(6.5, 0, 0))
+end;
 local function l(h, m)
     if m ~= nil then
         local n, o, p = h.Transform:GetWorldPosition()
@@ -42,55 +46,73 @@ local function C(h, D, u)
     D.SoundEmitter:PlaySound("dontstarve/common/lava_arena/blow_dart")
     h.components.recarregavel:StartRecharge()
 end;
-local function F()
-    local h = CreateEntity()
-    h.entity:AddTransform()
-    h.entity:AddSoundEmitter()
-    h.entity:AddAnimState()
-    h.entity:AddNetwork()
-    MakeInventoryPhysics(h)
-    h.nameoverride = "blowdart_lava2"
-    h.AnimState:SetBank("blowdart_lava2")
-    h.AnimState:SetBuild("blowdart_lava2")
-    h.AnimState:PlayAnimation("idle")
-    h:AddTag("blowdart")
-    h:AddTag("rechargeable")
-    h:AddTag("sharp")
-    h:AddComponent("aoetargeting")
-    h.components.aoetargeting:SetAlwaysValid(true)
-    h.components.aoetargeting.reticule.reticuleprefab = "reticulelong"
-    h.components.aoetargeting.reticule.pingprefab = "reticulelongping"
-    h.components.aoetargeting.reticule.targetfn = k;
-    h.components.aoetargeting.reticule.mousetargetfn = l;
-    h.components.aoetargeting.reticule.updatepositionfn = t;
-    h.components.aoetargeting.reticule.validcolour = { 1, .75, 0, 1 }
-    h.components.aoetargeting.reticule.invalidcolour = { .5, 0, 0, 1 }
-    h.components.aoetargeting.reticule.ease = true; h.components.aoetargeting.reticule.mouseenabled = true;
-    h.projectiledelay = f; h.entity:SetPristine()
-    if not TheWorld.ismastersim then return h end;
-    h:AddComponent("aoespell")
-    h.components.aoespell:SetSpellFn(C)
-    h:AddComponent("equippable")
-    h.components.equippable:SetOnEquip(g)
-    h.components.equippable:SetOnUnequip(j)
-    h:AddComponent("inspectable")
-    h:AddComponent("inventoryitem")
-    h.components.inventoryitem.imagename = "blowdart_lava2"
-    h:AddComponent("recarregavel")
-    h.components.recarregavel:SetRechargeTime(TUNING.FORGE_ITEM_PACK.TFWP_DRAGON_DART.COOLDOWN)
-    h:AddComponent("weapon")
-    h.components.weapon:SetDamage(TUNING.FORGE_ITEM_PACK.TFWP_DRAGON_DART.DAMAGE)
-    h.components.weapon:SetRange(10, 15)
-    h.components.weapon:SetProjectile("moltendarts_projectile")
-    h.components.weapon:SetDamageType(DAMAGETYPES.PHYSICAL)
-    h.components.weapon:SetAltAttack(TUNING.FORGE_ITEM_PACK.TFWP_DRAGON_DART.ALT_DAMAGE, { 10, 15 }, nil,
+
+local function fn()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
+
+    inst.nameoverride = "blowdart_lava2"
+    inst.AnimState:SetBank("blowdart_lava2")
+    inst.AnimState:SetBuild("blowdart_lava2")
+    inst.AnimState:PlayAnimation("idle")
+
+    inst:AddTag("blowdart")
+    inst:AddTag("rechargeable")
+    inst:AddTag("sharp")
+
+    inst:AddComponent("aoetargeting")
+    inst.components.aoetargeting:SetAlwaysValid(true)
+    inst.components.aoetargeting.reticule.reticuleprefab = "reticulelong"
+    inst.components.aoetargeting.reticule.pingprefab = "reticulelongping"
+    inst.components.aoetargeting.reticule.targetfn = k;
+    inst.components.aoetargeting.reticule.mousetargetfn = l;
+    inst.components.aoetargeting.reticule.updatepositionfn = t;
+    inst.components.aoetargeting.reticule.validcolour = { 1, .75, 0, 1 }
+    inst.components.aoetargeting.reticule.invalidcolour = { .5, 0, 0, 1 }
+    inst.components.aoetargeting.reticule.ease = true; inst.components.aoetargeting.reticule.mouseenabled = true;
+
+    inst.projectiledelay = f;
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end;
+
+    inst:AddComponent("aoespell")
+    inst.components.aoespell:SetSpellFn(C)
+
+    inst:AddComponent("equippable")
+    inst.components.equippable:SetOnEquip(g)
+    inst.components.equippable:SetOnUnequip(j)
+
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.imagename = "blowdart_lava2"
+
+    inst:AddComponent("recarregavel")
+    inst.components.recarregavel:SetRechargeTime(TUNING.FORGE_ITEM_PACK.TFWP_DRAGON_DART.COOLDOWN)
+
+    inst:AddComponent("weapon")
+    inst.components.weapon:SetDamage(TUNING.FORGE_ITEM_PACK.TFWP_DRAGON_DART.DAMAGE)
+    inst.components.weapon:SetRange(10, 15)
+    inst.components.weapon:SetProjectile("moltendarts_projectile")
+    inst.components.weapon:SetDamageType(DAMAGETYPES.PHYSICAL)
+    inst.components.weapon:SetAltAttack(TUNING.FORGE_ITEM_PACK.TFWP_DRAGON_DART.ALT_DAMAGE, { 10, 15 }, nil,
         DAMAGETYPES.PHYSICAL)
-    return h
+
+    return inst
 end;
 local G = 5;
 local H = { ["tail_5_2"] = .15, ["tail_5_3"] = .15, ["tail_5_4"] = .2, ["tail_5_5"] = .8, ["tail_5_6"] = 1, ["tail_5_7"] = 1 }
 local I = { ["tail_5_8"] = 1, ["tail_5_9"] = .5 }
-local function J(K, L)
+local function J(K, suffix)
     local h = CreateEntity()
     h:AddTag("FX")
     h:AddTag("NOCLICK")
@@ -100,74 +122,102 @@ local function J(K, L)
     h.entity:AddAnimState()
     h.AnimState:SetBank("lavaarena_blowdart_attacks")
     h.AnimState:SetBuild("lavaarena_blowdart_attacks")
-    h.AnimState:PlayAnimation(weighted_random_choice(K and I or H) .. L)
+    h.AnimState:PlayAnimation(weighted_random_choice(K and I or H) .. suffix)
     h.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     if not K then
         h.AnimState:SetAddColour(1, 1, 0, 0)
     end; h:ListenForEvent("animover", h.Remove)
     h.OnLoad = h.Remove; return h
-end; local function M(h, L)
-    local N = not h.entity:IsVisible() and 0 or h._fade ~= nil and (G - h._fade:value() + 1) / G or 1;
+end;
+local function M(inst, suffix)
+    local N = not inst.entity:IsVisible() and 0 or inst._fade ~= nil and (G - inst._fade:value() + 1) / G or 1;
     if N > 0 then
-        local O = J(h.thintailcount > 0, L)
-        O.Transform:SetPosition(h.Transform:GetWorldPosition())
-        O.Transform:SetRotation(h.Transform:GetRotation())
+        local O = J(inst.thintailcount > 0, suffix)
+        O.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        O.Transform:SetRotation(inst.Transform:GetRotation())
         if N < 1 then O.AnimState:SetTime(N * O.AnimState:GetCurrentAnimationLength()) end;
-        if h.thintailcount > 0 then h.thintailcount = h.thintailcount - 1 end
+        if inst.thintailcount > 0 then inst.thintailcount = inst.thintailcount - 1 end
     end
-end; local function P(h, i, Q, R)
+end;
+
+local function OnHit(inst, i, Q, R)
     if not R then
-        SpawnPrefab("weaponsparks_fx"):SetPiercing(h, Q)
+        SpawnPrefab("weaponsparks_fx"):SetPiercing(inst, Q)
     else
-        SpawnPrefab("explosivehit").Transform
-            :SetPosition(h:GetPosition():Get())
+        local fx = SpawnPrefab("explosivehit") --这个特效不会消失，而是留在地图上每次进入加载都会播放一次
+        fx.Transform:SetPosition(inst:GetPosition():Get())
+        fx.persists = false
+        fx:DoTaskInTime(5, fx.Remove)
     end;
-    h:Remove()
-end; local function S(h, i)
-    h:Remove()
-end; local function T(U, L, R)
-    local h = CreateEntity()
-    h.entity:AddTransform()
-    h.entity:AddAnimState()
-    h.entity:AddSoundEmitter()
-    h.entity:AddNetwork()
-    MakeInventoryPhysics(h)
-    RemovePhysicsColliders(h)
-    h.AnimState:SetBank("lavaarena_blowdart_attacks")
-    h.AnimState:SetBuild("lavaarena_blowdart_attacks")
-    h.AnimState:PlayAnimation(U, true)
-    h.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    h.AnimState:SetAddColour(1, 1, 0, 0)
-    h.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-    h:AddTag("projectile")
+    inst:Remove()
+end;
+
+local function common(anim, suffix, fade)
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
+    RemovePhysicsColliders(inst)
+
+    inst.AnimState:SetBank("lavaarena_blowdart_attacks")
+    inst.AnimState:SetBuild("lavaarena_blowdart_attacks")
+    inst.AnimState:PlayAnimation(anim, true)
+    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+    inst.AnimState:SetAddColour(1, 1, 0, 0)
+    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+
+    inst:AddTag("projectile")
+
+    if fade then
+        inst._fade = net_tinybyte(inst.GUID, "blowdart_lava2_projectile_explosive._fade")
+    end;
+
     if not TheNet:IsDedicated() then
-        h.thintailcount = R and math.random(3, 5) or math.random(2, 4)
-        h:DoPeriodicTask(0, M, nil, L)
-    end; if R then h._fade = net_tinybyte(h.GUID, "blowdart_lava2_projectile_explosive._fade") end;
-    h.entity:SetPristine()
-    if not TheWorld.ismastersim then return h end;
-    if not R then
-        h:AddComponent("projectile")
-        h.components.projectile:SetSpeed(30)
-        h.components.projectile:SetRange(20)
-        h.components.projectile:SetOnHitFn(function(h, V, Q) P(h, h.components.projectile.owner, Q, R) end)
-        h.components.projectile:SetOnMissFn(h.Remove)
-        h.components.projectile:SetLaunchOffset(Vector3(-2, 1, 0))
+        inst.thintailcount = fade and math.random(3, 5) or math.random(2, 4)
+        inst:DoPeriodicTask(0, M, nil, suffix)
+    end;
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end;
+
+    if not fade then
+        inst:AddComponent("projectile")
+        inst.components.projectile:SetSpeed(30)
+        inst.components.projectile:SetRange(20)
+        inst.components.projectile:SetOnHitFn(function(inst, V, Q) OnHit(inst, inst.components.projectile.owner, Q, fade) end)
+        inst.components.projectile:SetOnMissFn(inst.Remove)
+        inst.components.projectile:SetLaunchOffset(Vector3(-2, 1, 0))
     else
-        h:AddComponent("aimedprojectile")
-        h.components.aimedprojectile:SetSpeed(30)
-        h.components.aimedprojectile:SetRange(30)
-        h.components.aimedprojectile:SetStimuli("explosive")
-        h.components.aimedprojectile:SetOnHitFn(P)
-        h.components.aimedprojectile:SetOnMissFn(S)
-        h:DoTaskInTime(0, function(h)
+        inst:AddComponent("aimedprojectile")
+        inst.components.aimedprojectile:SetSpeed(30)
+        inst.components.aimedprojectile:SetRange(30)
+        inst.components.aimedprojectile:SetStimuli("explosive")
+        inst.components.aimedprojectile:SetOnHitFn(OnHit)
+        inst.components.aimedprojectile:SetOnMissFn(inst.Remove)
+        inst:DoTaskInTime(0, function(h)
             h.SoundEmitter:PlaySound("dontstarve/common/lava_arena/blow_dart")
         end)
     end;
-    h.OnLoad = h.Remove; return h
-end; local function W() return T("attack_4", "", false) end;
-local function X() return T("attack_4_large", "_large", true) end;
-return
-    CustomPrefab("tfwp_dragon_dart", F, a, c, nil, "images/inventoryimages.xml", "blowdart_lava2.tex",
+
+    inst.persists = false
+
+    return inst
+end;
+
+local function projectile_fn()
+    return common("attack_4", "", false)
+end;
+local function explosive_fn()
+    return common("attack_4_large", "_large", true)
+end;
+return CustomPrefab("tfwp_dragon_dart", fn, assets, prefabs, nil, "images/inventoryimages.xml", "blowdart_lava2.tex",
         TUNING.FORGE_ITEM_PACK.TFWP_DRAGON_DART, "swap_blowdart_lava2", "common_hand"),
-    Prefab("moltendarts_projectile", W, b, d), Prefab("moltendarts_projectile_explosive", X, b, e)
+    Prefab("moltendarts_projectile", projectile_fn, projectile_assets, projectile_prefabs),
+    Prefab("moltendarts_projectile_explosive", explosive_fn, projectile_assets, explosive_prefabs)

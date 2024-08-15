@@ -72,21 +72,14 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
 
     local function fn()
         local inst = CreateEntity()
-
-        --Core components
         inst.entity:AddTransform()
-
         inst.entity:AddNetwork()
-
         inst.entity:AddPhysics()
-
         inst.entity:AddAnimState()
         inst.entity:AddDynamicShadow()
 
 
         inst.entity:AddSoundEmitter()
-
-
         --Initialize physics
         inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
         inst.Physics:ClearCollisionMask()
@@ -94,14 +87,9 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
         inst.Physics:SetSphere(1)
         inst.Physics:SetMass(1)
 
-
         inst:AddTag("bird")
         inst:AddTag(name)
         inst:AddTag("smallcreature")
-
-
-        --if inst.HasTag("phoenix")
-        --then
 
         scale = scale or 1
 
@@ -173,10 +161,6 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
 
         inst:SetBrain(brain)
 
-
-
-
-        --fix this for phoenix---
         MakeSmallBurnableCharacter(inst, "crow_body")
         MakeTinyFreezableCharacter(inst, "crow_body")
 
@@ -205,7 +189,7 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
         return inst
     end
 
-    return Prefab("" .. name, fn, assets, prefabs)
+    return Prefab(name, fn, assets, prefabs)
 end
 
 return makebird("seagull", "canary", { { "seeds", 0.5 }, { "smallmeat", 0.5 }, { "seeds", 0.1 } }, "seeds", 1)

@@ -52,6 +52,8 @@ local function common(bank, build, anim)
         return inst
     end
 
+    inst:AddComponent("tropical_saveanim")
+
     inst:ListenForEvent("onbuilt", OnBuilt)
 
     inst.OnSave = OnSave
@@ -66,7 +68,6 @@ local function MakeWall(name, bank, build, anim)
 end
 
 return
-    MakeWall("wallinteriorplayerhouse", "wallhamletcity", "wallhamletcity1", "shop_wall_woodwall"),
     MakeWall("interior_wall_wood", "wallhamletcity", "wallhamletcity1", "shop_wall_woodwall"),
     MakeWall("interior_wall_checkered", "wallhamletcity", "wallhamletcity1", "shop_wall_checkered_metal"),
     MakeWall("interior_wall_sunflower", "wallhamletcity", "wallhamletcity1", "shop_wall_sunflower"),

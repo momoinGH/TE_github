@@ -1,4 +1,3 @@
-
 local vagner = {}
 local trapdoortag = false
 local function createmaze(inst)
@@ -3612,21 +3611,21 @@ print(vagner[18].numexits)
             end
         end
         ---------------------------------------------------------pig ruins------------------------------------------------------------------------
-        --Prefab("pig_ruins_door_cimaescondida", fnescadacimaescondida, assets),
+        --Prefab("pig_ruins_cracks_fake_north_door", fnescadacimaescondida, assets),
         --Prefab("pig_ruins_door_baixoescondida", fnescadabaixoescondida, assets),
         --Prefab("pig_ruins_door_esquerdaescondida", fnescadaesquerdaescondida, assets),
         --Prefab("pig_ruins_door_direitaescondida", fnescadadireitaescondida, assets),	
 
         local function portacomvinhacima(inst, trap)
-            if trap == true then return "pig_ruins_door_cima" end
-            if math.random() < 0.2 then return "pig_ruins_door_cimaescondida" end
-            if inst.entradadaruina == 0 then return "pig_ruins_door_cima" end
+            if trap == true then return "pig_ruins_door" end
+            if math.random() < 0.2 then return "pig_ruins_cracks_fake_north_door" end
+            if inst.entradadaruina == 0 then return "pig_ruins_door" end
             if inst.entradadaruina == 1 then
                 if math.random() < 0.3 then
                     return "pig_ruins_door_cimavine"
                 else
                     return
-                    "pig_ruins_door_cima"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 2 then
@@ -3634,7 +3633,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_cimavine"
                 else
                     return
-                    "pig_ruins_door_cima"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 3 then
@@ -3642,7 +3641,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_cimavine"
                 else
                     return
-                    "pig_ruins_door_cima"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 4 then
@@ -3650,7 +3649,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_cimavine"
                 else
                     return
-                    "pig_ruins_door_cima"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 5 then
@@ -3658,7 +3657,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_cimavine"
                 else
                     return
-                    "pig_ruins_door_cima"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 6 then
@@ -3666,21 +3665,21 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_cimavine"
                 else
                     return
-                    "pig_ruins_door_cima"
+                    "pig_ruins_door"
                 end
             end
         end
 
         local function portacomvinhabaixo(inst, trap)
-            if trap == true then return "pig_ruins_door_baixo" end
+            if trap == true then return "pig_ruins_door" end
             if math.random() < 0.2 then return "pig_ruins_door_baixoescondida" end
-            if inst.entradadaruina == 0 then return "pig_ruins_door_baixo" end
+            if inst.entradadaruina == 0 then return "pig_ruins_door" end
             if inst.entradadaruina == 1 then
                 if math.random() < 0.3 then
                     return "pig_ruins_door_baixovine"
                 else
                     return
-                    "pig_ruins_door_baixo"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 2 then
@@ -3688,7 +3687,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_baixovine"
                 else
                     return
-                    "pig_ruins_door_baixo"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 3 then
@@ -3696,7 +3695,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_baixovine"
                 else
                     return
-                    "pig_ruins_door_baixo"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 4 then
@@ -3704,7 +3703,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_baixovine"
                 else
                     return
-                    "pig_ruins_door_baixo"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 5 then
@@ -3712,7 +3711,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_baixovine"
                 else
                     return
-                    "pig_ruins_door_baixo"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 6 then
@@ -3720,21 +3719,21 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_baixovine"
                 else
                     return
-                    "pig_ruins_door_baixo"
+                    "pig_ruins_door"
                 end
             end
         end
 
         local function portacomvinhaesquerda(inst, trap)
-            if trap == true then return "pig_ruins_door_esquerda" end
+            if trap == true then return "pig_ruins_door" end
             if math.random() < 0.2 then return "pig_ruins_door_esquerdaescondida" end
-            if inst.entradadaruina == 0 then return "pig_ruins_door_esquerda" end
+            if inst.entradadaruina == 0 then return "pig_ruins_door" end
             if inst.entradadaruina == 1 then
                 if math.random() < 0.3 then
                     return "pig_ruins_door_esquerdavine"
                 else
                     return
-                    "pig_ruins_door_esquerda"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 2 then
@@ -3742,7 +3741,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_esquerdavine"
                 else
                     return
-                    "pig_ruins_door_esquerda"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 3 then
@@ -3750,7 +3749,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_esquerdavine"
                 else
                     return
-                    "pig_ruins_door_esquerda"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 4 then
@@ -3758,7 +3757,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_esquerdavine"
                 else
                     return
-                    "pig_ruins_door_esquerda"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 5 then
@@ -3766,7 +3765,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_esquerdavine"
                 else
                     return
-                    "pig_ruins_door_esquerda"
+                    "pig_ruins_door"
                 end
             end
             if inst.entradadaruina == 6 then
@@ -3774,7 +3773,7 @@ print(vagner[18].numexits)
                     return "pig_ruins_door_esquerdavine"
                 else
                     return
-                    "pig_ruins_door_esquerda"
+                    "pig_ruins_door"
                 end
             end
         end
@@ -3840,7 +3839,7 @@ print(vagner[18].numexits)
             vagner[1].valorz = TheWorld.components.contador:GetZ()
 
             if vagner[1].numexits > 0 then
-                vagner[1].saidacima = SpawnPrefab("pig_ruins_door_entrada")
+                vagner[1].saidacima = SpawnPrefab("pig_ruins_north_door")
                 vagner[1].saidacima.Transform:SetPosition(TheWorld.components.contador:GetX() + distportacima, 0,
                     TheWorld.components.contador:GetZ())
                 ---------
@@ -6864,7 +6863,7 @@ print(vagner[18].numexits)
 
         if inst.tipodemaze == 1 then
             local saidadolabirinto = portadesaida[math.random(1, #portadesaida)]
-            vagner[saidadolabirinto].saidacima = SpawnPrefab("pig_ruins_door_entrada")
+            vagner[saidadolabirinto].saidacima = SpawnPrefab("pig_ruins_north_door")
             vagner[saidadolabirinto].saidacima.Transform:SetPosition(vagner[saidadolabirinto].valorx + distportacima, 0,
                 vagner[saidadolabirinto].valorz)
             ----------------liga saida a segunda ilha-------------
@@ -6879,7 +6878,7 @@ print(vagner[18].numexits)
         ----------------liga saida a terceira ilha-------------
         if inst.tipodemaze == 2 then
             local saidadolabirinto = portadesaida[math.random(1, #portadesaida)]
-            vagner[saidadolabirinto].saidacima = SpawnPrefab("pig_ruins_door_entrada")
+            vagner[saidadolabirinto].saidacima = SpawnPrefab("pig_ruins_north_door")
             vagner[saidadolabirinto].saidacima.Transform:SetPosition(vagner[saidadolabirinto].valorx + distportacima, 0,
                 vagner[saidadolabirinto].valorz)
 
@@ -6894,7 +6893,7 @@ print(vagner[18].numexits)
         ----------------liga saida a quarta ilha-------------
         if inst.tipodemaze == 8 then
             local saidadolabirinto = portadesaida[math.random(1, #portadesaida)]
-            vagner[saidadolabirinto].saidacima = SpawnPrefab("pig_ruins_door_entrada")
+            vagner[saidadolabirinto].saidacima = SpawnPrefab("pig_ruins_north_door")
             vagner[saidadolabirinto].saidacima.Transform:SetPosition(vagner[saidadolabirinto].valorx + distportacima, 0,
                 vagner[saidadolabirinto].valorz)
 

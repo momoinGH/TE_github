@@ -111,7 +111,7 @@ local function entrance()
 		InteriorSpawnerUtils.InitHouseInteriorPrefab(inst.exit, inst.exit.initData)
 		inst.exit.Transform:SetPosition(x + 5.2, 0, z + 0.5)
 		---------------------------cria a parede inicio------------------------------------------------------------------	
-		local tipodemuro = "wall_tigerpond"
+		local tipodemuro = "wall_invisible"
 		---------------------------cria a parede inicio -------------------------------------
 		---------------------------parade dos aposento------------------------------------------------------------------	
 		local y = 0
@@ -397,5 +397,3 @@ end
 
 
 return Prefab("pig_academy_entrance", entrance)
-
-

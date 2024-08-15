@@ -1068,7 +1068,6 @@ STRINGS.NAMES.FLOTSAM_CARGO_BUILD                                               
 STRINGS.NAMES.FISH2_COOKED                                                      = "Tropical Fish Cooked"
 STRINGS.NAMES.WINDOW_SMALL_PEAKED_BACKWALL                                      = "后墙小帽檐窗"
 STRINGS.NAMES.DECO_CAVE_CEILING_TRIM2                                           = "洞穴房间断石柱侧墙"
-STRINGS.NAMES.WALLINTERIORPLAYERHOUSE                                           = "wall"
 STRINGS.NAMES.OINCPILE52                                                        = "Oinc Pile"
 STRINGS.NAMES.DECO_BANK_MARBLE_CORNERBEAM                                       = "上银行大理石柱"
 STRINGS.NAMES.ROC_CAVE_DOOR_CIMA                                                = "Door"

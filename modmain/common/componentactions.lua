@@ -31,14 +31,14 @@ AddComponentAction("SCENE", "melter", function(inst, doer, actions, right)
 end)
 
 
-
+-- TODO 用的不是hackable劈砍组件？
 AddComponentAction("SCENE", "workable", function(inst, doer, actions, right)
     if right and doer:HasTag("ironlord") then
         if inst:HasTag("tree") then
             table.insert(actions, ACTIONS.CHOP)
         end
 
-        if inst:HasTag("bush_vine") or inst:HasTag("bambootree") then
+        if inst:HasTag("hackable") then
             table.insert(actions, ACTIONS.HACK)
         end
 

@@ -61,6 +61,47 @@ local room_creatures       = {
         { name = "scorpion", x_offset = (math.random() * 7) - (7 / 2), z_offset = (math.random() * 13) - (13 / 2) },
     },
 }
+
+local function GetDoorProp(room, dir, exit, width, depth)
+    local build
+    if room.color == "_blue" and not exit.secret then
+        build = "pig_ruins_door_blue" --蓝色的门
+    end
+
+    local name
+    if room.aporkalypseclock then
+        --日晷房间的门
+        name = "pig_ruins_" .. dir.label .. "_door"
+    elseif exit.secret then
+        --隐藏门
+        name = "pig_ruins_cracks_" .. dir.label .. "_door"
+        build = false
+    elseif exit.vined then
+        --藤蔓门
+        name = "pig_ruins_vine_" .. dir.label .. "_door"
+    else
+        name = "pig_ruins_" .. dir.label .. "_door"
+    end
+
+    local x_offset, z_offset
+    if dir == InteriorSpawnerUtils.GetNorth() then
+        x_offset = -depth / 2
+    elseif dir == InteriorSpawnerUtils.GetSouth() then
+        x_offset = depth / 2
+    elseif dir == InteriorSpawnerUtils.GetEast() then
+        z_offset = -width / 2
+    elseif dir == InteriorSpawnerUtils.GetWest() then
+        z_offset = width / 2
+    end
+
+    return {
+        name = name,
+        x_offset = x_offset,
+        z_offset = z_offset,
+        animdata = { build = build, }
+    }
+end
+
 local function exitNumbers(room)
     local exits = room.exits
     local total = 0
@@ -130,33 +171,28 @@ local function makechoice(list)
 end
 ---构建房间
 ---@param dungeondef table 配置
----@return table|nil entranceRoom 入口房间
----@return table|nil exitRoom 出口房间
-local function mazemaker(dungeondef)
-    local interior_spawner = GetWorld().components.interiorspawner
+local function mazemaker(inst, dungeondef)
     local DIR = InteriorSpawnerUtils.DIR
+    local DIR_OPPOSITE = InteriorSpawnerUtils.DIR_OPPOSITE
     local rooms_to_make = dungeondef.rooms --24
-    local entranceRoom = nil
-    local exitRoom = nil
     local rooms = { {
         x = 0,
         y = 0,
-        idx = dungeondef.name .. "_" .. interior_spawner:GetNewID(),
+        idx = 1,
         exits = {},
-        blocked_exits = { DIR.NORTH }, -- 3 == NORTH
+        blocked_exits = { InteriorSpawnerUtils.GetNorth() }, -- 3 == NORTH
         entrance1 = true,
     } }
     local clock_placed = false
     while #rooms < rooms_to_make do
         -- 构建每一个房间
         -- 从现有房间里随机选择一个房间作为前置房间，然后在前置房间随机选择一个方向
-        local dir_opposite = InteriorSpawnerUtils.DIR_OPPOSITE
         local dir_choice = math.random(#DIR)
         local fromroom = rooms[math.random(#rooms)]
         local fail = false
         -- fail if this direction from the chosen room is blocked
         for i, exit in ipairs(fromroom.blocked_exits) do
-            if dir_choice == exit then
+            if DIR[dir_choice] == exit then
                 fail = true
                 break
             end
@@ -176,25 +212,21 @@ local function mazemaker(dungeondef)
             local newroom = {
                 x = fromroom.x + DIR[dir_choice].x,
                 y = fromroom.y + DIR[dir_choice].y,
-                idx = dungeondef.name .. "_" .. interior_spawner:GetNewID(),
+                idx = #rooms + 1,
                 exits = {},
                 blocked_exits = {},
             }
             fromroom.exits[DIR[dir_choice]] = {
                 target_room = newroom.idx,
-                bank = "doorway_ruins",
-                build = "pig_ruins_door",
                 room = fromroom.idx,
             }
-            newroom.exits[dir_opposite[dir_choice]] = {
+            newroom.exits[DIR_OPPOSITE[dir_choice]] = {
                 target_room = fromroom.idx,
-                bank = "doorway_ruins",
-                build = "pig_ruins_door",
                 room = newroom.idx,
             }
             if math.random() < dungeondef.doorvines then --藤蔓
                 fromroom.exits[DIR[dir_choice]].vined = true
-                newroom.exits[dir_opposite[dir_choice]].vined = true
+                newroom.exits[DIR_OPPOSITE[dir_choice]].vined = true
             end
             table.insert(rooms, newroom)
         end
@@ -229,9 +261,9 @@ local function mazemaker(dungeondef)
         local function FindCandidates()
             for i, room in ipairs(rooms) do
                 -- 通往秘密房间的门只会出现在上左右
-                local north = DIR.NORTH
-                local west = DIR.WEST
-                local east = DIR.EAST
+                local north = InteriorSpawnerUtils.GetNorth()
+                local west = InteriorSpawnerUtils.GetWest()
+                local east = InteriorSpawnerUtils.GetEast()
                 -- NORTH IS OPEN
                 if not room.exits[north] and not room.entrance2 and not room.entrance1 then
                     CheckAdjacent(room, north)
@@ -269,15 +301,13 @@ local function mazemaker(dungeondef)
             local secret_room = {
                 x = x,
                 y = y,
-                idx = dungeondef.name .. "_" .. interior_spawner:GetNewID(),
+                idx = #rooms + 1,
                 exits = {},
                 blocked_exits = {},
                 secretroom = true
             }
             local grid_rooms = grid[x][y].rooms
             local grid_dirs = grid[x][y].dirs
-            local bank = "interior_wall_decals_ruins"
-            local build = "interior_wall_decals_ruins_cracks"
             if dungeondef.name == "RUINS_5" and not clock_placed then
                 -- 可以放置日晷
                 clock_placed = true
@@ -286,28 +316,22 @@ local function mazemaker(dungeondef)
                     local num = math.random(1, #grid_rooms)
                     table.remove(grid_rooms, num)
                     table.remove(grid_dirs, num)
-                    bank = "doorway_ruins"
-                    build = "pig_ruins_door"
                 end
             end
             -- 将秘密房间和相邻房间相连通
             for i, grid_room in ipairs(grid_rooms) do
-                local op_dir = InteriorSpawnerUtils.DIR_OPPOSITE2[grid_dirs[i]]
+                local op_dir = InteriorSpawnerUtils.GetOppositeFromDirection(grid_dirs[i])
                 local secret = true
                 if secret_room.aporkalypseclock then
                     secret = false --有日晷的房间
                 end
                 secret_room.exits[op_dir] = {
                     target_room = grid_room.idx,
-                    bank = bank,
-                    build = build,
                     room = secret_room.idx,
                     secret = secret,
                 }
                 grid_room.exits[grid_dirs[i]] = {
                     target_room = secret_room.idx,
-                    bank = "interior_wall_decals_ruins",
-                    build = "interior_wall_decals_ruins_cracks",
                     room = grid_room.idx,
                     secret = true
                 }
@@ -335,8 +359,7 @@ local function mazemaker(dungeondef)
         -- 挑选最边缘的，顶部没有门的房间作为出口所在房间
         local dist = 0
         for i, room in ipairs(rooms) do
-            -- local dir = interior_spawner:GetDir()
-            local north_exit_open = not room.exits[interior_spawner:GetNorth()]
+            local north_exit_open = not room.exits[InteriorSpawnerUtils.GetNorth()]
             if math.abs(room.x) + math.abs(room.y) >= dist and north_exit_open then
                 if math.abs(room.x) + math.abs(room.y) > dist then
                     choices = {}
@@ -374,8 +397,9 @@ local function mazemaker(dungeondef)
 
     local width = 24
     local depth = 16
-    local props_by_room = {} --每个房间对应的预制件列表
     for _, room in ipairs(rooms) do
+        room.size = InteriorSpawnerUtils.ROOM_SIZE.MEDIUM
+
         if dungeondef.deepruins and math.random() < 0.3 then
             room.color = "_blue"
         else
@@ -390,32 +414,24 @@ local function mazemaker(dungeondef)
             end
         end
         if room.entrance1 then
-            local prefab = {
-                name = "pig_ruins_door_entrada",
-                x_offset = -8,
-                my_door_id = dungeondef.name .. "_EXIT1",
-                target_door_id = dungeondef.name .. "_ENTRANCE1",
-            }
-            table.insert(addprops, prefab)
-            entranceRoom = room
+            table.insert(addprops, {
+                name = "pig_ruins_exit_door",
+                x_offset = -depth / 2,
+                key = "entrance1"
+            })
         end
         if room.entrance2 then
-            local prefab = {
-                name = "pig_ruins_door_entrada",
-                x_offset = -8,
-                my_door_id = dungeondef.name .. "_EXIT2",
-                target_door_id = dungeondef.name .. "_ENTRANCE2",
-            }
-            table.insert(addprops, prefab)
-            exitRoom = room
+            table.insert(addprops, {
+                name = "pig_ruins_exit_door",
+                x_offset = -depth / 2,
+                key = "entrance2"
+            })
         end
         if room.endswell then
-            local prefab = { name = "deco_ruins_endswell" }
-            table.insert(addprops, prefab)
+            table.insert(addprops, { name = "deco_ruins_endswell" })
         end
         if room.pheromonestone then
-            local prefab = { name = "pheromonestone" }
-            table.insert(addprops, prefab)
+            table.insert(addprops, { name = "pheromonestone" })
         end
         local roomtype = nil
         local treasuretype = nil
@@ -443,33 +459,33 @@ local function mazemaker(dungeondef)
             end
             roomtype = roomtypes[math.random(1, #roomtypes)]
         end
+
         -- 有概率生成假的隐藏门
-        local northexitopen = not room.exits[DIR.NORTH] and not room.entrance2 and not room.entrance1
-        local westexitopen = not room.exits[DIR.WEST]
-        local southexitopen = not room.exits[DIR.SOUTH]
-        local eastexitopen = not room.exits[DIR.EAST]
+        local northexitopen = not room.exits[InteriorSpawnerUtils.GetNorth()] and not room.entrance2 and not room.entrance1
+        local westexitopen = not room.exits[InteriorSpawnerUtils.GetWest()]
+        local southexitopen = not room.exits[InteriorSpawnerUtils.GetSouth()]
+        local eastexitopen = not room.exits[InteriorSpawnerUtils.GetEast()]
         local numexits = GetTableSize(room.exits)
         if northexitopen and math.random() < 0.10 then
-            table.insert(addprops, { name = "pig_ruins_door_cimaescondida", x_offset = -depth / 2 })
+            table.insert(addprops, { name = "pig_ruins_cracks_fake_north_door", x_offset = -depth / 2 })
             northexitopen = false
         end
         if westexitopen and math.random() < 0.10 then
-            table.insert(addprops, { name = "pig_ruins_door_esquerdaescondida", z_offset = -width / 2 })
+            table.insert(addprops, { name = "pig_ruins_cracks_fake_west_door", z_offset = -width / 2 })
             westexitopen = false
         end
         if eastexitopen and math.random() < 0.10 then
-            table.insert(addprops, { name = "pig_ruins_door_direitaescondida", z_offset = width / 2 })
+            table.insert(addprops, { name = "pig_ruins_cracks_fake_east_door", z_offset = width / 2 })
             eastexitopen = false
         end
+
         local fountain = false
         -- 添加柱子
         local function addroomcolumn(x, z)
             if math.random() < 0.2 then
-                table.insert(addprops,
-                    { name = "deco_ruins_beam_room_broken" .. room.color, x_offset = x, z_offset = z, })
+                table.insert(addprops, { name = "deco_ruins_beam_room_broken" .. room.color, x_offset = x, z_offset = z, })
             else
-                table.insert(addprops,
-                    { name = "deco_ruins_beam_room" .. room.color, x_offset = x, z_offset = z, })
+                table.insert(addprops, { name = "deco_ruins_beam_room" .. room.color, x_offset = x, z_offset = z, })
             end
         end
         local function getspawnlocation(widthrange, depthrange)
@@ -495,7 +511,6 @@ local function mazemaker(dungeondef)
                 addroomcolumn(depth / 6, width / 6)
                 addroomcolumn(depth / 6, -width / 6)
                 addroomcolumn(-depth / 6, width / 6)
-                widepilars = true
             elseif feature == 2 then
                 if roomtype ~= "doortrap" and not room.pheromonestone then
                     table.insert(addprops, { name = "deco_ruins_fountain" })
@@ -504,13 +519,11 @@ local function mazemaker(dungeondef)
                 if math.random() < 0.5 then
                     addroomcolumn(-depth / 6, width / 3)
                     addroomcolumn(depth / 6, -width / 3)
-                    widepilars = true
                 else
                     addroomcolumn(-depth / 4, width / 4)
                     addroomcolumn(-depth / 4, -width / 4)
                     addroomcolumn(depth / 4, -width / 4)
                     addroomcolumn(depth / 4, width / 4)
-                    pilars = true
                 end
             elseif feature == 3 then
                 addroomcolumn(-depth / 4, width / 6)
@@ -519,7 +532,6 @@ local function mazemaker(dungeondef)
                 addroomcolumn(-depth / 4, -width / 6)
                 addroomcolumn(0, -width / 6)
                 addroomcolumn(depth / 4, -width / 6)
-                pilars = true
             end
         end
         -- Sets up the secret room
@@ -565,7 +577,7 @@ local function mazemaker(dungeondef)
                 table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = (math.random() * 2 - 1), z_offset = -width / 2 + 3 + (math.random() * 2 - 1) })
             elseif setups[random] == "hor" then
                 local unit = 1.5
-                table.insert(addprops, { name = "pig_ruins_pressure_plate", z_offset = 0 })
+                table.insert(addprops, { name = "pig_ruins_pressure_plate" })
                 for i = 1, 3 do
                     table.insert(addprops, { name = "pig_ruins_pressure_plate", z_offset = i * unit })
                     table.insert(addprops, { name = "pig_ruins_pressure_plate", z_offset = -i * unit })
@@ -580,7 +592,7 @@ local function mazemaker(dungeondef)
                     table.insert(dir, -1)
                 end
                 dir = dir[math.random(1, #dir)]
-                table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = depth / 4.5 * dir, z_offset = 0 })
+                table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = depth / 4.5 * dir })
                 for i = 1, 7 do
                     table.insert(addprops,
                         { name = "pig_ruins_pressure_plate", x_offset = depth / 4.5 * dir, z_offset = i * unit })
@@ -589,10 +601,10 @@ local function mazemaker(dungeondef)
                 end
             elseif setups[random] == "vert" then
                 local unit = 1.5
-                table.insert(addprops, { name = "pig_ruins_pressure_plate", z_offset = 0 })
+                table.insert(addprops, { name = "pig_ruins_pressure_plate" })
                 for i = 1, 3 do
-                    table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = i * unit, z_offset = 0 })
-                    table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = -i * unit, z_offset = 0 })
+                    table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = i * unit })
+                    table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = -i * unit })
                 end
             elseif setups[random] == "longhor" then
                 local unit = 1.5
@@ -614,7 +626,7 @@ local function mazemaker(dungeondef)
         -- 宝物
         if roomtype == "treasure" then
             if treasuretype and treasuretype == "aporkalypse" then
-                table.insert(addprops, { name = "aporkalypse_clock", x_offset = -1, z_offset = 0 })
+                table.insert(addprops, { name = "aporkalypse_clock", x_offset = -1 })
                 fountain = true
             elseif treasuretype and treasuretype == "secret" then
                 local items = {
@@ -650,21 +662,21 @@ local function mazemaker(dungeondef)
                 room.color = "_blue"
                 local relic = room.relicsow and "pig_ruins_sow" or "pig_ruins_truffle"
                 if not northexitopen and southexitopen then
-                    table.insert(addprops, { name = relic, x_offset = depth / 2 - 2, addtags = { "trggerdarttraps" } })
-                    table.insert(addprops, { name = "pig_ruins_light_beam", x_offset = depth / 2 - 2, z_offset = 0 })
+                    table.insert(addprops, { name = relic, x_offset = depth / 2 - 2, })
+                    table.insert(addprops, { name = "pig_ruins_light_beam", x_offset = depth / 2 - 2 })
                 elseif not southexitopen and northexitopen then
-                    table.insert(addprops, { name = relic, x_offset = -depth / 2 + 2, addtags = { "trggerdarttraps" } })
-                    table.insert(addprops, { name = "pig_ruins_light_beam", x_offset = -depth / 2 + 2, z_offset = 0 })
+                    table.insert(addprops, { name = relic, x_offset = -depth / 2 + 2, })
+                    table.insert(addprops, { name = "pig_ruins_light_beam", x_offset = -depth / 2 + 2 })
                 elseif not westexitopen and eastexitopen then
-                    table.insert(addprops, { name = relic, z_offset = width / 2 - 2, addtags = { "trggerdarttraps" } })
+                    table.insert(addprops, { name = relic, z_offset = width / 2 - 2, })
                     table.insert(addprops, { name = "pig_ruins_light_beam", z_offset = width / 2 - 2 })
                 elseif not eastexitopen and westexitopen then
-                    table.insert(addprops, { name = relic, z_offset = -width / 2 + 2, addtags = { "trggerdarttraps" } })
+                    table.insert(addprops, { name = relic, z_offset = -width / 2 + 2, })
                     table.insert(addprops, { name = "pig_ruins_light_beam", z_offset = -width / 2 + 2 })
                 else
                     -- Place it in the middle of the room as a fallback.
-                    table.insert(addprops, { name = relic, addtags = { "trggerdarttraps" } })
-                    table.insert(addprops, { name = "pig_ruins_light_beam", z_offset = 0 })
+                    table.insert(addprops, { name = relic, })
+                    table.insert(addprops, { name = "pig_ruins_light_beam" })
                 end
                 for i = 0, 3 do
                     for t = 0, 3 do
@@ -680,28 +692,28 @@ local function mazemaker(dungeondef)
                         local xoffset = x + depth / 16
                         local yoffset = y - width / 16
                         if math.abs(xoffset) < depth / 2 and math.abs(yoffset) < width / 2 then
-                            table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = xoffset, z_offset = yoffset, addtags = { "trap_dart" } })
+                            table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = xoffset, z_offset = yoffset, })
                         end
                     end
                     if math.random() < 0.5 then
                         local xoffset = x - depth / 16
                         local yoffset = y - width / 16
                         if math.abs(xoffset) < depth / 2 and math.abs(yoffset) < width / 2 then
-                            table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = xoffset, z_offset = yoffset, addtags = { "trap_dart" } })
+                            table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = xoffset, z_offset = yoffset, })
                         end
                     end
                     if math.random() < 0.5 then
                         local xoffset = x - depth / 16
                         local yoffset = y + width / 16
                         if math.abs(xoffset) < depth / 2 and math.abs(yoffset) < width / 2 then
-                            table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = xoffset, z_offset = yoffset, addtags = { "trap_dart" } })
+                            table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = xoffset, z_offset = yoffset, })
                         end
                     end
                     if math.random() < 0.5 then
                         local xoffset = x + depth / 16
                         local yoffset = y + width / 16
                         if math.abs(xoffset) < depth / 2 and math.abs(yoffset) < width / 2 then
-                            table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = xoffset, z_offset = yoffset, addtags = { "trap_dart" } })
+                            table.insert(addprops, { name = "pig_ruins_pressure_plate", x_offset = xoffset, z_offset = yoffset, })
                         end
                     end
                 end
@@ -745,11 +757,11 @@ local function mazemaker(dungeondef)
                     addprops = addrelicstatue(addprops, 0, 0)
                     addprops = addrelicstatue(addprops, 0, width / 4)
                     addprops = spawnspeartrapset(addprops, depth, width, 0, -width / 4, nil, true, true, 12)
-                    table.insert(addprops, { name = "pig_ruins_light_beam", z_offset = -width / 4, addtags = { "localtrap" } })
+                    table.insert(addprops, { name = "pig_ruins_light_beam", z_offset = -width / 4 })
                     addprops = spawnspeartrapset(addprops, depth, width, 0, 0, nil, true, true, 12)
-                    table.insert(addprops, { name = "pig_ruins_light_beam", addtags = { "localtrap" } })
+                    table.insert(addprops, { name = "pig_ruins_light_beam" })
                     addprops = spawnspeartrapset(addprops, depth, width, 0, width / 4, nil, true, true, 12)
-                    table.insert(addprops, { name = "pig_ruins_light_beam", z_offset = width / 4, addtags = { "localtrap" } })
+                    table.insert(addprops, { name = "pig_ruins_light_beam", z_offset = width / 4 })
                 elseif setups[random] == "darts n relics" then
                     addprops = addrelicstatue(addprops, 0, -width / 3 + 1, { "trggerdarttraps" })
                     addprops = addrelicstatue(addprops, depth / 4 - 1, 0, { "trggerdarttraps" })
@@ -786,33 +798,32 @@ local function mazemaker(dungeondef)
                     table.insert(addprops, { name = "deep_jungle_fern_noise_plant", x_offset = setdepth, z_offset = setwidth })
                 end
             end
-            table.insert(addprops, { name = "lightrays", z_offset = 0 })
+            table.insert(addprops, { name = "lightrays" })
         end
         -- GENERAL RUINS ROOM ART
         if math.random() < 0.8 or roomtype == "lightfires" or roomtype == "darts!" then -- the wall torches get blocked by the big beams
             table.insert(addprops,
                 { name = "deco_ruins_cornerbeam" .. room.color, x_offset = -depth / 2, z_offset = -width / 2 })
             table.insert(addprops,
-                { name = "deco_ruins_cornerbeam" .. room.color, x_offset = -depth / 2, z_offset = width / 2, flip = true })
+                { name = "deco_ruins_cornerbeam" .. room.color, x_offset = -depth / 2, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
             table.insert(addprops,
                 { name = "deco_ruins_cornerbeam" .. room.color, x_offset = depth / 2, z_offset = -width / 2 })
             table.insert(addprops,
-                { name = "deco_ruins_cornerbeam" .. room.color, x_offset = depth / 2, z_offset = width / 2, flip = true })
+                { name = "deco_ruins_cornerbeam" .. room.color, x_offset = depth / 2, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
         else
             table.insert(addprops,
                 { name = "deco_ruins_cornerbeam_heavy" .. room.color, x_offset = -depth / 2, z_offset = -width / 2 })
             table.insert(addprops,
-                { name = "deco_ruins_cornerbeam_heavy" .. room.color, x_offset = -depth / 2, z_offset = width / 2, flip = true })
+                { name = "deco_ruins_cornerbeam_heavy" .. room.color, x_offset = -depth / 2, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
             table.insert(addprops,
                 { name = "deco_ruins_beam_heavy" .. room.color, x_offset = depth / 2, z_offset = -width / 2 })
             table.insert(addprops,
-                { name = "deco_ruins_beam_heavy" .. room.color, x_offset = depth / 2, z_offset = width / 2, flip = true })
-            heavybeams = true
+                { name = "deco_ruins_beam_heavy" .. room.color, x_offset = depth / 2, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
         end
         local prop = math.random() < 0.2 and ("deco_ruins_beam_broken" .. room.color) or ("deco_ruins_beam" .. room.color)
         table.insert(addprops, { name = prop, x_offset = -depth / 2, z_offset = -width / 6 })
         table.insert(addprops, { name = prop, x_offset = -depth / 2, z_offset = width / 6, })
-        if room.exits[DIR.NORTH] and room.exits[DIR.NORTH].vined then
+        if room.exits[InteriorSpawnerUtils.GetNorth()] and room.exits[InteriorSpawnerUtils.GetNorth()].vined then
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = -width / 2 + 0.75 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = -width / 3 + 0.75 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = -width / 3 - 0.75 })
@@ -824,7 +835,7 @@ local function mazemaker(dungeondef)
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = width / 3 - 0.75 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = width / 2 - 0.75 })
         end
-        if room.exits[DIR.WEST] and room.exits[DIR.WEST].vined then
+        if room.exits[InteriorSpawnerUtils.GetWest()] and room.exits[InteriorSpawnerUtils.GetWest()].vined then
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = -depth / 2 + 0.75, z_offset = -width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = -depth / 3 - 0.75, z_offset = -width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = -depth / 6 - 0.75, z_offset = -width / 2 })
@@ -832,7 +843,7 @@ local function mazemaker(dungeondef)
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = depth / 3 - 0.75, z_offset = -width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = depth / 2 - 0.75, z_offset = -width / 2 })
         end
-        if room.exits[DIR.EAST] and room.exits[DIR.EAST].vined then
+        if room.exits[InteriorSpawnerUtils.GetEast()] and room.exits[InteriorSpawnerUtils.GetEast()].vined then
             table.insert(addprops, { name = "pig_ruins_wall_vines_west", x_offset = -depth / 2 + 0.75, z_offset = width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_west", x_offset = -depth / 3 - 0.75, z_offset = width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_west", x_offset = -depth / 6 - 0.75, z_offset = width / 2 })
@@ -850,44 +861,43 @@ local function mazemaker(dungeondef)
             if speartraps[random] == "spottraps" then
                 if math.random() < 0.3 then
                     addprops = spawnspeartrapset(addprops, depth, width, depth / 3, -width / 3)
-                    table.insert(addprops, { name = "pig_ruins_light_beam", x_offset = depth / 3, z_offset = -width / 3, addtags = { "localtrap" } })
+                    table.insert(addprops, { name = "pig_ruins_light_beam", x_offset = depth / 3, z_offset = -width / 3 })
                 elseif math.random() < 0.5 then
                     addprops = spawnspeartrapset(addprops, depth, width, 0, -width / 3)
-                    table.insert(addprops, { name = "pig_ruins_light_beam", z_offset = -width / 3, addtags = { "localtrap" } })
+                    table.insert(addprops, { name = "pig_ruins_light_beam", z_offset = -width / 3 })
                 else
                     addprops = spawnspeartrapset(addprops, depth, width, -depth / 3, -width / 3)
                     table.insert(addprops,
-                        { name = "pig_ruins_light_beam", x_offset = -depth / 3, z_offset = -width / 3, addtags = { "localtrap" } })
+                        { name = "pig_ruins_light_beam", x_offset = -depth / 3, z_offset = -width / 3 })
                 end
                 if math.random() < 0.3 then
                     addprops = spawnspeartrapset(addprops, depth, width, -depth / 3, width / 3)
                     table.insert(addprops,
-                        { name = "pig_ruins_light_beam", x_offset = -depth / 3, z_offset = width / 3, addtags = { "localtrap" } })
+                        { name = "pig_ruins_light_beam", x_offset = -depth / 3, z_offset = width / 3 })
                 elseif math.random() < 0.5 then
                     addprops = spawnspeartrapset(addprops, depth, width, 0, width / 3)
                     table.insert(addprops,
-                        { name = "pig_ruins_light_beam", z_offset = width / 3, addtags = { "localtrap" } })
+                        { name = "pig_ruins_light_beam", z_offset = width / 3 })
                 else
                     addprops = spawnspeartrapset(addprops, depth, width, depth / 3, width / 3)
                     table.insert(addprops,
-                        { name = "pig_ruins_light_beam", x_offset = depth / 3, z_offset = width / 3, addtags = { "localtrap" } })
+                        { name = "pig_ruins_light_beam", x_offset = depth / 3, z_offset = width / 3 })
                 end
                 if math.random() < 0.3 then
                     addprops = spawnspeartrapset(addprops, depth, width, -depth / 3, 0)
                     table.insert(addprops,
-                        { name = "pig_ruins_light_beam", x_offset = -depth / 3, addtags = { "localtrap" } })
+                        { name = "pig_ruins_light_beam", x_offset = -depth / 3 })
                 elseif math.random() < 0.5 then
                     addprops = spawnspeartrapset(addprops, depth, width, 0, 0)
                     table.insert(addprops,
-                        { name = "pig_ruins_light_beam", addtags = { "localtrap" } })
+                        { name = "pig_ruins_light_beam" })
                 else
                     addprops = spawnspeartrapset(addprops, depth, width, depth / 3, 0)
                     table.insert(addprops,
-                        { name = "pig_ruins_light_beam", x_offset = depth / 3, addtags = { "localtrap" } })
+                        { name = "pig_ruins_light_beam", x_offset = depth / 3 })
                 end
             elseif speartraps[random] == "bait" then
-                local baits = {
-                    { "goldnugget", 5 }, { "rocks", 20 }, { "flint", 20 }, { "redgem", 1 }, { "relic_1", 1 }, { "relic_2", 1 }, { "relic_3", 1 }, { "boneshard", 5 }, { "meat_dried", 5 }, }
+                local baits = { { "goldnugget", 5 }, { "rocks", 20 }, { "flint", 20 }, { "redgem", 1 }, { "relic_1", 1 }, { "relic_2", 1 }, { "relic_3", 1 }, { "boneshard", 5 }, { "meat_dried", 5 }, }
                 local offsets = { { -depth / 5, -width / 5 }, { depth / 5, -width / 5 }, { -depth / 5, width / 5 }, { depth / 5, width / 5 } }
                 for i = 1, math.random(1, 3) do
                     local rand = 1
@@ -898,7 +908,7 @@ local function mazemaker(dungeondef)
                     local loot = makechoice(deepcopy(baits))
                     addprops = spawnspeartrapset(addprops, depth, width, 0 + choicex, 0 + choicez, nil, true, true, 12)
                     table.insert(addprops,
-                        { name = "pig_ruins_pressure_plate", x_offset = 0 + choicex, z_offset = 0 + choicez, addtags = { "trap_spear", "localtrap", "reversetrigger", "startdown" } })
+                        { name = "pig_ruins_pressure_plate", x_offset = 0 + choicex, z_offset = 0 + choicez, })
                     table.insert(addprops, { name = loot, x_offset = 0 + choicex, z_offset = 0 + choicez })
                 end
             elseif speartraps[random] == "walltrap" then
@@ -920,8 +930,8 @@ local function mazemaker(dungeondef)
                     table.insert(addprops, { name = "pig_ruins_spear_trap", x_offset = offset.x, z_offset = offset.z })
                     angle = angle + anglestep
                 end
-                table.insert(addprops, { name = "relic_1", z_offset = 0 })
-                table.insert(addprops, { name = "pig_ruins_light_beam", z_offset = 0 })
+                table.insert(addprops, { name = "relic_1" })
+                table.insert(addprops, { name = "pig_ruins_light_beam" })
             elseif speartraps[random] == "wavetrap" then
                 if math.random() < 0.2 then
                     local function getrandomset()
@@ -1029,75 +1039,75 @@ local function mazemaker(dungeondef)
             elseif speartraps[random] == "litfloor" then
                 addprops = spawnspeartrapset(addprops, depth, width, depth / 2.7, -width / 2.7)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = depth / 2.5, z_offset = -width / 2.5, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = depth / 2.5, z_offset = -width / 2.5 })
                 addprops = spawnspeartrapset(addprops, depth, width, depth / 6, -width / 2.7, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = depth / 6, z_offset = -width / 2.5, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = depth / 6, z_offset = -width / 2.5 })
                 --        addprops = spawnspeartrapset(addprops, depth, width, 0, -width/2.5)
                 --      table.insert(addprops, { name = "pig_ruins_light_beam",  z_offset =  -width/2.5, addtags={"localtrap"}} )
                 addprops = spawnspeartrapset(addprops, depth, width, -depth / 6, -width / 2.7, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = -depth / 6, z_offset = -width / 2.5, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = -depth / 6, z_offset = -width / 2.5 })
                 addprops = spawnspeartrapset(addprops, depth, width, -depth / 2.7, -width / 2.7)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = -depth / 2.5, z_offset = -width / 2.5, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = -depth / 2.5, z_offset = -width / 2.5 })
                 addprops = spawnspeartrapset(addprops, depth, width, depth / 2.5, -width / 6, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = depth / 2.5, z_offset = -width / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = depth / 2.5, z_offset = -width / 6 })
                 addprops = spawnspeartrapset(addprops, depth, width, depth / 6, -width / 6)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = depth / 6, z_offset = -width / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = depth / 6, z_offset = -width / 6 })
                 addprops = spawnspeartrapset(addprops, depth, width, 0, -width / 6, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", z_offset = -width / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", z_offset = -width / 6 })
                 addprops = spawnspeartrapset(addprops, depth, width, -depth / 6, -width / 6)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = -depth / 6, z_offset = -width / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = -depth / 6, z_offset = -width / 6 })
                 addprops = spawnspeartrapset(addprops, depth, width, -depth / 2.5, -width / 6, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = -depth / 2.5, z_offset = -width / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = -depth / 2.5, z_offset = -width / 6 })
                 --      addprops = spawnspeartrapset(addprops, depth, width, depth/2.5, 0)
                 --      table.insert(addprops, { name = "pig_ruins_light_beam", x_offset = depth/2.5, z_offset =  0, addtags={"localtrap"}} )
                 addprops = spawnspeartrapset(addprops, depth, width, depth / 6, 0, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = depth / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = depth / 6 })
                 addprops = spawnspeartrapset(addprops, depth, width, 0, 0)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam" })
                 addprops = spawnspeartrapset(addprops, depth, width, -depth / 6, 0, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = -depth / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = -depth / 6 })
                 --      addprops = spawnspeartrapset(addprops, depth, width, -depth/2.5, 0)
                 --      table.insert(addprops, { name = "pig_ruins_light_beam", x_offset = -depth/2.5,  addtags={"localtrap"}} )
                 addprops = spawnspeartrapset(addprops, depth, width, depth / 2.5, width / 6, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = depth / 2.5, z_offset = width / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = depth / 2.5, z_offset = width / 6 })
                 addprops = spawnspeartrapset(addprops, depth, width, depth / 6, width / 6)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = depth / 6, z_offset = width / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = depth / 6, z_offset = width / 6 })
                 addprops = spawnspeartrapset(addprops, depth, width, 0, width / 6, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", z_offset = width / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", z_offset = width / 6 })
                 addprops = spawnspeartrapset(addprops, depth, width, -depth / 6, width / 6)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = -depth / 6, z_offset = width / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = -depth / 6, z_offset = width / 6 })
                 addprops = spawnspeartrapset(addprops, depth, width, -depth / 2.5, width / 6, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = -depth / 2.5, z_offset = width / 6, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = -depth / 2.5, z_offset = width / 6 })
                 addprops = spawnspeartrapset(addprops, depth, width, depth / 2.7, width / 2.7)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = depth / 2.5, z_offset = width / 2.5, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = depth / 2.5, z_offset = width / 2.5 })
                 addprops = spawnspeartrapset(addprops, depth, width, depth / 6, width / 2.7, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = depth / 6, z_offset = width / 2.5, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = depth / 6, z_offset = width / 2.5 })
                 --        addprops = spawnspeartrapset(addprops, depth, width, 0, width/2.5)
                 --      table.insert(addprops, { name = "pig_ruins_light_beam",  z_offset = width/2.5, addtags={"localtrap"}} )
                 addprops = spawnspeartrapset(addprops, depth, width, -depth / 6, width / 2.7, nil, nil, nil, nil, true)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = -depth / 6, z_offset = width / 2.5, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = -depth / 6, z_offset = width / 2.5 })
                 addprops = spawnspeartrapset(addprops, depth, width, -depth / 2.7, width / 2.7)
                 table.insert(addprops,
-                    { name = "pig_ruins_light_beam", x_offset = -depth / 2.5, z_offset = width / 2.5, addtags = { "localtrap" } })
+                    { name = "pig_ruins_light_beam", x_offset = -depth / 2.5, z_offset = width / 2.5 })
             end
         elseif roomtype == "darts!" then
             if advancedtraps and math.random() < 0.3 then
@@ -1111,31 +1121,18 @@ local function mazemaker(dungeondef)
                 end
                 table.insert(addprops, { name = "pig_ruins_dart_statue", x_offset = x, z_offset = z })
             else
-                table.insert(addprops {
-                    name = "pig_ruins_pigman_relief_dart" .. math.random(4) .. room.color,
-                    x_offset = -depth / 2,
-                    z_offset = -width / 3
-                })
+                table.insert(addprops, {
+                    name = "pig_ruins_pigman_relief_dart" .. math.random(4) .. room.color, x_offset = -depth / 2, z_offset = -width / 3 })
                 if northexitopen then
-                    table.insert(addprops,
-                        { name = "pig_ruins_pigman_relief_dart" .. math.random(4) .. room.color, x_offset = -depth / 2, z_offset = 0 })
+                    table.insert(addprops, { name = "pig_ruins_pigman_relief_dart" .. math.random(4) .. room.color, x_offset = -depth / 2 })
                 end
                 table.insert(addprops, {
-                    name = "pig_ruins_pigman_relief_dart" .. math.random(4) .. room.color,
-                    x_offset = -depth / 2,
-                    z_offset = width / 3
-                })
+                    name = "pig_ruins_pigman_relief_dart" .. math.random(4) .. room.color, x_offset = -depth / 2, z_offset = width / 3 })
                 table.insert(addprops, {
-                    name = "pig_ruins_pigman_relief_leftside_dart" .. room.color,
-                    x_offset = -depth / 4 + (math.random() * 1 - 0.5),
-                    z_offset = -width / 2
-                })
+                    name = "pig_ruins_pigman_relief_leftside_dart" .. room.color, x_offset = -depth / 4 + (math.random() * 1 - 0.5), z_offset = -width / 2 })
                 if westexitopen then
                     table.insert(addprops, {
-                        name = "pig_ruins_pigman_relief_leftside_dart" .. room.color,
-                        x_offset = 0 + (math.random() * 1 - 0.5),
-                        z_offset = -width / 2
-                    })
+                        name = "pig_ruins_pigman_relief_leftside_dart" .. room.color, x_offset = 0 + (math.random() * 1 - 0.5), z_offset = -width / 2 })
                 end
                 table.insert(addprops, {
                     name = "pig_ruins_pigman_relief_leftside_dart" .. room.color,
@@ -1166,57 +1163,57 @@ local function mazemaker(dungeondef)
                     name = "pig_ruins_pressure_plate",
                     x_offset = -depth / 6 * 2 + (math.random() * 2 - 1),
                     z_offset = 0 + (math.random() * 2 - 1),
-                    addtags = { "trap_dart" }
+
                 })
                 table.insert(addprops, {
                     name = "pig_ruins_pressure_plate",
                     x_offset = 0 + (math.random(2) - 1),
                     z_offset = 0 + (math.random() * 2 - 1),
-                    addtags = { "trap_dart" }
+
                 })
                 if southexitopen then
                     table.insert(addprops, {
                         name = "pig_ruins_pressure_plate",
                         x_offset = depth / 6 * 2 + (math.random() * 2 - 1),
                         z_offset = 0 + (math.random() * 2 - 1),
-                        addtags = { "trap_dart" }
+
                     })
                 end
                 table.insert(addprops, {
                     name = "pig_ruins_pressure_plate",
                     x_offset = -depth / 6 * 2 + (math.random() * 2 - 1),
                     z_offset = -width / 6 * 2 + (math.random() * 2 - 1),
-                    addtags = { "trap_dart" }
+
                 })
                 table.insert(addprops, {
                     name = "pig_ruins_pressure_plate",
                     x_offset = (math.random() * 2 - 1),
                     z_offset = -width / 6 * 2 + (math.random() * 2 - 1),
-                    addtags = { "trap_dart" }
+
                 })
                 table.insert(addprops, {
                     name = "pig_ruins_pressure_plate",
                     x_offset = -depth / 6 * 2 + (math.random() * 2 - 1),
                     z_offset = width / 6 * 2 + (math.random() * 2 - 1),
-                    addtags = { "trap_dart" }
+
                 })
                 table.insert(addprops, {
                     name = "pig_ruins_pressure_plate",
                     x_offset = depth / 6 * 2 + (math.random() * 2 - 1),
                     z_offset = -width / 6 * 2 + (math.random() * 2 - 1),
-                    addtags = { "trap_dart" }
+
                 })
                 table.insert(addprops, {
                     name = "pig_ruins_pressure_plate",
                     x_offset = (math.random() * 2 - 1),
                     z_offset = width / 6 * 2 + (math.random() * 2 - 1),
-                    addtags = { "trap_dart" }
+
                 })
                 table.insert(addprops, {
                     name = "pig_ruins_pressure_plate",
                     x_offset = depth / 6 * 2 + (math.random() * 2 - 1),
                     z_offset = width / 6 * 2 + (math.random() * 2 - 1),
-                    addtags = { "trap_dart" }
+
                 })
             end
         else
@@ -1283,7 +1280,7 @@ local function mazemaker(dungeondef)
                                 name = "pig_ruins_torch_wall" .. room.color,
                                 x_offset = -depth / 2,
                                 z_offset = -width / 6 * 2,
-                                addtags = { tags }
+
                             })
                         else
                             table.insert(addprops,
@@ -1326,16 +1323,16 @@ local function mazemaker(dungeondef)
                         name = "pig_ruins_torch_sidewall" .. room.color,
                         x_offset = -depth / 3 - 0.5,
                         z_offset = width / 2,
-                        flip = true
+                        animdata = { scale = { -1, 1 } }
                     })
                     if eastexitopen then
-                        table.insert(addprops, { name = "pig_ruins_torch_sidewall" .. room.color, x_offset = 0 - 0.5, z_offset = width / 2, flip = true })
+                        table.insert(addprops, { name = "pig_ruins_torch_sidewall" .. room.color, x_offset = 0 - 0.5, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
                     end
                     table.insert(addprops, {
                         name = "pig_ruins_torch_sidewall" .. room.color,
                         x_offset = depth / 3 - 0.5,
                         z_offset = width / 2,
-                        flip = true
+                        animdata = { scale = { -1, 1 } }
                     })
                 end
             end
@@ -1385,7 +1382,7 @@ local function mazemaker(dungeondef)
         if math.random() < 0.1 and roomtype ~= "lightfires" and roomtype ~= "speartraps!" then
             if math.random() < 0.5 then
                 table.insert(addprops,
-                    { name = "deco_ruins_corner_tree", x_offset = -depth / 2, z_offset = width / 2, flip = true })
+                    { name = "deco_ruins_corner_tree", x_offset = -depth / 2, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
             else
                 table.insert(addprops,
                     { name = "deco_ruins_corner_tree", x_offset = -depth / 2, z_offset = -width / 2, })
@@ -1400,28 +1397,45 @@ local function mazemaker(dungeondef)
                 end
             end
         end
-        props_by_room[room] = { addprops = addprops }
-    end
 
-    for i, room in ipairs(rooms) do
-        local floortexture = "levels/textures/interiors/ground_ruins_slab.tex"
-        local walltexture = "levels/textures/interiors/pig_ruins_panel.tex"
-        local minimaptexture = "levels/textures/map_interior/mini_ruins_slab.tex"
+        -- 地板和墙壁
         if room.color == "_blue" then
-            floortexture = "levels/textures/interiors/ground_ruins_slab_blue.tex"
-            walltexture = "levels/textures/interiors/pig_ruins_panel_blue.tex"
-            for i, exit in pairs(room.exits) do
-                if exit.build == "pig_ruins_door" then
-                    exit.build = "pig_ruins_door_blue" --把隔壁房间的门也换成蓝色的
-                end
+            table.insert(addprops, { name = "interior_floor_ground_ruins_slab_blue", x_offset = -5.5 })
+            table.insert(addprops, { name = "interior_wall_pig_ruins_blue", x_offset = -2, animdata = { scale = { 3.7, 3.7 } } })
+        else
+            table.insert(addprops, { name = "interior_floor_ground_ruins_slab", x_offset = -5.5 })
+            table.insert(addprops, { name = "interior_wall_pig_ruins", x_offset = -2, animdata = { scale = { 3.7, 3.7 } } })
+        end
+
+        -- 门
+        for dir, exit in pairs(room.exits) do
+            if dir ~= InteriorSpawnerUtils.GetNorth() or (not room.entrance1 and not room.entrance2) then
+                local opposite_dir = InteriorSpawnerUtils.GetOppositeFromDirection(dir)
+                local doorprop = GetDoorProp(room, opposite_dir, exit, width, depth)
+
+                -- 把隔壁门也一起生成
+                local opposite_room = rooms[exit.target_room]
+
+                local opposite_exit = opposite_room.exits[opposite_dir]
+                local doorprop2 = GetDoorProp(opposite_room, dir, opposite_exit, width, depth)
+                opposite_room.exits[opposite_dir] = nil --不再处理
+
+                doorprop.key = #addprops + 1
+                doorprop2.key = #addprops + 2
+                doorprop.target_door = doorprop2.key
+                doorprop2.target_door = doorprop.key
+
+                table.insert(addprops, doorprop)
+                table.insert(addprops, doorprop2)
             end
         end
 
-        interior_spawner:CreateRoom("generic_interior", width, nil, depth, dungeondef.name, room.idx,
-            props_by_room[room].addprops, room.exits, walltexture, floortexture, minimaptexture, nil,
-            "images/colour_cubes/pigshop_interior_cc.tex", nil, nil, "ruins", "RUINS", "STONE")
+        room.addprops = addprops
     end
-    return entranceRoom, exitRoom
+
+    local doors = InteriorSpawnerUtils.CreateRooms(rooms)
+    inst.components.teleporter:Target(doors.entrance1)
+    doors.entrance1.components.teleporter:Target(inst)
 end
 local function getstatus(inst)
     if inst:HasTag("burnt") then
@@ -1434,114 +1448,71 @@ local function getstatus(inst)
         end
     end
 end
-local function refreshImage(inst, push)
-    local anim = "idle_closed"
-    if inst.stage == 2 then
-        anim = "idle_med"
-    elseif inst.stage == 1 then
-        anim = "idle_low"
-    elseif inst.stage == 0 then
-        anim = "idle_open"
-    end
-    if inst:HasTag("top_ornament") then
-        inst.AnimState:AddOverrideBuild("pig_ruins_entrance_top_build")
-        inst.AnimState:Hide("swap_ornament2")
-        inst.AnimState:Hide("swap_ornament3")
-        inst.AnimState:Hide("swap_ornament4")
-    elseif inst:HasTag("top_ornament2") then
-        inst.AnimState:AddOverrideBuild("pig_ruins_entrance_top_build")
-        inst.AnimState:Hide("swap_ornament3")
-        inst.AnimState:Hide("swap_ornament4")
-        inst.AnimState:Hide("swap_ornament")
-    elseif inst:HasTag("top_ornament3") then
-        inst.AnimState:AddOverrideBuild("pig_ruins_entrance_top_build")
-        inst.AnimState:Hide("swap_ornament2")
-        inst.AnimState:Hide("swap_ornament4")
-        inst.AnimState:Hide("swap_ornament")
-    elseif inst:HasTag("top_ornament4") then
-        inst.AnimState:AddOverrideBuild("pig_ruins_entrance_top_build")
-        inst.AnimState:Hide("swap_ornament2")
-        inst.AnimState:Hide("swap_ornament3")
-        inst.AnimState:Hide("swap_ornament")
-    else
-        inst.AnimState:Hide("swap_ornament4")
-        inst.AnimState:Hide("swap_ornament3")
-        inst.AnimState:Hide("swap_ornament2")
-        inst.AnimState:Hide("swap_ornament")
-        inst.AnimState:OverrideSymbol("statue_01", "pig_ruins_entrance", "")
-        inst.AnimState:OverrideSymbol("swap_ornament", "pig_ruins_entrance", "")
-    end
+
+-- 门的藤蔓高度动画
+local function RefreshVineAnim(inst, push)
+    local anim = inst.stage == 0 and "idle_open" --无藤蔓，可以进
+        or inst.stage == 1 and "idle_low"
+        or inst.stage == 2 and "idle_med"
+        or "idle_closed" --有藤蔓
     if push then
         inst.AnimState:PushAnimation(anim, true)
     else
         inst.AnimState:PlayAnimation(anim, true)
     end
 end
-local function onhit(inst, worker)
-    if inst.stage == 3 then
-        inst.AnimState:PlayAnimation("hit_closed")
-    elseif inst.stage == 2 then
-        inst.AnimState:PlayAnimation("hit_med")
-    elseif inst.stage == 1 then
-        inst.AnimState:PlayAnimation("hit_low")
+
+local function OnHit(inst, worker)
+    local anim = inst.stage == 3 and "hit_closed"
+        or inst.stage == 2 and "hit_med"
+        or inst.stage == 1 and "hit_low"
+    if anim then
+        inst.AnimState:PlayAnimation(anim)
     end
-    refreshImage(inst, true)
+
+    RefreshVineAnim(inst, true)
 end
+
 local function onsave(inst, data)
     data.stage = inst.stage
-    data.hackeable = inst.components.hackable.canbehacked
-    if inst:HasTag("top_ornament") then
-        data.top_ornament = true
-    end
-    if inst:HasTag("top_ornament2") then
-        data.top_ornament2 = true
-    end
-    if inst:HasTag("top_ornament3") then
-        data.top_ornament3 = true
-    end
 end
+
 local function onload(inst, data)
-    if data then
-        if data.stage then
-            inst.stage = data.stage
-        end
-        if data.hackable then
-            inst.components.hackable.canbehacked = data.hackeable
-        end
-        if data.top_ornament then
-            inst:AddTag("top_ornament")
-        end
-        if data.top_ornament2 then
-            inst:AddTag("top_ornament2")
-        end
-        if data.top_ornament3 then
-            inst:AddTag("top_ornament3")
-        end
-    end
-    refreshImage(inst)
+    if not data then return end
+
+    inst.stage = data.stage or inst.stage
+    RefreshVineAnim(inst)
 end
+
 local function onhackedfn(inst, hacker, hacksleft)
-    if hacksleft <= 0 then
-        if inst.stage > 0 then
-            inst.stage = inst.stage - 1
-            if inst.stage == 0 then
-                inst.components.hackable.canbehacked = false
-                inst.components.door:checkDisableDoor(false, "vines")
-            else
-                inst.components.hackable.hacksleft = inst.components.hackable.maxhacks
-            end
+    if hacksleft <= 0 and inst.stage > 0 then
+        inst.stage = inst.stage - 1
+        if inst.stage == 0 then
+            inst.components.hackable.canbehacked = false
+            inst.components.teleporter:SetEnabled(true)
+        else
+            inst.components.hackable.hacksleft = inst.components.hackable.maxhacks
         end
     end
+
     local fx = SpawnPrefab("hacking_fx")
     local x, y, z = inst.Transform:GetWorldPosition()
     fx.Transform:SetPosition(x, y + math.random() * 2, z)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/vine_hack")
-    onhit(inst, hacker)
+    OnHit(inst, hacker)
 end
-local function initmaze(inst, dungeonname)
-    if inst.components.entitytracker:GetEntity("interior_center") then
+
+local function InitMaze(inst)
+    if inst.stage ~= 0 then
+        inst.components.teleporter:SetEnabled(false) --这个竟然需要我自己保存
+    end
+
+    if inst.components.teleporter:GetTarget() then --已经创建了
         return
     end
+
+    local dungeonname = inst.dungeonname
+
     local dungeondef = {
         name        = dungeonname,
         rooms       = 24,
@@ -1564,8 +1535,7 @@ local function initmaze(inst, dungeonname)
         dungeondef.doorvines = 0.6
         dungeondef.nosecondexit = true
     elseif dungeonname == "RUINS_SMALL" then
-        local interiorspawner = TheWorld.components.tropical_interiorspawner
-        dungeondef.name = "RUINS_SMALL" .. (interiorspawner.count + 1)
+        dungeondef.name = "RUINS_SMALL"
         dungeondef.rooms = math.random(6, 8)
         dungeondef.nosecondexit = true
         dungeondef.lock = nil
@@ -1574,90 +1544,83 @@ local function initmaze(inst, dungeonname)
         dungeondef.secretrooms = 1
         dungeondef.smallsecret = true
     end
-    local entranceRoom, exitRoom = mazemaker(dungeondef)
-    local interior_spawner = GetWorld().components.interiorspawner
-    local exterior_door_def = {
-        my_door_id = dungeondef.name .. "_ENTRANCE1",
-        target_door_id = dungeondef.name .. "_EXIT1",
-        target_interior = entranceRoom.idx,
-    }
-    interior_spawner:AddDoor(inst, exterior_door_def)
-    local exit_door = nil
-    for i, ent in pairs(Ents) do
-        if ent:HasTag(dungeondef.name .. "_EXIT_TARGET") then
-            exit_door = ent
-        end
-    end
-    if exit_door and exitRoom then
-        -- CREATE 2nd DOOR
-        local exterior_door_def2 = {
-            my_door_id = dungeondef.name .. "_ENTRANCE2",
-            target_door_id = dungeondef.name .. "_EXIT2",
-            target_interior = exitRoom.idx,
-        }
-        interior_spawner:AddDoor(exit_door, exterior_door_def2)
-    end
-    refreshImage(inst)
+
+    mazemaker(inst, dungeondef)
+    RefreshVineAnim(inst)
 end
+
+---fn
+---@param build_interiors boolean 是否需要构造遗迹，如果是入口则为true，为外部出口则为false
+---@param dungeonname string 迷宫类型
 local function makefn(build_interiors, dungeonname)
     local function fn()
-        local inst = CreateEntity()
-        inst.entity:AddTransform()
-        inst.entity:AddAnimState()
-        inst.entity:AddLight()
-        inst.entity:AddSoundEmitter()
-        inst.entity:AddNetwork()
-        local minimap = inst.entity:AddMiniMapEntity()
-        minimap:SetIcon("pig_ruins_entrance.png")
-        MakeObstaclePhysics(inst, 1.20)
-        inst.AnimState:SetBank("pig_ruins_entrance")
-        inst.AnimState:SetBuild("pig_ruins_entrance_build")
-        inst.AnimState:PlayAnimation("idle_closed", true)
+        local inst = InteriorSpawnerUtils.MakeBaseDoor("pig_ruins_entrance", "pig_ruins_entrance_build", "idle_closed", true, true, "pig_ruins_entrance.png")
+
         if dungeonname == "RUINS_1" then
-            inst:AddTag("top_ornament")
+            inst.AnimState:AddOverrideBuild("pig_ruins_entrance_top_build")
+            inst.AnimState:Hide("swap_ornament2")
+            inst.AnimState:Hide("swap_ornament3")
+            inst.AnimState:Hide("swap_ornament4")
         elseif dungeonname == "RUINS_2" then
-            inst:AddTag("top_ornament2")
+            inst.AnimState:AddOverrideBuild("pig_ruins_entrance_top_build")
+            inst.AnimState:Hide("swap_ornament3")
+            inst.AnimState:Hide("swap_ornament4")
+            inst.AnimState:Hide("swap_ornament")
         elseif dungeonname == "RUINS_3" then
-            inst:AddTag("top_ornament3")
+            inst.AnimState:AddOverrideBuild("pig_ruins_entrance_top_build")
+            inst.AnimState:Hide("swap_ornament2")
+            inst.AnimState:Hide("swap_ornament4")
+            inst.AnimState:Hide("swap_ornament")
         elseif dungeonname == "RUINS_4" or dungeonname == "RUINS_5" then
-            inst:AddTag("top_ornament4")
+            inst.AnimState:AddOverrideBuild("pig_ruins_entrance_top_build")
+            inst.AnimState:Hide("swap_ornament2")
+            inst.AnimState:Hide("swap_ornament3")
+            inst.AnimState:Hide("swap_ornament")
+        else
+            inst.AnimState:Hide("swap_ornament4")
+            inst.AnimState:Hide("swap_ornament3")
+            inst.AnimState:Hide("swap_ornament2")
+            inst.AnimState:Hide("swap_ornament")
+            inst.AnimState:OverrideSymbol("statue_01", "pig_ruins_entrance", "")
+            inst.AnimState:OverrideSymbol("swap_ornament", "pig_ruins_entrance", "")
         end
-        inst:AddTag(dungeonname .. "_EXIT_TARGET")
-        inst.entity:SetPristine()
+
+        MakeObstaclePhysics(inst, 1.20)
+
         if not TheWorld.ismastersim then
             return inst
         end
+
+        inst.dungeonname = dungeonname
+
         inst:AddComponent("hackable")
         inst.components.hackable:SetUp()
         inst.components.hackable.onhackedfn = onhackedfn
         inst.components.hackable.hacksleft = TUNING.RUINS_ENTRANCE_VINES_HACKS
         inst.components.hackable.maxhacks = TUNING.RUINS_ENTRANCE_VINES_HACKS
+
         inst:AddComponent("shearable")
-        inst:AddComponent("inspectable")
+
         inst.components.inspectable.getstatus = getstatus
-        inst:AddComponent("entitytracker")
-        build_interiors = false -- TODO 删除
+
         if build_interiors then
             -- this prefab is the entrance. Makes the maze
             inst.stage = 3
             -- spread out the maze gen for less hiccup at load time.
-            inst:DoTaskInTime(0, function()
-                initmaze(inst, dungeonname)
-            end)
-        else
-            -- this prefab is an exit. Just set the door and art
+            inst:DoTaskInTime(0, InitMaze)
+        end
+
+        if not build_interiors or dungeonname == "RUINS_SMALL" then --可以直接进
             inst.stage = 0
             inst.components.hackable.canbehacked = false
-            refreshImage(inst)
+            RefreshVineAnim(inst)
         end
-        if dungeonname == "RUINS_SMALL" then
-            inst.stage = 0
-            inst.components.hackable.canbehacked = false
-            refreshImage(inst)
-        end
+
         MakeSnowCovered(inst, .01)
+
         inst.OnSave = onsave
         inst.OnLoad = onload
+
         return inst
     end
     return fn

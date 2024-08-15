@@ -5,7 +5,7 @@ local InteriorSpawnerUtils = require("interiorspawnerutils")
 local function OnBuilt(inst)
     local isCorner, isLeft = InteriorSpawnerUtils.TestBeam(inst)
 
-    local initData = { animdata = { flip = true, } }
+    local initData = { animdata = { scale = { -1, 1 }, } }
 
     if isCorner then
         if not isLeft then

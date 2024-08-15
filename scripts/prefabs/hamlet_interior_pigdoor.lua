@@ -1,9 +1,9 @@
 local InteriorSpawnerUtils = require("interiorspawnerutils")
 
 local assets = {
-    Asset("ANIM", "anim/pig_ruins_door.zip"),
     Asset("ANIM", "anim/pig_shop_doormats.zip"),
     Asset("ANIM", "anim/pig_ruins_door.zip"),
+    Asset("ANIM", "anim/pig_ruins_door_blue.zip"),
 }
 
 local function opendoor(inst)
@@ -69,7 +69,7 @@ local function OnLoad(inst, data)
 end
 
 local function common(bank, build, anim, door_orientation, vine, exploitable)
-    local inst = InteriorSpawnerUtils.MakeBaseDoor(bank, build, anim, true, nil, "pig_ruins_exit_int.png")
+    local inst = InteriorSpawnerUtils.MakeBaseDoor(bank, build, anim, true, true, "pig_ruins_exit_int.png")
 
     if exploitable then
         inst:AddTag("escondida")
@@ -100,64 +100,90 @@ local function common(bank, build, anim, door_orientation, vine, exploitable)
     return inst
 end
 
-local function pig_ruins_door_entrada_fn()
-    local inst = common("doorway_ruins", "pig_ruins_door", "day_loop", "north")
+local function pig_ruins_exit_door_fn()
+    local inst = common("doorway_ruins", "pig_ruins_door", "day_loop")
     inst:AddTag("timechange_anims")
     inst:AddTag("ruins_entrance") --遗迹出口
     InteriorSpawnerUtils.SetDoorTimeChange(inst)
     return inst
 end
-local function pig_ruins_door_cima_fn()
+local function pig_ruins_north_door_fn()
     return common("doorway_ruins", "pig_ruins_door", "north", "north")
 end
-local function pig_ruins_door_baixo_fn()
+local function pig_ruins_south_door_fn()
     return common("doorway_ruins", "pig_ruins_door", "south", "south")
 end
-local function pig_ruins_door_esquerda_fn()
+local function pig_ruins_east_door_fn()
     return common("doorway_ruins", "pig_ruins_door", "east", "east")
 end
-local function pig_ruins_door_direita_fn()
+local function pig_ruins_west_door_fn()
     return common("doorway_ruins", "pig_ruins_door", "west", "west")
 end
-local function pig_ruins_door_cimavine_fn()
+local function pig_ruins_vine_north_door_fn()
     return common("doorway_ruins", "pig_ruins_door", "north", "north", true)
 end
-local function pig_ruins_door_baixovine_fn()
+local function pig_ruins_vine_south_door_fn()
     return common("doorway_ruins", "pig_ruins_door", "south", "south", true)
 end
-local function pig_ruins_door_esquerdavine_fn()
+local function pig_ruins_vine_east_door_fn()
     return common("doorway_ruins", "pig_ruins_door", "east", "east", true)
 end
-local function pig_ruins_door_direitavine_fn()
+local function pig_ruins_vine_west_door_fn()
     return common("doorway_ruins", "pig_ruins_door", "west", "west", true)
 end
-local function pig_ruins_door_cimaescondida_fn()
+
+local function pig_ruins_cracks_north_door_fn()
+    return common("interior_wall_decals_ruins", "interior_wall_decals_ruins_cracks", "north_closed", "north",
+        nil, true)
+end
+local function pig_ruins_cracks_south_door_fn()
+    return common("interior_wall_decals_ruins", "interior_wall_decals_ruins_cracks", "south_closed", "south",
+        nil, true)
+end
+local function pig_ruins_cracks_east_door_fn()
+    return common("interior_wall_decals_ruins", "interior_wall_decals_ruins_cracks", "east_closed", "east",
+        nil, true)
+end
+local function pig_ruins_cracks_west_door_fn()
+    return common("interior_wall_decals_ruins", "interior_wall_decals_ruins_cracks", "west_closed", "west",
+        nil, true)
+end
+
+local function pig_ruins_cracks_fake_north_door_fn()
     return common("interior_wall_decals_ruins_fake", "interior_wall_decals_ruins_cracks_fake", "north_closed", "north",
         nil, true)
 end
-local function pig_ruins_door_baixoescondida_fn()
+local function pig_ruins_cracks_fake_south_door_fn()
     return common("interior_wall_decals_ruins_fake", "interior_wall_decals_ruins_cracks_fake", "south_closed", "south",
         nil, true)
 end
-local function pig_ruins_door_esquerdaescondida_fn()
+local function pig_ruins_cracks_fake_east_door_fn()
     return common("interior_wall_decals_ruins_fake", "interior_wall_decals_ruins_cracks_fake", "east_closed", "east",
         nil, true)
 end
-local function pig_ruins_door_direitaescondida_fn()
+local function pig_ruins_cracks_fake_west_door_fn()
     return common("interior_wall_decals_ruins_fake", "interior_wall_decals_ruins_cracks_fake", "west_closed", "west",
         nil, true)
 end
 
-return Prefab("pig_ruins_door_entrada", pig_ruins_door_entrada_fn, assets),
-    Prefab("pig_ruins_door_cima", pig_ruins_door_cima_fn, assets),
-    Prefab("pig_ruins_door_baixo", pig_ruins_door_baixo_fn, assets),
-    Prefab("pig_ruins_door_esquerda", pig_ruins_door_esquerda_fn, assets),
-    Prefab("pig_ruins_door_direita", pig_ruins_door_direita_fn, assets),
-    Prefab("pig_ruins_door_cimavine", pig_ruins_door_cimavine_fn, assets),
-    Prefab("pig_ruins_door_baixovine", pig_ruins_door_baixovine_fn, assets),
-    Prefab("pig_ruins_door_esquerdavine", pig_ruins_door_esquerdavine_fn, assets),
-    Prefab("pig_ruins_door_direitavine", pig_ruins_door_direitavine_fn, assets),
-    Prefab("pig_ruins_door_cimaescondida", pig_ruins_door_cimaescondida_fn, assets),
-    Prefab("pig_ruins_door_baixoescondida", pig_ruins_door_baixoescondida_fn, assets),
-    Prefab("pig_ruins_door_esquerdaescondida", pig_ruins_door_esquerdaescondida_fn, assets),
-    Prefab("pig_ruins_door_direitaescondida", pig_ruins_door_direitaescondida_fn, assets)
+return Prefab("pig_ruins_exit_door", pig_ruins_exit_door_fn, assets),
+
+    --偷个懒，蓝色版本的替换个build得了
+    Prefab("pig_ruins_north_door", pig_ruins_north_door_fn, assets),
+    Prefab("pig_ruins_south_door", pig_ruins_south_door_fn, assets),
+    Prefab("pig_ruins_east_door", pig_ruins_east_door_fn, assets),
+    Prefab("pig_ruins_west_door", pig_ruins_west_door_fn, assets),
+    Prefab("pig_ruins_vine_north_door", pig_ruins_vine_north_door_fn, assets),
+    Prefab("pig_ruins_vine_south_door", pig_ruins_vine_south_door_fn, assets),
+    Prefab("pig_ruins_vine_east_door", pig_ruins_vine_east_door_fn, assets),
+    Prefab("pig_ruins_vine_west_door", pig_ruins_vine_west_door_fn, assets),
+
+    Prefab("pig_ruins_cracks_north_door", pig_ruins_cracks_north_door_fn, assets),
+    Prefab("pig_ruins_cracks_south_door", pig_ruins_cracks_south_door_fn, assets),
+    Prefab("pig_ruins_cracks_east_door", pig_ruins_cracks_east_door_fn, assets),
+    Prefab("pig_ruins_cracks_west_door", pig_ruins_cracks_west_door_fn, assets),
+
+    Prefab("pig_ruins_cracks_fake_north_door", pig_ruins_cracks_fake_north_door_fn, assets),
+    Prefab("pig_ruins_cracks_fake_south_door", pig_ruins_cracks_fake_south_door_fn, assets),
+    Prefab("pig_ruins_cracks_fake_east_door", pig_ruins_cracks_fake_east_door_fn, assets),
+    Prefab("pig_ruins_cracks_fake_west_door", pig_ruins_cracks_fake_west_door_fn, assets)

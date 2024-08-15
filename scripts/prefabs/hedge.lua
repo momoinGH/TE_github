@@ -22,7 +22,7 @@ end
 
 local function ondeploywall(inst, pt, deployer)
     --inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spider_egg_sack")
-    local wall = SpawnPrefab("wall_" .. data.name, inst.linked_skinname, inst.skin_id)
+    local wall = SpawnPrefab("wall_" .. self.name, inst.linked_skinname, inst.skin_id)
     if wall ~= nil then
         local x = math.floor(pt.x) + .5
         local z = math.floor(pt.z) + .5
@@ -31,12 +31,12 @@ local function ondeploywall(inst, pt, deployer)
         wall.Physics:SetCollides(true)
         inst.components.stackable:Get():Remove()
 
-        if data.name == "enforcedlimestone" then
+        if self.name == "enforcedlimestone" then
             wall.AnimState:PlayAnimation("water_half", true)
         end
 
-        if data.buildsound ~= nil then
-            wall.SoundEmitter:PlaySound(data.buildsound)
+        if self.buildsound ~= nil then
+            wall.SoundEmitter:PlaySound(self.buildsound)
         end
     end
 end

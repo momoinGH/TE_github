@@ -109,7 +109,7 @@ local function entrance()
 		inst.exit.Transform:SetPosition(x + 5.2, 0, z + 0.5)
 
 		---------------------------cria a parede inicio------------------------------------------------------------------	
-		local tipodemuro = "wall_tigerpond"
+		local tipodemuro = "wall_invisible"
 		---------------------------cria a parede inicio -------------------------------------
 		---------------------------parade dos aposento------------------------------------------------------------------	
 		local y = 0
@@ -440,5 +440,3 @@ local function entrance()
 end
 
 return Prefab("pig_shop_general_entrance", entrance)
-
-

@@ -213,12 +213,6 @@ local function OnWorkCallback(inst, worker, workleft)
 end
 
 local function OnRemove(inst)
-    if inst.decochildrenToRemove then
-        for _, child in ipairs(inst.decochildrenToRemove) do
-            child:Remove()
-        end
-    end
-
     if inst.swinglight then
         inst.swinglight:Remove()
     end
@@ -297,19 +291,8 @@ local function OnSave(inst, data)
     end
 
     data.onbuilt = inst.onbuilt
-    data.initData = inst.initData
 
     local references = {}
-    if inst.childrenspawned then
-        data.childrenspawned = inst.childrenspawned
-        data.children = {}
-        if inst.decochildrenToRemove then
-            for i, child in ipairs(inst.decochildrenToRemove) do
-                table.insert(data.children, child.GUID)
-                table.insert(references, child.GUID)
-            end
-        end
-    end
 
     if inst.sunraysspawned then
         data.sunraysspawned = inst.sunraysspawned
@@ -334,13 +317,7 @@ local function OnLoad(inst, data)
         inst.components.burnable.onburnt(inst)
     end
 
-    if data.initData then
-        InteriorSpawnerUtils.InitHouseInteriorPrefab(inst, data.initData)
-        inst.initData = data.initData
-    end
-
     inst.sunraysspawned = data.sunraysspawned or inst.sunraysspawned
-    inst.childrenspawned = data.childrenspawned or inst.childrenspawned
 
     if data.setbackground then
         inst.setbackground = data.setbackground
@@ -364,20 +341,6 @@ local function LoadPostPass(inst, ents, data)
     if data.dust then
         local dust = ents[data.dust]
         inst.dust = dust and dust.entity
-    end
-
-    inst.decochildrenToRemove = {}
-    if data.children then
-        for i, child in ipairs(data.children) do
-            local childent = ents[child]
-            if childent then
-                table.insert(inst.decochildrenToRemove, childent.entity)
-                if data.initData then
-                    -- 有些属性子对象也要初始化，比如翻转
-                    InteriorSpawnerUtils.InitHouseInteriorPrefabChild(childent.entity, data.initData)
-                end
-            end
-        end
     end
 end
 
@@ -508,31 +471,11 @@ function decofn(build, bank, animframe, data, name)
             return inst
         end
 
-        if data.children then
-            inst.tempChildrens = data.children --我需要一个能修改children的机会
-            inst:DoTaskInTime(0, function()
-                if not inst.childrenspawned then
-                    inst.decochildrenToRemove = {}
-                    for _, child in ipairs(inst.tempChildrens) do
-                        local pos = inst:GetPosition()
-                        local rotation = inst.Transform:GetRotation()
-                        local childprop = SpawnAt(child, pos)
-                        childprop.Transform:SetRotation(rotation)
-                        if inst.initData then
-                            -- 有些属性子对象也要初始化，比如翻转
-                            InteriorSpawnerUtils.InitHouseInteriorPrefabChild(childprop, inst.initData)
-                        end
-                        table.insert(inst.decochildrenToRemove, childprop)
-                    end
-                    inst.childrenspawned = true
-                end
-                inst.tempChildrens = nil
-            end)
-        end
-
         if STRINGS.NAMES[string.upper(name)] or data.workable or data.prefabname then
             inst:AddComponent("inspectable")
         end
+
+        inst:AddComponent("tropical_saveanim")
 
         if data.dayevents then
             inst:WatchWorldState("phase", OnPhaseChange)
@@ -640,9 +583,13 @@ function decofn(build, bank, animframe, data, name)
             data.masterInit(inst)
         end
 
-        inst.OnSave = OnSave
-        inst.OnLoad = OnLoad
-        inst.LoadPostPass = LoadPostPass
+        if data.persists == false then
+            inst.persists = false
+        else
+            inst.OnSave = OnSave
+            inst.OnLoad = OnLoad
+            inst.LoadPostPass = LoadPostPass
+        end
 
         return inst
     end

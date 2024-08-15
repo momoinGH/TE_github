@@ -54,7 +54,7 @@ local function createroom(inst)
 	z = TheWorld.components.contador:GetZ()
 
 	---------------------------cria a parede inicio------------------------------------------------------------------	
-	local tipodemuro = "wall_tigerpond"
+	local tipodemuro = "wall_invisible"
 	---------------------------parade dos aposento------------------------------------------------------------------	
 	local y = 0
 
@@ -2134,20 +2134,20 @@ end
 		elseif speartraps[math.random(1, 5)] == "bait" then
 			local baits = {
 				{ "goldnugget", 5 },
-				{ "rocks",      20 },
-				{ "flint",      20 },
-				{ "redgem",     1 },
-				{ "relic_1",    1 },
-				{ "relic_2",    1 },
-				{ "relic_3",    1 },
-				{ "boneshard",  5 },
+				{ "rocks", 20 },
+				{ "flint", 20 },
+				{ "redgem", 1 },
+				{ "relic_1", 1 },
+				{ "relic_2", 1 },
+				{ "relic_3", 1 },
+				{ "boneshard", 5 },
 				{ "meat_dried", 5 },
 			}
 
 			local offsets = { { -depth / 5, -width / 5 },
-				{ depth / 5,  -width / 5 },
+				{ depth / 5, -width / 5 },
 				{ -depth / 5, width / 5 },
-				{ depth / 5,  width / 5 } }
+				{ depth / 5, width / 5 } }
 
 			for i = 1, math.random(1, 3) do
 				local rand = 1

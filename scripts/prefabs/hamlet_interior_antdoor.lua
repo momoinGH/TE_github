@@ -25,7 +25,7 @@ local function closedoor(inst)
 end
 
 local function common(bank, build, anim, door_orientation)
-    local inst = InteriorSpawnerUtils.MakeBaseDoor(bank, build, anim, true)
+    local inst = InteriorSpawnerUtils.MakeBaseDoor(bank, build, anim, true, true)
 
     if not TheWorld.ismastersim then
         return inst
@@ -44,7 +44,7 @@ end
 local function anthill_door_entrada_fn()
     local inst = common("ant_cave_door", "ant_cave_door", "day_loop")
     inst:AddTag("timechange_anims")
-   InteriorSpawnerUtils.SetDoorTimeChange(inst)
+    InteriorSpawnerUtils.SetDoorTimeChange(inst)
     return inst
 end
 

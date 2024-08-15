@@ -2,7 +2,7 @@ local Utils = require("tropical_utils/utils")
 local InteriorSpawnerUtils = require("interiorspawnerutils")
 
 -- 我需要焦点再地板中心再偏下点，参考focalpoint组件的UpdateFocus函数
-local function focalPointUpdater(dt, params, parent, dist_sq)
+local function focalPointUpdater(dt, params, parent, dist_sq, x, y)
     local tpos = params.target:GetPosition()
     local ppos = parent:GetPosition()
 
@@ -11,10 +11,18 @@ local function focalPointUpdater(dt, params, parent, dist_sq)
         local range = params.maxrange - params.minrange
         offs = offs * (range ~= 0 and ((params.maxrange - math.sqrt(dist_sq)) / range))
     end
-    -- offs.x = offs.x + 2
-    offs.y = offs.y + 1.5
+    offs.x = offs.x + x
+    offs.y = offs.y + y
 
     TheCamera:SetOffset(offs)
+end
+
+local function focalPointUpdater4(dt, params, parent, dist_sq)
+    focalPointUpdater(dt, params, parent, dist_sq, 0, 1.5)
+end
+
+local function focalPointUpdater6(dt, params, parent, dist_sq)
+    focalPointUpdater(dt, params, parent, dist_sq, 1, 1.5)
 end
 
 local function OnDirtyEventCameraStuff(inst) -- this is called on client, if the server does inst.mynetvarCameraMode:set(...)
@@ -33,34 +41,22 @@ local function OnDirtyEventCameraStuff(inst) -- this is called on client, if the
         local target = GetClosestInstWithTag("interior_center", inst, 30)
         if target then
             TheCamera.controllable = false
-            TheCamera.distancetarget = 21.5
+            TheCamera.distancetarget = 21.5 + GetModConfigData("housewallajust")
             TheCamera:SetHeadingTarget(0)
             TheFocalPoint.components.focalpoint:StartFocusSource(inst, "tropical_inroom",
-                target, math.huge, math.huge, 10, { UpdateFn = focalPointUpdater })
+                target, math.huge, math.huge, 10, { UpdateFn = focalPointUpdater4 })
         end
     elseif val == 5 then --for player prox
-        TheCamera.controllable = false
-        TheCamera.cutscene = true
-        TheCamera.headingtarget = 0
-        local alvodacamera = GetClosestInstWithTag("caveinterior", inst, 30)
-        if alvodacamera then
-            TheCamera:SetTarget(alvodacamera)
-        end
-        if alvodacamera and alvodacamera:HasTag("pisodaruina") then
+        -- 遗迹
+        local target = GetClosestInstWithTag("interior_center", inst, 30)
+        if target then
+            TheCamera.controllable = false
+            print("检查", GetModConfigData("housewallajust"))
             TheCamera.distancetarget = 25 + GetModConfigData("housewallajust")
-            TheCamera.targetoffset = Vector3(6, 1.5, 0)
-            TheWorld:PushEvent("underwatercave", "night")
-            TheFocalPoint.SoundEmitter:PlaySound("dontstarve_DLC003/amb/inside/ruins", "storemusic")
-        elseif alvodacamera and alvodacamera:HasTag("pisogalleryinteriorpalace") then
-            TheCamera.distancetarget = 21.5 + GetModConfigData("housewallajust")
-            TheCamera.targetoffset = Vector3(3, 1.5, 0)
-        elseif alvodacamera and alvodacamera:HasTag("pisoanthill") then
-            TheCamera.distancetarget = 27 + GetModConfigData("housewallajust")
-            TheCamera.targetoffset = Vector3(5, 1.5, 0)
-            TheWorld:PushEvent("underwatercave", "night")
-        else
-            TheCamera.distancetarget = 27 + GetModConfigData("housewallajust")
-            TheCamera.targetoffset = Vector3(5, 1.5, 0)
+            TheCamera:SetHeadingTarget(0)
+            TheFocalPoint.components.focalpoint:StartFocusSource(inst, "tropical_inroom",
+                target, math.huge, math.huge, 10, { UpdateFn = focalPointUpdater6 })
+
             TheWorld:PushEvent("underwatercave", "night")
         end
     elseif val == 6 then --for player prox

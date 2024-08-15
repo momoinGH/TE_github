@@ -75,7 +75,7 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
         --Initialize physics
         inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
         inst.Physics:ClearCollisionMask()
-        inst.Physics:CollidesWith(COLLISION.GROUND)
+        inst.Physics:CollidesWith(COLLISION.WORLD)
         inst.Physics:SetSphere(1)
         inst.Physics:SetMass(1)
 

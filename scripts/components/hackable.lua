@@ -5,6 +5,15 @@ local MAX_PLANT_REJUVENATE_TEMP = 55
 
 local TOTAL_DAY_TIME = 480
 
+local function oncanbehacked(self, canbehacked)
+	if canbehacked then
+		self.inst:AddTag("hackable")
+	else
+		self.inst:RemoveTag("hackable")
+	end
+end
+
+--- 可以劈砍
 local Hackable = Class(function(self, inst)
 	self.inst = inst
 	self.canbehacked = nil
@@ -94,7 +103,9 @@ local Hackable = Class(function(self, inst)
 			end
 		end
 	end
-end)
+end, nil, {
+	canbehacked = oncanbehacked
+})
 
 function Hackable:CheckPlantState()
 	local data = { temp = TheWorld.state.temperature }
