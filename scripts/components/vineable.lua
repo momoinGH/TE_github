@@ -1,3 +1,4 @@
+-- TODO 优化掉
 local Vineable = Class(function(self, inst)
 	self.inst = inst
 	self.vined = false
@@ -16,7 +17,6 @@ function Vineable:SetUpVine()
 			self.inst:AddTag("vineadded")
 		end
 	end
-	--    self.inst:ListenForEvent("exitedruins", function() self:SetDoorDissabled(true) end, GetPlayer() )
 end
 
 function Vineable:dissabledoorvis()
@@ -74,19 +74,9 @@ function Vineable:updatevinevis()
 end
 
 function Vineable:InitInteriorPrefab()
-	--	if self.inst.components.door and self.inst.components.door.disabledcauses and self.inst.components.door.disabledcauses["vines"] == true then
 	if self.vined then
 		self:SetDoorDissabled(true)
-		--self:dissabledoorvis()
 	end
-	--	else
-	--		if self.vined then
-	--			self:SetDoorDissabled(false)
-	--self:enabledoor()
-	--		end
-	--	end
-
-	--self:updatevinevis()
 end
 
 function Vineable:testevent(data)

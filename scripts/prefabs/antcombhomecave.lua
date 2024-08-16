@@ -144,4 +144,4 @@ end
 
 return Prefab("antcombhomecave", fn1, assets, prefabs),
     Prefab("antcombhomecavewarrior", fn2, assets, prefabs),
-    MakePlacer("common/antcombhomecave_placer", "ant_house", "ant_house", "idle")
+    MakePlacer("antcombhomecave_placer", "ant_house", "ant_house", "idle")

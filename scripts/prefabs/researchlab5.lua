@@ -234,4 +234,4 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
 end
 
 return createmachine(2, "researchlab5", "lvl2", TUNING.PROTOTYPER_TREES.ALCHEMYMACHINE),
-    MakePlacer("common/researchlab5_placer", "researchlab5", "researchlab5", "idle")
+    MakePlacer("researchlab5_placer", "researchlab5", "researchlab5", "idle")

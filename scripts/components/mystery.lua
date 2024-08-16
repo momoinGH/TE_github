@@ -55,10 +55,6 @@ function Mystery:OnSave()
 	return data
 end
 
-function Mystery:IsActionValid(action, right)
-	return self.inst:HasTag("mystery") and action == ACTIONS.INVESTIGATE
-end
-
 function Mystery:Investigate(doer)
 	if self.reward then
 		doer.components.talker:Say(GetString(doer.prefab, "ANNOUNCE_MYSTERY_FOUND"))

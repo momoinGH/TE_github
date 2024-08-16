@@ -56,6 +56,7 @@ local function DoTest(inst)
     end
 end
 
+-- TODO 需要优化，总不能一直刷帧吧
 local CreatureProx = Class(function(self, inst)
     self.inst = inst
     self.near = 2

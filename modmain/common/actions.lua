@@ -1154,3 +1154,20 @@ Constructor.AddAction({ priority = 11, rmb = true, distance = 4, mount_valid = f
         end
     end
 )
+
+-- 剪，支持workable和shearable
+Constructor.AddAction({},
+    "SHEAR",
+    STRINGS.ACTIONS.SHEAR,
+    function(act)
+        if act.target.components.shearable then
+            act.target.components.shearable:Shear(act.doer)
+            return true
+        end
+
+        if act.target.components.workable and act.target.components.workable.action == ACTIONS.SHEAR then
+            act.target.components.workable:WorkedBy(act.doer)
+            return true
+        end
+    end
+)

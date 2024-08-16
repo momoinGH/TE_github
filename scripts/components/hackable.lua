@@ -13,6 +13,7 @@ local function oncanbehacked(self, canbehacked)
 	end
 end
 
+--- TODO 优化掉，改成pickable和hackable的组合
 --- 可以劈砍
 local Hackable = Class(function(self, inst)
 	self.inst = inst
@@ -574,26 +575,6 @@ function Hackable:DropProduct(shear_mult)
 		end
 	end
 	return loot
-end
-
-function Hackable:IsActionValid(action, right)
-	if not self.canbehacked then return false end
-
-	if action == ACTIONS.HAMMER and not right then
-		return false
-	end
-
-	return self.hacksleft > 0 and action == ACTIONS.HACK
-end
-
-function Hackable:CollectSceneActions(doer, actions)
-	if self.canbehacked and self.caninteractwith and not (self.inst.components.burnable and self.inst.components.burnable:IsBurning()) then
-		--Check if a hack tool is available
-		local tool = doer.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-		if (tool and tool.components.tool and tool.components.tool:CanDoAction(ACTIONS.HACK)) then
-			table.insert(actions, ACTIONS.HACK)
-		end
-	end
 end
 
 return Hackable

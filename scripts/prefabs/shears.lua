@@ -8,10 +8,6 @@ local assets =
 local SHEARS_DAMAGE = 34 * .5
 local SHEARS_USES = 20
 
-local function onfinished(inst)
-    inst:Remove()
-end
-
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", "swap_shears", "swap_shears")
     owner.AnimState:Show("ARM_carry")
@@ -23,20 +19,20 @@ local function onunequip(inst, owner)
     owner.AnimState:Show("ARM_normal")
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-    --MakeInventoryFloatable(inst)
     MakeInventoryFloatable(inst, "small", 0.05, { 1.2, 0.75, 1.2 })
 
-    anim:SetBank("shears")
-    anim:SetBuild("shears")
-    anim:PlayAnimation("idle")
+    inst.AnimState:SetBank("shears")
+    inst.AnimState:SetBuild("shears")
+    inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("shears")
 
@@ -52,24 +48,21 @@ local function fn(Sim)
     inst.components.weapon:SetDamage(SHEARS_DAMAGE)
     ---------------------------------------------------------------
     inst:AddComponent("tool")
-    inst.components.tool:SetAction(ACTIONS.HACK, 3)
+    inst.components.tool:SetAction(ACTIONS.SHEAR)
     ---------------------------------------------------------------
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(SHEARS_USES)
     inst.components.finiteuses:SetUses(SHEARS_USES)
-
-    inst.components.finiteuses:SetOnFinished(onfinished)
-    inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 1)
+    inst.components.finiteuses:SetOnFinished(inst.Remove)
     ---------------------------------------------------------------
     inst:AddComponent("equippable")
-
-    inst:AddComponent("inspectable")
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-
-
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
+
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
     return inst
 end

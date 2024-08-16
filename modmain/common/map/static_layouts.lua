@@ -895,13 +895,13 @@ Layouts["lilypadnovograss"] = StaticLayout.Get("map/static_layouts/lilypadnovogr
 				return { "lotus" }
 			else
 				local tipo = math.random(1, 11)
-				if tipo == 1 then return { "grass_tallwater" } end
-				if tipo == 2 then return { "grass_tallwater" } end
-				if tipo == 3 then return { "grass_tallwater" } end
-				if tipo == 4 then return { "grass_tallwater" } end
-				if tipo == 5 then return { "grass_tallwater" } end
-				if tipo == 6 then return { "grass_tallwater" } end
-				if tipo == 7 then return { "grass_tallwater" } end
+				if tipo == 1 then return { "grass_tall" } end
+				if tipo == 2 then return { "grass_tall" } end
+				if tipo == 3 then return { "grass_tall" } end
+				if tipo == 4 then return { "grass_tall" } end
+				if tipo == 5 then return { "grass_tall" } end
+				if tipo == 6 then return { "grass_tall" } end
+				if tipo == 7 then return { "grass_tall" } end
 				if tipo == 8 then return { "watercress_planted" } end
 				if tipo == 9 then return { "watercress_planted" } end
 				if tipo == 10 then return { "watercress_planted" } end

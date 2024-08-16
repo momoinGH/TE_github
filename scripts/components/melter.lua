@@ -221,15 +221,6 @@ function Melter:GetDebugString()
 	return str
 end
 
-function Melter:CollectSceneActions(doer, actions, right)
-	if not self.inst:HasTag("burnt") then
-		if self.done then
-			table.insert(actions, ACTIONS.HARVEST)
-		elseif right and self:CanCook() then
-			table.insert(actions, ACTIONS.COOK)
-		end
-	end
-end
 
 function Melter:IsDone()
 	return self.done

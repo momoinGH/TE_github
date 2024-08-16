@@ -55,4 +55,4 @@ local function makefn()
 end
 
 return Prefab("deed", makefn, assets),
-    MakePlacer("common/deed_placer", "pig_house_sale", "pig_house_sale", "idle", nil, nil, nil, 0.75)
+    MakePlacer("deed_placer", "pig_house_sale", "pig_house_sale", "idle", nil, nil, nil, 0.75)

@@ -219,4 +219,4 @@ local function fn()
 end
 
 return Prefab("playerhouse_city", fn, assets),
-    MakePlacer("common/playerhouse_city_placer", "pig_house_sale", "pig_house_sale", "idle")
+    MakePlacer("playerhouse_city_placer", "pig_house_sale", "pig_house_sale", "idle")

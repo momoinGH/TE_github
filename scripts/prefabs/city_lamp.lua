@@ -226,4 +226,4 @@ local function fn(Sim)
 end
 
 return Prefab("city_lamp", fn, assets),
-    MakePlacer("common/city_lamp_placer", "lamp_post", "lamp_post2_city_build", "idle", nil, nil, nil, nil, nil)
+    MakePlacer("city_lamp_placer", "lamp_post", "lamp_post2_city_build", "idle", nil, nil, nil, nil, nil)

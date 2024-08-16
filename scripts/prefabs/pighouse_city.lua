@@ -706,6 +706,6 @@ return house("pighouse_city", nil, nil),
     house("pighouse_farm", "pig_shop", "pig_farmhouse_build", spawned_farm, "pig_farmhouse.png"),
     house("pighouse_mine", "pig_shop", "pig_farmhouse_build", spawned_mine, "pig_farmhouse.png"),
     house2("pighouse_city2", nil, nil),
-    MakePlacer("common/pighouse_city_placer", "pig_shop", "pig_townhouse1_green_build", "idle", nil, nil, nil, 0.75)
+    MakePlacer("pighouse_city_placer", "pig_shop", "pig_townhouse1_green_build", "idle", nil, nil, nil, 0.75)
 
--- MakePlacer("common/pighouse_placer", "pig_house", "pig_house", "idle")
+-- MakePlacer("pighouse_placer", "pig_house", "pig_house", "idle")

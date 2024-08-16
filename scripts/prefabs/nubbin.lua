@@ -107,4 +107,4 @@ local function fnnubbin(sim)
 end
 
 return Prefab("nubbin", fnnubbin, assets, prefabs),
-    MakePlacer("common/nubbin_placer", "coral_rock", "coral_rock", "low1", false, false, false)
+    MakePlacer("nubbin_placer", "coral_rock", "coral_rock", "low1", false, false, false)

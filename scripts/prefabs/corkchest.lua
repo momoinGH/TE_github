@@ -109,4 +109,4 @@ local function fn(Sim)
 end
 
 return Prefab("corkchest", fn, assets),
-	MakePlacer("common/corkchest_placer", "chest", "treasure_chest_cork", "closed")
+	MakePlacer("corkchest_placer", "chest", "treasure_chest_cork", "closed")

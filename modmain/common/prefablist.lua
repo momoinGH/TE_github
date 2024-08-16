@@ -151,22 +151,7 @@ if TUNING.tropical.hamlet_caves then
     table.insert(PrefabFiles, "pigbandit")
     table.insert(PrefabFiles, "banditmap")
     table.insert(PrefabFiles, "pig_shop")
-    table.insert(PrefabFiles, "pig_shop_produce_interior")
-    table.insert(PrefabFiles, "pig_shop_hoofspa_interior")
-    table.insert(PrefabFiles, "pig_shop_general_interior")
-    table.insert(PrefabFiles, "pig_shop_florist_interior")
-    table.insert(PrefabFiles, "pig_shop_deli_interior")
-    table.insert(PrefabFiles, "pig_shop_academy_interior")
-
-    table.insert(PrefabFiles, "pig_shop_cityhall_interior")
-    table.insert(PrefabFiles, "pig_shop_cityhall_player_interior")
-
-    table.insert(PrefabFiles, "pig_shop_hatshop_interior")
-    table.insert(PrefabFiles, "pig_shop_weapons_interior")
-    table.insert(PrefabFiles, "pig_shop_bank_interior")
-    table.insert(PrefabFiles, "pig_shop_arcane_interior")
-    table.insert(PrefabFiles, "pig_shop_antiquities_interior")
-    table.insert(PrefabFiles, "pig_shop_tinker_interior")
+    
     table.insert(PrefabFiles, "pig_palace_interior")
     table.insert(PrefabFiles, "pig_palace")
 
@@ -226,7 +211,6 @@ then
     table.insert(PrefabFiles, "pheromonestone")
 
     if GetModConfigData("luajit") then
-        table.insert(PrefabFiles, "pig_ruins_maze_old")
     else
         if GetModConfigData("compactruins") then
             table.insert(PrefabFiles, "pig_ruins_mazecompact")
@@ -247,7 +231,6 @@ then
     table.insert(PrefabFiles, "rocksham")
     table.insert(PrefabFiles, "deco_ruins_fountain")
 
-    table.insert(PrefabFiles, "pig_ruins_entrance_interior")
     table.insert(PrefabFiles, "pig_ruins_dart_statue")
     table.insert(PrefabFiles, "pig_ruins_dart")
     table.insert(PrefabFiles, "pig_ruins_creeping_vines")

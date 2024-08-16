@@ -232,4 +232,4 @@ end
 
 return Prefab("teatree_nut", fn, assets, prefabs),
     Prefab("teatree_nut_cooked", cooked, assets),
-    MakePlacer("common/teatree_nut_placer", "teatree_nut", "teatree_nut", "idle_planted")
+    MakePlacer("teatree_nut_placer", "teatree_nut", "teatree_nut", "idle_planted")

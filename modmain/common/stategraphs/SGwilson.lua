@@ -124,3 +124,66 @@ AddStategraphState("wilson", State {
         end
     end,
 })
+
+----------------------------------------------------------------------------------------------------
+AddStategraphState("wilson", State {
+    name = "shear_start",
+    tags = { "preshear", "shearing", "working" },
+    onenter = function(inst)
+        inst.components.locomotor:Stop()
+        inst.AnimState:PlayAnimation("cut_pre")
+    end,
+
+    events =
+    {
+        EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
+        EventHandler("animover", function(inst) inst.sg:GoToState("shear") end),
+    },
+})
+
+AddStategraphState("wilson", State {
+    name = "shear",
+    tags = { "preshear", "shearing", "working" },
+    onenter = function(inst)
+        inst.AnimState:PlayAnimation("cut_loop")
+        inst.AnimState:PushAnimation("cut_pst")
+    end,
+
+    timeline =
+    {
+        TimeEvent(4 * FRAMES, function(inst)
+            inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/harvested/grass_tall/shears")
+            inst:PerformBufferedAction()
+        end),
+
+
+        TimeEvent(9 * FRAMES, function(inst)
+            inst.sg:RemoveStateTag("preshear")
+        end),
+
+        TimeEvent(16 * FRAMES, function(inst)
+            inst.sg:RemoveStateTag("shearing")
+        end),
+    },
+
+    events =
+    {
+        EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
+        EventHandler("animover", function(inst)
+            if inst.AnimState:AnimDone() then
+                inst.sg:GoToState("idle")
+            end
+        end),
+    },
+})
+
+AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.SHEAR, function(inst)
+    if not inst.sg:HasStateTag("preshear") then
+        if inst.sg:HasStateTag("shearing") then
+            return "shear"
+        else
+            return "shear_start"
+        end
+    end
+end))
+----------------------------------------------------------------------------------------------------

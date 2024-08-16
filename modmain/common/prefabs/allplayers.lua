@@ -51,7 +51,6 @@ local function OnDirtyEventCameraStuff(inst) -- this is called on client, if the
         local target = GetClosestInstWithTag("interior_center", inst, 30)
         if target then
             TheCamera.controllable = false
-            print("检查", GetModConfigData("housewallajust"))
             TheCamera.distancetarget = 25 + GetModConfigData("housewallajust")
             TheCamera:SetHeadingTarget(0)
             TheFocalPoint.components.focalpoint:StartFocusSource(inst, "tropical_inroom",
@@ -91,6 +90,7 @@ local function OnDirtyEventCameraStuff(inst) -- this is called on client, if the
         TheCamera.distancetarget = 30  --默认值
         TheCamera:SetHeadingTarget(45) --默认值
         TheFocalPoint.components.focalpoint:StopFocusSource(inst, "tropical_inroom")
+        TheWorld:PushEvent("underwatercaveexit", TheWorld.state.phase)
     end
 end
 

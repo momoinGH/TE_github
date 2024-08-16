@@ -1,59 +1,52 @@
---- 可以拿剪刀剪
+local function oncanshear(self, canshear)
+    if canshear then
+        self.inst:AddTag("shearable")
+    else
+        self.inst:RemoveTag("shearable")
+    end
+end
+
+--- 可以剪
 local Shearable = Class(function(self, inst)
     self.inst = inst
-end)
 
-function Shearable:SetProduct(product, product_amt, drop)
+    self.product = nil   --产物
+    self.product_num = 1 --产物数量
+    self.drop = true     --是直接掉落还是放入物品栏
+    self.canshear = true --是否可以剪
+
+    self.onshear = nil
+end, nil, {
+    canshear = oncanshear
+})
+
+function Shearable:SetProduct(product, product_num, drop)
     self.product = product
-    self.product_amt = product_amt or 2
-    self.drop = drop
-end
-
-function Shearable:Shear(shearer, numworks)
-    if self.inst.components.hackable then
-        numworks = self.inst.components.hackable.hacksleft
-        self.inst.components.hackable:Hack(shearer, numworks, self.product_amt, true)
-    else
-        if self.drop then
-            for i = 1, self.product_amt do
-                local product = SpawnPrefab(self.product)
-                if product then
-                    local pt = Point(self.inst.Transform:GetWorldPosition())
-                    product.Transform:SetPosition(pt.x, pt.y, pt.z)
-                    local angle = math.random() * TWOPI
-                    local speed = math.random()
-                    product.Physics:SetVel(speed * math.cos(angle), GetRandomWithVariance(12, 3), speed * math.sin(angle))
-                end
-            end
-        else
-            if self.product_amt then
-                for i = 1, self.product_amt do
-                    shearer.components.inventory:GiveItem(SpawnPrefab(self.product), nil,
-                        Vector3(TheSim:GetScreenPos(self.inst.Transform:GetWorldPosition())))
-                end
-            end
-        end
-
-        if self.inst.onshear then
-            self.inst.onshear(self.inst, shearer)
-        end
+    self.product_num = product_num or 2
+    if self.drop ~= nil then
+        self.drop = drop
     end
 end
 
-function Shearable:CanShear()
-    if self.inst.components.hackable and self.inst.components.hackable:CanBeHacked() then
-        return self.inst.components.hackable.hacksleft > 0
-    else
-        if self.inst.canshear then
-            return self.inst.canshear(self.inst)
+-- 剪，这里就不考虑工作效率了
+function Shearable:Shear(shearer)
+    if self.product then
+        for _ = 1, self.product_num do
+            local product = SpawnPrefab(self.product)
+            if product.components.inventoryitem then
+                if not self.drop and shearer and shearer.components.inventory then
+                    shearer.components.inventory:GiveItem(product) --如果失败会从玩家身上掉出来
+                else
+                    product.Transform:SetPosition(self.inst.Transform:GetWorldPosition())
+                    product.components.inventoryitem:OnDropped()
+                end
+            end
         end
     end
-end
 
-function Shearable:IsActionValid(action, right)
-    local is_valid = self:CanShear()
-
-    return is_valid
+    if self.onshear then
+        self.onshear(self.inst, shearer)
+    end
 end
 
 return Shearable

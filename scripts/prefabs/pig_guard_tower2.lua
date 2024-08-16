@@ -446,5 +446,5 @@ end
 
 return Prefab("pig_guard_tower2", fn, assets, prefabs),
     Prefab("pig_guard_tower_palace2", palacefn, assets, prefabs),
-    MakePlacer("common/pig_guard_tower_placer2", "pig_shop", "pig_guard_tower_palace2", "idle"),
-    MakePlacer("common/pig_guard_tower_palace_placer2", "pig_shop", "pig_tower_royal_build", "idle")
+    MakePlacer("pig_guard_tower_placer2", "pig_shop", "pig_guard_tower_palace2", "idle"),
+    MakePlacer("pig_guard_tower_palace_placer2", "pig_shop", "pig_tower_royal_build", "idle")

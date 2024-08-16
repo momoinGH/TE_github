@@ -51,4 +51,4 @@ local function fn()
 end
 
 return Prefab("goddess_tori", fn, assets),
-    MakePlacer("common/goddess_tori_placer", "goddess_tori", "goddess_gate", "full")
+    MakePlacer("goddess_tori_placer", "goddess_tori", "goddess_gate", "full")

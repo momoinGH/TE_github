@@ -90,4 +90,4 @@ local function fn(Sim)
 end
 
 return Prefab("waterdrop", fn, assets),
-    MakePlacer("common/waterdrop_placer", "lifeplant", "lifeplant", "idle_loop", nil, nil, nil, 2.5)
+    MakePlacer("waterdrop_placer", "lifeplant", "lifeplant", "idle_loop", nil, nil, nil, 2.5)

@@ -105,4 +105,4 @@ local function fnnubbin(sim)
 end
 
 return Prefab("mussel_bed", fnnubbin, assets, prefabs),
-    MakePlacer("common/mussel_bed_placer", "musselfarm", "musselfarm", "low1", false, false, false)
+    MakePlacer("mussel_bed_placer", "musselfarm", "musselfarm", "low1", false, false, false)
