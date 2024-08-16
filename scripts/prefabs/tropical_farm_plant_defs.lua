@@ -70,17 +70,24 @@ PLANT_DEFS.turnip.moisture                     = {
         .FARM_PLANT_DROUGHT_TOLERANCE
 }
 
-PLANT_DEFS.sweet_potato.good_seasons           = { autumn = true, winter = true, spring = true }
-PLANT_DEFS.aloe.good_seasons                   = { autumn = true, winter = true, spring = true }
-PLANT_DEFS.radish.good_seasons                 = { autumn = true, winter = true, spring = true }
-PLANT_DEFS.wheat.good_seasons                  = { autumn = true, winter = true, spring = true }
-PLANT_DEFS.turnip.good_seasons                 = { autumn = true, winter = true, spring = true }
+PLANT_DEFS.sweet_potato.good_seasons           = { autumn = true,                spring = true, summer = true }
+PLANT_DEFS.aloe.good_seasons                   = { autumn = true,                spring = true, summer = true }
+PLANT_DEFS.radish.good_seasons                 = { autumn = true,                spring = true                }
+PLANT_DEFS.wheat.good_seasons                  = {                winter = true, spring = true                }
+PLANT_DEFS.turnip.good_seasons                 = { autumn = true,                               summer = true }
 
-PLANT_DEFS.sweet_potato.nutrient_consumption   = { M, 0, 0 }
-PLANT_DEFS.aloe.nutrient_consumption           = { M, 0, 0 }
+PLANT_DEFS.sweet_potato.nutrient_consumption   = { 0, 0, M }
+PLANT_DEFS.aloe.nutrient_consumption           = { 0, M, 0 }
 PLANT_DEFS.radish.nutrient_consumption         = { M, 0, 0 }
-PLANT_DEFS.wheat.nutrient_consumption          = { M, 0, 0 }
+PLANT_DEFS.wheat.nutrient_consumption          = { 0, M, 0 }
 PLANT_DEFS.turnip.nutrient_consumption         = { M, 0, 0 }
+
+for _, data in pairs(PLANT_DEFS) do
+    data.nutrient_restoration = {}
+    for i = 1, #data.nutrient_consumption do
+        data.nutrient_restoration[i] = data.nutrient_consumption[i] == 0 or nil
+    end
+end
 
 PLANT_DEFS.sweet_potato.max_killjoys_tolerance = TUNING.FARM_PLANT_KILLJOY_TOLERANCE
 PLANT_DEFS.aloe.max_killjoys_tolerance         = TUNING.FARM_PLANT_KILLJOY_TOLERANCE
