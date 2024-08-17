@@ -42,10 +42,4 @@ function Shopped:LoadPostPass(ents, data)
 	end
 end
 
-function Shopped:CollectSceneActions(doer, actions)
-	if doer.components.shopper and self.inst.components.shopdispenser.item_served then
-		table.insert(actions, ACTIONS.SHOP)
-	end
-end
-
 return Shopped

@@ -300,4 +300,4 @@ local function fn(Sim)
 end
 
 return Prefab("fish_farm", fn, assets, prefabs),
-    MakePlacer("common/fish_farm_placer", "fish_farm", "fish_farm", "idle")
+    MakePlacer("fish_farm_placer", "fish_farm", "fish_farm", "idle")

@@ -6727,7 +6727,7 @@ AddRoom("BG_plains_base", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -6761,7 +6761,7 @@ AddRoom("BG_plains_base_nocanopy", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -6794,7 +6794,7 @@ AddRoom("BG_plains_base_nocanopy1", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
             vampirebatcave_entrance_roc = 1,
             gravestone = 5,
         },
@@ -6830,7 +6830,7 @@ AddRoom("BG_plains_base_nocanopy2", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -6864,7 +6864,7 @@ AddRoom("BG_plains_base_nocanopy3", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -6891,7 +6891,7 @@ AddRoom("plains_tallgrass", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -6915,7 +6915,7 @@ AddRoom("plains_ruins", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -6939,7 +6939,7 @@ AddRoom("plains_ruins_set", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -7953,7 +7953,7 @@ AddRoom("MAINBG_plains_base", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -7987,7 +7987,7 @@ AddRoom("MAINBG_plains_base_nocanopy", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -8020,7 +8020,7 @@ AddRoom("MAINBG_plains_base_nocanopy1", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
             vampirebatcave_entrance_roc = 1,
             gravestone = 5,
         },
@@ -8056,7 +8056,7 @@ AddRoom("MAINBG_plains_base_nocanopy2", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -8090,7 +8090,7 @@ AddRoom("MAINBG_plains_base_nocanopy3", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -8117,7 +8117,7 @@ AddRoom("MAINplains_tallgrass", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -8141,7 +8141,7 @@ AddRoom("MAINplains_ruins", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })
@@ -8165,7 +8165,7 @@ AddRoom("MAINplains_ruins_set", {
         countprefabs =
         {
             grass_tall_patch = 2,
-            grass_tall_infested = 1,
+            grass_tall = 1,
         },
     }
 })

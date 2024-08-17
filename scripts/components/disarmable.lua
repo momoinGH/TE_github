@@ -26,10 +26,4 @@ function Disarmable:DoRearming(inst, doer)
 	end
 end
 
-function Disarmable:CollectSceneActions(doer, actions)
-	if not self.armed and self.rearmable then
-		table.insert(actions, ACTIONS.REARM)
-	end
-end
-
 return Disarmable

@@ -458,4 +458,4 @@ return Prefab("octopuschest", fn1, assets),
 	Prefab("common/lavarenachest", fn3, assets),
 	Prefab("common/roottrunk", fn4, assets),
 	Prefab("common/roottrunk_child", fn5, assets),
-	MakePlacer("common/roottrunk_child_placer", "roottrunk", "treasure_chest_roottrunk", "closed")
+	MakePlacer("roottrunk_child_placer", "roottrunk", "treasure_chest_roottrunk", "closed")

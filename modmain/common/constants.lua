@@ -29,3 +29,25 @@ Utils.FnDecorator(GLOBAL, "PlayFootstep", function(inst)
     local boat = inst:GetCurrentPlatform()
     return nil, boat and boat:HasTag("shipwrecked_boat") --海难小船时不播放走路音效
 end)
+
+--- 掉落一个物品，ReplacePrefab的强化
+GLOBAL.TropicalDropItem = function(inst, item, isremove)
+    local product
+    if isremove then
+        product = ReplacePrefab(inst, item)
+    else
+        product = SpawnPrefab(item)
+        product.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    end
+
+    if product.components.inventoryitem then
+        product.components.inventoryitem:OnDropped()
+    end
+end
+
+
+GLOBAL.AddComponentIfNot = function(inst, name)
+    if not inst.components[name] then
+        inst:AddComponent(name)
+    end
+end

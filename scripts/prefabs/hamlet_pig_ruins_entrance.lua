@@ -69,6 +69,7 @@ local function GetDoorProp(room, dir, exit, width, depth)
     end
 
     local name
+    -- local opposite_dir = InteriorSpawnerUtils.GetOppositeFromDirection(dir)
     if room.aporkalypseclock then
         --日晷房间的门
         name = "pig_ruins_" .. dir.label .. "_door"
@@ -397,7 +398,14 @@ local function mazemaker(inst, dungeondef)
 
     local width = 24
     local depth = 16
-    for _, room in ipairs(rooms) do
+    local inc = 0
+    for id, room in ipairs(rooms) do
+        local addprops = room.addprops
+        if not addprops then
+            addprops = {}
+            room.addprops = addprops
+        end
+
         room.size = InteriorSpawnerUtils.ROOM_SIZE.MEDIUM
 
         if dungeondef.deepruins and math.random() < 0.3 then
@@ -405,7 +413,6 @@ local function mazemaker(inst, dungeondef)
         else
             room.color = ""
         end
-        local addprops = {}
         local nopressureplates = false
         if exitNumbers(room) == 1 or math.random() < 0.3 then
             -- all rooms with 1 exit get creatures, randomly add creatures otherwise
@@ -1409,33 +1416,43 @@ local function mazemaker(inst, dungeondef)
 
         -- 门
         for dir, exit in pairs(room.exits) do
-            if dir ~= InteriorSpawnerUtils.GetNorth() or (not room.entrance1 and not room.entrance2) then
-                local opposite_dir = InteriorSpawnerUtils.GetOppositeFromDirection(dir)
-                local doorprop = GetDoorProp(room, opposite_dir, exit, width, depth)
+            local opposite_dir = InteriorSpawnerUtils.GetOppositeFromDirection(dir)
+            local doorprop = GetDoorProp(room, dir, exit, width, depth)
 
-                -- 把隔壁门也一起生成
-                local opposite_room = rooms[exit.target_room]
+            -- 把隔壁门也一起生成
+            local opposite_room = rooms[exit.target_room]
+            local opposite_exit = opposite_room.exits[opposite_dir]
+            local doorprop2 = GetDoorProp(opposite_room, opposite_dir, opposite_exit, width, depth)
+            opposite_room.exits[opposite_dir] = nil --不再处理
 
-                local opposite_exit = opposite_room.exits[opposite_dir]
-                local doorprop2 = GetDoorProp(opposite_room, dir, opposite_exit, width, depth)
-                opposite_room.exits[opposite_dir] = nil --不再处理
-
-                doorprop.key = #addprops + 1
-                doorprop2.key = #addprops + 2
-                doorprop.target_door = doorprop2.key
-                doorprop2.target_door = doorprop.key
-
-                table.insert(addprops, doorprop)
-                table.insert(addprops, doorprop2)
-            end
+            doorprop.key = inc
+            inc = inc + 1
+            doorprop2.key = inc
+            inc = inc + 1
+            doorprop.target_door = doorprop2.key
+            doorprop2.target_door = doorprop.key
+            -- print("房间" .. id .. "生成" .. dir.label .. "门", doorprop.key, doorprop2.key)
+            table.insert(addprops, doorprop)
+            opposite_room.addprops = opposite_room.addprops or {}
+            table.insert(opposite_room.addprops, doorprop2)
         end
-
-        room.addprops = addprops
     end
 
     local doors = InteriorSpawnerUtils.CreateRooms(rooms)
     inst.components.teleporter:Target(doors.entrance1)
     doors.entrance1.components.teleporter:Target(inst)
+
+    if doors.entrance2 then
+        for _, v in ipairs(TheWorld.pig_ruins_exits) do
+            if v:IsValid()
+                and v.dungeonname == inst.dungeonname
+                and not v.components.teleporter:GetTarget()
+            then
+                doors.entrance2.components.teleporter:Target(v)
+                v.components.teleporter:Target(doors.entrance2)
+            end
+        end
+    end
 end
 local function getstatus(inst)
     if inst:HasTag("burnt") then
@@ -1614,6 +1631,11 @@ local function makefn(build_interiors, dungeonname)
             inst.stage = 0
             inst.components.hackable.canbehacked = false
             RefreshVineAnim(inst)
+
+            if not build_interiors then
+                -- 出口
+                table.insert(TheWorld.pig_ruins_exits, inst)
+            end
         end
 
         MakeSnowCovered(inst, .01)

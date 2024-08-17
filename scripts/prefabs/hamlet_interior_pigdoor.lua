@@ -4,6 +4,7 @@ local assets = {
     Asset("ANIM", "anim/pig_shop_doormats.zip"),
     Asset("ANIM", "anim/pig_ruins_door.zip"),
     Asset("ANIM", "anim/pig_ruins_door_blue.zip"),
+    Asset("ANIM", "anim/interior_wall_decals_ruins_cracks.zip"),
 }
 
 local function opendoor(inst)
@@ -26,53 +27,38 @@ local function closedoor(inst)
     inst.components.teleporter.enabled = false
 end
 
-local function revealcima(inst)
-    inst:AddTag("explodida")
+local function OnFinishd(inst, worker)
     inst:RemoveTag("NOCLICK")
     inst.AnimState:PlayAnimation(inst.door_orientation .. "_open")
     inst.AnimState:PushAnimation(inst.door_orientation)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/music/secret_found")
+    inst.components.teleporter:SetEnabled(true)
 
     local targetDoor = inst.components.teleporter.targetTeleporter
-    if targetDoor and not targetDoor:HasTag("explodida") and targetDoor.components.workable then --不能循环了
-        targetDoor.components.workable:Destroy()
-    end
-end
-
-local function Init(inst)
-    if inst:HasTag("explodida") then
-        inst.AnimState:PlayAnimation("north")
-    else
-        inst:AddTag("NOCLICK")
-
-        inst:AddComponent("workable")
-        inst.components.workable:SetWorkLeft(1)
-        inst.components.workable:SetOnFinishCallback(revealcima)
-
-        inst:AddComponent("health")
-        inst.components.health:SetMaxHealth(1)
-        inst.components.health.nofadeout = true
-        inst.components.health.vulnerabletoheatdamage = false
-        inst.components.health.canmurder = false
-        inst.components.health.canheal = false
-
-        inst:ListenForEvent("death", revealcima)
+    if targetDoor
+        and not inst.components.teleporter:GetEnabled()
+        and targetDoor.components.workable
+    then
+        targetDoor.components.workable:Destroy(worker)
     end
 end
 
 local function OnSave(inst, data)
-
+    data.exploded = inst.components.teleporter:GetEnabled()
 end
 
 local function OnLoad(inst, data)
-
+    if data.exploded then
+        inst.components.teleporter:SetEnabled(true)
+        inst.AnimState:PlayAnimation("north")
+    end
 end
 
 local function common(bank, build, anim, door_orientation, vine, exploitable)
     local inst = InteriorSpawnerUtils.MakeBaseDoor(bank, build, anim, true, true, "pig_ruins_exit_int.png")
 
     if exploitable then
-        inst:AddTag("escondida")
+        inst:AddTag("NOCLICK")
     end
 
     if not TheWorld.ismastersim then
@@ -82,13 +68,19 @@ local function common(bank, build, anim, door_orientation, vine, exploitable)
     inst.door_orientation = door_orientation
 
     if exploitable then
-        inst:DoTaskInTime(0, Init)
+        inst.components.teleporter:SetEnabled(false)
+
+        inst:AddComponent("workable")
+        inst.components.workable:SetWorkLeft(1)
+        inst.components.workable:SetOnFinishCallback(OnFinishd)
     else
         inst:ListenForEvent("open", opendoor)
         inst:ListenForEvent("close", closedoor)
     end
 
     if vine then
+        -- TODO 当剪掉以后，OnSave没保存
+        inst.components.teleporter:SetEnabled(false)
         inst:AddComponent("vineable")
         inst.components.vineable:InitInteriorPrefab()
         inst.components.vineable:SetUpVine()

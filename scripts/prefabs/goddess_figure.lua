@@ -51,4 +51,4 @@ local function fn()
 end
 
 return Prefab("goddess_figure", fn, assets),
-    MakePlacer("common/goddess_figure_placer", "goddess_statue", "goddess_statue", "idle")
+    MakePlacer("goddess_figure_placer", "goddess_statue", "goddess_statue", "idle")

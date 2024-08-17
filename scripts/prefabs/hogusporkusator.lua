@@ -200,4 +200,4 @@ local function createmachine(level, name, soundprefix, sounddelay, techtree, mer
 end
 
 return createmachine(4, "hogusporkusator", "lvl4", 0, TUNING.PROTOTYPER_TREES.PRESTIHATITATOR, false, spawnpigs),
-    MakePlacer("common/hogusporkusator_placer", "hogusporkusator", "hogusporkusator", "idle")
+    MakePlacer("hogusporkusator_placer", "hogusporkusator", "hogusporkusator", "idle")

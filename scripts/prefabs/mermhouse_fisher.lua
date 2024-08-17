@@ -275,5 +275,5 @@ local function fn1()
 end
 return Prefab("mermfishhouse", fn, assets, prefabs),
     Prefab("mermfishhouse_crafted", fn1, assets, prefabs),
-    MakePlacer("common/mermfishhouse_crafted_placer", "merm_fisherman_house", "merm_fisherman_house", "idle", false,
+    MakePlacer("mermfishhouse_crafted_placer", "merm_fisherman_house", "merm_fisherman_house", "idle", false,
         false, false)

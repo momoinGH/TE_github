@@ -212,4 +212,4 @@ local function fn(Sim)
 end
 
 return Prefab("ballphinhouse", fn, assets, prefabs),
-    MakePlacer("common/ballphinhouse_placer", "ballphin_house", "ballphin_house", "idle", false, false, false)
+    MakePlacer("ballphinhouse_placer", "ballphin_house", "ballphin_house", "idle", false, false, false)

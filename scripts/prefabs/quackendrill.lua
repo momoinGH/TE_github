@@ -86,4 +86,4 @@ local function fn(Sim)
 end
 
 return Prefab("quackendrill", fn, assets, prefabs),
-	MakePlacer("common/quackendrill_placer", "quacken_drill", "quacken_drill", "placer")
+	MakePlacer("quackendrill_placer", "quacken_drill", "quacken_drill", "placer")

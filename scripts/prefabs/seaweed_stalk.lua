@@ -102,4 +102,4 @@ local function fnseaweed(sim)
 end
 
 return Prefab("seaweed_stalk", fnseaweed, assets, prefabs),
-    MakePlacer("common/seaweed_stalk_placer", "seaweed_seed", "seaweed_seed", "idle_plant", false, false, false)
+    MakePlacer("seaweed_stalk_placer", "seaweed_seed", "seaweed_seed", "idle_plant", false, false, false)

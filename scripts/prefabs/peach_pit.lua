@@ -79,4 +79,4 @@ local function fn(Sim)
 end
 
 return Prefab("peach_pit", fn, Assets),
-	MakePlacer("common/peach_pit_placer", "peach_pit", "peach", "picked")
+	MakePlacer("peach_pit_placer", "peach_pit", "peach", "picked")

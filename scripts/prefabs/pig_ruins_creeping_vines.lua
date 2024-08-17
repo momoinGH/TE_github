@@ -100,7 +100,7 @@ local function setup(inst)
     blockdoor(inst)
 
     if inst.door_orientation ~= "south" then
-        inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+        -- inst.AnimState:SetLayer(LAYER_WORLD)
         inst.AnimState:SetSortOrder(3)
     end
 
@@ -162,9 +162,8 @@ local function makewallfn(facing)
         inst.entity:AddNetwork()
         inst.entity:AddSoundEmitter()
 
-        inst.Transform:SetRotation(-90)
         --        inst.AnimState:SetOrientation(ANIM_ORIENTATION.RotatingBillboard)
-        inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+        -- inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
         inst.AnimState:SetSortOrder(3)
 
         inst.door_orientation = facing

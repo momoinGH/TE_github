@@ -13,8 +13,8 @@ local prefabs =
 }
 
 SetSharedLootTable('primeapebarrel', {
-    { 'poop',        1.0 },
-    { 'poop',        1.0 },
+    { 'poop', 1.0 },
+    { 'poop', 1.0 },
     { 'cave_banana', 1.0 },
     { 'cave_banana', 1.0 },
     --    {'trinket_4',   .01},
@@ -235,4 +235,4 @@ end
 
 return Prefab("primeapebarrel", fn, assets, prefabs),
     Prefab("primeapebarrel_plus", fn1, assets, prefabs),
-    MakePlacer("common/primeapebarrel_placer", "barrel_tropical", "monkey_barrel_tropical", "idle")
+    MakePlacer("primeapebarrel_placer", "barrel_tropical", "monkey_barrel_tropical", "idle")

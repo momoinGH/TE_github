@@ -72,4 +72,4 @@ local function fn(Sim)
 end
 
 return Prefab("gem_seeds", fn, Assets),
-	MakePlacer("common/gem_seeds_placer", "plant_normal", "plant_gem", "picked")
+	MakePlacer("gem_seeds_placer", "plant_normal", "plant_gem", "picked")

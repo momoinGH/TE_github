@@ -15,12 +15,8 @@ modimport "modmain/common/components/playeractionpicker"
 
 modimport "modmain/common/prefabs/oceanfishdef"
 modimport "modmain/common/prefabs/allplayers"
+modimport "modmain/common/prefabs/world"
 
-local function AddComponent(inst, name)
-    if not inst.components[name] then
-        inst:AddComponent(name)
-    end
-end
 
 -- TODO 可以换个写法吗？
 local function AoeSpellCastSpellBefore(self)
@@ -297,14 +293,6 @@ end)
 
 
 
-----------------------------------------------------------------------------------------------------
-
-AddPrefabPostInit("world", function(inst)
-    if not TheWorld.ismastersim then return end
-
-    AddComponent(inst, "bigfooter")
-end)
-
 AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then return end
 
@@ -420,7 +408,7 @@ end)
 AddPrefabPostInit("ash", function(inst)
     if not TheWorld.ismastersim then return end
 
-    AddComponent(inst, "fertilizer")
+    AddComponentIfNot(inst, "fertilizer")
 end)
 
 ----------------------------------------------------------------------------------------------------
@@ -479,7 +467,7 @@ for _, v in ipairs({
     AddPrefabPostInit(v, function(inst)
         if not TheWorld.ismastersim then return end
 
-        AddComponent(inst, "tradable")
+        AddComponentIfNot(inst, "tradable")
     end)
 end
 

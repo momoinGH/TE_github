@@ -227,4 +227,4 @@ local function fn(Sim)
 end
 
 return Prefab("city_lamp2", fn, assets),
-    MakePlacer("common/city_lamp_placer", "lamp_post", "lamp_post2_yotp_build", "idle")
+    MakePlacer("city_lamp_placer", "lamp_post", "lamp_post2_yotp_build", "idle")

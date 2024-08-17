@@ -106,10 +106,5 @@ function Dislodgeable:Dislodge(dislodger)
     end
 end
 
-function Dislodgeable:CollectSceneActions(doer, actions)
-    if self.canbedislodged and self.caninteractwith and doer.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) and doer.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS):HasTag("dislodger") then
-        table.insert(actions, ACTIONS.DISLODGE)
-    end
-end
 
 return Dislodgeable

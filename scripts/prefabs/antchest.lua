@@ -330,4 +330,4 @@ local function fn1()
 end
 
 return Prefab("antchest", fn, assets), Prefab("honeychest", fn1, assets),
-    MakePlacer("common/honeychest_placer", "ant_chest", "ant_chest", "closed", nil, nil, nil, nil, nil, nil, hide_ground)
+    MakePlacer("honeychest_placer", "ant_chest", "ant_chest", "closed", nil, nil, nil, nil, nil, nil, hide_ground)

@@ -5,6 +5,8 @@ AddComponentAction("USEITEM", "inventoryitem", function(inst, doer, target, acti
         end
     end
 end)
+
+-- TODO 优化掉
 AddComponentAction("SCENE", "hackable", function(inst, doer, actions, right)
     local equipamento = doer.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
     if not right then
@@ -30,16 +32,10 @@ AddComponentAction("SCENE", "melter", function(inst, doer, actions, right)
     end
 end)
 
-
--- TODO 用的不是hackable劈砍组件？
 AddComponentAction("SCENE", "workable", function(inst, doer, actions, right)
     if right and doer:HasTag("ironlord") then
         if inst:HasTag("tree") then
             table.insert(actions, ACTIONS.CHOP)
-        end
-
-        if inst:HasTag("hackable") then
-            table.insert(actions, ACTIONS.HACK)
         end
 
         if inst:HasTag("boulder") then
@@ -304,7 +300,6 @@ AddComponentAction("USEITEM", "milker", function(inst, doer, target, actions)
     end
 end)
 
-
 AddComponentAction("SCENE", "store", function(inst, doer, actions)
     table.insert(actions, ACTIONS.STOREOPEN)
 end)
@@ -329,5 +324,39 @@ AddComponentAction("SCENE", "shipwreckedboat", function(inst, doer, actions, rig
     then
         -- 海难小船登船
         table.insert(actions, ACTIONS.BOATMOUNT)
+    end
+end)
+
+local function UseTool(inst, doer, target, actions)
+    if target:HasTag("INLIMBO") then return end
+
+    if inst:HasTag("shear_tool") and target:HasTag("shearable") then
+        -- 剪
+        table.insert(actions, ACTIONS.SHEAR)
+        return true
+    elseif inst:HasTag("hack_tool") and target:HasTag("hackable") then
+        --砍伐
+        table.insert(actions, ACTIONS.HACK)
+        return true
+    end
+
+    return false
+end
+
+AddComponentAction("USEITEM", "tool", function(inst, doer, target, actions)
+    if UseTool(inst, doer, target, actions) then
+        return
+    end
+end)
+
+AddComponentAction("EQUIPPED", "tool", function(inst, doer, target, actions, right)
+    if UseTool(inst, doer, target, actions) then
+        return
+    end
+end)
+
+AddComponentAction("USEITEM", "extrafillable", function(inst, doer, target, actions)
+    if target:HasTag("goddess_fountain") then
+        table.insert(actions, ACTIONS.FILLED)
     end
 end)

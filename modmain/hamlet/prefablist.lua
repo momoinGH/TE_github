@@ -4,9 +4,8 @@ PrefabFiles = {
     "hamlet_interior_antdoor",
     "hamlet_interior_pigdoor",
     "hamlet_interior_housedoor",
-    "pig_ruins_entrance_interior",
     "hamlet_pig_ruins_entrance",
-
+    "hamlet_interior_shopdoor",
 
 
 
@@ -121,20 +120,6 @@ PrefabFiles = {
     "pigbandit",
     "banditmap",
     "pig_shop",
-    "pig_shop_produce_interior",
-    "pig_shop_hoofspa_interior",
-    "pig_shop_general_interior",
-    "pig_shop_florist_interior",
-    "pig_shop_deli_interior",
-    "pig_shop_academy_interior",
-    "pig_shop_cityhall_interior",
-    "pig_shop_cityhall_player_interior",
-    "pig_shop_hatshop_interior",
-    "pig_shop_weapons_interior",
-    "pig_shop_bank_interior",
-    "pig_shop_arcane_interior",
-    "pig_shop_antiquities_interior",
-    "pig_shop_tinker_interior",
     "pig_palace_interior",
     "pig_palace",
     "pigman_shopkeeper_desk",
@@ -290,7 +275,6 @@ PrefabFiles = {
 
 
 if GetModConfigData("luajit") then
-    table.insert(PrefabFiles, "pig_ruins_maze_old")
 else
     if GetModConfigData("compactruins") then
         table.insert(PrefabFiles, "pig_ruins_mazecompact")

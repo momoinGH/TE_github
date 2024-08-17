@@ -309,6 +309,10 @@ local function OnDoorHaunt(inst, haunter)
     inst.components.teleporter:Activate(haunter)
 end
 
+local function StartTravelSound(inst)
+    inst.SoundEmitter:PlaySound(inst.usesounds)
+end
+
 --- 虚空门的基础代码
 --- trader和hauntable用于传送物品，teleporter用来传送玩家
 --- teleporter加在所有门上，可以关联传送目的地和判断房间是否已经创建；entitytracker加载虚空内的门上，保存当前所在房间的中心点
@@ -318,7 +322,7 @@ end
 ---@param trader boolean|nil 是否可用于传送物品、交易
 ---@param interior_door boolean|nil 是否是虚空内部的生成的门，如果是则表示需要记录中心点对象
 ---@param minimap string|nil 小地图图标
-function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap)
+function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, usesounds)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -376,6 +380,11 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap)
 
     if interior_door then
         inst:AddComponent("entitytracker")
+    end
+
+    if usesounds then
+        inst.usesounds = usesounds
+        inst:ListenForEvent("starttravelsound", StartTravelSound)
     end
 
     return inst
@@ -524,10 +533,12 @@ local newRoom = {
                 scale = { -1, 1 },             --支持函数、表
                 isloopplay = false,            --是否循环播放
                 isdelayset = false,            --加载时是否进入游戏再设置
-            }
+            },
         }
     },
 }
+
+local INC = 0
 
 ---创建房间
 ---@param room table 房间配置表
@@ -552,7 +563,7 @@ function FN.CreateRoom(room)
     FN.SpawnWall(x, z, room.size)
 
     --生产内部物品
-    for id, data in ipairs(room.addprops) do
+    for _, data in ipairs(room.addprops) do
         local p = SpawnPrefab(data.name)
 
         p.Transform:SetPosition(x + (data.x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))
@@ -560,7 +571,8 @@ function FN.CreateRoom(room)
         if p:HasTag("interior_door") then
             assert(p.components.entitytracker, "只要是虚空房间里的门都应该有这个组件，用来记录自己所在房间的中心点")
             p.components.entitytracker:TrackEntity("interior_center", center)
-            local key = data.key or id
+            local key = data.key or INC
+            INC = INC + 1 --只要每次创建房间时唯一就行
             doors[key] = p
             door_map[key] = data.target_door
         end
@@ -597,7 +609,7 @@ function FN.CreateRooms(rooms)
     -- 关联门
     for key, door in pairs(doors) do
         local target_door = door_map[key] and doors[door_map[key]]
-        print("构造门", key, door_map[key], door, target_door)
+        print("构造门", key, door_map[key], door, target_door, door:GetPosition())
         if target_door then
             door.components.teleporter:Target(target_door)
             target_door.components.teleporter:Target(door)

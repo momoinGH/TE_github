@@ -14,12 +14,12 @@ local function OnActivate(inst, doer)
 
         --Sounds are triggered in player's stategraph
     elseif inst.SoundEmitter ~= nil then
-        inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
+        inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_open")
     end
 end
 
 local function StartTravelSound(inst, doer)
-    inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
+    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_open")
 end
 
 local function OnHaunt(inst, haunter)

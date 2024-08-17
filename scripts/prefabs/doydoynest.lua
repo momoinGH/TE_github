@@ -148,4 +148,4 @@ local function fn(Sim)
 end
 
 return Prefab("doydoynest", fn, assets, prefabs),
-	MakePlacer("common/objects/doydoynest_placer", "doydoy_nest_2", "doydoy_nest_2", "idle_nest")
+	MakePlacer("objects/doydoynest_placer", "doydoy_nest_2", "doydoy_nest_2", "idle_nest")

@@ -211,4 +211,4 @@ local function createmachine(level, name, soundprefix, sounddelay, techtree, mer
 end
 
 return createmachine(4, "piratihatitator", "lvl4", 0, TUNING.PROTOTYPER_TREES.PRESTIHATITATOR, false, spawnparrots),
-    MakePlacer("common/piratihatitator_placer", "piratihatitator", "piratihatitator", "idle")
+    MakePlacer("piratihatitator_placer", "piratihatitator", "piratihatitator", "idle")

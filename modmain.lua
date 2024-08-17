@@ -29,7 +29,6 @@ local function Modimport(dirc)
 	SafeModImport("modmain/" .. dirc .. "/ui")                --UI相关
 	SafeModImport("modmain/" .. dirc .. "/prefabpost")        --组件、预制件的修改
 	SafeModImport("modmain/" .. dirc .. "/actions")           --action相关
-	SafeModImport("modmain/" .. dirc .. "/componentactions")  --组件行为相关
 	SafeModImport("modmain/" .. dirc .. "/sg")                --Stategraph相关
 	SafeModImport("modmain/" .. dirc .. "/recipes")           --配方相关
 	SafeModImport("modmain/" .. dirc .. "/rpc")               --RPC的注册
@@ -97,8 +96,7 @@ GLOBAL.WIKI_DATA = nil
 
 ----------------------------------------------------------------------------------------------------
 
-
-
+modimport "modmain/componentactions" --AddComponentAction比较特殊，如果mod的分开写就会前后覆盖
 modimport "scripts/prefabs/tropical_farm_plant_defs"
 
 AddMinimap()

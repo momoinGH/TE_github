@@ -15,6 +15,18 @@ local function OnPlayerNear(inst, doer)
     end)
 end
 
+local function OnSave(inst, data)
+    data.room_size = inst.room_size:value() ~= 0 and inst.room_size:value() or nil
+end
+
+local function OnLoad(inst, data)
+    if not data then return end
+
+    if data.room_size then
+        inst.room_size:set(data.room_size)
+    end
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -43,6 +55,9 @@ local function fn()
     inst.components.playerprox:SetDist(dis, dis)
     inst.components.playerprox:SetOnPlayerNear(OnPlayerNear)
     inst.components.playerprox:SetOnPlayerFar(OnPlayerFar)
+
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
 
     return inst
 end

@@ -86,12 +86,4 @@ function SentientBall:MakeConversation()
 	end
 end
 
-function SentientBall:CollectSceneActions(doer, actions)
-	if self.inst.components.burnable and self.inst.components.burnable:IsBurning() then
-		table.insert(actions, ACTIONS.MANUALEXTINGUISH)
-	elseif self.inst.components.burnable and self.inst.components.burnable:IsSmoldering() then
-		table.insert(actions, ACTIONS.SMOTHER)
-	end
-end
-
 return SentientBall

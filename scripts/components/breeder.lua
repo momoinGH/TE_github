@@ -266,12 +266,6 @@ function Breeder:Seed(item)
     return true
 end
 
-function Breeder:CollectSceneActions(doer, actions)
-    if self.volume > 0 and doer.components.inventory then
-        table.insert(actions, ACTIONS.RETRIEVE)
-    end
-end
-
 function Breeder:Harvest(harvester)
     self.inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_small")
     self.inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/fish_farm/harvest")
