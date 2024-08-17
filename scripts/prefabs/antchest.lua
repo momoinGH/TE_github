@@ -196,6 +196,38 @@ local function ChangeAntChestSymbol(inst) -- 切换通道
     -- inst.MiniMapEntity:SetIcon(prefix .. (buildIdx > 0 and "_" .. buildName[buildIdx] or "") .. ".png") -- "antchest_honey.png" etc.
 end
 
+local function stopConvert(inst, owner)
+    if owner == nil or owner.prefab ~= "antchest" or owner.prefab ~= "honeychest" then
+        if inst._convertTask_tro then
+            inst._convertTask_tro:Cancel()
+        end
+        inst:RemoveEventCallback("onputininventory", stopConvert)
+        inst:RemoveEventCallback("ondropped", stopConvert)
+    end
+end
+
+local function itemget(inst, data) -- 转化花粉花蜜
+    ChangeAntChestSymbol(inst)
+    local convertInfo = { nectar_pod = { time = 48, prod = "honey" }, pollen_item = { time = 48 * 3, prod = "royal_jelly" } }
+    if convertInfo[data.item.prefab] then
+        data.item:ListenForEvent("onputininventory", stopConvert)
+        data.item:ListenForEvent("ondropped", stopConvert)
+        if data.item._convertTask_tro then
+            data.item._convertTask_tro:Cancel()
+        end
+        data.item._convertTask_tro = data.item:DoTaskInTime(convertInfo[data.item.prefab].time, function()
+            if data.item.components.inventoryitem:GetGrandOwner() == inst then
+                local size = data.item.components.stackable and data.item.components.stackable:StackSize() or 1
+                data.item:Remove()
+                local prod = SpawnPrefab(convertInfo[data.item.prefab].prod)
+                prod.components.stackable:SetStackSize(size)
+                inst.components.container:GiveItem(prod)
+                inst.AnimState:PlayAnimation("close")
+            end
+        end)
+    end
+end
+
 local function hide_ground(inst) -- 隐藏建造的岩石通道
     inst.AnimState:HideSymbol("ground01")
 end
@@ -216,7 +248,7 @@ local function ArtificialPostInit(inst) -- 建造后装配
     end
 end
 
-local function Common(icon, bank, build)
+local function Common(name)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -226,10 +258,10 @@ local function Common(icon, bank, build)
     inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
 
-    inst.MiniMapEntity:SetIcon(icon)
+    inst.MiniMapEntity:SetIcon(name .. ".png")
 
-    inst.AnimState:SetBank(bank)
-    inst.AnimState:SetBuild(build)
+    inst.AnimState:SetBank("ant_chest")
+    inst.AnimState:SetBuild("ant_chest")
     inst.AnimState:PlayAnimation("closed", true)
 
     inst:AddTag("structure")
@@ -262,7 +294,7 @@ local function Common(icon, bank, build)
 
     MakeSmallPropagator(inst)
 
-    inst:ListenForEvent("itemget", ChangeAntChestSymbol)
+    inst:ListenForEvent("itemget", itemget)
     inst:ListenForEvent("itemlose", ChangeAntChestSymbol)
     inst:ListenForEvent("onbuilt", ArtificialPostInit)
 
@@ -273,7 +305,7 @@ local function Common(icon, bank, build)
 end
 
 local function fn()
-    local inst = Common("ant_chest.png", "ant_chest", "ant_chest")
+    local inst = Common("ant_chest")
 
     if not TheWorld.ismastersim then
         return inst
@@ -286,7 +318,7 @@ local function fn()
 end
 
 local function fn1()
-    local inst = Common("honey_chest.png", "ant_chest", "ant_chest")
+    local inst = Common("honey_chest")
 
     if not TheWorld.ismastersim then
         return inst
