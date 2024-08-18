@@ -100,9 +100,7 @@ local function entrance()
 		y = 0
 		z = TheWorld.components.contador:GetZ()
 
-		inst.exit = SpawnPrefab("house_city_exit_door")
-		inst.exit.initData = { anim = "idle_general" }
-		InteriorSpawnerUtils.InitHouseInteriorPrefab(inst.exit, inst.exit.initData)
+		inst.exit = SpawnPrefab("city_exit_old_door")
 		inst.exit.Transform:SetPosition(x + 5.2, 0, z + 0.5)
 
 		---------------------------cria a parede inicio------------------------------------------------------------------	

@@ -9,23 +9,31 @@ local SaveAnim = Class(function(self, inst)
     self.scale = nil
     self.isloopplay = nil
     self.isdelayset = nil
+    self.rotation = nil
 
     self.onSet = nil
 end)
 
 function SaveAnim:ReSet()
     local inst = self.inst
-    if self.bank then
-        inst.AnimState:SetBank(FunctionOrValue(self.bank, self.inst))
+    if inst.AnimState then
+        if self.bank then
+            inst.AnimState:SetBank(FunctionOrValue(self.bank, self.inst))
+        end
+        if self.build then
+            inst.AnimState:SetBuild(FunctionOrValue(self.build, self.inst))
+        end
+        if self.anim then
+            inst.AnimState:PlayAnimation(FunctionOrValue(self.anim, self.inst), self.isloopplay)
+        end
+        if self.scale then
+            inst.AnimState:SetScale(unpack(FunctionOrValue(self.scale, self.inst)))
+        end
     end
-    if self.build then
-        inst.AnimState:SetBuild(FunctionOrValue(self.build, self.inst))
-    end
-    if self.anim then
-        inst.AnimState:PlayAnimation(FunctionOrValue(self.anim, self.inst), self.isloopplay)
-    end
-    if self.scale then
-        inst.AnimState:SetScale(unpack(FunctionOrValue(self.scale, self.inst)))
+    if inst.Transform then
+        if self.rotation then
+            inst.Transform:SetRotation(FunctionOrValue(self.rotation, self.inst))
+        end
     end
 
     if self.onSet then
@@ -34,13 +42,14 @@ function SaveAnim:ReSet()
 end
 
 --- 初始化
-function SaveAnim:Init(bank, build, anim, scale, isloopplay, isdelayset, onSet)
+function SaveAnim:Init(bank, build, anim, scale, isloopplay, isdelayset, rotation, onSet)
     self.bank = bank
     self.build = build
     self.anim = anim
     self.scale = scale
     self.isloopplay = isloopplay
     self.isdelayset = isdelayset
+    self.rotation = rotation
     self.onSet = onSet
     self:ReSet()
 end
@@ -53,6 +62,7 @@ function SaveAnim:OnSave()
         scale = self.scale,
         isloopplay = self.isloopplay,
         isdelayset = self.isdelayset,
+        rotation = self.rotation
     }
 end
 
@@ -65,6 +75,7 @@ function SaveAnim:OnLoad(data)
     self.scale = data.scale
     self.isloopplay = data.isloopplay
     self.isdelayset = data.isdelayset
+    self.rotation = data.rotation
 
     if self.isdelayset then
         self.inst:DoTaskInTime(0, function() self:ReSet() end)

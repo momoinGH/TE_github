@@ -1,14 +1,9 @@
 PrefabFiles = {
     "hamlet_interior_wall",
     "hamlet_interior_floor",
-    "hamlet_interior_antdoor",
-    "hamlet_interior_pigdoor",
     "hamlet_interior_housedoor",
     "hamlet_pig_ruins_entrance",
-    "hamlet_interior_shopdoor",
-
-
-
+    "hamlet_interior_door",
 
 
 
@@ -24,9 +19,6 @@ PrefabFiles = {
     "grass_tall",
     "deep_jungle_fern_noise",
     "vampirebatcave",
-    "vampirebatcave_interior",
-    "roc_cave_entrance",
-    "roc_cave_interior",
     "seataro_planted",
     "cork",
     "corkbat",
@@ -120,7 +112,6 @@ PrefabFiles = {
     "pigbandit",
     "banditmap",
     "pig_shop",
-    "pig_palace_interior",
     "pig_palace",
     "pigman_shopkeeper_desk",
     "shop_pedestals",
@@ -167,7 +158,6 @@ PrefabFiles = {
     "laser",
     "iron",
     "pheromonestone",
-    "anthill_interior",
     "anthill_lamp",
     "anthill_stalactite",
     "antchest",
@@ -263,22 +253,4 @@ PrefabFiles = {
     "deco_beam",
     "deco_lamp",
     "deco_placers",
-
-
-
-
-
-
-
-
 }
-
-
-if GetModConfigData("luajit") then
-else
-    if GetModConfigData("compactruins") then
-        table.insert(PrefabFiles, "pig_ruins_mazecompact")
-    else
-        table.insert(PrefabFiles, "pig_ruins_maze")
-    end
-end

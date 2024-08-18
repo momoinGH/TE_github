@@ -1,29 +1,36 @@
 local InteriorSpawnerUtils = require("interiorspawnerutils")
 
 local function OnPlayerFar(inst, doer)
-    doer.mynetvarCameraMode:set(0)
+    doer:DoTaskInTime(0.5, function(doer)
+        doer.tropical_room_event:push()
+    end)
 end
 
 local function OnPlayerNear(inst, doer)
-    doer:DoTaskInTime(0.5, function(doer) --从一个房间跳到另一个房间，有可能出现先靠近再远离的调用顺序，这里延迟一下设置摄像机
-        local center = GetClosestInstWithTag("interior_center", doer, 30)
-        if center then
-            local val = InteriorSpawnerUtils.GetRoomSizeById(inst.room_size:value()) == InteriorSpawnerUtils.ROOM_SIZE.MEDIUM and 5
-                or 4
-            doer.mynetvarCameraMode:set(val)
-        end
+    -- doer:DoTaskInTime(0.5, function(doer) --从一个房间跳到另一个房间，有可能出现先靠近再远离的调用顺序，这里延迟一下设置摄像机
+    --     local center = GetClosestInstWithTag("interior_center", doer, 30)
+    --     if center then
+    --         doer.tropical_room_event:push()
+    --     end
+    -- end)
+    doer:DoTaskInTime(0.5, function(doer)
+        doer.tropical_room_event:push()
     end)
 end
 
 local function OnSave(inst, data)
-    data.room_size = inst.room_size:value() ~= 0 and inst.room_size:value() or nil
+    data.room_width = inst.room_width:value() ~= 0 and inst.room_width:value() or nil
+    data.room_depth = inst.room_depth:value() ~= 0 and inst.room_depth:value() or nil
 end
 
 local function OnLoad(inst, data)
     if not data then return end
 
-    if data.room_size then
-        inst.room_size:set(data.room_size)
+    if data.room_width then
+        inst.room_width:set(data.room_width)
+    end
+    if data.room_depth then
+        inst.room_depth:set(data.room_depth)
     end
 end
 
@@ -36,7 +43,9 @@ local function fn()
     inst:AddTag("interior_center")
     inst:AddTag("NOBLOCK")
 
-    inst.room_size = net_tinybyte(inst.GUID, "interior_center.room_size") --房间的大小，影响摄像机的缩放
+    --房间的大小，影响摄像机的缩放
+    inst.room_width = net_smallbyte(inst.GUID, "interior_center.room_width")
+    inst.room_depth = net_smallbyte(inst.GUID, "interior_center.room_depth")
 
     inst.entity:SetPristine()
 

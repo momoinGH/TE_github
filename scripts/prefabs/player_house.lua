@@ -38,27 +38,22 @@ end
 
 local room = {
     addprops = {
-        {
-            name = "house_city_exit_door",
-            x_offset = 4.7,
-            animdata = { anim = "idle_old", background = true },
-            key = "exit",
-        },
-        { name = "interior_wall_wood", x_offset = -2.8, },
+        { name = "city_exit_old_door", x_offset = 4.7, key = "exit", },
+        { name = "interior_wall_wood", x_offset = -2.8 },
+        { name = "interior_floor_wood", x_offset = -2.4 },
         { name = "deco_roomglow" },
         { name = "shelves_cinderblocks", x_offset = -4.5, z_offset = -15 / 3.5 + 0.7, init = AddCraftTag },
         { name = "deco_antiquities_wallfish", x_offset = -5, z_offset = 3.9, init = AddCraftTag },
         { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = -15 / 2, },
-        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = 15 / 2, animdata = { scale = { -1, 1 } } },
+        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = 15 / 2, scale = { -1, 1 } },
         { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = -15 / 2 - 0.3, },
-        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = 15 / 2 + 0.3, animdata = { scale = { -1, 1 } } },
+        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = 15 / 2 + 0.3, scale = { -1, 1 } },
         { name = "swinging_light_rope_1", x_offset = -2, y_offset = 1, init = AddCraftTag },
         { name = "charcoal", x_offset = -3, z_offset = -2 },
         { name = "charcoal", x_offset = 2, z_offset = 3 },
 
         -- { name = "window_round_curtains_nails_backwall",  z_offset = 15 / 2, init = AddCraftTag, children = { "window_round_light" } },
-        { name = "window_round_backwall", z_offset = 15 / 2, animdata = { scale = { -1, 1 }, bank = "interior_window_side" }, init = AddCraftTag },
-        { name = "playerhouse_city_floor", x_offset = -2.4 },
+        { name = "window_round", z_offset = 15 / 2, scale = { -1, 1 }, init = AddCraftTag },
         { name = "wallrenovation", x_offset = -2.5, z_offset = -5 },
         { name = "wallrenovation", x_offset = -2.5 },
         { name = "wallrenovation", x_offset = -2.5, z_offset = 5 },
@@ -79,9 +74,7 @@ local function onbuilt(inst)
     center:AddTag("playercrafted")
 end
 
-local function OnRemove(inst)
-    InteriorSpawnerUtils.OnHouseDestroy(inst, nil, true)
-end
+
 
 local function OnSave(inst, data)
     if inst:HasTag("burnt") or inst:HasTag("fire") then
@@ -213,7 +206,6 @@ local function fn()
     inst.OnLoad = OnLoad
 
     inst:ListenForEvent("onbuilt", onbuilt)
-    inst:ListenForEvent("onremove", OnRemove)
 
     return inst
 end

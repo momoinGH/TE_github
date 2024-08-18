@@ -99,7 +99,7 @@ local function GetDoorProp(room, dir, exit, width, depth)
         name = name,
         x_offset = x_offset,
         z_offset = z_offset,
-        animdata = { build = build, }
+        build = build
     }
 end
 
@@ -400,6 +400,9 @@ local function mazemaker(inst, dungeondef)
     local depth = 16
     local inc = 0
     for id, room in ipairs(rooms) do
+        room.width = 24
+        room.depth = 16
+
         local addprops = room.addprops
         if not addprops then
             addprops = {}
@@ -812,20 +815,20 @@ local function mazemaker(inst, dungeondef)
             table.insert(addprops,
                 { name = "deco_ruins_cornerbeam" .. room.color, x_offset = -depth / 2, z_offset = -width / 2 })
             table.insert(addprops,
-                { name = "deco_ruins_cornerbeam" .. room.color, x_offset = -depth / 2, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
+                { name = "deco_ruins_cornerbeam" .. room.color, x_offset = -depth / 2, z_offset = width / 2, scale = { -1, 1 } })
             table.insert(addprops,
                 { name = "deco_ruins_cornerbeam" .. room.color, x_offset = depth / 2, z_offset = -width / 2 })
             table.insert(addprops,
-                { name = "deco_ruins_cornerbeam" .. room.color, x_offset = depth / 2, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
+                { name = "deco_ruins_cornerbeam" .. room.color, x_offset = depth / 2, z_offset = width / 2, scale = { -1, 1 } })
         else
             table.insert(addprops,
                 { name = "deco_ruins_cornerbeam_heavy" .. room.color, x_offset = -depth / 2, z_offset = -width / 2 })
             table.insert(addprops,
-                { name = "deco_ruins_cornerbeam_heavy" .. room.color, x_offset = -depth / 2, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
+                { name = "deco_ruins_cornerbeam_heavy" .. room.color, x_offset = -depth / 2, z_offset = width / 2, scale = { -1, 1 } })
             table.insert(addprops,
                 { name = "deco_ruins_beam_heavy" .. room.color, x_offset = depth / 2, z_offset = -width / 2 })
             table.insert(addprops,
-                { name = "deco_ruins_beam_heavy" .. room.color, x_offset = depth / 2, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
+                { name = "deco_ruins_beam_heavy" .. room.color, x_offset = depth / 2, z_offset = width / 2, scale = { -1, 1 } })
         end
         local prop = math.random() < 0.2 and ("deco_ruins_beam_broken" .. room.color) or ("deco_ruins_beam" .. room.color)
         table.insert(addprops, { name = prop, x_offset = -depth / 2, z_offset = -width / 6 })
@@ -1330,16 +1333,16 @@ local function mazemaker(inst, dungeondef)
                         name = "pig_ruins_torch_sidewall" .. room.color,
                         x_offset = -depth / 3 - 0.5,
                         z_offset = width / 2,
-                        animdata = { scale = { -1, 1 } }
+                        scale = { -1, 1 }
                     })
                     if eastexitopen then
-                        table.insert(addprops, { name = "pig_ruins_torch_sidewall" .. room.color, x_offset = 0 - 0.5, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
+                        table.insert(addprops, { name = "pig_ruins_torch_sidewall" .. room.color, x_offset = 0 - 0.5, z_offset = width / 2, scale = { -1, 1 } })
                     end
                     table.insert(addprops, {
                         name = "pig_ruins_torch_sidewall" .. room.color,
                         x_offset = depth / 3 - 0.5,
                         z_offset = width / 2,
-                        animdata = { scale = { -1, 1 } }
+                        scale = { -1, 1 }
                     })
                 end
             end
@@ -1389,7 +1392,7 @@ local function mazemaker(inst, dungeondef)
         if math.random() < 0.1 and roomtype ~= "lightfires" and roomtype ~= "speartraps!" then
             if math.random() < 0.5 then
                 table.insert(addprops,
-                    { name = "deco_ruins_corner_tree", x_offset = -depth / 2, z_offset = width / 2, animdata = { scale = { -1, 1 } } })
+                    { name = "deco_ruins_corner_tree", x_offset = -depth / 2, z_offset = width / 2, scale = { -1, 1 } })
             else
                 table.insert(addprops,
                     { name = "deco_ruins_corner_tree", x_offset = -depth / 2, z_offset = -width / 2, })
@@ -1408,10 +1411,10 @@ local function mazemaker(inst, dungeondef)
         -- 地板和墙壁
         if room.color == "_blue" then
             table.insert(addprops, { name = "interior_floor_ground_ruins_slab_blue", x_offset = -5.5 })
-            table.insert(addprops, { name = "interior_wall_pig_ruins_blue", x_offset = -2, animdata = { scale = { 3.7, 3.7 } } })
+            table.insert(addprops, { name = "interior_wall_pig_ruins_blue", x_offset = -2, scale = { 3.7, 3.7 } })
         else
             table.insert(addprops, { name = "interior_floor_ground_ruins_slab", x_offset = -5.5 })
-            table.insert(addprops, { name = "interior_wall_pig_ruins", x_offset = -2, animdata = { scale = { 3.7, 3.7 } } })
+            table.insert(addprops, { name = "interior_wall_pig_ruins", x_offset = -2, scale = { 3.7, 3.7 } })
         end
 
         -- 门

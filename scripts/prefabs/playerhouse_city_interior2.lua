@@ -243,7 +243,7 @@ local function entrance()
 		y = 0
 		z = TheWorld.components.contador:GetZ()
 
-		inst.exit = SpawnPrefab("house_city_exit_door")
+		inst.exit = SpawnPrefab("city_exit_old_door")
 		inst.exit.Transform:SetPosition(x + 5.2, 0, z + 0.5)
 		---------------------------cria a parede inicio------------------------------------------------------------------	
 		local tipodemuro = "wall_invisible"
@@ -381,7 +381,7 @@ local function entrance()
 			end
 		end
 		------------------------portoes trancados--------------------------------
-		local part = SpawnPrefab("playerhouse_city_floor")
+		local part = SpawnPrefab("interior_floor_wood")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 2.4, 0, z)
 			if part.components.health ~= nil then
@@ -461,14 +461,14 @@ end
 ----------------------------------------------------------entrada-----------------------------------------------------------------------------
 local function OnDoneTeleporting(inst, obj)
 	if obj and obj:HasTag("player") then
-		obj.mynetvarCameraMode:set(4)
+		obj.tropical_room_event:push()
 	end
 end
 
 local function OnActivate(inst, doer)
 	if doer:HasTag("player") then
 		ProfileStatsSet("wormhole_used", true)
-		doer.mynetvarCameraMode:set(6)
+		doer.tropical_room_event:push()
 		local other = inst.components.teleporter.targetTeleporter
 		if other ~= nil then
 			DeleteCloseEntsWithTag("WORM_DANGER", other, 15)

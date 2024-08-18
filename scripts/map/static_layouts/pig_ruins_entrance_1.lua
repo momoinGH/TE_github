@@ -74,7 +74,7 @@ return {
       objects = {
         {
           name = "",
-          type = "maze_pig_ruins_entrance",
+          type = "pig_ruins_entrance",
           shape = "rectangle",
           x = 192,
           y = 127,

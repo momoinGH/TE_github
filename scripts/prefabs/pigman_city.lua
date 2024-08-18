@@ -1,9 +1,3 @@
-require "brains/citypigbrain"
-require "brains/pigguardbrain"
-require "brains/werepigbrain"
-require "stategraphs/SGpig_city"
-require "stategraphs/SGwerepig"
-
 local total_day_time = 480
 local seg_time = 30
 local PIG_DAMAGE = 33
@@ -725,17 +719,16 @@ end
 local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab)
     local function make_common()
         local inst = CreateEntity()
-        local trans = inst.entity:AddTransform()
-        local anim = inst.entity:AddAnimState()
-        local sound = inst.entity:AddSoundEmitter()
-        local shadow = inst.entity:AddDynamicShadow()
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
+        inst.entity:AddSoundEmitter()
+        inst.entity:AddDynamicShadow()
+        inst.entity:AddLightWatcher()
         inst.entity:AddNetwork()
 
-        shadow:SetSize(1.5, .75)
+        inst.DynamicShadow:SetSize(1.5, .75)
 
         inst.Transform:SetFourFaced()
-
-        inst.entity:AddLightWatcher()
 
         inst:AddComponent("talker")
         inst.components.talker.ontalk = ontalk
@@ -747,20 +740,14 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
 
         inst.sayline = sayline
 
-        --inst.components.talker.colour = Vector3(133/255, 140/255, 167/255)
-
         MakeCharacterPhysics(inst, 50, .5)
 
-        --        MakePoisonableCharacter(inst)
-
+        inst:AddTag("only_interior") --虚空房子内单位，不会出来
         inst:AddTag("character")
         inst:AddTag("pig")
         inst:AddTag("civilized")
         inst:AddTag("scarytoprey")
-
         inst:AddTag("city_pig")
-
-
 
         if tags then
             for i, tag in ipairs(tags) do
@@ -768,13 +755,13 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
             end
         end
 
-        anim:SetBank("townspig")
-        anim:SetBuild(build)
+        inst.AnimState:SetBank("townspig")
+        inst.AnimState:SetBuild(build)
 
-        anim:PlayAnimation("idle_loop", true)
-        anim:Hide("hat")
-        anim:Hide("desk")
-        anim:Hide("ARM_carry")
+        inst.AnimState:PlayAnimation("idle_loop", true)
+        inst.AnimState:Hide("hat")
+        inst.AnimState:Hide("desk")
+        inst.AnimState:Hide("ARM_carry")
         inst.daily_gift = 0
 
         inst.entity:SetPristine()
@@ -1454,7 +1441,7 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
 end
 
 local function makepigman(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab)
-    return Prefab("" .. name, makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab),
+    return Prefab(name, makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab),
         assets, prefabs)
 end
 

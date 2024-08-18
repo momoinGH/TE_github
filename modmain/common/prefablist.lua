@@ -151,9 +151,6 @@ if TUNING.tropical.hamlet_caves then
     table.insert(PrefabFiles, "pigbandit")
     table.insert(PrefabFiles, "banditmap")
     table.insert(PrefabFiles, "pig_shop")
-    
-    table.insert(PrefabFiles, "pig_palace_interior")
-    table.insert(PrefabFiles, "pig_palace")
 
     table.insert(PrefabFiles, "pigman_shopkeeper_desk")
     table.insert(PrefabFiles, "shop_pedestals")
@@ -210,16 +207,6 @@ then
     table.insert(PrefabFiles, "iron")
     table.insert(PrefabFiles, "pheromonestone")
 
-    if GetModConfigData("luajit") then
-    else
-        if GetModConfigData("compactruins") then
-            table.insert(PrefabFiles, "pig_ruins_mazecompact")
-        else
-            table.insert(PrefabFiles, "pig_ruins_maze")
-        end
-    end
-
-    table.insert(PrefabFiles, "anthill_interior")
     table.insert(PrefabFiles, "anthill_lamp")
     table.insert(PrefabFiles, "anthill_stalactite")
     table.insert(PrefabFiles, "antchest")

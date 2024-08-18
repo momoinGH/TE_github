@@ -382,8 +382,6 @@ local function amphibiousfn(Sim)
 	return inst
 end
 
-return --Prefab("monsters/snake", commonfn, assets, prefabs),
---	   Prefab("snake_poison", poisonfn, assets, prefabs),
---	   Prefab("snake_fire", firefn, assets, prefabs),
+return 
 	Prefab("monsters/snake_amphibious", amphibiousfn, assets, prefabs)
--- Prefab("deadsnake", fndefault, assets, prefabs),
+

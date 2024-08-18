@@ -1,25 +1,17 @@
+local InteriorSpawnerUtils = require("interiorspawnerutils")
+
 local assets =
 {
     Asset("ANIM", "anim/vamp_bat_entrance.zip"),
+    Asset("SOUND", "sound/hound.fsb"),
+    Asset("MINIMAP_IMAGE", "vamp_bat_cave"),
 }
 
 local prefabs =
 {
+    "vampirebat",
     "cave_fern",
 }
-
-
-local function onsave(inst, data)
-    if inst:HasTag("spawned_cave") then
-        data.spawned_cave = true
-    end
-end
-
-local function onload(inst, data)
-    if data and data.spawned_cave then
-        inst:AddTag("spawned_cave")
-    end
-end
 
 
 local function getlocationoutofcenter(dist, hole, random, invert)
@@ -30,87 +22,123 @@ local function getlocationoutofcenter(dist, hole, random, invert)
     return pos
 end
 
---------------------------------------do teleporter------------------------
-local function OnDoneTeleporting(inst, obj)
-    if obj and obj:HasTag("player") then
-        obj.mynetvarCameraMode:set(0)
+local function creatInterior(inst)
+    if inst.components.teleporter:GetTarget() then return end
+
+    local depth = 18
+    local width = 26
+    local addprops = {
+        { name = "interior_floor_batcave", x_offset = -5.5 },
+        { name = "interior_wall_batcave_wall_rock", x_offset = -4, scale = { 4.4, 4.4 } },
+        { name = "vamp_bat_cave_exit_door", x_offset = -depth / 2, key = "exit" },
+        { name = "deco_cave_cornerbeam", x_offset = -depth / 2, z_offset = -width / 2 },
+        { name = "deco_cave_cornerbeam", x_offset = -depth / 2, z_offset = width / 2, scale = { -1, 1 } },
+        { name = "deco_cave_pillar_side", x_offset = depth / 2, z_offset = -width / 2 },
+        { name = "deco_cave_pillar_side", x_offset = depth / 2, z_offset = width / 2, scale = { -1, 1 } },
+        { name = "deco_cave_bat_burrow" },
+    }
+    for i = 1, math.random(1, 3) do
+        table.insert(addprops, { name = "deco_cave_ceiling_trim", x_offset = -depth / 2, z_offset = getlocationoutofcenter(width * 0.6, 3, true) })
     end
-end
 
-local function StartTravelSound(inst, doer)
-    inst.SoundEmitter:PlaySound("dontstarve/common/teleportworm/swallow")
-    doer:PushEvent("wormholetravel", WORMHOLETYPE.WORM) --Event for playing local travel sound
-end
+    table.insert(addprops, { name = "deco_cave_floor_trim_front", x_offset = depth / 2, z_offset = -width / 4 })
+    table.insert(addprops, { name = "deco_cave_floor_trim_front", x_offset = depth / 2, addtags = { "roc_cave_delete_me" }, roc_cave_delete_me = true })
+    table.insert(addprops, { name = "deco_cave_floor_trim_front", x_offset = depth / 2, z_offset = width / 4, })
 
-local function OnActivateByOther(inst, source, doer)
-    --	if not inst.sg:HasStateTag("open") then
-    --		inst.sg:GoToState("opening")
-    --	end
-    if doer ~= nil and doer.Physics ~= nil then
-        doer.Physics:CollidesWith(COLLISION.WORLD)
+    if math.random() < 0.7 then
+        table.insert(addprops, { name = "deco_cave_floor_trim_2", x_offset = (math.random() * depth * 0.5) - depth / 2 * 0.5, z_offset = -width / 2, })
     end
-end
+    if math.random() < 0.7 then
+        table.insert(addprops, { name = "deco_cave_floor_trim_2", x_offset = (math.random() * depth * 0.5) - depth / 2 * 0.5, z_offset = width / 2, scale = { -1, 1 } })
+    end
 
-local function OnActivate(inst, doer)
-    if doer:HasTag("player") then
-        ProfileStatsSet("wormhole_used", true)
-        doer.mynetvarCameraMode:set(1)
-        local other = inst.components.teleporter.targetTeleporter
-        if other ~= nil then
-            DeleteCloseEntsWithTag("WORM_DANGER", other, 15)
+    if math.random() < 0.7 then
+        table.insert(addprops, { name = "deco_cave_ceiling_trim_2", x_offset = (math.random() * depth * 0.5) - depth / 2 * 0.5, z_offset = -width / 2, })
+    end
+    if math.random() < 0.7 then
+        table.insert(addprops, { name = "deco_cave_ceiling_trim_2", x_offset = (math.random() * depth * 0.5) - depth / 2 * 0.5, z_offset = width / 2, scale = { -1, 1 } })
+    end
+
+    if math.random() < 0.5 then
+        table.insert(addprops,
+            { name = "deco_cave_beam_room", x_offset = (math.random() * depth * 0.65) - depth / 2 * 0.65, z_offset = getlocationoutofcenter(width * 0.65, 7, false, true), })
+    end
+    if math.random() < 0.5 then
+        table.insert(addprops, { name = "deco_cave_beam_room", x_offset = (math.random() * depth * 0.65) - depth / 2 * 0.65, z_offset = getlocationoutofcenter(width * 0.65, 7), })
+    end
+
+    table.insert(addprops, { name = "flint", x_offset = getlocationoutofcenter(depth * 0.65, 3, true), z_offset = getlocationoutofcenter(width * 0.65, 3, true) })
+    if math.random() < 0.5 then
+        table.insert(addprops, { name = "flint", x_offset = getlocationoutofcenter(depth * 0.65, 3, true), z_offset = getlocationoutofcenter(width * 0.65, 3, true) })
+    end
+
+    table.insert(addprops, { name = "stalagmite", x_offset = getlocationoutofcenter(depth * 0.65, 4, true), z_offset = getlocationoutofcenter(width * 0.65, 4, true) })
+    if math.random() < 0.5 then
+        if math.random() < 0.5 then
+            table.insert(addprops, { name = "stalagmite", x_offset = getlocationoutofcenter(depth * 0.65, 4, true), z_offset = getlocationoutofcenter(width * 0.65, 4, true) })
+        else
+            table.insert(addprops, { name = "stalagmite_tall", x_offset = getlocationoutofcenter(depth * 0.65, 4, true), z_offset = getlocationoutofcenter(width * 0.65, 4, true) })
         end
-
-        --Sounds are triggered in player's stategraph
-    elseif inst.SoundEmitter ~= nil then
-        inst.SoundEmitter:PlaySound("dontstarve/common/teleportworm/swallow")
     end
+    if math.random() < 0.5 then
+        table.insert(addprops, { name = "stalagmite_tall", x_offset = getlocationoutofcenter(depth * 0.65, 3, true), z_offset = getlocationoutofcenter(width * 0.65, 3, true) })
+    end
+
+    if math.random() < 0.5 then
+        table.insert(addprops, { name = "deco_cave_stalactite", x_offset = (math.random() * depth * 0.5) - depth * 0.5 / 2, z_offset = getlocationoutofcenter(width, 6, true) })
+    end
+    if math.random() < 0.5 then
+        table.insert(addprops, { name = "deco_cave_stalactite", x_offset = (math.random() * depth * 0.5) - depth * 0.5 / 2, z_offset = getlocationoutofcenter(width, 6, true) })
+    end
+    if math.random() < 0.5 then
+        table.insert(addprops, { name = "deco_cave_stalactite", x_offset = (math.random() * depth * 0.5) - depth * 0.5 / 2, z_offset = getlocationoutofcenter(width, 6, true) })
+    end
+    if math.random() < 0.5 then
+        table.insert(addprops, { name = "deco_cave_stalactite", x_offset = (math.random() * depth * 0.5) - depth * 0.5 / 2, z_offset = getlocationoutofcenter(width, 6, true) })
+    end
+
+    for i = 1, math.random(2, 5) do
+        table.insert(addprops, { name = "cave_fern", x_offset = getlocationoutofcenter(depth * 0.7, 3, true), z_offset = getlocationoutofcenter(width * 0.7, 3, true) })
+    end
+
+    for i = 1, math.random(0, 2) do
+        table.insert(addprops, { name = "blue_mushroom", x_offset = getlocationoutofcenter(depth * 0.8, 3, true), z_offset = getlocationoutofcenter(width * 0.8, 3, true) })
+    end
+    for i = 1, math.random(0, 2) do
+        table.insert(addprops, { name = "red_mushroom", x_offset = getlocationoutofcenter(depth * 0.8, 3, true), z_offset = getlocationoutofcenter(width * 0.8, 3, true) })
+    end
+    for i = 1, math.random(0, 2) do
+        table.insert(addprops, { name = "green_mushroom", x_offset = getlocationoutofcenter(depth * 0.8, 3, true), z_offset = getlocationoutofcenter(width * 0.8, 3, true) })
+    end
+
+    local room = {
+        width = width,
+        depth = depth,
+        addprops = addprops
+    }
+
+    local doors = InteriorSpawnerUtils.CreateRoom(room)
+    inst.components.teleporter:Target(doors.exit)
+    doors.exit.components.teleporter:Target(inst)
 end
 
-local function fn(Sim)
-    local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
-
-    inst.entity:AddSoundEmitter()
+local function fn()
+    local inst = InteriorSpawnerUtils.MakeBaseDoor("vampbat_den", "vamp_bat_entrance", "idle", false, false, "vamp_bat_cave.png")
 
     MakeObstaclePhysics(inst, .5)
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("vamp_bat_cave.png")
-
-    anim:SetBank("vampbat_den")
-    anim:SetBuild("vamp_bat_entrance")
-    anim:PlayAnimation("idle")
-
-    --inst:AddTag("structure")
     inst:AddTag("houndmound")
     inst:AddTag("batcave")
-
-
-    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
-    inst:AddComponent("teleporter")
-    inst.components.teleporter.onActivate = OnActivate
-    inst.components.teleporter.onActivateByOther = OnActivateByOther
-    inst.components.teleporter.offset = 0
-    inst.components.teleporter.hamlet = true
-    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-    inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
+    inst:DoTaskInTime(0, creatInterior)
 
-    inst.OnSave = onsave
-    inst.OnLoad = onload
-
-    ---------------------
-    inst:AddComponent("inspectable")
     MakeSnowCovered(inst)
 
     return inst
 end
 
-return Prefab("vampirebatcave", fn, assets, prefabs),
-    Prefab("vampirebatcave_entrance_roc", fn, assets, prefabs)
+return Prefab("vampirebatcave", fn, assets, prefabs)

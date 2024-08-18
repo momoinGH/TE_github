@@ -1,8 +1,14 @@
+local InteriorSpawnerUtils = require("interiorspawnerutils")
+
 local assets =
 {
     Asset("ANIM", "anim/palace.zip"),
     Asset("ANIM", "anim/pig_shop_doormats.zip"),
     Asset("ANIM", "anim/palace_door.zip"),
+    Asset("ANIM", "anim/interior_wall_decals_palace.zip"),
+    Asset("MINIMAP_IMAGE", "pig_palace"),
+    Asset("MINIMAP_IMAGE", "pig_shop_florist"),
+    Asset("SOUND", "sound/pig.fsb"),
 }
 
 local prefabs =
@@ -10,7 +16,7 @@ local prefabs =
     "trinket_giftshop_1",
     "trinket_giftshop_3",
     "trinket_giftshop_4",
-    "grounded_wilba"
+    "city_hammer",
 }
 
 local function LightsOn(inst)
@@ -148,20 +154,14 @@ local function onhit(inst, worker)
     end
 end
 
-local function OnDay(inst)
-    --print(inst, "OnDay")
-    if not inst:HasTag("burnt") then
-        if inst.components.spawner:IsOccupied() then
-            LightsOff(inst)
+local function OnIsDay(inst, isday)
+    if isday and not inst:HasTag("burnt") and inst.components.spawner:IsOccupied() then
+        LightsOff(inst)
 
-            if inst.doortask then
-                inst.doortask:Cancel()
-                inst.doortask = nil
-            end
-
-            inst.doortask = inst:DoTaskInTime(1 + math.random() * 2,
-                function() inst.components.spawner:ReleaseChild() end)
+        if inst.doortask then
+            inst.doortask:Cancel()
         end
+        inst.doortask = inst:DoTaskInTime(1 + math.random() * 2, function() inst.components.spawner:ReleaseChild() end)
     end
 end
 
@@ -174,169 +174,203 @@ local function onsave(inst, data)
     if inst:HasTag("burnt") or inst:HasTag("fire") then
         data.burnt = true
     end
-
-    if inst:HasTag("spawned_shop") then
-        data.spawned_shop = true
-    end
 end
 
 local function onload(inst, data)
     if data and data.burnt then
         inst.components.burnable.onburnt(inst)
     end
+end
 
-    if data and data.spawned_shop then
-        inst:AddTag("spawned_shop")
+local rooms = { {
+    width    = 26,
+    depth    = 18,
+    addprops = {
+        { name = "interior_floor_marble_royal", x_offset = -5.5 },
+        { name = "interior_wall_rope", x_offset = -5, scale = { 5.2, 5.2 } },
+        { name = "interior_palace_south_door", x_offset = 9, key = "exit" },
+        { name = "deco_roomglow_large", },
+        { name = "interior_palace_west_door", key = "door1a", target_door = "door1b", z_offset = -26 / 2, scale = { -1, 1 }, },
+        { name = "deco_palace_beam_room_tall_corner", x_offset = -18 / 2, z_offset = -26 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall_corner", x_offset = -18 / 2, z_offset = 26 / 2, },
+        { name = "deco_palace_beam_room_tall_corner_front", x_offset = 18 / 2, z_offset = -26 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall_corner_front", x_offset = 18 / 2, z_offset = 26 / 2, },
+        { name = "deco_palace_beam_room_tall", x_offset = -18 / 2, z_offset = -26 / 6 - 1, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall", x_offset = -18 / 2, z_offset = 26 / 6 + 1, },
+        { name = "deco_palace_beam_room_tall_lights", x_offset = -18 / 6, z_offset = -26 / 6 - 1, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall_lights", x_offset = -18 / 6, z_offset = 26 / 6 + 1, },
+        { name = "deco_palace_beam_room_tall_lights", x_offset = 18 / 6, z_offset = -26 / 6 - 1, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall_lights", x_offset = 18 / 6, z_offset = 26 / 6 + 1, },
+        { name = "deco_palace_banner_big_front", x_offset = -18 / 6, z_offset = -26 / 3 - 0.5, },
+        { name = "deco_palace_banner_big_front", x_offset = -18 / 6, z_offset = 26 / 3 + 0.5, },
+        { name = "deco_palace_banner_big_front", x_offset = 18 / 6, z_offset = -26 / 3 - 0.5, },
+        { name = "deco_palace_banner_big_front", x_offset = 18 / 6, z_offset = 26 / 3 + 0.5, },
+        { name = "deco_palace_banner_small_front", x_offset = -18 / 2, z_offset = -26 / 18 - 3, },
+        { name = "deco_palace_banner_small_front", x_offset = -18 / 2, z_offset = 26 / 18 + 3, },
+        { name = "deco_palace_banner_small_front", x_offset = -18 / 2, z_offset = -26 / 18 - 26 / 3, },
+        { name = "deco_palace_banner_small_front", x_offset = -18 / 2, z_offset = 26 / 18 - 26 / 3, },
+        { name = "deco_palace_banner_small_sidewall", x_offset = -18 / 14, z_offset = -26 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_banner_small_sidewall", x_offset = -18 / 14, z_offset = 26 / 2, },
+        { name = "deco_palace_banner_small_sidewall", x_offset = 18 / 14, z_offset = -26 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_banner_small_sidewall", x_offset = 18 / 14, z_offset = 26 / 2, },
+        { name = "deco_palace_banner_small_sidewall", x_offset = -18 / 14 * 3, z_offset = -26 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_banner_small_sidewall", x_offset = -18 / 14 * 3, z_offset = 26 / 2, },
+        { name = "deco_palace_banner_small_sidewall", x_offset = 18 / 14 * 3, z_offset = -26 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_banner_small_sidewall", x_offset = 18 / 14 * 3, z_offset = 26 / 2, },
+        { name = "deco_palace_banner_small_sidewall", x_offset = -18 / 14 * 5, z_offset = -26 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_banner_small_sidewall", x_offset = -18 / 14 * 5, z_offset = 26 / 2, },
+        { name = "deco_palace_banner_small_sidewall", x_offset = 18 / 14 * 5, z_offset = -26 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_banner_small_sidewall", x_offset = 18 / 14 * 5, z_offset = 26 / 2, },
+        { name = "deco_palace_beam_room_tall_corner", x_offset = -18 / 6, z_offset = -26 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall_corner", x_offset = 18 / 6, z_offset = -26 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall_corner", x_offset = -18 / 6, z_offset = 26 / 2, },
+        { name = "deco_palace_beam_room_tall_corner", x_offset = 18 / 6, z_offset = 26 / 2, },
+        { name = "deco_palace_plant", x_offset = -18 / 2 + 0.3, z_offset = -26 / 6.5, scale = { -1, 1 } },
+        { name = "deco_palace_plant", x_offset = -18 / 2 + 0.3, z_offset = 26 / 6.5, },
+        { name = "wall_mirror", x_offset = 18 / 3, z_offset = -26 / 2, rotation = -90 },
+        { name = "wall_mirror", x_offset = -18 / 3, z_offset = -26 / 2, rotation = -90 },
+        { name = "deco_cityhall_picture1", x_offset = 18 / 3, z_offset = 26 / 2, scale = { -1, 1 } },
+        { name = "deco_cityhall_picture2", x_offset = -0.5, z_offset = 26 / 2, scale = { -1, 1 } },
+        { name = "deco_cityhall_picture1", x_offset = -18 / 3, z_offset = 26 / 2, scale = { -1, 1 } },
+        { name = "pigman_queen", x_offset = -3, },
+        { name = "deco_palace_throne", x_offset = -6, },
+        -- floor corner pieces
+        { name = "rug_palace_corners", x_offset = -18 / 2, z_offset = 26 / 2, },
+        { name = "rug_palace_corners", x_offset = 18 / 2, z_offset = 26 / 2, rotation = 180 },
+        { name = "rug_palace_corners", x_offset = 18 / 2, z_offset = -26 / 2, rotation = 270 },
+        { name = "rug_palace_corners", x_offset = -18 / 2, z_offset = -26 / 2, rotation = 0 }, --被墙壁挡住看不见了
+        -- front wall floor lights
+        { name = "swinglightobject", x_offset = 18 / 2, z_offset = -26 / 3, rotation = -90 },
+        { name = "swinglightobject", x_offset = 18 / 2, z_offset = 26 / 3, rotation = -90 },
+        -- back wall lights and floor lights
+        { name = "window_round_light_backwall", x_offset = -18 / 2, z_offset = -26 / 3, rotation = -90 },
+        { name = "window_palace", x_offset = -18 / 2, z_offset = -26 / 3, },
+        { name = "window_round_light_backwall", x_offset = -18 / 2, z_offset = 26 / 3, rotation = -90 },
+        { name = "window_palace", x_offset = -18 / 2, z_offset = 26 / 3, },
+        { name = "window_round_light_backwall", x_offset = -18 / 2, rotation = -90 },
+        { name = "window_palace_stainglass", x_offset = -18 / 2, },
+        -- aisle rug
+        { name = "rug_palace_runner", x_offset = -3.38, },
+        { name = "rug_palace_runner", x_offset = -3.38 * 2, },
+        { name = "rug_palace_runner", },
+        { name = "rug_palace_runner", x_offset = 3.38, },
+        { name = "rug_palace_runner", x_offset = 3.38 * 2, },
+    }
+}, {
+    width    = 18,
+    depth    = 12,
+    addprops = {
+        { name = "interior_floor_marble_royal", x_offset = -3.5, scale = { 2.9, 2.9 } },
+        { name = "interior_wall_rope", x_offset = -3.5, scale = { 3.6, 3.6 } },
+        { name = "deco_roomglow", },
+        { name = "interior_palace_east_door", z_offset = 18 / 2, key = "door1b", target_door = "door1a" },
+        { name = "interior_palace_west_door", z_offset = -18 / 2, key = "door2a", target_door = "door2b" },
+        { name = "rug_palace_corners", x_offset = -12 / 2, z_offset = 18 / 2, rotation = 90 },
+        { name = "rug_palace_corners", x_offset = 12 / 2, z_offset = 18 / 2, rotation = 180 },
+        { name = "rug_palace_corners", x_offset = 12 / 2, z_offset = -18 / 2, rotation = 270 },
+        { name = "rug_palace_corners", x_offset = -12 / 2, z_offset = -18 / 2 },
+        { name = "window_round_light_backwall", x_offset = -12 / 2, z_offset = -18 / 3, rotation = -90 },
+        { name = "window_palace", x_offset = -12 / 2, z_offset = -18 / 3, },
+        { name = "window_round_light_backwall", x_offset = -18 / 2, z_offset = 26 / 3, rotation = -90 },
+        { name = "window_palace", x_offset = -12 / 2, z_offset = 18 / 3, },
+        { name = "deco_palace_beam_room_tall_corner", x_offset = -12 / 2, z_offset = -18 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall_corner", x_offset = -12 / 2, z_offset = 18 / 2, },
+        { name = "deco_palace_beam_room_tall_corner_front", x_offset = 12 / 2, z_offset = -18 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall_corner_front", x_offset = 12 / 2, z_offset = 18 / 2, },
+        { name = "deco_palace_beam_room_tall", x_offset = -12 / 6, z_offset = -18 / 6, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall", x_offset = -12 / 6, z_offset = 18 / 6, },
+        { name = "deco_palace_beam_room_tall", x_offset = 12 / 6, z_offset = -18 / 6, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_tall", x_offset = 12 / 6, z_offset = 18 / 6, },
+        { name = "shelves_queen_display_1", x_offset = -12 / 4, z_offset = -18 / 3, shelfitems = { { 1, "key_to_city" } } },
+        { name = "shelves_queen_display_2", shelfitems = { { 1, "trinket_giftshop_4" } } },
+        { name = "shelves_queen_display_3", x_offset = -12 / 4, z_offset = 18 / 3, scale = { -1, 1 }, shelfitems = { { 1, "city_hammer" } } },
+        { name = "deco_palace_banner_small_sidewall", x_offset = -12 / 14 * 3, z_offset = -18 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_banner_small_sidewall", x_offset = -12 / 14 * 3, z_offset = 18 / 2, },
+        { name = "deco_palace_banner_small_sidewall", x_offset = 12 / 14 * 3, z_offset = -18 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_banner_small_sidewall", x_offset = 12 / 14 * 3, z_offset = 18 / 2, },
+        { name = "shelves_marble", x_offset = -12 / 2, shelfitems = { { 5, "trinket_20" }, { 6, "trinket_14" }, { 3, "trinket_4" }, { 4, "trinket_2" } } },
+    }
+}, {
+    width    = 15,
+    depth    = 10,
+    addprops = {
+        { name = "interior_floor_marble_royal", x_offset = -3, scale = { 2.5, 2.5 } },
+        { name = "interior_wall_rope", x_offset = -3.5, scale = { 3.1, 3.1 } },
+        { name = "deco_roomglow", },
+        { name = "city_exit_giftshop_door", x_offset = 10 / 2, key = "exit2" },
+        { name = "interior_palace_east_door", key = "door2b", target_door = "door2a", z_offset = 15 / 2, },
+        { name = "rug_palace_corners", x_offset = -10 / 2, z_offset = 15 / 2, },
+        { name = "rug_palace_corners", x_offset = 10 / 2, z_offset = 15 / 2, rotation = 180 },
+        { name = "rug_palace_corners", x_offset = 10 / 2, z_offset = -15 / 2, rotation = 270 },
+        { name = "rug_palace_corners", x_offset = -10 / 2, z_offset = -15 / 2, rotation = 0 },
+        { name = "deco_palace_beam_room_short_corner_lights", x_offset = -10 / 2, z_offset = -15 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_short_corner_lights", x_offset = -10 / 2, z_offset = 15 / 2, },
+        { name = "deco_palace_beam_room_short_corner_front_lights", x_offset = 10 / 2, z_offset = -15 / 2, scale = { -1, 1 } },
+        { name = "deco_palace_beam_room_short_corner_front_lights", x_offset = 10 / 2, z_offset = 15 / 2, },
+        { name = "deco_cityhall_picture2", x_offset = -10 / 5, z_offset = -15 / 2 },
+        { name = "deco_cityhall_picture1", x_offset = 10 / 5, z_offset = -15 / 2 },
+        { name = "shelves_wood", x_offset = -10 / 2, z_offset = -15 / 5, shelfitems = { { 1, "trinket_giftshop_3" }, { 2, "trinket_giftshop_3" }, { 3, "trinket_giftshop_3" }, { 5, "trinket_giftshop_3" }, { 6, "trinket_giftshop_3" } } },
+        { name = "shelves_wood", x_offset = -10 / 2, z_offset = 15 / 5, shelfitems = { { 1, "trinket_giftshop_3" }, { 3, "trinket_giftshop_3" }, { 4, "trinket_giftshop_3" }, { 5, "trinket_giftshop_3" }, { 6, "trinket_giftshop_3" } } },
+        { name = "swinging_light_floral_bloomer", },
+        { name = "shelves_displaycase", x_offset = -10 / 5, z_offset = -15 / 3, scale = { -1, 1 }, shelfitems = { { 1, "trinket_giftshop_1" }, { 2, "trinket_giftshop_1" }, { 3, "trinket_giftshop_1" } } },
+        { name = "shelves_displaycase", x_offset = 10 / 5, z_offset = 15 / 3, shelfitems = { { 1, "trinket_giftshop_1" }, { 3, "trinket_giftshop_1" } } },
+        { name = "shelves_displaycase", x_offset = 10 / 5, z_offset = -15 / 3, scale = { -1, 1 }, shelfitems = { { 2, "trinket_giftshop_1" }, { 3, "trinket_giftshop_1" } } },
+        { name = "shelves_displaycase", x_offset = -10 / 5, z_offset = 15 / 3, shelfitems = { { 1, "trinket_giftshop_1" }, { 2, "trinket_giftshop_1" } } },
+    }
+} }
+
+local function creatInterior(inst)
+    if inst.components.teleporter:GetTarget() then return end
+
+    local doors = InteriorSpawnerUtils.CreateRooms(rooms)
+    inst.components.teleporter:Target(doors.exit)
+    doors.exit.components.teleporter:Target(inst)
+    doors.exit2.components.teleporter:Target(inst) --两个出口
+end
+
+local function OnIgnite(inst)
+    if inst.components.spawner then
+        inst.components.spawner:ReleaseChild()
     end
 end
 
-local function usedoor(inst, data)
-    if inst.usesounds then
-        if data and data.doer and data.doer.SoundEmitter then
-            for i, sound in ipairs(inst.usesounds) do
-                data.doer.SoundEmitter:PlaySound(sound)
-            end
-        end
-    end
-end
---------------------------------------do teleporter------------------------
-local function OnDoneTeleporting(inst, obj)
+local function fn()
+    local inst = InteriorSpawnerUtils.MakeBaseDoor("palace", "palace", "idle", true, false, "pig_palace.png")
 
-end
-local function StartTravelSound(inst, doer)
-
-end
-
-local function OnActivateByOther(inst, source, doer)
-    --	if not inst.sg:HasStateTag("open") then
-    --		inst.sg:GoToState("opening")
-    --	end
-    if doer ~= nil and doer.Physics ~= nil then
-        doer.Physics:CollidesWith(COLLISION.WORLD)
-    end
-end
-
-local function OnActivate(inst, doer)
-    if doer:HasTag("player") then
-        ProfileStatsSet("wormhole_used", true)
-        doer.mynetvarCameraMode:set(1)
-
-        local other = inst.components.teleporter.targetTeleporter
-        if other ~= nil then
-            DeleteCloseEntsWithTag("WORM_DANGER", other, 15)
-        end
-
-        --Sounds are triggered in player's stategraph
-    elseif inst.SoundEmitter ~= nil then
-
-    end
-end
------------------------------------------------------------------------------
-local function OnHaunt(inst, haunter)
-    inst.components.teleporter:Activate(haunter)
-end
-
-local function fn(Sim)
-    local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local light = inst.entity:AddLight()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("pig_palace.png")
-
-    light:SetFalloff(1)
-    light:SetIntensity(.5)
-    light:SetRadius(1)
-    light:Enable(false)
-    light:SetColour(180 / 255, 195 / 255, 50 / 255)
+    inst.entity:AddLight()
+    inst.Light:SetFalloff(1)
+    inst.Light:SetIntensity(.5)
+    inst.Light:SetRadius(1)
+    inst.Light:Enable(false)
+    inst.Light:SetColour(180 / 255, 195 / 255, 50 / 255)
 
     MakeObstaclePhysics(inst, 1.25)
 
-    anim:SetBank("palace")
-
-    anim:SetBuild("palace")
-
-    anim:PlayAnimation("idle", true)
-
-
     inst:AddTag("structure")
-
-
-    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
-    inst:AddComponent("lootdropper")
-
-    --    inst:AddComponent("door")
-    --[[
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(4)
-	inst.components.workable:SetOnFinishCallback(onhammered)
-	inst.components.workable:SetOnWorkCallback(onhit)
-	]]
     inst:AddComponent("spawner")
-    WorldSettings_Spawner_SpawnDelay(inst, TUNING.TOTAL_DAY_TIME * 4, true)
-    inst.components.spawner:Configure("pigman_royalguard_3", TUNING.TOTAL_DAY_TIME * 4)
+    inst.components.spawner:Configure("pigman_banker", TUNING.TOTAL_DAY_TIME * 4)
     inst.components.spawner.onoccupied = onoccupied
     inst.components.spawner.onvacate = onvacate
-
-    inst:WatchWorldState("isday", OnDay)
-
-    inst:AddComponent("inspectable")
 
     inst.components.inspectable.getstatus = getstatus
 
     MakeSnowCovered(inst, .01)
 
-    inst:AddComponent("fixable")
-    inst.components.fixable:AddRecinstructionStageData("rubble", "pig_shop", "palace")
-    inst.components.fixable:AddRecinstructionStageData("unbuilt", "pig_shop", "palace")
-
-    inst:AddComponent("teleporter")
-    inst.components.teleporter.onActivate = OnActivate
-    inst.components.teleporter.onActivateByOther = OnActivateByOther
-    inst.components.teleporter.offset = 0
-    inst.components.teleporter.hamlet = true
-    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-    inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-    inst:ListenForEvent("burntup", function(inst)
-        inst.components.fixable:AddRecinstructionStageData("burnt", "pig_shop", "palace", 1)
-        if inst.doortask then
-            inst.doortask:Cancel()
-            inst.doortask = nil
-        end
-        inst:Remove()
-    end)
-
-    inst:ListenForEvent("onignite", function(inst, data)
-        if inst.components.spawner then
-            inst.components.spawner:ReleaseChild()
-        end
-    end)
-
     inst.OnSave = onsave
     inst.OnLoad = onload
 
+    inst:DoTaskInTime(0, creatInterior)
+
+    inst:ListenForEvent("burntup", inst.Remove)
+    inst:ListenForEvent("onignite", OnIgnite)
     inst:ListenForEvent("onbuilt", onbuilt)
-    inst:DoTaskInTime(math.random(), function()
-        if TheWorld.state.isday then
-            OnDay(inst)
-        end
-    end)
-
-    inst:AddComponent("hauntable")
-    inst.components.hauntable:SetOnHauntFn(OnHaunt)
-
-    inst.usesounds = { "Hamlet/common/objects/store/door_open" }
-    inst:ListenForEvent("usedoor", function(inst, data) usedoor(inst, data) end)
+    inst:WatchWorldState("isday", OnIsDay)
+    OnIsDay(inst, TheWorld.state.isday)
 
     return inst
 end

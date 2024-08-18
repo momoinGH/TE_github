@@ -311,7 +311,7 @@ local function teleport_start(teleportee, staff, caster, loctarget, target_in_oc
         if teleportee:HasTag("player") then
             is_teleporting_player = true
             teleportee.sg:GoToState("forcetele")
-            teleportee.mynetvarCameraMode:set(6)
+            teleportee.tropical_room_event:push()
         else
             if teleportee.components.health ~= nil then
                 teleportee.components.health:SetInvincible(true)

@@ -7,22 +7,16 @@ local function OnBuilt(inst)
     local side = InteriorSpawnerUtils.TestWallOrnamentPos(inst)
 
     if side == 1 or side == 3 then
-        inst.initData = {
-            animdata = {
-                bank = (side == 1 or side == 3) and bank .. "_side" or nil,
-                flip = side == 3 or nil,
-            }
-        }
-        InteriorSpawnerUtils.InitHouseInteriorPrefab(inst, inst.initData)
+        bank = bank .. "_side"
+        if side == 3 then
 
-        inst.tempChildrens = { "window_round_light" }
+        end
     end
 end
 
 -- 检查朝向生成对应的光线
 local function SpawnLight(inst)
-    local bank = inst.components.tropical_saveanim.bank
-    local prefab = bank and string.match(bank, "_side$") and "window_round_light" or "window_round_light_backwall"
+    local prefab = string.match(inst.prefab, "_backwall$") and "window_round_light_backwall" or "window_round_light"
 
     local light = SpawnPrefab(prefab)
     light.Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -54,16 +48,27 @@ local function MakeWindow(name, build, bank, anim)
 end
 
 return
+    MakeWindow("window_round", "interior_window", "interior_window_side", "day_loop"),
     MakeWindow("window_round_backwall", "interior_window", "interior_window", "day_loop"),
+    MakeWindow("window_round_curtains_nails", "interior_window", "interior_window_side", "day_loop"),
     MakeWindow("window_round_curtains_nails_backwall", "interior_window", "interior_window", "day_loop"),
+    MakeWindow("window_round_burlap", "interior_window_burlap", "interior_window_burlap_side", "day_loop"),
     MakeWindow("window_round_burlap_backwall", "interior_window_burlap", "interior_window_burlap", "day_loop"),
+    MakeWindow("window_small_peaked", "interior_window_small", "interior_window_small_side", "day_loop"),
     MakeWindow("window_small_peaked_backwall", "interior_window_small", "interior_window_small", "day_loop"),
+    MakeWindow("window_large_square", "interior_window_large", "interior_window_side", "day_loop"),
     MakeWindow("window_large_square_backwall", "interior_window_large", "interior_window", "day_loop"),
+    MakeWindow("window_tall", "interior_window_tall", "interior_window_tall_side", "day_loop"),
     MakeWindow("window_tall_backwall", "interior_window_tall", "interior_window_tall", "day_loop"),
+    MakeWindow("window_round_arcane", "window_arcane_build", "interior_window_large_side", "day_loop"),
     MakeWindow("window_round_arcane_backwall", "window_arcane_build", "interior_window_large", "day_loop"),
+    MakeWindow("window_small_peaked_curtain", "interior_window_small", "interior_window_side", "day_loop"),
     MakeWindow("window_small_peaked_curtain_backwall", "interior_window_small", "interior_window", "day_loop"),
+    MakeWindow("window_large_square_curtain", "interior_window_large", "interior_window", "day_loop"),
     MakeWindow("window_large_square_curtain_backwall", "interior_window_large", "interior_window_large", "day_loop"),
+    MakeWindow("window_tall_curtain", "interior_window_tall", "interior_window_tall_side", "day_loop"),
     MakeWindow("window_tall_curtain_backwall", "interior_window_tall", "interior_window_tall", "day_loop"),
+    MakeWindow("window_square_weapons", "window_weapons_build", "interior_window_large_side", "day_loop"),
     MakeWindow("window_square_weapons_backwall", "window_weapons_build", "interior_window_large", "day_loop"),
     -- 日光
     DecoCreator:Create("window_round_light", "interior_window", "interior_window_light_side", "day_loop",

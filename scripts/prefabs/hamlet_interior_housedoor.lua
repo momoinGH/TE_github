@@ -28,7 +28,6 @@ end
 
 local function OnHouseSave(inst, data)
     data.side = inst.side
-    data.initData = inst.initData
     data.hamlet_houseexit = inst:HasTag("hamlet_houseexit") or nil
 end
 
@@ -36,10 +35,6 @@ local function OnHouseLoad(inst, data)
     if data == nil then return end
 
     inst.side = data.side
-    if data.initData then
-        InteriorSpawnerUtils.InitHouseInteriorPrefab(inst, data.initData)
-        inst.initData = data.initData
-    end
     if data.hamlet_houseexit then
         inst:AddTag("hamlet_houseexit") --没有单机版的小地图，目前通过鼠标悬停时的“进入”和“离开”来判断出口
     end
@@ -61,11 +56,11 @@ local room = {
         { name = "interior_wall_wood", x_offset = -2.8, },
         { name = "deco_roomglow" },
         { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = -15 / 2, },
-        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = 15 / 2, animdata = { scale = { -1, 1 } } },
+        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = 15 / 2, scale = { -1, 1 } },
         { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = -15 / 2 - 0.3, },
-        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = 15 / 2 + 0.3, animdata = { scale = { -1, 1 } } },
+        { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = 15 / 2 + 0.3, scale = { -1, 1 } },
         { name = "swinging_light_rope_1", x_offset = -2, y_offset = 1, addtags = { "playercrafted" } },
-        { name = "playerhouse_city_floor", x_offset = -2.4 },
+        { name = "interior_floor_wood", x_offset = -2.4 },
     }
 }
 
@@ -98,17 +93,6 @@ local function common(bank, build, anim, interior_door)
     return inst
 end
 
-local function house_city_exit_door_fn()
-    local inst = common("pig_shop_doormats", "pig_shop_doormats", "idle_old", true)
-    inst:AddTag("hamlet_houseexit")
-
-    inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-    -- p.AnimState:SetOrientation(ANIM_ORIENTATION.RotatingBillboard)
-    inst.AnimState:SetSortOrder(3)
-
-    return inst
-end
-
 local function OnBuilt(inst)
     inst.side = InteriorSpawnerUtils.TestWallOrnamentPos(inst, false, 7.5, 5, 7.5, 5.5)
     local anim
@@ -121,14 +105,13 @@ local function OnBuilt(inst)
     elseif inst.side == 4 then
         anim = "_close_south"
     end
-    inst.AnimState:PlayAnimation(inst.playAnim .. anim)
-    inst.initData = { animdata = { anim = inst.playAnim .. anim } }
+
+    inst.components.tropical_saveanim:Init(nil, nil, inst.playAnim .. anim)
 end
 
 local function onhammered(inst, worker)
     local pos = inst:GetPosition()
     SpawnPrefab("collapse_big").Transform:SetPosition(pos:Get())
-    InteriorSpawnerUtils.OnHouseDestroy(inst, worker)
     inst:Remove()
 end
 
@@ -223,6 +206,21 @@ local function PostInitPlacer(inst, name)
     inst.accept_placement = false
 end
 
+local function MakeExitDoor(name, anim)
+    local function fn()
+        local inst = common("pig_shop_doormats", "pig_shop_doormats", anim, true)
+        inst:AddTag("hamlet_houseexit")
+
+        inst:SetPrefabName("city_exit_old_door")
+
+        inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+        inst.AnimState:SetSortOrder(3)
+
+        return inst
+    end
+    return Prefab(name, fn, assets)
+end
+
 local function MakeHouseDoorPlacer(name, build, bank)
     return MakePlacer(name .. "_placer", bank, build, name .. "_open_north", nil, nil,
         nil, nil, nil, nil, function(inst) PostInitPlacer(inst, name) end)
@@ -230,24 +228,34 @@ end
 
 return
 -- 出口门
--- 不同门之间主要是动画、位置、旋转角度不同，这里合并成一个预制件，其他的做成可设置的属性，这样灵活度更高
--- 动画：idle_old(默认)、idle_giftshop、idle_antiquities、idle_florist、idle_flag、idle_deli、idle_general、idle_hoofspa、idle_produce、idle_basic、idle_tinker
-    Prefab("house_city_exit_door", house_city_exit_door_fn, assets),
+    MakeExitDoor("city_exit_old_door", "idle_old"),
+    MakeExitDoor("city_exit_giftshop_door", "idle_giftshop"),
+    MakeExitDoor("city_exit_antiquities_door", "idle_antiquities"),
+    MakeExitDoor("city_exit_florist_door", "idle_florist"),
+    MakeExitDoor("city_exit_flag_door", "idle_flag"),
+    MakeExitDoor("city_exit_deli_door", "idle_deli"),
+    MakeExitDoor("city_exit_general_door", "idle_general"),
+    MakeExitDoor("city_exit_hoofspa_door", "idle_hoofspa"),
+    MakeExitDoor("city_exit_produce_door", "idle_produce"),
+    MakeExitDoor("city_exit_basic_door", "idle_basic"),
+    MakeExitDoor("city_exit_tinker_door", "idle_tinker"),
+    MakeExitDoor("city_exit_bank_door", "idle_bank"),
+   
 
     -- 室内门
-    MakeHouseDoor("wood_door"),
-    MakeHouseDoor("stone_door"),
-    MakeHouseDoor("organic_door"),
-    MakeHouseDoor("iron_door"),
-    MakeHouseDoor("pillar_door"),
-    MakeHouseDoor("curtain_door"),
-    MakeHouseDoor("round_door"),
-    MakeHouseDoor("plate_door"),
-    MakeHouseDoorPlacer("wood_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("stone_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("organic_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("iron_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("pillar_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("curtain_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("round_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("plate_door", "player_house_doors", "player_house_doors")
+    MakeHouseDoor("interior_wood_door"),
+    MakeHouseDoor("interior_stone_door"),
+    MakeHouseDoor("interior_organic_door"),
+    MakeHouseDoor("interior_iron_door"),
+    MakeHouseDoor("interior_pillar_door"),
+    MakeHouseDoor("interior_curtain_door"),
+    MakeHouseDoor("interior_round_door"),
+    MakeHouseDoor("interior_plate_door"),
+    MakeHouseDoorPlacer("interior_wood_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("interior_stone_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("interior_organic_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("interior_iron_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("interior_pillar_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("interior_curtain_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("interior_round_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("interior_plate_door", "player_house_doors", "player_house_doors")

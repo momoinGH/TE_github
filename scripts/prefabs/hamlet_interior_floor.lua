@@ -31,7 +31,7 @@ local function common(anim)
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(5)
-    inst.AnimState:SetScale(4, 4)
+    inst.AnimState:SetScale(4.5, 4.5)
     inst.AnimState:PlayAnimation(anim)
 
     inst:AddTag("NOCLICK")
@@ -49,6 +49,8 @@ local function common(anim)
         return inst
     end
 
+    inst:AddComponent("tropical_saveanim")
+
     inst:ListenForEvent("onbuilt", OnBuilt)
 
     return inst
@@ -59,8 +61,7 @@ local function MakeFloor(name, anim)
     return Prefab(name, fn, assets, prefabs)
 end
 
-return MakeFloor("playerhouse_city_floor", "noise_woodfloor"),
-    MakeFloor("interior_floor_marble", "shop_floor_marble"),
+return MakeFloor("interior_floor_marble", "shop_floor_marble"),
     MakeFloor("interior_floor_marble", "shop_floor_marble"),
     MakeFloor("interior_floor_check", "shop_floor_checker"),
     MakeFloor("interior_floor_check2", "shop_floor_checkered"),

@@ -8,9 +8,9 @@ FN.ROOM_SIZE_MAX = 60
 FN.ROW_COUNT = FN.BASE_OFF / FN.ROOM_SIZE_MAX * 2
 
 FN.ROOM_SIZE = {
-    SMALL = {
-        dx = { -5, 5 }, --上下
-        dz = { -9, 8 }  --左右
+    SMALL = {               --
+        dx = { -5.5, 5.5 }, --上下
+        dz = { -8.5, 8.5 }  --左右
     },
     MEDIUM = {
         dx = { -8.5, 8.5 },  --上下
@@ -49,9 +49,11 @@ function FN.OnHouseDestroy(house, destroyer, isRemove)
                 if v.components.workable then
                     v.components.workable:Destroy(destroyer)       --包括其他的房间
                 elseif v.components.health and not v.components.health:IsDead()
-                    and not v.components.locomotor and v.components.lootdropper
+                    and ((not v.components.locomotor and v.components.lootdropper) or v:HasTag("only_interior"))
                 then
-                    v.components.lootdropper:DropLoot() --一般是在死亡的sg中生成，我杀死直接移除不会生成额外的掉落物
+                    if v.components.lootdropper then
+                        v.components.lootdropper:DropLoot() --一般是在死亡的sg中生成，我杀死直接移除不会生成额外的掉落物
+                    end
                     v.components.health:Kill()
                 end
             end
@@ -62,7 +64,7 @@ function FN.OnHouseDestroy(house, destroyer, isRemove)
     for _, v in ipairs(TheSim:FindEntities(centerPos.x, centerPos.y, centerPos.z, dis)) do
         if not isRemove and v.components.inventoryitem then
             house.components.lootdropper:FlingItem(v) --借用lootdropper组件抛出物品
-        elseif v.components.health and v.components.locomotor then
+        elseif v.components.health and v.components.locomotor and not v:HasTag("only_interior") then
             if v:HasTag("player") then
                 -- 玩家落水处理
                 v.sg:GoToState("sink_fast")
@@ -76,45 +78,16 @@ function FN.OnHouseDestroy(house, destroyer, isRemove)
 end
 
 --- 不可见墙，阻挡玩家移动
-function FN.SpawnWall(x, z, size)
-    size = size or FN.ROOM_SIZE.SMALL
-    for dx = size.dx[1], size.dx[2] do --因为两侧墙角度不一样，所以墙壁并不是对称的
-        for dz = size.dz[1], size.dz[2] do
-            if dx == size.dx[1] or dx == size.dx[2] or dz == size.dz[1] or dz == size.dz[2] then
+function FN.SpawnWall(x, z, width, depth)
+    local room_dx = depth / 2 + 0.5
+    local room_dz = width / 2 + 0.5
+    for dx = -room_dx, room_dx do --因为两侧墙角度不一样，所以墙壁并不是对称的
+        for dz = -room_dz, room_dz do
+            if dx == -room_dx or dx == room_dx or dz == -room_dz or dz == room_dz then
                 local part = SpawnPrefab("wall_invisible")
                 -- local part = SpawnPrefab("wall_stone") -- 测试阶段先用石墙
                 part.Transform:SetPosition(x + dx, 0, z + dz)
             end
-        end
-    end
-end
-
----根据格式初始化室内装饰
-function FN.InitHouseInteriorPrefab(p, data)
-    if data.rotation then
-        p.Transform:SetRotation(data.rotation)
-    end
-    if data.animdata then
-        if data.animdata.flip then
-            p.AnimState:SetScale(-1, 1)
-        end
-        if data.animdata.scale then
-            local scale = data.animdata.scale
-            local x, y
-            if type(scale) == "number" then
-                x = scale
-                y = scale
-            else
-                x = scale[1]
-                y = scale[2]
-            end
-            p.AnimState:SetScale(x, y)
-        end
-    end
-
-    if data.addtags then
-        for _, tag in ipairs(data.addtags) do
-            p:AddTag(tag)
         end
     end
 end
@@ -252,6 +225,7 @@ function FN.SpawnNearHouseInterior(door, room)
         newDoor.side = 4
         newDoor.Transform:SetPosition(pos.x + 5.5, 0, pos.z + dpos.z)
         doorAnim = "_open_north"
+
         newDoorAnim = "_open_south"
     elseif door.side == 3 then
         newDoor.side = 1
@@ -265,10 +239,8 @@ function FN.SpawnNearHouseInterior(door, room)
         newDoorAnim = "_open_north"
     end
 
-    door.AnimState:PlayAnimation(door.playAnim .. doorAnim)
-    door.initData.animdata.anim = door.playAnim .. doorAnim
-    newDoor.AnimState:PlayAnimation(door.playAnim .. newDoorAnim)
-    newDoor.initData = { animdata = { anim = door.playAnim .. newDoorAnim } }
+    door.components.tropical_saveanim:Init(nil, nil, door.playAnim .. doorAnim)
+    newDoor.components.tropical_saveanim:Init(nil, nil, door.playAnim .. newDoorAnim)
 
     door:RemoveTag("predoor")
     newDoor:RemoveTag("predoor")
@@ -311,6 +283,10 @@ end
 
 local function StartTravelSound(inst)
     inst.SoundEmitter:PlaySound(inst.usesounds)
+end
+
+local function OnDoorRemove(inst)
+    FN.OnHouseDestroy(inst, nil, true)
 end
 
 --- 虚空门的基础代码
@@ -386,6 +362,8 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
         inst.usesounds = usesounds
         inst:ListenForEvent("starttravelsound", StartTravelSound)
     end
+
+    inst:ListenForEvent("onremove", OnDoorRemove)
 
     return inst
 end
@@ -514,9 +492,10 @@ function FN.GetOppositeFromDirection(direction)
     end
 end
 
--- 除了关键配置，基本都可省
+-- 房间的配置表，除了name，其他都可省
 local newRoom = {
-    size = FN.ROOM_SIZE.SMALL,                 --房间大小，需要根据房间大小生成不可见墙体
+    width = 15,                                --房间宽度，z，用于生成不可见墙体，默认16
+    depth = 15,                                --房间深度，x，用于生成不可见墙体，默认10
     addprops = {                               --房间内所有东西配置，包括地板、墙壁和房间门
         {
             name = "",                         --预制件名
@@ -526,15 +505,17 @@ local newRoom = {
             key = "exit",                      --对房间门生效，CreateRoom方法返回的表可以通过这个key获取到对应的门，同时用于连通不同房间的门
             target_door = "",                  --如果需要不同房间的门相互连通，则需要配置target_door = key
             init = function(inst, center) end, --生成后的初始化操作，第二个参数是中心点对象
-            animdata = {                       --该数据通过tropical_saveanim组件保存，因此建议给有该字段的预制件都添加该组件
-                bank = nil,                    --支持函数、字符串
-                build = nil,                   --支持函数、字符串
-                anim = nil,                    --支持函数、字符串
-                scale = { -1, 1 },             --支持函数、表
-                isloopplay = false,            --是否循环播放
-                isdelayset = false,            --加载时是否进入游戏再设置
-            },
-        }
+            startstate = "",                   --有Stategraph的单位初始state
+
+            --该数据通过tropical_saveanim组件保存和加载，因此建议给有这些字段的预制件都添加该组件
+            bank = nil,         --支持函数、字符串
+            build = nil,        --支持函数、字符串
+            anim = nil,         --支持函数、字符串
+            scale = { -1, 1 },  --支持函数、表
+            rotation = 90,      --Transform的旋转，支持函数、数字
+            isloopplay = false, --是否循环播放
+            isdelayset = false, --加载时是否进入游戏再设置
+        },
     },
 }
 
@@ -553,14 +534,17 @@ function FN.CreateRoom(room)
     -- 清除杂物，以防万一
     FN.ClearSpace(x, z)
 
+    local width = room.width or 16
+    local depth = room.depth or 10
+
     -- 生成中心点
     local center = SpawnPrefab("interior_center")
     center.Transform:SetPosition(x, 0, z)
-    center.room_size:set(FN.GetRoomSizeId(room.size))
-
+    center.room_width:set(width)
+    center.room_depth:set(depth)
 
     --生成墙体
-    FN.SpawnWall(x, z, room.size)
+    FN.SpawnWall(x, z, width, depth)
 
     --生产内部物品
     for _, data in ipairs(room.addprops) do
@@ -577,14 +561,20 @@ function FN.CreateRoom(room)
             door_map[key] = data.target_door
         end
 
-        if data.animdata and p.components.tropical_saveanim then
-            local animdata = data.animdata
-            p.components.tropical_saveanim:Init(animdata.bank, animdata.build, animdata.anim, animdata.scale, animdata.isloopplay, animdata.isdelayset)
+        if p.components.tropical_saveanim then
+            p.components.tropical_saveanim:Init(data.bank, data.build, data.anim, data.scale, data.isloopplay, data.isdelayset, data.rotation)
+        end
+
+        if data.startstate then
+            assert(p.sg and p.sg:HasState(data.startstate), data.name .. "没有sg或者没有state ：" .. data.startstate)
+            p.sg:GoToState(data.startstate)
         end
 
         if data.init then
-            data.init(p, center)
+            data.init(p, center, data)
         end
+
+        p:PushEvent("oninteriorspawn", data)
     end
 
     return doors, door_map, center

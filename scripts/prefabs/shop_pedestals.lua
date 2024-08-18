@@ -31,7 +31,6 @@ local function shopkeeper_speech(inst, speech)
     local ents = TheSim:FindEntities(x, y, z, 20, { "shopkeep" })
     for i, ent in ipairs(ents) do
         ent.shopkeeper_speech(ent, speech)
-        --ent.components.talker:Say(speech)
     end
 end
 
@@ -86,16 +85,17 @@ local function SetCost(inst, costprefab, cost)
     end
 end
 
+---设置商品
+---@param prefabtype string 商品
+---@param costprefab string 购买需要的货币
+---@param cost number 货币数量
 local function SpawnInventory(inst, prefabtype, costprefab, cost)
     inst.costprefab = costprefab
     inst.cost = cost
 
     local item = nil
-    if prefabtype ~= nil then
-        item = SpawnPrefab(prefabtype)
-    else
-        item = SpawnPrefab(inst.prefabtype)
-    end
+    prefabtype = prefabtype or inst.prefabtype
+    item = SpawnPrefab(prefabtype)
 
     if item ~= nil then
         inst:SetImage(item)
@@ -111,7 +111,7 @@ local function TimedInventory(inst, prefabtype)
     local time = 300 + math.random() * 300
     inst.components.shopdispenser:RemoveItem()
     inst:SetImage(nil)
-    inst:DoTaskInTime(time, function() inst:SpawnInventory(nil) end)
+    inst:DoTaskInTime(time, SpawnInventory)
 end
 
 local function SoldItem(inst)
@@ -125,11 +125,12 @@ local function restock(inst, force)
         SetCost(inst, "cost-nil")
         shopkeeper_speech(inst, STRINGS.CITY_PIG_SHOPKEEPER_ROBBED[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_ROBBED)])
     elseif (inst:IsInLimbo() and (inst.imagename == "" or math.random() < 0.16) and not inst:HasTag("justsellonce")) or force then
-        local newproduct = inst.components.shopped.shop.components.shopinterior:GetNewProduct(inst.components.shopped.shoptype)
-        if inst.saleitem then
-            newproduct = inst.saleitem
-        end
-        SpawnInventory(inst, newproduct[1], newproduct[2], newproduct[3])
+        -- TODO 重写逻辑，让猪人主动执行
+        -- local newproduct = inst.components.shopped.shop and inst.components.shopped.shop.components.shopinterior:GetNewProduct(inst.components.shopped.shoptype)
+        -- if inst.saleitem then
+        --     newproduct = inst.saleitem
+        -- end
+        -- SpawnInventory(inst, newproduct[1], newproduct[2], newproduct[3])
     end
 end
 
@@ -145,36 +146,39 @@ local function onsave(inst, data)
 end
 
 local function onload(inst, data)
-    if data then
-        if data.imagename then
-            SetImageFromName(inst, data.imagename)
-        end
-        if data.cost then
-            inst.cost = data.cost
-        end
-        if data.costprefab then
-            inst.costprefab = data.costprefab
-            SetCost(inst, inst.costprefab, inst.cost)
-        end
-        if data.interiorID then
-            inst.interiorID = data.interiorID
-        end
-        if data.startAnim then
-            inst.startAnim = data.startAnim
-            inst.AnimState:PlayAnimation(data.startAnim)
-        end
-        if data.saleitem then
-            inst.saleitem = data.saleitem
-        end
-        if data.justsellonce then
-            inst:AddTag("justsellonce")
-        end
-        if data.nodailyrestock then
-            inst:AddTag("nodailyrestock")
-        end
+    if not data then return end
+
+    if data.imagename then
+        SetImageFromName(inst, data.imagename)
+    end
+    if data.cost then
+        inst.cost = data.cost
+    end
+    if data.costprefab then
+        inst.costprefab = data.costprefab
+        SetCost(inst, inst.costprefab, inst.cost)
+    end
+    if data.interiorID then
+        inst.interiorID = data.interiorID
+    end
+    if data.startAnim then
+        inst.startAnim = data.startAnim
+        inst.AnimState:PlayAnimation(data.startAnim)
+    end
+    if data.saleitem then
+        inst.saleitem = data.saleitem
+    end
+    if data.justsellonce then
+        inst:AddTag("justsellonce")
+    end
+    if data.nodailyrestock then
+        inst:AddTag("nodailyrestock")
     end
 end
 
+local function OnInteriorSpawn(inst, data)
+    inst.saleitem = data.saleitem
+end
 
 local function common()
     local inst = CreateEntity()
@@ -202,6 +206,8 @@ local function common()
         return inst
     end
 
+    inst:AddComponent("tropical_saveanim")
+
     inst.imagename = nil
 
     MakeMediumBurnable(inst)
@@ -217,6 +223,8 @@ local function common()
     inst.OnSave = onsave
     inst.OnLoad = onload
     inst.restock = restock
+
+    inst:ListenForEvent("oninteriorspawn", OnInteriorSpawn)
 
     return inst
 end

@@ -59,6 +59,10 @@ local function onBuilt(inst)
     inst.onbuilt = true
 end
 
+local function OnInteriorSpawn(inst, data)
+    inst.shelfitems = data.shelfitems
+end
+
 local function SetImage(inst, ent, slot)
     local image = nil
 
@@ -268,6 +272,8 @@ local function common(setsize, swp_img_list, locked)
         return inst
     end
 
+    inst:AddComponent("tropical_saveanim")
+
     inst.swp_img_list = swp_img_list
     inst.size = setsize or 6
     inst.SetImage = SetImage
@@ -291,6 +297,7 @@ local function common(setsize, swp_img_list, locked)
     end)
 
     inst:ListenForEvent("onbuilt", onBuilt)
+    inst:ListenForEvent("oninteriorspawn", OnInteriorSpawn)
 
     return inst
 end
@@ -415,8 +422,7 @@ end
 
 local function cinderblocks()
     local inst = common()
-    local anim = inst.AnimState
-    anim:PlayAnimation("cinderblocks", false)
+    inst.AnimState:PlayAnimation("cinderblocks", false)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
     inst:AddTag("playercrafted")
@@ -706,6 +712,8 @@ local function ruins()
         return inst
     end
 
+    inst:AddComponent("tropical_saveanim")
+
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDone)
 
@@ -780,6 +788,8 @@ local function bonestaff()
         return inst
     end
 
+    inst:AddComponent("tropical_saveanim")
+
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDonebonestaff)
 
@@ -852,6 +862,8 @@ local function bossboar()
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst:AddComponent("tropical_saveanim")
 
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDonebossboar)
@@ -933,6 +945,8 @@ local function key()
         return inst
     end
 
+    inst:AddComponent("tropical_saveanim")
+
     inst:AddComponent("klaussackkey")
     inst.components.klaussackkey.keytype = "royal gallery"
 
@@ -944,6 +958,15 @@ local function key()
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
     inst:AddComponent("tradable")
 
+    return inst
+end
+
+local function metal()
+    local inst = common()
+    local anim = inst.AnimState
+    anim:PlayAnimation("metalcrates", false)
+    inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+    inst.AnimState:SetSortOrder(3)
     return inst
 end
 
@@ -979,4 +1002,5 @@ return Prefab("shelves_wood", wood, assets, prefabs),
     Prefab("shelves_ruins", ruins, assets, prefabs),
     Prefab("shelves_bonestaff", bonestaff, assets, prefabs),
     Prefab("shelves_bossboar", bossboar, assets, prefabs),
-    Prefab("pedestal_key", key, assets, prefabs)
+    Prefab("pedestal_key", key, assets, prefabs),
+    Prefab("shelves_metal", metal, assets, prefabs)

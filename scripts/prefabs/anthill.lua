@@ -18,7 +18,7 @@ local prefabs             = {
 --------------------------------------do teleporter------------------------
 local function OnDoneTeleporting(inst, obj)
     if obj and obj:HasTag("player") then
-        obj.mynetvarCameraMode:set(0)
+        obj.tropical_room_event:push()
     end
 end
 
@@ -34,7 +34,7 @@ end
 local function OnActivate(inst, doer)
     if doer:HasTag("player") then
         ProfileStatsSet("wormhole_used", true)
-        doer.mynetvarCameraMode:set(1)
+        doer.tropical_room_event:push()
 
         local other = inst.components.teleporter.targetTeleporter
         if other ~= nil then

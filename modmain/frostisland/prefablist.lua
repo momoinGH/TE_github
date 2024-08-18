@@ -11,8 +11,6 @@ PrefabFiles = {
     "pigbandit",
     "banditmap",
     "pig_shop",
-    "pig_palace_interior",
-    "pig_palace",
 
     "pigman_shopkeeper_desk",
     "shop_pedestals",

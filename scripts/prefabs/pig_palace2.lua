@@ -11,7 +11,6 @@ local prefabs =
     "trinket_giftshop_1",
     "trinket_giftshop_3",
     "trinket_giftshop_4",
-    "grounded_wilba"
 }
 
 local function LightsOn(inst)
@@ -227,7 +226,7 @@ end
 local function OnActivate(inst, doer)
     if doer:HasTag("player") then
         ProfileStatsSet("wormhole_used", true)
-        doer.mynetvarCameraMode:set(1)
+        doer.tropical_room_event:push()
 
         local other = inst.components.teleporter.targetTeleporter
         if other ~= nil then
@@ -333,9 +332,6 @@ local function fn(Sim)
             OnDay(inst)
         end
     end)
-
-    inst.usesounds = { "Hamlet/common/objects/store/door_open" }
-    inst:ListenForEvent("usedoor", function(inst, data) usedoor(inst, data) end)
 
     return inst
 end

@@ -2087,7 +2087,7 @@ return {
         {
           id = 1549,
           name = "",
-          type = "pig_palace_entrance",
+          type = "pig_palace",
           shape = "rectangle",
           x = 352,
           y = 1759,

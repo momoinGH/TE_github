@@ -274,14 +274,14 @@ AddHomeRecipe("deco_plantholder_winterfeasttree", 50, "deco_plantholder_winterfe
     "reno_lamp_festivetree")
 
 -- 门
-AddHomeRecipe("wood_door", 10, "wood_door_placer", "wood_door")
-AddHomeRecipe("stone_door", 10, "stone_door_placer", "stone_door")
-AddHomeRecipe("organic_door", 15, "organic_door_placer", "organic_door")
-AddHomeRecipe("iron_door", 15, "iron_door_placer", "iron_door")
-AddHomeRecipe("curtain_door", 15, "curtain_door_placer", "curtain_door")
-AddHomeRecipe("plate_door", 15, "plate_door_placer", "plate_door")
-AddHomeRecipe("round_door", 20, "round_door_placer", "round_door")
-AddHomeRecipe("pillar_door", 20, "pillar_door_placer", "pillar_door")
+AddHomeRecipe("interior_wood_door", 10, "wood_door_placer", "wood_door")
+AddHomeRecipe("interior_stone_door", 10, "stone_door_placer", "stone_door")
+AddHomeRecipe("interior_organic_door", 15, "organic_door_placer", "organic_door")
+AddHomeRecipe("interior_iron_door", 15, "iron_door_placer", "iron_door")
+AddHomeRecipe("interior_curtain_door", 15, "curtain_door_placer", "curtain_door")
+AddHomeRecipe("interior_plate_door", 15, "plate_door_placer", "plate_door")
+AddHomeRecipe("interior_round_door", 20, "round_door_placer", "round_door")
+AddHomeRecipe("interior_pillar_door", 20, "pillar_door_placer", "pillar_door")
 
 -- 地毯
 AddHomeRecipe("rug_round", 2, "rug_round_placer", "reno_rug_round", { min_spacing = 0 })

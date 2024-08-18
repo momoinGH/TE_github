@@ -17,19 +17,6 @@ local function OnBuilt(inst)
     end
 end
 
-local function OnSave(inst, data)
-    data.initData = data.initData
-end
-
-local function OnLoad(inst, data)
-    if not data then return end
-
-    if data.initData then
-        inst.initData = data.initData
-        InteriorSpawnerUtils.InitHouseInteriorPrefab(inst, data.initData)
-    end
-end
-
 local function common(bank, build, anim)
     local inst = CreateEntity()
     inst.entity:AddTransform()
@@ -55,9 +42,6 @@ local function common(bank, build, anim)
     inst:AddComponent("tropical_saveanim")
 
     inst:ListenForEvent("onbuilt", OnBuilt)
-
-    inst.OnSave = OnSave
-    inst.OnLoad = OnLoad
 
     return inst
 end
@@ -88,3 +72,6 @@ return
     MakeWall("interior_wall_batcave_wall_rock", "wallhamletant", "wallhamletant", "batcave_wall_rock"),
     MakeWall("interior_wall_pig_ruins", "wallhamletpig", "wallhamletpig", "pig_ruins_panel"),
     MakeWall("interior_wall_pig_ruins_blue", "wallhamletpig", "wallhamletpig", "pig_ruins_panel_blue")
+
+--有些墙没有
+-- levels/textures/interiors/wall_royal_high.tex"
