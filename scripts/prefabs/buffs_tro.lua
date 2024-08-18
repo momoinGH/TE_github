@@ -13,19 +13,19 @@ local speedupattr = {
     },
     icedtea = {
         mult = 23 / 18, -- 咖啡的1/3
-        duration = 80,  -- 咖啡的1/3
+        duration = 80, -- 咖啡的1/3
     },
 }
 
 local function speedup_attach(inst, target, followsymbol, followoffset, data)
-    if not data then
-        return
+    if data then
+        inst._debuffkey_tro = data.debuffkey
+        inst.components.timer:StopTimer("buffover")
+        inst.components.timer:StartTimer("buffover", speedupattr[data.debuffkey].duration)
     end
-    inst._debuffkey_tro = data.debuffkey
-    inst.components.timer:StopTimer("buffover")
-    inst.components.timer:StartTimer("buffover", speedupattr[data.debuffkey].duration)
     if target.components.locomotor then
-        target.components.locomotor:SetExternalSpeedMultiplier(target, "speedup_tro", speedupattr[data.debuffkey].mult)
+        target.components.locomotor:SetExternalSpeedMultiplier(inst, "speedup_tro", data and data.debuffkey and
+            speedupattr[data.debuffkey].mult or inst._debuffkey_tro and speedupattr[inst._debuffkey_tro].mult or 1) -- 进入世界时
     end
 end
 
@@ -40,11 +40,10 @@ local function speedup_extend(inst, target, followsymbol, followoffset, data)
         inst.components.timer:StopTimer("buffover")
         inst.components.timer:StartTimer("buffover", speedupattr[data.debuffkey].duration)
         if target.components.locomotor then
-            target.components.locomotor:RemoveExternalSpeedMultiplier(target, "speedup_tro")
-            target.components.locomotor:SetExternalSpeedMultiplier(target, "speedup_tro",
-                speedupattr[data.debuffkey].mult)
+            target.components.locomotor:RemoveExternalSpeedMultiplier(inst, "speedup_tro")
+            target.components.locomotor:SetExternalSpeedMultiplier(inst, "speedup_tro", speedupattr[data.debuffkey].mult)
         end
-        inst._debuffkey_tro = data.debuffkey
+        inst._debuffkey_tro = data.debuffkey    
     elseif data.debuffkey == inst._debuffkey_tro then
         inst.components.timer:StopTimer("buffover")
         inst.components.timer:StartTimer("buffover", speedupattr[data.debuffkey].duration)
@@ -53,7 +52,7 @@ end
 
 local function speedup_detach(inst, target)
     if target.components.locomotor then
-        target.components.locomotor:RemoveExternalSpeedMultiplier(target, "speedup_tro")
+        target.components.locomotor:RemoveExternalSpeedMultiplier(inst, "speedup_tro")
     end
     inst._debuffkey_tro = nil
 end
@@ -61,6 +60,18 @@ end
 local function OnTimerDone(inst, data)
     if data.name == "buffover" then
         inst.components.debuff:Stop()
+    end
+end
+
+local function onsave(inst, data)
+    if inst._debuffkey_tro then
+        data._debuffkey_tro = inst._debuffkey_tro
+    end
+end
+
+local function onload(inst, data)
+    if data._debuffkey_tro then
+        inst._debuffkey_tro = data._debuffkey_tro
     end
 end
 
@@ -135,6 +146,11 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
         inst:AddComponent("timer")
         inst.components.timer:StartTimer("buffover", duration)
         inst:ListenForEvent("timerdone", OnTimerDone)
+
+        if duration == 0 then
+            inst.OnSave = onsave
+            inst.OnLoad = onload
+        end
 
         return inst
     end
