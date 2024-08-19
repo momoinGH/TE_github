@@ -24,14 +24,6 @@ local function focalPointUpdater(dt, params, parent, dist_sq, x, y)
     TheCamera:SetOffset(offs)
 end
 
-local function focalPointUpdater4(dt, params, parent, dist_sq)
-    focalPointUpdater(dt, params, parent, dist_sq, 0, 1.5)
-end
-
-local function focalPointUpdater6(dt, params, parent, dist_sq)
-    focalPointUpdater(dt, params, parent, dist_sq, 1, 1.5)
-end
-
 -- this is called on client
 local function OnDirtyEventCameraStuff(inst)
     local target = GetClosestInstWithTag("interior_center", inst, 30)

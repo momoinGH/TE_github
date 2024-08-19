@@ -49,13 +49,15 @@ AddStategraphState("wilson", State {
     timeline =
     {
         TimeEvent(1 * FRAMES, function(inst)
-            if not inst.sg.statemem.heavy then
-                inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
+            local target = inst.sg.statemem.target
+            if not inst.sg.statemem.heavy and target and target:IsValid() and target.usesound then
+                inst.SoundEmitter:PlaySound(target.usesound) --使用门的声音
             end
         end),
         TimeEvent(5 * FRAMES, function(inst)
-            if inst.sg.statemem.heavy then
-                inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
+            local target = inst.sg.statemem.target
+            if inst.sg.statemem.heavy and target and target:IsValid() and target.usesound then
+                inst.SoundEmitter:PlaySound(target.usesound)
             end
         end),
 

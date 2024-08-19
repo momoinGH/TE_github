@@ -9,443 +9,106 @@ local function OnLoad(inst, data)
 	if data.entrada then inst.entrada = data.entrada end
 end
 
-local function OnActivateByOther(inst, source, doer)
-	--	if not inst.sg:HasStateTag("open") then
-	--		inst.sg:GoToState("opening")
-	--	end
-	if doer ~= nil and doer.Physics ~= nil then
-		doer.Physics:CollidesWith(COLLISION.WORLD)
-	end
-end
 
 local function PlayTravelSound(inst, doer)
 	inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_close")
 end
 
-local function OnActivate(inst, doer)
-	if doer:HasTag("player") then
-		if doer.components.talker ~= nil then
-			doer.components.talker:ShutUp()
-		end
-	else
-		inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_close")
+local function StartSpawning(inst)
+	if not inst:HasTag("burnt") and
+		inst.components.childspawner ~= nil then
+		inst.components.childspawner:StartSpawning()
 	end
 end
 
-
-local function OnAccept(inst, giver, item)
-	inst.components.inventory:DropItem(item)
-	inst.components.teleporter:Activate(item)
+local function OnSpawned(inst, child)
+	if not inst:HasTag("burnt") then
+		inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
+		if TheWorld.state.isday and
+			inst.components.childspawner ~= nil and
+			inst.components.childspawner:CountChildrenOutside() >= 1 and
+			child.components.combat.target == nil then
+			StopSpawning(inst)
+		end
+	end
 end
 
-local function entrance()
-	local inst = CreateEntity()
+local function OnGoHome(inst, child)
+	if not inst:HasTag("burnt") then
+		inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
+		if inst.components.childspawner ~= nil and
+			inst.components.childspawner:CountChildrenOutside() < 1 then
+			StartSpawning(inst)
+		end
+	end
+end
 
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-	inst.entity:AddMiniMapEntity()
+local room = {
+	width = 16,
+	depth = 10,
+	addprops = {
+		{ name = "city_exit_old_door", x_offset = 4.7, z_offset = 0.5, key = "exit" },
+		{ name = "interior_wall_upholstered", x_offset = -2.8 },
+		{ name = "interior_floor_herringbone", x_offset = -2.7 },
+		{ name = "shelves_midcentury", x_offset = -4.5, z_offset = 4 },
+		{ name = "deco_roomglow" },
+		{ name = "pigman_eskimo_shopkeep", x_offset = -3, startstate = "desk_pre" },
+		{ name = "shield_axes", x_offset = -7.5 },
+		{ name = "rug_porcupuss", z_offset = -2 },
+		{ name = "rug_fur", x_offset = 2, z_offset = 4 },
+		{ name = "rug_catcoon", x_offset = -2, z_offset = 4 },
+		{ name = "deco_weapon_beam1", x_offset = -5, z_offset = 7.5, scale = { -1, 1 } },
+		{ name = "deco_weapon_beam1", x_offset = -5, z_offset = -7.5 },
+		{ name = "deco_weapon_beam2", x_offset = 4.7, z_offset = 7.5, scale = { -1, 1 } },
+		{ name = "deco_weapon_beam2", x_offset = 4.7, z_offset = -7.5 },
+		{ name = "window_square_weapons_backwall", x_offset = -7.5, z_offset = -4 },
+		{ name = "swinging_light_basic_metal", x_offset = -2, z_offset = -4.5 },
+		{ name = "swinging_light_basic_metal", x_offset = 3, z_offset = 6.5 },
+		{ name = "deco_antiquities_beefalo_side", x_offset = -2, z_offset = 7.5, scale = { -1, 1 } },
+		{ name = "closed_chest", x_offset = 4.5, z_offset = -6 },
+		{ name = "deco_displaycase", x_offset = -4, z = -5.5 },
+		{ name = "deco_displaycase", x_offset = -4, z = -4 },
+		{ name = "shop_buyer", x_offset = 2.5, z_offset = -2, anim = "idle_cablespool", shoptype = "pig_shop_spears" },
+		{ name = "shop_buyer", x_offset = -0.5, z_offset = -2.5, anim = "idle_cablespool", shoptype = "pig_shop_spears" },
+		{ name = "shop_buyer", x_offset = 1.5, z_offset = -5, anim = "idle_cablespool", shoptype = "pig_shop_spears" },
+		{ name = "shop_buyer", z_offset = 3.5, anim = "idle_cablespool", shoptype = "pig_shop_spears" },
+		{ name = "shop_buyer", x_offset = 3.5, z_offset = 2.5, anim = "idle_cablespool", shoptype = "pig_shop_spears" },
+		{ name = "shop_buyer", x_offset = 2.5, z_offset = 5.5, anim = "idle_cablespool", shoptype = "pig_shop_spears" },
+	}
+}
 
-	--    inst.AnimState:SetBuild("palace")
-	--    inst.AnimState:SetBank("palace")
-	--    inst.AnimState:PlayAnimation("idle", true)
-	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetSortOrder(1)
-	inst.AnimState:SetFinalOffset(2)
+local function CreateInterior(inst)
+	InteriorSpawnerUtils.CreateSimpleInterior(inst, room)
+end
 
-	inst.Transform:SetEightFaced()
+local function fn()
+	local inst = InteriorSpawnerUtils.MakeBaseDoor("merm_sw_house", "wildbea_house", "idle_hunt1", true, false, "pig_lootshop.png", "dontstarve/common/pighouse_door")
 
-	inst.MiniMapEntity:SetIcon("pig_lootshop.png")
-
-
-
-
-	inst:SetDeployExtraSpacing(2.5)
-
-	inst.entity:SetPristine()
+	inst:AddTag("structure")
 
 	if not TheWorld.ismastersim then
 		return inst
 	end
 
+	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetLoot({ "boards", "boards", "cutstone", "cutstone" })
 
-	inst:AddComponent("inspectable")
-	--    inst.components.inspectable.getstatus = GetStatus
+	inst:AddComponent("workable")
 
-	inst:AddComponent("teleporter")
-	inst.components.teleporter.onActivate = OnActivate
-	inst.components.teleporter.onActivateByOther = OnActivateByOther
-	inst.components.teleporter.offset = 0
-	inst.components.teleporter.travelcameratime = 0.6
-	inst.components.teleporter.travelarrivetime = 0.5
+	inst:AddComponent("childspawner")
+	inst.components.childspawner.childname = "pig_eskimo"
+	inst.components.childspawner:SetSpawnedFn(OnSpawned)
+	inst.components.childspawner:SetGoHomeFn(OnGoHome)
+	inst.components.childspawner:SetRegenPeriod(TUNING.TOTAL_DAY_TIME * 4)
+	inst.components.childspawner:SetSpawnPeriod(10)
+	inst.components.childspawner:SetMaxChildren(1)
 
-	inst:AddComponent("inventory")
+	StartSpawning(inst)
+	MakeSnowCovered(inst)
 
-	inst:AddComponent("trader")
-	inst.components.trader.acceptnontradable = true
-	inst.components.trader.onaccept = OnAccept
-	inst.components.trader.deleteitemonaccept = false
-
-
-	--		if inst.components.teleporter.targetTeleporter ~= nil then
-	--		inst:RemoveEventCallback("onbuilt", OnBuilt)
-	--		return
-	--	end
-	if inst.entrada == nil then
-		local x = 0
-		local y = 0
-		local z = 0
-		if TheWorld.components.contador then TheWorld.components.contador:Increment(1) end
-		local numerounico = TheWorld.components.contador.count
-
-		x = TheWorld.components.contador:GetX()
-		y = 0
-		z = TheWorld.components.contador:GetZ()
-
-		inst.exit = SpawnPrefab("city_exit_old_door")
-		inst.exit.Transform:SetPosition(x + 5.2, 0, z + 0.5)
-		---------------------------cria a parede inicio------------------------------------------------------------------	
-		local tipodemuro = "wall_invisible"
-		---------------------------cria a parede inicio -------------------------------------
-		---------------------------parade dos aposento------------------------------------------------------------------	
-		local y = 0
-
-		x, z = math.floor(x) + 0.5, math.floor(z) + 0.5 --matching with normal walls
-		inst.Transform:SetPosition(x, 0, z)
-
-		local POS = {}
-		for x = -5.5, 5.5 do
-			for z = -8.5, 8.5 do
-				if x == -5.5 or x == 5.5 or z == -8.5 or z == 8.5 then
-					table.insert(POS, { x = x, z = z })
-				end
-			end
-		end
-
-
-		local count = 0
-		for _, v in pairs(POS) do
-			count = count + 1
-			local part = SpawnPrefab(tipodemuro)
-			part.Transform:SetPosition(x + v.x, 0, z + v.z)
-		end
-
-
-		----------------parede do fundo---------------------------------------------
-		local part = SpawnPrefab("interior_wall_upholstered")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 2.8, 0, z)
-			part.Transform:SetRotation(180)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-		---------------------------------itens de dentro----------------------------
-		local part = SpawnPrefab("shelves_midcentury")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 4.5, 0, z + 4)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("musac")
-		if part ~= nil then
-			part.Transform:SetPosition(x, 0, z)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("deco_roomglow")
-		if part ~= nil then
-			part.Transform:SetPosition(x, 0, z)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("pigman_eskimo_shopkeep")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 3, 0, z)
-			part.sg:GoToState("desk_pre")
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("shield_axes")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 15 / 2, 0, z)
-			part.Transform:SetRotation(90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("rug_porcupuss")
-		if part ~= nil then
-			part.Transform:SetPosition(x, 0, z - 2)
-			part.Transform:SetRotation(-90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("rug_fur")
-		if part ~= nil then
-			part.Transform:SetPosition(x + 2, 0, z + 4)
-			part.Transform:SetRotation(90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("rug_catcoon")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 2, 0, z + 4)
-			part.Transform:SetRotation(90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("deco_weapon_beam1")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 5, 0, z + 15 / 2)
-			part.Transform:SetRotation(180)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("deco_weapon_beam1")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 5, 0, z - 15 / 2)
-			part.Transform:SetRotation(-90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("deco_weapon_beam2")
-		if part ~= nil then
-			part.Transform:SetPosition(x + 4.7, 0, z + 15 / 2)
-			part.Transform:SetRotation(180)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("deco_weapon_beam2")
-		if part ~= nil then
-			part.Transform:SetPosition(x + 4.7, 0, z - 15 / 2)
-			part.Transform:SetRotation(-90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("window_square_weapons_backwall")
-		if part ~= nil then
-			part.Transform:SetPosition(x + 1, 0, z - 15 / 2)
-			part.Transform:SetRotation(-90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("swinging_light_basic_metal")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 2, 0, z - 4.5)
-			part.Transform:SetRotation(-90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-		--[[
-	local part = SpawnPrefab("swinging_light_basic_metal")
-	if part ~= nil then
-	part.Transform:SetPosition(x, 0, z +3)
-	part.Transform:SetRotation(-90)
-	if part.components.health ~= nil then
-	part.components.health:SetPercent(1)
-	end
-	end	
-]]
-		local part = SpawnPrefab("swinging_light_basic_metal")
-		if part ~= nil then
-			part.Transform:SetPosition(x + 3, 0, z + 6.5)
-			part.Transform:SetRotation(-90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("deco_antiquities_beefalo_side")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 2, 0, z + 15 / 2)
-			part.Transform:SetRotation(180)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-
-		local part = SpawnPrefab("closed_chest")
-		if part ~= nil then
-			part.Transform:SetPosition(x + 4.5, 0, z - (15 / 2) + 1.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("deco_displaycase")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 4, 0, z - 5.5)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("deco_displaycase")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 4, 0, z - 4)
-			--	part.Transform:SetRotation(90)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("shop_buyer")
-		if part ~= nil then
-			part.Transform:SetPosition(x + 2.5, 0, z - 2)
-			part.startAnim = "idle_cablespool"
-			part.AnimState:PlayAnimation("idle_cablespool")
-			part.shoptype = "pig_shop_spears"
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("shop_buyer")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 0.5, 0, z - 2.5)
-			part.startAnim = "idle_cablespool"
-			part.AnimState:PlayAnimation("idle_cablespool")
-			part.shoptype = "pig_shop_spears"
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("shop_buyer")
-		if part ~= nil then
-			part.Transform:SetPosition(x + 1.5, 0, z - 5)
-			part.startAnim = "idle_cablespool"
-			part.AnimState:PlayAnimation("idle_cablespool")
-			part.shoptype = "pig_shop_spears"
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("shop_buyer")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 1.5, 0, z - 5.5)
-			part.startAnim = "idle_cablespool"
-			part.AnimState:PlayAnimation("idle_cablespool")
-			part.shoptype = "pig_shop_spears"
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("shop_buyer")
-		if part ~= nil then
-			part.Transform:SetPosition(x, 0, z + 3.5)
-			part.startAnim = "idle_cablespool"
-			part.AnimState:PlayAnimation("idle_cablespool")
-			part.shoptype = "pig_shop_spears"
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("shop_buyer")
-		if part ~= nil then
-			part.Transform:SetPosition(x + 3.5, 0, z + 2.5)
-			part.startAnim = "idle_cablespool"
-			part.AnimState:PlayAnimation("idle_cablespool")
-			part.shoptype = "pig_shop_spears"
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		local part = SpawnPrefab("shop_buyer")
-		if part ~= nil then
-			part.Transform:SetPosition(x + 2.5, 0, z + 5.5)
-			part.startAnim = "idle_cablespool"
-			part.AnimState:PlayAnimation("idle_cablespool")
-			part.shoptype = "pig_shop_spears"
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
-		------------------------portoes trancados--------------------------------
-		local part = SpawnPrefab("interior_floor_herringbone")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 2.7, 0, z)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-		----------------------------criature dentro das jaulas-------------------------------------------------------------
-
-		if inst.caverna == nil then
-			inst.caverna = 1
-		end
-
-
-		--------------------------------------------cria o piso e itens fim -------------------------------------------------------	
-
-
-
-
-
-
-
-
-
-
-		inst:DoTaskInTime(1, function(inst)
-			local portaentrada = SpawnPrefab("pig_shop_spears")
-			local a, b, c = inst.Transform:GetWorldPosition()
-			portaentrada.Transform:SetPosition(a, b, c)
-			portaentrada.components.teleporter.targetTeleporter = inst.exit
-			inst.exit.components.teleporter.targetTeleporter = portaentrada
-
-			inst:Remove()
-		end)
-
-
-
-
-		inst.entrada = 1
-	end
-
-	inst.components.teleporter.targetTeleporter = inst.exit
-	inst.exit.components.teleporter.targetTeleporter = inst
-	inst:ListenForEvent("starttravelsound", PlayTravelSound)
-
-	inst.OnSave = OnSave
-	inst.OnLoad = OnLoad
+	inst:DoTaskInTime(0, CreateInterior)
 
 	return inst
 end
 
-return Prefab("pig_shop_spears_entrance", entrance)
+return Prefab("pig_shop_spears", fn)

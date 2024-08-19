@@ -28,8 +28,8 @@ local function creatInterior(inst)
     local depth = 18
     local width = 26
     local addprops = {
-        { name = "interior_floor_batcave", x_offset = -5.5 },
-        { name = "interior_wall_batcave_wall_rock", x_offset = -4, scale = { 4.4, 4.4 } },
+        { name = "interior_floor_batcave" },
+        { name = "interior_wall_batcave_wall_rock" },
         { name = "vamp_bat_cave_exit_door", x_offset = -depth / 2, key = "exit" },
         { name = "deco_cave_cornerbeam", x_offset = -depth / 2, z_offset = -width / 2 },
         { name = "deco_cave_cornerbeam", x_offset = -depth / 2, z_offset = width / 2, scale = { -1, 1 } },

@@ -12,7 +12,7 @@ local function onupdate(inst, dt)
 	if dt then
 		inst.timeremaining = inst.timeremaining - dt
 		local dist = Remap(inst.timeremaining, inst.timeremainingMax, 0, 2, 6)
-		inst.components.creatureprox:SetDist(dist, dist + 1)
+		inst.components.playerprox:SetDist(dist, dist + 1)
 	end
 end
 
@@ -51,19 +51,19 @@ local function fn(Sim)
 	inst:AddComponent("genericonupdate")
 	inst.components.genericonupdate:Setup(onupdate)
 
-	inst:AddComponent("creatureprox")
-	inst.components.creatureprox.inproxfn = oncollide
-	inst.components.creatureprox.period = 0.001
-	inst.components.creatureprox:SetDist(3, 4)
-	inst.components.creatureprox.piggybackfn = onupdate
+	inst:AddComponent("playerprox")
+	inst.components.playerprox.inproxfn = oncollide
+	inst.components.playerprox.period = 0.001
+	inst.components.playerprox:SetDist(3, 4)
+	inst.components.playerprox.piggybackfn = onupdate
 
 	inst.Physics:SetMotorVelOverride(10, 0, 0)
 
 	inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/pugalisk/gaze_LP", "gaze")
 
 	inst:ListenForEvent("animover", function(inst, data)
-		if inst.components.creatureprox.enabled then
-			inst.components.creatureprox.enabled = false
+		if inst.components.playerprox.enabled then
+			inst.components.playerprox.enabled = false
 			inst.AnimState:PlayAnimation("loop_pst")
 			inst.SoundEmitter:KillSound("gaze")
 		else

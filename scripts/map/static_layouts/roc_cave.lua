@@ -54,7 +54,7 @@ return {
       objects = {
         {
           name = "",
-          type = "pig_ruins_entrance_small",
+          type = "cave_entrance_roc",
           shape = "rectangle",
           x = 62,
           y = 61,

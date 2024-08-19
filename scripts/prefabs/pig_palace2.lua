@@ -1,8 +1,7 @@
+local InteriorSpawnerUtils = require("interiorspawnerutils")
+
 local assets =
 {
-    --    Asset("ANIM", "anim/palace2.zip"),
-    --    Asset("ANIM", "anim/pig_shop_doormats.zip"),
-    --    Asset("ANIM", "anim/palace_door.zip"),
     Asset("ANIM", "anim/wildbea_house.zip"),
 }
 
@@ -13,31 +12,7 @@ local prefabs =
     "trinket_giftshop_4",
 }
 
-local function LightsOn(inst)
-    if not inst:HasTag("burnt") then
-        inst.Light:Enable(true)
-        inst.AnimState:PlayAnimation("idle_fish1", true)
-        inst.SoundEmitter:PlaySound("dontstarve/pig/pighut_lighton")
-        inst.lightson = true
-    end
-end
 
-local function LightsOff(inst)
-    if not inst:HasTag("burnt") then
-        inst.Light:Enable(false)
-        inst.AnimState:PlayAnimation("idle_fish1", true)
-        inst.SoundEmitter:PlaySound("dontstarve/pig/pighut_lightoff")
-        inst.lightson = false
-    end
-end
-
-local function onfar(inst)
-    if not inst:HasTag("burnt") then
-        if inst.components.spawner and inst.components.spawner:IsOccupied() then
-            LightsOn(inst)
-        end
-    end
-end
 
 local function getstatus(inst)
     if inst:HasTag("burnt") then
@@ -51,223 +26,60 @@ local function getstatus(inst)
     end
 end
 
-local function onnear(inst)
-    if not inst:HasTag("burnt") then
-        if inst.components.spawner and inst.components.spawner:IsOccupied() then
-            LightsOff(inst)
-        end
-    end
+local room = {
+    width = 16,
+    depth = 10,
+    addprops = {
+        { name = "city_exit_general_door", x_offset = 4.7, z_offset = 0.5, key = "exit" },
+        { name = "interior_wall_wood", x_offset = -2.8 },
+        { name = "interior_floor_check", x_offset = -2.5 },
+        { name = "pigman_eskimo_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk_pre" },
+        { name = "deco_roomglow" },
+        { name = "shelves_wood", x_offset = -4.5, z_offset = -4 },
+        { name = "shelves_wood2", x_offset = -4.5, z_offset = 4 },
+        { name = "rug_hedgehog", x_offset = -2, z_offset = 4 },
+        { name = "deco_wood_cornerbeam", x_offset = -5, z_offset = 7.5 },
+        { name = "deco_wood_cornerbeam", x_offset = -5, z_offset = -7.5 },
+        { name = "deco_wood_cornerbeam", x_offset = 5, z_offset = 7.5 },
+        { name = "deco_wood_cornerbeam", x_offset = 5, z_offset = -7.5 },
+        { name = "deco_general_hangingpans", z_offset = -5.5 },
+        { name = "deco_general_hangingscale", x_offset = -2, z_offset = 6 },
+        { name = "swinging_light_chandalier_candles", x_offset = -1.3 },
+        { name = "deco_general_trough", x_offset = 1, z_offset = -7.5 },
+        { name = "deco_general_trough", x_offset = 3, z_offset = -7.5 },
+        { name = "window_round", x_offset = -2, z_offset = -7.5 },
+        { name = "window_round", x_offset = 1.5, z_offset = 7.5, scale = { -1, 1 } },
+        { name = "shop_buyer", x_offset = -1.8, z = -4.1, anim = "idle_barrel_dome", saleitem = { "swbait", "oinc", 5 } },
+        { name = "shop_buyer", x_offset = -1.8, z_offset = -1.9, anim = "idle_barrel_dome", shoptype = "pig_shop_fishing" },
+        { name = "shop_buyer", x_offset = 1.1, z_offset = -4.4, anim = "idle_barrel_dome", shoptype = "pig_shop_fishing" },
+        { name = "shop_buyer", x_offset = 1.3, z_offset = -2.2, anim = "idle_barrel_dome", shoptype = "pig_shop_fishing" },
+        { name = "shop_buyer", x_offset = 1.1, anim = "idle_barrel_dome", shoptype = "pig_shop_fishing" },
+        { name = "shop_buyer", x_offset = 1.5, z_offset = 5, anim = "idle_barrel_dome", shoptype = "pig_shop_fishing" },
+        { name = "shop_buyer", x_offset = 1.5, z_offset = 2.5, anim = "idle_barrel_dome", shoptype = "pig_shop_fishing" },
+        { name = "shop_buyer", x_offset = 4, z_offset = 5, anim = "idle_barrel_dome", shoptype = "pig_shop_fishing" },
+        { name = "shop_buyer", x_offset = 4, z_offset = 2.5, anim = "idle_barrel_dome", saleitem = { "boat_item", "oinc", 5 } },
+        { name = "shop_buyer", x_offset = 4, z_offset = -2.2, anim = "idle_barrel_dome", saleitem = { "oar", "oinc", 1 } },
+        { name = "shop_buyer", x_offset = 4, z_offset = -4.4, anim = "idle_barrel_dome", saleitem = { "oceanfishingrod", "oinc", 5 } },
+    }
+}
+
+local function CreateInterior(inst)
+    InteriorSpawnerUtils.CreateSimpleInterior(inst, room)
 end
 
-local function onwere(child)
-    if child.parent and not child.parent:HasTag("burnt") then
-        child.parent.SoundEmitter:KillSound("pigsound")
-        child.parent.SoundEmitter:PlaySound("dontstarve/pig/werepig_in_hut", "pigsound")
-    end
-end
+local function fn()
+    local inst = InteriorSpawnerUtils.MakeBaseDoor("merm_sw_house", "wildbea_house", "idle_fish1", true, false, "pig_fishingshop.png", "dontstarve/common/teleportworm/swallow")
 
-local function onnormal(child)
-    if child.parent and not child.parent:HasTag("burnt") then
-        child.parent.SoundEmitter:KillSound("pigsound")
-        child.parent.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/city_pig/pig_in_house_LP", "pigsound")
-    end
-end
-
-local function onoccupied(inst, child)
-    if not inst:HasTag("burnt") then
-        inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/city_pig/pig_in_house_LP", "pigsound")
-        inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
-
-        if inst.doortask then
-            inst.doortask:Cancel()
-            inst.doortask = nil
-        end
-
-        -- inst.doortask = inst:DoTaskInTime(1, function() if not inst.components.playerprox:IsPlayerClose() then LightsOn(inst) end end)
-        inst.doortask = inst:DoTaskInTime(1, function() LightsOn(inst) end)
-
-        if child then
-            inst:ListenForEvent("transformwere", onwere, child)
-            inst:ListenForEvent("transformnormal", onnormal, child)
-        end
-    end
-end
-
-local function onvacate(inst, child)
-    if not inst:HasTag("burnt") then
-        if inst.doortask then
-            inst.doortask:Cancel()
-            inst.doortask = nil
-        end
-
-        inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
-        inst.SoundEmitter:KillSound("pigsound")
-
-        if child then
-            inst:RemoveEventCallback("transformwere", onwere, child)
-            inst:RemoveEventCallback("transformnormal", onnormal, child)
-
-            if child.components.werebeast then
-                child.components.werebeast:ResetTriggers()
-            end
-
-            if child.components.health then
-                child.components.health:SetPercent(1)
-            end
-        end
-    end
-end
-
-
-local function onhammered(inst, worker)
-    if inst:HasTag("fire") and inst.components.burnable then
-        inst.components.burnable:Extinguish()
-    end
-
-    if inst.doortask then
-        inst.doortask:Cancel()
-        inst.doortask = nil
-    end
-
-    if inst.components.spawner then inst.components.spawner:ReleaseChild() end
-
-    inst.components.lootdropper:DropLoot()
-    SpawnPrefab("collapse_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
-    inst:Remove()
-end
-
-local function ongusthammerfn(inst)
-    onhammered(inst, nil)
-end
-
-local function onhit(inst, worker)
-    if not inst:HasTag("burnt") then
-        inst.AnimState:PlayAnimation("idle_fish1")
-        inst.AnimState:PushAnimation("idle_fish1")
-    end
-end
-
-local function OnDay(inst)
-    --print(inst, "OnDay")
-    if not inst:HasTag("burnt") then
-        if inst.components.spawner and inst.components.spawner:IsOccupied() then
-            LightsOff(inst)
-
-            if inst.doortask then
-                inst.doortask:Cancel()
-                inst.doortask = nil
-            end
-
-            inst.doortask = inst:DoTaskInTime(1 + math.random() * 2,
-                function() inst.components.spawner:ReleaseChild() end)
-        end
-    end
-end
-
-local function onbuilt(inst)
-    inst.AnimState:PlayAnimation("idle_fish1")
-    inst.AnimState:PushAnimation("idle_fish1")
-end
-
-local function onsave(inst, data)
-    if inst:HasTag("burnt") or inst:HasTag("fire") then
-        data.burnt = true
-    end
-
-    if inst:HasTag("spawned_shop") then
-        data.spawned_shop = true
-    end
-end
-
-local function onload(inst, data)
-    if data and data.burnt then
-        inst.components.burnable.onburnt(inst)
-    end
-
-    if data and data.spawned_shop then
-        inst:AddTag("spawned_shop")
-    end
-end
-
-local function usedoor(inst, data)
-    if inst.usesounds then
-        if data and data.doer and data.doer.SoundEmitter then
-            for i, sound in ipairs(inst.usesounds) do
-                data.doer.SoundEmitter:PlaySound(sound)
-            end
-        end
-    end
-end
---------------------------------------do teleporter------------------------
-local function OnDoneTeleporting(inst, obj)
-    if inst.closetask ~= nil then
-        inst.closetask:Cancel()
-    end
-
-    if obj ~= nil and obj:HasTag("player") then
-        obj:DoTaskInTime(1, obj.PushEvent, "wormholespit") -- for wisecracker
-    end
-end
-local function StartTravelSound(inst, doer)
-    inst.SoundEmitter:PlaySound("dontstarve/common/teleportworm/swallow")
-    doer:PushEvent("wormholetravel", WORMHOLETYPE.WORM) --Event for playing local travel sound
-end
-
-local function OnActivateByOther(inst, source, doer)
-    --	if not inst.sg:HasStateTag("open") then
-    --		inst.sg:GoToState("opening")
-    --	end
-    if doer ~= nil and doer.Physics ~= nil then
-        doer.Physics:CollidesWith(COLLISION.WORLD)
-    end
-end
-
-local function OnActivate(inst, doer)
-    if doer:HasTag("player") then
-        ProfileStatsSet("wormhole_used", true)
-        doer.tropical_room_event:push()
-
-        local other = inst.components.teleporter.targetTeleporter
-        if other ~= nil then
-            DeleteCloseEntsWithTag("WORM_DANGER", other, 15)
-        end
-
-        --Sounds are triggered in player's stategraph
-    elseif inst.SoundEmitter ~= nil then
-        inst.SoundEmitter:PlaySound("dontstarve/common/teleportworm/swallow")
-    end
-end
------------------------------------------------------------------------------
-local function fn(Sim)
-    local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local light = inst.entity:AddLight()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("pig_fishingshop.png")
-
-    light:SetFalloff(1)
-    light:SetIntensity(.5)
-    light:SetRadius(1)
-    light:Enable(false)
-    light:SetColour(180 / 255, 195 / 255, 50 / 255)
+    inst.entity:AddLight()
+    inst.Light:SetFalloff(1)
+    inst.Light:SetIntensity(.5)
+    inst.Light:SetRadius(1)
+    inst.Light:Enable(false)
+    inst.Light:SetColour(180 / 255, 195 / 255, 50 / 255)
 
     MakeObstaclePhysics(inst, 1.0)
 
-    inst.AnimState:SetBank("merm_sw_house")
-    inst.AnimState:SetBuild("wildbea_house")
-    inst.AnimState:PlayAnimation("idle_fish1")
-    --	inst.Transform:SetScale(0.9, 0.9, 0.9)	
-
-
     inst:AddTag("structure")
-
-
-    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
@@ -275,63 +87,11 @@ local function fn(Sim)
 
     inst:AddComponent("lootdropper")
 
-    --    inst:AddComponent("door")
-    --[[
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(4)
-	inst.components.workable:SetOnFinishCallback(onhammered)
-	inst.components.workable:SetOnWorkCallback(onhit)
-	]]
-    --	inst:AddComponent("spawner")
-    --    inst.components.spawner:Configure("pig_eskimo", TUNING.TOTAL_DAY_TIME*4)
-    --    inst.components.spawner.onoccupied = onoccupied
-    --    inst.components.spawner.onvacate = onvacate
-
-    inst:WatchWorldState("isday", OnDay)
-
-    inst:AddComponent("inspectable")
-
     inst.components.inspectable.getstatus = getstatus
 
     MakeSnowCovered(inst, .01)
 
-    inst:AddComponent("fixable")
-    inst.components.fixable:AddRecinstructionStageData("rubble", "pig_shop", "palace")
-    inst.components.fixable:AddRecinstructionStageData("unbuilt", "pig_shop", "palace")
-
-    inst:AddComponent("teleporter")
-    inst.components.teleporter.onActivate = OnActivate
-    inst.components.teleporter.onActivateByOther = OnActivateByOther
-    inst.components.teleporter.offset = 0
-    inst.components.teleporter.hamlet = true
-    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-    inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-    inst:ListenForEvent("burntup", function(inst)
-        inst.components.fixable:AddRecinstructionStageData("burnt", "pig_shop", "palace", 1)
-        if inst.doortask then
-            inst.doortask:Cancel()
-            inst.doortask = nil
-        end
-        inst:Remove()
-    end)
-
-    inst:ListenForEvent("onignite", function(inst, data)
-        if inst.components.spawner then
-            inst.components.spawner:ReleaseChild()
-        end
-    end)
-
-    inst.OnSave = onsave
-    inst.OnLoad = onload
-
-    inst:ListenForEvent("onbuilt", onbuilt)
-    inst:DoTaskInTime(math.random(), function()
-        if TheWorld.state.isday then
-            OnDay(inst)
-        end
-    end)
+    inst:DoTaskInTime(0, CreateInterior)
 
     return inst
 end

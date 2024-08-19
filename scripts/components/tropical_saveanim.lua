@@ -10,6 +10,7 @@ local SaveAnim = Class(function(self, inst)
     self.isloopplay = nil
     self.isdelayset = nil
     self.rotation = nil
+    self.minimap = nil
 
     self.onSet = nil
 end)
@@ -35,6 +36,9 @@ function SaveAnim:ReSet()
             inst.Transform:SetRotation(FunctionOrValue(self.rotation, self.inst))
         end
     end
+    if inst.MiniMapEntity and self.minimap then
+        inst.MiniMapEntity:SetIcon(self.minimap)
+    end
 
     if self.onSet then
         self.onSet(inst)
@@ -42,7 +46,7 @@ function SaveAnim:ReSet()
 end
 
 --- 初始化
-function SaveAnim:Init(bank, build, anim, scale, isloopplay, isdelayset, rotation, onSet)
+function SaveAnim:Init(bank, build, anim, scale, isloopplay, isdelayset, rotation, minimap, onSet)
     self.bank = bank
     self.build = build
     self.anim = anim
@@ -50,6 +54,7 @@ function SaveAnim:Init(bank, build, anim, scale, isloopplay, isdelayset, rotatio
     self.isloopplay = isloopplay
     self.isdelayset = isdelayset
     self.rotation = rotation
+    self.minimap = minimap
     self.onSet = onSet
     self:ReSet()
 end
@@ -62,7 +67,8 @@ function SaveAnim:OnSave()
         scale = self.scale,
         isloopplay = self.isloopplay,
         isdelayset = self.isdelayset,
-        rotation = self.rotation
+        rotation = self.rotation,
+        minimap = self.minimap,
     }
 end
 
@@ -76,7 +82,7 @@ function SaveAnim:OnLoad(data)
     self.isloopplay = data.isloopplay
     self.isdelayset = data.isdelayset
     self.rotation = data.rotation
-
+    self.minimap = data.minimap
     if self.isdelayset then
         self.inst:DoTaskInTime(0, function() self:ReSet() end)
     else

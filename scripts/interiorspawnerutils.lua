@@ -281,10 +281,6 @@ local function OnDoorHaunt(inst, haunter)
     inst.components.teleporter:Activate(haunter)
 end
 
-local function StartTravelSound(inst)
-    inst.SoundEmitter:PlaySound(inst.usesounds)
-end
-
 local function OnDoorRemove(inst)
     FN.OnHouseDestroy(inst, nil, true)
 end
@@ -298,7 +294,8 @@ end
 ---@param trader boolean|nil 是否可用于传送物品、交易
 ---@param interior_door boolean|nil 是否是虚空内部的生成的门，如果是则表示需要记录中心点对象
 ---@param minimap string|nil 小地图图标
-function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, usesounds)
+---@param usesound string|nil 使用门的声音，建议"dontstarve/common/pighouse_door"、"dontstarve_DLC003/common/objects/store/door_open"
+function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, usesound)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -342,6 +339,7 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
     inst.components.teleporter.travelcameratime = 0
     inst.components.teleporter.travelarrivetime = 0
     -- inst.components.teleporter.onActivate = OnActivate
+    -- inst.components.teleporter.OnDoneTeleporting = OnDoneTeleporting
 
     if trader then
         inst:AddComponent("trader")
@@ -358,9 +356,8 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
         inst:AddComponent("entitytracker")
     end
 
-    if usesounds then
-        inst.usesounds = usesounds
-        inst:ListenForEvent("starttravelsound", StartTravelSound)
+    if usesound then
+        inst.usesound = usesound
     end
 
     inst:ListenForEvent("onremove", OnDoorRemove)
@@ -534,8 +531,8 @@ function FN.CreateRoom(room)
     -- 清除杂物，以防万一
     FN.ClearSpace(x, z)
 
-    local width = room.width or 16
-    local depth = room.depth or 10
+    local width = room.width or TUNING.ROOM_TINY_WIDTH
+    local depth = room.depth or TUNING.ROOM_TINY_DEPTH
 
     -- 生成中心点
     local center = SpawnPrefab("interior_center")
@@ -550,19 +547,53 @@ function FN.CreateRoom(room)
     for _, data in ipairs(room.addprops) do
         local p = SpawnPrefab(data.name)
 
-        p.Transform:SetPosition(x + (data.x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))
+        local x_offset = data.x_offset
+        local scale = data.scale
+
         -- print("创建内部对象", p, p:HasTag("interior_door"), data.key)
+
         if p:HasTag("interior_door") then
-            assert(p.components.entitytracker, "只要是虚空房间里的门都应该有这个组件，用来记录自己所在房间的中心点")
+            --门
+            assert(p.components.entitytracker, "只要是虚空房间里的门都应该有entitytracker组件，用来记录自己所在房间的中心点")
             p.components.entitytracker:TrackEntity("interior_center", center)
             local key = data.key or INC
             INC = INC + 1 --只要每次创建房间时唯一就行
             doors[key] = p
             door_map[key] = data.target_door
+        elseif p:HasTag("interior_floor") then
+            --地板自适应缩放，不是直接的线性关系，这里懒得搞什么公式了
+            x_offset = x_offset
+                or depth == TUNING.ROOM_LARGE_DEPTH and -5.5
+                or depth == TUNING.ROOM_MEDIUM_DEPTH and -4.4
+                or depth == TUNING.ROOM_SMALL_DEPTH and -3.5
+                or depth == TUNING.ROOM_TINY_DEPTH and -3
+                or nil
+            scale = scale
+                or width == TUNING.ROOM_LARGE_WIDTH and { 4.5, 4.5 }
+                or width == TUNING.ROOM_MEDIUM_WIDTH and { 3.7, 3.7 }
+                or width == TUNING.ROOM_SMALL_WIDTH and { 2.9, 2.9 }
+                or width == TUNING.ROOM_TINY_WIDTH and { 2.4, 2.4 }
+                or nil
+        elseif p:HasTag("interior_wall") then
+            -- 墙壁自适应缩放
+            x_offset = x_offset
+                or depth == TUNING.ROOM_LARGE_DEPTH and -5.5
+                or depth == TUNING.ROOM_MEDIUM_DEPTH and -4
+                or depth == TUNING.ROOM_SMALL_DEPTH and -3.5
+                or depth == TUNING.ROOM_TINY_DEPTH and -2.8
+                or nil
+            scale = scale
+                or width == TUNING.ROOM_LARGE_WIDTH and { 4.6, 4.6 }
+                or width == TUNING.ROOM_MEDIUM_WIDTH and { 4.2, 4.2 }
+                or width == TUNING.ROOM_SMALL_WIDTH and { 3.5, 3.5 }
+                or width == TUNING.ROOM_TINY_WIDTH and { 3, 3 }
+                or nil
         end
 
+        p.Transform:SetPosition(x + (x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))
+
         if p.components.tropical_saveanim then
-            p.components.tropical_saveanim:Init(data.bank, data.build, data.anim, data.scale, data.isloopplay, data.isdelayset, data.rotation)
+            p.components.tropical_saveanim:Init(data.bank, data.build, data.anim, scale, data.isloopplay, data.isdelayset, data.rotation)
         end
 
         if data.startstate then
@@ -599,7 +630,7 @@ function FN.CreateRooms(rooms)
     -- 关联门
     for key, door in pairs(doors) do
         local target_door = door_map[key] and doors[door_map[key]]
-        print("构造门", key, door_map[key], door, target_door, door:GetPosition())
+        -- print("构造门", key, door_map[key], door, target_door, door:GetPosition())
         if target_door then
             door.components.teleporter:Target(target_door)
             target_door.components.teleporter:Target(door)
@@ -607,6 +638,14 @@ function FN.CreateRooms(rooms)
     end
 
     return doors, door_map, centers
+end
+
+function FN.CreateSimpleInterior(inst, room)
+    if inst.components.teleporter:GetTarget() then return end
+
+    local doors = FN.CreateRoom(room)
+    inst.components.teleporter:Target(doors.exit)
+    doors.exit.components.teleporter:Target(inst)
 end
 
 return FN

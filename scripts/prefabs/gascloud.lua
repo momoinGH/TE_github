@@ -109,11 +109,11 @@ local function fn(Sim)
 		return inst
 	end
 
-	inst:AddComponent("creatureprox")
-	-- inst.components.creatureprox.inproxfn = oncollide
-	inst.components.creatureprox.period = 0.01
-	inst.components.creatureprox:SetDist(START_RANGE, END_RANGE)
-	inst.components.creatureprox.piggybackfn = onupdate
+	inst:AddComponent("playerprox")
+	-- inst.components.playerprox.inproxfn = oncollide
+	inst.components.playerprox.period = 0.01
+	inst.components.playerprox:SetDist(START_RANGE, END_RANGE)
+	inst.components.playerprox.piggybackfn = onupdate
 
 	---------------	
 

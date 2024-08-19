@@ -15,7 +15,6 @@ PrefabFiles = {
     "pigman_shopkeeper_desk",
     "shop_pedestals",
     "deed",
-    "playerhouse_city_interior2",
     "shelf",
     "shelf_slot",
     "trinkets_giftshop",

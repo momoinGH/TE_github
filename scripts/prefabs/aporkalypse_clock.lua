@@ -380,14 +380,11 @@ local function make_rewind_plate()
 	end
 
 	-------------------------------------------------------------------------------
-	inst:AddComponent("creatureprox")
-	inst.components.creatureprox:SetOnPlayerNear(on_pressure_plate_near)
-	inst.components.creatureprox:SetOnPlayerFar(on_pressure_plate_far)
-
-	inst.components.creatureprox:SetTestfn(function(testing) return not testing:HasTag("flying") end)
-
-	inst.components.creatureprox:SetDist(0.8, 0.9)
-	inst.components.creatureprox.inventorytrigger = true
+	inst:AddComponent("playerprox")
+	inst.components.playerprox:SetOnPlayerNear(on_pressure_plate_near)
+	inst.components.playerprox:SetOnPlayerFar(on_pressure_plate_far)
+	inst.components.playerprox:SetDist(0.8, 0.9)
+	inst.components.playerprox.inventorytrigger = true
 
 	return inst
 end
@@ -448,14 +445,11 @@ local function make_fastforward_plate()
 	end
 
 	-------------------------------------------------------------------------------
-	inst:AddComponent("creatureprox")
-	inst.components.creatureprox:SetOnPlayerNear(on_pressure_plate_near)
-	inst.components.creatureprox:SetOnPlayerFar(on_pressure_plate_far)
-
-	inst.components.creatureprox:SetTestfn(function(testing) return not testing:HasTag("flying") end)
-
-	inst.components.creatureprox:SetDist(0.8, 0.9)
-	inst.components.creatureprox.inventorytrigger = true
+	inst:AddComponent("playerprox")
+	inst.components.playerprox:SetOnPlayerNear(on_pressure_plate_near)
+	inst.components.playerprox:SetOnPlayerFar(on_pressure_plate_far)
+	inst.components.playerprox:SetDist(0.8, 0.9)
+	inst.components.playerprox.inventorytrigger = true
 
 	-------------------------------------------------------------------------------
 

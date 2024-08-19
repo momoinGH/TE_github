@@ -148,18 +148,17 @@ end
 
 local function disarm(inst, doer)
     inst.AnimState:PlayAnimation("disarmed")
-    inst.components.creatureprox:SetEnabled(false)
+    inst.components.playerprox:SetOnPlayerNear(nil)
+    inst.components.playerprox:SetOnPlayerFar(nil)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/disarm_floor")
     inst.down = false
 end
 
 local function rearm(inst, doer)
     inst.AnimState:PlayAnimation("up_idle")
-    inst.components.creatureprox:SetEnabled(true)
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetOnPlayerFar(onfar)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/disarm_floor")
-    if inst.components.creatureprox then
-        inst.components.creatureprox:forcetest()
-    end
 end
 
 local function checkstartdown(inst)
@@ -203,13 +202,12 @@ local function fn(Sim)
     inst.components.disarmable.rearmable = true
     inst:AddTag("weighdownable")
 
-    inst:AddComponent("creatureprox")
-    inst.components.creatureprox:SetOnPlayerNear(onnear)
-    inst.components.creatureprox:SetOnPlayerFar(onfar)
-    inst.components.creatureprox:SetTestfn(testfn)
-    inst.components.creatureprox:SetDist(0.8, 0.9)
-    inst.components.creatureprox.inventorytrigger = true
-    inst.components.creatureprox.period = 0.01
+    inst:AddComponent("playerprox")
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetOnPlayerFar(onfar)
+    inst.components.playerprox:SetDist(0.8, 0.9)
+    inst.components.playerprox.inventorytrigger = true
+    inst.components.playerprox.period = 0.01
 
     inst.OnSave = onsave
     inst.OnLoad = onload

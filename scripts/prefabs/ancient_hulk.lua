@@ -35,29 +35,29 @@ local prefabs =
 }
 
 SetSharedLootTable('ancient_hulk', {
-    { 'infused_iron',              1.0 },
-    { 'infused_iron',              1.0 },
-    { 'infused_iron',              1.0 },
-    { 'infused_iron',              1.0 },
-    { 'infused_iron',              1.0 },
-    { 'infused_iron',              1.0 },
-    { 'infused_iron',              0.25 },
+    { 'infused_iron', 1.0 },
+    { 'infused_iron', 1.0 },
+    { 'infused_iron', 1.0 },
+    { 'infused_iron', 1.0 },
+    { 'infused_iron', 1.0 },
+    { 'infused_iron', 1.0 },
+    { 'infused_iron', 0.25 },
 
     { 'living_artifact_blueprint', 1 },
 
 
-    { 'iron',                      1.0 },
-    { 'iron',                      1.0 },
-    { 'iron',                      0.75 },
-    { 'iron',                      0.25 },
-    { 'iron',                      0.25 },
-    { 'iron',                      0.25 },
+    { 'iron', 1.0 },
+    { 'iron', 1.0 },
+    { 'iron', 0.75 },
+    { 'iron', 0.25 },
+    { 'iron', 0.25 },
+    { 'iron', 0.25 },
 
 
-    { 'gears',                     1.0 },
-    { 'gears',                     1.0 },
-    { 'gears',                     0.75 },
-    { 'gears',                     0.30 },
+    { 'gears', 1.0 },
+    { 'gears', 1.0 },
+    { 'gears', 0.75 },
+    { 'gears', 0.30 },
 })
 
 
@@ -793,10 +793,10 @@ local function minefn()
 
     inst.SetLightValue = SetLightValue
 
-    inst:AddComponent("creatureprox")
-    inst.components.creatureprox.period = 0.01
-    inst.components.creatureprox:SetDist(3.5, 5)
-    inst.components.creatureprox:SetOnPlayerNear(onnearmine)
+    inst:AddComponent("playerprox")
+    inst.components.playerprox.period = 0.01
+    inst.components.playerprox:SetDist(3.5, 5)
+    inst.components.playerprox:SetOnPlayerNear(onnearmine)
 
     return inst
 end

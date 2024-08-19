@@ -452,3 +452,5 @@ if TUNING.tropical.greenworld ~= 0 then
 	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/gw_bonestaff.xml"))
 	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/gw_bonestaff.xml"))
 end
+
+table.insert(Assets, Asset("IMAGE", "levels/textures/ds_fog1.tex"))

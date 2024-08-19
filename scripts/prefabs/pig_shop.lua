@@ -228,14 +228,16 @@ local function onload(inst, data)
     end
 end
 
-local width = 15
-local depth = 10
+local width = TUNING.ROOM_TINY_WIDTH
+local depth = TUNING.ROOM_TINY_DEPTH
 
 local rooms = {
     pig_shop_academy = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_circles", x_offset = -2.8 },
-            { name = "interior_floor_hexagon", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_circles", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_hexagon" },
             { name = "city_exit_giftshop_door", x_offset = 4.5, key = "exit", },
             { name = "deco_roomglow", },
             { name = "pigman_professor_shopkeep", x_offset = -2.3, z_offset = 4, startstate = "desk_pre" },
@@ -269,9 +271,11 @@ local rooms = {
         }
     },
     pig_shop_antiquities = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_harlequin", x_offset = -2.8 },
-            { name = "interior_floor_wood", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_harlequin", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_wood" },
             { name = "city_exit_antiquities_door", x_offset = 4.5, key = "exit" },
             { name = "pigman_collector_shopkeep", x_offset = -3, z_offset = 4, startstate = "desk_pre" },
             { name = "deco_roomglow", },
@@ -300,9 +304,11 @@ local rooms = {
         }
     },
     pig_shop_hatshop = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_floral", x_offset = -2.8 },
-            { name = "interior_floor_check2", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_floral", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_check2" },
             { name = "city_exit_giftshop_door", x_offset = 4.5, key = "exit", },
             { name = "shelves_floating", x_offset = -5, shelfitems = { { 1, "petals" }, { 2, "petals" }, { 3, "petals" }, { 4, "cutgrass" }, { 5, "cutgrass" }, { 6, "petals" } }, },
             { name = "deco_roomglow", },
@@ -337,9 +343,11 @@ local rooms = {
         }
     },
     pig_shop_weapons = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_upholstered", x_offset = -2.8 },
-            { name = "interior_floor_herringbone", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_upholstered", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_herringbone" },
             { name = "city_exit_basic_door", x_offset = 4.5, key = "exit", },
             { name = "shelves_midcentury", x_offset = -4.5, z_offset = 4, shelfitems = { { 5, "twigs" }, { 6, "twigs" }, { 3, "twigs" }, { 4, "twigs" } }, },
             { name = "deco_roomglow", },
@@ -370,9 +378,11 @@ local rooms = {
         }
     },
     pig_shop_arcane = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_moroc", x_offset = -2.8 },
-            { name = "interior_floor_octagon", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_moroc", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_octagon" },
             { name = "city_exit_florist_door", x_offset = 4.5, key = "exit", },
             { name = "pigman_erudite_shopkeep", x_offset = -3, z_offset = 4, startstate = "desk_pre" },
             { name = "deco_roomglow", },
@@ -399,9 +409,11 @@ local rooms = {
         }
     },
     pig_shop_florist = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_sunflower", x_offset = -2.8 },
-            { name = "interior_floor_wood", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_sunflower", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_wood" },
             { name = "city_exit_florist_door", x_offset = 4.5, key = "exit", },
             { name = "pigman_florist_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk_pre" },
             { name = "deco_roomglow", },
@@ -435,9 +447,11 @@ local rooms = {
         }
     },
     pig_shop_hoofspa = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_marble", x_offset = -2.8 },
-            { name = "interior_floor_check", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_marble", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_check"},
             { name = "city_exit_hoofspa_door", x_offset = 4.5, key = "exit", },
             { name = "pigman_beautician_shopkeep", x_offset = -3, z_offset = 3, startstate = "desk_pre" },
             { name = "deco_roomglow", },
@@ -461,9 +475,11 @@ local rooms = {
         }
     },
     pig_shop_general = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_wood", x_offset = -2.8 },
-            { name = "interior_floor_check", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_wood", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_check" },
             { name = "city_exit_general_door", x_offset = 4.5, key = "exit", },
             { name = "pigman_banker_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk_pre" },
             { name = "shelves_wood", x_offset = -4.5, z_offset = -4, shelfitems = { { 3, "rocks" }, { 4, "rocks" }, { 5, "rocks" }, { 6, "rocks" } }, },
@@ -494,9 +510,11 @@ local rooms = {
         }
     },
     pig_shop_produce = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_wood", x_offset = -2.8 },
-            { name = "interior_floor_wood", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_wood", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_wood" },
             { name = "city_exit_produce_door", x_offset = 4.5, key = "exit", },
             { name = "pigman_storeowner_shopkeep", x_offset = -2.5, z_offset = 4, startstate = "desk_pre" },
             { name = "rug_rectangle", x_offset = depth / 6 + 1, z_offset = width / 6 + 1, rotation = 95 },
@@ -531,9 +549,11 @@ local rooms = {
         }
     },
     pig_shop_deli = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_checkered", x_offset = -2.8 },
-            { name = "interior_floor_sheet_metal", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_checkered", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_sheet_metal" },
             { name = "city_exit_deli_door", x_offset = 4.5, key = "exit", },
             { name = "pigman_storeowner_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk_pre" },
             { name = "shelves_fridge", x_offset = -4.5, z_offset = -4, rotation = -90, shelfitems = { { 1, "fish_raw_small" }, { 2, "fish_raw_small" }, { 3, "bird_egg" }, { 4, "bird_egg" }, { 5, "froglegs" }, { 6, "froglegs" } }, },
@@ -562,9 +582,11 @@ local rooms = {
         }
     },
     pig_shop_cityhall = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_mayorsoffice", x_offset = -2.8 },
-            { name = "interior_floor_plaid_tile", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_mayorsoffice", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_plaid_tile" },
             { name = "city_exit_flag_door", x_offset = 4.5, key = "exit", },
             { name = "pigman_mayor_shopkeep", x_offset = -3, z_offset = 4 },
             { name = "deco_roomglow", },
@@ -592,9 +614,11 @@ local rooms = {
         }
     },
     pig_shop_cityhall_player = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_mayorsoffice", x_offset = -2.8 },
-            { name = "interior_floor_plaid_tile", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_mayorsoffice", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_plaid_tile" },
             { name = "city_exit_flag_door", x_offset = 4.5, key = "exit", },
             { name = "deco_roomglow", },
             { name = "deco_cityhall_desk", x_offset = -1.3, },
@@ -617,9 +641,11 @@ local rooms = {
         }
     },
     pig_shop_bank = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_fullwall_moulding", x_offset = -2.8 },
-            { name = "interior_floor_hoof_curvy", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_fullwall_moulding", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_hoof_curvy" },
             { name = "city_exit_bank_door", x_offset = 4.5, key = "exit", },
             { name = "pigman_banker_shopkeep", x_offset = -2.5, startstate = "desk_pre" },
             { name = "deco_roomglow", },
@@ -652,9 +678,11 @@ local rooms = {
         }
     },
     pig_shop_tinker = {
+        width = width,
+        depth = depth,
         addprops = {
-            { name = "interior_wall_bricks", x_offset = -2.8 },
-            { name = "interior_floor_woodpaneling2", x_offset = -2.4, scale = { 4.5, 4.5 } },
+            { name = "interior_wall_bricks", scale = { 2.8, 2.8 } },
+            { name = "interior_floor_woodpaneling2" },
             { name = "city_exit_tinker_door", x_offset = 4.5, key = "exit", },
             { name = "pigman_mechanic_shopkeep", x_offset = -2, z_offset = -3, startstate = "desk_pre" },
             { name = "deco_roomglow", },
@@ -706,9 +734,9 @@ local function makefn(name, build, bank, data)
     data = data or {}
 
     local function fn()
-        local usesounds = data.sounds and data.sounds[1] or nil
+        local usesound = data.sounds and data.sounds[1] or nil
         local inst = InteriorSpawnerUtils.MakeBaseDoor(bank or "pig_shop", build, "idle", false, false,
-            name == "pig_shop_cityhall_player" and "pig_shop_cityhall.png" or name .. ".png", usesounds)
+            name == "pig_shop_cityhall_player" and "pig_shop_cityhall.png" or name .. ".png", usesound)
 
         inst.entity:AddLight()
         inst.Light:SetFalloff(1)

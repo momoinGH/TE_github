@@ -352,5 +352,4 @@ end
 
 return Prefab("wildbeaver_house", fn, assets, prefabs),
     Prefab("pig_iglu", fn1, assets, prefabs),
-    Prefab("pig_shop_spears", fn2, assets, prefabs),
     MakePlacer("wildbeaver_house_placer", "merm_sw_house", "wildbea_house", "idle_beaver1")

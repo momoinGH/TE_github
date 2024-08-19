@@ -27,7 +27,6 @@ local function common(bank, build, anim)
     inst.AnimState:SetBuild(build)
     inst.AnimState:PlayAnimation(anim, true)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-    inst.AnimState:SetScale(2.8, 2.8)
 
     inst:AddTag("NOCLICK")
     inst:AddTag("NOBLOCK")

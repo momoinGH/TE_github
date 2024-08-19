@@ -4,7 +4,7 @@ PrefabFiles = {
     "hamlet_interior_housedoor",
     "hamlet_pig_ruins_entrance",
     "hamlet_interior_door",
-
+    "cave_entrance_roc",
 
 
 
@@ -117,7 +117,6 @@ PrefabFiles = {
     "shop_pedestals",
     "deed",
     "wallrenovation",
-    "playerhouse_city_interior2",
     "shelf",
     "shelf_slot",
     "trinkets_giftshop",

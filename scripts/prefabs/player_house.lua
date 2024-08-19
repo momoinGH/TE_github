@@ -39,8 +39,8 @@ end
 local room = {
     addprops = {
         { name = "city_exit_old_door", x_offset = 4.7, key = "exit", },
-        { name = "interior_wall_wood", x_offset = -2.8 },
-        { name = "interior_floor_wood", x_offset = -2.4 },
+        { name = "interior_wall_wood" },
+        { name = "interior_floor_wood" },
         { name = "deco_roomglow" },
         { name = "shelves_cinderblocks", x_offset = -4.5, z_offset = -15 / 3.5 + 0.7, init = AddCraftTag },
         { name = "deco_antiquities_wallfish", x_offset = -5, z_offset = 3.9, init = AddCraftTag },

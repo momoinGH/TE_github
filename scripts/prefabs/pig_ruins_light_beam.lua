@@ -79,12 +79,14 @@ local function turnoff(inst, light)
     if light then
         light:Enable(false)
     end
-    inst.components.creatureprox:SetEnabled(false)
+    inst.components.playerprox:SetOnPlayerNear(nil)
+    inst.components.playerprox:SetOnPlayerFar(nil)
     inst:Hide()
 end
 
 local function turnon(inst, light)
-    inst.components.creatureprox:SetEnabled(true)
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetOnPlayerFar(onfar)
 end
 
 local phasefunctions =
@@ -217,12 +219,11 @@ local function fn(Sim)
     end
     --------------------
 
-    inst:AddComponent("creatureprox")
-    inst.components.creatureprox:SetOnPlayerNear(onnear)
-    inst.components.creatureprox:SetOnPlayerFar(onfar)
-    inst.components.creatureprox:SetTestfn(testfn)
-    inst.components.creatureprox:SetDist(1.4, 1.5)
-    inst.components.creatureprox.inventorytrigger = true
+    inst:AddComponent("playerprox")
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetOnPlayerFar(onfar)
+    inst.components.playerprox:SetDist(1.4, 1.5)
+    inst.components.playerprox.inventorytrigger = true
 
     --------------------
 

@@ -183,11 +183,11 @@ local function onload(inst, data)
 end
 
 local rooms = { {
-    width    = 26,
-    depth    = 18,
+    width    = TUNING.ROOM_LARGE_WIDTH,
+    depth    = TUNING.ROOM_LARGE_DEPTH,
     addprops = {
-        { name = "interior_floor_marble_royal", x_offset = -5.5 },
-        { name = "interior_wall_rope", x_offset = -5, scale = { 5.2, 5.2 } },
+        { name = "interior_floor_marble_royal" },
+        { name = "interior_wall_rope", scale = { 5.2, 5.2 } },
         { name = "interior_palace_south_door", x_offset = 9, key = "exit" },
         { name = "deco_roomglow_large", },
         { name = "interior_palace_west_door", key = "door1a", target_door = "door1b", z_offset = -26 / 2, scale = { -1, 1 }, },
@@ -257,11 +257,11 @@ local rooms = { {
         { name = "rug_palace_runner", x_offset = 3.38 * 2, },
     }
 }, {
-    width    = 18,
-    depth    = 12,
+    width    = TUNING.ROOM_SMALL_WIDTH,
+    depth    = TUNING.ROOM_SMALL_DEPTH,
     addprops = {
-        { name = "interior_floor_marble_royal", x_offset = -3.5, scale = { 2.9, 2.9 } },
-        { name = "interior_wall_rope", x_offset = -3.5, scale = { 3.6, 3.6 } },
+        { name = "interior_floor_marble_royal" },
+        { name = "interior_wall_rope" },
         { name = "deco_roomglow", },
         { name = "interior_palace_east_door", z_offset = 18 / 2, key = "door1b", target_door = "door1a" },
         { name = "interior_palace_west_door", z_offset = -18 / 2, key = "door2a", target_door = "door2b" },
@@ -291,11 +291,11 @@ local rooms = { {
         { name = "shelves_marble", x_offset = -12 / 2, shelfitems = { { 5, "trinket_20" }, { 6, "trinket_14" }, { 3, "trinket_4" }, { 4, "trinket_2" } } },
     }
 }, {
-    width    = 15,
-    depth    = 10,
+    width    = TUNING.ROOM_TINY_WIDTH,
+    depth    = TUNING.ROOM_TINY_DEPTH,
     addprops = {
-        { name = "interior_floor_marble_royal", x_offset = -3, scale = { 2.5, 2.5 } },
-        { name = "interior_wall_rope", x_offset = -3.5, scale = { 3.1, 3.1 } },
+        { name = "interior_floor_marble_royal" },
+        { name = "interior_wall_rope" },
         { name = "deco_roomglow", },
         { name = "city_exit_giftshop_door", x_offset = 10 / 2, key = "exit2" },
         { name = "interior_palace_east_door", key = "door2b", target_door = "door2a", z_offset = 15 / 2, },

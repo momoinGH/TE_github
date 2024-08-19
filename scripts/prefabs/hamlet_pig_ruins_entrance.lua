@@ -225,7 +225,7 @@ local function mazemaker(inst, dungeondef)
                 target_room = fromroom.idx,
                 room = newroom.idx,
             }
-            if math.random() < dungeondef.doorvines then --藤蔓
+            if dungeondef.doorvines and math.random() < dungeondef.doorvines then --藤蔓
                 fromroom.exits[DIR[dir_choice]].vined = true
                 newroom.exits[DIR_OPPOSITE[dir_choice]].vined = true
             end
@@ -396,8 +396,8 @@ local function mazemaker(inst, dungeondef)
     CreateSecretRoom()
 
 
-    local width = 24
-    local depth = 16
+    local width = TUNING.ROOM_MEDIUM_WIDTH
+    local depth = TUNING.ROOM_MEDIUM_DEPTH
     local inc = 0
     for id, room in ipairs(rooms) do
         room.width = 24
@@ -1410,11 +1410,11 @@ local function mazemaker(inst, dungeondef)
 
         -- 地板和墙壁
         if room.color == "_blue" then
-            table.insert(addprops, { name = "interior_floor_ground_ruins_slab_blue", x_offset = -5.5 })
-            table.insert(addprops, { name = "interior_wall_pig_ruins_blue", x_offset = -2, scale = { 3.7, 3.7 } })
+            table.insert(addprops, { name = "interior_floor_ground_ruins_slab_blue" })
+            table.insert(addprops, { name = "interior_wall_pig_ruins_blue" })
         else
-            table.insert(addprops, { name = "interior_floor_ground_ruins_slab", x_offset = -5.5 })
-            table.insert(addprops, { name = "interior_wall_pig_ruins", x_offset = -2, scale = { 3.7, 3.7 } })
+            table.insert(addprops, { name = "interior_floor_ground_ruins_slab" })
+            table.insert(addprops, { name = "interior_wall_pig_ruins" })
         end
 
         -- 门
@@ -1453,6 +1453,7 @@ local function mazemaker(inst, dungeondef)
             then
                 doors.entrance2.components.teleporter:Target(v)
                 v.components.teleporter:Target(doors.entrance2)
+                break
             end
         end
     end

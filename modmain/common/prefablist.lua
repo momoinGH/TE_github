@@ -101,7 +101,6 @@ PrefabFiles =
     "trapslug",
     "fennel",
     "pig_palace2",
-    "pig_palace2_interior",
     "slipstor",
     "slip",
     "slipstor_spawner",
@@ -155,7 +154,6 @@ if TUNING.tropical.hamlet_caves then
     table.insert(PrefabFiles, "pigman_shopkeeper_desk")
     table.insert(PrefabFiles, "shop_pedestals")
     table.insert(PrefabFiles, "deed")
-    table.insert(PrefabFiles, "playerhouse_city_interior2")
     table.insert(PrefabFiles, "shelf")
     table.insert(PrefabFiles, "shelf_slot")
     table.insert(PrefabFiles, "trinkets_giftshop")
@@ -272,7 +270,6 @@ then
     table.insert(PrefabFiles, "antman_warrior")
     table.insert(PrefabFiles, "antman")
     table.insert(PrefabFiles, "antlarva")
-    table.insert(PrefabFiles, "anthill")
     table.insert(PrefabFiles, "antsuit")
     table.insert(PrefabFiles, "venus_stalk")
     table.insert(PrefabFiles, "walkingstick")

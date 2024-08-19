@@ -31,7 +31,6 @@ local function common(anim)
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(5)
-    inst.AnimState:SetScale(4.5, 4.5)
     inst.AnimState:PlayAnimation(anim)
 
     inst:AddTag("NOCLICK")
@@ -80,7 +79,6 @@ return MakeFloor("interior_floor_marble", "shop_floor_marble"),
     MakeFloor("interior_floor_woodpaneling2", "shop_floor_woodpaneling2"),
     MakeFloor("interior_floor_antcave", "antcave_floor"),
     MakeFloor("interior_floor_marble_royal", "floor_marble_royal"),
-    MakeFloor("interior_floor_marble_royal_small", "floor_marble_royal_small"),
     MakeFloor("interior_floor_ground_ruins_slab", "ground_ruins_slab"),
     MakeFloor("interior_floor_ground_ruins_slab_blue", "ground_ruins_slab_blue"),
     MakeFloor("interior_floor_batcave", "batcave_floor")
