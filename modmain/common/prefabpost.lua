@@ -773,6 +773,7 @@ for _, v in ipairs({ "butterflymuffin_sw", "lobsterbisque_sw", "lobsterdinner_sw
             end
         end)
     end)
+end
 
 
 ----------------------------------------------------------------------------------------------------
@@ -790,7 +791,7 @@ local function pickfarmplant()
         local season = TheWorld.state.season
         local weights = {}
         local season_mod = TUNING.SEED_WEIGHT_SEASON_MOD
-		
+
         for k, v in pairs(VEGGIES) do
             weights[k] = v.seed_weight * ((PLANT_DEFS[k] and PLANT_DEFS[k].good_seasons[season]) and season_mod or 1)
         end
@@ -799,20 +800,20 @@ local function pickfarmplant()
             weights[k] = 0
         end
 
-        return "farm_plant_"..weighted_random_choice(weights)
+        return "farm_plant_" .. weighted_random_choice(weights)
     end
     return "weed_forgetmelots"
 end
 
 AddPrefabPostInit("farm_plant_randomseed", function(inst)
-	if not TheWorld.ismastersim then return end
-	inst:ListenForEvent("on_planted", function(inst, data)
-		local old_changefn = inst.components.growable.stages[2].fn
-		inst.components.growable.stages[2].fn = function(inst, stage)
+    if not TheWorld.ismastersim then return end
+    inst:ListenForEvent("on_planted", function(inst, data)
+        local old_changefn = inst.components.growable.stages[2].fn
+        inst.components.growable.stages[2].fn = function(inst, stage)
             inst._identified_plant_type = old_changefn and old_changefn(inst, stage)
             if not inst._identified_plant_type or NOTINCLUDE[inst._identified_plant_type] then
-			    inst._identified_plant_type = pickfarmplant()
+                inst._identified_plant_type = pickfarmplant()
             end
-		end
-	end)
+        end
+    end)
 end)
