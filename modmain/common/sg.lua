@@ -352,8 +352,6 @@ AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BOATCANNON, "doshorta
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATCANNON, "doshortaction"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.RETRIEVE, "dolongaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.RETRIEVE, "dolongaction"))
-AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.SHOP, "doshortaction"))
-AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.SHOP, "doshortaction"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.SMELT, "doshortaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.SMELT, "doshortaction"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.HARVEST1, "doshortaction"))

@@ -132,7 +132,7 @@ function AddTiles()
             chk = false
             for _, val2 in pairs(tiledefs.ground) do
                 if val2[1] == tile_id or (is_multiworlds_enabled and tile_id >= 50 and tile_id < 68) then
-                    print(tile_id, "is reserved, incrementing...")
+                    -- print(tile_id, "is reserved, incrementing...")
                     tile_id = tile_id + 1
                     chk = true
                 end
@@ -143,7 +143,7 @@ function AddTiles()
             return error(("Numerical id %d is out of limits"):format(tile_id, GROUND.UNDERGROUND), 3)
         end
 
-        print("lowest founded value:", tile_id)
+        -- print("lowest founded value:", tile_id)
         ------------------------------------------------------
 
         GROUND[string.upper(tilename)] = tile_id
@@ -198,7 +198,7 @@ function AddTiles()
         table.insert(tiledefs.assets, Asset("IMAGE", realMapspecs.noise_texture))
         table.insert(tiledefs.assets, Asset("IMAGE", GroundImage(realMapspecs.name)))
         table.insert(tiledefs.assets, Asset("FILE", GroundAtlas(realMapspecs.name)))
-        print("tile", tilename, "added!")
+        -- print("tile", tilename, "added!")
     end
 end
 
@@ -232,7 +232,7 @@ function AddMinimap()
     AddPrefabPostInit("minimap", function(inst)
         for _, data in pairs(minimapGroundProperties) do
             local tile_type, layer_properties = unpack(data)
-            print(layer_properties.name, GroundAtlas(layer_properties.name))
+            -- print(layer_properties.name, GroundAtlas(layer_properties.name))
             local handle = _G.MapLayerManager:CreateRenderLayer(
                 tile_type,
                 resolvefilepath(GroundAtlas(layer_properties.name)),

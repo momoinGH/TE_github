@@ -737,6 +737,25 @@ local function OnEntityWake(inst) --应该什么时候显示呢
     -- end
 end
 
+local GUARDS_MUST_TAGS = { "guard", "city_pig" }
+
+--- 当传送玩家时，延迟一段时间把仇视玩家的猪人守卫也传送过去
+local function OnTeleporting(inst, doer)
+    if not doer:HasTag("player") then return end
+
+    local x, y, z = inst.Transform:GetWorldPosition()
+    for _, guard in ipairs(TheSim:FindEntities(x, 0, z, InteriorSpawnerUtils.RADIUS, GUARDS_MUST_TAGS)) do
+        if guard.components.combat:TargetIs(doer) then
+            guard:DoTaskInTime(math.random(1) + 1, function(guard)
+                if inst:IsValid() and inst:HasTag("teleporter") then
+                    inst.components.teleporter:Activate(guard)
+                    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_open")
+                end
+            end)
+        end
+    end
+end
+
 local function makefn(name, build, bank, data)
     data = data or {}
 
@@ -762,6 +781,8 @@ local function makefn(name, build, bank, data)
         if not TheWorld.ismastersim then
             return inst
         end
+
+        inst.components.teleporter.onActivate = OnTeleporting
 
         inst:AddComponent("lootdropper")
 

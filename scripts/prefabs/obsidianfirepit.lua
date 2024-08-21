@@ -35,10 +35,6 @@ end
 
 local function ontakefuel(inst)
     inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
-    local alagado = GetClosestInstWithTag("mare", inst, 10)
-    if alagado then
-        inst.components.burnable:Extinguish()
-    end
 end
 
 local function updatefuelrate(inst)
@@ -82,10 +78,6 @@ local function onbuilt(inst)
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("idle", false)
     inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
-    local alagado = GetClosestInstWithTag("mare", inst, 10)
-    if alagado then
-        inst.components.burnable:Extinguish()
-    end
 end
 
 local function OnHaunt(inst, haunter)
@@ -95,13 +87,6 @@ local function OnHaunt(inst, haunter)
         inst.components.fueled:DoDelta(TUNING.MED_FUEL)
         inst.components.hauntable.hauntvalue = TUNING.HAUNT_SMALL
         return true
-        --#HAUNTFIX
-        --elseif math.random() <= TUNING.HAUNT_CHANCE_HALF and
-        --inst.components.workable ~= nil and
-        --inst.components.workable:CanBeWorked() then
-        --inst.components.workable:WorkedBy(haunter, 1)
-        --inst.components.hauntable.hauntvalue = TUNING.HAUNT_SMALL
-        --return true
     end
     return false
 end

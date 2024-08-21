@@ -57,7 +57,10 @@ end
 local function spawnshelfslots(inst)
     for i = 1, inst.size do
         local object = SpawnPrefab("shelf_slot")
-        object:AddTag("playercrafted")
+        if inst:HasTag("playercrafted") then
+            object:AddTag("playercrafted")
+        end
+
         object.components.shelfer.slotindex = i
         if inst.swp_img_list then
             PutOnShelf(object, inst, inst.swp_img_list[i])
@@ -125,7 +128,7 @@ local function OnLoad(inst, data)
     end
 end
 
-local function common(size, swp_img_list, locked, physics_round)
+local function common(size, swp_img_list)
     size = size or 6
 
     local inst = CreateEntity()
@@ -134,12 +137,7 @@ local function common(size, swp_img_list, locked, physics_round)
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
 
-    if physics_round then
-        MakeObstaclePhysics(inst, .5)
-    else
-        MakeObstaclePhysics(inst, .5)
-        -- MakeInteriorPhysics(inst, 1.6, 1, 0.2) --联机版不支持矩形范围的碰撞
-    end
+    MakeObstaclePhysics(inst, .5)
 
     inst.AnimState:SetBuild("room_shelves")
     inst.AnimState:SetBank("bookcase")
@@ -148,10 +146,9 @@ local function common(size, swp_img_list, locked, physics_round)
 
     inst:AddTag("NOCLICK")
     -- inst:AddTag("NOBLOCK")
-    inst:AddTag("wallsection")
     inst:AddTag("furniture")
-    inst:AddTag("playercrafted")
     inst:AddTag("structure")
+    inst:AddTag("shop_shelf")
 
     inst.entity:SetPristine()
 

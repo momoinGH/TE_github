@@ -12,7 +12,7 @@ local actionhandlers =
     ActionHandler(ACTIONS.EQUIP, "pickup"),
     ActionHandler(ACTIONS.ADDFUEL, "pickup"),
     ActionHandler(ACTIONS.TAKEITEM, "pickup"),
-    ActionHandler(ACTIONS.STOCK, "interact"),
+    ActionHandler(ACTIONS.GIVE_SHELF, "interact"),
     ActionHandler(ACTIONS.MANUALEXTINGUISH, "interact")
 }
 

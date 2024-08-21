@@ -8,7 +8,7 @@ AddComponentAction("USEITEM", "inventoryitem", function(inst, doer, target, acti
 end)
 
 AddComponentAction("SCENE", "shelfer", function(inst, doer, actions, right)
-    if inst:HasTag("cost_one_oinc") and inst:HasTag("playercrafted") and inst:HasTag("slot_one") then
+    if inst:HasTag("cost_one_oinc") and inst:HasTag("slot_one") then
         --从柜子中拿取
         table.insert(actions, ACTIONS.TAKE_SHELF)
     end
@@ -157,7 +157,7 @@ end)
 
 AddComponentAction("SCENE", "shopped", function(inst, doer, actions, right)
     if inst:HasTag("slot_one") then
-        table.insert(actions, ACTIONS.SHOP)
+        table.insert(actions, ACTIONS.TAKE_SHELF)
     end
 end)
 

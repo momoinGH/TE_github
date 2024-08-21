@@ -64,14 +64,16 @@ AddPlayerPostInit(function(inst)
     inst.tropical_room_event = net_event(inst.GUID, "player.tropical_room_event")
     inst._isopening = net_bool(inst.GUID, "IsOpening")
 
-    if not TheNet:IsDedicated() then
-        inst:ListenForEvent("player.tropical_room_event", OnDirtyEventCameraStuff)
-    end
+    inst:AddComponent("shopper")
 
     inst:AddComponent("infestable")
 
     if TUNING.tropical.only_shipwrecked then
         inst:AddComponent("mapwrapper")
+    end
+
+    if not TheNet:IsDedicated() then
+        inst:ListenForEvent("player.tropical_room_event", OnDirtyEventCameraStuff)
     end
 
     if TheNet:GetIsServer() then
@@ -93,6 +95,4 @@ AddPlayerPostInit(function(inst)
     if not TheWorld.ismastersim then return end
 
     inst:AddComponent("tropical_noequipactivator")
-
-    inst:AddComponent("shopper")
 end)

@@ -518,7 +518,7 @@ return Class(function(self, inst)
 
                 local sandbags = TheSim:FindEntities(spawnpoint.x, spawnpoint.y, spawnpoint.z, 10, { "removealagamento" })
                 if #sandbags > 3 then return end
-                local bird = SpawnPrefab("floodsw")
+                local bird = SpawnPrefab("shipwrecked_flood")
                 bird.Transform:SetPosition(spawnpoint:Get())
                 local outraperto = GetClosestInstWithTag("marepracolocar", bird, 13)
                 if outraperto then

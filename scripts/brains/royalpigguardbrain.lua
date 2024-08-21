@@ -224,11 +224,7 @@ end
 
 
 local function GuardGoHomeAction(inst)
-    local homePos = inst.components.knownlocations:GetLocation("home")
-    if homePos and
-        not inst.components.combat.target then
-        return BufferedAction(inst, nil, ACTIONS.WALKTO, nil, homePos)
-    end
+
 end
 
 local function GetLeader(inst)
@@ -276,26 +272,7 @@ local function shouldPanic(inst)
 end
 
 local function ShouldGoHome(inst)
-    local homePos = inst.components.knownlocations:GetLocation("home")
-    return (homePos and distsq(homePos, inst:GetPosition()) > GO_HOME_DIST * GO_HOME_DIST)
-end
 
-local function inCityLimits(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, FAR_ENOUGH, { "citypossession" }, { "city_pig" })
-    if #ents > 0 then
-        return true
-    end
-    if inst.components.combat.target then
-        local speechset = getSpeechType(inst, STRINGS.CITY_PIG_TALK_STAYOUT)
-        local str = speechset[math.random(#speechset)]
-
-        inst.components.talker:Say(str)
-        --inst.components.talker:Say(str)
-
-        inst.components.combat:GiveUp()
-    end
-    return false
 end
 
 local function ExtinguishfireAction(inst)

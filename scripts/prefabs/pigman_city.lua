@@ -1,8 +1,4 @@
-require "brains/citypigbrain"
-require "brains/pigguardbrain"
-require "brains/werepigbrain"
-require "stategraphs/SGpig_city"
-require "stategraphs/SGwerepig"
+local InteriorSpawnerUtils = require("interiorspawnerutils")
 
 local assets =
 {
@@ -159,6 +155,24 @@ local function special_action(inst)
     end
 end
 
+--- 当皇家守卫因脱离加载消失时减少老板重新召唤的冷却，防止玩家通过离开加载范围卡bug
+local function vanishfn(inst)
+    local owner = inst.components.entitytracker:GetEntity("owner")
+    local left = owner and owner.components.timer:GetTimeLeft("guards_called")
+    if left then
+        owner.components.timer:StopTimer("guards_called")
+        if left - 30 > 0 then
+            owner.components.timer:StartTimer("guards_called", left - 60)
+        end
+    end
+end
+
+local function GuardSetTemp(inst)
+    inst.temp_spawn = true
+    inst:AddComponent("vanish_on_sleep")
+    inst.components.vanish_on_sleep.vanishfn = vanishfn
+end
+
 local function OnSave(inst, data)
     data.children = {}
 
@@ -174,9 +188,8 @@ local function OnSave(inst, data)
     if inst:HasTag("atdesk") then
         data.atdesk = true
     end
-    if inst:HasTag("guards_called") then
-        data.guards_called = true
-    end
+
+    data.temp_spawn = inst.temp_spawn
     if inst.task_guard1 or inst.task_guard2 then
 
     end
@@ -213,8 +226,8 @@ local function OnLoad(inst, data)
             inst.sg:GoToState("desk")
         end
 
-        if data.guards_called then
-            inst:AddTag("guards_called")
+        if data.temp_spawn then
+            GuardSetTemp(inst)
         end
 
         if data.equipped then
@@ -532,72 +545,67 @@ local function OnAttackedByDecidRoot(inst, attacker)
     end
 end
 
-local function callGuards(inst, attacker, task)
+local function callGuards(inst, attacker, id)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 30, { "guard_entrance" })
+    local ents = TheSim:FindEntities(x, y, z, InteriorSpawnerUtils.RADIUS, { "interior_door" })
     if #ents > 0 then
-        local guardprefab = "pigman_royalguard"
-        local cityID = 1
-        if inst:HasTag("city2") then
-            guardprefab = "pigman_royalguard_2"
-            cityID = 2
-        end
-        local spawnpt = Vector3(ents[math.random(#ents)].Transform:GetWorldPosition())
+        local guardprefab = inst:HasTag("city2") and "pigman_royalguard_2" or "pigman_royalguard"
         local guard = SpawnPrefab(guardprefab)
-        guard.Transform:SetPosition(spawnpt.x, spawnpt.y, spawnpt.z)
-        guard:PushEvent("attacked", { attacker = attacker, damage = 0, weapon = nil })
-        if attacker then
-            attacker:AddTag("wanted_by_guards")
-        end
-
-        local interior = GetInteriorSpawner():getPropInterior(inst)
-        if interior then
-            GetInteriorSpawner():injectprefab(guard, interior)
-        end
-
-        if inst[task] then
-            inst[task]:Cancel()
-            inst[task] = nil
-        end
+        local door = ents[math.random(#ents)]
+        guard.Transform:SetPosition(door.Transform:GetWorldPosition())
+        guard:PushEvent("attacked", { attacker = attacker, damage = 0 })
+        guard:SetTemp() --临时的
+   
+        door.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_open")
+        inst.components.entitytracker:TrackEntity("guard" .. id, guard)
+        guard.components.entitytracker:TrackEntity("owner", inst)
     end
-end
-
-local function spawnguardtasks(inst, attacker)
-    inst.task_guard1 = inst:DoTaskInTime(math.random(1) + 1, function() callGuards(inst, attacker, "task_guard1") end)
-    inst.task_guard2 = inst:DoTaskInTime(math.random(1) + 1.5, function() callGuards(inst, attacker, "task_guard2") end)
 end
 
 local function OnAttacked(inst, data)
-    --print(inst, "OnAttacked")
     local attacker = data.attacker
-    if attacker then
-        inst:ClearBufferedAction()
+    if not attacker then return end
+    inst:ClearBufferedAction()
 
-        if attacker.prefab == "deciduous_root" and attacker.owner then
-            OnAttackedByDecidRoot(inst, attacker.owner)
-        elseif attacker.prefab ~= "deciduous_root" then
-            inst.components.combat:SetTarget(attacker)
+    if attacker.prefab == "deciduous_root" and attacker.owner then
+        OnAttackedByDecidRoot(inst, attacker.owner)
+    elseif attacker.prefab ~= "deciduous_root" then
+        inst.components.combat:SetTarget(attacker)
 
-            if inst:HasTag("guard") then
-                if attacker:HasTag("player") then
-                    inst:AddTag("angry_at_player")
-                end
-                inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("pig") and (dude:HasTag("guard") or not attacker:HasTag("pig")) end,
-                    MAX_TARGET_SHARES)
-            else
-                if not (attacker:HasTag("pig") and attacker:HasTag("guard")) then
-                    inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("pig") end, MAX_TARGET_SHARES)
-                end
+        if inst:HasTag("guard") then
+            if attacker:HasTag("player") then
+                inst:AddTag("angry_at_player")
             end
-        end
-
-        if not inst:HasTag("guards_called") then
-            inst:AddTag("guards_called")
-            if inst:HasTag("shopkeep") or inst:HasTag("pigqueen") then
-                spawnguardtasks(inst, data.attacker)
+            inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("pig") and (dude:HasTag("guard") or not attacker:HasTag("pig")) end,
+                MAX_TARGET_SHARES)
+        else
+            if not (attacker:HasTag("pig") and attacker:HasTag("guard")) then
+                inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("pig") end, MAX_TARGET_SHARES)
             end
         end
     end
+
+    if (inst:HasTag("shopkeep") or inst:HasTag("pigqueen"))
+        and not inst.components.timer:TimerExists("guards_called")
+        and not inst.components.entitytracker:GetEntity("guard1")
+        and not inst.components.entitytracker:GetEntity("guard2")
+    then
+        inst:DoTaskInTime(math.random(1) + 1, function()
+            callGuards(inst, attacker, 1)
+        end)
+        inst:DoTaskInTime(math.random(1) + 1.5, function()
+            callGuards(inst, attacker, 2)
+            inst.components.timer:StartTimer("guards_called", 120)
+        end)
+    end
+end
+
+local function OnGoToSleep(inst)
+    inst:AddTag("sleeping") --我需要在客机检查老板是否睡着
+end
+
+local function OnWakeUp(inst)
+    inst:RemoveTag("sleeping")
 end
 
 local function NormalRetargetFn(inst)
@@ -750,7 +758,8 @@ local function throwcrackers(inst)
     cracker.components.fuse:StartFuse()
 end
 
-local function comon(name, build, fixer, tags, sex, econprefab)
+
+local function common(name, build, fixer, tags, sex, econprefab)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -833,7 +842,8 @@ local function comon(name, build, fixer, tags, sex, econprefab)
     inst:AddComponent("sleeper")
     inst:AddComponent("inventory")
     inst:AddComponent("lootdropper")
-    inst:AddComponent("knownlocations")
+    inst:AddComponent("timer")
+    inst:AddComponent("entitytracker")
 
     inst:AddComponent("trader")
     inst.components.trader:SetAcceptTest(ShouldAcceptItem)
@@ -882,12 +892,12 @@ local function SpawnInitEquip(inst)
 
     local torch = SpawnPrefab("torch")
     inst.components.inventory:GiveItem(torch)
-    inst.components.fueled.rate = 0
+    torch.components.fueled.rate = 0
 
     local axe = SpawnPrefab("halberd")
     inst.components.inventory:GiveItem(axe)
     inst.components.inventory:Equip(axe)
-    inst.components.finiteuses.onfinished = FullFiniteUses
+    axe.components.finiteuses.onfinished = FullFiniteUses
 
     local armour = SpawnPrefab("armorwood")
     inst.components.inventory:GiveItem(armour)
@@ -958,9 +968,10 @@ local function IniMechanic(inst)
     end
 end
 
+
 local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab)
     local function make_pig_guard()
-        local inst = comon(name, build, fixer, tags, sex, econprefab)
+        local inst = common(name, build, fixer, tags, sex, econprefab)
 
         inst:AddTag("emote_nocurtsy")
         inst:AddTag("guard")
@@ -969,6 +980,9 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
         if not TheWorld.ismastersim then
             return inst
         end
+
+        inst.temp_spawn = nil
+        inst.SetTemp = GuardSetTemp
 
         inst.components.burnable:SetBurnTime(2)
 
@@ -986,7 +1000,7 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
     end
 
     local function make_shopkeeper()
-        local inst = comon(name, build, fixer, tags, sex, econprefab)
+        local inst = common(name, build, fixer, tags, sex, econprefab)
 
         inst.AnimState:AddOverrideBuild("townspig_shop_wip")
 
@@ -996,21 +1010,21 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
             return inst
         end
 
-        inst:AddComponent("entitytracker")
-
         inst.separatedesk = separatedesk
         inst.shopkeeper_speech = shopkeeper_speech
 
+        inst.special_action = ShopkeeperSpecialAction
+
         inst:ListenForEvent("enterroom", OnShopkeeperEnterRoom)
         inst:WatchWorldState("isnight", OnShopkeeperNight)
-
-        inst.special_action = ShopkeeperSpecialAction
+        inst:ListenForEvent("gotosleep", OnGoToSleep)
+        inst:ListenForEvent("onwakeup", OnWakeUp)
 
         return inst
     end
 
     local function make_mechanic()
-        local inst = comon(name, build, fixer, tags, sex, econprefab)
+        local inst = common(name, build, fixer, tags, sex, econprefab)
 
         if not TheWorld.ismastersim then
             return inst
@@ -1022,7 +1036,7 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
     end
 
     local function make_queen()
-        local inst = comon(name, build, fixer, tags, sex, econprefab)
+        local inst = common(name, build, fixer, tags, sex, econprefab)
 
         MakeCharacterPhysics(inst, 50, 0.75)
 
@@ -1037,7 +1051,7 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
     end
 
     local function make_mayor()
-        local inst = comon(name, build, fixer, tags, sex, econprefab)
+        local inst = common(name, build, fixer, tags, sex, econprefab)
 
         if not TheWorld.ismastersim then
             return inst
@@ -1062,7 +1076,7 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
 
     --------------------------------------------------------------------------
     local function make_common()
-        return comon(name, build, fixer, tags, sex, econprefab)
+        return common(name, build, fixer, tags, sex, econprefab)
     end
 
     if name == "pigman_queen" then

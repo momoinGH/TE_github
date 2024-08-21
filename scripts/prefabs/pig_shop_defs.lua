@@ -2,6 +2,7 @@
 -- Available prices: [1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500]
 -- 猪人商店的商品售卖表
 
+-- 货架商品
 local SHOPTYPES = {
 
     DEFAULT = {
@@ -176,4 +177,13 @@ local SHOPTYPES = {
     pig_shop_cityhall = {},
 }
 
-return { SHOPTYPES = SHOPTYPES }
+-- 柜子里的商品
+local SHELFS = {
+    DEFAULT = {
+        "rocks",
+        "flint",
+        "goldnugget",
+    }
+}
+
+return { SHOPTYPES = SHOPTYPES, SHELFS = SHELFS }

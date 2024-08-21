@@ -47,16 +47,6 @@ local function onhammered(inst, worked)
 end
 
 local function fueltaskfn(inst)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado then
-		local fx = SpawnPrefab("shock_machines_fx")
-		if fx then
-			local pt = inst:GetPosition()
-			fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-		end
-		if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-		return
-	end
 	inst.AnimState:PlayAnimation("use")
 	inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/icemachine_start")
 	inst.components.fueled:StopConsuming() --temp pause fuel so we don't run out in the animation.
@@ -64,15 +54,6 @@ local function fueltaskfn(inst)
 end
 
 local function ontakefuelfn(inst)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado then
-		local fx = SpawnPrefab("shock_machines_fx")
-		if fx then
-			local pt = inst:GetPosition()
-			fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-		end
-		if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-	end
 	inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/machine_fuel")
 	inst.components.fueled:StartConsuming()
 end
@@ -130,17 +111,17 @@ local function onbuilt(inst)
 	inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/icemaker_place")
 end
 
---local function onFloodedStart(inst)
---	if inst.components.fueled then
---		inst.components.fueled.accepting = false
---	end
---end
+local function onFloodedStart(inst)
+	if inst.components.fueled then
+		inst.components.fueled.accepting = false
+	end
+end
 
---local function onFloodedEnd(inst)
---	if inst.components.fueled then
---		inst.components.fueled.accepting = true
-----	end
---end
+local function onFloodedEnd(inst)
+	if inst.components.fueled then
+		inst.components.fueled.accepting = true
+	end
+end
 
 local function fn(Sim)
 	local inst = CreateEntity()
@@ -185,11 +166,11 @@ local function fn(Sim)
 	inst.components.workable:SetOnFinishCallback(onhammered)
 	inst.components.workable:SetOnWorkCallback(onhit)
 
-	--inst:AddComponent("floodable")
-	--	inst.components.floodable.onStartFlooded = onFloodedStart
-	--inst.components.floodable.onStopFlooded = onFloodedEnd
-	--	--inst.components.floodable.floodEffect = "shock_machines_fx"
-	--inst.components.floodable.floodSound = "dontstarve_DLC002/creatures/jellyfish/electric_land"
+	inst:AddComponent("floodable")
+	inst.components.floodable.onStartFlooded = onFloodedStart
+	inst.components.floodable.onStopFlooded = onFloodedEnd
+	inst.components.floodable.floodEffect = "shock_machines_fx"
+	inst.components.floodable.floodSound = "dontstarve_DLC002/creatures/jellyfish/electric_land"
 
 	inst.machinestate = MACHINESTATES.ON
 	inst:ListenForEvent("onbuilt", onbuilt)

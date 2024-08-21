@@ -2349,11 +2349,6 @@ local function StartSpinning(inst)
 end
 
 local function ShouldAcceptItem(inst, item)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado then
-		return false
-	end
-
 	if not inst.busy and item.prefab == "dubloon" then
 		return true
 	else
@@ -2369,16 +2364,6 @@ local function OnGetItemFromPlayer(inst, giver, item)
 end
 
 local function OnRefuseItem(inst, item)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado then
-		local fx = SpawnPrefab("shock_machines_fx")
-		if fx then
-			local pt = inst:GetPosition()
-			fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-		end
-		if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-		return
-	end
 end
 
 local function OnLoad(inst, data)

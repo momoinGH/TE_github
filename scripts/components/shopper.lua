@@ -1,3 +1,5 @@
+local InteriorSpawnerUtils = require("interiorspawnerutils")
+
 --- 玩家购买商品，针对货架或柜子里的商品
 local Shopper = Class(function(self, inst)
 	self.inst = inst
@@ -5,15 +7,12 @@ end)
 
 --- 是否有老板在看着，如果为false表示玩家可以偷
 function Shopper:IsWatching(target)
-	if target:HasTag("cost_one_oinc") or target.components.shopped then
-		local x, y, z = target.Transform:GetWorldPosition()
-		for i, ent in ipairs(TheSim:FindEntities(x, y, z, 50, { "shopkeep" })) do
-			if not ent.components.sleeper or not ent.components.sleeper:IsAsleep() then
-				return true
-			end
+	local x, y, z = target.Transform:GetWorldPosition()
+	for i, ent in ipairs(TheSim:FindEntities(x, y, z, InteriorSpawnerUtils.RADIUS, { "shopkeep" })) do
+		if not ent:HasTag("sleeping") and (not ent.components.sleeper or not ent.components.sleeper:IsAsleep()) then
+			return true
 		end
 	end
-	return false --柜子里的可以直接偷
 end
 
 --- 是否有足够的钱购买
@@ -41,16 +40,15 @@ function Shopper:CanPayFor(target)
 		end
 	end
 
-	return false, "REPAIRBOAT"
+	return false
 end
 
 function Shopper:BoughtItem(target)
-	local item = SpawnPrefab(target.components.shopped.goodsprefab)
-	target.components.shopped:SoldItem()
-	if item.OnBought then
-		item.OnBought(item)
+	local item = target.components.shelfer and target.components.shelfer:GiveGift()
+		or target.components.shopped and target.components.shopped:BuyGoods(self.inst)
+	if item then
+		self.inst.components.inventory:GiveItem(item)
 	end
-	self.inst.components.inventory:GiveItem(item)
 end
 
 --- 购买商品
@@ -74,11 +72,7 @@ end
 
 --- 偷取货架上商品
 function Shopper:Take(target)
-	if not target.components.shopped.goodsprefab then
-		return false
-	end
 	self:BoughtItem(target)
-	return true
 end
 
 return Shopper

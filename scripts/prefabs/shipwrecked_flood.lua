@@ -36,6 +36,27 @@ local function OnEntitySleep(inst)
     inst.components.ripplespawner:Stop()
 end
 
+local function Init(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    for _, v in ipairs(TheSim:FindEntities(x, 0, z, 10, nil, { "flooded" })) do
+        if v.components.floodable then
+            v.components.floodable:StartFlooded()
+        end
+    end
+end
+
+local function OnRemove(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    for _, v in ipairs(TheSim:FindEntities(x, 0, z, 10, nil, { "flooded" })) do
+        if v.components.floodable then
+            local flood = FindEntity(v, 10, nil, { "mare" })
+            if not flood then
+                v.components.floodable:StopFlooded()
+            end
+        end
+    end
+end
+
 local function fn()
     local inst = CreateEntity()
     --    inst.entity:AddMiniMapEntity()
@@ -63,6 +84,8 @@ local function fn()
         return inst
     end
 
+    inst:DoTaskInTime(0, Init)
+
     inst:AddTag("alagamentopraremovergrande")
     inst:AddComponent("ripplespawner")
     inst.components.ripplespawner.range = 8
@@ -74,7 +97,9 @@ local function fn()
     inst.OnEntitySleep = OnEntitySleep
     inst.OnEntityWake = OnEntityWake
 
+    inst:ListenForEvent("onremove", OnRemove)
+
     return inst
 end
 
-return Prefab("floodsw", fn, assets)
+return Prefab("shipwrecked_flood", fn, assets)

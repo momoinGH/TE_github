@@ -77,17 +77,6 @@ local function TurnOff(inst, instant)
 end
 
 local function TurnOn(inst, instant)
-    local alagado = GetClosestInstWithTag("mare", inst, 10)
-    if alagado then
-        local fx = SpawnPrefab("shock_machines_fx")
-        if fx then
-            local pt = inst:GetPosition()
-            fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-        end
-        if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-        inst.on = false
-        return
-    end
     inst.on = true
     local isemergency = inst.components.firedetector:IsEmergency()
     if not isemergency then
@@ -102,18 +91,6 @@ end
 
 --Called from stategraph
 local function LaunchProjectile(inst, targetpos)
-    local alagado = GetClosestInstWithTag("mare", inst, 10)
-    if alagado then
-        local fx = SpawnPrefab("shock_machines_fx")
-        if fx then
-            local pt = inst:GetPosition()
-            fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-        end
-        if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-        inst.on = false
-        TurnOff(inst)
-        return
-    end
     local x, y, z = inst.Transform:GetWorldPosition()
 
     local projectile = SpawnPrefab("snowball")
@@ -295,6 +272,12 @@ local function OnEnableHelper(inst, enabled)
     end
 end
 
+local function onFloodedStart(inst)
+    if inst.on then
+        TurnOff(inst, true)
+    end
+end
+
 --------------------------------------------------------------------------
 
 local function fn()
@@ -384,6 +367,12 @@ local function fn()
     inst.components.workable:SetWorkLeft(4)
     inst.components.workable:SetOnFinishCallback(onhammered)
     inst.components.workable:SetOnWorkCallback(onhit)
+
+    inst:AddComponent("floodable")
+    inst.components.floodable.onStartFlooded = onFloodedStart
+    --inst.components.floodable.onStopFlooded = onFloodedEnd
+    inst.components.floodable.floodEffect = "shock_machines_fx"
+    inst.components.floodable.floodSound = "dontstarve_DLC002/creatures/jellyfish/electric_land"
 
     inst.LaunchProjectile = LaunchProjectile
     inst:SetStateGraph("SGfiresuppressor")

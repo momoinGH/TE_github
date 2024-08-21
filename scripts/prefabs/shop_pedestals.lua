@@ -1,4 +1,3 @@
-
 local assets =
 {
     Asset("ANIM", "anim/pedestal_crate.zip"),
@@ -53,9 +52,14 @@ local function fn()
         return inst
     end
 
-    inst:AddComponent("tropical_saveanim")
+    -- 原版是生成商品，获取数据然后删除，但是我客机需要知道商品的名字，为了方便，这里一直留着
+    inst:AddComponent("container")
+    inst.components.container:WidgetSetup("shop_buyer")
+    inst.components.container.canbeopened = false
 
     inst:AddComponent("shopped")
+
+    inst:AddComponent("tropical_saveanim")
 
     MakeMediumBurnable(inst)
     MakeSmallPropagator(inst)

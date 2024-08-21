@@ -93,8 +93,7 @@ STRINGS.ACTIONS.JUMPIN.LEAVE                            = "离开"
 STRINGS.ACTIONS.OPENTUNA                                = "打开"
 STRINGS.ACTIONS.GAS                                     = "喷"
 STRINGS.ACTIONS.TIRO                                    = "射击"
-STRINGS.ACTIONS.SHOP                                    = "购买"
-STRINGS.ACTIONS.SHOP                                    = "购买"
+
 --gorge
 STRINGS.ACTIONS.STOREOPEN                               = "交易"
 STRINGS.ACTIONS.GRIND                                   = "研磨"
@@ -104,7 +103,12 @@ STRINGS.ACTIONS.TAPSUGARTREE                            = "凿树"
 STRINGS.ACTIONS.SETUPITEM                               = "安装"
 STRINGS.ACTIONS.KILLSOFTLY                              = "屠宰"
 STRINGS.ACTIONS.BOATMOUNT                               = "登船"
-
+STRINGS.ACTIONS.TAKE_SHELF                              = {
+    GENERIC = "拿取",
+    TAKE = "拿取{item}",
+    STEAL = "偷走{item}",
+    BUY = "购买{item}",
+}
 -----------选项卡----------
 STRINGS.TABS.NAUTICALTAB                                = "航海"
 STRINGS.TABS.OBSIDIANTAB                                = "火山"
@@ -1581,7 +1585,7 @@ STRINGS.RECIPE_DESC.ARMOR_WINDBREAKER = "打破一些风。"
 
 -------------------------allsw
 STRINGS.NAMES.WHIRLPOOL = "漩涡"
-STRINGS.NAMES.FLOODSW = "洪水坑"
+STRINGS.NAMES.SHIPWRECKED_FLOOD = "洪水坑"
 --STRINGS.NAMES.SWIMMINGHORROR = "游动的恐惧"
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWIMMINGHORROR = "游动的恐惧"
 

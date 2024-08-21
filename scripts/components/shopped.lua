@@ -1,22 +1,22 @@
 local PigShopDefs = require("prefabs/pig_shop_defs")
 
-local function ongoodsprefab(self, goodsprefab)
-    if goodsprefab then
-        self.inst:AddTag("slot_one") --有商品了
-    else
-        self.inst:RemoveTag("slot_one")
-    end
+local function OnItemGet(inst, data)
+    inst:AddTag("slot_one") --有商品了
+    inst.components.shopped:SetImage(data.item)
+end
+
+local function OnItemLose(inst)
+    local self = inst.components.shopped
+    inst:RemoveTag("slot_one")
+    self:SetImage()
+    self:SetCost(self.robbed and "cost-nil" or nil)
 end
 
 -- 商品相关字段太琐碎，单独写个组件存储
 local Shopped = Class(function(self, inst)
     self.inst = inst
 
-    inst:AddTag("shop_pedestal")
-
-    self.goodsprefab = nil --商品名
-    self.goods_atlas = nil
-    self.goods_image = nil
+    inst:AddTag("shopped")
 
     self.costprefab = nil   --货币名
     self.cost = nil         --如果是呼噜币，呼噜币数量
@@ -25,9 +25,10 @@ local Shopped = Class(function(self, inst)
     self.shoptype = nil     --商店类型，这里是商店预制件名，从pig_shop_defs.lua中随机选择商品
     self.robbed = nil       --被偷了
     self.justsellonce = nil --只卖一次
-end, nil, {
-    goodsprefab = ongoodsprefab
-})
+
+    inst:ListenForEvent("itemget", OnItemGet)
+    inst:ListenForEvent("itemlose", OnItemLose)
+end)
 
 function Shopped:SetImage(ent)
     local image = ent and ent.replica.inventoryitem ~= nil and ent.replica.inventoryitem:GetImage()
@@ -38,15 +39,8 @@ function Shopped:SetImage(ent)
         if atlas ~= nil then
             atlas = resolvefilepath_soft(atlas) --需要找到路径，例如../mods/PigmanTribe/images/inventoryimages/ptribe_upgrade.xml
         end
-
-        self.goodsprefab = ent.prefab
-        self.goods_atlas = atlas or GetInventoryItemAtlas(image)
-        self.goods_image = image
-        self.inst.AnimState:OverrideSymbol("SWAP_SIGN", self.goods_atlas, self.goods_image)
+        self.inst.AnimState:OverrideSymbol("SWAP_SIGN", atlas or GetInventoryItemAtlas(image), image)
     else
-        self.goodsprefab = nil
-        self.goods_atlas = nil
-        self.goods_image = nil
         self.inst.AnimState:ClearOverrideSymbol("SWAP_SIGN")
     end
 end
@@ -75,34 +69,37 @@ function Shopped:SetCost(costprefab, cost)
 end
 
 ---设置商品
----@param goodsprefab string 商品
 ---@param costprefab string 购买需要的货币
 ---@param cost number 货币数量
-function Shopped:SpawnInventory(goodsprefab, costprefab, cost)
-    local item = SpawnPrefab(goodsprefab or self.goodsprefab)
+function Shopped:SpawnInventory(goods, costprefab, cost)
+    for _, v in ipairs(self.inst.components.container:RemoveAllItems()) do
+        v:Remove()
+    end
+
+    local item = SpawnPrefab(goods or self.goods)
+    assert(item.components.inventoryitem)
     self:SetImage(item)
     self:SetCost(costprefab, cost)
-    item:Remove()
+    self.inst.components.container:GiveItem(item)
 end
 
 --- 当商品被买后
-function Shopped:SoldItem()
-    self:SetImage(nil)
-end
-
-local function shopkeeper_speech(inst, speech)
-    local ent = FindEntity(inst, 20, nil, { "shopkeep" })
-    if ent then
-        ent:shopkeeper_speech(speech)
+function Shopped:BuyGoods(buyer)
+    local item = self.inst.components.container:RemoveItemBySlot(1)
+    if item.OnBought then
+        item:OnBought(buyer, self.inst)
     end
+    return item
 end
 
 --- 补货
 function Shopped:Restock(force)
     if self.robbed then --被偷了
-        self:SetCost("cost-nil")
-        shopkeeper_speech(self.inst, STRINGS.CITY_PIG_SHOPKEEPER_ROBBED[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_ROBBED)])
-    elseif force or ((not self.goodsprefab or math.random() < 0.16) and not self.justsellonce) then
+        local ent = FindEntity(inst, 20, nil, { "shopkeep" })
+        if ent then
+            ent.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_ROBBED[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_ROBBED)])
+        end
+    elseif force or ((self.inst.components.container:IsEmpty() or math.random() < 0.16) and not self.justsellonce) then
         local newproduct
         if self.saleitem then
             newproduct = self.saleitem
@@ -116,9 +113,6 @@ end
 
 function Shopped:OnSave()
     return {
-        goodsprefab = self.goodsprefab,
-        goods_atlas = self.goods_atlas,
-        goods_image = self.goods_image,
         costprefab = self.costprefab,
         cost = self.cost,
         saleitem = self.saleitem,
@@ -130,17 +124,6 @@ end
 
 function Shopped:OnLoad(data)
     if not data then return end
-
-    if data.goodsprefab then
-        self.goodsprefab = data.goodsprefab
-        self.goods_atlas = data.goods_atlas
-        self.goods_image = data.goods_image
-        self.inst.AnimState:OverrideSymbol("SWAP_SIGN", self.goods_atlas, self.goods_image)
-    end
-
-    if data.costprefab then
-        self:SetCost(data.costprefab, data.cost)
-    end
 
     self.saleitem = data.saleitem
     self.shoptype = data.shoptype

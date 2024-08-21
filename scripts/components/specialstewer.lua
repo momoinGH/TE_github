@@ -14,14 +14,6 @@ local function oncheckready(inst)
     end
 end
 
-local function onnotready(inst)
-    inst:RemoveTag("readytocook")
-    if inst.components.specialstewer.isdone then
-        inst:RemoveTag("takeonly")
-        inst.components.specialstewer.isdone = false
-    end
-end
-
 local SpecialStewer = Class(function(self, inst)
         self.inst = inst
 
