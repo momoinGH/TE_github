@@ -63,7 +63,7 @@ local function OnAttacked(inst, data)
     end
 end
 
-local function special_action(act)
+local function special_action(inst, act)
     if act.doer.puddle and act.doer.puddle.stage > 0 then
         act.doer.puddle:shrink()
         act.doer.goldlevel = act.doer.goldlevel + DRUNK_GOLD

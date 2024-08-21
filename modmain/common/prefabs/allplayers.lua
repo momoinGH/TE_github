@@ -68,8 +68,6 @@ AddPlayerPostInit(function(inst)
         inst:ListenForEvent("player.tropical_room_event", OnDirtyEventCameraStuff)
     end
 
-    inst:AddComponent("shopper")
-
     inst:AddComponent("infestable")
 
     if TUNING.tropical.only_shipwrecked then
@@ -95,4 +93,6 @@ AddPlayerPostInit(function(inst)
     if not TheWorld.ismastersim then return end
 
     inst:AddComponent("tropical_noequipactivator")
+
+    inst:AddComponent("shopper")
 end)

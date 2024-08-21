@@ -906,46 +906,7 @@ local function onload(inst, data)
         end
     end
 end
---[[
-local function OnGustAnimDone(inst)
-    if inst:HasTag("stump") or inst:HasTag("burnt") then
-        inst:RemoveEventCallback("animover", OnGustAnimDone)
-        return
-    end
-    if inst.components.blowinwindgust and inst.components.blowinwindgust:IsGusting() then
-        local anim = math.random(1,2)
-        inst.AnimState:PlayAnimation(inst.anims["blown"..tostring(anim)], false)
-    else
-        inst:DoTaskInTime(math.random()/2, function(inst)
-            inst:RemoveEventCallback("animover", OnGustAnimDone)
-            inst.AnimState:PlayAnimation(inst.anims.blown_pst, false)
-            PushSway(inst)
-        end)
-    end
-end
 
-local function OnGustStart(inst, windspeed)
-    if inst:HasTag("stump") or inst:HasTag("burnt") then
-        return
-    end
-    inst:DoTaskInTime(math.random()/2, function(inst)
-        if inst.spotemitter == nil then
-            AddToNearSpotEmitter(inst, "treeherd", "tree_creak_emitter", TUNING.TREE_CREAK_RANGE)
-        end
-        inst.AnimState:PlayAnimation(inst.anims.blown_pre, false)
-        inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/wind_tree_creak")
-        inst:ListenForEvent("animover", OnGustAnimDone)
-    end)
-end
-
-local function OnGustFall(inst)
-    if inst:HasTag("burnt") then
-        chop_down_burnt_tree(inst, GetPlayer())
-    else
-        chop_down_tree(inst, GetPlayer())
-    end
-end
-]]
 
 local function GetChild(inst)
     if math.random() < 0.2 then

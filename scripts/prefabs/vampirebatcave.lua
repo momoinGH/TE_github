@@ -25,11 +25,11 @@ end
 local function creatInterior(inst)
     if inst.components.teleporter:GetTarget() then return end
 
-    local depth = 18
-    local width = 26
+    local depth = TUNING.ROOM_LARGE_DEPTH
+    local width = TUNING.ROOM_LARGE_WIDTH
     local addprops = {
         { name = "interior_floor_batcave" },
-        { name = "interior_wall_batcave_wall_rock" },
+        { name = "interior_wall_batcave_wall_rock", x_offset = -4.5 },
         { name = "vamp_bat_cave_exit_door", x_offset = -depth / 2, key = "exit" },
         { name = "deco_cave_cornerbeam", x_offset = -depth / 2, z_offset = -width / 2 },
         { name = "deco_cave_cornerbeam", x_offset = -depth / 2, z_offset = width / 2, scale = { -1, 1 } },

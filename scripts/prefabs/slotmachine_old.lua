@@ -2693,7 +2693,7 @@ function SpawnTreasureLoot(name, lootdropper, pt, nexttreasure)
 			--bottle:OnDrop() Handled by lootdropper/inventoryitem  now
 		end
 
-		local player = GetPlayer()
+		local player = FindClosestPlayerInRange(pt.x, pt.y, pt.z, 900)
 		local loots = GetTreasureLootDefinition(name)
 		local lootprefabs = GetTreasureLoot(loots)
 		for p, n in pairs(lootprefabs) do
@@ -2731,7 +2731,7 @@ function SpawnTreasureChest(name, lootdropper, pt, nexttreasure)
 					chest.components.container:GiveItem(bottle, nil, nil, true, false)
 				end
 
-				local player = GetPlayer()
+				local player = FindClosestPlayerInRangeSq(pt, pt.x, pt.y, 900)
 				local lootprefabs = GetTreasureLoot(loots)
 				for p, n in pairs(lootprefabs) do
 					for i = 1, n, 1 do
@@ -3065,8 +3065,9 @@ local function SpawnCritter(inst, critter, lootdropper, pt, delay)
 	inst:DoTaskInTime(delay, function()
 		SpawnPrefab("collapse_small").Transform:SetPosition(pt:Get())
 		local spawn = lootdropper:SpawnLootPrefab(critter, pt)
-		if spawn and spawn.components.combat then
-			spawn.components.combat:SetTarget(GetPlayer())
+		local player = FindClosestPlayerInRangeSq(pt.x, pt.y, pt.z, 900)
+		if spawn and spawn.components.combat and player then
+			spawn.components.combat:SetTarget(player)
 		end
 	end)
 end

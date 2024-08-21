@@ -202,7 +202,7 @@ function Hackable:Rejuvenate(fertilizer)
 		self.shouldwither = true
 		self:Regen()
 	else
-		GetPlayer():PushEvent("insufficientfertilizer")
+		fertilizer:PushEvent("insufficientfertilizer")
 	end
 end
 

@@ -242,12 +242,6 @@ local function fn()
 	MakeSmallBurnableCharacter(inst, "pog_chest", Vector3(1, 0, 1))
 	MakeSmallFreezableCharacter(inst)
 
-	--[[
-	inst.special_action = function (act)
-        inst.sg:GoToState("desk_pre")
-    end
-]]
-
 
 	inst:ListenForEvent("beginaporkalypse", function() inst.AnimState:SetBuild("pog_feral_build") end, TheWorld)
 	inst:ListenForEvent("endaporkalypse", function() inst.AnimState:SetBuild("pog_basic") end, TheWorld)

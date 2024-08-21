@@ -98,44 +98,7 @@ local function KeepTarget(inst, target)
     end
     return true
 end
---[[
-local function Retarget(inst)
-    local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition() )
-    if (homePos and distsq(homePos, myPos) > 40*40)  and not
-    (inst.components.follower and inst.components.follower.leader)then
-        return
-    end
 
-    local newtarget = FindEntity(inst, HIPPO_TARGET_DIST, function(guy)
-            return (guy:HasTag("character") or guy:HasTag("monster"))
-                   and not (inst.components.follower and inst.components.follower.leader == guy)
-                   and not (guy:HasTag("hippopotamoose") and (guy.components.follower and not guy.components.follower.leader))
-                   and not ((inst.components.follower and inst.components.follower.leader == GetPlayer()) and (guy.components.follower and guy.components.follower.leader == GetPlayer()))
-                   and inst.components.combat:CanTarget(guy)
-    end)
-
-    if not newtarget then
-        inst:RemoveTag("enraged")
-    end
-    return newtarget
-end
-
-local function KeepTarget(inst, target)
-
-    if (inst.components.follower and inst.components.follower.leader) then
-        return true
-    end
-
-    if inst.sg and inst.sg:HasStateTag("running") then
-        return true
-    end
-
-    local homePos = inst.components.knownlocations:GetLocation("home")
-    local myPos = Vector3(inst.Transform:GetWorldPosition() )
-    return (homePos and distsq(homePos, myPos) < 40*40)
-end
-]]
 local function OnAttacked(inst, data)
     inst:AddTag("enraged")
     local attacker = data and data.attacker

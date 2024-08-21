@@ -1153,8 +1153,6 @@ local states =
                     local pos = inst:GetPosition()
                     --                    TheWorld:PushEvent("ms_sendlightningstrike", pos)
                     SpawnPrefab("lightning").Transform:SetPosition(pos:Get())
-                    --                        GetPlayer().SoundEmitter:PlaySound("dontstarve/rain/thunder_close")
-                    --                        GetPlayer().components.playercontroller:ShakeCamera(inst, "FULL", 0.7, 0.02, .5, 40)
                 end
             end),
         },

@@ -211,10 +211,16 @@ local function MakeExitDoor(name, anim)
         local inst = common("pig_shop_doormats", "pig_shop_doormats", anim, true)
         inst:AddTag("hamlet_houseexit")
 
-        inst:SetPrefabName("city_exit_old_door")
+        inst:SetPrefabNameOverride("city_exit_old_door")
 
         inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
         inst.AnimState:SetSortOrder(3)
+
+        if not TheWorld.ismastersim then
+            return inst
+        end
+
+        inst.usesound = "dontstarve_DLC003/common/objects/store/door_close"
 
         return inst
     end
@@ -240,7 +246,7 @@ return
     MakeExitDoor("city_exit_basic_door", "idle_basic"),
     MakeExitDoor("city_exit_tinker_door", "idle_tinker"),
     MakeExitDoor("city_exit_bank_door", "idle_bank"),
-   
+
 
     -- 室内门
     MakeHouseDoor("interior_wood_door"),

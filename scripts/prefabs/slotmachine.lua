@@ -2229,8 +2229,9 @@ local function SpawnCritter(inst, critter, lootdropper, pt, delay)
 	inst:DoTaskInTime(delay, function()
 		SpawnPrefab("collapse_small").Transform:SetPosition(pt:Get())
 		local spawn = lootdropper:SpawnLootPrefab(critter, pt)
-		if spawn and spawn.components.combat then
-			spawn.components.combat:SetTarget(GetPlayer())
+		local player = FindClosestPlayerInRangeSq(pt.x, pt.y, pt.z, 900)
+		if spawn and spawn.components.combat and player then
+			spawn.components.combat:SetTarget(player)
 		end
 	end)
 end

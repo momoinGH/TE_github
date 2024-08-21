@@ -240,7 +240,7 @@ local rooms = {
             { name = "interior_floor_hexagon" },
             { name = "city_exit_giftshop_door", x_offset = 4.5, key = "exit", },
             { name = "deco_roomglow", },
-            { name = "pigman_professor_shopkeep", x_offset = -2.3, z_offset = 4, startstate = "desk_pre" },
+            { name = "pigman_professor_shopkeep", x_offset = -2.3, z_offset = 4, startstate = "desk" },
             { name = "shelves_midcentury", x_offset = -4.5, z_offset = -3.3, shelfitems = { { 1, "trinket_1" }, { 5, "trinket_2" }, { 6, "trinket_3" } }, },
 
             { name = "deco_accademy_beam", x_offset = -5, z_offset = width / 2, scale = { -1, 1 } },
@@ -277,7 +277,7 @@ local rooms = {
             { name = "interior_wall_harlequin", scale = { 2.8, 2.8 } },
             { name = "interior_floor_wood" },
             { name = "city_exit_antiquities_door", x_offset = 4.5, key = "exit" },
-            { name = "pigman_collector_shopkeep", x_offset = -3, z_offset = 4, startstate = "desk_pre" },
+            { name = "pigman_collector_shopkeep", x_offset = -3, z_offset = 4, startstate = "desk" },
             { name = "deco_roomglow", },
             { name = "shelves_midcentury", x_offset = -4.5, shelfitems = { { 1, "trinket_1" }, { 5, "trinket_2" }, { 6, "trinket_3" } }, },
             { name = "shelves_cinderblocks", x_offset = -4.5, z_offset = -5 },
@@ -312,7 +312,7 @@ local rooms = {
             { name = "city_exit_giftshop_door", x_offset = 4.5, key = "exit", },
             { name = "shelves_floating", x_offset = -5, shelfitems = { { 1, "petals" }, { 2, "petals" }, { 3, "petals" }, { 4, "cutgrass" }, { 5, "cutgrass" }, { 6, "petals" } }, },
             { name = "deco_roomglow", },
-            { name = "pigman_hatmaker_shopkeep", x_offset = -3.5, z_offset = 5, startstate = "desk_pre" },
+            { name = "pigman_hatmaker_shopkeep", x_offset = -3.5, z_offset = 5, startstate = "desk" },
             { name = "shelves_pipe", x_offset = -4.5, z_offset = -3.5 },
             { name = "rug_rectangle", rotation = 90 },
             { name = "hat_lamp_side", x_offset = 2, z_offset = -width / 2 },
@@ -351,7 +351,7 @@ local rooms = {
             { name = "city_exit_basic_door", x_offset = 4.5, key = "exit", },
             { name = "shelves_midcentury", x_offset = -4.5, z_offset = 4, shelfitems = { { 5, "twigs" }, { 6, "twigs" }, { 3, "twigs" }, { 4, "twigs" } }, },
             { name = "deco_roomglow", },
-            { name = "pigman_hunter_shopkeep", x_offset = -3, startstate = "desk_pre" },
+            { name = "pigman_hunter_shopkeep", x_offset = -3, startstate = "desk" },
             { name = "shield_axes", x_offset = -width / 2, },
             { name = "rug_porcupuss", z_offset = -2, rotation = -90 },
             { name = "rug_fur", x_offset = 2, z_offset = 4, rotation = 90 },
@@ -384,7 +384,7 @@ local rooms = {
             { name = "interior_wall_moroc", scale = { 2.8, 2.8 } },
             { name = "interior_floor_octagon" },
             { name = "city_exit_florist_door", x_offset = 4.5, key = "exit", },
-            { name = "pigman_erudite_shopkeep", x_offset = -3, z_offset = 4, startstate = "desk_pre" },
+            { name = "pigman_erudite_shopkeep", x_offset = -3, z_offset = 4, startstate = "desk" },
             { name = "deco_roomglow", },
             { name = "shelves_glass", x_offset = -4.5, z_offset = -4, rotation = -90, shelfitems = { { 1, "trinket_1" }, { 5, "trinket_2" }, { 6, "trinket_3" } }, },
             { name = "deco_arcane_bookshelf", x_offset = -4.5, },
@@ -415,7 +415,7 @@ local rooms = {
             { name = "interior_wall_sunflower", scale = { 2.8, 2.8 } },
             { name = "interior_floor_wood" },
             { name = "city_exit_florist_door", x_offset = 4.5, key = "exit", },
-            { name = "pigman_florist_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk_pre" },
+            { name = "pigman_florist_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk" },
             { name = "deco_roomglow", },
             { name = "shelves_hutch", x_offset = -4.5, z_offset = -2.6, shelfitems = { { 3, "seeds" }, { 4, "seeds" }, { 5, "seeds" }, { 6, "seeds" } }, },
             { name = "rug_rectangle", x_offset = -2.3, z_offset = -width / 4 + 1, rotation = 92 },
@@ -451,9 +451,9 @@ local rooms = {
         depth = depth,
         addprops = {
             { name = "interior_wall_marble", scale = { 2.8, 2.8 } },
-            { name = "interior_floor_check"},
+            { name = "interior_floor_check" },
             { name = "city_exit_hoofspa_door", x_offset = 4.5, key = "exit", },
-            { name = "pigman_beautician_shopkeep", x_offset = -3, z_offset = 3, startstate = "desk_pre" },
+            { name = "pigman_beautician_shopkeep", x_offset = -3, z_offset = 3, startstate = "desk" },
             { name = "deco_roomglow", },
             { name = "shelves_marble", x_offset = -4.5, z_offset = -3, rotation = -90, shelfitems = { { 3, "petals" }, { 4, "petals" }, { 5, "petals" }, { 6, "petals" } }, },
             { name = "deco_marble_cornerbeam", x_offset = -5, z_offset = -width / 2 },
@@ -481,7 +481,7 @@ local rooms = {
             { name = "interior_wall_wood", scale = { 2.8, 2.8 } },
             { name = "interior_floor_check" },
             { name = "city_exit_general_door", x_offset = 4.5, key = "exit", },
-            { name = "pigman_banker_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk_pre" },
+            { name = "pigman_banker_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk" },
             { name = "shelves_wood", x_offset = -4.5, z_offset = -4, shelfitems = { { 3, "rocks" }, { 4, "rocks" }, { 5, "rocks" }, { 6, "rocks" } }, },
             { name = "shelves_wood", x_offset = -4.5, z_offset = 4, shelfitems = { { 3, "cutgrass" }, { 4, "cutgrass" }, { 5, "cutgrass" }, { 6, "cutgrass" } }, },
             { name = "rug_hedgehog", x_offset = -0.2, z_offset = 4, rotation = 90 },
@@ -516,7 +516,7 @@ local rooms = {
             { name = "interior_wall_wood", scale = { 2.8, 2.8 } },
             { name = "interior_floor_wood" },
             { name = "city_exit_produce_door", x_offset = 4.5, key = "exit", },
-            { name = "pigman_storeowner_shopkeep", x_offset = -2.5, z_offset = 4, startstate = "desk_pre" },
+            { name = "pigman_storeowner_shopkeep", x_offset = -2.5, z_offset = 4, startstate = "desk" },
             { name = "rug_rectangle", x_offset = depth / 6 + 1, z_offset = width / 6 + 1, rotation = 95 },
             { name = "rug_rectangle", x_offset = -depth / 6 + 1, z_offset = width / 6 + 1, rotation = 91 },
             { name = "rug_rectangle", x_offset = depth / 6 + 0.5, z_offset = -width / 6, rotation = -95 },
@@ -555,7 +555,7 @@ local rooms = {
             { name = "interior_wall_checkered", scale = { 2.8, 2.8 } },
             { name = "interior_floor_sheet_metal" },
             { name = "city_exit_deli_door", x_offset = 4.5, key = "exit", },
-            { name = "pigman_storeowner_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk_pre" },
+            { name = "pigman_storeowner_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk" },
             { name = "shelves_fridge", x_offset = -4.5, z_offset = -4, rotation = -90, shelfitems = { { 1, "fish_raw_small" }, { 2, "fish_raw_small" }, { 3, "bird_egg" }, { 4, "bird_egg" }, { 5, "froglegs" }, { 6, "froglegs" } }, },
             { name = "deco_general_hangingscale", x_offset = -2, z_offset = 4.7 },
             { name = "deco_roomglow", },
@@ -647,7 +647,7 @@ local rooms = {
             { name = "interior_wall_fullwall_moulding", scale = { 2.8, 2.8 } },
             { name = "interior_floor_hoof_curvy" },
             { name = "city_exit_bank_door", x_offset = 4.5, key = "exit", },
-            { name = "pigman_banker_shopkeep", x_offset = -2.5, startstate = "desk_pre" },
+            { name = "pigman_banker_shopkeep", x_offset = -2.5, startstate = "desk" },
             { name = "deco_roomglow", },
             { name = "deco_bank_marble_cornerbeam", x_offset = -4.99, z_offset = width / 2, scale = { -1, 1 } },
             { name = "deco_bank_marble_cornerbeam", x_offset = -4.99, z_offset = -width / 2 },
@@ -684,7 +684,7 @@ local rooms = {
             { name = "interior_wall_bricks", scale = { 2.8, 2.8 } },
             { name = "interior_floor_woodpaneling2" },
             { name = "city_exit_tinker_door", x_offset = 4.5, key = "exit", },
-            { name = "pigman_mechanic_shopkeep", x_offset = -2, z_offset = -3, startstate = "desk_pre" },
+            { name = "pigman_mechanic_shopkeep", x_offset = -2, z_offset = -3, startstate = "desk" },
             { name = "deco_roomglow", },
             { name = "deco_tinker_cornerbeam", x_offset = -4.99, z_offset = width / 2, scale = { -1, 1 } },
             { name = "deco_tinker_cornerbeam", x_offset = -4.99, z_offset = -width / 2 },
@@ -716,6 +716,13 @@ local function creatInterior(inst)
     if inst.components.teleporter:GetTarget() then return end
 
     local room = rooms[inst.prefab]
+
+    -- 摊位需要知道自己所处的商店
+    for _, data in ipairs(room.addprops) do
+        if data.name == "shop_buyer" then
+            data.shoptype = inst.prefab
+        end
+    end
 
     local doors = InteriorSpawnerUtils.CreateRoom(room)
     inst.components.teleporter:Target(doors.exit)
@@ -772,7 +779,6 @@ local function makefn(name, build, bank, data)
             inst.AnimState:AddOverrideBuild("flag_post_duster_build")
         elseif name == "pig_shop_cityhall_player" then
             inst.AnimState:AddOverrideBuild("flag_post_wilson_build")
-            -- GetPlayer():AddTag("mayor")
         end
 
         MakeSnowCovered(inst, .01)

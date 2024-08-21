@@ -104,35 +104,6 @@ local function fn(Sim)
     MakeObstaclePhysics(inst, .6)
     inst.Physics:SetCollides(false)
 
-    --[[inst.cooltask = inst:DoTaskInTime(30, function(inst)
-        --inst.AnimState:PushAnimation("cool", false)
-        fade_out(inst)
-        inst:DoTaskInTime(4*FRAMES, function(inst)
-            inst.AnimState:ClearBloomEffectHandle()
-        end)
-        if inst.components.propagator then
-            inst.components.propagator:StopSpreading()
-            inst:RemoveComponent("propagator")
-        end
-
-        local x, y, z = inst.Transform:GetWorldPosition()
-        --spawn some things
-        local radius = 1
-        local things = {"rocks", "rocks", "ash", "ash", "charcoal"}
-        for i = 1, #things, 1 do
-            local thing = SpawnPrefab(things[i])
-            thing.Transform:SetPosition(x + radius * UnitRand(), y, z + radius * UnitRand())
-        end
-
-        if math.random() < 0.25 then
-            local snake = SpawnPrefab("dragoon")
-            snake.Transform:SetPosition(x, y, z)
-            snake.components.combat:SetTarget(GetPlayer())
-        end
-
-        inst:Remove()
-    end)]]
-
     inst:AddComponent("burnable")
     inst.components.burnable:AddBurnFX("campfirefire", Vector3(0, 0, 0))
     --   inst.components.burnable:MakeNotWildfireStarter()

@@ -532,7 +532,6 @@ local function chop_down_tree(inst, chopper)
 
 	inst:DoTaskInTime(.4, function()
 		local sz = (inst.components.growable and inst.components.growable.stage > 2) and .5 or .25
-		--		GetPlayer().components.playercontroller:ShakeCamera(inst, "FULL", 0.25, 0.03, sz, 6)
 	end)
 
 	RemovePhysicsColliders(inst)

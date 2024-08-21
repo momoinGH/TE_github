@@ -1,10 +1,11 @@
 local Utils = require("tropical_utils/utils")
 local Constructor = require("tropical_utils/constructor")
 Constructor.SetEnv(env)
+local InteriorSpawnerUtils = require("interiorspawnerutils")
 
 -- Runar: 未定义的优先级，没有的话碎布加燃料会有问题
-ACTIONS.ADDFUEL.priority = 1
-ACTIONS.GIVE.priority    = 0
+ACTIONS.ADDFUEL.priority   = 1
+ACTIONS.GIVE.priority      = 0
 
 Utils.FnDecorator(ACTIONS.JUMPIN, "strfn", function(act)
     if act.target ~= nil then
@@ -155,7 +156,7 @@ end)
 
 Constructor.AddAction(nil, "SPECIAL_ACTION", STRINGS.ACTIONS.SPECIAL_ACTION, function(act)
     if act.doer.special_action then
-        act.doer.special_action(act)
+        act.doer.special_action(act.doer, act)
         return true
     end
 end)
@@ -221,71 +222,47 @@ Constructor.AddAction(nil, "USEDOOR", STRINGS.ACTIONS.USEDOOR, function(act)
     end
 end)
 
-Constructor.AddAction({ priority = 9, rmb = true, distance = 1, mount_valid = false, encumbered_valid = true },
+-- 摊位货架商品购买
+Constructor.AddAction({ priority = 9, distance = 1, mount_valid = false, encumbered_valid = true },
     "SHOP",
     STRINGS.ACTIONS.SHOP,
     function(act)
-        if act.doer.components.inventory then
-            if act.doer:HasTag("player") and act.doer.components.shopper then
-                if act.doer.components.shopper:IsWatching(act.target) then
-                    local sell = true
-                    local reason = nil
+        if not act.doer.components.shopper:IsWatching(act.target) then --偷
+            act.doer.components.shopper:Take(act.target)
+            return true
+        end
 
-                    if act.target:HasTag("shopclosed") or TheWorld.state.isnight then
-                        reason = "closed"
-                        sell = false
-                    elseif not act.doer.components.shopper:CanPayFor(act.target) then
-                        local prefab_wanted = act.target.costprefab
-                        if prefab_wanted == "oinc" then
-                            reason = "money"
-                        else
-                            reason = "goods"
-                        end
-                        sell = false
-                    end
-
-                    if sell then
-                        act.doer.components.shopper:PayFor(act.target)
-                        act.target.components.shopdispenser:RemoveItem()
-                        act.target:SetImage(nil)
-
-                        if act.target and act.target.shopkeeper_speech then
-                            act.target.shopkeeper_speech(act.target,
-                                STRINGS.CITY_PIG_SHOPKEEPER_SALE[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_SALE)])
-                        end
-
-                        return true
-                    else
-                        if reason == "money" then
-                            if act.target and act.target.shopkeeper_speech then
-                                act.target.shopkeeper_speech(act.target,
-                                    STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH
-                                    [math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH)])
-                            end
-                        elseif reason == "goods" then
-                            if act.target and act.target.shopkeeper_speech then
-                                act.target.shopkeeper_speech(act.target,
-                                    STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE
-                                    [math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE)])
-                            end
-                        elseif reason == "closed" then
-                            if act.target and act.target.shopkeeper_speech then
-                                act.target.shopkeeper_speech(act.target,
-                                    STRINGS.CITY_PIG_SHOPKEEPER_CLOSING
-                                    [math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_CLOSING)])
-                            end
-                        end
-                        return true
-                    end
-                else
-                    act.doer.components.shopper:Take(act.target)
-                    -- THIS IS WHAT HAPPENS IF ISWATCHING IS FALSE
-                    act.target.components.shopdispenser:RemoveItem()
-                    act.target:SetImage(nil)
-                    return true
-                end
+        local reason, prefab_wanted
+        if TheWorld.state.isnight then                                    --晚上不能买
+            reason = "closed"
+        elseif not act.doer.components.shopper:CanPayFor(act.target) then --钱不够
+            prefab_wanted = act.target.components.shopped.costprefab
+            if prefab_wanted == "oinc" then
+                reason = "money"
+            else
+                reason = "goods"
             end
         end
+
+        if not reason then
+            act.doer.components.shopper:PayFor(act.target)
+        end
+        local shopkeeper = FindEntity(act.doer, InteriorSpawnerUtils.RADIUS, nil, { "shopkeep" })
+        if shopkeeper then
+            if reason == "money" then
+                shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH)])
+            elseif reason == "goods" then
+                local name = STRINGS.NAMES[string.upper(prefab_wanted)]
+                assert(name) --严格一点，货币名字还是得有的
+                shopkeeper.components.talker:Say(string.format(STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE)], name))
+            elseif reason == "closed" then
+                shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_CLOSING[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_CLOSING)])
+            else
+                shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_SALE[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_SALE)])
+            end
+        end
+
+        return true
     end
 )
 
@@ -299,12 +276,10 @@ Constructor.AddAction(nil, "FIX", STRINGS.ACTIONS.FIX, function(act)
     end
 end)
 
+-- 商店老板补货
 Constructor.AddAction(nil, "STOCK", STRINGS.ACTIONS.STOCK, function(act)
-    if act.target then
-        act.target.restock(act.target, true)
-        act.doer.changestock = nil
-        return true
-    end
+    act.target.components.shopped:Restock(act.target, true)
+    return true
 end)
 
 ACTIONS.RUMMAGE.extra_arrive_dist = function(doer, dest)
@@ -685,125 +660,37 @@ Constructor.AddAction({ priority = 10, mount_valid = true },
     end
 )
 
--- TODO 能优化掉吗？
+----------------------------------------------------------------------------------------------------
+-- 柜子
+
 Constructor.AddAction({ priority = 10, distance = 1, mount_valid = true },
-    "GIVE2",
-    STRINGS.ACTIONS.GIVE2,
+    "GIVE_SHELF",
+    STRINGS.ACTIONS.GIVE_SHELF,
     function(act)
-        if act.invobject.components.inventoryitem then
-            act.target.components.shelfer:AcceptGift(act.doer, act.invobject)
+        return act.target.components.shelfer
+            and act.target.components.shelfer:AcceptGift(act.doer, act.invobject)
+            or false
+    end
+)
+
+Constructor.AddAction({ priority = 5, distance = 1 },
+    "TAKE_SHELF",
+    STRINGS.ACTIONS.TAKE_SHELF.GENERIC,
+    function(act)
+        local item = act.target.components.shelfer and act.target.components.shelfer:GiveGift()
+        if item and act.doer.components.inventory then
+            act.doer.components.inventory:GiveItem(item)
             return true
         end
     end
 )
 
-
-local function ExtraPickupRange(doer, dest)
-    if dest ~= nil then
-        local target_x, target_y, target_z = dest:GetPoint()
-
-        local is_on_water = TheWorld.Map:IsOceanTileAtPoint(target_x, 0, target_z) and
-            not TheWorld.Map:IsPassableAtPoint(target_x, 0, target_z)
-        if is_on_water then
-            return 0.75
-        end
-    end
-    return 0
+ACTIONS.TAKE_SHELF.stroverridefn = function(act)
+    local item = act.target.takeitem ~= nil and act.target.takeitem:value() or nil
+    return item ~= nil and subfmt(STRINGS.ACTIONS.TAKE_SHELF.ITEM, { item = item:GetBasicDisplayName() }) or nil
 end
 
-Constructor.AddAction({ priority = 1, distance = 2, extra_arrive_dist = ExtraPickupRange, mount_valid = true },
-    "PICKUP",
-    STRINGS.ACTIONS.PICKUP,
-    function(act)
-        if act.target and act.target.components.inventoryitem and act.target.components.shelfer then
-            local item = act.target.components.shelfer:GetGift()
-            if item then
-                item:AddTag("cost_one_oinc")
-                if act.target.components.shelfer.shelf and not act.target.components.shelfer.shelf:HasTag("playercrafted") then
-                    if act.doer.components.shopper and act.doer.components.shopper:IsWatching(item) then
-                        if act.doer.components.shopper:CanPayFor(item) then
-                            act.doer.components.shopper:PayFor(item)
-                        else
-                            return false, "CANTPAY"
-                        end
-                    else
-                        if act.target.components.shelfer.shelf and act.target.components.shelfer.shelf.curse then
-                            act.target.components.shelfer.shelf.curse(act.target)
-                        end
-                    end
-                end
-                item:RemoveTag("cost_one_oinc")
-                if item.components.perishable then item.components.perishable:StartPerishing() end
-                act.target = act.target.components.shelfer:GiveGift()
-            end
-        end
-
-        if act.doer.components.inventory ~= nil and
-            act.target ~= nil and
-            act.target.components.inventoryitem ~= nil and
-            (act.target.components.inventoryitem.canbepickedup or
-                (act.target.components.inventoryitem.canbepickedupalive and not act.doer:HasTag("player"))) and
-            not (act.target:IsInLimbo() or
-                (act.target.components.burnable ~= nil and act.target.components.burnable:IsBurning() and act.target.components.lighter == nil) or
-                (act.target.components.projectile ~= nil and act.target.components.projectile:IsThrown())) then
-            if act.doer.components.itemtyperestrictions ~= nil and not act.doer.components.itemtyperestrictions:IsAllowed(act.target) then
-                return false, "restriction"
-            elseif act.target.components.container ~= nil and act.target.components.container:IsOpenedByOthers(act.doer) then
-                return false, "INUSE"
-            elseif (act.target.components.yotc_racecompetitor ~= nil and act.target.components.entitytracker ~= nil) then
-                local trainer = act.target.components.entitytracker:GetEntity("yotc_trainer")
-                if trainer ~= nil and trainer ~= act.doer then
-                    return false, "NOTMINE_YOTC"
-                end
-            elseif act.doer.components.inventory.noheavylifting and act.target:HasTag("heavy") then
-                return false, "NO_HEAVY_LIFTING"
-            end
-
-            if (act.target:HasTag("spider") and act.doer:HasTag("spiderwhisperer")) and
-                (act.target.components.follower.leader ~= nil and act.target.components.follower.leader ~= act.doer) then
-                return false, "NOTMINE_SPIDER"
-            end
-            if act.target.components.curseditem and not act.target.components.curseditem:checkplayersinventoryforspace(act.doer) then
-                return false, "FULL_OF_CURSES"
-            end
-
-            if act.target.components.inventory ~= nil and act.target:HasTag("drop_inventory_onpickup") then
-                act.target.components.inventory:TransferInventory(act.doer)
-            end
-
-            act.doer:PushEvent("onpickupitem", { item = act.target })
-
-            if act.target.components.equippable ~= nil and not act.target.components.equippable:IsRestricted(act.doer) then
-                local equip = act.doer.components.inventory:GetEquippedItem(act.target.components.equippable.equipslot)
-                if equip ~= nil and not act.target.components.inventoryitem.cangoincontainer then
-                    --special case for trying to carry two backpacks
-                    if equip.components.inventoryitem ~= nil and equip.components.inventoryitem.cangoincontainer then
-                        --act.doer.components.inventory:SelectActiveItemFromEquipSlot(act.target.components.equippable.equipslot)
-                        act.doer.components.inventory:GiveItem(act.doer.components.inventory:Unequip(act.target
-                            .components
-                            .equippable.equipslot))
-                    else
-                        act.doer.components.inventory:DropItem(equip)
-                    end
-                    act.doer.components.inventory:Equip(act.target)
-                    return true
-                elseif act.doer:HasTag("player") then
-                    if equip == nil or act.doer.components.inventory:GetNumSlots() <= 0 then
-                        act.doer.components.inventory:Equip(act.target)
-                        return true
-                    elseif GetGameModeProperty("non_item_equips") then
-                        act.doer.components.inventory:DropItem(equip)
-                        act.doer.components.inventory:Equip(act.target)
-                        return true
-                    end
-                end
-            end
-
-            act.doer.components.inventory:GiveItem(act.target, nil, act.target:GetPosition())
-            return true
-        end
-    end
-)
+----------------------------------------------------------------------------------------------------
 
 -- TODO 能优化掉吗？
 Constructor.AddAction({ priority = 10, mount_valid = true },

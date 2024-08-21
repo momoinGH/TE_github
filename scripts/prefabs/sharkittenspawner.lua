@@ -18,22 +18,6 @@ local function ReturnChildren(inst)
     end
 end
 
-local function SummonShark(inst)
-    --Try to spawn a shark to protect this area if it's spring.
-    -- if inst.spawneractive then
-    --     local tigersharker = TheWorld.components.tigersharker
-
-    --     local shark = tigersharker:SpawnShark(true, false)
-    --     if shark then
-    --         local spawnpt = tigersharker:GetNearbySpawnPoint(GetPlayer())
-    --         if spawnpt then
-    --             shark.Transform:SetPosition(spawnpt:Get())
-    --             shark.components.combat:SuggestTarget(GetPlayer())
-    --         end
-    --     end
-    -- end
-end
-
 local function SpawnKittens(inst, num)
     for i = 1, num do
         local kitten = SpawnPrefab("sharkitten")

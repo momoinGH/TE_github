@@ -33,7 +33,7 @@ local room = {
         { name = "city_exit_general_door", x_offset = 4.7, z_offset = 0.5, key = "exit" },
         { name = "interior_wall_wood", x_offset = -2.8 },
         { name = "interior_floor_check", x_offset = -2.5 },
-        { name = "pigman_eskimo_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk_pre" },
+        { name = "pigman_eskimo_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk" },
         { name = "deco_roomglow" },
         { name = "shelves_wood", x_offset = -4.5, z_offset = -4 },
         { name = "shelves_wood2", x_offset = -4.5, z_offset = 4 },

@@ -285,6 +285,10 @@ local function OnDoorRemove(inst)
     FN.OnHouseDestroy(inst, nil, true)
 end
 
+local function OnDoneTeleporting(inst, obj)
+    obj:PushEvent("enterroom", inst) --猪人商人进店要说两句的
+end
+
 --- 虚空门的基础代码
 --- trader和hauntable用于传送物品，teleporter用来传送玩家
 --- teleporter加在所有门上，可以关联传送目的地和判断房间是否已经创建；entitytracker加载虚空内的门上，保存当前所在房间的中心点
@@ -361,6 +365,7 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
     end
 
     inst:ListenForEvent("onremove", OnDoorRemove)
+    inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
 
     return inst
 end
@@ -577,7 +582,7 @@ function FN.CreateRoom(room)
         elseif p:HasTag("interior_wall") then
             -- 墙壁自适应缩放
             x_offset = x_offset
-                or depth == TUNING.ROOM_LARGE_DEPTH and -5.5
+                or depth == TUNING.ROOM_LARGE_DEPTH and -4.5
                 or depth == TUNING.ROOM_MEDIUM_DEPTH and -4
                 or depth == TUNING.ROOM_SMALL_DEPTH and -3.5
                 or depth == TUNING.ROOM_TINY_DEPTH and -2.8

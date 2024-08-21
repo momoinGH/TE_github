@@ -1,8 +1,16 @@
 AddComponentAction("USEITEM", "inventoryitem", function(inst, doer, target, actions, right)
-    if not right then
-        if target:HasTag("shelfcanaccept") then --target.components.shelfer and target.components.shelfer:CanAccept(inst, doer ) then
-            table.insert(actions, ACTIONS.GIVE2)
+    if target:HasTag("cost_one_oinc") then
+        if target:HasTag("playercrafted") and not target:HasTag("slot_one") then
+            -- 物品放入柜中
+            table.insert(actions, ACTIONS.GIVE_SHELF)
         end
+    end
+end)
+
+AddComponentAction("SCENE", "shelfer", function(inst, doer, actions, right)
+    if inst:HasTag("cost_one_oinc") and inst:HasTag("playercrafted") and inst:HasTag("slot_one") then
+        --从柜子中拿取
+        table.insert(actions, ACTIONS.TAKE_SHELF)
     end
 end)
 
@@ -148,10 +156,8 @@ AddComponentAction("SCENE", "health", function(inst, doer, actions, right)
 end)
 
 AddComponentAction("SCENE", "shopped", function(inst, doer, actions, right)
-    if not right then
-        if doer.components.shopper then --and inst.components.shopdispenser and inst.components.shopdispenser.item_served then
-            table.insert(actions, ACTIONS.SHOP)
-        end
+    if inst:HasTag("slot_one") then
+        table.insert(actions, ACTIONS.SHOP)
     end
 end)
 

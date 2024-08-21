@@ -649,7 +649,6 @@ local states =
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound")
             end),
             TimeEvent(17 * FRAMES, function(inst)
-                --               GetPlayer().components.playercontroller:ShakeCamera(inst, "FULL", 0.7, 0.02, 2, 40)
                 inst.components.groundpounder:GroundPound()
             end),
             TimeEvent(19 * FRAMES, function(inst)
@@ -1096,7 +1095,6 @@ local states =
                 inst.components.groundpounder.damageRings = 4
                 inst.components.groundpounder.destructionRings = 4
                 inst.components.groundpounder.numRings = 4
-                --                GetPlayer().components.playercontroller:ShakeCamera(inst, "FULL", 0.7, 0.02, 2, 40)
                 inst.components.groundpounder:GroundPound()
                 local pt = inst:GetPosition()
                 TheWorld:DoTaskInTime(0.6, function() inst.spawnbarrier(inst, pt) end)

@@ -125,7 +125,7 @@ local function fn()
     inst:SetBrain(brain)
 
 
-    inst.special_action = function(act)
+    inst.special_action = function(inst,act)
         inst.sg:GoToState("thunder_attack")
     end
 

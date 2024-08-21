@@ -181,33 +181,33 @@ end
 local function spawnhoney()
     local choice = math.random(1, 4)
     if choice == 1 then
-        return { name = "deco_cave_honey_drip_1", x_offset = -depth / 2, z_offset = getlocationoutofcenter(width * 0.65, 3, true), rotation = -90 }
+        return { name = "deco_cave_honey_drip_1", x_offset = -depth / 2, z_offset = getlocationoutofcenter(width * 0.65, 3, true), }
     elseif choice == 2 then
-        return { name = "deco_cave_ceiling_drip_2", x_offset = -depth / 2, z_offset = getlocationoutofcenter(width * 0.65, 3, true), rotation = -90 }
+        return { name = "deco_cave_ceiling_drip_2", x_offset = -depth / 2, z_offset = getlocationoutofcenter(width * 0.65, 3, true), }
     elseif choice == 3 then
         if math.random() < 0.5 then
-            return { name = "deco_cave_honey_drip_side_1", x_offset = getlocationoutofcenter(depth * 0.65, 3, true), z_offset = -width / 2, rotation = -90 }
+            return { name = "deco_cave_honey_drip_side_1", x_offset = getlocationoutofcenter(depth * 0.65, 3, true), z_offset = -width / 2, }
         else
-            return { name = "deco_cave_honey_drip_side_1", x_offset = getlocationoutofcenter(depth * 0.65, 3, true), z_offset = width / 2, rotation = -90, flip = true }
+            return { name = "deco_cave_honey_drip_side_1", x_offset = getlocationoutofcenter(depth * 0.65, 3, true), z_offset = width / 2, scale = { -1, 1 } }
         end
     elseif choice == 4 then
         if math.random() < 0.5 then
-            return { name = "deco_cave_honey_drip_side_2", x_offset = getlocationoutofcenter(depth * 0.65, 3, true), z_offset = -width / 2, rotation = -90 }
+            return { name = "deco_cave_honey_drip_side_2", x_offset = getlocationoutofcenter(depth * 0.65, 3, true), z_offset = -width / 2, }
         else
-            return { name = "deco_cave_honey_drip_side_2", x_offset = getlocationoutofcenter(depth * 0.65, 3, true), z_offset = width / 2, rotation = -90, flip = true }
+            return { name = "deco_cave_honey_drip_side_2", x_offset = getlocationoutofcenter(depth * 0.65, 3, true), z_offset = width / 2, scale = { -1, 1 } }
         end
     end
 end
 
 local function AddCommonDeco(addprops)
-    table.insert(addprops, { name = "deco_hive_cornerbeam", x_offset = -depth / 2, z_offset = -width / 2, rotation = -90 })
-    table.insert(addprops, { name = "deco_hive_cornerbeam", x_offset = -depth / 2, z_offset = width / 2, rotation = -90, flip = true })
-    table.insert(addprops, { name = "deco_hive_pillar_side", x_offset = depth / 2, z_offset = -width / 2, rotation = -90 })
-    table.insert(addprops, { name = "deco_hive_pillar_side", x_offset = depth / 2, z_offset = width / 2, rotation = -90, flip = true })
+    table.insert(addprops, { name = "deco_hive_cornerbeam", x_offset = -depth / 2, z_offset = -width / 2, })
+    table.insert(addprops, { name = "deco_hive_cornerbeam", x_offset = -depth / 2, z_offset = width / 2, scale = { -1, 1 } })
+    table.insert(addprops, { name = "deco_hive_pillar_side", x_offset = depth / 2, z_offset = -width / 2, })
+    table.insert(addprops, { name = "deco_hive_pillar_side", x_offset = depth / 2, z_offset = width / 2, scale = { -1, 1 } })
 
-    table.insert(addprops, { name = "deco_hive_floor_trim", x_offset = depth / 2, z_offset = -width / 4, rotation = -90 })
-    table.insert(addprops, { name = "deco_hive_floor_trim", x_offset = depth / 2, z_offset = 0, rotation = -90 })
-    table.insert(addprops, { name = "deco_hive_floor_trim", x_offset = depth / 2, z_offset = width / 4, rotation = -90 })
+    table.insert(addprops, { name = "deco_hive_floor_trim", x_offset = depth / 2, z_offset = -width / 4, })
+    table.insert(addprops, { name = "deco_hive_floor_trim", x_offset = depth / 2, })
+    table.insert(addprops, { name = "deco_hive_floor_trim", x_offset = depth / 2, z_offset = width / 4, })
 
     return addprops
 end
@@ -270,15 +270,14 @@ end
 
 local function CreateQueenChambers(rooms, room_count)
     for i = 1, room_count do
-        local newRoom = {
+        local addprops = {}
+        table.insert(rooms, {
             width = width,
             depth = depth,
             idx = #rooms + 1,
             exits = {},
-            addprops = {},
-        }
-
-        local addprops = newRoom.addprops
+            addprops = addprops,
+        })
 
         if i ~= room_count then
             AddChamberDeco(addprops)
@@ -288,19 +287,19 @@ local function CreateQueenChambers(rooms, room_count)
                     { name = "antman_warrior", x_offset = getlocationoutofcenter(depth * 0.65, 5, true), z_offset = getlocationoutofcenter(width * 0.65, 5, true) })
             end
             -- 一路向上的门
-            table.insert(addprops, { name = "ant_cave_exit_door", x_offset = -depth / 2, key = newRoom.idx .. "NORTH", target_door = (#rooms + 1) .. "SOUTH" })
+            table.insert(addprops, { name = "ant_cave_exit_door", x_offset = -depth / 2, key = #rooms .. "NORTH", target_door = (#rooms + 1) .. "SOUTH" })
         else
             -- 蚁后房间
             addprops = AddCommonDeco(addprops)
 
-            table.insert(addprops, { name = "antqueen", x_offset = 0, z_offset = 0 })
-            table.insert(addprops, { name = "ant_cave_lantern", x_offset = -depth / 2, z_offset = 0 }) -- Behind the queen, placed there for better lighting
+            table.insert(addprops, { name = "antqueen", })
+            table.insert(addprops, { name = "ant_cave_lantern", x_offset = -depth / 2, }) -- Behind the queen, placed there for better lighting
 
             table.insert(addprops, { name = "ant_cave_lantern", x_offset = -depth / 2, z_offset = (depth / 2) - 2 })
             table.insert(addprops, { name = "ant_cave_lantern", x_offset = -depth / 2, z_offset = (-depth / 2) + 2 })
 
-            table.insert(addprops, { name = "ant_cave_lantern", x_offset = 0, z_offset = (depth / 2) + 1 })
-            table.insert(addprops, { name = "ant_cave_lantern", x_offset = 0, z_offset = (-depth / 2) - 1 })
+            table.insert(addprops, { name = "ant_cave_lantern", z_offset = (depth / 2) + 1 })
+            table.insert(addprops, { name = "ant_cave_lantern", z_offset = (-depth / 2) - 1 })
 
             -------------
             -- Gross
@@ -327,7 +326,7 @@ local function CreateQueenChambers(rooms, room_count)
             table.insert(addprops, { name = "throne_wall", x_offset = -1, z_offset = 6 })
 
             table.insert(addprops, { name = "throne_wall", x_offset = -3.25, z_offset = 1 })
-            table.insert(addprops, { name = "throne_wall", x_offset = -3.25, z_offset = 0.5 })
+            table.insert(addprops, { name = "throne_wall", x_offset = -3.25, .5 })
             table.insert(addprops, { name = "throne_wall", x_offset = -3.25, z_offset = -0 })
             table.insert(addprops, { name = "throne_wall", x_offset = -3.25, z_offset = -0.5 })
             table.insert(addprops, { name = "throne_wall", x_offset = -3.25, z_offset = -1 })
@@ -349,7 +348,7 @@ local function CreateQueenChambers(rooms, room_count)
             table.insert(addprops, { name = "throne_wall", x_offset = 1.25, z_offset = -4.5 })
             table.insert(addprops, { name = "throne_wall", x_offset = 1, z_offset = -5 })
             table.insert(addprops, { name = "throne_wall", x_offset = 0.75, z_offset = -5.5 })
-            table.insert(addprops, { name = "throne_wall", x_offset = 0, z_offset = -6 })
+            table.insert(addprops, { name = "throne_wall", z_offset = -6 })
             table.insert(addprops, { name = "throne_wall", x_offset = -0.5, z_offset = -6 })
         end
 
@@ -432,7 +431,7 @@ local function CreateMaze(inst)
                     name = "ant_cave_west_door",
                     z_offset = width / 2,
                     key = #rooms .. "WEST",
-                    target_door = (idx - 1) .. "EAST"
+                    target_door = (idx + 1) .. "EAST"
                 })
             end
 
@@ -657,5 +656,6 @@ local function makefn(buildanthill)
     return fn
 end
 
+-- 一个anthill搭配两个anthill_exit使用
 return Prefab("anthill", makefn(true), assets, prefabs),
     Prefab("anthill_exit", makefn(false), assets, prefabs)

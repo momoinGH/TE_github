@@ -19,7 +19,9 @@ local events =
 }
 
 local function ShouldStopSpin(inst)
-	return inst:GetDistanceSqToInst(GetPlayer()) > 100 or math.random() > 0.9
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local player = FindClosestPlayerInRangeSq(x, y, z, 10000)
+	return not player or math.random() > 0.9
 end
 
 local function LightningStrike(inst)

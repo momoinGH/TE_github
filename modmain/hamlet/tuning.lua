@@ -22,3 +22,5 @@ TUNING.ANTMAN_REGEN_TIME             = seg_time * 4
 TUNING.ANTMAN_RELEASE_TIME           = seg_time
 TUNING.ANTMAN_MIN                    = 3
 TUNING.ANTMAN_MAX                    = 4
+
+TUNING.CITY_PIG_GUARD_TARGET_DIST = 20

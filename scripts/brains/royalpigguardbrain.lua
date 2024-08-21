@@ -290,7 +290,7 @@ local function inCityLimits(inst)
         local speechset = getSpeechType(inst, STRINGS.CITY_PIG_TALK_STAYOUT)
         local str = speechset[math.random(#speechset)]
 
-        inst.sayline(inst, str)
+        inst.components.talker:Say(str)
         --inst.components.talker:Say(str)
 
         inst.components.combat:GiveUp()

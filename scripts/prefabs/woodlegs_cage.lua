@@ -41,12 +41,6 @@ local function Unlock(inst)
 	-- ProfileStatsSet("teleportato_powerup", true)
 	inst.AnimState:PlayAnimation("unlocked", false)
 
-	-- unlock woodlegs
-	--	local player = GetPlayer()
-	--	player.profile:UnlockCharacter("woodlegs")
-	--	player.profile.dirty = true
-	--	player.profile:Save()
-
 	inst.SoundEmitter:PlaySound("dontstarve_DLC002/characters/woodlegs/unlock")
 	inst.SoundEmitter:PlaySound("dontstarve/forest/treeCrumble")
 
