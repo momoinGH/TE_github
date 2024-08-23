@@ -22,9 +22,9 @@ SetSharedLootTable("bossboarte",
 		{ "meat",                1.0 },
 		{ "meat",                1.0 },
 		{ "tfwp_infernal_staff", 0.5 },
-		{ "tfwp_healing_staff",  1.0 },
-		{ "tfwp_spear_gung",     0.5 },
-		{ "tfwp_lava_hammer",    0.5 },
+		{ "healingstaff", 1.0 },
+		{ "spear_gungnir", 0.5 },
+		{ "hammer_mjolnir", 0.5 },
 	})
 
 local function OnTimerDone(inst, data)

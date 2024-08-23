@@ -47,7 +47,7 @@ local function i(j, k, light, addColour, multColour)
 
     return inst
 end;
-local function o(d, j, k, p, l, m, n, q, r)
+local function fn(d, j, k, p, l, m, n, q, r)
     local s, t, u = d.Transform:GetWorldPosition()
     for v, w in pairs(r) do v:ForceFacePoint(s, t, u) end;
     if d.entity:IsVisible() then
@@ -69,8 +69,8 @@ local function o(d, j, k, p, l, m, n, q, r)
     end
 end;
 
-local function MakeProjectile(D, j, k, speed, light, addColour, multColour, q)
-    local E = { Asset("ANIM", "anim/" .. k .. ".zip") }
+local function MakeProjectile(D, bank, build, speed, light, addColour, multColour, q)
+    local assets = { Asset("ANIM", "anim/" .. build .. ".zip") }
     local F = q ~= nil and { q } or nil;
     local function fn()
         local inst = CreateEntity()
@@ -83,8 +83,8 @@ local function MakeProjectile(D, j, k, speed, light, addColour, multColour, q)
 
         RemovePhysicsColliders(inst)
 
-        inst.AnimState:SetBank(j)
-        inst.AnimState:SetBuild(k)
+        inst.AnimState:SetBank(bank)
+        inst.AnimState:SetBuild(build)
         inst.AnimState:PlayAnimation("idle_loop", true)
 
         if addColour ~= nil then
@@ -101,7 +101,7 @@ local function MakeProjectile(D, j, k, speed, light, addColour, multColour, q)
         inst:AddTag("projectile")
 
         if not TheNet:IsDedicated() then
-            inst:DoPeriodicTask(0, o, nil, j, k, speed, light, addColour, multColour, q, {})
+            inst:DoPeriodicTask(0, fn, nil, bank, build, speed, light, addColour, multColour, q, {})
         end;
 
         inst.entity:SetPristine()
@@ -126,7 +126,7 @@ local function MakeProjectile(D, j, k, speed, light, addColour, multColour, q)
 
         return inst
     end;
-    return Prefab(D, fn, E, F)
+    return Prefab(D, fn, assets, F)
 end;
 local function H()
     local inst = CreateEntity()
@@ -154,7 +154,7 @@ local function H()
 
     return inst
 end;
-local function I()
+local function hit_fx_fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -186,6 +186,6 @@ return
         { 0, .2, .1, 0 }, nil,
         "forge_blossom_hit_fx"),
     Prefab("forge_fireball_hit_fx", H, a),
-    Prefab("forge_blossom_hit_fx", I, b),
+    Prefab("forge_blossom_hit_fx", hit_fx_fn, b),
     MakeProjectile("forge_fireball_projectile_fast", "fireball_fx", "fireball_2_fx", 30, 1, nil, nil,
         "forge_fireball_hit_fx")

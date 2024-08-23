@@ -17,14 +17,14 @@ local prefabs =
 
 local armasdotesouro =
 {
-	[1] = "tfwp_healing_staff",
+	[1] = "healingstaff",
 	[2] = "tfwp_control_book",
 	[3] = "tfwp_infernal_staff",
-	[4] = "tfwp_lava_hammer",
-	[5] = "tfwp_dragon_dart",
-	[6] = "tfwp_spear_lance",
-	[7] = "tfwp_lava_dart",
-	[8] = "tfwp_spear_gung",
+	[4] = "hammer_mjolnir",
+	[5] = "blowdart_lava2",
+	[6] = "spear_lance",
+	[7] = "blowdart_lava",
+	[8] = "spear_gungnir",
 	[9] = "tfwp_summon_book",
 	[10] = "lavaarena_armor_hpdamager",
 	[11] = "lavaarena_armor_hprecharger",
@@ -46,7 +46,7 @@ local armasdotesouro =
 	[27] = "lavaarena_eyecirclethat",
 	[28] = "lavaarena_crowndamagerhat",
 	[29] = "lavaarena_healinggarlandhat",
-	[30] = "tfwp_heavy_sword",
+	[30] = "lavaarena_heavyblade",
 }
 
 local battlespider =
@@ -723,16 +723,16 @@ local function SpawnChest6(inst)
 	local chest = SpawnPrefab("lavarenachest")
 
 	for i = 1, 2 do
-		local single = SpawnPrefab("tfwp_spear_gung")
+		local single = SpawnPrefab("spear_gungnir")
 		chest.components.container:GiveItem(single)
 
 		local single1 = SpawnPrefab("tfwp_infernal_staff")
 		chest.components.container:GiveItem(single1)
 
-		local single2 = SpawnPrefab("tfwp_healing_staff")
+		local single2 = SpawnPrefab("healingstaff")
 		chest.components.container:GiveItem(single2)
 
-		local single3 = SpawnPrefab("riledlucy")
+		local single3 = SpawnPrefab("lavaarena_lucy")
 		chest.components.container:GiveItem(single3)
 
 		if math.random() > 0.5 then

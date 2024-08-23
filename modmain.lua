@@ -104,7 +104,8 @@ GLOBAL.WIKI_DATA = nil
 
 ----------------------------------------------------------------------------------------------------
 
-modimport "modmain/componentactions" --AddComponentAction比较特殊，如果mod的分开写就会前后覆盖
+modimport "modmain/componentactions"  --AddComponentAction比较特殊，如果mod的分开写就会前后覆盖
+modimport "modmain/event_server/main" --熔炉和暴食的内容
 modimport "scripts/prefabs/tropical_farm_plant_defs"
 
 AddMinimap()

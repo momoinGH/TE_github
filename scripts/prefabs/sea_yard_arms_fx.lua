@@ -5,29 +5,36 @@ local assets =
 
 local function stopfx(inst)
     inst.AnimState:PlayAnimation("out")
-    inst:ListenForEvent("animover", function()
-        inst.SoundEmitter:KillSound("fix")
-        inst:Remove()
-    end)
+    inst:ListenForEvent("animover", inst.Remove)
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
-    anim:SetFinalOffset(10)
-
-    anim:SetBank("sea_yard_tools")
-    anim:SetBuild("sea_yard_tools")
-    anim:PlayAnimation("in")
-    anim:PushAnimation("loop", true)
+    inst.AnimState:SetFinalOffset(10)
+    inst.AnimState:SetBank("sea_yard_tools")
+    inst.AnimState:SetBuild("sea_yard_tools")
+    inst.AnimState:PlayAnimation("in")
+    inst.AnimState:PushAnimation("loop", true)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_medium")
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/shipyard/fix_LP", "fix")
 
+    inst:AddTag("FX")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
     inst.stopfx = stopfx
+    inst.persists = false
+
     return inst
 end
 

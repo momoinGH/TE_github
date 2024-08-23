@@ -188,11 +188,11 @@ Constructor.AddAction(nil, "LAUNCH_THROWABLE", STRINGS.ACTIONS.LAUNCH_THROWABLE,
     return true
 end)
 
--- TODO 这些action的fn不用返回true吗？
 Constructor.AddAction(nil, "INFEST", STRINGS.ACTIONS.INFEST, function(act)
     if not act.doer.infesting then
         act.doer.components.infester:Infest(act.target)
     end
+    return true
 end)
 
 
@@ -782,21 +782,6 @@ Constructor.AddAction(nil,
         end
     end
 )
-
--- TODO 能优化掉吗？
-Constructor.AddAction(nil,
-    "REPLATE",
-    STRINGS.ACTIONS.REPLATE,
-    function(act)
-        local replatable = act.target and act.target.components.replatable or nil
-        if act.invobject and replatable and replatable:CanReplate(act.invobject) then
-            replatable:Replate(act.invobject)
-            act.invobject.components.stackable:Get(1):Remove()
-            return true
-        end
-    end
-)
-
 
 Constructor.AddAction({ priority = 3, rmb = true, distance = 1, mount_valid = false, encumbered_valid = true },
     "COLLECTSAP",

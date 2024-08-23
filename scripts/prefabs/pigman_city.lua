@@ -555,7 +555,7 @@ local function callGuards(inst, attacker, id)
         guard.Transform:SetPosition(door.Transform:GetWorldPosition())
         guard:PushEvent("attacked", { attacker = attacker, damage = 0 })
         guard:SetTemp() --临时的
-   
+
         door.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_open")
         inst.components.entitytracker:TrackEntity("guard" .. id, guard)
         guard.components.entitytracker:TrackEntity("owner", inst)
@@ -1132,4 +1132,12 @@ return makepigman("pigman_beautician", "pig_beautician", nil, nil, nil, nil, "FE
     makepigman("pigman_miner_shopkeep", "pig_miner", nil, nil, true, nil, "MALE", "pigman_miner"),
     makepigman("pigman_collector_shopkeep", "pig_collector", nil, nil, true, nil, "MALE", "pigman_collector"),
     makepigman("pigman_professor_shopkeep", "pig_professor", nil, nil, true, nil, "MALE", "pigman_professor"),
-    makepigman("pigman_mechanic_shopkeep", "pig_mechanic", nil, nil, true, nil, "MALE", "pigman_mechanic")
+    makepigman("pigman_mechanic_shopkeep", "pig_mechanic", nil, nil, true, nil, "MALE", "pigman_mechanic"),
+
+    -- 新增
+    makepigman("pigman_eskimo_shopkeep", "pig_eskimo", nil, nil, true, nil, "MALE", "pig_eskimo"),
+    makepigman("pig_shopkeeper", "pig_shopkeeper", nil, nil, nil, nil, "MALE"),
+    makepigman("pig_royalguard_rich", "pig_royalguard_rich", nil, true, nil, nil, "MALE"),
+    makepigman("pig_royalguard_rich_2", "pig_royalguard_rich_2", nil, true, nil, nil, "MALE"),
+    makepigman("pigman_royalguard_3", "pig_royalguard_3", nil, true, nil, nil, "MALE"),
+    makepigman("pig_eskimo", "pig_eskimo", nil, true, nil, nil, "MALE")

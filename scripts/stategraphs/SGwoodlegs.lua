@@ -82,8 +82,12 @@ local states =
 
         onenter = function(inst)
             inst.components.locomotor:RunForward()
-            if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pre") else inst.AnimState:PlayAnimation(
-                "run_pre") end
+            if inst:HasTag("aquatic") then
+                inst.AnimState:PlayAnimation("sail_pre")
+            else
+                inst.AnimState:PlayAnimation(
+                    "run_pre")
+            end
             inst.sg.mem.foosteps = 0
         end,
 
@@ -111,8 +115,12 @@ local states =
 
         onenter = function(inst)
             inst.components.locomotor:RunForward()
-            if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_loop") else inst.AnimState:PlayAnimation(
-                "run_loop") end
+            if inst:HasTag("aquatic") then
+                inst.AnimState:PlayAnimation("sail_loop")
+            else
+                inst.AnimState:PlayAnimation(
+                    "run_loop")
+            end
         end,
 
         onupdate = function(inst)
@@ -144,8 +152,12 @@ local states =
 
         onenter = function(inst)
             inst.Physics:Stop()
-            if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else inst.AnimState:PlayAnimation(
-                "run_pst") end
+            if inst:HasTag("aquatic") then
+                inst.AnimState:PlayAnimation("sail_pst")
+            else
+                inst.AnimState:PlayAnimation(
+                    "run_pst")
+            end
         end,
 
         events =
@@ -165,8 +177,12 @@ local states =
 
         onenter = function(inst)
             inst.components.locomotor:WalkForward()
-            if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pre") else inst.AnimState:PlayAnimation(
-                "run_pre") end
+            if inst:HasTag("aquatic") then
+                inst.AnimState:PlayAnimation("sail_pre")
+            else
+                inst.AnimState:PlayAnimation(
+                    "run_pre")
+            end
         end,
 
         timeline = nil,
@@ -185,8 +201,12 @@ local states =
 
         onenter = function(inst)
             inst.components.locomotor:WalkForward()
-            if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_loop") else inst.AnimState:PlayAnimation(
-                "run_loop") end
+            if inst:HasTag("aquatic") then
+                inst.AnimState:PlayAnimation("sail_loop")
+            else
+                inst.AnimState:PlayAnimation(
+                    "run_loop")
+            end
             inst.sg:SetTimeout(inst.AnimState:GetCurrentAnimationLength())
         end,
 
@@ -207,8 +227,12 @@ local states =
 
         onenter = function(inst)
             inst.Physics:Stop()
-            if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else inst.AnimState:PlayAnimation(
-                "run_pst") end
+            if inst:HasTag("aquatic") then
+                inst.AnimState:PlayAnimation("sail_pst")
+            else
+                inst.AnimState:PlayAnimation(
+                    "run_pst")
+            end
         end,
 
         events =
@@ -229,20 +253,6 @@ local states =
             inst.Physics:Stop()
             inst.AnimState:Hide("swap_arm_carry")
             inst.AnimState:PlayAnimation("death")
-
-
-
-            if inst:HasTag("aquatic") then
-                if inst.components.driver2 then
-                    local barcoinv = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)
-                    if barcoinv then
-                        barcoinv:Remove()
-                    end
-                    inst.components.driver2.vehicle:Remove()
-                    inst:RemoveComponent("rowboatwakespawner")
-                    inst:RemoveComponent("driver2")
-                end
-            end
         end,
 
         events =

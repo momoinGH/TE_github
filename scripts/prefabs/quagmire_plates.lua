@@ -1,3 +1,17 @@
+local function TargetCheck(inst, doer, target)
+    return target:HasTag("replatable")
+end
+
+local function OnUse(inst, doer, target)
+    local replatable = target.components.replatable
+    if replatable and replatable:CanReplate(inst) then
+        replatable:Replate(inst)
+        inst.components.stackable:Get(1):Remove()
+        return true
+    end
+    return false
+end
+
 local function MakePlate(basedish, dishtype, assets)
     local assets =
     {
@@ -27,11 +41,17 @@ local function MakePlate(basedish, dishtype, assets)
 
         inst:AddTag("replater")
 
+        inst:AddComponent("tropical_consumable")
+        inst.components.tropical_consumable.targetCheckFn = TargetCheck
+        inst.components.tropical_consumable.str = "REPLATE"
+
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
             return inst
         end
+
+        inst.components.tropical_consumable.onUseFn = OnUse
 
         inst:AddComponent("inspectable")
 

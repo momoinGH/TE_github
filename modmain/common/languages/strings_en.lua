@@ -8828,7 +8828,6 @@ STRINGS.ACTIONS.COMPACTPOOP       = "Compact Poop"
 STRINGS.ACTIONS.MEAL              = "Meal"
 STRINGS.ACTIONS.INSTALL           = "Install"
 STRINGS.ACTIONS.SNACKRIFICE       = "Snackrifice"
-STRINGS.ACTIONS.REPLATE           = "Replate"
 
 STRINGS.ACTIONS.BOATMOUNT         = "Boat Mount"
 STRINGS.ACTIONS.TROPICAL_USE_ITEM = {
@@ -8840,6 +8839,7 @@ STRINGS.ACTIONS.TROPICAL_USE_ITEM = {
     KILLSOFTLY   = "屠宰",
     FILL         = "Fill",
     MILK = "Milk",
+    REPLATE      = "Replate"
 }
 
 

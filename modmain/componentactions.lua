@@ -143,13 +143,6 @@ AddComponentAction("USEITEM", "snackrificable", function(inst, doer, target, act
 end
 )
 
-AddComponentAction("USEITEM", "replater", function(inst, doer, target, actions)
-    if target:HasTag("replatable") then
-        table.insert(actions, ACTIONS.REPLATE)
-    end
-end
-)
-
 AddComponentAction("USEITEM", "installable", function(inst, doer, target, actions)
     if target:HasTag("installations") and not target:HasTag("installations_occupied") then
         table.insert(actions, ACTIONS.INSTALL)

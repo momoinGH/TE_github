@@ -111,6 +111,7 @@ STRINGS.ACTIONS.TROPICAL_USE_ITEM                       = {
     KILLSOFTLY   = "屠宰",
     FILL         = "灌满",
     MILK         = "挤奶",
+    REPLATE      = "摆盘"
 }
 -----------选项卡----------
 STRINGS.TABS.NAUTICALTAB                                = "航海"

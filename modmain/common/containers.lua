@@ -49,6 +49,8 @@ for line = 1, 0, -1 do
 	end
 end
 
+----------------------------------------------------------------------------------------------------
+
 local function DefaultItemTestFn(container, item, slot)
 	return (cooking.IsCookingIngredient(item.prefab) or item:HasTag("preparedfood") or item.prefab == "wetgoop") and
 		not container.inst:HasTag("burnt")
@@ -120,20 +122,16 @@ local cookertypes =
 		itemtestfn = SyrupItemTestFn,
 	},
 }
-cookertypes.casseroledish = cookertypes.large
-cookertypes.casseroledish_small = cookertypes.small
-cookertypes.pot = cookertypes.large
-cookertypes.pot_small = cookertypes.small
-cookertypes.grill = cookertypes.large
-cookertypes.grill_small = cookertypes.small
-cookertypes.firepit = cookertypes.large -- Hack
 
--- TODO 为什么要覆盖？
-Utils.FnDecorator(containers, "widgetsetup", function(container, prefab, data)
-	prefab = prefab or container.inst.prefab
-	data = cookertypes[prefab] or data
-	return nil, false, { container, prefab, data }
-end)
+
+
+params.casseroledish = cookertypes.large
+params.casseroledish_small = cookertypes.small
+params.pot = cookertypes.large
+params.pot_small = cookertypes.small
+params.grill = cookertypes.large
+params.grill_small = cookertypes.small
+params.firepit = cookertypes.large -- Hack
 
 
 ----------------------------------------------------------------------------------------------------
