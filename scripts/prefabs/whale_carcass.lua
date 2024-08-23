@@ -347,4 +347,4 @@ end
 
 
 return Prefab("whale_carcass_blue", bluefn, assets, prefabs),
-	Prefab("common/objects/whale_carcass_white", whitefn, assets, prefabs)
+	Prefab("whale_carcass_white", whitefn, assets, prefabs)

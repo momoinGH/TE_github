@@ -154,7 +154,7 @@ local function fn(Sim)
                 updateAnim(inst, section)
             end
         end)
-    inst.components.fueled.fueltype = "TAR"
+    inst.components.fueled.fueltype = FUELTYPE.TAR
 
     onBuilt(inst)
 
@@ -209,8 +209,6 @@ local function itemfn(Sim)
 
     inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
-    --	inst.components.fuel.fueltype = "TAR"
-    --	inst.components.fuel.secondaryfueltype = "TAR"
 
     inst:AddComponent("fueltar")
 

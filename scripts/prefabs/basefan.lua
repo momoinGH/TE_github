@@ -75,12 +75,6 @@ local function onhit(inst, worker)
 	end
 end
 
-local function onFloodedStart(inst)
-	if inst.on then
-		TurnOff(inst, true)
-	end
-end
-
 local function getstatus(inst, viewer)
 	if inst.on then
 		if inst.components.fueled and (inst.components.fueled.currentfuel / inst.components.fueled.maxfuel) <= .25 then
@@ -183,12 +177,6 @@ local function fn()
 	inst.components.workable:SetOnWorkCallback(onhit)
 
 	inst:SetStateGraph("SGbasefan")
-
-	inst:AddComponent("floodable")
-	inst.components.floodable.onStartFlooded = onFloodedStart
-	--inst.components.floodable.onStopFlooded = onFloodedEnd
-	inst.components.floodable.floodEffect = "shock_machines_fx"
-	inst.components.floodable.floodSound = "dontstarve_DLC002/creatures/jellyfish/electric_land"
 
 	inst.OnSave = onsave
 	inst.OnLoad = onload

@@ -486,7 +486,7 @@ end
 return MakeClock(1, 1, 1),
 	MakeClock(2, -1, 3),
 	MakeClock(3, 1, 0.5),
-	Prefab("common/objects/aporkalypse_rewind_plate", make_rewind_plate, assets),
-	Prefab("common/objects/aporkalypse_fastforward_plate", make_fastforward_plate, assets),
-	Prefab("common/objects/aporkalypse_clock", make_master_fn, assets),
-	Prefab("common/objects/aporkalypse_marker", make_marker, assets)
+	Prefab("aporkalypse_rewind_plate", make_rewind_plate, assets),
+	Prefab("aporkalypse_fastforward_plate", make_fastforward_plate, assets),
+	Prefab("aporkalypse_clock", make_master_fn, assets),
+	Prefab("aporkalypse_marker", make_marker, assets)

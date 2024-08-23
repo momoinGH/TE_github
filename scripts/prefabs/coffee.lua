@@ -1,4 +1,4 @@
-local Assets =
+local assets =
 {
 	Asset("ANIM", "anim/coffee.zip"),
 }
@@ -63,4 +63,4 @@ local function cooked(Sim)
 	return inst
 end
 
-return Prefab("coffee", cooked, Assets, prefabs)
+return Prefab("coffee", cooked, assets, prefabs)

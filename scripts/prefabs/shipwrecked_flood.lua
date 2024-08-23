@@ -13,9 +13,6 @@ local function QueueRemove(inst)
         inst:DoTaskInTime(2, function(inst) inst:Remove() end)
     end
 
-
-
-
     if math.random() < 0.10 then
         local invader = GetClosestInstWithTag("player", inst, 25)
         local outrobicho = GetClosestInstWithTag("mosquito", inst, 20)
@@ -50,7 +47,7 @@ local function OnRemove(inst)
     for _, v in ipairs(TheSim:FindEntities(x, 0, z, 10, nil, { "flooded" })) do
         if v.components.floodable then
             local flood = FindEntity(v, 10, nil, { "mare" })
-            if not flood then
+            if not flood or flood ~= inst then
                 v.components.floodable:StopFlooded()
             end
         end
@@ -75,6 +72,7 @@ local function fn()
     inst.AnimState:SetSortOrder(1)
 
     inst:AddTag("NOCLICK")
+    inst:AddTag("NOBLOCK")
     inst:AddTag("marepracolocar")
     inst:AddTag("mare")
 

@@ -28,30 +28,20 @@ end
 
 
 local function onequip(inst, owner)
-    if owner:HasTag("aquatic") then
+    owner.AnimState:AddOverrideBuild("player_living_suit_morph")
+    owner:AddTag("ironlord")
+    owner:AddTag("laser_immune")
+    owner:AddTag("mech")
+    owner:SetStateGraph("SGironlord")
+    owner.components.combat:SetDefaultDamage(IRON_LORD_DAMAGE)
+    owner.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED * 1.3
+    inst.nightlight = SpawnPrefab("living_artifact_light")
+    owner:AddChild(inst.nightlight)
 
-    else
-        owner.AnimState:AddOverrideBuild("player_living_suit_morph")
-        owner:AddTag("ironlord")
-        owner:AddTag("laser_immune")
-        owner:AddTag("mech")
-        owner:SetStateGraph("SGironlord")
-        owner.components.combat:SetDefaultDamage(IRON_LORD_DAMAGE)
-        owner.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED * 1.3
-        inst.nightlight = SpawnPrefab("living_artifact_light")
-        owner:AddChild(inst.nightlight)
+    owner.sg:GoToState("morph")
 
-        owner.sg:GoToState("morph")
-
-        if inst.components.fueled ~= nil then
-            inst.components.fueled:StartConsuming()
-        end
-        --owner:DoTaskInTime(2, function()
-        --            player.components.talker:Say(GetString(player.prefab, "ANNOUNCE_SUITUP"))
-        --end)
-
-
-        --end)
+    if inst.components.fueled ~= nil then
+        inst.components.fueled:StartConsuming()
     end
 end
 

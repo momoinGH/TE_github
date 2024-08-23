@@ -5,6 +5,7 @@ local BUCKET_LEVELS =
 	"overflow",
 }
 
+--- 树液
 local Sappy = Class(function(self, inst)
 	self.inst = inst
 
@@ -30,7 +31,7 @@ local Sappy = Class(function(self, inst)
 
 	self.contestmode = nil
 
-	self.inst:AddTag("tappable")
+	inst:AddTag("tappable")
 end)
 
 local function SplashOceanLoot(loot, cb)

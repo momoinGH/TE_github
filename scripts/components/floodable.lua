@@ -35,7 +35,9 @@ end, nil, {
 })
 
 local function SpawnFx(inst, self)
-    SpawnPrefab(self.floodEffect).Transform:SetPosition(inst.Transform:GetWorldPosition())
+    if self.floodEffect then
+        SpawnPrefab(self.floodEffect).Transform:SetPosition(inst.Transform:GetWorldPosition())
+    end
     if self.floodSound and self.inst.SoundEmitter then
         self.inst.SoundEmitter:PlaySound(self.floodSound)
     end
@@ -49,7 +51,9 @@ function Floodable:StartFlooded()
     if self.fxTask then
         self.fxTask:Cancel()
     end
-    self.fxTask = self.inst:DoPeriodicTask(self.fxPeriod, SpawnFx, 0, self)
+    if self.floodEffect or self.floodSound then
+        self.fxTask = self.inst:DoPeriodicTask(self.fxPeriod, SpawnFx, 0, self)
+    end
 end
 
 function Floodable:StopFlooded()

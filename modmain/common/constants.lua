@@ -22,8 +22,6 @@ MATERIALS.ENFORCEDLIMESTONE = "enforcedlimestone"
 TOOLACTIONS["HACK"] = true
 TOOLACTIONS["SHEAR"] = true
 TOOLACTIONS["PAN"] = true
-TOOLACTIONS["INVESTIGATEGLASS"] = true
-
 
 Utils.FnDecorator(GLOBAL, "PlayFootstep", function(inst)
     local boat = inst:GetCurrentPlatform()

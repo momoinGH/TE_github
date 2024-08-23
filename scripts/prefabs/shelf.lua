@@ -123,6 +123,8 @@ local function OnSave(inst, data)
 end
 
 local function OnLoad(inst, data)
+    if not data then return end
+
     if data.playercrafted then
         inst:AddTag("playercrafted")
     end

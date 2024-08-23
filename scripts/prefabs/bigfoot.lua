@@ -195,4 +195,4 @@ local function shadow_fn()
 end
 
 return Prefab("bigfoot", foot_fn, assets, prefabs), Prefab("bigfootprint", footprint_fn, assets, prefabs),
-	Prefab("common/bigfootshadow", shadow_fn, assets, prefabs)
+	Prefab("bigfootshadow", shadow_fn, assets, prefabs)

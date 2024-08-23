@@ -5,7 +5,6 @@ local actionhandlers =
 
     ActionHandler(ACTIONS.CHOP, "work"),
     ActionHandler(ACTIONS.HACK, "work"),
-    ActionHandler(ACTIONS.HACK1, "work"),
     ActionHandler(ACTIONS.MINE, "work"),
     ActionHandler(ACTIONS.DIG, "work"),
     ActionHandler(ACTIONS.HAMMER, "work"),

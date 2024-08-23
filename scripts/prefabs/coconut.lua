@@ -262,7 +262,6 @@ local function raw()
     inst:AddTag("machetecut")
     inst:AddTag("aquatic")
 
-    inst:AddComponent("interactions")
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HACK)
     inst.components.workable:SetWorkLeft(1)

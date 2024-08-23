@@ -3,18 +3,11 @@ local assets =
     Asset("ANIM", "anim/sea_yard_tools.zip")
 }
 
-local function delete(inst, user)
-    inst:Remove()
-    if user then
-        user.armsfx = nil
-    end
-end
-
-local function stopfx(inst, user)
+local function stopfx(inst)
     inst.AnimState:PlayAnimation("out")
     inst:ListenForEvent("animover", function()
         inst.SoundEmitter:KillSound("fix")
-        delete(inst, user)
+        inst:Remove()
     end)
 end
 

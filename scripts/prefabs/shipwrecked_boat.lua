@@ -35,6 +35,7 @@ local BOAT_COLLISION_SEGMENT_COUNT = 20
 --2这个值可以跳上船，但是下不来,需要覆盖locomotor的CheckEdge方法
 --0.2这个值可以跳下船，但是上不去，可以使用componentaction来实现上船，并且因为半径小，所以碰撞范围也小，而且保证不会有第二个玩家上船，是合适的选择
 local RADIUS = 0.2
+-- local RADIUS = 2
 
 local function sinkloot(inst)
     if inst.components.lootdropper then
@@ -244,10 +245,6 @@ local function OnDismantle(inst, doer)
     end
 end
 
-local function GetSpecificSlotForItemBefore(self, item)
-    print("获取槽")
-end
-
 ---fn
 ---@param minimap string|nil
 ---@param bank string
@@ -284,7 +281,7 @@ local function common(minimap, bank, build, loots, data)
     phys:SetCollisionGroup(COLLISION.OBSTACLES)
     phys:ClearCollisionMask()
     phys:CollidesWith(COLLISION.WORLD)
-    -- phys:CollidesWith(COLLISION.OBSTACLES)
+    phys:CollidesWith(COLLISION.OBSTACLES)
     phys:SetCylinder(0.5, 3)
 
     inst.AnimState:SetBank(bank)
@@ -472,7 +469,7 @@ local function boat_player_collision_fn()
     phys:ClearCollisionMask()
     phys:CollidesWith(COLLISION.CHARACTERS)
     phys:CollidesWith(COLLISION.WORLD)
-    phys:SetTriangleMesh(build_boat_collision_mesh(RADIUS + 0.1, 3)) --大了碰撞体积就大，小了跳船时容易掉海里
+    phys:SetTriangleMesh(build_boat_collision_mesh(1 + 0.1, 3)) --大了碰撞体积就大，小了跳船时容易掉海里
     inst:AddTag("NOBLOCK")
     inst:AddTag("NOCLICK")
 
@@ -552,8 +549,10 @@ local surfboard_prefabs = {
 }
 
 local function surfboard_fn()
-    return common("surfboard.png", "raft", "raft_surfboard_build", surfboard_loots,
+    local inst = common("surfboard.png", "raft", "raft_surfboard_build", surfboard_loots,
         { health = 100, dismantlePrefab = "porto_surfboard" })
+    inst:AddTag("surf") --冲浪板
+    return inst
 end
 
 local woodlegsboat_loots = {

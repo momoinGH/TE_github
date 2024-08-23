@@ -241,9 +241,6 @@ local states =
                     inst.components.driver2.vehicle:Remove()
                     inst:RemoveComponent("rowboatwakespawner")
                     inst:RemoveComponent("driver2")
-                    --inst.AnimState:SetLayer(LAYER_WORLD)
-                    --inst.AnimState:SetSortOrder(0)
-                    --inst:RemoveTag("aquatic")
                 end
             end
         end,

@@ -3,14 +3,25 @@ local assets =
     Asset("ANIM", "anim/quagmire_slaughtertool.zip"),
 }
 
-local function GetSlaughterActionString(inst, target)
-    local t = GetTime()
-    if target ~= inst._lasttarget or inst._lastactionstr == nil or inst._actionresettime < t then
-        inst._lastactionstr = GetRandomItem(STRINGS.ACTIONS.KILLSOFTLY)
-        inst._lasttarget = target
+local function TargetCheck(inst, doer, target)
+    return target:HasTag("canbeslaughtered")
+end
+
+local function ConsumableState(inst, doer)
+    return doer:HasTag("quagmire_fasthands") and "domediumaction" or "dolongaction"
+end
+
+local function OnUse(inst, doer, target)
+    if target.components.health and target.components.lootdropper then
+        if doer.prefab == "wigfrid" then
+            target.components.lootdropper:DropLoot()
+        end
+        target.components.health.invincible = false
+        inst.components.finiteuses:Use(1)
+        target.components.health:Kill()
+        return true
     end
-    inst._actionresettime = t + .1
-    return inst._lastactionstr
+    return false
 end
 
 local function fn()
@@ -28,11 +39,18 @@ local function fn()
     inst.AnimState:SetBuild("quagmire_slaughtertool")
     inst.AnimState:PlayAnimation("idle")
 
+    inst:AddComponent("tropical_consumable")
+    inst.components.tropical_consumable.targetCheckFn = TargetCheck
+    inst.components.tropical_consumable.state = ConsumableState
+    inst.components.tropical_consumable.str = "KILLSOFTLY"
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst.components.tropical_consumable.onUseFn = OnUse
 
     inst:AddComponent("inspectable")
 

@@ -220,7 +220,6 @@ PrefabFiles = {
   "ballphinhouse",
   "dorsalfin",
   "ballphinpod",
-  "jellyfish",
   "jellyfish_planted",
   "crocodog_spawner",
   "crocodog",

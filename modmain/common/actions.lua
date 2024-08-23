@@ -25,6 +25,18 @@ ACTIONS.CASTAOE.strfn = function(act)
 end;
 
 
+-- 使用道具
+Constructor.AddAction({ priority = 1 },
+    "TROPICAL_USE_ITEM",
+    function(act)
+        return FunctionOrValue(act.invobject.components.tropical_consumable.str, act.invobject, act.doer, act.target)
+    end,
+    function(act)
+        return act.invobject.components.tropical_consumable:Use(act.doer, act.target)
+    end
+)
+
+
 Constructor.AddAction(nil, "STOREOPEN", STRINGS.ACTIONS.STOREOPEN, function(act)
     if act.target.components.store == nil then return false end
 
@@ -245,41 +257,6 @@ ACTIONS.RUMMAGE.extra_arrive_dist = function(doer, dest)
     return 0
 end
 
-
-Constructor.AddAction({ priority = 9, rmb = true, distance = 8, mount_valid = false, encumbered_valid = true },
-    "BOATDISMOUNT",
-    STRINGS.ACTIONS.BOATDISMOUNT,
-    function(act)
-        if act.doer ~= nil and act.doer:HasTag("player") then
-            act.doer:AddTag("pulando")
-            if not act.doer.components.interactions then
-                act.doer:AddComponent("interactions")
-            end
-            act.doer.components.interactions:BoatDismount(act.doer, act:GetActionPoint())
-            return true
-        end
-    end
-)
-
-Constructor.AddAction({ priority = 4, distance = 20, encumbered_valid = true },
-    "SURF",
-    STRINGS.ACTIONS.SURF,
-    function(act)
-        local doer_x, doer_y, doer_z = act.doer.Transform:GetWorldPosition()
-        local planchadesurf = TheWorld.Map:GetPlatformAtPoint(doer_x, doer_z)
-        if planchadesurf and planchadesurf:HasTag("planchadesurf") then
-            local pos = act:GetActionPoint()
-            if pos == nil then
-                pos = act.target:GetPosition()
-            end
-            planchadesurf.components.oar:Row(act.doer, pos)
-            planchadesurf.components.health:DoDelta(-0.5)
-
-            return true
-        end
-    end
-)
-
 -- 船炮开火
 Constructor.AddAction({ priority = 8, rmb = true, distance = 25, mount_valid = false },
     "BOATCANNON",
@@ -322,80 +299,11 @@ Constructor.AddAction({ priority = 9, rmb = true, distance = 20, mount_valid = f
     STRINGS.ACTIONS.TIRO,
     function(act)
         if act.doer ~= nil and act.doer:HasTag("ironlord") then
-            --        act.doer:AddComponent("interactions")
-            --        act.doer.components.interactions:TIRO(act.doer, act.target:GetPosition())
             return true
         end
     end
 )
 
-Constructor.AddAction({ priority = 10, rmb = true, distance = 1, mount_valid = false },
-    "BOATREPAIR",
-    STRINGS.ACTIONS.BOATREPAIR,
-    function(act)
-        if act.doer:HasTag("aquatic") and act.invobject:HasTag("boatrepairkit") then
-            local platform = act.doer:GetCurrentPlatform()
-            local boat = platform and platform:HasTag("shipwrecked_boat") and platform or nil
-            local boat2 = act.doer.components.driver.vehicle
-            if boat and boat2 then
-                if boat2.components.finiteuses and boat.components.armor.condition and boat2.components.finiteuses.current + 150 >= boat2.components.finiteuses.total then
-                    boat2.components.finiteuses.current = boat2.components.finiteuses.total
-                    boat.components.armor.condition = boat2.components.finiteuses.current
-                    if boat2.components.finiteuses then
-                        boat2.components.finiteuses:Use(1)
-                    end
-                    if act.invobject.prefab == "sewing_tape" then
-                        local nut = act.invobject
-                        if act.invobject.components.stackable and act.invobject.components.stackable.stacksize > 1 then
-                            nut = act.invobject.components.stackable:Get()
-                        end
-                        nut:Remove()
-                    else
-                        if act.invobject.components.finiteuses then
-                            act.invobject.components.finiteuses:Use(1)
-                        end
-                    end
-                    return true
-                end
-
-                boat2.components.finiteuses.current = boat2.components.finiteuses.current + 150
-                boat.components.armor.condition = boat.components.armor.condition + 150
-                if act.invobject.components.finiteuses then
-                    act.invobject.components.finiteuses:Use(1)
-                end
-            end
-            return true
-        end
-
-
-        if
-            act.doer ~= nil and act.target ~= nil and act.doer:HasTag("player") and act.target.components.interactions and
-            act.target:HasTag("shipwrecked_boat")
-        then
-            local equipamento = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-
-            if equipamento then
-                if act.target.components.finiteuses.current + 150 >= act.target.components.finiteuses.total then
-                    act.target.components.finiteuses.current = act.target.components.finiteuses.total
-                    local gastabarco = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)                      -------armadura
-
-                    if gastabarco then gastabarco.components.armor.condition = act.target.components.finiteuses.current end ---------armadura
-                    if equipamento.components.finiteuses then
-                        equipamento.components.finiteuses:Use(1)
-                    end
-                    return true
-                end
-                act.target.components.finiteuses.current = act.target.components.finiteuses.current + 150
-                local gastabarco = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.BARCO)                      ---------armadura
-                if gastabarco then gastabarco.components.armor.condition = act.target.components.finiteuses.current end ---------armadura
-                if equipamento.components.finiteuses then
-                    equipamento.components.finiteuses:Use(1)
-                end
-            end
-            return true
-        end
-    end
-)
 
 
 Constructor.AddAction({ priority = 10, rmb = true, distance = 1, mount_valid = false },
@@ -415,30 +323,6 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 1, mount_valid = f
             end
             nut:Remove()
             return true
-        end
-    end
-)
-
-Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = false },
-    "DISLODGE",
-    STRINGS.ACTIONS.DISLODGE,
-    function(act)
-        local equipamento = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-        if act.target.components.dislodgeable and act.target.components.dislodgeable.canbedislodged and act.target.components.dislodgeable.caninteractwith then
-            if act.doer ~= nil and equipamento then
-                if equipamento.components.finiteuses then
-                    equipamento.components.finiteuses:Use(1)
-                end
-
-                if equipamento and equipamento:HasTag("ballpein_hammer") then
-                    if act.target.components.dislodgeable then
-                        act.target.components.dislodgeable:Dislodge(act.doer)
-                    end
-                    return true
-                end
-            end
-        else
-            return false
         end
     end
 )
@@ -734,17 +618,11 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
--- TODO 能优化掉吗？
-Constructor.AddAction({ priority = 10, mount_valid = true },
-    "HARVEST1",
-    STRINGS.ACTIONS.HARVEST1,
-    function(act)
-        if act.target.components.melter then
-            return act.target.components.melter:Harvest(act.doer)
-        end
+Utils.FnDecorator(ACTIONS.HARVEST, "fn", function(inst)
+    if act.target.components.melter then
+        return { act.target.components.melter:Harvest(act.doer) }, true
     end
-)
-
+end)
 
 Constructor.AddAction({ priority = 10, mount_valid = true },
     "PAN",
@@ -761,28 +639,6 @@ Constructor.AddAction({ priority = 10, mount_valid = true },
             act.target.components.workable:WorkedBy(act.doer, numworks)
         end
         return true
-    end
-)
-
-Constructor.AddAction({ priority = 10, mount_valid = true },
-    "INVESTIGATEGLASS",
-    STRINGS.ACTIONS.INVESTIGATEGLASS,
-    function(act)
-        if act.target:HasTag("secret_room") then
-            act.target.Investigate(act.doer)
-            return true
-        end
-
-        if act.target and act.target.components.mystery then
-            act.target.components.mystery:Investigate(act.doer)
-
-            local equipamento = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-            if act.doer ~= nil and equipamento then
-                equipamento.components.finiteuses:Use(1)
-            end
-
-            return true
-        end
     end
 )
 
@@ -840,44 +696,13 @@ Constructor.AddAction({ priority = 10, mount_valid = true },
     end
 )
 
--- TOOD 能优化掉吗？
-Constructor.AddAction({ priority = 10, mount_valid = true },
-    "HACK1",
-    STRINGS.ACTIONS.HACK,
-    function(act)
-        local equipamento = act.doer.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-        if equipamento and equipamento.components.finiteuses then
-            equipamento.components.finiteuses:Use(1)
-        end
-        local numworks = 1
-        if equipamento and equipamento.components.tool then
-            numworks = equipamento.components.tool:GetEffectiveness(ACTIONS.HACK)
-        elseif act.doer and act.doer.components.worker then
-            numworks = act.doer.components.worker:GetEffectiveness(ACTIONS.HACK)
-        end
-        if equipamento and equipamento.components.obsidiantool then
-            equipamento.components.obsidiantool:Use(act.doer, act.target)
-        end
-        if act.target and act.target.components.hackable then
-            act.target.components.hackable:Hack(act.doer, numworks)
-            return true
-        end
-        if act.target and act.target.components.workable and act.target.components.workable.action == ACTIONS.HACK then
-            act.target.components.workable:WorkedBy(act.doer, numworks)
-            return true
-        end
-        --    return DoToolWork(act, ACTIONS.HACK)
-    end
-)
-
 Constructor.AddAction({ priority = 10, distance = 3, mount_valid = true },
     "GAS",
     STRINGS.ACTIONS.GAS,
     function(act)
-        if act.invobject and act.invobject.components.gasser then
-            act.invobject.components.gasser:Gas(act:GetActionPoint())
-            return true
-        end
+        local pos = act.target and act.target:GetPosition() or act:GetActionPoint()
+        act.invobject.components.gasser:Gas(pos)
+        return true
     end
 )
 
@@ -947,21 +772,6 @@ Constructor.AddAction(nil,
 )
 
 Constructor.AddAction(nil,
-    "GIVE_DISH",
-    STRINGS.ACTIONS.GIVE_DISH,
-    function(act)
-        if act.target ~= nil and act.target.components.specialstewer then
-            if act.target.dish == nil and act.invobject.components.specialstewer_dish then
-                if act.invobject.components.specialstewer_dish:IsDishType(act.target.components.specialstewer.cookertype) then
-                    act.target:SetDish(act.doer, act.invobject)
-                    return true
-                end
-            end
-        end
-    end
-)
-
-Constructor.AddAction(nil,
     "SNACKRIFICE",
     STRINGS.ACTIONS.SNACKRIFICE,
     function(act)
@@ -987,33 +797,6 @@ Constructor.AddAction(nil,
     end
 )
 
-Constructor.AddAction({ priority = 3, rmb = true, distance = 3, mount_valid = false, encumbered_valid = true },
-    "SETUPITEM",
-    STRINGS.ACTIONS.SETUPITEM,
-    function(act)
-        if act.target and act.target.components.setupable and act.invobject then
-            if act.target.components.setupable:IsSetup() then
-                return false
-            else
-                act.target.components.setupable:Setup(act.invobject)
-
-                return true
-            end
-        end
-    end
-)
-
-Constructor.AddAction({ priority = 3, rmb = true, distance = 1, mount_valid = false, encumbered_valid = true },
-    "TAPSUGARTREE",
-    STRINGS.ACTIONS.TAPSUGARTREE,
-    function(act)
-        if act.target and act.invobject and act.target.components.sappy then
-            act.target.components.sappy:Tap(act.invobject)
-
-            return true
-        end
-    end
-)
 
 Constructor.AddAction({ priority = 3, rmb = true, distance = 1, mount_valid = false, encumbered_valid = true },
     "COLLECTSAP",
@@ -1025,40 +808,6 @@ Constructor.AddAction({ priority = 3, rmb = true, distance = 1, mount_valid = fa
             return true
         end
     end
-)
-
-Constructor.AddAction({ distance = 2, priority = 3, },
-    "KILLSOFTLY",
-    STRINGS.ACTIONS.KILLSOFTLY,
-    function(act)
-        if act.target and act.target.components.health and act.target.components.lootdropper then
-            act.target.components.health.invincible = false
-            if act.doer.prefab == "wigfrid" then
-                act.target.components.lootdropper:DropLoot()
-            end
-
-            if act.invobject ~= nil and act.invobject.components.finiteuses then
-                act.invobject.components.finiteuses:Use(1)
-            end
-            if act.doer.prefab == "wigfrid" then
-                act.target.components.lootdropper:DropLoot()
-            end
-            act.target.components.health:Kill()
-
-            return true
-        end
-    end
-)
-
-Constructor.AddAction(nil, "MILK", STRINGS.ACTIONS.MILK, function(act)
-    return act.target ~= nil
-        and act.invobject ~= nil
-        and act.invobject.components.milker ~= nil
-        and act.target:HasTag("goddess_deer")
-        and act.target:HasTag("windy4")
-        and act.target:HasTag("milkable")
-        and act.invobject.components.milker:Fill()
-end
 )
 
 -- 海难小船登船

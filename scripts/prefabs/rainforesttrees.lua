@@ -862,7 +862,8 @@ local function makefn(build, stage, data)
 		inst:AddTag("jungletree")
 		inst:AddTag("plant")
 		inst:AddTag("twiggytreesw")
-
+        inst:AddTag("spyable")
+		
 		if build == "rot" then
 			inst:AddTag("rotten")
 			minimap:SetIcon("rainforesttree_rot.png")

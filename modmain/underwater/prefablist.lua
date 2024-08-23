@@ -87,7 +87,6 @@ PrefabFiles =
     "kraken_projectile_underwater",
     "tropicalspawnblocker",
     "rainbowjellyfish",
-    "jellyfish",
     "magma_rocks",
     "limpets",
     "rock_limpet",

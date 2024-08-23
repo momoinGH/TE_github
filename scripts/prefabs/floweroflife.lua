@@ -288,4 +288,4 @@ end
 
 
 return Prefab("lifeplant", fn, assets, prefabs),
-	Prefab("common/objects/lifeplant_sparkle", sparklefn, assets, prefabs)
+	Prefab("lifeplant_sparkle", sparklefn, assets, prefabs)

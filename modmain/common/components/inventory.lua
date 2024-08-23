@@ -50,7 +50,7 @@ local function PayMoney(self, cost)
     end
     if oincresult < 0 then
         for i = 1, math.abs(oincresult) do
-            --				inventory:ConsumeByName("oinc", 1 )	
+            --                inventory:ConsumeByName("oinc", 1 )
             local item = next(self:GetItemByName("oinc", 1, true))
             if item then self:RemoveItem(item, false, true) end
         end
@@ -64,7 +64,7 @@ local function PayMoney(self, cost)
     end
     if oinc10result < 0 then
         for i = 1, math.abs(oinc10result) do
-            --				inventory:ConsumeByName("oinc10", 1 )
+            --                inventory:ConsumeByName("oinc10", 1 )
             local item = next(self:GetItemByName("oinc10", 1, true))
             if item then self:RemoveItem(item, false, true) end
         end
@@ -72,9 +72,32 @@ local function PayMoney(self, cost)
     local oinc100result = 0 - oinc100used
     if oinc100result < 0 then
         for i = 1, math.abs(oinc100result) do
-            --				inventory:ConsumeByName("oinc100", 1)
+            --                inventory:ConsumeByName("oinc100", 1)
             local item = next(self:GetItemByName("oinc100", 1, true))
             if item then self:RemoveItem(item, false, true) end
+        end
+    end
+end
+
+local function IsItemNameEquipped(self, item_name)
+    for k, v in pairs(self.equipslots) do
+        if v.prefab == item_name then
+            return true
+        end
+    end
+
+    return false
+end
+
+local function IsItemNameEquippedClient(self, item_name)
+    if self.inst.components.inventory ~= nil then
+        return self.inst.components.inventory:IsItemNameEquipped(item_name)
+    else
+        for _, v in pairs(EQUIPSLOTS) do
+            local item = self:GetEquippedItem(v)
+            if item and item.prefab == item_name then
+                return true
+            end
         end
     end
 end
@@ -82,8 +105,11 @@ end
 AddComponentPostInit("inventory", function(self)
     self.GetMoney = GetMoney
     self.PayMoney = PayMoney
+
+    self.IsItemNameEquipped = IsItemNameEquipped
 end)
 
 AddClassPostConstruct("components/inventory_replica", function(self)
     self.GetMoney = GetMoney
+    self.IsItemNameEquipped = IsItemNameEquippedClient
 end)

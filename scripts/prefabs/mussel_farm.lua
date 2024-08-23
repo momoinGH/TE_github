@@ -307,8 +307,6 @@ local function fn()
 	inst:AddComponent("stickable")
 	inst.components.stickable:SetOnPokeCallback(onpoked)
 
-	inst:AddComponent("interactions")
-
 	inst:AddComponent("trader")
 	inst.components.trader:SetAcceptTest(function(inst, item) return (item:HasTag("mussel_stick") and (inst.components.growable.stage < 3)) end)
 	inst.components.trader.onaccept = onpoked

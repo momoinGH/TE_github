@@ -71,8 +71,6 @@ STRINGS.NAMES.POISON                                    = "中毒"
 --------------操作选项-------
 --SW
 STRINGS.ACTIONS.HACK                                    = "劈砍"
-STRINGS.ACTIONS.BOATDISMOUNT                            = "上岸"
-STRINGS.ACTIONS.BOATREPAIR                              = "修理"
 STRINGS.ACTIONS.STICK                                   = "捣入"
 STRINGS.ACTIONS.DESACTIVATESAIL                         = "关灯"
 STRINGS.ACTIONS.LANTERNON                               = "开灯"
@@ -82,9 +80,7 @@ STRINGS.ACTIONS.PEER                                    = "观察"
 --ham
 STRINGS.ACTIONS.SMELT                                   = "熔炼"
 STRINGS.ACTIONS.SHEAR                                   = "剪"
-STRINGS.ACTIONS.DISLODGE                                = "取出"
-STRINGS.ACTIONS.HARVEST1                                = "收获"
-STRINGS.ACTIONS.INVESTIGATE                             = "调查"
+
 STRINGS.ACTIONS.PAN                                     = "淘金"
 STRINGS.ACTIONS.GIVE_SHELF                              = STRINGS.ACTIONS.GIVE.GENERIC
 STRINGS.ACTIONS.PAINT                                   = "涂画"
@@ -99,15 +95,22 @@ STRINGS.ACTIONS.STOREOPEN                               = "交易"
 STRINGS.ACTIONS.GRIND                                   = "研磨"
 STRINGS.ACTIONS.SNACKRIFICE                             = "献贡"
 STRINGS.ACTIONS.COLLECTSAP                              = "采集树液"
-STRINGS.ACTIONS.TAPSUGARTREE                            = "凿树"
-STRINGS.ACTIONS.SETUPITEM                               = "安装"
-STRINGS.ACTIONS.KILLSOFTLY                              = "屠宰"
 STRINGS.ACTIONS.BOATMOUNT                               = "登船"
 STRINGS.ACTIONS.TAKE_SHELF                              = {
     GENERIC = "拿取",
     TAKE = "拿取{item}",
     STEAL = "偷走{item}",
     BUY = "购买{item}",
+}
+STRINGS.ACTIONS.TROPICAL_USE_ITEM                       = {
+    GENERIC      = "使用",
+    DISLODGE     = "取出",
+    INSTALL      = "安装",
+    SPY          = "调查",
+    TAPSUGARTREE = "凿树",
+    KILLSOFTLY   = "屠宰",
+    FILL         = "灌满",
+    MILK         = "挤奶",
 }
 -----------选项卡----------
 STRINGS.TABS.NAUTICALTAB                                = "航海"

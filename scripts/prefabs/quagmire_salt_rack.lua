@@ -48,6 +48,26 @@ local function fn()
     return inst
 end
 
+local function TargetCheckFn(inst, doer, target)
+    return target:HasTag("saltwater")
+end
+
+local function ConsumableState(inst, doer)
+    return doer:HasTag("quagmire_fasthands") and "domediumaction" or "dolongaction"
+end
+
+local function Use(inst, doer, target)
+    if target.components.setupable then
+        if target.components.setupable:IsSetup() then
+            return false
+        else
+            target.components.setupable:Setup(inst)
+            return true
+        end
+    end
+    return false
+end
+
 local function itemfn()
     local inst = CreateEntity()
 
@@ -65,17 +85,22 @@ local function itemfn()
     inst:AddTag("salty")
     inst:AddTag("saltrack")
 
+    inst:AddComponent("tropical_consumable")
+    inst.components.tropical_consumable.state = ConsumableState
+    inst.components.tropical_consumable.targetCheckFn = TargetCheckFn
+    inst.components.tropical_consumable.str = "INSTALL"
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
+    inst.components.tropical_consumable.onUseFn = Use
+
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("setupable")
 
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(10)

@@ -1,3 +1,4 @@
+-- TODO 优化掉
 local Driver = Class(function(self, inst)
 	self.inst = inst
 	self.luzequipada = nil
@@ -124,8 +125,6 @@ function Driver:OnUpdate(dt) --Set my entity's position and rotation to be the s
 
 	local x, y, z = self.inst.Transform:GetWorldPosition()
 	if not TheWorld.Map:IsOceanAtPoint(x, y, z, false) and TheWorld.Map:IsValidTileAtPoint(x, y, z) then
-		if not self.inst.components.interactions then self.inst:AddComponent("interactions") end
-		self.inst.components.interactions:BoatDismount2(self.inst)
 	end
 
 

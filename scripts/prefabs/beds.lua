@@ -125,12 +125,10 @@ local function common_fn(anim)
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
 
-    inst:AddTag("cama")
+    inst:AddTag("bed")
     inst:AddTag("structure")
 
-    --    MakeObstaclePhysics(inst, 1)
-    --	inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetBank("beds")
     inst.AnimState:SetBuild("beds")
     inst.AnimState:PlayAnimation(anim)

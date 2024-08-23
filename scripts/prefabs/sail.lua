@@ -23,7 +23,7 @@ local function OnEquipped(inst, data)
 end
 
 local function OnUnEquipped(inst, data)
-    data.owner.AnimState:ClearOverrideSymbol(inst.symboltooverride, inst.build, inst.symbol)
+    data.owner.AnimState:ClearOverrideSymbol(inst.symboltooverride)
     if inst.components.fueled then
         inst.components.fueled:StopConsuming()
     end
@@ -82,8 +82,8 @@ local function common(bank, build, anim, symbol, data)
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeSmallPropagator(inst)
 
-    inst:ListenForEvent("equipped", OnEquipped)
-    inst:ListenForEvent("unequipped", OnUnEquipped)
+    inst:ListenForEvent("boat_equipped", OnEquipped)
+    inst:ListenForEvent("boat_unequipped", OnUnEquipped)
 
     return inst
 end

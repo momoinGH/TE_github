@@ -8,6 +8,8 @@ AddIngredientValues({ "sea_petals" }, { flower = 1 }, false, false)
 AddIngredientValues({ "jelly_cap" }, { sea_jelly = 1 }, false, false)
 AddIngredientValues({ "saltrock" }, { saltrock = 1 }, false, false)
 
+-- TODO 替换成AddRecipe2
+
 -- Light Tab
 AddRecipe("flare",
     { Ingredient("iron_ore", 1, "images/inventoryimages/iron_ore.xml"), Ingredient("twigs", 2) },

@@ -2386,14 +2386,6 @@ local function OnSave(inst, data)
 	data.prizevalue = inst.prizevalue
 end
 
---local function OnFloodedStart(inst)
---inst.components.payable:Disable()
---end
-
---local function OnFloodedEnd(inst)
---inst.components.payable:Enable()
---end
-
 local function CalcSanityAura(inst, observer)
 	return -(TUNING.SANITYAURA_MED * (1 + (inst.coins / 100)))
 end
@@ -2451,19 +2443,8 @@ local function CreateSlotMachine(name)
 		inst.components.trader.onaccept = OnGetItemFromPlayer
 		inst.components.trader.onrefuse = OnRefuseItem
 
-		--inst:AddComponent("payable")
-		--	inst.components.payable:SetAcceptTest(ShouldAcceptItem)
-		--inst.components.payable.onaccept = OnGetItemFromPlayer
-		--inst.components.payable.onrefuse = OnRefuseItem
-
 		inst:AddComponent("sanityaura")
 		inst.components.sanityaura.aurafn = CalcSanityAura
-
-		--inst:AddComponent("floodable")
-		--inst.components.floodable.onStartFlooded = --OnFloodedStart
-		--inst.components.floodable.onStopFlooded = --OnFloodedEnd
-		--inst.components.floodable.floodEffect = --"shock_machines_fx"
-		--inst.components.floodable.floodSound = --"dontstarve_DLC002/creatures/jellyfish/electric_land"
 
 		inst:SetStateGraph("SGslotmachine")
 

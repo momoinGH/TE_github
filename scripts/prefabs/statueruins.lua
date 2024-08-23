@@ -42,9 +42,9 @@ local gemlist =
 
 SetSharedLootTable('statue_ruins_no_gem',
     {
-        { 'thulecite',     1.00 },
+        { 'thulecite', 1.00 },
         { 'nightmarefuel', 1.00 },
-        { 'thulecite',     0.05 },
+        { 'thulecite', 0.05 },
     })
 
 local MAX_LIGHT_ON_FRAME = 15
@@ -307,8 +307,6 @@ end
 local function gem(small)
     local inst = commonfn(small)
 
-    inst:AddTag("dislodgeable")
-
     if not TheWorld.ismastersim then
         return inst
     end
@@ -326,8 +324,6 @@ local function gem(small)
         [5] = "orangegem",
         [6] = "purplegem",
     }
-
-
 
     inst:AddComponent("dislodgeable")
     inst.components.dislodgeable:SetUp(inst.gemmed, 1)

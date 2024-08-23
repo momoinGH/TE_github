@@ -1,4 +1,4 @@
-local Assets =
+local assets =
 {
 	Asset("ATLAS", "images/inventoryimages/gem_seeds.xml"),
 	Asset("IMAGE", "images/inventoryimages/gem_seeds.tex"),
@@ -71,5 +71,5 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("gem_seeds", fn, Assets),
+return Prefab("gem_seeds", fn, assets),
 	MakePlacer("gem_seeds_placer", "plant_normal", "plant_gem", "picked")

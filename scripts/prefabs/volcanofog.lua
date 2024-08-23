@@ -17,10 +17,10 @@ local function InitEnvelopes()
 
 		EnvelopeManager:AddColourEnvelope(
 			"volcanofogcolourenvelope",
-			{ { 0,  { 1, 1, 1, 0 } },
-				{ 0.1,  { 1, 1, 1, 0.12 } },
+			{ { 0, { 1, 1, 1, 0 } },
+				{ 0.1, { 1, 1, 1, 0.12 } },
 				{ 0.75, { 1, 1, 1, 0.12 } },
-				{ 1,    { 1, 1, 1, 0 } },
+				{ 1, { 1, 1, 1, 0 } },
 			})
 
 		EnvelopeManager:AddVector2Envelope(
@@ -222,6 +222,6 @@ local function volcanowall(Sim)
 end
 
 return
-	Prefab("common/fx/volcanofog", volcanofn, assets),
-	Prefab("common/fx/oceanfog", oceanfn, assets),
-	Prefab("common/fx/wallfog", volcanowall, assets)
+	Prefab("volcanofog", volcanofn, assets),
+	Prefab("oceanfog", oceanfn, assets),
+	Prefab("wallfog", volcanowall, assets)

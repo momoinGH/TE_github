@@ -31,17 +31,6 @@ function Throwable:CanThrowAtPoint(pt)
 	return true
 end
 
-function Throwable:CollectPointActions(doer, pos, actions, right)
-	if right then
-		if self.target_position then
-			pos = self.target_position
-		end
-		if self:CanThrowAtPoint(pos) then
-			table.insert(actions, ACTIONS.THROW)
-		end
-	end
-end
-
 function Throwable:CollectEquippedActions(doer, target, actions, right)
 	if right and self:CanThrowAtPoint(target:GetPosition()) then
 		table.insert(actions, ACTIONS.THROW)

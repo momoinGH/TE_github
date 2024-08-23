@@ -453,9 +453,9 @@ local function fn5(Sim)
 end
 
 return Prefab("octopuschest", fn1, assets),
-	Prefab("common/krakenchest", fn, assets),
-	Prefab("common/luggagechest", fn2, assets),
-	Prefab("common/lavarenachest", fn3, assets),
-	Prefab("common/roottrunk", fn4, assets),
-	Prefab("common/roottrunk_child", fn5, assets),
+	Prefab("krakenchest", fn, assets),
+	Prefab("luggagechest", fn2, assets),
+	Prefab("lavarenachest", fn3, assets),
+	Prefab("roottrunk", fn4, assets),
+	Prefab("roottrunk_child", fn5, assets),
 	MakePlacer("roottrunk_child_placer", "roottrunk", "treasure_chest_roottrunk", "closed")

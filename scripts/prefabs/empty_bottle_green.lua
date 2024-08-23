@@ -15,6 +15,18 @@ local function bottle(inst)
     end
 end
 
+local function TargetCheck(inst, doer, target)
+    return target:HasTag("goddess_fountain") or target:HasTag("milkable")
+end
+
+local function OnUse(inst, doer, target)
+    if target:HasTag("goddess_fountain") then
+        return inst.components.extrafillable:Fill()
+    else
+        return inst.components.milker:Fill()
+    end
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -29,11 +41,18 @@ local function fn()
     inst.AnimState:SetBuild("bottle_green")
     inst.AnimState:PlayAnimation("idle")
 
+    inst:AddComponent("tropical_consumable")
+    inst.components.tropical_consumable.targetCheckFn = TargetCheck
+    inst.components.tropical_consumable.state = "dolongaction"
+    inst.components.tropical_consumable.str = "FILL"
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst.components.tropical_consumable.onUseFn = OnUse
 
     inst:AddTag("glassbottle")
 

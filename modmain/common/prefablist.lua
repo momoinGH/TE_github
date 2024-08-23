@@ -31,7 +31,7 @@ PrefabFiles =
     "watercress",
     "pinkman",
     "piggolem",
-
+    "jellyfish",
 
     "boatmetal",
     --"bird_swarm",

@@ -1176,7 +1176,8 @@ local function makefn1(build, stage, data)
         inst:AddTag("workable")
         inst:AddTag("cattoyairborne")
         inst:AddTag("plant")
-
+        inst:AddTag("spyable")
+        
         anim:SetBank("tree_leaf")
         inst.build = build
         anim:SetBuild("teatree_trunk_build")

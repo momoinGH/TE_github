@@ -111,10 +111,6 @@ end)
 ----------------------------------------------------------------------------------------------------
 -- 不会落水
 local function DrownableShouldDrownBefore(self)
-    if self.inst.components.driver then
-        return { false }, true
-    end
-
     local x, y, z = self.inst.Transform:GetWorldPosition()
     if #TheSim:FindEntities(x, y, z, 30, { "interior_center" }) > 0 then
         return { false }, true
@@ -246,10 +242,6 @@ AddPrefabPostInit("saltrock", function(inst)
 
     inst:AddComponent("mealable")
     inst.components.mealable:SetType("salt")
-end)
-
-AddPrefabPostInit("spice_salt", function(inst)
-    inst:AddTag("salty")
 end)
 
 ----------------------------------------------------------------------------------------------------
@@ -404,16 +396,6 @@ for _, v in ipairs({
         inst:AddTag("quebraonda")
     end)
 end
-
-----------------------------------------------------------------------------------------------------
--- 修船
-AddPrefabPostInit("sewing_tape", function(inst)
-    inst:AddTag("boatrepairkit")
-
-    if not TheWorld.ismastersim then return end
-
-    inst:AddComponent("interactions")
-end)
 
 ----------------------------------------------------------------------------------------------------
 
@@ -780,4 +762,9 @@ AddPrefabPostInit("farm_plant_randomseed", function(inst)
             end
         end
     end)
+end)
+
+----------------------------------------------------------------------------------------------------
+AddComponentPostInit("oar", function(self, inst)
+    inst:AddTag("oar") --科雷真抠门，桨连个自己的标签也没有
 end)

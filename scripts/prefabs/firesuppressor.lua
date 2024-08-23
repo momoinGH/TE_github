@@ -272,12 +272,6 @@ local function OnEnableHelper(inst, enabled)
     end
 end
 
-local function onFloodedStart(inst)
-    if inst.on then
-        TurnOff(inst, true)
-    end
-end
-
 --------------------------------------------------------------------------
 
 local function fn()
@@ -367,12 +361,6 @@ local function fn()
     inst.components.workable:SetWorkLeft(4)
     inst.components.workable:SetOnFinishCallback(onhammered)
     inst.components.workable:SetOnWorkCallback(onhit)
-
-    inst:AddComponent("floodable")
-    inst.components.floodable.onStartFlooded = onFloodedStart
-    --inst.components.floodable.onStopFlooded = onFloodedEnd
-    inst.components.floodable.floodEffect = "shock_machines_fx"
-    inst.components.floodable.floodSound = "dontstarve_DLC002/creatures/jellyfish/electric_land"
 
     inst.LaunchProjectile = LaunchProjectile
     inst:SetStateGraph("SGfiresuppressor")

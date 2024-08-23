@@ -10,6 +10,7 @@ local function SafeModImport(filePath)
 end
 
 local ALL_PREFAB_FILES = {}
+local ALL_ASSETS = {}
 local language = string.lower(GetModConfigData("language"))
 GLOBAL.WIKI_DATA = {}
 
@@ -38,7 +39,12 @@ local function Modimport(dirc)
 	if PrefabFiles and #PrefabFiles > 0 then
 		ALL_PREFAB_FILES = ArrayUnion(ALL_PREFAB_FILES, PrefabFiles)
 	end
+	if Assets and #Assets > 0 then
+		ALL_ASSETS = JoinArrays(ALL_ASSETS, Assets)
+		-- print("加载的资产个数", #ALL_ASSETS, #Assets)
+	end
 	PrefabFiles = {}
+	Assets = {}
 end
 
 -- 默认
@@ -87,6 +93,8 @@ end
 
 PrefabFiles = ALL_PREFAB_FILES
 ALL_PREFAB_FILES = nil
+Assets = ALL_ASSETS
+ALL_ASSETS = nil
 
 local Constructor = require("tropical_utils/constructor")
 Constructor.SetEnv(env)

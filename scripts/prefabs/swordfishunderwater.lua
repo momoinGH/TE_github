@@ -31,7 +31,6 @@ end
 
 local function KeepTarget(inst, target)
     local shouldkeep = inst.components.combat:CanTarget(target)
-    --local onboat = target.components.driver and target.components.driver:GetIsDriving()
     return shouldkeep
 end
 
