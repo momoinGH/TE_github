@@ -24,12 +24,12 @@ end)
 --     "spear_gungnir",
 --     "healingstaff",
 --     "blowdart_lava2",
---     "tfwp_infernal_staff",
+--     "fireballstaff",
 --     "spear_lance",
 --     "lavaarena_firebomb",
 --     "lavaarena_heavyblade",
---     "tfwp_control_book",
---     "tfwp_summon_book",
+--     "book_fossil",
+--     "book_elemental",
 -- }) do
 --     AddPrefabPostInit(v, function(inst)
 --         local name = inst.prefab:upper()

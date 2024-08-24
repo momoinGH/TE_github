@@ -16,14 +16,14 @@ local prefabs =
 local armasdotesouro =
 {
 	[1] = "healingstaff",
-	[2] = "tfwp_control_book",
-	[3] = "tfwp_infernal_staff",
+	[2] = "book_fossil",
+	[3] = "fireballstaff",
 	[4] = "hammer_mjolnir",
 	[5] = "blowdart_lava2",
 	[6] = "spear_lance",
 	[7] = "blowdart_lava",
 	[8] = "spear_gungnir",
-	[9] = "tfwp_summon_book",
+	[9] = "book_elemental",
 	[10] = "lavaarena_armor_hpdamager",
 	[11] = "lavaarena_armor_hprecharger",
 	[12] = "lavaarena_armor_hppetmastery",

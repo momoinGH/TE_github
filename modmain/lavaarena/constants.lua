@@ -1,22 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
--- 对于熔炉、暴食里的一些预制件没有主机代码，但是有通用代码，其实只需要实现对应的主机代码就行了，没必要重新定义一个预制件
--- 好像这个方法没有AddPrefabPostInit方便和自由o(￣ヘ￣o＃).
-local MyEventServerFiles = {}
-
-Utils.FnDecorator(GLOBAL, "requireeventfile", nil, function(retTab, fullpath)
-    for k, v in pairs(MyEventServerFiles[fullpath] or {}) do
-        retTab[1][k] = v --替换成我实现的初始化函数
-    end
-
-    return retTab
-end)
-
-function add_event_server_data(eventname, path, data)
-    local fullpath = eventname .. "_event_server/" .. path
-    MyEventServerFiles[fullpath] = data
-end
-
 local function OnEquip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", inst.symbol_build, inst.symbol_build)
     owner.AnimState:Show("ARM_carry")
@@ -75,25 +56,3 @@ function InitLavaarenaWeapon(inst, symbol_build, damage, weaponspark)
 end
 
 ----------------------------------------------------------------------------------------------------
-
---下面的文件根据源码调用add_event_server_data实现初始化函数就行了
-
-modimport "modmain/event_server/firehits"
-modimport "modmain/event_server/weaponsparks"
-modimport "modmain/event_server/lavaarena_blooms"
-modimport "modmain/event_server/fireball_projectile"
-
-
-modimport "modmain/event_server/blowdart_lava"
-modimport "modmain/event_server/blowdart_lava2"
-modimport "modmain/event_server/lavaarena_firebomb"
-modimport "modmain/event_server/hammer_mjolnir"
-modimport "modmain/event_server/spear_gungnir"
-modimport "modmain/event_server/spear_lance"
-modimport "modmain/event_server/lavaarena_heavyblade"
-modimport "modmain/event_server/lavaarena_lucy"
-modimport "modmain/event_server/healingstaff"
-
-
-modimport "modmain/event_server/fireballstaff"
-modimport "modmain/event_server/books_lavaarena"

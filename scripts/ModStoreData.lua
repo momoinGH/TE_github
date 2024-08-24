@@ -40,14 +40,14 @@ return {
 
         [025] = "lavaarena_armorlightspeed",
         [026] = "lavaarena_feathercrownhat",
-        [027] = "tfwp_infernal_staff",
+        [027] = "fireballstaff",
         [028] = "blowdart_lava2",
         [029] = "lavaarena_tiaraflowerpetalshat",
         [030] = "lavaarena_armor_hpextraheavy",
 
         [031] = "lavaarena_armormedium",
         [032] = "lavaarena_strongdamagerhat",
-        [033] = "tfwp_control_book",
+        [033] = "book_fossil",
         [034] = "spear_lance",
         [035] = "lavaarena_eyecirclethat",
         [036] = "lavaarena_armor_hpdamager",
@@ -72,7 +72,7 @@ return {
 
         [049] = "lavaarena_armormediumrecharger",
         [050] = "lavaarena_armorheavy",
-        [051] = "tfwp_summon_book",
+        [051] = "book_elemental",
         [052] = "lavaarena_heavyblade",
         [053] = "lavaarena_healinggarlandhat",
         [054] = "lavaarena_armor_hppetmastery",

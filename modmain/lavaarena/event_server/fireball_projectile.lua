@@ -1,3 +1,10 @@
+local assets = {
+    Asset("ANIM", "anim/fireball_2_fx.zip"),
+    Asset("ANIM", "anim/deer_fire_charge.zip"),
+    Asset("ANIM", "anim/lavaarena_heal_projectile.zip"),
+    Asset("ANIM", "anim/gooball_fx.zip"),
+}
+
 local function OnHit(inst)
     SpawnPrefab(inst.hitfx).Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst:Remove()
@@ -12,7 +19,7 @@ local function projectile_postinit(inst, speed, hitfx)
     inst.components.projectile:SetHitDist(0.5)
     inst.components.projectile:SetOnHitFn(OnHit)
     inst.components.projectile:SetOnMissFn(inst.Remove)
-    inst.components.projectile:SetStimuli("fire")
+    inst.components.projectile:SetStimuli(function() return "fire" end)
 
     inst.persists = false
 end
@@ -27,4 +34,4 @@ add_event_server_data("lavaarena", "prefabs/fireball_projectile", {
     fireballhit_postinit = hit_postinit,
     blossomhit_postinit = hit_postinit,
     gooballhit_postinit = hit_postinit
-})
+}, assets)

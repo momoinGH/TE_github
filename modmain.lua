@@ -1,11 +1,25 @@
 require "stacktrace"
 
---- modimport导入文件，文件不存在不会报错，不过其他错误会打印
-local function SafeModImport(filePath)
-	local status, err = pcall(modimport, filePath)
-	if not status and not string.match(err, "Error in modimport: modmain/.+%.lua not found!") then
-		print("导入文件失败：" .. filePath)
-		print(StackTrace(err))
+--- 科雷modmain的定义抄过来，不过文件不存在时不提醒
+local function SafeModImport(modulename)
+	-- local status, err = pcall(modimport, filePath)
+	-- if not status and not string.match(err, "Error in modimport: modmain/.+%.lua not found!") then
+	-- 	print("导入文件失败：" .. filePath)
+	-- 	print(StackTrace(err))
+	-- end
+
+	print("modimport: " .. env.MODROOT .. modulename)
+	if string.sub(modulename, #modulename - 3, #modulename) ~= ".lua" then
+		modulename = modulename .. ".lua"
+	end
+	local result = kleiloadlua(env.MODROOT .. modulename)
+	if result == nil then
+		-- error("Error in modimport: " .. modulename .. " not found!")
+	elseif type(result) == "string" then
+		error("Error in modimport: " .. ModInfoname(modname) .. " importing " .. modulename .. "!\n" .. result)
+	else
+		setfenv(result, env.env)
+		result()
 	end
 end
 
@@ -40,8 +54,7 @@ local function Modimport(dirc)
 		ALL_PREFAB_FILES = ArrayUnion(ALL_PREFAB_FILES, PrefabFiles)
 	end
 	if Assets and #Assets > 0 then
-		ALL_ASSETS = JoinArrays(ALL_ASSETS, Assets)
-		-- print("加载的资产个数", #ALL_ASSETS, #Assets)
+		ConcatArrays(ALL_ASSETS, Assets)
 	end
 	PrefabFiles = {}
 	Assets = {}
@@ -104,8 +117,7 @@ GLOBAL.WIKI_DATA = nil
 
 ----------------------------------------------------------------------------------------------------
 
-modimport "modmain/componentactions"  --AddComponentAction比较特殊，如果mod的分开写就会前后覆盖
-modimport "modmain/event_server/main" --熔炉和暴食的内容
+modimport "modmain/componentactions" --AddComponentAction比较特殊，如果mod的分开写就会前后覆盖
 modimport "scripts/prefabs/tropical_farm_plant_defs"
 
 AddMinimap()

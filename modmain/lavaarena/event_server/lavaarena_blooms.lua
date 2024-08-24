@@ -1,5 +1,10 @@
 local GetPrefab = require("tropical_utils/getprefab")
 
+local assets =
+{
+    Asset("ANIM", "anim/lavaarena_heal_flowers_fx.zip"),
+}
+
 local function Kill(inst)
     inst.SoundEmitter:PlaySound("dontstarve/wilson/pickup_reeds", "flower_sound")
     inst.SoundEmitter:SetVolume("flower_sound", .25)
@@ -101,4 +106,4 @@ add_event_server_data("lavaarena", "prefabs/lavaarena_blooms", {
     createhealblooms = createhealblooms,
     -- createsleepdebuff = createsleepdebuff, --感觉用不到，一个周期任务就搞定了
     -- healbuff_postinit = healbuff_postinit
-})
+}, assets)

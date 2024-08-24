@@ -1,11 +1,11 @@
-local Fossilizer = Class(function(self, b)
-    self.inst = b;
+local Fossilizer = Class(function(self, inst)
+    self.inst = inst;
     self.duration = TUNING.FORGE_ITEM_PACK.TFWP_CONTROL_BOOK.DURATION;
     self.range = TUNING.FORGE_ITEM_PACK.TFWP_CONTROL_BOOK.ALT_RADIUS
 end)
 
-function Fossilizer:SetDuration(c)
-    self.duration = c
+function Fossilizer:SetDuration(duration)
+    self.duration = duration
 end;
 
 function Fossilizer:SpawnFosilFx(d)
@@ -29,11 +29,11 @@ function Fossilizer:SpawnFosilFx(d)
     end)
 end;
 
-function Fossilizer:Fossilize(d, l)
-    self:SpawnFosilFx(d)
+function Fossilizer:Fossilize(pos, doer)
+    self:SpawnFosilFx(pos)
     local f = 0;
     self.check_task = self.inst:DoPeriodicTask(.25, function()
-        local m = TheSim:FindEntities(d.x, 0, d.z, self.range, nil, { "player" })
+        local m = TheSim:FindEntities(pos.x, 0, pos.z, self.range, nil, { "player" })
 
         for n, o in ipairs(m) do
             if o.components.freezable and not o.components.freezable:IsFrozen() and not o:HasTag("player") then

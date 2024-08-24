@@ -172,9 +172,6 @@ Assets =
 	Asset("ATLAS", "images/store_soldout.xml"),
 	Asset("ATLAS", "images/buttongorge.xml"),
 	Asset("IMAGE", "images/buttongorge.tex"),
-
-	Asset("ANIM", "anim/sword_buster.zip"), --熔炉大剑，奇怪，为什么源码预制件里声明的没用，这里还要写一遍
-	Asset("ANIM", "anim/swap_sword_buster.zip"),
 }
 
 if TUNING.tropical.quagmire and TUNING.tropical.kindofworld == 15 or GetModConfigData("enableallprefabs") == true then
@@ -324,8 +321,7 @@ local dictInventoryItems = {
 		"shard_sword", "sharxocean", "snowitem", "spiderbattle", "spore_yellow", "stonebar", "surfboard", "surfboarditem",
 		"swbait", "sweet_potato_oversized", "sweet_potato_oversized_waxed", "swineclopsbattle", "swordfishjocean",
 		"swordfishjocean2", "tfwp_crystal_crown_hat", "tfwp_fire_bomb", "tfwp_flower_headband_hat",
-		 "tfwp_luxury_nox_helm_hat",
-		"tfwp_summon_book", "tfwp_wizard_crown_hat", "tfwp_woven_garland_hat",
+		"tfwp_luxury_nox_helm_hat",  "tfwp_wizard_crown_hat", "tfwp_woven_garland_hat",
 		"tree_forest_deep_seed", "tree_forest_rot_seed", "tree_forestseed", "trinket_giftshop_1", "trinket_giftshop_3",
 		"trinket_giftshop_4", "tropical_fish", "tropicalbouillabaisse", "tuber_bloom_crop", "tuber_bloom_crop_cooked",
 		"tuber_crop", "tuber_crop_cooked", "tunacan", "turbine_blades", "turf_ash", "turf_beach", "turf_checkeredlawn",

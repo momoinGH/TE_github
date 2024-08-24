@@ -1,3 +1,10 @@
+local assets =
+{
+    Asset("ANIM", "anim/healingstaff.zip"),
+    Asset("ANIM", "anim/swap_healingstaff.zip"),
+    Asset("ANIM", "anim/lavaarena_heal_projectile.zip"),
+}
+
 local function Spell(inst, doer, pos)
     SpawnAt("lavaarena_healblooms", pos)
     inst.components.rechargeable:Discharge(24)
@@ -27,4 +34,4 @@ end
 add_event_server_data("lavaarena", "prefabs/healingstaff", {
     healingstaff_postinit = healingstaff_postinit,
     -- castfx_postinit = castfx_postinit --爆炸特效已经有blossom_hit_fx了，一样的动画
-})
+}, assets)

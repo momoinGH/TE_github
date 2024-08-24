@@ -1,3 +1,9 @@
+local assets =
+{
+    Asset("ANIM", "anim/sword_buster.zip"),
+    Asset("ANIM", "anim/swap_sword_buster.zip"),
+}
+
 local function Spell(inst, doer, pos)
     inst.components.parryweapon:EnterParryState(doer, doer:GetAngleToPoint(pos), 6)
     inst.components.rechargeable:Discharge(12)
@@ -31,4 +37,4 @@ end
 
 add_event_server_data("lavaarena", "prefabs/lavaarena_heavyblade", {
     master_postinit = master_postinit,
-})
+}, assets)

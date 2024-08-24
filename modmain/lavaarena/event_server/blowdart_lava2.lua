@@ -1,16 +1,21 @@
+local assets =
+{
+    Asset("ANIM", "anim/blowdart_lava2.zip"),
+    Asset("ANIM", "anim/swap_blowdart_lava2.zip"),
+    Asset("ANIM", "anim/lavaarena_blowdart_attacks.zip"),
+}
+
 local function Spell(inst, doer, pos)
-    for i = 1, 6 do
-        inst:DoTaskInTime(0.08 * i, function()
-            if doer:IsValid() then
-                local off = math.random() * 2.5 - 1.25;
-                local offset = Vector3(math.random(), 0, math.random()):Normalize() * off;
-                local alt = SpawnPrefab("blowdart_lava_projectile_alt")
-                alt.Transform:SetPosition((inst:GetPosition() + offset):Get())
-                alt.components.complexprojectile:Launch(pos + offset, doer, inst)
-                doer.SoundEmitter:PlaySound("dontstarve/common/lava_arena/blow_dart_spread")
-            end
-        end)
-    end;
+    inst:DoTaskInTime(4 * FRAMES, function(inst)
+        if doer:IsValid() then
+            local fx = SpawnPrefab("blowdart_lava2_projectile_explosive")
+            fx.Transform:SetPosition(doer.Transform:GetWorldPosition())
+            fx.components.complexprojectile:Launch(pos, doer, inst)
+        end
+    end)
+    if doer.SoundEmitter then
+        doer.SoundEmitter:PlaySound("dontstarve/common/lava_arena/blow_dart")
+    end
     inst.components.rechargeable:Discharge(18)
 end
 
@@ -21,45 +26,43 @@ local function OnProjectileLaunched(inst, attacker)
 end
 
 local function blowdart_postinit(inst)
-    InitLavaarenaWeapon(inst, "swap_blowdart_lava",30)
+    InitLavaarenaWeapon(inst, "swap_blowdart_lava2", 25)
 
     inst.components.aoespell:SetSpellFn(Spell)
 
     inst.components.weapon:SetRange(10, 20)
-    inst.components.weapon:SetProjectile("blowdart_lava_projectile")
+    inst.components.weapon:SetProjectile("blowdart_lava2_projectile")
     inst.components.weapon:SetOnProjectileLaunched(OnProjectileLaunched)
 end
 
 ----------------------------------------------------------------------------------------------------
 local function OnHit(inst, attacker, target)
     if target then
-        if inst.prefab == "blowdart_lava_projectile_alt" then
+        if inst.prefab == "blowdart_lava2_projectile_explosive" then
             if attacker and attacker.components.combat and attacker.components.combat:CanTarget(target) then
-                target.components.combat:GetAttacked(attacker, 20, inst.components.complexprojectile.owningweapon, nil, { lavaarena_strong = 1 })
+                target.components.combat:GetAttacked(attacker, 50, inst.components.complexprojectile.owningweapon, nil, { lavaarena_fire = 1 })
             end
+            local fx = SpawnPrefab("explosivehit") --这个特效不会消失，而是留在地图上每次进入加载都会播放一次
+            fx.Transform:SetPosition(target:GetPosition():Get())
+            fx.persists = false
+            fx:DoTaskInTime(5, fx.Remove)
+        else
+            SpawnPrefab("weaponsparks_piercing"):Setup(attacker, target, inst)
         end
-
-        SpawnPrefab("weaponsparks_piercing"):Setup(attacker, target, inst)
     end
 
     inst:Remove()
 end
 
-local ATTACK_MUST_TAGS = { "_combat" }
-local ATTACK_CANT_TAGS = { "player", "companion" }
 local function OnUpdate(inst)
     local dt = 0.1
     local self = inst.components.complexprojectile
 
     if self.attacker:IsValid() and self.attacker.components.combat then
-        local pos = inst:GetPosition()
-        for _, v in ipairs(TheSim:FindEntities(pos.x, pos.y, pos.z, 3, ATTACK_MUST_TAGS, ATTACK_CANT_TAGS)) do
-            if v.entity:IsVisible() and self.attacker.components.combat:CanTarget(v) then
-                if v:GetPhysicsRadius(0) + 1 > distsq(pos, v:GetPosition()) then
-                    self:Hit(v)
-                    return true
-                end
-            end
+        for _, v in ipairs(GetPlayerAttackTarget(self.attacker, 3,
+            function(v) return v:GetPhysicsRadius(0) + 1 > distsq(pos, v:GetPosition()) end, pos, true)) do
+            self:Hit(v)
+            return true
         end
     end
 
@@ -91,11 +94,10 @@ local function projectile_postinit(inst, alt)
         inst.components.projectile:SetLaunchOffset(Vector3(-2, 1, 0))
     end
 
-
     inst.persists = false
 end
 
-add_event_server_data("lavaarena", "prefabs/blowdart_lava", {
+add_event_server_data("lavaarena", "prefabs/blowdart_lava2", {
     blowdart_postinit = blowdart_postinit,
     projectile_postinit = projectile_postinit
-})
+}, assets)

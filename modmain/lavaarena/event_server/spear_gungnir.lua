@@ -1,3 +1,10 @@
+local assets =
+{
+    Asset("ANIM", "anim/spear_gungnir.zip"),
+    Asset("ANIM", "anim/swap_spear_gungnir.zip"),
+    Asset("ANIM", "anim/lavaarena_staff_smoke_fx.zip"),
+}
+
 local function Spell(inst, doer, pos)
     doer:PushEvent("combat_lunge", { targetpos = pos, weapon = inst })
 end
@@ -27,4 +34,4 @@ end
 
 add_event_server_data("lavaarena", "prefabs/spear_gungnir", {
     master_postinit = master_postinit,
-})
+}, assets)

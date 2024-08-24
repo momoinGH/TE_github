@@ -1,3 +1,11 @@
+local assets =
+{
+    Asset("ANIM", "anim/swap_lucy_axe.zip"),
+    Asset("ANIM", "anim/lavaarena_lucy.zip"),
+    Asset("INV_IMAGE", "lucy"),
+    Asset("ANIM", "anim/lavaarena_lucy.zip"),
+}
+
 local function OnLaunch(inst, attacker, targetPos)
     attacker.components.inventory:RemoveItem(inst)
     inst.Transform:SetPosition(attacker.Transform:GetWorldPosition())
@@ -38,26 +46,19 @@ local function OnHit(inst, attacker, target)
     end
 end
 
-local ATTACK_MUST_TAGS = { "_combat" }
-local ATTACK_CANT_TAGS = { "player", "companion" }
 local function OnUpdate(inst)
     local dt = 0.15
     local self = inst.components.complexprojectile
 
     local attacker = inst.projectileowner
     if attacker:IsValid() and attacker.components.combat then
-        attacker.components.combat.ignorehitrange = true
         local pos = inst:GetPosition()
-        for _, v in ipairs(TheSim:FindEntities(pos.x, pos.y, pos.z, 3, ATTACK_MUST_TAGS, ATTACK_CANT_TAGS)) do
-            if v.entity:IsVisible() and attacker.components.combat:CanTarget(v) then
-                if v:GetPhysicsRadius(0) + 1 > distsq(pos, v:GetPosition()) then
-                    self:Hit(v)
-                    attacker.components.combat.ignorehitrange = false
-                    return true
-                end
-            end
+        for _, v in ipairs(GetPlayerAttackTarget(attacker, 3, function(v)
+            return v:GetPhysicsRadius(0) + 1 > distsq(pos, v:GetPosition())
+        end, pos, true)) do
+            self:Hit(v)
+            return true
         end
-        attacker.components.combat.ignorehitrange = false
     end
 
     inst.Physics:SetMotorVel(self.velocity:Get())
@@ -94,4 +95,4 @@ end
 
 add_event_server_data("lavaarena", "prefabs/lavaarena_lucy", {
     master_postinit = master_postinit,
-})
+}, assets)

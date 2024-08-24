@@ -547,7 +547,7 @@ end)
 
 
 local function am(l, an)
-    local ao = { tfwp_healing_staff = "heal_staff", tfwp_infernal_staff = "fireball" }
+    local ao = { tfwp_healing_staff = "heal_staff", fireballstaff = "fireball" }
     if ao[an.prefab] then l.sg.statemem.projectilesound = "dontstarve/common/lava_arena/" .. ao[an.prefab] end
 end;
 

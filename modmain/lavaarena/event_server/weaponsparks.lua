@@ -1,3 +1,8 @@
+local assets =
+{
+    Asset("ANIM", "anim/lavaarena_hit_sparks_fx.zip"),
+}
+
 local function Setup(inst, attacker, target, projectile, flashcolour)
     if inst.doubleflip then
         inst.flip:set(math.random(4))
@@ -15,4 +20,4 @@ end
 
 add_event_server_data("lavaarena", "prefabs/weaponsparks", {
     master_postinit = master_postinit
-})
+}, assets)

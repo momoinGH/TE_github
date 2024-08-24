@@ -1,5 +1,9 @@
 local Utils = require("tropical_utils/utils")
 
+
+
+----------------------------------------------------------------------------------------------------
+
 -- 太长的单独写一个文件了
 modimport "modmain/common/components/locomotor"
 modimport "modmain/common/components/birdspawner"

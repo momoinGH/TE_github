@@ -39,17 +39,16 @@ local function f()
             local k = {}
             local l, m, n = inst:GetPosition():Get()
             local o = TheSim:FindEntities(l, m, n, e, nil, { "player", "companion" })
-            for p, q in ipairs(o) do
+            for p, v in ipairs(o) do
                 if inst.attacker ~= nil
-                    and q ~= inst.attacker
-                    and q.entity:IsValid()
-                    and q.entity:IsVisible()
-                    and (q.components.health
-                        and not q.components.health:IsDead() or q.components.workable
-                        and q.components.workable:CanBeWorked()
-                        and q.components.workable:GetWorkAction())
+                    and v ~= inst.attacker
+                    and v.entity:IsValid()
+                    and v.entity:IsVisible()
+                    and (v.components.health
+                        and not v.components.health:IsDead() or v.components.workable and v.components.workable:CanBeWorked()
+                        and v.components.workable:GetWorkAction())
                 then
-                    table.insert(k, q)
+                    table.insert(k, v)
                 end
             end;
             if inst.owner.components.weapon and inst.owner.components.weapon:HasAltAttack() then

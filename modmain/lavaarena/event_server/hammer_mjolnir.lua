@@ -1,3 +1,10 @@
+local assets =
+{
+    Asset("ANIM", "anim/hammer_mjolnir.zip"),
+    Asset("ANIM", "anim/swap_hammer_mjolnir.zip"),
+    Asset("ANIM", "anim/lavaarena_hammer_attack_fx.zip"),
+}
+
 local function Spell(inst, doer, pos)
     doer:PushEvent("combat_leap", { targetpos = pos, weapon = inst })
 end
@@ -37,4 +44,4 @@ add_event_server_data("lavaarena", "prefabs/hammer_mjolnir", {
     hammer_postinit = hammer_postinit,
     crackle_postinit = crackle_postinit,
     cracklehit_postinit = cracklehit_postinit
-})
+}, assets)

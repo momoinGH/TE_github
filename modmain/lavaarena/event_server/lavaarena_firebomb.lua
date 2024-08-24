@@ -1,3 +1,11 @@
+local assets =
+{
+    Asset("ANIM", "anim/lavaarena_firebomb.zip"),
+    Asset("ANIM", "anim/swap_lavaarena_firebomb.zip"),
+    Asset("ANIM", "anim/lavaarena_firebomb.zip"),
+    Asset("ANIM", "anim/sparks_molotov.zip"),
+}
+
 local function ClearCharge(inst)
     inst.charge = 0
     if inst.chargetask then
@@ -60,7 +68,7 @@ local function Spell(inst, doer, pos)
 end
 
 local function firebomb_postinit(inst)
-    InitLavaarenaWeapon(inst, "swap_lavaarena_firebomb",  15)
+    InitLavaarenaWeapon(inst, "swap_lavaarena_firebomb", 15)
 
     inst.charge = 0 --连击次数
 
@@ -94,12 +102,10 @@ local function OnHit(inst)
         return
     end
 
-    local x, y, z = inst.Transform:GetWorldPosition()
-    for _, v in ipairs(TheSim:FindEntities(x, y, z, 8, ATTACK_MUST_TAGS, ATTACK_CANT_TAGS)) do
-        if v ~= inst.owner and inst.owner.components.combat:CanTarget(v) then
-            v.components.combat:GetAttacked(inst.owner, 75, inst.components.complexprojectile.owningweapon, nil, { lavaarena_fire = 1 })
-        end
+    for _, v in ipairs(GetPlayerAttackTarget(inst.owner, 8, nil, inst:GetPosition(), true)) do
+        v.components.combat:GetAttacked(inst.owner, 75, inst.components.complexprojectile.owningweapon, nil, { lavaarena_fire = 1 })
     end
+
     inst:Remove()
 end
 
@@ -130,4 +136,4 @@ add_event_server_data("lavaarena", "prefabs/lavaarena_firebomb", {
     projectile_postinit = projectile_postinit,
     explosion_postinit = explosion_postinit,
     -- procfx_postinit = explosion_postinit --和爆炸一个动画，也用不着
-})
+}, assets)
