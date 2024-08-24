@@ -1,4 +1,4 @@
-local Assets =
+local assets =
 {
 	Asset("ANIM", "anim/peach_pit.zip"),
 	Asset("ATLAS", "images/inventoryimages/peach_pit.xml"),
@@ -78,5 +78,5 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("peach_pit", fn, Assets),
+return Prefab("peach_pit", fn, assets),
 	MakePlacer("peach_pit_placer", "peach_pit", "peach", "picked")

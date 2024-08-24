@@ -427,7 +427,6 @@ local function chop_down_tree(inst, chopper)
 
 	inst:DoTaskInTime(.4, function()
 		local sz = (inst.components.growable and inst.components.growable.stage > 2) and .5 or .25
-		-- GetPlayer().components.playercontroller:ShakeCamera(inst, "FULL", 0.25, 0.03, sz, 6)
 		ShakeAllCameras(CAMERASHAKE.FULL, 0.25, 0.03, sz, inst, 6)
 	end)
 
@@ -656,14 +655,6 @@ local function OnGustStart(inst, windspeed)
 end
 
 local function OnGustEnd(inst, windspeed)
-end
-
-local function OnGustFall(inst)
-	if inst:HasTag("burnt") then
-		chop_down_burnt_tree(inst, GetPlayer())
-	else
-		chop_down_tree(inst, GetPlayer())
-	end
 end
 
 

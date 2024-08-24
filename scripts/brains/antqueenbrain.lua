@@ -101,7 +101,7 @@ end
 
 local function TrySanityAttack(inst)
     return inst.components.health:GetPercent() <= 0.75 and inst.sanity_attack_count < inst.max_sanity_attack_count and
-    CanAttack(inst) and not TheWorld.components.quaker_interior:IsQuaking()
+        CanAttack(inst) and not TheWorld.components.quaker_interior:IsQuaking()
 end
 
 local function SanityAttack(inst)
@@ -127,12 +127,16 @@ function AntQueenBrain:OnStart()
             {
                 --TODO: check if we're already in combat in case the player put the queen to sleep
                 IfNode(
-                    function() return IsPlayerInVicinity(self.inst) and IsFirstEncounter(self.inst) and
-                        (self.inst.sg.currentstate.name == "sleeping" or self.inst.sg.currentstate.name == "sleep") end,
+                    function()
+                        return IsPlayerInVicinity(self.inst) and IsFirstEncounter(self.inst) and
+                            (self.inst.sg.currentstate.name == "sleeping" or self.inst.sg.currentstate.name == "sleep")
+                    end,
                     "PlayerInVicinity",
                     DoAction(self.inst, function()
-                        if self.inst.components.combat.target == nil then
-                            self.inst.components.combat:SetTarget(GetPlayer())
+                        local x, y, z = self.inst.Transform:GetWorldPosition()
+                        local player = FindClosestPlayerInRangeSq(x, y, z, 900, true)
+                        if player and self.inst.components.combat.target == nil then
+                            self.inst.components.combat:SetTarget(player)
                             WakeUpFn(self.inst)
                         end
                     end, "WakingUp")),

@@ -43,7 +43,6 @@ local function fn(Sim)
     inst.components.equippable.equipslot = EQUIPSLOTS.HANDS
 
     inst:AddComponent("inspectable")
-    inst:AddComponent("interactions")
 
     inst:AddComponent("repairer")
     inst.components.repairer.repairmaterial = MATERIALS.WOOD

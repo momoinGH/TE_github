@@ -306,7 +306,6 @@ local function pig_ruins_head()
 	inst.MiniMapEntity:SetIcon("ruins_giant_head.png")
 
 	inst:AddTag("boulder")
-	inst:AddTag("dislodgeable")
 
 	inst.entity:SetPristine()
 
@@ -408,7 +407,6 @@ local function pig_ruins_pig()
 	inst.MiniMapEntity:SetIcon("statue_pig_ruins_pig.png")
 
 	inst:AddTag("boulder")
-	inst:AddTag("dislodgeable")
 
 	inst.entity:SetPristine()
 
@@ -491,7 +489,6 @@ local function pig_ruins_ant()
 	inst.MiniMapEntity:SetIcon("statue_pig_ruins_ant.png")
 
 	inst:AddTag("boulder")
-	inst:AddTag("dislodgeable")
 
 	inst.entity:SetPristine()
 
@@ -577,7 +574,6 @@ local function pig_ruins_idol()
 	inst.MiniMapEntity:SetIcon("statue_pig_ruins_idol.png")
 
 	inst:AddTag("boulder")
-	inst:AddTag("dislodgeable")
 
 	inst.entity:SetPristine()
 
@@ -657,7 +653,6 @@ local function pig_ruins_plaque()
 	inst.MiniMapEntity:SetIcon("statue_pig_ruins_plaque.png")
 
 	inst:AddTag("boulder")
-	inst:AddTag("dislodgeable")
 
 	inst.entity:SetPristine()
 
@@ -888,7 +883,6 @@ local function pig_ruins_truffle()
 	inst.MiniMapEntity:SetIcon("statue_pig_ruins_mushroom.png")
 
 	inst:AddTag("boulder")
-	inst:AddTag("dislodgeable")
 
 	inst.entity:SetPristine()
 
@@ -971,7 +965,6 @@ local function pig_ruins_sow()
 	inst.MiniMapEntity:SetIcon("statue_pig_ruins_idol_blue.png")
 
 	inst:AddTag("boulder")
-	inst:AddTag("dislodgeable")
 
 	inst.entity:SetPristine()
 

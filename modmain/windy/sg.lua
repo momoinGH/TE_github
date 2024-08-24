@@ -1,7 +1,4 @@
-AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.FILLED, "dolongaction"))
-AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.FILLED, "dolongaction"))
-AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.MILK, "dolongaction"))
-AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.MILK, "dolongaction"))
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Mod Action (give) [too lazy to make new component for goddess item repair]
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.GIVE, function(inst, action)

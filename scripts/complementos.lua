@@ -19,46 +19,46 @@ end)
 
 
 -- TODO 抽时间整理一下，去掉熔炉定义的这些常量
-for _, v in ipairs({
-    "tfwp_lava_hammer",
-    "tfwp_spear_gung",
-    "tfwp_healing_staff",
-    "tfwp_dragon_dart",
-    "tfwp_infernal_staff",
-    "tfwp_spear_lance",
-    "tfwp_fire_bomb",
-    "tfwp_heavy_sword",
-    "tfwp_control_book",
-    "tfwp_summon_book",
-}) do
-    AddPrefabPostInit(v, function(inst)
-        local name = inst.prefab:upper()
-        if TUNING.FORGE_ITEM_PACK[name]
-            and TUNING.FORGE_ITEM_PACK[name].DURABILITY
-            and TUNING.FORGE_ITEM_PACK[name].DURABILITY.AMOUNT
-        then
-            if TUNING.FORGE_ITEM_PACK[name].DURABILITY.AMOUNT > 0 then
-                inst:AddComponent("finiteuses")
-                inst.components.finiteuses:SetMaxUses(TUNING.FORGE_ITEM_PACK[name].DURABILITY.AMOUNT)
-                inst.components.finiteuses:SetUses(TUNING.FORGE_ITEM_PACK[name].DURABILITY.AMOUNT)
-                inst.components.finiteuses:SetOnFinished(inst.Remove)
-                if TUNING.FORGE_ITEM_PACK[name].DURABILITY.CONSUMPTION_NORMAL then
-                    inst.components.finiteuses:SetConsumption(ACTIONS.ATTACK,
-                        TUNING.FORGE_ITEM_PACK[name].DURABILITY.CONSUMPTION_NORMAL)
-                end;
+-- for _, v in ipairs({
+--     "hammer_mjolnir",
+--     "spear_gungnir",
+--     "healingstaff",
+--     "blowdart_lava2",
+--     "tfwp_infernal_staff",
+--     "spear_lance",
+--     "lavaarena_firebomb",
+--     "lavaarena_heavyblade",
+--     "tfwp_control_book",
+--     "tfwp_summon_book",
+-- }) do
+--     AddPrefabPostInit(v, function(inst)
+--         local name = inst.prefab:upper()
+--         if TUNING.FORGE_ITEM_PACK[name]
+--             and TUNING.FORGE_ITEM_PACK[name].DURABILITY
+--             and TUNING.FORGE_ITEM_PACK[name].DURABILITY.AMOUNT
+--         then
+--             if TUNING.FORGE_ITEM_PACK[name].DURABILITY.AMOUNT > 0 then
+--                 inst:AddComponent("finiteuses")
+--                 inst.components.finiteuses:SetMaxUses(TUNING.FORGE_ITEM_PACK[name].DURABILITY.AMOUNT)
+--                 inst.components.finiteuses:SetUses(TUNING.FORGE_ITEM_PACK[name].DURABILITY.AMOUNT)
+--                 inst.components.finiteuses:SetOnFinished(inst.Remove)
+--                 if TUNING.FORGE_ITEM_PACK[name].DURABILITY.CONSUMPTION_NORMAL then
+--                     inst.components.finiteuses:SetConsumption(ACTIONS.ATTACK,
+--                         TUNING.FORGE_ITEM_PACK[name].DURABILITY.CONSUMPTION_NORMAL)
+--                 end;
 
-                if TUNING.FORGE_ITEM_PACK[name].DURABILITY.CONSUMPTION_SPECIAL then
-                    inst.components.finiteuses:SetConsumption(
-                        ACTIONS.CASTAOE,
-                        TUNING.FORGE_ITEM_PACK[name].DURABILITY.AMOUNT *
-                        TUNING.FORGE_ITEM_PACK[name].DURABILITY.CONSUMPTION_SPECIAL / 100)
-                end
-            end
-        else
-            print("Cannot find tunning for " .. name)
-        end
-    end)
-end
+--                 if TUNING.FORGE_ITEM_PACK[name].DURABILITY.CONSUMPTION_SPECIAL then
+--                     inst.components.finiteuses:SetConsumption(
+--                         ACTIONS.CASTAOE,
+--                         TUNING.FORGE_ITEM_PACK[name].DURABILITY.AMOUNT *
+--                         TUNING.FORGE_ITEM_PACK[name].DURABILITY.CONSUMPTION_SPECIAL / 100)
+--                 end
+--             end
+--         else
+--             print("Cannot find tunning for " .. name)
+--         end
+--     end)
+-- end
 
 
 modimport("scripts/modweab.lua")

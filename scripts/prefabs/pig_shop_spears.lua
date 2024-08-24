@@ -52,7 +52,7 @@ local room = {
 		{ name = "interior_floor_herringbone", x_offset = -2.7 },
 		{ name = "shelves_midcentury", x_offset = -4.5, z_offset = 4 },
 		{ name = "deco_roomglow" },
-		{ name = "pigman_eskimo_shopkeep", x_offset = -3, startstate = "desk_pre" },
+		{ name = "pigman_eskimo_shopkeep", x_offset = -3, startstate = "desk" },
 		{ name = "shield_axes", x_offset = -7.5 },
 		{ name = "rug_porcupuss", z_offset = -2 },
 		{ name = "rug_fur", x_offset = 2, z_offset = 4 },

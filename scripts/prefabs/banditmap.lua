@@ -10,7 +10,7 @@ local assets =
 
 local tesouroescondido =
 {
-	[1] = "tfwp_healing_staff",
+	[1] = "healingstaff",
 	[2] = "purplegem",
 	[3] = "orangegem",
 	[4] = "yellowgem",

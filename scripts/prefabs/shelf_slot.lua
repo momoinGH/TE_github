@@ -1,53 +1,31 @@
 local assets =
 {
-    --Asset("ANIM", "anim/store_items.zip"),
     Asset("ANIM", "anim/shelf_slot.zip"),
 }
 
-local prefabs =
-{
-
-}
-
-local function empty(inst)
-    local item = inst.components.pocket:RemoveItem("shelfitem")
-    if item then
-        inst.components.shelfer:ReturnGift(item)
-        local pt = inst.Transform:GetWorldPosition()
-        if inst.components.shelfer.shelf then
-            pt = inst.components.shelfer.shelf.Transform:GetWorldPosition()
-        end
-        --DropLootPrefab
-        if item and inst.components.lootdropper then
-            inst.components.lootdropper:DropLoot(pt)
-        end
+local function displaynamefn(inst)
+    local item = inst.components.shelfer:GetGift()
+    if not item then
+        return ""
     end
+    return item:GetDisplayName()
 end
 
-local function common()
+local function fn()
     local inst = CreateEntity()
-    inst.entity:AddNetwork()
 
     inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
 
-    anim:SetBuild("shelf_slot")
-    anim:SetBank("shelf_slot")
-    anim:PlayAnimation("idle")
-    inst.AnimState:SetMultColour(255 / 255, 255 / 255, 255 / 255, 0.02)
-    --    anim:Hide("mouseclick")
+    -- 这个动画不是完全透明的，完全透明的贴图无法触发action
+    inst.AnimState:SetBuild("shelf_slot")
+    inst.AnimState:SetBank("shelf_slot")
+    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetMultColour(255 / 255, 255 / 255, 255 / 255, 0.02) --好像这个也行
 
     inst:AddTag("cost_one_oinc")
     inst:AddTag("NOBLOCK")
-    inst:AddTag("shelfcanaccept")
-    inst:AddTag("deletashelf")
-
-    inst:AddComponent("pocket")
-
-    inst:AddComponent("shelfer")
-
-    inst.AnimState:SetLayer(LAYER_WORLD)
-    inst.AnimState:SetSortOrder(3)
 
     inst.entity:SetPristine()
 
@@ -55,13 +33,19 @@ local function common()
         return inst
     end
 
-    inst:AddComponent("lootdropper")
+    --Remove these tags so that they can be added properly when replicating components below
+    inst:RemoveTag("_named")
 
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.canbepickedup = false
-    inst.empty = empty
+    inst:AddComponent("named")
+
+    inst:AddComponent("shelfer")
+
+    inst.displaynamefn = displaynamefn
+
+    -- we're not saving those anymore
+    inst.persists = false
 
     return inst
 end
 
-return Prefab("shelf_slot", common, assets, prefabs)
+return Prefab("shelf_slot", fn, assets)

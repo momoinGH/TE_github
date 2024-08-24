@@ -20,7 +20,7 @@ return {
         [007] = "meat",
         [008] = "fish",
         [009] = "carrot",
-        [010] = "tfwp_fire_bomb",
+        [010] = "lavaarena_firebomb",
         [011] = "quagmire_coin1",
         [012] = "quagmire_coin2",
         --------------------------lavaarena_spectator4---------------------------------------		
@@ -33,29 +33,29 @@ return {
         --------------------------lavaarena_spectator1---------------------------------------
         [019] = "lavaarena_armorlight",
         [020] = "lavaarena_rechargerhat",
-        [021] = "tfwp_healing_staff",
-        [022] = "tfwp_lava_hammer",
+        [021] = "healingstaff",
+        [022] = "hammer_mjolnir",
         [023] = "lavaarena_healingflowerhat",
         [024] = "lavaarena_armorextraheavy",
 
         [025] = "lavaarena_armorlightspeed",
         [026] = "lavaarena_feathercrownhat",
         [027] = "tfwp_infernal_staff",
-        [028] = "tfwp_dragon_dart",
+        [028] = "blowdart_lava2",
         [029] = "lavaarena_tiaraflowerpetalshat",
         [030] = "lavaarena_armor_hpextraheavy",
 
         [031] = "lavaarena_armormedium",
         [032] = "lavaarena_strongdamagerhat",
         [033] = "tfwp_control_book",
-        [034] = "tfwp_spear_lance",
+        [034] = "spear_lance",
         [035] = "lavaarena_eyecirclethat",
         [036] = "lavaarena_armor_hpdamager",
 
         [037] = "lavaarena_armormediumdamager",
         [038] = "lavaarena_lightdamagerhat",
-        [039] = "tfwp_lava_dart",
-        [040] = "tfwp_spear_gung",
+        [039] = "blowdart_lava",
+        [040] = "spear_gungnir",
         [041] = "lavaarena_crowndamagerhat",
         [042] = "lavaarena_armor_hprecharger",
 
@@ -73,7 +73,7 @@ return {
         [049] = "lavaarena_armormediumrecharger",
         [050] = "lavaarena_armorheavy",
         [051] = "tfwp_summon_book",
-        [052] = "tfwp_heavy_sword",
+        [052] = "lavaarena_heavyblade",
         [053] = "lavaarena_healinggarlandhat",
         [054] = "lavaarena_armor_hppetmastery",
 

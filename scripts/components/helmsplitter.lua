@@ -1,47 +1,48 @@
-local function a(self, b, c)
-    if c == true and b == true then
+local function onready(self, ready)
+    if ready then
         self.inst:AddTag("helmsplitter")
-    elseif c == true and b == false then
+    else
         self.inst:RemoveTag("helmsplitter")
     end
-end;
+end
 
 local Helmsplitter = Class(function(self, inst)
-    self.inst = inst;
-    self.ready = true;
-    self.damage = 10;
+    self.inst = inst
+
+    self.ready = false
+    self.damage = 10
     self.onhelmsplit = nil
 end, nil, {
-    ready = a,
+    ready = onready,
 })
 
-function Helmsplitter:SetOnHelmSplitFn(f)
-    self.onhelmsplit = f
-end;
+function Helmsplitter:SetOnHelmSplitFn(fn)
+    self.onhelmsplit = fn
+end
 
-function Helmsplitter:StartHelmSplitting(g)
-    if g.sg then
-        g.sg:PushEvent("start_helmsplit")
+function Helmsplitter:StartHelmSplitting(doer)
+    if doer.sg then
+        doer.sg:PushEvent("start_helmsplit")
         return true
-    end;
-    return false
-end;
-
-function Helmsplitter:DoHelmSplit(g, h)
-    if g.sg then
-        g.sg:PushEvent("do_helmsplit")
-    end;
-    g.components.combat:DoSpecialAttack(self.damage, h, "strong", g.components.combat.damagemultiplier)
-    if self.onhelmsplit then
-        self.onhelmsplit(self.inst, g, h)
     end
-end;
+    return false
+end
 
-function Helmsplitter:StopHelmSplitting(g)
-    if g.sg then
-        g.sg:PushEvent("stop_helmsplit")
-    end;
+function Helmsplitter:DoHelmSplit(doer, target)
+    if doer.sg then
+        doer.sg:PushEvent("do_helmsplit")
+    end
+    doer.components.combat:DoSpecialAttack(self.damage, target, "strong", doer.components.combat.damagemultiplier)
+    if self.onhelmsplit then
+        self.onhelmsplit(self.inst, doer, target)
+    end
+end
+
+function Helmsplitter:StopHelmSplitting(doer)
+    if doer.sg then
+        doer.sg:PushEvent("stop_helmsplit")
+    end
     self.ready = false
-end;
+end
 
 return Helmsplitter

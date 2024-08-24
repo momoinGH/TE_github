@@ -333,9 +333,9 @@ local function fn5(Sim)
 end
 
 
-return Prefab("common/dst_to_sw", fn, assets, prefabs),
-    Prefab("common/dst_to_hamlet", fn1, assets, prefabs),
-    Prefab("common/sw_to_dst", fn2, assets, prefabs),
-    Prefab("common/hamlet_to_dst", fn3, assets, prefabs),
-    Prefab("common/lobby_to_dst", fn4, assets, prefabs),
-    Prefab("common/dst_to_lobby", fn5, assets, prefabs)
+return Prefab("dst_to_sw", fn, assets, prefabs),
+    Prefab("dst_to_hamlet", fn1, assets, prefabs),
+    Prefab("sw_to_dst", fn2, assets, prefabs),
+    Prefab("hamlet_to_dst", fn3, assets, prefabs),
+    Prefab("lobby_to_dst", fn4, assets, prefabs),
+    Prefab("dst_to_lobby", fn5, assets, prefabs)

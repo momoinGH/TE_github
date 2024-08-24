@@ -332,7 +332,6 @@ local function common_fn(gem)
     inst:AddTag("deer")
     inst:AddTag("goddess_deer")
     inst:AddTag("animal")
-    inst:AddTag("goddess_deer")
     inst:AddTag("follower")
     inst:AddTag("healthinfo")
 

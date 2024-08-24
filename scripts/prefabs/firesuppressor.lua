@@ -77,17 +77,6 @@ local function TurnOff(inst, instant)
 end
 
 local function TurnOn(inst, instant)
-    local alagado = GetClosestInstWithTag("mare", inst, 10)
-    if alagado then
-        local fx = SpawnPrefab("shock_machines_fx")
-        if fx then
-            local pt = inst:GetPosition()
-            fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-        end
-        if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-        inst.on = false
-        return
-    end
     inst.on = true
     local isemergency = inst.components.firedetector:IsEmergency()
     if not isemergency then
@@ -102,18 +91,6 @@ end
 
 --Called from stategraph
 local function LaunchProjectile(inst, targetpos)
-    local alagado = GetClosestInstWithTag("mare", inst, 10)
-    if alagado then
-        local fx = SpawnPrefab("shock_machines_fx")
-        if fx then
-            local pt = inst:GetPosition()
-            fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-        end
-        if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-        inst.on = false
-        TurnOff(inst)
-        return
-    end
     local x, y, z = inst.Transform:GetWorldPosition()
 
     local projectile = SpawnPrefab("snowball")

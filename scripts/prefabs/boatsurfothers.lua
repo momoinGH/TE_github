@@ -42,8 +42,6 @@ local function fnsurf()
         return inst
     end
 
-    inst:AddComponent("interactions")
-
     inst.persists = false
 
     return inst
@@ -79,8 +77,6 @@ local function fnraft()
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst:AddComponent("interactions")
 
     inst.persists = false
 
@@ -118,8 +114,6 @@ local function fnlog()
         return inst
     end
 
-    inst:AddComponent("interactions")
-
     inst.persists = false
 
     return inst
@@ -152,8 +146,6 @@ local function fnraftrot()
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst:AddComponent("interactions")
 
     inst.persists = false
 

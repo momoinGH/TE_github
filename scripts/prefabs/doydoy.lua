@@ -197,8 +197,8 @@ end
 
 local growth_stages =
 {
-	{ name = "baby",  time = GetBabyGrowTime, fn = SetBaby },
-	{ name = "teen",  time = GetTeenGrowTime, fn = SetTeen },
+	{ name = "baby", time = GetBabyGrowTime, fn = SetBaby },
+	{ name = "teen", time = GetTeenGrowTime, fn = SetTeen },
 	{ name = "grown", time = GetTeenGrowTime, fn = SetFullyGrown },
 }
 
@@ -469,4 +469,4 @@ local function adultfn(Sim)
 end
 
 return Prefab("doydoybaby", babyfn, assets_baby, prefabs_baby),
-	Prefab("common/monsters/doydoy", adultfn, assets, prefabs)
+	Prefab("/doydoy", adultfn, assets, prefabs)

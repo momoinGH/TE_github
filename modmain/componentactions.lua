@@ -1,174 +1,25 @@
-AddComponentAction("USEITEM", "inventoryitem", function(inst, doer, target, actions, right)
-    if not right then
-        if target:HasTag("shelfcanaccept") then --target.components.shelfer and target.components.shelfer:CanAccept(inst, doer ) then
-            table.insert(actions, ACTIONS.GIVE2)
-        end
-    end
-end)
-
--- TODO 优化掉
-AddComponentAction("SCENE", "hackable", function(inst, doer, actions, right)
-    local equipamento = doer.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-    if not right then
-        if equipamento and equipamento:HasTag("machete") and not (doer.replica.rider:IsRiding()) then --and equipamento.components.hackable then --and inst.components.hackable.canbehacked then
-            table.insert(actions, ACTIONS.HACK1)
-        end
-    end
-
-    if right then
-        if doer:HasTag("ironlord") then
-            table.insert(actions, ACTIONS.HACK1)
-        end
-    end
-end)
-
-AddComponentAction("SCENE", "melter", function(inst, doer, actions, right)
-    if not inst:HasTag("burnt") then
-        if right and not inst:HasTag("alloydone") and inst.replica.container ~= nil and inst.replica.container:IsFull() then
-            table.insert(actions, ACTIONS.SMELT)
-        elseif not right and inst:HasTag("alloydone") then
-            table.insert(actions, ACTIONS.HARVEST1)
-        end
-    end
-end)
-
-AddComponentAction("SCENE", "workable", function(inst, doer, actions, right)
-    if right and doer:HasTag("ironlord") then
-        if inst:HasTag("tree") then
-            table.insert(actions, ACTIONS.CHOP)
-        end
-
-        if inst:HasTag("boulder") then
-            table.insert(actions, ACTIONS.MINE)
-        end
-
-        if inst:HasTag("structure") then
-            table.insert(actions, ACTIONS.HAMMER)
-        end
-    end
-end)
-
--------------------------------------------
-AddComponentAction("SCENE", "dislodgeable", function(inst, doer, actions, right)
-    local equipamento = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-    if not right then
-        if equipamento and equipamento:HasTag("ballpein_hammer") and inst:HasTag("dislodgeable") and not (doer.replica.rider:IsRiding()) then
-            table.insert(actions, ACTIONS.DISLODGE)
-            return
-        end
-    end
-end)
-
-
-AddComponentAction("SCENE", "mystery", function(inst, doer, actions, right)
-    if not right then
-        local equipamento = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-        if equipamento and equipamento:HasTag("magnifying_glass") and not (doer.replica.rider:IsRiding()) then
-            table.insert(actions, ACTIONS.INVESTIGATEGLASS)
-        end
-    end
-end)
-
-
-AddComponentAction("SCENE", "interactions", function(inst, doer, actions, right)
-    local equipamento = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-    --local rightrect = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-    --  and doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS).components.reticule ~= nil or nil
-    if right then
-        if equipamento and equipamento:HasTag("boatrepairkit") and doer:HasTag("aquatic") then
-            table.insert(actions, GLOBAL.ACTIONS.BOATREPAIR)
-            return
-        end
-    end
-
-    if not right then
-        ---------------------------------
-
-        if inst:HasTag("wallhousehamlet") and equipamento and equipamento:HasTag("hameletwallpaper") then
-            table.insert(actions, GLOBAL.ACTIONS.PAINT)
-            return
-        end
+local function CheckConsumable(inst, doer, target, actions)
+    local com = inst.components.tropical_consumable
+    if com
+        and inst:HasTag("tropical_consumable")
+        and (not com.userCheckFn or com.userCheckFn(inst, doer, target))
+        and (not com.targetCheckFn or com.targetCheckFn(inst, doer, target))
+    then
+        table.insert(actions, ACTIONS.TROPICAL_USE_ITEM)
     end
 end
-)
 
-AddComponentAction(
-    "INVENTORY",
-    "interactions",
-    function(inst, doer, actions)
-        if inst:HasTag("boatlight") and inst:HasTag("nonavio") and not inst:HasTag("ligado") then --and inst:HasTag("nonavio")
-            table.insert(actions, ACTIONS.ACTIVATESAIL)
-        end
-        if inst:HasTag("boatlight") and inst:HasTag("ligado") then
-            table.insert(actions, ACTIONS.DESACTIVATESAIL)
-        end
-
-        if inst:HasTag("boatrepairkit") then
-            table.insert(actions, ACTIONS.BOATREPAIR)
-        end
-
-        if inst:HasTag("tunacan") then
-            table.insert(actions, ACTIONS.OPENTUNA)
-        end
-
-        if inst:HasTag("pooptocompact") and doer:HasTag("wilbur") then
-            table.insert(actions, ACTIONS.COMPACTPOOP)
-        end
-    end)
-
-AddComponentAction("SCENE", "health", function(inst, doer, actions, right)
-    local boat = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO)
-    if right
-        and doer:HasTag("aquatic")
-        and boat
-        and boat.replica.container
-        and boat.replica.container:GetItemInSlot(2) ~= nil
-        and boat.replica.container:GetItemInSlot(2):HasTag("boatcannon")
-        and not (doer.replica.rider:IsRiding()
-            or doer.replica.inventory:IsHeavyLifting())
-    then
-        table.insert(actions, GLOBAL.ACTIONS.BOATCANNON)
-    end
-
-
-
-    if not right and doer:HasTag("ironlord") and
-        inst.replica.health ~= nil and not inst.replica.health:IsDead() and
-        inst.replica.combat ~= nil and inst.replica.combat:CanBeAttacked(doer) then
-        table.insert(actions, GLOBAL.ACTIONS.ATTACK)
-    end
-
-    if GLOBAL.TheWorld.ismastersim then
-        if right and doer:HasTag("ironlord") and not inst:HasTag("ironlord") and
-            inst.replica.health ~= nil and not inst.replica.health:IsDead() and
-            inst.replica.combat ~= nil and inst.replica.combat:CanBeAttacked(doer) then
-            table.insert(actions, ACTIONS.TIRO)
-        end
-    end
+AddComponentAction("INVENTORY", "tropical_consumable", function(inst, doer, actions, right)
+    CheckConsumable(inst, doer, doer, actions)
+end)
+AddComponentAction("USEITEM", "tropical_consumable", function(inst, doer, target, actions, right)
+    CheckConsumable(inst, doer, target, actions)
+end)
+AddComponentAction("EQUIPPED", "tropical_consumable", function(inst, doer, target, actions, right)
+    CheckConsumable(inst, doer, target, actions)
 end)
 
-AddComponentAction("SCENE", "shopped", function(inst, doer, actions, right)
-    if not right then
-        if doer.components.shopper then --and inst.components.shopdispenser and inst.components.shopdispenser.item_served then
-            table.insert(actions, ACTIONS.SHOP)
-        end
-    end
-end)
-
-AddComponentAction("POINT", "gasser", function(inst, doer, pos, actions, right)
-    if right and not (doer.replica.rider:IsRiding()) then
-        table.insert(actions, ACTIONS.GAS)
-    end
-end)
-
-AddComponentAction("SCENE", "poisonable", function(inst, doer, actions, right)
-    if right then
-        local equipamento = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-        if equipamento and equipamento:HasTag("bugrepellent") and not (doer.replica.rider:IsRiding()) then
-            table.insert(actions, ACTIONS.GAS)
-        end
-    end
-end)
+----------------------------------------------------------------------------------------------------
 
 AddComponentAction("POINT", "tropical_noequipactivator", function(inst, doer, pos, actions, right, target)
     local boat = doer:GetCurrentPlatform()
@@ -182,83 +33,106 @@ AddComponentAction("POINT", "tropical_noequipactivator", function(inst, doer, po
     then
         -- 船炮开炮
         table.insert(actions, ACTIONS.BOATCANNON)
-        return
     end
 end)
+----------------------------------------------------------------------------------------------------
 
-
-
-AddComponentAction("POINT", "equippable", function(inst, doer, pos, actions, right, target)
-    local xjp, yjp, zjp = pos:Get()
-    local xs, ys, zs = doer.Transform:GetWorldPosition()
-    local dist = math.sqrt((xjp - xs) * (xjp - xs) + (zjp - zs) * (zjp - zs))
-    local rightrect =
-        doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO) and
-        doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO).components.reticule ~= nil or
-        nil
-    local terraformer =
-        doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO) and
-        doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BARCO).components.terraformer ~= nil or
-        nil
-
-    if not right and rightrect == nil and terraformer == nil and doer:HasTag("aquatic") and
-        GLOBAL.TheWorld.Map:IsPassableAtPoint(pos:Get()) and not (doer.replica.rider:IsRiding())
-    then
-        table.insert(actions, GLOBAL.ACTIONS.BOATDISMOUNT)
-        return
-    end
-
-
-    if right and rightrect == nil and terraformer == nil and dist <= 20 then
-        local doer_x, doer_y, doer_z = doer.Transform:GetWorldPosition()
-        local planchadesurf = GLOBAL.TheWorld.Map:GetPlatformAtPoint(doer_x, doer_z)
-        if planchadesurf and planchadesurf:HasTag("planchadesurf") then
-            table.insert(actions, GLOBAL.ACTIONS.SURF)
-            return
+AddComponentAction("USEITEM", "inventoryitem", function(inst, doer, target, actions, right)
+    if target:HasTag("cost_one_oinc") then
+        if target:HasTag("playercrafted") and not target:HasTag("slot_one") then
+            -- 物品放入柜中
+            table.insert(actions, ACTIONS.GIVE_SHELF)
         end
     end
 end)
 
-AddComponentAction("USEITEM", "sapbucket", function(inst, doer, target, actions, right)
-    if target:HasTag("tappable") and not target:HasTag("tapped") and not target:HasTag("stump") then
-        table.insert(actions, ACTIONS.TAPSUGARTREE)
+AddComponentAction("SCENE", "shelfer", function(inst, doer, actions, right)
+    if inst:HasTag("cost_one_oinc") and inst:HasTag("slot_one") then
+        --从柜子中拿取
+        table.insert(actions, ACTIONS.TAKE_SHELF)
     end
 end)
 
+AddComponentAction("SCENE", "shopped", function(inst, doer, actions, right)
+    if inst:HasTag("slot_one") then
+        --拿取货架物品
+        table.insert(actions, ACTIONS.TAKE_SHELF)
+    end
+end)
+
+AddComponentAction("SCENE", "melter", function(inst, doer, actions, right)
+    if not inst:HasTag("burnt") then
+        if right and not inst:HasTag("alloydone") and inst.replica.container and inst.replica.container:IsFull() then
+            --冶炼炉冶炼
+            table.insert(actions, ACTIONS.SMELT)
+        elseif not right and inst:HasTag("alloydone") then
+            --冶炼炉收获
+            table.insert(actions, ACTIONS.HARVEST)
+        end
+    end
+end)
+
+local IRONLORD_WORKS = {
+    CHOP = true,
+    HAMMER = true,
+    MINE = true,
+}
+
+AddComponentAction("SCENE", "workable", function(inst, doer, actions, right)
+    if right and doer:HasTag("ironlord") then
+        -- 活性机甲
+        for k, _ in ipairs(IRONLORD_WORKS) do
+            if inst:HasTag(k .. "_workable") then
+                table.insert(actions, ACTIONS[k])
+            end
+        end
+    end
+end)
+
+AddComponentAction("SCENE", "hackable", function(inst, doer, actions, right)
+    if right and doer:HasTag("ironlord") and inst:HasTag("hackable") then
+        -- 活性机甲
+        table.insert(actions, ACTIONS.HACK)
+    end
+end)
+
+AddComponentAction("SCENE", "combat", function(inst, doer, actions, right)
+    if right and doer:HasTag("ironlord") and doer.replica.combat:CanTarget(inst) then
+        --活性机甲发射
+        table.insert(actions, ACTIONS.TIRO)
+    end
+end)
+
+AddComponentAction("POINT", "gasser", function(inst, doer, pos, actions, right)
+    if right and not doer.replica.rider:IsRiding() then
+        --喷洒杀毒剂
+        table.insert(actions, ACTIONS.GAS)
+    end
+end)
+
+AddComponentAction("EQUIPPED", "gasser", function(inst, doer, target, actions, right)
+    if right and not doer.replica.rider:IsRiding() then
+        --喷洒杀毒剂
+        table.insert(actions, ACTIONS.GAS)
+    end
+end)
+
+
+
 AddComponentAction("SCENE", "sappy", function(inst, doer, actions, right)
     if inst:HasTag("sappy") and not inst:HasTag("stump") then
+        -- 采集树液
         table.insert(actions, ACTIONS.COLLECTSAP)
     end
 end)
 
 AddComponentAction("USEITEM", "fueltar", function(inst, doer, target, actions)
-    if not (doer.replica.rider ~= nil and doer.replica.rider:IsRiding())
+    if not doer.replica.rider:IsRiding()
         or (target.replica.inventoryitem ~= nil and target.replica.inventoryitem:IsGrandOwner(doer)) then
-        if target:HasTag("seayard") then
+        if target:HasTag("seayard") or target:HasTag("tarlamp") or target:HasTag("tarsuit") then
+            --焦油添加燃料
             table.insert(actions, ACTIONS.ADDFUEL)
         end
-
-        if target:HasTag("tarlamp") then
-            table.insert(actions, ACTIONS.ADDFUEL)
-        end
-
-        if target:HasTag("tarsuit") then
-            table.insert(actions, ACTIONS.ADDFUEL)
-        end
-    end
-end)
-
-AddComponentAction("USEITEM", "setupable", function(inst, doer, target, actions, right)
-    if inst:HasTag("honeyed") and target:HasTag("honeyproducer") then
-        table.insert(actions, ACTIONS.SETUPITEM)
-    elseif inst:HasTag("salty") and target:HasTag("saltwater") then
-        table.insert(actions, ACTIONS.SETUPITEM)
-    end
-end)
-
-AddComponentAction("USEITEM", "slaughtertool", function(inst, doer, target, actions, right)
-    if target:HasTag("canbeslaughtered") then
-        table.insert(actions, ACTIONS.KILLSOFTLY)
     end
 end)
 
@@ -269,36 +143,12 @@ AddComponentAction("USEITEM", "snackrificable", function(inst, doer, target, act
 end
 )
 
-AddComponentAction("USEITEM", "replater", function(inst, doer, target, actions)
-    if target:HasTag("replatable") then
-        table.insert(actions, ACTIONS.REPLATE)
-    end
-end
-)
-
 AddComponentAction("USEITEM", "installable", function(inst, doer, target, actions)
     if target:HasTag("installations") and not target:HasTag("installations_occupied") then
         table.insert(actions, ACTIONS.INSTALL)
     end
 end
 )
-
-AddComponentAction("USEITEM", "specialstewer_dish", function(inst, doer, target, actions)
-    if inst:HasTag("quagmire_casseroledish") and target:HasTag("oven") and target:HasTag("specialstewer_dishtaker") then
-        table.insert(actions, ACTIONS.GIVE_DISH)
-    end
-
-
-    if inst:HasTag("quagmire_pot") and target:HasTag("pot_hanger") and target:HasTag("specialstewer_dishtaker") then
-        table.insert(actions, ACTIONS.GIVE_DISH)
-    end
-end)
-
-AddComponentAction("USEITEM", "milker", function(inst, doer, target, actions)
-    if target:HasTag("goddess_deer") and target:HasTag("windy4") then
-        table.insert(actions, ACTIONS.MILK)
-    end
-end)
 
 AddComponentAction("SCENE", "store", function(inst, doer, actions)
     table.insert(actions, ACTIONS.STOREOPEN)
@@ -352,11 +202,5 @@ end)
 AddComponentAction("EQUIPPED", "tool", function(inst, doer, target, actions, right)
     if UseTool(inst, doer, target, actions) then
         return
-    end
-end)
-
-AddComponentAction("USEITEM", "extrafillable", function(inst, doer, target, actions)
-    if target:HasTag("goddess_fountain") then
-        table.insert(actions, ACTIONS.FILLED)
     end
 end)

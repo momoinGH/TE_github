@@ -1,24 +1,26 @@
-local activelisteners = 0
+local function oncanbedislodged(self)
+    if self.canbedislodged and self.caninteractwith then
+        self.inst:AddTag("dislodgeable")
+    else
+        self.inst:RemoveTag("dislodgeable")
+    end
+end
 
 local Dislodgeable = Class(function(self, inst)
     self.inst = inst
-    self.canbedislodged = nil
+ 
     self.hasbeendislodged = nil
     self.product = nil
     self.ondislodgedfn = nil
-    self.caninteractwith = true
     self.numtoharvest = 1
-end)
---[[
-function Dislodgeable:GetDebugString()
-	local time = GetTime()
 
-	local str = ""
+    self.canbedislodged = true
+    self.caninteractwith = true
+end, nil, {
+    canbedislodged = oncanbedislodged,
+    caninteractwith = oncanbedislodged
+})
 
-	str = str
-	return str
-end
-]]
 function Dislodgeable:SetUp(product, number)
     self.canbedislodged = true
     self.hasbeendislodged = false

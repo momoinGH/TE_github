@@ -51,7 +51,6 @@ end
 local function KeepTarget(inst, target)
     local shouldkeep = inst.components.combat:CanTarget(target) and
         (not inst:HasTag("pet_hound") or inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP))
-    --local onboat = target.components.driver and target.components.driver:GetIsDriving()
     return shouldkeep
 end
 

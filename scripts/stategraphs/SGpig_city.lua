@@ -12,7 +12,7 @@ local actionhandlers =
     ActionHandler(ACTIONS.EQUIP, "pickup"),
     ActionHandler(ACTIONS.ADDFUEL, "pickup"),
     ActionHandler(ACTIONS.TAKEITEM, "pickup"),
-    ActionHandler(ACTIONS.STOCK, "interact"),
+    ActionHandler(ACTIONS.GIVE_SHELF, "interact"),
     ActionHandler(ACTIONS.MANUALEXTINGUISH, "interact")
 }
 
@@ -26,17 +26,14 @@ local events =
     CommonHandlers.OnAttack(),
     CommonHandlers.OnAttacked(true),
     CommonHandlers.OnDeath(),
-    EventHandler("transformnormal",
-        function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("transformNormal") end end),
-    EventHandler("doaction",
-        function(inst, data)
-            --           assert(false,"I think this is not used anymore?")
-        end),
-
-    EventHandler("behappy",
-        function(inst, data)
-            inst.sg:GoToState("happy")
-        end),
+    EventHandler("transformnormal", function(inst)
+        if inst.components.health:GetPercent() > 0 then
+            inst.sg:GoToState("transformNormal")
+        end
+    end),
+    EventHandler("behappy", function(inst, data)
+        inst.sg:GoToState("happy")
+    end),
 }
 
 local states =
@@ -336,47 +333,18 @@ local states =
     },
 
     State {
-        name = "desk_pre",
-        tags = { "desk" },
+        name = "desk",
+        tags = { "idle", "desk" }, --idle不能少，不然移动事件回调无法转到其他阶段
 
         onenter = function(inst)
             inst.separatedesk(inst, false)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("idle_table_pre")
-        end,
-
-        events =
-        {
-            EventHandler("animover", function(inst)
-                inst.keepdesk = true
-                inst.sg:GoToState("desk_idle")
-            end),
-        },
-
-        onexit = function(inst)
-            if inst.keepdesk then
-                inst.keepdesk = nil
-            else
-                inst.separatedesk(inst, true)
-            end
-        end
-    },
-
-    State {
-        name = "desk_idle",
-        tags = { "desk" },
-
-        onenter = function(inst)
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("idle_table_loop", true)
+            inst.AnimState:PushAnimation("idle_table_loop", true)
         end,
 
         onexit = function(inst)
-            if inst.keepdesk then
-                inst.keepdesk = nil
-            else
-                inst.separatedesk(inst, true)
-            end
+            inst.separatedesk(inst, true)
         end
     },
 
@@ -418,8 +386,12 @@ local states =
         timeline =
         {
 
-            TimeEvent(12 * FRAMES, function(inst) if inst:HasTag("guard") then inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/movement/armour/foley") end end),
+            TimeEvent(12 * FRAMES, function(inst)
+                if inst:HasTag("guard") then
+                    inst.SoundEmitter:PlaySound(
+                        "dontstarve_DLC003/movement/armour/foley")
+                end
+            end),
 
             TimeEvent(13 * FRAMES, function(inst) if 1 == 1 then inst.sg:GoToState("idle") end end),
 

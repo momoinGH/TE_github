@@ -47,7 +47,7 @@ local function fn()
     inst.components.pickable.quickpick = true
     inst.components.pickable.wildfirestarter = true
 
-    inst:DoTaskInTime(1, onpickedfn)
+    inst:DoTaskInTime(1, inst.Remove)
 
     MakeSmallBurnable(inst)
     MakeSmallPropagator(inst)

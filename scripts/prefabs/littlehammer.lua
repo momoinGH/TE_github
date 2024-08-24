@@ -5,10 +5,6 @@ local assets =
     Asset("INV_IMAGE", "ballpein_hammer"),
 }
 
-local function onfinished(inst)
-    inst:Remove()
-end
-
 local LITTLE_HAMMER_DAMAGE = 34 * 0.3
 local LITTLE_HAMMER_USES = 10
 
@@ -21,6 +17,16 @@ end
 local function onunequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
+end
+
+local function TargetCheckFn(inst, doer, target)
+    return target:HasTag("dislodgeable") and not doer.replica.rider:IsRiding()
+end
+
+local function OnUse(inst, doer, target)
+    inst.components.finiteuses:Use(1)
+    target.components.dislodgeable:Dislodge(doer)
+    return true
 end
 
 local function fn(Sim)
@@ -39,11 +45,18 @@ local function fn(Sim)
 
     inst:AddTag("ballpein_hammer")
 
+    inst:AddComponent("tropical_consumable")
+    inst.components.tropical_consumable.state = "tap"
+    inst.components.tropical_consumable.targetCheckFn = TargetCheckFn
+    inst.components.tropical_consumable.str = "DISLODGE"
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst.components.tropical_consumable.onUseFn = OnUse
 
     inst.components.floater:SetBankSwapOnFloat(true, -10, { sym_build = "swap_ballpein_hammer" })
 
@@ -57,7 +70,7 @@ local function fn(Sim)
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(LITTLE_HAMMER_USES)
     inst.components.finiteuses:SetUses(LITTLE_HAMMER_USES)
-    inst.components.finiteuses:SetOnFinished(onfinished)
+    inst.components.finiteuses:SetOnFinished(inst.Remove)
 
     inst:AddComponent("dislodger")
 

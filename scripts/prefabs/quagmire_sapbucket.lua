@@ -3,6 +3,22 @@ local assets =
     Asset("ANIM", "anim/quagmire_sapbucket.zip"),
 }
 
+local function TargetCheck(inst, doer, target)
+    return target:HasTag("tappable") and not target:HasTag("tapped") and not target:HasTag("stump")
+end
+
+local function ConsumableState(inst, doer)
+    return doer:HasTag("quagmire_fasthands") and "domediumaction" or "dolongaction"
+end
+
+local function OnUse(inst, doer, target)
+    if target.components.sappy then
+        target.components.sappy:Tap(inst)
+        return true
+    end
+    return false
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -17,11 +33,18 @@ local function fn()
     inst.AnimState:SetBuild("quagmire_sapbucket")
     inst.AnimState:PlayAnimation("idle")
 
+    inst:AddComponent("tropical_consumable")
+    inst.components.tropical_consumable.targetCheckFn = TargetCheck
+    inst.components.tropical_consumable.state = ConsumableState
+    inst.components.tropical_consumable.str = "TAPSUGARTREE"
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst.components.tropical_consumable.onUseFn = OnUse
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "quagmire_sapbucket"

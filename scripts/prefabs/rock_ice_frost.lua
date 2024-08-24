@@ -178,12 +178,8 @@ local function OnWorked(inst, worker, workleft)
                 local penguin = SpawnPrefab("penguin")
                 local bolha = SpawnPrefab("splash")
                 if bolha then bolha.Transform:SetPosition(inst.Transform:GetWorldPosition()) end
-
-
-
                 if penguin then
                     penguin.Transform:SetPosition(inst.Transform:GetWorldPosition())
-                    penguin.sg:GoToState("jumper_attack", v)
                 end
             end
         end

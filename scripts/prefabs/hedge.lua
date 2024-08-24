@@ -150,7 +150,6 @@ local function fn()
 
     inst.AnimState:SetTime(math.random() * 2)
 
-    inst:AddComponent("interactions")
     inst:AddComponent("inspectable")
     inst:AddComponent("lootdropper")
 
@@ -203,7 +202,6 @@ local function fn1()
 
     inst.AnimState:SetTime(math.random() * 2)
 
-    inst:AddComponent("interactions")
     inst:AddComponent("inspectable")
     inst:AddComponent("lootdropper")
 
@@ -256,7 +254,6 @@ local function fn2()
 
     inst.AnimState:SetTime(math.random() * 2)
 
-    inst:AddComponent("interactions")
     inst:AddComponent("inspectable")
     inst:AddComponent("lootdropper")
 

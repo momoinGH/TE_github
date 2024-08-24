@@ -532,7 +532,6 @@ local function chop_down_tree(inst, chopper)
 
 	inst:DoTaskInTime(.4, function()
 		local sz = (inst.components.growable and inst.components.growable.stage > 2) and .5 or .25
-		--		GetPlayer().components.playercontroller:ShakeCamera(inst, "FULL", 0.25, 0.03, sz, 6)
 	end)
 
 	RemovePhysicsColliders(inst)
@@ -863,7 +862,8 @@ local function makefn(build, stage, data)
 		inst:AddTag("jungletree")
 		inst:AddTag("plant")
 		inst:AddTag("twiggytreesw")
-
+        inst:AddTag("spyable")
+		
 		if build == "rot" then
 			inst:AddTag("rotten")
 			minimap:SetIcon("rainforesttree_rot.png")

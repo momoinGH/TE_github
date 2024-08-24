@@ -84,7 +84,7 @@ local function hurricane(Sim)
 end
 
 return Prefab("wave_shimmer", shallowfn, assets),
-	Prefab("common/fx/wave_shimmer_med", medfn, assets),
-	Prefab("common/fx/wave_shimmer_deep", deepfn, assets),
-	Prefab("common/fx/wave_shimmer_flood", floodfn, assets),
-	Prefab("common/fx/wave_shimmer_hurricane", hurricane, assets)
+	Prefab("wave_shimmer_med", medfn, assets),
+	Prefab("wave_shimmer_deep", deepfn, assets),
+	Prefab("wave_shimmer_flood", floodfn, assets),
+	Prefab("wave_shimmer_hurricane", hurricane, assets)

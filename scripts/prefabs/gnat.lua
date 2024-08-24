@@ -29,7 +29,7 @@ local function keeptargetfn(inst, target)
 		and target.components.health
 		and not target.components.health:IsDead()
 		and not (inst.components.follower and inst.components.follower.leader == target)
-		and not (inst.components.follower and inst.components.follower.leader == GetPlayer() and target:HasTag("companion"))
+		and not (inst.components.follower and inst.components.follower.leader and inst.components.follower.leader:HasTag("player") and target:HasTag("companion"))
 end
 
 local function NormalRetarget(inst)
@@ -39,7 +39,7 @@ local function NormalRetarget(inst)
 		function(guy)
 			if inst.components.combat:CanTarget(guy)
 				and not (inst.components.follower and inst.components.follower.leader == guy)
-				and not (inst.components.follower and inst.components.follower.leader == GetPlayer() and guy:HasTag("companion")) then
+				and not (inst.components.follower and inst.components.follower.leader and inst.components.follower.leader:HasTag("player") and guy:HasTag("companion")) then
 				return (guy:HasTag("character") and not guy:HasTag("monster"))
 			end
 		end, nil, notags)
@@ -84,7 +84,7 @@ local function stopinfesttest(inst)
 	end
 end
 
-local function makehome(act)
+local function makehome(inst,act)
 	local home = SpawnPrefab("gnatmound")
 	local pos = Vector3(act.doer.Transform:GetWorldPosition())
 	home.Transform:SetPosition(pos.x, pos.y, pos.z)

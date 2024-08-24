@@ -291,8 +291,6 @@ local function fn(Sim)
     inst.components.trader:SetAcceptTest(ShouldAcceptItem)
     inst.components.trader.onaccept = OnGetItemFromPlayer
 
-    inst:AddComponent("interactions")
-
     resetArt(inst)
     refreshArt(inst)
 

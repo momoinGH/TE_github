@@ -16,33 +16,6 @@ local function growtree(inst)
 end
 
 local function plant(inst, growtime)
-    --[[if not SaveGameIndex:IsModeShipwrecked() then
-        inst.AnimState:PlayAnimation("idle_planted")
-        inst.AnimState:PushAnimation("idle_planted")
-        inst.AnimState:PushAnimation("idle_planted")
-        inst.AnimState:PushAnimation("idle_planted")
-        inst.AnimState:PushAnimation("death", false)
-        inst:ListenForEvent("animqueueover", function()
-            local player = GetPlayer()
-            if player and player.components.talker then
-                player.components.talker:Say(GetString(player.prefab, "ANNOUNCE_OTHER_WORLD_PLANT"))
-            end
-            local time_to_erode = 4
-            local tick_time = TheSim:GetTickTime()
-            inst:StartThread( function()
-                local ticks = 0
-                while ticks * tick_time < time_to_erode do
-                    local erode_amount = ticks * tick_time / time_to_erode
-                    inst.AnimState:SetErosionParams( erode_amount, 0.1, 1.0 )
-                    ticks = ticks + 1
-                    Yield()
-                end
-                inst:Remove()
-            end)
-        end)
-        return
-    end]]
-
     inst:RemoveComponent("inventoryitem")
     inst:RemoveComponent("locomotor")
     RemovePhysicsColliders(inst)

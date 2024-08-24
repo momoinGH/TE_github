@@ -1615,7 +1615,6 @@ local function makefn(build_interiors, dungeonname)
         inst.dungeonname = dungeonname
 
         inst:AddComponent("hackable")
-        inst.components.hackable:SetUp()
         inst.components.hackable.onhackedfn = onhackedfn
         inst.components.hackable.hacksleft = TUNING.RUINS_ENTRANCE_VINES_HACKS
         inst.components.hackable.maxhacks = TUNING.RUINS_ENTRANCE_VINES_HACKS

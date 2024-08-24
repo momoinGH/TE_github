@@ -12,11 +12,12 @@ modimport "modmain/common/components/inventoryitem"
 modimport "modmain/common/components/walkableplatformplayer"
 modimport "modmain/common/components/playeractionpicker"
 
-
 modimport "modmain/common/prefabs/oceanfishdef"
 modimport "modmain/common/prefabs/allplayers"
 modimport "modmain/common/prefabs/world"
 
+
+----------------------------------------------------------------------------------------------------
 
 -- TODO 可以换个写法吗？
 local function AoeSpellCastSpellBefore(self)
@@ -111,10 +112,6 @@ end)
 ----------------------------------------------------------------------------------------------------
 -- 不会落水
 local function DrownableShouldDrownBefore(self)
-    if self.inst.components.driver then
-        return { false }, true
-    end
-
     local x, y, z = self.inst.Transform:GetWorldPosition()
     if #TheSim:FindEntities(x, y, z, 30, { "interior_center" }) > 0 then
         return { false }, true
@@ -148,42 +145,6 @@ end)
 AddComponentPostInit("groundpounder", function(self)
     table.insert(self.noTags, "groundpoundimmune")
 end)
-----------------------------------------------------------------------------------------------------
--- 淘气值表
-
-NAUGHTY_VALUE["lightflier"] = 1
-NAUGHTY_VALUE["dustmoth"] = 4
-NAUGHTY_VALUE["friendlyfruitfly"] = 20
-NAUGHTY_VALUE["ballphin"] = 2
-NAUGHTY_VALUE["toucan"] = 1
-NAUGHTY_VALUE["parrot"] = 2
-NAUGHTY_VALUE["parrot_pirate"] = 6
-NAUGHTY_VALUE["seagull"] = 1
-NAUGHTY_VALUE["crab"] = 1
-NAUGHTY_VALUE["solofish"] = 2
-NAUGHTY_VALUE["swordfish"] = 4
-NAUGHTY_VALUE["whale_white"] = 6
-NAUGHTY_VALUE["whale_blue"] = 7
-NAUGHTY_VALUE["jellyfish_planted"] = 1
-NAUGHTY_VALUE["rainbowjellyfish_planted"] = 1
-NAUGHTY_VALUE["ox"] = 4
-NAUGHTY_VALUE["lobster_land"] = 2
-NAUGHTY_VALUE["primeape"] = 2
-NAUGHTY_VALUE["doydoy"] = 8
-NAUGHTY_VALUE["twister_seal"] = 50
-NAUGHTY_VALUE["glowfly"] = 1
-NAUGHTY_VALUE["pog"] = 2
-NAUGHTY_VALUE["pangolden"] = 4
-NAUGHTY_VALUE["kingfisher"] = 2
-NAUGHTY_VALUE["quagmire_pigeon"] = 1
-NAUGHTY_VALUE["dungbeetle"] = 3
-NAUGHTY_VALUE["piko"] = 1
-NAUGHTY_VALUE["piko_orange"] = 2
-NAUGHTY_VALUE["hippopotamoose"] = 4
-NAUGHTY_VALUE["mandrakeman"] = 3
-NAUGHTY_VALUE["peagawk"] = 3
-NAUGHTY_VALUE["zeb"] = 2
-NAUGHTY_VALUE["chicken"] = 3
 
 
 ----------------------------------------------------------------------------------------------------
@@ -282,10 +243,6 @@ AddPrefabPostInit("saltrock", function(inst)
 
     inst:AddComponent("mealable")
     inst.components.mealable:SetType("salt")
-end)
-
-AddPrefabPostInit("spice_salt", function(inst)
-    inst:AddTag("salty")
 end)
 
 ----------------------------------------------------------------------------------------------------
@@ -440,16 +397,6 @@ for _, v in ipairs({
         inst:AddTag("quebraonda")
     end)
 end
-
-----------------------------------------------------------------------------------------------------
--- 修船
-AddPrefabPostInit("sewing_tape", function(inst)
-    inst:AddTag("boatrepairkit")
-
-    if not TheWorld.ismastersim then return end
-
-    inst:AddComponent("interactions")
-end)
 
 ----------------------------------------------------------------------------------------------------
 
@@ -817,3 +764,10 @@ AddPrefabPostInit("farm_plant_randomseed", function(inst)
         end
     end)
 end)
+
+----------------------------------------------------------------------------------------------------
+AddComponentPostInit("oar", function(self, inst)
+    inst:AddTag("oar") --科雷真抠门，桨连个自己的标签也没有
+end)
+
+----------------------------------------------------------------------------------------------------

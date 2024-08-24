@@ -30,22 +30,9 @@ local function TurnOff(inst, instant)
 end
 
 local function TurnOn(inst, instant)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado then
-		local fx = SpawnPrefab("shock_machines_fx")
-		if fx then
-			local pt = inst:GetPosition()
-			fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-		end
-		if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-		inst.on = false
-		return
-	end
 	inst.on = true
-	local randomizedStartTime = POPULATING
 	inst.components.fueled:StartConsuming()
 	inst:AddTag("prevents_hayfever")
-
 
 	if instant then
 		inst.sg:GoToState("idle_on")
@@ -133,18 +120,6 @@ local function onbuilt(inst)
 end
 
 local function ontakefuelfn(inst)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado then
-		local fx = SpawnPrefab("shock_machines_fx")
-		if fx then
-			local pt = inst:GetPosition()
-			fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-		end
-		if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-		inst.on = false
-		TurnOff(inst)
-		return
-	end
 	inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/machine_fuel")
 end
 
@@ -214,14 +189,6 @@ local function fn()
 
 	return inst
 end
-
-local function OnHit(inst, dist)
-	inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/firesupressor_impact")
-	-- SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst:GetPosition():Get())	
-	inst:Remove()
-end
-
-
 
 return Prefab("basefan", fn, assets, prefabs),
 	MakePlacer("basefan_placer", "sprinkler_placement", "sprinkler_placement", "idle", true, nil, nil, 1.55)

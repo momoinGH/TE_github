@@ -21,7 +21,7 @@ local prefabs =
 
 
 function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
-					  random_angle)
+	random_angle)
 	wavePrefab = wavePrefab or "rogue_wave"
 	totalAngle = math.clamp(totalAngle, 1, 360)
 
@@ -265,4 +265,4 @@ local function shadowfn(Sim)
 end
 
 return Prefab("firerain", firerainfn, assets, prefabs),
-	Prefab("common/shipwrecked/firerainshadow", shadowfn, assets, prefabs)
+	Prefab("shipwrecked/firerainshadow", shadowfn, assets, prefabs)

@@ -129,7 +129,7 @@ local function harassPlayer(inst)
             item = target.components.inventory:FindItem(function(item) return inst.components.eater:CanEat(item) end)
         end
 
-        if item and inst:GetDistanceSqToInst(target) < FOLLOWPLAYER_DIST * FOLLOWPLAYER_DIST then --  and not (target and target.components.driver and target.components.driver:GetIsDriving()) then
+        if item and inst:GetDistanceSqToInst(target) < FOLLOWPLAYER_DIST * FOLLOWPLAYER_DIST then
             return target
         end
     end

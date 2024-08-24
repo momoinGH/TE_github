@@ -26,10 +26,10 @@ local function giveitems(inst, data)
 end
 
 local function HeatFn(inst, observer)
-    if GetPlayer().components.temperature:GetCurrent() < 15 then
+    if observer.components.temperature:GetCurrent() < 15 then
         return 100
     end
-    if GetPlayer().components.temperature:GetCurrent() > TUNING.OVERHEAT_TEMP - 10 then
+    if observer.components.temperature:GetCurrent() > TUNING.OVERHEAT_TEMP - 10 then
         return -100
     end
     return 0

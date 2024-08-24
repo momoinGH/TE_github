@@ -184,7 +184,8 @@ local function fn()
     inst:AddTag("tree")
     inst:AddTag("tubertree")
     inst:AddTag("plant")
-
+    inst:AddTag("spyable")
+    
     inst.AnimState:SetBuild("tuber_tree_build")
     inst.AnimState:SetBank("tubertree")
 

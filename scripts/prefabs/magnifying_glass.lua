@@ -26,10 +26,28 @@ local function onfinished(inst)
 	inst:Remove()
 end
 
+local function TargetCheck(inst, doer, target)
+	return (target:HasTag("spyable") or target:HasTag("secret_room")) and not doer.replica.rider:IsRiding()
+end
+
+local function OnUse(inst, doer, target)
+	if target:HasTag("secret_room") then
+		target.Investigate(doer)
+		return true
+	end
+
+	if target.components.mystery then
+		target.components.mystery:Investigate(doer)
+		inst.components.finiteuses:Use(1)
+		return true
+	end
+end
+
 local function fn(Sim)
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
+
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
 	MakeInventoryPhysics(inst)
@@ -42,11 +60,18 @@ local function fn(Sim)
 
 	inst:AddTag("magnifying_glass")
 
+	inst:AddComponent("tropical_consumable")
+	inst.components.tropical_consumable.targetCheckFn = TargetCheck
+	inst.components.tropical_consumable.state = "investigate"
+	inst.components.tropical_consumable.str = "SPY"
+
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
 		return inst
 	end
+
+	inst.components.tropical_consumable.onUseFn = OnUse
 
 	inst.components.floater:SetBankSwapOnFloat(true, -10, { sym_build = "swap_hand_lens" })
 
@@ -56,14 +81,11 @@ local function fn(Sim)
 
 	inst.components.finiteuses:SetMaxUses(uses)
 	inst.components.finiteuses:SetUses(uses)
-	inst.components.finiteuses:SetConsumption(ACTIONS.INVESTIGATEGLASS, 1)
 	inst.components.finiteuses:SetOnFinished(onfinished)
 	-------
 	inst:AddComponent("weapon")
 	inst.components.weapon:SetDamage(MAGNIFYING_GLASS_DAMAGE)
 
-	inst:AddComponent("tool")
-	inst.components.tool:SetAction(ACTIONS.INVESTIGATEGLASS)
 	-------
 	inst:AddComponent("inspectable")
 	inst:AddComponent("inventoryitem")

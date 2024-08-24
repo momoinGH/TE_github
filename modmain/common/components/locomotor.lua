@@ -87,7 +87,14 @@ local function PlayerSetMotorSpeedBefore(self, speed)
     local boat = self.inst:GetCurrentPlatform()
     if boat and boat:HasTag("shipwrecked_boat") then
         boat.Transform:SetRotation(self.inst:GetRotation())
-        boat.Physics:SetMotorVel(speed * boat.components.shipwreckedboat:GetSpeedMutliplier(), 0, 0)
+        --算上零件的移速加成
+        speed = speed * boat.components.shipwreckedboat:GetSpeedMutliplier()
+        --算上手上桨的移速加成
+        local equip = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+        if equip and equip.components.oar then
+            speed = speed * (equip.components.oar.force + 1)
+        end
+        boat.Physics:SetMotorVel(speed, 0, 0)
         return nil, true
     end
 end

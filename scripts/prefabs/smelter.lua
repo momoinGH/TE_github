@@ -84,21 +84,6 @@ local function playJoggleAnim(inst)
 end
 
 local function onopen(inst)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado then
-		local fx = SpawnPrefab("shock_machines_fx")
-		if fx then
-			local pt = inst:GetPosition()
-			fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-		end
-		if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-		if inst.components.container then
-			inst.components.container:DropEverything()
-			inst.components.container:Close()
-		end
-		inst.AnimState:PlayAnimation("idle_empty")
-		return
-	end
 	if not inst:HasTag("burnt") then
 		--	inst.AnimState:PlayAnimation("smelting_pre")
 		inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/smelter/move_3", "open")
@@ -350,5 +335,5 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("common/smelter", fn, assets, prefabs),
+return Prefab("smelter", fn, assets, prefabs),
 	MakePlacer("smetler_placer", "smelter", "smelter", "idle_empty")

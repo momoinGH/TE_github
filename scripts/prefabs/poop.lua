@@ -164,7 +164,6 @@ local function fn()
     inst.components.fertilizer:SetNutrients(FERTILIZER_DEFS.poop.nutrients)
 
     inst:AddComponent("smotherer")
-    inst:AddComponent("interactions")
     inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
     inst.components.inventoryitem:SetOnPickupFn(OnPickup)
     inst.components.inventoryitem:SetOnPutInInventoryFn(OnPickup2)

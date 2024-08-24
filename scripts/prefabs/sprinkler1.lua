@@ -104,17 +104,7 @@ local function ontakefuelfn(inst)
 end
 
 local function TurnOn(inst)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado then
-		local fx = SpawnPrefab("shock_machines_fx")
-		if fx then
-			local pt = inst:GetPosition()
-			fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-		end
-		if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-		inst.on = false
-		return
-	end
+
 	inst:AddTag("shelter")
 	inst.on = true
 	inst.components.fueled:StartConsuming()
@@ -200,18 +190,6 @@ local function OnFuelSectionChange(old, new, inst)
 end
 
 local function ontakefuelfn(inst)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado then
-		local fx = SpawnPrefab("shock_machines_fx")
-		if fx then
-			local pt = inst:GetPosition()
-			fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-		end
-		if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-		inst.on = false
-		TurnOff(inst)
-		return
-	end
 	inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/machine_fuel")
 	local fuelAnim = 0
 	if inst and inst.components.fueled.currentfuel / inst.components.fueled.maxfuel <= 0.01 then

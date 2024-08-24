@@ -2229,8 +2229,9 @@ local function SpawnCritter(inst, critter, lootdropper, pt, delay)
 	inst:DoTaskInTime(delay, function()
 		SpawnPrefab("collapse_small").Transform:SetPosition(pt:Get())
 		local spawn = lootdropper:SpawnLootPrefab(critter, pt)
-		if spawn and spawn.components.combat then
-			spawn.components.combat:SetTarget(GetPlayer())
+		local player = FindClosestPlayerInRangeSq(pt.x, pt.y, pt.z, 900)
+		if spawn and spawn.components.combat and player then
+			spawn.components.combat:SetTarget(player)
 		end
 	end)
 end
@@ -2348,11 +2349,6 @@ local function StartSpinning(inst)
 end
 
 local function ShouldAcceptItem(inst, item)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado then
-		return false
-	end
-
 	if not inst.busy and item.prefab == "dubloon" then
 		return true
 	else
@@ -2368,16 +2364,6 @@ local function OnGetItemFromPlayer(inst, giver, item)
 end
 
 local function OnRefuseItem(inst, item)
-	local alagado = GetClosestInstWithTag("mare", inst, 10)
-	if alagado then
-		local fx = SpawnPrefab("shock_machines_fx")
-		if fx then
-			local pt = inst:GetPosition()
-			fx.Transform:SetPosition(pt.x, pt.y, pt.z)
-		end
-		if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
-		return
-	end
 end
 
 local function OnLoad(inst, data)
@@ -2399,14 +2385,6 @@ local function OnSave(inst, data)
 	data.prize = inst.prize
 	data.prizevalue = inst.prizevalue
 end
-
---local function OnFloodedStart(inst)
---inst.components.payable:Disable()
---end
-
---local function OnFloodedEnd(inst)
---inst.components.payable:Enable()
---end
 
 local function CalcSanityAura(inst, observer)
 	return -(TUNING.SANITYAURA_MED * (1 + (inst.coins / 100)))
@@ -2465,19 +2443,8 @@ local function CreateSlotMachine(name)
 		inst.components.trader.onaccept = OnGetItemFromPlayer
 		inst.components.trader.onrefuse = OnRefuseItem
 
-		--inst:AddComponent("payable")
-		--	inst.components.payable:SetAcceptTest(ShouldAcceptItem)
-		--inst.components.payable.onaccept = OnGetItemFromPlayer
-		--inst.components.payable.onrefuse = OnRefuseItem
-
 		inst:AddComponent("sanityaura")
 		inst.components.sanityaura.aurafn = CalcSanityAura
-
-		--inst:AddComponent("floodable")
-		--inst.components.floodable.onStartFlooded = --OnFloodedStart
-		--inst.components.floodable.onStopFlooded = --OnFloodedEnd
-		--inst.components.floodable.floodEffect = --"shock_machines_fx"
-		--inst.components.floodable.floodSound = --"dontstarve_DLC002/creatures/jellyfish/electric_land"
 
 		inst:SetStateGraph("SGslotmachine")
 

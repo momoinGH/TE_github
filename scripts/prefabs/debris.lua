@@ -1406,7 +1406,7 @@ else
                     end)
                 end
                 inst:DoTaskInTime(.3, function()
-                    data.player.sg:GoToState("sleep_intro")
+                    -- data.player.sg:GoToState("sleep_intro")
                 end)
                 inst:DoTaskInTime(.4, function()
                     inst.sg:GoToState("spawn_pre")

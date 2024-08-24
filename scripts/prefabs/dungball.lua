@@ -33,18 +33,6 @@ local function onpickup(inst, owner)
             if inst.components.lootdropper then
                 inst.components.lootdropper:SpawnLootPrefab(v)
             end
-            --[[
-			item = SpawnPrefab(v)
-            item.Transform:SetPosition(inst.Transform:GetWorldPosition())
-            if item.components.inventoryitem and item.components.inventoryitem.ondropfn then
-                item.components.inventoryitem.ondropfn(item)
-            end
-            if inst.lootaggro[i] and item.components.combat and GetPlayer() then
-                if not (GetPlayer():HasTag("spiderwhisperer") and item:HasTag("spider")) and not (GetPlayer():HasTag("monster") and item:HasTag("spider")) then
-                    item.components.combat:SuggestTarget(GetPlayer())
-                end
-            end
-            ]]
         end
     end
     inst.AnimState:PlayAnimation("break")

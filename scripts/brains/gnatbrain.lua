@@ -20,28 +20,6 @@ end
 local function infestplayer(inst, brain)
     local target = GetClosestInstWithTag("player", inst, 1)
     if target and not inst.infesting then
-        --[[	
-        inst.chasingtargettask = inst:DoPeriodicTask(0.2,function()
-                if inst:GetDistanceSqToInst(target) > AGRO_STOP_DIST*AGRO_STOP_DIST then
-
-                    dumptable(brain.pendingtasks,1,1,1)
-
-
-                    inst:ClearBufferedAction()
-                    inst.components.locomotor:Stop()
-                    inst.sg:GoToState("idle")
-
-                    if inst.chasingtargettask then
-                        inst.chasingtargettask:Cancel()
-                        inst.chasingtargettask = nil
-                    end
-
-                    -- THIS IS GROSS.. why does the "infest" DoAction not get it's OnFail event?!
-                    brain:Stop()
-                    brain:Start()
-                end
-            end)
-]]
         return BufferedAction(inst, target, ACTIONS.INFEST)
     end
     return false

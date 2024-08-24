@@ -7,6 +7,17 @@ local function SetPlayerCenter(inst, platform)
         inst.Physics:Stop()
         inst.components.locomotor:Stop()
         inst.Transform:SetPosition(platform.Transform:GetWorldPosition())
+
+        if platform.components.container then
+            platform.components.container.canbeopened = true
+            platform:DoTaskInTime(0, function()
+                if inst:IsValid() and not platform.components.container:IsOpen() then
+                    platform.components.container:Open(inst)
+                end
+            end)
+        end
+
+        platform.components.shipwreckedboat:OnPlayerMounted(inst)
     end
 end
 
@@ -17,15 +28,6 @@ local function GetOnPlatformBefore(self, platform)
     if TheWorld.ismastersim then
         self.inst:DoTaskInTime(0.5, SetPlayerCenter, platform)
         -- platform.Follower:FollowSymbol(self.inst.GUID, "foot") --船动人就会动，会导致一直移动
-        if platform.components.container then
-            platform.components.container.canbeopened = true
-            platform:DoTaskInTime(0, function()
-                if self.inst:IsValid() and not platform.components.container:IsOpen() then
-                    platform.components.container:Open(self.inst)
-                end
-            end)
-        end
-        platform.components.shipwreckedboat:OnPlayerMounted(self.inst)
     else
         -- TODO 如果开启了延迟补偿，强制关闭。因为延迟补偿会让船的运动变得很奇怪，或者客机发送rpc让船移动？
         if Profile:GetMovementPredictionEnabled() then

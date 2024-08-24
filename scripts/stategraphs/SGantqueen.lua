@@ -169,24 +169,14 @@ local states =
             TimeEvent(25 * FRAMES, function(inst) TheWorld:PushEvent("antqueenbattle") end),
             TimeEvent(25 * FRAMES, function(inst)
                 local pt = inst:GetPosition()
-                local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 25, { "player" })
-                for k, item in pairs(ents) do
-                    local head = item.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+                for k, player in pairs(TheSim:FindEntities(pt.x, pt.y, pt.z, 25, { "player" })) do
+                    local head = player.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
                     if head and head.prefab == "earmuffshat" then
                         return
                     end
-                    item:PushEvent("sanity_stun", { duration = 3.5 })
+                    player:PushEvent("sanity_stun", { duration = 3.5 })
                 end
             end),
-
-
-
-
-            --			ThePlayer:PushEvent("sanity_stun", {duration = 3.5}) end),
-            --            TimeEvent(27*FRAMES, function(inst) TheMixer:PushMix("mute") end),
-            -- print("mix_on")
-            --            TimeEvent(23*FRAMES*4, function(inst) TheMixer:PopMix("mute") end),
-            -- print("mix_off")
         },
 
         events =

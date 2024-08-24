@@ -462,7 +462,7 @@ function FN.TargetTest(inst, target)
         return false
     end
 
-    local ismonster = target:HasTag("monster")
+    local ismonster = target:HasTag("monster") or target:HasTag("hostile")
     if ismonster and not TheNet:GetPVPEnabled() and
         ((target.components.follower and target.components.follower.leader ~= nil and
             target.components.follower.leader:HasTag("player")) or target.bedazzled) then

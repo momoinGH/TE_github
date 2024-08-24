@@ -84,8 +84,6 @@ local function fn()
     inst.components.workable:SetWorkLeft(1)
     inst.components.workable:SetOnFinishCallback(onhacked)
 
-    inst:AddComponent("interactions")
-
     return inst
 end
 

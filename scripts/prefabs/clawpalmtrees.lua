@@ -376,7 +376,6 @@ local function chop_down_tree(inst, chopper)
 
 	inst:DoTaskInTime(.4, function()
 		local sz = (inst.components.growable and inst.components.growable.stage > 2) and .5 or .25
-		--		GetPlayer().components.playercontroller:ShakeCamera(inst, "FULL", 0.25, 0.03, sz, 6)
 	end)
 
 	RemovePhysicsColliders(inst)
@@ -757,6 +756,7 @@ local function makefn(build, stage, data)
 		inst:AddTag("plainstree")
 		inst:AddTag("plant")
 		inst:AddTag("twiggytreesw")
+		inst:AddTag("spyable")
 
 		if build == "rot" then
 			inst:AddTag("rotten")
@@ -803,15 +803,7 @@ local function makefn(build, stage, data)
 		inst.components.growable:StartGrowing()
 
 		inst.growfromseed = handler_growfromseed
-		--[[
-		inst:AddComponent("blowinwindgust")
-		inst.components.blowinwindgust:SetWindSpeedThreshold(TUNING.JUNGLETREE_WINDBLOWN_SPEED)
-		inst.components.blowinwindgust:SetDestroyChance(TUNING.JUNGLETREE_WINDBLOWN_FALL_CHANCE)
-		inst.components.blowinwindgust:SetGustStartFn(OnGustStart)
-		--inst.components.blowinwindgust:SetGustEndFn(OnGustEnd)
-		inst.components.blowinwindgust:SetDestroyFn(OnGustFall)
-		inst.components.blowinwindgust:Start()
-]]
+
 		inst:AddComponent("mystery")
 		---------------------
 		--PushSway(inst)
