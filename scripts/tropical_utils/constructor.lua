@@ -192,6 +192,7 @@ end
 ---在增强游戏已有brain时使用，防止使用的brain被其他mod不小心初始化了
 ---@param requirePath string 调用require的参数
 ---@param initFn function|nil 如果原brain在构造器里初始化了一些属性，可以在该函数里初始化
+---@return Brain brain
 function FN.CopyBrainFn(requirePath, initFn)
     local NewBrain = Class(Brain, function(self, inst)
         Brain._ctor(self, inst)
@@ -277,7 +278,7 @@ end
 
 function FN.FullHelmOnEquip(owner)
     if owner:HasTag("player") then
-        owner.AnimState:Hide("HAT")
+        owner.AnimState:Show("HAT")
         owner.AnimState:Hide("HAIR_HAT")
         owner.AnimState:Hide("HAIR_NOHAT")
         owner.AnimState:Hide("HAIR")
@@ -292,7 +293,7 @@ function FN.FullHelmOnEquip(owner)
         owner.AnimState:HideSymbol("beard")
         owner.AnimState:HideSymbol("cheeks")
 
-        owner.AnimState:UseHeadHatExchange(true)
+        -- owner.AnimState:UseHeadHatExchange(true)
     else
         owner.AnimState:Show("HAT")
         owner.AnimState:Hide("HAIR_HAT")
@@ -315,7 +316,7 @@ function FN.FullHelmOnUnEquip(inst, owner)
 end
 
 ---添加Actions，写个方法省事点，需要env
----@param data table|nil
+---@param data table
 ---@param id string
 ---@param str string|fn
 ---@param fn function
@@ -395,13 +396,13 @@ function FN.AddScrapbookWiki(type, data)
     local PANEL_HEIGHT = 530
     Utils.FnDecorator(ScrapbookScreen, "MakeSideBar", nil, function(retTab, self)
         local colors = {
-            { 114 / 255, 56 / 255,  56 / 255 },
-            { 111 / 255, 85 / 255,  47 / 255 },
+            { 114 / 255, 56 / 255, 56 / 255 },
+            { 111 / 255, 85 / 255, 47 / 255 },
             { 137 / 255, 126 / 255, 89 / 255 },
-            { 95 / 255,  123 / 255, 87 / 255 },
+            { 95 / 255, 123 / 255, 87 / 255 },
             { 113 / 255, 127 / 255, 126 / 255 },
-            { 74 / 255,  84 / 255,  99 / 255 },
-            { 79 / 255,  73 / 255,  107 / 255 },
+            { 74 / 255, 84 / 255, 99 / 255 },
+            { 79 / 255, 73 / 255, 107 / 255 },
         }
 
         local button = { name = type, filter = type }

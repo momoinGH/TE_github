@@ -1062,3 +1062,6 @@ TheWorld.minimap.MiniMap:Offset(4, 4)
 for k, v in pairs(getmetatable(ThePlayer.MiniMapEntity).__index) do
     print(k, v);
 end;
+
+--- 熔炉伤害数值显示，一个红色数字下落的动画
+player.HUD:ShowPopupNumber(damage, large and 48 or 32, target:GetPosition(), 40, COLOUR, large)

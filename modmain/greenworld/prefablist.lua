@@ -1,5 +1,4 @@
 PrefabFiles = {
-    "lavaarena_bossboar",
     "lizardman_cave",
     "lizardman",
     "pig_figure.lua",

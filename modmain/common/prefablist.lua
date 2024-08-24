@@ -72,7 +72,6 @@ PrefabFiles =
     "gorge_portal",
     "volcano_altar_pillar",
     "pollen_item",
-    "hatty_piggy_tfc",
     "boarmound",
     "mermhouse_tropical",
     "mermtrader",

@@ -17,8 +17,7 @@ local function Attack(inst)
             if v.components.combat then
                 local damage = 200 + math.sqrt(distsq(vpos, pos)) / radius * 50
                 local weapon = inst.owner.components.inventory and inst.owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-                local stimuli = weapon and weapon.components.weapon and weapon.components.weapon.overridestimulifn
-                v.components.combat:GetAttacked(inst.owner, damage, weapon, stimuli)
+                v.components.combat:GetAttacked(inst.owner, damage, weapon)
                 SpawnPrefab("lavaarena_meteor_splashhit"):SetTarget(v)
             elseif v.components.workable then
                 v.components.workable:Destroy(inst.owner)

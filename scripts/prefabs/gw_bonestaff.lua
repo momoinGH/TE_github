@@ -43,7 +43,7 @@ local function AnimatePigStatue(target)
         end
     end
 
-    local obj = SpawnPrefab("bossboar")
+    local obj = SpawnPrefab("boarrior")
     --    obj:Hide()
     --    TemporarilyRemovePhysics(obj, 15)
     if obj then

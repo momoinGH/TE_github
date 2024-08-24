@@ -40,12 +40,9 @@ local function OnHit(inst, attacker, target)
     if target then
         if inst.prefab == "blowdart_lava2_projectile_explosive" then
             if attacker and attacker.components.combat and attacker.components.combat:CanTarget(target) then
-                target.components.combat:GetAttacked(attacker, 50, inst.components.complexprojectile.owningweapon, nil, { lavaarena_fire = 1 })
+                target.components.combat:GetAttacked(attacker, 50, inst.components.complexprojectile.owningweapon)
             end
-            local fx = SpawnPrefab("explosivehit") --这个特效不会消失，而是留在地图上每次进入加载都会播放一次
-            fx.Transform:SetPosition(target:GetPosition():Get())
-            fx.persists = false
-            fx:DoTaskInTime(5, fx.Remove)
+            SpawnPrefab("explosivehit").Transform:SetPosition(target:GetPosition():Get())
         else
             SpawnPrefab("weaponsparks_piercing"):Setup(attacker, target, inst)
         end

@@ -39,7 +39,6 @@ function EntityScript:GetDisplayName()
     return name
 end;
 
-_G.DAMAGETYPES = { PHYSICAL = 1, MAGIC = 2 }
 _G.DAMAGETYPE_IDS = {}
 for o, p in pairs(_G.DAMAGETYPES) do
     _G.DAMAGETYPE_IDS[p] = o
@@ -48,23 +47,30 @@ end;
 local SpDamageUtil = require("components/spdamageutil")
 
 AddComponentPostInit("combat", function(self)
-    self.damage_override = nil;
-    self.damagetype = nil;
-    self.damagebuffs = { dealt = { dmgtype = {}, stimuli = {}, generic = {} }, recieved = { dmgtype = {}, stimuli = {}, generic = {} } }
+    self.damage_override = nil
+    self.damagetype = nil
+    self.damagebuffs = {
+        dealt = { dmgtype = {}, stimuli = {}, generic = {} },
+        recieved = { dmgtype = {}, stimuli = {}, generic = {} },
+    }
 
-    function self:SetDamageType(q)
-        self.damagetype = q
+    function self:SetDamageType(damagetype)
+        self.damagetype = damagetype
+    end
+
+    function self:HasDamageBuff(recieved, s, buffname)
+        local buff = self.damagebuffs[recieved and "recieved" or "dealt"]
+            [type(buffname) == "number" and "dmgtype" or (type(buffname) == "string" and "stimuli" or "generic")]
+        if not buffname then
+            if buff[s] then return true end
+        else
+            if buff[buffname] and buff[buffname][s] then return true end
+        end
     end;
 
-    function self:HasDamageBuff(r, s, t)
-        local u = self.damagebuffs[r and "recieved" or "dealt"]
-            [type(t) == "number" and "dmgtype" or (type(t) == "string" and "stimuli" or "generic")]
-        if not t then if u[s] then return true end else if u[t] and u[t][s] then return true end end
-    end;
-
-    function self:AddDamageBuff(r, s, v)
-        if not self:HasDamageBuff(r, s) then
-            self.damagebuffs[r and "recieved" or "dealt"].generic[s] = v
+    function self:AddDamageBuff(recieved, buffname, buff)
+        if not self:HasDamageBuff(recieved, buffname) then
+            self.damagebuffs[recieved and "recieved" or "dealt"].generic[buffname] = buff
         end
     end;
 
@@ -420,9 +426,12 @@ AddComponentPostInit("equippable", function(self)
 
     function self:AddDamageTypeBuff(r, w, s, v)
         if not self:HasDamageBuff(r, s, w) then
-            local u = self.damagebuffs[r and "recieved" or "dealt"].dmgtype; if not u[w] then u[w] = {} end; u[w][s] =
-                v; if self:IsEquipped() then
-                local ae = self.inst.components.inventoryitem.owner; if ae.components.combat then
+            local u = self.damagebuffs[r and "recieved" or "dealt"].dmgtype;
+            if not u[w] then u[w] = {} end;
+            u[w][s] = v;
+            if self:IsEquipped() then
+                local ae = self.inst.components.inventoryitem.owner;
+                if ae.components.combat then
                     ae.components.combat:AddDamageTypeBuff(r, w, s, v)
                 end
             end

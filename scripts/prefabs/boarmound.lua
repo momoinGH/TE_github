@@ -16,10 +16,10 @@ SetSharedLootTable('hound_mound_outro',
         { 'houndstooth', 1.00 },
         { 'houndstooth', 1.00 },
         { 'houndstooth', 1.00 },
-        { 'boneshard',   1.00 },
-        { 'boneshard',   1.00 },
-        { 'redgem',      0.01 },
-        { 'bluegem',     0.01 },
+        { 'boneshard', 1.00 },
+        { 'boneshard', 1.00 },
+        { 'redgem', 0.01 },
+        { 'bluegem', 0.01 },
     })
 
 local function GetSpecialHoundChance()
@@ -37,8 +37,7 @@ end
 local function SpawnGuardHound(inst, attacker)
     local prefab =
         (math.random() >= GetSpecialHoundChance() and "hound") or
-        ((TheWorld.state.iswinter or TheWorld.state.isspring) and "nohatty_piggy_tfc") or
-        "nohatty_piggy_tfc"
+        ((TheWorld.state.iswinter or TheWorld.state.isspring) and "boaron") or "boaron"
     local defender = inst.components.childspawner:SpawnChild(attacker, prefab)
     if defender ~= nil and attacker ~= nil and defender.components.combat ~= nil then
         defender.components.combat:SetTarget(attacker)
@@ -76,7 +75,7 @@ local function OnKilled(inst)
 end
 
 local function OnIsSummer(inst, issummer)
-    inst.components.childspawner:SetRareChild("nohatty_piggy_tfc", issummer and 0.2 or 0)
+    inst.components.childspawner:SetRareChild("boaron", issummer and 0.2 or 0)
 end
 
 local function OnHaunt(inst, haunter)
@@ -148,7 +147,7 @@ local function fn()
 
     -------------------
     inst:AddComponent("childspawner")
-    inst.components.childspawner.childname = "nohatty_piggy_tfc"
+    inst.components.childspawner.childname = "boaron"
     inst.components.childspawner:SetRegenPeriod(TUNING.HOUNDMOUND_REGEN_TIME)
     inst.components.childspawner:SetSpawnPeriod(TUNING.HOUNDMOUND_RELEASE_TIME)
     inst.components.childspawner:SetMaxChildren(1)

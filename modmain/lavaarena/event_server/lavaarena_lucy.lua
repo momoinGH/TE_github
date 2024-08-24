@@ -36,7 +36,7 @@ local function OnHit(inst, attacker, target)
 
         if target.components.combat then
             target.components.combat:SetTarget(attacker)
-            target.components.combat:GetAttacked(attacker, 30, inst, nil, { lavaarena_strong = 1 })
+            target.components.combat:GetAttacked(attacker, 30, inst)
         end
     end
 

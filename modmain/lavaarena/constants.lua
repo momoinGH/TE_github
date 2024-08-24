@@ -28,8 +28,6 @@ end
 ---@param damage number|nil
 ---@param weaponspark string|nil
 function InitLavaarenaWeapon(inst, symbol_build, damage, weaponspark)
-    inst:AddComponent("aoespell")
-
     inst:AddComponent("equippable")
     if symbol_build then
         inst.symbol_build = symbol_build
@@ -37,6 +35,8 @@ function InitLavaarenaWeapon(inst, symbol_build, damage, weaponspark)
         inst.components.equippable:SetOnUnequip(OnUnequip)
     end
 
+    inst:AddComponent("lavaarena_equip")
+    inst:AddComponent("aoespell")
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
 
@@ -56,3 +56,4 @@ function InitLavaarenaWeapon(inst, symbol_build, damage, weaponspark)
 end
 
 ----------------------------------------------------------------------------------------------------
+_G.DAMAGETYPES = { PHYSICAL = 1, MAGIC = 2 }

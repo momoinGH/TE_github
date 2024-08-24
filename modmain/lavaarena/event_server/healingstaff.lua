@@ -29,6 +29,8 @@ local function healingstaff_postinit(inst)
     inst.components.weapon:SetRange(10, 20)
     inst.components.weapon:SetProjectile("blossom_projectile")
     inst.components.weapon:SetOnProjectileLaunch(OnProjectileLaunch)
+
+    inst.components.lavaarena_equip.damagetype = DAMAGETYPES.MAGIC
 end
 
 add_event_server_data("lavaarena", "prefabs/healingstaff", {

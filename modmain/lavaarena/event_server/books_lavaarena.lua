@@ -43,6 +43,7 @@ local function SpawnFosilFx(inst, pos)
 
     for i = 1, 13 do
         inst:DoTaskInTime(i * 0.15, function()
+            -- 和lavaarena_fossilizedebris特效什么区别？
             SpawnAt("fossilizing_fx", pos + poses[math.random(#poses)]).Transform:SetScale(.65, .65, .65)
         end)
     end

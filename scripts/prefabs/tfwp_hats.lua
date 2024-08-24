@@ -16,15 +16,6 @@ local function OnEqipHelm(inst, owner)
     end
 end
 
-local function OnEqipCrown(inst, owner)
-    owner.AnimState:Show("HAT")
-    owner.AnimState:OverrideSymbol("swap_hat", "hat_" .. inst._baseBuild, "swap_hat")
-
-    if inst.components.fueled then
-        inst.components.fueled:StartConsuming()
-    end
-end
-
 local function OnUneqipHelm(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_hat")
     owner.AnimState:Hide("HAT")
@@ -41,6 +32,17 @@ local function OnUneqipHelm(inst, owner)
         inst.components.fueled:StopConsuming()
     end
 end
+
+local function OnEqipCrown(inst, owner)
+    owner.AnimState:Show("HAT")
+    owner.AnimState:OverrideSymbol("swap_hat", "hat_" .. inst._baseBuild, "swap_hat")
+
+    if inst.components.fueled then
+        inst.components.fueled:StartConsuming()
+    end
+end
+
+
 
 local function OnUneqipCrown(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_hat")

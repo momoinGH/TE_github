@@ -87,9 +87,9 @@ local battleknight =
 
 local battleboar =
 {
-	[1] = "hatty_piggy_tfc",
+	[1] = "boaron",
 	[2] = "lizardman_tfc",
-	[3] = "hatty_piggy_tfc",
+	[3] = "boaron",
 	[4] = "lizardman_tfc",
 	[5] = "strange_scorpion_tfc",
 }
@@ -108,7 +108,7 @@ local battlelizard =
 
 local battlebossboar =
 {
-	[1] = "hatty_piggy_tfc",
+	[1] = "boaron",
 	[2] = "lizardman_tfc",
 	[3] = "strange_scorpion_tfc",
 	[4] = "spiky_monkey_tfc",
@@ -116,19 +116,19 @@ local battlebossboar =
 	[6] = "strange_scorpion_tfc",
 	[7] = "spiky_turtle_tfc",
 	[8] = "spiky_monkey_tfc",
-	[9] = "bossboarte",
+	[9] = "boarrior",
 }
 
 
 local battlerhinocebros =
 {
-	[1] = "hatty_piggy_tfc",
-	[2] = "hatty_piggy_tfc",
-	[3] = "hatty_piggy_tfc",
+	[1] = "boaron",
+	[2] = "boaron",
+	[3] = "boaron",
 	[4] = "spiky_monkey_tfc",
-	[5] = "hatty_piggy_tfc",
-	[6] = "hatty_piggy_tfc",
-	[7] = "hatty_piggy_tfc",
+	[5] = "boaron",
+	[6] = "boaron",
+	[7] = "boaron",
 	[8] = "spiky_monkey_tfc",
 	[9] = "rhinodrillbros",
 }

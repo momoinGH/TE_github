@@ -652,4 +652,4 @@ CommonStates.AddWalkStates(states,
 
 CommonStates.AddFrozenStates(states)
 
-return StateGraph("bossboarte", states, events, "taunt", actionhandlers)
+return StateGraph("boarrior", states, events, "taunt", actionhandlers)

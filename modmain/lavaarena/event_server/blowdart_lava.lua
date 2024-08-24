@@ -41,7 +41,7 @@ local function OnHit(inst, attacker, target)
     if target then
         if inst.prefab == "blowdart_lava_projectile_alt" then
             if attacker and attacker.components.combat and attacker.components.combat:CanTarget(target) then
-                target.components.combat:GetAttacked(attacker, 20, inst.components.complexprojectile.owningweapon, nil, { lavaarena_strong = 1 })
+                target.components.combat:GetAttacked(attacker, 20, inst.components.complexprojectile.owningweapon)
             end
         end
 

@@ -32,7 +32,7 @@ local function Explode(inst, attacker, target)
     SpawnPrefab("firehit").Transform:SetPosition(target.Transform:GetWorldPosition())
 
     if attacker and attacker.components.combat and target and attacker.components.combat:CanTarget(target) then
-        target.components.combat:GetAttacked(attacker, 75, inst, nil, { lavaarena_fire = 1 })
+        target.components.combat:GetAttacked(attacker, 75, inst)
     end
 
     ClearCharge(inst)
@@ -103,7 +103,7 @@ local function OnHit(inst)
     end
 
     for _, v in ipairs(GetPlayerAttackTarget(inst.owner, 8, nil, inst:GetPosition(), true)) do
-        v.components.combat:GetAttacked(inst.owner, 75, inst.components.complexprojectile.owningweapon, nil, { lavaarena_fire = 1 })
+        v.components.combat:GetAttacked(inst.owner, 75, inst.components.complexprojectile.owningweapon)
     end
 
     inst:Remove()

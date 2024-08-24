@@ -19,7 +19,7 @@ local function OnProjectileLaunch(inst, attacker, target)
     local fx = SpawnPrefab("fireball_hit_fx")
     fx.Transform:SetPosition((attacker:GetPosition() + off):Get())
     fx.AnimState:SetScale(0.8, 0.8)
-end;
+end
 
 local function fireballstaff_postinit(inst)
     InitLavaarenaWeapon(inst, "swap_fireballstaff", 25)
@@ -30,7 +30,8 @@ local function fireballstaff_postinit(inst)
     inst.components.weapon:SetProjectile("fireball_projectile")
     inst.components.weapon:SetOnProjectileLaunch(OnProjectileLaunch)
     inst.components.weapon:SetDamageType(DAMAGETYPES.MAGIC)
-    inst.components.weapon:SetOverrideStimuliFn(function() return "fire" end)
+
+    inst.components.lavaarena_equip.damagetype = DAMAGETYPES.MAGIC
 end
 
 add_event_server_data("lavaarena", "prefabs/fireballstaff", {

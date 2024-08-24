@@ -8,19 +8,19 @@ local assetsBurst =
 	Asset("ANIM", "anim/lavaarena_boarrior_fx.zip"),
 }
 
-SetSharedLootTable("bossboarte",
+SetSharedLootTable("boarrior",
 	{
-		{ "meat",                1.0 },
-		{ "meat",                1.0 },
-		{ "meat",                1.0 },
-		{ "meat",                1.0 },
-		{ "meat",                1.0 },
-		{ "meat",                1.0 },
-		{ "meat",                1.0 },
-		{ "meat",                1.0 },
-		{ "meat",                1.0 },
-		{ "meat",                1.0 },
-		{ "meat",                1.0 },
+		{ "meat", 1.0 },
+		{ "meat", 1.0 },
+		{ "meat", 1.0 },
+		{ "meat", 1.0 },
+		{ "meat", 1.0 },
+		{ "meat", 1.0 },
+		{ "meat", 1.0 },
+		{ "meat", 1.0 },
+		{ "meat", 1.0 },
+		{ "meat", 1.0 },
+		{ "meat", 1.0 },
 		{ "fireballstaff", 0.5 },
 		{ "healingstaff", 1.0 },
 		{ "spear_gungnir", 0.5 },
@@ -175,22 +175,6 @@ local function fn()
 	inst.components.sleeper.diminishingreturns = true
 
 	inst:AddComponent("timer")
-
-	--[[
-if TUNING.tropical.greenmod then
-	if rawget(_G, "GF") ~= nil then
-		inst:AddComponent("gfspellcaster")
-		local spells =
-		{
-			"gw_boarrior_burst",
-			"gw_boarrior_slam",
-			"gw_boarrior_combo",
-			"gw_boarrior_whirl",
-		}
-		inst.components.gfspellcaster:AddSpells(spells)
-	end
-end	
-]]
 
 	inst.rage = 0
 	inst._fireburstHitted = {}
@@ -389,7 +373,5 @@ local function fnFire()
 	return inst
 end
 
-return Prefab("bossboarte", fn, assets),
-	Prefab("bossboar", fn2, assets),
-	Prefab("bossboarfireburst", fnBurst, assetsBurst),
+return Prefab("bossboarfireburst", fnBurst, assetsBurst),
 	Prefab("groundfire", fnFire, assetsFire)
