@@ -18,7 +18,6 @@ modimport "modmain/lavaarena/event_server/lavaarena_lootbeacon"
 modimport "modmain/lavaarena/event_server/lavaarena_portal"
 modimport "modmain/lavaarena/event_server/lavaarena_rhinobuff"
 modimport "modmain/lavaarena/event_server/lavaarena_spawner"
-modimport "modmain/lavaarena/event_server/spellmasterybuff"
 modimport "modmain/lavaarena/event_server/sunderarmordebuff"
 modimport "modmain/lavaarena/event_server/wathgrithr_bloodlustbuff"
 
@@ -46,7 +45,6 @@ modimport "modmain/lavaarena/event_server/lavaarena_rhinodrill"
 modimport "modmain/lavaarena/event_server/lavaarena_snapper"
 modimport "modmain/lavaarena/event_server/lavaarena_trails"
 modimport "modmain/lavaarena/event_server/lavaarena_turtillus"
-modimport "modmain/lavaarena/event_server/webber_spider_minions"
 modimport "modmain/lavaarena/event_server/lavaarena_peghook"
 
 
@@ -76,20 +74,33 @@ AddComponentPostInit("combat", function(self, inst)
 end)
 
 ----------------------------------------------------------------------------------------------------
+AddPrefabPostInit("world", function(inst)
+    inst:AddComponent("lavaarenamobtracker") --熔炉单位对象记录
 
-AddPrefabPostInit("world", function(inst) --其实竞技场只在洞穴世界生成
     if not TheWorld.ismastersim then return end
 
-    inst:AddComponent("lavaarena_battlestandard")
+    TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_portal")                 --熔炉传送门
+    TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_battlestandard_damager") --战旗
+    TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_battlestandard_shield")
+    TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_battlestandard_heal")
 end)
 
 ----------------------------------------------------------------------------------------------------
-
-
-AddPrefabPostInitAny(function(inst)
-    if not TheWorld.ismastersim then return end
-
-    if TheWorld.components.lavaarena_battlestandard then
-        TheWorld.components.lavaarena_battlestandard:OnEntSpawned(inst)
+--根据战旗添加buff
+local function StartTrackingBefore(self, ent)
+    for _, v in ipairs({
+        "lavaarena_battlestandard_damager",
+        "lavaarena_battlestandard_shield",
+        "lavaarena_battlestandard_heal"
+    }) do
+        local flag = TheWorld.components.tro_tempentitytracker:GetEnts(v)[1]
+        if flag then
+            ent:AddDebuff(flag.debuffprefab, flag.debuffprefab)
+        end
     end
+end
+
+AddComponentPostInit("lavaarenamobtracker", function(self)
+    if not TheWorld.ismastersim then return end
+    Utils.FnDecorator(self, "StartTracking", StartTrackingBefore)
 end)

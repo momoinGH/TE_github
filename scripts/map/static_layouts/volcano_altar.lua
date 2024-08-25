@@ -122,7 +122,7 @@ return {
         },
         {
           name = "",
-          type = "lavarenaescada",
+          type = "lavaarena_portal",
           shape = "rectangle",
           x = 256,
           y = 256,

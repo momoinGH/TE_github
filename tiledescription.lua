@@ -13,11 +13,11 @@ function SetInfo()
 	local NEW_TILE_DESCRIPTION =
 	{
 		magmafield = { specs = { name = "cave" }, turf = { { "turf_magmafield" } }, layer = 35, hard = true, cannotbedug = true }, --example tile
-		jungle = { specs = { name = "jungle" }, turf = { { "turf_jungle" } }, layer = 25 },                                 --example tile
-		ash = { specs = { name = "cave" }, turf = { { "turf_ash" } }, layer = 25 },                                         --example tile
-		volcano = { specs = { name = "cave" }, turf = { { "turf_volcano" } }, layer = 25 },                                 --example tile
-		tidalmarsh = { specs = { name = "beach" }, turf = { { "turf_tidalmarsh" } }, layer = 25 },                          --example tile	
-		meadow = { specs = { name = "jungle" }, turf = { { "turf_meadow" } }, layer = 25 },                                 --example tile
+		jungle = { specs = { name = "jungle" }, turf = { { "turf_jungle" } }, layer = 25 },                                  --example tile
+		ash = { specs = { name = "cave" }, turf = { { "turf_ash" } }, layer = 25 },                                          --example tile
+		volcano = { specs = { name = "cave" }, turf = { { "turf_volcano" } }, layer = 25 },                                  --example tile
+		tidalmarsh = { specs = { name = "beach" }, turf = { { "turf_tidalmarsh" } }, layer = 25 },                           --example tile	
+		meadow = { specs = { name = "jungle" }, turf = { { "turf_meadow" } }, layer = 25 },                                  --example tile
 		snakeskinfloor = { specs = { name = "carpet" }, turf = { { "turf_snakeskinfloor" } }, layer = 30, isfloor = true },
 		beach = { specs = { name = "beach" }, turf = { { "turf_beach" } }, layer = 30, hard = true, cannotbedug = true },
 		--		water_coral = 		{ specs = {name = "water_coral"}, 	turf = {{"turf_water_coral"}} ,	layer = 20},
@@ -38,12 +38,12 @@ function SetInfo()
 		foundation = { specs = { name = "blocky" }, turf = { { "turf_foundation" } }, layer = 20 },
 		cobbleroad = { specs = { name = "cobbleroad" }, turf = { { "turf_cobbleroad" } }, layer = 38, isfloor = true },
 		antfloor = { specs = { name = "antfloor" }, turf = { { "turf_antfloor" } }, layer = 25, hard = true, cannotbedug = true }, --frost lake
-		batfloor = { specs = { name = "batfloor" }, nil, layer = 25, hard = true, cannotbedug = true },                     --lava floor
-		pigruins = { specs = { name = "carpet" }, nil, layer = 30, hard = true, cannotbedug = true },                       --lava_trim
-		underwater_sandy = { specs = { name = "cave" }, layer = 5, hard = true, cannotbedug = true },                       --example tile
-		underwater_rocky = { specs = { name = "marsh" }, layer = 5, hard = true, cannotbedug = true },                      --example tile		
-		windy = { specs = { name = "windy" }, turf = { { "turf_windy" } }, layer = 25 },                                    --frost lake	
-		marsh_sw = { specs = { name = "marsh_sw" }, turf = { { "turf_marsh_sw" } }, layer = 25 },                           --frost lake
+		batfloor = { specs = { name = "batfloor" }, nil, layer = 25, hard = true, cannotbedug = true },                      --lava floor
+		pigruins = { specs = { name = "carpet" }, nil, layer = 30, hard = true, cannotbedug = true },                        --lava_trim
+		underwater_sandy = { specs = { name = "cave" }, layer = 5, hard = true, cannotbedug = true },                        --example tile
+		underwater_rocky = { specs = { name = "marsh" }, layer = 5, hard = true, cannotbedug = true },                       --example tile		
+		windy = { specs = { name = "windy" }, turf = { { "turf_windy" } }, layer = 25 },                                     --frost lake	
+		marsh_sw = { specs = { name = "marsh_sw" }, turf = { { "turf_marsh_sw" } }, layer = 25 },                            --frost lake
 
 		hamarchive = { specs = { name = "deeprainforest" }, turf = { { "turf_hamarchive" } }, layer = 25 },
 	}

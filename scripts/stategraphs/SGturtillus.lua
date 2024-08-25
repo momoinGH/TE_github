@@ -507,4 +507,4 @@ CommonStates.AddWalkStates(states,
 		},
 	})
 
-return StateGraph("spikyturtle_tfc", states, events, "taunt", actionhandlers)
+return StateGraph("turtillus", states, events, "taunt", actionhandlers)

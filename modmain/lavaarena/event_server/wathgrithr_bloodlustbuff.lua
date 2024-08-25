@@ -5,7 +5,11 @@ local assets =
 }
 
 local function master_postinit(inst, offset)
+    inst.AnimState:PushAnimation("idle", false)
+    inst.AnimState:PushAnimation("out", false)
 
+    inst:ListenForEvent("animqueueover", inst.Remove)
+    inst.persists = false
 end
 
 add_event_server_data("lavaarena", "prefabs/wathgrithr_bloodlustbuff", {

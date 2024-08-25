@@ -1,4 +1,5 @@
 PrefabFiles = {
+
     -- TODO 能用原版猎犬代替吗
     "lavaarena_hound",
     "lavaarena_knight",
@@ -9,16 +10,10 @@ PrefabFiles = {
     "lavaarena_bossboar",
     "teleportato_sw_parts",
     "teleportato_sw",
-    "lavaarena_rhinodrill",
+    "rhinodrillbros",
     "lavaarena_spectator",
-    "lavaarena_spawner2",
     "lavaarena_center",
     "lavaarena_floorgrate",
-    "lavarenaescada",
-    "strange_scorpion_tfc",
-    "lizardman_tfc",
-    "spiky_turtle_tfc",
-    "spiky_monkey_tfc",
     "lavarenawaves",
     "tfwp_elemental",
     "tfwp_armor",
@@ -34,12 +29,12 @@ PrefabFiles = {
     "teleportato2",
 
 
-    
 
 
 
 
 
 
-  
+
+
 }

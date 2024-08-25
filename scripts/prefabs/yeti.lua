@@ -107,8 +107,8 @@ local function fn()
     inst:AddComponent("locomotor")
     inst.components.locomotor.runspeed = TUNING.SPIKY_MONKEY_TFC.SPEED
 
-    inst:SetStateGraph("SGspikymonkey_tfc")
-    inst:SetBrain(require "brains/spikymonkey_tfcbrain")
+    inst:SetStateGraph("SGtrails")
+    inst:SetBrain(require "brains/trailsbrain")
 
     inst:AddComponent("knownlocations")
 

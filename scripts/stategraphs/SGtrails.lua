@@ -302,4 +302,4 @@ CommonStates.AddRunStates(states,
 		},
 	})
 
-return StateGraph("hattypiggy_tfc", states, events, "taunt", actionhandlers)
+return StateGraph("trails", states, events, "taunt", actionhandlers)

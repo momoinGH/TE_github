@@ -217,7 +217,7 @@ local function entrance()
 
 		basement_position = { x, 0, z }
 
-		inst.exit = SpawnPrefab("lavarenaescada2")
+		inst.exit = SpawnPrefab("lavaarena_portal")
 		inst.exit.Transform:SetPosition(unpack(basement_position))
 
 		---------------------------cria a parede inicio------------------------------------------------------------------	
@@ -348,7 +348,7 @@ local function entrance()
 			end
 		end
 
-		local part = SpawnPrefab("lavaarena_spawner2")
+		local part = SpawnPrefab("lavaarena_spawner")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 27 * TAMANHODOMAPA - 8, 0, z)
 			if part.components.health ~= nil then
@@ -356,7 +356,7 @@ local function entrance()
 			end
 		end
 
-		local part = SpawnPrefab("lavaarena_spawner2")
+		local part = SpawnPrefab("lavaarena_spawner")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 27 * TAMANHODOMAPA - 8, 0, z - 27 * TAMANHODOMAPA - 8)
 			if part.components.health ~= nil then
@@ -364,7 +364,7 @@ local function entrance()
 			end
 		end
 
-		local part = SpawnPrefab("lavaarena_spawner2")
+		local part = SpawnPrefab("lavaarena_spawner")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 27 * TAMANHODOMAPA - 8, 0, z + 27 * TAMANHODOMAPA + 8)
 			if part.components.health ~= nil then
@@ -372,7 +372,7 @@ local function entrance()
 			end
 		end
 
-		local part = SpawnPrefab("lavaarena_spawner2")
+		local part = SpawnPrefab("lavaarena_spawner")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 15, 0, z + 27 * TAMANHODOMAPA + 8)
 			if part.components.health ~= nil then
@@ -380,7 +380,7 @@ local function entrance()
 			end
 		end
 
-		local part = SpawnPrefab("lavaarena_spawner2")
+		local part = SpawnPrefab("lavaarena_spawner")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 15, 0, z - 27 * TAMANHODOMAPA - 8)
 			if part.components.health ~= nil then
@@ -581,7 +581,7 @@ local function entrance()
 
 
 		inst:DoTaskInTime(1, function(inst)
-			local portaentrada = SpawnPrefab("lavarenaescada2")
+			local portaentrada = SpawnPrefab("lavaarena_portal")
 			local a, b, c = inst.Transform:GetWorldPosition()
 			portaentrada.Transform:SetPosition(a, b, c)
 			portaentrada.components.teleporter.targetTeleporter = inst.exit
@@ -906,7 +906,7 @@ local function wall_common2()
 
 	return inst
 end
-
+-- TODO 重写
 return Prefab("lavaarena_entrance", entrance),
 	Prefab("pisolavarena1", SpawnPiso1, assets),
 	Prefab("pisolavarena2", SpawnPiso2, assets),

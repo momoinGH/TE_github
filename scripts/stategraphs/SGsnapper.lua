@@ -303,4 +303,4 @@ CommonStates.AddRunStates(states,
 		},
 	})
 
-return StateGraph("lizardman_tfc", states, events, "taunt", actionhandlers)
+return StateGraph("snapper", states, events, "taunt", actionhandlers)

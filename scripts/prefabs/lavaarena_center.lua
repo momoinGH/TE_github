@@ -88,34 +88,34 @@ local battleknight =
 local battleboar =
 {
 	[1] = "boaron",
-	[2] = "lizardman_tfc",
+	[2] = "snapper",
 	[3] = "boaron",
-	[4] = "lizardman_tfc",
-	[5] = "strange_scorpion_tfc",
+	[4] = "snapper",
+	[5] = "peghook",
 }
 
 local battlelizard =
 {
-	[1] = "lizardman_tfc",
-	[2] = "strange_scorpion_tfc",
-	[3] = "spiky_turtle_tfc",
-	[4] = "spiky_monkey_tfc",
-	[5] = "lizardman_tfc",
-	[6] = "strange_scorpion_tfc",
-	[7] = "spiky_turtle_tfc",
-	[8] = "spiky_monkey_tfc",
+	[1] = "snapper",
+	[2] = "peghook",
+	[3] = "turtillus",
+	[4] = "trails",
+	[5] = "snapper",
+	[6] = "peghook",
+	[7] = "turtillus",
+	[8] = "trails",
 }
 
 local battlebossboar =
 {
 	[1] = "boaron",
-	[2] = "lizardman_tfc",
-	[3] = "strange_scorpion_tfc",
-	[4] = "spiky_monkey_tfc",
-	[5] = "lizardman_tfc",
-	[6] = "strange_scorpion_tfc",
-	[7] = "spiky_turtle_tfc",
-	[8] = "spiky_monkey_tfc",
+	[2] = "snapper",
+	[3] = "peghook",
+	[4] = "trails",
+	[5] = "snapper",
+	[6] = "peghook",
+	[7] = "turtillus",
+	[8] = "trails",
 	[9] = "boarrior",
 }
 
@@ -125,24 +125,24 @@ local battlerhinocebros =
 	[1] = "boaron",
 	[2] = "boaron",
 	[3] = "boaron",
-	[4] = "spiky_monkey_tfc",
+	[4] = "trails",
 	[5] = "boaron",
 	[6] = "boaron",
 	[7] = "boaron",
-	[8] = "spiky_monkey_tfc",
+	[8] = "trails",
 	[9] = "rhinodrillbros",
 }
 
 local battlebeetletaur =
 {
-	[1] = "lizardman_tfc",
-	[2] = "lizardman_tfc",
-	[3] = "strange_scorpion_tfc",
-	[4] = "spiky_monkey_tfc",
-	[5] = "lizardman_tfc",
-	[6] = "strange_scorpion_tfc",
-	[7] = "strange_scorpion_tfc",
-	[8] = "spiky_monkey_tfc",
+	[1] = "snapper",
+	[2] = "snapper",
+	[3] = "peghook",
+	[4] = "trails",
+	[5] = "snapper",
+	[6] = "peghook",
+	[7] = "peghook",
+	[8] = "trails",
 	[9] = "beetletaur",
 }
 

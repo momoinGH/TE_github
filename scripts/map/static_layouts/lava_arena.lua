@@ -194,7 +194,7 @@ return {
       objects = {
         {
           name = "",
-          type = "lavaarena_spawner2",
+          type = "lavaarena_spawner",
           shape = "rectangle",
           x = 1552,
           y = 1184,
@@ -208,7 +208,7 @@ return {
         },
         {
           name = "",
-          type = "lavaarena_spawner2",
+          type = "lavaarena_spawner",
           shape = "rectangle",
           x = 1088,
           y = 1616,
@@ -222,7 +222,7 @@ return {
         },
         {
           name = "",
-          type = "lavaarena_spawner2",
+          type = "lavaarena_spawner",
           shape = "rectangle",
           x = 624,
           y = 1184,
@@ -237,7 +237,7 @@ return {
 		
         {
           name = "",
-          type = "lavaarena_spawner2",
+          type = "lavaarena_spawner",
           shape = "rectangle",
           x = 1088,
           y = 750,
@@ -311,7 +311,7 @@ return {
 		
         {
           name = "",
-          type = "lavarenaescada",
+          type = "lavaarena_portal",
           shape = "rectangle",
           x = 1088,
           y = 500,

@@ -13,8 +13,28 @@ local function Kill(inst)
     inst.components.health:Kill()
 end
 
+local function OnFlagRemove(_, prefab, debuffprefab)
+    if #TheWorld.components.tro_tempentitytracker:GetEnts(prefab) <= 0 then --该类型的战旗一个也没有了
+        for _, v in ipairs(TheWorld.components.lavaarenamobtracker:GetAllMobs()) do
+            v:RemoveDebuff(debuffprefab)
+        end
+    end
+end
+
+local TARGET_MUST_TAGS = { "monster", "hostile", "_combat", "_health" }
+local function AddBuff(inst)
+    for _, v in ipairs(TheWorld.components.lavaarenamobtracker:GetAllMobs()) do
+        if v:HasTags(TARGET_MUST_TAGS) then
+            v:AddDebuff(inst.debuffprefab, inst.debuffprefab)
+        end
+    end
+end
+
 local function battlestandard_postinit(inst)
-    TheWorld.components.lavaarena_battlestandard:OnFlagSpawned(inst)
+    inst:ListenForEvent("onremove", function(inst)
+        TheWorld:DoTaskInTime(0, OnFlagRemove, inst.prefab, inst.debuffprefab)
+    end)
+    inst:DoTaskInTime(0, AddBuff)
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(100)

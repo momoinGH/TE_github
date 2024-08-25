@@ -1,13 +1,10 @@
-require "stacktrace"
+-- 命名规范：tro_作为公共模块前缀，其他模块的东西用模块名或者tro_作为前缀
+
+
+----------------------------------------------------------------------------------------------------
 
 --- 科雷modmain的定义抄过来，不过文件不存在时不提醒
 local function SafeModImport(modulename)
-	-- local status, err = pcall(modimport, filePath)
-	-- if not status and not string.match(err, "Error in modimport: modmain/.+%.lua not found!") then
-	-- 	print("导入文件失败：" .. filePath)
-	-- 	print(StackTrace(err))
-	-- end
-
 	print("modimport: " .. env.MODROOT .. modulename)
 	if string.sub(modulename, #modulename - 3, #modulename) ~= ".lua" then
 		modulename = modulename .. ".lua"

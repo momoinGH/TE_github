@@ -454,6 +454,10 @@ AddPrefabPostInitAny(function(inst)
 
     if not TheWorld.ismastersim then return end
 
+    if TheWorld.components.tro_tempentitytracker and TheWorld.components.tro_tempentitytracker:KeyExists(inst.prefab) then
+        TheWorld.components.tro_tempentitytracker:OnEntSpawned(inst)
+    end
+
     -- Only fightable mobs can be poisonable 中毒组件
     if inst.components.combat and inst.components.poisonable == nil then
         inst:AddComponent("poisonable")
