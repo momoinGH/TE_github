@@ -384,6 +384,5 @@ local function fnb2()
 
     return inst
 end
-return Prefab("mermb", fnb, assets, prefabs),
-    Prefab("mermb1", fnb1, assets, prefabs),
+return Prefab("mermb1", fnb1, assets, prefabs),
     Prefab("mermb2", fnb2, assets, prefabs)

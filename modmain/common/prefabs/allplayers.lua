@@ -39,6 +39,7 @@ local function OnDirtyEventCameraStuff(inst)
         return
     end
 
+    -- TheWorld:PushEvent("underwatercave", "night")
     -- 这里只改距离distancetarget和偏移量x
     local width = target.room_width:value()
     TheCamera.controllable = false

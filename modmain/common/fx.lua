@@ -1,5 +1,3 @@
-local Vector3 = GLOBAL.Vector3
-
 local HAM_FX =
 {
 	{
@@ -72,13 +70,14 @@ local HAM_FX =
 		bank = "pine_needles",
 		build = "pine_needles",
 		anim = "fall",
-	}, {
-	name = "sparks_green_fx",
-	bank = "sparks",
-	build = "sparks_green",
-	anim = "sparks_1",
-	dlc = true,
-},
+	},
+	{
+		name = "sparks_green_fx",
+		bank = "sparks",
+		build = "sparks_green",
+		anim = "sparks_1",
+		dlc = true,
+	},
 	{
 		name = "robot_leaf_fx",
 		bank = "robot_leaf_fx",

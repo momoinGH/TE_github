@@ -17,10 +17,9 @@ local BeetletaurBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
-local function GetHealAuras(inst, range)
+local function GetHealAuras(inst)
     local pos = inst:GetPosition()
-    local range = range or 8
-    local heal_auras = TheSim:FindEntities(pos.x, 0, pos.z, range, { "healingcircle" })
+    local heal_auras = TheSim:FindEntities(pos.x, 0, pos.z, 1, { "lavaarena_bloom" })
     if heal_auras then
         table.sort(heal_auras, function(a, b)
             local a_distance_sq = distsq(a:GetPosition(), pos)

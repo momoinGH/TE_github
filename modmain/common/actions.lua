@@ -11,7 +11,7 @@ Utils.FnDecorator(ACTIONS.JUMPIN, "strfn", function(act)
     if act.target ~= nil then
         if act.target:HasTag("hamlet_houseexit") then
             return { "LEAVE" }, true
-        elseif act.target:HasTag("interior_door") then
+        elseif act.target:HasTag("interior_door") or act.target.prefab == "lavaarena_portal" then
             return { "ENTER" }, true
         elseif act.target:HasTag("stairs") then
             return { "USE" }, true

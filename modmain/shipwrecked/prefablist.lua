@@ -261,7 +261,7 @@ PrefabFiles = {
 
 
 
-
+  "shipwrecked_bishop",
 
 
 }

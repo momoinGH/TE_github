@@ -76,7 +76,6 @@ local function onhammered(inst, worker)
 	if inst:HasTag("fire") and inst.components.burnable then
 		inst.components.burnable:Extinguish()
 	end
-	inst.components.lootdropper:DropLoot()
 	if inst.components.container then inst.components.container:DropEverything() end
 	SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
@@ -87,7 +86,6 @@ local function onhammered2(inst, worker)
 	if inst:HasTag("fire") and inst.components.burnable then
 		inst.components.burnable:Extinguish()
 	end
-	inst.components.lootdropper:DropLoot()
 	SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
 	inst:Remove()
@@ -116,99 +114,11 @@ local function onsave(inst, data)
 end
 
 local function fn(Sim)
-	local inst = CreateEntity()
 
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
-	inst.entity:AddNetwork()
-	MakeInventoryPhysics(inst)
-
-	inst.MiniMapEntity:SetIcon("kraken_chest.png")
-
-	inst.AnimState:SetBank("kraken_chest")
-	inst.AnimState:SetBuild("kraken_chest")
-	inst.AnimState:PlayAnimation("closed", true)
-
-	inst:AddTag("structure")
-	inst:AddTag("chest")
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("inspectable")
-
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("treasurechest")
-	inst.components.container.onopenfn = onopen
-	inst.components.container.onclosefn = onclose
-
-	inst:AddComponent("lootdropper")
-	inst:AddComponent("workable")
-	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-	inst.components.workable:SetWorkLeft(2)
-	inst.components.workable:SetOnFinishCallback(onhammered)
-	inst.components.workable:SetOnWorkCallback(onhit)
-
-	inst:ListenForEvent("onbuilt", onbuilt)
-	MakeSnowCovered(inst, .01)
-
-	MakeSmallBurnable(inst, nil, nil, true)
-	MakeSmallPropagator(inst)
-
-	return inst
 end
 
 local function fn1(Sim)
-	local inst = CreateEntity()
 
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
-	inst.entity:AddNetwork()
-	MakeInventoryPhysics(inst)
-
-	--	inst.MiniMapEntity:SetIcon("lovelychest.tex")
-
-	inst.AnimState:SetBank("octopus_chest")
-	inst.AnimState:SetBuild("octopus_chest")
-	inst.AnimState:PlayAnimation("closed", true)
-
-	inst:AddTag("structure")
-	inst:AddTag("chest")
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("inspectable")
-
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("treasurechest")
-	inst.components.container.onopenfn = onopen
-	inst.components.container.onclosefn = oncloseocto
-
-	inst:AddComponent("lootdropper")
-	inst:AddComponent("workable")
-	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-	inst.components.workable:SetWorkLeft(2)
-	inst.components.workable:SetOnFinishCallback(onhammered)
-	inst.components.workable:SetOnWorkCallback(onhit)
-
-	inst:ListenForEvent("onbuilt", onbuilt)
-	MakeSnowCovered(inst, .01)
-
-	MakeSmallBurnable(inst, nil, nil, true)
-	MakeSmallPropagator(inst)
-
-	return inst
 end
 
 local function OnTimerDone(inst, data)
@@ -223,54 +133,6 @@ local function OnTimerDone(inst, data)
 end
 
 local function fn2(Sim)
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
-	inst.entity:AddNetwork()
-	MakeInventoryPhysics(inst)
-
-	inst.MiniMapEntity:SetIcon("luggage_chest.png")
-
-	inst.AnimState:SetBank("luggage")
-	inst.AnimState:SetBuild("luggage")
-	inst.AnimState:PlayAnimation("closed", true)
-
-	inst:AddTag("structure")
-	inst:AddTag("chest")
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("inspectable")
-
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("treasurechest")
-	inst.components.container.onopenfn = onopen
-	inst.components.container.onclosefn = onclose
-
-	inst:AddComponent("lootdropper")
-	inst:AddComponent("workable")
-	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-	inst.components.workable:SetWorkLeft(2)
-	inst.components.workable:SetOnFinishCallback(onhammered)
-	inst.components.workable:SetOnWorkCallback(onhit)
-
-	inst:ListenForEvent("onbuilt", onbuilt)
-	MakeSnowCovered(inst, .01)
-
-	MakeSmallBurnable(inst, nil, nil, true)
-	MakeSmallPropagator(inst)
-
-	inst:AddComponent("timer")
-	inst:ListenForEvent("timerdone", OnTimerDone)
-	inst.components.timer:StartTimer("vaiembora", 240 + math.random() * 240)
-
 	return inst
 end
 
@@ -278,56 +140,7 @@ local function onfar(inst)
 
 end
 
-local function fn3(Sim)
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
-	inst.entity:AddNetwork()
-	MakeInventoryPhysics(inst)
-
-	inst.MiniMapEntity:SetIcon("luggage_chest.png")
-
-	inst.AnimState:SetBank("chest")
-	inst.AnimState:SetBuild("treasure_chest")
-	inst.AnimState:PlayAnimation("closed", true)
-
-	inst:AddTag("structure")
-	inst:AddTag("chest")
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("inspectable")
-
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("treasurechest")
-	inst.components.container.onopenfn = onopen
-	inst.components.container.onclosefn = oncloseb
-
-	inst:AddComponent("lootdropper")
-	inst:AddComponent("workable")
-	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-	inst.components.workable:SetWorkLeft(2)
-	inst.components.workable:SetOnFinishCallback(onhammered)
-	inst.components.workable:SetOnWorkCallback(onhit)
-
-	inst:AddComponent("playerprox")
-	inst.components.playerprox:SetDist(4, 7)
-	inst.components.playerprox:SetOnPlayerNear(oncloseb)
-	inst.components.playerprox:SetOnPlayerFar(onfar)
-
-	inst:ListenForEvent("onbuilt", onbuilt)
-	MakeSnowCovered(inst, .01)
-
-	MakeSmallBurnable(inst, nil, nil, true)
-	MakeSmallPropagator(inst)
-
+local function fn3()
 	return inst
 end
 
@@ -353,49 +166,6 @@ local function onbuiltroot(inst)
 end
 
 local function fn4(Sim)
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddMiniMapEntity()
-	inst.entity:AddNetwork()
-	MakeInventoryPhysics(inst)
-
-	inst.MiniMapEntity:SetIcon("roottrunk.png")
-
-	--	inst.AnimState:SetBank("roottrunk")
-	--	inst.AnimState:SetBuild("treasure_chest_roottrunk")
-	--	inst.AnimState:PlayAnimation("closed", true)
-	--	inst:AddTag("structure")
-	--    inst:AddTag("chest")
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("inspectable")
-
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("shadowchester")
-	inst.components.container.onopenfn = onopenroot
-	inst.components.container.onclosefn = oncloseroot
-
-	inst:AddComponent("lootdropper")
-	inst:AddComponent("workable")
-	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-	inst.components.workable:SetWorkLeft(2)
-	inst.components.workable:SetOnFinishCallback(onhammered2)
-	inst.components.workable:SetOnWorkCallback(onhit)
-
-	--	inst:ListenForEvent( "onbuilt", onbuilt)
-	--	MakeSnowCovered(inst, .01)	
-
-	MakeSmallBurnable(inst, nil, nil, true)
-	MakeSmallPropagator(inst)
-
 	return inst
 end
 
@@ -452,10 +222,126 @@ local function fn5(Sim)
 	return inst
 end
 
-return Prefab("octopuschest", fn1, assets),
-	Prefab("krakenchest", fn, assets),
-	Prefab("luggagechest", fn2, assets),
-	Prefab("lavarenachest", fn3, assets),
-	Prefab("roottrunk", fn4, assets),
+local function common(bank, build, minimap, widget)
+	local inst = CreateEntity()
+
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
+
+	if minimap then
+		inst.entity:AddMiniMapEntity()
+		inst.MiniMapEntity:SetIcon(minimap)
+	end
+
+	inst.AnimState:SetBank(bank)
+	inst.AnimState:SetBuild(build)
+	inst.AnimState:PlayAnimation("closed", true)
+
+	inst:AddTag("structure")
+	inst:AddTag("chest")
+
+	inst:SetDeploySmartRadius(0.5) --recipe min_spacing/2
+
+	inst.entity:SetPristine()
+
+	if not TheWorld.ismastersim then
+		return inst
+	end
+
+	inst:AddComponent("inspectable")
+
+	inst:AddComponent("container")
+	inst.components.container:WidgetSetup("treasurechest")
+	inst.components.container.onopenfn = onopen
+	inst.components.container.onclosefn = onclose
+
+	inst:AddComponent("workable")
+	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+	inst.components.workable:SetWorkLeft(2)
+	inst.components.workable:SetOnFinishCallback(onhammered)
+	inst.components.workable:SetOnWorkCallback(onhit)
+
+	inst:ListenForEvent("onbuilt", onbuilt)
+	MakeSnowCovered(inst, .01)
+
+	MakeSmallBurnable(inst, nil, nil, true)
+	MakeSmallPropagator(inst)
+
+	return inst
+end
+
+local function octopuschest_fn()
+	local inst = common("octopus_chest", "octopus_chest", "kraken_chest.png")
+
+	if not TheWorld.ismastersim then
+		return inst
+	end
+
+	inst.components.container.onclosefn = oncloseocto
+	return inst
+end
+
+local function krakenchest_fn()
+	return common("kraken_chest", "kraken_chest", "kraken_chest.png")
+end
+
+local function luggagechest_fn()
+	local inst = common("luggage", "luggage", "luggage_chest.png")
+
+	if not TheWorld.ismastersim then
+		return inst
+	end
+
+	inst:AddComponent("vanish_on_sleep")
+	inst.components.vanish_on_sleep.duration = 240 + math.random() * 240
+
+	return inst
+end
+
+local function lavarenachest_fn()
+	local inst = common("chest", "treasure_chest", "luggage_chest.png")
+
+	if not TheWorld.ismastersim then
+		return inst
+	end
+
+	inst.components.container.onclosefn = oncloseb
+
+	inst:AddComponent("playerprox")
+	inst.components.playerprox:SetDist(4, 7)
+	inst.components.playerprox:SetOnPlayerNear(oncloseb)
+	inst.components.playerprox:SetOnPlayerFar(onfar)
+
+	-- inst:AddComponent("vanish_on_sleep")
+	-- inst.components.vanish_on_sleep.duration = 240 + math.random() * 240
+	-- inst.persists = false
+
+	return inst
+end
+
+local function roottrunk_fn()
+	local inst = common("roottrunk", "treasure_chest_roottrunk", "root_chest.png", "shadowchester")
+
+	if not TheWorld.ismastersim then
+		return inst
+	end
+
+	inst.components.container.onopenfn = onopenroot
+	inst.components.container.onclosefn = oncloseroot
+
+	inst.components.workable:SetOnFinishCallback(onhammered2)
+
+	return inst
+end
+
+-- TODO 待整理 DLC0003/scripts/prefabs/treasurechest.lua
+
+return Prefab("octopuschest", octopuschest_fn, assets),
+	Prefab("krakenchest", krakenchest_fn, assets),
+	Prefab("luggagechest", luggagechest_fn, assets),
+	Prefab("lavarenachest", lavarenachest_fn, assets),
+	Prefab("roottrunk", roottrunk_fn, assets),
 	Prefab("roottrunk_child", fn5, assets),
 	MakePlacer("roottrunk_child_placer", "roottrunk", "treasure_chest_roottrunk", "closed")

@@ -234,7 +234,7 @@ return {
             ["data.spawnerid"] = "west"
           }
         },
-		
+
         {
           name = "",
           type = "lavaarena_spawner",
@@ -248,8 +248,8 @@ return {
             ["data.savedrotation.rotation"] = "+90",
             ["data.spawnerid"] = "north"
           }
-        },		
-		
+        },
+
         {
           name = "",
           type = "lavaarena_boarlord",
@@ -262,8 +262,8 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "45"
           }
-        },		
-		
+        },
+
         {
           name = "",
           type = "lavaarena_spectator3",
@@ -273,7 +273,7 @@ return {
           width = 0,
           height = 0,
           visible = true,
-        },	
+        },
 
         {
           name = "",
@@ -284,7 +284,7 @@ return {
           width = 0,
           height = 0,
           visible = true,
-        },	
+        },
 
 
         {
@@ -296,7 +296,7 @@ return {
           width = 0,
           height = 0,
           visible = true,
-        },			
+        },
 
         {
           name = "",
@@ -307,8 +307,8 @@ return {
           width = 0,
           height = 0,
           visible = true,
-        },				
-		
+        },
+
         {
           name = "",
           type = "lavaarena_portal",
@@ -322,7 +322,7 @@ return {
             ["data.savedrotation.rotation"] = "180"
           }
         },
-		
+
         {
           name = "",
           type = "teleportato_sw_base",
@@ -332,9 +332,9 @@ return {
           width = 0,
           height = 0,
           visible = true,
-        },		
+        },
 
-	
+
         {
           name = "",
           type = "lavaarena_cerca",
@@ -344,8 +344,8 @@ return {
           width = 0,
           height = 0,
           visible = true,
-        },		
-		
+        },
+
         {
           name = "",
           type = "lavaarena_cerca",
@@ -355,7 +355,7 @@ return {
           width = 0,
           height = 0,
           visible = true,
-        },	
+        },
 
         {
           name = "",
@@ -366,8 +366,8 @@ return {
           width = 0,
           height = 0,
           visible = true,
-        },			
-		
+        },
+
         {
           name = "",
           type = "lavaarena_cerca",
@@ -378,8 +378,8 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
-		
+        },
+
         {
           name = "",
           type = "lavaarena_teambanner",
@@ -391,7 +391,7 @@ return {
           visible = true,
           properties = {}
         },
-		
+
         {
           name = "",
           type = "lavaarena_teambanner",
@@ -402,8 +402,8 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
-		
+        },
+
         {
           name = "",
           type = "lavaarena_cerca",
@@ -414,8 +414,8 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },				
-		
+        },
+
         {
           name = "",
           type = "lavaarena_cerca",
@@ -425,8 +425,8 @@ return {
           width = 0,
           height = 0,
           visible = true,
-        },		
-	
+        },
+
         {
           name = "",
           type = "lavaarena_cerca",
@@ -436,7 +436,7 @@ return {
           width = 0,
           height = 0,
           visible = true,
-        },		
+        },
 
         {
           name = "",
@@ -447,8 +447,8 @@ return {
           width = 0,
           height = 0,
           visible = true,
-        },		
-			
+        },
+
         {
           name = "",
           type = "lavaarena_center",

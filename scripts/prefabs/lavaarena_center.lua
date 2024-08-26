@@ -15,6 +15,8 @@ local prefabs =
 	"quagmire_coin4",
 }
 
+local RADIUS = 58 --竞技场的最大半径
+
 local armasdotesouro =
 {
 	[1] = "healingstaff",
@@ -59,15 +61,15 @@ local battlespider =
 
 local battlehound =
 {
-	[1] = "houndb",
-	[2] = "clayhoundb",
-	[3] = "firehoundb",
-	[4] = "icehoundb",
+	[1] = "hound",
+	[2] = "clayhound",
+	[3] = "firehound",
+	[4] = "icehound",
 }
 
 local battlemerm =
 {
-	[1] = "mermb",
+	[1] = "merm",
 	[2] = "mermb1",
 	[3] = "mermb2",
 	[4] = "mermb2",
@@ -75,14 +77,14 @@ local battlemerm =
 
 local battleknight =
 {
-	[1] = "knightb",
-	[2] = "bishopb",
-	[3] = "knight_nightmareb",
-	[4] = "bishop_nightmareb",
-	[5] = "knightb",
-	[6] = "bishopb",
-	[7] = "knight_nightmareb",
-	[8] = "bishop_nightmareb",
+	[1] = "knight",
+	[2] = "bishop",
+	[3] = "knight_nightmare",
+	[4] = "bishop_nightmare",
+	[5] = "knight",
+	[6] = "bishop",
+	[7] = "knight_nightmare",
+	[8] = "bishop_nightmare",
 }
 
 local battleboar =
@@ -146,1704 +148,295 @@ local battlebeetletaur =
 	[9] = "beetletaur",
 }
 
+local function GiveItem(chest, prefab)
+	if not chest.components.container:IsFull() then
+		local item = SpawnPrefab(prefab)
+		chest.components.container:GiveItem(item)
+	end
+end
+
 local function SpawnChest(inst)
 	local chest = SpawnPrefab("lavarenachest")
-
-	local single10 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-	chest.components.container:GiveItem(single10)
-
-	for i = 1, 2 do
-		local single = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single)
-
-		local single1 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single1)
-
-		local single2 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single2)
-
-		local single3 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single3)
-
-		if math.random() > 0.5 then
-			local single4 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single4)
-		else
-			local single4 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single4)
-		end
-
-		if math.random() > 0.5 then
-			local single5 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single5)
-		else
-			local single5 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single5)
-		end
-
-
-		if math.random() > 0.5 then
-			local single6 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single6)
-		else
-			local single6 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single6)
-		end
-
-		if math.random() > 0.5 then
-			local single7 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single7)
-		else
-			local single7 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single7)
-		end
-
-
-		if math.random() > 0.8 then
-			local single8 = SpawnPrefab("silk")
-			chest.components.container:GiveItem(single8)
-		else
-			local single8 = SpawnPrefab("spidergland")
-			chest.components.container:GiveItem(single8)
-		end
-
-		if math.random() > 0.8 then
-			local single9 = SpawnPrefab("silk")
-			chest.components.container:GiveItem(single9)
-		else
-			local single9 = SpawnPrefab("spidergland")
-			chest.components.container:GiveItem(single9)
-		end
+	GiveItem(chest, armasdotesouro[math.random(#armasdotesouro)])
+	for i = 1, 6 do
+		GiveItem(chest, "quagmire_coin1")
 	end
-	local pos = inst:GetPosition()
-	chest.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-	efeito.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-
-	inst.arenaativa = 0
-	local porcao = GetClosestInstWithTag("porcao", inst, 60)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-
-
-
-	if porcao then
-		local a, b, c = porcao.Transform:GetWorldPosition()
-		porcao:Remove()
-		efeito.Transform:SetPosition(a, b, c)
-	end
-end
-
-local function SpawnChest1(inst)
-	local chest = SpawnPrefab("lavarenachest")
-
-	local single10 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-	chest.components.container:GiveItem(single10)
-
-	--if inst.max1 == nil then
-	--inst.max1 = 1
-	--local parte = SpawnPrefab("quagmire_key_park")
-	--chest.components.container:GiveItem(parte)
-	--end
-
 	for i = 1, 2 do
-		local single = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single)
-
-		local single1 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single1)
-
-		local single2 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single2)
-
-		local single3 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single3)
-
-		if math.random() > 0.5 then
-			local single4 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single4)
-		else
-			local single4 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single4)
-		end
-
-		if math.random() > 0.5 then
-			local single5 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single5)
-		else
-			local single5 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single5)
-		end
-
-
-		if math.random() > 0.5 then
-			local single6 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single6)
-		else
-			local single6 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single6)
-		end
-
-		if math.random() > 0.5 then
-			local single7 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single7)
-		else
-			local single7 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single7)
-		end
-
-
-		if math.random() > 0.8 then
-			local single8 = SpawnPrefab("houndstooth")
-			chest.components.container:GiveItem(single8)
-		else
-			local single8 = SpawnPrefab("houndstooth")
-			chest.components.container:GiveItem(single8)
-		end
-
-		if math.random() > 0.8 then
-			local single9 = SpawnPrefab("houndstooth")
-			chest.components.container:GiveItem(single9)
-		else
-			local single9 = SpawnPrefab("houndstooth")
-			chest.components.container:GiveItem(single9)
-		end
+		GiveItem(chest, math.random() > 0.5 and "quagmire_coin1" or "quagmire_coin2")
 	end
 
 	local pos = inst:GetPosition()
 	chest.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-	efeito.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
+
+	SpawnPrefab("lavaarena_creature_teleport_small_fx").Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
 
 	inst.arenaativa = 0
-	local porcao = GetClosestInstWithTag("porcao", inst, 60)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-
-
-
-	if porcao then
-		local a, b, c = porcao.Transform:GetWorldPosition()
-		porcao:Remove()
-		efeito.Transform:SetPosition(a, b, c)
-	end
-end
-
-local function SpawnChest2(inst)
-	local chest = SpawnPrefab("lavarenachest")
-
-	local single10 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-	chest.components.container:GiveItem(single10)
-
-	if inst.max2 == nil then
-		inst.max2 = 1
-		local parte = SpawnPrefab("teleportato_sw_ring")
-		chest.components.container:GiveItem(parte)
-	end
-
-	for i = 1, 2 do
-		local single = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single)
-
-		local single1 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single1)
-
-		local single2 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single2)
-
-		local single3 = SpawnPrefab("quagmire_coin2")
-		chest.components.container:GiveItem(single3)
-
-		if math.random() > 0.5 then
-			local single4 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single4)
-		else
-			local single4 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single4)
-		end
-
-		if math.random() > 0.5 then
-			local single5 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single5)
-		else
-			local single5 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single5)
-		end
-
-
-		if math.random() > 0.5 then
-			local single6 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single6)
-		else
-			local single6 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single6)
-		end
-
-		if math.random() > 0.5 then
-			local single7 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single7)
-		else
-			local single7 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single7)
-		end
-
-
-		if math.random() > 0.8 then
-			local single8 = SpawnPrefab("fish")
-			chest.components.container:GiveItem(single8)
-		else
-			local single8 = SpawnPrefab("fish")
-			chest.components.container:GiveItem(single8)
-		end
-
-		if math.random() > 0.8 then
-			local single9 = SpawnPrefab("fish")
-			chest.components.container:GiveItem(single9)
-		else
-			local single9 = SpawnPrefab("fish")
-			chest.components.container:GiveItem(single9)
-		end
-	end
-
-	local single10 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-	chest.components.container:GiveItem(single10)
-
-	local pos = inst:GetPosition()
-	chest.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-	efeito.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-
-	inst.arenaativa = 0
-	local porcao = GetClosestInstWithTag("porcao", inst, 60)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-
-
-
-	if porcao then
-		local a, b, c = porcao.Transform:GetWorldPosition()
-		porcao:Remove()
-		efeito.Transform:SetPosition(a, b, c)
-	end
-end
-
-local function SpawnChest3(inst)
-	local chest = SpawnPrefab("lavarenachest")
-
-	local single10 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-	chest.components.container:GiveItem(single10)
-
-	if inst.max3 == nil then
-		inst.max3 = 1
-		local parte = SpawnPrefab("teleportato_sw_box")
-		chest.components.container:GiveItem(parte)
-	end
-
-	for i = 1, 2 do
-		local single = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single)
-
-		local single1 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single1)
-
-		local single2 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single2)
-
-		local single3 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single3)
-
-		if math.random() > 0.5 then
-			local single4 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single4)
-		else
-			local single4 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single4)
-		end
-
-		if math.random() > 0.5 then
-			local single5 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single5)
-		else
-			local single5 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single5)
-		end
-
-
-		if math.random() > 0.5 then
-			local single6 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single6)
-		else
-			local single6 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single6)
-		end
-
-		if math.random() > 0.5 then
-			local single7 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single7)
-		else
-			local single7 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single7)
-		end
-
-
-		if math.random() > 0.8 then
-			local single8 = SpawnPrefab("gears")
-			chest.components.container:GiveItem(single8)
-		else
-			local single8 = SpawnPrefab("gears")
-			chest.components.container:GiveItem(single8)
-		end
-
-		if math.random() > 0.8 then
-			local single9 = SpawnPrefab("gears")
-			chest.components.container:GiveItem(single9)
-		else
-			local single9 = SpawnPrefab("gears")
-			chest.components.container:GiveItem(single9)
-		end
-
-		local single10 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-		chest.components.container:GiveItem(single10)
-	end
-
-	local pos = inst:GetPosition()
-	chest.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-	efeito.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-
-	inst.arenaativa = 0
-	local porcao = GetClosestInstWithTag("porcao", inst, 60)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-
-
-
-	if porcao then
-		local a, b, c = porcao.Transform:GetWorldPosition()
-		porcao:Remove()
-		efeito.Transform:SetPosition(a, b, c)
-	end
-end
-
-
-local function SpawnChest4(inst)
-	local chest = SpawnPrefab("lavarenachest")
-
-	local single10 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-	chest.components.container:GiveItem(single10)
-
-	if inst.max4 == nil then
-		inst.max4 = 1
-		local parte = SpawnPrefab("teleportato_sw_crank")
-		chest.components.container:GiveItem(parte)
-	end
-
-	for i = 1, 2 do
-		local single = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single)
-
-		local single1 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single1)
-
-		local single2 = SpawnPrefab("quagmire_coin2")
-		chest.components.container:GiveItem(single2)
-
-		local single3 = SpawnPrefab("quagmire_coin2")
-		chest.components.container:GiveItem(single3)
-
-		if math.random() > 0.5 then
-			local single4 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single4)
-		else
-			local single4 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single4)
-		end
-
-		if math.random() > 0.5 then
-			local single5 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single5)
-		else
-			local single5 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single5)
-		end
-
-
-		if math.random() > 0.5 then
-			local single6 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single6)
-		else
-			local single6 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single6)
-		end
-
-		if math.random() > 0.5 then
-			local single7 = SpawnPrefab("quagmire_coin1")
-			chest.components.container:GiveItem(single7)
-		else
-			local single7 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single7)
-		end
-
-
-		if math.random() > 0.8 then
-			local single8 = SpawnPrefab("honeycomb")
-			chest.components.container:GiveItem(single8)
-		else
-			local single8 = SpawnPrefab("honey")
-			chest.components.container:GiveItem(single8)
-		end
-
-		if math.random() > 0.8 then
-			local single9 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single9)
-		else
-			local single9 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single9)
-		end
-
-		local single10 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-		chest.components.container:GiveItem(single10)
-	end
-
-	local pos = inst:GetPosition()
-	chest.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-	efeito.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-
-	inst.arenaativa = 0
-	local porcao = GetClosestInstWithTag("porcao", inst, 60)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-
-
-
-	if porcao then
-		local a, b, c = porcao.Transform:GetWorldPosition()
-		porcao:Remove()
-		efeito.Transform:SetPosition(a, b, c)
-	end
-end
-
-local function SpawnChest5(inst)
-	local chest = SpawnPrefab("lavarenachest")
-
-	local single10 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-	chest.components.container:GiveItem(single10)
-
-	if inst.max5 == nil then
-		inst.max5 = 1
-		local parte = SpawnPrefab("teleportato_sw_potato")
-		chest.components.container:GiveItem(parte)
-	end
-
-	for i = 1, 2 do
-		local single = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single)
-
-		local single1 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single1)
-
-		local single2 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single2)
-
-		local single3 = SpawnPrefab("quagmire_coin1")
-		chest.components.container:GiveItem(single3)
-
-		if math.random() > 0.5 then
-			local single4 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single4)
-		else
-			local single4 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single4)
-		end
-
-		if math.random() > 0.5 then
-			local single5 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single5)
-		else
-			local single5 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single5)
-		end
-
-
-		if math.random() > 0.5 then
-			local single6 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single6)
-		else
-			local single6 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single6)
-		end
-
-		if math.random() > 0.5 then
-			local single7 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single7)
-		else
-			local single7 = SpawnPrefab("quagmire_coin2")
-			chest.components.container:GiveItem(single7)
-		end
-
-
-		if math.random() > 0.8 then
-			local single8 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single8)
-		else
-			local single8 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single8)
-		end
-
-		if math.random() > 0.8 then
-			local single9 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single9)
-		else
-			local single9 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single9)
-		end
-	end
-
-	local single10 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-	chest.components.container:GiveItem(single10)
-
-
-
-	local pos = inst:GetPosition()
-	chest.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-	efeito.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-
-	inst.arenaativa = 0
-	local porcao = GetClosestInstWithTag("porcao", inst, 60)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-
-
-
-	if porcao then
-		local a, b, c = porcao.Transform:GetWorldPosition()
-		porcao:Remove()
-		efeito.Transform:SetPosition(a, b, c)
-	end
-end
-
-
-local function SpawnChest6(inst)
-	local chest = SpawnPrefab("lavarenachest")
-
-	for i = 1, 2 do
-		local single = SpawnPrefab("spear_gungnir")
-		chest.components.container:GiveItem(single)
-
-		local single1 = SpawnPrefab("fireballstaff")
-		chest.components.container:GiveItem(single1)
-
-		local single2 = SpawnPrefab("healingstaff")
-		chest.components.container:GiveItem(single2)
-
-		local single3 = SpawnPrefab("lavaarena_lucy")
-		chest.components.container:GiveItem(single3)
-
-		if math.random() > 0.5 then
-			local single4 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single4)
-		else
-			local single4 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single4)
-		end
-
-		if math.random() > 0.5 then
-			local single5 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single5)
-		else
-			local single5 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single5)
-		end
-
-
-		if math.random() > 0.5 then
-			local single6 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single6)
-		else
-			local single6 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single6)
-		end
-
-		if math.random() > 0.5 then
-			local single7 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single7)
-		else
-			local single7 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single7)
-		end
-
-
-		if math.random() > 0.8 then
-			local single8 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single8)
-		else
-			local single8 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single8)
-		end
-
-		if math.random() > 0.8 then
-			local single9 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single9)
-		else
-			local single9 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-			chest.components.container:GiveItem(single9)
-		end
-	end
-
-	local single10 = SpawnPrefab(armasdotesouro[math.random(1, 30)])
-	chest.components.container:GiveItem(single10)
-
-
-
-	local pos = inst:GetPosition()
-	chest.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-	efeito.Transform:SetPosition(pos.x + 3, 0, pos.z + 3)
-
-	inst.arenaativa = 0
-	local porcao = GetClosestInstWithTag("porcao", inst, 60)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-
-
-
-	if porcao then
-		local a, b, c = porcao.Transform:GetWorldPosition()
-		porcao:Remove()
-		efeito.Transform:SetPosition(a, b, c)
-	end
 end
 
 --------------acaba o combate se jogadores morreram-----------------
-local function fimdocombate(inst)
-	inst.spider = 0
-	inst.hound = 0
-	inst.merm = 0
-	inst.knight = 0
-	inst.boar = 0
-	inst.lizard = 0
-	inst.bossboar = 0
-	inst.rhinocebros = 0
-	inst.beetletaur = 0
-	inst.arenaativa = 0
-	local porcao = GetClosestInstWithTag("porcao", inst, 60)
-	local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-
-	if porcao then
-		local a, b, c = porcao.Transform:GetWorldPosition()
-		porcao:Remove()
-		efeito.Transform:SetPosition(a, b, c)
-	end
-
-	local pt = inst:GetPosition()
-	local procurainimigos = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-	for k, achei in pairs(procurainimigos) do
-		if achei then
-			local a, b, c = achei.Transform:GetWorldPosition()
-			local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-			achei:Remove()
-			efeito.Transform:SetPosition(a, b, c)
-		end
-	end
-end
-
-local function ItemTradeTest(inst, item)
-	if item.prefab == "spiderbattle" then return true end
-	if item.prefab == "houndbattle" then return true end
-	if item.prefab == "mermbattle" then return true end
-	if item.prefab == "boarbattle" then return true end
-	if item.prefab == "knightbattle" then return true end
-	if item.prefab == "lizardbattle" then return true end
-	if item.prefab == "bossboarbattle" then return true end
-	if item.prefab == "rhinocebrosbattle" then return true end
-	if item.prefab == "swineclopsbattle" then return true end
-	return false
-end
-
-local function ItemGet(inst, giver, item)
-	local pt = inst:GetPosition()
-	local jogadores = TheSim:FindEntities(pt.x, pt.y, pt.z, 70, { "player" })
-	for k, player in pairs(jogadores) do
-		if player.components.hunger then
-			player.components.hunger:DoDelta(500)
-		end
-		if player.components.sanity then
-			player.components.sanity:DoDelta(500)
-		end
-
-		if player.components.health then
-			player.components.health:DoDelta(500)
-		end
-	end
-
-
-	if item.prefab == "spiderbattle" then
-		inst.AnimState:PlayAnimation("unappeased", false)
-		inst.AnimState:PushAnimation("close", false)
-		inst.AnimState:PushAnimation("idle_close", false)
-		inst.spider = 27
-		inst.arenaativa = 1
-		local efeito = SpawnPrefab("lavaarena_spectator")
-		local efeito2 = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-		local a, b, c = inst.Transform:GetWorldPosition()
-		efeito.Transform:SetPosition(a, b, c - 32)
-		efeito2.Transform:SetPosition(a, b, c - 32)
-	end
-
-	if item.prefab == "houndbattle" then
-		inst.AnimState:PlayAnimation("unappeased", false)
-		inst.AnimState:PushAnimation("close", false)
-		inst.AnimState:PushAnimation("idle_close", false)
-		inst.hound = 28
-		inst.arenaativa = 2
-		local efeito = SpawnPrefab("lavaarena_spectator")
-		local efeito2 = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-		local a, b, c = inst.Transform:GetWorldPosition()
-		efeito.Transform:SetPosition(a, b, c - 32)
-		efeito2.Transform:SetPosition(a, b, c - 32)
-	end
-
-	if item.prefab == "mermbattle" then
-		inst.AnimState:PlayAnimation("unappeased", false)
-		inst.AnimState:PushAnimation("close", false)
-		inst.AnimState:PushAnimation("idle_close", false)
-		inst.merm = 18
-		inst.arenaativa = 3
-		local efeito = SpawnPrefab("lavaarena_spectator")
-		local efeito2 = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-		local a, b, c = inst.Transform:GetWorldPosition()
-		efeito.Transform:SetPosition(a, b, c - 32)
-		efeito2.Transform:SetPosition(a, b, c - 32)
-	end
-
-	if item.prefab == "boarbattle" then
-		inst.AnimState:PlayAnimation("unappeased", false)
-		inst.AnimState:PushAnimation("close", false)
-		inst.AnimState:PushAnimation("idle_close", false)
-		inst.boar = 24
-		inst.arenaativa = 4
-		local efeito = SpawnPrefab("lavaarena_spectator")
-		local efeito2 = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-		local a, b, c = inst.Transform:GetWorldPosition()
-		efeito.Transform:SetPosition(a, b, c - 32)
-		efeito2.Transform:SetPosition(a, b, c - 32)
-	end
-
-	if item.prefab == "knightbattle" then
-		inst.AnimState:PlayAnimation("unappeased", false)
-		inst.AnimState:PushAnimation("close", false)
-		inst.AnimState:PushAnimation("idle_close", false)
-		inst.knight = 24
-		inst.arenaativa = 5
-		local efeito = SpawnPrefab("lavaarena_spectator")
-		local efeito2 = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-		local a, b, c = inst.Transform:GetWorldPosition()
-		efeito.Transform:SetPosition(a, b, c - 32)
-		efeito2.Transform:SetPosition(a, b, c - 32)
-	end
-
-	if item.prefab == "lizardbattle" then
-		inst.AnimState:PlayAnimation("unappeased", false)
-		inst.AnimState:PushAnimation("close", false)
-		inst.AnimState:PushAnimation("idle_close", false)
-		inst.lizard = 24
-		inst.arenaativa = 6
-		local efeito = SpawnPrefab("lavaarena_spectator")
-		local efeito2 = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-		local a, b, c = inst.Transform:GetWorldPosition()
-		efeito.Transform:SetPosition(a, b, c - 32)
-		efeito2.Transform:SetPosition(a, b, c - 32)
-	end
-
-	if item.prefab == "bossboarbattle" then
-		inst.AnimState:PlayAnimation("unappeased", false)
-		inst.AnimState:PushAnimation("close", false)
-		inst.AnimState:PushAnimation("idle_close", false)
-		inst.bossboar = 24
-		inst.arenaativa = 7
-		local efeito = SpawnPrefab("lavaarena_spectator")
-		local efeito2 = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-		local a, b, c = inst.Transform:GetWorldPosition()
-		efeito.Transform:SetPosition(a, b, c - 32)
-		efeito2.Transform:SetPosition(a, b, c - 32)
-	end
-
-	if item.prefab == "rhinocebrosbattle" then
-		inst.AnimState:PlayAnimation("unappeased", false)
-		inst.AnimState:PushAnimation("close", false)
-		inst.AnimState:PushAnimation("idle_close", false)
-		inst.rhinocebros = 24
-		inst.arenaativa = 8
-		local efeito = SpawnPrefab("lavaarena_spectator")
-		local efeito2 = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-		local a, b, c = inst.Transform:GetWorldPosition()
-		efeito.Transform:SetPosition(a, b, c - 32)
-		efeito2.Transform:SetPosition(a, b, c - 32)
-	end
-
-	if item.prefab == "swineclopsbattle" then
-		inst.AnimState:PlayAnimation("unappeased", false)
-		inst.AnimState:PushAnimation("close", false)
-		inst.AnimState:PushAnimation("idle_close", false)
-		inst.beetletaur = 24
-		inst.arenaativa = 9
-		local efeito = SpawnPrefab("lavaarena_spectator")
-		local efeito2 = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-		local a, b, c = inst.Transform:GetWorldPosition()
-		efeito.Transform:SetPosition(a, b, c - 32)
-		efeito2.Transform:SetPosition(a, b, c - 32)
-	end
-
-	inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_addpart", "teleportato_addpart")
-end
-
-
-local function ItemTest(inst, item, slot)
-	return not item:HasTag("nonpotatable")
-end
-
-local function statusdabatalha(inst)
-	-- so aceita item se a arena nao estiver ativa
-	if inst.spider + inst.hound + inst.merm + inst.knight + inst.boar + inst.lizard + inst.bossboar + inst.rhinocebros + inst.beetletaur > 0 then
-		inst.components.trader:Disable()
-	else
-		inst.components.trader:Enable()
-	end
-
-	if inst.arenaativa == 1 then
-		----------------exibe a contagem de aranhas-----------------------------
-		local pt = inst:GetPosition()
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "spider" })
-		local aranhas = tostring(GetTableSize(ents)) + (inst.spider or 0)
-		inst.components.talker:Say("Enemies Left " .. aranhas .. "")
-		-------------------libera a trava de entrada-----------------------
-		if inst.spider > 16 then inst.spiderwave = 1 elseif inst.spider > 7 then inst.spiderwave = 2 elseif inst.spider > 1 then inst.spiderwave = 3 else inst.spiderwave = 4 end
-
-		if aranhas == 0 then
-			inst.AnimState:PlayAnimation("open", false)
-			inst.AnimState:PushAnimation("idle_open", true)
-			SpawnChest(inst)
-			return
-		end
-		------------------------------gerador de aranhas------------------------------------------
-		if inst.spider > 0 then
-			inst.contadorspider = inst.contadorspider + 1
-			if inst.contadorspider > 20 and aranhas - inst.spider < 6 then
-				for i = 1, 3 do
-					local aparece = math.random(1, 5)
-
-					if aparece == 1 then
-						local portalinvoca1 = SpawnPrefab(battlespider[inst.spiderwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a - 29, b, c + 2)
-					end
-
-					if aparece == 2 then
-						local portalinvoca1 = SpawnPrefab(battlespider[inst.spiderwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a, b, c - 25)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a, b, c - 25)
-					end
-
-					if aparece == 3 then
-						local portalinvoca1 = SpawnPrefab(battlespider[inst.spiderwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a - 29, b, c + 2)
-					end
-
-					if aparece == 4 then
-						local portalinvoca1 = SpawnPrefab(battlespider[inst.spiderwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a, b, c + 28)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a, b, c + 28)
-					end
-
-					if aparece == 5 then
-						local portalinvoca1 = SpawnPrefab(battlespider[inst.spiderwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a + 29, b, c + 2)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a + 29, b, c + 2)
-					end
-
-					inst.spider = inst.spider - 1
-					inst.contadorspider = 0
-				end
-			end
-		end
-	end
-
-
-	if inst.arenaativa == 2 then
-		----------------exibe a contagem de cachorros-----------------------------
-		local pt = inst:GetPosition()
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "hound" })
-		local cachorros = tostring(GetTableSize(ents)) + (inst.hound or 0)
-		inst.components.talker:Say("Enemies Left " .. cachorros .. "")
-		-------------------libera a trava de entrada-----------------------
-		if inst.hound > 21 then inst.houndwave = 1 elseif inst.hound > 14 then inst.houndwave = 2 elseif inst.hound > 7 then inst.houndwave = 3 else inst.houndwave = 4 end
-
-		if cachorros == 0 then
-			inst.AnimState:PlayAnimation("open", false)
-			inst.AnimState:PushAnimation("idle_open", true)
-			SpawnChest1(inst)
-			return
-		end
-		------------------------------gerador de cachorros------------------------------------------
-		if inst.hound > 0 then
-			inst.contadorspider = inst.contadorspider + 1
-			if inst.contadorspider > 20 and cachorros - inst.hound < 6 then
-				for i = 1, 3 do
-					local aparece = math.random(1, 5)
-
-					if aparece == 1 then
-						local portalinvoca1 = SpawnPrefab(battlehound[inst.houndwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a - 29, b, c + 2)
-					end
-
-					if aparece == 2 then
-						local portalinvoca1 = SpawnPrefab(battlehound[inst.houndwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a, b, c - 25)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a, b, c - 25)
-					end
-
-					if aparece == 3 then
-						local portalinvoca1 = SpawnPrefab(battlehound[inst.houndwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a - 29, b, c + 2)
-					end
-
-					if aparece == 4 then
-						local portalinvoca1 = SpawnPrefab(battlehound[inst.houndwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a, b, c + 28)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a, b, c + 28)
-					end
-
-					if aparece == 5 then
-						local portalinvoca1 = SpawnPrefab(battlehound[inst.houndwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a + 29, b, c + 2)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a + 29, b, c + 2)
-					end
-
-					inst.hound = inst.hound - 1
-					inst.contadorspider = 0
-				end
-			end
-		end
-	end
-
-	if inst.arenaativa == 3 then
-		----------------exibe a contagem de mutantes-----------------------------
-		local pt = inst:GetPosition()
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "merm" })
-		local mutantes = tostring(GetTableSize(ents)) + (inst.merm or 0)
-		inst.components.talker:Say("Enemies Left " .. mutantes .. "")
-		-------------------libera a trava de entrada-----------------------
-		if inst.merm > 11 then inst.mermwave = 1 elseif inst.merm > 5 then inst.mermwave = 2 elseif inst.merm > 1 then inst.mermwave = 3 else inst.mermwave = 4 end
-
-
-		if mutantes == 0 then
-			inst.AnimState:PlayAnimation("open", false)
-			inst.AnimState:PushAnimation("idle_open", true)
-			SpawnChest2(inst)
-			return
-		end
-		------------------------------gerador de mutantes------------------------------------------
-		if inst.merm > 0 then
-			inst.contadorspider = inst.contadorspider + 1
-			if inst.contadorspider > 20 and mutantes - inst.merm < 6 then
-				for i = 1, 3 do
-					local aparece = math.random(1, 5)
-
-					if aparece == 1 then
-						local portalinvoca1 = SpawnPrefab(battlemerm[inst.mermwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a - 29, b, c + 2)
-					end
-
-					if aparece == 2 then
-						local portalinvoca1 = SpawnPrefab(battlemerm[inst.mermwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a, b, c - 25)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a, b, c - 25)
-					end
-
-					if aparece == 3 then
-						local portalinvoca1 = SpawnPrefab(battlemerm[inst.mermwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a - 29, b, c + 2)
-					end
-
-					if aparece == 4 then
-						local portalinvoca1 = SpawnPrefab(battlemerm[inst.mermwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a, b, c + 28)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a, b, c + 28)
-					end
-
-					if aparece == 5 then
-						local portalinvoca1 = SpawnPrefab(battlemerm[inst.mermwave])
-						portalinvoca1:AddTag("Arena")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						portalinvoca1.Transform:SetPosition(a + 29, b, c + 2)
-
-						local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-						local a, b, c = inst.Transform:GetWorldPosition()
-						efeito.Transform:SetPosition(a + 29, b, c + 2)
-					end
-
-					inst.merm = inst.merm - 1
-					inst.contadorspider = 0
-				end
-			end
-		end
-	end
-
-	if inst.arenaativa == 4 then
-		----------------exibe a contagem de porcodomato-----------------------------
-		local pt = inst:GetPosition()
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local porcodomato = tostring(GetTableSize(ents)) + (inst.boar or 0)
-		inst.components.talker:Say("Enemies Left " .. porcodomato .. "")
-		-------------------libera a trava de entrada-----------------------
-		if inst.boar > 16 then inst.boarwave = 1 elseif inst.boar > 14 then inst.boarwave = 2 elseif inst.boar > 6 then inst.boarwave = 3 elseif inst.boar > 2 then inst.boarwave = 4 else inst.boarwave = 5 end
-
-		if porcodomato == 0 then
-			inst.AnimState:PlayAnimation("open", false)
-			inst.AnimState:PushAnimation("idle_open", true)
-			SpawnChest4(inst)
-			return
-		end
-		------------------------------gerador de porcodomato------------------------------------------
-		if inst.boar ~= 0 then
-			inst.contadorspider = inst.contadorspider + 1
-			if inst.contadorspider > 10 and porcodomato - inst.boar < 6 then
-				local aparece = math.random(1, 5)
-
-				if aparece == 1 then
-					local portalinvoca1 = SpawnPrefab(battleboar[inst.boarwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 2 then
-					local portalinvoca1 = SpawnPrefab(battleboar[inst.boarwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c - 25)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c - 25)
-				end
-
-				if aparece == 3 then
-					local portalinvoca1 = SpawnPrefab(battleboar[inst.boarwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 4 then
-					local portalinvoca1 = SpawnPrefab(battleboar[inst.boarwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c + 28)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c + 28)
-				end
-
-				if aparece == 5 then
-					local portalinvoca1 = SpawnPrefab(battleboar[inst.boarwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a + 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a + 29, b, c + 2)
-				end
-
-				inst.boar = inst.boar - 1
-				inst.contadorspider = 0
-			end
-		end
-	end
-
-
-
-	if inst.arenaativa == 5 then
-		----------------exibe a contagem de cavalos-----------------------------
-		local pt = inst:GetPosition()
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local cavalos = tostring(GetTableSize(ents)) + (inst.knight or 0)
-		inst.components.talker:Say("Enemies Left " .. cavalos .. "")
-		-------------------libera a trava de entrada-----------------------
-		if inst.knight > 20 then inst.knightwave = 1 elseif inst.knight > 18 then inst.knightwave = 2 elseif inst.knight > 14 then inst.knightwave = 3 elseif inst.knight > 12 then inst.knightwave = 4 elseif inst.knight > 8 then inst.knightwave = 5 elseif inst.knight > 6 then inst.knightwave = 6 elseif inst.knight > 2 then inst.knightwave = 7 else inst.knightwave = 8 end
-
-		if cavalos == 0 then
-			inst.AnimState:PlayAnimation("open", false)
-			inst.AnimState:PushAnimation("idle_open", true)
-			SpawnChest3(inst)
-			return
-		end
-		------------------------------gerador de cavalos------------------------------------------
-		if inst.knight ~= 0 then
-			inst.contadorspider = inst.contadorspider + 1
-			if inst.contadorspider > 10 and cavalos - inst.knight < 6 then
-				local aparece = math.random(1, 5)
-
-				if aparece == 1 then
-					local portalinvoca1 = SpawnPrefab(battleknight[inst.knightwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 2 then
-					local portalinvoca1 = SpawnPrefab(battleknight[inst.knightwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c - 25)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c - 25)
-				end
-
-				if aparece == 3 then
-					local portalinvoca1 = SpawnPrefab(battleknight[inst.knightwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 4 then
-					local portalinvoca1 = SpawnPrefab(battleknight[inst.knightwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c + 28)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c + 28)
-				end
-
-				if aparece == 5 then
-					local portalinvoca1 = SpawnPrefab(battleknight[inst.knightwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a + 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a + 29, b, c + 2)
-				end
-
-				inst.knight = inst.knight - 1
-				inst.contadorspider = 0
-			end
-		end
-	end
-
-	if inst.arenaativa == 6 then
-		----------------exibe a contagem de lagarto-----------------------------
-		local pt = inst:GetPosition()
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local lagarto = tostring(GetTableSize(ents)) + (inst.lizard or 0)
-		inst.components.talker:Say("Enemies Left " .. lagarto .. "")
-		-------------------libera a trava de entrada-----------------------
-		if inst.lizard > 20 then inst.lizardwave = 1 elseif inst.lizard > 18 then inst.lizardwave = 2 elseif inst.lizard > 14 then inst.lizardwave = 3 elseif inst.lizard > 13 then inst.lizardwave = 4 elseif inst.lizard > 8 then inst.lizardwave = 5 elseif inst.lizard > 6 then inst.lizardwave = 6 elseif inst.lizard > 1 then inst.lizardwave = 7 else inst.lizardwave = 8 end
-
-		if lagarto == 0 then
-			inst.AnimState:PlayAnimation("open", false)
-			inst.AnimState:PushAnimation("idle_open", true)
-			SpawnChest5(inst)
-			return
-		end
-		------------------------------gerador de lagarto------------------------------------------
-		if inst.lizard ~= 0 then
-			inst.contadorspider = inst.contadorspider + 1
-			if inst.contadorspider > 20 and lagarto - inst.lizard < 6 then
-				local aparece = math.random(1, 5)
-
-				if aparece == 1 then
-					local portalinvoca1 = SpawnPrefab(battlelizard[inst.lizardwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 2 then
-					local portalinvoca1 = SpawnPrefab(battlelizard[inst.lizardwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c - 25)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c - 25)
-				end
-
-				if aparece == 3 then
-					local portalinvoca1 = SpawnPrefab(battlelizard[inst.lizardwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 4 then
-					local portalinvoca1 = SpawnPrefab(battlelizard[inst.lizardwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c + 28)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c + 28)
-				end
-
-				if aparece == 5 then
-					local portalinvoca1 = SpawnPrefab(battlelizard[inst.lizardwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a + 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a + 29, b, c + 2)
-				end
-
-				inst.lizard = inst.lizard - 1
-				inst.contadorspider = 0
-			end
-		end
-	end
-
-
-
-	--------------------------bossboar battle-------------------------------------------------------------
-	if inst.arenaativa == 7 then
-		----------------exibe a contagem de bossboarunit-----------------------------
-		local pt = inst:GetPosition()
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local bossboarunit = tostring(GetTableSize(ents)) + (inst.bossboar or 0)
-		inst.components.talker:Say("Enemies Left " .. bossboarunit .. "")
-		-------------------libera a trava de entrada-----------------------
-		if inst.bossboar > 20 then inst.bossboarwave = 1 elseif inst.bossboar > 18 then inst.bossboarwave = 2 elseif inst.bossboar > 14 then inst.bossboarwave = 3 elseif inst.bossboar > 13 then inst.bossboarwave = 4 elseif inst.bossboar > 8 then inst.bossboarwave = 5 elseif inst.bossboar > 6 then inst.bossboarwave = 6 elseif inst.bossboar > 2 then inst.bossboarwave = 7 elseif inst.bossboar > 1 then inst.bossboarwave = 8 else inst.bossboarwave = 9 end
-
-		if bossboarunit == 0 then
-			inst.AnimState:PlayAnimation("open", false)
-			inst.AnimState:PushAnimation("idle_open", true)
-			SpawnChest6(inst)
-			return
-		end
-		------------------------------gerador de bossboarunit------------------------------------------
-		if inst.bossboar ~= 0 then
-			inst.contadorspider = inst.contadorspider + 1
-			if inst.contadorspider > 20 and bossboarunit - inst.bossboar < 6 then
-				local aparece = math.random(1, 5)
-
-				if aparece == 1 then
-					local portalinvoca1 = SpawnPrefab(battlebossboar[inst.bossboarwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 2 then
-					local portalinvoca1 = SpawnPrefab(battlebossboar[inst.bossboarwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c - 25)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c - 25)
-				end
-
-				if aparece == 3 then
-					local portalinvoca1 = SpawnPrefab(battlebossboar[inst.bossboarwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 4 then
-					local portalinvoca1 = SpawnPrefab(battlebossboar[inst.bossboarwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c + 28)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c + 28)
-				end
-
-				if aparece == 5 then
-					local portalinvoca1 = SpawnPrefab(battlebossboar[inst.bossboarwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a + 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a + 29, b, c + 2)
-				end
-
-				inst.bossboar = inst.bossboar - 1
-				inst.contadorspider = 0
-			end
-		end
-	end
-
-
-
-	--------------------------rhinocebros battle-------------------------------------------------------------
-	if inst.arenaativa == 8 then
-		----------------exibe a contagem de rhinocebrosunit-----------------------------
-		local pt = inst:GetPosition()
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local rhinocebrosunit = tostring(GetTableSize(ents)) + (inst.rhinocebros or 0)
-		inst.components.talker:Say("Enemies Left " .. rhinocebrosunit .. "")
-		-------------------libera a trava de entrada-----------------------
-		if inst.rhinocebros > 20 then inst.rhinocebroswave = 1 elseif inst.rhinocebros > 18 then inst.rhinocebroswave = 2 elseif inst.rhinocebros > 14 then inst.rhinocebroswave = 3 elseif inst.rhinocebros > 13 then inst.rhinocebroswave = 4 elseif inst.rhinocebros > 8 then inst.rhinocebroswave = 5 elseif inst.rhinocebros > 6 then inst.rhinocebroswave = 6 elseif inst.rhinocebros > 2 then inst.rhinocebroswave = 7 elseif inst.rhinocebros > 1 then inst.rhinocebroswave = 8 else inst.rhinocebroswave = 9 end
-
-		if rhinocebrosunit == 0 then
-			inst.AnimState:PlayAnimation("open", false)
-			inst.AnimState:PushAnimation("idle_open", true)
-			SpawnChest6(inst)
-			return
-		end
-		------------------------------gerador de rhinocebrosunit------------------------------------------
-		if inst.rhinocebros ~= 0 then
-			inst.contadorspider = inst.contadorspider + 1
-			if inst.contadorspider > 10 and rhinocebrosunit - inst.rhinocebros < 6 then
-				local aparece = math.random(1, 5)
-
-				if aparece == 1 then
-					local portalinvoca1 = SpawnPrefab(battlerhinocebros[inst.rhinocebroswave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 2 then
-					local portalinvoca1 = SpawnPrefab(battlerhinocebros[inst.rhinocebroswave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c - 25)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c - 25)
-				end
-
-				if aparece == 3 then
-					local portalinvoca1 = SpawnPrefab(battlerhinocebros[inst.rhinocebroswave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 4 then
-					local portalinvoca1 = SpawnPrefab(battlerhinocebros[inst.rhinocebroswave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c + 28)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c + 28)
-				end
-
-				if aparece == 5 then
-					local portalinvoca1 = SpawnPrefab(battlerhinocebros[inst.rhinocebroswave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a + 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a + 29, b, c + 2)
-				end
-
-				inst.rhinocebros = inst.rhinocebros - 1
-				inst.contadorspider = 0
-			end
-		end
-	end
-
-
-
-
-	--------------------------beetletaur battle-------------------------------------------------------------
-	if inst.arenaativa == 9 then
-		----------------exibe a contagem de beetletaurunit-----------------------------
-		local pt = inst:GetPosition()
-		local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 100, { "Arena" })
-		local beetletaurunit = tostring(GetTableSize(ents)) + (inst.beetletaur or 0)
-		inst.components.talker:Say("Enemies Left " .. beetletaurunit .. "")
-		-------------------libera a trava de entrada-----------------------
-		if inst.beetletaur > 20 then inst.beetletaurwave = 1 elseif inst.beetletaur > 18 then inst.beetletaurwave = 2 elseif inst.beetletaur > 14 then inst.beetletaurwave = 3 elseif inst.beetletaur > 13 then inst.beetletaurwave = 4 elseif inst.beetletaur > 8 then inst.beetletaurwave = 5 elseif inst.beetletaur > 6 then inst.beetletaurwave = 6 elseif inst.beetletaur > 2 then inst.beetletaurwave = 7 elseif inst.beetletaur > 1 then inst.beetletaurwave = 8 else inst.beetletaurwave = 9 end
-
-		if beetletaurunit == 0 then
-			inst.AnimState:PlayAnimation("open", false)
-			inst.AnimState:PushAnimation("idle_open", true)
-			SpawnChest6(inst)
-			return
-		end
-		------------------------------gerador de beetletaurunit------------------------------------------
-		if inst.beetletaur ~= 0 then
-			inst.contadorspider = inst.contadorspider + 1
-			if inst.contadorspider > 10 and beetletaurunit - inst.beetletaur < 6 then
-				local aparece = math.random(1, 5)
-
-				if aparece == 1 then
-					local portalinvoca1 = SpawnPrefab(battlebeetletaur[inst.beetletaurwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 2 then
-					local portalinvoca1 = SpawnPrefab(battlebeetletaur[inst.beetletaurwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c - 25)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c - 25)
-				end
-
-				if aparece == 3 then
-					local portalinvoca1 = SpawnPrefab(battlebeetletaur[inst.beetletaurwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a - 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a - 29, b, c + 2)
-				end
-
-				if aparece == 4 then
-					local portalinvoca1 = SpawnPrefab(battlebeetletaur[inst.beetletaurwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a, b, c + 28)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a, b, c + 28)
-				end
-
-				if aparece == 5 then
-					local portalinvoca1 = SpawnPrefab(battlebeetletaur[inst.beetletaurwave])
-					portalinvoca1:AddTag("Arena")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					portalinvoca1.Transform:SetPosition(a + 29, b, c + 2)
-
-					local efeito = SpawnPrefab("lavaarena_creature_teleport_small_fx")
-					local a, b, c = inst.Transform:GetWorldPosition()
-					efeito.Transform:SetPosition(a + 29, b, c + 2)
-				end
-
-				inst.beetletaur = inst.beetletaur - 1
-				inst.contadorspider = 0
-			end
-		end
-	end
-end
-
-
-local function OnActivate(inst, doer)
-	fimdocombate(inst)
-	return true
-end
-
-local function onsave(inst, data)
-	data.max1 = inst.max1
-	data.max2 = inst.max2
-	data.max3 = inst.max3
-	data.max4 = inst.max4
-	data.max5 = inst.max5
-end
-
-local function onload(inst, data)
-	if data ~= nil then
-		if data.max1 then inst.max1 = data.max1 end
-		if data.max2 then inst.max1 = data.max2 end
-		if data.max3 then inst.max1 = data.max3 end
-		if data.max4 then inst.max1 = data.max4 end
-		if data.max5 then inst.max1 = data.max5 end
-	end
-
-	fimdocombate(inst)
-end
-
-
-
-local function fn(Sim)
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	inst.entity:AddNetwork()
-
-	inst.spider = 0
-	inst.spiderwave = 0
-	inst.hound = 0
-	inst.houndwave = 0
-	inst.merm = 0
-	inst.mermwave = 0
-	inst.knight = 0
-	inst.knightwave = 0
-	inst.boar = 0
-	inst.boarwave = 0
-	inst.lizard = 0
-	inst.lizardwave = 0
-	inst.bossboar = 0
-	inst.bossboarwave = 0
-	inst.rhinocebros = 0
-	inst.rhinocebroswave = 0
-	inst.beetletaur = 0
-	inst.beetletaurwave = 0
+local function ClearState(inst)
+	inst.enemy_count = 0
+	inst.wave = 0
 	inst.contadorspider = 0
 	inst.arenaativa = 0
 
+	for _, v in ipairs(TheWorld.components.lavaarenamobtracker:GetAllMobs()) do
+		SpawnPrefab("lavaarena_creature_teleport_small_fx").Transform:SetPosition(v.Transform:GetWorldPosition())
+		v:Remove()
+	end
+	if inst.blocker then
+		SpawnPrefab("small_puff").Transform:SetPosition(inst.blocker.Transform:GetWorldPosition())
+		inst.blocker:Remove()
+		inst.blocker = nil
+	end
 
-	anim:SetBank("volcano_altar_fx")
-	anim:SetBuild("volcano_altar_fx")
-	anim:PlayAnimation("idle_open", true)
+	inst.components.trader:Enable()
+	inst.AnimState:PlayAnimation("open", false)
+	inst.AnimState:PushAnimation("idle_open", true)
+end
+
+local function AcceptTest(inst, item)
+	return item:HasTag("lavaarena_tribute")
+end
+
+local function OnAccept(inst, giver, item)
+	for _, player in ipairs(AllPlayers) do
+		if not player:HasTag("playerghost") and inst:GetDistanceSqToInst(player) <= RADIUS * RADIUS then
+			if player.components.hunger then
+				player.components.hunger:SetPercent(1)
+			end
+			if player.components.sanity then
+				player.components.sanity:SetPercent(1)
+			end
+
+			if player.components.health then
+				player.components.health:SetPercent(1)
+			end
+		end
+	end
+
+	inst.AnimState:PlayAnimation("unappeased", false)
+	inst.AnimState:PushAnimation("close", false)
+	inst.AnimState:PushAnimation("idle_close", false)
+	inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_addpart", "teleportato_addpart")
+
+	-- 把路堵死
+	local a, b, c = inst.Transform:GetWorldPosition()
+	local pig = SpawnPrefab("lavaarena_spectatorblocker")
+	pig.Transform:SetPosition(a, b, c - 32)
+	pig:ForceFacePoint(a, b, c)
+	inst.blocker = pig
+	local fx = SpawnPrefab("lavaarena_creature_teleport_small_fx")
+	fx.Transform:SetPosition(a, b, c - 32)
+
+	inst.enemy_count = item.enemy_count
+	inst.arenaativa = item.arenaativa
+end
+
+local function OnRefuse(inst, giver, item)
+	giver:DoTaskInTime(0.5, function()
+		if giver.components.talker then
+			giver.components.talker:Say("只有在战斗大师那里购买的祭品才能放进去。")
+		end
+	end)
+end
+
+local function SpawnEnemy(pos, list)
+	local fxs = {}
+	for _, v in ipairs(type(list) == "table" and list or { list }) do
+		local ent = SpawnPrefab(v)
+		TheWorld.components.lavaarenamobtracker:StartTracking(ent)
+		ent.persists = false
+
+		local aparece = math.random(4)
+		local offx, offz = 0, 0
+		if aparece == 1 then
+			offx = -29
+		elseif aparece == 2 then
+			offz = -25
+		elseif aparece == 3 then
+			offz = 28
+		elseif aparece == 4 then
+			offx = 29
+		end
+
+		ent.Transform:SetPosition(pos.x + offx, 0, pos.z + offz)
+		if not fxs[aparece] then
+			SpawnPrefab("lavaarena_portal_player_fx").Transform:SetPosition(pos.x + offx, 0, pos.z + offz)
+			fxs[aparece] = true
+		end
+	end
+end
+
+local function Update(inst)
+	if inst.arenaativa == 0 then return end
+
+	local current = TheWorld.components.lavaarenamobtracker:GetNumMobs()
+	local all = inst.enemy_count + current
+	local pt = inst:GetPosition()
+
+	if all > 0 then
+		inst.components.trader:Disable()
+		inst.components.talker:Say("Enemies Left " .. all .. "")
+	else
+		--结束
+		SpawnChest(inst)
+		ClearState(inst)
+		return
+	end
+
+	if inst.enemy_count <= 0 then
+		return
+	end
+
+	-- 生成怪物
+
+	local enemys
+	if inst.arenaativa == 1 then
+		inst.wave = inst.enemy_count > 16 and 1
+			or inst.enemy_count > 7 and 2
+			or inst.enemy_count > 1 and 3
+			or 4
+		enemys = battlespider
+	elseif inst.arenaativa == 2 then
+		inst.wave = inst.enemy_count > 21 and 1
+			or inst.enemy_count > 14 and 2
+			or inst.enemy_count > 7 and 3
+			or 4
+		enemys = battlehound
+	elseif inst.arenaativa == 3 then
+		inst.wave = inst.enemy_count > 11 and 1
+			or inst.enemy_count > 5 and 2
+			or inst.enemy_count > 1 and 3
+			or 4
+
+		enemys = battlemerm
+	elseif inst.arenaativa == 4 then
+		inst.wave = inst.enemy_count > 16 and 1
+			or inst.enemy_count > 14 and 2
+			or inst.enemy_count > 6 and 3
+			or inst.enemy_count > 2 and 4
+			or 5
+
+		enemys = battleboar
+	elseif inst.arenaativa == 5 then
+		inst.wave = inst.enemy_count > 20 and 1
+			or inst.enemy_count > 18 and 2
+			or inst.enemy_count > 14 and 3
+			or inst.enemy_count > 12 and 4
+			or inst.enemy_count > 8 and 5
+			or inst.enemy_count > 6 and 6
+			or inst.enemy_count > 2 and 7
+			or 8
+
+		enemys = battleknight
+	elseif inst.arenaativa == 6 then
+		inst.wave = inst.enemy_count > 20 and 1
+			or inst.enemy_count > 18 and 2
+			or inst.enemy_count > 14 and 3
+			or inst.enemy_count > 13 and 4
+			or inst.enemy_count > 8 and 5
+			or inst.enemy_count > 6 and 6
+			or inst.enemy_count > 1 and 7
+			or 8
+		enemys = battlelizard
+	elseif inst.arenaativa == 7 then
+		inst.wave = inst.enemy_count > 20 and 1
+			or inst.enemy_count > 18 and 2
+			or inst.enemy_count > 14 and 3
+			or inst.enemy_count > 13 and 4
+			or inst.enemy_count > 8 and 5
+			or inst.enemy_count > 6 and 6
+			or inst.enemy_count > 2 and 7
+			or inst.enemy_count > 1 and 8
+			or 9
+		enemys = battlebossboar
+	elseif inst.arenaativa == 8 then
+		inst.wave = inst.enemy_count > 20 and 1
+			or inst.enemy_count > 18 and 2
+			or inst.enemy_count > 14 and 3
+			or inst.enemy_count > 13 and 4
+			or inst.enemy_count > 8 and 5
+			or inst.enemy_count > 6 and 6
+			or inst.enemy_count > 2 and 7
+			or inst.enemy_count > 1 and 8
+			or 9
+		enemys = battlerhinocebros
+	elseif inst.arenaativa == 9 then
+		inst.wave = inst.enemy_count > 20 and 1
+			or inst.enemy_count > 18 and 2
+			or inst.enemy_count > 14 and 3
+			or inst.enemy_count > 13 and 4
+			or inst.enemy_count > 8 and 5
+			or inst.enemy_count > 6 and 6
+			or inst.enemy_count > 2 and 7
+			or inst.enemy_count > 1 and 8
+			or 9
+		enemys = battlebeetletaur
+	end
+
+	inst.contadorspider = inst.contadorspider + 1 --计时器
+	if inst.contadorspider > 20 and current < 6 then
+		for i = 1, 3 do
+			SpawnEnemy(pt, enemys[inst.wave])
+			inst.enemy_count = inst.enemy_count - 1
+		end
+		inst.contadorspider = 0
+	end
+end
+
+local function OnActivate(inst, doer)
+	ClearState(inst)
+	return true
+end
+
+local function OnPlayerNear(inst)
+	inst.Light:SetRadius(RADIUS)
+	inst.Light:SetIntensity(1)
+end
+
+local function OnPlayerFar(inst)
+	inst:DoTaskInTime(2, function()
+		if not inst.components.playerprox:IsPlayerClose() then
+			inst.Light:SetRadius(5)
+			inst.Light:SetIntensity(.2)
+			ClearState(inst)
+		end
+	end)
+end
+
+local function fn()
+	local inst = CreateEntity()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddMiniMapEntity()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddLight()
+	inst.entity:AddNetwork()
+
+	inst.AnimState:SetBank("volcano_altar_fx")
+	inst.AnimState:SetBuild("volcano_altar_fx")
+	inst.AnimState:PlayAnimation("idle_open", true)
 
 	MakeObstaclePhysics(inst, 1.1)
 
-	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetPriority(5)
-	minimap:SetIcon("teleportato_base.png")
-	minimap:SetPriority(1)
+	inst.MiniMapEntity:SetPriority(5)
+	inst.MiniMapEntity:SetIcon("teleportato_base.png")
+	inst.MiniMapEntity:SetPriority(1)
 
-	inst.entity:AddSoundEmitter()
-
-	inst.entity:AddLight()
+	inst.Light:SetIntensity(.2)
 	inst.Light:SetFalloff(0.4)
-	inst.Light:SetIntensity(.7)
-	inst.Light:SetRadius(10)
+	inst.Light:SetRadius(58) --竞技场的最大半径
 	inst.Light:SetColour(249 / 255, 130 / 255, 117 / 255)
 	inst.Light:Enable(true)
 
-	inst:AddComponent("talker")
-
 	inst:AddTag("recipientedosmobs")
 	inst:AddTag("resurrector")
+
+	inst:AddComponent("talker")
+	inst.components.talker.fontsize = 35
+	inst.components.talker.font = TALKINGFONT
+	inst.components.talker.offset = Vector3(0, -400, 0)
 
 	inst.entity:SetPristine()
 
@@ -1851,9 +444,22 @@ local function fn(Sim)
 		return inst
 	end
 
+	inst.enemy_count = 0 --需要生成的敌人数量
+	inst.wave = 0        --波数
+	inst.contadorspider = 0 --计时器
+	inst.arenaativa = 0  --关卡
+
+	inst.blocker = nil
+
+	inst:AddComponent("playerprox")
+	inst.components.playerprox:SetDist(32, 58)
+	inst.components.playerprox:SetOnPlayerNear(OnPlayerNear)
+	inst.components.playerprox:SetOnPlayerFar(OnPlayerFar)
+
 	inst:AddComponent("trader")
-	inst.components.trader:SetAcceptTest(ItemTradeTest)
-	inst.components.trader.onaccept = ItemGet
+	inst.components.trader:SetAcceptTest(AcceptTest)
+	inst.components.trader:SetOnAccept(OnAccept)
+	inst.components.trader:SetOnRefuse(OnRefuse)
 
 	inst:AddComponent("inspectable")
 
@@ -1861,39 +467,7 @@ local function fn(Sim)
 	inst.components.hauntable:SetHauntValue(TUNING.HAUNT_INSTANT_REZ)
 	inst.components.hauntable:SetOnHauntFn(OnActivate)
 
-	inst:DoPeriodicTask(0.5, statusdabatalha)
-
-	--[[
-local function oninit(inst)
-
-local x, y, z = inst.Transform:GetLocalPosition()
-local fx = SpawnPrefab("log")
-if fx then fx.Transform:SetPosition(x+29, y, z+2) end
-
-local x, y, z = inst.Transform:GetLocalPosition()
-local fx = SpawnPrefab("log")
-if fx then fx.Transform:SetPosition(x-29, y, z+2) end
-
-
-local x, y, z = inst.Transform:GetLocalPosition()
-local fx = SpawnPrefab("log")
-if fx then fx.Transform:SetPosition(x, y, z+28) end
-
-local x, y, z = inst.Transform:GetLocalPosition()
-local fx = SpawnPrefab("log")
-if fx then fx.Transform:SetPosition(x, y, z-25) end
-
-local x, y, z = inst.Transform:GetLocalPosition()
-local fx = SpawnPrefab("log")
-if fx then fx.Transform:SetPosition(x, y, z-32) end
-
-
-end
-
-inst:DoTaskInTime(0, oninit)
-]]
-	inst.OnSave = onsave
-	inst.OnLoad = onload
+	inst:DoPeriodicTask(0.5, Update)
 
 	return inst
 end

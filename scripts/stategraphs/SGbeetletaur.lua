@@ -48,7 +48,7 @@ local function JumpToPosition(inst, target_pos, total_frames)
         local starting_pos = inst:GetPosition()
         inst:ForceFacePoint(target_pos:Get())
         inst.Physics:SetMotorVel(
-        math.sqrt(distsq(starting_pos.x, starting_pos.z, target_pos.x, target_pos.z)) / (total_frames * FRAMES), 0, 0)
+            math.sqrt(distsq(starting_pos.x, starting_pos.z, target_pos.x, target_pos.z)) / (total_frames * FRAMES), 0, 0)
     end
 end
 
@@ -66,10 +66,10 @@ local function FindDouble(inst, tags)
     return #doubles
 end
 
-local function GetHealAuras(inst, range)
+local function GetHealAuras(inst)
     local pos = inst:GetPosition()
-    local range = range or 8
-    local heal_auras = TheSim:FindEntities(pos.x, 0, pos.z, range, { "healingcircle" })
+
+    local heal_auras = TheSim:FindEntities(pos.x, 0, pos.z, 1, { "lavaarena_bloom" })
     if heal_auras then
         table.sort(heal_auras, function(a, b)
             local a_distance_sq = distsq(a:GetPosition(), pos)
@@ -111,7 +111,7 @@ end
 local function ShouldBodySlam(inst)
     local target = inst.components.combat.target
     return not ShouldGuard(inst) and inst.sg.mem.wants_to_slam and inst.attacks.body_slam and inst
-    .attack_body_slam_ready and (IsTargetInBodySlamRange(inst, target) or IsTargetInMeleeRange(inst, target))
+        .attack_body_slam_ready and (IsTargetInBodySlamRange(inst, target) or IsTargetInMeleeRange(inst, target))
 end
 
 local function DoBattleCryBuff(inst)
@@ -215,8 +215,8 @@ local events = {
                 --inst.components.sleeper.isasleep = false
             elseif not (inst.sg:HasStateTag("nofreeze") or inst.sg:HasStateTag("nointerrupt") or inst:HasTag("fire" or inst.sg.currentstate.name == "sleep")) then
                 inst.sg:GoToState(inst.sg.currentstate.name == "sleeping" and "sleeping" or
-                not inst.sg:HasStateTag("sleeping") and inst.attacks.body_slam and inst.attack_body_slam_ready and
-                "body_slam" or "sleep")
+                    not inst.sg:HasStateTag("sleeping") and inst.attacks.body_slam and inst.attack_body_slam_ready and
+                    "body_slam" or "sleep")
             end
         end
     end),
@@ -388,8 +388,8 @@ local states = {
                     inst.sg:GoToState(inst.sg.statemem.wants_to_slam and "body_slam" or "idle")
                 elseif not EndCombo(inst, inst.attacks.uppercut) then
                     inst.sg:GoToState(
-                    inst.sg.statemem.current_combo >= inst.attacks.combo and inst.attacks.uppercut and "uppercut" or
-                    inst.sg.statemem.current_combo < inst.attacks.combo and "attack_combo_left_hook",
+                        inst.sg.statemem.current_combo >= inst.attacks.combo and inst.attacks.uppercut and "uppercut" or
+                        inst.sg.statemem.current_combo < inst.attacks.combo and "attack_combo_left_hook",
                         { current_combo = inst.sg.statemem.current_combo, target = inst.sg.statemem.target })
                 else
                     inst.sg.statemem.end_combo = true

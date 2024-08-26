@@ -196,4 +196,4 @@ return
     Prefab("lavaarena_spectator2", fn2, assets, prefabs),
     Prefab("lavaarena_spectator3", fn3, assets, prefabs),
     Prefab("lavaarena_spectator4", fn4, assets, prefabs),
-    Prefab("lavaarena_cerca", cerca, assets, prefabs) --TODO 优化掉，用lavaarena_crowdstand替代
+    Prefab("lavaarena_cerca", cerca, assets, prefabs)

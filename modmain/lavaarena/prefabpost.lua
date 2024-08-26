@@ -80,6 +80,7 @@ AddPrefabPostInit("world", function(inst)
     if not TheWorld.ismastersim then return end
 
     TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_portal")                 --熔炉传送门
+    TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_center")                 --角斗容器
     TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_battlestandard_damager") --战旗
     TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_battlestandard_shield")
     TheWorld.components.tro_tempentitytracker:AddKey("lavaarena_battlestandard_heal")
@@ -88,19 +89,27 @@ end)
 ----------------------------------------------------------------------------------------------------
 --根据战旗添加buff
 local function StartTrackingBefore(self, ent)
-    for _, v in ipairs({
-        "lavaarena_battlestandard_damager",
-        "lavaarena_battlestandard_shield",
-        "lavaarena_battlestandard_heal"
-    }) do
-        local flag = TheWorld.components.tro_tempentitytracker:GetEnts(v)[1]
-        if flag then
-            ent:AddDebuff(flag.debuffprefab, flag.debuffprefab)
+    self.count = self.count + 1
+
+    if TheWorld.ismastersim then
+        for _, v in ipairs({
+            "lavaarena_battlestandard_damager",
+            "lavaarena_battlestandard_shield",
+            "lavaarena_battlestandard_heal"
+        }) do
+            local flag = TheWorld.components.tro_tempentitytracker:GetEnts(v)[1]
+            if flag then
+                ent:AddDebuff(flag.debuffprefab, flag.debuffprefab)
+            end
         end
     end
 end
 
+local function StopTrackingBefore(self)
+    self.count = self.count - 1
+end
+
 AddComponentPostInit("lavaarenamobtracker", function(self)
-    if not TheWorld.ismastersim then return end
     Utils.FnDecorator(self, "StartTracking", StartTrackingBefore)
+    Utils.FnDecorator(self, "StopTracking", StopTrackingBefore)
 end)

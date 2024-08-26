@@ -340,7 +340,7 @@ local function entrance()
 			end
 		end
 
-		local part = SpawnPrefab("teleportato2")
+		local part = SpawnPrefab("lavaarena_center")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 20, 0, z)
 			if part.components.health ~= nil then

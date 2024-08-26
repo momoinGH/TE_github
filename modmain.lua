@@ -25,21 +25,21 @@ local ALL_ASSETS = {}
 local language = string.lower(GetModConfigData("language"))
 GLOBAL.WIKI_DATA = {}
 
+
 --- 导入对应模块的文件，不需要的文件可以不存在
 local function Modimport(dirc)
 	SafeModImport("modmain/" .. dirc .. "/tuning")            --定义的变量
 	SafeModImport("modmain/" .. dirc .. "/constants")         --一些全局变量、全局函数
 	SafeModImport("modmain/" .. dirc .. "/prefablist")        --Prefabs中追加预制件
 	SafeModImport("modmain/" .. dirc .. "/assets")            --注册资产
-
 	SafeModImport("modmain/" .. dirc .. "/languages/strings_en") --英文版本兜底，不使用的台词不应该添加
 	SafeModImport("modmain/" .. dirc .. "/languages/strings_" .. language)
 	SafeModImport("modmain/" .. dirc .. "/languages/modwiki_zh") -- 其他语言的wiki先不管
-
 	SafeModImport("modmain/" .. dirc .. "/containers")        --定义容器
 	SafeModImport("modmain/" .. dirc .. "/character")         --添加角色，角色相关变量定义
 	SafeModImport("modmain/" .. dirc .. "/ui")                --UI相关
 	SafeModImport("modmain/" .. dirc .. "/prefabpost")        --组件、预制件的修改
+	SafeModImport("modmain/" .. dirc .. "/fx")                --特效
 	SafeModImport("modmain/" .. dirc .. "/actions")           --action相关
 	SafeModImport("modmain/" .. dirc .. "/sg")                --Stategraph相关
 	SafeModImport("modmain/" .. dirc .. "/recipes")           --配方相关
@@ -119,7 +119,5 @@ modimport "scripts/prefabs/tropical_farm_plant_defs"
 
 AddMinimap()
 
-
-modimport("scripts/ham_fx")
 
 modimport("scripts/cooking_tropical")

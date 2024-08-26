@@ -36,7 +36,7 @@ local room = {
         { name = "pigman_eskimo_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk" },
         { name = "deco_roomglow" },
         { name = "shelves_wood", x_offset = -4.5, z_offset = -4 },
-        { name = "shelves_wood2", x_offset = -4.5, z_offset = 4 },
+        { name = "shelves_wood", x_offset = -4.5, z_offset = 4 },
         { name = "rug_hedgehog", x_offset = -2, z_offset = 4 },
         { name = "deco_wood_cornerbeam", x_offset = -5, z_offset = 7.5 },
         { name = "deco_wood_cornerbeam", x_offset = -5, z_offset = -7.5 },

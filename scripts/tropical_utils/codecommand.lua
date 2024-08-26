@@ -376,6 +376,9 @@ end
 function d_spawnlayout(name, offset)
 end
 
+require("debugcommands");
+d_spawnlayout("");
+
 ---以鼠标所指位置为圆心，摆一圈燧石
 function d_radius(radius, num, lifetime)
 end

@@ -48,11 +48,11 @@ function HealAura:OnEntEnter(target)
 
     if target.components.colourfader then target.components.colourfader:StartFade({ 0, 0.3, 0.1 }, .35) end;
     if (target:HasTag("player") or target:HasTag("companion")) and target.components.debuffable ~= nil and target.components.debuffable:IsEnabled() and not (target.components.health ~= nil and target.components.health:IsDead()) and not target:HasTag("playerghost") then
-        target.components.debuffable:AddDebuff("healingcircle_regenbuff", "healingcircle_regenbuff")
-        target.components.debuffable.debuffs["healingcircle_regenbuff"].inst.heal_value = self.heal_rate *
-            target.components.debuffable.debuffs["healingcircle_regenbuff"].inst.tick_rate;
-        target.components.debuffable.debuffs["healingcircle_regenbuff"].inst.caster =
-            self.caster;
+        -- target.components.debuffable:AddDebuff("healingcircle_regenbuff", "healingcircle_regenbuff")
+        -- target.components.debuffable.debuffs["healingcircle_regenbuff"].inst.heal_value = self.heal_rate *
+        --     target.components.debuffable.debuffs["healingcircle_regenbuff"].inst.tick_rate;
+        -- target.components.debuffable.debuffs["healingcircle_regenbuff"].inst.caster =
+        --     self.caster;
         if target.components.debuffable:HasDebuff("scorpeon_dot") then
             target.components.debuffable:RemoveDebuff(
                 "scorpeon_dot")

@@ -6,313 +6,54 @@ local assets =
     Asset("ANIM", "anim/lavaarena_beetletaur_basic.zip"),
 }
 
-local function fn()
-    local inst = CreateEntity()
+local function MakeTribute(name, bank, build, anim, scale, arenaativa, enemy_count)
+    local function fn()
+        local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
+        inst.entity:AddSoundEmitter()
+        inst.entity:AddNetwork()
 
-    MakeInventoryPhysics(inst)
+        MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("spider")
-    inst.AnimState:SetBuild("spider_build")
-    inst.AnimState:PlayAnimation("idle", true)
-    inst.Transform:SetScale(.4, .4, .4)
+        inst.AnimState:SetBank(bank)
+        inst.AnimState:SetBuild(build)
+        inst.AnimState:PlayAnimation(anim, true)
+        inst.Transform:SetScale(scale, scale, scale)
 
-    inst.entity:SetPristine()
+        inst:AddTag("lavaarena_tribute")
 
-    if not TheWorld.ismastersim then
+        inst.entity:SetPristine()
+
+        if not TheWorld.ismastersim then
+            return inst
+        end
+
+        inst.enemy_count = enemy_count
+        inst.arenaativa = arenaativa
+
+        inst:AddComponent("tradable")
+
+        inst:AddComponent("inspectable")
+
+        inst:AddComponent("inventoryitem")
+        inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+
+        MakeHauntableLaunchAndSmash(inst)
+
         return inst
     end
 
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
-    MakeHauntableLaunchAndSmash(inst)
-
-    return inst
+    return Prefab(name, fn, assets)
 end
 
-local function fn1()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
-
-    inst.AnimState:SetBank("hound")
-    inst.AnimState:SetBuild("hound")
-    inst.AnimState:PlayAnimation("idle", true)
-    inst.Transform:SetScale(.3, .3, .3)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
-    MakeHauntableLaunchAndSmash(inst)
-
-    return inst
-end
-
-local function fn2()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
-
-    inst.AnimState:SetBank("pigman")
-    inst.AnimState:SetBuild("merm_build")
-    inst.AnimState:PlayAnimation("idle_loop", true)
-    inst.Transform:SetScale(.3, .3, .3)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
-    MakeHauntableLaunchAndSmash(inst)
-
-    return inst
-end
-
-local function fn3()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
-
-    inst.AnimState:SetBank("boaron")
-    inst.AnimState:SetBuild("lavaarena_boaron_basic")
-    inst.AnimState:PlayAnimation("idle_loop", true)
-    inst.Transform:SetScale(.3, .3, .3)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
-    MakeHauntableLaunchAndSmash(inst)
-
-    return inst
-end
-
-local function fn4()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
-
-    inst.AnimState:SetBank("knight")
-    inst.AnimState:SetBuild("knight_build")
-    inst.AnimState:PlayAnimation("idle_loop", true)
-    inst.Transform:SetScale(.3, .3, .3)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
-    MakeHauntableLaunchAndSmash(inst)
-
-    return inst
-end
-
-local function fn5()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
-
-    inst.AnimState:SetBank("snapper")
-    inst.AnimState:SetBuild("lavaarena_snapper_basic")
-    inst.AnimState:PlayAnimation("idle_loop")
-    inst.Transform:SetScale(.3, .3, .3)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
-    MakeHauntableLaunchAndSmash(inst)
-
-    return inst
-end
-
-local function fn6()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
-
-
-    inst.AnimState:SetBank("boarrior")
-    inst.AnimState:SetBuild("lavaarena_boarrior_basic")
-    inst.AnimState:PlayAnimation("idle_loop")
-    inst.Transform:SetScale(.2, .2, .2)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
-    MakeHauntableLaunchAndSmash(inst)
-
-    return inst
-end
-
-local function fn7()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
-
-
-    inst.AnimState:SetBank("rhinodrill")
-    inst.AnimState:SetBuild("lavaarena_rhinodrill_basic")
-    inst.AnimState:PlayAnimation("idle_loop")
-
-    inst.Transform:SetScale(.2, .2, .2)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
-    MakeHauntableLaunchAndSmash(inst)
-
-    return inst
-end
-
-local function fn8()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
-
-
-    inst.AnimState:SetBank("beetletaur")
-    inst.AnimState:SetBuild("lavaarena_beetletaur")
-    inst.AnimState:PlayAnimation("idle_loop", true)
-    inst.Transform:SetScale(.2, .2, .2)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
-    MakeHauntableLaunchAndSmash(inst)
-
-    return inst
-end
-
-return Prefab("spiderbattle", fn, assets),
-    Prefab("houndbattle", fn1, assets),
-    Prefab("mermbattle", fn2, assets),
-    Prefab("boarbattle", fn3, assets),
-    Prefab("knightbattle", fn4, assets),
-    Prefab("lizardbattle", fn5, assets),
-    Prefab("bossboarbattle", fn6, assets),
-    Prefab("rhinocebrosbattle", fn7, assets),
-    Prefab("swineclopsbattle", fn8, assets)
+return MakeTribute("spiderbattle", "spider", "spider_build", "idle", .4, 1, 27),
+    MakeTribute("houndbattle", "hound", "hound", "idle", .3, 2, 28),
+    MakeTribute("mermbattle", "pigman", "merm_build", "idle_loop", .3, 3, 18),
+    MakeTribute("boarbattle", "boaron", "lavaarena_boaron_basic", "idle_loop", .3, 4, 24),
+    MakeTribute("knightbattle", "knight", "knight_build", "idle_loop", .3, 5, 24),
+    MakeTribute("lizardbattle", "snapper", "lavaarena_snapper_basic", "idle_loop", .3, 6, 24),
+    MakeTribute("bossboarbattle", "boarrior", "lavaarena_boarrior_basic", "idle_loop", .2, 7, 24),
+    MakeTribute("rhinocebrosbattle", "rhinodrill", "lavaarena_rhinodrill_basic", "idle_loop", .2, 8, 24),
+    MakeTribute("swineclopsbattle", "beetletaur", "lavaarena_beetletaur", "idle_loop", .2, 9, 24)

@@ -36,15 +36,15 @@ local brain = require "brains/bishopbrain"
 
 SetSharedLootTable('bishop',
     {
-        { 'gears',     1.0 },
-        { 'gears',     1.0 },
+        { 'gears', 1.0 },
+        { 'gears', 1.0 },
         { 'purplegem', 1.0 },
     })
 
 SetSharedLootTable('bishop_nightmare',
     {
-        { 'purplegem',        1.0 },
-        { 'nightmarefuel',    0.6 },
+        { 'purplegem', 1.0 },
+        { 'nightmarefuel', 0.6 },
         { 'thulecite_pieces', 0.5 },
     })
 
@@ -313,38 +313,6 @@ local function bishop_nightmare_fn()
     return inst
 end
 
-local function bishop_fnb()
-    local inst = common_fn("bishop_build")
-    inst:AddTag("Arena")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.components.lootdropper:SetChanceLootTable('bishopb')
-    inst.kind = ""
-    inst.soundpath = "dontstarve/creatures/bishop/"
-    inst.effortsound = "dontstarve/creatures/bishop/idle"
-
-    return inst
-end
-
-local function bishop_nightmare_fnb()
-    local inst = common_fn("bishop_nightmare", "cavedweller")
-    inst:AddTag("Arena")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.components.lootdropper:SetChanceLootTable('bishopb')
-    inst.kind = "_nightmare"
-    inst.soundpath = "dontstarve/creatures/bishop_nightmare/"
-    inst.effortsound = "dontstarve/creatures/bishop_nightmare/rattle"
-
-    return inst
-end
-
 local function onruinsrespawn(inst, respawner)
     if not respawner:IsAsleep() then
         inst.sg:GoToState("ruinsrespawn")
@@ -353,6 +321,5 @@ end
 
 return Prefab("bishop", bishop_fn, assets, prefabs),
     Prefab("bishop_nightmare", bishop_nightmare_fn, assets, prefabs_nightmare),
-    Prefab("bishopb", bishop_fnb, assets, prefabs),
-    Prefab("bishop_nightmareb", bishop_nightmare_fnb, assets, prefabs_nightmare),
-    RuinsRespawner.Inst("bishop_nightmare", onruinsrespawn), RuinsRespawner.WorldGen("bishop_nightmare", onruinsrespawn)
+    RuinsRespawner.Inst("bishop_nightmare", onruinsrespawn),
+    RuinsRespawner.WorldGen("bishop_nightmare", onruinsrespawn)
