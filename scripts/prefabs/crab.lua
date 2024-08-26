@@ -15,7 +15,6 @@ local assets =
 local CRAB_WALK_SPEED = 1.5
 local CRAB_RUN_SPEED = 5
 local CRAB_HEALTH = 50
-local APPEASEMENT_MEDIUM = 16
 local BEARDLING_SANITY = .4
 
 local prefabs =
@@ -231,9 +230,6 @@ local function fn(Sim)
 	inst:AddComponent("inspectable")
 	inst.components.inspectable.getstatus = getstatus
 	inst:AddComponent("sleeper")
-
-	inst:AddComponent("appeasement")
-	inst.components.appeasement.appeasementvalue = APPEASEMENT_MEDIUM
 
 	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
 	inst.components.locomotor.runspeed = CRAB_RUN_SPEED

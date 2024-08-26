@@ -3,9 +3,6 @@ local assets =
 	Asset("ANIM", "anim/blubber.zip"),
 }
 
-local APPEASEMENT_SMALL = 8
-
-
 local function fn(Sim)
 	local inst = CreateEntity()
 	inst.entity:AddTransform()

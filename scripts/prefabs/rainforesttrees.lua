@@ -51,8 +51,8 @@ local JUNGLETREESEED_GROWTIME = { base = 4.5 * day_time, random = 0.75 * day_tim
 local JUNGLETREE_GROW_TIME =
 {
 	{ base = 4.5 * day_time, random = 0.5 * day_time }, --tall to short
-	{ base = 8 * day_time,   random = 5 * day_time }, --short to normal
-	{ base = 8 * day_time,   random = 5 * day_time }, --normal to tall
+	{ base = 8 * day_time, random = 5 * day_time },  --short to normal
+	{ base = 8 * day_time, random = 5 * day_time },  --normal to tall
 }
 
 local SNAKE_JUNGLETREE_AMOUNT_TALL = 2 -- num of times to try and spawn a snake from a tall tree
@@ -252,6 +252,16 @@ end
 
 local function stopbloom(inst)
 	doTransformNormal(inst)
+end
+
+local function dropBurr(inst)
+	if not inst:HasTag("burnt") then
+		local burr = SpawnPrefab("burr")
+		local pt = Vector3(inst.Transform:GetWorldPosition())
+		burr.AnimState:PlayAnimation("drop")
+		burr.AnimState:PushAnimation("idle")
+		burr.Transform:SetPosition(pt:Get())
+	end
 end
 
 local function OnSeasonChange(inst)
@@ -862,8 +872,8 @@ local function makefn(build, stage, data)
 		inst:AddTag("jungletree")
 		inst:AddTag("plant")
 		inst:AddTag("twiggytreesw")
-        inst:AddTag("spyable")
-		
+		inst:AddTag("spyable")
+
 		if build == "rot" then
 			inst:AddTag("rotten")
 			minimap:SetIcon("rainforesttree_rot.png")
@@ -911,11 +921,11 @@ local function makefn(build, stage, data)
 
 		inst.growfromseed = handler_growfromseed
 
-		--		inst:AddComponent("bloomable")
-		--		inst.components.bloomable:SetCanBloom(canbloom)
-		--		inst.components.bloomable:SetStartBloomFn(startbloom)
-		--		inst.components.bloomable:SetStopBloomFn(stopbloom)
-		--		inst.components.bloomable:SetDoBloom(dropBurr)
+		inst:AddComponent("bloomable")
+		inst.components.bloomable:SetCanBloom(canbloom)
+		inst.components.bloomable:SetStartBloomFn(startbloom)
+		inst.components.bloomable:SetStopBloomFn(stopbloom)
+		inst.components.bloomable:SetDoBloom(dropBurr)
 		inst:AddComponent("mystery")
 
 		---------------------
@@ -955,15 +965,6 @@ local function makefn(build, stage, data)
 			inst.components.workable:SetWorkLeft(1)
 		end
 
-		--		inst:ListenForEvent("blownbywind", function()
-		--	    	if inst.components.bloomable:CanBloom() and inst:HasTag("blooming") then
-		--	    		if math.random()< 0.30 then  --0.15
-		--	    			inst.components.bloomable:DoBloom()
-		--	    		end
-		--	    	end
-		--	    end)
-
-		--		inst:WatchWorldState("startday", OnSeasonChange)
 		inst:DoTaskInTime(0, OnSeasonChange)
 
 		inst.OnEntitySleep = OnEntitySleep

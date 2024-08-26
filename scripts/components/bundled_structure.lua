@@ -1,6 +1,9 @@
 local function onname(self, name)
 	self.inst._name:set(tostring(name))
 end
+
+--- 哈姆雷特用来打包被锤毁的建筑的
+--- TODO 删掉
 local Bundled_Structure = Class(function(self, inst)
 	self.inst = inst
 	self.canpackfn = nil

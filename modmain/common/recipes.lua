@@ -192,16 +192,20 @@ end
 AddRecipe2("campfire", { Ingredient("cutgrass", 3), Ingredient("log", 2) }, TECH.NONE, { placer = "campfire_placer" })
 
 --CHARACTER--
---Walani
-AddRecipe2("surfboarditem", { Ingredient("boards", 1), Ingredient("seashell", 1, v_atlas) }, TECH.NONE,
-    { builder_tag = "walani", atlas = v_atlas }, { "CHARACTER" })
---Woodlegs
-AddRecipe2("porto_woodlegsboat",
-    { Ingredient("boards", 4), Ingredient("dubloon", 4, v_atlas), Ingredient("boatcannon", 1, v_atlas) }, TECH.NONE,
-    { builder_tag = "woodlegs", atlas = v_atlas }, { "CHARACTER" })
-AddRecipe2("luckyhat",
-    { Ingredient("boneshard", 4), Ingredient("fabric", 3, v_atlas), Ingredient("dubloon", 10, v_atlas) },
-    TECH.NONE, { builder_tag = "woodlegs", atlas = v_atlas }, { "CHARACTER" })
+if not GetModConfigData("disablecharacters") then
+    --Walani
+    AddRecipe2("surfboarditem", { Ingredient("boards", 1), Ingredient("seashell", 1, v_atlas) }, TECH.NONE,
+        { builder_tag = "walani", atlas = v_atlas }, { "CHARACTER" })
+    --Woodlegs
+    AddRecipe2("porto_woodlegsboat",
+        { Ingredient("boards", 4), Ingredient("dubloon", 4, v_atlas), Ingredient("boatcannon", 1, v_atlas) }, TECH.NONE,
+        { builder_tag = "woodlegs", atlas = v_atlas }, { "CHARACTER" })
+    AddRecipe2("luckyhat",
+        { Ingredient("boneshard", 4), Ingredient("fabric", 3, v_atlas), Ingredient("dubloon", 10, v_atlas) },
+        TECH.NONE, { builder_tag = "woodlegs", atlas = v_atlas }, { "CHARACTER" })
+end
+
+
 --Wormwood
 AddRecipe2("poisonbalm", { Ingredient("livinglog", 1), Ingredient("venomgland", 1, v_atlas) }, TECH.NONE,
     { builder_tag = "plantkin", atlas = h_atlas }, { "CHARACTER" })
@@ -235,7 +239,7 @@ AddRecipe2("mermhouse_tropical_crafted",
         atlas = v_atlas,
         placer = "mermhouse_tropical_crafted_placer",
         testfn = function(pt,
-                          rot)
+            rot)
             local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
             return ground_tile and
                 (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)

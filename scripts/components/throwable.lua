@@ -1,3 +1,4 @@
+-- TODO 能用原版组件替换吗
 local Throwable = Class(function(self, inst)
 	self.inst = inst
 	self.onthrown = nil

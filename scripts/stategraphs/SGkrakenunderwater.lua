@@ -128,8 +128,8 @@ local states =
             inst.AnimState:PlayAnimation("taunt")
             inst.AnimState:PushAnimation("exit", false)
             inst.sg.statemem.pos = pos
-            inst.components.minionspawner2:DespawnAll()
-            inst.components.minionspawner2.minionpositions = nil
+            inst.components.minionspawner:DespawnAll()
+            inst.components.minionspawner.minionpositions = nil
             inst.sg:SetTimeout(4)
         end,
 
@@ -183,10 +183,12 @@ local states =
 
         timeline =
         {
-            TimeEvent(50 * FRAMES, function(inst) inst.components.minionspawner2:SpawnAll() end),
+            TimeEvent(50 * FRAMES, function(inst) inst.components.minionspawner:SpawnAll() end),
             TimeEvent(70 * FRAMES, function(inst) inst.sg.statemem.smashed = DoAOEAttack(inst, .8, 4) end),
-            TimeEvent(35 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/quacken/enter") end)
+            TimeEvent(35 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/quacken/enter")
+            end)
         },
 
         events =
@@ -206,8 +208,8 @@ local states =
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("death")
-            inst.components.minionspawner2:DespawnAll()
-            inst.components.minionspawner2.minionpositions = nil
+            inst.components.minionspawner:DespawnAll()
+            inst.components.minionspawner.minionpositions = nil
         end,
 
         timeline =
@@ -243,8 +245,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/quacken/taunt") end)
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/quacken/taunt")
+            end)
         },
 
         events =
@@ -268,7 +272,7 @@ local states =
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/taunt")
                 dogaze(inst)
             end),
-            TimeEvent(50 * FRAMES, function(inst) inst.components.minionspawner2:SpawnAll() end),
+            TimeEvent(50 * FRAMES, function(inst) inst.components.minionspawner:SpawnAll() end),
         },
 
         events =

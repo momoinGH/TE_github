@@ -243,6 +243,15 @@ local function OnDismantle(inst, doer)
         -- inst.SoundEmitter:PlaySound("meta4/winona_catapult/collapse")
         inst:Remove()
     end
+    return true
+end
+
+local function candismantle(inst, doer)
+    if TheWorld.ismastersim then
+        return not next(inst.components.walkableplatform:GetPlayersOnPlatform()) --船上不能有玩家
+    else
+        return doer:GetCurrentPlatform() ~= inst
+    end
 end
 
 ---fn
@@ -313,11 +322,10 @@ local function common(minimap, bank, build, loots, data)
 
     inst.on_start_steering = on_start_steering
     inst.on_stop_steering = on_stop_steering
-
     inst.walksound = "wood"
     inst.doplatformcamerazoom = net_bool(inst.GUID, "doplatformcamerazoom", "doplatformcamerazoomdirty")
-
     inst.GetBoatPlayer = GetBoatPlayer
+    inst.candismantle = candismantle
 
     if not TheNet:IsDedicated() then
         inst:ListenForEvent("endsteeringreticule", function(inst2, event_data)
@@ -371,8 +379,8 @@ local function common(minimap, bank, build, loots, data)
 
     if data.dismantlePrefab then --表示可收回
         inst.dismantlePrefab = data.dismantlePrefab
-        inst:AddComponent("portablestructure")
-        inst.components.portablestructure:SetOnDismantleFn(OnDismantle)
+        inst:AddComponent("pro_portablestructure")
+        inst.components.pro_portablestructure:SetOnDismantleFn(OnDismantle)
     end
 
     if data.container then

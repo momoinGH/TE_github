@@ -210,8 +210,6 @@ local function itemfn(Sim)
     inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
 
-    inst:AddComponent("fueltar")
-
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeSmallPropagator(inst)
 

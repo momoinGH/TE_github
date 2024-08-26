@@ -16,6 +16,7 @@ local Hackable = Class(function(self, inst)
 
 	self.hacksleft = 1
 	self.maxhacks = 1
+	self.onhackedfn = nil
 end, nil, {
 	canbehacked = oncanbehacked,
 	caninteractwith = oncanbehacked

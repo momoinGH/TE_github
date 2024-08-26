@@ -324,7 +324,7 @@ local function SpawnChest(inst)
 end
 
 local function OnRemove(inst)
-	inst.components.minionspawner2:DespawnAll()
+	inst.components.minionspawner:DespawnAll()
 end
 
 local function OnSave(inst, data)
@@ -361,8 +361,8 @@ local function fn()
 	inst:AddTag("epic")
 	inst:AddTag("noteleport")
 	inst:AddTag("mudacamada")
-    inst:AddTag("quebraonda")
-	
+	inst:AddTag("quebraonda")
+
 	MakeCharacterPhysics(inst, 1000, 1)
 
 	local minimap = inst.entity:AddMiniMapEntity()
@@ -390,15 +390,15 @@ local function fn()
 	inst:AddComponent("sanityaura")
 	inst:AddComponent("locomotor")
 
-	inst:AddComponent("minionspawner2")
-	inst.components.minionspawner2.validtiletypes = { GROUND.OCEAN_COASTAL, GROUND.OCEAN_WATERLOG, GROUND
+	inst:AddComponent("minionspawner")
+	inst.components.minionspawner.validtiletypes = { GROUND.OCEAN_COASTAL, GROUND.OCEAN_WATERLOG, GROUND
 		.OCEAN_COASTAL_SHORE, GROUND.OCEAN_SWELL, GROUND.OCEAN_ROUGH, GROUND.OCEAN_BRINEPOOL, GROUND
 		.OCEAN_BRINEPOOL_SHORE, GROUND.OCEAN_HAZARDOUS }
-	inst.components.minionspawner2.miniontype = "kraken_tentacle"
-	inst.components.minionspawner2.distancemodifier = 35
-	inst.components.minionspawner2.maxminions = 35
-	inst.components.minionspawner2:RegenerateFreePositions()
-	inst.components.minionspawner2.shouldspawn = false
+	inst.components.minionspawner.miniontype = "kraken_tentacle"
+	inst.components.minionspawner.distancemodifier = 35
+	inst.components.minionspawner.maxminions = 35
+	inst.components.minionspawner:RegenerateFreePositions()
+	inst.components.minionspawner.shouldspawn = false
 
 	inst:AddComponent("lootdropper")
 	inst.components.lootdropper:SetChanceLootTable('kraken')

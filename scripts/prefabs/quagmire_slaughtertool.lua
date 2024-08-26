@@ -39,10 +39,10 @@ local function fn()
     inst.AnimState:SetBuild("quagmire_slaughtertool")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddComponent("tropical_consumable")
-    inst.components.tropical_consumable.targetCheckFn = TargetCheck
-    inst.components.tropical_consumable.state = ConsumableState
-    inst.components.tropical_consumable.str = "KILLSOFTLY"
+    inst:AddComponent("tro_consumable")
+    inst.components.tro_consumable.targetCheckFn = TargetCheck
+    inst.components.tro_consumable.state = ConsumableState
+    inst.components.tro_consumable.str = "KILLSOFTLY"
 
     inst.entity:SetPristine()
 
@@ -50,13 +50,11 @@ local function fn()
         return inst
     end
 
-    inst.components.tropical_consumable.onUseFn = OnUse
+    inst.components.tro_consumable.onUseFn = OnUse
 
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("slaughtertool")
 
     if TheNet:GetServerGameMode() ~= "quagmire" then
         inst:AddComponent("finiteuses")

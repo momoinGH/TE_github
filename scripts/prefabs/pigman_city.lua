@@ -265,7 +265,7 @@ local function ShouldAcceptItem(inst, item)
         end
 
         if (item.components.edible.foodtype == "VEGGIE" or item.components.edible.foodtype == "RAW") then
-            local econ = GetWorld().components.economy
+            local econ = TheWorld.components.economy
             local econprefab = inst.prefab
             if inst.econprefab then
                 econprefab = inst.econprefab
@@ -299,7 +299,7 @@ local function ShouldAcceptItem(inst, item)
         if inst:HasTag("city2") then
             city = 2
         end
-        local econ = GetWorld().components.economy
+        local econ = TheWorld.components.economy
 
         local econprefab = inst.prefab
         if inst.econprefab then
@@ -418,7 +418,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
             end
         end
 
-        local econ = GetWorld().components.economy
+        local econ = TheWorld.components.economy
 
         local econprefab = inst.prefab
         if inst.econprefab then

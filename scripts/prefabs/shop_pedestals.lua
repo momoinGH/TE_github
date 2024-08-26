@@ -59,7 +59,7 @@ local function fn()
 
     inst:AddComponent("shopped")
 
-    inst:AddComponent("tropical_saveanim")
+    inst:AddComponent("tro_saveanim")
 
     MakeMediumBurnable(inst)
     MakeSmallPropagator(inst)

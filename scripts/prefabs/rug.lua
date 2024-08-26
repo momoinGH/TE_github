@@ -40,7 +40,7 @@ end
 local function MasterInit(inst)
 	inst:AddComponent("lootdropper")
 
-	inst:AddComponent("tropical_saveanim")
+	inst:AddComponent("tro_saveanim")
 
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)

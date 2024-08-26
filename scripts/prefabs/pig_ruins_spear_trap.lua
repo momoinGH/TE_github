@@ -213,11 +213,11 @@ end
 
 
 local function returntointeriorscene(inst)
-    inst.components.cycletimer:Resume()
+    cycletrap(inst)
 end
 
 local function removefrominteriorscene(inst)
-    inst.components.cycletimer:Pause()
+    cycletrap(inst)
 end
 
 local function canbeattackedfn(inst)
@@ -302,8 +302,6 @@ local function fn(Sim)
     inst.OnLoad = onload
     inst.OnSave = onsave
 
-    inst:AddComponent("cycletimer")
-
     inst:DoTaskInTime(0, function()
         local time1 = 1
         if inst:HasTag("up_3") then
@@ -314,7 +312,6 @@ local function fn(Sim)
         if inst:HasTag("down_6") then
             time2 = 6
         end
-        inst.components.cycletimer:setup(time1, time2, cycletrap, cycletrap)
         if inst:HasTag("timed") then
             local initialdelay = 3
             if inst:HasTag("delay_6") then
@@ -322,9 +319,6 @@ local function fn(Sim)
             elseif inst:HasTag("delay_9") then
                 initialdelay = 9
             end
-            --print("starting spears")
-            inst.components.cycletimer:start(initialdelay)
-            --               startcycle(inst)
         end
     end)
 

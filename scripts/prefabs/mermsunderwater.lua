@@ -919,11 +919,11 @@ local function updateeyebuild(inst)
 end
 
 local function OnEntityWake(inst)
-    inst.components.bubbleblower:Start()
+    inst.components.und_bubbleblower:Start()
 end
 
 local function OnEntitySleep(inst)
-    inst.components.bubbleblower:Stop()
+    inst.components.und_bubbleblower:Stop()
 end
 
 local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit, data)
@@ -965,7 +965,7 @@ local function MakeMerm(name, assets, prefabs, common_postinit, master_postinit,
         talker.resolvechatterfn = ResolveMermChatter
         talker:MakeChatter()
 
-        inst:AddComponent("bubbleblower")
+        inst:AddComponent("und_bubbleblower")
 
         if common_postinit ~= nil then
             common_postinit(inst)

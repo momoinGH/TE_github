@@ -6,9 +6,10 @@ local function oncanbedislodged(self)
     end
 end
 
+--- 哈姆雷特文物考古用的组件
 local Dislodgeable = Class(function(self, inst)
     self.inst = inst
- 
+
     self.hasbeendislodged = nil
     self.product = nil
     self.ondislodgedfn = nil
@@ -107,6 +108,5 @@ function Dislodgeable:Dislodge(dislodger)
         end
     end
 end
-
 
 return Dislodgeable

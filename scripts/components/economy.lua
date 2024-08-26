@@ -104,6 +104,7 @@ local TRADER = {
 	--	pigman_shopkeep = 		{items={},						num=5, current=0,	desc=STRINGS.CITY_PIG_SHOPKEEP_TRADE, 	reward = "oinc"},
 }
 
+--- 哈姆雷特猪镇猪人使用，控制它们收什么物品
 local Economy = Class(function(self, inst)
 	self.inst = inst
 	self.cities = {}

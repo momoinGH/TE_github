@@ -48,7 +48,7 @@ local function common(anim)
         return inst
     end
 
-    inst:AddComponent("tropical_saveanim")
+    inst:AddComponent("tro_saveanim")
 
     inst:ListenForEvent("onbuilt", OnBuilt)
 

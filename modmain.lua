@@ -1,4 +1,13 @@
--- 命名规范：tro_作为公共模块前缀，其他模块的东西用模块名或者tro_作为前缀
+--[[
+命名建议：
+- tro_作为公共模块前缀
+- 其他模块的东西用模块名或者模块名前三个字母再或者tro_作为前缀
+
+
+
+
+]]
+
 
 
 ----------------------------------------------------------------------------------------------------
@@ -118,6 +127,5 @@ modimport "modmain/componentactions" --AddComponentAction比较特殊，如果mo
 modimport "scripts/prefabs/tropical_farm_plant_defs"
 
 AddMinimap()
-
 
 modimport("scripts/cooking_tropical")

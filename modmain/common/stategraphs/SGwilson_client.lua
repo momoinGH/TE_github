@@ -13,7 +13,7 @@ AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATMOUNT, fun
 end))
 
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.TROPICAL_USE_ITEM, function(inst, act)
-    return FunctionOrValue(act.invobject.components.tropical_consumable.state, act.invobject, act.doer, act.target)
+    return FunctionOrValue(act.invobject.components.tro_consumable.state, act.invobject, act.doer, act.target)
 end))
 
 ----------------------------------------------------------------------------------------------------

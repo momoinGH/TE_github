@@ -5,26 +5,23 @@ local assets =
     Asset("ATLAS", "images/inventoryimages/empty_bottle_green.xml")
 }
 
-local function bottle(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local watersource = TheSim:FindClosestEntityInRange(x, y, z, 3, "watersource")
-    if watersource:HasTag("goddess_fountain") and watersource:HasTag("watersource") then
-        inst.componwatersource.fillable.filledprefab = "full_bottle_green"
-    elseif not watersource:HasTag("goddess_fountain") and watersource:HasTag("watersource") then
-        inst.components.fillable.filledprefab = "full_bottle_green_dirty"
-    end
-end
-
 local function TargetCheck(inst, doer, target)
     return target:HasTag("goddess_fountain") or target:HasTag("milkable")
 end
 
 local function OnUse(inst, doer, target)
-    if target:HasTag("goddess_fountain") then
-        return inst.components.extrafillable:Fill()
+    local extrafilleditem = SpawnPrefab(target:HasTag("goddess_fountain") and "full_bottle_green" or "full_bottle_green_milk")
+    local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem:GetGrandOwner() or nil
+    if owner ~= nil then
+        local container = owner.components.inventory or owner.components.container
+        local item = container:RemoveItem(inst, false) or inst
+        item:Remove()
+        container:GiveItem(extrafilleditem, nil, owner:GetPosition())
     else
-        return inst.components.milker:Fill()
+        extrafilleditem.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        inst.components.stackable:Get():Remove()
     end
+    return true
 end
 
 local function fn()
@@ -41,10 +38,10 @@ local function fn()
     inst.AnimState:SetBuild("bottle_green")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddComponent("tropical_consumable")
-    inst.components.tropical_consumable.targetCheckFn = TargetCheck
-    inst.components.tropical_consumable.state = "dolongaction"
-    inst.components.tropical_consumable.str = "FILL"
+    inst:AddComponent("tro_consumable")
+    inst.components.tro_consumable.targetCheckFn = TargetCheck
+    inst.components.tro_consumable.state = "dolongaction"
+    inst.components.tro_consumable.str = "FILL"
 
     inst.entity:SetPristine()
 
@@ -52,7 +49,7 @@ local function fn()
         return inst
     end
 
-    inst.components.tropical_consumable.onUseFn = OnUse
+    inst.components.tro_consumable.onUseFn = OnUse
 
     inst:AddTag("glassbottle")
 
@@ -64,15 +61,6 @@ local function fn()
     inst.components.inventoryitem.atlasname = "images/inventoryimages/empty_bottle_green.xml"
 
     inst:AddComponent("stackable")
-
-    inst:AddComponent("milker")
-    inst.components.milker.milkprefab = "full_bottle_green_milk"
-
-    inst:AddComponent("fillable")
-    inst.components.fillable.filledprefab = "full_bottle_green_dirty"
-
-    inst:AddComponent("extrafillable")
-    inst.components.extrafillable.extrafilledprefab = "full_bottle_green"
 
     return inst
 end

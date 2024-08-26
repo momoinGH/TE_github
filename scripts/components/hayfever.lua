@@ -2,6 +2,7 @@ local function onnextsneeze(self, sneezetime)
     self.inst.replica.hayfever:SetNextSneezeTime(sneezetime)
 end
 
+--- TODO 这个组件目前没被使用过，花粉症的代码是在weather组件里面，花粉症需要重写
 local Hayfever = Class(function(self, inst)
     self.inst       = inst
     self.enabled    = false

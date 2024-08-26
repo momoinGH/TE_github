@@ -1,4 +1,4 @@
---Creates & Launches "throwable" items.
+-- TODO 能用原版组件替换吗
 local Thrower = Class(function(self, inst)
 	self.inst = inst
 	self.throwable_prefab = "coconade"

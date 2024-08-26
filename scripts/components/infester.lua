@@ -1,3 +1,4 @@
+--- 感染者组件，用于哈姆雷特虫群
 local Infester = Class(function(self, inst)
 	self.inst = inst
 	self.infesting = false

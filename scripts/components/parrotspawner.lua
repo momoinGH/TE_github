@@ -1,7 +1,4 @@
---------------------------------------------------------------------------
---[[ BirdSpawner class definition ]]
---------------------------------------------------------------------------
-
+--- 海难洪水生成组件
 return Class(function(self, inst)
     assert(TheWorld.ismastersim, "BirdSpawner should not exist on client")
 

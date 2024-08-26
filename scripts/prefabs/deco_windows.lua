@@ -20,7 +20,7 @@ local function SpawnLight(inst)
 
     local light = SpawnPrefab(prefab)
     light.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    local scale = FunctionOrValue(inst.components.tropical_saveanim.scale, inst)
+    local scale = FunctionOrValue(inst.components.tro_saveanim.scale, inst)
     if scale then
         light.AnimState:SetScale(unpack(scale))
     end

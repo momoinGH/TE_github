@@ -48,8 +48,7 @@ local function fn(Sim)
 		return inst
 	end
 
-	inst:AddComponent("genericonupdate")
-	inst.components.genericonupdate:Setup(onupdate)
+	inst:DoPeriodicTask(0.1, onupdate, 0.1, 0.1)
 
 	inst:AddComponent("playerprox")
 	inst.components.playerprox.inproxfn = oncollide

@@ -1,17 +1,15 @@
 local function DoSpawn(inst)
     local spawner = inst.components.areaspawner
-    if spawner then
-        spawner.target_time = nil
-        spawner:TrySpawn()
-        spawner:Start()
-    end
+    spawner.target_time = nil
+    spawner:TrySpawn()
+    spawner:Start()
 end
 
+--- 定时生成单位，可以限制时间、地皮、时段、是否已有该单位，休眠时不会生成
 local AreaSpawner = Class(function(self, inst)
     self.inst = inst
     self.basetime = 40
     self.randtime = 60
-    self.prefabfn = nil
     self.prefab = nil
 
     self.range = nil
@@ -28,10 +26,6 @@ end)
 
 function AreaSpawner:SetPrefab(prefab)
     self.prefab = prefab
-end
-
-function AreaSpawner:SetPrefabFn(fn)
-    self.prefabfn = fn
 end
 
 function AreaSpawner:SetValidTileType(tiles)
@@ -81,27 +75,24 @@ function AreaSpawner:SetSpawnTestFn(fn)
 end
 
 function AreaSpawner:TrySpawn(prefab)
-    prefab = prefab or (self.prefabfn and self.prefabfn()) or self.prefab
-    if not self.inst:IsValid() or not prefab then
-        return
-    end
+    prefab = FunctionOrValue(prefab or self.prefab, self.inst)
+    if not prefab then return end
 
-    local pos = Vector3(self.inst.Transform:GetWorldPosition())
+    local pos = self.inst:GetPosition()
     local canspawn = true
 
     if self.spawnoffscreen and not self.inst:IsAsleep() then
         return false
     end
 
-    if self.spawnphase and GetClock():GetPhase() ~= self.spawnphase then
+    if self.spawnphase and TheWorld.state.phase ~= self.spawnphase then
         return false
     end
 
     if canspawn and (self.range or self.spacing) then
-        local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, self.range or self.spacing)
         local count = 0
-        for k, v in pairs(ents) do
-            if v.prefab == prefab then
+        for k, v in pairs(TheSim:FindEntities(pos.x, pos.y, pos.z, self.range or self.spacing)) do
+            if v.prefab == prefab then --已经有了
                 if self.spacing and v:GetDistanceSqToInst(self.inst) < self.spacing * self.spacing then
                     canspawn = false
                     break
@@ -161,16 +152,6 @@ function AreaSpawner:Stop()
     end
     --self.inst:StopUpdatingComponent(self)
 end
-
---[[
-function AreaSpawner:OnEntitySleep()
-	self:Stop()
-end
-
-function AreaSpawner:OnEntityWake()
-	self:Start()
-end
---]]
 
 function AreaSpawner:OnUpdate(dt)
     self:DebugRender()

@@ -29,10 +29,10 @@ end;
 Constructor.AddAction({ priority = 1 },
     "TROPICAL_USE_ITEM",
     function(act)
-        return FunctionOrValue(act.invobject.components.tropical_consumable.str, act.invobject, act.doer, act.target)
+        return FunctionOrValue(act.invobject.components.tro_consumable.str, act.invobject, act.doer, act.target)
     end,
     function(act)
-        return act.invobject.components.tropical_consumable:Use(act.doer, act.target)
+        return act.invobject.components.tro_consumable:Use(act.doer, act.target)
     end
 )
 
@@ -803,18 +803,19 @@ Constructor.AddAction({ priority = 10, distance = 4, mount_valid = false, encumb
 )
 
 
--- 收回小船
+-- 收回
 Constructor.AddAction({ priority = 11, rmb = true, distance = 4, mount_valid = false },
-    "RETRIEVE",
-    STRINGS.ACTIONS.RETRIEVE,
+    "TRO_DISMANTLE",
+    STRINGS.ACTIONS.TRO_DISMANTLE,
     function(act)
-        if act.target.components.portablestructure
-            and act.target.components.walkableplatform
-            and not next(act.target.components.walkableplatform:GetPlayersOnPlatform()) --船上不能有玩家
-        then
-            act.target.components.portablestructure:Dismantle(act.doer)
-            return true
+        if act.target ~= nil and
+            act.target.components.pro_portablestructure ~= nil and
+            not (act.target.components.burnable ~= nil and act.target.components.burnable:IsBurning()) then
+            if act.target.candismantle and not act.target:candismantle() then
+                return false
+            end
         end
+        return act.target.components.pro_portablestructure:Dismantle(act.doer)
     end
 )
 

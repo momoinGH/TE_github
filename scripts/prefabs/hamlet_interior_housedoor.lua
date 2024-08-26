@@ -106,7 +106,7 @@ local function OnBuilt(inst)
         anim = "_close_south"
     end
 
-    inst.components.tropical_saveanim:Init(nil, nil, inst.playAnim .. anim)
+    inst.components.tro_saveanim:Init(nil, nil, inst.playAnim .. anim)
 end
 
 local function onhammered(inst, worker)

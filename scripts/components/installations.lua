@@ -1,3 +1,4 @@
+--- 安装
 local Installations = Class(function(self, inst)
     self.inst = inst
     self.caninstallfn = nil

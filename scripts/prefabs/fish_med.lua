@@ -54,15 +54,7 @@ SetSharedLootTable('spoiledfish',
 		{ 'boneshard', 1.00 },
 	})
 
-local APPEASEMENT_TINY = 4
-local APPEASEMENT_SMALL = 8
-local APPEASEMENT_MEDIUM = 16
-local APPEASEMENT_LARGE = 32
-local APPEASEMENT_HUGE = 64
 
-local function stopkicking(inst)
-	inst.AnimState:PlayAnimation("dead")
-end
 
 local function makefish_med(bank, build, inventoryimage, dryablesymbol)
 	local function commonfn()
@@ -105,11 +97,6 @@ local function makefish_med(bank, build, inventoryimage, dryablesymbol)
 		inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 		--    	inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 		inst.data = {}
-
-		inst:AddComponent("appeasement")
-		inst.components.appeasement.appeasementvalue = APPEASEMENT_SMALL
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
 
 		return inst
 	end
@@ -156,11 +143,6 @@ local function makefish_med(bank, build, inventoryimage, dryablesymbol)
 		inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 		--    	inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 		inst.data = {}
-
-		inst:AddComponent("appeasement")
-		inst.components.appeasement.appeasementvalue = APPEASEMENT_SMALL
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
 
 		--		MakeInventoryFloatable(inst, "idle_water", "dead")
 		inst.AnimState:PlayAnimation("dead")
@@ -225,10 +207,6 @@ local function makefish_med1(bank, build, inventoryimage, dryablesymbol)
 		--    	inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 		inst.data = {}
 
-		inst:AddComponent("appeasement")
-		inst.components.appeasement.appeasementvalue = APPEASEMENT_SMALL
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
 
 		return inst
 	end
@@ -274,11 +252,6 @@ local function makefish_med1(bank, build, inventoryimage, dryablesymbol)
 		inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 		--    	inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 		inst.data = {}
-
-		inst:AddComponent("appeasement")
-		inst.components.appeasement.appeasementvalue = APPEASEMENT_SMALL
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
 
 		--		MakeInventoryFloatable(inst, "idle_water", "dead")
 		inst.AnimState:PlayAnimation("dead")
@@ -361,10 +334,6 @@ local function spoiledfn()
 	--	inst:AddComponent("floatable")
 	--	inst.components.floatable:SetOnHitWaterFn(function(inst) inst.AnimState:PlayAnimation("idle_water", true) end)
 	--	inst.components.floatable:SetOnHitLandFn(function(inst) inst.AnimState:PlayAnimation("idle", true) end)
-
-	inst:RemoveComponent("appeasement")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
 
 	return inst
 end
@@ -466,9 +435,6 @@ local function fish_raw_fn()
 	--   inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 	inst.data = {}
 
-	inst:AddComponent("appeasement")
-	inst.components.appeasement.appeasementvalue = APPEASEMENT_SMALL
-
 	inst.components.edible.healthvalue = TUNING.HEALING_TINY
 	inst.components.edible.hungervalue = TUNING.CALORIES_MED
 
@@ -528,9 +494,6 @@ local function quagmire_crabmeat_fn()
 	inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 	--   inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 	inst.data = {}
-
-	inst:AddComponent("appeasement")
-	inst.components.appeasement.appeasementvalue = APPEASEMENT_SMALL
 
 	inst.components.edible.healthvalue = TUNING.HEALING_TINY
 	inst.components.edible.hungervalue = TUNING.CALORIES_SMALL

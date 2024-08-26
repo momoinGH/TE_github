@@ -1,3 +1,4 @@
+--- 哈姆雷特猪镇房子修理组件
 local Fixer = Class(function(self, inst)
     self.inst = inst
     self.inst:AddTag("fixer")

@@ -75,7 +75,6 @@ STRINGS.ACTIONS.STICK                                   = "捣入"
 STRINGS.ACTIONS.DESACTIVATESAIL                         = "关灯"
 STRINGS.ACTIONS.LANTERNON                               = "开灯"
 STRINGS.ACTIONS.BOATCANNON                              = "发射"
-STRINGS.ACTIONS.RETRIEVE                                = "收回"
 STRINGS.ACTIONS.PEER                                    = "观察"
 --ham
 STRINGS.ACTIONS.SMELT                                   = "熔炼"
@@ -111,7 +110,8 @@ STRINGS.ACTIONS.TROPICAL_USE_ITEM                       = {
     KILLSOFTLY   = "屠宰",
     FILL         = "灌满",
     MILK         = "挤奶",
-    REPLATE      = "摆盘"
+    REPLATE      = "摆盘",
+    ADDFUEL      = "添加燃料"
 }
 -----------选项卡----------
 STRINGS.TABS.NAUTICALTAB                                = "航海"

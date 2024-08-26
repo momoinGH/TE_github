@@ -193,8 +193,8 @@ local function deathbubble_fx()
     inst.entity:AddTransform()
 
     inst:AddTag("FX")
-    inst:AddComponent("bubbleblower")
-    inst.components.bubbleblower:RemoveOnFinish(true)
+    inst:AddComponent("und_bubbleblower")
+    inst.components.und_bubbleblower:RemoveOnFinish(true)
 
     inst.persists = false
 

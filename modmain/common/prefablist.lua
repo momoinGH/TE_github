@@ -17,11 +17,7 @@ PrefabFiles =
 
     "firetwister",
     "twister_tornadodefogo",
-    -- "firetwister_spawner", --火豹卷生成器
     "firetwister_seal",
-    "walani",   --角色
-    "wilbur",   --角色
-    "woodlegs", --角色
     "glass",
     "flood_ice",
     "mushtree_yellow",

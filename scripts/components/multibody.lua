@@ -6,6 +6,7 @@ STATES = {
 	DEAD = 3,
 }
 
+--- 哈姆雷特大蛇
 local Multibody = Class(function(self, inst)
 	self.inst = inst
 	self.maxbodies = 1

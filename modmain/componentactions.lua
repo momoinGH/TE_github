@@ -1,7 +1,7 @@
 local function CheckConsumable(inst, doer, target, actions)
-    local com = inst.components.tropical_consumable
+    local com = inst.components.tro_consumable
     if com
-        and inst:HasTag("tropical_consumable")
+        and inst:HasTag("tro_consumable")
         and (not com.userCheckFn or com.userCheckFn(inst, doer, target))
         and (not com.targetCheckFn or com.targetCheckFn(inst, doer, target))
     then
@@ -9,19 +9,19 @@ local function CheckConsumable(inst, doer, target, actions)
     end
 end
 
-AddComponentAction("INVENTORY", "tropical_consumable", function(inst, doer, actions, right)
+AddComponentAction("INVENTORY", "tro_consumable", function(inst, doer, actions, right)
     CheckConsumable(inst, doer, doer, actions)
 end)
-AddComponentAction("USEITEM", "tropical_consumable", function(inst, doer, target, actions, right)
+AddComponentAction("USEITEM", "tro_consumable", function(inst, doer, target, actions, right)
     CheckConsumable(inst, doer, target, actions)
 end)
-AddComponentAction("EQUIPPED", "tropical_consumable", function(inst, doer, target, actions, right)
+AddComponentAction("EQUIPPED", "tro_consumable", function(inst, doer, target, actions, right)
     CheckConsumable(inst, doer, target, actions)
 end)
 
 ----------------------------------------------------------------------------------------------------
 
-AddComponentAction("POINT", "tropical_noequipactivator", function(inst, doer, pos, actions, right, target)
+AddComponentAction("POINT", "tro_noequipactivator", function(inst, doer, pos, actions, right, target)
     local boat = doer:GetCurrentPlatform()
     if right
         and boat
@@ -37,12 +37,26 @@ AddComponentAction("POINT", "tropical_noequipactivator", function(inst, doer, po
 end)
 ----------------------------------------------------------------------------------------------------
 
+local function IsHold(doer, target)
+    return target.replica.inventoryitem ~= nil and target.replica.inventoryitem:IsGrandOwner(doer)
+end
+
+local function IsRiding(doer)
+    return doer.replica.rider:IsRiding()
+end
+
 AddComponentAction("USEITEM", "inventoryitem", function(inst, doer, target, actions, right)
-    if target:HasTag("cost_one_oinc") then
-        if target:HasTag("playercrafted") and not target:HasTag("slot_one") then
-            -- 物品放入柜中
-            table.insert(actions, ACTIONS.GIVE_SHELF)
-        end
+    if target:HasTag("cost_one_oinc") and target:HasTag("playercrafted") and not target:HasTag("slot_one") then
+        -- 物品放入柜中
+        table.insert(actions, ACTIONS.GIVE_SHELF)
+    end
+
+    if inst.prefab == "tar"
+        and (not IsRiding(doer) or IsHold(doer, target))
+        and (target:HasTag("seayard") or target:HasTag("tarlamp") or target:HasTag("tarsuit"))
+    then
+        --焦油添加燃料
+        table.insert(actions, ACTIONS.ADDFUEL)
     end
 end)
 
@@ -96,6 +110,7 @@ AddComponentAction("SCENE", "hackable", function(inst, doer, actions, right)
     end
 end)
 
+-- bugrepellent
 AddComponentAction("SCENE", "combat", function(inst, doer, actions, right)
     if right and doer:HasTag("ironlord") and doer.replica.combat:CanTarget(inst) then
         --活性机甲发射
@@ -126,15 +141,7 @@ AddComponentAction("SCENE", "sappy", function(inst, doer, actions, right)
     end
 end)
 
-AddComponentAction("USEITEM", "fueltar", function(inst, doer, target, actions)
-    if not doer.replica.rider:IsRiding()
-        or (target.replica.inventoryitem ~= nil and target.replica.inventoryitem:IsGrandOwner(doer)) then
-        if target:HasTag("seayard") or target:HasTag("tarlamp") or target:HasTag("tarsuit") then
-            --焦油添加燃料
-            table.insert(actions, ACTIONS.ADDFUEL)
-        end
-    end
-end)
+
 
 AddComponentAction("USEITEM", "snackrificable", function(inst, doer, target, actions)
     if target:HasTag("gorge_altar") then
@@ -155,15 +162,16 @@ AddComponentAction("SCENE", "store", function(inst, doer, actions)
 end)
 
 
-AddComponentAction("SCENE", "portablestructure", function(inst, doer, actions, right)
+AddComponentAction("SCENE", "pro_portablestructure", function(inst, doer, actions, right)
     if right
-        and inst:HasTag("shipwrecked_boat")
         and not inst:HasTag("fire")
-        and (not inst.replica.container or not inst.replica.container:IsOpenedBy(doer))
-        and doer:GetCurrentPlatform() ~= inst
+        and (not inst.candismantle or inst:candismantle(doer))
     then
-        -- 可以收回小船
-        table.insert(actions, ACTIONS.RETRIEVE)
+        local container = inst.replica.container
+        if (container == nil or (container:CanBeOpened() and not container:IsOpenedBy(doer))) then
+            -- 收回
+            table.insert(actions, ACTIONS.TRO_DISMANTLE)
+        end
     end
 end)
 

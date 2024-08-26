@@ -1,4 +1,8 @@
 if not GetModConfigData("disablecharacters") then
+    table.insert(PrefabFiles, "walani")
+    table.insert(PrefabFiles, "wilbur")
+    table.insert(PrefabFiles, "woodlegs")
+
     AddModCharacter("walani", "FEMALE")
     AddModCharacter("wilbur", "NEUTRAL")
     AddModCharacter("woodlegs", "MALE")
