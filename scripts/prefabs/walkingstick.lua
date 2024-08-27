@@ -83,7 +83,7 @@ local function fn()
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = FUELTYPE.USAGE
     inst.components.fueled:InitializeFuelLevel(480 * 3)
-    --inst.components.fueled:SetDepletedFn(onwornout)
+    inst.components.fueled:SetDepletedFn(onwornout)
 
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeSmallPropagator(inst)
