@@ -337,7 +337,7 @@ local dictInventoryItems = {
 		"bubbletea", "frenchonionsoup", "lotuschips", "meated_nettle", "poi", "slaw",
 	},
 	creepindedeepinventory = {
-		"armor_lifejacket", "dug_bambootree", "fish_raw_small_cooked", "hat_submarine", "jellyjerky", "jungletreeseed",
+		"armor_lifejacket", "fish_raw_small_cooked", "hat_submarine", "jellyjerky", "jungletreeseed",
 		"mussel_bed_underwater", "waterchest",
 	}, -- unconfirmed
 	quagmirefoods = {
