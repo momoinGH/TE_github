@@ -85,10 +85,10 @@ local function itemfn()
     inst:AddTag("salty")
     inst:AddTag("saltrack")
 
-    inst:AddComponent("tropical_consumable")
-    inst.components.tropical_consumable.state = ConsumableState
-    inst.components.tropical_consumable.targetCheckFn = TargetCheckFn
-    inst.components.tropical_consumable.str = "INSTALL"
+    inst:AddComponent("tro_consumable")
+    inst.components.tro_consumable.state = ConsumableState
+    inst.components.tro_consumable.targetCheckFn = TargetCheckFn
+    inst.components.tro_consumable.str = "INSTALL"
 
     inst.entity:SetPristine()
 
@@ -96,7 +96,7 @@ local function itemfn()
         return inst
     end
 
-    inst.components.tropical_consumable.onUseFn = Use
+    inst.components.tro_consumable.onUseFn = Use
 
     inst:AddComponent("inspectable")
 

@@ -1,3 +1,4 @@
+--- 哈姆雷特猪镇房子修理组件
 local Fixable = Class(function(self, inst)
     self.inst = inst
     self.reconstruction_stages = {}
@@ -35,10 +36,6 @@ function Fixable:OnRemoveEntity()
             fixer.AnimState:SetScale(1, 1, 1)
         end
         fixer:Show()
-
-        if self.inst.components.citypossession then
-            fixer.cityID = self.inst.components.citypossession.cityID
-        end
         if self.inst.interiorID then
             fixer.interiorID = self.inst.interiorID
         end

@@ -1,14 +1,14 @@
 --Green Framework. Please, don't copy any files or functions from this mod, because it can break other mods based on the GF.
 
 local colors = {
-    { 42 / 255, 209 / 255, 235 / 255 }, --light blue
-    { 124 / 255, 252 / 255, 0 }, -- green
-    { 218 / 255, 165 / 255, 32 / 255 }, -- yellow
+    { 42 / 255, 209 / 255, 235 / 255 },  --light blue
+    { 124 / 255, 252 / 255, 0 },         -- green
+    { 218 / 255, 165 / 255, 32 / 255 },  -- yellow
     { 147 / 255, 112 / 255, 219 / 255 }, -- purple
-    { 1,       1,       1 },     --white
-    { 205 / 255, 0,     0 },     -- red
-    { 0.3,     0.3,     0.3 },   --gray
-    { 0,       0,       0 },     --black
+    { 1, 1, 1 },                         --white
+    { 205 / 255, 0, 0 },                 -- red
+    { 0.3, 0.3, 0.3 },                   --gray
+    { 0, 0, 0 },                         --black
 }
 
 local function FloorToFirstDecimal(val)
@@ -35,6 +35,7 @@ local function OnLightningDirty(inst)
     inst.components.gflightningdrawer:DrowLightning(points)
 end
 
+--- 主客机通用组件，用于生成一条弯弯曲曲的闪电路径，有点牛逼的
 local GFLightningDrawer = Class(function(self, inst)
     self.inst = inst
     self.fxs = {}

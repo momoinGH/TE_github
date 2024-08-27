@@ -475,7 +475,7 @@ function decofn(build, bank, animframe, data, name)
             inst:AddComponent("inspectable")
         end
 
-        inst:AddComponent("tropical_saveanim")
+        inst:AddComponent("tro_saveanim")
 
         if data.dayevents then
             inst:WatchWorldState("phase", OnPhaseChange)

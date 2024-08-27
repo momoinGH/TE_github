@@ -40,9 +40,6 @@ local function fn(Sim)
     inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.SMALL_FUEL
 
-    -- inst:AddComponent("appeasement")
-    -- inst.components.appeasement.appeasementvalue = TUNING.WRATH_SMALL
-
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeSmallPropagator(inst)
 

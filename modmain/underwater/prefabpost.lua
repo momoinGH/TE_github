@@ -4,7 +4,7 @@ AddPrefabPostInitAny(function(inst)
     if not TheWorld.ismastersim then return end
 
     if inst.components.workable or inst.components.health then
-        inst:AddComponent("deathbubbles")
+        inst:AddComponent("und_deathbubbles")
     end
 end)
 
@@ -28,7 +28,7 @@ AddPlayerPostInit(function(inst)
 
     if not TheWorld.ismastersim then return end
 
-    inst:AddComponent("bubbleblower") ------- Blow bubble underwater to players
+    inst:AddComponent("und_bubbleblower") ------- Blow bubble underwater to players
 
     inst:ListenForEvent("runningoutofoxygen", function(inst, data)
         inst.components.talker:Say("Low Oxygen")

@@ -45,10 +45,10 @@ local function fn(Sim)
 
     inst:AddTag("ballpein_hammer")
 
-    inst:AddComponent("tropical_consumable")
-    inst.components.tropical_consumable.state = "tap"
-    inst.components.tropical_consumable.targetCheckFn = TargetCheckFn
-    inst.components.tropical_consumable.str = "DISLODGE"
+    inst:AddComponent("tro_consumable")
+    inst.components.tro_consumable.state = "tap"
+    inst.components.tro_consumable.targetCheckFn = TargetCheckFn
+    inst.components.tro_consumable.str = "DISLODGE"
 
     inst.entity:SetPristine()
 
@@ -56,7 +56,7 @@ local function fn(Sim)
         return inst
     end
 
-    inst.components.tropical_consumable.onUseFn = OnUse
+    inst.components.tro_consumable.onUseFn = OnUse
 
     inst.components.floater:SetBankSwapOnFloat(true, -10, { sym_build = "swap_ballpein_hammer" })
 
@@ -71,8 +71,6 @@ local function fn(Sim)
     inst.components.finiteuses:SetMaxUses(LITTLE_HAMMER_USES)
     inst.components.finiteuses:SetUses(LITTLE_HAMMER_USES)
     inst.components.finiteuses:SetOnFinished(inst.Remove)
-
-    inst:AddComponent("dislodger")
 
     inst:AddComponent("inspectable")
 

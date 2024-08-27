@@ -4,6 +4,7 @@ local function onnotready(inst)
 	end
 end
 
+--- 暴食碾末石
 local Mealer = Class(function(self, inst)
 	self.inst = inst
 

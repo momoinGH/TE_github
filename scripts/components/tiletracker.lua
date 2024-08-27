@@ -64,13 +64,6 @@ function TileTracker:OnUpdate(dt)
 				if self.onwaterchangefn then
 					self.onwaterchangefn(self.inst, onwater)
 				end
-				--				if self.inst:HasTag("amphibious") then
-				--					if onwater then
-				--						self.inst:AddTag("aquatic")
-				--					else
-				--						self.inst:RemoveTag("aquatic")
-				--					end
-				--				end
 			end
 			self.onwater = onwater
 		end

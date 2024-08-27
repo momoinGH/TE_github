@@ -1,6 +1,6 @@
+--- 哈姆雷特蝙蝠的生成
 local Aporkalypse = Class(function(self, inst)
 	self.inst = inst
-	local _activeplayers = {}
 	self.begin_date = 120 * TUNING.TOTAL_DAY_TIME
 	self.aporkalypse_active = false
 	self.inside_ruins = false
@@ -31,13 +31,6 @@ local Aporkalypse = Class(function(self, inst)
 			self:EndAporkalypse()
 		end
 	end, TheWorld)
-
-	--    self.inst:ListenForEvent("seasonChange", function(inst, data)
-	--    	if self.aporkalypse_active and data.season ~= SEASONS.APORKALYPSE then
-	--    		--self:EndAporkalypse()
-	--    	end
-	--    end)
-
 
 	self.inst:DoTaskInTime(0.5, function()
 		if self.aporkalypse_active == true then
@@ -187,39 +180,8 @@ function Aporkalypse:SpawnBats()
 		local interior = GetClosestInstWithTag("interior_center", player, 30)
 		if not interior then
 			local x, y, z = player.Transform:GetWorldPosition()
-			local part = SpawnPrefab("circlingbat")
-			if part ~= nil then
-				part.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
-			end
-
-			local x, y, z = player.Transform:GetWorldPosition()
-			local part = SpawnPrefab("circlingbat")
-			if part ~= nil then
-				part.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
-			end
-
-			local x, y, z = player.Transform:GetWorldPosition()
-			local part = SpawnPrefab("circlingbat")
-			if part ~= nil then
-				part.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
-			end
-
-			local x, y, z = player.Transform:GetWorldPosition()
-			local part = SpawnPrefab("circlingbat")
-			if part ~= nil then
-				part.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
-			end
-
-			local x, y, z = player.Transform:GetWorldPosition()
-			local part = SpawnPrefab("circlingbat")
-			if part ~= nil then
-				part.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
-			end
-
-			local x, y, z = player.Transform:GetWorldPosition()
-			local part = SpawnPrefab("circlingbat")
-			if part ~= nil then
-				part.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
+			for _ = 1, 6 do
+				SpawnPrefab("circlingbat").Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
 			end
 		end
 	end

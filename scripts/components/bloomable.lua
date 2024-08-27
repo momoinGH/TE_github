@@ -1,12 +1,18 @@
+-- 控制游戏对象（如植物）在特定季节开花
 local Bloomable = Class(function(self, inst)
     self.inst = inst
-    self.season = TheWorld.state.isspring
+    self.season = { SEASONS.SPRING }
     self.blooming = false
     self.time = 0
     self.timevarriance = TUNING.TOTAL_DAY_TIME / 2
 
-    self.inst:WatchWorldState("season", function(data) self:SeasonChange(data) end)
+    self:WatchWorldState("season", self.SeasonChange)
 end)
+
+function Bloomable:OnRemoveFromEntity()
+    self:StopBloom()
+    self.StopWatchingWorldState("seasonChange", self.SeasonChange)
+end
 
 function Bloomable:SetCanBloom(fn)
     self.canbloom = fn
@@ -20,12 +26,15 @@ function Bloomable:SetStopBloomFn(fn)
     self.unbloomfunction = fn
 end
 
-function Bloomable:StartBloom()
-    if self.unbloomtask then
-        self.unbloomtask:Cancel()
-        self.unbloomtask = nil
+function Bloomable:StartBloom(instant)
+    -- Instant is used on load.
+    if not instant then
+        if self.unbloomtask then
+            self.unbloomtask:Cancel()
+            self.unbloomtask = nil
+        end
+        self.unbloomtaskinfo = nil
     end
-    self.unbloomtaskinfo = nil
 
     self.blooming = true
     self.inst:AddTag("blooming")
@@ -37,7 +46,7 @@ function Bloomable:StartBloom()
     self.bloomtaskinfo = nil
 
     if self.bloomfunction then
-        self.bloomfunction(self.inst)
+        self.bloomfunction(self.inst, instant)
     end
 end
 
@@ -73,10 +82,16 @@ end
 
 function Bloomable:SeasonChange(data)
     if self:CanBloom() then
-        if TheWorld.state.isspring and not self.blooming then
-            print("OHHHH")
+        local goodseason = false
+        for i, v in ipairs(self.season) do
+            if data.season == v then
+                goodseason = true
+                break
+            end
+        end
+        if goodseason and not self.blooming then
             self:DoStartBloomTask(self.time + math.random() * self.timevarriance)
-        elseif (not TheWorld.state.isspring) and self.blooming then
+        elseif not goodseason and self.blooming then
             self:DoStopBloomTask(self.time + math.random() * self.timevarriance)
         end
     end
@@ -136,7 +151,7 @@ function Bloomable:OnLoad(data)
     end
 
     if self.blooming then
-        self:StartBloom()
+        self:StartBloom(true)
     end
 end
 

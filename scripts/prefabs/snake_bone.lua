@@ -63,10 +63,6 @@ local function fn()
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
-
-    --inst:AddComponent("appeasement")
-    --inst.components.appeasement.appeasementvalue = TUNING.APPEASEMENT_TINY
-
     -- inst:AddComponent("floatable")
     -- inst.components.floatable:SetOnHitWaterFn(function(inst) inst.AnimState:PlayAnimation("idle_water", true) end)
     --  inst.components.floatable:SetOnHitLandFn(function(inst) inst.AnimState:PlayAnimation("idle", true) end)

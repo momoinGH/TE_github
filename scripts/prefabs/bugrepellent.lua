@@ -79,8 +79,6 @@ local function commonfn()
         return inst
     end
 
-    inst:AddComponent("gasser")
-
     inst:AddComponent("inspectable")
 
     inst:AddComponent("equippable")

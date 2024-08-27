@@ -19,68 +19,68 @@ local function MakeGrowTimes(germination_min, germination_max, full_grow_min, fu
     return grow_time
 end
 
-local drink_low                                = TUNING.FARM_PLANT_DRINK_LOW
-local drink_med                                = TUNING.FARM_PLANT_DRINK_MED
-local drink_high                               = TUNING.FARM_PLANT_DRINK_HIGH
+local drink_low                              = TUNING.FARM_PLANT_DRINK_LOW
+local drink_med                              = TUNING.FARM_PLANT_DRINK_MED
+local drink_high                             = TUNING.FARM_PLANT_DRINK_HIGH
 
-local S                                        = TUNING.FARM_PLANT_CONSUME_NUTRIENT_LOW
-local M                                        = TUNING.FARM_PLANT_CONSUME_NUTRIENT_MED
-local L                                        = TUNING.FARM_PLANT_CONSUME_NUTRIENT_HIGH
+local S                                      = TUNING.FARM_PLANT_CONSUME_NUTRIENT_LOW
+local M                                      = TUNING.FARM_PLANT_CONSUME_NUTRIENT_MED
+local L                                      = TUNING.FARM_PLANT_CONSUME_NUTRIENT_HIGH
 
-PLANT_DEFS.aloe                                = { build = "farm_plant_aloeplant", bank = "farm_plant_asparagus" }
-PLANT_DEFS.radish                              = { build = "farm_plant_radish", bank = "farm_plant_carrot" }
-PLANT_DEFS.sweet_potato                        = { build = "farm_plant_sweett", bank = "farm_plant_carrot" }
-PLANT_DEFS.wheat                               = { build = "farm_plant_wheataaaa", bank = "farm_plant_asparagus" }
-PLANT_DEFS.turnip                              = { build = "farm_plant_turnip", bank = "farm_plant_carrot" }
+PLANT_DEFS.aloe                              = { build = "farm_plant_aloeplant", bank = "farm_plant_asparagus" }
+PLANT_DEFS.radish                            = { build = "farm_plant_radish", bank = "farm_plant_carrot" }
+PLANT_DEFS.sweet_potato                      = { build = "farm_plant_sweett", bank = "farm_plant_carrot" }
+PLANT_DEFS.wheat                             = { build = "farm_plant_wheataaaa", bank = "farm_plant_asparagus" }
+PLANT_DEFS.turnip                            = { build = "farm_plant_turnip", bank = "farm_plant_carrot" }
 
-PLANT_DEFS.sweet_potato.grow_time              = MakeGrowTimes(12 * TUNING.SEG_TIME, 16 * TUNING.SEG_TIME,
+PLANT_DEFS.sweet_potato.grow_time            = MakeGrowTimes(12 * TUNING.SEG_TIME, 16 * TUNING.SEG_TIME,
     4 * TUNING.TOTAL_DAY_TIME, 7 * TUNING.TOTAL_DAY_TIME)
-PLANT_DEFS.aloe.grow_time                      = MakeGrowTimes(12 * TUNING.SEG_TIME, 16 * TUNING.SEG_TIME,
+PLANT_DEFS.aloe.grow_time                    = MakeGrowTimes(12 * TUNING.SEG_TIME, 16 * TUNING.SEG_TIME,
     4 * TUNING.TOTAL_DAY_TIME, 7 * TUNING.TOTAL_DAY_TIME)
-PLANT_DEFS.radish.grow_time                    = MakeGrowTimes(12 * TUNING.SEG_TIME, 16 * TUNING.SEG_TIME,
+PLANT_DEFS.radish.grow_time                  = MakeGrowTimes(12 * TUNING.SEG_TIME, 16 * TUNING.SEG_TIME,
     4 * TUNING.TOTAL_DAY_TIME, 7 * TUNING.TOTAL_DAY_TIME)
-PLANT_DEFS.wheat.grow_time                     = MakeGrowTimes(12 * TUNING.SEG_TIME, 16 * TUNING.SEG_TIME,
+PLANT_DEFS.wheat.grow_time                   = MakeGrowTimes(12 * TUNING.SEG_TIME, 16 * TUNING.SEG_TIME,
     4 * TUNING.TOTAL_DAY_TIME, 7 * TUNING.TOTAL_DAY_TIME)
-PLANT_DEFS.turnip.grow_time                    = MakeGrowTimes(12 * TUNING.SEG_TIME, 16 * TUNING.SEG_TIME,
+PLANT_DEFS.turnip.grow_time                  = MakeGrowTimes(12 * TUNING.SEG_TIME, 16 * TUNING.SEG_TIME,
     4 * TUNING.TOTAL_DAY_TIME, 7 * TUNING.TOTAL_DAY_TIME)
 
-PLANT_DEFS.sweet_potato.moisture               = {
+PLANT_DEFS.sweet_potato.moisture             = {
     drink_rate = drink_low,
     min_percent = TUNING
         .FARM_PLANT_DROUGHT_TOLERANCE
 }
-PLANT_DEFS.aloe.moisture                       = {
+PLANT_DEFS.aloe.moisture                     = {
     drink_rate = drink_low,
     min_percent = TUNING
         .FARM_PLANT_DROUGHT_TOLERANCE
 }
-PLANT_DEFS.radish.moisture                     = {
+PLANT_DEFS.radish.moisture                   = {
     drink_rate = drink_low,
     min_percent = TUNING
         .FARM_PLANT_DROUGHT_TOLERANCE
 }
-PLANT_DEFS.wheat.moisture                      = {
+PLANT_DEFS.wheat.moisture                    = {
     drink_rate = drink_low,
     min_percent = TUNING
         .FARM_PLANT_DROUGHT_TOLERANCE
 }
-PLANT_DEFS.turnip.moisture                     = {
+PLANT_DEFS.turnip.moisture                   = {
     drink_rate = drink_low,
     min_percent = TUNING
         .FARM_PLANT_DROUGHT_TOLERANCE
 }
 
-PLANT_DEFS.sweet_potato.good_seasons           = { autumn = true,                spring = true, summer = true }
-PLANT_DEFS.aloe.good_seasons                   = { autumn = true,                spring = true, summer = true }
-PLANT_DEFS.radish.good_seasons                 = { autumn = true,                spring = true                }
-PLANT_DEFS.wheat.good_seasons                  = {                winter = true, spring = true                }
-PLANT_DEFS.turnip.good_seasons                 = { autumn = true,                               summer = true }
+PLANT_DEFS.sweet_potato.good_seasons         = { autumn = true, spring = true, summer = true }
+PLANT_DEFS.aloe.good_seasons                 = { autumn = true, spring = true, summer = true }
+PLANT_DEFS.radish.good_seasons               = { autumn = true, spring = true }
+PLANT_DEFS.wheat.good_seasons                = { winter = true, spring = true }
+PLANT_DEFS.turnip.good_seasons               = { autumn = true, summer = true }
 
-PLANT_DEFS.sweet_potato.nutrient_consumption   = { 0, 0, M }
-PLANT_DEFS.aloe.nutrient_consumption           = { 0, M, 0 }
-PLANT_DEFS.radish.nutrient_consumption         = { M, 0, 0 }
-PLANT_DEFS.wheat.nutrient_consumption          = { 0, M, 0 }
-PLANT_DEFS.turnip.nutrient_consumption         = { M, 0, 0 }
+PLANT_DEFS.sweet_potato.nutrient_consumption = { 0, 0, M }
+PLANT_DEFS.aloe.nutrient_consumption         = { 0, M, 0 }
+PLANT_DEFS.radish.nutrient_consumption       = { M, 0, 0 }
+PLANT_DEFS.wheat.nutrient_consumption        = { 0, M, 0 }
+PLANT_DEFS.turnip.nutrient_consumption       = { M, 0, 0 }
 
 for _, data in pairs(PLANT_DEFS) do
     data.nutrient_restoration = {}

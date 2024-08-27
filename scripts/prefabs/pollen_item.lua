@@ -59,9 +59,6 @@ local function commonfn()
     inst:AddComponent("tradable")
     inst.components.tradable.goldvalue = 0
 
-    --inst:AddComponent("appeasement")
-    --inst.components.appeasement.appeasementvalue = TUNING.APPEASEMENT_SMALL
-
     return inst
 end
 

@@ -1,15 +1,7 @@
-----------------------------------------------------------------------------------------------------
---2017.03.04
---[Class] Store Definition (base, _ctor, props)
-----------------------------------------------------------------------------------------------------
-local function StoreConstructor(self, inst)
+local Store = Class(function(self, inst)
     self.inst = inst
-end
+end)
 
-local Store = Class(nil, StoreConstructor, nil)
-----------------------------------------------------------------------------------------------------
---[Member Functions]
-----------------------------------------------------------------------------------------------------
 function Store:CanOpen(doer)
     return self.CanOpenFn == nil or self.CanOpenFn(self.inst, doer)
 end

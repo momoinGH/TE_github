@@ -76,11 +76,11 @@ local function fn(Sim)
 	inst:AddTag("tidal_node")
 	inst:AddTag("underwater")
 
-	inst:AddComponent("bubbleblower")
-	inst.components.bubbleblower:SetYOffset(40)
-	inst.components.bubbleblower:SetYOffset(30)
-	inst.components.bubbleblower:SetBubbleRate(1)
-	inst.components.bubbleblower.tipo = "correntdebolhas"
+	inst:AddComponent("und_bubbleblower")
+	inst.components.und_bubbleblower:SetYOffset(40)
+	inst.components.und_bubbleblower:SetYOffset(30)
+	inst.components.und_bubbleblower:SetBubbleRate(1)
+	inst.components.und_bubbleblower.tipo = "correntdebolhas"
 
 	inst.entity:SetPristine()
 

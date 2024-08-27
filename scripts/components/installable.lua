@@ -1,5 +1,7 @@
+--- 安装，手持物品对某一实体操作
 local Installable = Class(function(self, inst)
     self.inst = inst
+    
     self.prefab = nil
     self.componenttype = nil
     self.oninstallfn = nil
@@ -22,3 +24,4 @@ function Installable:DoInstall(target)
 end
 
 return Installable
+

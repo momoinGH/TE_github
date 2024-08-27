@@ -306,10 +306,6 @@ local function makebirdex(name, feathername, takeoff_soundname, chirp_soundname,
 		inst:AddComponent("cookable")
 		inst.components.cookable.product = "cookedsmallmeat"
 
-		--	  	inst:AddComponent("appeasement")
-		--    	inst.components.appeasement.appeasementvalue = TUNING.APPEASEMENT_MEDIUM
-
-
 		inst:AddComponent("combat")
 		inst.components.combat.hiteffectsymbol = "crow_body"
 		inst.components.combat.canbeattackedfn = canbeattacked

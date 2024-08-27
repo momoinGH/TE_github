@@ -239,8 +239,8 @@ function FN.SpawnNearHouseInterior(door, room)
         newDoorAnim = "_open_north"
     end
 
-    door.components.tropical_saveanim:Init(nil, nil, door.playAnim .. doorAnim)
-    newDoor.components.tropical_saveanim:Init(nil, nil, door.playAnim .. newDoorAnim)
+    door.components.tro_saveanim:Init(nil, nil, door.playAnim .. doorAnim)
+    newDoor.components.tro_saveanim:Init(nil, nil, door.playAnim .. newDoorAnim)
 
     door:RemoveTag("predoor")
     newDoor:RemoveTag("predoor")
@@ -509,7 +509,7 @@ local newRoom = {
             init = function(inst, center) end, --生成后的初始化操作，第二个参数是中心点对象
             startstate = "",                   --有Stategraph的单位初始state
 
-            --该数据通过tropical_saveanim组件保存和加载，因此建议给有这些字段的预制件都添加该组件
+            --该数据通过tro_saveanim组件保存和加载，因此建议给有这些字段的预制件都添加该组件
             bank = nil,         --支持函数、字符串
             build = nil,        --支持函数、字符串
             anim = nil,         --支持函数、字符串
@@ -531,7 +531,7 @@ local INC = 0
 function FN.CreateRoom(room)
     local doors = {}
     local door_map = {}
-    local x, y, z = TheWorld.components.tropical_interiorspawner:GetPos():Get()
+    local x, y, z = TheWorld.components.tro_interiorspawner:GetPos():Get()
 
     -- 清除杂物，以防万一
     FN.ClearSpace(x, z)
@@ -597,8 +597,8 @@ function FN.CreateRoom(room)
 
         p.Transform:SetPosition(x + (x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))
 
-        if p.components.tropical_saveanim then
-            p.components.tropical_saveanim:Init(data.bank, data.build, data.anim, scale, data.isloopplay, data.isdelayset, data.rotation)
+        if p.components.tro_saveanim then
+            p.components.tro_saveanim:Init(data.bank, data.build, data.anim, scale, data.isloopplay, data.isdelayset, data.rotation)
         end
 
         if data.startstate then

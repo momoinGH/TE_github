@@ -1,6 +1,6 @@
 -- manages the migration event of the rainbowjellyfish
 
-
+-- TODO 没用过的组件，待删
 underwaterMigrationManager = Class(function(self, inst)
     self.inst = inst
     self.diad = 0

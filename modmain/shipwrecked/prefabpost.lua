@@ -117,3 +117,49 @@ end
 
 
 ----------------------------------------------------------------------------------------------------
+local function generatefreepositions(max)
+    local pos_table = {}
+    for num = 1, max do
+        table.insert(pos_table, num)
+    end
+    return pos_table
+end
+
+local POS_MODIFIER = 1.2
+
+AddComponentPostInit("minionspawner", function(self)
+    function self:DespawnAll()
+        self.spawninprogress = false
+        for k, v in pairs(self.minions) do
+            v:DoTaskInTime(math.random(), function()
+                if v:IsAsleep() then
+                    v:Remove()
+                else
+                    v:PushEvent("despawn")
+                    v:ListenForEvent("entitysleep", function() v:Remove() end)
+                end
+            end)
+        end
+    end
+
+    function self:SpawnAll()
+        for i = 1, self.maxminions do
+            self.inst:DoTaskInTime(math.random(2, 3) * math.random(), function()
+                self:SpawnNewMinion(true)
+            end)
+        end
+    end
+
+    function self:RegenerateFreePositions()
+        self.freepositions = generatefreepositions(self.maxminions * POS_MODIFIER)
+    end
+end)
+
+
+----------------------------------------------------------------------------------------------------
+
+AddPrefabPostInit("forest", function(inst)
+    if not TheWorld.ismastersim then return end
+
+    inst:AddComponent("parrotspawner")
+end)

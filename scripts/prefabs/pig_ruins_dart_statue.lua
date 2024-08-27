@@ -21,7 +21,7 @@ SetSharedLootTable('dart_thrower',
 
 local function updateart(inst)
     if not inst.components.disarmable.armed then
-        inst.components.autodartthrower:TurnOff()
+        inst.components.simpleperiodtask:TurnOff("autodartthrower")
         inst.AnimState:PlayAnimation("disarmed")
     end
 
@@ -76,7 +76,7 @@ local function disarm(inst, doer)
     local pt = Point(inst.Transform:GetWorldPosition())
     inst.components.lootdropper:SpawnLootPrefab("blowdart_pipe", pt)
     updateart(inst)
-    inst.components.autodartthrower:TurnOff()
+    inst.components.simpleperiodtask:TurnOff("autodartthrower")
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/disarm_wall")
 end
 
@@ -102,13 +102,13 @@ local function setrotation(inst, rotation)
     inst.AnimState:SetPercent("CCW", rotation)
 end
 
-local function updaterotation(inst, dt)
-    local inc = 360 / 10 * dt
+local function updaterotation(inst)
+    local inc = 360 / 10 * 0.1
     if not inst.ccw then
         inc = -inc
     end
     setrotation(inst, inst.Transform:GetRotation() + inc)
-    inst.darttimer = inst.darttimer + dt
+    inst.darttimer = inst.darttimer + 0.1
     if inst.darttimer >= inst.shoottime then
         inst.shootdart(inst)
         inst.darttimer = 0
@@ -154,7 +154,7 @@ local function fn(Sim)
     inst.components.workable:SetOnWorkCallback(
         function(inst, worker, workleft)
             local pt = Point(inst.Transform:GetWorldPosition())
-            inst.components.autodartthrower:TurnOn()
+            inst.components.simpleperiodtask:TurnOn("autodartthrower")
             inst:AddChild(SpawnPrefab("rock_hit_debris"))
             if workleft <= 0 then
                 inst.SoundEmitter:PlaySound("dontstarve/wilson/rock_break")
@@ -181,10 +181,10 @@ local function fn(Sim)
     inst.darttimer = 0
     inst.shoottime = 0.4
 
-    inst:AddComponent("autodartthrower")
-    inst.components.autodartthrower.updatefn = updaterotation
-    inst.components.autodartthrower.turnonfn = turnonfn
-    inst.components.autodartthrower.turnofffn = turnofffn
+    inst:AddComponent("simpleperiodtask")
+    inst.components.simpleperiodtask:DoPeriodicTask("autodartthrower", 0.1, updaterotation)
+    inst.components.simpleperiodtask.turnonfn = turnonfn
+    inst.components.simpleperiodtask.turnofffn = turnofffn
 
     updateart(inst)
 

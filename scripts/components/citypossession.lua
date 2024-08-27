@@ -1,3 +1,4 @@
+--- 哈姆雷特猪镇城镇的编号
 local Citypossession = Class(function(self, inst)
     self.inst = inst
     self.cityID = 1

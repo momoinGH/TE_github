@@ -6,6 +6,7 @@ local function onready(self, ready)
     end
 end
 
+--- 熔炉武器技能组件
 local Helmsplitter = Class(function(self, inst)
     self.inst = inst
 

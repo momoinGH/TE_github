@@ -41,9 +41,9 @@ local function MakePlate(basedish, dishtype, assets)
 
         inst:AddTag("replater")
 
-        inst:AddComponent("tropical_consumable")
-        inst.components.tropical_consumable.targetCheckFn = TargetCheck
-        inst.components.tropical_consumable.str = "REPLATE"
+        inst:AddComponent("tro_consumable")
+        inst.components.tro_consumable.targetCheckFn = TargetCheck
+        inst.components.tro_consumable.str = "REPLATE"
 
         inst.entity:SetPristine()
 
@@ -51,7 +51,7 @@ local function MakePlate(basedish, dishtype, assets)
             return inst
         end
 
-        inst.components.tropical_consumable.onUseFn = OnUse
+        inst.components.tro_consumable.onUseFn = OnUse
 
         inst:AddComponent("inspectable")
 

@@ -815,8 +815,6 @@ local function makefn(name, build, bank, data)
             inst:ListenForEvent("burntup", OnBurntUp)
         end
 
-        inst:AddComponent("gridnudger")
-
         inst:DoTaskInTime(0, creatInterior)
 
         inst.breaksoundsufix = data.usestonebreaksound and "stone" or "wood"

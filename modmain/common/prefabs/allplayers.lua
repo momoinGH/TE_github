@@ -69,10 +69,6 @@ AddPlayerPostInit(function(inst)
 
     inst:AddComponent("infestable")
 
-    if TUNING.tropical.only_shipwrecked then
-        inst:AddComponent("mapwrapper")
-    end
-
     if not TheNet:IsDedicated() then
         inst:ListenForEvent("player.tropical_room_event", OnDirtyEventCameraStuff)
     end
@@ -95,5 +91,5 @@ AddPlayerPostInit(function(inst)
 
     if not TheWorld.ismastersim then return end
 
-    inst:AddComponent("tropical_noequipactivator")
+    inst:AddComponent("tro_noequipactivator")
 end)

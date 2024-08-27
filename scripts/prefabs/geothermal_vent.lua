@@ -18,11 +18,11 @@ local function onsave(inst, data)
 end
 
 local function OnEntityWake(inst)
-	inst.components.bubbleblower:Start()
+	inst.components.und_bubbleblower:Start()
 end
 
 local function OnEntitySleep(inst)
-	inst.components.bubbleblower:Stop()
+	inst.components.und_bubbleblower:Stop()
 end
 
 local function fn()
@@ -45,10 +45,10 @@ local function fn()
 	inst:AddComponent("lighttweener")
 	inst.entity:AddLight()
 
-	inst:AddComponent("bubbleblower")
-	inst.components.bubbleblower:SetXZOffset(40)
-	inst.components.bubbleblower:SetYOffset(60)
-	inst.components.bubbleblower:SetBubbleRate(6)
+	inst:AddComponent("und_bubbleblower")
+	inst.components.und_bubbleblower:SetXZOffset(40)
+	inst.components.und_bubbleblower:SetYOffset(60)
+	inst.components.und_bubbleblower:SetBubbleRate(6)
 
 	inst:AddComponent("oxygenaura")
 	inst.components.oxygenaura:SetAura(TUNING.GEOTHERMAL_VENT_AIR)

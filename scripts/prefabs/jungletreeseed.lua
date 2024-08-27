@@ -150,9 +150,6 @@ local function fn()
     inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.SMALL_FUEL
 
-    -- inst:AddComponent("appeasement")
-    -- inst.components.appeasement.appeasementvalue = TUNING.WRATH_SMALL
-
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     inst:ListenForEvent("onignite", stopgrowing)
     inst:ListenForEvent("onextinguish", restartgrowing)

@@ -1,3 +1,4 @@
+--- 中毒组件
 local Poisonous = Class(function(self, inst)
 	self.inst = inst
 	self.poisontestfn = function(x, target)

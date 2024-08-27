@@ -10,10 +10,10 @@ local prefabs =
 
 SetSharedLootTable('reconstruction_project',
     {
-        { "boards",   1.00 },
-        { "boards",   0.50 },
-        { "pigskin",  1.00 },
-        { "pigskin",  0.50 },
+        { "boards", 1.00 },
+        { "boards", 0.50 },
+        { "pigskin", 1.00 },
+        { "pigskin", 0.50 },
         { "cutstone", 1.00 },
     })
 
@@ -33,9 +33,9 @@ SetSharedLootTable('lawnornamentsdrop',
 
 SetSharedLootTable('lamp_post',
     {
-        { "alloy",      1.00 },
+        { "alloy", 1.00 },
         { "transistor", 1.00 },
-        { "lantern",    1.00 },
+        { "lantern", 1.00 },
     })
 
 
@@ -62,9 +62,6 @@ local function fix(inst, fixer)
         newprop.AnimState:PlayAnimation("place")
         newprop.AnimState:PushAnimation("idle")
         if inst.cityID then
-            if not newprop.components.citypossession then
-                newprop:AddComponent("citypossession")
-            end
             newprop.components.citypossession:SetCity(inst.cityID)
             if newprop.citypossessionfn then
                 newprop.citypossessionfn(newprop)

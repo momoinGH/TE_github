@@ -52,7 +52,7 @@ end
 
 local function fn(Sim)
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
+    inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
     inst.entity:AddNetwork()
 

@@ -25,8 +25,8 @@ local function CollectNoEquipActions(self, actiontype, ...)
                 local namemap = MOD_ACTION_COMPONENT_NAMES[modname] --组件名
                 for i, id in ipairs(cmplist) do
                     local componentname = namemap[id]
-                    if componentname == "tropical_noequipactivator" then
-                        -- 只判断tropical_noequipactivator组件的componentaction
+                    if componentname == "tro_noequipactivator" then
+                        -- 只判断tro_noequipactivator组件的componentaction
                         local collector = t[componentname]
                         if collector ~= nil then
                             collector(self, ...)
@@ -65,7 +65,7 @@ local function NoEquipActivator(retTab, self, position, right)
     local acts = retTab[1]
 
     --追加的bufferedaction，这里第三个参数用于componentaction的inst参数，这里可以加判断修改第三个参数，
-    --比如给船加个tropical_noequipactivator组件，这里再替换成船，addcomponentaction里就可以添加船的判断，inst也是船体本身
+    --比如给船加个tro_noequipactivator组件，这里再替换成船，addcomponentaction里就可以添加船的判断，inst也是船体本身
     local acts2 = GetNoEquipPointActions(self, position, self.inst, right)
     for _, buf in ipairs(acts2) do
         table.insert(acts, buf)

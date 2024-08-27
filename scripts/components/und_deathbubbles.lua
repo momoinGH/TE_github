@@ -2,6 +2,8 @@ local default_y_offset = 20
 local default_xz_offset_small = 30
 local default_xz_offset_large = 60
 
+-- 海底世界内单位被工作或死亡时生成点气泡
+-- TODO 可以不判断地皮吗
 local DeathBubbles = Class(function(self, inst)
 	self.inst = inst
 
@@ -72,10 +74,10 @@ function DeathBubbles:ReleaseBubbles(bubble_mod)
 	-- Set up the bubbler prefab
 	if bubbler and pt then
 		bubbler.Transform:SetPosition(pt:Get())
-		bubbler.components.bubbleblower:SetMaxBubbles(self.bubbles_to_be_released * bubble_mod)
-		bubbler.components.bubbleblower:SetXZOffset(self.xz_offset)
-		bubbler.components.bubbleblower:SetYOffset(self.y_offset)
-		bubbler.components.bubbleblower:SetBubbleRate(self.bubble_rate)
+		bubbler.components.und_bubbleblower:SetMaxBubbles(self.bubbles_to_be_released * bubble_mod)
+		bubbler.components.und_bubbleblower:SetXZOffset(self.xz_offset)
+		bubbler.components.und_bubbleblower:SetYOffset(self.y_offset)
+		bubbler.components.und_bubbleblower:SetBubbleRate(self.bubble_rate)
 	end
 end
 
@@ -84,7 +86,16 @@ function DeathBubbles:OnDestruction()
 	local x, y, z = self.inst.Transform:GetWorldPosition()
 	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 	local naagua = false
-	if ground == GROUND.UNDERWATER_SANDY or ground == GROUND.UNDERWATER_ROCKY or (ground == GROUND.BEACH and TheWorld:HasTag("cave")) or (ground == GROUND.BATTLEGROUND and TheWorld:HasTag("cave")) or (ground == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground == GROUND.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
+	if ground == GROUND.UNDERWATER_SANDY
+		or ground == GROUND.UNDERWATER_ROCKY
+		or (ground == GROUND.BEACH and TheWorld:HasTag("cave"))
+		or (ground == GROUND.BATTLEGROUND and TheWorld:HasTag("cave"))
+		or (ground == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave"))
+		or (ground == GROUND.MAGMAFIELD and TheWorld:HasTag("cave"))
+		or (ground == GROUND.PAINTED and TheWorld:HasTag("cave"))
+	then
+		naagua = true
+	end
 
 	-- No need to release bubbles if not underwater
 	if not naagua then
@@ -116,7 +127,16 @@ function DeathBubbles:OnHit()
 	local x, y, z = self.inst.Transform:GetWorldPosition()
 	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 	local naagua = false
-	if ground == GROUND.UNDERWATER_SANDY or ground == GROUND.UNDERWATER_ROCKY or (ground == GROUND.BEACH and TheWorld:HasTag("cave")) or (ground == GROUND.BATTLEGROUND and TheWorld:HasTag("cave")) or (ground == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground == GROUND.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
+	if ground == GROUND.UNDERWATER_SANDY
+		or ground == GROUND.UNDERWATER_ROCKY
+		or (ground == GROUND.BEACH and TheWorld:HasTag("cave"))
+		or (ground == GROUND.BATTLEGROUND and TheWorld:HasTag("cave"))
+		or (ground == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave"))
+		or (ground == GROUND.MAGMAFIELD and TheWorld:HasTag("cave"))
+		or (ground == GROUND.PAINTED and TheWorld:HasTag("cave"))
+	then
+		naagua = true
+	end
 
 	-- No need to release bubbles if not underwater
 	if not naagua then

@@ -21,12 +21,6 @@ AddPrefabPostInit("player_classified", function(inst)
     end
 end)
 
--- TODO 主机还是客机组件？
-AddPlayerPostInit(function(inst)
-    inst:AddComponent("buffable")
-    inst:AddComponent("colourfader")
-end)
-
 function EntityScript:GetDisplayName()
     local name = self:GetAdjectivedName()
     if self.prefab ~= nil then
@@ -439,17 +433,17 @@ AddComponentPostInit("equippable", function(self)
     end;
 
     function self:AddBuffsTo(ae)
-        if ae and ae.components.buffable then
-            ae.components.buffable:AddBuff(
-                self.inst.prefab, self.uniquebuffs)
-        end
+        -- if ae and ae.components.buffable then
+        --     ae.components.buffable:AddBuff(
+        --         self.inst.prefab, self.uniquebuffs)
+        -- end
     end;
 
     function self:RemoveBuffsFrom(ae)
-        if ae and ae.components.buffable then
-            ae.components.buffable:RemoveBuff(self
-                .inst.prefab)
-        end
+        -- if ae and ae.components.buffable then
+        --     ae.components.buffable:RemoveBuff(self
+        --         .inst.prefab)
+        -- end
     end;
 
     function self:AddUniqueBuff(af)
@@ -617,10 +611,6 @@ for av, aw in pairs(au) do
             ax(l)
         end; self.states[av].onexit = function(l)
             if not l.sg.statemem.equip then return end;
-
-            if l.sg.statemem.tm < l.sg.statemem.trgt and l.sg.statemem.equip.components.reticule_spawner then
-                l.sg.statemem.equip.components.reticule_spawner:Interrupt()
-            end;
             ay(l)
         end;
         self.states[av].onupdate = function(l, aA)

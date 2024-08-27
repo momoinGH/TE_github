@@ -33,10 +33,10 @@ local function fn()
     inst.AnimState:SetBuild("quagmire_sapbucket")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddComponent("tropical_consumable")
-    inst.components.tropical_consumable.targetCheckFn = TargetCheck
-    inst.components.tropical_consumable.state = ConsumableState
-    inst.components.tropical_consumable.str = "TAPSUGARTREE"
+    inst:AddComponent("tro_consumable")
+    inst.components.tro_consumable.targetCheckFn = TargetCheck
+    inst.components.tro_consumable.state = ConsumableState
+    inst.components.tro_consumable.str = "TAPSUGARTREE"
 
     inst.entity:SetPristine()
 
@@ -44,7 +44,7 @@ local function fn()
         return inst
     end
 
-    inst.components.tropical_consumable.onUseFn = OnUse
+    inst.components.tro_consumable.onUseFn = OnUse
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "quagmire_sapbucket"
@@ -53,9 +53,6 @@ local function fn()
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
 
     inst:AddComponent("inspectable")
-
-    inst:AddComponent("sapbucket")
-
     return inst
 end
 

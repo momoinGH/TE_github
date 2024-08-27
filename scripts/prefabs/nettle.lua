@@ -44,9 +44,6 @@ local function fn(Sim)
     inst:AddComponent("tradable")
     inst:AddComponent("inspectable")
 
-    --    inst:AddComponent("appeasement")
-    --    inst.components.appeasement.appeasementvalue = WRATH_SMALL
-
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeSmallPropagator(inst)
     --inst.components.burnable:MakeDragonflyBait(3)

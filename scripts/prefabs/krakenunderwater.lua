@@ -242,7 +242,7 @@ local function SpawnChest(inst)
 end
 
 local function OnRemove(inst)
-    inst.components.minionspawner2:DespawnAll()
+    inst.components.minionspawner:DespawnAll()
 end
 
 local function OnSave(inst, data)
@@ -313,15 +313,15 @@ local function fn()
     inst:AddComponent("locomotor")
 
 
-    inst:AddComponent("minionspawner2")
-    inst.components.minionspawner2.validtiletypes = { GROUND.UNDERWATER_SANDY, GROUND.UNDERWATER_ROCKY, GROUND.BEACH,
+    inst:AddComponent("minionspawner")
+    inst.components.minionspawner.validtiletypes = { GROUND.UNDERWATER_SANDY, GROUND.UNDERWATER_ROCKY, GROUND.BEACH,
         GROUND.MAGMAFIELD, GROUND.PAINTED, GROUND.BATTLEGROUND, GROUND.PEBBLEBEACH }
 
-    inst.components.minionspawner2.miniontype = "krakenunderwater_tentacle"
-    inst.components.minionspawner2.distancemodifier = 9
-    inst.components.minionspawner2.maxminions = 35
-    inst.components.minionspawner2:RegenerateFreePositions()
-    inst.components.minionspawner2.shouldspawn = false
+    inst.components.minionspawner.miniontype = "krakenunderwater_tentacle"
+    inst.components.minionspawner.distancemodifier = 9
+    inst.components.minionspawner.maxminions = 35
+    inst.components.minionspawner:RegenerateFreePositions()
+    inst.components.minionspawner.shouldspawn = false
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('krakenunderwater')
@@ -389,6 +389,6 @@ local function fn2()
 
     return inst
 end
-
+-- TODO kraken、krakenunderwater、krakenholefundo怎么这么多海妖？
 return Prefab("krakenunderwater", fn, assets, prefabs), Prefab("krakenholefrente", fn1, assets, prefabs),
     Prefab("krakenholefundo", fn2, assets, prefabs)

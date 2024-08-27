@@ -60,10 +60,10 @@ local function fn(Sim)
 
 	inst:AddTag("magnifying_glass")
 
-	inst:AddComponent("tropical_consumable")
-	inst.components.tropical_consumable.targetCheckFn = TargetCheck
-	inst.components.tropical_consumable.state = "investigate"
-	inst.components.tropical_consumable.str = "SPY"
+	inst:AddComponent("tro_consumable")
+	inst.components.tro_consumable.targetCheckFn = TargetCheck
+	inst.components.tro_consumable.state = "investigate"
+	inst.components.tro_consumable.str = "SPY"
 
 	inst.entity:SetPristine()
 
@@ -71,7 +71,7 @@ local function fn(Sim)
 		return inst
 	end
 
-	inst.components.tropical_consumable.onUseFn = OnUse
+	inst.components.tro_consumable.onUseFn = OnUse
 
 	inst.components.floater:SetBankSwapOnFloat(true, -10, { sym_build = "swap_hand_lens" })
 

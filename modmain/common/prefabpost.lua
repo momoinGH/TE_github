@@ -21,22 +21,6 @@ modimport "modmain/common/prefabs/allplayers"
 modimport "modmain/common/prefabs/world"
 
 
-----------------------------------------------------------------------------------------------------
-
--- TODO 可以换个写法吗？
-local function AoeSpellCastSpellBefore(self)
-    if self.inst.components.reticule_spawner then
-        if self.inst.components.recarregavel and self.inst.components.recarregavel.isready then
-            self.inst.components.reticule_spawner:Spawn(pos)
-        end
-        self.inst.components.reticule_spawner:OnCastAoeSpelled()
-    end
-end
-
-AddComponentPostInit("aoespell", function(self)
-    Utils.FnDecorator(self, "CastSpell", AoeSpellCastSpellBefore)
-end)
-
 
 ----------------------------------------------------------------------------------------------------
 local function ArmorCanResistBefore(self, attacker, weapon)
@@ -242,12 +226,7 @@ Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
 end)
 
 
-AddPrefabPostInit("saltrock", function(inst)
-    if not TheWorld.ismastersim then return end
 
-    inst:AddComponent("mealable")
-    inst.components.mealable:SetType("salt")
-end)
 
 ----------------------------------------------------------------------------------------------------
 
@@ -257,11 +236,9 @@ end)
 AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then return end
 
-    inst:AddComponent("parrotspawner")
     inst:AddComponent("economy")
     inst:AddComponent("shadowmanager")
-    inst:AddComponent("contador")
-    inst:AddComponent("tropical_interiorspawner")
+    inst:AddComponent("tro_interiorspawner")
 
     if TUNING.tropical.sealnado then
         inst:AddComponent("twisterspawner")
@@ -299,10 +276,6 @@ AddPrefabPostInit("forest", function(inst)
     if not TUNING.tropical.only_shipwrecked then
         inst:AddComponent("quaker_interior")
     end
-
-    -- if TUNING.tropical.springflood or TUNING.tropical.only_shipwrecked then
-    --     inst:AddComponent("floodspawner")
-    -- end
 end)
 
 AddPrefabPostInit("cave", function(inst)
@@ -311,8 +284,7 @@ AddPrefabPostInit("cave", function(inst)
     inst:AddComponent("roottrunkinventory")
     inst:AddComponent("quaker_interior")
     inst:AddComponent("economy")
-    inst:AddComponent("contador")
-    inst:AddComponent("tropical_interiorspawner")
+    inst:AddComponent("tro_interiorspawner")
 end)
 
 ----------------------------------------------------------------------------------------------------

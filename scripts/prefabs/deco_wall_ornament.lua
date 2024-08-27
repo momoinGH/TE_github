@@ -9,7 +9,7 @@ local function OnBuilt(inst)
     if side == 1 or side == 3 then
         bank = (side == 1 or side == 3) and bank .. "_side" or nil
         local scale = side == 3 and { -1, 1 } or nil
-        inst.components.tropical_saveanim:Init(bank, nil, nil, scale)
+        inst.components.tro_saveanim:Init(bank, nil, nil, scale)
     end
 end
 

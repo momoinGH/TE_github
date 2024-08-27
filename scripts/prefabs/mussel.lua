@@ -9,8 +9,6 @@ local prefabs =
 	"spoiled_food",
 }
 
-local APPEASEMENT_SMALL = 8
-
 local function raw()
 	local inst = CreateEntity()
 	inst.entity:AddTransform()

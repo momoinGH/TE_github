@@ -1,3 +1,4 @@
+-- 海底世界，用来冒泡的
 local BubbleBlower = Class(function(self, inst)
 	self.inst = inst
 
@@ -74,7 +75,16 @@ function BubbleBlower:OnUpdate(dt)
 	local x, y, z = self.inst.Transform:GetWorldPosition()
 	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 	local naagua = false
-	if ground == GROUND.UNDERWATER_SANDY or ground == GROUND.UNDERWATER_ROCKY or (ground == GROUND.BEACH and TheWorld:HasTag("cave")) or (ground == GROUND.BATTLEGROUND and TheWorld:HasTag("cave")) or (ground == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground == GROUND.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
+	if ground == GROUND.UNDERWATER_SANDY
+		or ground == GROUND.UNDERWATER_ROCKY
+		or (ground == GROUND.BEACH and TheWorld:HasTag("cave"))
+		or (ground == GROUND.BATTLEGROUND and TheWorld:HasTag("cave"))
+		or (ground == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave"))
+		or (ground == GROUND.MAGMAFIELD and TheWorld:HasTag("cave"))
+		or (ground == GROUND.PAINTED and TheWorld:HasTag("cave"))
+	then
+		naagua = true
+	end
 
 	--naagua = true
 	if (self.time_since_bubble > self.time_til_bubble) and naagua then

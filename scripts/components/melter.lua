@@ -3,6 +3,7 @@ local night_time = 60
 local BASE_COOK_TIME = night_time * .3333
 local smelting = require("smelting")
 
+-- TODO 冶炼，用烹饪组件替代
 local Melter = Class(function(self, inst)
 	self.inst = inst
 	self.cooking = false
@@ -67,22 +68,21 @@ function Melter:CanCook()
 end
 
 local function count_components(tbl) -- 临时放这
-    local lst = {}
-    for _, v in pairs(tbl) do
-        if not lst[v] then
-            lst[v] = 1
-        else
-            lst[v] = lst[v] + 1
-        end
-    end
-    return lst
+	local lst = {}
+	for _, v in pairs(tbl) do
+		if not lst[v] then
+			lst[v] = 1
+		else
+			lst[v] = lst[v] + 1
+		end
+	end
+	return lst
 end
 
 function Melter:StartCooking()
 	if not self.done and not self.cooking then
 		local container = self.inst.components.container
 		if container then
-
 			self.done = nil
 			self.cooking = true
 
@@ -220,7 +220,6 @@ function Melter:GetDebugString()
 
 	return str
 end
-
 
 function Melter:IsDone()
 	return self.done

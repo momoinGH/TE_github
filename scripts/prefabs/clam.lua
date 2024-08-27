@@ -15,11 +15,11 @@ local prefabs =
 }
 
 local function OnEntityWake(inst)
-	inst.components.bubbleblower:Start()
+	inst.components.und_bubbleblower:Start()
 end
 
 local function OnEntitySleep(inst)
-	inst.components.bubbleblower:Stop()
+	inst.components.und_bubbleblower:Stop()
 end
 
 local function fn(Sim)
@@ -45,7 +45,7 @@ local function fn(Sim)
 	inst:AddTag("clam")
 	inst:AddTag("underwater")
 
-	inst:AddComponent("bubbleblower")
+	inst:AddComponent("und_bubbleblower")
 
 	inst.entity:SetPristine()
 

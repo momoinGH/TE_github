@@ -13,7 +13,7 @@ local function oncheckready(inst)
         inst.components.specialstewer:StartWorking()
     end
 end
-
+--- TODO 能替换掉吗
 local SpecialStewer = Class(function(self, inst)
         self.inst = inst
 
@@ -157,10 +157,6 @@ local function dostew(inst, self)
     self.done = true
 end
 
-function SpecialStewer:IsDone()
-    return self.done
-end
-
 function SpecialStewer:IsSpoiling()
     return self.done and self.targettime ~= nil
 end
@@ -240,10 +236,6 @@ function SpecialStewer:StartCooking()
         -- self.inst.components.container:DestroyContents()
         -- self.inst.components.coinstallationsntainer.canbeopened = false
     end
-end
-
-local function StopProductPhysics(prod)
-    prod.Physics:Stop()
 end
 
 function SpecialStewer:CompleteCooking(reason)

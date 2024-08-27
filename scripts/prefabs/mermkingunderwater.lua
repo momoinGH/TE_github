@@ -380,11 +380,11 @@ local function OnLoadPostPass(inst, newents, savedata)
 end
 
 local function OnEntityWake(inst)
-    inst.components.bubbleblower:Start()
+    inst.components.und_bubbleblower:Start()
 end
 
 local function OnEntitySleep(inst)
-    inst.components.bubbleblower:Stop()
+    inst.components.und_bubbleblower:Stop()
 end
 
 local function fn()
@@ -408,7 +408,7 @@ local function fn()
     inst:AddTag("wet")
 
     inst:AddComponent("talker")
-    inst:AddComponent("bubbleblower")
+    inst:AddComponent("und_bubbleblower")
     inst.AnimState:SetMultColour(255 / 255, 150 / 255, 0 / 255, 1)
 
     inst.entity:SetPristine()

@@ -667,10 +667,6 @@ local function corpsefn(Sim)
 
     inst:AddComponent("lootdropper")
 
-    ------------------------------------------
-
-    inst:AddComponent("hole")
-
     inst:AddComponent("inspectable")
 
     inst:AddComponent("workable")

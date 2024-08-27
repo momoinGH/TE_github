@@ -1,7 +1,3 @@
-require("constants")
-
-local easing = require("easing")
-
 local function spawnCloudPuff(x, y, z)
 	local cloudpuff = SpawnPrefab("cloudpuff")
 	cloudpuff.Transform:SetPosition(x, y, z)
@@ -15,6 +11,7 @@ local function isSky(map, x, y, z)
 		(GROUND.IMPASSABLE == map:GetTileAtPoint(x, y, z - 1.0))
 end
 
+--- 玩家附近生成云雾特效
 local CloudPuffManager = Class(function(self, inst)
 	self.inst = inst
 

@@ -37,9 +37,6 @@ local function fn()
     inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.MED_FUEL
 
-    -- inst:AddComponent("appeasement")
-    -- inst.components.appeasement.appeasementvalue = TUNING.WRATH_SMALL
-
     MakeSmallBurnable(inst, TUNING.MED_BURNTIME)
     MakeSmallPropagator(inst)
     MakeDragonflyBait(inst, 3)

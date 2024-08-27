@@ -26,7 +26,7 @@ end))
 
 -- 使用消耗品道具
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TROPICAL_USE_ITEM, function(inst, act)
-    return FunctionOrValue(act.invobject.components.tropical_consumable.state, act.invobject, act.doer, act.target)
+    return FunctionOrValue(act.invobject.components.tro_consumable.state, act.invobject, act.doer, act.target)
 end))
 
 

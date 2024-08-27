@@ -14,6 +14,7 @@ local PLATES =
     },
 }
 
+--- 暴食
 local Replatable = Class(function(self, inst)
     self.inst = inst
     self.platetype = nil
