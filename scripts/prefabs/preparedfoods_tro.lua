@@ -55,7 +55,7 @@ local function MakePreparedFood(data)
             inst:AddTag("spicedfood")
 
             inst.inv_image_bg = { image = (data.basename or data.name) .. ".tex" }
-            inst.inv_image_bg.atlas = GetInventoryItemAtlas(inst.inv_image_bg.image)
+            inst.inv_image_bg.atlas = data.atlasname or GetInventoryItemAtlas(inst.inv_image_bg.image)
 
             food_symbol_build = data.overridebuild or "cook_pot_food"
         else
@@ -65,6 +65,7 @@ local function MakePreparedFood(data)
 
         inst.AnimState:PlayAnimation("idle")
         inst.AnimState:OverrideSymbol("swap_food", data.overridebuild or "cook_pot_food", data.basename or data.name)
+        -- inst.scrapbook_overridedata = {"swap_food", data.overridebuild or "cook_pot_food", data.basename or data.name}
 
         inst:AddTag("preparedfood")
 
@@ -125,13 +126,16 @@ local function MakePreparedFood(data)
         end
 
         inst:AddComponent("stackable")
-        inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+        inst.components.stackable.maxsize = data.maxstacksize or TUNING.STACK_SIZE_SMALLITEM
 
         if data.perishtime ~= nil and data.perishtime > 0 then
             inst:AddComponent("perishable")
             inst.components.perishable:SetPerishTime(data.perishtime)
             inst.components.perishable:StartPerishing()
-            inst.components.perishable.onperishreplacement = "spoiled_food"
+            inst.components.perishable.onperishreplacement = data.onperishreplacement or "spoiled_food"
+            if data.perishfn then
+                inst.components.perishable:SetOnPerishFn(data.perishfn)
+            end
         end
 
         MakeSmallBurnable(inst)
