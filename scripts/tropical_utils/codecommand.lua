@@ -1005,6 +1005,9 @@ AddRecipe2 = function(name, ingredients, tech, config, filters) end
 ---@param config table|nil 如果config.builder_tag和config.builder_skill均为nil，则退化为未定义制作栏的MOD配方
 ---@param extra_filters table|nil CRAFTING_FILTER_DEFS的name
 AddCharacterRecipe = function(name, ingredients, tech, config, extra_filters) end
+---添加拆解配方
+---@param name string 实体名
+---@param return_ingredients table Ingredient组成的表
 AddDeconstructRecipe = function(name, return_ingredients) end
 AddModRPCHandler = function(namespace, name, fn) end
 AddClientModRPCHandler = function(namespace, name, fn) end
