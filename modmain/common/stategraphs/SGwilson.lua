@@ -658,7 +658,7 @@ AddStategraphState("wilson", State {
     onenter = function(inst)
         local usehit = inst.components.rider:IsRiding() or inst:HasTag("wereplayer")
         local stun_frames = usehit and 6 or 9
-        inst.wantstosneeze = false
+        inst.components.hayfever.wantstosneeze = false
         inst:ClearBufferedAction()
         inst.components.locomotor:Stop()
         inst.SoundEmitter:PlaySound("dontstarve/wilson/hit", nil, .02)

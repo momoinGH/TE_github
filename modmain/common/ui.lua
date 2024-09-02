@@ -115,7 +115,7 @@ end
 local iconedevelocidade = require "widgets/speedicon"
 AddClassPostConstruct("widgets/statusdisplays", function(self)
     self.velocidadeativa = self:AddChild(iconedevelocidade(self.owner))
-    self.owner.velocidadeativa = self.velocidadeativa
+
     if KnownModIndex:IsModEnabled("workshop-376333686") then --适配Combined Status模组
         self.velocidadeativa:SetPosition(-85, 6, 0)
     else

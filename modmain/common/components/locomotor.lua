@@ -73,12 +73,14 @@ local function ExternalSpeedMultiplierBefore(self)
         end
     end
     -------------------------------------------------------------------------------------------
-    local fogspeed = 1
-    if self.inst:HasTag("hamfogspeed") then
-        fogspeed = 0.4
+
+    local groggy_modifier = 1
+
+    if self.inst.components.grogginess and self.inst:HasTag("groggy") then
+        groggy_modifier = self.inst.components.grogginess.speed_mod
     end
 
-    return self.externalspeedmultiplier * wind_speed * wave_speed * fogspeed * flood_speed
+    return self.externalspeedmultiplier * wind_speed * wave_speed * flood_speed * groggy_modifier
 end
 
 ----------------------------------------------------------------------------------------------------

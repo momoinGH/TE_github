@@ -56,6 +56,7 @@ local function OnUpdate(inst)
     local self = inst.components.complexprojectile
 
     if self.attacker:IsValid() and self.attacker.components.combat then
+        local pos = inst:GetPosition()
         for _, v in ipairs(GetPlayerAttackTarget(self.attacker, 3,
             function(v) return v:GetPhysicsRadius(0) + 1 > distsq(pos, v:GetPosition()) end, pos, true)) do
             self:Hit(v)
