@@ -15,6 +15,16 @@ local CANT_DEPLOY_IN_CAVE_TILES = {
     [WORLD_TILES.PEBBLEBEACH] = true,
 }
 
+local VOLCANO_PLANT_TILES = table.invert{
+    WORLD_TILES.MAGMAFIELD,
+    WORLD_TILES.ASH,
+    WORLD_TILES.VOLCANO,
+}
+
+local JUNGLE_PLANT_TILES = table.invert{
+    WORLD_TILES.JUNGLE,
+}
+
 Utils.FnDecorator(Map, "CanDeployRecipeAtPoint", function(self, pt, recipe, rot)
     local x, _, z = pt:Get()
     -- 地皮限制
@@ -84,4 +94,23 @@ Utils.FnDecorator(Map, "GetTileCenterPoint", nil, function(retTab, self, x, y, z
     return next(retTab) and retTab
         or x and z and { math.floor(x / 4) * 4 + 2, 0, math.floor(z / 4) * 4 + 2 }
         or {}
+end)
+
+-- 咖啡、象仙人掌、荨麻、竹子、藤蔓
+function Map:CanVolcanoPlantAtPoint(x, y, z)
+    local tile = self:GetTileAtPoint(x, y, z)
+    return VOLCANO_PLANT_TILES[tile]
+end
+
+function Map:CanJunglePlantAtPoint(x, y, z)
+    local tile = self:GetTileAtPoint(x, y, z)
+    return JUNGLE_PLANT_TILES[tile]
+end
+
+Utils.FnDecorator(Map, "CanDeployPlantAtPoint", function(self, pt, inst, ...)
+    if inst.prefab == "dug_elephantcactus" or inst.prefab == "dug_coffeebush" then
+        return { self:CanVolcanoPlantAtPoint(pt:Get()) and self:IsDeployPointClear(pt, inst, inst.replica.inventoryitem ~= nil and inst.replica.inventoryitem:DeploySpacingRadius() or DEPLOYSPACING_RADIUS[DEPLOYSPACING.DEFAULT]) }, true
+    elseif inst.prefab == "dug_bush_vine" or inst.prefab == "dug_bambootree" then
+        return { self:CanJunglePlantAtPoint(pt:Get()) and self:IsDeployPointClear(pt, inst, inst.replica.inventoryitem ~= nil and inst.replica.inventoryitem:DeploySpacingRadius() or DEPLOYSPACING_RADIUS[DEPLOYSPACING.DEFAULT]) }, true
+    end
 end)

@@ -722,7 +722,7 @@ if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.multiplayerportal == 15 or
     AddRecipe2("living_artifact", { Ingredient("infused_iron", 6, h_atlas), Ingredient("waterdrop", 1, h_atlas) },
         TECH.LOST, { atlas = h_atlas }, { "MAGIC" })
     AddRecipe2("honeychest", { Ingredient("chitin", 6, h_atlas), Ingredient("beeswax", 1), Ingredient("honey", 3) },
-        TECH.LOST, { atlas = h_atlas, image = "honeychest.tex", min_spacing = 1, placer = "honeychest_placer" },
+        TECH.LOST, { atlas = h_atlas, image = "honeychest.tex", min_spacing = 2, placer = "honeychest_placer" },
         { "STRUCTURES", "CONTAINERS", "COOKING", "GARDENING" })
     AddRecipe2("pigskin", { Ingredient("bat_leather", 1, h_atlas) }, TECH.SCIENCE_ONE, { atlas = h_atlas }, { "REFINE" })
     AddRecipe2("hogusporkusator",

@@ -975,7 +975,15 @@ AddPrefabPostInit = function(prefab, fn) end
 AddRecipePostInitAny = function(fn) end
 AddRecipePostInit = function(recipename, fn) end
 AddBrainPostInit = function(brain, fn) end
+---添加食材属性
+---@param names table 食材的prefab名组成的表
+---@param tags table 食材度属性键与值组成的表
+---@param cancook boolean|nil 烤制后能否入锅，如果烤制后具有不同食材度也可令其为假
+---@param candry boolean|nil 干制后能否入锅，如果干制后具有不同食材度也可令其为假
 AddIngredientValues = function(names, tags, cancook, candry) end
+---添加食物配方到烹饪锅配方
+---@param cooker string 锅名
+---@param recipe table 烹饪配方的表
 AddCookerRecipe = function(cooker, recipe) end
 AddModCharacter = function(name, gender, modes) end
 RemoveDefaultCharacter = function(name) end
@@ -990,7 +998,16 @@ RemoveRecipeFromFilter = function(recipe_name, filter_name) end
 ---@param config table|nil
 ---@param filters table|nil CRAFTING_FILTER_DEFS的name
 AddRecipe2 = function(name, ingredients, tech, config, filters) end
+---添加角色配方
+---@param name string 配方名，避免使用原版预制体名作为配方名，同名的配方名会相互覆盖
+---@param ingredients table Ingredient组成的表
+---@param tech table TECH常量
+---@param config table|nil 如果config.builder_tag和config.builder_skill均为nil，则退化为未定义制作栏的MOD配方
+---@param extra_filters table|nil CRAFTING_FILTER_DEFS的name
 AddCharacterRecipe = function(name, ingredients, tech, config, extra_filters) end
+---添加拆解配方
+---@param name string 实体名
+---@param return_ingredients table Ingredient组成的表
 AddDeconstructRecipe = function(name, return_ingredients) end
 AddModRPCHandler = function(namespace, name, fn) end
 AddClientModRPCHandler = function(namespace, name, fn) end

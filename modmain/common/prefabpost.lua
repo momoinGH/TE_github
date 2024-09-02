@@ -644,25 +644,6 @@ for _, v in ipairs({
     end)
 end
 
-----------------------------------------------------------------------------------------------------
-
--- 还原科雷想做没做的 茶在冰箱里腐烂会转化为冰茶
-local function changeonperishreplacement(inst)
-    local owner = inst.components.inventoryitem:GetContainer()
-    inst.components.perishable.onperishreplacement = owner and owner.inst.prefab == "icebox" and "iced" .. inst.prefab or
-        "spoiled_food"
-end
-
-AddPrefabPostInitAny(function(inst)
-    if not TheWorld.ismastersim then
-        return inst
-    end
-    if inst.food_basename and inst.food_basename == "tea" then
-        inst.components.inventoryitem:SetOnPutInInventoryFn(changeonperishreplacement)
-        inst.components.inventoryitem:SetOnDroppedFn(changeonperishreplacement)
-    end
-end)
-
 
 ----------------------------------------------------------------------------------------------------
 local function CheckHorn(inst)
@@ -678,29 +659,6 @@ AddPrefabPostInit("gnarwail_attack_horn", function(inst)
 
     inst:DoTaskInTime(TUNING.GNARWAIL.HORN_RETREAT_TIME - 0.1, CheckHorn)
 end)
-
-
-----------------------------------------------------------------------------------------------------
--- 海难特色料理转化
-for _, v in ipairs({ "butterflymuffin_sw", "lobsterbisque_sw", "lobsterdinner_sw", }) do
-    AddPrefabPostInit(v, function(inst)
-        if inst.prefab == v then
-            inst._old_prefab = inst.prefab
-            inst.prefab = inst.prefab:sub(1, -4)
-        end
-        if not TheWorld.ismastersim then
-            return inst
-        end
-        local old_oneat = inst.components.edible.oneaten
-        inst.components.edible:SetOnEatenFn(function(inst, eater, ...)
-            eater:PushEvent("learncookbookstats", inst._old_prefab or inst.prefab)
-            inst._old_prefab = nil
-            if old_oneat then
-                old_oneat(inst, eater, ...)
-            end
-        end)
-    end)
-end
 
 
 ----------------------------------------------------------------------------------------------------
@@ -767,5 +725,54 @@ AddComponentPostInit("vanish_on_sleep", function(self)
     self.OnEntitySleep = OnEntitySleep
 end)
 
+
+----------------------------------------------------------------------------------------------------
+
+local function shardDMGRedirect(self, attacker, damage, weapon, ...) -- 碎裂武器伤害重定向
+    if weapon then
+        if weapon.prefab == "shard_sword" and self.inst:HasTag("shadow") then -- 碎裂剑对梦魇生物
+            local health = self.inst.components.health
+            if health then
+                if health.currenthealth <= damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MAXIMUM then
+                    return nil, false,
+                           {self, attacker,
+                            math.max(damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MINIMUM, health.currenthealth - 1),
+                            weapon, ...}
+                else
+                    if attacker and attacker.components.combat then
+                        attacker:DoTaskInTime(0, function()
+                            attacker.components.combat:GetAttacked(weapon, math.random(1, 5))
+                            attacker:PushEvent("thorns")
+                        end)
+                    end
+                    return nil, false,
+                           {self, attacker, damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MAXIMUM, weapon, ...}
+                end
+            end
+        elseif weapon.prefab == "shard_beak" and -- 碎裂喙对建筑和巢
+            (self.inst:HasTag("wall") or self.inst:HasTag("structure") or self.inst.components.childspawner) then
+            return nil, false, {self, attacker, damage * TUNING.SWP_SHARD_DMG.STRUCTURE_MODIFIER, weapon, ...}
+        end
+    end
+end
+
+AddComponentPostInit("combat", function(self, inst) Utils.FnDecorator(self, "GetAttacked", shardDMGRedirect) end)
+
+----------------------------------------------------------------------------------------------------
+
+AddComponentPostInit("boatphysics", function(self, inst) -- 给船和保险杠增加破浪能力
+    Utils.FnDecorator(self, "ApplyForce", function(self, dir_x, dir_z, force)
+        if SWP_WAVEBREAK_EFFICIENCY.BOAT[self.inst.prefab] then
+            force = force * math.max(1 - SWP_WAVEBREAK_EFFICIENCY.BOAT[self.inst.prefab], 0)
+        end
+        if self.inst.components.boatring then
+            local bumper = self.inst.components.boatring:GetBumperAtPoint(dir_x, dir_z)
+            if bumper and SWP_WAVEBREAK_EFFICIENCY.BUMPER["boat_bumper_" .. bumper.prefab] then
+                force = force * math.max(1 - SWP_WAVEBREAK_EFFICIENCY.BUMPER["boat_bumper_" .. bumper.prefab], 0)
+            end
+        end
+        return nil, false, {self, dir_x, dir_z, force}
+    end)
+end)
 
 ----------------------------------------------------------------------------------------------------

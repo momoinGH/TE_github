@@ -104,7 +104,6 @@ PrefabFiles = {
   "elephantcactus",
   "coffeebush",
   "coffeebeans",
-  "coffee",
   "lavaerupt",
   "volcano",
   "woodlegs_cage",

@@ -1,6 +1,5 @@
 local assets =
 {
-    Asset("ANIM", "anim/buoy.zip"),
     Asset("ANIM", "anim/fish_farm_ground.zip"),
     Asset("ANIM", "anim/seafarer_boatsw.zip"),
 }
@@ -29,10 +28,10 @@ local function fnbuoy(sim)
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
 
-    inst.AnimState:SetBank("buoy")
-    inst.AnimState:SetBuild("buoy")
-    inst.AnimState:PlayAnimation("ground", true)
-    inst.AnimState:OverrideSymbol("light", "buoy", "")
+    inst.AnimState:SetBank("seafarer_boatsw")
+    inst.AnimState:SetBuild("seafarer_boatsw")
+    inst.AnimState:PlayAnimation("buoy", true)
+    --inst.AnimState:OverrideSymbol("light", "buoy", "")
 
     --	inst.Transform:SetScale(0.5, 0.5, 0.5)	
 
