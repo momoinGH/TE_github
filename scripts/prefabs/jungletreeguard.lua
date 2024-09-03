@@ -22,16 +22,16 @@ local prefabs =
 
 SetSharedLootTable('jungletreeguard',
     {
-        { "livinglog",   1.0 },
-        { "livinglog",   1.0 },
-        { "livinglog",   1.0 },
-        { "livinglog",   0.5 },
-        { "livinglog",   0.5 },
-        { "livinglog",   0.5 },
+        { "livinglog", 1.0 },
+        { "livinglog", 1.0 },
+        { "livinglog", 1.0 },
+        { "livinglog", 0.5 },
+        { "livinglog", 0.5 },
+        { "livinglog", 0.5 },
         { "monstermeat", 1.0 },
         { "monstermeat", 0.5 },
-        { "bird_egg",    1.0 },
-        { "bird_egg",    0.5 },
+        { "bird_egg", 1.0 },
+        { "bird_egg", 0.5 },
         { "cave_banana", 1.0 },
         { "cave_banana", 0.5 },
     })
@@ -82,7 +82,9 @@ end
 local function OnAttack(inst, data)
     if data.target then
         local offset = Vector3(math.random(-2, 2), math.random(-2, 2), math.random(-2, 2))
-        inst.components.thrower:Throw(data.target:GetPosition() + offset)
+        local ent = SpawnPrefab("jungletreeguard_snake")
+        ent.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        ent.components.complexprojectile:Launch(data.target:GetPosition() + offset, inst)
     end
 end
 
@@ -163,9 +165,6 @@ local function fn(Sim)
     inst.components.combat:SetAttackPeriod(2)
     inst.components.combat:SetRange(20, 25)
     inst.components.combat.playerdamagepercent = .33
-
-    inst:AddComponent("thrower")
-    inst.components.thrower.throwable_prefab = "jungletreeguard_snake"
 
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)

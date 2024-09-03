@@ -150,7 +150,6 @@ Assets =
 	Asset("ANIM", "anim/leaves_canopy2.zip"),
 
 	Asset("ANIM", "anim/mushroom_tree_yelow.zip"),
-	Asset("ANIM", "anim/speedicon.zip"),
 
 	Asset("IMAGE", "images/cookbook/cookbook_sw.tex"),
 	Asset("ATLAS", "images/cookbook/cookbook_sw.xml"),

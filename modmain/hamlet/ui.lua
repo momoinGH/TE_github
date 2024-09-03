@@ -7,10 +7,17 @@ AddClassPostConstruct("widgets/controls", function(self)
     end
 
     self.hamlet_leafbadge = self:AddChild(LeafBadge(self.owner))
-    -- self.hamlet_leafbadge:SetPosition(0, 0, 0)
-    -- self.hamlet_leafbadge:MoveToBack()
 
     if TUNING.tropical.fog ~= 0 then
         self.hamlet_clouds = self:AddChild(Clouds(self.owner))
     end
 end)
+
+
+-- 哈姆雷特血月
+local luavermelha = require "widgets/bloodmoon"
+if TUNING.tropical.aporkalypse then
+    AddClassPostConstruct("widgets/uiclock", function(self)
+        self.luadesangue = self:AddChild(luavermelha(self.owner))
+    end)
+end

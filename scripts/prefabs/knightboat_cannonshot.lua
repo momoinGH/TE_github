@@ -20,7 +20,7 @@ local CANNONBOAT_DAMAGE = 50
 
 
 function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
-					  random_angle)
+	random_angle)
 	wavePrefab = wavePrefab or "rogue_wave"
 	totalAngle = math.clamp(totalAngle, 1, 360)
 
@@ -335,5 +335,6 @@ local function fnobsidian(Sim)
 	return inst
 end
 
-return Prefab("knightboat_cannonshot", fn, assets, prefabs), Prefab("cannonshot", fncannon, assets, prefabs),
+return Prefab("knightboat_cannonshot", fn, assets, prefabs),
+	Prefab("cannonshot", fncannon, assets, prefabs),
 	Prefab("cannonshotobsidian", fnobsidian, assets, prefabs)

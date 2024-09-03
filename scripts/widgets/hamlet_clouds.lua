@@ -1,6 +1,6 @@
-local Badge = require "widgets/badge"
 local UIAnim = require "widgets/uianim"
 
+-- 哈姆雷特雾气
 local Clouds = Class(UIAnim, function(self, owner)
     self.owner = owner
     UIAnim._ctor(self)
@@ -13,80 +13,50 @@ local Clouds = Class(UIAnim, function(self, owner)
 
     self:GetAnimState():SetBank("vagner_over")
     self:GetAnimState():SetBuild("vagner_over")
-    self:GetAnimState():PlayAnimation("polenfraco", true)
+    self:GetAnimState():PlayAnimation("foog_loop8", true)
 
     self:StartUpdating()
     self:Hide()
-    self.speed = false
-    self.hayfever = 0
     self.neblina = 0
-    self.ash = false
 end)
 
 
 function Clouds:OnUpdate(dt)
-    -- --print(TheWorld.state.wetness)
-    -- -------------------------------------fog---------------------------------------------
-    -- local fanlimpador = GetClosestInstWithTag("prevents_hayfever", self.owner, 15)
-    -- if (TheWorld.state.iswinter and TheWorld.state.precipitationrate > 0 and self.owner and self.owner.components.areaaware and self.owner.components.areaaware:CurrentlyInTag("hamlet") and TUNING.tropical.fog == 10) or
-    --     (TheWorld.state.iswinter and TheWorld.state.precipitationrate > 0 and self.owner and self.owner.components.areaaware and self.owner.components.areaaware:GetCurrentArea() ~= nil and TUNING.tropical.fog == 20) then
-    --     if fanlimpador then
-    --         if self.neblina and self.neblina > 0 then self.neblina = self.neblina - 2 end
-    --     else
-    --         self.neblina = self.neblina + 1
-    --     end
-    --     if self.neblina and self.neblina < 1000 then
-    --         self:GetAnimState():SetBank("vagner_over")
-    --         self:GetAnimState():SetBuild("vagner_over")
-    --         self:GetAnimState():PlayAnimation("foog_loop8", true)
-    --         self:Hide()
-    --     elseif self.neblina and self.neblina < 2000 then
-    --         self:GetAnimState():SetBank("vagner_over")
-    --         self:GetAnimState():SetBuild("vagner_over")
-    --         self:GetAnimState():PlayAnimation("foog_loop8", true)
-    --         self:Show()
-    --     elseif self.neblina and self.neblina < 3000 then
-    --         self:GetAnimState():SetBank("vagner_over")
-    --         self:GetAnimState():SetBuild("vagner_over")
-    --         self:GetAnimState():PlayAnimation("foog_loop7", true)
-    --         self:Show()
-    --     elseif self.neblina and self.neblina < 4000 then
-    --         self:GetAnimState():SetBank("vagner_over")
-    --         self:GetAnimState():SetBuild("vagner_over")
-    --         self:GetAnimState():PlayAnimation("foog_loop6", true)
-    --         self:Show()
-    --     elseif self.neblina and self.neblina < 5000 then
-    --         self:GetAnimState():SetBank("vagner_over")
-    --         self:GetAnimState():SetBuild("vagner_over")
-    --         self:GetAnimState():PlayAnimation("foog_loop5", true)
-    --         self:Show()
-    --     elseif self.neblina and self.neblina < 6000 then
-    --         self:GetAnimState():SetBank("vagner_over")
-    --         self:GetAnimState():SetBuild("vagner_over")
-    --         self:GetAnimState():PlayAnimation("foog_loop4", true)
-    --         self:Show()
-    --     elseif self.neblina and self.neblina < 7000 then
-    --         self:GetAnimState():SetBank("vagner_over")
-    --         self:GetAnimState():SetBuild("vagner_over")
-    --         self:GetAnimState():PlayAnimation("foog_loop3", true)
-    --         self:Show()
-    --     elseif self.neblina and self.neblina < 8000 then
-    --         self:GetAnimState():SetBank("vagner_over")
-    --         self:GetAnimState():SetBuild("vagner_over")
-    --         self:GetAnimState():PlayAnimation("foog_loop2", true)
-    --         self:Show()
-    --     elseif self.neblina and self.neblina < 9000 then
-    --         self:GetAnimState():SetBank("vagner_over")
-    --         self:GetAnimState():SetBuild("vagner_over")
-    --         self:GetAnimState():PlayAnimation("foog_loop1", true)
-    --         self:Show()
-    --     elseif self.neblina and self.neblina >= 9000 then
-    --         self:GetAnimState():SetBank("vagner_over")
-    --         self:GetAnimState():SetBuild("vagner_over")
-    --         self:GetAnimState():PlayAnimation("foog_loop", true)
-    --         self:Show()
-    --     end
-    -- end
+    if TheWorld.state.iswinter
+        and TheWorld.state.precipitationrate > 0
+        and (TUNING.tropical.fog == 20 or (TUNING.tropical.fog == 10 and self.owner.components.areaaware and self.owner.components.areaaware:CurrentlyInTag("hamlet")))
+    then
+        if GetClosestInstWithTag("prevents_hayfever", self.owner, 15) then
+            self.neblina = math.max(self.neblina - 2, 0)
+        else
+            self.neblina = self.neblina + 1
+        end
+
+        if self.neblina < 1000 then
+            self:Hide()
+        else
+            if self.neblina < 2000 then
+                self:GetAnimState():PlayAnimation("foog_loop8", true)
+            elseif self.neblina < 3000 then
+                self:GetAnimState():PlayAnimation("foog_loop7", true)
+            elseif self.neblina < 4000 then
+                self:GetAnimState():PlayAnimation("foog_loop6", true)
+            elseif self.neblina < 5000 then
+                self:GetAnimState():PlayAnimation("foog_loop5", true)
+            elseif self.neblina < 6000 then
+                self:GetAnimState():PlayAnimation("foog_loop4", true)
+            elseif self.neblina < 7000 then
+                self:GetAnimState():PlayAnimation("foog_loop3", true)
+            elseif self.neblina < 8000 then
+                self:GetAnimState():PlayAnimation("foog_loop2", true)
+            elseif self.neblina < 9000 then
+                self:GetAnimState():PlayAnimation("foog_loop1", true)
+            else
+                self:GetAnimState():PlayAnimation("foog_loop", true)
+            end
+            self:Show()
+        end
+    end
 end
 
 return Clouds

@@ -128,20 +128,6 @@ Constructor.AddAction(nil, "SHOWCRAB", STRINGS.ACTIONS.SHOWCRAB, function(act)
 end)
 
 
-Constructor.AddAction({ priority = 0, rmb = true, distance = 20, mount_valid = true },
-    "THROW",
-    STRINGS.ACTIONS.THROW,
-    function(act)
-        local thrown = act.invobject or act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-        if act.target and not act.pos then
-            act.pos = act.target:GetPosition()
-        end
-        if thrown and thrown.components.throwable then
-            thrown.components.throwable:Throw(act.pos, act.doer)
-            return true
-        end
-    end
-)
 
 Constructor.AddAction(nil, "PEAGAWK_TRANSFORM", STRINGS.ACTIONS.PEAGAWK_TRANSFORM, function(act)
     --Dummy action for flup hiding
@@ -178,14 +164,6 @@ Constructor.AddAction(nil, "SPECIAL_ACTION2", STRINGS.ACTIONS.SPECIAL_ACTION2, f
         act.doer.special_action2(act)
         return true
     end
-end)
-
-Constructor.AddAction(nil, "LAUNCH_THROWABLE", STRINGS.ACTIONS.LAUNCH_THROWABLE, function(act)
-    if act.target and not act.pos then
-        act.pos = act.target:GetPosition()
-    end
-    act.invobject.components.thrower:Throw(act.pos)
-    return true
 end)
 
 Constructor.AddAction(nil, "INFEST", STRINGS.ACTIONS.INFEST, function(act)
@@ -286,7 +264,7 @@ Constructor.AddAction({ priority = 8, rmb = true, distance = 25, mount_valid = f
             item.components.finiteuses:Use(1)
         end
         bomba.Transform:SetPosition(x, y + 1.5, z)
-        bomba.components.complexprojectile:Launch(targetPos)
+        bomba.components.complexprojectile:Launch(targetPos, act.doer)
         act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
 
         return true

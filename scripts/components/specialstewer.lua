@@ -113,9 +113,6 @@ local function dostewstep(inst, self)
         if self.cooktime <= 0 then
             if self.product ~= nil then
                 self:CompleteCooking()
-                -- TODO
-                -- elseif self.cooktime < self.burnthreshold then
-                --     self:BurnProduct()
             end
         end
     end

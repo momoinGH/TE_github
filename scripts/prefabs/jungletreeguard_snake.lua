@@ -9,34 +9,22 @@ local prefabs =
 	"groundpoundring_fx",
 }
 
-local function onthrown(inst, thrower, pt, time_to_target)
-	inst.Physics:SetFriction(.2)
-	inst.Transform:SetFourFaced()
-	inst:FacePoint(pt:Get())
-	inst.AnimState:PlayAnimation("throw", true)
-
+local function OnLaunch(inst, attacker, targetPos)
 	local shadow = SpawnPrefab("warningshadow")
-	shadow.Transform:SetPosition(pt:Get())
+	shadow.Transform:SetPosition(targetPos:Get())
+	local time_to_target = 1 -- 落地时间不好计算啊
 	shadow:shrink(time_to_target, 1.75, 0.5)
+end
 
-	inst.TrackHeight = inst:DoPeriodicTask(FRAMES, function()
-		local pos = inst:GetPosition()
-
-		if pos.y <= 0.3 then
-			local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 1.5)
-
-			for k, v in pairs(ents) do
-				if v.components.combat and v ~= inst and v.prefab ~= "treeguard" then
-					v.components.combat:GetAttacked(thrower, 50)
-				end
-			end
-
-			local other = SpawnPrefab("snake")
-			other.Transform:SetPosition(pt:Get())
-
-			inst:Remove()
+local function OnHit(inst, attacker)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	for k, v in pairs(TheSim:FindEntities(x, y, z, 1.5)) do
+		if v.components.combat and v ~= inst then
+			v.components.combat:GetAttacked(attacker or inst, 50)
 		end
-	end)
+	end
+
+	ReplacePrefab(inst, "snake")
 end
 
 local function onremove(inst)
@@ -44,15 +32,6 @@ local function onremove(inst)
 		inst.TrackHeight:Cancel()
 		inst.TrackHeight = nil
 	end
-end
-
-
-local function OnSave(inst, data)
-	inst:Remove()
-end
-
-local function OnLoad(inst, data)
-	inst:Remove()
 end
 
 local function fn()
@@ -64,9 +43,14 @@ local function fn()
 
 	MakeInventoryPhysics(inst)
 
+	inst.Transform:SetFourFaced()
+
 	inst.AnimState:SetBank("snake_cannon")
 	inst.AnimState:SetBuild("snake_cannon")
 	inst.AnimState:PlayAnimation("throw", true)
+
+	inst:AddTag("projectile")
+	inst:AddTag("thrown")
 
 	inst.entity:SetPristine()
 
@@ -74,21 +58,17 @@ local function fn()
 		return inst
 	end
 
-	inst:AddTag("thrown")
-	inst:AddTag("projectile")
-
-	inst:AddComponent("throwable")
-	inst.components.throwable.onthrown = onthrown
-	inst.components.throwable.random_angle = 0
-	inst.components.throwable.max_y = 50
-	inst.components.throwable.yOffset = 1
+	inst:AddComponent("complexprojectile")
+	inst.components.complexprojectile:SetOnHit(OnHit)
+	inst.components.complexprojectile:SetOnLaunch(OnLaunch)
+	inst.components.complexprojectile:SetLaunchOffset(Vector3(.75, 4.5, 0))
+	inst.components.complexprojectile:SetHorizontalSpeed(20)
+	inst.components.complexprojectile:SetGravity(-30)
 
 	inst:AddComponent("combat")
 	inst.components.combat:SetDefaultDamage(3)
 
-	inst.OnSave = OnSave
-	inst.OnLoad = OnLoad
-
+	inst.persists = false
 
 	inst.OnRemoveEntity = onremove
 
