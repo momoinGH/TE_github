@@ -16,13 +16,10 @@
 local KEY = "pro_"
 --是否只拦截自己mod的标签，如果为false则拦截玩家绝大部分标签
 local ONLY_MOD_TAGS = true
---拦截等级，默认只拦截EntityScripts相关方法，>=2表示拦截的标签也可用于FindEntities查找，>=3表示拦截的标签可用于装备和放置组件的标签限制
-local HOOK_LEVEL = 2
 
 --[[
 - 建议 KEY 填写自己的mod前缀，而且mod标签最好也加上mod前缀，
 - ONLY_MOD_TAGS 填写true，只处理自己mod的标签就好了
-- HOOK_LEVEL 填写1或者2，不过如果确定不会查找自己mod标签就不用填2
 ]]
 
 
@@ -141,9 +138,9 @@ end
 
 local function AddTagBefore(inst, tag)
     tag = string.lower(tag)
-    if EXCLUDE_TAGS[tag]                                  --不应该延迟
-        or string.find(tag, "_") == 1                     --不处理组件副件
-        or (ONLY_MOD_TAGS and string.find(tag, KEY) ~= 1) --只处理mod标签
+    if (ONLY_MOD_TAGS and string.find(tag, KEY) ~= 1) --只处理mod标签
+        or EXCLUDE_TAGS[tag]                          --不应该延迟
+        or string.find(tag, "_") == 1                 --不处理组件副件
     then
         return
     end
@@ -224,9 +221,6 @@ AddPlayerPostInit(function(inst)
     inst.HasAnyTag = inst.HasOneOfTags
 end)
 
-if HOOK_LEVEL < 2 then return end
--- 不再执行
-
 ----------------------------------------------------------------------------------------------------
 -- 检查一下参数，有些mod不规范，比如永不妥协，表里套表或者单纯一个字符串什么的
 local function CheckTagTable(tags)
@@ -269,7 +263,6 @@ getmetatable(TheSim).__index["FindEntities"] = function(self, x, y, z, radius, m
     return ents
 end
 
-if HOOK_LEVEL < 3 then return end
 ----------------------------------------------------------------------------------------------------
 
 AddPrefabPostInit("inventoryitem_classified", function(inst)

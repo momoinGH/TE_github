@@ -21,20 +21,17 @@ local GrabbingvineBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
-
+local FINDFOOD_CANT_TAGS = { "outofreach" }
 local function FoodNear(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 5, { "edible" }) --TODO 食物没有该标签
-
-    for i = #ents, 1, -1 do
-        if not ents[i] or ents[i]:IsInLimbo() or not inst.components.eater:AbleToEat(ents[i]) then
-            table.remove(ents, i)
-        end
-    end
-
-    if #ents > 0 then
-        return ents[1]
-    end
+    return FindEntity(inst, 5, function(item)
+            return item:GetTimeAlive() >= 8
+                and item.components.edible ~= nil
+                and item:IsOnPassablePoint()
+                and inst.components.eater:CanEat(item)
+        end,
+        nil,
+        FINDFOOD_CANT_TAGS
+    )
 end
 
 local function GoEatFood(inst)

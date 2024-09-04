@@ -24,8 +24,7 @@ end)
 
 local SEE_FOOD_DIST = 15
 
-local ONE_TAGS = { "edible", "eyebush" }
-local FOOD_TAGS = { "edible" } --TODO 食物没有该标签
+local ONE_TAGS = { "eyebush" }
 local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
 local function IsThreatened(inst)
@@ -97,30 +96,22 @@ local function PickEyebushAction(inst) --Look for food to eat
     end
 end
 
+local FINDFOOD_CANT_TAGS = { "outofreach" }
 local function EatFoodAction(inst) --Look for food to eat
-    local target = nil
-    local action = nil
-
-    if inst.sg:HasStateTag("busy") then
-        return
-    end
-
-    local pt = inst:GetPosition()
-    local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, SEE_FOOD_DIST, FOOD_TAGS, NO_TAGS)
-
-    if not target then
-        for k, v in pairs(ents) do
-            if v and v:IsOnValidGround() and inst.components.eater:CanEat(v)
-                and v.components.inventoryitem and not v.components.inventoryitem:IsHeld() then
-                target = v
-                break
-            end
-        end
-    end
-
-    if target then
-        local action = BufferedAction(inst, target, ACTIONS.EAT)
-        return action
+    local target = FindEntity(inst,
+        SEE_FOOD_DIST,
+        function(item)
+            return item:GetTimeAlive() >= 8
+                and item.prefab ~= "mandrake"
+                and item.components.edible ~= nil
+                and item:IsOnPassablePoint()
+                and inst.components.eater:CanEat(item)
+        end,
+        nil,
+        FINDFOOD_CANT_TAGS
+    )
+    if target ~= nil then
+        return BufferedAction(inst, target, ACTIONS.EAT)
     end
 end
 

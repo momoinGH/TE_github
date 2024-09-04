@@ -4,24 +4,10 @@ require "behaviours/doaction"
 require "behaviours/panic"
 require "behaviours/minperiod"
 
-local TIME_BETWEEN_EATING = 3.5
-
 local SEE_FOOD_DIST = 15
 local SEE_STRUCTURE_DIST = 30
 
-local BASE_TAGS = { "structure" }
-local FOOD_TAGS = { "edible" } --TODO 食物没有该标签
-local STEAL_TAGS = { "structure" }
 local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", "AQUATIC" }
-
-
-local MAX_CHASE_TIME = 20
-local MAX_WANDER_DIST = 16
-local MAX_CHASEAWAY_DIST = 32
-local START_FACE_DIST = 6
-local KEEP_FACE_DIST = 8
-local WARN_BEFORE_ATTACK_TIME = 2
-local DOYDOY_MATING_DANCE_DIST = 3
 
 local VALID_FOODS =
 {
@@ -43,39 +29,34 @@ local function ItemIsInList(item, list)
 	end
 end
 
+local FINDFOOD_CANT_TAGS = { "outofreach" }
 local function EatFoodAction(inst) --Look for food to eat
-	local target = nil
-	local action = nil
-
 	if inst.sg:HasStateTag("busy") and not
 		inst.sg:HasStateTag("wantstoeat") then
 		return
 	end
 
-	if inst.components.inventory and inst.components.eater then
-		target = inst.components.inventory:FindItem(function(item) return inst.components.eater:CanEat(item) end)
-		if target then return BufferedAction(inst, target, ACTIONS.EAT) end
-	end
-
-	local pt = inst:GetPosition()
-	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, SEE_FOOD_DIST, FOOD_TAGS, NO_TAGS)
-
-	if not target then
-		for k, v in pairs(ents) do
-			if v and v:IsOnValidGround() and
-				inst.components.eater:CanEat(v) and
-				v:GetTimeAlive() > 5 and
-				v.components.inventoryitem and not
-				v.components.inventoryitem:IsHeld() then
-				target = v
-				break
-			end
-		end
-	end
-
-	if target then
-		local action = BufferedAction(inst, target, ACTIONS.PICKUP)
-		return action
+    if inst.components.inventory and inst.components.eater then
+        local target = inst.components.inventory:FindItem(function(item) return inst.components.eater:CanEat(item) end)
+        if target then
+            return BufferedAction(inst, target, ACTIONS.EAT)
+        end
+    end
+	
+	local target = FindEntity(inst,
+		SEE_FOOD_DIST,
+		function(item)
+			return item:GetTimeAlive() >= 5
+				and item.prefab ~= "mandrake"
+				and item.components.edible ~= nil
+				and item:IsOnPassablePoint()
+				and inst.components.eater:CanEat(item)
+		end,
+		nil,
+		FINDFOOD_CANT_TAGS
+	)
+	if target ~= nil then
+		return BufferedAction(inst, target, ACTIONS.EAT)
 	end
 end
 
