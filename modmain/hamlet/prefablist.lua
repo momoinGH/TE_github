@@ -85,7 +85,6 @@ PrefabFiles = {
     "snapdragonherd",
     "zeb",
     "tigersharkpool",
-    "krakenchest",
     ------------------------------------------------------------------------------------------------
 
     "roc_leg",

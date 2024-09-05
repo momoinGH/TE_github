@@ -5,23 +5,9 @@ local assets =
     Asset("ANIM", "anim/fish_farm_sign.zip"),
 }
 
-local prefabs =
-{
-
-}
-
 local function determineSign(inst)
-    if inst.parent then
-        if inst.parent.components.breeder.seeded then
-            if inst.parent.components.breeder.harvested then
-                return "buoy_sign_1"
-                --                return ROE_FISH[inst.parent.components.breeder.product].sign
-            else
-                return "buoy_sign_1"
-            end
-        else
-            return nil
-        end
+    if inst.parent and inst.parent.fish then
+        return inst.parent.harvested and ROE_FISH[inst.parent.fish].sign or "buoy_sign_1"
     end
 end
 
@@ -38,28 +24,18 @@ local function resetArt(inst)
     end
 end
 
-local function onsave(inst, data)
-
-end
-
-local function onload(inst, data)
-    inst:Remove()
-end
-
-local function onbuilt(inst, sound)
-
-end
-
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
+    inst.entity:AddAnimState()
     inst.entity:AddNetwork()
 
-    anim:SetBank("fish_farm_sign")
-    anim:SetBuild("fish_farm_sign")
-    anim:PlayAnimation("idle", true)
-    anim:SetLayer(LAYER_BACKGROUND)
+    inst.AnimState:SetBank("fish_farm_sign")
+    inst.AnimState:SetBuild("fish_farm_sign")
+    inst.AnimState:PlayAnimation("idle", true)
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
+
     inst:AddTag("ignorewalkableplatforms")
 
     inst.entity:SetPristine()
@@ -68,13 +44,10 @@ local function fn(Sim)
         return inst
     end
 
-    inst.OnSave = onsave
-    inst.OnLoad = onload
+    inst.persists = false
 
     inst.resetArt = resetArt
-    --inst:ListenForEvent("onfishchange", function () resetArt(inst) end)
-
     return inst
 end
 
-return Prefab("fish_farm_sign", fn, assets, prefabs)
+return Prefab("fish_farm_sign", fn, assets)

@@ -68,7 +68,6 @@ PrefabFiles =
     "gorge_portal",
     "volcano_altar_pillar",
     "pollen_item",
-    "boarmound",
     "mermhouse_tropical",
     "mermtrader",
     "wildbeaver",
@@ -105,7 +104,7 @@ PrefabFiles =
     "wildbore_minion",
     "pigkingstaff",
     "wildboreking_spawner",
-
+    "tro_treasurechest",
     "buffs_tro", -- (Food) Buffs
 
 }
@@ -213,7 +212,6 @@ then
 
     table.insert(PrefabFiles, "pig_ruins_dart_statue")
     table.insert(PrefabFiles, "pig_ruins_dart")
-    table.insert(PrefabFiles, "pig_ruins_creeping_vines")
     table.insert(PrefabFiles, "pig_ruins_pressure_plate")
     table.insert(PrefabFiles, "pig_ruins_spear_trap")
     table.insert(PrefabFiles, "smashingpot")

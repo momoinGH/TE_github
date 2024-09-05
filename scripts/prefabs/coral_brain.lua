@@ -36,7 +36,7 @@ local function fn()
 	inst:AddComponent("inventoryitem")
 
 	inst:AddComponent("edible")
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 	inst.components.edible.healthvalue = -10
 	inst.components.edible.sanityvalue = 50
 	inst.components.edible.hungervalue = 10

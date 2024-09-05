@@ -22,18 +22,8 @@ local function DoShineFlick(inst)
 end
 
 local function OnActivateByOther(inst, source, doer)
-	--	if not inst.sg:HasStateTag("open") then
-	--		inst.sg:GoToState("opening")
-	--	end
 	if doer ~= nil and doer.Physics ~= nil then
 		doer.Physics:CollidesWith(COLLISION.WORLD)
-	end
-end
-
-local function ExitOnActivateByOther(inst, other, doer)
-	if doer ~= nil
-		and doer.sg ~= nil and not doer:HasTag("playerghost") then
-		doer.sg.statemem.teleportarrivestate = "jumpout_ceiling"
 	end
 end
 
@@ -41,28 +31,6 @@ local function PlayTravelSound(inst, doer)
 	inst.SoundEmitter:PlaySound("dontstarve/cave/rope_down")
 end
 
-local function ReceiveItem(teleporter, item)
-	if item.Transform ~= nil then
-		local x, y, z = teleporter.inst.Transform:GetWorldPosition()
-		local angle = math.random() * TWOPI
-
-		if item.Physics ~= nil then
-			item.Physics:Stop()
-			if teleporter.inst:IsAsleep() then
-				local radius = teleporter.inst:GetPhysicsRadius(0) + math.random()
-				item.Physics:Teleport(x + math.cos(angle) * radius, 0, z - math.sin(angle) * radius)
-			else
-				TemporarilyRemovePhysics(item, 1)
-				local speed = 2 + math.random() * .5 + teleporter.inst:GetPhysicsRadius(0)
-				item.Physics:Teleport(x, 4, z)
-				item.Physics:SetVel(speed * math.cos(angle), -1, speed * math.sin(angle))
-			end
-		else
-			local radius = 2 + math.random()
-			item.Transform:SetPosition(x + math.cos(angle) * radius, 0, z - math.sin(angle) * radius)
-		end
-	end
-end
 
 local function OnMouseOver(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
@@ -79,61 +47,12 @@ local function OnActivate(inst, doer)
 	end
 end
 
-local function TakeLightSteps(light, value)
-	local function LightToggle(light)
-		light.level = (light.level or 0) + value
-		if (value > 0 and light.level <= 1) or (value < 0 and light.level > 0) then
-			light.Light:SetRadius(light.level)
-			light.lighttoggle = light:DoTaskInTime(2 * FRAMES, LightToggle)
-		elseif value < 0 then
-			light.Light:Enable(false)
-			light:Hide()
-		end
-		light.AnimState:SetScale(light.level, 1)
-	end
-	if light.lighttoggle ~= nil then
-		light.lighttoggle:Cancel()
-	end
-	light.lighttoggle = light:DoTaskInTime(2 * FRAMES, LightToggle)
-end
-
-local function OnNearExit(inst, chain)
-	inst.hatchlight.Light:Enable(true)
-	inst.hatchlight:Show()
-
-	TakeLightSteps(inst.hatchlight, 0.2)
-
-	if not chain then
-		ChainPlayerprox(inst, true)
-	end
-end
-
-local function OnFarExit(inst, chain)
-	TakeLightSteps(inst.hatchlight, -0.2)
-
-	if not chain then
-		ChainPlayerprox(inst, false)
-	end
-end
-
 local function OnNearEntrance(inst, chain)
-	--	if inst.components.teleporter:IsActive() and not inst.sg:HasStateTag("open") then
-	--		inst.sg:GoToState("opening")
-	--	end
 
-	--	if not chain then
-	--		ChainPlayerprox(inst, true)
-	--	end
 end
 
 local function OnFarEntrance(inst, chain)
-	--	if not inst.components.teleporter:IsBusy() and inst.sg:HasStateTag("open") then
-	--		inst.sg:GoToState("closing")
-	--	end
 
-	--	if not chain then
-	--		ChainPlayerprox(inst, false)
-	--	end
 end
 
 local function OnAccept(inst, giver, item)
@@ -162,10 +81,6 @@ local function entrance()
 	inst.Transform:SetEightFaced()
 
 	inst.MiniMapEntity:SetIcon("minimap_volcano_entrance.tex")
-
-
-
-
 	inst:SetDeployExtraSpacing(2.5)
 
 	if not TheNet:IsDedicated() then
@@ -203,11 +118,6 @@ local function entrance()
 	inst.components.trader.onaccept = OnAccept
 	inst.components.trader.deleteitemonaccept = false
 
-
-	--		if inst.components.teleporter.targetTeleporter ~= nil then
-	--		inst:RemoveEventCallback("onbuilt", OnBuilt)
-	--		return
-	--	end
 	if inst.entrada == nil then
 		--	local tries = 0
 		local basement_position = nil
@@ -262,32 +172,6 @@ local function entrance()
 					table.insert(POS, { x = x, z = z })
 				end
 
-				--[[
-		if x > -41 and x < -19 and z == -40 or x > -41 and x < -19 and z == -20 then
-				table.insert(POS, { x = x, z = z })
-			end
-			
-			if z > -41 and z < -19 and x == -40 or z > -41 and z < -30 and x == -20 or z > -30 and z < -19 and x == -20 then			
-				table.insert(POS, { x = x, z = z })
-			end			
----------------------------------------------------------------------------------------------			
-			if x > -41 and x < -19 and z == -45 or x > -41 and x < -19 and z == -65 then
-				table.insert(POS, { x = x, z = z })
-			end
-
-			if z > -66 and z < -44 and x == -40 or z > -66 and z < -55 and x == -20 or z > -55 and z < -44 and x == -20 then			
-				table.insert(POS, { x = x, z = z })
-			end	
-----------------------------------------------------------------------------------------------
-			if x > -41 and x < -19 and z == -15 or x > -41 and x < -19 and z == 5 then
-				table.insert(POS, { x = x, z = z })
-			end
-
-			if z > -16 and z < 5 and x == -40 or z > -16 and z < - 5 and x == -20 or z > -5 and z < 5 and x == -20 then			
-				table.insert(POS, { x = x, z = z })
-			end	
------------------------------------------------------------------------------------------------			
-]]
 			end
 		end
 
@@ -427,9 +311,6 @@ local function entrance()
 				part.components.health:SetPercent(1)
 			end
 		end
-		----------------------------criature dentro das jaulas-------------------------------------------------------------
-
-		--------------------------------------------cria o piso e itens inicio -------------------------------------------------------		
 		local POS = {}
 		local POS1 = {}
 		local POS2 = {}
@@ -444,30 +325,7 @@ local function entrance()
 				-- adiciona na tabela POS multiplos de 27 que e o tamanho do mapa
 				if math.fmod(x, 27) == 0 and math.fmod(z, 27) == 0 then
 					table.insert(POS, { x = x, z = z })
-				end
-				--adiciona na tabela POS1 multiplos de 3
-
-				--		    if math.fmod (x, 3) == 0 and math.fmod (z, 27)==0 then			
-				--			if  math.random (1 , 10) ==   math.random (1 , 10)	then	table.insert(POS1, { x = x, z = z }) end		--flamegeyser
-				--			end
-
-				--adiciona na tabela POS1 multiplos de 3
-
-				--		    if math.fmod (x, 3) == 0 and math.fmod (z, 27)==0 then			
-				--	         if  math.random (1 , 10) ==   math.random (1 , 10)	then	table.insert(POS2, { x = x, z = z }) end		--dragoonden		
-				--			end			
-
-				--adiciona na tabela POS1 multiplos de 3
-
-				--		    if math.fmod (x, 3) == 0 and math.fmod (z, 27)==0 then			
-				--	         if  math.random (1 , 10) ==   math.random (1 , 10)	then	table.insert(POS3, { x = x, z = z }) end		--volcano_shrub		
-				--			end		
-
-				--adiciona na tabela POS1 multiplos de 3
-
-				--		    if math.fmod (x, 3) == 0 and math.fmod (z, 27)==0 then			
-				--	         if  math.random (1 , 10) ==   math.random (1 , 10)	then	table.insert(POS4, { x = x, z = z }) end		--skeleton		
-				--			end					
+				end			
 			end
 		end
 
@@ -483,8 +341,6 @@ local function entrance()
 			end
 			print("x")
 		end
-
-
 
 		for _, v in pairs(POS1) do
 			local part = SpawnPrefab("flamegeyser")
@@ -529,56 +385,9 @@ local function entrance()
 
 
 		if inst.caverna == nil then
-			--	local part = SpawnPrefab("volcanofog")
-			--	if part ~= nil then
-			--	part.Transform:SetPosition(x-30, 0, z-30)
-			--	if part.components.health ~= nil then
-			--	part.components.health:SetPercent(1)
-			--	end
-			--	end		
-
-			--		local part = SpawnPrefab("volcanofog")
-			--	if part ~= nil then
-			--	part.Transform:SetPosition(x-30, 0, z+30)
-			--	if part.components.health ~= nil then
-			--	part.components.health:SetPercent(1)
-			--	end
-			--	end		
-
-			--		local part = SpawnPrefab("volcanofog")
-			--	if part ~= nil then
-			--	part.Transform:SetPosition(x+30, 0, z-30)
-			--	if part.components.health ~= nil then
-			--	part.components.health:SetPercent(1)
-			--	end
-			--	end		
-
-			--		local part = SpawnPrefab("volcanofog")
-			--	if part ~= nil then
-			--	part.Transform:SetPosition(x+30, 0, z+30)
-			--	if part.components.health ~= nil then
-			--	part.components.health:SetPercent(1)
-			--	end
-			--	end		
-
-
-
-
 
 			inst.caverna = 1
 		end
-
-
-		--------------------------------------------cria o piso e itens fim -------------------------------------------------------	
-
-
-
-
-
-
-
-
-
 
 		inst:DoTaskInTime(1, function(inst)
 			local portaentrada = SpawnPrefab("lavaarena_portal")
@@ -587,112 +396,6 @@ local function entrance()
 			portaentrada.components.teleporter.targetTeleporter = inst.exit
 			inst.exit.components.teleporter.targetTeleporter = portaentrada
 
-
-			----------cria a grade no bioma ----------------------	
-			--[[	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c+5)		
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-4, b, c+5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-3, b, c+5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-2, b, c+5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-1, b, c+5)		
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a, b, c+5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+1, b, c+5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+2, b, c+5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+3, b, c+5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+4, b, c+5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c+5)	
-		
-	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c-5)		
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-4, b, c-5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-3, b, c-5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-2, b, c-5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-1, b, c+5)		
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a, b, c-5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+1, b, c-5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+2, b, c-5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+3, b, c-5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+4, b, c-5)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c-5)	
-	
-	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c-5)		
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c-4)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c-3)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c-2)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c-1)		
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c+1)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c+2)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c+3)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c+4)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a-5, b, c+5)	
-
-	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c-5)		
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c-4)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c-3)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c-2)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c-1)		
-	local portaentrada = SpawnPrefab("quagmire_park_gate")
-	portaentrada.Transform:SetPosition(a+5, b, c)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c+1)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c+2)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c+3)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c+4)	
-	local portaentrada = SpawnPrefab("grade")
-	portaentrada.Transform:SetPosition(a+5, b, c+5)	
-]]
-
-			--	local portaentrada = SpawnPrefab("beavertorch")
-			--	portaentrada.Transform:SetPosition(a-6, b, c-6)	
-			--	local portaentrada = SpawnPrefab("beavertorch")
-			--	portaentrada.Transform:SetPosition(a-6, b, c+6)	
-			--	local portaentrada = SpawnPrefab("beavertorch")
-			--	portaentrada.Transform:SetPosition(a+6, b, c-6)	
-			--	local portaentrada = SpawnPrefab("beavertorch")
-			--	portaentrada.Transform:SetPosition(a+6, b, c+6)
 
 			local portaentrada = SpawnPrefab("beaverhead")
 			portaentrada.Transform:SetPosition(a, b, c - 6)
@@ -706,19 +409,11 @@ local function entrance()
 			inst:Remove()
 		end)
 
-
-
-
 		inst.entrada = 1
 	end
 
 	inst.components.teleporter.targetTeleporter = inst.exit
 	inst.exit.components.teleporter.targetTeleporter = inst
-
-
-
-	--	inst:ListenForEvent("onbuilt", OnBuilt)
-	--	inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
 	inst:ListenForEvent("starttravelsound", PlayTravelSound)
 
 	inst.OnSave = OnSave
@@ -744,9 +439,6 @@ local function SpawnPiso1(inst)
 	--tamanho do chao
 	inst.AnimState:SetScale(8, 8)
 	inst.AnimState:PlayAnimation("piso1")
-
-	--inst.Transform:SetScale(2.82, 2.82, 2.82)
-
 	inst:AddTag("NOCLICK")
 
 	return inst
@@ -769,9 +461,6 @@ local function SpawnPiso2(inst)
 	--tamanho do chao
 	inst.AnimState:SetScale(8, 8)
 	inst.AnimState:PlayAnimation("piso2")
-
-	--inst.Transform:SetScale(2.82, 2.82, 2.82)
-
 	inst:AddTag("NOCLICK")
 
 	return inst
@@ -794,9 +483,6 @@ local function SpawnPiso3(inst)
 	--tamanho do chao
 	inst.AnimState:SetScale(4, 4)
 	inst.AnimState:PlayAnimation("piso3")
-
-	--inst.Transform:SetScale(2.82, 2.82, 2.82)
-
 	inst:AddTag("NOCLICK")
 
 	return inst
@@ -819,8 +505,6 @@ local function SpawnPiso4(inst)
 	--tamanho do chao
 	inst.AnimState:SetScale(8, 8)
 	inst.AnimState:PlayAnimation("piso4")
-
-	--inst.Transform:SetScale(2.82, 2.82, 2.82)
 
 	inst:AddTag("NOCLICK")
 
@@ -859,11 +543,6 @@ local function wall_common()
 	if not TheWorld.ismastersim then
 		return inst
 	end
-
-	--	inst.AnimState:PlayAnimation(WALL_ANIM_VARIANTS[math.random(#WALL_ANIM_VARIANTS)])
-
-	--	inst.persists = false
-
 	return inst
 end
 
@@ -899,10 +578,6 @@ local function wall_common2()
 	if not TheWorld.ismastersim then
 		return inst
 	end
-
-	--	inst.AnimState:PlayAnimation(WALL_ANIM_VARIANTS[math.random(#WALL_ANIM_VARIANTS)])
-
-	--	inst.persists = false
 
 	return inst
 end

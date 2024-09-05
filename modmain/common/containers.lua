@@ -1,4 +1,3 @@
-local Utils = require("tropical_utils/utils")
 local containers = require("containers")
 local cooking = require("cooking")
 local params = containers.params
@@ -174,23 +173,6 @@ for i = 3, 0, -1 do
 end
 
 ----------------------------------------------------------------------------------------------------
-params.smelter = deepcopy(params.cookpot)
-params.smelter.widget.buttoninfo.text = STRINGS.ACTIONS.SMELT
-
-local smelting = require("smelting")
-function params.smelter.itemtestfn(container, item, slot)
-	return smelting.isAttribute(item.prefab)
-end
-
-function params.smelter.widget.buttoninfo.fn(inst, doer)
-	if inst.components.container ~= nil then
-		BufferedAction(doer, inst, ACTIONS.SMELT):Do()
-	elseif inst.replica.container ~= nil and not inst.replica.container:IsBusy() then
-		SendRPCToServer(RPC.DoWidgetButtonAction, ACTIONS.SMELT.code, inst, ACTIONS.SMELT.mod_name)
-	end
-end
-
-----------------------------------------------------------------------------------------------------
 params.thatchpack = deepcopy(params.corkchest)
 params.thatchpack.issidewidget = true
 ----------------------------------------------------------------------------------------------------
@@ -337,3 +319,11 @@ params.shop_buyer = {
 	},
 	type = "chest",
 }
+----------------------------------------------------------------------------------------------------
+-- 箱子
+params.octopuschest = params.treasurechest
+params.krakenchest = params.treasurechest
+params.luggagechest = params.treasurechest
+params.lavarenachest = params.treasurechest
+params.roottrunk = params.shadowchester
+params.roottrunk_child = params.shadowchester

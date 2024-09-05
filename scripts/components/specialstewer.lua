@@ -13,7 +13,8 @@ local function oncheckready(inst)
         inst.components.specialstewer:StartWorking()
     end
 end
---- TODO 能替换掉吗
+
+--- 暴食烹饪组件
 local SpecialStewer = Class(function(self, inst)
         self.inst = inst
 
@@ -172,7 +173,7 @@ end
 
 function SpecialStewer:CanCook()
     return self.inst.components.container ~= nil and self.inst.components.container:IsFull() and
-    not self:GetContainer():Has("ash")
+        not self:GetContainer():Has("ash")
 end
 
 function SpecialStewer:OverrideProduct()

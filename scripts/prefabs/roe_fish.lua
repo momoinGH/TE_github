@@ -544,7 +544,7 @@ local function MakeFish(name, has_seeds)
 		inst.components.edible.hungervalue = ROE_FISH[name].hunger
 		inst.components.edible.sanityvalue = ROE_FISH[name].sanity or 0
 		inst.components.edible.ismeat = true
-		inst.components.edible.foodtype = "MEAT"
+		inst.components.edible.foodtype = FOODTYPE.MEAT
 
 		if ROE_FISH[name].boost_surf then
 			inst.components.edible:SetOnEatenFn(OnEatenboost_surf)
@@ -614,7 +614,7 @@ local function MakeFish(name, has_seeds)
 
 		inst:AddComponent("edible")
 		inst.components.edible.ismeat = true
-		inst.components.edible.foodtype = "MEAT"
+		inst.components.edible.foodtype = FOODTYPE.MEAT
 		inst.components.edible.foodstate = "COOKED"
 		inst.components.edible.healthvalue = ROE_FISH[name].cooked_health
 		inst.components.edible.hungervalue = ROE_FISH[name].cooked_hunger

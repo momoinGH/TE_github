@@ -24,9 +24,13 @@ ACTIONS.CASTAOE.strfn = function(act)
         string.upper(act.invobject.nameoverride ~= nil and act.invobject.nameoverride or act.invobject.prefab) or nil
 end;
 
+local function UseItemExtraArriveDist(inst, dest, act)
+    return act.invobject and act.invobject.components.tro_consumable and act.invobject.components.tro_consumable.extra_arrive_dist
+        and act.invobject.components.tro_consumable.extra_arrive_dist(inst, dest, act) or 0
+end
 
 -- 使用道具
-Constructor.AddAction({ priority = 1 },
+Constructor.AddAction({ priority = 1, extra_arrive_dist = UseItemExtraArriveDist },
     "TROPICAL_USE_ITEM",
     function(act)
         return FunctionOrValue(act.invobject.components.tro_consumable.str, act.invobject, act.doer, act.target)
@@ -461,18 +465,6 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
     end
 )
 
-Constructor.AddAction({ priority = 10, mount_valid = true },
-    "SMELT",
-    STRINGS.ACTIONS.SMELT,
-    function(act)
-        if act.target.components.melter then
-            act.target.components.melter:StartCooking()
-            return true
-        end
-    end
-)
-
-
 ----------------------------------------------------------------------------------------------------
 -- 柜子
 
@@ -595,12 +587,6 @@ ACTIONS.TAKE_SHELF.stroverridefn = function(act)
 end
 
 ----------------------------------------------------------------------------------------------------
-
-Utils.FnDecorator(ACTIONS.HARVEST, "fn", function(inst)
-    if act.target.components.melter then
-        return { act.target.components.melter:Harvest(act.doer) }, true
-    end
-end)
 
 Constructor.AddAction({ priority = 10, mount_valid = true },
     "PAN",

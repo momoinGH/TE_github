@@ -92,12 +92,8 @@ local function common(bank, build, anim, data)
         inst.components.workable:SetOnFinishCallback(OnHammered)
     end
 
-    if data.vine then
-        -- TODO 当剪掉以后，OnSave没保存
-        inst.components.teleporter:SetEnabled(false)
+    if data.vined then
         inst:AddComponent("vineable")
-        inst.components.vineable:InitInteriorPrefab()
-        inst.components.vineable:SetUpVine()
     end
 
     inst.OnSave = OnSave

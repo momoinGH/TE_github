@@ -53,6 +53,7 @@ local function Modimport(dirc)
 	SafeModImport("modmain/" .. dirc .. "/actions")           --action相关
 	SafeModImport("modmain/" .. dirc .. "/sg")                --Stategraph相关
 	SafeModImport("modmain/" .. dirc .. "/recipes")           --配方相关
+	SafeModImport("modmain/" .. dirc .. "/cooking")           --料理相关
 	SafeModImport("modmain/" .. dirc .. "/rpc")               --RPC的注册
 	SafeModImport("modmain/" .. dirc .. "/input")             --客机操作的监听
 	SafeModImport("modmain/" .. dirc .. "/modwiki")           --图鉴wiki定义

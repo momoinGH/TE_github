@@ -759,6 +759,8 @@ door.AnimState:SetHaunted(true)
 -- 获取对象当前的面向（相对摄像机）
 print(ThePlayer.AnimState:GetCurrentFacing())
 
+-- 动画时长
+print(inst.AnimState:GetCurrentAnimationLength())
 ------------------------------------------------------------------------------------------------------------------------
 -- 14. physics.lua
 

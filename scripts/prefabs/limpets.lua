@@ -31,7 +31,7 @@ local function commonfn()
     end
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible.forcequickeat = true
 
     inst:AddComponent("perishable")

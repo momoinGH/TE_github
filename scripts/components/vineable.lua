@@ -1,134 +1,67 @@
--- TODO 优化掉
+local function Init(inst, self)
+	self.vines = SpawnPrefab("pig_ruins_creeping_vines")
+	self.vines:setup(self.inst)
+
+	self:SetOpen(self.vines_open)
+end
+
+--- 哈姆雷特门的藤蔓，要求门必须有teleporter组件
 local Vineable = Class(function(self, inst)
 	self.inst = inst
-	self.vined = false
+
+	self.vines_open = false
+	self.regrowtask = nil
+	self.regrowtimeleft = nil
+
+	inst:DoTaskInTime(0, Init, self)
 end)
 
-function Vineable:SetUpVine()
-	if not self.inst:HasTag("novine") then
-		if not self.inst:HasTag("vineadded") then
-			self.vined = true
-			self.vines = SpawnPrefab("pig_ruins_creeping_vines")
-			self.inst:AddChild(self.vines)
-			self.vines.Transform:SetPosition(0, 0, 0)
-			self.vines.door = self.inst
-			self.vines.setup(self.vines)
-			self.vines_open = false
-			self.inst:AddTag("vineadded")
-		end
-	end
-end
-
-function Vineable:dissabledoorvis()
-	if self.vined then
-		self.inst:AddTag("NOCLICK")
-		self.vines_open = false
-		--self.inst.disableDoor(self.inst, true, "vines")				
-		self:updatevinevis()
-	end
-end
-
-function Vineable:enabledoorvis()
-	if self.vined then
+function Vineable:SetOpen(open)
+	if open then
+		-- 摧毁
 		self.inst:RemoveTag("NOCLICK")
-		self.inst:AddTag("novine")
-		self.vines_open = true
-		--self.inst.disableDoor(self.inst, false, "vines")		
-		self:updatevinevis()
-	end
-end
-
-function Vineable:SetDoorDissabled(setting)
-	--	self.inst.disableDoor(self.inst, setting, "vines")
-	if setting then
-		if self.inst.regrowtask then
-			self.inst.regrowtask:Cancel()
-			self.inst.regrowtask = nil
-		end
-		self:dissabledoorvis()
+		self.vines:hackedopen()
+		self:BeginRegrow()
 	else
-		self:enabledoorvis()
+		-- 再生
+		if self.regrowtask then
+			self.regrowtask:Cancel()
+			self.regrowtask = nil
+		end
+		self.inst:AddTag("NOCLICK")
+		self.vines:regrow()
+	end
+
+	self.vines_open = open
+	self.inst.components.teleporter:SetEnabled(open)
+
+	local target = self.inst.components.teleporter:GetTarget()
+	if target and target ~= self.inst and target.components.vineable and (target.components.vineable.vines_open ~= open) then
+		target.components.vineable:SetOpen(true)
 	end
 end
 
 function Vineable:SetGrowTask(time)
-	self.inst.regrowtask, self.inst.regrowtaskinfo = self.inst:ResumeTask(time, function()
-		self:SetDoorDissabled(true)
-	end)
+	self.regrowtask = self.inst:DoTaskInTime(time, function() self:SetOpen(false) end)
 end
 
 function Vineable:BeginRegrow()
-	print("BEGIN REGROW TASK", self.inst.GUID)
-	self:SetGrowTask(20 + (math.random() * 20))
-end
-
-function Vineable:updatevinevis()
-	-- gets the vines to update their visuals.
-	if self.vines then
-		if self.vines_open then
-			self.vines.hackedopen(self.vines)
-		else
-			self.vines.regrow(self.vines)
-		end
-	end
-end
-
-function Vineable:InitInteriorPrefab()
-	if self.vined then
-		self:SetDoorDissabled(true)
-	end
-end
-
-function Vineable:testevent(data)
+	self:SetGrowTask(self.regrowtimeleft or (20 + (math.random() * 20)))
+	self.regrowtimeleft = nil
 end
 
 function Vineable:OnSave()
-	local data = {
-		vined = self.vined,
+	return {
+		regrowtimeleft = self.regrowtask and GetTaskRemaining(self.regrowtask) or nil,
+		vines_open = self.vines_open
 	}
-	if self.inst.regrowtask then
-		data.regrowtimeleft = self.inst:TimeRemainingInTask(self.inst.regrowtaskinfo)
-		self.inst.regrowtask:Cancel()
-		self.inst.regrowtask = nil
-		self.inst.regrowtaskinfo = nil
-	end
-	if self.vines_open then
-		data.vines_open = self.vines_open
-	end
-
-	if self.vines then
-		data.vines = self.vines.GUID
-	end
-
-	if next(data) then
-		return data
-	end
 end
 
 function Vineable:OnLoad(data)
-	if data then
+	if not data then return end
 
-	end
-end
-
-function Vineable:LoadPostPass(ents, data)
-	if data.vines and ents[data.vines] then
-		self.vines = ents[data.vines].entity
-	end
-	if data.vined then
-		self:SetUpVine()
-
-		if data.vines_open then
-			self:SetDoorDissabled(false)
-		else
-			self:SetDoorDissabled(true)
-		end
-	end
-
-	if data.regrowtimeleft then
-		print("RELOADING TASK TIME", data.regrowtimeleft)
-		self:SetGrowTask(data.regrowtimeleft)
-	end
+	self.vines_open = data.vines_open or self.vines_open
+	self.regrowtimeleft = data.regrowtimeleft
 end
 
 return Vineable

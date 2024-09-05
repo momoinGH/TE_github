@@ -60,12 +60,12 @@ end
 
 local function raw()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
     --    MakeInventoryFloatable(inst, "idle_water", "idle")
-
 
     inst.AnimState:SetBank("roe")
     inst.AnimState:SetBuild("roe")
@@ -73,6 +73,9 @@ local function raw()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("roe")
+    inst:AddTag("oceanfishing_lure")
+    inst:AddTag("spawnnosharx")
+
     MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
@@ -82,10 +85,9 @@ local function raw()
     end
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
-
-    inst:AddTag("oceanfishing_lure")
-    inst:AddTag("spawnnosharx")
+    inst.components.edible.foodtype = FOODTYPE.MEAT
+    inst.components.edible.healthvalue = TUNING.HEALING_TINY
+    inst.components.edible.hungervalue = TUNING.CALORIES_TINY / 2
 
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -97,14 +99,10 @@ local function raw()
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
-
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERFAST)
     inst.components.perishable:StartPerishing()
     inst.components.perishable.onperishreplacement = "spoiled_food"
-
-    inst.components.edible.healthvalue = TUNING.HEALING_TINY
-    inst.components.edible.hungervalue = TUNING.CALORIES_TINY / 2
 
     inst:AddComponent("cookable")
     inst.components.cookable.product = "roe_cooked"
@@ -116,7 +114,6 @@ local function raw()
 
     inst:AddComponent("oceanfishingtackle")
     inst.components.oceanfishingtackle:SetupLure({ build = "oceanfishing_lure_mis", symbol = "hook_seeds", single_use = true, lure_data = { charm = 0.3, reel_charm = -0.3, radius = 3.0, style = "rot", timeofday = { day = 1, dusk = 1, night = 1 }, dist_max = 2 } })
-
 
     return inst
 end
@@ -148,7 +145,7 @@ local function cooked()
     end
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible.healthvalue = 0
     inst.components.edible.foodstate = "COOKED"
     inst.components.edible.hungervalue = TUNING.CALORIES_TINY / 2
