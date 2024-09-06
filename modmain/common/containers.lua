@@ -174,7 +174,10 @@ end
 
 ----------------------------------------------------------------------------------------------------
 params.thatchpack = deepcopy(params.corkchest)
+params.thatchpack.widget.pos = Vector3(-60, -60, 0)
 params.thatchpack.issidewidget = true
+params.thatchpack.type = "pack"
+params.thatchpack.openlimit = 1
 ----------------------------------------------------------------------------------------------------
 local function BoatItemTestFn(container, item, slot)
 	if slot == 1 then
