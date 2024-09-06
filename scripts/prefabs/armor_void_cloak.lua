@@ -6,7 +6,7 @@ local assets =
     Asset("ANIM", "anim/cloak_fx.zip"), -- wait for modify
 }
 
-
+local equipslot = EQUIPSLOTS.BACK or EQUIPSLOTS.BODY -- 四格中设定为背包
 
 local function setsoundparam(inst)
     local param = Remap(inst.components.armor.condition, 0, inst.components.armor.maxcondition, 0, 1)
@@ -21,7 +21,7 @@ local function spawnwisp(owner)
             wisp.Transform:SetPosition(x + math.random() * 0.25 - 0.25 / 2, y, z + math.random() * 0.25 - 0.25 / 2)
         end
 
-        local armadura = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+        local armadura = owner.components.inventory:GetEquippedItem(equipslot)
         if armadura and armadura:HasTag("void_cloak") and armadura.components.armor.condition <= 0 then
             armadura
                 .components.armor:SetAbsorption(0)
@@ -93,7 +93,7 @@ end
 
 local function SetupEquippable(inst)
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+    inst.components.equippable.equipslot = equipslot
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 
