@@ -29,7 +29,7 @@ local function fn(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("edible")
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 
 	inst:AddComponent("fuel")
 	inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL

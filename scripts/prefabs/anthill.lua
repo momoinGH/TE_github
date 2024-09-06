@@ -552,7 +552,7 @@ local function CreateMaze(inst)
     inst.components.teleporter:Target(doors["exit" .. isEntranceId])
     doors["exit" .. isEntranceId].components.teleporter:Target(inst)
 
-    for _, v in ipairs(TheWorld.anthill_exits) do
+    for _, v in ipairs(TheWorld.components.tro_tempentitytracker:GetEnts("anthill_exit")) do
         if v:IsValid() and not v.components.teleporter:GetTarget() then
             isEntranceId = isEntranceId - 1
             v.components.teleporter:Target(doors["exit" .. isEntranceId])
@@ -637,8 +637,6 @@ local function common(buildanthill)
 
     if buildanthill then
         inst:DoTaskInTime(0, CreateMaze)
-    else
-        table.insert(TheWorld.anthill_exits, inst)
     end
 
     MakeSnowCovered(inst, .01)

@@ -134,10 +134,6 @@ local function fn(Sim)
 	MakeSmallBurnable(inst, TUNING.LARGE_BURNTIME)
 	MakeSmallPropagator(inst)
 
-	--	inst:AddComponent("throwable")
-	--	inst.components.throwable.onthrown = onthrown
-
-
 	inst:AddComponent("complexprojectile")
 	inst.components.complexprojectile:SetHorizontalSpeed(15)
 	inst.components.complexprojectile:SetGravity(-35)

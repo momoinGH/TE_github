@@ -168,7 +168,7 @@ local function slugbug_raw()
     end
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible.healthvalue = 0
     inst.components.edible.hungervalue = TUNING.CALORIES_TINY
     inst.components.edible.sanityvalue = -TUNING.SANITY_SMALL
@@ -223,7 +223,7 @@ local function slugbug_cooked()
     end
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible.healthvalue = TUNING.HEALING_TINY
     inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
     inst.components.edible.sanityvalue = -TUNING.SANITY_TINY

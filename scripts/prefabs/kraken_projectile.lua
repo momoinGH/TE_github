@@ -6,73 +6,23 @@ local assets =
 
 local prefabs = {}
 
-local function onthrown(inst, thrower, pt, time_to_target)
-	inst.Physics:SetFriction(.2)
+local function OnHit(inst, attacker)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    for k, v in pairs(TheSim:FindEntities(x, y, z, 1.5, nil, { "FX", "NOCLICK", "DECOR", "INLIMBO" })) do
+        if v.components.combat and v ~= inst and v.prefab ~= "kraken_tentacle" then
+            v.components.combat:GetAttacked(attacker, 50)
+        end
+    end
+    inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_large")
 
-	-- local shadow = SpawnPrefab("warningshadow")
-	-- shadow.Transform:SetPosition(pt:Get())
-	-- shadow:shrink(time_to_target, 1.75, 0.5)
-
-	inst.TrackHeight = inst:DoPeriodicTask(FRAMES, function()
-		local pos = inst:GetPosition()
-
-		if pos.y <= 1 then
-			local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 1.5, nil, { "FX", "NOCLICK", "DECOR", "INLIMBO" })
-
-			for k, v in pairs(ents) do
-				if v.components.combat and v ~= inst and v.prefab ~= "kraken_tentacle" then
-					v.components.combat:GetAttacked(thrower, 50)
-				end
-			end
-
-			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_large")
-
-			local ink = SpawnPrefab("kraken_inkpatch")
-			ink.Transform:SetPosition(pos.x, pos.y, pos.z)
-			local ground = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pos.x, pos.y, pos.z))
-			inst:Remove()
-		end
-	end)
-end
-
-local function onthrown2(inst, thrower, pt, time_to_target)
-	inst.Physics:SetFriction(.2)
-
-	-- local shadow = SpawnPrefab("warningshadow")
-	-- shadow.Transform:SetPosition(pt:Get())
-	-- shadow:shrink(time_to_target, 1.75, 0.5)
-
-	inst.TrackHeight = inst:DoPeriodicTask(FRAMES, function()
-		local pos = inst:GetPosition()
-
-		if pos.y <= 1 then
-			local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 1.5, nil, { "FX", "NOCLICK", "DECOR", "INLIMBO" })
-
-			for k, v in pairs(ents) do
-				if v.components.combat and v ~= inst and v.prefab ~= "kraken_tentacle" then
-					v.components.combat:GetAttacked(thrower, 50)
-				end
-			end
-
-			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_large")
-
-			local ink = SpawnPrefab("kraken_jellyfish")
-			ink.Transform:SetPosition(pos.x, pos.y, pos.z)
-			local ground = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pos.x, pos.y, pos.z))
-			if ground ~= GROUND.OCEAN_COASTAL and
-				ground ~= GROUND.OCEAN_COASTAL_SHORE and
-				ground ~= GROUND.OCEAN_SWELL and
-				ground ~= GROUND.OCEAN_ROUGH and
-				ground ~= GROUND.OCEAN_BRINEPOOL and
-				ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-				ground ~= GROUND.OCEAN_WATERLOG and
-				ground ~= GROUND.OCEAN_HAZARDOUS then
-				ink.sg:GoToState("some")
-			end
-
-			inst:Remove()
-		end
-	end)
+    if inst.prefab == "kraken_projectile" then
+        ReplacePrefab(inst, "kraken_inkpatch")
+    else
+        local ent = ReplacePrefab(inst, "kraken_jellyfish") --水母
+        if not TheWorld.Map:IsSurroundedByWater(x, y, z, 2) then
+            ent.sg:GoToState("some")
+        end
+    end
 end
 
 local function onremove(inst)
@@ -140,11 +90,11 @@ local function fn()
 
 	MakeInventoryPhysics(inst)
 
-	inst:AddComponent("throwable")
-	inst.components.throwable.onthrown = onthrown
-	inst.components.throwable.random_angle = 0
-	inst.components.throwable.max_y = 100
-	inst.components.throwable.yOffset = 7
+	inst:AddComponent("complexprojectile")
+	inst.components.complexprojectile:SetOnHit(OnHit)
+	inst.components.complexprojectile:SetLaunchOffset(Vector3(0, 7, 0))
+	inst.components.complexprojectile:SetHorizontalSpeed(25)
+	inst.components.complexprojectile:SetGravity(-30)
 
 	inst.OnRemoveEntity = onremove
 	inst:DoTaskInTime(4, function(inst) inst:Remove() end)
@@ -176,11 +126,11 @@ local function fn2()
 
 	MakeInventoryPhysics(inst)
 
-	inst:AddComponent("throwable")
-	inst.components.throwable.onthrown = onthrown2
-	inst.components.throwable.random_angle = 0
-	inst.components.throwable.max_y = 100
-	inst.components.throwable.yOffset = 7
+	inst:AddComponent("complexprojectile")
+	inst.components.complexprojectile:SetOnHit(OnHit)
+	inst.components.complexprojectile:SetLaunchOffset(Vector3(0, 7, 0))
+	inst.components.complexprojectile:SetHorizontalSpeed(25)
+	inst.components.complexprojectile:SetGravity(-30)
 
 	inst.OnRemoveEntity = onremove
 	inst:DoTaskInTime(4, function(inst) inst:Remove() end)

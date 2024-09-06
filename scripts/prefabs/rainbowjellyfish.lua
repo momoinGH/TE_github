@@ -258,7 +258,7 @@ local function deadfn(sim)
     inst.Transform:SetScale(0.7, 0.7, 0.7)
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible:SetOnEatenFn(item_oneaten)
 
     inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
@@ -318,7 +318,7 @@ local function cookedfn(sim)
     --    inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible.foodstate = "COOKED"
     inst.components.edible.hungervalue = TUNING.CALORIES_MEDSMALL
     inst.components.edible.sanityvalue = 0
@@ -367,7 +367,7 @@ local function driedfn(sim)
     inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
     --    inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible.foodstate = "DRIED"
     inst.components.edible.hungervalue = TUNING.CALORIES_MEDSMALL
     inst.components.edible.sanityvalue = 0

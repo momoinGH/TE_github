@@ -1446,7 +1446,7 @@ local function mazemaker(inst, dungeondef)
     doors.entrance1.components.teleporter:Target(inst)
 
     if doors.entrance2 then
-        for _, v in ipairs(TheWorld.pig_ruins_exits) do
+        for _, v in ipairs(TheWorld.components.tro_tempentitytracker:GetEnts("pig_ruins_exits")) do
             if v:IsValid()
                 and v.dungeonname == inst.dungeonname
                 and not v.components.teleporter:GetTarget()
@@ -1637,7 +1637,7 @@ local function makefn(build_interiors, dungeonname)
 
             if not build_interiors then
                 -- 出口
-                table.insert(TheWorld.pig_ruins_exits, inst)
+                TheWorld.components.tro_tempentitytracker:OnEntSpawned(inst, "pig_ruins_exits")
             end
         end
 

@@ -14,11 +14,9 @@ function JellyfishBrain:OnInitializationComplete()
 end
 
 function JellyfishBrain:OnStart()
-    local migrationMgr = TheWorld.components.underwatermigration
-
     local root = PriorityNode(
         {
-            WhileNode(function() return migrationMgr and migrationMgr:IsMigrationActive() end, "Migrating",
+            WhileNode(function() return false end, "Migrating",
                 PriorityNode({
                     Migrate(self.inst, function() return self.inst.components.knownlocations:GetLocation("migration") end),
                     Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("migration") end,

@@ -150,7 +150,6 @@ Assets =
 	Asset("ANIM", "anim/leaves_canopy2.zip"),
 
 	Asset("ANIM", "anim/mushroom_tree_yelow.zip"),
-	Asset("ANIM", "anim/speedicon.zip"),
 
 	Asset("IMAGE", "images/cookbook/cookbook_sw.tex"),
 	Asset("ATLAS", "images/cookbook/cookbook_sw.xml"),
@@ -306,7 +305,7 @@ local dictInventoryItems = {
 		"goldenbar", "goldfish", "gooseberry", "gooseberry_cooked", "hedge_block", "hedge_cone", "hedge_layered",
 		"houndbattle", "knightbattle", "lizardbattle", "lobster_land", "lobsterunderwater", "lograft_old", "luckyhat",
 		"malbatrossail", "maxwellphonograph", "maxwellstatuebracod", "maxwellstatuebracoe", "maxwellstatuecabeca",
-		"maxwellstatuecorpo", "mecfish", "mermbattle", "messagebottle1", "messagebottleempty1", "mosquitopoison",
+		"maxwellstatuecorpo", "mecfish", "mermbattle", "messagebottle1",  "mosquitopoison",
 		"obsidianbomb", "oceanfish_small_10_inv", "oceanfish_small_11_inv", "oceanfish_small_12_inv",
 		"oceanfish_small_13_inv", "oceanfish_small_14_inv", "oceanfish_small_15_inv", "oceanfish_small_16_inv",
 		"oceanfish_small_17_inv", "oceanfish_small_18_inv", "oceanfish_small_19_inv", "oceanfish_small_20_inv",

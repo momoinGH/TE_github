@@ -31,7 +31,7 @@ local function fn(Sim)
     inst:AddComponent("inventoryitem")
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible.healthvalue = TUNING.HEALING_MED
     inst.components.edible.hungervalue = TUNING.CALORIES_MED
     inst.components.edible.sanityvalue = -TUNING.SANITY_MED

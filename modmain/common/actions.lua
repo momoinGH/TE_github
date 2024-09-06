@@ -24,9 +24,13 @@ ACTIONS.CASTAOE.strfn = function(act)
         string.upper(act.invobject.nameoverride ~= nil and act.invobject.nameoverride or act.invobject.prefab) or nil
 end;
 
+local function UseItemExtraArriveDist(inst, dest, act)
+    return act.invobject and act.invobject.components.tro_consumable and act.invobject.components.tro_consumable.extra_arrive_dist
+        and act.invobject.components.tro_consumable.extra_arrive_dist(inst, dest, act) or 0
+end
 
 -- 使用道具
-Constructor.AddAction({ priority = 1 },
+Constructor.AddAction({ priority = 1, extra_arrive_dist = UseItemExtraArriveDist },
     "TROPICAL_USE_ITEM",
     function(act)
         return FunctionOrValue(act.invobject.components.tro_consumable.str, act.invobject, act.doer, act.target)
@@ -128,20 +132,6 @@ Constructor.AddAction(nil, "SHOWCRAB", STRINGS.ACTIONS.SHOWCRAB, function(act)
 end)
 
 
-Constructor.AddAction({ priority = 0, rmb = true, distance = 20, mount_valid = true },
-    "THROW",
-    STRINGS.ACTIONS.THROW,
-    function(act)
-        local thrown = act.invobject or act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-        if act.target and not act.pos then
-            act.pos = act.target:GetPosition()
-        end
-        if thrown and thrown.components.throwable then
-            thrown.components.throwable:Throw(act.pos, act.doer)
-            return true
-        end
-    end
-)
 
 Constructor.AddAction(nil, "PEAGAWK_TRANSFORM", STRINGS.ACTIONS.PEAGAWK_TRANSFORM, function(act)
     --Dummy action for flup hiding
@@ -178,14 +168,6 @@ Constructor.AddAction(nil, "SPECIAL_ACTION2", STRINGS.ACTIONS.SPECIAL_ACTION2, f
         act.doer.special_action2(act)
         return true
     end
-end)
-
-Constructor.AddAction(nil, "LAUNCH_THROWABLE", STRINGS.ACTIONS.LAUNCH_THROWABLE, function(act)
-    if act.target and not act.pos then
-        act.pos = act.target:GetPosition()
-    end
-    act.invobject.components.thrower:Throw(act.pos)
-    return true
 end)
 
 Constructor.AddAction(nil, "INFEST", STRINGS.ACTIONS.INFEST, function(act)
@@ -286,7 +268,7 @@ Constructor.AddAction({ priority = 8, rmb = true, distance = 25, mount_valid = f
             item.components.finiteuses:Use(1)
         end
         bomba.Transform:SetPosition(x, y + 1.5, z)
-        bomba.components.complexprojectile:Launch(targetPos)
+        bomba.components.complexprojectile:Launch(targetPos, act.doer)
         act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
 
         return true
@@ -483,18 +465,6 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 2, mount_valid = f
     end
 )
 
-Constructor.AddAction({ priority = 10, mount_valid = true },
-    "SMELT",
-    STRINGS.ACTIONS.SMELT,
-    function(act)
-        if act.target.components.melter then
-            act.target.components.melter:StartCooking()
-            return true
-        end
-    end
-)
-
-
 ----------------------------------------------------------------------------------------------------
 -- 柜子
 
@@ -617,12 +587,6 @@ ACTIONS.TAKE_SHELF.stroverridefn = function(act)
 end
 
 ----------------------------------------------------------------------------------------------------
-
-Utils.FnDecorator(ACTIONS.HARVEST, "fn", function(inst)
-    if act.target.components.melter then
-        return { act.target.components.melter:Harvest(act.doer) }, true
-    end
-end)
 
 Constructor.AddAction({ priority = 10, mount_valid = true },
     "PAN",

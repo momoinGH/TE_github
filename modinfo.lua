@@ -98,20 +98,20 @@ local function shipwrecked_plus(id)
 end
 
 local function hamlet_caves(id)
-    return {
-        name = "hamlet_caves" .. id,
-        label = en_zh_zht("Hamlet Caves", "哈姆雷特洞穴"),
-        hover = en_zh_zht(
-            "It will generate a new zone in the caves that is very different from the traditional one and with new biomes, accessible in hamlet biome",
-            "将在洞穴服务器生成一个与联机版洞穴生态迥异的哈姆雷特群系洞穴区域",
-            "將在洞穴伺服器生成一個與連線版洞穴生態迥異的哈姆雷特羣系洞穴區域"),
-        default = true,
-        options =
-        {
-            { description = en_zh_zht("Disabled", "禁用"), data = false, hover = en_zh_zht("This biome will not be generated", "禁用该生态群系生成", "禁用該生態羣系生成") },
-            { description = en_zh_zht("Enabled", "启用", "啟用"), data = true, hover = en_zh_zht("Will generate a new cave zone", "将生成一个新的洞穴区域", "將生成一個新的洞穴區域") },
-        },
-    }
+	return {
+		name = "hamlet_caves" .. id,
+		label = en_zh_zht("Hamlet Caves", "哈姆雷特洞穴"),
+		hover = en_zh_zht(
+			"It will generate a new zone in the caves that is very different from the traditional one and with new biomes, accessible in hamlet biome",
+			"将在洞穴服务器生成一个与联机版洞穴生态迥异的哈姆雷特群系洞穴区域",
+			"將在洞穴伺服器生成一個與連線版洞穴生態迥異的哈姆雷特羣系洞穴區域"),
+		default = true,
+		options =
+		{
+			{ description = en_zh_zht("Disabled", "禁用"), data = false, hover = en_zh_zht("This biome will not be generated", "禁用该生态群系生成", "禁用該生態羣系生成") },
+			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = true, hover = en_zh_zht("Will generate a new cave zone", "将生成一个新的洞穴区域", "將生成一個新的洞穴區域") },
+		},
+	}
 end
 
 local function frost_island(id)
@@ -1290,7 +1290,7 @@ configuration_options =
 		{
 			{
 				description = en_zh_zht("Disabled", "禁用"),
-				data = 5,
+				data = 0,
 				hover = en_zh_zht("Disabled", "禁用")
 			},
 			{
@@ -1319,7 +1319,7 @@ configuration_options =
 		default = 10,
 		options =
 		{
-			{ description = en_zh_zht("Disabled", "禁用"), data = 5, hover = en_zh_zht("Disabled", "禁用") },
+			{ description = en_zh_zht("Disabled", "禁用"), data = 0, hover = en_zh_zht("Disabled", "禁用") },
 			{
 				description = en_zh_zht("Hamlet Zone", "哈姆雷特区域", "哈姆雷特區域"),
 				data = 10,
@@ -1379,13 +1379,13 @@ configuration_options =
 		options =
 		{
 			{ description = "-100", data = -100 },
-			{ description = "-75",  data = -75 },
-			{ description = "-50",  data = -50 },
-			{ description = "-25",  data = -25 },
-			{ description = "0",    data = 0 },
-			{ description = "+25",  data = 25 },
-			{ description = "+50",  data = 50 },
-			{ description = "+75",  data = 75 },
+			{ description = "-75", data = -75 },
+			{ description = "-50", data = -50 },
+			{ description = "-25", data = -25 },
+			{ description = "0", data = 0 },
+			{ description = "+25", data = 25 },
+			{ description = "+50", data = 50 },
+			{ description = "+75", data = 75 },
 			{ description = "+100", data = 100 },
 		},
 	},
@@ -1407,7 +1407,7 @@ configuration_options =
 			{ description = "-3", data = -3 },
 			{ description = "-2", data = -2 },
 			{ description = "-1", data = -1 },
-			{ description = "0",  data = 0 },
+			{ description = "0", data = 0 },
 			{ description = "+1", data = 1 },
 			{ description = "+2", data = 2 },
 			{ description = "+3", data = 3 },

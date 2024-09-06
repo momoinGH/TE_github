@@ -20,18 +20,18 @@ local prefabs =
 
 SetSharedLootTable('treeguard',
     {
-        { "livinglog",   1.0 },
-        { "livinglog",   1.0 },
-        { "livinglog",   1.0 },
-        { "livinglog",   0.5 },
-        { "livinglog",   0.5 },
-        { "livinglog",   0.5 },
+        { "livinglog", 1.0 },
+        { "livinglog", 1.0 },
+        { "livinglog", 1.0 },
+        { "livinglog", 0.5 },
+        { "livinglog", 0.5 },
+        { "livinglog", 0.5 },
         { "monstermeat", 1.0 },
         { "monstermeat", 0.5 },
-        { "coconut",     1.0 },
-        { "coconut",     0.5 },
-        { "palmleaf",    1.0 },
-        { "palmleaf",    0.5 },
+        { "coconut", 1.0 },
+        { "coconut", 0.5 },
+        { "palmleaf", 1.0 },
+        { "palmleaf", 0.5 },
     })
 
 local function OnLoad(inst, data)
@@ -82,12 +82,13 @@ local function OnAttack(inst, data)
     if data.target then
         for i = 0, numshots - 1 do
             local offset = Vector3(math.random(-4, 4), math.random(-4, 4), math.random(-4, 4))
-            inst.components.thrower:Throw(data.target:GetPosition() + offset)
+            local ent = SpawnPrefab("treeguard_coconut")
+            ent.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            ent.components.complexprojectile:Launch(data.target:GetPosition() + offset, inst)
         end
-    end
-    if data.target then
-        local offset = Vector3(0, 0, 0)
-        inst.components.thrower:Throw(data.target:GetPosition() + offset)
+        local ent = SpawnPrefab("treeguard_coconut")
+        ent.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        ent.components.complexprojectile:Launch(data.target:GetPosition(), inst)
     end
 end
 
@@ -167,9 +168,6 @@ local function fn(Sim)
     inst.components.combat:SetAttackPeriod(2)
     inst.components.combat:SetRange(20, 25)
     inst.components.combat.playerdamagepercent = .33
-
-    inst:AddComponent("thrower")
-    inst.components.thrower.throwable_prefab = "treeguard_coconut"
 
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)

@@ -21,6 +21,7 @@ local Consumable = Class(function(self, inst)
 
     self.state = "domediumaction"             --使用执行的state，建议give/domediumaction
     self.str = nil
+    self.extra_arrive_dist = nil
 
     if not TheWorld.ismastersim then return end
 

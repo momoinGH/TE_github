@@ -37,7 +37,7 @@ local function defaultfn()
 	inst:AddComponent("inventoryitem")
 
 	inst:AddComponent("edible")
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 
 	inst:AddComponent("perishable")
 	inst.components.perishable.onperishreplacement = "spoiled_food"
@@ -85,7 +85,7 @@ local function cookedfn()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 	inst:AddComponent("edible")
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 
 	inst:AddComponent("perishable")
 	inst.components.perishable.onperishreplacement = "spoiled_food"

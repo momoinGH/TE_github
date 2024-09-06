@@ -84,7 +84,7 @@ local function eggify(inst)
 	dohatch(inst, 1)
 end
 
--- TODO 也许加个Stategraph会更好
+
 local function fn()
 	local inst = CreateEntity()
 

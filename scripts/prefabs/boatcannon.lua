@@ -27,6 +27,21 @@ local function OnFinished(inst)
     inst:Remove()
 end
 
+local function ReticuleTargetFn()
+    local player = ThePlayer
+    local ground = TheWorld.Map
+    local pos = Vector3()
+    --Attack range is 8, leave room for error
+    --Min range was chosen to not hit yourself (2 is the hit range)
+    for r = 6.5, 3.5, -.25 do
+        pos.x, pos.y, pos.z = player.entity:LocalToWorldSpace(r, 0, 0)
+        if ground:IsPassableAtPoint(pos:Get()) and not ground:IsGroundTargetBlocked(pos) then
+            return pos
+        end
+    end
+    return pos
+end
+
 local function common(bank, build, anim, symbol_build, symbol)
     local inst = CreateEntity()
 
@@ -64,15 +79,8 @@ local function common(bank, build, anim, symbol_build, symbol)
     inst.components.finiteuses:SetOnFinished(OnFinished)
 
     inst:AddComponent("reticule")
-    inst.components.reticule.targetfn = function()
-        return inst.components.thrower:GetThrowPoint()
-    end
+    inst.components.reticule.targetfn = ReticuleTargetFn
     inst.components.reticule.ease = true
-
-    inst:AddComponent("thrower")
-    inst.components.thrower.throwable_prefab = "cannonshot"
-    inst.components.thrower.onthrowfn = onthrowfn
-    inst.components.thrower.canthrowatpointfn = canshootfn
 
     inst:AddComponent("shipwreckedboatparts")
 

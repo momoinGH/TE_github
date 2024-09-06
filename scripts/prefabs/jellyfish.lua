@@ -165,7 +165,7 @@ local function deadfn(sim)
     inst:AddComponent("tradable")
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
     inst.components.perishable:StartPerishing()
     inst.components.perishable.onperishreplacement = "spoiled_food"
@@ -217,7 +217,7 @@ local function cookedfn(sim)
     inst:AddComponent("tradable")
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible.foodstate = "COOKED"
     inst.components.edible.hungervalue = TUNING.CALORIES_MEDSMALL
     inst.components.edible.sanityvalue = 0 --TUNING.SANITY_SMALL
@@ -263,7 +263,7 @@ local function driedfn(sim)
 
     inst:AddComponent("tradable")
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible.foodstate = "DRIED"
     inst.components.edible.hungervalue = TUNING.CALORIES_MED
     inst.components.edible.sanityvalue = TUNING.SANITY_MEDLARGE

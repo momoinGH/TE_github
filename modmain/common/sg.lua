@@ -96,8 +96,6 @@ AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BOATCANNON, "doshorta
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATCANNON, "doshortaction"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TRO_DISMANTLE, "dolongaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.TRO_DISMANTLE, "dolongaction"))
-AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.SMELT, "doshortaction"))
-AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.SMELT, "doshortaction"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.GIVE_SHELF, "give"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.GIVE_SHELF, "give"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TAKE_SHELF, "give"))
@@ -266,7 +264,7 @@ end))
 AddStategraphEvent("wilson", EventHandler("sneeze", function(inst, data)
     if not inst.components.health:IsDead() and not inst.components.health.invincible then
         if inst.sg:HasStateTag("busy") and inst.sg.currentstate.name ~= "emote" then
-            inst.wantstosneeze = true
+            inst.components.hayfever.wantstosneeze = true
         else
             inst.sg:GoToState("sneeze")
         end

@@ -370,8 +370,6 @@ local function common(minimap, bank, build, loots, data)
     inst.components.health:SetMaxHealth(data.health or TUNING.BOAT.HEALTH)
     inst.components.health.nofadeout = true
 
-    --TODO 死亡时生成残骸 flotsam_debris_sw.lua
-
     if loots then
         inst:AddComponent("lootdropper")
         inst.components.lootdropper:SetLoot(loots)

@@ -37,11 +37,11 @@ local function onunequip(inst, owner)
 end
 
 local function poisonattack(inst, attacker, target, projectile)
-	if target and target.components.poisonable == nil then
-		target:AddComponent("poisonable")
+	if not target or not target.components.poisonable then
+		return
 	end
 
-	if target and target:HasTag("player") then
+	if target:HasTag("player") then
 		local corpo = target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
 		local cabeca = target.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
 		if corpo and corpo.prefab == "armor_seashell" then return end

@@ -412,7 +412,7 @@ AddRecipe2("monkeyball", { Ingredient("cave_banana", 1), Ingredient("snakeskin",
     TECH.SCIENCE_ONE, { atlas = v_atlas }, { "TOOLS" })
 AddRecipe2("chiminea", { Ingredient("log", 2), Ingredient("limestone", 3, v_atlas), Ingredient("sand", 2, v_atlas) },
     TECH.NONE, { atlas = v_atlas, placer = "chiminea_placer" }, { "LIGHT", "COOKING", "WINTER" })
-AddRecipe2("bottlelantern", { Ingredient("messagebottleempty1", 1, v_atlas), Ingredient("bioluminescence", 2, v_atlas) },
+AddRecipe2("bottlelantern", { Ingredient("messagebottleempty", 1, v_atlas), Ingredient("bioluminescence", 2, v_atlas) },
     TECH.SCIENCE_TWO, { atlas = v_atlas }, { "LIGHT" })
 
 AddRecipe2("porto_sea_chiminea",
@@ -430,7 +430,7 @@ AddRecipe2("icemaker", { Ingredient("heatrock", 1), Ingredient("bamboo", 5, v_at
 AddRecipe2("quackendrill", { Ingredient("quackenbeak", 1, v_atlas), Ingredient("gears", 1), Ingredient("transistor", 1) },
     TECH.SCIENCE_TWO, { atlas = v_atlas }, { "TOOLS" })
 AddRecipe2("fabric", { Ingredient("bamboo", 3, v_atlas) }, TECH.SCIENCE_ONE, { atlas = v_atlas }, { "REFINE" })
-AddRecipe2("messagebottleempty1", { Ingredient("sand", 3, v_atlas) }, TECH.SCIENCE_TWO, { atlas = v_atlas }, { "REFINE" })
+AddRecipe2("messagebottleempty", { Ingredient("sand", 3, v_atlas) }, TECH.SCIENCE_TWO, { atlas = v_atlas }, { "REFINE" })
 AddRecipe2("limestone", { Ingredient("coral", 3, v_atlas) }, TECH.SCIENCE_ONE, { atlas = v_atlas }, { "REFINE" })
 AddRecipe2("nubbin", { Ingredient("limestone", 3, v_atlas), Ingredient("corallarve", 1, v_atlas) }, TECH.SCIENCE_ONE,
     { atlas = v_atlas }, { "REFINE" })
@@ -483,7 +483,7 @@ AddRecipe2("armor_windbreaker",
     { Ingredient("blubber", 2, v_atlas), Ingredient("fabric", 1, v_atlas), Ingredient("rope", 1) }, TECH.SCIENCE_TWO,
     { atlas = h_atlas }, { "CLOTHING", "RAIN" }) -- CHECK  THIS
 AddRecipe2("gashat",
-    { Ingredient("coral", 2, h_atlas), Ingredient("messagebottleempty1", 2, v_atlas), Ingredient("jellyfish", 1, h_atlas) },
+    { Ingredient("coral", 2, h_atlas), Ingredient("messagebottleempty", 2, v_atlas), Ingredient("jellyfish", 1, h_atlas) },
     TECH.SCIENCE_TWO, { atlas = h_atlas }, { "CLOTHING" })
 AddRecipe2("antidote",
     { Ingredient("venomgland", 1, v_atlas), Ingredient("coral", 2, v_atlas), Ingredient("seaweed", 2, v_atlas) },
@@ -598,10 +598,10 @@ AddRecipe2("corkboatitem", { Ingredient("rope", 1), Ingredient("cork", 4, h_atla
 AddRecipe2("boat_torch", { Ingredient("torch", 1), Ingredient("twigs", 2) }, TECH.ONE, { atlas = v_atlas },
     { "NAUTICAL", "LIGHT" })
 AddRecipe2("boat_lantern",
-    { Ingredient("messagebottleempty1", 1, v_atlas), Ingredient("twigs", 2), Ingredient("bioluminescence", 1, v_atlas) },
+    { Ingredient("messagebottleempty", 1, v_atlas), Ingredient("twigs", 2), Ingredient("bioluminescence", 1, v_atlas) },
     TECH.SCIENCE_TWO, { atlas = v_atlas }, { "NAUTICAL", "LIGHT" })
 AddRecipe2("porto_buoy",
-    { Ingredient("messagebottleempty1", 1, v_atlas), Ingredient("bamboo", 4, v_atlas), Ingredient("bioluminescence", 2,
+    { Ingredient("messagebottleempty", 1, v_atlas), Ingredient("bamboo", 4, v_atlas), Ingredient("bioluminescence", 2,
         v_atlas) }, TECH.SEAFARING_TWO, { atlas = v_atlas, image = "buoy.tex" }, { "LIGHT", "STRUCTURES", "NAUTICAL" })
 AddRecipe2("boatcannon", { Ingredient("coconut", 6, v_atlas), Ingredient("log", 5), Ingredient("gunpowder", 4) },
     TECH.SEAFARING_TWO, { atlas = v_atlas }, { "NAUTICAL" })
@@ -612,11 +612,11 @@ AddRecipe2("trawlnet", { Ingredient("bamboo", 2, v_atlas), Ingredient("rope", 3)
     { atlas = v_atlas },
     { "TOOLS", "FISHING", "NAUTICAL" })
 AddRecipe2("seatrap",
-    { Ingredient("palmleaf", 4, v_atlas), Ingredient("messagebottleempty1", 2, v_atlas), Ingredient("jellyfish", 1,
+    { Ingredient("palmleaf", 4, v_atlas), Ingredient("messagebottleempty", 2, v_atlas), Ingredient("jellyfish", 1,
         v_atlas) }, TECH.SEAFARING_TWO, { atlas = v_atlas }, { "TOOLS", "GARDENING", "NAUTICAL" })
 
 AddRecipe2("telescope",
-    { Ingredient("goldnugget", 1), Ingredient("pigskin", 1), Ingredient("messagebottleempty1", 1, v_atlas) },
+    { Ingredient("goldnugget", 1), Ingredient("pigskin", 1), Ingredient("messagebottleempty", 1, v_atlas) },
     TECH.SEAFARING_TWO, { atlas = v_atlas }, { "TOOLS", "NAUTICAL" })
 AddRecipe2("supertelescope",
     { Ingredient("telescope", 1, v_atlas), Ingredient("goldnugget", 1), Ingredient("tigereye", 1, v_atlas) },
@@ -626,7 +626,7 @@ AddRecipe2("captainhat", { Ingredient("boneshard", 1), Ingredient("seaweed", 1, 
 AddRecipe2("piratehat", { Ingredient("boneshard", 2), Ingredient("rope", 1), Ingredient("silk", 2) }, TECH.SCIENCE_TWO,
     { atlas = v_atlas }, { "CLOTHING", "NAUTICAL" })
 AddRecipe2("armor_lifejacket",
-    { Ingredient("fabric", 2, v_atlas), Ingredient("vine", 2, v_atlas), Ingredient("messagebottleempty1", 2, v_atlas) },
+    { Ingredient("fabric", 2, v_atlas), Ingredient("vine", 2, v_atlas), Ingredient("messagebottleempty", 2, v_atlas) },
     TECH.SEAFARING_TWO, { atlas = v_atlas }, { "CLOTHING", "NAUTICAL" })
 AddRecipe2("porto_tar_extractor",
     { Ingredient("coconut", 2, v_atlas), Ingredient("bamboo", 4, v_atlas), Ingredient("limestone", 4, v_atlas) },
@@ -1134,7 +1134,7 @@ SortAfter("limestone", "fabric", "REFINE")
 SortAfter("nubbin", "limestone", "REFINE")
 SortAfter("goldnugget", "nubbin", "REFINE")
 SortAfter("ice", "goldnugget", "REFINE")
-SortAfter("messagebottleempty1", "ice", "REFINE")
+SortAfter("messagebottleempty", "ice", "REFINE")
 SortAfter("spear_poison", "spear", "WEAPONS")
 SortAfter("armor_seashell", "armorwood", "ARMOUR")
 SortAfter("armorlimestone", "armormarble", "ARMOUR")
@@ -1249,7 +1249,7 @@ SortAfter("smelter", "wintersfeastoven", "PROTOTYPERS")
 SortAfter("basefan", "smelter", "STRUCTURES")
 SortAfter("basefan", "icemaker", "SUMMER")
 
-SortAfter("glass_shards", "messagebottleempty1", "REFINE")
+SortAfter("glass_shards", "messagebottleempty", "REFINE")
 SortAfter("pigskin", "bearger_fur", "REFINE")
 
 SortAfter("halberd", "boomerang", "WEAPONS")

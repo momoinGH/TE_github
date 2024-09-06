@@ -38,7 +38,6 @@ local function fullfn()
 	end
 	inst:AddComponent("inspectable")
 
-	inst:AddComponent("bundled_structure")
 	inst:AddComponent("deployable")
 	inst.components.deployable.ondeploy = ondeploy
 
@@ -52,6 +51,6 @@ local function fullfn()
 
 	return inst
 end
-
+-- TODO 废弃，照搬原版设定，这个不需要了
 return Prefab("bundled_structure", fullfn, assets),
 	MakePlacer("bundled_structure_placer", "bundled_structure", "bundled_structure", "idle")

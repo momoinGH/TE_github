@@ -269,7 +269,7 @@ local function initmaze(inst)
     inst.components.teleporter:Target(doors.entrance1)
     doors.entrance1.components.teleporter:Target(inst)
 
-    for _, v in ipairs(TheWorld.cave_entrance_roc_exits) do
+    for _, v in ipairs(TheWorld.components.tro_tempentitytracker:GetEnts("cave_exit_roc")) do
         if v:IsValid() and not v.components.teleporter:GetTarget() then
             doors.entrance2.components.teleporter:Target(v)
             v.components.teleporter:Target(doors.entrance2)
@@ -381,8 +381,6 @@ local function exitfn()
     if not TheWorld.ismastersim then
         return inst
     end
-
-    table.insert(TheWorld.cave_entrance_roc_exits, inst)
 
     return inst
 end

@@ -32,7 +32,7 @@ local function flytrapstalk(inst)
 
     inst:AddComponent("edible")
     inst.components.edible.ismeat = true
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible.foodstate = "RAW"
 
     inst:AddComponent("stackable")

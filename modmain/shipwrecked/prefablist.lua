@@ -228,7 +228,6 @@ PrefabFiles = {
   "jungletreeguard_snake",
   -- "ox_wool", --水牛毛
   -- "conch", --海螺
-  "krakenchest",
   "spearsw",
   "rookwater",
   "whaletrack",

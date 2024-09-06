@@ -110,6 +110,21 @@ local function onfinished(inst)
 	SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
 end
 
+local function ReticuleTargetFn()
+	local player = ThePlayer
+	local ground = TheWorld.Map
+	local pos = Vector3()
+	--Attack range is 8, leave room for error
+	--Min range was chosen to not hit yourself (2 is the hit range)
+	for r = 6.5, 3.5, -.25 do
+		pos.x, pos.y, pos.z = player.entity:LocalToWorldSpace(r, 0, 0)
+		if ground:IsPassableAtPoint(pos:Get()) and not ground:IsGroundTargetBlocked(pos) then
+			return pos
+		end
+	end
+	return pos
+end
+
 local function fn()
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -132,6 +147,10 @@ local function fn()
 	inst:AddTag("projectile")
 	inst:AddTag("monkeybait")
 	MakeInventoryFloatable(inst)
+
+	inst:AddComponent("reticule")
+	inst.components.reticule.targetfn = ReticuleTargetFn
+	inst.components.reticule.ease = true
 
 	inst.entity:SetPristine()
 
@@ -157,21 +176,12 @@ local function fn()
 	inst.components.finiteuses:SetUses(MONKEYBALL_USES)
 	inst.components.finiteuses:SetOnFinished(onfinished)
 
-	inst:AddComponent("throwable")
-	inst.components.throwable.onthrown = onthrown2
-
 	inst:AddComponent("complexprojectile")
 	inst.components.complexprojectile:SetHorizontalSpeed(20)
 	inst.components.complexprojectile:SetGravity(-35)
 	inst.components.complexprojectile:SetLaunchOffset(Vector3(.25, 3, 0))
 	inst.components.complexprojectile:SetOnLaunch(onthrown)
 	inst.components.complexprojectile:SetOnHit(onhitground)
-
-	inst:AddComponent("reticule")
-	inst.components.reticule.targetfn = function()
-		return inst.components.throwable:GetThrowPoint()
-	end
-	inst.components.reticule.ease = true
 
 	inst.Physics:SetCollisionCallback(oncollision)
 

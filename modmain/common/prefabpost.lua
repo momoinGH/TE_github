@@ -21,6 +21,8 @@ modimport "modmain/common/prefabs/allplayers"
 modimport "modmain/common/prefabs/world"
 
 
+modimport "modmain/common/poisonable"
+
 
 ----------------------------------------------------------------------------------------------------
 local function ArmorCanResistBefore(self, attacker, weapon)
@@ -321,21 +323,6 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-local function OnPoisonOverDirty(inst)
-    if inst._parent and inst._parent.HUD then
-        if inst.poisonover:value() then
-            inst._parent.HUD.poisonover:Flash()
-        end
-    end
-end
-
-AddPrefabPostInit("player_classified", function(inst)
-    inst.poisonover = net_bool(inst.GUID, "poison.poisonover", "poisonoverdirty") --中毒HUD
-
-    if not TheNet:IsDedicated() then
-        inst:ListenForEvent("poisonoverdirty", OnPoisonOverDirty)
-    end
-end)
 ----------------------------------------------------------------------------------------------------
 
 AddPrefabPostInit("ash", function(inst)
@@ -428,16 +415,6 @@ AddPrefabPostInitAny(function(inst)
 
     if TheWorld.components.tro_tempentitytracker and TheWorld.components.tro_tempentitytracker:KeyExists(inst.prefab) then
         TheWorld.components.tro_tempentitytracker:OnEntSpawned(inst)
-    end
-
-    -- Only fightable mobs can be poisonable 中毒组件
-    if inst.components.combat and inst.components.poisonable == nil then
-        inst:AddComponent("poisonable")
-    end
-
-    -- 被毒死时生成的掉落物处理
-    if inst.components.perishable then
-        inst:ListenForEvent("on_loot_dropped", OnLootDropped)
     end
 end)
 
@@ -578,7 +555,7 @@ end)
 
 ----------------------------------------------------------------------------------------------------
 
--- TODO 根据地皮判断不太好，能不能给草添加特殊标签
+-- 根据地皮判断不太好，能不能给草添加特殊标签
 local CANT_PICK_TILES = {
     [GROUND.SUBURB] = true,
     [GROUND.FOUNDATION] = true,
@@ -728,16 +705,16 @@ end)
 
 ----------------------------------------------------------------------------------------------------
 
-local function shardDMGRedirect(self, attacker, damage, weapon, ...) -- 碎裂武器伤害重定向
+local function shardDMGRedirect(self, attacker, damage, weapon, ...)          -- 碎裂武器伤害重定向
     if weapon then
         if weapon.prefab == "shard_sword" and self.inst:HasTag("shadow") then -- 碎裂剑对梦魇生物
             local health = self.inst.components.health
             if health then
                 if health.currenthealth <= damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MAXIMUM then
                     return nil, false,
-                           {self, attacker,
+                        { self, attacker,
                             math.max(damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MINIMUM, health.currenthealth - 1),
-                            weapon, ...}
+                            weapon, ... }
                 else
                     if attacker and attacker.components.combat then
                         attacker:DoTaskInTime(0, function()
@@ -746,12 +723,12 @@ local function shardDMGRedirect(self, attacker, damage, weapon, ...) -- 碎裂�
                         end)
                     end
                     return nil, false,
-                           {self, attacker, damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MAXIMUM, weapon, ...}
+                        { self, attacker, damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MAXIMUM, weapon, ... }
                 end
             end
         elseif weapon.prefab == "shard_beak" and -- 碎裂喙对建筑和巢
             (self.inst:HasTag("wall") or self.inst:HasTag("structure") or self.inst.components.childspawner) then
-            return nil, false, {self, attacker, damage * TUNING.SWP_SHARD_DMG.STRUCTURE_MODIFIER, weapon, ...}
+            return nil, false, { self, attacker, damage * TUNING.SWP_SHARD_DMG.STRUCTURE_MODIFIER, weapon, ... }
         end
     end
 end
@@ -771,7 +748,7 @@ AddComponentPostInit("boatphysics", function(self, inst) -- 给船和保险杠�
                 force = force * math.max(1 - SWP_WAVEBREAK_EFFICIENCY.BUMPER["boat_bumper_" .. bumper.prefab], 0)
             end
         end
-        return nil, false, {self, dir_x, dir_z, force}
+        return nil, false, { self, dir_x, dir_z, force }
     end)
 end)
 

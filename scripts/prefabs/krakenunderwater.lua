@@ -124,10 +124,13 @@ local RND_OFFSET = 4
 local function OnAttack(inst, data)
     local numshots = 10
     if data.target then
+        local x, y, z = inst.Transform:GetWorldPosition()
         for i = 1, numshots do
             local offset = Vector3(math.random(-RND_OFFSET, RND_OFFSET), math.random(-RND_OFFSET, RND_OFFSET),
                 math.random(-RND_OFFSET, RND_OFFSET))
-            inst.components.thrower:Throw(data.target:GetPosition() + offset)
+            local ent = SpawnPrefab("kraken_projectile_underwater")
+            ent.Transform:SetPosition(x, y, z)
+            ent.components.complexprojectile:Launch(data.target:GetPosition() + offset, inst)
         end
     end
 end
@@ -325,9 +328,6 @@ local function fn()
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('krakenunderwater')
-
-    inst:AddComponent("thrower")
-    inst.components.thrower.throwable_prefab = "kraken_projectile_underwater"
 
     inst:SetStateGraph("SGkrakenunderwater")
     local brain = require("brains/krakenbrain")

@@ -48,13 +48,13 @@ function BloodmoonBadge:OnUpdate(dt)
     self.contador = self.contador + 1
     if self.contador > 50 then
         self.contador = 0
-        for k, jogador in pairs(AllPlayers) do
-            if jogador:HasTag("aporkalypse") and self.aporkalypse == false then
+        for k, player in pairs(AllPlayers) do
+            if player:HasTag("aporkalypse") and self.aporkalypse == false then
                 self.aporkalypse = true
                 self:Show()
             end
 
-            if self.aporkalypse == true and not jogador:HasTag("aporkalypse") then
+            if self.aporkalypse == true and not player:HasTag("aporkalypse") then
                 self.aporkalypse = false
                 self:Hide()
             end

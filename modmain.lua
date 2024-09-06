@@ -3,6 +3,7 @@
 - tro_作为公共模块前缀
 - 其他模块的东西用模块名或者模块名前三个字母再或者tro_作为前缀
 
+extend_tags文件实现了标签扩展，tro_打头的标签可以随意给玩家添加，不会增加玩家标签数量，但是希望不要滥用标签，应在主客机需要交互时使用
 
 
 
@@ -52,6 +53,7 @@ local function Modimport(dirc)
 	SafeModImport("modmain/" .. dirc .. "/actions")           --action相关
 	SafeModImport("modmain/" .. dirc .. "/sg")                --Stategraph相关
 	SafeModImport("modmain/" .. dirc .. "/recipes")           --配方相关
+	SafeModImport("modmain/" .. dirc .. "/cooking")           --料理相关
 	SafeModImport("modmain/" .. dirc .. "/rpc")               --RPC的注册
 	SafeModImport("modmain/" .. dirc .. "/input")             --客机操作的监听
 	SafeModImport("modmain/" .. dirc .. "/modwiki")           --图鉴wiki定义
@@ -122,7 +124,7 @@ GLOBAL.WIKI_DATA = nil
 
 
 ----------------------------------------------------------------------------------------------------
-
+modimport "modmain/extend_tags"      --标签扩展，pro_开头的标签可以随便给玩家加
 modimport "modmain/componentactions" --AddComponentAction比较特殊，如果mod的分开写就会前后覆盖
 modimport "scripts/prefabs/tropical_farm_plant_defs"
 

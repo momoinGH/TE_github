@@ -5,16 +5,14 @@ local InteriorSpawnerUtils = require("interiorspawnerutils")
 local function OnBuilt(inst)
     local isCorner, isLeft = InteriorSpawnerUtils.TestBeam(inst)
 
-
-
     if isCorner then
         if not isLeft then
-            -- TODO 翻转
+            inst.AnimState:SetScale(-1, 1)
         end
     else
         local beam = SpawnAt(inst.prefab:gsub("cornerbeam", "beam"), inst)
         if not isLeft then
-            -- TODO 翻转
+            beam.AnimState:SetScale(-1, 1)
         end
 
         inst:Remove()

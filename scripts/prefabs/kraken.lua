@@ -230,31 +230,23 @@ local function OnAttack(inst, data)
 	local numshots = 20
 
 	if data.target then
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local y1 = y
 		for i = 1, numshots / 2 do
-			inst.components.thrower.throwable_prefab = "kraken_projectile"
-			local x, y, z = inst.Transform:GetWorldPosition()
 			local x1 = x + math.random(-24, 24)
-			local y1 = y
 			local z1 = z + math.random(-24, 24)
-			local new_pos = Vector3(x1, y1, z1)
-			inst.components.thrower:Throw(new_pos)
+			local ent = SpawnPrefab("kraken_projectile")
+			ent.Transform:SetPosition(x, y, z)
+			ent.components.complexprojectile:Launch(Vector3(x1, y1, z1), inst)
 		end
 
 		for i = 1, numshots do
-			inst.components.thrower.throwable_prefab = "kraken_projectile2"
-			local x, y, z = inst.Transform:GetWorldPosition()
 			local x1 = x + math.random(-24, 24)
-			local y1 = y
 			local z1 = z + math.random(-24, 24)
-			local new_pos = Vector3(x1, y1, z1)
-			inst.components.thrower:Throw(new_pos)
+			local ent = SpawnPrefab("kraken_projectile2")
+			ent.Transform:SetPosition(x, y, z)
+			ent.components.complexprojectile:Launch(Vector3(x1, y1, z1), inst)
 		end
-		--[[
-        for i = 1, numshots do
-            local offset = Vector3(math.random(-RND_OFFSET, RND_OFFSET), math.random(-RND_OFFSET, RND_OFFSET), math.random(-RND_OFFSET, RND_OFFSET))
-            inst.components.thrower:Throw(data.target:GetPosition() + offset)
-        end
-]]
 	end
 end
 
@@ -402,9 +394,6 @@ local function fn()
 
 	inst:AddComponent("lootdropper")
 	inst.components.lootdropper:SetChanceLootTable('kraken')
-
-	inst:AddComponent("thrower")
-	inst.components.thrower.throwable_prefab = "kraken_projectile"
 
 	inst:SetStateGraph("SGkraken")
 	local brain = require("brains/krakenbrain")

@@ -30,7 +30,7 @@ local function raw()
 	end
 
 	inst:AddComponent("edible")
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 
 	inst:AddComponent("stackable")
 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -86,7 +86,7 @@ local function cooked()
 	end
 
 	inst:AddComponent("edible")
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 
 	inst:AddComponent("stackable")
 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM

@@ -78,7 +78,7 @@ local function makefish_med(bank, build, inventoryimage, dryablesymbol)
 		end
 		inst:AddComponent("edible")
 		inst.components.edible.ismeat = true
-		inst.components.edible.foodtype = "MEAT"
+		inst.components.edible.foodtype = FOODTYPE.MEAT
 
 		inst:AddComponent("stackable")
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -124,7 +124,7 @@ local function makefish_med(bank, build, inventoryimage, dryablesymbol)
 		end
 		inst:AddComponent("edible")
 		inst.components.edible.ismeat = true
-		inst.components.edible.foodtype = "MEAT"
+		inst.components.edible.foodtype = FOODTYPE.MEAT
 
 		inst:AddComponent("stackable")
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -188,7 +188,7 @@ local function makefish_med1(bank, build, inventoryimage, dryablesymbol)
 		end
 		inst:AddComponent("edible")
 		inst.components.edible.ismeat = true
-		inst.components.edible.foodtype = "MEAT"
+		inst.components.edible.foodtype = FOODTYPE.MEAT
 
 		inst:AddComponent("stackable")
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -234,7 +234,7 @@ local function makefish_med1(bank, build, inventoryimage, dryablesymbol)
 		end
 		inst:AddComponent("edible")
 		inst.components.edible.ismeat = true
-		inst.components.edible.foodtype = "MEAT"
+		inst.components.edible.foodtype = FOODTYPE.MEAT
 
 		inst:AddComponent("stackable")
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -363,7 +363,7 @@ local function cookedfn()
 
 	inst:AddComponent("edible")
 	inst.components.edible.ismeat = true
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 	inst.components.edible.foodstate = "COOKED"
 	inst.components.edible.healthvalue = TUNING.HEALING_MED
 	inst.components.edible.hungervalue = TUNING.CALORIES_MED
@@ -416,7 +416,7 @@ local function fish_raw_fn()
 
 	inst:AddComponent("edible")
 	inst.components.edible.ismeat = true
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 
 	inst:AddComponent("stackable")
 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -476,7 +476,7 @@ local function quagmire_crabmeat_fn()
 
 	inst:AddComponent("edible")
 	inst.components.edible.ismeat = true
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 
 	inst:AddComponent("stackable")
 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -538,7 +538,7 @@ local function quagmire_crabmeat_cooked_fn()
 
 	inst:AddComponent("edible")
 	inst.components.edible.ismeat = true
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 	inst.components.edible.foodstate = "COOKED"
 	inst.components.edible.healthvalue = TUNING.HEALING_TINY
 	inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
@@ -602,7 +602,7 @@ local function lobster_dead_fn()
 
 	inst:AddComponent("edible")
 	inst.components.edible.ismeat = true
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 	inst.components.edible.healthvalue = TUNING.HEALING_TINY
 	inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
 
@@ -655,7 +655,7 @@ local function lobster_dead_cooked_fn()
 
 	inst:AddComponent("edible")
 	inst.components.edible.ismeat = true
-	inst.components.edible.foodtype = "MEAT"
+	inst.components.edible.foodtype = FOODTYPE.MEAT
 	inst.components.edible.foodstate = "COOKED"
 	inst.components.edible.healthvalue = TUNING.HEALING_TINY
 	inst.components.edible.hungervalue = TUNING.CALORIES_SMALL

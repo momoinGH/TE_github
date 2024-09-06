@@ -9,60 +9,31 @@ local prefabs =
 	"groundpoundring_fx",
 }
 
-local function onhacked(nut)
-	nut.components.lootdropper:SpawnLootPrefab("coconut_halved")
-	nut.components.lootdropper:SpawnLootPrefab("coconut_halved")
-	nut:Remove()
-end
-
-local function onthrown(inst, thrower, pt, time_to_target)
-	inst.Physics:SetFriction(.2)
-	inst.Transform:SetFourFaced()
-	inst:FacePoint(pt:Get())
-	inst.AnimState:PlayAnimation("throw", true)
-
+local function OnLaunch(inst, attacker, targetPos)
 	local shadow = SpawnPrefab("warningshadow")
-	shadow.Transform:SetPosition(pt:Get())
+	shadow.Transform:SetPosition(targetPos:Get())
+	local time_to_target = 1 -- 落地时间不好计算啊
 	shadow:shrink(time_to_target, 1.75, 0.5)
-
-	inst.TrackHeight = inst:DoPeriodicTask(FRAMES, function()
-		local pos = inst:GetPosition()
-
-		if pos.y <= 0.3 then
-			local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, 1.5)
-
-			for k, v in pairs(ents) do
-				if v.components.combat and v ~= inst and v.prefab ~= "treeguard" then
-					v.components.combat:GetAttacked(thrower, 50)
-				end
-			end
-
-
-
-
-			--				local smoke = SpawnPrefab("small_puff_light")
-			local other = nil
-			if math.random() < 0.01 then
-				other = SpawnPrefab("coconut")
-			else
-				--				other = SpawnPrefab("coconut_chunks")
-				--				other = SpawnPrefab("explode_small")
-			end
-			--				smoke.Transform:SetPosition(pt:Get())
-			--				other.Transform:SetPosition(pt:Get())			
-
-
-			inst.components.groundpounder:GroundPound()
-
-
-
-
-
-
-			inst:Remove()
-		end
-	end)
 end
+
+local function OnHit(inst, attacker)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	for k, v in pairs(TheSim:FindEntities(x, y, z, 1.5)) do
+		if v.components.combat and v ~= inst and v.prefab ~= "treeguard" then
+			v.components.combat:GetAttacked(attacker or inst, 50)
+		end
+	end
+
+	inst.components.groundpounder:GroundPound()
+
+	if math.random() < 0.01 then
+		item = ReplacePrefab(inst, "coconut")
+		item.components.inventoryitem:OnDropped()
+	else
+		inst:Remove()
+	end
+end
+
 
 local function onremove(inst)
 	if inst.TrackHeight then
@@ -87,6 +58,8 @@ local function fn()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
 
+	inst.Transform:SetFourFaced()
+
 	MakeInventoryPhysics(inst)
 
 	inst.AnimState:SetBank("coconut_cannon")
@@ -102,13 +75,12 @@ local function fn()
 	inst:AddTag("thrown")
 	inst:AddTag("projectile")
 
-	inst:AddComponent("throwable")
-	inst.components.throwable.onthrown = onthrown
-	inst.components.throwable.random_angle = 0
-	inst.components.throwable.max_y = 50
-	inst.components.throwable.yOffset = 1
-
-
+	inst:AddComponent("complexprojectile")
+	inst.components.complexprojectile:SetOnHit(OnHit)
+	inst.components.complexprojectile:SetOnLaunch(OnLaunch)
+	inst.components.complexprojectile:SetLaunchOffset(Vector3(.75, 1, 0))
+	inst.components.complexprojectile:SetHorizontalSpeed(20)
+	inst.components.complexprojectile:SetGravity(-30)
 
 
 	inst:AddComponent("groundpounder")
@@ -124,16 +96,6 @@ local function fn()
 	inst.components.groundpounder.ring_fx_scale = 0.15
 	inst.components.groundpounder.groundpoundfx = "explode_small"
 	inst.components.groundpounder.groundpoundringfx = "explode_small"
-
-
-
-
-
-
-
-
-
-
 
 
 	inst:AddComponent("combat")

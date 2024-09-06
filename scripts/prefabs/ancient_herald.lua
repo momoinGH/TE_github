@@ -40,14 +40,14 @@ local function oncollide(inst, other)
 end
 
 SetSharedLootTable('ancientherald', {
-    { 'ancient_remnant',            1.00 },
-    { 'ancient_remnant',            1.00 },
-    { 'ancient_remnant',            1.00 },
-    { 'ancient_remnant',            1.00 },
-    { 'ancient_remnant',            1.00 },
-    { 'nightmarefuel',              1.00 },
-    { 'nightmarefuel',              1.00 },
-    { 'nightmarefuel',              0.33 },
+    { 'ancient_remnant', 1.00 },
+    { 'ancient_remnant', 1.00 },
+    { 'ancient_remnant', 1.00 },
+    { 'ancient_remnant', 1.00 },
+    { 'ancient_remnant', 1.00 },
+    { 'nightmarefuel', 1.00 },
+    { 'nightmarefuel', 1.00 },
+    { 'nightmarefuel', 0.33 },
 
     { 'armorvortexcloak_blueprint', 1 },
 })
@@ -130,7 +130,6 @@ local function fn()
         inst:Remove()
     end, TheWorld)
 
-    -- TODO 似乎是技能冷却的，能用timer代替吗
     inst.summon_time = GetTime()
     inst.taunt_time = GetTime()
 

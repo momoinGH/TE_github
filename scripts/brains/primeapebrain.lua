@@ -566,22 +566,7 @@ local function AssistPlayer(inst)
                 return not inst.components.eater:CanEat(
                     item) and not item.components.fertilizer
             end)
-            if throwable then
-                --Add throwable component, remove when it is picked up again.
-                if not throwable.components.throwable then
-                    throwable:AddComponent("throwable")
-                    throwable.throwable_onputininventory = function()
-                        throwable:RemoveComponent("throwable")
-                        throwable:RemoveEventCallback("onputininventory", throwable.throwable_onputininventory)
-                        throwable.throwable_onputininventory = nil
-                    end
-                    throwable:ListenForEvent("onputininventory", throwable.throwable_onputininventory)
-                end
-                local jogador = GetClosestInstWithTag("player", inst, 15)
-                if jogador then
-                    return BufferedAction(inst, jogador, ACTIONS.THROW, throwable)
-                end
-            end
+            
         end
 
         --If there is anything nearby (but still farish from the player) that I can pick, pick it.

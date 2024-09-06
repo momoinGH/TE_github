@@ -74,18 +74,6 @@ AddComponentAction("SCENE", "shopped", function(inst, doer, actions, right)
     end
 end)
 
-AddComponentAction("SCENE", "melter", function(inst, doer, actions, right)
-    if not inst:HasTag("burnt") then
-        if right and not inst:HasTag("alloydone") and inst.replica.container and inst.replica.container:IsFull() then
-            --冶炼炉冶炼
-            table.insert(actions, ACTIONS.SMELT)
-        elseif not right and inst:HasTag("alloydone") then
-            --冶炼炉收获
-            table.insert(actions, ACTIONS.HARVEST)
-        end
-    end
-end)
-
 local IRONLORD_WORKS = {
     CHOP = true,
     HAMMER = true,

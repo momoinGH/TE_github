@@ -4,26 +4,26 @@ local assets =
 	Asset("MINIMAP_IMAGE", "messageBottle"),
 }
 
-
--- TODO 看看能不能优化掉这个文件
-
 local function getrevealtargetpos(inst, doer)
-	local davez = nil
 	local map = TheWorld.Map
 	local x, y, z
-	for k, v in pairs(Ents) do
-		if (v.prefab == "kraken" and v.revelado == nil)
-			or (v.prefab == "octopusking" and v.revelado == nil)
-		then
-			v.revelado = true
-			davez = v
-			break
+	local inventory = inst.components.inventoryitem:GetContainer()
+	-- 返回这两个家伙的位置
+	for _, name in ipairs({ "kraken", "octopusking" }) do
+		for _, v in ipairs(TheWorld.components.tro_tempentitytracker:GetEnts(name)) do
+			if not v.revelado then
+				v.revelado = true
+				x, y, z = v.Transform:GetWorldPosition()
+				local empty_bottle = SpawnPrefab("messagebottleempty")
+				empty_bottle.Transform:SetPosition(inst.Transform:GetWorldPosition())
+				inst:Remove()
+				if inventory ~= nil then
+					inventory:GiveItem(empty_bottle)
+				end
+
+				return Vector3(math.floor(x), 0, math.floor(z))
+			end
 		end
-	end
-	if davez then
-		x, y, z = davez.Transform:GetWorldPosition()
-		doer.components.inventory:GiveItem(SpawnPrefab("messagebottleempty1"))
-		return Vector3(math.floor(x), 0, math.floor(z))
 	end
 
 	local sx, sy = TheWorld.Map:GetSize()
@@ -71,14 +71,8 @@ local function messagebottlefn(Sim)
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
-
 	inst:AddComponent("waterproofer")
 	inst.components.waterproofer:SetEffectiveness(0)
-
-	inst.no_wet_prefix = true
-	--local minimap = inst.entity:AddMiniMapEntity() --temp
-
-	--minimap:SetIcon("messageBottle.png")
 
 	inst:AddComponent("mapspotrevealer")
 	inst.components.mapspotrevealer:SetGetTargetFn(getrevealtargetpos)
@@ -87,40 +81,4 @@ local function messagebottlefn(Sim)
 	return inst
 end
 
-local function emptybottlefn(Sim)
-	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	inst.entity:AddNetwork()
-
-	MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)
-
-	anim:SetBank("messagebottle")
-	anim:SetBuild("messagebottle")
-	inst.AnimState:PlayAnimation("idle_empty", true)
-	inst:AddTag("aquatic")
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("inspectable")
-	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
-
-	inst:AddComponent("waterproofer")
-	inst.components.waterproofer:SetEffectiveness(0)
-
-	inst.no_wet_prefix = true
-
-	inst:AddComponent("stackable")
-	inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
-	return inst
-end
-
-return Prefab("messagebottle1", messagebottlefn, assets),
-	Prefab("shipwrecked/objects/messagebottleempty1", emptybottlefn, assets)
+return Prefab("messagebottle1", messagebottlefn, assets)

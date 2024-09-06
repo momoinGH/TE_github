@@ -351,5 +351,8 @@ AddRecipe2("bed7", { OincIngredient(20) }, TECH.HOME_TWO,
 AddRecipe2("bed8", { OincIngredient(22) }, TECH.HOME_TWO,
     { atlas = v_atlas, nounlock = true, min_spacing = 1, placer = "bed8_placer" }, { "INTERIOR" })
 
-    --房屋扩建许可证
+--房屋扩建许可证
 AddHomeRecipe("construction_permit", 50)
+
+----------------------------------------------------------------------------------------------------
+
