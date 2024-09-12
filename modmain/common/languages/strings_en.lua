@@ -2312,6 +2312,11 @@ STRINGS.NAMES.FISH7                                                             
 STRINGS.NAMES.TIGERSHARK                                                        = "Tiger Shark"
 STRINGS.NAMES.RENO_LIGHT_BASIC_BULB                                             = "Wired Bulb"
 STRINGS.NAMES.CORAL_BRAIN_ROCK                                                  = "Brainy Sprout"
+STRINGS.NAMES.BUFF_SPEEDUP_TRO                                                  = "Caffeine"
+STRINGS.NAMES.BUFF_SPEEDUP_TRO_1                                                = "Caffeine I"
+STRINGS.NAMES.BUFF_SPEEDUP_TRO_2                                                = "Caffeine II"
+STRINGS.NAMES.BUFF_SPEEDUP_TRO_3                                                = "Surfing"
+STRINGS.NAMES.BUFF_SPEEDUP_TRO_4                                                = "Caffeine III"
 
 -----------------------------Description of the recipes-----------------------------
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORK                                        = "Science says it floats."
