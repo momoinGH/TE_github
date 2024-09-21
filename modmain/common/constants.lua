@@ -21,7 +21,14 @@ TOOLACTIONS["HACK"] = true
 TOOLACTIONS["SHEAR"] = true
 TOOLACTIONS["PAN"] = true
 
-SWP_WAVEBREAK_EFFICIENCY = { -- 破浪效率：var * 100%
+GLOBAL.ANTCHEST_PRESERVATION = {
+    honey = true,
+    royal_jelly = true,
+    nectar_pod = true,
+    pollen_item = true,
+}
+
+GLOBAL.SWP_WAVEBREAK_EFFICIENCY = { -- 破浪效率：var * 100%
     BUMPER = {
         kelp = .6, -- prefab = "boat_bumper_" .. k
         shell = .8,

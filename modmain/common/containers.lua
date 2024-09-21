@@ -3,14 +3,8 @@ local cooking = require("cooking")
 local params = containers.params
 
 ------ 蜜箱
-local antchest_preservation = {
-	honey = true,
-	royal_jelly = true,
-	nectar_pod = true,
-	pollen_item = true,
-}
 local function antchestitemtestfn(container, item, slot)
-	return antchest_preservation[item.prefab]
+	return ANTCHEST_PRESERVATION[item.prefab]
 end
 
 params.antchest = deepcopy(params.icebox) -- 野生蜜箱
