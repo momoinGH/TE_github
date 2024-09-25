@@ -41,17 +41,13 @@ local function MakePlate(basedish, dishtype, assets)
 
         inst:AddTag("replater")
 
-        inst:AddComponent("tro_consumable")
-        inst.components.tro_consumable.targetCheckFn = TargetCheck
-        inst.components.tro_consumable.str = "REPLATE"
+        inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheck, nil, "REPLATE", OnUse)
 
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
             return inst
         end
-
-        inst.components.tro_consumable.onUseFn = OnUse
 
         inst:AddComponent("inspectable")
 

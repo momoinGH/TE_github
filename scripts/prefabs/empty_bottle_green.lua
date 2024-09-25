@@ -38,18 +38,13 @@ local function fn()
     inst.AnimState:SetBuild("bottle_green")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddComponent("tro_consumable")
-    inst.components.tro_consumable.targetCheckFn = TargetCheck
-    inst.components.tro_consumable.state = "dolongaction"
-    inst.components.tro_consumable.str = "FILL"
+    inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheck, "dolongaction", "FILL", OnUse)
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst.components.tro_consumable.onUseFn = OnUse
 
     inst:AddTag("glassbottle")
 

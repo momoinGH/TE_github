@@ -303,8 +303,8 @@ local function common(minimap, bank, build, loots, data)
 
     inst:AddComponent("walkableplatform")
     inst.components.walkableplatform.platform_radius = RADIUS
-    --生成一圈碰撞墙，防止玩家上船的时候跳过头直接跳海里了
-    -- inst.components.walkableplatform.player_collision_prefab = "shipwrecked_boat_player_collision"
+    --生成一圈碰撞墙，防止玩家上船的时候跳过头直接跳海里了，但是会把海上的物品拖动起来
+    inst.components.walkableplatform.player_collision_prefab = "shipwrecked_boat_player_collision"
 
     inst:AddComponent("healthsyncer")
     inst.components.healthsyncer.max_health = data.health or TUNING.BOAT.HEALTH

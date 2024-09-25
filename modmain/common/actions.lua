@@ -24,23 +24,6 @@ ACTIONS.CASTAOE.strfn = function(act)
         string.upper(act.invobject.nameoverride ~= nil and act.invobject.nameoverride or act.invobject.prefab) or nil
 end;
 
-local function UseItemExtraArriveDist(inst, dest, act)
-    return act.invobject and act.invobject.components.tro_consumable and act.invobject.components.tro_consumable.extra_arrive_dist
-        and act.invobject.components.tro_consumable.extra_arrive_dist(inst, dest, act) or 0
-end
-
--- 使用道具
-Constructor.AddAction({ priority = 1, extra_arrive_dist = UseItemExtraArriveDist },
-    "TROPICAL_USE_ITEM",
-    function(act)
-        return FunctionOrValue(act.invobject.components.tro_consumable.str, act.invobject, act.doer, act.target)
-    end,
-    function(act)
-        return act.invobject.components.tro_consumable:Use(act.doer, act.target)
-    end
-)
-
-
 Constructor.AddAction(nil, "STOREOPEN", STRINGS.ACTIONS.STOREOPEN, function(act)
     if act.target.components.store == nil then return false end
 
@@ -238,43 +221,6 @@ ACTIONS.RUMMAGE.extra_arrive_dist = function(doer, dest)
     end
     return 0
 end
-
--- 船炮开火
-Constructor.AddAction({ priority = 8, rmb = true, distance = 25, mount_valid = false },
-    "BOATCANNON",
-    STRINGS.ACTIONS.BOATCANNON,
-    function(act)
-        local boat = act.doer:GetCurrentPlatform()
-        local item = boat
-            and boat:HasTag("shipwrecked_boat")
-            and boat.components.container
-            and boat.components.container:GetItemInSlot(2)
-        if not item then return true end --应该不可能
-
-        ----------------posiciona pra sair no canhao-----------------------
-        local angle = act.doer:GetRotation()
-        local dist = 1.5
-        local offset = Vector3(dist * math.cos(angle * DEGREES), 0, -dist * math.sin(angle * DEGREES))
-        local targetPos = act.target and act.target:GetPosition() or act:GetActionPoint()
-        local bombpos = act.doer:GetPosition() + offset
-        local x, y, z = bombpos:Get()
-
-        -------------------------------------------------------
-
-        local bomba = SpawnPrefab(item.prefab == "woodlegs_boatcannon" and "cannonshotobsidian" or "cannonshot")
-        if boat.prefab == "woodlegsboat" and act.doer.prefab == "woodlegs" then
-            bomba.components.explosive.explosivedamage = 50
-        else
-            item.components.finiteuses:Use(1)
-        end
-        bomba.Transform:SetPosition(x, y + 1.5, z)
-        bomba.components.complexprojectile:Launch(targetPos, act.doer)
-        act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
-
-        return true
-    end
-)
-
 
 Constructor.AddAction({ priority = 9, rmb = true, distance = 20, mount_valid = false },
     "TIRO",
@@ -798,4 +744,13 @@ Constructor.AddAction({},
             return true
         end
     end
+)
+
+-- 发射船炮
+Constructor.AddAction({ priority = 11, distance = 25 },
+    "BOATCANNON",
+    STRINGS.ACTIONS.GIVE.BOATCANNON,
+    function(act)
+        return act.doer.components.pro_componentaction:Use("BOATCANNON", act.target:GetPosition())
+    end, "doshortaction", "doshortaction"
 )

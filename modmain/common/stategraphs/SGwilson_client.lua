@@ -12,10 +12,6 @@ AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATMOUNT, fun
     inst.components.locomotor:StartHopping(x, z, act.target)
 end))
 
-AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.TROPICAL_USE_ITEM, function(inst, act)
-    return FunctionOrValue(act.invobject.components.tro_consumable.state, act.invobject, act.doer, act.target)
-end))
-
 ----------------------------------------------------------------------------------------------------
 
 AddStategraphState("wilson_client", State {

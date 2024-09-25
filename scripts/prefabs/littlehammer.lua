@@ -45,18 +45,13 @@ local function fn(Sim)
 
     inst:AddTag("ballpein_hammer")
 
-    inst:AddComponent("tro_consumable")
-    inst.components.tro_consumable.state = "tap"
-    inst.components.tro_consumable.targetCheckFn = TargetCheckFn
-    inst.components.tro_consumable.str = "DISLODGE"
+    inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheckFn, "tap", "DISLODGE", OnUse)
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst.components.tro_consumable.onUseFn = OnUse
 
     inst.components.floater:SetBankSwapOnFloat(true, -10, { sym_build = "swap_ballpein_hammer" })
 

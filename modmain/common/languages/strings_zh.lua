@@ -69,12 +69,23 @@ STRINGS.NAMES.DROWNING                                  = "溺水"
 STRINGS.NAMES.POISON                                    = "中毒"
 
 --------------操作选项-------
+STRINGS.ACTIONS.GIVE.BOATCANNON                         = "发射"
+STRINGS.ACTIONS.GIVE.USE                                = "使用"
+STRINGS.ACTIONS.GIVE.DISLODGE                           = "取出"
+STRINGS.ACTIONS.GIVE.INSTALL                            = "安装"
+STRINGS.ACTIONS.GIVE.SPY                                = "调查"
+STRINGS.ACTIONS.GIVE.TAPSUGARTREE                       = "凿树"
+STRINGS.ACTIONS.GIVE.KILLSOFTLY                         = "屠宰"
+STRINGS.ACTIONS.GIVE.FILL                               = "灌满"
+STRINGS.ACTIONS.GIVE.MILK                               = "挤奶"
+STRINGS.ACTIONS.GIVE.REPLATE                            = "摆盘"
+STRINGS.ACTIONS.GIVE.ADDFUEL                            = "添加燃料"
+
 --SW
 STRINGS.ACTIONS.HACK                                    = "劈砍"
 STRINGS.ACTIONS.STICK                                   = "捣入"
 STRINGS.ACTIONS.DESACTIVATESAIL                         = "关灯"
 STRINGS.ACTIONS.LANTERNON                               = "开灯"
-STRINGS.ACTIONS.BOATCANNON                              = "发射"
 STRINGS.ACTIONS.PEER                                    = "观察"
 --ham
 STRINGS.ACTIONS.SMELT                                   = "熔炼"
@@ -101,18 +112,7 @@ STRINGS.ACTIONS.TAKE_SHELF                              = {
     STEAL = "偷走{item}",
     BUY = "购买{item}",
 }
-STRINGS.ACTIONS.TROPICAL_USE_ITEM                       = {
-    GENERIC      = "使用",
-    DISLODGE     = "取出",
-    INSTALL      = "安装",
-    SPY          = "调查",
-    TAPSUGARTREE = "凿树",
-    KILLSOFTLY   = "屠宰",
-    FILL         = "灌满",
-    MILK         = "挤奶",
-    REPLATE      = "摆盘",
-    ADDFUEL      = "添加燃料"
-}
+
 -----------选项卡----------
 STRINGS.TABS.NAUTICALTAB                                = "航海"
 STRINGS.TABS.OBSIDIANTAB                                = "火山"

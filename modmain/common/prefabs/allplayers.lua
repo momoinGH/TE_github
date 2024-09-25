@@ -64,6 +64,54 @@ local function GetCurrentTileTypeBefore(inst)
     end
 end
 
+----------------------------------------------------------------------------------------------------
+-- 船炮开火
+
+local function UnarmedTest(doer, pos, right)
+    local boat = doer:GetCurrentPlatform()
+    if right
+        and boat
+        and boat:HasTag("shipwrecked_boat")
+        and boat.replica.container
+        and boat.replica.container:GetItemInSlot(2)
+        and boat.replica.container:GetItemInSlot(2):HasTag("boatcannon") -- 船炮
+        and not doer.replica.inventory:IsHeavyLifting()
+    then
+        -- 船炮开炮
+        return true
+    end
+end
+
+local function Shoot(doer, pos)
+    local boat = doer:GetCurrentPlatform()
+    local item = boat
+        and boat:HasTag("shipwrecked_boat")
+        and boat.components.container
+        and boat.components.container:GetItemInSlot(2)
+    if not item then return true end --应该不可能
+
+    ----------------posiciona pra sair no canhao-----------------------
+    local angle = doer:GetRotation()
+    local dist = 1.5
+    local offset = Vector3(dist * math.cos(angle * DEGREES), 0, -dist * math.sin(angle * DEGREES))
+    local bombpos = doer:GetPosition() + offset
+    local x, y, z = bombpos:Get()
+    boat:ForceFacePoint(x,y,z)
+    -------------------------------------------------------
+
+    local bomba = SpawnPrefab(item.prefab == "woodlegs_boatcannon" and "cannonshotobsidian" or "cannonshot")
+    if boat.prefab == "woodlegsboat" and doer.prefab == "woodlegs" then
+        bomba.components.explosive.explosivedamage = 50
+    else
+        item.components.finiteuses:Use(1)
+    end
+    bomba.Transform:SetPosition(x, y + 1.5, z)
+    bomba.components.complexprojectile:Launch(target and target:GetPosition() or pos, doer)
+    doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
+
+    return true
+end
+
 AddPlayerPostInit(function(inst)
     inst.tropical_room_event = net_event(inst.GUID, "player.tropical_room_event")
     inst._isopening = net_bool(inst.GUID, "IsOpening")
@@ -90,9 +138,10 @@ AddPlayerPostInit(function(inst)
         end)
     end
 
+    inst:AddComponent("pro_componentaction")
+    inst.components.pro_componentaction:InitUNARMED(UnarmedTest, "doshortaction", "BOATCANNON", Shoot, { priority = 11, extra_arrive_dist = 25 })
+
     Utils.FnDecorator(inst, "GetCurrentTileType", GetCurrentTileTypeBefore)
 
     if not TheWorld.ismastersim then return end
-
-    inst:AddComponent("tro_noequipactivator")
 end)

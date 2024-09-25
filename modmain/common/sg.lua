@@ -92,8 +92,6 @@ AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.DESACTIVATESAIL, "dos
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.DESACTIVATESAIL, "doshortaction"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.OPENTUNA, "dolongaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.OPENTUNA, "dolongaction"))
-AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BOATCANNON, "doshortaction"))
-AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATCANNON, "doshortaction"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TRO_DISMANTLE, "dolongaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.TRO_DISMANTLE, "dolongaction"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.GIVE_SHELF, "give"))

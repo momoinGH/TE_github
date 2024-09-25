@@ -1312,12 +1312,14 @@ STRINGS.NAMES.MERM1 = "Merm"
 STRINGS.NAMES.MERM2 = "Merm"
 --------------store---------
 --------------actions-------
+STRINGS.ACTIONS.GIVE.BOATCANNON = "Shot"
+
 STRINGS.ACTIONS.HACK = "Taglia"
 STRINGS.ACTIONS.STICK = "Bastone"
 STRINGS.TABS.NAUTICALTAB = "Nautico"
 STRINGS.ACTIONS.DESACTIVATESAIL = "Turn Off"
 STRINGS.ACTIONS.LANTERNON = "Turn On"
-STRINGS.ACTIONS.BOATCANNON = "Shot"
+
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Rowley"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "È mio amico."

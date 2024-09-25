@@ -60,18 +60,13 @@ local function fn(Sim)
 
 	inst:AddTag("magnifying_glass")
 
-	inst:AddComponent("tro_consumable")
-	inst.components.tro_consumable.targetCheckFn = TargetCheck
-	inst.components.tro_consumable.state = "investigate"
-	inst.components.tro_consumable.str = "SPY"
+	inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheck, "investigate", "SPY", OnUse)
 
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
 		return inst
 	end
-
-	inst.components.tro_consumable.onUseFn = OnUse
 
 	inst.components.floater:SetBankSwapOnFloat(true, -10, { sym_build = "swap_hand_lens" })
 

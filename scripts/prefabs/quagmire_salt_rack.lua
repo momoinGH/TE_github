@@ -85,18 +85,13 @@ local function itemfn()
     inst:AddTag("salty")
     inst:AddTag("saltrack")
 
-    inst:AddComponent("tro_consumable")
-    inst.components.tro_consumable.state = ConsumableState
-    inst.components.tro_consumable.targetCheckFn = TargetCheckFn
-    inst.components.tro_consumable.str = "INSTALL"
+    inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheckFn, ConsumableState, "INSTALL", Use)
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst.components.tro_consumable.onUseFn = Use
 
     inst:AddComponent("inspectable")
 

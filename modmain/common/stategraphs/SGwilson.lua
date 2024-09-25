@@ -23,15 +23,6 @@ AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BOATMOUNT, function(i
     inst.components.locomotor:StartHopping(x, z, act.target)
 end))
 
-
--- 使用消耗品道具
-AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TROPICAL_USE_ITEM, function(inst, act)
-    return FunctionOrValue(act.invobject.components.tro_consumable.state, act.invobject, act.doer, act.target)
-end))
-
-
-
-
 ----------------------------------------------------------------------------------------------------
 
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.SHEAR, function(inst)

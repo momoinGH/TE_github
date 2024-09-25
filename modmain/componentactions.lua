@@ -1,42 +1,3 @@
-local function CheckConsumable(inst, doer, target, actions)
-    local com = inst.components.tro_consumable
-    if com
-        and inst:HasTag("tro_consumable")
-        and (not com.userCheckFn or com.userCheckFn(inst, doer, target))
-        and (not com.targetCheckFn or com.targetCheckFn(inst, doer, target))
-    then
-        table.insert(actions, ACTIONS.TROPICAL_USE_ITEM)
-    end
-end
-
-AddComponentAction("INVENTORY", "tro_consumable", function(inst, doer, actions, right)
-    CheckConsumable(inst, doer, doer, actions)
-end)
-AddComponentAction("USEITEM", "tro_consumable", function(inst, doer, target, actions, right)
-    CheckConsumable(inst, doer, target, actions)
-end)
-AddComponentAction("EQUIPPED", "tro_consumable", function(inst, doer, target, actions, right)
-    CheckConsumable(inst, doer, target, actions)
-end)
-
-----------------------------------------------------------------------------------------------------
-
-AddComponentAction("POINT", "tro_noequipactivator", function(inst, doer, pos, actions, right, target)
-    local boat = doer:GetCurrentPlatform()
-    if right
-        and boat
-        and boat:HasTag("shipwrecked_boat")
-        and boat.replica.container
-        and boat.replica.container:GetItemInSlot(2)
-        and boat.replica.container:GetItemInSlot(2):HasTag("boatcannon") -- 船炮
-        and not doer.replica.inventory:IsHeavyLifting()
-    then
-        -- 船炮开炮
-        table.insert(actions, ACTIONS.BOATCANNON)
-    end
-end)
-----------------------------------------------------------------------------------------------------
-
 local function IsHold(doer, target)
     return target.replica.inventoryitem ~= nil and target.replica.inventoryitem:IsGrandOwner(doer)
 end
@@ -172,6 +133,15 @@ AddComponentAction("SCENE", "shipwreckedboat", function(inst, doer, actions, rig
         table.insert(actions, ACTIONS.BOATMOUNT)
     end
 end)
+
+AddComponentAction("SCENE", "inspectable", function(inst, doer, actions, right)
+    if doer.components.pro_componentaction:Test("UNARMED", inst:GetPosition(), right) then
+        -- 发射船炮
+        table.insert(actions, ACTIONS.BOATCANNON)
+    end
+end)
+
+
 
 local function UseTool(inst, doer, target, actions)
     if target:HasTag("INLIMBO") then return end

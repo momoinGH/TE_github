@@ -1319,12 +1319,13 @@ STRINGS.NAMES.ESCADADOVULCAO2 = "Volcano Exit"
 STRINGS.NAMES.LAVAPONDBIG1 = "Big lava pool"
 --------------store---------
 --------------actions-------
+STRINGS.ACTIONS.GIVE.BOATCANNON = "Tűz"
+
 STRINGS.ACTIONS.HACK = "Felvágás"
 STRINGS.ACTIONS.STICK = "Bot"
 STRINGS.TABS.NAUTICALTAB = "Tengeri"
 STRINGS.ACTIONS.DESACTIVATESAIL = "Kikapcsol"
 STRINGS.ACTIONS.LANTERNON = "Bekapcsol"
-STRINGS.ACTIONS.BOATCANNON = "Tűz"
 STRINGS.ACTIONS.BOATMOUNT = "Beszállás"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Wilson labdája"

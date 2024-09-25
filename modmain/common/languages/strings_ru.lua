@@ -1369,12 +1369,13 @@ STRINGS.NAMES.MERM2 = "Мэрм" --DTR
 --------------store---------
 
 --------------actions-------
+STRINGS.ACTIONS.GIVE.BOATCANNON = "Запустить"
+
 STRINGS.ACTIONS.HACK = "Кромсать"
 STRINGS.ACTIONS.STICK = "Разместить палку"
 STRINGS.TABS.NAUTICALTAB = "Морское"
 STRINGS.ACTIONS.DESACTIVATESAIL = "Выключить"
 STRINGS.ACTIONS.LANTERNON = "Включить"
-STRINGS.ACTIONS.BOATCANNON = "Запустить"
 STRINGS.ACTIONS.BOATMOUNT = "Сесть на"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Роулинг"

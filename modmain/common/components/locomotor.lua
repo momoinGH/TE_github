@@ -102,6 +102,9 @@ local function PlayerSetMotorSpeedBefore(self, speed)
     end
 end
 
+
+
+
 -- 一般情况上岸是玩家在船体边缘并且靠近岸边，GetPlatformAtPoint不会返回船体，但是小船是玩家在小船中间，原方法往前一段距离还是在小船范围，改成如果在岸上则不属于小船范围
 local function PlayerCheckEdgeBefore(self, my_platform, map, my_x, my_z, dir_x, dir_z, radius)
     local boat = self.inst:GetCurrentPlatform()

@@ -1339,13 +1339,14 @@ STRINGS.NAMES.SHARK_GILLS = "Shark Gills"
 --------------store---------
 
 --------------actions-------
+STRINGS.ACTIONS.GIVE.BOATCANNON = "Atirar"
+
 STRINGS.ACTIONS.HACK = "Cortar"
 STRINGS.ACTIONS.STICK = "Graveto"
 STRINGS.TABS.NAUTICALTAB = "Náutico"
 STRINGS.ACTIONS.STICK = "Colocar"
 STRINGS.ACTIONS.DESACTIVATESAIL = "Desligar"
 STRINGS.ACTIONS.LANTERNON = "Ligar"
-STRINGS.ACTIONS.BOATCANNON = "Atirar"
 STRINGS.ACTIONS.BOATMOUNT = "Subir no barco"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Bola do Wilson"

@@ -1325,12 +1325,13 @@ STRINGS.NAMES.MERM2 = "Merm"
 --------------store---------
 
 --------------actions-------
+STRINGS.ACTIONS.GIVE.BOATCANNON = "Disparar"
+
 STRINGS.ACTIONS.HACK = "Tajar"
 STRINGS.ACTIONS.STICK = "Pegar"
 STRINGS.TABS.NAUTICALTAB = "Náutico"
 STRINGS.ACTIONS.DESACTIVATESAIL = "Apagar"
 STRINGS.ACTIONS.LANTERNON = "Encender"
-STRINGS.ACTIONS.BOATCANNON = "Disparar"
 STRINGS.ACTIONS.BOATMOUNT = "Montar Bote"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "rawling"

@@ -33,18 +33,13 @@ local function fn()
     inst.AnimState:SetBuild("quagmire_sapbucket")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddComponent("tro_consumable")
-    inst.components.tro_consumable.targetCheckFn = TargetCheck
-    inst.components.tro_consumable.state = ConsumableState
-    inst.components.tro_consumable.str = "TAPSUGARTREE"
+    inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheck, ConsumableState, "TAPSUGARTREE", OnUse)
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst.components.tro_consumable.onUseFn = OnUse
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "quagmire_sapbucket"

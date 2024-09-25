@@ -172,3 +172,7 @@ AddPrefabPostInit("world", function(inst)
     inst.components.tro_tempentitytracker:AddKey("kraken")      --海妖
     inst.components.tro_tempentitytracker:AddKey("octopusking") --章鱼王
 end)
+
+----------------------------------------------------------------------------------------------------
+
+
