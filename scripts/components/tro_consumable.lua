@@ -6,11 +6,7 @@ local function DefaultTargetCheckFn(inst, doer, target)
 end
 
 --- 通用消耗品组件，主客机通用组件
---- 该组件和trader组件功能有些重叠，两者的区别在于trader组件功能强大，但是不够灵活，比如trader必须在给予方添加tradable组件，不能修改动作，
---      一次只能给一个，不能在客机拦截显示，tradable的东西对所有trader的东西都能互动，即便有时候不想显示文本也不行，也不能修改显示的文本，
---      trader是站在被给予方进行判断的，该组件是站在给予方进行判断的
---- 该组件也有缺点，必须在主客机添加并分别配置，功能单一，有时候想站在被给予方进行判断会比较麻烦，比如让肉类可与一个建筑互动，就得给所有有
---      肉类标签的对象添加组件并判断（虽然trader也类似，不过判断方是建筑）
+--- 该组件和trader组件功能有些重叠
 local Consumable = Class(function(self, inst)
     self.inst = inst
 

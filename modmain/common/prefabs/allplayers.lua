@@ -26,7 +26,10 @@ end
 
 -- this is called on client
 local function OnDirtyEventCameraStuff(inst)
-    local target = GetClosestInstWithTag("interior_center", inst, 30)
+    if inst ~= ThePlayer then return end
+
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local target = TheWorld.Map:TroGetRoomCenter(x, y, z)
     if not target then
         --  默认
         -- TheCamera:SetDefault()

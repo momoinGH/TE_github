@@ -15,13 +15,13 @@ local CANT_DEPLOY_IN_CAVE_TILES = {
     [WORLD_TILES.PEBBLEBEACH] = true,
 }
 
-local VOLCANO_PLANT_TILES = table.invert{
+local VOLCANO_PLANT_TILES = table.invert {
     WORLD_TILES.MAGMAFIELD,
     WORLD_TILES.ASH,
     WORLD_TILES.VOLCANO,
 }
 
-local JUNGLE_PLANT_TILES = table.invert{
+local JUNGLE_PLANT_TILES = table.invert {
     WORLD_TILES.JUNGLE,
 }
 
@@ -34,56 +34,52 @@ Utils.FnDecorator(Map, "CanDeployRecipeAtPoint", function(self, pt, recipe, rot)
     end
 end)
 
-local home = {}     --室内的中心坐标，由于地皮一定在中心
-local DIS = 30      --只要不比房子半径小就行
-local DIS_SQ = DIS * DIS
-local lastHome = {} --缓存，短时间内在一个房间附近求值的可能性较大
+
+local DIS = InteriorSpawnerUtils.RADIUS --只要不比房子半径小就行
+local lastcenter = nil                  --缓存，短时间内在一个房间附近求值的可能性较大
 -- 室内可放置建筑，物品不会掉入“水”中
 
+local function IsInRoom(center, x, y, z)
+    local cx, cy, cz = center.Transform:GetWorldPosition()
+    local room_width, room_depth = center.room_width:value() / 2 + 1, center.room_depth:value() / 2 + 1 --留点空隙
+    return x >= cx - room_depth and x <= cx + room_depth and z >= cz - room_width and z <= cz + room_width
+end
+
 local function CheckPointBefore(self, x, y, z)
-    if z >= InteriorSpawnerUtils.BASE_OFF - 100 then --判断的基础
-        -- 缓存
-        if lastHome.home then
-            if lastHome.home:IsValid() then
-                if VecUtil_DistSq(lastHome.pos[1], lastHome.pos[2], x, z) < DIS_SQ then
-                    return { true }, true
-                end
-            else
-                lastHome.home = nil
-                lastHome.pos = nil
-            end
-        end
+    if z < InteriorSpawnerUtils.BASE_OFF - 100 then --判断的基础
+        return
+    end
 
-        -- 缓存表
-        for ent, pos in pairs(home) do
-            if ent:IsValid() then
-                -- print(x, z, pos[1], pos[2], VecUtil_DistSq(pos[1], pos[2], x, z))
-                if VecUtil_DistSq(pos[1], pos[2], x, z) < DIS_SQ then
-                    lastHome.home = ent
-                    lastHome.pos = pos
-                    return { true }, true
-                end
-            else
-                home[ent] = nil
-            end
+    -- 缓存
+    if lastcenter then
+        if lastcenter:IsValid() and IsInRoom(lastcenter, x, y, z) then
+            return { true }, true
+        else
+            lastcenter = nil
         end
+    end
 
-        -- 查找
-        local ents = TheSim:FindEntities(x, 0, z, DIS, { "interior_center" }) --查找地板
-        if #ents > 0 then
-            for _, ent in ipairs(ents) do
-                local ex, _, ez = ent.Transform:GetWorldPosition()
-                ex = ex + 2 --地板中心往下偏移2
-                home[ent] = { ex, ez }
-                lastHome.home = ent
-                lastHome.pos = { ex, ez }
-            end
+    -- 查找
+    for _, center in ipairs(TheSim:FindEntities(x, 0, z, DIS, { "interior_center" })) do
+        if IsInRoom(center, x, y, z) then
+            lastcenter = center
             return { true }, true
         end
     end
+
+    -- 就不返回false了，交给原方法执行，防止影响其他mod
 end
 
+local function GetRoomCenter(self, x, y, z)
+    for _, center in ipairs(TheSim:FindEntities(x, 0, z, DIS, { "interior_center" })) do
+        if IsInRoom(center, x, y, z) then
+            return center
+        end
+    end
+    return false
+end
 
+Map.TroGetRoomCenter = GetRoomCenter
 Utils.FnDecorator(Map, "IsAboveGroundAtPoint", CheckPointBefore)
 Utils.FnDecorator(Map, "IsPassableAtPoint", CheckPointBefore)
 Utils.FnDecorator(Map, "IsVisualGroundAtPoint", CheckPointBefore)
@@ -109,8 +105,14 @@ end
 
 Utils.FnDecorator(Map, "CanDeployPlantAtPoint", function(self, pt, inst, ...)
     if inst.prefab == "dug_elephantcactus" or inst.prefab == "dug_coffeebush" then
-        return { self:CanVolcanoPlantAtPoint(pt:Get()) and self:IsDeployPointClear(pt, inst, inst.replica.inventoryitem ~= nil and inst.replica.inventoryitem:DeploySpacingRadius() or DEPLOYSPACING_RADIUS[DEPLOYSPACING.DEFAULT]) }, true
+        return
+            { self:CanVolcanoPlantAtPoint(pt:Get()) and
+            self:IsDeployPointClear(pt, inst, inst.replica.inventoryitem ~= nil and inst.replica.inventoryitem:DeploySpacingRadius() or DEPLOYSPACING_RADIUS[DEPLOYSPACING.DEFAULT]) },
+            true
     elseif inst.prefab == "dug_bush_vine" or inst.prefab == "dug_bambootree" then
-        return { self:CanJunglePlantAtPoint(pt:Get()) and self:IsDeployPointClear(pt, inst, inst.replica.inventoryitem ~= nil and inst.replica.inventoryitem:DeploySpacingRadius() or DEPLOYSPACING_RADIUS[DEPLOYSPACING.DEFAULT]) }, true
+        return
+            { self:CanJunglePlantAtPoint(pt:Get()) and
+            self:IsDeployPointClear(pt, inst, inst.replica.inventoryitem ~= nil and inst.replica.inventoryitem:DeploySpacingRadius() or DEPLOYSPACING_RADIUS[DEPLOYSPACING.DEFAULT]) },
+            true
     end
 end)

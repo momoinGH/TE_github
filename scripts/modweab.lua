@@ -525,7 +525,7 @@ AddClassPostConstruct("components/inventoryitem_replica", function(self)
     end;
 
     function self:CanAltAttack()
-        if self.classified.isaltattacking:value() then
+        if self.classified and self.classified.isaltattacking:value() then
             return self.inst.components.weapon and self.components.weapon:CanAltAttack() or
                 self.can_altattack_fn(self.inst)
         end

@@ -4,6 +4,10 @@ local assets =
 	Asset("MINIMAP_IMAGE", "messageBottle"),
 }
 
+local function GiveEmpty(inst)
+
+end
+
 local function getrevealtargetpos(inst, doer)
 	local map = TheWorld.Map
 	local x, y, z
@@ -14,13 +18,13 @@ local function getrevealtargetpos(inst, doer)
 			if not v.revelado then
 				v.revelado = true
 				x, y, z = v.Transform:GetWorldPosition()
+-- TODO
 				local empty_bottle = SpawnPrefab("messagebottleempty")
 				empty_bottle.Transform:SetPosition(inst.Transform:GetWorldPosition())
 				inst:Remove()
 				if inventory ~= nil then
 					inventory:GiveItem(empty_bottle)
 				end
-
 				return Vector3(math.floor(x), 0, math.floor(z))
 			end
 		end

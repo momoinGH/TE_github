@@ -342,6 +342,18 @@ AddStategraphState("wilson_client", State {
 
 ----------------------------------------------------------------------------------------------------
 
+local function IsChannelCasting(inst)
+    --essentially prediction, since the actions aren't busy w/ lag states
+    local buffaction = inst.sg.mem.preview_channelcast_action
+    if buffaction then
+        return buffaction.action == ACTIONS.START_CHANNELCAST
+        --Don't use "or inst:IsChannelCasting()"
+        --We want to be able to return false here when predicting!
+    end
+    --otherwise return server state
+    return inst:IsChannelCasting()
+end
+
 local function IsChannelCastingItem(inst)
     --essentially prediction, since the actions aren't busy w/ lag states
     local buffaction = inst.sg.mem.preview_channelcast_action

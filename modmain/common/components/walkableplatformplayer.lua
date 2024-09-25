@@ -29,7 +29,12 @@ local function GetOnPlatformBefore(self, platform)
         self.inst:DoTaskInTime(0.5, SetPlayerCenter, platform)
         -- platform.Follower:FollowSymbol(self.inst.GUID, "foot") --船动人就会动，会导致一直移动
     else
-        -- TODO 如果开启了延迟补偿，强制关闭。因为延迟补偿会让船的运动变得很奇怪，或者客机发送rpc让船移动？
+        -- TODO 如果开启了延迟补偿，强制关闭。因为延迟补偿会让船的运动变得很奇怪，船会慢玩家一拍
+        -- 或者换个写法，只是将船作为一个特效挂在玩家身上
+        -- if inst.components.playercontroller ~= nil then
+        --     inst.components.playercontroller:RemotePausePrediction()
+        -- end
+
         if Profile:GetMovementPredictionEnabled() then
             Profile:SetMovementPredictionEnabled(false)
             self.inst:EnableMovementPrediction(false)

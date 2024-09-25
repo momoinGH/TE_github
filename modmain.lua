@@ -124,7 +124,7 @@ GLOBAL.WIKI_DATA = nil
 
 
 ----------------------------------------------------------------------------------------------------
-modimport "modmain/extend_tags"      --标签扩展，pro_开头的标签可以随便给玩家加
+modimport "modmain/pro_extend_tags"  --标签扩展，pro_开头的标签可以随便给玩家加
 modimport "modmain/componentactions" --AddComponentAction比较特殊，如果mod的分开写就会前后覆盖
 modimport "scripts/prefabs/tropical_farm_plant_defs"
 

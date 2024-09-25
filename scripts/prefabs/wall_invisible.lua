@@ -45,6 +45,7 @@ local function onload(inst, data)
     end
 end
 
+
 local function fn()
     local inst = CreateEntity()
 
@@ -55,6 +56,7 @@ local function fn()
 
     MakeObstaclePhysics(inst, .5)
     inst.Physics:SetDontRemoveOnSleep(true)
+    inst.Physics:SetCollisionGroup(COLLISION.WORLD) --阻挡所有单位，包括飞行单位
 
     inst:AddTag("wall")
     inst:AddTag("NOCLICK")
@@ -81,6 +83,5 @@ local function fn()
     return inst
 end
 
--- TODO 挡不住蝙蝠怎么办？
 -- 无敌的不可见墙体
 return Prefab("wall_invisible", fn)
