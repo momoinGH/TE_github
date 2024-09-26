@@ -17,6 +17,10 @@ local IRON_WIND_PERISH_TIME = total_day_time * 4
 
 local function OnEquipped(inst, data)
     data.owner.AnimState:OverrideSymbol(inst.symboltooverride, inst.build, inst.symbol)
+    local boatfx = data.owner.components.shipwreckedboat.boatfx
+    if boatfx then
+        boatfx.AnimState:OverrideSymbol(inst.symboltooverride, inst.build, inst.symbol)
+    end
     if inst.components.fueled then
         inst.components.fueled:StartConsuming()
     end
@@ -24,6 +28,10 @@ end
 
 local function OnUnEquipped(inst, data)
     data.owner.AnimState:ClearOverrideSymbol(inst.symboltooverride)
+    local boatfx = data.owner.components.shipwreckedboat.boatfx
+    if boatfx then
+        boatfx.AnimState:ClearOverrideSymbol(inst.symboltooverride)
+    end
     if inst.components.fueled then
         inst.components.fueled:StopConsuming()
     end

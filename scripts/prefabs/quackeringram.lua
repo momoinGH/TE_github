@@ -128,11 +128,19 @@ local function updateWindFX(inst)
 end
 
 local function OnBoatEquipped(inst, data)
-	data.owner.AnimState:OverrideSymbol("swap_lantern", "swap_quackeringram", "swap_quackeringram")
+    data.owner.AnimState:OverrideSymbol("swap_lantern", "swap_quackeringram", "swap_quackeringram")
+	local boatfx = data.owner.components.shipwreckedboat.boatfx
+	if boatfx then
+		boatfx.AnimState:OverrideSymbol("swap_lantern", "swap_quackeringram", "swap_quackeringram")
+	end
 end
 
 local function OnBoatUnquipped(inst, data)
-	data.owner.AnimState:ClearOverrideSymbol("swap_lantern")
+    data.owner.AnimState:ClearOverrideSymbol("swap_lantern")
+	local boatfx = data.owner.components.shipwreckedboat.boatfx
+	if boatfx then
+		boatfx.AnimState:ClearOverrideSymbol("swap_lantern")
+	end
 end
 
 local function OnRammerActive(inst)

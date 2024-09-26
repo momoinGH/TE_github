@@ -155,8 +155,7 @@ local function updateTrawling(inst)
         return
     end
 
-    local boat = inst.components.shipwreckedboatparts:GetBoat()
-    local driver = boat.components.shipwreckedboat:GetDriver()
+    local driver = inst.components.shipwreckedboatparts:GetDriver()
 
     if not driver then --拖网没有玩家，出问题啦！
         stoptrawling(inst)
@@ -211,27 +210,37 @@ local function droploot(inst, boat)
         chest.components.container:GiveItem(v)
     end
 
-    local driver = boat and boat.components.shipwreckedboat:GetDriver()
-    if driver then
-        local angle = driver.Transform:GetRotation()
-        local dist = -3
-        local offset = Vector3(dist * math.cos(angle * DEGREES), 0, -dist * math.sin(angle * DEGREES))
-        local chestpos = pt + offset
-        chest.Transform:SetPosition(chestpos:Get())
-        chest:FacePoint(pt:Get())
-    end
+    -- TODO
+    -- local driver = boat and boat.components.shipwreckedboat:GetDriver()
+    -- if driver then
+    --     local angle = driver.Transform:GetRotation()
+    --     local dist = -3
+    --     local offset = Vector3(dist * math.cos(angle * DEGREES), 0, -dist * math.sin(angle * DEGREES))
+    --     local chestpos = pt + offset
+    --     chest.Transform:SetPosition(chestpos:Get())
+    --     chest:FacePoint(pt:Get())
+    -- end
 end
 
 local function OnEquipped(inst, data)
     local owner = data.owner
     owner.AnimState:OverrideSymbol("swap_trawlnet", gettrawlbuild(inst), "swap_trawlnet")
-    updatespeedmult(inst)
+    local boatfx = data.owner.components.shipwreckedboat.boatfx
+    if boatfx then
+        boatfx.AnimState:OverrideSymbol("swap_trawlnet", gettrawlbuild(inst), "swap_trawlnet")
+    end
+
     starttrawling(inst)
+    updatespeedmult(inst)
 end
 
 local function OnUnEquipped(inst, data)
     local boat = data.owner
     boat.AnimState:ClearOverrideSymbol("swap_trawlnet")
+    local boatfx = data.owner.components.shipwreckedboat.boatfx
+    if boatfx then
+        boatfx.AnimState:ClearOverrideSymbol("swap_trawlnet")
+    end
 
     stoptrawling(inst)
     droploot(inst, boat)

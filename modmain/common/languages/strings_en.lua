@@ -8781,8 +8781,7 @@ STRINGS.CHARACTERS.WOODIE.DESCRIBE.JELLYFISH_COOKED = "It actually looks edible.
 
 
 ----------------------------- ACTIONS -----------------------------
-STRINGS.ACTIONS.GIVE.BOATCANNON   = "Shoot"
-STRINGS.ACTIONS.GIVE.USE   = "Use"
+STRINGS.ACTIONS.GIVE.USE          = "Use"
 STRINGS.ACTIONS.GIVE.DISLODGE     = "Dislodge"
 STRINGS.ACTIONS.GIVE.INSTALL      = "Install"
 STRINGS.ACTIONS.GIVE.SPY          = "Investigate"
@@ -8843,9 +8842,9 @@ STRINGS.ACTIONS.COMPACTPOOP       = "Compact Poop"
 STRINGS.ACTIONS.MEAL              = "Meal"
 STRINGS.ACTIONS.INSTALL           = "Install"
 STRINGS.ACTIONS.SNACKRIFICE       = "Snackrifice"
-
+STRINGS.ACTIONS.BOATCANNON        = "Shoot"
 STRINGS.ACTIONS.BOATMOUNT         = "Boat Mount"
-
+STRINGS.ACTIONS.BOATDISMOUNT      = "Boat Dismount"
 
 
 STRINGS.CHARACTERS.GENERIC.ACTIONFAIL.GIVE.UN_CONSTRUCTION_PERMIT = "需要先使用房屋扩建许可证解锁该房间。"

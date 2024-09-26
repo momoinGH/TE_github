@@ -1,21 +1,19 @@
 local BOATCANNON_AMMO_COUNT = 15
 
-local function onthrowfn(inst)
-    if inst.components.finiteuses then
-        inst.components.finiteuses:Use()
-    end
-end
-
-local function canshootfn(inst, pt)
-    return true
-end
-
 local function OnBoatQeuipped(inst, data)
     data.owner.AnimState:OverrideSymbol("swap_lantern", inst.symbol_build, inst.symbol)
+    local boatfx = data.owner.components.shipwreckedboat.boatfx
+    if boatfx then
+        boatfx.AnimState:OverrideSymbol("swap_lantern", inst.symbol_build, inst.symbol)
+    end
 end
 
 local function OnBoatUnQeuipped(inst, data)
     data.owner.AnimState:ClearOverrideSymbol("swap_lantern")
+    local boatfx = data.owner.components.shipwreckedboat.boatfx
+    if boatfx then
+        boatfx.AnimState:ClearOverrideSymbol("swap_lantern")
+    end
 end
 
 local function OnFinished(inst)

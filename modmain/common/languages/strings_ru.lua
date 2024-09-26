@@ -1369,7 +1369,7 @@ STRINGS.NAMES.MERM2 = "Мэрм" --DTR
 --------------store---------
 
 --------------actions-------
-STRINGS.ACTIONS.GIVE.BOATCANNON = "Запустить"
+STRINGS.ACTIONS.BOATCANNON = "Запустить"
 
 STRINGS.ACTIONS.HACK = "Кромсать"
 STRINGS.ACTIONS.STICK = "Разместить палку"

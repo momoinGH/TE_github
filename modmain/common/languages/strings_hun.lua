@@ -1319,7 +1319,7 @@ STRINGS.NAMES.ESCADADOVULCAO2 = "Volcano Exit"
 STRINGS.NAMES.LAVAPONDBIG1 = "Big lava pool"
 --------------store---------
 --------------actions-------
-STRINGS.ACTIONS.GIVE.BOATCANNON = "Tűz"
+STRINGS.ACTIONS.BOATCANNON = "Tűz"
 
 STRINGS.ACTIONS.HACK = "Felvágás"
 STRINGS.ACTIONS.STICK = "Bot"

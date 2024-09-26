@@ -125,23 +125,11 @@ AddComponentAction("SCENE", "pro_portablestructure", function(inst, doer, action
 end)
 
 AddComponentAction("SCENE", "shipwreckedboat", function(inst, doer, actions, right)
-    if inst:HasTag("shipwrecked_boat")
-        and not inst:HasTag("fire")
-        and inst.GetBoatPlayer and not inst:GetBoatPlayer()
-    then
+    if inst:HasTag("shipwrecked_boat") and not inst:HasTag("fire") then
         -- 海难小船登船
         table.insert(actions, ACTIONS.BOATMOUNT)
     end
 end)
-
-AddComponentAction("SCENE", "inspectable", function(inst, doer, actions, right)
-    if doer.components.pro_componentaction:Test("UNARMED", inst:GetPosition(), right) then
-        -- 发射船炮
-        table.insert(actions, ACTIONS.BOATCANNON)
-    end
-end)
-
-
 
 local function UseTool(inst, doer, target, actions)
     if target:HasTag("INLIMBO") then return end

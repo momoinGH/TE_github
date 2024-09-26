@@ -1,5 +1,8 @@
 local Utils = require("tropical_utils/utils")
 
+EQUIPSLOTS.SWBOAT = "swboat" --海难小船的装备槽
+
+
 --渡渡鸟数量控制
 _G.SEABEACH_AMOUNT = {
     doydoy = 0,
@@ -7,11 +10,11 @@ _G.SEABEACH_AMOUNT = {
 
 -- TODO 定义新的FUELTYPE最好给图鉴一个图片，用于图鉴wiki
 -- FUELTYPE_SUBICON_LOOKUP
-FUELTYPE.TAR = "TAR" -- tar.tex
+FUELTYPE.TAR = "TAR"                         -- tar.tex
 FUELTYPE.REPARODEBARCO = "REPARODEBARCO"
-FUELTYPE.LIVINGARTIFACT = "LIVINGARTIFACT" -- living_artifact.tex
+FUELTYPE.LIVINGARTIFACT = "LIVINGARTIFACT"   -- living_artifact.tex
 FUELTYPE.ANCIENT_REMNANT = "ANCIENT_REMNANT" -- ancient_remnant.tex
-FUELTYPE.CORK = "CORK" -- cork.tex
+FUELTYPE.CORK = "CORK"                       -- cork.tex
 
 MATERIALS.SANDBAG = "sandbag"
 MATERIALS.LIMESTONE = "limestone"
@@ -30,7 +33,7 @@ GLOBAL.ANTCHEST_PRESERVATION = {
 
 GLOBAL.SWP_WAVEBREAK_EFFICIENCY = { -- 破浪效率：var * 100%
     BUMPER = {
-        kelp = .6, -- prefab = "boat_bumper_" .. k
+        kelp = .6,                  -- prefab = "boat_bumper_" .. k
         shell = .8,
         yotd = .8,
         crabking = 1,
@@ -44,8 +47,7 @@ GLOBAL.SWP_WAVEBREAK_EFFICIENCY = { -- 破浪效率：var * 100%
 }
 
 Utils.FnDecorator(GLOBAL, "PlayFootstep", function(inst)
-    local boat = inst:GetCurrentPlatform()
-    return nil, boat and boat:HasTag("shipwrecked_boat") --海难小船时不播放走路音效
+    return nil, inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT) --海难小船时不播放走路音效
 end)
 
 --- 掉落一个物品，ReplacePrefab的强化

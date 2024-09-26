@@ -1325,7 +1325,7 @@ STRINGS.NAMES.MERM2 = "Merm"
 --------------store---------
 
 --------------actions-------
-STRINGS.ACTIONS.GIVE.BOATCANNON = "Disparar"
+STRINGS.ACTIONS.BOATCANNON = "Disparar"
 
 STRINGS.ACTIONS.HACK = "Tajar"
 STRINGS.ACTIONS.STICK = "Pegar"

@@ -5,11 +5,22 @@ local TIMEOUT = 2
 
 
 ----------------------------------------------------------------------------------------------------
-
--- 登船
+AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATCANNON, "doshortaction"))
+AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATDISMOUNT, function(inst, act)
+    local x, y, z = act:GetActionPoint():Get()
+    act.doer.components.locomotor:StartHopping(x, z)
+end))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATMOUNT, function(inst, act)
     local x, y, z = act.target.Transform:GetWorldPosition()
-    inst.components.locomotor:StartHopping(x, z, act.target)
+    inst.components.embarker:SetDisembarkPos(x, z)
+
+    if (inst.components.health == nil or not inst.components.health:IsDead()) and (inst.sg:HasStateTag("moving") or inst.sg:HasStateTag("idle")) then
+        if not inst.sg:HasStateTag("jumping") then
+            return "hop_pre"
+        end
+    elseif inst.components.embarker then
+        inst.components.embarker:Cancel()
+    end
 end))
 
 ----------------------------------------------------------------------------------------------------
@@ -333,7 +344,6 @@ AddStategraphState("wilson_client", State {
     end,
 })
 
-----------------------------------------------------------------------------------------------------
 
 
 ----------------------------------------------------------------------------------------------------
@@ -409,8 +419,8 @@ end
 -- 划船
 AddStategraphPostInit("wilson_client", function(sg)
     Utils.FnDecorator(sg.states["run_start"], "onenter", nil, function(retTab, inst)
-        local boat = inst:GetCurrentPlatform()
-        if boat and boat:HasTag("shipwrecked_boat") then
+        local boat = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+        if boat then
             local item = boat.replica.container and boat.replica.container:GetItemInSlot(1)
             local anim = inst.replica.inventory:IsHeavyLifting() and "heavy_idle"
                 or boat:HasTag("surf") and "surf_pre"
@@ -421,8 +431,8 @@ AddStategraphPostInit("wilson_client", function(sg)
     end)
 
     Utils.FnDecorator(sg.states["run"], "onenter", function(inst)
-        local boat = inst:GetCurrentPlatform()
-        if not boat or not boat:HasTag("shipwrecked_boat") then
+        local boat = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+        if not boat then
             return
         end
 
@@ -453,14 +463,23 @@ AddStategraphPostInit("wilson_client", function(sg)
     end)
 
     Utils.FnDecorator(sg.states["run_stop"], "onenter", nil, function(retTab, inst)
-        local boat = inst:GetCurrentPlatform()
-        if boat and boat:HasTag("shipwrecked_boat") then
+        local boat = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+        if boat then
             local item = boat.replica.container and boat.replica.container:GetItemInSlot(1)
             local anim = inst.replica.inventory:IsHeavyLifting() and "heavy_idle"
                 or boat:HasTag("surf") and "surf_pst"
                 or item and item:HasTag("sail") and "sail_pst"
                 or "row_pst"
             inst.AnimState:PlayAnimation(anim)
+        end
+    end)
+
+    ----------------------------------------------------------------------------------------------------
+    --跳船
+    Utils.FnDecorator(sg.states["hop_pre"], "onenter", nil, function(retTab, inst)
+        local act = inst:GetBufferedAction()
+        if act and act.action == ACTIONS.BOATMOUNT then
+            inst:PerformPreviewBufferedAction() --直接执行
         end
     end)
 end)

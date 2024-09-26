@@ -69,7 +69,6 @@ STRINGS.NAMES.DROWNING                                  = "溺水"
 STRINGS.NAMES.POISON                                    = "中毒"
 
 --------------操作选项-------
-STRINGS.ACTIONS.GIVE.BOATCANNON                         = "发射"
 STRINGS.ACTIONS.GIVE.USE                                = "使用"
 STRINGS.ACTIONS.GIVE.DISLODGE                           = "取出"
 STRINGS.ACTIONS.GIVE.INSTALL                            = "安装"
@@ -87,6 +86,8 @@ STRINGS.ACTIONS.STICK                                   = "捣入"
 STRINGS.ACTIONS.DESACTIVATESAIL                         = "关灯"
 STRINGS.ACTIONS.LANTERNON                               = "开灯"
 STRINGS.ACTIONS.PEER                                    = "观察"
+STRINGS.ACTIONS.BOATCANNON                              = "发射"
+STRINGS.ACTIONS.BOATDISMOUNT                            = "上岸"
 --ham
 STRINGS.ACTIONS.SMELT                                   = "熔炼"
 STRINGS.ACTIONS.SHEAR                                   = "剪"

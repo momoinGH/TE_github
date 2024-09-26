@@ -1339,7 +1339,7 @@ STRINGS.NAMES.SHARK_GILLS = "Shark Gills"
 --------------store---------
 
 --------------actions-------
-STRINGS.ACTIONS.GIVE.BOATCANNON = "Atirar"
+STRINGS.ACTIONS.BOATCANNON = "Atirar"
 
 STRINGS.ACTIONS.HACK = "Cortar"
 STRINGS.ACTIONS.STICK = "Graveto"

@@ -129,12 +129,20 @@ end
 local function OnBoatEquipped(inst, data)
     turnon(inst)
     data.owner.AnimState:OverrideSymbol("swap_lantern", inst.symbol_build, FunctionOrValue(inst.symbol, inst))
+    local boatfx = data.owner.components.shipwreckedboat.boatfx
+    if boatfx then
+        boatfx.AnimState:OverrideSymbol("swap_lantern", inst.symbol_build, FunctionOrValue(inst.symbol, inst))
+    end
 end
 
 local function OnBoatUnEquipped(inst, data)
     turnoff(inst)
 
     data.owner.AnimState:ClearOverrideSymbol("swap_lantern")
+    local boatfx = data.owner.components.shipwreckedboat.boatfx
+    if boatfx then
+        boatfx.AnimState:ClearOverrideSymbol("swap_lantern")
+    end
 end
 
 ---fn
