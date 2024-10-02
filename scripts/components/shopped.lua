@@ -105,7 +105,11 @@ function Shopped:Restock(force)
             newproduct = self.saleitem
         else
             local tab = PigShopDefs.SHOPTYPES[self.shoptype or "DEFAULT"]
-            newproduct = tab[math.random(#tab)] --如果shoptype存在但是没有在pig_shop_defs中定义会报错
+            if not tab or #tab <= 0 then return end
+            -- assert(tab, "shoptype应该在PigShopDefs.SHOPTYPES表中定义  " .. tostring(self.inst) .. "  " .. tostring(self.shoptype))
+            --如果shoptype存在但是没有在pig_shop_defs中定义会报错
+
+            newproduct = tab[math.random(#tab)]
         end
         self:SpawnInventory(newproduct[1], newproduct[2], newproduct[3])
     end

@@ -27,7 +27,7 @@ local function SpawnLight(inst)
 end
 
 local function MasterInit(inst)
-    inst:ListenForEvent("onbuilt", OnBuilt)
+    -- inst:ListenForEvent("onbuilt", OnBuilt)
 
     inst:DoTaskInTime(0, SpawnLight)
 end
@@ -72,6 +72,6 @@ return
     MakeWindow("window_square_weapons_backwall", "window_weapons_build", "interior_window_large", "day_loop"),
     -- 日光
     DecoCreator:Create("window_round_light", "interior_window", "interior_window_light_side", "day_loop",
-        { loopanim = true, decal = true, light = true, dayevents = true, followlight = "natural", windowlight = true, dustzmod = 1.3, tags = { "NOBLOCK", "NOCLICK" } }),
+        { loopanim = true, decal = true, light = true, dayevents = true, followlight = "natural", windowlight = true, dustzmod = 1.3, tags = { "NOBLOCK", "NOCLICK" }, persists = false }),
     DecoCreator:Create("window_round_light_backwall", "interior_window", "interior_window_light", "day_loop",
-        { loopanim = true, decal = true, light = true, dayevents = true, followlight = "natural", windowlight = true, dustxmod = 1.3, tags = { "NOBLOCK", "NOCLICK" } })
+        { loopanim = true, decal = true, light = true, dayevents = true, followlight = "natural", windowlight = true, dustxmod = 1.3, tags = { "NOBLOCK", "NOCLICK" }, persists = false })

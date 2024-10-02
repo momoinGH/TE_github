@@ -1,126 +1,150 @@
--- TODO 虚空小地图，还没写，示例代码先放这里
-
-GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
-
-
--- 获取所有预制件对象的小地图图标，变量为_map_icon
--- _map_icon只赋值一次，避免二次调用SetIcon影响其他inst，因此只能获取第一次设置的图片名
--- 只对主客机公共区域添加小地图图标、AddMiniMapEntity和SetIcon之间没有创建其他预制件对象的预制件有效，也不支持中途修改图标
--- 所有对象entity和MiniMapEntity的元表都是共用的，因此获取一次就行了，第一次获取的才是初始的函数，也避免了层层包装的导致inst值不正确
-local OldAddMiniMapEntity, OldSetIcon
-Utils.FnDecorator(GLOBAL, "CreateEntity", nil, function(retTab, name)
-    local inst = retTab[1]
-
-    if not OldAddMiniMapEntity then
-        OldAddMiniMapEntity = getmetatable(inst.entity).__index["AddMiniMapEntity"]
-    end
-
-    getmetatable(inst.entity).__index["AddMiniMapEntity"] = function(self, ...)
-        local MiniMapEntity = OldAddMiniMapEntity(self, ...)
-        if not OldSetIcon then
-            OldSetIcon = getmetatable(MiniMapEntity).__index["SetIcon"]
-        end
-        getmetatable(MiniMapEntity).__index["SetIcon"] = function(self, icon, ...)
-            if inst.MiniMapEntity and inst.MiniMapEntity == self then --以防在AddMiniMapEntity和SetIcon之间又创建其他有小地图图标的预制件对象
-                inst._map_icon = inst._map_icon or icon               --只赋值一次
-            end
-            return OldSetIcon(self, icon, ...)
-        end
-
-        return val
-    end
-
-    return retTab
-end)
-
-----------------------------------------------------------------------------------------------------
-
-PrefabFiles = {
-}
-
-Assets = {
-    Asset("ATLAS", "levels/textures/tro_map_interior/exit.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/frame.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/mini_antcave_floor.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/mini_floor_marble_royal.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/mini_ruins_slab.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/mini_vamp_cave_noise.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/passage_blocked.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/passage_unknown.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/passage.xml"),
-}
-
-modimport "modmain/minimap"
-
+local Utils = require("tropical_utils/utils")
 local Image = require "widgets/image"
+local MINIMAP_DEFS = require("tro_minimapdefs")
+local InteriorSpawnerUtils = require("interiorspawnerutils")
+local Widget = require "widgets/widget"
 
-local function AppendRoomTexture(self)
-    for i = -1, 1 do
-        for j = -1, 1 do
-            local floor = self:AddChild(Image("levels/textures/tro_map_interior/mini_ruins_slab.xml",
-                "mini_ruins_slab.tex"))
-            floor:SetHAnchor(ANCHOR_MIDDLE)
-            floor:SetVAnchor(ANCHOR_MIDDLE)
-            floor:SetPosition(i * 64, j * 64)
-            floor:SetScale(1.02, 1.02, 1) --不放大一点儿中间有缝
-            table.insert(self.houseimags, floor)
-        end
+-- 拟定的房子大小
+local WORLD_TO_MAP_SCALE = 10
+
+local function AddImage(self, atlas, tex, x, y, scale_x, scale_y)
+    local img = self:AddChild(Image(atlas, tex))
+    img:SetHAnchor(ANCHOR_MIDDLE)
+    img:SetVAnchor(ANCHOR_MIDDLE)
+    img:SetPosition(x * WORLD_TO_MAP_SCALE, y * WORLD_TO_MAP_SCALE)
+    img._tro_pos = Vector3(x * WORLD_TO_MAP_SCALE, y * WORLD_TO_MAP_SCALE, 0)
+    if scale_x or scale_y then
+        img:SetScale(scale_x or 1, scale_y, 1)
     end
-    local frame = self:AddChild(Image("levels/textures/tro_map_interior/frame.xml", "frame.tex"))
-    frame:SetHAnchor(ANCHOR_MIDDLE)
-    frame:SetVAnchor(ANCHOR_MIDDLE)
-    -- frame.inst.ImageWidget:SetBlendMode(BLENDMODE.Additive)
-    table.insert(self.houseimags, frame)
+    table.insert(self._tro_houseimags, img)
+    return img
 end
 
-AddClassPostConstruct("widgets/mapwidget", function(self)
-    self.houseimags = {}
+local function AppendRoomTexture(self, room)
+    local width = room.room_width:value() --z
+    local depth = room.room_depth:value() --x
+    local ratio = width / depth           --长宽比，小房子会更长点
 
-    function self:UpdateTexture()
-        print("更新一次")
+    local x, _, z = ThePlayer.Transform:GetWorldPosition()
+    local rx, _, rz = room.Transform:GetWorldPosition()
 
-        for _, v in ipairs(self.houseimags) do
-            v:Kill()
+    --地板
+    for j = -1, 1 do
+        for i = -1, 1 do
+            AddImage(self, "levels/textures/tro_map_interior/mini_ruins_slab.xml", "mini_ruins_slab.tex",
+                rz - z + j * 6.4 * ratio, rx - x + i * 6.4,
+                1.02 * ratio, 1.02)
         end
-
-        AppendRoomTexture(self)
     end
+
+    --房间边框
+    AddImage(self, "levels/textures/tro_map_interior/frame.xml", "frame.tex", rz - z, rx - x, ratio, 1)
+    -- frame.inst.ImageWidget:SetBlendMode(BLENDMODE.Additive)
+
+    --把房间里所有有小地图图标的画出来
+    for _, v in ipairs(TheSim:FindEntities(rx, 0, rz, math.sqrt(depth * depth + width * width) / 2)) do
+        local icon = MINIMAP_DEFS[v.prefab]
+        if icon then
+            local vx, _, vz = v.Transform:GetWorldPosition()
+            if math.abs(vx - rx) <= depth / 2 and math.abs(vz - rz) <= width / 2 then              --在房间里
+                AddImage(self, icon.atlas, icon.tex, (vz - rz) * ratio + rz - z, rx - vx + rx - x) --相对房子偏移
+            end
+        end
+    end
+
+    --检查该房间的门，构建其他房间图片
+    for _, v in ipairs(TheSim:FindEntities(rx, 0, rz, math.sqrt(depth * depth + width * width) / 2, { "interior_door" })) do
+        local targetdoor = v.targetdoor and v.targetdoor:value()
+        local nearroom = targetdoor and targetdoor.interior_center and targetdoor.interior_center:value()
+        print("构建相邻房间", v, targetdoor, nearroom)
+        if nearroom and nearroom ~= room then  --应该不可能
+            AppendRoomTexture(self, nearroom)
+        end
+    end
+end
+
+local function UpdateTextureBefore(self)
+    if not ThePlayer then return end
+    local x, y, z = ThePlayer.Transform:GetWorldPosition()
+    if z < InteriorSpawnerUtils.BASE_OFF then return end --TODO
+
+    self._tro_pos = self._tro_pos or Vector3(x, y, z)
+
+    -- 清除之前的图片
+    for _, v in ipairs(self._tro_houseimags) do
+        v:Kill()
+    end
+    self._tro_houseimags = {}
+
+    -- 从玩家所在房间开始计算
+    local room = TheWorld.Map:TroGetRoomCenter(x, y, z)
+    if room then
+        AppendRoomTexture(self, room)
+    end
+
+    return nil, true
+end
+
+
+----------------------------------------------------------------------------------------------------
+-- 拖拽
+
+local function OnControlBefore(self, control, down)
+    if control == CONTROL_ACCEPT then
+        if down then
+            self:StartDrag()
+        else
+            self:EndDrag()
+        end
+    end
+end
+
+TUNING.TT = 6
+local function SetDragPosition(self, x, y, z)
+    local pos
+    if type(x) == "number" then
+        pos = Vector3(x, y, 0)
+    else
+        pos = x
+    end
+    pos = pos + self.dragPosDiff
+    for _, v in ipairs(self._tro_houseimags) do
+        v:SetPosition(v._tro_pos + pos)
+    end
+end
+
+local function StartDrag(self)
+    if not self.followhandler then
+        local mousepos = TheInput:GetScreenPosition()
+        self.dragPosDiff = (self:GetPosition() - mousepos)
+        self.followhandler = TheInput:AddMoveHandler(function(x, y)
+            self:SetDragPosition(x, y)
+        end)
+        self:SetDragPosition(mousepos)
+    end
+end
+
+local function EndDrag(self)
+    if self.followhandler then
+        self.followhandler:Remove()
+    end
+    self.followhandler = nil
+    self.dragPosDiff = nil
+
+    for _, v in ipairs(self._tro_houseimags) do
+        v._tro_pos = v:GetPosition()
+    end
+end
+
+
+AddClassPostConstruct("widgets/mapwidget", function(self)
+    self._tro_houseimags = {}
+    self._tro_offset = { 0, 0 }
+
+    Utils.FnDecorator(self, "UpdateTexture", UpdateTextureBefore)
+
+    Utils.FnDecorator(self, "OnControl", OnControlBefore)
+    self.SetDragPosition = SetDragPosition
+    self.StartDrag = StartDrag
+    self.EndDrag = EndDrag
 end)
-
--- local function SetIcon(self, icon)
-
--- end
-
--- local MyMiniMapEntity = require("MyMiniMapEntity")
-
-
--- inst.MiniMap:AddAtlas(resolvefilepath("minimap/minimap_data1.xml"))
--- inst.MiniMap:AddAtlas(resolvefilepath("minimap/minimap_data2.xml"))
--- for _, atlases in ipairs(ModManager:GetPostInitData("MinimapAtlases")) do
---     for _, path in ipairs(atlases) do
---         inst.MiniMap:AddAtlas(resolvefilepath(path))
---     end
--- end
-
-
--- minimap/minimap_data2.xml
--- grass.png
-
-
-
-
-
-
--- TheFrontEnd:PopScreen();
--- local mapwidget = TheFrontEnd:GetActiveScreen().minimap;
--- local Image = require "widgets/image";
--- mapwidget.grass = mapwidget:AddChild(Image("levels/textures/tropical_map_interior/mini_ruins_slab.xml",
---     "mini_ruins_slab.tex"));
--- mapwidget.grass:SetHAnchor(ANCHOR_MIDDLE);
--- mapwidget.grass:SetVAnchor(ANCHOR_MIDDLE);
--- mapwidget.grass.inst.ImageWidget:SetBlendMode(BLENDMODE.Additive);
-
--- - 拿到所有预制件的小地图图片
--- - 准备所有小房子地板的低分辨率图片
--- - 摆放图片
--- - 处理缩放、拖动、每个房子相对位置的逻辑

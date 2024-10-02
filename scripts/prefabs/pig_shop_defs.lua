@@ -175,6 +175,7 @@ local SHOPTYPES = {
 
     pig_shop_academy = {},
     pig_shop_cityhall = {},
+    pig_shop_fishing = {}
 }
 
 -- 柜子里的商品

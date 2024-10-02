@@ -171,6 +171,17 @@ Assets =
 	Asset("ATLAS", "images/store_soldout.xml"),
 	Asset("ATLAS", "images/buttongorge.xml"),
 	Asset("IMAGE", "images/buttongorge.tex"),
+
+	-- 虚空小地图使用
+	Asset("ATLAS", "levels/textures/tro_map_interior/exit.xml"),
+	Asset("ATLAS", "levels/textures/tro_map_interior/frame.xml"),
+	Asset("ATLAS", "levels/textures/tro_map_interior/mini_antcave_floor.xml"),
+	Asset("ATLAS", "levels/textures/tro_map_interior/mini_floor_marble_royal.xml"),
+	Asset("ATLAS", "levels/textures/tro_map_interior/mini_ruins_slab.xml"),
+	Asset("ATLAS", "levels/textures/tro_map_interior/mini_vamp_cave_noise.xml"),
+	Asset("ATLAS", "levels/textures/tro_map_interior/passage_blocked.xml"),
+	Asset("ATLAS", "levels/textures/tro_map_interior/passage_unknown.xml"),
+	Asset("ATLAS", "levels/textures/tro_map_interior/passage.xml"),
 }
 
 if TUNING.tropical.quagmire and TUNING.tropical.kindofworld == 15 or GetModConfigData("enableallprefabs") == true then
@@ -305,7 +316,7 @@ local dictInventoryItems = {
 		"goldenbar", "goldfish", "gooseberry", "gooseberry_cooked", "hedge_block", "hedge_cone", "hedge_layered",
 		"houndbattle", "knightbattle", "lizardbattle", "lobster_land", "lobsterunderwater", "lograft_old", "luckyhat",
 		"malbatrossail", "maxwellphonograph", "maxwellstatuebracod", "maxwellstatuebracoe", "maxwellstatuecabeca",
-		"maxwellstatuecorpo", "mecfish", "mermbattle", "messagebottle1",  "mosquitopoison",
+		"maxwellstatuecorpo", "mecfish", "mermbattle", "messagebottle1", "mosquitopoison",
 		"obsidianbomb", "oceanfish_small_10_inv", "oceanfish_small_11_inv", "oceanfish_small_12_inv",
 		"oceanfish_small_13_inv", "oceanfish_small_14_inv", "oceanfish_small_15_inv", "oceanfish_small_16_inv",
 		"oceanfish_small_17_inv", "oceanfish_small_18_inv", "oceanfish_small_19_inv", "oceanfish_small_20_inv",
@@ -320,7 +331,7 @@ local dictInventoryItems = {
 		"shard_sword", "sharxocean", "snowitem", "spiderbattle", "spore_yellow", "stonebar", "surfboard", "surfboarditem",
 		"swbait", "sweet_potato_oversized", "sweet_potato_oversized_waxed", "swineclopsbattle", "swordfishjocean",
 		"swordfishjocean2", "tfwp_crystal_crown_hat", "tfwp_fire_bomb", "tfwp_flower_headband_hat",
-		"tfwp_luxury_nox_helm_hat",  "tfwp_wizard_crown_hat", "tfwp_woven_garland_hat",
+		"tfwp_luxury_nox_helm_hat", "tfwp_wizard_crown_hat", "tfwp_woven_garland_hat",
 		"tree_forest_deep_seed", "tree_forest_rot_seed", "tree_forestseed", "trinket_giftshop_1", "trinket_giftshop_3",
 		"trinket_giftshop_4", "tropical_fish", "tropicalbouillabaisse", "tuber_bloom_crop", "tuber_bloom_crop_cooked",
 		"tuber_crop", "tuber_crop_cooked", "tunacan", "turbine_blades", "turf_ash", "turf_beach", "turf_checkeredlawn",

@@ -1,11 +1,13 @@
 -- 为虚空小房子服务
 
+local Utils = require("tropical_utils/utils")
+
 local FN = {}
 
 FN.RADIUS = 16     --小房子半径
-FN.BASE_OFF = 1500 --小房子的初始z坐标，需要注意的是这个是小房子中心点的初始z坐标
+FN.BASE_OFF = 1400 --小房子的初始z坐标
 FN.ROOM_SIZE_MAX = 60
-FN.ROW_COUNT = FN.BASE_OFF / FN.ROOM_SIZE_MAX * 2
+FN.ROW_COUNT = (FN.BASE_OFF + 100) / FN.ROOM_SIZE_MAX * 2
 
 FN.ROOM_SIZE = {
     SMALL = {               --
@@ -205,56 +207,6 @@ function FN.GetDoorRelativePosition(door)
     return centerPos and (door:GetPosition() - centerPos) or nil
 end
 
---- 生成临近的新房间，用于房屋扩展许可证
-function FN.SpawnNearHouseInterior(door, room)
-    if door.components.teleporter:GetTarget() then return false end --已经有了
-    local dpos = FN.GetDoorRelativePosition(door)
-    if not dpos or not door.side then return false end              --不可能
-    local _, _, center = FN.CreateRoom(room)
-    local pos = center:GetPosition()
-
-    -- 还要装一个对应的门
-    local doorAnim, newDoorAnim
-    local newDoor = SpawnPrefab(door.prefab)
-    if door.side == 1 then
-        newDoor.side = 3
-        newDoor.Transform:SetPosition(pos.x + dpos.x, 0, pos.z + 7.5)
-        doorAnim = "_open_east"
-        newDoorAnim = "_open_west"
-    elseif door.side == 2 then
-        newDoor.side = 4
-        newDoor.Transform:SetPosition(pos.x + 5.5, 0, pos.z + dpos.z)
-        doorAnim = "_open_north"
-
-        newDoorAnim = "_open_south"
-    elseif door.side == 3 then
-        newDoor.side = 1
-        newDoor.Transform:SetPosition(pos.x + dpos.x, 0, pos.z - 7.5)
-        doorAnim = "_open_west"
-        newDoorAnim = "_open_east"
-    elseif door.side == 4 then
-        newDoor.side = 2
-        newDoor.Transform:SetPosition(pos.x - 5.5, 0, pos.z + dpos.z)
-        doorAnim = "_open_south"
-        newDoorAnim = "_open_north"
-    end
-
-    door.components.tro_saveanim:Init(nil, nil, door.playAnim .. doorAnim)
-    newDoor.components.tro_saveanim:Init(nil, nil, door.playAnim .. newDoorAnim)
-
-    door:RemoveTag("predoor")
-    newDoor:RemoveTag("predoor")
-    newDoor:AddTag("hamlet_houseexit")
-
-    door.components.teleporter:Target(newDoor)
-    newDoor.components.teleporter:Target(door)
-
-    if door.SoundEmitter then
-        door.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break")
-    end
-    return true
-end
-
 ----------------------------------------------------------------------------------------------------
 
 local function DefaultDoorAbleToAcceptTest(inst, item)
@@ -287,6 +239,24 @@ end
 
 local function OnDoneTeleporting(inst, obj)
     obj:PushEvent("enterroom", inst) --猪人商人进店要说两句的
+end
+
+local function TargetBefore(self, otherTeleporter)
+    self.inst.targetdoor:set(otherTeleporter)
+end
+
+local function TrackEntityBefore(self, name, inst)
+    if name == "interior_center" then
+        self.inst.interior_center:set(inst)
+    end
+end
+
+local function InitDoor(inst)
+    --加载的时候我需要手动给网络变量赋值
+    local targetdoor = inst.components.teleporter:GetTarget()
+    if targetdoor then
+        inst.targetdoor:set(targetdoor)
+    end
 end
 
 --- 虚空门的基础代码
@@ -330,6 +300,11 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
         inst:AddTag("alltrader")
     end
 
+    -- TODO 不知道为什么主机设置了网络变量客机老是获取不到
+    --我需要客机拿到目的地房间的位置，用于构建小地图
+    inst.targetdoor = net_entity(inst.GUID, "tro_interiordoor.targetdoor")
+    inst.interior_center = net_entity(inst.GUID, "tro_interiordoor.interior_center")
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -342,6 +317,7 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
     inst.components.teleporter.offset = 0
     inst.components.teleporter.travelcameratime = 0
     inst.components.teleporter.travelarrivetime = 0
+    Utils.FnDecorator(inst.components.teleporter, "Target", TargetBefore)
     -- inst.components.teleporter.onActivate = OnActivate
     -- inst.components.teleporter.OnDoneTeleporting = OnDoneTeleporting
 
@@ -358,6 +334,7 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
 
     if interior_door then
         inst:AddComponent("entitytracker")
+        Utils.FnDecorator(inst.components.entitytracker, "TrackEntity", TrackEntityBefore)
     end
 
     if usesound then
@@ -366,6 +343,8 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
 
     inst:ListenForEvent("onremove", OnDoorRemove)
     inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
+
+    inst:DoTaskInTime(0, InitDoor)
 
     return inst
 end
@@ -525,9 +504,9 @@ local INC = 0
 
 ---创建房间
 ---@param room table 房间配置表
----@return doors table 所有的房间门
----@return door_map table 门的key的映射关系
----@return center Entity
+---@return table doors  所有的房间门
+---@return table door_map 门的key的映射关系
+---@return Entity center
 function FN.CreateRoom(room)
     local doors = {}
     local door_map = {}
@@ -643,6 +622,57 @@ function FN.CreateRooms(rooms)
     end
 
     return doors, door_map, centers
+end
+
+--- 生成临近的新房间，用于房屋扩展许可证
+function FN.SpawnNearHouseInterior(door, room)
+    if door.components.teleporter:GetTarget() then return false end --已经有了
+    local dpos = FN.GetDoorRelativePosition(door)
+    if not dpos or not door.side then return false end              --不可能
+    local _, _, center = FN.CreateRoom(room)
+    local pos = center:GetPosition()
+
+    -- 还要装一个对应的门
+    local doorAnim, newDoorAnim
+    local newDoor = SpawnPrefab(door.prefab)
+    newDoor.components.entitytracker:TrackEntity("interior_center", center)
+
+    if door.side == 1 then
+        newDoor.side = 3
+        newDoor.Transform:SetPosition(pos.x + dpos.x, 0, pos.z + 7.5)
+        doorAnim = "_open_east"
+        newDoorAnim = "_open_west"
+    elseif door.side == 2 then
+        newDoor.side = 4
+        newDoor.Transform:SetPosition(pos.x + 5, 0, pos.z + dpos.z)
+        doorAnim = "_open_north"
+        newDoorAnim = "_open_south"
+    elseif door.side == 3 then
+        newDoor.side = 1
+        newDoor.Transform:SetPosition(pos.x + dpos.x, 0, pos.z - 7.5)
+        doorAnim = "_open_west"
+        newDoorAnim = "_open_east"
+    elseif door.side == 4 then
+        newDoor.side = 2
+        newDoor.Transform:SetPosition(pos.x - 5, 0, pos.z + dpos.z)
+        doorAnim = "_open_south"
+        newDoorAnim = "_open_north"
+    end
+
+    door.components.tro_saveanim:Init(nil, nil, door.prefab .. doorAnim)
+    newDoor.components.tro_saveanim:Init(nil, nil, door.prefab .. newDoorAnim)
+
+    door:RemoveTag("predoor")
+    newDoor:RemoveTag("predoor")
+    newDoor:AddTag("hamlet_houseexit")
+
+    door.components.teleporter:Target(newDoor)
+    newDoor.components.teleporter:Target(door)
+
+    if door.SoundEmitter then
+        door.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break")
+    end
+    return true
 end
 
 function FN.CreateSimpleInterior(inst, room)

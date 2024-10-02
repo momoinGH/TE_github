@@ -125,7 +125,7 @@ AddComponentAction("SCENE", "pro_portablestructure", function(inst, doer, action
 end)
 
 AddComponentAction("SCENE", "shipwreckedboat", function(inst, doer, actions, right)
-    if inst:HasTag("shipwrecked_boat") and not inst:HasTag("fire") then
+    if inst:HasTag("shipwrecked_boat") and not inst:HasTag("fire") and not inst:HasTag("pro_fakeboat") then
         -- 海难小船登船
         table.insert(actions, ACTIONS.BOATMOUNT)
     end

@@ -53,14 +53,14 @@ end
 -- x是上下偏移，往下增大，z是左右偏移，往右增大
 local room = {
     addprops = {
-        { name = "interior_wall_wood", x_offset = -2.8, },
+        { name = "interior_wall_wood" },
         { name = "deco_roomglow" },
         { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = -15 / 2, },
         { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = 15 / 2, scale = { -1, 1 } },
         { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = -15 / 2 - 0.3, },
         { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = 15 / 2 + 0.3, scale = { -1, 1 } },
         { name = "swinging_light_rope_1", x_offset = -2, y_offset = 1, addtags = { "playercrafted" } },
-        { name = "interior_floor_wood", x_offset = -2.4 },
+        { name = "interior_floor_wood" },
     }
 }
 
@@ -106,7 +106,8 @@ local function OnBuilt(inst)
         anim = "_close_south"
     end
 
-    inst.components.tro_saveanim:Init(nil, nil, inst.playAnim .. anim)
+    inst.components.tro_saveanim:Init(nil, nil, inst.prefab .. anim)
+    -- inst.AnimState:PlayAnimation(inst.prefab .. anim)
 end
 
 local function onhammered(inst, worker)
@@ -124,11 +125,10 @@ local function MakeHouseDoor(name)
             return inst
         end
 
-        inst.side = nil      --门所在墙边
-        inst.playAnim = name --为了兼容，不能通过.prefab选择动画了，得单独存储
+        inst.side = nil --门所在墙边
 
         inst:AddComponent("lootdropper")
-
+        inst:AddComponent("tro_saveanim")
         inst:AddComponent("entitytracker")
 
         -- 出口不能敲毁，入口可敲，出口不能敲
@@ -248,7 +248,7 @@ local function MakeExitDoor(name, anim)
     return Prefab(name, fn, assets)
 end
 
-local function MakeHouseDoorPlacer(name, build, bank)
+local function MakeHouseDoorPlacer(name, bank, build)
     return MakePlacer(name .. "_placer", bank, build, name .. "_open_north", nil, nil,
         nil, nil, nil, nil, function(inst) PostInitPlacer(inst, name) end)
 end
@@ -270,19 +270,19 @@ return
 
 
     -- 室内门
-    MakeHouseDoor("interior_wood_door"),
-    MakeHouseDoor("interior_stone_door"),
-    MakeHouseDoor("interior_organic_door"),
-    MakeHouseDoor("interior_iron_door"),
-    MakeHouseDoor("interior_pillar_door"),
-    MakeHouseDoor("interior_curtain_door"),
-    MakeHouseDoor("interior_round_door"),
-    MakeHouseDoor("interior_plate_door"),
-    MakeHouseDoorPlacer("interior_wood_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("interior_stone_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("interior_organic_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("interior_iron_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("interior_pillar_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("interior_curtain_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("interior_round_door", "player_house_doors", "player_house_doors"),
-    MakeHouseDoorPlacer("interior_plate_door", "player_house_doors", "player_house_doors")
+    MakeHouseDoor("wood_door"),
+    MakeHouseDoor("stone_door"),
+    MakeHouseDoor("organic_door"),
+    MakeHouseDoor("iron_door"),
+    MakeHouseDoor("pillar_door"),
+    MakeHouseDoor("curtain_door"),
+    MakeHouseDoor("round_door"),
+    MakeHouseDoor("plate_door"),
+    MakeHouseDoorPlacer("wood_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("stone_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("organic_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("iron_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("pillar_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("curtain_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("round_door", "player_house_doors", "player_house_doors"),
+    MakeHouseDoorPlacer("plate_door", "player_house_doors", "player_house_doors")

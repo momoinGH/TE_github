@@ -1,6 +1,6 @@
 local InteriorSpawnerUtils = require("interiorspawnerutils")
 
-local BASE_OFF = InteriorSpawnerUtils.BASE_OFF
+local BASE_OFF = InteriorSpawnerUtils.BASE_OFF + 100
 local ROOM_SIZE_MAX = InteriorSpawnerUtils.ROOM_SIZE_MAX
 local ROW_COUNT = InteriorSpawnerUtils.ROW_COUNT
 

@@ -443,7 +443,9 @@ Constructor.AddAction({ priority = 10, distance = 2, mount_valid = true },
                 end
             elseif target.components.shopped then
                 --货架
-                target.components.shopped:Restock(true)
+                if target.components.shopped.shoptype then
+                    target.components.shopped:Restock(true)
+                end
             end
 
             return true
