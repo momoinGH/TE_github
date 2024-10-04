@@ -29,8 +29,8 @@ end
 local function makeemptyfn(inst)
     inst.AnimState:PlayAnimation("picked")
 end
-
-local function dig_up(inst, worker)
+--[[
+local function OnDig(inst, worker)
     if inst.components.pickable ~= nil and inst.components.lootdropper ~= nil then
         local withered = inst.components.witherable ~= nil and inst.components.witherable:IsWithered()
 
@@ -44,6 +44,18 @@ local function dig_up(inst, worker)
             "dug_grass"
         )
     end
+    inst:Remove()
+end]]
+
+local function OnDig(inst, worker)
+    if inst.components.pickable:CanBePicked() then
+        local pt = inst:GetPosition()
+        pt.y = pt.y + (inst.components.pickable.dropheight or 0)
+        if not inst.components.pickable:IsBarren() then
+            inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product, pt)
+        end
+    end
+    inst.components.lootdropper:SpawnLootPrefab("dug_quagmire_spotspice_shrub")
     inst:Remove()
 end
 
@@ -65,7 +77,7 @@ local function shrub_fn()
     MakeObstaclePhysics(inst, 0.35)
 
     inst:AddTag("renewable")
-    inst:AddTag("witherable")
+    --inst:AddTag("witherable")
 
     inst.entity:SetPristine()
 
@@ -89,16 +101,16 @@ local function shrub_fn()
     inst.components.pickable.cycles_left = 20
     --        inst.components.pickable.ontransplantfn = ontransplantfn
 
-    inst:AddComponent("witherable")
+    --inst:AddComponent("witherable")
 
     inst:AddComponent("lootdropper")
     inst:AddComponent("inspectable")
 
     --		if not GetGameModeProperty("disable_transplanting") then
-    --			inst:AddComponent("workable")
-    --			inst.components.workable:SetWorkAction(ACTIONS.DIG)
-    --			inst.components.workable:SetOnFinishCallback(dig_up)
-    --			inst.components.workable:SetWorkLeft(1)
+    inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.DIG)
+    inst.components.workable:SetOnFinishCallback(OnDig)
+    inst.components.workable:SetWorkLeft(1)
     --		end
     ---------------------
 

@@ -51,4 +51,5 @@ PrefabFiles =
     "quagmire_sugarwoodtree_cone",
     "quagmire_pigeon",
     "quagmire_spiceshrub",
+	"dug_quagmire_spotspice_shrub",
 }
