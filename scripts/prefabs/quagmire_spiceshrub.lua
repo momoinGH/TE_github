@@ -48,12 +48,8 @@ local function OnDig(inst, worker)
 end]]
 
 local function OnDig(inst, worker)
-    if inst.components.pickable:CanBePicked() then
-        local pt = inst:GetPosition()
-        pt.y = pt.y + (inst.components.pickable.dropheight or 0)
-        if not inst.components.pickable:IsBarren() then
-            inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product, pt)
-        end
+    if inst.components.pickable and inst.components.pickable:CanBePicked() and not inst.components.pickable:IsBarren() then
+        inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
     end
     inst.components.lootdropper:SpawnLootPrefab("dug_quagmire_spotspice_shrub")
     inst:Remove()

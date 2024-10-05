@@ -159,6 +159,8 @@ Assets =
 	Asset("ATLAS", "images/inventoryimages/cookpotfoods_sw.xml"),
 	Asset("IMAGE", "images/inventoryimages/cookpotfoods_ham.tex"),
 	Asset("ATLAS", "images/inventoryimages/cookpotfoods_ham.xml"),
+	-- tempo
+	Asset("ATLAS", "images/inventoryimages/inventory_quagmire.xml"),
 
 	Asset("ANIM", "anim/ui_honeychest_7x.zip"),
 	Asset("IMAGE", "images/ui/honeychest.tex"),

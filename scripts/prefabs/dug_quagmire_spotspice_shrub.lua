@@ -1,18 +1,18 @@
 --require "prefabutil"
 
-local WAXED_PLANTS = require "prefabs/waxed_plant_common"
+-- local WAXED_PLANTS = require "prefabs/waxed_plant_common"
 
 local function make_plantable(data)
-    local bank = data.bank or data.name
+    local name = "dug_" .. data.name
+
     local assets =
     {
-        Asset("ANIM", "anim/dug_quagmire_spotspice_shrub.zip"),
+        Asset("ANIM", "anim/" .. name .. ".zip"),
     }
 
     local function ondeploy(inst, pt, deployer)
-        local tree = SpawnPrefab(data.name)
+        local tree = SpawnAt(data.name, pt)
         if tree ~= nil then
-            tree.Transform:SetPosition(pt:Get())
             inst.components.stackable:Get():Remove()
             tree.components.pickable:OnTransplant()
             tree.components.pickable:MakeEmpty()
@@ -35,11 +35,11 @@ local function make_plantable(data)
 
         MakeInventoryPhysics(inst)
 
-        inst.AnimState:SetBank("dug_quagmire_spotspice_shrub")
-        inst.AnimState:SetBuild("dug_quagmire_spotspice_shrub")
-        inst.AnimState:PlayAnimation("dropped")
-		inst.scrapbook_anim = "dropped"
-        inst.AnimState:SetScale(1.5, 1.5, 1.5)
+        inst.AnimState:SetBank(data.prefabbank or name)
+        inst.AnimState:SetBuild(data.prefabbuild or name)
+        inst.AnimState:PlayAnimation(data.prefabanim or "idle")
+		inst.scrapbook_anim = data.prefabanim
+        inst.AnimState:SetScale(data.prefabscale, data.prefabscale, data.prefabscale)
 
         if data.floater ~= nil then
             MakeInventoryFloatable(inst, data.floater[1], data.floater[2], data.floater[3])
@@ -55,13 +55,14 @@ local function make_plantable(data)
         end
 
         inst:AddComponent("stackable")
-        inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
+        inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM -- := 10
 
         inst:AddComponent("inspectable")
-		inst.components.inspectable.nameoverride = data.inspectoverride or ("dug_"..data.name)
+		inst.components.inspectable.nameoverride = data.inspectoverride or (name)
 
         inst:AddComponent("inventoryitem")
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/inventory_quagmire.xml"
+        inst.components.inventoryitem.atlasname = data.atlas
+        inst.components.inventoryitem.imagename = data.image
 
         inst:AddComponent("fuel")
         inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
@@ -72,9 +73,8 @@ local function make_plantable(data)
         MakeHauntableLaunchAndIgnite(inst)
 
         inst:AddComponent("deployable")
-        --inst.components.deployable:SetDeployMode(DEPLOYMODE.ANYWHERE)
-        inst.components.deployable.ondeploy = ondeploy
         inst.components.deployable:SetDeployMode(DEPLOYMODE.PLANT)
+        inst.components.deployable.ondeploy = ondeploy
         if data.mediumspacing then
             inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.MEDIUM)
         end
@@ -83,37 +83,38 @@ local function make_plantable(data)
         return inst
     end
 
-    return Prefab("dug_quagmire_spotspice_shrub", fn, assets)
+    return Prefab(name, fn, assets)
 end
 
 local plantables =
 {
     {
-        name = "quagmire_spiceshrub",
-        anim = "empty",
+        -- should be des' name
+        name = "quagmire_spotspice_shrub",
 		inspectoverride = "dug_berrybush",
-		floater = {"med", 0.2, 0.95},
-        --bank = "dug_quagmire_spotspice_shrub",
-        --build = "dug_quagmire_spotspice_shrub",
-        --prefabbank = "quagmire_spotspiceshrub",
-        --prefabbuild = "quagmire_spotspiceshrub",
-        --prefabanim = "idle",
+		floater = { "med", .2, .95 },
+        -- for placer
+        bank = "quagmire_spiceshrub",
+        build = "quagmire_spiceshrub",
+        -- anim = "idle",
+        -- for prefab
+        prefabbank = "dug_quagmire_spotspice_shrub",
+        prefabbuild = "dug_quagmire_spotspice_shrub",
+        prefabanim = "dropped",
+        prefabscale = 1.5,
+        -- inventoryitem
+        atlas = "images/inventoryimages/inventory_quagmire.xml",
+        -- image = "",
     },
 }
---[[
-local prefabs = {}
-for i, v in ipairs(plantables) do
-    table.insert(prefabs, make_plantable(v))
-    table.insert(prefabs, MakePlacer("dug_"..v.name.."_placer", v.prefabbank or v.name, v.prefabbuild or v.name, v.prefabanim or "idle"))
-end]]
 
 local prefabs = {}
 
 for _, data in ipairs(plantables) do
     table.insert(prefabs, make_plantable(data))
-    table.insert(prefabs, MakePlacer("dug_"..data.name.."_placer", data.bank or data.name, data.build or data.name, data.anim or "idle"))
-
-    table.insert(prefabs, WAXED_PLANTS.CreateDugWaxedPlant(data))
+    table.insert(prefabs, MakePlacer("dug_" .. data.name .. "_placer", data.bank or data.name, data.build or data.name, data.anim or "idle"))
+    -- unable to be waxed
+    -- table.insert(prefabs, WAXED_PLANTS.CreateDugWaxedPlant(data))
 end
 
 return unpack(prefabs)
