@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Atlas>
+    <Texture filename="minimap_lavaarena.tex"/>
+    <Elements>
+        <Element name="boarlord.tex" u1="0.00390625" u2="0.496094" v1="0.503906" v2="0.996094"/>
+        <Element name="forge_altar.tex" u1="0.00390625" u2="0.496094" v1="0.00390625" v2="0.496094"/>
+        <Element name="forge_portal.tex" u1="0.503906" u2="0.996094" v1="0.503906" v2="0.996094"/>
+        <Element name="forgeboar.tex" u1="0.503906" u2="0.996094" v1="0.00390625" v2="0.496094"/>
+    </Elements>
+    <StraightAlpha>false</StraightAlpha>
+</Atlas>
+

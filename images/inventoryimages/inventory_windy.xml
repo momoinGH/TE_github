@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Atlas>
+    <Texture filename="inventory_windy.tex"/>
+    <Elements>
+        <Element name="bubble_item.tex" u1="0.000976563" u2="0.124023" v1="0.751953" v2="0.998047"/>
+        <Element name="coral_cluster.tex" u1="0.000976563" u2="0.124023" v1="0.501953" v2="0.748047"/>
+        <Element name="cut_blue_coral.tex" u1="0.000976563" u2="0.124023" v1="0.251953" v2="0.498047"/>
+        <Element name="cut_green_coral.tex" u1="0.000976563" u2="0.124023" v1="0.00195313" v2="0.248047"/>
+        <Element name="cut_orange_coral.tex" u1="0.125977" u2="0.249023" v1="0.751953" v2="0.998047"/>
+        <Element name="diving_suit_summer.tex" u1="0.125977" u2="0.249023" v1="0.501953" v2="0.748047"/>
+        <Element name="diving_suit_winter.tex" u1="0.125977" u2="0.249023" v1="0.251953" v2="0.498047"/>
+        <Element name="fish_fillet.tex" u1="0.125977" u2="0.249023" v1="0.00195313" v2="0.248047"/>
+        <Element name="fish_fillet_cooked.tex" u1="0.250977" u2="0.374023" v1="0.751953" v2="0.998047"/>
+        <Element name="flare.tex" u1="0.250977" u2="0.374023" v1="0.501953" v2="0.748047"/>
+        <Element name="hat_submarine.tex" u1="0.250977" u2="0.374023" v1="0.251953" v2="0.498047"/>
+        <Element name="iron_ore.tex" u1="0.250977" u2="0.374023" v1="0.00195313" v2="0.248047"/>
+        <Element name="jelly_cap.tex" u1="0.375977" u2="0.499023" v1="0.751953" v2="0.998047"/>
+        <Element name="jelly_lantern.tex" u1="0.375977" u2="0.499023" v1="0.501953" v2="0.748047"/>
+        <Element name="lavastone.tex" u1="0.375977" u2="0.499023" v1="0.251953" v2="0.498047"/>
+        <Element name="mussel_bed_underwater.tex" u1="0.375977" u2="0.499023" v1="0.00195313" v2="0.248047"/>
+        <Element name="obsidianhelm.tex" u1="0.500977" u2="0.624023" v1="0.751953" v2="0.998047"/>
+        <Element name="pearl.tex" u1="0.500977" u2="0.624023" v1="0.501953" v2="0.748047"/>
+        <Element name="pearl_amulet.tex" u1="0.500977" u2="0.624023" v1="0.251953" v2="0.498047"/>
+        <Element name="sand.tex" u1="0.500977" u2="0.624023" v1="0.00195313" v2="0.248047"/>
+        <Element name="sea_cucumber.tex" u1="0.625977" u2="0.749023" v1="0.751953" v2="0.998047"/>
+        <Element name="sea_petals.tex" u1="0.750977" u2="0.874023" v1="0.751953" v2="0.998047"/>
+        <Element name="seagrass_chunk.tex" u1="0.875977" u2="0.999023" v1="0.751953" v2="0.998047"/>
+        <Element name="shrimp_tail.tex" u1="0.625977" u2="0.749023" v1="0.501953" v2="0.748047"/>
+        <Element name="snorkel.tex" u1="0.625977" u2="0.749023" v1="0.251953" v2="0.498047"/>
+        <Element name="sponge_piece.tex" u1="0.625977" u2="0.749023" v1="0.00195313" v2="0.248047"/>
+    </Elements>
+    <StraightAlpha>false</StraightAlpha>
+</Atlas>
+

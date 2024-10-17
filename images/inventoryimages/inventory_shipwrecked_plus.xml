@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Atlas>
+    <Texture filename="inventory_shipwrecked_plus.tex"/>
+    <Elements>
+        <Element name="pandahouse.tex" u1="0.00195313" u2="0.248047" v1="0.503906" v2="0.996094"/>
+        <Element name="pandaskin.tex" u1="0.00195313" u2="0.248047" v1="0.00390625" v2="0.496094"/>
+        <Element name="placeholder.tex" u1="0.251953" u2="0.498047" v1="0.503906" v2="0.996094"/>
+        <Element name="shadyglasses.tex" u1="0.251953" u2="0.498047" v1="0.00390625" v2="0.496094"/>
+        <Element name="tikimask.tex" u1="0.501953" u2="0.748047" v1="0.503906" v2="0.996094"/>
+        <Element name="tree_forest_deep_seed.tex" u1="0.501953" u2="0.748047" v1="0.00390625" v2="0.496094"/>
+        <Element name="tree_forest_rot_seed.tex" u1="0.751953" u2="0.998047" v1="0.503906" v2="0.996094"/>
+        <Element name="tree_forestseed.tex" u1="0.751953" u2="0.998047" v1="0.00390625" v2="0.496094"/>
+    </Elements>
+    <StraightAlpha>false</StraightAlpha>
+</Atlas>
+

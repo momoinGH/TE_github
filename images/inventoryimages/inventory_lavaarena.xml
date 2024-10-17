@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Atlas>
+    <Texture filename="inventory_lavaarena.tex"/>
+    <Elements>
+        <Element name="amulet.tex" u1="0.000976563" u2="0.124023" v1="0.751953" v2="0.998047"/>
+        <Element name="ancient_remnant.tex" u1="0.000976563" u2="0.124023" v1="0.501953" v2="0.748047"/>
+        <Element name="antivenom.tex" u1="0.000976563" u2="0.124023" v1="0.251953" v2="0.498047"/>
+        <Element name="boarbattle.tex" u1="0.000976563" u2="0.124023" v1="0.00195313" v2="0.248047"/>
+        <Element name="bossboarbattle.tex" u1="0.125977" u2="0.249023" v1="0.751953" v2="0.998047"/>
+        <Element name="cutgrass.tex" u1="0.125977" u2="0.249023" v1="0.501953" v2="0.748047"/>
+        <Element name="houndbattle.tex" u1="0.125977" u2="0.249023" v1="0.251953" v2="0.498047"/>
+        <Element name="knightbattle.tex" u1="0.125977" u2="0.249023" v1="0.00195313" v2="0.248047"/>
+        <Element name="lizardbattle.tex" u1="0.250977" u2="0.374023" v1="0.751953" v2="0.998047"/>
+        <Element name="mermbattle.tex" u1="0.250977" u2="0.374023" v1="0.501953" v2="0.748047"/>
+        <Element name="reno_rug_tiles.tex" u1="0.250977" u2="0.374023" v1="0.251953" v2="0.498047"/>
+        <Element name="rhinocebrosbattle.tex" u1="0.250977" u2="0.374023" v1="0.00195313" v2="0.248047"/>
+        <Element name="spiderbattle.tex" u1="0.375977" u2="0.499023" v1="0.751953" v2="0.998047"/>
+        <Element name="swineclopsbattle.tex" u1="0.375977" u2="0.499023" v1="0.501953" v2="0.748047"/>
+        <Element name="tfwp_crystal_crown_hat.tex" u1="0.375977" u2="0.499023" v1="0.251953" v2="0.498047"/>
+        <Element name="tfwp_dragon_dart.tex" u1="0.375977" u2="0.499023" v1="0.00195313" v2="0.248047"/>
+        <Element name="tfwp_fire_bomb.tex" u1="0.500977" u2="0.624023" v1="0.751953" v2="0.998047"/>
+        <Element name="tfwp_flower_headband_hat.tex" u1="0.500977" u2="0.624023" v1="0.501953" v2="0.748047"/>
+        <Element name="tfwp_healing_staff.tex" u1="0.500977" u2="0.624023" v1="0.251953" v2="0.498047"/>
+        <Element name="tfwp_lava_dart.tex" u1="0.500977" u2="0.624023" v1="0.00195313" v2="0.248047"/>
+        <Element name="tfwp_lava_hammer.tex" u1="0.625977" u2="0.749023" v1="0.751953" v2="0.998047"/>
+        <Element name="tfwp_luxury_nox_helm_hat.tex" u1="0.750977" u2="0.874023" v1="0.751953" v2="0.998047"/>
+        <Element name="tfwp_spear_gung.tex" u1="0.875977" u2="0.999023" v1="0.751953" v2="0.998047"/>
+        <Element name="tfwp_spear_lance.tex" u1="0.625977" u2="0.749023" v1="0.501953" v2="0.748047"/>
+        <Element name="tfwp_summon_book.tex" u1="0.625977" u2="0.749023" v1="0.251953" v2="0.498047"/>
+        <Element name="tfwp_wizard_crown_hat.tex" u1="0.625977" u2="0.749023" v1="0.00195313" v2="0.248047"/>
+        <Element name="tfwp_woven_garland_hat.tex" u1="0.750977" u2="0.874023" v1="0.501953" v2="0.748047"/>
+    </Elements>
+    <StraightAlpha>false</StraightAlpha>
+</Atlas>
+

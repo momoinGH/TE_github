@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Atlas>
+    <Texture filename="minimap_shipwrecked_plus.tex"/>
+    <Elements>
+        <Element name="goldtomb.tex" u1="0.00195313" u2="0.248047" v1="0.244141" v2="0.490234"/>
+        <Element name="pandahouse.tex" u1="0.00195313" u2="0.251953" v1="0.748047" v2="0.998047"/>
+        <Element name="pandatree.tex" u1="0.00195313" u2="0.251953" v1="0.494141" v2="0.744141"/>
+        <Element name="tiki.tex" u1="0.251953" u2="0.498047" v1="0.244141" v2="0.490234"/>
+        <Element name="tree_forest_green.tex" u1="0.501953" u2="0.748047" v1="0.751953" v2="0.998047"/>
+        <Element name="tree_forest_pink.tex" u1="0.751953" u2="0.998047" v1="0.751953" v2="0.998047"/>
+    </Elements>
+    <StraightAlpha>false</StraightAlpha>
+</Atlas>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Atlas>
+    <Texture filename="minimap_grotto.tex"/>
+    <Elements>
+        <Element name="anthill_cavelamp.tex" u1="0.00195313" u2="0.248047" v1="0.503906" v2="0.996094"/>
+        <Element name="anthillcave.tex" u1="0.00195313" u2="0.248047" v1="0.00390625" v2="0.496094"/>
+        <Element name="grotto_grub_nest.tex" u1="0.251953" u2="0.498047" v1="0.503906" v2="0.996094"/>
+        <Element name="grotto_parsnip_giant.tex" u1="0.251953" u2="0.498047" v1="0.00390625" v2="0.496094"/>
+        <Element name="grotto_pillar_bug.tex" u1="0.501953" u2="0.748047" v1="0.503906" v2="0.996094"/>
+    </Elements>
+    <StraightAlpha>false</StraightAlpha>
+</Atlas>
+
