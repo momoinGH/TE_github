@@ -46,10 +46,3 @@ Assets = {
     Asset("SOUNDPACKAGE", "sound/citd.fev"),
     Asset("SOUND", "sound/citd.fsb"),
 }
-
-----------------------------------------------------------------------------------------------------
-
--- Add minimap atlas
-AddMinimapAtlas("images/minimap/iron_boulder.xml")
-
-----------------------------------------------------------------------------------------------------
