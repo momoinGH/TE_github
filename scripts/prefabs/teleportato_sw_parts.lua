@@ -29,7 +29,6 @@ local function makefn(name, frame)
 		inst:AddComponent("inspectable")
 
 		inst:AddComponent("inventoryitem")
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 		anim:SetBuild("teleportato_shipwrecked_parts")

@@ -1,8 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/bottle_green.zip"),
-    Asset("IMAGE", "images/inventoryimages/empty_bottle_green.tex"),
-    Asset("ATLAS", "images/inventoryimages/empty_bottle_green.xml")
 }
 
 local function TargetCheck(inst, doer, target)
@@ -53,7 +51,6 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/empty_bottle_green.xml"
 
     inst:AddComponent("stackable")
 

@@ -57,7 +57,6 @@ local function fn(Sim)
     MakeSmallPropagator(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     return inst
@@ -108,7 +107,6 @@ local function cookedfn(Sim)
     MakeSmallPropagator(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     return inst
@@ -159,7 +157,6 @@ local function bloomfn(Sim)
     MakeSmallPropagator(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     return inst
@@ -211,7 +208,6 @@ local function cookedbloomfn(Sim)
     MakeSmallPropagator(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     return inst

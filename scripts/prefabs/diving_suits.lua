@@ -87,7 +87,6 @@ local function create_summer()
     inst.components.oxygenapparatus:SetReductionPercentage(0.5)
 
     inst.components.inventoryitem.imagename = "diving_suit_summer"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/diving_suit_summer.xml"
 
     return inst
 end
@@ -142,7 +141,6 @@ local function create_winter()
     inst.components.oxygenapparatus:SetReductionPercentage(0.5)
 
     inst.components.inventoryitem.imagename = "diving_suit_winter"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/diving_suit_winter.xml"
 
     return inst
 end

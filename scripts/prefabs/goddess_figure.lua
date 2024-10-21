@@ -1,8 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/goddess_statue.zip"),
-    Asset("ATLAS", "images/inventoryimages/goddess_figure.xml"),
-    Asset("IMAGE", "images/inventoryimages/goddess_figure.tex"),
 }
 
 local function ondeploy(inst, pt)
@@ -40,7 +38,6 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_figure.xml"
 
     inst:AddComponent("deployable")
     inst.components.deployable.ondeploy = ondeploy

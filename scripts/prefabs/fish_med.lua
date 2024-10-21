@@ -385,7 +385,6 @@ local function cookedfn()
 	--    inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 	inst.data = {}
 	inst:AddComponent("bait")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	return inst
@@ -446,7 +445,6 @@ local function fish_raw_fn()
 	--	inst.components.dryable:SetOverrideSymbol("fishraw")
 
 	inst:AddComponent("bait")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	return inst
@@ -612,7 +610,6 @@ local function lobster_dead_fn()
 	inst:AddComponent("tradable")
 	inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 	--   inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	return inst
@@ -663,7 +660,6 @@ local function lobster_dead_cooked_fn()
 	inst:AddComponent("tradable")
 	inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 	--   inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	return inst

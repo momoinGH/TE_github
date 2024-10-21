@@ -49,7 +49,6 @@ local function fn(Sim)
     --inst.components.burnable:MakeDragonflyBait(3)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 
     return inst

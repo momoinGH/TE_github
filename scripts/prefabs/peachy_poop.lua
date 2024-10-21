@@ -1,7 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/peachy_poop.zip"),
-    Asset("ATLAS", "images/inventoryimages/peachy_poop.xml"),
     Asset("SCRIPT", "scripts/prefabs/fertilizer_nutrient_defs.lua"),
 }
 local prefabs =
@@ -86,7 +85,6 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst:AddComponent("stackable")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/peachy_poop.xml"
     inst:AddComponent("fertilizerresearchable")
     inst.components.fertilizerresearchable:SetResearchFn(fertilizerresearchfn)
 

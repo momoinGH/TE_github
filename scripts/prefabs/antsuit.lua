@@ -54,7 +54,6 @@ local function fn()
     inst.components.fueled:SetDepletedFn(inst.Remove)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
     return inst
 end

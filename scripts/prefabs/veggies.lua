@@ -536,19 +536,14 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
         if name == "aloe" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "radish" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "gooseberry" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "blueberries" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "turnip" then inst.components.inventoryitem.imagename = "quagmire_seeds_5" end
         if name == "wheat" then inst.components.inventoryitem.imagename = "quagmire_seeds_1" end
@@ -693,22 +688,16 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
         if name == "aloe" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "radish" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "gooseberry" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "blueberries" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "wheat" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/novositens.xml"
         end
         if name == "turnip" then inst.components.inventoryitem.imagename = "quagmire_turnip" end
 
@@ -827,19 +816,14 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
         if name == "aloe" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "radish" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "gooseberry" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "blueberries" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "wheat" then inst.components.inventoryitem.imagename = "quagmire_wheat_cooked" end
         if name == "turnip" then inst.components.inventoryitem.imagename = "quagmire_turnip_cooked" end
@@ -905,19 +889,14 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
         if name == "aloe" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "radish" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
         end
         if name == "gooseberry" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "blueberries" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
 
         MakeSmallBurnable(inst)
@@ -979,19 +958,14 @@ local function MakeVeggie(name, has_seeds)
         inst.components.inventoryitem.cangoincontainer = false
         inst.components.inventoryitem:SetSinks(true)
         if name == "aloe" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "radish" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "turnip" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/novositens.xml"
         end
         if name == "wheat" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/novositens.xml"
         end
 
         inst:AddComponent("equippable")
@@ -1075,13 +1049,10 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
         if name == "aloe" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "radish" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         if name == "sweet_potato" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
 
         inst.components.inventoryitem.cangoincontainer = false

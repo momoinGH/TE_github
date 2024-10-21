@@ -1,7 +1,5 @@
 local assets =
 {
-	Asset("ATLAS", "images/inventoryimages/gem_seeds.xml"),
-	Asset("IMAGE", "images/inventoryimages/gem_seeds.tex"),
 }
 
 local function test_ground(inst, pt)
@@ -57,7 +55,6 @@ local function fn(Sim)
 	inst:AddComponent("tradable")
 	inst:AddComponent("inspectable")
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/gem_seeds.xml"
 
 	inst.AnimState:PlayAnimation("idle")
 

@@ -33,7 +33,6 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "sand"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/sand.xml"
 
     inst:AddComponent("repairer")
     inst.components.repairer.repairmaterial = "sand"

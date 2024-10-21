@@ -63,7 +63,6 @@ local function fn()
     inst:AddComponent("stackable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
     inst:AddComponent("bait")
 
@@ -111,7 +110,6 @@ local function fn2()
     inst:AddComponent("stackable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
     inst:AddComponent("bait")
 
@@ -157,7 +155,6 @@ local function fn3()
     inst:AddComponent("stackable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
     inst:AddComponent("bait")
 

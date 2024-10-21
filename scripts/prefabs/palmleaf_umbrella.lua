@@ -170,7 +170,6 @@ local function palmleaf()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
     MakeHauntableLaunch(inst)
 

@@ -46,7 +46,6 @@ local function BecomeRabbit(inst)
 		inst.iscrab = true
 		inst.components.sanityaura.aura = 0
 		inst.components.inventoryitem:ChangeImageName("crab")
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 		inst.sounds = crabbitsounds
 	end
@@ -63,7 +62,6 @@ local function BecomeBeardling(inst)
 		inst.components.sanityaura.aura = -TUNING.SANITYAURA_MED
 		inst.iscrab = false
 		inst.components.inventoryitem:ChangeImageName("crabbit_beardling")
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 		inst.sounds = beardsounds
 	end
@@ -194,7 +192,6 @@ local function fn(Sim)
 	inst.components.eater.ablefoods = { "MEAT", "VEGGIE", "INSECT" }
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 	inst.components.inventoryitem.nobounce = true
 	inst.components.inventoryitem.canbepickedup = false

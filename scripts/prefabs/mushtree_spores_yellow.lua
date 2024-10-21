@@ -140,7 +140,6 @@ local function makespore(data)
         inst:AddComponent("inventoryitem")
 
         if data.build == "mushroom_spore_yelo" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
 
         inst.components.inventoryitem.canbepickedup = false

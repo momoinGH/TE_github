@@ -6,14 +6,6 @@ local overridebuild = {
 local cookbook_atlas = {
     [tabName[1]] = "images/cookbook/cookbook_ham.xml",
     [tabName[2]] = "images/cookbook/cookbook_sw.xml",
-    [tabName[3]] = "images/inventoryimages/creepindeep_cuisine.xml",
-    [tabName[4]] = "images/inventoryimages/volcanoinventory.xml",
-}
-local inventoryitem_atlas = {
-    [tabName[1]] = resolvefilepath("images/inventoryimages/cookpotfoods_ham.xml"),
-    [tabName[2]] = resolvefilepath("images/inventoryimages/cookpotfoods_sw.xml"),
-    [tabName[3]] = resolvefilepath(cookbook_atlas.creeps),
-    [tabName[4]] = resolvefilepath(cookbook_atlas.frost),
 }
 
 local foods_tro = {
@@ -783,9 +775,9 @@ for tabIdx, foodTab in pairs(foods_tro) do
         foodDef.floater = foodDef.floater or {"small", 0.05, 0.7}
         foodDef.mod = true
         -- foodDef.cookbook_tex = foodName..".tex"
-        foodDef.cookbook_atlas = cookbook_atlas[tabIdx] or ("images/inventoryimages/" .. foodName .. ".xml")
-        foodDef.atlasname = foodDef.atlasname or inventoryitem_atlas[tabIdx] or "images/inventoryimages/" .. foodName ..
-                                ".xml"
+        -- foodDef.cookbook_atlas = cookbook_atlas[tabIdx] or ("images/inventoryimages/" .. foodName .. ".xml")
+        -- foodDef.atlasname = foodDef.atlasname or inventoryitem_atlas[tabIdx] or "images/inventoryimages/" .. foodName ..
+        --                         ".xml"
         if foodDef.oneatenfn then foodDef.oneat_desc = STRINGS.UI.COOKBOOK[string.upper(foodName)] end
     end
 end

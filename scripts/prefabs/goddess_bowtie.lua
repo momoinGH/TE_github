@@ -2,7 +2,6 @@ local assets =
 {
     Asset("ANIM", "anim/goddess_bowtie.zip"),
     Asset("ANIM", "anim/torso_bowtie.zip"),
-    Asset("ATLAS", "images/inventoryimages/goddess_bowtie.xml")
 }
 
 local function onequip(inst, owner)
@@ -79,7 +78,6 @@ local function fn()
     --inst.components.trader.onaccept = OnGetItem
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_bowtie.xml"
 
     MakeHauntableLaunch(inst)
 

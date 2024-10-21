@@ -1,8 +1,6 @@
 local assets =
 {
 	Asset("ANIM", "anim/goddess_statue2.zip"),
-	Asset("IMAGE", "images/map_icons/goddess_statue2.tex"),
-	Asset("ATLAS", "images/map_icons/goddess_statue2.xml")
 }
 
 local function light(inst)

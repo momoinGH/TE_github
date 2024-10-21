@@ -69,7 +69,6 @@ local function common(bank, build, anim, symbol_build, symbol)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(BOATCANNON_AMMO_COUNT)

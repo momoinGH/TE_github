@@ -1,9 +1,6 @@
 local assets =
 {
 	Asset("ANIM", "anim/sugarwood_seed.zip"),
-
-	Asset("IMAGE", "images/inventoryimages/sugarwood_seed.tex"),
-	Asset("ATLAS", "images/inventoryimages/sugarwood_seed.xml"),
 }
 
 local function growintotree(inst)
@@ -122,7 +119,6 @@ local function seed_fn()
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/sugarwood_seed.xml"
 
 	inst:AddComponent("stackable")
 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM

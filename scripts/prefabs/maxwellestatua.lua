@@ -147,7 +147,6 @@ local function fnp2()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     return inst
@@ -178,7 +177,6 @@ local function fnp3()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     return inst
@@ -209,7 +207,6 @@ local function fnp4()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     return inst

@@ -28,7 +28,6 @@ local function sandfn(Sim)
 	----------------------
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	return inst

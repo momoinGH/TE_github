@@ -3,9 +3,6 @@ local assets =
 	Asset("ANIM", "anim/torch.zip"),
 	Asset("ANIM", "anim/swap_flare.zip"),
 	Asset("SOUND", "sound/common.fsb"),
-
-	Asset("IMAGE", "images/inventoryimages/flare.tex"),
-	Asset("ATLAS", "images/inventoryimages/flare.xml"),
 }
 
 local prefabs =
@@ -123,7 +120,6 @@ local function fn(Sim)
 	inst.components.inventoryitem:SetOnPickupFn(stop_sparks)
 
 	inst.components.inventoryitem.imagename = "flare"
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/flare.xml"
 
 	inst:AddComponent("equippable")
 	inst.components.equippable:SetOnEquip(onequip)

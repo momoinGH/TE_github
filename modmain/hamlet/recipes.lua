@@ -19,14 +19,9 @@ AddPrototyperDef("wallrenovation", {
 
 -- AddRecipeFilter({ name = "INTERIOR", atlas = tab_atlas, image = "tab_home_decor.tex" })
 
-
-
-local h_atlas = "images/inventoryimages/hamletinventory.xml"
-local v_atlas = "images/inventoryimages/volcanoinventory.xml"
-
 ---@param id number|nil 不填/10/100
 local function OincIngredient(val, id)
-    return Ingredient("oinc", val, h_atlas, nil, "oinc" .. (id or "") .. ".tex")
+    return Ingredient("oinc", val, nil, nil, "oinc" .. (id or "") .. ".tex")
 end
 
 local function AddHamletRecipe(name, tech, cost, placer, image, data)
@@ -58,7 +53,7 @@ local function AddHamletRecipe(name, tech, cost, placer, image, data)
         placer = placer,
         builder_tag = data.builder_tag,
         min_spacing = data.min_spacing, --最小建造间距
-        atlas = data.atlas or h_atlas,
+        atlas = data.atlas,
         image = image and (image .. ".tex") or nil
     }, data.filters)
 end
@@ -185,9 +180,8 @@ AddHomeRecipe("deco_lamp_hoofspa", 8, "deco_lamp_hoofspa_placer", "reno_lamp_hoo
 -- 桌子
 AddHomeRecipe("deco_table_round", 2, "deco_table_round_placer", "reno_table_round")
 -- AddHomeRecipe("deco_table_banker", 4, "deco_table_banker_placer", "reno_table_banker")
-AddRecipe2("deco_table_banker", { Ingredient("oinc", 4, h_atlas) }, TECH.HOME_TWO,
+AddRecipe2("deco_table_banker", { Ingredient("oinc", 4) }, TECH.HOME_TWO,
     {
-        atlas = h_atlas,
         nounlock = true,
         min_spacing = 1,
         placer = "deco_table_banker_placer",
@@ -333,23 +327,23 @@ AddHomeRecipe("shelves_pallet", 6, "shelves_pallet_placer", "reno_shelves_pallet
 
 
 AddRecipe2("bed0", { OincIngredient(5) }, TECH.HOME_TWO,
-    { atlas = v_atlas, nounlock = true, min_spacing = 1, placer = "bed0_placer" }, { "INTERIOR" })
+    { nounlock = true, min_spacing = 1, placer = "bed0_placer" }, { "INTERIOR" })
 AddRecipe2("bed1", { OincIngredient(7) }, TECH.HOME_TWO,
-    { atlas = v_atlas, nounlock = true, min_spacing = 1, placer = "bed1_placer" }, { "INTERIOR" })
+    { nounlock = true, min_spacing = 1, placer = "bed1_placer" }, { "INTERIOR" })
 AddRecipe2("bed2", { OincIngredient(10) }, TECH.HOME_TWO,
-    { atlas = v_atlas, nounlock = true, min_spacing = 1, placer = "bed2_placer" }, { "INTERIOR" })
+    { nounlock = true, min_spacing = 1, placer = "bed2_placer" }, { "INTERIOR" })
 AddRecipe2("bed3", { OincIngredient(12) }, TECH.HOME_TWO,
-    { atlas = v_atlas, nounlock = true, min_spacing = 1, placer = "bed3_placer" }, { "INTERIOR" })
+    { nounlock = true, min_spacing = 1, placer = "bed3_placer" }, { "INTERIOR" })
 AddRecipe2("bed4", { OincIngredient(14) }, TECH.HOME_TWO,
-    { atlas = v_atlas, nounlock = true, min_spacing = 1, placer = "bed4_placer" }, { "INTERIOR" })
+    { nounlock = true, min_spacing = 1, placer = "bed4_placer" }, { "INTERIOR" })
 AddRecipe2("bed5", { OincIngredient(16) }, TECH.HOME_TWO,
-    { atlas = v_atlas, nounlock = true, min_spacing = 1, placer = "bed5_placer" }, { "INTERIOR" })
+    { nounlock = true, min_spacing = 1, placer = "bed5_placer" }, { "INTERIOR" })
 AddRecipe2("bed6", { OincIngredient(18) }, TECH.HOME_TWO,
-    { atlas = v_atlas, nounlock = true, min_spacing = 1, placer = "bed6_placer" }, { "INTERIOR" })
+    { nounlock = true, min_spacing = 1, placer = "bed6_placer" }, { "INTERIOR" })
 AddRecipe2("bed7", { OincIngredient(20) }, TECH.HOME_TWO,
-    { atlas = v_atlas, nounlock = true, min_spacing = 1, placer = "bed7_placer" }, { "INTERIOR" })
+    { nounlock = true, min_spacing = 1, placer = "bed7_placer" }, { "INTERIOR" })
 AddRecipe2("bed8", { OincIngredient(22) }, TECH.HOME_TWO,
-    { atlas = v_atlas, nounlock = true, min_spacing = 1, placer = "bed8_placer" }, { "INTERIOR" })
+    { nounlock = true, min_spacing = 1, placer = "bed8_placer" }, { "INTERIOR" })
 
 --房屋扩建许可证
 AddHomeRecipe("construction_permit", 50)

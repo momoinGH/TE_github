@@ -1,8 +1,6 @@
 local assets =
 {
 	Asset("ANIM", "anim/goddess_shrine.zip"),
-	Asset("IMAGE", "images/map_icons/goddess_shrine.tex"),
-	Asset("ATLAS", "images/map_icons/goddess_shrine.xml")
 }
 
 local GODDESS = { SCIENCE = 0, ANCIENT = 0, GODDESS = 2, MAGIC = 0, SHADOW = 0, CARTOGRAPHY = 0, ORPHANAGE = 0, SCULPTING = 0, PERDOFFERING = 0 }

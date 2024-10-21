@@ -119,7 +119,6 @@ local function fn()
     inst:AddComponent("tradable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("equippable")

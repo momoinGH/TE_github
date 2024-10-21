@@ -341,7 +341,6 @@ local function capcommonfn(data)
     MakeSmallPropagator(inst)
     inst:AddComponent("inventoryitem")
     if data.name == "yelow_mushroom" then
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
     end
 
     --this is where it gets interesting
@@ -400,7 +399,6 @@ local function cookedcommonfn(data)
     MakeSmallPropagator(inst)
     inst:AddComponent("inventoryitem")
     if data.name == "yelow_mushroom" then
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
     end
 
     MakeHauntableLaunchAndPerish(inst)

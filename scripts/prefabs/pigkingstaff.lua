@@ -2,8 +2,6 @@ local assets =
 {
     Asset("ANIM", "anim/pigkingstaff.zip"),
     Asset("ANIM", "anim/swap_pigkingstaff.zip"),
-    Asset("ATLAS", "images/inventoryimages/pigkingstaff.xml"),
-    Asset("IMAGE", "images/inventoryimages/pigkingstaff.tex"),
 }
 
 local function onfinished(inst)
@@ -186,7 +184,6 @@ local function init()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/pigkingstaff.xml"
     inst.components.inventoryitem.imagename = "pigkingstaff"
 
     inst:AddComponent("equippable")

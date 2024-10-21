@@ -45,13 +45,6 @@ local function makefeather(name)
         MakeHauntableLaunchAndIgnite(inst)
 
         inst:AddComponent("inventoryitem")
-        if name == "thunder" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
-        end
-        if name == "chicken" then
-            inst.components.inventoryitem.atlasname = "map_icons/creepindedeepicon.xml"
-        end
-
         inst.components.inventoryitem.nobounce = true
 
         inst:AddComponent("tradable")

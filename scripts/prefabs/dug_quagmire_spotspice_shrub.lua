@@ -103,7 +103,7 @@ local plantables =
         prefabanim = "dropped",
         prefabscale = 1.5,
         -- inventoryitem
-        atlas = "images/inventoryimages/inventory_quagmire.xml",
+        -- atlas = "",
         -- image = "",
     },
 }

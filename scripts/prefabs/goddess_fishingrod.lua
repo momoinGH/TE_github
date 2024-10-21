@@ -2,7 +2,6 @@ local assets =
 {
     Asset("ANIM", "anim/fishingrod.zip"),
     Asset("ANIM", "anim/swap_fishingrod.zip"),
-    Asset("ATLAS", "images/inventoryimages/goddess_fishingrod.xml"),
 }
 
 local function glow(inst)
@@ -85,7 +84,6 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_fishingrod.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)

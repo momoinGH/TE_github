@@ -1,7 +1,5 @@
 local assets =
 {
-	Asset("IMAGE", "images/inventoryimages/forbidden_fruit.tex"),
-	Asset("ATLAS", "images/inventoryimages/forbidden_fruit.xml"),
 	Asset("ANIM", "anim/forbidden_fruit.zip"),
 }
 
@@ -97,7 +95,6 @@ local function fn()
 	inst.components.perishable.onperishreplacement = "forbidden_fruit_pit"
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/forbidden_fruit.xml"
 
 	MakeHauntableLaunchAndPerish(inst)
 

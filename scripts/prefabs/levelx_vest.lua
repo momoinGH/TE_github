@@ -4,8 +4,6 @@ local assets =
     Asset("ANIM", "anim/armor_my.zip"),
     -- Asset("ANIM", "anim/ui_backpack_2x4.zip"),
     Asset("ANIM", "anim/ui_krampusbag_2x8.zip"),
-    Asset("IMAGE", "images/inventoryimages/levelx_vest.tex"),
-    Asset("ATLAS", "images/inventoryimages/levelx_vest.xml"),
     Asset("IMAGE", "images/levelx_vestbg.tex"),
     Asset("ATLAS", "images/levelx_vestbg.xml"),
 }
@@ -151,7 +149,6 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "levelx_vest"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/levelx_vest.xml"
     --    inst.components.inventoryitem.cangoincontainer = false
 
     inst:AddComponent("equippable")

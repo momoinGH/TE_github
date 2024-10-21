@@ -436,7 +436,6 @@ local function MakeFish(name, has_seeds)
 		inst:AddComponent("tradable")
 		inst:AddComponent("inspectable")
 		inst:AddComponent("inventoryitem")
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 		inst.AnimState:PlayAnimation("idle")
@@ -569,7 +568,6 @@ local function MakeFish(name, has_seeds)
 
 		inst:AddComponent("inspectable")
 		inst:AddComponent("inventoryitem")
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 		---------------------
@@ -642,7 +640,6 @@ local function MakeFish(name, has_seeds)
 
 		inst:AddComponent("inspectable")
 		inst:AddComponent("inventoryitem")
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 		--inst.components.inventoryitem:ChangeImageName("fishtropical_cooked")
 

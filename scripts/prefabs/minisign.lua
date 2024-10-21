@@ -4,8 +4,6 @@ local assets =
     Asset("ATLAS_BUILD", "images/inventoryimages1.xml", 256),
     Asset("ATLAS_BUILD", "images/inventoryimages2.xml", 256),
     Asset("ATLAS_BUILD", "images/inventoryimages3.xml", 256),
-    Asset("ATLAS_BUILD", "images/inventoryimages/volcanoinventory.xml", 256),
-    Asset("ATLAS_BUILD", "images/inventoryimages/hamletinventory.xml", 256),
 }
 
 local assets_item =
@@ -88,8 +86,6 @@ local function OnDrawnFn(inst, image, src, atlas, bgimage, bgatlas)
                 atlas = "images/inventoryimages2.xml"
             elseif atlas and atlas == "images/inventoryimages3.xml" then
                 atlas = "images/inventoryimages3.xml"
-            else
-                atlas = "images/inventoryimages/hamletinventory.xml"
             end
             inst.atlas = atlas
             inst.image = image

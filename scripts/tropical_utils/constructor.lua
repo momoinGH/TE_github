@@ -78,7 +78,6 @@ function FN.MakePrefab(name, data)
 
         if isInventoryitem then
             inst:AddComponent("inventoryitem")
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/" .. name .. ".xml"
 
             inst:AddComponent("inspectable")
         end

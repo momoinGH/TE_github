@@ -1,7 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/usedfan.zip"),
-    Asset("ATLAS", "images/inventoryimages/usedfan.xml")
 }
 
 local function fn()
@@ -32,7 +31,6 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/usedfan.xml"
 
     MakeHauntableLaunch(inst)
 

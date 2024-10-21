@@ -44,8 +44,6 @@ local function defaultfn()
 
 	inst:AddComponent("tradable")
 
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
 	inst.components.edible.healthvalue = TUNING.HEALING_SMALL
 	inst.components.edible.hungervalue = TUNING.CALORIES_MED
 
@@ -82,7 +80,6 @@ local function cookedfn()
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 	inst:AddComponent("edible")
 	inst.components.edible.foodtype = FOODTYPE.MEAT

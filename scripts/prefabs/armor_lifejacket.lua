@@ -44,7 +44,6 @@ local function fn()
     inst.components.flotationdevice.onpreventdrowningdamagefn = inst.Remove
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
     inst.components.inventoryitem.keepondeath = true
 
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)

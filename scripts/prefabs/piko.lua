@@ -259,7 +259,6 @@ local function fn()
 	inst:AddComponent("inventory")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 	inst.components.inventoryitem.nobounce = true
 	inst.components.inventoryitem.canbepickedup = false
@@ -414,7 +413,6 @@ local function orangefn()
 	inst:AddComponent("inventory")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 	inst.components.inventoryitem.nobounce = true
 	inst.components.inventoryitem.canbepickedup = false

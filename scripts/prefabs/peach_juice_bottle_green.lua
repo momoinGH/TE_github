@@ -1,29 +1,21 @@
 local assets =
 {
 	Asset("ANIM", "anim/peach_juice_bottle_green.zip"),
-	Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green.tex"),
-	Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green.xml"),
 }
 
 local assets1 =
 {
 	Asset("ANIM", "anim/peach_juice_bottle_green.zip"),
-	Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green_most.tex"),
-	Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green_most.xml"),
 }
 
 local assets2 =
 {
 	Asset("ANIM", "anim/peach_juice_bottle_green.zip"),
-	Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green_half.tex"),
-	Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green_half.xml"),
 }
 
 local assets3 =
 {
 	Asset("ANIM", "anim/peach_juice_bottle_green.zip"),
-	Asset("IMAGE", "images/inventoryimages/peach_juice_bottle_green_less.tex"),
-	Asset("ATLAS", "images/inventoryimages/peach_juice_bottle_green_less.xml"),
 }
 
 local function Full_EatFn(inst, eater)
@@ -105,7 +97,6 @@ local function full()
 	inst.components.edible:SetOnEatenFn(Full_EatFn)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach_juice_bottle_green.xml"
 
 
 	return inst
@@ -143,7 +134,6 @@ local function most()
 	inst.components.edible:SetOnEatenFn(Most_EatFn)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach_juice_bottle_green_most.xml"
 
 	return inst
 end
@@ -180,7 +170,6 @@ local function half()
 	inst.components.edible:SetOnEatenFn(Half_EatFn)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach_juice_bottle_green_half.xml"
 
 	return inst
 end
@@ -221,7 +210,6 @@ local function less()
 	inst.components.edible:SetOnEatenFn(Less_EatFn)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach_juice_bottle_green_less.xml"
 
 	return inst
 end

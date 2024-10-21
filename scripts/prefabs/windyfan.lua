@@ -2,7 +2,6 @@ local assets =
 {
 	Asset("ANIM", "anim/windyfan.zip"),
 	Asset("ANIM", "anim/swap_windyfan.zip"),
-	Asset("ATLAS", "images/inventoryimages/windyfan.xml")
 }
 
 local function onequip(inst, owner)
@@ -171,7 +170,6 @@ local function fn()
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/windyfan.xml"
 
 	MakeHauntableLaunch(inst)
 

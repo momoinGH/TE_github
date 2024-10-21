@@ -44,8 +44,6 @@ local function make_turf(data)
 	local assets = {
 		--		Asset("ANIM", "anim/turf.zip"),
 		Asset("ANIM", "anim/" .. data.anim .. ".zip"),
-		Asset("IMAGE", "images/inventoryimages/" .. data.invname .. ".tex"),
-		Asset("ATLAS", "images/inventoryimages/" .. data.invname .. ".xml"),
 	}
 
 	local function fn()
@@ -80,7 +78,6 @@ local function make_turf(data)
 
 		inst:AddComponent("inspectable")
 		inst:AddComponent("inventoryitem")
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/" .. data.invname .. ".xml"
 		inst.components.inventoryitem.imagename = data.invname
 
 		inst.data = data

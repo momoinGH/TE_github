@@ -184,7 +184,6 @@ local function fn()
     inst.components.weapon:SetOnAttack(OnAttack)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/gw_bonestaff.xml"
 
     inst:AddComponent("inspectable")
 

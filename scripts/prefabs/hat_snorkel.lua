@@ -1,9 +1,6 @@
 local assets =
 {
 	Asset("ANIM", "anim/snorkel.zip"),
-
-	Asset("IMAGE", "images/inventoryimages/snorkel.tex"),
-	Asset("ATLAS", "images/inventoryimages/snorkel.xml"),
 }
 
 -- On equip
@@ -82,7 +79,6 @@ local function fn()
 	-- Inventory item
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.imagename = "snorkel"
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/snorkel.xml"
 
 	-- Equippable
 	inst:AddComponent("equippable")

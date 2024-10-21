@@ -43,7 +43,6 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
     inst:AddComponent("armor")
     inst.components.armor:InitCondition(TUNING.ARMOR_WEEVOLE, TUNING.ARMOR_WEEVOLE_ABSORPTION)

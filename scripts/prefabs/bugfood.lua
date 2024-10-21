@@ -69,7 +69,6 @@ local function jellybug_raw()
 
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 
     inst:AddComponent("perishable")
@@ -129,7 +128,6 @@ local function jellybug_cooked()
 
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 
     inst:AddComponent("perishable")
@@ -188,7 +186,6 @@ local function slugbug_raw()
     MakeSmallPropagator(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 
     inst:AddComponent("perishable")
@@ -240,7 +237,6 @@ local function slugbug_cooked()
     MakeSmallPropagator(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 
     inst:AddComponent("perishable")

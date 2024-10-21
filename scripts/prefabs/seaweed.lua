@@ -90,8 +90,6 @@ local function defaultfn(sim)
     inst.components.fertilizer.withered_cycles = POOP_WITHEREDCYCLES
     inst.components.fertilizer:SetNutrients(TUNING.FERTILIZER_NUTRIENTS, 1, 5)
 
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
     return inst
 end
 
@@ -141,7 +139,6 @@ local function cookedfn(sim)
     inst.components.edible.sanityvalue = 0 --TUNING.SANITY_SMALL
     inst.components.perishable:SetPerishTime(PERISH_MED)
     inst.AnimState:PlayAnimation("cooked", true)
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
     return inst
 end
@@ -197,8 +194,6 @@ local function driedfn(sim)
     inst.AnimState:SetBank("meat_rack_food")
     inst.AnimState:SetBuild("meat_rack_food")
     inst.AnimState:PlayAnimation("idle_dried_seaweed", true)
-
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
     return inst
 end

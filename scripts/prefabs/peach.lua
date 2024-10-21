@@ -1,7 +1,5 @@
 local assets =
 {
-    Asset("IMAGE", "images/inventoryimages/peach.tex"),
-    Asset("ATLAS", "images/inventoryimages/peach.xml"),
     Asset("ANIM", "anim/peach.zip"),
 }
 
@@ -54,7 +52,6 @@ local function fn()
     inst.components.perishable.onperishreplacement = "peach_pit"
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/peach.xml"
 
     inst:AddComponent("bait")
 

@@ -293,7 +293,6 @@ local function net()
     inst.components.inventory.show_invspace = true
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
     inst:AddComponent("shipwreckedboatparts")
     inst.components.shipwreckedboatparts.move_sound = "dontstarve_DLC002/common/trawl_net/move_LP"

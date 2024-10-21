@@ -1,8 +1,6 @@
 local assets =
 {
 	Asset("ANIM", "anim/sea_cucumber.zip"),
-	Asset("IMAGE", "images/inventoryimages/sea_cucumber.tex"),
-	Asset("ATLAS", "images/inventoryimages/sea_cucumber.xml"),
 }
 
 local function StartSpoil(inst)
@@ -45,7 +43,6 @@ local function fn(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.imagename = "sea_cucumber"
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/sea_cucumber.xml"
 
 	inst:AddComponent("perishable")
 	inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)

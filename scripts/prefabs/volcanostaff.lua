@@ -85,7 +85,6 @@ local function commonfn(colour, tags, hasskin)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("tradable")

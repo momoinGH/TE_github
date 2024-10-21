@@ -1,7 +1,6 @@
 local assets =
 {
 	Asset("ANIM", "anim/goddess_bell.zip"),
-	Asset("ATLAS", "images/inventoryimages/goddess_bell.xml")
 }
 
 local function unproctect(inst)
@@ -134,7 +133,6 @@ local function fn()
 	inst.components.finiteuses:SetConsumption(ACTIONS.PLAY, 1)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_bell.xml"
 
 	inst:AddComponent("trader")
 	inst.components.trader:SetAcceptTest(ShouldAcceptItem)

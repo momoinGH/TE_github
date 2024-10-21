@@ -227,7 +227,6 @@ local function fn1()
     inst.components.weapon:SetRange(8, 10)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
     inst:AddComponent("stackable")
 

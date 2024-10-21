@@ -185,7 +185,6 @@ local function commonfn()
 
 
     inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
     inst.components.inventoryitem:SetOnPutInInventoryFn(OnPutInInventory)
 
     inst.components.inspectable.getstatus = GetStatus

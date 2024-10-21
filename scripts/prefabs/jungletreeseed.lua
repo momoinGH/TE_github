@@ -156,7 +156,6 @@ local function fn()
     MakeSmallPropagator(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("deployable")

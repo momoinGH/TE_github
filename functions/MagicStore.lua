@@ -4,11 +4,6 @@ local CoinsPrefab, GoodsPrefab = ModStoreData.CoinsPrefab, ModStoreData.GoodsPre
 
 ----------------------------------------------------------------------------------------------------
 local function AtlasTextureFinder(moneyprefab)
-    if moneyprefab and moneyprefab == "goldnugget" then
-        return "images/inventoryimages/hamletinventory.xml"
-    else
-        return "images/inventoryimages/volcanoinventory.xml"
-    end
 end
 
 --==============================--

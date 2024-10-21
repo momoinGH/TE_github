@@ -42,7 +42,6 @@ local function fn(Sim)
 	inst.components.repairer.healthrepairvalue = TUNING.REPAIR_CUTSTONE_HEALTH
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	return inst

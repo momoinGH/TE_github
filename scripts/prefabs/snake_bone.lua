@@ -61,7 +61,6 @@ local function fn()
     inst.components.edible.foodtype = "BONE"
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
     -- inst:AddComponent("floatable")
     -- inst.components.floatable:SetOnHitWaterFn(function(inst) inst.AnimState:PlayAnimation("idle_water", true) end)

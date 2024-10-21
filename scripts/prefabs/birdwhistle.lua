@@ -58,7 +58,6 @@ local function fn(Sim)
     inst.components.finiteuses:SetConsumption(ACTIONS.PLAY, 1)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 
     inst.hornbuild = "swap_antler"

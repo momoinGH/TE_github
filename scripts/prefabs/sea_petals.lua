@@ -33,7 +33,6 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "sea_petals"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/sea_petals.xml"
 
     inst:AddComponent("edible")
     inst.components.edible.healthvalue = TUNING.HEALING_TINY

@@ -24,7 +24,6 @@ local peach_juice =
     hunger = 35,
     sanity = 5,
     cooktime = 0.5,
-    cookbook_atlas = "images/inventoryimages/peach_juice_bottle_green.xml",
     tags = { "honeyed" },
     card_def = { ingredients = { { "peach", 2 }, { "honey", 1 }, { "full_bottle_green", 1 } } },
 }
@@ -42,82 +41,71 @@ local potion =
     hunger = 75,
     sanity = 75,
     cooktime = 0.5,
-    cookbook_atlas = "images/inventoryimages/potion_bottle_green.xml",
     card_def = { ingredients = { { "peach", 1 }, { "peach_juice_bottle_green", 1 }, { "peachy_meatloaf", 1 }, { "magicpowder", 1 } } },
 }
 AddCookerRecipe("cookpot", potion)
 AddCookerRecipe("cookpot", peach_juice)
 AddCookerRecipe("portablecookpot", potion)
 AddCookerRecipe("portablecookpot", peach_juice)
---local goddess_tab = AddRecipeTab("Wind Goddess Magic", 969, "images/inventoryimages/windyfan1.xml", "windyfan1.tex", nil )
+--local goddess_tab = AddRecipeTab("Wind Goddess Magic", 969, "windyfan1.tex", nil )
 AddRecipe2("magicpowder",
-    { Ingredient("goddess_butterflywings", 8, "images/inventoryimages/goddess_butterflywings.xml"), Ingredient(
-        "nightmarefuel", 8), Ingredient("cutgreengrass", 8, "images/inventoryimages/cutgreengrass.xml") },
+    { Ingredient("goddess_butterflywings", 8), Ingredient(
+        "nightmarefuel", 8), Ingredient("cutgreengrass", 8) },
     TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/magicpowder.xml", numtogive = 8 }, { "CRAFTING_STATION" })
+    { numtogive = 8 }, { "CRAFTING_STATION" })
 AddRecipe2("goddess_ribbon",
-    { Ingredient("goddess_rabbit_fur", 3, "images/inventoryimages/goddess_rabbit_fur.xml"), Ingredient("silk", 9),
-        Ingredient("magicpowder", 1, "images/inventoryimages/magicpowder.xml") }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/goddess_ribbon.xml", numtogive = 3 }, { "CRAFTING_STATION" })
+    { Ingredient("goddess_rabbit_fur", 3), Ingredient("silk", 9),
+        Ingredient("magicpowder", 1) }, TECH.GODDESS_TWO,
+    { numtogive = 3 }, { "CRAFTING_STATION" })
 AddRecipe2("forbidden_fruit",
-    { Ingredient("mixed_gem", 1, "images/inventoryimages/mixed_gem.xml"), Ingredient("magicpowder", 8,
-        "images/inventoryimages/magicpowder.xml"), Ingredient("peach", 1, "images/inventoryimages/peach.xml") },
-    TECH.GODDESS_TWO, { atlas = "images/inventoryimages/forbidden_fruit.xml" }, { "CRAFTING_STATION" })
+    { Ingredient("mixed_gem", 1), Ingredient("magicpowder", 8), Ingredient("peach", 1) },
+    TECH.GODDESS_TWO, nil, { "CRAFTING_STATION" })
 AddRecipe2("glass_bomb",
-    { Ingredient("full_bottle_green_dirty", 3, "images/inventoryimages/full_bottle_green_dirty.xml"), Ingredient(
-        "magicpowder", 3, "images/inventoryimages/magicpowder.xml"), Ingredient("gunpowder", 9) }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/glass_bomb.xml", numtogive = 3 }, { "CRAFTING_STATION" })
+    { Ingredient("full_bottle_green_dirty", 3), Ingredient(
+        "magicpowder", 3), Ingredient("gunpowder", 9) }, TECH.GODDESS_TWO,
+    { numtogive = 3 }, { "CRAFTING_STATION" })
 AddRecipe2("goddess_hat",
-    { Ingredient("eyebrellahat", 1), Ingredient("goddess_feather", 2, "images/inventoryimages/goddess_feather.xml"),
-        Ingredient("forbidden_fruit", 1, "images/inventoryimages/forbidden_fruit.xml") }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/goddess_hat.xml" }, { "CRAFTING_STATION" })
+    { Ingredient("eyebrellahat", 1), Ingredient("goddess_feather", 2),
+        Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO,
+    nil, { "CRAFTING_STATION" })
 AddRecipe2("goddess_bowtie",
-    { Ingredient("goddess_ribbon", 8, "images/inventoryimages/goddess_ribbon.xml"), Ingredient("goddess_butterfly", 3,
-        "images/inventoryimages/goddess_butterfly.xml"), Ingredient("forbidden_fruit", 1,
-        "images/inventoryimages/forbidden_fruit.xml") }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/goddess_bowtie.xml" }, { "CRAFTING_STATION" })
+    { Ingredient("goddess_ribbon", 8), Ingredient("goddess_butterfly", 3), Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO,
+    nil, { "CRAFTING_STATION" })
 AddRecipe2("usedfan",
-    { Ingredient("goddess_feather", 8, "images/inventoryimages/goddess_feather.xml"), Ingredient("goldnugget", 12),
-        Ingredient("goose_feather", 8) }, TECH.GODDESS_TWO, { atlas = "images/inventoryimages/usedfan.xml" },
+    { Ingredient("goddess_feather", 8), Ingredient("goldnugget", 12),
+        Ingredient("goose_feather", 8) }, TECH.GODDESS_TWO, nil,
     { "CRAFTING_STATION" })
 AddRecipe2("windyfan",
-    { Ingredient("usedfan", 1, "images/inventoryimages/usedfan.xml"), Ingredient("magicpowder", 8,
-        "images/inventoryimages/magicpowder.xml"), Ingredient("forbidden_fruit", 1,
-        "images/inventoryimages/forbidden_fruit.xml") }, TECH.GODDESS_TWO, {
-        atlas =
-        "images/inventoryimages/windyfan.xml"
-    }, { "CRAFTING_STATION" })
+    { Ingredient("usedfan", 1), Ingredient("magicpowder", 8), Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO, nil, { "CRAFTING_STATION" })
 AddRecipe2("goddess_sword",
-    { Ingredient("magicpowder", 10, "images/inventoryimages/magicpowder.xml"), Ingredient("nightsword", 3), Ingredient(
-        "forbidden_fruit", 1, "images/inventoryimages/forbidden_fruit.xml") }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/goddess_sword.xml" }, { "CRAFTING_STATION" })
+    { Ingredient("magicpowder", 10), Ingredient("nightsword", 3), Ingredient(
+        "forbidden_fruit", 1) }, TECH.GODDESS_TWO,
+    nil, { "CRAFTING_STATION" })
 AddRecipe2("goddess_flute",
-    { Ingredient("staff_tornado", 3), Ingredient("cutreeds", 10), Ingredient("forbidden_fruit", 1,
-        "images/inventoryimages/forbidden_fruit.xml") }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/goddess_flute.xml" }, { "CRAFTING_STATION" })
+    { Ingredient("staff_tornado", 3), Ingredient("cutreeds", 10), Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO,
+    nil, { "CRAFTING_STATION" })
 AddRecipe2("goddess_bell",
-    { Ingredient("goldnugget", 8), Ingredient("steelwool", 8), Ingredient("forbidden_fruit", 1,
-        "images/inventoryimages/forbidden_fruit.xml") }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/goddess_bell.xml" }, { "CRAFTING_STATION" })
+    { Ingredient("goldnugget", 8), Ingredient("steelwool", 8), Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO,
+    nil, { "CRAFTING_STATION" })
 AddRecipe2("goddess_staff",
-    { Ingredient("goldnugget", 8), Ingredient("goddess_ribbon", 8, "images/inventoryimages/goddess_ribbon.xml"),
-        Ingredient("forbidden_fruit", 1, "images/inventoryimages/forbidden_fruit.xml") }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/goddess_staff.xml" }, { "CRAFTING_STATION" })
+    { Ingredient("goldnugget", 8), Ingredient("goddess_ribbon", 8),
+        Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO,
+    nil, { "CRAFTING_STATION" })
 AddRecipe2("goddess_lantern",
-    { Ingredient("yellowstaff", 2), Ingredient("goddess_ribbon", 8, "images/inventoryimages/goddess_ribbon.xml"),
-        Ingredient("forbidden_fruit", 1, "images/inventoryimages/forbidden_fruit.xml") }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/goddess_lantern.xml" }, { "CRAFTING_STATION" })
+    { Ingredient("yellowstaff", 2), Ingredient("goddess_ribbon", 8),
+        Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO,
+    nil, { "CRAFTING_STATION" })
 AddRecipe2("goddess_fountainette",
-    { Ingredient("full_bottle_green", 4, "images/inventoryimages/full_bottle_green.xml"), Ingredient("moonrocknugget", 15),
-        Ingredient("forbidden_fruit", 1, "images/inventoryimages/forbidden_fruit.xml") }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/goddess_fountainette.xml" }, { "CRAFTING_STATION" })
+    { Ingredient("full_bottle_green", 4), Ingredient("moonrocknugget", 15),
+        Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO,
+    nil, { "CRAFTING_STATION" })
 AddRecipe2("goddess_figure",
-    { Ingredient("windyfan", 1, "images/inventoryimages/windyfan.xml"), Ingredient("marble", 15), Ingredient(
-        "forbidden_fruit", 1, "images/inventoryimages/forbidden_fruit.xml") }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/goddess_figure.xml" }, { "CRAFTING_STATION" })
+    { Ingredient("windyfan", 1), Ingredient("marble", 15), Ingredient(
+        "forbidden_fruit", 1) }, TECH.GODDESS_TWO,
+    nil, { "CRAFTING_STATION" })
 AddRecipe2("gem_seeds",
-    { Ingredient("mixed_gem", 1, "images/inventoryimages/mixed_gem.xml"), Ingredient("seeds", 3), Ingredient("peach_pit",
-        3, "images/inventoryimages/peach_pit.xml") }, TECH.GODDESS_TWO,
-    { atlas = "images/inventoryimages/gem_seeds.xml", numtogive = 3 }, { "CRAFTING_STATION" })
-AddRecipe2("peachy_poop", { Ingredient("guano", 6), Ingredient("peach", 6, "images/inventoryimages/peach.xml") },
-    TECH.SCIENCE_TWO, { atlas = "images/inventoryimages/peachy_poop.xml", numtogive = 6 }, { "GARDENING" })
+    { Ingredient("mixed_gem", 1), Ingredient("seeds", 3), Ingredient("peach_pit",
+        3) }, TECH.GODDESS_TWO,
+    { numtogive = 3 }, { "CRAFTING_STATION" })
+AddRecipe2("peachy_poop", { Ingredient("guano", 6), Ingredient("peach", 6) },
+    TECH.SCIENCE_TWO, { numtogive = 6 }, { "GARDENING" })

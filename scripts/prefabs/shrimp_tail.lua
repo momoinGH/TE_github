@@ -35,7 +35,6 @@ local function fn(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.imagename = "shrimp_tail"
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/shrimp_tail.xml"
 
 	inst.Transform:SetScale(0.80, 0.80, 0.80)
 

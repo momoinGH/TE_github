@@ -1,8 +1,5 @@
 local TechTree = require("techtree")
 
-local v_atlas = "images/inventoryimages/volcanoinventory.xml"
-local h_atlas = "images/inventoryimages/hamletinventory.xml"
-
 table.insert(TechTree.AVAILABLE_TECH, "OBSIDIAN_TWO")
 
 TECH.OBSIDIAN_TWO = { OBSIDIAN = 2 }
@@ -21,29 +18,29 @@ AddPrototyperDef("obsidian_workbench", {
 -- 黑曜石
 AddRecipe2("axeobsidian",
     { Ingredient("axe", 1), Ingredient("obsidian", 2, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true }, { "OBSIDIAN" })
+    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 AddRecipe2("armorobsidian",
     { Ingredient("armorwood", 1), Ingredient("obsidian", 5, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true }, { "OBSIDIAN" })
+    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 AddRecipe2("obsidianmachete",
     { Ingredient("machete", 1, v_atlas), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true }, { "OBSIDIAN" })
+    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 AddRecipe2("spear_obsidian",
     { Ingredient("spear", 1), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true }, { "OBSIDIAN" })
+    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 AddRecipe2("volcanostaff",
     { Ingredient("firestaff", 1), Ingredient("obsidian", 4, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true }, { "OBSIDIAN" })
+    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 
 AddRecipe2("obsidianbomb",
     { Ingredient("coconade", 3, v_atlas), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true, numtogive = 3 }, { "OBSIDIAN" })
+    TECH.OBSIDIAN_TWO, { nounlock = true, numtogive = 3 }, { "OBSIDIAN" })
 AddRecipe2("woodlegs_boatcannon",
     { Ingredient("obsidian", 6, v_atlas), Ingredient("log", 5), Ingredient("gunpowder", 4) },
-    TECH.SEAFARING_TWO, { atlas = v_atlas }, { "OBSIDIAN" })
+    TECH.SEAFARING_TWO, nil, { "OBSIDIAN" })
 AddRecipe2("wind_conch",
     { Ingredient("obsidian", 4, v_atlas), Ingredient("purplegem", 1), Ingredient("magic_seal", 1, h_atlas) },
-    TECH.OBSIDIAN_TWO, { atlas = v_atlas, nounlock = true }, { "OBSIDIAN" })
+    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 AddRecipe2("sail_stick",
     { Ingredient("obsidian", 2, v_atlas), Ingredient("nightmarefuel", 3), Ingredient("magic_seal", 1, h_atlas) },
-    TECH.OBSIDIAN_TWO, { atlas = h_atlas, nounlock = true }, { "OBSIDIAN" })
+    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })

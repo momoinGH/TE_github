@@ -260,7 +260,6 @@ local function fn()
     MakeSmallPropagator(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("deployable")
@@ -318,7 +317,6 @@ local function fn1()
     MakeSmallPropagator(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("deployable")
@@ -376,7 +374,6 @@ local function fn2()
     MakeSmallPropagator(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("deployable")

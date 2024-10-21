@@ -1,8 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/sponge_piece.zip"),
-    Asset("IMAGE", "images/inventoryimages/sponge_piece.tex"),
-    Asset("ATLAS", "images/inventoryimages/sponge_piece.xml"),
 }
 
 local function fn(Sim)
@@ -29,7 +27,6 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "sponge_piece"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/sponge_piece.xml"
 
     inst:AddComponent("edible")
     inst.components.edible.foodtype = "SPONGE"

@@ -36,7 +36,6 @@ local function fn(Sim)
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.imagename = "fish_fillet"
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/fish_fillet.xml"
 
 	inst:AddComponent("cookable")
 	inst.components.cookable.product = "fish_fillet_cooked"

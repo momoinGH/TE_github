@@ -42,7 +42,6 @@ local function fullfn()
 	inst.components.deployable.ondeploy = ondeploy
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	MakeMediumBurnable(inst)

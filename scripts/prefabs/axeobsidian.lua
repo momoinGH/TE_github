@@ -1,6 +1,5 @@
 local assets =
 {
-    Asset("ATLAS", "images/inventoryimages/volcanoinventory.xml"),
     Asset("ANIM", "anim/axe_obsidian.zip"),
     Asset("ANIM", "anim/swap_axe_obsidian.zip"),
 }
@@ -148,7 +147,6 @@ local function obsidianfn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequipobsidian)

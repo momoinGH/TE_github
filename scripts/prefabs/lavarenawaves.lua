@@ -38,7 +38,6 @@ local function MakeTribute(name, bank, build, anim, scale, arenaativa, enemy_cou
         inst:AddComponent("inspectable")
 
         inst:AddComponent("inventoryitem")
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
         MakeHauntableLaunchAndSmash(inst)
 

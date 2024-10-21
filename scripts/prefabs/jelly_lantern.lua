@@ -68,7 +68,6 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "jelly_lantern"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/jelly_lantern.xml"
     inst.components.inventoryitem.nobounce = true
     inst.components.inventoryitem:SetOnDroppedFn(turnon)
     inst.components.inventoryitem:SetOnPutInInventoryFn(turnoff)

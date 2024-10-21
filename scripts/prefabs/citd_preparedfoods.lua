@@ -39,7 +39,6 @@ local function MakePreparedFood(data)
 		inst:AddComponent("inspectable")
 		inst:AddComponent("inventoryitem")
 		inst.components.inventoryitem.imagename = data.name
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/food/" .. data.name .. ".xml"
 
 		inst:AddComponent("stackable")
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM

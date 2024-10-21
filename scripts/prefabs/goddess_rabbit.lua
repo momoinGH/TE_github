@@ -7,9 +7,6 @@ local assets =
     Asset("SOUND", "sound/rabbit.fsb"),
     Asset("INV_IMAGE", "beard_monster"),
     Asset("INV_IMAGE", "rabbit_winter"),
-
-    Asset("ATLAS", "images/inventoryimages/goddess_rabbit_live.xml"),
-    Asset("IMAGE", "images/inventoryimages/goddess_rabbit_live.tex"),
 }
 
 local prefabs =
@@ -301,8 +298,6 @@ local function fn()
     inst.components.inventoryitem.nobounce = true
     inst.components.inventoryitem.canbepickedup = false
     inst.components.inventoryitem.canbepickedupalive = true
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_rabbit_live.xml"
-    inst.components.inventoryitem.imagename = "images/inventoryimages/goddess_rabbit_live.tex"
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura

@@ -158,7 +158,6 @@ local function MakeVeggie(name, has_seeds)
 
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
         MakeSmallBurnable(inst)
@@ -226,7 +225,6 @@ end
 
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
         MakeSmallBurnable(inst)

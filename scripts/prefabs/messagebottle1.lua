@@ -73,7 +73,6 @@ local function messagebottlefn(Sim)
 
 	inst:AddComponent("inspectable")
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 	inst:AddComponent("waterproofer")
 	inst.components.waterproofer:SetEffectiveness(0)

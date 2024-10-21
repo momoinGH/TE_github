@@ -161,7 +161,6 @@ local function normal(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 	inst.components.inventoryitem:SetOnDroppedFn(ondropped)
 
@@ -221,7 +220,6 @@ local function golden(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 	inst.components.inventoryitem:SetOnDroppedFn(ondropped)
 
@@ -330,7 +328,6 @@ local function obsidian(Sim)
 	inst.components.waterproofer:SetEffectiveness(0)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 	inst.AnimState:SetBuild("machete_obsidian")
 	inst.AnimState:SetBank("machete_obsidian")
@@ -428,7 +425,6 @@ local function glass(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 	--inst.components.finiteuses:SetConsumption(ACTIONS.HACK, 2.5 / TUNING.GOLDENTOOLFACTOR)
 	inst.components.inventoryitem:SetOnDroppedFn(ondropped)

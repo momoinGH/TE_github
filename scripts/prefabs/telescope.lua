@@ -113,7 +113,6 @@ local function normalfn()
 
 	inst:AddComponent("inspectable")
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 	inst:AddComponent("equippable")
 	inst.components.equippable:SetOnUnequip(onunequip)
@@ -160,7 +159,6 @@ local function superfn(Sim)
 
 	inst:AddComponent("inspectable")
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	inst:AddComponent("equippable")

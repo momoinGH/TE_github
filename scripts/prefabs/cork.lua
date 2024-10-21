@@ -54,7 +54,6 @@ local function fn(Sim)
     inst.components.repairer.healthrepairvalue = TUNING.REPAIR_LOGS_HEALTH
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 
     return inst

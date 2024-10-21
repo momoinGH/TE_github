@@ -156,7 +156,6 @@ local function poisonfn(Sim)
 	inst.components.equippable:SetOnUnequip(onunequip)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	inst.components.weapon:SetOnAttack(poisonattack)
@@ -323,7 +322,6 @@ local function obsidianfn(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	inst:AddComponent("equippable")
@@ -405,7 +403,6 @@ local function needlefn(Sim)
 	inst.components.equippable:SetOnUnequip(onunequip)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	inst.components.weapon:SetDamage(NEEDLESPEAR_DAMAGE)
@@ -473,7 +470,6 @@ local function peglegfn(Sim)
 
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	inst.components.equippable:SetOnEquip(onequippegleg)

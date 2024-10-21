@@ -80,7 +80,6 @@ local function fn()
 	-- Inventory item
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.imagename = "hat_submarine"
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/creepindedeepinventory.xml"
 
 	-- Equippable
 	inst:AddComponent("equippable")

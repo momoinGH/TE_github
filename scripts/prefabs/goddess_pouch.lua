@@ -1,8 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/goddess_pouch.zip"),
-    Asset("ATLAS", "images/inventoryimages/goddess_pouch.xml"),
-    Asset("IMAGE", "images/inventoryimages/goddess_pouch.tex")
 }
 
 local function MakeLoot(inst)
@@ -154,7 +152,6 @@ local function fn()
     MakeLoot(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_pouch.xml"
 
     inst:AddComponent("unwrappable")
     inst.components.unwrappable:SetOnUnwrappedFn(OnUnwrapped)

@@ -1,9 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/goddess_goggles.zip"),
-
-    Asset("ATLAS", "images/inventoryimages/goddess_goggles.xml"),
-    Asset("IMAGE", "images/inventoryimages/goddess_goggles.tex"),
 }
 
 local function OnEquip(inst, owner)
@@ -81,7 +78,6 @@ local function fn()
     inst:AddComponent("tradable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_goggles.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.HEAD

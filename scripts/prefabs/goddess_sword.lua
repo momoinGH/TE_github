@@ -2,8 +2,6 @@ local assets =
 {
 	Asset("ANIM", "anim/goddess_sword.zip"),
 	Asset("ANIM", "anim/swap_goddess_sword.zip"),
-	Asset("IMAGE", "images/inventoryimages/goddess_sword.tex"),
-	Asset("ATLAS", "images/inventoryimages/goddess_sword.xml"),
 }
 
 local WAKE_TO_FOLLOW_DISTANCE = 10
@@ -126,7 +124,6 @@ local function fn()
 	inst.components.tool:SetAction(ACTIONS.MINE, 4)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_sword.xml"
 
 	inst:AddComponent("equippable")
 	inst.components.equippable:SetOnEquip(onequip)

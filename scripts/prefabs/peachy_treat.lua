@@ -1,7 +1,5 @@
 local assets =
 {
-    Asset("IMAGE", "images/inventoryimages/peach.tex"),
-    Asset("ATLAS", "images/inventoryimages/peach.xml"),
     Asset("ANIM", "anim/peach.zip"),
 }
 
@@ -47,7 +45,6 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/peach.xml"
 
     MakeHauntableLaunchAndPerish(inst)
 

@@ -1,8 +1,6 @@
 local assets =
 {
 	Asset("ANIM", "anim/goddess_lantern.zip"),
-	Asset("IMAGE", "images/inventoryimages/goddess_lantern.tex"),
-	Asset("ATLAS", "images/inventoryimages/goddess_lantern.xml"),
 	Asset("ANIM", "anim/swap_goddess_lantern.zip"),
 	Asset("ANIM", "anim/swap_goddess_lantern1.zip"),
 }
@@ -210,7 +208,6 @@ local function fn()
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_lantern.xml"
 
 	inst:AddComponent("equippable")
 	inst.components.equippable:SetOnEquip(onequip)

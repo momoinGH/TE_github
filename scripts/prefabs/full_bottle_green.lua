@@ -1,15 +1,11 @@
 local assets =
 {
 	Asset("ANIM", "anim/bottle_green.zip"),
-	Asset("IMAGE", "images/inventoryimages/full_bottle_green.tex"),
-	Asset("ATLAS", "images/inventoryimages/full_bottle_green.xml")
 }
 
 local assets1 =
 {
 	Asset("ANIM", "anim/bottle_green.zip"),
-	Asset("IMAGE", "images/inventoryimages/full_bottle_green_dirty.tex"),
-	Asset("ATLAS", "images/inventoryimages/full_bottle_green_dirty.xml")
 }
 
 local function EatFn(inst, eater)
@@ -106,7 +102,6 @@ local function fn()
 	inst.components.edible.temperatureduration = TUNING.FOOD_TEMP_AVERAGE * 2
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/full_bottle_green.xml"
 
 	return inst
 end
@@ -160,7 +155,6 @@ local function fnn()
 	inst.components.edible.temperatureduration = TUNING.FOOD_TEMP_AVERAGE
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/full_bottle_green_dirty.xml"
 
 	return inst
 end

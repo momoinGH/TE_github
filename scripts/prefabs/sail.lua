@@ -74,7 +74,6 @@ local function common(bank, build, anim, symbol, data)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
     if data.perish_time then
         inst:AddComponent("fueled")

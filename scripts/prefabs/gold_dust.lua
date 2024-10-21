@@ -42,7 +42,6 @@ local function fn(Sim)
 
     inst:AddComponent("stackable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 
     inst:AddComponent("bait")

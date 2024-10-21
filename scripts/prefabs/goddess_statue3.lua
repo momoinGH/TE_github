@@ -1,8 +1,6 @@
 local assets =
 {
 	Asset("ANIM", "anim/goddess_statue3.zip"),
-	Asset("IMAGE", "images/map_icons/goddess_statue3.tex"),
-	Asset("ATLAS", "images/map_icons/goddess_statue3.xml")
 }
 
 local function deer(inst)

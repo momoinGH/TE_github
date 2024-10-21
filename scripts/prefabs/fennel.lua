@@ -83,7 +83,6 @@ local function fn1(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	inst:AddComponent("stackable")
@@ -134,7 +133,6 @@ local function fn2(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	inst:AddComponent("stackable")

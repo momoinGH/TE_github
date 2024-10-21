@@ -98,7 +98,6 @@ local function fntropical()
     MakeHauntableLaunchAndPerish(inst)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     return inst

@@ -36,7 +36,6 @@ local function common(name, housebank, housebuild)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
     inst.components.inventoryitem.imagename = "player_house_" .. name
 
     return inst

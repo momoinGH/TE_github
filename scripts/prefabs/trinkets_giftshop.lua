@@ -38,7 +38,6 @@ local function MakeTrinket(num)
         inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.TRINKETS[num] or 3
 
         inst:AddComponent("inventoryitem")
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
         inst:AddComponent("bait")

@@ -7,8 +7,6 @@ local brain = require "brains/birdbrain"
 local assets =
 {
     Asset("ANIM", "anim/goddess_bird_build.zip"),
-    Asset("ATLAS", "images/inventoryimages/goddess_bird.xml"),
-    Asset("IMAGE", "images/inventoryimages/goddess_bird.tex")
 }
 
 local function ShouldSleep(inst)
@@ -157,7 +155,6 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
         inst.components.inventoryitem.nobounce = true
         inst.components.inventoryitem.canbepickedup = false
         inst.components.inventoryitem.canbepickedupalive = true
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_bird.xml"
 
         inst:AddComponent("cookable")
         inst.components.cookable.product = "cookedsmallmeat"

@@ -1,8 +1,6 @@
 local assets =
 {
 	Asset("ANIM", "anim/potion_bottle_green.zip"),
-	Asset("IMAGE", "images/inventoryimages/potion_bottle_green.tex"),
-	Asset("ATLAS", "images/inventoryimages/potion_bottle_green.xml")
 }
 
 local function EatFn(inst, eater)
@@ -137,7 +135,6 @@ local function fn()
 	inst.components.edible:SetOnEatenFn(EatFn)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/potion_bottle_green.xml"
 
 	inst:ListenForEvent("ondropped", glow)
 	inst:ListenForEvent("onputininventory", unglow)

@@ -1,7 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/goddess_feather.zip"),
-    Asset("ATLAS", "images/inventoryimages/goddess_feather.xml")
 }
 
 local function fn()
@@ -31,7 +30,6 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_feather.xml"
 
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM

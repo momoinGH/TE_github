@@ -26,12 +26,6 @@ Assets =
 	Asset("IMAGE", "images/barco.tex"),
 	Asset("ATLAS", "images/barco.xml"),
 
-	Asset("ATLAS", "images/inventoryimages/volcanoinventory.xml"),
-	Asset("IMAGE", "images/inventoryimages/volcanoinventory.tex"),
-
-	Asset("ATLAS", "images/inventoryimages/novositens.xml"),
-	Asset("IMAGE", "images/inventoryimages/novositens.tex"),
-
 	Asset("ANIM", "anim/player_actions_paddle.zip"),
 	Asset("ANIM", "anim/player_actions_speargun.zip"),
 	Asset("ANIM", "anim/player_actions_tap.zip"),
@@ -103,15 +97,6 @@ Assets =
 	Asset("IMAGE", "levels/textures/outro.tex"),
 	Asset("IMAGE", "levels/textures/ground_noise_water_deep.tex"),
 
-	Asset("IMAGE", "images/inventoryimages/hamletinventory.tex"),
-	Asset("ATLAS", "images/inventoryimages/hamletinventory.xml"),
-	Asset("IMAGE", "images/inventoryimages/hamletinventory2.tex"),
-	Asset("ATLAS", "images/inventoryimages/hamletinventory2.xml"),
-
-	Asset("ATLAS", "map_icons/hamleticon.xml"),
-	Asset("IMAGE", "map_icons/hamleticon.tex"),
-	Asset("ATLAS", "map_icons/creepindedeepicon.xml"),
-	Asset("IMAGE", "map_icons/creepindedeepicon.tex"),
 	Asset("ANIM", "anim/butterflymuffin.zip"),
 	Asset("IMAGE", "images/tfwp_inventoryimgs.tex"),
 	Asset("ATLAS", "images/tfwp_inventoryimgs.xml"),
@@ -155,12 +140,7 @@ Assets =
 	Asset("ATLAS", "images/cookbook/cookbook_sw.xml"),
 	Asset("IMAGE", "images/cookbook/cookbook_ham.tex"),
 	Asset("ATLAS", "images/cookbook/cookbook_ham.xml"),
-	Asset("IMAGE", "images/inventoryimages/cookpotfoods_sw.tex"),
-	Asset("ATLAS", "images/inventoryimages/cookpotfoods_sw.xml"),
-	Asset("IMAGE", "images/inventoryimages/cookpotfoods_ham.tex"),
-	Asset("ATLAS", "images/inventoryimages/cookpotfoods_ham.xml"),
 	-- tempo
-	Asset("ATLAS", "images/inventoryimages/inventory_quagmire.xml"),
 
 	Asset("ANIM", "anim/ui_honeychest_7x.zip"),
 	Asset("IMAGE", "images/ui/honeychest.tex"),
@@ -186,11 +166,6 @@ Assets =
 	Asset("ATLAS", "levels/textures/tro_map_interior/passage.xml"),
 }
 
-if TUNING.tropical.quagmire and TUNING.tropical.kindofworld == 15 or GetModConfigData("enableallprefabs") == true then
-	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/quagmirefoods.xml"))
-	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/quagmirefoods.tex"))
-end
-
 -- # Inventory item atlas register
 local InventoryItems = {
 	frost = { "beaverskin", "blueberries", "blueberries_cooked", "maxwellstatuebracod", "maxwellstatuebracoe", "maxwellstatuecabeca", "maxwellstatuecorpo", "mutator_frost", "snowitem", "spider_snow2", "turf_snow", "wildbeaver_house", },
@@ -204,7 +179,6 @@ local InventoryItems = {
 	shipwrecked = { "aerodynamichat", "antivenom", "armor_lifejacket", "armor_snakeskin", "armor_windbreaker", "armorcactus", "armorlimestone", "armorobsidian", "armorseashell", "armouredboat", "ballphinhouse", "ballphinocean", "bamboo", "bananas", "bananas_cooked", "bioluminescence", "blowdart_flup", "blowdart_poison", "blubber", "blubbersuit", "boat_lantern", "boat_lantern_off", "boat_torch", "boat_torch_off", "boatcannon", "boatrepairkit", "book_meteor", "bottlelantern", "bottlelantern_off", "brainjellyhat", "buoy", "butterfly_tropical", "butterflywings_tropical", "captainhat", "cargoboat", "chiminea", "clothes", "clothsail", "coconade", "coconut", "coconut_cooked", "coconut_halved", "coffeebeans", "coffeebeans_cooked", "conch", "coral", "coral_brain", "corallarve", "cormorant", "crab", "crabbit_beardling", "cutgrass_green", "cutlass", "dead_swordfish", "dogfishocean", "dorsalfin", "double_umbrellahat", "doydoy", "doydoy_baby", "doydoy_teen", "doydoyegg", "doydoyegg_cooked", "doydoyfeather", "doydoynest", "dragoonden", "dragoonheart", "dubloon", "dug_bambootree", "dug_bush_vine", "dug_coffeebush", "dug_elephantcactus", "dug_grass_green", "earring", "encrustedboat", "fabric", "feathersail", "fish2", "fish2_cooked", "fish3", "fish3_cooked", "fish4", "fish4_cooked", "fish5", "fish5_cooked", "fish6", "fish6_cooked", "fish7", "fish7_cooked", "fish_farm", "fish_med", "fish_med_cooked", "fish_raw", "fish_raw_small", "gashat", "glass_shards", "glassmachete", "goldenmachete", "goldfish", "hail_ice", "harpoon", "hawaiianshirt", "icemaker", "ironwind", "jellyfish", "jellyfish_cooked", "jellyfish_dead", "jellyjerky", "jungletreeseed", "limestone", "limpets", "limpets_cooked", "lobster", "lobster_dead", "lobster_dead_cooked", "lobsterbisque", "log_tropical", "lograft", "lograft_old", "machete", "magic_seal", "malbatrossail", "mecfish", "mermfisherhouse_crafted", "mermhouse_tropical_crafted", "messagebottle_sw", "messagebottleempty_sw", "monkeyball", "mosquito_yellow", "mosquitosack_yellow", "mussel", "mussel_bed", "mussel_cooked", "mussel_stick", "mutator_tropical", "mysterymeat", "needlespear", "nubbin", "obsidian", "obsidianaxe", "obsidiancoconade", "obsidianfirepit", "obsidianmachete", "ox_flute", "ox_horn", "ox_wool", "oxhat", "packim_fishbone", "packim_fishbone_dead", "palmleaf", "palmleaf_hut", "palmleaf_umbrella", "parrot", "parrot_pirate", "peg_leg", "pigkingstaff", "piratehat", "piratepack", "piratihatitator", "poop2", "porto_armouredboat", "porto_ballphinhouse", "porto_buoy", "porto_cargoboat", "porto_encrustedboat", "porto_fish_farm", "porto_lograft", "porto_lograft_old", "porto_raft", "porto_raft_old", "porto_researchlab5", "porto_rowboat", "porto_sea_chiminea", "porto_sea_yard", "porto_shadowboat", "porto_tar_extractor", "porto_waterchest1", "porto_woodlegsboat", "primeapebarrel", "quackenbeak", "quackendrill", "quackeringram", "raft", "raft_old", "rainbowjellyfish", "rainbowjellyfish_cooked", "rainbowjellyfish_dead", "rawling", "reflectivevest", "researchlab5", "roe", "roe_cooked", "rowboat", "sail", "sail_stick", "sand", "sand_castle", "sandbag_item", "sea_chiminea", "sea_yard", "seacucumber", "seacucumber_cooked", "seagull", "seasack", "seashell", "seataro", "seataro_cooked", "seatrap", "seaweed", "seaweed_cooked", "seaweed_dried", "seaweed_stalk", "shadowmower_builder", "shard_beak", "shard_sword", "shark_fin", "shark_gills", "shark_teethhat", "shark_tooth", "sharxocean", "shipwrecked_entrance", "skull_wilbur", "snake_dead", "snakeoil", "snakeskin", "snakeskinhat", "snakeskinsail", "spear_launcher", "spear_launcher_obsidian", "spear_launcher_poison", "spear_launcher_spear", "spear_launcher_wathgrithr", "spear_obsidian", "spear_poison", "spider_tropical", "spoiled_fish", "stopwatch", "stunrod", "supertelescope", "surfboard_item", "sw_trinket_13", "sw_trinket_14", "sw_trinket_15", "sw_trinket_16", "sw_trinket_17", "sw_trinket_18", "sw_trinket_19", "sw_trinket_20", "sw_trinket_21", "sw_trinket_22", "sw_trinket_23", "swbait", "sweet_potato", "sweet_potato_cooked", "sweet_potato_oversized", "sweet_potato_oversized_waxed", "sweet_potato_seeds", "swordfishjocean", "swordfishjocean2", "tar", "tar_extractor", "tarlamp", "tarsuit", "teleportato_sw_base", "teleportato_sw_box", "teleportato_sw_crank", "teleportato_sw_potato", "teleportato_sw_ring", "telescope", "thatchpack", "tigereye", "toucan", "trawlnet", "trident_sw", "tropicalfan", "tunacan", "tunacan_open", "turbine_blades", "turf_ash", "turf_beach", "turf_jungle", "turf_magmafield", "turf_meadow", "turf_snakeskinfloor", "turf_tidalmarsh", "turf_volcano", "turf_volcano_rock", "venomgland", "volcanohat_off", "volcanohat_on", "volcanostaff", "wall_enforcedlimestone_item", "wall_limestone_item", "waterchest", "whaleblueocean", "wilbur_crown", "wildborehouse", "wind_conch", "woodlegs_boatcannon", "woodlegs_key1", "woodlegs_key2", "woodlegs_key3", "woodlegsboat", "woodlegshat", "woodlegssail", },
 	underwater = { "bubble_item", "coral_cluster", "cut_blue_coral", "cut_green_coral", "cut_orange_coral", "diving_suit_summer", "diving_suit_winter", "fish_fillet", "fish_fillet_cooked", "flare", "hat_submarine", "iron_ore", "jelly_cap", "jelly_lantern", "lavastone", "mussel_bed_underwater", "obsidianhelm", "pearl", "pearl_amulet", "sand", "sea_cucumber", "sea_petals", "seagrass_chunk", "shrimp_tail", "snorkel", "sponge_piece", },
 	windy = { "bottle_green_youghurt", "caramel_peach", "cutgreengrass", "empty_bottle_green", "flower_bottle", "forbidden_fruit", "full_bottle_green", "full_bottle_green_dirty", "full_bottle_green_milk", "full_bottle_green_youghurt", "gem_seeds", "glass_bomb", "goddess_bar", "goddess_bell", "goddess_bird", "goddess_butterfly", "goddess_butterflywings", "goddess_feather", "goddess_figure", "goddess_fishingrod", "goddess_flute", "goddess_fountainette", "goddess_goggles", "goddess_hat", "goddess_lantern", "goddess_pouch", "goddess_rabbit_fur", "goddess_rabbit_live", "goddess_ribbon", "goddess_staff", "goddess_sword", "goddess_tea", "goddess_tori", "grilled_peach", "half_bottle_green_milk", "less_bottle_green_milk", "magicpowder", "mixed_gem", "peach", "peach_custard", "peach_juice_bottle_green", "peach_juice_bottle_green_half", "peach_juice_bottle_green_less", "peach_juice_bottle_green_most", "peach_kabobs", "peach_pit", "peach_pop", "peach_smoothie", "peachy_meatloaf", "peachy_poop", "potion_bottle_green", "usedfan", "windyfan", "windyturf", }, 
-
 }
 for atlas, items in pairs(InventoryItems) do
 	local path = resolvefilepath("images/inventoryimages/inventory_" .. atlas .. ".xml")
@@ -212,17 +186,10 @@ for atlas, items in pairs(InventoryItems) do
 		RegisterInventoryItemAtlas(path, image .. ".tex")
 	end
 end
-
-AddMinimapAtlas("map_icons/creepindedeepicon.xml")
-AddMinimapAtlas("map_icons/hamleticon.xml")
 ----------------------------------------------------------------------------------------------------
-
-
-if TUNING.tropical.greenworld ~= 0 then
-	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/pig_figure.xml"))
-	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/pig_figure.xml"))
-	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/gw_bonestaff.xml"))
-	table.insert(Assets, Asset("IMAGE", "images/inventoryimages/gw_bonestaff.xml"))
+local minimappatlas = { "frost", "volcano", "grotto", "hamlet", "lavaarena", "quagmire", "rog", "shipwrecked_plus", "shipwrecked", "underwater", "windy", }
+for _, theme in ipairs(minimappatlas) do
+	AddMinimapAtlas("minimap/minimap_" .. theme .. ".xml")
 end
 
 table.insert(Assets, Asset("IMAGE", "levels/textures/ds_fog1.tex"))

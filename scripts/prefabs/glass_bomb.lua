@@ -2,9 +2,6 @@ local assets =
 {
 	Asset("ANIM", "anim/glass_bomb.zip"),
 	Asset("ANIM", "anim/swap_glass_bomb.zip"),
-
-	Asset("ATLAS", "images/inventoryimages/glass_bomb.xml"),
-	Asset("IMAGE", "images/inventoryimages/glass_bomb.tex")
 }
 
 local prefabs =
@@ -165,7 +162,6 @@ local function fn()
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/glass_bomb.xml"
 
 	inst:AddComponent("equippable")
 	inst.components.equippable:SetOnEquip(onequip)

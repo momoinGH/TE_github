@@ -1,7 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/magicpowder.zip"),
-    Asset("ATLAS", "images/inventoryimages/magicpowder.xml")
 }
 
 local function fn()
@@ -35,7 +34,6 @@ local function fn()
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/magicpowder.xml"
 
     MakeHauntableLaunch(inst)
 

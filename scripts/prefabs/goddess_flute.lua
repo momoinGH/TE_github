@@ -70,7 +70,6 @@ local function fn()
     inst.components.finiteuses:SetConsumption(ACTIONS.PLAY, 1)
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_flute.xml"
 
     MakeHauntableLaunch(inst)
     AddHauntableCustomReaction(inst, function(inst, haunter)

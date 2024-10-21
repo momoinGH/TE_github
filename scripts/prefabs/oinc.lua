@@ -66,7 +66,6 @@ local function fn(Sim)
     inst:AddComponent("waterproofer")
     inst.components.waterproofer.effectiveness = 0
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 
     return inst

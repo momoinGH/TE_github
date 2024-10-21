@@ -14,10 +14,8 @@ AddRecipe2("jelly_lantern", { Ingredient("twigs", 3), Ingredient("rope", 2), Ing
 AddRecipe2("snorkel", { Ingredient("tentaclespots", 2), Ingredient("silk", 2), Ingredient("mosquitosack", 4) },
     TECH.SCIENCE_ONE, nil, { "TOOLS" })
 AddRecipe2("hat_submarine", { Ingredient("tentaclespots", 5), Ingredient("iron_ore", 4), Ingredient("mosquitosack", 4) },
-    TECH.SCIENCE_TWO, {
-        atlas = "images/inventoryimages/creepindedeepinventory.xml"
-    }, { "TOOLS" })
-AddRecipe2("pearl_amulet", { Ingredient("pearl", 3, "images/inventoryimages/pearl.xml"), Ingredient("coral_cluster", 3) },
+    TECH.SCIENCE_TWO, nil, { "TOOLS" })
+AddRecipe2("pearl_amulet", { Ingredient("pearl", 3), Ingredient("coral_cluster", 3) },
     TECH.MAGIC_TWO, nil, { "MAGIC" })
 AddRecipe2("diving_suit_summer", { Ingredient("trunk_summer", 1), Ingredient("silk", 8), Ingredient("sponge_piece", 4) },
     TECH.SCIENCE_ONE, nil, { "CLOTHING" })

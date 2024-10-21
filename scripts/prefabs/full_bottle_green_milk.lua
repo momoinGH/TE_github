@@ -1,29 +1,21 @@
 local assets =
 {
 	Asset("ANIM", "anim/bottle_green.zip"),
-	Asset("IMAGE", "images/inventoryimages/full_bottle_green_milk.tex"),
-	Asset("ATLAS", "images/inventoryimages/full_bottle_green_milk.xml"),
 }
 
 local assets1 =
 {
 	Asset("ANIM", "anim/bottle_green.zip"),
-	Asset("IMAGE", "images/inventoryimages/half_bottle_green_milk.tex"),
-	Asset("ATLAS", "images/inventoryimages/half_bottle_green_milk.xml"),
 }
 
 local assets2 =
 {
 	Asset("ANIM", "anim/bottle_green.zip"),
-	Asset("IMAGE", "images/inventoryimages/less_bottle_green_milk.tex"),
-	Asset("ATLAS", "images/inventoryimages/less_bottle_green_milk.xml"),
 }
 
 local assets3 =
 {
 	Asset("ANIM", "anim/bottle_green.zip"),
-	Asset("IMAGE", "images/inventoryimages/bottle_green_youghurt.tex"),
-	Asset("ATLAS", "images/inventoryimages/bottle_green_youghurt.xml"),
 }
 
 local function Full_EatFn(inst, eater)
@@ -118,7 +110,6 @@ local function full_milk()
 	inst.components.edible:SetOnEatenFn(Full_EatFn)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/full_bottle_green_milk.xml"
 
 	return inst
 end
@@ -161,7 +152,6 @@ local function less_milk()
 	inst.components.edible:SetOnEatenFn(Less_EatFn)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/less_bottle_green_milk.xml"
 
 	return inst
 end
@@ -203,7 +193,6 @@ local function half_milk()
 
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/half_bottle_green_milk.xml"
 
 	return inst
 end
@@ -245,7 +234,6 @@ local function youghurt()
 	inst.components.edible:SetOnEatenFn(EatFn)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/bottle_green_youghurt.xml"
 
 	return inst
 end

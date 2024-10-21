@@ -33,7 +33,6 @@ local function fn(Sim)
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "jelly_cap"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/jelly_cap.xml"
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)

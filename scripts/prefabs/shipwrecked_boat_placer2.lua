@@ -48,7 +48,6 @@ local function fnbuoy(sim)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("fuel")
@@ -98,7 +97,6 @@ local function fnfish_farm(sim)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("fuel")
@@ -146,7 +144,6 @@ local function fnballphinhouse(sim)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("fuel")
@@ -194,7 +191,6 @@ local function fnresearchlab5(sim)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("fuel")
@@ -267,7 +263,6 @@ local function fntar_extractor(sim)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("fuel")
@@ -315,7 +310,6 @@ local function fnsea_chiminea(sim)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("fuel")
@@ -363,7 +357,6 @@ local function fnwaterchest1(sim)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("fuel")
@@ -411,7 +404,6 @@ local function fnsea_yard(sim)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
     inst:AddComponent("fuel")

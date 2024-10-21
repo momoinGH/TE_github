@@ -132,7 +132,6 @@ local function item()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "bubble_item"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/bubble_item.xml"
 
     inst.startfloating = startfloating
     inst.stopfloating = stopfloating

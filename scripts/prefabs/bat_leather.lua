@@ -38,7 +38,6 @@ local function fn()
     inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
 
 
     inst:AddComponent("edible")

@@ -139,8 +139,6 @@ local function fn(Sim)
 
     inst:AddComponent("inspectable")
 
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
-
 
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(10)

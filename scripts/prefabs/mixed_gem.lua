@@ -1,8 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/mixed_gem.zip"),
-    Asset("ATLAS", "images/inventoryimages/mixed_gem.xml"),
-    Asset("IMAGE", "images/inventoryimages/mixed_gem.tex"),
 
 }
 
@@ -31,7 +29,6 @@ local function fn()
     end
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/mixed_gem.xml"
 
     inst:AddComponent("inspectable")
 

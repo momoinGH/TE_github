@@ -1,10 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/pearl_amulet.zip"),
-
-
-    Asset("IMAGE", "images/inventoryimages/pearl_amulet.tex"),
-    Asset("ATLAS", "images/inventoryimages/pearl_amulet.xml"),
 }
 
 local function onequip(inst, owner)
@@ -53,7 +49,6 @@ local function fn()
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.foleysound = "dontstarve/movement/foley/jewlery"
     inst.components.inventoryitem.imagename = "pearl_amulet"
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/pearl_amulet.xml"
 
     inst:AddTag("amulet") -- 适配六格
 

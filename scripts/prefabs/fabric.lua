@@ -26,7 +26,6 @@ local function fn()
     end
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
     inst:AddComponent("inspectable")
     inst:AddComponent("stackable")

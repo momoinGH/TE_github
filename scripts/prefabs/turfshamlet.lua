@@ -64,11 +64,6 @@ local function make_turf(tile, data)
         --inst.components.inventoryitem.imagename = data.name
         inst.components.inventoryitem.atlasname = data.invent
 
-        if data.invent == "images/inventoryimages/volcanoinventory.xml" then
-            inst.caminho =
-            "images/inventoryimages/volcanoinventory.xml"
-        end
-
         inst:AddComponent("bait")
 
         inst:AddComponent("fuel")
@@ -92,28 +87,28 @@ end
 local ret = {}
 table.insert(ret,
     make_turf(GROUND.CHECKEREDLAWN or GROUND.MARSH,
-        { name = "checkeredlawn", anim = "checkeredlawn", invent = "images/inventoryimages/volcanoinventory.xml" }))
+        { name = "checkeredlawn", anim = "checkeredlawn" }))
 table.insert(ret,
     make_turf(GROUND.SUBURB or GROUND.MARSH,
-        { name = "suburb", anim = "mossy_blossom", invent = "images/inventoryimages/volcanoinventory.xml" })) --place a marsh tile, if the swamp generation is disabled
+        { name = "suburb", anim = "mossy_blossom" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
     make_turf(GROUND.FOUNDATION or GROUND.MARSH,
-        { name = "foundation", anim = "fanstone", invent = "images/inventoryimages/volcanoinventory.xml" })) --place a marsh tile, if the swamp generation is disabled
+        { name = "foundation", anim = "fanstone" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
     make_turf(GROUND.COBBLEROAD or GROUND.MARSH,
-        { name = "cobbleroad", anim = "cobbleroad", invent = "images/inventoryimages/volcanoinventory.xml" })) --place a marsh tile, if the swamp generation is disabled
+        { name = "cobbleroad", anim = "cobbleroad" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
     make_turf(GROUND.GASJUNGLE or GROUND.MARSH,
-        { name = "gasjungle", anim = "gasjungle", invent = "images/inventoryimages/volcanoinventory.xml" })) --place a marsh tile, if the swamp generation is disabled
+        { name = "gasjungle", anim = "gasjungle" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
     make_turf(GROUND.FIELDS or GROUND.MARSH,
-        { name = "fields", anim = "farmland", invent = "images/inventoryimages/volcanoinventory.xml" })) --place a marsh tile, if the swamp generation is disabled
+        { name = "fields", anim = "farmland" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
     make_turf(GROUND.RAINFOREST or GROUND.MARSH,
-        { name = "rainforest", anim = "rainforest", invent = "images/inventoryimages/volcanoinventory.xml" })) --place a marsh tile, if the swamp generation is disabled
+        { name = "rainforest", anim = "rainforest" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
     make_turf(GROUND.DEEPRAINFOREST or GROUND.MARSH,
-        { name = "deeprainforest", anim = "deepjungle", invent = "images/inventoryimages/volcanoinventory.xml" })) --place a marsh tile, if the swamp generation
+        { name = "deeprainforest", anim = "deepjungle" })) --place a marsh tile, if the swamp generation
 
 table.insert(ret,
     make_turf(GROUND.PAINTED or GROUND.MARSH, { name = "painted", anim = "bog", invent = "images/turfs/turf01-9.xml" }))   --place a marsh tile, if the swamp generation is disabled
@@ -128,7 +123,7 @@ table.insert(ret,
         { name = "beardrug", anim = "beard_hair", invent = "images/turfs/turf01-14.xml" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
     make_turf(GROUND.PIGRUINS or GROUND.MARSH,
-        { name = "pigruins", anim = "pig_ruins", invent = "images/inventoryimages/volcanoinventory.xml" })) --place a marsh tile, if the swamp generation is disabled
+        { name = "pigruins", anim = "pig_ruins" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
     make_turf(GROUND.ANTFLOOR or GROUND.MARSH,
         { name = "antfloor", anim = "antcave", invent = "images/turfs/turf01-13.xml" })) --place a marsh tile, if the swamp generation is disabled

@@ -75,9 +75,7 @@ local function make_plantable(data)
         inst:AddComponent("inventoryitem")
 
         if data.name == "nettle" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
         else
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
 
         inst:AddComponent("fuel")

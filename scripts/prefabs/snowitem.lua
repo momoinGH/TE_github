@@ -50,7 +50,6 @@ local function sandfn(Sim)
 	inst.components.perishable:SetOnPerishFn(onperish)
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 	return inst

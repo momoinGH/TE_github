@@ -2,7 +2,6 @@ local assets =
 {
     Asset("ANIM", "anim/hat_bee.zip"),
     Asset("ANIM", "anim/tiki_mask.zip"),
-    Asset("ATLAS", "images/inventoryimages/tikimask.xml")
 }
 
 local function generic_perish(inst)
@@ -61,7 +60,6 @@ local function fn(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/tikimask.xml"
     inst:AddComponent("tradable")
 
     inst:AddComponent("armor")

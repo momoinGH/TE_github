@@ -1,7 +1,5 @@
 local assets =
 {
-    Asset("IMAGE", "images/inventoryimages/goddess_butterflywings.tex"),
-    Asset("ATLAS", "images/inventoryimages/goddess_butterflywings.xml"),
     Asset("ANIM", "anim/goddess_butterfly_wings.zip"),
 }
 
@@ -61,7 +59,6 @@ local function fn()
     inst.components.perishable.onperishreplacement = "spoiled_food"
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/goddess_butterflywings.xml"
 
     MakeHauntableLaunchAndPerish(inst)
 

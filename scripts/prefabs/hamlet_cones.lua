@@ -47,8 +47,6 @@ local function addcone(name, spawn_prefab, bank, build, anim, winter_tree)
     local assets =
     {
         Asset("ANIM", "anim/" .. build .. ".zip"),
-        Asset("IMAGE", "images/inventoryimages/" .. name .. ".tex"),
-        Asset("ATLAS", "images/inventoryimages/" .. name .. ".xml"),
     }
     if bank ~= build then
         table.insert("ANIM", "anim/" .. bank .. ".zip")
@@ -100,7 +98,6 @@ local function addcone(name, spawn_prefab, bank, build, anim, winter_tree)
         MakeSmallPropagator(inst)
 
         inst:AddComponent("inventoryitem")
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/" .. name .. ".xml"
         --inst.components.inventoryitem:ChangeImageName("pinecone")
 
         MakeHauntableLaunchAndIgnite(inst)

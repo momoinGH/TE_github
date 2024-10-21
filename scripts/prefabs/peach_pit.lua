@@ -1,8 +1,6 @@
 local assets =
 {
 	Asset("ANIM", "anim/peach_pit.zip"),
-	Asset("ATLAS", "images/inventoryimages/peach_pit.xml"),
-	Asset("IMAGE", "images/inventoryimages/peach_pit.tex"),
 }
 
 local prefabs =
@@ -60,7 +58,6 @@ local function fn(Sim)
 	inst:AddComponent("tradable")
 	inst:AddComponent("inspectable")
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach_pit.xml"
 
 	inst.AnimState:PlayAnimation("idle")
 

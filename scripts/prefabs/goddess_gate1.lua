@@ -1,8 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/goddess_gate.zip"),
-    Asset("IMAGE", "images/map_icons/goddess_gate.tex"),
-    Asset("ATLAS", "images/map_icons/goddess_gate.xml")
 }
 
 local function fn()

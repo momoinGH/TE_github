@@ -87,7 +87,6 @@ local function MakeBook(def)
 
         inst:AddComponent("inventoryitem")
         if def.name == "book_meteor1" then
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
         end
         inst:AddComponent("finiteuses")
         inst.components.finiteuses:SetMaxUses(def.uses)
@@ -151,7 +150,6 @@ local function fnobsidian(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
 
 
 

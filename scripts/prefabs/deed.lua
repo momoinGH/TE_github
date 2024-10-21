@@ -48,7 +48,6 @@ local function makefn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
     inst.components.inventoryitem.foleysound = "dontstarve/movement/foley/jewlery"
 
     return inst
