@@ -181,6 +181,7 @@ local InventoryItems = {
 	windy = { "bottle_green_youghurt", "caramel_peach", "cutgreengrass", "empty_bottle_green", "flower_bottle", "forbidden_fruit", "full_bottle_green", "full_bottle_green_dirty", "full_bottle_green_milk", "full_bottle_green_youghurt", "gem_seeds", "glass_bomb", "goddess_bar", "goddess_bell", "goddess_bird", "goddess_butterfly", "goddess_butterflywings", "goddess_feather", "goddess_figure", "goddess_fishingrod", "goddess_flute", "goddess_fountainette", "goddess_goggles", "goddess_hat", "goddess_lantern", "goddess_pouch", "goddess_rabbit_fur", "goddess_rabbit_live", "goddess_ribbon", "goddess_staff", "goddess_sword", "goddess_tea", "goddess_tori", "grilled_peach", "half_bottle_green_milk", "less_bottle_green_milk", "magicpowder", "mixed_gem", "peach", "peach_custard", "peach_juice_bottle_green", "peach_juice_bottle_green_half", "peach_juice_bottle_green_less", "peach_juice_bottle_green_most", "peach_kabobs", "peach_pit", "peach_pop", "peach_smoothie", "peachy_meatloaf", "peachy_poop", "potion_bottle_green", "usedfan", "windyfan", "windyturf", }, 
 }
 for atlas, items in pairs(InventoryItems) do
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/inventory_" .. atlas .. ".xml"))
 	local path = resolvefilepath("images/inventoryimages/inventory_" .. atlas .. ".xml")
 	for _, image in ipairs(items) do
 		RegisterInventoryItemAtlas(path, image .. ".tex")

@@ -80,7 +80,6 @@ local function fn1(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "map_icons/creepindedeepicon.xml"
 
 
 	inst:AddComponent("stackable")
@@ -130,7 +129,6 @@ local function fn2(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "map_icons/creepindedeepicon.xml"
 
 
 	inst:AddComponent("stackable")

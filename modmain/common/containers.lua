@@ -24,7 +24,7 @@ params.honeychest = {
 	widget = {
 		slotpos = { Vector3(hcpos.x, hcpos.y + hcpos.r, 0) },
 		slotbg = { hcbg },
-		animbank = "ui_honeychest_7x",
+        animbank = "ui_chest_3x3",
 		animbuild = "ui_honeychest_7x",
 		pos = Vector3(hcpos.x, hcpos.y + 200, 0),
 		side_align_tip = 300 - hcpos.r
@@ -174,13 +174,17 @@ params.thatchpack.type = "pack"
 params.thatchpack.openlimit = 1
 ----------------------------------------------------------------------------------------------------
 local function BoatItemTestFn(container, item, slot)
-	if slot == 1 then
-		return item:HasTag("shipwrecked_boat_tail")
-	elseif slot == 2 then
-		return item:HasTag("shipwrecked_boat_head")
-	else
-		return true
-	end
+    if not slot then return true end
+    local slotitem = container:GetItemInSlot(slot)
+    if slot == 1 then
+        return not slotitem and item:HasTag("shipwrecked_boat_tail")
+    elseif slot == 2 then
+        return not slotitem and item:HasTag("shipwrecked_boat_head")
+    else
+        if not slotitem then return true end
+        if slotitem.prefab ~= item.prefab then return false end
+        return slotitem.components.stackable and not slotitem.components.stackable:IsFull()
+    end
 end
 
 local shipwrecked_boat_slotbg =
