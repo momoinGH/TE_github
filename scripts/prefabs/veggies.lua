@@ -528,27 +528,15 @@ local function MakeVeggie(name, has_seeds)
 
         inst:AddComponent("edible")
         inst.components.edible.foodtype = FOODTYPE.SEEDS
-
+        inst.components.edible.healthvalue = TUNING.HEALING_TINY / 2
+        inst.components.edible.hungervalue = TUNING.CALORIES_TINY
+		
         inst:AddComponent("stackable")
         inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
         inst:AddComponent("tradable")
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
-        if name == "aloe" then
-        end
-        if name == "radish" then
-        end
-        if name == "gooseberry" then
-        end
-        if name == "blueberries" then
-        end
-        if name == "sweet_potato" then
-        end
-        if name == "turnip" then inst.components.inventoryitem.imagename = "quagmire_seeds_5" end
-        if name == "wheat" then inst.components.inventoryitem.imagename = "quagmire_seeds_1" end
-        inst.components.edible.healthvalue = TUNING.HEALING_TINY / 2
-        inst.components.edible.hungervalue = TUNING.CALORIES_TINY
 
         inst:AddComponent("perishable")
         inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
@@ -687,23 +675,6 @@ local function MakeVeggie(name, has_seeds)
 
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
-        if name == "aloe" then
-        end
-        if name == "radish" then
-        end
-        if name == "gooseberry" then
-        end
-        if name == "blueberries" then
-        end
-        if name == "sweet_potato" then
-        end
-        if name == "wheat" then
-        end
-        if name == "turnip" then inst.components.inventoryitem.imagename = "quagmire_turnip" end
-
-        if usequagmireicon then
-            inst.components.inventoryitem:ChangeImageName("quagmire_" .. name)
-        end
 
         -- Regular veggies are weighable but don't have a weight. They all show the same
         -- result when put in a trophyscale_oversizedveggies, and always replace other
@@ -815,22 +786,6 @@ local function MakeVeggie(name, has_seeds)
 
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
-        if name == "aloe" then
-        end
-        if name == "radish" then
-        end
-        if name == "gooseberry" then
-        end
-        if name == "blueberries" then
-        end
-        if name == "sweet_potato" then
-        end
-        if name == "wheat" then inst.components.inventoryitem.imagename = "quagmire_wheat_cooked" end
-        if name == "turnip" then inst.components.inventoryitem.imagename = "quagmire_turnip_cooked" end
-
-        if usequagmireicon then
-            inst.components.inventoryitem:ChangeImageName("quagmire_" .. name .. "_cooked")
-        end
 
         MakeSmallBurnable(inst)
         MakeSmallPropagator(inst)
@@ -888,16 +843,6 @@ local function MakeVeggie(name, has_seeds)
 
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
-        if name == "aloe" then
-        end
-        if name == "radish" then
-        end
-        if name == "gooseberry" then
-        end
-        if name == "blueberries" then
-        end
-        if name == "sweet_potato" then
-        end
 
         MakeSmallBurnable(inst)
         MakeSmallPropagator(inst)
@@ -957,16 +902,6 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("inventoryitem")
         inst.components.inventoryitem.cangoincontainer = false
         inst.components.inventoryitem:SetSinks(true)
-        if name == "aloe" then
-        end
-        if name == "radish" then
-        end
-        if name == "sweet_potato" then
-        end
-        if name == "turnip" then
-        end
-        if name == "wheat" then
-        end
 
         inst:AddComponent("equippable")
         inst.components.equippable.equipslot = EQUIPSLOTS.BODY
@@ -1048,12 +983,6 @@ local function MakeVeggie(name, has_seeds)
 
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
-        if name == "aloe" then
-        end
-        if name == "radish" then
-        end
-        if name == "sweet_potato" then
-        end
 
         inst.components.inventoryitem.cangoincontainer = false
         inst.components.inventoryitem:SetSinks(true)

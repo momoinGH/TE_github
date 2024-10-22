@@ -81,7 +81,6 @@ local function fn1(Sim)
 
 	inst:AddComponent("inventoryitem")
 
-
 	inst:AddComponent("stackable")
 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
@@ -129,7 +128,6 @@ local function fn2(Sim)
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-
 
 	inst:AddComponent("stackable")
 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
