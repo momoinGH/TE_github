@@ -8,15 +8,15 @@ local function en_zh_zht(en, zh, zht)
 	end -- 英文
 end
 
-name = en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "船難哈姆雷特生態：來自域外")
+name = en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "熱帶體驗 | 船難哈姆雷特生態：來自域外")
 description = en_zh_zht([[
-version：3.79
+version：3.83
 Attention: We added a complement to this mod.
 In it will have several changes to improve the experience of the game.
 Visit only the main mod page and download.
 Tropical Experience| Complement",
 ]], [[
-版本：3.79
+版本：3.83
 注意：我们为此模组添加了一些内容补充
 其中包含了多项改进游戏体验的玩法变化，请访问此模组创意工坊进行下载
 多种生态群系体验 | 补充内容
@@ -30,7 +30,7 @@ Tropical Experience| Complement",
 
 兼容樱花林(Cherry Forest)",
 ]], [[
-版本：3.79
+版本：3.83
 注意：我們爲此模組添加了一些內容補充
 其中包含了多項改進遊戲體驗的玩法變化，請訪問此模組創意工坊進行下載
 多種生態羣系體驗 | 補充內容
@@ -46,7 +46,7 @@ Tropical Experience| Complement",
 ]])
 
 author = "Vagner da Rocha Santos."
-version = "3.79"
+version = "3.83"
 forumthread = ""
 api_version = 10
 priority = -20
