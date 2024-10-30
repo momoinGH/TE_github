@@ -295,7 +295,6 @@ local function MakeArmor(name, data)
         end
 
         inst:AddComponent("inventoryitem")
-        inst.components.inventoryitem.atlasname = "images/tfwp_inventoryimgs.xml"
 
         inst:AddComponent("inspectable")
 
