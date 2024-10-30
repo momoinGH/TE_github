@@ -1023,7 +1023,7 @@ local internalloot =
 			dubloon = 2,
 			footballhat = 1,
 			spear = 1,
-			armor_seashell = 1,
+			armorseashell = 1,
 		},
 
 		random_loot =
@@ -2029,7 +2029,7 @@ local internalloot =
 		{
 			--spear_launcher = 1,
 			spear_poison = 1,
-			armor_seashell = 1,
+			armorseashell = 1,
 			coconade = 1,
 		},
 	},

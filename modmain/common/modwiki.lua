@@ -146,8 +146,8 @@ WIKI_DATA.armor_metalplate = {
     armor = TUNING.ARMORMETAL,
     absorb_percent = TUNING.ARMORMETAL_ABSORPTION,
 }
-WIKI_DATA.armor_seashell = {
-    tex = "armor_seashell.tex",
+WIKI_DATA.armorseashell = {
+    tex = "armorseashell.tex",
     bank = "armor_seashell",
     build = "armor_seashell",
     anim = "anim",
