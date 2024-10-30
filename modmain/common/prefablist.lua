@@ -11,7 +11,7 @@ PrefabFiles =
     "turfesvolcanobiome",
     "venomgland",
     "machetes",
-    "antidote",
+    "antivenom",
     "splash_water",
     "debris", --debris_1, debris_2, debris_3, debris_4 espalhar na praia
 

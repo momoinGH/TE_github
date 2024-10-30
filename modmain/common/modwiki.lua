@@ -82,8 +82,8 @@ WIKI_DATA.honeychest = {
     workable = "HAMMER",
     deps = { "chestupgrade_stacksize" }
 }
-WIKI_DATA.antidote = {
-    tex = "antidote.tex",
+WIKI_DATA.antivenom = {
+    tex = "antivenom.tex",
     bank = "poison_antidote",
     build = "poison_antidote",
     anim = "idle",

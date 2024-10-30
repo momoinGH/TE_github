@@ -27,7 +27,7 @@ return {
         [013] = "spidergland",
         [014] = "healingsalve",
         [015] = "bandage",
-        [016] = "antidote",
+        [016] = "antivenom",
         [017] = "reviver",
         [018] = "goatmilk",
         --------------------------lavaarena_spectator1---------------------------------------

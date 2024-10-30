@@ -53,4 +53,4 @@ local function fn()
     return inst
 end
 
-return Prefab("antidote", fn, assets)
+return Prefab("antivenom", fn, assets)
