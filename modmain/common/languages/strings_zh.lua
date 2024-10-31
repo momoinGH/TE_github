@@ -2399,9 +2399,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FROGLEGS_POISON_COOKED = "被毒素污染的
 STRINGS.NAMES.MOSQUITO_POISON = "毒蚊子"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MOSQUITO_POISON = "这些该死的蚊子携带着一种可怕的疾病。"
 
-STRINGS.NAMES.OTTER = "水獭"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.OTTER = "具有水生习性的生物。"
-
 -----------------------------------------------彩绘沙漠painted---------------------------------------
 
 STRINGS.NAMES.TUBERTREE = "块茎树"
