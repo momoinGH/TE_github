@@ -417,7 +417,7 @@ AddRecipe2("shadowduelist_builder", {Ingredient("nightmarefuel", 2),
                                                 GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDUELIST)},
            TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
 -- Wickerbottom
-AddRecipe2("book_meteor1", {Ingredient("papyrus", 2), Ingredient("obsidian", 2)}, TECH.SCIENCE_TWO, {
+AddRecipe2("book_meteor", {Ingredient("papyrus", 2), Ingredient("obsidian", 2)}, TECH.SCIENCE_TWO, {
     builder_tag = "bookbuilder",
 }, {"CHARACTER"})
 -- WX78--
@@ -1452,7 +1452,7 @@ SortAfter("luckyhat", "surfboarditem", "CHARACTER")
 -- SortAfter("transmute_dragoonheart", "transmute_obsidian", "CHARACTER")--ia改威吊技能树：化黑曜石为呆龙心脏。
 -- SortAfter("transmute_jelly", "transmute_smallmeat", "CHARACTER")--ia改威吊技能树：化彩虹水母为水母。
 -- SortAfter("transmute_rainbowjelly", "transmute_jelly", "CHARACTER")--ia改威吊技能树：化水母为彩虹水母。
-SortAfter("book_meteor1", "book_sleep", "CHARACTER")
+SortAfter("book_meteor", "book_sleep", "CHARACTER")
 SortAfter("mutator_tropical", "mutator_warrior", "CHARACTER")
 SortAfter("mutator_frost", "mutator_moon", "CHARACTER")
 -- SortAfter("poisonbalm", "antivenom", "RESTORATION")
