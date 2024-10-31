@@ -4,11 +4,6 @@ local assets =
     Asset("ANIM", "anim/fan.zip"),
 }
 
-local prefabs_perd =
-{
-    "tornado",
-}
-
 local function OnUse(inst, target)
     local x, y, z = target.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, TUNING.FEATHERFAN_RADIUS, nil,
@@ -26,50 +21,7 @@ local function OnUse(inst, target)
     end
 end
 
-local function NoHoles(pt)
-    return not TheWorld.Map:IsPointNearHole(pt)
-end
-
-local function OnChanneling(inst, target)
-    if inst.components.finiteuses:GetUses() > 3 then
-        local pos =
-            (target ~= nil and target:GetPosition()) or
-            (inst.components.inventoryitem.owner ~= nil and inst.components.inventoryitem.owner:GetPosition()) or
-            nil
-        if pos ~= nil then
-            local angle
-            if inst.lasttornadoangle == nil then
-                angle = math.random() * TWOPI
-                inst.lasttornadoangle = angle
-            else
-                angle = inst.lasttornadoangle + PI
-                inst.lasttornadoangle = nil
-            end
-            local offset = FindWalkableOffset(pos, angle, 4, 8, false, true, NoHoles)
-            if offset ~= nil then
-                inst.components.finiteuses:Use(2)
-
-                local tornado = SpawnPrefab("tornado")
-                tornado:SetDuration(TUNING.PERDFAN_TORNADO_LIFETIME)
-                tornado.WINDSTAFF_CASTER = inst.components.inventoryitem.owner
-                tornado.WINDSTAFF_CASTER_ISPLAYER = tornado.WINDSTAFF_CASTER ~= nil and
-                    tornado.WINDSTAFF_CASTER:HasTag("player")
-                tornado.Transform:SetPosition(pos.x + offset.x * .5, 0, pos.z + offset.z * .5)
-                pos.x = pos.x + offset.x
-                pos.y = 0
-                pos.z = pos.z + offset.z
-                tornado.components.knownlocations:RememberLocation("target", pos)
-
-                if tornado.WINDSTAFF_CASTER_ISPLAYER then
-                    tornado.overridepkname = tornado.WINDSTAFF_CASTER:GetDisplayName()
-                    tornado.overridepkpet = true
-                end
-            end
-        end
-    end
-end
-
-local function doydoyfan()
+local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -87,7 +39,6 @@ local function doydoyfan()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("fan")
-    inst:AddTag("channelingfan")
     inst:AddTag("aquatic")
 
     inst.entity:SetPristine()
@@ -99,10 +50,8 @@ local function doydoyfan()
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
 
-
     inst:AddComponent("fan")
     inst.components.fan:SetOnUseFn(OnUse)
-    inst.components.fan:SetOnChannelingFn(OnChanneling)
     --    inst.components.fan:SetOverrideSymbol("swap_fan_tropical")
     inst.components.fan:SetOverrideSymbol("fan01")
     inst.components.fan.overridebuild = "fan_tropical"
@@ -110,12 +59,12 @@ local function doydoyfan()
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetOnFinished(inst.Remove)
     inst.components.finiteuses:SetConsumption(ACTIONS.FAN, 1)
-    inst.components.finiteuses:SetMaxUses(15)
-    inst.components.finiteuses:SetUses(15)
+    inst.components.finiteuses:SetMaxUses(TUNING.FEATHERFAN_USES)
+    inst.components.finiteuses:SetUses(TUNING.FEATHERFAN_USES)
 
     MakeHauntableLaunch(inst)
 
     return inst
 end
 
-return Prefab("doydoyfan", doydoyfan, assets)
+return Prefab("tropicalfan", fn, assets)
