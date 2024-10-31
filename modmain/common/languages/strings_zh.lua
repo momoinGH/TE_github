@@ -1108,9 +1108,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_VOLCANO = "岩石与灰烬。"
 -------------------------------------------海难制造-------------------------------------------------
 
 -----黑曜石工作台OBSIDIAN_WORKBENCH
-STRINGS.NAMES.BOOK_METEOR1 = "火山学的乐趣"
-STRINGS.RECIPE_DESC.BOOK_METEOR1 = "流星从天而降！"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOOK_METEOR1 = "序言写着“希望你能喜欢龙。”"
+STRINGS.NAMES.BOOK_METEOR = "火山学的乐趣"
+STRINGS.RECIPE_DESC.BOOK_METEOR = "流星从天而降！"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOOK_METEOR = "序言写着“希望你能喜欢龙。”"
 
 STRINGS.NAMES.OBSIDIANFIREPIT = "黑曜石火坑"
 STRINGS.RECIPE_DESC.OBSIDIANFIREPIT = "所有火焰中最炙热的！"
@@ -2398,9 +2398,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FROGLEGS_POISON_COOKED = "被毒素污染的
 
 STRINGS.NAMES.MOSQUITO_POISON = "毒蚊子"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MOSQUITO_POISON = "这些该死的蚊子携带着一种可怕的疾病。"
-
-STRINGS.NAMES.OTTER = "水獭"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.OTTER = "具有水生习性的生物。"
 
 -----------------------------------------------彩绘沙漠painted---------------------------------------
 

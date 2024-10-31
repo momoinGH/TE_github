@@ -374,7 +374,7 @@ local function fn()
     inst.components.childspawner:SetMaxChildren(1)
     inst.components.childspawner:StartRegen()
 	inst.components.childspawner.spawnradius = {min = 0, max = 0}
-	inst.components.childspawner.childname = "otter"
+	inst.components.childspawner.childname = ""
 	inst.components.childspawner.wateronly = true
 	inst.components.childspawner:StartSpawning()	]]
 

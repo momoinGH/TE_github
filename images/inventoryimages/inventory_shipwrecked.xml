@@ -34,7 +34,7 @@
         <Element name="brainjellyhat.tex" u1="0.0314941" u2="0.0622559" v1="0.000488281" v2="0.0620117"/>
         <Element name="buoy.tex" u1="0.0627441" u2="0.0935059" v1="0.937988" v2="0.999512"/>
         <Element name="butterfly_tropical.tex" u1="0.0627441" u2="0.0935059" v1="0.875488" v2="0.937012"/>
-        <Element name="butterflywings_tropical.tex" u1="0.0627441" u2="0.0935059" v1="0.812988" v2="0.874512"/>
+        <Element name="butterfly_tropical_wings.tex" u1="0.0627441" u2="0.0935059" v1="0.812988" v2="0.874512"/>
         <Element name="captainhat.tex" u1="0.0627441" u2="0.0935059" v1="0.750488" v2="0.812012"/>
         <Element name="cargoboat.tex" u1="0.0627441" u2="0.0935059" v1="0.687988" v2="0.749512"/>
         <Element name="chiminea.tex" u1="0.0627441" u2="0.0935059" v1="0.625488" v2="0.687012"/>

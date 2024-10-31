@@ -54,7 +54,6 @@ PrefabFiles =
     "grotto_grub",
     "grotto_parsnip",
     "grottoqueen",
-    -- otter --水獭，废弃
     "icedpad",
     --"yeti",
     "artic_flower",
