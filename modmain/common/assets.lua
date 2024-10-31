@@ -23,7 +23,7 @@ Assets =
 	--Asset("SOUNDPACKAGE", "sound/tropical.fev"),
 	--Asset("SOUND", "sound/tropical.fsb"),
 
-	Asset("IMAGE", "images/barco.tex"),
+	-- Asset("IMAGE", "images/barco.tex"),
 	Asset("ATLAS", "images/barco.xml"),
 
 	Asset("ANIM", "anim/player_actions_paddle.zip"),
@@ -102,55 +102,55 @@ Assets =
 	--Asset("SOUND", "sound/Hamlet.fsb"),
 
 
-	Asset("IMAGE", "images/names_wilbur.tex"),
+	-- @Runar: 声明资产不需要声明tex
+	-- Asset("IMAGE", "images/names_wilbur.tex"),
 	Asset("ATLAS", "images/names_wilbur.xml"),
-	Asset("IMAGE", "images/names_woodlegs.tex"),
+	-- Asset("IMAGE", "images/names_woodlegs.tex"),
 	Asset("ATLAS", "images/names_woodlegs.xml"),
-	Asset("IMAGE", "images/names_walani.tex"),
+	-- Asset("IMAGE", "images/names_walani.tex"),
 	Asset("ATLAS", "images/names_walani.xml"),
 
 
 	Asset("ATLAS", "images/tabs.xml"),
-	Asset("IMAGE", "images/tabs.tex"),
-	Asset("IMAGE", "images/turfs/turf01-9.tex"),
+	-- Asset("IMAGE", "images/tabs.tex"),
+	-- Asset("IMAGE", "images/turfs/turf01-9.tex"),
 	Asset("ATLAS", "images/turfs/turf01-9.xml"),
 
-	Asset("IMAGE", "images/turfs/turf01-10.tex"),
+	-- Asset("IMAGE", "images/turfs/turf01-10.tex"),
 	Asset("ATLAS", "images/turfs/turf01-10.xml"),
 
-	Asset("IMAGE", "images/turfs/turf01-11.tex"),
+	-- Asset("IMAGE", "images/turfs/turf01-11.tex"),
 	Asset("ATLAS", "images/turfs/turf01-11.xml"),
 
-	Asset("IMAGE", "images/turfs/turf01-12.tex"),
+	-- Asset("IMAGE", "images/turfs/turf01-12.tex"),
 	Asset("ATLAS", "images/turfs/turf01-12.xml"),
 
-	Asset("IMAGE", "images/turfs/turf01-13.tex"),
+	-- Asset("IMAGE", "images/turfs/turf01-13.tex"),
 	Asset("ATLAS", "images/turfs/turf01-13.xml"),
 
-	Asset("IMAGE", "images/turfs/turf01-14.tex"),
+	-- Asset("IMAGE", "images/turfs/turf01-14.tex"),
 	Asset("ATLAS", "images/turfs/turf01-14.xml"),
 	Asset("ANIM", "anim/vagner_over.zip"),
 	Asset("ANIM", "anim/leaves_canopy2.zip"),
 
 	Asset("ANIM", "anim/mushroom_tree_yelow.zip"),
 
-	Asset("IMAGE", "images/cookbook/cookbook_sw.tex"),
+	-- Asset("IMAGE", "images/cookbook/cookbook_sw.tex"),
 	Asset("ATLAS", "images/cookbook/cookbook_sw.xml"),
-	Asset("IMAGE", "images/cookbook/cookbook_ham.tex"),
+	-- Asset("IMAGE", "images/cookbook/cookbook_ham.tex"),
 	Asset("ATLAS", "images/cookbook/cookbook_ham.xml"),
-	-- tempo
 
 	Asset("ANIM", "anim/ui_honeychest_7x.zip"),
-	Asset("IMAGE", "images/ui/honeychest.tex"),
+	-- Asset("IMAGE", "images/ui/honeychest.tex"),
 	Asset("ATLAS", "images/ui/honeychest.xml"),
 
 	Asset("ANIM", "anim/button.zip"),
-	Asset("IMAGE", "images/store.tex"),
+	-- Asset("IMAGE", "images/store.tex"),
 	Asset("ATLAS", "images/store.xml"),
-	Asset("IMAGE", "images/store_soldout.tex"),
+	-- Asset("IMAGE", "images/store_soldout.tex"),
 	Asset("ATLAS", "images/store_soldout.xml"),
 	Asset("ATLAS", "images/buttongorge.xml"),
-	Asset("IMAGE", "images/buttongorge.tex"),
+	-- Asset("IMAGE", "images/buttongorge.tex"),
 
 	-- 虚空小地图使用
 	Asset("ATLAS", "levels/textures/tro_map_interior/exit.xml"),
@@ -162,6 +162,8 @@ Assets =
 	Asset("ATLAS", "levels/textures/tro_map_interior/passage_blocked.xml"),
 	Asset("ATLAS", "levels/textures/tro_map_interior/passage_unknown.xml"),
 	Asset("ATLAS", "levels/textures/tro_map_interior/passage.xml"),
+
+	Asset("IMAGE", "levels/textures/ds_fog1.tex"),
 }
 
 -- # Inventory item atlas register
@@ -185,10 +187,26 @@ for atlas, items in pairs(InventoryItems) do
 		RegisterInventoryItemAtlas(path, image .. ".tex")
 	end
 end
-----------------------------------------------------------------------------------------------------
-local minimappatlas = { "frost", "volcano", "grotto", "hamlet", "lavaarena", "quagmire", "rog", "shipwrecked_plus", "shipwrecked", "underwater", "windy", }
-for _, theme in ipairs(minimappatlas) do
-	AddMinimapAtlas("minimap/minimap_" .. theme .. ".xml")
+
+-- # Preparedfood item atlas register
+local Preparedfoods = {
+	frost = { "fruityjuice", },
+	ham = { "bubbletea.tex", "feijoada.tex", "frenchonionsoup.tex", "gummy_cake.tex", "hardshell_tacos.tex", "icedtea.tex", "lotuschips.tex", "meated_nettle.tex", "nettlelosange.tex", "poi.tex", "slaw.tex", "snakebonesoup.tex", "steamedhamsandwich.tex", "tea.tex", },
+	quagmire = { "bacon_wrapped_meat", "bacon_wrapped_meat_plate_generic", "bacon_wrapped_meat_plate_gold", "bacon_wrapped_meat_plate_silver", "bagel_n_fish", "bagel_n_fish_plate_generic", "bagel_n_fish_plate_gold", "bagel_n_fish_plate_silver", "berry_tart", "berry_tart_plate_generic", "berry_tart_plate_gold", "berry_tart_plate_silver", "bread", "bread_plate_generic", "bread_plate_gold", "bread_plate_silver", "breaded_cutlet", "breaded_cutlet_plate_generic", "breaded_cutlet_plate_gold", "breaded_cutlet_plate_silver", "bruschetta", "bruschetta_plate_generic", "bruschetta_plate_gold", "bruschetta_plate_silver", "candied_fish", "candied_fish_plate_generic", "candied_fish_plate_gold", "candied_fish_plate_silver", "candy", "candy_plate_generic", "candy_plate_gold", "candy_plate_silver", "caramel_cube", "caramel_cube_plate_generic", "caramel_cube_plate_gold", "caramel_cube_plate_silver", "carrot_cake", "carrot_cake_plate_generic", "carrot_cake_plate_gold", "carrot_cake_plate_silver", "carrot_soup", "carrot_soup_bowl_generic", "carrot_soup_bowl_gold", "carrot_soup_bowl_silver", "cheeseburger", "cheeseburger_plate_generic", "cheeseburger_plate_gold", "cheeseburger_plate_silver", "cheesecake", "cheesecake_plate_generic", "cheesecake_plate_gold", "cheesecake_plate_silver", "chips", "chips_plate_generic", "chips_plate_gold", "chips_plate_silver", "crab_cake", "crab_cake_plate_generic", "crab_cake_plate_gold", "crab_cake_plate_silver", "crab_ravioli", "crab_ravioli_plate_generic", "crab_ravioli_plate_gold", "crab_ravioli_plate_silver", "crab_roll", "crab_roll_plate_generic", "crab_roll_plate_gold", "crab_roll_plate_silver", "cream_of_mushroom", "cream_of_mushroom_bowl_generic", "cream_of_mushroom_bowl_gold", "cream_of_mushroom_bowl_silver", "creamy_fish", "creamy_fish_plate_generic", "creamy_fish_plate_gold", "creamy_fish_plate_silver", "croquette", "croquette_plate_generic", "croquette_plate_gold", "croquette_plate_silver", "curry", "curry_bowl_generic", "curry_bowl_gold", "curry_bowl_silver", "fettuccine", "fettuccine_plate_generic", "fettuccine_plate_gold", "fettuccine_plate_silver", "fish_and_chips", "fish_and_chips_plate_generic", "fish_and_chips_plate_gold", "fish_and_chips_plate_silver", "fish_burger", "fish_burger_plate_generic", "fish_burger_plate_gold", "fish_burger_plate_silver", "fish_pie", "fish_pie_plate_generic", "fish_pie_plate_gold", "fish_pie_plate_silver", "fish_steak", "fish_steak_plate_generic", "fish_steak_plate_gold", "fish_steak_plate_silver", "fish_stew", "fish_stew_bowl_generic", "fish_stew_bowl_gold", "fish_stew_bowl_silver", "fishball_skewers", "fishball_skewers_plate_generic", "fishball_skewers_plate_gold", "fishball_skewers_plate_silver", "garlic_bread", "garlic_bread_plate_generic", "garlic_bread_plate_gold", "garlic_bread_plate_silver", "gorge_jam_plate_generic", "gorge_jam_plate_gold", "gorge_jam_plate_silver", "gorge_meatballs_plate_generic", "gorge_meatballs_plate_gold", "gorge_meatballs_plate_silver", "gorge_ratatouille_bowl_generic", "gorge_ratatouille_bowl_gold", "gorge_ratatouille_bowl_silver", "grilled_cheese", "grilled_cheese_plate_generic", "grilled_cheese_plate_gold", "grilled_cheese_plate_silver", "hamburger", "hamburger_plate_generic", "hamburger_plate_gold", "hamburger_plate_silver", "jam", "jam_plate_generic", "jam_plate_gold", "jam_plate_silver", "jelly_roll", "jelly_roll_plate_generic", "jelly_roll_plate_gold", "jelly_roll_plate_silver", "jelly_sandwich", "jelly_sandwich_plate_generic", "jelly_sandwich_plate_gold", "jelly_sandwich_plate_silver", "lasagna", "lasagna_plate_generic", "lasagna_plate_gold", "lasagna_plate_silver", "mac_n_cheese", "mac_n_cheese_bowl_generic", "mac_n_cheese_bowl_gold", "mac_n_cheese_bowl_silver", "manicotti", "manicotti_plate_generic", "manicotti_plate_gold", "manicotti_plate_silver", "mashed_potatoes", "mashed_potatoes_bowl_generic", "mashed_potatoes_bowl_gold", "mashed_potatoes_bowl_silver", "meat_pie", "meat_pie_plate_generic", "meat_pie_plate_gold", "meat_pie_plate_silver", "meat_skewers", "meat_skewers_plate_generic", "meat_skewers_plate_gold", "meat_skewers_plate_silver", "meat_stew", "meat_stew_bowl_generic", "meat_stew_bowl_gold", "meat_stew_bowl_silver", "meat_wellington", "meat_wellington_plate_generic", "meat_wellington_plate_gold", "meat_wellington_plate_silver", "meatballs", "meatballs_plate_generic", "meatballs_plate_gold", "meatballs_plate_silver", "meatloaf", "meatloaf_plate_generic", "meatloaf_plate_gold", "meatloaf_plate_silver", "mushroom_burger", "mushroom_burger_plate_generic", "mushroom_burger_plate_gold", "mushroom_burger_plate_silver", "onion_soup", "onion_soup_bowl_generic", "onion_soup_bowl_gold", "onion_soup_bowl_silver", "pierogies", "pierogies_plate_generic", "pierogies_plate_gold", "pierogies_plate_silver", "pizza", "pizza_plate_generic", "pizza_plate_gold", "pizza_plate_silver", "poached_fish", "poached_fish_plate_generic", "poached_fish_plate_gold", "poached_fish_plate_silver", "pot_roast", "pot_roast_plate_generic", "pot_roast_plate_gold", "pot_roast_plate_silver", "potato_pancakes", "potato_pancakes_plate_generic", "potato_pancakes_plate_gold", "potato_pancakes_plate_silver", "potato_soup", "potato_soup_bowl_generic", "potato_soup_bowl_gold", "potato_soup_bowl_silver", "pudding", "pudding_plate_generic", "pudding_plate_gold", "pudding_plate_silver", "ratatouille", "ratatouille_bowl_generic", "ratatouille_bowl_gold", "ratatouille_bowl_silver", "roasted_veggies", "roasted_veggies_plate_generic", "roasted_veggies_plate_gold", "roasted_veggies_plate_silver", "sausage", "sausage_plate_generic", "sausage_plate_gold", "sausage_plate_silver", "scone", "scone_plate_generic", "scone_plate_gold", "scone_plate_silver", "shepherds_pie", "shepherds_pie_plate_generic", "shepherds_pie_plate_gold", "shepherds_pie_plate_silver", "shooter_sandwich", "shooter_sandwich_plate_generic", "shooter_sandwich_plate_gold", "shooter_sandwich_plate_silver", "slider", "slider_plate_generic", "slider_plate_gold", "slider_plate_silver", "spaghetti_and_meatballs", "spaghetti_and_meatballs_plate_generic", "spaghetti_and_meatballs_plate_gold", "spaghetti_and_meatballs_plate_silver", "steak_frites", "steak_frites_plate_generic", "steak_frites_plate_gold", "steak_frites_plate_silver", "stone_soup", "stone_soup_bowl_generic", "stone_soup_bowl_gold", "stone_soup_bowl_silver", "stuffed_mushroom", "stuffed_mushroom_plate_generic", "stuffed_mushroom_plate_gold", "stuffed_mushroom_plate_silver", "tomato_soup", "tomato_soup_bowl_generic", "tomato_soup_bowl_gold", "tomato_soup_bowl_silver", "trifle", "trifle_plate_generic", "trifle_plate_gold", "trifle_plate_silver", "turnip_cake", "turnip_cake_plate_generic", "turnip_cake_plate_gold", "turnip_cake_plate_silver", "veggie_soup", "veggie_soup_bowl_generic", "veggie_soup_bowl_gold", "veggie_soup_bowl_silver", "waffles", "waffles_plate_generic", "waffles_plate_gold", "waffles_plate_silver", "syrup", "sap", "flour", "quagmire_goatmilk", "quagmire_spotspice_ground", },
+	sw = { "bisque", "butterflymuffin_sw", "californiaroll_sw", "caviar", "coffee", "jellyopop", "lobsterbisque_sw", "lobsterdinner_sw", "musselbouillabaise", "sharkfinsoup", "sweetpotatosouffle", "tropicalbouillabaisse", },
+	underwater = { "fish_gazpacho", "fish_n_chips", "fish_sushi", "flower_sushi", "seajelly", "sponge_cake", "tentacle_sushi", "tuna_muffin", },
+}
+for atlas, items in pairs(Preparedfoods) do
+	table.insert(Assets, Asset("ATLAS", "images/inventoryimages/cookpotfoods/cookpotfoods_" .. atlas .. ".xml"))
+	local path = resolvefilepath("images/inventoryimages/cookpotfoods/cookpotfoods_" .. atlas .. ".xml")
+	for _, image in ipairs(items) do
+		RegisterInventoryItemAtlas(path, image .. ".tex")
+	end
 end
 
-table.insert(Assets, Asset("IMAGE", "levels/textures/ds_fog1.tex"))
+-- # MiniMap atlas
+local minimappatlas = { "frost", "volcano", "grotto", "hamlet", "lavaarena", "quagmire", "rog", "shipwrecked_plus", "shipwrecked", "underwater", "windy", }
+for _, theme in ipairs(minimappatlas) do
+	table.insert(Assets, Asset("ATLAS", "minimap/minimap_" .. theme .. ".xml"))
+	AddMinimapAtlas("minimap/minimap_" .. theme .. ".xml")
+end

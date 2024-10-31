@@ -185,7 +185,6 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "armorvortexcloak"
     inst.components.inventoryitem.cangoincontainer = false
 
     inst.foleysound = "dontstarve_DLC003/common/crafted/vortex_armour/foley"

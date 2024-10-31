@@ -2,19 +2,19 @@
 <Atlas>
     <Texture filename="minimap_frost.tex"/>
     <Elements>
-        <Element name="bearden.tex" u1="0.00195313" u2="0.248047" v1="0.751953" v2="0.998047"/>
-        <Element name="cristaled_tree.tex" u1="0.00195313" u2="0.248047" v1="0.501953" v2="0.748047"/>
-        <Element name="fishpalace.tex" u1="0.00195313" u2="0.248047" v1="0.251953" v2="0.498047"/>
-        <Element name="frostbush.tex" u1="0.00195313" u2="0.248047" v1="0.00195313" v2="0.248047"/>
-        <Element name="icedpad.tex" u1="0.251953" u2="0.498047" v1="0.751953" v2="0.998047"/>
-        <Element name="pig_fishingshop.tex" u1="0.501953" u2="0.748047" v1="0.751953" v2="0.998047"/>
-        <Element name="pig_iglu.tex" u1="0.751953" u2="0.998047" v1="0.751953" v2="0.998047"/>
-        <Element name="pig_lootshop.tex" u1="0.251953" u2="0.498047" v1="0.501953" v2="0.748047"/>
-        <Element name="pig_shop_spears.tex" u1="0.251953" u2="0.498047" v1="0.251953" v2="0.498047"/>
-        <Element name="snow_pile.tex" u1="0.251953" u2="0.498047" v1="0.00195313" v2="0.248047"/>
-        <Element name="snowspiderden2.tex" u1="0.501953" u2="0.748047" v1="0.501953" v2="0.748047"/>
-        <Element name="wildbeaver_house.tex" u1="0.751953" u2="0.998047" v1="0.501953" v2="0.748047"/>
-        <Element name="wildbeaver_house_old.tex" u1="0.501953" u2="0.748047" v1="0.251953" v2="0.498047"/>
+        <Element name="bearden.png" u1="0.00195313" u2="0.248047" v1="0.751953" v2="0.998047"/>
+        <Element name="cristaled_tree.png" u1="0.00195313" u2="0.248047" v1="0.501953" v2="0.748047"/>
+        <Element name="fishpalace.png" u1="0.00195313" u2="0.248047" v1="0.251953" v2="0.498047"/>
+        <Element name="frostbush.png" u1="0.00195313" u2="0.248047" v1="0.00195313" v2="0.248047"/>
+        <Element name="icedpad.png" u1="0.251953" u2="0.498047" v1="0.751953" v2="0.998047"/>
+        <Element name="pig_fishingshop.png" u1="0.501953" u2="0.748047" v1="0.751953" v2="0.998047"/>
+        <Element name="pig_iglu.png" u1="0.751953" u2="0.998047" v1="0.751953" v2="0.998047"/>
+        <Element name="pig_lootshop.png" u1="0.251953" u2="0.498047" v1="0.501953" v2="0.748047"/>
+        <Element name="pig_shop_spears.png" u1="0.251953" u2="0.498047" v1="0.251953" v2="0.498047"/>
+        <Element name="snow_pile.png" u1="0.251953" u2="0.498047" v1="0.00195313" v2="0.248047"/>
+        <Element name="snowspiderden2.png" u1="0.501953" u2="0.748047" v1="0.501953" v2="0.748047"/>
+        <Element name="wildbeaver_house.png" u1="0.751953" u2="0.998047" v1="0.501953" v2="0.748047"/>
+        <Element name="wildbeaver_house_old.png" u1="0.501953" u2="0.748047" v1="0.251953" v2="0.498047"/>
     </Elements>
     <StraightAlpha>false</StraightAlpha>
 </Atlas>

@@ -2,8 +2,8 @@
 <Atlas>
     <Texture filename="minimap_volcano.tex"/>
     <Elements>
-        <Element name="volcano.tex" u1="0.000488281" u2="0.499512" v1="0.000976563" v2="0.999023"/>
-        <Element name="volcano_active.tex" u1="0.500488" u2="0.999512" v1="0.000976563" v2="0.999023"/>
+        <Element name="volcano.png" u1="0.000488281" u2="0.499512" v1="0.000976563" v2="0.999023"/>
+        <Element name="volcano_active.png" u1="0.500488" u2="0.999512" v1="0.000976563" v2="0.999023"/>
     </Elements>
     <StraightAlpha>false</StraightAlpha>
 </Atlas>

@@ -2,31 +2,31 @@
 <Atlas>
     <Texture filename="minimap_quagmire.tex"/>
     <Elements>
-        <Element name="galinheiro.tex" u1="0.000976563" u2="0.124023" v1="0.751953" v2="0.998047"/>
-        <Element name="goatkid.tex" u1="0.000976563" u2="0.124023" v1="0.501953" v2="0.748047"/>
-        <Element name="goatmum.tex" u1="0.000976563" u2="0.124023" v1="0.251953" v2="0.498047"/>
-        <Element name="gorge_portal.tex" u1="0.000976563" u2="0.124023" v1="0.00195313" v2="0.248047"/>
-        <Element name="oliver.tex" u1="0.125977" u2="0.249023" v1="0.751953" v2="0.998047"/>
-        <Element name="pigelder.tex" u1="0.125977" u2="0.249023" v1="0.501953" v2="0.748047"/>
-        <Element name="pipton.tex" u1="0.125977" u2="0.249023" v1="0.251953" v2="0.498047"/>
-        <Element name="quagmire_altar.tex" u1="0.125977" u2="0.249023" v1="0.00195313" v2="0.248047"/>
-        <Element name="quagmire_mealingstone.tex" u1="0.250977" u2="0.374023" v1="0.751953" v2="0.998047"/>
-        <Element name="quagmire_merm_house.tex" u1="0.250977" u2="0.374023" v1="0.501953" v2="0.748047"/>
-        <Element name="quagmire_mushroomstump.tex" u1="0.250977" u2="0.374023" v1="0.251953" v2="0.498047"/>
-        <Element name="quagmire_pond_salt.tex" u1="0.250977" u2="0.374023" v1="0.00195313" v2="0.248047"/>
-        <Element name="quagmire_portal_key.tex" u1="0.375977" u2="0.499023" v1="0.751953" v2="0.998047"/>
-        <Element name="quagmire_safe.tex" u1="0.375977" u2="0.499023" v1="0.501953" v2="0.748047"/>
-        <Element name="quagmire_safe_old.tex" u1="0.375977" u2="0.499023" v1="0.251953" v2="0.498047"/>
-        <Element name="quagmire_salt_rack.tex" u1="0.375977" u2="0.499023" v1="0.00195313" v2="0.248047"/>
-        <Element name="quagmire_spotspice_shrub.tex" u1="0.500977" u2="0.624023" v1="0.751953" v2="0.998047"/>
-        <Element name="quagmire_sugarwoodtree.tex" u1="0.500977" u2="0.624023" v1="0.501953" v2="0.748047"/>
-        <Element name="quagmire_sugarwoodtree_stump.tex" u1="0.500977" u2="0.624023" v1="0.251953" v2="0.498047"/>
-        <Element name="quagmire_sugarwoodtree_tapped.tex" u1="0.500977" u2="0.624023" v1="0.00195313" v2="0.248047"/>
-        <Element name="quagmire_swampig_house.tex" u1="0.625977" u2="0.749023" v1="0.751953" v2="0.998047"/>
-        <Element name="quagmire_swampig_house_unbuilt.tex" u1="0.750977" u2="0.874023" v1="0.751953" v2="0.998047"/>
-        <Element name="salt_rack.tex" u1="0.875977" u2="0.999023" v1="0.751953" v2="0.998047"/>
-        <Element name="summy.tex" u1="0.625977" u2="0.749023" v1="0.501953" v2="0.748047"/>
-        <Element name="wheat.tex" u1="0.625977" u2="0.749023" v1="0.251953" v2="0.498047"/>
+        <Element name="galinheiro.png" u1="0.000976563" u2="0.124023" v1="0.751953" v2="0.998047"/>
+        <Element name="goatkid.png" u1="0.000976563" u2="0.124023" v1="0.501953" v2="0.748047"/>
+        <Element name="goatmum.png" u1="0.000976563" u2="0.124023" v1="0.251953" v2="0.498047"/>
+        <Element name="gorge_portal.png" u1="0.000976563" u2="0.124023" v1="0.00195313" v2="0.248047"/>
+        <Element name="oliver.png" u1="0.125977" u2="0.249023" v1="0.751953" v2="0.998047"/>
+        <Element name="pigelder.png" u1="0.125977" u2="0.249023" v1="0.501953" v2="0.748047"/>
+        <Element name="pipton.png" u1="0.125977" u2="0.249023" v1="0.251953" v2="0.498047"/>
+        <Element name="quagmire_altar.png" u1="0.125977" u2="0.249023" v1="0.00195313" v2="0.248047"/>
+        <Element name="quagmire_mealingstone.png" u1="0.250977" u2="0.374023" v1="0.751953" v2="0.998047"/>
+        <Element name="quagmire_merm_house.png" u1="0.250977" u2="0.374023" v1="0.501953" v2="0.748047"/>
+        <Element name="quagmire_mushroomstump.png" u1="0.250977" u2="0.374023" v1="0.251953" v2="0.498047"/>
+        <Element name="quagmire_pond_salt.png" u1="0.250977" u2="0.374023" v1="0.00195313" v2="0.248047"/>
+        <Element name="quagmire_portal_key.png" u1="0.375977" u2="0.499023" v1="0.751953" v2="0.998047"/>
+        <Element name="quagmire_safe.png" u1="0.375977" u2="0.499023" v1="0.501953" v2="0.748047"/>
+        <Element name="quagmire_safe_old.png" u1="0.375977" u2="0.499023" v1="0.251953" v2="0.498047"/>
+        <Element name="quagmire_salt_rack.png" u1="0.375977" u2="0.499023" v1="0.00195313" v2="0.248047"/>
+        <Element name="quagmire_spotspice_shrub.png" u1="0.500977" u2="0.624023" v1="0.751953" v2="0.998047"/>
+        <Element name="quagmire_sugarwoodtree.png" u1="0.500977" u2="0.624023" v1="0.501953" v2="0.748047"/>
+        <Element name="quagmire_sugarwoodtree_stump.png" u1="0.500977" u2="0.624023" v1="0.251953" v2="0.498047"/>
+        <Element name="quagmire_sugarwoodtree_tapped.png" u1="0.500977" u2="0.624023" v1="0.00195313" v2="0.248047"/>
+        <Element name="quagmire_swampig_house.png" u1="0.625977" u2="0.749023" v1="0.751953" v2="0.998047"/>
+        <Element name="quagmire_swampig_house_unbuilt.png" u1="0.750977" u2="0.874023" v1="0.751953" v2="0.998047"/>
+        <Element name="salt_rack.png" u1="0.875977" u2="0.999023" v1="0.751953" v2="0.998047"/>
+        <Element name="summy.png" u1="0.625977" u2="0.749023" v1="0.501953" v2="0.748047"/>
+        <Element name="wheat.png" u1="0.625977" u2="0.749023" v1="0.251953" v2="0.498047"/>
     </Elements>
     <StraightAlpha>false</StraightAlpha>
 </Atlas>
