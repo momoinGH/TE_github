@@ -4,15 +4,14 @@ local assets =
     Asset("ANIM", "anim/fan.zip"),
 }
 
-local function doydayfan()
+local function fn()
     local swap_data = {
         bank = "fan_tropical",
         sym_build = "fan_tropical",
         sym_name = "fan01",
     }
     local inst = Prefabs.featherfan.fn()
-    -- @Runar: 更改prefab名后这里也需要更改
-    inst:SetPrefabName("doydoyfan")
+    inst:SetPrefabName("tropicalfan")
 
     inst.AnimState:SetBuild(swap_data.sym_build)
     inst.AnimState:PlayAnimation("idle")
@@ -30,11 +29,8 @@ local function doydayfan()
     inst.components.finiteuses:SetMaxUses(TUNING.PERDFAN_USES)
     inst.components.finiteuses:SetUses(TUNING.PERDFAN_USES)
 
-    -- @Runar: 更改prefab名后删除这行
-    inst.components.inventoryitem.imagename = "tropicalfan"
-
     return inst
 
 end
 
-return Prefab("doydoyfan", doydayfan, assets)
+return Prefab("tropicalfan", fn, assets)
