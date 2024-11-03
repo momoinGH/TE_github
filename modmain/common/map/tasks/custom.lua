@@ -235,7 +235,7 @@ AddRoom("OceanCoastal_TE", {
             driftwood_log = 1,
             bullkelp_plant = 2,
             messagebottle = 0.1,
-            messagebottle1 = 0.1,
+            messagebottle_sw = 0.1,
         },
 
         countstaticlayouts =
@@ -293,7 +293,7 @@ AddRoom("OceanCoastal_SW", {
         {
             seaweed_planted = 200,
             mussel_farm = 300,
-            messagebottle1 = 20,
+            messagebottle_sw = 20,
         },
 
         distributepercent = 0.01,
@@ -335,7 +335,7 @@ AddRoom("OceanRough_SW", {
         {
             rawling = 1,
             tar_pool = 8,
-            messagebottle1 = 20,
+            messagebottle_sw = 20,
             --bermudatriangle = 6,									
         },
 

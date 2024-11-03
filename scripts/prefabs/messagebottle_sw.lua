@@ -84,4 +84,4 @@ local function messagebottlefn(Sim)
 	return inst
 end
 
-return Prefab("messagebottle1", messagebottlefn, assets)
+return Prefab("messagebottle_sw", messagebottlefn, assets)

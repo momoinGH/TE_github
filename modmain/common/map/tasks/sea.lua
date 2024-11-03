@@ -37,7 +37,7 @@ AddRoom("OceanCoastal_SEA", {
         {
             seaweed_planted = 200,
             mussel_farm = 300,
-            messagebottle1 = 20,
+            messagebottle_sw = 20,
             mermboat = 4,
         },
 
@@ -100,7 +100,7 @@ AddRoom("OceanRough_SEA", {
     contents = {
         -- countprefabs =
         -- {
-        -- 	messagebottle1 = 20,
+        -- 	messagebottle_sw = 20,
         -- },
 
         distributepercent = 0.01,

@@ -63,7 +63,7 @@ PrefabFiles = {
   "waterchest",
   "mussel_bed",
   "mussel_stick",
-  "messagebottle1",
+  "messagebottle_sw",
   "bottlelantern",
   "researchlab5",
   "roe",
