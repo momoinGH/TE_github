@@ -129,7 +129,7 @@
         <Element name="messagebottle_sw.tex" u1="0.218994" u2="0.249756" v1="0.0629883" v2="0.124512"/>
         <Element name="messagebottleempty_sw.tex" u1="0.218994" u2="0.249756" v1="0.000488281" v2="0.0620117"/>
         <Element name="monkeyball.tex" u1="0.250244" u2="0.281006" v1="0.937988" v2="0.999512"/>
-        <Element name="mosquito_yellow.tex" u1="0.250244" u2="0.281006" v1="0.875488" v2="0.937012"/>
+        <Element name="mosquito_poison.tex" u1="0.250244" u2="0.281006" v1="0.875488" v2="0.937012"/>
         <Element name="mosquitosack_yellow.tex" u1="0.250244" u2="0.281006" v1="0.812988" v2="0.874512"/>
         <Element name="mussel.tex" u1="0.250244" u2="0.281006" v1="0.750488" v2="0.812012"/>
         <Element name="mussel_bed.tex" u1="0.250244" u2="0.281006" v1="0.687988" v2="0.749512"/>

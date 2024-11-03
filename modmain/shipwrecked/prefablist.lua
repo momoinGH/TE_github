@@ -14,6 +14,7 @@ PrefabFiles = {
   "seagull",
   "toucan",
   "mosquitopoison",
+  "mosquitosack_yellow",
   "cormorant",
   "chiminea",
   "sea_chiminea",
