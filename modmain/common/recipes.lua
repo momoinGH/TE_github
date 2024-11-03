@@ -240,7 +240,7 @@ if not GetModConfigData("disablecharacters") then
                TECH.NONE, {
         builder_tag = "woodlegs",
     }, {"CHARACTER"})
-    AddRecipe2("luckyhat", {Ingredient("boneshard", 4), Ingredient("fabric", 3), Ingredient("dubloon", 10)}, TECH.NONE,
+    AddRecipe2("woodlegshat", {Ingredient("boneshard", 4), Ingredient("fabric", 3), Ingredient("dubloon", 10)}, TECH.NONE,
                {
         builder_tag = "woodlegs",
     }, {"CHARACTER"})
@@ -1440,7 +1440,7 @@ SortAfter("surfboarditem", "wx78_scanner_item", "CHARACTER")
 -- SortBefore("surfboarditem", "boat_lograft", "SEAFARING")
 -- SortAfter("woodlegshat", "piratehat", "SEAFARING")
 -- SortAfter("woodlegshat", "mermhat", "CLOTHING")
-SortAfter("luckyhat", "surfboarditem", "CHARACTER")
+SortAfter("woodlegshat", "surfboarditem", "CHARACTER")
 -- SortAfter("boat_woodlegs", "boat_encrusted", "SEAFARING")
 -- SortAfter("boat_woodlegs", "woodlegshat", "CHARACTER")
 -- SortAfter("transmute_bamboo", "transmute_twigs", "CHARACTER")--ia改威吊技能树：化藤蔓为竹子。
