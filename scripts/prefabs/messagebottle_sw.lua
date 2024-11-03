@@ -19,7 +19,7 @@ local function getrevealtargetpos(inst, doer)
 				v.revelado = true
 				x, y, z = v.Transform:GetWorldPosition()
 -- TODO
-				local empty_bottle = SpawnPrefab("messagebottleempty")
+				local empty_bottle = SpawnPrefab("messagebottleempty_sw")
 				empty_bottle.Transform:SetPosition(inst.Transform:GetWorldPosition())
 				inst:Remove()
 				if inventory ~= nil then
@@ -84,4 +84,39 @@ local function messagebottlefn(Sim)
 	return inst
 end
 
-return Prefab("messagebottle_sw", messagebottlefn, assets)
+local function emptybottlefn()
+	local inst = CreateEntity()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddNetwork()
+
+	MakeInventoryPhysics(inst)
+	MakeInventoryFloatable(inst)
+
+	inst.AnimState:SetBank("messagebottle")
+	inst.AnimState:SetBuild("messagebottle")
+	inst.AnimState:PlayAnimation("idle_empty", true)
+
+	inst:AddTag("aquatic")
+	inst:AddTag("messagebottleempty")
+
+	inst.entity:SetPristine()
+
+	if not TheWorld.ismastersim then
+		return inst
+	end
+
+	inst:AddComponent("inspectable")
+	inst:AddComponent("inventoryitem")
+
+	inst:AddComponent("waterproofer")
+	inst.components.waterproofer:SetEffectiveness(0)
+
+    inst:AddComponent("stackable")
+    inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
+
+    return inst
+end
+
+return Prefab("messagebottle_sw", messagebottlefn, assets),
+       Prefab("messagebottleempty_sw", emptybottlefn, assets)

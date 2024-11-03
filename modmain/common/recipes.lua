@@ -462,7 +462,7 @@ AddRecipe2("monkeyball", {Ingredient("cave_banana", 1), Ingredient("snakeskin", 
 AddRecipe2("chiminea", {Ingredient("log", 2), Ingredient("limestone", 3), Ingredient("sand", 2)}, TECH.NONE, {
     placer = "chiminea_placer",
 }, {"LIGHT", "COOKING", "WINTER"})
-AddRecipe2("bottlelantern", {Ingredient("messagebottleempty1", 1), Ingredient("bioluminescence", 2)}, TECH.SCIENCE_TWO,
+AddRecipe2("bottlelantern", {Ingredient("messagebottleempty_sw", 1), Ingredient("bioluminescence", 2)}, TECH.SCIENCE_TWO,
            {
 }, {"LIGHT"})
 
@@ -488,7 +488,7 @@ AddRecipe2("quackendrill", {Ingredient("quackenbeak", 1), Ingredient("gears", 1)
 }, {"TOOLS"})
 AddRecipe2("fabric", {Ingredient("bamboo", 3)}, TECH.SCIENCE_ONE, {
 }, {"REFINE"})
-AddRecipe2("messagebottleempty1", {Ingredient("sand", 3)}, TECH.SCIENCE_TWO, {
+AddRecipe2("messagebottleempty_sw", {Ingredient("sand", 3)}, TECH.SCIENCE_TWO, {
 }, {"REFINE"})
 AddRecipe2("limestone", {Ingredient("coral", 3)}, TECH.SCIENCE_ONE, {
 }, {"REFINE"})
@@ -547,7 +547,7 @@ AddRecipe2("brainjellyhat", {Ingredient("coral_brain", 1), Ingredient("jellyfish
 AddRecipe2("armor_windbreaker", {Ingredient("blubber", 2), Ingredient("fabric", 1), Ingredient("rope", 1)},
            TECH.SCIENCE_TWO, {
 }, {"CLOTHING", "RAIN"}) -- CHECK  THIS
-AddRecipe2("gashat", {Ingredient("coral", 2), Ingredient("messagebottleempty1", 2), Ingredient("jellyfish", 1)},
+AddRecipe2("gashat", {Ingredient("coral", 2), Ingredient("messagebottleempty_sw", 2), Ingredient("jellyfish", 1)},
            TECH.SCIENCE_TWO, {
 }, {"CLOTHING"})
 AddRecipe2("antivenom", {Ingredient("venomgland", 1), Ingredient("coral", 2), Ingredient("seaweed", 2)},
@@ -690,11 +690,11 @@ AddRecipe2("corkboatitem", {Ingredient("rope", 1), Ingredient("cork", 4)}, TECH.
 AddRecipe2("boat_torch", {Ingredient("torch", 1), Ingredient("twigs", 2)}, TECH.ONE, {
 }, {"NAUTICAL", "LIGHT"})
 AddRecipe2("boat_lantern",
-           {Ingredient("messagebottleempty1", 1), Ingredient("twigs", 2), Ingredient("bioluminescence", 1)},
+           {Ingredient("messagebottleempty_sw", 1), Ingredient("twigs", 2), Ingredient("bioluminescence", 1)},
            TECH.SCIENCE_TWO, {
 }, {"NAUTICAL", "LIGHT"})
 AddRecipe2("porto_buoy",
-           {Ingredient("messagebottleempty1", 1), Ingredient("bamboo", 4), Ingredient("bioluminescence", 2)},
+           {Ingredient("messagebottleempty_sw", 1), Ingredient("bamboo", 4), Ingredient("bioluminescence", 2)},
            TECH.SEAFARING_TWO, {
     image = "buoy.tex",
 }, {"LIGHT", "STRUCTURES", "NAUTICAL"})
@@ -706,11 +706,11 @@ AddRecipe2("quackeringram", {Ingredient("quackenbeak", 1), Ingredient("bamboo", 
 }, {"NAUTICAL"})
 AddRecipe2("trawlnet", {Ingredient("bamboo", 2), Ingredient("rope", 3)}, TECH.SEAFARING_TWO, {
 }, {"TOOLS", "FISHING", "NAUTICAL"})
-AddRecipe2("seatrap", {Ingredient("palmleaf", 4), Ingredient("messagebottleempty1", 2), Ingredient("jellyfish", 1)},
+AddRecipe2("seatrap", {Ingredient("palmleaf", 4), Ingredient("messagebottleempty_sw", 2), Ingredient("jellyfish", 1)},
            TECH.SEAFARING_TWO, {
 }, {"TOOLS", "GARDENING", "NAUTICAL"})
 
-AddRecipe2("telescope", {Ingredient("goldnugget", 1), Ingredient("pigskin", 1), Ingredient("messagebottleempty1", 1)},
+AddRecipe2("telescope", {Ingredient("goldnugget", 1), Ingredient("pigskin", 1), Ingredient("messagebottleempty_sw", 1)},
            TECH.SEAFARING_TWO, {
 }, {"TOOLS", "NAUTICAL"})
 AddRecipe2("supertelescope", {Ingredient("telescope", 1), Ingredient("goldnugget", 1), Ingredient("tigereye", 1)},
@@ -721,7 +721,7 @@ AddRecipe2("captainhat", {Ingredient("boneshard", 1), Ingredient("seaweed", 1), 
 }, {"CLOTHING", "NAUTICAL"})
 AddRecipe2("piratehat", {Ingredient("boneshard", 2), Ingredient("rope", 1), Ingredient("silk", 2)}, TECH.SCIENCE_TWO, {
 }, {"CLOTHING", "NAUTICAL"})
-AddRecipe2("armor_lifejacket", {Ingredient("fabric", 2), Ingredient("vine", 2), Ingredient("messagebottleempty1", 2)},
+AddRecipe2("armor_lifejacket", {Ingredient("fabric", 2), Ingredient("vine", 2), Ingredient("messagebottleempty_sw", 2)},
            TECH.SEAFARING_TWO, {
 }, {"CLOTHING", "NAUTICAL"})
 AddRecipe2("porto_tar_extractor", {Ingredient("coconut", 2), Ingredient("bamboo", 4), Ingredient("limestone", 4)},
