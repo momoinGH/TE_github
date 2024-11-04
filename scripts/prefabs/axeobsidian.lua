@@ -125,7 +125,7 @@ local function obsidianfn()
     inst:AddTag("sharp")
     inst:AddTag("axe")
 
-    MakeInventoryFloatable(inst)
+    MakeInventoryFloatable(inst, "small", 0.05, {1.2, 0.75, 1.2})
 
     inst.entity:SetPristine()
 
@@ -133,14 +133,16 @@ local function obsidianfn()
         return inst
     end
 
+    --inst.components.floater:SetBankSwapOnFloat(true, -11, {sym_build = "swap_axe_obsidian"})
+
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.AXEOBSIDIAN_DAMAGE)
+    inst.components.weapon:SetDamage(TUNING.OBSIDIANAXE_DAMAGE)
     inst.components.weapon.attackwear = 0.4
     inst.components.weapon:SetOnAttack(ObsidianToolAttack)
 
     inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(TUNING.AXEOBSIDIAN_USES)
-    inst.components.finiteuses:SetUses(TUNING.AXEOBSIDIAN_USES)
+    inst.components.finiteuses:SetMaxUses(TUNING.OBSIDIANAXE_USES)
+    inst.components.finiteuses:SetUses(TUNING.OBSIDIANAXE_USES)
     inst.components.finiteuses:SetConsumption(ACTIONS.CHOP, 1)
     inst.components.finiteuses:SetOnFinished(inst.Remove)
 
@@ -175,4 +177,4 @@ local function obsidianfn()
     return inst
 end
 
-return Prefab("axeobsidian", obsidianfn, assets)
+return Prefab("obsidianaxe", obsidianfn, assets)

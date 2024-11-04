@@ -101,7 +101,7 @@ local internalloot =
 		{
 			minerhat = 1,
 			dubloon = 5,
-			axeobsidian = 1,
+			obsidianaxe = 1,
 		},
 
 		random_loot =
@@ -575,7 +575,7 @@ local internalloot =
 		loot =
 		{
 			dubloon = 2,
-			axeobsidian = 1,
+			obsidianaxe = 1,
 			gunpowder = 2,
 		},
 

@@ -16,7 +16,7 @@ AddPrototyperDef("obsidian_workbench", {
 })
 
 -- 黑曜石
-AddRecipe2("axeobsidian",
+AddRecipe2("obsidianaxe",
     { Ingredient("axe", 1), Ingredient("obsidian", 2, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
     TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 AddRecipe2("armorobsidian",

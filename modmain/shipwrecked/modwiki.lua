@@ -1,10 +1,10 @@
-WIKI_DATA.axeobsidian = {
-    tex = "axeobsidian.tex",
+WIKI_DATA.obsidianaxe = {
+    tex = "obsidianaxe.tex",
     bank = "axe_obsidian",
     build = "axe_obsidian",
     anim = "idle",
-    weapondamage = TUNING.AXEOBSIDIAN_DAMAGE,
-    finiteuses = TUNING.AXEOBSIDIAN_USES,
+    weapondamage = TUNING.OBSIDIANAXE_DAMAGE,
+    finiteuses = TUNING.OBSIDIANAXE_USES,
     toolactions = { "CHOP" }
 
 }
