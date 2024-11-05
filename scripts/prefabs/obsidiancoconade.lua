@@ -11,7 +11,7 @@ local prefabs =
 
 local function OnHitWater(inst, attacker, target)
     inst.SoundEmitter:KillSound("hiss")
-    SpawnPrefab("obsidianbombactive").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    SpawnPrefab("obsidiancoconadeactive").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst.SoundEmitter:PlaySound("dontstarve/common/dropwood")
 
     inst:Remove()
@@ -56,7 +56,7 @@ local function ReticuleTargetFn()
 end
 
 local function OnIgniteFn(inst)
-    SpawnPrefab("obsidianbombactive").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    SpawnPrefab("obsidiancoconadeactive").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst:Remove()
 end
 
@@ -102,32 +102,24 @@ local function fn(Sim)
     inst:AddComponent("locomotor")
 
     inst:AddComponent("complexprojectile")
-
     inst.components.complexprojectile:SetHorizontalSpeed(15)
     inst.components.complexprojectile:SetGravity(-35)
     inst.components.complexprojectile:SetLaunchOffset(Vector3(.25, 1, 0))
     inst.components.complexprojectile:SetOnLaunch(onthrown)
     inst.components.complexprojectile:SetOnHit(OnHitWater)
 
-
     MakeSmallBurnable(inst, 3 + math.random() * 3)
     inst.components.burnable:SetOnBurntFn(nil)
     inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
 
-
     inst:AddComponent("inspectable")
-
-    inst.components.inventoryitem.imagename = "obsidianbomb"
-
 
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(10)
     inst.components.weapon:SetRange(10, 12)
 
-
     inst:AddComponent("wateryprotection")
     inst.components.wateryprotection.witherprotectiontime = TUNING.WATERBALLOON_PROTECTION_TIME
-
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
@@ -138,4 +130,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("obsidianbomb", fn, assets)
+return Prefab("obsidiancoconade", fn, assets)

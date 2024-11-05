@@ -1430,7 +1430,7 @@ SortAfter("turf_beach", "turf_volcano", "DECOR")
 -- SortAfter("volcanostaff", "spear_obsidian", "CRAFTING_STATION")
 -- SortAfter("wind_conch", "obsidiancoconade", "CRAFTING_STATION")
 -- SortAfter("windstaff", "wind_conch", "CRAFTING_STATION")
-SortAfter("woodlegs_boatcannon", "obsidianbomb", "OBSIDIAN")
+-- SortAfter("woodlegs_boatcannon", "obsidiancoconade", "OBSIDIAN")
 -- SortAfter("turf_ruinsbrick_glow_blueprint", "windstaff", "CRAFTING_STATION")
 -- SortAfter("chesspiece_kraken_builder", "chesspiece_klaus_builder", "CRAFTING_STATION")--海妖雕塑
 -- SortAfter("chesspiece_tigershark_builder", "chesspiece_kraken_builder", "CRAFTING_STATION")--虎鲨雕塑

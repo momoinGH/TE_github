@@ -271,4 +271,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("obsidianbombactive", fn, assets)
+return Prefab("obsidiancoconadeactive", fn, assets)

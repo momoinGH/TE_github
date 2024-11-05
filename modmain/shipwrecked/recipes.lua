@@ -32,7 +32,7 @@ AddRecipe2("volcanostaff",
     { Ingredient("firestaff", 1), Ingredient("obsidian", 4, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
     TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 
-AddRecipe2("obsidianbomb",
+AddRecipe2("obsidiancoconade",
     { Ingredient("coconade", 3, v_atlas), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
     TECH.OBSIDIAN_TWO, { nounlock = true, numtogive = 3 }, { "OBSIDIAN" })
 AddRecipe2("woodlegs_boatcannon",
