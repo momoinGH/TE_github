@@ -232,7 +232,7 @@ AddRecipe2("campfire", {Ingredient("cutgrass", 3), Ingredient("log", 2)}, TECH.N
 -- CHARACTER--
 if not GetModConfigData("disablecharacters") then
     -- Walani
-    AddRecipe2("surfboarditem", {Ingredient("boards", 1), Ingredient("seashell", 1)}, TECH.NONE, {
+    AddRecipe2("surfboard_item", {Ingredient("boards", 1), Ingredient("seashell", 1)}, TECH.NONE, {
         builder_tag = "walani",
     }, {"CHARACTER"})
     -- Woodlegs
@@ -1436,11 +1436,11 @@ SortAfter("turf_beach", "turf_volcano", "DECOR")
 -- SortAfter("chesspiece_tigershark_builder", "chesspiece_kraken_builder", "CRAFTING_STATION")--虎鲨雕塑
 -- SortAfter("chesspiece_twister_builder", "chesspiece_tigershark_builder", "CRAFTING_STATION")--豹卷风雕塑
 -- SortAfter("chesspiece_seal_builder", "chesspiece_twister_builder", "CRAFTING_STATION")--海豹雕塑
-SortAfter("surfboarditem", "wx78_scanner_item", "CHARACTER")
--- SortBefore("surfboarditem", "boat_lograft", "SEAFARING")
+SortAfter("surfboard_item", "wx78_scanner_item", "CHARACTER")
+-- SortBefore("surfboard_item", "boat_lograft", "SEAFARING")
 -- SortAfter("woodlegshat", "piratehat", "SEAFARING")
 -- SortAfter("woodlegshat", "mermhat", "CLOTHING")
-SortAfter("woodlegshat", "surfboarditem", "CHARACTER")
+SortAfter("woodlegshat", "surfboard_item", "CHARACTER")
 -- SortAfter("boat_woodlegs", "boat_encrusted", "SEAFARING")
 -- SortAfter("boat_woodlegs", "woodlegshat", "CHARACTER")
 -- SortAfter("transmute_bamboo", "transmute_twigs", "CHARACTER")--ia改威吊技能树：化藤蔓为竹子。

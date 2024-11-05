@@ -309,7 +309,7 @@ if
                     data.player.components.inventory:GiveItem(mochila)
                 end
                 if data.player.prefab == "walani" then
-                    local mochila = SpawnPrefab("surfboarditem")
+                    local mochila = SpawnPrefab("surfboard_item")
                     mochila.Transform:SetPosition(xf - 0.5, 0, zf - 0.5)
                 end
 
@@ -487,7 +487,7 @@ if
                         data.player.components.inventory:GiveItem(mochila)
                     end
                     if data.player.prefab == "walani" then
-                        local mochila = SpawnPrefab("surfboarditem")
+                        local mochila = SpawnPrefab("surfboard_item")
                         mochila.Transform:SetPosition(xf - 0.5, 0, zf - 0.5)
                     end
 
@@ -1220,7 +1220,7 @@ else
                     data.player.components.inventory:GiveItem(mochila)
                 end
                 if data.player.prefab == "walani" then
-                    local mochila = SpawnPrefab("surfboarditem")
+                    local mochila = SpawnPrefab("surfboard_item")
                     mochila.Transform:SetPosition(xf - 0.5, 0, zf - 0.5)
                 end
 
@@ -1388,7 +1388,7 @@ else
                         data.player.components.inventory:GiveItem(mochila)
                     end
                     if data.player.prefab == "walani" then
-                        local mochila = SpawnPrefab("surfboarditem")
+                        local mochila = SpawnPrefab("surfboard_item")
                         mochila.Transform:SetPosition(xf - 0.5, 0, zf - 0.5)
                     end
 
