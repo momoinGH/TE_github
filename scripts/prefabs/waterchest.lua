@@ -14,6 +14,7 @@ local loot =
 local function onopen(inst)
     if not inst:HasTag("burnt") then
         inst.AnimState:PlayAnimation("open")
+        inst.AnimState:PushAnimation("opened", true)
         inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_open")
     end
 end
@@ -139,5 +140,5 @@ local function MakeChest(name, bank, build, indestructible, custom_postinit, pre
     return Prefab(name, fn, assets, prefabs)
 end
 
-return MakeChest("waterchest1", "water_chest", "water_chest", false, nil, { "collapse_small" }),
-    MakePlacer("waterchest1_placer", "water_chest", "water_chest", "closed")
+return MakeChest("waterchest", "water_chest", "water_chest", false, nil, { "collapse_small" }),
+    MakePlacer("waterchest_placer", "water_chest", "water_chest", "closed")

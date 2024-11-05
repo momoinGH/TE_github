@@ -177,7 +177,7 @@
         <Element name="porto_sea_yard.tex" u1="0.312744" u2="0.343506" v1="0.125488" v2="0.187012"/>
         <Element name="porto_shadowboat.tex" u1="0.312744" u2="0.343506" v1="0.0629883" v2="0.124512"/>
         <Element name="porto_tar_extractor.tex" u1="0.312744" u2="0.343506" v1="0.000488281" v2="0.0620117"/>
-        <Element name="porto_waterchest1.tex" u1="0.343994" u2="0.374756" v1="0.937988" v2="0.999512"/>
+        <Element name="porto_waterchest.tex" u1="0.343994" u2="0.374756" v1="0.937988" v2="0.999512"/>
         <Element name="porto_woodlegsboat.tex" u1="0.343994" u2="0.374756" v1="0.875488" v2="0.937012"/>
         <Element name="primeapebarrel.tex" u1="0.343994" u2="0.374756" v1="0.812988" v2="0.874512"/>
         <Element name="quackenbeak.tex" u1="0.343994" u2="0.374756" v1="0.750488" v2="0.812012"/>
