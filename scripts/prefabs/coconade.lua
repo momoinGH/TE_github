@@ -4,12 +4,14 @@ local assets =
     Asset("ANIM", "anim/swap_coconade.zip"),
 }
 
-local COCONADE_DAMAGE = 250
-
 local prefabs =
 {
-
+    "explode_small",
 }
+
+local COCONADE_DAMAGE = 250
+local COCONADE_EXPLOSIONRANGE = 6
+local COCONADE_BUILDINGDAMAGE = 10
 
 local function OnHitWater(inst, attacker, target)
     inst.SoundEmitter:KillSound("hiss")
@@ -129,8 +131,9 @@ local function fn(Sim)
 
 
     inst:AddComponent("explosive")
-    inst.components.explosive.explosivedamage = COCONADE_DAMAGE
-    inst.components.explosive.explosiverange = 6
+	inst.components.explosive.explosivedamage = COCONADE_DAMAGE
+	inst.components.explosive.explosiverange = COCONADE_EXPLOSIONRANGE
+	inst.components.explosive.buildingdamage = COCONADE_BUILDINGDAMAGE
 
     MakeSmallBurnable(inst, 3 + math.random() * 3)
     inst.components.burnable:SetOnBurntFn(nil)

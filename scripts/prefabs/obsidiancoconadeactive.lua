@@ -9,6 +9,10 @@ local prefabs =
     "explode_small",
 }
 
+local COCONADE_OBSIDIAN_DAMAGE = 350
+local COCONADE_OBSIDIAN_EXPLOSIONRANGE = 9
+local COCONADE_OBSIDIAN_BUILDINGDAMAGE = 15
+		
 local function ondropped(inst)
     local map = TheWorld.Map
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -180,12 +184,6 @@ local function Explode(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-
-
-
-
-
-
     if ground == GROUND.OCEAN_COASTAL or
         ground == GROUND.OCEAN_COASTAL_SHORE or
         ground == GROUND.OCEAN_SWELL or
@@ -231,10 +229,6 @@ local function Explode(inst)
 end
 
 
-
-
-
-
 local function fn(Sim)
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
@@ -259,9 +253,9 @@ local function fn(Sim)
 
 
     inst:AddComponent("explosive")
-    inst.components.explosive:SetOnExplodeFn(OnExplodeFn)
-    inst.components.explosive.explosivedamage = TUNING.GUNPOWDER_DAMAGE
-    inst.components.explosive.explosiverange = 5.5
+	inst.components.explosive.explosivedamage = COCONADE_OBSIDIAN_DAMAGE
+	inst.components.explosive.explosiverange = COCONADE_OBSIDIAN_EXPLOSIONRANGE
+	inst.components.explosive.buildingdamage = COCONADE_OBSIDIAN_BUILDINGDAMAGE
 
     inst._light = nil
 
