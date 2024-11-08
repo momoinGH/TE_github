@@ -268,7 +268,6 @@ AddRecipe2("mermfishhouse_crafted", {Ingredient("boards", 5), Ingredient("cutree
            TECH.SCIENCE_ONE, {
     builder_tag = "merm_builder",
     placer = "mermfishhouse_crafted_placer",
-    image = "mermhouse_fisher.png",
     testfn = function(pt, rot)
         local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
         return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH)
@@ -278,7 +277,6 @@ AddRecipe2("mermhouse_tropical_crafted", {Ingredient("boards", 5), Ingredient("c
            TECH.SCIENCE_ONE, {
     builder_tag = "merm_builder",
     placer = "mermhouse_tropical_crafted_placer",
-    image = "mermhouse_tropical.png",
     testfn = function(pt, rot)
         local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
         return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH)
