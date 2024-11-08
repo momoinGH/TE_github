@@ -264,16 +264,16 @@ AddRecipe2("mutator_frost", {Ingredient("monstermeat", 2), Ingredient("silk", 3)
     builder_tag = "spiderwhisperer",
 }, {"CHARACTER"})
 -- Wurt
-AddRecipe2("mermfishhouse_crafted", {Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("fish2", 2)},
+AddRecipe2("mermhouse_fisher_crafted", {Ingredient("boards", 5), Ingredient("rocks", 3), Ingredient("oceanfish_small_61_inv", 2)},
            TECH.SCIENCE_ONE, {
     builder_tag = "merm_builder",
-    placer = "mermfishhouse_crafted_placer",
+    placer = "mermhouse_fisher_crafted_placer",
     testfn = function(pt, rot)
         local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
         return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH)
     end,
 }, {"CHARACTER"})
-AddRecipe2("mermhouse_tropical_crafted", {Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("fish2", 2)},
+AddRecipe2("mermhouse_tropical_crafted", {Ingredient("boards", 5), Ingredient("rocks", 3), Ingredient("oceanfish_small_61_inv", 2)},
            TECH.SCIENCE_ONE, {
     builder_tag = "merm_builder",
     placer = "mermhouse_tropical_crafted_placer",
@@ -282,7 +282,7 @@ AddRecipe2("mermhouse_tropical_crafted", {Ingredient("boards", 5), Ingredient("c
         return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH)
     end,
 }, {"CHARACTER"})
-AddRecipe2("quagmire_merm_house_crafted", {Ingredient("boards", 5), Ingredient("cutstone", 3), Ingredient("salmon", 2)},
+AddRecipe2("quagmire_merm_house_crafted", {Ingredient("boards", 5), Ingredient("cutstone", 3), Ingredient("oceanfish_small_11_inv", 2)},
            TECH.SCIENCE_ONE, {
     builder_tag = "merm_builder",
     placer = "quagmire_merm_house_crafted_placer",
@@ -1456,8 +1456,8 @@ SortAfter("mutator_frost", "mutator_moon", "CHARACTER")
 -- SortAfter("poisonbalm", "antivenom", "RESTORATION")
 SortAfter("poisonbalm", "livinglog", "CHARACTER")
 SortAfter("seaweed_stalk", "wormwood_lureplant", "CHARACTER")
-SortAfter("mermfishhouse", "mermwatchtower", "CHARACTER")
--- SortAfter("mermfishhouse", "mermwatchtower", "STRUCTURES")
+SortAfter("mermhouse_fisher", "mermwatchtower", "CHARACTER")
+-- SortAfter("mermhouse_fisher", "mermwatchtower", "STRUCTURES")
 -- SortAfter("wurt_turf_tidalmarsh", "wurt_turf_marsh", "CHARACTER")
 -- SortAfter("slingshotammo_obsidian", "slingshotammo_thulecite", "CHARACTER")--ia沃尔特配方：黑曜石弹
 -- SortBefore("slingshotammo_limestone", "slingshotammo_marble", "CHARACTER")--ia沃尔特配方：石灰岩弹
@@ -1542,5 +1542,5 @@ SortAfter("cartographydesk", "tacklestation", "PROTOTYPERS")
 SortAfter("porto_shadowboat", "waxwelljournal", "CHARACTER")
 
 SortAfter("mermhouse_tropical_crafted", "mermhouse_crafted", "CHARACTER")
-SortAfter("mermfishhouse_crafted", "mermhouse_tropical_crafted", "CHARACTER")
-SortAfter("quagmire_merm_house_crafted", "mermfishhouse_crafted", "CHARACTER")
+SortAfter("mermhouse_fisher_crafted", "mermhouse_tropical_crafted", "CHARACTER")
+SortAfter("quagmire_merm_house_crafted", "mermhouse_fisher_crafted", "CHARACTER")
