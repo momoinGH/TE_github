@@ -15,14 +15,14 @@ local prefabs =
     --loot:
     "boards",
     "rocks",
-    "fish2",
+    "oceanfish_small_61_inv",
 }
 
 local loot =
 {
     "boards",
     "rocks",
-    "fish2",
+    "oceanfish_small_61_inv",
 }
 
 ---------------------------------------------------------------

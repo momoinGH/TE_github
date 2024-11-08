@@ -11,14 +11,14 @@ local prefabs =
     --loot:
     "boards",
     "rocks",
-    "fish",
+    "oceanfish_small_61_inv",
 }
 
 local loot =
 {
     "boards",
     "rocks",
-    "fish",
+    "oceanfish_small_61_inv",
 }
 
 local function onhammered(inst, worker)
@@ -231,7 +231,7 @@ local function fn1()
     end
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot(loot)
+    --inst.components.lootdropper:SetLoot(loot)
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(2)
@@ -273,7 +273,7 @@ local function fn1()
 
     return inst
 end
-return Prefab("mermfishhouse", fn, assets, prefabs),
-    Prefab("mermfishhouse_crafted", fn1, assets, prefabs),
-    MakePlacer("mermfishhouse_crafted_placer", "merm_fisherman_house", "merm_fisherman_house", "idle", false,
+return Prefab("mermhouse_fisher", fn, assets, prefabs),
+    Prefab("mermhouse_fisher_crafted", fn1, assets, prefabs),
+    MakePlacer("mermhouse_fisher_crafted_placer", "merm_fisherman_house", "merm_fisherman_house", "idle", false,
         false, false)

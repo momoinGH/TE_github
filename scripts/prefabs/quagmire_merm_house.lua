@@ -11,7 +11,7 @@ local prefabs =
     --loot:
     "boards",
     "cutstone",
-    "salmon",
+    "oceanfish_small_11_inv",
 }
 
 local loot =
@@ -19,7 +19,7 @@ local loot =
     "boards",
     "cutstone",
     "cutstone",
-    "salmon",
+    "oceanfish_small_11_inv",
 }
 
 local function onhammered(inst, worker)
@@ -228,7 +228,7 @@ local function fn1()
     end
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot(loot)
+    --inst.components.lootdropper:SetLoot(loot)
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(4)

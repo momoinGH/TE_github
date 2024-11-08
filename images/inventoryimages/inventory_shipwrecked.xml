@@ -124,7 +124,7 @@
         <Element name="magic_seal.tex" u1="0.218994" u2="0.249756" v1="0.375488" v2="0.437012"/>
         <Element name="malbatrossail.tex" u1="0.218994" u2="0.249756" v1="0.312988" v2="0.374512"/>
         <Element name="mecfish.tex" u1="0.218994" u2="0.249756" v1="0.250488" v2="0.312012"/>
-        <Element name="mermfisherhouse_crafted.tex" u1="0.218994" u2="0.249756" v1="0.187988" v2="0.249512"/>
+        <Element name="mermhouse_fisher_crafted.tex" u1="0.218994" u2="0.249756" v1="0.187988" v2="0.249512"/>
         <Element name="mermhouse_tropical_crafted.tex" u1="0.218994" u2="0.249756" v1="0.125488" v2="0.187012"/>
         <Element name="messagebottle_sw.tex" u1="0.218994" u2="0.249756" v1="0.0629883" v2="0.124512"/>
         <Element name="messagebottleempty_sw.tex" u1="0.218994" u2="0.249756" v1="0.000488281" v2="0.0620117"/>
