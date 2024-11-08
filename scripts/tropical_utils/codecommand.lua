@@ -1024,7 +1024,11 @@ GetModRPC = function(namespace, name) end
 GetClientModRPC = function(namespace, name) end
 GetShardModRPC = function(namespace, name) end
 AddUserCommand = function(command_name, data) end
-RegisterInventoryItemAtlas = function(atlas, prefabname) end
+---登记库存物品贴图路径
+---@param atlas string @图集路径(以.xml结尾)
+---@param imagename string @贴图名，一般是prefab.tex
+---@param overridenimagename string|nil @(仅限热带体验)覆盖贴图名，使用了非同名图的预制物预期图名prefab.tex
+RegisterInventoryItemAtlas = function(atlas, imagename, overridenimagename) end
 RegisterScrapbookIconAtlas = function(atlas, tex) end
 RegisterSkilltreeBGForCharacter = function(atlas, charactername) end
 RegisterSkilltreeIconsAtlas = function(atlas, tex) end

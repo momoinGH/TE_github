@@ -142,47 +142,75 @@ Assets =
 }
 
 -- # No more inventoryitem atlas register
-local InventoryThemes = {"frost", "greenworld", "grotto", "hamlet", "lavaarena", "quagmire", "rog", "shipwrecked_plus",
+local InvAtlas = {"frost", "greenworld", "grotto", "hamlet", "lavaarena", "quagmire", "rog", "shipwrecked_plus",
                          "shipwrecked", "underwater", "windy"}
-for _, theme in ipairs(InventoryThemes) do
-    table.insert(Assets, Asset("ATLAS", "images/inventoryimages/inventory_" .. theme .. ".xml"))
+for i = 1, #InvAtlas do
+    InvAtlas[i] = "images/inventoryimages/inventory_" .. InvAtlas[i] .. ".xml"
+    table.insert(Assets, Asset("ATLAS", InvAtlas[i]))
+    InvAtlas[i] = resolvefilepath(InvAtlas[i])
 end
-local PreparedfoodsThemes = {"frost", "ham", "quagmire", "sw", "underwater"}
-for _, theme in ipairs(PreparedfoodsThemes) do
-    table.insert(Assets, Asset("ATLAS", "images/inventoryimages/cookpotfoods/cookpotfoods_" .. theme .. ".xml"))
+local FoodAtlas = {"frost", "ham", "quagmire", "sw", "underwater"}
+for i = 1, #FoodAtlas do
+    FoodAtlas[i] = "images/inventoryimages/cookpotfoods/cookpotfoods_" .. FoodAtlas[i] .. ".xml"
+    table.insert(Assets, Asset("ATLAS", FoodAtlas[i]))
+    FoodAtlas[i] = resolvefilepath(FoodAtlas[i])
 end
-local MinimapThemes = {"frost", "volcano", "grotto", "hamlet", "lavaarena", "quagmire", "rog", "shipwrecked_plus",
+local MiMapAtlas = {"frost", "volcano", "grotto", "hamlet", "lavaarena", "quagmire", "rog", "shipwrecked_plus",
                        "shipwrecked", "underwater", "windy"}
-for _, theme in ipairs(MinimapThemes) do
-    table.insert(Assets, Asset("ATLAS", "minimap/minimap_" .. theme .. ".xml"))
-    AddMinimapAtlas("minimap/minimap_" .. theme .. ".xml")
+for i = 1, #MiMapAtlas do
+    MiMapAtlas[i] = "minimap/minimap_" .. MiMapAtlas[i] .. ".xml"
+    table.insert(Assets, Asset("ATLAS", MiMapAtlas[i]))
+    AddMinimapAtlas(MiMapAtlas[i])
+    MiMapAtlas[i] = resolvefilepath(MiMapAtlas[i])
 end
+
+local inventoryItemOverridenAtlasLookup = {}
+
 local old_GetInventoryItemAtlas_Internal = GLOBAL.GetInventoryItemAtlas_Internal
-rawset(GLOBAL, "GetInventoryItemAtlas_Internal", function(imagename, no_fallback)
-    local atlas, path
-    for _, theme in ipairs(InventoryThemes) do
-        path = resolvefilepath("images/inventoryimages/inventory_" .. theme .. ".xml")
+local function GetInventoryItemAtlas_Extended(imagename, no_fallback, no_fallback_ex)
+    local atlas
+    for _, path in ipairs(InvAtlas) do
         if TheSim:AtlasContains(path, imagename) then
             atlas = path
             break
         end
     end
     if atlas then return atlas end
-    for _, theme in ipairs(PreparedfoodsThemes) do
-        path = resolvefilepath("images/inventoryimages/cookpotfoods/cookpotfoods_" .. theme .. ".xml")
+    for _, path in ipairs(FoodAtlas) do
         if TheSim:AtlasContains(path, imagename) then
             atlas = path
             break
         end
     end
     if atlas then return atlas end
-    for _, theme in ipairs(MinimapThemes) do
-        path = resolvefilepath("minimap/minimap_" .. theme .. ".xml")
+    for _, path in ipairs(MiMapAtlas) do
         if TheSim:AtlasContains(path, imagename) then
             atlas = path
             break
         end
     end
     if atlas then return atlas end
-    return old_GetInventoryItemAtlas_Internal(imagename, no_fallback)
-end)
+    atlas = old_GetInventoryItemAtlas_Internal(imagename, no_fallback)
+    if atlas then return atlas end
+    if not no_fallback_ex and inventoryItemOverridenAtlasLookup[imagename] then
+        return GetInventoryItemAtlas_Extended(inventoryItemOverridenAtlasLookup[imagename], no_fallback, true)
+    end
+end
+rawset(GLOBAL, "GetInventoryItemAtlas_Internal", GetInventoryItemAtlas_Extended)
+
+-- @Runar: Klei style code
+---第三个参数填写预期贴图名，使第二个参数指定的贴图可以作为一个不同名的预制物使用
+local old_RegisterInventoryItemAtlas = GLOBAL.RegisterInventoryItemAtlas
+local function RegisterInventoryItemAtlas_Extend(atlas, imagename, overridenimagename)
+    if imagename ~= nil and overridenimagename ~= nil then
+        if inventoryItemOverridenAtlasLookup[overridenimagename] ~= nil then
+            if inventoryItemOverridenAtlasLookup[overridenimagename] ~= imagename then
+                print("RegisterInventoryItemAtlas_Extend: Image '" .. overridenimagename .. "' is already registered to atlas '" .. atlas .."'")
+            end
+        else
+            inventoryItemOverridenAtlasLookup[overridenimagename] = imagename
+        end
+    end
+    return old_RegisterInventoryItemAtlas(atlas, imagename)
+end
+rawset(GLOBAL, "RegisterInventoryItemAtlas", RegisterInventoryItemAtlas_Extend)
