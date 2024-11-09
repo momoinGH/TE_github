@@ -2,6 +2,7 @@ GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL,
 _G = GLOBAL
 
 modimport "modmain/gentuning"
+modimport "tiledefs"
 
 require("map/tasks")
 require("map/rooms")
@@ -9,14 +10,11 @@ require("map/terrain")
 require("map/level")
 require("map/room_functions")
 
-modimport 'tileadder.lua'
-AddTiles()
-
 modimport "modmain/common/map/spawnutil"
 modimport "modmain/common/map/graph"
 modimport "modmain/common/map/static_layouts"
 
-local MapTags = { "frost", "hamlet", "tropical", "underwater", "folha" }
+local MapTags = { "frost", "hamlet", "shipwrecked", "tropical", "underwater", "folha" }
 AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
 	for k, v in pairs(MapTags) do
 		self.map_tags.Tag[v] = function(tagdata) return "TAG", v end

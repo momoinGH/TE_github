@@ -128,8 +128,6 @@ modimport "modmain/componentactions" --AddComponentAction比较特殊，如果mo
 modimport "scripts/prefabs/tropical_farm_plant_defs"
 modimport "modmain/common/interiorminimap"
 
-AddMinimap()
-
 modimport("scripts/cooking_tropical")
 
 modimport "modmain/pro_extend_tags"     --标签扩展，pro_开头的标签可以随便给玩家加

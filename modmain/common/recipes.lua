@@ -145,6 +145,7 @@ AddCookerRecipe("pot", {
     perishtime = TUNING.PERISH_SLOW,
     cooktime = 2,
     tags = {},
+    no_cookbook = true,
 })
 
 local GNAW_REWARDS = {}

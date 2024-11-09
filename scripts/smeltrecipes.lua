@@ -49,8 +49,8 @@ for k, v in pairs(Products) do
     v.name = k
     v.weight = v.weight or 1
     v.priority = v.priority or 0
-
-    v.cookbook_category = "smelter"
+    v.no_cookbook = true
+    -- v.cookbook_category = "smelter" -- 有这个键但是这样写没用
 end
 
 return Products

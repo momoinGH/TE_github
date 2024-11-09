@@ -1543,6 +1543,7 @@ for k, v in pairs(preparedFoods) do
 	v.name = k
 	v.weight = v.weight or 1
 	v.priority = v.priority or 0
+	v.no_cookbook = true
 end
 
 return preparedFoods
