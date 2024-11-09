@@ -1601,6 +1601,7 @@ local function MakeHat(name)
 
     local function pigcrown()
         local inst = simple()
+        inst:AddTag("regal")
 
         if not TheWorld.ismastersim then
             return inst
@@ -1940,32 +1941,6 @@ local function MakeHat(name)
     return Prefab(prefabname, fn or default, assets, prefabs)
 end
 
-
-local function minerhatlightfn()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddLight()
-    inst.entity:AddNetwork()
-
-    inst:AddTag("FX")
-
-    inst.Light:SetFalloff(0.4)
-    inst.Light:SetIntensity(.7)
-    inst.Light:SetRadius(2.5)
-    inst.Light:SetColour(180 / 255, 195 / 255, 150 / 255)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.persists = false
-
-    return inst
-end
-
 return MakeHat("peagawkfeather"),
     MakeHat("antmask"),
     MakeHat("pigcrown"),
@@ -1976,4 +1951,4 @@ return MakeHat("peagawkfeather"),
     MakeHat("candle"),
     MakeHat("thunder"),
     MakeHat("metalplate")
---        Prefab("minerhatlight", minerhatlightfn)
+

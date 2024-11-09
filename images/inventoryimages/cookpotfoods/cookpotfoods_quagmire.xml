@@ -1,5 +1,5 @@
 <Atlas>
-<Texture filename="quagmirefoods.tex" /><Elements>
+<Texture filename="cookpotfoods_quagmire.tex" /><Elements>
 
 <Element name="bacon_wrapped_meat.tex" u1="0.0" u2="0.05" v1="0.95" v2="1" />
 <Element name="bacon_wrapped_meat_plate_generic.tex" u1="0.05" u2="0.1" v1="0.95" v2="1" />
