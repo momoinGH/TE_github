@@ -40,7 +40,7 @@ function Replatable:SetMaterial(material, food)
     self.material = material
     local inventoryitem = self.inst.components.inventoryitem
     local img = food .. "_" .. self.platetype .. "_" .. material
-    inventoryitem.imagename = img
+    inventoryitem:ChangeImageName(img)
     local plate = material .. "_" .. self.platetype
     self:HidePlateSymbols()
     self.inst.AnimState:OverrideSymbol("generic_" .. self.platetype, "preparedfood_gorge", plate)

@@ -167,7 +167,7 @@ end
 local inventoryItemOverridenAtlasLookup = {}
 
 local old_GetInventoryItemAtlas_Internal = GLOBAL.GetInventoryItemAtlas_Internal
-local function GetInventoryItemAtlas_Extended(imagename, no_fallback, no_fallback_ex)
+local function GetInventoryItemAtlas_Extended(imagename, no_fallback)
     local atlas
     for _, path in ipairs(InvAtlas) do
         if TheSim:AtlasContains(path, imagename) then
@@ -190,27 +190,6 @@ local function GetInventoryItemAtlas_Extended(imagename, no_fallback, no_fallbac
         end
     end
     if atlas then return atlas end
-    atlas = old_GetInventoryItemAtlas_Internal(imagename, no_fallback)
-    if atlas then return atlas end
-    if not no_fallback_ex and inventoryItemOverridenAtlasLookup[imagename] then
-        return GetInventoryItemAtlas_Extended(inventoryItemOverridenAtlasLookup[imagename], no_fallback, true)
-    end
+    return old_GetInventoryItemAtlas_Internal(imagename, no_fallback)
 end
 rawset(GLOBAL, "GetInventoryItemAtlas_Internal", GetInventoryItemAtlas_Extended)
-
--- @Runar: Klei style code
----第三个参数填写预期贴图名，使第二个参数指定的贴图可以作为一个不同名的预制物使用
-local old_RegisterInventoryItemAtlas = GLOBAL.RegisterInventoryItemAtlas
-local function RegisterInventoryItemAtlas_Extend(atlas, imagename, overridenimagename)
-    if imagename ~= nil and overridenimagename ~= nil then
-        if inventoryItemOverridenAtlasLookup[overridenimagename] ~= nil then
-            if inventoryItemOverridenAtlasLookup[overridenimagename] ~= imagename then
-                print("RegisterInventoryItemAtlas_Extend: Image '" .. overridenimagename .. "' is already registered to atlas '" .. atlas .."'")
-            end
-        else
-            inventoryItemOverridenAtlasLookup[overridenimagename] = imagename
-        end
-    end
-    return old_RegisterInventoryItemAtlas(atlas, imagename)
-end
-rawset(GLOBAL, "RegisterInventoryItemAtlas", RegisterInventoryItemAtlas_Extend)
