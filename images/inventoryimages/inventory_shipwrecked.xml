@@ -34,7 +34,7 @@
         <Element name="brainjellyhat.tex" u1="0.0314941" u2="0.0622559" v1="0.000488281" v2="0.0620117"/>
         <Element name="buoy.tex" u1="0.0627441" u2="0.0935059" v1="0.937988" v2="0.999512"/>
         <Element name="butterfly_tropical.tex" u1="0.0627441" u2="0.0935059" v1="0.875488" v2="0.937012"/>
-        <Element name="butterflywings_tropical.tex" u1="0.0627441" u2="0.0935059" v1="0.812988" v2="0.874512"/>
+        <Element name="butterfly_tropical_wings.tex" u1="0.0627441" u2="0.0935059" v1="0.812988" v2="0.874512"/>
         <Element name="captainhat.tex" u1="0.0627441" u2="0.0935059" v1="0.750488" v2="0.812012"/>
         <Element name="cargoboat.tex" u1="0.0627441" u2="0.0935059" v1="0.687988" v2="0.749512"/>
         <Element name="chiminea.tex" u1="0.0627441" u2="0.0935059" v1="0.625488" v2="0.687012"/>
@@ -113,9 +113,9 @@
         <Element name="limestone.tex" u1="0.187744" u2="0.218506" v1="0.0629883" v2="0.124512"/>
         <Element name="limpets.tex" u1="0.187744" u2="0.218506" v1="0.000488281" v2="0.0620117"/>
         <Element name="limpets_cooked.tex" u1="0.218994" u2="0.249756" v1="0.937988" v2="0.999512"/>
-        <Element name="lobster.tex" u1="0.218994" u2="0.249756" v1="0.875488" v2="0.937012"/>
-        <Element name="lobster_dead.tex" u1="0.218994" u2="0.249756" v1="0.812988" v2="0.874512"/>
-        <Element name="lobster_dead_cooked.tex" u1="0.218994" u2="0.249756" v1="0.750488" v2="0.812012"/>
+        <Element name="lobster_dead.tex" u1="0.218994" u2="0.249756" v1="0.875488" v2="0.937012"/>
+        <Element name="lobster_dead_cooked.tex" u1="0.218994" u2="0.249756" v1="0.812988" v2="0.874512"/>
+        <Element name="lobster_land.tex" u1="0.218994" u2="0.249756" v1="0.750488" v2="0.812012"/>
         <Element name="lobsterbisque.tex" u1="0.218994" u2="0.249756" v1="0.687988" v2="0.749512"/>
         <Element name="log_tropical.tex" u1="0.218994" u2="0.249756" v1="0.625488" v2="0.687012"/>
         <Element name="lograft.tex" u1="0.218994" u2="0.249756" v1="0.562988" v2="0.624512"/>
@@ -129,7 +129,7 @@
         <Element name="messagebottle_sw.tex" u1="0.218994" u2="0.249756" v1="0.0629883" v2="0.124512"/>
         <Element name="messagebottleempty_sw.tex" u1="0.218994" u2="0.249756" v1="0.000488281" v2="0.0620117"/>
         <Element name="monkeyball.tex" u1="0.250244" u2="0.281006" v1="0.937988" v2="0.999512"/>
-        <Element name="mosquito_yellow.tex" u1="0.250244" u2="0.281006" v1="0.875488" v2="0.937012"/>
+        <Element name="mosquito_poison.tex" u1="0.250244" u2="0.281006" v1="0.875488" v2="0.937012"/>
         <Element name="mosquitosack_yellow.tex" u1="0.250244" u2="0.281006" v1="0.812988" v2="0.874512"/>
         <Element name="mussel.tex" u1="0.250244" u2="0.281006" v1="0.750488" v2="0.812012"/>
         <Element name="mussel_bed.tex" u1="0.250244" u2="0.281006" v1="0.687988" v2="0.749512"/>
@@ -177,7 +177,7 @@
         <Element name="porto_sea_yard.tex" u1="0.312744" u2="0.343506" v1="0.125488" v2="0.187012"/>
         <Element name="porto_shadowboat.tex" u1="0.312744" u2="0.343506" v1="0.0629883" v2="0.124512"/>
         <Element name="porto_tar_extractor.tex" u1="0.312744" u2="0.343506" v1="0.000488281" v2="0.0620117"/>
-        <Element name="porto_waterchest1.tex" u1="0.343994" u2="0.374756" v1="0.937988" v2="0.999512"/>
+        <Element name="porto_waterchest.tex" u1="0.343994" u2="0.374756" v1="0.937988" v2="0.999512"/>
         <Element name="porto_woodlegsboat.tex" u1="0.343994" u2="0.374756" v1="0.875488" v2="0.937012"/>
         <Element name="primeapebarrel.tex" u1="0.343994" u2="0.374756" v1="0.812988" v2="0.874512"/>
         <Element name="quackenbeak.tex" u1="0.343994" u2="0.374756" v1="0.750488" v2="0.812012"/>
