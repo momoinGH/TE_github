@@ -264,7 +264,7 @@ AddRecipe2("mutator_frost", {Ingredient("monstermeat", 2), Ingredient("silk", 3)
     builder_tag = "spiderwhisperer",
 }, {"CHARACTER"})
 -- Wurt
-AddRecipe2("mermhouse_fisher_crafted", {Ingredient("boards", 5), Ingredient("rocks", 3), Ingredient("oceanfish_small_61_inv", 2)},
+AddRecipe2("mermhouse_fisher_crafted", {Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("oceanfish_small_61_inv", 2)},
            TECH.SCIENCE_ONE, {
     builder_tag = "merm_builder",
     placer = "mermhouse_fisher_crafted_placer",
@@ -273,7 +273,7 @@ AddRecipe2("mermhouse_fisher_crafted", {Ingredient("boards", 5), Ingredient("roc
         return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH)
     end,
 }, {"CHARACTER"})
-AddRecipe2("mermhouse_tropical_crafted", {Ingredient("boards", 5), Ingredient("rocks", 3), Ingredient("oceanfish_small_61_inv", 2)},
+AddRecipe2("mermhouse_tropical_crafted", {Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("oceanfish_small_61_inv", 2)},
            TECH.SCIENCE_ONE, {
     builder_tag = "merm_builder",
     placer = "mermhouse_tropical_crafted_placer",
