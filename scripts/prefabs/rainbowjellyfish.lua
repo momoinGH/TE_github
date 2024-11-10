@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/rainbowjellyfish.zip"),
-    Asset("ANIM", "anim/meat_rack_food.zip"),
+    Asset("ANIM", "anim/meat_rack_food_tro.zip"),
     Asset("INV_IMAGE", "rainbowJellyJerky"),
 }
 

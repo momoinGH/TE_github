@@ -1,9 +1,8 @@
 local assets =
 {
     Asset("ANIM", "anim/seaweed.zip"),
-    Asset("ANIM", "anim/meat_rack_food.zip"),
+    Asset("ANIM", "anim/meat_rack_food_tro.zip"),
 }
-
 
 local prefabs =
 {
@@ -52,8 +51,6 @@ local function defaultfn(sim)
         return inst
     end
 
-
-
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
     inst:AddComponent("bait")
@@ -93,7 +90,6 @@ local function defaultfn(sim)
     return inst
 end
 
-
 local function cookedfn(sim)
     local inst = CreateEntity()
     inst.entity:AddTransform()
@@ -124,7 +120,6 @@ local function cookedfn(sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(PERISH_FAST)
@@ -167,17 +162,12 @@ local function driedfn(sim)
         return inst
     end
 
-
-
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
     inst:AddComponent("bait")
     inst:AddComponent("inspectable")
 
-
     inst:AddComponent("inventoryitem")
-
-
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(PERISH_FAST)
@@ -192,7 +182,7 @@ local function driedfn(sim)
     inst.components.edible.sanityvalue = TUNING.SANITY_SMALL
     inst.components.perishable:SetPerishTime(PERISH_PRESERVED)
     inst.AnimState:SetBank("meat_rack_food")
-    inst.AnimState:SetBuild("meat_rack_food")
+    inst.AnimState:SetBuild("meat_rack_food_tro")
     inst.AnimState:PlayAnimation("idle_dried_seaweed", true)
 
     return inst

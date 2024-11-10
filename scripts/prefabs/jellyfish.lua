@@ -1,8 +1,8 @@
 local assets =
 {
     Asset("ANIM", "anim/jellyfish.zip"),
-    --    Asset("ANIM", "anim/meat_rack_food.zip"),
-    --    Asset("INV_IMAGE", "jellyJerky"),
+    Asset("ANIM", "anim/meat_rack_food_tro.zip"),
+    Asset("INV_IMAGE", "jellyJerky"),
 }
 
 
@@ -237,8 +237,8 @@ local function driedfn(sim)
 
     inst.AnimState:SetRayTestOnBB(true);
     inst.AnimState:SetBank("meat_rack_food")
-    inst.AnimState:SetBuild("meat_rack_food")
-    inst.AnimState:PlayAnimation("idle_dried_large", true)
+    inst.AnimState:SetBuild("meat_rack_food_tro")
+    inst.AnimState:PlayAnimation("idle_dried_jellyjerky", true)
 
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
