@@ -39,6 +39,7 @@ local function defaultfn(sim)
     inst.AnimState:SetRayTestOnBB(true);
     inst.AnimState:SetBank("seaweed")
     inst.AnimState:SetBuild("seaweed")
+    inst.AnimState:PlayAnimation("idle", true)
 
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
@@ -58,7 +59,6 @@ local function defaultfn(sim)
 
     inst:AddComponent("inventoryitem")
 
-
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(PERISH_FAST)
     inst.components.perishable:StartPerishing()
@@ -76,8 +76,8 @@ local function defaultfn(sim)
 
     inst:AddComponent("dryable")
     inst.components.dryable:SetProduct("seaweed_dried")
+    inst.components.dryable:SetBuildFile("meat_rack_food_tro")    
     inst.components.dryable:SetDryTime(TUNING.DRY_SUPERFAST)
-    inst.AnimState:PlayAnimation("idle", true)
 
     inst:AddComponent("talker")
 
@@ -148,8 +148,9 @@ local function driedfn(sim)
     inst.entity:AddNetwork()
 
     inst.AnimState:SetRayTestOnBB(true);
-    inst.AnimState:SetBank("seaweed")
-    inst.AnimState:SetBuild("seaweed")
+    inst.AnimState:SetBank("meat_rack_food")
+    inst.AnimState:SetBuild("meat_rack_food_tro")
+    inst.AnimState:PlayAnimation("idle_dried_seaweed", true)
 
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
@@ -170,7 +171,7 @@ local function driedfn(sim)
     inst:AddComponent("inventoryitem")
 
     inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(PERISH_FAST)
+    inst.components.perishable:SetPerishTime(PERISH_PRESERVED)
     inst.components.perishable:StartPerishing()
     inst.components.perishable.onperishreplacement = "spoiled_food"
 
@@ -180,10 +181,6 @@ local function driedfn(sim)
     inst.components.edible.healthvalue = HEALING_SMALL
     inst.components.edible.hungervalue = CALORIES_SMALL
     inst.components.edible.sanityvalue = TUNING.SANITY_SMALL
-    inst.components.perishable:SetPerishTime(PERISH_PRESERVED)
-    inst.AnimState:SetBank("meat_rack_food")
-    inst.AnimState:SetBuild("meat_rack_food_tro")
-    inst.AnimState:PlayAnimation("idle_dried_seaweed", true)
 
     return inst
 end

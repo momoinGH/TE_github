@@ -12,7 +12,7 @@ local invassets =
 
 local prefabs =
 {
-    "dead_swordfish"
+    "swordfish_dead"
 }
 
 local SWORDFISH_WALK_SPEED = 5
@@ -121,7 +121,7 @@ local function swordfishfn()
 
     inst:AddComponent("eater")
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({ "dead_swordfish" })
+    inst.components.lootdropper:SetLoot({ "swordfish_dead" })
 
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetSleepTest(ShouldSleep)

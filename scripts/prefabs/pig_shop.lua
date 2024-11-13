@@ -556,7 +556,7 @@ local rooms = {
             { name = "interior_floor_sheet_metal" },
             { name = "city_exit_deli_door", x_offset = 4.5, key = "exit", },
             { name = "pigman_storeowner_shopkeep", x_offset = -1, z_offset = 4, startstate = "desk" },
-            { name = "shelves_fridge", x_offset = -4.5, z_offset = -4, rotation = -90, shelfitems = { { 1, "fish_raw_small" }, { 2, "fish_raw_small" }, { 3, "bird_egg" }, { 4, "bird_egg" }, { 5, "froglegs" }, { 6, "froglegs" } }, },
+            { name = "shelves_fridge", x_offset = -4.5, z_offset = -4, rotation = -90, shelfitems = { { 1, "fishmeat_small" }, { 2, "fishmeat_small" }, { 3, "bird_egg" }, { 4, "bird_egg" }, { 5, "froglegs" }, { 6, "froglegs" } }, },
             { name = "deco_general_hangingscale", x_offset = -2, z_offset = 4.7 },
             { name = "deco_roomglow", },
             { name = "deco_wood_cornerbeam", x_offset = -5, z_offset = width / 2, scale = { -1, 1 } },

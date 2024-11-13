@@ -51,7 +51,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		inst.components.lootdropper:AddRandomLoot("tunacan", 4)
 		inst.components.lootdropper:AddRandomLoot("fabric", 5)
 		inst.components.lootdropper:AddRandomLoot("dubloon", 5)
-		inst.components.lootdropper:AddRandomLoot("fish_raw", 5)
+		inst.components.lootdropper:AddRandomLoot("fishmeat", 5)
 		inst.components.lootdropper:AddRandomLoot("coconut", 5)
 		inst.components.lootdropper:AddRandomLoot("tikimask", 3)
 		inst.components.lootdropper:AddRandomLoot("shark_gills", 1)
@@ -68,7 +68,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		inst.components.lootdropper:AddRandomLoot("ox_horn", 1)
 		inst.components.lootdropper:AddRandomLoot("limestone", 4)
 		inst.components.lootdropper:AddRandomLoot("limestone", 5)
-		inst.components.lootdropper:AddRandomLoot("fish_med", 4)
+		inst.components.lootdropper:AddRandomLoot("dogfish_dead", 4)
 	end
 
 	if item.prefab == "redgem" or item.prefab == "bluegem" or item.prefab == "purplegem" then
@@ -100,7 +100,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		inst.components.lootdropper:AddRandomLoot("limestone", 5)
 		inst.components.lootdropper:AddRandomLoot("tar", 4)
 		inst.components.lootdropper:AddRandomLoot("corallarve", 2)
-		inst.components.lootdropper:AddRandomLoot("fish_med", 4)
+		inst.components.lootdropper:AddRandomLoot("dogfish_dead", 4)
 		inst.components.lootdropper:AddRandomLoot("lobster", 2)
 	end
 

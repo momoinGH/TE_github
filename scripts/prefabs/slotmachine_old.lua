@@ -2361,7 +2361,7 @@ local internalloot =
 			limpets = 2,
 			jellyfish_dead = 1,
 			fish2 = 2,
-			fish_med = 1,
+			dogfish_dead = 1,
 		},
 	},
 
@@ -2455,7 +2455,7 @@ local internalloot =
 		loot =
 		{
 			fishingrod = 1,
-			fish_med = 3,
+			dogfish_dead = 3,
 			fish2 = 3,
 		},
 	},
