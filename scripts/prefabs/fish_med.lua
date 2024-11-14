@@ -59,6 +59,7 @@ local function makefish_med(bank, build, dryablesymbol)
 		inst.entity:AddAnimState()
 		inst.AnimState:SetBank(bank)
 		inst.AnimState:SetBuild(build)
+		inst.AnimState:PlayAnimation("dead")
 		inst.build = build --This is used within SGwilson, sent from an event in fishingrod.lua
 
 		inst:AddTag("catfood")

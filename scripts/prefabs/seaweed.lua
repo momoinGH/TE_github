@@ -76,7 +76,7 @@ local function defaultfn(sim)
 
     inst:AddComponent("dryable")
     inst.components.dryable:SetProduct("seaweed_dried")
-    inst.components.dryable:SetBuildFile("meat_rack_food_tro")    
+    inst.components.dryable:SetBuildFile("meat_rack_food_tro")
     inst.components.dryable:SetDryTime(TUNING.DRY_SUPERFAST)
 
     inst:AddComponent("talker")
