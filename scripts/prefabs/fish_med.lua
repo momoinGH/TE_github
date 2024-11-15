@@ -470,7 +470,7 @@ local rawswordfish = makefish_med("swordfish", "fish_swordfish", "swordfish")
 
 return Prefab("dogfish_dead", rawdogfish, dogfish_assets, prefabs),
 	Prefab("swordfish_dead", rawswordfish, swordfish_assets, prefabs),
-	Prefab("spoiled_fish_large", function() return spoiledfn(fish_large_init, fish_large_mastersim_init, FERTILIZER_DEFS.spoiled_fish.nutrients) end, spoiledfish_large_assets, spoiled_fish_large_prefabs),
+	Prefab("spoiled_fish_large", function() return spoiledfn(fish_large_init, fish_large_mastersim_init, FERTILIZER_DEFS.spoiled_fish_large.nutrients) end, spoiledfish_large_assets, spoiled_fish_large_prefabs),
 	--Prefab("fish_raw", fish_raw_fn, raw_assets),
 	--Prefab("fish_med_cooked", cookedfn, cooked_assets),
 	Prefab("quagmire_crabmeat", quagmire_crabmeat_fn, quagmire_crabmeat_assets),
