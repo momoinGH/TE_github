@@ -521,12 +521,22 @@ local function MakeHat(name, bankparam, prefabnameparam)
         return inst
     end
 
+    local SHARK_TEETHHAT_DAPPERNESS = 0
+    local SHARK_TEETHHAT_DAPPERNESS_OCEAN = TUNING.DAPPERNESS_LARGE
+
+    local function shark_teethhat_calculation(inst, attacker, target)
+        local is_over_ground = TheWorld.Map:IsVisualGroundAtPoint(attacker:GetPosition():Get())
+        return (is_over_ground and SHARK_TEETHHAT_DAPPERNESS) or SHARK_TEETHHAT_DAPPERNESS_OCEAN
+    end
+
     local function shark_teeth()
         local inst = simple()
 
         inst.AnimState:SetBank("hat_shark_teeth")
         inst.AnimState:SetBuild("hat_shark_teeth")
         inst.AnimState:PlayAnimation("anim")
+
+        inst:AddTag("regal")
 
         inst.entity:SetPristine()
 
@@ -539,6 +549,8 @@ local function MakeHat(name, bankparam, prefabnameparam)
         inst.components.fueled:InitializeFuelLevel(TUNING.SHARK_HAT_PERISHTIME)
         --inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
         inst.components.fueled:SetDepletedFn(generic_perish)
+
+        inst.components.equippable.dapperness = (shark_teethhat_calculation)
 
         --inst.components.equippable:SetOnEquip(opentop_onequip)
         -- inst.components.equippable:SetOnUnequip(shark_teeth_onunequip)
