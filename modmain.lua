@@ -35,7 +35,7 @@ local ALL_ASSETS = {}
 local language = string.lower(GetModConfigData("language"))
 GLOBAL.WIKI_DATA = {}
 
-
+require("knownmodcheck") -- 检测不兼容模组并报错崩溃
 --- 导入对应模块的文件，不需要的文件可以不存在
 local function Modimport(dirc)
 	SafeModImport("modmain/" .. dirc .. "/tuning")            --定义的变量

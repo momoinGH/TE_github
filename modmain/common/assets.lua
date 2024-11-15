@@ -147,12 +147,14 @@ local InvAtlas = {"frost", "greenworld", "grotto", "hamlet", "lavaarena", "quagm
 for i = 1, #InvAtlas do
     InvAtlas[i] = "images/inventoryimages/inventory_" .. InvAtlas[i] .. ".xml"
     table.insert(Assets, Asset("ATLAS", InvAtlas[i]))
+    table.insert(Assets, Asset("ATLAS_BUILD", InvAtlas[i], 256)) -- for minisign
     InvAtlas[i] = resolvefilepath(InvAtlas[i])
 end
 local FoodAtlas = {"frost", "ham", "quagmire", "sw", "underwater"}
 for i = 1, #FoodAtlas do
     FoodAtlas[i] = "images/inventoryimages/cookpotfoods/cookpotfoods_" .. FoodAtlas[i] .. ".xml"
     table.insert(Assets, Asset("ATLAS", FoodAtlas[i]))
+    table.insert(Assets, Asset("ATLAS_BUILD", FoodAtlas[i], 256)) -- for minisign
     FoodAtlas[i] = resolvefilepath(FoodAtlas[i])
 end
 local MiMapAtlas = {"frost", "volcano", "grotto", "hamlet", "lavaarena", "quagmire", "rog", "shipwrecked_plus",
@@ -163,8 +165,6 @@ for i = 1, #MiMapAtlas do
     AddMinimapAtlas(MiMapAtlas[i])
     MiMapAtlas[i] = resolvefilepath(MiMapAtlas[i])
 end
-
-local inventoryItemOverridenAtlasLookup = {}
 
 local old_GetInventoryItemAtlas_Internal = GLOBAL.GetInventoryItemAtlas_Internal
 local function GetInventoryItemAtlas_Extended(imagename, no_fallback)
