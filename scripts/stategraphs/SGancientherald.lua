@@ -54,10 +54,11 @@ function SpawnRandomInRange(inst, prefab, min_count, max_count, radius, offset_y
 end
 
 function SpawnFireRain(inst)
-    local objs = SpawnRandomInRange(inst, "firerain", 1, 4, 6)
-
-    for k, v in pairs(objs) do
-        v:StartStep()
+    if TheWorld:HasTag("cave") then
+        SpawnRandomInRange(inst, "cavein_boulder", 1, 4, 6, 35)
+    else
+        local objs = SpawnRandomInRange(inst, "firerain", 1, 4, 6)
+        for _, v in pairs(objs) do v:StartStep() end
     end
 end
 

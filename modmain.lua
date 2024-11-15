@@ -13,6 +13,9 @@ extend_tags文件实现了标签扩展，tro_打头的标签可以随意给玩�
 
 ----------------------------------------------------------------------------------------------------
 
+require("knownmodcheck") -- 检测不兼容模组并报错崩溃
+require("scripts/components/animstate") -- AnimState 增强
+
 --- 科雷modmain的定义抄过来，不过文件不存在时不提醒
 local function SafeModImport(modulename)
 	print("modimport: " .. env.MODROOT .. modulename)
@@ -35,7 +38,6 @@ local ALL_ASSETS = {}
 local language = string.lower(GetModConfigData("language"))
 GLOBAL.WIKI_DATA = {}
 
-require("knownmodcheck") -- 检测不兼容模组并报错崩溃
 --- 导入对应模块的文件，不需要的文件可以不存在
 local function Modimport(dirc)
 	SafeModImport("modmain/" .. dirc .. "/tuning")            --定义的变量
