@@ -38,6 +38,12 @@ SetSharedLootTable('tigershark',
         { "shark_gills", 0.10 },
         { "shark_gills", 0.33 },
 
+        { "shark_tooth", 1.00 },
+        { "shark_tooth", 1.00 },
+        { "shark_tooth", 1.00 },
+        { "shark_tooth", 1.00 },
+        { "shark_tooth", 1.00 },
+
         { "mysterymeat", 1.00 },
         { "mysterymeat", 0.50 },
         { "mysterymeat", 0.33 },

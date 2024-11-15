@@ -543,6 +543,8 @@ AddRecipe2("blubbersuit", {Ingredient("blubber", 4), Ingredient("fabric", 2), In
 AddRecipe2("brainjellyhat", {Ingredient("coral_brain", 1), Ingredient("jellyfish", 1), Ingredient("rope", 2)},
            TECH.SCIENCE_TWO, {
 }, {"CLOTHING", "PROTOTYPERS"})
+AddRecipe2("shark_teethhat", {Ingredient("shark_tooth", 5), Ingredient("goldnugget", 1)}, TECH.SCIENCE_ONE, nil, {"CLOTHING"})
+
 AddRecipe2("armor_windbreaker", {Ingredient("blubber", 2), Ingredient("fabric", 1), Ingredient("rope", 1)},
            TECH.SCIENCE_TWO, {
 }, {"CLOTHING", "RAIN"}) -- CHECK  THIS
@@ -1381,7 +1383,7 @@ SortAfter("spear_launcher", "spear_wathgrithr_lightning", "WEAPONS")
 SortAfter("cutlass", "nightstick", "WEAPONS")
 SortAfter("brainjellyhat", "researchlab3", "PROTOTYPERS")
 SortAfter("brainjellyhat", "catcoonhat", "CLOTHING")
--- SortAfter("shark_teethhat", "brainjellyhat", "CLOTHING")
+SortAfter("shark_teethhat", "brainjellyhat", "CLOTHING")
 SortAfter("snakeskinhat", "rainhat", "CLOTHING")
 SortAfter("snakeskinhat", "rainhat", "RAIN")
 SortAfter("armor_snakeskin", "raincoat", "CLOTHING")
@@ -1394,7 +1396,7 @@ SortAfter("tarsuit", "blubbersuit", "CLOTHING")
 SortAfter("tarsuit", "blubbersuit", "RAIN")
 SortAfter("armor_windbreaker", "tarsuit", "CLOTHING")
 SortAfter("armor_windbreaker", "tarsuit", "RAIN")
-SortAfter("gashat", "brainjellyhat", "CLOTHING")
+SortAfter("gashat", "shark_teethhat", "CLOTHING")
 SortAfter("aerodynamichat", "gasmaskhat", "CLOTHING")
 SortAfter("double_umbrellahat", "eyebrellahat", "CLOTHING")
 SortAfter("double_umbrellahat", "eyebrellahat", "RAIN")

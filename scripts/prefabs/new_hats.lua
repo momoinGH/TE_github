@@ -521,11 +521,44 @@ local function MakeHat(name, bankparam, prefabnameparam)
         return inst
     end
 
+    local function shark_teeth()
+        local inst = simple()
 
+        inst.AnimState:SetBank("hat_shark_teeth")
+        inst.AnimState:SetBuild("hat_shark_teeth")
+        inst.AnimState:PlayAnimation("anim")
 
+        inst.entity:SetPristine()
 
+        if not TheWorld.ismastersim then
+            return inst
+        end
 
+        inst:AddComponent("fueled")
+        inst.components.fueled.fueltype = FUELTYPE.USAGE
+        inst.components.fueled:InitializeFuelLevel(TUNING.SHARK_HAT_PERISHTIME)
+        --inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
+        inst.components.fueled:SetDepletedFn(generic_perish)
 
+        --inst.components.equippable:SetOnEquip(opentop_onequip)
+        -- inst.components.equippable:SetOnUnequip(shark_teeth_onunequip)
+
+        --inst.onmountboat = function(player, data)
+            --inst.components.equippable.dapperness = TUNING.DAPPERNESS_LARGE
+        --end
+        --inst.ondismountboat = function(player, data)
+           -- inst.components.equippable.dapperness = 0
+        --end
+
+        -- inst:DoTaskInTime(0.1,function()
+        -- local owner = inst.components.inventoryitem.owner
+        -- if owner and owner.components.sailor and owner.components.sailor:IsSailing() then
+        -- inst.onmountboat(inst)
+        -- end
+        -- end)
+
+        return inst
+    end
 
     local fn = nil
     local assets = { Asset("ANIM", "anim/" .. fname .. ".zip") }
@@ -551,6 +584,8 @@ local function MakeHat(name, bankparam, prefabnameparam)
         fn = gas
     elseif name == "disguise" then
         fn = disguise
+    elseif name == "shark_teeth" then
+        fn = shark_teeth
     end
 
     return Prefab(prefabname, fn, assets, prefabs)
@@ -565,5 +600,6 @@ return MakeHat("pirate"),
     MakeHat("aerodynamic"),
     MakeHat("brainjelly"),
     MakeHat("disguise"),
+    MakeHat("shark_teeth"),
     MakeHat("gas")
 --    MakeHat("bunny", "beefalohat", "bunnyhat")

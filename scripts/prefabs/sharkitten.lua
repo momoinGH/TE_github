@@ -12,8 +12,14 @@ local prefabs =
 
 SetSharedLootTable('sharkitten',
     {
-        { "fish",        0.90 },
-        { "shark_gills", 0.05 },
+        {"fishmeat", 1.00},
+        {"fishmeat", 1.00},
+        {'shark_fin',  1.0},
+        {"shark_gills", 0.25},
+        {"shark_gills", 0.10},
+
+        {"shark_tooth", 0.25 },
+        {"mysterymeat", 0.10 },
     })
 
 local function grow(inst, dt)

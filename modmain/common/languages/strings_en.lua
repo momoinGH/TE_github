@@ -2310,6 +2310,8 @@ STRINGS.NAMES.PEACH_JUICE_BOTTLE_GREEN                                          
 STRINGS.NAMES.PIG_QUEEN                                                         = "Pig Queen"
 STRINGS.NAMES.FISH7                                                             = "Dead Hutch Fish"
 STRINGS.NAMES.TIGERSHARK                                                        = "Tiger Shark"
+STRINGS.NAMES.SHARK_TOOTH                                                       = "Shark tooth"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_TOOTH                                 = "It's like a sharp blade."
 STRINGS.NAMES.RENO_LIGHT_BASIC_BULB                                             = "Wired Bulb"
 STRINGS.NAMES.CORAL_BRAIN_ROCK                                                  = "Brainy Sprout"
 STRINGS.NAMES.BUFF_SPEEDUP_TRO                                                  = "Caffeine"

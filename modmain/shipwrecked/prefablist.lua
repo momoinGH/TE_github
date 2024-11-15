@@ -123,6 +123,7 @@ PrefabFiles = {
   "poisonhole",
   "tigershark",
   "tigersharkshadow",
+  "shark_tooth",
   "mysterymeat",
   "volcanofog",
   "flupspawner",
