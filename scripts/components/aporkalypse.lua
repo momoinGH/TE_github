@@ -190,42 +190,36 @@ function Aporkalypse:SpawnBats()
 end
 
 function Aporkalypse:ScheduleHeraldCheck()
-	self:CancelHeraldCheck()
-	self.herald_check_task = self.inst:DoTaskInTime(math.random(TUNING.TOTAL_DAY_TIME / 3, TUNING.TOTAL_DAY_TIME),
-		function()
-			for i, player in ipairs(AllPlayers) do
+	self.herald_check_task = self.inst:StartThread(function()
+		while self.aporkalypse_active do
+			for _, player in ipairs(AllPlayers) do
 				if player and not player.components.health:IsDead() then
 					local herald = GetClosestInstWithTag("ancient", player, 40)
-					local interior = GetClosestInstWithTag("interior_center", player, 40)
-					if not interior then
-						if herald == nil then
+					if not GetClosestInstWithTag("interior_center", player, 40) then
+						if not herald then
 							local map = TheWorld.Map
-							local x, y, z = player.Transform:GetWorldPosition()
-							local x1 = x + math.random(-10, 10)
-							local y1 = y
-							local z1 = z + math.random(-10, 10)
-							local ground = map:GetTile(map:GetTileCoordsAtPoint(x1, y1, z1))
-
-							if
-								ground ~= GROUND.OCEAN_COASTAL and
-								ground ~= GROUND.OCEAN_COASTAL_SHORE and
-								ground ~= GROUND.OCEAN_SWELL and
-								ground ~= GROUND.OCEAN_ROUGH and
-								ground ~= GROUND.OCEAN_BRINEPOOL and
-								ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-								ground ~= GROUND.OCEAN_WATERLOG and
-								ground ~= GROUND.OCEAN_HAZARDOU then
-								local part = SpawnPrefab("ancient_herald")
-								if part ~= nil then part.Transform:SetPosition(x1, y1, z1) end
+							local x, _, z = player.Transform:GetWorldPosition()
+							x = x + math.random(-10, 10)
+							z = z + math.random(-10, 10)
+							local ground = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z))
+							if ground ~= GROUND.OCEAN_COASTAL and
+							   ground ~= GROUND.OCEAN_COASTAL_SHORE and
+							   ground ~= GROUND.OCEAN_SWELL and
+							   ground ~= GROUND.OCEAN_ROUGH and
+							   ground ~= GROUND.OCEAN_BRINEPOOL and
+							   ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
+							   ground ~= GROUND.OCEAN_WATERLOG and
+							   ground ~= GROUND.OCEAN_HAZARDOU then
+							   	herald = SpawnAt("ancient_herald", Vector3(x, 0, z))
 							end
-						else
-							if herald.components.combat then herald.components.combat:SuggestTarget(player) end
+						if herald and herald.components.combat then herald.components.combat:SuggestTarget(player) end
 						end
 					end
 				end
-				self:ScheduleHeraldCheck()
 			end
-		end)
+			Sleep(math.random(TUNING.SEG_TIME / 2, TUNING.SEG_TIME))
+		end
+	end)
 end
 
 function Aporkalypse:CancelHeraldCheck()
