@@ -5,16 +5,12 @@
 
 extend_tags文件实现了标签扩展，tro_打头的标签可以随意给玩家添加，不会增加玩家标签数量，但是希望不要滥用标签，应在主客机需要交互时使用
 
-
-
 ]]
-
-
 
 ----------------------------------------------------------------------------------------------------
 
 require("knownmodcheck") -- 检测不兼容模组并报错崩溃
-require("scripts/components/animstate") -- AnimState 增强
+require("components/animstate") -- AnimState 增强
 
 --- 科雷modmain的定义抄过来，不过文件不存在时不提醒
 local function SafeModImport(modulename)
