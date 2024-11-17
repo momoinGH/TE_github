@@ -35,7 +35,7 @@ AddRecipe2("volcanostaff",
 AddRecipe2("obsidiancoconade",
     { Ingredient("coconade", 3, v_atlas), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
     TECH.OBSIDIAN_TWO, { nounlock = true, numtogive = 3 }, { "OBSIDIAN" })
-AddRecipe2("woodlegs_boatcannon",
+AddRecipe2("obsidian_boatcannon",
     { Ingredient("obsidian", 6, v_atlas), Ingredient("log", 5), Ingredient("gunpowder", 4) },
     TECH.SEAFARING_TWO, nil, { "OBSIDIAN" })
 AddRecipe2("wind_conch",

@@ -769,7 +769,7 @@ Constructor.AddAction({ priority = 11, distance = 25 },
         act.doer:ForceFacePoint(x, y, z)
         -------------------------------------------------------
 
-        local bomba = SpawnPrefab(item.prefab == "woodlegs_boatcannon" and "cannonshotobsidian" or "cannonshot")
+        local bomba = SpawnPrefab(item.prefab == "obsidian_boatcannon" and "cannonshotobsidian" or "cannonshot")
         if boat.prefab == "woodlegsboat" and act.doer.prefab == "woodlegs" then
             bomba.components.explosive.explosivedamage = 50
         else

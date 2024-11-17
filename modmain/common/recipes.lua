@@ -603,7 +603,7 @@ AddRecipe2("seasack", {Ingredient("seaweed", 5), Ingredient("vine", 2), Ingredie
            {
 }, {"CONTAINERS", "COOKING", "CLOTHING"})
 AddRecipe2("porto_waterchest", {Ingredient("boards", 4), Ingredient("tar", 1)}, TECH.SCIENCE_ONE, {
-    image = "waterchest.png",
+    image = "waterchest.tex",
 }, {"STRUCTURES", "CONTAINERS"})
 AddRecipe2("mussel_stick", {Ingredient("bamboo", 2), Ingredient("vine", 1), Ingredient("seaweed", 1)}, TECH.SCIENCE_ONE,
            {
@@ -1431,7 +1431,7 @@ SortAfter("turf_beach", "turf_volcano", "DECOR")
 -- SortAfter("volcanostaff", "spear_obsidian", "CRAFTING_STATION")
 -- SortAfter("wind_conch", "obsidiancoconade", "CRAFTING_STATION")
 -- SortAfter("windstaff", "wind_conch", "CRAFTING_STATION")
--- SortAfter("woodlegs_boatcannon", "obsidiancoconade", "OBSIDIAN")
+-- SortAfter("obsidian_boatcannon", "obsidiancoconade", "OBSIDIAN")
 -- SortAfter("turf_ruinsbrick_glow_blueprint", "windstaff", "CRAFTING_STATION")
 -- SortAfter("chesspiece_kraken_builder", "chesspiece_klaus_builder", "CRAFTING_STATION")--海妖雕塑
 -- SortAfter("chesspiece_tigershark_builder", "chesspiece_kraken_builder", "CRAFTING_STATION")--虎鲨雕塑

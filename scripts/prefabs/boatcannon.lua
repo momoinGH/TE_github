@@ -102,17 +102,17 @@ local function boatcannon_fn()
     return common("cannon", "swap_cannon", "idle", "swap_cannon", "swap_cannon")
 end
 
-local woodlegs_boatcannon_assets = {
+local obsidian_boatcannon_assets = {
     Asset("ANIM", "anim/swap_cannon_pirate.zip"),
 }
 
-local woodlegs_boatcannon_prefabs = {
+local obsidian_boatcannon_prefabs = {
     "collapse_small",
 }
 
-local function woodlegs_boatcannon_fn()
+local function obsidian_boatcannon_fn()
     return common("cannon", "swap_cannon_pirate", "anim", "swap_cannon_pirate", "swap_cannon")
 end
 
 return Prefab("boatcannon", boatcannon_fn, boatcannon_assets, boatcannon_prefabs),
-    Prefab("woodlegs_boatcannon", woodlegs_boatcannon_fn, woodlegs_boatcannon_assets, woodlegs_boatcannon_prefabs)
+    Prefab("obsidian_boatcannon", obsidian_boatcannon_fn, obsidian_boatcannon_assets, obsidian_boatcannon_prefabs)

@@ -1062,9 +1062,9 @@ STRINGS.NAMES.BOATCANNON = "Cannone"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOATCANNON = "L'unica cosa migliore di una barca è una barca con un cannone."
 STRINGS.RECIPE_DESC.BOATCANNON = "Proteggerà la tua barca."
 
-STRINGS.NAMES.WOODLEGS_BOATCANNON = "Cannone da pirata"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGS_BOATCANNON = "Ecco il motivo per cui i furfanti non vanno molto lontano."
-STRINGS.RECIPE_DESC.WOODLEGS_BOATCANNON = "Fuoco alle polveri!"
+STRINGS.NAMES.OBSIDIAN_BOATCANNON = "Cannone da pirata"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIAN_BOATCANNON = "Ecco il motivo per cui i furfanti non vanno molto lontano."
+STRINGS.RECIPE_DESC.OBSIDIAN_BOATCANNON = "Fuoco alle polveri!"
 
 STRINGS.NAMES.QUACKERINGRAM = "Ariete del Quacken"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUACKERINGRAM = "Scusatemi tutti, fuori dai piedi, perfavore."
