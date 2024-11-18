@@ -29,8 +29,7 @@ local events =
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
     CommonHandlers.OnLocomote(true, true),
-    EventHandler("attacked",
-        function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("hit") end end),
+    EventHandler("attacked",function(inst) if inst.components.health:GetPercent() > 0 then inst.sg:GoToState("hit") end end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("trapped", function(inst) inst.sg:GoToState("trapped") end),
     EventHandler("locomote",
@@ -55,6 +54,7 @@ local events =
             end
         end),
     EventHandler("stunned", function(inst) inst.sg:GoToState("stunned") end),
+    EventHandler("stunbomb", function(inst) inst.sg:GoToState("stunned") end),
 }
 
 local states =
@@ -225,16 +225,19 @@ local states =
         },
     },
 
-    State {
+    State{
         name = "death",
-        tags = { "busy" },
+        tags = {"busy"},
 
-        onenter = function(inst)
+        onenter = function(inst, data)
             inst.SoundEmitter:PlaySound(inst.sounds.scream)
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(inst:GetPosition())
+			--print("data.afflicter",tostring(data.afflicter),type(data.afflicter))
+			-- KAJ: I'm not happy with this, I'd rather set this somewhere else
+			inst.causeofdeath = data and data.afflicter or nil
+            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()), data and data.afflicter or nil)
         end,
 
     },
