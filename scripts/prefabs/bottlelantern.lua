@@ -1,8 +1,8 @@
 local dusk_time = 120
 local night_time = 60
-local BOAT_TORCH_LIGHTTIME = night_time * 1.75
-local BOAT_LANTERN_LIGHTTIME = (night_time + dusk_time) * 2.6
-local BOTTLE_LANTERN_LIGHTTIME = (night_time + dusk_time) * 2.6
+--local BOAT_TORCH_LIGHTTIME = night_time * 1.75
+--local BOAT_LANTERN_LIGHTTIME = (night_time + dusk_time) * 2.6
+--local BOTTLE_LANTERN_LIGHTTIME = (night_time + dusk_time) * 2.6
 
 local assets =
 {
@@ -18,8 +18,7 @@ local prefabs =
 
 local function DoTurnOffSound(inst, owner)
     inst._soundtask = nil
-    (owner ~= nil and owner:IsValid() and owner.SoundEmitter or inst.SoundEmitter):PlaySound(
-        "dontstarve_DLC002/common/bottlelantern_turnoff")
+    (owner ~= nil and owner:IsValid() and owner.SoundEmitter or inst.SoundEmitter):PlaySound("dontstarve_DLC002/common/bottlelantern_turnoff")
 end
 
 local function PlayTurnOffSound(inst)
@@ -126,7 +125,8 @@ local function turnon(inst)
 
         inst.components.machine.ison = true
 
-        --        inst.components.inventoryitem:ChangeImageName("lantern_lit")
+        inst.components.inventoryitem:ChangeImageName("bottlelantern_lit")
+        inst:PushEvent("lantern_on")
     end
 end
 
@@ -177,7 +177,8 @@ local function turnoff(inst)
 
     inst.components.machine.ison = false
 
-    --   inst.components.inventoryitem:ChangeImageName("lantern")
+    inst.components.inventoryitem:ChangeImageName("bottlelantern")
+    inst:PushEvent("lantern_off")
 end
 
 local function OnRemove(inst)
@@ -193,7 +194,7 @@ local function ondropped(inst)
     turnoff(inst)
     turnon(inst)
 end
-
+--[[
 local function onequip(inst, owner)
     if not owner.sg:HasStateTag("rowing") then
         owner.AnimState:Show("ARM_carry")
@@ -210,12 +211,42 @@ local function onequip(inst, owner)
         inst.components.machine:TurnOn()
     end
 end
+]]
+local function onequip(inst, owner)
+	if owner and owner.sg and owner.sg:HasStateTag("rowing") then return end
+	owner.AnimState:OverrideSymbol("swap_object", "swap_bottlle_lantern", "swap_lantern_off")
+	owner.AnimState:OverrideSymbol("lantern_overlay", "swap_bottlle_lantern", "lantern_overlay")
+
+	owner.AnimState:Show("ARM_carry")
+	owner.AnimState:Hide("ARM_normal")
+
+	if inst.components.fueled:IsEmpty() then
+		owner.AnimState:OverrideSymbol("swap_object", "swap_bottlle_lantern", "swap_lantern_off")
+		owner.AnimState:Hide("LANTERN_OVERLAY")
+	else
+		owner.AnimState:OverrideSymbol("swap_object", "swap_bottlle_lantern", "swap_lantern_on")
+		owner.AnimState:Show("LANTERN_OVERLAY")
+		turnon(inst)
+	end
+end
 
 local function onunequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
     owner.AnimState:ClearOverrideSymbol("lantern_overlay")
     owner.AnimState:Hide("LANTERN_OVERLAY")
+
+    if inst.components.machine.ison then
+        starttrackingowner(inst, owner)
+    end
+end
+
+local function onequiptomodel(inst, owner, from_ground)
+    if inst.components.machine.ison then
+        starttrackingowner(inst, owner)
+    end
+
+    turnoff(inst)
 end
 
 local function nofuel(inst)
@@ -305,7 +336,6 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
 
-
     inst.components.inventoryitem:SetOnDroppedFn(ondropped)
     inst.components.inventoryitem:SetOnPutInInventoryFn(turnoff)
 
@@ -332,6 +362,7 @@ local function fn()
 
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
+	inst.components.equippable:SetOnEquipToModel(onequiptomodel)
 
     inst.OnRemoveEntity = OnRemove
 

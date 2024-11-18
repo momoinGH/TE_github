@@ -1,7 +1,6 @@
 local function DoTurnOffSound(inst, owner)
     inst._soundtask = nil
-    (owner ~= nil and owner:IsValid() and owner.SoundEmitter or inst.SoundEmitter):PlaySound(
-        "dontstarve/wilson/lantern_off")
+    (owner ~= nil and owner:IsValid() and owner.SoundEmitter or inst.SoundEmitter):PlaySound("dontstarve/wilson/lantern_off")
 end
 
 local function PlayTurnOffSound(inst)
@@ -75,6 +74,7 @@ local function turnon(inst)
         if inst.components.machine then
             inst.components.machine.ison = true
         end
+        --inst.components.inventoryitem:ChangeImageName(name"_lit")
     end
 end
 
@@ -102,6 +102,7 @@ local function turnoff(inst)
     if boat then
         boat.AnimState:OverrideSymbol("swap_lantern", inst.symbol_build, FunctionOrValue(inst.symbol, inst))
     end
+    --inst.components.inventoryitem:ChangeImageName("")
 end
 
 local function OnRemove(inst)
