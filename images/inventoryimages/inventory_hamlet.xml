@@ -402,31 +402,34 @@
         <Element name="touch_hamlet.tex" u1="0.656494" u2="0.687256" v1="0.250488" v2="0.312012"/>
         <Element name="tracker.tex" u1="0.656494" u2="0.687256" v1="0.187988" v2="0.249512"/>
         <Element name="tracker_open.tex" u1="0.656494" u2="0.687256" v1="0.125488" v2="0.187012"/>
-        <Element name="truffle.tex" u1="0.656494" u2="0.687256" v1="0.0629883" v2="0.124512"/>
-        <Element name="turf_antcave.tex" u1="0.656494" u2="0.687256" v1="0.000488281" v2="0.0620117"/>
-        <Element name="turf_batcave.tex" u1="0.687744" u2="0.718506" v1="0.625488" v2="0.687012"/>
-        <Element name="turf_battlegrounds.tex" u1="0.718994" u2="0.749756" v1="0.625488" v2="0.687012"/>
-        <Element name="turf_cobbleroad.tex" u1="0.750244" u2="0.781006" v1="0.625488" v2="0.687012"/>
-        <Element name="turf_deeprainforest.tex" u1="0.781494" u2="0.812256" v1="0.625488" v2="0.687012"/>
-        <Element name="turf_fields.tex" u1="0.812744" u2="0.843506" v1="0.625488" v2="0.687012"/>
-        <Element name="turf_foundation.tex" u1="0.843994" u2="0.874756" v1="0.625488" v2="0.687012"/>
-        <Element name="turf_gasrainforest.tex" u1="0.875244" u2="0.906006" v1="0.625488" v2="0.687012"/>
-        <Element name="turf_lawn.tex" u1="0.906494" u2="0.937256" v1="0.625488" v2="0.687012"/>
-        <Element name="turf_moss.tex" u1="0.937744" u2="0.968506" v1="0.625488" v2="0.687012"/>
-        <Element name="turf_painted.tex" u1="0.968994" u2="0.999756" v1="0.625488" v2="0.687012"/>
-        <Element name="turf_pigruins.tex" u1="0.687744" u2="0.718506" v1="0.562988" v2="0.624512"/>
-        <Element name="turf_plains.tex" u1="0.687744" u2="0.718506" v1="0.500488" v2="0.562012"/>
-        <Element name="turf_rainforest.tex" u1="0.687744" u2="0.718506" v1="0.437988" v2="0.499512"/>
-        <Element name="venus_stalk.tex" u1="0.687744" u2="0.718506" v1="0.375488" v2="0.437012"/>
-        <Element name="walkingstick.tex" u1="0.687744" u2="0.718506" v1="0.312988" v2="0.374512"/>
-        <Element name="watercress.tex" u1="0.687744" u2="0.718506" v1="0.250488" v2="0.312012"/>
-        <Element name="watercress_cooked.tex" u1="0.687744" u2="0.718506" v1="0.187988" v2="0.249512"/>
-        <Element name="waterdrop.tex" u1="0.687744" u2="0.718506" v1="0.125488" v2="0.187012"/>
-        <Element name="weevole_carapace.tex" u1="0.687744" u2="0.718506" v1="0.0629883" v2="0.124512"/>
-        <Element name="werewilbafur.tex" u1="0.687744" u2="0.718506" v1="0.000488281" v2="0.0620117"/>
-        <Element name="wood_door.tex" u1="0.718994" u2="0.749756" v1="0.562988" v2="0.624512"/>
-        <Element name="yelow_cap.tex" u1="0.750244" u2="0.781006" v1="0.562988" v2="0.624512"/>
-        <Element name="yelow_cap_cooked.tex" u1="0.781494" u2="0.812256" v1="0.562988" v2="0.624512"/>
+        <Element name="trinket_giftshop_1.tex" u1="0.656494" u2="0.687256" v1="0.0629883" v2="0.124512"/>
+        <Element name="trinket_giftshop_3.tex" u1="0.656494" u2="0.687256" v1="0.000488281" v2="0.0620117"/>
+        <Element name="trinket_giftshop_4.tex" u1="0.687744" u2="0.718506" v1="0.625488" v2="0.687012"/>
+        <Element name="truffle.tex" u1="0.718994" u2="0.749756" v1="0.625488" v2="0.687012"/>
+        <Element name="turf_antcave.tex" u1="0.750244" u2="0.781006" v1="0.625488" v2="0.687012"/>
+        <Element name="turf_batcave.tex" u1="0.781494" u2="0.812256" v1="0.625488" v2="0.687012"/>
+        <Element name="turf_battlegrounds.tex" u1="0.812744" u2="0.843506" v1="0.625488" v2="0.687012"/>
+        <Element name="turf_cobbleroad.tex" u1="0.843994" u2="0.874756" v1="0.625488" v2="0.687012"/>
+        <Element name="turf_deeprainforest.tex" u1="0.875244" u2="0.906006" v1="0.625488" v2="0.687012"/>
+        <Element name="turf_fields.tex" u1="0.906494" u2="0.937256" v1="0.625488" v2="0.687012"/>
+        <Element name="turf_foundation.tex" u1="0.937744" u2="0.968506" v1="0.625488" v2="0.687012"/>
+        <Element name="turf_gasrainforest.tex" u1="0.968994" u2="0.999756" v1="0.625488" v2="0.687012"/>
+        <Element name="turf_lawn.tex" u1="0.687744" u2="0.718506" v1="0.562988" v2="0.624512"/>
+        <Element name="turf_moss.tex" u1="0.687744" u2="0.718506" v1="0.500488" v2="0.562012"/>
+        <Element name="turf_painted.tex" u1="0.687744" u2="0.718506" v1="0.437988" v2="0.499512"/>
+        <Element name="turf_pigruins.tex" u1="0.687744" u2="0.718506" v1="0.375488" v2="0.437012"/>
+        <Element name="turf_plains.tex" u1="0.687744" u2="0.718506" v1="0.312988" v2="0.374512"/>
+        <Element name="turf_rainforest.tex" u1="0.687744" u2="0.718506" v1="0.250488" v2="0.312012"/>
+        <Element name="venus_stalk.tex" u1="0.687744" u2="0.718506" v1="0.187988" v2="0.249512"/>
+        <Element name="walkingstick.tex" u1="0.687744" u2="0.718506" v1="0.125488" v2="0.187012"/>
+        <Element name="watercress.tex" u1="0.687744" u2="0.718506" v1="0.0629883" v2="0.124512"/>
+        <Element name="watercress_cooked.tex" u1="0.687744" u2="0.718506" v1="0.000488281" v2="0.0620117"/>
+        <Element name="waterdrop.tex" u1="0.718994" u2="0.749756" v1="0.562988" v2="0.624512"/>
+        <Element name="weevole_carapace.tex" u1="0.750244" u2="0.781006" v1="0.562988" v2="0.624512"/>
+        <Element name="werewilbafur.tex" u1="0.781494" u2="0.812256" v1="0.562988" v2="0.624512"/>
+        <Element name="wood_door.tex" u1="0.812744" u2="0.843506" v1="0.562988" v2="0.624512"/>
+        <Element name="yelow_cap.tex" u1="0.843994" u2="0.874756" v1="0.562988" v2="0.624512"/>
+        <Element name="yelow_cap_cooked.tex" u1="0.875244" u2="0.906006" v1="0.562988" v2="0.624512"/>
     </Elements>
     <StraightAlpha>false</StraightAlpha>
 </Atlas>
