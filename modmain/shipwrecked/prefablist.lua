@@ -244,6 +244,8 @@ PrefabFiles = {
   "piratihatitator",
   "walls_tropical",
   "trident_sw",
+  "trinkets_sw",
+  "earring",
   "boatraft",
   "tigersharkpool",
   "tigersharktorch",

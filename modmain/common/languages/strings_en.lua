@@ -9702,6 +9702,28 @@ STRINGS.BORE_TALK_PANICFIRE       = { "HOT HOT HOT!", "OWWWWW!", "IT BURNS!" }
 STRINGS.BORE_TALK_FIND_MEAT       = { "ME HUNGRY!", "YUM!", "I EAT FOOD!", "TIME FOR FOOD!" }
 STRINGS.BORE_TALK_GO_HOME         = { "HOME TIME!", "HOME! HOME!" }
 
+STRINGS.NAMES.TRINKET_SW_13 = "Orange Soda"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_13 = "What is this substance?"
+STRINGS.NAMES.TRINKET_SW_14 = "Voodoo Doll"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_14 = "This thing gives me the creeps..."
+STRINGS.NAMES.TRINKET_SW_15 = "Ukulele"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_15 = "Incredible! This guitar has undergone shrinkification!"
+STRINGS.NAMES.TRINKET_SW_16 = "License Plate"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_16 = "How did this get all the way out here?"
+STRINGS.NAMES.TRINKET_SW_17 = "Old Boot"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_17 = "Where's the other one?"
+STRINGS.NAMES.TRINKET_SW_18 = "Ancient Vase"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_18 = "A relic of a bygone era!"
+STRINGS.NAMES.TRINKET_SW_19 = "Brain Cloud Pill"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_19 = "Clouding of the brain. Never heard of it..."
+STRINGS.NAMES.TRINKET_SW_20 = "Sextant"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_20 = "I'm not sure what it is, but it makes me feel smarter!"
+STRINGS.NAMES.TRINKET_SW_21 = "Toy Boat"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_21 = "I ought to measure it to ensure it's to scale."
+STRINGS.NAMES.TRINKET_SW_22 = "Wine Bottle Candle"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_22 = "I'm sure someone would like this."
+STRINGS.NAMES.TRINKET_SW_23 = "Broken AAC Device"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_23 = "Someone lost their words."
 
 modimport "modmain/common/languages/stringscreeps"
 modimport "modmain/common/languages/wurt_quotes"
