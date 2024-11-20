@@ -843,7 +843,10 @@ if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.multiplayerportal == 15 or
                TECH.SCIENCE_ONE, {
         placer = "hogusporkusator_placer",
     }, {"PROTOTYPERS", "MAGIC", "STRUCTURES"})
-
+	AddRecipe2("clawpalmtree_cone", {Ingredient("cork", 1), Ingredient("poop", 1)}, TECH.SCIENCE_ONE, {
+    }, {"REFINE"})
+	AddRecipe2("venomgland", {Ingredient("froglegs_poison", 3)}, TECH.SCIENCE_TWO, {
+    }, {"REFINE"})
     -- LEGACY--
     AddRecipe2("goldpan", {Ingredient("iron", 2), Ingredient("hammer", 1)}, TECH.SCIENCE_ONE, {
     }, {"TOOLS", "LEGACY"})

@@ -127,7 +127,7 @@ local function fn()
 
 	inst:AddComponent("lootdropper")
 	inst.components.lootdropper:AddChanceLoot("froglegs_poison", 1)
-	inst.components.lootdropper:AddChanceLoot("venomgland", 0.5)
+	--inst.components.lootdropper:AddChanceLoot("venomgland", 0.5)
 
 	inst:AddComponent("eater")
 	inst:AddComponent("tiletracker")
@@ -141,7 +141,7 @@ local function fn()
 	inst.components.combat.onhitotherfn = function(inst, other, damage) inst.components.thief:StealItem(other) end
 
 	inst:AddComponent("thief")
-	inst:AddComponent("poisonous")
+	--inst:AddComponent("poisonous")
 	MakeTinyFreezableCharacter(inst, "frogsack")
 	MakeSmallBurnableCharacter(inst, "frogsack")
 
@@ -162,40 +162,5 @@ local function fn()
 
 	return inst
 end
-
---[[local function commonfn(Sim)
-	local inst = commonfn(Sim)
-
-	MakeCharacterPhysics(inst, 1, .3)
-	inst.AnimState:SetBuild("frog_treefrog_build")
-	inst.AnimState:PlayAnimation("idle")
-	inst.Physics:ClearCollidesWith(COLLISION.BOAT_LIMITS)
-	
-	inst:AddTag("duskok")
-	inst:AddTag("eatsbait")
-	inst:AddTag("scarytoprey")	
-
-    inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end	
-	
-	inst.components.lootdropper:SetLoot({"froglegs_poison"})
-	inst.components.lootdropper:AddRandomLoot("venomgland", 0.5)
-
-	inst:AddComponent("eater")
-	inst:AddComponent("tiletracker")
-	inst.components.tiletracker:SetOnWaterChangeFn(OnWaterChange)
-
-	inst.components.combat:SetRetargetFunction(3, retargetpoisonfrogfn)
-	
-	inst.sounds = sounds.poison
-
-	inst.OnEntityWake = OnEntityWake
-	inst.OnEntitySleep = OnEntitySleep
-
-	return inst
-end]]
 
 return Prefab("frog_poison", fn, assets, prefabs)
