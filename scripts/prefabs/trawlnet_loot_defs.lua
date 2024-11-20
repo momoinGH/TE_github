@@ -26,7 +26,7 @@ local LOOT                 = {
         { "jellyfish",          chance_medium },
         { "fish",               chance_high },
         { "coral",              chance_high },
-        { "dogfish_dead",           chance_medium },
+        { "dogfish_dead",       chance_medium },
         { "messagebottleempty", chance_medium },
         { "boneshard",          chance_medium },
         { "spoiled_fish",       chance_medium },
@@ -39,6 +39,9 @@ local LOOT                 = {
         { "trinket_16",         chance_low },
         { "trinket_17",         chance_medium },
         { "trinket_18",         chance_verylow },
+        { "trinket_sw_16",      chance_low },
+        { "trinket_sw_17",      chance_medium },
+        { "trinket_sw_18",      chance_verylow },
     },
 
     deep = {
@@ -71,6 +74,9 @@ local LOOT                 = {
         { "trinket_16",         chance_low },
         { "trinket_17",         chance_low },
         { "trinket_18",         chance_verylow },
+        { "trinket_sw_16",      chance_low },
+        { "trinket_sw_17",      chance_low },
+        { "trinket_sw_18",      chance_verylow },
         { "trident",            chance_verylow },
     }
 }
@@ -90,6 +96,8 @@ local HURRICANE_LOOT       = {
         { "dubloon",            chance_low },
         { "trinket_16",         chance_low },
         { "trinket_17",         chance_low },
+        { "trinket_sw_16",      chance_low },
+        { "trinket_sw_17",      chance_low },
     },
 
     medium = {
@@ -113,6 +121,9 @@ local HURRICANE_LOOT       = {
         { "trinket_16",         chance_low },
         { "trinket_17",         chance_low },
         { "trinket_18",         chance_verylow },
+        { "trinket_sw_16",      chance_low },
+        { "trinket_sw_17",      chance_low },
+        { "trinket_sw_18",      chance_verylow },
         { "trident",            chance_verylow },
     },
 
@@ -146,6 +157,9 @@ local HURRICANE_LOOT       = {
         { "trinket_16",         chance_medium },
         { "trinket_17",         chance_medium },
         { "trinket_18",         chance_verylow },
+        { "trinket_sw_16",      chance_medium },
+        { "trinket_sw_17",      chance_medium },
+        { "trinket_sw_18",      chance_verylow },
         { "trident",            chance_low },
     }
 }
@@ -186,6 +200,9 @@ local DRY_LOOT             = {
         { "trinket_16",         chance_low },
         { "trinket_17",         chance_low },
         { "trinket_18",         chance_verylow },
+        { "trinket_sw_16",      chance_low },
+        { "trinket_sw_17",      chance_low },
+        { "trinket_sw_18",      chance_verylow },
         { "trident",            chance_verylow },
     },
 
@@ -219,6 +236,9 @@ local DRY_LOOT             = {
         { "trinket_16",         chance_low },
         { "trinket_17",         chance_low },
         { "trinket_18",         chance_verylow },
+        { "trinket_sw_16",      chance_low },
+        { "trinket_sw_17",      chance_low },
+        { "trinket_sw_18",      chance_verylow },
         { "trident",            chance_low },
     }
 }
@@ -228,6 +248,9 @@ local UNIQUE_ITEMS         = {
     "trinket_16",
     "trinket_17",
     "trinket_18",
+    "trinket_sw_16",
+    "trinket_sw_17",
+    "trinket_sw_18",
     "trident",
 }
 

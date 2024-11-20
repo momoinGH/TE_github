@@ -758,3 +758,14 @@ AddComponentPostInit("boatphysics", function(self, inst) -- 给船和保险杠�
 end)
 
 ----------------------------------------------------------------------------------------------------
+
+-- 让原版坟墓也能挖出海难玩具
+local PickRandomTrinket = GLOBAL.PickRandomTrinket
+local trinkets_sw = {"trinket_sw_23"}
+GLOBAL.PickRandomTrinket = function()
+    if math.random() < #trinkets_sw / (#trinkets_sw + GLOBAL.NUM_TRINKETS) then
+        return trinkets_sw[math.random(1, #trinkets_sw)]
+    else
+        return PickRandomTrinket()
+    end
+end
