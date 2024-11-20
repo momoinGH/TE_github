@@ -14,8 +14,8 @@ local treasure = {"healingstaff", "purplegem", "orangegem", "yellowgem", "greeng
                   "charcoal", "axe", "hammer", "shovel", "bugnet", "fishingrod", "spidergland", "silk", "flint",
                   "coral", "trinket_sw_13", "trinket_sw_14", "trinket_sw_15", "trinket_sw_19"}
 
-local function spawntreasure(inst)
-    local chest = SpawnAt("luggagechest", inst)
+local function fn()
+    local chest = SpawnPrefab("luggagechest")
 
     local function GetRandItem(itemname, maxcount, chanceoverride)
         local chance = chanceoverride or .5
@@ -30,19 +30,7 @@ local function spawntreasure(inst)
     GetRandItem("coral", 4)
     GetRandItem(function() return treasure[math.random(1, #treasure)] end, 8)
 
-    inst:Remove()
-end
-
-local function fn()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    MakeWaterObstaclePhysics(inst, 1, 1, 1)
-    inst:AddTag("NOCLICK")
-
-    inst:DoTaskInTime(0, spawntreasure)
-
-    return inst
+    return chest
 end
 
 return Prefab("luggagechest_spawner", fn, nil, prefabs)
