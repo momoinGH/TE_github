@@ -126,6 +126,4 @@ addcone("burr", "rainforesttree_sapling", "burr", "burr", "idle_planted")
 
 addcone("clawpalmtree_cone", "clawpalmtree_sapling", "clawling", "clawling", "idle_planted")
 
---addcone("teatree_nut",  "teatree_sapling", "teatree_nut", "teatree_nut", "idle_planted")
-
 return unpack(cones)

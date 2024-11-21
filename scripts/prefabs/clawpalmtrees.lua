@@ -18,13 +18,13 @@ local prefabs =
 	--"jungletreeseed",
 	"charcoal",
 	"treeguard",
-	"chop_mangrove_pink",
-	"fall_mangrove_pink",
+	"chop_mangrove_blue",
+	"fall_mangrove_blue",
 	"snake_amphibious",
 	"cave_banana",
 	"bird_egg",
 	"scorpion",
-	--	"burr",
+	"clawpalmtree_cone",
 }
 
 local PALMTREEGUARD_PINECONE_CHILL_CHANCE_CLOSE = .33
@@ -319,7 +319,7 @@ local function chop_tree(inst, chopper, chops)
 	end
 
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local fx = SpawnPrefab("chop_mangrove_pink")
+	local fx = SpawnPrefab("chop_mangrove_blue")
 	if fx then
 		fx.Transform:SetPosition(x, y + 2 + math.random() * 2, z)
 	end
@@ -360,7 +360,7 @@ local function chop_down_tree(inst, chopper)
 		inst.components.lootdropper:DropLoot(pt + TheCamera:GetRightVec())
 	end
 
-	local fx = SpawnPrefab("fall_mangrove_pink")
+	local fx = SpawnPrefab("fall_mangrove_blue")
 	if fx then
 		local x, y, z = inst.Transform:GetWorldPosition()
 		fx.Transform:SetPosition(x, y + 2 + math.random() * 2, z)

@@ -52,7 +52,7 @@ end
 local function updatespeedmult(inst)
     local fullpenalty = TUNING.TRAWLING_SPEED_MULT
     local penalty = fullpenalty * (inst.components.inventory:NumItems() / TUNING.TRAWLNET_MAX_ITEMS)
-    inst.components.shipwreckedboatparts:SetSpeedMult(1 - penalty)
+    inst.components.shipwreckedboatparts:SetSpeedMult(math.floor((1 - penalty) * 100 + .5) / 100)
 end
 
 --- 捕获一个物品

@@ -15,6 +15,20 @@ local HAM_FX =
 		dlc = true,
 	},
 	{
+        name = "chop_mangrove_blue",
+        bank = "chop_mangrove",
+        build = "chop_mangrove_blue",
+        anim = "chop",
+		dlc = true,
+    },
+    {
+        name = "fall_mangrove_blue",
+        bank = "chop_mangrove",
+        build = "chop_mangrove_blue",
+        anim = "fall",
+		dlc = true,
+    },
+	{
 		name = "hacking_tall_grass_fx",
 		bank = "hacking_fx",
 		build = "hacking_tall_grass_fx",
