@@ -10,13 +10,13 @@ local function onregenfn(inst)
 end
 
 local function makeemptyfn(inst)
-    inst.AnimState:DoJoggle(inst)
-    inst.AnimState:SetFillter("generic")
+    inst.AnimState:PlayExtendAnim("shake")
+    inst.AnimState:SetFilter("generic")
 	inst.AnimState:PlayAnimation("picked", true)
 end
 
 local function makebarrenfn(inst)
-    inst.AnimState:SetFillter("withered")
+    inst.AnimState:SetFilter("withered")
 	inst.AnimState:PlayAnimation("picked", true)
 end
 
