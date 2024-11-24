@@ -11,29 +11,6 @@ local JELLYFISH_DAMAGE = 5
 local JELLYFISH_HEALTH = 50
 local JELLYFISH_WALK_SPEED = 2
 
-
-local function ondropped(inst)
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-    if ground ~= GROUND.OCEAN_COASTAL and
-        ground ~= GROUND.OCEAN_COASTAL_SHORE and
-        ground ~= GROUND.OCEAN_SWELL and
-        ground ~= GROUND.OCEAN_ROUGH and
-        ground ~= GROUND.OCEAN_BRINEPOOL and
-        ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-        ground ~= GROUND.OCEAN_WATERLOG and
-        ground ~= GROUND.OCEAN_HAZARDOUS then
-        local replacement = SpawnPrefab("jellyfish_dead")
-        replacement.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        replacement.AnimState:PlayAnimation("death_ground", true)
-        replacement:AddTag("stinger")
-        inst:Remove()
-    end
-end
-
-
 local function OnWorked(inst, worker)
     if worker.components.inventory then
         if not worker.components.inventory:IsFull() then
@@ -89,13 +66,18 @@ end
 
 local function fn(Sim)
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
+
     local physics = inst.entity:AddPhysics()
     MakeCharacterPhysics(inst, 1, 0.5)
     inst.Transform:SetFourFaced()
+
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
+    inst.AnimState:SetSortOrder(3)
 
     inst.AnimState:SetBank("jellyfish")
     inst.AnimState:SetBuild("jellyfish")
@@ -115,23 +97,22 @@ local function fn(Sim)
     inst.components.locomotor.walkspeed = JELLYFISH_WALK_SPEED
 
     --inst.AnimState:SetRayTestOnBB(true);
-    inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
-    inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
-
+    --inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
+    --inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
 
     inst:AddComponent("combat")
     inst.components.combat:SetHurtSound("dontstarve_DLC002/creatures/jellyfish/hit")
+
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(JELLYFISH_HEALTH)
 
-    MakeMediumFreezableCharacter(inst, "jelly")
     inst:AddComponent("lootdropper")
-    inst:ListenForEvent("attacked", onattacked)
-
     inst.components.lootdropper:SetLoot({ "jellyfish_dead" })
 
     inst:AddComponent("inspectable")
+
     inst:AddComponent("knownlocations")
+
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetSleepTest(ShouldSleep)
 
@@ -140,7 +121,7 @@ local function fn(Sim)
     inst.components.workable:SetWorkLeft(1)
     inst.components.workable:SetOnFinishCallback(OnWorked)
 
-    inst:DoTaskInTime(0, ondropped)
+    --inst:DoTaskInTime(0, ondropped)
     inst:SetStateGraph("SGjellyfish")
     local brain = require "brains/jellyfishbrain"
     inst:SetBrain(brain)
@@ -148,6 +129,11 @@ local function fn(Sim)
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDone)
     inst.components.timer:StartTimer("vaiembora", 240 + math.random() * 240)
+
+    inst:ListenForEvent("attacked", onattacked)
+
+    MakeHauntablePanic(inst)
+    MakeMediumFreezableCharacter(inst, "jelly")
 
     return inst
 end

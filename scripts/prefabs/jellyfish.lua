@@ -19,6 +19,10 @@ local JELLYFISH_HEALTH = 50
 
 PERISH_ONE_DAY = total_day_time
 
+local function CalcNewSize()
+	return math.random()
+end
+
 local function playshockanim(inst)
     if inst:HasTag("aquatic") then
         inst.AnimState:PlayAnimation("idle_water_shock")
@@ -29,15 +33,17 @@ local function playshockanim(inst)
         inst.AnimState:PushAnimation("idle_ground", true)
         inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_land")
     end
-    local pclose = GetClosestInstWithTag("player", inst, 2)
+    --[[local pclose = GetClosestInstWithTag("player", inst, 2)
     if pclose and pclose.components.health then
         pclose.components.health:DoDelta(-5)
         pclose.sg:GoToState("electrocute")
-    end
+    end]]
 end
 
 local function playDeadAnimation(inst)
-    inst.AnimState:PlayAnimation("idle_ground", true)
+    inst.AnimState:PlayAnimation("death_ground", true)
+    inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/death_murder")
+    inst.AnimState:PushAnimation("idle_ground", true)
 end
 
 local function ondropped(inst)
@@ -52,12 +58,20 @@ local function ondropped(inst)
         ground == GROUND.OCEAN_ROUGH or
         ground == GROUND.OCEAN_BRINEPOOL or
         ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-        ground == GROUND.OCEAN_HAZARDOUS then
-        if not inst.replica.inventoryitem:IsHeld() then
+        ground == GROUND.OCEAN_HAZARDOUS 
+        then
+        --if not inst.replica.inventoryitem:IsHeld() then
             local replacement = SpawnPrefab("jellyfish_planted")
             replacement.Transform:SetPosition(inst.Transform:GetWorldPosition())
             inst:Remove()
-        end
+        else
+            local replacement = SpawnPrefab("jellyfish_dead")
+            replacement.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            replacement.AnimState:PlayAnimation("stunned_loop", true)
+            replacement:DoTaskInTime(2.5, playDeadAnimation)
+            replacement.shocktask = replacement:DoPeriodicTask(math.random() * 10 + 5, playshockanim)
+            replacement:AddTag("stinger")
+            inst:Remove()
     end
 end
 
@@ -81,20 +95,25 @@ end
 local function defaultfn(sim)
     local inst = CreateEntity()
     inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    MakeInventoryPhysics(inst)
-    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddAnimState()
+
+    MakeInventoryPhysics(inst)
+    MakeInventoryFloatable(inst)
 
     inst.AnimState:SetRayTestOnBB(true);
     inst.AnimState:SetBank("jellyfish")
     inst.AnimState:SetBuild("jellyfish")
+    inst.AnimState:PlayAnimation("idle_ground", true)
 
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:SetSortOrder(3)
-    MakeInventoryFloatable(inst)
+    --inst.AnimState:SetLayer(LAYER_BACKGROUND)
+    --inst.AnimState:SetSortOrder(3)
+
     inst:AddTag("show_spoilage")
-
+    inst:AddTag("jellyfish")
+    inst:AddTag("fishmeat")
+    inst:AddTag("aquatic")
 
     inst.entity:SetPristine()
 
@@ -102,20 +121,24 @@ local function defaultfn(sim)
         return inst
     end
 
+	inst:AddComponent("edible")
+    inst.components.edible.foodtype = nil
+
     inst:AddComponent("inspectable")
+
     inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem:SetOnDroppedFn(ondropped)
+    inst.components.inventoryitem:SetOnPickupFn(onpickup)
+    inst:ListenForEvent("on_landed", ondropped)
 
     inst:AddComponent("perishable")
-
-    inst:AddComponent("tradable")
-
     inst.components.perishable:SetPerishTime(PERISH_ONE_DAY * 1.5)
     inst.components.perishable:StartPerishing()
     inst.components.perishable.onperishreplacement = "jellyfish_dead"
 
-    inst.components.inventoryitem:SetOnDroppedFn(ondropped)
-    inst.components.inventoryitem:SetOnPickupFn(onpickup)
-    inst.AnimState:PlayAnimation("idle_ground", true)
+    inst:AddComponent("tradable")
+    inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
+    --inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 
     inst:AddComponent("cookable")
     inst.components.cookable.product = "jellyfish_cooked"
@@ -127,7 +150,12 @@ local function defaultfn(sim)
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({ "jellyfish_dead" }) --Replace with dead jelly
 
-    inst:DoTaskInTime(0, ondropped)
+	--[[inst:AddComponent("weighable")
+	inst.components.weighable.type = TROPHYSCALE_TYPES.FISH
+	inst.components.weighable:Initialize(TUNING.JELLYFISH_WEIGHTS.min, TUNING.JELLYFISH_WEIGHTS.max)
+	inst.components.weighable:SetWeight(Lerp(TUNING.JELLYFISH_WEIGHTS.min, TUNING.JELLYFISH_WEIGHTS.max, CalcNewSize()))]]
+
+    MakeHauntableLaunchAndPerish(inst)
 
     return inst
 end
