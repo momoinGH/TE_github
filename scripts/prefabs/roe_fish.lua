@@ -381,7 +381,6 @@ ROE_FISH =
 
 }
 
-
 local function MakeFish(name, has_seeds)
 	local assets =
 	{
@@ -403,7 +402,6 @@ local function MakeFish(name, has_seeds)
 		"spoiled_food",
 	}
 
-
 	if has_seeds then
 		table.insert(prefabs, name .. "_seeds")
 	end
@@ -413,30 +411,28 @@ local function MakeFish(name, has_seeds)
 		inst.entity:AddTransform()
 		inst.entity:AddAnimState()
 		inst.entity:AddNetwork()
+
 		MakeInventoryPhysics(inst)
+		MakeInventoryFloatable(inst)
+
 		inst.AnimState:SetBank("seeds")
 		inst.AnimState:SetBuild("seeds")
 		inst.AnimState:SetRayTestOnBB(true)
-		MakeInventoryFloatable(inst)
 
 		inst.entity:SetPristine()
 
 		if not TheWorld.ismastersim then
 			return inst
 		end
-
+		inst:AddComponent("inspectable")
+		inst:AddComponent("inventoryitem")
+		inst:AddComponent("stackable")
+		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
 		inst:AddComponent("edible")
 		inst.components.edible.foodtype = "SEEDS"
 
-		inst:AddComponent("stackable")
-		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
-
-
 		inst:AddComponent("tradable")
-		inst:AddComponent("inspectable")
-		inst:AddComponent("inventoryitem")
-
 
 		inst.AnimState:PlayAnimation("idle")
 		inst.components.edible.healthvalue = TUNING.HEALING_TINY / 2
@@ -447,7 +443,6 @@ local function MakeFish(name, has_seeds)
 		inst.components.perishable:StartPerishing()
 		inst.components.perishable.onperishreplacement = "spoiled_food"
 
-
 		inst:AddComponent("cookable")
 		inst.components.cookable.product = "seeds_cooked"
 
@@ -456,11 +451,10 @@ local function MakeFish(name, has_seeds)
 		inst.components.plantable.growtime = TUNING.SEEDS_GROW_TIME
 		inst.components.plantable.product = name
 
+		MakeHauntableLaunchAndPerish(inst)
+
 		return inst
 	end
-
-
-
 
 	local function OnEatenboost_dry(inst, eater)
 		if eater ~= nil and eater:IsValid() and eater.components.locomotor ~= nil then
@@ -479,7 +473,6 @@ local function MakeFish(name, has_seeds)
 		end
 	end
 
-
 	local function OnEatenboost_surf(inst, eater)
 		if eater ~= nil and eater:IsValid() and eater.components.locomotor ~= nil then
 			if eater._tropicalbouillabaisse_speedmulttask ~= nil then
@@ -497,7 +490,6 @@ local function MakeFish(name, has_seeds)
 		end
 	end
 
-
 	local function OnEatenboost_cool(inst, eater)
 		if eater and eater.components.temperature then
 			local current_temp = eater.components.temperature:GetCurrent()
@@ -506,16 +498,15 @@ local function MakeFish(name, has_seeds)
 		end
 	end
 
-
-
-
-
 	local function fn(Sim)
 		local inst = CreateEntity()
 		inst.entity:AddTransform()
 		inst.entity:AddAnimState()
-		MakeInventoryPhysics(inst)
 		inst.entity:AddNetwork()
+
+		MakeInventoryPhysics(inst)
+		MakeInventoryFloatable(inst)
+
 		inst.AnimState:SetBank(name)
 		inst.AnimState:SetBuild(name)
 		inst.AnimState:PlayAnimation("dead")
@@ -527,16 +518,23 @@ local function MakeFish(name, has_seeds)
 		inst:AddTag("fish")
 		inst:AddTag("catfood")
 		inst:AddTag("packimfood")
-		MakeInventoryFloatable(inst)
 		inst:AddTag("cru")
+
+		local dryablefish = name == "fish2" or "fish3" or "fish4" or "fish5" or "coi" or "salmon"
+
+		if dryablefish then
+			inst:AddTag("dryable")
+		end
 
 		inst.entity:SetPristine()
 
 		if not TheWorld.ismastersim then
 			return inst
 		end
-
-		--		MakeInventoryFloatable(inst, "idle_water", "idle")	
+		inst:AddComponent("inspectable")
+		inst:AddComponent("inventoryitem")
+		inst:AddComponent("stackable")
+		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
 		inst:AddComponent("edible")
 		inst.components.edible.healthvalue = ROE_FISH[name].health
@@ -562,25 +560,20 @@ local function MakeFish(name, has_seeds)
 		inst.components.perishable:StartPerishing()
 		inst.components.perishable.onperishreplacement = "spoiled_food"
 
-		inst:AddComponent("stackable")
-
-		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
-
-		inst:AddComponent("inspectable")
-		inst:AddComponent("inventoryitem")
-
-
-		---------------------
-
 		inst:AddComponent("bait")
 
-		------------------------------------------------
 		inst:AddComponent("tradable")
 
-		------------------------------------------------
+		if dryablefish then
+			inst:AddComponent("dryable")
+			inst.components.dryable:SetProduct("smallmeat_dried")
+			inst.components.dryable:SetDryTime(TUNING.DRY_FAST)
+		end
 
 		inst:AddComponent("cookable")
 		inst.components.cookable.product = name .. "_cooked"
+
+        MakeHauntableLaunchAndPerish(inst)
 
 		return inst
 	end
@@ -589,19 +582,20 @@ local function MakeFish(name, has_seeds)
 		local inst = CreateEntity()
 		inst.entity:AddTransform()
 		inst.entity:AddAnimState()
-		MakeInventoryPhysics(inst)
 		inst.entity:AddNetwork()
+
+		MakeInventoryPhysics(inst)
+		MakeInventoryFloatable(inst)
+
 		inst.AnimState:SetBank(ROE_FISH[name].cooked_anim)
 		inst.AnimState:SetBuild(ROE_FISH[name].cooked_build)
 		inst.AnimState:PlayAnimation(ROE_FISH[name].cooked_state)
-
-		--		MakeInventoryFloatable(inst, "cooked_water", "cooked")	
 
 		inst:AddTag("meat")
 		inst:AddTag("fishmeat")
 		inst:AddTag("catfood")
 		inst:AddTag("packimfood")
-		MakeInventoryFloatable(inst)
+
 		inst:AddTag("cosido")
 
 		inst.entity:SetPristine()
@@ -609,6 +603,12 @@ local function MakeFish(name, has_seeds)
 		if not TheWorld.ismastersim then
 			return inst
 		end
+
+		inst:AddComponent("inspectable")
+		inst:AddComponent("inventoryitem")
+		inst:AddComponent("stackable")
+		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+		--inst.components.inventoryitem:ChangeImageName("fishtropical_cooked")
 
 		inst:AddComponent("edible")
 		inst.components.edible.ismeat = true
@@ -630,24 +630,18 @@ local function MakeFish(name, has_seeds)
 			inst.components.edible:SetOnEatenFn(OnEatenboost_cool)
 		end
 
-		inst:AddComponent("stackable")
-		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
-
 		inst:AddComponent("perishable")
 		inst.components.perishable:SetPerishTime(ROE_FISH[name].cooked_perishtime)
 		inst.components.perishable:StartPerishing()
 		inst.components.perishable.onperishreplacement = "spoiled_food"
 
-		inst:AddComponent("inspectable")
-		inst:AddComponent("inventoryitem")
-
-		--inst.components.inventoryitem:ChangeImageName("fishtropical_cooked")
-
 		inst:AddComponent("tradable")
 		inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
-		--    	inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD		---------------------
+		--inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 
 		inst:AddComponent("bait")
+
+        MakeHauntableLaunchAndPerish(inst)
 
 		return inst
 	end

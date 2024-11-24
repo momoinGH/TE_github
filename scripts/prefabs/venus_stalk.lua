@@ -15,11 +15,11 @@ local function flytrapstalk(inst)
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
 
-    MakeInventoryPhysics(inst)
-
     inst.AnimState:SetBank("stalk")
     inst.AnimState:SetBuild("venus_stalk")
     inst.AnimState:PlayAnimation("idle")
+
+    MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
 
     inst:AddTag("meat")
@@ -30,18 +30,19 @@ local function flytrapstalk(inst)
         return inst
     end
 
+    inst:AddComponent("inspectable")
+    inst:AddComponent("inventoryitem")
+    inst:AddComponent("stackable")
+
     inst:AddComponent("edible")
     inst.components.edible.ismeat = true
     inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible.foodstate = "RAW"
+    inst.components.edible.healthvalue = 0
+    inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
+    inst.components.edible.sanityvalue = -TUNING.SANITY_SMALL
 
-    inst:AddComponent("stackable")
     inst:AddComponent("bait")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-
 
     inst:AddComponent("tradable")
     inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
@@ -52,16 +53,14 @@ local function flytrapstalk(inst)
     inst.components.perishable.onperishreplacement = "spoiled_food"
     inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
 
-    inst.components.edible.healthvalue = 0
-    inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
-    inst.components.edible.sanityvalue = -TUNING.SANITY_SMALL
-
     inst:AddComponent("dryable")
     inst.components.dryable:SetProduct("walkingstick")
     inst.components.dryable:SetDryTime(TUNING.DRY_FAST)
 
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
     MakeSmallPropagator(inst)
+
+    MakeHauntableLaunchAndPerish(inst)
 
     return inst
 end

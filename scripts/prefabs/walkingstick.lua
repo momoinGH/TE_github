@@ -2,7 +2,6 @@ local assets =
 {
     Asset("ANIM", "anim/walkingstick.zip"),
     Asset("ANIM", "anim/swap_walkingstick.zip"),
-    --Asset("INV_IMAGE", "cane"),
 }
 
 local function onfinished(inst)
@@ -38,8 +37,6 @@ local function OnEquipToModel(inst, owner, from_ground)
     end
 end
 
---local floatable_swap_data = {sym_build = "walkingstick", sym_name = "swap_walkingstick"}
-
 local function fn()
     local inst = CreateEntity()
 
@@ -55,23 +52,19 @@ local function fn()
     inst.AnimState:SetBuild("walkingstick")
     inst.AnimState:PlayAnimation("idle")
 
-    --MakeInventoryFloatable(inst, "med", 0.05, {0.95, 0.40, 0.95}, true, 1, floatable_swap_data)
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
+    inst:AddComponent("inspectable")
+    inst:AddComponent("inventoryitem")
+
     inst.components.floater:SetBankSwapOnFloat(true, -5, { sym_build = "swap_walkingstick" })
 
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(20.4)
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(OnEquip)

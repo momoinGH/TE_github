@@ -1,7 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/seaweed.zip"),
-    Asset("ANIM", "anim/meat_rack_food_tro.zip"),
 }
 
 local prefabs =
@@ -27,48 +26,63 @@ local POOP_FERTILIZE = 300
 local POOP_SOILCYCLES = 10
 local POOP_WITHEREDCYCLES = 1
 
-local function defaultfn(sim)
+local function commonfn(sim)
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)
-    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
+    inst.entity:AddSoundEmitter()
 
     inst.AnimState:SetRayTestOnBB(true);
     inst.AnimState:SetBank("seaweed")
     inst.AnimState:SetBuild("seaweed")
-    inst.AnimState:PlayAnimation("idle", true)
 
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:SetSortOrder(3)
-
-    inst.entity:SetPristine()
+    MakeInventoryPhysics(inst)
+    MakeInventoryFloatable(inst)
 
     inst:AddTag("aquatic")
+
+    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
-    inst:AddComponent("bait")
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
 
-    inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(PERISH_FAST)
-    inst.components.perishable:StartPerishing()
-    inst.components.perishable.onperishreplacement = "spoiled_food"
+    inst:AddComponent("stackable")
+    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+
+    inst:AddComponent("bait")
 
     inst:AddComponent("edible")
     inst.components.edible.foodtype = "VEGGIE"
+
+    inst:AddComponent("perishable")
+    inst.components.perishable:StartPerishing()
+    inst.components.perishable.onperishreplacement = "spoiled_food"
+
+    MakeHauntableLaunchAndPerish(inst)
+
+    return inst
+end
+
+local function defaultfn(sim)
+    local inst = commonfn()
+    inst.AnimState:PlayAnimation("idle", true)
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
     inst.components.edible.healthvalue = HEALING_TINY
     inst.components.edible.hungervalue = CALORIES_TINY
     inst.components.edible.sanityvalue = -SANITY_SMALL
+
     inst.components.perishable:SetPerishTime(PERISH_FAST)
 
     inst:AddComponent("cookable")
@@ -76,10 +90,7 @@ local function defaultfn(sim)
 
     inst:AddComponent("dryable")
     inst.components.dryable:SetProduct("seaweed_dried")
-    inst.components.dryable:SetBuildFile("meat_rack_food_tro")
     inst.components.dryable:SetDryTime(TUNING.DRY_SUPERFAST)
-
-    inst:AddComponent("talker")
 
     inst:AddComponent("fertilizer")
     inst.components.fertilizer.fertilizervalue = POOP_FERTILIZE
@@ -91,22 +102,8 @@ local function defaultfn(sim)
 end
 
 local function cookedfn(sim)
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    inst.AnimState:SetRayTestOnBB(true);
-    inst.AnimState:SetBank("seaweed")
-    inst.AnimState:SetBuild("seaweed")
-
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:SetSortOrder(3)
-
-    inst:AddTag("aquatic")
+    local inst = commonfn()
+    inst.AnimState:PlayAnimation("cooked", true)
 
     inst.entity:SetPristine()
 
@@ -114,48 +111,22 @@ local function cookedfn(sim)
         return inst
     end
 
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
-    inst:AddComponent("bait")
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(PERISH_FAST)
-    inst.components.perishable:StartPerishing()
-    inst.components.perishable.onperishreplacement = "spoiled_food"
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = "VEGGIE"
     inst.components.edible.foodstate = "COOKED"
     inst.components.edible.healthvalue = HEALING_SMALL
     inst.components.edible.hungervalue = CALORIES_TINY
     inst.components.edible.sanityvalue = 0 --TUNING.SANITY_SMALL
+
     inst.components.perishable:SetPerishTime(PERISH_MED)
-    inst.AnimState:PlayAnimation("cooked", true)
 
     return inst
 end
 
 local function driedfn(sim)
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
+    local inst = commonfn()
 
-    inst.AnimState:SetRayTestOnBB(true);
     inst.AnimState:SetBank("meat_rack_food")
     inst.AnimState:SetBuild("meat_rack_food_tro")
     inst.AnimState:PlayAnimation("idle_dried_seaweed", true)
-
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:SetSortOrder(3)
-
-    inst:AddTag("aquatic")
 
     inst.entity:SetPristine()
 
@@ -163,24 +134,12 @@ local function driedfn(sim)
         return inst
     end
 
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
-    inst:AddComponent("bait")
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(PERISH_PRESERVED)
-    inst.components.perishable:StartPerishing()
-    inst.components.perishable.onperishreplacement = "spoiled_food"
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = "VEGGIE"
     inst.components.edible.foodstate = "DRIED"
     inst.components.edible.healthvalue = HEALING_SMALL
     inst.components.edible.hungervalue = CALORIES_SMALL
     inst.components.edible.sanityvalue = TUNING.SANITY_SMALL
+
+    inst.components.perishable:SetPerishTime(PERISH_PRESERVED)
 
     return inst
 end

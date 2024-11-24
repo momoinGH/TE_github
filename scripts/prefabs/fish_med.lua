@@ -47,20 +47,20 @@ local function stopkicking(inst)
 	inst.AnimState:PlayAnimation("dead")
   end
 
-local function makefish_med(bank, build, dryablesymbol)
+local function makefish_med(bank, build)
 	local function commonfn()
 		local inst = CreateEntity()
 		inst.entity:AddTransform()
 		inst.entity:AddNetwork()
-
-		MakeInventoryPhysics(inst)
-	    MakeInventoryFloatable(inst)
-
 		inst.entity:AddAnimState()
+
 		inst.AnimState:SetBank(bank)
 		inst.AnimState:SetBuild(build)
 		inst.AnimState:PlayAnimation("dead")
 		inst.build = build --This is used within SGwilson, sent from an event in fishingrod.lua
+
+		MakeInventoryPhysics(inst)
+	    MakeInventoryFloatable(inst)
 
 		inst:AddTag("catfood")
 	    inst:AddTag("fishmeat")
@@ -72,21 +72,19 @@ local function makefish_med(bank, build, dryablesymbol)
 			return inst
 		end
 
+		inst:AddComponent("inspectable")
+		inst:AddComponent("inventoryitem")
+		inst:AddComponent("stackable")
+		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+
 		inst:AddComponent("edible")
 		inst.components.edible.ismeat = true
 		inst.components.edible.foodtype = FOODTYPE.MEAT
-
-		inst:AddComponent("stackable")
-		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
 		inst:AddComponent("perishable")
 		inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
 		inst.components.perishable:StartPerishing()
 		inst.components.perishable.onperishreplacement = "spoiled_fish_large"
-
-		inst:AddComponent("inspectable")
-
-		inst:AddComponent("inventoryitem")
 
 		inst:AddComponent("tradable")
 		inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
@@ -98,7 +96,6 @@ local function makefish_med(bank, build, dryablesymbol)
 
 		inst:AddComponent("dryable")
 		inst.components.dryable:SetProduct("meat_dried")
-		inst.components.dryable:SetBuildFile("meat_rack_food_tro")
 		inst.components.dryable:SetDryTime(TUNING.DRY_FAST)
 
 		MakeHauntableLaunchAndPerish(inst)
@@ -113,47 +110,45 @@ local function quagmire_crabmeat_fn()
 	local inst = CreateEntity()
 	inst.entity:AddTransform()
 	inst.entity:AddNetwork()
-	MakeInventoryPhysics(inst)
-
 	inst.entity:AddAnimState()
+
 	inst.AnimState:SetBank("quagmire_crabmeat")
 	inst.AnimState:SetBuild("quagmire_crabmeat")
 	inst.AnimState:PlayAnimation("idle")
 
+	MakeInventoryPhysics(inst)
+	MakeInventoryFloatable(inst)
+
 	inst:AddTag("catfood")
 	inst:AddTag("packimfood")
 	inst:AddTag("meat")
-
-	MakeInventoryFloatable(inst)
 
 	inst.entity:SetPristine()
 	if not TheWorld.ismastersim then
 		return inst
 	end
 
+	inst:AddComponent("inspectable")
+	inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
+	inst:AddComponent("stackable")
+	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+
 	inst:AddComponent("edible")
 	inst.components.edible.ismeat = true
 	inst.components.edible.foodtype = FOODTYPE.MEAT
-
-	inst:AddComponent("stackable")
-	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+	inst.components.edible.healthvalue = TUNING.HEALING_TINY
+	inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
 
 	inst:AddComponent("perishable")
 	inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERFAST)
 	inst.components.perishable:StartPerishing()
 	inst.components.perishable.onperishreplacement = "spoiled_food"
 
-	inst:AddComponent("inspectable")
-
-	inst:AddComponent("inventoryitem")
-
 	inst:AddComponent("tradable")
 	inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 	--inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 	inst.data = {}
-
-	inst.components.edible.healthvalue = TUNING.HEALING_TINY
-	inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
 
 	inst:AddComponent("cookable")
 	inst.components.cookable.product = "quagmire_crabmeat_cooked"
@@ -161,11 +156,10 @@ local function quagmire_crabmeat_fn()
 	inst:AddComponent("dryable")
 	inst.components.dryable:SetProduct("smallmeat_dried")
 	inst.components.dryable:SetDryTime(TUNING.DRY_FAST)
-	inst.components.dryable:SetBuildFile("meat_rack_food_tro")
-	inst.components.dryable:SetOverrideSymbol("quagmire_crabmeat")
 
 	inst:AddComponent("bait")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
+
+	MakeHauntableLaunchAndPerish(inst)
 
 	return inst
 end
@@ -174,24 +168,30 @@ local function quagmire_crabmeat_cooked_fn()
 	local inst = CreateEntity()
 	inst.entity:AddTransform()
 	inst.entity:AddNetwork()
-	MakeInventoryPhysics(inst)
-
 	inst.entity:AddAnimState()
+
 	inst.AnimState:SetBank("quagmire_crabmeat")
 	inst.AnimState:SetBuild("quagmire_crabmeat")
 	inst.AnimState:PlayAnimation("cooked", true)
 
-	--	MakeInventoryFloatable(inst, "cooked_water", "cooked")
+	MakeInventoryPhysics(inst)
+	MakeInventoryFloatable(inst)
 
 	inst:AddTag("meat")
 	inst:AddTag("catfood")
 	inst:AddTag("packimfood")
-	MakeInventoryFloatable(inst)
+
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
 		return inst
 	end
+
+	inst:AddComponent("inspectable")
+	inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
+	inst:AddComponent("stackable")
+	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
 	inst:AddComponent("edible")
 	inst.components.edible.ismeat = true
@@ -200,25 +200,19 @@ local function quagmire_crabmeat_cooked_fn()
 	inst.components.edible.healthvalue = TUNING.HEALING_TINY
 	inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
 
-	inst:AddComponent("stackable")
-	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
-
 	inst:AddComponent("perishable")
 	inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
 	inst.components.perishable:StartPerishing()
 	inst.components.perishable.onperishreplacement = "spoiled_food"
 
-	inst:AddComponent("inspectable")
-
-	inst:AddComponent("inventoryitem")
-
-
 	inst:AddComponent("tradable")
 	inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 	--inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 	inst.data = {}
+
 	inst:AddComponent("bait")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages2.xml"
+
+	MakeHauntableLaunchAndPerish(inst)
 
 	return inst
 end
@@ -248,14 +242,7 @@ local function lobster_dead_fn()
 	end
 
 	inst:AddComponent("inspectable")
-
-	inst:AddComponent("perishable")
-	inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERFAST)
-	inst.components.perishable:StartPerishing()
-	inst.components.perishable.onperishreplacement = "spoiled_food"
-
 	inst:AddComponent("inventoryitem")
-
 	inst:AddComponent("stackable")
 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
 
@@ -264,6 +251,11 @@ local function lobster_dead_fn()
 	inst.components.edible.foodtype = FOODTYPE.MEAT
 	inst.components.edible.healthvalue = TUNING.HEALING_TINY
 	inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
+
+	inst:AddComponent("perishable")
+	inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERFAST)
+	inst.components.perishable:StartPerishing()
+	inst.components.perishable.onperishreplacement = "spoiled_food"
 
 	inst:AddComponent("cookable")
 	inst.components.cookable.product = "lobster_dead_cooked"
@@ -302,14 +294,7 @@ local function lobster_dead_cooked_fn()
 	end
 
 	inst:AddComponent("inspectable")
-
-	inst:AddComponent("perishable")
-	inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
-	inst.components.perishable:StartPerishing()
-	inst.components.perishable.onperishreplacement = "spoiled_food"
-
 	inst:AddComponent("inventoryitem")
-
 	inst:AddComponent("stackable")
 	inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
 
@@ -320,9 +305,16 @@ local function lobster_dead_cooked_fn()
 	inst.components.edible.healthvalue = TUNING.HEALING_TINY
 	inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
 
+	inst:AddComponent("perishable")
+	inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
+	inst.components.perishable:StartPerishing()
+	inst.components.perishable.onperishreplacement = "spoiled_food"
+
 	inst:AddComponent("tradable")
 	inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 	--inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
+
+	MakeHauntableLaunchAndPerish(inst)
 
 	return inst
 end
@@ -375,19 +367,17 @@ local function spoiledfn(common_init, mastersim_init, nutrients)
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
-    MakeInventoryPhysics(inst)
-
     inst.AnimState:SetBank("spoiled")
     inst.AnimState:SetBuild("spoiled_food")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddTag("icebox_valid")
-	inst:AddTag("saltbox_valid")
-    inst:AddTag("show_spoiled")
-
+    MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst, "med", .04, 0.73)
     MakeDeployableFertilizerPristine(inst)
 
+    inst:AddTag("icebox_valid")
+	inst:AddTag("saltbox_valid")
+    inst:AddTag("show_spoiled")
     inst:AddTag("fertilizerresearchable")
 
 	if common_init ~= nil then
@@ -402,6 +392,11 @@ local function spoiledfn(common_init, mastersim_init, nutrients)
         return inst
     end
 
+    inst:AddComponent("inspectable")
+    inst:AddComponent("inventoryitem")
+    inst:AddComponent("stackable")
+    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+
     inst:AddComponent("fertilizer")
     inst.components.fertilizer.fertilizervalue = TUNING.SPOILEDFOOD_FERTILIZE
     inst.components.fertilizer.soil_cycles = TUNING.SPOILEDFOOD_SOILCYCLES
@@ -409,11 +404,6 @@ local function spoiledfn(common_init, mastersim_init, nutrients)
     inst.components.fertilizer:SetNutrients(nutrients)
 
     inst:AddComponent("smotherer")
-
-    inst:AddComponent("inspectable")
-    inst:AddComponent("inventoryitem")
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
     inst:AddComponent("fertilizerresearchable")
     inst.components.fertilizerresearchable:SetResearchFn(fertilizerresearchfn)
@@ -465,14 +455,12 @@ local function fish_large_mastersim_init(inst)
 	inst:ListenForEvent("stacksizechange", fish_stack_size_changed)
 end
 
-local rawdogfish = makefish_med("dogfish", "fish_dogfish",  "dogfish")
-local rawswordfish = makefish_med("swordfish", "fish_swordfish", "swordfish")
+local rawdogfish = makefish_med("dogfish", "fish_dogfish")
+local rawswordfish = makefish_med("swordfish", "fish_swordfish")
 
 return Prefab("dogfish_dead", rawdogfish, dogfish_assets, prefabs),
 	Prefab("swordfish_dead", rawswordfish, swordfish_assets, prefabs),
 	Prefab("spoiled_fish_large", function() return spoiledfn(fish_large_init, fish_large_mastersim_init, FERTILIZER_DEFS.spoiled_fish_large.nutrients) end, spoiledfish_large_assets, spoiled_fish_large_prefabs),
-	--Prefab("fish_raw", fish_raw_fn, raw_assets),
-	--Prefab("fish_med_cooked", cookedfn, cooked_assets),
 	Prefab("quagmire_crabmeat", quagmire_crabmeat_fn, quagmire_crabmeat_assets),
 	Prefab("quagmire_crabmeat_cooked", quagmire_crabmeat_cooked_fn, quagmire_crabmeat_assets),
 	Prefab("lobster_dead", lobster_dead_fn, lobster_assets),

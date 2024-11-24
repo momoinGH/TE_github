@@ -5,7 +5,6 @@ local assets =
     --Asset("INV_IMAGE", "rainbowJellyJerky"),
 }
 
-
 local prefabs =
 {
     "rainbowjellyfish_planted",
@@ -181,8 +180,8 @@ local function defaultfn(sim)
     MakeInventoryFloatable(inst)
 
     inst.Transform:SetScale(0.8, 0.8, 0.8)
-    inst.AnimState:SetRayTestOnBB(true);
 
+    inst.AnimState:SetRayTestOnBB(true);
     inst.AnimState:SetBank("rainbowjellyfish")
     inst.AnimState:SetBuild("rainbowjellyfish")
     inst.AnimState:PlayAnimation("idle_ground", true)
@@ -201,13 +200,13 @@ local function defaultfn(sim)
         return inst
     end
 
+    inst:AddComponent("inspectable")
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem:SetOnDroppedFn(ondropped)
+
 	inst:AddComponent("edible")
     inst.components.edible.foodtype = nil
 
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem:SetOnDroppedFn(ondropped)
     inst:ListenForEvent("on_landed", ondropped)
 
     inst:AddComponent("perishable")
@@ -241,20 +240,20 @@ end
 local function deadfn(sim)
     local inst = CreateEntity()
     inst.entity:AddTransform()
-    inst.Transform:SetScale(0.8, 0.8, 0.8)
     inst.entity:AddNetwork()
-
     inst.entity:AddAnimState()
-    MakeInventoryPhysics(inst)
     inst.entity:AddSoundEmitter()
+
+    MakeInventoryPhysics(inst)
+    MakeInventoryFloatable(inst)
+
+    inst.Transform:SetScale(0.7, 0.7, 0.7)
 
     inst.AnimState:SetRayTestOnBB(true);
     inst.AnimState:SetBank("rainbowjellyfish")
     inst.AnimState:SetBuild("rainbowjellyfish")
+    inst.AnimState:PlayAnimation("idle_ground", true)
 
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:SetSortOrder(3)
-    MakeInventoryFloatable(inst)
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -263,26 +262,21 @@ local function deadfn(sim)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("perishable")
+    inst:AddComponent("stackable")
+    inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
 
     inst:AddComponent("tradable")
     inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
     --    inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 
-    inst.Transform:SetScale(0.7, 0.7, 0.7)
-
     inst:AddComponent("edible")
     inst.components.edible.foodtype = FOODTYPE.MEAT
     inst.components.edible:SetOnEatenFn(item_oneaten)
 
+    inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
     inst.components.perishable:StartPerishing()
     inst.components.perishable.onperishreplacement = "spoiled_food"
-
-    inst.AnimState:PlayAnimation("idle_ground", true)
-
-    --    MakeInventoryFloatable(inst, "idle_water", "idle_ground")
 
     inst:AddComponent("cookable")
     inst.components.cookable.product = "rainbowjellyfish_cooked"
@@ -291,30 +285,27 @@ local function deadfn(sim)
     inst.components.dryable:SetProduct("jellyjerky")
     inst.components.dryable:SetDryTime(TUNING.DRY_FAST)
 
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
+    MakeHauntableLaunchAndPerish(inst)
+
     return inst
 end
-
 
 local function cookedfn(sim)
     local inst = CreateEntity()
     inst.entity:AddTransform()
-    inst.Transform:SetScale(0.8, 0.8, 0.8)
     inst.entity:AddNetwork()
-
     inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
-    inst.entity:AddSoundEmitter()
+
+    inst.Transform:SetScale(0.8, 0.8, 0.8)
 
     inst.AnimState:SetRayTestOnBB(true);
     inst.AnimState:SetBank("rainbowjellyfish")
     inst.AnimState:SetBuild("rainbowjellyfish")
     inst.AnimState:PlayAnimation("cooked", true)
-
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:SetSortOrder(3)
 
     inst.entity:SetPristine()
 
@@ -324,8 +315,8 @@ local function cookedfn(sim)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("perishable")
+    inst:AddComponent("stackable")
+    inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
 
     inst:AddComponent("tradable")
     inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
@@ -337,17 +328,17 @@ local function cookedfn(sim)
     inst.components.edible.hungervalue = TUNING.CALORIES_MEDSMALL
     inst.components.edible.sanityvalue = 0
 
-
+    inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_MED)
     inst.components.perishable:StartPerishing()
     inst.components.perishable.onperishreplacement = "spoiled_food"
 
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
+    MakeHauntableLaunchAndPerish(inst)
+
     return inst
 end
 
-return Prefab("rainbowjellyfish", defaultfn, assets),
+return Prefab("rainbowjellyfish", defaultfn, assets, prefabs),
     Prefab("rainbowjellyfish_dead", deadfn, assets),
     Prefab("rainbowjellyfish_cooked", cookedfn, assets),
     Prefab("rainbowjellylight", lightfn, assets)
