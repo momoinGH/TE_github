@@ -26,13 +26,12 @@ local sounds =
 	explode = "dontstarve/creatures/mosquito/mosquito_explo",
 }
 
-SetSharedLootTable('glowfly',
+SetSharedLootTable("glowfly",
 	{
 		{ 'lightbulb', .1 },
 	})
 
-
-SetSharedLootTable('glowflyinventory',
+SetSharedLootTable("glowflyinventory",
 	{
 		{ 'lightbulb', 1 },
 	})
@@ -151,7 +150,7 @@ end
 
 local function OnPickedUp(inst)
 	inst.SoundEmitter:KillSound("buzz")
-	inst.components.lootdropper:SetChanceLootTable('glowflyinventory')
+	inst.components.lootdropper:SetChanceLootTable("glowflyinventory")
 end
 
 local function KillerRetarget(inst)
@@ -235,7 +234,7 @@ end
 
 
 local function OnDropped(inst)
-	inst.components.lootdropper:SetChanceLootTable('glowfly')
+	inst.components.lootdropper:SetChanceLootTable("glowfly")
 	inst.sg:GoToState("idle")
 	if inst.components.workable then
 		inst.components.workable:SetWorkLeft(1)
@@ -346,21 +345,19 @@ local function fn(Sim)
 	inst.OnBorn = OnBorn
 
 	inst:AddComponent("inventoryitem")
-
-
-	inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
-	inst.components.inventoryitem:SetOnPutInInventoryFn(OnPickedUp)
-	inst.components.inventoryitem.canbepickedup = false
-	--	inst.components.inventoryitem:ChangeImageName("lantern_fly")
+	--inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
+	--inst.components.inventoryitem:SetOnPutInInventoryFn(OnPickedUp)
+    inst.components.inventoryitem.nobounce = true
+    inst.components.inventoryitem.canbepickedup = false
+    inst.components.inventoryitem.canbepickedupalive = true
 
 	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
 	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 	inst.components.locomotor:SetTriggersCreep(false)
 	inst.components.locomotor.walkspeed = 6
 	inst.components.locomotor.runspeed = 8
+
 	inst:SetStateGraph("SGglowfly")
-
-
 	---------------------
 
 	inst:AddComponent("pollinator")
@@ -370,6 +367,7 @@ local function fn(Sim)
 	inst.components.lootdropper:SetChanceLootTable('glowfly')
 
 	inst:AddComponent("tradable")
+
 	inst:AddTag("cattoyairborne")
 
 	------------------
@@ -385,6 +383,7 @@ local function fn(Sim)
 	inst:AddComponent("health")
 	inst.components.health:SetMaxHealth(1)
 
+    MakeFeedableSmallLivestock(inst, TUNING.TOTAL_DAY_TIME*2, OnPickedUp, OnDropped)
 	------------------
 	inst:AddComponent("combat")
 	inst.components.combat.hiteffectsymbol = "body"
