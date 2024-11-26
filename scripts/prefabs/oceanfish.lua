@@ -447,7 +447,7 @@ local function ondropped(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-	if ground == GROUND.UNDERWATER_SANDY or ground == GROUND.UNDERWATER_ROCKY or (ground == GROUND.BEACH and TheWorld:HasTag("cave")) or (ground == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground == GROUND.PAINTED and TheWorld:HasTag("cave")) or (ground == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground == GROUND.BATTLEGROUND and TheWorld:HasTag("cave")) then
+	if ground == GROUND.UNDERWATER_SANDY or ground == GROUND.UNDERWATER_ROCKY or (ground == GROUND.BEACH and TheWorld:HasTag("cave")) or (ground == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground == GROUND.PAINTED and TheWorld:HasTag("cave")) or (ground == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground == GROUND.PIGRUINS and TheWorld:HasTag("cave")) then
 		if inst.prefab == "oceanfish_medium_1_inv" then
 			local novopeixe = SpawnPrefab("oceanfish_medium_underwater_1")
 			if novopeixe then

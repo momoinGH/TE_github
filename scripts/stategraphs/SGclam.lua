@@ -171,7 +171,7 @@ local states =
                         or (curr == GROUND.BEACH and curr1 == GROUND.BEACH and curr2 == GROUND.BEACH and curr3 == GROUND.BEACH and curr4 == GROUND.BEACH)
                         or (curr == GROUND.MAGMAFIELD and curr1 == GROUND.MAGMAFIELD and curr2 == GROUND.MAGMAFIELD and curr3 == GROUND.MAGMAFIELD and curr4 == GROUND.MAGMAFIELD)
                         or (curr == GROUND.PAINTED and curr1 == GROUND.PAINTED and curr2 == GROUND.PAINTED and curr3 == GROUND.PAINTED and curr4 == GROUND.PAINTED)
-                        or (curr == GROUND.BATTLEGROUND and curr1 == GROUND.BATTLEGROUND and curr2 == GROUND.BATTLEGROUND and curr3 == GROUND.BATTLEGROUND and curr4 == GROUND.BATTLEGROUND)
+                        or (curr == GROUND.PIGRUINS and curr1 == GROUND.PIGRUINS and curr2 == GROUND.PIGRUINS and curr3 == GROUND.PIGRUINS and curr4 == GROUND.BATTLEGROUND)
                         or (curr == GROUND.PEBBLEBEACH and curr1 == GROUND.PEBBLEBEACH and curr2 == GROUND.PEBBLEBEACH and curr3 == GROUND.PEBBLEBEACH and curr4 == GROUND.PEBBLEBEACH)
                     then
                         local colocaitem = SpawnPrefab(inst.prefab)

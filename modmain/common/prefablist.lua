@@ -8,7 +8,7 @@ PrefabFiles =
     "sail",
     "tropical_boatlamp",
 
-    "turfesvolcanobiome",
+    --"turfesvolcanobiome",
     "venomgland",
     "machetes",
     "antivenom",

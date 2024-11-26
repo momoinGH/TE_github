@@ -2112,7 +2112,7 @@ AddRoom("city_base_1_set", {
 
 AddRoom("city_base_2_set", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = GROUND.MOSS,
     tags = { "RoadPoison", "hamlet" },
     contents = {
         countstaticlayouts = {
@@ -2131,7 +2131,7 @@ AddRoom("city_base_2_set", {
 
 AddRoom("city_base", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = GROUND.MOSS,
     tags = { "RoadPoison", "hamlet" },
     contents = {
         distributepercent = 0.3,
@@ -2147,7 +2147,7 @@ AddRoom("city_base", {
 
 AddRoom("BG_suburb_base", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = GROUND.MOSS,
     tags = { "RoadPoison", "hamlet" },
     contents = {
         distributepercent = 0.3,
@@ -2166,7 +2166,7 @@ AddRoom("BG_suburb_base", {
 ----------------------------------main-------------
 AddRoom("MAINcity_base_1_set", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = GROUND.MOSS,
     tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = {
@@ -2185,7 +2185,7 @@ AddRoom("MAINcity_base_1_set", {
 
 AddRoom("MAINcity_base_2_set", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = GROUND.MOSS,
     tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = {
@@ -2204,7 +2204,7 @@ AddRoom("MAINcity_base_2_set", {
 
 AddRoom("MAINcity_base", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = GROUND.MOSS,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.3,
@@ -2220,7 +2220,7 @@ AddRoom("MAINcity_base", {
 
 AddRoom("MAINBG_suburb_base", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = GROUND.MOSS,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.3,
@@ -2447,7 +2447,7 @@ AddTask("Pigcity", {
         ["city_base_1_set"] = 1,
         ["city_base"] = 1,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2477,7 +2477,7 @@ AddTask("Pigcity2", {
         ["city_base_2_set"] = 1,
         ["city_base"] = 1,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2523,7 +2523,7 @@ AddTask("Deep_lost_ruins_gas", {
         ["deeprainforest_gas_flytrap_grove"] = math.random(2),
         ["deeprainforest_gas_entrance6"] = 1,
     },
-    room_bg = GROUND.GASJUNGLE,
+    room_bg = GROUND.GASRAINFOREST,
     background_room = "deeprainforest_gas",
     colour = { r = 0.8, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2688,7 +2688,7 @@ AddTask("MPigcity", {
         ["city_base_1_set"] = 1,
         ["city_base"] = 1,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     entrance_room = "city_base",
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
@@ -2703,7 +2703,7 @@ AddTask("MPigcityside1", {
         ["city_base"] = 1,
     },
     entrance_room = "city_base",
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2718,7 +2718,7 @@ AddTask("MPigcityside2", {
 
     },
     entrance_room = "city_base",
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2733,7 +2733,7 @@ AddTask("MPigcityside3", {
 
     },
     entrance_room = "city_base",
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2748,7 +2748,7 @@ AddTask("MPigcityside4", {
 
     },
     entrance_room = "city_base",
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2777,7 +2777,7 @@ AddTask("MPigcity2", {
     room_choices = {
         ["city_base_2_set"] = 1,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2790,7 +2790,7 @@ AddTask("MPigcity2side1", {
     room_choices = {
         ["city_base"] = 1,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2804,7 +2804,7 @@ AddTask("MPigcity2side2", {
         ["city_base"] = 1,
 
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2817,7 +2817,7 @@ AddTask("MPigcity2side3", {
     room_choices = {
         ["city_base"] = 1,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2831,7 +2831,7 @@ AddTask("MPigcity2side4", {
         ["city_base"] = 1,
 
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2874,7 +2874,7 @@ AddTask("MDeep_lost_ruins_gas", {
         ["deeprainforest_gas_flytrap_grove"] = math.random(2),
         ["deeprainforest_gas_entrance6"] = 1,
     },
-    room_bg = GROUND.GASJUNGLE,
+    room_bg = GROUND.GASRAINFOREST,
     background_room = "deeprainforest_gas",
     colour = { r = 0.8, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3085,7 +3085,7 @@ AddTask("XPigcity", {
     room_choices = {
         ["MAINcity_base_1_set"] = 1,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3098,7 +3098,7 @@ AddTask("XPigcityside1", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3111,7 +3111,7 @@ AddTask("XPigcityside2", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3124,7 +3124,7 @@ AddTask("XPigcityside3", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3137,7 +3137,7 @@ AddTask("XPigcityside4", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3149,7 +3149,7 @@ AddTask("XPigcity2", {
     room_choices = {
         ["MAINcity_base_2_set"] = 1,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3161,7 +3161,7 @@ AddTask("XPigcity2side1", {
     room_choices = {
         ["MAINcity_base"] = 1,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3174,7 +3174,7 @@ AddTask("XPigcity2side2", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3187,7 +3187,7 @@ AddTask("XPigcity2side3", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3200,7 +3200,7 @@ AddTask("XPigcity2side4", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = GROUND.MOSS,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3240,7 +3240,7 @@ AddTask("XDeep_lost_ruins_gas", {
         ["MAINdeeprainforest_gas_flytrap_grove"] = math.random(2),
         ["MAINdeeprainforest_gas_entrance6"] = 1,
     },
-    room_bg = GROUND.GASJUNGLE,
+    room_bg = GROUND.GASRAINFOREST,
     background_room = "MAINdeeprainforest_gas",
     colour = { r = 0.8, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -6123,7 +6123,7 @@ AddRoom("BG_painted_base", {
 -------------------------------------------room deep florest hamlet-------------------------------------------
 AddRoom("deeprainforest_gas", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASJUNGLE,
+    value = GROUND.GASRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         distributepercent = 0.45, --.45
@@ -6149,7 +6149,7 @@ AddRoom("deeprainforest_gas", {
 
 AddRoom("deeprainforest_gas_entrance6", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASJUNGLE,
+    value = GROUND.GASRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         distributepercent = 0.45, --.45
@@ -6179,7 +6179,7 @@ AddRoom("deeprainforest_gas_entrance6", {
 
 AddRoom("deeprainforest_gas_flytrap_grove", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASJUNGLE,
+    value = GROUND.GASRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = {
@@ -6630,7 +6630,7 @@ AddRoom("deeprainforest_anthill_exit", {
     value = GROUND.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
-        countstaticlayouts = { ["pig_ruins_entrance_5"] = TUNING.tropical.pigruins and 1 or 0 },
+        countstaticlayouts = { ["pig_ruins_entrance_5"] = TUNING.tropical.PIGRUINS  and 1 or 0 },
         distributepercent = 0.25, --.3
         distributeprefabs =
         {
@@ -7348,7 +7348,7 @@ AddRoom("MAINBG_painted_base", {
 -------------------------------------------room deep florest hamlet-------------------------------------------
 AddRoom("MAINdeeprainforest_gas", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASJUNGLE,
+    value = GROUND.GASRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "folha" },
     contents = {
         distributepercent = 0.45, --.45
@@ -7374,7 +7374,7 @@ AddRoom("MAINdeeprainforest_gas", {
 
 AddRoom("MAINdeeprainforest_gas_entrance6", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASJUNGLE,
+    value = GROUND.GASRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "folha" },
     contents = {
         distributepercent = 0.45, --.45
@@ -7405,7 +7405,7 @@ AddRoom("MAINdeeprainforest_gas_entrance6", {
 
 AddRoom("MAINdeeprainforest_gas_flytrap_grove", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASJUNGLE,
+    value = GROUND.GASRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "folha" },
     contents = {
         countstaticlayouts = {
@@ -7856,7 +7856,7 @@ AddRoom("MAINdeeprainforest_anthill_exit", {
     value = GROUND.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "folha" },
     contents = {
-        countstaticlayouts = { ["pig_ruins_entrance_5"] = TUNING.tropical.pigruins and 1 or 0 },
+        countstaticlayouts = { ["pig_ruins_entrance_5"] = TUNING.tropical.PIGRUINS  and 1 or 0 },
         distributepercent = 0.25, --.3
         distributeprefabs =
         {

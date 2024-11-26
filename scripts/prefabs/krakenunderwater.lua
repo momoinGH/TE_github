@@ -318,7 +318,7 @@ local function fn()
 
     inst:AddComponent("minionspawner")
     inst.components.minionspawner.validtiletypes = { GROUND.UNDERWATER_SANDY, GROUND.UNDERWATER_ROCKY, GROUND.BEACH,
-        GROUND.MAGMAFIELD, GROUND.PAINTED, GROUND.BATTLEGROUND, GROUND.PEBBLEBEACH }
+        GROUND.MAGMAFIELD, GROUND.PAINTED, GROUND.PIGRUINS, GROUND.PEBBLEBEACH }
 
     inst.components.minionspawner.miniontype = "krakenunderwater_tentacle"
     inst.components.minionspawner.distancemodifier = 9

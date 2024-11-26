@@ -14,7 +14,7 @@ local function UpdateGroundSpeedMultiplierAfter(retTab, self)
         (current_ground_tile == GROUND.BEACH and isCave) or
         (current_ground_tile == GROUND.MAGMAFIELD and isCave) or
         (current_ground_tile == GROUND.PAINTED and isCave) or
-        (current_ground_tile == GROUND.BATTLEGROUND and isCave) or
+        (current_ground_tile == GROUND.PIGRUINS and isCave) or
         (current_ground_tile == GROUND.PEBBLEBEACH and isCave) then
         if self.inst.prefab ~= "wurt" then
             self.groundspeedmultiplier = 0.5
