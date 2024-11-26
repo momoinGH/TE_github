@@ -409,7 +409,7 @@ Bunches.wobster_den_spawner_shore = {
                         return "rock_ice_frost"
                     elseif tile == GROUND.PEBBLEBEACH or tile == GROUND.METEOR or tile == GROUND.SHELLBEACH then
                         return "moonglass_wobster_den"
-                    elseif tile == GROUND.BEACH or tile == GROUND.MEADOW or tile == GROUND.ASH or tile == GROUND.JUNGLE or tile == GROUND.VOLCANO or tile == GROUND.TIDALMARSH then
+                    elseif tile == GROUND.BEACH or tile == GROUND.MEADOW or tile == GROUND.ASH or tile == GROUND.JUNGLE or tile == GROUND.VOLCANO_ROCK or tile == GROUND.TIDALMARSH then
                         return "lobsterhole"
                     elseif not GLOBAL.IsOceanTile(tile) then
                         return "wobster_den"
@@ -3325,7 +3325,7 @@ if GetModConfigData("Shipwrecked") == 10 then
             ["Volcano"] = 1,
             ["VolcanoObsidian"] = 1,
         },
-        room_bg = GROUND.VOLCANO,
+        room_bg = GROUND.VOLCANO_ROCK,
         background_room = "VolcanoNoise",
         colour = { 1, .5, .5, .2 },
     })
@@ -3663,7 +3663,7 @@ if GetModConfigData("Shipwrecked") == 15 or TUNING.tropical.only_shipwrecked the
             ["JungleRockSkull"] = 1,
             [salasjungle[math.random(1, 24)]] = 1,
         },
-        room_bg = GROUND.VOLCANO,
+        room_bg = GROUND.VOLCANO_ROCK,
         background_room = "VolcanoNoise",
         colour = { r = 1, g = 1, b = 0, a = 1 },
     })
@@ -3693,7 +3693,7 @@ if GetModConfigData("Shipwrecked") == 15 or TUNING.tropical.only_shipwrecked the
             ["Volcano"] = 1,
             ["VolcanoObsidian"] = 1,
         },
-        room_bg = GROUND.VOLCANO,
+        room_bg = GROUND.VOLCANO_ROCK,
         background_room = "VolcanoNoise",
         colour = { 1, .5, .5, .2 },
     })
@@ -5121,7 +5121,7 @@ if GetModConfigData("Shipwrecked") == 20 then
             ["MAINVolcano"] = 1,
             ["MAINVolcanoObsidian"] = 1,
         },
-        room_bg = GROUND.VOLCANO,
+        room_bg = GROUND.VOLCANO_ROCK,
         background_room = "MAINVolcanoNoise",
         colour = { 1, .5, .5, .2 },
     })
@@ -5459,7 +5459,7 @@ if GetModConfigData("Shipwrecked") == 25 or TUNING.tropical.only_shipwrecked the
             ["VolcanoObsidian"] = 1,
         },
         entrance_room = "ForceDisconnectedRoom",
-        room_bg = GROUND.VOLCANO,
+        room_bg = GROUND.VOLCANO_ROCK,
         background_room = "VolcanoNoise",
         colour = { 1, .5, .5, .2 },
     })
@@ -8245,7 +8245,7 @@ AddTask("VOLCANO_TASK_FOREST",
             ["VolcanoNoise"] = 1,
         },
         --	entrance_room = "Magmadragoon",
-        room_bg = GROUND.VOLCANO,
+        room_bg = GROUND.VOLCANO_ROCK,
         background_room = "VolcanoNoise",
         colour = { r = 1, g = 0, b = 0.6, a = 1 },
     })
@@ -8874,7 +8874,7 @@ AddRoom("MagmaVolcano", {
 
 AddRoom("Volcano", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO,
+    value = GROUND.VOLCANO_ROCK,
     tags = { "RoadPoison", "tropical" },
     --					required_prefabs = {"volcano"},
     contents = {
@@ -8908,7 +8908,7 @@ AddRoom("Volcano", {
 
 AddRoom("Volcanofundo", {
     colour = { r = 0.8, g = .8, b = .1, a = .50 },
-    value = GROUND.VOLCANO,
+    value = GROUND.VOLCANO_ROCK,
     tags = { "RoadPoison", "tropical" },
     contents = {
         --						     green_mushroom = .05,
@@ -9106,7 +9106,7 @@ AddRoom("MagmaSpiders", {
 
 AddRoom("VolcanoRock", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO,
+    value = GROUND.VOLCANO_ROCK,
     tags = { "RoadPoison", "tropical" },
     contents = {
         distributepercent = .15,
@@ -9163,7 +9163,7 @@ AddRoom("VolcanoAsh", {
 
 AddRoom("VolcanoObsidian", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.BEARDRUG,
+    value = GROUND.VOLCANO,
     tags = { "RoadPoison", "tropical" },
     contents = {
         --									countstaticlayouts={["beaverking"]=1}, --adds 1 per room
@@ -9191,7 +9191,7 @@ AddRoom("VolcanoObsidian", {
 
 AddRoom("VolcanoStart", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO,
+    value = GROUND.VOLCANO_ROCK,
     tags = { "RoadPoison", "tropical" },
     contents = {
         countstaticlayouts = { ["Entradavulcao"] = 1 }, --adds 1 per room
@@ -9219,7 +9219,7 @@ AddRoom("VolcanoStart", {
 
 AddRoom("VolcanoNoise", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO,
+    value = GROUND.VOLCANO_ROCK,
     tags = { "RoadPoison", "tropical" },
     contents = {
         countstaticlayouts = { ["CoffeeBushBunch"] = function() if math.random() < 0.25 then return 1 else return 0 end end },
@@ -9247,7 +9247,7 @@ AddRoom("VolcanoNoise", {
 
 AddRoom("VolcanoObsidianBench", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.BEARDRUG,
+    value = GROUND.VOLCANO,
     tags = { "RoadPoison", "tropical" },
     contents = {
         countstaticlayouts = { ["ObsidianWorkbench"] = 1 }, --adds 1 per room
@@ -9272,7 +9272,7 @@ AddRoom("VolcanoObsidianBench", {
 
 AddRoom("VolcanoAltar", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.BEARDRUG,
+    value = GROUND.VOLCANO,
     tags = { "RoadPoison", "tropical" },
     contents = {
         countstaticlayouts = { ["volcano_altar"] = TUNING.tropical.lavaarena and 1 or 0, },
@@ -9297,7 +9297,7 @@ AddRoom("VolcanoAltar", {
 
 AddRoom("VolcanoLavaarena", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.BEARDRUG,
+    value = GROUND.VOLCANO,
     tags = { "RoadPoison", "tropical" },
     contents = {
         countstaticlayouts = { ["lava_arena"] = TUNING.tropical.lavaarena and 1 or 0, },
@@ -9319,7 +9319,7 @@ AddRoom("VolcanoLavaarena", {
 
 AddRoom("VolcanoCage", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.BEARDRUG,
+    value = GROUND.VOLCANO,
     tags = { "RoadPoison", "tropical" },
     contents = {
         countstaticlayouts = { ["WoodlegsUnlock"] = 1, },
@@ -12158,7 +12158,7 @@ AddRoom("MAINMagmaVolcano", {
 
 AddRoom("MAINVolcano", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO,
+    value = GROUND.VOLCANO_ROCK,
     tags = { "RoadPoison" },
     --					required_prefabs = {"volcano"},
     contents = {
@@ -12192,7 +12192,7 @@ AddRoom("MAINVolcano", {
 
 AddRoom("MAINVolcanofundo", {
     colour = { r = 0.8, g = .8, b = .1, a = .50 },
-    value = GROUND.VOLCANO,
+    value = GROUND.VOLCANO_ROCK,
     tags = { "RoadPoison" },
     contents = {
         --						     green_mushroom = .05,
@@ -12390,7 +12390,7 @@ AddRoom("MAINMagmaSpiders", {
 
 AddRoom("MAINVolcanoRock", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO,
+    value = GROUND.VOLCANO_ROCK,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = .15,
@@ -12447,7 +12447,7 @@ AddRoom("MAINVolcanoAsh", {
 
 AddRoom("MAINVolcanoObsidian", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.BEARDRUG,
+    value = GROUND.VOLCANO,
     tags = { "RoadPoison" },
     contents = {
         --									countstaticlayouts={["beaverking"]=1}, --adds 1 per room
@@ -12475,7 +12475,7 @@ AddRoom("MAINVolcanoObsidian", {
 
 AddRoom("MAINVolcanoStart", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO,
+    value = GROUND.VOLCANO_ROCK,
     tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = { ["Entradavulcao"] = 1 }, --adds 1 per room
@@ -12503,7 +12503,7 @@ AddRoom("MAINVolcanoStart", {
 
 AddRoom("MAINVolcanoNoise", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO,
+    value = GROUND.VOLCANO_ROCK,
     tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = { ["CoffeeBushBunch"] = function() if math.random() < 0.25 then return 1 else return 0 end end },
@@ -12531,7 +12531,7 @@ AddRoom("MAINVolcanoNoise", {
 
 AddRoom("MAINVolcanoObsidianBench", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.BEARDRUG,
+    value = GROUND.VOLCANO,
     tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = { ["ObsidianWorkbench"] = 1 }, --adds 1 per room
@@ -12556,7 +12556,7 @@ AddRoom("MAINVolcanoObsidianBench", {
 
 AddRoom("MAINVolcanoAltar", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.BEARDRUG,
+    value = GROUND.VOLCANO,
     tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = { ["volcano_altar"] = TUNING.tropical.lavaarena and 1 or 0, },
@@ -12582,7 +12582,7 @@ AddRoom("MAINVolcanoAltar", {
 
 AddRoom("MAINVolcanoLavaarena", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.BEARDRUG,
+    value = GROUND.VOLCANO,
     tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = { ["lava_arena"] = TUNING.tropical.lavaarena and 1 or 0, },
@@ -12604,7 +12604,7 @@ AddRoom("MAINVolcanoLavaarena", {
 
 AddRoom("MAINVolcanoCage", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.BEARDRUG,
+    value = GROUND.VOLCANO,
     tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = { ["WoodlegsUnlock"] = 1, },
@@ -17493,7 +17493,7 @@ AddTask("separahamcave", {
         ["ForceDisconnectedRoom"] = 10,
     },
     entrance_room = "ForceDisconnectedRoom",
-    room_bg = GROUND.VOLCANO,
+    room_bg = GROUND.VOLCANO_ROCK,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -17852,7 +17852,7 @@ if TUNING.tropical.only_shipwrecked and GetModConfigData("togethercaves_shipwrec
             ["ForceDisconnectedRoom"] = 10,
         },
         entrance_room = "ForceDisconnectedRoom",
-        room_bg = GROUND.VOLCANO,
+        room_bg = GROUND.VOLCANO_ROCK,
         background_room = "ForceDisconnectedRoom",
         colour = { r = 1, g = 1, b = 1, a = 0.3 }
     })
@@ -17866,7 +17866,7 @@ elseif GetModConfigData("Volcano") == true then
             ["ForceDisconnectedRoom"] = 10,
         },
         entrance_room = "ForceDisconnectedRoom",
-        room_bg = GROUND.VOLCANO,
+        room_bg = GROUND.VOLCANO_ROCK,
         background_room = "ForceDisconnectedRoom",
         colour = { r = 1, g = 1, b = 1, a = 0.3 }
     })
@@ -17880,7 +17880,7 @@ else
             ["ForceDisconnectedRoom"] = 10,
         },
         entrance_room = "ForceDisconnectedRoom",
-        room_bg = GROUND.VOLCANO,
+        room_bg = GROUND.VOLCANO_ROCK,
         background_room = "ForceDisconnectedRoom",
         colour = { r = 1, g = 1, b = 1, a = 0.3 }
     })
@@ -17902,7 +17902,7 @@ AddTask("vulcaonacaverna", {
     },
     entrance_room = "ForceDisconnectedRoom",
     background_room = "VolcanoNoise",
-    room_bg = GROUND.VOLCANO,
+    room_bg = GROUND.VOLCANO_ROCK,
     colour = { r = 0.6, g = 0.4, b = 0.0, a = 0.9 },
 })
 
@@ -17919,7 +17919,7 @@ AddTask("vulcaonacaverna1", {
     },
     entrance_room = "VolcanoRock",
     background_room = "VolcanoRock",
-    room_bg = GROUND.VOLCANO,
+    room_bg = GROUND.VOLCANO_ROCK,
     colour = { r = 0.6, g = 0.4, b = 0.0, a = 0.9 },
 })
 
@@ -17935,7 +17935,7 @@ AddTask("vulcaonacaverna2", {
     },
     entrance_room = "VolcanoObsidian",
     background_room = "VolcanoObsidian",
-    room_bg = GROUND.VOLCANO,
+    room_bg = GROUND.VOLCANO_ROCK,
     colour = { r = 0.6, g = 0.4, b = 0.0, a = 0.9 },
 })
 
@@ -17952,7 +17952,7 @@ AddTask("vulcaonacaverna3", {
     },
     entrance_room = "VolcanoAsh",
     background_room = "VolcanoAsh",
-    room_bg = GROUND.VOLCANO,
+    room_bg = GROUND.VOLCANO_ROCK,
     colour = { r = 0.6, g = 0.4, b = 0.0, a = 0.9 },
 })
 

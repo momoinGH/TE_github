@@ -2188,7 +2188,7 @@ AddTask("separavulcao", {
         ["ForceDisconnectedRoom"] = 10,
     },
     entrance_room = "ForceDisconnectedRoom",
-    room_bg = GROUND.VOLCANO,
+    room_bg = GROUND.VOLCANO_ROCK,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -2203,7 +2203,7 @@ AddTask("separahamcave", {
         ["ForceDisconnectedRoom"] = 10,
     },
     entrance_room = "ForceDisconnectedRoom",
-    room_bg = GROUND.VOLCANO,
+    room_bg = GROUND.VOLCANO_ROCK,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -4056,7 +4056,7 @@ AddTask("underwaterdivide", {
 
 AddRoom("VolcanoObsidian", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.BEARDRUG,
+    value = GROUND.VOLCANO_ROCK,
     tags = { "RoadPoison", "tropical" },
     contents = {
         --									countstaticlayouts={["beaverking"]=1}, --adds 1 per room

@@ -79,7 +79,7 @@ local function test_ground(inst, pt)
         tiletype ~= GROUND.MAGMAFIELD and
         tiletype ~= GROUND.UNDERROCK and tiletype ~= GROUND.WOODFLOOR and tiletype ~= GROUND.SAND and
         tiletype ~= GROUND.CARPET and tiletype ~= GROUND.CHECKER and tiletype < GROUND.UNDERGROUND and
-        tiletype ~= GROUND.ASH and tiletype ~= GROUND.VOLCANO and tiletype ~= GROUND.LAVA_ROCK and
+        tiletype ~= GROUND.ASH and tiletype ~= GROUND.VOLCANO and tiletype ~= GROUND.VOLCANO_ROCK and
         tiletype ~= GROUND.BRICK_GLOW
 
     if ground_OK then
