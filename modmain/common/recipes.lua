@@ -1262,7 +1262,7 @@ AddRecipe2("turf_beach", {Ingredient("sand", 2)}, TECH.TURFCRAFTING_ONE, {
 AddRecipe2("turf_fields", {Ingredient("turf_rainforest", 1), Ingredient("ash", 1)}, TECH.SCIENCE_TWO, {
     numtogive = 4,
 }, {"DECOR"})
-AddRecipe2("turf_deeprainforest", {Ingredient("bramble_bulb", 1), Ingredient("cutgrass", 2), Ingredient("ash", 1)},
+AddRecipe2("turf_deeprainforest_nocanopy", {Ingredient("bramble_bulb", 1), Ingredient("cutgrass", 2), Ingredient("ash", 1)},
            TECH.SCIENCE_TWO, {
     numtogive = 4,
 }, {"DECOR"})

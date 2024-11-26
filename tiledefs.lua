@@ -581,6 +581,7 @@ local tro_tiledefs = {
             runsound = "dontstarve/movement/run_woods",
             walksound = "dontstarve/movement/walk_woods",
             flashpoint_modifier = 0,
+			cannotbedug = true,
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -592,7 +593,7 @@ local tro_tiledefs = {
         },
     },
 
-    DEEPRAINFOREST_NOCANOPY = {------------XX地皮
+    DEEPRAINFOREST_NOCANOPY = {------------茂密雨林地皮（玩家做的深层雨林地皮）
         tile_range       = TileRanges.HAM_LAND,
         tile_data        = {
             ground_name = "Jungle Deep Nocanopy",
@@ -604,17 +605,17 @@ local tro_tiledefs = {
             runsound = "dontstarve/movement/run_woods",
             walksound = "dontstarve/movement/walk_woods",
             flashpoint_modifier = 0,
-            cannotbedug = true, ----不能挖
+            --cannotbedug = true, 
         },
         minimap_tile_def = {
             name = "map_edge",
             noise_texture = "ham/mini_ground_deeprainforest_nocanopy",
         },
-        -- turf_def         = {
-        --     name = "deeprainforest_nocanopy",
-        --     anim = "deeprainforest",
-        --     bank_build = "turf_ham",
-        -- },
+        turf_def         = {
+             name = "deeprainforest_nocanopy",
+             anim = "deeprainforest",
+             bank_build = "turf_ham",
+        },
     },
 
     FIELDS = {------------耕种地皮
