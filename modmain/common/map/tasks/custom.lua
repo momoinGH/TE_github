@@ -405,7 +405,7 @@ Bunches.wobster_den_spawner_shore = {
                 -- We reject INVALID and IMPASSABLE out of hand.
                 -- ROCKY can appear on the mainland or moon island, so we have to look for something else.
                 if tile ~= GROUND.INVALID and tile ~= GROUND.IMPASSABLE and tile ~= GROUND.ROCKY then
-                    if tile == GROUND.WATER_MANGROVE or tile == GROUND.ANTFLOOR then
+                    if tile == GROUND.SNOWLAND or tile == GROUND.ICELAND then
                         return "rock_ice_frost"
                     elseif tile == GROUND.PEBBLEBEACH or tile == GROUND.METEOR or tile == GROUND.SHELLBEACH then
                         return "moonglass_wobster_den"
@@ -432,7 +432,7 @@ Bunches.wobster_den_spawner_shore = {
 
 AddRoom("FrostIsland_Beach", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     contents = {
         countprefabs =
@@ -461,7 +461,7 @@ AddRoom("FrostIsland_Beach", {
 
 AddRoom("FrostIsland_deciduoustree", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     contents = {
@@ -492,7 +492,7 @@ AddRoom("FrostIsland_deciduoustree", {
 
 AddRoom("FrostIsland_Mine", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     contents = {
@@ -519,7 +519,7 @@ AddRoom("FrostIsland_Mine", {
 
 AddRoom("FrostIsland_Mineboss", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     contents = {
@@ -549,7 +549,7 @@ AddRoom("FrostIsland_Mineboss", {
 
 AddRoom("FrostIsland_Mammoth", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     -- tags = { "RoadPoison" },
     internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
@@ -578,7 +578,7 @@ AddRoom("FrostIsland_Mammoth", {
 
 AddRoom("FrostIsland_Meadows", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     random_node_exit_weight = 0,
@@ -608,7 +608,7 @@ AddRoom("FrostIsland_Meadows", {
 
 AddRoom("FrostIsland_Meadowscave", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     random_node_exit_weight = 0,
@@ -638,7 +638,7 @@ AddRoom("FrostIsland_Meadowscave", {
 
 AddRoom("strange_island_maxwell", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     contents = {
         countstaticlayouts = { ["mactuskgrass"] = 1 },
@@ -655,7 +655,7 @@ AddRoom("strange_island_maxwell", {
 
 AddRoom("strange_island_maxwell_set", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     contents = {
         countstaticlayouts = {
@@ -683,7 +683,7 @@ AddRoom("strange_island_maxwell_set", {
 
 AddRoom("strange_island_canada", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     --					type = GLOBAL.NODE_TYPE.SeparatedRoom,		
     contents = {
@@ -719,7 +719,7 @@ AddRoom("strange_island_canada", {
 
 AddRoom("strange_island_canada2", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     --					type = GLOBAL.NODE_TYPE.SeparatedRoom,	
     contents = {
@@ -752,7 +752,7 @@ AddRoom("strange_island_canada2", {
 
 AddRoom("strange_island_canada3", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     type = GLOBAL.NODE_TYPE.SeparatedRoom,
     contents = {
@@ -787,7 +787,7 @@ AddRoom("strange_island_canada3", {
 
 AddRoom("frost_island_palace", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     contents = {
         --					countstaticlayouts={["strangerpigs"]=1},					
@@ -823,7 +823,7 @@ AddRoom("frost_island_palace", {
 
 AddRoom("frost_island_palace_set", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     contents = {
         distributepercent = .2,
@@ -855,7 +855,7 @@ AddRoom("frost_island_palace_set", {
 
 AddRoom("frost_island_palace_city", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     contents = {
         countstaticlayouts = { ["city"] = 1 },
@@ -885,7 +885,7 @@ AddRoom("frost_island_palace_city", {
 
 AddRoom("FrostIsland_icelake_beager", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
-    value = GROUND.ANTFLOOR,
+    value = GROUND.ICELAND,
     tags = { "RoadPoison", "frost", "sandstorm" },
     contents = {
         distributepercent = .1,
@@ -909,7 +909,7 @@ AddRoom("FrostIsland_icelake_beager", {
 
 AddRoom("FrostIsland_deeclop", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
-    value = GROUND.ANTFLOOR,
+    value = GROUND.ICELAND,
     tags = { "RoadPoison", "frost", "sandstorm" },
     contents = {
         distributepercent = .1,
@@ -933,7 +933,7 @@ AddRoom("FrostIsland_deeclop", {
 
 AddRoom("FrostIsland_icelake_cave", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
-    value = GROUND.ANTFLOOR,
+    value = GROUND.ICELAND,
     tags = { "RoadPoison", "frost", "sandstorm" },
     contents = {
         distributepercent = .15,
@@ -959,7 +959,7 @@ AddRoom("FrostIsland_icelake_cave", {
 
 AddRoom("FrostIsland_icelake", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
-    value = GROUND.ANTFLOOR,
+    value = GROUND.ICELAND,
     tags = { "RoadPoison", "frost", "sandstorm" },
     contents = {
         distributepercent = .15,
@@ -1010,7 +1010,7 @@ AddTask("FrostIsland_icelake", {
         ["FrostIsland_icelake_beager"] = 1,
         ["rock_ice_frost_lake"] = 1,
     },
-    room_bg = GROUND.ANTFLOOR,
+    room_bg = GROUND.ICELAND,
     background_room = "FrostIsland_icelake",
     colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
 })
@@ -1029,7 +1029,7 @@ AddTask("FrostIsland_Wildbeaver", {
         ["Empty_Cove"] = 2,
         ["rock_ice_frost_lake"] = 1,
     },
-    room_bg = GROUND.WATER_MANGROVE,
+    room_bg = GROUND.SNOWLAND,
     background_room = "Empty_Cove",
     cove_room_name = "Blank",
     make_loop = true,
@@ -1051,7 +1051,7 @@ AddTask("FrostIsland_Beach", {
         ["FrostIsland_Beach"] = 2,
         ["rock_ice_frost_lake"] = 1,
     },
-    room_bg = GROUND.WATER_MANGROVE,
+    room_bg = GROUND.SNOWLAND,
     background_room = "Empty_Cove",
     cove_room_name = "Empty_Cove",
     cove_room_chance = 1,
@@ -1074,7 +1074,7 @@ AddTask("FrostIsland_palace", {
         ["frost_island_palace"] = 1,
         ["rock_ice_frost_lake"] = 1,
     },
-    room_bg = GROUND.WATER_MANGROVE,
+    room_bg = GROUND.SNOWLAND,
     background_room = "Empty_Cove",
     cove_room_name = "Empty_Cove",
     cove_room_chance = 1,
@@ -1094,7 +1094,7 @@ AddTask("FrostIsland_deciduoustree", {
         ["FrostIsland_deciduoustree"] = 3,
         ["rock_ice_frost_lake"] = 1,
     },
-    room_bg = GROUND.WATER_MANGROVE,
+    room_bg = GROUND.SNOWLAND,
     background_room = "Empty_Cove",
     cove_room_name = "Empty_Cove",
     crosslink_factor = 1,
@@ -1115,7 +1115,7 @@ AddTask("FrostIsland_maxwell", {
         ["strange_island_maxwell_set"] = 1,
         ["rock_ice_frost_lake"] = 1,
     },
-    room_bg = GROUND.WATER_MANGROVE,
+    room_bg = GROUND.SNOWLAND,
     background_room = "Empty_Cove",
     cove_room_name = "Empty_Cove",
     crosslink_factor = 1,
@@ -1134,7 +1134,7 @@ AddTask("FrostIsland_Mine", {
         ["FrostIsland_Mine"] = 2,
         ["FrostIsland_Mineboss"] = 1,
     },
-    room_bg = GROUND.WATER_MANGROVE,
+    room_bg = GROUND.SNOWLAND,
     background_room = "Empty_Cove",
     cove_room_name = "Empty_Cove",
     cove_room_chance = 1,
@@ -1154,7 +1154,7 @@ AddTask("FrostIsland_Mammoth", {
         ["FrostIsland_Meadows"] = 2,
         ["rock_ice_frost_lake"] = 1,
     },
-    room_bg = GROUND.WATER_MANGROVE,
+    room_bg = GROUND.SNOWLAND,
     background_room = "FrostIsland_Meadows",
     cove_room_name = "Empty_Cove",
     cove_room_chance = 1,
@@ -17999,7 +17999,7 @@ AddTask("Frostcavetask", {
         ["frostBlueSpiderForest"] = 1,
         ["frostDropperDesolation"] = 1,
     },
-    room_bg = GROUND.WATER_MANGROVE,
+    room_bg = GROUND.SNOWLAND,
     background_room = "FrostIsland_Meadowscave",
     colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
 })
@@ -18011,7 +18011,7 @@ AddTask("frostExitRoom", {
     {
         ["frostExitRoom"] = 1,
     },
-    room_bg = GROUND.WATER_MANGROVE,
+    room_bg = GROUND.SNOWLAND,
     background_room = "BGSinkhole",
     colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
 })
@@ -18042,7 +18042,7 @@ AddRoom("frostExitRoom", {
 
 AddRoom("frostBatCave", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "frost" },
     contents = {
         countstaticlayouts = { ["IceSpiderpillar"] = 1, },
@@ -18065,7 +18065,7 @@ AddRoom("frostBatCave", {
 -- Very batty bat cave
 AddRoom("frostBattyCave", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "frost" },
     contents = {
         countprefabs = { slipstor = 1, },
@@ -18087,7 +18087,7 @@ AddRoom("frostBattyCave", {
 -- Ferny bat cave
 AddRoom("frostFernyBatCave", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "frost" },
     contents = {
         distributepercent = .25,
@@ -18109,7 +18109,7 @@ AddRoom("frostFernyBatCave", {
 
 AddRoom("frostBlueMushForest", {
     colour = { r = 0.1, g = 0.1, b = 0.8, a = 0.9 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "frost" },
     contents = {
         distributepercent = .6,
@@ -18130,7 +18130,7 @@ AddRoom("frostBlueMushForest", {
 -- Blue light meadow
 AddRoom("frostBlueMushMeadow", {
     colour = { r = 0.1, g = 0.1, b = 0.8, a = 0.9 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "frost" },
     contents = {
         distributepercent = .3,
@@ -18153,7 +18153,7 @@ AddRoom("frostBlueMushMeadow", {
 -- Dropper forest
 AddRoom("frostBlueSpiderForest", {
     colour = { r = 0.1, g = 0.1, b = 0.8, a = 0.9 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "frost" },
     contents = {
         distributepercent = .4,
@@ -18177,7 +18177,7 @@ AddRoom("frostBlueSpiderForest", {
 -- Dropper desolation
 AddRoom("frostDropperDesolation", {
     colour = { r = 0.1, g = 0.1, b = 0.8, a = 0.9 },
-    value = GROUND.WATER_MANGROVE,
+    value = GROUND.SNOWLAND,
     tags = { "frost" },
     contents = {
         countprefabs = { frosttocave = 1, },
@@ -18420,7 +18420,7 @@ AddTask("atlantidaExitRoom", {
     {
         ["atlantidaExitRoom"] = 1,
     },
-    room_bg = GROUND.WATER_MANGROVE,
+    room_bg = GROUND.SNOWLAND,
     background_room = "BGSinkhole",
     colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
 })

@@ -71,10 +71,10 @@ local function IsSpecialTile(tile)
         or (isCave and (tile == GROUND.BEACH
             or tile == GROUND.MAGMAFIELD
             or tile == GROUND.PAINTED
-            or tile == GROUND.BATTLEGROUND
+            or tile == GROUND.BATTLEGROUNDS
             or tile == GROUND.PEBBLEBEACH
-            or tile == GROUND.ANTFLOOR
-            or tile == GROUND.WATER_MANGROVE
+            or tile == GROUND.ICELAND
+            or tile == GROUND.SNOWLAND
         ))
 end
 
@@ -398,7 +398,7 @@ end
 -- 如果夏季考拉象在冰岛上生成则替换成冬季的
 local function OnSpawnedForHunt(inst, data)
     local ground = TheWorld.Map:GetTileAtPoint(inst.Transform:GetWorldPosition())
-    if ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then
+    if ground == GROUND.SNOWLAND or ground == GROUND.ICELAND then
         ReplacePrefab(inst, "koalefant_winter")
     end
 end
@@ -418,7 +418,7 @@ AddPrefabPostInitAny(function(inst)
             local map = TheWorld.Map
             local x, y, z = inst.Transform:GetWorldPosition()
             local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground == WORLD_TILES.WATER_MANGROVE or ground == WORLD_TILES.ANTFLOOR then
+            if ground == WORLD_TILES.SNOWLAND or ground == WORLD_TILES.ICELAND then
                 inst:AddTag("mostraneve")
             end
         end)
@@ -562,7 +562,7 @@ end)
 
 -- 根据地皮判断不太好，能不能给草添加特殊标签
 local CANT_PICK_TILES = {
-    [GROUND.SUBURB] = true,
+    [GROUND.MOSS] = true,
     [GROUND.FOUNDATION] = true,
     [GROUND.COBBLEROAD] = true,
     [GROUND.FIELDS] = true

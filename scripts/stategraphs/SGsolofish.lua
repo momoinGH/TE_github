@@ -263,7 +263,7 @@ local curr3 = map:GetTile(map:GetTileCoordsAtPoint(x,0,z-4))
 local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x,0,z+4))
 -------------------coloca os itens------------------------
 if (curr == GROUND.IMPASSABLE and curr1 == GROUND.IMPASSABLE and curr2 == GROUND.IMPASSABLE and curr3 == GROUND.IMPASSABLE and curr4 == GROUND.IMPASSABLE)
-or (curr == GROUND.WATER_MANGROVE and curr1 == GROUND.WATER_MANGROVE and curr2 == GROUND.WATER_MANGROVE and curr3 == GROUND.WATER_MANGROVE and curr4 == GROUND.WATER_MANGROVE)
+or (curr == GROUND.SNOWLAND and curr1 == GROUND.SNOWLAND and curr2 == GROUND.SNOWLAND and curr3 == GROUND.SNOWLAND and curr4 == GROUND.SNOWLAND)
 or (curr == GROUND.WATER_CORAL and curr1 == GROUND.WATER_CORAL and curr2 == GROUND.WATER_CORAL and curr3 == GROUND.WATER_CORAL and curr4 == GROUND.WATER_CORAL)
 or (curr == GROUND.WATER_DEEP and curr1 == GROUND.WATER_DEEP and curr2 == GROUND.WATER_DEEP and curr3 == GROUND.WATER_DEEP and curr4 == GROUND.WATER_DEEP)
 or (curr == GROUND.WATER_MEDIUM and curr1 == GROUND.WATER_MEDIUM and curr2 == GROUND.WATER_MEDIUM and curr3 == GROUND.WATER_MEDIUM and curr4 == GROUND.WATER_MEDIUM)

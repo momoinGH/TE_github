@@ -215,7 +215,7 @@ local function OnIsWinter(inst, iswinter)
             if not IsWinterRabbit(inst) then
                 inst.task = inst:DoTaskInTime(math.random() * .5, BecomeWinterRabbit)
             end
-        elseif not IsNormalRabbit(inst) and ground ~= GROUND.WATER_MANGROVE and ground ~= GROUND.ANTFLOOR then
+        elseif not IsNormalRabbit(inst) and ground ~= GROUND.SNOWLAND and ground ~= GROUND.ICELAND then
             inst.task = inst:DoTaskInTime(math.random() * .5, BecomeRabbit)
         end
     end
@@ -232,11 +232,11 @@ local function OnWake(inst)
         inst.task = nil
     end
     if not IsForcedNightmare(inst) then
-        if TheWorld.state.iswinter or ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then
+        if TheWorld.state.iswinter or ground == GROUND.SNOWLAND or ground == GROUND.ICELAND then
             if not IsWinterRabbit(inst) then
                 BecomeWinterRabbit(inst)
             end
-        elseif not IsNormalRabbit and ground ~= GROUND.WATER_MANGROVE and ground ~= GROUND.ANTFLOOR then
+        elseif not IsNormalRabbit and ground ~= GROUND.SNOWLAND and ground ~= GROUND.ICELAND then
             BecomeRabbit(inst)
         end
     end

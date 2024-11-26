@@ -56,7 +56,7 @@ local function SetOccupied(inst, occupied)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     --print("OnIsWinter", inst)
-    if TheWorld.state.iswinter or ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then
+    if TheWorld.state.iswinter or ground == GROUND.SNOWLAND or ground == GROUND.ICELAND then
         occupied = true
     else
         occupied = false
@@ -98,7 +98,7 @@ local function UpdateCampOccupied(inst)
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     --print("UpdateCampOccupied", inst, inst:GetPosition())
     if inst.data.occupied then
-        if not TheWorld.state.iswinter and ground ~= GROUND.WATER_MANGROVE and ground ~= GROUND.ANTFLOOR then
+        if not TheWorld.state.iswinter and ground ~= GROUND.SNOWLAND and ground ~= GROUND.ICELAND then
             for k in pairs(inst.data.children) do
                 if k:IsValid() and not k:IsAsleep() then
                     -- don't go away while there are children alive in the world
@@ -277,7 +277,7 @@ local function CheckSpawnHuntingParty(inst, target, houndsonly)
     local map = TheWorld.Map
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-    if inst.data.occupied and TheWorld.state.iswinter or inst.data.occupied and ground == GROUND.WATER_MANGROVE or inst.data.occupied and ground == GROUND.ANTFLOOR then
+    if inst.data.occupied and TheWorld.state.iswinter or inst.data.occupied and ground == GROUND.SNOWLAND or inst.data.occupied and ground == GROUND.ICELAND then
         SpawnHuntingParty(inst, target, houndsonly)
         UpdateLight(inst, houndsonly) -- keep light on if hounds only, otherwise off
     end
@@ -309,7 +309,7 @@ local function OnIsWinter(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
     --print("OnIsWinter", inst)
-    if TheWorld.state.iswinter or ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then
+    if TheWorld.state.iswinter or ground == GROUND.SNOWLAND or ground == GROUND.ICELAND then
         if inst:IsAsleep() then
             UpdateCampOccupied(inst)
             CheckSpawnHuntingParty(inst, nil, not TheWorld.state.isday)

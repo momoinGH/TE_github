@@ -1062,7 +1062,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERDINNER_SW = "如果我早上吃它那
 
 
 ------------------------------------------海难地皮SW turf--------------------------------
-
+--[[
 STRINGS.NAMES.TURF_SNAKESKINFLOOR = "蛇皮地毯"
 STRINGS.RECIPE_DESC.TURF_SNAKESKINFLOOR = "嗯...很奇怪。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_SNAKESKINFLOOR = "嘶嘶~时髦的体现。"
@@ -1104,8 +1104,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_BEACH = "美好的沙滩。"
 
 --STRINGS.NAMES.TURF_LAVAROCK = "熔岩石地皮"
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_LAVAROCK = "熔岩石的地皮。"
-
---[[这些是正确的地皮
+]]
+--[[这些是正确的地皮]]
 STRINGS.NAMES.TURF_ASH = "灰烬地皮"
 STRINGS.RECIPE_DESC.TURF_ASH = "不会被风吹走。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_ASH = "灰烬地皮。"
@@ -1141,7 +1141,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_VOLCANO = "烫手！"
 STRINGS.NAMES.TURF_VOLCANO_ROCK = "火山岩地皮"
 STRINGS.RECIPE_DESC.TURF_VOLCANO = "火山岩石！"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_VOLCANO = "岩石与灰烬。"
-]]
+
 
 -------------------------------------------海难制造-------------------------------------------------
 
@@ -5364,7 +5364,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOATMETAL = "极其坚固。"
 STRINGS.NAMES.BANDITBOAT = "强盗猪船"
 
 ----------------猪镇地皮
-
+--[[
 STRINGS.NAMES.TURF_LAWN = "草坪地皮"
 STRINGS.RECIPE_DESC.TURF_LAWN = "完全驯服的草皮。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_LAWN = "长满了草。"
@@ -5424,11 +5424,11 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_PAINTED = "一个采集铁矿的好地�
 STRINGS.NAMES.TURF_PLAINS = "平原地皮"
 STRINGS.RECIPE_DESC.TURF_PLAINS = "绿色草原版本！"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_PLAINS = "它有如此多的绿草！"
-
+]]
 
 STRINGS.NAMES.TURF_HAMARCHIVE = "遗迹迷宫地皮"------------------------------------------------------------------
 
---[[这些是正确的地皮
+--[[这些是正确的地皮]]
 STRINGS.NAMES.TURF_ANTCAVE = "蚁巢地皮"
 STRINGS.RECIPE_DESC.TURF_ANTCAVE = "杀光蚂蚁！"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_ANTCAVE = "啊哈哈哈，蚂蚁们。"
@@ -5484,7 +5484,21 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_PLAINS = "它有如此多的绿草！"
 STRINGS.NAMES.TURF_RAINFOREST = "雨林地皮"
 STRINGS.RECIPE_DESC.TURF_RAINFOREST = "来自雨林的地皮。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_RAINFOREST = "一块雨林地皮。"
-]]
+
+
+
+STRINGS.NAMES.TURF_LAVALAND = "熔炉地皮"
+STRINGS.RECIPE_DESC.TURF_LAVALAND = "来自熔炉的地皮。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_LAVALAND = "一块熔炉地皮。"
+
+STRINGS.NAMES.TURF_ICELAND = "冰封地皮"
+STRINGS.RECIPE_DESC.TURF_ICELAND = "冰封地皮。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_ICELAND = "冻手。"
+
+STRINGS.NAMES.TURF_SNOWLAND = "覆雪地皮"
+STRINGS.RECIPE_DESC.TURF_SNOWLAND = "覆雪地皮。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_SNOWLAND = "一块覆雪的地皮。"
+
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------熔炉forge-----------------------------------------------------------------------------------------

@@ -10,7 +10,7 @@ local prefabs =
 
 local VALID_TILES = table.invert(
     {
-        GROUND.WATER_MANGROVE,
+        GROUND.SNOWLAND,
     })
 
 local VALID_TILES2 = table.invert(

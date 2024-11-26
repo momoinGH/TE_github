@@ -35,16 +35,16 @@ local function OnUpdate(self, dt, applyhealthdelta)
         local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex + 5, ey, ez))
         local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex - 5, ey, ez))
 
-        if posicao == (GROUND.ANTFLOOR)
-            or posicao1 == (GROUND.ANTFLOOR)
-            or posicao2 == (GROUND.ANTFLOOR)
-            or posicao3 == (GROUND.ANTFLOOR)
-            or posicao4 == (GROUND.ANTFLOOR)
-            or posicao == (GROUND.WATER_MANGROVE)
-            or posicao1 == (GROUND.WATER_MANGROVE)
-            or posicao2 == (GROUND.WATER_MANGROVE)
-            or posicao3 == (GROUND.WATER_MANGROVE)
-            or posicao4 == (GROUND.WATER_MANGROVE)
+        if posicao == (GROUND.ICELAND)
+            or posicao1 == (GROUND.ICELAND)
+            or posicao2 == (GROUND.ICELAND)
+            or posicao3 == (GROUND.ICELAND)
+            or posicao4 == (GROUND.ICELAND)
+            or posicao == (GROUND.SNOWLAND)
+            or posicao1 == (GROUND.SNOWLAND)
+            or posicao2 == (GROUND.SNOWLAND)
+            or posicao3 == (GROUND.SNOWLAND)
+            or posicao4 == (GROUND.SNOWLAND)
         then
             ambient_temperature = -20
         end
@@ -60,8 +60,8 @@ local function OnUpdate(self, dt, applyhealthdelta)
 	local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex+5, ey, ez))
 	local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex-5, ey, ez))	
 	
-	if posicao == (GROUND.ANTFLOOR) or posicao1 == (GROUND.ANTFLOOR) or posicao2 == (GROUND.ANTFLOOR) or posicao3 == (GROUND.ANTFLOOR) or posicao4 == (GROUND.ANTFLOOR) or
-	posicao == (GROUND.WATER_MANGROVE) or posicao1 == (GROUND.WATER_MANGROVE) or posicao2 == (GROUND.WATER_MANGROVE) or posicao3 == (GROUND.WATER_MANGROVE) or posicao4 == (GROUND.WATER_MANGROVE) then
+	if posicao == (GROUND.ICELAND) or posicao1 == (GROUND.ICELAND) or posicao2 == (GROUND.ICELAND) or posicao3 == (GROUND.ICELAND) or posicao4 == (GROUND.ICELAND) or
+	posicao == (GROUND.SNOWLAND) or posicao1 == (GROUND.SNOWLAND) or posicao2 == (GROUND.SNOWLAND) or posicao3 == (GROUND.SNOWLAND) or posicao4 == (GROUND.SNOWLAND) then
 	ambient_temperature = -20
 	end
 	end

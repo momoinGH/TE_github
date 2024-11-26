@@ -58,7 +58,7 @@ local function workcallback(inst, worker, workleft)
 			local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z + 4))
 			contagem = contagem + 1
 			-------------------coloca os itens------------------------
-			if (curr == GROUND.WATER_MANGROVE and curr1 == GROUND.WATER_MANGROVE and curr2 == GROUND.WATER_MANGROVE and curr3 == GROUND.WATER_MANGROVE and curr4 == GROUND.WATER_MANGROVE) then
+			if (curr == GROUND.SNOWLAND and curr1 == GROUND.SNOWLAND and curr2 == GROUND.SNOWLAND and curr3 == GROUND.SNOWLAND and curr4 == GROUND.SNOWLAND) then
 				local colocaitem = SpawnPrefab(inst.prefab)
 				colocaitem.Transform:SetPosition(x, 0, z)
 				numerodeitens = numerodeitens - 1
@@ -97,7 +97,7 @@ local function onperish(inst)
 		local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z + 4))
 		contagem = contagem + 1
 		-------------------coloca os itens------------------------
-		if (curr == GROUND.WATER_MANGROVE and curr1 == GROUND.WATER_MANGROVE and curr2 == GROUND.WATER_MANGROVE and curr3 == GROUND.WATER_MANGROVE and curr4 == GROUND.WATER_MANGROVE) then
+		if (curr == GROUND.SNOWLAND and curr1 == GROUND.SNOWLAND and curr2 == GROUND.SNOWLAND and curr3 == GROUND.SNOWLAND and curr4 == GROUND.SNOWLAND) then
 			local colocaitem = SpawnPrefab(inst.prefab)
 			colocaitem.Transform:SetPosition(x, 0, z)
 			numerodeitens = numerodeitens - 1

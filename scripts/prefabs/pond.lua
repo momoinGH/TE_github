@@ -123,7 +123,7 @@ local function OnSnowLevel(inst, snowlevel)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-    if snowlevel > .02 or ground == GROUND.WATER_MANGROVE or ground == GROUND.ANTFLOOR then
+    if snowlevel > .02 or ground == GROUND.SNOWLAND or ground == GROUND.ICELAND then
         if not inst.frozen then
             inst.frozen = true
             inst.AnimState:PlayAnimation("frozen")
@@ -273,7 +273,7 @@ local function OnIsDay(inst, isday)
         local map = TheWorld.Map
         local x, y, z = inst.Transform:GetWorldPosition()
         local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-        if ground ~= GROUND.WATER_MANGROVE and ground ~= GROUND.ANTFLOOR then
+        if ground ~= GROUND.SNOWLAND and ground ~= GROUND.ICELAND then
             inst.components.childspawner:StartSpawning()
         end
     end

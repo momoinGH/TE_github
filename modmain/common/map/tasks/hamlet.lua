@@ -4290,7 +4290,7 @@ AddTask("atlantidaExitRoom", {
     {
         ["atlantidaExitRoom"] = 1,
     },
-    room_bg = GROUND.WATER_MANGROVE,
+    room_bg = GROUND.SNOWLAND,
     background_room = "BGSinkhole",
     colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
 })

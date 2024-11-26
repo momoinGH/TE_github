@@ -60,8 +60,8 @@ local function HeatFn(inst, observer)
     local posicao2 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez - 5))
     local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex + 5, ey, ez))
     local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex - 5, ey, ez))
-    if posicao == (GROUND.ANTFLOOR) or posicao1 == (GROUND.ANTFLOOR) or posicao2 == (GROUND.ANTFLOOR) or posicao3 == (GROUND.ANTFLOOR) or posicao4 == (GROUND.ANTFLOOR) or
-        posicao == (GROUND.WATER_MANGROVE) or posicao1 == (GROUND.WATER_MANGROVE) or posicao2 == (GROUND.WATER_MANGROVE) or posicao3 == (GROUND.WATER_MANGROVE) or posicao4 == (GROUND.WATER_MANGROVE) then
+    if posicao == (GROUND.ICELAND) or posicao1 == (GROUND.ICELAND) or posicao2 == (GROUND.ICELAND) or posicao3 == (GROUND.ICELAND) or posicao4 == (GROUND.ICELAND) or
+        posicao == (GROUND.SNOWLAND) or posicao1 == (GROUND.SNOWLAND) or posicao2 == (GROUND.SNOWLAND) or posicao3 == (GROUND.SNOWLAND) or posicao4 == (GROUND.SNOWLAND) then
         temperaturaaual = -20
     end
     local range = GetRangeForTemperature(inst.components.temperature:GetCurrent(), temperaturaaual)
@@ -133,8 +133,8 @@ local function TemperatureChange(inst, data)
     local posicao2 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez - 5))
     local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex + 5, ey, ez))
     local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex - 5, ey, ez))
-    if posicao == (GROUND.ANTFLOOR) or posicao1 == (GROUND.ANTFLOOR) or posicao2 == (GROUND.ANTFLOOR) or posicao3 == (GROUND.ANTFLOOR) or posicao4 == (GROUND.ANTFLOOR) or
-        posicao == (GROUND.WATER_MANGROVE) or posicao1 == (GROUND.WATER_MANGROVE) or posicao2 == (GROUND.WATER_MANGROVE) or posicao3 == (GROUND.WATER_MANGROVE) or posicao4 == (GROUND.WATER_MANGROVE) then
+    if posicao == (GROUND.ICELAND) or posicao1 == (GROUND.ICELAND) or posicao2 == (GROUND.ICELAND) or posicao3 == (GROUND.ICELAND) or posicao4 == (GROUND.ICELAND) or
+        posicao == (GROUND.SNOWLAND) or posicao1 == (GROUND.SNOWLAND) or posicao2 == (GROUND.SNOWLAND) or posicao3 == (GROUND.SNOWLAND) or posicao4 == (GROUND.SNOWLAND) then
         ambient_temp = -20
     end
     local cur_temp = inst.components.temperature:GetCurrent()
@@ -295,8 +295,8 @@ local function fn()
         local posicao2 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez - 5))
         local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex + 5, ey, ez))
         local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex - 5, ey, ez))
-        if posicao == (GROUND.ANTFLOOR) or posicao1 == (GROUND.ANTFLOOR) or posicao2 == (GROUND.ANTFLOOR) or posicao3 == (GROUND.ANTFLOOR) or posicao4 == (GROUND.ANTFLOOR) or
-            posicao == (GROUND.WATER_MANGROVE) or posicao1 == (GROUND.WATER_MANGROVE) or posicao2 == (GROUND.WATER_MANGROVE) or posicao3 == (GROUND.WATER_MANGROVE) or posicao4 == (GROUND.WATER_MANGROVE) then
+        if posicao == (GROUND.ICELAND) or posicao1 == (GROUND.ICELAND) or posicao2 == (GROUND.ICELAND) or posicao3 == (GROUND.ICELAND) or posicao4 == (GROUND.ICELAND) or
+            posicao == (GROUND.SNOWLAND) or posicao1 == (GROUND.SNOWLAND) or posicao2 == (GROUND.SNOWLAND) or posicao3 == (GROUND.SNOWLAND) or posicao4 == (GROUND.SNOWLAND) then
             inst.components.temperature.current = -20
         end
     end)
