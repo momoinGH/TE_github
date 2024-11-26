@@ -12,8 +12,9 @@
         <Element name="mutator_frost.tex" u1="0.501953" u2="0.748047" v1="0.501953" v2="0.748047"/>
         <Element name="snowitem.tex" u1="0.751953" u2="0.998047" v1="0.501953" v2="0.748047"/>
         <Element name="spider_snow2.tex" u1="0.501953" u2="0.748047" v1="0.251953" v2="0.498047"/>
-        <Element name="turf_snow.tex" u1="0.501953" u2="0.748047" v1="0.00195313" v2="0.248047"/>
-        <Element name="wildbeaver_house.tex" u1="0.751953" u2="0.998047" v1="0.251953" v2="0.498047"/>
+        <Element name="turf_iceland.tex" u1="0.501953" u2="0.748047" v1="0.00195313" v2="0.248047"/>
+        <Element name="turf_snowland.tex" u1="0.751953" u2="0.998047" v1="0.251953" v2="0.498047"/>
+        <Element name="wildbeaver_house.tex" u1="0.751953" u2="0.998047" v1="0.00195313" v2="0.248047"/>
     </Elements>
     <StraightAlpha>false</StraightAlpha>
 </Atlas>
