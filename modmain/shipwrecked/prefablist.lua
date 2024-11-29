@@ -162,7 +162,6 @@ PrefabFiles = {
   "crabhole",
   "treeguard",
   "treeguard_coconut",
-  "warningshadow",
   "slotmachine",
   "sharkitten",
   "sharkittenspawner",

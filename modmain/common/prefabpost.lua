@@ -771,3 +771,18 @@ AddPrefabPostInit("trinket_1", function() -- 定义在prefab里面，延迟修�
         end
     end
 end)
+
+----------------------------------------------------------------------------------------------------
+
+AddPrefabPostInit("warningshadow", function(inst)
+    if not TheWorld.ismastersim then return end
+
+    inst:AddComponent("sizetweener")
+    inst:AddComponent("colourtweener")
+    inst.shrink = function(inst, times, startsize, endsize)
+        inst.AnimState:SetMultColour(1, 1, 1, .33)
+        inst.Transform:SetScale(startsize, startsize, startsize)
+        inst.components.colourtweener:StartTween({1, 1, 1, .75}, times)
+        inst.components.sizetweener:StartTween(.5, times, inst.Remove)
+    end
+end)
