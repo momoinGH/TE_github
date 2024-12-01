@@ -13,7 +13,7 @@ local loot =
 {
     "bamboo",
     "bamboo",
-    "messagebottleempty",
+    "messagebottleempty_sw",
     "bioluminescence",
     "bioluminescence",
 }
@@ -64,12 +64,12 @@ end
 local function OnCollide(inst, data)
     inst.SoundEmitter:PlaySound(HIT_SOUND)
 end
-
+--[[
 local function onbuilt(inst)
     inst.sg:GoToState("place")
     --inst.AnimState:PlayAnimation("place")
     --inst.AnimState:PushAnimation("idle", true)
-end
+end]]
 
 local function OnPhysicsWake(inst)
     inst.components.boatphysics:StartUpdating()
@@ -183,7 +183,7 @@ local function fn(Sim)
     end)
 
     inst:ListenForEvent("on_collide", OnCollide)
-    inst:ListenForEvent("onbuilt", onbuilt)
+    --inst:ListenForEvent("onbuilt", onbuilt)
 
     inst:SetStateGraph("SGbuoy")
 

@@ -106,12 +106,12 @@ local function Repair(inst)
 		end)
 	end
 end
-
+--[[
 local function onbuilt(inst)
 	inst.AnimState:PlayAnimation("place")
 	inst.AnimState:PushAnimation("idle", true)
 	inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/shipyard/craft")
-end
+end]]
 
 local function OnPercentUsedChange(inst, data)
 	inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/machine_fuel")
@@ -183,7 +183,7 @@ local function fn()
 	inst:AddComponent("simpleperiodtask")
 	inst.components.simpleperiodtask:DoPeriodicTask("repair", 0.5, Repair)
 
-	inst:ListenForEvent("onbuilt", onbuilt)
+	--inst:ListenForEvent("onbuilt", onbuilt)
 	inst:ListenForEvent("percentusedchange", OnPercentUsedChange)
 	return inst
 end

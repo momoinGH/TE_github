@@ -117,13 +117,13 @@ local function OnDay(inst)
         end
     end
 end
-
+--[[
 local function onbuilt(inst)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/ballphin_house_craft")
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_medium")
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("idle")
-end
+end]]
 
 
 local function fn(Sim)
@@ -198,7 +198,7 @@ local function fn(Sim)
     end)
 
 
-    inst:ListenForEvent("onbuilt", onbuilt)
+    --inst:ListenForEvent("onbuilt", onbuilt)
     inst:DoTaskInTime(math.random(), function()
         --print(inst, "spawn check day")
         if TheWorld.state.isday then
