@@ -9,7 +9,9 @@ extend_tags文件实现了标签扩展，tro_打头的标签可以随意给玩�
 
 ----------------------------------------------------------------------------------------------------
 
-require("knownmodcheck") -- 检测不兼容模组并报错崩溃
+require("tools/worldutil")
+require("tools/standardcomponents")
+require("knownmodcheck")        -- 检测不兼容模组并报错崩溃
 require("components/animstate") -- AnimState 增强
 
 --- 科雷modmain的定义抄过来，不过文件不存在时不提醒
@@ -55,6 +57,7 @@ local function Modimport(dirc)
 	SafeModImport("modmain/" .. dirc .. "/rpc")               --RPC的注册
 	SafeModImport("modmain/" .. dirc .. "/input")             --客机操作的监听
 	SafeModImport("modmain/" .. dirc .. "/modwiki")           --图鉴wiki定义
+	SafeModImport("modmain/" .. dirc .. "/skins")             --物品皮肤
 
 	if PrefabFiles and #PrefabFiles > 0 then
 		ALL_PREFAB_FILES = ArrayUnion(ALL_PREFAB_FILES, PrefabFiles)
@@ -128,7 +131,7 @@ modimport "modmain/common/interiorminimap"
 
 modimport("scripts/cooking_tropical")
 
-modimport "modmain/pro_extend_tags"     --标签扩展，pro_开头的标签可以随便给玩家加
-modimport "modmain/pro_componentaction" --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
+modimport "modmain/pro_extend_tags"                    --标签扩展，pro_开头的标签可以随便给玩家加
+modimport "modmain/pro_componentaction"                --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
 
 modimport "modmain/common/sw_fertilizer_nutrient_defs" --肥料值定义

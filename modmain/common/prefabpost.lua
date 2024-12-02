@@ -5,6 +5,10 @@ local Utils = require("tropical_utils/utils")
 ----------------------------------------------------------------------------------------------------
 
 -- 太长的单独写一个文件了
+modimport "modmain/common/natureskin_variants"
+modimport "modmain/common/world_map"
+modimport "modmain/common/entityscript"
+
 modimport "modmain/common/components/locomotor"
 modimport "modmain/common/components/birdspawner"
 modimport "modmain/common/components/map"
@@ -15,6 +19,8 @@ modimport "modmain/common/components/builder"
 modimport "modmain/common/components/inventoryitem"
 modimport "modmain/common/components/walkableplatformplayer"
 modimport "modmain/common/components/playeractionpicker"
+
+
 
 modimport "modmain/common/prefabs/oceanfishdef"
 modimport "modmain/common/prefabs/allplayers"
@@ -760,7 +766,7 @@ end)
 ----------------------------------------------------------------------------------------------------
 
 -- 让原版坟墓也能挖出海难玩具
-local trinkets_sw = {"trinket_sw_23"}
+local trinkets_sw = { "trinket_sw_23" }
 AddPrefabPostInit("trinket_1", function() -- 定义在prefab里面，延迟修改
     local PickRandomTrinket = GLOBAL.PickRandomTrinket
     GLOBAL.PickRandomTrinket = function()
@@ -782,7 +788,7 @@ AddPrefabPostInit("warningshadow", function(inst)
     inst.shrink = function(inst, times, startsize, endsize)
         inst.AnimState:SetMultColour(1, 1, 1, .33)
         inst.Transform:SetScale(startsize, startsize, startsize)
-        inst.components.colourtweener:StartTween({1, 1, 1, .75}, times)
+        inst.components.colourtweener:StartTween({ 1, 1, 1, .75 }, times)
         inst.components.sizetweener:StartTween(.5, times, inst.Remove)
     end
 end)
