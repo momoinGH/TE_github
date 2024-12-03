@@ -83,6 +83,7 @@ function Poisonable:OnUpdate(dt)
 	-- poison bubbles fx, fixed by EvenMr
 	if not self.poisonfx and self.dmg < 0 then
 		self.poisonfx = SpawnPrefab("poisonbubble_level1_loop")
+		self.inst:AddChild(self.poisonfx)
 		local cmp = self.inst.components
 		if cmp.burnable and #cmp.burnable.fxdata > 0 then
 			local symbol = cmp.burnable.fxdata[1].follow
