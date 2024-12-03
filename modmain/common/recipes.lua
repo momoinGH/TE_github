@@ -1007,20 +1007,17 @@ AddRecipe2("pig_shop_tinker_entrance", {Ingredient("magnifying_glass", 2), Ingre
     placer = "pig_shop_tinker_placer",
     image = "pig_shop_tinker.png",
 }, {"CITY"})
-AddRecipe2("hedge_block", {Ingredient("clippings", 3), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
+AddRecipe2("hedge_block_item", {Ingredient("clippings", 9), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
     nounlock = true,
-    min_spacing = 1,
-    placer = "hedge_block_placer",
+    numtogive = 3,
 }, {"CITY"})
-AddRecipe2("hedge_cone", {Ingredient("clippings", 3), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
+AddRecipe2("hedge_cone_item", {Ingredient("clippings", 9), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
     nounlock = true,
-    min_spacing = 1,
-    placer = "hedge_cone_placer",
+    numtogive = 3,
 }, {"CITY"})
-AddRecipe2("hedge_layered", {Ingredient("clippings", 3), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
+AddRecipe2("hedge_layered_item", {Ingredient("clippings", 9), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
     nounlock = true,
-    min_spacing = 1,
-    placer = "hedge_layered_placer",
+    numtogive = 3,
 }, {"CITY"})
 AddRecipe2("lawnornament_1", {Ingredient("cutstone", 2), Ingredient("oinc", 7)}, TECH.CITY_TWO, {
     nounlock = true,
