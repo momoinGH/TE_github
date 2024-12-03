@@ -1,6 +1,8 @@
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
 _G = GLOBAL
 
+require("tools/tableutil") ----一些表相关的工具函数
+
 modimport "modmain/gentuning"
 modimport "tiledefs"
 

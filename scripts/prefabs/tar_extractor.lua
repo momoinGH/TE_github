@@ -62,7 +62,7 @@ local function startTar(inst)
 	inst.task_tar = inst:DoTaskInTime(RESOURSE_TIME, makeTar)
 	inst.task_tar_time = GetTime()
 end
-
+--[[
 local function onBuilt(inst)
 	inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/tar_extractor/craft")
 	inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_shark/splash_large")
@@ -77,7 +77,7 @@ local function onBuilt(inst)
 			tarpit.components.inspectable.inspectdisabled = true
 		end
 	end
-end
+end]]
 
 local function placeTestFn(inst, pt)
 	local range = 1
@@ -334,10 +334,10 @@ local function fn(Sim)
 	--MakeLargePropagator(inst)
 	inst.OnSave = onsave
 	inst.OnLoad = onload
-
+    --[[
 	inst:ListenForEvent("onbuilt", function()
 		onBuilt(inst)
-	end)
+	end)]]
 
 	inst.startTar = startTar
 	inst.OnRemoveEntity = onRemove

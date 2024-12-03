@@ -141,12 +141,12 @@ local function fn()
             return t[sec]
         end
     end
-
+    --[[
     inst:ListenForEvent("onbuilt", function()
         anim:PlayAnimation("place")
         anim:PushAnimation("idle_water", true)
         inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
-    end)
+    end)]]
 
     return inst
 end

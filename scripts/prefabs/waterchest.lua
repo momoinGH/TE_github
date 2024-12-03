@@ -51,12 +51,12 @@ local function onhit(inst, worker)
         end
     end
 end
-
+--[[
 local function onbuilt(inst)
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("closed", true)
     inst.SoundEmitter:PlaySound("dontstarve/common/chest_craft")
-end
+end]]
 
 local function onsave(inst, data)
     if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() or inst:HasTag("burnt") then
@@ -124,7 +124,7 @@ local function MakeChest(name, bank, build, indestructible, custom_postinit, pre
             MakeMediumPropagator(inst)
         end
 
-        inst:ListenForEvent("onbuilt", onbuilt)
+        --inst:ListenForEvent("onbuilt", onbuilt)
         MakeSnowCovered(inst)
 
         inst.OnSave = onsave

@@ -139,7 +139,7 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
             inst._activetask = inst:DoTaskInTime(inst.AnimState:GetCurrentAnimationLength() + 2 * FRAMES, doneact)
         end
     end
-
+    --[[
     local function onbuilt(inst, data)
         inst:_PlayAnimation("place")
         inst:_PushAnimation("idle", false)
@@ -148,7 +148,7 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
         if name == "researchlab5" then
             AwardPlayerAchievement("build_researchlab5", data.builder)
         end
-    end
+    end]]
 
     local function fn()
         local inst = CreateEntity()
@@ -200,7 +200,7 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
         inst.components.wardrobe:SetCanBeShared(true)
         inst.components.wardrobe:SetRange(TUNING.RESEARCH_MACHINE_DIST + .1)
 
-        inst:ListenForEvent("onbuilt", onbuilt)
+        --inst:ListenForEvent("onbuilt", onbuilt)
 
         inst:AddComponent("lootdropper")
         inst.components.lootdropper:SetLoot(loot)

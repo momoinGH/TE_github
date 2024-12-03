@@ -88,6 +88,16 @@ STRINGS.ACTIONS.LANTERNON                               = "开灯"
 STRINGS.ACTIONS.PEER                                    = "观察"
 STRINGS.ACTIONS.BOATCANNON                              = "发射"
 STRINGS.ACTIONS.BOATDISMOUNT                            = "上岸"
+
+STRINGS.ACTIONS.DEPLOY.DEPLOYBUOY                       = "部署"
+STRINGS.ACTIONS.DEPLOY.DEPLOYFISH_FARM                  = "部署"
+STRINGS.ACTIONS.DEPLOY.DEPLOYBALLPHINHOUSE              = "部署"
+STRINGS.ACTIONS.DEPLOY.DEPLOYSEARCHLAB5                 = "部署"
+STRINGS.ACTIONS.DEPLOY.DEPLOYTAR_EXTRATOR               = "部署"
+STRINGS.ACTIONS.DEPLOY.DEPLOYSEA_CHIMINEA               = "部署"
+STRINGS.ACTIONS.DEPLOY.DEPLOYWATERCHEST                 = "部署"
+STRINGS.ACTIONS.DEPLOY.DEPLOYSEA_YARD                   = "部署"
+
 --ham
 STRINGS.ACTIONS.SMELT                                   = "熔炼"
 STRINGS.ACTIONS.SHEAR                                   = "剪"

@@ -59,7 +59,15 @@ STRINGS.TABS.HOME                                                               
 STRINGS.TABS.CITY                                                               = "City Planning"
 STRINGS.TABS.GODDESSTAB                                                         = "GODDESSTAB"
 STRINGS.TABS.GORGE                                                              = "GORGE"
-
+--actions
+STRINGS.ACTIONS.DEPLOY.DEPLOYBUOY                       = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYFISH_FARM                  = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYBALLPHINHOUSE              = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYSEARCHLAB5                 = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYTAR_EXTRATOR               = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYSEA_CHIMINEA               = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYWATERCHEST                 = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYSEA_YARD                   = "Deploy"
 ----------------------------- Name of Things -----------------------------
 STRINGS.NAMES.WILBUR                                                            = "Wilbur"
 STRINGS.NAMES.WOODLEGS                                                          = "Woodlegs"
