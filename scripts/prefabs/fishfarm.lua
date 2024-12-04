@@ -218,7 +218,8 @@ local function fn()
     inst.components.harvestable:SetGrowTime((math.random() * (0.75 - 0.5) + 0.5) * TUNING.TOTAL_DAY_TIME)
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLootSetupFn(lootsetfn)
+    --inst.components.lootdropper:SetLootSetupFn(lootsetfn)
+    inst.components.lootdropper:SetLoot(loots)
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
