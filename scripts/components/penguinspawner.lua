@@ -308,7 +308,7 @@ end
         local player = playerdata.player
         if player and player.components.areaaware then
             if player.components.areaaware:CurrentlyInTag("hamlet")
-                or player.components.areaaware:CurrentlyInTag("tropical")
+                or player.components.areaaware:CurrentlyInTag("shipwrecked")
                 or player.components.areaaware:CurrentlyInTag("ForceDisconnected")
             then
                 return

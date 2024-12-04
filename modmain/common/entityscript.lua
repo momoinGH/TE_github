@@ -40,7 +40,8 @@ end
 ----area aware related--------------------
 function EntityScript:AwareInTropicalArea() ----减少计算量
     return self.components.areaaware and
-        (self.components.areaaware:CurrentlyInTag("tropical")
+        (self.components.areaaware:CurrentlyInTag("shipwrecked")
+            or self.components.areaaware:CurrentlyInTag("hamlet")
             or self.components.areaaware:CurrentlyInTag("ForceDisconnected")) and
         true or false
 end

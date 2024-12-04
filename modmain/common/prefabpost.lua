@@ -55,7 +55,7 @@ end)
 -- 用于控制熊大和巨鹿刷新条件，组件没有可以hook的方法，只好通过该方式来阻止生成
 local function AreaAwareCurrentlyInTagBefore(self, tag)
     if tag == "nohasslers" and (
-            self:CurrentlyInTag("tropical")
+            self:CurrentlyInTag("shipwrecked")
             or self:CurrentlyInTag("hamlet")
             or self:CurrentlyInTag("frost")
         )

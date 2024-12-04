@@ -70,7 +70,7 @@ local function OnUpdate(self, dt, applyhealthdelta)
     if self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("frost") then
         ambient_temperature = -20
     elseif TheWorld.state.iswinter and TUNING.tropical.only_shipwrecked or
-        TheWorld.state.iswinter and self.inst and self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("tropical") or
+        TheWorld.state.iswinter and self.inst and self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("shipwrecked") or
         TheWorld.state.iswinter and self.inst and self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("hamlet")
     then
         -----------------------------------------------mais quente no inverno ------------------------------
@@ -92,7 +92,7 @@ local function OnUpdate(self, dt, applyhealthdelta)
         ambient_temperature = TheWorld.state.temperature - 30
     end
     if TheWorld.state.issummer and TUNING.tropical.only_shipwrecked or
-        TheWorld.state.issummer and self.inst and self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("tropical") then
+        TheWorld.state.issummer and self.inst and self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("shipwrecked") then
         ambient_temperature = TheWorld.state.temperature - 10
     end
     ----------------------ajusta temperatura da casa---------------------------

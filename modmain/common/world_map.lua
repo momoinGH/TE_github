@@ -54,7 +54,7 @@ end
 
 
 Map.IsTropicalAreaAtPoint = function(self, x, y, z)
-    local node = self:FindVisualNodeAtPoint(x, y, z, "tropical")
+    local node = self:FindVisualNodeAtPoint(x, y, z, "shipwrecked")
         or self:FindVisualNodeAtPoint(x, y, z, "ForceDisconnected")
 
     if node ~= nil then

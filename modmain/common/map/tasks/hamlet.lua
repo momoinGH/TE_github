@@ -601,7 +601,7 @@ AddRoom("BG_deeprainforest_base", {
         distributeprefabs =
         {
             rainforesttree = 2, --4,
-            tree_pillar = 0.5, --0.5,
+            tree_pillar = 0.5,  --0.5,
             nettle = 0.12,
             flower_rainforest = 1,
             deep_jungle_fern_noise = 1,
@@ -641,7 +641,7 @@ AddRoom("deeprainforest_spider_monkey_nest", {
         distributeprefabs =
         {
             rainforesttree = 3, --4,
-            tree_pillar = 1, --0.5,
+            tree_pillar = 1,    --0.5,
             nettle = 0.12,
             flower_rainforest = 1,
             --										lightrays_jungle = 1.2,								
@@ -2004,7 +2004,7 @@ AddRoom("deeprainforest_base_nobatcave", {
         distributeprefabs =
         {
             rainforesttree = 2, --4,
-            tree_pillar = 0.5, --0.5,
+            tree_pillar = 0.5,  --0.5,
             nettle = 0.12,
             flower_rainforest = 1,
             --	berrybush = 1,
@@ -2038,7 +2038,7 @@ AddRoom("deeprainforest_base_nobatcave_PigRuinsExit4", {
         distributeprefabs =
         {
             rainforesttree = 2, --4,
-            tree_pillar = 0.5, --0.5,
+            tree_pillar = 0.5,  --0.5,
             nettle = 0.12,
             flower_rainforest = 1,
             --	berrybush = 1,
@@ -3471,7 +3471,7 @@ AddRoom("HamGreenMushForest", {
             spider_monkey_tree = 1,
             spider_monkey = 1,
             rainforesttree = 6, --4,
-            pillar_cave = 1, --0.5,
+            pillar_cave = 1,    --0.5,
             flower_rainforest = 4,
             berrybush_juicy = 2,
             cavelight = 0.6,
@@ -3505,7 +3505,7 @@ AddRoom("HamGreenMushPonds", {
             spider_monkey_tree = 1,
             spider_monkey = 1,
             rainforesttree = 6, --4,
-            pillar_cave = 1, --0.5,
+            pillar_cave = 1,    --0.5,
             flower_rainforest = 4,
             berrybush_juicy = 2,
             cavelight = 0.6,
@@ -3546,7 +3546,7 @@ AddRoom("HamGreenMushSinkhole", {
             spider_monkey_tree = 1,
             spider_monkey = 1,
             rainforesttree = 6, --4,
-            pillar_cave = 1, --0.5,
+            pillar_cave = 1,    --0.5,
             flower_rainforest = 4,
             berrybush_juicy = 2,
             cavelight = 0.6,
@@ -3580,7 +3580,7 @@ AddRoom("HamGreenMushMeadow", {
             spider_monkey_tree = 1,
             spider_monkey = 1,
             rainforesttree = 6, --4,
-            pillar_cave = 1, --0.5,
+            pillar_cave = 1,    --0.5,
             flower_rainforest = 4,
             berrybush_juicy = 2,
             cavelight = 0.6,
@@ -3623,7 +3623,7 @@ AddRoom("HamGreenMushRabbits", {
             spider_monkey_tree = 1,
             spider_monkey = 1,
             rainforesttree = 6, --4,
-            pillar_cave = 1, --0.5,
+            pillar_cave = 1,    --0.5,
             flower_rainforest = 4,
             berrybush_juicy = 2,
             cavelight = 0.6,
@@ -3661,7 +3661,7 @@ AddRoom("HamGreenMushNoise", {
             spider_monkey_tree = 1,
             spider_monkey = 1,
             rainforesttree = 6, --4,
-            pillar_cave = 1, --0.5,
+            pillar_cave = 1,    --0.5,
             flower_rainforest = 4,
             berrybush_juicy = 2,
             cavelight = 0.6,
@@ -3693,7 +3693,7 @@ AddRoom("HamBGGreenMush", {
             spider_monkey_tree = 1,
             spider_monkey = 1,
             rainforesttree = 6, --4,
-            pillar_cave = 1, --0.5,
+            pillar_cave = 1,    --0.5,
             flower_rainforest = 4,
             berrybush_juicy = 2,
             cavelight = 0.6,
@@ -4057,7 +4057,7 @@ AddTask("underwaterdivide", {
 AddRoom("VolcanoObsidian", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = GROUND.VOLCANO_ROCK,
-    tags = { "RoadPoison", "tropical" },
+    tags = { "RoadPoison", "shipwrecked" },
     contents = {
         --									countstaticlayouts={["beaverking"]=1}, --adds 1 per room
         distributepercent = .2,

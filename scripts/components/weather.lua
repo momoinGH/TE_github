@@ -1026,7 +1026,7 @@ return Class(function(self, inst)
                 nevenailha = 10
             end
             if (TUNING.tropical.kindofworld ~= 15) or (_activatedplayer and _activatedplayer.components.areaaware
-                    and (_activatedplayer.components.areaaware:CurrentlyInTag("tropical")
+                    and (_activatedplayer.components.areaaware:CurrentlyInTag("shipwrecked")
                         or _activatedplayer.components.areaaware:CurrentlyInTag("hamlet")
                         or _activatedplayer.components.areaaware:CurrentlyInTag("ForceDisconnected")))
             then
@@ -1092,7 +1092,7 @@ return Class(function(self, inst)
         if _snowlevel:value() > 0 and (_temperature < 0 or _wetness:value() < 5) then
             --###
             if (TUNING.tropical.kindofworld ~= 15) or (_activatedplayer and _activatedplayer.components.areaaware
-                    and (_activatedplayer.components.areaaware:CurrentlyInTag("tropical")
+                    and (_activatedplayer.components.areaaware:CurrentlyInTag("shipwrecked")
                         or _activatedplayer.components.areaaware:CurrentlyInTag("hamlet")
                         or _activatedplayer.components.areaaware:CurrentlyInTag("ForceDisconnected"))
                 )

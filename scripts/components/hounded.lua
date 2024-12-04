@@ -329,7 +329,7 @@ return Class(function(self, inst)
 						_spawndata.base_prefab = "icehound"
 						_spawndata.winter_prefab = "icehound"
 						_spawndata.summer_prefab = "icehound"
-					elseif node.tags ~= nil and table.contains(node.tags, "tropical") then
+					elseif node.tags ~= nil and table.contains(node.tags, "shipwrecked") then
 						_spawndata.base_prefab = "crocodog"
 						_spawndata.winter_prefab = "watercrocodog"
 						_spawndata.summer_prefab = "poisoncrocodog"

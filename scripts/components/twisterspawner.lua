@@ -64,7 +64,7 @@ return Class(function(self, inst)
 		return player:IsValid()
 			and TheWorld.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition())
 			and area:GetCurrentArea() ~= nil
-			and area:CurrentlyInTag("tropical")
+			and area:CurrentlyInTag("shipwrecked")
 	end
 
 	local function PickPlayer()
