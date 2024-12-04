@@ -1,6 +1,7 @@
 local assets = {
     Asset("ANIM", "anim/armor_vortex_cloak.zip"),
-    Asset("ANIM", "anim/cloak_fx.zip")
+    Asset("ANIM", "anim/cloak_fx.zip"),
+    Asset("ANIM", "anim/ui_krampusbag_2x5.zip"),
 }
 
 local equipslot = EQUIPSLOTS.BACK or EQUIPSLOTS.BODY -- 四格中设定为背包
