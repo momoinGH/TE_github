@@ -28,6 +28,7 @@ local function fn()
     inst.AnimState:PlayAnimation("anim")
 
     inst:AddTag("wood")
+    inst:AddTag("vented")
     --	inst:AddTag("aquatic")
     inst.foleysound = "dontstarve/movement/foley/logarmour"
 
