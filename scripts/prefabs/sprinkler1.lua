@@ -588,7 +588,7 @@ end
 
 
 
-return Prefab("sprinkler1", fn, assets, prefabs),
+return Prefab("sprinkler", fn, assets, prefabs),
 	MakePlacer("sprinkler1_placer", "sprinkler_placement", "sprinkler_placement", "idle", true, nil, nil, 1.4, nil,
 		nil, nil, nil, nil, nil)
---MakePlacer("sprinkler1_placer", "sprinkler_placement", "sprinkler_placement", "idle", true, nil, nil, 1.4, nil, nil, nil, nil, nil, PlaceTestFn)
+--MakePlacer("sprinkler_placer", "sprinkler_placement", "sprinkler_placement", "idle", true, nil, nil, 1.4, nil, nil, nil, nil, nil, PlaceTestFn)

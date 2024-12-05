@@ -799,7 +799,7 @@ if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.multiplayerportal == 15 or
                TECH.SCIENCE_TWO, {
         placer = "basefan_placer",
     }, {"STRUCTURES", "SUMMER"})
-    AddRecipe2("sprinkler1", {Ingredient("alloy", 2), Ingredient("bluegem", 1), Ingredient("ice", 6)}, TECH.SCIENCE_TWO,
+    AddRecipe2("sprinkler", {Ingredient("alloy", 2), Ingredient("bluegem", 1), Ingredient("ice", 6)}, TECH.SCIENCE_TWO,
                {
         placer = "sprinkler1_placer",
     }, {"GARDENING"})
@@ -1530,7 +1530,7 @@ SortAfter("honeychest", "saltbox", "STRUCTURES")
 SortAfter("honeychest", "saltbox", "CONTAINERS")
 SortAfter("honeychest", "saltbox", "COOKING")
 SortAfter("honeychest", "beebox", "GARDENING")
-SortBefore("sprinkler1", "beebox", "GARDENING")
+SortBefore("sprinkler", "beebox", "GARDENING")
 
 SortAfter("porto_lograft", "seafaring_prototyper", "SEAFARING")
 SortAfter("porto_raft", "porto_lograft", "SEAFARING")
