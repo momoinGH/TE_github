@@ -9733,5 +9733,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_22 = "I'm sure someone would like
 STRINGS.NAMES.TRINKET_SW_23 = "Broken AAC Device"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_23 = "Someone lost their words."
 
+STRINGS.NAMES.TURF_PIGRUINS_BLUE = "Blue Pattern Ancient Stone Turf"
+STRINGS.RECIPE_DESC.TURF_PIGRUINS_BLUE = "From ancient ruins."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_PIGRUINS_BLUE = "fancy broken stone brick."
+
 modimport "modmain/common/languages/stringscreeps"
 modimport "modmain/common/languages/wurt_quotes"
