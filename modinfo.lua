@@ -8,7 +8,17 @@ local function en_zh_zht(en, zh, zht)
 	end -- 英文
 end
 
-name = en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "熱帶體驗 | 船難哈姆雷特生態：來自域外")
+folder_name = folder_name or "workshop-"
+
+local isdev = folder_name:len() < 9 or not folder_name:sub(1, 9) == "workshop"
+
+local function pub_dev(pub, dev)
+    return isdev and dev or pub
+end
+
+name = pub_dev(en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "熱帶體驗 | 船難哈姆雷特生態：來自域外"),
+               en_zh_zht("Tropical Experience | DEV", "热带体验 | 开发版", "熱帶體驗 | 開發版"))
+
 description = en_zh_zht([[
 version：3.83
 Attention: We added a complement to this mod.
