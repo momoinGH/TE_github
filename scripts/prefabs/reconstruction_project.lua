@@ -23,12 +23,7 @@ SetSharedLootTable('lawnornamentsdrop',
         { "oinc", 1.00 },
         { "oinc", 1.00 },
         { "oinc", 1.00 },
-        { "oinc", 1.00 },
-        { "oinc", 1.00 },
-        { "oinc", 1.00 },
-        { "oinc", 1.00 },
-        { "oinc", 1.00 },
-        { "oinc", 1.00 },
+        { "cutstone", 1.00 },
     })
 
 SetSharedLootTable('lamp_post',
@@ -91,7 +86,14 @@ local function onhammered(inst, worker)
         SpawnPrefab("collapse_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
         inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
 
-        if inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary" then
+        if inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary01"
+        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary02"
+        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary03"
+        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary04"
+        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary05"
+        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary06"
+        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary07"
+        then
             inst.components.lootdropper:SetChanceLootTable('lawnornamentsdrop')
         end
 

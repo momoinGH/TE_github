@@ -28,9 +28,12 @@ local function onhit(inst, worker)
     inst.AnimState:PlayAnimation("hit")
     inst.AnimState:PushAnimation("idle", false)
 
-    local fx = SpawnPrefab("robot_leaf_fx")
-    local x, y, z = inst.Transform:GetWorldPosition()
-    fx.Transform:SetPosition(x, y + math.random() * 0.5, z)
+    local isLawnornament7 = inst.prefab == "lawnornament_7"
+    if not isLawnornament7 then
+        local fx = SpawnPrefab("robot_leaf_fx")
+        local x, y, z = inst.Transform:GetWorldPosition()
+        fx.Transform:SetPosition(x, y + math.random() * 0.5, z)
+    end
 
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/vine_hack")
 end
