@@ -1,24 +1,3 @@
-local assets =
-{
-    Asset("ANIM", "anim/topiary.zip"),
-
-    Asset("ANIM", "anim/topiary01_build.zip"),
-    Asset("ANIM", "anim/topiary02_build.zip"),
-    Asset("ANIM", "anim/topiary03_build.zip"),
-    Asset("ANIM", "anim/topiary04_build.zip"),
-    Asset("ANIM", "anim/topiary05_build.zip"),
-    Asset("ANIM", "anim/topiary06_build.zip"),
-    Asset("ANIM", "anim/topiary07_build.zip"),
-
-    Asset("MINIMAP_IMAGE", "lawnornaments_1"),
-    Asset("MINIMAP_IMAGE", "lawnornaments_2"),
-    Asset("MINIMAP_IMAGE", "lawnornaments_3"),
-    Asset("MINIMAP_IMAGE", "lawnornaments_4"),
-    Asset("MINIMAP_IMAGE", "lawnornaments_5"),
-    Asset("MINIMAP_IMAGE", "lawnornaments_6"),
-    Asset("MINIMAP_IMAGE", "lawnornaments_7"),
-}
-
 local prefabs =
 {
     "ash",
@@ -42,24 +21,18 @@ local function onhammered(inst, worker)
     --	inst.components.lootdropper:DropLoot()
     SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst:Remove()
-    inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
+    inst.SoundEmitter:PlaySound("dontstarve/common/destroy_straw")
 end
 
 local function onhit(inst, worker)
     inst.AnimState:PlayAnimation("hit")
     inst.AnimState:PushAnimation("idle", false)
-end
 
-local function OnSave(inst, data)
+    local fx = SpawnPrefab("robot_leaf_fx")
+    local x, y, z = inst.Transform:GetWorldPosition()
+    fx.Transform:SetPosition(x, y + math.random() * 0.5, z)
 
-end
-
-local function OnLoad(inst, data)
-
-end
-
-local function getstatus(inst)
-
+    inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/vine_hack")
 end
 
 local function onbuilt(inst)
@@ -68,27 +41,31 @@ local function onbuilt(inst)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/lawnornaments/repair")
 end
 
-local function makeitem(name, frame)
+
+local function MakeLawnornament(n)
+    local assets = {
+        Asset("ANIM", "anim/topiary0"..n..".zip"),
+        Asset("MINIMAP_IMAGE", "lawnornaments_"..n),
+    }
     local function fn(Sim)
         local inst = CreateEntity()
-        local trans = inst.entity:AddTransform()
-        local anim = inst.entity:AddAnimState()
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
         inst.entity:AddNetwork()
 
         inst.entity:AddPhysics()
         MakeObstaclePhysics(inst, .5)
 
         local minimap = inst.entity:AddMiniMapEntity()
-        minimap:SetIcon("lawnornament_" .. frame .. ".png")
-
+        minimap:SetIcon("lawnornament_" .. n .. ".png")
 
         inst.entity:AddSoundEmitter()
         inst:AddTag("structure")
 
-        anim:SetBank("topiary")
-        anim:SetBuild("topiary0" .. frame .. "_build")
+        inst.AnimState:SetBank("topiary0".. n)
+        inst.AnimState:SetBuild("topiary0".. n)
 
-        anim:PlayAnimation("idle", true)
+        inst.AnimState:PlayAnimation("idle")
 
         --		inst.AnimState:Hide("snow")
 
@@ -101,50 +78,45 @@ local function makeitem(name, frame)
         --        inst:AddComponent("lootdropper")
         inst:AddComponent("workable")
         inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-        inst.components.workable:SetWorkLeft(2)
+        inst.components.workable:SetWorkLeft(3)
         inst.components.workable:SetOnFinishCallback(onhammered)
         inst.components.workable:SetOnWorkCallback(onhit)
 
         inst:AddComponent("inspectable")
-        inst.components.inspectable.getstatus = getstatus
+        --inst.components.inspectable.getstatus = getstatus
 
-        --        MakeSnowCovered(inst, .01)
-        --inst:ListenForEvent( "onbuilt", onbuilt)
+        MakeSnowCovered(inst)
+        inst:ListenForEvent( "onbuilt", onbuilt)
 
-        inst:SetPrefabNameOverride("lawnornament")
+        --inst:SetPrefabNameOverride("lawnornament")
 
         inst:AddComponent("fixable")
-        inst.components.fixable:AddRecinstructionStageData("burnt", "topiary", "topiary0" .. frame .. "_build")
-        inst.components.fixable:SetPrefabName("lawnornament")
+        inst.components.fixable:AddRecinstructionStageData("burnt", "topiary0".. n, "topiary0".. n)
+        --inst.components.fixable:SetPrefabName("lawnornament")
 
         MakeSmallBurnable(inst, nil, nil, true)
         MakeSmallPropagator(inst)
 
         inst:AddComponent("gridnudger")
 
-        inst:ListenForEvent("burntup", function(inst)
-            inst:Remove()
-        end)
+        inst:ListenForEvent("burntup", inst.Remove)
 
-        inst.OnSave = OnSave
-        inst.OnLoad = OnLoad
+        MakeHauntableWork(inst)
         return inst
     end
 
-    return Prefab(name, fn, assets, prefabs)
+    return Prefab("lawnornament_"..n, fn, assets, prefabs)
 end
 
-return makeitem("lawnornament_1", "1"),
-    makeitem("lawnornament_2", "2"),
-    makeitem("lawnornament_3", "3"),
-    makeitem("lawnornament_4", "4"),
-    makeitem("lawnornament_5", "5"),
-    makeitem("lawnornament_6", "6"),
-    makeitem("lawnornament_7", "7"),
-    MakePlacer("lawnornament_1_placer", "topiary", "topiary01_build", "idle"),
-    MakePlacer("lawnornament_2_placer", "topiary", "topiary02_build", "idle"),
-    MakePlacer("lawnornament_3_placer", "topiary", "topiary03_build", "idle"),
-    MakePlacer("lawnornament_4_placer", "topiary", "topiary04_build", "idle"),
-    MakePlacer("lawnornament_5_placer", "topiary", "topiary05_build", "idle"),
-    MakePlacer("lawnornament_6_placer", "topiary", "topiary06_build", "idle"),
-    MakePlacer("lawnornament_7_placer", "topiary", "topiary07_build", "idle")
+local function MakeLawnornamentPlacer(n)
+    return MakePlacer("lawnornament_"..n.."_placer", "topiary0"..n, "topiary0"..n, "idle")
+end
+
+local ret = {}
+
+for i=1, 7 do
+    table.insert(ret, MakeLawnornament(i))
+    table.insert(ret, MakeLawnornamentPlacer(i))
+end
+
+return unpack(ret)
