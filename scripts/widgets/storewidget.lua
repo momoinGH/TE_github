@@ -151,7 +151,7 @@ function StoreWidget:SetGoods(goods)
 end
 
 function StoreWidget:SetMoney()
-    self.money:SetTexture(self.goods.atlas, self.goods.moneyprefab .. ".tex")
+    self.money:SetTexture(self.goods.atlas or GetInventoryItemAtlas(self.goods.moneyprefab .. ".tex"), self.goods.moneyprefab .. ".tex")
 end
 
 function StoreWidget:SendPurchaseCommand()
