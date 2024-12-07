@@ -57,11 +57,11 @@ local StoreWidget = Class(Widget, function(self, owner, goods)
     if prefabname == "crate_grill_small" then prefabname = "quagmire_crate_grill_small" end
 
     self.image = self:AddChild(Image("images/inventoryimages.xml", prefabname .. ".tex", "default.tex")) and
-    self:AddChild(Image("images/quagmire_food_common_inv_images.xml", prefabname .. ".tex", "default.tex")) and
+    self:AddChild(Image("images/inventoryimages/cookpotfoods/cookpotfoods_quagmire.xml", prefabname .. ".tex", "default.tex")) and
     self:AddChild(Image("images/inventoryimages1.xml", prefabname .. ".tex", "default.tex")) and
     self:AddChild(Image("images/inventoryimages2.xml", prefabname .. ".tex", "default.tex")) and
     self:AddChild(Image("images/inventoryimages3.xml", prefabname .. ".tex", "default.tex")) and
-    self:AddChild(Image("images/tfwp_inventoryimgs.xml", prefabname .. ".tex", "default.tex"))
+    self:AddChild(Image("images/inventoryimages/inventory_lavaarena.xml", prefabname .. ".tex", "default.tex"))
 
 
     if self.goods.spoil ~= 255 then
