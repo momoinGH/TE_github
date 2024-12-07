@@ -26,6 +26,25 @@ SetSharedLootTable('lawnornamentsdrop',
         { "cutstone", 1.00 },
     })
 
+SetSharedLootTable('topiarymedium',
+    {
+        { "oinc", 1.00 },
+        { "oinc", 1.00 },
+        { "oinc", 1.00 },
+        { "oinc", 1.00 },
+        { "oinc", 1.00 },
+    })
+
+SetSharedLootTable('topiarylarge',
+    {
+        { "oinc", 1.00 },
+        { "oinc", 1.00 },
+        { "oinc", 1.00 },
+        { "oinc", 1.00 },
+        { "oinc", 1.00 },
+        { "oinc", 1.00 },
+    })
+
 SetSharedLootTable('lamp_post',
     {
         { "alloy", 1.00 },
@@ -86,18 +105,23 @@ local function onhammered(inst, worker)
         SpawnPrefab("collapse_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
         inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
 
-        if inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary01"
-        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary02"
-        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary03"
-        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary04"
-        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary05"
-        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary06"
-        or inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "topiary07"
-        then
+        local bank = inst.reconstruction_stages[inst.reconstruction_stage].bank
+
+        if bank and bank == bank:match("topiary0[1-7]") then
             inst.components.lootdropper:SetChanceLootTable('lawnornamentsdrop')
         end
 
-        if inst.reconstruction_stages[inst.reconstruction_stage].bank and inst.reconstruction_stages[inst.reconstruction_stage].bank == "lamp_post" then
+        if bank and bank == bank:match("topiary_pigman")
+        or bank and bank == bank:match("topiary_werepig")then
+            inst.components.lootdropper:SetChanceLootTable('topiarymedium')
+        end
+
+        if bank and bank == bank:match("topiary_beefalo")
+        or bank and bank == bank:match("topiary_pigking")then
+            inst.components.lootdropper:SetChanceLootTable('topiarylarge')
+        end
+
+        if bank and bank == bank:match("lamp_post") then
             inst.components.lootdropper:SetChanceLootTable('lamp_post')
         end
 
