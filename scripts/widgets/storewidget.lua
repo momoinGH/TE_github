@@ -44,25 +44,21 @@ local StoreWidget = Class(Widget, function(self, owner, goods)
     self.wetness:SetClickable(false)
 
     local prefabname = "log"
-    if type(goods.goodsprefab) == "string" then prefabname = goods.goodsprefab end
-    if type(goods.goodsprefab) == "table" and goods.goodsprefab.Prefab then prefabname = goods.goodsprefab.Prefab end
+    if type(goods.goodsprefab) == "string" then
+        prefabname = goods.goodsprefab
+    elseif type(goods.goodsprefab) == "table" and goods.goodsprefab.Prefab then
+        prefabname = goods.goodsprefab.Prefab
+    end
 
-    if prefabname == "pot_syrup" then prefabname = "quagmire_pot_syrup" end
-    if prefabname == "pot" then prefabname = "quagmire_pot" end
-    if prefabname == "casseroledish" then prefabname = "quagmire_casseroledish" end
-    if prefabname == "crate_grill" then prefabname = "quagmire_crate_grill" end
+    for _, v in ipairs({"pot_syrup", "pot", "casseroledish", "crate_grill", "crate_pot_hanger", "crate_oven",
+                        "crate_grill_small"}) do
+        if prefabname == v then
+            prefabname = "quagmire_" .. prefabname
+            break
+        end
+    end
 
-    if prefabname == "crate_pot_hanger" then prefabname = "quagmire_crate_pot_hanger" end
-    if prefabname == "crate_oven" then prefabname = "quagmire_crate_oven" end
-    if prefabname == "crate_grill_small" then prefabname = "quagmire_crate_grill_small" end
-
-    self.image = self:AddChild(Image("images/inventoryimages.xml", prefabname .. ".tex", "default.tex")) and
-    self:AddChild(Image("images/inventoryimages/cookpotfoods/cookpotfoods_quagmire.xml", prefabname .. ".tex", "default.tex")) and
-    self:AddChild(Image("images/inventoryimages1.xml", prefabname .. ".tex", "default.tex")) and
-    self:AddChild(Image("images/inventoryimages2.xml", prefabname .. ".tex", "default.tex")) and
-    self:AddChild(Image("images/inventoryimages3.xml", prefabname .. ".tex", "default.tex")) and
-    self:AddChild(Image("images/inventoryimages/inventory_lavaarena.xml", prefabname .. ".tex", "default.tex"))
-
+    self.image = self:AddChild(Image(GetInventoryItemAtlas(prefabname .. ".tex"), prefabname .. ".tex", "default.tex"))
 
     if self.goods.spoil ~= 255 then
         self.bgspoilage:Show()
