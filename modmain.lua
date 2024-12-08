@@ -133,5 +133,3 @@ modimport "modmain/pro_extend_tags"                    --标签扩展，pro_开�
 modimport "modmain/pro_componentaction"                --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
 
 modimport "modmain/common/sw_fertilizer_nutrient_defs" --肥料值定义
-
-modimport "scripts/widgets/image"                      --image类钩子，暂时放这里

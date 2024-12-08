@@ -10,7 +10,7 @@ end
 
 folder_name = folder_name or "workshop-"
 
-local isdev = folder_name:len() < 9 or not folder_name:sub(1, 9) == "workshop"
+local isdev = not folder_name:find("workshop-")
 
 local function pub_dev(pub, dev)
     return isdev and dev or pub
