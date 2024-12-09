@@ -29,8 +29,7 @@ local parrot_blue_sounds = {
 }
 
 local kingfisher_sounds = {
-    takeoff = "porkland_soundpackage/birds/takeoff_faster",
-    takeoff_2 = "dontstarve_DLC003/creatures/king_fisher/take_off",
+    takeoff = "dontstarve_DLC003/creatures/king_fisher/take_off",
     chirp = "dontstarve_DLC003/creatures/king_fisher/chirp",
     flyin = "dontstarve/birds/flyin",
 }
@@ -107,7 +106,8 @@ local function makebird(name, sounds, feather_name)
 	}
 
 	local function fn()
-		local namedParrotblue = (name == "parrot_blue")
+		local Parrotblue = (name == "parrot_blue")
+        local Kingfisher = (name == "kingfisher")
         local inst = CreateEntity()
 
         --Core components
@@ -146,7 +146,9 @@ local function makebird(name, sounds, feather_name)
 
         MakeFeedableSmallLivestockPristine(inst)
 
-        --MakeInventoryFloatable(inst, nil, .07)
+        if Kingfisher then
+            MakeInventoryFloatable(inst, nil, .07)
+        end
 
 		inst.entity:SetPristine()
 
@@ -171,7 +173,7 @@ local function makebird(name, sounds, feather_name)
 		inst:AddComponent("occupier")
 
 		inst:AddComponent("eater")
-        if name == "kingfisher" then
+        if Kingfisher then
 			inst.components.eater:SetDiet({ FOODTYPE.SEEDS }, { FOODTYPE.MEAT })
 		else
 			inst.components.eater:SetDiet({ FOODTYPE.SEEDS }, { FOODTYPE.SEEDS })
@@ -185,7 +187,9 @@ local function makebird(name, sounds, feather_name)
         inst.components.inventoryitem.nobounce = true
         inst.components.inventoryitem.canbepickedup = false
         inst.components.inventoryitem.canbepickedupalive = true
-        inst.components.inventoryitem:SetSinks(true)
+        if not Kingfisher then
+            inst.components.inventoryitem:SetSinks(true)
+        end
 
 		inst:AddComponent("cookable")
 		inst.components.cookable.product = "cookedsmallmeat"
@@ -212,9 +216,9 @@ local function makebird(name, sounds, feather_name)
 		MakeTinyFreezableCharacter(inst, "crow_body")
 
 		inst:AddComponent("periodicspawner")
-		if namedParrotblue then
+		if Parrotblue then
 			inst.components.periodicspawner:SetPrefab("oinc") --("dubloon")
-		elseif name == "kingfisher" and math.random() < 0.1 then
+		elseif Kingfisher and math.random() < 0.1 then
 			inst.components.periodicspawner:SetPrefab("coi")
 			inst.components.periodicspawner.onlanding = true
 		else
