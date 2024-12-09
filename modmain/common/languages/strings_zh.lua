@@ -899,10 +899,77 @@ STRINGS.NAMES.CORMORANT = "鸬鹚"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORMORANT = "我敢打赌它吃了很多鱼。"
 
 STRINGS.NAMES.PARROT = "鹦鹉"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT = "我尽量不吃取了名字的东西。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT = "我发现我的饼干刚用完了。"
+
 STRINGS.NAMES.PARROT_PIRATE = "海盗鹦鹉"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT_PIRATE = "我尽量不吃取了名字的东西。"
-
+STRINGS.PARROTNAMES = {
+    "丹佳亚","萨米","佐伊","克丽丝","特伦特",
+    "哈里森","阿勒西娅","乔尼・德雷格","弗兰克","波利冈",
+    "威克胜","尚格云顿","汉克","小甜心","蔬菜",
+    "斯卡威","黑胡子","奥克托帕罗","米格西","艾米",
+    "维多利亚","科尼利厄斯","德翰尼・约普","大个儿","虎克博士",
+    "霍雷肖","艾格","王尔德","默多克","莱托勒",
+    "博克霍尔","穆迪","菲利普斯","饼干","舰长",
+    "巴雷特","萨利","雷金纳德・韦尔约翰森",
+    "丹凡 3000","范・达德","哈利"
+}
+STRINGS.TALKINGBIRD = {
+    in_container = {
+    "别把我埋了！",
+    "我要出去，出去！",
+    "完蛋了！",
+    "我的眼睛！我的眼睛！",
+    "太黑了！"
+    },
+    in_inventory = {
+    "冒险！",
+    "你真臭！",
+    "嘎～！",
+    "喂～你！",
+    "笨蛋！",
+    "呆子！",
+    "宝藏！",
+    "走跳板！",
+    "饼干！"
+    },
+    on_dismounted = {
+    "着陆！",
+    "坚实的大地！",
+    "我们成功了！"
+    },
+    on_dropped = {
+    "笨蛋！",
+    "再见！",
+    "再见，笨蛋！",
+    "再见！"
+    },
+    on_ground = {
+    "不错！",
+    "笨蛋！",
+    "自以为是！",
+    "你真臭！"
+    },
+    on_mounted = {
+    "前进！",
+    "啊哦！",
+    "你确定吗？"
+    },
+    on_pickedup = {
+    "笨蛋！",
+    "你好！",
+    "喂我吃东西！",
+    "我饿了！",
+    "哎哟！"
+    },
+    other_owner = {
+    "救命啊！",
+    "啊！",
+    "卑鄙！",
+    "救救我！",
+    "我没事！"
+    }
+    }
 --------------------海难食物SWfood---------------------------------------------
 
 STRINGS.NAMES.SWEET_POTATO_PLANTED = "甘薯"
@@ -2130,23 +2197,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANDRAKEHOUSE = "好像有...什么尖声怪
 STRINGS.NAMES.MANDRAKEMAN = "曼德拉长者"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANDRAKEMAN = "肥大，尖声怪气。"
 STRINGS.MANDRAKEMANNAMES = {
-    "箣竹",
-    "山茱萸",
-    "柏桧",
-    "马利筋",
-    "栎",
-    "葱",
-    "豌豆",
-    "荆蓟",
-    "麝香草",
-    "豆",
-    "桦木",
-    "覆盆子",
-    "胡萝卜",
-    "甘蓝",
-    "齿栗叶",
-    "车轴草",
-    "黄瓜",
+    "箣竹","山茱萸","柏桧","马利筋","栎","葱",
+    "豌豆","荆蓟","麝香草","豆","桦木","覆盆子",
+    "胡萝卜","甘蓝","齿栗叶","车轴草","黄瓜",
 }
 STRINGS.MANDRAKEMAN_MANDRAKE_BATTLECRY = {
     "窃贼！",
@@ -6410,18 +6463,9 @@ STRINGS.NAMES.BEAVERKING_SPAWNER = "海狸王刷新点"
 STRINGS.NAMES.BEAVER_KING = "凯斯特·雷"
 
 STRINGS.WILDBEAVER_NAMES = {
-    "凯斯特",
-    "卢卡斯",
-    "罗根",
-    "伊桑",
-    "雅各布",
-    "艾弗里",
-    "艾玛",
-    "詹克生",
-    "卡尔洛特",
-    "利亚姆",
-    "梅森",
-    "伊利亚",
+    "凯斯特","卢卡斯","罗根","伊桑",
+    "雅各布","艾弗里","艾玛","詹克生",
+    "卡尔洛特","利亚姆","梅森","伊利亚",
 }
 
 STRINGS.WILDBEAVER_TALK_FIGHT = {
