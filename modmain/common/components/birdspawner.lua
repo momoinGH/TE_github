@@ -14,7 +14,7 @@ local function AddBirds(tile, vals)
     BIRD_TYPES[tile] = birds
 end
 
-AddComponentPostInit("birdspawner", function(self)
+AddComponentPostInit("birdspawner",function(self)
     if not BIRD_TYPES then
         BIRD_TYPES = Utils.ChainFindUpvalue(self.SpawnBird, "PickBird", "BIRD_TYPES")
         if BIRD_TYPES then
@@ -54,12 +54,12 @@ AddComponentPostInit("birdspawner", function(self)
             AddBirds(WORLD_TILES.RAINFOREST, { "toucan_hamlet", "kingfisher", "parrot_blue", "kingfisher_swarm","toucan_hamlet_swarm", "parrot_blue_swarm" })
 
 
-            AddBirds(WORLD_TILES.QUAGMIRE_PEATFOREST, { "quagmire_pigeon", "pigeon_swarm" })
-            AddBirds(WORLD_TILES.QUAGMIRE_PARKFIELD, { "quagmire_pigeon", "pigeon_swarm" })
-            AddBirds(WORLD_TILES.QUAGMIRE_PARKSTONE, { "quagmire_pigeon", "pigeon_swarm" })
-            AddBirds(WORLD_TILES.QUAGMIRE_GATEWAY, { "quagmire_pigeon", "pigeon_swarm" })
-            AddBirds(WORLD_TILES.QUAGMIRE_SOIL, { "quagmire_pigeon", "pigeon_swarm" })
-            AddBirds(WORLD_TILES.QUAGMIRE_CITYSTONE, { "quagmire_pigeon", "pigeon_swarm" })
+            AddBirds(WORLD_TILES.QUAGMIRE_PEATFOREST, { "robin", "crow" })--和dst森林一样
+            AddBirds(WORLD_TILES.QUAGMIRE_PARKFIELD, { "robin", "quagmire_pigeon" })
+            AddBirds(WORLD_TILES.QUAGMIRE_PARKSTONE, { "robin", "quagmire_pigeon", "quagmire_pigeon_swarm" })
+            AddBirds(WORLD_TILES.QUAGMIRE_GATEWAY, { "robin", "quagmire_pigeon" })
+            --AddBirds(WORLD_TILES.QUAGMIRE_SOIL, { "quagmire_pigeon", "quagmire_pigeon_swarm" })
+            AddBirds(WORLD_TILES.QUAGMIRE_CITYSTONE, { "quagmire_pigeon", "quagmire_pigeon_swarm" })
             AddBirds(WORLD_TILES.IMPASSABLE, {}) --不生成鸟
             AddBirds(WORLD_TILES.INVALID, {})    --不生成鸟
             --AddBirds(WORLD_TILES.WATER_MANGROV, { "robin_winter" })
@@ -74,4 +74,13 @@ AddComponentPostInit("birdspawner", function(self)
             end
         end
     end
-end)
+--[[
+    function self:SpawnBird(spawnpoint, ignorebait)
+        local PARROT_PIRATE_CHANCE = 0.1
+        local birds = nil
+        if birds == "parrot" and math.random() < PARROT_PIRATE_CHANCE then
+            birds = "parrot_pirate"
+        end
+    end]]
+end
+)

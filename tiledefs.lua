@@ -412,7 +412,7 @@ local tro_tiledefs = {
     },
 
 
-    VOLCANO_ROCK = { -------------火山岩地皮有地皮动画但是没贴图
+    VOLCANO_ROCK = { -------------火山岩地皮
         tile_range       = TileRanges.SW_LAND,
         tile_data        = {
             ground_name = "Volcano Rock",
@@ -860,105 +860,156 @@ local tro_tiledefs = {
     },
 
     HAMARCHIVE = { --------------- 哈姆洞穴遗迹迷宫地皮（重写海底世界范围判断逻辑后就可以删除）
-        tile_range       = TileRanges.SW_LAND,
+        tile_range       = TileRanges.HAM_LAND,
         tile_data        = {
-            ground_name = "frost",
+            ground_name = "Pigruins Archive",
             old_static_id = 33,
+        },
+        ground_tile_def = {
+            name = "ham/blocky",
+            noise_texture = "ham/ground_pigruins_blue",
+            runsound = "dontstarve/movement/run_dirt",
+            walksound = "dontstarve/movement/walk_dirt",
+            snowsound = "run_ice",
+            cannotbedug = true
+        },
+        minimap_tile_def = {
+            name = "map_edge",
+            noise_texture = "ham/mini_ground_pigruins"
+        },
+         turf_def = {
+             name = "hamarchive",
+             anim = "pigruins",
+             bank_build = "turf_ham",
+        },
+    },
+--------------------------以下为暴食地皮-------------------------
+--[[
+	QUAGMIRE_GATEWAY = { --------------- 沼地草坪地皮
+        tile_range       = TileRanges.LAND,
+        tile_data        = {
+            ground_name = "Gorge Gateway",
+            old_static_id = GROUND.QUAGMIRE_GATEWAY,
         },
         ground_tile_def  = {
-            name = "sw/tidalmarsh",
-            noise_texture = "sw/ground_tidalmarsh",
-            runsound = "dontstarve/movement/run_marsh",
-            walksound = "dontstarve/movement/walk_marsh",
+            name = "grass3",
+            noise_texture = "quagmire_gateway_noise",
+            runsound="dontstarve/movement/run_woods",
+            walksound="dontstarve/movement/walk_woods",
+            snowsound="dontstarve/movement/run_snow",
+            mudsound = "dontstarve/movement/run_mud",
             flashpoint_modifier = 0,
         },
         minimap_tile_def = {
             name = "map_edge",
-            noise_texture = "sw/mini_ground_tidalmarsh",
+            noise_texture = "quagmire_gateway_mini",
         },
         turf_def         = {
-            name = "tidalmarsh",
-            bank_build = "turf",
+            name = "quagmire_gateway",
+            bank_build = "turf_quagmire",
         },
     },
-
---[[
-    BEARDRUG = {------------胡须地毯,DST已经移值了这个
-        tile_range = TileRanges.HAM_LAND,
-        tile_data = {
-            ground_name = "Beardrug",
-            old_static_id = 33,
-        },
-        ground_tile_def = {
-            name = "ham/pebble",
-            noise_texture = "ham/ground_cobbleroad",
-            runsound = "dontstarve/movement/run_marble",
-            walksound = "dontstarve/movement/walk_marble",
-            -- runsound = "dontstarve/movement/run_rock",
-            -- walksound = "dontstarve/movement/walk_rock",
-            snowsound = "run_ice",
-            flashpoint_modifier = 0,
-            flooring = true,
-            hard = true,
-        },
-        minimap_tile_def = {
-            name = "map_edge",
-            noise_texture = "ham/mini_ground_cobbleroad",
-        },
-        turf_def = {
-            name = "cobbleroad",
-            bank_build = "turf",
-        },
-    },]]
-
-    --[[ ICELAND = {------------沙滩地皮
-        tile_range = TileRanges.HAM_LAND,
-        tile_data = {
-            ground_name = "Iceland",
-            old_static_id = 33,
-        },
-        ground_tile_def = {
-            name = "cave",
-            noise_texture = "frost/ground_iceland",
-            runsound = "dontstarve/movement/run_dirt",
-            walksound = "dontstarve/movement/walk_dirt",
-            snowsound = "run_ice",
-            cannotbedug = true
-        },
-        minimap_tile_def = {
-            name = "map_edge",
-            noise_texture = "frost/mini_ground_iceland"
-        },
-        turf_def = {
-            name = "iceland",
-            bank_build = "turf",
-        },
-    },
-
-    LAVALAND = {------------沙滩地皮
-        tile_range = TileRanges.HAM_LAND,
-        tile_data = {
-            ground_name = "Lavaland",
-            old_static_id = 33,
-        },
-        ground_tile_def = {
-            name = "cave",
-            noise_texture = "lavaarena/ground_lavaarena_floor",
-            runsound = "dontstarve/movement/run_dirt",
-            walksound = "dontstarve/movement/walk_dirt",
-            snowsound = "run_ice",
-            cannotbedug = true
-        },
-        minimap_tile_def = {
-            name = "map_edge",
-            noise_texture = "lavaarena/mini_ground_lavaarena_floor"
-        },
-        turf_def = {
-            name = "lavaland",
-            bank_build = "turf",
-        },
-    }, ]]
 	
+	    QUAGMIRE_CITYSTONE = { --------------- 城市石头地皮
+        tile_range       = TileRanges.LAND,
+        tile_data        = {
+            ground_name = "Gorge Citystone",
+            old_static_id = GROUND.QUAGMIRE_CITYSTONE,
+        },
+        ground_tile_def  = {
+            name = "cave",
+            noise_texture = "quagmire_citystone_noise",
+            runsound="dontstarve/movement/run_dirt",
+            walksound="dontstarve/movement/walk_dirt",
+            snowsound="dontstarve/movement/run_ice",
+            mudsound = "dontstarve/movement/run_mud",
+            flashpoint_modifier = 0,
+        },
+        minimap_tile_def = {
+            name = "map_edge",
+            noise_texture = "quagmire_citystone_mini",
+        },
+        turf_def         = {
+            name = "quagmire_citystone",
+            bank_build = "turf_quagmire",
+        },
+    },
+	
+	    QUAGMIRE_PARKFIELD = { --------------- 糖木草坪地皮
+        tile_range       = TileRanges.LAND,
+        tile_data        = {
+            ground_name = "Gorge Park Grass",
+            old_static_id = GROUND.QUAGMIRE_PARKFIELD,
+        },
+        ground_tile_def  = {
+            name = "deciduous",
+            noise_texture = "quagmire_parkfield_noise",
+            runsound="dontstarve/movement/run_carpet",
+            walksound="dontstarve/movement/walk_carpet",
+            snowsound="dontstarve/movement/run_snow",
+            mudsound = "dontstarve/movement/run_mud",
+            flashpoint_modifier = 0,
+        },
+        minimap_tile_def = {
+            name = "map_edge",
+            noise_texture = "quagmire_parkfield_mini",
+        },
+        turf_def         = {
+            name = "quagmire_parkfield",
+            bank_build = "turf_quagmire",
+        },
+    },
+	
+	    QUAGMIRE_PARKSTONE = { --------------- 糖木石头地皮
+        tile_range       = TileRanges.LAND,
+        tile_data        = {
+            ground_name = "Gorge Park Path",
+            old_static_id = GROUND.QUAGMIRE_PARKSTONE,
+        },
+        ground_tile_def  = {
+            name = "cave",
+            noise_texture = "quagmire_parkstone_noise",
+            runsound="dontstarve/movement/run_dirt",
+            walksound="dontstarve/movement/walk_dirt",
+            snowsound="dontstarve/movement/run_ice",
+            mudsound = "dontstarve/movement/run_mud",
+            flashpoint_modifier = 0,
+        },
+        minimap_tile_def = {
+            name = "map_edge",
+            noise_texture = "quagmire_parkstone_mini",
+        },
+        turf_def         = {
+            name = "quagmire_parkstone",
+            bank_build = "turf_quagmire",
+        },
+    },
+	
+	    QUAGMIRE_PEATFOREST = { --------------- 泥炭林地皮
+        tile_range       = TileRanges.LAND,
+        tile_data        = {
+            ground_name = "Gorge Peat Forest",
+            old_static_id = GROUND.QUAGMIRE_PEATFOREST,
+        },
+        ground_tile_def  = {
+            name = "grass2",
+            noise_texture = "quagmire_peatforest_noise",
+            runsound="dontstarve/movement/run_marsh",
+            walksound="dontstarve/movement/walk_marsh",
+            snowsound="dontstarve/movement/run_ice",
+            mudsound = "dontstarve/movement/run_mud",
+            flashpoint_modifier = 0,
+        },
+        minimap_tile_def = {
+            name = "map_edge",
+            noise_texture = "sw/quagmire_peatforest_mini",
+        },
+        turf_def         = {
+            name = "quagmire_peatforest",
+            bank_build = "turf_quagmire",
+        },
+    },
+	]]
 --------------------------以下为海底世界地皮---------------------
 
     UNDERWATER_SANDY = {------------海底沙滩地皮
@@ -1064,7 +1115,7 @@ local tro_tiledefs = {
     MARSH_SW = { ----------------湿地草皮
         tile_range       = TileRanges.SW_LAND,
         tile_data        = {
-            ground_name = "Tidal Marsh",
+            ground_name = "Marsh sw",
             old_static_id = 33,
         },
         ground_tile_def  = {
@@ -1079,8 +1130,9 @@ local tro_tiledefs = {
             noise_texture = "sw/mini_ground_tidalmarsh",
         },
         turf_def         = {
-            name = "tidalmarsh",
-            bank_build = "turf",
+            name = "marsh sw",
+			anim = "tidalmarsh",
+            bank_build = "turf_sw",
         },
     },
 
@@ -1104,8 +1156,9 @@ local tro_tiledefs = {
             noise_texture = "sw/mini_ground_tidalmarsh",
         },
         turf_def         = {
-            name = "tidalmarsh",
-            bank_build = "turf",
+            name = "windy",
+			anim = "tidalmarsh",
+            bank_build = "turf_sw",
         },
     },
 

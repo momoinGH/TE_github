@@ -33,6 +33,29 @@ local function spawn_pigeon(inst)
             TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= GROUND.OCEAN_COASTAL_SHORE and
             TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= GROUND.OCEAN_COASTAL_SHORE and not
             TheWorld.GroundCreep:OnCreep(x, y, z) then
+            local pigeon = SpawnPrefab("pigeon")
+            pigeon.Physics:Teleport(x, 15, z)
+            if math.random() < .5 then
+                pigeon.Transform:SetRotation(180)
+            end
+        end
+    end
+
+    if inst.prefab == "quagmire_pigeon_swarm" then
+        local x, y, z = inst.Transform:GetWorldPosition()
+        x = x + (math.random() * DIST) - DIST / 2
+        z = z + (math.random() * DIST) - DIST / 2
+        if TheWorld.Map:IsPassableAtPoint(x, y, z) and
+            TheWorld.Map:IsPassableAtPoint(x + 2, y, z) and
+            TheWorld.Map:IsPassableAtPoint(x - 2, y, z) and
+            TheWorld.Map:IsPassableAtPoint(x, y, z + 2) and
+            TheWorld.Map:IsPassableAtPoint(x, y, z - 2) and
+            TheWorld.Map:GetTileAtPoint(x, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x + 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x - 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= GROUND.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= GROUND.OCEAN_COASTAL_SHORE and not
+            TheWorld.GroundCreep:OnCreep(x, y, z) then
             local pigeon = SpawnPrefab("quagmire_pigeon")
             pigeon.Physics:Teleport(x, 15, z)
             if math.random() < .5 then
@@ -153,6 +176,7 @@ local function fn(Sim)
 end
 
 return Prefab("pigeon_swarm", fn, assets, prefabs),
+    Prefab("quagmire_pigeon_swarm", fn, assets, prefabs),
     Prefab("kingfisher_swarm", fn, assets, prefabs),
     Prefab("toucan_hamlet_swarm", fn, assets, prefabs),
     Prefab("parrot_blue_swarm", fn, assets, prefabs)

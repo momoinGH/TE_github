@@ -52,4 +52,5 @@ PrefabFiles =
     "quagmire_pigeon",
     "quagmire_spiceshrub",
 	"dug_quagmire_spotspice_shrub",
+	"turf_quagmire",
 }
