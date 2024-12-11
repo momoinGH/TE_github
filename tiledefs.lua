@@ -1242,6 +1242,35 @@ function HandleDugGround(dug_ground, x, y, z, ...)
     end
 end
 
+--[[准备修改深层雨林地皮和毒瘴雨林地皮
+ACTIONS.TERRAFORM.fn = function(act)
+	if act.invobject and act.invobject.components.terraformer then
+		local tile = GetWorld().Map:GetTileAtPoint(act.pos.x, act.pos.y, act.pos.z)
+
+		if tile == GROUND.GASJUNGLE then
+			act.invobject.components.finiteuses:SetUses(0)
+			GetPlayer().components.talker:Say(GetString(GetPlayer().prefab, "ANNOUNCE_TOOLCORRODED"))
+			return true
+		elseif tile == GROUND.DEEPRAINFOREST then
+			GetPlayer().components.talker:Say(GetString(GetPlayer().prefab, "ANNOUNCE_TURFTOOHARD"))
+			return true
+		else
+			return act.invobject.components.terraformer:Terraform(act.pos)
+		end
+	end
+end
+
+#. STRINGS.CHARACTERS.GENERIC.ANNOUNCE_TOOLCORRODED
+msgctxt "STRINGS.CHARACTERS.GENERIC.ANNOUNCE_TOOLCORRODED"
+msgid "My tool just dissolved!"
+msgstr "我的工具刚刚被溶解了！"
+
+#. STRINGS.CHARACTERS.GENERIC.ANNOUNCE_TURFTOOHARD
+msgctxt "STRINGS.CHARACTERS.GENERIC.ANNOUNCE_TURFTOOHARD"
+msgid "This ground is too stubborn to pry up."
+msgstr "这块地太硬了，撬不动。"
+]]
+
 -- ID 1 is for impassable
 -- in ds, tile priority after the desert tile
 
