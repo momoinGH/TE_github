@@ -1247,7 +1247,7 @@ ACTIONS.TERRAFORM.fn = function(act)
 	if act.invobject and act.invobject.components.terraformer then
 		local tile = GetWorld().Map:GetTileAtPoint(act.pos.x, act.pos.y, act.pos.z)
 
-		if tile == GROUND.GASJUNGLE then
+		if tile == GROUND.GASRAINFOREST then
 			act.invobject.components.finiteuses:SetUses(0)
 			GetPlayer().components.talker:Say(GetString(GetPlayer().prefab, "ANNOUNCE_TOOLCORRODED"))
 			return true
@@ -1259,16 +1259,6 @@ ACTIONS.TERRAFORM.fn = function(act)
 		end
 	end
 end
-
-#. STRINGS.CHARACTERS.GENERIC.ANNOUNCE_TOOLCORRODED
-msgctxt "STRINGS.CHARACTERS.GENERIC.ANNOUNCE_TOOLCORRODED"
-msgid "My tool just dissolved!"
-msgstr "我的工具刚刚被溶解了！"
-
-#. STRINGS.CHARACTERS.GENERIC.ANNOUNCE_TURFTOOHARD
-msgctxt "STRINGS.CHARACTERS.GENERIC.ANNOUNCE_TURFTOOHARD"
-msgid "This ground is too stubborn to pry up."
-msgstr "这块地太硬了，撬不动。"
 ]]
 
 -- ID 1 is for impassable
@@ -1300,13 +1290,9 @@ ChangeTileRenderOrder(WORLD_TILES.PIGRUINS, WORLD_TILES.CHECKER, true)
 ChangeTileRenderOrder(WORLD_TILES.PLAINS, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.RAINFOREST, WORLD_TILES.MUD, true)
 
-
-
 -- --Priority turf
 
 -- ChangeTileRenderOrder(WORLD_TILES.BEARDRUG, WORLD_TILES.CARPET, false)
-
-
 
 -----ocean turf -------如果是联机海水就不能设置高优先级
 -- ChangeTileRenderOrder(WORLD_TILES.OCEAN_SHALLOW, WORLD_TILES.OCEAN_COASTAL, false)
@@ -1325,9 +1311,6 @@ ChangeTileRenderOrder(WORLD_TILES.OCEAN_MEDIUM, WORLD_TILES.MONKEY_DOCK, false)
 ChangeTileRenderOrder(WORLD_TILES.OCEAN_DEEP, WORLD_TILES.MONKEY_DOCK, false)
 ChangeTileRenderOrder(WORLD_TILES.OCEAN_CORAL, WORLD_TILES.MONKEY_DOCK, false)
 ChangeTileRenderOrder(WORLD_TILES.OCEAN_SHIPGRAVEYARD, WORLD_TILES.MONKEY_DOCK, false)
-
-
-
 
 for tile, def in pairs(tro_tiledefs) do
     if GROUND[tile] == nil then

@@ -879,7 +879,11 @@ AddRecipe2("turf_cobbleroad", {Ingredient("cutstone", 2), Ingredient("boards", 1
     nounlock = true,
     numtogive = 4,
 }, {"CITY"})
-AddRecipe2("turf_checkeredlawn", {Ingredient("cutgrass", 2), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
+AddRecipe2("turf_lawn", {Ingredient("cutgrass", 2), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
+    nounlock = true,
+    numtogive = 4,
+}, {"CITY"})
+AddRecipe2("turf_pigruins", {Ingredient("cutstone", 4), Ingredient("rocks", 2)}, TECH.CITY_TWO, {
     nounlock = true,
     numtogive = 4,
 }, {"CITY"})
