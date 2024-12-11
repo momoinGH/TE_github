@@ -192,7 +192,7 @@ local tro_tiledefs = {
     },
 
     ---------------------以下为海难陆地地皮------------------------------
-	
+
 	ASH = {----------------灰烬地皮
         tile_range       = TileRanges.SW_LAND,
         tile_data        = {
@@ -239,7 +239,7 @@ local tro_tiledefs = {
         turf_def         = {
             name = "beach",
             bank_build = "turf_sw",
-        }, 
+        },
     },
 
     JUNGLE = {------------丛林地皮
@@ -468,7 +468,7 @@ local tro_tiledefs = {
 
 
     --------------------------以下为哈姆陆地地皮---------------------
-	
+
     ANTCAVE = {------------蚁巢地皮
         tile_range = TileRanges.HAM_LAND,
         tile_data = {
@@ -568,7 +568,7 @@ local tro_tiledefs = {
             bank_build = "turf_ham",
         },
     },
- 
+
     DEEPRAINFOREST = {------------深层雨林地皮
         tile_range       = TileRanges.HAM_LAND,
         tile_data        = {
@@ -581,7 +581,7 @@ local tro_tiledefs = {
             runsound = "dontstarve/movement/run_woods",
             walksound = "dontstarve/movement/walk_woods",
             flashpoint_modifier = 0,
-			cannotbedug = true,
+			--cannotbedug = true,
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -677,7 +677,7 @@ local tro_tiledefs = {
             noise_texture = "ham/ground_gasrainforest",
             runsound = "dontstarve/movement/run_moss",
             walksound = "dontstarve/movement/walk_moss",
-            cannotbedug = true,
+            --cannotbedug = true,
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -800,7 +800,7 @@ local tro_tiledefs = {
             runsound = "dontstarve/movement/run_dirt",
             walksound = "dontstarve/movement/walk_dirt",
             snowsound = "run_ice",
-            cannotbedug = true
+            --cannotbedug = true
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -867,11 +867,11 @@ local tro_tiledefs = {
         },
         ground_tile_def = {
             name = "ham/blocky",
-            noise_texture = "ham/ground_pigruins_blue",
+            noise_texture = "ham/ground_pigruins",
             runsound = "dontstarve/movement/run_dirt",
             walksound = "dontstarve/movement/walk_dirt",
             snowsound = "run_ice",
-            cannotbedug = true
+            --cannotbedug = true
         },
         minimap_tile_def = {
             name = "map_edge",
@@ -1059,9 +1059,9 @@ local tro_tiledefs = {
             bank_build = "turf",
         },
     },
-		
+
     --------------------------以下为冰霜岛屿地皮---------------------
-	
+
     ICELAND = { --------------- 冰封地皮
         tile_range       = TileRanges.LAND,
         tile_data        = {
@@ -1085,7 +1085,7 @@ local tro_tiledefs = {
             bank_build = "turf_sw",
         },
     },
-	
+
     SNOWLAND = { --------------- 覆雪地皮
         tile_range       = TileRanges.LAND,
         tile_data        = {
@@ -1111,7 +1111,7 @@ local tro_tiledefs = {
     },
 
     --------------------------以下为绿色世界地皮---------------------
-	
+
     MARSH_SW = { ----------------湿地草皮
         tile_range       = TileRanges.SW_LAND,
         tile_data        = {
@@ -1211,7 +1211,36 @@ for tile, def in pairs(tro_tiledefs) do
     end
 end
 
+local SpeciaTileDrop =
+{
+    [WORLD_TILES.PIGRUINS] = "cutstone",
+    [WORLD_TILES.PIGRUINS_BLUE] = "cutstone",
+	[WORLD_TILES.HAMARCHIVE] = "cutstone",
 
+	[WORLD_TILES.QUAGMIRE_GATEWAY] = "turf_quagmire_gateway",
+	[WORLD_TILES.QUAGMIRE_CITYSTONE] = "turf_quagmire_citystone",
+	[WORLD_TILES.QUAGMIRE_PARKFIELD] = "turf_quagmire_parkfield",
+	[WORLD_TILES.QUAGMIRE_PARKSTONE] = "turf_quagmire_parkstone",
+	[WORLD_TILES.QUAGMIRE_PEATFOREST] = "turf_quagmire_peatforest",
+
+}
+
+local _HandleDugGround = HandleDugGround
+function HandleDugGround(dug_ground, x, y, z, ...)
+    if SpeciaTileDrop[dug_ground] then
+        local loot = SpawnPrefab(SpeciaTileDrop[dug_ground])
+        if loot.components.inventoryitem ~= nil then
+            loot.components.inventoryitem:InheritWorldWetnessAtXZ(x, z)
+        end
+        loot.Transform:SetPosition(x, y, z)
+        if loot.Physics ~= nil then
+            local angle = math.random() * TWOPI
+            loot.Physics:SetVel(2 * math.cos(angle), 10, 2 * math.sin(angle))
+        end
+    else
+        return _HandleDugGround(dug_ground, x, y, z, ...)
+    end
+end
 
 -- ID 1 is for impassable
 -- in ds, tile priority after the desert tile
