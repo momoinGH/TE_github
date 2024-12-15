@@ -143,7 +143,7 @@ Assets =
 
 -- # No more inventoryitem atlas register
 local InvAtlas = {"frost", "greenworld", "grotto", "hamlet", "lavaarena", "quagmire", "rog", "shipwrecked_plus",
-                         "shipwrecked", "underwater", "windy"}
+                         "shipwrecked", "underwater", "windy", "skins"}
 for i = 1, #InvAtlas do
     InvAtlas[i] = "images/inventoryimages/inventory_" .. InvAtlas[i] .. ".xml"
     table.insert(Assets, Asset("ATLAS", InvAtlas[i]))

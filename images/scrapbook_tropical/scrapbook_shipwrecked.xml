@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Atlas>
+    <Texture filename="scrapbook_shipwrecked.tex"/>
+    <Elements>
+        <Element name="ballphins.tex" u1="0.000488281" u2="0.124512" v1="0.875488" v2="0.999512"/>
+        <Element name="bamboo.tex" u1="0.000488281" u2="0.124512" v1="0.750488" v2="0.874512"/>
+        <Element name="bermudatriangle.tex" u1="0.000488281" u2="0.124512" v1="0.625488" v2="0.749512"/>
+        <Element name="berrybush.tex" u1="0.000488281" u2="0.124512" v1="0.500488" v2="0.624512"/>
+        <Element name="bioluminescence.tex" u1="0.000488281" u2="0.124512" v1="0.375488" v2="0.499512"/>
+        <Element name="birds.tex" u1="0.000488281" u2="0.124512" v1="0.250488" v2="0.374512"/>
+        <Element name="braincoral.tex" u1="0.000488281" u2="0.124512" v1="0.125488" v2="0.249512"/>
+        <Element name="butterfly.tex" u1="0.000488281" u2="0.124512" v1="0.000488281" v2="0.124512"/>
+        <Element name="chess_monsters.tex" u1="0.125488" u2="0.249512" v1="0.875488" v2="0.999512"/>
+        <Element name="coral.tex" u1="0.250488" u2="0.374512" v1="0.875488" v2="0.999512"/>
+        <Element name="crabbits.tex" u1="0.375488" u2="0.499512" v1="0.875488" v2="0.999512"/>
+        <Element name="crates.tex" u1="0.500488" u2="0.624512" v1="0.875488" v2="0.999512"/>
+        <Element name="crocodog.tex" u1="0.625488" u2="0.749512" v1="0.875488" v2="0.999512"/>
+        <Element name="dogfish.tex" u1="0.750488" u2="0.874512" v1="0.875488" v2="0.999512"/>
+        <Element name="doydoy.tex" u1="0.875488" u2="0.999512" v1="0.875488" v2="0.999512"/>
+        <Element name="dragooneggs.tex" u1="0.125488" u2="0.249512" v1="0.750488" v2="0.874512"/>
+        <Element name="dragoons.tex" u1="0.125488" u2="0.249512" v1="0.625488" v2="0.749512"/>
+        <Element name="floods.tex" u1="0.125488" u2="0.249512" v1="0.500488" v2="0.624512"/>
+        <Element name="flups.tex" u1="0.125488" u2="0.249512" v1="0.375488" v2="0.499512"/>
+        <Element name="grass.tex" u1="0.125488" u2="0.249512" v1="0.250488" v2="0.374512"/>
+        <Element name="jellyfish.tex" u1="0.125488" u2="0.249512" v1="0.125488" v2="0.249512"/>
+        <Element name="kraken.tex" u1="0.125488" u2="0.249512" v1="0.000488281" v2="0.124512"/>
+        <Element name="krampus.tex" u1="0.250488" u2="0.374512" v1="0.750488" v2="0.874512"/>
+        <Element name="limpets.tex" u1="0.375488" u2="0.499512" v1="0.750488" v2="0.874512"/>
+        <Element name="lobsters.tex" u1="0.500488" u2="0.624512" v1="0.750488" v2="0.874512"/>
+        <Element name="merms.tex" u1="0.625488" u2="0.749512" v1="0.750488" v2="0.874512"/>
+        <Element name="monkeys.tex" u1="0.750488" u2="0.874512" v1="0.750488" v2="0.874512"/>
+        <Element name="mosquitos.tex" u1="0.875488" u2="0.999512" v1="0.750488" v2="0.874512"/>
+        <Element name="mussels.tex" u1="0.250488" u2="0.374512" v1="0.625488" v2="0.749512"/>
+        <Element name="obsidian.tex" u1="0.250488" u2="0.374512" v1="0.500488" v2="0.624512"/>
+        <Element name="ox.tex" u1="0.250488" u2="0.374512" v1="0.375488" v2="0.499512"/>
+        <Element name="palmguard.tex" u1="0.250488" u2="0.374512" v1="0.250488" v2="0.374512"/>
+        <Element name="poison.tex" u1="0.250488" u2="0.374512" v1="0.125488" v2="0.249512"/>
+        <Element name="poisonhole.tex" u1="0.250488" u2="0.374512" v1="0.000488281" v2="0.124512"/>
+        <Element name="resurrection.tex" u1="0.375488" u2="0.499512" v1="0.625488" v2="0.749512"/>
+        <Element name="sand.tex" u1="0.500488" u2="0.624512" v1="0.625488" v2="0.749512"/>
+        <Element name="seagulls.tex" u1="0.625488" u2="0.749512" v1="0.625488" v2="0.749512"/>
+        <Element name="seashell.tex" u1="0.750488" u2="0.874512" v1="0.625488" v2="0.749512"/>
+        <Element name="seaweed.tex" u1="0.875488" u2="0.999512" v1="0.625488" v2="0.749512"/>
+        <Element name="sharx.tex" u1="0.375488" u2="0.499512" v1="0.500488" v2="0.624512"/>
+        <Element name="shoals.tex" u1="0.375488" u2="0.499512" v1="0.375488" v2="0.499512"/>
+        <Element name="snakes.tex" u1="0.375488" u2="0.499512" v1="0.250488" v2="0.374512"/>
+        <Element name="stinkrays.tex" u1="0.375488" u2="0.499512" v1="0.125488" v2="0.249512"/>
+        <Element name="sweetpotatos.tex" u1="0.375488" u2="0.499512" v1="0.000488281" v2="0.124512"/>
+        <Element name="swordfish.tex" u1="0.500488" u2="0.624512" v1="0.500488" v2="0.624512"/>
+        <Element name="tidalpools.tex" u1="0.625488" u2="0.749512" v1="0.500488" v2="0.624512"/>
+        <Element name="tides.tex" u1="0.750488" u2="0.874512" v1="0.500488" v2="0.624512"/>
+        <Element name="tigershark.tex" u1="0.875488" u2="0.999512" v1="0.500488" v2="0.624512"/>
+        <Element name="trees.tex" u1="0.500488" u2="0.624512" v1="0.375488" v2="0.499512"/>
+        <Element name="twister.tex" u1="0.500488" u2="0.624512" v1="0.250488" v2="0.374512"/>
+        <Element name="vines.tex" u1="0.500488" u2="0.624512" v1="0.125488" v2="0.249512"/>
+        <Element name="volcano.tex" u1="0.500488" u2="0.624512" v1="0.000488281" v2="0.124512"/>
+        <Element name="waves.tex" u1="0.625488" u2="0.749512" v1="0.375488" v2="0.499512"/>
+        <Element name="whales.tex" u1="0.750488" u2="0.874512" v1="0.375488" v2="0.499512"/>
+        <Element name="wildbores.tex" u1="0.875488" u2="0.999512" v1="0.375488" v2="0.499512"/>
+    </Elements>
+    <StraightAlpha>false</StraightAlpha>
+</Atlas>
+
