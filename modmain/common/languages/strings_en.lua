@@ -2070,7 +2070,7 @@ STRINGS.NAMES.DECO_WOOD                                                         
 STRINGS.NAMES.TARLAMP                                                           = "Tar Lamp."
 STRINGS.NAMES.PORTO_ENCRUSTEDBOAT                                               = "Encrusted Boat"
 STRINGS.NAMES.PIG_SHOP_BANK_ENTRANCE                                            = "Swinesbury Mineral Exchange"
-STRINGS.NAMES.WHEAT_COOKED                                                      = "烤小麦"
+STRINGS.NAMES.WHEAT_COOKED                                                      = "Cooked wheat"
 STRINGS.NAMES.PLAYERHOUSE_TURRET                                                = "Turreted Home"
 STRINGS.NAMES.DECO_CHAIR_CORNER                                                 = "Corner Chair"
 STRINGS.NAMES.ARMORVOIDCLOAK                                                    = "Void Cloak"

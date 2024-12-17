@@ -1,5 +1,5 @@
-
-require("prefabs/tropical_farm_plant_defs") --modmain里新增的数据好像会清空，这里再加一次
+--require("prefabs/tropical_farm_plant_defs") --modmain里新增的数据好像会清空，这里再加一次
+require "tuning"
 local PLANT_DEFS = require("prefabs/farm_plant_defs").PLANT_DEFS
 local function MakeVegStats(seedweight, hunger, health, perish_time, sanity, cooked_hunger, cooked_health,
                             cooked_perish_time, cooked_sanity, float_settings, cooked_float_settings, dryable,
@@ -37,137 +37,8 @@ local QUAGMIRE_PORTS =
     "onion",
 }
 
-VEGGIES =
+TRO_VEGGIES =
 {
-    cave_banana = MakeVegStats(0, TUNING.CALORIES_SMALL, TUNING.HEALING_TINY, TUNING.PERISH_MED, 0,
-        TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_FAST, 0,
-        { "small", 0.05, 0.9 }, { "med", nil, 0.75 }),
-
-    carrot = MakeVegStats(COMMON, TUNING.CALORIES_SMALL, TUNING.HEALING_TINY, TUNING.PERISH_MED, 0,
-        TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_FAST, 0,
-        { "med", 0.05, 0.8 }, { "small", 0.1, nil },
-        nil, nil,
-        { prefab = "carrat" }),
-
-    corn = MakeVegStats(COMMON, TUNING.CALORIES_MED, TUNING.HEALING_SMALL, TUNING.PERISH_MED, 0,
-        TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_SLOW, 0),
-
-    pumpkin = MakeVegStats(UNCOMMON, TUNING.CALORIES_LARGE, TUNING.HEALING_SMALL,
-        IsSpecialEventActive(SPECIAL_EVENTS.HALLOWED_NIGHTS) and TUNING.PERISH_PRESERVED or TUNING.PERISH_MED, 0,
-        TUNING.CALORIES_LARGE, TUNING.HEALING_MEDSMALL, TUNING.PERISH_FAST, 0,
-        nil, { "small", 0.1, nil }),
-
-    eggplant = MakeVegStats(UNCOMMON, TUNING.CALORIES_MED, TUNING.HEALING_MEDSMALL, TUNING.PERISH_MED, 0,
-        TUNING.CALORIES_MED, TUNING.HEALING_MED, TUNING.PERISH_FAST, 0),
-
-    durian = MakeVegStats(RARE, TUNING.CALORIES_MED, -TUNING.HEALING_SMALL, TUNING.PERISH_MED, -TUNING.SANITY_TINY,
-        TUNING.CALORIES_MED, 0, TUNING.PERISH_FAST, -TUNING.SANITY_TINY,
-        nil, nil, nil, FOODTYPE.MONSTER),
-
-    pomegranate = MakeVegStats(RARE, TUNING.CALORIES_TINY, TUNING.HEALING_SMALL, TUNING.PERISH_FAST, 0,
-        TUNING.CALORIES_SMALL, TUNING.HEALING_MED, TUNING.PERISH_SUPERFAST, 0,
-        { "small", nil, 0.8 }, { "small", nil, 0.8 }),
-
-    dragonfruit = MakeVegStats(RARE, TUNING.CALORIES_TINY, TUNING.HEALING_SMALL, TUNING.PERISH_FAST, 0,
-        TUNING.CALORIES_SMALL, TUNING.HEALING_MED, TUNING.PERISH_SUPERFAST, 0,
-        { "small", 0.1, 0.8 }, { "small", 0.05, nil },
-        nil,
-        nil,
-        {
-            prefab = "fruitdragon",
-            onmutatefn = function(inst, new_inst)
-                new_inst:MakeRipe(true)
-            end
-        }),
-
-    berries = MakeVegStats(0, TUNING.CALORIES_TINY, 0, TUNING.PERISH_FAST, 0,
-        TUNING.CALORIES_SMALL, TUNING.HEALING_TINY, TUNING.PERISH_SUPERFAST, 0,
-        { "med", nil, 0.7 }, { "med", nil, 0.65 },
-        nil,
-        FOODTYPE.BERRY,
-        nil,
-        {
-            lure_data = TUNING.OCEANFISHING_LURE.BERRY,
-            single_use = true,
-            build = "oceanfishing_lure_mis",
-            symbol =
-            "hook_berries"
-        }),
-
-    berries_juicy = MakeVegStats(0, TUNING.CALORIES_SMALL, TUNING.HEALING_TINY, TUNING.PERISH_TWO_DAY, 0,
-        TUNING.CALORIES_MEDSMALL, TUNING.HEALING_SMALL, TUNING.PERISH_ONE_DAY, 0,
-        { "med", nil, 0.7 }, nil,
-        nil,
-        FOODTYPE.BERRY,
-        nil,
-        {
-            lure_data = TUNING.OCEANFISHING_LURE.BERRY,
-            single_use = true,
-            build = "oceanfishing_lure_mis",
-            symbol =
-            "hook_juiceberries"
-        }),
-
-    fig = MakeVegStats(0, TUNING.CALORIES_SMALL, 0, TUNING.PERISH_FAST, 0,
-        TUNING.CALORIES_MEDSMALL, TUNING.HEALING_TINY, TUNING.PERISH_SUPERFAST, 0,
-        { "med", nil, 0.7 }, { "med", nil, 0.65 },
-        nil,
-        FOODTYPE.BERRY,
-        nil,
-        {
-            lure_data = TUNING.OCEANFISHING_LURE.BERRY,
-            single_use = true,
-            build = "oceanfishing_lure_mis",
-            symbol =
-            "hook_fig"
-        }),
-
-    cactus_meat = MakeVegStats(0, TUNING.CALORIES_SMALL, -TUNING.HEALING_SMALL, TUNING.PERISH_MED, -TUNING.SANITY_TINY,
-        TUNING.CALORIES_SMALL, TUNING.HEALING_TINY, TUNING.PERISH_MED, TUNING.SANITY_MED),
-
-    watermelon = MakeVegStats(UNCOMMON, TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_FAST,
-        TUNING.SANITY_TINY,
-        TUNING.CALORIES_SMALL, TUNING.HEALING_TINY, TUNING.PERISH_SUPERFAST, TUNING.SANITY_TINY * 1.5,
-        { "med", 0.05, 0.7 }),
-
-    kelp = MakeVegStats(0, TUNING.CALORIES_TINY, -TUNING.HEALING_TINY, TUNING.PERISH_MED, -TUNING.SANITY_SMALL,
-        TUNING.CALORIES_TINY, 0, TUNING.PERISH_MED, -TUNING.SANITY_TINY,
-        { "med", nil, 0.7 }, { "med", nil, 0.65 },
-        {
-            build = "meat_rack_food_tot",
-            hunger = TUNING.CALORIES_TINY,
-            health = TUNING.HEALING_TINY,
-            sanity = TUNING
-                .SANITY_SMALL,
-            perish = TUNING.PERISH_PRESERVED,
-            time = TUNING.DRY_SUPERFAST
-        }),
-
-
-    tomato = MakeVegStats(COMMON, TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_FAST, 0,
-        TUNING.CALORIES_SMALL, TUNING.HEALING_MED, TUNING.PERISH_MED, 0,
-        { nil, 0.1, 0.75 }),
-
-    potato = MakeVegStats(COMMON, TUNING.CALORIES_SMALL, -TUNING.HEALING_SMALL, TUNING.PERISH_MED, -TUNING.SANITY_TINY,
-        TUNING.CALORIES_MED, TUNING.HEALING_MED, TUNING.PERISH_FAST, 0,
-        { nil, 0.05, 0.65 }),
-
-    asparagus = MakeVegStats(UNCOMMON, TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_FAST, 0,
-        TUNING.CALORIES_MED, TUNING.HEALING_SMALL, TUNING.PERISH_SUPERFAST, 0,
-        { "med", nil, 0.7 }),
-
-    onion = MakeVegStats(RARE, TUNING.CALORIES_TINY, 0, TUNING.PERISH_SLOW, -TUNING.SANITY_SMALL,
-        TUNING.CALORIES_TINY, TUNING.HEALING_TINY, TUNING.PERISH_MED, -TUNING.SANITY_TINY,
-        { "large", 0.05, 0.45 }),
-
-    garlic = MakeVegStats(RARE, TUNING.CALORIES_TINY, 0, TUNING.PERISH_SLOW, -TUNING.SANITY_SMALL,
-        TUNING.CALORIES_TINY, TUNING.HEALING_TINY, TUNING.PERISH_MED, -TUNING.SANITY_TINY,
-        { nil, 0.05, 0.775 }),
-
-    pepper = MakeVegStats(RARE, TUNING.CALORIES_TINY, -TUNING.HEALING_MED, TUNING.PERISH_SLOW, -TUNING.SANITY_MED,
-        TUNING.CALORIES_TINY, -TUNING.HEALING_SMALL, TUNING.PERISH_SLOW, -TUNING.SANITY_SMALL,
-        { nil, 0.1, 0.75 }),
-
     radish = MakeVegStats(COMMON, TUNING.CALORIES_SMALL, TUNING.HEALING_TINY, TUNING.PERISH_SLOW, 0,
         TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_MED, 0),
 
@@ -195,13 +66,10 @@ VEGGIES =
     turnip = MakeVegStats(COMMON, TUNING.CALORIES_MED, TUNING.HEALING_TINY, TUNING.PERISH_SLOW, 0,
         TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_MED, 0),
 
-    wheat = MakeVegStats(COMMON, 0, 0, TUNING.PERISH_SLOW, 0,
-        0, 0, TUNING.PERISH_SLOW, 0),
+    wheat = MakeVegStats(COMMON, TUNING.CALORIES_TINY, -TUNING.HEALING_SMALL, TUNING.PERISH_SLOW, 0,
+        TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_MED, TUNING.SANITY_TINY),
 
 }
-
-VEGGIES.cave_banana.extra_tags_fresh = { "monkeyqueenbribe" }
-VEGGIES.cave_banana.extra_tags_cooked = { "monkeyqueenbribe" }
 
 local SEEDLESS =
 {
@@ -218,8 +86,8 @@ local SEEDLESS =
 local assets_seeds =
 {
     Asset("ANIM", "anim/seeds.zip"),
-    Asset("ANIM", "anim/farm_plant_seeds.zip"),
-    Asset("ANIM", "anim/moded_seeds.zip"),
+    --Asset("ANIM", "anim/farm_plant_seeds.zip"),
+    Asset("ANIM", "anim/seeds_tropical.zip"),
 }
 
 local prefabs_seeds =
@@ -378,8 +246,8 @@ local function MakeVeggie(name, has_seeds)
         Asset("ANIM", "anim/" .. name .. ".zip"),
         Asset("INV_IMAGE", name),
     }
-    if VEGGIES[name].lure_data ~= nil then
-        table.insert(assets, Asset("ANIM", "anim/" .. VEGGIES[name].lure_data.build .. ".zip"))
+    if TRO_VEGGIES[name].lure_data ~= nil then
+        table.insert(assets, Asset("ANIM", "anim/" .. TRO_VEGGIES[name].lure_data.build .. ".zip"))
     end
 
     table.insert(assets, Asset("INV_IMAGE", name .. "_oversized_rot"))
@@ -405,7 +273,7 @@ local function MakeVeggie(name, has_seeds)
         name .. "_cooked",
         "spoiled_food",
     }
-    local dryable = VEGGIES[name].dryable
+    local dryable = TRO_VEGGIES[name].dryable
 
     if has_seeds then
         table.insert(prefabs, name .. "_seeds")
@@ -475,32 +343,11 @@ local function MakeVeggie(name, has_seeds)
 
         MakeInventoryPhysics(inst)
 
-        if name == "aloe" then
-            inst.AnimState:SetBank("moded_seeds")
-            inst.AnimState:SetBuild("moded_seeds")
-            inst.AnimState:PlayAnimation("aloe")
-        elseif name == "radish" then
-            inst.AnimState:SetBank("moded_seeds")
-            inst.AnimState:SetBuild("moded_seeds")
-            inst.AnimState:PlayAnimation("radish")
-        elseif name == "sweet_potato" then
-            inst.AnimState:SetBank("moded_seeds")
-            inst.AnimState:SetBuild("moded_seeds")
-            inst.AnimState:PlayAnimation("sweet_potato")
-        elseif name == "turnip" then
-            inst.AnimState:SetBank("moded_seeds")
-            inst.AnimState:SetBuild("moded_seeds")
-            inst.AnimState:PlayAnimation("turnip")
-        elseif name == "wheat" then
-            inst.AnimState:SetBank("moded_seeds")
-            inst.AnimState:SetBuild("moded_seeds")
-            inst.AnimState:PlayAnimation("wheat")
-        else
-            inst.AnimState:SetBank("farm_plant_seeds")
-            inst.AnimState:SetBuild("farm_plant_seeds")
-            inst.AnimState:PlayAnimation(name)
-        end
+        inst.AnimState:SetBank("seeds_tropical")
+        inst.AnimState:SetBuild("seeds_tropical")
+        inst.AnimState:PlayAnimation(name)
         inst.AnimState:SetRayTestOnBB(true)
+
         inst.scrapbook_anim = name
 
         inst.pickupsound = "vegetation_firm"
@@ -530,7 +377,7 @@ local function MakeVeggie(name, has_seeds)
         inst.components.edible.foodtype = FOODTYPE.SEEDS
         inst.components.edible.healthvalue = TUNING.HEALING_TINY / 2
         inst.components.edible.hungervalue = TUNING.CALORIES_TINY
-		
+
         inst:AddComponent("stackable")
         inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
@@ -612,20 +459,20 @@ local function MakeVeggie(name, has_seeds)
             inst:AddTag("weighable_OVERSIZEDVEGGIES")
         end
 
-        if VEGGIES[name].extra_tags_fresh then
-            for _, extra_tag in ipairs(VEGGIES[name].extra_tags_fresh) do
+        if TRO_VEGGIES[name].extra_tags_fresh then
+            for _, extra_tag in ipairs(TRO_VEGGIES[name].extra_tags_fresh) do
                 inst:AddTag(extra_tag)
             end
         end
 
-        local float = VEGGIES[name].float_settings
+        local float = TRO_VEGGIES[name].float_settings
         if float ~= nil then
             MakeInventoryFloatable(inst, float[1], float[2], float[3])
         else
             MakeInventoryFloatable(inst)
         end
 
-        if VEGGIES[name].lure_data ~= nil then
+        if TRO_VEGGIES[name].lure_data ~= nil then
             inst:AddTag("oceanfishing_lure")
         end
         if name == "wheat" then inst:SetPrefabNameOverride("quagmire_wheat") end
@@ -636,42 +483,18 @@ local function MakeVeggie(name, has_seeds)
         end
 
         inst:AddComponent("edible")
-        inst.components.edible.healthvalue = VEGGIES[name].health
-        inst.components.edible.hungervalue = VEGGIES[name].hunger
-        inst.components.edible.sanityvalue = VEGGIES[name].sanity or 0
+        inst.components.edible.healthvalue = TRO_VEGGIES[name].health
+        inst.components.edible.hungervalue = TRO_VEGGIES[name].hunger
+        inst.components.edible.sanityvalue = TRO_VEGGIES[name].sanity or 0
         inst.components.edible.foodtype = FOODTYPE.VEGGIE
-        inst.components.edible.secondaryfoodtype = VEGGIES[name].secondary_foodtype
+        inst.components.edible.secondaryfoodtype = TRO_VEGGIES[name].secondary_foodtype
 
         inst:AddComponent("perishable")
-        inst.components.perishable:SetPerishTime(VEGGIES[name].perishtime)
+        inst.components.perishable:SetPerishTime(TRO_VEGGIES[name].perishtime)
         inst.components.perishable:StartPerishing()
         inst.components.perishable.onperishreplacement = "spoiled_food"
 
         inst:AddComponent("stackable")
-        if name ~= "pumpkin" and
-            name ~= "eggplant" and
-            name ~= "durian" and
-            name ~= "watermelon" then
-            inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
-        end
-
-        if name == "watermelon" then
-            inst.components.edible.temperaturedelta = TUNING.COLD_FOOD_BONUS_TEMP
-            inst.components.edible.temperatureduration = TUNING.FOOD_TEMP_BRIEF
-        end
-
-        if name == "kelp" then
-            inst:AddComponent("repairer")
-            inst.components.repairer.repairmaterial = MATERIALS.KELP
-            inst.components.repairer.healthrepairvalue = TUNING.REPAIR_KELP_HEALTH
-        end
-
-        if dryable ~= nil then
-            inst:AddComponent("dryable")
-            inst.components.dryable:SetProduct(name .. "_dried")
-            inst.components.dryable:SetBuildFile(dryable.build)
-            inst.components.dryable:SetDryTime(dryable.time)
-        end
 
         inst:AddComponent("inspectable")
         inst:AddComponent("inventoryitem")
@@ -698,40 +521,23 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("cookable")
         inst.components.cookable.product = name .. "_cooked"
         if name == "wheat" then
-            inst.components.cookable.product = "ash"
             inst:AddComponent("mealable")
             inst.components.mealable:SetType("wheat")
         end
 
-        if VEGGIES[name].lure_data ~= nil then
+        if TRO_VEGGIES[name].lure_data ~= nil then
             inst:AddComponent("oceanfishingtackle")
-            inst.components.oceanfishingtackle:SetupLure(VEGGIES[name].lure_data)
+            inst.components.oceanfishingtackle:SetupLure(TRO_VEGGIES[name].lure_data)
         end
 
-        local halloweenmoonmutable_settings = VEGGIES[name].halloweenmoonmutable_settings
+        local halloweenmoonmutable_settings = TRO_VEGGIES[name].halloweenmoonmutable_settings
         if halloweenmoonmutable_settings ~= nil then
             inst:AddComponent("halloweenmoonmutable")
             inst.components.halloweenmoonmutable:SetPrefabMutated(halloweenmoonmutable_settings.prefab)
             inst.components.halloweenmoonmutable:SetOnMutateFn(halloweenmoonmutable_settings.onmutatefn)
         end
 
-        if TheNet:GetServerGameMode() == "quagmire" then
-            event_server_data("quagmire", "prefabs/veggies").master_postinit(inst)
-        end
-
         MakeHauntableLaunchAndPerish(inst)
-
-        if name == "carrot" then
-            inst.Spin = spin
-            inst:AddComponent("timer")
-            inst:ListenForEvent("timerdone", timerdone)
-            inst:AddComponent("activatable")
-            inst.components.activatable.OnActivate = OnActivateSpin
-            inst.components.activatable.quickaction = true
-            inst.components.inventoryitem:SetOnPickupFn(function()
-                inst.Transform:SetNoFaced()
-            end)
-        end
 
         return inst
     end
@@ -750,13 +556,13 @@ local function MakeVeggie(name, has_seeds)
         inst.AnimState:PlayAnimation("cooked")
         inst.scrapbook_anim = "cooked"
 
-        if VEGGIES[name].extra_tags_cooked then
-            for _, extra_tag in ipairs(VEGGIES[name].extra_tags_cooked) do
+        if TRO_VEGGIES[name].extra_tags_cooked then
+            for _, extra_tag in ipairs(TRO_VEGGIES[name].extra_tags_cooked) do
                 inst:AddTag(extra_tag)
             end
         end
 
-        local float = VEGGIES[name].cooked_float_settings
+        local float = TRO_VEGGIES[name].cooked_float_settings
         if float ~= nil then
             MakeInventoryFloatable(inst, float[1], float[2], float[3])
         else
@@ -770,16 +576,16 @@ local function MakeVeggie(name, has_seeds)
         end
 
         inst:AddComponent("perishable")
-        inst.components.perishable:SetPerishTime(VEGGIES[name].cooked_perishtime)
+        inst.components.perishable:SetPerishTime(TRO_VEGGIES[name].cooked_perishtime)
         inst.components.perishable:StartPerishing()
         inst.components.perishable.onperishreplacement = "spoiled_food"
 
         inst:AddComponent("edible")
-        inst.components.edible.healthvalue = VEGGIES[name].cooked_health
-        inst.components.edible.hungervalue = VEGGIES[name].cooked_hunger
-        inst.components.edible.sanityvalue = VEGGIES[name].cooked_sanity or 0
+        inst.components.edible.healthvalue = TRO_VEGGIES[name].cooked_health
+        inst.components.edible.hungervalue = TRO_VEGGIES[name].cooked_hunger
+        inst.components.edible.sanityvalue = TRO_VEGGIES[name].cooked_sanity or 0
         inst.components.edible.foodtype = FOODTYPE.VEGGIE
-        inst.components.edible.secondaryfoodtype = VEGGIES[name].secondary_foodtype
+        inst.components.edible.secondaryfoodtype = TRO_VEGGIES[name].secondary_foodtype
 
         inst:AddComponent("stackable")
         inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -794,61 +600,6 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("bait")
 
         ------------------------------------------------
-        inst:AddComponent("tradable")
-
-        if TheNet:GetServerGameMode() == "quagmire" then
-            event_server_data("quagmire", "prefabs/veggies").master_postinit_cooked(inst)
-        end
-
-        MakeHauntableLaunchAndPerish(inst)
-
-        return inst
-    end
-
-    local function fn_dried()
-        local inst = CreateEntity()
-
-        inst.entity:AddTransform()
-        inst.entity:AddAnimState()
-        inst.entity:AddNetwork()
-
-        MakeInventoryPhysics(inst)
-
-        inst.AnimState:SetBank(dryable.build)
-        inst.AnimState:SetBuild(dryable.build)
-        inst.AnimState:PlayAnimation("dried_" .. name)
-        inst.scrapbook_anim = "dried_" .. name
-
-        MakeInventoryFloatable(inst)
-
-        inst.entity:SetPristine()
-
-        if not TheWorld.ismastersim then
-            return inst
-        end
-
-        inst:AddComponent("perishable")
-        inst.components.perishable:SetPerishTime(dryable.perish)
-        inst.components.perishable:StartPerishing()
-        inst.components.perishable.onperishreplacement = "spoiled_food"
-
-        inst:AddComponent("edible")
-        inst.components.edible.healthvalue = dryable.health or 0
-        inst.components.edible.hungervalue = dryable.hunger or 0
-        inst.components.edible.sanityvalue = dryable.sanity or 0
-        inst.components.edible.foodtype = FOODTYPE.VEGGIE
-
-        inst:AddComponent("stackable")
-        inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
-
-        inst:AddComponent("inspectable")
-        inst:AddComponent("inventoryitem")
-
-        MakeSmallBurnable(inst)
-        MakeSmallPropagator(inst)
-
-        inst:AddComponent("bait")
-
         inst:AddComponent("tradable")
 
         MakeHauntableLaunchAndPerish(inst)
@@ -893,7 +644,7 @@ local function MakeVeggie(name, has_seeds)
         inst.components.heavyobstaclephysics:SetRadius(OVERSIZED_PHYSICS_RADIUS)
 
         inst:AddComponent("perishable")
-        inst.components.perishable:SetPerishTime(VEGGIES[name].perishtime * OVERSIZED_PERISHTIME_MULT)
+        inst.components.perishable:SetPerishTime(TRO_VEGGIES[name].perishtime * OVERSIZED_PERISHTIME_MULT)
         inst.components.perishable:StartPerishing()
         inst.components.perishable.onperishreplacement = nil
         inst.components.perishable:SetOnPerishFn(oversized_onperish)
@@ -1119,7 +870,7 @@ local function MakeVeggie(name, has_seeds)
 end
 
 local prefs = {}
-for veggiename, veggiedata in pairs(VEGGIES) do
+for veggiename, veggiedata in pairs(TRO_VEGGIES) do
     local veggies = MakeVeggie(veggiename, not SEEDLESS[veggiename])
     for _, v in ipairs(veggies) do
         table.insert(prefs, v)

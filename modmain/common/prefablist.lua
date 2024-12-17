@@ -105,6 +105,7 @@ PrefabFiles =
     "wildboreking_spawner",
     "tro_treasurechest",
     "buffs_tro", -- (Food) Buffs
+	"tro_veggies",
 
 }
 

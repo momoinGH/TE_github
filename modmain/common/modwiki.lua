@@ -249,9 +249,9 @@ WIKI_DATA.nectar_pod = {
 }
 WIKI_DATA.aloe = {
     tex = "aloe.tex",
-    bank = "moded_seeds",
-    build = "moded_seeds",
-    anim = "aloe",
+    bank = "aloe",
+    build = "aloe",
+    anim = "ldle",
     foodtype = "VEGGIE",
 }
 WIKI_DATA.ancient_remnant = {
