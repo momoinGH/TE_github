@@ -802,6 +802,31 @@ Constructor.AddAction({ priority = 9, distance = 4, mount_valid = false },
     function(act) return true end
 )
 
+----------------------------------------------------------------------------------------------------
+--活性机甲
+Constructor.AddAction(nil, "IRONTURNON", STRINGS.ACTIONS.IRONTURNON, function(act)
+    local inst = act.invobject
+    if inst and inst.components.ironmachine and not inst.components.ironmachine:IsOn() then
+         inst.components.ironmachine:TurnOn()
+         return true
+    end
+end)
+
+Constructor.AddAction(nil, "IRONTURNOFF", STRINGS.ACTIONS.IRONTURNOFF, function(act)
+    local inst = act.invobject
+    if inst and inst.components.ironmachine and inst.components.ironmachine:IsOn() then
+         inst.components.ironmachine:TurnOff()
+         return true
+    end
+end)
+
+Constructor.AddAction(nil, "CHARGE_UP", STRINGS.ACTIONS.CHARGE_UP, function(act)
+    if act.doer:HasTag("ironlord") then
+         return true
+    end
+end)
+ACTIONS.CHARGE_UP.do_not_locomote = true
+
 -- 渡渡羽毛扇摇扇动作写死在sg里了，没留overridebuild，勾一下
 AddStategraphPostInit("wilson", function(sg)
     local old_enter = sg.states["use_fan"].onenter

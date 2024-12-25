@@ -40,7 +40,7 @@ local IRONLORD_WORKS = {
     HAMMER = true,
     MINE = true,
 }
-
+--[[
 AddComponentAction("SCENE", "workable", function(inst, doer, actions, right)
     if right and doer:HasTag("ironlord") then
         -- 活性机甲
@@ -65,6 +65,25 @@ AddComponentAction("SCENE", "combat", function(inst, doer, actions, right)
         --活性机甲发射
         table.insert(actions, ACTIONS.TIRO)
     end
+end)]]
+
+local ARTIFACT_FORBIDDEN = {"beaver", "weremoose", "weregoose", "wonkey"}
+
+AddComponentAction("INVENTORY", "ironmachine", function(inst, doer, actions)
+     if (doer.replica.rider and doer.replica.rider:IsRiding()) or
+          not (inst.replica.inventoryitem and inst.replica.inventoryitem:IsHeldBy(doer)) then
+          return
+     end
+
+     for _,v in pairs(ARTIFACT_FORBIDDEN) do
+          if doer:HasTag(v) then return end
+     end
+
+     if inst:HasTag("ironmachineon") then
+          table.insert(actions, ACTIONS.IRONTURNOFF)
+     elseif not doer:HasTag("ironlord") then
+          table.insert(actions, ACTIONS.IRONTURNON)
+     end
 end)
 
 AddComponentAction("POINT", "gasser", function(inst, doer, pos, actions, right)

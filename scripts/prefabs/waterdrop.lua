@@ -27,6 +27,7 @@ local function ondeploy(inst, pt)
     plant.Transform:SetPosition(pt:Get())
     plant.AnimState:PlayAnimation("grow")
     plant.AnimState:PushAnimation("idle_loop", true)
+    plant.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/flower_of_life/plant")
 
     inst.planted = true
     inst:Remove()
@@ -51,16 +52,17 @@ local function fn(Sim)
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
-
-    inst.entity:AddNetwork()
 
     inst.AnimState:SetBank("waterdrop")
     inst.AnimState:SetBuild("waterdrop")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("waterdrop")
+    inst:AddTag("deployedplant")
 
     inst.entity:SetPristine()
 
@@ -68,18 +70,15 @@ local function fn(Sim)
         return inst
     end
 
+    inst:AddComponent("inspectable")
+    inst:AddComponent("inventoryitem")
+
     inst:AddComponent("edible")
     inst.components.edible.foodtype = FOODTYPE.GOODIES
     inst.components.edible.healthvalue = TUNING.HEALING_SUPERHUGE * 3
     inst.components.edible.hungervalue = TUNING.CALORIES_SUPERHUGE * 3
     inst.components.edible.sanityvalue = TUNING.SANITY_HUGE * 3
     inst.components.edible:SetOnEatenFn(oneat)
-
-    inst:AddComponent("inspectable")
-
-
-    inst:AddComponent("inventoryitem")
-
 
     inst:AddComponent("deployable")
     inst.components.deployable.CanDeploy = test_ground
@@ -89,4 +88,4 @@ local function fn(Sim)
 end
 
 return Prefab("waterdrop", fn, assets),
-    MakePlacer("waterdrop_placer", "lifeplant", "lifeplant", "idle_loop", nil, nil, nil, 2.5)
+    MakePlacer("waterdrop_placer", "lifeplant", "lifeplant", "idle_loop")

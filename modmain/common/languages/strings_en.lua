@@ -9806,5 +9806,12 @@ STRINGS.TALKINGBIRD = {
     "I'm okay!"
     }
     }
+
+STRINGS.ACTIONS.IRONTURNON = "Turn On"
+STRINGS.ACTIONS.IRONTURNOFF = "Turn Off"
+STRINGS.ACTIONS.CHARGE_UP = "Charge"
+STRINGS.ACTIONS.PUNCH = "Punch"
+STRINGS.CHARACTERS.GENERIC.ANNOUNCE_SUITUP = "For Science!"
+
 modimport "modmain/common/languages/stringscreeps"
 modimport "modmain/common/languages/wurt_quotes"

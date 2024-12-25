@@ -2,6 +2,8 @@ local Utils = require("tropical_utils/utils")
 
 modimport "modmain/common/stategraphs/SGwilson"
 modimport "modmain/common/stategraphs/SGwilson_client"
+modimport "modmain/common/stategraphs/AddIronLordStates"
+modimport "modmain/common/stategraphs/AddIronLordStates_client"
 
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.MEAL, "doshortaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.MEAL, "doshortaction"))

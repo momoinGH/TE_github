@@ -111,6 +111,11 @@ STRINGS.ACTIONS.OPENTUNA                                = "打开"
 STRINGS.ACTIONS.GAS                                     = "喷"
 STRINGS.ACTIONS.TIRO                                    = "射击"
 
+STRINGS.ACTIONS.IRONTURNON = "开启"
+STRINGS.ACTIONS.IRONTURNOFF = "关闭"
+STRINGS.ACTIONS.CHARGE_UP = "充能"
+STRINGS.ACTIONS.PUNCH = "重击"
+
 --gorge
 STRINGS.ACTIONS.STOREOPEN                               = "交易"
 STRINGS.ACTIONS.GRIND                                   = "研磨"
@@ -2576,7 +2581,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_BASALT = "快速冷却形成的岩石�
 STRINGS.NAMES.LIVING_ARTIFACT = "活性机甲"
 STRINGS.RECIPE_DESC.LIVING_ARTIFACT = "让我们把它们合为一体，看看会怎么样。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIVING_ARTIFACT = "我简直无敌了！"
-
+STRINGS.CHARACTERS.GENERIC.ANNOUNCE_SUITUP = "为了科学！"
 
 -------------------------------------------------------峰顶pinacle------------------------------------
 

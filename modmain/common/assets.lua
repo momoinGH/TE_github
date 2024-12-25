@@ -22,8 +22,21 @@ Assets =
     --Asset("SOUND", "sound/volcano_new.fsb"),
     --Asset("SOUNDPACKAGE", "sound/tropical.fev"),
     --Asset("SOUND", "sound/tropical.fsb"),
+
+    Asset("ATLAS", "images/overlays/poison.xml"),
+    Asset("IMAGE", "images/overlays/poison.tex"),
+    Asset("ATLAS", "images/overlays/hayfever.xml"),
+    Asset("IMAGE", "images/overlays/hayfever.tex"),
+    Asset("ATLAS", "images/overlays/fog.xml"),
+    Asset("IMAGE", "images/overlays/fog.tex"),
+    Asset("ATLAS", "images/overlays/living_artifact.xml"),
+    Asset("IMAGE", "images/overlays/living_artifact.tex"),
+
+
     Asset("ATLAS", "images/barco.xml"),
 
+    Asset("ANIM", "anim/livingartifact_meter.zip"),
+    Asset("ANIM", "anim/player_lifeplant.zip"),
     Asset("ANIM", "anim/player_actions_paddle.zip"),
     Asset("ANIM", "anim/player_actions_speargun.zip"),
     Asset("ANIM", "anim/player_actions_tap.zip"),
@@ -39,8 +52,7 @@ Assets =
     Asset("ANIM", "anim/player_actions_shear.zip"),
     Asset("ANIM", "anim/player_actions_cropdust.zip"),
     Asset("ANIM", "anim/ripple_build.zip"),
-    Asset("ATLAS", "images/fx4te.xml"),
-    Asset("IMAGE", "images/fx4te.tex"),
+
     Asset("ANIM", "anim/boat_health.zip"),
     Asset("ANIM", "anim/player_actions_telescope.zip"),
     Asset("ANIM", "anim/pig_house_old.zip"),
