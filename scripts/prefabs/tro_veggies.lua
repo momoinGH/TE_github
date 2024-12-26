@@ -840,7 +840,7 @@ local function MakeVeggie(name, has_seeds)
         inst:AddComponent("lootdropper")
         inst.components.lootdropper:SetLoot(plant_def.loot_oversized_rot)
 
-        inst.components.inventoryitem:ChangeImageName(name .. "_oversized_rot")
+        --inst.components.inventoryitem:ChangeImageName(name .. "_oversized_rot")
 
         MakeMediumBurnable(inst)
         inst.components.burnable:SetOnBurntFn(oversized_onburnt)
