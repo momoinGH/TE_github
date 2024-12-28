@@ -4,6 +4,7 @@
     "need-check-nil",
     "undefined-field",
     "param-type-mismatch",
-    "inject-field"
+    "inject-field",
+    "redundant-return"
   ]
 }

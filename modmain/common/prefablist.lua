@@ -106,6 +106,9 @@ PrefabFiles =
     "tro_treasurechest",
     "buffs_tro", -- (Food) Buffs
 	"tro_veggies",
+	"fryfocals_charge",
+	"hiddendanger_fx",
+	"goggles",
 
 }
 

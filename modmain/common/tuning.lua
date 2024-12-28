@@ -1,5 +1,12 @@
 local TechTree = require("techtree")
-
+local require = GLOBAL.require
+local TUNING = GLOBAL.TUNING
+local wilson_attack = 34
+local wilson_health = 150
+local seg_time = 30
+local total_day_time = seg_time*16
+local night_segs = 2
+local night_time = seg_time * night_segs
 TUNING.HAMROOM = {
     roomtype = {
         playerhouse_city_floor = "large",
@@ -466,7 +473,6 @@ TUNING.BUFF_BOUILLABAISSE_DURATION = TUNING.SEG_TIME
 TUNING.SHARK_HAT_PERISHTIME = TUNING.EYEBRELLA_PERISHTIME
 
 TUNING.SPOILED_FISH_LARGE_NUTRIENTS = { 24, 0, 0 }
-
 TUNING.MYSTERYMEAT_NUTRIENTS = { 24, 24, 24 }
 
 TUNING.JELLYFISH_WEIGHTS = {
@@ -477,3 +483,49 @@ TUNING.RAINBOWJELLYFISH_WEIGHTS = {
     min = 69.36,
     max = 118.21,
 }
+
+TUNING.BATHAT_PERISHTIME = TUNING.TOTAL_DAY_TIME*2
+TUNING.SCAN_DISTANCE = 30
+TUNING.GOGGLES_PERISHTIME = TUNING.TOTAL_DAY_TIME*10
+TUNING.GOGGLES_HEAT_PERISHTIME = TUNING.TOTAL_DAY_TIME*2
+TUNING.GOGGLES_ARMOR_ARMOR = wilson_health * 4 * 0.7
+TUNING.GOGGLES_ARMOR_ABSORPTION = 0.85
+TUNING.GOGGLES_SHOOT_USES = 10
+TUNING.NEARSIGHTED_BLUR_START_RADIUS = 0.0
+TUNING.NEARSIGHTED_BLUR_STRENGTH = 3.0
+TUNING.GOGGLES_HEAT =
+	{
+		HOT=
+		{
+			BLOOM = true,
+			DESATURATION = 1.0,
+			MULT_COLOUR = {0.0, 1.0, 0.5, 1.0},
+			ADD_COLOUR  = {1.0, 0.1, 0.3, 1.0},
+		},
+		COLD=
+		{
+			BLOOM = false,
+			DESATURATION = 0.7,
+			MULT_COLOUR = {0.0, 0.0, 0.3, 1.0},
+			ADD_COLOUR  = {0.1, 0.1, 0.5, 1.0},
+		},
+		GROUND=
+		{
+			MULT_COLOUR = {0.0, 0.1, 0.3, 1.0},
+        	ADD_COLOUR  = {0.1, 0.1, 0.5, 1.0}
+		},
+		WAVES=
+		{
+			MULT_COLOUR = {0.0, 0.0, 0.3, 1.0},
+			ADD_COLOUR  = {0.1, 0.1, 0.6, 1.0},
+		},
+		BLUR=
+		{
+			ENABLED = true,
+			START_RADIUS = -5.0,
+			STRENGTH = 0.16,
+		}
+ 	}
+
+TUNING.TELEBRELLA_USES = 10
+TUNING.NEARSIGHTED_ACTION_RANGE = 4

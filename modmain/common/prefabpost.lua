@@ -1,7 +1,5 @@
 local Utils = require("tropical_utils/utils")
 
-
-
 ----------------------------------------------------------------------------------------------------
 
 -- 太长的单独写一个文件了
@@ -798,47 +796,41 @@ end)
 -- scripts/widgets/image
 AddClassPostConstruct("widgets/image", function(self)
     Utils.FnDecorator(self, "SetTexture", function(atlas, tex, default_tex)
-        return nil, false, {atlas or tex and GetInventoryItemAtlas(tex) or
-                            default_tex and GetInventoryItemAtlas(default_tex),
-                            tex, default_tex}
+        return nil, false, { atlas or tex and GetInventoryItemAtlas(tex) or
+        default_tex and GetInventoryItemAtlas(default_tex),
+            tex, default_tex }
     end)
 end)
 
 ----------------------------------------------------------------------------------------------------
 --晾肉架悬挂物品，以后可晾物品只用在fn里添加dryable组件并SetProduct和DryTime，Symbol写在这里就行了
-local PLENV = env
-GLOBAL.setfenv(1, GLOBAL)
-
 local tro_buildfile = "meat_rack_food_tro"
-
-local meatrack_items = {--前面是prefab名，后面是bulid里面的Symbol
+local meatrack_items = { --前面是prefab名，后面是bulid里面的Symbol
     coi = "coi",
-	dogfish_dead = "dogfish",
+    dogfish_dead = "dogfish",
     jellyjerky = "jellyjerky",
     seaweed_dried = "seaweed_dried",
     fish2 = "fish2",
-	fish3 = "fish3",
-	fish4 = "fish4",
-	fish5 = "fish5",
+    fish3 = "fish3",
+    fish4 = "fish4",
+    fish5 = "fish5",
     froglegs_poison = "froglegs_poison",
-	jellyfish_dead = "jellyfish_dead",
+    jellyfish_dead = "jellyfish_dead",
     quagmire_crabmeat = "quagmire_crabmeat",
     quagmire_smallmeat = "quagmire_smallmeat",
-	rainbowjellyfish_dead = "rainbowjellyfish_dead",
-	salmon = "salmon",
-	seaweed = "seaweed",
+    rainbowjellyfish_dead = "rainbowjellyfish_dead",
+    salmon = "salmon",
+    seaweed = "seaweed",
     swordfish_dead = "dead_swordfish",
     venus_stalk = "venus_stalk",
     walkingstick = "walkingstick"
 
 }
 
-PLENV.AddPrefabPostInit("meatrack", function(inst)
-    if not TheWorld.ismastersim then
-        return
-    end
+AddPrefabPostInit("meatrack", function(inst)
+    if not TheWorld.ismastersim then return end
 
-    local _OnStartDrying = inst.components.dryer.onstartdrying--开始晾的时候，即可晾物品
+    local _OnStartDrying = inst.components.dryer.onstartdrying --开始晾的时候，即可晾物品
     local function OnStartDrying(inst, ingredient, buildfile)
         if meatrack_items[ingredient] then
             ingredient = meatrack_items[ingredient]
@@ -849,7 +841,7 @@ PLENV.AddPrefabPostInit("meatrack", function(inst)
 
     inst.components.dryer:SetStartDryingFn(OnStartDrying)
 
-    local _ondonedrying = inst.components.dryer.ondonedrying--晾完的时候，即产物
+    local _ondonedrying = inst.components.dryer.ondonedrying --晾完的时候，即产物
     local function OnDoneDrying(inst, product, buildfile)
         if meatrack_items[product] then
             product = meatrack_items[product]
@@ -859,7 +851,7 @@ PLENV.AddPrefabPostInit("meatrack", function(inst)
     end
 
     inst.components.dryer:SetDoneDryingFn(OnDoneDrying)
---[[
+    --[[
     local _StartDrying = inst.components.dryer.StartDrying
     local function StartDrying(self, dryable, ...)
         if inst:GetIsInInterior() then
@@ -871,4 +863,193 @@ PLENV.AddPrefabPostInit("meatrack", function(inst)
     end
 
     inst.components.dryer.StartDrying = StartDrying]]
+end)
+
+AddPrefabPostInit("mosquitosack", function(inst)
+    if not GLOBAL.TheWorld.ismastersim then return end
+
+    inst:AddComponent("fuel")
+    inst.components.fuel.fueltype = FUELTYPE.BLOOD  --新燃料值：血，可以用蚊子血嚢给蝙蝠帽回耐久
+    inst.components.fuel.fuelvalue = TUNING.TOTAL_DAY_TIME * .5
+end)
+
+local require = GLOBAL.require
+local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
+local resolvefilepath = GLOBAL.resolvefilepath
+
+AddClassPostConstruct("widgets/controls", function(self)
+    if self.owner == nil then return end
+    local VisorOver = require "widgets/visorover"
+    self.visorover = self:AddChild(VisorOver(self.owner))
+    self.visorover:MoveToBack()
+end)
+
+AddClassPostConstruct("screens/playerhud", function(self)
+    local BatSonar = require "widgets/batsonar"
+    local TrapMarker = require "widgets/trapmarker"
+
+    local old_CreateOverlays = self.CreateOverlays
+    function self:CreateOverlays(owner)
+        old_CreateOverlays(self, owner)
+        self.batview = self.overlayroot:AddChild(BatSonar(owner))
+        self.trapmarker = self.overlayroot:AddChild(TrapMarker(owner))
+    end
+
+    local shootview = false
+    local old_OnUpdate = self.OnUpdate
+    function self:OnUpdate(dt)
+        old_OnUpdate(self, dt)
+
+        if self.batview and self.trapmarker and shootview ~= nil and self.owner then
+            if not (self.batview.shown or self.trapmarker.shown or shootview) and
+                self.owner.replica.inventory:EquipHasTag("invisiblegoggles") then
+                self.gogglesover.bg:SetTint(1, 1, 1, 0)
+            elseif (self.batview.shown or self.trapmarker.shown or shootview) and
+                not self.owner.replica.inventory:EquipHasTag("invisiblegoggles") then
+                self.gogglesover.bg:SetTint(1, 1, 1, 1)
+            end
+
+            if not self.batview.shown and self.owner.replica.inventory:EquipHasTag("batvision") then
+                self.batview:StartSonar()
+            elseif self.batview.shown and not self.owner.replica.inventory:EquipHasTag("batvision") then
+                self.batview:StopSonar()
+            end
+
+            if not self.trapmarker.shown and self.owner.replica.inventory:EquipHasTag("dangervision") then
+                self.trapmarker:ShowMarker()
+            elseif self.trapmarker.shown and not self.owner.replica.inventory:EquipHasTag("dangervision") then
+                self.trapmarker:HideMarker()
+            end
+
+            if not shootview and self.owner.replica.inventory:EquipHasTag("shootvision") then
+                shootview = true
+            elseif shootview and not self.owner.replica.inventory:EquipHasTag("shootvision") then
+                shootview = false
+            end
+        end
+    end
+end)
+
+AddPlayerPostInit(function(inst)
+    local function fn(ent)
+        if ent == GLOBAL.TheWorld then --[[
+	        local tuning = TUNING.GOGGLES_HEAT.GROUND
+			 ent.Map:SetMultColour(unpack(tuning.MULT_COLOUR))
+			 ent.Map:SetAddColour(unpack(tuning.ADD_COLOUR))
+
+			 local tuning = TUNING.GOGGLES_HEAT.WAVES
+			 local waves = ent.WaveComponent or ent.CloudComponent
+			 if waves then
+			 	waves:SetMultColour(unpack(tuning.MULT_COLOUR))
+			 	waves:SetAddColour(unpack(tuning.ADD_COLOUR))
+			 end]]
+            return
+        end
+        if ent.AnimState then
+            local tuning
+            if not ent:HasTag("shadow") and (ent:HasTag("monster") or ent:HasTag("animal") or ent:HasTag("character") or ent:HasTag("smallcreature") or ent:HasTag("seacreature") or ent:HasTag("oceanfish")) then
+                tuning = TUNING.GOGGLES_HEAT.HOT
+            else
+                tuning = TUNING.GOGGLES_HEAT.COLD
+            end
+            if tuning.BLOOM then
+                ent.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+            end
+            ent.AnimState:SetMultColour(GLOBAL.unpack(tuning.MULT_COLOUR))
+            ent.AnimState:SetAddColour(GLOBAL.unpack(tuning.ADD_COLOUR))
+            -- ent.AnimState:SetSaturation(1 - tuning.DESATURATION)
+        end
+    end
+
+    local function OnPlayerActivated(inst)
+        GLOBAL.TheWorld:ListenForEvent("ccoverrides", function()
+            inst:DoTaskInTime(0, function()
+                if inst.components.playervision.heatvision then
+                    if GLOBAL.TheWorld.components.globalcolourmodifier then
+                        GLOBAL.TheWorld.components.globalcolourmodifier:SetModifyColourFn(fn)
+                    end
+                elseif inst.components.playervision.heatvision == false then
+                    if GLOBAL.TheWorld.components.globalcolourmodifier then
+                        GLOBAL.TheWorld.components.globalcolourmodifier:Reset()
+                    end
+                end
+            end)
+        end, inst)
+    end
+
+    if not GLOBAL.TheNet:IsDedicated() then
+        inst:ListenForEvent("playeractivated", OnPlayerActivated)
+    end
+end)
+
+AddComponentPostInit("playervision", function(self)
+    local BAT_COLOURCUBE = resolvefilepath "images/colour_cubes/bat_vision_on_cc.tex"
+    local BAT_COLOURCUBES =
+    {
+        day = BAT_COLOURCUBE,
+        dusk = BAT_COLOURCUBE,
+        night = BAT_COLOURCUBE,
+        full_moon = BAT_COLOURCUBE,
+    }
+    local HEATVISION_COLOURCUBE = GLOBAL.resolvefilepath("images/colour_cubes/heat_vision_cc.tex")
+    local HEATVISION_COLOURCUBES =
+    {
+        day = HEATVISION_COLOURCUBE,
+        dusk = HEATVISION_COLOURCUBE,
+        night = HEATVISION_COLOURCUBE,
+        full_moon = HEATVISION_COLOURCUBE,
+    }
+    local SHOOT_COLOURCUBE = resolvefilepath "images/colour_cubes/shooting_goggles_cc.tex"
+    local SHOOT_COLOURCUBES =
+    {
+        day = SHOOT_COLOURCUBE,
+        dusk = SHOOT_COLOURCUBE,
+        night = SHOOT_COLOURCUBE,
+        full_moon = SHOOT_COLOURCUBE,
+    }
+
+    local function OnEquipChanged(inst)
+        local self = inst.components.playervision
+        if self.batvision == not inst.replica.inventory:EquipHasTag("batvision") then
+            self.batvision = not self.batvision
+            self:UpdateCCTable()
+        end
+        if self.heatvision == not inst.replica.inventory:EquipHasTag("heatvision") then
+            self.heatvision = not self.heatvision
+            self:UpdateCCTable()
+        end
+        if self.shootvision == not inst.replica.inventory:EquipHasTag("shootvision") then
+            self.shootvision = not self.shootvision
+            self:UpdateCCTable()
+        end
+    end
+
+    local function OnInit(inst, self)
+        inst:ListenForEvent("equip", OnEquipChanged)
+        inst:ListenForEvent("unequip", OnEquipChanged)
+        if not GLOBAL.TheWorld.ismastersim then
+            inst:ListenForEvent("inventoryclosed", OnEquipChanged)
+            if inst.replica.inventory == nil then return end
+        end
+        OnEquipChanged(inst)
+    end
+
+    self.batvision = false
+    self.heatvision = false
+    self.shootvision = false
+
+    self.inst:DoTaskInTime(0, OnInit, self)
+
+    local old_UpdateCCTable = self.UpdateCCTable
+    function self:UpdateCCTable()
+        old_UpdateCCTable(self)
+        local cctable = (self.batvision and BAT_COLOURCUBES)
+            or (self.heatvision and HEATVISION_COLOURCUBES)
+            or (self.shootvision and SHOOT_COLOURCUBES)
+            or nil
+        if cctable ~= self.currentcctable and cctable ~= nil then
+            self.currentcctable = cctable
+            self.inst:PushEvent("ccoverrides", cctable)
+        end
+    end
 end)

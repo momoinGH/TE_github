@@ -31,10 +31,16 @@ Assets =
     Asset("IMAGE", "images/overlays/fog.tex"),
     Asset("ATLAS", "images/overlays/living_artifact.xml"),
     Asset("IMAGE", "images/overlays/living_artifact.tex"),
+    Asset("ATLAS", "images/overlays/visorvision.xml"),
+    Asset("IMAGE", "images/overlays/visorvision.tex"),
 
+    Asset("IMAGE", "images/colour_cubes/bat_vision_on_cc.tex"),
+    Asset("IMAGE", "images/colour_cubes/shooting_goggles_cc.tex"),
 
     Asset("ATLAS", "images/barco.xml"),
 
+    Asset("ANIM", "anim/player_wagstaff.zip" ),
+    Asset("ANIM", "anim/player_mount_wagstaff.zip"),
     Asset("ANIM", "anim/livingartifact_meter.zip"),
     Asset("ANIM", "anim/player_lifeplant.zip"),
     Asset("ANIM", "anim/player_actions_paddle.zip"),

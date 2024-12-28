@@ -15,6 +15,7 @@ FUELTYPE.REPARODEBARCO = "REPARODEBARCO"
 FUELTYPE.LIVINGARTIFACT = "LIVINGARTIFACT"   -- living_artifact.tex
 FUELTYPE.ANCIENT_REMNANT = "ANCIENT_REMNANT" -- ancient_remnant.tex
 FUELTYPE.CORK = "CORK"                       -- cork.tex
+FUELTYPE.BLOOD = "BLOOD" --新增一个燃料值：血，可以用蚊子血嚢给蝙蝠帽回耐久
 
 MATERIALS.SANDBAG = "sandbag"
 MATERIALS.LIMESTONE = "limestone"

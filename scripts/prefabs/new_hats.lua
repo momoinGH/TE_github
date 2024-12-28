@@ -14,12 +14,14 @@ local function MakeHat(name, bankparam, prefabnameparam)
 
     local function onequip(inst, owner, symbol_override)
         local skin_build = inst:GetSkinBuild()
+        local symbol_override = symbol_override and "swap_hat" or "swap_hat"
+
         if skin_build ~= nil then
             owner:PushEvent("equipskinneditem", inst:GetSkinName())
-            owner.AnimState:OverrideItemSkinSymbol("swap_hat", skin_build, symbol_override or "swap_hat", inst.GUID,
+            owner.AnimState:OverrideItemSkinSymbol("swap_hat", skin_build, symbol_override, inst.GUID,
                 fname)
         else
-            owner.AnimState:OverrideSymbol("swap_hat", fname, symbol_override or "swap_hat")
+            owner.AnimState:OverrideSymbol("swap_hat", fname, symbol_override)
         end
         owner.AnimState:Show("HAT")
         owner.AnimState:Show("HAIR_HAT")
@@ -35,11 +37,6 @@ local function MakeHat(name, bankparam, prefabnameparam)
             if inst.components.fueled ~= nil then
                 inst.components.fueled:StartConsuming()
             end
-        end
-
-        if inst:HasTag("disguise") then
-            owner:RemoveTag("monster")
-            owner:RemoveTag("merm")
         end
     end
 
@@ -63,15 +60,6 @@ local function MakeHat(name, bankparam, prefabnameparam)
         if inst.components.fueled ~= nil then
             inst.components.fueled:StopConsuming()
         end
-
-        if inst:HasTag("disguise") then
-            if owner:HasTag("spiderwhisperer") or owner:HasTag("playermonster") then
-                owner:AddTag("monster")
-            end
-            if owner:HasTag("playermerm") then
-                owner:AddTag("merm")
-            end
-        end
     end
 
     local function opentop_onequip(inst, owner)
@@ -88,8 +76,10 @@ local function MakeHat(name, bankparam, prefabnameparam)
         owner.AnimState:Show("HAIR_NOHAT")
         owner.AnimState:Show("HAIR")
 
-        owner.AnimState:Show("HEAD")
-        owner.AnimState:Hide("HEAD_HAT")
+        if owner:HasTag("player") then
+            owner.AnimState:Show("HEAD")
+            owner.AnimState:Hide("HEAD_HAT")
+       end
 
         if not owner:HasTag("equipmentmodel") then
             if inst.components.fueled ~= nil then
@@ -248,20 +238,7 @@ local function MakeHat(name, bankparam, prefabnameparam)
     -- end
 
     local function double_umbrella_onequip(inst, owner)
-        owner.AnimState:OverrideSymbol("swap_hat", "hat_double_umbrella", "swap_hat")
-        owner.AnimState:Show("HAT")
-        owner.AnimState:Hide("HAT_HAIR")
-        owner.AnimState:Show("HAIR_NOHAT")
-        owner.AnimState:Show("HAIR")
-
-        owner.AnimState:Show("HEAD")
-        owner.AnimState:Hide("HEAD_HAIR")
-
-        if not owner:HasTag("equipmentmodel") then
-            if inst.components.fueled then
-                inst.components.fueled:StartConsuming()
-            end
-        end
+        opentop_onequip(inst, owner)
 
         -- double_umbrella_updatesound(inst)
 
@@ -480,47 +457,6 @@ local function MakeHat(name, bankparam, prefabnameparam)
         return inst
     end
 
-
-    local function disguise()
-        local inst = CreateEntity()
-        inst.entity:AddNetwork()
-        inst.entity:AddTransform()
-        inst.entity:AddAnimState()
-        MakeInventoryPhysics(inst)
-
-        inst.AnimState:SetBank("disguise")
-        inst.AnimState:SetBuild("hat_disguise")
-        inst.AnimState:PlayAnimation("anim")
-
-
-        inst:AddTag("hat")
-        inst:AddTag("disguise")
-        MakeInventoryFloatable(inst)
-
-        inst.entity:SetPristine()
-
-        if not TheWorld.ismastersim then
-            return inst
-        end
-
-        inst:AddComponent("inspectable")
-
-        inst:AddComponent("inventoryitem")
-
-        inst:AddComponent("tradable")
-
-        inst:AddComponent("equippable")
-        inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
-
-        inst.components.equippable:SetOnEquip(onequip)
-
-        inst.components.equippable:SetOnUnequip(onunequip)
-
-        MakeHauntableLaunch(inst)
-
-        return inst
-    end
-
     local SHARK_TEETHHAT_DAPPERNESS = 0
     local SHARK_TEETHHAT_DAPPERNESS_OCEAN = TUNING.DAPPERNESS_LARGE
 
@@ -553,21 +489,6 @@ local function MakeHat(name, bankparam, prefabnameparam)
         inst.components.equippable:SetDappernessFn(shark_teethhat_calculation)
 
         inst.components.equippable:SetOnEquip(opentop_onequip)
-        -- inst.components.equippable:SetOnUnequip(shark_teeth_onunequip)
-
-        --inst.onmountboat = function(player, data)
-            --inst.components.equippable.dapperness = TUNING.DAPPERNESS_LARGE
-        --end
-        --inst.ondismountboat = function(player, data)
-           -- inst.components.equippable.dapperness = 0
-        --end
-
-        -- inst:DoTaskInTime(0.1,function()
-        -- local owner = inst.components.inventoryitem.owner
-        -- if owner and owner.components.sailor and owner.components.sailor:IsSailing() then
-        -- inst.onmountboat(inst)
-        -- end
-        -- end)
 
         return inst
     end
@@ -594,8 +515,6 @@ local function MakeHat(name, bankparam, prefabnameparam)
         fn = brainjelly
     elseif name == "gas" then
         fn = gas
-    elseif name == "disguise" then
-        fn = disguise
     elseif name == "shark_teeth" then
         fn = shark_teeth
     end
@@ -611,7 +530,6 @@ return MakeHat("pirate"),
     MakeHat("ox"),
     MakeHat("aerodynamic"),
     MakeHat("brainjelly"),
-    MakeHat("disguise"),
     MakeHat("shark_teeth"),
     MakeHat("gas")
 --    MakeHat("bunny", "beefalohat", "bunnyhat")
