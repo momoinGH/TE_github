@@ -15,6 +15,8 @@ Assets =
     Asset("SOUND", "sound/sw_character.fsb"),
     Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"),
     Asset("SOUND", "sound/DLC003_sfx.fsb"),
+	Asset("SOUNDPACKAGE", "sound/dontstarve_wagstaff.fev"),
+	Asset("SOUND", "sound/dontstarve_wagstaff.fsb"),
     Asset("IMAGE", "images/fog_cloud.tex"),
     --Asset("SOUND", "sound/amb_stream_SW.fsb"),
     --NEW SOUND FILE

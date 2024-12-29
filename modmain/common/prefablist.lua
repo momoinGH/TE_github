@@ -109,6 +109,7 @@ PrefabFiles =
 	"fryfocals_charge",
 	"hiddendanger_fx",
 	"goggles",
+	"thumper",
 
 }
 
