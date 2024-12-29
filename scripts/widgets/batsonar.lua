@@ -5,7 +5,7 @@ local BatSonar = Class(Widget, function(self, owner)
     Widget._ctor(self, "BatSonar")
     self:SetClickable(false)
 
-    self.bg2 = self:AddChild(Image("images/overlays/fx_batsonar.xml", "fog_over.tex"))
+    self.bg2 = self:AddChild(Image("images/overlays/fog.xml", "fog_over.tex"))
     self.bg2:SetVRegPoint(ANCHOR_MIDDLE)
     self.bg2:SetHRegPoint(ANCHOR_MIDDLE)
     self.bg2:SetVAnchor(ANCHOR_MIDDLE)

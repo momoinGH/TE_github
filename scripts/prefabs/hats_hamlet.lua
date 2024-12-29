@@ -225,6 +225,16 @@ local function MakeHat(name)
     local function bat()
         local inst = simple(bat_custom_init)
 
+        inst:AddTag("goggles")
+        inst:AddTag("invisiblegoggles")
+        inst:AddTag("batvision")
+        inst:AddTag("no_sewing")
+        inst:AddTag("venting")
+        inst:AddTag("bat_hat")
+        inst:AddTag("clearfog")
+
+        inst.components.floater:SetBankSwapOnFloat(false, nil, { bank = "bathat", anim = "anim" })
+
         if not TheWorld.ismastersim then
             return inst
         end
@@ -238,14 +248,6 @@ local function MakeHat(name)
         inst.components.fueled:SetDepletedFn(bat_perish)
         inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
         inst.components.fueled.accepting = true
-
-        inst:AddTag("goggles")
-        inst:AddTag("invisiblegoggles")
-        inst:AddTag("batvision")
-        inst:AddTag("no_sewing")
-        inst:AddTag("venting")
-        inst:AddTag("bat_hat")
-        inst:AddTag("clearfog")
 
         return inst
     end
@@ -313,6 +315,8 @@ local function MakeHat(name)
 		inst.components.equippable:SetOnEquip( disguise_onequip )
 		inst.components.equippable:SetOnUnequip( disguise_unequip )
 		inst.opentop = true
+
+        return inst
     end
 
     local function antmask_onupdate(inst)

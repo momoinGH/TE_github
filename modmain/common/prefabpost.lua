@@ -873,6 +873,39 @@ AddPrefabPostInit("mosquitosack", function(inst)
     inst.components.fuel.fuelvalue = TUNING.TOTAL_DAY_TIME * .5
 end)
 
+AddComponentPostInit("combat", function(self)
+	function self:GetWeapon()
+		if self.inst.components.inventory ~= nil then
+			local item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+			return item ~= nil
+				and item.components.weapon ~= nil
+				and (item.components.projectile ~= nil or
+					not (self.inst.components.rider ~= nil and
+						self.inst.components.rider:IsRiding()) or
+					item:HasTag("rangedweapon"))
+				and item
+				or nil
+		end
+	end
+end)
+
+AddClassPostConstruct("components/combat_replica", function(self)
+	function self:GetWeapon()
+		if self.inst.components.combat ~= nil then
+			return self.inst.components.combat:GetWeapon()
+		elseif self.inst.replica.inventory ~= nil then
+			local item = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+			if item ~= nil and item:HasTag("weapon") then
+				if item:HasTag("projectile") or item:HasTag("rangedweapon") then
+					return item
+				end
+				local rider = self.inst.replica.rider
+				return not (rider ~= nil and rider:IsRiding()) and item or nil
+			end
+		end
+	end
+end)
+
 local require = GLOBAL.require
 local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
 local resolvefilepath = GLOBAL.resolvefilepath
@@ -991,7 +1024,7 @@ AddComponentPostInit("playervision", function(self)
         night = BAT_COLOURCUBE,
         full_moon = BAT_COLOURCUBE,
     }
-    local HEATVISION_COLOURCUBE = GLOBAL.resolvefilepath("images/colour_cubes/heat_vision_cc.tex")
+    local HEATVISION_COLOURCUBE = resolvefilepath("images/colour_cubes/heat_vision_cc.tex")
     local HEATVISION_COLOURCUBES =
     {
         day = HEATVISION_COLOURCUBE,
@@ -1014,7 +1047,7 @@ AddComponentPostInit("playervision", function(self)
             self.batvision = not self.batvision
             self:UpdateCCTable()
         end
-        if self.heatvision == not inst.replica.inventory:EquipHasTag("heatvision") then
+        if self.heatvision == not inst.replica.inventory:EquipHasTag("") then
             self.heatvision = not self.heatvision
             self:UpdateCCTable()
         end
