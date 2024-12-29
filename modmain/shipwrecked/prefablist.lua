@@ -9,7 +9,7 @@ PrefabFiles = {
   "snake_hole",
   "snakeskin",
   "harpoon",
-  "new_hats",
+  "hats_sw",
   "dubloon",
   "mosquitopoison",
   "mosquitosack_yellow",
