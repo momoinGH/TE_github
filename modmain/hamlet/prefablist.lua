@@ -189,6 +189,7 @@ PrefabFiles = {
     "peagawkfeather",
     "peagawk",
     "aloe",
+    "asparagus_planted",	
     "pog",
     "weevole",
     "weevole_carapace",
