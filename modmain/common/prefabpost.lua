@@ -869,41 +869,43 @@ AddPrefabPostInit("mosquitosack", function(inst)
     if not GLOBAL.TheWorld.ismastersim then return end
 
     inst:AddComponent("fuel")
-    inst.components.fuel.fueltype = FUELTYPE.BLOOD  --新燃料值：血，可以用蚊子血嚢给蝙蝠帽回耐久
+    inst.components.fuel.fueltype = FUELTYPE.BLOOD --新燃料值：血，可以用蚊子血嚢给蝙蝠帽回耐久
     inst.components.fuel.fuelvalue = TUNING.TOTAL_DAY_TIME * .5
 end)
 
 AddComponentPostInit("combat", function(self)
-	function self:GetWeapon()
-		if self.inst.components.inventory ~= nil then
-			local item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-			return item ~= nil
-				and item.components.weapon ~= nil
-				and (item.components.projectile ~= nil or
-					not (self.inst.components.rider ~= nil and
-						self.inst.components.rider:IsRiding()) or
-					item:HasTag("rangedweapon"))
-				and item
-				or nil
-		end
-	end
+    function self:GetWeapon()
+        if self.inst.components.inventory ~= nil then
+            local item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or
+            self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+            return item ~= nil
+                and item.components.weapon ~= nil
+                and (item.components.projectile ~= nil or
+                    not (self.inst.components.rider ~= nil and
+                        self.inst.components.rider:IsRiding()) or
+                    item:HasTag("rangedweapon"))
+                and item
+                or nil
+        end
+    end
 end)
 
 AddClassPostConstruct("components/combat_replica", function(self)
-	function self:GetWeapon()
-		if self.inst.components.combat ~= nil then
-			return self.inst.components.combat:GetWeapon()
-		elseif self.inst.replica.inventory ~= nil then
-			local item = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-			if item ~= nil and item:HasTag("weapon") then
-				if item:HasTag("projectile") or item:HasTag("rangedweapon") then
-					return item
-				end
-				local rider = self.inst.replica.rider
-				return not (rider ~= nil and rider:IsRiding()) and item or nil
-			end
-		end
-	end
+    function self:GetWeapon()
+        if self.inst.components.combat ~= nil then
+            return self.inst.components.combat:GetWeapon()
+        elseif self.inst.replica.inventory ~= nil then
+            local item = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or
+            self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+            if item ~= nil and item:HasTag("weapon") then
+                if item:HasTag("projectile") or item:HasTag("rangedweapon") then
+                    return item
+                end
+                local rider = self.inst.replica.rider
+                return not (rider ~= nil and rider:IsRiding()) and item or nil
+            end
+        end
+    end
 end)
 
 local require = GLOBAL.require
@@ -961,6 +963,10 @@ AddClassPostConstruct("screens/playerhud", function(self)
             end
         end
     end
+end)
+
+AddPrefabPostInit("world", function(inst)
+    inst:AddComponent("globalcolourmodifier")
 end)
 
 AddPlayerPostInit(function(inst)
@@ -1047,7 +1053,7 @@ AddComponentPostInit("playervision", function(self)
             self.batvision = not self.batvision
             self:UpdateCCTable()
         end
-        if self.heatvision == not inst.replica.inventory:EquipHasTag("") then
+        if self.heatvision == not inst.replica.inventory:EquipHasTag("heatvision") then
             self.heatvision = not self.heatvision
             self:UpdateCCTable()
         end
@@ -1074,15 +1080,19 @@ AddComponentPostInit("playervision", function(self)
     self.inst:DoTaskInTime(0, OnInit, self)
 
     local old_UpdateCCTable = self.UpdateCCTable
-    function self:UpdateCCTable()
-        old_UpdateCCTable(self)
-        local cctable = (self.batvision and BAT_COLOURCUBES)
-            or (self.heatvision and HEATVISION_COLOURCUBES)
-            or (self.shootvision and SHOOT_COLOURCUBES)
-            or nil
-        if cctable ~= self.currentcctable and cctable ~= nil then
-            self.currentcctable = cctable
-            self.inst:PushEvent("ccoverrides", cctable)
+    function self:UpdateCCTable(...)
+        if self.inst.replica.inventory and (self.inst.replica.inventory:EquipHasTag("heatvision")) then
+            --old_UpdateCCTable(self)
+            local cctable = (self.batvision and BAT_COLOURCUBES)
+                or (self.heatvision and HEATVISION_COLOURCUBES)
+                or (self.shootvision and SHOOT_COLOURCUBES)
+                or nil
+            if cctable ~= self.currentcctable and cctable ~= nil then
+                self.currentcctable = cctable
+                self.inst:PushEvent("ccoverrides", cctable)
+            end
+        else
+            old_UpdateCCTable(self, ...)
         end
     end
 end)
