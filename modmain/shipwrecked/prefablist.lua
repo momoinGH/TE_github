@@ -254,11 +254,9 @@ PrefabFiles = {
   "waterygrave",
   "flotsam_debris_sw",
 
-
-
-
-
   "shipwrecked_bishop",
+
+  "lobster",
 
 
 }

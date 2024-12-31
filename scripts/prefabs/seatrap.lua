@@ -1,10 +1,7 @@
---require "stategraphs/SGtrap"
-
 local sea_assets =
 {
 	Asset("ANIM", "anim/trap_sea.zip"),
 	Asset("SOUND", "sound/common.fsb"),
-	Asset("MINIMAP_IMAGE", "rabbittrap"),
 }
 
 local seasounds =
@@ -17,19 +14,11 @@ local function ondropped(inst)
 	local map = TheWorld.Map
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-	if ground == GROUND.OCEAN_COASTAL or
-		ground == GROUND.OCEAN_COASTAL_SHORE or
-		ground == GROUND.OCEAN_SWELL or
-		ground == GROUND.OCEAN_ROUGH or
-		ground == GROUND.OCEAN_BRINEPOOL or
-		ground == GROUND.OCEAN_WATERLOG or
-		ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-		ground == GROUND.OCEAN_HAZARDOUS then
+	if TileGroupManager:IsOceanTile(ground) then
 		inst.components.trap:Set()
 		inst.sg:GoToState("idle")
 	else
-		inst.sg:GoToState("idle_ground")
-		--Disable trap
+		inst.sg:GoToState("idle_ground")--Disable trap	
 	end
 end
 
@@ -55,15 +44,17 @@ local function sea_onpickup(inst, doer)
 	end
 end
 
-local function seafn(Sim)
+local function seafn()
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
-	MakeInventoryPhysics(inst)
 	inst.entity:AddNetwork()
+
 	inst.entity:AddMiniMapEntity()
 	inst.MiniMapEntity:SetIcon("seatrap.png")
+
+    MakeInventoryPhysics(inst)
 
 	inst.AnimState:SetBank("trap_sea")
 	inst.AnimState:SetBuild("trap_sea")

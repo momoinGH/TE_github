@@ -18,15 +18,11 @@ modimport "modmain/common/components/inventoryitem"
 modimport "modmain/common/components/walkableplatformplayer"
 modimport "modmain/common/components/playeractionpicker"
 
-
-
 modimport "modmain/common/prefabs/oceanfishdef"
 modimport "modmain/common/prefabs/allplayers"
 modimport "modmain/common/prefabs/world"
 
-
 modimport "modmain/common/poisonable"
-
 
 ----------------------------------------------------------------------------------------------------
 local function ArmorCanResistBefore(self, attacker, weapon)
@@ -130,7 +126,6 @@ AddComponentPostInit("drownable", function(self)
     Utils.FnDecorator(self, "ShouldDrown", DrownableShouldDrownBefore)
 end)
 
-
 ----------------------------------------------------------------------------------------------------
 
 local flotsam_prefabs
@@ -145,7 +140,6 @@ AddComponentPostInit("flotsamgenerator", function(self)
         end
     end
 end)
-
 
 ----------------------------------------------------------------------------------------------------
 
@@ -208,24 +202,18 @@ AddComponentPostInit("spooked", function(self)
 end)
 
 ----------------------------------------------------------------------------------------------------
-local function DoSpringBefore(self)
-    if self.target
-        and self.target:IsValid()
-        and not self.target:IsInLimbo()
-        and not (self.target.components.health ~= nil and self.target.components.health:IsDead())
-        and self.target.components.inventoryitem ~= nil
-        and self.target.components.inventoryitem.trappable
-    then
-        local old = self.target.prefab
-        self.target.prefab = old == "lobster" and "lobster_land"
-            or old == "wobster_sheller" and "wobster_sheller_land"
-            or old == "wobster_moonglass" and "wobster_moonglass_land"
-    end
-end
+for _, v in ipairs({"wobster_sheller", "wobster_moonglass"}) do
+    AddPrefabPostInit(v, function(inst)
+        inst:AddTag("lobster")
+        if not TheWorld.ismastersim then return inst end
 
-AddComponentPostInit("trap", function(self)
-    Utils.FnDecorator(self, "DoSpring", DoSpringBefore)
-end)
+        local lootdropper = inst:AddComponent("lootdropper")
+        lootdropper.trappable = true
+        lootdropper:SetLoot({v .. "_land"})
+
+    end)
+end
+----------------------------------------------------------------------------------------------------
 
 Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
     local val = next(retTab)
@@ -244,13 +232,7 @@ Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
     return retTab
 end)
 
-
-
-
 ----------------------------------------------------------------------------------------------------
-
-
-
 
 AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then return end
@@ -308,9 +290,6 @@ end)
 
 ----------------------------------------------------------------------------------------------------
 
-
-
-
 if TUNING.tropical.only_sea then
     for _, v in ipairs({
         "rocks",
@@ -332,11 +311,6 @@ if TUNING.tropical.only_sea then
         end)
     end
 end
-
-
-
-
-
 
 ----------------------------------------------------------------------------------------------------
 
@@ -630,7 +604,6 @@ for _, v in ipairs({
     end)
 end
 
-
 ----------------------------------------------------------------------------------------------------
 local function CheckHorn(inst)
     local boat = inst:GetCurrentPlatform()
@@ -645,7 +618,6 @@ AddPrefabPostInit("gnarwail_attack_horn", function(inst)
 
     inst:DoTaskInTime(TUNING.GNARWAIL.HORN_RETREAT_TIME - 0.1, CheckHorn)
 end)
-
 
 ----------------------------------------------------------------------------------------------------
 -- 屏蔽随机种子中种出三合一作物
