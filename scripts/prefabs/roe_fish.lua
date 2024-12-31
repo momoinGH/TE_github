@@ -217,7 +217,7 @@ ROE_FISH =
 		cooked_state = "cooked",
 
 	},
-
+--[[
 	mecfish = { -- Neon Quattro
 		seedweight = UNCOMMON,
 		health = TUNING.HEALING_TINY,
@@ -263,7 +263,7 @@ ROE_FISH =
 		cooked_state = "cooked",
 
 	},
-
+]]
 	whaleblueocean = { -- Neon Quattro
 		seedweight = UNCOMMON,
 		health = TUNING.HEALING_TINY,
@@ -381,7 +381,7 @@ ROE_FISH =
 
 }
 
-local function MakeFish(name, has_seeds)
+local function MakeFish(name, has_cooked, has_seeds)
 	local assets =
 	{
 		Asset("ANIM", "anim/" .. name .. ".zip"),
@@ -571,7 +571,7 @@ local function MakeFish(name, has_seeds)
 		end
 
 		inst:AddComponent("cookable")
-		inst.components.cookable.product = name .. "_cooked"
+		inst.components.cookable.product = has_cooked and name .. "_cooked" or "fishmeat_cooked"
 
         MakeHauntableLaunchAndPerish(inst)
 
@@ -647,7 +647,7 @@ local function MakeFish(name, has_seeds)
 	end
 	local base = Prefab("" .. name, fn, assets, prefabs)
 
-	local cooked = Prefab("" .. name .. "_cooked", fn_cooked, assets_cooked)
+	local cooked = has_cooked and Prefab("" .. name .. "_cooked", fn_cooked, assets_cooked) or nil
 	local seeds = has_seeds and Prefab("" .. name .. "_seeds", fn_seeds, assets_seeds) or nil
 	return base, cooked, seeds
 end
@@ -655,29 +655,11 @@ end
 
 local prefs = {}
 for fishname, fishdata in pairs(ROE_FISH) do
-	if fishdata.createPrefab == true then
-		local fish, cooked, seeds = MakeFish(fishname,
-			fishname ~= "fish2" and fishname ~= "fish3" and fishname ~= "fish4" and fishname ~= "fish5" and
-			fishname ~= "fish6" and fishname ~= "fish7" and fishname ~= "coi" and fishname ~= "salmon" and
-			fishname ~= "ballphinocean" and fishname ~= "mecfish" and fishname ~= "goldfish" and
-			fishname ~= "whaleblueocean" and fishname ~= "dogfishocean" and fishname ~= "swordfishjocean" and
-			fishname ~= "swordfishjocean2" and fishname ~= "sharxocean")
-		table.insert(prefs, fish)
-		table.insert(prefs, cooked)
-		if seeds then
-			--	table.insert(prefs, seeds)
-		end
-	end
-
-	if fishdata.createPrefab == false then
-		local fish, cooked, seeds = MakeFish(fishname,
-			fishname ~= "fish2" and fishname ~= "fish3" and fishname ~= "fish4" and fishname ~= "fish5" and
-			fishname ~= "fish6" and fishname ~= "fish7" and fishname ~= "coi" and fishname ~= "salmon" and
-			fishname ~= "ballphinocean" and fishname ~= "mecfish" and fishname ~= "goldfish" and
-			fishname ~= "whaleblueocean" and fishname ~= "dogfishocean" and fishname ~= "swordfishjocean" and
-			fishname ~= "swordfishjocean2" and fishname ~= "sharxocean")
-		table.insert(prefs, fish)
-	end
+	-- if fishdata.createPrefab == true then
+	local fish, cooked, seeds = MakeFish(fishname, fishdata.createPrefab, false)
+	table.insert(prefs, fish)
+	table.insert(prefs, cooked)
+	table.insert(prefs, seeds)
 end
 
 return unpack(prefs)
