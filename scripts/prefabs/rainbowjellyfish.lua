@@ -28,15 +28,7 @@ local function ondropped(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-    if ground == GROUND.OCEAN_COASTAL or
-        ground == GROUND.OCEAN_COASTAL_SHORE or
-        ground == GROUND.OCEAN_SWELL or
-        ground == GROUND.OCEAN_ROUGH or
-        ground == GROUND.OCEAN_BRINEPOOL or
-        ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-        ground == GROUND.OCEAN_WATERLOG or
-        ground == GROUND.OCEAN_HAZARDOUS
-        then
+    if TileGroupManager:IsOceanTile(ground) then
         --if not inst.replica.inventoryitem:IsHeld() then
             local replacement = SpawnPrefab("rainbowjellyfish_planted")
             replacement.Transform:SetPosition(inst.Transform:GetWorldPosition())
