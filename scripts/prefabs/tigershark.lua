@@ -45,8 +45,7 @@ SetSharedLootTable('tigershark',
         { "shark_tooth", 1.00 },
 
         { "mysterymeat", 1.00 },
-        { "mysterymeat", 0.50 },
-        { "mysterymeat", 0.33 },
+        { "mysterymeat", 0.10 },
     })
 
 local TARGET_DIST = 20
@@ -88,14 +87,7 @@ local function GetIsOnWater(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-    if ground == GROUND.OCEAN_SWELL or
-        ground == GROUND.OCEAN_COASTAL or
-        ground == GROUND.OCEAN_COASTAL_SHORE or
-        ground == GROUND.OCEAN_ROUGH or
-        ground == GROUND.OCEAN_BRINEPOOL or
-        ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-        ground == GROUND.OCEAN_WATERLOG or
-        ground == GROUND.OCEAN_HAZARDOUS then
+    if TileGroupManager:IsOceanTile(ground) then
         return true
     else
         return false

@@ -8,6 +8,7 @@ local prefabs =
 {
     "shark_gills",
     "fishmeat",
+    "shark_tooth",
 }
 
 SetSharedLootTable('sharkitten',
