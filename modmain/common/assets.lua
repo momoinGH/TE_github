@@ -37,6 +37,7 @@ Assets =
     Asset("IMAGE", "images/overlays/visorvision.tex"),
 
     Asset("IMAGE", "images/colour_cubes/bat_vision_on_cc.tex"),
+	Asset("IMAGE", "images/colour_cubes/heat_vision_cc.tex"),
     Asset("IMAGE", "images/colour_cubes/shooting_goggles_cc.tex"),
 
     Asset("ATLAS", "images/barco.xml"),
