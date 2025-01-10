@@ -22,15 +22,15 @@ end
 
 local function fn(Sim)
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    MakeInventoryPhysics(inst)
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
     inst.entity:AddNetwork()
 
-    anim:SetBank("pig_scepter")
-    anim:SetBuild("pig_scepter")
-    anim:PlayAnimation("idle")
+    inst.AnimState:SetBank("pig_scepter")
+    inst.AnimState:SetBuild("pig_scepter")
+    inst.AnimState:PlayAnimation("idle")
 
+    MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst, "large", 0.05, { 1.1, 0.5, 1.1 }, true, -9)
 
     inst:AddTag("regal")
@@ -44,9 +44,7 @@ local function fn(Sim)
     inst.components.floater:SetBankSwapOnFloat(true, -11, { sym_build = "swap_pig_scepter" })
 
     inst:AddComponent("inspectable")
-
     inst:AddComponent("inventoryitem")
-
 
     inst:AddComponent("tradable")
 

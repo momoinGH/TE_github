@@ -36,9 +36,6 @@ local LOOT                 = {
         { "firestaff",          chance_verylow },
         { "icestaff",           chance_verylow },
         { "panflute",           chance_verylow },
-        { "trinket_16",         chance_low },
-        { "trinket_17",         chance_medium },
-        { "trinket_18",         chance_verylow },
         { "trinket_sw_16",      chance_low },
         { "trinket_sw_17",      chance_medium },
         { "trinket_sw_18",      chance_verylow },
@@ -71,13 +68,10 @@ local LOOT                 = {
         { "spear",              chance_low },
         { "compass",            chance_low },
         { "amulet",             chance_verylow },
-        { "trinket_16",         chance_low },
-        { "trinket_17",         chance_low },
-        { "trinket_18",         chance_verylow },
         { "trinket_sw_16",      chance_low },
         { "trinket_sw_17",      chance_low },
         { "trinket_sw_18",      chance_verylow },
-        { "trident",            chance_verylow },
+        { "trident_sw",            chance_verylow },
     }
 }
 
@@ -94,8 +88,6 @@ local HURRICANE_LOOT       = {
         { "dogfish_dead",           chance_medium },
         { "rocks",              chance_high },
         { "dubloon",            chance_low },
-        { "trinket_16",         chance_low },
-        { "trinket_17",         chance_low },
         { "trinket_sw_16",      chance_low },
         { "trinket_sw_17",      chance_low },
     },
@@ -118,13 +110,10 @@ local HURRICANE_LOOT       = {
         { "firestaff",          chance_low },
         { "icestaff",           chance_low },
         { "panflute",           chance_low },
-        { "trinket_16",         chance_low },
-        { "trinket_17",         chance_low },
-        { "trinket_18",         chance_verylow },
         { "trinket_sw_16",      chance_low },
         { "trinket_sw_17",      chance_low },
         { "trinket_sw_18",      chance_verylow },
-        { "trident",            chance_verylow },
+        { "trident_sw",            chance_verylow },
     },
 
     deep = {
@@ -154,13 +143,10 @@ local HURRICANE_LOOT       = {
         { "spear",              chance_medium },
         { "compass",            chance_medium },
         { "amulet",             chance_verylow },
-        { "trinket_16",         chance_medium },
-        { "trinket_17",         chance_medium },
-        { "trinket_18",         chance_verylow },
         { "trinket_sw_16",      chance_medium },
         { "trinket_sw_17",      chance_medium },
         { "trinket_sw_18",      chance_verylow },
-        { "trident",            chance_low },
+        { "trident_sw",            chance_low },
     }
 }
 
@@ -197,13 +183,10 @@ local DRY_LOOT             = {
         { "icestaff",           chance_low },
         { "panflute",           chance_low },
         { "obsidian",           chance_medium },
-        { "trinket_16",         chance_low },
-        { "trinket_17",         chance_low },
-        { "trinket_18",         chance_verylow },
         { "trinket_sw_16",      chance_low },
         { "trinket_sw_17",      chance_low },
         { "trinket_sw_18",      chance_verylow },
-        { "trident",            chance_verylow },
+        { "trident_sw",            chance_verylow },
     },
 
     deep = {
@@ -233,25 +216,19 @@ local DRY_LOOT             = {
         { "compass",            chance_medium },
         { "amulet",             chance_verylow },
         { "obsidian",           chance_medium },
-        { "trinket_16",         chance_low },
-        { "trinket_17",         chance_low },
-        { "trinket_18",         chance_verylow },
         { "trinket_sw_16",      chance_low },
         { "trinket_sw_17",      chance_low },
         { "trinket_sw_18",      chance_verylow },
-        { "trident",            chance_low },
+        { "trident_sw",            chance_low },
     }
 }
 
 -- Don't collect more than one of these.
 local UNIQUE_ITEMS         = {
-    "trinket_16",
-    "trinket_17",
-    "trinket_18",
     "trinket_sw_16",
     "trinket_sw_17",
     "trinket_sw_18",
-    "trident",
+    "trident_sw",
 }
 
 local SPECIAL_CASE_PREFABS = {
