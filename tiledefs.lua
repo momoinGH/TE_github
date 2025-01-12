@@ -1242,24 +1242,30 @@ function HandleDugGround(dug_ground, x, y, z, ...)
     end
 end
 
---[[准备修改深层雨林地皮和毒瘴雨林地皮
+-- 准备修改深层雨林地皮和毒瘴雨林地皮
+local old_terraform = ACTIONS.TERRAFORM.fn
 ACTIONS.TERRAFORM.fn = function(act)
 	if act.invobject and act.invobject.components.terraformer then
-		local tile = GetWorld().Map:GetTileAtPoint(act.pos.x, act.pos.y, act.pos.z)
-
+        local tile = TheWorld.Map:GetTileAtPoint(act:GetActionPoint():Get())
 		if tile == GROUND.GASRAINFOREST then
-			act.invobject.components.finiteuses:SetUses(0)
-			GetPlayer().components.talker:Say(GetString(GetPlayer().prefab, "ANNOUNCE_TOOLCORRODED"))
-			return true
+            if act.doer.components.talker then
+			    act.doer.components.talker:Say(GetString(act.doer.prefab, "ANNOUNCE_TOOLCORRODED"))
+            end
+            local finiteuses = act.invobject.components.finiteuses
+            if finiteuses then
+			    finiteuses:Use(finiteuses:GetUses())
+            end
+			return
 		elseif tile == GROUND.DEEPRAINFOREST then
-			GetPlayer().components.talker:Say(GetString(GetPlayer().prefab, "ANNOUNCE_TURFTOOHARD"))
-			return true
-		else
-			return act.invobject.components.terraformer:Terraform(act.pos)
+            if act.doer.components.talker then
+			    act.doer.components.talker:Say(GetString(act.doer.prefab, "ANNOUNCE_TURFTOOHARD"))
+            end
+			return
 		end
 	end
+	return old_terraform(act)
 end
-]]
+
 
 -- ID 1 is for impassable
 -- in ds, tile priority after the desert tile
