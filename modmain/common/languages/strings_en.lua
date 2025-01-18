@@ -2191,7 +2191,7 @@ STRINGS.NAMES.CROCODOGSTOOTH                                                    
 STRINGS.NAMES.MUSSEL_STICK                                                      = "Mussel Stick"
 STRINGS.NAMES.ANCIENT_ROBOT_RIBS                                                = "Iron Hulk"
 STRINGS.NAMES.RUG_NAILBED                                                       = "Nailbed Rug"
-STRINGS.NAMES.BAT_LEATHER                                                       = "bat leather"
+STRINGS.NAMES.BAT_HIDE                                                          = "Pig Skin?"
 STRINGS.NAMES.SNAKESKINHAT                                                      = "Snake Skin Hat"
 STRINGS.NAMES.PIG_RUINS_PLAQUE                                                  = "Eroding Totem"
 STRINGS.NAMES.FETTUCCINE                                                        = "意式宽面条贡品"
@@ -2356,7 +2356,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALACE_DOOR_WEST                            
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINFORESTTREE_BURNING                      = "It's done for."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TAR_EXTRACTOR_ON                            = "It's running smoothly."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_ANTIQUITIES_BEEFALO                    = "He looks unhappy."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAT_LEATHER                                 = "Is the bat hide-ing in there?"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAT_HIDE                                 = "Is the bat hide-ing in there?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDER_MONKEY                               = {
     DEAD = "That's that.",
     SLEEPING = "I don't want to wake it.",

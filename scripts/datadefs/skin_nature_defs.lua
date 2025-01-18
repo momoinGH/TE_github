@@ -236,7 +236,7 @@ local natureskins = {
             bank = "bat_leather",
             image = "bat_leather",
             sourceprefabs = { "vampirebat" },
-            name = "bat_leather",
+            name = "bat_hide",
             -- skintype = "shipwrecked",
         }
     },
