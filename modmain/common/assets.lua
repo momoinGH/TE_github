@@ -128,12 +128,6 @@ Assets =
 
 
     Asset("ATLAS", "images/tabs.xml"),
-    Asset("ATLAS", "images/turfs/turf01-9.xml"),
-    Asset("ATLAS", "images/turfs/turf01-10.xml"),
-    Asset("ATLAS", "images/turfs/turf01-11.xml"),
-    Asset("ATLAS", "images/turfs/turf01-12.xml"),
-    Asset("ATLAS", "images/turfs/turf01-13.xml"),
-    Asset("ATLAS", "images/turfs/turf01-14.xml"),
     Asset("ANIM", "anim/vagner_over.zip"),
     Asset("ANIM", "anim/leaves_canopy2.zip"),
 
