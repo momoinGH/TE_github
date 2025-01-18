@@ -72,7 +72,7 @@ PrefabFiles =
     "wildbeaver_house",
     "wildbeaverguard",
     "beaverskin",
-    "beaver_head",
+    "stick_heads",
     "beavertorch",
     "obsidiancoconade",
     "obsidiancoconadeactive",

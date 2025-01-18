@@ -235,18 +235,11 @@ local natureskins = {
             build = "bat_leather",
             bank = "bat_leather",
             image = "bat_leather",
-            sourceprefabs = { "circlingbat", "vampirebat" },
+            sourceprefabs = { "vampirebat" },
             name = "bat_leather",
             -- skintype = "shipwrecked",
         }
     },
-
-    pighead = {
-        default = { basebank = "pig_head", basebuild = "pig_head" },
-        wildbore_head = { build = "wildbore_head", bank = "wildbore_head", skintype = "shipwrecked", }
-    },
-
-
 
 }
 

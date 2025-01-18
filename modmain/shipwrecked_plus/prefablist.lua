@@ -9,7 +9,6 @@ PrefabFiles = {
     "tikimask",
     "tikifire",
     "wanawanatiki",
-    "tikistick",
     "summerwalrus",
     "summerigloo",
     "octoatt",
