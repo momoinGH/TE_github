@@ -11,7 +11,6 @@ PrefabFiles = {
     "swfishbait",
     "construction_permit",
     "deco_roomglow",
-    "grassnova",
     --"turfshamlet",
     "frog_poison",
     -- "frog_poison2",

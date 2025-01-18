@@ -586,7 +586,6 @@ end
 
 for _, v in ipairs({
     "grass",
-    "grassnova"
 }) do
     AddPrefabPostInit(v, function(inst)
         inst:AddTag("grasss") --用于海难刮大风用的

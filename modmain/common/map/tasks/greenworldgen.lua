@@ -134,7 +134,7 @@ AddRoom("WillageGreenSwamp",
 			{
 				evergreen = 0.7,
 				sapling = 0.3,
-				grassnova = 0.3,
+				grass = 0.3,
 				lizardman_cave = 0.15,
 				rock1 = 0.1,
 			},
@@ -154,7 +154,7 @@ AddRoom("EntranceGreenSwamp",
 				rock1 = 0.04,
 				sapling = 0.05,
 				spiderden = 0.3,
-				grassnova = 0.05,
+				grass = 0.05,
 			},
 			prefabdata =
 			{

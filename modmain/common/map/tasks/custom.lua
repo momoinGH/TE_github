@@ -8516,7 +8516,7 @@ AddRoom("JungleDense_plus", {
             tree_forest = 3,  --was 4,
             rock1 = 0.05,
             rock2 = 0.1,      --was .05
-            --grassnova = 1, --was .05
+            --grass = 1, --was .05
             --sapling = .8,
             berrybush2 = .1,
             berrybush2_snake = 0.04,
@@ -8547,7 +8547,7 @@ AddRoom("NoOxMeadow", {
         distributeprefabs =
         {
             flint = 0.01,
-            grassnova = .4,
+            grass = .4,
             -- ox = 0.05,
             sweet_potato_planted = 0.05,
             beehive = 0.003,
@@ -8569,7 +8569,7 @@ AddRoom("MeadowOxBoon", {
         distributeprefabs =
         {
             --    ox = .5, --was 1,
-            grassnova = 1,
+            grass = 1,
             flower = .5,
             beehive = 0.1,
             wasphive = 0.003,
@@ -8588,7 +8588,7 @@ AddRoom("MeadowFlowery", {
         {
             flower = .5,
             beehive = .05, --was .4
-            grassnova = .4,
+            grass = .4,
             rocks = .05,
             mandrake_planted = 0.005,
         },
@@ -8605,7 +8605,7 @@ AddRoom("MeadowBees", {
         distributeprefabs =
         {
             flint = 0.05,               --was .01
-            grassnova = 3,              --was .4,
+            grass = 3,              --was .4,
             --ox = 3,
             sweet_potato_planted = 0.1, --was .05,
             rock_flintless = 0.01,
@@ -8626,7 +8626,7 @@ AddRoom("MeadowCarroty", {
         distributeprefabs =
         {
             sweet_potato_planted = 1,
-            grassnova = 1.5,
+            grass = 1.5,
             rocks = .2,
             flower = .5,
         },
@@ -8643,7 +8643,7 @@ AddRoom("MeadowCarroty", {
 					                {
 					                    --pond = 1,
 					                    pond_mos = .8,
-					                    grassnova = .5,
+					                    grass = .5,
 					                    flower = .3,
 					                    sapling = .2,
 					                    sweet_potato_planted = .1,
@@ -8659,7 +8659,7 @@ AddRoom("MeadowSappy", {
         distributepercent = .3,
         distributeprefabs =
         {
-            grassnova = 3,
+            grass = 3,
             --sapling = 1,
             flower = .5,
             beehive = .1,    --was 1,
@@ -8678,7 +8678,7 @@ AddRoom("MeadowSpider", {
         distributeprefabs =
         {
             spiderden = .1,
-            grassnova = 1,
+            grass = 1,
             --sapling = .8,
             --ox = .5,
             flower = .5,
@@ -8699,7 +8699,7 @@ AddRoom("MeadowRocky", {
             rocks = 1,
             rock1 = 1,
             rock2 = 1,
-            grassnova = 4, --was 2
+            grass = 4, --was 2
             flower = 1,
         },
     }
@@ -8713,7 +8713,7 @@ AddRoom("MeadowMandrake", {
         distributepercent = .3,
         distributeprefabs =
         {
-            grassnova = .8,
+            grass = .8,
             --sapling = .8,
             sweet_potato_planted = 0.05,
             rocks = 0.003,
@@ -9585,7 +9585,7 @@ AddRoom("BeachSand", {
             --rock2 = .2,
             beehive = .01,  --was .05,
             --flower = .04, --trying
-            grassnova = .2, --trying
+            grass = .2, --trying
             sapling = .2,   --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
@@ -9616,7 +9616,7 @@ AddRoom("BeachSandHome", {
             rock_flintless = .1, --trying
             --beehive = .05, --trying
             --flower = .04, --trying
-            grassnova = .5, --trying
+            grass = .5, --trying
             sapling = .2,   --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
@@ -9643,7 +9643,7 @@ AddRoom("BeachUnkept", {
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            grassnova = .3, --down from 3
+            grass = .3, --down from 3
             sapling = .1,   --lowered from 15
             --flower = 0.05,
             rock_limpet = .02,
@@ -9664,7 +9664,7 @@ AddRoom("BeachUnkept", {
             --coconut = 1, --one coconut
             --mandrake =0.05,
             sapling = 3,
-            grassnova = 3,
+            grass = 3,
             --sandhill = .05,
         }
 
@@ -9679,7 +9679,7 @@ AddRoom("BeachUnkeptInicio", {
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            grassnova = .3, --down from 3
+            grass = .3, --down from 3
             sapling = .1,   --lowered from 15
             --flower = 0.05,
             rock_limpet = .02,
@@ -9700,7 +9700,7 @@ AddRoom("BeachUnkeptInicio", {
             --coconut = 1, --one coconut
             --mandrake =0.05,
             sapling = 6,
-            grassnova = 6,
+            grass = 6,
             --sandhill = .05,
         }
 
@@ -9716,7 +9716,7 @@ AddRoom("BeachX", {
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            --grassnova = .3, --down from 3
+            --grass = .3, --down from 3
             --sapling = .1, --lowered from 15
             --flower = 0.05,
             rock_limpet = .02,
@@ -9737,7 +9737,7 @@ AddRoom("BeachX", {
             --coconut = 1, --one coconut
             --mandrake =0.05,
             --sapling = 3,
-            --grassnova = 3,
+            --grass = 3,
             --sandhill = .05,
         }
 
@@ -9752,7 +9752,7 @@ AddRoom("BeachUnkeptDubloon", {
         distributeprefabs =
         {
             seashell_beached = 0.025,
-            grassnova = .1, --was .3
+            grass = .1, --was .3
             sapling = .05,  --was .15
             --flower = 0.05,
             rock_limpet = .02,
@@ -9786,7 +9786,7 @@ AddRoom("BeachGravel", {
             rock1 = 0.05,
             --rock2 = 0.05,
             rock_flintless = 0.05,
-            grassnova = .05,
+            grass = .05,
             --flower = 0.05, --removed as it's used on NoFlower island
             sandhill = .05,
             seashell_beached = .025,
@@ -9812,7 +9812,7 @@ AddRoom("BeachSinglePalmTreeHome", {
             --rock2 = .2,
             beehive = .01,  --was .05,
             --flower = .04, --trying
-            grassnova = .2, --trying
+            grass = .2, --trying
             sapling = .2,   --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
@@ -9915,7 +9915,7 @@ AddRoom("BeachPalmForest", {
             sandhill = .05,
             crabhole = .025,
             crate = 0.02,
-            grassnova = .05,
+            grass = .05,
             rock_limpet = .015,
             flint = .005,
             seashell_beached = .025,
@@ -9933,7 +9933,7 @@ AddRoom("BeachPiggy", {
         distributeprefabs =
         {
             sapling = 0.25,
-            grassnova = .5,
+            grass = .5,
             palmtree = .1,
             wildborehouse = .05,
             rock_limpet = 0.1,
@@ -9952,7 +9952,7 @@ AddRoom("BeachCassino", {
         distributeprefabs =
         {
             sapling = 0.25,
-            grassnova = .5,
+            grass = .5,
             palmtree = .1,
             wildborehouse = .05,
             rock_limpet = 0.1,
@@ -9980,7 +9980,7 @@ AddRoom("BeesBeach", {
             beehive = .1, --was .5
             wasphive = .05,
             --flower = .04, --trying
-            grassnova = .4, --trying
+            grass = .4, --trying
             sapling = .4,   --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
@@ -10003,7 +10003,7 @@ AddRoom("BeachCrabTown", {
             crabhole = 1,
             sapling = .2,
             palmtree = .75,
-            grassnova = .5,
+            grass = .5,
             --flower=.1,
             seashell_beached = .01,
             rocks = .1,
@@ -10026,7 +10026,7 @@ AddRoom("BeachDunes", {
         distributeprefabs =
         {
             sandhill = 1.5,
-            grassnova = 1,
+            grass = 1,
             seashell_beached = .5,
             sapling = 1,
             rock1 = .5,
@@ -10046,7 +10046,7 @@ AddRoom("BeachGrassy", {
         distributepercent = .2, --was .1
         distributeprefabs =
         {
-            grassnova = 1.5,
+            grass = 1.5,
             rock_limpet = .25,
             beehive = .1,
             sandhill = 1,
@@ -10090,7 +10090,7 @@ AddRoom("BeachRocky", {
             --rock2 = 1, removing to take gold vein rocks out of all beaches
             rocks = 1,
             rock_flintless = 1,
-            grassnova = 2,
+            grass = 2,
             crabhole = 2,
             rock_limpet = 0.01,
             flint = .05,
@@ -10111,7 +10111,7 @@ AddRoom("BeachLimpety", {
         {
             rock_limpet = 1,
             rock1 = 1,
-            grassnova = 1,
+            grass = 1,
             seashell = 1,
             sapling = .5,
             flint = .05,
@@ -10133,7 +10133,7 @@ AddRoom("BeachSpider", {
             rock_limpet = 0.01,
             spiderden = 0.5,
             palmtree = 1,
-            grassnova = 1,
+            grass = 1,
             rocks = 0.5,
             sapling = 0.2,
             flint = .05,
@@ -10158,7 +10158,7 @@ AddRoom("BeachNoFlowers", {
             palmtree = .3,
             rocks = .003,   --trying
             beehive = .005, --trying
-            grassnova = .3, --trying
+            grass = .3, --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -10180,7 +10180,7 @@ AddRoom("BeachFlowers", {
             flower = 2,   --was 1
             palmtree = .3,
             rock1 = .1,
-            grassnova = .2,
+            grass = .2,
             sapling = .1,
             seashell_beached = .025,
             rock_limpet = 0.01,
@@ -10204,7 +10204,7 @@ AddRoom("BeachNoLimpets", {
             rocks = .003,    --trying
             beehive = .0025, --trying
             --flower = 0.04, --trying
-            grassnova = .3,  --trying
+            grass = .3,  --trying
             sapling = .2,    --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -10229,7 +10229,7 @@ AddRoom("BeachNoCrabbits", {
             rocks = .003,   --trying
             beehive = .005, --trying
             --flower = 0.04, --trying
-            grassnova = .3, --trying
+            grass = .3, --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -10254,7 +10254,7 @@ AddRoom("BeachPalmCasino", {
             rocks = .003,   --trying
             beehive = .005, --trying
             --flower = 0.04, --trying
-            grassnova = .3, --trying
+            grass = .3, --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -10286,7 +10286,7 @@ AddRoom("BeachShells", {
             --rock2 = .05, --was .2,
             beehive = .02,
             --flower = .04,
-            grassnova = .3, --was .2,
+            grass = .3, --was .2,
             sapling = .2,
             --fireflies = .02,
             --spiderden = .03,
@@ -10320,7 +10320,7 @@ AddRoom("BeachShark", {
             --rock2 = .05, --was .2,
             beehive = .02,
             --flower = .04,
-            grassnova = .3, --was .2,
+            grass = .3, --was .2,
             sapling = .2,
             --fireflies = .02,
             --spiderden = .03,
@@ -10354,7 +10354,7 @@ AddRoom("BeachShells1", {
             --rock2 = .05, --was .2,
             beehive = .02,
             --flower = .04,
-            grassnova = .3, --was .2,
+            grass = .3, --was .2,
             sapling = .2,
             --fireflies = .02,
             --spiderden = .03,
@@ -10387,7 +10387,7 @@ AddRoom("BeachSkull", {
             rocks = .03,
             rock1 = .1,
             beehive = .01,
-            grassnova = .2,
+            grass = .2,
             sapling = .2,
             flint = .05,
             sandhill = .6,
@@ -10421,7 +10421,7 @@ AddRoom("JunglePigs", {
             jungletree = 3,
             rock1 = 0.05,
             flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .8,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -10457,7 +10457,7 @@ AddRoom("Beaverkinghome", {
         distributeprefabs =
         {
             --sweet_potato_planted = 0.5,
-            grassnova = 1,
+            grass = 1,
             --beehive = 0.003,
             rocks = 0.003,
             rock_flintless = 0.01,
@@ -10490,7 +10490,7 @@ AddRoom("Beaverkingcity", {
         distributeprefabs =
         {
             --   sweet_potato_planted = 1,
-            grassnova = 1,
+            grass = 1,
             rocks = .2,
             rock_flintless = 0.01,
             flower = 0.15,
@@ -10591,7 +10591,7 @@ AddRoom("JungleBees", {
             jungletree = 4,
             rock1 = 0.05,
             flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .8,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -10662,7 +10662,7 @@ AddRoom("JungleClearing", {
             rock1 = 0.03,
             primeapebarrel = 0.1,
             flint = 0.03,
-            grassnova = .03, --was .05
+            grass = .03, --was .05
             red_mushroom = .07,
             green_mushroom = .07,
             blue_mushroom = .07,
@@ -10693,7 +10693,7 @@ AddRoom("Jungle", {
             rock1 = 0.05, --was .01
             rock2 = 0.1,  --was .05
             flint = 0.1,  --was 0.03,
-            --grassnova = .01, --was .05
+            --grass = .01, --was .05
             --sapling = .8,
             berrybush2 = .09, -- was .0003
             berrybush2_snake = 0.01,
@@ -10790,7 +10790,7 @@ AddRoom("JungleSparse", {
             --sapling = .8,
             berrybush2 = .05, --was .03
             berrybush2_snake = 0.01,
-            --grassnova = 1,
+            --grass = 1,
             red_mushroom = .03,
             green_mushroom = .02,
             blue_mushroom = .02,
@@ -10822,7 +10822,7 @@ AddRoom("JungleSparseHome", {
             rock_flintless = 0.05,
             -- rock2 = 0.05, --gold rock
             flint = .1, --dropped
-            --grassnova = .6, --raised from 05
+            --grass = .6, --raised from 05
             --sapling = .8,
             berrybush2 = .05, --was .03
             berrybush2_snake = 0.01,
@@ -10856,7 +10856,7 @@ AddRoom("JungleDense", {
             jungletree = 3,   --was 4,
             rock1 = 0.05,
             rock2 = 0.1,      --was .05
-            --grassnova = 1, --was .05
+            --grass = 1, --was .05
             --sapling = .8,
             berrybush2 = .1,
             berrybush2_snake = 0.04,
@@ -10893,7 +10893,7 @@ AddRoom("JungleDenseHome", {
             jungletree = 4,
             rock1 = 0.05,
             --rock2 = 0.05, --gold rock
-            --grassnova = 1, --was .05
+            --grass = 1, --was .05
             --sapling = .8,
             berrybush2 = .1,         --was .05,
             berrybush2_snake = 0.03, --was 0.01,
@@ -10925,7 +10925,7 @@ AddRoom("JungleDenseMed", {
             jungletree = 2, --lowered from 6
             rock1 = 0.05,
             rock2 = 0.05,
-            --grassnova = .02, --was .05
+            --grass = .02, --was .05
             --sapling = .8,
             berrybush2 = .06,       --was .03,
             berrybush2_snake = .02, --was .01,
@@ -10956,7 +10956,7 @@ AddRoom("JungleDenseBerries", {
             jungletree = 4, --was 6
             rock1 = 0.05,
             rock2 = 0.05,
-            --grassnova = .02, --was .05
+            --grass = .02, --was .05
             --sapling = .8,
             berrybush2 = .6,        --was .03
             berrybush2_snake = .03, --was .01,
@@ -11021,7 +11021,7 @@ AddRoom("JunglePigGuards", {
             jungletree = 3,
             rock1 = 0.05,
             flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .8,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -11055,7 +11055,7 @@ AddRoom("JungleFlower", {
             jungletree = 2, --was 3
             rock1 = 0.05,
             --flint=0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -11093,7 +11093,7 @@ AddRoom("JungleSpidersDense", {
             jungletree = 4,
             rock1 = 0.05,
             rock2 = 0.05,
-            --grassnova = 1, --was .05
+            --grass = 1, --was .05
             --sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was 0.01,
@@ -11159,7 +11159,7 @@ AddRoom("JungleBamboozled", {
             jungletree = .09,
             rock1 = 0.05,
             -- flint=0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .04,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -11197,7 +11197,7 @@ AddRoom("JungleMonkeyHell", {
             primeapebarrel = .04, --was .8,
             skeleton = .1,
             flint = 0.5,
-            --grassnova = .75,
+            --grass = .75,
             --sapling = .4,
             berrybush2 = .1,
             berrybush2_snake = .02,
@@ -11235,7 +11235,7 @@ AddRoom("JungleCritterCrunch", {
             jungletree = 3, --was 3
             rock1 = 0.05,
             --flint=0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .06, --was .01,
@@ -11271,7 +11271,7 @@ AddRoom("JungleDenseCritterCrunch", {
             jungletree = 6,
             rock_flintless = 0.05,
             --rock2 = 0.05, --gold rock
-            --grassnova = .05,
+            --grass = .05,
             --sapling = .8,
             berrybush2 = .75,       --was 0.3
             berrybush2_snake = .04, --was .01,
@@ -11306,7 +11306,7 @@ AddRoom("JungleShroomin", {
             jungletree = 3,
             rock1 = 0.05,
             --flint=0.05,
-            --grassnova = 1, --was .4,
+            --grass = 1, --was .4,
             --sapling = .3,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .07, --was .01,
@@ -11343,7 +11343,7 @@ AddRoom("JungleRockyDrop", {
             rock_flintless = 2,
             rocks = 3,
             --flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .07, --was .01,
@@ -11376,7 +11376,7 @@ AddRoom("JungleGrassy", {
             jungletree = 2, --was 3
             rock1 = 0.05,
             --flint=0.05,
-            --grassnova = 5,
+            --grass = 5,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -11409,7 +11409,7 @@ AddRoom("JungleSappy", {
             jungletree = 1.5, --was 3
             rock1 = 0.05,
             --flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             sapling = 6,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -11442,7 +11442,7 @@ AddRoom("JungleEvilFlowers", {
             jungletree = 2, --was 3
             rock1 = 0.05,
             --flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -11478,7 +11478,7 @@ AddRoom("JungleParrotSanctuary", {
             rock1 = 0.5,
             rock2 = 0.5,
             rocks = 0.4,
-            --grassnova = 0.5, --was .05
+            --grass = 0.5, --was .05
             --sapling  = 8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was .01,
@@ -11517,7 +11517,7 @@ AddRoom("JungleNoBerry", {
             rock1 = 0.5,
             rock2 = 0.5,
             rocks = 0.4,
-            --grassnova = 0.6, --was .05
+            --grass = 0.6, --was .05
             --sapling = .8,
             red_mushroom = 0.05,
             green_mushroom = 0.03,
@@ -11551,7 +11551,7 @@ AddRoom("JungleNoRock", {
         {
             --palmtree = 0.05,
             jungletree = 5,
-            --grassnova = 0.6, --was .05
+            --grass = 0.6, --was .05
             --sapling = .8,
             berrybush2 = .05,
             berrybush2_snake = 0.01,
@@ -11591,7 +11591,7 @@ AddRoom("JungleNoMushroom", {
             rock1 = 0.05,
             rock2 = 0.05,
             rocks = 0.04,
-            --grassnova = 0.6, --was .05
+            --grass = 0.6, --was .05
             --sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was .01,
@@ -11630,7 +11630,7 @@ AddRoom("JungleNoFlowers", {
             rock1 = 0.05,
             rock2 = 0.05,
             rocks = 0.04,
-            --grassnova = 0.6, --was .05
+            --grass = 0.6, --was .05
             --sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was .01,
@@ -11671,7 +11671,7 @@ AddRoom("JungleMorePalms", {
             rock1 = 0.05,
             rock2 = 0.05,
             rocks = 0.04,
-            --grassnova = 0.6, --was .05
+            --grass = 0.6, --was .05
             --sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was .01,
@@ -11738,7 +11738,7 @@ AddRoom("JungleSkeleton", {
             jungletree = 1.5, --was 3
             rock1 = 0.05,
             --flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -11777,7 +11777,7 @@ AddRoom("BeachPortalRoom", {
             --rock2 = .2,
             beehive = .01,  --was .05,
             --flower = .04, --trying
-            grassnova = .2, --trying
+            grass = .2, --trying
             sapling = .2,   --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
@@ -11813,7 +11813,7 @@ AddRoom("PigVillagesw", {
         },
         distributepercent = .1,
         distributeprefabs = {
-            grassnova = .05,
+            grass = .05,
             berrybush2 = .05,
             berrybush_juicy = 0.025,
         },
@@ -11831,7 +11831,7 @@ AddRoom("MAINNoOxMeadow", {
         distributeprefabs =
         {
             flint = 0.01,
-            grassnova = .4,
+            grass = .4,
             -- ox = 0.05,
             sweet_potato_planted = 0.05,
             beehive = 0.003,
@@ -11853,7 +11853,7 @@ AddRoom("MAINMeadowOxBoon", {
         distributeprefabs =
         {
             --    ox = .5, --was 1,
-            grassnova = 1,
+            grass = 1,
             flower = .5,
             beehive = 0.1,
             wasphive = 0.003,
@@ -11872,7 +11872,7 @@ AddRoom("MAINMeadowFlowery", {
         {
             flower = .5,
             beehive = .05, --was .4
-            grassnova = .4,
+            grass = .4,
             rocks = .05,
             mandrake_planted = 0.005,
         },
@@ -11889,7 +11889,7 @@ AddRoom("MAINMeadowBees", {
         distributeprefabs =
         {
             flint = 0.05,               --was .01
-            grassnova = 3,              --was .4,
+            grass = 3,              --was .4,
             --ox = 3,
             sweet_potato_planted = 0.1, --was .05,
             rock_flintless = 0.01,
@@ -11910,7 +11910,7 @@ AddRoom("MAINMeadowCarroty", {
         distributeprefabs =
         {
             sweet_potato_planted = 1,
-            grassnova = 1.5,
+            grass = 1.5,
             rocks = .2,
             flower = .5,
         },
@@ -11927,7 +11927,7 @@ AddRoom("MAINMeadowCarroty", {
 					                {
 					                    --pond = 1,
 					                    pond_mos = .8,
-					                    grassnova = .5,
+					                    grass = .5,
 					                    flower = .3,
 					                    sapling = .2,
 					                    sweet_potato_planted = .1,
@@ -11943,7 +11943,7 @@ AddRoom("MAINMeadowSappy", {
         distributepercent = .3,
         distributeprefabs =
         {
-            grassnova = 3,
+            grass = 3,
             --sapling = 1,
             flower = .5,
             beehive = .1,    --was 1,
@@ -11962,7 +11962,7 @@ AddRoom("MAINMeadowSpider", {
         distributeprefabs =
         {
             spiderden = .1,
-            grassnova = 1,
+            grass = 1,
             --sapling = .8,
             --ox = .5,
             flower = .5,
@@ -11983,7 +11983,7 @@ AddRoom("MAINMeadowRocky", {
             rocks = 1,
             rock1 = 1,
             rock2 = 1,
-            grassnova = 4, --was 2
+            grass = 4, --was 2
             flower = 1,
         },
     }
@@ -11997,7 +11997,7 @@ AddRoom("MAINMeadowMandrake", {
         distributepercent = .3,
         distributeprefabs =
         {
-            grassnova = .8,
+            grass = .8,
             --sapling = .8,
             sweet_potato_planted = 0.05,
             rocks = 0.003,
@@ -12814,7 +12814,7 @@ AddRoom("MAINBeachSand", {
             --rock2 = .2,
             beehive = .01,  --was .05,
             --flower = .04, --trying
-            grassnova = .2, --trying
+            grass = .2, --trying
             sapling = .2,   --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
@@ -12845,7 +12845,7 @@ AddRoom("MAINBeachSandHome", {
             rock_flintless = .1, --trying
             --beehive = .05, --trying
             --flower = .04, --trying
-            grassnova = .5, --trying
+            grass = .5, --trying
             sapling = .2,   --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
@@ -12872,7 +12872,7 @@ AddRoom("MAINBeachUnkept", {
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            grassnova = .3, --down from 3
+            grass = .3, --down from 3
             sapling = .1,   --lowered from 15
             --flower = 0.05,
             rock_limpet = .02,
@@ -12893,7 +12893,7 @@ AddRoom("MAINBeachUnkept", {
             --coconut = 1, --one coconut
             --mandrake =0.05,
             sapling = 3,
-            grassnova = 3,
+            grass = 3,
             --sandhill = .05,
         }
 
@@ -12908,7 +12908,7 @@ AddRoom("MAINBeachUnkeptInicio", {
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            grassnova = .3, --down from 3
+            grass = .3, --down from 3
             sapling = .1,   --lowered from 15
             --flower = 0.05,
             rock_limpet = .02,
@@ -12929,7 +12929,7 @@ AddRoom("MAINBeachUnkeptInicio", {
             --coconut = 1, --one coconut
             --mandrake =0.05,
             sapling = 6,
-            grassnova = 6,
+            grass = 6,
             --sandhill = .05,
         }
 
@@ -12945,7 +12945,7 @@ AddRoom("MAINBeachX", {
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            --grassnova = .3, --down from 3
+            --grass = .3, --down from 3
             --sapling = .1, --lowered from 15
             --flower = 0.05,
             rock_limpet = .02,
@@ -12966,7 +12966,7 @@ AddRoom("MAINBeachX", {
             --coconut = 1, --one coconut
             --mandrake =0.05,
             --sapling = 3,
-            --grassnova = 3,
+            --grass = 3,
             --sandhill = .05,
         }
 
@@ -12981,7 +12981,7 @@ AddRoom("MAINBeachUnkeptDubloon", {
         distributeprefabs =
         {
             seashell_beached = 0.025,
-            grassnova = .1, --was .3
+            grass = .1, --was .3
             sapling = .05,  --was .15
             --flower = 0.05,
             rock_limpet = .02,
@@ -13015,7 +13015,7 @@ AddRoom("MAINBeachGravel", {
             rock1 = 0.05,
             --rock2 = 0.05,
             rock_flintless = 0.05,
-            grassnova = .05,
+            grass = .05,
             --flower = 0.05, --removed as it's used on NoFlower island
             sandhill = .05,
             seashell_beached = .025,
@@ -13041,7 +13041,7 @@ AddRoom("MAINBeachSinglePalmTreeHome", {
             --rock2 = .2,
             beehive = .01,  --was .05,
             --flower = .04, --trying
-            grassnova = .2, --trying
+            grass = .2, --trying
             sapling = .2,   --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
@@ -13144,7 +13144,7 @@ AddRoom("MAINBeachPalmForest", {
             sandhill = .05,
             crabhole = .025,
             crate = 0.02,
-            grassnova = .05,
+            grass = .05,
             rock_limpet = .015,
             flint = .005,
             seashell_beached = .025,
@@ -13162,7 +13162,7 @@ AddRoom("MAINBeachPiggy", {
         distributeprefabs =
         {
             sapling = 0.25,
-            grassnova = .5,
+            grass = .5,
             palmtree = .1,
             wildborehouse = .05,
             rock_limpet = 0.1,
@@ -13181,7 +13181,7 @@ AddRoom("MAINBeachCassino", {
         distributeprefabs =
         {
             sapling = 0.25,
-            grassnova = .5,
+            grass = .5,
             palmtree = .1,
             wildborehouse = .05,
             rock_limpet = 0.1,
@@ -13209,7 +13209,7 @@ AddRoom("MAINBeesBeach", {
             beehive = .1, --was .5
             wasphive = .05,
             --flower = .04, --trying
-            grassnova = .4, --trying
+            grass = .4, --trying
             sapling = .4,   --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
@@ -13232,7 +13232,7 @@ AddRoom("MAINBeachCrabTown", {
             crabhole = 1,
             sapling = .2,
             palmtree = .75,
-            grassnova = .5,
+            grass = .5,
             --flower=.1,
             seashell_beached = .01,
             rocks = .1,
@@ -13255,7 +13255,7 @@ AddRoom("MAINBeachDunes", {
         distributeprefabs =
         {
             sandhill = 1.5,
-            grassnova = 1,
+            grass = 1,
             seashell_beached = .5,
             sapling = 1,
             rock1 = .5,
@@ -13275,7 +13275,7 @@ AddRoom("MAINBeachGrassy", {
         distributepercent = .2, --was .1
         distributeprefabs =
         {
-            grassnova = 1.5,
+            grass = 1.5,
             rock_limpet = .25,
             beehive = .1,
             sandhill = 1,
@@ -13319,7 +13319,7 @@ AddRoom("MAINBeachRocky", {
             --rock2 = 1, removing to take gold vein rocks out of all beaches
             rocks = 1,
             rock_flintless = 1,
-            grassnova = 2,
+            grass = 2,
             crabhole = 2,
             rock_limpet = 0.01,
             flint = .05,
@@ -13340,7 +13340,7 @@ AddRoom("MAINBeachLimpety", {
         {
             rock_limpet = 1,
             rock1 = 1,
-            grassnova = 1,
+            grass = 1,
             seashell = 1,
             sapling = .5,
             flint = .05,
@@ -13362,7 +13362,7 @@ AddRoom("MAINBeachSpider", {
             rock_limpet = 0.01,
             spiderden = 0.5,
             palmtree = 1,
-            grassnova = 1,
+            grass = 1,
             rocks = 0.5,
             sapling = 0.2,
             flint = .05,
@@ -13387,7 +13387,7 @@ AddRoom("MAINBeachNoFlowers", {
             palmtree = .3,
             rocks = .003,   --trying
             beehive = .005, --trying
-            grassnova = .3, --trying
+            grass = .3, --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -13409,7 +13409,7 @@ AddRoom("MAINBeachFlowers", {
             flower = 2,   --was 1
             palmtree = .3,
             rock1 = .1,
-            grassnova = .2,
+            grass = .2,
             sapling = .1,
             seashell_beached = .025,
             rock_limpet = 0.01,
@@ -13433,7 +13433,7 @@ AddRoom("MAINBeachNoLimpets", {
             rocks = .003,    --trying
             beehive = .0025, --trying
             --flower = 0.04, --trying
-            grassnova = .3,  --trying
+            grass = .3,  --trying
             sapling = .2,    --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -13458,7 +13458,7 @@ AddRoom("MAINBeachNoCrabbits", {
             rocks = .003,   --trying
             beehive = .005, --trying
             --flower = 0.04, --trying
-            grassnova = .3, --trying
+            grass = .3, --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -13483,7 +13483,7 @@ AddRoom("MAINBeachPalmCasino", {
             rocks = .003,   --trying
             beehive = .005, --trying
             --flower = 0.04, --trying
-            grassnova = .3, --trying
+            grass = .3, --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -13515,7 +13515,7 @@ AddRoom("MAINBeachShells", {
             --rock2 = .05, --was .2,
             beehive = .02,
             --flower = .04,
-            grassnova = .3, --was .2,
+            grass = .3, --was .2,
             sapling = .2,
             --fireflies = .02,
             --spiderden = .03,
@@ -13549,7 +13549,7 @@ AddRoom("MAINBeachShark", {
             --rock2 = .05, --was .2,
             beehive = .02,
             --flower = .04,
-            grassnova = .3, --was .2,
+            grass = .3, --was .2,
             sapling = .2,
             --fireflies = .02,
             --spiderden = .03,
@@ -13583,7 +13583,7 @@ AddRoom("MAINBeachShells1", {
             --rock2 = .05, --was .2,
             beehive = .02,
             --flower = .04,
-            grassnova = .3, --was .2,
+            grass = .3, --was .2,
             sapling = .2,
             --fireflies = .02,
             --spiderden = .03,
@@ -13616,7 +13616,7 @@ AddRoom("MAINBeachSkull", {
             rocks = .03,
             rock1 = .1,
             beehive = .01,
-            grassnova = .2,
+            grass = .2,
             sapling = .2,
             flint = .05,
             sandhill = .6,
@@ -13650,7 +13650,7 @@ AddRoom("MAINJunglePigs", {
             jungletree = 3,
             rock1 = 0.05,
             flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .8,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -13686,7 +13686,7 @@ AddRoom("MAINBeaverkinghome", {
         distributeprefabs =
         {
             --sweet_potato_planted = 0.5,
-            grassnova = 1,
+            grass = 1,
             --beehive = 0.003,
             rocks = 0.003,
             rock_flintless = 0.01,
@@ -13719,7 +13719,7 @@ AddRoom("MAINBeaverkingcity", {
         distributeprefabs =
         {
             --   sweet_potato_planted = 1,
-            grassnova = 1,
+            grass = 1,
             rocks = .2,
             rock_flintless = 0.01,
             flower = 0.15,
@@ -13820,7 +13820,7 @@ AddRoom("MAINJungleBees", {
             jungletree = 4,
             rock1 = 0.05,
             flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .8,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -13891,7 +13891,7 @@ AddRoom("MAINJungleClearing", {
             rock1 = 0.03,
             primeapebarrel = 0.1,
             flint = 0.03,
-            grassnova = .03, --was .05
+            grass = .03, --was .05
             red_mushroom = .07,
             green_mushroom = .07,
             blue_mushroom = .07,
@@ -13922,7 +13922,7 @@ AddRoom("MAINJungle", {
             rock1 = 0.05, --was .01
             rock2 = 0.1,  --was .05
             flint = 0.1,  --was 0.03,
-            --grassnova = .01, --was .05
+            --grass = .01, --was .05
             --sapling = .8,
             berrybush2 = .09, -- was .0003
             berrybush2_snake = 0.01,
@@ -14019,7 +14019,7 @@ AddRoom("MAINJungleSparse", {
             --sapling = .8,
             berrybush2 = .05, --was .03
             berrybush2_snake = 0.01,
-            --grassnova = 1,
+            --grass = 1,
             red_mushroom = .03,
             green_mushroom = .02,
             blue_mushroom = .02,
@@ -14051,7 +14051,7 @@ AddRoom("MAINJungleSparseHome", {
             rock_flintless = 0.05,
             -- rock2 = 0.05, --gold rock
             flint = .1, --dropped
-            --grassnova = .6, --raised from 05
+            --grass = .6, --raised from 05
             --sapling = .8,
             berrybush2 = .05, --was .03
             berrybush2_snake = 0.01,
@@ -14085,7 +14085,7 @@ AddRoom("MAINJungleDense", {
             jungletree = 3,   --was 4,
             rock1 = 0.05,
             rock2 = 0.1,      --was .05
-            --grassnova = 1, --was .05
+            --grass = 1, --was .05
             --sapling = .8,
             berrybush2 = .1,
             berrybush2_snake = 0.04,
@@ -14122,7 +14122,7 @@ AddRoom("MAINJungleDenseHome", {
             jungletree = 4,
             rock1 = 0.05,
             --rock2 = 0.05, --gold rock
-            --grassnova = 1, --was .05
+            --grass = 1, --was .05
             --sapling = .8,
             berrybush2 = .1,         --was .05,
             berrybush2_snake = 0.03, --was 0.01,
@@ -14154,7 +14154,7 @@ AddRoom("MAINJungleDenseMed", {
             jungletree = 2, --lowered from 6
             rock1 = 0.05,
             rock2 = 0.05,
-            --grassnova = .02, --was .05
+            --grass = .02, --was .05
             --sapling = .8,
             berrybush2 = .06,       --was .03,
             berrybush2_snake = .02, --was .01,
@@ -14185,7 +14185,7 @@ AddRoom("MAINJungleDenseBerries", {
             jungletree = 4, --was 6
             rock1 = 0.05,
             rock2 = 0.05,
-            --grassnova = .02, --was .05
+            --grass = .02, --was .05
             --sapling = .8,
             berrybush2 = .6,        --was .03
             berrybush2_snake = .03, --was .01,
@@ -14250,7 +14250,7 @@ AddRoom("MAINJunglePigGuards", {
             jungletree = 3,
             rock1 = 0.05,
             flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .8,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -14284,7 +14284,7 @@ AddRoom("MAINJungleFlower", {
             jungletree = 2, --was 3
             rock1 = 0.05,
             --flint=0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -14322,7 +14322,7 @@ AddRoom("MAINJungleSpidersDense", {
             jungletree = 4,
             rock1 = 0.05,
             rock2 = 0.05,
-            --grassnova = 1, --was .05
+            --grass = 1, --was .05
             --sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was 0.01,
@@ -14388,7 +14388,7 @@ AddRoom("MAINJungleBamboozled", {
             jungletree = .09,
             rock1 = 0.05,
             -- flint=0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .04,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -14426,7 +14426,7 @@ AddRoom("MAINJungleMonkeyHell", {
             primeapebarrel = .04, --was .8,
             skeleton = .1,
             flint = 0.5,
-            --grassnova = .75,
+            --grass = .75,
             --sapling = .4,
             berrybush2 = .1,
             berrybush2_snake = .02,
@@ -14464,7 +14464,7 @@ AddRoom("MAINJungleCritterCrunch", {
             jungletree = 3, --was 3
             rock1 = 0.05,
             --flint=0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .06, --was .01,
@@ -14500,7 +14500,7 @@ AddRoom("MAINJungleDenseCritterCrunch", {
             jungletree = 6,
             rock_flintless = 0.05,
             --rock2 = 0.05, --gold rock
-            --grassnova = .05,
+            --grass = .05,
             --sapling = .8,
             berrybush2 = .75,       --was 0.3
             berrybush2_snake = .04, --was .01,
@@ -14535,7 +14535,7 @@ AddRoom("MAINJungleShroomin", {
             jungletree = 3,
             rock1 = 0.05,
             --flint=0.05,
-            --grassnova = 1, --was .4,
+            --grass = 1, --was .4,
             --sapling = .3,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .07, --was .01,
@@ -14572,7 +14572,7 @@ AddRoom("MAINJungleRockyDrop", {
             rock_flintless = 2,
             rocks = 3,
             --flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .07, --was .01,
@@ -14605,7 +14605,7 @@ AddRoom("MAINJungleGrassy", {
             jungletree = 2, --was 3
             rock1 = 0.05,
             --flint=0.05,
-            --grassnova = 5,
+            --grass = 5,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -14638,7 +14638,7 @@ AddRoom("MAINJungleSappy", {
             jungletree = 1.5, --was 3
             rock1 = 0.05,
             --flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             sapling = 6,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -14671,7 +14671,7 @@ AddRoom("MAINJungleEvilFlowers", {
             jungletree = 2, --was 3
             rock1 = 0.05,
             --flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -14707,7 +14707,7 @@ AddRoom("MAINJungleParrotSanctuary", {
             rock1 = 0.5,
             rock2 = 0.5,
             rocks = 0.4,
-            --grassnova = 0.5, --was .05
+            --grass = 0.5, --was .05
             --sapling  = 8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was .01,
@@ -14746,7 +14746,7 @@ AddRoom("MAINJungleNoBerry", {
             rock1 = 0.5,
             rock2 = 0.5,
             rocks = 0.4,
-            --grassnova = 0.6, --was .05
+            --grass = 0.6, --was .05
             --sapling = .8,
             red_mushroom = 0.05,
             green_mushroom = 0.03,
@@ -14780,7 +14780,7 @@ AddRoom("MAINJungleNoRock", {
         {
             --palmtree = 0.05,
             jungletree = 5,
-            --grassnova = 0.6, --was .05
+            --grass = 0.6, --was .05
             --sapling = .8,
             berrybush2 = .05,
             berrybush2_snake = 0.01,
@@ -14820,7 +14820,7 @@ AddRoom("MAINJungleNoMushroom", {
             rock1 = 0.05,
             rock2 = 0.05,
             rocks = 0.04,
-            --grassnova = 0.6, --was .05
+            --grass = 0.6, --was .05
             --sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was .01,
@@ -14859,7 +14859,7 @@ AddRoom("MAINJungleNoFlowers", {
             rock1 = 0.05,
             rock2 = 0.05,
             rocks = 0.04,
-            --grassnova = 0.6, --was .05
+            --grass = 0.6, --was .05
             --sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was .01,
@@ -14900,7 +14900,7 @@ AddRoom("MAINJungleMorePalms", {
             rock1 = 0.05,
             rock2 = 0.05,
             rocks = 0.04,
-            --grassnova = 0.6, --was .05
+            --grass = 0.6, --was .05
             --sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was .01,
@@ -14967,7 +14967,7 @@ AddRoom("MAINJungleSkeleton", {
             jungletree = 1.5, --was 3
             rock1 = 0.05,
             --flint = 0.05,
-            --grassnova = .025,
+            --grass = .025,
             --sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
@@ -15006,7 +15006,7 @@ AddRoom("MAINBeachPortalRoom", {
             --rock2 = .2,
             beehive = .01,  --was .05,
             --flower = .04, --trying
-            grassnova = .2, --trying
+            grass = .2, --trying
             sapling = .2,   --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
@@ -15042,7 +15042,7 @@ AddRoom("MAINPigVillagesw", {
         },
         distributepercent = .1,
         distributeprefabs = {
-            grassnova = .05,
+            grass = .05,
             berrybush2 = .05,
             berrybush_juicy = 0.025,
         },
