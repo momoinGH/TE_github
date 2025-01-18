@@ -63,7 +63,6 @@ PrefabFiles =
     "marsh_tree_new",
     "ligamundo",
     "armor_void_cloak",
-    "bat_leather",
     "gorge_portal",
     "volcano_altar_pillar",
     "pollen_item",

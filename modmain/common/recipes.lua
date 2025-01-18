@@ -836,8 +836,6 @@ if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.multiplayerportal == 15 or
         min_spacing = 1,
         placer = "honeychest_placer",
     }, {"STRUCTURES", "CONTAINERS", "COOKING", "GARDENING"})
-    AddRecipe2("pigskin", {Ingredient("bat_leather", 1)}, TECH.SCIENCE_ONE, {
-    }, {"REFINE"})
     AddRecipe2("hogusporkusator",
                {Ingredient("pigskin", 4), Ingredient("boards", 4), Ingredient("feather_robin_winter", 4)},
                TECH.SCIENCE_ONE, {

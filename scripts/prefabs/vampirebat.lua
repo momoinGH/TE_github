@@ -15,7 +15,7 @@ local prefabs =
     "guano",
     "batwing",
     "monstermeat",
-    "bat_leather",
+    "pigskin",
 }
 
 local SLEEP_DIST_FROMHOME = 1
@@ -240,7 +240,7 @@ local function fn()
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({})
     inst.components.lootdropper:AddRandomLoot("monstermeat", 6)
-    inst.components.lootdropper:AddRandomLoot("bat_leather", 3)
+    inst.components.lootdropper:AddRandomLoot("pigskin", 3)
     inst.components.lootdropper:AddRandomLoot("batwing", 1)
     inst.components.lootdropper.numrandomloot = 1
 
