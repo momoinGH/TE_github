@@ -60,7 +60,7 @@ local function fn()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.MiniMapEntity:SetIcon("seaweed.png")
+    inst.MiniMapEntity:SetIcon("seaweed_plant.png")
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     --	inst.AnimState:SetSortOrder(0)
     inst.AnimState:SetRayTestOnBB(true)
