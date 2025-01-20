@@ -4,13 +4,24 @@ local assets =
 }
 
 local function onequip(inst, owner)
+    local skin_build = inst:GetSkinBuild()
+    if skin_build ~= nil then
+        owner:PushEvent("equipskinneditem", inst:GetSkinName())
+        owner.AnimState:OverrideItemSkinSymbol("swap_body", skin_build, "swap_body", inst.GUID, "armor_snakeskin")
+    else
     owner.AnimState:OverrideSymbol("swap_body", "armor_snakeskin", "swap_body")
+    end
     inst.components.fueled:StartConsuming()
 end
 
 local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
     inst.components.fueled:StopConsuming()
+
+    local skin_build = inst:GetSkinBuild()
+    if skin_build ~= nil then
+        owner:PushEvent("unequipskinneditem", inst:GetSkinName())
+    end
 end
 
 local function fn()
@@ -28,7 +39,7 @@ local function fn()
 
     inst.foleysound = "dontstarve_DLC002/common/foley/snakeskin_jacket"
 
-    MakeInventoryFloatable(inst)
+    MakeInventoryFloatable(inst, "small", 0.2, 0.9)
 
     inst.entity:SetPristine()
 
@@ -38,7 +49,6 @@ local function fn()
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.imagename = "armor_snakeskin"
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
@@ -57,6 +67,8 @@ local function fn()
 
     inst:AddComponent("insulator")
     inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
+
+    MakeHauntableLaunch(inst)
 
     return inst
 end
