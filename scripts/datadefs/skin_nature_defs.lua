@@ -184,7 +184,7 @@ local natureskins = {
         log_rainforest = {
             build = "log_rainforest",
             image = "log_rainforest",
-            sourceprefabs = { "teatree", "teatree_piko_nest", "rainforesttree", },
+            sourceprefabs = { "teatree", "teatree_piko_nest", "rainforesttree", "deciduoustree", },
             skintype = "hamlet",
 
         }
