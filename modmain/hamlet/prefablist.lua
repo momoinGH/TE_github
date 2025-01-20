@@ -94,7 +94,7 @@ PrefabFiles = {
     "hippoptamoose",
     "lillypad",
     "lotus",
-    "lotus_flower1",
+    "lotus_flower",
     "bill",
     "bill_quill",
     "reeds_water",

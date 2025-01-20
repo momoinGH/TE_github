@@ -504,7 +504,7 @@ STRINGS.NAMES.PIKO                                                              
 STRINGS.NAMES.RELIC_5                                                           = "The Jeweled Truffle"
 STRINGS.NAMES.SEDIMENTPUDDLE                                                    = "Sparkling Pool"
 STRINGS.NAMES.DECO_WALLPAPER_FLORIST_SIDE_RIP1                                  = "花店壁纸裂口1侧"
-STRINGS.NAMES.LOTUS_FLOWER1_COOKED                                              = "Cooked Lotus Root"
+STRINGS.NAMES.LOTUS_FLOWER_COOKED                                              = "Cooked Lotus Root"
 STRINGS.NAMES.MERMBATTLE                                                        = "mermbattle"
 STRINGS.NAMES.COTTONTREE_SAPLING                                                = "Cotton Tree Sapling"
 STRINGS.NAMES.SPEAR_PROJECTILE                                                  = "Spear Projectile"
@@ -1873,7 +1873,7 @@ STRINGS.NAMES.DECO_WALLORNAMENT_CAPE                                            
 STRINGS.NAMES.ELEPHANTCACTUS                                                    = "Elephant Cactus"
 STRINGS.NAMES.EG_PLANT                                                          = "Eggplant"
 STRINGS.NAMES.LESS_BOTTLE_GREEN_MILK                                            = "Bottle of Deer Milk"
-STRINGS.NAMES.LOTUS_FLOWER1                                                     = "Lotus Flower"
+STRINGS.NAMES.LOTUS_FLOWER                                                     = "Lotus Flower"
 STRINGS.NAMES.RUG_HOOFPRINT                                                     = "Hoofprint Rug"
 STRINGS.NAMES.DECO_WALLORNAMENT_PHOTO                                           = "Photo"
 STRINGS.NAMES.INTERIOR_FLOOR_TRANSITIONAL                                       = "Transitional Flooring"
@@ -4081,7 +4081,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYBABY                                  
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAVE_EXIT_HAM3                              = "Cave Exit."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MIXED_GEM                                   = "A colourful gem."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_HOOFSPA_GENERIC                    = "I could use a fix-me-up."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER1_COOKED                        = "A delicacy."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER_COOKED                        = "A delicacy."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_STOREOWNER                           = {
     "她采购修剪下的碎叶",
 
@@ -4201,7 +4201,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BERRYBUSH_WITHERED                          
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_STATUE5                             = "Wind butterflies really like it."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWEET_POTATO_OVERSIZED_WAXED                = "Sweet Potato Oversized Waxed."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GLASS_BOMB                                  = "A transperant bomb, how neat."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER1                               = "A lovely science flower."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER                               = "A lovely science flower."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRAB_HIDDEN                                 = "I wonder where that crabbit went?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINFORESTTREE_CONE                         = "Weird tree cone."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PANDA                                       = "Panda."

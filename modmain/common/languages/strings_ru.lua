@@ -2229,8 +2229,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.RELIC_5                             = "Тр�
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.REEDS_WATER                         = "Водный тростник."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS                               = "Наука процветает."
 
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER1                       = "Любимый цветок науки."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER1_COOKED                = "У него тонкий вкус."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER                       = "Любимый цветок науки."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER_COOKED                = "У него тонкий вкус."
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VAMPIREBAT                          =
 {
@@ -2864,8 +2864,8 @@ STRINGS.NAMES.LILYPAD                                                   = "Ку�
 STRINGS.NAMES.LOTUS                                                     = "Лотос"
 STRINGS.NAMES.REEDS_WATER                                               = "Камыши"
 
-STRINGS.NAMES.LOTUS_FLOWER1                                             = "Цветок лотоса"
-STRINGS.NAMES.LOTUS_FLOWER1_COOKED                                      = "Приготовленный корень лотоса"
+STRINGS.NAMES.LOTUS_FLOWER                                             = "Цветок лотоса"
+STRINGS.NAMES.LOTUS_FLOWER_COOKED                                      = "Приготовленный корень лотоса"
 
 STRINGS.NAMES.FROGLEGS_POISON                                           = "Ядовитые лапки древолаза"
 STRINGS.NAMES.FROGLEGS_POISON_COOKED                                    = "Приготовленные лапки древолаза"

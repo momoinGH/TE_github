@@ -50,7 +50,7 @@ local function fn(Sim)
     ---------------------
 
     inst:AddComponent("cookable")
-    inst.components.cookable.product = "lotus_flower1_cooked"
+    inst.components.cookable.product = "lotus_flower_cooked"
 
 
     inst:AddComponent("bait")
@@ -123,5 +123,5 @@ local function fncooked(Sim)
     return inst
 end
 
-return Prefab("lotus_flower1", fn, assets),
-    Prefab("lotus_flower1_cooked", fncooked, assets)
+return Prefab("lotus_flower", fn, assets),
+    Prefab("lotus_flower_cooked", fncooked, assets)

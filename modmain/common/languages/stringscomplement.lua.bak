@@ -759,8 +759,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.RELIC_5                             = "The J
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.REEDS_WATER                         = "Aquatic reeds."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS                               = "The science is blooming well this season."
 
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER1                       = "A lovely science flower."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER1_COOKED                = "A delicacy."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER                       = "A lovely science flower."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER_COOKED                = "A delicacy."
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VAMPIREBAT                          =
 {
@@ -1393,8 +1393,8 @@ STRINGS.NAMES.LILYPAD                                                   = "Lily 
 STRINGS.NAMES.LOTUS                                                     = "Lotus Plant"
 STRINGS.NAMES.REEDS_WATER                                               = "Reeds"
 
-STRINGS.NAMES.LOTUS_FLOWER1                                             = "Lotus Flower"
-STRINGS.NAMES.LOTUS_FLOWER1_COOKED                                      = "Cooked Lotus Root"
+STRINGS.NAMES.LOTUS_FLOWER                                             = "Lotus Flower"
+STRINGS.NAMES.LOTUS_FLOWER_COOKED                                      = "Cooked Lotus Root"
 
 STRINGS.NAMES.FROGLEGS_POISON                                           = "Poison Dartfrog Legs"
 STRINGS.NAMES.FROGLEGS_POISON_COOKED                                    = "Cooked Dartfrog Legs"

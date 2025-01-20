@@ -127,7 +127,7 @@ if GetModConfigData("lilypad") then
     table.insert(PrefabFiles, "hippoptamoose")
     table.insert(PrefabFiles, "lillypad")
     table.insert(PrefabFiles, "lotus")
-    table.insert(PrefabFiles, "lotus_flower1")
+    table.insert(PrefabFiles, "lotus_flower")
     table.insert(PrefabFiles, "bill")
     table.insert(PrefabFiles, "bill_quill")
     table.insert(PrefabFiles, "reeds_water")

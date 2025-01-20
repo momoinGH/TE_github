@@ -785,8 +785,8 @@ STRINGS.CHARACTERS.WURT.DESCRIBE.RELIC_4                               = "Belong
 STRINGS.CHARACTERS.WURT.DESCRIBE.RELIC_5                               = "Good present for mermfolk royalty!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.REEDS_WATER                           = "Swamp have these too!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.LOTUS                                 = "Glargh! Such ugly flower!"
-STRINGS.CHARACTERS.WURT.DESCRIBE.LOTUS_FLOWER1                         = "Glurgh, it hideous!."
-STRINGS.CHARACTERS.WURT.DESCRIBE.LOTUS_FLOWER1_COOKED                  = "Look and taste better now."
+STRINGS.CHARACTERS.WURT.DESCRIBE.LOTUS_FLOWER                         = "Glurgh, it hideous!."
+STRINGS.CHARACTERS.WURT.DESCRIBE.LOTUS_FLOWER_COOKED                  = "Look and taste better now."
 STRINGS.CHARACTERS.WURT.DESCRIBE.VAMPIREBAT                            =
 {
 	GENERIC = "Glargh! It even bigger than normal bat!",
