@@ -1439,8 +1439,8 @@ STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_WARN = "Il va y avoir des monstres."
 ----------------------------- DEATH CAUSES -----------------------------
 STRINGS.NAMES.DROWNING = "Noyade"
 STRINGS.NAMES.POISON = "Poison"
-STRINGS.NAMES.BELL1 = "Vieille cloche"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL1 = "Ding, daing, dong."
+STRINGS.NAMES.BELL = "Vieille cloche"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "Ding, daing, dong."
 
 STRINGS.NAMES.PALMLEAF_UMBRELLA = "Parasol tropical"
 STRINGS.CHARACTERS.GENERIC.PALMLEAF_UMBRELLA = "Parapluie en feuilles de palmier"

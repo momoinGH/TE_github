@@ -4461,8 +4461,8 @@ STRINGS.RECIPE_DESC.LIVING_ARTIFACT = "Let's put them together and see what happ
 STRINGS.NAMES.ANTCHEST = "honey chest"
 STRINGS.RECIPE_DESC.ANTCHEST = "Save the sweet things."
 
-STRINGS.NAMES.BELL1 = "old bell"
-STRINGS.RECIPE_DESC.BELL1 = "This is no ordinary bell."
+STRINGS.NAMES.BELL = "old bell"
+STRINGS.RECIPE_DESC.BELL = "This is no ordinary bell."
 
 
 STRINGS.NAMES.BAT_LEATHER = "bat leather"

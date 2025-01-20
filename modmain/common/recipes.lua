@@ -624,7 +624,7 @@ AddRecipe2("palmleaf_hut", {Ingredient("palmleaf", 4), Ingredient("bamboo", 4), 
 -- AddRecipe2("goldnugget",			{Ingredient("dubloon", 3)},  																	            TECH.SCIENCE_ONE, {atlas=h_atlas}, {"REFINE"})
 AddRecipe2("armorlimestone", {Ingredient("limestone", 3), Ingredient("rope", 2)}, TECH.SCIENCE_TWO, {
 }, {"ARMOUR"})
-AddRecipe2("bell1", {Ingredient("glommerwings", 1), Ingredient("glommerflower", 1)}, TECH.MAGIC_TWO, {
+AddRecipe2("bell", {Ingredient("glommerwings", 1), Ingredient("glommerflower", 1)}, TECH.MAGIC_TWO, {
 }, {"MAGIC"})
 AddRecipe2("slow_farmplot", {Ingredient("cutgrass", 8), Ingredient("poop", 4), Ingredient("log", 4)}, TECH.SCIENCE_ONE,
            {
@@ -1498,7 +1498,7 @@ SortBefore("pithhat", "snakeskinhat", "CLOTHING")
 SortAfter("gasmaskhat", "gashat", "CLOTHING")
 SortAfter("thunderhat", "snakeskinhat", "CLOTHING")
 
-SortAfter("bell1", "ox_flute", "MAGIC")
+SortAfter("bell", "ox_flute", "MAGIC")
 SortAfter("bonestaff", "icestaff", "MAGIC")
 SortAfter("armorvortexcloak", "armor_sanity", "ARMOUR")
 SortAfter("armorvortexcloak", "armor_sanity", "MAGIC")

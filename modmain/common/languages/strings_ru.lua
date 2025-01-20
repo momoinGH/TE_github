@@ -1454,8 +1454,8 @@ STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_RETURN =
 "[Мне|pl=Нам] показалось, как что-то коснулось [моей|pl=нашей] ноги..."
 
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_WARN = "Там дальше повсюду монстры."
-STRINGS.NAMES.BELL1 = "Старый колокольчик" --DTR
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL1 = "Старый колокольчик." --DTR
+STRINGS.NAMES.BELL = "Старый колокольчик" --DTR
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "Старый колокольчик." --DTR
 
 
 
