@@ -28,7 +28,7 @@ PrefabFiles =
     "pinkman",
     "piggolem",
     "jellyfish",
-
+    "feathers_tro",
     "boatmetal",
     --"bird_swarm",
     "tropicalspawnblocker",

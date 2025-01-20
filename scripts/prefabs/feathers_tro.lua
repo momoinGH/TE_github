@@ -54,9 +54,6 @@ local function makefeather(name)
     return Prefab(assetname, fn, assets)
 end
 
-return makefeather("crow"),
-    makefeather("robin"),
-    makefeather("robin_winter"),
-    makefeather("canary"),
+return
     makefeather("thunder"),
     makefeather("chicken")
