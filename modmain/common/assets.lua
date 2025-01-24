@@ -120,6 +120,11 @@ Assets =
     --Asset("SOUNDPACKAGE", "sound/Hamlet.fev"),
     --Asset("SOUND", "sound/Hamlet.fsb"),
 
+	--蘑菇农场额外种植动画包，来自老版棱镜
+    Asset("ANIM", "anim/mushroom_farm_cutlichen_build.zip"),
+    Asset("ANIM", "anim/mushroom_farm_foliage1_build.zip"),
+    Asset("ANIM", "anim/mushroom_farm_foliage2_build.zip"),
+    --Asset("ANIM", "anim/mushroom_farm_quagmire_mushrooms_build.zip"),
 
     -- @Runar: 声明资产不需要声明tex
     Asset("ATLAS", "images/names_wilbur.xml"),
