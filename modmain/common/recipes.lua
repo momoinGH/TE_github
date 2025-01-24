@@ -1,6 +1,7 @@
 local cooking = require("cooking")
 local preparedFoods = require("gorge_foods")
 local TechTree = require("techtree")
+local tab_atlas = "images/tabs.xml"
 
 table.insert(TechTree.AVAILABLE_TECH, "OBSIDIAN")
 table.insert(TechTree.AVAILABLE_TECH, "CITY")
@@ -190,902 +191,290 @@ local function SortBefore(a, b, filter_name) SortRecipe(a, b, filter_name, 0) en
 
 local function SortAfter(a, b, filter_name) SortRecipe(a, b, filter_name, 1) end
 
-AddRecipeFilter({
-    name = "NAUTICAL",
-    image = "tab_nautical.tex",
-})
-AddRecipeFilter({
-    name = "LEGACY",
-    image = "tab_archaeology.tex",
-})
--- 这几个靠近科技站才有物品，平常一直都是空的，不需要额外的过滤器
--- AddRecipeFilter({ name = "OBSIDIAN", atlas = tab_atlas, image = "tab_volcano.tex" })
--- AddRecipeFilter({ name = "CITY", atlas = tab_atlas, image = "tab_city.tex" })
--- AddRecipeFilter({ name = "FORGE", atlas = tab_atlas, image = "tab_forge.tex" })
--- AddRecipeFilter({ name = "GORGE", atlas = tab_atlas, image = "tab_gorge.tex" })
+AddRecipeFilter({ name = "NAUTICAL", atlas = tab_atlas, image = "tab_nautical.tex" })
+AddRecipeFilter({ name = "OBSIDIAN", atlas = tab_atlas, image = "tab_volcano.tex" })-- 这个靠近科技站才有物品，平常一直都是空的
+AddRecipeFilter({ name = "ARCHAEOLOGY", atlas = tab_atlas, image = "tab_archaeology.tex" })
+AddRecipeFilter({ name = "INTERIOR", atlas = tab_atlas, image = "tab_home_decor.tex" })-- 这个靠近科技站才有物品，平常一直都是空的
+AddRecipeFilter({ name = "CITY", atlas = tab_atlas, image = "tab_city.tex" })-- 这个靠近科技站才有物品，平常一直都是空的
+--AddRecipeFilter({ name = "FORGE", atlas = tab_atlas, image = "tab_forge.tex" })--给未来预留的
+AddRecipeFilter({ name = "GORGE", atlas = tab_atlas, image = "tab_gorge.tex" })-- 这个靠近科技站才有物品，平常一直都是空的
 
 if TUNING.tropical.frost_island ~= 0 then
-    AddRecipe2("wildbeaver_house", {Ingredient("beaverskin", 4), Ingredient("boards", 4), Ingredient("cutstone", 3)},
-               TECH.SCIENCE_TWO, {
-        placer = "wildbeaver_house_placer",
-    }, {"STRUCTURES"})
+	AddRecipe2("wildbeaver_house", {Ingredient("beaverskin", 4), Ingredient("boards", 4), Ingredient("cutstone", 3)}, TECH.SCIENCE_TWO, {placer="wildbeaver_house_placer"}, {"STRUCTURES"})
 end
 
 if TUNING.tropical.shipwrecked_plus then
-    AddRecipe2("pandahouse", {Ingredient("pandaskin", 4), Ingredient("boards", 4), Ingredient("cutstone", 3)},
-               TECH.SCIENCE_TWO, {
-        placer = "pandahouse_placer",
-    }, {"STRUCTURES"})
+	AddRecipe2("pandahouse", {Ingredient("pandaskin", 4), Ingredient("boards", 4), Ingredient("cutstone", 3)}, TECH.SCIENCE_TWO, {placer="pandahouse_placer"}, {"STRUCTURES"})
 end
 
 if TUNING.tropical.quagmire or TUNING.tropical.shipwrecked_plus then
-    AddRecipe2("galinheiro", {Ingredient("seeds", 6), Ingredient("boards", 4), Ingredient("feather_chicken", 2)},
-               TECH.SCIENCE_TWO, {
-        placer = "galinheiro_placer",
-    }, {"STRUCTURES"})
+	AddRecipe2("galinheiro",{Ingredient("seeds", 6), Ingredient("boards", 4), Ingredient("feather_chicken", 2)}, TECH.SCIENCE_TWO,{placer="galinheiro_placer"}, {"STRUCTURES"})
 end
 
 ---------------------corrigindo bug estranho-------------
-AddRecipe2("campfire", {Ingredient("cutgrass", 3), Ingredient("log", 2)}, TECH.NONE, {
-    placer = "campfire_placer",
-})
+--AddRecipe2("campfire", {Ingredient("cutgrass", 3), Ingredient("log", 2)}, TECH.NONE, {placer="campfire_placer"})--为什么有个营火？
 
 -- CHARACTER--
 if not GetModConfigData("disablecharacters") then
     -- Walani
-    AddRecipe2("surfboard_item", {Ingredient("boards", 1), Ingredient("seashell", 1)}, TECH.NONE, {
-        builder_tag = "walani",
-    }, {"CHARACTER"})
+AddRecipe2("surfboarditem", 			{Ingredient("boards", 1), Ingredient("seashell", 1)}, 									TECH.NONE, {builder_tag="walani"},   {"CHARACTER"})
     -- Woodlegs
-    AddRecipe2("porto_woodlegsboat", {Ingredient("boards", 4), Ingredient("dubloon", 4), Ingredient("boatcannon", 1)},
-               TECH.NONE, {
-        builder_tag = "woodlegs",
-    }, {"CHARACTER"})
-    AddRecipe2("woodlegshat", {Ingredient("boneshard", 4), Ingredient("fabric", 3), Ingredient("dubloon", 10)}, TECH.NONE,
-               {
-        builder_tag = "woodlegs",
-    }, {"CHARACTER"})
+AddRecipe2("porto_woodlegsboat", 		{Ingredient("boards", 4), Ingredient("dubloon", 4), Ingredient("boatcannon", 1)}, 		TECH.NONE, {builder_tag="woodlegs"}, {"CHARACTER"})
+AddRecipe2("woodlegshat", 				{Ingredient("boneshard", 4), Ingredient("fabric", 3), Ingredient("dubloon", 10)},		TECH.NONE, {builder_tag="woodlegs"}, {"CHARACTER"})
 end
 
 -- Wormwood
-AddRecipe2("poisonbalm", {Ingredient("livinglog", 1), Ingredient("venomgland", 1)}, TECH.NONE, {
-    builder_tag = "plantkin",
-}, {"CHARACTER"})
-AddRecipe2("seaweed_stalk",
-           {Ingredient("bullkelp_root", 1), Ingredient("seaweed", 3), Ingredient(CHARACTER_INGREDIENT.HEALTH, 10)},
-           TECH.NONE, {
-    builder_tag = "plantkin",
-}, {"CHARACTER"})
+AddRecipe2("poisonbalm",				{Ingredient("livinglog", 1), Ingredient("venomgland", 1)}, 												  TECH.NONE, 		  {builder_tag="plantkin"}, {"CHARACTER"})
+AddRecipe2("seaweed_stalk",				{Ingredient("bullkelp_root", 1), Ingredient("seaweed", 3), Ingredient(CHARACTER_INGREDIENT.HEALTH, 10)},  TECH.NONE, 		  {builder_tag="plantkin"}, {"CHARACTER"})
 -- Wedbber
-AddRecipe2("mutator_tropical", {Ingredient("monstermeat", 2), Ingredient("silk", 1), Ingredient("venomgland", 1)},
-           TECH.NONE, {
-    builder_tag = "spiderwhisperer",
-}, {"CHARACTER"})
-AddRecipe2("mutator_frost", {Ingredient("monstermeat", 2), Ingredient("silk", 3), Ingredient("ice", 4)}, TECH.NONE, {
-    builder_tag = "spiderwhisperer",
-}, {"CHARACTER"})
+AddRecipe2("mutator_tropical", 			{Ingredient("monstermeat", 2), Ingredient("silk", 1), Ingredient("venomgland", 1)}, 					  TECH.NONE,		  {builder_tag="spiderwhisperer"}, {"CHARACTER"})
+AddRecipe2("mutator_frost", 			{Ingredient("monstermeat", 2), Ingredient("silk", 3), Ingredient("ice", 4)}, 							  TECH.NONE,		  {builder_tag="spiderwhisperer"}, {"CHARACTER"})
 -- Wurt
-AddRecipe2("mermhouse_fisher_crafted", {Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("oceanfish_small_61_inv", 2)},
-           TECH.SCIENCE_ONE, {
-    builder_tag = "merm_builder",
-    placer = "mermhouse_fisher_crafted_placer",
-    testfn = function(pt, rot)
-        local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH)
-    end,
-}, {"CHARACTER"})
-AddRecipe2("mermhouse_tropical_crafted", {Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("oceanfish_small_61_inv", 2)},
-           TECH.SCIENCE_ONE, {
-    builder_tag = "merm_builder",
-    placer = "mermhouse_tropical_crafted_placer",
-    testfn = function(pt, rot)
-        local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH)
-    end,
-}, {"CHARACTER"})
-AddRecipe2("quagmire_merm_house_crafted", {Ingredient("boards", 5), Ingredient("cutstone", 3), Ingredient("oceanfish_small_11_inv", 2)},
-           TECH.SCIENCE_ONE, {
-    builder_tag = "merm_builder",
-    placer = "quagmire_merm_house_crafted_placer",
-    testfn = function(pt, rot)
-        local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH)
-    end,
-}, {"CHARACTER"})
-AddRecipe2("mermhouse_crafted", {Ingredient("boards", 4), Ingredient("cutreeds", 3), Ingredient("pondfish", 2)},
-           TECH.SCIENCE_ONE, {
-    builder_tag = "merm_builder",
-    placer = "mermhouse_crafted_placer",
-    testfn = function(pt, rot)
-        local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH)
-    end,
-}, {"CHARACTER"})
-AddRecipe2("mermthrone_construction", {Ingredient("boards", 5), Ingredient("rope", 5)}, TECH.SCIENCE_ONE, {
-    builder_tag = "merm_builder",
-    placer = "mermthrone_construction_placer",
-    testfn = function(pt, rot)
-        local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH)
-    end,
-}, {"CHARACTER"})
-AddRecipe2("mermwatchtower", {Ingredient("boards", 5), Ingredient("tentaclespots", 1), Ingredient("spear", 2)},
-           TECH.SCIENCE_TWO, {
-    builder_tag = "merm_builder",
-    placer = "mermwatchtower_placer",
-    testfn = function(pt, rot)
-        local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH)
-    end,
-}, {"CHARACTER"})
---[[
-AddRecipe2("offering_pot", { Ingredient("boards", 2), Ingredient("cutreeds", 2) }, TECH.NONE,
-    {
-        builder_tag = "merm_swampmaster_offeringpot",
-        placer = "offering_pot_placer",
-        testfn = function(pt, rot)
-            local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-            return ground_tile and
-                (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-        end
-    }, { "CHARACTER" })
-AddRecipe2("offering_pot_upgraded",
-    { Ingredient("boards", 3), Ingredient("cutreeds", 3), Ingredient("tentaclespots", 1) },
-    TECH.NONE,
-    {
-        builder_tag = "merm_swampmaster_offeringpot_upgraded",
-        placer = "offering_pot_upgraded_placer",
-        testfn = function(
-            pt, rot)
-            local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-            return ground_tile and
-                (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-        end
-    }, { "CHARACTER" })
-AddRecipe2("merm_armory", { Ingredient("boards", 2), Ingredient("log", 5), Ingredient("cutgrass", 5) }, TECH.NONE,
-    {
-        builder_tag = "merm_swampmaster_mermarmory",
-        placer = "merm_armory_placer",
-        testfn = function(pt, rot)
-            local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-            return ground_tile and
-                (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-        end
-    }, { "CHARACTER" })
-AddRecipe2("merm_armory_upgraded",
-    { Ingredient("boards", 4), Ingredient("tentaclespots", 1), Ingredient("log", 5), Ingredient("cutgrass", 5) },
-    TECH.NONE,
-    {
-        builder_tag = "merm_swampmaster_mermarmory_upgraded",
-        placer = "merm_armory_upgraded_placer",
-        testfn = function(pt,
-                          rot)
-            local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-            return ground_tile and
-                (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-        end
-    }, { "CHARACTER" })
-AddRecipe2("merm_toolshed", { Ingredient("boards", 2), Ingredient("twigs", 5), Ingredient("rocks", 5) }, TECH.NONE,
-    {
-        builder_tag = "merm_swampmaster_mermtoolshed",
-        placer = "merm_toolshed_placer",
-        testfn = function(pt, rot)
-            local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-            return ground_tile and
-                (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-        end
-    }, { "CHARACTER" })
-AddRecipe2("merm_toolshed_upgraded",
-    { Ingredient("boards", 4), Ingredient("tentaclespots", 1), Ingredient("twigs", 5), Ingredient("rocks", 5) },
-    TECH.NONE,
-    {
-        builder_tag = "merm_swampmaster_mermtoolshed_upgraded",
-        placer = "merm_toolshed_upgraded_placer",
-        testfn = function(
-            pt, rot)
-            local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-            return ground_tile and
-                (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-        end
-    }, { "CHARACTER" })]]
+AddRecipe2("mermhouse_fisher_crafted", 	{Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("oceanfish_small_61_inv", 2)}, 				TECH.SCIENCE_ONE, {builder_tag="merm_builder", 		 placer="mermhouse_fisher_crafted_placer",    testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+AddRecipe2("mermhouse_tropical_crafted", {Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("oceanfish_small_61_inv", 2)}, 			TECH.SCIENCE_ONE, {builder_tag="merm_builder", 		 placer="mermhouse_tropical_crafted_placer",  testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+AddRecipe2("quagmire_merm_house_crafted", {Ingredient("boards", 5), Ingredient("cutstone", 3), Ingredient("oceanfish_small_11_inv", 2)}, 			TECH.SCIENCE_ONE, {builder_tag="merm_builder", 		 placer="quagmire_merm_house_crafted_placer", testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+
+AddRecipe2("mermhouse_crafted", 		{Ingredient("boards", 4), Ingredient("cutreeds", 3), Ingredient("pondfish", 2)}, 							TECH.SCIENCE_ONE, {builder_tag="merm_builder", 						placer="mermhouse_crafted_placer", 		testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+AddRecipe2("mermthrone_construction",	{Ingredient("boards", 5), Ingredient("rope", 5)}, 															TECH.SCIENCE_ONE, {builder_tag="merm_builder", 						placer="mermthrone_construction_placer",testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+AddRecipe2("mermwatchtower", 			{Ingredient("boards", 5), Ingredient("tentaclespots", 1), Ingredient("spear", 2)}, 							TECH.SCIENCE_TWO, {builder_tag="merm_builder", 						placer="mermwatchtower_placer", 		testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+--AddRecipe2("offering_pot",			{Ingredient("boards", 2), Ingredient("cutreeds", 2)},											            TECH.NONE,		  {builder_tag="merm_swampmaster_offeringpot",      placer="offering_pot_placer",           testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+--AddRecipe2("offering_pot_upgraded",	{Ingredient("boards", 3), Ingredient("cutreeds", 3),Ingredient("tentaclespots", 1)},			            TECH.NONE,		  {builder_tag="merm_swampmaster_offeringpot_upgraded", placer="offering_pot_upgraded_placer", testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+--AddRecipe2("merm_armory",			    {Ingredient("boards", 2), Ingredient("log", 5), Ingredient("cutgrass", 5)},						            TECH.NONE,		  {builder_tag="merm_swampmaster_mermarmory",           placer="merm_armory_placer",           testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+--AddRecipe2("merm_armory_upgraded",	{Ingredient("boards", 4), Ingredient("tentaclespots", 1), Ingredient("log", 5), Ingredient("cutgrass", 5)},	TECH.NONE,		  {builder_tag="merm_swampmaster_mermarmory_upgraded",  placer="merm_armory_upgraded_placer",  testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+--AddRecipe2("merm_toolshed",		    {Ingredient("boards", 2), Ingredient("twigs", 5), Ingredient("rocks", 5)},						            TECH.NONE,		  {builder_tag="merm_swampmaster_mermtoolshed",         placer="merm_toolshed_placer",         testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+--AddRecipe2("merm_toolshed_upgraded",  {Ingredient("boards", 4), Ingredient("tentaclespots", 1), Ingredient("twigs", 5), Ingredient("rocks", 5)},	TECH.NONE,	      {builder_tag="merm_swampmaster_mermtoolshed_upgraded",placer="merm_toolshed_upgraded_placer",testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
 -- Maxwell
-AddRecipe2("porto_shadowboat",
-           {Ingredient("papyrus", 3), Ingredient("nightmarefuel", 4), Ingredient(CHARACTER_INGREDIENT.SANITY, 60)},
-           TECH.NONE, {
-    builder_tag = "shadowmagic",
-}, {"CHARACTER"})
-AddRecipe2("shadowmower_builder", {Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.SANITY, 60)},
-           TECH.SHADOW_TWO, {
-    builder_tag = "shadowmagic",
-    nounlock = true,
-}, {"CRAFTING_STATION"})
-AddRecipe2("shadowlumber_builder", {Ingredient("nightmarefuel", 2),
-                                    Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY,
-                                               GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWLUMBER)},
-           TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
-AddRecipe2("shadowminer_builder", {Ingredient("nightmarefuel", 2),
-                                   Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY,
-                                              GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWMINER)}, TECH.SHADOW_TWO,
-           nil, nil, true, nil, "shadowmagic")
-AddRecipe2("shadowdigger_builder", {Ingredient("nightmarefuel", 2),
-                                    Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY,
-                                               GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDIGGER)},
-           TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
-AddRecipe2("shadowduelist_builder", {Ingredient("nightmarefuel", 2),
-                                     Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY,
-                                                GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDUELIST)},
-           TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
+AddRecipe2("porto_shadowboat",			{Ingredient("papyrus", 3), Ingredient("nightmarefuel", 4), Ingredient(CHARACTER_INGREDIENT.SANITY, 60)},	TECH.NONE,		  {builder_tag="shadowmagic"}, {"CHARACTER"})
+AddRecipe2("shadowmower_builder", 		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.SANITY, 60)}, 	TECH.SHADOW_TWO,  {builder_tag="shadowmagic", 		  nounlock=true}, {"CRAFTING_STATION"})
+AddRecipe2("shadowlumber_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWLUMBER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
+AddRecipe2("shadowminer_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWMINER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
+AddRecipe2("shadowdigger_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDIGGER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
+AddRecipe2("shadowduelist_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDUELIST)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
 -- Wickerbottom
-AddRecipe2("book_meteor", {Ingredient("papyrus", 2), Ingredient("obsidian", 2)}, TECH.SCIENCE_TWO, {
-    builder_tag = "bookbuilder",
-}, {"CHARACTER"})
+AddRecipe2("book_meteor", 			{Ingredient("papyrus", 2), Ingredient("obsidian", 2)},   TECH.SCIENCE_TWO,  { builder_tag="bookbuilder", }, {"CHARACTER"})
 -- WX78--
-AddRecipe2("wx78module_movespeed_sw", {Ingredient("scandata", 2), Ingredient("crab", 1)}, TECH.ROBOTMODULECRAFT_ONE, {
-    builder_tag = "upgrademoduleowner",
-    product = "wx78module_movespeed",
-}, {"CHARACTER"})
+AddRecipe2("wx78module_movespeed_sw", {Ingredient("scandata", 2), Ingredient("crab" , 1)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_movespeed", }, { "CHARACTER" })
 SortAfter("wx78module_movespeed_sw", "wx78module_movespeed", "CHARACTER")
-AddRecipe2("wx78module_movespeed_ham", {Ingredient("scandata", 2), Ingredient("piko", 1)}, TECH.ROBOTMODULECRAFT_ONE, {
-    builder_tag = "upgrademoduleowner",
-    product = "wx78module_movespeed",
-}, {"CHARACTER"})
+AddRecipe2("wx78module_movespeed_ham", {Ingredient("scandata", 2), Ingredient("piko" , 1)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_movespeed", }, { "CHARACTER" })
 SortAfter("wx78module_movespeed_ham", "wx78module_movespeed_sw", "CHARACTER")
-AddRecipe2("wx78module_maxhunger_sw",
-           {Ingredient("scandata", 3), Ingredient("shark_gills", 1), Ingredient("wx78module_maxhunger1", 1)},
-           TECH.ROBOTMODULECRAFT_ONE, {
-    builder_tag = "upgrademoduleowner",
-    product = "wx78module_maxhunger",
-}, {"CHARACTER"})
+AddRecipe2("wx78module_maxhunger_sw", {Ingredient("scandata", 3), Ingredient("shark_gills", 1), Ingredient("wx78module_maxhunger1", 1)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_maxhunger", }, { "CHARACTER" })
 SortAfter("wx78module_maxhunger_sw", "wx78module_maxhunger", "CHARACTER")
-AddRecipe2("wx78module_taser_ham", {Ingredient("scandata", 5), Ingredient("feather_thunder", 1)},
-           TECH.ROBOTMODULECRAFT_ONE, {
-    builder_tag = "upgrademoduleowner",
-    product = "wx78module_taser",
-}, {"CHARACTER"})
+AddRecipe2("wx78module_taser_ham", {Ingredient("scandata", 5), Ingredient("feather_thunder", 1)}, TECH.ROBOTMODULECRAFT_ONE, { builder_tag="upgrademoduleowner", product = "wx78module_taser", }, { "CHARACTER" })
 SortAfter("wx78module_taser_ham", "wx78module_taser", "CHARACTER")
 
 -- Moon--
-AddRecipe2("glassmachete", {Ingredient("twigs", 2), Ingredient("moonglass", 4)}, TECH.CELESTIAL_THREE, {
-    nounlock = true,
-}, {"CRAFTING_STATION"})
+AddRecipe2("glassmachete", 			{Ingredient("twigs", 2), Ingredient("moonglass", 4)},         TECH.CELESTIAL_THREE, { nounlock=true}, {"CRAFTING_STATION"})
 
 -- OTHER--
-AddRecipe2("machete", {Ingredient("flint", 3), Ingredient("twigs", 1)}, TECH.NONE, {
-}, {"TOOLS"})
-AddRecipe2("goldenmachete", {Ingredient("twigs", 4), Ingredient("goldnugget", 2)}, TECH.SCIENCE_TWO, {
-}, {"TOOLS"})
+AddRecipe2("machete", 				{Ingredient("flint", 3), Ingredient("twigs", 1)}, 			  TECH.NONE, 		   {"TOOLS"})
+AddRecipe2("goldenmachete", 		{Ingredient("twigs", 4), Ingredient("goldnugget", 2)},  	  TECH.SCIENCE_TWO,    {"TOOLS"})
 
-AddRecipe2("monkeyball", {Ingredient("cave_banana", 1), Ingredient("snakeskin", 2), Ingredient("rope", 2)},
-           TECH.SCIENCE_ONE, {
-}, {"TOOLS"})
-AddRecipe2("chiminea", {Ingredient("log", 2), Ingredient("limestone", 3), Ingredient("sand", 2)}, TECH.NONE, {
-    placer = "chiminea_placer",
-}, {"LIGHT", "COOKING", "WINTER"})
-AddRecipe2("bottlelantern", {Ingredient("messagebottleempty_sw", 1), Ingredient("bioluminescence", 2)}, TECH.SCIENCE_TWO,
-           {
-}, {"LIGHT"})
+AddRecipe2("monkeyball",			{Ingredient("cave_banana", 1), Ingredient("snakeskin", 2), Ingredient("rope", 2)}, 			  TECH.SCIENCE_ONE,  {"TOOLS"})
+AddRecipe2("chiminea",				{Ingredient("log", 2), Ingredient("limestone", 3), Ingredient("sand", 2)}, 					  TECH.NONE, 		 { placer="chiminea_placer"}, {"LIGHT","COOKING","WINTER"})
+AddRecipe2("bottlelantern",			{Ingredient("messagebottleempty_sw", 1), Ingredient("bioluminescence", 2)}, 				  TECH.SCIENCE_TWO,  {"LIGHT"})
 
-AddRecipe2("porto_sea_chiminea", {Ingredient("sand", 4), Ingredient("tar", 6), Ingredient("limestone", 6)},
-           TECH.SCIENCE_ONE, {
-    image = "sea_chiminea.tex",
-}, {"LIGHT", "COOKING", "WINTER"})
-AddRecipe2("tarlamp", {Ingredient("seashell", 1), Ingredient("tar", 1)}, TECH.SCIENCE_ONE, {
-}, {"LIGHT"})
-AddRecipe2("obsidianfirepit", {Ingredient("log", 3), Ingredient("obsidian", 8)}, TECH.SCIENCE_TWO, {
-    placer = "obsidianfirepit_placer",
-}, {"LIGHT", "COOKING", "WINTER"})
-AddRecipe2("porto_researchlab5", {Ingredient("limestone", 4), Ingredient("sand", 2), Ingredient("transistor", 2)},
-           TECH.SCIENCE_ONE, {
-    image = "researchlab5.tex",
-}, {"PROTOTYPERS", "STRUCTURES"})
-AddRecipe2("icemaker", {Ingredient("heatrock", 1), Ingredient("bamboo", 5), Ingredient("transistor", 2)},
-           TECH.SCIENCE_TWO, {
-    placer = "icemaker_placer",
-}, {"COOKING", "SUMMER", "STRUCTURES"})
-AddRecipe2("quackendrill", {Ingredient("quackenbeak", 1), Ingredient("gears", 1), Ingredient("transistor", 1)},
-           TECH.SCIENCE_TWO, {
-}, {"TOOLS"})
-AddRecipe2("fabric", {Ingredient("bamboo", 3)}, TECH.SCIENCE_ONE, {
-}, {"REFINE"})
-AddRecipe2("messagebottleempty_sw", {Ingredient("sand", 3)}, TECH.SCIENCE_TWO, {
-}, {"REFINE"})
-AddRecipe2("limestone", {Ingredient("coral", 3)}, TECH.SCIENCE_ONE, {
-}, {"REFINE"})
-AddRecipe2("nubbin", {Ingredient("limestone", 3), Ingredient("corallarve", 1)}, TECH.SCIENCE_ONE, {
-}, {"REFINE"})
-AddRecipe2("ice", {Ingredient("hail_ice", 4)}, TECH.SCIENCE_ONE, {"REFINE"})
-AddRecipe2("goldnugget_sw", {Ingredient("dubloon", 3)}, TECH.SCIENCE_ONE, {
-    product = "goldnugget",
-}, {"REFINE"})
-AddRecipe2("spear_poison", {Ingredient("spear", 1), Ingredient("venomgland", 1)}, TECH.SCIENCE_ONE, {
-}, {"WEAPONS"})
-AddRecipe2("cutlass", {Ingredient("goldnugget", 2), Ingredient("twigs", 1), Ingredient("dead_swordfish", 1)},
-           TECH.SCIENCE_TWO, {
-}, {"WEAPONS"})
-AddRecipe2("coconade", {Ingredient("coconut", 1), Ingredient("gunpowder", 1), Ingredient("rope", 1)}, TECH.SCIENCE_ONE,
-           {
-}, {"WEAPONS"})
-AddRecipe2("spear_launcher", {Ingredient("bamboo", 3), Ingredient("jellyfish", 1)}, TECH.SCIENCE_TWO, {
-}, {"WEAPONS"})
-AddRecipe2("blowdart_poison", {Ingredient("cutreeds", 2), Ingredient("venomgland", 1), Ingredient("feather_crow", 1)},
-           TECH.SCIENCE_ONE, {
-}, {"WEAPONS"})
-AddRecipe2("armorseashell", {Ingredient("seashell", 10), Ingredient("rope", 1), Ingredient("seaweed", 2)},
-           TECH.SCIENCE_TWO, {
-}, {"ARMOUR"})
-AddRecipe2("oxhat", {Ingredient("rope", 1), Ingredient("seashell", 4), Ingredient("ox_horn", 1)}, TECH.SCIENCE_ONE, {
-}, {"ARMOUR"})
-AddRecipe2("armorcactus", {Ingredient("needlespear", 3), Ingredient("armorwood", 1)}, TECH.SCIENCE_TWO, {
-}, {"ARMOUR"})
-AddRecipe2("snakeskinhat", {Ingredient("boneshard", 1), Ingredient("snakeskin", 1), Ingredient("strawhat", 1)},
-           TECH.SCIENCE_TWO, {
-}, {"CLOTHING", "RAIN"})
-AddRecipe2("armor_snakeskin", {Ingredient("boneshard", 2), Ingredient("snakeskin", 2), Ingredient("vine", 1)},
-           TECH.SCIENCE_TWO, {
-}, {"CLOTHING", "RAIN", "WINTER"})
-AddRecipe2("palmleaf_umbrella", {Ingredient("twigs", 4), Ingredient("petals", 6), Ingredient("palmleaf", 3)}, TECH.NONE,
-           {
-}, {"CLOTHING", "RAIN", "SUMMER"})
-AddRecipe2("double_umbrellahat", {Ingredient("umbrella", 1), Ingredient("shark_gills", 2), Ingredient("strawhat", 2)},
-           TECH.SCIENCE_TWO, {
-}, {"CLOTHING", "RAIN", "SUMMER"})
-AddRecipe2("aerodynamichat", {Ingredient("coconut", 1), Ingredient("shark_fin", 1), Ingredient("vine", 2)},
-           TECH.SCIENCE_TWO, {
-}, {"CLOTHING"})
-AddRecipe2("thatchpack", {Ingredient("palmleaf", 6)}, TECH.NONE, {
-}, {"CLOTHING", "CONTAINERS"})
+AddRecipe2("porto_sea_chiminea",	{Ingredient("sand", 4), Ingredient("tar", 6), Ingredient("limestone", 6)}, 				      TECH.SCIENCE_ONE,  { image="sea_chiminea.tex"}, {"LIGHT","COOKING","WINTER"})
+AddRecipe2("tarlamp",				{Ingredient("seashell", 1), Ingredient("tar", 1)}, 											  TECH.SCIENCE_ONE,  {"LIGHT"})
+AddRecipe2("obsidianfirepit",		{Ingredient("log", 3), Ingredient("obsidian", 8)}, 											  TECH.SCIENCE_TWO,  { placer="obsidianfirepit_placer"}, {"LIGHT","COOKING","WINTER"})
+AddRecipe2("porto_researchlab5",	{Ingredient("limestone", 4), Ingredient("sand", 2), Ingredient("transistor", 2)}, 			  TECH.SCIENCE_ONE,  { image="researchlab5.tex"}, {"PROTOTYPERS","STRUCTURES"})
+AddRecipe2("icemaker",				{Ingredient("heatrock", 1), Ingredient("bamboo", 5), Ingredient("transistor", 2)},			  TECH.SCIENCE_TWO,  { placer="icemaker_placer"}, {"COOKING","SUMMER","STRUCTURES"})
+AddRecipe2("quackendrill",			{Ingredient("quackenbeak", 1), Ingredient("gears", 1), Ingredient("transistor", 1)}, 		  TECH.SCIENCE_TWO,  {"TOOLS"})
+AddRecipe2("fabric", 				{Ingredient("bamboo", 3)}, 																	  TECH.SCIENCE_ONE,  {"REFINE"})
+AddRecipe2("messagebottleempty_sw",	{Ingredient("sand", 3)}, 																	  TECH.SCIENCE_TWO,  {"REFINE"})
+AddRecipe2("limestone",				{Ingredient("coral", 3)}, 																	  TECH.SCIENCE_ONE,  {"REFINE"})
+AddRecipe2("nubbin",				{Ingredient("limestone", 3), Ingredient("corallarve", 1)}, 									  TECH.SCIENCE_ONE,  {"REFINE"})
+AddRecipe2("ice",					{Ingredient("hail_ice", 4)}, 																  TECH.SCIENCE_ONE,  {"REFINE"})
+AddRecipe2("goldnugget_sw",         {Ingredient("dubloon", 3)},                                                                   TECH.SCIENCE_ONE,  {product = "goldnugget",}, {"REFINE"})
+AddRecipe2("spear_poison",			{Ingredient("spear", 1), Ingredient("venomgland", 1)}, 										  TECH.SCIENCE_ONE,  {"WEAPONS"})
+AddRecipe2("cutlass",				{Ingredient("goldnugget", 2), Ingredient("twigs", 1), Ingredient("dead_swordfish", 1)}, 	  TECH.SCIENCE_TWO,  {"WEAPONS"})
+AddRecipe2("coconade",				{Ingredient("coconut", 1), Ingredient("gunpowder", 1), Ingredient("rope", 1)},				  TECH.SCIENCE_ONE,  {"WEAPONS"})
+AddRecipe2("spear_launcher",		{Ingredient("bamboo", 3), Ingredient("jellyfish", 1)},										  TECH.SCIENCE_TWO,  {"WEAPONS"})
+AddRecipe2("blowdart_poison",		{Ingredient("cutreeds", 2), Ingredient("venomgland", 1), Ingredient("feather_crow", 1)},	  TECH.SCIENCE_ONE,  {"WEAPONS"})
+AddRecipe2("armorseashell",		    {Ingredient("seashell", 10), Ingredient("rope", 1), Ingredient("seaweed", 2)},  			  TECH.SCIENCE_TWO,  {"ARMOUR"})
+AddRecipe2("oxhat",					{Ingredient("rope", 1), Ingredient("seashell", 4), Ingredient("ox_horn", 1)},  				  TECH.SCIENCE_ONE,  {"ARMOUR"})
+AddRecipe2("armorcactus",			{Ingredient("needlespear", 3), Ingredient("armorwood", 1)},									  TECH.SCIENCE_TWO,  {"ARMOUR"})
+AddRecipe2("snakeskinhat", 			{Ingredient("boneshard", 1), Ingredient("snakeskin", 1), Ingredient("strawhat", 1)},  		  TECH.SCIENCE_TWO,  {"CLOTHING","RAIN"})
+AddRecipe2("armor_snakeskin", 		{Ingredient("boneshard", 2), Ingredient("snakeskin", 2), Ingredient("vine", 1)},  			  TECH.SCIENCE_TWO,  {"CLOTHING","RAIN","WINTER"})
+AddRecipe2("palmleaf_umbrella",		{Ingredient("twigs", 4), Ingredient("petals", 6), Ingredient("palmleaf", 3)},  				  TECH.NONE, 		 {"CLOTHING","RAIN","SUMMER"})
+AddRecipe2("double_umbrellahat",	{Ingredient("umbrella", 1), Ingredient("shark_gills", 2), Ingredient("strawhat", 2)}, 		  TECH.SCIENCE_TWO,  {"CLOTHING","RAIN","SUMMER"})
+AddRecipe2("aerodynamichat",		{Ingredient("coconut", 1), Ingredient("shark_fin", 1), Ingredient("vine", 2)}, 			      TECH.SCIENCE_TWO,  {"CLOTHING"})
+AddRecipe2("thatchpack",			{Ingredient("palmleaf", 6)},																  TECH.NONE,		 {"CLOTHING","CONTAINERS"})
 
-AddRecipe2("tarsuit", {Ingredient("tar", 4), Ingredient("fabric", 2), Ingredient("palmleaf", 2)}, TECH.SCIENCE_ONE, {
-}, {"CLOTHING", "RAIN"})
-AddRecipe2("blubbersuit", {Ingredient("blubber", 4), Ingredient("fabric", 2), Ingredient("palmleaf", 2)},
-           TECH.SCIENCE_TWO, {
-}, {"CLOTHING", "RAIN", "WINTER"})
-AddRecipe2("brainjellyhat", {Ingredient("coral_brain", 1), Ingredient("jellyfish", 1), Ingredient("rope", 2)},
-           TECH.SCIENCE_TWO, {
-}, {"CLOTHING", "PROTOTYPERS"})
-AddRecipe2("shark_teethhat", {Ingredient("shark_tooth", 5), Ingredient("goldnugget", 1)}, TECH.SCIENCE_ONE, nil, {"CLOTHING"})
+AddRecipe2("tarsuit",				{Ingredient("tar", 4), Ingredient("fabric", 2), Ingredient("palmleaf", 2)}, 				  TECH.SCIENCE_ONE,  {"CLOTHING","RAIN"})
+AddRecipe2("blubbersuit",			{Ingredient("blubber", 4), Ingredient("fabric", 2), Ingredient("palmleaf", 2)}, 			  TECH.SCIENCE_TWO,  {"CLOTHING","RAIN","WINTER"})
+AddRecipe2("brainjellyhat",			{Ingredient("coral_brain", 1), Ingredient("jellyfish", 1), Ingredient("rope", 2)},			  TECH.SCIENCE_TWO,  {"CLOTHING","PROTOTYPERS"})
+AddRecipe2("armor_windbreaker",		{Ingredient("blubber", 2), Ingredient("fabric", 1), Ingredient("rope", 1)},					  TECH.SCIENCE_TWO,  {"CLOTHING","RAIN"}) -- CHECK  THIS
+AddRecipe2("gashat",				{Ingredient("coral", 2), Ingredient("messagebottleempty_sw", 2), Ingredient("jellyfish", 1)}, TECH.SCIENCE_TWO,  {"CLOTHING"})
+AddRecipe2("antivenom",				{Ingredient("venomgland", 1), Ingredient("coral", 2), Ingredient("seaweed", 2)},			  TECH.SCIENCE_ONE,  {"RESTORATION"})
+AddRecipe2("ox_flute",				{Ingredient("ox_horn", 1), Ingredient("nightmarefuel", 2), Ingredient("rope", 1)},			  TECH.MAGIC_TWO,    {"MAGIC"})
+AddRecipe2("sand_castle", 			{Ingredient("sand", 4), Ingredient("palmleaf", 2), Ingredient("seashell", 3)},			      TECH.NONE, 		 { placer="sand_castle_placer"}, {"STRUCTURES","DECOR"})
 
-AddRecipe2("armor_windbreaker", {Ingredient("blubber", 2), Ingredient("fabric", 1), Ingredient("rope", 1)},
-           TECH.SCIENCE_TWO, {
-}, {"CLOTHING", "RAIN"}) -- CHECK  THIS
-AddRecipe2("gashat", {Ingredient("coral", 2), Ingredient("messagebottleempty_sw", 2), Ingredient("jellyfish", 1)},
-           TECH.SCIENCE_TWO, {
-}, {"CLOTHING"})
-AddRecipe2("antivenom", {Ingredient("venomgland", 1), Ingredient("coral", 2), Ingredient("seaweed", 2)},
-           TECH.SCIENCE_ONE, {
-}, {"RESTORATION"})
-AddRecipe2("ox_flute", {Ingredient("ox_horn", 1), Ingredient("nightmarefuel", 2), Ingredient("rope", 1)},
-           TECH.MAGIC_TWO, {
-}, {"MAGIC"})
-
-AddRecipe2("sand_castle", {Ingredient("sand", 4), Ingredient("palmleaf", 2), Ingredient("seashell", 3)}, TECH.NONE, {
-    placer = "sand_castle_placer",
-}, {"STRUCTURES", "DECOR"})
-AddRecipe2("turf_road", {Ingredient("cutstone", 1), Ingredient("flint", 2)}, TECH.SCIENCE_TWO, {
-    numtogive = 4,
-}, {"DECOR"})
+AddRecipe2("turf_road",				{Ingredient("cutstone", 1), Ingredient("flint", 2)}, 										  TECH.SCIENCE_TWO,  {numtogive=4}, {"DECOR"})--要先加个卵石路下面改的海难卵石路才能生效吗？
 if TUNING.tropical.only_shipwrecked then -- WHAT?
-    AddRecipe2("turf_road", {Ingredient("boards", 1), Ingredient("turf_magmafield", 1)}, TECH.SCIENCE_TWO, {
-        numtogive = 4,
-    }, {"DECOR"})
+	AddRecipe2("turf_road",			{Ingredient("boards", 1), Ingredient("turf_magmafield", 1)},  								  TECH.SCIENCE_TWO,  {numtogive=4}, {"DECOR"})
 end
 
-AddRecipe2("dragoonden", {Ingredient("dragoonheart", 1), Ingredient("rocks", 5), Ingredient("obsidian", 4)},
-           TECH.SCIENCE_TWO, {
-    placer = "dragoonden_placer",
-}, {"STRUCTURES"})
-AddRecipe2("wildborehouse", {Ingredient("pigskin", 4), Ingredient("palmleaf", 5), Ingredient("bamboo", 8)},
-           TECH.SCIENCE_TWO, {
-    placer = "wildborehouse_placer",
-}, {"STRUCTURES"})
-AddRecipe2("primeapebarrel", {Ingredient("twigs", 10), Ingredient("cave_banana", 3), Ingredient("poop", 4)},
-           TECH.SCIENCE_TWO, {
-    placer = "primeapebarrel_placer",
-}, {"STRUCTURES"})
-AddRecipe2("porto_ballphinhouse", {Ingredient("limestone", 4), Ingredient("seaweed", 4), Ingredient("dorsalfin", 2)},
-           TECH.SCIENCE_ONE, {
-    image = "ballphinhouse.tex",
-}, {"STRUCTURES"})
-AddRecipe2("sandbag_item", {Ingredient("fabric", 2), Ingredient("sand", 3)}, TECH.SCIENCE_TWO, {
-    numtogive = 4,
-}, {"STRUCTURES", "DECOR"})
-AddRecipe2("doydoynest", {Ingredient("twigs", 8), Ingredient("doydoyfeather", 2), Ingredient("poop", 4)},
-           TECH.SCIENCE_TWO, {
-    placer = "doydoynest_placer",
-}, {"STRUCTURES"})
-AddRecipe2("wall_limestone_item", {Ingredient("limestone", 2)}, TECH.SCIENCE_TWO, {
-    numtogive = 4,
-}, {"STRUCTURES", "DECOR"})
-AddRecipe2("wall_enforcedlimestone_item", {Ingredient("limestone", 2), Ingredient("seaweed", 4)}, TECH.SCIENCE_ONE, {
-    numtogive = 4,
-}, {"STRUCTURES", "DECOR"})
-AddRecipe2("seasack", {Ingredient("seaweed", 5), Ingredient("vine", 2), Ingredient("shark_gills", 1)}, TECH.SCIENCE_TWO,
-           {
-}, {"CONTAINERS", "COOKING", "CLOTHING"})
-AddRecipe2("porto_waterchest", {Ingredient("boards", 4), Ingredient("tar", 1)}, TECH.SCIENCE_ONE, {
-    image = "waterchest.tex",
-}, {"STRUCTURES", "CONTAINERS"})
-AddRecipe2("mussel_stick", {Ingredient("bamboo", 2), Ingredient("vine", 1), Ingredient("seaweed", 1)}, TECH.SCIENCE_ONE,
-           {
-}, {"GARDENING"})
-AddRecipe2("mussel_bed", {Ingredient("mussel", 1), Ingredient("coral", 1)}, TECH.SCIENCE_ONE, {
-}, {"GARDENING"})
-AddRecipe2("porto_fish_farm", {Ingredient("silk", 2), Ingredient("rope", 2), Ingredient("coconut", 4)},
-           TECH.SCIENCE_ONE, {
-    image = "fish_farm.tex",
-}, {"GARDENING"})
-AddRecipe2("tropicalfan", {Ingredient("cutreeds", 2), Ingredient("rope", 2), Ingredient("doydoyfeather", 5)},
-           TECH.SCIENCE_TWO, {
-}, {"SUMMER", "CLOTHING"})
-AddRecipe2("palmleaf_hut", {Ingredient("palmleaf", 4), Ingredient("bamboo", 4), Ingredient("rope", 3)},
-           TECH.SCIENCE_TWO, {
-    placer = "palmleaf_hut_placer",
-}, {"STRUCTURES", "RAIN", "SUMMER"})
--- AddRecipe2("goldnugget",			{Ingredient("dubloon", 3)},  																	            TECH.SCIENCE_ONE, {atlas=h_atlas}, {"REFINE"})
-AddRecipe2("armorlimestone", {Ingredient("limestone", 3), Ingredient("rope", 2)}, TECH.SCIENCE_TWO, {
-}, {"ARMOUR"})
-AddRecipe2("bell", {Ingredient("glommerwings", 1), Ingredient("glommerflower", 1)}, TECH.MAGIC_TWO, {
-}, {"MAGIC"})
-AddRecipe2("slow_farmplot", {Ingredient("cutgrass", 8), Ingredient("poop", 4), Ingredient("log", 4)}, TECH.SCIENCE_ONE,
-           {
-    atlas = TapDefaultAtlas,
-    min_spacing = 0,
-    placer = "slow_farmplot_placer",
-    image = "slow_farmplot.tex",
-}, {"GARDENING"})
-AddRecipe2("fast_farmplot", {Ingredient("cutgrass", 10), Ingredient("poop", 6), Ingredient("rocks", 4)},
-           TECH.SCIENCE_ONE, {
-    atlas = TapDefaultAtlas,
-    min_spacing = 0,
-    placer = "fast_farmplot_placer",
-    image = "fast_farmplot.tex",
-}, {"GARDENING"})
+AddRecipe2("dragoonden",			{Ingredient("dragoonheart", 1), Ingredient("rocks", 5), Ingredient("obsidian", 4)}, 				 TECH.SCIENCE_TWO, { placer="dragoonden_placer"}, {"STRUCTURES"})
+AddRecipe2("wildborehouse",			{Ingredient("pigskin", 4), Ingredient("palmleaf", 5), Ingredient("bamboo", 8)}, 					 TECH.SCIENCE_TWO, { placer="wildborehouse_placer"}, {"STRUCTURES"})
+AddRecipe2("primeapebarrel",		{Ingredient("twigs", 10), Ingredient("cave_banana", 3), Ingredient("poop", 4)}, 					 TECH.SCIENCE_TWO, { placer="primeapebarrel_placer"}, {"STRUCTURES"})
+AddRecipe2("porto_ballphinhouse",	{Ingredient("limestone", 4), Ingredient("seaweed", 4), Ingredient("dorsalfin", 2)}, 		         TECH.SCIENCE_ONE, { image="ballphinhouse.tex"}, {"STRUCTURES"})
+AddRecipe2("sandbag_item",			{Ingredient("fabric", 2), Ingredient("sand", 3)}, 												     TECH.SCIENCE_TWO, { numtogive=4}, {"STRUCTURES","DECOR"})
+AddRecipe2("doydoynest",			{Ingredient("twigs", 8), Ingredient("doydoyfeather", 2), Ingredient("poop", 4)}, 					 TECH.SCIENCE_TWO, { placer="doydoynest_placer"}, {"STRUCTURES"})
+AddRecipe2("wall_limestone_item",	{Ingredient("limestone", 2)}, 																		 TECH.SCIENCE_TWO, { numtogive=4}, {"STRUCTURES","DECOR"})
+AddRecipe2("wall_enforcedlimestone_item",{Ingredient("limestone", 2), Ingredient("seaweed", 4)}, 										 TECH.SCIENCE_ONE, { numtogive=4}, {"STRUCTURES","DECOR"})
+AddRecipe2("seasack",				{Ingredient("seaweed", 5), Ingredient("vine", 2), Ingredient("shark_gills", 1)}, 		             TECH.SCIENCE_TWO, {"CONTAINERS","COOKING","CLOTHING"})
+AddRecipe2("porto_waterchest",		{Ingredient("boards", 4), Ingredient("tar", 1)}, 													 TECH.SCIENCE_ONE, { image="waterchest.tex"}, {"STRUCTURES","CONTAINERS"})
+AddRecipe2("mussel_stick",			{Ingredient("bamboo", 2), Ingredient("vine", 1), Ingredient("seaweed", 1)},				             TECH.SCIENCE_ONE, {"GARDENING"})
+AddRecipe2("mussel_bed",			{Ingredient("mussel", 1), Ingredient("coral", 1)}, 												     TECH.SCIENCE_ONE, {"GARDENING"})
+AddRecipe2("porto_fish_farm",		{Ingredient("silk", 2), Ingredient("rope", 2), Ingredient("coconut", 4)}, 							 TECH.SCIENCE_ONE, { image="fish_farm.tex"}, {"GARDENING"})
+AddRecipe2("tropicalfan", 			{Ingredient("cutreeds", 2), Ingredient("rope", 2), Ingredient("doydoyfeather", 5)}, 				 TECH.SCIENCE_TWO, {"SUMMER","CLOTHING"})
+AddRecipe2("palmleaf_hut", 			{Ingredient("palmleaf", 4), Ingredient("bamboo", 4), Ingredient("rope", 3)}, 						 TECH.SCIENCE_TWO, { placer="palmleaf_hut_placer"}, {"STRUCTURES","RAIN","SUMMER"})
+AddRecipe2("armorlimestone",		{Ingredient("limestone", 3), Ingredient("rope", 2)}, 								                 TECH.SCIENCE_TWO, {"ARMOUR"})
+AddRecipe2("bell",			        {Ingredient("glommerwings", 1), Ingredient("glommerflower", 1)},                                     TECH.MAGIC_TWO,   {"MAGIC"})
+AddRecipe2("slow_farmplot",         {Ingredient("cutgrass", 8), Ingredient("poop", 4), Ingredient("log", 4)},                            TECH.SCIENCE_ONE, {atlas = TapDefaultAtlas, min_spacing = 0, placer = "slow_farmplot_placer", image = "slow_farmplot.tex",},{"GARDENING"})
+AddRecipe2("fast_farmplot",         {Ingredient("cutgrass", 10), Ingredient("poop", 6), Ingredient("rocks", 4)},                         TECH.SCIENCE_ONE, {atlas = TapDefaultAtlas, min_spacing = 0, placer = "fast_farmplot_placer", image = "fast_farmplot.tex",},{"GARDENING"})
 
 -- NAUTICAL--
-AddRecipe2("sail", {Ingredient("bamboo", 2), Ingredient("vine", 2), Ingredient("palmleaf", 4)}, TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
-AddRecipe2("feathersail", {Ingredient("bamboo", 2), Ingredient("rope", 4), Ingredient("doydoyfeather", 4)},
-           TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
-AddRecipe2("clothsail", {Ingredient("bamboo", 2), Ingredient("fabric", 2), Ingredient("rope", 2)}, TECH.SEAFARING_TWO,
-           {
-}, {"NAUTICAL"})
-AddRecipe2("snakeskinsail", {Ingredient("log", 4), Ingredient("rope", 2), Ingredient("snakeskin", 2)},
-           TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
-AddRecipe2("malbatrossail",
-           {Ingredient("driftwood_log", 4), Ingredient("rope", 2), Ingredient("malbatross_feather", 4)},
-           TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
-AddRecipe2("ironwind", {Ingredient("turbine_blades", 1), Ingredient("transistor", 1), Ingredient("goldnugget", 2)},
-           TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
-AddRecipe2("boatrepairkit", {Ingredient("boards", 2), Ingredient("stinger", 2), Ingredient("rope", 2)},
-           TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
+AddRecipe2("sail",					{Ingredient("bamboo", 2), Ingredient("vine", 2), Ingredient("palmleaf", 4)},						 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("feathersail",			{Ingredient("bamboo", 2), Ingredient("rope", 4), Ingredient("doydoyfeather", 4)},					 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("clothsail",				{Ingredient("bamboo", 2), Ingredient("fabric", 2), Ingredient("rope", 2)},							 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("snakeskinsail",			{Ingredient("log", 4), Ingredient("rope", 2), Ingredient("snakeskin", 2)},							 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("malbatrossail",			{Ingredient("driftwood_log", 4), Ingredient("rope", 2), Ingredient("malbatross_feather", 4)},		 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("ironwind",				{Ingredient("turbine_blades", 1), Ingredient("transistor", 1), Ingredient("goldnugget", 2)},		 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("boatrepairkit",			{Ingredient("boards", 2), Ingredient("stinger", 2), Ingredient("rope", 2)},							 TECH.SEAFARING_TWO,  {"NAUTICAL"})
 
 if TUNING.tropical.only_shipwrecked or GetModConfigData("raftlog") then
-    AddRecipe2("porto_lograft_old", {Ingredient("log", 6), Ingredient("cutgrass", 4)}, TECH.NONE, {
-    }, {"NAUTICAL"})
-    AddRecipe2("porto_raft_old", {Ingredient("bamboo", 4), Ingredient("vine", 3)}, TECH.NONE, {
-    }, {"NAUTICAL"})
+AddRecipe2("porto_lograft_old", 	{Ingredient("log", 6), Ingredient("cutgrass", 4)},													 TECH.NONE, 		  {"NAUTICAL"})
+AddRecipe2("porto_raft_old", 		{Ingredient("bamboo", 4), Ingredient("vine", 3)},													 TECH.NONE, 		  {"NAUTICAL"})
 else
-    AddRecipe2("porto_lograft", {Ingredient("log", 6), Ingredient("cutgrass", 4)}, TECH.NONE, {
-    }, {"SEAFARING", "NAUTICAL"})
-    AddRecipe2("porto_raft", {Ingredient("bamboo", 4), Ingredient("vine", 3)}, TECH.NONE, {
-    }, {"SEAFARING", "NAUTICAL"})
+AddRecipe2("porto_lograft", 		{Ingredient("log", 6), Ingredient("cutgrass", 4)},													 TECH.NONE, 		  {"SEAFARING", "NAUTICAL"})
+AddRecipe2("porto_raft", 			{Ingredient("bamboo", 4), Ingredient("vine", 3)},													 TECH.NONE, 		  {"SEAFARING", "NAUTICAL"})
 end
-AddRecipe2("porto_rowboat", {Ingredient("boards", 3), Ingredient("vine", 4)}, TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
-AddRecipe2("porto_cargoboat", {Ingredient("boards", 6), Ingredient("rope", 3)}, TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
-AddRecipe2("porto_armouredboat", {Ingredient("boards", 6), Ingredient("rope", 3), Ingredient("seashell", 10)},
-           TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
-AddRecipe2("porto_encrustedboat", {Ingredient("boards", 6), Ingredient("limestone", 4), Ingredient("rope", 3)},
-           TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
-AddRecipe2("corkboatitem", {Ingredient("rope", 1), Ingredient("cork", 4)}, TECH.NONE, {
-}, {"NAUTICAL"})
+AddRecipe2("porto_rowboat",			{Ingredient("boards", 3), Ingredient("vine", 4)},													 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("porto_cargoboat",		{Ingredient("boards", 6), Ingredient("rope", 3)},													 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("porto_armouredboat",	{Ingredient("boards", 6), Ingredient("rope", 3), Ingredient("seashell", 10)},						 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("porto_encrustedboat",	{Ingredient("boards", 6), Ingredient("limestone", 4), Ingredient("rope", 3)},						 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("corkboatitem",			{Ingredient("rope", 1), Ingredient("cork", 4)},													     TECH.NONE, 		  {"NAUTICAL"})
 
-AddRecipe2("boat_torch", {Ingredient("torch", 1), Ingredient("twigs", 2)}, TECH.ONE, {
-}, {"NAUTICAL", "LIGHT"})
-AddRecipe2("boat_lantern",
-           {Ingredient("messagebottleempty_sw", 1), Ingredient("twigs", 2), Ingredient("bioluminescence", 1)},
-           TECH.SCIENCE_TWO, {
-}, {"NAUTICAL", "LIGHT"})
-AddRecipe2("porto_buoy",
-           {Ingredient("messagebottleempty_sw", 1), Ingredient("bamboo", 4), Ingredient("bioluminescence", 2)},
-           TECH.SEAFARING_TWO, {
-    image = "buoy.tex",
-}, {"LIGHT", "STRUCTURES", "NAUTICAL"})
-AddRecipe2("boatcannon", {Ingredient("coconut", 6), Ingredient("log", 5), Ingredient("gunpowder", 4)},
-           TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
-AddRecipe2("quackeringram", {Ingredient("quackenbeak", 1), Ingredient("bamboo", 4), Ingredient("rope", 4)},
-           TECH.SEAFARING_TWO, {
-}, {"NAUTICAL"})
-AddRecipe2("trawlnet", {Ingredient("bamboo", 2), Ingredient("rope", 3)}, TECH.SEAFARING_TWO, {
-}, {"TOOLS", "FISHING", "NAUTICAL"})
-AddRecipe2("seatrap", {Ingredient("palmleaf", 4), Ingredient("messagebottleempty_sw", 2), Ingredient("jellyfish", 1)},
-           TECH.SEAFARING_TWO, {
-}, {"TOOLS", "GARDENING", "NAUTICAL"})
+AddRecipe2("boat_torch",			{Ingredient("torch", 1), Ingredient("twigs", 2)}, 													 TECH.ONE, 		      {"NAUTICAL","LIGHT"})
+AddRecipe2("boat_lantern",			{Ingredient("messagebottleempty_sw", 1), Ingredient("twigs", 2), Ingredient("bioluminescence", 1)},  TECH.SCIENCE_TWO,    {"NAUTICAL","LIGHT"})
+AddRecipe2("porto_buoy",			{Ingredient("messagebottleempty_sw", 1), Ingredient("bamboo", 4), Ingredient("bioluminescence", 2)}, TECH.SEAFARING_TWO,  { image="buoy.tex"}, {"LIGHT","STRUCTURES","NAUTICAL"})
+AddRecipe2("boatcannon",			{Ingredient("coconut", 6), Ingredient("log", 5), Ingredient("gunpowder", 4)},						 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("quackeringram",			{Ingredient("quackenbeak", 1), Ingredient("bamboo", 4), Ingredient("rope", 4)},						 TECH.SEAFARING_TWO,  {"NAUTICAL"})
+AddRecipe2("trawlnet",				{Ingredient("bamboo", 2), Ingredient("rope", 3)},													 TECH.SEAFARING_TWO,  {"TOOLS","FISHING","NAUTICAL"})
+AddRecipe2("seatrap",				{Ingredient("palmleaf", 4), Ingredient("messagebottleempty_sw", 2), Ingredient("jellyfish", 1)},	 TECH.SEAFARING_TWO,  {"TOOLS","GARDENING","NAUTICAL"})
 
-AddRecipe2("telescope", {Ingredient("goldnugget", 1), Ingredient("pigskin", 1), Ingredient("messagebottleempty_sw", 1)},
-           TECH.SEAFARING_TWO, {
-}, {"TOOLS", "NAUTICAL"})
-AddRecipe2("supertelescope", {Ingredient("telescope", 1), Ingredient("goldnugget", 1), Ingredient("tigereye", 1)},
-           TECH.SEAFARING_TWO, {
-}, {"TOOLS", "NAUTICAL"})
-AddRecipe2("captainhat", {Ingredient("boneshard", 1), Ingredient("seaweed", 1), Ingredient("strawhat", 1)},
-           TECH.SCIENCE_TWO, {
-}, {"CLOTHING", "NAUTICAL"})
-AddRecipe2("piratehat", {Ingredient("boneshard", 2), Ingredient("rope", 1), Ingredient("silk", 2)}, TECH.SCIENCE_TWO, {
-}, {"CLOTHING", "NAUTICAL"})
-AddRecipe2("armor_lifejacket", {Ingredient("fabric", 2), Ingredient("vine", 2), Ingredient("messagebottleempty_sw", 2)},
-           TECH.SEAFARING_TWO, {
-}, {"CLOTHING", "NAUTICAL"})
-AddRecipe2("porto_tar_extractor", {Ingredient("coconut", 2), Ingredient("bamboo", 4), Ingredient("limestone", 4)},
-           TECH.SEAFARING_TWO, {
-    image = "tar_extractor.tex",
-}, {"STRUCTURES", "NAUTICAL"})
-AddRecipe2("porto_sea_yard", {Ingredient("limestone", 6), Ingredient("tar", 6), Ingredient("log", 4)},
-           TECH.SEAFARING_TWO, {
-    image = "sea_yard.tex",
-}, {"STRUCTURES", "NAUTICAL"})
+AddRecipe2("telescope",				{Ingredient("goldnugget", 1), Ingredient("pigskin", 1), Ingredient("messagebottleempty_sw", 1)},	 TECH.SEAFARING_TWO,  {"TOOLS","NAUTICAL"})
+AddRecipe2("supertelescope",		{Ingredient("telescope", 1), Ingredient("goldnugget", 1), Ingredient("tigereye", 1)},				 TECH.SEAFARING_TWO,  {"TOOLS","NAUTICAL"})
+AddRecipe2("captainhat",			{Ingredient("boneshard", 1), Ingredient("seaweed", 1), Ingredient("strawhat", 1)},					 TECH.SCIENCE_TWO,    {"CLOTHING","NAUTICAL"})
+AddRecipe2("piratehat",				{Ingredient("boneshard", 2), Ingredient("rope", 1), Ingredient("silk", 2)},							 TECH.SCIENCE_TWO,    {"CLOTHING","NAUTICAL"})
+AddRecipe2("armor_lifejacket",		{Ingredient("fabric", 2), Ingredient("vine", 2), Ingredient("messagebottleempty_sw", 2)},			 TECH.SEAFARING_TWO,  {"CLOTHING","NAUTICAL"})
+AddRecipe2("porto_tar_extractor",	{Ingredient("coconut", 2), Ingredient("bamboo", 4), Ingredient("limestone", 4)},					 TECH.SEAFARING_TWO,  { image="tar_extractor.tex"}, {"STRUCTURES","NAUTICAL"})
+AddRecipe2("porto_sea_yard",		{Ingredient("limestone", 6), Ingredient("tar", 6), Ingredient("log", 4)},							 TECH.SEAFARING_TWO,  { image="sea_yard.tex"}, {"STRUCTURES","NAUTICAL"})
 
 -- SEAFARING--
-AddRecipe2("boatmetal_item", {Ingredient("alloy", 4), Ingredient("iron", 4)}, TECH.SEAFARING_TWO, {
-}, {"SEAFARING"})
+AddRecipe2("boatmetal_item", 		{Ingredient("alloy", 4), Ingredient("iron", 4)}, 													 TECH.SEAFARING_TWO,  {"SEAFARING"})
 
 ----SW----
 if GetModConfigData("Shipwrecked") ~= 1 or TUNING.tropical.multiplayerportal == 10 or TUNING.tropical.only_hamlet then
-    AddRecipe2("glass_shards", {Ingredient("sand", 3)}, TECH.SCIENCE_ONE, {
-    }, {"REFINE"})
-    AddRecipe2("shard_sword", {Ingredient("glass_shards", 3), Ingredient("nightmarefuel", 2), Ingredient("twigs", 2)},
-               TECH.MAGIC_TWO, {
-    }, {"MAGIC", "WEAPONS"})
-    AddRecipe2("shard_beak", {Ingredient("glass_shards", 3), Ingredient("crow", 1), Ingredient("twigs", 2)},
-               TECH.MAGIC_TWO, {
-    }, {"MAGIC", "WEAPONS"})
-    AddRecipe2("piratihatitator", {Ingredient("parrot", 1), Ingredient("boards", 4), Ingredient("piratehat", 1)},
-               TECH.SCIENCE_ONE, {
-        placer = "piratihatitator_placer",
-    }, {"PROTOTYPERS", "MAGIC", "STRUCTURES"})
+AddRecipe2("glass_shards",			{Ingredient("sand", 3)},																			TECH.SCIENCE_ONE,     {"REFINE"})
+AddRecipe2("shard_sword",			{Ingredient("glass_shards", 3), Ingredient("nightmarefuel", 2), Ingredient("twigs", 2)},  			TECH.MAGIC_TWO,       {"MAGIC","WEAPONS"})
+AddRecipe2("shard_beak",			{Ingredient("glass_shards", 3), Ingredient("crow", 1), Ingredient("twigs", 2)},  					TECH.MAGIC_TWO,       {"MAGIC","WEAPONS"})
+AddRecipe2("piratihatitator",       {Ingredient("parrot", 1), Ingredient("boards", 4), Ingredient("piratehat", 1)},                     TECH.SCIENCE_ONE,     { placer="piratihatitator_placer"},{"PROTOTYPERS","MAGIC","STRUCTURES"})
 end
 
 -- HAMLET--
 if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.multiplayerportal == 15 or TUNING.tropical.only_hamlet then -- GetModConfigData("painted_sands")
-    AddRecipe2("shears", {Ingredient("twigs", 2), Ingredient("iron", 2)}, TECH.SCIENCE_ONE, {
-    }, {"TOOLS"})
-    AddRecipe2("bugrepellent", {Ingredient("tuber_crop", 6), Ingredient("venus_stalk", 1)}, TECH.SCIENCE_ONE, {
-    }, {"TOOLS"})
-    AddRecipe2("bathat", {Ingredient("pigskin", 2), Ingredient("batwing", 1), Ingredient("compass", 1)},
-               TECH.SCIENCE_TWO, {
-    }, {"LIGHT"})
-    AddRecipe2("candlehat", {Ingredient("cork", 4), Ingredient("iron", 2)}, TECH.SCIENCE_ONE, {
-    }, {"LIGHT"})
-    AddRecipe2("goldnugget_ham", {Ingredient("gold_dust", 6)}, TECH.SCIENCE_ONE, {
-        product = "goldnugget",
-    }, {"REFINE"})
-    AddRecipe2("armor_weevole", {Ingredient("weevole_carapace", 4), Ingredient("chitin", 2)}, TECH.SCIENCE_TWO, {
-    }, {"ARMOUR", "RAIN"})
-    AddRecipe2("antsuit", {Ingredient("chitin", 5), Ingredient("armorwood", 1)}, TECH.SCIENCE_ONE, {
-    }, {"ARMOUR"})
-    AddRecipe2("antmaskhat", {Ingredient("chitin", 5), Ingredient("footballhat", 1)}, TECH.SCIENCE_ONE, {
-    }, {"ARMOUR"})
-    AddRecipe2("metalplatehat", {Ingredient("alloy", 3), Ingredient("cork", 3)}, TECH.SCIENCE_ONE, {
-    }, {"ARMOUR"})
-    AddRecipe2("armor_metalplate", {Ingredient("alloy", 3), Ingredient("hammer", 1)}, TECH.SCIENCE_ONE, {
-    }, {"ARMOUR"})
-    AddRecipe2("halberd", {Ingredient("alloy", 1), Ingredient("twigs", 2)}, TECH.SCIENCE_ONE, {
-    }, {"WEAPONS", "TOOLS"})
-    AddRecipe2("cork_bat", {Ingredient("cork", 3), Ingredient("boards", 1)}, TECH.SCIENCE_ONE, {
-    }, {"WEAPONS"})
-    AddRecipe2("blunderbuss", {Ingredient("oinc10", 1), Ingredient("boards", 2), Ingredient("gears", 1)},
-               TECH.SCIENCE_ONE, {
-    }, {"WEAPONS"})
-    AddRecipe2("corkchest", {Ingredient("cork", 2), Ingredient("rope", 1)}, TECH.SCIENCE_ONE, {
-        min_spacing = 1,
-        placer = "corkchest_placer",
-    }, {"CONTAINERS", "STRUCTURES"})
-    AddRecipe2("roottrunk_child",
-               {Ingredient("bramble_bulb", 1), Ingredient("venus_stalk", 2), Ingredient("boards", 2)}, TECH.SCIENCE_ONE,
-               {
-        min_spacing = 1,
-        placer = "roottrunk_child_placer",
-    }, {"CONTAINERS", "STRUCTURES"})
-    AddRecipe2("basefan", {Ingredient("alloy", 2), Ingredient("transistor", 2), Ingredient("gears", 1)},
-               TECH.SCIENCE_TWO, {
-        placer = "basefan_placer",
-    }, {"STRUCTURES", "SUMMER"})
-    AddRecipe2("sprinkler", {Ingredient("alloy", 2), Ingredient("bluegem", 1), Ingredient("ice", 6)}, TECH.SCIENCE_TWO,
-               {
-        placer = "sprinkler1_placer",
-    }, {"GARDENING"})
-    AddRecipe2("smelter", {Ingredient("cutstone", 6), Ingredient("boards", 4), Ingredient("redgem", 1)},
-               TECH.SCIENCE_TWO, {
-        placer = "smetler_placer",
-    }, {"STRUCTURES", "PROTOTYPERS"})
-    AddRecipe2("disguisehat", {Ingredient("twigs", 2), Ingredient("pigskin", 1), Ingredient("beardhair", 1)},
-               TECH.SCIENCE_TWO, {
-    }, {"CLOTHING"})
-    AddRecipe2("pithhat", {Ingredient("fabric", 1), Ingredient("vine", 3), Ingredient("cork", 6)}, TECH.SCIENCE_TWO, {
-    }, {"CLOTHING"})
-    AddRecipe2("thunderhat", {Ingredient("feather_thunder", 1), Ingredient("goldnugget", 1), Ingredient("cork", 2)},
-               TECH.SCIENCE_TWO, {
-    }, {"CLOTHING"})
-    AddRecipe2("gasmaskhat", {Ingredient("peagawkfeather", 4), Ingredient("fabric", 1), Ingredient("pigskin", 1)},
-               TECH.SCIENCE_ONE, {
-    }, {"CLOTHING"})
+AddRecipe2("shears",				{Ingredient("twigs", 2), Ingredient("iron", 2)}, 													TECH.SCIENCE_ONE,  {"TOOLS"})
+AddRecipe2("bugrepellent",			{Ingredient("tuber_crop", 6), Ingredient("venus_stalk", 1)}, 								TECH.SCIENCE_ONE,  {"TOOLS"})
+AddRecipe2("bathat",				{Ingredient("pigskin", 2), Ingredient("batwing", 1), Ingredient("compass", 1)},  							TECH.SCIENCE_TWO,  {"LIGHT"})
+AddRecipe2("candlehat",				{Ingredient("cork", 4), Ingredient("iron", 2)}, 											TECH.SCIENCE_ONE,  {"LIGHT"})
+AddRecipe2("goldnugget_ham",        {Ingredient("gold_dust", 6)}, TECH.SCIENCE_ONE, {product = "goldnugget",}, {"REFINE"})
+AddRecipe2("armor_weevole",			{Ingredient("weevole_carapace", 4), Ingredient("chitin", 2)}, 							TECH.SCIENCE_TWO,  {"ARMOUR","RAIN"})
+AddRecipe2("antsuit",				{Ingredient("chitin", 5), Ingredient("armorwood", 1)}, 											TECH.SCIENCE_ONE,  {"ARMOUR"})
+AddRecipe2("antmaskhat",			{Ingredient("chitin", 5), Ingredient("footballhat", 1)}, 											TECH.SCIENCE_ONE,  {"ARMOUR"})
+AddRecipe2("metalplatehat",			{Ingredient("alloy", 3), Ingredient("cork", 3)}, 											TECH.SCIENCE_ONE,  {"ARMOUR"})
+AddRecipe2("armor_metalplate",		{Ingredient("alloy", 3), Ingredient("hammer", 1)}, 												TECH.SCIENCE_ONE,  {"ARMOUR"})
+AddRecipe2("halberd",				{Ingredient("alloy", 1), Ingredient("twigs", 2)}, 													TECH.SCIENCE_ONE,  {"WEAPONS","TOOLS"})
+AddRecipe2("cork_bat",				{Ingredient("cork", 3), Ingredient("boards", 1)},  												TECH.SCIENCE_ONE,  {"WEAPONS"})
+AddRecipe2("blunderbuss",			{Ingredient("oinc10", 1), Ingredient("boards", 2), Ingredient("gears", 1)}, 						TECH.SCIENCE_ONE,  {"WEAPONS"})
+AddRecipe2("corkchest",				{Ingredient("cork", 2), Ingredient("rope", 1)}, 													TECH.SCIENCE_ONE, { min_spacing=1, placer="corkchest_placer"}, {"CONTAINERS","STRUCTURES"})
+AddRecipe2("roottrunk_child",		{Ingredient("bramble_bulb", 1), Ingredient("venus_stalk", 2), Ingredient("boards", 2)},	TECH.SCIENCE_ONE, { min_spacing=1, placer="roottrunk_child_placer"}, {"CONTAINERS","STRUCTURES"})
+AddRecipe2("basefan",				{Ingredient("alloy", 2), Ingredient("transistor", 2), Ingredient("gears", 1)},  					TECH.SCIENCE_TWO, { placer="basefan_placer"}, {"STRUCTURES","SUMMER"})
+AddRecipe2("sprinkler",		     	{Ingredient("alloy", 2), Ingredient("bluegem", 1), Ingredient("ice", 6)},  						TECH.SCIENCE_TWO, { placer="sprinkler1_placer"}, {"GARDENING"})
+AddRecipe2("smelter",				{Ingredient("cutstone", 6), Ingredient("boards", 4), Ingredient("redgem", 1)}, 								TECH.SCIENCE_TWO, { placer="smetler_placer"}, {"STRUCTURES","PROTOTYPERS"})
+AddRecipe2("disguisehat",			{Ingredient("twigs", 2), Ingredient("pigskin", 1), Ingredient("beardhair", 1)},  							TECH.SCIENCE_TWO,  {"CLOTHING"})
+AddRecipe2("pithhat",				{Ingredient("fabric", 1), Ingredient("vine", 3), Ingredient("cork", 6)},  		TECH.SCIENCE_TWO,  {"CLOTHING"})
+AddRecipe2("thunderhat", 			{Ingredient("feather_thunder", 1), Ingredient("goldnugget", 1), Ingredient("cork", 2)},  	TECH.SCIENCE_TWO,  {"CLOTHING"})
+AddRecipe2("gasmaskhat",			{Ingredient("peagawkfeather", 4), Ingredient("fabric", 1), Ingredient("pigskin", 1)}, 	TECH.SCIENCE_ONE,  {"CLOTHING"})
 
-    AddRecipe2("bonestaff",
-               {Ingredient("pugalisk_skull", 1), Ingredient("boneshard", 1), Ingredient("nightmarefuel", 2)}, TECH.LOST,
-               {
-    }, {"MAGIC"})
-    AddRecipe2("armorvortexcloak", {Ingredient("ancient_remnant", 5), Ingredient("armor_sanity", 1)}, TECH.LOST, {
-    }, {"ARMOUR", "MAGIC", "CONTAINERS"})
-    AddRecipe2("armorvoidcloak",
-               {Ingredient("armorvortexcloak", 1), Ingredient("horrorfuel", 4), Ingredient("voidcloth", 4),
-                Ingredient("shadowheart", 1)}, TECH.SHADOWFORGING_TWO, {
-        nounlock = true,
-    }, {"CRAFTING_STATION"})
-    AddRecipe2("living_artifact", {Ingredient("infused_iron", 6), Ingredient("waterdrop", 1)}, TECH.LOST, {
-    }, {"MAGIC"})
-    AddRecipe2("honeychest", {Ingredient("chitin", 6), Ingredient("beeswax", 1), Ingredient("honey", 3)}, TECH.LOST, {
-        min_spacing = 1,
-        placer = "honeychest_placer",
-    }, {"STRUCTURES", "CONTAINERS", "COOKING", "GARDENING"})
-    AddRecipe2("hogusporkusator",
-               {Ingredient("pigskin", 4), Ingredient("boards", 4), Ingredient("feather_robin_winter", 4)},
-               TECH.SCIENCE_ONE, {
-        placer = "hogusporkusator_placer",
-    }, {"PROTOTYPERS", "MAGIC", "STRUCTURES"})
-	AddRecipe2("clawpalmtree_cone", {Ingredient("cork", 1), Ingredient("poop", 1)}, TECH.SCIENCE_ONE, {
-    }, {"REFINE"})
-	AddRecipe2("venomgland", {Ingredient("froglegs_poison", 3)}, TECH.SCIENCE_TWO, {
-    }, {"REFINE"})
-    -- LEGACY--
-    AddRecipe2("goldpan", {Ingredient("iron", 2), Ingredient("hammer", 1)}, TECH.SCIENCE_ONE, {
-    }, {"TOOLS", "LEGACY"})
-    AddRecipe2("ballpein_hammer", {Ingredient("iron", 2), Ingredient("twigs", 1)}, TECH.SCIENCE_ONE, {
-    }, {"TOOLS", "LEGACY"})
-    AddRecipe2("magnifying_glass", {Ingredient("iron", 1), Ingredient("twigs", 1), Ingredient("bluegem", 1)},
-               TECH.SCIENCE_TWO, {
-    }, {"TOOLS", "LEGACY"})
+AddRecipe2("bonestaff",			    {Ingredient("pugalisk_skull", 1), Ingredient("boneshard", 1), Ingredient("nightmarefuel", 2)},     TECH.LOST,         {"MAGIC"})
+AddRecipe2("armorvortexcloak",	    {Ingredient("ancient_remnant", 5), Ingredient("armor_sanity", 1)},                                 TECH.LOST,         { "ARMOUR", "MAGIC", "CONTAINERS" })
+AddRecipe2("armorvoidcloak",        {Ingredient("armorvortexcloak", 1), Ingredient("horrorfuel", 4), Ingredient("voidcloth", 4),Ingredient("shadowheart", 1)}, TECH.SHADOWFORGING_TWO, { nounlock = true}, {"CRAFTING_STATION"})
+AddRecipe2("living_artifact",		{Ingredient("infused_iron", 6), Ingredient("waterdrop", 1)}, 								TECH.LOST,         {"MAGIC"})
+AddRecipe2("honeychest",			{Ingredient("chitin", 6), Ingredient("beeswax",1), Ingredient("honey",3)}, 						TECH.LOST,        { min_spacing=1, placer="honeychest_placer"}, {"STRUCTURES","CONTAINERS","COOKING","GARDENING"})
+AddRecipe2("hogusporkusator",       {Ingredient("pigskin", 4), Ingredient("boards", 4), Ingredient("feather_robin_winter", 4)},                 TECH.SCIENCE_ONE, { placer="hogusporkusator_placer"}, {"PROTOTYPERS","MAGIC","STRUCTURES"})
+AddRecipe2("clawpalmtree_cone",     {Ingredient("cork", 1), Ingredient("poop", 1)}, TECH.SCIENCE_ONE, {}, {"REFINE"})
+AddRecipe2("venomgland",            {Ingredient("froglegs_poison", 3)}, TECH.SCIENCE_TWO, {}, {"REFINE"})
+
+--ARCHAEOLOGY--
+--AddRecipe2("disarming_kit",         {Ingredient("iron", 2), Ingredient("cutreeds", 2)},                             TECH.NONE,  {"TOOLS", "ARCHAEOLOGY"})--陷阱拆除工具(未来)
+AddRecipe2("goldpan",				{Ingredient("iron", 2), Ingredient("hammer", 1)}, 													TECH.SCIENCE_ONE,  {"TOOLS", "ARCHAEOLOGY"})
+AddRecipe2("ballpein_hammer",		{Ingredient("iron", 2), Ingredient("twigs", 1)}, 													TECH.SCIENCE_ONE,  {"TOOLS", "ARCHAEOLOGY"})
+AddRecipe2("magnifying_glass",	 	{Ingredient("iron", 1), Ingredient("twigs", 1), Ingredient("bluegem", 1)},							TECH.SCIENCE_TWO,  {"TOOLS", "ARCHAEOLOGY"})
 end
 
 if TUNING.tropical.only_hamlet then
-    AddRecipe2("antler", {Ingredient("hippo_antler", 1), Ingredient("bill_quill", 3), Ingredient("flint", 1)},
-               TECH.SCIENCE_ONE, {
-    }, {"TOOLS"})
-    -- AddRecipe2("antler_corrupted",		{Ingredient("antler", 1), Ingredient("ancient_remnant", 2)},		                        TECH.MAGIC_TWO,   {atlas=h_atlas}, {"TOOLS","MAGIC"})
+AddRecipe2("antler",				{Ingredient("hippo_antler", 1), Ingredient("bill_quill", 3), Ingredient("flint", 1)},		TECH.SCIENCE_ONE,  {"TOOLS"})
+--AddRecipe2("antler_corrupted",		{Ingredient("antler", 1), Ingredient("ancient_remnant", 2)},		                        TECH.MAGIC_TWO,    {"TOOLS","MAGIC"})--噩梦鸟笛(未来)
 end
 
 -- CITY--
-AddRecipe2("city_hammer", {Ingredient("iron", 2), Ingredient("twigs", 1)}, TECH.CITY_TWO, {
-    nounlock = true,
-}, {"CITY"})
-AddRecipe2("securitycontract", {Ingredient("oinc", 10)}, TECH.CITY_TWO, {
-    nounlock = true,
-}, {"CITY"})
-AddRecipe2("turf_foundation", {Ingredient("cutstone", 1)}, TECH.CITY_TWO, {
-    nounlock = true,
-    numtogive = 4,
-}, {"CITY"})
-AddRecipe2("turf_cobbleroad", {Ingredient("cutstone", 2), Ingredient("boards", 1)}, TECH.CITY_TWO, {
-    nounlock = true,
-    numtogive = 4,
-}, {"CITY"})
-AddRecipe2("turf_lawn", {Ingredient("cutgrass", 2), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
-    nounlock = true,
-    numtogive = 4,
-}, {"CITY"})
-AddRecipe2("turf_pigruins", {Ingredient("cutstone", 4), Ingredient("rocks", 2)}, TECH.CITY_TWO, {
-    nounlock = true,
-    numtogive = 4,
-}, {"CITY"})
-AddRecipe2("city_lamp", {Ingredient("alloy", 1), Ingredient("transistor", 1), Ingredient("lantern", 1)}, TECH.CITY_TWO,
-           {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "city_lamp_placer",
-    image = "city_lamp.tex",
-}, {"CITY"})
-AddRecipe2("playerhouse_city_entrance", {Ingredient("boards", 4), Ingredient("cutstone", 3), Ingredient("oinc", 30)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "deed_placer",
-    image = "pig_house_sale.png",
-}, {"CITY"})
-AddRecipe2("pighouse_city", {Ingredient("boards", 4), Ingredient("cutstone", 3), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pighouse_city_placer",
-    image = "pighouse_city.tex",
-}, {"CITY"})
-AddRecipe2("pig_guard_tower", {Ingredient("cutstone", 3), Ingredient("halberd", 1), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_guard_tower_placer",
-}, {"CITY"})
-AddRecipe2("pig_guard_tower_palace", {Ingredient("cutstone", 5), Ingredient("halberd", 1), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_guard_tower_palace_placer",
-    image = "pig_royal_tower.png",
-}, {"CITY"})
-AddRecipe2("pig_shop_cityhall_player_entrance",
-           {Ingredient("boards", 4), Ingredient("goldnugget", 4), Ingredient("pigskin", 4)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_cityhall_placer",
-    image = "pig_shop_cityhall.png",
-}, {"CITY"})
-AddRecipe2("pig_shop_deli_entrance", {Ingredient("boards", 4), Ingredient("honeyham", 1), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_deli_placer",
-    image = "pig_shop_deli.png",
-}, {"CITY"})
-AddRecipe2("pig_shop_general_entrance", {Ingredient("boards", 4), Ingredient("axe", 3), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_general_placer",
-    image = "pig_shop_general.png",
-}, {"CITY"})
-AddRecipe2("pig_shop_hoofspa_entrance", {Ingredient("boards", 4), Ingredient("bandage", 3), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_hoofspa_placer",
-    image = "pig_shop_hoofspa.png",
-}, {"CITY"})
-AddRecipe2("pig_shop_produce_entrance", {Ingredient("boards", 4), Ingredient("eggplant", 3), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_produce_placer",
-    image = "pig_shop_produce.png",
-}, {"CITY"})
-AddRecipe2("pig_shop_florist_entrance", {Ingredient("boards", 4), Ingredient("petals", 12), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_florist_placer",
-    image = "pig_shop_florist.png",
-}, {"CITY"})
-AddRecipe2("pig_antiquities_entrance",
-           {Ingredient("boards", 4), Ingredient("ballpein_hammer", 3), Ingredient("pigskin", 4)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_antiquities_placer",
-    image = "pig_shop_antiquities.png",
-}, {"CITY"})
-AddRecipe2("pig_shop_arcane_entrance",
-           {Ingredient("boards", 4), Ingredient("nightmarefuel", 1), Ingredient("pigskin", 4)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_arcane_placer",
-    image = "pig_shop_arcane.png",
-}, {"CITY"})
-AddRecipe2("pig_shop_weapons_entrance", {Ingredient("boards", 4), Ingredient("spear", 3), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_weapons_placer",
-    image = "pig_shop_weapons.png",
-}, {"CITY"})
-AddRecipe2("pig_academy_entrance", {Ingredient("boards", 4), Ingredient("cutstone", 3), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_academy_placer",
-    image = "pig_shop_academy.png",
-}, {"CITY"})
-AddRecipe2("hatshop_entrance", {Ingredient("boards", 4), Ingredient("tophat", 2), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_hatshop_placer",
-    image = "pig_shop_hatshop.png",
-}, {"CITY"})
-AddRecipe2("pig_shop_bank_entrance", {Ingredient("cutstone", 4), Ingredient("oinc", 100), Ingredient("pigskin", 4)},
-           TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_bank_placer",
-    image = "pig_shop_bank.png",
-}, {"CITY"})
-AddRecipe2("pig_shop_tinker_entrance", {Ingredient("magnifying_glass", 2), Ingredient("pigskin", 4)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "pig_shop_tinker_placer",
-    image = "pig_shop_tinker.png",
-}, {"CITY"})
-AddRecipe2("hedge_block_item", {Ingredient("clippings", 9), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
-    nounlock = true,
-    numtogive = 3,
-}, {"CITY"})
-AddRecipe2("hedge_cone_item", {Ingredient("clippings", 9), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
-    nounlock = true,
-    numtogive = 3,
-}, {"CITY"})
-AddRecipe2("hedge_layered_item", {Ingredient("clippings", 9), Ingredient("nitre", 1)}, TECH.CITY_TWO, {
-    nounlock = true,
-    numtogive = 3,
-}, {"CITY"})
-AddRecipe2("lawnornament_1", {Ingredient("cutstone", 2), Ingredient("oinc", 7)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "lawnornament_1_placer",
-}, {"CITY"})
-AddRecipe2("lawnornament_2", {Ingredient("cutstone", 2), Ingredient("oinc", 7)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "lawnornament_2_placer",
-}, {"CITY"})
-AddRecipe2("lawnornament_3", {Ingredient("cutstone", 2), Ingredient("oinc", 7)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "lawnornament_3_placer",
-}, {"CITY"})
-AddRecipe2("lawnornament_4", {Ingredient("cutstone", 2), Ingredient("oinc", 7)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "lawnornament_4_placer",
-}, {"CITY"})
-AddRecipe2("lawnornament_5", {Ingredient("cutstone", 2), Ingredient("oinc", 7)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "lawnornament_5_placer",
-}, {"CITY"})
-AddRecipe2("lawnornament_6", {Ingredient("cutstone", 2), Ingredient("oinc", 7)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "lawnornament_6_placer",
-}, {"CITY"})
-AddRecipe2("lawnornament_7", {Ingredient("cutstone", 2), Ingredient("oinc", 7)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "lawnornament_7_placer",
-}, {"CITY"})
-AddRecipe2("topiary_1", {Ingredient("oinc", 10)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "topiary_1_placer",
-    image = "topiary_1.png",
-}, {"CITY"})
-AddRecipe2("topiary_2", {Ingredient("oinc", 10)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "topiary_2_placer",
-    image = "topiary_2.png",
-}, {"CITY"})
-AddRecipe2("topiary_3", {Ingredient("oinc", 12)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "topiary_3_placer",
-    image = "topiary_3.png",
-}, {"CITY"})
-AddRecipe2("topiary_4", {Ingredient("oinc", 12)}, TECH.CITY_TWO, {
-    nounlock = true,
-    min_spacing = 1,
-    placer = "topiary_4_placer",
-    image = "topiary_4.png",
-}, {"CITY"})
+AddRecipe2("city_hammer",		 		{Ingredient("iron", 2), Ingredient("twigs", 1)},										TECH.CITY_TWO, {  nounlock=true},              {"CITY"})
+AddRecipe2("securitycontract",	 		{Ingredient("oinc", 10)},																TECH.CITY_TWO, {  nounlock=true},              {"CITY"})
+AddRecipe2("turf_foundation",	 		{Ingredient("cutstone", 1)},																	TECH.CITY_TWO, {  nounlock=true, numtogive=4}, {"CITY"})
+AddRecipe2("turf_cobbleroad",	 		{Ingredient("cutstone", 2), Ingredient("boards", 1)},											TECH.CITY_TWO, {  nounlock=true, numtogive=4}, {"CITY"})
+AddRecipe2("turf_lawn", 	           	{Ingredient("cutgrass", 2), Ingredient("nitre", 1)},											TECH.CITY_TWO, {  nounlock=true, numtogive=4}, {"CITY"})
+AddRecipe2("turf_pigruins",             {Ingredient("cutstone", 4), Ingredient("rocks", 2)}, TECH.CITY_TWO, {nounlock = true,numtogive = 4,}, {"CITY"})
+AddRecipe2("city_lamp",			 		{Ingredient("alloy", 1), Ingredient("transistor", 1), Ingredient("lantern",1)},		TECH.CITY_TWO, {  nounlock=true, min_spacing=1,			placer="city_lamp_placer",				image="city_lamp.tex"}, {"CITY"})
+AddRecipe2("playerhouse_city_entrance",	{Ingredient("boards", 4), Ingredient("cutstone", 3), Ingredient("oinc", 30)},			TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="deed_placer",	   				image="pig_house_sale.png"}, {"CITY"})
+AddRecipe2("pighouse_city",		 		{Ingredient("boards", 4), Ingredient("cutstone", 3), Ingredient("pigskin", 4)},					TECH.CITY_TWO, {  nounlock=true, min_spacing=1, 			placer="pighouse_city_placer",			image="pighouse_city.tex"}, {"CITY"})
+AddRecipe2("pig_guard_tower",	 		{Ingredient("cutstone", 3), Ingredient("halberd", 1), Ingredient("pigskin", 4)},		TECH.CITY_TWO, {  nounlock=true, min_spacing=1, 			placer="pig_guard_tower_placer"}, 		{"CITY"})
+AddRecipe2("pig_guard_tower_palace",	{Ingredient("cutstone", 5), Ingredient("halberd", 1), Ingredient("pigskin", 4)},		TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_guard_tower_palace_placer",	image="pig_royal_tower.png"}, {"CITY"})
+AddRecipe2("pig_shop_cityhall_player_entrance", {Ingredient("boards", 4), Ingredient("goldnugget", 4), Ingredient("pigskin", 4)},		TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_cityhall_placer",		image="pig_shop_cityhall.png"}, {"CITY"})
+AddRecipe2("pig_shop_deli_entrance",	{Ingredient("boards", 4), Ingredient("honeyham", 1), Ingredient("pigskin", 4)},					TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_deli_placer",			image="pig_shop_deli.png"}, {"CITY"})
+AddRecipe2("pig_shop_general_entrance",	{Ingredient("boards", 4), Ingredient("axe", 3), Ingredient("pigskin", 4)},						TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_general_placer",		image="pig_shop_general.png"}, {"CITY"})
+AddRecipe2("pig_shop_hoofspa_entrance",	{Ingredient("boards", 4), Ingredient("bandage", 3), Ingredient("pigskin", 4)},					TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_hoofspa_placer",		image="pig_shop_hoofspa.png"}, {"CITY"})
+AddRecipe2("pig_shop_produce_entrance",	{Ingredient("boards", 4), Ingredient("eggplant", 3), Ingredient("pigskin", 4)},					TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_produce_placer",		image="pig_shop_produce.png"}, {"CITY"})
+AddRecipe2("pig_shop_florist_entrance",	{Ingredient("boards", 4), Ingredient("petals", 12), Ingredient("pigskin", 4)},					TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_florist_placer",		image="pig_shop_florist.png"}, {"CITY"})
+AddRecipe2("pig_antiquities_entrance",	{Ingredient("boards", 4), Ingredient("ballpein_hammer", 3), Ingredient("pigskin", 4)}, TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_antiquities_placer", 	image="pig_shop_antiquities.png"}, {"CITY"})
+AddRecipe2("pig_shop_arcane_entrance",	{Ingredient("boards", 4), Ingredient("nightmarefuel", 1), Ingredient("pigskin", 4)},			TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_arcane_placer",		image="pig_shop_arcane.png"}, {"CITY"})
+AddRecipe2("pig_shop_weapons_entrance",	{Ingredient("boards", 4), Ingredient("spear", 3), Ingredient("pigskin", 4)},					TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_weapons_placer",		image="pig_shop_weapons.png"}, {"CITY"})
+AddRecipe2("pig_academy_entrance", 		{Ingredient("boards", 4), Ingredient("cutstone", 3), Ingredient("pigskin", 4)},					TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_academy_placer",		image="pig_shop_academy.png"}, {"CITY"})
+AddRecipe2("hatshop_entrance",	 		{Ingredient("boards", 4), Ingredient("tophat", 2), Ingredient("pigskin", 4)},					TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_hatshop_placer",		image="pig_shop_hatshop.png"}, {"CITY"})
+AddRecipe2("pig_shop_bank_entrance",	{Ingredient("cutstone", 4), Ingredient("oinc", 100), Ingredient("pigskin", 4)},		TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_bank_placer",			image="pig_shop_bank.png"}, {"CITY"})
+AddRecipe2("pig_shop_tinker_entrance",	{Ingredient("magnifying_glass", 2), Ingredient("pigskin", 4)},							TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="pig_shop_tinker_placer",		image="pig_shop_tinker.png"}, {"CITY"})
+AddRecipe2("hedge_block_item",          {Ingredient("clippings", 9), Ingredient("nitre", 1)}, TECH.CITY_TWO, {nounlock = true,numtogive = 3,}, {"CITY"})
+AddRecipe2("hedge_cone_item",           {Ingredient("clippings", 9), Ingredient("nitre", 1)}, TECH.CITY_TWO, {nounlock = true,numtogive = 3,}, {"CITY"})
+AddRecipe2("hedge_layered_item",        {Ingredient("clippings", 9), Ingredient("nitre", 1)}, TECH.CITY_TWO, {nounlock = true,numtogive = 3,}, {"CITY"})
+AddRecipe2("lawnornament_1",	 		{Ingredient("cutstone", 2), Ingredient("oinc", 7)},									TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="lawnornament_1_placer"}, {"CITY"})
+AddRecipe2("lawnornament_2",	 		{Ingredient("cutstone", 2), Ingredient("oinc", 7)},									TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="lawnornament_2_placer"}, {"CITY"})
+AddRecipe2("lawnornament_3",	 		{Ingredient("cutstone", 2), Ingredient("oinc", 7)},									TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="lawnornament_3_placer"}, {"CITY"})
+AddRecipe2("lawnornament_4",	 		{Ingredient("cutstone", 2), Ingredient("oinc", 7)},									TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="lawnornament_4_placer"}, {"CITY"})
+AddRecipe2("lawnornament_5",	 		{Ingredient("cutstone", 2), Ingredient("oinc", 7)},									TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="lawnornament_5_placer"}, {"CITY"})
+AddRecipe2("lawnornament_6",	 		{Ingredient("cutstone", 2), Ingredient("oinc", 7)},									TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="lawnornament_6_placer"}, {"CITY"})
+AddRecipe2("lawnornament_7",	 		{Ingredient("cutstone", 2), Ingredient("oinc", 7)},									TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="lawnornament_7_placer"}, {"CITY"})
+AddRecipe2("topiary_1",			 		{Ingredient("oinc", 10)},									TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="topiary_1_placer",				image="topiary_1.png"}, {"CITY"})
+AddRecipe2("topiary_2",			 		{Ingredient("oinc", 10)},									TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="topiary_2_placer",				image="topiary_2.png"}, {"CITY"})
+AddRecipe2("topiary_3",			 		{Ingredient("oinc", 12)},									TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="topiary_3_placer",				image="topiary_3.png"}, {"CITY"})
+AddRecipe2("topiary_4",			 		{Ingredient("oinc", 12)},									TECH.CITY_TWO, { nounlock=true, min_spacing=1, 			placer="topiary_4_placer",				image="topiary_4.png"}, {"CITY"})
+
+--DeconstructRecipe("pighouse_farm", {Ingredient("cutstone", 3), Ingredient("pitchfork", 1), Ingredient("seeds", 6), Ingredient("pigskin", 4)})
+--DeconstructRecipe("pighouse_mine", {Ingredient("cutstone", 3), Ingredient("pickaxe", 2), Ingredient("pigskin", 4)})
+--DeconstructRecipe("mandrakehouse", {Ingredient("boards", 3), Ingredient("mandrake", 2), Ingredient("cutgrass", 10)})
+
 -- GORGE--
-AddRecipe2("quagmire_swampig_house", {Ingredient("boards", 4), Ingredient("rocks", 8), Ingredient("pigskin", 4)},
-           TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_swampig_house_placer",
-}, {"GORGE"})
+AddRecipe2("quagmire_swampig_house",    {Ingredient("boards", 4), Ingredient("rocks", 8), Ingredient("pigskin", 4)},  	TECH.GORGE_TWO, { nounlock=true, placer="quagmire_swampig_house_placer"}, {"GORGE"})
 
 --[[AddRecipe2("dubloon",					{Ingredient("quagmire_coin1", 2)}, 	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
 AddRecipe2("oinc",						{Ingredient("quagmire_coin1", 2)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
@@ -1115,183 +504,71 @@ AddRecipe2("quagmire_seedpacket_6",		{Ingredient("quagmire_coin1", 1)},	TECH.GOR
 AddRecipe2("quagmire_seedpacket_7",		{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
 AddRecipe2("quagmire_seedpacket_mix",	{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})]]
 
-AddRecipe2("quagmire_crabtrap", {Ingredient("twigs", 3), Ingredient("silk", 2)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    image = "quagmire_crabtrap.tex",
-}, {"GORGE"})
-AddRecipe2("quagmire_safe", {Ingredient("cutstone", 3), Ingredient("goldnugget", 2)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_safe_placer",
-}, {"GORGE"})
+AddRecipe2("quagmire_crabtrap",         {Ingredient("twigs", 3), Ingredient("silk", 2)}, TECH.GORGE_TWO, {nounlock = true,image = "quagmire_crabtrap.tex",}, {"GORGE"})
+AddRecipe2("quagmire_safe",             {Ingredient("cutstone", 3), Ingredient("goldnugget", 2)}, TECH.GORGE_TWO, {nounlock = true,placer = "quagmire_safe_placer",}, {"GORGE"})
 
-AddRecipe2("quagmire_lamp_post", {Ingredient("lantern", 1), Ingredient("cutstone", 1), Ingredient("transistor", 1)},
-           TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_lamp_post_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_lamp_short", {Ingredient("lantern", 1), Ingredient("cutstone", 1), Ingredient("transistor", 1)},
-           TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_lamp_short_placer",
-}, {"GORGE"})
+AddRecipe2("quagmire_lamp_post",        {Ingredient("lantern", 1), Ingredient("cutstone", 1), Ingredient("transistor", 1)}, TECH.GORGE_TWO, {nounlock=true, placer="quagmire_lamp_post_placer"},  {"GORGE"})
+AddRecipe2("quagmire_lamp_short",       {Ingredient("lantern", 1), Ingredient("cutstone", 1), Ingredient("transistor", 1)}, TECH.GORGE_TWO, {nounlock=true, placer="quagmire_lamp_short_placer",},{"GORGE"})
 
-AddRecipe2("quagmire_altar_statue1", {Ingredient("redgem", 2), Ingredient("cutstone", 2)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_altar_statue1_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_altar_statue2", {Ingredient("redgem", 2), Ingredient("cutstone", 1)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_altar_statue2_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_altar_queen", {Ingredient("redgem", 2), Ingredient("purplegem", 1), Ingredient("yellowgem", 1),
-                                    Ingredient("cutstone", 4)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_altar_queen_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_altar_bollard", {Ingredient("cutstone", 1)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_altar_bollard_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_altar_ivy", {Ingredient("cutgrass", 2), Ingredient("cutstone", 1)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_altar_ivy_placer",
-}, {"GORGE"})
+AddRecipe2("quagmire_altar_statue1",    {Ingredient("redgem", 2), Ingredient("cutstone", 2)},    TECH.GORGE_TWO, {nounlock=true, placer="quagmire_altar_statue1_placer",},{"GORGE"})
+AddRecipe2("quagmire_altar_statue2",    {Ingredient("redgem", 2), Ingredient("cutstone", 1)},    TECH.GORGE_TWO, {nounlock=true, placer="quagmire_altar_statue2_placer",},{"GORGE"})
+AddRecipe2("quagmire_altar_queen",      {Ingredient("redgem", 2), Ingredient("purplegem", 1),
+                                         Ingredient("yellowgem", 1),Ingredient("cutstone", 4)},  TECH.GORGE_TWO, {nounlock=true, placer="quagmire_altar_queen_placer",},  {"GORGE"})
+AddRecipe2("quagmire_altar_bollard",    {Ingredient("cutstone", 1)},                             TECH.GORGE_TWO, {nounlock=true, placer="quagmire_altar_bollard_placer",},{"GORGE"})
+AddRecipe2("quagmire_altar_ivy",        {Ingredient("cutgrass", 2), Ingredient("cutstone", 1)},  TECH.GORGE_TWO, {nounlock=true, placer="quagmire_altar_ivy_placer",},    {"GORGE"})
 
-AddRecipe2("quagmire_park_fountain", {Ingredient("purplegem", 1), Ingredient("cutstone", 1)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_park_fountain_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_park_angel", {Ingredient("redgem", 1), Ingredient("cutstone", 2)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_park_angel_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_park_angel2", {Ingredient("redgem", 1), Ingredient("cutstone", 2)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_park_angel2_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_park_urn", {Ingredient("redgem", 1), Ingredient("cutstone", 2)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_park_urn_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_park_obelisk", {Ingredient("cutstone", 3)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_park_obelisk_placer",
-}, {"GORGE"})
+AddRecipe2("quagmire_park_fountain",    {Ingredient("purplegem", 1), Ingredient("cutstone", 1)}, TECH.GORGE_TWO, {nounlock=true, placer="quagmire_park_fountain_placer",},{"GORGE"})
+AddRecipe2("quagmire_park_angel",       {Ingredient("redgem", 1), Ingredient("cutstone", 2)},    TECH.GORGE_TWO, {nounlock=true, placer="quagmire_park_angel_placer",},   {"GORGE"})
+AddRecipe2("quagmire_park_angel2",      {Ingredient("redgem", 1), Ingredient("cutstone", 2)},    TECH.GORGE_TWO, {nounlock=true, placer="quagmire_park_angel2_placer",},  {"GORGE"})
+AddRecipe2("quagmire_park_urn",         {Ingredient("redgem", 1), Ingredient("cutstone", 2)},    TECH.GORGE_TWO, {nounlock=true, placer="quagmire_park_urn_placer",},     {"GORGE"})
+AddRecipe2("quagmire_park_obelisk",     {Ingredient("cutstone", 3)},                             TECH.GORGE_TWO, {nounlock=true, placer="quagmire_park_obelisk_placer",}, {"GORGE"})
 
-AddRecipe2("quagmire_rubble_bike", {Ingredient("wagpunk_bits", 3), Ingredient("gears", 1)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_rubble_bike_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_rubble_carriage", {Ingredient("boards", 4)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_rubble_carriage_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_rubble_cathedral", {Ingredient("cutstone", 3)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_rubble_cathedral_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_rubble_chimney", {Ingredient("cutstone", 3)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_rubble_chimney_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_rubble_chimney2", {Ingredient("cutstone", 3)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_rubble_chimney2_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_rubble_clock", {Ingredient("cutstone", 2), Ingredient("compass", 1)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_rubble_clock_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_rubble_clocktower", {Ingredient("cutstone", 3), Ingredient("compass", 1)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_rubble_clocktower_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_rubble_door", {Ingredient("cutstone", 2), Ingredient("boards", 1)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_rubble_door_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_rubble_house", {Ingredient("cutstone", 3)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_rubble_house_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_rubble_pubdoor", {Ingredient("boards", 3)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_rubble_pubdoor_placer",
-}, {"GORGE"})
-AddRecipe2("quagmire_rubble_roof", {Ingredient("cutstone", 2), Ingredient("boards", 1)}, TECH.GORGE_TWO, {
-    nounlock = true,
-    placer = "quagmire_rubble_roof_placer",
-}, {"GORGE"})
+AddRecipe2("quagmire_rubble_bike",      {Ingredient("wagpunk_bits", 3), Ingredient("gears", 1)}, TECH.GORGE_TWO, {nounlock=true, placer="quagmire_rubble_bike_placer",},       {"GORGE"})
+AddRecipe2("quagmire_rubble_carriage",  {Ingredient("boards", 4)},                               TECH.GORGE_TWO, {nounlock=true, placer="quagmire_rubble_carriage_placer",},   {"GORGE"})
+AddRecipe2("quagmire_rubble_cathedral", {Ingredient("cutstone", 3)},                             TECH.GORGE_TWO, {nounlock=true, placer="quagmire_rubble_cathedral_placer",},  {"GORGE"})
+AddRecipe2("quagmire_rubble_chimney",   {Ingredient("cutstone", 3)},                             TECH.GORGE_TWO, {nounlock=true, placer="quagmire_rubble_chimney_placer",},    {"GORGE"})
+AddRecipe2("quagmire_rubble_chimney2",  {Ingredient("cutstone", 3)},                             TECH.GORGE_TWO, {nounlock=true, placer="quagmire_rubble_chimney2_placer",},   {"GORGE"})
+AddRecipe2("quagmire_rubble_clock",     {Ingredient("cutstone", 2), Ingredient("compass", 1)},   TECH.GORGE_TWO, {nounlock=true, placer="quagmire_rubble_clock_placer",},      {"GORGE"})
+AddRecipe2("quagmire_rubble_clocktower",{Ingredient("cutstone", 3), Ingredient("compass", 1)},   TECH.GORGE_TWO, {nounlock=true, placer="quagmire_rubble_clocktower_placer",}, {"GORGE"})
+AddRecipe2("quagmire_rubble_door",      {Ingredient("cutstone", 2), Ingredient("boards", 1)},    TECH.GORGE_TWO, {nounlock=true, placer="quagmire_rubble_door_placer",},       {"GORGE"})
+AddRecipe2("quagmire_rubble_house",     {Ingredient("cutstone", 3)},                             TECH.GORGE_TWO, {nounlock=true, placer="quagmire_rubble_house_placer",},      {"GORGE"})
+AddRecipe2("quagmire_rubble_pubdoor",   {Ingredient("boards", 3)},                               TECH.GORGE_TWO, {nounlock=true, placer="quagmire_rubble_pubdoor_placer",},    {"GORGE"})
+AddRecipe2("quagmire_rubble_roof",      {Ingredient("cutstone", 2), Ingredient("boards", 1)},    TECH.GORGE_TWO, {nounlock=true, placer="quagmire_rubble_roof_placer",},       {"GORGE"})
 
 -- TURFS--
 -- Sw
-AddRecipe2("turf_snakeskinfloor", {Ingredient("snakeskin", 2), Ingredient("fabric", 1)}, TECH.SCIENCE_TWO, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_magmafield", {Ingredient("rocks", 2), Ingredient("ash", 1)}, TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_ash", {Ingredient("ash", 3)}, TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_jungle", {Ingredient("bamboo", 1), Ingredient("cutgrass", 1)}, TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_volcano", {Ingredient("nitre", 2), Ingredient("ash", 1)}, TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_tidalmarsh", {Ingredient("cutgrass", 2), Ingredient("nitre", 1)}, TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_meadow", {Ingredient("cutgrass", 2)}, TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_beach", {Ingredient("sand", 2)}, TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
+AddRecipe2("turf_snakeskinfloor",	    {Ingredient("snakeskin", 2), Ingredient("fabric", 1)}, TECH.SCIENCE_TWO,       {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_magmafield",	 		{Ingredient("rocks", 2), Ingredient("ash", 1)},					         TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_ash",			 		{Ingredient("ash", 3)},											         TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_jungle",		 		{Ingredient("bamboo", 1), Ingredient("cutgrass", 1)},	         TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_volcano",		 		{Ingredient("nitre", 2), Ingredient("ash", 1)},					         TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_tidalmarsh",	 		{Ingredient("cutgrass", 2), Ingredient("nitre", 1)},			         TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_meadow",		 		{Ingredient("cutgrass", 2)},									         TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_beach",		 		{Ingredient("sand", 2)},								         TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
 
 -- Ham
-AddRecipe2("turf_fields", {Ingredient("turf_rainforest", 1), Ingredient("ash", 1)}, TECH.SCIENCE_TWO, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_deeprainforest_nocanopy", {Ingredient("bramble_bulb", 1), Ingredient("cutgrass", 2), Ingredient("ash", 1)},
-           TECH.SCIENCE_TWO, {
-    numtogive = 4,
-}, {"DECOR"})
--- AddRecipe2("turf_suburb", 				{Ingredient("oinc", 1)}, 						                               TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
--- AddRecipe2("turf_gasjungle", 			{Ingredient("oinc", 1)}, 						      	                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
--- AddRecipe2("turf_checkeredlawn", 		{Ingredient("oinc", 1)}, 						  		                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
--- AddRecipe2("turf_rainforest", 			{Ingredient("oinc", 1)}, 						     	                       TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
--- AddRecipe2("turf_pigruins", 			{Ingredient("oinc", 1)}, 						       	                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
--- AddRecipe2("turf_antfloor", 			{Ingredient("oinc", 1)}, 						       	                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
--- AddRecipe2("turf_batfloor", 			{Ingredient("oinc", 1)}, 						       	                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
--- AddRecipe2("turf_battleground", 		{Ingredient("oinc", 1)}, 						   		                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
--- AddRecipe2("turf_painted", 				{Ingredient("oinc", 1)}, 						                               TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
--- AddRecipe2("turf_plains", 				{Ingredient("oinc", 1)}, 						                               TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
--- AddRecipe2("turf_beardrug", 			{Ingredient("oinc", 1)}, 								                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_fields", 				  {Ingredient("turf_rainforest", 1), Ingredient("ash", 1)},		                   TECH.SCIENCE_TWO,       {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_deeprainforest_nocanopy",{Ingredient("bramble_bulb", 1), Ingredient("cutgrass", 2), Ingredient("ash", 1)}, TECH.SCIENCE_TWO,       {numtogive=4}, {"DECOR"})
+-- AddRecipe2("turf_suburb", 			  {Ingredient("oinc", 1)}, 						                               TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+-- AddRecipe2("turf_gasjungle", 		  {Ingredient("oinc", 1)}, 						      	                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+-- AddRecipe2("turf_checkeredlawn", 	  {Ingredient("oinc", 1)}, 						  		                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+-- AddRecipe2("turf_rainforest", 		  {Ingredient("oinc", 1)}, 						     	                       TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+-- AddRecipe2("turf_pigruins", 			  {Ingredient("oinc", 1)}, 						       	                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+-- AddRecipe2("turf_antfloor", 			  {Ingredient("oinc", 1)}, 						       	                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+-- AddRecipe2("turf_batfloor", 			  {Ingredient("oinc", 1)}, 						       	                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+-- AddRecipe2("turf_battleground", 		  {Ingredient("oinc", 1)}, 						   		                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+-- AddRecipe2("turf_painted", 			  {Ingredient("oinc", 1)}, 						                               TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+-- AddRecipe2("turf_plains", 			  {Ingredient("oinc", 1)}, 						                               TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+-- AddRecipe2("turf_beardrug", 			 {Ingredient("oinc", 1)}, 								                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
 
 -- Gorge
-AddRecipe2("turf_quagmire_gateway", {Ingredient("cutgrass", 2), Ingredient("petals", 1)}, TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_quagmire_citystone", {Ingredient("rocks", 2), Ingredient("nitre", 1)}, TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_quagmire_parkfield", {Ingredient("cutgrass", 2), Ingredient("quagmire_spotspice_sprig", 1)},
-           TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_quagmire_parkstone", {Ingredient("rocks", 2), Ingredient("quagmire_spotspice_sprig", 1)},
-           TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
-AddRecipe2("turf_quagmire_peatforest", {Ingredient("charcoal", 1), Ingredient("spoiled_food", 2)},
-           TECH.TURFCRAFTING_ONE, {
-    numtogive = 4,
-}, {"DECOR"})
+AddRecipe2("turf_quagmire_gateway", 	{Ingredient("cutgrass", 2), Ingredient("petals", 1)},			                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_quagmire_citystone",	{Ingredient("rocks", 2), Ingredient("saltrock", 1)},			                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_quagmire_parkfield",	{Ingredient("cutgrass", 2), Ingredient("quagmire_spotspice_sprig", 1)},			           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_quagmire_parkstone",	{Ingredient("rocks", 2), Ingredient("quagmire_spotspice_sprig", 1)},			           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
+AddRecipe2("turf_quagmire_peatforest",	{Ingredient("charcoal", 1), Ingredient("spoiled_food", 2)},		                           TECH.TURFCRAFTING_ONE,  {numtogive=4}, {"DECOR"})
 
-GLOBAL.CONSTRUCTION_PLANS["collapsed_honeychest"] = {Ingredient("chitin", 3), Ingredient("beeswax", 1),
-                                                     Ingredient("honey", 2), Ingredient("alterguardianhatshard", 1)}
+GLOBAL.CONSTRUCTION_PLANS["collapsed_honeychest"] = {Ingredient("chitin", 3), Ingredient("beeswax", 1), Ingredient("honey", 2), Ingredient("alterguardianhatshard", 1)}
 
 -- Recipe2 Sort!
 SortAfter("hammer", "pitchfork", "TOOLS")
