@@ -124,7 +124,8 @@ Assets =
     Asset("ANIM", "anim/mushroom_farm_cutlichen_build.zip"),
     Asset("ANIM", "anim/mushroom_farm_foliage1_build.zip"),
     Asset("ANIM", "anim/mushroom_farm_foliage2_build.zip"),
-    --Asset("ANIM", "anim/mushroom_farm_quagmire_mushrooms_build.zip"),
+    Asset("ANIM", "anim/mushroom_farm_quagmire_mushrooms_build.zip"),
+    Asset("ANIM", "anim/mushroom_farm_yellow_cap_build.zip"),
 
     -- @Runar: 声明资产不需要声明tex
     Asset("ATLAS", "images/names_wilbur.xml"),

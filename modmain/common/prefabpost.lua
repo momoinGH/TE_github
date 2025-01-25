@@ -1075,7 +1075,8 @@ end)
 local mushroom_farm_seeds = {
     cutlichen = { product = "cutlichen", produce = 4 },
     foliage = { product = "foliage", produce = 6 },
-    --quagmire_mushrooms = { product = "quagmire_mushrooms", produce = 4 }
+    quagmire_mushrooms = { product = "quagmire_mushrooms", produce = 4 },
+    yellow_cap = { product = "yellow_cap", produce = 4 },
 }
 AddPrefabPostInit("mushroom_farm", function(inst)
     local AbleToAcceptTest_old = inst.components.trader.abletoaccepttest
