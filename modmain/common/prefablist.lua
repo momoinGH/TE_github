@@ -20,6 +20,7 @@ PrefabFiles =
     "firetwister_seal",
     "glass",
     "flood_ice",
+    "mushroom_yellow",		
     "mushtree_yellow",
     "mushtree_spores_yellow",
     "bishopwater",

@@ -77,5 +77,5 @@ AddIngredientValues({ "cutnettle", }, { antihistamine = 1 }, true, false)
 AddIngredientValues({ "weevole_carapace", }, { inedible = 1 }, true, false)
 AddIngredientValues({ "piko_orange", }, { filter = 1 }, true, false)
 AddIngredientValues({ "snake_bone", }, { bone = 1 }, true, false)
-AddIngredientValues({ "fennel", "yelow_cap", "yelow_cooked", }, { veggie = 0.5 }, true, false)
+AddIngredientValues({ "fennel", "yellow_cap", "yellow_cooked", }, { veggie = 0.5 }, true, false)
 AddIngredientValues({ "quagmire_smallmeat", }, { meat = 0.5, smallmeat = 1 }, true, false) -- "smallmeat" for quagmire, I think

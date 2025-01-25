@@ -340,7 +340,7 @@ local function capcommonfn(data)
     MakeSmallBurnable(inst, TUNING.TINY_BURNTIME)
     MakeSmallPropagator(inst)
     inst:AddComponent("inventoryitem")
-    if data.name == "yelow_mushroom" then
+    if data.name == "yellow_mushroom" then
     end
 
     --this is where it gets interesting
@@ -398,7 +398,7 @@ local function cookedcommonfn(data)
     MakeSmallBurnable(inst, TUNING.TINY_BURNTIME)
     MakeSmallPropagator(inst)
     inst:AddComponent("inventoryitem")
-    if data.name == "yelow_mushroom" then
+    if data.name == "yellow_mushroom" then
     end
 
     MakeHauntableLaunchAndPerish(inst)
@@ -492,9 +492,9 @@ local data =
         transform_prefab = "mushtree_tall",
     },]]
     {
-        name = "yelow_mushroom",
+        name = "yellow_mushroom",
         animname = "yelow",
-        pickloot = "yelow_cap",
+        pickloot = "yellow_cap",
         open_time = "day",
         sanity = -TUNING.SANITY_SMALL,
         health = TUNING.HEALING_MED,
@@ -502,7 +502,7 @@ local data =
         cookedsanity = TUNING.SANITY_SMALL,
         cookedhealth = TUNING.HEALING_SMALL,
         cookedhunger = TUNING.CALORIES_SMALL,
-        transform_prefab = "mushtree_yelow",
+        transform_prefab = "mushtree_yellow",
     },
 }
 

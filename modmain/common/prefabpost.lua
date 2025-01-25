@@ -150,7 +150,7 @@ end)
 
 ----------------------------------------------------------------------------------------------------
 AddComponentPostInit("plantregrowth", function(self)
-    self.TimeMultipliers["mushtree_yelow"] = function()
+    self.TimeMultipliers["mushtree_yellow"] = function()
         return TUNING.MUSHTREE_REGROWTH_TIME_MULT * ((not TheWorld.state.autumn and 0) or 1)
     end
 end)
@@ -196,7 +196,7 @@ AddComponentPostInit("spooked", function(self)
     if not FX_MAP then
         FX_MAP = Utils.ChainFindUpvalue(self.Spook, "FX_MAP")
         if FX_MAP then
-            FX_MAP["mushtree_yelow"] = "mushtree_yelow"
+            FX_MAP["mushtree_yellow"] = "mushtree_yellow"
         end
     end
 end)

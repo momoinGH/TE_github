@@ -3266,8 +3266,8 @@ AddRoom("HamRedMushForest", {
         distributepercent = .3,
         distributeprefabs =
         {
-            mushtree_yelow = 9.0,
-            yelow_mushroom = 0.9,
+            mushtree_yellow = 9.0,
+            yellow_mushroom = 0.9,
 
             stalagmite = 0.5,
             spiderhole = 0.05,
@@ -3294,8 +3294,8 @@ AddRoom("HamRedSpiderForest", {
         distributepercent = .3,
         distributeprefabs =
         {
-            mushtree_yelow = 9.0,
-            yelow_mushroom = 0.9,
+            mushtree_yellow = 9.0,
+            yellow_mushroom = 0.9,
 
             stalagmite = 1.5,
             spiderhole = 0.4,
@@ -3322,8 +3322,8 @@ AddRoom("HamRedSpiderForestexit", {
         distributepercent = .3,
         distributeprefabs =
         {
-            mushtree_yelow = 9.0,
-            yelow_mushroom = 0.9,
+            mushtree_yellow = 9.0,
+            yellow_mushroom = 0.9,
 
             spiderhole = 0.4,
             stalagmite = 0.2,
@@ -3349,8 +3349,8 @@ AddRoom("HamRedMushPillars", {
         distributepercent = .15,
         distributeprefabs =
         {
-            mushtree_yelow = 6.0,
-            yelow_mushroom = 0.9,
+            mushtree_yellow = 6.0,
+            yellow_mushroom = 0.9,
 
             stalagmite = 0.5,
             spiderhole = 0.01,
@@ -3377,8 +3377,8 @@ AddRoom("HamStalagmiteForest", {
         distributepercent = .3,
         distributeprefabs =
         {
-            mushtree_yelow = 9.0,
-            yelow_mushroom = 0.9,
+            mushtree_yellow = 9.0,
+            yellow_mushroom = 0.9,
 
             stalagmite = 3.5,
             spiderhole = 0.15,
@@ -3405,8 +3405,8 @@ AddRoom("HamSpillagmiteMeadow", {
         distributepercent = .15,
         distributeprefabs =
         {
-            mushtree_yelow = 9.0,
-            yelow_mushroom = 0.9,
+            mushtree_yellow = 9.0,
+            yellow_mushroom = 0.9,
 
             stalagmite = 1.5,
             spiderhole = 0.45,
@@ -3437,8 +3437,8 @@ AddRoom("HamBGRedMush", {
         distributepercent = .3,
         distributeprefabs =
         {
-            mushtree_yelow = 9.0,
-            yelow_mushroom = 0.9,
+            mushtree_yellow = 9.0,
+            yellow_mushroom = 0.9,
 
             pillar_cave = 0.05,
             cavelight = 0.6,

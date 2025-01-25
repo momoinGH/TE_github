@@ -51,7 +51,7 @@ local REMOVABLE =
     --["blue_cap"] = true,
     --["red_cap"] = true,
     --["green_cap"] = true,
-    ["yelow_cap"] = true,
+    ["yellow_cap"] = true,
     ["charcoal"] = true,
 }
 
@@ -158,15 +158,15 @@ local growth_stages =
 
 local data =
 {
-    yelow =
-    { --yelow
+    yellow =
+    { --yellow
         bank = "mushroom_tree_yelow",
         build = "mushroom_tree_yelow",
         season = SEASONS.AUTUMN,
         bloom_build = "mushroom_tree_yelow",
         spore = "spore_yellow",
-        icon = "mushtree_yelow.png",
-        loot = { "log", "log", "yelow_cap" },
+        icon = "mushtree_yellow.png",
+        loot = { "log", "log", "yellow_cap" },
         work = TUNING.MUSHTREE_CHOPS_MEDIUM,
         lightradius = 1.25,
         lightcolour = { 255 / 255, 255 / 255, 0 / 255 },
@@ -571,7 +571,7 @@ function treeset(name, data, build, bloombuild)
     local prefabs =
     {
         "log",
-        "yelow_cap",
+        "yellow_cap",
         "charcoal",
         "ash",
         data.spore,
@@ -587,6 +587,6 @@ function treeset(name, data, build, bloombuild)
     table.insert(treeprefabs, Prefab(name .. "_bloom_burntfx", makeburntfx(name, data, true), { bloombuildasset }))
 end
 
-treeset("mushtree_yelow", data.yelow, "anim/mushroom_tree_yelow.zip", "anim/mushroom_tree_yelow.zip")
+treeset("mushtree_yellow", data.yellow, "anim/mushroom_tree_yelow.zip", "anim/mushroom_tree_yelow.zip")
 
 return unpack(treeprefabs)
