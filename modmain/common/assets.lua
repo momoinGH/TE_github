@@ -131,7 +131,9 @@ Assets =
     Asset("ATLAS", "images/names_wilbur.xml"),
     Asset("ATLAS", "images/names_woodlegs.xml"),
     Asset("ATLAS", "images/names_walani.xml"),
-
+    Asset("ATLAS", "images/names_gold_cn_wilbur.xml"),
+    Asset("ATLAS", "images/names_gold_cn_woodlegs.xml"),
+    Asset("ATLAS", "images/names_gold_cn_walani.xml"),
 
     Asset("ATLAS", "images/tabs.xml"),
     Asset("ANIM", "anim/vagner_over.zip"),
