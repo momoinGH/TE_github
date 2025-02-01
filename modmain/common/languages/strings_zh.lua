@@ -43,10 +43,11 @@ STRINGS.NAMES.PORTAL_SHIPWRECKED                        = "遇到故障的新奇
 --Wilbur
 STRINGS.CHARACTER_TITLES.wilbur                         = "猴王"
 STRINGS.CHARACTER_NAMES.wilbur                          = "威尔伯"
-STRINGS.CHARACTER_DESCRIPTIONS.wilbur                   = "*不会说话\n*走的时候慢,跑的时候快\n*是个猴子"
-STRINGS.CHARACTER_QUOTES.wilbur                         = "\"哦哦啊哈！\""
+STRINGS.CHARACTER_DESCRIPTIONS.wilbur                   = "*不会说话\n*两脚走的时候慢,四足跑的时候快\n*是个猴子"
+STRINGS.CHARACTER_QUOTES.wilbur                         = "\"呜哦啊哈！\""
 STRINGS.NAMES.WILBUR                                    = "威尔伯"
-STRINGS.CHARACTER_ABOUTME.wilbur                        = "哦哦啊哈！"
+STRINGS.CHARACTER_ABOUTME.wilbur                        = "呜哦啊哈！"
+STRINGS.CHARACTER_SURVIVABILITY.wilbur                  = "渺茫"
 
 --Woodlegs:
 STRINGS.CHARACTER_TITLES.woodlegs                       = "海盗船长"
@@ -55,14 +56,16 @@ STRINGS.CHARACTER_DESCRIPTIONS.woodlegs                 = "*可以嗅到宝藏\n
 STRINGS.CHARACTER_QUOTES.woodlegs                       = "\"不要介意我的卑鄙。吼吼吼吼！\""
 STRINGS.NAMES.WOODLEGS                                  = "伍德莱格"
 STRINGS.CHARACTER_ABOUTME.woodlegs                      = "\"不要介意我的卑鄙。吼吼吼吼！\""
+STRINGS.CHARACTER_SURVIVABILITY.woodlegs                = "严峻"
 
 --Walani
-STRINGS.CHARACTER_TITLES.walani                         = "稳如泰山"
+STRINGS.CHARACTER_TITLES.walani                         = "沉稳的冲浪者"
 STRINGS.CHARACTER_NAMES.walani                          = "瓦拉尼"
-STRINGS.CHARACTER_DESCRIPTIONS.walani                   = "*喜欢冲浪\n*干燥的快\n*是个相当冷艳的女孩"
+STRINGS.CHARACTER_DESCRIPTIONS.walani                   = "*喜欢冲浪\n*干燥的快\n*是个相当冷静的女孩"
 STRINGS.CHARACTER_QUOTES.walani                         = "\"如果我起不来请原谅我。我也不想这样。\""
 STRINGS.NAMES.WALANI                                    = "瓦拉尼"
 STRINGS.CHARACTER_ABOUTME.walani                        = "如果我起不来请原谅我。我也不想这样。"
+STRINGS.CHARACTER_SURVIVABILITY.walani                  = "渺茫"
 
 -------------死因death causes--------------
 STRINGS.NAMES.DROWNING                                  = "溺水"
