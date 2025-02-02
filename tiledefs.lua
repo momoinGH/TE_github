@@ -593,7 +593,7 @@ local tro_tiledefs = {
         },
     },
 
-    DEEPRAINFOREST_NOCANOPY = {------------茂密雨林地皮（玩家做的深层雨林地皮）
+    DEEPRAINFOREST_CRAFTED = {------------茂密雨林地皮（玩家做的深层雨林地皮）
         tile_range       = TileRanges.HAM_LAND,
         tile_data        = {
             ground_name = "Jungle Deep Nocanopy",
