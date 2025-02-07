@@ -23,7 +23,7 @@
         <Element name="fish2.png" u1="0.125488" u2="0.187012" v1="0.625977" v2="0.749023"/>
         <Element name="fish_farm.png" u1="0.125488" u2="0.187012" v1="0.500977" v2="0.624023"/>
         <Element name="geyser.png" u1="0.125488" u2="0.187012" v1="0.375977" v2="0.499023"/>
-        <Element name="grassGreen.png" u1="0.125488" u2="0.187012" v1="0.250977" v2="0.374023"/>
+        <Element name="grassGreen.tex" u1="0.125488" u2="0.187012" v1="0.250977" v2="0.374023"/>
         <Element name="gunpowder_barrel.png" u1="0.125488" u2="0.187012" v1="0.125977" v2="0.249023"/>
         <Element name="icemachine.png" u1="0.125488" u2="0.187012" v1="0.000976563" v2="0.124023"/>
         <Element name="jungleTree.png" u1="0.187988" u2="0.249512" v1="0.875977" v2="0.999023"/>

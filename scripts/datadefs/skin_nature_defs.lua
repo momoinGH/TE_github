@@ -26,7 +26,7 @@ local natureskins = {
             build = "grass1",
             image = "grassGreen",
             skintype = "tropical",
-            name = "grassnova",
+            name = "grassgreen",
             extra_init_fn = function(inst, skinname)
                 CancelNoGrowInWinter(inst)
                 inst.AnimState:SetFilter("green")
