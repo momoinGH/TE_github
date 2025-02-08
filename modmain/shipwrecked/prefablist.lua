@@ -139,7 +139,7 @@ PrefabFiles = {
   "lavapondbig",
   "bigfoot",
   "glommerbell",
-  "sweet_potato",
+  "sweet_potato_planted",
   "doydoyfan",
   "sand_castle",
   "sandhill",
