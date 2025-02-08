@@ -10,7 +10,6 @@ local prefabs =
 	"radish",
 }
 
-
 local function fn(Sim)
 	--Radish you eat is defined in veggies.lua
 	local inst = CreateEntity()
@@ -45,40 +44,4 @@ local function fn(Sim)
 	return inst
 end
 
-local function fn2(Sim)
-	--Radish you eat is defined in veggies.lua
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	inst.AnimState:SetBank("farm_plant_carrot")
-	inst.AnimState:SetBuild("farm_plant_turnip")
-	inst.AnimState:PlayAnimation("crop_full")
-	inst.AnimState:OverrideSymbol("soil01", "farm_soil", "soil01")
-	inst.AnimState:SetRayTestOnBB(true)
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:AddComponent("inspectable")
-
-	inst:AddComponent("pickable")
-	inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
-	inst.components.pickable:SetUp("turnip", 10)
-	inst.components.pickable.remove_when_picked = true
-
-	inst.components.pickable.quickpick = true
-
-	MakeSmallBurnable(inst)
-	MakeSmallPropagator(inst)
-
-	return inst
-end
-
-return Prefab("radish_planted", fn, assets),
-	Prefab("turnip_planted", fn2, assets)
+return Prefab("radish_planted", fn, assets)

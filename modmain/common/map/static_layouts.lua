@@ -1564,7 +1564,7 @@ Layouts["CropCirclegorge"] =
 	type = GLOBAL.LAYOUT.CIRCLE_RANDOM,
 	defs =
 	{
-		unknown_plant = { "farm_plant_potato", "farm_plant_tomato", },
+		unknown_plant = { "potato_planted", "tomato_planted", },
 	},
 	count =
 	{

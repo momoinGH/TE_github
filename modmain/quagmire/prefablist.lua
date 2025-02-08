@@ -53,4 +53,5 @@ PrefabFiles =
     "quagmire_spiceshrub",
 	"dug_quagmire_spotspice_shrub",
 	"turf_quagmire",
+	"quagmire_plants_planted",
 }

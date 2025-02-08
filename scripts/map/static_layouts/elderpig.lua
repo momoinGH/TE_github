@@ -76,7 +76,7 @@ return {
       opacity = 1,
       properties = {},
       objects = {
-  
+
         {
           name = "",
           type = "quagmire_swampig_house",
@@ -88,7 +88,7 @@ return {
           visible = true,
           properties = {}
         },
-		
+
         {
           name = "",
           type = "quagmire_swampig_house",
@@ -99,8 +99,8 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
-		
+        },
+
         {
           name = "",
           type = "quagmire_swampig_house",
@@ -189,7 +189,7 @@ return {
           visible = true,
           properties = {}
         },
-		
+
         {
           name = "",
           type = "quagmire_swampigelder",
@@ -204,7 +204,7 @@ return {
 --[[		
         {
           name = "",
-          type = "farm_plant_potato",
+          type = "potato_planted",
           shape = "rectangle",
           x = 500,
           y = 250,
@@ -216,7 +216,7 @@ return {
 		
         {
           name = "",
-          type = "farm_plant_potato",
+          type = "potato_planted",
           shape = "rectangle",
           x = 520,
           y = 250,
@@ -229,7 +229,7 @@ return {
 
         {
           name = "",
-          type = "farm_plant_potato",
+          type = "potato_planted",
           shape = "rectangle",
           x = 540,
           y = 250,
@@ -242,7 +242,7 @@ return {
 
         {
           name = "",
-          type = "farm_plant_potato",
+          type = "potato_planted",
           shape = "rectangle",
           x = 500,
           y = 270,
@@ -254,7 +254,7 @@ return {
 		
         {
           name = "",
-          type = "farm_plant_potato",
+          type = "potato_planted",
           shape = "rectangle",
           x = 520,
           y = 270,
@@ -267,7 +267,7 @@ return {
 
         {
           name = "",
-          type = "farm_plant_potato",
+          type = "potato_planted",
           shape = "rectangle",
           x = 540,
           y = 270,
@@ -280,7 +280,7 @@ return {
 
         {
           name = "",
-          type = "farm_plant_potato",
+          type = "potato_planted",
           shape = "rectangle",
           x = 500,
           y = 290,
@@ -292,7 +292,7 @@ return {
 		
         {
           name = "",
-          type = "farm_plant_potato",
+          type = "potato_planted",
           shape = "rectangle",
           x = 520,
           y = 290,
@@ -305,7 +305,7 @@ return {
 
         {
           name = "",
-          type = "farm_plant_potato",
+          type = "potato_planted",
           shape = "rectangle",
           x = 540,
           y = 290,
@@ -314,7 +314,7 @@ return {
           visible = true,
           properties = {}
         },			
-]]		
+]]
       }
     }
   }
