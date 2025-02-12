@@ -1835,7 +1835,7 @@ STRINGS.NAMES.GODDESS_STATUE2                                                   
 STRINGS.NAMES.GOOSEBERRY                                                        = "Gooseberry"
 STRINGS.NAMES.ICEROCKLEIF                                                       = "Frozen Creature"
 STRINGS.NAMES.GODDESS_STATUE3                                                   = "Flowery Wind Goddess Statue"
-STRINGS.NAMES.SNOWMAN                                                           = "Snowman."
+STRINGS.NAMES.SNOWMAN_LAMP                                                           = "Snowman."
 STRINGS.NAMES.SPEAR_LAUNCHER                                                    = "Speargun"
 STRINGS.NAMES.WALL_PIG_RUINS                                                    = "Ancient Wall"
 STRINGS.NAMES.GROTTO_PILLAR_BUG                                                 = "Unimportant Pillar"
@@ -4086,7 +4086,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_STOREOWNER                           
     "她采购修剪下的碎叶",
 
 }
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNOWMAN                                     = "Snowman."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNOWMAN_LAMP                                     = "Snowman."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOOTREE_BURNING                          = "Bye bye, bamboo."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ZEB                                         = {
     DEAD = "Deceased.",

@@ -875,7 +875,7 @@ AddRoom("frost_island_palace_city", {
 
         countprefabs =
         {
-            snowman = 3,
+            snowman_lamp = 3,
             snowberrybush = 3,
         }
 

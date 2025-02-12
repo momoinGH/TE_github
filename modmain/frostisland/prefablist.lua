@@ -38,7 +38,7 @@ PrefabFiles = {
     "oinc100",
     "billsnow",
     "giantsnow",
-    "snowman",
+    "snowman_lamp",
     "bear",
     "ice_deer",
     "mammoth",
