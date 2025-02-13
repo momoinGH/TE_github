@@ -9831,6 +9831,16 @@ STRINGS.CHARACTERS.GENERIC.ANNOUNCE_PUGALISK_INVULNERABLE = {
     "A tough nut to crack.",
     "Break, darn you!"
 }
-
+STRINGS.CHARACTERS.GENERIC.ANNOUNCE_PICKPOOP = {
+    "Eugg!",
+    "Gross!",
+    "Ick!",
+    "I got some on my hands!",
+}
+STRINGS.CHARACTERS.WORMWOOD.ANNOUNCE_PICKPOOP = {
+    "Wheee!",
+    "Yay!",
+    "Woohoo!",
+}
 modimport "modmain/common/languages/stringscreeps"
 modimport "modmain/common/languages/wurt_quotes"
