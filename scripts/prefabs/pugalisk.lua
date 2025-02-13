@@ -41,7 +41,7 @@ SetSharedLootTable('pugalisk',
 
 local SHAKE_DIST = 40
 
-local function redirecthealth(inst, amount, overtime, cause, ignore_invincible)
+local function redirecthealth(inst, amount, overtime, cause, ignore_invincible, afflicter)
     local originalinst = inst
 
     if inst.startpt then
@@ -49,6 +49,9 @@ local function redirecthealth(inst, amount, overtime, cause, ignore_invincible)
     end
 
     if amount < 0 and ((inst.components.segmented and inst.components.segmented.vulnerablesegments == 0) or inst:HasTag("tail") or inst:HasTag("head")) then
+        if afflicter and afflicter:HasTag("player") then
+            afflicter.components.talker:Say(GetString(afflicter.prefab, "ANNOUNCE_PUGALISK_INVULNERABLE"))
+        end
         inst.SoundEmitter:PlaySound("dontstarve/common/destroy_metal", nil, .25)
         inst.SoundEmitter:PlaySound("dontstarve/wilson/hit_metal")
     elseif amount and inst.host then
@@ -59,8 +62,7 @@ local function redirecthealth(inst, amount, overtime, cause, ignore_invincible)
 
         inst:PushEvent("dohitanim")
         if inst.host.components.health then
-            inst.host.components.health:DoDelta(amount, overtime, cause,
-                ignore_invincible, nil, true)
+            inst.host.components.health:DoDelta(amount, overtime, cause, ignore_invincible, nil, true)
         end
         inst.host:PushEvent("attacked")
     end
@@ -180,7 +182,7 @@ local function segment_deathfn(segment)
         local bone = segment.components.lootdropper:SpawnLootPrefab("bluegem", pt)
     end
     if math.random() < 0.05 then
-        local bone = segment.components.lootdropper:SpawnLootPrefab("spoiled_fish", pt)
+        local bone = segment.components.lootdropper:SpawnLootPrefab("spoiled_fish_large", pt)
     end
 
     local fx = SpawnPrefab("snake_scales_fx")
@@ -215,7 +217,7 @@ local function bodyfn(Sim)
     inst.invulnerable = true
     ------------------------------------------
 
-    inst:AddTag("epic")
+    --inst:AddTag("epic")
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("pugalisk")
@@ -352,7 +354,7 @@ local function tailfn(Sim)
     ------------------------------------------
 
     inst:AddTag("tail")
-    inst:AddTag("epic")
+    --inst:AddTag("epic")
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("pugalisk")

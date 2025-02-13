@@ -9826,5 +9826,11 @@ STRINGS.ACTIONS.CHARGE_UP = "Charge"
 STRINGS.ACTIONS.PUNCH = "Punch"
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_SUITUP = "For Science!"
 
+STRINGS.CHARACTERS.GENERIC.ANNOUNCE_PUGALISK_INVULNERABLE = {
+    "Its hide is too tough!",
+    "A tough nut to crack.",
+    "Break, darn you!"
+}
+
 modimport "modmain/common/languages/stringscreeps"
 modimport "modmain/common/languages/wurt_quotes"
