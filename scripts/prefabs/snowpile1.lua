@@ -69,24 +69,32 @@ end
 local function OnEntitySleep(inst)
 end
 
-
-
 local function makeemptyfn(inst)
     -- adjust art for empty
 end
 
+local function PlayStageAnim(inst, anim)
+    if inst.components.pickable.cycles_left == 3 then
+        inst.AnimState:PushAnimation("idle_full")
+    elseif inst.components.pickable.cycles_left == 2 then
+        inst.AnimState:PlayAnimation("dig_full", false)
+        inst.AnimState:PushAnimation("idle_med")
+    elseif inst.components.pickable.cycles_left == 1 then
+        inst.AnimState:PlayAnimation("dig_med", false)
+        inst.AnimState:PushAnimation("idle_low")
+	else
+        inst.AnimState:PlayAnimation("dig_low", false)
+        --inst.AnimState:PushAnimation("idle_dead")
+    end
+end
+
 local function onpickedfn(inst, picker)
+    PlayStageAnim(inst)
+
     inst.SoundEmitter:PlaySound("dontstarve/common/food_rot")
     local loots = inst.components.lootdropper:GenerateLoot()
     local pt = Point(inst.Transform:GetWorldPosition())
     inst.components.lootdropper:DropLoot(pt, loots)
-
-    --    if picker.components.sanity then
-    --        if picker.components.talker and picker:HasTag("player") then
-    --            picker.components.talker:Say(GetString(picker.prefab, "ANNOUNCE_PICKPOOP"))
-    --        end
-    --        picker.components.sanity:DoDelta(-10)
-    --    end
 
     if inst.components.pickable.cycles_left <= 0 then
         inst.components.pickable:MakeBarren()
@@ -97,8 +105,6 @@ local function makefullfn(inst)
     if inst.components.pickable.cycles_left <= 0 then
         inst.components.workable:SetWorkLeft(1)
         inst:AddTag("snowpile1")
-        inst.AnimState:PlayAnimation("dead_to_idle")
-        inst.AnimState:PushAnimation("idle")
     end
 end
 
@@ -182,22 +188,13 @@ local function onsave(inst, data)
     end
 end
 
-local function OnBurn(inst)
-    --    DefaultBurnFn(inst)
-    --    if inst.flies then
-    --        inst.flies:Remove()
-    --        inst.flies = nil
-    --    end
-end
-
 local function onload(inst, data)
+    PlayStageAnim(inst)
     if data then
         if data.hasdung then
             inst:AddTag("hasdung")
-            inst.AnimState:PlayAnimation("idle")
         else
             inst:RemoveTag("hasdung")
-            inst.AnimState:PlayAnimation("dead")
         end
         if data.timeleft then
             if inst.task then
@@ -221,18 +218,17 @@ end
 
 local function fn(Sim)
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.entity:AddSoundEmitter()
+    inst.MiniMapEntity:SetIcon("snow_pile.png")
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("snow_pile.png")
-
-    anim:SetBank("dung_pile")
-    anim:SetBuild("snow_pile")
-    anim:PlayAnimation("idle")
+    inst.AnimState:SetBank("dung_pile")
+    inst.AnimState:SetBuild("snow_pile")
+    inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("snowpile1")
     inst:AddTag("pick_digin")
@@ -251,7 +247,6 @@ local function fn(Sim)
     ---------------------
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"
-
     inst.components.pickable.getregentimefn = getregentimefn
     inst.components.pickable.onpickedfn = onpickedfn
     inst.components.pickable.makebarrenfn = makebarrenfn
@@ -267,7 +262,6 @@ local function fn(Sim)
     inst.components.childspawner:SetSpawnPeriod(CATCOONDEN_RELEASE_TIME)
     inst.components.childspawner:SetMaxChildren(1)
     -- inst.components.childspawner.canspawnfn = function(inst)
-
     -- end
 
     ---------------------
@@ -279,10 +273,6 @@ local function fn(Sim)
     inst.components.lootdropper.speed = 2
     inst.components.lootdropper.alwaysinfront = true
 
-    --   MakeMediumBurnable(inst)
-    --    inst.components.burnable:SetOnIgniteFn(OnBurn)
-    --    MakeSmallPropagator(inst)
-
     ---------------------
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = function(inst, viewer)
@@ -292,18 +282,16 @@ local function fn(Sim)
     end
 
     inst:ListenForEvent("animover", function(inst, data)
-        if anim:IsCurrentAnimation("idle_to_dead") then
+        if inst.AnimState:IsCurrentAnimation("idle_to_dead") then
             destroy(inst)
         end
-        if anim:IsCurrentAnimation("fall") then
+        if inst.AnimState:IsCurrentAnimation("fall") then
             land(inst)
         end
     end)
 
-    --    inst.flies = inst:SpawnChild("flies")
-    --    inst.flies.Transform:SetScale(1.2,1.2,1.2)
-
     MakeSnowCovered(inst)
+    MakeHauntableIgnite(inst)
 
     inst.OnEntitySleep = OnEntitySleep
     inst.OnEntityWake = OnEntityWake
