@@ -751,7 +751,7 @@ Constructor.AddAction({},
 -- 发射船炮
 Constructor.AddAction({ priority = 11, distance = 25 },
     "BOATCANNON",
-    STRINGS.ACTIONS.GIVE.BOATCANNON,
+    STRINGS.ACTIONS.BOATCANNON,
     function(act)
         local boat = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
         local item = boat
@@ -776,7 +776,7 @@ Constructor.AddAction({ priority = 11, distance = 25 },
             item.components.finiteuses:Use(1)
         end
         bomba.Transform:SetPosition(x, y + 1.5, z)
-        bomba.components.complexprojectile:Launch(act.target and act.target:GetPosition() or act:GetActionString(), act.doer)
+        bomba.components.complexprojectile:Launch(act.target and act.target:GetPosition() or act:GetActionPoint(), act.doer)
         act.doer.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/knight_steamboat/cannon")
 
         return true
@@ -786,7 +786,7 @@ Constructor.AddAction({ priority = 11, distance = 25 },
 ----------------------------------------------------------------------------------------------------
 -- 跳船
 
-Constructor.AddAction({ priority = 10, rmb = true, distance = 4, mount_valid = false, encumbered_valid = true },
+Constructor.AddAction({ priority = 10, rmb = true, distance = 6, mount_valid = false, encumbered_valid = true },
     "BOATMOUNT",
     STRINGS.ACTIONS.BOATMOUNT,
     function(act)

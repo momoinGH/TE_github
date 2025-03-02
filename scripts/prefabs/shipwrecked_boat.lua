@@ -148,10 +148,13 @@ local function MakeBoat(name, minimap, bank, build, loots, data, prefabs, init)
 
     local function fake_fn()
         local inst = common(minimap, bank, build)
+        if init then
+            init(inst)
+        end
 
         inst:SetPrefabNameOverride(name)
 
-        inst:AddTag("pro_fakeboat") --玩家不能上这个船
+        inst:AddTag("pro_fakeboat")              --玩家不能上这个船
 
         if data.container then                   --没有container就没有container_proxy，这里主要是兼容insight，那个mod会报错
             inst:AddComponent("container_proxy") --用来给船体复制体使用的

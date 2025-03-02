@@ -875,6 +875,13 @@ AddStategraphPostInit("wilson", function(sg)
         if inst.sg.statemem.row_boat then
             inst.SoundEmitter:PlaySound("turnoftides/common/together/water/splash/small")
         end
+        -- 生成波纹
+        if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT) then
+            local wake = SpawnPrefab("rowboat_wake")
+            wake.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            wake.Transform:SetRotation(inst.Transform:GetRotation())
+            -- 要不要根据速度缩放一下波纹的大小？
+        end
     end))
     table.sort(sg.states["run"].timeline, Chronological)
 

@@ -14,7 +14,7 @@ local function fn(Sim)
 	anim:SetBank("wakeTrail")
 	anim:SetOrientation(ANIM_ORIENTATION.OnGround)
 	anim:SetLayer(LAYER_BACKGROUND)
-	anim:SetSortOrder(3)
+	-- anim:SetSortOrder(0)
 	anim:PlayAnimation("trail")
 	inst.entity:AddNetwork()
 
@@ -28,7 +28,7 @@ local function fn(Sim)
 		return inst
 	end
 
-	inst:ListenForEvent("animover", function(inst) inst:Remove() end)
+	inst:ListenForEvent("animover", inst.Remove)
 
 	inst:AddComponent("colourtweener")
 	inst.components.colourtweener:StartTween({ 0, 0, 0, 0 }, FRAMES * 20)
