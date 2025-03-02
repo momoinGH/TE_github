@@ -3,34 +3,46 @@
 --使用案例及最新版：https://n77a3mjegs.feishu.cn/docx/K9bUdpb5Qo85j2xo8XkcOsU1nuh?from=from_copylink
 --这个文件不会被调用，单纯写一些源码的注解，虽然删了更节省体积，不过我相信也许会对其他moder有些帮助，而且全局函数在一些编译器下会提供代码补全功能
 
-STRINGS          = {}
-TheWorld         = {}
-Map              = {}
-ThePlayer        = {}
-DEPLOYMODE       = {}
-ANIM_ORIENTATION = {}
-TheCamera        = {}
-env              = {}
-TUNING           = {}
-GLOBAL           = {}
-ACTIONS          = {}
-EQUIPSLOTS       = {}
-COLLISION        = {}
-Prefabs          = {}
-GROUND           = {}
-WORLD_TILES      = {}
-GROUND_NAMES     = {}
-GROUND_FLOORING  = {}
-Input            = {}
-PI               = math.pi
-PI2              = PI * 2
-TWOPI            = PI2
-SQRT2            = math.sqrt(2)
-GOLDENANGLE      = PI * (3 - math.sqrt(5))
-DEGREES          = PI / 180
-RADIANS          = 180 / PI
-FRAMES           = 1 / 30
+AllPlayers      = {}
+FOODTYPE        = {}
+modname         = ""
+TECH            = {}
+POPUPS          = {}
+AnimState       = {}
+TheSim          = {}
+Entity          = {}
+STRINGS         = {}
+TheWorld        = {}
+ThePlayer       = {}
+TheNet          = {}
+TheCamera       = {}
+env             = {}
+TUNING          = {}
+GLOBAL          = {}
+ACTIONS         = {}
+EQUIPSLOTS      = {}
+COLLISION       = {}
+Prefabs         = {}
+GROUND          = {}
+WORLD_TILES     = {}
+GROUND_NAMES    = {}
+GROUND_FLOORING = {}
+Input           = {}
+TheFrontEnd     = {}
+PI              = math.pi
+PI2             = PI * 2
+TWOPI           = PI2
+SQRT2           = math.sqrt(2)
+GOLDENANGLE     = PI * (3 - math.sqrt(5))
+DEGREES         = PI / 180
+RADIANS         = 180 / PI
+FRAMES          = 1 / 30
+DEPLOYMODE      = {}
+DEPLOYSPACING   = {}
+AllRecipes      = {}
 function Class(base, _ctor, props) end
+
+function CanEntitySeeTarget(inst, target) end
 
 Vector3 = Class(function(self, x, y, z) end)
 Brain = Class(function(self) end)
@@ -60,9 +72,6 @@ function PlayFootstep(inst, volume, ispredicted) end
 function MakeHauntableLaunch(inst, chance, speed, cooldown, haunt_value) end
 
 function FrameEvent(frame, fn) end
-
---- 根据小地图图标名获取atlas
-function GetMinimapAtlas(imagename) end
 
 RemapSoundEvent = function(name, new_name) end
 Asset = Class(function(self, type, file, param) end)
@@ -172,7 +181,6 @@ function CanEntitySeeInDark(inst)
 end
 
 --在沙尘暴中看见、是否能看见某个点、是否能看见某个对象...
-
 
 ---移除对象碰撞体积一段时间，没有Physics的对象会报错的（可惜没有把定时任务返回，让开发者随意控制）
 function TemporarilyRemovePhysics(obj, time)
@@ -375,9 +383,6 @@ end
 ---生成预设的布局，这个功能有些强大，游戏中可以一下子改变大块儿地形，布局可以在layouts.lua中查找，例如 Waterlogged1
 function d_spawnlayout(name, offset)
 end
-
-require("debugcommands");
-d_spawnlayout("");
 
 ---以鼠标所指位置为圆心，摆一圈燧石
 function d_radius(radius, num, lifetime)
@@ -629,9 +634,6 @@ function ConcatArrays(ret, ...) end
 --- 获取task的剩余执行时间，不存在时返回-1
 function GetTaskRemaining(task) end
 
---- 返回最小值和最大值之间的一个浮点数
-function GetRandomMinMax(min, max) end
-
 ---循环数组，可以一直添加元素，溢出的部分会覆盖前面的
 RingBuffer()
 
@@ -743,7 +745,7 @@ ThePlayer.fx.AnimState:SetDeltaTimeMultiplier(1);
 -- 缩放
 ThePlayer.fx.AnimState:SetScale(1, 1, 1);
 -- 应该叫后期处理吧
-ThePlayer.fx.AnimState:SetBloomEffectHandle("shaders/anim_bloom_ghost.ksh");
+ThePlayer.fx.AnimState:SetBloomEffectHandle("shaders/anim_bloom_ghost.ksh"); --淡淡的辉光
 ThePlayer.fx.AnimState:SetBloomEffectHandle("shaders/anim.ksh");
 -- 夜晚可见度
 ThePlayer.fx.AnimState:SetLightOverride(1);
@@ -754,13 +756,32 @@ ThePlayer.fx.AnimState:SetFinalOffset(0);
 
 ThePlayer.fx.AnimState:SetLayer(LAYER_BACKGROUND);
 -- 可以让物品一闪一闪的
-door.AnimState:SetHaunted(true)
-
--- 获取对象当前的面向（相对摄像机）
-print(ThePlayer.AnimState:GetCurrentFacing())
+inst.AnimState:SetHaunted(true)
+--发光
+inst.AnimState:SetSymbolBloom("bolt_f")
+inst.AnimState:SetSymbolLightOverride("bolt_b", .5)
 
 -- 动画时长
 print(inst.AnimState:GetCurrentAnimationLength())
+
+-- 瓦格斯塔夫一闪一闪的滤镜
+ThePlayer.AnimState:SetErosionParams(0, -0.125, -1.0)
+
+-- 获取当前bank和动画名
+local bank, anim = ThePlayer.AnimState:GetHistoryData()
+
+-- 动画当前面朝向
+local facing = ThePlayer.AnimState:GetCurrentFacing()
+FACING_RIGHT = 0 --constants定义的常量
+FACING_UP = 1
+FACING_LEFT = 2
+FACING_DOWN = 3
+FACING_UPRIGHT = 4
+FACING_UPLEFT = 5
+FACING_DOWNRIGHT = 6
+FACING_DOWNLEFT = 7
+FACING_NONE = 8
+
 ------------------------------------------------------------------------------------------------------------------------
 -- 14. physics.lua
 
@@ -855,12 +876,6 @@ TheNet:IsDedicated() -- 判断是否是服务器
 
 ---装备耐久为0不消失，可修复
 function MakeForgeRepairable(inst, material, onbroken, onrepaired) end
-
-function MakeHauntableLaunchAndIgnite(inst, launchchance, ignitechance, speed, cooldown, launch_haunt_value,
-    ignite_haunt_value)
-end
-
-function MakeObstaclePhysics(inst, rad, height) end
 
 ------------------------------------------------------------------------------------------------------------------------
 -- 22. components/map.lua
@@ -977,15 +992,7 @@ AddPrefabPostInit = function(prefab, fn) end
 AddRecipePostInitAny = function(fn) end
 AddRecipePostInit = function(recipename, fn) end
 AddBrainPostInit = function(brain, fn) end
----添加食材属性
----@param names table 食材的prefab名组成的表
----@param tags table 食材度属性键与值组成的表
----@param cancook boolean|nil 烤制后能否入锅，如果烤制后具有不同食材度也可令其为假
----@param candry boolean|nil 干制后能否入锅，如果干制后具有不同食材度也可令其为假
 AddIngredientValues = function(names, tags, cancook, candry) end
----添加食物配方到烹饪锅配方
----@param cooker string 锅名
----@param recipe table 烹饪配方的表
 AddCookerRecipe = function(cooker, recipe) end
 AddModCharacter = function(name, gender, modes) end
 RemoveDefaultCharacter = function(name) end
@@ -1000,16 +1007,7 @@ RemoveRecipeFromFilter = function(recipe_name, filter_name) end
 ---@param config table|nil
 ---@param filters table|nil CRAFTING_FILTER_DEFS的name
 AddRecipe2 = function(name, ingredients, tech, config, filters) end
----添加角色配方
----@param name string 配方名，避免使用原版预制体名作为配方名，同名的配方名会相互覆盖
----@param ingredients table Ingredient组成的表
----@param tech table TECH常量
----@param config table|nil 如果config.builder_tag和config.builder_skill均为nil，则退化为未定义制作栏的MOD配方
----@param extra_filters table|nil CRAFTING_FILTER_DEFS的name
 AddCharacterRecipe = function(name, ingredients, tech, config, extra_filters) end
----添加拆解配方
----@param name string 实体名
----@param return_ingredients table Ingredient组成的表
 AddDeconstructRecipe = function(name, return_ingredients) end
 AddModRPCHandler = function(namespace, name, fn) end
 AddClientModRPCHandler = function(namespace, name, fn) end
@@ -1024,11 +1022,7 @@ GetModRPC = function(namespace, name) end
 GetClientModRPC = function(namespace, name) end
 GetShardModRPC = function(namespace, name) end
 AddUserCommand = function(command_name, data) end
----登记库存物品贴图路径
----@param atlas string @图集路径(以.xml结尾)
----@param imagename string @贴图名，一般是prefab.tex
----@param overridenimagename string|nil @(仅限热带体验)覆盖贴图名，使用了非同名图的预制物预期图名prefab.tex
-RegisterInventoryItemAtlas = function(atlas, imagename, overridenimagename) end
+RegisterInventoryItemAtlas = function(atlas, prefabname) end
 RegisterScrapbookIconAtlas = function(atlas, tex) end
 RegisterSkilltreeBGForCharacter = function(atlas, charactername) end
 RegisterSkilltreeIconsAtlas = function(atlas, tex) end
@@ -1062,32 +1056,30 @@ env.RemapSoundEvent = function(name, new_name) end
 -- 判断某个mod是否启用
 KnownModIndex:IsModEnabled("workshop-1289779251")
 
+-- 牛逼mod可能会用到的代码，版本控制
+-- TUNING.MAMI_VERSION = KnownModIndex:GetModInfo(modname).version
 
 function IsSimPaused() end
 
--- 小地图焦点重新回到玩家身上
-TheWorld.minimap.MiniMap:ResetOffset()
--- 小地图显示某个区域
-TheWorld.minimap.MiniMap:ShowArea(x, 0, y, 8)
--- 重置战争迷雾，要重新探图了
-TheWorld.minimap.MiniMap:ClearRevealedAreas()
-
--- 世界坐标相对于小地图的位置
-TheWorld.minimap.MiniMap:WorldPosToMapPos(x, y, z)
-
-TheWorld.minimap.MiniMap:MapPosToWorldPos(x, y, z)
-
--- 小地图缩放程度
-TheWorld.minimap.MiniMap:GetZoom()
--- 小地图缩放，加减法，正数缩小，负数放大
-TheWorld.minimap.MiniMap:Zoom(-0.1)
--- 小地图偏移
-TheWorld.minimap.MiniMap:Offset(4, 4)
-
-
-for k, v in pairs(getmetatable(ThePlayer.MiniMapEntity).__index) do
-    print(k, v);
-end;
-
 --- 熔炉伤害数值显示，一个红色数字下落的动画
 player.HUD:ShowPopupNumber(damage, large and 48 or 32, target:GetPosition(), 40, COLOUR, large)
+AddReplicableComponent = function(name) end
+
+--- 判断一个点是否在多边形内部
+TheSim:WorldPointInPoly(x, z, node.poly)
+
+function Lerp(a, b, t)
+end
+
+-- 让作者的mod被打差评后不用吃哑巴亏了
+AddPlayerPostInit(function(inst)
+    inst:DoTaskInTime(1, function()
+        if inst and inst.userid and GLOBAL.TheNet then
+            local data = GLOBAL.TheNet:GetClientTableForUser(inst.userid)
+            if data then
+                print("steam信息", data.netid)
+                -- 禁止该玩家游玩
+            end
+        end
+    end)
+end)

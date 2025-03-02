@@ -7,6 +7,7 @@ local seg_time = 30
 local total_day_time = seg_time*16
 local night_segs = 2
 local night_time = seg_time * night_segs
+
 TUNING.HAMROOM = {
     roomtype = {
         playerhouse_city_floor = "large",

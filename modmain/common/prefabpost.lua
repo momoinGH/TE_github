@@ -25,6 +25,10 @@ modimport "modmain/common/prefabs/world"
 modimport "modmain/common/poisonable"
 
 ----------------------------------------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------------------------------------
 local function ArmorCanResistBefore(self, attacker, weapon)
     if attacker and self.immunetags then
         for k, v in pairs(self.immunetags) do
@@ -202,15 +206,14 @@ AddComponentPostInit("spooked", function(self)
 end)
 
 ----------------------------------------------------------------------------------------------------
-for _, v in ipairs({"wobster_sheller", "wobster_moonglass"}) do
+for _, v in ipairs({ "wobster_sheller", "wobster_moonglass" }) do
     AddPrefabPostInit(v, function(inst)
         inst:AddTag("lobster")
         if not TheWorld.ismastersim then return inst end
 
         local lootdropper = inst:AddComponent("lootdropper")
         lootdropper.trappable = true
-        lootdropper:SetLoot({v .. "_land"})
-
+        lootdropper:SetLoot({ v .. "_land" })
     end)
 end
 ----------------------------------------------------------------------------------------------------
@@ -848,7 +851,7 @@ AddComponentPostInit("combat", function(self)
     function self:GetWeapon()
         if self.inst.components.inventory ~= nil then
             local item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or
-            self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+                self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
             return item ~= nil
                 and item.components.weapon ~= nil
                 and (item.components.projectile ~= nil or
@@ -867,7 +870,7 @@ AddClassPostConstruct("components/combat_replica", function(self)
             return self.inst.components.combat:GetWeapon()
         elseif self.inst.replica.inventory ~= nil then
             local item = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or
-            self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+                self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
             if item ~= nil and item:HasTag("weapon") then
                 if item:HasTag("projectile") or item:HasTag("rangedweapon") then
                     return item
@@ -941,6 +944,7 @@ AddPrefabPostInit("world", function(inst)
 end)
 
 AddPlayerPostInit(function(inst)
+    
     local function fn(ent)
         if ent == GLOBAL.TheWorld then --[[
 	        local tuning = TUNING.GOGGLES_HEAT.GROUND
@@ -1069,7 +1073,7 @@ AddComponentPostInit("playervision", function(self)
 end)
 
 --------------------------------------------------------------------------
---[[ 让蘑菇农场能种植新东西 ]]--来自老版棱镜，感谢梧桐山大佬的无私分享！
+--[[ 让蘑菇农场能种植新东西 ]] --来自老版棱镜，感谢梧桐山大佬的无私分享！
 --------------------------------------------------------------------------
 
 local mushroom_farm_seeds = {
@@ -1119,10 +1123,10 @@ AddPrefabPostInit("mushroom_farm", function(inst)
                         "swap_mushroom"
                     )
                 else
-                    farm.AnimState:OverrideSymbol("swap_mushroom", "mushroom_farm_"..data.product.."_build", "swap_mushroom")
+                    farm.AnimState:OverrideSymbol("swap_mushroom", "mushroom_farm_" .. data.product .. "_build", "swap_mushroom")
                 end
                 farm.components.harvestable:SetProduct(data.product, max_produce)
-                farm.components.harvestable:SetGrowTime(grow_time/max_produce)
+                farm.components.harvestable:SetGrowTime(grow_time / max_produce)
                 farm.components.harvestable:Grow()
 
                 TheWorld:PushEvent("itemplanted", { doer = giver, pos = farm:GetPosition() }) --this event is pushed in other places too
@@ -1136,7 +1140,7 @@ AddPrefabPostInit("mushroom_farm", function(inst)
     inst.OnLoad = function(farm, data)
         OnLoad_old(farm, data)
         if data ~= nil and not data.burnt and data.product ~= nil then
-            for k,v in pairs(mushroom_farm_seeds) do
+            for k, v in pairs(mushroom_farm_seeds) do
                 if v.product == data.product then
                     if data.product == "foliage" then
                         farm.AnimState:OverrideSymbol(
@@ -1145,7 +1149,7 @@ AddPrefabPostInit("mushroom_farm", function(inst)
                             "swap_mushroom"
                         )
                     else
-                        farm.AnimState:OverrideSymbol("swap_mushroom", "mushroom_farm_"..data.product.."_build", "swap_mushroom")
+                        farm.AnimState:OverrideSymbol("swap_mushroom", "mushroom_farm_" .. data.product .. "_build", "swap_mushroom")
                     end
                     break
                 end
@@ -1160,13 +1164,13 @@ local SpeciaTileDrop =
 {
     [WORLD_TILES.PIGRUINS] = "cutstone",
     [WORLD_TILES.PIGRUINS_BLUE] = "cutstone",
-	[WORLD_TILES.HAMARCHIVE] = "cutstone",
+    [WORLD_TILES.HAMARCHIVE] = "cutstone",
 
-	[WORLD_TILES.QUAGMIRE_GATEWAY] = "turf_quagmire_gateway",
-	[WORLD_TILES.QUAGMIRE_CITYSTONE] = "turf_quagmire_citystone",
-	[WORLD_TILES.QUAGMIRE_PARKFIELD] = "turf_quagmire_parkfield",
-	[WORLD_TILES.QUAGMIRE_PARKSTONE] = "turf_quagmire_parkstone",
-	[WORLD_TILES.QUAGMIRE_PEATFOREST] = "turf_quagmire_peatforest",
+    [WORLD_TILES.QUAGMIRE_GATEWAY] = "turf_quagmire_gateway",
+    [WORLD_TILES.QUAGMIRE_CITYSTONE] = "turf_quagmire_citystone",
+    [WORLD_TILES.QUAGMIRE_PARKFIELD] = "turf_quagmire_parkfield",
+    [WORLD_TILES.QUAGMIRE_PARKSTONE] = "turf_quagmire_parkstone",
+    [WORLD_TILES.QUAGMIRE_PEATFOREST] = "turf_quagmire_peatforest",
 
 }
 local old_HandleDugGround = HandleDugGround
@@ -1189,25 +1193,25 @@ end
 -- 添加深层雨林地皮和毒瘴雨林地皮挖起的特殊效果
 local old_terraform = ACTIONS.TERRAFORM.fn
 ACTIONS.TERRAFORM.fn = function(act)
-	if act.invobject and act.invobject.components.terraformer then
+    if act.invobject and act.invobject.components.terraformer then
         local tile = TheWorld.Map:GetTileAtPoint(act:GetActionPoint():Get())
-		if tile == GROUND.GASRAINFOREST then
+        if tile == GROUND.GASRAINFOREST then
             if act.doer.components.talker then
-			    act.doer.components.talker:Say(GetString(act.doer.prefab, "ANNOUNCE_TOOLCORRODED"))
+                act.doer.components.talker:Say(GetString(act.doer.prefab, "ANNOUNCE_TOOLCORRODED"))
             end
             local finiteuses = act.invobject.components.finiteuses
             if finiteuses then
-			    finiteuses:Use(finiteuses:GetUses())
+                finiteuses:Use(finiteuses:GetUses())
             end
-			return
-		elseif tile == GROUND.DEEPRAINFOREST then
+            return
+        elseif tile == GROUND.DEEPRAINFOREST then
             if act.doer.components.talker then
-			    act.doer.components.talker:Say(GetString(act.doer.prefab, "ANNOUNCE_TURFTOOHARD"))
+                act.doer.components.talker:Say(GetString(act.doer.prefab, "ANNOUNCE_TURFTOOHARD"))
             end
-			return
-		end
-	end
-	return old_terraform(act)
+            return
+        end
+    end
+    return old_terraform(act)
 end
 
 -- for client mod ActionQueue
