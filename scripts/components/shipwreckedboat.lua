@@ -80,8 +80,10 @@ end
 local function SpawnFakeBoat(inst)
     local b = SpawnPrefab(inst.prefab .. "_fake")
     b.Transform:SetPosition(0, 0, 0)
-    b.components.container_proxy:SetMaster(inst)
-    b.components.container_proxy:SetCanBeOpened(true)
+    if b.components.container_proxy then
+        b.components.container_proxy:SetMaster(inst)
+        b.components.container_proxy:SetCanBeOpened(true)
+    end
     b.boat = inst
     return b
 end

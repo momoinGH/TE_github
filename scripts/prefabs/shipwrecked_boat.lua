@@ -151,10 +151,12 @@ local function MakeBoat(name, minimap, bank, build, loots, data, prefabs, init)
 
         inst:SetPrefabNameOverride(name)
 
-        inst:AddTag("pro_fakeboat")          --玩家不能上这个船
+        inst:AddTag("pro_fakeboat") --玩家不能上这个船
 
-        inst:AddComponent("container_proxy") --用来给船体复制体使用的
-        inst.components.container_proxy:SetCanBeOpened(false)
+        if data.container then                   --没有container就没有container_proxy，这里主要是兼容insight，那个mod会报错
+            inst:AddComponent("container_proxy") --用来给船体复制体使用的
+            inst.components.container_proxy:SetCanBeOpened(false)
+        end
 
         inst.entity:SetPristine()
 
