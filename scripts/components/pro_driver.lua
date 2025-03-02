@@ -41,11 +41,24 @@ local function CheckFall(inst, self, boat)
     end
 end
 
+local function SetWereDrowning(inst, isFly)
+    if inst.components.drownable ~= nil then
+        if isFly then
+            if inst.components.drownable.enabled ~= false then
+                inst.components.drownable.enabled = false
+            end
+        elseif inst.components.drownable.enabled == false then
+            inst.components.drownable.enabled = true
+        end
+    end
+end
+
 -- 开始跳到船上
 function Driver:StartHopBoat(boat)
     self:SetBoat(nil) --船跳船的情况
 
     if boat and not self.hoptask then
+        SetWereDrowning(self.inst, true) --上船的时候得提前设置，等SetBoat里设置true还是会落水
         self.hoptask = self.inst:DoPeriodicTask(0, CheckFall, 0, self, boat)
     end
 end
@@ -57,27 +70,29 @@ function Driver:SetBoat(boat)
     if oldboat then
         oldboat.components.equippable:SetPreventUnequipping(false)
         self.inst.components.inventory:Unequip(EQUIPSLOTS.SWBOAT)
-        oldboat.Transform:SetPosition(self.inst.Transform:GetWorldPosition())
-        oldboat.components.inventoryitem:OnDropped() --不加这一行船还是隐身状态
+        oldboat.components.inventoryitem:OnDropped(nil, 0) --不加这一行船还是隐身状态
+        local x, y, z = self.inst.Transform:GetWorldPosition()
+        oldboat.Transform:SetPosition(x, 0, z)
         oldboat.components.shipwreckedboat:OnPlayerDismounted(self.inst)
     end
 
     if boat then
         self.inst.components.inventory:Equip(boat)
         boat.components.equippable:SetPreventUnequipping(true)
-
         boat.components.shipwreckedboat:OnPlayerMounted(self.inst)
 
         self.inst:StartUpdatingComponent(self)
     else
         self.inst:StopUpdatingComponent(self)
     end
+    SetWereDrowning(self.inst, boat ~= nil)
 end
 
 function Driver:Check()
-    return not self.inst:HasTag("playerghost")
-        and not (self.inst.sg and self.inst.sg:HasStateTag("jumping"))
-        and TheWorld.Map:IsOceanAtPoint(self.inst.Transform:GetWorldPosition())
+    return self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)    --船还在
+        and not self.inst:HasTag("playerghost")                                 --玩家没死
+        and not (self.inst.sg and self.inst.sg:HasStateTag("jumping"))          --玩家不在跳跃
+        and TheWorld.Map:IsOceanAtPoint(self.inst.Transform:GetWorldPosition()) --玩家在海上
 end
 
 -- TODO 就算刷帧，延迟补偿下上岸还是有些问题，只能先这样了
