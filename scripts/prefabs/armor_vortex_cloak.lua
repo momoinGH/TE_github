@@ -51,6 +51,10 @@ local function onequip(inst, owner)
     setsoundparam(inst)
 end
 
+local function close(inst)
+    inst.components.container.canbeopened = false
+end
+
 local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
     owner.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/vortex_armour/equip_on")
@@ -63,7 +67,7 @@ local function onunequip(inst, owner)
         inst.wisptask = nil
     end
     if inst.components.container:IsEmpty() == true then
-        inst.components.container.canbeopened = false
+        close(inst)
         inst.components.inventoryitem.cangoincontainer = true
     else
         inst.components.inventoryitem.cangoincontainer = false
@@ -186,6 +190,8 @@ local function fn()
     shadowlevel:SetDefaultLevel(TUNING.ARMOR_SANITY_SHADOW_LEVEL) -- Runar: 影甲的老麦2级暗影之力
 
     SetupEquippable(inst)
+
+    inst:ListenForEvent("onputininventory", close)
 
     inst.OnBlocked = function(owner, data)
         OnBlocked(owner, data, inst)
