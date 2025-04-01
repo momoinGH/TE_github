@@ -183,7 +183,7 @@ local function chop_down_tree(inst, chopper)
 
     RemovePhysicsColliders(inst)
     inst.AnimState:PushAnimation(inst.anims.stump)
-    inst.MiniMapEntity:SetIcon("teatree_stump.tex")
+    inst.MiniMapEntity:SetIcon("teatree_stump.png")
 
     inst.components.workable:SetWorkAction(ACTIONS.DIG)
     inst.components.workable:SetOnFinishCallback(dig_up_stump)
@@ -235,7 +235,7 @@ local function onburntchanges(inst)
     inst:RemoveComponent("childspawner")
 
     inst.AnimState:PlayAnimation(inst.anims.burnt, true)
-    inst.MiniMapEntity:SetIcon("teatree_burnt.tex")
+    inst.MiniMapEntity:SetIcon("teatree_burnt.png")
     inst:DoTaskInTime(3 * FRAMES, function(inst)
         if inst.components.burnable and inst.components.propagator then
             inst.components.burnable:Extinguish()
@@ -363,7 +363,7 @@ local setupfns = {
         inst:RemoveTag("teatree")
         inst:RemoveTag("shelter")
         inst:RemoveTag("cattoyairborne")
-        inst.MiniMapEntity:SetIcon("teatree_stump.tex")
+        inst.MiniMapEntity:SetIcon("teatree_stump.png")
 
         inst:RemoveComponent("burnable")
         MakeSmallBurnable(inst)
@@ -381,7 +381,7 @@ local setupfns = {
     burnt = function(inst)
         inst:AddTag("burnt")
         inst:AddTag("fire") -- Add the fire tag here: OnEntityWake will handle it actually doing burnt logic
-        inst.MiniMapEntity:SetIcon("teatree_burnt.tex")
+        inst.MiniMapEntity:SetIcon("teatree_burnt.png")
         inst:RemoveComponent("childspawner")
     end,
     nest = function(inst)
@@ -428,7 +428,7 @@ local function tree(name, stage, type)
 
         MakeObstaclePhysics(inst, .25)
 
-        inst.MiniMapEntity:SetIcon("teatree.tex")
+        inst.MiniMapEntity:SetIcon("teatree.png")
         inst.MiniMapEntity:SetPriority(-1)
 
         inst:AddTag("plant")
