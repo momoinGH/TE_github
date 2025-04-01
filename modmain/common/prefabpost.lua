@@ -17,9 +17,16 @@ modimport "modmain/common/components/builder"
 modimport "modmain/common/components/inventoryitem"
 modimport "modmain/common/components/walkableplatformplayer"
 modimport "modmain/common/components/playeractionpicker"
-
+--[[
+modimport "modmain/common/components/soundemitter"
+modimport "modmain/common/components/ambientlighting"
+modimport "modmain/common/components/colourcube"
+modimport "modmain/common/components/ambientsound"
+modimport "modmain/common/components/dynamicmusic"
+]]
 modimport "modmain/common/prefabs/oceanfishdef"
 modimport "modmain/common/prefabs/allplayers"
+--modimport "modmain/common/prefabs/player_classified"
 modimport "modmain/common/prefabs/world"
 
 modimport "modmain/common/poisonable"

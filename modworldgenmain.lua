@@ -1,7 +1,14 @@
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
 _G = GLOBAL
 
-require("tools/tableutil") ----一些表相关的工具函数
+local require = require
+local modimport = modimport
+
+require "tools/upvaluehelper"        ----用来hook的一些函数
+require "tools/tableutil"            ----一些表相关的工具函数，都在表tableutil里
+require "tools/modutil"              ----用来require  scripts之外的文件，读取，修改mod相关配置
+require "tools/tileutil"             ----一些关于tile的工具函数
+require "tools/spawnutil"            ----地形生成相关工具
 
 modimport "modmain/gentuning"
 modimport "tiledefs"

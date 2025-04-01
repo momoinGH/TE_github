@@ -453,7 +453,7 @@ local tro_tiledefs = {
     --     },
     --     minimap_tile_def = {
     --         name = "map_edge",
-    --         noise_texture = "mini_lava_noise",
+    --         noise_texture = "sw/mini_lava_noise",
     --     },
     -- },
 
@@ -462,9 +462,23 @@ local tro_tiledefs = {
     -- (only for worldgen)
     -------------------------------
 
-    -- VOLCANO_NOISE = {
-    --     tile_range = volcano_noisefn,
-    -- },
+    VOLCANO_NOISE = {
+        tile_range = function(noise)
+            if noise < 0.5 then
+                return WORLD_TILES.VOLCANO
+            end
+            return WORLD_TILES.VOLCANO_ROCK
+        end,
+    },
+
+    BATTLEGROUND_RAINFOREST_NOISE = {
+        tile_range = function(noise)
+            if noise < 0.5 then
+                return WORLD_TILES.DIRT
+            end
+            return WORLD_TILES.RAINFOREST
+        end,
+    },
 
 
     --------------------------以下为哈姆陆地地皮---------------------

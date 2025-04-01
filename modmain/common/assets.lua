@@ -2,29 +2,41 @@ Assets =
 {
     Asset("ANIM", "anim/pigman_tribe.zip"), --图鉴wiki默认动画
 
+    --LOAD SOUND FILE
+	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC002.fev"),
+	Asset("SOUND", "sound/music_stream_SW.fsb"),
+	Asset("SOUND", "sound/dontstarve_shipwreckedSFX.fsb"),
+
+	Asset("SOUNDPACKAGE", "sound/sw_character.fev"),
+	Asset("SOUND", "sound/sw_character.fsb"),
+
+	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"),
+	Asset("SOUND", "sound/DLC003_sfx.fsb"),
+	Asset("SOUND", "sound/DLC003_music_stream.fsb"),
+	Asset("SOUND", "sound/DLC003_AMB_stream.fsb"),
+
+	Asset("SOUNDPACKAGE", "sound/dontstarve_wagstaff.fev"),
+	Asset("SOUND", "sound/dontstarve_wagstaff.fsb"),
+
     --Asset("SOUNDPACKAGE", "sound/volcano.fev"),
     --Asset("SOUND", "sound/volcano.fsb"),
     --Asset("SOUND", "sound/boats.fsb"),
     --Asset("SOUND", "sound/creatures.fsb"),
     --Asset("SOUND", "sound/slot_machine.fsb"),
     --Asset("SOUND", "sound/waves.fsb"),
-    --LOD SOUND FILE
-    Asset("SOUNDPACKAGE", "sound/dontstarve_DLC002.fev"),
-    Asset("SOUNDPACKAGE", "sound/sw_character.fev"),
-    Asset("SOUND", "sound/dontstarve_shipwreckedSFX.fsb"),
-    Asset("SOUND", "sound/sw_character.fsb"),
-    Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"),
-    Asset("SOUND", "sound/DLC003_sfx.fsb"),
-	Asset("SOUNDPACKAGE", "sound/dontstarve_wagstaff.fev"),
-	Asset("SOUND", "sound/dontstarve_wagstaff.fsb"),
-    Asset("IMAGE", "images/fog_cloud.tex"),
     --Asset("SOUND", "sound/amb_stream_SW.fsb"),
     --NEW SOUND FILE
     --Asset("SOUNDPACKAGE", "sound/volcano_new.fev"),
     --Asset("SOUND", "sound/volcano_new.fsb"),
     --Asset("SOUNDPACKAGE", "sound/tropical.fev"),
     --Asset("SOUND", "sound/tropical.fsb"),
+    --Asset("SOUNDPACKAGE", "sound/Hamlet.fev"),
+    --Asset("SOUND", "sound/Hamlet.fsb"),
 
+    Asset("IMAGE", "images/fog_cloud.tex"),--云海
+    Asset("ATLAS", "images/barco.xml"),
+
+    -------------overlays -------------------
     Asset("ATLAS", "images/overlays/poison.xml"),
     Asset("IMAGE", "images/overlays/poison.tex"),
     Asset("ATLAS", "images/overlays/hayfever.xml"),
@@ -36,12 +48,45 @@ Assets =
     Asset("ATLAS", "images/overlays/visorvision.xml"),
     Asset("IMAGE", "images/overlays/visorvision.tex"),
 
+	-------------colour cubes -------------------
+	Asset("IMAGE", "images/colour_cubes/sw_mild_day_cc.tex"),
+	Asset("IMAGE", "images/colour_cubes/SW_mild_dusk_cc.tex"),
+
+	Asset("IMAGE", "images/colour_cubes/SW_wet_day_cc.tex"),
+	Asset("IMAGE", "images/colour_cubes/SW_wet_dusk_cc.tex"),
+
+	Asset("IMAGE", "images/colour_cubes/sw_green_day_cc.tex"),
+	Asset("IMAGE", "images/colour_cubes/sw_green_dusk_cc.tex"),
+
+	Asset("IMAGE", "images/colour_cubes/SW_dry_day_cc.tex"),
+	Asset("IMAGE", "images/colour_cubes/SW_dry_dusk_cc.tex"),
+
+	Asset("IMAGE", "images/colour_cubes/sw_volcano_cc.tex"),
+	Asset("IMAGE", "images/colour_cubes/sw_volcano_active_cc.tex"),
+
+
+	Asset("IMAGE", "images/colour_cubes/pork_temperate_day_cc.tex"),
+	Asset("IMAGE", "images/colour_cubes/pork_temperate_dusk_cc.tex"),
+	Asset("IMAGE", "images/colour_cubes/pork_temperate_night_cc.tex"),
+	Asset("IMAGE", "images/colour_cubes/pork_temperate_fullmoon_cc.tex"),
+
+	Asset("IMAGE", "images/colour_cubes/pork_cold_day_cc.tex"),
+	Asset("IMAGE", "images/colour_cubes/pork_cold_dusk_cc.tex"),
+	Asset("IMAGE", "images/colour_cubes/pork_cold_fullmoon_cc.tex"),
+
+	Asset("IMAGE", "images/colour_cubes/pork_lush_day_test.tex"),
+	Asset("IMAGE", "images/colour_cubes/pork_lush_dusk_test.tex"),
+	Asset("IMAGE", "images/colour_cubes/pork_warm_fullmoon_cc.tex"),
+
+	Asset("IMAGE", "images/colour_cubes/pork_cold_bloodmoon_cc.tex"),
+
+	Asset("IMAGE", "images/colour_cubes/pigshop_interior_cc.tex"),
     Asset("IMAGE", "images/colour_cubes/bat_vision_on_cc.tex"),
 	Asset("IMAGE", "images/colour_cubes/heat_vision_cc.tex"),
     Asset("IMAGE", "images/colour_cubes/shooting_goggles_cc.tex"),
 
-    Asset("ATLAS", "images/barco.xml"),
 
+    -------------anims -------------------
     Asset("ANIM", "anim/player_wagstaff.zip" ),
     Asset("ANIM", "anim/player_mount_wagstaff.zip"),
     Asset("ANIM", "anim/livingartifact_meter.zip"),
@@ -117,8 +162,6 @@ Assets =
     Asset("IMAGE", "levels/textures/ground_noise_water_deep.tex"),
 
     Asset("ANIM", "anim/butterflymuffin.zip"),
-    --Asset("SOUNDPACKAGE", "sound/Hamlet.fev"),
-    --Asset("SOUND", "sound/Hamlet.fsb"),
 
 	--蘑菇农场额外种植动画包，来自老版棱镜
     Asset("ANIM", "anim/mushroom_farm_cutlichen_build.zip"),
