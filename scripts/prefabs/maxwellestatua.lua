@@ -84,31 +84,32 @@ end
 
 local function fn(Sim)
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    anim:SetBank("estatuademaxwell")
-    anim:SetBuild("estatuademaxwell")
-    anim:PlayAnimation("completa", true)
+    inst.AnimState:SetBank("estatuademaxwell")
+    inst.AnimState:SetBuild("estatuademaxwell")
+    inst.AnimState:PlayAnimation("completa", true)
     inst.AnimState:OverrideSymbol("cab", "estatuademaxwell", "")
     inst.AnimState:OverrideSymbol("maoe", "estatuademaxwell", "")
     inst.AnimState:OverrideSymbol("maod", "estatuademaxwell", "")
 
     MakeObstaclePhysics(inst, 1.1)
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetPriority(5)
-
-    inst.entity:AddSoundEmitter()
-
-    inst:AddComponent("talker")
+    inst.MiniMapEntity:SetPriority(5)
+    inst.MiniMapEntity:SetIcon("statue.png")
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst:AddComponent("talker")
 
     inst:AddComponent("trader")
     inst.components.trader:SetAcceptTest(ItemTradeTest)

@@ -254,7 +254,7 @@ local function makefn(build, stage, data)
 		MakeWaterObstaclePhysics(inst, 1.2, 2, 1.25)
 
 		local minimap = inst.entity:AddMiniMapEntity()
-		minimap:SetIcon("mangrovebee.png")
+		minimap:SetIcon("mangrove_bee.png")
 
 		minimap:SetPriority(-1)
 
