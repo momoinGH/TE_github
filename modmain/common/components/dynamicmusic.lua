@@ -1,3 +1,5 @@
+local upvaluehelper = require("tools/upvaluehelper")
+
 local soundremap = {
 
     shipwrecked = {

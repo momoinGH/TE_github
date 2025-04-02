@@ -1,10 +1,10 @@
 local Utils = require("tropical_utils/utils")
-
+-- require "tools/upvaluehelper" ----用来hook的一些函数
 ----------------------------------------------------------------------------------------------------
 
 -- 太长的单独写一个文件了
 modimport "modmain/common/natureskin_variants"
-modimport "modmain/common/world_map"
+modimport "modmain/common/components/world_map"
 modimport "modmain/common/entityscript"
 
 modimport "modmain/common/components/locomotor"
@@ -17,16 +17,16 @@ modimport "modmain/common/components/builder"
 modimport "modmain/common/components/inventoryitem"
 modimport "modmain/common/components/walkableplatformplayer"
 modimport "modmain/common/components/playeractionpicker"
---[[
+
 modimport "modmain/common/components/soundemitter"
 modimport "modmain/common/components/ambientlighting"
 modimport "modmain/common/components/colourcube"
 modimport "modmain/common/components/ambientsound"
 modimport "modmain/common/components/dynamicmusic"
-]]
+
 modimport "modmain/common/prefabs/oceanfishdef"
 modimport "modmain/common/prefabs/allplayers"
---modimport "modmain/common/prefabs/player_classified"
+modimport "modmain/common/prefabs/player_classified"
 modimport "modmain/common/prefabs/world"
 
 modimport "modmain/common/poisonable"
@@ -951,7 +951,6 @@ AddPrefabPostInit("world", function(inst)
 end)
 
 AddPlayerPostInit(function(inst)
-    
     local function fn(ent)
         if ent == GLOBAL.TheWorld then --[[
 	        local tuning = TUNING.GOGGLES_HEAT.GROUND
@@ -1130,7 +1129,8 @@ AddPrefabPostInit("mushroom_farm", function(inst)
                         "swap_mushroom"
                     )
                 else
-                    farm.AnimState:OverrideSymbol("swap_mushroom", "mushroom_farm_" .. data.product .. "_build", "swap_mushroom")
+                    farm.AnimState:OverrideSymbol("swap_mushroom", "mushroom_farm_" .. data.product .. "_build",
+                        "swap_mushroom")
                 end
                 farm.components.harvestable:SetProduct(data.product, max_produce)
                 farm.components.harvestable:SetGrowTime(grow_time / max_produce)
@@ -1156,7 +1156,8 @@ AddPrefabPostInit("mushroom_farm", function(inst)
                             "swap_mushroom"
                         )
                     else
-                        farm.AnimState:OverrideSymbol("swap_mushroom", "mushroom_farm_" .. data.product .. "_build", "swap_mushroom")
+                        farm.AnimState:OverrideSymbol("swap_mushroom", "mushroom_farm_" .. data.product .. "_build",
+                            "swap_mushroom")
                     end
                     break
                 end

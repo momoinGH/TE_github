@@ -1,4 +1,4 @@
--- local upvaluehelper = require("tools/upvaluehelper")
+local upvaluehelper = require("tools/upvaluehelper")
 
 local COLOURS = {
 	INTERIOR_COLOURS =

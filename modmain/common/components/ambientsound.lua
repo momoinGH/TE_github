@@ -1,3 +1,4 @@
+local upvaluehelper = require("tools/upvaluehelper")
 local ambient_sounds =
 {
     --TODO需要重新整理地皮

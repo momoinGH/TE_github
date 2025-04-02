@@ -15,6 +15,14 @@ function tableutil.is_array(t)
     return true
 end
 
+function tableutil.getlength(tbl)
+    local num = 0
+    for i, v in pairs(tbl) do
+        num = num + 1
+    end
+    return num - #tbl
+end
+
 function tableutil.has_index(tbl, index)
     for i, v in pairs(tbl) do
         if i == index then
@@ -65,8 +73,9 @@ function tableutil.insert_components(tbl, vs)
     end
 end
 
-function table.remove_components(tbl, vs)
+function tableutil.remove_components(tbl, vs)
     -- 从后向前遍历 tbl
+    if (not tbl) or type(tbl) ~= "table" then return end
     for i = #tbl, 1, -1 do
         for k, w in pairs(vs) do
             if tbl[i] == w then
@@ -78,10 +87,11 @@ function table.remove_components(tbl, vs)
 end
 
 function tableutil.remove_indexes(tbl, vs)
+    if (not tbl) or type(tbl) ~= "table" then return end
     for i, v in pairs(tbl) do
         for k, w in pairs(vs) do
-            if i == k then
-                table.remove(tbl, i)
+            if i == w then
+                tbl[i] = nil
                 break
             end
         end
