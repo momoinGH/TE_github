@@ -55,8 +55,8 @@ Assets =
     Asset("IMAGE", "images/mapstyle/hud_hamlet.tex"),
 	Asset("ATLAS", "images/mapstyle/hud_hamlet.xml"),
 
-	Asset("IMAGE", "images/mapstyle/hud_porkland.tex"),
-	Asset("ATLAS", "images/mapstyle/hud_porkland.xml"),
+	Asset("IMAGE", "images/mapstyle/hud_pigcity.tex"),
+	Asset("ATLAS", "images/mapstyle/hud_pigcity.xml"),
 
 	-------------colour cubes -------------------
 	Asset("IMAGE", "images/colour_cubes/sw_mild_day_cc.tex"),

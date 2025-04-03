@@ -66,32 +66,29 @@ AddClassPostConstruct("screens/mapscreen", function(self)
         if player and _activatedplayer ~= player then
             player:ListenForEvent("regionchange_client", function()
                 local region = GetCurrentRegion(player)
-                if region ~= CUBES.default then
-                    local config = MAP_CONFIG[region]
-                    if config then
-
-                        local mapWidget = self:GetChild("mapwidget")
-                        if mapWidget then
-                            if mapWidget.bg then
-                                mapWidget.bg:Kill()
-                            end
-                            mapWidget.bg = mapWidget:AddChild(Image(config.bg_xml, config.bg_tex))
-                            mapWidget.bg:SetVRegPoint(ANCHOR_MIDDLE)
-                            mapWidget.bg:SetHRegPoint(ANCHOR_MIDDLE)
-                            mapWidget.bg:SetVAnchor(ANCHOR_MIDDLE)
-                            mapWidget.bg:SetHAnchor(ANCHOR_MIDDLE)
-                            mapWidget.bg:SetScaleMode(SCALEMODE_FILLSCREEN)
-                            local BLENDMODE = {
-                                Disabled = 0,
-                                AlphaBlended = 1,
-                                Additive = 2,
-                                Premultiplied = 3,
-                                InverseAlpha = 4,
-                                AlphaAdditive = 5,
-                                VFXTest = 6,
-                            }
-                            mapWidget.bg.inst.ImageWidget:SetBlendMode(BLENDMODE.Premultiplied)
+                local config = MAP_CONFIG[region]
+                if config then
+                    local mapWidget = self:GetChild("mapwidget")
+                    if mapWidget then
+                        if mapWidget.bg then
+                            mapWidget.bg:Kill()
                         end
+                        mapWidget.bg = mapWidget:AddChild(Image(config.bg_xml, config.bg_tex))
+                        mapWidget.bg:SetVRegPoint(ANCHOR_MIDDLE)
+                        mapWidget.bg:SetHRegPoint(ANCHOR_MIDDLE)
+                        mapWidget.bg:SetVAnchor(ANCHOR_MIDDLE)
+                        mapWidget.bg:SetHAnchor(ANCHOR_MIDDLE)
+                        mapWidget.bg:SetScaleMode(SCALEMODE_FILLSCREEN)
+                        local BLENDMODE = {
+                            Disabled = 0,
+                            AlphaBlended = 1,
+                            Additive = 2,
+                            Premultiplied = 3,
+                            InverseAlpha = 4,
+                            AlphaAdditive = 5,
+                            VFXTest = 6,
+                        }
+                        mapWidget.bg.inst.ImageWidget:SetBlendMode(BLENDMODE.Premultiplied)
                     end
                 end
             end)
@@ -99,7 +96,6 @@ AddClassPostConstruct("screens/mapscreen", function(self)
         end
     end)
 end)
-
 
 AddClassPostConstruct("widgets/mapwidget", function(self)
     local BLENDMODE = {
@@ -114,16 +110,18 @@ AddClassPostConstruct("widgets/mapwidget", function(self)
     local player = GLOBAL.ThePlayer
     local region = GetCurrentRegion(player)
     local config = MAP_CONFIG[region]
-    if self.bg then
-        self.bg:Kill()
+    if config then
+        if self.bg then
+            self.bg:Kill()
+        end
+        self.bg = self:AddChild(Image(config.bg_xml, config.bg_tex))
+        self.bg:SetVRegPoint(ANCHOR_MIDDLE)
+        self.bg:SetHRegPoint(ANCHOR_MIDDLE)
+        self.bg:SetVAnchor(ANCHOR_MIDDLE)
+        self.bg:SetHAnchor(ANCHOR_MIDDLE)
+        self.bg:SetScaleMode(SCALEMODE_FILLSCREEN)
+        self.bg.inst.ImageWidget:SetBlendMode(BLENDMODE.Premultiplied)
     end
-    self.bg = self:AddChild(Image(config.bg_xml, config.bg_tex))
-    self.bg:SetVRegPoint(ANCHOR_MIDDLE)
-    self.bg:SetHRegPoint(ANCHOR_MIDDLE)
-    self.bg:SetVAnchor(ANCHOR_MIDDLE)
-    self.bg:SetHAnchor(ANCHOR_MIDDLE)
-    self.bg:SetScaleMode(SCALEMODE_FILLSCREEN)
-    self.bg.inst.ImageWidget:SetBlendMode(BLENDMODE.Premultiplied)
 
     self.minimap = GLOBAL.TheWorld.minimap.MiniMap
 
