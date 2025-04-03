@@ -21,6 +21,7 @@ modimport "modmain/common/components/playeractionpicker"
 modimport "modmain/common/components/soundemitter"
 modimport "modmain/common/components/ambientlighting"
 modimport "modmain/common/components/colourcube"
+modimport "modmain/common/components/mapstyle"
 modimport "modmain/common/components/ambientsound"
 modimport "modmain/common/components/dynamicmusic"
 

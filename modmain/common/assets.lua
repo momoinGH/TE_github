@@ -48,6 +48,16 @@ Assets =
     Asset("ATLAS", "images/overlays/visorvision.xml"),
     Asset("IMAGE", "images/overlays/visorvision.tex"),
 
+    -------------mapstyle -------------------
+    Asset("IMAGE", "images/mapstyle/hud_shipwrecked.tex"),
+	Asset("ATLAS", "images/mapstyle/hud_shipwrecked.xml"),
+
+    Asset("IMAGE", "images/mapstyle/hud_hamlet.tex"),
+	Asset("ATLAS", "images/mapstyle/hud_hamlet.xml"),
+
+	Asset("IMAGE", "images/mapstyle/hud_porkland.tex"),
+	Asset("ATLAS", "images/mapstyle/hud_porkland.xml"),
+
 	-------------colour cubes -------------------
 	Asset("IMAGE", "images/colour_cubes/sw_mild_day_cc.tex"),
 	Asset("IMAGE", "images/colour_cubes/SW_mild_dusk_cc.tex"),
