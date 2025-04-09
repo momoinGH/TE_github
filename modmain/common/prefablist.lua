@@ -157,6 +157,7 @@ if TUNING.tropical.hamlet_caves then
     table.insert(PrefabFiles, "shelf")
     table.insert(PrefabFiles, "shop_pedestals")
     table.insert(PrefabFiles, "smelter")
+    table.insert(PrefabFiles, "smeltingrecipecard")
     table.insert(PrefabFiles, "sprinkler1")
     table.insert(PrefabFiles, "topiary")
     table.insert(PrefabFiles, "trinkets_giftshop")
