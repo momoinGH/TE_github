@@ -277,7 +277,7 @@ local function fn(Sim)
 	inst:AddComponent("lootdropper")
 	inst.components.lootdropper:AddRandomLoot("monstermeat", 1.00)
 	inst.components.lootdropper:AddRandomLoot("snakeskin", 0.50)
-	--	inst.components.lootdropper:AddRandomLoot("snakeoil", 0.01)
+	inst.components.lootdropper:AddRandomLoot("snakeoil", 0.01)
 	inst.components.lootdropper.numrandomloot = math.random(0, 1)
 
 	inst:AddComponent("inspectable")

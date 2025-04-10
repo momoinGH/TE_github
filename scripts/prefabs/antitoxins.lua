@@ -5,6 +5,7 @@ local assets =
     Asset("ANIM", "anim/poison_antidote.zip"),
     Asset("ANIM", "anim/poison_salve.zip"),
     Asset("ANIM", "anim/venom_gland.zip"),
+    Asset("ANIM", "anim/snakeoil.zip"),
 }
 
 local MAX_VENOM_GLAND_DAMAGE = 80
@@ -29,6 +30,12 @@ local function oneat_gland(inst, eater)
                    MIN_VENOM_GLAND_LEFTOVER - health.currenthealth or -MAX_VENOM_GLAND_DAMAGE, nil, "venomgland")
 end
 
+local function oneat_oil(inst, eater)
+    eater.SoundEmitter:PlaySound("dontstarve_DLC002/common/HUD_antivenom_use")
+    eater.AnimState:PlayAnimation("research")
+    inst.removebyused = true
+end
+
 local function syrumpost(inst)
     inst.AnimState:SetBank("poison_antidote")
     inst.AnimState:SetBuild("poison_antidote")
@@ -37,7 +44,7 @@ local function syrumpost(inst)
 
     if not TheWorld.ismastersim then return inst end
 
-    local healer = inst:AddComponent("healer")
+    local healer = inst.components.healer or inst:AddComponent("healer")
     healer:SetHealthAmount(0)
     healer:SetOnHealFn(oneat_anti)
 
@@ -52,7 +59,7 @@ local function balmpost(inst)
 
     if not TheWorld.ismastersim then return inst end
 
-    local healer = inst:AddComponent("healer")
+    local healer = inst.components.healer or inst:AddComponent("healer")
     healer:SetHealthAmount(0)
     healer:SetOnHealFn(oneat_anti)
 
@@ -65,13 +72,39 @@ local function glandpost(inst)
 
     if not TheWorld.ismastersim then return inst end
 
-    local healer = inst:AddComponent("healer")
+    local healer = inst.components.healer or inst:AddComponent("healer")
     healer:SetHealthAmount(0)
     healer:SetOnHealFn(oneat_gland)
 
     return inst
 end
 
+local function oilpost(inst)
+    inst.AnimState:SetBank("snakeoil")
+    inst.AnimState:SetBuild("snakeoil")
+
+    if not TheWorld.ismastersim then return inst end
+
+    inst:RemoveComponent("stackable")
+
+    local healer = inst.components.healer or inst:AddComponent("healer")
+    healer:SetHealthAmount(0)
+    healer:SetOnHealFn(oneat_oil)
+
+    local fuel = inst.components.fuel or inst:AddComponent("fuel")
+    fuel.fuelvalue = 0
+
+    local Remove = inst.Remove
+    inst.Remove = function(inst)
+        local remove = not inst.removebyused
+        inst.removebyused = nil
+        return remove and Remove(inst)
+    end
+
+    return inst
+end
+
 return Derive("bandage", "antivenom", syrumpost, assets),
     Derive("bandage", "poisonbalm", balmpost, assets),
-    Derive("spidergland", "venomgland", glandpost, assets)
+    Derive("spidergland", "venomgland", glandpost, assets),
+    Derive("spidergland", "snakeoil", oilpost, assets)
