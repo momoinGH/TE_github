@@ -558,7 +558,7 @@ local function MakeFish(name, has_cooked, has_seeds)
 		inst:AddComponent("perishable")
 		inst.components.perishable:SetPerishTime(ROE_FISH[name].perishtime)
 		inst.components.perishable:StartPerishing()
-		inst.components.perishable.onperishreplacement = "spoiled_food"
+		inst.components.perishable.onperishreplacement = "spoiled_fish"
 
 		inst:AddComponent("bait")
 
@@ -633,7 +633,7 @@ local function MakeFish(name, has_cooked, has_seeds)
 		inst:AddComponent("perishable")
 		inst.components.perishable:SetPerishTime(ROE_FISH[name].cooked_perishtime)
 		inst.components.perishable:StartPerishing()
-		inst.components.perishable.onperishreplacement = "spoiled_food"
+		inst.components.perishable.onperishreplacement = "spoiled_fish"
 
 		inst:AddComponent("tradable")
 		inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
