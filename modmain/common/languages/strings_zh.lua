@@ -113,6 +113,7 @@ STRINGS.ACTIONS.JUMPIN.LEAVE                            = "离开"
 STRINGS.ACTIONS.OPENTUNA                                = "打开"
 STRINGS.ACTIONS.GAS                                     = "喷"
 STRINGS.ACTIONS.TIRO                                    = "射击"
+STRINGS.ACTIONS.CHECKSHOP                               = "花费 {cost} {costprefab}\n购买 {item}"
 
 STRINGS.ACTIONS.IRONTURNON = "开启"
 STRINGS.ACTIONS.IRONTURNOFF = "关闭"

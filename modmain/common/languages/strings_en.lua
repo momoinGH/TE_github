@@ -9842,5 +9842,6 @@ STRINGS.CHARACTERS.WORMWOOD.ANNOUNCE_PICKPOOP = {
     "Yay!",
     "Woohoo!",
 }
+STRINGS.ACTIONS.CHECKSHOP                               = "Cost {cost} {costprefab}\n for {item}"
 modimport "modmain/common/languages/stringscreeps"
 modimport "modmain/common/languages/wurt_quotes"
