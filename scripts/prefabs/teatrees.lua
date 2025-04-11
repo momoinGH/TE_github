@@ -115,18 +115,18 @@ end
 local growth_stages = {{
     name = "short",
     time = function(inst) return GetRandomWithVariance(DECIDUOUS_GROW_TIME[1].base, DECIDUOUS_GROW_TIME[1].random) end,
-    fn = function(inst) SetShort(inst) end,
-    growfn = function(inst) GrowShort(inst) end,
+    fn = SetShort,
+    growfn = GrowShort,
 }, {
     name = "normal",
     time = function(inst) return GetRandomWithVariance(DECIDUOUS_GROW_TIME[2].base, DECIDUOUS_GROW_TIME[2].random) end,
-    fn = function(inst) SetNormal(inst) end,
-    growfn = function(inst) GrowNormal(inst) end,
+    fn = SetNormal,
+    growfn = GrowNormal,
 }, {
     name = "tall",
     time = function(inst) return GetRandomWithVariance(DECIDUOUS_GROW_TIME[3].base, DECIDUOUS_GROW_TIME[3].random) end,
-    fn = function(inst) SetTall(inst) end,
-    growfn = function(inst) GrowTall(inst) end,
+    fn = SetTall,
+    growfn = GrowTall,
 }}
 
 local function chop_tree(inst, chopper, chops)
@@ -155,8 +155,8 @@ local function chop_down_tree(inst, chopper)
 
     inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
 
-    local pt = Vector3(inst.Transform:GetWorldPosition())
-    local hispos = Vector3(chopper.Transform:GetWorldPosition())
+    local pt = inst:GetPosition()
+    local hispos = chopper:GetPosition()
     local he_right = (hispos - pt):Dot(TheCamera:GetRightVec()) > 0
 
     if he_right then
@@ -385,6 +385,9 @@ local setupfns = {
         inst:RemoveComponent("childspawner")
     end,
     nest = function(inst)
+        if not inst.components.childspawner then
+            spawner_presetup(inst)
+        end
         TestSpawning(inst)
         inst:ListenForEvent("enterlight", TestSpawning)
         inst:ListenForEvent("enterdark", TestSpawning)
@@ -392,11 +395,9 @@ local setupfns = {
 }
 
 local function onsave(inst, data)
-    return {
-        nest = inst.components.childspawner ~= nil,
-        burnt = inst:HasTag("burnt") or inst:HasTag("fire"),
-        stump = inst:HasTag("stump")
-    }
+    if inst:HasTag("stump") then data.stump = true
+    elseif inst:HasTag("burnt") or inst:HasTag("fire") then data.burnt = true
+    elseif inst.components.childspawner ~= nil then data.nest = true end
 end
 
 local function onload(inst, data)
@@ -417,7 +418,6 @@ local function tree(name, stage, type)
         inst.entity:AddTransform()
         inst.entity:AddSoundEmitter()
         inst.entity:AddMiniMapEntity()
-        inst.entity:SetPristine()
 
         local anim = inst.entity:AddAnimState()
         inst.color = .7 + math.random() * .3
@@ -437,6 +437,8 @@ local function tree(name, stage, type)
         inst:AddTag("shelter")
         inst:AddTag("workable")
         inst:AddTag("cattoyairborne")
+
+        inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
             return inst
