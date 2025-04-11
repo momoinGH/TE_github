@@ -94,7 +94,7 @@ AddComponentAction("POINT", "gasser", function(inst, doer, pos, actions, right)
 end)
 
 AddComponentAction("EQUIPPED", "gasser", function(inst, doer, target, actions, right)
-    if right and not doer.replica.rider:IsRiding() then
+    if right and not (doer.replica.rider:IsRiding() or doer:HasTag("bonked")) then
         --喷洒杀毒剂
         table.insert(actions, ACTIONS.GAS)
     end
