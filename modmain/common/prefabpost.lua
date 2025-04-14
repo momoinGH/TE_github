@@ -1,41 +1,41 @@
 local Utils = require("tropical_utils/utils")
 -- require "tools/upvaluehelper" ----用来hook的一些函数
-----------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+-- 太长的单独写一个文件了---------------------------------------------------【注释的已搬到postinit】-------
+--modimport "modmain/common/natureskin_variants"-------------------------------------------------------
+--modimport "modmain/common/components/world_map"------------------------------------------------------
+--modimport "modmain/common/entityscript"
 
--- 太长的单独写一个文件了
-modimport "modmain/common/natureskin_variants"
-modimport "modmain/common/components/world_map"
-modimport "modmain/common/entityscript"
-
-modimport "modmain/common/components/locomotor"
-modimport "modmain/common/components/birdspawner"
-modimport "modmain/common/components/map"
+--modimport "modmain/common/components/locomotor"
+--modimport "modmain/common/components/birdspawner"
+--modimport "modmain/common/components/map"
 modimport "modmain/common/components/playervision"
 modimport "modmain/common/components/temperature"
-modimport "modmain/common/components/inventory"
-modimport "modmain/common/components/builder"
-modimport "modmain/common/components/inventoryitem"
+--modimport "modmain/common/components/inventory"
+--modimport "modmain/common/components/builder"
+--modimport "modmain/common/components/inventoryitem"
 modimport "modmain/common/components/walkableplatformplayer"
 modimport "modmain/common/components/playeractionpicker"
-
+--[[
 modimport "modmain/common/components/soundemitter"
 modimport "modmain/common/components/ambientlighting"
 modimport "modmain/common/components/colourcube"
 modimport "modmain/common/components/mapstyle"
 modimport "modmain/common/components/ambientsound"
 modimport "modmain/common/components/dynamicmusic"
-
+]]
 modimport "modmain/common/prefabs/oceanfishdef"
 modimport "modmain/common/prefabs/allplayers"
-modimport "modmain/common/prefabs/player_classified"
+--modimport "modmain/common/prefabs/player_classified"
 modimport "modmain/common/prefabs/world"
 
-modimport "modmain/common/poisonable"
+--modimport "modmain/common/poisonable"
 
 ----------------------------------------------------------------------------------------------------
 
 
-
+--[[
 ----------------------------------------------------------------------------------------------------
 local function ArmorCanResistBefore(self, attacker, weapon)
     if attacker and self.immunetags then
@@ -46,9 +46,9 @@ local function ArmorCanResistBefore(self, attacker, weapon)
         end
     end
 end
-
+--不能抵抗标签，如果指定了标签，则对于含有该标签的攻击者伤害不抵抗，与tags不同，tags只能抵抗记录已有标签的攻击
 AddComponentPostInit("armor", function(self)
-    self.immunetags = nil --不能抵抗标签，如果指定了标签，则对于含有该标签的攻击者伤害不抵抗，与tags不同，tags只能抵抗记录已有标签的攻击
+    self.immunetags = nil 
 
     function self:SetImmuneTags(tags)
         self.immunetags = tags
@@ -136,10 +136,10 @@ end
 AddComponentPostInit("drownable", function(self)
     Utils.FnDecorator(self, "ShouldX_InternalCheck", nil, ShouldX_InternalCheckAfter)
     Utils.FnDecorator(self, "ShouldDrown", DrownableShouldDrownBefore)
-end)
+end)]]
 
 ----------------------------------------------------------------------------------------------------
-
+--[[
 local flotsam_prefabs
 AddComponentPostInit("flotsamgenerator", function(self)
     if not flotsam_prefabs then
@@ -165,8 +165,8 @@ AddComponentPostInit("plantregrowth", function(self)
     self.TimeMultipliers["mushtree_yellow"] = function()
         return TUNING.MUSHTREE_REGROWTH_TIME_MULT * ((not TheWorld.state.autumn and 0) or 1)
     end
-end)
-
+end)]]
+--[[
 ----------------------------------------------------------------------------------------------------
 -- 地震组件quaker不好覆盖，这里判断如果是地震生成的物品就直接删除
 
@@ -223,9 +223,9 @@ for _, v in ipairs({ "wobster_sheller", "wobster_moonglass" }) do
         lootdropper.trappable = true
         lootdropper:SetLoot({ v .. "_land" })
     end)
-end
+end]]
 ----------------------------------------------------------------------------------------------------
-
+--[[
 Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
     local val = next(retTab)
     if val > TUNING.WILDFIRE_THRESHOLD then
@@ -348,6 +348,7 @@ end
 
 ----------------------------------------------------------------------------------------------------
 -- 浪花碰撞检测对象
+
 for _, v in ipairs({
     "seastack",
     "wreck",
@@ -396,8 +397,8 @@ AddPrefabPostInit("koalefant_summer", function(inst)
     if not TheWorld.ismastersim then return end
 
     inst:ListenForEvent("spawnedforhunt", OnSpawnedForHunt)
-end)
-
+end)]]
+--[[
 ----------------------------------------------------------------------------------------------------
 
 AddPrefabPostInitAny(function(inst)
@@ -527,11 +528,12 @@ if TUNING.tropical.only_hamlet then
             TheWorld:AddComponent("cloudpuffmanager")
         end
     end)
-end
+end]]
 
 ----------------------------------------------------------------------------------------------------
 ----- sai pulando automaticamente do barco cliente outra parte dentro de locomotor ----------------
 -- 直接让玩家跳到海难小船中心位置，天才！
+--[[
 local function GetEmbarkPositionBefore(self)
     local boat = self.embarkable
     if boat ~= nil and boat:IsValid() and boat:HasTag("shipwrecked_boat") then
@@ -546,9 +548,9 @@ end
 AddComponentPostInit("embarker", function(self)
     Utils.FnDecorator(self, "GetEmbarkPosition", GetEmbarkPositionBefore)
 end)
-
+]]
 ----------------------------------------------------------------------------------------------------
-
+--[[
 -- 根据地皮判断不太好，能不能给草添加特殊标签
 local CANT_PICK_TILES = {
     [GROUND.MOSS] = true,
@@ -691,11 +693,11 @@ end
 AddComponentPostInit("vanish_on_sleep", function(self)
     self.duration = 10 --支持设置休眠后多少秒移除
     self.OnEntitySleep = OnEntitySleep
-end)
+end)]]
 
 
 ----------------------------------------------------------------------------------------------------
-
+--[[
 local function shardDMGRedirect(self, attacker, damage, weapon, ...)          -- 碎裂武器伤害重定向
     if weapon then
         if weapon.prefab == "shard_sword" and self.inst:HasTag("shadow") then -- 碎裂剑对梦魇生物
@@ -725,9 +727,9 @@ local function shardDMGRedirect(self, attacker, damage, weapon, ...)          --
 end
 
 AddComponentPostInit("combat", function(self, inst) Utils.FnDecorator(self, "GetAttacked", shardDMGRedirect) end)
-
+]]
 ----------------------------------------------------------------------------------------------------
-
+--[[
 AddComponentPostInit("boatphysics", function(self, inst) -- 给船和保险杠增加破浪能力
     Utils.FnDecorator(self, "ApplyForce", function(self, dir_x, dir_z, force)
         if SWP_WAVEBREAK_EFFICIENCY.BOAT[self.inst.prefab] then
@@ -741,10 +743,10 @@ AddComponentPostInit("boatphysics", function(self, inst) -- 给船和保险杠�
         end
         return nil, false, { self, dir_x, dir_z, force }
     end)
-end)
+end)]]
 
 ----------------------------------------------------------------------------------------------------
-
+--[[
 -- 让原版坟墓也能挖出海难玩具
 local trinkets_sw = { "trinket_sw_23" }
 AddPrefabPostInit("trinket_1", function() -- 定义在prefab里面，延迟修改
@@ -771,10 +773,10 @@ AddPrefabPostInit("warningshadow", function(inst)
         inst.components.colourtweener:StartTween({ 1, 1, 1, .75 }, times)
         inst.components.sizetweener:StartTween(.5, times, inst.Remove)
     end
-end)
+end)]]
 
 ----------------------------------------------------------------------------------------------------
-
+    --[[
 -- scripts/widgets/image
 AddClassPostConstruct("widgets/image", function(self)
     Utils.FnDecorator(self, "SetTexture", function(atlas, tex, default_tex)
@@ -833,7 +835,7 @@ AddPrefabPostInit("meatrack", function(inst)
     end
 
     inst.components.dryer:SetDoneDryingFn(OnDoneDrying)
-    --[[
+
     local _StartDrying = inst.components.dryer.StartDrying
     local function StartDrying(self, dryable, ...)
         if inst:GetIsInInterior() then
@@ -844,7 +846,7 @@ AddPrefabPostInit("meatrack", function(inst)
         return _StartDrying(self, dryable, ...)
     end
 
-    inst.components.dryer.StartDrying = StartDrying]]
+    inst.components.dryer.StartDrying = StartDrying
 end)
 
 AddPrefabPostInit("mosquitosack", function(inst)
@@ -853,8 +855,8 @@ AddPrefabPostInit("mosquitosack", function(inst)
     inst:AddComponent("fuel")
     inst.components.fuel.fueltype = FUELTYPE.BLOOD --新燃料值：血，可以用蚊子血嚢给蝙蝠帽回耐久
     inst.components.fuel.fuelvalue = TUNING.TOTAL_DAY_TIME * .5
-end)
-
+end)]]
+--[[
 AddComponentPostInit("combat", function(self)
     function self:GetWeapon()
         if self.inst.components.inventory ~= nil then
@@ -953,7 +955,7 @@ end)
 
 AddPlayerPostInit(function(inst)
     local function fn(ent)
-        if ent == GLOBAL.TheWorld then --[[
+        if ent == GLOBAL.TheWorld then 
 	        local tuning = TUNING.GOGGLES_HEAT.GROUND
 			 ent.Map:SetMultColour(unpack(tuning.MULT_COLOUR))
 			 ent.Map:SetAddColour(unpack(tuning.ADD_COLOUR))
@@ -963,7 +965,7 @@ AddPlayerPostInit(function(inst)
 			 if waves then
 			 	waves:SetMultColour(unpack(tuning.MULT_COLOUR))
 			 	waves:SetAddColour(unpack(tuning.ADD_COLOUR))
-			 end]]
+			 end
             return
         end
         if ent.AnimState then
@@ -1077,12 +1079,12 @@ AddComponentPostInit("playervision", function(self)
             old_UpdateCCTable(self, ...)
         end
     end
-end)
+end)]]
 
 --------------------------------------------------------------------------
 --[[ 让蘑菇农场能种植新东西 ]] --来自老版棱镜，感谢梧桐山大佬的无私分享！
 --------------------------------------------------------------------------
-
+--[[
 local mushroom_farm_seeds = {
     cutlichen = { product = "cutlichen", produce = 4 },
     foliage = { product = "foliage", produce = 6 },
@@ -1168,7 +1170,7 @@ AddPrefabPostInit("mushroom_farm", function(inst)
 end)
 
 
--- 添加猪镇和暴食地皮挖起的特殊掉落
+添加猪镇和暴食地皮挖起的特殊掉落
 local SpeciaTileDrop =
 {
     [WORLD_TILES.PIGRUINS] = "cutstone",
@@ -1231,4 +1233,4 @@ AddComponentPostInit("actionqueuer", function(self)
         self.AddActionList("autocollect", "HACK", "HACK1")
         self.AddActionList("noworkdelay", "HACK", "HACK1")
     end
-end)
+end)]]

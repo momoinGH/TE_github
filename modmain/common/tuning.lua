@@ -329,11 +329,12 @@ TUNING.STARTING_ITEM_IMAGE_OVERRIDE["surfboard_item"] = {
 --glass---------------------------
 ----------------------------------
 TUNING.SWP_SHARD_DMG = {
-    BEAK = 34,
+    BEAK = 51,
     SWORD = 50,
     SHADOW_MODIFIER_MINIMUM = 2,
     SHADOW_MODIFIER_MAXIMUM = 8,
-    STRUCTURE_MODIFIER = 5,
+    STRUCTURE_MODIFIER = 3,
+    SWEEP_MODIFIER = .5,
 }
 
 local dm = 1.5
