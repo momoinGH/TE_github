@@ -1,3 +1,5 @@
+local upvaluehelper = require("tools/upvaluehelper")
+
 AddComponentPostInit("hounded", function(cmp)
     cmp.inst:DoTaskInTime(0, function()
         local _spawndata = upvaluehelper.Get(cmp.SetSpawnData, "_spawndata")

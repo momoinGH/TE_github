@@ -128,7 +128,7 @@ GLOBAL.WIKI_DATA = nil
 modimport "modmain/componentactions" --AddComponentAction比较特殊，如果mod的分开写就会前后覆盖
 modimport "scripts/prefabs/tropical_farm_plant_defs"
 modimport "modmain/common/interiorminimap"
-modimport "modmain/common/postinit"
+modimport "modmain/postinit"
 
 modimport "modmain/pro_componentaction"                --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
 
