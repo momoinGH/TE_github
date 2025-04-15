@@ -1,5 +1,5 @@
 -- 身上总钱数
-local function HasMoney(self)
+local function GetMoney(self)
     local money = 0
 
     local _, oincamount = self:Has("oinc", 0)
@@ -103,13 +103,13 @@ local function IsItemNameEquippedClient(self, item_name)
 end
 
 AddComponentPostInit("inventory", function(self)
-    self.HasMoney = HasMoney
+    self.GetMoney = GetMoney
     self.PayMoney = PayMoney
 
     self.IsItemNameEquipped = IsItemNameEquipped
 end)
 
 AddClassPostConstruct("components/inventory_replica", function(self)
-    self.HasMoney = HasMoney
+    self.GetMoney = GetMoney
     self.IsItemNameEquipped = IsItemNameEquippedClient
 end)
