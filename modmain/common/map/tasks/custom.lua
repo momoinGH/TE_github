@@ -1948,7 +1948,7 @@ AddRoom("chickenbiomeset", {
         {
             quagmire_beefalo = 4,
             beefalo = 1,
-            galinheiro = 2,
+            chickenhouse = 2,
             grass_patch = 2,
         }
     }
@@ -1971,7 +1971,7 @@ AddRoom("chickenbiome", {
 
         countprefabs =
         {
-            galinheiro = 2,
+            chickenhouse = 2,
             grass_patch = 2,
         }
     }

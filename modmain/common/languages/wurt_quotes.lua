@@ -1477,7 +1477,7 @@ GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.HIPPO_ANTLER                   = "Is ver
 STRINGS.CHARACTERS.WURT.DESCRIBE.RHINOCEBROSBATTLE                     = "They not so tough, flort!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.SWINECLOPSBATTLE                      = "Glurt!!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.LAVARENAESCADA2                       = "Fighty folk keep coming from there."
-STRINGS.CHARACTERS.WURT.DESCRIBE.GALINHEIRO                            = "Silly-looking birdies live here, florp."
+STRINGS.CHARACTERS.WURT.DESCRIBE.CHICKENHOUSE                            = "Silly-looking birdies live here, florp."
 ------------------------------------creeps------------------------------------
 STRINGS.CHARACTERS.WURT.DESCRIBE.STUNGRAYUNDERWATER                    = "Glargh! Good thing it under water!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.DOGFISH_UNDER                         = "Come up and play cute doggy!"

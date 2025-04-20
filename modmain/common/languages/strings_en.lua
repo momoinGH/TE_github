@@ -691,7 +691,7 @@ STRINGS.NAMES.WEEVOLE_CARAPACE                                                  
 STRINGS.NAMES.TEATREE_SAPLING                                                   = "Tea Tree Sapling"
 STRINGS.NAMES.WATERCHEST1                                                       = "Water Chest"
 STRINGS.NAMES.WEREWILBAFUR_HEAD                                                 = "Body Hair"
-STRINGS.NAMES.GALINHEIRO                                                        = "Chicken House"
+STRINGS.NAMES.CHICKENHOUSE                                                        = "Chicken House"
 STRINGS.NAMES.ANTMAN2                                                           = "Antman"
 STRINGS.NAMES.FLOWERS_LAKE                                                      = "Goddess Spring Flowers"
 STRINGS.NAMES.BLUBBER                                                           = "Blubber"
@@ -3929,7 +3929,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAMPFIRE_HIGH                               
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUNGPILE_PICKED                             = "Dung and dung."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_19_INV                      = "装在身上会不会把我刺穿？"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FENNEL_PLANTED                              = "一种香料作物。"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GALINHEIRO                                  = "Chicken House."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CHICKENHOUSE                                  = "Chicken House."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIKIHEAD                                    = {
     "Give gold or gems to it!",
 
@@ -5664,7 +5664,7 @@ STRINGS.RECIPE_DESC.FORBIDDEN_FRUIT                                             
 STRINGS.RECIPE_DESC.RENO_SHELVES_MARBLE                                         = "Classic, yet avant-garde."
 STRINGS.RECIPE_DESC.WINDYFAN                                                    = "Own the full force of the wind!"
 STRINGS.RECIPE_DESC.GODDESS_LANTERN                                             = "A fun way to use more of goddess's powers."
-STRINGS.RECIPE_DESC.GALINHEIRO                                                  = "Chicken House."
+STRINGS.RECIPE_DESC.CHICKENHOUSE                                                  = "Chicken House."
 STRINGS.RECIPE_DESC.RENO_CORNERBEAM_WOOD                                        = "Wood Pillar"
 STRINGS.RECIPE_DESC.USEDFAN                                                     = "A vessel for the goddess's power."
 STRINGS.RECIPE_DESC.GODDESS_FIGURE                                              = "Make the goddess repel foes and fire!"

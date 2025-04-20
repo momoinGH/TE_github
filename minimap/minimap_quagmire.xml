@@ -2,7 +2,7 @@
 <Atlas>
     <Texture filename="minimap_quagmire.tex"/>
     <Elements>
-        <Element name="galinheiro.png" u1="0.000976563" u2="0.124023" v1="0.751953" v2="0.998047"/>
+        <Element name="chickenhouse.png" u1="0.000976563" u2="0.124023" v1="0.751953" v2="0.998047"/>
         <Element name="goatkid.png" u1="0.000976563" u2="0.124023" v1="0.501953" v2="0.748047"/>
         <Element name="goatmum.png" u1="0.000976563" u2="0.124023" v1="0.251953" v2="0.498047"/>
         <Element name="gorge_portal.png" u1="0.000976563" u2="0.124023" v1="0.00195313" v2="0.248047"/>

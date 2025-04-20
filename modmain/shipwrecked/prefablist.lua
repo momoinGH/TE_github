@@ -231,7 +231,7 @@ PrefabFiles = {
   "pandaskin",
   "pandatree",
   "shipwrecked_flood",
-  "galinheiro",
+  "chickenhouse",
   "palmleaf_umbrella",
   "blowdart_sw",
   "piratihatitator",
