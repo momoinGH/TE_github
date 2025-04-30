@@ -8,6 +8,7 @@ local assets =
 local prefabs =
 {
     "chicken",
+    "bird_egg",
 }
 
 local function onbuilt(inst)
@@ -18,6 +19,13 @@ end
 local function onhammered(inst, worker)
     if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() then
         inst.components.burnable:Extinguish()
+    end
+    if inst.components.harvestable and inst.components.harvestable:CanBeHarvested() then
+        local num_eggs = inst.components.harvestable.produce
+        for i = 1, num_eggs do
+            local egg = SpawnPrefab("bird_egg")
+            egg.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        end
     end
     inst:RemoveComponent("childspawner")
     inst.components.lootdropper:DropLoot()
@@ -80,11 +88,24 @@ local function onsave(inst, data)
     if inst:HasTag("burnt") or (inst.components.burnable ~= nil and inst.components.burnable:IsBurning()) then
         data.burnt = true
     end
+    if inst.components.harvestable then
+        data.egg_count = inst.components.harvestable.produce
+    end
 end
 
 local function onload(inst, data)
     if data ~= nil and data.burnt then
         inst.components.burnable.onburnt(inst)
+    end
+    if data and data.egg_count and inst.components.harvestable then
+        inst.components.harvestable.produce = data.egg_count
+    end
+    if inst.components.childspawner ~= nil then
+        if TheWorld.state.isday and not inst:HasTag("burnt") then
+            StartSpawning(inst)
+        else
+            StopSpawning(inst)
+        end
     end
 end
 
@@ -104,8 +125,40 @@ local function OnIsDay(inst, isday)
     else
         StopSpawning(inst)
     end
+    if inst.components.harvestable then
+        local has_chicken =  inst.components.childspawner.childreninside > 0
+        local can_produce = has_chicken and inst.components.harvestable.produce < inst.components.harvestable.maxproduce
+        if can_produce then
+            if not inst._egg_production_task then
+                inst._egg_production_task = inst:DoPeriodicTask(TUNING.DAY_TIME, function()
+                    if inst.components.harvestable.produce < inst.components.harvestable.maxproduce then
+                        inst.components.harvestable.produce = inst.components.harvestable.produce + 1
+                    end
+                end)
+            end
+        else
+            if inst._egg_production_task then
+                inst._egg_production_task:Cancel()
+                inst._egg_production_task = nil
+            end
+        end
+    end
 end
 
+local function onharvest(inst, picker)
+    local num_eggs = inst.components.harvestable.produce
+    for i = 1, num_eggs do
+        local egg = SpawnPrefab("bird_egg")
+        if picker.components.inventory then
+            picker.components.inventory:GiveItem(egg)
+        else
+            egg.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        end
+    end
+    inst.components.harvestable.produce = 0
+    inst.AnimState:PlayAnimation("hit")
+    inst.AnimState:PushAnimation("idle")
+end
 
 local function fn()
     local inst = CreateEntity()
@@ -153,10 +206,7 @@ local function fn()
     inst.components.childspawner:SetMaxChildren(3)
     inst.components.childspawner:SetMaxEmergencyChildren(1)
 
-
     inst:WatchWorldState("isday", OnIsDay)
-
-    StartSpawning(inst)
 
     MakeMediumBurnable(inst, TUNING.MED_BURNTIME)
     MakeLargePropagator(inst)
@@ -171,6 +221,10 @@ local function fn()
     inst.OnLoad = onload
 
     inst:ListenForEvent("onbuilt", onbuilt)
+
+    inst:AddComponent("harvestable")
+    inst.components.harvestable:SetUp("bird_egg", 3, nil, onharvest, nil)
+    inst.components.harvestable.produce = 0
 
     return inst
 end
