@@ -1,4 +1,3 @@
---- 暴食食物
 local Mealable = Class(function(self, inst)
     self.inst = inst
 

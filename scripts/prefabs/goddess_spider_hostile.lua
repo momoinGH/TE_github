@@ -20,11 +20,11 @@ end
 
 function GetOtherSpiders(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    return TheSim:FindEntities(x, y, z, 15, { "spider" }, { "FX", "NOCLICK", "DECOR", "INLIMBO" })
+    return TheSim:FindEntities(x, y, z, 15,  { "spider" }, { "FX", "NOCLICK", "DECOR", "INLIMBO" })
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
-    if inst.components.eater:CanEat(item) then
+    if inst.components.eater:CanEat(item) then  
         inst.sg:GoToState("eat", true)
 
         local playedfriendsfx = false
@@ -35,8 +35,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
             giver:PushEvent("makefriend")
             playedfriendsfx = true
             giver.components.leader:AddFollower(inst)
-            inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() * TUNING
-            .SPIDER_LOYALTY_PER_HUNGER)
+            inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() * TUNING.SPIDER_LOYALTY_PER_HUNGER)
         end
 
         if giver.components.leader ~= nil then
@@ -58,8 +57,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
                         playedfriendsfx = true
                     end
                     giver.components.leader:AddFollower(v)
-                    v.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() *
-                    TUNING.SPIDER_LOYALTY_PER_HUNGER)
+                    v.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() * TUNING.SPIDER_LOYALTY_PER_HUNGER)
                 end
                 maxSpiders = maxSpiders - 1
 
@@ -92,18 +90,16 @@ local function FindTarget(inst, radius)
 end
 
 local function NormalRetarget(inst)
-    return FindTarget(inst,
-        inst.components.knownlocations:GetLocation("investigate") ~= nil and TUNING.SPIDER_INVESTIGATETARGET_DIST or
-        TUNING.SPIDER_TARGET_DIST)
+    return FindTarget(inst, inst.components.knownlocations:GetLocation("investigate") ~= nil and TUNING.SPIDER_INVESTIGATETARGET_DIST or TUNING.SPIDER_TARGET_DIST)
 end
 
 local function keeptargetfn(inst, target)
-    return target ~= nil
+   return target ~= nil
         and target.components.combat ~= nil
         and target.components.health ~= nil
         and not target.components.health:IsDead()
         and not (inst.components.follower ~= nil and
-            (inst.components.follower.leader == target or inst.components.follower:IsLeaderSame(target)))
+                (inst.components.follower.leader == target or inst.components.follower:IsLeaderSame(target)))
 end
 
 local function BasicWakeCheck(inst)
@@ -187,7 +183,7 @@ end
 
 local function create_goddess_spider()
     local inst = CreateEntity()
-
+    
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
@@ -226,7 +222,7 @@ local function create_goddess_spider()
 
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
-    inst.components.locomotor:SetSlowMultiplier(1)
+    inst.components.locomotor:SetSlowMultiplier( 1 )
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
 
@@ -239,11 +235,11 @@ local function create_goddess_spider()
     inst.components.lootdropper:AddRandomHauntedLoot("spidergland", 1)
     inst.components.lootdropper.numrandomloot = 1
 
-    ---------------------
+    ---------------------        
     MakeMediumBurnableCharacter(inst, "body")
     MakeMediumFreezableCharacter(inst, "body")
     inst.components.burnable.flammability = TUNING.SPIDER_FLAMMABILITY
-    ---------------------
+    ---------------------       
 
     inst:AddComponent("health")
     inst:AddComponent("combat")
@@ -287,10 +283,10 @@ local function create_goddess_spider()
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura
 
-    inst.components.health:SetMaxHealth(TUNING.SPIDER_HEALTH * 2)
+	inst.components.health:SetMaxHealth(TUNING.SPIDER_HEALTH*2)
 
-    inst.components.combat:SetDefaultDamage(TUNING.SPIDER_DAMAGE * 2)
-    inst.components.combat:SetAttackPeriod(TUNING.SPIDER_ATTACK_PERIOD * 0.5)
+    inst.components.combat:SetDefaultDamage(TUNING.SPIDER_DAMAGE*2)
+    inst.components.combat:SetAttackPeriod(TUNING.SPIDER_ATTACK_PERIOD*0.5)
     inst.components.combat:SetRetargetFunction(1, NormalRetarget)
 
     inst.components.locomotor.walkspeed = TUNING.SPIDER_WALK_SPEED
@@ -298,7 +294,7 @@ local function create_goddess_spider()
 
     inst.components.sanityaura.aura = -TUNING.SANITYAURA_SMALL
 
-
+	
     MakeHauntablePanic(inst)
 
     inst:SetBrain(brain)
@@ -307,7 +303,7 @@ local function create_goddess_spider()
 
     inst:WatchWorldState("iscaveday", OnIsCaveDay)
     OnIsCaveDay(inst, TheWorld.state.iscaveday)
-
+	
     inst.SoundPath = SoundPath
 
     --inst:SetIncineratedSound(SoundPath(inst, "die"))	

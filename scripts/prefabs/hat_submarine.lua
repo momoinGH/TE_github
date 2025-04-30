@@ -8,24 +8,24 @@ local function onequip(inst, owner)
 	owner.AnimState:OverrideSymbol("swap_hat", "snorkll", "swap_hat")
 	owner.AnimState:Show("HAT")
 	owner.AnimState:Show("HAT_HAIR")
-
+	
 	owner.AnimState:Hide("HAIR_NOHAT")
-	owner.AnimState:Hide("HAIR")
-
-
+    owner.AnimState:Hide("HAIR")
+	
+	
 	if owner:HasTag("player") then
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Show("HEAD_HAIR")
 	end
-
+	
 	if owner.components.health then -- for robots
 		owner:DoTaskInTime(0, function(wilson)
 			wilson.components.health:RecalculatePenalty()
 		end)
 	end
-
+	
 	if inst.components.fueled then
-		inst.components.fueled:StartConsuming()
+		inst.components.fueled:StartConsuming()        
 	end
 end
 
@@ -40,8 +40,8 @@ local function onunequip(inst, owner)
 		owner.AnimState:Show("HEAD")
 		owner.AnimState:Show("HEAD_HAIR")
 	end
-
-	if owner.components.health then -- for robots
+	
+    if owner.components.health then -- for robots
 		owner:DoTaskInTime(0, function(wilson)
 			wilson.components.health:RecalculatePenalty()
 		end)
@@ -54,7 +54,7 @@ end
 
 local function fn()
 	local inst = CreateEntity()
-	inst.entity:AddNetwork()
+    inst.entity:AddNetwork()	
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	MakeInventoryPhysics(inst)
@@ -67,19 +67,20 @@ local function fn()
 	-- Tags
 	inst:AddTag("hat")
 
-	inst.entity:SetPristine()
+    inst.entity:SetPristine()
 
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
+    if not TheWorld.ismastersim then
+        return inst
+    end	
+	
 	-- Misc components
 	inst:AddComponent("inspectable")
 	inst:AddComponent("tradable")
-
+	
 	-- Inventory item
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.imagename = "hat_submarine"
+	inst.components.inventoryitem.imagename = "hat_submarine"	
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/creepindedeepinventory.xml"
 
 	-- Equippable
 	inst:AddComponent("equippable")
@@ -89,15 +90,15 @@ local function fn()
 
 	-- Fueled
 	inst:AddComponent("fueled")
-	inst.components.fueled.fueltype = FUELTYPE.USAGE
-	inst.components.fueled:InitializeFuelLevel(TUNING.HAT_SNORKEL_PERISHTIME)
-	inst.components.fueled:SetDepletedFn(inst.Remove)
-
+	inst.components.fueled.fueltype = "USAGE"
+	inst.components.fueled:InitializeFuelLevel(UW_TUNING.HAT_SNORKEL_PERISHTIME)
+	inst.components.fueled:SetDepletedFn(function() inst:Remove() end)
+	
 	-- Oxygen
 	inst:AddComponent("oxygenapparatus")
 	inst.components.oxygenapparatus:SetReductionPercentage(0.95)
-
+	
 	return inst
 end
 
-return Prefab("hat_submarine", fn, assets)
+return Prefab( "common/inventory/hat_submarine", fn, assets)

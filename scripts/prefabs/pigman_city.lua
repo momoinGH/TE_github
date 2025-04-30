@@ -1,4 +1,22 @@
-local InteriorSpawnerUtils = require("interiorspawnerutils")
+require "brains/citypigbrain"
+require "brains/pigguardbrain"
+require "brains/werepigbrain"
+require "stategraphs/SGpig_city"
+require "stategraphs/SGwerepig"
+
+local total_day_time = 480
+local seg_time = 30
+local PIG_DAMAGE = 33
+local PIG_HEALTH = 250
+local PIG_ATTACK_PERIOD = 3
+local PIG_TARGET_DIST = 16
+local PIG_LOYALTY_MAXTIME = 2.5 * total_day_time
+local PIG_LOYALTY_PER_HUNGER = total_day_time / 25
+local PIG_MIN_POOP_PERIOD = seg_time * .5
+local PIG_RUN_SPEED = 5
+local PIG_WALK_SPEED = 3
+local CITY_PIG_GUARD_TARGET_DIST = 20
+local SPRING_COMBAT_MOD = 1.33
 
 local assets =
 {
@@ -24,6 +42,12 @@ local assets =
     Asset("ANIM", "anim/townspig_actions.zip"),
     Asset("ANIM", "anim/pig_royalguard_2.zip"),
     Asset("ANIM", "anim/townspig_shop_wip.zip"),
+
+    Asset("ANIM", "anim/pig_eskimo.zip"),
+    Asset("ANIM", "anim/pig_royalguard_rich.zip"),
+    Asset("ANIM", "anim/pig_royalguard_rich_2.zip"),
+    Asset("ANIM", "anim/pig_royalguard_3.zip"),
+    Asset("ANIM", "anim/pig_shopkeeper.zip"),
 }
 
 local prefabs =
@@ -35,15 +59,14 @@ local prefabs =
     "halberd",
     "strawhat",
     "monstermeat",
-    "pigcrownhat",
-    "pig_scepter",
+    --    "pigcrownhat",
+    --    "pig_scepter",
     "pigman_shopkeeper_desk",
-    "pedestal_key",
-    "firecrackers",
 }
 
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
+
 
 local function getSpeechType(inst, speech)
     local line = speech.DEFAULT
@@ -59,28 +82,53 @@ local function getSpeechType(inst, speech)
     return line
 end
 
+local function OnTimerDone(inst, data)
+    if data.name == "vaiembora" then
+        local invader = GetClosestInstWithTag("player", inst, 25)
+        if not invader then
+            inst:Remove()
+        else
+            inst.components.timer:StartTimer("vaiembora", 10)
+        end
+    end
+end
+
 local function shopkeeper_speech(inst, speech)
-    if not inst.components.combat.target and not inst:IsInLimbo() then
-        inst.components.talker:Say(speech)
+    if inst:IsValid() and not inst:IsAsleep() and not inst.components.combat.target and not inst:IsInLimbo() then
+        inst.sayline(inst, speech)
+        --inst.components.talker:Say(speech, 1.5, nil, true)
+    end
+end
+
+local function closeshop(inst)
+    if inst:IsValid() and not inst:IsAsleep() and not inst.components.combat.target and not inst:IsInLimbo() then
+        inst.sg:GoToState("idle")
+        shopkeeper_speech(inst, STRINGS.CITY_PIG_SHOPKEEPER_CLOSING
+            [math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_CLOSING)])
     end
 end
 
 local function spawndesk(inst, spawndesk)
     if spawndesk then
-        local desk = SpawnPrefab("pigman_shopkeeper_desk")
-        desk.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        inst.components.entitytracker:TrackEntity("home", desk)
+        local desklocation = Vector3(inst.Transform:GetWorldPosition())
+        if inst.desklocation then
+            desklocation = inst.desklocation
+        end
+        inst.desk = SpawnPrefab("pigman_shopkeeper_desk")
+        inst.desk.Transform:SetPosition(desklocation.x, desklocation.y, desklocation.z)
+        inst:AddComponent("homeseeker")
+        inst.components.homeseeker:SetHome(inst.desk)
     else
-        local desk = inst.components.entitytracker:GetEntity("home")
-        if desk then
-            inst.components.entitytracker:ForgetEntity("home")
-            desk:Remove()
+        inst.desklocation = Vector3(inst.Transform:GetWorldPosition())
+        if inst.desk then
+            inst.desk:Remove()
+            inst.desk = nil
         end
     end
 end
 
-local function separatedesk(inst, separate)
-    if separate then
+local function separatedesk(inst, separatedesk)
+    if separatedesk then
         inst:RemoveTag("atdesk")
         inst.AnimState:Hide("desk")
         spawndesk(inst, true)
@@ -88,15 +136,18 @@ local function separatedesk(inst, separate)
         inst.Physics:SetMass(50)
     else
         ChangeToObstaclePhysics(inst)
-        local desk = inst.components.entitytracker:GetEntity("home")
-        if desk then
-            local x, y, z = desk.Transform:GetWorldPosition()
+        if inst.desk then
+            local x, y, z = inst.desk.Transform:GetWorldPosition()
             inst.Transform:SetPosition(x, y, z)
         end
         spawndesk(inst, false)
         inst:AddTag("atdesk")
         inst.AnimState:Show("desk")
     end
+end
+
+local function sayline(inst, line, mood)
+    inst.components.talker:Say(line, 1.5, nil, true, mood)
 end
 
 local function ontalk(inst, script, mood)
@@ -123,6 +174,17 @@ local function ontalk(inst, script, mood)
     end
 end
 
+local function ontalkfinish(inst)
+    inst.SoundEmitter:KillSound("talk")
+end
+
+local function SpringMod(amt)
+    if TheWorld.state.isspring then
+        return amt * SPRING_COMBAT_MOD
+    else
+        return amt
+    end
+end
 
 local function CalcSanityAura(inst, observer)
     if inst.components.werebeast
@@ -137,131 +199,12 @@ local function CalcSanityAura(inst, observer)
     return 0
 end
 
-local function getstatus(inst)
-    if inst:HasTag("guard") then
-        return "GUARD"
-    elseif inst.components.follower.leader ~= nil then
-        return "FOLLOWER"
-    end
-end
-
-local function special_action(inst)
-    if inst.daily_gifting then
-        inst.sg:GoToState("daily_gift")
-    elseif inst.poop_tip then
-        inst.sg:GoToState("poop_tip")
-    elseif inst:HasTag("paytax") then
-        inst.sg:GoToState("pay_tax")
-    end
-end
-
---- 当皇家守卫因脱离加载消失时减少老板重新召唤的冷却，防止玩家通过离开加载范围卡bug
-local function vanishfn(inst)
-    local owner = inst.components.entitytracker:GetEntity("owner")
-    local left = owner and owner.components.timer:GetTimeLeft("guards_called")
-    if left then
-        owner.components.timer:StopTimer("guards_called")
-        if left - 30 > 0 then
-            owner.components.timer:StartTimer("guards_called", left - 60)
-        end
-    end
-end
-
-local function GuardSetTemp(inst)
-    inst.temp_spawn = true
-    inst:AddComponent("vanish_on_sleep")
-    inst.components.vanish_on_sleep.vanishfn = vanishfn
-end
-
-local function OnSave(inst, data)
-    data.children = {}
-
-    if inst.torch then
-        table.insert(data.children, inst.torch.GUID)
-        data.torch = inst.torch.GUID
-    end
-    if inst.axe then
-        table.insert(data.children, inst.axe.GUID)
-        data.axe = inst.axe.GUID
-    end
-
-    if inst:HasTag("atdesk") then
-        data.atdesk = true
-    end
-
-    data.temp_spawn = inst.temp_spawn
-    if inst.task_guard1 or inst.task_guard2 then
-
-    end
-    -- end shopkeeper stuff
-
-    if inst:HasTag("angry_at_player") then
-        data.angryatplayer = true
-    end
-
-    if inst.equipped then
-        data.equipped = true
-    end
-
-    if inst:HasTag("recieved_trinket") then
-        data.recieved_trinket = true
-    end
-
-    if inst:HasTag("paytax") then
-        data.paytax = true
-    end
-
-    if inst.daily_gift then
-        data.daily_gift = inst.daily_gift
-    end
-
-    if data.children and #data.children > 0 then
-        return data.children
-    end
-end
-
-local function OnLoad(inst, data)
-    if data then
-        if data.atdesk then
-            inst.sg:GoToState("desk")
-        end
-
-        if data.temp_spawn then
-            GuardSetTemp(inst)
-        end
-
-        if data.equipped then
-            inst.equipped = true
-        end
-
-        if data.angryatplayer then
-            inst:AddTag("angry_at_player")
-        end
-
-        if data.recieved_trinket then
-            inst:AddTag("recieved_trinket")
-        end
-
-        if data.paytax then
-            inst:AddTag("paytax")
-        end
-
-        if data.daily_gift then
-            inst.daily_gift = data.daily_gift
-        end
-    end
-end
-
 local function ShouldAcceptItem(inst, item)
-    if inst.components.sleeper:IsAsleep() then
+    if inst.components.sleeper and inst.components.sleeper:IsAsleep() then
         return false
     end
 
-    if item.components.unwrappable then
-        return true
-    end
-
-    if inst.components.eater:CanEat(item) then
+    if item.components.edible then
         if (item.components.edible.foodtype == "MEAT" or item.components.edible.foodtype == "HORRIBLE")
             and inst.components.follower.leader
             and inst.components.follower:GetLoyaltyPercent() > 0.9 then
@@ -269,22 +212,8 @@ local function ShouldAcceptItem(inst, item)
         end
 
         if (item.components.edible.foodtype == "VEGGIE" or item.components.edible.foodtype == "RAW") then
-            local econ = TheWorld.components.economy
-            local econprefab = inst.prefab
-            if inst.econprefab then
-                econprefab = inst.econprefab
-            end
-            local wanteditems = econ:GetTradeItems(econprefab)
-            local wantitem = false
-            for i, wanted in ipairs(wanteditems or {}) do
-                if wanted == item.prefab then
-                    wantitem = true
-                    break
-                end
-            end
-
             local last_eat_time = inst.components.eater:TimeSinceLastEating()
-            if not wantitem and last_eat_time and last_eat_time < TUNING.PIG_MIN_POOP_PERIOD then
+            if last_eat_time and last_eat_time < TUNING.PIG_MIN_POOP_PERIOD then
                 return false
             end
 
@@ -294,11 +223,11 @@ local function ShouldAcceptItem(inst, item)
         end
     end
 
-    if item.prefab == "oinc" or item.prefab == "oinc10" or item.prefab == "oinc100" then --or trinket_giftshop `
+    if item.prefab == "oinc" or item.prefab == "oinc10" or item.prefab == "oinc100" then --or trinket_giftshop
         return true
     end
 
-    if not inst:HasTag("guard") then
+    if not inst:HasTag("guard") or inst.prefab == "pig_eskimo" then
         local city = 1
         if inst:HasTag("city2") then
             city = 2
@@ -312,7 +241,6 @@ local function ShouldAcceptItem(inst, item)
 
         local wanteditems = econ:GetTradeItems(econprefab)
         local desc = econ:GetTradeItemDesc(econprefab)
-        --local wantednum =   econ:GetNumberWanted(econprefab,city)
 
         local wantitem = false
         for i, wanted in ipairs(wanteditems) do
@@ -320,11 +248,6 @@ local function ShouldAcceptItem(inst, item)
                 wantitem = true
                 break
             end
-        end
-        print(item.prefab, inst.prefab)
-        if item.prefab == "purplegem" and (inst.prefab == "pigman_banker" or inst.prefab == "pigman_banker_shopkeep") then
-            inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_PURPLEGEM))
-            return false
         end
 
         if (item.prefab == "trinket_giftshop_1" or item.prefab == "trinket_giftshop_3") and inst:HasTag("city1") and not inst:HasTag("recieved_trinket") then
@@ -341,12 +264,13 @@ local function ShouldAcceptItem(inst, item)
             end
 
             local delay = econ:GetDelay(econprefab, city, inst)
-            if delay > 0 then
-                if delay == 1 then
-                    inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY_TOMORROW))
+            if inst:HasTag("troqueihoje") and not (inst.prefab == "pigman_storeowner" or inst.prefab == "pigman_banker" or inst.prefab == "pigman_mayor" or inst.prefab == "pigman_queen" or inst.prefab == "pigman_professor" or inst.prefab == "pigman_collector" or inst.prefab == "pigman_mechanic" or inst.prefab == "pigman_storeowner_shopkeep" or inst.prefab == "pigman_banker_shopkeep" or inst.prefab == "pigman_mayor_shopkeep" or inst.prefab == "pigman_professor_shopkeep" or inst.prefab == "pigman_collector_shopkeep" or inst.prefab == "pigman_mechanic_shopkeep") then
+                if inst:HasTag("troqueihoje") then
+                    inst.sayline(inst, getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY_TOMORROW))
                     --inst.components.talker:Say(  getSpeechType(inst,STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY_TOMORROW) )
                 else
-                    inst.components.talker:Say(string.format(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY), tostring(delay)))
+                    inst.sayline(inst,
+                        string.format(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY), tostring(delay)))
                     --inst.components.talker:Say( string.format( getSpeechType(inst,STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY), tostring(delay) ) )
                 end
                 return false
@@ -356,17 +280,19 @@ local function ShouldAcceptItem(inst, item)
         else
             if item:HasTag("relic") then
                 if item.prefab == "relic_4" or item.prefab == "relic_5" then
-                    inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_PRICELESS_GIFT))
+                    inst.sayline(inst, getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_PRICELESS_GIFT))
+                elseif (inst.prefab == "pigman_collector_shopkeep" or inst.prefab == "pigman_collector") then
+                    return true
                 else
-                    inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_RELIC_GIFT))
+                    inst.sayline(inst, getSpeechType(inst, STRINGS.CITY_PIG_TALK_RELIC_GIFT))
                     --inst.components.talker:Say( getSpeechType(inst,STRINGS.CITY_PIG_TALK_RELIC_GIFT) )
                 end
             else
                 if item.prefab == "trinket_giftshop_1" or item.prefab == "trinket_giftshop_3" and inst:HasTag("city1") then
-                    inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_TRINKET_GIFT))
+                    inst.sayline(inst, getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_TRINKET_GIFT))
                 else
                     --HUGO
-                    inst.components.talker:Say(string.format(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_GIFT), desc))
+                    inst.sayline(inst, getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_GIFT))
                     --inst.components.talker:Say( string.format( getSpeechType(inst,STRINGS.CITY_PIG_TALK_REFUSE_GIFT), desc ) )
                 end
             end
@@ -383,118 +309,129 @@ local function ShouldAcceptItem(inst, item)
     return false
 end
 
----Runar: 打包交易,TE未测试
-local Trinkets = { "kabobs", "pumpkincookie", "taffy", "oinc", "butterflymuffin", "powcake" }
-local function OnAccept(inst, doer, item)
-    --- Trade items init
-    local Items = {}
-    local RewardList = {}
-    if item.components.unwrappable == nil then
-        Items[item] = true
-    else
-        if item.prefab == "bundle" then
-            RewardList["waxpaper"] = 1
+local function OnGetItemFromPlayer(inst, giver, item)
+    if not inst:HasTag("guard") or inst.prefab == "pig_eskimo" then -- or inst:HasTag("pigqueen")
+        local city = 1
+        if inst:HasTag("city2") then
+            city = 2
         end
-        for _, v in ipairs(item.components.unwrappable.itemdata) do
-            local tradeitem = SpawnPrefab(v.prefab, v.skinname, v.skin_id)
-            tradeitem:SetPersistData(v.data)
-            Items[tradeitem] = true
-        end
-    end
 
-    --- Sp trade actions
-    if inst:HasTag("guard") then
-        for item in pairs(Items) do
-            if item:HasTag("securitycontract") then
-                inst.SoundEmitter:PlaySound("dontstarve/common/makeFriend")
-                doer.components.leader:AddFollower(inst)
-                inst.components.follower:AddLoyaltyTime(TUNING.PIG_LOYALTY_MAXTIME)
-                Items[item] = false
+        --I wear hats (but should they? the art doesn't show)
+        if inst:HasTag("pigqueen") and item.components.equippable then
+            local behappy = false
+            if item.components.equippable.equipslot == EQUIPSLOTS.HEAD then
+                local current = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+                if current then
+                    inst.components.inventory:DropItem(current)
+                end
+
+                inst.components.inventory:Equip(item)
+                inst.AnimState:Show("hat")
+                behappy = true
+
+                --                if item.prefab == "pigcrownhat" and not Profile:IsCharacterUnlocked("wilba") then
+                --                    Profile:UnlockCharacter("wilba")
+                --                    Profile:Save()
+                --                end
+            end
+
+            --            if item.components.equippable.equipslot == EQUIPSLOTS.HANDS and item.prefab == "pig_scepter" then
+            --                inst.components.inventory:Equip(item)
+            --                behappy = true
+            --            end
+
+            if item.prefab == "relic_4" or item.prefab == "relic_5" then
+                behappy = true
+            end
+            if behappy then
+                inst:PushEvent("behappy")
+            end
+        end
+
+        local econ = TheWorld.components.economy
+
+        local econprefab = inst.prefab
+        if inst.econprefab then
+            econprefab = inst.econprefab
+        end
+
+        local wanteditems = econ:GetTradeItems(econprefab)
+        local desc = econ:GetTradeItemDesc(econprefab)
+        --local wantednum =   econ:GetNumberWanted(econprefab,city)
+
+        local wantitem = false
+        local trinket = false
+        for i, wanted in ipairs(wanteditems) do
+            if wanted == item.prefab then
+                wantitem = true
                 break
             end
         end
-    elseif inst:HasTag("pigqueen") then
-        local behappy = false
-        for item in pairs(Items) do
-            if item.prefab == "pigcrownhat" or item.prefab == "pig_scepter" then
-                inst.components.inventory:Equip(SpawnPrefab(item.prefab))
-                behappy = true
-            elseif item.prefab == "relic_4" or item.prefab == "relic_5" then
-                behappy = true
-            end
+
+        if item.prefab == "trinket_giftshop_1" or item.prefab == "trinket_giftshop_3" and inst:HasTag("city1") then
+            wantitem = true
+            trinket = true
         end
-        if behappy then
-            inst:PushEvent("behappy")
-        end
-    end
 
-    --- Handle trade
-    if not inst:HasTag("guard") then
-        local city = inst:HasTag("city2") and 2 or 1
-        local economy = TheWorld.components.economy
-        local econprefab = inst.econprefab or inst.prefab
+        if wantitem then
+            if trinket then
+                if giver.components.inventory then
+                    inst:AddTag("recieved_trinket")
+                    inst.sayline(inst, getSpeechType(inst, STRINGS.CITY_PIG_TALK_GIVE_TRINKET_REWARD))
 
-        local TradeItems = economy:GetTradeItems(econprefab)
-        local desc = economy:GetTradeItemDesc(econprefab)
+                    local reward = { "kabobs", "pumpkincookie", "taffy", "oinc", "butterflymuffin", "powcake" }
+                    local rewarditem = SpawnPrefab(reward[math.random(1, #reward)])
+                    giver.components.inventory:GiveItem(rewarditem, nil,
+                        Vector3(TheSim:GetScreenPos(inst.Transform:GetWorldPosition())))
 
-        for item in pairs(Items) do
-            if not inst:HasTag("pigqueen") and (item.prefab == "trinket_giftshop_1" or item.prefab == "trinket_giftshop_3" and inst:HasTag("city1")) then
-                inst:AddTag("recieved_trinket")
-                inst:sayline(getSpeechType(inst, STRINGS.CITY_PIG_TALK_GIVE_TRINKET_REWARD))
-                local reward = Trinkets[math.random(1, #Trinkets)]
-                RewardList[reward] = (RewardList[reward] or 0) + 1
-                Items[item] = false
-            else
-                for _, tradeitem in ipairs(TradeItems or {}) do
-                    if tradeitem == item.prefab then
-                        local reward, quanty = economy:MakeTrade(econprefab, city, inst, item.prefab)
-                        if reward then
-                            inst:AddTag("troqueihoje")
-                            inst:sayline(string.format(getSpeechType(inst, STRINGS.CITY_PIG_TALK_GIVE_REWARD),
-                                tostring(1), desc))
-                            if item.components.stackable then
-                                quanty = quanty * item.components.stackable.stacksize
-                            end
-                            RewardList[reward] = (RewardList[reward] or 0) + quanty
-                            Items[item] = false
-                        end
-                        break
-                    end
+                    return true
                 end
             end
+
+            local reward, qty = econ:MakeTrade(econprefab, city, inst)
+            if item.prefab ~= "pig_scepter" and item.prefab ~= "pigcrownhat" then
+                item:Remove()
+            end
+            if reward then
+                inst:AddTag("troqueihoje")
+                if giver.components.inventory then
+                    inst.sayline(inst,
+                        string.format(getSpeechType(inst, STRINGS.CITY_PIG_TALK_GIVE_REWARD), tostring(1), desc))
+                    --inst.components.talker:Say( string.format(getSpeechType(inst,STRINGS.CITY_PIG_TALK_GIVE_REWARD), tostring(1), desc ))--econ:GetNumberWanted(econprefab,city) ), desc ) )
+
+                    for i = 1, qty do
+                        local rewarditem = SpawnPrefab(reward)
+                        giver.components.inventory:GiveItem(rewarditem, nil,
+                            Vector3(TheSim:GetScreenPos(inst.Transform:GetWorldPosition())))
+                    end
+                end
+            else
+                inst.sayline(inst, string.format(getSpeechType(inst, STRINGS.CITY_PIG_TALK_TAKE_GIFT), tostring(1), desc))
+                --inst.components.talker:Say( string.format(getSpeechType(inst,STRINGS.CITY_PIG_TALK_TAKE_GIFT), tostring(1), desc ))--econ:GetNumberWanted(econprefab,city) ), desc ) )
+            end
+        end
+        if item:HasTag("relic") and (inst.prefab == "pigman_collector_shopkeep" or inst.prefab == "pigman_collector") then
+            if giver.components.inventory then
+                inst.sayline(inst, getSpeechType(inst, STRINGS.CITY_PIG_TALK_GIVE_RELIC_REWARD))
+                --inst.components.talker:Say( getSpeechType(inst,STRINGS.CITY_PIG_TALK_GIVE_RELIC_REWARD) )
+                local rewarditem = SpawnPrefab("oinc10")
+                giver.components.inventory:GiveItem(rewarditem, nil,
+                    Vector3(TheSim:GetScreenPos(inst.Transform:GetWorldPosition())))
+            end
         end
     end
 
-    --- Give rewards
-    for item, give in pairs(Items) do
-        if give then
-            doer.components.inventory:GiveItem(item, nil,
-                Vector3(TheSim:GetScreenPos(inst.Transform:GetWorldPosition())))
-        else
-            item:Remove()
-        end
-    end
-    RewardList["oinc100"] = (RewardList["oinc100"] or 0) + math.floor((RewardList["oinc10"] or 0) / 10) + math.floor((RewardList["oinc"] or 0) / 100)
-    RewardList["oinc10"] = (RewardList["oinc10"] or 0) % 10 + math.floor((RewardList["oinc"] or 0) % 100 / 10)
-    RewardList["oinc"] = (RewardList["oinc"] or 0) % 10
-    for reward, amount in pairs(RewardList) do
-        while amount > 0 do
-            local p = SpawnPrefab(reward)
-            if p.components.stackable then
-                local sz = math.clamp(amount, 1, p.components.stackable.maxsize)
-                p.components.stackable:SetStackSize(sz)
-                amount = amount - sz
-            else
-                amount = amount - 1
-            end
-            doer.components.inventory:GiveItem(p, nil, Vector3(TheSim:GetScreenPos(inst.Transform:GetWorldPosition())))
-        end
+    if inst:HasTag("guard") and item:HasTag("securitycontract") then
+        inst.SoundEmitter:PlaySound("dontstarve/common/makeFriend")
+        giver.components.leader:AddFollower(inst)
+        inst.components.follower:AddLoyaltyTime(TUNING.PIG_LOYALTY_MAXTIME)
+        item:Remove()
     end
 end
 
 local function OnRefuseItem(inst, item)
     inst.sg:GoToState("refuse")
-    if inst.components.sleeper:IsAsleep() then
+    if inst.components.sleeper and inst.components.sleeper:IsAsleep() then
         inst.components.sleeper:WakeUp()
     end
 end
@@ -511,9 +448,11 @@ local function OnEat(inst, food)
 
     if food.components.edible and (food.components.edible.foodtype == "VEGGIE") then --or food.components.edible.foodtype == "SEEDS") then
         local poop = SpawnPrefab("poop")
+        poop:AddTag("podepegar")
         poop.Transform:SetPosition(inst.Transform:GetWorldPosition())
 
-        GetWorld().components.periodicpoopmanager:OnPoop(poop.cityID, poop)
+        --        poop.cityID = inst.components.citypossession.cityID
+        --        TheWorld.components.periodicpoopmanager:OnPoop(poop.cityID, poop)
     end
 end
 
@@ -522,8 +461,8 @@ local function OnAttackedByDecidRoot(inst, attacker)
 
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = nil
-    if GetSeasonManager() and (GetSeasonManager():IsSpring() or GetSeasonManager():IsGreenSeason()) then
-        ents = TheSim:FindEntities(x, y, z, (SHARE_TARGET_DIST * TUNING.SPRING_COMBAT_MOD) / 2)
+    if TheWorld.state.isspring then
+        ents = TheSim:FindEntities(x, y, z, (SHARE_TARGET_DIST * SPRING_COMBAT_MOD) / 2)
     else
         ents = TheSim:FindEntities(x, y, z, SHARE_TARGET_DIST / 2)
     end
@@ -543,28 +482,47 @@ local function OnAttackedByDecidRoot(inst, attacker)
     end
 end
 
-local function callGuards(inst, attacker, id)
+local function callGuards(inst, attacker)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, InteriorSpawnerUtils.RADIUS, { "interior_door" })
-    if #ents > 0 then
-        local guardprefab = inst:HasTag("city2") and "pigman_royalguard_2" or "pigman_royalguard"
-        local guard = SpawnPrefab(guardprefab)
-        local door = ents[math.random(#ents)]
-        guard.Transform:SetPosition(door.Transform:GetWorldPosition())
-        guard:PushEvent("attacked", { attacker = attacker, damage = 0 })
-        guard:SetTemp() --临时的
 
-        door.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_open")
-        inst.components.entitytracker:TrackEntity("guard" .. id, guard)
-        guard.components.entitytracker:TrackEntity("owner", inst)
+
+    local eles = TheSim:FindEntities(x, y, z, 30, { "guard" })
+    if #eles > 1 then return end
+
+    local ents = TheSim:FindEntities(x, y, z, 30, { "guard_entrance" })
+    if #ents > 0 then
+        local guardprefab = "pigman_royalguard"
+        local cityID = 1
+        if inst:HasTag("city2") then
+            guardprefab = "pigman_royalguard_2"
+            cityID = 2
+        end
+        local spawnpt = Vector3(ents[math.random(#ents)].Transform:GetWorldPosition())
+        local guard = SpawnPrefab(guardprefab)
+        guard.components.citypossession:SetCity(cityID)
+        guard.Transform:SetPosition(spawnpt.x, spawnpt.y, spawnpt.z)
+        guard:PushEvent("attacked", { attacker = attacker, damage = 0, weapon = nil })
+
+        guard:AddComponent("timer")
+        guard:ListenForEvent("timerdone", OnTimerDone)
+        guard.components.timer:StartTimer("vaiembora", 240)
+
+        if attacker then
+            attacker:AddTag("wanted_by_guards")
+        end
     end
 end
 
-local function OnAttacked(inst, data)
-    local attacker = data.attacker
-    if not attacker then return end
-    inst:ClearBufferedAction()
+local function spawnguardtasks(inst, attacker)
+    inst.task_guard1 = inst:DoTaskInTime(math.random(1) + 1, function() callGuards(inst, attacker) end)
+    inst.task_guard2 = inst:DoTaskInTime(math.random(1) + 1.5, function() callGuards(inst, attacker) end)
+end
 
+local function OnAttacked(inst, data)
+    --print(inst, "OnAttacked")
+    local attacker = data.attacker
+    inst:ClearBufferedAction()
+    if not attacker then return end
     if attacker.prefab == "deciduous_root" and attacker.owner then
         OnAttackedByDecidRoot(inst, attacker.owner)
     elseif attacker.prefab ~= "deciduous_root" then
@@ -574,48 +532,39 @@ local function OnAttacked(inst, data)
             if attacker:HasTag("player") then
                 inst:AddTag("angry_at_player")
             end
-            inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("pig") and (dude:HasTag("guard") or not attacker:HasTag("pig")) end,
+            inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST,
+                function(dude) return dude:HasTag("pig") and (dude:HasTag("guard") or not attacker:HasTag("pig")) end,
                 MAX_TARGET_SHARES)
         else
             if not (attacker:HasTag("pig") and attacker:HasTag("guard")) then
-                inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("pig") end, MAX_TARGET_SHARES)
+                inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST,
+                    function(dude) return dude:HasTag("pig") end, MAX_TARGET_SHARES)
             end
         end
     end
 
-    if (inst:HasTag("shopkeep") or inst:HasTag("pigqueen"))
-        and not inst.components.timer:TimerExists("guards_called")
-        and not inst.components.entitytracker:GetEntity("guard1")
-        and not inst.components.entitytracker:GetEntity("guard2")
-    then
-        inst:DoTaskInTime(math.random(1) + 1, function()
-            callGuards(inst, attacker, 1)
-        end)
-        inst:DoTaskInTime(math.random(1) + 1.5, function()
-            callGuards(inst, attacker, 2)
-            inst.components.timer:StartTimer("guards_called", 120)
-        end)
+    --    if not inst:HasTag("guards_called") then
+    --        inst:AddTag("guards_called")
+    if inst:HasTag("shopkeep") or inst:HasTag("pigqueen") then
+        spawnguardtasks(inst, data.attacker)
     end
+    --    end
 end
 
-local function OnGoToSleep(inst)
-    inst:AddTag("sleeping") --我需要在客机检查老板是否睡着
-end
-
-local function OnWakeUp(inst)
-    inst:RemoveTag("sleeping")
-end
+local builds = { "pig_build", "pigspotted_build" }
+local guardbuilds = { "pig_guard_build" }
 
 local function NormalRetargetFn(inst)
-    return FindEntity(inst, TUNING.CITY_PIG_GUARD_TARGET_DIST,
+    return FindEntity(inst, CITY_PIG_GUARD_TARGET_DIST,
         function(guy)
             if not guy.LightWatcher or guy.LightWatcher:IsInLight() then
-                if guy and guy:HasTag("player") and inst:HasTag("angry_at_player") and guy.components.health and not guy.components.health:IsDead() and inst.components.combat:CanTarget(guy) and not (inst.components.combat.target and inst.components.combat.target:HasTag("player")) then
-                    inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_GUARD_TALK_ANGRY_PLAYER))
+                if guy:HasTag("player") and inst:HasTag("angry_at_player") and guy.components.health and not guy.components.health:IsDead() and inst.components.combat:CanTarget(guy) then
+                    inst.sayline(inst, getSpeechType(inst, STRINGS.CITY_PIG_GUARD_TALK_ANGRY_PLAYER))
                     --inst.components.talker:Say( getSpeechType(inst,STRINGS.CITY_PIG_GUARD_TALK_ANGRY_PLAYER) )
                 end
 
-                return (guy:HasTag("monster") or (guy:HasTag("player") and inst:HasTag("angry_at_player"))) and guy.components.health and not guy.components.health:IsDead() and
+                return (guy:HasTag("monster") or guy:HasTag("merm") or (guy:HasTag("player") and inst:HasTag("angry_at_player"))) and
+                    guy.components.health and not guy.components.health:IsDead() and
                     inst.components.combat:CanTarget(guy) and not
                     (inst.components.follower.leader ~= nil and guy:HasTag("abigail"))
             end
@@ -641,25 +590,19 @@ local function NormalShouldSleep(inst)
     end
 end
 
-local brain = require "brains/citypigbrain"
-
-local function SetNormalPig(inst)
+local function SetNormalPig(inst, brain_id)
     inst:RemoveTag("werepig")
     inst:RemoveTag("guard")
+    --	inst.AnimState:SetBuild(inst.build)
 
-    inst:SetBrain(brain)
-    inst:SetStateGraph("SGpig_city")
-
+    --inst.components.werebeast:SetOnNormalFn(SetNormalPig)
     inst.components.sleeper:SetResistance(2)
 
-    inst.components.combat:SetDefaultDamage(TUNING.PIG_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.PIG_ATTACK_PERIOD)
+    inst.components.combat:SetDefaultDamage(PIG_DAMAGE)
+    inst.components.combat:SetAttackPeriod(PIG_ATTACK_PERIOD)
     inst.components.combat:SetKeepTargetFunction(NormalKeepTargetFn)
-    inst.components.combat:SetRetargetFunction(3, NormalRetargetFn)
-    inst.components.combat:SetTarget(nil)
-
-    inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED
-    inst.components.locomotor.walkspeed = TUNING.PIG_WALK_SPEED
+    inst.components.locomotor.runspeed = PIG_RUN_SPEED
+    inst.components.locomotor.walkspeed = PIG_WALK_SPEED
 
     inst.components.sleeper:SetSleepTest(NormalShouldSleep)
     inst.components.sleeper:SetWakeTest(DefaultWakeTest)
@@ -669,8 +612,13 @@ local function SetNormalPig(inst)
     inst.components.lootdropper:AddRandomLoot("pigskin", 1)
     inst.components.lootdropper.numrandomloot = 1
 
-    inst.components.health:SetMaxHealth(TUNING.PIG_HEALTH)
-
+    if inst:HasTag("shopkeep") then
+        inst.components.health:SetMaxHealth(20000)
+    else
+        inst.components.health:SetMaxHealth(PIG_HEALTH)
+    end
+    inst.components.combat:SetRetargetFunction(3, NormalRetargetFn)
+    inst.components.combat:SetTarget(nil)
     inst:ListenForEvent("suggest_tree_target", function(inst, data)
         if data and data.tree and inst:GetBufferedAction() ~= ACTIONS.CHOP then
             inst.tree_target = data.tree
@@ -699,15 +647,15 @@ local function SetNormalPig(inst)
                     if inst.bribe_count >= bribe_threshold then
                         inst:RemoveTag("angry_at_player")
 
-                        if inst.components.combat and inst.components.combat.target and inst.components.combat.target:HasTag("player") then
+                        if inst.components.combat and inst.components.combat:IsTarget(GetPlayer()) then
                             inst.components.combat:GiveUp()
                         end
 
                         inst.bribe_count = 0
-                        inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_FORGIVE_PLAYER))
+                        inst.sayline(inst, getSpeechType(inst, STRINGS.CITY_PIG_TALK_FORGIVE_PLAYER))
                         --inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_FORGIVE_PLAYER))
                     else
-                        inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_NOT_ENOUGH))
+                        inst.sayline(inst, getSpeechType(inst, STRINGS.CITY_PIG_TALK_NOT_ENOUGH))
                     end
                 end
             end
@@ -715,14 +663,31 @@ local function SetNormalPig(inst)
 
     inst.components.trader:Enable()
     inst.components.talker:StopIgnoringAll()
+
+    local brain = require "brains/citypigbrain"
+    inst:SetBrain(brain)
+    inst:SetStateGraph("SGpig_city")
+
+
+    inst:WatchWorldState("isday", function()
+        if inst:HasTag("shopkeep") then
+            local bancada = GetClosestInstWithTag("moveporco", inst, 25)
+            if bancada then
+                local x, y, z = bancada.Transform:GetWorldPosition()
+                inst.Transform:SetPosition(x, y, z)
+            end
+        end
+    end)
 end
 
-local function NormalGuardWeapon(item)
-    if item.components.fueled then
-        item.components.fueled.rate = 1
-    elseif item.components.finiteuses then
-        item.components.finiteuses.onfinished = nil
-    end
+local function normalizetorch(torch)
+    print("normalizing torch")
+    torch.components.fueled.unlimited_fuel = nil
+end
+
+local function normalizehalberd(halberd)
+    print("normalizing halberd")
+    halberd.components.finiteuses.unlimited_uses = nil
 end
 
 local function throwcrackers(inst)
@@ -753,223 +718,306 @@ local function throwcrackers(inst)
     tossdir.z = -math.sin(rot)
 
     inst.components.inventory:DropItem(cracker, nil, nil, nil, nil, tossdir)
-    cracker.components.fuse:StartFuse()
+    --    cracker.components.fuse:StartFuse()
+    cracker.components.burnable:Ignite()
 end
 
+local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab)
+    local function make_common()
+        local inst = CreateEntity()
+        local trans = inst.entity:AddTransform()
+        local anim = inst.entity:AddAnimState()
+        local sound = inst.entity:AddSoundEmitter()
+        local shadow = inst.entity:AddDynamicShadow()
+        inst.entity:AddNetwork()
 
-local function common(name, build, fixer, tags, sex, econprefab)
-    local inst = CreateEntity()
+        shadow:SetSize(1.5, .75)
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddDynamicShadow()
-    inst.entity:AddLightWatcher()
-    inst.entity:AddNetwork()
+        inst.Transform:SetFourFaced()
 
-    inst.AnimState:SetBank("townspig")
-    inst.AnimState:SetBuild(build)
-    inst.AnimState:PlayAnimation("idle_loop", true)
-    inst.AnimState:Hide("hat")
-    inst.AnimState:Hide("desk")
-    inst.AnimState:Hide("ARM_carry")
+        inst.entity:AddLightWatcher()
 
-    inst.DynamicShadow:SetSize(1.5, .75)
+        inst:AddComponent("talker")
+        inst.components.talker.ontalk = ontalk
+        inst.components.talker.donetalkingfn = ontalkfinish
+        inst.components.talker.fontsize = 35
+        inst.components.talker.font = TALKINGFONT
+        inst.components.talker.offset = Vector3(0, -600, 0)
+        inst.talkertype = name
 
-    inst.Transform:SetFourFaced()
+        inst.sayline = sayline
 
-    inst:AddComponent("talker")
-    inst.components.talker.ontalk = ontalk
-    inst.components.talker.fontsize = 35
-    inst.components.talker.font = TALKINGFONT
-    inst.components.talker.offset = Vector3(0, -600, 0)
-    inst.talkertype = name
+        --inst.components.talker.colour = Vector3(133/255, 140/255, 167/255)
 
-    MakeCharacterPhysics(inst, 50, .5)
+        MakeCharacterPhysics(inst, 50, .5)
 
-    inst:AddTag("character")
-    inst:AddTag("pig")
-    inst:AddTag("civilized")
-    inst:AddTag("scarytoprey")
-    inst:AddTag("firecrackerdance")
-    inst:AddTag("city_pig")
-    if tags then
-        for i, tag in ipairs(tags) do
-            inst:AddTag(tag)
+        --        MakePoisonableCharacter(inst)
+
+        inst:AddTag("character")
+        inst:AddTag("pig")
+        inst:AddTag("civilized")
+        inst:AddTag("scarytoprey")
+
+        inst:AddTag("city_pig")
+
+
+
+        if tags then
+            for i, tag in ipairs(tags) do
+                inst:AddTag(tag)
+            end
         end
-    end
 
-    inst.entity:SetPristine()
+        anim:SetBank("townspig")
+        anim:SetBuild(build)
 
-    if not TheWorld.ismastersim then
+        anim:PlayAnimation("idle_loop", true)
+        anim:Hide("hat")
+        anim:Hide("desk")
+        anim:Hide("ARM_carry")
+        inst.daily_gift = 0
+
+        inst.entity:SetPristine()
+
+        if not TheWorld.ismastersim then
+            return inst
+        end
+
+        inst:AddComponent("locomotor")                       -- locomotor must be constructed before the stategraph
+        inst.components.locomotor.runspeed = PIG_RUN_SPEED   --5
+        inst.components.locomotor.walkspeed = PIG_WALK_SPEED --3	
+
+        -- boat hopping setup
+        inst.components.locomotor:SetAllowPlatformHopping(true)
+        inst:AddComponent("embarker")
+
+        ------------------------------------------
+        inst:AddComponent("eater")
+        inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
+        inst.components.eater:SetCanEatHorrible()
+        inst.components.eater:SetCanEatRaw()
+        inst.components.eater.strongstomach = true -- can eat monster meat!
+        inst.components.eater:SetOnEatFn(OnEat)
+
+        ------------------------------------------
+        inst:AddComponent("combat")
+        inst.components.combat.hiteffectsymbol = "pig_torso"
+
+        MakeMediumBurnableCharacter(inst, "pig_torso")
+
+        inst:AddComponent("named")
+
+        local names = {}
+        if sex and sex == "QUEEN" then --Runar: 女王只随女王的名称列表,这个函数里面有很多重复代码不知道怎么删
+            inst.female = true
+            for i, name in ipairs(STRINGS.CITYPIGNAMES["QUEEN"]) do
+                table.insert(names, name)
+            end
+        
+        else
+            for i, name in ipairs(STRINGS.CITYPIGNAMES["UNISEX"]) do
+                table.insert(names, name)
+            end
+
+            if sex then
+                if sex == "MALE" then
+                    inst.female = false
+                else
+                    inst.female = true
+                end
+
+                for i, name in ipairs(STRINGS.CITYPIGNAMES[sex]) do
+                    table.insert(names, name)
+                end
+            end
+        end
+
+        inst.components.named.possiblenames = names
+        inst.components.named:PickNewName()
+
+        inst:AddComponent("follower")
+        inst.components.follower.maxfollowtime = PIG_LOYALTY_MAXTIME
+
+        ------------------------------------------
+        inst:AddComponent("health")
+        inst:AddComponent("sleeper")
+        inst:AddComponent("inventory")
+        inst.components.inventory:DisableDropOnDeath()
+        inst:AddComponent("lootdropper")
+        inst:AddComponent("knownlocations")
+        inst:AddComponent("citypossession")
+        --        inst:AddComponent("citypooper")
+        ------------------------------------------
+
+        inst:AddComponent("trader")
+        inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+        inst.components.trader.onaccept = OnGetItemFromPlayer
+        inst.components.trader.onrefuse = OnRefuseItem
+
+        ------------------------------------------
+
+        inst:AddComponent("sanityaura")
+        inst.components.sanityaura.aurafn = CalcSanityAura
+
+        ------------------------------------------
+        MakeMediumFreezableCharacter(inst, "pig_torso")
+        --------------------------------------------
+
+        inst:AddComponent("inspectable")
+        inst.components.inspectable.getstatus = function(inst)
+            if inst:HasTag("guard") then
+                return "GUARD"
+            elseif inst.components.follower.leader ~= nil then
+                return "FOLLOWER"
+            end
+        end
+
+        if econprefab then
+            inst.econprefab = econprefab
+            inst.components.inspectable.nameoverride = econprefab
+        end
+        ------------------------------------------
+
+        inst.special_action = function(act)
+            if inst.daily_gifting then
+                inst.sg:GoToState("daily_gift")
+            elseif inst.poop_tip then
+                inst.sg:GoToState("poop_tip")
+            elseif inst:HasTag("paytax") then
+                inst.sg:GoToState("pay_tax")
+            end
+        end
+
+        ------------------------------------------
+        inst.OnSave = function(inst, data)
+            data.build = inst.build
+
+            data.children = {}
+            -- for the shopkeepers if they have spawned their desk
+            if inst.desk then
+                print("SAVING THE DESK")
+                table.insert(data.children, inst.desk.GUID)
+                data.desk = inst.desk.GUID
+            end
+
+            if inst.daily_gift then
+                data.daily_gift = inst.daily_gift
+            end
+
+            if inst.torch then
+                table.insert(data.children, inst.torch.GUID)
+                data.torch = inst.torch.GUID
+            end
+            if inst.axe then
+                table.insert(data.children, inst.axe.GUID)
+                data.axe = inst.axe.GUID
+            end
+
+            if inst:HasTag("atdesk") then
+                data.atdesk = true
+            end
+            if inst:HasTag("guards_called") then
+                data.guards_called = true
+            end
+            if inst.task_guard1 or inst.task_guard2 then
+                --print("SAVING GUARD TASKS")
+                data.doSpawnGuardTask = true
+            end
+            -- end shopkeeper stuff
+
+            if inst:HasTag("angry_at_player") then
+                data.angryatplayer = true
+            end
+
+            if inst.equipped then
+                data.equipped = true
+            end
+
+            if inst:HasTag("recieved_trinket") then
+                data.recieved_trinket = true
+            end
+
+            if inst:HasTag("paytax") then
+                data.paytax = true
+            end
+
+            if data.children and #data.children > 0 then
+                return data.children
+            end
+        end
+
+        inst.OnLoad = function(inst, data)
+            if data then
+                inst.build = data.build or builds[1]
+                if data.atdesk then
+                    inst.sg:GoToState("desk_pre")
+                end
+
+                if data.guards_called then
+                    inst:AddTag("guards_called")
+                end
+
+                --                if data.doSpawnGuardTask then
+                --                    spawnguardtasks(inst,ThePlayer)
+                --                end
+
+                if data.equipped then
+                    inst.equipped = true
+                    inst.equiptask:Cancel()
+                    inst.equiptask = nil
+                end
+
+                if data.daily_gift then
+                    inst.daily_gift = data.daily_gift
+                end
+
+                if data.angryatplayer then
+                    inst:AddTag("angry_at_player")
+                end
+                if data.recieved_trinket then
+                    inst:AddTag("recieved_trinket")
+                end
+                if data.paytax then
+                    inst:AddTag("paytax")
+                end
+            end
+        end
+
+        inst.OnLoadPostPass = function(inst, ents, data)
+            if data then
+                if data.children then
+                    for k, v in pairs(data.children) do
+                        local item = ents[v]
+                        if item then
+                            if data.desk and data.desk == v then
+                                inst.desk = item.entity
+                                inst:AddComponent("homeseeker")
+                                inst.components.homeseeker:SetHome(inst.desk)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
+        inst:ListenForEvent("attacked", OnAttacked)
+
+        inst.throwcrackers = throwcrackers
+        SetNormalPig(inst)
+
+        if fixer then
+            inst:AddComponent("fixer")
+        end
+
+        inst:WatchWorldState("isday", function() if inst:HasTag("troqueihoje") then inst:RemoveTag("troqueihoje") end end)
+
         return inst
     end
 
-    inst:AddComponent("locomotor")                              -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED   --5
-    inst.components.locomotor.walkspeed = TUNING.PIG_WALK_SPEED --3
+    ----------------------------------------------------------------------------------------
 
-    inst:AddComponent("eater")
-    inst.components.eater:SetCanEatHorrible()
-    inst.components.eater.strongstomach = true -- can eat monster meat!
-    inst.components.eater:SetOnEatFn(OnEat)
-
-    inst:AddComponent("combat")
-    inst.components.combat.hiteffectsymbol = "pig_torso"
-
-    MakeMediumBurnableCharacter(inst, "pig_torso")
-
-    inst:AddComponent("named")
-    local names = {}
-    for i, v in ipairs(STRINGS.CITYPIGNAMES["UNISEX"]) do
-        table.insert(names, v)
-    end
-    if sex then
-        inst.female = sex ~= "MALE"
-        for i, v in ipairs(STRINGS.CITYPIGNAMES[sex]) do
-            table.insert(names, v)
-        end
-    end
-    inst.components.named.possiblenames = names
-    inst.components.named:PickNewName()
-
-    inst:AddComponent("follower")
-    inst.components.follower.maxfollowtime = TUNING.PIG_LOYALTY_MAXTIME
-
-    inst:AddComponent("health")
-    inst:AddComponent("sleeper")
-    inst:AddComponent("inventory")
-    inst:AddComponent("lootdropper")
-    inst:AddComponent("timer")
-    inst:AddComponent("entitytracker")
-
-    inst:AddComponent("trader")
-    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
-    inst.components.trader.onaccept = OnAccept
-    inst.components.trader.onrefuse = OnRefuseItem
-
-    inst:AddComponent("sanityaura")
-    inst.components.sanityaura.aurafn = CalcSanityAura
-
-    ------------------------------------------
-    MakeMediumFreezableCharacter(inst, "pig_torso")
-    --------------------------------------------
-
-    inst:AddComponent("inspectable")
-    inst.components.inspectable.getstatus = getstatus
-
-    if econprefab then
-        inst.econprefab = econprefab
-        inst.components.inspectable.nameoverride = econprefab
-    end
-
-    if fixer then
-        inst:AddComponent("fixer")
-    end
-
-    inst.special_action = special_action
-    inst.OnSave = OnSave
-    inst.OnLoad = OnLoad
-    inst.throwcrackers = throwcrackers
-    SetNormalPig(inst)
-
-    inst:ListenForEvent("attacked", OnAttacked)
-
-    return inst
-end
-
-local function FullFiniteUses(inst)
-    inst.components.finiteuses:SetPercent(1)
-end
-
--- 生成守卫初始装备
-local function SpawnInitEquip(inst)
-    if inst.equipped then return end
-
-    inst.equipped = true
-
-    local torch = SpawnPrefab("torch")
-    inst.components.inventory:GiveItem(torch)
-    torch.components.fueled.rate = 0
-
-    local axe = SpawnPrefab("halberd")
-    inst.components.inventory:GiveItem(axe)
-    inst.components.inventory:Equip(axe)
-    axe.components.finiteuses.onfinished = FullFiniteUses
-
-    local armour = SpawnPrefab("armorwood")
-    inst.components.inventory:GiveItem(armour)
-    inst.components.inventory:Equip(armour)
-end
-
-local function OnIsDay(inst, isday)
-    if isday then
-
-    else
-        if TheWorld.state.isdusk then
-            inst.components.talker:Say(STRINGS.CITY_PIG_GUARD_LIGHT_TORCH.DEFAULT[math.random(#STRINGS.CITY_PIG_GUARD_LIGHT_TORCH.DEFAULT)])
-        end
-        local axe = inst.components.inventory:FindItem(function(item) return item.prefab == "halberd" end)
-        if axe then
-            inst.components.inventory:Equip(axe)
-        end
-    end
-end
-
-local function OnGuardDropItem(inst, data)
-    if data.item.prefab == "torch" or data.item.prefab == "halberd" then
-        NormalGuardWeapon(data.item)
-    end
-end
-
-local function OnGuardDeath(inst)
-    local torch = inst.components.inventory:FindItem(function(item) return item.prefab == "torch" end)
-    if torch then
-        NormalGuardWeapon(torch)
-    end
-
-    local axe = inst.components.inventory:FindItem(function(item) return item.prefab == "halberd" end)
-    if axe then
-        NormalGuardWeapon(axe)
-    end
-end
-
-local function getguardstatus(inst)
-    if inst.components.sleeper:IsAsleep() then
-        return "SLEEPING"
-    end
-end
-
-local guard_brain = require "brains/royalpigguardbrain"
-
-----------------------------------------------------------------------------------------------------
-
-local function OnShopkeeperEnterRoom(inst)
-    shopkeeper_speech(inst, getSpeechType(inst, STRINGS.CITY_PIG_SHOPKEEPER_GREETING))
-end
-
-local function OnShopkeeperNight(inst)
-    if not inst:IsAsleep() and not inst.components.combat.target and not inst:IsInLimbo() then
-        inst.sg:GoToState("idle")
-        shopkeeper_speech(inst, STRINGS.CITY_PIG_SHOPKEEPER_CLOSING[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_CLOSING)])
-    end
-end
-
-local function ShopkeeperSpecialAction(inst)
-    inst.sg:GoToState("desk")
-end
-
-local function IniMechanic(inst)
-    if not inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
-        local tool = SpawnPrefab("hammer")
-        inst.components.inventory:Equip(tool)
-    end
-end
-
-
-local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab)
     local function make_pig_guard()
-        local inst = common(name, build, fixer, tags, sex, econprefab)
+        local inst = make_common()
 
         inst:AddTag("emote_nocurtsy")
         inst:AddTag("guard")
@@ -979,129 +1027,444 @@ local function makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econ
             return inst
         end
 
-        inst.temp_spawn = nil
-        inst.SetTemp = GuardSetTemp
+        inst.components.inventory:DisableDropOnDeath()
 
+        --inst.components.lootdropper:SetLoot({ "halberd" })
+
+        inst:RemoveComponent("sleeper")
         inst.components.burnable:SetBurnTime(2)
 
-        inst:DoTaskInTime(0, SpawnInitEquip)
+        inst.equiptask = inst:DoTaskInTime(0, function()
+            if not inst.equipped then
+                inst.equipped = true
 
-        inst.components.inspectable.getstatus = getguardstatus
+                --                local torch = SpawnPrefab("torch")
+                --                inst.components.inventory:GiveItem(torch)
+                --                torch.components.fueled.unlimited_fuel = true
 
-        inst:SetBrain(guard_brain)
+                if inst.prefab == "pig_eskimo" then
+                    local axe = SpawnPrefab("spear")
+                    inst.components.inventory:GiveItem(axe)
+                    inst.components.inventory:Equip(axe)
 
-        inst:WatchWorldState("isday", OnIsDay)
-        inst:ListenForEvent("dropitem", OnGuardDropItem)
-        inst:ListenForEvent("death", OnGuardDeath)
+                    local hat = SpawnPrefab("beefalohat")
+                    inst.components.inventory:GiveItem(hat)
+                    inst.components.inventory:Equip(hat)
+					
+					inst.components.lootdropper:SetLoot({ "spear" })
+                else
+                    local axe = SpawnPrefab("halberd")
+                    inst.components.inventory:GiveItem(axe)
+                    inst.components.inventory:Equip(axe)
+					
+					inst.components.lootdropper:SetLoot({ "halberd" })
+                end
 
+
+                local armour = SpawnPrefab("armorwood")
+                if armour then
+                    inst.components.inventory:GiveItem(armour)
+                    inst.components.inventory:Equip(armour)
+                end
+            end
+        end)
+        inst:WatchWorldState("startday", function(inst)
+            if inst.prefab == "pig_eskimo" then
+                local axe = inst.components.inventory:FindItem(function(item)
+                    if item.prefab == "spear" then return true end
+                end)
+                if not axe then axe = SpawnPrefab("spear") end
+                if axe then inst.components.inventory:Equip(axe) end
+            else
+                local axe = inst.components.inventory:FindItem(
+                    function(item)
+                        if item.prefab == "halberd" then return true end
+                    end)
+                if not axe then axe = SpawnPrefab("halberd") end
+                if axe then inst.components.inventory:Equip(axe) end
+            end
+        end)
+
+        inst:WatchWorldState("isnight", function()
+            local function getspeech()
+                return STRINGS.CITY_PIG_GUARD_LIGHT_TORCH.DEFAULT
+                    [math.random(#STRINGS.CITY_PIG_GUARD_LIGHT_TORCH.DEFAULT)]
+            end
+            inst.sayline(inst, getspeech())
+            --inst.components.talker:Say(getspeech(), 1.5, nil, true)
+            --local torch = inst.components.inventory:FindItem(function(item)
+            --if item.prefab == "torch" then return true end end)
+            --if not torch then torch = SpawnPrefab("torch") end
+            --if torch then inst.components.inventory:Equip(torch) end
+        end)
+
+        local brain = require "brains/royalpigguardbrain"
+        inst:SetBrain(brain)
         return inst
     end
 
     local function make_shopkeeper()
-        local inst = common(name, build, fixer, tags, sex, econprefab)
+        local inst = CreateEntity()
+        local trans = inst.entity:AddTransform()
+        local anim = inst.entity:AddAnimState()
+        local sound = inst.entity:AddSoundEmitter()
+        local shadow = inst.entity:AddDynamicShadow()
+        inst.entity:AddNetwork()
+
+        shadow:SetSize(1.5, .75)
+
+        inst.Transform:SetFourFaced()
+
+        inst.entity:AddLightWatcher()
+
+        inst:AddComponent("talker")
+        inst.components.talker.ontalk = ontalk
+        inst.components.talker.donetalkingfn = ontalkfinish
+        inst.components.talker.fontsize = 35
+        inst.components.talker.font = TALKINGFONT
+        inst.components.talker.offset = Vector3(0, -600, 0)
+        inst.talkertype = name
+
+        inst.sayline = sayline
+
+        --inst.components.talker.colour = Vector3(133/255, 140/255, 167/255)
+
+        MakeCharacterPhysics(inst, 50, .5)
+
+        --        MakePoisonableCharacter(inst)
+
+        inst:AddTag("character")
+        inst:AddTag("pig")
+        inst:AddTag("civilized")
+        inst:AddTag("scarytoprey")
+
+        inst:AddTag("city_pig")
 
         inst.AnimState:AddOverrideBuild("townspig_shop_wip")
+        inst:AddTag("shopkeep")
+        inst.separatedesk = separatedesk
+        inst.shopkeeper_speech = shopkeeper_speech
 
-        inst:AddTag("shopkeep") --有该标签才能补货
+        if tags then
+            for i, tag in ipairs(tags) do
+                inst:AddTag(tag)
+            end
+        end
+
+        anim:SetBank("townspig")
+        anim:SetBuild(build)
+
+        anim:PlayAnimation("idle_loop", true)
+        anim:Hide("hat")
+        anim:Hide("desk")
+        anim:Hide("ARM_carry")
+        inst.daily_gift = 0
+
+        inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
             return inst
         end
 
-        inst.separatedesk = separatedesk
-        inst.shopkeeper_speech = shopkeeper_speech
+        inst:AddComponent("locomotor")                       -- locomotor must be constructed before the stategraph
+        inst.components.locomotor.runspeed = PIG_RUN_SPEED   --5
+        inst.components.locomotor.walkspeed = PIG_WALK_SPEED --3		
 
-        inst.special_action = ShopkeeperSpecialAction
+        ------------------------------------------
+        inst:AddComponent("eater")
+        inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
+        inst.components.eater:SetCanEatHorrible()
+        inst.components.eater:SetCanEatRaw()
+        inst.components.eater.strongstomach = true -- can eat monster meat!
+        inst.components.eater:SetOnEatFn(OnEat)
 
-        inst:ListenForEvent("enterroom", OnShopkeeperEnterRoom)
-        inst:WatchWorldState("isnight", OnShopkeeperNight)
-        inst:ListenForEvent("gotosleep", OnGoToSleep)
-        inst:ListenForEvent("onwakeup", OnWakeUp)
+        ------------------------------------------
+        inst:AddComponent("combat")
+        inst.components.combat.hiteffectsymbol = "pig_torso"
+
+        MakeMediumBurnableCharacter(inst, "pig_torso")
+
+        inst:AddComponent("named")
+
+        local names = {}
+        if sex and sex == "QUEEN" then
+            inst.female = true
+            for i, name in ipairs(STRINGS.CITYPIGNAMES["QUEEN"]) do
+                table.insert(names, name)
+            end
+        
+        else
+            for i, name in ipairs(STRINGS.CITYPIGNAMES["UNISEX"]) do
+                table.insert(names, name)
+            end
+
+            if sex then
+                if sex == "MALE" then
+                    inst.female = false
+                else
+                    inst.female = true
+                end
+
+                for i, name in ipairs(STRINGS.CITYPIGNAMES[sex]) do
+                    table.insert(names, name)
+                end
+            end
+        end
+
+        inst.components.named.possiblenames = names
+        inst.components.named:PickNewName()
+
+        inst:AddComponent("follower")
+        inst.components.follower.maxfollowtime = PIG_LOYALTY_MAXTIME
+
+        ------------------------------------------
+        inst:AddComponent("health")
+        inst:AddComponent("sleeper")
+        inst:AddComponent("inventory")
+        inst:AddComponent("lootdropper")
+        inst:AddComponent("knownlocations")
+        inst:AddComponent("citypossession")
+        --        inst:AddComponent("citypooper")
+        ------------------------------------------
+
+        inst:AddComponent("trader")
+        inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+        inst.components.trader.onaccept = OnGetItemFromPlayer
+        inst.components.trader.onrefuse = OnRefuseItem
+
+        ------------------------------------------
+
+        inst:AddComponent("sanityaura")
+        inst.components.sanityaura.aurafn = CalcSanityAura
+
+        ------------------------------------------
+        MakeMediumFreezableCharacter(inst, "pig_torso")
+        --------------------------------------------
+
+        inst:AddComponent("inspectable")
+        inst.components.inspectable.getstatus = function(inst)
+            if inst:HasTag("guard") then
+                return "GUARD"
+            elseif inst.components.follower.leader ~= nil then
+                return "FOLLOWER"
+            end
+        end
+
+        if econprefab then
+            inst.econprefab = econprefab
+            inst.components.inspectable.nameoverride = econprefab
+        end
+        ------------------------------------------
+
+        inst.special_action = function(act)
+            if inst.daily_gifting then
+                inst.sg:GoToState("daily_gift")
+            elseif inst.poop_tip then
+                inst.sg:GoToState("poop_tip")
+            elseif inst:HasTag("paytax") then
+                inst.sg:GoToState("pay_tax")
+            end
+        end
+
+        ------------------------------------------
+        inst.OnSave = function(inst, data)
+            data.build = inst.build
+
+            data.children = {}
+            -- for the shopkeepers if they have spawned their desk
+            if inst.desk then
+                print("SAVING THE DESK")
+                table.insert(data.children, inst.desk.GUID)
+                data.desk = inst.desk.GUID
+            end
+
+            if inst.torch then
+                table.insert(data.children, inst.torch.GUID)
+                data.torch = inst.torch.GUID
+            end
+            if inst.axe then
+                table.insert(data.children, inst.axe.GUID)
+                data.axe = inst.axe.GUID
+            end
+
+            if inst.daily_gift then
+                data.daily_gift = inst.daily_gift
+            end
+
+            if inst:HasTag("atdesk") then
+                data.atdesk = true
+            end
+            if inst:HasTag("guards_called") then
+                data.guards_called = true
+            end
+            if inst.task_guard1 or inst.task_guard2 then
+                print("SAVING GUARD TASKS")
+                data.doSpawnGuardTask = true
+            end
+            -- end shopkeeper stuff
+
+            if inst:HasTag("angry_at_player") then
+                data.angryatplayer = true
+            end
+
+            if inst.equipped then
+                data.equipped = true
+            end
+
+            if inst:HasTag("recieved_trinket") then
+                data.recieved_trinket = true
+            end
+
+            if inst:HasTag("paytax") then
+                data.paytax = true
+            end
+
+            if data.children and #data.children > 0 then
+                return data.children
+            end
+        end
+
+        inst.OnLoad = function(inst, data)
+            if data then
+                inst.build = data.build or builds[1]
+                if data.atdesk then
+                    inst.sg:GoToState("desk_pre")
+                end
+
+                if data.guards_called then
+                    inst:AddTag("guards_called")
+                end
+
+                --                if data.doSpawnGuardTask then
+                --                    spawnguardtasks(inst,ThePlayer)
+                --                end
+
+                if data.equipped then
+                    inst.equipped = true
+                    inst.equiptask:Cancel()
+                    inst.equiptask = nil
+                end
+
+                if data.daily_gift then
+                    inst.daily_gift = data.daily_gift
+                end
+
+                if data.angryatplayer then
+                    inst:AddTag("angry_at_player")
+                end
+                if data.recieved_trinket then
+                    inst:AddTag("recieved_trinket")
+                end
+                if data.paytax then
+                    inst:AddTag("paytax")
+                end
+            end
+        end
+
+        inst.OnLoadPostPass = function(inst, ents, data)
+            if data then
+                if data.children then
+                    for k, v in pairs(data.children) do
+                        local item = ents[v]
+                        if item then
+                            if data.desk and data.desk == v then
+                                inst.desk = item.entity
+                                inst:AddComponent("homeseeker")
+                                inst.components.homeseeker:SetHome(inst.desk)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+
+        inst:ListenForEvent("attacked", OnAttacked)
+
+        inst.throwcrackers = throwcrackers
+        SetNormalPig(inst)
+
+        if fixer then
+            inst:AddComponent("fixer")
+        end
+
+        inst:DoTaskInTime(0, function() inst.desklocation = Vector3(inst.Transform:GetWorldPosition()) end)
+
+        TheWorld:ListenForEvent("enterroom",
+            function(data) shopkeeper_speech(inst, getSpeechType(inst, STRINGS.CITY_PIG_SHOPKEEPER_GREETING)) end) --  getSpeechType(inst,speech) -- [math.random(1,#STRINGS.CITY_PIG_SHOPKEEPER_GREETING)]
+        inst:WatchWorldState("isnight", function() closeshop(inst) end)
+
+        inst.special_action = function(act)
+            inst.sg:GoToState("desk_pre")
+        end
 
         return inst
     end
 
     local function make_mechanic()
-        local inst = common(name, build, fixer, tags, sex, econprefab)
+        local inst = make_common()
+        local tool = SpawnPrefab("hammer")
 
         if not TheWorld.ismastersim then
             return inst
         end
 
-        inst:DoTaskInTime(0, IniMechanic)
+        if not inst.components.inventory then
+            inst:AddComponent("inventory")
+        end
+
+        if inst.components.inventory and tool then -- Runar: 根据单机的逻辑修复一下建筑猪掉锤子的问题
+            local remove_item = inst.components.inventory:RemoveItem(tool)
+            remove_item:Remove()
+            inst.components.inventory:GiveItem(tool)
+            inst.components.inventory:Equip(tool)
+        end
 
         return inst
     end
 
     local function make_queen()
-        local inst = common(name, build, fixer, tags, sex, econprefab)
-
+        local inst = make_common()
         MakeCharacterPhysics(inst, 50, 0.75)
-
         if not TheWorld.ismastersim then
             return inst
         end
-
         inst.components.named.possiblenames = STRINGS.QUEENPIGNAMES
         inst.components.named:PickNewName()
 
         return inst
     end
 
-    local function make_mayor()
-        local inst = common(name, build, fixer, tags, sex, econprefab)
-
-        if not TheWorld.ismastersim then
-            return inst
-        end
-
-        inst.components.named:SetName(STRINGS.NAMES.PIGMAN_MAYOR)
-
-        return inst
-    end
-
-    local function make_mayor_shopkeeper()
-        local inst = make_shopkeeper()
-
-        if not TheWorld.ismastersim then
-            return inst
-        end
-
-        inst.components.named:SetName(STRINGS.NAMES.PIGMAN_MAYOR)
-
-        return inst
-    end
-
     --------------------------------------------------------------------------
-    local function make_common()
-        return common(name, build, fixer, tags, sex, econprefab)
-    end
 
     if name == "pigman_queen" then
         return make_queen
-    elseif name == "pigman_mayor" then
-        return make_mayor
-    elseif name == "pigman_mayor_shopkeep" then
-        return make_mayor_shopkeeper
-    elseif name == "pigman_mechanic" then
-        return make_mechanic
-    elseif shopkeeper or name == "pigman_shopkeep" then
-        return make_shopkeeper
-    elseif guard_pig then
-        return make_pig_guard
-    else
-        return make_common
     end
+
+    if name == "pigman_mechanic" then
+        return make_mechanic
+    end
+
+    if shopkeeper or name == "pigman_shopkeep" then
+        return make_shopkeeper
+    end
+
+    if guard_pig then
+        return make_pig_guard
+    end
+
+    return make_common
 end
 
 local function makepigman(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab)
-    return Prefab(name, makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab), assets, prefabs)
+    return Prefab("common/objects/" .. name, makefn(name, build, fixer, guard_pig, shopkeeper, tags, sex, econprefab),
+        assets, prefabs)
 end
 
 --                      name                        build         fixer  guard shop tags               sex
-return makepigman("pigman_beautician", "pig_beautician", nil, nil, nil, nil, "FEMALE"),
+return
+    makepigman("pigman_beautician", "pig_beautician", nil, nil, nil, nil, "FEMALE"),
     makepigman("pigman_florist", "pig_florist", nil, nil, nil, nil, "FEMALE"),
-    makepigman("pigman_erudite", "pig_erudite", nil, nil, nil, nil, "FEMALE"),
+    makepigman("pigman_erudite", "pig_erudite", nil, nil, nil, { "emote_nohat" }, "FEMALE"),
     makepigman("pigman_hatmaker", "pig_hatmaker", nil, nil, nil, nil, "FEMALE"),
     makepigman("pigman_storeowner", "pig_storeowner", nil, nil, nil, { "emote_nohat" }, "FEMALE"),
     makepigman("pigman_banker", "pig_banker", nil, nil, nil, { "emote_nohat" }, "MALE"),
@@ -1109,19 +1472,19 @@ return makepigman("pigman_beautician", "pig_beautician", nil, nil, nil, nil, "FE
     makepigman("pigman_hunter", "pig_hunter", nil, nil, nil, nil, "MALE"),
     makepigman("pigman_mayor", "pig_mayor", nil, nil, nil, nil, "MALE"),
     makepigman("pigman_mechanic", "pig_mechanic", true, nil, nil, nil, "MALE"),
-    makepigman("pigman_professor", "pig_professor", nil, nil, nil, nil, "MALE"),
-    makepigman("pigman_usher", "pig_usher", nil, nil, nil, nil, "MALE"),
-
+    makepigman("pigman_professor", "pig_professor", nil, nil, nil, { "emote_nohat" }, "MALE"),
+    makepigman("pigman_usher", "pig_usher", nil, nil, nil, { "emote_nohat" }, "MALE"),
     makepigman("pigman_royalguard", "pig_royalguard", nil, true, nil, nil, "MALE"),
     makepigman("pigman_royalguard_2", "pig_royalguard_2", nil, true, nil, nil, "MALE"),
     makepigman("pigman_farmer", "pig_farmer", nil, nil, nil, nil, "MALE"),
     makepigman("pigman_miner", "pig_miner", nil, nil, nil, nil, "MALE"),
-    makepigman("pigman_queen", "pig_queen", nil, nil, nil, { "pigqueen", "emote_nohat" }),
+    makepigman("pigman_queen", "pig_queen", nil, nil, nil, { "pigqueen", "emote_nohat" }, "QUEEN"),
     makepigman("pigman_beautician_shopkeep", "pig_beautician", nil, nil, true, nil, "FEMALE", "pigman_beautician"),
     makepigman("pigman_florist_shopkeep", "pig_florist", nil, nil, true, nil, "FEMALE", "pigman_florist"),
-    makepigman("pigman_erudite_shopkeep", "pig_erudite", nil, nil, true, nil, "FEMALE", "pigman_erudite"),
+    makepigman("pigman_erudite_shopkeep", "pig_erudite", nil, nil, true, { "emote_nohat" }, "FEMALE", "pigman_erudite"),
     makepigman("pigman_hatmaker_shopkeep", "pig_hatmaker", nil, nil, true, nil, "FEMALE", "pigman_hatmaker"),
-    makepigman("pigman_storeowner_shopkeep", "pig_storeowner", nil, nil, true, { "emote_nohat" }, "FEMALE", "pigman_storeowner"),
+    makepigman("pigman_storeowner_shopkeep", "pig_storeowner", nil, nil, true, { "emote_nohat" }, "FEMALE",
+        "pigman_storeowner"),
     makepigman("pigman_banker_shopkeep", "pig_banker", nil, nil, true, { "emote_nohat" }, "MALE", "pigman_banker"),
     makepigman("pigman_shopkeep", "pig_banker", nil, nil, true, nil, "MALE", "pigman_banker"), -- default
     makepigman("pigman_hunter_shopkeep", "pig_hunter", nil, nil, true, nil, "MALE", "pigman_hunter"),
@@ -1129,10 +1492,9 @@ return makepigman("pigman_beautician", "pig_beautician", nil, nil, nil, nil, "FE
     makepigman("pigman_farmer_shopkeep", "pig_farmer", nil, nil, true, nil, "MALE", "pigman_farmer"),
     makepigman("pigman_miner_shopkeep", "pig_miner", nil, nil, true, nil, "MALE", "pigman_miner"),
     makepigman("pigman_collector_shopkeep", "pig_collector", nil, nil, true, nil, "MALE", "pigman_collector"),
-    makepigman("pigman_professor_shopkeep", "pig_professor", nil, nil, true, nil, "MALE", "pigman_professor"),
+    makepigman("pigman_professor_shopkeep", "pig_professor", nil, nil, true, { "emote_nohat" }, "MALE",
+        "pigman_professor"),
     makepigman("pigman_mechanic_shopkeep", "pig_mechanic", nil, nil, true, nil, "MALE", "pigman_mechanic"),
-
-    -- 新增
     makepigman("pigman_eskimo_shopkeep", "pig_eskimo", nil, nil, true, nil, "MALE", "pig_eskimo"),
     makepigman("pig_shopkeeper", "pig_shopkeeper", nil, nil, nil, nil, "MALE"),
     makepigman("pig_royalguard_rich", "pig_royalguard_rich", nil, true, nil, nil, "MALE"),

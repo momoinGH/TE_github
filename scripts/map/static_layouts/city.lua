@@ -82,7 +82,7 @@ return {
       objects = {
         {
           name = "",
-          type = "pig_shop_spears",
+          type = "pig_shop_spears_entrance",
           shape = "rectangle",
           x = 96,
           y = 160,
@@ -93,7 +93,7 @@ return {
         },
         {
           name = "",
-          type = "pig_palace2",
+          type = "pig_palace2_entrance",
           shape = "rectangle",
           x = 288,
           y = 160,

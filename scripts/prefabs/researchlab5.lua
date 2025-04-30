@@ -1,17 +1,19 @@
+require "prefabutil"
+
 local loot =
 {
     "limestone",
     "limestone",
-    "sand",
+	"sand",
     "transistor",
 }
 
 local function Default_PlayAnimation(inst, anim)
-    inst.AnimState:PushAnimation("idle", true)
+		inst.AnimState:PushAnimation("idle", true)
 end
 
 local function Default_PushAnimation(inst, anim)
-    inst.AnimState:PushAnimation("idle", true)
+		inst.AnimState:PushAnimation("idle", true)
 end
 
 local function isgifting(inst)
@@ -58,7 +60,7 @@ end
 
 local function onturnoff(inst)
     if inst._activetask == nil and not inst:HasTag("burnt") then
-        inst.AnimState:PushAnimation("idle", true)
+		inst.AnimState:PushAnimation("idle", true)
         inst.SoundEmitter:KillSound("idlesound")
         inst.SoundEmitter:KillSound("loop")
     end
@@ -77,9 +79,10 @@ local function onload(inst, data)
 end
 
 local function createmachine(level, name, soundprefix, techtree, giftsound)
-    local assets =
+    
+	local assets =
     {
-        Asset("ANIM", "anim/" .. name .. ".zip"),
+		Asset("ANIM", "anim/"..name..".zip"),
     }
 
     local prefabs =
@@ -87,12 +90,12 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
         "collapse_small",
     }
 
-    local function onturnon(inst)
-        if not inst:HasTag("burnt") then
-            inst.AnimState:PlayAnimation("proximity_loop", true)
-            inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_lvl2_idle_LP", "idlesound")
-        end
-    end
+local function onturnon(inst)
+		if not inst:HasTag("burnt") then
+			inst.AnimState:PlayAnimation("proximity_loop", true)
+			inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_lvl2_idle_LP","idlesound")
+		end
+	end
 
     local function refreshonstate(inst)
         --V2C: if "burnt" tag, prototyper cmp should've been removed *see standardcomponents*
@@ -139,16 +142,17 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
             inst._activetask = inst:DoTaskInTime(inst.AnimState:GetCurrentAnimationLength() + 2 * FRAMES, doneact)
         end
     end
-    --[[
+
     local function onbuilt(inst, data)
         inst:_PlayAnimation("place")
         inst:_PushAnimation("idle", false)
         inst.SoundEmitter:PlaySound("dontstarve/common/researchmachine_lvl2_place")
-
-        if name == "researchlab5" then
-            AwardPlayerAchievement("build_researchlab5", data.builder)
-        end
-    end]]
+        
+		if name == "researchlab5" then
+	        AwardPlayerAchievement("build_researchlab5", data.builder)
+	    end
+        
+    end
 
     local function fn()
         local inst = CreateEntity()
@@ -162,20 +166,20 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
         MakeObstaclePhysics(inst, .4)
 
         inst.MiniMapEntity:SetPriority(5)
-        inst.MiniMapEntity:SetIcon(name .. ".png")
+        inst.MiniMapEntity:SetIcon(name..".png")
 
         inst.AnimState:SetBank(name)
         inst.AnimState:SetBuild(name)
         inst.AnimState:PlayAnimation("idle")
 
         inst:AddTag("giftmachine")
-        inst:AddTag("ignorewalkableplatforms")
+	    inst:AddTag("ignorewalkableplatforms")	
         inst:AddTag("structure")
-        inst:AddTag("level" .. level)
+        inst:AddTag("level"..level)
 
         --prototyper (from prototyper component) added to pristine state for optimization
         inst:AddTag("prototyper")
-        MakeWaterObstaclePhysics(inst, 1, 2, 1.25)
+		MakeWaterObstaclePhysics(inst, 1, 2, 1.25)	
 
         MakeSnowCoveredPristine(inst)
 
@@ -200,11 +204,11 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
         inst.components.wardrobe:SetCanBeShared(true)
         inst.components.wardrobe:SetRange(TUNING.RESEARCH_MACHINE_DIST + .1)
 
-        --inst:ListenForEvent("onbuilt", onbuilt)
+        inst:ListenForEvent("onbuilt", onbuilt)
 
         inst:AddComponent("lootdropper")
-        inst.components.lootdropper:SetLoot(loot)
-
+		inst.components.lootdropper:SetLoot(loot)
+		
         inst:AddComponent("workable")
         inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
         inst.components.workable:SetWorkLeft(4)
@@ -234,4 +238,5 @@ local function createmachine(level, name, soundprefix, techtree, giftsound)
 end
 
 return createmachine(2, "researchlab5", "lvl2", TUNING.PROTOTYPER_TREES.ALCHEMYMACHINE),
-    MakePlacer("researchlab5_placer", "researchlab5", "researchlab5", "idle")
+    MakePlacer("common/researchlab5_placer", "researchlab5", "researchlab5", "idle")
+	

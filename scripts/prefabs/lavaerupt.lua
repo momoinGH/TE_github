@@ -22,9 +22,9 @@ local function commonfn(Sim)
 
 	inst.OnEntitySleep = OnEntitySleep
 
-	inst:ListenForEvent("animover", function(inst) inst:Remove() end)
+	inst:ListenForEvent( "animover", function(inst) inst:Remove() end )
 
-	return inst
+	return inst	
 end
 
 local function eruptfn(Sim)
@@ -45,5 +45,5 @@ local function bubblefn(Sim)
 	return inst
 end
 
-return Prefab("lava_erupt", eruptfn, erupt_assets),
-	Prefab("volcano/lava_bubbling", bubblefn, bubble_assets)
+return Prefab("common/volcano/lava_erupt", eruptfn, erupt_assets),
+		Prefab("common/volcano/lava_bubbling", bubblefn, bubble_assets)

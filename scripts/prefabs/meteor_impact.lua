@@ -1,10 +1,10 @@
 local assets =
 {
-    Asset("ANIM", "anim/meteor_impact.zip"),
+	Asset("ANIM", "anim/meteor_impact.zip"),
 }
 
 local function RemoveImpact(inst)
-    inst.components.colourtweener:StartTween({ 0, 0, 0, 0 }, 5, inst.Remove)
+    inst.components.colourtweener:StartTween({0,0,0,0}, 5, inst.Remove)
     inst.persists = false
 end
 
@@ -15,28 +15,26 @@ local function ontimerdone(inst, data)
 end
 
 local function fn()
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
+	local inst = CreateEntity()
+	local trans = inst.entity:AddTransform()
+	local anim = inst.entity:AddAnimState()
     inst.Transform:SetTwoFaced()
-
     inst.entity:AddNetwork()
-
-    inst.AnimState:SetBank("meteorimpact")
-    inst.AnimState:SetBuild("meteor_impact")
-    inst.AnimState:PlayAnimation("idle_loop")
-    inst.AnimState:SetFinalOffset(-1)
-
+	
+    anim:SetBank("meteorimpact")
+    anim:SetBuild("meteor_impact")
+    anim:PlayAnimation("idle_loop")
+    anim:SetFinalOffset(-1)
     inst:AddTag("fx")
 
     inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+	if not TheWorld.ismastersim then
+		return inst
+	end
+    
     inst:AddComponent("colourtweener")
-
+  
     inst:AddComponent("timer")
 
     inst:ListenForEvent("timerdone", ontimerdone)
@@ -44,4 +42,4 @@ local function fn()
     return inst
 end
 
-return Prefab("meteor_impact", fn, assets)
+return Prefab("common/fx/meteor_impact", fn, assets)

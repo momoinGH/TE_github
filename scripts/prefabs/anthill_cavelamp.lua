@@ -1,6 +1,5 @@
-local prefabs =
+local prefabs = 
 {
-    "collapse_small"
 }
 
 local assets =
@@ -8,62 +7,64 @@ local assets =
     Asset("ANIM", "anim/grotto_bug_lamp.zip"),
 }
 
-local loot = { "log", "log", "lightbulb", "honey" }
+	local HONEY_LANTERN_MINE = 6
 
-local function OnWorked(inst, worker, workleft)
-    if workleft <= 0 then
-        SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
-        inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
-        inst.components.lootdropper:DropLoot(inst:GetPosition())
-        inst:Remove()
-    else
-        inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
-    end
-end
-
-local function fn()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddLight()
+local function fn(Sim)
+	local inst  = CreateEntity()
+	local trans = inst.entity:AddTransform()
+	local anim  = inst.entity:AddAnimState()
+    local light = inst.entity:AddLight()
     inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
     MakeObstaclePhysics(inst, 0.5)
 
-    inst.Light:SetFalloff(0.4)
-    inst.Light:SetIntensity(0.8)
-    inst.Light:SetRadius(2.5)
-    inst.Light:SetColour(180 / 255, 195 / 255, 150 / 255)
-    inst.Light:Enable(true)
+    light:SetFalloff(0.4)
+    light:SetIntensity(0.8)
+    light:SetRadius(2.5)
+    light:SetColour(180/255, 195/255, 150/255)
 
-    inst.MiniMapEntity:SetIcon("anthill_cavelamp.png")
+    light:Enable(true)
 
-    inst.AnimState:SetBank("grotto_bug_lamp")
-    inst.AnimState:SetBuild("grotto_bug_lamp")
-    inst.AnimState:PlayAnimation("idle", true)
+	local minimap = inst.entity:AddMiniMapEntity()
+	minimap:SetIcon("anthill_cavelamp.png")
 
-    inst.entity:SetPristine()
+	anim:SetBank("grotto_bug_lamp")
+	anim:SetBuild("grotto_bug_lamp")
+	anim:PlayAnimation("idle", true)
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	inst.entity:SetPristine()
 
+	if not TheWorld.ismastersim then
+		return inst
+	end		
+	
     inst:AddComponent("inspectable")
 
-    ---------------------
+    ---------------------  
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot(loot)
+    inst.components.lootdropper:SetLoot({"log", "log", "lightbulb", "honey"})
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.CHOP)
-    inst.components.workable:SetWorkLeft(6)
+    inst.components.workable:SetWorkLeft(HONEY_LANTERN_MINE)
 
-    inst.components.workable:SetOnWorkCallback(OnWorked)
+    inst.components.workable:SetOnWorkCallback(
+        function(inst, worker, workleft)
+            local pt = Point(inst.Transform:GetWorldPosition())
+            if workleft <= 0 then
+				SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+				inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
+                inst.components.lootdropper:DropLoot(pt)
+                inst:Remove()
+				
+			else
+			inst.AnimState:PlayAnimation("idle", true)
+			inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
+            end
+        end)
 
-    return inst
+	return inst
 end
 
-return Prefab("anthill_cavelamp", fn, assets, prefabs)
+return Prefab("anthill/items/anthill_cavelamp", fn, assets, prefabs) 

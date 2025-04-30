@@ -1,16 +1,30 @@
-local prefabs =
+local assets =
+{
+	Asset("ANIM", "anim/topiary.zip"),
+    Asset("ANIM", "anim/topiary_pigman_build.zip"),
+    Asset("ANIM", "anim/topiary_werepig_build.zip"),
+    Asset("ANIM", "anim/topiary_beefalo_build.zip"),
+    Asset("ANIM", "anim/topiary_pigking_build.zip"),
+    Asset("MINIMAP_IMAGE", "topiary_1"),
+    Asset("MINIMAP_IMAGE", "topiary_2"),
+    Asset("MINIMAP_IMAGE", "topiary_3"),
+    Asset("MINIMAP_IMAGE", "topiary_4"),
+}
+
+local prefabs = 
 {
     "ash",
     "collapse_small",
 }
+    
 
 local function onhammered(inst, worker)
     local x, y, z = inst.Transform:GetWorldPosition()
-    for i = 1, math.random(3, 4) do
+    for i=1,math.random(3,4) do
         local fx = SpawnPrefab("robot_leaf_fx")
-        fx.Transform:SetPosition(x + (math.random() * 2), y + math.random() * 0.5, z + (math.random() * 2))
+        fx.Transform:SetPosition(x + (math.random()*2) , y+math.random()*0.5, z + (math.random()*2))
         if math.random() < 0.5 then
-            fx.Transform:SetScale(-1, 1, -1)
+            fx.Transform:SetScale(-1,1,-1)
         end
     end
     inst:Remove()
@@ -18,96 +32,87 @@ local function onhammered(inst, worker)
 end
 
 local function onhit(inst, worker)
-    inst.AnimState:PlayAnimation("hit")
-    inst.AnimState:PushAnimation("idle", false)
+	inst.AnimState:PlayAnimation("hit")
+	inst.AnimState:PushAnimation("idle", false)
+end
 
-    local fx = SpawnPrefab("robot_leaf_fx")
-    local x, y, z= inst.Transform:GetWorldPosition()
-    fx.Transform:SetPosition(x, y + math.random()*0.5, z)
+local function OnSave(inst, data)
 
-    inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/vine_hack")
+end
+
+local function OnLoad(inst, data)
+
+end
+
+local function getstatus(inst)
+
 end
 
 local function onbuilt(inst)
-    inst.AnimState:PlayAnimation("place")
-    inst.AnimState:PushAnimation("idle")
-    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/lawnornaments/repair")
+	inst.AnimState:PlayAnimation("place")
+	inst.AnimState:PushAnimation("idle")
 end
 
-local function MakeTopiary(name, build, n)
-    local assets = {
-        Asset("ANIM", "anim/"..build..".zip"),
-        Asset("MINIMAP_IMAGE", "topiary_"..n),
-    }
+local function makeitem(name, build, frame)
     local function fn(Sim)
         local inst = CreateEntity()
-        inst.entity:AddTransform()
-        inst.entity:AddAnimState()
-        inst.entity:AddNetwork()
-
-        inst.entity:AddPhysics()
-        MakeObstaclePhysics(inst, .25)
-
+        local trans = inst.entity:AddTransform()
+        local anim = inst.entity:AddAnimState() 
+    inst.entity:AddNetwork()
+	
+        inst.entity:AddPhysics() 
+        MakeObstaclePhysics(inst, .25)         
+     
         local minimap = inst.entity:AddMiniMapEntity()
-        minimap:SetIcon("topiary_" .. n .. ".png")
+        minimap:SetIcon( "topiary_".. frame ..".png" )
 
         inst.entity:AddSoundEmitter()
         inst:AddTag("structure")
 
-        inst.AnimState:SetBank(build)
-        inst.AnimState:SetBuild(build)
-        inst.AnimState:PlayAnimation("idle", true)
+        anim:SetBank("topiary")
+        anim:SetBuild(build)
+
+        anim:PlayAnimation("idle",true)
 
         --inst:AddComponent("lootdropper")
 
-        inst.entity:SetPristine()
+	inst.entity:SetPristine()
 
-        if not TheWorld.ismastersim then
-            return inst
-        end
-
+	if not TheWorld.ismastersim then
+		return inst
+	end		
+		
         inst:AddComponent("workable")
         inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
         inst.components.workable:SetWorkLeft(4)
         inst.components.workable:SetOnFinishCallback(onhammered)
         inst.components.workable:SetOnWorkCallback(onhit)
-
+        
         inst:AddComponent("inspectable")
-        --inst.components.inspectable.getstatus = getstatus
-
-        MakeSnowCovered(inst)
-        inst:ListenForEvent( "onbuilt", onbuilt)
-
-        if n == "3" or n == "4" then
-            MakeLargeBurnable(inst, nil, nil, true)
-            MakeLargePropagator(inst)
-        else
-            MakeMediumBurnable(inst, nil, nil, true)
-            MakeMediumPropagator(inst)
-        end
-
-        inst:ListenForEvent("burntup", inst.Remove)
+        inst.components.inspectable.getstatus = getstatus
+        
+        MakeMediumBurnable(inst, nil, nil, true)
+        MakeMediumPropagator(inst)
 
         inst:AddComponent("fixable")
-        inst.components.fixable:AddRecinstructionStageData("burnt", build, build)
-        --inst.components.fixable:SetPrefabName("topiary")
+        inst.components.fixable:AddRecinstructionStageData("burnt","topiary",build)
+	    inst.components.fixable:SetPrefabName("topiary")
 
-        inst:AddComponent("gridnudger")
+        inst:SetPrefabNameOverride("topiary")
 
-        --inst:SetPrefabNameOverride("topiary")
-
-        MakeHauntableWork(inst)
+        inst.OnSave = OnSave
+        inst.OnLoad = OnLoad
         return inst
     end
 
-    return Prefab(name, fn, assets, prefabs)
+    return Prefab( name, fn, assets, prefabs)
 end
 
-return MakeTopiary("topiary_1", "topiary_pigman", "1"),
-    MakeTopiary("topiary_2", "topiary_werepig", "2"),
-    MakeTopiary("topiary_3", "topiary_beefalo", "3"),
-    MakeTopiary("topiary_4", "topiary_pigking", "4"),
-    MakePlacer("topiary_1_placer", "topiary_pigman", "topiary_pigman", "idle"),
-    MakePlacer("topiary_2_placer", "topiary_werepig", "topiary_werepig", "idle"),
-    MakePlacer("topiary_3_placer", "topiary_beefalo", "topiary_beefalo", "idle"),
-    MakePlacer("topiary_4_placer", "topiary_pigking", "topiary_pigking", "idle")
+return makeitem( "topiary_1", "topiary_pigman_build", "1" ),
+       makeitem( "topiary_2", "topiary_werepig_build", "2" ),
+       makeitem( "topiary_3", "topiary_beefalo_build", "3" ),
+       makeitem( "topiary_4", "topiary_pigking_build", "4" ), 
+	MakePlacer("topiary_1_placer", "topiary", "topiary_pigman_build", "idle"),
+	MakePlacer("topiary_2_placer", "topiary", "topiary_werepig_build", "idle"),
+	MakePlacer("topiary_3_placer", "topiary", "topiary_beefalo_build", "idle"),
+	MakePlacer("topiary_4_placer", "topiary", "topiary_pigking_build", "idle")

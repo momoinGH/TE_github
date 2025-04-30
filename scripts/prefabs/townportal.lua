@@ -1,3 +1,5 @@
+require "prefabutil"
+
 local assets =
 {
     Asset("ANIM", "anim/townportal.zip"),
@@ -100,7 +102,7 @@ end
 
 local function OnStartTeleporting(inst, doer)
     if doer:HasTag("player") then
-        doer.tropical_room_event:push()
+	doer.mynetvarCameraMode:set(6)
         if doer.components.talker ~= nil then
             doer.components.talker:ShutUp()
         end
@@ -262,7 +264,7 @@ local function fx_fn()
     inst.AnimState:SetBuild("teleport_sand_fx")
     inst.AnimState:OverrideSymbol("sand_splash", "sand_splash_fx", "sand_splash")
     inst.AnimState:PlayAnimation("portal_in")
-    inst.AnimState:SetFinalOffset(7)
+	inst.AnimState:SetFinalOffset(7)	
 
     inst:AddTag("NOCLICK")
     inst:AddTag("FX")

@@ -1,3 +1,5 @@
+require "prefabutil"
+
 local prefabs =
 {
     "boards",
@@ -14,10 +16,9 @@ local loot =
 local function onopen(inst)
     if not inst:HasTag("burnt") then
         inst.AnimState:PlayAnimation("open")
-        inst.AnimState:PushAnimation("opened", true)
         inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_open")
     end
-end
+end 
 
 local function onclose(inst)
     if not inst:HasTag("burnt") then
@@ -51,12 +52,12 @@ local function onhit(inst, worker)
         end
     end
 end
---[[
+
 local function onbuilt(inst)
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("closed", true)
     inst.SoundEmitter:PlaySound("dontstarve/common/chest_craft")
-end]]
+end
 
 local function onsave(inst, data)
     if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() or inst:HasTag("burnt") then
@@ -90,7 +91,7 @@ local function MakeChest(name, bank, build, indestructible, custom_postinit, pre
 
         inst:AddTag("structure")
         inst:AddTag("chest")
-        inst:AddTag("aquatic")
+		inst:AddTag("aquatic")
 
         inst.AnimState:SetBank("water_chest")
         inst.AnimState:SetBuild("water_chest")
@@ -100,9 +101,12 @@ local function MakeChest(name, bank, build, indestructible, custom_postinit, pre
 
         inst.entity:SetPristine()
 
-        if not TheWorld.ismastersim then
-            return inst
-        end
+    if not TheWorld.ismastersim then
+		inst.OnEntityReplicated = function(inst) 
+			if inst.replica.container then inst.replica.container:WidgetSetup("treasurechest") end
+		end
+		return inst
+	end
 
         inst:AddComponent("inspectable")
         inst:AddComponent("container")
@@ -112,8 +116,8 @@ local function MakeChest(name, bank, build, indestructible, custom_postinit, pre
 
         if not indestructible then
             inst:AddComponent("lootdropper")
-            inst.components.lootdropper:SetLoot(loot)
-
+			inst.components.lootdropper:SetLoot(loot)
+			
             inst:AddComponent("workable")
             inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
             inst.components.workable:SetWorkLeft(2)
@@ -124,10 +128,10 @@ local function MakeChest(name, bank, build, indestructible, custom_postinit, pre
             MakeMediumPropagator(inst)
         end
 
-        --inst:ListenForEvent("onbuilt", onbuilt)
+        inst:ListenForEvent("onbuilt", onbuilt)
         MakeSnowCovered(inst)
 
-        inst.OnSave = onsave
+        inst.OnSave = onsave 
         inst.OnLoad = onload
 
         if custom_postinit ~= nil then
@@ -140,5 +144,6 @@ local function MakeChest(name, bank, build, indestructible, custom_postinit, pre
     return Prefab(name, fn, assets, prefabs)
 end
 
-return MakeChest("waterchest", "water_chest", "water_chest", false, nil, { "collapse_small" }),
-    MakePlacer("waterchest_placer", "water_chest", "water_chest", "closed")
+return MakeChest("waterchest1", "water_chest", "water_chest", false, nil, { "collapse_small" }),
+				MakePlacer("waterchest1_placer", "water_chest", "water_chest", "closed")
+	

@@ -1,6 +1,8 @@
 local assets =
 {
-    Asset("ANIM", "anim/peach.zip"),
+	Asset("IMAGE", "images/inventoryimages/peach.tex"),
+	Asset("ATLAS", "images/inventoryimages/peach.xml"),
+	Asset("ANIM", "anim/peach.zip"),
 }
 
 local prefabs =
@@ -16,15 +18,15 @@ local function fn()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)
+	MakeInventoryFloatable(inst)	
 
     inst.AnimState:SetBuild("peach")
     inst.AnimState:SetBank("peach")
     inst.AnimState:PlayAnimation("idle", false)
 
-    local s = 0.70
-    inst.Transform:SetScale(s, s, s)
-
+	local s = 0.70
+	inst.Transform:SetScale(s,s,s)
+	
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -33,8 +35,8 @@ local function fn()
 
     inst:AddComponent("edible")
     inst.components.edible.hungervalue = 12.5
-    inst.components.edible.foodtype = FOODTYPE.VEGGIE
-    inst.components.edible.healthvalue = 1
+	inst.components.edible.foodtype = FOODTYPE.VEGGIE
+	inst.components.edible.healthvalue = 1
 
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -42,9 +44,9 @@ local function fn()
     inst:AddComponent("tradable")
 
     inst:AddComponent("inspectable")
-
-    inst:AddComponent("cookable")
-    inst.components.cookable.product = "grilled_peach"
+	
+	inst:AddComponent("cookable")
+	inst.components.cookable.product = "grilled_peach"
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_MED)
@@ -52,9 +54,10 @@ local function fn()
     inst.components.perishable.onperishreplacement = "peach_pit"
 
     inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("bait")
-
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/peach.xml"
+	
+	inst:AddComponent("bait")
+	
     MakeHauntableLaunchAndPerish(inst)
 
     return inst

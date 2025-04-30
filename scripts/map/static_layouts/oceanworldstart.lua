@@ -140,7 +140,7 @@ return {
         },
         {
           name = "",
-          type = "pig_palace2",
+          type = "pig_palace2_entrance",
           shape = "rectangle",
           x = 220,
           y = 310,

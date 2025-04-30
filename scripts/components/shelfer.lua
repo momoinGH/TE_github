@@ -1,19 +1,20 @@
 local Shelfer = Class(function(self, inst)
     self.inst = inst
     self.enabled = true
+    self.deleteitemonaccept = true
+	self.inst:AddTag("shelfcanaccept")
 end)
 
 function Shelfer:OnSave()
     local data = {}
     local references = {}
-    data.enabled = self.enabled
+    data.enabled = self.enabled 
     data.slot = self.slot
-    data.slotindex = self.slotindex
     if self.shelf then
         data.shelf = self.shelf.GUID
-        table.insert(references, self.shelf.GUID)
+    table.insert(references, self.shelf.GUID)
     end
-    return data, references
+    return  data, references
 end
 
 function Shelfer:OnLoad(data)
@@ -21,24 +22,12 @@ function Shelfer:OnLoad(data)
     if data.slot then
         self.slot = data.slot
     end
-    if not data.slotindex then
-        if data.slot == "SWAP_SIGN" then
-            self.slotindex = 1
-        else
-            local slot = data.slot
-            local prefix = slot:sub(1, 8)
-            assert(prefix == "SWAP_img")
-            self.slotindex = tonumber(slot:sub(9))
-        end
-    else
-        self.slotindex = data.slotindex
-    end
 end
 
 function Shelfer:LoadPostPass(newents, data)
     if data.shelf and newents[data.shelf] then
         self.shelf = newents[data.shelf].entity
-        self:SetArt()
+	    self:SetArt()
     end
 end
 
@@ -49,57 +38,89 @@ function Shelfer:IsTryingToTradeWithMe(inst)
     end
 end
 
-function Shelfer:Enable()
+function Shelfer:Enable( )
     self.enabled = true
-    -- do I have an underlying item?
-
-    self.inst:AddTag("slot_one")
+	if self.inst.components.inventoryitem then
+    self.inst.components.inventoryitem.canbepickedup = true
+	end
 end
 
-function Shelfer:Disable()
+function Shelfer:Disable( )
     self.enabled = false
-    self.inst:RemoveTag("slot_one")
+	if self.inst.components.inventoryitem then
+    self.inst.components.inventoryitem.canbepickedup = false
+	end
 end
 
-function Shelfer:SetShelf(shelf, slot)
+function Shelfer:SetShelf( shelf, slot )
     self.shelf = shelf
     self.slot = slot
 end
 
 function Shelfer:GetGift()
-    return self.shelf.components.container:GetItemInSlot(self.slotindex)
+    return self.inst.components.pocket:GetItem("shelfitem")        
 end
 
 function Shelfer:GiveGift()
-    self.inst:RemoveTag("slot_one")
+    self.inst.components.inventoryitem.canbepickedup = false
+	if self.shelf ~= nil then
     self.shelf.SetImageFromName(self.shelf, nil, self.slot)
-    local item = self.shelf.components.container:RemoveItemBySlot(self.slotindex)
+	end
+    local item = self.inst.components.pocket:RemoveItem("shelfitem")
+	if self.inst.components.shelfer and self.inst.components.shelfer.shelf:HasTag("pigcurse") then
+	if self.inst.components.shelfer and self.inst.components.shelfer.shelf.components.timer then
+	self.inst.components.shelfer.shelf.components.timer:StartTimer("spawndelay", 480*60)	
+	end	
+    if math.random() < 0.3 and self.inst.components.shelfer and self.inst.components.shelfer.shelf then
+    local ghost = SpawnPrefab("ghost")
+    local pt = Vector3(self.inst.components.shelfer.shelf.Transform:GetWorldPosition())
+	if ghost then ghost.Transform:SetPosition(pt.x,pt.y,pt.z) end
+    end
+	end
+	
+	if self.inst.components.shelfer and self.inst.components.shelfer.shelf:HasTag("yellow_lizardman") then
+	if self.inst.components.shelfer and self.inst.components.shelfer.shelf.components.timer then
+	self.inst.components.shelfer.shelf.components.timer:StartTimer("spawndelay", 480*60)	
+	end	
+    if self.inst.components.shelfer and self.inst.components.shelfer.shelf then
+    local ghost = SpawnPrefab("gw_yellow_lizardman")
+	local pt = Vector3(self.inst.components.shelfer.shelf.Transform:GetWorldPosition())
+	if ghost then ghost.Transform:SetPosition(pt.x,pt.y,pt.z) end
+	local invader = GetClosestInstWithTag("player", self.inst, 17)
+	if invader then
+	ghost.components.combat:SetTarget(invader)
+	end
+    end
+	end	
+	
+	
     return self:ReturnGift(item)
 end
 
-function Shelfer:CanAccept(item, giver)
-    local frozen = self.inst.components.freezable and self.inst.components.freezable:IsFrozen()
-    local inventortyitem = item.components.inventoryitem ~= nil
-    local item = self.shelf.components.container:GetItemInSlot(self.slotindex)
-    local player_to_shop = not self.shelf:HasTag("playercrafted") and giver and giver:HasTag("player")
+function Shelfer:CanAccept( item , giver )
+    local frozen = false
+    if  self.inst.components.freezable and self.inst.components.freezable:IsFrozen() then
+        frozen = true        
+    end
+    
+    local inventortyitem = false
+    if  item.components.inventoryitem then
+        inventortyitem = true
+    end
 
-    return self.enabled
-        and inventortyitem     --物品
-        and not frozen         --没有冻结
-        and not item           --槽位当前空缺
-        and not player_to_shop --非购买
+    local pocketitem = self.inst.components.pocket:GetItem("shelfitem")
+
+    return self.enabled and inventortyitem and not frozen and not pocketitem -- (not self.test or self.test(self.inst, item, giver))
 end
 
 function Shelfer:SetArt()
-    local item = self.shelf.components.container:GetItemInSlot(self.slotindex)
 
+    local item = self.inst.components.pocket:GetItem("shelfitem")
     if item then
-        self.shelf:SetImage(item, self.slot)
-        -- self.inst:SetPrefabNameOverride(item.components.inspectable.nameoverride or item.prefab) -- 不开洞穴会显示名字，但是开启洞穴后不行
-        self.inst.components.named:SetName(STRINGS.NAMES
-            [string.upper(item.components.inspectable.nameoverride or item.prefab)])
-    else
-        self.inst:RemoveTag("slot_one")
+        self.shelf.SetImage(self.shelf, item, self.slot)
+		if item.components.inspectable then
+        self.inst:SetPrefabNameOverride(item.components.inspectable.nameoverride or item.prefab)
+		end
     end
 end
 
@@ -110,38 +131,39 @@ function Shelfer:ReturnGift(item)
     end
 end
 
-function Shelfer:AcceptGift(giver, item)
-    if not self.enabled then return false end
+function Shelfer:AcceptGift( giver, item )
 
+    if not self.enabled then
+        return false
+    end
+   
     if self:CanAccept(item, giver) then
-        if item.components.stackable and item.components.stackable.stacksize > 1 then
-            item = item.components.stackable:Get()
-        else
-            item.components.inventoryitem:RemoveFromOwner()
+
+		if item.components.stackable and item.components.stackable.stacksize > 1 then
+			item = item.components.stackable:Get()
+		else
+			item.components.inventoryitem:RemoveFromOwner()
+		end
+        item.onshelf = self.inst
+        self.inst:PushEvent("trade", {giver = giver, item = item})
+
+        if self.shelf and self.slot then
+            self.inst.components.pocket:GiveItem("shelfitem", item)  
+            self.inst.components.inventoryitem.canbepickedup = true
+            self:SetArt()            
         end
-
-        self.shelf.components.container:GiveItem(item, self.slotindex)
-        self:UpdateGift(item)
-
-        self.inst:PushEvent("trade", { giver = giver, item = item })
 
         return true
     end
 
-    local frozen = self.inst.components.freezable and self.inst.components.freezable:IsFrozen() or false
-
-    if self.onrefuse and not frozen then
-        self.onrefuse(self.inst, giver, item)
+    local frozen = false
+    if  self.inst.components.freezable and self.inst.components.freezable:IsFrozen() then
+        frozen = true        
     end
-end
 
-function Shelfer:UpdateGift(item)
-    item.onshelf = self.inst
-
-    if self.shelf and self.slot then
-        self.inst:AddTag("slot_one")
-        self:SetArt()
-    end
+	if self.onrefuse and not frozen then
+		self.onrefuse(self.inst, giver, item)
+	end
 end
 
 return Shelfer

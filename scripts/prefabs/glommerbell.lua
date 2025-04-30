@@ -19,22 +19,19 @@ local function OnPutInInv(inst, owner)
 	if owner.prefab == "mole" or owner.prefab == "krampus" then
 		inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/glommer_bell")
 		OnPlayed(inst, owner)
-		if inst.components.finiteuses then
-			inst.components.finiteuses:Use()
-		end
+		if inst.components.finiteuses then inst.components.finiteuses:Use() end
 	end
 end
 
 local function fn()
 	local inst = CreateEntity()
-
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
 
 	MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst)
+	MakeInventoryFloatable(inst)	
 
 	inst.AnimState:SetBank("bell")
 	inst.AnimState:SetBuild("bell")
@@ -43,7 +40,7 @@ local function fn()
 	inst:AddTag("bell")
 	inst:AddTag("molebait")
 	inst:AddTag("aquatic")
-
+			
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
@@ -63,15 +60,16 @@ local function fn()
 
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem:SetOnPutInInventoryFn(OnPutInInv)
-
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
 
 	inst:AddComponent("tool")
 	inst.components.tool:SetAction(ACTIONS.PLAY)
 
-	inst:ListenForEvent("onstolen", function(inst, data)
+	inst:ListenForEvent("onstolen", function(inst, data) 
 		if data.thief.components.inventory then
 			data.thief.components.inventory:GiveItem(inst)
-		end
+		end 
 	end)
 
 	shine(inst)
@@ -79,4 +77,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("bell", fn, assets)
+return Prefab("bell1", fn, assets)

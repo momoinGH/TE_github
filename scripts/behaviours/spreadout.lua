@@ -7,6 +7,7 @@ SpreadOut = Class(BehaviourNode, function(self, inst, spread_dist, others_tags)
 	self.others_tags = others_tags
 
 	self.nearby_ents = {}
+
 end)
 
 function SpreadOut:__tostring()
@@ -23,7 +24,7 @@ end
 
 function SpreadOut:Visit()
 	--behaviour is unfinished
-	self.status = FAILED
+ 	self.status = FAILED
 
 	--[[
 	local pos = self.inst:GetPosition()

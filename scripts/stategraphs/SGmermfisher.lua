@@ -100,10 +100,8 @@ local states =
         },
         timeline =
         {
-            TimeEvent(0 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_splat", nil,
-                    .5)
-            end),
+            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/tentacle/tentacle_splat", nil,
+                    .5) end),
         },
     },
 
@@ -201,13 +199,13 @@ local states =
 
                         if target.Transform ~= nil then
                             local mine_fx = (frozen and "mining_ice_fx") or (moonglass and "mining_moonglass_fx") or
-                                "mining_fx"
+                            "mining_fx"
                             SpawnPrefab(mine_fx).Transform:SetPosition(target.Transform:GetWorldPosition())
                         end
 
                         inst.SoundEmitter:PlaySound((frozen and "dontstarve_DLC001/common/iceboulder_hit") or
-                            (moonglass and "turnoftides/common/together/moon_glass/mine") or
-                            "dontstarve/wilson/use_pick_rock")
+                        (moonglass and "turnoftides/common/together/moon_glass/mine") or
+                        "dontstarve/wilson/use_pick_rock")
                     end
                 end
 
@@ -344,7 +342,7 @@ local states =
         name = "fishing_pre",
         tags = { "canrotate", "prefish", "fishing" },
         onenter = function(inst)
-            ponds[tostring(inst.GUID)] = inst.bufferedaction.target
+            ponds[tostring(inst.GUID)]=inst.bufferedaction.target
             inst.AnimState:PlayAnimation("fish_pre")
         end,
 
@@ -549,7 +547,7 @@ local states =
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(inst:GetPosition())
+            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
         end,
     },
 

@@ -85,13 +85,25 @@ function ObsidianTool:OnUpdate(dt)
         self:SetCharge(math.max(self.charge - 1, 0))
         self.cooltimer = 0.0
     end
-
+	   
     local charge, maxcharge = self:GetCharge()
-    local percentage = charge / maxcharge
+	local percentage = charge / maxcharge
     if self.inst.components.temperature then
         local heat = Lerp(0, TUNING.OBSIDIAN_TOOL_MAXHEAT, percentage)
         self.inst.components.temperature:DoDelta(math.max((heat - curtemp) / 30, 0)) -- 调整与温差相关的失温倍率: 随充能升高，不随充能降低
     end
+
+    -- local owner = nil	
+    -- if self.inst.components.equippable and self.inst.components.equippable:IsEquipped() and self.inst.components.inventoryitem then
+    -- 	owner = self.inst.components.inventoryitem:GetGrandOwner()
+    -- 	-- print(owner)
+    -- 	-- print(self.charge)		
+    -- 	if owner then
+    -- 	local newtemp = self.inst.components.temperature:GetCurrent()
+    -- 	owner.components.temperature:SetTemperature(newtemp + 55 * (self.charge/self.maxcharge))
+    -- 	end
+    -- end	
+
 end
 
 local function getAnimSuffix(self, percentage)

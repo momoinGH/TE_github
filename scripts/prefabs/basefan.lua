@@ -11,16 +11,16 @@ local prefabs =
 }
 
 local function ontimerdone(inst, data)
-	if data.name == "Reload" then
-		inst.canFire = true
-	end
+    if data.name == "Reload" then
+        inst.canFire = true
+    end
 end
 
 local function TurnOff(inst, instant)
 	inst.on = false
 	inst.components.fueled:StopConsuming()
 	inst:RemoveTag("prevents_hayfever")
-	inst:RemoveTag("interior_center")
+	inst:RemoveTag("blows_air")
 
 	if instant then
 		inst.sg:GoToState("idle_off")
@@ -30,9 +30,20 @@ local function TurnOff(inst, instant)
 end
 
 local function TurnOn(inst, instant)
+local alagado = GetClosestInstWithTag("mare", inst, 10)
+if alagado then
+local fx = SpawnPrefab("shock_machines_fx")
+if fx then local pt = inst:GetPosition() fx.Transform:SetPosition(pt.x, pt.y, pt.z) end 
+if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
+inst.on = false
+return 
+end
 	inst.on = true
+	local randomizedStartTime = POPULATING
 	inst.components.fueled:StartConsuming()
 	inst:AddTag("prevents_hayfever")
+--	inst:AddTag("blows_air")
+
 
 	if instant then
 		inst.sg:GoToState("idle_on")
@@ -51,7 +62,7 @@ local function OnFuelSectionChange(old, new, inst)
 end
 
 local function CanInteract(inst)
-	return not inst.components.fueled:IsEmpty() --and not inst.components.floodable.flooded
+	return not inst.components.fueled:IsEmpty() --and not inst.components.floodable.flooded 
 end
 
 local function onhammered(inst, worker)
@@ -88,23 +99,23 @@ local function getstatus(inst, viewer)
 end
 
 local function OnEntitySleep(inst)
-	inst.SoundEmitter:KillSound("firesuppressor_idle")
+    inst.SoundEmitter:KillSound("firesuppressor_idle")
 end
 
 local function onsave(inst, data)
 	if inst:HasTag("burnt") or inst:HasTag("fire") then
-		data.burnt = true
-	end
+        data.burnt = true
+    end
 
-	data.on = inst.on
+    data.on = inst.on
 end
 
 local function onload(inst, data)
 	if data and data.burnt and inst.components.burnable and inst.components.burnable.onburnt then
-		inst.components.burnable.onburnt(inst)
-	end
+        inst.components.burnable.onburnt(inst)
+    end
 	if data and data.on then
-		inst.on = data.on
+    inst.on = data.on
 	end
 end
 
@@ -120,6 +131,15 @@ local function onbuilt(inst)
 end
 
 local function ontakefuelfn(inst)
+local alagado = GetClosestInstWithTag("mare", inst, 10)
+if alagado then
+local fx = SpawnPrefab("shock_machines_fx")
+if fx then local pt = inst:GetPosition() fx.Transform:SetPosition(pt.x, pt.y, pt.z) end 
+if inst.SoundEmitter then inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_water") end
+inst.on = false
+TurnOff(inst)
+return 
+end
 	inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/machine_fuel")
 end
 
@@ -130,7 +150,7 @@ local function fn()
 	local anim = inst.entity:AddAnimState()
 	local sound = inst.entity:AddSoundEmitter()
 
-	local minimap = inst.entity:AddMiniMapEntity()
+	local minimap = inst.entity:AddMiniMapEntity()	
 	minimap:SetPriority(5)
 	minimap:SetIcon("basefan.png")
 
@@ -140,12 +160,12 @@ local function fn()
 	anim:SetBuild("basefan")
 	anim:PlayAnimation("off")
 	inst.on = false
-
+	
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
 		return inst
-	end
+	end	
 
 	inst:AddComponent("inspectable")
 	inst.components.inspectable.getstatus = getstatus
@@ -167,7 +187,7 @@ local function fn()
 	inst.components.fueled.secondaryfueltype = "CHEMICAL"
 
 	inst:AddComponent("timer")
-	inst:ListenForEvent("timerdone", ontimerdone)
+    inst:ListenForEvent("timerdone", ontimerdone)
 
 	inst:AddComponent("lootdropper")
 	inst:AddComponent("workable")
@@ -179,10 +199,10 @@ local function fn()
 	inst:SetStateGraph("SGbasefan")
 
 	inst.OnSave = onsave
-	inst.OnLoad = onload
-	inst.OnLoadPostPass = OnLoadPostPass
-	inst.OnEntitySleep = OnEntitySleep
-
+    inst.OnLoad = onload
+    inst.OnLoadPostPass = OnLoadPostPass
+    inst.OnEntitySleep = OnEntitySleep
+	
 	inst:ListenForEvent("onbuilt", onbuilt)
 
 
@@ -190,5 +210,13 @@ local function fn()
 	return inst
 end
 
-return Prefab("basefan", fn, assets, prefabs),
-	MakePlacer("basefan_placer", "sprinkler_placement", "sprinkler_placement", "idle", true, nil, nil, 1.55)
+local function OnHit(inst, dist)
+	inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/firesupressor_impact")
+	-- SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst:GetPosition():Get())	
+	inst:Remove()
+end
+
+require "prefabutil"
+
+return Prefab("basefan", fn, assets, prefabs), 
+MakePlacer("common/basefan_placer", "sprinkler_placement", "sprinkler_placement", "idle", true, nil, nil, 1.55)

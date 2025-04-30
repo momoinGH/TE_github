@@ -1,4 +1,3 @@
---- 安装
 local Installations = Class(function(self, inst)
     self.inst = inst
     self.caninstallfn = nil
@@ -33,7 +32,7 @@ function Installations:Install(prefab)
     local obj = SpawnPrefab(prefab)
     if obj then
         obj.entity:SetParent(self.inst.entity)
-        obj.Transform:SetPosition(0, 0.03, 0)
+		obj.Transform:SetPosition(0, 0.03, 0)		
         self:SetInstallation(obj)
         if self.oninstallfn then
             self.oninstallfn(obj, self.inst)

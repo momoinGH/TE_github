@@ -1,252 +1,129 @@
 require "stategraphs/SGcrab"
 
-local assets =
+local assets=
 {
 	Asset("ANIM", "anim/crabbit_build.zip"),
 	Asset("ANIM", "anim/crabbit_beardling_build.zip"),
 	Asset("ANIM", "anim/beardling_crabbit.zip"),
 
 	Asset("ANIM", "anim/crabbit.zip"),
+	--Asset("ANIM", "anim/crab_basic.zip"),
+	--Asset("ANIM", "anim/crab_build.zip"),
+	
 }
 
-local CRAB_WALK_SPEED = 1.5
-local CRAB_RUN_SPEED = 5
-local CRAB_HEALTH = 50
+local   CRAB_WALK_SPEED = 1.5
+local   CRAB_RUN_SPEED = 5
+local   CRAB_HEALTH = 50
+local APPEASEMENT_MEDIUM = 16
 local BEARDLING_SANITY = .4
-
+		
 local prefabs =
 {
-	"fishmeat_small",
-	"fishmeat_small_cooked",
-	"beardhair",
-	"monstermeat",
-    "cookedmonstermeat",
-    "nightmarefuel",
-	"shadow_despawn",
-    "statue_transition_2",
+    "fishmeat_small",
+    "fishmeat_small_cooked",
+    "beardhair",
 }
 
-local crabbitsounds =
+local crabbitsounds = 
 {
-	scream = "dontstarve_DLC002/creatures/crab/scream",
-	hurt = "dontstarve_DLC002/creatures/crab/scream_short",
+    scream = "dontstarve_DLC002/creatures/crab/scream",
+    hurt = "dontstarve_DLC002/creatures/crab/scream_short",
 }
 
-local beardsounds =
+local beardsounds = 
 {
-	scream = "dontstarve_DLC002/creatures/crab/scream",
-	hurt = "dontstarve_DLC002/creatures/crab/scream_short",
+    scream = "dontstarve_DLC002/creatures/crab/scream",
+    hurt = "dontstarve_DLC002/creatures/crab/scream_short",
 }
 
-local crabbitloot = {"fishmeat_small"}
-local forced_beardlingloot = {"nightmarefuel"}
 
 local brain = require "brains/crabbrain"
 
-local function DoShadowFx(inst, isnightmare)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local fx = SpawnPrefab("statue_transition_2")
-    fx.Transform:SetPosition(x, y, z)
-    fx.Transform:SetScale(.5, .5, .5)
-
-    --When forcing into nightmare state, shadow_trap would've already spawned this fx
-    if not isnightmare then
-        fx = SpawnPrefab("shadow_despawn")
-        local platform = inst:GetCurrentPlatform()
-        if platform ~= nil then
-            fx.entity:SetParent(platform.entity)
-            fx.Transform:SetPosition(platform.entity:WorldToLocalSpace(x, y, z))
-            fx:ListenForEvent("onremove", function()
-                fx.Transform:SetPosition(fx.Transform:GetWorldPosition())
-                fx.entity:SetParent(nil)
-            end, platform)
-        else
-            fx.Transform:SetPosition(x, y, z)
-        end
-    end
-end
-
-local function IsCrazyGuy(guy)
-    local sanity = guy ~= nil and guy.replica.sanity or nil
-    return sanity ~= nil and sanity:IsInsanityMode() and sanity:GetPercentNetworked() <= (guy:HasTag("dappereffects") and TUNING.DAPPER_BEARDLING_SANITY or TUNING.BEARDLING_SANITY)
-end
-
-local function IsForcedNightmare(inst)
-    return inst.components.timer:TimerExists("forcenightmare")
-end
-
-local function SetRabbitLoot(lootdropper)
-    if lootdropper.loot ~= crabbitloot and not lootdropper.inst._fixedloot then
-        lootdropper:SetLoot(crabbitloot)
-    end
-end
-
-local function SetBeardlingLoot(lootdropper)
-    if not lootdropper.inst._fixedloot then
-        lootdropper:SetLoot(nil)
-        lootdropper:AddRandomLoot("beardhair", .5)
-        lootdropper:AddRandomLoot("monstermeat", 1)
-        lootdropper:AddRandomLoot("nightmarefuel", 1)
-        lootdropper.numrandomloot = 1
-    end
-end
-
-local function SetForcedBeardlingLoot(lootdropper)
-    if not lootdropper.inst._fixedloot then
-        lootdropper:SetLoot(forced_beardlingloot)
-        if math.random() < .5 then
-            lootdropper:AddRandomLoot("beardhair", .5)
-            lootdropper:AddRandomLoot("monstermeat", 1)
-            lootdropper.numrandomloot = 1
-        end
-    end
-end
-
 local function BecomeRabbit(inst)
-    if IsForcedNightmare(inst) or inst.components.health:IsDead() then
-        return
-    end
-    inst.AnimState:SetBuild("crabbit_build")
-    if inst.components.inventoryitem then
-        inst.components.inventoryitem:ChangeImageName("crab")
-    end
-    inst.sounds = crabbitsounds
+	if not inst.iscrab then
+		inst.AnimState:SetBuild("crabbit_build")
+	    inst.components.lootdropper:SetLoot({"fishmeat_small"})
+	    inst.iscrab = true
+	    inst.components.sanityaura.aura = 0
+		inst.components.inventoryitem:ChangeImageName("crab")
+		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+		inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
+		inst.sounds = crabbitsounds
+	end
 end
 
-local function OnEnterLimbo(inst)
-    inst.components.timer:PauseTimer("forcenightmare")
+local function BecomeBeardling(inst)
+	if inst.iscrab then
+		inst.AnimState:SetBuild("crabbit_beardling_build")
+	    inst.components.lootdropper:SetLoot{}
+		inst.components.lootdropper:AddRandomLoot("beardhair", .5)	    
+		inst.components.lootdropper:AddRandomLoot("monstermeat", 1)	    
+		inst.components.lootdropper:AddRandomLoot("nightmarefuel", 1)	  
+		inst.components.lootdropper.numrandomloot = 1
+		inst.components.sanityaura.aura = -TUNING.SANITYAURA_MED		
+	    inst.iscrab = false
+	    inst.components.inventoryitem:ChangeImageName("crabbit_beardling")
+		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+		inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+		inst.sounds = beardsounds
+	end
 end
 
-local function OnExitLimbo(inst)
-    inst.components.timer:ResumeTimer("forcenightmare")
-end
-
-local function OnTimerDone(inst, data)
-    if data ~= nil and data.name == "forcenightmare" then
-        if not (inst:IsInLimbo() or inst:IsAsleep()) then
-            if inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("sleeping") then
-                inst.components.timer:StartTimer("forcenightmare", 1)
-                return
-            end
-            DoShadowFx(inst, false)
-        end
-        inst:RemoveEventCallback("timerdone", OnTimerDone)
-        inst:RemoveEventCallback("enterlimbo", OnEnterLimbo)
-        inst:RemoveEventCallback("exitlimbo", OnExitLimbo)
-        BecomeRabbit(inst)
-    end
-end
-
-local function BecomeBeardling(inst, duration)
-    -- duration nil is loading, so don't perform checks
-    if duration ~= nil then
-        if inst.components.health:IsDead() then
-            return
-        end
-        local t = inst.components.timer:GetTimeLeft("forcenightmare")
-        if t ~= nil then
-            if t < duration then
-                inst.components.timer:SetTimeLeft("forcenightmare", duration)
-            end
-            return
-        end
-        inst.components.timer:StartTimer("forcenightmare", duration, inst:IsInLimbo())
-    end
-    inst.AnimState:SetBuild("crabbit_beardling_build")
-    if inst.components.inventoryitem ~= nil then
-        inst.components.inventoryitem:ChangeImageName("crabbit_beardling")
-    end
-    inst.sounds = beardsounds
-    inst:ListenForEvent("timerdone", OnTimerDone)
-    inst:ListenForEvent("enterlimbo", OnEnterLimbo)
-    inst:ListenForEvent("exitlimbo", OnExitLimbo)
-end
-
-local function OnForceNightmareState(inst, data)
-    if data ~= nil and data.duration ~= nil then
-        DoShadowFx(inst, true)
-        BecomeBeardling(inst, data.duration)
-    end
-end
-
-local function OnWake(inst)
-    --inst:WatchWorldState("iswinter", OnIsWinter)
-    if inst.task ~= nil then
-        inst.task:Cancel()
-        inst.task = nil
-    end
-		BecomeRabbit(inst)
-end
-
-local function OnSleep(inst)
-    --inst:StopWatchingWorldState("iswinter", OnIsWinter)
-    if inst.task ~= nil then
-        inst.task:Cancel()
-        inst.task = nil
-    end
-end
-
-local function OnLoad(inst)
-	if IsForcedNightmare(inst) then
-		BecomeBeardling(inst, nil)
-		if inst:IsInLimbo() then
-			inst.components.timer:PauseTimer("forcenightmare")
+local function CheckTransformState(inst)
+	if not inst.components.health:IsDead() then
+		local player = GetClosestInstWithTag("player", inst, 17)
+		if player and player.components.sanity:GetPercent() < BEARDLING_SANITY then
+			BecomeBeardling(inst)
 		else
-			inst.components.timer:ResumeTimer("forcenightmare")
+			BecomeRabbit(inst)			
 		end
 	end
 end
 
-local function SetBeardlingTrapData(inst)
-	local t = inst.components.timer:GetTimeLeft("forcenightmare")
-	return t ~= nil and {
-		beardlingtime = t,
-	} or nil
+local function ondrop(inst)
+	inst.sg:GoToState("stunned")
+	CheckTransformState(inst)
 end
 
-local function RestoreBeardlingFromTrap(inst, data)
-	if data ~= nil and data.beardlingtime ~= nil then
-		BecomeBeardling(inst, data.beardlingtime)
+local function OnWake(inst)
+	CheckTransformState(inst)
+	inst.checktask = inst:DoPeriodicTask(10, CheckTransformState)
+end
+
+local function OnSleep(inst)
+	 if inst.checktask then
+	 	inst.checktask:Cancel()
+	 	inst.checktask = nil
+	 end
+end
+
+local function GetCookProductFn(inst)
+	if inst.iscrab then
+		return "fishmeat_small_cooked" 
+	else 
+		return "cookedmonstermeat"
 	end
-end
-
-local function CalcSanityAura(inst, observer)
-    return (IsForcedNightmare(inst) or IsCrazyGuy(observer)) and -TUNING.SANITYAURA_MED or 0
-end
-
-local function GetCookProductFn(inst, cooker, chef)
-    return (IsForcedNightmare(inst) or IsCrazyGuy(chef)) and "cookedmonstermeat" or "fishmeat_small_cooked"
 end
 
 local function OnCookedFn(inst)
 	inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/crab/scream_short")
 end
 
-local function LootSetupFunction(lootdropper)
-    local guy = lootdropper.inst.causeofdeath
-	if IsForcedNightmare(lootdropper.inst) then
-		SetForcedBeardlingLoot(lootdropper)
-	elseif IsCrazyGuy(guy ~= nil and guy.components.follower ~= nil and guy.components.follower.leader or guy) then
-        SetBeardlingLoot(lootdropper)
-    else
-        SetRabbitLoot(lootdropper)
-    end
-end
-
 local function OnAttacked(inst, data)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local ents = TheSim:FindEntities(x, y, z, 30, { 'crab' })
-
-	local num_friends = 0
-	local maxnum = 5
-	for k, v in pairs(ents) do
-		v:PushEvent("gohome")
-		num_friends = num_friends + 1
-
-		if num_friends > maxnum then
-			break
-		end
-	end
+    local x,y,z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x,y,z, 30, {'crab'})
+    
+    local num_friends = 0
+    local maxnum = 5
+    for k,v in pairs(ents) do
+        v:PushEvent("gohome")
+        num_friends = num_friends + 1
+        
+        if num_friends > maxnum then
+            break
+        end
+    end
 end
 
 local function OnDug(inst, worker)
@@ -269,156 +146,128 @@ local function OnDug(inst, worker)
 end
 
 local function DisplayName(inst)
-	if inst.sg:HasStateTag("invisible") then
-		return STRINGS.NAMES.CRAB_HIDDEN
-	end
-	return STRINGS.NAMES.CRAB
+    if inst.sg:HasStateTag("invisible") then
+        return STRINGS.NAMES.CRAB_HIDDEN
+    end
+    return STRINGS.NAMES.CRAB
 end
 
 local function getstatus(inst)
-	if inst.sg:HasStateTag("invisible") then
-		return "HIDDEN"
-	end
-end
-
-local function OnDropped(inst)
-    inst.sg:GoToState("stunned")
-end
-
-local function getmurdersound(inst, doer)
-    return (IsForcedNightmare(inst) or IsCrazyGuy(doer)) and beardsounds.hurt or inst.sounds.hurt
-end
-
-local function getincineratesound(inst, doer)
-    return (IsForcedNightmare(inst) or IsCrazyGuy(doer)) and beardsounds.scream or inst.sounds.scream
-end
-
-local function drawimageoverride(inst, viewer)
-    return (IsForcedNightmare(inst) or IsCrazyGuy(viewer)) and "crabbit_beardling"
+    if inst.sg:HasStateTag("invisible") then 
+        return "HIDDEN"
+    end
 end
 
 local function fn(Sim)
 	local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddPhysics()
+	local trans = inst.entity:AddTransform()
+	local anim = inst.entity:AddAnimState()
+    local physics = inst.entity:AddPhysics()
+	local sound = inst.entity:AddSoundEmitter()
+	local shadow = inst.entity:AddDynamicShadow()
+	shadow:SetSize( 1.5, .5 )
+    inst.Transform:SetFourFaced()
     inst.entity:AddNetwork()
-    inst.entity:AddLightWatcher()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddDynamicShadow()
-    inst.DynamicShadow:SetSize(1.5, .5)
-	inst.Transform:SetFourFaced()
+	
+    MakeCharacterPhysics(inst, 1, 0.5)
+ --   MakePoisonableCharacter(inst)
 
-	MakeCharacterPhysics(inst, 1, 0.5)
-
-    inst.AnimState:SetBank("crabbit")
-    inst.AnimState:SetBuild("crabbit_build")
-    inst.AnimState:PlayAnimation("idle")
+    anim:SetBank("crabbit")
+    anim:SetBuild("crabbit_build")
+    anim:PlayAnimation("idle")
 
     inst:AddTag("animal")
     inst:AddTag("prey")
     inst:AddTag("rabbit")
-	inst:AddTag("crab")
     inst:AddTag("smallcreature")
-    inst:AddTag("canbetrapped")
-    inst:AddTag("cattoy")
-    inst:AddTag("catfood")
-    inst:AddTag("stunnedbybomb")
-    inst:AddTag("cookable")
-
-    inst.AnimState:SetClientsideBuildOverride("insane", "crabbit_build", "crabbit_beardling_build")
-    inst:SetClientSideInventoryImageOverride("insane", "crab.tex", "crabbit_beardling.tex")
-
-    MakeFeedableSmallLivestockPristine(inst)
-
-    inst.displaynamefn = DisplayName
+    inst:AddTag("canbetrapped")    
 
 	inst.entity:SetPristine()
 
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-    inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-	inst.components.locomotor.runspeed = CRAB_RUN_SPEED
-	inst.components.locomotor.walkspeed = CRAB_WALK_SPEED
-    inst:SetStateGraph("SGcrab")
-
-    inst:SetBrain(brain)
-
-	inst.data = {}
-
-	inst:AddComponent("eater")
-    local diet = {FOODTYPE.MEAT, FOODTYPE.VEGGIE, FOODTYPE.INSECT}
-    inst.components.eater:SetDiet(diet, diet)
+    if not TheWorld.ismastersim then
+        return inst
+    end
+    
+    inst.data = {}
+    
+    inst:AddComponent("eater")
+    inst.components.eater.foodprefs = { "MEAT", "VEGGIE", "INSECT" }
+    inst.components.eater.ablefoods = { "MEAT", "VEGGIE", "INSECT" }
 
 	inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.nobounce = true
-    inst.components.inventoryitem.canbepickedup = false
-    inst.components.inventoryitem.canbepickedupalive = true
-    inst.components.inventoryitem:SetSinks(true)
-
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+	inst.caminho = "images/inventoryimages/volcanoinventory.xml"
+	inst.components.inventoryitem.nobounce = true
+	inst.components.inventoryitem.canbepickedup = false
+	--inst.components.inventoryitem:SetOnDroppedFn(ondrop) Done in MakeFeedablePet
 	inst:AddComponent("sanityaura")
-	inst.components.sanityaura.aurafn = CalcSanityAura
 
-	inst:AddComponent("cookable")
-	inst.components.cookable.product = GetCookProductFn
-	inst.components.cookable:SetOnCookedFn(OnCookedFn)
-
-	inst:AddComponent("knownlocations")
-	inst:AddComponent("timer")
-
-	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(CRAB_HEALTH)
-    inst.components.health.murdersound = getmurdersound
-    inst.incineratesound = getincineratesound
-
-	inst:AddComponent("workable")
-	inst.components.workable:SetWorkAction(ACTIONS.DIG)
-	inst.components.workable:SetWorkLeft(1)
-	inst.components.workable.workable = false
-	inst.components.workable:SetOnFinishCallback(OnDug)
-
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLootSetupFn(LootSetupFunction)
-    LootSetupFunction(inst.components.lootdropper)
-
+    inst:AddComponent("cookable")
+    inst.components.cookable.product = GetCookProductFn
+    inst.components.cookable:SetOnCookedFn(OnCookedFn)
+    
+    inst:AddComponent("knownlocations")
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "chest"
-	MakeSmallBurnableCharacter(inst, "chest")
-	MakeTinyFreezableCharacter(inst, "chest")
+    inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(CRAB_HEALTH)
+    inst.components.health.murdersound = "dontstarve_DLC002/creatures/crab/scream_short"
 
-    inst:AddComponent("inspectable")
-	inst.components.inspectable.getstatus = getstatus
+    inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.DIG)
+    inst.components.workable:SetWorkLeft(1)
+    inst.components.workable.workable = false
+    inst.components.workable:SetOnFinishCallback(OnDug)
 
-    inst:AddComponent("sleeper")
-    inst.components.sleeper.watchlight = true
+    MakeSmallBurnableCharacter(inst, "chest")
+    MakeTinyFreezableCharacter(inst, "chest")
+
+    inst:AddComponent("lootdropper")
 
     inst:AddComponent("tradable")
+    inst:AddTag("cattoy")
+    inst:AddTag("catfood")
+    
+    inst:AddComponent("inspectable")
+    inst.components.inspectable.getstatus = getstatus
+    inst:AddComponent("sleeper")
 
-    inst.sounds = nil
-    inst.task = nil
-    BecomeRabbit(inst)
+	inst:AddComponent("appeasement")
+	inst.components.appeasement.appeasementvalue = APPEASEMENT_MEDIUM
+	
+    inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
+    inst.components.locomotor.runspeed = CRAB_RUN_SPEED
+    inst.components.locomotor.walkspeed = CRAB_WALK_SPEED
+    inst:SetStateGraph("SGcrab")	
+	
+    inst:SetBrain(brain)
+	
+	BecomeRabbit(inst)
+    CheckTransformState(inst)
+    inst.CheckTransformState = CheckTransformState
+	
+	inst.OnEntityWake = OnWake
+	inst.OnEntitySleep = OnSleep    
+    
+    inst.OnSave = function(inst, data)
+		data.iscrab = inst.iscrab
+    end        
+    
+    inst.OnLoad = function(inst, data)
+        if data then
+			if not data.iscrab then
+				BecomeBeardling(inst)
+	        end
+	    end 
+    end
 
-    MakeHauntablePanic(inst)
+    inst.displaynamefn = DisplayName
 
     inst:ListenForEvent("attacked", OnAttacked)
 
-	--shadow_trap interaction
-	inst.has_nightmare_state = true
-	inst:ListenForEvent("ms_forcenightmarestate", OnForceNightmareState)
+    MakeFeedablePet(inst, 480*2, nil, ondrop)
 
-    MakeFeedableSmallLivestock(inst, TUNING.TOTAL_DAY_TIME*2, nil, OnDropped)
-
-    inst.drawimageoverride = drawimageoverride
-	inst.settrapdata = SetBeardlingTrapData
-	inst.restoredatafromtrap = RestoreBeardlingFromTrap
-
-	inst.OnEntityWake = OnWake
-	inst.OnEntitySleep = OnSleep
-	inst.OnLoad = OnLoad
-
-	return inst
+    return inst
 end
 
-return Prefab("crab", fn, assets, prefabs)
+return Prefab( "crab", fn, assets, prefabs) 

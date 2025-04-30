@@ -8,55 +8,41 @@ local function en_zh_zht(en, zh, zht)
 	end -- 英文
 end
 
-folder_name = folder_name or "workshop-"
+name = en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "船難哈姆雷特生態：來自域外")
+description = en_zh_zht(
+	"\nversion：3.87" ..
+	"\nAttention: We added a complement to this mod." ..
+	"\nIn it will have several changes to improve the experience of the game." ..
+	"\nVisit only the main mod page and download." ..
+	"\nTropical Experience| Complement",
 
-local isdev = not folder_name:find("workshop-")
+	"\n版本：3.87" ..
+	"\n注意：我们为此模组添加了一些内容补充" ..
+	"\n其中包含了多项改进游戏体验的玩法变化，请访问此模组创意工坊进行下载" ..
+	"\n多种生态群系体验 | 补充内容" ..
+	"\n添加饥荒单机版的海难DLC、哈姆雷特DLC内容" ..
+	"\n\n集成多个生态群系模组内容：" ..
+	"\n冰霜岛屿与冰霜洞穴 - 灵感来源永不妥协(Uncompromising Mode)" ..
+	"\n海底世界(Creeps in the Deeps)" ..
+	"\n绿色世界(Green World)" ..
+	"\n大风平原(Windy Plains)" ..
+	"\n\n兼容樱花林(Cherry Forest)",
 
-local function pub_dev(pub, dev)
-    return isdev and dev or pub
-end
-
-name = pub_dev(en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "熱帶體驗 | 船難哈姆雷特生態：來自域外"),
-               en_zh_zht("Tropical Experience | DEV", "热带体验 | 开发版", "熱帶體驗 | 開發版"))
-
-description = en_zh_zht([[
-version：3.83
-Attention: We added a complement to this mod.
-In it will have several changes to improve the experience of the game.
-Visit only the main mod page and download.
-Tropical Experience| Complement",
-]], [[
-版本：3.83
-注意：我们为此模组添加了一些内容补充
-其中包含了多项改进游戏体验的玩法变化，请访问此模组创意工坊进行下载
-多种生态群系体验 | 补充内容
-添加饥荒单机版的海难DLC、哈姆雷特DLC内容
-
-集成多个生态群系模组内容：
-冰霜岛屿与冰霜洞穴 - 灵感来源永不妥协(Uncompromising Mode)
-海底世界(Creeps in the Deeps)
-绿色世界(Green World)
-大风平原(Windy Plains)
-
-兼容樱花林(Cherry Forest)",
-]], [[
-版本：3.83
-注意：我們爲此模組添加了一些內容補充
-其中包含了多項改進遊戲體驗的玩法變化，請訪問此模組創意工坊進行下載
-多種生態羣系體驗 | 補充內容
-添加饑荒單機版的海難DLC、哈姆雷特DLC內容
-
-集成多個生態羣系模組內容：
-冰霜島嶼與冰霜洞穴 - 靈感來源永不妥協(Uncompromising Mode)
-海底世界(Creeps in the Deeps)
-綠色世界(Green World)
-大風平原(Windy Plains)
-
-兼容櫻花林(Cherry Forest)
-]])
+	"\n版本：3.87" ..
+	"\n注意：我們爲此模組添加了一些內容補充" ..
+	"\n其中包含了多項改進遊戲體驗的玩法變化，請訪問此模組創意工坊進行下載" ..
+	"\n多種生態羣系體驗 | 補充內容" ..
+	"\n添加饑荒單機版的海難DLC、哈姆雷特DLC內容" ..
+	"\n\n集成多個生態羣系模組內容：" ..
+	"\n冰霜島嶼與冰霜洞穴 - 靈感來源永不妥協(Uncompromising Mode)" ..
+	"\n海底世界(Creeps in the Deeps)" ..
+	"\n綠色世界(Green World)" ..
+	"\n大風平原(Windy Plains)" ..
+	"\n\n兼容櫻花林(Cherry Forest)"
+)
 
 author = "Vagner da Rocha Santos."
-version = "3.83"
+version = "3.87"
 forumthread = ""
 api_version = 10
 priority = -20
@@ -66,9 +52,8 @@ dont_starve_compatible = false
 all_clients_require_mod = true
 client_only_mod = false
 reign_of_giants_compatible = false
-server_filter_tags = { "shipwrecked", "tropical experience", "Hamlet", "Economy", "itens", "biome", "world", "gen",
-	"money", "coins", "house", "home", "boats", "light", "hats", "boss", "companion", "endless", "ruins", "gun", "hard",
-	"trade", "vagner", "三合一", "热带体验" }
+server_filter_tags = { "shipwrecked", "tropical experience", "Hamlet", "Economy", "itens", "biome", "world", "gen", "money", "coins", "house", "home", "boats", "light", "hats",
+	"boss", "companion", "endless", "ruins", "gun", "hard", "trade", "vagner", "三合一", "热带体验" }
 
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
@@ -77,89 +62,24 @@ local function title(label)
 	return { name = "", label = label, hover = "", options = { { description = "", data = false }, }, default = false, }
 end
 
-local function shipwrecked_plus(id)
-	return {
-		name = "shipwrecked_plus" .. id,
-		label = en_zh_zht("Shipwrecked Plus", "海难PLUS内容", "船難PLUS內容"),
-		hover = en_zh_zht(
-			"Generate a extra Shipwrecked island based on the Shipwrecked Plus mod",
-			"生成来自海难PLUS(Shipwrecked PLUS)模组内容的额外岛屿",
-			"生成來自船難PLUS(Shipwrecked PLUS)模組內容的額外島嶼"),
-		default = true,
-		options = {
-			{
-				description = en_zh_zht("NO", "禁用"),
-				data = false,
-				hover = en_zh_zht(
-					"Eldorado civilization will not be generated",
-					"禁用海难PLUS的黄金之国岛屿生成",
-					"禁用海難PLUS的黃金之國島嶼生成")
-			},
-			{
-				description = en_zh_zht("YES", "启用", "啟用"),
-				data = true,
-				hover = en_zh_zht(
-					"Eldorado civilization will be generated",
-					"启用海难PLUS的黄金之国岛屿生成",
-					"啓用海難PLUS的黃金之國島嶼生成")
-			},
-		},
-	}
-end
-
-local function hamlet_caves(id)
-	return {
-		name = "hamlet_caves" .. id,
-		label = en_zh_zht("Hamlet Caves", "哈姆雷特洞穴"),
-		hover = en_zh_zht(
-			"It will generate a new zone in the caves that is very different from the traditional one and with new biomes, accessible in hamlet biome",
-			"将在洞穴服务器生成一个与联机版洞穴生态迥异的哈姆雷特群系洞穴区域",
-			"將在洞穴伺服器生成一個與連線版洞穴生態迥異的哈姆雷特羣系洞穴區域"),
-		default = true,
-		options =
-		{
-			{ description = en_zh_zht("Disabled", "禁用"), data = false, hover = en_zh_zht("This biome will not be generated", "禁用该生态群系生成", "禁用該生態羣系生成") },
-			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = true, hover = en_zh_zht("Will generate a new cave zone", "将生成一个新的洞穴区域", "將生成一個新的洞穴區域") },
-		},
-	}
-end
-
-local function frost_island(id)
-	return {
-		name = "frost_island" .. id,
-		label = en_zh_zht("Frost Land", "冰霜岛屿", "冰霜島嶼"),
-		hover = en_zh_zht(
-			"Creates Frost island、frozen cave where it is winter all the time.",
-			"创建永远是冬天的冰霜岛屿、冰霜洞穴\n灵感来自永不妥协(Uncompromising Mode)",
-			"創建永遠是冬天的冰霜岛屿、冰霜洞穴\n靈感來自永不妥協(Uncompromising Mode)"),
-		default = 10,
-		options = {
-			{ description = en_zh_zht("NO", "禁用"), data = 5, hover = en_zh_zht("Disable Generation", "禁止生成冰霜岛屿群系", "禁止生成冰霜島嶼羣系") },
-			{ description = en_zh_zht("YES", "启用", "啟用"), data = 10, hover = en_zh_zht("Allow Generate on Caves & World", "在洞穴和地面服务器生成冰霜岛屿及冰霜洞穴", "在洞穴和地面伺服器生成冰霜岛屿及冰霜洞穴") },
-			{ description = en_zh_zht("YES", "启用", "啟用"), data = 15, hover = en_zh_zht("Just Generate Frost island on World", "只在地面服务器生成冰霜岛屿", "只在地面伺服器生成冰霜島嶼") },
-		},
-	}
-end
-
-
 configuration_options =
 {
 	{
-		name = "language",
+		name = "set_idioma",
 		label = en_zh_zht("Language/Idioma", "选择语言", "選擇語言"),
 		hover = "EN/PT/ZH/IT/RU/ES/KR/HU/FR",
-		default = en_zh_zht("en", "zh"),
+		default = en_zh_zht("stringsEU", "stringsCh"),
 		options =
 		{
-			{ description = "English", data = "en" },
-			{ description = "Português", data = "pt" },
-			{ description = "中文", data = "zh" },
-			{ description = "Italian", data = "it" },
-			{ description = "Russian", data = "ru" },
-			{ description = "Spanish", data = "sp" },
-			{ description = "한국어", data = "ko" },
-			{ description = "Magyar", data = "hun" },
-			{ description = "Français", data = "fr" },
+			{ description = "English", data = "stringsEU" },
+			{ description = "Português", data = "stringsPT" },
+			{ description = "中文", data = "stringsCh" },
+			{ description = "Italian", data = "stringsIT" },
+			{ description = "Russian", data = "stringsRU" },
+			{ description = "Spanish", data = "stringsSP" },
+			{ description = "한국어", data = "stringsKO" },
+			{ description = "Magyar", data = "stringsHUN" },
+			{ description = "Français", data = "stringsFR" },
 		},
 	},
 
@@ -211,7 +131,34 @@ configuration_options =
 
 	title(en_zh_zht("<for hamlet world>", "<仅哈姆雷特世界设置>", "<僅哈姆雷特世界設置>")),
 
-	hamlet_caves(""),
+	{
+		name = "hamletcaves_hamletworld",
+		label = en_zh_zht("Hamlet Caves", "哈姆雷特洞穴"),
+		hover = en_zh_zht(
+			"Will generate a new cave zone, do not forget to enable caves to work",
+			"将在洞穴服务器生成一个哈姆雷特群系的新洞穴区域\n需要添加洞穴",
+			"將在洞穴伺服器生成一個哈姆雷特羣系的新洞穴區域\n需要添加洞穴"),
+		options =
+		{
+			{
+				description = en_zh_zht("Disabled", "禁用"),
+				data = 0,
+				hover = en_zh_zht(
+					"This biome will not be generated",
+					"禁用该生态群系生成",
+					"禁用該生態羣系生成")
+			},
+			{
+				description = en_zh_zht("Enabled", "启用", "啟用"),
+				data = 1,
+				hover = en_zh_zht(
+					"Will generate a new cave zone",
+					"将生成一个新的洞穴区域",
+					"將生成一個新的洞穴區域")
+			},
+		},
+		default = 1,
+	},
 
 	{
 		name = "togethercaves_hamletworld",
@@ -380,9 +327,69 @@ configuration_options =
 		},
 	},
 
-	shipwrecked_plus(""),
+	{
+		name = "Shipwreckedworld_plus",
+		label = en_zh_zht("Shipwrecked Plus", "海难PLUS内容", "船難PLUS內容"),
+		hover = en_zh_zht(
+			"Generate a extra Shipwrecked island based on the Shipwrecked Plus mod",
+			"生成来自海难PLUS(Shipwrecked PLUS)模组内容的额外岛屿",
+			"生成來自船難PLUS(Shipwrecked PLUS)模組內容的額外島嶼"),
+		default = true,
+		options = {
+			{
+				description = en_zh_zht("NO", "禁用"),
+				data = false,
+				hover = en_zh_zht(
+					"Eldorado civilization will not be generated",
+					"禁用海难PLUS的黄金之国岛屿生成",
+					"禁用海難PLUS的黃金之國島嶼生成")
+			},
+			{
+				description = en_zh_zht("YES", "启用", "啟用"),
+				data = true,
+				hover = en_zh_zht(
+					"Eldorado civilization will be generated",
+					"启用海难PLUS的黄金之国岛屿生成",
+					"啓用海難PLUS的黃金之國島嶼生成")
+			},
+		},
+	},
 
-	frost_island(""),
+	{
+		name = "frost_islandworld",
+		label = en_zh_zht("Frost Land", "冰霜岛屿", "冰霜島嶼"),
+		hover = en_zh_zht(
+			"Creates Frost island、frozen cave where it is winter all the time.",
+			"创建永远是冬天的冰霜岛屿、冰霜洞穴\n灵感来自永不妥协(Uncompromising Mode)",
+			"創建永遠是冬天的冰霜岛屿、冰霜洞穴\n靈感來自永不妥協(Uncompromising Mode)"),
+		default = 10,
+		options = {
+			{
+				description = en_zh_zht("NO", "禁用"),
+				data = 5,
+				hover = en_zh_zht(
+					"Disable Generation",
+					"禁止生成冰霜岛屿群系",
+					"禁止生成冰霜島嶼羣系")
+			},
+			{
+				description = en_zh_zht("YES", "启用", "啟用"),
+				data = 10,
+				hover = en_zh_zht(
+					"Generate on Caves & World",
+					"生成冰霜岛屿和冰霜洞穴",
+					"生成冰霜島嶼和冰霜洞穴")
+			},
+			{
+				description = en_zh_zht("YES", "启用", "啟用"),
+				data = 15,
+				hover = en_zh_zht(
+					"Just Generate Frost island on World",
+					"只在地面服务器生成冰霜岛屿",
+					"只在地面伺服器生成冰霜島嶼")
+			},
+		},
+	},
 
 	{
 		name = "Moonshipwrecked",
@@ -422,7 +429,34 @@ configuration_options =
 		},
 		default = 1,
 	},
-	hamlet_caves("2"),
+	{
+		name = "hamletcaves_shipwreckedworld",
+		label = en_zh_zht("Hamlet Caves", "哈姆雷特洞穴"),
+		hover = en_zh_zht(
+			"Will generate a new cave zone, do not forget to enable caves to work",
+			"将在洞穴服务器生成一个哈姆雷特群系的新洞穴区域",
+			"將在洞穴伺服器生成一個哈姆雷特羣系的新洞穴區域"),
+		options =
+		{
+			{
+				description = en_zh_zht("Disabled", "禁用"),
+				data = 0,
+				hover = en_zh_zht(
+					"This biome will not be generated",
+					"禁用该生态群系生成",
+					"禁用該生態羣系生成")
+			},
+			{
+				description = en_zh_zht("Enabled", "启用", "啟用"),
+				data = 1,
+				hover = en_zh_zht(
+					"Will generate a new cave zone",
+					"将生成一个新的洞穴区域",
+					"將生成一個新的洞穴區域")
+			},
+		},
+		default = 1,
+	},
 
 
 
@@ -571,7 +605,31 @@ configuration_options =
 		},
 	},
 
-	shipwrecked_plus("2"),
+	{
+		name = "Shipwrecked_plus",
+		label = en_zh_zht("Shipwrecked Plus", "海难PLUS内容", "船難PLUS內容"),
+		hover = en_zh_zht(
+			"Generate a extra Shipwrecked island based on the Shipwrecked Plus mod",
+			"生成来自海难PLUS(Shipwrecked PLUS)模组内容的额外岛屿",
+			"生成來自船難PLUS(Shipwrecked PLUS)模組內容的額外島嶼"),
+		default = true,
+		options = {
+			{
+				description = en_zh_zht("NO", "禁用"),
+				data = false,
+				hover = en_zh_zht("Eldorado civilization will not be generated",
+					"禁用海难PLUS的黄金之国岛屿生成",
+					"禁用船難PLUS的黃金之國島嶼生成")
+			},
+			{
+				description = en_zh_zht("YES", "启用", "啟用"),
+				data = true,
+				hover = en_zh_zht("Eldorado civilization will be generated",
+					"启用海难PLUS的黄金之国岛屿生成",
+					"啟用船難PLUS的黃金之國島嶼生成")
+			},
+		},
+	},
 
 	{
 		name = "Hamlet",
@@ -708,12 +766,12 @@ configuration_options =
 		name = "pinacle",
 		label = en_zh_zht("Pinacle", "峰顶", "峯頂"),
 		hover = en_zh_zht("Generate Roc Nest Island", "生成友善的大鵬巢穴島嶼", "生成友善的大鹏巢穴岛屿"),
-		default = true,
+		default = 1,
 		options =
 		{
 			{
 				description = en_zh_zht("Disabled", "禁用"),
-				data = false,
+				data = 0,
 				hover = en_zh_zht(
 					"This biome will not be generated",
 					"禁用该生态群系生成",
@@ -721,7 +779,7 @@ configuration_options =
 			},
 			{
 				description = en_zh_zht("Enabled", "启用", "啟用"),
-				data = true,
+				data = 1,
 				hover = en_zh_zht(
 					"Will generate a small island in the ocean with a roc nest",
 					"将在海洋中生成一个带有友善的大鹏巢穴的小岛",
@@ -737,11 +795,11 @@ configuration_options =
 			"Generate Ant Hill containing: The Den entrance & Queen Womant",
 			"生成一个包含蚁后房间的蚁丘",
 			"生成一個包含蟻后房間的蟻丘"),
-		default = true,
+		default = 1,
 		options =
 		{
-			{ description = en_zh_zht("Disabled", "禁用"), data = false, hover = en_zh_zht("The Anthill will not be generated", "禁用蚁丘生成", "禁用蟻丘生成") },
-			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = true, hover = en_zh_zht("The Anthill will be generated", "启用蚁丘生成", "啟用蟻丘生成") },
+			{ description = en_zh_zht("Disabled", "禁用"), data = 0, hover = en_zh_zht("The Anthill will not be generated", "禁用蚁丘生成", "禁用蟻丘生成") },
+			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = 1, hover = en_zh_zht("The Anthill will be generated", "启用蚁丘生成", "啟用蟻丘生成") },
 		},
 	},
 
@@ -752,11 +810,11 @@ configuration_options =
 			"Generate Ancient pig Ruins containing the Aporkalypse Calendar",
 			"生成含有灾变日历的古代猪人遗迹",
 			"生成含有災變日曆的古代豬人遺蹟"),
-		default = true,
+		default = 1,
 		options =
 		{
-			{ description = en_zh_zht("Disabled", "禁用"), data = false, hover = en_zh_zht("The Pig Ruin will not be generated", "禁用古代猪人遗迹生成", "禁用古代豬人遺蹟生成") },
-			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = true, hover = en_zh_zht("The Pig Ruin will be generated", "启用古代猪人遗迹生成", "啟用古代豬人遺蹟生成") },
+			{ description = en_zh_zht("Disabled", "禁用"), data = 0, hover = en_zh_zht("The Pig Ruin will not be generated", "禁用古代猪人遗迹生成", "禁用古代豬人遺蹟生成") },
+			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = 1, hover = en_zh_zht("The Pig Ruin will be generated", "启用古代猪人遗迹生成", "啟用古代豬人遺蹟生成") },
 		},
 	},
 
@@ -767,12 +825,12 @@ configuration_options =
 			"create an island with content from the gorge event",
 			"生成一个暴食生态群系岛屿\n灵感来自官方的暴食(Re-Gorge-itated)模组",
 			"生成一個暴食生態羣系島嶼\n靈感來自官方的暴食(Re-Gorge-itated)模組"),
-		default = true,
+		default = 1,
 		options =
 		{
 			{
 				description = en_zh_zht("Disabled", "禁用"),
-				data = false,
+				data = 0,
 				hover = en_zh_zht(
 					"This biome will not be generated",
 					"禁用该生态群系生成",
@@ -780,7 +838,7 @@ configuration_options =
 			},
 			{
 				description = en_zh_zht("Enabled", "启用", "啟用"),
-				data = true,
+				data = 1,
 				hover = en_zh_zht(
 					"Will generate a small island in the ocean with this biome",
 					"将在海洋中生成一个具有此生态群系的岛屿",
@@ -803,9 +861,35 @@ configuration_options =
 		},
 		]]
 
-	frost_island("2"),
+	{
+		name = "frost_island",
+		label = en_zh_zht("Frost Land", "冰霜岛屿", "冰霜島嶼"),
+		hover = en_zh_zht(
+			"Creates Frost island、frozen cave where it is winter all the time.",
+			"创建永远是冬天的冰霜岛屿、冰霜洞穴\n灵感来自永不妥协(Uncompromising Mode)",
+			"創建永遠是冬天的冰霜岛屿、冰霜洞穴\n靈感來自永不妥協(Uncompromising Mode)"),
+		default = 10,
+		options = {
+			{ description = en_zh_zht("NO", "禁用"), data = 5, hover = en_zh_zht("Disable Generation", "禁止生成冰霜岛屿群系", "禁止生成冰霜島嶼羣系") },
+			{ description = en_zh_zht("YES", "启用", "啟用"), data = 10, hover = en_zh_zht("Allow Generate on Caves & World", "在洞穴和地面服务器生成冰霜岛屿及冰霜洞穴", "在洞穴和地面伺服器生成冰霜岛屿及冰霜洞穴") },
+			{ description = en_zh_zht("YES", "启用", "啟用"), data = 15, hover = en_zh_zht("Just Generate Frost island on World", "只在地面服务器生成冰霜岛屿", "只在地面伺服器生成冰霜島嶼") },
+		},
+	},
 
-	hamlet_caves("3"),
+	{
+		name = "hamlet_caves",
+		label = en_zh_zht("Hamlet Caves", "哈姆雷特洞穴"),
+		hover = en_zh_zht(
+			"It will generate a new zone in the caves that is very different from the traditional one and with new biomes, accessible in hamlet biome",
+			"将在洞穴服务器生成一个与联机版洞穴生态迥异的哈姆雷特群系洞穴区域",
+			"將在洞穴伺服器生成一個與連線版洞穴生態迥異的哈姆雷特羣系洞穴區域"),
+		default = 1,
+		options =
+		{
+			{ description = en_zh_zht("Disabled", "禁用"), data = 0, hover = en_zh_zht("This biome will not be generated", "禁用该生态群系生成", "禁用該生態羣系生成") },
+			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = 1, hover = en_zh_zht("Will generate a new cave zone", "将生成一个新的洞穴区域", "將生成一個新的洞穴區域") },
+		},
+	},
 
 	{
 		name = "monkeyisland",
@@ -814,10 +898,10 @@ configuration_options =
 			"It will generate the Monkey Island in ocean",
 			"将在海洋中生成月亮码头",
 			"將在海洋中生成月亮碼頭"),
-		default = true,
+		default = 1,
 		options = {
-			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = true, hover = en_zh_zht("Will generate the Monkey Island", "启用月亮码头生成", "啟用月亮碼頭生成") },
-			{ description = en_zh_zht("Disabled", "禁用"), data = false, hover = en_zh_zht("The Monkey Island will not spawn", "禁用月亮码头生成", "禁用月亮碼頭生成") },
+			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = 1, hover = en_zh_zht("Will generate the Monkey Island", "启用月亮码头生成", "啟用月亮碼頭生成") },
+			{ description = en_zh_zht("Disabled", "禁用"), data = 0, hover = en_zh_zht("The Monkey Island will not spawn", "禁用月亮码头生成", "禁用月亮碼頭生成") },
 		},
 	},
 
@@ -865,10 +949,10 @@ configuration_options =
 			"It will generate the forge arena inside volcano. (will only affects custom and shipwrecked world)",
 			"将在火山内生成熔炉竞技场\n灵感来自官方的熔炉(ReForged)模组\n（仅影响自定义世界和海难世界）",
 			"將在火山內生成熔爐競技場\n靈感來自官方的熔爐(ReForged)模組\n（僅影響自定義世界和船難世界）"),
-		default = true,
+		default = 1,
 		options = {
-			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = true, hover = en_zh_zht("Will generate the forge arena", "启用熔炉竞技场生成", "啟用熔爐競技場生成") },
-			{ description = en_zh_zht("Disabled", "禁用"), data = false, hover = en_zh_zht("Will not generate the forge arena", "禁用熔炉竞技场生成", "禁用熔爐競技場生成") },
+			{ description = en_zh_zht("Enabled", "启用", "啟用"), data = 1, hover = en_zh_zht("Will generate the forge arena", "启用熔炉竞技场生成", "啟用熔爐競技場生成") },
+			{ description = en_zh_zht("Disabled", "禁用"), data = 0, hover = en_zh_zht("Will not generate the forge arena", "禁用熔炉竞技场生成", "禁用熔爐競技場生成") },
 		},
 	},
 
@@ -1218,11 +1302,7 @@ configuration_options =
 		default = 10,
 		options =
 		{
-			{
-				description = en_zh_zht("Disabled", "禁用"),
-				data = 5,
-				hover = en_zh_zht("Disabled", "禁用")
-			},
+			{ description = en_zh_zht("Disabled", "禁用"), data = 5, hover = en_zh_zht("Disabled", "禁用") },
 			{
 				description = en_zh_zht("Tropical-Hamlet", "海难区域和哈姆雷特区域", "船難區域和哈姆雷特區域"),
 				data = 10,
@@ -1267,11 +1347,7 @@ configuration_options =
 		default = 10,
 		options =
 		{
-			{
-				description = en_zh_zht("Disabled", "禁用"),
-				data = 5,
-				hover = en_zh_zht("Disabled", "禁用")
-			},
+			{ description = en_zh_zht("Disabled", "禁用"), data = 5, hover = en_zh_zht("Disabled", "禁用") },
 			{
 				description = en_zh_zht("Tropical Zone", "海难区域", "船難區域"),
 				data = 10,
@@ -1298,11 +1374,7 @@ configuration_options =
 		default = 10,
 		options =
 		{
-			{
-				description = en_zh_zht("Disabled", "禁用"),
-				data = 0,
-				hover = en_zh_zht("Disabled", "禁用")
-			},
+			{ description = en_zh_zht("Disabled", "禁用"), data = 5, hover = en_zh_zht("Disabled", "禁用") },
 			{
 				description = en_zh_zht("Hamlet Zone", "哈姆雷特区域", "哈姆雷特區域"),
 				data = 10,
@@ -1329,7 +1401,7 @@ configuration_options =
 		default = 10,
 		options =
 		{
-			{ description = en_zh_zht("Disabled", "禁用"), data = 0, hover = en_zh_zht("Disabled", "禁用") },
+			{ description = en_zh_zht("Disabled", "禁用"), data = 5, hover = en_zh_zht("Disabled", "禁用") },
 			{
 				description = en_zh_zht("Hamlet Zone", "哈姆雷特区域", "哈姆雷特區域"),
 				data = 10,
@@ -1610,3 +1682,12 @@ configuration_options =
 		default = false,
 	},
 }
+
+
+--swampyvenice
+--pinacle
+--gorgeisland
+--gorgecity
+--mactuskonice
+--pandabiome
+--Shipwrecked_plus

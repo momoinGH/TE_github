@@ -1,6 +1,8 @@
+require "prefabutil"
+
 local assets =
 {
-    Asset("ANIM", "anim/pressure_plate.zip"),
+	Asset("ANIM", "anim/pressure_plate.zip"),
     Asset("ANIM", "anim/pressure_plate_build.zip"),
 }
 
@@ -15,90 +17,91 @@ local function onsave(inst, data)
     end
     if inst:HasTag("trap_spear") then
         data.trap = "trap_spear"
-    end
+    end   
     if inst:HasTag("localtrap") then
         data.localtrap = true
-    end
+    end    
     if inst:HasTag("reversetrigger") then
         data.reversetrigger = true
-    end
+    end  
     if inst:HasTag("startdown") then
         data.startdown = true
-    end
+    end      
 end
 
 local function onload(inst, data)
-    if data then
-        if data.trap then
-            inst:AddTag(data.trap)
-        end
-        if data.localtrap then
-            inst:AddTag("localtrap")
-        end
-        if data.reversetrigger then
-            inst:AddTag("reversetrigger")
-        end
-        if data.startdown then
-            inst:AddTag("startdown")
-        end
+  if data then
+    if data.trap then
+        inst:AddTag(data.trap)
     end
+    if data.localtrap then
+        inst:AddTag("localtrap")
+    end
+    if data.reversetrigger then
+        inst:AddTag("reversetrigger")
+    end 
+    if data.startdown then
+        inst:AddTag("startdown")
+    end
+  end
 end
 
 local function trigger(inst)
     if inst:HasTag("trap_dart") then
         print("TRIGGER DARTS!")
-        local pt = inst:GetPosition()
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "dartthrower" }, { "INTERIOR_LIMBO" })
+        local pt = Vector3(inst.Transform:GetWorldPosition())
+        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, {"dartthrower"}, {"INTERIOR_LIMBO"})
         for i, ent in ipairs(ents) do
-            if ent.components.simpleperiodtask then
-                ent.components.simpleperiodtask:TurnOn("autodartthrower")
+            if ent.components.autodartthrower then
+                ent.components.autodartthrower:TurnOn()    
             elseif ent.shoot then
                 ent.shoot(ent)
             end
         end
     elseif inst:HasTag("trap_spear") then
         print("TRIGGER SPEARS!")
-        local pt = inst:GetPosition()
+        local pt = Vector3(inst.Transform:GetWorldPosition())
         local dist = 50
         if inst:HasTag("localtrap") then
             dist = 4
         end
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, dist, { "spear_trap" }, { "INTERIOR_LIMBO" })
+        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, dist, {"spear_trap"}, {"INTERIOR_LIMBO"})
         for i, ent in ipairs(ents) do
-            if ent then
-                ent:PushEvent("triggertrap")
-            end
-        end
+		if ent then
+            ent:PushEvent("triggertrap")
+		end	
+        end         
     else
-        local pt = inst:GetPosition()
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
+        local pt = Vector3(inst.Transform:GetWorldPosition())
+        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, {"INTERIOR_LIMBO"})
         for i, ent in ipairs(ents) do
             if ent:HasTag("lockable_door") then
                 ent:PushEvent("open")
             end
         end
-    end
+    end    
 end
 
 local function untrigger(inst)
-    if inst:HasTag("trap_dart") then
+    if inst:HasTag("trap_dart")  then
     elseif inst:HasTag("trap_spear") then
         print("TRIGGER SPEARS!")
-        local pt = inst:GetPosition()
+        local pt = Vector3(inst.Transform:GetWorldPosition())
         local dist = 50
         if inst:HasTag("localtrap") then
             dist = 4
         end
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, dist, { "spear_trap" }, { "INTERIOR_LIMBO" })
+        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, dist, {"spear_trap"}, {"INTERIOR_LIMBO"})
         for i, ent in ipairs(ents) do
-            if ent then
-                ent:PushEvent("reset")
-            end
-        end
+		if ent then
+            ent:PushEvent("reset")
+		end
+        end   
     else
-        local pt = inst:GetPosition()
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
+        local pt = Vector3(inst.Transform:GetWorldPosition())
+        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, {"INTERIOR_LIMBO"})
         for i, ent in ipairs(ents) do
+
             if ent:HasTag("lockable_door") then
                 ent:PushEvent("close")
             end
@@ -108,7 +111,7 @@ end
 
 local function onnear(inst)
     print("TRIGGER")
-    --  if inst.weights == 0 then
+  --  if inst.weights == 0 then
     if inst.components.disarmable and inst.components.disarmable.armed and not inst.down then
         inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/items/pressure_plate/hit")
         inst.AnimState:PlayAnimation("popdown")
@@ -120,9 +123,9 @@ local function onnear(inst)
             trigger(inst)
         end
     end
-    -- end
-    -- inst.weights = inst.weights +1
-    -- print("near",inst.weights)
+   -- end
+   -- inst.weights = inst.weights +1
+   -- print("near",inst.weights)
 end
 
 local function onfar(inst)
@@ -138,8 +141,8 @@ local function onfar(inst)
             untrigger(inst)
         end
     end
-    -- end
-    --  print("far",inst.weights)
+   -- end
+  --  print("far",inst.weights)
 end
 
 local function testfn(testinst)
@@ -147,18 +150,19 @@ local function testfn(testinst)
 end
 
 local function disarm(inst, doer)
-    inst.AnimState:PlayAnimation("disarmed")
-    inst.components.playerprox:SetOnPlayerNear(nil)
-    inst.components.playerprox:SetOnPlayerFar(nil)
-    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/disarm_floor")
-    inst.down = false
+   inst.AnimState:PlayAnimation("disarmed")
+   inst.components.creatureprox:SetEnabled(false)
+   inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/disarm_floor")
+   inst.down = false
 end
 
 local function rearm(inst, doer)
     inst.AnimState:PlayAnimation("up_idle")
-    inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetOnPlayerFar(onfar)
+    inst.components.creatureprox:SetEnabled(true)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/disarm_floor")
+    if inst.components.creatureprox then
+       inst.components.creatureprox:forcetest()
+    end    
 end
 
 local function checkstartdown(inst)
@@ -170,9 +174,9 @@ local function checkstartdown(inst)
 end
 
 local function fn(Sim)
-    local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
+	local inst = CreateEntity()
+	local trans = inst.entity:AddTransform()
+	local anim = inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
@@ -184,17 +188,17 @@ local function fn(Sim)
     inst.AnimState:SetSortOrder(3)
 
     inst:AddTag("structure")
-
+    
     inst:AddTag("NOCLICK")
     --------------------
 
     inst.weights = 0
+	
+	inst.entity:SetPristine()
 
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	if not TheWorld.ismastersim then
+		return inst
+	end	
 
     inst:AddComponent("disarmable")
     inst.components.disarmable.disarmfn = disarm
@@ -202,19 +206,20 @@ local function fn(Sim)
     inst.components.disarmable.rearmable = true
     inst:AddTag("weighdownable")
 
-    inst:AddComponent("playerprox")
-    inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetOnPlayerFar(onfar)
-    inst.components.playerprox:SetDist(0.8, 0.9)
-    inst.components.playerprox.inventorytrigger = true
-    inst.components.playerprox.period = 0.01
+    inst:AddComponent("creatureprox")
+    inst.components.creatureprox:SetOnPlayerNear(onnear)
+    inst.components.creatureprox:SetOnPlayerFar(onfar)
+    inst.components.creatureprox:SetTestfn(testfn)
+    inst.components.creatureprox:SetDist(0.8, 0.9)
+    inst.components.creatureprox.inventorytrigger = true	
+    inst.components.creatureprox.period = 0.01
 
     inst.OnSave = onsave
     inst.OnLoad = onload
-    inst:DoTaskInTime(0, function() checkstartdown(inst) end)
+    inst:DoTaskInTime(0,function() checkstartdown(inst) end)
     --inst.OnLoadPostPass = OnLoadPostPass
 
     return inst
 end
 
-return Prefab("pig_ruins_pressure_plate", fn, assets, prefabs)
+return  Prefab( "common/objects/pig_ruins_pressure_plate", fn, assets, prefabs)

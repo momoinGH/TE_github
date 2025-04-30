@@ -1,4 +1,6 @@
 -- this file function only for worldgen, in game use main/util.lua functions
+GLOBAL.setfenv(1, GLOBAL)
+
 SpawnUtil = {}
 
 function SpawnUtil.IsShoreTile(tile)
@@ -152,8 +154,8 @@ local function notclosetowater(x, y, ents)
 end
 
 local waterprefabs = {
-    "rock_coral", "seaweed_planted", "mussel_farm", "lobsterhole", "messagebottle", "messagebottleempty",
-    "shipwreck", "ballphinhouse"
+    "coralreef", "seaweed_planted", "mussel_farm", "lobsterhole", "messagebottle1", 
+    "wreck", "ballphinhouse"
 }
 
 local landprefabs = {

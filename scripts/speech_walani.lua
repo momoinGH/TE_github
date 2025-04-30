@@ -17,29 +17,29 @@ return {
 			NOTALLOWED = "I could jam it in there I guess. Might get smushed.",
 		},
 		RUMMAGE =
-		{
-			GENERIC = "Haha, nah.",
+		{	
+			GENERIC = "Haha, nah.",	
 		},
-		COOK =
-		{
-			GENERIC = "Ughh, no.",
-			TOOFAR = "I just need to walk over there to use it... Ughhh, I'm going to starve!",
-		},
-		GIVE =
-		{
-			DEAD = "Poor guy's dead.",
-			SLEEPING = "Aw. Let it sleep.",
-			BUSY = "It's doing something else right now.",
-		},
-		WRITE =
-		{
-			GENERIC = "Nah. Don't wanna.",
-		},
+        COOK =
+        {
+            GENERIC = "Ughh, no.",
+            TOOFAR = "I just need to walk over there to use it... Ughhh, I'm going to starve!",
+        },
+        GIVE =
+        {
+            DEAD = "Poor guy's dead.",
+            SLEEPING = "Aw. Let it sleep.",
+            BUSY = "It's doing something else right now.",
+        },
+        WRITE =
+        {
+            GENERIC = "Nah. Don't wanna.",
+        },
 		TEACH =
-		{
-			KNOWN = "I already know that, y'know?",
-			CANTLEARN = "Looks boring.",
-		},
+        {
+            KNOWN = "I already know that, y'know?",
+            CANTLEARN = "Looks boring.",
+        },
 	},
 	ACTIONFAIL_GENERIC = "Well that didn't work.",
 	ANNOUNCE_MAGIC_FAIL = "It won't work. Me either! Haha.",
@@ -52,7 +52,7 @@ return {
 	ANNOUNCE_BOAT_SINKING_IMMINENT = "I won't be floating much longer...",
 	ANNOUNCE_BOOMERANG = "Ow! Stop hitting yourself, Walani!",
 	ANNOUNCE_BURNT = "OUCH! That's burnin' my digits!",
-	ANNOUNCE_CANFIX = "\nI should probably repair that. Maybe later.",
+	ANNOUNCE_CANFIX = "\nI should probably repair that. Maybe later.", 
 	ANNOUNCE_CHARLIE = "Who's there?! Leave me alone!",
 	ANNOUNCE_CHARLIE_ATTACK = "ACHK! I SAID GO AWAY!",
 	ANNOUNCE_COLD = "Way too cold!",
@@ -145,6 +145,12 @@ return {
 	},
 	DESCRIBE =
 	{
+		BERRYBUSH =
+		{
+			GENERIC = "How lush!",
+			PICKED = "Thanks for the snack, dude.",
+			WITHERED = "I can nurse it back to health.",
+		},
 		INVENTORYGRAVE = "Surf that big wave in the sky, dude.",
 		INVENTORYMOUND = "Surf that big wave in the sky, dude.",
 		ACCOMPLISHMENT_SHRINE = "Well, that looks like a lot of busywork.",
@@ -186,6 +192,7 @@ return {
 		},
 		AXE = "I could cut trees with this... But I'd rather not.",
 		BABYBEEFALO = "Growing up is a trap... don't do it!",
+		BABYOX = "Stay young forever!",
 		BACKPACK = "To haul my stuff around.",
 		BACONEGGS = "Turn that frown upside down!",
 		BALLPHIN = "My surfing buddies!",
@@ -271,6 +278,7 @@ return {
 		BLUBBER = "If I had enough of this I could surf in any weather!",
 		BLUBBERSUIT = "Gross, but effective.",
 		BOARDS = "Not much surf in these boards.",
+		BOATCANNON = "Can't we find a peaceful solution?",
 		BOATREPAIRKIT = "Surfboard maintenance is essential!",
 		BOAT_LANTERN = "Night-surfing. I love it!",
 		BOAT_TORCH = "Night-surfing. I love it!",
@@ -327,22 +335,22 @@ return {
 			BURNING = "This will make a big splash!",
 			GENERIC = "Just holding it makes me feel powerful.",
 		},
-		COCONUT =
+		COCONUT = 
 		{
-			GENERIC = "Imagine getting conked on the head by one of these!",
-			PLANTED = "Hey little tree dude.",
+		    GENERIC = "Imagine getting conked on the head by one of these!",
+		    PLANTED = "Hey little tree dude.",
 		},
 		COCONUT_COOKED = "Hmmm. Yep. It's cooked now.",
 		COFFEE = "Smells amazing!",
 		COFFEEBEANS = "Come to mama!",
 		COFFEEBEANS_COOKED = "Peppy!",
 		COFFEEBUSH =
-		{
-			BARREN = "Nooo, I need my java!",
-			GENERIC = "Java!",
-			PICKED = "Hurry up and grow back!",
-			WITHERED = "If it grew on the volcano...",
-		},
+		 {
+		 	BARREN = "Nooo, I need my java!",
+		 	GENERIC = "Java!",
+		 	PICKED = "Hurry up and grow back!",
+		 	WITHERED = "If it grew on the volcano...",
+		 },
 		COLDFIRE =
 		{
 			EMBERS = "Don't leave me, light!",
@@ -467,6 +475,7 @@ return {
 		FEATHERSAIL = "For smooth and swift sailing!",
 		FEATHER_CROW = "A real softy.",
 		FEATHER_ROBIN = "I'm tickled by the color of this.",
+		FEATHER_ROBIN_WINTER = "A portable reminder of the beauty of nature.",
 		FEM_PUPPET = "Bummer.",
 		FERTILIZER = "Ground food.",
 		FIREFLIES =
@@ -588,10 +597,10 @@ return {
 			GENERIC = "It's like nature's canopy.",
 		},
 		JUNGLETREESEED =
-		{
-			GENERIC = "A tree yee shall be.",
-			PLANTED = "Ugh, planting that got me all sweaty. Gross.",
-		},
+        {
+            GENERIC = "A tree yee shall be.",
+            PLANTED = "Ugh, planting that got me all sweaty. Gross.",
+        },
 		KABOBS = "It's like a meatsicle!",
 		KILLERBEE =
 		{
@@ -1610,99 +1619,99 @@ return {
 		YELLOWGEM = "It's got a nice energy.",
 		YELLOWSTAFF = "Isn't starlight bad for the skin?",
 		CALIFORNIAROLL = "I could eat a boat load of that stuff.",
+	
 
+        OXWOOL = "Thanks, ox-dude.",
+        ENCRUSTEDBOAT = "Whatever floats my boat.",
+        JUNGLETREEGUARD = "No way this is worth the effort!",
+        BABYOX = "Awww, you smell like garbage!",
+        BALLPHINHOUSE = "Man, even their houses are cute.",
+        DORSALFIN = "I thought I was the only one around here who'd fallen to pieces.",
+        NUBBIN = "Heh. \"Nubbin.\"",
+        CORALLARVE = "Look at this lil slime dude! How are you, slime dude?",
+        RAINBOWJELLYFISH = "Hey there, little buddy.",
+        RAINBOWJELLYFISH_PLANTED = "Lookin' good, lil dude!",
+        RAINBOWJELLYFISH_DEAD = "Aw.",
+        RAINBOWJELLYFISH_COOKED = "Aw jeez. It's even cute when it's cooked.",
+        RAINBOWJELLYJERKY = "I feel bad. And also hungry.",
+        WALL_ENFORCEDLIMESTONE = "A coral corral. Heh.",
+        WALL_ENFORCEDLIMESTONE_ITEM = "I still have to like... build it.",
+        POI = "Boy, could I ever go for some poi.",
+        LOTUSCHIPS = "I just want to eat these until I die!",
+        CROCODOG = "It's cute, from a safe distance.",
+        POISONCROCODOG = "I respect its right to exist, but... not so nearby!",
+        WATERCROCODOG = "What's the crocodeal, dude?!",
+        QUACKENBEAK = "He was probably a bit peckish when he died.",
+        QUACKERINGRAM = "I prefer to be a pacifist on the pacific.",
 
-		OXWOOL = "Thanks, ox-dude.",
-		ENCRUSTEDBOAT = "Whatever floats my boat.",
-		JUNGLETREEGUARD = "No way this is worth the effort!",
-		BABYOX = "Awww, you smell like garbage!",
-		BALLPHINHOUSE = "Man, even their houses are cute.",
-		DORSALFIN = "I thought I was the only one around here who'd fallen to pieces.",
-		NUBBIN = "Heh. \"Nubbin.\"",
-		CORALLARVE = "Look at this lil slime dude! How are you, slime dude?",
-		RAINBOWJELLYFISH = "Hey there, little buddy.",
-		RAINBOWJELLYFISH_PLANTED = "Lookin' good, lil dude!",
-		RAINBOWJELLYFISH_DEAD = "Aw.",
-		RAINBOWJELLYFISH_COOKED = "Aw jeez. It's even cute when it's cooked.",
-		RAINBOWJELLYJERKY = "I feel bad. And also hungry.",
-		WALL_ENFORCEDLIMESTONE = "A coral corral. Heh.",
-		WALL_ENFORCEDLIMESTONE_ITEM = "I still have to like... build it.",
-		POI = "Boy, could I ever go for some poi.",
-		LOTUSCHIPS = "I just want to eat these until I die!",
-		CROCODOG = "It's cute, from a safe distance.",
-		POISONCROCODOG = "I respect its right to exist, but... not so nearby!",
-		WATERCROCODOG = "What's the crocodeal, dude?!",
-		QUACKENBEAK = "He was probably a bit peckish when he died.",
-		QUACKERINGRAM = "I prefer to be a pacifist on the pacific.",
+        --- DLC ------------------------------------------------------------------------------------------------    
 
-		--- DLC ------------------------------------------------------------------------------------------------
+        CAVIAR = "I made them fancy, but they're still fish eggs.",
+        CORMORANT = "Hang ten, stinky sea dude!",
 
-		CAVIAR = "I made them fancy, but they're still fish eggs.",
-		CORMORANT = "Hang ten, stinky sea dude!",
+        FISH3 = "His doofiness is kinda endearing.",
+        FISH4 = "I can't kill that! Look how cute it is!",
+        FISH5 = "What a cute lil dude!",
 
-		FISH3 = "His doofiness is kinda endearing.",
-		FISH4 = "I can't kill that! Look how cute it is!",
-		FISH5 = "What a cute lil dude!",
+        FISH3_COOKED = "Sorry, man. It was you or me.",
+        FISH4_COOKED = "Delicious, delicious guilt.",
+        FISH5_COOKED = "Sorry. I still gotta eat.",
 
-		FISH3_COOKED = "Sorry, man. It was you or me.",
-		FISH4_COOKED = "Delicious, delicious guilt.",
-		FISH5_COOKED = "Sorry. I still gotta eat.",
+        FISH_FARM = 
+        {
+        	EMPTY = "I guess I gotta find fish eggs now. Oof.",
+			STOCKED = "C'mon fish! I'm an \"instant gratification\" kind of gal.",
+			ONEFISH = "Hey lil dude! Welcome to the farm!",
+			TWOFISH = "Aw, my fish has buddies!",
+			REDFISH = "It's looking like a real party in there!",
+			BLUEFISH  = "Do I really have to eat them?",
+        },
 
-		FISH_FARM =
-		{
-			EMPTY    = "I guess I gotta find fish eggs now. Oof.",
-			STOCKED  = "C'mon fish! I'm an \"instant gratification\" kind of gal.",
-			ONEFISH  = "Hey lil dude! Welcome to the farm!",
-			TWOFISH  = "Aw, my fish has buddies!",
-			REDFISH  = "It's looking like a real party in there!",
-			BLUEFISH = "Do I really have to eat them?",
-		},
+        ROE = "Roe, roe, roe my board... I'm going nuts out here.",
+        ROE_COOKED = "At least they didn't have faces.",
+        
+        SEA_YARD = 
+        {
+            ON = "Does it work on surfboards?",
+            OFF = "Ughhh, I should refill it.",
+            LOWFUEL = "It's running on fumes. Same!",
+        },
+        
+        SEA_CHIMINEA =
+        {
+            EMBERS = "It looks totally pooped.",
+            GENERIC = "I taught the fire how to surf.",
+            HIGH = "That thing's working waaaay too hard.",
+            LOW = "It's okay, fire. You can take a rest if you want.",
+            NORMAL = "Don't strain yourself, fire.",
+            OUT = "I guess it needed a rest.",
+        }, 
 
-		ROE = "Roe, roe, roe my board... I'm going nuts out here.",
-		ROE_COOKED = "At least they didn't have faces.",
+        TAR = "Why did I want this again?",
+        TAR_EXTRACTOR =
+        {
+            ON = "It's doing everything for me. Great!",
+            OFF = "I'm giving Mother Nature a rest.",
+            LOWFUEL = "It's gonna run out of fuel.",
+        },
+        TAR_POOL = "Aww, the tar's seeping right into the ocean water.",
 
-		SEA_YARD =
-		{
-			ON = "Does it work on surfboards?",
-			OFF = "Ughhh, I should refill it.",
-			LOWFUEL = "It's running on fumes. Same!",
-		},
+        TARLAMP = "Will this fit on a surfboard?",
+        TARSUIT = "This may have been my worst idea. Ever.",
+        TAR_TRAP = "Sticky and environmentally unfriendly!",
 
-		SEA_CHIMINEA =
-		{
-			EMBERS = "It looks totally pooped.",
-			GENERIC = "I taught the fire how to surf.",
-			HIGH = "That thing's working waaaay too hard.",
-			LOW = "It's okay, fire. You can take a rest if you want.",
-			NORMAL = "Don't strain yourself, fire.",
-			OUT = "I guess it needed a rest.",
-		},
+        TROPICALBOUILLABAISSE = "Eating a lot cures the desert island blues.",
 
-		TAR = "Why did I want this again?",
-		TAR_EXTRACTOR =
-		{
-			ON = "It's doing everything for me. Great!",
-			OFF = "I'm giving Mother Nature a rest.",
-			LOWFUEL = "It's gonna run out of fuel.",
-		},
-		TAR_POOL = "Aww, the tar's seeping right into the ocean water.",
-
-		TARLAMP = "Will this fit on a surfboard?",
-		TARSUIT = "This may have been my worst idea. Ever.",
-		TAR_TRAP = "Sticky and environmentally unfriendly!",
-
-		TROPICALBOUILLABAISSE = "Eating a lot cures the desert island blues.",
-
-		RESEARCHLAB5 = "In the middle of the ocean and I still have to do stuff!",
-		WATERCHEST1 = "Now I don't need to swim back to shore for my stuff.",
-		QUACKENDRILL = "This is not a drill! Wait, it totally is.",
-		HARPOON = "I don't wanna hurt any poor animals.",
-		MUSSEL_BED = "I should plant it before the poor things dry out.",
-	},
+        RESEARCHLAB5 = "In the middle of the ocean and I still have to do stuff!",
+        WATERCHEST1 = "Now I don't need to swim back to shore for my stuff.",
+        QUACKENDRILL = "This is not a drill! Wait, it totally is.",
+        HARPOON = "I don't wanna hurt any poor animals.",
+        MUSSEL_BED = "I should plant it before the poor things dry out.",
+},
 	DESCRIBE_GENERIC = "Yup, that's definitely a thing.",
 	DESCRIBE_SMOLDERING = "It's getting too hot to handle.",
 	DESCRIBE_TOODARK = "HELP! I'm freakin' out here!",
-	EAT_FOOD =
+		EAT_FOOD =
 	{
 		TALLBIRDEGG_CRACKED = "Sorry, lil guy.",
 	},

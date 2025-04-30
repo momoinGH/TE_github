@@ -21,12 +21,13 @@ local events =
 
             if not inst.components.locomotor:WantsToMoveForward() then
                 if not inst.sg:HasStateTag("idle") then
-                    inst.sg:GoToState("idle")
+                        inst.sg:GoToState("idle")
                 end
             else
                 if not inst.sg:HasStateTag("moving") then
                     inst.sg:GoToState("swimming")
                 end
+
             end
         end),
 }
@@ -34,9 +35,9 @@ local events =
 local states =
 {
 
-    State {
+    State{
         name = "idle",
-        tags = { "idle", "canrotate" },
+        tags = {"idle", "canrotate"},
 
         onenter = function(inst, playanim)
             inst.Physics:Stop()
@@ -47,7 +48,7 @@ local states =
             end
         end,
 
-        events =
+        events=
         {
             EventHandler("animqueueover", function(inst)
                 inst.sg:GoToState("idle")
@@ -55,9 +56,9 @@ local states =
         },
     },
 
-    State {
+    State{
         name = "swimming",
-        tags = { "moving", "canrotate" },
+        tags = {"moving", "canrotate"},
 
 
         onenter = function(inst, skippre)
@@ -76,50 +77,51 @@ local states =
             end
         end,
 
-        onupdate = function(inst)
+        onupdate= function(inst)
             if not inst.components.locomotor:WantsToMoveForward() then
                 inst.sg:GoToState("idle", "run_pst")
             end
         end,
 
-        events =
+         events=
         {
-            EventHandler("animover", function(inst)
-                inst.sg:GoToState("swimming", true)
+             EventHandler("animover", function(inst)
+               inst.sg:GoToState("swimming", true)
             end),
 
-            EventHandler("animqueueover", function(inst)
-                inst.sg:GoToState("swimming", true)
+             EventHandler("animqueueover", function(inst)
+               inst.sg:GoToState("swimming", true)
             end)
         },
 
 
     },
 
-    State {
+     State{
         name = "death",
-        tags = { "busy" },
+        tags = {"busy"},
 
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/death_murder")
             inst:Hide()
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.components.lootdropper:DropLoot(inst:GetPosition())
+            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+				
         end,
 
     },
 
-    State {
+    State{
         name = "hit",
-        tags = { "busy", "hit" },
+        tags = {"busy", "hit"},
 
         onenter = function(inst, cb)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("hit")
         end,
 
-        events =
+        events=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },

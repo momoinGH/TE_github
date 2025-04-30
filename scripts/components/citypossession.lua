@@ -1,4 +1,3 @@
---- 哈姆雷特猪镇城镇的编号
 local Citypossession = Class(function(self, inst)
     self.inst = inst
     self.cityID = 1
@@ -39,6 +38,6 @@ function Citypossession:OnLoad(data)
     if not self.enabled then
         self:Disable()
     end
-end
+end 
 
 return Citypossession

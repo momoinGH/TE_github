@@ -1,14 +1,12 @@
---- 中毒组件
 local Poisonable = Class(function(self, inst)
 	self.inst = inst
-
-	self.dmg = 0   --每次扣除的伤害
-	self.interval = 0 --每次扣血间隔
+	self.dmg = 0
+	self.interval = 0
 	self.maxInterval = 5
 	self.minInterval = 1
 	self.defaultDuration = 60 * 16
 	self.startDuration = 0
-	self.duration = 0 --持续时间
+	self.duration = 0
 	self.updating = false
 	self.lastDamageTime = 0
 	self:SetOnHitFn()
@@ -24,17 +22,20 @@ local function SpoilLoot(inst, loot)
 end
 
 function Poisonable:SetPoison(dmg, interval, duration)
-	self.inst:AddTag("tro_poisoned") --中毒标签
 	self.dmg = dmg or -1
 	self.interval = interval or self.maxInterval
 	self.startDuration = duration or self.defaultDuration
 	self.duration = self.startDuration
+	if not self.updating then
+		self.inst:StartUpdatingComponent(self)
+		if self.inst.components.lootdropper then
+			self.inst.components.lootdropper:SetLootPostInit("poisoned", SpoilLoot)
+		end
+	end
+	
 	if self.inst.player_classified then
 		self.inst.player_classified.poisonover:set_local(true)
 		self.inst.player_classified.poisonover:set(true)
-	end
-	if not self.updating then
-		self.inst:StartUpdatingComponent(self)
 	end
 end
 
@@ -47,9 +48,11 @@ function Poisonable:ResetValues()
 end
 
 function Poisonable:WearOff()
-	self.inst:RemoveTag("tro_poisoned")
 	self:ResetValues()
 	self.inst:StopUpdatingComponent(self)
+	if self.updating and self.inst.components.lootdropper then
+		self.inst.components.lootdropper:RemoveLootPostInit("poisoned")
+	end
 	self.updating = false
 
 	--remove poisonfx
@@ -60,7 +63,7 @@ function Poisonable:WearOff()
 end
 
 function Poisonable:IncreaseIntensity()
-	if self.duration > 0 and self.interval > self.minInterval then
+	if self.duration ~= 0 and self.interval > self.minInterval then
 		local progress = self.startDuration / self.duration
 		self.interval = math.max(progress * self.maxInterval, self.minInterval)
 	end
@@ -79,26 +82,20 @@ function Poisonable:OnUpdate(dt)
 			self.inst.player_classified.poisonover:set(true)
 		end
 	end
-
+	
 	-- poison bubbles fx, fixed by EvenMr
 	if not self.poisonfx and self.dmg < 0 then
 		self.poisonfx = SpawnPrefab("poisonbubble_level1_loop")
-		self.inst:AddChild(self.poisonfx)
 		local cmp = self.inst.components
 		if cmp.burnable and #cmp.burnable.fxdata > 0 then
 			local symbol = cmp.burnable.fxdata[1].follow
 			if symbol then
-				self.poisonfx.Follower:FollowSymbol(self.inst.GUID, symbol, 0, 0, 0)
+				self.poisonfx.Follower:FollowSymbol(self.inst.GUID,symbol,0,0,0)
 			end
 		end
 	end
-
-	if self.duration <= 0
-		or self.inst:HasTag("weremoose")
-		or self.inst:HasTag("weregoose")
-		or self.inst:HasTag("beaver")
-		or self.inst:HasTag("playerghost")
-	then
+	
+	if self.duration <= 0 or self.inst:HasTag("weremoose")  or self.inst:HasTag("weregoose")  or self.inst:HasTag("beaver")  or self.inst:HasTag("playerghost") then
 		self:WearOff()
 	end
 end

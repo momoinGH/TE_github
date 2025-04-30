@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Atlas>
+    <Texture filename="creepindeep_cuisine.tex"/>
+    <Elements>
+        <Element name="fish_gazpacho.tex" u1="0.00195313" u2="0.248047" v1="0.503906" v2="0.996094"/>
+        <Element name="fish_n_chips.tex" u1="0.00195313" u2="0.248047" v1="0.00390625" v2="0.496094"/>
+        <Element name="fish_sushi.tex" u1="0.251953" u2="0.498047" v1="0.503906" v2="0.996094"/>
+        <Element name="flower_sushi.tex" u1="0.251953" u2="0.498047" v1="0.00390625" v2="0.496094"/>
+        <Element name="seajelly.tex" u1="0.501953" u2="0.748047" v1="0.503906" v2="0.996094"/>
+        <Element name="sponge_cake.tex" u1="0.501953" u2="0.748047" v1="0.00390625" v2="0.496094"/>
+        <Element name="tentacle_sushi.tex" u1="0.751953" u2="0.998047" v1="0.503906" v2="0.996094"/>
+        <Element name="tuna_muffin.tex" u1="0.751953" u2="0.998047" v1="0.00390625" v2="0.496094"/>
+    </Elements>
+    <StraightAlpha>false</StraightAlpha>
+</Atlas>
+

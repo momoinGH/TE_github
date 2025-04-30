@@ -12,24 +12,15 @@ local ShadowCreatureBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
-local function GetClosedPlayer(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local player = FindClosestPlayerInRangeSq(x, y, z, 900, true)
-    return player
-end
-
 function ShadowCreatureBrain:OnStart()
+    
     local root = PriorityNode(
-        {
-            ChaseAndAttack(self.inst, 100),
-            Follow(self.inst, GetClosedPlayer, MIN_FOLLOW, MED_FOLLOW, MAX_FOLLOW),
-            Wander(self.inst,
-                function()
-                    local player = GetClosedPlayer(self.inst)
-                    return player and player:GetPosition() or nil
-                end, 20)
-        }, .25)
-
+    {
+        ChaseAndAttack(self.inst, 100),
+        Follow(self.inst, function() return GetPlayer() end, MIN_FOLLOW, MED_FOLLOW, MAX_FOLLOW),
+        Wander(self.inst, function() local player = GetPlayer() if player then return Vector3(player.Transform:GetWorldPosition()) end end, 20)
+    }, .25)
+    
     self.bt = BT(self.inst, root)
 end
 

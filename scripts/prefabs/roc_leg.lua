@@ -1,8 +1,9 @@
+
 require "stategraphs/SGroc_leg"
 
 local trace = function() end
 
-local assets =
+local assets=
 {
 	Asset("ANIM", "anim/roc_leg.zip"),
 }
@@ -18,7 +19,7 @@ local function fn(Sim)
 	local anim = inst.entity:AddAnimState()
 	local physics = inst.entity:AddPhysics()
 	local sound = inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
+    inst.entity:AddNetwork()
 	--local shadow = inst.entity:AddDynamicShadow()
 	--shadow:SetSize( 2.5, 1.5 )
 	inst.Transform:SetSixFaced()
@@ -28,9 +29,9 @@ local function fn(Sim)
 	inst:AddTag("hostile")
 	inst:AddTag("roc")
 	inst:AddTag("roc_leg")
-	inst:AddTag("noteleport")
+	inst:AddTag("noteleport")	
 
-	MakeObstaclePhysics(inst, 2)
+    MakeObstaclePhysics(inst, 2)
 
 	anim:SetBank("foot")
 	anim:SetBuild("roc_leg")
@@ -41,8 +42,8 @@ local function fn(Sim)
 
 	if not TheWorld.ismastersim then
 		return inst
-	end
-
+	end	
+	
 	inst:AddComponent("knownlocations")
 
 	--inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
@@ -50,16 +51,16 @@ local function fn(Sim)
 
 	inst:SetStateGraph("SGroc_leg")
 
-	--	inst:AddComponent("health")
-	--	inst.components.health:SetMaxHealth(TUNING.SNAKE_HEALTH)
+--	inst:AddComponent("health")
+--	inst.components.health:SetMaxHealth(TUNING.SNAKE_HEALTH)
 	--inst.components.health.poison_damage_scale = 0 -- immune to poison
 
-	inst:AddComponent("groundpounder")
-	inst.components.groundpounder.destroyer = true
-	inst.components.groundpounder.damageRings = 2
-	inst.components.groundpounder.destructionRings = 1
-	inst.components.groundpounder.numRings = 2
-
+	inst:AddComponent("groundpounder")	
+    inst.components.groundpounder.destroyer = true
+    inst.components.groundpounder.damageRings = 2
+    inst.components.groundpounder.destructionRings = 1
+    inst.components.groundpounder.numRings = 2	
+    
 	inst:AddComponent("combat")
 	inst.components.combat:SetDefaultDamage(1000)
 	inst:AddComponent("inspectable")
@@ -73,4 +74,4 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("roc_leg", fn, assets, prefabs)
+return Prefab("monsters/roc_leg", fn, assets, prefabs)

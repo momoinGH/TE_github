@@ -1,22 +1,22 @@
+require "prefabutil"
+
 local function make_plantable(data)
     local bank = data.bank or data.name
     local assets =
     {
-        Asset("ANIM", "anim/" .. bank .. ".zip"),
-        Asset("INV_IMAGE", "dug_" .. data.name)
+        Asset("ANIM", "anim/"..bank..".zip"),
+        Asset("INV_IMAGE", "dug_"..data.name)
     }
 
     if data.build ~= nil then
-        table.insert(assets, Asset("ANIM", "anim/" .. data.build .. ".zip"))
+        table.insert(assets, Asset("ANIM", "anim/"..data.build..".zip"))
     end
 
     local function ondeploy(inst, pt, deployer)
-        local tree
-        if data.name == "elephantcactus" then
-            tree = SpawnPrefab("elephantcactus_stump")
-        else
-            tree = SpawnPrefab(data.name)
-        end
+	local tree
+	if data.name == "elephantcactus" then tree = SpawnPrefab("elephantcactus_stump")
+	else tree = SpawnPrefab(data.name)
+	end
         if tree ~= nil then
             tree.Transform:SetPosition(pt:Get())
             inst.components.stackable:Get():Remove()
@@ -29,21 +29,48 @@ local function make_plantable(data)
                 --     one just for this sound!
                 deployer.SoundEmitter:PlaySound("dontstarve/common/plant")
             end
-            if tree:HasTag("machetecut") then
-                tree.AnimState:PlayAnimation(data.anim)
-                tree:RemoveTag("machetecut")
-                tree.components.workable:SetWorkAction(ACTIONS.DIG)
-                tree.components.workable:SetWorkLeft(1)
-                tree.components.timer:StartTimer("spawndelay", 60 * 8 * 2)
-            end
+			if tree:HasTag("machetecut")  then
+				tree.AnimState:PlayAnimation(data.anim)			
+				tree:RemoveTag("machetecut")
+				tree.components.workable:SetWorkAction(ACTIONS.DIG)
+				tree.components.workable:SetWorkLeft(1)
+				tree.components.timer:StartTimer("spawndelay", 60*8*2)
+			end
         end
     end
+
+	local function test_ground(inst, pt)
+	--local another = GetClosestInstWithTag("deployedplant", inst, 2)
+    --if another then return false end
+	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.MAGMAFIELD) then return true end --adicionado por vagner
+	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.ASH) then return true end --adicionado por vagner
+	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.VOLCANO) then return true end --adicionado por vagner
+	return false
+	end
+	
+	local function test_jungle(inst, pt)
+	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == 
+	GROUND.JUNGLE or
+	GROUND.FOREST or
+	GROUND.GRASS or
+	GROUND.DECIDUOUS or
+	GROUND.DIRT or
+	GROUND.RAINFOREST or
+	GROUND.DEEPRAINFOREST or
+	GROUND.FIELDS or
+	GROUND.MEADOW or
+	GROUND.QUAGMIRE_SOIL or
+	GROUND.FARMING_SOIL or
+	GROUND.QUAGMIRE_PARKFIELD) then return true end --adicionado por vagner
+	return false
+	end
 
     local function fn()
         local inst = CreateEntity()
 
         inst.entity:AddTransform()
         inst.entity:AddAnimState()
+        --inst.entity:AddSoundEmitter()
         inst.entity:AddNetwork()
 
         MakeInventoryPhysics(inst)
@@ -57,7 +84,7 @@ local function make_plantable(data)
         if data.floater ~= nil then
             MakeInventoryFloatable(inst, data.floater[1], data.floater[2], data.floater[3])
         else
-            MakeInventoryFloatable(inst, "large", .2, .65)
+            MakeInventoryFloatable(inst)
         end
 
         inst.entity:SetPristine()
@@ -70,13 +97,16 @@ local function make_plantable(data)
         inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
 
         inst:AddComponent("inspectable")
-        inst.components.inspectable.nameoverride = data.inspectoverride or ("dug_" .. data.name)
-        
+        inst.components.inspectable.nameoverride = data.inspectoverride or ("dug_"..data.name)
         inst:AddComponent("inventoryitem")
-
-        if data.name == "nettle" then
-        else
-        end
+		
+		if data.name == "nettle" then
+		inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
+		inst.caminho = "images/inventoryimages/hamletinventory.xml"
+		else
+		inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+		inst.caminho = "images/inventoryimages/volcanoinventory.xml"		
+		end
 
         inst:AddComponent("fuel")
         inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
@@ -87,35 +117,38 @@ local function make_plantable(data)
         MakeHauntableLaunchAndIgnite(inst)
 
         inst:AddComponent("deployable")
+        --inst.components.deployable:SetDeployMode(DEPLOYMODE.ANYWHERE)
         inst.components.deployable.ondeploy = ondeploy
         inst.components.deployable:SetDeployMode(DEPLOYMODE.PLANT)
-        inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.DEFAULT)
-
-        if data.halloweenmoonmutable_settings ~= nil then
-            inst:AddComponent("halloweenmoonmutable")
-            inst.components.halloweenmoonmutable:SetPrefabMutated(data.halloweenmoonmutable_settings.prefab)
-        end
+        inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.MEDIUM)
+		if data.name == "elephantcactus" or data.name == "coffeebush" then
+			inst.components.deployable.CanDeploy = test_ground
+		elseif data.name == "bush_vine" or data.name == "bambootree" then inst.components.deployable.CanDeploy = test_jungle end
+		
+		if data.halloweenmoonmutable_settings ~= nil then
+			inst:AddComponent("halloweenmoonmutable")
+			inst.components.halloweenmoonmutable:SetPrefabMutated(data.halloweenmoonmutable_settings.prefab)
+		end
 
         ---------------------
         return inst
     end
-    return Prefab("dug_" .. data.name, fn, assets)
+    return Prefab("dug_"..data.name, fn, assets)
 end
 
 local plantables =
 {
-    { name = "bambootree",     bank = "bambootree",     build = "bambootree_build", anim = "picked",      },
-    { name = "elephantcactus", bank = "cactus_volcano", build = "cactus_volcano",   anim = "idle_dead",   },
-    { name = "bush_vine",      bank = "bush_vine",      build = "bush_vine",        anim = "hacked_idle", },
-    { name = "nettle",         bank = "nettle",         build = "nettle",                                 },
-    { name = "coffeebush",     bank = "coffeebush",     build = "coffeebush",                             },
+	 {name="bambootree", bank = "bambootree", build = "bambootree_build", anim = "picked", floater = {"large", 0.2, 0.65}},
+	 {name="elephantcactus", bank = "cactus_volcano", build = "cactus_volcano",anim="idle_dead", floater = {"large", 0.2, 0.65}},
+	 {name="bush_vine", bank = "bush_vine", build = "bush_vine", anim = "hacked_idle", floater = {"large", 0.2, 0.65}},
+	 {name="nettle", bank = "nettle", build = "nettle", floater = {"large", 0.2, 0.65}},
+	 {name="coffeebush", bank = "coffeebush", build = "coffeebush", floater = {"large", 0.2, 0.65}},
 }
 
 local prefabs = {}
 for i, v in ipairs(plantables) do
     table.insert(prefabs, make_plantable(v))
-    table.insert(prefabs,
-        MakePlacer("dug_" .. v.name .. "_placer", v.bank or v.name, v.build or v.name, v.anim or "idle"))
+    table.insert(prefabs, MakePlacer("dug_"..v.name.."_placer", v.bank or v.name, v.build or v.name, v.anim or "idle"))
 end
 
 return unpack(prefabs)

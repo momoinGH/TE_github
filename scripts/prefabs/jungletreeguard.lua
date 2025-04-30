@@ -12,39 +12,39 @@ local assets =
 
 local prefabs =
 {
-    "meat",
-    "bird_egg",
-    "cave_banana",
-    "character_fire",
+	"meat",
+	"bird_egg",
+	"cave_banana",
+	"character_fire",
     "livinglog",
     "treeguard_coconut",
 }
 
-SetSharedLootTable('jungletreeguard',
-    {
-        { "livinglog", 1.0 },
-        { "livinglog", 1.0 },
-        { "livinglog", 1.0 },
-        { "livinglog", 0.5 },
-        { "livinglog", 0.5 },
-        { "livinglog", 0.5 },
-        { "monstermeat", 1.0 },
-        { "monstermeat", 0.5 },
-        { "bird_egg", 1.0 },
-        { "bird_egg", 0.5 },
-        { "cave_banana", 1.0 },
-        { "cave_banana", 0.5 },
-    })
+SetSharedLootTable( 'jungletreeguard',
+{
+    {"livinglog",   1.0},
+    {"livinglog",   1.0},
+    {"livinglog",   1.0},
+    {"livinglog",   0.5},
+    {"livinglog",   0.5},
+    {"livinglog",   0.5},
+    {"monstermeat", 1.0},
+	{"monstermeat", 0.5},
+    {"bird_egg",    1.0},
+    {"bird_egg",    0.5},
+	{"cave_banana", 1.0},
+    {"cave_banana", 0.5},
+})
 
 local function OnLoad(inst, data)
     if data and data.hibernate then
         inst.components.sleeper.hibernate = true
     end
     if data and data.sleep_time then
-        inst.components.sleeper.testtime = data.sleep_time
+         inst.components.sleeper.testtime = data.sleep_time
     end
     if data and data.sleeping then
-        inst.components.sleeper:GoToSleep()
+         inst.components.sleeper:GoToSleep()
     end
 end
 
@@ -60,13 +60,14 @@ local function OnSave(inst, data)
 end
 
 local function CalcSanityAura(inst, observer)
-    if inst.components.combat.target then
-        return -TUNING.SANITYAURA_LARGE
-    else
-        return 0.1
-    end
 
-    return 0
+	if inst.components.combat.target then
+		return -TUNING.SANITYAURA_LARGE
+	else
+		return 0.1
+	end
+
+	return 0
 end
 
 local function OnBurnt(inst)
@@ -81,10 +82,8 @@ end
 
 local function OnAttack(inst, data)
     if data.target then
-        local offset = Vector3(math.random(-2, 2), math.random(-2, 2), math.random(-2, 2))
-        local ent = SpawnPrefab("jungletreeguard_snake")
-        ent.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        ent.components.complexprojectile:Launch(data.target:GetPosition() + offset, inst)
+    local offset = Vector3(math.random(-2, 2), math.random(-2, 2), math.random(-2, 2))
+    inst.components.thrower:Throw(data.target:GetPosition() + offset)
     end
 end
 
@@ -113,14 +112,14 @@ local function SetMeleeMode(inst)
 end
 
 local function fn(Sim)
-    local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
-    local shadow = inst.entity:AddDynamicShadow()
-    inst.entity:AddNetwork()
+	local inst = CreateEntity()
+	local trans = inst.entity:AddTransform()
+	local anim = inst.entity:AddAnimState()
+	local sound = inst.entity:AddSoundEmitter()
+	local shadow = inst.entity:AddDynamicShadow()
+	inst.entity:AddNetwork()
 
-    shadow:SetSize(4, 1.5)
+	shadow:SetSize( 4, 1.5 )
     inst.Transform:SetFourFaced()
 
     MakeCharacterPhysics(inst, 1000, .5)
@@ -130,18 +129,18 @@ local function fn(Sim)
     inst:AddTag("leif")
     inst:AddTag("tree")
     inst:AddTag("largecreature")
-    inst:AddTag("epic")
-    inst:AddTag("snake")
+	inst:AddTag("epic")
+	inst:AddTag("snake")
 
     inst.AnimState:SetBank("jungletreeguard")
     inst.AnimState:SetBuild("jungleTreeGuard_build")
     inst.AnimState:PlayAnimation("idle_loop", true)
-
-    inst.entity:SetPristine()
+	
+	inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
-        return inst
-    end
+       	return inst
+   	end
 
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
     inst.components.locomotor.walkspeed = 3
@@ -166,6 +165,9 @@ local function fn(Sim)
     inst.components.combat:SetRange(20, 25)
     inst.components.combat.playerdamagepercent = .33
 
+    inst:AddComponent("thrower")
+    inst.components.thrower.throwable_prefab = "jungletreeguard_snake"
+
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)
 
@@ -189,4 +191,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("jungletreeguard", fn, assets, prefabs)
+return Prefab( "common/jungletreeguard", fn, assets, prefabs)

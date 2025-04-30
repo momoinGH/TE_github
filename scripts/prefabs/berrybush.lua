@@ -48,7 +48,7 @@ local function makeemptyfn(inst)
     setberries(inst, nil)
 end
 
-local function makebarrenfn(inst) --, wasempty)
+local function makebarrenfn(inst)--, wasempty)
     if not POPULATING and (inst:HasTag("withered") or inst.AnimState:IsCurrentAnimation("idle")) then
         inst.AnimState:PlayAnimation("idle_to_dead")
         inst.AnimState:PushAnimation("dead", false)
@@ -75,7 +75,7 @@ local function spawnperd(inst)
     if inst:IsValid() then
         local perd = SpawnPrefab("perd")
         local x, y, z = inst.Transform:GetWorldPosition()
-        local angle = math.random() * TWOPI
+        local angle = math.random() * 2 * PI
         perd.Transform:SetPosition(x + math.cos(angle), 0, z + math.sin(angle))
         perd.sg:GoToState("appear")
         perd.components.homeseeker:SetHome(inst)
@@ -84,21 +84,18 @@ local function spawnperd(inst)
 end
 
 local function onpickedfn(inst, picker)
-    local pt = inst:GetPosition()
-    local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-    if tiletype == GROUND.MOSS or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD  or tiletype == GROUND.FIELDS then
-        if picker and picker:HasTag("player") and not picker:HasTag("sneaky") then
-            local x, y, z = inst.Transform:GetWorldPosition()
-            local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-            local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
-            for k, guardas in pairs(eles) do
-                if guardas.components.combat and guardas.components.combat.target == nil then
-                    guardas.components.combat
-                        :SetTarget(picker)
-                end
-            end
-        end
-    end
+local pt = inst:GetPosition()
+local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
+if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.LAWN or tiletype == GROUND.FIELDS then
+if  picker and  picker:HasTag("player") and not picker:HasTag("sneaky") then
+local x, y, z = inst.Transform:GetWorldPosition()
+local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
+local eles = TheSim:FindEntities(x,y,z, 40,{"guard"})
+for k,guardas in pairs(eles) do 
+if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat:SetTarget( picker) end
+end 
+end
+end
 
 
     if inst.components.pickable ~= nil then
@@ -152,8 +149,7 @@ local function makefullfn(inst)
     local berries = nil
     if inst.components.pickable ~= nil then
         if inst.components.pickable:CanBePicked() then
-            berries = inst.components.pickable.cycles_left ~= nil and
-                inst.components.pickable.cycles_left / inst.components.pickable.max_cycles or 1
+            berries = inst.components.pickable.cycles_left ~= nil and inst.components.pickable.cycles_left / inst.components.pickable.max_cycles or 1
         elseif inst.components.pickable:IsBarren() then
             anim = "dead"
         end
@@ -198,7 +194,7 @@ local function dig_up_common(inst, worker, numberries)
                     inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product, pt)
                 end
             end
-            inst.components.lootdropper:SpawnLootPrefab("dug_" .. inst.prefab)
+            inst.components.lootdropper:SpawnLootPrefab("dug_"..inst.prefab)
         end
     end
     inst:Remove()
@@ -230,14 +226,14 @@ end
 local function createbush(name, inspectname, berryname, master_postinit)
     local assets =
     {
-        Asset("ANIM", "anim/" .. name .. ".zip"),
-        Asset("ANIM", "anim/" .. name .. "_diseased_build.zip"),
+        Asset("ANIM", "anim/"..name..".zip"),
+        Asset("ANIM", "anim/"..name.."_diseased_build.zip"),
     }
 
     local prefabs =
     {
         berryname,
-        "dug_" .. name,
+        "dug_"..name,
         "perd",
         "twigs",
         "spoiled_food",
@@ -265,7 +261,7 @@ local function createbush(name, inspectname, berryname, master_postinit)
             inst:AddTag("quagmire_wildplant")
         end
 
-        inst.MiniMapEntity:SetIcon(name .. ".png")
+        inst.MiniMapEntity:SetIcon(name..".png")
 
         inst.AnimState:SetBank(name)
         inst.AnimState:SetBuild(name)

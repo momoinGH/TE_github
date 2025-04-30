@@ -8,7 +8,7 @@ local prefabs =
     "foliage",
 }
 
-local names = { "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10" }
+local names = {"f1","f2","f3","f4","f5","f6","f7","f8","f9","f10"}
 
 local function onsave(inst, data)
     data.anim = inst.animname
@@ -31,8 +31,8 @@ local function fn()
     inst.AnimState:SetBank("ferns")
     inst.AnimState:SetBuild("cave_ferns")
     inst.AnimState:SetRayTestOnBB(true)
-
-    inst:AddTag("plant")
+	
+	inst:AddTag("plant")
 
     inst.entity:SetPristine()
 
@@ -48,7 +48,7 @@ local function fn()
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
     inst.components.pickable:SetUp("foliage", 10)
-    inst.components.pickable.remove_when_picked = true
+    inst.components.pickable.onpickedfn = inst.Remove
     inst.components.pickable.quickpick = true
 
     MakeSmallBurnable(inst)

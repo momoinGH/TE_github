@@ -48,7 +48,7 @@ local function makeemptyfn(inst)
     setberries(inst, nil)
 end
 
-local function makebarrenfn(inst) --, wasempty)
+local function makebarrenfn(inst)--, wasempty)
     if not POPULATING and (inst:HasTag("withered") or inst.AnimState:IsCurrentAnimation("idle")) then
         inst.AnimState:PlayAnimation("idle_to_dead")
         inst.AnimState:PushAnimation("dead", false)
@@ -75,7 +75,7 @@ local function spawnperd(inst)
     if inst:IsValid() then
         local perd = SpawnPrefab("perd")
         local x, y, z = inst.Transform:GetWorldPosition()
-        local angle = math.random() * TWOPI
+        local angle = math.random() * 2 * PI
         perd.Transform:SetPosition(x + math.cos(angle), 0, z + math.sin(angle))
         perd.sg:GoToState("appear")
         perd.components.homeseeker:SetHome(inst)
@@ -98,7 +98,7 @@ local function onpickedfn(inst, picker)
             setberriesonanimover(inst)
         end
     end
-
+	
     if not (picker ~= nil and picker:HasTag("berrythief") or inst._noperd) and math.random() < (IsSpecialEventActive(SPECIAL_EVENTS.YOTG) and TUNING.YOTG_PERD_SPAWNCHANCE or TUNING.PERD_SPAWNCHANCE) then
         inst:DoTaskInTime(3 + math.random() * 3, spawnperd)
     end
@@ -135,8 +135,7 @@ local function makefullfn(inst)
     local berries = nil
     if inst.components.pickable ~= nil then
         if inst.components.pickable:CanBePicked() then
-            berries = inst.components.pickable.cycles_left ~= nil and
-                inst.components.pickable.cycles_left / inst.components.pickable.max_cycles or 1
+            berries = inst.components.pickable.cycles_left ~= nil and inst.components.pickable.cycles_left / inst.components.pickable.max_cycles or 1
         elseif inst.components.pickable:IsBarren() then
             anim = "dead"
         end
@@ -211,21 +210,21 @@ local function OnHaunt(inst)
 end
 
 local function check_spawn_snake(inst)
-    if inst:IsValid() then
-        local invader = GetClosestInstWithTag("player", inst, 5)
+	if inst:IsValid() then
+local invader = GetClosestInstWithTag("player", inst, 5)
 
-        if invader then
-            if math.random() > 0.75 then
-                local perd = SpawnPrefab("snake")
-                local spawnpos = inst:GetPosition()
-                spawnpos = spawnpos + TheCamera:GetDownVec()
-                perd.Transform:SetPosition(spawnpos:Get())
-                shake(inst)
-            end
-        end
+		if invader then
+			if math.random() > 0.75 then
+				local perd = SpawnPrefab("snake")
+				local spawnpos = Vector3(inst.Transform:GetWorldPosition() )
+				spawnpos = spawnpos + TheCamera:GetDownVec()
+				perd.Transform:SetPosition(spawnpos:Get() )
+				shake(inst)
+			end
+		end
 
-        inst:DoTaskInTime(5 + (math.random() * 2), check_spawn_snake)
-    end
+		inst:DoTaskInTime(5+(math.random()*2), check_spawn_snake)
+	end
 end
 
 local function createbush(name, inspectname, berryname, master_postinit)
@@ -255,7 +254,7 @@ local function createbush(name, inspectname, berryname, master_postinit)
         MakeSmallObstaclePhysics(inst, .1)
 
         inst:AddTag("bush")
-        inst:AddTag("plant")
+        inst:AddTag("plant")		
         inst:AddTag("renewable")
 
         --witherable (from witherable component) added to pristine state for optimization
@@ -264,7 +263,7 @@ local function createbush(name, inspectname, berryname, master_postinit)
         if TheNet:GetServerGameMode() == "quagmire" then
             -- for stats tracking
             inst:AddTag("quagmire_wildplant")
-        end
+        end		
 
         inst.MiniMapEntity:SetIcon("berrybush2.png")
 
@@ -300,7 +299,7 @@ local function createbush(name, inspectname, berryname, master_postinit)
         AddHauntableCustomReaction(inst, OnHaunt, false, false, true)
 
         inst:AddComponent("lootdropper")
-
+		
         if not GetGameModeProperty("disable_transplanting") then
             inst:AddComponent("workable")
             inst.components.workable:SetWorkAction(ACTIONS.DIG)
@@ -315,7 +314,7 @@ local function createbush(name, inspectname, berryname, master_postinit)
         inst:ListenForEvent("onwenthome", shake)
         MakeSnowCovered(inst)
         MakeNoGrowInWinter(inst)
-        inst:DoTaskInTime(5 + (math.random() * 2), check_spawn_snake)
+		inst:DoTaskInTime(5+(math.random()*2), check_spawn_snake)
         master_postinit(inst)
 
         if IsSpecialEventActive(SPECIAL_EVENTS.YOTG) then

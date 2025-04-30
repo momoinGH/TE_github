@@ -1,10 +1,10 @@
-local assets = {
-    Asset("ANIM", "anim/armor_vortex_cloak.zip"),
-    Asset("ANIM", "anim/cloak_fx.zip"),
-    Asset("ANIM", "anim/ui_krampusbag_2x5.zip"),
-}
+local DEBUG_MODE = BRANCH == "dev"
 
-local equipslot = EQUIPSLOTS.BACK or EQUIPSLOTS.BODY -- 四格中设定为背包
+local assets = {Asset("ANIM", "anim/armor_vortex_cloak.zip"), Asset("ANIM", "anim/cloak_fx.zip")}
+
+local ARMORVORTEX = 450
+local ARMORVORTEXFUEL = ARMORVORTEX / 45 * TUNING.LARGE_FUEL
+local ARMORVORTEX_ABSORPTION = 1
 
 local function setsoundparam(inst)
     local param = Remap(inst.components.armor.condition, 0, inst.components.armor.maxcondition, 0, 1)
@@ -19,7 +19,7 @@ local function spawnwisp(owner)
             wisp.Transform:SetPosition(x + math.random() * 0.25 - 0.25 / 2, y, z + math.random() * 0.25 - 0.25 / 2)
         end
 
-        local armadura = owner.components.inventory:GetEquippedItem(equipslot)
+        local armadura = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
         if armadura and armadura:HasTag("vortex_cloak") and armadura.components.armor.condition <= 0 then
             armadura.components.armor:SetAbsorption(0)
         end
@@ -51,10 +51,6 @@ local function onequip(inst, owner)
     setsoundparam(inst)
 end
 
-local function close(inst)
-    inst.components.container.canbeopened = false
-end
-
 local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
     owner.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/vortex_armour/equip_on")
@@ -67,7 +63,7 @@ local function onunequip(inst, owner)
         inst.wisptask = nil
     end
     if inst.components.container:IsEmpty() == true then
-        close(inst)
+        inst.components.container.canbeopened = false
         inst.components.inventoryitem.cangoincontainer = true
     else
         inst.components.inventoryitem.cangoincontainer = false
@@ -78,6 +74,10 @@ end
 local function ondrop(inst, owner)
     inst.components.inventoryitem.cangoincontainer = false
     inst.components.container.canbeopened = true
+end
+
+local function nofuel(inst)
+
 end
 
 local function ontakefuel(inst)
@@ -95,7 +95,7 @@ end
 
 local function SetupEquippable(inst)
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = equipslot
+    inst.components.equippable.equipslot = EQUIPSLOTS.BODY
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 
@@ -137,7 +137,6 @@ local function fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-
     MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("armor_vortex_cloak")
@@ -146,7 +145,7 @@ local function fn()
 
     MakeInventoryFloatable(inst)
 
-    inst:AddTag("backpack") -- 六格
+    inst:AddTag("backpack")
     inst:AddTag("vortex_cloak")
     inst:AddTag("shadow_item")
 
@@ -159,12 +158,18 @@ local function fn()
     minimap:SetIcon("armor_vortex_cloak.png")
 
     if not TheWorld.ismastersim then
+        if inst.replica.container then
+            inst.OnEntityReplicated = function(inst)
+                inst.replica.container:WidgetSetup("armorvortexcloak")
+            end
+        end
         return inst
     end
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
+    inst.caminho = "images/inventoryimages/hamletinventory.xml"
     inst.components.inventoryitem.cangoincontainer = false
     inst.components.inventoryitem.canonlygoinpocket = true
     inst.components.inventoryitem:SetOnDroppedFn(ondrop)
@@ -174,14 +179,14 @@ local function fn()
     container:WidgetSetup("armorvortexcloak")
 
     local armor = inst:AddComponent("armor")
-    armor:InitCondition(TUNING.ARMORVORTEX, TUNING.ARMORVORTEX_ABSORPTION)
+    armor:InitCondition(ARMORVORTEX, ARMORVORTEX_ABSORPTION)
     armor:SetKeepOnFinished(true)
-    armor:SetImmuneTags({ "shadow" })
+    armor:SetImmuneTags({"shadow"})
     inst.components.armor.ontakedamage = OnTakeDamage
 
     local fueled = inst:AddComponent("fueled")
-    fueled:InitializeFuelLevel(TUNING.ARMORVORTEXFUEL) -- Runar: 原来的燃值是充场面的，现在是等效燃值
-    fueled.fueltype = FUELTYPE.NIGHTMARE               -- 燃料是噩梦燃料
+    fueled:InitializeFuelLevel(ARMORVORTEXFUEL) -- Runar: 原来的燃值是充场面的，现在是等效燃值
+    fueled.fueltype = FUELTYPE.NIGHTMARE -- 燃料是噩梦燃料
     fueled.secondaryfueltype = FUELTYPE.ANCIENT_REMNANT
     fueled.ontakefuelfn = ontakefuel
     fueled.accepting = true
@@ -190,8 +195,6 @@ local function fn()
     shadowlevel:SetDefaultLevel(TUNING.ARMOR_SANITY_SHADOW_LEVEL) -- Runar: 影甲的老麦2级暗影之力
 
     SetupEquippable(inst)
-
-    inst:ListenForEvent("onputininventory", close)
 
     inst.OnBlocked = function(owner, data)
         OnBlocked(owner, data, inst)
@@ -225,5 +228,5 @@ local function fxfn()
     return inst
 end
 
-return Prefab("armorvortexcloak", fn, assets),
-    Prefab("armorvortexcloak_fx", fxfn, assets)
+return Prefab("common/inventory/armorvortexcloak", fn, assets),
+    Prefab("common/inventory/armorvortexcloak_fx", fxfn, assets)

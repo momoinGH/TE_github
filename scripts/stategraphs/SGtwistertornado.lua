@@ -53,7 +53,7 @@ local WORK_ACTIONS =
 }
 local TARGET_TAGS = { "_combat" }
 for k, v in pairs(WORK_ACTIONS) do
-    table.insert(TARGET_TAGS, k .. "_workable")
+    table.insert(TARGET_TAGS, k.."_workable")
 end
 local function destroystuff(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -62,10 +62,11 @@ local function destroystuff(inst)
         --stuff might become invalid as we work or damage during iteration
         if v ~= inst.WINDSTAFF_CASTER and v:IsValid() then
             if v.components.health ~= nil and
-                not v.components.health:IsDead() and
-                v.components.combat ~= nil and
-                v.components.combat:CanBeAttacked() and
-                (TheNet:GetPVPEnabled() or not (inst.WINDSTAFF_CASTER_ISPLAYER and v:HasTag("player"))) then
+            not v.components.health:IsDead() and
+            v.components.combat ~= nil and
+            v.components.combat:CanBeAttacked() and
+            (TheNet:GetPVPEnabled() or not (inst.WINDSTAFF_CASTER_ISPLAYER and v:HasTag("player"))) then
+
                 local damage = 30
                 if inst.WINDSTAFF_CASTER_ISPLAYER then
                     if v:HasTag("player") then
@@ -86,18 +87,21 @@ local function destroystuff(inst)
                 end
 
                 if v:IsValid() and
-                    inst.WINDSTAFF_CASTER ~= nil and inst.WINDSTAFF_CASTER:IsValid() and
-                    v.components.combat ~= nil and
-                    not (v.components.health ~= nil and v.components.health:IsDead()) and
-                    not (v.components.follower ~= nil and
-                        v.components.follower.keepleaderonattacked and
-                        v.components.follower:GetLeader() == inst.WINDSTAFF_CASTER) then
+                inst.WINDSTAFF_CASTER ~= nil and inst.WINDSTAFF_CASTER:IsValid() and
+                v.components.combat ~= nil and
+                not (v.components.health ~= nil and v.components.health:IsDead()) and
+                not (v.components.follower ~= nil and
+                v.components.follower.keepleaderonattacked and
+                v.components.follower:GetLeader() == inst.WINDSTAFF_CASTER) then
+
                     v.components.combat:SuggestTarget(inst.WINDSTAFF_CASTER)
                 end
+
             elseif v.components.workable ~= nil and
-                v.components.workable:CanBeWorked() and
-                v.components.workable:GetWorkAction() and
-                WORK_ACTIONS[v.components.workable:GetWorkAction().id] then
+            v.components.workable:CanBeWorked() and
+            v.components.workable:GetWorkAction() and
+            WORK_ACTIONS[v.components.workable:GetWorkAction().id] then
+
                 SpawnPrefab("collapse_small").Transform:SetPosition(v.Transform:GetWorldPosition())
                 v.components.workable:WorkedBy(inst, 10)
                 --v.components.workable:Destroy(inst)
@@ -108,9 +112,10 @@ end
 
 local states =
 {
-    State {
+    State
+    {
         name = "empty",
-        tags = { "idle", "empty" },
+        tags = {"idle", "empty"},
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -118,14 +123,15 @@ local states =
         end,
     },
 
-    State {
+    State
+    {
         name = "idle",
-        tags = { "idle" },
+        tags = {"idle"},
 
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PushAnimation("tornado_loop", false)
-            -- destroystuff(inst)
+           -- destroystuff(inst)
         end,
 
         events =
@@ -136,9 +142,10 @@ local states =
         },
     },
 
-    State {
+    State
+    {
         name = "spawn",
-        tags = { "moving", "canrotate" },
+        tags = {"moving", "canrotate"},
 
         onenter = function(inst)
             inst.components.locomotor:RunForward()
@@ -153,9 +160,10 @@ local states =
         },
     },
 
-    State {
+    State
+    {
         name = "despawn",
-        tags = { "busy" },
+        tags = {"busy"},
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -170,18 +178,20 @@ local states =
         },
     },
 
-    State {
+    State
+    {
         name = "walk_start",
-        tags = { "moving", "canrotate" },
+        tags = {"moving", "canrotate"},
 
         onenter = function(inst)
             inst.sg:GoToState("walk")
         end,
     },
 
-    State {
+    State
+    {
         name = "walk",
-        tags = { "moving", "canrotate" },
+        tags = {"moving", "canrotate"},
 
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
@@ -203,18 +213,20 @@ local states =
         },
     },
 
-    State {
+    State
+    {
         name = "walk_stop",
-        tags = { "canrotate" },
+        tags = {"canrotate"},
 
         onenter = function(inst)
             inst.sg:GoToState("idle")
         end,
     },
 
-    State {
+    State
+    {
         name = "run_start",
-        tags = { "moving", "running", "canrotate" },
+        tags = {"moving", "running", "canrotate"},
 
         onenter = function(inst)
             inst.components.locomotor:RunForward()
@@ -223,9 +235,9 @@ local states =
 
         timeline =
         {
-            --  TimeEvent(25*FRAMES, destroystuff),
+          --  TimeEvent(25*FRAMES, destroystuff),
         },
-
+		
         events =
         {
             EventHandler("animqueueover", function(inst)
@@ -234,9 +246,10 @@ local states =
         },
     },
 
-    State {
+    State
+    {
         name = "run",
-        tags = { "moving", "running", "canrotate" },
+        tags = {"moving", "running", "canrotate"},
 
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
@@ -246,7 +259,7 @@ local states =
 
         timeline =
         {
-            -- TimeEvent(25*FRAMES, destroystuff),
+           -- TimeEvent(25*FRAMES, destroystuff),
         },
 
         events =
@@ -257,9 +270,10 @@ local states =
         },
     },
 
-    State {
+    State
+    {
         name = "run_stop",
-        tags = { "idle" },
+        tags = {"idle"},
 
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
@@ -268,7 +282,7 @@ local states =
 
         timeline =
         {
-            -- TimeEvent(25*FRAMES, destroystuff),
+           -- TimeEvent(25*FRAMES, destroystuff),
         },
 
         events =

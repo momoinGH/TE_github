@@ -3,16 +3,25 @@ local assets =
     Asset("ANIM", "anim/armor_weevole.zip"),
 }
 
-local function OnBlocked(owner)
+local prefabs =
+{
+	"weevole_carapace",
+}
+
+local wilson_health = 150
+local ARMOR_WEEVOLE_DURABILITY = wilson_health*6
+local ARMOR_WEEVOLE_ABSORPTION = .65
+
+local function OnBlocked(owner) 
     owner.SoundEmitter:PlaySound("dontstarve/wilson/hit_armour")
 end
 
 local function onequip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_body", "armor_weevole", "swap_body")
+	owner.AnimState:OverrideSymbol("swap_body", "armor_weevole", "swap_body")
     inst:ListenForEvent("blocked", OnBlocked, owner)
 end
 
-local function onunequip(inst, owner)
+local function onunequip(inst, owner) 
     owner.AnimState:ClearOverrideSymbol("swap_body")
     inst:RemoveEventCallback("blocked", OnBlocked, owner)
 end
@@ -20,7 +29,8 @@ end
 local function fn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
-    inst.entity:AddAnimState()
+    inst.entity:AddAnimState()    
+    MakeInventoryPhysics(inst)
     inst.entity:AddNetwork()
 
     inst.AnimState:SetBank("armor_weevole")
@@ -29,35 +39,37 @@ local function fn()
 
     inst:AddTag("wood")
     inst:AddTag("vented")
-    --	inst:AddTag("aquatic")
-    inst.foleysound = "dontstarve/movement/foley/logarmour"
+--	inst:AddTag("aquatic")
+	inst.foleysound = "dontstarve/movement/foley/logarmour"
 
-    MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)
+	MakeInventoryFloatable(inst)
+  
+	inst.entity:SetPristine()
 
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
+	if not TheWorld.ismastersim then
+		return inst
+	end	
 
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
+	inst.caminho = "images/inventoryimages/hamletinventory.xml"	
 
     inst:AddComponent("armor")
-    inst.components.armor:InitCondition(TUNING.ARMOR_WEEVOLE, TUNING.ARMOR_WEEVOLE_ABSORPTION)
-
+    inst.components.armor:InitCondition(ARMOR_WEEVOLE_DURABILITY, ARMOR_WEEVOLE_ABSORPTION)
+	
     inst:AddComponent("waterproofer")
-    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_MED)
+    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_MED)	
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 
     MakeHauntableLaunch(inst)
-
+	
     return inst
 end
 

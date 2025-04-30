@@ -1,24 +1,27 @@
+
 local function DoSpawn(inst)
     local spawner = inst.components.areaspawner
-    spawner.target_time = nil
-    spawner:TrySpawn()
-    spawner:Start()
+    if spawner then
+		spawner.target_time = nil    
+		spawner:TrySpawn()
+        spawner:Start()
+    end
 end
 
---- 定时生成单位，可以限制时间、地皮、时段、是否已有该单位，休眠时不会生成
 local AreaSpawner = Class(function(self, inst)
     self.inst = inst
     self.basetime = 40
     self.randtime = 60
+    self.prefabfn = nil
     self.prefab = nil
-
+    
     self.range = nil
     self.density = nil
     self.spacing = nil
-
+    
     self.onspawn = nil
     self.spawntest = nil
-
+    
     self.spawnoffscreen = false
     self.spawnphase = nil
     self.spawntiles = nil
@@ -28,11 +31,15 @@ function AreaSpawner:SetPrefab(prefab)
     self.prefab = prefab
 end
 
+function AreaSpawner:SetPrefabFn(fn)
+    self.prefabfn = fn
+end
+
 function AreaSpawner:SetValidTileType(tiles)
     if type(tiles) == "table" then
         self.spawntiles = tiles
     else
-        self.spawntiles = { tiles }
+        self.spawntiles = {tiles}
     end
 end
 
@@ -75,25 +82,28 @@ function AreaSpawner:SetSpawnTestFn(fn)
 end
 
 function AreaSpawner:TrySpawn(prefab)
-    prefab = FunctionOrValue(prefab or self.prefab, self.inst)
-    if not prefab then return end
+    prefab = prefab or (self.prefabfn and self.prefabfn()) or self.prefab
+    if not self.inst:IsValid() or not prefab then
+        return
+    end
 
-    local pos = self.inst:GetPosition()
+    local pos = Vector3(self.inst.Transform:GetWorldPosition())
     local canspawn = true
 
     if self.spawnoffscreen and not self.inst:IsAsleep() then
         return false
     end
 
-    if self.spawnphase and TheWorld.state.phase ~= self.spawnphase then
+    if self.spawnphase and GetClock():GetPhase() ~= self.spawnphase then
         return false
     end
 
     if canspawn and (self.range or self.spacing) then
+        local ents = TheSim:FindEntities(pos.x,pos.y,pos.z, self.range or self.spacing)
         local count = 0
-        for k, v in pairs(TheSim:FindEntities(pos.x, pos.y, pos.z, self.range or self.spacing)) do
-            if v.prefab == prefab then --已经有了
-                if self.spacing and v:GetDistanceSqToInst(self.inst) < self.spacing * self.spacing then
+        for k,v in pairs(ents) do
+            if v.prefab == prefab then
+                if self.spacing and v:GetDistanceSqToInst(self.inst) < self.spacing*self.spacing then
                     canspawn = false
                     break
                 end
@@ -106,9 +116,8 @@ function AreaSpawner:TrySpawn(prefab)
     end
 
     local map = TheWorld.Map
-    local x, y, z = pos.x + self.range * (2.0 * math.random() - 1.0), pos.y,
-        pos.z + self.range * (2.0 * math.random() - 1.0)
-    local ground = self.inst:GetCurrentTileType(x, y, z) --map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
+    local x, y, z = pos.x + self.range * (2.0 * math.random() - 1.0), pos.y, pos.z + self.range * (2.0 * math.random() - 1.0)
+    local ground = self.inst:GetCurrentTileType(x, y, z)--map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
     if self.spawntiles then
         local is_validtile = function(ground)
@@ -121,7 +130,7 @@ function AreaSpawner:TrySpawn(prefab)
         end
         canspawn = canspawn and is_validtile(ground)
     end
-
+    
     if self.spawntest then
         canspawn = canspawn and self.spawntest(self.inst, ground, x, y, z)
     end
@@ -138,11 +147,12 @@ function AreaSpawner:TrySpawn(prefab)
 end
 
 function AreaSpawner:Start()
-    local t = self.basetime + math.random() * self.randtime
+    local t = self.basetime + math.random()*self.randtime
     self.target_time = GetTime() + t
     self.task = self.inst:DoTaskInTime(t, DoSpawn)
     --self.inst:StartUpdatingComponent(self)
 end
+
 
 function AreaSpawner:Stop()
     self.target_time = nil
@@ -153,25 +163,35 @@ function AreaSpawner:Stop()
     --self.inst:StopUpdatingComponent(self)
 end
 
+--[[
+function AreaSpawner:OnEntitySleep()
+	self:Stop()
+end
+
+function AreaSpawner:OnEntityWake()
+	self:Start()
+end
+--]]
+
 function AreaSpawner:OnUpdate(dt)
     self:DebugRender()
 end
 
 function AreaSpawner:LongUpdate(dt)
-    if self.target_time then
-        if self.task then
-            self.task:Cancel()
-            self.task = nil
-        end
-        local time_to_wait = self.target_time - GetTime() - dt
-
-        if time_to_wait <= 0 then
-            DoSpawn(self.inst)
-        else
-            self.target_time = GetTime() + time_to_wait
-            self.task = self.inst:DoTaskInTime(time_to_wait, DoSpawn)
-        end
-    end
+	if self.target_time then
+		if self.task then
+			self.task:Cancel()
+			self.task = nil
+		end
+		local time_to_wait = self.target_time - GetTime() - dt
+		
+		if time_to_wait <= 0 then
+			DoSpawn(self.inst)		
+		else
+			self.target_time = GetTime() + time_to_wait
+			self.task = self.inst:DoTaskInTime(time_to_wait, DoSpawn)
+		end
+	end
 end
 
 function AreaSpawner:OnSave()

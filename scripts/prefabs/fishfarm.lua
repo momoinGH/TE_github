@@ -1,36 +1,33 @@
+require "prefabutil"
+require "tuning"
+
 local assets =
 {
-    Asset("ANIM", "anim/fish_farm.zip"),
-    Asset("MINIMAP_IMAGE", "fish_farm"),
+	Asset("ANIM", "anim/fish_farm.zip"),
+	Asset("MINIMAP_IMAGE", "fish_farm"),
 }
 
-local prefabs =
+local day_time = 3 --30 * 10
+local SEEDS_GROW_TIME = day_time*6
+local FARM1_GROW_BONUS = 1
+local FARM2_GROW_BONUS = .6667
+local FARM3_GROW_BONUS = .333
+
+local prefabs = 
 {
     "fish_farm_sign"
 }
 
-local loots =
+local loot =
 {
     "silk",
     "rope",
-    "coconut",
+	"coconut",
     "coconut",
 }
 
-local FISHS = { --其实这几个鱼概率不一样
-    "fish2",    --蓝色
-    "fish3",    --紫色
-    "fish3",    --紫色
-    "fish5",    --清色
-}
-
-local function lootsetfn(self)
-    local l = shallowcopy(loots)
-    for i = 1, self.produce do
-        table.insert(l, self.product)
-    end
-    self:SetLoot(l)
-end
+local usedFishStates = {}
+local unusedFishStates={1,2,3,4,5,6,7,8}
 
 local function onRemove(inst)
     if inst.sign_prefab then
@@ -39,211 +36,275 @@ local function onRemove(inst)
 end
 
 local function onhammered(inst, worker)
-    inst.components.lootdropper:DropLoot()
-
-    local fx = SpawnPrefab("collapse_small")
-    fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    fx:SetMaterial("wood")
-    inst:Remove()
+	if inst:HasTag("fire") and inst.components.burnable then
+		inst.components.burnable:Extinguish()
+	end
+	if inst.components.breeder then inst.components.breeder:Reset() end
+	inst.components.lootdropper:DropLoot()
+	SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	inst:Remove()
+	inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
 end
 
-local function resetArt(inst)
+local function onhit(inst, worker)
+	--inst.AnimState:PlayAnimation("hit")
+	--inst.AnimState:PushAnimation("idle")
+end
+
+local rates = 
+{
+	FARM1_GROW_BONUS,
+	FARM2_GROW_BONUS,
+	FARM3_GROW_BONUS,
+}
+
+local croppoints = {
+	{ Vector3(0,0,0) },
+	{ Vector3(0,0,0) },
+	{ Vector3(0,0,0) },
+}
+
+local function resetArt(inst)    
     inst.AnimState:Hide("sign")
-    inst.AnimState:Hide("fish_1")
+    inst.AnimState:Hide("fish_1")    
     inst.AnimState:Hide("fish_2")
     inst.AnimState:Hide("fish_3")
     inst.AnimState:Hide("fish_4")
     inst.AnimState:Hide("fish_5")
     inst.AnimState:Hide("fish_6")
     inst.AnimState:Hide("fish_7")
-    inst.AnimState:Hide("fish_8")
-    inst.AnimState:Hide("fish_9")
+    inst.AnimState:Hide("fish_8")    
+    inst.AnimState:Hide("fish_9")    
+end
+
+local function switchTables(fromTable,toTable)
+        
+    local randNum = math.random(#fromTable)
+    local fishLayer = fromTable[randNum]
+    table.remove(fromTable,randNum)
+    table.insert(toTable,fishLayer)    
+
+    return fishLayer
 end
 
 local function refreshArt(inst)
+    if inst.sign_prefab then
+        inst.sign_prefab.resetArt(inst.sign_prefab)
+    end
+    --[[
+    if inst.components.breeder.seeded then        
+    --    inst.AnimState:Show("sign")
+    else
+        inst.AnimState:Hide("sign")
+    end
+    ]]
+
+    if inst.volume ~= inst.components.breeder.volume then
+        local fishLayer = 0
+       
+        for i=1,math.abs(inst.volume - inst.components.breeder.volume) do
+            if inst.volume < inst.components.breeder.volume then
+                if inst.volume == inst.components.breeder.max_volume -1 then
+                    table.insert(inst.usedFishStates,9)                    
+                    inst.AnimState:Show("fish_9")
+                else
+                    local loop = 1
+                    if #inst.usedFishStates > 0 then                    
+                        loop = 2
+                    end
+                    for i=1,loop do
+                        inst.AnimState:Show("fish_"..switchTables(inst.unusedFishStates,inst.usedFishStates)) 
+                    end
+                end
+                inst.volume = inst.volume + 1
+            else
+                if inst.volume == inst.components.breeder.max_volume then
+                    table.remove(inst.usedFishStates,#inst.usedFishStates)
+                    inst.AnimState:Hide("fish_9")
+                else
+                    local loop = 1
+                    if #inst.usedFishStates > 1 then                    
+                        loop = 2
+                    end
+                    for i=1,loop do
+                        inst.AnimState:Hide("fish_"..switchTables(inst.usedFishStates,inst.unusedFishStates))
+                    end
+                end
+                inst.volume = inst.volume -1
+            end
+        end
+    end
+end
+
+local function onsave(inst, data)
+	if inst:HasTag("burnt") or inst:HasTag("fire") then
+        data.burnt = true
+    end
+end
+
+local function onload(inst, data)
+	if data then
+		if data.burnt then
+        	inst.components.burnable.onburnt(inst)
+       	end
+    end
     resetArt(inst)
-    local produce = inst.components.harvestable.produce
-    for i = 1, produce do
-        inst.AnimState:Show("fish_" .. i * 2 - 1)
-        inst.AnimState:Show("fish_" .. i * 2)
+    refreshArt(inst)
+end
+
+local function spawnSign(inst)
+    local pt =   Vector3(inst.Transform:GetWorldPosition())
+    --pt.x = pt.x+1
+    inst.sign_prefab = SpawnPrefab("fish_farm_sign")
+    inst.sign_prefab.Transform:SetPosition(pt.x,0,pt.z)
+    inst.sign_prefab.parent = inst
+    inst.sign_prefab.resetArt(inst.sign_prefab)
+end
+
+local function onbuilt(inst)
+	inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/dogfish/water_submerge_med")
+--    inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_shark/splash_large")
+	refreshArt(inst)
+end
+
+local function placeTestFn(inst, pt)
+
+    if not inst.arthidden then
+
+        inst.AnimState:Hide("mouseover")
+        inst.AnimState:Hide("sign")
+        inst.AnimState:Hide("fish_1")    
+        inst.AnimState:Hide("fish_2")
+        inst.AnimState:Hide("fish_3")
+        inst.AnimState:Hide("fish_4")
+        inst.AnimState:Hide("fish_5")
+        inst.AnimState:Hide("fish_6")
+        inst.AnimState:Hide("fish_7")
+        inst.AnimState:Hide("fish_8")    
+        inst.AnimState:Hide("fish_9") 
+
+        inst.arthidden = true
     end
-    if produce == 4 then
-        inst.AnimState:Show("fish_" .. 9)
+
+    local range = 5
+    local canbuild = false
+    
+    local blocks = TheSim:FindEntities(pt.x, pt.y, pt.z, range, {"structure"}, nil)
+
+    if #blocks < 1 then
+        canbuild = true      
     end
+    return canbuild
 end
 
-local function AbleToAcceptTest(inst, item)
-    return item.prefab == "roe"
-end
 
-local function AcceptTest(inst, item)
-    return not inst.components.harvestable.task
-end
-
-local function SpawnFishSign(inst)
-    local sign = SpawnPrefab("fish_farm_sign")
-    sign.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    sign.parent = inst
-    sign:resetArt()
-    inst.sign_prefab = sign
+local function ShouldAcceptItem(inst, item)
+    if item and item.prefab == "roe" then return true else return false
+    end
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
-    inst.fish = FISHS[math.random(#FISHS)]
-    inst.components.harvestable:Grow()
-    inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/pickobject_water")
+if inst.components.breeder then inst.components.breeder:Seed(item) end
 
-    SpawnFishSign(inst)
 end
 
-local function getstatus(inst)
-    local produce = inst.components.harvestable.produce
-    if produce > 0 then
-        if produce == 1 then
-            return "ONEFISH"
-        elseif produce == 2 then
-            return "TWOFISH"
-        elseif produce == 3 then
-            return "REDFISH"
-        elseif produce == 4 then
-            return "BLUEFISH"
-        end
-    else
-        if inst.components.harvestable.task then
-            return "STOCKED"
-        else
-            return "EMPTY"
-        end
-    end
-end
 
-local function onharvest(inst, picker, produce)
-    local item = SpawnPrefab(inst.fish)
-    if not picker or not picker.components.inventory or not picker.components.inventory:GiveItem(item) then
-        item.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        item.components.inventoryitem:OnDropped()
-    end
+local function fn(Sim)
+	
 
-    if produce <= 1 then
-        -- 你把独苗收走了
-        inst.components.harvestable:SetGrowTime(nil)
-        inst.fish = nil
-        inst.harvested = false
-        refreshArt(inst)
-        if inst.sign_prefab then
-            inst.sign_prefab:Remove()
-            inst.sign_prefab = nil
-        end
-    else
-        inst.components.harvestable.produce = produce - 1
-        inst.harvested = true
-        if inst.sign_prefab then
-            inst.sign_prefab:resetArt()
-        end
-    end
-end
-
-local function ongrow(inst, produce)
-    refreshArt(inst)
-    inst.components.harvestable:SetGrowTime((math.random() * (0.75 - 0.5) + 0.5) * TUNING.TOTAL_DAY_TIME)
-end
-
-local function domagicgrowth(inst, doer)
-    if inst.components.harvestable:Grow() then
-        inst.components.harvestable:Disable()
-        inst.components.trader:Disable()
-
-        inst:DoTaskInTime(0.5, domagicgrowth)
-    else
-        inst.components.harvestable:Enable()
-    end
-end
-
-local function OnSave(inst, data)
-    data.fish = inst.fish
-    data.harvested = inst.harvested
-end
-
-local function OnLoad(inst, data)
-    if not data then return end
-
-    inst.harvested = data.harvested or inst.harvested
-
-    if data.fish then
-        inst.fish = data.fish
-        SpawnFishSign(inst)
-    end
-end
-
-local function fn()
     local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
-    inst.entity:AddNetwork()
-
+	inst.entity:AddNetwork()
+    
     inst:AddTag("structure")
     inst:AddTag("fishfarm")
-    inst:AddTag("ignorewalkableplatforms")
+	inst:AddTag("ignorewalkableplatforms")	
+    
+    anim:SetBank("fish_farm")
+    anim:SetBuild("fish_farm")
+    anim:PlayAnimation( "idle",true)
+	--anim:SetOrientation( ANIM_ORIENTATION.OnGround )
+	anim:SetLayer(LAYER_BACKGROUND)
 
-    inst.AnimState:SetBank("fish_farm")
-    inst.AnimState:SetBuild("fish_farm")
-    inst.AnimState:PlayAnimation("idle", true)
-    --anim:SetOrientation( ANIM_ORIENTATION.OnGround )
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:Hide("mouseover")
+    local minimap = inst.entity:AddMiniMapEntity()
+    minimap:SetIcon( "fish_farm.png" )
 
-    inst.MiniMapEntity:SetIcon("fish_farm.png")
-
-    inst.entity:SetPristine()
+	inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst.fish = nil        --鱼的种类
-    inst.harvested = false --是否收取过，收取过牌子才会显示颜色
-
+	
     inst:AddComponent("inspectable")
     inst.components.inspectable.nameoverride = "FISH_FARM"
-    inst.components.inspectable.getstatus = getstatus
+    inst.components.inspectable.getstatus = function(inst)
+        if inst.components.breeder.volume > 0 then
+            if inst.components.breeder.volume == 1 then
+                return "ONEFISH"
+            elseif inst.components.breeder.volume == 2 then
+                return "TWOFISH"
+            elseif inst.components.breeder.volume == 3 then
+                return "REDFISH"
+            elseif inst.components.breeder.volume == 4 then
+                return "BLUEFISH"
+            end
+        else
+            if inst.components.breeder.seeded then
+                return "STOCKED"
+            else
+                return "EMPTY"
+            end
+        end
+    end
 
-    inst:AddComponent("harvestable")
-    inst.components.harvestable:SetProduct(nil, 4)
-    inst.components.harvestable:SetOnGrowFn(ongrow)
-    inst.components.harvestable:SetOnHarvestFn(onharvest)
-    inst.components.harvestable:SetDoMagicGrowthFn(domagicgrowth)
-    inst.components.harvestable:SetGrowTime((math.random() * (0.75 - 0.5) + 0.5) * TUNING.TOTAL_DAY_TIME)
-
-    inst:AddComponent("lootdropper")
-    --inst.components.lootdropper:SetLootSetupFn(lootsetfn)
-    inst.components.lootdropper:SetLoot(loots)
-
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(4)
-    inst.components.workable:SetOnFinishCallback(onhammered)
+    inst.OnSave = onsave 
+    inst.OnLoad = onload        
+        
+    inst:AddComponent("breeder")    
+    inst.components.breeder.onseedfn = function()
+        inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/birds/bird_land_water")
+--        inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/pickobject_water")
+    end  
+   -- inst.components.breeder.updateFn = updateFn
+	
+	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetLoot(loot)
+	
+	inst:AddComponent("workable")
+	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+	inst.components.workable:SetWorkLeft(4)
+	inst.components.workable:SetOnFinishCallback(onhammered)
+	inst.components.workable:SetOnWorkCallback(onhit)
 
     inst.volume = 0
     inst.usedFishStates = {}
-    inst.unusedFishStates = { 1, 2, 3, 4, 5, 6, 7, 8 }
+    inst.unusedFishStates={1,2,3,4,5,6,7,8}
 
     inst.OnRemoveEntity = onRemove
 
-    inst:AddComponent("trader")
-    inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
-    inst.components.trader:SetAcceptTest(AcceptTest)
+	inst:ListenForEvent("onbuilt", function () onbuilt(inst) end)
+    
+	inst:ListenForEvent("onVisChange", function () refreshArt(inst) end)
+
+    inst.AnimState:Hide("mouseover")
+
+    inst:DoTaskInTime(0,function()  spawnSign(inst) end)
+ 
+
+	inst:AddComponent("trader")
+    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
     inst.components.trader.onaccept = OnGetItemFromPlayer
-
+	
+	inst:AddComponent("interactions")
+    
     resetArt(inst)
-
-    inst.OnSave = OnSave
-    inst.OnLoad = OnLoad
-
+	refreshArt(inst)
+    
     return inst
-end
 
-return Prefab("fish_farm", fn, assets, prefabs),
-    MakePlacer("fish_farm_placer", "fish_farm", "fish_farm", "idle")
+end    
+
+return Prefab( "common/objects/fish_farm", fn, assets, prefabs ),	   
+	   MakePlacer( "common/fish_farm_placer", "fish_farm", "fish_farm", "idle")

@@ -1,3 +1,5 @@
+require "prefabutil"
+
 local assets =
 {
     Asset("ANIM", "anim/butterfly_basic.zip"),
@@ -54,7 +56,7 @@ local function CanDeploy(inst)
     return true
 end
 
-local function OnDeploy(inst, pt, deployer)
+local function OnDeploy(inst, pt, deployer) 
     local flower = SpawnPrefab("planted_flower")
     if flower then
         flower:PushEvent("growfrombutterfly")
@@ -222,7 +224,8 @@ local function fntropical()
     ---------------------
     inst:AddComponent("stackable")
     inst:AddComponent("inventoryitem")
-
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
     inst.components.inventoryitem.canbepickedup = false
     inst.components.inventoryitem.canbepickedupalive = true
     inst.components.inventoryitem.nobounce = true
@@ -285,5 +288,5 @@ end
 
 return Prefab("butterfly", fn, assets, prefabs),
     MakePlacer("butterfly_placer", "flowers", "flowers", "f1"),
-    Prefab("butterfly_tropical", fntropical, assets, prefabs),
+	Prefab("butterfly_tropical", fntropical, assets, prefabs),
     MakePlacer("butterfly_tropical_placer", "flowers", "flowers", "f1")

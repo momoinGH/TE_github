@@ -1,7 +1,10 @@
-local assets =
+local assets=
 {
 	Asset("ANIM", "anim/blubber.zip"),
 }
+
+local	 	APPEASEMENT_SMALL = 8
+
 
 local function fn(Sim)
 	local inst = CreateEntity()
@@ -11,25 +14,25 @@ local function fn(Sim)
 	inst.AnimState:SetBank("blubber")
 	inst.AnimState:SetBuild("blubber")
 	inst.AnimState:PlayAnimation("idle")
-
+	
 	MakeInventoryPhysics(inst)
-	--	MakeInventoryFloatable(inst, "idle_water", "idle")
-
+--	MakeInventoryFloatable(inst, "idle_water", "idle")
+--    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.MEDIUM, TUNING.WINDBLOWN_SCALE_MAX.MEDIUM)
 
 	MakeInventoryFloatable(inst)
 
 	inst.entity:SetPristine()
 
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
+        if not TheWorld.ismastersim then
+        return inst
+    end	
+	
 	inst:AddComponent("stackable")
-	inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
+	inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM    
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("edible")
-	inst.components.edible.foodtype = FOODTYPE.MEAT
+	inst.components.edible.foodtype = "MEAT"
 
 	inst:AddComponent("fuel")
 	inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
@@ -39,15 +42,17 @@ local function fn(Sim)
 	inst:AddComponent("inventoryitem")
 
 	inst:AddComponent("tradable")
-	--    inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
+--    inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 
-	inst:AddComponent("perishable")
-	inst.components.perishable:SetPerishTime(TUNING.PERISH_MED)
-	inst.components.perishable:StartPerishing()
-	inst.components.perishable.onperishreplacement = "spoiled_food"
-
+    inst:AddComponent("perishable")
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_MED)
+    inst.components.perishable:StartPerishing()
+    inst.components.perishable.onperishreplacement = "spoiled_food"
+	
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"
+	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
 
 	return inst
 end
 
-return Prefab("blubber", fn, assets)
+return Prefab( "common/inventory/blubber", fn, assets) 

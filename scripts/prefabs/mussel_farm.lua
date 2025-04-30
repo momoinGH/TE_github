@@ -1,35 +1,39 @@
+require "prefabutil"
+require "tuning"
+
 local assets =
 {
 	Asset("ANIM", "anim/musselfarm.zip"),
 	Asset("MINIMAP_IMAGE", "musselFarm"),
 }
 
-local prefabs =
+local prefabs = 
 {
 	"mussel",
 	"collapse_small",
 }
 
-local total_day_time = 480
-local MUSSELFARM_WINDBLOWN_SPEED = 0.2
-local MUSSELFARM_WINDBLOWN_FALL_CHANCE = 0.1
-local MUSSEL_CATCH_TIME =
-{
-	{ base = 1 * total_day_time, random = 0.5 * total_day_time }, --tall to short
-	{ base = 1 * total_day_time, random = 0.5 * total_day_time }, --tall to short
-	{ base = 1 * total_day_time, random = 0.5 * total_day_time }, --tall to short
-	{ base = 1 * total_day_time, random = 0.5 * total_day_time }, --tall to short
-	{ base = 1 * total_day_time, random = 0.5 * total_day_time }, --tall to short
-	{ base = 1 * total_day_time, random = 0.5 * total_day_time }, --tall to short
-}
-MUSSEL_CATCH_SMALL = 1
-MUSSEL_CATCH_MED = 3
-MUSSEL_CATCH_LARGE = 6
+local	total_day_time = 480
+local 	MUSSELFARM_WINDBLOWN_SPEED = 0.2
+local	MUSSELFARM_WINDBLOWN_FALL_CHANCE = 0.1
+local		MUSSEL_CATCH_TIME =
+	    {
+	        {base=1*total_day_time, random=0.5*total_day_time},   --tall to short
+	        {base=1*total_day_time, random=0.5*total_day_time},   --tall to short
+	        {base=1*total_day_time, random=0.5*total_day_time},   --tall to short
+	        {base=1*total_day_time, random=0.5*total_day_time},   --tall to short
+	        {base=1*total_day_time, random=0.5*total_day_time},   --tall to short
+	        {base=1*total_day_time, random=0.5*total_day_time},   --tall to short
+	    }
+		MUSSEL_CATCH_SMALL = 1
+		MUSSEL_CATCH_MED = 3
+		MUSSEL_CATCH_LARGE = 6
 
 local function getnewpoint(pt)
-	local theta = math.random() * TWOPI
-	local radius = 6 + math.random() * 6
 
+	local theta = math.random() * 2 * PI
+	local radius = 6+math.random()*6
+	
 	local result_offset = FindValidPositionByFan(theta, radius, 12, function(offset)
 		local ground = GetWorld()
 		local spawn_point = pt + offset
@@ -40,12 +44,12 @@ local function getnewpoint(pt)
 	end)
 
 	if result_offset then
-		return pt + result_offset
+		return pt+result_offset
 	end
 end
 
 local function movetonewhome(inst, child)
-	local pos = inst:GetPosition()
+	local pos = Vector3(inst.Transform:GetWorldPosition())
 	local spawn_point = getnewpoint(pos)
 
 	if spawn_point then
@@ -54,6 +58,7 @@ local function movetonewhome(inst, child)
 end
 
 local function onpickedfn(inst, picker)
+
 	inst.AnimState:PlayAnimation("picked")
 
 
@@ -67,9 +72,9 @@ end
 
 -- for inspect string
 local function getstatus(inst)
-	if inst.growthstage > 0 then
-		return "STICKPLANTED"
-	end
+    if inst.growthstage > 0 then 
+        return "STICKPLANTED"
+    end
 end
 
 local function makeemptyfn(inst)
@@ -84,7 +89,7 @@ end
 local function SetHidden(inst)
 	inst.components.pickable.numtoharvest = 0
 	inst.components.pickable.canbepicked = false
-	--	inst.components.blowinwindgust:Stop()
+--	inst.components.blowinwindgust:Stop()
 	inst.MiniMapEntity:SetEnabled(false)
 	inst.Physics:SetCollides(false)
 	inst:Hide()
@@ -96,11 +101,11 @@ local function SetUnderwater(inst)
 	inst.AnimState:PlayAnimation("idle_underwater", true)
 	inst.components.pickable.numtoharvest = 0
 	inst.components.pickable.canbepicked = false
-	--	inst.components.blowinwindgust:Stop()
+--	inst.components.blowinwindgust:Stop()
 	inst.AnimState:SetLayer(LAYER_BACKGROUND)
 	inst.AnimState:SetSortOrder(2)
 	inst.MiniMapEntity:SetEnabled(false)
-	inst.Physics:SetCollides(false)
+ 	inst.Physics:SetCollides(false)
 	inst:Show()
 	inst.components.stickable:UnStuck()
 end
@@ -109,7 +114,7 @@ local function SetAboveWater(inst)
 	-- common
 	inst.AnimState:SetLayer(LAYER_WORLD)
 	inst.AnimState:SetSortOrder(0)
-	--	inst.components.blowinwindgust:Start()
+--	inst.components.blowinwindgust:Start()
 	inst.MiniMapEntity:SetEnabled(true)
 	inst.Physics:SetCollides(true)
 	inst.components.growable:StartGrowing()
@@ -194,7 +199,7 @@ local growth_stages =
 {
 	{
 		name = "hidden",
-		time = function(inst)
+		time = function(inst) 
 			return GetRandomWithVariance(MUSSEL_CATCH_TIME[1].base, MUSSEL_CATCH_TIME[1].random)
 		end,
 		fn = SetHidden,
@@ -202,7 +207,7 @@ local growth_stages =
 	},
 	{
 		name = "underwater", -- waiting to be stuck
-		time = function(inst)
+		time = function(inst) 
 			return nil -- this stage doesn't grow automatically
 		end,
 		fn = SetUnderwater,
@@ -210,7 +215,7 @@ local growth_stages =
 	},
 	{
 		name = "empty", -- the stick is in now
-		time = function(inst)
+		time = function(inst) 
 			return GetRandomWithVariance(MUSSEL_CATCH_TIME[2].base, MUSSEL_CATCH_TIME[2].random)
 		end,
 		fn = SetEmpty,
@@ -218,7 +223,7 @@ local growth_stages =
 	},
 	{
 		name = "small",
-		time = function(inst)
+		time = function(inst) 
 			return GetRandomWithVariance(MUSSEL_CATCH_TIME[3].base, MUSSEL_CATCH_TIME[3].random)
 		end,
 		fn = SetSmall,
@@ -226,7 +231,7 @@ local growth_stages =
 	},
 	{
 		name = "medium",
-		time = function(inst)
+		time = function(inst) 
 			return GetRandomWithVariance(MUSSEL_CATCH_TIME[4].base, MUSSEL_CATCH_TIME[4].random)
 		end,
 		fn = SetMedium,
@@ -234,7 +239,7 @@ local growth_stages =
 	},
 	{
 		name = "large",
-		time = function(inst)
+		time = function(inst) 
 			return GetRandomWithVariance(MUSSEL_CATCH_TIME[5].base, MUSSEL_CATCH_TIME[5].random)
 		end,
 		fn = SetLarge,
@@ -245,11 +250,11 @@ local growth_stages =
 local function onpoked(inst, worker, stick)
 	inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/plant_mussel")
 	inst.components.growable:SetStage(3)
-
-	--	if stick.components.stackable and stick.components.stackable.stacksize > 1 then
-	--		stick = stick.components.stackable:Get()
-	-- 	end
-	--	stick:Remove()
+	
+--	if stick.components.stackable and stick.components.stackable.stacksize > 1 then
+--		stick = stick.components.stackable:Get()
+-- 	end
+--	stick:Remove()
 end
 
 --local function ongustharvest(inst)
@@ -262,21 +267,22 @@ end
 --end
 
 local function fn()
+	
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
 	inst.entity:AddNetwork()
-
+	
 	inst.entity:AddSoundEmitter()
 	MakeObstaclePhysics(inst, 0.8, 1.2)
-
-	inst:SetPhysicsRadiusOverride(1.8)
-
-	inst.Physics:SetCollides(false)
+	
+	inst:SetPhysicsRadiusOverride(1.8)	
+	
+ 	inst.Physics:SetCollides(false)
 
 	local minimap = inst.entity:AddMiniMapEntity()
 	minimap:SetIcon("musselFarm.tex")
-	minimap:SetEnabled(false) --Not enabled until poked
+	minimap:SetEnabled(false) --Not enabled until poked 
 
 	inst.no_wet_prefix = true
 	inst.growthstage = 0
@@ -286,30 +292,32 @@ local function fn()
 	inst:AddTag("mussel_farm")
 	inst:AddTag("aquatic")
 	inst:AddTag("musselrede")
-	inst:AddTag("ignorewalkableplatforms")
-	inst:AddTag("trader")
-
+	inst:AddTag("ignorewalkableplatforms")	
+	inst:AddTag("trader")	
+	
 	inst.AnimState:SetBank("musselFarm")
 	inst.AnimState:SetBuild("musselFarm")
 	inst.AnimState:PlayAnimation("idle_underwater", true)
 	inst.AnimState:SetLayer(LAYER_BACKGROUND)
-	inst.AnimState:SetRayTestOnBB(true)
+ 	inst.AnimState:SetRayTestOnBB(true)
+	
+    inst.entity:SetPristine()
 
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
 	inst:AddComponent("inspectable")
 	inst.components.inspectable.getstatus = getstatus
 
 	inst:AddComponent("stickable")
 	inst.components.stickable:SetOnPokeCallback(onpoked)
+	
+	inst:AddComponent("interactions")
 
-	inst:AddComponent("trader")
-	inst.components.trader:SetAcceptTest(function(inst, item) return (item:HasTag("mussel_stick") and (inst.components.growable.stage < 3)) end)
-	inst.components.trader.onaccept = onpoked
+	inst:AddComponent("trader")	
+	inst.components.trader:SetAcceptTest(function(inst, item) return (item:HasTag("mussel_stick") and (inst.components.growable.stage < 3) ) end)
+	inst.components.trader.onaccept = onpoked	
 
 	inst:AddComponent("pickable")
 	inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"
@@ -330,6 +338,6 @@ local function fn()
 	inst:AddComponent("lootdropper")
 
 	return inst
-end
+end    
 
-return Prefab("mussel_farm", fn, assets, prefabs)
+return Prefab( "common/objects/mussel_farm", fn, assets, prefabs )

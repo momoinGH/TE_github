@@ -5,9 +5,9 @@ local assets =
 
 local prefabs =
 {
-	"sand",
-	"sandhill",
-	"seashell"
+	 "sand",
+	 "sandhill",
+	 "seashell"
 }
 
 local SANDCASTLE_PERISHTIME = 480
@@ -15,7 +15,7 @@ local SANDCASTLE_RAIN_PERISH_RATE = 2
 local SANDCASTLE_WIND_PERISH_RATE = 2
 
 -- these should match the animation names to the workleft
-local anims = { "low", "med", "full" }
+local anims = {"low", "med", "full"}
 
 local function setanim(inst)
 	if inst.components.workable.workleft < 1 then
@@ -28,15 +28,15 @@ end
 local function workcallback(inst, worker, workleft)
 	if workleft <= 0 then
 		-- figure out which side to drop the loot
-		local pt = inst:GetPosition()
+		local pt = Vector3(inst.Transform:GetWorldPosition())
 		local hispos = Vector3(worker.Transform:GetWorldPosition())
 
 		local he_right = ((hispos - pt):Dot(TheCamera:GetRightVec()) > 0)
 
 		if he_right then
-			inst.components.lootdropper:DropLoot(pt - (TheCamera:GetRightVec() * 2))
+			inst.components.lootdropper:DropLoot(pt - (TheCamera:GetRightVec()*2))
 		else
-			inst.components.lootdropper:DropLoot(pt + (TheCamera:GetRightVec() * 2))
+			inst.components.lootdropper:DropLoot(pt + (TheCamera:GetRightVec()*2))
 		end
 
 		inst:Remove()
@@ -52,17 +52,21 @@ local function sectioncallback(newsection, oldsection, inst)
 	setanim(inst)
 end
 
+local function onperish(inst)
+	inst:Remove()
+end
+
 local function onupdate(inst)
 	-- local sm = GetSeasonManager()
 	local rain = Remap(math.max(TheWorld.state.precipitationrate, 0.5), 0.5, 1.0, 0.0, 1.0)
 	-- local wind = sm:GetHurricaneWindSpeed()
 	local wind = 1
-	inst.components.fueled.rate = 1 + SANDCASTLE_RAIN_PERISH_RATE *
+	inst.components.fueled.rate = 1 + SANDCASTLE_RAIN_PERISH_RATE * 
 		rain + SANDCASTLE_WIND_PERISH_RATE * wind
 end
 
 local function onbuilt(inst)
-	inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sandcastle")
+	 inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sandcastle")
 end
 
 local function getstatus(inst, viewer)
@@ -89,22 +93,22 @@ local function sandcastlefn(Sim)
 
 	inst.entity:SetPristine()
 
-	if not TheWorld.ismastersim then
-		return inst
-	end
+    if not TheWorld.ismastersim then
+        return inst
+    end
 
 	inst:AddComponent("sanityaura")
 	inst.components.sanityaura.aura = TUNING.SANITYAURA_SMALL
 
-	inst:AddComponent("fueled")
-	inst.components.fueled.fueltype = "NONE"
-	inst.components.fueled.accepting = false
-	inst.components.fueled:InitializeFuelLevel(SANDCASTLE_PERISHTIME)
-	inst.components.fueled:SetDepletedFn(inst.Remove)
-	inst.components.fueled:SetSections(#anims)
-	inst.components.fueled:SetSectionCallback(sectioncallback)
-	inst.components.fueled:SetUpdateFn(onupdate)
-	inst.components.fueled:StartConsuming()
+    inst:AddComponent("fueled")
+    inst.components.fueled.fueltype = "NONE"
+    inst.components.fueled.accepting = false
+    inst.components.fueled:InitializeFuelLevel(SANDCASTLE_PERISHTIME)
+    inst.components.fueled:SetDepletedFn(onperish)
+    inst.components.fueled:SetSections(#anims)
+    inst.components.fueled:SetSectionCallback(sectioncallback)
+    inst.components.fueled:SetUpdateFn(onupdate)
+    inst.components.fueled:StartConsuming()
 
 	----------------------
 	inst:AddComponent("inspectable")
@@ -121,10 +125,10 @@ local function sandcastlefn(Sim)
 	inst.components.workable:SetWorkLeft(#anims)
 	inst.components.workable:SetOnWorkCallback(workcallback)
 
-	inst:ListenForEvent("onbuilt", onbuilt)
+	inst:ListenForEvent( "onbuilt", onbuilt)
 
 	return inst
 end
 
-return Prefab("sand_castle", sandcastlefn, assets, prefabs),
-	MakePlacer("sand_castle_placer", "sand_castle", "sand_castle", anims[#anims])
+return Prefab( "sand_castle", sandcastlefn, assets, prefabs),
+		MakePlacer( "sand_castle_placer", "sand_castle", "sand_castle", anims[#anims] )

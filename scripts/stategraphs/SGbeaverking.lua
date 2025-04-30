@@ -8,10 +8,10 @@ local function ShakeIfClose_Footstep(inst)
     ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1.25, inst, 40)
 end
 
-local function DoFootstep(inst)
-    --inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/step_soft")
+local function DoFootstep(inst) 
+    --inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/step_soft")  
     inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/step_stomp")
-    ShakeIfClose_Footstep(inst)
+    ShakeIfClose_Footstep(inst) 
 end
 
 
@@ -21,20 +21,22 @@ local events =
     CommonHandlers.OnStep(),
     CommonHandlers.OnLocomote(false, true),
     EventHandler("attacked", function(inst, data)
+
         if inst.sg.currentstate.name == "death" then
             return
         end
 
         if inst.sg.currentstate.name == "lying" or
             inst.sg.currentstate.name == "sleep" then
-            inst.sg:GoToState("standup")
+            inst.sg:GoToState("standup")            
             inst:MakePigsAttack()
             inst:RemoveTag("wall")
-        elseif
+        elseif 
             inst.sg.currentstate.name ~= "standup" and
             inst.sg.currentstate.name ~= "pound" and
-            inst.components.health and
+            inst.components.health and 
             not inst.components.health:IsDead() then
+
             inst.sg:GoToState("hit")
             --inst.SoundEmitter:PlaySound("dontstarve/creatures/mandrake/hit")
             inst.SoundEmitter:PlaySound("dontstarve/pig/PigKingReject")
@@ -61,7 +63,7 @@ local events =
                         inst.sg:GoToState("idle")
                     elseif is_moving then
                         inst.sg:GoToState(is_running and "run_stop" or "walk_stop")
-                    else
+                    else 
                         inst.sg:GoToState("idle")
                     end
                 end
@@ -75,15 +77,15 @@ local events =
                 end
             end
         end),
-
-    EventHandler("death", function(inst) inst.sg:GoToState("death") end),
+		
+		EventHandler("death", function(inst) inst.sg:GoToState("death") end),
 }
 
 local states =
 {
 
 
-    State {
+    State{
         name = "idle",
         tags = { "idle", "canrotate" },
 
@@ -100,9 +102,9 @@ local states =
     },
 
 
-    State {
+    State{
         name = "lying",
-        tags = { "lying", "mindless" },
+        tags = {"lying", "mindless"},
 
         onenter = function(inst, pushanim)
             inst.Physics:Stop()
@@ -119,9 +121,9 @@ local states =
     },
 
 
-    State {
+    State{
         name = "sleep",
-        tags = { "busy", "mindless", "busy" },
+        tags = { "busy", "mindless", "busy"},
         onenter = function(inst, pushanim)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("sleep_pre")
@@ -132,9 +134,9 @@ local states =
     },
 
 
-    State {
+    State{
         name = "wakeup",
-        tags = { "busy", "mindless", "busy" },
+        tags = { "busy", "mindless", "busy"},
         onenter = function(inst, pushanim)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("sleep_pst")
@@ -148,7 +150,7 @@ local states =
     },
 
 
-    State {
+    State{
         name = "standup",
         tags = { "standup", "mindless", "busy" },
 
@@ -158,11 +160,10 @@ local states =
             inst:RemoveComponent("store")
         end,
 
-        timeline =
+        timeline=
         {
-            TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC001/creatures/bearger/swhoosh") end),
-            TimeEvent(10 * FRAMES, function(inst)
+            TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/swhoosh") end),
+            TimeEvent(10*FRAMES, function(inst)
                 ShakeIfClose(inst)
                 inst.components.groundpounder:GroundPound()
                 inst.cangroundpound = false
@@ -175,38 +176,39 @@ local states =
 
 
         events =
-        {
-            EventHandler("animover", function(inst)
+        {            
+            EventHandler("animover", function(inst) 
                 --inst:SetBrain(inst._brain)
-                inst.sg:GoToState("idle")
+                inst.sg:GoToState("idle") 
             end),
         },
     },
 
 
-    State {
+    State{
         name = "sitdown",
-        tags = { "sitdown", "mindless", "busy" },
+        tags = { "sitdown", "mindless", "busy"},
         onenter = function(inst, pushanim)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("sitdown")
+			
+if not inst.components.store then
+		inst:AddComponent("store")
+end
 
-            if not inst.components.store then
-                inst:AddComponent("store")
-            end
         end,
         timeline = {},
         events =
-        {
-            EventHandler("animover", function(inst)
+        {            
+            EventHandler("animover", function(inst) 
                 --inst:SetBrain(nil)
-                inst.sg:GoToState("lying")
+                inst.sg:GoToState("lying") 
             end),
         },
     },
 
 
-    State {
+    State{
         name = "happy",
         tags = { "happy", "mindless" },
         onenter = function(inst, pushanim)
@@ -221,12 +223,13 @@ local states =
     },
 
 
-    State {
+    State{
         name = "cointoss",
-        tags = { "cointoss", "mindless" },
+        tags = { "cointoss", "mindless"},
         onenter = function(inst, pushanim)
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("cointoss")
+            inst.AnimState:PlayAnimation("cointoss")        
+
         end,
         timeline = {},
         events =
@@ -236,7 +239,7 @@ local states =
     },
 
 
-    State {
+    State{
         name = "unimpressed",
         tags = { "unimpressed", "mindless", "busy" },
         onenter = function(inst, pushanim)
@@ -251,14 +254,14 @@ local states =
     },
 
 
-    State {
+    State{
         name = "cast",
         tags = { "cast", "busy" },
         onenter = function(inst, pushanim)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("cast")
         end,
-
+        
         timeline =
         {
             TimeEvent(13 * FRAMES, function(inst)
@@ -279,9 +282,9 @@ local states =
 
 
 
-    State {
+    State{
         name = "jump",
-        tags = { "jump", "canrotate", "busy" },
+        tags = { "jump" , "canrotate", "busy"},
 
         onenter = function(inst)
             --inst.SoundEmitter:PlaySound("dontstarve/creatures/mandrake/hit")
@@ -290,14 +293,14 @@ local states =
         end,
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
         },
 
     },
 
-    State {
+    State{
         name = "hit",
-        tags = { "busy", "canrotate" },
+        tags = { "busy" , "canrotate"},
 
         onenter = function(inst)
             --inst.SoundEmitter:PlaySound("dontstarve/creatures/mandrake/hit")
@@ -306,26 +309,25 @@ local states =
         end,
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("walk") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("walk") end ),
         },
 
     },
 
 
-    State {
+    State{
         name = "pound",
-        tags = { "attack", "busy", "canrotate" },
+        tags = {"attack", "busy", "canrotate"},
 
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("jump")
         end,
 
-        timeline =
+        timeline=
         {
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC001/creatures/bearger/swhoosh") end),
-            TimeEvent(30 * FRAMES, function(inst)
+            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/swhoosh") end),
+            TimeEvent(30*FRAMES, function(inst)
                 ShakeIfClose(inst)
                 inst.components.groundpounder:GroundPound()
                 inst.cangroundpound = false
@@ -336,7 +338,7 @@ local states =
             end),
         },
 
-        events =
+        events=
         {
             EventHandler("animover", function(inst)
                 inst.sg:GoToState("walk")
@@ -344,42 +346,43 @@ local states =
         },
     },
 
-    State {
+    State{
         name = "death",
         tags = { "busy" },
 
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("death")
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/bunnyman/death")
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/bunnyman/death")		
+
         end,
 
         timeline =
         {
             TimeEvent(13 * FRAMES, RemovePhysicsColliders),
 
-            TimeEvent(35 * FRAMES, function(inst)
-                ShakeIfClose(inst)
+            TimeEvent(35*FRAMES, function(inst)
+                ShakeIfClose(inst)         
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound")
             end),
-
-
-            TimeEvent(65 * FRAMES, function(inst)
-                local x, y, z = inst.Transform:GetLocalPosition()
-                inst.components.lootdropper:DropLoot(inst.Transform:SetPosition(x, y, z))
-                if inst.entrada == nil then
-                    local fx = SpawnPrefab("woodlegs_key3")
-                    if fx then fx.Transform:SetPosition(x, y, z) end
-                    inst.entrada = 1
-                end
-
-                if inst.components.knownlocations and inst.components.knownlocations:GetLocation("spawnpoint") then
-                    local spawner = SpawnPrefab("beaverking_spawner")
-                    if spawner then
-                        spawner.Transform:SetPosition(inst.components.knownlocations:GetLocation("spawnpoint"):Get())
-                    end
-                end
-            end),
+			
+			
+            TimeEvent(65*FRAMES, function(inst)			
+local x, y, z = inst.Transform:GetLocalPosition()
+inst.components.lootdropper:DropLoot(inst.Transform:SetPosition(x, y, z))
+if inst.entrada == nil then 
+local fx = SpawnPrefab("woodlegs_key3")
+if fx then fx.Transform:SetPosition(x, y, z) end
+inst.entrada = 1
+end
+ 
+ if inst.components.knownlocations and inst.components.knownlocations:GetLocation("spawnpoint") then
+        local spawner = SpawnPrefab("beaverking_spawner")
+        if spawner then
+           spawner.Transform:SetPosition(inst.components.knownlocations:GetLocation("spawnpoint"):Get())
+        end
+end							
+            end),						
 
         },
     },
@@ -389,25 +392,26 @@ local states =
 }
 
 CommonStates.AddWalkStates(states,
+{
+    walktimeline =
     {
-        walktimeline =
-        {
+        
+        TimeEvent(3*FRAMES, DoFootstep),
+        TimeEvent(7*FRAMES, DoFootstep),        
 
-            TimeEvent(3 * FRAMES, DoFootstep),
-            TimeEvent(7 * FRAMES, DoFootstep),
-
-        }
-    })
+    }
+})
 
 
 CommonStates.AddRunStates(states,
+{
+    runtimeline =
     {
-        runtimeline =
-        {
-            TimeEvent(3 * FRAMES, DoFootstep),
-            TimeEvent(7 * FRAMES, DoFootstep),
-        }
-    })
+        TimeEvent(3*FRAMES, DoFootstep),
+        TimeEvent(7*FRAMES, DoFootstep),
+    }
+})
 
 
 return StateGraph("beaverking", states, events, "lying")
+

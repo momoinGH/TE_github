@@ -20,7 +20,7 @@ local function GetSpawnPoint(inst)
     --print("GetSpawnPoint", inst, inst:GetPosition())
     local x, y, z = inst.Transform:GetWorldPosition()
     local rad = 2
-    local angle = math.random() * TWOPI
+    local angle = math.random() * 2 * PI
     --print("    ", Vector3(x + rad * math.cos(angle), y, z - rad * math.sin(angle)))
     return x + rad * math.cos(angle), y, z - rad * math.sin(angle)
 end
@@ -57,8 +57,9 @@ local function SetOccupied(inst, occupied)
     inst.data.occupied = occupied
 
     if occupied then
-        anim:SetBank("walrus_house")
-        anim:SetBuild("summer_igloo")
+
+		anim:SetBank("walrus_house")
+		anim:SetBuild("summer_igloo")
 
         UpdateLight(inst, not TheWorld.state.isday)
 
@@ -86,14 +87,14 @@ local function UpdateCampOccupied(inst)
     --print("UpdateCampOccupied", inst, inst:GetPosition())
     if inst.data.occupied then
         if not TheWorld.state.issummer then
-            for k, v in pairs(inst.data.children) do
+            for k,v in pairs(inst.data.children) do
                 if k:IsValid() and not k:IsAsleep() then
                     -- don't go away while there are children alive in the world
                     --print("    Child still awake", k)
                     return
                 end
             end
-            for k, v in pairs(inst.data.children) do
+            for k,v in pairs(inst.data.children) do
                 --print("    Removing sleeping child", k)
                 k:Remove()
             end
@@ -136,7 +137,7 @@ local function TrackMember(inst, member)
     inst.data.children[member] = true
     inst:ListenForEvent("death", function(...) OnMemberKilled(inst, ...) end, member)
     inst:ListenForEvent("newcombattarget", function(...) OnMemberNewTarget(inst, ...) end, member)
-    inst:ListenForEvent("despawnedfromhaunt", function(member, data) DespawnedFromHaunt(inst, member, data) end, member)
+    inst:ListenForEvent("despawnedfromhaunt", function(member, data) DespawnedFromHaunt(inst,member,data) end, member)
 
     if not member.components.homeseeker then
         member:AddComponent("homeseeker")
@@ -146,7 +147,7 @@ end
 
 DespawnedFromHaunt = function(inst, oldchild, data)
     local newchild = data.newPrefab
-
+    
     inst.data.children[oldchild] = nil
     TrackMember(inst, newchild)
 
@@ -165,7 +166,7 @@ local function SpawnMember(inst, prefab)
 end
 
 local function GetMember(inst, prefab)
-    for k, v in pairs(inst.data.children) do
+    for k,v in pairs(inst.data.children) do
         if k.prefab == prefab then
             return k
         end
@@ -174,7 +175,7 @@ end
 
 local function GetMembers(inst, prefab)
     local members = {}
-    for k, v in pairs(inst.data.children) do
+    for k,v in pairs(inst.data.children) do
         if k.prefab == prefab then
             table.insert(members, k)
         end
@@ -209,16 +210,16 @@ local function SpawnHuntingParty(inst, target, houndsonly)
     local leader = GetMember(inst, "summerwalrus")
     if not houndsonly and not leader and CanSpawn(inst, "summerwalrus") then
         leader = SpawnMember(inst, "summerwalrus")
-        local x, y, z = GetSpawnPoint(inst)
-        transformsToSet[#transformsToSet + 1] = { inst = leader, x = x, y = y, z = z }
+        local x,y,z = GetSpawnPoint(inst)
+        transformsToSet[#transformsToSet + 1] = {inst = leader, x=x, y=y,z=z }
         --print("spawn", leader)
     end
 
     local companion = GetMember(inst, "little_walrus")
     if not houndsonly and not companion and CanSpawn(inst, "little_walrus") then
         companion = SpawnMember(inst, "little_walrus")
-        local x, y, z = GetSpawnPoint(inst)
-        transformsToSet[#transformsToSet + 1] = { inst = companion, x = x, y = y, z = z }
+        local x,y,z = GetSpawnPoint(inst)
+        transformsToSet[#transformsToSet + 1] = {inst = companion, x=x, y=y,z=z }
         --print("spawn", companion)
     end
 
@@ -227,7 +228,7 @@ local function SpawnHuntingParty(inst, target, houndsonly)
     end
 
     local existing_hounds = GetMembers(inst, "firehound")
-    for i = 1, NUM_HOUNDS do
+    for i = 1,NUM_HOUNDS do
         --print("hound", i)
 
         local hound = existing_hounds[i]
@@ -235,8 +236,8 @@ local function SpawnHuntingParty(inst, target, houndsonly)
             --print("spawn new hound")
             hound = SpawnMember(inst, "firehound")
             hound:AddTag("pet_hound")
-            local x, y, z = GetSpawnPoint(inst)
-            transformsToSet[#transformsToSet + 1] = { inst = hound, x = x, y = y, z = z }
+            local x,y,z = GetSpawnPoint(inst)
+            transformsToSet[#transformsToSet + 1] = {inst = hound, x=x, y=y,z=z }
             hound.sg:GoToState("idle")
         else
             --print("use old hound")
@@ -259,7 +260,7 @@ local function SpawnHuntingParty(inst, target, houndsonly)
         end
     end
 
-    for i, v in ipairs(transformsToSet) do
+    for i,v in ipairs(transformsToSet) do
         v.inst.Transform:SetPosition(v.x, v.y, v.z)
     end
 end
@@ -273,7 +274,7 @@ local function CheckSpawnHuntingParty(inst, target, houndsonly)
 end
 
 -- assign value to forward declared local above
-OnMemberNewTarget = function(inst, member, data)
+OnMemberNewTarget = function (inst, member, data)
     --print("OnMemberNewTarget", inst, member, data)
     if member:IsNear(inst, AGGRO_SPAWN_PARTY_RADIUS) then
         CheckSpawnHuntingParty(inst, data.target, false)
@@ -306,11 +307,12 @@ local function Onsummer(inst)
 end
 
 local function OnSave(inst, data)
+
     --print("OnSave", inst, GetTime())
 
     data.children = {}
 
-    for k, v in pairs(inst.data.children) do
+    for k,v in pairs(inst.data.children) do
         --print("    ", k.prefab, k.GUID)
         table.insert(data.children, k.GUID)
     end
@@ -325,7 +327,7 @@ local function OnSave(inst, data)
     if inst.data.regentime then
         local time = GetTime()
         data.regentimeremaining = {}
-        for k, v in pairs(inst.data.regentime) do
+        for k,v in pairs(inst.data.regentime) do
             local remaining = v - time
             if remaining > 0 then
                 data.regentimeremaining[k] = remaining
@@ -335,12 +337,14 @@ local function OnSave(inst, data)
     end
 
     return data.children
+
 end
 
 local function OnLoad(inst, data)
+
     --print("OnLoad", inst, GetTime())
     if data then
-        -- children loaded by OnLoadPostPass
+    -- children loaded by OnLoadPostPass
 
         --print("    occupied", data.occupied)
         if data.occupied ~= nil then
@@ -350,7 +354,7 @@ local function OnLoad(inst, data)
         inst.data.regentime = {}
         if data.regentimeremaining then
             local time = GetTime()
-            for k, v in pairs(data.regentimeremaining) do
+            for k,v in pairs(data.regentimeremaining) do
                 inst.data.regentime[k] = time + v
                 --print("    ", k, time + v)
             end
@@ -359,10 +363,10 @@ local function OnLoad(inst, data)
 end
 
 local function OnLoadPostPass(inst, newents, data)
-    --    print("OnLoadPostPass", inst, newents, data and data.children and #data.children)
+--    print("OnLoadPostPass", inst, newents, data and data.children and #data.children)
 
     if data and data.children and #data.children > 0 then
-        for k, v in pairs(data.children) do
+        for k,v in pairs(data.children) do
             local child = newents[v]
             if child then
                 --print("Child Name: ", child.entity.prefab)
@@ -371,6 +375,7 @@ local function OnLoadPostPass(inst, newents, data)
                 TrackMember(inst, child)
             end
         end
+
     end
 end
 
@@ -394,10 +399,10 @@ local function create()
     inst.Light:SetFalloff(1)
     inst.Light:SetIntensity(.5)
     inst.Light:SetRadius(2)
-    inst.Light:SetColour(180 / 255, 195 / 255, 50 / 255)
+    inst.Light:SetColour(180/255, 195/255, 50/255)
 
     --inst:AddTag("tent")
-
+    inst:AddTag("antlion_sinkhole_blocker")
 
     inst.entity:SetPristine()
 

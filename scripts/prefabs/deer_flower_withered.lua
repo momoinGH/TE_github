@@ -3,7 +3,11 @@ local assets =
     Asset("ANIM", "anim/withered_flowers.zip"),
 }
 
-local names = { "wf1", "wf2", "wf3" }
+local names = {"wf1","wf2","wf3"}
+
+local function onpickedfn(inst, picker)
+    inst:Remove()
+end
 
 local function onsave(inst, data)
     data.anim = inst.animname
@@ -23,8 +27,8 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-
-    inst:AddTag("deer_flower")
+	
+	inst:AddTag("deer_flower")
 
     inst.AnimState:SetBank("withered_flowers")
     inst.AnimState:SetBuild("withered_flowers")
@@ -43,12 +47,12 @@ local function fn()
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/pickup_plants"
     inst.components.pickable:SetUp("cutgrass", 10)
-    inst.components.pickable.remove_when_picked = true
+    inst.components.pickable.onpickedfn = onpickedfn
     inst.components.pickable.quickpick = true
     inst.components.pickable.wildfirestarter = true
 
-    inst:DoTaskInTime(1, inst.Remove)
-
+	inst:DoTaskInTime(1, onpickedfn)
+	
     MakeSmallBurnable(inst)
     MakeSmallPropagator(inst)
 
@@ -59,4 +63,4 @@ local function fn()
     return inst
 end
 
-return Prefab("deer_flower_withered", fn, assets)
+return Prefab("common/objects/deer_flower_withered", fn, assets)

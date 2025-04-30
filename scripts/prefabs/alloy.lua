@@ -1,172 +1,159 @@
-local assets =
+local assets=
 {
-    Asset("ANIM", "anim/alloy.zip"),
-    Asset("ANIM", "anim/alloygold.zip"),
-    Asset("ANIM", "anim/alloystone.zip"),
+	Asset("ANIM", "anim/alloy.zip"),
+	Asset("ANIM", "anim/alloygold.zip"),
+	Asset("ANIM", "anim/alloystone.zip"),	
 }
 
---common to all gold prefabs below
 local function shine(inst)
-    inst.shinetask = nil
-    if not inst.AnimState:IsCurrentAnimation("sparkle") then
-        inst.AnimState:PlayAnimation("sparkle")
-        inst.AnimState:PushAnimation("idle", false)
-    end
-    if not inst:IsAsleep() then
-        inst.shinetask = inst:DoTaskInTime(4 + math.random() * 5, shine)
+    inst.task = nil
+    if inst.entity:IsAwake() then
+        inst:DoTaskInTime(4+math.random()*5, function() shine(inst) end)
     end
 end
 
---common to all gold prefabs below
-local function OnEntityWake(inst)
-    if inst.shinetask == nil then
-        inst.shinetask = inst:DoTaskInTime(4 + math.random() * 5, shine)
-    end
+local function onwake(inst)
+    inst.task = inst:DoTaskInTime(4+math.random()*5, function() shine(inst) end)
 end
 
-local function fn()
-    local inst = CreateEntity()
-
+local function fn(Sim)
+	local inst = CreateEntity()
     inst.entity:AddNetwork()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddPhysics()
-    inst.entity:AddSoundEmitter()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
 
+	inst.entity:AddPhysics()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
 
-    inst.pickupsound = "metal"
-
-    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+	inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
+	
+	inst.entity:AddSoundEmitter()
+	inst.pickupsound = "metal"
+	
     inst.AnimState:SetBank("alloy")
     inst.AnimState:SetBuild("alloy")
     inst.AnimState:PlayAnimation("idle")
+	
+	inst.entity:SetPristine()
 
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+	if not TheWorld.ismastersim then
+		return inst
+	end	
+	
+    inst:AddComponent("edible")
+    inst.components.edible.foodtype = "ELEMENTAL"
+    inst.components.edible.hungervalue = 2
+    inst:AddComponent("tradable")
+    
+    inst:AddComponent("inspectable")
+    
+    inst:AddComponent("stackable")
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"	
+	inst.caminho = "images/inventoryimages/hamletinventory.xml"	
+	
+    inst:AddComponent("bait")
     inst:AddTag("molebait")
     inst:AddTag("scarerbait")
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
-    inst.components.edible.hungervalue = 2
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("stackable")
-
-    inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("bait")
-
+	
     inst:AddComponent("fuel")
     inst.components.fuel.fueltype = FUELTYPE.LIVINGARTIFACT
-    inst.components.fuel.fuelvalue = 20
+    inst.components.fuel.fuelvalue = 20	
+    
+    inst.OnEntityWake = onwake
 
-    shine(inst)
-    inst.OnEntityWake = OnEntityWake
-
+    shine(inst)    
     return inst
 end
 
-local function fn2()
-    local inst = CreateEntity()
-
+local function fn2(Sim)
+	local inst = CreateEntity()
     inst.entity:AddNetwork()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddPhysics()
-
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddPhysics()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
+--    MakeBlowInHurricane(inst, TUNING.WINDBLOWN_SCALE_MIN.MEDIUM, TUNING.WINDBLOWN_SCALE_MAX.MEDIUM)
 
-    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+	inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
+	
     inst.AnimState:SetBank("alloy")
     inst.AnimState:SetBuild("alloygold")
     inst.AnimState:PlayAnimation("idle")
+	
+	inst.entity:SetPristine()
 
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+	if not TheWorld.ismastersim then
+		return inst
+	end	
+	
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
+    inst.components.edible.foodtype = "ELEMENTAL"
     inst.components.edible.hungervalue = 2
-
     inst:AddComponent("tradable")
-
+    
     inst:AddComponent("inspectable")
-
+    
     inst:AddComponent("stackable")
-
     inst:AddComponent("inventoryitem")
-
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"	
+	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
+	
     inst:AddComponent("bait")
-
     inst:AddTag("molebait")
     inst:AddTag("scarerbait")
+    
+    inst.OnEntityWake = onwake
 
-    shine(inst)
-    inst.OnEntityWake = OnEntityWake
-
+    shine(inst)    
     return inst
 end
 
-local function fn3()
-    local inst = CreateEntity()
-
+local function fn3(Sim)
+	local inst = CreateEntity()
     inst.entity:AddNetwork()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddPhysics()
-
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddPhysics()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
-
+	
     inst.AnimState:SetBank("alloy")
     inst.AnimState:SetBuild("alloystone")
     inst.AnimState:PlayAnimation("idle")
+	
+	inst.entity:SetPristine()
 
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+	if not TheWorld.ismastersim then
+		return inst
+	end	
+	
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
+    inst.components.edible.foodtype = "ELEMENTAL"
     inst.components.edible.hungervalue = 2
-
     inst:AddComponent("tradable")
-
+    
     inst:AddComponent("inspectable")
-
+    
     inst:AddComponent("stackable")
-
     inst:AddComponent("inventoryitem")
-
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/volcanoinventory.xml"	
+	inst.caminho = "images/inventoryimages/volcanoinventory.xml"	
+	
     inst:AddComponent("bait")
-
     inst:AddTag("molebait")
     inst:AddTag("scarerbait")
+    
+    inst.OnEntityWake = onwake
 
-    shine(inst)
-    inst.OnEntityWake = OnEntityWake
-
+    shine(inst)    
     return inst
 end
 
-return Prefab("alloy", fn, assets),
-    Prefab("goldenbar", fn2, assets),
-    Prefab("stonebar", fn3, assets)
+return Prefab( "common/inventory/alloy", fn, assets),
+Prefab( "common/inventory/goldenbar", fn2, assets), 
+Prefab( "common/inventory/stonebar", fn3, assets) 

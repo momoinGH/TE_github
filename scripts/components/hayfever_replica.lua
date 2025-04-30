@@ -1,15 +1,17 @@
 local Hayfever = Class(function(self, inst)
-	self.inst = inst
+    self.inst = inst
 
-	self.level = net_tinybyte(inst.GUID, "hayfever.level", "leveldirty")
+	self._sneezetime = net_byte(inst.GUID, "hayfever._sneezetime", "sneezetimedirty")
+	
+	if not TheWorld.ismastersim then
+		self.inst:ListenForEvent("sneezetimedirty", function()
+			self.inst:PushEvent("updatepollen", {sneezetime = self._sneezetime:value()})
+		end)
+	end
 end)
 
-function Hayfever:SetLevel(level)
-	self.level:set(level)
-end
-
-function Hayfever:GetLevel()
-	return self.level:value()
+function Hayfever:SetNextSneezeTime(newsneezetime)
+	self._sneezetime:set(newsneezetime)
 end
 
 return Hayfever

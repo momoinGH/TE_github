@@ -1,41 +1,41 @@
-local assets =
+local assets = 
 {
-    Asset("ANIM", "anim/sea_yard_tools.zip")
+   Asset("ANIM", "anim/sea_yard_tools.zip")
 }
 
-local function stopfx(inst)
-    inst.AnimState:PlayAnimation("out")
-    inst:ListenForEvent("animover", inst.Remove)
+local function delete(inst, user)
+     inst:Remove() 
+     if user then
+        user.armsfx = nil
+    end
 end
 
-local function fn()
-    local inst = CreateEntity()
+local function stopfx(inst, user)
+    inst.AnimState:PlayAnimation("out")
+    inst:ListenForEvent("animover", function() 
+        inst.SoundEmitter:KillSound("fix")   
+        delete(inst, user) 
+    end)   
+end
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
+local function fn(Sim)
+	local inst = CreateEntity()
+	local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
+    local sound = inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
 
-    inst.AnimState:SetFinalOffset(10)
-    inst.AnimState:SetBank("sea_yard_tools")
-    inst.AnimState:SetBuild("sea_yard_tools")
-    inst.AnimState:PlayAnimation("in")
-    inst.AnimState:PushAnimation("loop", true)
+    anim:SetFinalOffset(10)
+
+    anim:SetBank("sea_yard_tools")
+    anim:SetBuild("sea_yard_tools")
+    anim:PlayAnimation("in")
+    anim:PushAnimation("loop", true)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_medium")
-    inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/shipyard/fix_LP", "fix")
-
-    inst:AddTag("FX")
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
+    inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/shipyard/fix_LP", "fix")   
 
     inst.stopfx = stopfx
-    inst.persists = false
-
     return inst
 end
 
-return Prefab("sea_yard_arms_fx", fn, assets)
+return Prefab( "shipwrecked/sea_yard_arms_fx", fn, assets) 
