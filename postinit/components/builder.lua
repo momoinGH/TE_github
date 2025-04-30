@@ -5,6 +5,14 @@ function RoundBiasedUp(num, idp)
     return math.floor(num * mult + 0.5) / mult
 end
 
+local function get_oinc_cost(recipe)
+    for _, v in ipairs(recipe.ingredients) do
+        if v.type == "oinc" then
+            return v.amount
+        end
+    end
+end
+
 AddComponentPostInit("builder", function(self)
     -- 对于配方的nounlock，如果我加上就会被分类到”模组物品“下，建筑可以正常建造，如果不加，被分类到“翻新”，但是无法正常建造，不过对于物品加不加都可以正常获得
     -- 这里在建造前添加到配方中，使KnowsRecipe方法返回true，可以正常建造，其实我这里不知道该怎么写，只好覆盖了原方法，都是因为这个不支持placer
@@ -12,6 +20,43 @@ AddComponentPostInit("builder", function(self)
         if not self:KnowsRecipe(recipe) and recipe.level.HOME and recipe.level.HOME == 2 then
             self:AddRecipe(recipe.name)
         end
+    end)
+
+    Utils.FnDecorator(self, "HasIngredients", function(self, recipe)
+        if type(recipe) == "string" then
+            recipe = GetValidRecipe(recipe)
+        end
+
+        if not (recipe and get_oinc_cost(recipe)) then
+            return
+        end
+
+        if self.freebuildmode then
+            return {true}, true
+        end
+        for i, v in ipairs(recipe.ingredients) do
+            local amount = math.max(1, RoundBiasedUp(v.amount * self.ingredientmod))
+            if v.type == "oinc" then
+                if self.inst.components.inventory:GetMoney() < amount then
+                    return {false}, true
+                end
+            else
+                if not self.inst.components.inventory:Has(v.type, amount, true) then
+                    return {false}, true
+                end
+            end
+        end
+        for i, v in ipairs(recipe.character_ingredients) do
+            if not self:HasCharacterIngredient(v) then
+                return {false}, true
+            end
+        end
+        for i, v in ipairs(recipe.tech_ingredients) do
+            if not self:HasTechIngredient(v) then
+                return {false}, true
+            end
+        end
+        return {true}, true
     end)
 
     --- 对消耗呼噜币的扣除
@@ -99,5 +144,14 @@ AddClassPostConstruct("components/builder_replica", function(self)
         else
             return false, all
         end
+    end
+
+    local HasIngredients = self.HasIngredients
+    function self:HasIngredients(recipe, ...)
+        local check_all_oincs = self.inst.replica.inventory.check_all_oincs
+        self.inst.replica.inventory.check_all_oincs = true
+        local ret = { HasIngredients(self, recipe, ...) }
+        self.inst.replica.inventory.check_all_oincs = check_all_oincs
+        return unpack(ret)
     end
 end)

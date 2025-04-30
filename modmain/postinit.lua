@@ -129,6 +129,7 @@ modimport("postinit/prefabs/gnarwail_attack_horn")--一角鲸扎小饼船
 ---modimport("postinit/widgets/container_boat") -- boat container sizing tweak by EvenMr
 ---modimport("postinit/widgets/container_widget_boat")
 ---modimport("postinit/widgets/container_woodleg_boat")
+modimport("postinit/widgets/craftingmenu_ingredients")
 --("postinit/widgets/containers") --new containers
 ---modimport("postinit/widgets/crafttabs")优化制作栏***
 ---modimport("postinit/widgets/healthbadge")毒在血量上的显示***

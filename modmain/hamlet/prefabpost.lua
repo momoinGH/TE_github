@@ -30,3 +30,11 @@ AddComponentPostInit("autoterraformer", function(self)
 		if tile == GROUND.GASRAINFOREST or tile == GROUND.DEEPRAINFOREST then return nil, true end
     end)
 end)
+
+local Unwrappable = require "components/unwrappable"
+Utils.FnDecorator(Unwrappable, "_ctor", nil, function(rets, self, inst)
+    if TheWorld.ismastersim and inst.components.tradable == nil then
+        inst:AddComponent("tradable")
+    end
+    return rets
+end)
