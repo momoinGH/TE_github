@@ -6,9 +6,13 @@ end
 
 local incompatibleMODs = {
     {
-        name = en_zh(" Tropical Adventures|Ship of Theseus", "热带冒险|忒修斯之船"),
+        -- name = en_zh(" Tropical Adventures|Ship of Theseus", "热带冒险|忒修斯之船"),
         workshop = "2986194136",
         str = en_zh("Tropical Adventures", "热带冒险"),
+    },
+    {
+        workshop = "3435352667",
+        str = "Island Adventures - Core",
     },
     {
         workshop = "1467214795",
@@ -45,10 +49,10 @@ function KnownModIndex:IsInfoModEnable(modinfo)
 end
 
 -- function EnabledModCheck
-print("Finded Mods:")
-for k, v in pairs(KnownModIndex:GetEnabledServerModNames()) do
-    print(k, v)
-end
+-- print("Finded Mods:")
+-- for k, v in pairs(KnownModIndex:GetEnabledServerModNames()) do
+--     print(k, v)
+-- end
 for _, v in ipairs(incompatibleMODs) do
     assert(KnownModIndex:IsInfoModEnable(v) ~= true, warn(v))
 end
