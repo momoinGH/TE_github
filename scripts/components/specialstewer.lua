@@ -214,7 +214,7 @@ function SpecialStewer:StartCooking()
         self.product, cooktime = cooking.CalculateRecipe(self.cookertype or self.inst.prefab, ings)
         self:OverrideProduct()
         local recipe = cooking.GetRecipe(self.cookertype or self.inst.prefab, self.product)
-        local productperishtime = recipe.perishtime or 0
+        local productperishtime = recipe and recipe.perishtime or 0
 
         if productperishtime > 0 then
 			local spoilage_total = 0
