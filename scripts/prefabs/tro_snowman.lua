@@ -128,4 +128,4 @@ local function fn()
     return inst
 end
 
-return Prefab("snowman", fn, assets, prefabs)
+return Prefab("tro_snowman", fn, assets, prefabs)

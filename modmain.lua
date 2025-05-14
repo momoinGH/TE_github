@@ -761,7 +761,7 @@ end
 if GetModConfigData("frost_island") ~= 5 and GetModConfigData("kindofworld") ~= 5 or GetModConfigData("enableallprefabs") == true then
 	table.insert(PrefabFiles, "billsnow")
 	table.insert(PrefabFiles, "giantsnow")
-	table.insert(PrefabFiles, "snowman")
+	table.insert(PrefabFiles, "tro_snowman")
 	table.insert(PrefabFiles, "bear")
 	table.insert(PrefabFiles, "ice_deer")
 	table.insert(PrefabFiles, "mammoth")
