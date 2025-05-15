@@ -2,7 +2,7 @@ require "prefabutil"
 
 local assets =
 {
-    Asset("ANIM", "anim/galinheiro.zip"),
+    Asset("ANIM", "anim/chicken_house.zip"),
 }
 
 local prefabs =
@@ -11,158 +11,126 @@ local prefabs =
     "bird_egg",
 }
 
-local function onbuilt(inst)
-    inst.AnimState:PlayAnimation("place")
-    inst.AnimState:PushAnimation("idle")
-end
+local levels =
+{
+    { amount = 3, idle = "egg3", hit = "hit_egg3" },
+    { amount = 2, idle = "egg2", hit = "hit_egg2" },
+    { amount = 1, idle = "egg1", hit = "hit_egg1" },
+    { amount = 0, idle = "idle", hit = "hit" },
+}
 
-local function onhammered(inst, worker)
-    if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() then
-        inst.components.burnable:Extinguish()
+local function Stop(inst)
+    if inst.components.harvestable ~= nil and inst.components.harvestable.growtime ~= nil then
+        inst.components.harvestable:PauseGrowing()
     end
-    if inst.components.harvestable and inst.components.harvestable:CanBeHarvested() then
-        local num_eggs = inst.components.harvestable.produce
-        for i = 1, num_eggs do
-            local egg = SpawnPrefab("bird_egg")
-            egg.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        end
-    end
-    inst:RemoveComponent("childspawner")
-    inst.components.lootdropper:DropLoot()
-    local fx = SpawnPrefab("collapse_big")
-    fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    fx:SetMaterial("wood")
-    inst:Remove()
-end
-
-local function onhit(inst, worker)
-    if not inst:HasTag("burnt") then
-        if inst.components.childspawner ~= nil then
-            inst.components.childspawner:ReleaseAllChildren(worker)
-        end
-        inst.AnimState:PlayAnimation("hit")
-        inst.AnimState:PushAnimation("idle")
-    end
-end
-
-local function StartSpawning(inst)
-    if not inst:HasTag("burnt") and
-        not TheWorld.state.iswinter and
-        inst.components.childspawner ~= nil then
-        inst.components.childspawner:StartSpawning()
-    end
-end
-
-local function StopSpawning(inst)
-    if not inst:HasTag("burnt") and inst.components.childspawner ~= nil then
+    if inst.components.childspawner ~= nil then
         inst.components.childspawner:StopSpawning()
     end
 end
 
-
-local function OnSpawned(inst, child)
+local function Start(inst)
     if not inst:HasTag("burnt") then
-        inst.AnimState:PlayAnimation("hit")
-        inst.AnimState:PushAnimation("idle")
-        if TheWorld.state.isday and
-            inst.components.childspawner ~= nil and
-            inst.components.childspawner:CountChildrenOutside() >= 1 and
-            child.components.combat.target == nil then
-            StopSpawning(inst)
+        if inst.components.harvestable ~= nil then
+            inst.components.harvestable:StartGrowing()
+        end
+        if not TheWorld.state.iswinter and inst.components.childspawner ~= nil then
+            inst.components.childspawner:StartSpawning()
         end
     end
 end
 
-local function OnGoHome(inst, child)
+local function OnBuilt(inst)
+    inst.AnimState:PlayAnimation("place")
+    inst.AnimState:PushAnimation("idle")
+end
+
+local function OnHammered(inst, worker)
+    if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() then
+        inst.components.burnable:Extinguish()
+    end
+    if inst.components.harvestable ~= nil then
+        inst.components.harvestable:Harvest()
+    end
+    -- inst:RemoveComponent("childspawner")
+    inst.components.lootdropper:DropLoot()
+    local fx = SpawnAt("collapse_big", inst)
+    fx:SetMaterial("wood")
+    inst:Remove()
+end
+
+local function OnHit(inst, worker)
     if not inst:HasTag("burnt") then
-        inst.AnimState:PlayAnimation("hit")
-        inst.AnimState:PushAnimation("idle")
-        if inst.components.childspawner ~= nil and
-            inst.components.childspawner:CountChildrenOutside() < 1 then
-            StartSpawning(inst)
+        if inst.components.childspawner ~= nil then
+            inst.components.childspawner:ReleaseAllChildren(worker)
         end
+        inst.AnimState:PlayAnimation(inst.anims.hit)
+        inst.AnimState:PushAnimation(inst.anims.idle, false)
     end
 end
 
-local function onsave(inst, data)
-    if inst:HasTag("burnt") or (inst.components.burnable ~= nil and inst.components.burnable:IsBurning()) then
-        data.burnt = true
-    end
-    if inst.components.harvestable then
-        data.egg_count = inst.components.harvestable.produce
-    end
-end
-
-local function onload(inst, data)
-    if data ~= nil and data.burnt then
-        inst.components.burnable.onburnt(inst)
-    end
-    if data and data.egg_count and inst.components.harvestable then
-        inst.components.harvestable.produce = data.egg_count
-    end
-    if inst.components.childspawner ~= nil then
-        if TheWorld.state.isday and not inst:HasTag("burnt") then
-            StartSpawning(inst)
-        else
-            StopSpawning(inst)
-        end
-    end
-end
-
-local function onignite(inst)
+local function OnIgnite(inst)
     if inst.components.childspawner ~= nil then
         inst.components.childspawner:ReleaseAllChildren()
     end
 end
 
-local function onburntup(inst)
+local function OnBurnt(inst)
     inst.AnimState:PlayAnimation("burnt")
 end
 
 local function OnIsDay(inst, isday)
     if isday and not inst:HasTag("burnt") then
-        StartSpawning(inst)
+        Start(inst)
     else
-        StopSpawning(inst)
-    end
-    if inst.components.harvestable then
-        local has_chicken =  inst.components.childspawner.childreninside > 0
-        local can_produce = has_chicken and inst.components.harvestable.produce < inst.components.harvestable.maxproduce
-        if can_produce then
-            if not inst._egg_production_task then
-                inst._egg_production_task = inst:DoPeriodicTask(TUNING.DAY_TIME, function()
-                    if inst.components.harvestable.produce < inst.components.harvestable.maxproduce then
-                        inst.components.harvestable.produce = inst.components.harvestable.produce + 1
-                    end
-                end)
-            end
-        else
-            if inst._egg_production_task then
-                inst._egg_production_task:Cancel()
-                inst._egg_production_task = nil
-            end
-        end
+        Stop(inst)
     end
 end
 
-local function onharvest(inst, picker)
-    local num_eggs = inst.components.harvestable.produce
-    for i = 1, num_eggs do
-        local egg = SpawnPrefab("bird_egg")
-        if picker.components.inventory then
-            picker.components.inventory:GiveItem(egg)
-        else
-            egg.Transform:SetPosition(inst.Transform:GetWorldPosition())
+local function UpdateLevel(inst)
+    if not inst:HasTag("burnt") then
+        local produce = inst.components.harvestable.produce
+        for k, v in ipairs(levels) do
+            if produce >= v.amount then
+                inst.anims = { idle = v.idle, hit = v.hit }
+                break
+            end
         end
+        inst.AnimState:PlayAnimation(inst.anims.idle)
     end
-    inst.components.harvestable.produce = 0
-    inst.AnimState:PlayAnimation("hit")
-    inst.AnimState:PushAnimation("idle")
+end
+
+local function OnHarvest(inst, picker)
+    if not inst:HasTag("burnt") and inst.components.harvestable then
+        inst.components.harvestable:SetGrowTime(nil)
+        inst.components.harvestable.pausetime = nil
+        inst.components.harvestable:StopGrowing()
+        inst.AnimState:PlayAnimation("hit")
+        inst.AnimState:PushAnimation("idle")
+        UpdateLevel(inst)
+    end
+end
+
+local function OnSave(inst, data)
+    if inst:HasTag("burnt") or (inst.components.burnable ~= nil and inst.components.burnable:IsBurning()) then
+        data.burnt = true
+    end
+end
+
+local function OnLoad(inst, data)
+    if data ~= nil and data.burnt then
+        inst.components.burnable.onburnt(inst)
+    else
+        UpdateLevel(inst)
+    end
+end
+
+local function OnPreLoad(inst, data)
+    WorldSettings_ChildSpawner_PreLoad(inst, data, TUNING.BEEBOX_RELEASE_TIME, TUNING.BEEBOX_REGEN_TIME)
 end
 
 local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
+    inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
     inst.entity:AddNetwork()
     inst.entity:AddSoundEmitter()
@@ -172,8 +140,8 @@ local function fn()
     local minimap = inst.entity:AddMiniMapEntity()
     minimap:SetIcon("chickenhouse.png")
 
-    anim:SetBank("galinheiro")
-    anim:SetBuild("galinheiro")
+    anim:SetBank("chicken_house")
+    anim:SetBuild("chicken_house")
     anim:PlayAnimation("idle", true)
 
     inst:AddTag("structure")
@@ -183,51 +151,52 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
+
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({})
-    inst.components.lootdropper:AddRandomLoot("boards", 4)
-    inst.components.lootdropper:AddRandomLoot("cutgrass", 10)
-    inst.components.lootdropper.numrandomloot = 5
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(5)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-    inst.components.workable:SetOnWorkCallback(onhit)
+    inst.components.workable:SetOnFinishCallback(OnHammered)
+    inst.components.workable:SetOnWorkCallback(OnHit)
 
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "chicken"
-    inst.components.childspawner:SetSpawnedFn(OnSpawned)
-    inst.components.childspawner:SetGoHomeFn(OnGoHome)
-    inst.components.childspawner.emergencychildname = "chicken"
-    inst.components.childspawner:SetEmergencyRadius(15)
     inst.components.childspawner:SetRegenPeriod(TUNING.TOTAL_DAY_TIME)
     inst.components.childspawner:SetSpawnPeriod(40)
     inst.components.childspawner:SetMaxChildren(3)
-    inst.components.childspawner:SetMaxEmergencyChildren(1)
+    WorldSettings_ChildSpawner_SpawnPeriod(inst, TUNING.BEEBOX_RELEASE_TIME, true)
+    WorldSettings_ChildSpawner_RegenPeriod(inst, TUNING.BEEBOX_REGEN_TIME, true)
 
-    inst:WatchWorldState("isday", OnIsDay)
+    if TheWorld.state.isday and not TheWorld.state.iswinter then
+        inst.components.childspawner:StartSpawning()
+    end
 
-    MakeMediumBurnable(inst, TUNING.MED_BURNTIME)
-    MakeLargePropagator(inst)
-    inst:ListenForEvent("onignite", onignite)
-    inst:ListenForEvent("burntup", onburntup)
+    inst:AddComponent("harvestable")
+    inst.components.harvestable:SetUp("bird_egg", 3, nil, OnHarvest, UpdateLevel)
+    inst.components.harvestable.produce = 0
 
     inst:AddComponent("inspectable")
 
+    inst:WatchWorldState("isday", OnIsDay)
+
+    UpdateLevel(inst)
+
+    MakeMediumBurnable(inst, TUNING.MED_BURNTIME)
+    MakeLargePropagator(inst)
+
+    inst:ListenForEvent("onignite", OnIgnite)
+    inst:ListenForEvent("burntup", OnBurnt)
+    inst:ListenForEvent("onbuilt", OnBuilt)
+
     MakeSnowCovered(inst)
 
-    inst.OnSave = onsave
-    inst.OnLoad = onload
-
-    inst:ListenForEvent("onbuilt", onbuilt)
-
-    inst:AddComponent("harvestable")
-    inst.components.harvestable:SetUp("bird_egg", 3, nil, onharvest, nil)
-    inst.components.harvestable.produce = 0
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
+    inst.OnPreLoad = OnPreLoad
 
     return inst
 end
 
 return Prefab("chickenhouse", fn, assets, prefabs),
-    MakePlacer("chickenhouse_placer", "galinheiro", "galinheiro", "idle", nil, nil, nil, 3)
+    MakePlacer("chickenhouse_placer", "chicken_house", "chicken_house", "idle", nil, nil, nil, 3)
