@@ -8,7 +8,12 @@ local function en_zh_zht(en, zh, zht)
 	end -- 英文
 end
 
-name = en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "船難哈姆雷特生態：來自域外")
+folder_name = folder_name or "workshop-"
+
+local isdev = not folder_name:find("workshop-")
+
+name = not isdev and en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "船難哈姆雷特生態：來自域外")
+        or "Tropical Experience | Classic Dev"
 description = en_zh_zht(
 	"\nversion：3.87" ..
 	"\nAttention: We added a complement to this mod." ..
