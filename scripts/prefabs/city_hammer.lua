@@ -59,9 +59,9 @@ local function fn(Sim)
     inst.components.tool.tagrequirements = {"fixable"}
     -------
 
-    inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(TUNING.HAMMER_USES)
-    inst.components.finiteuses:SetUses(TUNING.HAMMER_USES)	
+    -- inst:AddComponent("finiteuses")
+    -- inst.components.finiteuses:SetMaxUses(TUNING.HAMMER_USES)
+    -- inst.components.finiteuses:SetUses(TUNING.HAMMER_USES)	
 	
     inst:AddComponent("inspectable")
     
