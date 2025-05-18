@@ -110,6 +110,17 @@ local function OnHarvest(inst, picker)
     end
 end
 
+local function onchildgoinghome(inst, data)
+    if not inst:HasTag("burnt") and
+        data.child ~= nil and
+        data.child.hadeaten ~= nil and
+        data.child.hadeaten >= 2 and
+        inst.components.harvestable ~= nil then
+        data.child.hadeaten = data.child.hadeaten - 2
+        inst.components.harvestable:Grow()
+    end
+end
+
 local function OnSave(inst, data)
     if inst:HasTag("burnt") or (inst.components.burnable ~= nil and inst.components.burnable:IsBurning()) then
         data.burnt = true
@@ -135,7 +146,8 @@ local function fn()
     inst.entity:AddNetwork()
     inst.entity:AddSoundEmitter()
     MakeObstaclePhysics(inst, 1)
-    inst.Transform:SetScale(3, 3, 3)
+    inst.Transform:SetScale(1.73, 1.73, 1.73)
+    inst.AnimState:SetScale(1.73, 1.73, 1.73)
 
     local minimap = inst.entity:AddMiniMapEntity()
     minimap:SetIcon("chickenhouse.png")
@@ -175,6 +187,7 @@ local function fn()
     inst:AddComponent("harvestable")
     inst.components.harvestable:SetUp("bird_egg", 3, nil, OnHarvest, UpdateLevel)
     inst.components.harvestable.produce = 0
+    inst:ListenForEvent("childgoinghome", onchildgoinghome)
 
     inst:AddComponent("inspectable")
 
@@ -182,7 +195,7 @@ local function fn()
 
     UpdateLevel(inst)
 
-    MakeMediumBurnable(inst, TUNING.MED_BURNTIME)
+    MakeMediumBurnable(inst, nil, nil, true)
     MakeLargePropagator(inst)
 
     inst:ListenForEvent("onignite", OnIgnite)
