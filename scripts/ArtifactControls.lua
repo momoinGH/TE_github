@@ -1,4 +1,4 @@
-local ARTIFACT_ACTIONS_STR = { "CHOP", "MINE", "DIG", "HAMMER", "ATTACK" }
+local ARTIFACT_ACTIONS_STR = { "CHOP", "MINE", "DIG", "HAMMER", "ATTACK", "HACK" }
 
 local function ArtifactActionString(inst, act)
      for _,v in ipairs(ARTIFACT_ACTIONS_STR) do
@@ -14,6 +14,7 @@ local ARTIFACT_ACTIONS =
      { "MINE_workable", "MINE" }, 
      { "DIG_workable", "DIG" }, 
      --{ "HAMMER_workable", "HAMMER" },  -- Too aggressive, skip at actionbutton
+     { "HACK_workable", "HACK" },
      { "inactive", "ACTIVATE" },  -- Wood gate
      { "pickable", "PICK" } 
 }
