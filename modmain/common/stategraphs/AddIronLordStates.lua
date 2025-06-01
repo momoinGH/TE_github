@@ -94,7 +94,9 @@ local IronLordStates =
           
           timeline=
           {
-               TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/music/iron_lord") end),
+               TimeEvent(0*FRAMES, function(inst)
+                    inst.artifact.ToggleLight(inst, true)
+                    inst.SoundEmitter:PlaySound("dontstarve_DLC003/music/iron_lord") end),
                TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/iron_lord/morph") end),
                TimeEvent(105*FRAMES, function(inst) GLOBAL.ShakeAllCameras(GLOBAL.CAMERASHAKE.FULL, 0.7, 0.02, .5, inst, 40) end),
                TimeEvent(125*FRAMES, function(inst) 

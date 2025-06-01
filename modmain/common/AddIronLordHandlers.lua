@@ -33,6 +33,7 @@ end)
 
 AddClientModRPCHandler("Living Artifact", "ToggleBGM", function(on)
 	if on then
+        ThePlayer.SoundEmitter:KillAllSounds()
 		ThePlayer.SoundEmitter:PlaySound("dontstarve_DLC003/music/iron_lord_suit", "ironlord_music")
 	else
 		ThePlayer.SoundEmitter:KillSound("ironlord_music")

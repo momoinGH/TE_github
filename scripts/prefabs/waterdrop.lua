@@ -84,6 +84,10 @@ local function fn(Sim)
     inst.components.deployable.CanDeploy = test_ground
     inst.components.deployable.ondeploy = ondeploy
 
+    inst:AddComponent("fuel")
+    inst.components.fuel.fueltype = FUELTYPE.LIVINGARTIFACT
+    inst.components.fuel.fuelvalue = TUNING.IRON_LORD_TIME
+
     return inst
 end
 

@@ -15,11 +15,13 @@ local function wave_ripple_fn(inst)
 
     inst.AnimState:SetBuild("waverripple")
     inst.AnimState:SetBank("wave_ripple_sw")
+    inst.Transform:SetFourFaced()
 end
 
 local function rogue_wave_fn(inst)
     inst.AnimState:SetBuild("wave_rogue")
     inst.AnimState:SetBank("wave_rogue")
+    inst.Transform:SetFourFaced()
 end
 
 return Constructor.CopyPrefab("wave_ripple", "wave_med", { --低

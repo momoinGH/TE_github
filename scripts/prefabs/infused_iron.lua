@@ -58,6 +58,9 @@ local function fn()
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
 
+    inst:AddComponent("fuel")
+    inst.components.fuel.fueltype = FUELTYPE.LIVINGARTIFACT
+    inst.components.fuel.fuelvalue = TUNING.IRON_LORD_TIME / 5
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.MOONGLASS_CHARGED_PERISH_TIME)

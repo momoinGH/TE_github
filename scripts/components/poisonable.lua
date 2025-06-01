@@ -24,6 +24,7 @@ local function SpoilLoot(inst, loot)
 end
 
 function Poisonable:SetPoison(dmg, interval, duration)
+    if self.inst:HasTag("poisonimmune") then return end
 	self.inst:AddTag("tro_poisoned") --中毒标签
 	self.dmg = dmg or -1
 	self.interval = interval or self.maxInterval

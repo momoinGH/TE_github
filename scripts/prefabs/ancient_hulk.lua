@@ -893,7 +893,7 @@ local function OnHitOrb(inst, dist)
          local speed = 6
          local idle = 1.5
          inst:DoTaskInTime(0.1, function()
-              SpawnAttackWaves(pos, nil, rad, num, 360, speed, nil, idle, nil)
+              SpawnAttackWaves(pos, nil, rad, num, 360, speed, "rogue_wave", idle, nil)
               WaterExplode(pos, radius)
          end)
     else
