@@ -1,3 +1,5 @@
+local easing = require "easing"
+
 local function DefaultKnockoutTest(inst)
     local self = inst.components.grogginess
     return self.grog_amount >= self.resistance
