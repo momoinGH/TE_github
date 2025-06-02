@@ -28,9 +28,6 @@ AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.SHEAR, function(inst)
     end
 end))
 
-
-
-
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BOATMOUNT, function(inst, act)
     local x, y, z = act.target.Transform:GetWorldPosition()
     inst.components.embarker:SetDisembarkPos(x, z)
@@ -42,6 +39,11 @@ AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BOATMOUNT, function(i
     elseif inst.components.embarker then
         inst.components.embarker:Cancel()
     end
+end))
+
+AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(ACTIONS.BOATDISMOUNT, function(inst, act)
+    local x, y, z = act:GetActionPoint():Get()
+    act.doer.components.locomotor:StartHopping(x, z)
 end))
 
 ----------------------------------------------------------------------------------------------------
@@ -1046,7 +1048,7 @@ AddStategraphPostInit("wilson", function(inst)
     end
 end)
 
-AddStategraphPostInit("wilson", function(sg)-- 碎裂喙横扫sg hooker
+AddStategraphPostInit("wilson", function(sg) -- 碎裂喙横扫sg hooker
     local attack = sg.states["attack"]
     if not attack then return end
     local _onenter = attack.onenter
@@ -1076,3 +1078,6 @@ AddStategraphPostInit("wilson", function(sg)-- 碎裂喙横扫sg hooker
         end
     end
 end)
+
+----------------------------------------------------------------------------------------------------
+

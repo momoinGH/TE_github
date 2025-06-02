@@ -796,14 +796,10 @@ Constructor.AddAction({ priority = 10, rmb = true, distance = 6, mount_valid = f
 )
 
 -- 上岸
-Constructor.AddAction({ priority = 9, distance = 4, mount_valid = false, instant = true },
+Constructor.AddAction({ priority = 9, distance = 8, mount_valid = false, encumbered_valid = true },
     "BOATDISMOUNT",
     STRINGS.ACTIONS.BOATDISMOUNT,
-    function(act)
-        local x, y, z = act:GetActionPoint():Get()
-        act.doer.components.locomotor:StartHopping(x, z)
-        return true
-    end
+    function(act) return true end
 )
 
 ----------------------------------------------------------------------------------------------------

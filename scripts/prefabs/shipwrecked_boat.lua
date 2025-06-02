@@ -83,6 +83,20 @@ local function common(minimap, bank, build)
     return inst
 end
 
+----------------------------------------------------------------------------------------------------
+
+local function onhammered(inst)
+    -- if inst:HasTag("fire") and inst.components.burnable then
+    --     inst.components.burnable:Extinguish()
+    -- end
+    SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    SpawnPrefab("boards").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    SpawnPrefab("vine").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    SpawnPrefab("vine").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
+    inst:Remove()
+end
+
 ---fn
 ---@param minimap string|nil
 ---@param bank string
@@ -121,11 +135,17 @@ local function common_fn(minimap, bank, build, loots, data)
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.cangoincontainer = false
     inst.components.inventoryitem.canbepickedup = false
+    inst.components.inventoryitem.nobounce = true --脱下的时候不希望有自由落体的过程
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.SWBOAT
 
     inst:AddComponent("shipwreckedboat")
+
+    inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+    inst.components.workable:SetWorkLeft(2)
+    inst.components.workable:SetOnFinishCallback(onhammered)
 
     inst.sounds = sounds
 

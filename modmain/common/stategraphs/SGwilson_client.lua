@@ -575,3 +575,12 @@ AddStategraphPostInit("wilson_client", function(inst)
         return actionHandler_attack(inst, action, ...)
     end
 end)
+
+----------------------------------------------------------------------------------------------------
+-- 上岸，开启延迟补偿下主机和客机都执行跳跃逻辑，避免位置不同步的问题
+AddStategraphActionHandler("wilson_client", GLOBAL.ActionHandler(ACTIONS.BOATDISMOUNT, function(inst, act)
+    inst:PerformPreviewBufferedAction()
+
+    local x, y, z = act:GetActionPoint():Get()
+    act.doer.components.locomotor:StartHopping(x, z)
+end))

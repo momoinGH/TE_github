@@ -18,7 +18,6 @@ local Driver = Class(function(self, inst)
     self.hoptask = nil
 
     inst:ListenForEvent("death", ClearBoat)
-    inst:ListenForEvent("onhop", ClearBoat) --延迟补偿下主机检测不到，得刷帧才行
 
     inst:DoTaskInTime(0, Init, self)
 end)
@@ -63,16 +62,36 @@ function Driver:StartHopBoat(boat)
     end
 end
 
+-- 修正船的位置，如果在陆地上重新设置到海上去
+local function FixBoatPosition(boat)
+    local pos = boat:GetPosition()
+    if TheWorld.Map:IsOceanAtPoint(pos.x, pos.y, pos.z, false) then
+        return
+    end
+
+    local offset = FindSwimmableOffset(pos, math.random() * 2 * PI, 2, 6) or
+        FindSwimmableOffset(pos, math.random() * 2 * PI, 4, 6) or
+        FindSwimmableOffset(pos, math.random() * 2 * PI, 6, 6) or
+        FindSwimmableOffset(pos, math.random() * 2 * PI, 8, 6) or
+        FindSwimmableOffset(pos, math.random() * 2 * PI, 12, 6) or
+        FindSwimmableOffset(pos, math.random() * 2 * PI, 14, 6) or
+        FindSwimmableOffset(pos, math.random() * 2 * PI, 16, 6) or
+        FindSwimmableOffset(pos, math.random() * 2 * PI, 20, 6) or
+        FindSwimmableOffset(pos, math.random() * 2 * PI, 18, 6)
+
+    if offset then
+        boat.Transform:SetPosition(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z)
+    end
+end
+
 function Driver:SetBoat(boat)
     local oldboat = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
     if oldboat == boat then return end
 
     if oldboat then
         oldboat.components.equippable:SetPreventUnequipping(false)
-        self.inst.components.inventory:Unequip(EQUIPSLOTS.SWBOAT)
-        oldboat.components.inventoryitem:OnDropped(nil, 0) --不加这一行船还是隐身状态
-        local x, y, z = self.inst.Transform:GetWorldPosition()
-        oldboat.Transform:SetPosition(x, 0, z)
+        self.inst.components.inventory:DropItem(oldboat)
+        FixBoatPosition(oldboat)
         oldboat.components.shipwreckedboat:OnPlayerDismounted(self.inst)
     end
 
@@ -95,7 +114,6 @@ function Driver:Check()
         and TheWorld.Map:IsOceanAtPoint(self.inst.Transform:GetWorldPosition()) --玩家在海上
 end
 
--- TODO 就算刷帧，延迟补偿下上岸还是有些问题，只能先这样了
 function Driver:OnUpdate(dt)
     if not self:Check() then
         self:SetBoat(nil)
