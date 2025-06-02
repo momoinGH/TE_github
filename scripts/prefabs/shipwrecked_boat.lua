@@ -106,6 +106,10 @@ end
 local function common_fn(minimap, bank, build, loots, data)
     local inst = common(minimap, bank, build)
 
+    local max_health = data.health or TUNING.BOAT.HEALTH
+    inst:AddComponent("healthsyncer")
+    inst.components.healthsyncer.max_health = max_health
+
     if not TheWorld.ismastersim then
         return inst
     end
@@ -113,7 +117,7 @@ local function common_fn(minimap, bank, build, loots, data)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(data.health or TUNING.BOAT.HEALTH)
+    inst.components.health:SetMaxHealth(max_health)
     inst.components.health.nofadeout = true
 
     if loots then
