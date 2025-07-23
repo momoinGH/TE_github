@@ -1,14 +1,3 @@
--- shop_interior
-local assets =
-{
-    --Asset("ANIM", "anim/store_items.zip"),
-    Asset("ANIM", "anim/pedestal_crate.zip"),
-    Asset("ATLAS_BUILD", "images/inventoryimages1.xml", 256),
-    Asset("ATLAS_BUILD", "images/inventoryimages2.xml", 256),
-    Asset("ATLAS_BUILD", "images/inventoryimages3.xml", 256),	
-    Asset("ATLAS_BUILD", "images/inventoryimages/volcanoinventory.xml", 256),
-    Asset("ATLAS_BUILD", "images/inventoryimages/hamletinventory.xml", 256),  
-}
 
 
 local DEFAULT =
@@ -32,6 +21,7 @@ local pig_shop_deli =
 [11] = {"turkeydinner","oinc",10 },
 [12] = {"dragonpie","oinc",30 },
 }
+
 --[[
 local pig_shop_florist = {
 [1] = { "carrot_seeds","oinc",1  },
@@ -78,7 +68,7 @@ local pig_shop_florist = {
 [13] =    { "pinecone", "oinc", 1 },
 [14] =    { "dug_berrybush2", "oinc", 2 },
 [15] =    { "dug_berrybush", "oinc", 2 },
-},
+}
 
 local pig_shop_general = {
 [1] = { "pitchfork","oinc",5  },
@@ -230,7 +220,7 @@ local pig_shop_tinker = {
 [5] = { "player_house_gothic_craft","oinc",20}, 
 [6] = { "player_house_brick_craft","oinc",20}, 
 [7] = { "player_house_turret_craft","oinc",20}, 
-}  
+}    
 
            
 local pig_shop_academy = {
