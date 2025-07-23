@@ -7287,7 +7287,7 @@ else
 
 			countprefabs =
 			{
-				tro_snowman = 3,
+				snowman_lamp = 3,
 				snowberrybush = 3,
 			}
 
