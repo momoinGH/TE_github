@@ -2112,7 +2112,7 @@ AddRoom("city_base_1_set", {
 
 AddRoom("city_base_2_set", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "RoadPoison", "hamlet" },
     contents = {
         countstaticlayouts = {
@@ -2131,7 +2131,7 @@ AddRoom("city_base_2_set", {
 
 AddRoom("city_base", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "RoadPoison", "hamlet" },
     contents = {
         distributepercent = 0.3,
@@ -2147,7 +2147,7 @@ AddRoom("city_base", {
 
 AddRoom("BG_suburb_base", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "RoadPoison", "hamlet" },
     contents = {
         distributepercent = 0.3,
@@ -2166,7 +2166,7 @@ AddRoom("BG_suburb_base", {
 ----------------------------------main-------------
 AddRoom("MAINcity_base_1_set", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = {
@@ -2185,7 +2185,7 @@ AddRoom("MAINcity_base_1_set", {
 
 AddRoom("MAINcity_base_2_set", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = {
@@ -2204,7 +2204,7 @@ AddRoom("MAINcity_base_2_set", {
 
 AddRoom("MAINcity_base", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.3,
@@ -2220,7 +2220,7 @@ AddRoom("MAINcity_base", {
 
 AddRoom("MAINBG_suburb_base", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.3,
@@ -2232,6 +2232,74 @@ AddRoom("MAINBG_suburb_base", {
             twigs = 1,
         },
     }
+})
+---------------------------------------------------------------city --------------------------------------
+
+
+
+local cityContents = {
+    distributepercent = 0.1,
+    distributeprefabs = {
+        rocks = 1,
+        grass_ham = 1,
+        spoiled_food = 1,
+        twigs = 1,
+    },
+}
+
+AddRoom("BG_city_base", {
+    colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
+    value = WORLD_TILES.SUBURB,
+    tags = { "City_Foundation" },
+    contents = cityContents
+})
+
+AddRoom("city_base_1", {
+    colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
+    value = WORLD_TILES.SUBURB,
+    tags = { "City_Foundation" },
+    contents = cityContents
+})
+
+
+AddRoom("city_base_2", {
+    colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
+    value = WORLD_TILES.SUBURB,
+    tags = { "City_Foundation" },
+    contents = cityContents
+})
+
+
+local suburb_contents = {
+    distributepercent = 0.1,
+    distributeprefabs = {
+        rocks = 1,
+        grass_ham = 1,
+        spoiled_food = 1,
+        twigs = 1,
+    },
+}
+
+
+AddRoom("BG_suburb_base", {
+    colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
+    value = WORLD_TILES.SUBURB,
+    tags = { "City_Foundation", "Suburb" },
+    contents = suburb_contents
+})
+
+AddRoom("suburb_base_1", {
+    colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
+    value = WORLD_TILES.SUBURB,
+    tags = { "City_Foundation", "Suburb" },
+    contents = suburb_contents
+})
+
+AddRoom("suburb_base_2", {
+    colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
+    value = WORLD_TILES.SUBURB,
+    tags = { "City_Foundation", "Suburb" },
+    contents = suburb_contents
 })
 -------------------------------pinacle----------------------------------
 AddRoom("BG_pinacle_base_set", {
@@ -2421,6 +2489,7 @@ AddTask("rainforest_ruins", {
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 -------------------------
+--[[
 AddTask("Edge_of_civilization", {
     locks = {},
     keys_given = {},
@@ -2447,9 +2516,69 @@ AddTask("Pigcity", {
         ["city_base_1_set"] = 1,
         ["city_base"] = 1,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
+})
+]]
+
+AddTask("Edge_of_civilization", {
+    locks = LOCKS.JUNGLE_DEPTH_2,
+    keys_given = KEYS.CIVILIZATION_1,
+    region_id = "hamlet",
+    room_tags = { "City1", "RoadPoison", "hamlet", "tropical", "nohunt", "nohasslers", "not_mainland" },
+    room_choices = {
+        ["cultivated_base_1"] = math.random(3, 5),
+        ["piko_land"] = math.random(2, 3),
+    },
+    room_bg = WORLD_TILES.FIELDS,
+    background_room = "cultivated_base_1",
+    cove_room_name = "cultivated_base_1",
+    make_loop = true,
+    crosslink_factor = 10,
+    cove_room_chance = 1,
+    cove_room_max_edges = 10,
+    colour = { r = 1, g = 1, b = 1, a = 0.3 }
+})
+
+
+AddTask("Pigtopia", {
+    locks = LOCKS.CIVILIZATION_1,
+    keys_given = KEYS.CIVILIZATION_2,
+    level_set_piece_blocker = true,
+    region_id = "hamlet",
+    room_tags = { "City1", "RoadPoison", "hamlet", "tropical", "nohunt", "nohasslers", "not_mainland" },
+    room_choices = {
+        ["city_base_1"] = math.random(5, 7),
+        -- ["suburb_base_1"] = math.random(2, 3),
+    },
+    room_bg = WORLD_TILES.SUBURB,
+    background_room = "suburb_base_1",
+    cove_room_name = "suburb_base_1",
+    make_loop = true,
+    crosslink_factor = 10,
+    cove_room_chance = 1,
+    cove_room_max_edges = 10,
+    colour = { r = 1, g = 1, b = 1, a = 0.3 }
+})
+
+AddTask("Pigtopia_capital", {
+    locks = LOCKS.CIVILIZATION_2,
+    keys_given = KEYS.ISLAND_2,
+    level_set_piece_blocker = true,
+    region_id = "hamlet",
+    room_tags = { "City1", "RoadPoison", "hamlet", "tropical", "nohunt", "nohasslers", "not_mainland" },
+    room_choices = {
+        ["city_base_1"] = math.random(3, 4),
+    },
+    room_bg = WORLD_TILES.SUBURB,
+    background_room = "suburb_base_1",
+    cove_room_name = "suburb_base_1",
+    make_loop = true,
+    crosslink_factor = 10,
+    cove_room_chance = 1,
+    cove_room_max_edges = 10,
+    colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 
 AddTask("Deep_rainforest_4", {
@@ -2467,7 +2596,7 @@ AddTask("Deep_rainforest_4", {
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
-
+--[[
 AddTask("Pigcity2", {
     locks = {},
     keys_given = {},
@@ -2477,9 +2606,67 @@ AddTask("Pigcity2", {
         ["city_base_2_set"] = 1,
         ["city_base"] = 1,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
+})]]
+
+AddTask("Other_edge_of_civilization", {
+    locks = LOCKS.OTHER_JUNGLE_DEPTH_1,
+    keys_given = KEYS.OTHER_CIVILIZATION_1,
+    region_id = "hamlet_palace",
+    room_tags = { "City1", "RoadPoison", "hamlet", "tropical", "nohunt", "nohasslers", "not_mainland" },
+    room_choices = {
+        ["cultivated_base_2"] = math.random(2, 3),
+        ["piko_land"] = math.random(1, 2),
+    },
+    room_bg = WORLD_TILES.FIELDS,
+    background_room = "cultivated_base_2",
+    cove_room_name = "cultivated_base_2",
+    make_loop = true,
+    crosslink_factor = 10,
+    cove_room_chance = 1,
+    cove_room_max_edges = 10,
+    colour = { r = 1, g = 1, b = 1, a = 0.3 }
+})
+
+AddTask("Other_pigtopia", {
+    locks = LOCKS.OTHER_CIVILIZATION_1,
+    keys_given = KEYS.OTHER_CIVILIZATION_2,
+    level_set_piece_blocker = true,
+    region_id = "hamlet_palace",
+    room_tags = { "City2", "RoadPoison", "hamlet", "tropical", "nohunt", "nohasslers", "not_mainland" },
+    room_choices = {
+        ["city_base_2"] = math.random(5, 7),
+        -- ["suburb_base_2"] = math.random(2, 3),
+    },
+    room_bg = WORLD_TILES.SUBURB,
+    background_room = "suburb_base_2",
+    cove_room_name = "suburb_base_2",
+    make_loop = true,
+    crosslink_factor = 10,
+    cove_room_chance = 1,
+    cove_room_max_edges = 10,
+    colour = { r = 1, g = 1, b = 1, a = 0.3 }
+})
+
+AddTask("Other_pigtopia_capital", {
+    locks = LOCKS.OTHER_CIVILIZATION_2,
+    keys_given = KEYS.ISLAND_3,
+    level_set_piece_blocker = true,
+    region_id = "hamlet_palace",
+    room_tags = { "City2", "RoadPoison", "hamlet", "tropical", "nohunt", "nohasslers", "not_mainland" },
+    room_choices = {
+        ["city_base_2"] = math.random(3, 4),
+    },
+    room_bg = WORLD_TILES.SUBURB,
+    background_room = "suburb_base_2",
+    cove_room_name = "suburb_base_2",
+    make_loop = true,
+    crosslink_factor = 10,
+    cove_room_chance = 1,
+    cove_room_max_edges = 10,
+    colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 
 AddTask("Deep_rainforest_3", {
@@ -2688,7 +2875,7 @@ AddTask("MPigcity", {
         ["city_base_1_set"] = 1,
         ["city_base"] = 1,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     entrance_room = "city_base",
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
@@ -2703,7 +2890,7 @@ AddTask("MPigcityside1", {
         ["city_base"] = 1,
     },
     entrance_room = "city_base",
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2718,7 +2905,7 @@ AddTask("MPigcityside2", {
 
     },
     entrance_room = "city_base",
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2733,7 +2920,7 @@ AddTask("MPigcityside3", {
 
     },
     entrance_room = "city_base",
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2748,7 +2935,7 @@ AddTask("MPigcityside4", {
 
     },
     entrance_room = "city_base",
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2777,7 +2964,7 @@ AddTask("MPigcity2", {
     room_choices = {
         ["city_base_2_set"] = 1,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2790,7 +2977,7 @@ AddTask("MPigcity2side1", {
     room_choices = {
         ["city_base"] = 1,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2804,7 +2991,7 @@ AddTask("MPigcity2side2", {
         ["city_base"] = 1,
 
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2817,7 +3004,7 @@ AddTask("MPigcity2side3", {
     room_choices = {
         ["city_base"] = 1,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -2831,7 +3018,7 @@ AddTask("MPigcity2side4", {
         ["city_base"] = 1,
 
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "BG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3085,7 +3272,7 @@ AddTask("XPigcity", {
     room_choices = {
         ["MAINcity_base_1_set"] = 1,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3098,7 +3285,7 @@ AddTask("XPigcityside1", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3111,7 +3298,7 @@ AddTask("XPigcityside2", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3124,7 +3311,7 @@ AddTask("XPigcityside3", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3137,7 +3324,7 @@ AddTask("XPigcityside4", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3149,7 +3336,7 @@ AddTask("XPigcity2", {
     room_choices = {
         ["MAINcity_base_2_set"] = 1,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3161,7 +3348,7 @@ AddTask("XPigcity2side1", {
     room_choices = {
         ["MAINcity_base"] = 1,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3174,7 +3361,7 @@ AddTask("XPigcity2side2", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3187,7 +3374,7 @@ AddTask("XPigcity2side3", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -3200,7 +3387,7 @@ AddTask("XPigcity2side4", {
         ["MAINcity_base"] = 1,
 
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "MAINBG_suburb_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -20914,43 +21101,65 @@ else
 
         ---------------------Main Land------------------------	
         if TUNING.tropical.hamlet_pigcity1 == 10 then
+--[[
             table.insert(taskset.tasks, "XPigcity")
             table.insert(taskset.tasks, "XPigcityside1")
             table.insert(taskset.tasks, "XPigcityside2")
             table.insert(taskset.tasks, "XPigcityside3")
             table.insert(taskset.tasks, "XPigcityside4")
+]]
+            table.insert(taskset.tasks, "Edge_of_civilization") --城郊地区
+            table.insert(taskset.tasks, "Pigtopia")
+            -- table.insert(taskset.tasks, "Pigtopia_capital")
         end
 
         ------------continent----------------------
         if TUNING.tropical.hamlet_pigcity1 == 15 then
+--[[
             table.insert(taskset.tasks, "MPigcity")
             table.insert(taskset.tasks, "MPigcityside1")
             table.insert(taskset.tasks, "MPigcityside2")
             table.insert(taskset.tasks, "MPigcityside3")
             table.insert(taskset.tasks, "MPigcityside4")
+]]
+            table.insert(taskset.tasks, "Edge_of_civilization") --城郊地区
+            table.insert(taskset.tasks, "Pigtopia")
+            -- table.insert(taskset.tasks, "Pigtopia_capital")
         end
 
         --------------island-------------------------
         if TUNING.tropical.hamlet_pigcity1 == 20 then
-            table.insert(taskset.tasks, "Pigcity")
+            --table.insert(taskset.tasks, "Pigcity")
+            table.insert(taskset.tasks, "Edge_of_civilization") --城郊地区
+            table.insert(taskset.tasks, "Pigtopia")
+            -- table.insert(taskset.tasks, "Pigtopia_capital")
             table.insert(taskset.tasks, "Deep_rainforest_4")
         end
 
 
         ---------------------Main Land------------------------	
         if TUNING.tropical.hamlet_pigcity2 == 10 then
+--[[
             table.insert(taskset.tasks, "XPigcity2")
             table.insert(taskset.tasks, "XPigcity2side1")
             table.insert(taskset.tasks, "XPigcity2side2")
             table.insert(taskset.tasks, "XPigcity2side3")
             table.insert(taskset.tasks, "XPigcity2side4")
+]]
+            table.insert(taskset.tasks, "Other_edge_of_civilization")
+            table.insert(taskset.tasks, "Other_pigtopia")
+            -- table.insert(taskset.tasks, "Other_pigtopia_capital")
             table.insert(taskset.tasks, "XDeep_rainforest_3")
+
         end
 
         ------------continent----------------------
         if TUNING.tropical.hamlet_pigcity2 == 15 then
-            table.insert(taskset.tasks, "M_BLANK1")
-            table.insert(taskset.tasks, "MDeep_rainforestC")
+            --table.insert(taskset.tasks, "M_BLANK1")
+            table.insert(taskset.tasks, "Other_edge_of_civilization")
+            table.insert(taskset.tasks, "Other_pigtopia")
+            -- table.insert(taskset.tasks, "Other_pigtopia_capital")
+            --table.insert(taskset.tasks, "MDeep_rainforestC")
             --table.insert(taskset.tasks, "MPigcity2")
             --table.insert(taskset.tasks, "MPigcity2side1")
             --table.insert(taskset.tasks, "MPigcity2side2")
@@ -20961,7 +21170,10 @@ else
 
         --------------island-------------------------
         if TUNING.tropical.hamlet_pigcity2 == 20 then
-            table.insert(taskset.tasks, "Pigcity2")
+            --table.insert(taskset.tasks, "Pigcity2")
+            table.insert(taskset.tasks, "Other_edge_of_civilization")
+            table.insert(taskset.tasks, "Other_pigtopia")
+            -- table.insert(taskset.tasks, "Other_pigtopia_capital")
             table.insert(taskset.tasks, "Deep_rainforest_3")
         end
 

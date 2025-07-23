@@ -32,6 +32,10 @@ end)
 
 modimport "modmain/common/map/lockandkey"
 
+modimport "postinit/map/storygen"
+modimport "scripts/map/tro_lockandkey"      ----地形锁钥
+modimport "scripts/map/city_layouts"        --新的城镇 layouts
+
 -- vai ate 6077
 if TUNING.tropical.only_hamlet then
 	modimport "modmain/common/map/tasks/hamlet"

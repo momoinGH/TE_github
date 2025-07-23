@@ -1,27 +1,27 @@
--- local upvaluehelper = require("tools/upvaluehelper")
+local upvaluehelper = require("tools/upvaluehelper")
 require("constants")
 require("mathutil")
 
 local ta_worldgen = TA_CONFIG.WORLDGEN
 local forest_map = require("map/forest_map")
 
-local old_generatemap = forest_map.Generate
+local old_generatemap = forest_map.Generate--[[
 local SKIP_GEN_CHECKS = upvaluehelper.Get(old_generatemap, "SKIP_GEN_CHECKS")
 if SKIP_GEN_CHECKS ~= nil and TA_CONFIG.DEVELOP.test_map then
     print("Skipping generation checks for test map")
     local old = SKIP_GEN_CHECKS
     upvaluehelper.Set(old_generatemap, "SKIP_GEN_CHECKS", true)
-end
+end]]
 
 
 forest_map.Generate = function(prefab, map_width, map_height, tasks, level, level_type, ...)
     ----世界设置覆盖mod设置中的相同内容
-    local worldgenset = deepcopy(level.overrides) or {}
+    --local worldgenset = deepcopy(level.overrides) or {}
     -- print("worldgenset:")
     -- for i, v in pairs(worldgenset) do
     --     print(i .. ":" .. tostring(v))
     -- end
-
+--[[
     for i, v in pairs(ta_worldgen) do
         ta_worldgen[i] = (worldgenset[i] ~= nil) and worldgenset[i] or ta_worldgen[i]
         if ta_worldgen[i] == "disabled" then
@@ -38,7 +38,7 @@ forest_map.Generate = function(prefab, map_width, map_height, tasks, level, leve
     ta_worldgen.ham_start = ta_worldgen.hamlet and (ta_worldgen.multiplayerportal == "hamlet")
     ta_worldgen.together_not_mainland = (ta_worldgen.sw_start or ta_worldgen.ham_start)
     ta_worldgen.together = not ((not ta_worldgen.rog) and ta_worldgen.together_not_mainland)
-
+]]
 
     local save = old_generatemap(prefab, map_width, map_height, tasks, level, level_type, ...)
 

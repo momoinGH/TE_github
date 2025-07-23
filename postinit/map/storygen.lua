@@ -29,7 +29,7 @@ end
 
 
 
-
+--[[
 local troadv = TA_CONFIG.WORLDGEN
 -------------以下代码可以直接改变主大陆但是 background room都不会生成
 if (troadv.together_not_mainland) and (not troadv.testmap) then
@@ -69,3 +69,4 @@ if (troadv.together_not_mainland) and (not troadv.testmap) then
         self.startNode = self:_AddPlayerStartNode(g) -- Adds where the player portal will be spawned and used in placement.lua to force the starting point to be at the center of the map
     end
 end
+]]

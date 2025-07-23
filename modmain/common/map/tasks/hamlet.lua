@@ -106,7 +106,7 @@ AddTask("Pigtopia", {
     room_choices = {
         ["suburb_base_1"] = 1 + tamanho,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "suburb_base_1",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -120,7 +120,7 @@ AddTask("Pigtopia_capital", {
         ["city_base_1_set2"] = 1,
         ["city_base_1"] = 1,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "suburb_base_1",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -293,7 +293,7 @@ AddTask("Other_pigtopia", {
     room_choices = {
         ["suburb_base_2"] = 1 + tamanho,
     },
-    room_bg = GROUND.MOSS,
+    room_bg = GROUND.SUBURB,
     background_room = "suburb_base_2",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -1706,7 +1706,7 @@ AddRoom("plains_pogs_ruin", {
 -------------------------------------------------------------city room------------------------------------------------------------------------------------
 AddRoom("BG_city_base", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1723,7 +1723,7 @@ AddRoom("BG_city_base", {
 
 AddRoom("city_base_1", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1739,7 +1739,7 @@ AddRoom("city_base_1", {
 
 AddRoom("city_base_1_set", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         countstaticlayouts = {
@@ -1758,7 +1758,7 @@ AddRoom("city_base_1_set", {
 
 AddRoom("city_base_1_set2", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1932,7 +1932,7 @@ AddRoom("piko_land", {
 -----------------------------------------------------suburb room-----------------------------------------
 AddRoom("BG_suburb_base", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1948,7 +1948,7 @@ AddRoom("BG_suburb_base", {
 
 AddRoom("suburb_base_1", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1964,7 +1964,7 @@ AddRoom("suburb_base_1", {
 
 AddRoom("suburb_base_2", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.MOSS,
+    value = GROUND.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,

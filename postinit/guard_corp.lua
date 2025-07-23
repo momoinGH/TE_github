@@ -1,7 +1,7 @@
 local Utils = require("tropical_utils/utils")
 -- 根据地皮判断不太好，能不能给草添加特殊标签
 local CANT_PICK_TILES = {
-    [GROUND.MOSS] = true,
+    [GROUND.SUBURB] = true,
     [GROUND.FOUNDATION] = true,
     [GROUND.COBBLEROAD] = true,
     [GROUND.FIELDS] = true

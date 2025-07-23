@@ -732,7 +732,7 @@ local tro_tiledefs = {
         },
     },
 
-    MOSS = {------------苔藓地皮
+    SUBURB = {------------苔藓地皮
         tile_range = TileRanges.HAM_LAND,
         tile_data = {
             ground_name = "Suburb",
@@ -1249,7 +1249,7 @@ ChangeTileRenderOrder(WORLD_TILES.FIELDS, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.FOUNDATION, WORLD_TILES.WOODFLOOR, true)
 ChangeTileRenderOrder(WORLD_TILES.GASRAINFOREST, WORLD_TILES.MUD, true)--GASJUNGLE
 ChangeTileRenderOrder(WORLD_TILES.LAWN, WORLD_TILES.WOODFLOOR, true)--CHECKEREDLAWN
-ChangeTileRenderOrder(WORLD_TILES.MOSS, WORLD_TILES.MUD, true)--SUBURB
+ChangeTileRenderOrder(WORLD_TILES.SUBURB, WORLD_TILES.MUD, true)--SUBURB
 ChangeTileRenderOrder(WORLD_TILES.PAINTED, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.PIGRUINS, WORLD_TILES.CHECKER, true)
 ChangeTileRenderOrder(WORLD_TILES.PLAINS, WORLD_TILES.MUD, true)
