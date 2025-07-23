@@ -95,8 +95,8 @@ local function fn()
     inst.entity:AddSoundEmitter()
     --MakeObstaclePhysics( inst, 1)
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("goldtomb_icon.tex")
+    --local minimap = inst.entity:AddMiniMapEntity()
+    --minimap:SetIcon("goldtomb_icon.tex")
 
     anim:SetBank("walrus_house")
     anim:SetBuild("golden_tomb")
