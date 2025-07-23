@@ -63,7 +63,7 @@ local function fn(Sim)
 	anim:SetBuild("volcano_shrub")
 	anim:PlayAnimation("idle", true)
 
-	minimap:SetIcon("volcano_shrub.tex")
+	minimap:SetIcon("volcano_shrub.png")
 
 	inst.entity:SetPristine()
 	  
