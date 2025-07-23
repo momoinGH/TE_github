@@ -1,3 +1,14 @@
+-- shop_interior
+local assets =
+{
+    --Asset("ANIM", "anim/store_items.zip"),
+    Asset("ANIM", "anim/pedestal_crate.zip"),
+    Asset("ATLAS_BUILD", "images/inventoryimages1.xml", 256),
+    Asset("ATLAS_BUILD", "images/inventoryimages2.xml", 256),
+    Asset("ATLAS_BUILD", "images/inventoryimages3.xml", 256),	
+    Asset("ATLAS_BUILD", "images/inventoryimages/volcanoinventory.xml", 256),
+    Asset("ATLAS_BUILD", "images/inventoryimages/hamletinventory.xml", 256),  
+}
 
 
 local DEFAULT =
