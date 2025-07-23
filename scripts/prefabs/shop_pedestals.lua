@@ -32,7 +32,7 @@ local pig_shop_deli =
 [11] = {"turkeydinner","oinc",10 },
 [12] = {"dragonpie","oinc",30 },
 }
-
+--[[
 local pig_shop_florist = {
 [1] = { "carrot_seeds","oinc",1  },
 [2] = { "pumpkin_seeds","oinc",1  },
@@ -49,7 +49,36 @@ local pig_shop_florist = {
 [13] = { "dug_berrybush","oinc",2  },
 [14] = { "watermelon_seeds","oinc",1  },
 [15] = { "dug_berrybush_juicy","oinc",5  },
-}
+}]]
+
+local pig_shop_florist = {
+        --{ "asparagus_seeds", "oinc", 1 },
+        --{ "carrot_seeds", "oinc", 1 },
+[1] =     { "corn_seeds", "oinc", 1 },
+[2] =     { "eggplant_seeds", "oinc", 1 },
+[3] =     { "garlic_seeds", "oinc", 1 },
+[4] =     { "onion_seeds", "oinc", 1 },
+[5] =     { "pepper_seeds", "oinc", 1 },
+        --{ "potato_seeds", "oinc", 1 },
+[6] =     { "pumpkin_seeds", "oinc", 1 },
+        --{ "tomato_seeds", "oinc", 1 },
+[7] =     { "dragonfruit_seeds", "oinc", 10 },
+[8] =     { "durian_seeds", "oinc", 1 },
+[9] =     { "pomegranate_seeds", "oinc", 1 },
+[10] =    { "watermelon_seeds", "oinc", 1 },
+
+        --{ "aloe_seeds", "oinc", 1 },
+        --{ "radish_seeds", "oinc", 1 },
+        --{ "sweet_potato_seeds", "oinc", 1 },
+        --{ "turnip_seeds", "oinc", 1 },
+        --{ "wheat_seeds", "oinc", 1 },
+
+[11] =    { "flowerhat", "oinc", 2 },
+[12] =    { "acorn", "oinc", 1 },
+[13] =    { "pinecone", "oinc", 1 },
+[14] =    { "dug_berrybush2", "oinc", 2 },
+[15] =    { "dug_berrybush", "oinc", 2 },
+},
 
 local pig_shop_general = {
 [1] = { "pitchfork","oinc",5  },
