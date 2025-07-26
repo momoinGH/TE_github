@@ -231,14 +231,13 @@ local function common_fn(isempty)
     inst:AddTag("hostile")
     inst:AddTag("laser")
 
-    inst:SetPrefabNameOverride("deerclops")
+    inst:SetPrefabNameOverride("ancient_robot")
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-
 
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(LASER_DAMAGE)

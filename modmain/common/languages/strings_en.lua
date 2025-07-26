@@ -2190,6 +2190,7 @@ STRINGS.NAMES.BLUBBERSUIT                                                       
 STRINGS.NAMES.CROCODOGSTOOTH                                                    = "Crocodog's Tooth"
 STRINGS.NAMES.MUSSEL_STICK                                                      = "Mussel Stick"
 STRINGS.NAMES.ANCIENT_ROBOT_RIBS                                                = "Iron Hulk"
+STRINGS.NAMES.ANCIENT_ROBOT                                                     = "Iron Hulk"
 STRINGS.NAMES.RUG_NAILBED                                                       = "Nailbed Rug"
 STRINGS.NAMES.BAT_HIDE                                                          = "Pig Skin?"
 STRINGS.NAMES.SNAKESKINHAT                                                      = "Snake Skin Hat"

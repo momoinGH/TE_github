@@ -26,12 +26,12 @@ local prefabs =
 
 SetSharedLootTable('anchientrobot',
     {
-        { 'iron', 1.00 },
-        { 'iron', 1.00 },
-        { 'iron', 1.00 },
-        { 'iron', 0.33 },
-        { 'iron', 0.33 },
-        { 'iron', 0.33 },
+        { 'iron',  1.00 },
+        { 'iron',  1.00 },
+        { 'iron',  1.00 },
+        { 'iron',  0.33 },
+        { 'iron',  0.33 },
+        { 'iron',  0.33 },
         { 'gears', 1.00 },
         { 'gears', 0.33 },
     })
@@ -85,6 +85,22 @@ local function OnLightning(inst, data)
             inst.updatetask = inst:DoPeriodicTask(UPDATETIME, periodicupdate)
         end
     end
+end
+
+local function OnHaunt(inst, haunter)
+    if math.random() < TUNING.HAUNT_CHANCE_HALF then
+        inst.lifetime = 8 + math.random(4)
+        if inst:HasTag("dormant") then
+            inst.wantstodeactivate = nil
+            inst:RemoveTag("dormant")
+            inst:PushEvent("shock")
+            if not inst.updatetask then
+                inst.updatetask = inst:DoPeriodicTask(UPDATETIME, periodicupdate)
+            end
+        end
+        return true
+    end
+    return false
 end
 
 local function OnAttacked(inst, data)
@@ -183,7 +199,8 @@ local function ribsfn()
 
     inst.MiniMapEntity:SetIcon("metal_spider.png")
 
-    MakeCharacterPhysics(inst, 100, 2)
+    inst.collisionradius = 1.2
+    MakeCharacterPhysics(inst, 99999, inst.collisionradius)
 
     inst.DynamicShadow:SetSize(6, 2)
 
@@ -242,6 +259,8 @@ local function ribsfn()
     inst.components.locomotor.walkspeed = 2
     inst.components.locomotor.runspeed = 2
 
+    inst:AddComponent("hauntable")
+    inst.components.hauntable:SetOnHauntFn(OnHaunt)
 
     inst:SetBrain(brain)
     inst:SetStateGraph("SGAncientRobot")
@@ -281,7 +300,8 @@ local function armfn(Sim)
     inst.MiniMapEntity:SetIcon("metal_claw.png")
 
     inst.Transform:SetSixFaced()
-    MakeCharacterPhysics(inst, 100, 2)
+    inst.collisionradius = 1.2
+    MakeCharacterPhysics(inst, 99999, inst.collisionradius)
 
     inst.AnimState:SetBank("metal_claw")
     inst.AnimState:SetBuild("metal_claw")
@@ -350,6 +370,9 @@ local function armfn(Sim)
     inst.components.locomotor.walkspeed = 3
     inst.components.locomotor.runspeed = 3
 
+    inst:AddComponent("hauntable")
+    inst.components.hauntable:SetOnHauntFn(OnHaunt)
+
     inst:SetBrain(brain)
     inst:SetStateGraph("SGAncientRobot")
 
@@ -394,7 +417,8 @@ local function legfn(Sim)
 
     inst.DynamicShadow:SetSize(4, 2)
 
-    MakeCharacterPhysics(inst, 100, 2)
+    inst.collisionradius = 1.2
+    MakeCharacterPhysics(inst, 99999, inst.collisionradius)
 
     inst.AnimState:SetBank("metal_leg")
     inst.AnimState:SetBuild("metal_leg")
@@ -455,6 +479,9 @@ local function legfn(Sim)
     inst.components.locomotor.walkspeed = 4
     inst.components.locomotor.runspeed = 4
 
+    inst:AddComponent("hauntable")
+    inst.components.hauntable:SetOnHauntFn(OnHaunt)
+
     inst:SetBrain(brain)
     inst:SetStateGraph("SGAncientRobot")
 
@@ -497,7 +524,8 @@ local function headfn()
 
     inst.DynamicShadow:SetSize(4, 2)
 
-    MakeCharacterPhysics(inst, 100, 2)
+    inst.collisionradius = 1.2
+    MakeCharacterPhysics(inst, 99999, inst.collisionradius)
 
     inst.AnimState:SetBank("metal_head")
     inst.AnimState:SetBuild("metal_head")
@@ -558,6 +586,9 @@ local function headfn()
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
     inst.components.locomotor.walkspeed = 4
     inst.components.locomotor.runspeed = 4
+
+    inst:AddComponent("hauntable")
+    inst.components.hauntable:SetOnHauntFn(OnHaunt)
 
     inst:SetBrain(brain)
     inst:SetStateGraph("SGAncientRobot")
