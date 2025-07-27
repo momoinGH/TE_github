@@ -22,7 +22,7 @@ local prefabs =
 
 local LAUNCH_SPEED = .2
 local RADIUS = 1.7
-local LASER_DAMAGE = 20
+local LASER_DAMAGE = 5
 
 local function SetLightRadius(inst, radius)
     inst.Light:SetRadius(radius)
