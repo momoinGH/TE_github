@@ -1111,7 +1111,9 @@ PICKUP.fn = function(act)
             end
             item:RemoveTag("cost_one_oinc")
             if item.components.perishable then item.components.perishable:StartPerishing() end
-            act.target = act.target.components.shelfer:GiveGift()
+            if act.target.components.shelfer then
+                act.target = act.target.components.shelfer:GiveGift()
+            end
         end
     end
 
