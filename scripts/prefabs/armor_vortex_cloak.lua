@@ -170,7 +170,7 @@ local function fn()
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/hamletinventory.xml"
     inst.caminho = "images/inventoryimages/hamletinventory.xml"
-    inst.components.inventoryitem.cangoincontainer = false
+    inst.components.inventoryitem.cangoincontainer = true
     inst.components.inventoryitem.canonlygoinpocket = true
     inst.components.inventoryitem:SetOnDroppedFn(ondrop)
     inst.foleysound = "dontstarve_DLC003/common/crafted/vortex_armour/foley"
@@ -185,14 +185,14 @@ local function fn()
     inst.components.armor.ontakedamage = OnTakeDamage
 
     local fueled = inst:AddComponent("fueled")
-    fueled:InitializeFuelLevel(ARMORVORTEXFUEL) -- Runar: 原来的燃值是充场面的，现在是等效燃值
-    fueled.fueltype = FUELTYPE.NIGHTMARE -- 燃料是噩梦燃料
+    fueled:InitializeFuelLevel(ARMORVORTEXFUEL)
+    fueled.fueltype = FUELTYPE.NIGHTMARE
     fueled.secondaryfueltype = FUELTYPE.ANCIENT_REMNANT
     fueled.ontakefuelfn = ontakefuel
     fueled.accepting = true
 
     local shadowlevel = inst:AddComponent("shadowlevel")
-    shadowlevel:SetDefaultLevel(TUNING.ARMOR_SANITY_SHADOW_LEVEL) -- Runar: 影甲的老麦2级暗影之力
+    shadowlevel:SetDefaultLevel(TUNING.ARMOR_SANITY_SHADOW_LEVEL)
 
     SetupEquippable(inst)
 
