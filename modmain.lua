@@ -3039,6 +3039,7 @@ params["woodlegsboat"] = pirateslot
 params["surfboard"] = raftslot
 params["trawlnetdropped"] = trawlnetdroppedslot
 params["corkboat"] = rowboatslot
+params["shadowwaxwell_boat"] = rowboatslot
 params["smelter"] = smelter
 params["corkchest"] = corkchest
 params["thatchpack"] = thatchpack
