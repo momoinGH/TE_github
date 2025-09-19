@@ -5524,3 +5524,6 @@ GLOBAL.ACTIONS.JUMPIN.strfn = function(act)
 	end
 	return Oldstrfnjumpin(act)
 end
+
+-- 补丁
+modimport "postinit/components/plantregrowth"
