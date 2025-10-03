@@ -49,26 +49,28 @@ local function SpawnButterflyForPlayer(player, reschedule)
     local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 64, BUTTERFLY_TAGS)
     if #ents < _maxbutterflies then
         local spawnflower = GetSpawnPoint(player)
-        if spawnflower ~= nil then
-
-local butterfly
-local map = TheWorld.Map
-local x, y, z = player.Transform:GetWorldPosition()
-local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-if ground == GROUND.DEEPRAINFOREST or ground == GROUND.RAINFOREST then butterfly = SpawnPrefab("glowfly") 
-elseif ground == GROUND.WINDY then butterfly = SpawnPrefab("goddess_butterfly") 
-elseif ground == GROUND.JUNGLE or ground == GROUND.MEADOW or ground == GROUND.BEACH then butterfly = SpawnPrefab("butterfly_tropical") 
-else butterfly = SpawnPrefab("butterfly") end		
-            if butterfly.components.pollinator ~= nil then
-                butterfly.components.pollinator:Pollinate(spawnflower)
+            if spawnflower ~= nil then
+                local butterfly
+                local map = TheWorld.Map
+                local ground = map:GetTile(map:GetTileCoordsAtPoint(pt:Get()))
+                if ground == GROUND.DEEPRAINFOREST or ground == GROUND.RAINFOREST then
+                    butterfly = SpawnPrefab("glowfly")
+                elseif ground == GROUND.WINDY then
+                    butterfly = SpawnPrefab("goddess_butterfly")
+                elseif ground == GROUND.JUNGLE or ground == GROUND.MEADOW or ground == GROUND.BEACH then
+                    butterfly = SpawnPrefab("butterfly_tropical")
+                end
+                butterfly = butterfly or SpawnPrefab("butterfly")
+                if butterfly.components.pollinator ~= nil then
+                    butterfly.components.pollinator:Pollinate(spawnflower)
+                end
+                if butterfly.components.homeseeker ~= nil then
+                    butterfly.components.homeseeker:SetHome(spawnflower)
+                end
+                -- KAJ: TODO: Butterflies can be despawned before getting to the rest of the logic if this is above the homeseeker
+                butterfly.Physics:Teleport(spawnflower.Transform:GetWorldPosition())
             end
-			if butterfly.components.homeseeker ~= nil then
-            butterfly.components.homeseeker:SetHome(spawnflower)
-			end
-			-- KAJ: TODO: Butterflies can be despawned before getting to the rest of the logic if this is above the homeseeker
-            butterfly.Physics:Teleport(spawnflower.Transform:GetWorldPosition())
         end
-    end
     _scheduledtasks[player] = nil
     reschedule(player)
 end

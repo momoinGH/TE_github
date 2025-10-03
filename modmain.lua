@@ -5526,4 +5526,5 @@ GLOBAL.ACTIONS.JUMPIN.strfn = function(act)
 end
 
 -- 补丁
+modimport "postinit/components/map"
 modimport "postinit/components/plantregrowth"
