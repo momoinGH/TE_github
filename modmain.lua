@@ -5528,3 +5528,4 @@ end
 -- 补丁
 modimport "postinit/components/map"
 modimport "postinit/components/plantregrowth"
+modimport "postinit/components/butterflyspawner"

@@ -1,5 +1,6 @@
 local Util = require "tools/utils"
-local Map = require "components/map"
+require "components/map"
+local Map = (_G or GLOBAL).Map
 
 Util.FnDecorator(Map, "IsPassableAtPoint", function(self, x, y, z)
     local entities = TheSim:FindEntities(x, y, z, 30, { "blows_air" })
@@ -13,16 +14,21 @@ Util.FnDecorator(Map, "IsPassableAtPoint", function(self, x, y, z)
 end)
 
 Util.FnDecorator(Map, "CanDeployRecipeAtPoint", nil, function(rets, self, pt, recipe, rot)
-    if not (rets and #rets > 0 and rets[1]) then
+    if rets and #rets > 0 and rets[1] then
         return rets
     end
+    local is_valid_ground = false;
     local x, y, z = pt:Get()
     local entities = TheSim:FindEntities(x, 0, z, 20, { "canbuild" })
     for i, v in ipairs(entities) do
         local platform_x, platform_y, platform_z = v.Transform:GetWorldPosition()
         local distance_sq = VecUtil_LengthSq(x - platform_x, z - platform_z)
-        return { distance_sq <= 150 }
+        if distance_sq <= 150 then
+            is_valid_ground = true
+        end
     end
+    return { is_valid_ground and (recipe.testfn == nil or recipe.testfn(pt, rot)) and
+    self:IsDeployPointClear(pt, nil, recipe.min_spacing or 3.2) }
 end)
 
 local GOODOCEANARENAPOINTS_ITERATIONS_PER_TICK, key_1 = Util.FindUpvalue(Map.StartFindingGoodOceanArenaPoints,
