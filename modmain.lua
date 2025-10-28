@@ -5526,6 +5526,7 @@ GLOBAL.ACTIONS.JUMPIN.strfn = function(act)
 end
 
 -- 补丁
+modimport "postinit/components/butterflyspawner"
+modimport "postinit/components/drownable"
 modimport "postinit/components/map"
 modimport "postinit/components/plantregrowth"
-modimport "postinit/components/butterflyspawner"
