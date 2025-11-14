@@ -8,21 +8,6 @@ local birdvstile = {
     [WORLD_TILES.OCEAN_HAZARDOUS] = { "puffin", "seagull" },
 
     [WORLD_TILES.MANGROVE] = { "puffin", "seagull" },
-    [WORLD_TILES.RAINFOREST] = { "toucan_hamlet", "kingfisher", "parrot_blue" },
-    [WORLD_TILES.DEEPRAINFOREST] = { "toucan_hamlet", "parrot_blue", "kingfisher" },
-    [WORLD_TILES.GASRAINFOREST] = { "parrot_blue" },
-    [WORLD_TILES.FOUNDATION] = { "canary", "pigeon" },
-    [WORLD_TILES.FIELDS] = { "crow", "pigeon" },
-    [WORLD_TILES.SUBURB] = { "crow", "pigeon" },
-    [WORLD_TILES.PAINTED] = { "kingfisher", "crow" },
-    [WORLD_TILES.PLAINS] = { "toucan_hamlet", "kingfisher", "parrot_blue" },
-    [WORLD_TILES.CHECKEREDLAWN] = { "canary", "pigeon" },
-    [WORLD_TILES.COBBLEROAD] = { "canary", "pigeon" },
-    [WORLD_TILES.TIDALMARSH] = { "toucan" },
-    [WORLD_TILES.MAGMAFIELD] = { "toucan" },
-    [WORLD_TILES.MEADOW] = { "parrot", "toucan" },
-    [WORLD_TILES.BEACH] = { "toucan" },
-    [WORLD_TILES.JUNGLE] = { "parrot" },
 }
 
 local SCARYTOPREY_TAGS = { "scarytoprey" }
