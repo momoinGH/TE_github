@@ -7,7 +7,6 @@ local birdvstile = {
     [WORLD_TILES.OCEAN_BRINEPOOL_SHORE] = { "puffin" },
     [WORLD_TILES.OCEAN_HAZARDOUS] = { "puffin", "seagull" },
 
-    [WORLD_TILES.LILYPOND] = { "cormorant", "seagull" }, -------------------新添加----------------
     [WORLD_TILES.MANGROVE] = { "puffin", "seagull" },
     [WORLD_TILES.RAINFOREST] = { "toucan_hamlet", "kingfisher", "parrot_blue" },
     [WORLD_TILES.DEEPRAINFOREST] = { "toucan_hamlet", "parrot_blue", "kingfisher" },
