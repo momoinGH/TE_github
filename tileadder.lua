@@ -143,7 +143,7 @@ function AddTiles()
             for _, val2 in pairs (tiledefs.ground) do
                 if val2[1] == numid or (is_multiworlds_enabled and numid >= 50 and numid < 68) then
                     
-                    print(numid, "is reserved, incrementing...")
+                    --print(numid, "is reserved, incrementing...")
                     numid = numid + 1
                     chk = true
                 end
