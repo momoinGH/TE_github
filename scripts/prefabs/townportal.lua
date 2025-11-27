@@ -66,7 +66,7 @@ local function OnStartChanneling(inst, channeler)
 end
 
 local function OnStopChanneling(inst, aborted)
-    TheWorld:PushEvent("townportaldeactivated")
+    TheWorld:PushEvent("townportaldeactivated", inst)
 
     inst.MiniMapEntity:SetIcon("townportal.png")
     inst.MiniMapEntity:SetPriority(0)
@@ -102,7 +102,7 @@ end
 
 local function OnStartTeleporting(inst, doer)
     if doer:HasTag("player") then
-	doer.mynetvarCameraMode:set(6)
+	    doer.mynetvarCameraMode:set(6)
         if doer.components.talker ~= nil then
             doer.components.talker:ShutUp()
         end
@@ -132,7 +132,7 @@ local function onhit(inst)
         inst.AnimState:PlayAnimation("hit_on")
     else
         if inst.components.teleporter.targetTeleporter ~= nil then
-            TheWorld:PushEvent("townportaldeactivated")
+            TheWorld:PushEvent("townportaldeactivated", inst)
             inst.AnimState:PlayAnimation("hit_on")
         else
             inst.AnimState:PlayAnimation("hit_off")
@@ -180,6 +180,7 @@ local function fn()
     inst.MiniMapEntity:SetCanUseCache(false)
     inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
+	inst:SetDeploySmartRadius(1) --recipe min_spacing/2
     MakeObstaclePhysics(inst, .1)
 
     inst.AnimState:SetBank("townportal")
@@ -200,6 +201,7 @@ local function fn()
     -----------------------
     MakeHauntableWork(inst)
     MakeSnowCovered(inst)
+    SetLunarHailBuildupAmountLarge(inst)
 
     -------------------------
     inst:AddComponent("lootdropper")
