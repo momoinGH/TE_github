@@ -55,7 +55,7 @@ local function fn(Sim)
 	inst.navio = nil
 	
     inst:AddTag("cannon")
-    inst:AddTag("boatcannon")
+    inst:AddTag("sw_boatcannon")
 	MakeInventoryFloatable(inst)
 	
 	inst.entity:SetPristine()
