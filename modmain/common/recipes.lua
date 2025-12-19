@@ -475,6 +475,8 @@ AddRecipe2("topiary_4",			 		{Ingredient("oinc", 12)},									TECH.CITY_TWO, { 
 
 -- GORGE--
 AddRecipe2("quagmire_swampig_house",    {Ingredient("boards", 4), Ingredient("rocks", 8), Ingredient("pigskin", 4)},  	TECH.GORGE_TWO, { nounlock=true, placer="quagmire_swampig_house_placer"}, {"GORGE"})
+AddRecipe2("quagmire_flour",            {Ingredient("wheat", 2)}, TECH.FOODPROCESSING_ONE, {nounlock=true}, {"REFINE", "COOKING"})
+AddRecipe2("quagmire_spotspice_ground",            {Ingredient("quagmire_spotspice_sprig", 3)}, TECH.FOODPROCESSING_ONE, {nounlock=true}, {"REFINE", "COOKING"})
 
 --[[AddRecipe2("dubloon",					{Ingredient("quagmire_coin1", 2)}, 	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
 AddRecipe2("oinc",						{Ingredient("quagmire_coin1", 2)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
