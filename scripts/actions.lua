@@ -6004,6 +6004,7 @@ AddStategraphState(
 local _G = GLOBAL
 _G.require("vector3")
 local containers = _G.require("containers")
+local params = containers.params
 local cooking = _G.require("cooking")
 local Vector3 = _G.Vector3
 
@@ -6076,20 +6077,20 @@ local cookertypes =
         itemtestfn = SyrupItemTestFn,
     },
 }
-cookertypes.casseroledish = cookertypes.large
-cookertypes.casseroledish_small = cookertypes.small
-cookertypes.pot = cookertypes.large
-cookertypes.pot_small = cookertypes.small
-cookertypes.grill = cookertypes.large
-cookertypes.grill_small = cookertypes.small
-cookertypes.firepit = cookertypes.large -- Hack
+params.casseroledish = cookertypes.large
+params.casseroledish_small = cookertypes.small
+params.pot = cookertypes.large
+params.pot_small = cookertypes.small
+params.grill = cookertypes.large
+params.grill_small = cookertypes.small
+params.firepit = cookertypes.large -- Hack
 
-local oldwidgetsetup = containers.widgetsetup
-containers.widgetsetup = function(container, prefab, data)
-    prefab = prefab or container.inst.prefab
-    data = cookertypes[prefab] or data
-    oldwidgetsetup(container, prefab, data)
-end
+--local oldwidgetsetup = containers.widgetsetup
+--containers.widgetsetup = function(container, prefab, data)
+--    prefab = prefab or container.inst.prefab
+--    data = cookertypes[prefab] or data
+--    oldwidgetsetup(container, prefab, data)
+--end
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
 -- Meal
 

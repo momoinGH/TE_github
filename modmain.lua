@@ -5529,6 +5529,7 @@ end
 modimport "postinit/components/birdspawner"
 modimport "postinit/components/butterflyspawner"
 modimport "postinit/components/drownable"
+modimport "postinit/components/hounded"
 modimport "postinit/components/map"
 modimport "postinit/components/plantregrowth"
 modimport "postinit/components/spooked"
