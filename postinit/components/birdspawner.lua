@@ -7,7 +7,7 @@ local birdvstile = {
     [WORLD_TILES.OCEAN_BRINEPOOL_SHORE] = { "puffin" },
     [WORLD_TILES.OCEAN_HAZARDOUS] = { "puffin", "seagull" },
 
-    [WORLD_TILES.MANGROVE] = { "puffin", "seagull" },
+    --[WORLD_TILES.MANGROVE] = { "puffin", "seagull" }, -- 没有这个地皮
 }
 
 local SCARYTOPREY_TAGS = { "scarytoprey" }

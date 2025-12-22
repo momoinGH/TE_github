@@ -41,3 +41,25 @@ Util.FnDecorator(Map, "StartFindingGoodOceanArenaPoints", function(self)
         debug.setupvalue(Map.StartFindingGoodOceanArenaPoints, key_2, 0.0)
     end
 end)
+
+-- local worldwidth, worldheight = TheWorld.Map:GetWorldSize()
+local check_size = 1350
+local function checkxz(x, z)
+    if math.abs(z) >= check_size or math.abs(x) >= check_size then
+        return true
+    else
+        return false
+    end
+end
+
+Map.IsOutsideWorldAtPoint = function(self, x, y, z)
+    if checkxz(x, z) then --判断的基础，也许光判断z就行了
+        return true
+    end
+    return false
+end
+
+
+Map.IsTropicalAreaAtPoint = function(self, x, y, z)
+    return self:FindVisualNodeAtPoint(x, y, z, "tropical")
+end

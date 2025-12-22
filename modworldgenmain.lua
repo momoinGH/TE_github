@@ -1,3 +1,4 @@
+GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
 --level.overrides.has_ocean = false
 local SIZE_VARIATION = 3
 --boarmound
