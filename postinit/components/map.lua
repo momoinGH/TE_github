@@ -136,7 +136,7 @@ end
 
 local BASE_TILES = {
     -- [WORLD_TILES.VOLCANO_ROCK] = true,
-    [WORLD_TILES.BEACH] = true,
+    --[WORLD_TILES.BEACH] = true,
 }
 
 local _CanPlaceTurfAtPoint = Map.CanPlaceTurfAtPoint
