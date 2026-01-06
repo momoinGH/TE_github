@@ -1,6 +1,6 @@
 --@Author: Peng
 local Utils = require("tools/utils")
-require "tools/tableutil"               ----一些表相关的工具函数，都在表tableutil里
+local tableutil = require "tools/tableutil"               ----一些表相关的工具函数，都在表tableutil里
 
 -----------map related--------------------------
 require("components/map")
@@ -294,6 +294,17 @@ end
 ---------- 根据components/deployable.lua判断需要覆盖的方法
 Utils.FnDecorator(Map, "IsAboveGroundAtPoint", CheckHamRoomBefore)
 Utils.FnDecorator(Map, "IsPassableAtPoint", CheckHamRoomBefore)
+Utils.FnDecorator(Map, "IsPassableAtPoint", function(self, x, y, z)
+    local entities = TheSim:FindEntities(x, y, z, 30, { "blows_air" })
+    if entities and #entities > 0 then
+        return { true }, true
+    end
+    entities = TheSim:FindEntities(x, y, z, 1.2, { "boat" })
+    if entities and #entities > 0 then
+        return { true }, true
+    end
+end)
+
 Utils.FnDecorator(Map, "IsVisualGroundAtPoint", CheckHamRoomBefore)
 Utils.FnDecorator(Map, "CanPlantAtPoint", CheckHamRoomBefore) --允许房间里种植，不知道算不算超模
 
@@ -347,3 +358,32 @@ Map.CanDeployRecipeAtPoint = function(self, pt, recipe, rot)
         return old_CanDeployRecipeAtPoint(self, pt, recipe, rot)
     end
 end
+
+Utils.FnDecorator(Map, "CanDeployRecipeAtPoint", nil, function(rets, self, pt, recipe, rot)
+    if rets and #rets > 0 and rets[1] then
+        return rets
+    end
+    local is_valid_ground = false;
+    local x, y, z = pt:Get()
+    local entities = TheSim:FindEntities(x, 0, z, 20, { "canbuild" })
+    for i, v in ipairs(entities) do
+        local platform_x, platform_y, platform_z = v.Transform:GetWorldPosition()
+        local distance_sq = VecUtil_LengthSq(x - platform_x, z - platform_z)
+        if distance_sq <= 150 then
+            is_valid_ground = true
+        end
+    end
+    return { is_valid_ground and (recipe.testfn == nil or recipe.testfn(pt, rot)) and
+    self:IsDeployPointClear(pt, nil, recipe.min_spacing or 3.2) }
+end)
+
+local GOODOCEANARENAPOINTS_ITERATIONS_PER_TICK, key_1 = Utils.FindUpvalue(Map.StartFindingGoodOceanArenaPoints,
+    "GOODOCEANARENAPOINTS_ITERATIONS_PER_TICK")
+local GOODOCEANARENAPOINTS_TIME_PER_TICK, key_2 = Utils.FindUpvalue(Map.StartFindingGoodOceanArenaPoints,
+    "GOODOCEANARENAPOINTS_TIME_PER_TICK")
+Utils.FnDecorator(Map, "StartFindingGoodOceanArenaPoints", function(self)
+    if TheWorld.components.sharkboimanager and TheWorld.components.sharkboimanager.TEMP_DEBUG_RATE then
+        debug.setupvalue(Map.StartFindingGoodOceanArenaPoints, key_1, 3000)
+        debug.setupvalue(Map.StartFindingGoodOceanArenaPoints, key_2, 0.0)
+    end
+end)
