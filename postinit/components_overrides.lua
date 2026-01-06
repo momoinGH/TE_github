@@ -1,3 +1,5 @@
+local Util = require "tools/utils"
+
 local package_loaded = {}
 --- import files outside the script folder or even from other mods
 ---@diagnostic disable-next-line: lowercase-global
@@ -29,14 +31,10 @@ local override_components = {
     "aoeweapon_lunge",
     "armor",
     "autoterraformer",
-    "beargerspawner",
     "bedazzlement",
     "blinkstaff",
-    "caveweather",
     "curseditem",
-    "deerclopsspawner",
     "deployable",
-    "flotsamgenerator",
     "groundpounder",
     "kramped",
     "lock",
@@ -44,25 +42,38 @@ local override_components = {
     "moisture",
     "oceantrawler",
     "parryweapon",
-    "penguinspawner",
     "placer",
     "playervision",
-    "quaker",
-    "schoolspawner",
     "temperature",
     "terraformer",
     "thief",
     "trap",
+}
+
+local LoadComponent = Util.FindUpvalue(EntityScript.AddComponent, "LoadComponent")
+
+for _, name in ipairs(override_components) do
+    local orcmp = require("components/overrides/" .. name)
+    local cmp = LoadComponent(name)
+    for k, v in pairs(orcmp) do
+        if v ~= nil then
+            cmp[k] = v
+        end
+    end
+end
+
+local override_component_bases = {
+    "beargerspawner",
+    "caveweather",
+    "deerclopsspawner",
+    "flotsamgenerator",
+    "quaker",
+    "penguinspawner",
+    "schoolspawner",
     "weather",
     "wildfires",
 }
 
 for _, name in ipairs(override_components) do
-    pcall(function()
-        local orcmp = modrequire("components/override/" .. name)
-        local cmp = require("components/" .. name)
-        for k, v in pairs(orcmp) do
-            cmp[k] = v
-        end
-    end)
+    package.loaded["components/" .. name] = require("components/overrides/" .. name)
 end
