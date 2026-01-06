@@ -155,8 +155,8 @@ GLOBAL.GNAW_REWARDS = GNAW_REWARDS
 for k, v in pairs(preparedFoods) do
     GNAW_REWARDS[k] = v.reward
     if v.cookers then
-        for i, cookertype in ipairs(v.cookers) do
-            for i, cookerprefab in ipairs(cookers[cookertype] or {}) do AddCookerRecipe(cookerprefab, v) end
+        for _, cookertype in ipairs(v.cookers) do
+            for _, cookerprefab in ipairs(cookers[cookertype] or {}) do AddCookerRecipe(cookerprefab, v) end
         end
     else
         AddCookerRecipe("cookpot", v)
@@ -245,11 +245,11 @@ AddRecipe2("mermwatchtower", 			{Ingredient("boards", 5), Ingredient("tentaclesp
 --AddRecipe2("merm_toolshed_upgraded",  {Ingredient("boards", 4), Ingredient("tentaclespots", 1), Ingredient("twigs", 5), Ingredient("rocks", 5)},	TECH.NONE,	      {builder_tag="merm_swampmaster_mermtoolshed_upgraded",placer="merm_toolshed_upgraded_placer",testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
 -- Maxwell
 AddRecipe2("porto_shadowboat",			{Ingredient("papyrus", 3), Ingredient("nightmarefuel", 4), Ingredient(CHARACTER_INGREDIENT.SANITY, 60)},	TECH.NONE,		  {builder_tag="shadowmagic"}, {"CHARACTER"})
-AddRecipe2("shadowmower_builder", 		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.SANITY, 60)}, 	TECH.SHADOW_TWO,  {builder_tag="shadowmagic", 		  nounlock=true}, {"CRAFTING_STATION"})
-AddRecipe2("shadowlumber_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWLUMBER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
-AddRecipe2("shadowminer_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWMINER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
-AddRecipe2("shadowdigger_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDIGGER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
-AddRecipe2("shadowduelist_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDUELIST)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
+--AddRecipe2("shadowmower_builder", 		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.SANITY, 60)}, 	TECH.SHADOW_TWO,  {builder_tag="shadowmagic", 		  nounlock=true}, {"CRAFTING_STATION"})
+--AddRecipe2("shadowlumber_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWLUMBER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
+--AddRecipe2("shadowminer_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWMINER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
+--AddRecipe2("shadowdigger_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDIGGER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
+--AddRecipe2("shadowduelist_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDUELIST)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
 -- Wickerbottom
 AddRecipe2("book_meteor", 			{Ingredient("papyrus", 2), Ingredient("obsidian", 2)},   TECH.SCIENCE_TWO,  { builder_tag="bookbuilder", }, {"CHARACTER"})
 -- WX78--
@@ -331,8 +331,8 @@ AddRecipe2("tropicalfan", 			{Ingredient("cutreeds", 2), Ingredient("rope", 2), 
 AddRecipe2("palmleaf_hut", 			{Ingredient("palmleaf", 4), Ingredient("bamboo", 4), Ingredient("rope", 3)}, 						 TECH.SCIENCE_TWO, { placer="palmleaf_hut_placer"}, {"STRUCTURES","RAIN","SUMMER"})
 AddRecipe2("armorlimestone",		{Ingredient("limestone", 3), Ingredient("rope", 2)}, 								                 TECH.SCIENCE_TWO, nil,  {"ARMOUR"})
 AddRecipe2("bell",			        {Ingredient("glommerwings", 1), Ingredient("glommerflower", 1)},                                     TECH.MAGIC_TWO, nil,    {"MAGIC"})
-AddRecipe2("slow_farmplot",         {Ingredient("cutgrass", 8), Ingredient("poop", 4), Ingredient("log", 4)},                            TECH.SCIENCE_ONE, {atlas = TapDefaultAtlas, min_spacing = 0, placer = "slow_farmplot_placer", image = "slow_farmplot.tex",},{"GARDENING"})
-AddRecipe2("fast_farmplot",         {Ingredient("cutgrass", 10), Ingredient("poop", 6), Ingredient("rocks", 4)},                         TECH.SCIENCE_ONE, {atlas = TapDefaultAtlas, min_spacing = 0, placer = "fast_farmplot_placer", image = "fast_farmplot.tex",},{"GARDENING"})
+--AddRecipe2("slow_farmplot",         {Ingredient("cutgrass", 8), Ingredient("poop", 4), Ingredient("log", 4)},                            TECH.SCIENCE_ONE, {atlas = TapDefaultAtlas, min_spacing = 0, placer = "slow_farmplot_placer", image = "slow_farmplot.tex",},{"GARDENING"})
+--AddRecipe2("fast_farmplot",         {Ingredient("cutgrass", 10), Ingredient("poop", 6), Ingredient("rocks", 4)},                         TECH.SCIENCE_ONE, {atlas = TapDefaultAtlas, min_spacing = 0, placer = "fast_farmplot_placer", image = "fast_farmplot.tex",},{"GARDENING"})
 
 -- NAUTICAL--
 AddRecipe2("sail",					{Ingredient("bamboo", 2), Ingredient("vine", 2), Ingredient("palmleaf", 4)},						 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
