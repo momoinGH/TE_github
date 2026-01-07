@@ -5533,4 +5533,3 @@ modimport "postinit/components/hounded"
 modimport "postinit/components/map"
 modimport "postinit/components/plantregrowth"
 modimport "postinit/components/spooked"
-modimport "postinit/components_overrides" -- 简易去覆盖
