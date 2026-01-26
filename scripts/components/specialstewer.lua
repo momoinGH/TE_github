@@ -212,6 +212,7 @@ function SpecialStewer:StartCooking()
 
         local cooktime = 1
         self.product, cooktime = cooking.CalculateRecipe(self.cookertype or self.inst.prefab, ings)
+        cooktime = cooktime or 1
         self:OverrideProduct()
         local recipe = cooking.GetRecipe(self.cookertype or self.inst.prefab, self.product)
         local productperishtime = recipe and recipe.perishtime or 0
