@@ -63,7 +63,6 @@ AddStategraphState("wilson", State {
         inst.sg.statemem.target = teleporter
         inst.sg.statemem.heavy = inst.components.inventory:IsHeavyLifting()
 
-
         if teleporter ~= nil and teleporter.components.teleporter ~= nil then
             teleporter.components.teleporter:RegisterTeleportee(inst)
         end

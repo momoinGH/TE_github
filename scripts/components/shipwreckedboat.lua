@@ -1,14 +1,3 @@
---[[
-海难小船逻辑：
-
-1. 玩家上船后将装备小船，同时小船生成一个复制体挂在玩家身上
-2. 复制体所有特征与小船一样，不过自己container里面没有东西，通过container_proxy和小船内容一致
-4. 玩家下船时删除复制体，装备的小船掉落
-5. 玩家退出游戏重进时，由于复制体不会保存，所以重新上线时会重新生成一个复制体
-6. 动画数据小船和复制体应该一起修改
-
-]]
-
 local function OnItemGet(inst, data)
     local item = data and data.item
     local part = item and item.components.shipwreckedboatparts
@@ -91,6 +80,9 @@ end
 --- 玩家上船（或者说被装备的时候）
 function Boat:OnPlayerMounted(player)
     self.boatfx = SpawnFakeBoat(self.inst)
+    self.inst:ListenForEvent("onremove", function()
+        self.boatfx = nil
+    end, self.boatfx)
     player:AddChild(self.boatfx)
 
     -- 刷新一下外观
@@ -135,6 +127,18 @@ function Boat:OnPlayerDismounted(player)
                 fn(item, self.inst, player)
             end
         end
+    end
+end
+
+function Boat:OnDriverAttacked()
+    if not self.boatfx then
+        return
+    end
+
+    self.boatfx.AnimState:PlayAnimation("hit")
+    self.boatfx.AnimState:PushAnimation("run_loop", true)
+    if self.boatfx.SoundEmitter and self.inst.sounds then
+        self.boatfx.SoundEmitter:PlaySound(self.inst.sounds.hit)
     end
 end
 

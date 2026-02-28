@@ -97,11 +97,11 @@ local function onhammered(inst)
     inst:Remove()
 end
 
+local function OnDeath(inst, data)
+    
+end
+
 ---fn
----@param minimap string|nil
----@param bank string
----@param build string
----@param loots table
 ---@param data table health:血量；dismantlePrefab:收回后的预制体；container：容器；
 local function common_fn(minimap, bank, build, loots, data)
     local inst = common(minimap, bank, build)
@@ -152,6 +152,8 @@ local function common_fn(minimap, bank, build, loots, data)
     inst.components.workable:SetOnFinishCallback(onhammered)
 
     inst.sounds = sounds
+
+    inst:ListenForEvent("death", OnDeath)
 
     return inst
 end

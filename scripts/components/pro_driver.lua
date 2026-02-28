@@ -22,6 +22,10 @@ local Driver = Class(function(self, inst)
     inst:DoTaskInTime(0, Init, self)
 end)
 
+function Driver:GetBoat()
+    return self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+end
+
 -- 检测玩家落地，玩家落地时将船挂在玩家身上
 local function CheckFall(inst, self, boat)
     if not boat:IsValid() then

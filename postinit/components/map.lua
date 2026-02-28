@@ -47,7 +47,7 @@ local function IsInRoom(center, x, y, z)
 end
 
 local function CheckPointBefore(self, x, y, z)
-    if z < InteriorSpawnerUtils.BASE_OFF then  --判断的基础
+    if z < InteriorSpawnerUtils.BASE_OFF then --判断的基础
         return
     end
 

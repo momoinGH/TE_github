@@ -1,15 +1,15 @@
 local Utils = require("tropical_utils/utils")
 
-local function shardDMGRedirect(self, attacker, damage, weapon, ...) -- 碎裂武器伤害重定向
+local function shardDMGRedirect(self, attacker, damage, weapon, ...)          -- 碎裂武器伤害重定向
     if weapon then
         if weapon.prefab == "shard_sword" and self.inst:HasTag("shadow") then -- 碎裂剑对梦魇生物
             local health = self.inst.components.health
             if health then
                 if health.currenthealth <= damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MAXIMUM then
                     return nil, false,
-                           {self, attacker,
+                        { self, attacker,
                             math.max(damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MINIMUM, health.currenthealth - 1),
-                            weapon, ...}
+                            weapon, ... }
                 else
                     if attacker and attacker.components.combat then
                         if math.random(0, 1) < .67 then
@@ -20,16 +20,18 @@ local function shardDMGRedirect(self, attacker, damage, weapon, ...) -- 碎裂�
                         end
                     end
                     return nil, false,
-                           {self, attacker, damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MAXIMUM, weapon, ...}
+                        { self, attacker, damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MAXIMUM, weapon, ... }
                 end
             end
         elseif weapon.prefab == "shard_beak" then -- 碎裂喙对建筑和巢, 以及碎裂扫的伤害重定向
-            return nil, false, {self, attacker, damage *
-                ((self.inst:HasTag("wall") or self.inst:HasTag("structure") or self.inst.components.childspawner) and
-                    TUNING.SWP_SHARD_DMG.STRUCTURE_MODIFIER or 1) *
-                (attacker._beakSweepTrigger == true and TUNING.SWP_SHARD_DMG.SWEEP_MODIFIER or 1), weapon, ...}
+            return nil, false, { self, attacker, damage *
+            ((self.inst:HasTag("wall") or self.inst:HasTag("structure") or self.inst.components.childspawner) and
+                TUNING.SWP_SHARD_DMG.STRUCTURE_MODIFIER or 1) *
+            (attacker._beakSweepTrigger == true and TUNING.SWP_SHARD_DMG.SWEEP_MODIFIER or 1), weapon, ... }
         end
     end
 end
 
-AddComponentPostInit("combat", function(self, inst) Utils.FnDecorator(self, "GetAttacked", shardDMGRedirect) end)
+AddComponentPostInit("combat", function(self, inst)
+    Utils.FnDecorator(self, "GetAttacked", shardDMGRedirect)
+end)

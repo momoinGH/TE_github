@@ -109,8 +109,4 @@ AddPlayerPostInit(function(inst)
     end
 
     Utils.FnDecorator(inst, "GetCurrentTileType", GetCurrentTileTypeBefore)
-
-    if not TheWorld.ismastersim then return end
-
-    inst:AddComponent("pro_driver")
 end)

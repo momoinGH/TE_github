@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 PrefabFiles = {
     "adult_flytrap",
     "alloy",
