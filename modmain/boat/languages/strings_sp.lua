@@ -1,0 +1,284 @@
+STRINGS.NAMES.ARMOUREDBOAT = "Bote Blindado"
+STRINGS.RECIPE_DESC.ARMOUREDBOAT = "Pague por este fuerte bote."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOUREDBOAT = "Ese es un bote durable."
+
+STRINGS.NAMES.CARGOBOAT = "Bote de Carga"
+STRINGS.RECIPE_DESC.CARGOBOAT = "Acumulando en el mar!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CARGOBOAT = "Tiene espacio para todas mis cosas!"
+
+STRINGS.NAMES.PORTO_ARMOUREDBOAT = "Bote Blindado"
+STRINGS.RECIPE_DESC.PORTO_ARMOUREDBOAT = "Pague por este fuerte bote."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ARMOUREDBOAT = "Ese es un bote resistente."
+
+STRINGS.NAMES.PORTO_CARGOBOAT = "Bote de Carga"
+STRINGS.RECIPE_DESC.PORTO_CARGOBOAT = "Acumulando en el mar!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_CARGOBOAT = "Tiene espacio para todas mis cosas!"
+
+STRINGS.NAMES.ENCRUSTEDBOAT = "Bote Incrustado"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ENCRUSTEDBOAT = "Muy robusto."
+STRINGS.RECIPE_DESC.ENCRUSTEDBOAT = "Altamente resistente"
+
+STRINGS.NAMES.PORTO_ENCRUSTEDBOAT = "Bote Incrustado"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ENCRUSTEDBOAT = "Muy robusto."
+STRINGS.RECIPE_DESC.PORTO_ENCRUSTEDBOAT = "Altamente resistente"
+
+STRINGS.NAMES.ROWBOAT = "Bote de Remos"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROWBOAT = "Ahora mi aventura está completa."
+STRINGS.RECIPE_DESC.ROWBOAT = "Un bote más fuerte"
+
+STRINGS.NAMES.PORTO_ROWBOAT = "Bote de Remos"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ROWBOAT = "Ahora mi aventura está completa."
+STRINGS.RECIPE_DESC.PORTO_ROWBOAT = "Un bote más fuerte"
+
+STRINGS.NAMES.PORTO_SURFBOARD = "Tabla de Surf"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_SURFBOARD = "Si estuviera en mi tabla de surf, podría atraparte."
+STRINGS.RECIPE_DESC.PORTO_SURFBOARD = "Hang ten!"
+
+STRINGS.NAMES.SURFBOARD = "Tabla de Surf"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SURFBOARD = "Si estuviera en mi tabla de surf, podría atraparte.."
+STRINGS.RECIPE_DESC.SURFBOARD = "Hang ten!"
+
+STRINGS.NAMES.SURFBOARD_ITEM = "Tabla de Surf"
+STRINGS.RECIPE_DESC.SURFBOARD_ITEM = "Cowabunga dudes!"
+
+STRINGS.NAMES.PORTO_WOODLEGSBOAT = "Bote Pirata"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_WOODLEGSBOAT = "Un buque adecuado para un canalla."
+STRINGS.RECIPE_DESC.PORTO_WOODLEGSBOAT = "Ve a hacer cosas de pirata."
+
+STRINGS.NAMES.PORTO_WOODLEGSBOAT = "Bote Pirata"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_WOODLEGSBOAT = "Un buque adecuado para un canalla."
+STRINGS.RECIPE_DESC.PORTO_WOODLEGSBOAT = "Ve a hacer cosas de pirata."
+
+STRINGS.NAMESWOODLEGSBOATAMIGO = "Pirate Boat"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGSBOATAMIGO = "Un buque adecuado para un canalla."
+STRINGS.RECIPE_DESC.WOODLEGSBOATAMIGO = "Ve a hacer cosas de pirata."
+
+STRINGS.NAMES.WOODLEGSBOATAMIGO = "Pirate Boat"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGSBOATAMIGO = "A vessel fit for a scallywag."
+STRINGS.RECIPE_DESC.WOODLEGSBOATAMIGO = "Ve a hacer cosas de pirata."
+
+STRINGS.NAMES.BOATCANNON = "Cañón de Barco"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOATCANNON = "Lo único mejor que un bote es un bote con cañón."
+STRINGS.RECIPE_DESC.BOATCANNON = "Te devuelve tu bote."
+
+STRINGS.NAMES.OBSIDIAN_BOATCANNON = "Cañón Pirata"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIAN_BOATCANNON = "Digno de un pirata"
+STRINGS.RECIPE_DESC.OBSIDIAN_BOATCANNON = "Bien reforzado"
+
+STRINGS.NAMES.QUACKERINGRAM = "Ariete de Quacken"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUACKERINGRAM = "SMASH!"
+STRINGS.RECIPE_DESC.QUACKERINGRAM = "Mejor todos salgan de su camino"
+
+STRINGS.NAMES.SAIL = "Vela"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAIL = "Esto realmente debería transformar mi experiencia de navegación.."
+STRINGS.RECIPE_DESC.SAIL = "Atrapa el viento!"
+
+STRINGS.NAMES.CLOTHSAIL = "Vela de Tela"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CLOTHSAIL = "Ese viento no se está escapando ahora!"
+STRINGS.RECIPE_DESC.CLOTHSAIL = "Atrapa aún más viento!"
+
+STRINGS.NAMES.SNAKESKINSAIL = "Vela de Piel de Serpiente"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNAKESKINSAIL = "Escamarlo y navegarlo!"
+STRINGS.RECIPE_DESC.SNAKESKINSAIL = "Atrapador de viento resistente."
+
+STRINGS.NAMES.FEATHERSAIL = "Vela de Plumas"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FEATHERSAIL = "Es ligera como una pluma!"
+STRINGS.RECIPE_DESC.FEATHERSAIL = "Como el ala de un pájaro, para tu bote!"
+
+STRINGS.NAMES.IRONWIND = "Viento de Hierro"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.IRONWIND = "Así es como un científico debería viajar.."
+STRINGS.RECIPE_DESC.IRONWIND = "Motorizado!"
+
+STRINGS.NAMES.WOODLEGSSAIL = "Vela de Woodlegs"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGSSAIL = "La vela pirata por excelencia."
+STRINGS.RECIPE_DESC.WOODLEGSSAIL = "Me convertiré en pirata!"
+
+STRINGS.NAMES.TRAWLNET = "Red de Arrastre"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRAWLNET = "Definitivamente se está hundiendo."
+STRINGS.RECIPE_DESC.TRAWLNET = "El paciente pescador siempre es recompensado."
+
+STRINGS.NAMES.TRAWLNETDROPPED = "Red de Arrastre"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRAWLNETDROPPED = "Definitivamente se está hundiendo."
+
+STRINGS.NAMES.TARLAMP = "Tar Lamp."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TARLAMP = "Tar Lamp."
+STRINGS.RECIPE_DESC.TARLAMP = "Tar Lamp"
+
+STRINGS.NAMES.BOAT_LANTERN = "Linterna de Bote"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_LANTERN = "Esto hará maravillas para mi visión nocturna!!"
+STRINGS.RECIPE_DESC.BOAT_LANTERN = "Arroja un poco de luz a la situación."
+
+STRINGS.NAMES.BOAT_TORCH = "Antorcha de Bote"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_TORCH = "Esto mantendrá mis manos libres."
+STRINGS.RECIPE_DESC.BOAT_TORCH = "Nos vemos en el mar."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

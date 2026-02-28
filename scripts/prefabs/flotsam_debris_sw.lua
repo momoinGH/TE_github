@@ -19,336 +19,60 @@ local function onhammered(inst)
     local fx = SpawnPrefab("collapse_small")
     fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
     fx:SetMaterial("wood")
-    --	inst.components.lootdropper:DropLoot(inst:GetPosition())
     inst:Remove()
 end
 
-local function fn(build)
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-    MakeObstaclePhysics(inst, 0.3)
+local function MakeFlotsamDebris(name, build, loots)
+    local function fn()
+        local inst = CreateEntity()
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
+        inst.entity:AddNetwork()
+        MakeObstaclePhysics(inst, 0.3)
 
-    inst.AnimState:SetBank("flotsam_debris_sw")
-    inst.AnimState:SetBuild("flotsam_armoured_build")
-    inst.AnimState:PlayAnimation("idle", true)
-    local ondas = SpawnPrefab("float_fx_front")
-    ondas.entity:SetParent(inst.entity)
-    ondas.Transform:SetPosition(0, 0, 0)
-    ondas.AnimState:PlayAnimation("idle_front_small", true)
-    ondas.Transform:SetScale(0.8, 0.8, 0.8)
+        inst.AnimState:SetBank("flotsam_debris_sw")
+        inst.AnimState:SetBuild(build)
+        inst.AnimState:PlayAnimation("idle", true)
 
-    inst.entity:SetPristine()
+        if not TheNet:IsDedicated() then
+            local ondas = SpawnPrefab("float_fx_front")
+            inst:AddChild(ondas)
+            ondas.AnimState:PlayAnimation("idle_front_small", true)
+            ondas.Transform:SetScale(0.8, 0.8, 0.8)
+        end
 
-    if not TheWorld.ismastersim then
+        inst.entity:SetPristine()
+
+        if not TheWorld.ismastersim then
+            return inst
+        end
+
+        MakeLargeBurnable(inst)
+        MakeLargePropagator(inst)
+
+        inst:AddComponent("hauntable")
+
+        inst:AddComponent("inspectable")
+        inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
+
+        inst:AddComponent("workable")
+        inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+        inst.components.workable:SetWorkLeft(2)
+        inst.components.workable:SetOnFinishCallback(onhammered)
+
+        inst:AddComponent("lootdropper")
+        inst.components.lootdropper:SetLoot({ "boards" })
+
         return inst
     end
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.WOOD
-    inst.components.edible.healthvalue = 0
-    inst.components.edible.hungervalue = 0
-
-    MakeLargeBurnable(inst)
-    MakeLargePropagator(inst)
-
-    inst:AddComponent("hauntable")
-    inst:AddComponent("inspectable")
-    inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
-
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(2)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({ "boards" })
-
-    return inst
+    return Prefab(name, fn, assets, prefabs)
 end
 
-local function fn1(build)
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-    MakeObstaclePhysics(inst, 0.3)
-
-    inst.AnimState:SetBank("flotsam_debris_sw")
-    inst.AnimState:SetBuild("flotsam_cargo_build")
-    inst.AnimState:PlayAnimation("idle", true)
-    local ondas = SpawnPrefab("float_fx_front")
-    ondas.entity:SetParent(inst.entity)
-    ondas.Transform:SetPosition(0, 0, 0)
-    ondas.AnimState:PlayAnimation("idle_front_small", true)
-    ondas.Transform:SetScale(0.8, 0.8, 0.8)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.WOOD
-    inst.components.edible.healthvalue = 0
-    inst.components.edible.hungervalue = 0
-
-    MakeLargeBurnable(inst)
-    MakeLargePropagator(inst)
-
-    inst:AddComponent("hauntable")
-    inst:AddComponent("inspectable")
-    inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
-
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(2)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({ "boards" })
-
-    return inst
-end
-
-local function fn2(build)
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-    MakeObstaclePhysics(inst, 0.3)
-
-    inst.AnimState:SetBank("flotsam_debris_sw")
-    inst.AnimState:SetBuild("flotsam_bamboo_build")
-    inst.AnimState:PlayAnimation("idle", true)
-    local ondas = SpawnPrefab("float_fx_front")
-    ondas.entity:SetParent(inst.entity)
-    ondas.Transform:SetPosition(0, 0, 0)
-    ondas.AnimState:PlayAnimation("idle_front_small", true)
-    ondas.Transform:SetScale(0.8, 0.8, 0.8)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.WOOD
-    inst.components.edible.healthvalue = 0
-    inst.components.edible.hungervalue = 0
-
-    MakeLargeBurnable(inst)
-    MakeLargePropagator(inst)
-
-    inst:AddComponent("hauntable")
-    inst:AddComponent("inspectable")
-    inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
-
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(2)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({ "bamboo" })
-
-    return inst
-end
-
-local function fn3(build)
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-    MakeObstaclePhysics(inst, 0.3)
-
-    inst.AnimState:SetBank("flotsam_debris_sw")
-    inst.AnimState:SetBuild("flotsam_lograft_build")
-    inst.AnimState:PlayAnimation("idle", true)
-    local ondas = SpawnPrefab("float_fx_front")
-    ondas.entity:SetParent(inst.entity)
-    ondas.Transform:SetPosition(0, 0, 0)
-    ondas.AnimState:PlayAnimation("idle_front_small", true)
-    ondas.Transform:SetScale(0.8, 0.8, 0.8)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.WOOD
-    inst.components.edible.healthvalue = 0
-    inst.components.edible.hungervalue = 0
-
-    MakeLargeBurnable(inst)
-    MakeLargePropagator(inst)
-
-    inst:AddComponent("hauntable")
-    inst:AddComponent("inspectable")
-    inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
-
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(2)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({ "log" })
-
-    return inst
-end
-
-local function fn4(build)
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-    MakeObstaclePhysics(inst, 0.3)
-
-    inst.AnimState:SetBank("flotsam_debris_sw")
-    inst.AnimState:SetBuild("flotsam_rowboat_build")
-    inst.AnimState:PlayAnimation("idle", true)
-    local ondas = SpawnPrefab("float_fx_front")
-    ondas.entity:SetParent(inst.entity)
-    ondas.Transform:SetPosition(0, 0, 0)
-    ondas.AnimState:PlayAnimation("idle_front_small", true)
-    ondas.Transform:SetScale(0.8, 0.8, 0.8)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.WOOD
-    inst.components.edible.healthvalue = 0
-    inst.components.edible.hungervalue = 0
-
-    MakeLargeBurnable(inst)
-    MakeLargePropagator(inst)
-
-    inst:AddComponent("hauntable")
-    inst:AddComponent("inspectable")
-    inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
-
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(2)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({ "boards" })
-
-    return inst
-end
-
-local function fn5(build)
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-    MakeObstaclePhysics(inst, 0.3)
-
-    inst.AnimState:SetBank("flotsam_debris_sw")
-    inst.AnimState:SetBuild("flotsam_surfboard_build")
-    inst.AnimState:PlayAnimation("idle", true)
-    local ondas = SpawnPrefab("float_fx_front")
-    ondas.entity:SetParent(inst.entity)
-    ondas.Transform:SetPosition(0, 0, 0)
-    ondas.AnimState:PlayAnimation("idle_front_small", true)
-    ondas.Transform:SetScale(0.8, 0.8, 0.8)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.WOOD
-    inst.components.edible.healthvalue = 0
-    inst.components.edible.hungervalue = 0
-
-    MakeLargeBurnable(inst)
-    MakeLargePropagator(inst)
-
-    inst:AddComponent("hauntable")
-    inst:AddComponent("inspectable")
-    inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
-
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(2)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({ "log" })
-
-    return inst
-end
-
-local function fn6(build)
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-    MakeObstaclePhysics(inst, 0.3)
-
-    inst.AnimState:SetBank("flotsam_debris_sw")
-    inst.AnimState:SetBuild("flotsam_cargo_build")
-    inst.AnimState:PlayAnimation("idle", true)
-    local ondas = SpawnPrefab("float_fx_front")
-    ondas.entity:SetParent(inst.entity)
-    ondas.Transform:SetPosition(0, 0, 0)
-    ondas.AnimState:PlayAnimation("idle_front_small", true)
-    ondas.Transform:SetScale(0.8, 0.8, 0.8)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.WOOD
-    inst.components.edible.healthvalue = 0
-    inst.components.edible.hungervalue = 0
-
-    MakeLargeBurnable(inst)
-    MakeLargePropagator(inst)
-
-    inst:AddComponent("hauntable")
-    inst:AddComponent("inspectable")
-    inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
-
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(2)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({ "limestone" })
-
-    return inst
-end
 -- 残骸
-return Prefab("flotsam_armoured_build", fn, assets, prefabs),
-    Prefab("flotsam_cargo_build", fn1, assets, prefabs),
-    Prefab("flotsam_bamboo_build", fn2, assets, prefabs),
-    Prefab("flotsam_lograft_build", fn3, assets, prefabs),
-    Prefab("flotsam_rowboat_build", fn4, assets, prefabs),
-    Prefab("flotsam_surfboard_build", fn5, assets, prefabs),
-    Prefab("flotsam_encrusted_build", fn6, assets, prefabs)
+return MakeFlotsamDebris("flotsam_armoured_build", "flotsam_armoured_build", { "boards" }),
+    MakeFlotsamDebris("flotsam_cargo_build", "flotsam_cargo_build", { "boards" }),
+    MakeFlotsamDebris("flotsam_bamboo_build", "flotsam_bamboo_build", { "bamboo" }),
+    MakeFlotsamDebris("flotsam_lograft_build", "flotsam_lograft_build", { "log" }),
+    MakeFlotsamDebris("flotsam_rowboat_build", "flotsam_rowboat_build", { "boards" }),
+    MakeFlotsamDebris("flotsam_surfboard_build", "flotsam_surfboard_build", { "log" }),
+    MakeFlotsamDebris("flotsam_encrusted_build", "flotsam_cargo_build", { "limestone" })

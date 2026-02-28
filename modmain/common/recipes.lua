@@ -217,9 +217,7 @@ end
 -- CHARACTER--
 if not GetModConfigData("disablecharacters") then
     -- Walani
-AddRecipe2("surfboarditem", 			{Ingredient("boards", 1), Ingredient("seashell", 1)}, 									TECH.NONE, {builder_tag="walani"},   {"CHARACTER"})
     -- Woodlegs
-AddRecipe2("porto_woodlegsboat", 		{Ingredient("boards", 4), Ingredient("dubloon", 4), Ingredient("boatcannon", 1)}, 		TECH.NONE, {builder_tag="woodlegs"}, {"CHARACTER"})
 AddRecipe2("woodlegshat", 				{Ingredient("boneshard", 4), Ingredient("fabric", 3), Ingredient("dubloon", 10)},		TECH.NONE, {builder_tag="woodlegs"}, {"CHARACTER"})
 end
 
@@ -274,7 +272,6 @@ AddRecipe2("chiminea",				{Ingredient("log", 2), Ingredient("limestone", 3), Ing
 AddRecipe2("bottlelantern",			{Ingredient("messagebottleempty_sw", 1), Ingredient("bioluminescence", 2)}, 				  TECH.SCIENCE_TWO,  nil,{"LIGHT"})
 
 AddRecipe2("porto_sea_chiminea",	{Ingredient("sand", 4), Ingredient("tar", 6), Ingredient("limestone", 6)}, 				      TECH.SCIENCE_ONE,  { image="sea_chiminea.tex"}, {"LIGHT","COOKING","WINTER"})
-AddRecipe2("tarlamp",				{Ingredient("seashell", 1), Ingredient("tar", 1)}, 											  TECH.SCIENCE_ONE, nil,  {"LIGHT"})
 AddRecipe2("obsidianfirepit",		{Ingredient("log", 3), Ingredient("obsidian", 8)}, 											  TECH.SCIENCE_TWO,  { placer="obsidianfirepit_placer"}, {"LIGHT","COOKING","WINTER"})
 AddRecipe2("porto_researchlab5",	{Ingredient("limestone", 4), Ingredient("sand", 2), Ingredient("transistor", 2)}, 			  TECH.SCIENCE_ONE,  { image="researchlab5.tex"}, {"PROTOTYPERS","STRUCTURES"})
 AddRecipe2("icemaker",				{Ingredient("heatrock", 1), Ingredient("bamboo", 5), Ingredient("transistor", 2)},			  TECH.SCIENCE_TWO,  { placer="icemaker_placer"}, {"COOKING","SUMMER","STRUCTURES"})
@@ -335,33 +332,12 @@ AddRecipe2("bell",			        {Ingredient("glommerwings", 1), Ingredient("glommer
 --AddRecipe2("fast_farmplot",         {Ingredient("cutgrass", 10), Ingredient("poop", 6), Ingredient("rocks", 4)},                         TECH.SCIENCE_ONE, {atlas = TapDefaultAtlas, min_spacing = 0, placer = "fast_farmplot_placer", image = "fast_farmplot.tex",},{"GARDENING"})
 
 -- NAUTICAL--
-AddRecipe2("sail",					{Ingredient("bamboo", 2), Ingredient("vine", 2), Ingredient("palmleaf", 4)},						 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
-AddRecipe2("feathersail",			{Ingredient("bamboo", 2), Ingredient("rope", 4), Ingredient("doydoyfeather", 4)},					 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
-AddRecipe2("clothsail",				{Ingredient("bamboo", 2), Ingredient("fabric", 2), Ingredient("rope", 2)},							 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
-AddRecipe2("snakeskinsail",			{Ingredient("log", 4), Ingredient("rope", 2), Ingredient("snakeskin", 2)},							 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
-AddRecipe2("malbatrossail",			{Ingredient("driftwood_log", 4), Ingredient("rope", 2), Ingredient("malbatross_feather", 4)},		 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
-AddRecipe2("ironwind",				{Ingredient("turbine_blades", 1), Ingredient("transistor", 1), Ingredient("goldnugget", 2)},		 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
+
 AddRecipe2("boatrepairkit",			{Ingredient("boards", 2), Ingredient("stinger", 2), Ingredient("rope", 2)},							 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
 
-if TUNING.tropical.only_shipwrecked or GetModConfigData("raftlog") then
-AddRecipe2("porto_lograft_old", 	{Ingredient("log", 6), Ingredient("cutgrass", 4)},													 TECH.NONE, nil,  		  {"NAUTICAL"})
-AddRecipe2("porto_raft_old", 		{Ingredient("bamboo", 4), Ingredient("vine", 3)},													 TECH.NONE, nil,  		  {"NAUTICAL"})
-else
-AddRecipe2("porto_lograft", 		{Ingredient("log", 6), Ingredient("cutgrass", 4)},													 TECH.NONE, nil,  		  {"SEAFARING", "NAUTICAL"})
-AddRecipe2("porto_raft", 			{Ingredient("bamboo", 4), Ingredient("vine", 3)},													 TECH.NONE, nil,  		  {"SEAFARING", "NAUTICAL"})
-end
-AddRecipe2("porto_rowboat",			{Ingredient("boards", 3), Ingredient("vine", 4)},													 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
-AddRecipe2("porto_cargoboat",		{Ingredient("boards", 6), Ingredient("rope", 3)},													 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
-AddRecipe2("porto_armouredboat",	{Ingredient("boards", 6), Ingredient("rope", 3), Ingredient("seashell", 10)},						 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
-AddRecipe2("porto_encrustedboat",	{Ingredient("boards", 6), Ingredient("limestone", 4), Ingredient("rope", 3)},						 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
-AddRecipe2("corkboatitem",			{Ingredient("rope", 1), Ingredient("cork", 4)},													     TECH.NONE, nil,  		  {"NAUTICAL"})
 
-AddRecipe2("boat_torch",			{Ingredient("torch", 1), Ingredient("twigs", 2)}, 													 TECH.ONE, nil,  		      {"NAUTICAL","LIGHT"})
-AddRecipe2("boat_lantern",			{Ingredient("messagebottleempty_sw", 1), Ingredient("twigs", 2), Ingredient("bioluminescence", 1)},  TECH.SCIENCE_TWO, nil,     {"NAUTICAL","LIGHT"})
+
 AddRecipe2("porto_buoy",			{Ingredient("messagebottleempty_sw", 1), Ingredient("bamboo", 4), Ingredient("bioluminescence", 2)}, TECH.SEAFARING_TWO,  { image="buoy.tex"}, {"LIGHT","STRUCTURES","NAUTICAL"})
-AddRecipe2("boatcannon",			{Ingredient("coconut", 6), Ingredient("log", 5), Ingredient("gunpowder", 4)},						 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
-AddRecipe2("quackeringram",			{Ingredient("quackenbeak", 1), Ingredient("bamboo", 4), Ingredient("rope", 4)},						 TECH.SEAFARING_TWO, nil,   {"NAUTICAL"})
-AddRecipe2("trawlnet",				{Ingredient("bamboo", 2), Ingredient("rope", 3)},													 TECH.SEAFARING_TWO, nil,   {"TOOLS","FISHING","NAUTICAL"})
 AddRecipe2("seatrap",				{Ingredient("palmleaf", 4), Ingredient("messagebottleempty_sw", 2), Ingredient("jellyfish", 1)},	 TECH.SEAFARING_TWO, nil,   {"TOOLS","GARDENING","NAUTICAL"})
 
 AddRecipe2("telescope",				{Ingredient("goldnugget", 1), Ingredient("pigskin", 1), Ingredient("messagebottleempty_sw", 1)},	 TECH.SEAFARING_TWO, nil,   {"TOOLS","NAUTICAL"})
@@ -675,13 +651,9 @@ SortAfter("aerodynamichat", "gasmaskhat", "CLOTHING")
 SortAfter("double_umbrellahat", "eyebrellahat", "CLOTHING")
 SortAfter("double_umbrellahat", "eyebrellahat", "RAIN")
 SortAfter("double_umbrellahat", "eyebrellahat", "SUMMER")
-SortBefore("tarlamp", "lantern", "LIGHT")
-SortAfter("boat_torch", "coldfirepit", "LIGHT")
-SortAfter("boat_lantern", "boat_torch", "LIGHT")
 SortAfter("seatrap", "birdtrap", "TOOLS")
 SortAfter("seatrap", "birdtrap", "GARDENING")
-SortAfter("trawlnet", "oceanfishingrod", "TOOLS")
-SortAfter("trawlnet", "oceanfishingrod", "FISHING")
+
 SortAfter("telescope", "compass", "TOOLS")
 SortAfter("supertelescope", "telescope", "TOOLS")
 SortAfter("captainhat", "bushhat", "CLOTHING")
@@ -711,11 +683,7 @@ SortAfter("turf_beach", "turf_volcano", "DECOR")
 -- SortAfter("chesspiece_tigershark_builder", "chesspiece_kraken_builder", "CRAFTING_STATION")--虎鲨雕塑
 -- SortAfter("chesspiece_twister_builder", "chesspiece_tigershark_builder", "CRAFTING_STATION")--豹卷风雕塑
 -- SortAfter("chesspiece_seal_builder", "chesspiece_twister_builder", "CRAFTING_STATION")--海豹雕塑
-SortAfter("surfboard_item", "wx78_scanner_item", "CHARACTER")
--- SortBefore("surfboard_item", "boat_lograft", "SEAFARING")
--- SortAfter("woodlegshat", "piratehat", "SEAFARING")
--- SortAfter("woodlegshat", "mermhat", "CLOTHING")
-SortAfter("woodlegshat", "surfboard_item", "CHARACTER")
+
 -- SortAfter("boat_woodlegs", "boat_encrusted", "SEAFARING")
 -- SortAfter("boat_woodlegs", "woodlegshat", "CHARACTER")
 -- SortAfter("transmute_bamboo", "transmute_twigs", "CHARACTER")--ia改威吊技能树：化藤蔓为竹子。

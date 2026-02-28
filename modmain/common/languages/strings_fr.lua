@@ -670,13 +670,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.OX_HORN = "Il faut attraper le taureau par l
 STRINGS.NAMES.OX = "Bœufalo d'eau"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OX = "Ces créatures ont l'air raisonnable."
 
-STRINGS.NAMES.ROWBOAT = "Canot"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROWBOAT = "Ça marche à l'huile de coude."
-STRINGS.RECIPE_DESC.ROWBOAT = "Qu'allait-il faire dans cette galère ?"
 
-STRINGS.NAMES.ENCRUSTEDBOAT = "Bateau en croûte"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ENCRUSTEDBOAT = "Une simple coquille vide."
-STRINGS.RECIPE_DESC.ENCRUSTEDBOAT = "Un vrai char des mers !"
+
+
 
 STRINGS.NAMES.TURF_QUAGMIRE_PARKFIELD = "Gazon Quagmire Parkfield"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_QUAGMIRE_PARKFIELD = "Très stylé."
@@ -881,13 +877,9 @@ STRINGS.NAMES.MESSAGEBOTTLEEMPTY1 = "Bouteille vide"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MESSAGEBOTTLEEMPTY1 = "Ce n'est qu'une bouteille vide."
 STRINGS.RECIPE_DESC.MESSAGEBOTTLEEMPTY1 = "Ne pas oublier de la recycler !"
 
-STRINGS.NAMES.ARMOUREDBOAT = "Bateau blindé"
-STRINGS.RECIPE_DESC.ARMOUREDBOAT = "Un vaisseau solide avec coquilles de protection."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOUREDBOAT = "Ça c'est un bateau durable."
 
-STRINGS.NAMES.CARGOBOAT = "Cargo"
-STRINGS.RECIPE_DESC.CARGOBOAT = "Pour stocker en mer !"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CARGOBOAT = "Ça peut contenir tout ce que j'ai !"
+
+
 
 STRINGS.NAMES.CORAL_BRAIN = "Matière cérébrale"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORAL_BRAIN = "De la nourriture pour penser."
@@ -979,25 +971,16 @@ STRINGS.NAMES.PORTO_RAFT = "Radeau"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_RAFT = "Ça a l'air correct."
 STRINGS.RECIPE_DESC.PORTO_RAFT = "Absolument pas fait pour naviguer."
 
-STRINGS.NAMES.PORTO_ARMOUREDBOAT = "Bateau blindé"
-STRINGS.RECIPE_DESC.PORTO_ARMOUREDBOAT = "Un vaisseau solide avec coquilles de protection."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ARMOUREDBOAT = "Ça c'est un bateau durable."
 
-STRINGS.NAMES.PORTO_CARGOBOAT = "Cargo"
-STRINGS.RECIPE_DESC.PORTO_CARGOBOAT = "Pour stocker en mer !"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_CARGOBOAT = "Ça peut contenir tout ce que j'ai !"
+
+
 
 STRINGS.NAMES.PORTO_LOGRAFT = "Radeau de rondins"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "Ça ressemble à... un genre de bateau..."
 STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "Pour naviguer sans garantie."
 
-STRINGS.NAMES.PORTO_ROWBOAT = "Canot"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ROWBOAT = "Ça marche à l'huile de coude."
-STRINGS.RECIPE_DESC.PORTO_ROWBOAT = "Qu'allait-il faire dans cette galère ?"
 
-STRINGS.NAMES.PORTO_ENCRUSTEDBOAT = "Bateau en croûte"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ENCRUSTEDBOAT = "Une simple coquille vide."
-STRINGS.RECIPE_DESC.PORTO_ENCRUSTEDBOAT = "Un vrai char des mers !"
+
 
 STRINGS.NAMES.PRIMEAPE = "Singe primitif"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PRIMEAPE = "Ces bestioles finiront par me tuer."
@@ -1045,49 +1028,19 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASSNOVA = "C'est une touffe d'herbe."
 
 STRINGS.RECIPE_DESC.DOUBLE_UMBRELLAHAT = "La fonction l'emporte sur l'aspect."
 
-STRINGS.NAMES.SAIL = "Voile de chaume"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAIL = "Ça devrait vraiment changer mon expérience navale."
-STRINGS.RECIPE_DESC.SAIL = "Pour attraper le vent !"
 
-STRINGS.NAMES.CLOTHSAIL = "Voile en tissu"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CLOTHSAIL = "Ce vent ne va plus m'échapper maintenant !"
-STRINGS.RECIPE_DESC.CLOTHSAIL = "Pour attraper encore plus de vent !"
 
-STRINGS.NAMES.SNAKESKINSAIL = "Voile en peau de serpent"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNAKESKINSAIL = "Si je l'écaille ça me fera une voile !"
-STRINGS.RECIPE_DESC.SNAKESKINSAIL = "Attrape-vent résistant."
 
-STRINGS.NAMES.FEATHERSAIL = "Voile de plumes"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.FEATHERSAIL = "Légère comme une plume !"
-STRINGS.RECIPE_DESC.FEATHERSAIL = "Comme une aile d'oiseau pour le bateau !"
 
-STRINGS.NAMES.IRONWIND = "Vent de fer"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.IRONWIND = "C'est comme ça qu'un scientifique doit voyager."
-STRINGS.RECIPE_DESC.IRONWIND = "C'est l'ère du moteur !"
 
-STRINGS.NAMES.WOODLEGSSAIL = "Voile de Woodlegs"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGSSAIL = "La voile de pirate par excellence."
-STRINGS.RECIPE_DESC.WOODLEGSSAIL = "Je vais devenir un pirate !"
 
-STRINGS.NAMES.BOAT_LANTERN = "Lanterne de bateau"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_LANTERN = "Ça va être génial pour voir de nuit !"
-STRINGS.RECIPE_DESC.BOAT_LANTERN = "Pour illuminer certaines situations."
 
-STRINGS.NAMES.BOAT_TORCH = "Torche de bateau"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_TORCH = "Avec ça, j'aurai les mains libres."
-STRINGS.RECIPE_DESC.BOAT_TORCH = "Pour voir en mer."
 
-STRINGS.NAMES.BOATCANNON = "Canon naval"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOATCANNON = "Mieux qu'un bateau, un bateau avec canon."
-STRINGS.RECIPE_DESC.BOATCANNON = "Assure la protection du bateau."
 
-STRINGS.NAMES.OBSIDIAN_BOATCANNON = "Canon de Pirate"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIAN_BOATCANNON = "Digne d'un pirate"
-STRINGS.RECIPE_DESC.OBSIDIAN_BOATCANNON = "Bien renforcé"
 
-STRINGS.NAMES.QUACKERINGRAM = "Bélier de quacken"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUACKERINGRAM = "Mon ingénuité ne connaîtrait-elle pas de limites ?"
-STRINGS.RECIPE_DESC.QUACKERINGRAM = "Il va falloir vous éviter !"
+
+
+
 
 STRINGS.NAMES.QUACKENDRILL = "Trépan de quacken"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUACKENDRILL = "Outil de forage en eau profonde"
@@ -1096,9 +1049,7 @@ STRINGS.RECIPE_DESC.QUACKENDRILL = "Pour les forages en haute mer."
 STRINGS.NAMES.QUACKENBEAK = "Bec de quacken"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUACKENBEAK = "Une prise de bec semble évidente."
 
-STRINGS.NAMES.TRAWLNET = "Chalut"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRAWLNET = "Rien qu'un filet."
-STRINGS.RECIPE_DESC.TRAWLNET = "Le pêcheur patient est toujours récompensé."
+
 
 STRINGS.NAMES.GLASS_SHARDS = "Eclats de verre"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GLASS_SHARDS = "Les hautes températures transforment le sable en verre imparfait."
@@ -1112,31 +1063,14 @@ STRINGS.NAMES.SHARD_BEAK = "Eclat de bec"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARD_BEAK = "Un instrument de déconstruction."
 STRINGS.RECIPE_DESC.SHARD_BEAK = "Brise les nids fortifiés."
 
-STRINGS.NAMES.PORTO_SURFBOARD = "Planche de surf"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_SURFBOARD = "Si j'étais sur ma planche de surf, je pourrais t'attraper."
-STRINGS.RECIPE_DESC.PORTO_SURFBOARD = "Ca gaze, mec ? "
 
-STRINGS.NAMES.SURFBOARD = "Planche de surf"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SURFBOARD = "Si j'étais sur ma planche de surf, je pourrais t'attraper..."
-STRINGS.RECIPE_DESC.SURFBOARD = "Ca gaze, mec ?"
 
-STRINGS.NAMES.WOODLEGSBOAT = "Le « Sea Legs »"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGSBOAT = "Un navire digne d'un vrai truand !"
-STRINGS.RECIPE_DESC.WOODLEGSBOAT = "Pour aller pirater."
 
-STRINGS.NAMES.PORTO_WOODLEGSBOAT = "Le « Sea Legs »"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_WOODLEGSBOAT = "Un navire digne d'un truand !"
-STRINGS.RECIPE_DESC.PORTO_WOODLEGSBOAT = "Pour aller pirater."
-
-STRINGS.NAMES.WOODLEGSBOATAMIGO = "Le « Sea Legs »"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGSBOATAMIGO = "Un navire digne d'un forban!"
-STRINGS.RECIPE_DESC.WOODLEGSBOATAMIGO = "Pour aller pirater."
 
 STRINGS.NAMES.TURBINE_BLADES = "Hélice de turbine"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURBINE_BLADES = "Ça alimentait peut-être une tempête bestiale."
 
-STRINGS.NAMES.TRAWLNETDROPPED = "Filet de chalutier lancé"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRAWLNETDROPPED = "Il est en train de couler, c'est certain."
+
 
 STRINGS.NAMES.SHARKITTEN = "Sharkitten"
 
@@ -1157,7 +1091,7 @@ STRINGS.RECIPE_DESC.ARMOR_LIFEJACKET = "La sécurité d'abord !"
 STRINGS.WALLY1 = "Tu peux être fier !"
 STRINGS.WALLY2 = "Joli naufrage"
 
-STRINGS.NAMES.SURFBOARDITEM = "Planche de surf"
+
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKYHAT = "Est-ce que ça me donne l'air villain.... Je veux dire effrayant !?"
 STRINGS.NAMES.LUCKYHAT = "Chapeau porte-bonheur"
@@ -1292,9 +1226,7 @@ STRINGS.NAMES.SEA_YARD = "Chantier naval"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_YARD = "Je vais devoir réalimenter bientôt."
 STRINGS.RECIPE_DESC.SEA_YARD = "Pour maintenir vos bateaux en forme !"
 
-STRINGS.NAMES.TARLAMP = "Lampe à goudron"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TARLAMP = "Une vraie lampe à pétrole."
-STRINGS.RECIPE_DESC.TARLAMP = "Une lampe pour la main, ou pour le bateau !"
+
 
 STRINGS.NAMES.TARSUIT = "Costume de goudron"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TARSUIT = "Porter ce truc-là c'est à devenir cinglé."
@@ -1312,7 +1244,7 @@ STRINGS.NAMES.WATERCHEST1 = "Coffre de mer"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WATERCHEST1 = "Inattaquable, comme toutes mes théories."
 STRINGS.RECIPE_DESC.WATERCHEST1 = "La malle de voyage de Davy Jones."
 
-STRINGS.RECIPE_DESC.SURFBOARDITEM = "Cowabunga les gars!"
+
 
 STRINGS.NAMES.HAIL_ICE = "Grêlon"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HAIL_ICE = "Rafraîchissant."

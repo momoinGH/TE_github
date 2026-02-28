@@ -98,7 +98,7 @@ local function onhammered(inst)
 end
 
 local function OnDeath(inst, data)
-    
+    -- TODO
 end
 
 ---fn

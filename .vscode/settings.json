@@ -7,6 +7,6 @@
         "inject-field",
         "redundant-return",
         "unused-local",
-        "missing-parameter"
+        "missing-parameter",
     ]
 }

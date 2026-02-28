@@ -1,7 +1,7 @@
 require("stategraphs/commonstates")
 
 local actionhandlers =
-{    
+{
     ActionHandler(ACTIONS.CHOP,
         function(inst)
             if not inst.sg:HasStateTag("prechop") then
@@ -10,8 +10,8 @@ local actionhandlers =
                     or "chop_start"
             end
         end),
-    ActionHandler(ACTIONS.MINE, 
-        function(inst) 
+    ActionHandler(ACTIONS.MINE,
+        function(inst)
             if not inst.sg:HasStateTag("premine") then
                 return inst.sg:HasStateTag("mining")
                     and "mine"
@@ -51,9 +51,9 @@ local events =
 
 local states =
 {
-    State{
+    State {
         name = "idle",
-        tags = {"idle", "canrotate"},
+        tags = { "idle", "canrotate" },
 
         onenter = function(inst, pushanim)
             inst.Physics:Stop()
@@ -61,13 +61,13 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "run_start",
-        tags = {"moving", "running", "canrotate", "sailing" },
+        tags = { "moving", "running", "canrotate", "sailing" },
 
         onenter = function(inst)
             inst.components.locomotor:RunForward()
-if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pre") else inst.AnimState:PlayAnimation("run_pre") end            
+            if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pre") else inst.AnimState:PlayAnimation("run_pre") end
         end,
 
         events =
@@ -81,20 +81,22 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pre") else ins
 
         timeline =
         {
-            TimeEvent(4*FRAMES, function(inst)
+            TimeEvent(4 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_step")
             end),
         },
     },
 
-    State{
+    State {
         name = "run",
-        tags = {"moving", "running", "canrotate", "sailing" },
+        tags = { "moving", "running", "canrotate", "sailing" },
 
         onenter = function(inst)
             inst.components.locomotor:RunForward()
-if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_loop") else 			
-            if not inst.AnimState:IsCurrentAnimation("run_loop") then inst.AnimState:PlayAnimation("run_loop", true) end
+            if inst:HasTag("aquatic") then
+                inst.AnimState:PlayAnimation("sail_loop")
+            else
+                if not inst.AnimState:IsCurrentAnimation("run_loop") then inst.AnimState:PlayAnimation("run_loop", true) end
             end
             inst.sg:SetTimeout(inst.AnimState:GetCurrentAnimationLength())
         end,
@@ -114,13 +116,13 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_loop") else
         end,
     },
 
-    State{
+    State {
         name = "run_stop",
-        tags = {"canrotate", "idle", "sailing" },
+        tags = { "canrotate", "idle", "sailing" },
 
         onenter = function(inst)
             inst.Physics:Stop()
-if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else inst.AnimState:PlayAnimation("run_pst") end              
+            if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else inst.AnimState:PlayAnimation("run_pst") end
         end,
 
         events =
@@ -133,9 +135,9 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
         },
     },
 
-    State{
+    State {
         name = "attack",
-        tags = {"attack", "notalking", "abouttoattack", "busy"},
+        tags = { "attack", "notalking", "abouttoattack", "busy" },
 
         onenter = function(inst)
             inst.sg.statemem.target = inst.components.combat.target
@@ -151,11 +153,14 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
 
         timeline =
         {
-            TimeEvent(8*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) inst.sg:RemoveStateTag("abouttoattack") end),
-            TimeEvent(12*FRAMES, function(inst)
+            TimeEvent(8 * FRAMES, function(inst)
+                inst.components.combat:DoAttack(inst.sg.statemem.target)
+                inst.sg:RemoveStateTag("abouttoattack")
+            end),
+            TimeEvent(12 * FRAMES, function(inst)
                 inst.sg:RemoveStateTag("busy")
             end),
-            TimeEvent(13*FRAMES, function(inst)
+            TimeEvent(13 * FRAMES, function(inst)
                 inst.sg:RemoveStateTag("attack")
             end),
         },
@@ -170,9 +175,9 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
         },
     },
 
-    State{
+    State {
         name = "death",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -193,9 +198,9 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
         },
     },
 
-    State{
+    State {
         name = "hit",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst:ClearBufferedAction()
@@ -214,15 +219,15 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
 
         timeline =
         {
-            TimeEvent(3*FRAMES, function(inst)
+            TimeEvent(3 * FRAMES, function(inst)
                 inst.sg:RemoveStateTag("busy")
             end),
         },
     },
 
-    State{
+    State {
         name = "stunned",
-        tags = {"busy", "canrotate"},
+        tags = { "busy", "canrotate" },
 
         onenter = function(inst)
             inst:ClearBufferedAction()
@@ -237,9 +242,9 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
         end,
     },
 
-    State{
+    State {
         name = "chop_start",
-        tags = {"prechop", "working"},
+        tags = { "prechop", "working" },
 
         onenter = function(inst)
             local buffaction = inst:GetBufferedAction()
@@ -259,9 +264,9 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
         },
     },
 
-    State{
+    State {
         name = "chop",
-        tags = {"prechop", "chopping", "working"},
+        tags = { "prechop", "chopping", "working" },
 
         onenter = function(inst)
             local buffaction = inst:GetBufferedAction()
@@ -282,7 +287,7 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
                 inst.sg:RemoveStateTag("prechop")
             end),
 
-            TimeEvent(16*FRAMES, function(inst)
+            TimeEvent(16 * FRAMES, function(inst)
                 inst.sg:RemoveStateTag("chopping")
             end),
         },
@@ -297,9 +302,9 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
         },
     },
 
-    State{
+    State {
         name = "mine_start",
-        tags = {"premine", "working"},
+        tags = { "premine", "working" },
 
         onenter = function(inst)
             local buffaction = inst:GetBufferedAction()
@@ -319,9 +324,9 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
         },
     },
 
-    State{
+    State {
         name = "mine",
-        tags = {"premine", "mining", "working"},
+        tags = { "premine", "mining", "working" },
 
         onenter = function(inst)
             local buffaction = inst:GetBufferedAction()
@@ -353,18 +358,18 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
 
         events =
         {
-            EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
                 if inst.AnimState:AnimDone() then
-                    inst.AnimState:PlayAnimation("pickaxe_pst") 
+                    inst.AnimState:PlayAnimation("pickaxe_pst")
                     inst.sg:GoToState("idle", true)
                 end
             end),
         },
     },
 
-    State{
+    State {
         name = "dig_start",
-        tags = {"predig", "working"},
+        tags = { "predig", "working" },
 
         onenter = function(inst)
             local buffaction = inst:GetBufferedAction()
@@ -384,9 +389,9 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
         },
     },
 
-    State{
+    State {
         name = "dig",
-        tags = {"predig", "digging", "working"},
+        tags = { "predig", "digging", "working" },
 
         onenter = function(inst)
             local buffaction = inst:GetBufferedAction()
@@ -418,9 +423,9 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
         },
     },
 
-    State{
+    State {
         name = "dance",
-        tags = {"idle", "dancing"},
+        tags = { "idle", "dancing" },
 
         onenter = function(inst)
             inst.components.locomotor:Stop()
@@ -434,7 +439,7 @@ if inst:HasTag("aquatic") then inst.AnimState:PlayAnimation("sail_pst") else ins
         end,
     },
 
-    State{
+    State {
         name = "jumpout",
         tags = { "busy", "canrotate", "jumping" },
 

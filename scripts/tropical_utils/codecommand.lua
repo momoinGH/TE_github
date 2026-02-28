@@ -40,6 +40,10 @@ FRAMES          = 1 / 30
 DEPLOYMODE      = {}
 DEPLOYSPACING   = {}
 AllRecipes      = {}
+FUELTYPE        = {}
+Ents            = {}
+TheInput        = {}
+MOD_RPC         = {}
 function Class(base, _ctor, props) end
 
 function CanEntitySeeTarget(inst, target) end
@@ -756,13 +760,13 @@ ThePlayer.fx.AnimState:SetFinalOffset(0);
 
 ThePlayer.fx.AnimState:SetLayer(LAYER_BACKGROUND);
 -- 可以让物品一闪一闪的
-inst.AnimState:SetHaunted(true)
+ent.AnimState:SetHaunted(true)
 --发光
-inst.AnimState:SetSymbolBloom("bolt_f")
-inst.AnimState:SetSymbolLightOverride("bolt_b", .5)
+ent.AnimState:SetSymbolBloom("bolt_f")
+ent.AnimState:SetSymbolLightOverride("bolt_b", .5)
 
 -- 动画时长
-print(inst.AnimState:GetCurrentAnimationLength())
+print(ent.AnimState:GetCurrentAnimationLength())
 
 -- 瓦格斯塔夫一闪一闪的滤镜
 ThePlayer.AnimState:SetErosionParams(0, -0.125, -1.0)
@@ -882,7 +886,12 @@ function MakeForgeRepairable(inst, material, onbroken, onrepaired) end
 --可以通过TheWorld.Map:XXX() 直接调用
 
 ---map组件方法，获取指定位置的地皮信息tile，类型为WORLD_TILES、GROUND常量里定义的值，整数类型，表示地皮编号
-print(TheWorld.Map:GetTileAtPoint(ConsoleWorldPosition():Get()));
+local tile_id = TheWorld.Map:GetTileAtPoint(ConsoleWorldPosition():Get());
+for k, v in pairs(WORLD_TILES) do
+    if v == tile_id then
+        print(k, v);
+    end;
+end;
 -- 参数为地皮坐标
 -- TheWorld.Map:GetTile(newX, newZ)
 
@@ -894,6 +903,7 @@ print(TheWorld.Map:GetTileCoordsAtPoint(ConsoleWorldPosition():Get()));
 
 -- 所给位置所处地皮的中心位置
 print(TheWorld.Map:GetTileCenterPoint(ConsoleWorldPosition():Get()));
+print(TheWorld.Map:GetTileCenterPoint(tile_x, tile_y));
 
 -- 添加一个隐形墙体，玩家还是可以用键盘空间角色穿过，但是自动寻路会规避墙体
 TheWorld.Pathfinder:AddWall(x + 0.5, 0, z + 0.5);
@@ -1083,3 +1093,36 @@ AddPlayerPostInit(function(inst)
         end
     end)
 end)
+
+-- 把世界坐标转屏幕坐标
+TheSim:GetScreenPos(x, y, z)
+
+
+AddRecipe = function(arg1, ...) end
+
+function MakeObstaclePhysics(inst, rad, height) end
+function MakeSmallBurnable(inst, time, offset, structure, sym) end
+function MakeMediumBurnable(inst, time, offset, structure, sym) end
+function MakeLargeBurnable(inst, time, offset, structure, sym) end
+function MakeSmallPropagator(inst) end
+function MakeMediumPropagator(inst) end
+function MakeLargePropagator(inst) end
+function MakeSmallBurnableCharacter(inst, sym, offset) end
+function MakeMediumBurnableCharacter(inst, sym, offset) end
+function MakeLargeBurnableCharacter(inst, sym, offset, scale) end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
