@@ -12,6 +12,7 @@ tro_作为公共模块前缀，新的命名建议都用这个作为前缀
    1. pro_driver：玩家身上航海组件
    2. shipwreckedboat：小船身上
    3. shipwreckedboatparts：船配件身上
+9. 单机版用OverrideSymbol替换玩家贴图，玩家播放对应动画帆布和螺旋桨就能动起来，但是联机版不会动，目前不知道为什么，可能是因为联机和单机角色动画通道不一样
 
 
 添加ComponentAction：

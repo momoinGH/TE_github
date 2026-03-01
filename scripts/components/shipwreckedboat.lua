@@ -15,11 +15,11 @@ local function OnItemGet(inst, data)
         end
     end
 
-    item:PushEvent("boat_equipped", { owner = inst }) --需要判断真假船！可以根据pro_fakeboat标签判断
+    item:PushEvent("boat_equipped", { owner = inst })
 end
 
 local function OnItemLose(inst, data)
-    local item = data and data.item
+    local item = data and data.prev_item
     local part = item and item.components.shipwreckedboatparts
     if not part or (data.slot ~= 1 and data.slot ~= 2) then
         return
@@ -34,7 +34,6 @@ local function OnItemLose(inst, data)
             part.onplayerdismountedfn(item, inst, driver)
         end
     end
-
     item:PushEvent("boat_unequipped", { owner = inst })
 end
 
@@ -49,6 +48,11 @@ local Boat = Class(function(self, inst)
     inst:ListenForEvent("itemget", OnItemGet)
     inst:ListenForEvent("itemlose", OnItemLose)
 end)
+
+-- 获取可见的小船，如果被装备了就获取复制体，否则获取真实的船
+function Boat:GetVisibleBoat()
+    return self.boatfx or self.inst
+end
 
 --重新计算移速倍率
 function Boat:UpdateSpeedMult()

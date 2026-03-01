@@ -242,7 +242,6 @@ AddRecipe2("mermwatchtower", 			{Ingredient("boards", 5), Ingredient("tentaclesp
 --AddRecipe2("merm_toolshed",		    {Ingredient("boards", 2), Ingredient("twigs", 5), Ingredient("rocks", 5)},						            TECH.NONE,		  {builder_tag="merm_swampmaster_mermtoolshed",         placer="merm_toolshed_placer",         testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
 --AddRecipe2("merm_toolshed_upgraded",  {Ingredient("boards", 4), Ingredient("tentaclespots", 1), Ingredient("twigs", 5), Ingredient("rocks", 5)},	TECH.NONE,	      {builder_tag="merm_swampmaster_mermtoolshed_upgraded",placer="merm_toolshed_upgraded_placer",testfn=function(pt, rot) local ground_tile = GLOBAL.TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
 -- Maxwell
-AddRecipe2("porto_shadowboat",			{Ingredient("papyrus", 3), Ingredient("nightmarefuel", 4), Ingredient(CHARACTER_INGREDIENT.SANITY, 60)},	TECH.NONE,		  {builder_tag="shadowmagic"}, {"CHARACTER"})
 --AddRecipe2("shadowmower_builder", 		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.SANITY, 60)}, 	TECH.SHADOW_TWO,  {builder_tag="shadowmagic", 		  nounlock=true}, {"CRAFTING_STATION"})
 --AddRecipe2("shadowlumber_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWLUMBER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
 --AddRecipe2("shadowminer_builder",		{Ingredient("nightmarefuel", 2), Ingredient(GLOBAL.CHARACTER_INGREDIENT.MAX_SANITY, GLOBAL.TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWMINER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
@@ -784,7 +783,6 @@ SortAfter("seafaring_prototyper", "researchlab3", "PROTOTYPERS")
 SortAfter("tacklestation", "seafaring_prototyper", "PROTOTYPERS")
 SortAfter("cartographydesk", "tacklestation", "PROTOTYPERS")
 
-SortAfter("porto_shadowboat", "waxwelljournal", "CHARACTER")
 
 SortAfter("mermhouse_tropical_crafted", "mermhouse_crafted", "CHARACTER")
 SortAfter("mermhouse_fisher_crafted", "mermhouse_tropical_crafted", "CHARACTER")

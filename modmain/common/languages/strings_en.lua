@@ -972,7 +972,6 @@ STRINGS.NAMES.POTATO_PANCAKES                                                   
 STRINGS.NAMES.DECO_RUINS_CRACK_ROOTS4                                           = "遗迹裂口树根4"
 STRINGS.NAMES.WILDBOREHOUSE                                                     = "Wildbore House"
 STRINGS.NAMES.SHIELD_AXES                                                       = "斧盾挂饰"
-STRINGS.NAMES.PORTO_SHADOWBOAT                                                  = "暗影船套装"
 STRINGS.NAMES.RUG_CITYHALL_CORNERS                                              = "市政厅角落毯子"
 STRINGS.NAMES.HAMBURGER                                                         = "汉堡贡品"
 STRINGS.NAMES.SALT_RACK                                                         = "盐架套装"
@@ -4380,7 +4379,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_LATIN_1                                 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCTOPUSCHEST                                = "I hope that thing is waterproof."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_BIRD                                = "They are free like the wind."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_TINKER_GENERIC                     = "For science-ing!"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_SHADOWBOAT                            = "一艘船，由暗影能量所构成。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISHBALL_SKEWERS                            = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.INVENTORYGRAVE                              = "There was someone here before me!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_GUARD_TOWER                             = {
@@ -5646,7 +5644,6 @@ STRINGS.RECIPE_DESC.TURF_DEEPRAINFOREST                                         
 STRINGS.RECIPE_DESC.TURF_JUNGLE                                                 = "热带丛林。"
 STRINGS.RECIPE_DESC.PIGHOUSE_CITY_ENTRANCE                                      = "收容一只纳税的猪。"
 STRINGS.RECIPE_DESC.JELLY_LANTERN                                               = "为潜水活动提供了更持久的光亮！"
-STRINGS.RECIPE_DESC.PORTO_SHADOWBOAT                                            = "水也无法渗透暗影。"
 STRINGS.RECIPE_DESC.DIVING_SUIT_SUMMER                                          = "休闲游泳装备。"
 STRINGS.RECIPE_DESC.FLARE                                                       = "照亮海洋的深处。"
 STRINGS.RECIPE_DESC.PEARL_AMULET                                                = "可以将海水转化成新鲜的空气！"

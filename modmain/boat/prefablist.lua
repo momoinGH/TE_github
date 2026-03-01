@@ -5,6 +5,7 @@ PrefabFiles = {
     "flotsam_debris_sw",
 
     -- 海难船
+    "boatraft",
     "shipwrecked_boat_placer",
     "shipwrecked_boat_placer2",
     "shipwrecked_boat",

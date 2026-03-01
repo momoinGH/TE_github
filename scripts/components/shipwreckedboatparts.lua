@@ -21,6 +21,11 @@ function ShipwreckedBoatParts:GetBoat()
     end
 end
 
+function ShipwreckedBoatParts:GetVisibleBoat()
+    local boat = self:GetBoat()
+    return boat and boat.components.shipwreckedboat:GetVisibleBoat() or nil
+end
+
 function ShipwreckedBoatParts:GetDriver()
     local boat = self:GetBoat()
     return boat and boat.components.inventoryitem.owner or nil

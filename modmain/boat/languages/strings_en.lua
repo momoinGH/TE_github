@@ -454,9 +454,9 @@ STRINGS.CHARACTERS.WX78.DESCRIBE.BOAT_TORCH                     = "Strangely not
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.BOAT_TORCH                   = "Strangely not for torching boats."
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.BOAT_TORCH              = "Holds fire stick for me."
 
-
-
-
+STRINGS.NAMES.PORTO_SHADOWBOAT                                  = "暗影船套装"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_SHADOWBOAT            = "一艘船，由暗影能量所构成。"
+STRINGS.RECIPE_DESC.PORTO_SHADOWBOAT                            = "水也无法渗透暗影。"
 
 
 

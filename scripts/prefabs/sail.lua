@@ -1,20 +1,3 @@
-local total_day_time = 480
-
-local SAIL_SPEED_MULT = 1.2
-
-local SAIL_PERISH_TIME = total_day_time * 2
-local CLOTH_SAIL_SPEED_MULT = 1.3 --这里改成乘积的形式
-local CLOTH_SAIL_PERISH_TIME = total_day_time * 3
-
-local SNAKESKIN_SAIL_SPEED_MULT = 1.25
-local SNAKESKIN_SAIL_PERISH_TIME = total_day_time * 4
-
-local FEATHER_SAIL_SPEED_MULT = 1.4
-local FEATHER_SAIL_PERISH_TIME = total_day_time * 2
-
-local IRON_WIND_SPEED_MULT = 1.5
-local IRON_WIND_PERISH_TIME = total_day_time * 4
-
 local function OnEquipped(inst, data)
     data.owner.AnimState:OverrideSymbol(inst.symboltooverride, inst.build, inst.symbol)
     local boatfx = data.owner.components.shipwreckedboat.boatfx
@@ -104,8 +87,8 @@ local sail_assets =
 
 local function sail_fn()
     return common("sail", "swap_sail", "idle", "swap_sail", {
-        perish_time = SAIL_PERISH_TIME,
-        speed_mult = SAIL_SPEED_MULT,
+        perish_time = TUNING.TOTAL_DAY_TIME * 2,
+        speed_mult = 1.2,
         move_sound = "dontstarve_DLC002/common/sail_LP_cloth"
     })
 end
@@ -117,8 +100,8 @@ local clothsail_assets =
 
 local function clothsail_fn()
     return common("sail", "swap_sail_cloth", "idle", "swap_sail", {
-        perish_time = CLOTH_SAIL_PERISH_TIME,
-        speed_mult = CLOTH_SAIL_SPEED_MULT,
+        perish_time = TUNING.TOTAL_DAY_TIME * 3,
+        speed_mult = 1.3,
         move_sound = "dontstarve_DLC002/common/sail_LP_cloth"
     })
 end
@@ -130,8 +113,8 @@ local snakeskinsail_assets =
 
 local function snakeskinsail_fn()
     return common("sail", "swap_sail_snakeskin", "idle", "swap_sail", {
-        perish_time = SNAKESKIN_SAIL_PERISH_TIME,
-        speed_mult = SNAKESKIN_SAIL_SPEED_MULT,
+        perish_time = TUNING.TOTAL_DAY_TIME * 4,
+        speed_mult = 1.25,
         move_sound = "dontstarve_DLC002/common/sail_LP_snakeskin"
     })
 end
@@ -143,8 +126,8 @@ local feathersailassets =
 
 local function feathersail_fn()
     return common("sail", "swap_sail_feathers", "idle", "swap_sail", {
-        perish_time = FEATHER_SAIL_PERISH_TIME,
-        speed_mult = FEATHER_SAIL_SPEED_MULT,
+        perish_time = TUNING.TOTAL_DAY_TIME * 2,
+        speed_mult = 1.4,
         move_sound = "dontstarve_DLC002/common/sail_LP_feather"
     })
 end
@@ -156,9 +139,9 @@ local ironwind_assets =
 
 local function ironwind_fn()
     return common("propeller", "swap_propeller", "idle", "swap_propeller", {
-        perish_time = IRON_WIND_PERISH_TIME,
+        perish_time = TUNING.TOTAL_DAY_TIME * 4,
         fueltype = FUELTYPE.REPARODEBARCO,
-        speed_mult = IRON_WIND_SPEED_MULT,
+        speed_mult = 1.5,
         move_sound = "dontstarve_DLC002/common/boatpropellor_lp"
     })
 end
@@ -181,8 +164,8 @@ local malbatrossail_assets =
 
 local function malbatrossail_fn()
     return common("sail", "swap_sail_malbatro", "idle", "swap_sail", {
-        perish_time = CLOTH_SAIL_PERISH_TIME,
-        speed_mult = CLOTH_SAIL_SPEED_MULT,
+        perish_time = TUNING.TOTAL_DAY_TIME * 3,
+        speed_mult = 1.3,
         move_sound = "dontstarve_DLC002/common/sail_LP_sealegs"
     })
 end
