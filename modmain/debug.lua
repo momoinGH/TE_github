@@ -1,6 +1,8 @@
 local Utils = require("tropical_utils/utils")
 
 local is_print_click_actions = false
+
+-- 打印左键和右键的Action，本地执行
 GLOBAL.c_printclickactions = function(is_print)
     is_print_click_actions = is_print
 end
@@ -36,3 +38,21 @@ AddComponentPostInit("playeractionpicker", function(self)
         return retTab
     end)
 end)
+
+
+--- 判断鼠标对象有没有指定标签
+GLOBAL.c_hastag = function(tag)
+    print(c_select():HasTag(tag))
+end
+
+--- 打印鼠标对象的当前状态
+GLOBAL.c_ptstate = function()
+    local bu = ThePlayer:GetBufferedAction()
+    print(ThePlayer.sg.currentstate.name)
+    print(bu, bu and bu.action and bu.action.id)
+end
+
+-- 测试音频
+GLOBAL.c_testsound = function(sound)
+    ThePlayer.SoundEmitter:PlaySound(sound)
+end
