@@ -15,7 +15,8 @@ local function PickActions(retTab, self, position, target, right)
             if boat.replica.container
                 and boat.replica.container:GetItemInSlot(2)
                 and boat.replica.container:GetItemInSlot(2):HasTag("boatcannon") -- 船炮
-                and not self.inst.replica.inventory:IsHeavyLifting() then
+                and not self.inst.replica.inventory:IsHeavyLifting()
+                and not self.inst.replica.inventory:GetActiveItem() then
                 -- 发射船炮
                 table.insert(actions, ACTIONS.BOATCANNON)
             end

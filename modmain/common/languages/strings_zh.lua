@@ -125,7 +125,6 @@ STRINGS.ACTIONS.STOREOPEN                               = "交易"
 STRINGS.ACTIONS.GRIND                                   = "研磨"
 STRINGS.ACTIONS.SNACKRIFICE                             = "献贡"
 STRINGS.ACTIONS.COLLECTSAP                              = "采集树液"
-STRINGS.ACTIONS.BOATMOUNT                               = "登船"
 STRINGS.ACTIONS.TAKE_SHELF                              = {
     GENERIC = "拿取",
     TAKE = "拿取{item}",
@@ -1329,15 +1328,12 @@ STRINGS.NAMES.BOATREPAIRKIT = "修船套件"
 STRINGS.RECIPE_DESC.BOATREPAIRKIT = "使你的小船重回年轻。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOATREPAIRKIT = "这可以给我的船增加些浮力。"
 
-
-
 STRINGS.NAMES.LOGRAFT = "木筏"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOGRAFT = "这看起来...有点像船..."
 STRINGS.RECIPE_DESC.LOGRAFT = "行船时请自担风险。"
 STRINGS.NAMES.PORTO_LOGRAFT = "木筏套装"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "木头做的筏子……？"
 STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "这看起来……从某种程度上来说像条船……"
-
 
 
 STRINGS.NAMES.RAFT = "竹筏"

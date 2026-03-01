@@ -286,6 +286,9 @@ end
 function c_spawn(prefab, count, dontselect)
 end
 
+--清空世界里的东西
+function c_emptyworld() end
+
 ---解锁全科技
 function c_freecrafting(player)
 end
@@ -1101,28 +1104,43 @@ TheSim:GetScreenPos(x, y, z)
 AddRecipe = function(arg1, ...) end
 
 function MakeObstaclePhysics(inst, rad, height) end
+
 function MakeSmallBurnable(inst, time, offset, structure, sym) end
+
 function MakeMediumBurnable(inst, time, offset, structure, sym) end
+
 function MakeLargeBurnable(inst, time, offset, structure, sym) end
+
 function MakeSmallPropagator(inst) end
+
 function MakeMediumPropagator(inst) end
+
 function MakeLargePropagator(inst) end
+
 function MakeSmallBurnableCharacter(inst, sym, offset) end
+
 function MakeMediumBurnableCharacter(inst, sym, offset) end
+
 function MakeLargeBurnableCharacter(inst, sym, offset, scale) end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+MATERIALS =
+{
+    WOOD = "wood",
+    STONE = "stone",
+    HAY = "hay",
+    THULECITE = "thulecite",
+    GEM = "gem",
+    GEARS = "gears",
+    MOONROCK = "moonrock",
+    ICE = "ice",
+    CARROT = "carrot",
+    SCULPTURE = "sculpture",
+    FOSSIL = "fossil",
+    MOON_ALTAR = "moon_altar",
+    KELP = "kelp",
+    SHELL = "shell",
+    NIGHTMARE = "nightmare",
+    DREADSTONE = "dreadstone",
+    SALT = "salt",
+    VITAE = "vitae",
+}

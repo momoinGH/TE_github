@@ -5,11 +5,32 @@
 ]]
 
 ----------------------------------------------------------------------------------------------------
+GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
 
 require("tools/worldutil")
 require("tools/standardcomponents")
 require("knownmodcheck")        -- 检测不兼容模组并报错崩溃
 require("components/animstate") -- AnimState 增强
+
+
+local ALL_PREFAB_FILES = {}
+local ALL_ASSETS = {}
+local language = string.lower(GetModConfigData("language"))
+WIKI_DATA = {}
+
+local TRO_COMPONENT_ACTIONS = {
+    SCENE = {},
+    USEITEM = {},
+    POINT = {},
+    EQUIPPED = {},
+    INVENTORY = {}
+}
+
+-- 封装的AddComponentAction，同样的type和组件也不会被覆盖
+function TRO_AddComponentAction(actiontype, component, fn)
+    TRO_COMPONENT_ACTIONS[actiontype][component] = TRO_COMPONENT_ACTIONS[actiontype][component] or {}
+    table.insert(TRO_COMPONENT_ACTIONS[actiontype][component], fn)
+end
 
 --- 科雷modmain的定义抄过来，不过文件不存在时不提醒
 local function SafeModImport(modulename)
@@ -28,11 +49,6 @@ local function SafeModImport(modulename)
     end
 end
 
-local ALL_PREFAB_FILES = {}
-local ALL_ASSETS = {}
-local language = string.lower(GetModConfigData("language"))
-GLOBAL.WIKI_DATA = {}
-
 --- 导入对应模块的文件，不需要的文件可以不存在
 local function Modimport(dirc)
     SafeModImport("modmain/" .. dirc .. "/tuning")               --定义的变量
@@ -46,8 +62,9 @@ local function Modimport(dirc)
     SafeModImport("modmain/" .. dirc .. "/character")            --添加角色，角色相关变量定义
     SafeModImport("modmain/" .. dirc .. "/ui")                   --UI相关
     SafeModImport("modmain/" .. dirc .. "/prefabpost")           --组件、预制件的修改
-    SafeModImport("modmain/" .. dirc .. "/fx")                   --特效
+    SafeModImport("modmain/" .. dirc .. "/`fx")                   --特效
     SafeModImport("modmain/" .. dirc .. "/actions")              --action相关
+    SafeModImport("modmain/" .. dirc .. "/componentactions")     --componentactions相关
     SafeModImport("modmain/" .. dirc .. "/sg")                   --Stategraph相关
     SafeModImport("modmain/" .. dirc .. "/recipes")              --配方相关
     SafeModImport("modmain/" .. dirc .. "/cooking")              --料理相关
@@ -112,19 +129,10 @@ if TUNING.tropical.quagmire then
     Modimport("quagmire")
 end
 
-PrefabFiles = ALL_PREFAB_FILES
-ALL_PREFAB_FILES = nil
-Assets = ALL_ASSETS
-ALL_ASSETS = nil
-
-local Constructor = require("tropical_utils/constructor")
-Constructor.SetEnv(env)
-Constructor.AddScrapbookWiki("tropical", WIKI_DATA)
-GLOBAL.WIKI_DATA = nil
 
 
 ----------------------------------------------------------------------------------------------------
-modimport "modmain/componentactions" --AddComponentAction比较特殊，如果mod的分开写就会前后覆盖
+modimport "modmain/componentactions" --TODO 拆到各个模块里
 modimport "scripts/prefabs/tropical_farm_plant_defs"
 modimport "modmain/common/interiorminimap"
 modimport "modmain/postinit"
@@ -136,3 +144,24 @@ modimport "modmain/common/sw_fertilizer_nutrient_defs" --肥料值定义
 modimport "modmain/common/AddIronLordHandlers"         --活性机甲处理
 modimport "modmain/common/AddIronLordPostinit"         --活性机甲构造
 modimport "scripts/ArtifactControls"                   --活性机甲控制
+modimport "modmain/debug"                              --注册一些c_指令，用于控制台调试
+
+----------------------------------------------------------------------------------------------------
+
+for actiontype, components in pairs(TRO_COMPONENT_ACTIONS) do
+    for component, fns in pairs(components) do
+        AddComponentAction(actiontype, component, function(...)
+            for _, fn in ipairs(fns) do fn(...) end
+        end)
+    end
+end
+
+PrefabFiles = ALL_PREFAB_FILES
+ALL_PREFAB_FILES = nil
+Assets = ALL_ASSETS
+ALL_ASSETS = nil
+
+local Constructor = require("tropical_utils/constructor")
+Constructor.SetEnv(env)
+Constructor.AddScrapbookWiki("tropical", WIKI_DATA)
+WIKI_DATA = nil

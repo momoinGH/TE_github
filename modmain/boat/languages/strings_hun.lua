@@ -1,3 +1,8 @@
+STRINGS.ACTIONS.BOATMOUNT = "Beszállás"
+
+
+
+
 STRINGS.NAMES.ARMOUREDBOAT = "Páncélozott Hajó"
 STRINGS.RECIPE_DESC.ARMOUREDBOAT = "Húzza ki ezt a szívós hajót."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOUREDBOAT = "Na az egy elég szívós hajó ."

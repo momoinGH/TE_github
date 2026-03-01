@@ -1,5 +1,8 @@
 local easing = require "easing"
 
+local RESISTANCE_MODIFIER_LIST_KEY = "groggyresistance"
+local IMMUNITY_MODIFIER_LIST_KEY = "groggyimmunity"
+
 local function DefaultKnockoutTest(inst)
     local self = inst.components.grogginess
     return self.grog_amount >= self.resistance
@@ -39,13 +42,16 @@ local function Check(inst, self)
     end
 end
 
---- 哈姆雷特雾气组件
+--- 雾气组件
+--- TODO 看能不能优化掉
 local Grogginess = Class(function(self, inst)
     self.inst = inst
 
     self.resistance = 1
     self.grog_amount = 0
-    self.wearofftime = nil
+    self.knockouttime = 0
+    self.knockoutduration = 0
+    self.wearofftime = 0
     self.wearoffduration = TUNING.GROGGINESS_WEAR_OFF_DURATION
     self.decayrate = TUNING.GROGGINESS_DECAY_RATE
 
@@ -98,22 +104,21 @@ function Grogginess:IsKnockedOut()
 end
 
 function Grogginess:IsGroggy()
-    return self.grog_amount > 0 and not self:IsKnockedOut()
+    return self.grog_amount > 0 and self.enablespeedmod and not self:IsKnockedOut()
 end
 
 function Grogginess:HasGrogginess()
-    return self.grog_amount > 0
+    return self.grog_amount > 0 and self.enablespeedmod
 end
 
 function Grogginess:GetDebugString()
-    local grog = 0
-    if self.grog_amount then
-        grog = self.grog_amount
-    end
-
-    return string.format("Groggy: %d/%d",
-        grog,
-        self.resistance)
+    return string.format("%s, KO time=%2.2f Groggy: %d/%d%s (%.2f)",
+        self:IsKnockedOut() and "KNOCKED OUT" or "AWAKE",
+        self.knockouttime,
+        self.grog_amount,
+        self:GetResistance(),
+        self.enablespeedmod and "" or " (disable speed mod)",
+        self.grog_amount)
 end
 
 function Grogginess:onequip(data)
@@ -145,8 +150,8 @@ function Grogginess:SetGroggyWeather(groggyweather)
     end
 end
 
-function Grogginess:AddGrogginess(grogginess)
-    if grogginess <= 0 then
+function Grogginess:SubtractGrogginess(grogginess)
+    if grogginess <= 0 or self._immunity_sources:CalculateModifierFromKey(IMMUNITY_MODIFIER_LIST_KEY) then
         return
     end
 
@@ -156,6 +161,12 @@ function Grogginess:AddGrogginess(grogginess)
     if not self.inst:HasTag("groggy") then
         self.inst:AddTag("groggy")
         self.inst:StartUpdatingComponent(self)
+    end
+end
+
+function Grogginess:ResetGrogginess()
+    if self.grog_amount > 0 then
+        self:SubtractGrogginess(self.grog_amount)
     end
 end
 

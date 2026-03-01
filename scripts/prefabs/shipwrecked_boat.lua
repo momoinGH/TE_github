@@ -85,20 +85,23 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-local function onhammered(inst)
-    -- if inst:HasTag("fire") and inst.components.burnable then
-    --     inst.components.burnable:Extinguish()
-    -- end
-    SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    SpawnPrefab("boards").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    SpawnPrefab("vine").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    SpawnPrefab("vine").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
+local function OnDeath(inst)
+    if inst.components.container then
+        inst.components.container:DropEverything()
+    end
+    if inst.debris then --生成残骸
+        SpawnAt(inst.debris, inst)
+    end
+
+    ReplacePrefab(inst, "collapse_small")
     inst:Remove()
 end
 
-local function OnDeath(inst, data)
-    -- TODO
+local function onhammered(inst, worker)
+    if worker and worker.SoundEmitter then
+        worker.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
+    end
+    OnDeath(inst)
 end
 
 ---fn
@@ -152,6 +155,7 @@ local function common_fn(minimap, bank, build, loots, data)
     inst.components.workable:SetOnFinishCallback(onhammered)
 
     inst.sounds = sounds
+    inst.debris = data.debris
 
     inst:ListenForEvent("death", OnDeath)
 
@@ -214,7 +218,7 @@ local armouredboat_prefabs = {
     "boards", "rope", "seashell"
 }
 MakeBoat("armouredboat", "armouredboat.png", "rowboat", "rowboat_armored_build", armouredboat_loots,
-    { health = 150, dismantlePrefab = "porto_armouredboat", container = "armouredboat" }, armouredboat_prefabs)
+    { health = 150, container = "armouredboat", debris = "flotsam_armoured_build" }, armouredboat_prefabs)
 
 
 local corkboat_loots = {
@@ -224,7 +228,7 @@ local corkboat_prefabs = {
     "cork"
 }
 MakeBoat("corkboat", "coracle_boat.png", "rowboat", "coracle_boat_build", corkboat_loots,
-    { health = 80, dismantlePrefab = "corkboatitem", container = "corkboat" }, corkboat_prefabs)
+    { health = 80, dismantlePrefab = "corkboatitem", container = "corkboat", debris = "flotsam_corkboat_build" }, corkboat_prefabs)
 
 
 local cargoboat_loots = {
@@ -235,7 +239,7 @@ local cargoboat_prefabs = {
 }
 
 MakeBoat("cargoboat", "cargo.png", "rowboat", "rowboat_cargo_build", cargoboat_loots,
-    { health = 300, dismantlePrefab = "porto_cargoboat", container = "cargoboat" }, cargoboat_prefabs)
+    { health = 300, container = "cargoboat", debris = "flotsam_cargo_build" }, cargoboat_prefabs)
 
 
 local encrustedboat_loots = {
@@ -246,7 +250,7 @@ local encrustedboat_prefabs = {
 }
 
 MakeBoat("encrustedboat", "encrustedboat.png", "rowboat", "rowboat_encrusted_build", encrustedboat_loots,
-    { health = 800, dismantlePrefab = "porto_encrustedboat", container = "encrustedboat" }, encrustedboat_prefabs)
+    { health = 800, container = "encrustedboat", debris = "flotsam_armoured_build" }, encrustedboat_prefabs)
 
 local rowboat_loots = {
     "boards", "vine", "vine"
@@ -256,7 +260,7 @@ local rowboat_prefabs = {
 }
 
 MakeBoat("rowboat", "rowboat.png", "rowboat", "rowboat_build", rowboat_loots,
-    { health = 250, dismantlePrefab = "porto_rowboat", container = "rowboat" }, rowboat_prefabs)
+    { health = 250, container = "rowboat", debris = "flotsam_rowboat_build" }, rowboat_prefabs)
 
 local surfboard_loots = {
     "seashell"
@@ -266,7 +270,7 @@ local surfboard_prefabs = {
 }
 
 MakeBoat("surfboard", "surfboard.png", "raft", "raft_surfboard_build", surfboard_loots,
-    { health = 100, dismantlePrefab = "porto_surfboard" }, surfboard_prefabs, function(inst)
+    { health = 100, dismantlePrefab = "porto_surfboard", debris = "flotsam_surfboard_build" }, surfboard_prefabs, function(inst)
         inst:AddTag("surf") --冲浪板
     end)
 
@@ -279,7 +283,7 @@ local woodlegsboat_prefabs = {
 }
 
 MakeBoat("woodlegsboat", "woodlegsboat.png", "rowboat", "pirate_boat_build", woodlegsboat_loots,
-    { health = 500, dismantlePrefab = "porto_woodlegsboat", container = "woodlegsboat" }, woodlegsboat_prefabs)
+    { health = 500, dismantlePrefab = "porto_woodlegsboat", container = "woodlegsboat", debris = "flotsam_armoured_build" }, woodlegsboat_prefabs)
 
 
 local shadowwaxwellboat_loots = {
@@ -302,7 +306,7 @@ local raft_old_prefabs = {
     "vine", "bamboo"
 }
 
-MakeBoat("raft_old", "raft.png", "raft", "raft_build", raft_old_loots, { health = 150 }, raft_old_prefabs)
+MakeBoat("raft_old", "raft.png", "raft", "raft_build", raft_old_loots, { health = 150, debris = "flotsam_bamboo_build" }, raft_old_prefabs)
 
 local lograft_old_loots = {
     "log", "log", "log", "cutgrass", "cutgrass"
@@ -312,7 +316,7 @@ local lograft_old_prefabs = {
     "log", "cutgrass"
 }
 
-MakeBoat("lograft_old", "lograft.png", "raft", "raft_log_build", lograft_old_loots, { health = 150 }, lograft_old_prefabs)
+MakeBoat("lograft_old", "lograft.png", "raft", "raft_log_build", lograft_old_loots, { health = 150, debris = "flotsam_bamboo_build" }, lograft_old_prefabs)
 
 local woodlegsboatamigo_loots = {
     "log"
@@ -323,7 +327,7 @@ local woodlegsboatamigo_prefabs = {
 }
 
 MakeBoat("woodlegsboatamigo", "woodlegsboat.png", "rowboat", "pirate_boat_build", woodlegsboatamigo_loots,
-    { health = 150, container = "woodlegsboatamigo" }, woodlegsboatamigo_prefabs, function(inst)
+    { health = 150, container = "woodlegsboatamigo", debris = "flotsam_armoured_build" }, woodlegsboatamigo_prefabs, function(inst)
         if not TheWorld.ismastersim then return end
         inst.components.health:SetInvincible(true)
     end)

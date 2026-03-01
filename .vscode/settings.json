@@ -8,5 +8,8 @@
         "redundant-return",
         "unused-local",
         "missing-parameter",
+    ],
+    "Lua.diagnostics.globals": [
+        "TRO_AddComponentAction"
     ]
 }

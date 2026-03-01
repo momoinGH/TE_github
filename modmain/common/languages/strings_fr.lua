@@ -1306,7 +1306,6 @@ STRINGS.ACTIONS.DESACTIVATESAIL = "Eteindre"
 STRINGS.ACTIONS.LANTERNON = "Allumer"
 
 STRINGS.ACTIONS.PEER = "Scruter"
-STRINGS.ACTIONS.BOATMOUNT = "Monter sur le bateau"
 
 ----------------------------- RAWLING -----------------------------
 STRINGS.NAMES.RAWLING = "Basket-boule"

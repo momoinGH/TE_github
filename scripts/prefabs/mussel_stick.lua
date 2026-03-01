@@ -7,10 +7,6 @@ local function onfinished(inst)
 	inst:Remove()
 end
 
-
-local BOAT_REPAIR_KIT_HEALING = 100
-local BOAT_REPAIR_KIT_USES = 3
-
 local function fn(Sim)
 	local inst = CreateEntity()
 	inst.entity:AddTransform()

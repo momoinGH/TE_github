@@ -40,7 +40,7 @@ AddAction("SEA2LAND", "填海造陆", function(act)
 end)
 
 ACTIONS.SEA2LAND.tile_placer = "gridplacer"
-AddComponentAction("POINT", "sea2land", function(inst, doer, pos, actions, right)
+TRO_AddComponentAction("POINT", "sea2land", function(inst, doer, pos, actions, right)
     if right then
         table.insert(actions, ACTIONS.SEA2LAND)
     end

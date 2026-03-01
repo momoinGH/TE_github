@@ -1307,7 +1307,6 @@ STRINGS.ACTIONS.STICK = "Разместить палку"
 STRINGS.TABS.NAUTICALTAB = "Морское"
 STRINGS.ACTIONS.DESACTIVATESAIL = "Выключить"
 STRINGS.ACTIONS.LANTERNON = "Включить"
-STRINGS.ACTIONS.BOATMOUNT = "Сесть на"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Роулинг"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "Это мой приятель!"

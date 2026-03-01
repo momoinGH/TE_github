@@ -1,3 +1,10 @@
+STRINGS.ACTIONS.BOATMOUNT = "Subir no barco"
+
+
+
+
+
+
 STRINGS.NAMES.ARMOUREDBOAT = "Barco reforçado"
 STRINGS.RECIPE_DESC.ARMOUREDBOAT = "Reforço direto do mar!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOUREDBOAT = "Esse é um barco durável."

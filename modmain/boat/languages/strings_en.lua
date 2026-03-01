@@ -1,3 +1,16 @@
+STRINGS.ACTIONS.BOATMOUNT = "Boat Mount"
+
+
+
+
+
+
+
+
+
+
+
+
 STRINGS.NAMES.ARMOUREDBOAT                                      = "Armored Boat"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOUREDBOAT                = "That is one durable boat."
 STRINGS.RECIPE_DESC.ARMOUREDBOAT                                = "Shell out for this hearty vessel."

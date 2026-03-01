@@ -1,3 +1,9 @@
+STRINGS.ACTIONS.BOATMOUNT = "Сесть на"
+
+
+
+
+
 STRINGS.NAMES.ARMOUREDBOAT                       = "Бронированная лодка"
 STRINGS.RECIPE_DESC.ARMOUREDBOAT                 = "Рассекает некоторые волны пополам."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOUREDBOAT = "Вот это прочная лодка, тут не поспоришь."

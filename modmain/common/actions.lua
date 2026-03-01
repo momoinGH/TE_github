@@ -707,13 +707,6 @@ Constructor.AddAction({ priority = 3, rmb = true, distance = 1, mount_valid = fa
     end
 )
 
--- 海难小船登船
-Constructor.AddAction({ priority = 10, distance = 4, mount_valid = false, encumbered_valid = true },
-    "BOATMOUNT",
-    STRINGS.ACTIONS.BOATMOUNT,
-    function(act) return true end --不需要state
-)
-
 
 -- 收回
 Constructor.AddAction({ priority = 11, rmb = true, distance = 4, mount_valid = false },
@@ -784,16 +777,7 @@ Constructor.AddAction({ priority = 11, distance = 25 },
 )
 
 ----------------------------------------------------------------------------------------------------
--- 跳船
 
-Constructor.AddAction({ priority = 10, rmb = true, distance = 6, mount_valid = false, encumbered_valid = true },
-    "BOATMOUNT",
-    STRINGS.ACTIONS.BOATMOUNT,
-    function(act)
-        act.doer.components.pro_driver:StartHopBoat(act.target)
-        return true
-    end
-)
 
 -- 上岸
 Constructor.AddAction({ priority = 9, distance = 8, mount_valid = false, encumbered_valid = true },

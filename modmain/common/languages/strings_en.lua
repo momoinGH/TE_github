@@ -8494,7 +8494,6 @@ STRINGS.ACTIONS.MEAL              = "Meal"
 STRINGS.ACTIONS.INSTALL           = "Install"
 STRINGS.ACTIONS.SNACKRIFICE       = "Snackrifice"
 STRINGS.ACTIONS.BOATCANNON        = "Shoot"
-STRINGS.ACTIONS.BOATMOUNT         = "Boat Mount"
 STRINGS.ACTIONS.BOATDISMOUNT      = "Boat Dismount"
 
 

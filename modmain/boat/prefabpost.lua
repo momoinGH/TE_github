@@ -36,3 +36,5 @@ AddPlayerPostInit(function(inst)
 
     inst:AddComponent("pro_driver")
 end)
+
+----------------------------------------------------------------------------------------------------

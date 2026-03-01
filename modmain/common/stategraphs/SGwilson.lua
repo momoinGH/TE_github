@@ -28,18 +28,7 @@ AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.SHEAR, function(inst)
     end
 end))
 
-AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BOATMOUNT, function(inst, act)
-    local x, y, z = act.target.Transform:GetWorldPosition()
-    inst.components.embarker:SetDisembarkPos(x, z)
 
-    if (inst.components.health == nil or not inst.components.health:IsDead()) and (inst.sg:HasStateTag("moving") or inst.sg:HasStateTag("idle")) then
-        if not inst.sg:HasStateTag("jumping") then
-            return "hop_pre"
-        end
-    elseif inst.components.embarker then
-        inst.components.embarker:Cancel()
-    end
-end))
 
 AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(ACTIONS.BOATDISMOUNT, function(inst, act)
     local x, y, z = act:GetActionPoint():Get()
@@ -918,15 +907,6 @@ AddStategraphPostInit("wilson", function(sg)
     Utils.FnDecorator(sg.actionhandlers[ACTIONS.JUMPIN], "deststate", function(inst, act)
         return { "jumpin_interior" }, act.target and (act.target:HasTag("interior_door") or act.target.prefab == "lavaarena_portal")
     end)
-
-    ----------------------------------------------------------------------------------------------------
-    --跳船
-    Utils.FnDecorator(sg.states["hop_pre"], "onenter", nil, function(retTab, inst)
-        local act = inst:GetBufferedAction()
-        if act and act.action == ACTIONS.BOATMOUNT then
-            inst:PerformBufferedAction() --直接执行
-        end
-    end)
 end)
 
 local ActionHandler = GLOBAL.ActionHandler
@@ -1079,4 +1059,3 @@ AddStategraphPostInit("wilson", function(sg) -- 碎裂喙横扫sg hooker
 end)
 
 ----------------------------------------------------------------------------------------------------
-

@@ -3,30 +3,39 @@ local assets =
     Asset("ANIM", "anim/boat_repair_kit.zip"),
 }
 
-local function onfinished(inst)
-    inst:Remove()
+local function TargetCheck(inst, doer, target)
+    return target:HasTag("shipwrecked_boat")
 end
 
-
-local BOAT_REPAIR_KIT_HEALING = 100
-local BOAT_REPAIR_KIT_USES = 3
+local function OnRepair(inst, doer, target)
+    if target.components.health and target.components.health:IsHurt() then
+        target.components.health:DoDelta(100)
+        inst.components.finiteuses:Use(1)
+        doer:PushEvent("repair") --可以播放一个音效
+        return true
+    end
+    return false
+end
 
 local function fn(Sim)
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("boat_repair_kit")
     inst.AnimState:SetBuild("boat_repair_kit")
     inst.AnimState:PlayAnimation("idle")
 
+    MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
+
     inst:AddTag("boatrepairkit")
     inst:AddTag("allow_action_on_impassable")
     inst:AddTag("boat_patch")
+
+    inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheck, "dolongaction", "REPAIR", OnRepair, { priority = 11 })
 
     inst.entity:SetPristine()
 
@@ -35,19 +44,11 @@ local function fn(Sim)
     end
 
     inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(BOAT_REPAIR_KIT_USES)
-    inst.components.finiteuses:SetUses(BOAT_REPAIR_KIT_USES)
-    inst.components.finiteuses:SetOnFinished(onfinished)
-
-    inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.HANDS
+    inst.components.finiteuses:SetMaxUses(3)
+    inst.components.finiteuses:SetUses(3)
+    inst.components.finiteuses:SetOnFinished(inst.Remove)
 
     inst:AddComponent("inspectable")
-
-    inst:AddComponent("repairer")
-    inst.components.repairer.repairmaterial = MATERIALS.WOOD
-    inst.components.repairer.healthrepairvalue = TUNING.REPAIR_BOARDS_HEALTH * 3.5
-
     inst:AddComponent("inventoryitem")
 
     return inst
