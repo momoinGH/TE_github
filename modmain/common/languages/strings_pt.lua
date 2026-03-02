@@ -1103,18 +1103,6 @@ STRINGS.NAMES.PORTO_RAFT = "Jangada"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_RAFT = "Isto parece adequado."
 STRINGS.RECIPE_DESC.PORTO_RAFT = "Totalmente tipo de navegação."
 
-
-
-
-
-STRINGS.NAMES.PORTO_LOGRAFT = "Jagada de madeira"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "Jagada de madeira...?"
-STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "Este parece... tipo de barco..."
-
-
-
-
-
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.THATCHPACK = "Eu chamo-lhe um thatchel"
 STRINGS.NAMES.THATCHPACK = "Pacote de palma"
 STRINGS.RECIPE_DESC.THATCHPACK = "Carrega uma carga leve."

@@ -60,8 +60,6 @@ end
 local Boat = Class(function(self, inst)
     self.inst = inst
 
-    self.boatfx = nil --这是船体的复制体，真正的船被玩家装入物品栏后该船就会生成并挂在玩家身上跟随移动
-
     inst:AddTag("shipwrecked_boat")
 
     inst.consume_task = nil
@@ -74,11 +72,14 @@ end)
 
 -- 获取可见的小船，如果被装备了就获取复制体，否则获取真实的船
 function Boat:GetVisibleBoat()
-    return self.boatfx or self.inst
+    return self.inst
 end
 
 --重新计算移速倍率
 function Boat:UpdateSpeedMult()
+    local driver = self.inst.components.inventoryitem.owner
+    if not driver or not driver.components.locomotor then return end
+
     local c = self.inst.components.container
     if not c then return end
 
@@ -90,40 +91,12 @@ function Boat:UpdateSpeedMult()
         end
     end
 
-    self.inst.components.equippable.walkspeedmult = speed_mult
+    driver.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "swboat")
+    driver.components.locomotor:SetExternalSpeedMultiplier(self.inst, "swboat", speed_mult)
 end
-
--- local function SpawnFakeBoat(inst)
---     local b = SpawnPrefab(inst.prefab .. "_fake")
---     b.Transform:SetPosition(0, 0, 0)
---     if b.components.container_proxy then
---         b.components.container_proxy:SetMaster(inst)
---         b.components.container_proxy:SetCanBeOpened(true)
---     end
---     b.boat = inst
---     return b
--- end
 
 --- 玩家上船（或者说被装备的时候）
 function Boat:OnPlayerMounted(player)
-    -- self.boatfx = SpawnFakeBoat(self.inst)
-    -- self.inst:ListenForEvent("onremove", function()
-    --     self.boatfx = nil
-    -- end, self.boatfx)
-    -- player:AddChild(self.boatfx)
-
-    -- 刷新一下外观
-    -- local c = self.inst.components.container
-    -- if c then
-    --     for i = 1, math.min(2, c.numslots) do
-    --         local item = c.slots[i]
-    --         if item then
-    --             c:RemoveItemBySlot(i)
-    --             c:GiveItem(item, i)
-    --         end
-    --     end
-    -- end
-
     if self.inst.components.container then
         self.inst.components.container:Open(player)
 
@@ -135,15 +108,12 @@ function Boat:OnPlayerMounted(player)
             end
         end
     end
+
+    self:UpdateSpeedMult()
 end
 
 --- 玩家下船
 function Boat:OnPlayerDismounted(player)
-    if self.boatfx then
-        self.boatfx:Remove()
-        self.boatfx = nil
-    end
-
     if self.inst.components.container then
         self.inst.components.container:Close(player)
 
@@ -155,17 +125,9 @@ function Boat:OnPlayerDismounted(player)
             end
         end
     end
-end
 
-function Boat:OnDriverAttacked()
-    if not self.boatfx then
-        return
-    end
-
-    self.boatfx.AnimState:PlayAnimation("hit")
-    self.boatfx.AnimState:PushAnimation("run_loop", true)
-    if self.boatfx.SoundEmitter and self.inst.sounds then
-        self.boatfx.SoundEmitter:PlaySound(self.inst.sounds.hit)
+    if player.components.locomotor then
+        player.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "swboat")
     end
 end
 

@@ -31,7 +31,6 @@ modimport("postinit/components/combat")
 -- modimport("postinit/components/container")
 modimport("postinit/components/curseditem") --威尔伯不受诅咒饰品影响
 modimport("postinit/components/dynamicmusic")
-modimport("postinit/components/embarker")
 modimport("postinit/components/flotsamgenerator") --漂浮物刷新，TODO可能不生效
 modimport("postinit/components/groundpounder")    --这个组件拍地板的？
 ---modimport("postinit/components/hatchable")这是孵露比蛋的吗？***

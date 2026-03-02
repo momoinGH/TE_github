@@ -771,8 +771,6 @@ SortAfter("honeychest", "saltbox", "COOKING")
 SortAfter("honeychest", "beebox", "GARDENING")
 SortBefore("sprinkler", "beebox", "GARDENING")
 
-SortAfter("porto_lograft", "seafaring_prototyper", "SEAFARING")
-SortAfter("porto_raft", "porto_lograft", "SEAFARING")
 SortAfter("boatmetal_item", "boat_item", "SEAFARING")
 
 SortAfter("armor_weevole", "armor_windbreaker", "RAIN")

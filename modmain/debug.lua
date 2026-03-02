@@ -61,6 +61,11 @@ GLOBAL.c_testanim = function(anim, loop)
     ThePlayer.AnimState:PlayAnimation(anim, loop)
 end
 
+GLOBAL.c_gotopoint = function()
+    local pos = ConsoleWorldPosition()
+    ThePlayer.Transform:SetPosition(pos.x, pos.y, pos.z)
+end
+
 ----------------------------------------------------------------------------------------------------
 local is_show_prefab_details = false
 

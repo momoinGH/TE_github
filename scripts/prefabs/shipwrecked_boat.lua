@@ -47,10 +47,6 @@ local function OnDismantle(inst, doer)
     return true
 end
 
-local function common(data)
-    return inst
-end
-
 ----------------------------------------------------------------------------------------------------
 
 local function OnDeath(inst)
@@ -63,6 +59,12 @@ local function OnDeath(inst)
 
     ReplacePrefab(inst, "collapse_small")
     inst:Remove()
+end
+
+local function OnAttacked(inst, data)
+    inst.AnimState:PlayAnimation("hit")
+    inst.AnimState:PushAnimation("run_loop", true)
+    inst.SoundEmitter:PlaySound(inst.sounds.hit)
 end
 
 local function onhammered(inst, worker)
@@ -161,6 +163,7 @@ local function MakeBoat(name, data, common_post_fn, master_post_fn)
         inst.debris = data.debris
 
         inst:ListenForEvent("death", OnDeath)
+        inst:ListenForEvent("attacked", OnAttacked)
 
         if master_post_fn then
             master_post_fn(inst)
@@ -170,6 +173,7 @@ local function MakeBoat(name, data, common_post_fn, master_post_fn)
     end
 
     table.insert(BOATS, Prefab(name, fn, assets, data.prefabs))
+    table.insert(BOATS, MakePlacer(name .. "_placer", data.bank, data.build, "run_loop", false, false, false))
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -307,9 +311,9 @@ MakeBoat("surfboard", {
         "seashell"
     },
     health = 100,
-    dismantlePrefab = "porto_surfboard",
+    dismantlePrefab = "surfboard_item",
     debris = "flotsam_surfboard_build",
-    runspeed = 6,
+    runspeed = 6.5,
     prefabs = {
         "seashell"
     },

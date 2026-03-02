@@ -10,17 +10,9 @@ local function GetAttackedBefore(self, attacker, damage, weapon, stimuli, spdama
 
     -- 小船格挡这次伤害
     if damage and boat and boat.components.health then
-        local blocked = false
         if damage > 0 and not boat.components.health:IsInvincible() then
-            boat.components.health:DoDelta(-damage, "combat", attacker and attacker.prefab or "NIL")
-        else
-            blocked = true
+            boat.components.combat:GetAttacked(attacker, damage)
         end
-
-        if boat.components.shipwreckedboat then
-            boat.components.shipwreckedboat:OnDriverAttacked()
-        end
-
         return { false }, true
     end
 end

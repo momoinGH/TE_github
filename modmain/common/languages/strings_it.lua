@@ -963,18 +963,6 @@ STRINGS.NAMES.PORTO_RAFT = "Zattera"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_RAFT = "Questa zattera sembra adeguata."
 STRINGS.RECIPE_DESC.PORTO_RAFT = "Abbastanza affidabile per navigare."
 
-
-
-
-
-STRINGS.NAMES.PORTO_LOGRAFT = "Zattera di tronchi"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "Non sembra molto sicura."
-STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "Naviga a tuo rischio e pericolo."
-
-
-
-
-
 STRINGS.NAMES.PRIMEAPE = "Scimpanzé"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PRIMEAPE = "Questi esseri saranno la mia fine."
 

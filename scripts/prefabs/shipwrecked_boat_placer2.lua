@@ -21,9 +21,9 @@ local function ondeploybuoy(inst, pt, deployer)
         at.Physics:Teleport(pt.x, 0, pt.z)
         at.Physics:SetCollides(true)
 
-	    at.SoundEmitter:PlaySound("yotc_2020/gym/start/place")
+        at.SoundEmitter:PlaySound("yotc_2020/gym/start/place")
         at.AnimState:PlayAnimation("place")
-		at.AnimState:PushAnimation("idle", true)
+        at.AnimState:PushAnimation("idle", true)
         inst:ListenForEvent("animover", onplaced)
 
         inst:Remove()
@@ -79,10 +79,10 @@ local function ondeployfish_farm(inst, pt, deployer)
     if at ~= nil then
         at.Transform:SetPosition(pt.x, 0, pt.z)
 
-	    at.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/water_submerge_med")
+        at.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/water_submerge_med")
         at.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_medium")
         --at.AnimState:PlayAnimation("place")
-		at.AnimState:PushAnimation("idle", true)
+        at.AnimState:PushAnimation("idle", true)
         inst:ListenForEvent("animover", onplaced)
 
         inst:Remove()
@@ -139,7 +139,7 @@ local function ondeployballphinhouse(inst, pt, deployer)
         at.SoundEmitter:PlaySound("dontstarve_DLC002/common/ballphin_house_craft")
         at.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_medium")
         at.AnimState:PlayAnimation("place")
-		at.AnimState:PushAnimation("idle", true)
+        at.AnimState:PushAnimation("idle", true)
         inst:ListenForEvent("animover", onplaced)
 
         inst:Remove()
@@ -192,9 +192,9 @@ local function ondeployresearchlab5(inst, pt, deployer)
     if at ~= nil then
         at.Transform:SetPosition(pt.x, 0, pt.z)
 
-	    at.SoundEmitter:PlaySound("dontstarve/common/researchmachine_lvl2_place")
+        at.SoundEmitter:PlaySound("dontstarve/common/researchmachine_lvl2_place")
         at.AnimState:PlayAnimation("place")
-		at.AnimState:PushAnimation("idle", false)
+        at.AnimState:PushAnimation("idle", false)
         inst:ListenForEvent("animover", onplaced)
 
         inst:Remove()
@@ -247,10 +247,10 @@ local function ondeploytar_extractor(inst, pt, deployer)
     if at ~= nil then
         at.Transform:SetPosition(pt.x, 0, pt.z)
 
-	    at.SoundEmitter:PlaySound("dontstarve_DLC002/common/tar_extractor/craft")
-	    at.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_shark/splash_large")
+        at.SoundEmitter:PlaySound("dontstarve_DLC002/common/tar_extractor/craft")
+        at.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_shark/splash_large")
         at.AnimState:PlayAnimation("place")
-		at.AnimState:PushAnimation("idle", true)
+        at.AnimState:PushAnimation("idle", true)
         inst:ListenForEvent("animover", onplaced)
 
         inst:Remove()
@@ -328,9 +328,9 @@ local function ondeploysea_chiminea(inst, pt, deployer)
     if at ~= nil then
         at.Transform:SetPosition(pt.x, 0, pt.z)
 
-	    at.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
+        at.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
         at.AnimState:PlayAnimation("place")
-		at.AnimState:PushAnimation("idle_water", true)
+        at.AnimState:PushAnimation("idle_water", true)
         inst:ListenForEvent("animover", onplaced)
 
         inst:Remove()
@@ -383,9 +383,9 @@ local function ondeploywaterchest(inst, pt, deployer)
     if at ~= nil then
         at.Transform:SetPosition(pt.x, 0, pt.z)
 
-	    at.SoundEmitter:PlaySound("dontstarve/common/chest_craft")
+        at.SoundEmitter:PlaySound("dontstarve/common/chest_craft")
         at.AnimState:PlayAnimation("place")
-		at.AnimState:PushAnimation("closed", true)
+        at.AnimState:PushAnimation("closed", true)
         inst:ListenForEvent("animover", onplaced)
 
         inst:Remove()

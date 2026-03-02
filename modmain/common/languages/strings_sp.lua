@@ -950,18 +950,6 @@ STRINGS.NAMES.PORTO_RAFT = "Balsa"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_RAFT = "Esto parece adecuado."
 STRINGS.RECIPE_DESC.PORTO_RAFT = "Totalmente en buen estado para navegar."
 
-
-
-
-
-STRINGS.NAMES.PORTO_LOGRAFT = "Balsa de Tronco"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "balsa de tronco...?"
-STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "Esto parece... una especie de bote..."
-
-
-
-
-
 STRINGS.NAMES.PRIMEAPE = "Primate"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PRIMEAPE = "Esas cosas van a ser el final de mí."
 

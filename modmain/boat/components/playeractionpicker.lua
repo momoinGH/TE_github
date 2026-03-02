@@ -7,7 +7,7 @@ local function PickActions(retTab, self, position, target, right)
     local bufs = retTab[1]
 
     local actions = {}
-    local boat = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+    local boat = self.inst:TroGetSWBoat()
     if boat then
         if right then
             if boat.replica.container

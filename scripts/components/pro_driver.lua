@@ -2,11 +2,14 @@ local function ClearBoat(inst, data)
     inst.components.pro_driver:SetBoat(nil)
 end
 
+-- 加载的时候找找附近的船
 local function Init(inst, self)
-    local boat = inst:TroGetSWBoat()
-        or FindClosestEntity(inst, 1, nil, { "shipwrecked_boat" }, { "INLIMBO" })
-    if boat then
-        self:SetBoat(boat)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    if not self.boat and TheWorld.Map:IsOceanAtPoint(x, y, z, false) then
+        local boat = FindClosestEntity(inst, 0.5, nil, { "shipwrecked_boat" }, { "INLIMBO" })
+        if boat then
+            self:SetBoat(boat)
+        end
     end
 end
 
@@ -47,6 +50,9 @@ local function CheckFall(inst, self, boat)
 
         self.hoptask:Cancel()
         self.hoptask = nil
+        if inst.components.playercontroller then --延迟补偿下玩家跳到船上了但会一直往岸上跑，调用这个解决
+            inst.components.playercontroller:OnRemoteStopHopping()
+        end
     end
 end
 
@@ -76,14 +82,16 @@ function Driver:SetBoat(boat)
     local oldboat = self.boat
     if oldboat == boat then return end
 
-    if oldboat then
+    if oldboat and oldboat:IsValid() then
+        self.inst:RemoveChild(oldboat)
+        oldboat.Physics:Teleport(self.inst.Transform:GetWorldPosition()) --不能用Transform，延迟补偿下会坐标闪一下
         oldboat.components.shipwreckedboat:OnPlayerDismounted(self.inst)
     end
 
     self.boat = boat
     if boat then
+        boat.Physics:Teleport(0, -0.2, 0)
         self.inst:AddChild(boat)
-        boat.Transform:SetPosition(0, -0.2, 0)
         boat.components.shipwreckedboat:OnPlayerMounted(self.inst)
         self.inst:StartUpdatingComponent(self)
     else
@@ -97,6 +105,7 @@ function Driver:Check()
         and not self.inst:HasTag("playerghost")                                 --玩家没死
         and not (self.inst.sg and self.inst.sg:HasStateTag("jumping"))          --玩家不在跳跃
         and TheWorld.Map:IsOceanAtPoint(self.inst.Transform:GetWorldPosition()) --玩家在海上
+        or false
 end
 
 function Driver:OnUpdate(dt)

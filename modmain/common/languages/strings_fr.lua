@@ -971,17 +971,6 @@ STRINGS.NAMES.PORTO_RAFT = "Radeau"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_RAFT = "Ça a l'air correct."
 STRINGS.RECIPE_DESC.PORTO_RAFT = "Absolument pas fait pour naviguer."
 
-
-
-
-
-STRINGS.NAMES.PORTO_LOGRAFT = "Radeau de rondins"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "Ça ressemble à... un genre de bateau..."
-STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "Pour naviguer sans garantie."
-
-
-
-
 STRINGS.NAMES.PRIMEAPE = "Singe primitif"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PRIMEAPE = "Ces bestioles finiront par me tuer."
 

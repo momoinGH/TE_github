@@ -974,18 +974,6 @@ STRINGS.NAMES.PORTO_RAFT = "Бамбуковый плот"
 STRINGS.RECIPE_DESC.PORTO_RAFT = "В целом для плавания сгодится."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_RAFT = "Он выглядит... адекватно..."
 
-
-
-
-
-STRINGS.NAMES.PORTO_LOGRAFT = "Деревянный плот"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "Это выглядит... лодкоподобно..."
-STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "Использовать на свой страх и риск."
-
-
-
-
-
 STRINGS.NAMES.PRIMEAPE = "Подлый примат"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PRIMEAPE = "Эти ребята меня доведут."
 

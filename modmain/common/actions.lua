@@ -779,7 +779,7 @@ Constructor.AddAction({ priority = 11, distance = 25 },
 
 
 -- 上岸
-Constructor.AddAction({ priority = 9, distance = 8, mount_valid = false, encumbered_valid = true },
+Constructor.AddAction({ priority = 9, distance = 4, mount_valid = false, encumbered_valid = true },
     "BOATDISMOUNT",
     STRINGS.ACTIONS.BOATDISMOUNT,
     function(act) return true end

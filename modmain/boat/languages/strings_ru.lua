@@ -20,33 +20,13 @@ STRINGS.NAMES.CARGOBOAT                          = "Грузовая лодка"
 STRINGS.RECIPE_DESC.CARGOBOAT                    = "Сберегательный сейф в море!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CARGOBOAT    = "Тут хватит места для всего!"
 
-STRINGS.NAMES.PORTO_ARMOUREDBOAT                       = "Бронированная лодка"
-STRINGS.RECIPE_DESC.PORTO_ARMOUREDBOAT                 = "Рассекает некоторые волны пополам."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ARMOUREDBOAT = "Вот это прочная лодка, тут не поспоришь."
-
-STRINGS.NAMES.PORTO_CARGOBOAT                          = "Грузовая лодка"
-STRINGS.RECIPE_DESC.PORTO_CARGOBOAT                    = "Сберегательный сейф в море!"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_CARGOBOAT    = "Тут хватит места для всего!"
-
 STRINGS.NAMES.ENCRUSTEDBOAT                            = "Инкрустированная лодка"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ENCRUSTEDBOAT      = "Довольно крепкая."
 STRINGS.RECIPE_DESC.ENCRUSTEDBOAT                      = "Высокоустойчивая."
 
-STRINGS.NAMES.PORTO_ENCRUSTEDBOAT                       = "Инкрустированная лодка"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ENCRUSTEDBOAT = "Довольно крепкая."
-STRINGS.RECIPE_DESC.PORTO_ENCRUSTEDBOAT                 = "Высокоустойчивая."
-
 STRINGS.NAMES.ROWBOAT                                     = "Гребная лодка"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROWBOAT               = "Она работает на ручной тяге."
 STRINGS.RECIPE_DESC.ROWBOAT                               = "Греби, греби, греби на своей лодке!"
-
-STRINGS.NAMES.PORTO_ROWBOAT                               = "Гребная лодка"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ROWBOAT         = "Она работает на ручной тяге."
-STRINGS.RECIPE_DESC.PORTO_ROWBOAT                         = "Греби, греби, греби на своей лодке!"
-
-STRINGS.NAMES.PORTO_SURFBOARD                             = "Доска для сёрфинга"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_SURFBOARD       = "Если бы я был на доске для серфинга, я бы смог тебя поймать.."
-STRINGS.RECIPE_DESC.PORTO_SURFBOARD                       = "Кавабанга, чуваки!"
 
 STRINGS.NAMES.SURFBOARD                                   = "Доска для сёрфинга"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SURFBOARD             = "Если бы я был на доске для серфинга, я бы смог тебя поймать.."
@@ -74,14 +54,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAFT_OLD                = "Это выгля
 STRINGS.NAMES.LOGRAFT_OLD                                   = "Плот из бревен"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOGRAFT_OLD             = "Плот из бревен...?"
 STRINGS.RECIPE_DESC.LOGRAFT_OLD                             = "Это выглядит... на подобие лодки.."
-
-STRINGS.NAMES.PORTO_RAFT_OLD                                = "Плот"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_RAFT_OLD          = "Это выглядит адекватноe."
-STRINGS.RECIPE_DESC.PORTO_RAFT_OLD                          = "Вполне пригоден для плавания."
-
-STRINGS.NAMES.PORTO_LOGRAFT_OLD                             = "Плот из бревен"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT_OLD       = "Бревенчатый плот...?"
-STRINGS.RECIPE_DESC.PORTO_LOGRAFT_OLD                       = "Это выглядит... на подобие лодки..."
 
 STRINGS.NAMES.FLOTSAM_ARMOURED_BUILD                        = "Обломки лодок"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_ARMOURED_BUILD  = "Обломки лодок"

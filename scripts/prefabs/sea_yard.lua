@@ -187,7 +187,7 @@ local function fn()
     MakeSnowCovered(inst)
 
     inst:AddComponent("simpleperiodtask")
-    inst.components.simpleperiodtask:DoPeriodicTask("repair", 0.5, Repair)
+    inst.components.simpleperiodtask:DoPeriodicTask("repair", 0.5, Repair) --加载范围外不生效
 
     inst:ListenForEvent("onbuilt", onbuilt)
     inst:ListenForEvent("percentusedchange", OnPercentUsedChange)

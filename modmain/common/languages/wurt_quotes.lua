@@ -243,7 +243,6 @@ GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.BISQUE                         = "Glargh
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.CALIFORNIAROLL                 = "Wait.. there fish in here!"
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.JELLYOPOP                      = "Glurgh, this not candy!"
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_RAFT                     = "Has holes to let water in."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_LOGRAFT                  = "Is good for swimming, florp."
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.PRIMEAPE                       = "Hee-hee! Monkies are funny!"
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.MONKEYBALL                     = "Wanna play with it, florp!"
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.NEEDLESPEAR                    = "Glargh! Too sharp!"
