@@ -1,14 +1,18 @@
 local Utils = require("tropical_utils/utils")
--- require "tools/upvaluehelper" ----用来hook的一些函数
--------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------
--- 太长的单独写一个文件了---------------------------------------------------【注释的已搬到postinit】-------
---modimport "modmain/common/natureskin_variants"-------------------------------------------------------
---modimport "modmain/common/components/world_map"------------------------------------------------------
---modimport "modmain/common/entityscript"
 
---modimport "modmain/common/components/locomotor"
---modimport "modmain/common/components/birdspawner"
+modimport "modmain/common/entityscript"
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------
+
+modimport "modmain/common/components/locomotor"
+modimport "modmain/common/components/birdspawner"
 --modimport "modmain/common/components/map"
 modimport "modmain/common/components/playervision"
 modimport "modmain/common/components/temperature"
@@ -25,13 +29,20 @@ modimport "modmain/common/components/mapstyle"
 modimport "modmain/common/components/ambientsound"
 modimport "modmain/common/components/dynamicmusic"
 ]]
+modimport "modmain/common/components/map"        --theworld.map相关
+modimport "modmain/common/components/deployable" -- 让某些地形不能部署、建造、种东西
+modimport "modmain/common/components/spooked"         --黄蘑菇孢子
+
+----------------------------------------------------------------------------------------------------
+
+
 modimport "modmain/common/prefabs/oceanfishdef"
 modimport "modmain/common/prefabs/allplayers"
 --modimport "modmain/common/prefabs/player_classified"
 modimport "modmain/common/prefabs/world"
-
 --modimport "modmain/common/poisonable"
-
+modimport("modmain/common/prefabs/guard_corp")         --守卫保护作物、高草转化、草大风摇晃？
+modimport("modmain/common/prefabs/player_vision_post") --四眼镜、蝙蝠帽所用
 ----------------------------------------------------------------------------------------------------
 
 
@@ -48,7 +59,7 @@ local function ArmorCanResistBefore(self, attacker, weapon)
 end
 --不能抵抗标签，如果指定了标签，则对于含有该标签的攻击者伤害不抵抗，与tags不同，tags只能抵抗记录已有标签的攻击
 AddComponentPostInit("armor", function(self)
-    self.immunetags = nil 
+    self.immunetags = nil
 
     function self:SetImmuneTags(tags)
         self.immunetags = tags
@@ -94,22 +105,6 @@ local function DeployableCanDeployBefore(self, pt)
     local tile = TheWorld.Map:GetTileAtPoint(pt:Get())
     return { false }, IsSpecialTile(tile)
 end
-
-local function ForceDeploy(self, pt, deployer)
-    if self.ondeploy ~= nil then
-        self.ondeploy(self.inst, pt, deployer)
-    end
-    -- self.inst is removed during ondeploy
-    deployer:PushEvent("deployitem", { prefab = self.inst.prefab })
-    return true
-end
-
-AddComponentPostInit("deployable", function(self)
-    self.ForceDeploy = ForceDeploy
-
-    Utils.FnDecorator(self, "CanDeploy", DeployableCanDeployBefore)
-end)
-
 
 ----------------------------------------------------------------------------------------------------
 -- 不会落水
@@ -776,7 +771,7 @@ AddPrefabPostInit("warningshadow", function(inst)
 end)]]
 
 ----------------------------------------------------------------------------------------------------
-    --[[
+--[[
 -- scripts/widgets/image
 AddClassPostConstruct("widgets/image", function(self)
     Utils.FnDecorator(self, "SetTexture", function(atlas, tex, default_tex)
@@ -955,7 +950,7 @@ end)
 
 AddPlayerPostInit(function(inst)
     local function fn(ent)
-        if ent == GLOBAL.TheWorld then 
+        if ent == GLOBAL.TheWorld then
 	        local tuning = TUNING.GOGGLES_HEAT.GROUND
 			 ent.Map:SetMultColour(unpack(tuning.MULT_COLOUR))
 			 ent.Map:SetAddColour(unpack(tuning.ADD_COLOUR))

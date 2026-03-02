@@ -1,11 +1,10 @@
-
 local Utils = require("tropical_utils/utils")
 
 Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
     local val = next(retTab)
     if val > TUNING.WILDFIRE_THRESHOLD then
-        -- 防野火-- 是防止室内野火？
-        if #TheSim:FindEntities(x, 0, z, 20, { "interior_center" }) > 0 then
+        -- 防止室内野火
+        if TheWorld.Map:OutsideWorldAtPoint(x, z) then
             return { TUNING.WILDFIRE_THRESHOLD }
         end
 
@@ -23,7 +22,7 @@ end)
 local function ShelteredOnUpdateBefore(self)
     local x, y, z = self.inst.Transform:GetWorldPosition()
     if not self.mounted
-        and #TheSim:FindEntities(x, y, z, 40, { "interior_center" }) > 0
+        and TheWorld.Map:OutsideWorldAtPoint(x, z)
     then
         self:SetSheltered(true)
         return nil, true
@@ -45,7 +44,7 @@ AddSimPostInit(function()
                     self.old_updatefuncs[inst.prefab] = data.updateFunc
                 end
                 local x, y, z = inst.Transform:GetWorldPosition()
-                if #TheSim:FindEntities(x, y, z, 40, { "interior_center" }) > 0 then
+                if TheWorld.Map:OutsideWorldAtPoint(x, z) then
                     data.updateFunc = function() end -- empty function
                 else
                     data.updateFunc = self.old_updatefuncs[inst.prefab] ~= nil and self.old_updatefuncs[inst.prefab] or

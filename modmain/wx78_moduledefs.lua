@@ -1,5 +1,4 @@
 local wx78_moduledefs = require("wx78_moduledefs")
-local module_definitions = wx78_moduledefs.module_definitions
 local AddCreatureScanDataDefinition = wx78_moduledefs.AddCreatureScanDataDefinition
 AddCreatureScanDataDefinition("crab", "movespeed_sw", 2)
 AddCreatureScanDataDefinition("piko", "movespeed_ham", 2)

@@ -1,30 +1,9 @@
 -------------------------------------------------------------------------------------
---[[
-if TE_CONFIG.DEVELOP.test_mode then        --开发人员测试时才可以使用
-    modimport("postinit/seafork")
-    modimport("postinit/opengift")
-    modimport("postinit/widgets/hoverer_info")
-end
 
-if not TheNet:IsDedicated() then ---客机读取主机的overrides---似乎也只能在这里读取了
-    print("reupdate overrides in client")
-    AddSimPostInit(function() modimport("main/ta_config_client") end)
-end]]
 
-modimport("postinit/world_map")    --theworld.map相关
-modimport("postinit/entityscript") --修改entity相关
-modimport("postinit/interior")     -- 室内效果
-
----modimport("postinit/actionrelated")
----modimport("postinit/components/weather")       --热带气候（冬季降雨
 ---modimport("postinit/tropical_climate")         --热带气候
----modimport("postinit/ham_room")                 --新的room
 ---modimport("postinit/room_camera")              --房间镜头
 ---modimport("postinit/boat")                     --单人船相关修改
-modimport("postinit/natureskin_variants") --和自然皮肤切换相关的所有内容
-modimport("postinit/player_vision_post")  --四眼镜、蝙蝠帽所用
-modimport("postinit/tile_post")           --特殊地皮挖起
-modimport("postinit/guard_corp")          --守卫保护作物、高草转化、草大风摇晃？
 
 
 -- do not know how to sort
@@ -34,8 +13,7 @@ modimport("postinit/postinit_poisonables") --posonables--and loot dropper--
 ---modimport("postinit/sim_rain_effect")
 -- modimport("postinit/player_darkness") --没有用
 ---modimport("postinit/farm")    --种植相关  --通过veggies改变随机种子权重
-modimport("postinit/wx78_module")
-modimport("postinit/sim_ham") --ham cloud
+
 
 ---modimport("postinit/entity")  --不知道这个是干啥的
 modimport("postinit/naughty") --淘气值
@@ -45,13 +23,10 @@ modimport("postinit/naughty") --淘气值
 
 -- modimport("postinit/components/oceancolor")
 -- modimport("postinit/components/playervision")
-modimport("postinit/components/spooked") --黄蘑菇孢子
 -- modimport("postinit/components/trap")
-modimport("postinit/components/actionqueuer")
 modimport("postinit/components/ambientlighting")
 modimport("postinit/components/ambientsound")
 modimport("postinit/components/armor")
-modimport("postinit/components/birdspawner")
 modimport("postinit/components/boatphysics")
 modimport("postinit/components/builder")
 modimport("postinit/components/colourcube")
@@ -68,8 +43,6 @@ modimport("postinit/components/hounded")          --猎犬袭击
 modimport("postinit/components/inventory")        ----主要是物品栏的钱的计算
 ---modimport("postinit/components/inventory_prevent_pick") ----可能和船拿不起来有关系***
 modimport("postinit/components/inventoryitem")    --优化架子上放东西？
-modimport("postinit/components/locomotor")        --
-modimport("postinit/components/map")
 ---modimport("postinit/components/penguinspawner")控制企鸥生成，现在是覆盖的***
 ---modimport("postinit/components/playercontroller")***
 ---modimport("postinit/components/playerspawner")***
@@ -82,7 +55,6 @@ modimport("postinit/components/soundemitter")
 modimport("postinit/components/plantregrowth")   --植物再生 --黄蘑菇树成长
 
 modimport("postinit/components/areaaware")       -- 用于控制熊大和巨鹿刷新条件
-modimport("postinit/components/deployable")      -- 让某些地形不能部署、建造、种东西
 modimport("postinit/components/drownable")       -- 在室内不会落水
 modimport("postinit/components/oar")             -- 桨加标签
 modimport("postinit/components/vanish_on_sleep") --

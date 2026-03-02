@@ -35,7 +35,6 @@ AddClassPostConstruct("components/combat_replica", function(self)
 end)
 
 local require = GLOBAL.require
-local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
 local resolvefilepath = GLOBAL.resolvefilepath
 
 AddClassPostConstruct("widgets/controls", function(self)

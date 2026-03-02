@@ -15,21 +15,24 @@ local function IsSpecialTile(tile)
 end
 
 local function DeployableCanDeployBefore(self, pt)
+    if self.tro_force_deploy then
+        return { true }, true
+    end
+
     local tile = TheWorld.Map:GetTileAtPoint(pt:Get())
     return { false }, IsSpecialTile(tile)
 end
 
-local function ForceDeploy(self, pt, deployer)
-    if self.ondeploy ~= nil then
-        self.ondeploy(self.inst, pt, deployer)
-    end
-    -- self.inst is removed during ondeploy
-    deployer:PushEvent("deployitem", { prefab = self.inst.prefab })
-    return true
+local function TroForceDeploy(self, ...)
+    self.tro_force_deploy = true
+    local result = self:Deploy(...)
+    self.tro_force_deploy = false
+    return result
 end
 
 AddComponentPostInit("deployable", function(self)
-    self.ForceDeploy = ForceDeploy
+    self.tro_force_deploy = false --不检查放置条件
 
+    self.TroForceDeploy = TroForceDeploy
     Utils.FnDecorator(self, "CanDeploy", DeployableCanDeployBefore)
 end)

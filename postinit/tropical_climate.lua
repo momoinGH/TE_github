@@ -25,15 +25,6 @@ local function OnTemperatureUpdateBefore(self)
     return nil, false
 end
 
--- local function GetMoistureRateBefore(self)
---     if TheWorld.state.issnowing and self.inst:AwareInTropicalArea() then
---         return { self:_GetMoistureRateAssumingRain() }, false
---     end
---     return nil, false
--- end
-
-
-
 AddPlayerPostInit(function(inst)
     if not TheWorld.ismastersim then return end
     Utils.FnDecorator(inst.components.temperature, "OnUpdate", OnTemperatureUpdateBefore)
@@ -178,38 +169,3 @@ for _, prefab in pairs({ "spider_warrior" }) do
         end)
     end)
 end
-
-
-----热带蝴蝶和发光飞虫刷新
--- for _, prefab in pairs({ "butterfly" }) do
---     AddPrefabPostInit(prefab, function(inst)
---         if not TheWorld.ismastersim then
---             return
---         end
-
---         inst:DoTaskInTime(0, function(inst)
---             local map = TheWorld.Map
---             local x, y, z = inst.Transform:GetWorldPosition()
---             if x and y and z then
---                 local butterfly
---                 local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
---                 if IsSwLandTile(ground) then
---                     butterfly = SpawnPrefab("butterfly_tropical")
---                 elseif IsHamLandTile(ground) then
---                     butterfly = SpawnPrefab("glowfly")
---                 end
-
---                 if butterfly then
---                     -- if butterfly.components.pollinator ~= nil then
---                     --     butterfly.components.pollinator:Pollinate(spawnflower)
---                     -- end
---                     -- if butterfly.components.homeseeker ~= nil then
---                     --     butterfly.components.homeseeker:SetHome(spawnflower)
---                     -- end
---                     butterfly.Transform:SetPosition(x, y, z)
---                     inst:Remove()
---                 end
---             end
---         end)
---     end)
--- end

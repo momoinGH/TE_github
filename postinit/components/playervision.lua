@@ -21,8 +21,6 @@ local OVERRIDE_SEASON_COLOURCUBES = {
 
 }
 
-
-
 local VISION_PHASEFN = {
     interior = {
         blendtime = 0.5,
@@ -31,7 +29,6 @@ local VISION_PHASEFN = {
     },
 
 }
-
 
 AddComponentPostInit("playervision", function(self)
     -- local NIGHTVISION_COLOURCUBES = upvaluehelper.Get(self.UpdateCCTable, "NIGHTVISION_COLOURCUBES")

@@ -3,7 +3,7 @@ local Utils = require("tropical_utils/utils")
 local is_print_click_actions = false
 
 -- 打印左键和右键的Action，本地执行
-GLOBAL.c_printclickactions = function(is_print)
+GLOBAL.c_setprintclickactions = function(is_print)
     is_print_click_actions = is_print
 end
 
@@ -56,3 +56,65 @@ end
 GLOBAL.c_testsound = function(sound)
     ThePlayer.SoundEmitter:PlaySound(sound)
 end
+
+----------------------------------------------------------------------------------------------------
+local is_show_prefab_details = false
+
+-- 显示鼠标处实体的详细信息
+GLOBAL.c_setshowprefabdetails = function(is_show)
+    is_show_prefab_details = is_show
+end
+
+local function GetBuild(inst)
+    local strnn = ""
+    local str = inst.entity:GetDebugString()
+
+    if not str then
+        return nil
+    end
+    local bank, build, anim = str:match("bank: (.+) build: (.+) anim: .+:(.+) Frame")
+
+    if bank ~= nil and build ~= nil then
+        strnn = strnn .. "动画bank: anim/" .. bank .. ".zip"
+        strnn = strnn .. "\n" .. "贴图build: anim/" .. build .. ".zip"
+    end
+    return strnn
+end
+
+
+AddClassPostConstruct("widgets/hoverer", function(self)
+    local old_SetString = self.text.SetString
+    self.text.SetString = function(text, str, ...)
+        if not is_show_prefab_details then
+            return old_SetString(text, str, ...)
+        end
+
+        local target = TheInput:GetHUDEntityUnderMouse()
+        if target ~= nil then
+            target = target.widget ~= nil and target.widget.parent ~= nil and target.widget.parent.item
+        else
+            target = TheInput:GetWorldEntityUnderMouse()
+        end
+        if target and target.entity ~= nil then
+            if target.prefab ~= nil then
+                str = str .. "\n" .. "代码:" .. target.prefab
+            end
+            local build = GetBuild(target)
+            if build ~= nil then
+                str = str .. "\n" .. build
+            end
+            local skin = target:GetSkinName(target)
+            if skin ~= nil then
+                str = str .. "\n" .. "皮肤:" .. skin
+            end
+
+            local skinid = target.skin_id
+            if skinid ~= nil then
+                str = str .. "\n" .. "皮肤ID:" .. skinid
+            end
+        end
+        return old_SetString(text, str, ...)
+    end
+end)
+
+----------------------------------------------------------------------------------------------------

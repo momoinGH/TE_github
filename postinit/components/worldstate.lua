@@ -15,7 +15,7 @@ AddComponentPostInit("worldstate", function(self, inst)
     --------------------------------------------------------------------------
 
     ----竟然有现成的函数hook这个东西
-    local OnTemperatureTick = inst:GetEventCallbacks("temperaturetick", TheWorld, "scripts/components/worldstate.lua")
+    local OnTemperatureTick = inst:GetEventCallback("temperaturetick", TheWorld, "scripts/components/worldstate.lua")
     local SetVariable = upvaluehelper.Get(OnTemperatureTick, "SetVariable")
 
     --------------------------------------------------------------------------

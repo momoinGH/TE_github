@@ -1,5 +1,12 @@
 local Utils = require "tropical_utils/utils"
 
+if TUNING.tropical.only_hamlet then
+    modimport "modmain/hamlet/sim_ham" --ham cloud
+end
+
+
+
+
 AddReplicableComponent("hayfever")
 
 AddPlayerPostInit(function(inst)
@@ -44,3 +51,10 @@ end)
 modimport "modmain/common/AddIronLordHandlers" --活性机甲处理
 modimport "modmain/common/AddIronLordPostinit" --活性机甲构造
 modimport "scripts/ArtifactControls"           --活性机甲控制
+
+----------------------------------------------------------------------------------------------------
+
+local _OnCreep = GroundCreep.OnCreep
+function GroundCreep:OnCreep(x, y, z, ...)
+    return _OnCreep(self, x, y, z, ...) and not TheWorld.Map:IsHamRoomAtPoint(x, y, z)
+end

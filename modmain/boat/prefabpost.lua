@@ -1,5 +1,12 @@
 local Utils = require("tropical_utils/utils")
 
+
+modimport "modmain/boat/components/map"
+
+
+
+----------------------------------------------------------------------------------------------------
+
 local function GetEquippedShipwreckedBoat(inst)
     if TheWorld.ismastersim then
         return inst.components.inventory and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT) or nil

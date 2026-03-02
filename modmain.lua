@@ -78,36 +78,33 @@ local function Modimport(dirc)
 end
 
 ----------------------------------------------------------------------------------------------------
--- 检测不兼容模组并报错崩溃
-modimport "modmain/knownmodcheck"
 
-
+modimport "modmain/mods/knownmodcheck"               -- 检测不兼容模组并报错崩溃
+modimport "modmain/animstate"                        -- AnimState 增强
 modimport "modmain/standardcomponents"               -- 定义一些全局函数
 modimport "scripts/prefabs/tropical_farm_plant_defs" --定义新植物
+modimport "modmain/interior"                         --小房子
 modimport "modmain/interiorminimap"                  --绘制小房间内的小地图
 modimport "modmain/sw_fertilizer_nutrient_defs"      --肥料值定义
-
-modimport "modmain/animstate"                        -- AnimState 增强
 modimport "modmain/pro_componentaction"              --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
+modimport "modmain/natureskin_variants"              --和自然皮肤切换相关的所有内容
+modimport "modmain/wx78_moduledefs"
 
 
 
 
-modimport "modmain/postinit"
+modimport "modmain/postinit" --TODO 拆到各个模块中
+
+-- 兼容其他mod
+modimport "modmain/mods/action_queue"
 
 
-
-
-
-
-
-modimport "modmain/debug"                              --注册一些c_指令，用于控制台调试
-
-
--- 默认
+-- 共同
 Modimport("common")
 --海难小船
 Modimport("boat")
+--小房子，以及在地图外生成相关
+Modimport("room")
 -- 大风平原
 if TUNING.tropical.windyplains ~= 5 then
     Modimport("windy")
@@ -170,3 +167,5 @@ local Constructor = require("tropical_utils/constructor")
 Constructor.SetEnv(env)
 Constructor.AddScrapbookWiki("tropical", WIKI_DATA)
 WIKI_DATA = nil
+
+modimport "modmain/debug" --注册一些c_指令，用于控制台调试

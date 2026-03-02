@@ -52,10 +52,10 @@ local soundremap = {
 AddComponentPostInit("dynamicmusic", function(self, inst)
     ------------------------------Adding Climate Music---------------------------------
     local _activatedplayer
-    local OnPlayerActivated = inst:GetEventCallbacks("playeractivated", inst, "scripts/components/dynamicmusic.lua")
+    local OnPlayerActivated = inst:GetEventCallback("playeractivated", inst, "scripts/components/dynamicmusic.lua")
     local BUSYTHEMES = upvaluehelper.Get(OnPlayerActivated, "BUSYTHEMES")
 
-    local OnEnableDynamicMusic = inst:GetEventCallbacks("enabledynamicmusic", TheWorld)
+    local OnEnableDynamicMusic = inst:GetEventCallback("enabledynamicmusic", TheWorld)
     local StopBusy = upvaluehelper.Get(OnEnableDynamicMusic, "StopBusy")
 
 
