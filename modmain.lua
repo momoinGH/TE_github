@@ -7,12 +7,6 @@
 ----------------------------------------------------------------------------------------------------
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
 
-require("tools/worldutil")
-require("tools/standardcomponents")
-require("knownmodcheck")        -- 检测不兼容模组并报错崩溃
-require("components/animstate") -- AnimState 增强
-
-
 local ALL_PREFAB_FILES = {}
 local ALL_ASSETS = {}
 local language = string.lower(GetModConfigData("language"))
@@ -62,7 +56,7 @@ local function Modimport(dirc)
     SafeModImport("modmain/" .. dirc .. "/character")            --添加角色，角色相关变量定义
     SafeModImport("modmain/" .. dirc .. "/ui")                   --UI相关
     SafeModImport("modmain/" .. dirc .. "/prefabpost")           --组件、预制件的修改
-    SafeModImport("modmain/" .. dirc .. "/`fx")                   --特效
+    SafeModImport("modmain/" .. dirc .. "/`fx")                  --特效
     SafeModImport("modmain/" .. dirc .. "/actions")              --action相关
     SafeModImport("modmain/" .. dirc .. "/componentactions")     --componentactions相关
     SafeModImport("modmain/" .. dirc .. "/sg")                   --Stategraph相关
@@ -82,6 +76,33 @@ local function Modimport(dirc)
     PrefabFiles = {}
     Assets = {}
 end
+
+----------------------------------------------------------------------------------------------------
+-- 检测不兼容模组并报错崩溃
+modimport "modmain/knownmodcheck"
+
+
+modimport "modmain/standardcomponents"               -- 定义一些全局函数
+modimport "scripts/prefabs/tropical_farm_plant_defs" --定义新植物
+modimport "modmain/interiorminimap"                  --绘制小房间内的小地图
+modimport "modmain/sw_fertilizer_nutrient_defs"      --肥料值定义
+
+modimport "modmain/animstate"                        -- AnimState 增强
+modimport "modmain/pro_componentaction"              --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
+
+
+
+
+modimport "modmain/postinit"
+
+
+
+
+
+
+
+modimport "modmain/debug"                              --注册一些c_指令，用于控制台调试
+
 
 -- 默认
 Modimport("common")
@@ -129,22 +150,6 @@ if TUNING.tropical.quagmire then
     Modimport("quagmire")
 end
 
-
-
-----------------------------------------------------------------------------------------------------
-modimport "modmain/componentactions" --TODO 拆到各个模块里
-modimport "scripts/prefabs/tropical_farm_plant_defs"
-modimport "modmain/common/interiorminimap"
-modimport "modmain/postinit"
-
-modimport "modmain/pro_componentaction"                --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
-
-modimport "modmain/common/sw_fertilizer_nutrient_defs" --肥料值定义
-
-modimport "modmain/common/AddIronLordHandlers"         --活性机甲处理
-modimport "modmain/common/AddIronLordPostinit"         --活性机甲构造
-modimport "scripts/ArtifactControls"                   --活性机甲控制
-modimport "modmain/debug"                              --注册一些c_指令，用于控制台调试
 
 ----------------------------------------------------------------------------------------------------
 

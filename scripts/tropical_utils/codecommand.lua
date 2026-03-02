@@ -1122,3 +1122,6 @@ function MakeSmallBurnableCharacter(inst, sym, offset) end
 function MakeMediumBurnableCharacter(inst, sym, offset) end
 
 function MakeLargeBurnableCharacter(inst, sym, offset, scale) end
+
+-- pickable冬天暂停倒计时
+function MakeNoGrowInWinter(inst) end

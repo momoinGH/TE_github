@@ -27,7 +27,7 @@ end)
 AddComponentPostInit("autoterraformer", function(self)
     Utils.FnDecorator(self, "DoTerraform", function(_self, px, py, pz, _x, _y)
         local tile = TheWorld.Map:GetTileAtPoint(px, py, pz)
-		if tile == GROUND.GASRAINFOREST or tile == GROUND.DEEPRAINFOREST then return nil, true end
+        if tile == GROUND.GASRAINFOREST or tile == GROUND.DEEPRAINFOREST then return nil, true end
     end)
 end)
 
@@ -38,3 +38,9 @@ Utils.FnDecorator(Unwrappable, "_ctor", nil, function(rets, self, inst)
     end
     return rets
 end)
+
+----------------------------------------------------------------------------------------------------
+
+modimport "modmain/common/AddIronLordHandlers" --活性机甲处理
+modimport "modmain/common/AddIronLordPostinit" --活性机甲构造
+modimport "scripts/ArtifactControls"           --活性机甲控制

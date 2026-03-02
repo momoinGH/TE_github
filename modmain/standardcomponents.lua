@@ -1,3 +1,5 @@
+local Utils = require("tropical_utils/utils")
+
 local relative_temperature_thresholds = { -30, -10, 10, 30 }
 local function GetRangeForTemperature(temp, ambient)
     local range = 1
@@ -16,44 +18,32 @@ end
 
 function MakeObsidianTool(inst)
     inst:AddTag("heatrock")
-    -- local temperature = inst:AddComponent("temperature")
-    local temperature = inst.components.temperature
+
+    local temperature = inst.components.temperature or inst:AddComponent("temperature")
     temperature.inherentinsulation = TUNING.INSULATION_MED
     temperature.inherentsummerinsulation = TUNING.INSULATION_LARGE * 2
     temperature:IgnoreTags("heatrock")
-    local heater = inst:AddComponent("heater")
+
+    local heater = inst.components.heater or inst:AddComponent("heater")
     heater.heatfn = HeatFn
     heater.equippedheatfn = HeatFn
     heater.carriedheatfn = HeatFn
     heater.carriedheatmultiplier = TUNING.HEAT_ROCK_CARRIED_BONUS_HEAT_FACTOR
     heater:SetThermics(true, false)
 end
+GLOBAL.MakeObsidianTool = MakeObsidianTool
 
-local function TogglePickable(pickable, iswinter)
-    if iswinter then
-        pickable:Pause()
-    else
-        pickable:Resume()
-    end
+
+----------------------------------------------------------------------------------------------------
+-- 取消作物冬天不生长的限制
+local TogglePickable = Utils.FindUpvalue(MakeNoGrowInWinter, "TogglePickable")
+if not TogglePickable then
+    print("获取TogglePickable函数失败，无法让作物冬天也生长了。")
 end
-
-function MakeNoGrowInWinter(inst)
-    inst.components.pickable:WatchWorldState("iswinter", TogglePickable)
-    TogglePickable(inst.components.pickable, TheWorld.state.iswinter)
-end
-
 function CancelNoGrowInWinter(inst)
+    if not TogglePickable then return end
     inst.components.pickable:StopWatchingWorldState("iswinter", TogglePickable)
     inst.components.pickable:Resume()
 end
 
-function MakeNoWinterItem(inst)
-    -- inst:StopAllWatchingWorldStates()
-    inst:StopWatchingOneOfWorldStates("iswinter")
-    inst:StopWatchingOneOfWorldStates("snowlevel")
-end
-
-function CancelMakeNoWinterItem(inst)
-    -- inst:ReWatchingOneOfWorldStates("iswinter")
-    -- inst:ReWatchingOneOfWorldStates("snowlevel")
-end
+GLOBAL.CancelNoGrowInWinter = CancelNoGrowInWinter

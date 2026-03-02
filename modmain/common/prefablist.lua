@@ -204,7 +204,6 @@ then
     table.insert(PrefabFiles, "laser")
     table.insert(PrefabFiles, "light_rays_ham")
     table.insert(PrefabFiles, "littlehammer")
-    table.insert(PrefabFiles, "living_artifact")
     table.insert(PrefabFiles, "mandrakehouse")
     table.insert(PrefabFiles, "mandrakeman")
     table.insert(PrefabFiles, "mean_flytrap")

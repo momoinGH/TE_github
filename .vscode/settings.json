@@ -1,15 +1,8 @@
 {
-    "Lua.diagnostics.workspaceDelay": -1,
     "Lua.diagnostics.disable": [
         "need-check-nil",
         "undefined-field",
-        "param-type-mismatch",
         "inject-field",
-        "redundant-return",
-        "unused-local",
-        "missing-parameter",
-    ],
-    "Lua.diagnostics.globals": [
-        "TRO_AddComponentAction"
+        "param-type-mismatch"
     ]
 }

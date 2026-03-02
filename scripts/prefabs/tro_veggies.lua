@@ -1,4 +1,3 @@
---require("prefabs/tropical_farm_plant_defs") --modmain里新增的数据好像会清空，这里再加一次
 require "tuning"
 local PLANT_DEFS = require("prefabs/farm_plant_defs").PLANT_DEFS
 local function MakeVegStats(seedweight, hunger, health, perish_time, sanity, cooked_hunger, cooked_health,

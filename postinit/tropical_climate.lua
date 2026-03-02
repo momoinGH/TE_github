@@ -116,54 +116,6 @@ AddPrefabPostInit("forest", function(inst)
     end
 end)
 
-
-
-----prefabs 相关修改--
----
----
--- local function OnTransplantfnAfter(retTab, inst)
---     -- checks to turn into Tall Grass if on the right terrain
---     local map = TheWorld.Map
---     local x, y, z = inst.Transform:GetWorldPosition()
---     local tiletype = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
---     if tiletype == GROUND.PLAINS
---         or tiletype == GROUND.RAINFOREST
---         or tiletype == GROUND.DEEPRAINFOREST then
---         local newgrass = SpawnPrefab("grass_tall")
---         newgrass.Transform:SetPosition(x, y, z)
---         if newgrass:HasTag("machetecut") then
---             inst:RemoveTag("machetecut")
---         end
---         newgrass.components.workable:SetWorkAction(ACTIONS.DIG)
---         newgrass.components.workable:SetWorkLeft(1)
---         newgrass.components.timer:StartTimer("spawndelay", 60 * 8 * 4)
---         newgrass.AnimState:PlayAnimation("picked", true)
---         inst:Remove()
---     end
--- end
-
--- AddPrefabPostInit("grass", function(inst)
---     inst:DoTaskInTime(0, function(...)
---         if not inst:IsOnLandTile() then
---             TheSim:ReskinEntity(inst.GUID, inst.skinname, "grass_water", nil)
---         elseif inst:IsInTropicalArea() then
---             TheSim:ReskinEntity(inst.GUID, inst.skinname, "grass_tropical", nil)
---         end
---     end)
--- end)
-
-
--- AddPrefabPostInit("grass", function(inst)
---     inst:DoTaskInTime(0, function(...)
---         if inst:IsInTropicalArea() then
---             inst.AnimState:SetBuild("grassgreen_build")
---             inst.AnimState:PlayAnimation("idle", true)
---         end
---     end)
--- end)
-
-
 --脚印
 AddPrefabPostInit("dirtpile", function(inst)
     if TheWorld.ismastersim then

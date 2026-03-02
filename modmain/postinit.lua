@@ -1,10 +1,4 @@
-local Utils = require("tropical_utils/utils")
--- require "tools/upvaluehelper" ----用来hook的一些函数
 -------------------------------------------------------------------------------------
-local modimport = modimport
-
-modimport("scripts/tools/modutil_limited") -- 优化env下的modutil
-modimport("postinit/safeapi")              --这些函数是env里的，仅对这个mod有效
 --[[
 if TE_CONFIG.DEVELOP.test_mode then        --开发人员测试时才可以使用
     modimport("postinit/seafork")
@@ -56,7 +50,6 @@ modimport("postinit/components/spooked") --黄蘑菇孢子
 modimport("postinit/components/actionqueuer")
 modimport("postinit/components/ambientlighting")
 modimport("postinit/components/ambientsound")
---("postinit/components/animstate")
 modimport("postinit/components/armor")
 modimport("postinit/components/birdspawner")
 modimport("postinit/components/boatphysics")
