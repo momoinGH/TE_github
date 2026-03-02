@@ -4,9 +4,6 @@ local function OnEquipped(inst, data)
     if boatfx then
         boatfx.AnimState:OverrideSymbol(inst.symboltooverride, inst.build, inst.symbol)
     end
-    if inst.components.fueled then
-        inst.components.fueled:StartConsuming()
-    end
 end
 
 local function OnUnEquipped(inst, data)
@@ -14,9 +11,6 @@ local function OnUnEquipped(inst, data)
     local boatfx = data.owner.components.shipwreckedboat.boatfx
     if boatfx then
         boatfx.AnimState:ClearOverrideSymbol(inst.symboltooverride)
-    end
-    if inst.components.fueled then
-        inst.components.fueled:StopConsuming()
     end
 end
 

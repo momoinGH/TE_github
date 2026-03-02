@@ -1,5 +1,12 @@
 local Utils = require("tropical_utils/utils")
 
+modimport "modmain/room/components/map"
+
+
+
+
+
+
 Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
     local val = next(retTab)
     if val > TUNING.WILDFIRE_THRESHOLD then
@@ -16,7 +23,6 @@ Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
 
     return retTab
 end)
-
 ----------------------------------------------------------------------------------------------------
 --室内避雨？
 local function ShelteredOnUpdateBefore(self)

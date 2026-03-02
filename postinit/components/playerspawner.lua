@@ -22,29 +22,7 @@ AddComponentPostInit("playerspawner", function(self)
                     player.components.inventory:GiveItem(item)
                 end
             end
-
-            ----------填海叉
-            local startitem
-            if TA_CONFIG.DEVELOP.test_mode then
-                startitem = "sea2land_fork"
-            end
-
-            if startitem then
-                local item = SpawnPrefab(startitem)
-                if item then
-                    player.components.inventory:GiveItem(item)
-                    -- local eslot = item.components.equippable.equipslot
-                    -- player:PushEvent("equipped", { item = item, eslot = eslot })
-                end
-            end
         end
         OldSpawnAtLocation(self, inst, player, x, y, z, isloading, ...)
-
-        -- if portal ~= nil then
-        --     local spawnpoint = FindClosestEntity(player, 2, true, "CLASSIFIED") ------这个函数好用啊
-        --     if spawnpoint and ((spawnpoint.prefab == "spawnpoint_master") or (spawnpoint.prefab == "spawnpoint_multiplayer")) then
-        --         player.Transform:SetPosition(x, y, z)
-        --     end
-        -- end
     end
 end)

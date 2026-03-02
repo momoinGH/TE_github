@@ -745,7 +745,7 @@ Constructor.AddAction({ priority = 11, distance = 25 },
     "BOATCANNON",
     STRINGS.ACTIONS.BOATCANNON,
     function(act)
-        local boat = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+        local boat = act.doer:TroGetSWBoat()
         local item = boat
             and boat:HasTag("shipwrecked_boat")
             and boat.components.container

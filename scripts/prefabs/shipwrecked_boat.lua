@@ -48,38 +48,6 @@ local function OnDismantle(inst, doer)
 end
 
 local function common(data)
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    if data.minimap then
-        inst.entity:AddMiniMapEntity()
-        inst.MiniMapEntity:SetIcon("armouredboat.png")
-        inst.MiniMapEntity:SetPriority(-1)
-    end
-    inst.entity:AddNetwork()
-
-    inst.Transform:SetFourFaced()
-
-    inst.entity:AddPhysics()
-
-    inst:AddTag("shipwrecked_boat")
-    inst:AddTag("ignorewalkableplatforms")
-
-    inst:AddTag("boat")
-    inst:AddTag("wood")
-
-    inst.AnimState:SetBank(data.bank)
-    inst.AnimState:SetBuild(data.build)
-    inst.AnimState:PlayAnimation("run_loop", true)
-    inst.AnimState:SetSortOrder(3)
-    inst.AnimState:SetFinalOffset(1)
-    -- inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-
-    inst.entity:SetPristine()
-
     return inst
 end
 
@@ -104,94 +72,49 @@ local function onhammered(inst, worker)
     OnDeath(inst)
 end
 
----fn
----@param data table health:血量；dismantlePrefab:收回后的预制体；container：容器；
-local function common_fn(data)
-    local inst = common(data)
-
-    local max_health = data.health or TUNING.BOAT.HEALTH
-    inst:AddComponent("healthsyncer")
-    inst.components.healthsyncer.max_health = max_health
-
-    inst.runspeed = data.runspeed --移动速度
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(max_health)
-    inst.components.health.nofadeout = true
-
-    if data.loots then
-        inst:AddComponent("lootdropper")
-        inst.components.lootdropper:SetLoot(data.loots)
-    end
-
-    if data.dismantlePrefab then --表示可收回
-        inst.dismantlePrefab = data.dismantlePrefab
-        inst:AddComponent("pro_portablestructure")
-        inst.components.pro_portablestructure:SetOnDismantleFn(OnDismantle)
-    end
-
-    if data.container then
-        inst:AddComponent("container")
-        inst.components.container:WidgetSetup(data.container)
-    end
-
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.cangoincontainer = false
-    inst.components.inventoryitem.canbepickedup = false
-    inst.components.inventoryitem.nobounce = true --脱下的时候不希望有自由落体的过程
-
-    inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.SWBOAT
-
-    inst:AddComponent("shipwreckedboat")
-
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(2)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-
-    inst.sounds = sounds
-    inst.debris = data.debris
-
-    inst:ListenForEvent("death", OnDeath)
-
-    return inst
-end
-
-
 local BOATS = {}
 
 -- local function MakeBoat(name, minimap, bank, build, loots, data, prefabs, init)
-local function MakeBoat(name, data, init)
+local function MakeBoat(name, data, common_post_fn, master_post_fn)
     data = data or {}
 
     local function fn()
-        local inst = common_fn(data)
-        if init then
-            init(inst)
+        local inst = CreateEntity()
+
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
+        inst.entity:AddSoundEmitter()
+        if data.minimap then
+            inst.entity:AddMiniMapEntity()
+            inst.MiniMapEntity:SetIcon("armouredboat.png")
+            inst.MiniMapEntity:SetPriority(-1)
         end
-        return inst
-    end
+        inst.entity:AddNetwork()
 
-    local function fake_fn()
-        local inst = common(data)
-        if init then
-            init(inst)
-        end
+        inst.Transform:SetFourFaced()
 
-        inst:SetPrefabNameOverride(name)
+        inst.entity:AddPhysics()
 
-        inst:AddTag("pro_fakeboat")              --玩家不能上这个船
+        inst:AddTag("shipwrecked_boat")
+        inst:AddTag("ignorewalkableplatforms")
+        inst:AddTag("boat")
 
-        if data.container then                   --没有container就没有container_proxy，这里主要是兼容insight，那个mod会报错
-            inst:AddComponent("container_proxy") --用来给船体复制体使用的
-            inst.components.container_proxy:SetCanBeOpened(false)
+        inst.AnimState:SetBank(data.bank)
+        inst.AnimState:SetBuild(data.build)
+        inst.AnimState:PlayAnimation("run_loop", true)
+        inst.AnimState:SetSortOrder(3)
+        inst.AnimState:SetFinalOffset(1)
+        -- inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+        inst.AnimState:SetLayer(LAYER_BACKGROUND)
+
+        local max_health = data.health or TUNING.BOAT.HEALTH
+        inst:AddComponent("healthsyncer")
+        inst.components.healthsyncer.max_health = max_health
+
+        inst.runspeed = data.runspeed --移动速度
+
+        if common_post_fn then
+            common_post_fn(inst)
         end
 
         inst.entity:SetPristine()
@@ -202,14 +125,51 @@ local function MakeBoat(name, data, init)
 
         inst:AddComponent("inspectable")
 
+        inst:AddComponent("health")
+        inst.components.health:SetMaxHealth(max_health)
+        inst.components.health.nofadeout = true
+
+        if data.loots then
+            inst:AddComponent("lootdropper")
+            inst.components.lootdropper:SetLoot(data.loots)
+        end
+
+        if data.dismantlePrefab then --表示可收回
+            inst.dismantlePrefab = data.dismantlePrefab
+            inst:AddComponent("pro_portablestructure")
+            inst.components.pro_portablestructure:SetOnDismantleFn(OnDismantle)
+        end
+
+        if data.container then
+            inst:AddComponent("container")
+            inst.components.container:WidgetSetup(data.container)
+        end
+
+        inst:AddComponent("inventoryitem")
+        inst.components.inventoryitem.cangoincontainer = false
+        inst.components.inventoryitem.canbepickedup = false
+        inst.components.inventoryitem.nobounce = true --脱下的时候不希望有自由落体的过程
+
+        inst:AddComponent("shipwreckedboat")
+
+        inst:AddComponent("workable")
+        inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+        inst.components.workable:SetWorkLeft(2)
+        inst.components.workable:SetOnFinishCallback(onhammered)
+
         inst.sounds = sounds
-        inst.persists = false --有AddChild，不加也不会保存
+        inst.debris = data.debris
+
+        inst:ListenForEvent("death", OnDeath)
+
+        if master_post_fn then
+            master_post_fn(inst)
+        end
 
         return inst
     end
 
     table.insert(BOATS, Prefab(name, fn, assets, data.prefabs))
-    table.insert(BOATS, Prefab(name .. "_fake", fake_fn, assets, data.prefabs))
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -410,11 +370,8 @@ MakeBoat("woodlegsboatamigo", {
     prefabs = {
         "log"
     },
-}, function(inst)
-    if not TheWorld.ismastersim then return end
-    if inst.components.health then
-        inst.components.health:SetInvincible(true)
-    end
+}, nil, function(inst)
+    inst.components.health:SetInvincible(true)
 end)
 
 

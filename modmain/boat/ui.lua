@@ -1,6 +1,6 @@
 local function UpdateUI(inst)
     -- 显示小船血量UI
-    local boat = inst.replica.inventory and inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+    local boat = inst:TroGetSWBoat()
     local boatmeter = inst.HUD.controls.status.boatmeter
     local is_show = boat and boat.components.healthsyncer
 

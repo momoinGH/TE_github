@@ -20,7 +20,6 @@ modimport "modmain/common/components/temperature"
 --modimport "modmain/common/components/builder"
 --modimport "modmain/common/components/inventoryitem"
 modimport "modmain/common/components/walkableplatformplayer"
-modimport "modmain/common/components/playeractionpicker"
 --[[
 modimport "modmain/common/components/soundemitter"
 modimport "modmain/common/components/ambientlighting"
@@ -342,24 +341,6 @@ for _, v in ipairs({
 end
 
 ----------------------------------------------------------------------------------------------------
--- 浪花碰撞检测对象
-
-for _, v in ipairs({
-    "seastack",
-    "wreck",
-    "waterygrave",
-    "octopusking",
-    "ballphinhouse",
-    "saltstackthen",
-    "wall_enforcedlimestone",
-    "sea_yard"
-}) do
-    AddPrefabPostInit(v, function(inst)
-        inst:AddTag("quebraonda")
-    end)
-end
-
-----------------------------------------------------------------------------------------------------
 
 
 for _, v in ipairs({
@@ -525,25 +506,6 @@ if TUNING.tropical.only_hamlet then
     end)
 end]]
 
-----------------------------------------------------------------------------------------------------
------ sai pulando automaticamente do barco cliente outra parte dentro de locomotor ----------------
--- 直接让玩家跳到海难小船中心位置，天才！
---[[
-local function GetEmbarkPositionBefore(self)
-    local boat = self.embarkable
-    if boat ~= nil and boat:IsValid() and boat:HasTag("shipwrecked_boat") then
-        local x, _, z = self.inst.Transform:GetWorldPosition()
-        local embarkable_radius = 0.1
-        local embarkable_x, embarkable_y, embarkable_z = boat.Transform:GetWorldPosition()
-        local embark_x, embark_z = VecUtil_Normalize(x - embarkable_x, z - embarkable_z)
-        return { embarkable_x + embark_x * embarkable_radius, embarkable_z + embark_z * embarkable_radius }, true
-    end
-end
-
-AddComponentPostInit("embarker", function(self)
-    Utils.FnDecorator(self, "GetEmbarkPosition", GetEmbarkPositionBefore)
-end)
-]]
 ----------------------------------------------------------------------------------------------------
 --[[
 -- 根据地皮判断不太好，能不能给草添加特殊标签

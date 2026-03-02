@@ -3,6 +3,8 @@
         "need-check-nil",
         "undefined-field",
         "inject-field",
-        "param-type-mismatch"
+        "param-type-mismatch",
+        "cast-local-type",
+        "missing-parameter"
     ]
 }

@@ -24,7 +24,7 @@ for _, prefab in pairs({ "skeleton", "skeleton_player" }) do
     end)
 end
 
-for _, prefab in pairs({ "ash" }) do--灰烬施肥，给咖啡的
+for _, prefab in pairs({ "ash" }) do --灰烬施肥，给咖啡的
     AddPrefabPostInit(prefab, function(inst)
         if not TheWorld.ismastersim then
             return
@@ -89,26 +89,22 @@ for _, prefab in pairs({ "cave_exit", "cave_exit_vulcao" }) do
     end)
 end
 
-for _, prefab in pairs(-- 浪花碰撞检测对象
-    { "seastack",
-        "coralreef",
-        "wreck",
-        "waterygrave",
-        "octopusking",
-        "kraken",
-        "ballphinhouse",
-        "coral_brain_rock",
-        "saltstackthen",
-        "wall_enforcedlimestone",
-        "kraken_tentacle",
-        "sea_chiminea",
-        "sea_yard",
-        "buoy" }) do
+-- 浪花碰撞检测对象
+for _, prefab in pairs({ "seastack",
+    "coralreef",
+    "wreck",
+    "waterygrave",
+    "octopusking",
+    "kraken",
+    "ballphinhouse",
+    "coral_brain_rock",
+    "saltstackthen",
+    "wall_enforcedlimestone",
+    "kraken_tentacle",
+    "sea_chiminea",
+    "sea_yard",
+    "buoy" }) do
     AddPrefabPostInit(prefab, function(inst)
-        -- if not TheWorld.ismastersim then
-        --     return
-        -- end
-
         inst:AddTag("quebraonda")
     end)
 end

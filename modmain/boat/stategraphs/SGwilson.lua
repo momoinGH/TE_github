@@ -87,7 +87,7 @@ AddStategraphPostInit("wilson", function(sg)
     ------------------------------------------------------------------------------------------------
 
     Utils.FnDecorator(sg.states["run_start"], "onenter", nil, function(retTab, inst)
-        local boat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+        local boat = inst:TroGetSWBoat()
         if boat then
             local item = boat.components.container and boat.components.container:GetItemInSlot(1)
             local anim = inst.components.inventory:IsHeavyLifting() and "heavy_idle"
@@ -100,7 +100,7 @@ AddStategraphPostInit("wilson", function(sg)
     end)
 
     Utils.FnDecorator(sg.states["run"], "onenter", function(inst)
-        local boat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+        local boat = inst:TroGetSWBoat()
         if not boat then
             return
         end
@@ -137,7 +137,7 @@ AddStategraphPostInit("wilson", function(sg)
             inst.SoundEmitter:PlaySound("turnoftides/common/together/water/splash/small")
         end
         -- 生成波纹
-        if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT) then
+        if inst:TroGetSWBoat() then
             local wake = SpawnPrefab("rowboat_wake")
             wake.Transform:SetPosition(inst.Transform:GetWorldPosition())
             wake.Transform:SetRotation(inst.Transform:GetRotation())
@@ -152,7 +152,7 @@ AddStategraphPostInit("wilson", function(sg)
     end)
 
     Utils.FnDecorator(sg.states["run_stop"], "onenter", nil, function(retTab, inst)
-        local boat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+        local boat = inst:TroGetSWBoat()
         if boat then
             local item = boat.components.container and boat.components.container:GetItemInSlot(1)
             local anim = inst.components.inventory:IsHeavyLifting() and "heavy_idle"

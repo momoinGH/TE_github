@@ -1,5 +1,7 @@
-local TechTree = require("techtree")
+local Ig = Ingredient
+local v_atlas = "images/inventoryimages/inventory_shipwrecked.xml"
 
+local TechTree = require("techtree")
 table.insert(TechTree.AVAILABLE_TECH, "OBSIDIAN_TWO")
 
 TECH.OBSIDIAN_TWO = { OBSIDIAN = 2 }
@@ -16,31 +18,15 @@ AddPrototyperDef("obsidian_workbench", {
 })
 
 -- 黑曜石
-AddRecipe2("obsidianaxe",
-    { Ingredient("axe", 1), Ingredient("obsidian", 2, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("armorobsidian",
-    { Ingredient("armorwood", 1), Ingredient("obsidian", 5, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("obsidianmachete",
-    { Ingredient("machete", 1, v_atlas), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("spear_obsidian",
-    { Ingredient("spear", 1), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("volcanostaff",
-    { Ingredient("firestaff", 1), Ingredient("obsidian", 4, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
+AddRecipe2("obsidianaxe", { Ig("axe", 1), Ig("obsidian", 2, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
+AddRecipe2("armorobsidian", { Ig("armorwood", 1), Ig("obsidian", 5, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
+AddRecipe2("obsidianmachete", { Ig("machete", 1, v_atlas), Ig("obsidian", 3, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
+AddRecipe2("spear_obsidian", { Ig("spear", 1), Ig("obsidian", 3, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
+AddRecipe2("volcanostaff", { Ig("firestaff", 1), Ig("obsidian", 4, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
+AddRecipe2("obsidiancoconade", { Ig("coconade", 3, v_atlas), Ig("obsidian", 3, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true, numtogive = 3 },
+    { "OBSIDIAN" })
+AddRecipe2("obsidian_boatcannon", { Ig("obsidian", 6, v_atlas), Ig("log", 5), Ig("gunpowder", 4) }, TECH.SEAFARING_TWO, nil, { "OBSIDIAN" })
+AddRecipe2("wind_conch", { Ig("obsidian", 4, v_atlas), Ig("purplegem", 1), Ig("magic_seal", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
+AddRecipe2("sail_stick", { Ig("obsidian", 2, v_atlas), Ig("nightmarefuel", 3), Ig("magic_seal", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 
-AddRecipe2("obsidiancoconade",
-    { Ingredient("coconade", 3, v_atlas), Ingredient("obsidian", 3, v_atlas), Ingredient("dragoonheart", 1, v_atlas) },
-    TECH.OBSIDIAN_TWO, { nounlock = true, numtogive = 3 }, { "OBSIDIAN" })
-AddRecipe2("obsidian_boatcannon",
-    { Ingredient("obsidian", 6, v_atlas), Ingredient("log", 5), Ingredient("gunpowder", 4) },
-    TECH.SEAFARING_TWO, nil, { "OBSIDIAN" })
-AddRecipe2("wind_conch",
-    { Ingredient("obsidian", 4, v_atlas), Ingredient("purplegem", 1), Ingredient("magic_seal", 1, h_atlas) },
-    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("sail_stick",
-    { Ingredient("obsidian", 2, v_atlas), Ingredient("nightmarefuel", 3), Ingredient("magic_seal", 1, h_atlas) },
-    TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
+AddRecipe2("sea_yard", { Ig("limestone", 6), Ig("tar", 6), Ig("log", 4) }, TECH.SEAFARING_TWO, { placer = "sea_yard_placer" }, { "STRUCTURES", "NAUTICAL" })

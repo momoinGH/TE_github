@@ -433,61 +433,6 @@ local function fnwaterchest(sim)
     return inst
 end
 
-local function ondeploysea_yard(inst, pt, deployer)
-    local at = SpawnPrefab("sea_yard")
-    if at ~= nil then
-        at.Transform:SetPosition(pt.x, 0, pt.z)
-
-	    at.SoundEmitter:PlaySound("dontstarve_DLC002/common/shipyard/craft")
-        at.AnimState:PlayAnimation("place")
-		at.AnimState:PushAnimation("idle", true)
-        inst:ListenForEvent("animover", onplaced)
-
-        inst:Remove()
-    end
-end
-
-local function fnsea_yard(sim)
-    local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)
-
-    inst:AddTag("usedeploystring")
-
-    inst.AnimState:SetBank("seafarer_boatsw")
-    inst.AnimState:SetBuild("seafarer_boatsw")
-    inst.AnimState:PlayAnimation("seayard", true)
-
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("deployable")
-    inst.components.deployable.ondeploy = ondeploysea_yard
-    inst.components.deployable:SetDeployMode(DEPLOYMODE.WATER)
-    inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.MEDIUM)
-
-    inst:AddComponent("inspectable")
-    inst:AddComponent("inventoryitem")
-
-
-    inst:AddComponent("fuel")
-    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
-
-    MakeSmallBurnable(inst, TUNING.TINY_BURNTIME)
-    MakeSmallPropagator(inst)
-    MakeHauntableLaunchAndIgnite(inst)
-
-    return inst
-end
-
 return Prefab("porto_buoy", fnbuoy, assets, prefabs),
     MakePlacer("porto_buoy_placer", "buoy", "buoy", "ground", false, false, false),
     Prefab("porto_fish_farm", fnfish_farm, assets, prefabs),
@@ -501,6 +446,4 @@ return Prefab("porto_buoy", fnbuoy, assets, prefabs),
     Prefab("porto_sea_chiminea", fnsea_chiminea, assets, prefabs),
     MakePlacer("porto_sea_chiminea_placer", "fire_water_pit", "fire_water_pit", "idle_water", false, false, false),
     Prefab("porto_waterchest", fnwaterchest, assets, prefabs),
-    MakePlacer("porto_waterchest_placer", "water_chest", "water_chest", "closed", false, false, false),
-    Prefab("porto_sea_yard", fnsea_yard, assets, prefabs),
-    MakePlacer("porto_sea_yard_placer", "sea_yard", "sea_yard", "idle", false, false, false)
+    MakePlacer("porto_waterchest_placer", "water_chest", "water_chest", "closed", false, false, false)

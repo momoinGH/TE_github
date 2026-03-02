@@ -92,7 +92,7 @@ end))
 AddStategraphPostInit("wilson_client", function(sg)
     -- 划船
     Utils.FnDecorator(sg.states["run_start"], "onenter", nil, function(retTab, inst)
-        local boat = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+        local boat = inst:TroGetSWBoat()
         if boat then
             local item = boat.replica.container and boat.replica.container:GetItemInSlot(1)
             local anim = inst.replica.inventory:IsHeavyLifting() and "heavy_idle"
@@ -104,7 +104,7 @@ AddStategraphPostInit("wilson_client", function(sg)
     end)
 
     Utils.FnDecorator(sg.states["run"], "onenter", function(inst)
-        local boat = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+        local boat = inst:TroGetSWBoat()
         if not boat then
             return
         end
@@ -136,7 +136,7 @@ AddStategraphPostInit("wilson_client", function(sg)
     end)
 
     Utils.FnDecorator(sg.states["run_stop"], "onenter", nil, function(retTab, inst)
-        local boat = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+        local boat = inst:TroGetSWBoat()
         if boat then
             local item = boat.replica.container and boat.replica.container:GetItemInSlot(1)
             local anim = inst.replica.inventory:IsHeavyLifting() and "heavy_idle"

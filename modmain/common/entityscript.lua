@@ -69,3 +69,12 @@ function EntityScript:GetEventCallback(event, source, source_file, test_fn)
         end
     end
 end
+
+-- 获取玩家身上的小船
+function EntityScript:TroGetSWBoat()
+    if TheWorld.ismastersim then
+        return self.components.pro_driver and self.components.pro_driver.boat or nil
+    else
+        return self.replica.pro_driver and self.replica.pro_driver:GetBoat() or nil
+    end
+end

@@ -1,4 +1,3 @@
-local Utils = require("tropical_utils/utils")
 require "components/map"
 
 -- 海难小船

@@ -3,27 +3,33 @@ local function ClearBoat(inst, data)
 end
 
 local function Init(inst, self)
-    local boat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+    local boat = inst:TroGetSWBoat()
         or FindClosestEntity(inst, 1, nil, { "shipwrecked_boat" }, { "INLIMBO" })
     if boat then
-        self:SetBoat(nil) --先脱下来
         self:SetBoat(boat)
     end
+end
+
+local function onboat(self, boat)
+    self.inst.replica.pro_driver:SetBoat(boat)
 end
 
 --- 海难小船行驶组件
 local Driver = Class(function(self, inst)
     self.inst = inst
 
+    self.boat = nil
     self.hoptask = nil
 
     inst:ListenForEvent("death", ClearBoat)
 
     inst:DoTaskInTime(0, Init, self)
-end)
+end, nil, {
+    boat = onboat
+})
 
 function Driver:GetBoat()
-    return self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+    return self.inst:TroGetSWBoat()
 end
 
 -- 检测玩家落地，玩家落地时将船挂在玩家身上
@@ -66,44 +72,19 @@ function Driver:StartHopBoat(boat)
     end
 end
 
--- 修正船的位置，如果在陆地上重新设置到海上去
-local function FixBoatPosition(boat)
-    local pos = boat:GetPosition()
-    if TheWorld.Map:IsOceanAtPoint(pos.x, pos.y, pos.z, false) then
-        return
-    end
-
-    local offset = FindSwimmableOffset(pos, math.random() * 2 * PI, 2, 6) or
-        FindSwimmableOffset(pos, math.random() * 2 * PI, 4, 6) or
-        FindSwimmableOffset(pos, math.random() * 2 * PI, 6, 6) or
-        FindSwimmableOffset(pos, math.random() * 2 * PI, 8, 6) or
-        FindSwimmableOffset(pos, math.random() * 2 * PI, 12, 6) or
-        FindSwimmableOffset(pos, math.random() * 2 * PI, 14, 6) or
-        FindSwimmableOffset(pos, math.random() * 2 * PI, 16, 6) or
-        FindSwimmableOffset(pos, math.random() * 2 * PI, 20, 6) or
-        FindSwimmableOffset(pos, math.random() * 2 * PI, 18, 6)
-
-    if offset then
-        boat.Transform:SetPosition(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z)
-    end
-end
-
 function Driver:SetBoat(boat)
-    local oldboat = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)
+    local oldboat = self.boat
     if oldboat == boat then return end
 
     if oldboat then
-        oldboat.components.equippable:SetPreventUnequipping(false)
-        self.inst.components.inventory:DropItem(oldboat)
-        FixBoatPosition(oldboat)
         oldboat.components.shipwreckedboat:OnPlayerDismounted(self.inst)
     end
 
+    self.boat = boat
     if boat then
-        self.inst.components.inventory:Equip(boat)
-        boat.components.equippable:SetPreventUnequipping(true)
+        self.inst:AddChild(boat)
+        boat.Transform:SetPosition(0, -0.2, 0)
         boat.components.shipwreckedboat:OnPlayerMounted(self.inst)
-
         self.inst:StartUpdatingComponent(self)
     else
         self.inst:StopUpdatingComponent(self)
@@ -112,7 +93,7 @@ function Driver:SetBoat(boat)
 end
 
 function Driver:Check()
-    return self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT)    --船还在
+    return self.boat and self.boat:IsValid()                                    --船还在
         and not self.inst:HasTag("playerghost")                                 --玩家没死
         and not (self.inst.sg and self.inst.sg:HasStateTag("jumping"))          --玩家不在跳跃
         and TheWorld.Map:IsOceanAtPoint(self.inst.Transform:GetWorldPosition()) --玩家在海上

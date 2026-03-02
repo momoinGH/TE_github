@@ -83,7 +83,6 @@ modimport "modmain/mods/knownmodcheck"               -- 检测不兼容模组并
 modimport "modmain/animstate"                        -- AnimState 增强
 modimport "modmain/standardcomponents"               -- 定义一些全局函数
 modimport "scripts/prefabs/tropical_farm_plant_defs" --定义新植物
-modimport "modmain/interior"                         --小房子
 modimport "modmain/interiorminimap"                  --绘制小房间内的小地图
 modimport "modmain/sw_fertilizer_nutrient_defs"      --肥料值定义
 modimport "modmain/pro_componentaction"              --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
@@ -101,10 +100,10 @@ modimport "modmain/mods/action_queue"
 
 -- 共同
 Modimport("common")
---海难小船
-Modimport("boat")
 --小房子，以及在地图外生成相关
 Modimport("room")
+--海难小船
+Modimport("boat")
 -- 大风平原
 if TUNING.tropical.windyplains ~= 5 then
     Modimport("windy")

@@ -57,6 +57,10 @@ GLOBAL.c_testsound = function(sound)
     ThePlayer.SoundEmitter:PlaySound(sound)
 end
 
+GLOBAL.c_testanim = function(anim, loop)
+    ThePlayer.AnimState:PlayAnimation(anim, loop)
+end
+
 ----------------------------------------------------------------------------------------------------
 local is_show_prefab_details = false
 

@@ -1125,3 +1125,7 @@ function MakeLargeBurnableCharacter(inst, sym, offset, scale) end
 
 -- pickable冬天暂停倒计时
 function MakeNoGrowInWinter(inst) end
+
+function MakeWaterObstaclePhysics(inst, rad, height, restitution) end
+
+function MakeSnowCovered(inst) end

@@ -1,3 +1,26 @@
+local function OnBoatStartMoving(inst)
+    if inst.components.fueled then
+        inst.components.fueled:StartConsuming()
+    end
+end
+local function OnBoatStopMoving(inst)
+    if inst.components.fueled then
+        inst.components.fueled:StopConsuming()
+    end
+end
+
+local function OnEquipped(inst, data)
+    local self = inst.components.shipwreckedboatparts
+    inst:ListenForEvent("boat_startmoving", self.on_boat_startmoving_fn, data.owner)
+    inst:ListenForEvent("boat_stopmoving", self.on_boat_stopmoving_fn, data.owner)
+end
+
+local function OnUnEquipped(inst, data)
+    local self = inst.components.shipwreckedboatparts
+    inst:RemoveEventCallback("boat_startmoving", self.on_boat_startmoving_fn, data.owner)
+    inst:RemoveEventCallback("boat_stopmoving", self.on_boat_stopmoving_fn, data.owner)
+end
+
 --- 海难小船零件
 --- 别忘了给零件添加shipwrecked_boat_head或者shipwrecked_boat_tail标签，前者对应船帆，后者对应船灯
 local ShipwreckedBoatParts = Class(function(self, inst)
@@ -10,6 +33,12 @@ local ShipwreckedBoatParts = Class(function(self, inst)
     -- 区别在于下面两个函数是玩家在船上和不在船上时调用，这两个事件只跟是否被船放入槽中有关系
     self.onplayermountedfn = nil    --(inst, boat, driver)玩家上船，其中boatfx是船的复制体，我希望大部分修改boat和boatfx都一同修改
     self.onplayerdismountedfn = nil --(inst, boat, driver)玩家下船
+
+    self.on_boat_startmoving_fn = function(boat) OnBoatStartMoving(inst) end
+    self.on_boat_stopmoving_fn = function(boat) OnBoatStopMoving(inst) end
+
+    inst:ListenForEvent("boat_equipped", OnEquipped)
+    inst:ListenForEvent("boat_unequipped", OnUnEquipped)
 end)
 
 -- 当零件被装备时返回小船

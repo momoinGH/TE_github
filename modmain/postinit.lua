@@ -1,6 +1,3 @@
--------------------------------------------------------------------------------------
-
-
 ---modimport("postinit/tropical_climate")         --热带气候
 ---modimport("postinit/room_camera")              --房间镜头
 ---modimport("postinit/boat")                     --单人船相关修改

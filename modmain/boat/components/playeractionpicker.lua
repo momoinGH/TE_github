@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 local function OrderByPriority(l, r)
     return (l.action and l.action.priority or 0) > (r.action and r.action.priority or 0)
 end

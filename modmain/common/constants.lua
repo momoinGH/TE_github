@@ -1,8 +1,5 @@
 local Utils = require("tropical_utils/utils")
 
-EQUIPSLOTS.SWBOAT = "swboat" --海难小船的装备槽
-
-
 --渡渡鸟数量控制
 _G.SEABEACH_AMOUNT = {
     doydoy = 0,
@@ -47,9 +44,7 @@ GLOBAL.SWP_WAVEBREAK_EFFICIENCY = { -- 破浪效率：var * 100%
     }
 }
 
-Utils.FnDecorator(GLOBAL, "PlayFootstep", function(inst)
-    return nil, inst.replica.inventory and inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.SWBOAT) --海难小船时不播放走路音效
-end)
+
 
 --- 掉落一个物品，ReplacePrefab的强化
 GLOBAL.TropicalDropItem = function(inst, item, isremove)
