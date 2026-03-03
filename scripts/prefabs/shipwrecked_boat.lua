@@ -111,7 +111,7 @@ local function MakeBoat(name, data, common_post_fn, master_post_fn)
 
         local max_health = data.health or TUNING.BOAT.HEALTH
         inst:AddComponent("healthsyncer")
-        inst.components.healthsyncer.max_health = max_health
+        inst.components.healthsyncer.max_health = max_health --给客户端
 
         inst.runspeed = data.runspeed --移动速度
 

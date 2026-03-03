@@ -127,3 +127,28 @@ AddClassPostConstruct("widgets/hoverer", function(self)
 end)
 
 ----------------------------------------------------------------------------------------------------
+
+local profiler = nil
+-- 开启和关闭性能分析，可以打印开启期间所调用函数的执行时间，用来检查哪里造成了卡顿
+GLOBAL.c_setprofile = function(enable)
+    if (enable or false) == (profiler ~= nil) then
+        return
+    end
+
+    require("profiler")
+    if enable then
+        profiler = newProfiler()
+        profiler:start()
+    else
+        profiler:stop()
+
+        local tmp = {}
+        profiler:lua_report(tmp)
+        print("性能分析日志打印开始")
+        for k, v in pairs(tmp) do
+            print(k, v)
+        end
+        print("性能分析日志打印结束")
+        profiler = nil
+    end
+end
