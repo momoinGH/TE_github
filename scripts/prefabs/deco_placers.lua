@@ -82,9 +82,10 @@ local function PostInitWallOrnament(inst)
 end
 
 local function PlacerOnLightUpdateTransform(inst)
-    local centerPos = RoomUtils.GetHouseCenterPos(inst)
-    if centerPos then
-        inst.Transform:SetPosition(centerPos.x - 2, 1, centerPos.z)
+    local room_center = inst:TroGetRoomCenter()
+    if room_center then
+        local x, y, z = room_center.Transform:GetWorldPosition()
+        inst.Transform:SetPosition(x - 2, 1, z)
         inst.accept_placement = true
     else
         inst.accept_placement = false

@@ -11,7 +11,6 @@ local RoomSpawner = Class(function(self, inst)
     self.count = 0 --小房子计数器，主机数据
 end)
 
----从地图左上角开始，从左到右，从上到下累积
 function RoomSpawner:GetPos()
     local x = (self.count % ROW_COUNT) * ROOM_GAP - BASE_OFF
     local z = BASE_OFF + math.ceil(self.count / ROW_COUNT) * ROOM_GAP

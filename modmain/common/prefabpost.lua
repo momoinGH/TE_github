@@ -3,12 +3,6 @@ local Utils = require("tropical_utils/utils")
 modimport "modmain/common/entityscript"
 
 
-
-
-
-
-
-
 ----------------------------------------------------------------------------------------------------
 
 modimport "modmain/common/components/locomotor"
@@ -43,6 +37,7 @@ modimport "modmain/common/prefabs/world"
 modimport("modmain/common/prefabs/guard_corp")         --守卫保护作物、高草转化、草大风摇晃？
 modimport("modmain/common/prefabs/player_vision_post") --四眼镜、蝙蝠帽所用
 ----------------------------------------------------------------------------------------------------
+
 
 
 --[[

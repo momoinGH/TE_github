@@ -102,14 +102,6 @@ function FN.ClearSpace(x, z)
     end
 end
 
-function FN.GetHouseCenterPos(target)
-    local x, _, z = target.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, 0, z, FN.RADIUS, { "interior_center" })
-    if #ents > 0 then
-        return ents[1]:GetPosition()
-    end
-end
-
 ---根据目标对象位置计算距离最近的墙面
 ---side =1 左侧； =2 顶部； =3 右侧； =4 底部
 function FN.TestWallOrnamentPos(target, isSetPos, left, top, right, bottom)
@@ -118,10 +110,10 @@ function FN.TestWallOrnamentPos(target, isSetPos, left, top, right, bottom)
     right = right or 7.5
 
     local pos = target:GetPosition()
-    local centerPos = FN.GetHouseCenterPos(target)
+    local room_center = target:TroGetRoomCenter()
 
-    if centerPos then
-        local x, y, z = centerPos:Get()
+    if room_center then
+        local x, y, z = room_center.Transform:GetWorldPosition()
         local dx, dz = pos.x - x, pos.z - z
 
         -- 寻找距离最近的一侧墙
@@ -168,9 +160,9 @@ end
 ---判断柱子所在哪个角
 function FN.TestBeam(target)
     local pos = target:GetPosition()
-    local centerPos = FN.GetHouseCenterPos(target)
-    if centerPos then
-        local x, y, z = FN.GetHouseCenterPos(target)
+    local room_center = target:TroGetRoomCenter()
+    if room_center then
+        local x, y, z = room_center.Transform:GetWorldPosition()
         return pos.x < x, pos.z < z --isCorner,isLeft
     end
 end
@@ -203,8 +195,12 @@ end
 
 ---获取门对室内中心的相对位置
 function FN.GetDoorRelativePosition(door)
-    local centerPos = FN.GetHouseCenterPos(door)
-    return centerPos and (door:GetPosition() - centerPos) or nil
+    local room_center = door:TroGetRoomCenter()
+    if not room_center then
+        return nil
+    end
+    local centerPos = room_center:GetPosition()
+    return door:GetPosition() - centerPos
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -346,7 +342,7 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
         inst:AddComponent("trader")
         inst.components.trader.acceptnontradable = true
         inst.components.trader.deleteitemonaccept = false
-        inst.components.trader:SetAcceptTest(DefaultDoorAcceptTest)
+        inst.components.trader:SetAbleToAcceptTest(DefaultDoorAcceptTest)
         inst.components.trader.onaccept = FN.DefaultOnDoorAccept
 
         inst:AddComponent("hauntable")
@@ -651,9 +647,15 @@ end
 
 --- 生成临近的新房间，用于房屋扩展许可证
 function FN.SpawnNearHouseInterior(door, room)
-    if door.components.teleporter:GetTarget() then return false end --已经有了
+    if door.components.teleporter:GetTarget() then
+        print("生成新房间失败，该门已经有传送目标了", door)
+        return false
+    end
     local dpos = FN.GetDoorRelativePosition(door)
-    if not dpos or not door.side then return false end              --不可能
+    if not dpos or not door.side then
+        print("生成新房间失败", door, door.side)
+        return false
+    end
     local _, _, center = FN.CreateRoom(room)
     local pos = center:GetPosition()
 

@@ -167,3 +167,12 @@ local Constructor = require("tropical_utils/constructor")
 Constructor.SetEnv(env)
 Constructor.AddScrapbookWiki("tropical", WIKI_DATA)
 WIKI_DATA = nil
+
+----------------------------------------------------------------------------------------------------
+-- 防止制作栏文本忘记写导致游戏崩溃
+for name, _ in ipairs(CRAFTING_FILTERS) do
+    if not STRINGS.UI.CRAFTING_FILTERS[name] then
+        STRINGS.UI.CRAFTING_FILTERS[name] = "STRINGS.UI.CRAFTING_FILTERS." .. name .. "未赋值"
+        print("LUA ERROR stack traceback:\n提示：STRINGS.UI.CRAFTING_FILTERS." .. name .. "未赋值，点击制作栏时会报错")
+    end
+end

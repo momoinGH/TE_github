@@ -34,14 +34,15 @@ local function OnLoad(inst, data)
     end
 end
 
+-- 横向为z右为正，纵向为x下为正
 local function IsPointInRoom(inst, x, z)
     local half_width = inst.room_width:value() / 2
     local half_depth = inst.room_depth:value() / 2
     local rx, ry, rz = inst.Transform:GetWorldPosition()
-    return x >= rx - half_width
-        and x <= rx + half_width
-        and z >= rz - half_depth
-        and z <= rz + half_depth
+    return z >= rz - half_width
+        and z <= rz + half_width
+        and x >= rx - half_depth
+        and x <= rx + half_depth
 end
 
 local function fn()

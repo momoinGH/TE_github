@@ -17,12 +17,12 @@ GLOBAL.c_resetroomentoffset = function(offset_x, offset_y, offset_z)
     end
 
     local x, y, z = ent.Transform:GetWorldPosition()
-    conprint("旧偏移量：", x, ", ", y, ", ", z, ", 新偏移量：", offset_x, ", ", offset_y, ", ", offset_z)
+    local cx, cy, cz = room_center.Transform:GetWorldPosition()
+    conprint("旧偏移量：", x - cx, ", ", y - cy, ", ", z - cz, ", 新偏移量：", offset_x, ", ", offset_y, ", ", offset_z)
 
     if offset_x == nil and offset_y == nil and offset_z == nil then
         return --仅打印
     end
 
-    local cx, cy, cz = room_center.Transform:GetWorldPosition()
     ent.Transform:SetPosition(cx + (offset_x or 0), (offset_y or 0), cz + (offset_z or 0))
 end

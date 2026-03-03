@@ -55,8 +55,8 @@ local room = {
     addprops = {
         { name = "interior_wall_wood" },
         { name = "deco_roomglow" },
-        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = -15 / 2, },
-        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = 15 / 2, scale = { -1, 1 } },
+        { name = "deco_antiquities_cornerbeam", x_offset = -5.5, z_offset = -8.3, },
+        { name = "deco_antiquities_cornerbeam", x_offset = -5, z_offset = 8.3, scale = { -1, 1 } },
         { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = -15 / 2 - 0.3, },
         { name = "deco_antiquities_cornerbeam2", x_offset = 4.7, z_offset = 15 / 2 + 0.3, scale = { -1, 1 } },
         { name = "swinging_light_rope_1", x_offset = -2, y_offset = 1, addtags = { "playercrafted" } },
@@ -65,11 +65,15 @@ local room = {
 }
 
 local function onaccept(inst, giver, item)
+    print("检查", item.prefab, inst.components.teleporter.targetTeleporter)
     if item.prefab == "construction_permit" and not inst.components.teleporter.targetTeleporter then
+        print("2")
         if RoomUtils.SpawnNearHouseInterior(inst, room) then --应该没可能失败
+            print("3")
             item:Remove()
         end
     else
+        print("4")
         inst.components.teleporter:Activate(item)
     end
 end
@@ -155,7 +159,7 @@ end
 ----------------------------------------------------------------------------------------------------
 
 local function PlacerOnUpdateTransform(inst)
-    local side, minDis = RoomUtils.TestWallOrnamentPos(inst, true, 7.5, 5, 7.5, 5.5)
+    local side, minDis = RoomUtils.TestWallOrnamentPos(inst, true, 7.5, 5, 7.5, 5) --门可建造范围，太靠墙会导致玩家过不去
     local anim
     if side and minDis < 4 then
         if side == 1 then

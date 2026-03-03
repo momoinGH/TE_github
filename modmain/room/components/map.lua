@@ -12,22 +12,25 @@ function Map:TroIsWorldOut(x, y, z)
     end
 end
 
-local last_room = nil --缓存，短时间内在一个房间附近求值的可能性较大
+local last_rooms = {} --缓存，短时间内在一个房间附近求值的可能性较大
 function Map:TroGetRoomCenter(x, y, z)
     if not self:TroIsWorldOut(x, 0, z) then
         return nil
     end
-    if last_room and last_room:IsValid() and last_room:IsPointInRoom(x, z) then
-        return last_room
-    end
-    -- 查找
-    last_room = nil
-    for _, ent in ipairs(TheSim:FindEntities(x, 0, z, RoomUtils.RADIUS, { "interior_center" })) do
-        if ent:IsPointInRoom(x, z) then
-            last_room = ent
-            return ent
+
+    for _, v in ipairs(last_rooms) do
+        if v:IsValid() and v:IsPointInRoom(x, z) then
+            return v
         end
     end
+    -- 查找
+    last_rooms = TheSim:FindEntities(x, 0, z, RoomUtils.RADIUS, { "interior_center" })
+    for _, v in ipairs(last_rooms) do
+        if v:IsPointInRoom(x, z) then
+            return v
+        end
+    end
+
     return nil
 end
 
