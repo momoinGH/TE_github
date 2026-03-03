@@ -49,8 +49,8 @@ local function ontrawlpickup(inst)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/trawl_net/collect")
 end
 
+local fullpenalty = 0.75
 local function updatespeedmult(inst)
-    local fullpenalty = TUNING.TRAWLING_SPEED_MULT
     local penalty = fullpenalty * (inst.components.inventory:NumItems() / TUNING.TRAWLNET_MAX_ITEMS)
     inst.components.shipwreckedboatparts:SetSpeedMult(math.floor((1 - penalty) * 100 + .5) / 100)
 end
@@ -71,7 +71,6 @@ local function pickupitem(inst, pickup)
 end
 
 local function stoptrawling(inst)
-    inst.trawling = false
     if inst.trawltask then
         inst.trawltask:Cancel()
         inst.trawltask = nil
@@ -150,13 +149,9 @@ local function isBehind(inst, tar)
     return dot <= 0 and dist >= 1
 end
 
+local TRAWLNET_ITEM_DISTANCE = 8 --How far you have to travel to get another item
 local function updateTrawling(inst)
-    if not inst.trawling then
-        return
-    end
-
     local driver = inst.components.shipwreckedboatparts:GetDriver()
-
     if not driver then --拖网没有玩家，出问题啦！
         stoptrawling(inst)
         return
@@ -167,7 +162,7 @@ local function updateTrawling(inst)
     local displacement = pos - inst.lastPos
     inst.distanceCounter = inst.distanceCounter + displacement:Length()
 
-    if inst.distanceCounter > TUNING.TRAWLNET_ITEM_DISTANCE then --生成一个
+    if inst.distanceCounter > TRAWLNET_ITEM_DISTANCE then --生成一个
         pickup = SpawnPrefab(selectLoot(inst))
         inst.distanceCounter = 0
     end
@@ -190,13 +185,6 @@ local function updateTrawling(inst)
     if pickup then
         pickupitem(inst, pickup)
     end
-end
-
-local function starttrawling(inst)
-    inst.trawling = true
-    inst.lastPos = inst:GetPosition()
-    inst.trawltask = inst:DoPeriodicTask(FRAMES * 5, updateTrawling)
-    inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/trawl_net/attach")
 end
 
 local function droploot(inst, boat)
@@ -222,40 +210,38 @@ local function droploot(inst, boat)
     -- end
 end
 
-local function OnEquipped(inst, data)
-    local owner = data.owner
-    owner.AnimState:OverrideSymbol("swap_trawlnet", gettrawlbuild(inst), "swap_trawlnet")
-    local boatfx = data.owner.components.shipwreckedboat.boatfx
-    if boatfx then
-        boatfx.AnimState:OverrideSymbol("swap_trawlnet", gettrawlbuild(inst), "swap_trawlnet")
-    end
+-- 被装备并且玩家上船后开始
+local function StartTrawling(inst)
+    if inst.trawltask then return end
 
-    starttrawling(inst)
-    updatespeedmult(inst)
-end
-
-local function OnUnEquipped(inst, data)
-    local boat = data.owner
-    boat.AnimState:ClearOverrideSymbol("swap_trawlnet")
-    local boatfx = data.owner.components.shipwreckedboat.boatfx
-    if boatfx then
-        boatfx.AnimState:ClearOverrideSymbol("swap_trawlnet")
-    end
-
-    stoptrawling(inst)
-    droploot(inst, boat)
-    inst:DoTaskInTime(2 * FRAMES, inst.Remove)
-end
-
-local function OnPlayerMounted(inst, boat, player)
-    -- player.AnimState:OverrideSymbol("swap_trawlnet", gettrawlbuild(item), "swap_trawlnet") --玩家替换有什么用吗？
-    starttrawling(inst)
+    inst.distanceCounter = 0
+    inst.lastPos = inst:GetPosition()
+    inst.trawltask = inst:DoPeriodicTask(FRAMES * 5, updateTrawling)
+    inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/trawl_net/attach")
     updatespeedmult(inst)
 end
 
 local function OnPlayerDismounted(inst, boat, player)
     player.AnimState:ClearOverrideSymbol("swap_trawlnet")
     stoptrawling(inst)
+end
+
+local function OnEquipped(inst, data)
+    local owner = data.owner
+    owner.AnimState:OverrideSymbol("swap_trawlnet", gettrawlbuild(inst), "swap_trawlnet")
+
+    if inst.components.shipwreckedboatparts:GetDriver() then
+        StartTrawling(inst)
+    end
+end
+
+local function OnUnEquipped(inst, data)
+    local boat = data.owner
+    boat.AnimState:ClearOverrideSymbol("swap_trawlnet")
+
+    stoptrawling(inst)
+    droploot(inst, boat)
+    inst:DoTaskInTime(2 * FRAMES, inst.Remove)
 end
 
 local function net()
@@ -276,6 +262,7 @@ local function net()
     inst:AddTag("trawlnet")
     inst:AddTag("aquatic")
     inst:AddTag("shipwrecked_boat_tail")
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -290,13 +277,12 @@ local function net()
 
     inst:AddComponent("inventory")
     inst.components.inventory.maxslots = TUNING.TRAWLNET_MAX_ITEMS
-    inst.components.inventory.show_invspace = true
 
     inst:AddComponent("inventoryitem")
 
     inst:AddComponent("shipwreckedboatparts")
     inst.components.shipwreckedboatparts.move_sound = "dontstarve_DLC002/common/trawl_net/move_LP"
-    inst.components.shipwreckedboatparts.onplayermountedfn = OnPlayerMounted
+    inst.components.shipwreckedboatparts.onplayermountedfn = StartTrawling
     inst.components.shipwreckedboatparts.onplayerdismountedfn = OnPlayerDismounted
 
     MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)

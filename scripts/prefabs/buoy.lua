@@ -21,10 +21,6 @@ local loot =
 local HIT_SOUND = "terraria1/skins/hammush" -- TODO better sound for this maybe?
 
 local function onhammered(inst, worker)
-    if inst:HasTag("fire") and inst.components.burnable then
-        inst.components.burnable:Extinguish()
-    end
-    --inst.components.lootdropper:SpawnLootPrefab("bamboo")	
     inst.components.lootdropper:DropLoot()
     SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst.SoundEmitter:PlaySound("dontstarve/common/destroy_metal")
@@ -34,10 +30,6 @@ end
 local function onhit(inst, worker)
     inst.sg:GoToState("hit")
     inst.SoundEmitter:PlaySound(HIT_SOUND)
-    --if not inst:HasTag("burnt") then
-    --inst.AnimState:PlayAnimation("hit")
-    --inst.AnimState:PushAnimation("idle", true)
-    --end
 end
 
 local function ShouldKeepTarget(_) return false end
@@ -49,27 +41,13 @@ local function OnHitByAttack(inst, attacker, damage, specialdamage)
     end
 end
 
-local function onsave(inst, data)
-    --if inst:HasTag("burnt") or inst:HasTag("fire") then
-    --    data.burnt = true
-    --end
-end
-
-local function onload(inst, data)
-    --if data and data.burnt then
-    --    inst.components.burnable.onburnt(inst)
-    --end
-end
-
 local function OnCollide(inst, data)
     inst.SoundEmitter:PlaySound(HIT_SOUND)
 end
---[[
+
 local function onbuilt(inst)
     inst.sg:GoToState("place")
-    --inst.AnimState:PlayAnimation("place")
-    --inst.AnimState:PushAnimation("idle", true)
-end]]
+end
 
 local function OnPhysicsWake(inst)
     inst.components.boatphysics:StartUpdating()
@@ -85,9 +63,10 @@ end
 
 local function fn(Sim)
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
+    inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
+    inst.entity:AddLight()
     inst.entity:AddNetwork()
 
     local minimap = inst.entity:AddMiniMapEntity()
@@ -110,7 +89,6 @@ local function fn(Sim)
     anim:SetBuild("buoy")
     anim:PlayAnimation("idle", true)
 
-    inst.entity:AddLight()
     inst.Light:Enable(true)
     inst.Light:SetIntensity(.75)
     inst.Light:SetColour(223 / 255, 246 / 255, 255 / 255)
@@ -122,6 +100,7 @@ local function fn(Sim)
     inst:AddTag("ignorewalkableplatforms")
     inst:AddTag("noauradamage")
     inst:AddTag("seastack")
+    inst:AddTag("structure")
 
     local floater = MakeInventoryFloatable(inst, "med", 0.1, { 1.1, 0.9, 1.1 })
     floater.bob_percent = 0
@@ -136,15 +115,12 @@ local function fn(Sim)
 
     inst.scrapbook_anim = "1_idle"
 
-    --
     inst:AddComponent("boatphysics")
 
-    --
     local combat = inst:AddComponent("combat")
     combat:SetKeepTargetFunction(ShouldKeepTarget)
     combat:SetOnHit(OnHitByAttack)
 
-    --
     local health = inst:AddComponent("health")
     health:SetMaxHealth(1)
     health:SetAbsorptionAmount(1)
@@ -162,13 +138,8 @@ local function fn(Sim)
     inst.components.workable:SetWorkLeft(4)
     inst.components.workable:SetOnFinishCallback(onhammered)
     inst.components.workable:SetOnWorkCallback(onhit)
-    MakeSnowCovered(inst, .01)
 
-    inst:AddTag("structure")
-    --MakeSmallBurnable(inst, nil, nil, true)
-    --MakeSmallPropagator(inst)
-    inst.OnSave = onsave
-    inst.OnLoad = onload
+    MakeSnowCovered(inst, .01)
 
     inst:DoTaskInTime(0.2, function()
         local efeito = SpawnPrefab("float_fx_front")
@@ -183,7 +154,7 @@ local function fn(Sim)
     end)
 
     inst:ListenForEvent("on_collide", OnCollide)
-    --inst:ListenForEvent("onbuilt", onbuilt)
+    inst:ListenForEvent("onbuilt", onbuilt)
 
     inst:SetStateGraph("SGbuoy")
 

@@ -434,7 +434,6 @@ local function fnwaterchest(sim)
 end
 
 return Prefab("porto_buoy", fnbuoy, assets, prefabs),
-    MakePlacer("porto_buoy_placer", "buoy", "buoy", "ground", false, false, false),
     Prefab("porto_fish_farm", fnfish_farm, assets, prefabs),
     MakePlacer("porto_fish_farm_placer", "fish_farm", "fish_farm", "idle", false, false, false),
     Prefab("porto_ballphinhouse", fnballphinhouse, assets, prefabs),

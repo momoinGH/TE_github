@@ -45,19 +45,14 @@ end)
 function ShipwreckedBoatParts:GetBoat()
     local owner = self.inst.components.inventoryitem.owner
     if owner and owner:HasTag("shipwrecked_boat") then
-        local slot = owner.components.container:GetItemSlot(self.inst)
+        local slot = owner.components.container and owner.components.container:GetItemSlot(self.inst)
         return (slot == 1 or slot == 2) and owner or nil
     end
 end
 
-function ShipwreckedBoatParts:GetVisibleBoat()
-    local boat = self:GetBoat()
-    return boat and boat.components.shipwreckedboat:GetVisibleBoat() or nil
-end
-
 function ShipwreckedBoatParts:GetDriver()
     local boat = self:GetBoat()
-    return boat and boat.components.inventoryitem.owner or nil
+    return boat and boat.components.shipwreckedboat.driver or nil
 end
 
 function ShipwreckedBoatParts:SetSpeedMult(speed_mult)

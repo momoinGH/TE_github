@@ -90,6 +90,7 @@ function Driver:SetBoat(boat)
 
     self.boat = boat
     if boat then
+        -- boat.Physics:SetCollides(false) --需要吗？
         boat.Physics:Teleport(0, -0.2, 0)
         self.inst:AddChild(boat)
         boat.components.shipwreckedboat:OnPlayerMounted(self.inst)

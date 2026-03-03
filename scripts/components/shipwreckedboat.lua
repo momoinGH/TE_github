@@ -8,10 +8,9 @@ local function OnItemGet(inst, data)
     local self = inst.components.shipwreckedboat
     self:UpdateSpeedMult()
 
-    local driver = inst.components.inventoryitem.owner
-    if driver then
+    if self.driver then
         if part.onplayermountedfn then
-            part.onplayermountedfn(item, inst, driver)
+            part.onplayermountedfn(item, inst, self.driver)
         end
     end
 
@@ -28,10 +27,9 @@ local function OnItemLose(inst, data)
     local self = inst.components.shipwreckedboat
     self:UpdateSpeedMult()
 
-    local driver = inst.components.inventoryitem.owner
-    if driver then
+    if self.driver then
         if part.onplayerdismountedfn then
-            part.onplayerdismountedfn(item, inst, driver)
+            part.onplayerdismountedfn(item, inst, self.driver)
         end
     end
     item:PushEvent("boat_unequipped", { owner = inst })
@@ -62,6 +60,7 @@ local Boat = Class(function(self, inst)
 
     inst:AddTag("shipwrecked_boat")
 
+    inst.driver = nil
     inst.consume_task = nil
 
     inst:ListenForEvent("itemget", OnItemGet)
@@ -70,15 +69,9 @@ local Boat = Class(function(self, inst)
     inst:ListenForEvent("boat_stopmoving", OnBoatStopMoving)
 end)
 
--- 获取可见的小船，如果被装备了就获取复制体，否则获取真实的船
-function Boat:GetVisibleBoat()
-    return self.inst
-end
-
 --重新计算移速倍率
 function Boat:UpdateSpeedMult()
-    local driver = self.inst.components.inventoryitem.owner
-    if not driver or not driver.components.locomotor then return end
+    if not self.driver or not self.driver.components.locomotor then return end
 
     local c = self.inst.components.container
     if not c then return end
@@ -91,12 +84,13 @@ function Boat:UpdateSpeedMult()
         end
     end
 
-    driver.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "swboat")
-    driver.components.locomotor:SetExternalSpeedMultiplier(self.inst, "swboat", speed_mult)
+    self.driver.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "swboat")
+    self.driver.components.locomotor:SetExternalSpeedMultiplier(self.inst, "swboat", speed_mult)
 end
 
 --- 玩家上船（或者说被装备的时候）
 function Boat:OnPlayerMounted(player)
+    self.driver = player
     if self.inst.components.container then
         self.inst.components.container:Open(player)
 
@@ -114,6 +108,7 @@ end
 
 --- 玩家下船
 function Boat:OnPlayerDismounted(player)
+    self.driver = nil
     if self.inst.components.container then
         self.inst.components.container:Close(player)
 

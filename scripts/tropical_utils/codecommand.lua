@@ -1129,3 +1129,7 @@ function MakeNoGrowInWinter(inst) end
 function MakeWaterObstaclePhysics(inst, rad, height, restitution) end
 
 function MakeSnowCovered(inst) end
+
+function MakeHauntableLaunchAndIgnite(inst, launchchance, ignitechance, speed, cooldown, launch_haunt_value, ignite_haunt_value) end
+
+function MakeHauntableIgnite(inst, chance, cooldown, haunt_value) end

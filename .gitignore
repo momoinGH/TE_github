@@ -1,5 +1,6 @@
 .vscode/
 /test.lua
+/test2.lua
 exported/
 
 sound/DLC003_AMB_stream.fsb

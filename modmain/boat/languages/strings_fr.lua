@@ -15,13 +15,29 @@ STRINGS.NAMES.CARGOBOAT = "Cargo"
 STRINGS.RECIPE_DESC.CARGOBOAT = "Pour stocker en mer !"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CARGOBOAT = "Ça peut contenir tout ce que j'ai !"
 
+STRINGS.NAMES.PORTO_ARMOUREDBOAT = "Bateau blindé"
+STRINGS.RECIPE_DESC.PORTO_ARMOUREDBOAT = "Un vaisseau solide avec coquilles de protection."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ARMOUREDBOAT = "Ça c'est un bateau durable."
+
+STRINGS.NAMES.PORTO_CARGOBOAT = "Cargo"
+STRINGS.RECIPE_DESC.PORTO_CARGOBOAT = "Pour stocker en mer !"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_CARGOBOAT = "Ça peut contenir tout ce que j'ai !"
+
 STRINGS.NAMES.ENCRUSTEDBOAT = "Bateau en croûte"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ENCRUSTEDBOAT = "Une simple coquille vide."
 STRINGS.RECIPE_DESC.ENCRUSTEDBOAT = "Un vrai char des mers !"
 
+STRINGS.NAMES.PORTO_ENCRUSTEDBOAT = "Bateau en croûte"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ENCRUSTEDBOAT = "Une simple coquille vide."
+STRINGS.RECIPE_DESC.PORTO_ENCRUSTEDBOAT = "Un vrai char des mers !"
+
 STRINGS.NAMES.ROWBOAT = "Canot"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROWBOAT = "Ça marche à l'huile de coude."
 STRINGS.RECIPE_DESC.ROWBOAT = "Qu'allait-il faire dans cette galère ?"
+
+STRINGS.NAMES.PORTO_ROWBOAT = "Canot"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ROWBOAT = "Ça marche à l'huile de coude."
+STRINGS.RECIPE_DESC.PORTO_ROWBOAT = "Qu'allait-il faire dans cette galère ?"
 
 STRINGS.NAMES.SURFBOARD = "Planche de surf"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SURFBOARD = "Si j'étais sur ma planche de surf, je pourrais t'attraper..."
@@ -97,45 +113,6 @@ STRINGS.NAMES.BOAT_TORCH = "Torche de bateau"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_TORCH = "Avec ça, j'aurai les mains libres."
 STRINGS.RECIPE_DESC.BOAT_TORCH = "Pour voir en mer."
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+STRINGS.NAMES.PORTO_LOGRAFT = "Radeau de rondins"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "Ça ressemble à... un genre de bateau..."
+STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "Pour naviguer sans garantie."

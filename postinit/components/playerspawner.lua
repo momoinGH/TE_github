@@ -10,7 +10,9 @@ AddComponentPostInit("playerspawner", function(self)
 
             -------------添加出生物品---------------修改为DOTAskintime或许会更好
             local startitem
-            if TUNING.ham_start == true then
+            if TUNING.sw_start == true then
+                startitem = "porto_raft_old"
+            elseif TUNING.ham_start == true then
                 startitem = "machete"
             end
 

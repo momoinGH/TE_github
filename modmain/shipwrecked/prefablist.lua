@@ -1,4 +1,5 @@
 PrefabFiles = {
+    "shipwrecked_boat_placer2",
     "birds_sw",
     "axeobsidian",
     "armor_obsidian",

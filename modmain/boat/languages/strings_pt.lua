@@ -17,13 +17,29 @@ STRINGS.NAMES.CARGOBOAT = "Barco cargueiro"
 STRINGS.RECIPE_DESC.CARGOBOAT = "Acumulando espaço no mar!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CARGOBOAT = "Tem espaço para todas as minhas coisas!"
 
+STRINGS.NAMES.PORTO_ARMOUREDBOAT = "Barco blindado"
+STRINGS.RECIPE_DESC.PORTO_ARMOUREDBOAT = "Descascar para fora para este vaso saudável."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ARMOUREDBOAT = "Esse é um barco durável."
+
+STRINGS.NAMES.PORTO_CARGOBOAT = "Barco de carga"
+STRINGS.RECIPE_DESC.PORTO_CARGOBOAT = "Acumulando no mar!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_CARGOBOAT = "Tem espaço para todas as minhas coisas!"
+
 STRINGS.NAMES.ENCRUSTEDBOAT = "Barco de coral"
 STRINGS.RECIPE_DESC.ENCRUSTEDBOAT = "Um tanque em alto mar!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ENCRUSTEDBOAT = "Um mero casco de navio."
 
+STRINGS.NAMES.PORTO_ENCRUSTEDBOAT = "Barco resistente"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ENCRUSTEDBOAT = "Bastante robusto."
+STRINGS.RECIPE_DESC.PORTO_ENCRUSTEDBOAT = "Altamente resistente"
+
 STRINGS.NAMES.ROWBOAT = "Barco a remo"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROWBOAT = "É movido a trabalho braçal."
 STRINGS.RECIPE_DESC.ROWBOAT = "Vai, vai, vai, navegando!"
+
+STRINGS.NAMES.PORTO_ROWBOAT = "Barco"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ROWBOAT = "Agora minha aventura está completa."
+STRINGS.RECIPE_DESC.PORTO_ROWBOAT = "Um barco mais resistente"
 
 STRINGS.NAMES.SURFBOARD = "Prancha"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SURFBOARD = "Se eu estivesse na minha prancha eu poderia te pegar"
@@ -115,88 +131,9 @@ STRINGS.NAMES.BOAT_TORCH = "Tocha de barco"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_TORCH = "Assim minhas mãos ficarão livres."
 STRINGS.RECIPE_DESC.BOAT_TORCH = "Veja, o mar."
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+STRINGS.NAMES.PORTO_LOGRAFT = "Jagada de madeira"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "Jagada de madeira...?"
+STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "Este parece... tipo de barco..."
 
 
 

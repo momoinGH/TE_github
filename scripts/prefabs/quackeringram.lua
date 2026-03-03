@@ -37,11 +37,10 @@ local function spawnWake(boat)
             wake.idleanimation = "idle_2"
             boat.wakeLeft = true
         end
-        local out_boat = boat.components.shipwreckedboat:GetVisibleBoat()
         if wake.Follower then
-            wake.Follower:FollowSymbol(out_boat.GUID, "torso", 0, 0, 0)
+            wake.Follower:FollowSymbol(boat.GUID, "torso", 0, 0, 0)
         end
-        wake.Transform:SetRotation(out_boat.Transform:GetRotation())
+        wake.Transform:SetRotation(boat.Transform:GetRotation())
         boat.wakeTask = boat:DoTaskInTime(5 * FRAMES, function() spawnWake(boat) end)
     end
 end
@@ -224,10 +223,6 @@ end
 local function OnBoatEquipped(inst, data)
     local boat = data.owner
     boat.AnimState:OverrideSymbol("swap_lantern", "swap_quackeringram", "swap_quackeringram")
-    local boatfx = boat.components.shipwreckedboat.boatfx
-    if boatfx then
-        boatfx.AnimState:OverrideSymbol("swap_lantern", "swap_quackeringram", "swap_quackeringram")
-    end
 
     OnEntityWake(inst)
 end
@@ -235,10 +230,6 @@ end
 local function OnBoatUnquipped(inst, data)
     local boat = data.owner
     boat.AnimState:ClearOverrideSymbol("swap_lantern")
-    local boatfx = boat.components.shipwreckedboat.boatfx
-    if boatfx then
-        boatfx.AnimState:ClearOverrideSymbol("swap_lantern")
-    end
 
     OnEntitySleep(inst)
 end

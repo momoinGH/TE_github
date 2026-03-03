@@ -6,13 +6,29 @@ STRINGS.NAMES.ARMOUREDBOAT = "Barca corazzata"
 STRINGS.RECIPE_DESC.ARMOUREDBOAT = "Un battello ricco di investimenti e gusci."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOUREDBOAT = "Quella si che è una barca resistente."
 
+STRINGS.NAMES.PORTO_ARMOUREDBOAT = "Barca corazzata"
+STRINGS.RECIPE_DESC.PORTO_ARMOUREDBOAT = "Un batello ricco di investimenti e gusci."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ARMOUREDBOAT = "Quella si che è una barca resistente."
+
+STRINGS.NAMES.PORTO_CARGOBOAT = "Nave da carico"
+STRINGS.RECIPE_DESC.PORTO_CARGOBOAT = "Un accampamento in mezzo al mare!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_CARGOBOAT = "Ha spazio per tutte le mie cose!"
+
 STRINGS.NAMES.ENCRUSTEDBOAT = "Barca di calcare"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ENCRUSTEDBOAT = "Piutosto resistente."
 STRINGS.RECIPE_DESC.ENCRUSTEDBOAT = "Un carro armato in alto mare!"
 
+STRINGS.NAMES.PORTO_ENCRUSTEDBOAT = "Barca di calcare"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ENCRUSTEDBOAT = "Piutosto resistente."
+STRINGS.RECIPE_DESC.PORTO_ENCRUSTEDBOAT = "Un carro armato in alto mare!"
+
 STRINGS.NAMES.ROWBOAT = "Barca a remi"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROWBOAT = "Alimentato da grasso di gomito."
 STRINGS.RECIPE_DESC.ROWBOAT = "Rema, rema, rema la tua barca!"
+
+STRINGS.NAMES.PORTO_ROWBOAT = "Barca a remi"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ROWBOAT = "Alimentato con olio di gomito."
+STRINGS.RECIPE_DESC.PORTO_ROWBOAT = "Rema, rema, rema la tua barca!"
 
 STRINGS.NAMES.SURFBOARD = "Tavola da surf"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SURFBOARD = "Spero di non cadere in acqua con questo."
@@ -84,117 +100,9 @@ STRINGS.NAMES.BOAT_TORCH = "Torcia per barche"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_TORCH = "Questo manterrà le mie mani libere."
 STRINGS.RECIPE_DESC.BOAT_TORCH = "Fai luce sul mare."
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+STRINGS.NAMES.PORTO_LOGRAFT = "Zattera di tronchi"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "Non sembra molto sicura."
+STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "Naviga a tuo rischio e pericolo."
 
 
 

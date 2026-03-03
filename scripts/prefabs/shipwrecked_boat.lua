@@ -147,11 +147,6 @@ local function MakeBoat(name, data, common_post_fn, master_post_fn)
             inst.components.container:WidgetSetup(data.container)
         end
 
-        inst:AddComponent("inventoryitem")
-        inst.components.inventoryitem.cangoincontainer = false
-        inst.components.inventoryitem.canbepickedup = false
-        inst.components.inventoryitem.nobounce = true --脱下的时候不希望有自由落体的过程
-
         inst:AddComponent("shipwreckedboat")
 
         inst:AddComponent("workable")

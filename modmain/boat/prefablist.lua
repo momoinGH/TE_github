@@ -6,8 +6,7 @@ PrefabFiles = {
 
     -- 海难船
     "boatraft",
-    "shipwrecked_boat_placer",
-    "shipwrecked_boat_placer2",
+    "shipwrecked_boat_items",
     "shipwrecked_boat",
 
     -- 海难船零件

@@ -13,13 +13,29 @@ STRINGS.NAMES.CARGOBOAT = "Bote de Carga"
 STRINGS.RECIPE_DESC.CARGOBOAT = "Acumulando en el mar!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CARGOBOAT = "Tiene espacio para todas mis cosas!"
 
+STRINGS.NAMES.PORTO_ARMOUREDBOAT = "Bote Blindado"
+STRINGS.RECIPE_DESC.PORTO_ARMOUREDBOAT = "Pague por este fuerte bote."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ARMOUREDBOAT = "Ese es un bote resistente."
+
+STRINGS.NAMES.PORTO_CARGOBOAT = "Bote de Carga"
+STRINGS.RECIPE_DESC.PORTO_CARGOBOAT = "Acumulando en el mar!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_CARGOBOAT = "Tiene espacio para todas mis cosas!"
+
 STRINGS.NAMES.ENCRUSTEDBOAT = "Bote Incrustado"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ENCRUSTEDBOAT = "Muy robusto."
 STRINGS.RECIPE_DESC.ENCRUSTEDBOAT = "Altamente resistente"
 
+STRINGS.NAMES.PORTO_ENCRUSTEDBOAT = "Bote Incrustado"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ENCRUSTEDBOAT = "Muy robusto."
+STRINGS.RECIPE_DESC.PORTO_ENCRUSTEDBOAT = "Altamente resistente"
+
 STRINGS.NAMES.ROWBOAT = "Bote de Remos"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROWBOAT = "Ahora mi aventura está completa."
 STRINGS.RECIPE_DESC.ROWBOAT = "Un bote más fuerte"
+
+STRINGS.NAMES.PORTO_ROWBOAT = "Bote de Remos"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ROWBOAT = "Ahora mi aventura está completa."
+STRINGS.RECIPE_DESC.PORTO_ROWBOAT = "Un bote más fuerte"
 
 STRINGS.NAMES.SURFBOARD = "Tabla de Surf"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SURFBOARD = "Si estuviera en mi tabla de surf, podría atraparte.."
@@ -99,173 +115,8 @@ STRINGS.NAMES.BOAT_TORCH = "Antorcha de Bote"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_TORCH = "Esto mantendrá mis manos libres."
 STRINGS.RECIPE_DESC.BOAT_TORCH = "Nos vemos en el mar."
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+STRINGS.NAMES.PORTO_LOGRAFT = "Balsa de Tronco"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "balsa de tronco...?"
+STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "Esto parece... una especie de bote..."
 
 

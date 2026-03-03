@@ -11,13 +11,29 @@ STRINGS.NAMES.CARGOBOAT = "Teherhajó"
 STRINGS.RECIPE_DESC.CARGOBOAT = "Szállítás a vizen!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CARGOBOAT = "Van benne hely mindenre"
 
+STRINGS.NAMES.PORTO_ARMOUREDBOAT = "Páncélozott Hajó"
+STRINGS.RECIPE_DESC.PORTO_ARMOUREDBOAT = "Húzza ki ezt a szívós hajót."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ARMOUREDBOAT = "Na az egy elég szívós hajó."
+
+STRINGS.NAMES.PORTO_CARGOBOAT = "Teherhajó"
+STRINGS.RECIPE_DESC.PORTO_CARGOBOAT = "Szállítás a vizen!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_CARGOBOAT = "Van benne hely mindenre!"
+
 STRINGS.NAMES.ENCRUSTEDBOAT = "Biztosított Hajó"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ENCRUSTEDBOAT = "Elég stabil."
 STRINGS.RECIPE_DESC.ENCRUSTEDBOAT = "Nagyon ellenálló"
 
+STRINGS.NAMES.PORTO_ENCRUSTEDBOAT = "Biztosított Hajó"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ENCRUSTEDBOAT = "Elég stabil."
+STRINGS.RECIPE_DESC.PORTO_ENCRUSTEDBOAT = "Nagyon ellenálló"
+
 STRINGS.NAMES.ROWBOAT = "Csónak"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROWBOAT = "Most a kalandom teljes."
 STRINGS.RECIPE_DESC.ROWBOAT = "Egy erősebb hajó"
+
+STRINGS.NAMES.PORTO_ROWBOAT = "Csónak"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ROWBOAT = "Most a kalandom teljes."
+STRINGS.RECIPE_DESC.PORTO_ROWBOAT = "Egy erősebb hajó"
 
 STRINGS.NAMES.SURFBOARD = "Szörfdeszka"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SURFBOARD = "Ha a szörfdeszkámon lettem volna,elkaptalak volna."
@@ -93,117 +109,7 @@ STRINGS.NAMES.BOAT_TORCH = "Hajó Fákja"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_TORCH = "Ez szabaddá teszi a kezemet."
 STRINGS.RECIPE_DESC.BOAT_TORCH = "Látás a vitorlázásban."
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+STRINGS.NAMES.PORTO_LOGRAFT = "Fa Tutaj"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT = "Fa tutaj...?"
+STRINGS.RECIPE_DESC.PORTO_LOGRAFT = "Olyan... hajószerűen néz ki..."
 
