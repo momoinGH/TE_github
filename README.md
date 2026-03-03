@@ -8,9 +8,16 @@ tro_作为公共模块前缀，新的命名建议都用这个作为前缀
    2. shipwreckedboat：小船身上
    3. shipwreckedboatparts：船配件身上
 9. 单机版用OverrideSymbol替换玩家贴图，玩家播放对应动画帆布和螺旋桨就能动起来，但是联机版不会动，目前不知道为什么，可能是因为联机和单机角色动画通道不一样
+10. 标签说明：
+    1.  shipwrecked_boat：小船标签
+    2.  shipwrecked_boat_head：船头配件
+    3.  shipwrecked_boat_tail：船尾配件
 
 
 添加ComponentAction：
 1. 建议在每个模块的componentactions.lua文件里添加，调用TRO_AddComponentAction方法来添加
 2. 如果发现现有ACTION不满足自己的需求，并且需求只为了几个预制件服务，可以用一个比较通用的组件pro_componentaction，这个组件在预制件文件里主客机共有的地方添加，代码简便
 
+
+覆盖原有组件或预制件：
+1. 如果是修改原有预制件，建议在模块/prefabs目录下创建对应文件名字的文件，然后在模块/prefabpost.lua文件里modimport导入，组件同理，在模块/components目录下创建同名文件然后导入，同样的全局函数也是这样，找到函数定义的文件在模块目录里创建该文件然后导入

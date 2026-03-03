@@ -84,6 +84,7 @@ local function MakeBoatItem(name, data, common_post_fn, master_post_fn)
         MakeInventoryFloatable(inst, "med", 0.25, 0.83)
 
         inst.boat = data.boat
+        inst.overridedeployplacername = data.boat .. "_placer" --placer在小船预制件里定义
 
         --Deployable needs to be client side because of the custom deploy range
         inst:AddComponent("deployable")
@@ -119,7 +120,7 @@ local function MakeBoatItem(name, data, common_post_fn, master_post_fn)
         return inst
     end
 
-    Prefab(name, fn, assets, prefabs)
+    return Prefab(name, fn, assets, prefabs)
 end
 
 return MakeBoatItem("porto_raft", { anim = "bambo", boat = "raft" }),
