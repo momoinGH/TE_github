@@ -26,12 +26,15 @@ end
 local ShipwreckedBoatParts = Class(function(self, inst)
     self.inst = inst
 
+    assert(inst:HasTag("shipwrecked_boat_head") or inst:HasTag("shipwrecked_boat_tail"),
+        "小船配件需要添加shipwrecked_boat_head或者shipwrecked_boat_tail标签，用来决定对应小船容器那个槽位")
+
     self.speed_mult = 1
     self.move_sound = nil
 
     -- 可以监听boat_equipped和boat_unequipped事件来判断是否被装备到容器对应槽中
     -- 区别在于下面两个函数是玩家在船上和不在船上时调用，这两个事件只跟是否被船放入槽中有关系
-    self.onplayermountedfn = nil    --(inst, boat, driver)玩家上船，其中boatfx是船的复制体，我希望大部分修改boat和boatfx都一同修改
+    self.onplayermountedfn = nil    --(inst, boat, driver)玩家上船
     self.onplayerdismountedfn = nil --(inst, boat, driver)玩家下船
 
     self.on_boat_startmoving_fn = function(boat) OnBoatStartMoving(inst) end

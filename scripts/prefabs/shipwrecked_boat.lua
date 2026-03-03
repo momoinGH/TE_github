@@ -131,6 +131,8 @@ local function MakeBoat(name, data, common_post_fn, master_post_fn)
         inst.components.health:SetMaxHealth(max_health)
         inst.components.health.nofadeout = true
 
+        inst:AddComponent("combat")
+
         if data.loots then
             inst:AddComponent("lootdropper")
             inst.components.lootdropper:SetLoot(data.loots)

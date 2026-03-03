@@ -2,7 +2,7 @@ tro_作为公共模块前缀，新的命名建议都用这个作为前缀
 
 
 海难小船逻辑：
-1. 玩家上船后会设置pro_driver.boat变量，表示正在驾驶这个船
+1. 玩家上船后会设置pro_driver.boat变量，表示正在驾驶这个船，可以直接用inst:TroGetSWBoat()获取玩家正在驾驶的船
 8. 相关组件：
    1. pro_driver：玩家身上航海组件
    2. shipwreckedboat：小船身上
@@ -12,6 +12,7 @@ tro_作为公共模块前缀，新的命名建议都用这个作为前缀
     1.  shipwrecked_boat：小船标签
     2.  shipwrecked_boat_head：船头配件
     3.  shipwrecked_boat_tail：船尾配件
+11. 小船配件必须有shipwrecked_boat_head或者shipwrecked_boat_tail标签
 
 
 添加ComponentAction：

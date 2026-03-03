@@ -78,10 +78,31 @@ function Driver:StartHopBoat(boat)
     end
 end
 
+-- 小船抗伤
+local function PlayerRedirectDamage(inst, attacker, damage, weapon, stimuli)
+    local boat = inst.components.pro_driver.boat
+    return boat
+        and boat:IsValid()
+        and not IsEntityDead(boat)
+        and not (
+            weapon and (
+                weapon.components.projectile or
+                weapon.components.complexprojectile or
+                weapon.components.weapon:CanRangedAttack()
+            ) or
+            (attacker and attacker:HasTag("pseudoprojectile"))
+        )
+        and stimuli ~= "electric"
+        and stimuli ~= "darkness"
+        and boat
+        or nil
+end
+
 function Driver:SetBoat(boat)
     local oldboat = self.boat
     if oldboat == boat then return end
 
+    self.inst.components.combat.redirectdamagefn = nil
     if oldboat and oldboat:IsValid() then
         self.inst:RemoveChild(oldboat)
         oldboat.Physics:Teleport(self.inst.Transform:GetWorldPosition()) --不能用Transform，延迟补偿下会坐标闪一下
@@ -93,6 +114,7 @@ function Driver:SetBoat(boat)
         -- boat.Physics:SetCollides(false) --需要吗？
         boat.Physics:Teleport(0, -0.2, 0)
         self.inst:AddChild(boat)
+        self.inst.components.combat.redirectdamagefn = PlayerRedirectDamage
         boat.components.shipwreckedboat:OnPlayerMounted(self.inst)
         self.inst:StartUpdatingComponent(self)
     else

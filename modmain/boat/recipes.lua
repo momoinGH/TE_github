@@ -5,9 +5,7 @@ AddRecipe2("porto_cargoboat", { Ig("boards", 6), Ig("rope", 3) }, TECH.SEAFARING
 AddRecipe2("porto_encrustedboat", { Ig("boards", 6), Ig("limestone", 4), Ig("rope", 3) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
 AddRecipe2("porto_rowboat", { Ig("boards", 3), Ig("vine", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
 AddRecipe2("porto_woodlegsboat", { Ig("boards", 4), Ig("dubloon", 4), Ig("boatcannon", 1) }, TECH.NONE, { builder_tag = "woodlegs" }, { "CHARACTER" })
-AddRecipe2("porto_shadowboat", { Ig("papyrus", 3), Ig("nightmarefuel", 4), Ig(CHARACTER_INGREDIENT.SANITY, 60) }, TECH.NONE, { builder_tag = "shadowmagic" },
-    { "CHARACTER" })
-
+AddRecipe2("porto_shadowboat", { Ig("papyrus", 3), Ig("nightmarefuel", 4), Ig(CHARACTER_INGREDIENT.SANITY, 60) }, TECH.NONE, { builder_tag = "shadowmagic" },{ "CHARACTER" })
 AddRecipe2("corkboatitem", { Ig("rope", 1), Ig("cork", 4) }, TECH.NONE, nil, { "NAUTICAL" })
 AddRecipe2("surfboard_item", { Ig("boards", 1), Ig("seashell", 1) }, TECH.NONE, { builder_tag = "walani" }, { "CHARACTER" })
 
