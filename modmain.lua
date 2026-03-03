@@ -66,6 +66,7 @@ local function Modimport(dirc)
     SafeModImport("modmain/" .. dirc .. "/input")                --客机操作的监听
     SafeModImport("modmain/" .. dirc .. "/modwiki")              --图鉴wiki定义
     SafeModImport("modmain/" .. dirc .. "/skins")                --物品皮肤
+    SafeModImport("modmain/" .. dirc .. "/debug")                --注册一些c_指令，用于控制台调试
 
     if PrefabFiles and #PrefabFiles > 0 then
         ALL_PREFAB_FILES = ArrayUnion(ALL_PREFAB_FILES, PrefabFiles)
@@ -166,5 +167,3 @@ local Constructor = require("tropical_utils/constructor")
 Constructor.SetEnv(env)
 Constructor.AddScrapbookWiki("tropical", WIKI_DATA)
 WIKI_DATA = nil
-
-modimport "modmain/debug" --注册一些c_指令，用于控制台调试

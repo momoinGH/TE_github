@@ -162,7 +162,7 @@ PrefabFiles = {
     "pigman_shopkeeper_desk",
     "piko",
     "player_house_kits",
-    "player_house",
+    "playerhouse_city",
     "pog",
     "poisonbubble",
     "poisonmistparticle",

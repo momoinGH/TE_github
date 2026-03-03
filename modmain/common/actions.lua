@@ -1,7 +1,7 @@
 local Utils = require("tropical_utils/utils")
 local Constructor = require("tropical_utils/constructor")
 Constructor.SetEnv(env)
-local InteriorSpawnerUtils = require("interiorspawnerutils")
+local InteriorSpawnerUtils = require("tropical_utils/room_utils")
 
 -- Runar: 未定义的优先级，没有的话碎布加燃料会有问题
 ACTIONS.ADDFUEL.priority   = 1

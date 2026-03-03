@@ -4,13 +4,13 @@ local Utils = require("tropical_utils/utils")
 
 local FN = {}
 
-FN.RADIUS = 16     --小房子半径
+FN.RADIUS = 16     --小房子最大半径
 FN.BASE_OFF = 1400 --小房子的初始z坐标
-FN.ROOM_SIZE_MAX = 60
-FN.ROW_COUNT = (FN.BASE_OFF + 100) / FN.ROOM_SIZE_MAX * 2
+FN.ROOM_GAP = 60
+FN.ROW_COUNT = (FN.BASE_OFF + 100) / FN.ROOM_GAP * 2
 
 FN.ROOM_SIZE = {
-    SMALL = {               --
+    SMALL = {
         dx = { -5.5, 5.5 }, --上下
         dz = { -8.5, 8.5 }  --左右
     },
@@ -32,7 +32,7 @@ end
 
 function FN.GetCenterPosByHouse(house)
     local door = house.components.teleporter and house.components.teleporter:GetTarget()
-    local center = door and door.components.entitytracker and door.components.entitytracker:GetEntity("interior_center")
+    local center = door and door:GetRoomCenter()
     return center and center:GetPosition()
 end
 
@@ -209,11 +209,11 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-local function DefaultDoorAbleToAcceptTest(inst, item)
+local function DefaultDoorAcceptTest(inst, item)
     return inst:HasTag("teleporter")
 end
 
-local function DefaultOnDoorAccept(inst, giver, item)
+function FN.DefaultOnDoorAccept(inst, giver, item)
     if not inst.components.teleporter:Activate(item)
         and item.components.inventoryitem --一定有吧
         and giver
@@ -245,13 +245,28 @@ local function TargetBefore(self, otherTeleporter)
     self.inst.targetdoor:set(otherTeleporter)
 end
 
-local function TrackEntityBefore(self, name, inst)
-    if name == "interior_center" then
-        self.inst.interior_center:set(inst)
-    end
+local function GetRoomCenter(inst)
+    return inst.room_center and inst.room_center:value() or nil
 end
 
-local function InitDoor(inst)
+local function OnSave(inst, data)
+    local refs = nil
+    local center = inst:GetRoomCenter()
+    if center then
+        data.center_guid = center.GUID
+        refs = { center.GUID }
+    end
+    return refs
+end
+
+local function OnLoadPostPass(inst, newents, data)
+    if data and data.center_guid then
+        local center = newents[data.center_guid]
+        if center and inst.room_center then
+            inst.room_center:set(center.entity)
+        end
+    end
+
     --加载的时候我需要手动给网络变量赋值
     local targetdoor = inst.components.teleporter:GetTarget()
     if targetdoor then
@@ -261,7 +276,7 @@ end
 
 --- 虚空门的基础代码
 --- trader和hauntable用于传送物品，teleporter用来传送玩家
---- teleporter加在所有门上，可以关联传送目的地和判断房间是否已经创建；entitytracker加载虚空内的门上，保存当前所在房间的中心点
+--- teleporter加在所有门上，可以关联传送目的地和判断房间是否已经创建
 ---@param bank string
 ---@param build string
 ---@param anim string
@@ -271,6 +286,8 @@ end
 ---@param usesound string|nil 使用门的声音，建议"dontstarve/common/pighouse_door"、"dontstarve_DLC003/common/objects/store/door_open"
 function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, usesound)
     local inst = CreateEntity()
+
+    inst.entity:SetCanSleep(false) --休眠会影响网络变量的更新
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -303,7 +320,11 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
     -- TODO 不知道为什么主机设置了网络变量客机老是获取不到
     --我需要客机拿到目的地房间的位置，用于构建小地图
     inst.targetdoor = net_entity(inst.GUID, "tro_interiordoor.targetdoor")
-    inst.interior_center = net_entity(inst.GUID, "tro_interiordoor.interior_center")
+
+    if interior_door then
+        inst.room_center = net_entity(inst.GUID, "tro_interiordoor.room_center")
+    end
+    inst.GetRoomCenter = GetRoomCenter
 
     inst.entity:SetPristine()
 
@@ -325,16 +346,11 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
         inst:AddComponent("trader")
         inst.components.trader.acceptnontradable = true
         inst.components.trader.deleteitemonaccept = false
-        inst.components.trader:SetAbleToAcceptTest(DefaultDoorAbleToAcceptTest)
-        inst.components.trader.onaccept = DefaultOnDoorAccept
+        inst.components.trader:SetAcceptTest(DefaultDoorAcceptTest)
+        inst.components.trader.onaccept = FN.DefaultOnDoorAccept
 
         inst:AddComponent("hauntable")
         inst.components.hauntable:SetOnHauntFn(OnDoorHaunt)
-    end
-
-    if interior_door then
-        inst:AddComponent("entitytracker")
-        Utils.FnDecorator(inst.components.entitytracker, "TrackEntity", TrackEntityBefore)
     end
 
     if usesound then
@@ -344,7 +360,8 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
     inst:ListenForEvent("onremove", OnDoorRemove)
     inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
 
-    inst:DoTaskInTime(0, InitDoor)
+    inst.OnSave = OnSave
+    inst.OnLoadPostPass = OnLoadPostPass
 
     return inst
 end
@@ -474,31 +491,31 @@ function FN.GetOppositeFromDirection(direction)
 end
 
 -- 房间的配置表，除了name，其他都可省
-local newRoom = {
-    width = 15,                                --房间宽度，z，用于生成不可见墙体，默认16
-    depth = 15,                                --房间深度，x，用于生成不可见墙体，默认10
-    addprops = {                               --房间内所有东西配置，包括地板、墙壁和房间门
-        {
-            name = "",                         --预制件名
-            x_offset = 0.5,                    --偏移，x上下偏移，往下增大
-            y_offset = 0.5,                    --偏移
-            z_offset = 0.5,                    --偏移，z左右偏移，往右增大
-            key = "exit",                      --对房间门生效，CreateRoom方法返回的表可以通过这个key获取到对应的门，同时用于连通不同房间的门
-            target_door = "",                  --如果需要不同房间的门相互连通，则需要配置target_door = key
-            init = function(inst, center) end, --生成后的初始化操作，第二个参数是中心点对象
-            startstate = "",                   --有Stategraph的单位初始state
+-- local newRoom = {
+--     width = 15,                                --房间宽度，z，用于生成不可见墙体，默认16
+--     depth = 15,                                --房间深度，x，用于生成不可见墙体，默认10
+--     addprops = {                               --房间内所有东西配置，包括地板、墙壁和房间门
+--         {
+--             name = "",                         --预制件名
+--             x_offset = 0.5,                    --偏移，x上下偏移，往下增大
+--             y_offset = 0.5,                    --偏移
+--             z_offset = 0.5,                    --偏移，z左右偏移，往右增大
+--             key = "exit",                      --对房间门生效，CreateRoom方法返回的表可以通过这个key获取到对应的门，同时用于连通不同房间的门
+--             target_door = "",                  --如果需要不同房间的门相互连通，则需要配置target_door = key
+--             init = function(inst, center) end, --生成后的初始化操作，第二个参数是中心点对象
+--             startstate = "",                   --有Stategraph的单位初始state
 
-            --该数据通过tro_saveanim组件保存和加载，因此建议给有这些字段的预制件都添加该组件
-            bank = nil,         --支持函数、字符串
-            build = nil,        --支持函数、字符串
-            anim = nil,         --支持函数、字符串
-            scale = { -1, 1 },  --支持函数、表
-            rotation = 90,      --Transform的旋转，支持函数、数字
-            isloopplay = false, --是否循环播放
-            isdelayset = false, --加载时是否进入游戏再设置
-        },
-    },
-}
+--             --该数据通过tro_saveanim组件保存和加载，因此建议给有这些字段的预制件都添加该组件
+--             bank = nil,         --支持函数、字符串
+--             build = nil,        --支持函数、字符串
+--             anim = nil,         --支持函数、字符串
+--             scale = { -1, 1 },  --支持函数、表
+--             rotation = 90,      --Transform的旋转，支持函数、数字
+--             isloopplay = false, --是否循环播放
+--             isdelayset = false, --加载时是否进入游戏再设置
+--         },
+--     },
+-- }
 
 local INC = 0
 
@@ -510,7 +527,7 @@ local INC = 0
 function FN.CreateRoom(room)
     local doors = {}
     local door_map = {}
-    local x, y, z = TheWorld.components.tro_interiorspawner:GetPos():Get()
+    local x, y, z = TheWorld.components.tro_roomspawner:GetPos():Get()
 
     -- 清除杂物，以防万一
     FN.ClearSpace(x, z)
@@ -538,8 +555,9 @@ function FN.CreateRoom(room)
 
         if p:HasTag("interior_door") then
             --门
-            assert(p.components.entitytracker, "只要是虚空房间里的门都应该有entitytracker组件，用来记录自己所在房间的中心点")
-            p.components.entitytracker:TrackEntity("interior_center", center)
+            if p.room_center then
+                p.room_center:set(center)
+            end
             local key = data.key or INC
             INC = INC + 1 --只要每次创建房间时唯一就行
             doors[key] = p
@@ -635,7 +653,9 @@ function FN.SpawnNearHouseInterior(door, room)
     -- 还要装一个对应的门
     local doorAnim, newDoorAnim
     local newDoor = SpawnPrefab(door.prefab)
-    newDoor.components.entitytracker:TrackEntity("interior_center", center)
+    if newDoor.room_center then
+        newDoor.room_center:set(center)
+    end
 
     if door.side == 1 then
         newDoor.side = 3

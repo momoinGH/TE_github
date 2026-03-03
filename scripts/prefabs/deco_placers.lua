@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("interiorspawnerutils")
+local InteriorSpawnerUtils = require("tropical_utils/room_utils")
 
 local PLACER_SNAP_DISTANCE = 6
 local function placer_onupdatetransform(inst)

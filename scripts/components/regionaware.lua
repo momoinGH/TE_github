@@ -54,7 +54,7 @@ end
 function RegionAware:GetRegionFromArea()
     if TheWorld:HasTag("cave") then
         return REGIONS.cave
-    elseif self.inst:IsInHamRoom() then
+    elseif self.inst:TroGetRoomCenter() then
         return
     else
         if not self.areaaware then return end

@@ -62,7 +62,6 @@ AddPrefabPostInit("forest", function(inst)
 
     inst:AddComponent("economy")
     inst:AddComponent("shadowmanager")
-    inst:AddComponent("tro_interiorspawner")
 
     if TUNING.tropical.sealnado then
         inst:AddComponent("twisterspawner")
@@ -108,5 +107,4 @@ AddPrefabPostInit("cave", function(inst)
     inst:AddComponent("roottrunkinventory")
     inst:AddComponent("quaker_interior")
     inst:AddComponent("economy")
-    inst:AddComponent("tro_interiorspawner")
 end)

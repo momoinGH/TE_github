@@ -1,5 +1,3 @@
---@author: 绯世行
---欢迎其他开发者直接使用，但是强烈谴责搬用代码后对搬用代码加密的行为！
 --使用案例及最新版：https://n77a3mjegs.feishu.cn/docx/K9bUdpb5Qo85j2xo8XkcOsU1nuh?from=from_copylink
 
 local FN = {}

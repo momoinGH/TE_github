@@ -1,7 +1,7 @@
 local Utils = require("tropical_utils/utils")
 local Image = require "widgets/image"
 local MINIMAP_DEFS = require("tro_minimapdefs")
-local InteriorSpawnerUtils = require("interiorspawnerutils")
+local InteriorSpawnerUtils = require("tropical_utils/room_utils")
 local Widget = require "widgets/widget"
 
 -- 拟定的房子大小
@@ -55,9 +55,9 @@ local function AppendRoomTexture(self, room)
     --检查该房间的门，构建其他房间图片
     for _, v in ipairs(TheSim:FindEntities(rx, 0, rz, math.sqrt(depth * depth + width * width) / 2, { "interior_door" })) do
         local targetdoor = v.targetdoor and v.targetdoor:value()
-        local nearroom = targetdoor and targetdoor.interior_center and targetdoor.interior_center:value()
+        local nearroom = targetdoor and targetdoor:GetRoomCenter()
         print("构建相邻房间", v, targetdoor, nearroom)
-        if nearroom and nearroom ~= room then  --应该不可能
+        if nearroom and nearroom ~= room then --应该不可能
             AppendRoomTexture(self, nearroom)
         end
     end

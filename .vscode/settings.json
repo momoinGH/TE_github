@@ -5,6 +5,10 @@
         "inject-field",
         "param-type-mismatch",
         "cast-local-type",
-        "missing-parameter"
-    ]
+        "missing-parameter",
+        "lowercase-global",
+        "undefined-doc-name",
+        "return-type-mismatch"
+    ],
+    "Lua.workspace.maxPreload": 2000
 }

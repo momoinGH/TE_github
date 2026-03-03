@@ -51,5 +51,5 @@ modimport "scripts/ArtifactControls"           --活性机甲控制
 
 local _OnCreep = GroundCreep.OnCreep
 function GroundCreep:OnCreep(x, y, z, ...)
-    return _OnCreep(self, x, y, z, ...) and not TheWorld.Map:IsHamRoomAtPoint(x, y, z)
+    return _OnCreep(self, x, y, z, ...) and not TheWorld.Map:TroGetRoomCenter(x, y, z)
 end

@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("interiorspawnerutils")
+local InteriorSpawnerUtils = require("tropical_utils/room_utils")
 local assets               =
 {
     Asset("ANIM", "anim/pig_ruins_entrance.zip"),

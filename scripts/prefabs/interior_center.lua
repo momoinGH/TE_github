@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("interiorspawnerutils")
+local InteriorSpawnerUtils = require("tropical_utils/room_utils")
 
 local function OnPlayerFar(inst, doer)
     doer:DoTaskInTime(0.5, function(doer)
@@ -34,6 +34,16 @@ local function OnLoad(inst, data)
     end
 end
 
+local function IsPointInRoom(inst, x, z)
+    local half_width = inst.room_width:value() / 2
+    local half_depth = inst.room_depth:value() / 2
+    local rx, ry, rz = inst.Transform:GetWorldPosition()
+    return x >= rx - half_width
+        and x <= rx + half_width
+        and z >= rz - half_depth
+        and z <= rz + half_depth
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -52,6 +62,8 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst.IsPointInRoom = IsPointInRoom
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aura = TUNING.SANITYAURA_SMALL

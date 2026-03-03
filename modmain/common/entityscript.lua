@@ -44,11 +44,6 @@ function EntityScript:AwareInVolcanoArea()
     return aware or false
 end
 
---实体是否在虚空的房间里面
-function EntityScript:IsInHamRoom()
-    return TheWorld.Map:IsHamRoomAtPoint(self:GetPosition():Get()) --------------------似乎不太对
-end
-
 -- 根据定义的文件获取事件回调函数，尽量少用，因为文件里定义多个监听时获取的不一定是自己想要的
 -- 可以使用require预制件文件用FindUpvalue拿到回调
 function EntityScript:GetEventCallback(event, source, source_file, test_fn)
@@ -77,4 +72,12 @@ function EntityScript:TroGetSWBoat()
     else
         return self.replica.pro_driver and self.replica.pro_driver:GetBoat() or nil
     end
+end
+
+-- 获取玩家所处房子对象
+function EntityScript:TroGetRoomCenter()
+    if not TheWorld.Map.TroGetRoomCenter then
+        return nil --没加载room模块
+    end
+    return TheWorld.Map:TroGetRoomCenter(self.Transform:GetWorldPosition())
 end

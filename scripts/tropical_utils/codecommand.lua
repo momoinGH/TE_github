@@ -1,5 +1,3 @@
---@author: 绯世行
---欢迎其他开发者直接使用，但是强烈谴责搬用代码后对搬用代码加密的行为！
 --使用案例及最新版：https://n77a3mjegs.feishu.cn/docx/K9bUdpb5Qo85j2xo8XkcOsU1nuh?from=from_copylink
 --这个文件不会被调用，单纯写一些源码的注解，虽然删了更节省体积，不过我相信也许会对其他moder有些帮助，而且全局函数在一些编译器下会提供代码补全功能
 
@@ -1133,3 +1131,37 @@ function MakeSnowCovered(inst) end
 function MakeHauntableLaunchAndIgnite(inst, launchchance, ignitechance, speed, cooldown, launch_haunt_value, ignite_haunt_value) end
 
 function MakeHauntableIgnite(inst, chance, cooldown, haunt_value) end
+
+EmitterManager = {}
+
+
+-- 1-bit boolean
+net_bool = Class(function(self, guid, event) end)
+-- 3-bit unsigned integer   [0..7]
+net_tinybyte = Class(function(self, guid, event) end)
+-- 6-bit unsigned integer   [0..63]
+net_smallbyte = Class(function(self, guid, event) end)
+-- 8-bit unsigned integer   [0..255]
+net_byte = Class(function(self, guid, event) end)
+-- net_shortint            16-bit signed integer    [-32767..32767]
+net_shortint = Class(function(self, guid, event) end)
+-- net_ushortint           16-bit unsigned integer  [0..65535]
+net_ushortint = Class(function(self, guid, event) end)
+-- net_int                 32-bit signed integer    [-2147483647..2147483647]
+net_int = Class(function(self, guid, event) end)
+-- net_uint                32-bit unsigned integer  [0..4294967295]
+net_uint = Class(function(self, guid, event) end)
+-- net_float               32-bit float
+net_float = Class(function(self, guid, event) end)
+-- net_hash                32-bit hash of the string assigned
+net_hash = Class(function(self, guid, event) end)
+-- net_string              variable length string
+net_string = Class(function(self, guid, event) end)
+-- net_entity              entity instance
+net_entity = Class(function(self, guid, event) end)
+-- net_bytearray           array of 8-bit unsigned integers (max size = 31)
+net_bytearray = Class(function(self, guid, event) end)
+-- net_smallbytearray      array of 6-bit unsigned integers (max size = 31)
+net_smallbytearray = Class(function(self, guid, event) end)
+-- net_ushortarray         array of 16-bit unsigned integers (max size = 31)
+net_ushortarray = Class(function(self, guid, event) end)

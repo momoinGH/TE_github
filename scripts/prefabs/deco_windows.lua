@@ -1,5 +1,5 @@
 local DecoCreator = require "prefabs/deco_util"
-local InteriorSpawnerUtils = require("interiorspawnerutils")
+local InteriorSpawnerUtils = require("tropical_utils/room_utils")
 
 -- 构建后我需要根据所在墙面初始化bank和旋转方向
 local function OnBuilt(inst)

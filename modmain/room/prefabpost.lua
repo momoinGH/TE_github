@@ -1,17 +1,19 @@
 local Utils = require("tropical_utils/utils")
 
+
+
 modimport "modmain/room/components/map"
 
 
 
 
 
-
+----------------------------------------------------------------------------------------------------
 Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
     local val = next(retTab)
     if val > TUNING.WILDFIRE_THRESHOLD then
         -- 防止室内野火
-        if TheWorld.Map:OutsideWorldAtPoint(x, z) then
+        if TheWorld.Map:TroIsWorldOut(x, 0, z) then
             return { TUNING.WILDFIRE_THRESHOLD }
         end
 
@@ -28,7 +30,7 @@ end)
 local function ShelteredOnUpdateBefore(self)
     local x, y, z = self.inst.Transform:GetWorldPosition()
     if not self.mounted
-        and TheWorld.Map:OutsideWorldAtPoint(x, z)
+        and TheWorld.Map:TroIsWorldOut(x, 0, z)
     then
         self:SetSheltered(true)
         return nil, true
@@ -50,7 +52,7 @@ AddSimPostInit(function()
                     self.old_updatefuncs[inst.prefab] = data.updateFunc
                 end
                 local x, y, z = inst.Transform:GetWorldPosition()
-                if TheWorld.Map:OutsideWorldAtPoint(x, z) then
+                if TheWorld.Map:TroIsWorldOut(x, 0, z) then
                     data.updateFunc = function() end -- empty function
                 else
                     data.updateFunc = self.old_updatefuncs[inst.prefab] ~= nil and self.old_updatefuncs[inst.prefab] or
@@ -59,4 +61,16 @@ AddSimPostInit(function()
             end
         end
     end)
+end)
+
+----------------------------------------------------------------------------------------------------
+
+AddPrefabPostInit("forest", function(inst)
+    if not TheWorld.ismastersim then return end
+    inst:AddComponent("tro_roomspawner")
+end)
+
+AddPrefabPostInit("cave", function(inst)
+    if not TheWorld.ismastersim then return end
+    inst:AddComponent("tro_roomspawner")
 end)

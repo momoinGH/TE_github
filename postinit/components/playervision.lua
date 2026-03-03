@@ -52,7 +52,7 @@ AddComponentPostInit("playervision", function(self)
         --     return
         -- end
 
-        if self.inst:IsInHamRoom() then
+        if self.inst:TroGetRoomCenter() then
             local cc = OVERRIDE_SEASON_COLOURCUBES.interior
             self.currentcctable = cc
             self.inst:PushEvent("ccoverrides", cc)

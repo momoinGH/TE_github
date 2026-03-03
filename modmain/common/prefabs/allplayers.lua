@@ -1,5 +1,5 @@
 local Utils = require("tropical_utils/utils")
-local InteriorSpawnerUtils = require("interiorspawnerutils")
+local InteriorSpawnerUtils = require("tropical_utils/room_utils")
 
 -- 调试焦点
 -- TUNING.TX = 0

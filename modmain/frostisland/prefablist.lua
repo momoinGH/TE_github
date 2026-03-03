@@ -14,13 +14,11 @@ PrefabFiles = {
 
     "pigman_shopkeeper_desk",
     "shop_pedestals",
-    "deed",
     "shelf",
     "shelf_slot",
     "trinkets_giftshop",
     "key_to_city",
     "player_house_kits",
-    "player_house",
 
     "pigman_city",
     "pighouse_city",

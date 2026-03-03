@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("interiorspawnerutils")
+local InteriorSpawnerUtils = require("tropical_utils/room_utils")
 
 local assets =
 {
@@ -127,7 +127,7 @@ local function OnActivate(inst, doer)
 end
 
 local function ShouldAcceptItem(inst, item)
-    return item:HasTag("decoradordecasa")
+    return not inst:HasTag("burnt") and item:HasTag("decoradordecasa")
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
@@ -159,7 +159,6 @@ local function fn()
     local inst = InteriorSpawnerUtils.MakeBaseDoor("pig_house_sale", "pig_house_sale", "idle", true, false, "pig_house_sale.png")
 
     inst.entity:AddLight()
-
     inst.Light:SetFalloff(1)
     inst.Light:SetIntensity(.5)
     inst.Light:SetRadius(1)
@@ -210,5 +209,4 @@ local function fn()
     return inst
 end
 
-return Prefab("playerhouse_city", fn, assets),
-    MakePlacer("playerhouse_city_placer", "pig_house_sale", "pig_house_sale", "idle")
+return Prefab("playerhouse_city", fn, assets)
