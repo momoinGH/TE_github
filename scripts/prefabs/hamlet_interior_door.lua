@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets = {
     Asset("ANIM", "anim/ant_cave_door.zip"),
@@ -59,14 +59,14 @@ local d = {
 
 local function common(bank, build, anim, data)
     data = data or {}
-    local inst = InteriorSpawnerUtils.MakeBaseDoor(bank, build, anim, true, true, data.minimap)
+    local inst = RoomUtils.MakeBaseDoor(bank, build, anim, true, true, data.minimap)
 
     if data.exploitable then
         inst:AddTag("NOCLICK")
     end
     if data.light then
         inst:AddTag("timechange_anims")
-        InteriorSpawnerUtils.SetDoorTimeChange(inst)
+        RoomUtils.SetDoorTimeChange(inst)
     end
 
     if data.scale then

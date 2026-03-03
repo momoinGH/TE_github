@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets =
 {
@@ -64,11 +64,11 @@ local room = {
 }
 
 local function CreateInterior(inst)
-    InteriorSpawnerUtils.CreateSimpleInterior(inst, room)
+    RoomUtils.CreateSimpleInterior(inst, room)
 end
 
 local function fn()
-    local inst = InteriorSpawnerUtils.MakeBaseDoor("merm_sw_house", "wildbea_house", "idle_fish1", true, false, "pig_fishingshop.png", "dontstarve/common/teleportworm/swallow")
+    local inst = RoomUtils.MakeBaseDoor("merm_sw_house", "wildbea_house", "idle_fish1", true, false, "pig_fishingshop.png", "dontstarve/common/teleportworm/swallow")
 
     inst.entity:AddLight()
     inst.Light:SetFalloff(1)

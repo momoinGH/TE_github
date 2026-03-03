@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets =
 {
@@ -23,7 +23,7 @@ end
 
 -- 如果屋里有玩家则房子不可燃，可以通过递归查询来检查是否有玩家在里面
 local function OnIgniteFn(inst)
-    if InteriorSpawnerUtils.InterioHasPlayer(inst) then
+    if RoomUtils.InterioHasPlayer(inst) then
         inst:DoTaskInTime(0, function()
             if inst.components.burnable then
                 inst.components.burnable:Extinguish()
@@ -68,10 +68,9 @@ local function onbuilt(inst)
     inst.AnimState:PushAnimation("idle")
     inst.SoundEmitter:PlaySound("dontstarve/common/pighouse_door")
 
-    local doors, _, center = InteriorSpawnerUtils.CreateRoom(room)
+    local doors, _, center = RoomUtils.CreateRoom(room)
     inst.components.teleporter:Target(doors.exit)
     doors.exit.components.teleporter:Target(inst)
-    center:AddTag("playercrafted")
 end
 
 
@@ -151,12 +150,12 @@ local function onhammered(inst, worker)
 
     local pos = inst:GetPosition()
     SpawnPrefab("collapse_big").Transform:SetPosition(pos:Get())
-    InteriorSpawnerUtils.OnHouseDestroy(inst, worker)
+    RoomUtils.OnHouseDestroy(inst, worker)
     inst:Remove()
 end
 
 local function fn()
-    local inst = InteriorSpawnerUtils.MakeBaseDoor("pig_house_sale", "pig_house_sale", "idle", true, false, "pig_house_sale.png")
+    local inst = RoomUtils.MakeBaseDoor("pig_house_sale", "pig_house_sale", "idle", true, false, "pig_house_sale.png")
 
     inst.entity:AddLight()
     inst.Light:SetFalloff(1)

@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets =
 {
@@ -545,7 +545,7 @@ end
 
 local function callGuards(inst, attacker, id)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, InteriorSpawnerUtils.RADIUS, { "interior_door" })
+    local ents = TheSim:FindEntities(x, y, z, RoomUtils.RADIUS, { "interior_door" })
     if #ents > 0 then
         local guardprefab = inst:HasTag("city2") and "pigman_royalguard_2" or "pigman_royalguard"
         local guard = SpawnPrefab(guardprefab)

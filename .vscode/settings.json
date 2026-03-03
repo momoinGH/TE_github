@@ -10,5 +10,6 @@
         "undefined-doc-name",
         "return-type-mismatch"
     ],
-    "Lua.workspace.maxPreload": 2000
+    "Lua.workspace.maxPreload": 2000,
+    "Lua.diagnostics.workspaceDelay": -1
 }

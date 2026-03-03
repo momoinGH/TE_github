@@ -83,21 +83,21 @@ end
 function FN.SpawnWall(x, z, width, depth)
     local room_dx = depth / 2 + 0.5
     local room_dz = width / 2 + 0.5
-    for dx = -room_dx, room_dx do --因为两侧墙角度不一样，所以墙壁并不是对称的
+    for dx = -room_dx, room_dx do
         for dz = -room_dz, room_dz do
             if dx == -room_dx or dx == room_dx or dz == -room_dz or dz == room_dz then
-                local part = SpawnPrefab("wall_invisible")
-                -- local part = SpawnPrefab("wall_stone") -- 测试阶段先用石墙
+                local part = TUNING.TRO_ROOM_DEBUG and SpawnPrefab("wall_stone") or SpawnPrefab("wall_invisible") --测试使用石墙
                 part.Transform:SetPosition(x + dx, 0, z + dz)
             end
         end
     end
 end
 
+local cant_remove_tags = { "CLASSIFIED", "INLIMBO", "player", "irreplaceable" }
 -- 清理目标区域的空间
 -- 虽然房子坐标是累增的，但是防止一些特殊情况，比如mod中途移除再添加导致count重新计数，或者其他mod也有小房子，房子生成位置冲突
 function FN.ClearSpace(x, z)
-    for _, ent in ipairs(TheSim:FindEntities(x, 0, z, FN.RADIUS)) do
+    for _, ent in ipairs(TheSim:FindEntities(x, 0, z, FN.RADIUS, nil, cant_remove_tags)) do
         ent:Remove()
     end
 end
@@ -517,7 +517,7 @@ end
 --     },
 -- }
 
-local INC = 0
+
 
 ---创建房间
 ---@param room table 房间配置表
@@ -541,9 +541,14 @@ function FN.CreateRoom(room)
     center.room_width:set(width)
     center.room_depth:set(depth)
 
+    if TUNING.TRO_ROOM_DEBUG then
+        conprint("开始生成房间，房子中心：", x, ",", z, "，房间大小：", width, ",", depth)
+    end
+
     --生成墙体
     FN.SpawnWall(x, z, width, depth)
 
+    local door_inc = 1
     --生产内部物品
     for _, data in ipairs(room.addprops) do
         local p = SpawnPrefab(data.name)
@@ -551,19 +556,21 @@ function FN.CreateRoom(room)
         local x_offset = data.x_offset
         local scale = data.scale
 
-        -- print("创建内部对象", p, p:HasTag("interior_door"), data.key)
+        if TUNING.TRO_ROOM_DEBUG then
+            conprint("创建内部对象：", p, "是门吗：", p:HasTag("interior_door"), ", key：", data.key)
+        end
 
         if p:HasTag("interior_door") then
             --门
             if p.room_center then
                 p.room_center:set(center)
             end
-            local key = data.key or INC
-            INC = INC + 1 --只要每次创建房间时唯一就行
+            local key = data.key or door_inc
+            door_inc = door_inc + 1 --只要每次创建房间时唯一就行
             doors[key] = p
             door_map[key] = data.target_door
         elseif p:HasTag("interior_floor") then
-            --地板自适应缩放，不是直接的线性关系，这里懒得搞什么公式了
+            --地板自适应缩放，但不是直接的线性关系，这里懒得搞什么公式了
             x_offset = x_offset
                 or depth == TUNING.ROOM_LARGE_DEPTH and -5.5
                 or depth == TUNING.ROOM_MEDIUM_DEPTH and -4.4

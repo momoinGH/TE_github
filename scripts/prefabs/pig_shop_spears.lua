@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 local function OnSave(inst, data)
     data.entrada = inst.entrada
 end
@@ -78,11 +78,11 @@ local room = {
 }
 
 local function CreateInterior(inst)
-    InteriorSpawnerUtils.CreateSimpleInterior(inst, room)
+    RoomUtils.CreateSimpleInterior(inst, room)
 end
 
 local function fn()
-    local inst = InteriorSpawnerUtils.MakeBaseDoor("merm_sw_house", "wildbea_house", "idle_hunt1", true, false, "pig_lootshop.png", "dontstarve/common/pighouse_door")
+    local inst = RoomUtils.MakeBaseDoor("merm_sw_house", "wildbea_house", "idle_hunt1", true, false, "pig_lootshop.png", "dontstarve/common/pighouse_door")
 
     inst:AddTag("structure")
 

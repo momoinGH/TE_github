@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets = {
     Asset("ANIM", "anim/wallhamletcity1.zip"),
@@ -8,7 +8,7 @@ local assets = {
 }
 
 local function OnBuilt(inst)
-    local oldWall = GetClosestInstWithTag("interior_wall", inst, InteriorSpawnerUtils.RADIUS)
+    local oldWall = GetClosestInstWithTag("interior_wall", inst, RoomUtils.RADIUS)
     if oldWall then
         local x, y, z = oldWall.Transform:GetWorldPosition()
         inst.Transform:SetPosition(x, y, z)

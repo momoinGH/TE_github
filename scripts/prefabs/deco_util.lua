@@ -1,5 +1,3 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
-
 local DecoCreator = {}
 
 local assets =

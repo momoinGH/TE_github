@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets =
 {
@@ -322,7 +322,7 @@ local rooms = { {
 local function creatInterior(inst)
     if inst.components.teleporter:GetTarget() then return end
 
-    local doors = InteriorSpawnerUtils.CreateRooms(rooms)
+    local doors = RoomUtils.CreateRooms(rooms)
     inst.components.teleporter:Target(doors.exit)
     doors.exit.components.teleporter:Target(inst)
     doors.exit2.components.teleporter:Target(inst) --两个出口
@@ -335,7 +335,7 @@ local function OnIgnite(inst)
 end
 
 local function fn()
-    local inst = InteriorSpawnerUtils.MakeBaseDoor("palace", "palace", "idle", true, false, "pig_palace.png")
+    local inst = RoomUtils.MakeBaseDoor("palace", "palace", "idle", true, false, "pig_palace.png")
 
     inst.entity:AddLight()
     inst.Light:SetFalloff(1)

@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 --- 玩家购买商品，针对货架或柜子里的商品
 local Shopper = Class(function(self, inst)
@@ -8,7 +8,7 @@ end)
 --- 是否有老板在看着，如果为false表示玩家可以偷
 function Shopper:IsWatching(target)
     local x, y, z = target.Transform:GetWorldPosition()
-    for i, ent in ipairs(TheSim:FindEntities(x, y, z, InteriorSpawnerUtils.RADIUS, { "shopkeep" })) do
+    for i, ent in ipairs(TheSim:FindEntities(x, y, z, RoomUtils.RADIUS, { "shopkeep" })) do
         if not ent:HasTag("sleeping") and (not ent.components.sleeper or not ent.components.sleeper:IsAsleep()) then
             return true
         end

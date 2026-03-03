@@ -1,7 +1,7 @@
 local Utils = require("tropical_utils/utils")
 local Image = require "widgets/image"
 local MINIMAP_DEFS = require("tro_minimapdefs")
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 local Widget = require "widgets/widget"
 
 -- 拟定的房子大小
@@ -66,7 +66,7 @@ end
 local function UpdateTextureBefore(self)
     if not ThePlayer then return end
     local x, y, z = ThePlayer.Transform:GetWorldPosition()
-    if z < InteriorSpawnerUtils.BASE_OFF then return end --TODO
+    if z < RoomUtils.BASE_OFF then return end --TODO
 
     self._tro_pos = self._tro_pos or Vector3(x, y, z)
 

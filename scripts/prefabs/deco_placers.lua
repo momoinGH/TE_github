@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local PLACER_SNAP_DISTANCE = 6
 local function placer_onupdatetransform(inst)
@@ -6,7 +6,7 @@ local function placer_onupdatetransform(inst)
     local ents = TheSim:FindEntities(pos.x, 0, pos.z, PLACER_SNAP_DISTANCE, { "cornerpost" })
 
     if #ents > 0 then
-        local _, isLeft = InteriorSpawnerUtils.TestBeam(inst)
+        local _, isLeft = RoomUtils.TestBeam(inst)
         inst.AnimState:SetScale(not isLeft and -1 or 1, 1)
 
         local targetpos = ents[1]:GetPosition()
@@ -48,7 +48,7 @@ local function PostInitRaise(inst)
 end
 
 local function PlacerOnWallUpdateTransform(inst)
-    local side, minDis = InteriorSpawnerUtils.TestWallOrnamentPos(inst, true)
+    local side, minDis = RoomUtils.TestWallOrnamentPos(inst, true)
     local bank = ""
     local flip = false
     if side and minDis < 4 then
@@ -82,7 +82,7 @@ local function PostInitWallOrnament(inst)
 end
 
 local function PlacerOnLightUpdateTransform(inst)
-    local centerPos = InteriorSpawnerUtils.GetHouseCenterPos(inst)
+    local centerPos = RoomUtils.GetHouseCenterPos(inst)
     if centerPos then
         inst.Transform:SetPosition(centerPos.x - 2, 1, centerPos.z)
         inst.accept_placement = true

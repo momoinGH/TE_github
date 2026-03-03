@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets = {
     Asset("ANIM", "anim/acorn.zip"),
@@ -66,7 +66,7 @@ local room = {
 
 local function onaccept(inst, giver, item)
     if item.prefab == "construction_permit" and not inst.components.teleporter.targetTeleporter then
-        if InteriorSpawnerUtils.SpawnNearHouseInterior(inst, room) then --应该没可能失败
+        if RoomUtils.SpawnNearHouseInterior(inst, room) then --应该没可能失败
             item:Remove()
         end
     else
@@ -75,7 +75,7 @@ local function onaccept(inst, giver, item)
 end
 
 local function common(bank, build, anim, interior_door)
-    local inst = InteriorSpawnerUtils.MakeBaseDoor(bank, build, anim, true, interior_door)
+    local inst = RoomUtils.MakeBaseDoor(bank, build, anim, true, interior_door)
 
     if not TheWorld.ismastersim then
         return inst
@@ -94,7 +94,7 @@ local function common(bank, build, anim, interior_door)
 end
 
 local function OnBuilt(inst)
-    inst.side = InteriorSpawnerUtils.TestWallOrnamentPos(inst, false, 7.5, 5, 7.5, 5.5)
+    inst.side = RoomUtils.TestWallOrnamentPos(inst, false, 7.5, 5, 7.5, 5.5)
     local anim
     if inst.side == 1 then
         anim = "_close_east"
@@ -155,7 +155,7 @@ end
 ----------------------------------------------------------------------------------------------------
 
 local function PlacerOnUpdateTransform(inst)
-    local side, minDis = InteriorSpawnerUtils.TestWallOrnamentPos(inst, true, 7.5, 5, 7.5, 5.5)
+    local side, minDis = RoomUtils.TestWallOrnamentPos(inst, true, 7.5, 5, 7.5, 5.5)
     local anim
     if side and minDis < 4 then
         if side == 1 then
@@ -213,7 +213,7 @@ local function OnTeleporting(inst, doer)
     if not doer:HasTag("player") then return end
 
     local x, y, z = inst.Transform:GetWorldPosition()
-    for _, guard in ipairs(TheSim:FindEntities(x, 0, z, InteriorSpawnerUtils.RADIUS, GUARDS_MUST_TAGS)) do
+    for _, guard in ipairs(TheSim:FindEntities(x, 0, z, RoomUtils.RADIUS, GUARDS_MUST_TAGS)) do
         if guard.components.combat:TargetIs(doer) then
             guard:DoTaskInTime(math.random(1) + 1, function(guard)
                 if inst:IsValid() and inst:HasTag("teleporter") then

@@ -1,9 +1,9 @@
 local DecoCreator = require "prefabs/deco_util"
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 -- 这次不替换了，直接移除并重新生成
 local function OnBuilt(inst)
-    local isCorner, isLeft = InteriorSpawnerUtils.TestBeam(inst)
+    local isCorner, isLeft = RoomUtils.TestBeam(inst)
 
     if isCorner then
         if not isLeft then

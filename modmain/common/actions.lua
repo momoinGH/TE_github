@@ -1,7 +1,7 @@
 local Utils = require("tropical_utils/utils")
 local Constructor = require("tropical_utils/constructor")
 Constructor.SetEnv(env)
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 -- Runar: 未定义的优先级，没有的话碎布加燃料会有问题
 ACTIONS.ADDFUEL.priority   = 1
@@ -491,7 +491,7 @@ Constructor.AddAction({ priority = 5, distance = 2 },
                 if not reason then
                     act.doer.components.shopper:PayFor(act.target)
                 end
-                local shopkeeper = FindEntity(act.doer, InteriorSpawnerUtils.RADIUS, nil, { "shopkeep" })
+                local shopkeeper = FindEntity(act.doer, RoomUtils.RADIUS, nil, { "shopkeep" })
                 if shopkeeper then
                     if reason == "money" then
                         shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH)])

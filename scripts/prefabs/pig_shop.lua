@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets =
 {
@@ -724,7 +724,7 @@ local function creatInterior(inst)
         end
     end
 
-    local doors = InteriorSpawnerUtils.CreateRoom(room)
+    local doors = RoomUtils.CreateRoom(room)
     inst.components.teleporter:Target(doors.exit)
     doors.exit.components.teleporter:Target(inst)
 end
@@ -744,7 +744,7 @@ local function OnTeleporting(inst, doer)
     if not doer:HasTag("player") then return end
 
     local x, y, z = inst.Transform:GetWorldPosition()
-    for _, guard in ipairs(TheSim:FindEntities(x, 0, z, InteriorSpawnerUtils.RADIUS, GUARDS_MUST_TAGS)) do
+    for _, guard in ipairs(TheSim:FindEntities(x, 0, z, RoomUtils.RADIUS, GUARDS_MUST_TAGS)) do
         if guard.components.combat:TargetIs(doer) then
             guard:DoTaskInTime(math.random(1) + 1, function(guard)
                 if inst:IsValid() and inst:HasTag("teleporter") then
@@ -761,7 +761,7 @@ local function makefn(name, build, bank, data)
 
     local function fn()
         local usesound = data.sounds and data.sounds[1] or nil
-        local inst = InteriorSpawnerUtils.MakeBaseDoor(bank or "pig_shop", build, "idle", false, false,
+        local inst = RoomUtils.MakeBaseDoor(bank or "pig_shop", build, "idle", false, false,
             name == "pig_shop_cityhall_player" and "pig_shop_cityhall.png" or name .. ".png", usesound)
 
         inst.entity:AddLight()

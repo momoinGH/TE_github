@@ -79,7 +79,7 @@ local function Modimport(dirc)
 end
 
 ----------------------------------------------------------------------------------------------------
-
+modimport "modmain/global_function"                  --一些与功能无关的全局函数
 modimport "modmain/mods/knownmodcheck"               -- 检测不兼容模组并报错崩溃
 modimport "modmain/animstate"                        -- AnimState 增强
 modimport "modmain/standardcomponents"               -- 定义一些全局函数

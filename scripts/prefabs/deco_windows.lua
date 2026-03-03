@@ -1,10 +1,10 @@
 local DecoCreator = require "prefabs/deco_util"
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 -- 构建后我需要根据所在墙面初始化bank和旋转方向
 local function OnBuilt(inst)
     local bank = inst.AnimState:GetCurrentBankName()
-    local side = InteriorSpawnerUtils.TestWallOrnamentPos(inst)
+    local side = RoomUtils.TestWallOrnamentPos(inst)
 
     if side == 1 or side == 3 then
         bank = bank .. "_side"

@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets =
 {
@@ -117,13 +117,13 @@ local function creatInterior(inst)
         addprops = addprops
     }
 
-    local doors = InteriorSpawnerUtils.CreateRoom(room)
+    local doors = RoomUtils.CreateRoom(room)
     inst.components.teleporter:Target(doors.exit)
     doors.exit.components.teleporter:Target(inst)
 end
 
 local function fn()
-    local inst = InteriorSpawnerUtils.MakeBaseDoor("vampbat_den", "vamp_bat_entrance", "idle", false, false, "vamp_bat_cave.png")
+    local inst = RoomUtils.MakeBaseDoor("vampbat_den", "vamp_bat_entrance", "idle", false, false, "vamp_bat_cave.png")
 
     MakeObstaclePhysics(inst, .5)
 

@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets =
 {
@@ -548,7 +548,7 @@ local function CreateMaze(inst)
 
     --连接三个出口
     isEntranceId = isEntranceId - 1
-    local doors = InteriorSpawnerUtils.CreateRooms(rooms)
+    local doors = RoomUtils.CreateRooms(rooms)
     inst.components.teleporter:Target(doors["exit" .. isEntranceId])
     doors["exit" .. isEntranceId].components.teleporter:Target(inst)
 
@@ -601,7 +601,7 @@ local function onload(inst, data)
 end
 
 local function common(buildanthill)
-    local inst = InteriorSpawnerUtils.MakeBaseDoor("ant_hill_entrance", "ant_hill_entrance", "idle", false, false, "ant_hill_entrance.png")
+    local inst = RoomUtils.MakeBaseDoor("ant_hill_entrance", "ant_hill_entrance", "idle", false, false, "ant_hill_entrance.png")
 
     local light = inst.entity:AddLight()
     light:SetFalloff(1)

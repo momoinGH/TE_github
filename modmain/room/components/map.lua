@@ -14,7 +14,7 @@ end
 
 local last_room = nil --缓存，短时间内在一个房间附近求值的可能性较大
 function Map:TroGetRoomCenter(x, y, z)
-    if not self:TroIsWorldOut(x, z) then
+    if not self:TroIsWorldOut(x, 0, z) then
         return nil
     end
     if last_room and last_room:IsValid() and last_room:IsPointInRoom(x, z) then
@@ -36,7 +36,7 @@ local function CheckPointBefore(self, x, y, z)
 end
 
 local function GetTileCenterPointBefore(self, x, y, z)
-    if x and z and self:TroIsWorldOut(x, z) then -- 虚空也不希望返回一个空值
+    if x and z and self:TroIsWorldOut(x, 0, z) then -- 虚空也不希望返回一个空值
         return { math.floor(x / 4) * 4 + 2, 0, math.floor(z / 4) * 4 + 2 }, true
     end
 end

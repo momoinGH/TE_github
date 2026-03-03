@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 local assets               =
 {
     Asset("ANIM", "anim/pig_ruins_entrance.zip"),
@@ -85,13 +85,13 @@ local function GetDoorProp(room, dir, exit, width, depth)
     end
 
     local x_offset, z_offset
-    if dir == InteriorSpawnerUtils.GetNorth() then
+    if dir == RoomUtils.GetNorth() then
         x_offset = -depth / 2
-    elseif dir == InteriorSpawnerUtils.GetSouth() then
+    elseif dir == RoomUtils.GetSouth() then
         x_offset = depth / 2
-    elseif dir == InteriorSpawnerUtils.GetEast() then
+    elseif dir == RoomUtils.GetEast() then
         z_offset = -width / 2
-    elseif dir == InteriorSpawnerUtils.GetWest() then
+    elseif dir == RoomUtils.GetWest() then
         z_offset = width / 2
     end
 
@@ -173,15 +173,15 @@ end
 ---构建房间
 ---@param dungeondef table 配置
 local function mazemaker(inst, dungeondef)
-    local DIR = InteriorSpawnerUtils.DIR
-    local DIR_OPPOSITE = InteriorSpawnerUtils.DIR_OPPOSITE
+    local DIR = RoomUtils.DIR
+    local DIR_OPPOSITE = RoomUtils.DIR_OPPOSITE
     local rooms_to_make = dungeondef.rooms --24
     local rooms = { {
         x = 0,
         y = 0,
         idx = 1,
         exits = {},
-        blocked_exits = { InteriorSpawnerUtils.GetNorth() }, -- 3 == NORTH
+        blocked_exits = { RoomUtils.GetNorth() }, -- 3 == NORTH
         entrance1 = true,
     } }
     local clock_placed = false
@@ -262,9 +262,9 @@ local function mazemaker(inst, dungeondef)
         local function FindCandidates()
             for i, room in ipairs(rooms) do
                 -- 通往秘密房间的门只会出现在上左右
-                local north = InteriorSpawnerUtils.GetNorth()
-                local west = InteriorSpawnerUtils.GetWest()
-                local east = InteriorSpawnerUtils.GetEast()
+                local north = RoomUtils.GetNorth()
+                local west = RoomUtils.GetWest()
+                local east = RoomUtils.GetEast()
                 -- NORTH IS OPEN
                 if not room.exits[north] and not room.entrance2 and not room.entrance1 then
                     CheckAdjacent(room, north)
@@ -321,7 +321,7 @@ local function mazemaker(inst, dungeondef)
             end
             -- 将秘密房间和相邻房间相连通
             for i, grid_room in ipairs(grid_rooms) do
-                local op_dir = InteriorSpawnerUtils.GetOppositeFromDirection(grid_dirs[i])
+                local op_dir = RoomUtils.GetOppositeFromDirection(grid_dirs[i])
                 local secret = true
                 if secret_room.aporkalypseclock then
                     secret = false --有日晷的房间
@@ -360,7 +360,7 @@ local function mazemaker(inst, dungeondef)
         -- 挑选最边缘的，顶部没有门的房间作为出口所在房间
         local dist = 0
         for i, room in ipairs(rooms) do
-            local north_exit_open = not room.exits[InteriorSpawnerUtils.GetNorth()]
+            local north_exit_open = not room.exits[RoomUtils.GetNorth()]
             if math.abs(room.x) + math.abs(room.y) >= dist and north_exit_open then
                 if math.abs(room.x) + math.abs(room.y) > dist then
                     choices = {}
@@ -409,7 +409,7 @@ local function mazemaker(inst, dungeondef)
             room.addprops = addprops
         end
 
-        room.size = InteriorSpawnerUtils.ROOM_SIZE.MEDIUM
+        room.size = RoomUtils.ROOM_SIZE.MEDIUM
 
         if dungeondef.deepruins and math.random() < 0.3 then
             room.color = "_blue"
@@ -471,10 +471,10 @@ local function mazemaker(inst, dungeondef)
         end
 
         -- 有概率生成假的隐藏门
-        local northexitopen = not room.exits[InteriorSpawnerUtils.GetNorth()] and not room.entrance2 and not room.entrance1
-        local westexitopen = not room.exits[InteriorSpawnerUtils.GetWest()]
-        local southexitopen = not room.exits[InteriorSpawnerUtils.GetSouth()]
-        local eastexitopen = not room.exits[InteriorSpawnerUtils.GetEast()]
+        local northexitopen = not room.exits[RoomUtils.GetNorth()] and not room.entrance2 and not room.entrance1
+        local westexitopen = not room.exits[RoomUtils.GetWest()]
+        local southexitopen = not room.exits[RoomUtils.GetSouth()]
+        local eastexitopen = not room.exits[RoomUtils.GetEast()]
         local numexits = GetTableSize(room.exits)
         if northexitopen and math.random() < 0.10 then
             table.insert(addprops, { name = "pig_ruins_cracks_fake_north_door", x_offset = -depth / 2 })
@@ -833,7 +833,7 @@ local function mazemaker(inst, dungeondef)
         local prop = math.random() < 0.2 and ("deco_ruins_beam_broken" .. room.color) or ("deco_ruins_beam" .. room.color)
         table.insert(addprops, { name = prop, x_offset = -depth / 2, z_offset = -width / 6 })
         table.insert(addprops, { name = prop, x_offset = -depth / 2, z_offset = width / 6, })
-        if room.exits[InteriorSpawnerUtils.GetNorth()] and room.exits[InteriorSpawnerUtils.GetNorth()].vined then
+        if room.exits[RoomUtils.GetNorth()] and room.exits[RoomUtils.GetNorth()].vined then
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = -width / 2 + 0.75 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = -width / 3 + 0.75 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = -width / 3 - 0.75 })
@@ -845,7 +845,7 @@ local function mazemaker(inst, dungeondef)
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = width / 3 - 0.75 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = width / 2 - 0.75 })
         end
-        if room.exits[InteriorSpawnerUtils.GetWest()] and room.exits[InteriorSpawnerUtils.GetWest()].vined then
+        if room.exits[RoomUtils.GetWest()] and room.exits[RoomUtils.GetWest()].vined then
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = -depth / 2 + 0.75, z_offset = -width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = -depth / 3 - 0.75, z_offset = -width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = -depth / 6 - 0.75, z_offset = -width / 2 })
@@ -853,7 +853,7 @@ local function mazemaker(inst, dungeondef)
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = depth / 3 - 0.75, z_offset = -width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = depth / 2 - 0.75, z_offset = -width / 2 })
         end
-        if room.exits[InteriorSpawnerUtils.GetEast()] and room.exits[InteriorSpawnerUtils.GetEast()].vined then
+        if room.exits[RoomUtils.GetEast()] and room.exits[RoomUtils.GetEast()].vined then
             table.insert(addprops, { name = "pig_ruins_wall_vines_west", x_offset = -depth / 2 + 0.75, z_offset = width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_west", x_offset = -depth / 3 - 0.75, z_offset = width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_west", x_offset = -depth / 6 - 0.75, z_offset = width / 2 })
@@ -1419,7 +1419,7 @@ local function mazemaker(inst, dungeondef)
 
         -- 门
         for dir, exit in pairs(room.exits) do
-            local opposite_dir = InteriorSpawnerUtils.GetOppositeFromDirection(dir)
+            local opposite_dir = RoomUtils.GetOppositeFromDirection(dir)
             local doorprop = GetDoorProp(room, dir, exit, width, depth)
 
             -- 把隔壁门也一起生成
@@ -1441,7 +1441,7 @@ local function mazemaker(inst, dungeondef)
         end
     end
 
-    local doors = InteriorSpawnerUtils.CreateRooms(rooms)
+    local doors = RoomUtils.CreateRooms(rooms)
     inst.components.teleporter:Target(doors.entrance1)
     doors.entrance1.components.teleporter:Target(inst)
 
@@ -1575,7 +1575,7 @@ end
 ---@param dungeonname string 迷宫类型
 local function makefn(build_interiors, dungeonname)
     local function fn()
-        local inst = InteriorSpawnerUtils.MakeBaseDoor("pig_ruins_entrance", "pig_ruins_entrance_build", "idle_closed", true, true, "pig_ruins_entrance.png")
+        local inst = RoomUtils.MakeBaseDoor("pig_ruins_entrance", "pig_ruins_entrance_build", "idle_closed", true, true, "pig_ruins_entrance.png")
 
         if dungeonname == "RUINS_1" then
             inst.AnimState:AddOverrideBuild("pig_ruins_entrance_top_build")

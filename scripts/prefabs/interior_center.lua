@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local function OnPlayerFar(inst, doer)
     doer:DoTaskInTime(0.5, function(doer)
@@ -46,6 +46,7 @@ end
 
 local function fn()
     local inst = CreateEntity()
+    inst.entity:SetCanSleep(false)
 
     inst.entity:AddTransform()
     inst.entity:AddNetwork()
@@ -56,6 +57,7 @@ local function fn()
     --房间的大小，影响摄像机的缩放
     inst.room_width = net_smallbyte(inst.GUID, "interior_center.room_width")
     inst.room_depth = net_smallbyte(inst.GUID, "interior_center.room_depth")
+    inst.IsPointInRoom = IsPointInRoom
 
     inst.entity:SetPristine()
 
@@ -63,11 +65,9 @@ local function fn()
         return inst
     end
 
-    inst.IsPointInRoom = IsPointInRoom
-
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aura = TUNING.SANITYAURA_SMALL
-    local dis = InteriorSpawnerUtils.RADIUS
+    local dis = RoomUtils.RADIUS
     inst.components.sanityaura.max_distsq = dis * dis
 
     -- 玩家可能通过其他手段进入和离开房间，我不能通过开关门来判断，只能用这个组件

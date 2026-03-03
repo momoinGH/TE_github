@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets = {
     Asset("ANIM", "anim/pisohamlet.zip")
@@ -10,7 +10,7 @@ local prefabs = {
 }
 
 local function OnBuilt(inst)
-    local oldFloor = GetClosestInstWithTag("interior_floor", inst, InteriorSpawnerUtils.RADIUS)
+    local oldFloor = GetClosestInstWithTag("interior_floor", inst, RoomUtils.RADIUS)
     if oldFloor then
         local x, y, z = oldFloor.Transform:GetWorldPosition()
         inst.Transform:SetPosition(x, y, z)

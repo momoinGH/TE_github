@@ -1,4 +1,4 @@
-local InteriorSpawnerUtils = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
 local assets = {
     Asset("ANIM", "anim/cave_entrance.zip"),
@@ -22,13 +22,13 @@ end
 
 local function GetDoorProp(room, dir, exit, width, depth)
     local x_offset, z_offset
-    if dir == InteriorSpawnerUtils.GetNorth() then
+    if dir == RoomUtils.GetNorth() then
         x_offset = -depth / 2
-    elseif dir == InteriorSpawnerUtils.GetSouth() then
+    elseif dir == RoomUtils.GetSouth() then
         x_offset = depth / 2
-    elseif dir == InteriorSpawnerUtils.GetEast() then
+    elseif dir == RoomUtils.GetEast() then
         z_offset = -width / 2
-    elseif dir == InteriorSpawnerUtils.GetWest() then
+    elseif dir == RoomUtils.GetWest() then
         z_offset = width / 2
     end
 
@@ -56,8 +56,8 @@ local function initmaze(inst)
     local rooms = { { x = 0, y = 0, idx = 1, exits = {}, entrance1 = true, } }
 
     while #rooms < rooms_to_make do
-        local dir = InteriorSpawnerUtils.DIR
-        local dir_opposite = InteriorSpawnerUtils.DIR_OPPOSITE
+        local dir = RoomUtils.DIR
+        local dir_opposite = RoomUtils.DIR_OPPOSITE
         local dir_choice = math.random(#dir)
         local fromroom = rooms[math.random(#rooms)]
 
@@ -89,7 +89,7 @@ local function initmaze(inst)
     local exits = {}
     for i, room in ipairs(rooms) do
         if not room.entrance1 then
-            local northexitopen = not room.exits[InteriorSpawnerUtils:GetNorth()]
+            local northexitopen = not room.exits[RoomUtils:GetNorth()]
             if northexitopen then
                 table.insert(exits, i)
             end
@@ -102,9 +102,9 @@ local function initmaze(inst)
         room.width = width
         room.depth = depth
 
-        local westexitopen = not room.exits[InteriorSpawnerUtils:GetWest()]
-        local southexitopen = not room.exits[InteriorSpawnerUtils:GetSouth()]
-        local eastexitopen = not room.exits[InteriorSpawnerUtils:GetEast()]
+        local westexitopen = not room.exits[RoomUtils:GetWest()]
+        local southexitopen = not room.exits[RoomUtils:GetSouth()]
+        local eastexitopen = not room.exits[RoomUtils:GetEast()]
 
         local addprops = room.addprops
         if not room.addprops then
@@ -243,7 +243,7 @@ local function initmaze(inst)
 
         --房间门
         for dir, exit in pairs(room.exits) do
-            local opposite_dir = InteriorSpawnerUtils.GetOppositeFromDirection(dir)
+            local opposite_dir = RoomUtils.GetOppositeFromDirection(dir)
             local doorprop = GetDoorProp(room, dir, exit, width, depth)
 
             -- 把隔壁门也一起生成
@@ -265,7 +265,7 @@ local function initmaze(inst)
         end
     end
 
-    local doors = InteriorSpawnerUtils.CreateRooms(rooms)
+    local doors = RoomUtils.CreateRooms(rooms)
     inst.components.teleporter:Target(doors.entrance1)
     doors.entrance1.components.teleporter:Target(inst)
 
@@ -330,7 +330,7 @@ local function Init(inst)
 end
 
 local function common()
-    local inst = InteriorSpawnerUtils.MakeBaseDoor("cave_entrance", "cave_entrance", "idle_closed", false, false, "cave_closed.png")
+    local inst = RoomUtils.MakeBaseDoor("cave_entrance", "cave_entrance", "idle_closed", false, false, "cave_closed.png")
 
     MakeObstaclePhysics(inst, 1)
 
