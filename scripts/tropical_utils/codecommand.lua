@@ -1216,3 +1216,34 @@ function DefaultWakeTest(inst) end
 function ChangeToCharacterPhysics(inst, mass, rad) end
 
 function ChangeToObstaclePhysics(inst, rad, height) end
+
+BehaviourNode = Class(function(self, name, children) end)
+
+PriorityNode = Class(BehaviourNode, function(self, children, period, noscatter) end)
+
+DoAction = Class(BehaviourNode, function(self, inst, getactionfn, name, run, timeout) end)
+
+ChattyNode = Class(BehaviourNode, function(self, inst, chatlines, child, delay, rand_delay, enter_delay, enter_delay_rand) end)
+
+LoopNode = Class(BehaviourNode, function(self, children, maxreps) end)
+
+Leash = Class(BehaviourNode, function(self, inst, homelocation, max_dist, inner_return_dist, running) end)
+
+FaceEntity = Class(BehaviourNode, function(self, inst, getfn, keepfn, timeout, customalert) end)
+
+Wander = Class(BehaviourNode, function(self, inst, homelocation, max_dist, times, getdirectionFn, setdirectionFn, checkpointFn, data) end)
+
+RunAway = Class(BehaviourNode, function(self, inst, hunterparams, see_dist, safe_dist, fn, runhome, fix_overhang, walk_instead, safe_point_fn) end)
+
+FindLight = Class(BehaviourNode, function(self, inst, see_dist, safe_dist) end)
+
+Panic = Class(BehaviourNode, function(self, inst) end)
+
+ActionNode = Class(BehaviourNode, function(self, action, name) end)
+
+Follow = Class(BehaviourNode, function(self, inst, target, min_dist, target_dist, max_dist, canrun, alwayseval, inlimbo_invalid) end)
+
+BT = Class(function(self, inst, root) end)
+
+--like resolvefilepath, but without the crash if it fails.
+function resolvefilepath_soft(filepath, force_path_search, search_first_path) end

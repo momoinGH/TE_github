@@ -7,7 +7,8 @@
 ----------------------------------------------------------------------------------------------------
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
 Utils = require("tropical_utils/utils")
-
+Constructor = require("tropical_utils/constructor")
+Constructor.SetEnv(env)
 
 local ALL_PREFAB_FILES = {}
 local ALL_ASSETS = {}

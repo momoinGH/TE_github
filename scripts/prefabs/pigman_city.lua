@@ -733,6 +733,7 @@ local function common(name, build, fixer, tags, sex, econprefab)
 
     inst.Transform:SetFourFaced()
 
+    inst.getSpeechType = getSpeechType
     inst:AddComponent("talker")
     inst.components.talker.ontalk = ontalk
     inst.components.talker.fontsize = 35

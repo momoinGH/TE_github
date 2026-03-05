@@ -12,7 +12,6 @@ modimport "modmain/common/components/playervision"
 modimport "modmain/common/components/temperature"
 --modimport "modmain/common/components/inventory"
 --modimport "modmain/common/components/builder"
---modimport "modmain/common/components/inventoryitem"
 modimport "modmain/common/components/walkableplatformplayer"
 --[[
 modimport "modmain/common/components/soundemitter"

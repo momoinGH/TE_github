@@ -96,8 +96,6 @@ AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.OPENTUNA, "dolongacti
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.OPENTUNA, "dolongaction"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TRO_DISMANTLE, "dolongaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.TRO_DISMANTLE, "dolongaction"))
-AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.GIVE_SHELF, "give"))
-AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.GIVE_SHELF, "give"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.TAKE_SHELF, "give"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.TAKE_SHELF, "give"))
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.PAINT, "dolongaction"))

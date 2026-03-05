@@ -1,4 +1,5 @@
-local PigShopDefs = require("prefabs/pig_shop_defs")
+local pig_shop_defs = require("prefabs/pig_shop_defs")
+
 
 local function OnItemGet(inst, data)
     inst:AddTag("slot_one") --有商品了
@@ -31,18 +32,7 @@ local Shopped = Class(function(self, inst)
 end)
 
 function Shopped:SetImage(ent)
-    local image = ent and ent.replica.inventoryitem ~= nil and ent.replica.inventoryitem:GetImage()
-
-    if image then
-        --mod物品drawatlasoverride或atlasname至少指定一个
-        local atlas = FunctionOrValue(ent.drawatlasoverride, ent, self.inst) or ent.components.inventoryitem.atlasname
-        if atlas ~= nil then
-            atlas = resolvefilepath_soft(atlas) --需要找到路径，例如../mods/PigmanTribe/images/inventoryimages/ptribe_upgrade.xml
-        end
-        self.inst.AnimState:OverrideSymbol("SWAP_SIGN", atlas or GetInventoryItemAtlas(image), image)
-    else
-        self.inst.AnimState:ClearOverrideSymbol("SWAP_SIGN")
-    end
+    pig_shop_defs.SetImage(self.inst, ent, "SWAP_SIGN")
 end
 
 ---设置价格
@@ -104,7 +94,7 @@ function Shopped:Restock(force)
         if self.saleitem then
             newproduct = self.saleitem
         else
-            local tab = PigShopDefs.SHOPTYPES[self.shoptype or "DEFAULT"]
+            local tab = pig_shop_defs.SHOPTYPES[self.shoptype or "DEFAULT"]
             if not tab or #tab <= 0 then return end
             -- assert(tab, "shoptype应该在PigShopDefs.SHOPTYPES表中定义  " .. tostring(self.inst) .. "  " .. tostring(self.shoptype))
             --如果shoptype存在但是没有在pig_shop_defs中定义会报错

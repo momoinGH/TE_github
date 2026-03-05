@@ -1,4 +1,5 @@
 PrefabFiles = {
+    "pedestal_key",
     "adult_flytrap",
     "alloy",
     "aloe",

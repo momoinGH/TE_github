@@ -1,46 +1,10 @@
 local Shelfer = Class(function(self, inst)
     self.inst = inst
-    self.enabled = true
+
+    self.shelf = nil
+    self.slotindex = nil
+    self.slot = nil
 end)
-
-function Shelfer:OnSave()
-    local data = {}
-    local references = {}
-    data.enabled = self.enabled
-    data.slot = self.slot
-    data.slotindex = self.slotindex
-    if self.shelf then
-        data.shelf = self.shelf.GUID
-        table.insert(references, self.shelf.GUID)
-    end
-    return data, references
-end
-
-function Shelfer:OnLoad(data)
-    self.enabled = data.enabled
-    if data.slot then
-        self.slot = data.slot
-    end
-    if not data.slotindex then
-        if data.slot == "SWAP_SIGN" then
-            self.slotindex = 1
-        else
-            local slot = data.slot
-            local prefix = slot:sub(1, 8)
-            assert(prefix == "SWAP_img")
-            self.slotindex = tonumber(slot:sub(9))
-        end
-    else
-        self.slotindex = data.slotindex
-    end
-end
-
-function Shelfer:LoadPostPass(newents, data)
-    if data.shelf and newents[data.shelf] then
-        self.shelf = newents[data.shelf].entity
-        self:SetArt()
-    end
-end
 
 function Shelfer:IsTryingToTradeWithMe(inst)
     local act = inst:GetBufferedAction()
@@ -49,21 +13,10 @@ function Shelfer:IsTryingToTradeWithMe(inst)
     end
 end
 
-function Shelfer:Enable()
-    self.enabled = true
-    -- do I have an underlying item?
-
-    self.inst:AddTag("slot_one")
-end
-
-function Shelfer:Disable()
-    self.enabled = false
-    self.inst:RemoveTag("slot_one")
-end
-
-function Shelfer:SetShelf(shelf, slot)
+function Shelfer:SetShelf(shelf, slot, slotindex)
     self.shelf = shelf
     self.slot = slot
+    self.slotindex = slotindex
 end
 
 function Shelfer:GetGift()
@@ -83,8 +36,7 @@ function Shelfer:CanAccept(item, giver)
     local item = self.shelf.components.container:GetItemInSlot(self.slotindex)
     local player_to_shop = not self.shelf:HasTag("playercrafted") and giver and giver:HasTag("player")
 
-    return self.enabled
-        and inventortyitem     --物品
+    return inventortyitem      --物品
         and not frozen         --没有冻结
         and not item           --槽位当前空缺
         and not player_to_shop --非购买
@@ -111,8 +63,6 @@ function Shelfer:ReturnGift(item)
 end
 
 function Shelfer:AcceptGift(giver, item)
-    if not self.enabled then return false end
-
     if self:CanAccept(item, giver) then
         if item.components.stackable and item.components.stackable.stacksize > 1 then
             item = item.components.stackable:Get()
@@ -124,7 +74,6 @@ function Shelfer:AcceptGift(giver, item)
         self:UpdateGift(item)
 
         self.inst:PushEvent("trade", { giver = giver, item = item })
-
         return true
     end
 

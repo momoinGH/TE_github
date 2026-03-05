@@ -38,7 +38,6 @@ modimport("postinit/components/healthtrigger")    --这个生命值管理器是�
 modimport("postinit/components/hounded")          --猎犬袭击
 modimport("postinit/components/inventory")        ----主要是物品栏的钱的计算
 ---modimport("postinit/components/inventory_prevent_pick") ----可能和船拿不起来有关系***
-modimport("postinit/components/inventoryitem")    --优化架子上放东西？
 ---modimport("postinit/components/penguinspawner")控制企鸥生成，现在是覆盖的***
 ---modimport("postinit/components/playercontroller")***
 ---modimport("postinit/components/playerspawner")***

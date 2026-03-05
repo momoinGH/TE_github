@@ -401,6 +401,7 @@ function CityPigBrain:OnStart()
 
     local root =
         PriorityNode({
+            -- 着火
             WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire",
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_PANICFIRE), Panic(self.inst))),
             --补货

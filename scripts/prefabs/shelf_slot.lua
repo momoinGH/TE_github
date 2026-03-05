@@ -26,6 +26,7 @@ local function fn()
 
     inst:AddTag("cost_one_oinc")
     inst:AddTag("NOBLOCK")
+    inst:AddTag("_named")
 
     inst.entity:SetPristine()
 
@@ -42,7 +43,6 @@ local function fn()
 
     inst.displaynamefn = displaynamefn
 
-    -- we're not saving those anymore
     inst.persists = false
 
     return inst

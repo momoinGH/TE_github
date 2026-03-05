@@ -106,7 +106,6 @@ STRINGS.ACTIONS.SMELT                                   = "熔炼"
 STRINGS.ACTIONS.SHEAR                                   = "剪"
 
 STRINGS.ACTIONS.PAN                                     = "淘金"
-STRINGS.ACTIONS.GIVE_SHELF                              = STRINGS.ACTIONS.GIVE.GENERIC
 STRINGS.ACTIONS.PAINT                                   = "涂画"
 STRINGS.ACTIONS.JUMPIN.ENTER                            = "进入"
 STRINGS.ACTIONS.JUMPIN.LEAVE                            = "离开"
