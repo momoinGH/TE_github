@@ -66,8 +66,8 @@ local Boat = Class(function(self, inst)
     inst.consume_task = nil
 
     -- 玩家装备浆的时候需要判断是不是有加速效果
-    inst.on_driver_equip_fn = function(driver, data) self:UpdateSpeedMult() end
-    inst.on_driver_unequip_fn = function(driver, data) self:UpdateSpeedMult() end
+    self.on_driver_equip_fn = function(driver, data) self:UpdateSpeedMult() end
+    self.on_driver_unequip_fn = function(driver, data) self:UpdateSpeedMult() end
 
     inst:ListenForEvent("itemget", OnItemGet)
     inst:ListenForEvent("itemlose", OnItemLose)
