@@ -32,7 +32,7 @@ local function stopFixingFn(inst)
         inst.task_fix = nil
     end
 
-    inst.AnimState:PlayAnimation("idle", true)
+    inst.AnimState:PushAnimation("idle", true)
 
     inst.boat = nil
     if inst.armsfx then
