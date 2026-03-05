@@ -176,24 +176,11 @@ end
 local function OnSave(inst, data)
     data.children = {}
 
-    if inst.torch then
-        table.insert(data.children, inst.torch.GUID)
-        data.torch = inst.torch.GUID
-    end
-    if inst.axe then
-        table.insert(data.children, inst.axe.GUID)
-        data.axe = inst.axe.GUID
-    end
-
     if inst:HasTag("atdesk") then
         data.atdesk = true
     end
 
     data.temp_spawn = inst.temp_spawn
-    if inst.task_guard1 or inst.task_guard2 then
-
-    end
-    -- end shopkeeper stuff
 
     if inst:HasTag("angry_at_player") then
         data.angryatplayer = true
@@ -221,34 +208,34 @@ local function OnSave(inst, data)
 end
 
 local function OnLoad(inst, data)
-    if data then
-        if data.atdesk then
-            inst.sg:GoToState("desk")
-        end
+    if not data then return end
 
-        if data.temp_spawn then
-            GuardSetTemp(inst)
-        end
+    if data.atdesk then
+        inst.sg:GoToState("desk")
+    end
 
-        if data.equipped then
-            inst.equipped = true
-        end
+    if data.temp_spawn then
+        GuardSetTemp(inst)
+    end
 
-        if data.angryatplayer then
-            inst:AddTag("angry_at_player")
-        end
+    if data.equipped then
+        inst.equipped = true
+    end
 
-        if data.recieved_trinket then
-            inst:AddTag("recieved_trinket")
-        end
+    if data.angryatplayer then
+        inst:AddTag("angry_at_player")
+    end
 
-        if data.paytax then
-            inst:AddTag("paytax")
-        end
+    if data.recieved_trinket then
+        inst:AddTag("recieved_trinket")
+    end
 
-        if data.daily_gift then
-            inst.daily_gift = data.daily_gift
-        end
+    if data.paytax then
+        inst:AddTag("paytax")
+    end
+
+    if data.daily_gift then
+        inst.daily_gift = data.daily_gift
     end
 end
 
@@ -262,13 +249,13 @@ local function ShouldAcceptItem(inst, item)
     end
 
     if inst.components.eater:CanEat(item) then
-        if (item.components.edible.foodtype == "MEAT" or item.components.edible.foodtype == "HORRIBLE")
+        if (item.components.edible.foodtype == FOODTYPE.MEAT or item.components.edible.foodtype == "HORRIBLE")
             and inst.components.follower.leader
             and inst.components.follower:GetLoyaltyPercent() > 0.9 then
             return false
         end
 
-        if (item.components.edible.foodtype == "VEGGIE" or item.components.edible.foodtype == "RAW") then
+        if (item.components.edible.foodtype == FOODTYPE.VEGGIE or item.components.edible.foodtype == FOODTYPE.RAW) then
             local econ = TheWorld.components.economy
             local econprefab = inst.prefab
             if inst.econprefab then
@@ -294,7 +281,7 @@ local function ShouldAcceptItem(inst, item)
         end
     end
 
-    if item.prefab == "oinc" or item.prefab == "oinc10" or item.prefab == "oinc100" then --or trinket_giftshop `
+    if item:HasTag("oinc") then
         return true
     end
 
@@ -344,10 +331,8 @@ local function ShouldAcceptItem(inst, item)
             if delay > 0 then
                 if delay == 1 then
                     inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY_TOMORROW))
-                    --inst.components.talker:Say(  getSpeechType(inst,STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY_TOMORROW) )
                 else
                     inst.components.talker:Say(string.format(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY), tostring(delay)))
-                    --inst.components.talker:Say( string.format( getSpeechType(inst,STRINGS.CITY_PIG_TALK_REFUSE_GIFT_DELAY), tostring(delay) ) )
                 end
                 return false
             else
@@ -359,7 +344,6 @@ local function ShouldAcceptItem(inst, item)
                     inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_PRICELESS_GIFT))
                 else
                     inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_RELIC_GIFT))
-                    --inst.components.talker:Say( getSpeechType(inst,STRINGS.CITY_PIG_TALK_RELIC_GIFT) )
                 end
             else
                 if item.prefab == "trinket_giftshop_1" or item.prefab == "trinket_giftshop_3" and inst:HasTag("city1") then
@@ -367,7 +351,6 @@ local function ShouldAcceptItem(inst, item)
                 else
                     --HUGO
                     inst.components.talker:Say(string.format(getSpeechType(inst, STRINGS.CITY_PIG_TALK_REFUSE_GIFT), desc))
-                    --inst.components.talker:Say( string.format( getSpeechType(inst,STRINGS.CITY_PIG_TALK_REFUSE_GIFT), desc ) )
                 end
             end
             return false
@@ -469,7 +452,7 @@ local function OnAccept(inst, doer, item)
     for item, give in pairs(Items) do
         if give then
             doer.components.inventory:GiveItem(item, nil,
-                Vector3(TheSim:GetScreenPos(inst.Transform:GetWorldPosition())))
+                inst:GetPosition())
         else
             item:Remove()
         end
@@ -487,7 +470,7 @@ local function OnAccept(inst, doer, item)
             else
                 amount = amount - 1
             end
-            doer.components.inventory:GiveItem(p, nil, Vector3(TheSim:GetScreenPos(inst.Transform:GetWorldPosition())))
+            doer.components.inventory:GiveItem(p, nil, inst:GetPosition())
         end
     end
 end
@@ -500,8 +483,7 @@ local function OnRefuseItem(inst, item)
 end
 
 local function OnEat(inst, food)
-    if food.components.edible
-        and food.components.edible.foodtype == "MEAT"
+    if food.components.edible.foodtype == FOODTYPE.MEAT
         and inst.components.werebeast
         and not inst.components.werebeast:IsInWereState() then
         if food.components.edible:GetHealth() < 0 then
@@ -509,11 +491,8 @@ local function OnEat(inst, food)
         end
     end
 
-    if food.components.edible and (food.components.edible.foodtype == "VEGGIE") then --or food.components.edible.foodtype == "SEEDS") then
-        local poop = SpawnPrefab("poop")
-        poop.Transform:SetPosition(inst.Transform:GetWorldPosition())
-
-        GetWorld().components.periodicpoopmanager:OnPoop(poop.cityID, poop)
+    if food.components.edible.foodtype == FOODTYPE.VEGGIE then --or food.components.edible.foodtype == FOODTYPE.SEEDS) then
+        SpawnPrefab("poop").Transform:SetPosition(inst.Transform:GetWorldPosition())
     end
 end
 
@@ -521,24 +500,16 @@ local function OnAttackedByDecidRoot(inst, attacker)
     local fn = function(dude) return dude:HasTag("pig") and not dude:HasTag("werepig") and not dude:HasTag("guard") end
 
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = nil
-    if GetSeasonManager() and (GetSeasonManager():IsSpring() or GetSeasonManager():IsGreenSeason()) then
-        ents = TheSim:FindEntities(x, y, z, (SHARE_TARGET_DIST * TUNING.SPRING_COMBAT_MOD) / 2)
-    else
-        ents = TheSim:FindEntities(x, y, z, SHARE_TARGET_DIST / 2)
-    end
-
-    if ents then
-        local num_helpers = 0
-        for k, v in pairs(ents) do
-            if v ~= inst and v.components.combat and not (v.components.health and v.components.health:IsDead()) and fn(v) then
-                if v:PushEvent("suggest_tree_target", { tree = attacker }) then
-                    num_helpers = num_helpers + 1
-                end
+    local radius = TheWorld.state.isspring and ((SHARE_TARGET_DIST * TUNING.SPRING_COMBAT_MOD) / 2) or (SHARE_TARGET_DIST / 2)
+    local num_helpers = 0
+    for k, v in pairs(TheSim:FindEntities(x, y, z, radius)) do
+        if v ~= inst and v.components.combat and not (v.components.health and v.components.health:IsDead()) and fn(v) then
+            if v:PushEvent("suggest_tree_target", { tree = attacker }) then
+                num_helpers = num_helpers + 1
             end
-            if num_helpers >= MAX_TARGET_SHARES then
-                break
-            end
+        end
+        if num_helpers >= MAX_TARGET_SHARES then
+            break
         end
     end
 end
@@ -677,38 +648,22 @@ local function SetNormalPig(inst)
         end
     end)
 
-    inst:ListenForEvent("itemreceived",
+    -- 给予猪币取消仇恨
+    inst:ListenForEvent("itemget",
         function(inst, data)
-            if data.item.prefab == "oinc" or data.item.prefab == "oinc10" or data.item.prefab == "oinc100" then
-                if inst:HasTag("angry_at_player") then
-                    if not inst.bribe_count then
-                        inst.bribe_count = 0
+            if data.item:HasTag("oinc") and inst:HasTag("angry_at_player") then
+                inst.bribe_count = (inst.bribe_count or 0) + data.item:GetOincAllValue()
+                local bribe_threshold = inst:HasTag("guard") and 10 or 1
+                if inst.bribe_count >= bribe_threshold then
+                    inst:RemoveTag("angry_at_player")
+                    if inst.components.combat and inst.components.combat.target and inst.components.combat.target:HasTag("player") then
+                        inst.components.combat:GiveUp()
                     end
 
-                    -- If the item is not an oinc it's obviously an oinc10, so we count the bribe accordingly
-                    if data.item.prefab == "oinc" then
-                        inst.bribe_count = inst.bribe_count + 1
-                    elseif data.item.prefab == "oinc10" then
-                        inst.bribe_count = inst.bribe_count + 10
-                    elseif data.item.prefab == "oinc100" then
-                        inst.bribe_count = inst.bribe_count + 100
-                    end
-                    inst.bribe_count = inst.bribe_count * data.item.components.stackable.stacksize
-
-                    local bribe_threshold = inst:HasTag("guard") and 10 or 1
-                    if inst.bribe_count >= bribe_threshold then
-                        inst:RemoveTag("angry_at_player")
-
-                        if inst.components.combat and inst.components.combat.target and inst.components.combat.target:HasTag("player") then
-                            inst.components.combat:GiveUp()
-                        end
-
-                        inst.bribe_count = 0
-                        inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_FORGIVE_PLAYER))
-                        --inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_FORGIVE_PLAYER))
-                    else
-                        inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_NOT_ENOUGH))
-                    end
+                    inst.bribe_count = nil
+                    inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_FORGIVE_PLAYER))
+                else
+                    inst.components.talker:Say(getSpeechType(inst, STRINGS.CITY_PIG_TALK_NOT_ENOUGH))
                 end
             end
         end)
@@ -844,6 +799,7 @@ local function common(name, build, fixer, tags, sex, econprefab)
     inst:AddComponent("entitytracker")
 
     inst:AddComponent("trader")
+    inst.components.trader.deleteitemonaccept = false
     inst.components.trader:SetAcceptTest(ShouldAcceptItem)
     inst.components.trader.onaccept = OnAccept
     inst.components.trader.onrefuse = OnRefuseItem
@@ -868,10 +824,11 @@ local function common(name, build, fixer, tags, sex, econprefab)
     end
 
     inst.special_action = special_action
-    inst.OnSave = OnSave
-    inst.OnLoad = OnLoad
     inst.throwcrackers = throwcrackers
     SetNormalPig(inst)
+
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
 
     inst:ListenForEvent("attacked", OnAttacked)
 

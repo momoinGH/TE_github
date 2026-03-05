@@ -4,10 +4,18 @@ if TUNING.tropical.only_hamlet then
     modimport "modmain/hamlet/sim_ham" --ham cloud
 end
 
-
-
-
 AddReplicableComponent("hayfever")
+
+
+modimport "modmain/common/AddIronLordHandlers" --活性机甲处理
+modimport "modmain/common/AddIronLordPostinit" --活性机甲构造
+modimport "scripts/ArtifactControls"           --活性机甲控制
+
+
+
+
+----------------------------------------------------------------------------------------------------
+
 
 AddPlayerPostInit(function(inst)
     if not TheWorld.ismastersim then return end
@@ -40,12 +48,6 @@ Utils.FnDecorator(Unwrappable, "_ctor", nil, function(rets, self, inst)
     end
     return rets
 end)
-
-----------------------------------------------------------------------------------------------------
-
-modimport "modmain/common/AddIronLordHandlers" --活性机甲处理
-modimport "modmain/common/AddIronLordPostinit" --活性机甲构造
-modimport "scripts/ArtifactControls"           --活性机甲控制
 
 ----------------------------------------------------------------------------------------------------
 

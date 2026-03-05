@@ -1,5 +1,5 @@
 local Utils = require("tropical_utils/utils")
-local RoomUtils = require("tropical_utils/room_utils")
+
 
 -- 调试焦点
 -- TUNING.TX = 0
@@ -56,13 +56,7 @@ local function OnDirtyEventCameraStuff(inst)
         })
 end
 
--- PlayFootstep函数使用，我需要玩家在室内走路时有声音，但是因为没有地皮，只能覆盖函数，这里使用木板地皮的声音
-local function GetCurrentTileTypeBefore(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    if z > RoomUtils.BASE_OFF then
-        return { WORLD_TILES.WOODFLOOR, GetTileInfo(WORLD_TILES.WOODFLOOR) }, true
-    end
-end
+
 
 ----------------------------------------------------------------------------------------------------
 
@@ -107,6 +101,4 @@ AddPlayerPostInit(function(inst)
             end
         end)
     end
-
-    Utils.FnDecorator(inst, "GetCurrentTileType", GetCurrentTileTypeBefore)
 end)

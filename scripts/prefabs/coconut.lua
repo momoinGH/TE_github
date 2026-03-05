@@ -156,7 +156,7 @@ local function common()
 
 
     -- inst:AddComponent("edible")
-    --inst.components.edible.foodtype = "VEGGIE"
+    --inst.components.edible.foodtype = FOODTYPE.VEGGIE
     -- inst:AddTag("coconut")
     inst:AddTag("cattoy")
 

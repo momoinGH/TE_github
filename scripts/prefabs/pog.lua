@@ -110,10 +110,10 @@ local function ShouldAcceptItem(inst, item)
 	if inst.components.health and inst.components.health:IsDead() then return false end
 
 	if item.components.edible and (
-			item.components.edible.foodtype == "MEAT" or
-			item.components.edible.foodtype == "VEGGIE" or
-			item.components.edible.foodtype == "SEEDS" or
-			item.components.edible.foodtype == "INSECT" or
+			item.components.edible.foodtype == FOODTYPE.MEAT or
+			item.components.edible.foodtype == FOODTYPE.VEGGIE or
+			item.components.edible.foodtype == FOODTYPE.SEEDS or
+			item.components.edible.foodtype == FOODTYPE.INSECT or
 			item.components.edible.foodtype == "GENERIC") then
 		return true
 	end

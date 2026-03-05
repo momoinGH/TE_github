@@ -72,7 +72,7 @@ function LeafBadge:OnUpdate(dt)
     if not self.leavestop_intensity then
         self.leavestop_intensity = 0
         -- if wasup then
-        --     GetPlayer():PushEvent("canopyout") --用来播放音乐的
+        --     ThePlayer:PushEvent("canopyout") --用来播放音乐的
         -- end
     end
 
@@ -101,7 +101,7 @@ function LeafBadge:OnUpdate(dt)
             if not self.leavesfullyin then
                 self:GetAnimState():PlayAnimation("idle", true)
                 self.leavesfullyin = true
-                -- GetPlayer():PushEvent("canopyin")
+                -- ThePlayer:PushEvent("canopyin")
             else
                 if self.owner:HasTag("moving") then
                     if not self.leavesmoving then

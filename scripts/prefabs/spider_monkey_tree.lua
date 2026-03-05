@@ -19,8 +19,8 @@ local day_time = seg_time * day_segs
 local JUNGLETREE_GROW_TIME =
 {
     { base = 4.5 * day_time, random = 0.5 * day_time }, --tall to short
-    { base = 8 * day_time,   random = 5 * day_time },   --short to normal
-    { base = 8 * day_time,   random = 5 * day_time },   --normal to tall
+    { base = 8 * day_time, random = 5 * day_time },     --short to normal
+    { base = 8 * day_time, random = 5 * day_time },     --normal to tall
 }
 
 local JUNGLETREE_CHOPS_SMALL = 5
@@ -747,7 +747,7 @@ local function makefn(build, stage, data)
         --                    -- stop pollinating
         --                end
         --            end
-        --        end, GetWorld())
+        --        end, TheWorld)
 
 
         inst.OnEntitySleep = OnEntitySleep

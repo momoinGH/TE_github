@@ -9,7 +9,7 @@ end
 
 local function HearPanFlute(inst, musician, instrument)
     TheWorld:PushEvent("ms_forceprecipitation")
-    -- GetWorld().components.seasonmanager:ForcePrecip()
+    -- TheWorld.components.seasonmanager:ForcePrecip()
 end
 
 local function fn()

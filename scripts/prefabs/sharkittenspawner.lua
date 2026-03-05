@@ -51,7 +51,7 @@ local function ActivateSpawner(inst, isload)
                 end
             end)
 
-            --inst:WatchWorldState("dusktime", inst.dusktime_fn, GetWorld())
+            --inst:WatchWorldState("dusktime", inst.dusktime_fn, TheWorld)
             inst:WatchWorldState("iscaveday", OnIsDay)
         end
 
@@ -156,7 +156,7 @@ local function fn()
     inst.OnLoad = OnLoad
     inst.OnSave = OnSave
 
-    --inst:ListenForEvent("seasonChange", function(...) OnSeasonChange(inst, ...) end, GetWorld())
+    --inst:ListenForEvent("seasonChange", function(...) OnSeasonChange(inst, ...) end, TheWorld)
     inst:WatchWorldState("iscaveday", OnIsDay)
     ActivateSpawner(inst, true)
     inst.components.childspawner:StartSpawning()

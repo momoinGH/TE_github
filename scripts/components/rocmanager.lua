@@ -81,8 +81,7 @@ function Rocmanager:ShouldSpawn()
 			for i, v in ipairs(self._activeplayers) do
 				if v ~= nil then
 					local px, py, pz = v.Transform:GetWorldPosition()
-					local ground = GetWorld()
-					local tile = ground.Map:GetTileAtPoint(px, py, pz)
+                    local tile = TheWorld.Map:GetTileAtPoint(px, py, pz)
 					if tile ~= GROUND.IMPASSABLE or tile ~= GROUND.INVALID then
 						local pt = Vector3(v.Transform:GetWorldPosition())
 						local angle = math.random() * TWOPI

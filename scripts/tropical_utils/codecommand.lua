@@ -913,8 +913,7 @@ TheWorld.Pathfinder:AddWall(x + 0.5, 0, z + 0.5);
 -- prefabutil.lua
 
 -- 制作placer，如果希望有吸附效果的placer，可以参考月亮虹吸器的，prefabs/moon_device.lua
-function MakePlacer(name, bank, build, anim, onground, snap, metersnap, scale, fixedcameraoffset, facing, postinit_fn,
-    offset, onfailedplacement)
+function MakePlacer(name, bank, build, anim, onground, snap, metersnap, scale, fixedcameraoffset, facing, postinit_fn, offset, onfailedplacement)
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -1167,3 +1166,53 @@ net_smallbytearray = Class(function(self, guid, event) end)
 net_ushortarray = Class(function(self, guid, event) end)
 
 CRAFTING_FILTERS = {}
+
+
+DEFAULTFONT = "opensans"
+DIALOGFONT = "opensans"
+TITLEFONT = "bp100"
+UIFONT = "bp50"
+BUTTONFONT = "buttonfont"
+NEWFONT = "spirequal"
+NEWFONT_SMALL = "spirequal_small"
+NEWFONT_OUTLINE = "spirequal_outline"
+NEWFONT_OUTLINE_SMALL = "spirequal_outline_small"
+NUMBERFONT = "stint-ucr"
+TALKINGFONT = "talkingfont"
+TALKINGFONT_WORMWOOD = "talkingfont_wormwood"
+TALKINGFONT_TRADEIN = "talkingfont_tradein"
+TALKINGFONT_HERMIT = "talkingfont_hermit"
+CHATFONT = "bellefair"
+HEADERFONT = "hammerhead"
+CHATFONT_OUTLINE = "bellefair_outline"
+SMALLNUMBERFONT = "stint-small"
+BODYTEXTFONT = "stint-ucr"
+CODEFONT = "ptmono"
+
+-- These extra glyph fonts are only used as fallbacks.
+local CONTROLLERS = "controllers"
+local EMOJIFONT = "emoji"
+
+FALLBACK_FONT = "fallback_font"
+FALLBACK_FONT_FULL = "fallback_font_full"
+FALLBACK_FONT_OUTLINE = "fallback_font_outline"
+FALLBACK_FONT_FULL_OUTLINE = "fallback_font_full_outline"
+
+
+function MakeTinyFreezableCharacter(inst, sym, offset) end
+
+function MakeSmallFreezableCharacter(inst, sym, offset) end
+
+function MakeMediumFreezableCharacter(inst, sym, offset) end
+
+function MakeLargeFreezableCharacter(inst, sym, offset) end
+
+function MakeHugeFreezableCharacter(inst, sym, offset) end
+
+function DefaultSleepTest(inst) end
+
+function DefaultWakeTest(inst) end
+
+function ChangeToCharacterPhysics(inst, mass, rad) end
+
+function ChangeToObstaclePhysics(inst, rad, height) end

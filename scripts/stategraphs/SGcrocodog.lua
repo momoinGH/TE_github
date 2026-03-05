@@ -69,7 +69,7 @@ local states =
 
             if inst:HasTag("enable_shake") then
                 if math.random() < .05 and inst:HasTag("enable_shake") then
-                    --               if GetWorld().components.flooding and GetWorld().components.flooding.mode == "flood"  then
+                    --               if TheWorld.components.flooding and TheWorld.components.flooding.mode == "flood"  then
                     inst.sg:GoToState("shake")
                 end
             end
@@ -98,12 +98,12 @@ local states =
             inst.AnimState:PlayAnimation("shake")
 
             local x, y, z = inst.Transform:GetWorldPosition()
-            --			local currentLevel = GetWorld().Flooding:GetTargetDepth()
+            --			local currentLevel = TheWorld.Flooding:GetTargetDepth()
             --			if currentLevel < 1 then
-            --				GetWorld().Flooding:SetTargetDepth(1)	
+            --				TheWorld.Flooding:SetTargetDepth(1)	
             --			end
 
-            --			GetWorld().Flooding:SetPositionPuddleSource(x,0,z)
+            --			TheWorld.Flooding:SetPositionPuddleSource(x,0,z)
         end,
 
         timeline =
@@ -250,12 +250,12 @@ local states =
             --			local sm = GetSeasonManager()
             --			if inst:HasTag("enable_shake") and sm:IsGreenSeason() and sm:GetPercentSeason() > 0.25 then
             --				local x,y,z = inst.Transform:GetWorldPosition()
-            --				local currentLevel = GetWorld().Flooding:GetTargetDepth()
+            --				local currentLevel = TheWorld.Flooding:GetTargetDepth()
             --				if currentLevel < 1 then
-            --					GetWorld().Flooding:SetTargetDepth(1)	
+            --					TheWorld.Flooding:SetTargetDepth(1)	
             --				end
             --
-            --				GetWorld().Flooding:SetPositionPuddleSource(x,0,z)
+            --				TheWorld.Flooding:SetPositionPuddleSource(x,0,z)
             --			end
         end,
 

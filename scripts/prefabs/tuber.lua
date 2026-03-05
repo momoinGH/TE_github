@@ -36,7 +36,7 @@ local function fn(Sim)
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "VEGGIE"
+    inst.components.edible.foodtype = FOODTYPE.VEGGIE
     inst.components.edible:SetOnEatenFn(oneaten)
     inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
 
@@ -88,7 +88,7 @@ local function cookedfn(Sim)
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "VEGGIE"
+    inst.components.edible.foodtype = FOODTYPE.VEGGIE
     inst.components.edible:SetOnEatenFn(oneaten)
     inst.components.edible.healthvalue = TUNING.HEALING_SMALL
     inst.components.edible.hungervalue = TUNING.CALORIES_MEDSMALL
@@ -137,7 +137,7 @@ local function bloomfn(Sim)
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "VEGGIE"
+    inst.components.edible.foodtype = FOODTYPE.VEGGIE
     inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
 
     inst:AddComponent("perishable")
@@ -188,7 +188,7 @@ local function cookedbloomfn(Sim)
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "VEGGIE"
+    inst.components.edible.foodtype = FOODTYPE.VEGGIE
     inst.components.edible.healthvalue = TUNING.HEALING_SMALL
     inst.components.edible.hungervalue = TUNING.CALORIES_MEDSMALL
     inst.components.edible.sanityvalue = TUNING.SANITY_TINY

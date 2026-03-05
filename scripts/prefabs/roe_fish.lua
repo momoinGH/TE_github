@@ -430,7 +430,7 @@ local function MakeFish(name, has_cooked, has_seeds)
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
 		inst:AddComponent("edible")
-		inst.components.edible.foodtype = "SEEDS"
+        inst.components.edible.foodtype = FOODTYPE.SEEDS
 
 		inst:AddComponent("tradable")
 

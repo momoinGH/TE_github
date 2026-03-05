@@ -53,9 +53,7 @@ local function sectioncallback(newsection, oldsection, inst)
 end
 
 local function onupdate(inst)
-	-- local sm = GetSeasonManager()
 	local rain = Remap(math.max(TheWorld.state.precipitationrate, 0.5), 0.5, 1.0, 0.0, 1.0)
-	-- local wind = sm:GetHurricaneWindSpeed()
 	local wind = 1
 	inst.components.fueled.rate = 1 + SANDCASTLE_RAIN_PERISH_RATE *
 		rain + SANDCASTLE_WIND_PERISH_RATE * wind

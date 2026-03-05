@@ -729,14 +729,6 @@ local function creatInterior(inst)
     doors.exit.components.teleporter:Target(inst)
 end
 
-local function OnEntityWake(inst) --应该什么时候显示呢
-    -- if GetAporkalypse() and GetAporkalypse():GetFiestaActive() then
-    --     inst.AnimState:Show("YOTP")
-    -- else
-    --     inst.AnimState:Hide("YOTP")
-    -- end
-end
-
 local GUARDS_MUST_TAGS = { "guard", "city_pig" }
 
 --- 当传送玩家时，延迟一段时间把仇视玩家的猪人守卫也传送过去
@@ -756,13 +748,21 @@ local function OnTeleporting(inst, doer)
     end
 end
 
-local function makefn(name, build, bank, data)
+local function PlacerPost(inst)
+    inst.AnimState:Hide("YOTP")
+    inst.AnimState:Hide("SNOW")
+end
+
+local function MakeShop(name, data)
     data = data or {}
+    local bank = data.bank or "pig_shop"
+    local build = data.build
+    local minimap = data.minimap or (name .. ".png")
+    assert(build)
 
     local function fn()
         local usesound = data.sounds and data.sounds[1] or nil
-        local inst = RoomUtils.MakeBaseDoor(bank or "pig_shop", build, "idle", false, false,
-            name == "pig_shop_cityhall_player" and "pig_shop_cityhall.png" or name .. ".png", usesound)
+        local inst = RoomUtils.MakeBaseDoor(bank, build, "idle", false, false, minimap, usesound)
 
         inst.entity:AddLight()
         inst.Light:SetFalloff(1)
@@ -776,7 +776,6 @@ local function makefn(name, build, bank, data)
         inst.AnimState:Hide("YOTP")
 
         inst:AddTag("structure")
-        inst:AddTag("city_hammerable")
 
         if not TheWorld.ismastersim then
             return inst
@@ -787,6 +786,7 @@ local function makefn(name, build, bank, data)
         inst:AddComponent("lootdropper")
 
         if not data.indestructable then
+            inst.breaksoundsufix = data.usestonebreaksound and "stone" or "wood"
             inst:AddComponent("workable")
             inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
             inst.components.workable:SetWorkLeft(4)
@@ -802,9 +802,9 @@ local function makefn(name, build, bank, data)
             inst.AnimState:AddOverrideBuild("flag_post_wilson_build")
         end
 
-        MakeSnowCovered(inst, .01)
+        MakeSnowCovered(inst)
 
-        inst.fixbank = bank or "pig_shop"
+        inst.fixbank = bank
         inst:AddComponent("fixable")
         inst.components.fixable:AddRecinstructionStageData("rubble", inst.fixbank, build)
         inst.components.fixable:AddRecinstructionStageData("unbuilt", inst.fixbank, build)
@@ -817,61 +817,33 @@ local function makefn(name, build, bank, data)
 
         inst:DoTaskInTime(0, creatInterior)
 
-        inst.breaksoundsufix = data.usestonebreaksound and "stone" or "wood"
         inst.OnSave = onsave
         inst.OnLoad = onload
-        inst.OnEntityWake = OnEntityWake
 
         inst:WatchWorldState("isnight", OnNight)
         OnNight(inst, TheWorld.state.isnight)
-
         inst:ListenForEvent("onbuilt", onbuilt)
 
         return inst
     end
-    return fn
+
+    return Prefab(name, fn, assets, prefabs),
+        MakePlacer(name .. "_placer", bank, build, "idle", false, false, true, nil, nil, nil, PlacerPost)
 end
 
-local function makeshop(name, build, bank, data)
-    return Prefab(name, makefn(name, build, bank, data), assets, prefabs)
-end
 
-local function placetestfn(inst)
-    inst.AnimState:Hide("YOTP")
-    inst.AnimState:Hide("SNOW")
 
-    local pt = inst:GetPosition()
-    local tile = GetWorld().Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-    if tile == GROUND.INTERIOR then
-        return false
-    end
-
-    return true
-end
-
-return makeshop("pig_shop_deli", "pig_shop_deli", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    makeshop("pig_shop_general", "pig_shop_general", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
-    makeshop("pig_shop_hoofspa", "pig_shop_hoofspa", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    makeshop("pig_shop_produce", "pig_shop_produce", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    makeshop("pig_shop_florist", "pig_shop_florist", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    makeshop("pig_shop_antiquities", "pig_shop_antiquities", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
-    makeshop("pig_shop_academy", "pig_shop_accademia", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    makeshop("pig_shop_arcane", "pig_shop_arcane", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    makeshop("pig_shop_weapons", "pig_shop_weapons", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    makeshop("pig_shop_hatshop", "pig_shop_millinery", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    makeshop("pig_shop_bank", "pig_shop_bank", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
-    makeshop("pig_shop_tinker", "pig_shop_tinker", nil, { sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
-    makeshop("pig_shop_cityhall", "pig_cityhall", "pig_cityhall", { indestructable = true, unburnable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    makeshop("pig_shop_cityhall_player", "pig_cityhall", "pig_cityhall", { unburnable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
-    MakePlacer("pig_shop_deli_placer", "pig_shop", "pig_shop_deli", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn),
-    MakePlacer("pig_shop_general_placer", "pig_shop", "pig_shop_general", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn),
-    MakePlacer("pig_shop_hoofspa_placer", "pig_shop", "pig_shop_hoofspa", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn),
-    MakePlacer("pig_shop_produce_placer", "pig_shop", "pig_shop_produce", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn),
-    MakePlacer("pig_shop_florist_placer", "pig_shop", "pig_shop_florist", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn),
-    MakePlacer("pig_shop_antiquities_placer", "pig_shop", "pig_shop_antiquities", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn),
-    MakePlacer("pig_shop_arcane_placer", "pig_shop", "pig_shop_arcane", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn),
-    MakePlacer("pig_shop_weapons_placer", "pig_shop", "pig_shop_weapons", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn),
-    MakePlacer("pig_shop_hatshop_placer", "pig_shop", "pig_shop_millinery", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn),
-    MakePlacer("pig_shop_cityhall_placer", "pig_cityhall", "pig_cityhall", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn),
-    MakePlacer("pig_shop_bank_placer", "pig_shop", "pig_shop_bank", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn),
-    MakePlacer("pig_shop_tinker_placer", "pig_shop", "pig_shop_tinker", "idle", false, false, true, nil, nil, nil, nil, nil, nil, placetestfn)
+return MakeShop("pig_shop_deli", { build = "pig_shop_deli", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
+    MakeShop("pig_shop_general", { build = "pig_shop_general", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
+    MakeShop("pig_shop_hoofspa", { build = "pig_shop_hoofspa", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
+    MakeShop("pig_shop_produce", { build = "pig_shop_produce", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
+    MakeShop("pig_shop_florist", { build = "pig_shop_florist", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
+    MakeShop("pig_shop_antiquities", { build = "pig_shop_antiquities", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
+    MakeShop("pig_shop_academy", { build = "pig_shop_accademia", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
+    MakeShop("pig_shop_arcane", { build = "pig_shop_arcane", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
+    MakeShop("pig_shop_weapons", { build = "pig_shop_weapons", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
+    MakeShop("pig_shop_hatshop", { build = "pig_shop_millinery", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
+    MakeShop("pig_shop_bank", { build = "pig_shop_bank", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
+    MakeShop("pig_shop_tinker", { build = "pig_shop_tinker", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
+    MakeShop("pig_shop_cityhall", { build = "pig_cityhall", bank = "pig_cityhall", indestructable = true, unburnable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
+    MakeShop("pig_shop_cityhall_player", { bank = "pig_cityhall", build = "pig_cityhall", minimap = "pig_shop_cityhall.png", unburnable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true })

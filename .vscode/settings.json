@@ -8,7 +8,8 @@
         "missing-parameter",
         "lowercase-global",
         "undefined-doc-name",
-        "return-type-mismatch"
+        "return-type-mismatch",
+        "undefined-doc-param"
     ],
     "Lua.workspace.maxPreload": 2000,
     "Lua.diagnostics.workspaceDelay": -1

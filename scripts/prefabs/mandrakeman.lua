@@ -286,8 +286,8 @@ local function fn()
     ------------------------------------------
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.VEGGIE }, { FOODTYPE.VEGGIE })
-    --    table.insert(inst.components.eater.foodprefs, "RAW")
-    --    table.insert(inst.components.eater.ablefoods, "RAW")
+    --    table.insert(inst.components.eater.foodprefs, FOODTYPE.RAW)
+    --    table.insert(inst.components.eater.ablefoods, FOODTYPE.RAW)
 
     ------------------------------------------
     inst:AddComponent("combat")

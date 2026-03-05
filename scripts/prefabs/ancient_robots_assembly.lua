@@ -260,7 +260,7 @@ local function commonfn()
 
     refreshart(inst)
 
-    --  inst:ListenForEvent("beginaporkalypse", function(world) OnLightning(inst) end, GetWorld())
+    --  inst:ListenForEvent("beginaporkalypse", function(world) OnLightning(inst) end, TheWorld)
     inst:ListenForEvent("lightningstrike", OnLightning)
     inst:ListenForEvent("merge", onmerge)
 

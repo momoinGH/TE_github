@@ -13,7 +13,7 @@ local function ShouldAcceptItem(inst, item)
         local can_accept = item.components.currency or item.prefab == "goldnugget" or item.prefab == "dubloon" or
             item.prefab == "oinc" or item.prefab == "oinc10" or
             item.prefab ==
-            "oinc100" --and (Prefabs[seed_name] or item.prefab == "seeds" or item.components.edible.foodtype == "MEAT")
+            "oinc100" --and (Prefabs[seed_name] or item.prefab == "seeds" or item.components.edible.foodtype == FOODTYPE.MEAT)
 
         return can_accept
     else

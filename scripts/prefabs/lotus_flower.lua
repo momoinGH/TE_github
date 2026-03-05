@@ -37,8 +37,8 @@ local function fn(Sim)
     inst.components.edible.healthvalue = TUNING.HEALING_TINY
     inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
     inst.components.edible.sanityvalue = TUNING.SANITY_TINY or 0
-    inst.components.edible.foodtype = "VEGGIE"
-    inst.components.edible.foodstate = "RAW"
+    inst.components.edible.foodtype = FOODTYPE.VEGGIE
+    inst.components.edible.foodstate = FOODTYPE.RAW
 
     ---------------------
 
@@ -96,7 +96,7 @@ local function fncooked(Sim)
     inst.components.edible.healthvalue = TUNING.HEALING_TINY
     inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
     inst.components.edible.sanityvalue = TUNING.SANITY_MED or 0
-    inst.components.edible.foodtype = "VEGGIE"
+    inst.components.edible.foodtype = FOODTYPE.VEGGIE
     inst.components.edible.foodstate = "COOKED"
 
     ---------------------

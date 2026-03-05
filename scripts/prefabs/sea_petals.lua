@@ -37,7 +37,7 @@ local function fn(Sim)
     inst:AddComponent("edible")
     inst.components.edible.healthvalue = TUNING.HEALING_TINY
     inst.components.edible.hungervalue = 0
-    inst.components.edible.foodtype = "VEGGIE"
+    inst.components.edible.foodtype = FOODTYPE.VEGGIE
 
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)

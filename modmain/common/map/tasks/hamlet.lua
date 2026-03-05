@@ -1978,21 +1978,6 @@ AddRoom("suburb_base_2", {
     }
 })
 
---------------------------interior-----------------------------------		
-AddRoom("BG_interior_base", {
-    colour = { r = .01, g = 0.01, b = 0.01, a = 0.3 },
-    value = GROUND.INTERIOR,
-    tags = { "hamlet" },
-    contents = {
-        distributepercent = 0.0,
-        distributeprefabs =
-        {
-
-        },
-    }
-
-})
-
 ---------------------------------island 5--------------------------------------
 AddRoom("deeprainforest_base_nobatcave", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 },

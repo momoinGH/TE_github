@@ -6,6 +6,8 @@
 
 ----------------------------------------------------------------------------------------------------
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
+Utils = require("tropical_utils/utils")
+
 
 local ALL_PREFAB_FILES = {}
 local ALL_ASSETS = {}

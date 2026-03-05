@@ -65,13 +65,13 @@ local function ShouldAcceptItem(inst, item)
         return true
     end
     if item.components.edible then
-        if (item.components.edible.foodtype == "MEAT" or item.components.edible.foodtype == "HORRIBLE")
+        if (item.components.edible.foodtype == FOODTYPE.MEAT or item.components.edible.foodtype == "HORRIBLE")
             and inst.components.follower.leader
             and inst.components.follower:GetLoyaltyPercent() > 0.9 then
             return false
         end
 
-        if (item.components.edible.foodtype == "VEGGIE" or item.components.edible.foodtype == "RAW") then
+        if (item.components.edible.foodtype == FOODTYPE.VEGGIE or item.components.edible.foodtype == FOODTYPE.RAW) then
             local last_eat_time = inst.components.eater:TimeSinceLastEating()
             if last_eat_time and last_eat_time < PIG_MIN_POOP_PERIOD then
                 return false
@@ -91,7 +91,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
     if item.components.edible then
         --meat makes us friends
         if inst.components.eater:CanEat(item) then
-            --  if item.components.edible.foodtype == "MEAT" or item.components.edible.foodtype == "HORRIBLE" then
+            --  if item.components.edible.foodtype == FOODTYPE.MEAT or item.components.edible.foodtype == "HORRIBLE" then
             if inst.components.combat.target and inst.components.combat.target == giver then
                 inst.components.combat:SetTarget(nil)
             elseif giver.components.leader then
@@ -291,8 +291,8 @@ local function fn()
     inst.components.inventoryitem:SetSinks(true)
 
     inst.components.eater:SetCanEatHorrible()
-    --    table.insert(inst.components.eater.foodprefs, "RAW")
-    --    table.insert(inst.components.eater.ablefoods, "RAW")
+    --    table.insert(inst.components.eater.foodprefs, FOODTYPE.RAW)
+    --    table.insert(inst.components.eater.ablefoods, FOODTYPE.RAW)
     inst.components.eater.strongstomach = true -- can eat monster meat!
     ------------------------------------------
     inst:AddComponent("combat")

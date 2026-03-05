@@ -67,7 +67,6 @@ local notags = { 'NOBLOCK', 'player', 'FX' }
 local function test_ground(inst, pt)
     local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
     local ground_OK = tiletype ~= GROUND.ROCKY and tiletype ~= GROUND.ROAD and tiletype ~= GROUND.IMPASSABLE and
-        tiletype ~= GROUND.INTERIOR and
         tiletype ~= GROUND.UNDERROCK and tiletype ~= GROUND.WOODFLOOR and
         tiletype ~= GROUND.CARPET and tiletype ~= GROUND.CHECKER and tiletype < GROUND.UNDERGROUND
 
@@ -148,8 +147,8 @@ local function fn()
     inst.components.edible.hungervalue = TUNING.CALORIES_TINY
     inst.components.edible.healthvalue = TUNING.HEALING_TINY
     inst.components.edible.antihistamine = 60
-    inst.components.edible.foodtype = "SEEDS"
-    inst.components.edible.foodstate = "RAW"
+    inst.components.edible.foodtype = FOODTYPE.SEEDS
+    inst.components.edible.foodstate = FOODTYPE.RAW
     inst.components.edible:SetOnEatenFn(oneat)
 
     inst:AddComponent("bait")
@@ -206,7 +205,7 @@ local function cooked()
     inst.components.edible.hungervalue = TUNING.CALORIES_TINY
     inst.components.edible.healthvalue = TUNING.HEALING_SMALL
     inst.components.edible.antihistamine = 120
-    inst.components.edible.foodtype = "SEEDS"
+    inst.components.edible.foodtype = FOODTYPE.SEEDS
     inst.components.edible:SetOnEatenFn(oneat)
 
     inst:AddComponent("perishable")

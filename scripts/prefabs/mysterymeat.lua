@@ -56,7 +56,7 @@ local function fn(Sim)
     inst:AddComponent("edible")
     inst.components.edible.healthvalue = TUNING.SPOILED_HEALTH
     inst.components.edible.hungervalue = TUNING.SPOILED_HUNGER
-    inst.components.edible.foodtype = "MEAT"
+    inst.components.edible.foodtype = FOODTYPE.MEAT
 
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM

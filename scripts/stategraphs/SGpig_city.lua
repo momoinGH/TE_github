@@ -105,7 +105,7 @@ local states =
         {
             TimeEvent(13 * FRAMES,
                 function(inst)
-                    inst.throwcrackers(inst)
+                    inst:throwcrackers()
                 end),
         },
 

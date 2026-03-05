@@ -1,5 +1,6 @@
-local Utils = require("tropical_utils/utils")
+Utils = require("tropical_utils/utils")
 
+modimport "modmain/room/entityscript"
 
 
 modimport "modmain/room/components/map"

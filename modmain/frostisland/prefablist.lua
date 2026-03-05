@@ -20,7 +20,6 @@ PrefabFiles = {
     "key_to_city",
     "player_house_kits",
 
-    "pigman_city",
     "pighouse_city",
     "pig_guard_tower",
     "armor_metal",
@@ -31,9 +30,6 @@ PrefabFiles = {
     "alloy",
     "smelter",
     "halberd",
-    "oinc",
-    "oinc10",
-    "oinc100",
     "billsnow",
     "giantsnow",
     "snowman_lamp",

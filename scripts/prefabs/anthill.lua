@@ -363,7 +363,7 @@ end
 
 local function spawnDust(inst, dustCount)
     if dustCount > 0 then
-        local interior_spawner = GetWorld().components.interiorspawner
+        local interior_spawner = TheWorld.components.interiorspawner
         local current_interior = interior_spawner.current_interior
 
         local pt = interior_spawner:getSpawnOrigin()

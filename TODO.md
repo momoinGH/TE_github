@@ -5,4 +5,17 @@
 
 
 干掉TA_CONFIG
-小船血量图标和位置改变
+干掉"city1"/"city2"
+
+
+pig_shop
+playerhouse_city
+vampirebatcave
+
+
+anthill
+cave_entrance_roc
+hamlet_pig_ruins_entrance
+pig_palace
+
+

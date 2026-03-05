@@ -58,7 +58,7 @@ local function commonfn(sim)
     inst:AddComponent("bait")
 
     inst:AddComponent("edible")
-    inst.components.edible.foodtype = "VEGGIE"
+    inst.components.edible.foodtype = FOODTYPE.VEGGIE
 
     inst:AddComponent("perishable")
     inst.components.perishable:StartPerishing()

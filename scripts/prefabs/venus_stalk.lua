@@ -37,7 +37,7 @@ local function flytrapstalk(inst)
     inst:AddComponent("edible")
     inst.components.edible.ismeat = true
     inst.components.edible.foodtype = FOODTYPE.MEAT
-    inst.components.edible.foodstate = "RAW"
+    inst.components.edible.foodstate = FOODTYPE.RAW
     inst.components.edible.healthvalue = 0
     inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
     inst.components.edible.sanityvalue = -TUNING.SANITY_SMALL

@@ -261,7 +261,7 @@ function Quaker_Interior:GetDebris()
 	if rng < 0.75 then
 		todrop = debris.common[math.random(1, #debris.common)]
 	elseif rng >= 0.75 and rng < 0.95 then
-		--		if self.mammals_per_quake > 0 and GetWorld():IsRuins() then self.mammals_per_quake = 0 end -- Don't allow mammals to spawn from quakes in the ruins
+		--		if self.mammals_per_quake > 0 and TheWorld:IsRuins() then self.mammals_per_quake = 0 end -- Don't allow mammals to spawn from quakes in the ruins
 		if self.mammals_per_quake > 0 then self.mammals_per_quake = 0 end
 		todrop = debris.rare[math.random(1, #debris.rare)]
 		-- Make sure we don't spawn a ton of mammals per quake

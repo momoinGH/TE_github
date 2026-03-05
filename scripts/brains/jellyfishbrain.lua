@@ -13,9 +13,6 @@ function JellyfishBrain:OnInitializationComplete()
 end
 
 function JellyfishBrain:OnStart()
-    --    local clock = GetClock()
-    --    local seasonmgr = GetSeasonManager()
-
     local root = PriorityNode(
         {
             Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end,

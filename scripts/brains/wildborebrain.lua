@@ -99,7 +99,7 @@ local function FindFoodAction(inst)
         target = FindEntity(inst, SEE_FOOD_DIST, function(item) 
 				if item:GetTimeAlive() < 8 then return false end
 				if item.prefab == "mandrake" then return false end
-				if noveggie and item.components.edible and item.components.edible.foodtype ~= "MEAT" then
+				if noveggie and item.components.edible and item.components.edible.foodtype ~= FOODTYPE.MEAT then
 					return false
 				end
 				if not item:IsOnValidGround() then
@@ -116,7 +116,7 @@ local function FindFoodAction(inst)
         target = FindEntity(inst, SEE_FOOD_DIST, function(item) 
                 if not item.components.shelf then return false end
                 if not item.components.shelf.itemonshelf or not item.components.shelf.cantakeitem then return false end
-                if noveggie and item.components.shelf.itemonshelf.components.edible and item.components.shelf.itemonshelf.components.edible.foodtype ~= "MEAT" then
+                if noveggie and item.components.shelf.itemonshelf.components.edible and item.components.shelf.itemonshelf.components.edible.foodtype ~= FOODTYPE.MEAT then
                     return false
                 end
                 if not item:IsOnValidGround() then

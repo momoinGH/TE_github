@@ -65,15 +65,11 @@ local room = {
 }
 
 local function onaccept(inst, giver, item)
-    print("检查", item.prefab, inst.components.teleporter.targetTeleporter)
     if item.prefab == "construction_permit" and not inst.components.teleporter.targetTeleporter then
-        print("2")
         if RoomUtils.SpawnNearHouseInterior(inst, room) then --应该没可能失败
-            print("3")
             item:Remove()
         end
     else
-        print("4")
         inst.components.teleporter:Activate(item)
     end
 end
