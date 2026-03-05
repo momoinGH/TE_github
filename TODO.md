@@ -5,7 +5,7 @@
 
 
 干掉TA_CONFIG
-干掉"city1"/"city2"
+
 
 
 pig_shop
@@ -17,5 +17,3 @@ anthill
 cave_entrance_roc
 hamlet_pig_ruins_entrance
 pig_palace
-
-

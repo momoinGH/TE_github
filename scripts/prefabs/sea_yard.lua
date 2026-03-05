@@ -195,5 +195,59 @@ local function fn()
     return inst
 end
 
+----------------------------------------------------------------------------------------------------
+local item_assets = {
+    Asset("ANIM", "anim/seafarer_boatsw.zip")
+}
+
+local function ondeploysea_yard(inst, pt, deployer)
+    local boat = SpawnPrefab("sea_yard")
+    if boat ~= nil then
+        boat.Transform:SetPosition(pt.x, 0, pt.z)
+        inst:Remove()
+    end
+end
+
+local function item_fn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
+    MakeInventoryFloatable(inst)
+
+    inst.AnimState:SetBank("seafarer_boatsw")
+    inst.AnimState:SetBuild("seafarer_boatsw")
+    inst.AnimState:PlayAnimation("seayard", true)
+
+    inst.overridedeployplacername = "sea_yard_placer"
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("deployable")
+    inst.components.deployable.ondeploy = ondeploysea_yard
+    inst.components.deployable:SetDeployMode(DEPLOYMODE.WATER)
+    inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.MEDIUM)
+
+    inst:AddComponent("inspectable")
+    inst:AddComponent("inventoryitem")
+
+    inst:AddComponent("fuel")
+    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
+
+    MakeSmallBurnable(inst, TUNING.TINY_BURNTIME)
+    MakeSmallPropagator(inst)
+    MakeHauntableLaunchAndIgnite(inst)
+
+    return inst
+end
+
 return Prefab("sea_yard", fn, assets, prefabs),
-    MakePlacer("sea_yard_placer", "sea_yard", "sea_yard", "placer")
+    MakePlacer("sea_yard_placer", "sea_yard", "sea_yard", "placer"),
+    Prefab("porto_sea_yard", item_fn, item_assets, prefabs)

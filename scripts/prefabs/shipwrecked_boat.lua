@@ -100,14 +100,15 @@ local function MakeBoat(name, data, common_post_fn, master_post_fn)
         inst:AddTag("shipwrecked_boat")
         inst:AddTag("ignorewalkableplatforms")
         inst:AddTag("boat")
+        inst:AddTag("companion") --玩家不要攻击！
 
+        --TODO 层级有点儿问题，优先级是按照相机距离排序的，船和物品重叠的时候，有一半是物品在前，一半是物品在后，
+        -- 单机版是用AddOverrideBuild在玩家身上叠加，联机版这么写玩家静止不动的时候不会显示贴图，不知道为什么
         inst.AnimState:SetBank(data.bank)
         inst.AnimState:SetBuild(data.build)
         inst.AnimState:PlayAnimation("run_loop", true)
-        inst.AnimState:SetSortOrder(3)
-        inst.AnimState:SetFinalOffset(1)
-        -- inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-        inst.AnimState:SetLayer(LAYER_BACKGROUND)
+        -- inst.AnimState:SetSortOrder(3)
+        -- inst.AnimState:SetFinalOffset(1)
 
         local max_health = data.health or TUNING.BOAT.HEALTH
         inst:AddComponent("healthsyncer")
@@ -339,7 +340,7 @@ MakeBoat("woodlegsboat", {
 
 ----------------------------------------------------------------------------------------------------
 
-MakeBoat("shadowwaxwellboat", {
+MakeBoat("shadowboat", {
     minimap = "shadowboat.png",
     bank = "rowboat",
     build = "waxwell_shadowboat_build",
@@ -347,7 +348,7 @@ MakeBoat("shadowwaxwellboat", {
         "papyrus", "nightmarefuel", "nightmarefuel"
     },
     health = 150,
-    container = "shadowwaxwellboat",
+    container = "shadowboat",
     runspeed = 6,
     prefabs = {
         "papyrus", "nightmarefuel"

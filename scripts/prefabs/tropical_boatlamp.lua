@@ -319,6 +319,8 @@ local function tarlamp_fn()
     inst.components.weapon:SetAttackCallback(OnAttack)
 
     inst.components.fueled:SetDepletedFn(OnTarLampDepleted)
+
+    return inst
 end
 
 ----------------------------------------------------------------------------------------------------

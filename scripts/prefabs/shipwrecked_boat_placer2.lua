@@ -48,6 +48,8 @@ local function fnbuoy(sim)
 
     --	inst.Transform:SetScale(0.5, 0.5, 0.5)	
 
+    inst.overridedeployplacername = "buoy_placer"
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then

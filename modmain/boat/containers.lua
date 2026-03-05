@@ -50,11 +50,10 @@ params.cargoboat = {
 
         animbank = "boat_hud_cargo",
         animbuild = "boat_hud_cargo",
-        pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
-        isboat = true,
+        pos = Vector3(106, 40, 0),
     },
     usespecificslotsforitems = true,
-    type = "chest",
+    type = "hand_inv",
     itemtestfn = BoatItemTestFn,
 }
 
@@ -71,10 +70,10 @@ params.encrustedboat = {
         slotbg = shipwrecked_boat_slotbg,
         animbank = "boat_hud_encrusted",
         animbuild = "boat_hud_encrusted",
-        pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
+        pos = Vector3(106, 40, 0),
     },
     usespecificslotsforitems = true,
-    type = "chest",
+    type = "hand_inv",
     itemtestfn = BoatItemTestFn,
 }
 
@@ -91,16 +90,16 @@ params.rowboat = {
 
         animbank = "boat_hud_row",
         animbuild = "boat_hud_row",
-        pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
+        pos = Vector3(106, 40, 0),
     },
     usespecificslotsforitems = true,
-    type = "chest",
+    type = "hand_inv",
     itemtestfn = BoatItemTestFn
 }
 
 params.armouredboat = params.rowboat
 params.corkboat = params.rowboat
-params.shadowwaxwellboat = params.rowboat
+params.shadowboat = params.rowboat
 
 
 params.woodlegsboat = {
@@ -116,10 +115,10 @@ params.woodlegsboat = {
         slotbg = shipwrecked_boat_slotbg,
         animbank = "boat_hud_encrusted",
         animbuild = "boat_hud_encrusted",
-        pos = Vector3(440, -300 + GetModConfigData("boatlefthud"), 0),
+        pos = Vector3(106, 40, 0),
     },
     usespecificslotsforitems = true,
-    type = "chest",
+    type = "hand_inv",
     itemtestfn = BoatItemTestFn,
 }
 

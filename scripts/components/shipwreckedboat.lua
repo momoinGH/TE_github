@@ -54,6 +54,8 @@ local function OnBoatStopMoving(inst, data)
     end
 end
 
+----------------------------------------------------------------------------------------------------
+
 --- 海难小船
 local Boat = Class(function(self, inst)
     self.inst = inst
@@ -63,16 +65,42 @@ local Boat = Class(function(self, inst)
     inst.driver = nil
     inst.consume_task = nil
 
+    -- 玩家装备浆的时候需要判断是不是有加速效果
+    inst.on_driver_equip_fn = function(driver, data) self:UpdateSpeedMult() end
+    inst.on_driver_unequip_fn = function(driver, data) self:UpdateSpeedMult() end
+
     inst:ListenForEvent("itemget", OnItemGet)
     inst:ListenForEvent("itemlose", OnItemLose)
     inst:ListenForEvent("boat_startmoving", OnBoatStartMoving)
     inst:ListenForEvent("boat_stopmoving", OnBoatStopMoving)
 end)
 
+-- 如果玩家在用桨划船就拿到桨
+local function GetDriverUsingOar(driver, boat)
+    if not driver.components.inventory then
+        return nil
+    end
+    if driver.components.inventory:IsHeavyLifting() then
+        return nil
+    end
+
+    local item = boat.components.container and boat.components.container:GetItemInSlot(1)
+    if item and item:HasTag("sail") then
+        return nil
+    end
+
+    local equip = driver.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+    if equip and equip.components.oar then
+        return equip
+    end
+    return nil
+end
+
 --重新计算移速倍率
 function Boat:UpdateSpeedMult()
     if not self.driver or not self.driver.components.locomotor then return end
 
+    self.driver.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "swboat")
     local c = self.inst.components.container
     if not c then return end
 
@@ -84,13 +112,21 @@ function Boat:UpdateSpeedMult()
         end
     end
 
-    self.driver.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "swboat")
+    -- 如果在划桨，计算桨的速度加成
+    local oar = GetDriverUsingOar(self.driver, self.inst)
+    if oar then
+        speed_mult = oar.components.oar.force / TUNING.BOAT.OARS.BASIC.FORCE * speed_mult --跟木浆相比
+    end
+
     self.driver.components.locomotor:SetExternalSpeedMultiplier(self.inst, "swboat", speed_mult)
 end
 
 --- 玩家上船（或者说被装备的时候）
 function Boat:OnPlayerMounted(player)
     self.driver = player
+    self.inst:ListenForEvent("equip", self.on_driver_equip_fn, player)
+    self.inst:ListenForEvent("unequip", self.on_driver_unequip_fn, player)
+
     if self.inst.components.container then
         self.inst.components.container:Open(player)
 
@@ -109,6 +145,9 @@ end
 --- 玩家下船
 function Boat:OnPlayerDismounted(player)
     self.driver = nil
+    self.inst:RemoveEventCallback("equip", self.on_driver_equip_fn, player)
+    self.inst:RemoveEventCallback("unequip", self.on_driver_unequip_fn, player)
+
     if self.inst.components.container then
         self.inst.components.container:Close(player)
 

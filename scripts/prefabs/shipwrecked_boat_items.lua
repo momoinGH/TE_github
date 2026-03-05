@@ -143,4 +143,5 @@ return MakeBoatItem("porto_raft", { anim = "bambo", boat = "raft" }),
         inst.components.finiteuses:SetMaxUses(80)
         inst.components.finiteuses:SetUses(80)
         inst.components.finiteuses:SetOnFinished(inst.Remove)
-    end)
+    end),
+    MakeBoatItem("porto_shadowboat", { anim = "shadow", boat = "shadowboat" })

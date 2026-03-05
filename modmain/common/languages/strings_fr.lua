@@ -1211,12 +1211,6 @@ STRINGS.NAMES.RESEARCHLAB5 = "Labo de mer"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RESEARCHLAB5 = "Pour la science maritime !"
 STRINGS.RECIPE_DESC.RESEARCHLAB5 = "Pour débloquer des recettes de fabrication... en mer !"
 
-STRINGS.NAMES.SEA_YARD = "Chantier naval"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_YARD = "Je vais devoir réalimenter bientôt."
-STRINGS.RECIPE_DESC.SEA_YARD = "Pour maintenir vos bateaux en forme !"
-
-
-
 STRINGS.NAMES.TARSUIT = "Costume de goudron"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TARSUIT = "Porter ce truc-là c'est à devenir cinglé."
 STRINGS.RECIPE_DESC.TARSUIT = "Le meilleur moyen de rester sec."

@@ -58,7 +58,7 @@ local function Modimport(dirc)
     SafeModImport("modmain/" .. dirc .. "/character")            --添加角色，角色相关变量定义
     SafeModImport("modmain/" .. dirc .. "/ui")                   --UI相关
     SafeModImport("modmain/" .. dirc .. "/prefabpost")           --组件、预制件的修改
-    SafeModImport("modmain/" .. dirc .. "/`fx")                  --特效
+    SafeModImport("modmain/" .. dirc .. "/fx")                  --特效
     SafeModImport("modmain/" .. dirc .. "/actions")              --action相关
     SafeModImport("modmain/" .. dirc .. "/componentactions")     --componentactions相关
     SafeModImport("modmain/" .. dirc .. "/sg")                   --Stategraph相关
@@ -178,3 +178,8 @@ for name, _ in ipairs(CRAFTING_FILTERS) do
         print("LUA ERROR stack traceback:\n提示：STRINGS.UI.CRAFTING_FILTERS." .. name .. "未赋值，点击制作栏时会报错")
     end
 end
+
+
+
+
+-- KnownModIndex:IsModEnabled("workshop-1289779251")

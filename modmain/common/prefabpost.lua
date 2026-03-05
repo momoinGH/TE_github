@@ -100,31 +100,7 @@ local function DeployableCanDeployBefore(self, pt)
     return { false }, IsSpecialTile(tile)
 end
 
-----------------------------------------------------------------------------------------------------
--- 不会落水
-local function DrownableShouldDrownBefore(self)
-    local x, y, z = self.inst.Transform:GetWorldPosition()
-    if #TheSim:FindEntities(x, y, z, 30, { "interior_center" }) > 0 then
-        return { false }, true
-    end
-end
 
-
-local function ShouldX_InternalCheckAfter(retTab, self)
-    if not retTab[1] then return retTab end
-
-    -- 同设置drownable的enabled效果，没有直接改enabled是为了兼容
-    local x, y, z = self.inst.Transform:GetWorldPosition()
-    if TheWorld.Map:GetSWBoatAtPoint(x, y, z) then
-        retTab[1] = false
-    end
-
-    return retTab
-end
-
-AddComponentPostInit("drownable", function(self)
-    Utils.FnDecorator(self, "ShouldX_InternalCheck", nil, ShouldX_InternalCheckAfter)
-    Utils.FnDecorator(self, "ShouldDrown", DrownableShouldDrownBefore)
 end)]]
 
 ----------------------------------------------------------------------------------------------------
@@ -567,11 +543,6 @@ AddPrefabPostInit("farm_plant_randomseed", function(inst)
             end
         end
     end)
-end)
-
-----------------------------------------------------------------------------------------------------
-AddComponentPostInit("oar", function(self, inst)
-    inst:AddTag("oar") --科雷真抠门，桨连个自己的标签也没有
 end)
 
 ----------------------------------------------------------------------------------------------------

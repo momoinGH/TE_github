@@ -19,9 +19,7 @@ local function PickActions(retTab, self, position, target, right)
                 table.insert(actions, ACTIONS.BOATCANNON)
             end
         else
-            if not target
-                and not TheWorld.Map:GetSWBoatAtPoint(position:Get())
-                and TheWorld.Map:IsPassableAtPoint(position:Get()) then
+            if not target and TheWorld.Map:IsPassableAtPoint(position:Get()) then
                 -- 上岸
                 table.insert(actions, ACTIONS.BOATDISMOUNT)
             end

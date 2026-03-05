@@ -1379,28 +1379,6 @@ configuration_options =
 	},
 
 	{
-		name = "boatlefthud",
-		label = en_zh_zht("Boat HUD(Vertical Adjustment)", "海难船只HUD调整", "船難船隻HUD調整"),
-		hover = en_zh_zht(
-			"Here u can adjust the height of the boat HUD *Health meter",
-			"在这里可以调整海难船只HUD（耐久度）的显示高度",
-			"在這裏可以調整船難船隻HUD（耐久度）的顯示高度"),
-		default = 0,
-		options =
-		{
-			{ description = "-100", data = -100 },
-			{ description = "-75", data = -75 },
-			{ description = "-50", data = -50 },
-			{ description = "-25", data = -25 },
-			{ description = "0", data = 0 },
-			{ description = "+25", data = 25 },
-			{ description = "+50", data = 50 },
-			{ description = "+75", data = 75 },
-			{ description = "+100", data = 100 },
-		},
-	},
-
-	{
 		name = "housewallajust",
 		label = en_zh_zht("house wall ajust", "室内墙壁调整", "室內牆壁調整"),
 		hover = en_zh_zht(

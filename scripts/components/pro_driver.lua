@@ -2,17 +2,6 @@ local function ClearBoat(inst, data)
     inst.components.pro_driver:SetBoat(nil)
 end
 
--- 加载的时候找找附近的船
-local function Init(inst, self)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    if not self.boat and TheWorld.Map:IsOceanAtPoint(x, y, z, false) then
-        local boat = FindClosestEntity(inst, 0.5, nil, { "shipwrecked_boat" }, { "INLIMBO" })
-        if boat then
-            self:SetBoat(boat)
-        end
-    end
-end
-
 local function onboat(self, boat)
     self.inst.replica.pro_driver:SetBoat(boat)
 end
@@ -25,8 +14,6 @@ local Driver = Class(function(self, inst)
     self.hoptask = nil
 
     inst:ListenForEvent("death", ClearBoat)
-
-    inst:DoTaskInTime(0, Init, self)
 end, nil, {
     boat = onboat
 })

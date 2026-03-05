@@ -29,4 +29,4 @@ AddRecipe2("obsidian_boatcannon", { Ig("obsidian", 6, v_atlas), Ig("log", 5), Ig
 AddRecipe2("wind_conch", { Ig("obsidian", 4, v_atlas), Ig("purplegem", 1), Ig("magic_seal", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 AddRecipe2("sail_stick", { Ig("obsidian", 2, v_atlas), Ig("nightmarefuel", 3), Ig("magic_seal", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 
-AddRecipe2("sea_yard", { Ig("limestone", 6), Ig("tar", 6), Ig("log", 4) }, TECH.SEAFARING_TWO, { placer = "sea_yard_placer" }, { "STRUCTURES", "NAUTICAL" })
+AddRecipe2("porto_sea_yard", { Ig("limestone", 6), Ig("tar", 6), Ig("log", 4) }, TECH.SEAFARING_TWO, nil, { "STRUCTURES", "NAUTICAL" })

@@ -191,8 +191,8 @@ STRINGS.CHARACTERS.WX78.DESCRIBE.WOODLEGSBOAT                   = "A seaworthy v
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.WOODLEGSBOAT                 = "A seaworthy vessel if ever there was one!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.WOODLEGSBOAT                   = "Belongs to wood-folk scale-less elder."
 
-STRINGS.NAMES.SHADOWWAXWELLBOAT                                 = "暗影船"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHADOWWAXWELLBOAT           = "一艘船，由暗影能量所构成。"
+STRINGS.NAMES.SHADOWBOAT                                        = "暗影船"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHADOWBOAT                  = "一艘船，由暗影能量所构成。"
 
 STRINGS.NAMES.RAFT_OLD                                          = "Raft"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAFT_OLD                    = "This looks adequate."

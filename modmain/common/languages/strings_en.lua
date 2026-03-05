@@ -853,7 +853,6 @@ STRINGS.NAMES.UNDERSEAROCK_FLINTLESS_MED                                        
 STRINGS.NAMES.SNORKEL                                                           = "浮潜通气管"
 STRINGS.NAMES.SANDHILL                                                          = "Sandy Pile"
 STRINGS.NAMES.DECO_LAMP_UPTURN                                                  = "Upturn Lamp"
-STRINGS.NAMES.SEA_YARD                                                          = "Sea Yard"
 STRINGS.NAMES.ANCIENT_HULK                                                      = "Large Iron Hulk"
 STRINGS.NAMES.DIVING_SUIT_SUMMER                                                = "潜水衣"
 STRINGS.NAMES.LAWNORNAMENT_5                                                    = "Funbrella Tree"
@@ -3307,7 +3306,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIGERSHARKSHADOW                            
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANGROVETREE                                = "I wonder if it's getting enough water?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEACUCUMBER_PLANTED                         = "Sea Cucumber Plant"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POISONBALM                                  = "Takes away sick"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_YARD                                    = "Sea Yard."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RELIC_5_GENERIC                             = "It's an old fancy feast."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHELVES_HATTREE                             = "A place to hang your hat."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CLIPPINGS                                   = "Evidence of my hard labor."
@@ -5128,7 +5126,6 @@ STRINGS.RECIPE_DESC.BALLPEIN_HAMMER                                             
 STRINGS.RECIPE_DESC.SHELVES_GLASS                                               = "Breakable yet practical."
 STRINGS.RECIPE_DESC.AXEOBSIDIAN                                                 = "Like a regular axe, only hotter."
 STRINGS.RECIPE_DESC.DECO_WALLORNAMENT_AXE                                       = "Always handy."
-STRINGS.RECIPE_DESC.SEA_YARD                                                    = "Sea Yard"
 STRINGS.RECIPE_DESC.PIG_SHOP_HOOFSPA_ENTRANCE                                   = "The mud really cleans the pores."
 STRINGS.RECIPE_DESC.BELL                                                        = "This is no ordinary bell."
 STRINGS.RECIPE_DESC.SWINGING_LIGHT_FLORAL_BLOOMER                               = "Brighting your ceiling."
@@ -5817,7 +5814,6 @@ STRINGS.CHARACTERS.WILLOW.DESCRIBE.WILDBEAVER_HOUSE         = "谁都有比我�
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.SHARKITTEN               = "Hey cutie, where's your mom?"
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.WATERCHEST1              = "I keep all my best stuff in there."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.WOODLEGSGHOST            = "He was my friend"
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.SEA_YARD                 = "It's a fixin' machine."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.TROPICALBOUILLABAISSE    = "Ughh, is there anything besides fish out here??"
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.SNAKESKINFLOOR           = "Gross."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.SLOTMACHINE              = "This seems like a waste of time."
@@ -6135,7 +6131,6 @@ STRINGS.CHARACTERS.WENDY.DESCRIBE.RAWLING                   = "rawling"
 STRINGS.CHARACTERS.WENDY.DESCRIBE.RESEARCHLAB5              = "Wolfgang will learn many splishy splashy things!"
 STRINGS.CHARACTERS.WENDY.DESCRIBE.WATERCHEST1               = "Treasures suspended over the bottomless abyss."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.BOOK_METEOR               = "Rainus Magmus!"
-STRINGS.CHARACTERS.WENDY.DESCRIBE.SEA_YARD                  = "It wards off the inevitable decay."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.BEAVER_KING               = "堤坝之王。"
 STRINGS.CHARACTERS.WENDY.DESCRIBE.CAVIAR                    = "I took their life to sustain my own."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.TURF_SNAKESKINFLOOR       = "It's just ground."
@@ -6273,7 +6268,6 @@ STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.COCONUT_COOKED = "Is bitter beans!"
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.NEEDLESPEAR = "The weapon of a mighty plant!"
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.WOODLEGS_KEY3 = "Boring key!"
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.SWORDFISH = "Wolfgang challenges you to duel!"
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.SEA_YARD = "Will make boats mighty again!"
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.VOLCANO_EXIT = "Goodbye!"
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.MERMHOUSE_FISHER = "The house was not strong enough."
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.BISQUE = "It will fuel powerful punches!"
@@ -6732,7 +6726,6 @@ STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.SHARD_SWORD = "The pen is mightier."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.POISONCROCODOG = "Its saliva contains a nasty venom."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.WHALE_CARCASS_WHITE = "There is a harpoon still stuck inside"
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.SANDHILL = "The dune's iconic shape is formed by the winds."
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.SEA_YARD = "It's at peak performance."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.OXBABY = "Cold, vacant eyes..."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.DUG_ELEPHANTCACTUS = "It requires soil to grow."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.OX_FLUTE = "That I might play a tune to soothe my troubled heart."
@@ -6977,7 +6970,6 @@ STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.BLOWDART_POISON = "To weaken from a dista
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.LOBSTER_LAND = "You are dressed for battle, sea-dweller."
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.CRABHOLE = "Does shame drive them to this hole?"
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.OXHAT = "This helm will keep my scalp dry."
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.SEA_YARD = "An altar to Njord!"
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.TURF_SNAKESKINFLOOR = "My enemy's hide feels good beneath my feet!"
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.NUBBIN = "No Excalibur juts from its center."
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.BIOLUMINESCENCE = "What magic is this?"
@@ -7315,7 +7307,6 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.WATERCHEST1 = "My suits had best not get mol
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.MUSSEL_BED = "They'll grow where I tell them to."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.BLUBBERSUIT = "This is undignified."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.MUSSEL_STICK = "The mussels won't be able to resist."
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.SEA_YARD = "Much needed ship maintenance."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.SNAKE_HOLE = "These have taken over the island."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.FISH3 = "Truly an ugly creature."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.OX_FLUTE = "Goodness. It's been awhile since I played."
@@ -7805,12 +7796,7 @@ STRINGS.CHARACTERS.WEBBER.DESCRIBE.WATERYGRAVE = "Blub blub."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.MAGMAROCK_GOLD = "It's a bunch of shiny stones."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.BOTTLELANTERN = "Hey in there, thanks for the light!"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.SANDBAG_ITEM = "Remember to lift with your legs... all eight of them!"
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.SEA_YARD = {
-    OFF = "It won't work again until we fuel it.",
-    ON = "It's making the boats feel better!",
-    LOWFUEL = "We gotta fill it up soon.",
 
-}
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.RAFT = "Do we think this is sturdy enough?"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.CROCODOG = "Ohh, oh no, uh, fetch??"
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.SEAGULLWATER = "It must be nice to fly... and eat garbage."
@@ -9480,7 +9466,6 @@ STRINGS.CITY_PIG_TALK_REFUSE_PURPLEGEM                    = {
         "把它拿走！"
     }
 }
-
 
 
 

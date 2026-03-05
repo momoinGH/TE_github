@@ -307,7 +307,6 @@ GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.TROPICALBOUILLABAISSE          = "G-glor
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.CAVIAR                         = "Fishy eggs don't need food until they hatched, florp."
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.OX_FLUTE                       = "It still nice and wet!"
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.OXBABY                         = "Is little, but still good at swimming, flurp!"
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.SEA_YARD                       = "Not for adding more holes to boat?"
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.TARSUIT                        = "Is nice and sticky, but keeps scales too dry."
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.BLUBBERSUIT                    = "Glurgh, don't wanna wear this..."
 GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_WATERCHEST               = "Watertight, just like all my theories."
