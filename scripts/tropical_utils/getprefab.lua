@@ -374,4 +374,19 @@ function FN.FindClosestEnt(ents, pos)
     return closestEnt, closestEnt ~= nil and rangesq or nil
 end
 
+--- 掉落一个物品，ReplacePrefab的强化
+function FN.DropItem(inst, item, isremove)
+    local product
+    if isremove then
+        product = ReplacePrefab(inst, item)
+    else
+        product = SpawnPrefab(item)
+        product.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    end
+
+    if product.components.inventoryitem then
+        product.components.inventoryitem:OnDropped()
+    end
+end
+
 return FN

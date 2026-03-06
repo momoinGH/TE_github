@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 modimport "modmain/common/stategraphs/SGwilson"
 modimport "modmain/common/stategraphs/SGwilson_client"
 modimport "modmain/common/stategraphs/AddIronLordStates"
@@ -7,7 +5,6 @@ modimport "modmain/common/stategraphs/AddIronLordStates_client"
 
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.MEAL, "doshortaction"))
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.MEAL, "doshortaction"))
-
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.COLLECTSAP, function(inst, action)
     return inst:HasTag("fastpicker") and "doshortaction" or inst:HasTag("quagmire_fasthands") and "domediumaction" or
         "dolongaction"
@@ -16,14 +13,10 @@ AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.COLLECTSAP, fu
     return inst:HasTag("fastpicker") and "doshortaction" or inst:HasTag("quagmire_fasthands") and "domediumaction" or
         "dolongaction"
 end))
-
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.SNACKRIFICE, "give"))
-
 AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.SNACKRIFICE, "give"))
-
 AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.STOREOPEN, "doshortaction"))
 AddStategraphActionHandler("wilson_client", GLOBAL.ActionHandler(GLOBAL.ACTIONS.STOREOPEN, "doshortaction"))
-
 
 AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.PLAY, function(inst, action)
     if action.invobject ~= nil then

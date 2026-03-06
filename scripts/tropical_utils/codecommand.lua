@@ -1257,3 +1257,8 @@ function ArrayUnion(...) end
 
 
 Action = Class(function(self, data, instant, rmb, distance, ghost_valid, ghost_exclusive, canforce, rangecheckfn) end)
+
+function resolvefilepath(filepath, force_path_search, search_first_path) end
+--like resolvefilepath, but without the crash if it fails.
+function resolvefilepath_soft(filepath, force_path_search, search_first_path) end
+local function resolvefilepath_internal(filepath, force_path_search, search_first_path) end

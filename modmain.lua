@@ -1,6 +1,6 @@
 --[[
 mod前缀名：pro_
-
+TRO_AddComponentAction：添加ComponentAction，允许组件行为重复
 ]]
 
 ----------------------------------------------------------------------------------------------------
@@ -25,22 +25,15 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-modimport "modmain/dev_utils"                        --开发环境下辅助用的函数
-modimport "modmain/data_validator_before"            --校验器，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
-modimport "modmain/mods/knownmodcheck"               -- 检测不兼容模组并报错崩溃
-modimport "modmain/animstate"                        -- AnimState 增强
-modimport "modmain/standardcomponents"
-modimport "scripts/prefabs/tropical_farm_plant_defs" --定义新植物
-modimport "modmain/sw_fertilizer_nutrient_defs"      --肥料值定义
-modimport "modmain/natureskin_variants"              --和自然皮肤切换相关的所有内容
-modimport "modmain/wx78_moduledefs"
-modimport "modmain/pro_componentaction"              --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
+modimport "modmain/dev_utils"             --开发环境下辅助用的函数，与游戏无关
+modimport "modmain/data_validator_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
+modimport "modmain/mods/knownmodcheck"    -- 检测不兼容模组并报错崩溃
+modimport "modmain/mods/action_queue"     -- 兼容其他mod
 
+-- 共同
+modimport "modmain/postinit" --TODO 拆到各个模块中
 
-modimport "modmain/postinit"          --TODO 拆到各个模块中
-
-modimport "modmain/mods/action_queue" -- 兼容其他mod
-modimport "modmain/modules"           --模块导入
+modimport "modmain/modules"  --模块导入
 ----------------------------------------------------------------------------------------------------
 
 for actiontype, components in pairs(TRO_COMPONENT_ACTIONS) do
@@ -51,4 +44,4 @@ for actiontype, components in pairs(TRO_COMPONENT_ACTIONS) do
     end
 end
 TRO_COMPONENT_ACTIONS = nil
-modimport "modmain/data_validator_after" --校验器，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
+modimport "modmain/data_validator_after" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃

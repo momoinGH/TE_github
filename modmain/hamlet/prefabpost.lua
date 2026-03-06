@@ -6,12 +6,10 @@ end
 
 AddReplicableComponent("hayfever")
 
+modimport "modmain/hamlet/simutil"
 
-modimport "modmain/common/AddIronLordHandlers" --活性机甲处理
-modimport "modmain/common/AddIronLordPostinit" --活性机甲构造
-modimport "scripts/ArtifactControls"           --活性机甲控制
-
-
+modimport "modmain/hamlet/AddIronLordHandlers" --活性机甲处理
+modimport "modmain/hamlet/AddIronLordPostinit" --活性机甲构造
 
 
 ----------------------------------------------------------------------------------------------------

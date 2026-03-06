@@ -135,11 +135,12 @@ local function OnTimerDone(inst, data)
 	weevolenesttest(inst)
 end
 
+local GetPrefab = require("tropical_utils/getprefab")
 local function OnDig(inst)
 	if inst.product then
-		TropicalDropItem("cutgrass")
+		GetPrefab.DropItem("cutgrass")
 	end
-	TropicalDropItem("dug_grass", true)
+    GetPrefab.DropItem("dug_grass", true)
 end
 
 local function OnShear(inst, worker)

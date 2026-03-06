@@ -8,15 +8,15 @@ local function ArtifactActionString(inst, act)
     end
 end
 
-local ARTIFACT_ACTIONS = 
+local ARTIFACT_ACTIONS =
 {
-     { "CHOP_workable", "CHOP" }, 
-     { "MINE_workable", "MINE" }, 
-     { "DIG_workable", "DIG" }, 
-     --{ "HAMMER_workable", "HAMMER" },  -- Too aggressive, skip at actionbutton
-     { "HACK_workable", "HACK" },
-     { "inactive", "ACTIVATE" },  -- Wood gate
-    --  { "pickable", "PICK" } 
+    { "CHOP_workable", "CHOP" },
+    { "MINE_workable", "MINE" },
+    { "DIG_workable", "DIG" },
+    --{ "HAMMER_workable", "HAMMER" },  -- Too aggressive, skip at actionbutton
+    { "HACK_workable", "HACK" },
+    { "inactive", "ACTIVATE" },  -- Wood gate
+    --  { "pickable", "PICK" }
 }
 
 local function GetArtifactAction(inst, target)
@@ -75,21 +75,21 @@ local function ArtifactLeftClickPicker(inst, target, pos)
 
     if target and target ~= inst then
         if item and target:HasTag("trader") then
-            return inst.components.playeractionpicker:SortActionList({ACTIONS.GIVE}, target, item)
+            return inst.components.playeractionpicker:SortActionList({ ACTIONS.GIVE }, target, item)
         end
 
         if inst.replica.combat:CanTarget(target) or
             inst.components.playercontroller:IsControlPressed(CONTROL_FORCE_ATTACK) then
-            return inst.components.playeractionpicker:SortActionList({ACTIONS.ATTACK}, target, nil)
+            return inst.components.playeractionpicker:SortActionList({ ACTIONS.ATTACK }, target, nil)
         end
 
         if target:HasTag("HAMMER_workable") then -- Higher priority to override ACTIVATE
-            return inst.components.playeractionpicker:SortActionList({ACTIONS.HAMMER}, target, nil)
+            return inst.components.playeractionpicker:SortActionList({ ACTIONS.HAMMER }, target, nil)
         end
 
         for _, v in ipairs(ARTIFACT_ACTIONS) do
             if target:HasTag(v[1]) then
-                return inst.components.playeractionpicker:SortActionList({ACTIONS[v[2]]}, target, nil)
+                return inst.components.playeractionpicker:SortActionList({ ACTIONS[v[2]] }, target, nil)
             end
         end
 
@@ -99,23 +99,23 @@ local function ArtifactLeftClickPicker(inst, target, pos)
 
         if target:HasTag("walkingplank") and target:HasTag("interactable") then
             if target:HasTag("plank_extended") then
-                return inst.components.playeractionpicker:SortActionList({ACTIONS.MOUNT_PLANK}, target, nil)
+                return inst.components.playeractionpicker:SortActionList({ ACTIONS.MOUNT_PLANK }, target, nil)
             else
-                return inst.components.playeractionpicker:SortActionList({ACTIONS.EXTEND_PLANK}, target, nil)
+                return inst.components.playeractionpicker:SortActionList({ ACTIONS.EXTEND_PLANK }, target, nil)
             end
         end
 
         if target:HasTag("migrator") then -- World shard
-            return inst.components.playeractionpicker:SortActionList({ACTIONS.MIGRATE}, target, nil)
+            return inst.components.playeractionpicker:SortActionList({ ACTIONS.MIGRATE }, target, nil)
         end
 
         if target:HasTag("teleporter") and not target:HasTag("townportal") then -- Wormhole
-            return inst.components.playeractionpicker:SortActionList({ACTIONS.JUMPIN}, target, nil)
+            return inst.components.playeractionpicker:SortActionList({ ACTIONS.JUMPIN }, target, nil)
         end
     end
 
     if pos and item then
-        local actlist = inst.components.playeractionpicker:SortActionList({ACTIONS.DROP}, pos, item)
+        local actlist = inst.components.playeractionpicker:SortActionList({ ACTIONS.DROP }, pos, item)
         if item.replica.stackable then
             actlist[1].options.wholestack = true
         end
@@ -131,16 +131,16 @@ local function ArtifactRightClickPicker(inst, target, pos)
     if target and target ~= inst then
         if target:HasTag("walkingplank") then
             if inst:HasTag("on_walkable_plank") then
-                return inst.components.playeractionpicker:SortActionList({ACTIONS.ABANDON_SHIP}, target, nil)
+                return inst.components.playeractionpicker:SortActionList({ ACTIONS.ABANDON_SHIP }, target, nil)
             elseif target:HasTag("plank_extended") then
-                return inst.components.playeractionpicker:SortActionList({ACTIONS.RETRACT_PLANK}, target, nil)
+                return inst.components.playeractionpicker:SortActionList({ ACTIONS.RETRACT_PLANK }, target, nil)
             end
         end
     end
 
     local shoot_target = (target and target ~= inst) and target or pos
     if shoot_target then
-        return inst.components.playeractionpicker:SortActionList({ACTIONS.CHARGE_UP}, shoot_target, nil)
+        return inst.components.playeractionpicker:SortActionList({ ACTIONS.CHARGE_UP }, shoot_target, nil)
     end
 
     -- TODO: plant/deploy?
@@ -208,4 +208,4 @@ local function toggle(player, on)
     end
 end
 
-return {toggle = toggle}
+return { toggle = toggle }

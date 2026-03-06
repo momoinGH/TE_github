@@ -2,8 +2,6 @@
 -- 在此感谢风铃大佬
 -- 皮肤api,看不懂,能用就行
 
-GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end, })
-
 -- verion = 1.09
 -- v1.10 更新 atlas 和 image直接注册到Prefab 方便调用
 --       增加 GetSkinBase  获取皮肤对应的基础prefab

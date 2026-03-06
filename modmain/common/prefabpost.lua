@@ -1,5 +1,12 @@
 local Utils = require("tropical_utils/utils")
 
+modimport "modmain/common/pro_componentaction"          --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
+modimport "modmain/common/animstate"                    -- AnimState 增强
+modimport "modmain/common/standardcomponents"
+modimport "scripts/prefabs/tropical_farm_plant_defs"    --定义新植物
+modimport "scripts/prefabs/sw_fertilizer_nutrient_defs" --肥料值定义
+modimport "modmain/common/natureskin_variants"          --和自然皮肤切换相关的所有内容
+modimport "modmain/common/wx78_moduledefs"
 modimport "modmain/common/entityscript"
 
 
@@ -23,7 +30,7 @@ modimport "modmain/common/components/dynamicmusic"
 ]]
 modimport "modmain/common/components/map"        --theworld.map相关
 modimport "modmain/common/components/deployable" -- 让某些地形不能部署、建造、种东西
-modimport "modmain/common/components/spooked"         --黄蘑菇孢子
+modimport "modmain/common/components/spooked"    --黄蘑菇孢子
 
 ----------------------------------------------------------------------------------------------------
 
