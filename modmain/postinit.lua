@@ -1,48 +1,42 @@
 ---modimport("postinit/tropical_climate")         --热带气候
 ---modimport("postinit/room_camera")              --房间镜头
----modimport("postinit/boat")                     --单人船相关修改
-
 
 -- do not know how to sort
 ---modimport("postinit/oceancolor")
-modimport("postinit/postinit_poisonables") --posonables--and loot dropper--
 ---modimport("postinit/camera")               --旧的房间镜头，但是现在不能删
----modimport("postinit/sim_rain_effect")
--- modimport("postinit/player_darkness") --没有用
 ---modimport("postinit/farm")    --种植相关  --通过veggies改变随机种子权重
-
-
 ---modimport("postinit/entity")  --不知道这个是干啥的
-modimport("postinit/naughty") --淘气值
-
 
 ----------------------------components-------------------------------------------
 
 -- modimport("postinit/components/oceancolor")
 -- modimport("postinit/components/playervision")
 -- modimport("postinit/components/trap")
-modimport("postinit/components/ambientlighting")
 modimport("postinit/components/ambientsound")
-modimport("postinit/components/armor")
-modimport("postinit/components/boatphysics")
-modimport("postinit/components/builder")
 modimport("postinit/components/colourcube")
-modimport("postinit/components/combat")
--- modimport("postinit/components/container")
-modimport("postinit/components/curseditem") --威尔伯不受诅咒饰品影响
 modimport("postinit/components/dynamicmusic")
-modimport("postinit/components/flotsamgenerator") --漂浮物刷新，TODO可能不生效
-modimport("postinit/components/groundpounder")    --这个组件拍地板的？
----modimport("postinit/components/hatchable")这是孵露比蛋的吗？***
-modimport("postinit/components/healthtrigger")    --这个生命值管理器是干嘛的？
-modimport("postinit/components/hounded")          --猎犬袭击
-modimport("postinit/components/inventory")        ----主要是物品栏的钱的计算
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ---modimport("postinit/components/inventory_prevent_pick") ----可能和船拿不起来有关系***
 ---modimport("postinit/components/penguinspawner")控制企鸥生成，现在是覆盖的***
 ---modimport("postinit/components/playercontroller")***
 ---modimport("postinit/components/playerspawner")***
 ---modimport("postinit/components/snowtile") -- disable snow effeccts控积雪***
-modimport("postinit/components/soundemitter")
 ---modimport("postinit/components/thief")偷东西，能否打开容器、丢弃物品、吃特定的食物，是给小狐狸用的吗？***
 ---modimport("postinit/components/wavemanager")波浪管理***
 ---modimport("postinit/components/worldstate")世界状态***

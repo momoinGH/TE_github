@@ -14,11 +14,8 @@ modimport "modmain/common/entityscript"
 
 modimport "modmain/common/components/locomotor"
 modimport "modmain/common/components/birdspawner"
---modimport "modmain/common/components/map"
 modimport "modmain/common/components/playervision"
 modimport "modmain/common/components/temperature"
---modimport "modmain/common/components/inventory"
---modimport "modmain/common/components/builder"
 modimport "modmain/common/components/walkableplatformplayer"
 --[[
 modimport "modmain/common/components/soundemitter"
@@ -31,6 +28,13 @@ modimport "modmain/common/components/dynamicmusic"
 modimport "modmain/common/components/map"        --theworld.map相关
 modimport "modmain/common/components/deployable" -- 让某些地形不能部署、建造、种东西
 modimport "modmain/common/components/spooked"    --黄蘑菇孢子
+modimport("modmain/common/components/ambientlighting")
+modimport "modmain/common/components/inventory"
+modimport "modmain/common/components/inventory_replica"
+modimport "modmain/common/components/armor"
+modimport "modmain/common/components/boatphysics"
+modimport "modmain/common/components/combat"
+modimport "modmain/common/components/hounded" --猎犬袭击
 
 ----------------------------------------------------------------------------------------------------
 
@@ -47,27 +51,6 @@ modimport("modmain/common/prefabs/player_vision_post") --四眼镜、蝙蝠帽�
 
 
 --[[
-----------------------------------------------------------------------------------------------------
-local function ArmorCanResistBefore(self, attacker, weapon)
-    if attacker and self.immunetags then
-        for k, v in pairs(self.immunetags) do
-            if attacker:HasTag(v) or (weapon ~= nil and weapon:HasTag(v)) then
-                return { false }, true
-            end
-        end
-    end
-end
---不能抵抗标签，如果指定了标签，则对于含有该标签的攻击者伤害不抵抗，与tags不同，tags只能抵抗记录已有标签的攻击
-AddComponentPostInit("armor", function(self)
-    self.immunetags = nil
-
-    function self:SetImmuneTags(tags)
-        self.immunetags = tags
-    end
-
-    Utils.FnDecorator(self, "CanResist", ArmorCanResistBefore)
-end)
-
 ----------------------------------------------------------------------------------------------------
 -- 用于控制熊大和巨鹿刷新条件，组件没有可以hook的方法，只好通过该方式来阻止生成
 local function AreaAwareCurrentlyInTagBefore(self, tag)
@@ -111,24 +94,8 @@ end)]]
 
 ----------------------------------------------------------------------------------------------------
 --[[
-local flotsam_prefabs
-AddComponentPostInit("flotsamgenerator", function(self)
-    if not flotsam_prefabs then
-        flotsam_prefabs = Utils.ChainFindUpvalue(self.SpawnFlotsam, "PickFlotsam", "flotsam_prefabs")
-        if flotsam_prefabs then
-            flotsam_prefabs["waterygrave"] = 1
-            flotsam_prefabs["redbarrel"] = 1
-            flotsam_prefabs["luggagechest_spawner"] = 1
-            flotsam_prefabs["messagebottle_sw"] = 1
-        end
-    end
-end)
 
-----------------------------------------------------------------------------------------------------
 
-AddComponentPostInit("groundpounder", function(self)
-    table.insert(self.noTags, "groundpoundimmune")
-end)
 
 
 ----------------------------------------------------------------------------------------------------
@@ -568,55 +535,6 @@ AddComponentPostInit("vanish_on_sleep", function(self)
     self.OnEntitySleep = OnEntitySleep
 end)]]
 
-
-----------------------------------------------------------------------------------------------------
---[[
-local function shardDMGRedirect(self, attacker, damage, weapon, ...)          -- 碎裂武器伤害重定向
-    if weapon then
-        if weapon.prefab == "shard_sword" and self.inst:HasTag("shadow") then -- 碎裂剑对梦魇生物
-            local health = self.inst.components.health
-            if health then
-                if health.currenthealth <= damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MAXIMUM then
-                    return nil, false,
-                        { self, attacker,
-                            math.max(damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MINIMUM, health.currenthealth - 1),
-                            weapon, ... }
-                else
-                    if attacker and attacker.components.combat then
-                        attacker:DoTaskInTime(0, function()
-                            attacker.components.combat:GetAttacked(weapon, math.random(1, 5))
-                            attacker:PushEvent("thorns")
-                        end)
-                    end
-                    return nil, false,
-                        { self, attacker, damage * TUNING.SWP_SHARD_DMG.SHADOW_MODIFIER_MAXIMUM, weapon, ... }
-                end
-            end
-        elseif weapon.prefab == "shard_beak" and -- 碎裂喙对建筑和巢
-            (self.inst:HasTag("wall") or self.inst:HasTag("structure") or self.inst.components.childspawner) then
-            return nil, false, { self, attacker, damage * TUNING.SWP_SHARD_DMG.STRUCTURE_MODIFIER, weapon, ... }
-        end
-    end
-end
-
-AddComponentPostInit("combat", function(self, inst) Utils.FnDecorator(self, "GetAttacked", shardDMGRedirect) end)
-]]
-----------------------------------------------------------------------------------------------------
---[[
-AddComponentPostInit("boatphysics", function(self, inst) -- 给船和保险杠增加破浪能力
-    Utils.FnDecorator(self, "ApplyForce", function(self, dir_x, dir_z, force)
-        if SWP_WAVEBREAK_EFFICIENCY.BOAT[self.inst.prefab] then
-            force = force * math.max(1 - SWP_WAVEBREAK_EFFICIENCY.BOAT[self.inst.prefab], 0)
-        end
-        if self.inst.components.boatring then
-            local bumper = self.inst.components.boatring:GetBumperAtPoint(dir_x, dir_z)
-            if bumper and SWP_WAVEBREAK_EFFICIENCY.BUMPER["boat_bumper_" .. bumper.prefab] then
-                force = force * math.max(1 - SWP_WAVEBREAK_EFFICIENCY.BUMPER["boat_bumper_" .. bumper.prefab], 0)
-            end
-        end
-        return nil, false, { self, dir_x, dir_z, force }
-    end)
-end)]]
 
 ----------------------------------------------------------------------------------------------------
 --[[

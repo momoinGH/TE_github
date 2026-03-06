@@ -1,4 +1,12 @@
-local Utils = require("tropical_utils/utils")
+modimport "modmain/common/poisonable"
+
+modimport "modmain/shipwrecked/components/builder"
+modimport "modmain/shipwrecked/components/builder_replica"
+modimport "modmain/shipwrecked/components/flotsamgenerator" --漂浮物刷新
+
+
+
+----------------------------------------------------------------------------------------------------
 
 -- 海难洪水仪器失灵
 
@@ -174,5 +182,3 @@ AddPrefabPostInit("world", function(inst)
 end)
 
 ----------------------------------------------------------------------------------------------------
-
-

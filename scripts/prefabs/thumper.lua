@@ -98,7 +98,7 @@ local function fn()
 	inst.MiniMapEntity:SetIcon("wagstaff_thumper.png")
 
 	inst:AddTag("structure")
-	inst:AddTag("groundpoundimmune")
+    inst:AddTag("groundpound_immune")
 	inst:AddTag("thumper")
     inst:AddTag("metal")
 	MakeObstaclePhysics(inst, 1)

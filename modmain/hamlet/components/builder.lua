@@ -1,10 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
-function RoundBiasedUp(num, idp)
-    local mult = 10 ^ (idp or 0)
-    return math.floor(num * mult + 0.5) / mult
-end
-
 local function get_oinc_cost(recipe)
     for _, v in ipairs(recipe.ingredients) do
         if v.type == "oinc" then
@@ -32,31 +25,31 @@ AddComponentPostInit("builder", function(self)
         end
 
         if self.freebuildmode then
-            return {true}, true
+            return { true }, true
         end
         for i, v in ipairs(recipe.ingredients) do
             local amount = math.max(1, RoundBiasedUp(v.amount * self.ingredientmod))
             if v.type == "oinc" then
                 if self.inst.components.inventory:GetMoney() < amount then
-                    return {false}, true
+                    return { false }, true
                 end
             else
                 if not self.inst.components.inventory:Has(v.type, amount, true) then
-                    return {false}, true
+                    return { false }, true
                 end
             end
         end
         for i, v in ipairs(recipe.character_ingredients) do
             if not self:HasCharacterIngredient(v) then
-                return {false}, true
+                return { false }, true
             end
         end
         for i, v in ipairs(recipe.tech_ingredients) do
             if not self:HasTechIngredient(v) then
-                return {false}, true
+                return { false }, true
             end
         end
-        return {true}, true
+        return { true }, true
     end)
 
     --- 对消耗呼噜币的扣除
@@ -81,17 +74,6 @@ AddComponentPostInit("builder", function(self)
         return nil, false, { self, newIngredients, recname, ... }
     end)
 
-    -- 装备智慧帽时解锁所有配方
-    Utils.FnDecorator(self, "KnowsRecipe", function(self, recipe)
-        if type(recipe) == "string" then
-            recipe = GetValidRecipe(recipe)
-        end
-
-        if recipe and self.inst.components.inventory:EquipHasTag("brainjelly") then
-            return { true }, true
-        end
-    end)
-
     -- 对呼噜币进行换算，也许修改HasIngredients也行，不过应该没这个简单
     local oldHas = self.Has
     function self:Has(item, amount, ...)
@@ -111,47 +93,5 @@ AddComponentPostInit("builder", function(self)
         else
             return false, all
         end
-    end
-end)
-
-----------------------------------------------------------------------------------------------------
-AddClassPostConstruct("components/builder_replica", function(self)
-    Utils.FnDecorator(self, "KnowsRecipe", function(self, recipe)
-        if type(recipe) == "string" then
-            recipe = GetValidRecipe(recipe)
-        end
-
-        if recipe and self.inst.replica.inventory:EquipHasTag("brainjelly") then
-            return { true }, true
-        end
-    end)
-
-    local oldHas = self.Has
-    function self:Has(item, amount, ...)
-        if not TUNING.OINCS[item] or self.inst.components.inventory or not self.classified then --主机交给主机组件判断
-            return oldHas(self, item, amount, ...)
-        end
-
-        local all = 0
-        for key, val in pairs(TUNING.OINCS) do
-            local _, count = oldHas(self, key, 1, ...)
-            all = all + count * val
-        end
-
-        local need = TUNING.OINCS[item] * amount
-        if all >= need then
-            return true, math.floor(all / TUNING.OINCS[item])
-        else
-            return false, all
-        end
-    end
-
-    local HasIngredients = self.HasIngredients
-    function self:HasIngredients(recipe, ...)
-        local check_all_oincs = self.inst.replica.inventory.check_all_oincs
-        self.inst.replica.inventory.check_all_oincs = true
-        local ret = { HasIngredients(self, recipe, ...) }
-        self.inst.replica.inventory.check_all_oincs = check_all_oincs
-        return unpack(ret)
     end
 end)

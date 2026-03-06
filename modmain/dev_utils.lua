@@ -60,7 +60,7 @@ GLOBAL.prosoftassert = prosoftassert
 
 ----------------------------------------------------------------------------------------------------
 --- 科雷modmain的定义抄过来，不过文件不存在时不提醒
-function SafeModImport(modulename, has_print)
+function modimportmodulefile(modulename, has_print)
     if has_print == nil then
         has_print = true
     end

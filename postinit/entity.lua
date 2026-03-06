@@ -38,16 +38,6 @@ local function setval(fn, path, new)
     GLOBAL.debug.setupvalue(prev, i, new)
 end
 
-AddGlobalClassPostConstruct("entityscript", "EntityScript", function(self)
-    local tbl = getval(self.CollectActions, "COMPONENT_ACTIONS")
-    if not getval(tbl.INVENTORY.equippable, "oldfn") then
-        local oldfn = tbl.INVENTORY.equippable
-        tbl.INVENTORY.equippable = function(inst, ...)
-            if not inst:HasTag("boat") then oldfn(inst, ...) end
-        end
-    end
-end)
-
 local hackpath = "OnFilesLoaded.OnUpdatePurchaseStateComplete.DoResetAction.DoGenerateWorld.DoInitGame"
 local OldLoad = GLOBAL.Profile.Load
 function GLOBAL.Profile:Load(fn)

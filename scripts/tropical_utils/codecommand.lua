@@ -961,8 +961,8 @@ function RunInSandboxSafe(untrusted_code, error_handler) end
 AddClassPostConstruct("components/combat_replica", function(self)
     -- 攻击玩家三要素
     self.IsValidTarget = function() return true end
-    self.CanTarget = function() return true end  --可以攻击，但无伤害
-    self.CanBeAttacked = function() return true end  --攻击玩家有伤害
+    self.CanTarget = function() return true end     --可以攻击，但无伤害
+    self.CanBeAttacked = function() return true end --攻击玩家有伤害
 end)
 
 ----------------------------------------------------------------------------------------------------
@@ -1255,10 +1255,16 @@ function StackTrace(err) end
 
 function ArrayUnion(...) end
 
-
 Action = Class(function(self, data, instant, rmb, distance, ghost_valid, ghost_exclusive, canforce, rangecheckfn) end)
 
 function resolvefilepath(filepath, force_path_search, search_first_path) end
+
 --like resolvefilepath, but without the crash if it fails.
 function resolvefilepath_soft(filepath, force_path_search, search_first_path) end
+
 local function resolvefilepath_internal(filepath, force_path_search, search_first_path) end
+
+--Round a number to idp decimal points. 0.5-values are always rounded up.
+function RoundBiasedUp(num, idp) end
+
+SoundEmitter = {}

@@ -55,14 +55,14 @@ if proisdev then
             "hun",
             "fr"
         }) do
-            SafeModImport("modmain/" .. m .. "/languages/strings_" .. language, false)
+            modimportmodulefile("modmain/" .. m .. "/languages/strings_" .. language, false)
         end
     end
     local other_language_strings = STRINGS
     GLOBAL.STRINGS = deepcopy(old_strings)
 
     for _, m in ipairs(modules) do
-        SafeModImport("modmain/" .. m .. "/languages/strings_en", false)
+        modimportmodulefile("modmain/" .. m .. "/languages/strings_en", false)
     end
 
     -- 比较

@@ -1,18 +1,16 @@
 local upvaluehelper = require("tools/upvaluehelper")
 
-AddComponentPostInit("hounded", function(cmp)
-    cmp.inst:DoTaskInTime(0, function()
-        local _spawndata = upvaluehelper.Get(cmp.SetSpawnData, "_spawndata")
-        local _SummonSpawn = upvaluehelper.Get(cmp.SummonSpawn, "SummonSpawn")
+AddComponentPostInit("hounded", function(self)
+    self.inst:DoTaskInTime(0, function()
+        local _spawndata = upvaluehelper.Get(self.SetSpawnData, "_spawndata")
+        local _SummonSpawn = upvaluehelper.Get(self.SummonSpawn, "SummonSpawn")
         local _GetSpawnPrefab = upvaluehelper.Get(_SummonSpawn, "GetSpawnPrefab")
         local _GetSpawnPoint = upvaluehelper.Get(_SummonSpawn, "GetSpawnPoint")
         local _GetSpecialSpawnChance = upvaluehelper.Get(_GetSpawnPrefab, "GetSpecialSpawnChance")
         local _SPAWN_DIST = upvaluehelper.Get(_GetSpawnPoint, "SPAWN_DIST")
 
         local function SummonSpawn(pt, upgrade, radius_override)
-            local map = TheWorld.Map
             local x, y, z = pt:Get()
-
             local spawndat = deepcopy(_spawndata)
 
             if TheWorld:HasTag("cave") then
@@ -44,10 +42,10 @@ AddComponentPostInit("hounded", function(cmp)
             end
 
             upvaluehelper.Set(_GetSpawnPoint, "SPAWN_DIST", _SPAWN_DIST)
-            upvaluehelper.Set(cmp.SetSpawnData, "_spawndata", spawndat)
-            _SummonSpawn(pt, upgrade, radius_override)
+            upvaluehelper.Set(self.SetSpawnData, "_spawndata", spawndat)
+            return _SummonSpawn(pt, upgrade, radius_override)
         end
 
-        upvaluehelper.Set(cmp.SummonSpawn, "SummonSpawn", SummonSpawn)
+        upvaluehelper.Set(self.SummonSpawn, "SummonSpawn", SummonSpawn)
     end)
 end)

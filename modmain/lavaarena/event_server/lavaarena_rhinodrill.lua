@@ -116,7 +116,6 @@ local function OnHitOther(inst, target)
 end
 
 local function DamagedTrigger(inst)
-    inst.components.healthtrigger:RemoveTrigger(0.2)
     inst.AnimState:AddOverrideBuild("lavaarena_rhinodrill_damaged" .. inst.damagedtype)
 end
 

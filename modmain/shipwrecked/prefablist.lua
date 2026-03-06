@@ -29,7 +29,7 @@ PrefabFiles = {
     "boatrepairkit",
     "sandbag",
     "cutlass",
-    "luggarechestspawn",
+    "luggagechest_spawner",
     "buriedtreasure",
     "windtrail",
     "windswirl",

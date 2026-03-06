@@ -1,4 +1,17 @@
-local Utils = require("tropical_utils/utils")
+local SWP_WAVEBREAK_EFFICIENCY = {  -- 破浪效率：var * 100%
+    BUMPER = {
+        kelp = .6,                  -- prefab = "boat_bumper_" .. k
+        shell = .8,
+        yotd = .8,
+        crabking = 1,
+    },
+    BOAT = {
+        boat = .3, -- prefab = k
+        boat_pirate = .3,
+        boat_ancient = .4,
+        boatmetal = .9,
+    }
+}
 
 AddComponentPostInit("boatphysics", function(self, inst) -- 给船和保险杠增加破浪能力
     Utils.FnDecorator(self, "ApplyForce", function(self, dir_x, dir_z, force)

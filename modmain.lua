@@ -23,6 +23,20 @@ function TRO_AddComponentAction(actiontype, component, fn)
     table.insert(TRO_COMPONENT_ACTIONS[actiontype][component], fn)
 end
 
+-- 允许一个文件重复导入，这样多个模块导入同一个文件就不会执行多次了
+local modulename_loaded = {}
+local old_modimport = env.modimport
+env.modimport = function(modulename, ...)
+    if string.sub(modulename, #modulename - 3, #modulename) ~= ".lua" then
+        modulename = modulename .. ".lua"
+    end
+    if modulename_loaded[modulename] then
+        return
+    end
+    modulename_loaded[modulename] = true
+    return old_modimport(modulename, ...)
+end
+
 ----------------------------------------------------------------------------------------------------
 
 modimport "modmain/dev_utils"             --开发环境下辅助用的函数，与游戏无关
@@ -33,6 +47,7 @@ modimport "modmain/mods/action_queue"     -- 兼容其他mod
 -- 共同
 modimport "modmain/postinit" --TODO 拆到各个模块中
 
+modimport "modmain/soundemitter"
 modimport "modmain/modules"  --模块导入
 ----------------------------------------------------------------------------------------------------
 
@@ -45,3 +60,7 @@ for actiontype, components in pairs(TRO_COMPONENT_ACTIONS) do
 end
 TRO_COMPONENT_ACTIONS = nil
 modimport "modmain/data_validator_after" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
+
+env.modimport = old_modimport
+old_modimport = nil
+modulename_loaded = nil

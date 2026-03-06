@@ -1,6 +1,4 @@
-local Utils = require("tropical_utils/utils")
-
-local function shardDMGRedirect(self, attacker, damage, weapon, ...)          -- 碎裂武器伤害重定向
+local function GetAttackedBefore(self, attacker, damage, weapon, ...)         -- 碎裂武器伤害重定向
     if weapon then
         if weapon.prefab == "shard_sword" and self.inst:HasTag("shadow") then -- 碎裂剑对梦魇生物
             local health = self.inst.components.health
@@ -33,5 +31,5 @@ local function shardDMGRedirect(self, attacker, damage, weapon, ...)          --
 end
 
 AddComponentPostInit("combat", function(self, inst)
-    Utils.FnDecorator(self, "GetAttacked", shardDMGRedirect)
+    Utils.FnDecorator(self, "GetAttacked", GetAttackedBefore)
 end)

@@ -7,6 +7,13 @@ end
 AddReplicableComponent("hayfever")
 
 modimport "modmain/hamlet/simutil"
+modimport "modmain/common/poisonable"
+
+
+modimport "modmain/hamlet/components/inventory_replica"
+modimport "modmain/hamlet/components/builder"
+modimport "modmain/hamlet/components/builder_replica"
+
 
 modimport "modmain/hamlet/AddIronLordHandlers" --活性机甲处理
 modimport "modmain/hamlet/AddIronLordPostinit" --活性机甲构造

@@ -217,7 +217,7 @@ local function MakeMoose(nightmare)
     inst:AddTag("huff_idle")
     inst:AddTag("wavemaker")
     inst:AddTag("lightshake")
-    inst:AddTag("groundpoundimmune")
+    inst:AddTag("groundpound_immune")
 
     inst.entity:SetPristine()
 

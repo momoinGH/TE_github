@@ -60,7 +60,6 @@ end
 
 --------------------------------------------------------------------------
 local function AttackModeTrigger(inst)
-    inst.components.healthtrigger:RemoveTrigger(0.9)
     inst.modes.guard = false
     inst.modes.attack = true
     inst.attacks.combo = 2
@@ -71,7 +70,6 @@ local function AttackModeTrigger(inst)
 end
 
 local function AttackAndGuardModeTrigger(inst)
-    inst.components.healthtrigger:RemoveTrigger(0.8)
     inst.modes.guard = true
     inst.attacks.uppercut = true
     inst.attacks.buff = true
@@ -79,12 +77,10 @@ local function AttackAndGuardModeTrigger(inst)
 end
 
 local function Combo2Trigger(inst)
-    inst.components.healthtrigger:RemoveTrigger(0.5)
     inst.attacks.combo = 4
 end
 
 local function InfiniteComboTrigger(inst)
-    inst.components.healthtrigger:RemoveTrigger(0.25)
     inst.attacks.combo = 999
 end
 

@@ -35,18 +35,17 @@ local function HasFriendlyLeader(target, attacker)
     local target_leader = (target.components.follower ~= nil) and target.components.follower.leader or nil
 
     if target_leader ~= nil then
-
         if target_leader.components.inventoryitem then
             target_leader = target_leader.components.inventoryitem:GetGrandOwner()
         end
 
         local PVP_enabled = TheNet:GetPVPEnabled()
-        return (target_leader ~= nil 
-                and (target_leader:HasTag("player") 
-                and not PVP_enabled)) or
-                (target.components.domesticatable and target.components.domesticatable:IsDomesticated() 
+        return (target_leader ~= nil
+                and (target_leader:HasTag("player")
+                    and not PVP_enabled)) or
+            (target.components.domesticatable and target.components.domesticatable:IsDomesticated()
                 and not PVP_enabled) or
-                (target.components.saltlicker and target.components.saltlicker.salted
+            (target.components.saltlicker and target.components.saltlicker.salted
                 and not PVP_enabled)
     end
 
@@ -58,8 +57,8 @@ local function BeakAoEValidFn(target, attacker)
         return false
     end
 
-    if target:HasTag("monster") and not TheNet:GetPVPEnabled() and 
-        ((target.components.follower and target.components.follower.leader ~= nil and 
+    if target:HasTag("monster") and not TheNet:GetPVPEnabled() and
+        ((target.components.follower and target.components.follower.leader ~= nil and
             target.components.follower.leader:HasTag("player")) or target.bedazzled) then
         return false
     end
@@ -210,4 +209,6 @@ local function fn()
     return inst
 end
 
-return Prefab("shard_sword", swordfn, assets), Prefab("shard_beak", beakfn, assets), Prefab("glass_shards", fn, assets)
+return Prefab("shard_sword", swordfn, assets),
+    Prefab("shard_beak", beakfn, assets),
+    Prefab("glass_shards", fn, assets)
