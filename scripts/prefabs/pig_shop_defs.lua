@@ -201,9 +201,9 @@ local SHELFS = {
 }
 
 local function SetImage(inst, ent, slot)
-    local image = ent ~= nil and ent.components.inventoryitem ~= nil and ent.components.inventoryitem:GetImage()
+    local image = ent and ent.components.inventoryitem and ent.components.inventoryitem.imagename or nil
 
-    if image ~= nil then
+    if image then
         --mod物品drawatlasoverride或atlasname至少指定一个
         local atlas = FunctionOrValue(ent.drawatlasoverride, ent, inst) or ent.components.inventoryitem.atlasname
         if atlas ~= nil then

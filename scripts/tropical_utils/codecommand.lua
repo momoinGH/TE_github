@@ -1247,3 +1247,10 @@ BT = Class(function(self, inst, root) end)
 
 --like resolvefilepath, but without the crash if it fails.
 function resolvefilepath_soft(filepath, force_path_search, search_first_path) end
+
+-- 打印堆栈到日志
+function StackTraceToLog() end
+function StackTrace(err) end
+
+
+function ArrayUnion(...) end

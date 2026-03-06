@@ -10,6 +10,8 @@ Utils = require("tropical_utils/utils")
 Constructor = require("tropical_utils/constructor")
 Constructor.SetEnv(env)
 
+modimport "modmain/dev_utils" --开发环境下辅助用的函数
+
 local ALL_PREFAB_FILES = {}
 local ALL_ASSETS = {}
 local language = string.lower(GetModConfigData("language"))
@@ -30,8 +32,14 @@ function TRO_AddComponentAction(actiontype, component, fn)
 end
 
 --- 科雷modmain的定义抄过来，不过文件不存在时不提醒
-local function SafeModImport(modulename)
-    print("modimport: " .. env.MODROOT .. modulename)
+function SafeModImport(modulename, has_print)
+    if has_print == nil then
+        has_print = true
+    end
+    if has_print then
+        print("modimport: " .. env.MODROOT .. modulename)
+    end
+
     if string.sub(modulename, #modulename - 3, #modulename) ~= ".lua" then
         modulename = modulename .. ".lua"
     end
@@ -59,7 +67,7 @@ local function Modimport(dirc)
     SafeModImport("modmain/" .. dirc .. "/character")            --添加角色，角色相关变量定义
     SafeModImport("modmain/" .. dirc .. "/ui")                   --UI相关
     SafeModImport("modmain/" .. dirc .. "/prefabpost")           --组件、预制件的修改
-    SafeModImport("modmain/" .. dirc .. "/fx")                  --特效
+    SafeModImport("modmain/" .. dirc .. "/fx")                   --特效
     SafeModImport("modmain/" .. dirc .. "/actions")              --action相关
     SafeModImport("modmain/" .. dirc .. "/componentactions")     --componentactions相关
     SafeModImport("modmain/" .. dirc .. "/sg")                   --Stategraph相关
@@ -69,7 +77,9 @@ local function Modimport(dirc)
     SafeModImport("modmain/" .. dirc .. "/input")                --客机操作的监听
     SafeModImport("modmain/" .. dirc .. "/modwiki")              --图鉴wiki定义
     SafeModImport("modmain/" .. dirc .. "/skins")                --物品皮肤
-    SafeModImport("modmain/" .. dirc .. "/debug")                --注册一些c_指令，用于控制台调试
+    if proisdev then
+        SafeModImport("modmain/" .. dirc .. "/debug")            --注册一些c_指令，用于控制台调试
+    end
 
     if PrefabFiles and #PrefabFiles > 0 then
         ALL_PREFAB_FILES = ArrayUnion(ALL_PREFAB_FILES, PrefabFiles)
@@ -82,7 +92,9 @@ local function Modimport(dirc)
 end
 
 ----------------------------------------------------------------------------------------------------
-modimport "modmain/global_function"                  --一些与功能无关的全局函数
+
+
+modimport "modmain/data_validator_before"            --校验器，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 modimport "modmain/mods/knownmodcheck"               -- 检测不兼容模组并报错崩溃
 modimport "modmain/animstate"                        -- AnimState 增强
 modimport "modmain/standardcomponents"               -- 定义一些全局函数
@@ -172,15 +184,6 @@ Constructor.AddScrapbookWiki("tropical", WIKI_DATA)
 WIKI_DATA = nil
 
 ----------------------------------------------------------------------------------------------------
--- 防止制作栏文本忘记写导致游戏崩溃
-for name, _ in ipairs(CRAFTING_FILTERS) do
-    if not STRINGS.UI.CRAFTING_FILTERS[name] then
-        STRINGS.UI.CRAFTING_FILTERS[name] = "STRINGS.UI.CRAFTING_FILTERS." .. name .. "未赋值"
-        print("LUA ERROR stack traceback:\n提示：STRINGS.UI.CRAFTING_FILTERS." .. name .. "未赋值，点击制作栏时会报错")
-    end
-end
 
 
-
-
--- KnownModIndex:IsModEnabled("workshop-1289779251")
+modimport "modmain/data_validator_after" --校验器，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃

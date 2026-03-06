@@ -84,7 +84,9 @@ local function Repair(inst)
         or not boat.components.health
         or not boat.components.health:IsHurt()
     then
-        stopFixingFn(inst)
+        if inst.boat then
+            stopFixingFn(inst)
+        end
 
         boat = FindNearbyBoat(inst)
         if boat then
