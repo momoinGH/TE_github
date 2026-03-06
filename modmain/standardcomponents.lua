@@ -31,6 +31,7 @@ function MakeObsidianTool(inst)
     heater.carriedheatmultiplier = TUNING.HEAT_ROCK_CARRIED_BONUS_HEAT_FACTOR
     heater:SetThermics(true, false)
 end
+
 GLOBAL.MakeObsidianTool = MakeObsidianTool
 
 

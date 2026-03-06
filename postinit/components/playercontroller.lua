@@ -1,5 +1,4 @@
 ----- desembarque automatico resto do código dentro de locomotor ----------------
-local Utils = require("tools/utils")
 AddClassPostConstruct("components/playercontroller", function(self)
     local RUBBER_BAND_PING_TOLERANCE_IN_SECONDS = 0.7
     local RUBBER_BAND_DISTANCE = 4

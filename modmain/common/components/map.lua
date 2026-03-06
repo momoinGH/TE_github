@@ -1,6 +1,4 @@
 --@Author: Peng
-local Utils = require("tools/utils")
-
 -----------map related--------------------------
 require("components/map")
 

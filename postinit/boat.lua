@@ -1,5 +1,3 @@
-local Utils = require("tools/utils")
-
 -- 不会落水
 local function DrownableShouldDrownBefore(self)
     if self.inst.components.driver then

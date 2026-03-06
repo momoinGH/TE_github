@@ -479,28 +479,6 @@ function FN.IsInRectangle(pos, targetPos, rotate, width, length)
     end
 end
 
----返回一个爱心形状点集
----@param centerX number
----@param centerY number
----@param scale number
----@param numPoints number
-function FN.GenerateHeartPoints(centerX, centerY, scale, numPoints)
-    local points = {}
-    local pi = math.pi
-    local step = 2 * pi / numPoints
-
-    for i = 1, numPoints do
-        local t = step * (i - 1)
-        local x = 16 * math.sin(t) ^ 3
-        local y = 13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t)
-        x = x * scale + centerX
-        y = y * scale + centerY
-        table.insert(points, { x, y })
-    end
-
-    return points
-end
-
 ---小圆圆心位于大圆边长上，用给定的小圆围绕大圆平均一圈，返回小圆圆心表
 ---@param bigRadius number 小圆半径
 ---@param smallRadius number 大圆半径

@@ -960,9 +960,9 @@ function RunInSandboxSafe(untrusted_code, error_handler) end
 
 AddClassPostConstruct("components/combat_replica", function(self)
     -- 攻击玩家三要素
-    self.IsValidTarget = Utils.TrueFn
-    self.CanTarget = Utils.TrueFn     --可以攻击，但无伤害
-    self.CanBeAttacked = Utils.TrueFn --攻击玩家有伤害
+    self.IsValidTarget = function() return true end
+    self.CanTarget = function() return true end  --可以攻击，但无伤害
+    self.CanBeAttacked = function() return true end  --攻击玩家有伤害
 end)
 
 ----------------------------------------------------------------------------------------------------
@@ -1250,7 +1250,10 @@ function resolvefilepath_soft(filepath, force_path_search, search_first_path) en
 
 -- 打印堆栈到日志
 function StackTraceToLog() end
+
 function StackTrace(err) end
 
-
 function ArrayUnion(...) end
+
+
+Action = Class(function(self, data, instant, rmb, distance, ghost_valid, ghost_exclusive, canforce, rangecheckfn) end)

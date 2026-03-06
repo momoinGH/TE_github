@@ -1,4 +1,3 @@
-local Utils = require("tools/utils")
 local RoomUtils = require("tropical_utils/room_utils")
 require("components/map")
 

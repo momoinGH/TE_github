@@ -57,3 +57,27 @@ function prosoftassert(v, ...)
 end
 
 GLOBAL.prosoftassert = prosoftassert
+
+----------------------------------------------------------------------------------------------------
+--- 科雷modmain的定义抄过来，不过文件不存在时不提醒
+function SafeModImport(modulename, has_print)
+    if has_print == nil then
+        has_print = true
+    end
+    if has_print then
+        print("modimport: " .. env.MODROOT .. modulename)
+    end
+
+    if string.sub(modulename, #modulename - 3, #modulename) ~= ".lua" then
+        modulename = modulename .. ".lua"
+    end
+    local result = kleiloadlua(env.MODROOT .. modulename)
+    if result == nil then
+        -- error("Error in modimport: " .. modulename .. " not found!")
+    elseif type(result) == "string" then
+        error("Error in modimport: " .. ModInfoname(modname) .. " importing " .. modulename .. "!\n" .. result)
+    else
+        setfenv(result, env.env)
+        result()
+    end
+end

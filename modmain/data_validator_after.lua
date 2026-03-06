@@ -69,3 +69,25 @@ if proisdev then
         return OldPushEvent(inst, event, data, ...)
     end
 end
+
+----------------------------------------------------------------------------------------------------
+-- 对象销毁时不能执行定时任务
+if proisdev then
+    local old_DoTaskInTime = EntityScript.DoTaskInTime
+    function EntityScript:DoTaskInTime(...)
+        if self.IsValid and not self:IsValid() then
+            ProErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoTaskInTime，这可能导致游戏崩溃", true, true)
+            return
+        end
+        return old_DoTaskInTime(self, ...)
+    end
+
+    local old_DoPeriodicTask = EntityScript.DoPeriodicTask
+    function EntityScript:DoPeriodicTask(...)
+        if self.IsValid and not self:IsValid() then
+            ProErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoPeriodicTask，这可能导致游戏崩溃", true, true)
+            return
+        end
+        return old_DoPeriodicTask(self, ...)
+    end
+end

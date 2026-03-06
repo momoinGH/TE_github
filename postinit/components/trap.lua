@@ -1,5 +1,3 @@
-local Utils = require("tools/utils")
-
 local function DoSpringBefore(self)
     if self.target
         and self.target:IsValid()

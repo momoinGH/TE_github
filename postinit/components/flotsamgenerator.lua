@@ -1,4 +1,3 @@
-local Utils = require("tools/utils")
 ----海上漂浮物刷新
 local flotsam_prefabs
 AddComponentPostInit("flotsamgenerator", function(self)

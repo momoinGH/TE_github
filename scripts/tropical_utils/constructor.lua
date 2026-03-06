@@ -1,11 +1,7 @@
 
---使用案例及最新版：https://n77a3mjegs.feishu.cn/docx/K9bUdpb5Qo85j2xo8XkcOsU1nuh?from=from_copylink
-
---初始化时调用
 
 local FN = {}
 local _source = debug.getinfo(1, 'S').source
-local KEY = "_" .. _source:match(".*scripts[/\\](.*)%.lua"):gsub("[/\\]", "_") .. "_"
 
 local Utils = require(_source:match(".*scripts[/\\](.*[/\\])") .. "utils")
 
@@ -13,201 +9,6 @@ local env --环境变量，需要手动赋值
 
 function FN.SetEnv(newEnv)
     env = newEnv
-end
-
----按照一定的格式创建一个基础的预制体，适用于那些功能简单的预制体
----@param name string 预制体名
----@param data table|nil
----@return Prefab
-function FN.MakePrefab(name, data)
-    local assets = Utils.GetVal(data, "assets")     --默认name名字的动画资产、如果是物品的话还有物品栏贴图
-    local prefabs = Utils.GetVal(data, "prefabs")
-    local bank = Utils.GetVal(data, "bank", name)   --默认name
-    local build = Utils.GetVal(data, "build", name) --默认name
-    local coomonInit = Utils.GetVal(data, "coomonInit")
-    local masterInit = Utils.GetVal(data, "masterInit")
-    local isHat = Utils.GetVal(data, "isHat", false)
-    local isInventoryitem = Utils.GetVal(data, "isInventoryitem", false)        --是否是一个物品，如果为true会默认图片路径为images/inventoryimages/，图片名为name
-    local playAnim = Utils.GetVal(data, "playAnim", isHat and "anim" or "idle") --默认播放动画，默认idle
-
-    if not assets then
-        assets = { Asset("ANIM", "anim/" .. build .. ".zip") }
-    end
-
-    if isInventoryitem then
-        table.insert(assets, Asset("ATLAS", "images/inventoryimages/" .. name .. ".xml"))
-        table.insert(assets, Asset("ATLAS_BUILD", "images/inventoryimages/" .. name .. ".xml", 256)) --小木牌和展柜使用
-        RegisterInventoryItemAtlas("images/inventoryimages/" .. name .. ".xml", name .. ".tex")
-    end
-
-    local function fn()
-        local inst = CreateEntity()
-
-        inst.entity:AddTransform()
-        inst.entity:AddAnimState()
-        inst.entity:AddNetwork()
-
-        inst.AnimState:SetBank(bank)
-        inst.AnimState:SetBuild(build)
-        inst.AnimState:PlayAnimation(playAnim)
-
-        if isHat then
-            inst:AddTag("hat")
-
-            MakeInventoryFloatable(inst)
-            inst.components.floater:SetBankSwapOnFloat(false, nil, { bank = bank, anim = playAnim }) --Hats default animation is not "idle", so even though we don't swap banks, we need to specify the swap_data for re-skinning to reset properly when floating
-            inst.components.floater:SetSize("med")
-            inst.components.floater:SetVerticalOffset(0.1)
-        end
-
-
-        if isInventoryitem then
-            MakeInventoryPhysics(inst)
-        end
-
-        if coomonInit ~= nil then
-            coomonInit(inst)
-        end
-
-        inst.entity:SetPristine()
-
-        if not TheWorld.ismastersim then
-            return inst
-        end
-
-        if isInventoryitem then
-            inst:AddComponent("inventoryitem")
-
-            inst:AddComponent("inspectable")
-        end
-
-        if isHat then
-            inst:AddComponent("tradable")
-
-            inst:AddComponent("equippable")
-            inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
-
-            MakeHauntableLaunch(inst)
-        end
-
-        if masterInit ~= nil then
-            masterInit(inst)
-        end
-
-        return inst
-    end
-
-    return Prefab(name, fn, assets, prefabs)
-end
-
----创建特效预制体的fn，来自deer_fx.lua
----必须得吐槽fx.lua太难用了，传参数不让，AnimState的操作也艰难，相比之下deer_fx.lua写的就很好用，可惜不开放
----@param data table {sound, soundLoop, anim, multColour, isLoopPlayAnim, isBloom, isOnGround, light, commonPostInit, isAnimOverRemove, masterPostInit}
-function FN.MakeFXFn(bank, build, data)
-    local sound = Utils.GetVal(data, "sound")                       --播放的音效
-    local soundLoop = Utils.GetVal(data, "soundLoop")               --播放该音乐时键为 loop
-    local anim = Utils.GetVal(data, "anim", "idle")                 --播放的动画
-    local isLoopPlayAnim = Utils.GetVal(data, "isLoopPlayAnim")     --是否循环播放anim动画
-    local isOnGround = Utils.GetVal(data, "isOnGround")             --是否在地面上
-    local orientation = Utils.GetVal(data, "orientation")           --如果在地面上，设置为ANIM_ORIENTATION.OnGround时可以旋转
-    local commonPostInit = Utils.GetVal(data, "commonPostInit")
-    local isAnimOverRemove = Utils.GetVal(data, "isAnimOverRemove") --动画播放结束后是否移除
-    local masterPostInit = Utils.GetVal(data, "masterPostInit")
-
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    if sound ~= nil or soundLoop ~= nil then
-        inst.entity:AddSoundEmitter()
-    end
-    inst.entity:AddNetwork()
-
-    inst.AnimState:SetBank(bank)
-    inst.AnimState:SetBuild(build)
-    if anim then
-        inst.AnimState:PlayAnimation(anim, isLoopPlayAnim)
-    end
-
-    if isOnGround then
-        inst.AnimState:SetLayer(LAYER_BACKGROUND) --在地面上
-        inst.AnimState:SetSortOrder(3)
-    end
-    if orientation then
-        inst.AnimState:SetOrientation(orientation)
-    end
-    if soundLoop ~= nil then
-        inst.SoundEmitter:PlaySound(soundLoop, "loop")
-    end
-
-    inst:AddTag("FX")
-
-    if commonPostInit ~= nil then
-        commonPostInit(inst)
-    end
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.persists = false
-
-    if sound ~= nil then
-        inst.SoundEmitter:PlaySound(data.sound)
-    end
-
-    if isAnimOverRemove then
-        inst:ListenForEvent("animover", inst.Remove)
-    end
-
-    if masterPostInit ~= nil then
-        masterPostInit(inst)
-    end
-
-    return inst
-end
-
----创建特效预制体，assets、bank和build三个不填都默认名字为name
----@param name string
----@param data table|nil {bank, build, prefabs, assets, sound, soundLoop, anim, multColour, isLoopPlayAnim, isBloom, isOnGround, light, commonPostInit, isAnimOverRemove, masterPostInit}
-function FN.MakeFX(name, data)
-    local bank = Utils.GetVal(data, "bank", name)
-    local build = Utils.GetVal(data, "build", name)
-    local assets = Utils.GetVal(data, "assets", { Asset("ANIM", "anim/" .. name .. ".zip") })
-    local prefabs = Utils.GetVal(data, "prefabs")
-
-    local fn = function()
-        return FN.MakeFXFn(bank, build, data)
-    end
-
-    return Prefab(name, fn, assets, prefabs)
-end
-
-----------------------------------------------------------------------------------------------------
-
----拷贝原版brain对象，不会受到AddBrainPostInit的影响。
----在增强游戏已有brain时使用，防止使用的brain被其他mod不小心初始化了
----@param requirePath string 调用require的参数
----@param initFn function|nil 如果原brain在构造器里初始化了一些属性，可以在该函数里初始化
----@return Brain brain
-function FN.CopyBrainFn(requirePath, initFn)
-    local NewBrain = Class(Brain, function(self, inst)
-        Brain._ctor(self, inst)
-        if initFn then
-            initFn(self)
-        end
-    end)
-
-    local brain = require(requirePath)
-    for k, v in pairs(brain) do
-        if type(v) == "function" then
-            NewBrain[k] = v
-        end
-    end
-
-    return NewBrain
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -609,6 +410,18 @@ function FN.CopyPrefab(newPrefab, oldprefab, data)
     end
 
     return Prefab(newPrefab, newFn, assets, prefabs)
+end
+
+---添加方法AddToHistoryCanRepeat(sender_name, message, colour, icondata, ...)，使其支持图标的同时还能显示重复内容
+function FN.ChatHistoryAddToHistoryCanRepeat()
+    function ChatHistory:AddToHistoryCanRepeat(sender_name, message, colour, icondata, ...)
+        local old = self.NPC_CHATTER_MAX_CHAT_NO_DUPES
+        self.NPC_CHATTER_MAX_CHAT_NO_DUPES = 0 --移除对重复内容的判断
+
+        self:AddToHistory(ChatTypes.ChatterMessage, nil, nil, sender_name, message, colour, icondata, ...)
+
+        self.NPC_CHATTER_MAX_CHAT_NO_DUPES = old
+    end
 end
 
 return FN

@@ -1,5 +1,8 @@
 Utils = require("tropical_utils/utils")
 
+
+modimport "modmain/room/interiorminimap" --绘制小房间内的小地图
+
 modimport "modmain/room/entityscript"
 
 

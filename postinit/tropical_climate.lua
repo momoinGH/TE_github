@@ -1,6 +1,3 @@
-local Utils = require("tools/utils")
--- local upvaluehelper = require("tools/upvaluehelper")
-
 --温度变化更加丝滑
 local function OnTemperatureUpdateBefore(self)
     if self.inst:AwareInVolcanoArea() then
