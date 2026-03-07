@@ -14,6 +14,7 @@ modimport "modmain/boat/components/playerspawner"
 
 
 modimport "modmain/boat/prefabs/player"
+modimport "modmain/boat/prefabs/gears.lua" --齿轮
 ----------------------------------------------------------------------------------------------------
 
 

@@ -212,6 +212,9 @@ local function fn()
 
     MakeHauntableWorkAndIgnite(inst)
 
+    inst:AddComponent("plantregrowth")
+    inst.components.plantregrowth:SetRegrowthRate(TUNING.EVERGREEN_REGROWTH.OFFSPRING_TIME)
+
     local color = 0.5 + math.random() * 0.5
     inst.AnimState:SetMultColour(color, color, color, 1)
     sway(inst)

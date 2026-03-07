@@ -8,7 +8,7 @@ modimport "scripts/prefabs/sw_fertilizer_nutrient_defs" --肥料值定义
 modimport "modmain/common/natureskin_variants"          --和自然皮肤切换相关的所有内容
 modimport "modmain/common/wx78_moduledefs"
 modimport "modmain/common/entityscript"
-
+modimport "modmain/common/floatable_items.lua" --海洋世界里石头漂浮
 
 ----------------------------------------------------------------------------------------------------
 
@@ -35,6 +35,9 @@ modimport "modmain/common/components/armor"
 modimport "modmain/common/components/boatphysics"
 modimport "modmain/common/components/combat"
 modimport "modmain/common/components/hounded" --猎犬袭击
+modimport "modmain/common/components/plantregrowth.lua"
+modimport "modmain/common/components/areaaware.lua"
+modimport "modmain/common/components/oar.lua"
 
 ----------------------------------------------------------------------------------------------------
 
@@ -44,8 +47,13 @@ modimport "modmain/common/prefabs/allplayers"
 --modimport "modmain/common/prefabs/player_classified"
 modimport "modmain/common/prefabs/world"
 --modimport "modmain/common/poisonable"
-modimport("modmain/common/prefabs/guard_corp")         --守卫保护作物、高草转化、草大风摇晃？
-modimport("modmain/common/prefabs/player_vision_post") --四眼镜、蝙蝠帽所用
+modimport("modmain/common/prefabs/guard_corp")               --守卫保护作物、高草转化、草大风摇晃？
+modimport("modmain/common/prefabs/player_vision_post")       --四眼镜、蝙蝠帽所用
+modimport "modmain/common/prefabs/farm_plant_randomseed.lua" --植物再生
+modimport "modmain/common/prefabs/dock_kit.lua"              --码头套件
+
+
+
 ----------------------------------------------------------------------------------------------------
 
 
@@ -517,24 +525,6 @@ AddPrefabPostInit("farm_plant_randomseed", function(inst)
         end
     end)
 end)
-
-----------------------------------------------------------------------------------------------------
-
-local function DoVanish(inst, self)
-    self:vanish()
-end
-
-local function OnEntitySleep(self)
-    if self.vanish_task == nil then
-        self.vanish_task = self.inst:DoTaskInTime(self.duration, DoVanish, self)
-    end
-end
-
-AddComponentPostInit("vanish_on_sleep", function(self)
-    self.duration = 10 --支持设置休眠后多少秒移除
-    self.OnEntitySleep = OnEntitySleep
-end)]]
-
 
 ----------------------------------------------------------------------------------------------------
 --[[

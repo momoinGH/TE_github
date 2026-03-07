@@ -472,6 +472,9 @@ local function tree(name, stage, type)
 
         inst.growfromseed = handler_growfromseed
 
+        inst:AddComponent("plantregrowth")
+        inst.components.plantregrowth:SetRegrowthRate(TUNING.EVERGREEN_REGROWTH.OFFSPRING_TIME)
+
         inst.AnimState:SetTime(math.random() * 2)
 
         inst.OnSave = onsave

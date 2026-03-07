@@ -127,9 +127,9 @@ local fns = {
 		end
 	end,
 	luggagechest = function(inst, common)
-		if not common then
-			inst:AddComponent("vanish_on_sleep")
-			inst.components.vanish_on_sleep.duration = 240 + math.random() * 240
+        if not common then
+            inst.persists = false
+			-- inst:AddComponent("vanish_on_sleep")
 		end
 	end,
 	lavarenachest = function(inst, common)

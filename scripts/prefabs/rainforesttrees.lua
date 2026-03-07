@@ -869,10 +869,10 @@ local function makefn(build, stage, data)
 		inst:AddTag("workable")
 		inst:AddTag("shelter")
 		inst:AddTag("gustable")
-		inst:AddTag("jungletree")
 		inst:AddTag("plant")
 		inst:AddTag("twiggytreesw")
 		inst:AddTag("spyable")
+        inst:AddTag("rainforesttree")
 
 		if build == "rot" then
 			inst:AddTag("rotten")
@@ -920,6 +920,9 @@ local function makefn(build, stage, data)
 		inst.components.growable:StartGrowing()
 
 		inst.growfromseed = handler_growfromseed
+
+        inst:AddComponent("plantregrowth")
+        inst.components.plantregrowth:SetRegrowthRate(TUNING.EVERGREEN_REGROWTH.OFFSPRING_TIME)
 
 		inst:AddComponent("bloomable")
 		inst.components.bloomable:SetCanBloom(canbloom)

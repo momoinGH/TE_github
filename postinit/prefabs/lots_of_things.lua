@@ -1,29 +1,3 @@
-local AddPrefabPostInit = AddPrefabPostInit
-
-for _, prefab in pairs({ "skeleton", "skeleton_player" }) do
-    AddPrefabPostInit(prefab, function(inst)
-        if not TheWorld.ismastersim then
-            return
-        end
-
-        local function ondropped(inst)
-            local x, y, z = inst.Transform:GetWorldPosition()
-            if x and y and z then
-                if (TheWorld.Map:IsOceanTileAtPoint(x, 0, z)) then
-                    inst:DoTaskInTime(0.5, function(inst)
-                        local bolha = SpawnPrefab("frogsplash")
-                        if bolha then
-                            bolha.Transform:SetPosition(x, y, z)
-                        end
-                        inst:Remove()
-                    end)
-                end
-            end
-        end
-        inst:DoTaskInTime(0, ondropped)
-    end)
-end
-
 for _, prefab in pairs({ "ash" }) do --灰烬施肥，给咖啡的
     AddPrefabPostInit(prefab, function(inst)
         if not TheWorld.ismastersim then
@@ -164,47 +138,3 @@ for _, v in ipairs({
         inst:AddTag("velocidadenormal")
     end)
 end
-
-
--- for _, prefab in pairs(
---     {
---         "snake_amphibious",
---         "bat",
---         "scorpion",
---         "ghost",
---         "antman_warrior",
---         "antman",
---         "hanging_vine",
---         "grabbing_vine",
---         "hanging_vine_patch",
---         "mean_flytrap",
---         "adult_flytrap",
---         "lightrays_jungle",
---         "pog",
---         "zeb",
---         "lightrays"
---     }) do
---     AddPrefabPostInit(prefab, function(inst)
---         inst:AddTag("tropicalspawner")
-
---         -- if not TheWorld.ismastersim then
---         --     return
---         -- end
-
---         -- local function OnTimerDone(inst, data)
---         --     if data.name == "vaiembora" then
---         --         local invader = GetClosestInstWithTag("player", inst, 25)
---         --         if not invader then
---         --             inst:Remove() --为什么要自删呢
---         --         else
---         --             inst.components.timer:StartTimer("vaiembora", 10)
---         --         end
---         --     end
---         -- end
-
-
---         -- inst:AddComponent("timer")
---         -- inst:ListenForEvent("timerdone", OnTimerDone)
---         -- inst.components.timer:StartTimer("vaiembora", 80 + math.random() * 80)
---     end)
--- end

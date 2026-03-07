@@ -727,6 +727,8 @@ local function makefn(build, stage, data)
 
 		inst.growfromseed = handler_growfromseed
 
+        inst:AddComponent("plantregrowth")
+        inst.components.plantregrowth:SetRegrowthRate(TUNING.EVERGREEN_REGROWTH.OFFSPRING_TIME)
 		---------------------
 		--PushSway(inst)
 		inst.AnimState:SetTime(math.random() * 2)

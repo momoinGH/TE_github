@@ -1,8 +1,6 @@
 -- 屏蔽随机种子种出三合一作物
 local PLANT_DEFS = require("prefabs/farm_plant_defs").PLANT_DEFS
-
 local WEIGHTED_SEED_TABLE = require("prefabs/weed_defs").weighted_seed_table
-
 local NOTINCLUDE = { wheat = true, } -- 先禁小麦
 
 local function pickfarmplant()

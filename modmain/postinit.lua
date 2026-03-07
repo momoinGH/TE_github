@@ -19,25 +19,8 @@ modimport("postinit/components/dynamicmusic")
 ---modimport("postinit/components/worldstate")世界状态***
 
 
-
-
-modimport("postinit/components/plantregrowth")   --植物再生 --黄蘑菇树成长
-
-modimport("postinit/components/areaaware")       -- 用于控制熊大和巨鹿刷新条件
-modimport("postinit/components/drownable")       -- 在室内不会落水
-modimport("postinit/components/oar")             -- 桨加标签
-modimport("postinit/components/vanish_on_sleep") --
-
 ---------------------prefabs------------------------------
 
--- modimport("postinit/prefabs/cave")
-modimport("postinit/prefabs/farm_plants") --屏蔽随机种子种出三合一作物
--- modimport("postinit/prefabs/forest")
--- modimport("postinit/prefabs/image_minisign") --会影响到其他mod
----modimport("postinit/prefabs/blueprints")不老泉蓝图不可燃烧
-modimport("postinit/prefabs/dock_kit")        --码头套件安放相关
-modimport("postinit/prefabs/floatable_items") --海洋世界里石头漂浮
-modimport("postinit/prefabs/gears")
 modimport("postinit/prefabs/lots_of_things")
 modimport("postinit/prefabs/meatrack")
 modimport("postinit/prefabs/mosquitosack")

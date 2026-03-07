@@ -40,8 +40,8 @@ local JUNGLETREE_CHOPS_TALL = 15
 local CLAWPALMTREE_GROW_TIME =
 {
     { base = 8 * day_time, random = 0.5 * day_time }, --tall to short
-    { base = 12 * day_time, random = 5 * day_time }, --short to normal
-    { base = 12 * day_time, random = 5 * day_time }, --normal to tall
+    { base = 12 * day_time, random = 5 * day_time },  --short to normal
+    { base = 12 * day_time, random = 5 * day_time },  --normal to tall
 }
 
 local builds =
@@ -758,6 +758,7 @@ local function makefn(build, stage, data)
         inst:AddTag("plant")
         inst:AddTag("twiggytreesw")
         inst:AddTag("spyable")
+        inst:AddTag("clawpalmtree")
 
         if build == "rot" then
             inst:AddTag("rotten")
@@ -804,6 +805,9 @@ local function makefn(build, stage, data)
         inst.components.growable:StartGrowing()
 
         inst.growfromseed = handler_growfromseed
+
+        inst:AddComponent("plantregrowth")
+        inst.components.plantregrowth:SetRegrowthRate(TUNING.EVERGREEN_REGROWTH.OFFSPRING_TIME)
 
         inst:AddComponent("mystery")
         ---------------------

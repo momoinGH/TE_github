@@ -631,8 +631,8 @@ local function makefn(build, stage, data)
 		inst:AddTag("workable")
 		inst:AddTag("shelter")
 		inst:AddTag("gustable")
-		inst:AddTag("palmtree")
 		inst:AddTag("plant")
+        inst:AddTag("jungletree")
 
 		inst.build = build
 		anim:SetBuild(GetBuild(inst).file)
@@ -675,6 +675,9 @@ local function makefn(build, stage, data)
 		inst.components.growable:StartGrowing()
 
 		inst.growfromseed = handler_growfromseed
+
+        inst:AddComponent("plantregrowth")
+        inst.components.plantregrowth:SetRegrowthRate(TUNING.EVERGREEN_REGROWTH.OFFSPRING_TIME)
 
 		---------------------
 		--PushSway(inst)
