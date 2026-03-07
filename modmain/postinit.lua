@@ -15,32 +15,12 @@
 modimport("postinit/components/ambientsound")
 modimport("postinit/components/colourcube")
 modimport("postinit/components/dynamicmusic")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----modimport("postinit/components/inventory_prevent_pick") ----可能和船拿不起来有关系***
----modimport("postinit/components/penguinspawner")控制企鸥生成，现在是覆盖的***
----modimport("postinit/components/playercontroller")***
----modimport("postinit/components/playerspawner")***
----modimport("postinit/components/snowtile") -- disable snow effeccts控积雪***
----modimport("postinit/components/thief")偷东西，能否打开容器、丢弃物品、吃特定的食物，是给小狐狸用的吗？***
 ---modimport("postinit/components/wavemanager")波浪管理***
 ---modimport("postinit/components/worldstate")世界状态***
----modimport("postinit/components/edible")吃荨麻治花粉的？***
+
+
+
+
 modimport("postinit/components/plantregrowth")   --植物再生 --黄蘑菇树成长
 
 modimport("postinit/components/areaaware")       -- 用于控制熊大和巨鹿刷新条件

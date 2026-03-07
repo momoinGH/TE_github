@@ -5,39 +5,22 @@ require("components/map")
 Map.IsTropicalAreaAtPoint = function(self, x, y, z)
     local node = self:FindVisualNodeAtPoint(x, y, z, "tropical")
         or self:FindVisualNodeAtPoint(x, y, z, "ForceDisconnected")
-
-    if node ~= nil then
-        return true
-    else
-        return false
-    end
+    return node ~= nil
 end
 
 Map.IsShipwreckedAreaAtPoint = function(self, x, y, z)
     local node = self:FindVisualNodeAtPoint(x, y, z, "shipwrecked")
-    if node ~= nil then
-        return true
-    else
-        return false
-    end
+    return node ~= nil
 end
 
 Map.IsHamletAreaAtPoint = function(self, x, y, z)
     local node = self:FindVisualNodeAtPoint(x, y, z, "hamlet")
-    if node ~= nil then
-        return true
-    else
-        return false
-    end
+    return node ~= nil
 end
 
 Map.IsVolcanoAreaAtPoint = function(self, x, y, z)
     local node = self:FindVisualNodeAtPoint(x, y, z, "volcano")
-    if node ~= nil then
-        return true
-    else
-        return false
-    end
+    return node ~= nil
 end
 
 local _SetTile = Map.SetTile

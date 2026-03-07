@@ -111,19 +111,19 @@ AddComponentPostInit("colourcube", function(self)
 					_showencc = CUBES.aporka
 					upvaluehelper.Set(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.aporkalypse)
 				end
-			elseif _activatedplayer:AwareInShipwreckedArea() then
+            elseif _activatedplayer:IsInShipwreckedArea() then
 				--print("colourcube shipwrecked")
 				if _showencc ~= CUBES.shipwrecked then
 					_showencc = CUBES.shipwrecked
 					upvaluehelper.Set(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.shipwrecked)
 				end
-			elseif _activatedplayer:AwareInHamletArea() then
+            elseif _activatedplayer:IsInHamletArea() then
 				--print("colourcube hamlet")
 				if _showencc ~= CUBES.hamlet then
 					_showencc = CUBES.hamlet
 					upvaluehelper.Set(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.hamlet)
 				end
-			elseif _activatedplayer:AwareInVolcanoArea() then
+            elseif _activatedplayer:IsInVolcanoArea() then
 				--print("colourcube volcano")
 				if _showencc ~= CUBES.vlocano then
 					_showencc = CUBES.volcano

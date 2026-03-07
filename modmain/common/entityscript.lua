@@ -1,47 +1,38 @@
 require("entityscript")
 
+-- 我们mod定义的区域，海难、哈姆雷特、火山、热带等等
 function EntityScript:IsInTropicalArea()
+    if self.components.areaaware then
+        return (self.components.areaaware:CurrentlyInTag("tropical")
+                or self.components.areaaware:CurrentlyInTag("ForceDisconnected"))
+            and true
+            or false
+    end
     return TheWorld.Map:IsTropicalAreaAtPoint(self:GetPosition():Get())
 end
 
+-- 海难区域
 function EntityScript:IsInShipwreckedArea()
+    if self.components.areaaware then
+        return self.components.areaaware:CurrentlyInTag("shipwrecked") and true or false
+    end
     return TheWorld.Map:IsShipwreckedAreaAtPoint(self:GetPosition():Get())
 end
 
+--哈姆雷特区域
 function EntityScript:IsInHamletArea()
+    if self.components.areaaware then
+        return self.components.areaaware:CurrentlyInTag("hamlet") and true or false
+    end
     return TheWorld.Map:IsHamletAreaAtPoint(self:GetPosition():Get())
 end
 
+--火山区域
 function EntityScript:IsInVolcanoArea()
+    if self.components.areaaware then
+        return self.components.areaaware:CurrentlyInTag("volcano") and true or false
+    end
     return TheWorld.Map:IsVolcanoAreaAtPoint(self:GetPosition():Get())
-end
-
-function EntityScript:IsInWorld()
-    local x, y, z = self.Transform:GetWorldPosition()
-    return math.abs(x) <= 1350 and math.abs(z) <= 1350
-end
-
-----area aware related--------------------
-function EntityScript:AwareInTropicalArea() ----减少计算量
-    return self.components.areaaware and
-        (self.components.areaaware:CurrentlyInTag("tropical")
-            or self.components.areaaware:CurrentlyInTag("ForceDisconnected")) and
-        true or false
-end
-
-function EntityScript:AwareInShipwreckedArea()
-    local aware = self.components.areaaware and self.components.areaaware:CurrentlyInTag("shipwrecked") and true
-    return aware or false
-end
-
-function EntityScript:AwareInHamletArea()
-    local aware = self.components.areaaware and self.components.areaaware:CurrentlyInTag("hamlet") and true
-    return aware or false
-end
-
-function EntityScript:AwareInVolcanoArea()
-    local aware = self.components.areaaware and self.components.areaaware:CurrentlyInTag("volcano") and true
-    return aware or false
 end
 
 -- 根据定义的文件获取事件回调函数，尽量少用，因为文件里定义多个监听时获取的不一定是自己想要的

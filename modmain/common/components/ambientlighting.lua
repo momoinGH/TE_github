@@ -65,7 +65,7 @@ AddComponentPostInit("ambientlighting", function(self, inst)
 	-- 		if _activatedplayer and targetsettings == _overridecolour and _overridecolour.currentcolourset.PHASE_COLOURS.spring then
 	-- 			local temp = _overridecolour.currentcolourset
 
-	-- 			if _activatedplayer:AwareInTropicalArea() then
+    -- 			if _activatedplayer:IsInTropicalArea() then
 	-- 				_overridecolour.currentcolourset = COLOURS.TROPICAL_COLOURS
 	-- 			end
 	-- 			_ComputeTargetColour(targetsettings, timeoverride, ...)

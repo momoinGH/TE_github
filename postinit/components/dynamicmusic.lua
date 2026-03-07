@@ -70,13 +70,13 @@ AddComponentPostInit("dynamicmusic", function(self, inst)
         if _activatedplayer then
             StopBusy()
             -- print("MusicReDirect")
-            if _activatedplayer:AwareInHamletArea() then
+            if _activatedplayer:IsInHamletArea() then
                 -- print "in hamlet"
                 BUSYTHEMES.FOREST = BUSYTHEMES.HAMLET
                 for k, v in pairs(soundremap.hamlet) do
                     RemapSound(k, v)
                 end
-            elseif _activatedplayer:AwareInShipwreckedArea() then
+            elseif _activatedplayer:IsInShipwreckedArea() then
                 -- print "in shipwrecked"
                 BUSYTHEMES.FOREST = BUSYTHEMES.SHIPWRECCKED
                 for k, v in pairs(soundremap.shipwrecked) do

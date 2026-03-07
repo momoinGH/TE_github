@@ -1,6 +1,6 @@
 --温度变化更加丝滑
 local function OnTemperatureUpdateBefore(self)
-    if self.inst:AwareInVolcanoArea() then
+    if self.inst:IsInVolcanoArea() then
         local volcano_tem = 40
         self:SetModifier("volcanoregion", volcano_tem)
 
@@ -10,7 +10,7 @@ local function OnTemperatureUpdateBefore(self)
     end
 
 
-    if self.inst:AwareInTropicalArea() then
+    if self.inst:IsInTropicalArea() then
         local tro_tem = math.max(10 - TheWorld.state.temperature, 0) + 5
         self:SetModifier("tropicalregion", tro_tem)
     else
@@ -33,7 +33,7 @@ end)
 
 local Moisture = require("components/moisture")
 function Moisture:GetMoistureRate()
-    if not TheWorld.state.israining and not (TheWorld.state.issnowing and self.inst:AwareInTropicalArea()) then
+    if not TheWorld.state.israining and not (TheWorld.state.issnowing and self.inst:IsInTropicalArea()) then
         return -0.005 ---没搞懂为什么冬天不会自然干燥
     end
 

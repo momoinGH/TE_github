@@ -307,11 +307,10 @@ end
 
         local player = playerdata.player
         if player and player.components.areaaware then
-            if player.components.areaaware:CurrentlyInTag("hamlet")
-                or player.components.areaaware:CurrentlyInTag("shipwrecked")
+            if player:IsInTropicalArea()
                 or player.components.areaaware:CurrentlyInTag("ForceDisconnected")
             then
-                return
+                return --这些区域不生成企鹅
             end
             if player.components.areaaware:CurrentlyInTag("frost") then
                 frostisland = true

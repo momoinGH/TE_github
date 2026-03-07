@@ -21,24 +21,7 @@ forest_map.Generate = function(prefab, map_width, map_height, tasks, level, leve
     -- for i, v in pairs(worldgenset) do
     --     print(i .. ":" .. tostring(v))
     -- end
---[[
-    for i, v in pairs(ta_worldgen) do
-        ta_worldgen[i] = (worldgenset[i] ~= nil) and worldgenset[i] or ta_worldgen[i]
-        if ta_worldgen[i] == "disabled" then
-            ta_worldgen[i] = false
-        end
-    end
 
-    -- print("ta_worldgen:")
-    -- for i, v in pairs(ta_worldgen) do
-    --     print(i .. ":" .. tostring(v))
-    -- end
-
-    ta_worldgen.sw_start = ta_worldgen.shipwrecked and (ta_worldgen.multiplayerportal == "shipwrecked")
-    ta_worldgen.ham_start = ta_worldgen.hamlet and (ta_worldgen.multiplayerportal == "hamlet")
-    ta_worldgen.together_not_mainland = (ta_worldgen.sw_start or ta_worldgen.ham_start)
-    ta_worldgen.together = not ((not ta_worldgen.rog) and ta_worldgen.together_not_mainland)
-]]
 
     local save = old_generatemap(prefab, map_width, map_height, tasks, level, level_type, ...)
 
