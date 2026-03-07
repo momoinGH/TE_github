@@ -1273,6 +1273,8 @@ function IsOceanTile(tile) end
 function IsLandTile(tile) end
 function GetOceanDepthAtPosition(x, y, z) end
 function GetOceanDepthAtPoint(pt) end
-
+function TintByOceanTile(inst) end
 
 TileGroupManager = {}
+
+function VecUtil_NormalAndLength(p1_x, p1_z) end

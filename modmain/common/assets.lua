@@ -173,13 +173,6 @@ Assets =
 
     Asset("ANIM", "anim/butterflymuffin.zip"),
 
-	--蘑菇农场额外种植动画包，来自老版棱镜
-    Asset("ANIM", "anim/mushroom_farm_cutlichen_build.zip"),
-    Asset("ANIM", "anim/mushroom_farm_foliage1_build.zip"),
-    Asset("ANIM", "anim/mushroom_farm_foliage2_build.zip"),
-    Asset("ANIM", "anim/mushroom_farm_quagmire_mushrooms_build.zip"),
-    Asset("ANIM", "anim/mushroom_farm_yellow_cap_build.zip"),
-
     -- @Runar: 声明资产不需要声明tex
     Asset("ATLAS", "images/names_wilbur.xml"),
     Asset("ATLAS", "images/names_woodlegs.xml"),

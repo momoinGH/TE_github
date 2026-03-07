@@ -16,14 +16,17 @@ local function ontornadolifetime(inst)
     inst.task = nil
     inst.Physics:Stop()
     inst.AnimState:PlayAnimation("tornado_pst")
-    inst:DoTaskInTime(1, inst:Remove())
+    inst:DoTaskInTime(1, inst.Remove)
 end
 
 local function SetDuration(inst, duration)
     if inst.task ~= nil then
         inst.task:Cancel()
+        inst.task = nil
     end
-    inst.task = inst:DoTaskInTime(duration, ontornadolifetime)
+    if inst:IsValid() then
+        inst.task = inst:DoTaskInTime(duration, ontornadolifetime)
+    end
 end
 
 local function causadano(inst)

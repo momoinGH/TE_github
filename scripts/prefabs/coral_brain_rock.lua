@@ -181,7 +181,6 @@ local function fn()
 	inst:AddTag("mudacamada")
 	inst:AddTag("aquatic")
 	inst:AddTag("ignorewalkableplatforms")
-	inst:AddTag("quebraonda")
 
 	inst.entity:SetPristine()
 

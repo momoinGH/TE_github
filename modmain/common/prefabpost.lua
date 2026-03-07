@@ -37,11 +37,13 @@ modimport "modmain/common/components/plantregrowth.lua"
 modimport "modmain/common/components/areaaware.lua"
 modimport "modmain/common/components/oar.lua"
 
+
+
 ----------------------------------------------------------------------------------------------------
 
 
 modimport "modmain/common/prefabs/oceanfishdef"
-modimport "modmain/common/prefabs/allplayers"
+modimport "modmain/common/prefabs/player"
 --modimport "modmain/common/prefabs/player_classified"
 modimport "modmain/common/prefabs/world"
 --modimport "modmain/common/poisonable"
@@ -49,3 +51,7 @@ modimport("modmain/common/prefabs/guard_corp")               --守卫保护作�
 modimport("modmain/common/prefabs/player_vision_post")       --四眼镜、蝙蝠帽所用
 modimport "modmain/common/prefabs/farm_plant_randomseed.lua" --植物再生
 modimport "modmain/common/prefabs/dock_kit.lua"              --码头套件
+modimport "modmain/common/prefabs/mosquitosack.lua"
+modimport "modmain/common/prefabs/mushroom_farm.lua"
+modimport "modmain/common/prefabs/warningshadow.lua"
+modimport "modmain/common/prefabs/wobster.lua"

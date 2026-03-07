@@ -6,6 +6,7 @@ local easing = require("easing")
 
 --------------------------------------------------------------------------
 --[[ BaseHassler class definition ]]
+-- 豹卷风生成
 --------------------------------------------------------------------------
 return Class(function(self, inst)
 	assert(TheWorld.ismastersim, "Beargerspawner should not exist on client")

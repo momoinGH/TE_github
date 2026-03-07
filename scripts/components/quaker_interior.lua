@@ -35,6 +35,7 @@ local quakelevels =
 	},
 }
 
+-- 哈姆雷特蚁后地震生成
 local Quaker_Interior = Class(function(self, inst)
 	self.inst = inst
 	self.timetospawn = 0

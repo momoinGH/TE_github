@@ -95,14 +95,14 @@ AddComponentPostInit("dynamicmusic", function(self, inst)
     self.inst:ListenForEvent("playeractivated", function(src, player)
         -- print "playeractivated111111111"
         if player and _activatedplayer ~= player then
-            player:ListenForEvent("regionchange_client", MusicReDirect)
+            player:ListenForEvent("changearea", MusicReDirect)
             player:DoTaskInTime(1, MusicReDirect) --initialise
         end
         _activatedplayer = player
     end)
     self.inst:ListenForEvent("playerdeactivated", function(src, player)
         if player then
-            player:RemoveEventCallback("regionchange_client", MusicReDirect)
+            player:RemoveEventCallback("changearea", MusicReDirect)
             if _activatedplayer == player then
                 _activatedplayer = nil
             end

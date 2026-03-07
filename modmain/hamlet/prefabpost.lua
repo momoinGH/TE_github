@@ -1,10 +1,12 @@
 local Utils = require "tropical_utils/utils"
 
+AddReplicableComponent("hayfever")
+AddReplicableComponent("hayfever")
+
 if TUNING.tropical.only_hamlet then
     modimport "modmain/hamlet/sim_ham" --ham cloud
 end
 
-AddReplicableComponent("hayfever")
 
 modimport "modmain/hamlet/simutil"
 modimport "modmain/common/poisonable"
@@ -18,7 +20,10 @@ modimport "modmain/hamlet/components/edible"
 
 modimport "modmain/hamlet/AddIronLordHandlers" --活性机甲处理
 modimport "modmain/hamlet/AddIronLordPostinit" --活性机甲构造
-
+modimport "modmain/hamlet/prefabs/molehat.lua" --鼹鼠帽
+modimport "modmain/hamlet/prefabs/player.lua"
+modimport "modmain/hamlet/prefabs/world.lua"
+modimport "modmain/hamlet/prefabs/forest.lua"
 
 ----------------------------------------------------------------------------------------------------
 

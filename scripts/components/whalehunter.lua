@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------
 --[[ Hunter class definition ]]
 --------------------------------------------------------------------------
-
+-- 鲸鱼生成
 return Class(function(self, inst)
     assert(TheWorld.ismastersim, "Hunter should not exist on client")
 

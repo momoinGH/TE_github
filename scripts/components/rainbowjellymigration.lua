@@ -1,6 +1,6 @@
 -- manages the migration event of the rainbowjellyfish
 
-
+-- 彩虹水母迁徙
 RainbowJellyfishMigrationManager = Class(function(self, inst)
     self.inst = inst
     self.diad = 0

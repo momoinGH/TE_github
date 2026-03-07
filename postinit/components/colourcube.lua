@@ -153,7 +153,7 @@ AddComponentPostInit("colourcube", function(self)
 	end
 	self.inst:ListenForEvent("playeractivated", function(src, player)
 		if player and _activatedplayer ~= player then
-			player:ListenForEvent("regionchange_client", onClimateDirty)
+            player:ListenForEvent("changearea", onClimateDirty)
 			self.inst:WatchWorldState("startaporkalypse", onClimateDirtyfast)
 			self.inst:WatchWorldState("stopaporkalypse", onClimateDirtyfast)
 			player:DoTaskInTime(0, function() UpdateAmbientCCTable(.01) end) --initialise
@@ -162,7 +162,7 @@ AddComponentPostInit("colourcube", function(self)
 	end)
 	self.inst:ListenForEvent("playerdeactivated", function(src, player)
 		if player then
-			player:RemoveEventCallback("regionchange_client", onClimateDirty)
+            player:RemoveEventCallback("changearea", onClimateDirty)
 			player:StopWatchingWorldState("startaporkalypse", onClimateDirtyfast)
 			player:StopWatchingWorldState("stopaporkalypse", onClimateDirtyfast)
 			if _activatedplayer == player then

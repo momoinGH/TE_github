@@ -32,8 +32,13 @@ function ProErrorHandle(msg, has_trace, dev_can_crash)
     else
         s = s .. tostring(msg) .. "\nLUA ERROR stack traceback:（方便搜索）" --方便搜索
     end
-    if proisdev and dev_can_crash then
-        error(s)
+    if proisdev then
+        if dev_can_crash then
+            error(s)
+        else
+            c_announce(s) --公告提示一下
+            print(s)
+        end
     else
         print(s)
     end

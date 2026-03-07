@@ -58,14 +58,14 @@ AddComponentPostInit("oceancolor", function(self)
 
 	self.inst:ListenForEvent("playeractivated", function(src, player)
 		if player and _activatedplayer ~= player then
-			player:ListenForEvent("regionchange_client", OnRegionChanged)
+            player:ListenForEvent("changearea", OnRegionChanged)
 			player:DoTaskInTime(0, function() OnRegionChanged() end) --initialise
 		end
 		_activatedplayer = player
 	end)
 	self.inst:ListenForEvent("playerdeactivated", function(src, player)
 		if player then
-			player:RemoveEventCallback("regionchange_client", OnRegionChanged)
+            player:RemoveEventCallback("changearea", OnRegionChanged)
 			if _activatedplayer == player then
 				_activatedplayer = nil
 			end

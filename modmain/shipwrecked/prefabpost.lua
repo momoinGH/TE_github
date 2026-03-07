@@ -4,7 +4,10 @@ modimport "modmain/shipwrecked/components/builder"
 modimport "modmain/shipwrecked/components/builder_replica"
 modimport "modmain/shipwrecked/components/flotsamgenerator" --漂浮物刷新
 
-
+modimport "modmain/shipwrecked/prefabs/sapling.lua"
+modimport "modmain/shipwrecked/prefabs/ash.lua"
+modimport "modmain/shipwrecked/prefabs/trinkets.lua"
+modimport "modmain/shipwrecked/prefabs/forest.lua"
 
 ----------------------------------------------------------------------------------------------------
 

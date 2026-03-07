@@ -95,7 +95,7 @@ end
 
 local NUM_TRINKETS_SW = 23
 local ret = {}
-for k =13,NUM_TRINKETS_SW do
+for k = 13, NUM_TRINKETS_SW do
     table.insert(ret, MakeTrinket(k))
 end
 

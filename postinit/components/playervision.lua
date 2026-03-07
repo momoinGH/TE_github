@@ -38,7 +38,7 @@ AddComponentPostInit("playervision", function(self)
     -- self.inst:ListenForEvent("enterinterior_client", function() self:UpdateCCTable() end)
     -- self.inst:ListenForEvent("leaveinterior_client", function() self:UpdateCCTable() end)
     -- self.inst:WatchWorldState("isaporkalypse", function() self:UpdateCCTable() end)
-    self.inst:ListenForEvent("regionchange_client", function() self:UpdateCCTable() end)
+    self.inst:ListenForEvent("changearea", function() self:UpdateCCTable() end)
 
     local _UpdateCCTable = self.UpdateCCTable
     function self:UpdateCCTable()

@@ -95,7 +95,6 @@ local function fn(Sim)
     inst.Light:SetFalloff(0.5)
     inst.Light:SetRadius(2)
 
-    inst:AddTag("quebraonda")
     inst:AddTag("blocker")
     inst:AddTag("ignorewalkableplatforms")
     inst:AddTag("noauradamage")

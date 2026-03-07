@@ -1,6 +1,7 @@
 local SPAWNDIST = 40
 local TESTTIME = 100 --TUNING.SEG_TIME*4
 
+-- 饥荒大鹏鸟管理
 local Rocmanager = Class(function(self, inst)
 	self.disabled = false
 	self.inst = inst

@@ -21,18 +21,9 @@ modimport("postinit/components/dynamicmusic")
 
 ---------------------prefabs------------------------------
 
-modimport("postinit/prefabs/lots_of_things")
-modimport("postinit/prefabs/meatrack")
-modimport("postinit/prefabs/mosquitosack")
-modimport("postinit/prefabs/mushroom_farm")
-modimport("postinit/prefabs/player_classified")
--- modimport("postinit/prefabs/player_hayfever")
----modimport("postinit/prefabs/player") --shopper, drownable, infestable***
-modimport("postinit/prefabs/sword_lunarplant") --亮茄剑加劈砍功能
-modimport("postinit/prefabs/trinket_1")
-modimport("postinit/prefabs/warningshadow")
-modimport("postinit/prefabs/wobster")
-modimport("postinit/prefabs/world")
+
+
+
 
 modimport("postinit/prefabs/quaker_rocks")         --删除多余的地震石头
 modimport("postinit/prefabs/koalefant_summer")     --冰岛翻冬象
@@ -43,7 +34,6 @@ modimport("postinit/prefabs/gnarwail_attack_horn") --一角鲸扎小饼船
 ---modimport("postinit/screens/playerhud")      ---雾和花粉症效果在这里
 
 modimport("postinit/widgets/craftingmenu_ingredients")
---("postinit/widgets/containers") --new containers
 ---modimport("postinit/widgets/crafttabs")优化制作栏***
 ---modimport("postinit/widgets/healthbadge")毒在血量上的显示***
 ---modimport("postinit/widgets/seasonsdisplay.lua") --大树藤树荫层级？***

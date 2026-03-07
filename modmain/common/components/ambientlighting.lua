@@ -85,26 +85,6 @@ AddComponentPostInit("ambientlighting", function(self, inst)
 	-- 		PushCurrentColour()
 	-- 	end
 
-
-
-	-- 	self.inst:ListenForEvent("playeractivated", function(src, player)
-	-- 		--print("ambientlighting:OnClimateChanged")
-	-- 		if player then
-	-- 			player:ListenForEvent("regionchange_client", OnClimateChanged)
-	-- 			player:DoTaskInTime(0, function() OnClimateChanged() end) --initialise
-	-- 		end
-	-- 		_activatedplayer = player
-	-- 	end)
-	-- 	self.inst:ListenForEvent("playerdeactivated", function(src, player)
-	-- 		if player then
-	-- 			player:RemoveEventCallback("regionchange_client", OnClimateChanged)
-	-- 		end
-	-- 		if _activatedplayer == player then
-	-- 			_activatedplayer = nil
-	-- 		end
-	-- 	end)
-	-- end
-
 	if true then
 		local DoUpdateFlash = upvaluehelper.Get(self.OnUpdate, "DoUpdateFlash")
 		local PushCurrentColour = upvaluehelper.Get(self.OnUpdate, "PushCurrentColour")

@@ -353,7 +353,6 @@ local function fn()
 	inst:AddTag("epic")
 	inst:AddTag("noteleport")
 	inst:AddTag("mudacamada")
-	inst:AddTag("quebraonda")
 
 	MakeCharacterPhysics(inst, 1000, 1)
 

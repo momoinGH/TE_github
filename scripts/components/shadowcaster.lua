@@ -1,22 +1,18 @@
 --local SHADE = 0.3
 
-function unshadow(guid, data)
+local function unshadow(guid, data)
 	local inst = Ents[guid]
 
 	if inst and inst:HasTag("player") then
 		inst:RemoveTag("under_shadowcaster")
-	else
-		TheWorld.components.shadowmanager:PopShadow(inst)
 	end
 end
 
-function shadow(guid)
+local function shadow(guid)
 	local inst = Ents[guid]
 
 	if inst and inst:HasTag("player") then
 		inst:AddTag("under_shadowcaster")
-	else
-		TheWorld.components.shadowmanager:PushShadow(inst)
 	end
 end
 

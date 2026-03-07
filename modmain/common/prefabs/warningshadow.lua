@@ -1,3 +1,4 @@
+-- 圆形阴影从大到小，然后消失
 local function shrink(inst, times, startsize, endsize)
     inst.AnimState:SetMultColour(1, 1, 1, 0.33)
     inst.Transform:SetScale(startsize, startsize, startsize)
