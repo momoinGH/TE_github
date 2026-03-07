@@ -185,9 +185,11 @@ local function fn()
     inst:AddTag("tubertree")
     inst:AddTag("plant")
     inst:AddTag("spyable")
-    
+
     inst.AnimState:SetBuild("tuber_tree_build")
     inst.AnimState:SetBank("tubertree")
+
+    inst:SetPrefabName("tubertree") --plantregrowth组件需要先设置inst.prefab的值
 
     MakeSnowCoveredPristine(inst)
 

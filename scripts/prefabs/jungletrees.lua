@@ -627,6 +627,8 @@ local function makefn(build, stage, data)
 
 		minimap:SetPriority(-1)
 
+        inst:SetPrefabName(GetBuild(inst).prefab_name)
+
 		inst:AddTag("tree")
 		inst:AddTag("workable")
 		inst:AddTag("shelter")
@@ -690,8 +692,6 @@ local function makefn(build, stage, data)
 
 		MakeSnowCovered(inst, .01)
 		---------------------
-
-		inst:SetPrefabName(GetBuild(inst).prefab_name)
 
 		if data == "burnt" then
 			OnBurnt(inst)

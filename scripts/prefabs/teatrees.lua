@@ -426,6 +426,8 @@ local function tree(name, stage, type)
         anim:OverrideSymbol("swap_leaves", treecommon.leavesbuild, "swap_leaves")
         anim:SetMultColour(inst.color, inst.color, inst.color, 1)
 
+        inst:SetPrefabName(treecommon.prefab_name)
+
         MakeObstaclePhysics(inst, .25)
 
         inst.MiniMapEntity:SetIcon("teatree.png")
@@ -482,8 +484,6 @@ local function tree(name, stage, type)
         inst.OnPreLoad = OnPreLoad
 
         MakeSnowCovered(inst, .01)
-
-        inst:SetPrefabName(treecommon.prefab_name)
 
         spawner_presetup(inst)
         if type == "burnt" then

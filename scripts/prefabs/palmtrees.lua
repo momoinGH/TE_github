@@ -691,6 +691,8 @@ local function makefn(build, stage, data)
 		local color = 0.5 + math.random() * 0.5
 		anim:SetMultColour(color, color, color, 1)
 
+        inst:SetPrefabName(GetBuild(inst).prefab_name)
+
 		inst.entity:SetPristine()
 
 		if not TheWorld.ismastersim then
@@ -740,8 +742,6 @@ local function makefn(build, stage, data)
 
 		MakeSnowCovered(inst, .01)
 		---------------------
-
-		inst:SetPrefabName(GetBuild(inst).prefab_name)
 
 		if data == "burnt" then
 			OnBurnt(inst)

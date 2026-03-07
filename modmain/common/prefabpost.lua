@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 modimport "modmain/common/pro_componentaction"          --一个功能比较强大的组件，可以在预制件里定义ACTION的逻辑
 modimport "modmain/common/animstate"                    -- AnimState 增强
 modimport "modmain/common/standardcomponents"
