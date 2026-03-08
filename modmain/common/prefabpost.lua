@@ -55,3 +55,13 @@ modimport "modmain/common/prefabs/mosquitosack.lua"
 modimport "modmain/common/prefabs/mushroom_farm.lua"
 modimport "modmain/common/prefabs/warningshadow.lua"
 modimport "modmain/common/prefabs/wobster.lua"
+
+
+
+AddPrefabPostInitAny(function(inst)
+    if not TheWorld.ismastersim then return end
+
+    if TheWorld.components.tro_tempentitytracker and TheWorld.components.tro_tempentitytracker:KeyExists(inst.prefab) then
+        TheWorld.components.tro_tempentitytracker:OnEntSpawned(inst)
+    end
+end)

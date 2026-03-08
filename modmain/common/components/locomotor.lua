@@ -23,7 +23,7 @@ local function UpdateGroundSpeedMultiplierAfter(retTab, self)
             self.groundspeedmultiplier = 0.8
         end
     end
-    if current_ground_tile == GROUND.COBBLEROAD then-- 修改石板路的加速
+    if current_ground_tile == GROUND.COBBLEROAD then -- 修改石板路的加速
         self.groundspeedmultiplier = 1.3
     end
     return retTab
@@ -76,13 +76,7 @@ local function ExternalSpeedMultiplierBefore(self)
     end
     -------------------------------------------------------------------------------------------
 
-    local groggy_modifier = 1
-
-    if self.inst.components.grogginess and self.inst:HasTag("groggy") then
-        groggy_modifier = self.inst.components.grogginess.speed_mod
-    end
-
-    return self.externalspeedmultiplier * wind_speed * wave_speed * flood_speed * groggy_modifier
+    return self.externalspeedmultiplier * wind_speed * wave_speed * flood_speed
 end
 
 ----------------------------------------------------------------------------------------------------

@@ -1,7 +1,6 @@
 -- 如果夏季考拉象在冰岛上生成则替换成冬季的
 local function OnSpawnedForHunt(inst, data)
-    local ground = TheWorld.Map:GetTileAtPoint(inst.Transform:GetWorldPosition())
-    if ground == GROUND.SNOWLAND or ground == GROUND.ICELAND then
+    if inst:IsInFrostisLandArea() then
         ReplacePrefab(inst, "koalefant_winter")
     end
 end

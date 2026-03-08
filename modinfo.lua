@@ -142,6 +142,7 @@ local function frost_island(id)
 end
 
 
+-- TODO 重新整理配置项，迭代期间先不管，迭代完成后再处理
 configuration_options =
 {
 	{

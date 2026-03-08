@@ -367,7 +367,7 @@ function d_ground(ground, pt)
 end
 
 require("debugcommands");
-d_ground(WORLD_TILES.LILYPOND, ConsoleWorldPosition());
+d_ground(WORLD_TILES.LILYPOND);
 
 ---不知道有啥用，但是角色会有一个从全黑到正常的过渡动画
 function d_portalfx()
@@ -1278,3 +1278,5 @@ function TintByOceanTile(inst) end
 TileGroupManager = {}
 
 function VecUtil_NormalAndLength(p1_x, p1_z) end
+
+Image = Class(Widget, function(self, atlas, tex, default_tex) end)

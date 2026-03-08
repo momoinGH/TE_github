@@ -8,7 +8,7 @@ function EntityScript:IsInTropicalArea()
             and true
             or false
     end
-    return TheWorld.Map:IsTropicalAreaAtPoint(self:GetPosition():Get())
+    return TheWorld.Map:IsTropicalAreaAtPoint(self.Transform:GetWorldPosition())
 end
 
 -- 海难区域
@@ -16,7 +16,7 @@ function EntityScript:IsInShipwreckedArea()
     if self.components.areaaware then
         return self.components.areaaware:CurrentlyInTag("shipwrecked") and true or false
     end
-    return TheWorld.Map:IsShipwreckedAreaAtPoint(self:GetPosition():Get())
+    return TheWorld.Map:IsShipwreckedAreaAtPoint(self.Transform:GetWorldPosition())
 end
 
 --哈姆雷特区域
@@ -24,7 +24,7 @@ function EntityScript:IsInHamletArea()
     if self.components.areaaware then
         return self.components.areaaware:CurrentlyInTag("hamlet") and true or false
     end
-    return TheWorld.Map:IsHamletAreaAtPoint(self:GetPosition():Get())
+    return TheWorld.Map:IsHamletAreaAtPoint(self.Transform:GetWorldPosition())
 end
 
 --火山区域
@@ -32,7 +32,20 @@ function EntityScript:IsInVolcanoArea()
     if self.components.areaaware then
         return self.components.areaaware:CurrentlyInTag("volcano") and true or false
     end
-    return TheWorld.Map:IsVolcanoAreaAtPoint(self:GetPosition():Get())
+    return TheWorld.Map:IsVolcanoAreaAtPoint(self.Transform:GetWorldPosition())
+end
+
+-- TODO 等待给地形加个tag，现在用地皮判断
+-- 水下区域
+function EntityScript:IsInUnderWaterArea()
+    local tile_id = TheWorld.Map:GetTileAtPoint(self.Transform:GetWorldPosition())
+    return tile_id == WORLD_TILES.UNDERWATER_SANDY or tile_id == WORLD_TILES.UNDERWATER_ROCKY
+end
+
+-- 冰岛区域
+function EntityScript:IsInFrostisLandArea()
+    local tile_id = TheWorld.Map:GetTileAtPoint(self.Transform:GetWorldPosition())
+    return tile_id == WORLD_TILES.ICELAND or tile_id == WORLD_TILES.SNOWLAND
 end
 
 -- 根据定义的文件获取事件回调函数，尽量少用，因为文件里定义多个监听时获取的不一定是自己想要的
@@ -71,4 +84,16 @@ function EntityScript:TroGetRoomCenter()
         return nil --没加载room模块
     end
     return TheWorld.Map:TroGetRoomCenter(self.Transform:GetWorldPosition())
+end
+
+-- 是否在哈姆雷特雾气中
+function EntityScript:TroInHamletFog()
+    if self.player_classified then
+        return self.player_classified.pro_fog and self.player_classified.pro_fog:value() or false
+    end
+    --不是玩家
+    if GLOBAL.TroInHamlteFogImple then
+        return TroInHamlteFogImple(self)
+    end
+    return false
 end

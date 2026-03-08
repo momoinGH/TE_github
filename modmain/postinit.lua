@@ -22,19 +22,7 @@ modimport("postinit/components/dynamicmusic")
 ---------------------prefabs------------------------------
 
 
-
-
-
-modimport("postinit/prefabs/quaker_rocks")         --删除多余的地震石头
-modimport("postinit/prefabs/koalefant_summer")     --冰岛翻冬象
-modimport("postinit/prefabs/snowcovered")          --冰岛东西落雪
-modimport("postinit/prefabs/gnarwail_attack_horn") --一角鲸扎小饼船
-
---screens and widgets
----modimport("postinit/screens/playerhud")      ---雾和花粉症效果在这里
-
 modimport("postinit/widgets/craftingmenu_ingredients")
----modimport("postinit/widgets/crafttabs")优化制作栏***
 ---modimport("postinit/widgets/healthbadge")毒在血量上的显示***
 ---modimport("postinit/widgets/seasonsdisplay.lua") --大树藤树荫层级？***
 ---modimport("postinit/widgets/statusdisplays_speed")速度图标？***

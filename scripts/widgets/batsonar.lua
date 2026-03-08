@@ -1,5 +1,6 @@
 local Widget = require "widgets/widget"
 
+-- TODO 这个是什么？哈姆雷特大雾吗
 local BatSonar = Class(Widget, function(self, owner)
     self.owner = owner
     Widget._ctor(self, "BatSonar")
@@ -17,7 +18,7 @@ local BatSonar = Class(Widget, function(self, owner)
     self.transitiontime = 2.0
     self.transitiontimeIN = 0.2
     self.transitiontimeOUT = 5
-    self.transitiontimeREST = 1    
+    self.transitiontimeREST = 1
     self.time = self.transitiontimeIN
     self.currentstate = "out"
     self:Hide()
@@ -38,21 +39,19 @@ function BatSonar:StopSonar()
 end
 
 function BatSonar:UpdateAlpha(dt)
-
     if self.time > 0 then
         self.time = math.max(0, self.time - dt)
     else
         if self.currentstate == "out" then
-
             ThePlayer.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/batmask/sonar")
             local ring = SpawnPrefab("groundpoundring_fx")
-            ring.Transform:SetScale(2,2,2)
-            ring.Transform:SetPosition(ThePlayer.Transform:GetWorldPosition())    
-            
+            ring.Transform:SetScale(2, 2, 2)
+            ring.Transform:SetPosition(ThePlayer.Transform:GetWorldPosition())
+
             ThePlayer:DoTaskInTime(0.1, function()
                 if self.shown then
                     local ring2 = SpawnPrefab("groundpoundring_fx")
-                    ring2.Transform:SetScale(2,2,2)
+                    ring2.Transform:SetScale(2, 2, 2)
                     ring2.Transform:SetPosition(ThePlayer.Transform:GetWorldPosition())
                 end
             end)
@@ -64,7 +63,7 @@ function BatSonar:UpdateAlpha(dt)
             self.currentstate = "out"
             self.alphagoal = 1
             self.time = self.transitiontimeOUT
-        end                
+        end
     end
 
     local mapping = 0

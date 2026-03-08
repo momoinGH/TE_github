@@ -11,11 +11,11 @@ end
 modimport "modmain/hamlet/simutil"
 modimport "modmain/common/poisonable"
 
-
 modimport "modmain/hamlet/components/inventory_replica"
 modimport "modmain/hamlet/components/builder"
 modimport "modmain/hamlet/components/builder_replica"
 modimport "modmain/hamlet/components/edible"
+modimport "modmain/hamlet/components/grogginess.lua" --眩晕、减速
 
 
 modimport "modmain/hamlet/AddIronLordHandlers" --活性机甲处理
@@ -24,6 +24,7 @@ modimport "modmain/hamlet/prefabs/molehat.lua" --鼹鼠帽
 modimport "modmain/hamlet/prefabs/player.lua"
 modimport "modmain/hamlet/prefabs/world.lua"
 modimport "modmain/hamlet/prefabs/forest.lua"
+modimport "modmain/hamlet/prefabs/player_classified.lua" --玩家网络变量
 
 ----------------------------------------------------------------------------------------------------
 

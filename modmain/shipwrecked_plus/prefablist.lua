@@ -1,5 +1,4 @@
 PrefabFiles = {
-    "goldbishop",
     "goldentomb",
     "goldmonkey",
     "goldbishop",

@@ -14,7 +14,8 @@ modimport "modmain/boat/components/playerspawner"
 
 
 modimport "modmain/boat/prefabs/player"
-modimport "modmain/boat/prefabs/gears.lua" --齿轮
+modimport "modmain/boat/prefabs/gears.lua"                --齿轮
+modimport "modmain/boat/prefabs/gnarwail_attack_horn.lua" --一角鲸的角
 ----------------------------------------------------------------------------------------------------
 
 
@@ -23,5 +24,3 @@ modimport "modmain/boat/prefabs/gears.lua" --齿轮
 
 
 ----------------------------------------------------------------------------------------------------
-
-

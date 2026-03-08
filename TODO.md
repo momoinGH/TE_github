@@ -5,7 +5,7 @@
 
 
 干掉TA_CONFIG
-
+很多地方通过地皮来判断玩家在什么区域，最好换成inst:IsInxxArea()方法
 
 
 pig_shop

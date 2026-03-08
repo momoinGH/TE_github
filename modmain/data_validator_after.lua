@@ -61,16 +61,8 @@ if proisdev then
         unequipped = true,
     }
 
-    -- 实体被销毁了也能推送的事件
-    local removed_can_events = {
-        onremove = true,
-    }
-
     local OldPushEvent = EntityScript.PushEvent
     EntityScript.PushEvent = function(inst, event, data, ...)
-        if event and not inst:IsValid() and not removed_can_events[event] then
-            ProErrorHandle("对象" .. tostring(inst) .. "被销毁了还会推送事件" .. tostring(event), true, true)
-        end
         if event and need_data_events[event] and not (data == nil or type(data) == "table") then
             ProErrorHandle("事件" .. tostring(event) .. "的参数" .. tostring(data) .. "不是table也不为空，可能导致游戏崩溃", true, true)
         end
