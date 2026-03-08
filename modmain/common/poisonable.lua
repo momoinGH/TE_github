@@ -1,52 +1,75 @@
 -- 中毒
 
+table.insert(Assets, Asset("ANIM", "anim/poison.zip"))
+table.insert(Assets, Asset("ANIM", "anim/poison_meter_overlay.zip"))
+
+----------------------------------------------------------------------------------------------------
+
 AddPrefabPostInitAny(function(inst)
     if inst.components.combat then
         AddComponentIfNot(inst, "poisonable")
     end
 end)
 
-----------------------------------------------------------------------------------------------------
-
-AddClassPostConstruct("screens/playerhud", function(inst)
-    local PoisonOver = require("widgets/poisonover")
-    local fn = inst.CreateOverlays
-    function inst:CreateOverlays(owner)
-        fn(self, owner)
-        self.poisonover = self.overlayroot:AddChild(PoisonOver(owner))
-    end
-end)
-
 local function OnPoisonOverDirty(inst)
-    if inst._parent and inst._parent.HUD then
-        if inst.poisonover:value() then
-            inst._parent.HUD.poisonover:Flash()
-        end
+    if inst._parent then
+        inst._parent:PushEvent("poisondamage")
     end
 end
 
 AddPrefabPostInit("player_classified", function(inst)
-    inst.poisonover = net_bool(inst.GUID, "poison.poisonover", "poisonoverdirty") --中毒HUD
+    inst.poisonover = net_event(inst.GUID, "poison.poisonover", "poisonoverdirty") --中毒扣血事件
 
     if not TheNet:IsDedicated() then
         inst:ListenForEvent("poisonoverdirty", OnPoisonOverDirty)
     end
 end)
 
--- 中毒时血条显示下降箭头
+----------------------------------------------------------------------------------------------------
+
 local function HealthBadgeOnUpdateBefore(self)
-    if not TheNet:IsServerPaused()
-        and self.owner:HasTag("tro_poisoned")
-    then
-        local anim = "arrow_loop_decrease"
-        if self.arrowdir ~= anim then
-            self.arrowdir = anim
-            self.sanityarrow:GetAnimState():PlayAnimation(anim, true)
+    local is_poison = self.owner:HasTag("tro_poisoned")
+    if is_poison ~= self.poisoned then
+        self.poisoned = is_poison
+        if is_poison then --中毒
+            self.poisonanim:GetAnimState():PlayAnimation("activate")
+            self.poisonanim:GetAnimState():PushAnimation("idle", true)
+            self.poisonanim:Show()
+        else --不再中毒
+            self.owner.SoundEmitter:PlaySound("dontstarve_DLC002/common/HUD_antivenom_use")
+            self.poisonanim:GetAnimState():PlayAnimation("deactivate")
         end
-        return nil, true
     end
 end
 
+-- 血条上的中毒动画
+local UIAnim = require "widgets/uianim"
 AddClassPostConstruct("widgets/healthbadge", function(self)
+    self.poisoned = false
+    self.poisonanim = self.underNumber:AddChild(UIAnim())
+    self.poisonanim:GetAnimState():SetBank("poison")
+    self.poisonanim:GetAnimState():SetBuild("poison_meter_overlay")
+    self.poisonanim:GetAnimState():PlayAnimation("deactivate")
+    self.poisonanim:Hide()
+
     Utils.FnDecorator(self, "OnUpdate", HealthBadgeOnUpdateBefore)
+end)
+
+-- 中毒扣血时屏幕闪一下
+local PoisonOver = require("widgets/poisonover")
+AddClassPostConstruct("screens/playerhud", function(self)
+    Utils.FnDecorator(self, "CreateOverlays", nil, function(retTab, self, owner)
+        self.poisonover = self.overlayroot:AddChild(PoisonOver(owner))
+        return retTab
+    end)
+
+    Utils.FnDecorator(self, "SetMainCharacter", nil, function(retTab, self, maincharacter)
+        if not maincharacter then
+            return retTab
+        end
+
+        self.inst:ListenForEvent("poisondamage", function(inst, data) return self.poisonover:Flash() end, self.owner)
+
+        return retTab
+    end)
 end)

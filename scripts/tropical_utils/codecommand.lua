@@ -1164,6 +1164,8 @@ net_bytearray = Class(function(self, guid, event) end)
 net_smallbytearray = Class(function(self, guid, event) end)
 -- net_ushortarray         array of 16-bit unsigned integers (max size = 31)
 net_ushortarray = Class(function(self, guid, event) end)
+-- as a wrapper over net_bool
+net_event = Class(function(self, guid, event) end)
 
 CRAFTING_FILTERS = {}
 

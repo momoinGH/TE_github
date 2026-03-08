@@ -2,7 +2,7 @@
 local FogSpawner = Class(function(self, inst)
     self.inst = inst
 
-    self.in_fog_players = {} --正在起雾的玩家
+    self.in_fog_players = {} --在起雾范围的玩家
     self.grog_players = {}   --正在减速的玩家
 
     inst:StartUpdatingComponent(self)
@@ -31,14 +31,17 @@ function FogSpawner:OnUpdate(dt)
             PlayerStopFog(self, player)
         end
 
-        local can_resist = TroCanResistHamletFog(player)
-        if can_resist == self.grog_players[player.GUID] then
-            if can_resist then
-                player:PushEvent("stopfoggrog")
-                self.grog_players[player.GUID] = nil
-            else
-                player:PushEvent("startfoggrog")
-                self.grog_players[player.GUID] = true
+        if self.grog_players[player.GUID] or (self.in_fog_players[player] and not self.grog_players[player.GUID]) then
+            --刷新抵抗情况
+            local can_resist = TroCanResistHamletFog(player)
+            if can_resist == self.grog_players[player.GUID] then
+                if can_resist then
+                    player:PushEvent("stopfoggrog")
+                    self.grog_players[player.GUID] = nil
+                else
+                    player:PushEvent("startfoggrog")
+                    self.grog_players[player.GUID] = true
+                end
             end
         end
     end

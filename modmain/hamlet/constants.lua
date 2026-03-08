@@ -34,3 +34,4 @@ function TroCanResistHamletFog(player)
         return player.replica.inventory:EquipHasTag("clearfog")
     end
 end
+GLOBAL.TroCanResistHamletFog = TroCanResistHamletFog
