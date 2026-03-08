@@ -163,7 +163,7 @@ end
 
 AddStategraphState("wilson_client",
     State {
-        name = "goggleattack",   --激光眼镜
+        name = "goggleattack", --激光眼镜
         tags = { "attack", "notalking", "abouttoattack" },
 
         onenter = function(inst)
@@ -179,7 +179,7 @@ AddStategraphState("wilson_client",
             local equip = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
             if (equip ~= nil and equip.projectiledelay or 0) > 0 then
                 inst.sg.statemem.projectiledelay = (inst.sg.statemem.chained and 9 or 14) * FRAMES -
-                equip.projectiledelay
+                    equip.projectiledelay
                 if inst.sg.statemem.projectiledelay <= 0 then
                     inst.sg.statemem.projectiledelay = nil
                 end

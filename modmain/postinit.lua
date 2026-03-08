@@ -21,14 +21,6 @@ modimport("postinit/components/dynamicmusic")
 
 ---------------------prefabs------------------------------
 
-
----modimport("postinit/widgets/seasonsdisplay.lua") --大树藤树荫层级？***
----modimport("postinit/widgets/statusdisplays_speed")速度图标？***
---modimport("postinit/widgets/uiclock_bloodmoon")哈姆雷特血月，在ui里面有了
-modimport("postinit/widgets/image")
-modimport("postinit/widgets/mapstyle") --地图边框
-
---stagegraph
 --modimport("postinit/stategraphs/stagegraph_wilson") --需要整理
 --modimport("postinit/stategraphs/SGwilson")
 --modimport("postinit/stategraphs/SGwilson_client")
