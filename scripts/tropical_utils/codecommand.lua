@@ -1296,4 +1296,7 @@ terrain = { rooms = {}, filter = {} }
 
 
 
-function SetPause(val,reason) end
+function SetPause(val, reason) end
+
+-- 加载预制件文件，返回文件定义的预制件对象
+function LoadPrefabFile( filename, async_batch_validation, search_asset_first_path ) end

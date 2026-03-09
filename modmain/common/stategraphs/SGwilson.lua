@@ -71,11 +71,26 @@ local states = {
         {
             EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
             EventHandler("animover", function(inst)
-                if inst.AnimState:AnimDone() then
-                    inst.sg:GoToState("idle")
+                if not inst:GetBufferedAction() then
+                    inst.sg:GoToState("shear_end")
                 end
             end),
         },
+    },
+
+    State {
+        name = "shear_end",
+        tags = { "working" },
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("cut_pst")
+        end,
+
+        events =
+        {
+            EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+
     },
 
     --矛枪

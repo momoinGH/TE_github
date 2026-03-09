@@ -17,6 +17,7 @@ local actionhandlers = {
             return "pan_start"
         end
     end),
+    ActionHandler(ACTIONS.SMELT, "doshortaction")
 }
 
 local eventhandlers = {
@@ -315,7 +316,29 @@ local states = {
         events =
         {
             EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
-            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("investigate_post")
+            end),
+        },
+    },
+
+    State { name = "investigate_post",
+        tags = { "investigating", "working" },
+        onenter = function(inst)
+            if inst.components.rider:IsRiding() then
+                inst.Transform:SetFourFaced()
+            end
+            inst.AnimState:PlayAnimation("lens_pst")
+        end,
+        onexit = function(inst)
+            if inst.components.rider:IsRiding() then
+                inst.Transform:SetSixFaced()
+            end
+        end,
+        events =
+        {
+            EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 

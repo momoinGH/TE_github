@@ -33,7 +33,6 @@ PrefabFiles =
     "quagmire_fern",
     "quagmire_pebblecrab",
     "quagmire_safe",
-    "quagmire_park_gate",
     "quagmire_parkspike",
     "quagmire_key",
     "quagmire_goatkid",

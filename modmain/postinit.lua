@@ -20,5 +20,3 @@ modimport("postinit/components/dynamicmusic")
 
 
 ---------------------prefabs------------------------------
-
---modimport("postinit/stategraphs/stagegraph_wilson") --需要整理

@@ -4,6 +4,17 @@ Utils.FnDecorator(ACTIONS.COOK, "stroverridefn", function(act)
     end
 end)
 
+local SMELT = Action({ priority = 10, mount_valid = true })
+SMELT.str = (STRINGS.ACTIONS.SMELT)
+SMELT.id = "SMELT"
+SMELT.fn = function(act)
+    if act.target.components.melter then
+        act.target.components.melter:StartCooking()
+        return true
+    end
+end
+AddAction(SMELT)
+
 -- 给予、补货，target支持柜子、柜子的槽、货架
 local PigShopDefs = require("prefabs/pig_shop_defs")
 Constructor.AddAction({ priority = 10, distance = 2, mount_valid = true },

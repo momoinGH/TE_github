@@ -29,7 +29,7 @@ local function callGuards(inst, attacker)
     local eles = TheSim:FindEntities(x, y, z, 30, { "piggolem" })
     if #eles > 5 then return end
 
-    local ents = TheSim:FindEntities(x, y, z, 30, { "hamletteleport" })
+    local ents = TheSim:FindEntities(x, y, z, 30, { "hamletteleport" }) --TODO 没有这个标签，重新实现逻辑
     if #ents > 0 then
         local guardprefab = "piggolem"
         local spawnpt = Vector3(ents[math.random(#ents)].Transform:GetWorldPosition())
