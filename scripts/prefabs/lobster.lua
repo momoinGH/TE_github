@@ -1,22 +1,22 @@
 require "stategraphs/SGwobster"
 require "stategraphs/SGwobsterland"
 
-local lobster_assets            =
+local lobster_assets   =
 {
     Asset("ANIM", "anim/lobster_build.zip"),
     Asset("ANIM", "anim/lobster_build_color.zip"),
-    Asset("ANIM", "anim/lobster.zip"),
+    Asset("ANIM", "anim/lobster.zip"), --TODO 地上龙虾动画有问题，会看不见，Could not find anim [run_loop] in bank [lobster]
     Asset("ANIM", "anim/lobster_water.zip"),
 }
 
-local ocean_prefabs             =
+local ocean_prefabs    =
 {
     "ocean_splash_small1",
     "wobster_sheller_land",
     "lobster_land",
 }
 
-local land_prefabs              =
+local land_prefabs     =
 {
     "lobster_dead",
     "lobster_dead_cooked",

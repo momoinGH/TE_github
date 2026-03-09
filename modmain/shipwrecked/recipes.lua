@@ -30,3 +30,5 @@ AddRecipe2("wind_conch", { Ig("obsidian", 4, v_atlas), Ig("purplegem", 1), Ig("m
 AddRecipe2("sail_stick", { Ig("obsidian", 2, v_atlas), Ig("nightmarefuel", 3), Ig("magic_seal", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
 
 AddRecipe2("porto_sea_yard", { Ig("limestone", 6), Ig("tar", 6), Ig("log", 4) }, TECH.SEAFARING_TWO, nil, { "STRUCTURES", "NAUTICAL" })
+AddRecipe2("seatrap", { Ingredient("palmleaf", 4), Ingredient("messagebottleempty_sw", 2), Ingredient("jellyfish", 1) }, TECH.SEAFARING_TWO, nil,
+{ "TOOLS", "GARDENING", "NAUTICAL" })

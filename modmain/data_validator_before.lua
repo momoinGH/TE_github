@@ -110,7 +110,7 @@ Utils.FnDecorator(GLOBAL, "LoadPrefabFile", nil, function(retTab, filename, asyn
 end)
 
 ----------------------------------------------------------------------------------------------------
--- 检查ACTION是否定义
+-- 检查ActionHandler的ACTION是否定义
 local OldAddStategraphActionHandler = env.AddStategraphActionHandler
 env.AddStategraphActionHandler = function(stategraph, handler, ...)
     prodevassert(handler and handler.action and ACTIONS[handler.action.id], "发现没有定义的ACTION，你应该先在actions.lua文件中定义ACTION")

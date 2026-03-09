@@ -374,7 +374,6 @@ AddRecipe2("boatrepairkit", { Ingredient("boards", 2), Ingredient("stinger", 2),
 
 AddRecipe2("porto_buoy", { Ingredient("messagebottleempty_sw", 1), Ingredient("bamboo", 4), Ingredient("bioluminescence", 2) }, TECH.SEAFARING_TWO, { image = "buoy.tex" },
     { "LIGHT", "STRUCTURES", "NAUTICAL" })
-AddRecipe2("seatrap", { Ingredient("palmleaf", 4), Ingredient("messagebottleempty_sw", 2), Ingredient("jellyfish", 1) }, TECH.SEAFARING_TWO, nil, { "TOOLS", "GARDENING", "NAUTICAL" })
 
 AddRecipe2("telescope", { Ingredient("goldnugget", 1), Ingredient("pigskin", 1), Ingredient("messagebottleempty_sw", 1) }, TECH.SEAFARING_TWO, nil, { "TOOLS", "NAUTICAL" })
 AddRecipe2("supertelescope", { Ingredient("telescope", 1), Ingredient("goldnugget", 1), Ingredient("tigereye", 1) }, TECH.SEAFARING_TWO, nil, { "TOOLS", "NAUTICAL" })
@@ -716,8 +715,6 @@ SortAfter("aerodynamichat", "gasmaskhat", "CLOTHING")
 SortAfter("double_umbrellahat", "eyebrellahat", "CLOTHING")
 SortAfter("double_umbrellahat", "eyebrellahat", "RAIN")
 SortAfter("double_umbrellahat", "eyebrellahat", "SUMMER")
-SortAfter("seatrap", "birdtrap", "TOOLS")
-SortAfter("seatrap", "birdtrap", "GARDENING")
 
 SortAfter("telescope", "compass", "TOOLS")
 SortAfter("supertelescope", "telescope", "TOOLS")

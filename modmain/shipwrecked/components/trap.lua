@@ -1,4 +1,8 @@
+-- 海上陷阱可以抓海里的龙虾
+
 local function DoSpringBefore(self)
+    if not self.pro_water then return end
+
     if self.target
         and self.target:IsValid()
         and not self.target:IsInLimbo()
@@ -6,13 +10,13 @@ local function DoSpringBefore(self)
         and self.target.components.inventoryitem ~= nil
         and self.target.components.inventoryitem.trappable
     then
-        local old = self.target.prefab
-        self.target.prefab = old == "lobster" and "lobster_land"
-            or old == "wobster_sheller" and "wobster_sheller_land"
-            or old == "wobster_moonglass" and "wobster_moonglass_land"
+        if self.target:HasTag("lobster") then
+            self.target.prefab = self.target.prefab .. "_land"
+        end
     end
 end
 
 AddComponentPostInit("trap", function(self)
+    self.pro_water = nil --海里的陷阱
     Utils.FnDecorator(self, "DoSpring", DoSpringBefore)
 end)

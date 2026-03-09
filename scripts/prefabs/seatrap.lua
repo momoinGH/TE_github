@@ -84,8 +84,7 @@ local function seafn()
 	inst.components.trap.targettag = "lobster"
 	inst.components.trap:SetOnHarvestFn(onharvested)
 	inst.components.trap.baitsortorder = 1
-
-	inst.components.trap.water = true
+    inst.components.trap.pro_water = true
 	inst.components.trap.onbaited = sea_onbaited
 	inst.components.trap.range = 2
 
