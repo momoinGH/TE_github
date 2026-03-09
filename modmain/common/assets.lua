@@ -13,7 +13,7 @@ Assets =
     Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"),
     Asset("SOUND", "sound/DLC003_sfx.fsb"),
     Asset("SOUND", "sound/DLC003_music_stream.fsb"),
-    Asset("SOUND", "sound/DLC003_AMB_stream.fsb"),
+    Asset("SOUND", "sound/DLC003_AMB_stream.fsb"), --这个太大，有106MB
 
     Asset("SOUNDPACKAGE", "sound/dontstarve_wagstaff.fev"),
     Asset("SOUND", "sound/dontstarve_wagstaff.fsb"),

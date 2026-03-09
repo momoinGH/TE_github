@@ -2,7 +2,7 @@
 mod前缀名：pro_
 
 ProErrorHandle：错误处理，可打印堆栈可设置仅开发环境崩溃
-prosoftassert：仅开发环境崩溃的断言
+prodevassert：仅开发环境崩溃的断言
 modimportmodulefile：允许一个文件重复导入，不会崩溃
 
 TRO_AddComponentAction：添加ComponentAction，允许组件行为重复
@@ -47,10 +47,12 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-modimport "modmain/dev_utils"             --开发环境下辅助用的函数，与游戏无关
-modimport "modmain/data_validator_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
-modimport "modmain/knownmodcheck"         -- 检测不兼容模组并报错崩溃
-modimport "modmain/mods"                  -- 兼容其他mod
+modimport "modmain/dev_utils"                 --开发环境下辅助用的函数，与游戏无关
+if proisdev then
+    modimport "modmain/data_validator_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
+end
+modimport "modmain/knownmodcheck"             -- 检测不兼容模组并报错崩溃
+modimport "modmain/mods"                      -- 兼容其他mod
 
 -- 共同
 modimport "modmain/postinit" --TODO 拆到各个模块中
@@ -58,6 +60,10 @@ modimport "modmain/postinit" --TODO 拆到各个模块中
 modimport "modmain/soundemitter"
 modimport "modmain/modules" --模块导入
 ----------------------------------------------------------------------------------------------------
+
+if proisdev then
+    modimport "modmain/data_validator_after" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
+end
 
 for actiontype, components in pairs(TRO_COMPONENT_ACTIONS) do
     for component, fns in pairs(components) do
@@ -67,7 +73,6 @@ for actiontype, components in pairs(TRO_COMPONENT_ACTIONS) do
     end
 end
 TRO_COMPONENT_ACTIONS = nil
-modimport "modmain/data_validator_after" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 
 env.modimport = old_modimport
 old_modimport = nil

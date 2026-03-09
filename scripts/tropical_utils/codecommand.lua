@@ -1282,3 +1282,11 @@ TileGroupManager = {}
 function VecUtil_NormalAndLength(p1_x, p1_z) end
 
 Image = Class(Widget, function(self, atlas, tex, default_tex) end)
+
+ModManager = {}
+
+
+-- usage:
+-- subfmt("this is my {adjective} string, read it {number} times!", {adjective="cool", number="five"})
+-- => "this is my cool string, read it five times"
+function subfmt(s, tab) end

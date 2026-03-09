@@ -13,7 +13,7 @@ local function OnPlayed(inst, musician, instrument)
     TheWorld:PushEvent("ms_forceprecipitation")
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -26,7 +26,7 @@ local function fn(Sim)
 
     MakeInventoryPhysics(inst)
 
-    inst:AddTag("flutesw")
+    inst:AddTag("flute")
     MakeInventoryFloatable(inst)
 
 
@@ -39,7 +39,7 @@ local function fn(Sim)
     inst:AddComponent("inspectable")
     inst:AddComponent("instrument")
     inst.components.instrument.onplayed = OnPlayed
-    --	inst.components.instrument.sound_noloop = "dontstarve_DLC002/common/ox_flute"
+    inst.components.instrument:SetAssetOverrides("ox_flute", "ox_flute01", "dontstarve_DLC002/common/ox_flute")
 
     inst:AddComponent("tool")
     inst.components.tool:SetAction(ACTIONS.PLAY)
@@ -51,10 +51,6 @@ local function fn(Sim)
     inst.components.finiteuses:SetConsumption(ACTIONS.PLAY, 1)
 
     inst:AddComponent("inventoryitem")
-
-
-    inst.flutebuild = "ox_flute"
-    inst.flutesymbol = "ox_flute01"
 
     return inst
 end

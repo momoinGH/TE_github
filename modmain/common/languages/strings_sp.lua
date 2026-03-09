@@ -1236,12 +1236,10 @@ STRINGS.NAMES.MERM2 = "Merm"
 --------------store---------
 
 --------------actions-------
-STRINGS.ACTIONS.BOATCANNON = "Disparar"
 
 STRINGS.ACTIONS.HACK = "Tajar"
 STRINGS.ACTIONS.STICK = "Pegar"
 STRINGS.TABS.NAUTICALTAB = "Náutico"
-STRINGS.ACTIONS.DESACTIVATESAIL = "Apagar"
 STRINGS.ACTIONS.LANTERNON = "Encender"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "rawling"

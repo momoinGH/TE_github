@@ -1229,12 +1229,10 @@ STRINGS.NAMES.MERM1 = "Merm"
 STRINGS.NAMES.MERM2 = "Merm"
 --------------store---------
 --------------actions-------
-STRINGS.ACTIONS.BOATCANNON = "Shot"
 
 STRINGS.ACTIONS.HACK = "Taglia"
 STRINGS.ACTIONS.STICK = "Bastone"
 STRINGS.TABS.NAUTICALTAB = "Nautico"
-STRINGS.ACTIONS.DESACTIVATESAIL = "Turn Off"
 STRINGS.ACTIONS.LANTERNON = "Turn On"
 
 --------------rawling speak---------------

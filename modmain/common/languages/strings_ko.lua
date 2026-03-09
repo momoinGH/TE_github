@@ -1238,12 +1238,10 @@ STRINGS.NAMES.MERM1 = "Merm"
 STRINGS.NAMES.MERM2 = "Merm"
 --------------store---------
 --------------actions-------
-STRINGS.ACTIONS.BOATCANNON = "발사하기"
 
 STRINGS.ACTIONS.HACK = "베기"
 STRINGS.ACTIONS.STICK = "꽂기"
 STRINGS.TABS.NAUTICALTAB = "항해"
-STRINGS.ACTIONS.DESACTIVATESAIL = "끄기"
 STRINGS.ACTIONS.LANTERNON = "켜기"
 STRINGS.ACTIONS.COLETAR = "걷어내기"
 --------------rawling speak---------------

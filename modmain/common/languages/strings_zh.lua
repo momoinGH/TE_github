@@ -86,10 +86,8 @@ STRINGS.ACTIONS.GIVE.ADDFUEL                            = "添加燃料"
 --SW
 STRINGS.ACTIONS.HACK                                    = "劈砍"
 STRINGS.ACTIONS.STICK                                   = "捣入"
-STRINGS.ACTIONS.DESACTIVATESAIL                         = "关灯"
 STRINGS.ACTIONS.LANTERNON                               = "开灯"
 STRINGS.ACTIONS.PEER                                    = "观察"
-STRINGS.ACTIONS.BOATCANNON                              = "发射"
 STRINGS.ACTIONS.BOATDISMOUNT                            = "上岸"
 
 STRINGS.ACTIONS.DEPLOY.DEPLOYBUOY                       = "部署"
@@ -103,14 +101,9 @@ STRINGS.ACTIONS.DEPLOY.DEPLOYSEA_YARD                   = "部署"
 
 --ham
 STRINGS.ACTIONS.SMELT                                   = "熔炼"
-STRINGS.ACTIONS.SHEAR                                   = "剪"
 
-STRINGS.ACTIONS.PAN                                     = "淘金"
-STRINGS.ACTIONS.PAINT                                   = "涂画"
 STRINGS.ACTIONS.JUMPIN.ENTER                            = "进入"
 STRINGS.ACTIONS.JUMPIN.LEAVE                            = "离开"
-STRINGS.ACTIONS.OPENTUNA                                = "打开"
-STRINGS.ACTIONS.GAS                                     = "喷"
 STRINGS.ACTIONS.TIRO                                    = "射击"
 STRINGS.ACTIONS.CHECKSHOP                               = "花费 {cost} {costprefab}\n购买 {item}"
 
@@ -121,15 +114,6 @@ STRINGS.ACTIONS.PUNCH = "重击"
 
 --gorge
 STRINGS.ACTIONS.STOREOPEN                               = "交易"
-STRINGS.ACTIONS.GRIND                                   = "研磨"
-STRINGS.ACTIONS.SNACKRIFICE                             = "献贡"
-STRINGS.ACTIONS.COLLECTSAP                              = "采集树液"
-STRINGS.ACTIONS.TAKE_SHELF                              = {
-    GENERIC = "拿取",
-    TAKE = "拿取{item}",
-    STEAL = "偷走{item}",
-    BUY = "购买{item}",
-}
 
 -----------选项卡----------
 STRINGS.TABS.NAUTICALTAB                                = "航海"

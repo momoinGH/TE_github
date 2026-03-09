@@ -1,5 +1,5 @@
 STRINGS.ACTIONS.BOATMOUNT = "Montar Bote"
-
+STRINGS.ACTIONS.BOATCANNON = "Disparar"
 
 
 

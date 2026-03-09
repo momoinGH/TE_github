@@ -1,2 +1,2 @@
-AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.GIVE_SHELF, "give"))
-AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.GIVE_SHELF, "give"))
+modimport "modmain/hamlet/stategraphs/SGwilson.lua"
+modimport "modmain/hamlet/stategraphs/SGwilson_client.lua"

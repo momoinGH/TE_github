@@ -55,37 +55,53 @@ local function Chronological(a, b)
     return a.time < b.time
 end
 
-AddStategraphActionHandler("wilson", ActionHandler(ACTIONS.BOATMOUNT, function(inst, act)
-    local x, y, z = act.target.Transform:GetWorldPosition()
-    inst.components.embarker:SetDisembarkPos(x, z)
+----------------------------------------------------------------------------------------------------
 
-    if (inst.components.health == nil or not inst.components.health:IsDead()) and (inst.sg:HasStateTag("moving") or inst.sg:HasStateTag("idle")) then
-        if not inst.sg:HasStateTag("jumping") then
-            return "hop_pre"
+local actionhandlers = {
+    ActionHandler(ACTIONS.BOATMOUNT, function(inst, act)
+        local x, y, z = act.target.Transform:GetWorldPosition()
+        inst.components.embarker:SetDisembarkPos(x, z)
+
+        if (inst.components.health == nil or not inst.components.health:IsDead()) and (inst.sg:HasStateTag("moving") or inst.sg:HasStateTag("idle")) then
+            if not inst.sg:HasStateTag("jumping") then
+                return "hop_pre"
+            end
+        elseif inst.components.embarker then
+            inst.components.embarker:Cancel()
         end
-    elseif inst.components.embarker then
-        inst.components.embarker:Cancel()
-    end
-end))
+    end),
+    ActionHandler(ACTIONS.BOATDISMOUNT, function(inst, act)
+        local x, y, z = act:GetActionPoint():Get()
+        act.doer.components.locomotor:StartHopping(x, z)
+    end),
+    ActionHandler(ACTIONS.BOATCANNON, "doshortaction"),
+}
 
-AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(ACTIONS.BOATDISMOUNT, function(inst, act)
-    local x, y, z = act:GetActionPoint():Get()
-    act.doer.components.locomotor:StartHopping(x, z)
-end))
+local eventhandlers = {
+
+}
+
+local states = {
+
+}
+
+for _, actionhandler in ipairs(actionhandlers) do
+    AddStategraphActionHandler("wilson", actionhandler)
+end
+
+for _, eventhandler in ipairs(eventhandlers) do
+    AddStategraphEvent("wilson", eventhandler)
+end
+
+for _, state in ipairs(states) do
+    AddStategraphState("wilson", state)
+end
+
+----------------------------------------------------------------------------------------------------
 
 
-
--- 划船
 AddStategraphPostInit("wilson", function(sg)
-    Utils.FnDecorator(sg.actionhandlers[ACTIONS.CASTSPELL], "deststate", function(inst)
-        local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-        if item and item:HasTag("telescope") then
-            return { "peertelescope" }, true
-        end
-    end)
-
-    ------------------------------------------------------------------------------------------------
-
+    -- 划船
     Utils.FnDecorator(sg.states["run_start"], "onenter", nil, function(retTab, inst)
         local boat = inst:TroGetSWBoat()
         if boat then

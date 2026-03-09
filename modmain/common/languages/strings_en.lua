@@ -8418,24 +8418,11 @@ STRINGS.ACTIONS.STICK             = "Stick"
 STRINGS.ACTIONS.JUMPIN.ENTER      = "Enter"
 STRINGS.ACTIONS.JUMPIN.LEAVE      = "Leave"
 STRINGS.ACTIONS.JUMPIN.USE        = STRINGS.ACTIONS.USEITEM
-STRINGS.ACTIONS.DESACTIVATESAIL   = "Turn Off"
 STRINGS.ACTIONS.LANTERNON         = "Turn On"
 STRINGS.ACTIONS.TRO_DISMANTLE     = STRINGS.ACTIONS.DISMANTLE
-STRINGS.ACTIONS.TAKE_SHELF        = {
-    GENERIC = "Take",
-    TAKE = "Take {item}",
-    STEAL = "Steal {item}",
-    BUY = "Buy {item}",
-}
-STRINGS.ACTIONS.GAS               = "Gas"
 STRINGS.ACTIONS.TIRO              = "Shoot"
-STRINGS.ACTIONS.OPENTUNA          = "Open"
-STRINGS.ACTIONS.PAINT             = "Paint"
 STRINGS.ACTIONS.SMELT             = "Smelt" --这不是一个action，不过文本需要
-STRINGS.ACTIONS.PAN               = "Pan"
-STRINGS.ACTIONS.COLLECTSAP        = "采集树液"
 STRINGS.ACTIONS.STOREOPEN         = "交易"
-STRINGS.ACTIONS.SNACKRIFICE       = "献贡"
 STRINGS.ACTIONS.LAVASPIT          = "Spit"
 STRINGS.ACTIONS.DEPLOY_AI         = "Deploy AI"
 STRINGS.ACTIONS.FLUP_HIDE         = "FLUP_HIDE"
@@ -8457,11 +8444,7 @@ STRINGS.ACTIONS.RANSACK           = "Ransack"
 STRINGS.ACTIONS.CUREPOISON        = "Curepoison"
 STRINGS.ACTIONS.USEDOOR           = "Usedoor"
 STRINGS.ACTIONS.FIX               = "Fix"
-STRINGS.ACTIONS.COMPACTPOOP       = "Compact Poop"
-STRINGS.ACTIONS.MEAL              = "Meal"
 STRINGS.ACTIONS.INSTALL           = "Install"
-STRINGS.ACTIONS.SNACKRIFICE       = "Snackrifice"
-STRINGS.ACTIONS.BOATCANNON        = "Shoot"
 STRINGS.ACTIONS.BOATDISMOUNT      = "Boat Dismount"
 
 

@@ -68,26 +68,53 @@ local function ConfigureRunState(inst)
     end
 end
 
-AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATMOUNT, function(inst, act)
-    local x, y, z = act.target.Transform:GetWorldPosition()
-    inst.components.embarker:SetDisembarkPos(x, z)
+----------------------------------------------------------------------------------------------------
 
-    if (inst.components.health == nil or not inst.components.health:IsDead()) and (inst.sg:HasStateTag("moving") or inst.sg:HasStateTag("idle")) then
-        if not inst.sg:HasStateTag("jumping") then
-            return "hop_pre"
+local actionhandlers = {
+    ActionHandler(ACTIONS.BOATMOUNT, function(inst, act)
+        local x, y, z = act.target.Transform:GetWorldPosition()
+        inst.components.embarker:SetDisembarkPos(x, z)
+
+        if (inst.components.health == nil or not inst.components.health:IsDead()) and (inst.sg:HasStateTag("moving") or inst.sg:HasStateTag("idle")) then
+            if not inst.sg:HasStateTag("jumping") then
+                return "hop_pre"
+            end
+        elseif inst.components.embarker then
+            inst.components.embarker:Cancel()
         end
-    elseif inst.components.embarker then
-        inst.components.embarker:Cancel()
-    end
-end))
+    end),
 
--- 上岸，开启延迟补偿下主机和客机都执行跳跃逻辑，避免位置不同步的问题
-AddStategraphActionHandler("wilson_client", ActionHandler(ACTIONS.BOATDISMOUNT, function(inst, act)
-    inst:PerformPreviewBufferedAction()
+    -- 上岸，开启延迟补偿下主机和客机都执行跳跃逻辑，避免位置不同步的问题
+    ActionHandler(ACTIONS.BOATDISMOUNT, function(inst, act)
+        inst:PerformPreviewBufferedAction()
 
-    local x, y, z = act:GetActionPoint():Get()
-    act.doer.components.locomotor:StartHopping(x, z)
-end))
+        local x, y, z = act:GetActionPoint():Get()
+        act.doer.components.locomotor:StartHopping(x, z)
+    end),
+    ActionHandler(ACTIONS.BOATCANNON, "doshortaction"),
+}
+
+local eventhandlers = {
+
+}
+
+local states = {
+
+}
+
+for _, actionhandler in ipairs(actionhandlers) do
+    AddStategraphActionHandler("wilson_client", actionhandler)
+end
+
+for _, eventhandler in ipairs(eventhandlers) do
+    AddStategraphEvent("wilson_client", eventhandler)
+end
+
+for _, state in ipairs(states) do
+    AddStategraphState("wilson_client", state)
+end
+
+----------------------------------------------------------------------------------------------------
 
 AddStategraphPostInit("wilson_client", function(sg)
     -- 划船

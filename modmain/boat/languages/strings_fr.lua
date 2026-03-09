@@ -1,5 +1,5 @@
 STRINGS.ACTIONS.BOATMOUNT = "Monter sur le bateau"
-
+STRINGS.ACTIONS.BOATCANNON = "Tirez"
 
 
 

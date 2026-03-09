@@ -1,5 +1,5 @@
 STRINGS.ACTIONS.BOATMOUNT = "Сесть на"
-
+STRINGS.ACTIONS.BOATCANNON = "Запустить"
 
 
 

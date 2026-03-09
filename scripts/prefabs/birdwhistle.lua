@@ -27,7 +27,7 @@ local function fn(Sim)
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
 
-    inst:AddTag("horn3")
+    inst:AddTag("horn")
 
     inst.AnimState:SetBank("antler")
     inst.AnimState:SetBuild("antler")
@@ -46,7 +46,7 @@ local function fn(Sim)
     inst:AddComponent("instrument")
     inst.components.instrument.range = 0
     inst.components.instrument.onplayed = OnPlayed
-    inst.components.instrument.sound_noloop = "dontstarve_DLC003/common/crafted/roc_flute"
+    inst.components.instrument:SetAssetOverrides("swap_antler", "swap_antler", "dontstarve_DLC003/common/crafted/roc_flute")
 
     inst:AddComponent("tool")
     inst.components.tool:SetAction(ACTIONS.PLAY)
@@ -58,10 +58,6 @@ local function fn(Sim)
     inst.components.finiteuses:SetConsumption(ACTIONS.PLAY, 1)
 
     inst:AddComponent("inventoryitem")
-
-
-    inst.hornbuild = "swap_antler"
-    inst.hornsymbol = "swap_antler"
 
     return inst
 end

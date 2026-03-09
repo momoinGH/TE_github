@@ -1,3 +1,13 @@
+STRINGS.ACTIONS.BOATCANNON = "Shot"
+
+
+
+
+
+
+
+
+
 STRINGS.NAMES.CARGOBOAT = "Nave da carico"
 STRINGS.RECIPE_DESC.CARGOBOAT = "Un accampamento in mezzo al mare!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CARGOBOAT = "Ha spazio per tutte le mie cose!"

@@ -57,10 +57,6 @@ local function fn(Sim)
 
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(LITTLE_HAMMER_DAMAGE)
-    -----
-    --inst:AddComponent("tool")
-    --inst.components.tool:SetAction(ACTIONS.DISLODGE)
-    -------
 
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(LITTLE_HAMMER_USES)

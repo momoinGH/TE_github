@@ -105,7 +105,7 @@ local function fn()
 	inst.AnimState:SetBuild("goddess_bell")
 	inst.AnimState:PlayAnimation("idle")
 
-	inst:AddTag("goddess_bell")
+    inst:AddTag("bell")
 	inst:AddTag("goddess_item")
 
 	local s = 1
@@ -121,7 +121,8 @@ local function fn()
 
 	inst:AddComponent("instrument")
 	inst.components.instrument.range = 30
-	inst.components.instrument:SetOnHeardFn(HearBell)
+    inst.components.instrument:SetOnHeardFn(HearBell)
+    inst.components.instrument:SetAssetOverrides("goddess_bell")
 
 	inst:AddComponent("tool")
 	inst.components.tool:SetAction(ACTIONS.PLAY)

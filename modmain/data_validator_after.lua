@@ -39,55 +39,84 @@ end
 
 ----------------------------------------------------------------------------------------------------
 -- 对于推送常见事件data的补充，避免有些地方推送事件参数类型不对导致崩溃
-if proisdev then
-    -- 一些常见的含有data的事件
-    local need_data_events = {
-        death = true,
-        onattackother = true,
-        onmissother = true,
-        attacked = true,
-        itemget = true,
-        itemlose = true,
-        timerdone = true,
-        picked = true,
-        worked = true,
-        equip = true,
-        unequip = true,
-        onbuilt = true,
-        healthdelta = true,
-        sanitydelta = true,
-        hungerdelta = true,
-        equipped = true,
-        unequipped = true,
-    }
+-- 一些常见的含有data的事件
+local need_data_events = {
+    death = true,
+    onattackother = true,
+    onmissother = true,
+    attacked = true,
+    itemget = true,
+    itemlose = true,
+    timerdone = true,
+    picked = true,
+    worked = true,
+    equip = true,
+    unequip = true,
+    onbuilt = true,
+    healthdelta = true,
+    sanitydelta = true,
+    hungerdelta = true,
+    equipped = true,
+    unequipped = true,
+}
 
-    local OldPushEvent = EntityScript.PushEvent
-    EntityScript.PushEvent = function(inst, event, data, ...)
-        if event and need_data_events[event] and not (data == nil or type(data) == "table") then
-            ProErrorHandle("事件" .. tostring(event) .. "的参数" .. tostring(data) .. "不是table也不为空，可能导致游戏崩溃", true, true)
-        end
-        return OldPushEvent(inst, event, data, ...)
+local OldPushEvent = EntityScript.PushEvent
+EntityScript.PushEvent = function(inst, event, data, ...)
+    if event and need_data_events[event] and not (data == nil or type(data) == "table") then
+        ProErrorHandle("事件" .. tostring(event) .. "的参数" .. tostring(data) .. "不是table也不为空，可能导致游戏崩溃", true, true)
     end
+    return OldPushEvent(inst, event, data, ...)
 end
 
 ----------------------------------------------------------------------------------------------------
 -- 对象销毁时不能执行定时任务
-if proisdev then
-    local old_DoTaskInTime = EntityScript.DoTaskInTime
-    function EntityScript:DoTaskInTime(...)
-        if self.IsValid and not self:IsValid() then
-            ProErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoTaskInTime，这可能导致游戏崩溃", true, true)
-            return
-        end
-        return old_DoTaskInTime(self, ...)
+local old_DoTaskInTime = EntityScript.DoTaskInTime
+function EntityScript:DoTaskInTime(...)
+    if self.IsValid and not self:IsValid() then
+        ProErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoTaskInTime，这可能导致游戏崩溃", true, true)
+        return
     end
+    return old_DoTaskInTime(self, ...)
+end
 
-    local old_DoPeriodicTask = EntityScript.DoPeriodicTask
-    function EntityScript:DoPeriodicTask(...)
-        if self.IsValid and not self:IsValid() then
-            ProErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoPeriodicTask，这可能导致游戏崩溃", true, true)
-            return
-        end
-        return old_DoPeriodicTask(self, ...)
+local old_DoPeriodicTask = EntityScript.DoPeriodicTask
+function EntityScript:DoPeriodicTask(...)
+    if self.IsValid and not self:IsValid() then
+        ProErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoPeriodicTask，这可能导致游戏崩溃", true, true)
+        return
     end
+    return old_DoPeriodicTask(self, ...)
+end
+
+----------------------------------------------------------------------------------------------------
+-- 检查状态机的重复注册
+for _, name in ipairs({
+    "wilson",
+    "wilson_client"
+}) do
+    AddStategraphPostInit(name, function(self)
+        local actions = {}
+        for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphActionHandler", self.name)) do
+            for i, v in ipairs(modhandlers) do
+                prodevassert(not actions[v.action], name .. "状态机对ACTIONS." .. v.action.id .. "重复注册，会导致相互覆盖，请hook对应的函数")
+                actions[v.action] = true
+            end
+        end
+
+        local events = {}
+        for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphEvent", self.name)) do
+            for i, v in ipairs(modhandlers) do
+                prodevassert(not events[v.name], name .. "状态机对事件" .. v.name .. "重复注册，会导致相互覆盖，请hook对应的函数")
+                events[v.name] = true
+            end
+        end
+
+        local states = {}
+        for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphState", self.name)) do
+            for i, v in ipairs(modhandlers) do
+                prodevassert(not states[v.name], name .. "状态机对状态" .. v.name .. "重复注册，会导致相互覆盖，请hook对应的函数")
+                states[v.name] = true
+            end
+        end
+    end)
 end

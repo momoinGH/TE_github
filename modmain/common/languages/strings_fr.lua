@@ -1280,12 +1280,10 @@ STRINGS.RECIPE_DESC.WALL_ENFORCEDLIMESTONE_ITEM = "Segments de mur solides pour 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALL_ENFORCEDLIMESTONE = "J'ai payé le prix pour avoir ce qu'on fait de mieux."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALL_ENFORCEDLIMESTONE_ITEM = "Il faut construire ça dans l'eau."
 ----------------------------- ACTIONS -----------------------------
-STRINGS.ACTIONS.BOATCANNON = "Tirez"
 
 STRINGS.ACTIONS.HACK = "Tailler"
 STRINGS.ACTIONS.STICK = "Planter le bâton"
 STRINGS.TABS.NAUTICALTAB = "Nautique"
-STRINGS.ACTIONS.DESACTIVATESAIL = "Eteindre"
 STRINGS.ACTIONS.LANTERNON = "Allumer"
 
 STRINGS.ACTIONS.PEER = "Scruter"

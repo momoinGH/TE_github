@@ -43,7 +43,7 @@ local function fn()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
 
-    inst:AddTag("goddess_flute")
+    inst:AddTag("flute")
 
     inst.AnimState:SetBank("pan_flute")
     inst.AnimState:SetBuild("goddess_flute")
@@ -59,6 +59,7 @@ local function fn()
     inst:AddComponent("instrument")
     inst.components.instrument.range = TUNING.PANFLUTE_SLEEPRANGE
     inst.components.instrument:SetOnHeardFn(HearPanFlute)
+    inst.components.instrument:SetAssetOverrides("goddess_flute")
 
     inst:AddComponent("tool")
     inst.components.tool:SetAction(ACTIONS.PLAY)

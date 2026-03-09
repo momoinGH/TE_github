@@ -1286,12 +1286,10 @@ STRINGS.NAMES.MERM2 = "Мэрм" --DTR
 --------------store---------
 
 --------------actions-------
-STRINGS.ACTIONS.BOATCANNON = "Запустить"
 
 STRINGS.ACTIONS.HACK = "Кромсать"
 STRINGS.ACTIONS.STICK = "Разместить палку"
 STRINGS.TABS.NAUTICALTAB = "Морское"
-STRINGS.ACTIONS.DESACTIVATESAIL = "Выключить"
 STRINGS.ACTIONS.LANTERNON = "Включить"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Роулинг"
@@ -3977,9 +3975,6 @@ STRINGS.GROUNDED_WILBA_THANKS = {
 ----------------------------ACTIONS-------------------------------
 STRINGS.ACTIONS.HACK = "Кромсать"
 STRINGS.ACTIONS.SMELT = "Плавить"
-STRINGS.ACTIONS.SHEAR = "Резать"
-STRINGS.ACTIONS.PAN = "Искать в воде"
-STRINGS.ACTIONS.GAS = "Газ"
 
 STRINGS.TABS.NAUTICALTAB = "Море"
 STRINGS.TABS.ARCHAEOLOGY = "Охота за сокровищами"
@@ -4495,8 +4490,6 @@ STRINGS.NAMES.INTERIOR_FLOOR_SHEETMETAL = "interior floor sheetmetal"        --I
 STRINGS.NAMES.INTERIOR_FLOOR_TRANSITIONAL = "interior floor woodmetal"       --IDK
 STRINGS.NAMES.INTERIOR_FLOOR_HOOF_CURVY = "interior floor hoof curvy"        --IDK
 STRINGS.NAMES.INTERIOR_FLOOR_WOODPANELS = "interior floor woodpanels"        --IDK
-
-STRINGS.ACTIONS.PAINT = "Краска"
 
 STRINGS.NAMES.PIG_SHOP_BANK_DOOR_SAIDA = "Дверь"
 STRINGS.NAMES.INTERIOR_FLOOR_WOOD = "Пол"
@@ -5221,7 +5214,6 @@ STRINGS.NAMES.ARMOR_WINDBREAKER = "Ветровка"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOR_WINDBREAKER = "У ветра нет шансов!"
 STRINGS.RECIPE_DESC.ARMOR_WINDBREAKER = "Немного остановит ветер!"
 
-STRINGS.ACTIONS.OPENTUNA = "Открыть"
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_QUAKE = "Сейсмическая активность! Это звучит нехорошо."
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_VOLCANO_ERUPT = "Извержение вулкана! Огонь с неба приближается."
 

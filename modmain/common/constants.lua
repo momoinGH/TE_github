@@ -97,3 +97,36 @@ function AddComponentIfNot(inst, name)
 end
 
 GLOBAL.AddComponentIfNot = AddComponentIfNot
+
+
+-- 关闭物理碰撞
+function ToggleOffPhysics(inst)
+    inst.sg.statemem.isphysicstoggle = true
+    inst.Physics:ClearCollisionMask()
+    inst.Physics:CollidesWith(COLLISION.GROUND)
+end
+
+GLOBAL.ToggleOffPhysics = ToggleOffPhysics
+
+-- 开启物理碰撞
+function ToggleOnPhysics(inst)
+    inst.sg.statemem.isphysicstoggle = nil
+    inst.Physics:ClearCollisionMask()
+    inst.Physics:CollidesWith(COLLISION.WORLD)
+    inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+    inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+    inst.Physics:CollidesWith(COLLISION.GIANTS)
+end
+
+GLOBAL.ToggleOnPhysics = ToggleOnPhysics
+
+
+function GetEquippedItem(inst, eslot)
+    if inst.components.inventory then
+        return inst.components.inventory:GetEquippedItem(eslot)
+    end
+    return inst.replilca.inventory and inst.replilca.inventory:GetEquippedItem(eslot) or nil
+end
+
+GLOBAL.GetEquippedItem = GetEquippedItem

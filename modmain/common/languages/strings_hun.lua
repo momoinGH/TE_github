@@ -1231,12 +1231,10 @@ STRINGS.NAMES.ESCADADOVULCAO2 = "Volcano Exit"
 STRINGS.NAMES.LAVAPONDBIG1 = "Big lava pool"
 --------------store---------
 --------------actions-------
-STRINGS.ACTIONS.BOATCANNON = "Tűz"
 
 STRINGS.ACTIONS.HACK = "Felvágás"
 STRINGS.ACTIONS.STICK = "Bot"
 STRINGS.TABS.NAUTICALTAB = "Tengeri"
-STRINGS.ACTIONS.DESACTIVATESAIL = "Kikapcsol"
 STRINGS.ACTIONS.LANTERNON = "Bekapcsol"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Wilson labdája"

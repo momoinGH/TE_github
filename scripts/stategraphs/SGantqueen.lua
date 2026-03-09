@@ -159,12 +159,10 @@ local states =
         timeline =
         {
             TimeEvent(5 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/boss/antqueen/atk_3_breath_in")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/antqueen/atk_3_breath_in")
             end),
             TimeEvent(22 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/boss/antqueen/insane_LP", "insane")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/antqueen/insane_LP", "insane")
             end),
             TimeEvent(25 * FRAMES, function(inst) TheWorld:PushEvent("antqueenbattle") end),
             TimeEvent(25 * FRAMES, function(inst)

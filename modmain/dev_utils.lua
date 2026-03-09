@@ -51,7 +51,7 @@ end
 GLOBAL.ProErrorHandle = ProErrorHandle
 
 -- 可以判断是否是开发模式的断言，开发陌生下游戏崩溃，工坊订阅下只会打印堆栈到日志
-function prosoftassert(v, ...)
+function prodevassert(v, ...)
     if proisdev then
         return assert(v, ...)
     end
@@ -65,7 +65,7 @@ function prosoftassert(v, ...)
     return v
 end
 
-GLOBAL.prosoftassert = prosoftassert
+GLOBAL.prodevassert = prodevassert
 
 ----------------------------------------------------------------------------------------------------
 --- 科雷modmain的定义抄过来，不过文件不存在时不提醒

@@ -25,7 +25,7 @@ local function fn(Sim)
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
 
-    inst:AddTag("horn2")
+    inst:AddTag("horn")
 
     inst.AnimState:SetBank("wind_conch")
     inst.AnimState:SetBuild("wind_conch")
@@ -43,6 +43,7 @@ local function fn(Sim)
     inst:AddComponent("inspectable")
     inst:AddComponent("instrument")
     inst.components.instrument.onplayed = OnPlayed
+    inst.components.instrument:SetAssetOverrides("swap_wind_conch", "swap_horn")
 
     inst:AddComponent("tool")
     inst.components.tool:SetAction(ACTIONS.PLAY)
@@ -54,10 +55,6 @@ local function fn(Sim)
     inst.components.finiteuses:SetConsumption(ACTIONS.PLAY, 1)
 
     inst:AddComponent("inventoryitem")
-
-
-    inst.hornbuild = "swap_wind_conch"
-    inst.hornsymbol = "swap_horn"
 
     return inst
 end

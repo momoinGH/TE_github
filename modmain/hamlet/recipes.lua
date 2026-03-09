@@ -349,3 +349,6 @@ AddRecipe2("bed8", { OincIngredient(22) }, TECH.HOME_TWO,
 AddHomeRecipe("construction_permit", 50)
 
 ----------------------------------------------------------------------------------------------------
+
+AddRecipe2("shears", { Ingredient("twigs", 2), Ingredient("iron", 2) }, TECH.SCIENCE_ONE, nil, { "TOOLS" })
+AddRecipe2("bugrepellent", { Ingredient("tuber_crop", 6), Ingredient("venus_stalk", 1) }, TECH.SCIENCE_ONE, nil, { "TOOLS" })

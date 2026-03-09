@@ -641,7 +641,6 @@ GLOBAL.STRINGS.MERM_KING_TALK_HUNGER_HUNGRISH                             = "Kin
 GLOBAL.STRINGS.MERM_KING_TALK_HUNGER_FULL                                 = "Have done well. Now go."
 
 ------------------------------------gorge------------------------------------------
-GLOBAL.STRINGS.ACTIONS.COLLECTSAP                                         = "Collect Sap"
 
 STRINGS.NAMES.FLOUR                                                       = "Flour"
 STRINGS.NAMES.SAPTREE                                                     = "Sugarwood Tree"

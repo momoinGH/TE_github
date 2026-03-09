@@ -16,7 +16,7 @@ local LEG_WALKDIST = 4
 local LEG_WALKDIST_BIG = 6
 local LAND_PROX = 7
 
-
+-- 大鹏鸟
 local RocController = Class(function(self, inst)
 	self.inst = inst
 	self.speed = 10
