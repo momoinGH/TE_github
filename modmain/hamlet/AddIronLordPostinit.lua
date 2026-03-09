@@ -129,7 +129,7 @@ AddComponentPostInit("locomotor", function(self)
 		return mult
 	end
 
-	if GLOBAL.TheWorld.ismastersim then
+	if TheWorld.ismastersim then
 		self.GetSpeedMultiplier = ServerGetSpeedMultiplier
 	else
 		self.GetSpeedMultiplier = ClientGetSpeedMultiplier
@@ -185,7 +185,7 @@ AddComponentPostInit("projectile", function(self)
 			local pos = self.inst:GetPosition()
 			local targetpos = self.artifacttarget:GetPosition()
 			local range = self.artifacttarget:GetPhysicsRadius(0)+self.hitdist
-			if GLOBAL.distsq(pos, targetpos) < range*range then
+			if distsq(pos, targetpos) < range*range then
 				self.inst.collide(self.inst, self.artifacttarget)
 			end
 		end
@@ -204,7 +204,7 @@ end)
 ----------------------------------------------- Prefab -----------------------------------------------
 
 AddPrefabPostInit("wormwood", function(inst)
-	if not GLOBAL.TheWorld.ismastersim then return end
+	if not TheWorld.ismastersim then return end
 
 	local old_onlevelchangedfn = inst.components.bloomness.onlevelchangedfn
 	inst.components.bloomness.onlevelchangedfn = function(inst, stage)
@@ -216,17 +216,17 @@ AddPrefabPostInit("wormwood", function(inst)
 end)
 --[[
 AddPrefabPostInit("rock_moon", function(inst)
-	if not GLOBAL.TheWorld.ismastersim then return end
+	if not TheWorld.ismastersim then return end
 	inst.components.lootdropper:AddChanceLoot("infused_iron", 0.25)
 end)
 
 AddPrefabPostInit("opalpreciousgem", function(inst)
-	if not GLOBAL.TheWorld.ismastersim then return end
+	if not TheWorld.ismastersim then return end
 	inst.components.tradable.rocktribute = 18
 end)
 
 AddPrefabPostInit("antlion", function(inst)
-	if not GLOBAL.TheWorld.ismastersim then return end
+	if not TheWorld.ismastersim then return end
 
 	local old_OnGivenItem = inst.components.trader.onaccept
 	inst.components.trader.onaccept = function(inst, giver, item)
@@ -242,7 +242,7 @@ AddPrefabPostInit("antlion", function(inst)
 	local old_GiveReward = inst.GiveReward
 	inst.GiveReward = function(inst)
 		if inst.pendingrewarditem_waterdrop then
-			GLOBAL.LaunchAt(SpawnPrefab(inst.pendingrewarditem_waterdrop), inst, (inst.tributer and inst.tributer:IsValid()) and inst.tributer or nil, 1, 2, 1)
+			LaunchAt(SpawnPrefab(inst.pendingrewarditem_waterdrop), inst, (inst.tributer and inst.tributer:IsValid()) and inst.tributer or nil, 1, 2, 1)
 			inst.pendingrewarditem_waterdrop = nil
 			inst.tributer = nil
 			return

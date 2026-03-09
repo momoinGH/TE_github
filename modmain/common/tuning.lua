@@ -1,6 +1,4 @@
 local TechTree = require("techtree")
-local require = GLOBAL.require
-local TUNING = GLOBAL.TUNING
 local wilson_attack = 34
 local wilson_health = 150
 local seg_time = 30

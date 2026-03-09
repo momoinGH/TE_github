@@ -116,24 +116,18 @@ Constructor.AddAction(nil, "PEAGAWK_TRANSFORM", STRINGS.ACTIONS.PEAGAWK_TRANSFOR
     --Dummy action for flup hiding
 end)
 
-
-
-Constructor.AddAction(nil, "MANUALEXTINGUISH", STRINGS.ACTIONS.MANUALEXTINGUISH, function(act)
+Utils.FnDecorator(ACTIONS.MANUALEXTINGUISH, "fn", function(act)
     if act.doer:HasTag("extinguisher") then
         if act.target.components.burnable and act.target.components.burnable:IsBurning() then
             act.target.components.burnable:Extinguish()
-            return true
+            return { true }, true
         end
     elseif act.target.components.sentientball then
         act.target.components.burnable:Extinguish()
         -- damage player?
-        return true
-    elseif act.invobject:HasTag("frozen") and act.target.components.burnable and act.target.components.burnable:IsBurning() then
-        act.target.components.burnable:Extinguish(true, TUNING.SMOTHERER_EXTINGUISH_HEAT_PERCENT, act.invobject)
-        return true
+        return { true }, true
     end
 end)
-
 
 Constructor.AddAction(nil, "SPECIAL_ACTION", STRINGS.ACTIONS.SPECIAL_ACTION, function(act)
     if act.doer.special_action then
@@ -286,21 +280,17 @@ Constructor.AddAction({ priority = 10, mount_valid = true },
     end
 )
 
-Constructor.AddAction(nil,
-    "INSTALL",
-    STRINGS.ACTIONS.INSTALL,
-    function(act)
-        if act.invobject ~= nil and act.target ~= nil then
-            if act.invobject.components.installable ~= nil
-                and act.target.components.installations ~= nil
-                and act.target.components.installations:CanInstall(act.invobject.components.installable.prefab)
-                and act.invobject.components.installable:DoInstall(act.target) then
-                act.invobject:Remove()
-                return true
-            end
+Utils.FnDecorator(ACTIONS.INSTALL, "fn", function(act)
+    if act.invobject ~= nil and act.target ~= nil then
+        if act.invobject.components.installable ~= nil
+            and act.target.components.installations ~= nil
+            and act.target.components.installations:CanInstall(act.invobject.components.installable.prefab)
+            and act.invobject.components.installable:DoInstall(act.target) then
+            act.invobject:Remove()
+            return { true }, true
         end
     end
-)
+end)
 
 -- 收回
 Constructor.AddAction({ priority = 11, rmb = true, distance = 4, mount_valid = false },

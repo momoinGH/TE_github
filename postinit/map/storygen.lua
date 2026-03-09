@@ -15,7 +15,6 @@ require("map/storygen")
 
 
 
-GLOBAL.setfenv(1, GLOBAL) ----为什么要这么声明变量，不是很理解
 TOPOLOGY_SAVE = nil
 STORYGEN = nil
 

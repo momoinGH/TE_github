@@ -1,545 +1,543 @@
-local require = GLOBAL.require
-local GROUND = GLOBAL.GROUND
 local Layouts = require("map/layouts").Layouts
 local StaticLayout = require("map/static_layout")
 
 Layouts["tigersharkarea"] = StaticLayout.Get("map/static_layouts/tigersharkarea", {
-	start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
-	fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
+	start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
+	fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
 })
 
 Layouts["CoffeeBushBunch"] = StaticLayout.Get("map/static_layouts/coffeebushbunch",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["Entradavulcao"] = StaticLayout.Get("map/static_layouts/volcano_start",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["ObsidianWorkbench"] = StaticLayout.Get("map/static_layouts/volcano_workbench",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["WoodlegsUnlock"] = StaticLayout.Get("map/static_layouts/woodlegs_unlock",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["volcano_altar"] = StaticLayout.Get("map/static_layouts/volcano_altar",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["lava_arena"] = StaticLayout.Get("map/static_layouts/lava_arena",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
 		disable_transform = true,
 	})
 
 Layouts["LivingJungleTree"] = StaticLayout.Get("map/static_layouts/livingjungletree")
 Layouts["BerryBushBunch"] = StaticLayout.Get("map/static_layouts/berrybushbunch",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["slotmachine"] = StaticLayout.Get("map/static_layouts/slotmachine",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["skull_isle2"] = StaticLayout.Get("map/static_layouts/skull_isle2",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["coral"] = StaticLayout.Get("map/static_layouts/coral",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["entradadaarena"] = StaticLayout.Get("map/static_layouts/entradadaarena",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["doydoym"] = StaticLayout.Get("map/static_layouts/doydoym",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["doydoyf"] = StaticLayout.Get("map/static_layouts/doydoyf",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["strangerlord"] = StaticLayout.Get("map/static_layouts/strangerlord",
 	{
 		layout_position = 1,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["strangerpigs"] = StaticLayout.Get("map/static_layouts/strangerpigs",
 	{
 		layout_position = 1,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["strangerlavaarena"] = StaticLayout.Get("map/static_layouts/strangerlavaarena",
 	{
 		layout_position = 1,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["eldorado"] = StaticLayout.Get("map/static_layouts/eldorado",
 	{
 		layout_position = 1,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["tikitribe"] = StaticLayout.Get("map/static_layouts/tikitribe", {
-	layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-	start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-	fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+	layout_position = LAYOUT_POSITION.CENTER,
+	start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+	fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
 Layouts["vacation"] = StaticLayout.Get("map/static_layouts/vacation",
 	{
 		layout_position = 1,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["city"] = StaticLayout.Get("map/static_layouts/city",
 	{
 		layout_position = 1,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["BeachStart"] = StaticLayout.Get("map/static_layouts/beachstart",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["volcano_entrance"] = StaticLayout.Get("map/static_layouts/volcano_entrance",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["x_spot"] = StaticLayout.Get("map/static_layouts/x_spot",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["lobby"] = StaticLayout.Get("map/static_layouts/lobby",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["mactuskgrass"] = StaticLayout.Get("map/static_layouts/mactuskgrass",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["mastuskrocky"] = StaticLayout.Get("map/static_layouts/mastuskrocky",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["mactusksavanna"] = StaticLayout.Get("map/static_layouts/mactusksavanna",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["pugalisk_fountain"] = StaticLayout.Get("map/static_layouts/pugalisk_fountain",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["farm_1"] = StaticLayout.Get("map/static_layouts/farm_1",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.RANDOM,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.RANDOM,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["farm_2"] = StaticLayout.Get("map/static_layouts/farm_2",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.RANDOM,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.RANDOM,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["farm_3"] = StaticLayout.Get("map/static_layouts/farm_3",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.RANDOM,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.RANDOM,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["farm_4"] = StaticLayout.Get("map/static_layouts/farm_4",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.RANDOM,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.RANDOM,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["farm_5"] = StaticLayout.Get("map/static_layouts/farm_5",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.RANDOM,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.RANDOM,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["farm_fill_1"] = StaticLayout.Get("map/static_layouts/farm_fill_1",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.RANDOM,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.RANDOM,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["farm_fill_2"] = StaticLayout.Get("map/static_layouts/farm_fill_2",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.RANDOM,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.RANDOM,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["farm_fill_3"] = StaticLayout.Get("map/static_layouts/farm_fill_3",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.RANDOM,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.RANDOM,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["cidade1"] = StaticLayout.Get("map/static_layouts/cidade1",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["cidade2"] = StaticLayout.Get("map/static_layouts/cidade2",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["mandraketown"] = StaticLayout.Get("map/static_layouts/mandraketown",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["porkland_start"] = StaticLayout.Get("map/static_layouts/porkland_start",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["IceSpiderpillar"] = StaticLayout.Get("map/static_layouts/IceSpiderpillar",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["nettlegrove"] = StaticLayout.Get("map/static_layouts/nettlegrove",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.RANDOM,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.RANDOM,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["pantano"] = StaticLayout.Get("map/static_layouts/pantano",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.RANDOM,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.RANDOM,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 ------------------------------extras--------------------------------------------------------------------			
 Layouts["pig_ruins_entrance_1"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_1",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["pig_ruins_entrance_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_2",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["pig_ruins_entrance_3"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_3",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["pig_ruins_entrance_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_4",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["pig_ruins_entrance_5"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_5",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["pig_ruins_exit_1"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_1",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["pig_ruins_exit_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_2",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["pig_ruins_exit_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_4",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["lilypad"] = StaticLayout.Get("map/static_layouts/lilypad",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["pig_ruins_artichoke"] = StaticLayout.Get("map/static_layouts/pig_ruins_artichoke",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["pig_ruins_head"] = StaticLayout.Get("map/static_layouts/pig_ruins_head",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["pig_ruins_nocanopy"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["pig_ruins_nocanopy_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_2",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["pig_ruins_nocanopy_3"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_3",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["pig_ruins_nocanopy_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_4",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["roc_cave"] = StaticLayout.Get("map/static_layouts/roc_cave",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["roc_nest"] = StaticLayout.Get("map/static_layouts/roc_nest",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["sw_exit"] = StaticLayout.Get("map/static_layouts/sw_exit",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["hamlet_exit"] = StaticLayout.Get("map/static_layouts/hamlet_exit",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["sw_entrance"] = StaticLayout.Get("map/static_layouts/sw_entrance",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 Layouts["hamlet_entrance"] = StaticLayout.Get("map/static_layouts/hamlet_entrance",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["lobby_exit"] = StaticLayout.Get("map/static_layouts/lobby_exit",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["cave_entranceham1"] = StaticLayout.Get("map/static_layouts/cave_entranceham1",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["cave_entranceham2"] = StaticLayout.Get("map/static_layouts/cave_entranceham2",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["cave_entranceham3"] = StaticLayout.Get("map/static_layouts/cave_entranceham3",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["ruins_exit"] = StaticLayout.Get("map/static_layouts/ruins_exit",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["ruins_exit2"] = StaticLayout.Get("map/static_layouts/ruins_exit2",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["atlantida"] = StaticLayout.Get("map/static_layouts/atlantida",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["antqueencave"] = StaticLayout.Get("map/static_layouts/antqueencave",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["oceanworldstart"] = StaticLayout.Get("map/static_layouts/oceanworldstart",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["mermtrader1set"] = StaticLayout.Get("map/static_layouts/mermtrader1set",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["mermtrader2set"] = StaticLayout.Get("map/static_layouts/mermtrader2set",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["mermtrader3set"] = StaticLayout.Get("map/static_layouts/mermtrader3set",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["mermtrader3setmainland"] = StaticLayout.Get("map/static_layouts/mermtrader3setmainland",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["elderpig"] = StaticLayout.Get("map/static_layouts/elderpig",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["ligamundoham"] = StaticLayout.Get("map/static_layouts/ligamundoham",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["ligamundohamexit"] = StaticLayout.Get("map/static_layouts/ligamundohamexit",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["ligamundosw"] = StaticLayout.Get("map/static_layouts/ligamundosw",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["ligamundoswexit"] = StaticLayout.Get("map/static_layouts/ligamundoswexit",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["gwestatua"] = StaticLayout.Get("map/static_layouts/gwestatua",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
 	})
 
 Layouts["goatkid"] = StaticLayout.Get("map/static_layouts/goatkid",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 		areas =
 		{
 			oldcity = function()
@@ -562,8 +560,8 @@ Layouts["goatkid"] = StaticLayout.Get("map/static_layouts/goatkid",
 
 Layouts["goatkid2"] = StaticLayout.Get("map/static_layouts/goatkid2",
 	{
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 		areas =
 		{
 			oldcity = function()
@@ -585,9 +583,9 @@ Layouts["goatkid2"] = StaticLayout.Get("map/static_layouts/goatkid2",
 	})
 
 Layouts["octopuskinghome"] = StaticLayout.Get("map/static_layouts/octopuskinghome", {
-	layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-	start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-	fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+	layout_position = LAYOUT_POSITION.CENTER,
+	start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+	fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	areas =
 	{
 		treearea = function()
@@ -683,9 +681,9 @@ Layouts["octopuskinghome"] = StaticLayout.Get("map/static_layouts/octopuskinghom
 
 Layouts["coralpool1"] = StaticLayout.Get("map/static_layouts/coralpool1",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 
 		areas =
 		{
@@ -729,9 +727,9 @@ Layouts["coralpool1"] = StaticLayout.Get("map/static_layouts/coralpool1",
 
 Layouts["coralpool2"] = StaticLayout.Get("map/static_layouts/coralpool2",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 		areas =
 		{
 			coralzone = function()
@@ -774,9 +772,9 @@ Layouts["coralpool2"] = StaticLayout.Get("map/static_layouts/coralpool2",
 
 Layouts["coralpool3"] = StaticLayout.Get("map/static_layouts/coralpool3",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 		areas =
 		{
 			coralzone = function()
@@ -818,9 +816,9 @@ Layouts["coralpool3"] = StaticLayout.Get("map/static_layouts/coralpool3",
 
 Layouts["oceanbamboforest"] = StaticLayout.Get("map/static_layouts/oceanbamboforest",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 		disable_transform = true,
 		areas =
 		{
@@ -856,9 +854,9 @@ Layouts["oceanbamboforest"] = StaticLayout.Get("map/static_layouts/oceanbambofor
 	})
 
 Layouts["lilypadnovo"] = StaticLayout.Get("map/static_layouts/lilypadnovo", {
-	layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-	start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
-	fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
+	layout_position = LAYOUT_POSITION.CENTER,
+	start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
+	fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
 	areas =
 	{
 		objetoaleatorio = function()
@@ -884,9 +882,9 @@ Layouts["lilypadnovo"] = StaticLayout.Get("map/static_layouts/lilypadnovo", {
 })
 
 Layouts["lilypadnovograss"] = StaticLayout.Get("map/static_layouts/lilypadnovograss", {
-	layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-	start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
-	fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
+	layout_position = LAYOUT_POSITION.CENTER,
+	start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
+	fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
 	areas =
 	{
 		objetoaleatorio = function()
@@ -913,9 +911,9 @@ Layouts["lilypadnovograss"] = StaticLayout.Get("map/static_layouts/lilypadnovogr
 
 
 Layouts["mangrove1"] = StaticLayout.Get("map/static_layouts/mangrove1", {
-	layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-	start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-	fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+	layout_position = LAYOUT_POSITION.CENTER,
+	start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+	fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	areas =
 	{
 		treearea = function()
@@ -1004,9 +1002,9 @@ Layouts["mangrove1"] = StaticLayout.Get("map/static_layouts/mangrove1", {
 
 
 Layouts["mangrove2"] = StaticLayout.Get("map/static_layouts/mangrove1", {
-	layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-	start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-	fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+	layout_position = LAYOUT_POSITION.CENTER,
+	start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+	fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	areas =
 	{
 		treearea = function()
@@ -1100,9 +1098,9 @@ Layouts["mangrove2"] = StaticLayout.Get("map/static_layouts/mangrove1", {
 
 Layouts["oceanforest"] = StaticLayout.Get("map/static_layouts/oceanforest",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 		disable_transform = true,
 		areas =
 		{
@@ -1162,9 +1160,9 @@ Layouts["oceanforest"] = StaticLayout.Get("map/static_layouts/oceanforest",
 
 Layouts["oceanrocks"] = StaticLayout.Get("map/static_layouts/oceanrocks",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 		disable_transform = true,
 		areas =
 		{
@@ -1191,33 +1189,33 @@ Layouts["oceanrocks"] = StaticLayout.Get("map/static_layouts/oceanrocks",
 
 Layouts["icebergs"] = StaticLayout.Get("map/static_layouts/icebergs",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["oceangrotolunar"] = StaticLayout.Get("map/static_layouts/oceangrotolunar",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 -----------------------------------------------------------------------------------------------			
 
 
 Layouts["wildboreking"] = StaticLayout.Get("map/static_layouts/wildboreking",
 	{
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 	})
 
 Layouts["quagmire_kitchen"] = StaticLayout.Get("map/static_layouts/quagmire_kitchen",
 	{
 
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
 		disable_transform = true,
 
 		areas =
@@ -1253,9 +1251,9 @@ Layouts["quagmire_kitchen"] = StaticLayout.Get("map/static_layouts/quagmire_kitc
 Layouts["wreck"] = StaticLayout.Get("map/static_layouts/wreck",
 	{
 
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
 		disable_transform = true,
 
 		areas =
@@ -1334,9 +1332,9 @@ Layouts["wreck"] = StaticLayout.Get("map/static_layouts/wreck",
 Layouts["wreck2"] = StaticLayout.Get("map/static_layouts/wreck2",
 	{
 
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
 		disable_transform = true,
 
 		areas =
@@ -1414,9 +1412,9 @@ Layouts["wreck2"] = StaticLayout.Get("map/static_layouts/wreck2",
 Layouts["iceberg1"] = StaticLayout.Get("map/static_layouts/iceberg1",
 	{
 
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
 		disable_transform = true,
 
 		areas =
@@ -1480,9 +1478,9 @@ Layouts["iceberg1"] = StaticLayout.Get("map/static_layouts/iceberg1",
 Layouts["kraken"] = StaticLayout.Get("map/static_layouts/kraken",
 	{
 
-		start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+		start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = LAYOUT_POSITION.CENTER,
 		disable_transform = true,
 
 		areas =
@@ -1561,7 +1559,7 @@ Layouts["kraken"] = StaticLayout.Get("map/static_layouts/kraken",
 
 Layouts["CropCirclegorge"] =
 {
-	type = GLOBAL.LAYOUT.CIRCLE_RANDOM,
+	type = LAYOUT.CIRCLE_RANDOM,
 	defs =
 	{
 		unknown_plant = { "potato_planted", "tomato_planted", },

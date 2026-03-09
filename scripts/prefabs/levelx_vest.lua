@@ -39,7 +39,7 @@ local function onequip(inst, owner)
     -- SendModRPCToServer(MOD_RPC["ranger"]["vest_lighton"])
 
     -- end
-    -- GLOBAL.TheInput:AddKeyDownHandler(TUNING.RANGER.LIGHT_SWITCH_KEY, LightOn)
+    -- TheInput:AddKeyDownHandler(TUNING.RANGER.LIGHT_SWITCH_KEY, LightOn)
 
     -- local function SendLightOn()
     -- SendModRPCToServer(MOD_RPC["ranger"]["VestLightOn"])

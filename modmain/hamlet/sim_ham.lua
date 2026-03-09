@@ -1,5 +1,5 @@
 function HamletcloudPostInit()
-    local World = GLOBAL.TheWorld
+    local World = TheWorld
     if not (not TheNet:IsDedicated() and World and World.WaveComponent) then
         return
     end
@@ -7,7 +7,7 @@ function HamletcloudPostInit()
     local map = World.Map
     map:SetUndergroundFadeHeight(0)
     map:AlwaysDrawWaves(true)
-    World.WaveComponent:SetWaveTexture(GLOBAL.resolvefilepath("images/fog_cloud.tex"))
+    World.WaveComponent:SetWaveTexture(resolvefilepath("images/fog_cloud.tex"))
     local scale = 1
     local map_width, map_height = map:GetSize()
     World.WaveComponent:SetWaveParams(13.5, 2.5, -1)

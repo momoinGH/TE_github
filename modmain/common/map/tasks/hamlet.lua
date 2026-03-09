@@ -3006,8 +3006,8 @@ AddRoom("HamSlurtleCanyon", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .20,
         distributeprefabs =
@@ -3045,8 +3045,8 @@ AddRoom("HamBatsAndSlurtles", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .20,
         distributeprefabs =
@@ -3082,8 +3082,8 @@ AddRoom("HamRockyPlains", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .25,
         distributeprefabs =
@@ -3122,8 +3122,8 @@ AddRoom("HamRockyPlainsexit", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .20,
         distributeprefabs =
@@ -3153,8 +3153,8 @@ AddRoom("HamRockyHatchingGrounds", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .30,
         distributeprefabs =
@@ -3182,8 +3182,8 @@ AddRoom("HamBatsAndRocky", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.SeparatedRoom,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
+    type = NODE_TYPE.SeparatedRoom,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     contents = {
         countstaticlayouts = {
             ["antqueencave"] = 1,
@@ -3211,8 +3211,8 @@ AddRoom("HamBGRockyCaveRoom", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},	
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .20,
         distributeprefabs =
@@ -5689,7 +5689,7 @@ AddRoom("UnderwaterEntrance", {
     }
 })
 --------------------------------cherry----------------------------
-if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289779251") then
+if KnownModIndex:IsModEnabled("workshop-1289779251") then
     AddTask("cherry_mainland", {
         locks = LOCKS.JUNGLE_DEPTH_1,
         keys_given = { KEYS.JUNGLE_DEPTH_1 },
@@ -5862,11 +5862,11 @@ local function TasksetPreInit(taskset)
 
 
     -----------------------------umcompromissing-----------------------------------------------------		
-    if GLOBAL.KnownModIndex:IsModEnabled("workshop-2039181790") then
+    if KnownModIndex:IsModEnabled("workshop-2039181790") then
         table.insert(taskset.tasks, "GiantTrees")
     end
     -----------------------------cherry forest-----------------------------------------------------
-    if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289779251") then
+    if KnownModIndex:IsModEnabled("workshop-1289779251") then
         table.insert(taskset.tasks, "cherry_mainland")
     end
 

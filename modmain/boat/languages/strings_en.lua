@@ -75,7 +75,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.PORTO_CARGOBOAT             = "Ah, plenty of
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.PORTO_CARGOBOAT              = "Ah, we can stretch all our legs..."
 STRINGS.CHARACTERS.WX78.DESCRIBE.PORTO_CARGOBOAT                = "I can carry so many flammables on this."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.PORTO_CARGOBOAT              = "I can carry so many flammables on this."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_CARGOBOAT         = "Oooooh, it have room for things!"
+STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_CARGOBOAT         = "Oooooh, it have room for things!"
 
 STRINGS.NAMES.ENCRUSTEDBOAT                                     = "Encrusted Boat"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ENCRUSTEDBOAT               = "A mere shell of a ship."
@@ -89,7 +89,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.ENCRUSTEDBOAT               = "It seems stur
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.ENCRUSTEDBOAT                = "Ready to set sail!"
 STRINGS.CHARACTERS.WX78.DESCRIBE.ENCRUSTEDBOAT                  = "Crumbly."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.ENCRUSTEDBOAT                = "Crumbly."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.ENCRUSTEDBOAT           = "Rocks can float by being boy-ant, florp."
+STRINGS.CHARACTERS.WURT.DESCRIBE.ENCRUSTEDBOAT           = "Rocks can float by being boy-ant, florp."
 
 STRINGS.NAMES.PORTO_ENCRUSTEDBOAT                               = "Encrusted Boat"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ENCRUSTEDBOAT         = "A mere shell of a ship."
@@ -103,7 +103,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.PORTO_ENCRUSTEDBOAT         = "It seems stur
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.PORTO_ENCRUSTEDBOAT          = "Ready to set sail!"
 STRINGS.CHARACTERS.WX78.DESCRIBE.PORTO_ENCRUSTEDBOAT            = "Crumbly."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.PORTO_ENCRUSTEDBOAT          = "Crumbly."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_ENCRUSTEDBOAT     = "Rocks can float by being boy-ant, florp."
+STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_ENCRUSTEDBOAT     = "Rocks can float by being boy-ant, florp."
 
 STRINGS.NAMES.ROWBOAT                                           = "Row Boat"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROWBOAT                     = "It runs on elbow grease."
@@ -117,7 +117,7 @@ STRINGS.CHARACTERS.WX78.DESCRIBE.ROWBOAT                        = "Rowing? Reall
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.ROWBOAT                      = "How's that old song go?"
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.ROWBOAT                     = "Manually operated. A pity."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.ROWBOAT                      = "Rowing? Really?"
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.ROWBOAT                 = "Will use strength of mermfolk!"
+STRINGS.CHARACTERS.WURT.DESCRIBE.ROWBOAT                 = "Will use strength of mermfolk!"
 
 STRINGS.NAMES.PORTO_ROWBOAT                                     = "Row Boat"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ROWBOAT               = "It runs on elbow grease."
@@ -131,7 +131,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.PORTO_ROWBOAT               = "Manually oper
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.PORTO_ROWBOAT                = "How's that old song go?"
 STRINGS.CHARACTERS.WX78.DESCRIBE.PORTO_ROWBOAT                  = "Rowing? Really?"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.PORTO_ROWBOAT                = "Rowing? Really?"
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_ROWBOAT           = "Will use strength of mermfolk!"
+STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_ROWBOAT           = "Will use strength of mermfolk!"
 
 STRINGS.NAMES.SURFBOARD_ITEM                                    = "Surfboard"
 STRINGS.RECIPE_DESC.SURFBOARD_ITEM                              = "Cowabunga dudes!"
@@ -202,45 +202,45 @@ STRINGS.CHARACTERS.WURT.DESCRIBE.RAFT_OLD                       = "Has holes to 
 STRINGS.NAMES.PORTO_RAFT_OLD                                    = "Raft"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_RAFT_OLD              = "This looks adequate."
 STRINGS.RECIPE_DESC.PORTO_RAFT_OLD                              = "Totally sort of seaworthy."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_RAFT_OLD          = "Has holes to let water in."
+STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_RAFT_OLD          = "Has holes to let water in."
 
 STRINGS.NAMES.PORTO_LOGRAFT_OLD                                 = "Log raft"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT_OLD           = "log raft...?"
 STRINGS.RECIPE_DESC.PORTO_LOGRAFT_OLD                           = "This looks... sort of boat-like..."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_LOGRAFT_OLD       = "Is good for swimming, florp."
+STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_LOGRAFT_OLD       = "Is good for swimming, florp."
 
 STRINGS.NAMES.LOGRAFT_OLD                                       = "Log raft"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOGRAFT_OLD                 = "log raft...?"
 STRINGS.RECIPE_DESC.LOGRAFT_OLD                                 = "This looks... sort of boat-like..."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.LOGRAFT_OLD             = "Is good for swimming, florp."
+STRINGS.CHARACTERS.WURT.DESCRIBE.LOGRAFT_OLD             = "Is good for swimming, florp."
 
 STRINGS.NAMES.FLOTSAM_ARMOURED_BUILD                            = "Boat Debris"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_ARMOURED_BUILD      = "Boat Debris."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_ARMOURED_BUILD  = "Someone let too much water on boat."
+STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_ARMOURED_BUILD  = "Someone let too much water on boat."
 
 STRINGS.NAMES.FLOTSAM_CARGO_BUILD                               = "Boat Debris"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_CARGO_BUILD         = "Boat Debris."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_CARGO_BUILD     = "Someone let too much water on boat."
+STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_CARGO_BUILD     = "Someone let too much water on boat."
 
 STRINGS.NAMES.FLOTSAM_BAMBOO_BUILD                              = "Boat Debris"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_BAMBOO_BUILD        = "Boat Debris."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_BAMBOO_BUILD    = "Someone let too much water on boat."
+STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_BAMBOO_BUILD    = "Someone let too much water on boat."
 
 STRINGS.NAMES.FLOTSAM_LOGRAFT_BUILD                             = "Boat Debris"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_LOGRAFT_BUILD       = "Boat Debris."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_LOGRAFT_BUILD   = "Someone let too much water on boat."
+STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_LOGRAFT_BUILD   = "Someone let too much water on boat."
 
 STRINGS.NAMES.FLOTSAM_ROWBOAT_BUILD                             = "Boat Debris"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_ROWBOAT_BUILD       = "Boat Debris."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_ROWBOAT_BUILD   = "Someone let too much water on boat."
+STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_ROWBOAT_BUILD   = "Someone let too much water on boat."
 
 STRINGS.NAMES.FLOTSAM_SURFBOARD_BUILD                           = "Boat Debris"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_SURFBOARD_BUILD     = "Boat Debris."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_SURFBOARD_BUILD = "Someone let too much water on boat."
+STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_SURFBOARD_BUILD = "Someone let too much water on boat."
 
 STRINGS.NAMES.FLOTSAM_ENCRUSTED_BUILD                           = "Boat Debris"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_ENCRUSTED_BUILD     = "Boat Debris."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_ENCRUSTED_BUILD = "Someone let too much water on boat."
+STRINGS.CHARACTERS.WURT.DESCRIBE.FLOTSAM_ENCRUSTED_BUILD = "Someone let too much water on boat."
 
 STRINGS.NAMES.BOATCANNON                                        = "Boat Cannon"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOATCANNON                  = "The only thing better than a boat is a boat with a cannon."
@@ -254,7 +254,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.BOATCANNON                  = "It's about ti
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.BOATCANNON                   = "With this we can make a warship!"
 STRINGS.CHARACTERS.WX78.DESCRIBE.BOATCANNON                     = "I wonder if I can start fires with this?"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.BOATCANNON                   = "I wonder if I can start fires with this?"
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.BOATCANNON              = "Splodey ball shooter!"
+STRINGS.CHARACTERS.WURT.DESCRIBE.BOATCANNON              = "Splodey ball shooter!"
 
 STRINGS.NAMES.OBSIDIAN_BOATCANNON                               = "Pirate Cannon"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIAN_BOATCANNON         = "Worthy of a pirate."
@@ -267,7 +267,7 @@ STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.OBSIDIAN_BOATCANNON      = "Worthy of a p
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.OBSIDIAN_BOATCANNON         = "Worthy of a pirate"
 STRINGS.CHARACTERS.WX78.DESCRIBE.OBSIDIAN_BOATCANNON            = "Worthy of a pirate"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.OBSIDIAN_BOATCANNON          = "Worthy of a pirate"
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.OBSIDIAN_BOATCANNON     = "This belong to funny wood-folk scale-less."
+STRINGS.CHARACTERS.WURT.DESCRIBE.OBSIDIAN_BOATCANNON     = "This belong to funny wood-folk scale-less."
 
 STRINGS.NAMES.QUACKERINGRAM                                     = "Quackering Ram"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUACKERINGRAM               = "Does my ingenuity know no bounds?!"
@@ -281,7 +281,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.QUACKERINGRAM               = "Quacker befor
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.QUACKERINGRAM                = "Everyone get out of our way!!"
 STRINGS.CHARACTERS.WX78.DESCRIBE.QUACKERINGRAM                  = "Can't stop me now!"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.QUACKERINGRAM                = "Can't stop me now!"
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.QUACKERINGRAM           = "Will smash through everything!"
+STRINGS.CHARACTERS.WURT.DESCRIBE.QUACKERINGRAM           = "Will smash through everything!"
 
 STRINGS.NAMES.SAIL                                              = "Thatch Sail"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAIL                        = "This should really transform my boating experience."
@@ -295,7 +295,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.SAIL                        = "It will be sm
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.SAIL                         = "This'll give us a push!"
 STRINGS.CHARACTERS.WX78.DESCRIBE.SAIL                           = "It makes use of the wind."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.SAIL                         = "It makes use of the wind."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.SAIL                    = "This make boat go fast?"
+STRINGS.CHARACTERS.WURT.DESCRIBE.SAIL                    = "This make boat go fast?"
 
 STRINGS.NAMES.CLOTHSAIL                                         = "Cloth Sail"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CLOTHSAIL                   = "That wind isn't getting away now!"
@@ -322,7 +322,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.SNAKESKINSAIL               = "For ease of t
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.SNAKESKINSAIL                = "With our sheet of gross skins, we're ready for adventure."
 STRINGS.CHARACTERS.WX78.DESCRIBE.SNAKESKINSAIL                  = "What a morbid sail."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.SNAKESKINSAIL                = "What a morbid sail."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.SNAKESKINSAIL           = "Scales useful for lots of things, florpt!"
+STRINGS.CHARACTERS.WURT.DESCRIBE.SNAKESKINSAIL           = "Scales useful for lots of things, florpt!"
 
 STRINGS.NAMES.FEATHERSAIL                                       = "Feather Lite Sail"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FEATHERSAIL                 = "It's feather-light!"
@@ -336,7 +336,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.FEATHERSAIL                 = "I suppose it'
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.FEATHERSAIL                  = "A feathery sail makes for swift travel."
 STRINGS.CHARACTERS.WX78.DESCRIBE.FEATHERSAIL                    = "Gotta hand it to those dumdums... they make good sails!"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.FEATHERSAIL                  = "Gotta hand it to those dumdums... they make good sails!"
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.FEATHERSAIL             = "Birdies good at pushing air, florp."
+STRINGS.CHARACTERS.WURT.DESCRIBE.FEATHERSAIL             = "Birdies good at pushing air, florp."
 
 STRINGS.NAMES.IRONWIND                                          = "Iron Wind"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.IRONWIND                    = "This is how a scientist should travel."
@@ -350,7 +350,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.IRONWIND                    = "Thank goodnes
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.IRONWIND                     = "Who needs a sail!"
 STRINGS.CHARACTERS.WX78.DESCRIBE.IRONWIND                       = "Now we're gettin' somewhere."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.IRONWIND                     = "Now we're gettin' somewhere."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.IRONWIND                = "Never knew spinning was fast way to swim."
+STRINGS.CHARACTERS.WURT.DESCRIBE.IRONWIND                = "Never knew spinning was fast way to swim."
 
 STRINGS.NAMES.WOODLEGSSAIL                                      = "Woodlegs Sail"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGSSAIL                = "The quintessential pirate sail."
@@ -364,12 +364,12 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.WOODLEGSSAIL                = "A fine sail."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.WOODLEGSSAIL                 = "One fancy piece of cloth."
 STRINGS.CHARACTERS.WX78.DESCRIBE.WOODLEGSSAIL                   = "This sail looks like it would be special to someone."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.WOODLEGSSAIL                 = "This sail looks like it would be special to someone."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.WOODLEGSSAIL            = "Old scale-less man has a funny sail."
+STRINGS.CHARACTERS.WURT.DESCRIBE.WOODLEGSSAIL            = "Old scale-less man has a funny sail."
 
 STRINGS.NAMES.MALBATROSSAIL                                     = "Malbatros Sail"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MALBATROSSAIL               = "This should really transform my boating experience.."
 STRINGS.RECIPE_DESC.MALBATROSSAIL                               = "Malbatros Sail!"
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.MALBATROSSAIL           = "Smaller birdy sail, florp."
+STRINGS.CHARACTERS.WURT.DESCRIBE.MALBATROSSAIL           = "Smaller birdy sail, florp."
 
 STRINGS.NAMES.TRAWLNET                                          = "Trawl Net"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRAWLNET                    = "Nothing but net."
@@ -383,7 +383,7 @@ STRINGS.CHARACTERS.WOODIE.DESCRIBE.TRAWLNET                     = "I'll catch a 
 STRINGS.CHARACTERS.WX78.DESCRIBE.TRAWLNET                       = "I'll catch a bunch of wet stuff with this."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.TRAWLNET                     = "I wonder what we'll drag up."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.TRAWLNET                    = "I see no downside to using this."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.TRAWLNET                = "Collect fishies without nasty hook!"
+STRINGS.CHARACTERS.WURT.DESCRIBE.TRAWLNET                = "Collect fishies without nasty hook!"
 
 STRINGS.NAMES.TRAWLNETDROPPED                                   = "Trawl Net"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRAWLNETDROPPED             = "It's bulging with potential!"
@@ -411,7 +411,7 @@ STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.TARLAMP                = "Tar ought to 
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.TARLAMP                  = "A light to guide mine longship!"
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.TARLAMP                     = "A little light in the dark."
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.TARLAMP                      = "We could burn some tar for light."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.TARLAMP                 = "Icky black stuff useful for something, florp!"
+STRINGS.CHARACTERS.WURT.DESCRIBE.TARLAMP                 = "Icky black stuff useful for something, florp!"
 
 STRINGS.NAMES.BOAT_LANTERN                                      = "Boat Lantern"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_LANTERN                = "This will do wonders for my night vision!"
@@ -425,7 +425,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.BOAT_LANTERN                = "It lends an e
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.BOAT_LANTERN                 = "Seeing where we're going is sure handy!"
 STRINGS.CHARACTERS.WX78.DESCRIBE.BOAT_LANTERN                   = "Light without a flame. I don't like it one bit."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.BOAT_LANTERN                 = "Light without a flame. I don't like it one bit."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.BOAT_LANTERN            = "Can use to keep night lady away from water!"
+STRINGS.CHARACTERS.WURT.DESCRIBE.BOAT_LANTERN            = "Can use to keep night lady away from water!"
 
 STRINGS.NAMES.BOAT_TORCH                                        = "Boat Torch"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_TORCH                  = "This'll keep my hands free."
@@ -439,7 +439,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.BOAT_TORCH                  = "Sailing at ni
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.BOAT_TORCH                   = "It will light my way!"
 STRINGS.CHARACTERS.WX78.DESCRIBE.BOAT_TORCH                     = "Strangely not for torching boats."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.BOAT_TORCH                   = "Strangely not for torching boats."
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.BOAT_TORCH              = "Holds fire stick for me."
+STRINGS.CHARACTERS.WURT.DESCRIBE.BOAT_TORCH              = "Holds fire stick for me."
 
 STRINGS.NAMES.PORTO_SHADOWBOAT                                  = "暗影船套装"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_SHADOWBOAT            = "一艘船，由暗影能量所构成。"
@@ -457,7 +457,7 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.PORTO_LOGRAFT               = "It seems like
 STRINGS.CHARACTERS.WEBBER.DESCRIBE.PORTO_LOGRAFT                = "This does not look swift."
 STRINGS.CHARACTERS.WX78.DESCRIBE.PORTO_LOGRAFT                  = "Campfire wood has other uses, apparently!"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.PORTO_LOGRAFT                = "Campfire wood has other uses, apparently!"
-GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_LOGRAFT           = "Is good for swimming, florp."
+STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_LOGRAFT           = "Is good for swimming, florp."
 
 
 

@@ -1,6 +1,6 @@
 AddClassPostConstruct("widgets/statusdisplays", function(self)
     -- self.owner:HasTag("musha") then
-    local OxygenBadge = GLOBAL.require "widgets/oxygenbadge"
+    local OxygenBadge = require "widgets/oxygenbadge"
     self.oxygen = self:AddChild(OxygenBadge(self.owner))
     self.owner.oxygenbadge = self.oxygen
     self._custombadge = self.oxygen
@@ -11,8 +11,8 @@ AddClassPostConstruct("widgets/statusdisplays", function(self)
     self.oxygen:SetPosition(badge_brain.x + badge_stomach.x - badge_heart.x,
         badge_brain.y + badge_stomach.y - badge_heart.y, 0)
     -- local AlwaysOnStatus = false
-    -- for k, v in ipairs(GLOBAL.KnownModIndex:GetModsToLoad()) do
-    --     local Mod = GLOBAL.KnownModIndex:GetModInfo(v).name
+    -- for k, v in ipairs(KnownModIndex:GetModsToLoad()) do
+    --     local Mod = KnownModIndex:GetModInfo(v).name
     --     if Mod == "Combined Status" then
     --         AlwaysOnStatus = true
     --     end

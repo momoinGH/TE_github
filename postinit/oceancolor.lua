@@ -12,9 +12,6 @@ local AddNewTile = function(tile, range, tile_data, ground_tile_def, minimap_til
     AddTile(tile, range, tile_data, ground_tile_def, minimap_tile_def, turf_def)
 end
 
--- local TAENV = env
-GLOBAL.setfenv(1, GLOBAL)
-
 local is_worldgen = rawget(_G, "WORLDGEN_MAIN") ~= nil
 
 if not is_worldgen then

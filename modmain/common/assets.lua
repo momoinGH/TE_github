@@ -235,7 +235,7 @@ for i = 1, #MiMapAtlas do
     MiMapAtlas[i] = resolvefilepath(MiMapAtlas[i])
 end
 
-local old_GetInventoryItemAtlas_Internal = GLOBAL.GetInventoryItemAtlas_Internal
+local old_GetInventoryItemAtlas_Internal = GetInventoryItemAtlas_Internal
 local function GetInventoryItemAtlas_Extended(imagename, no_fallback)
     local atlas
     for _, path in ipairs(InvAtlas) do

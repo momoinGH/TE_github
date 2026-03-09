@@ -1290,3 +1290,10 @@ ModManager = {}
 -- subfmt("this is my {adjective} string, read it {number} times!", {adjective="cool", number="five"})
 -- => "this is my cool string, read it five times"
 function subfmt(s, tab) end
+
+
+terrain = { rooms = {}, filter = {} }
+
+
+
+function SetPause(val,reason) end

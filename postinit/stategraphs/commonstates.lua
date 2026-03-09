@@ -1,4 +1,3 @@
-GLOBAL.setfenv(1, GLOBAL)
 require("stategraphs/commonstates")
 
 local function on_exit_water(inst)

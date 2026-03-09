@@ -1,8 +1,4 @@
 require("map/lockandkey")
--- local LOCKS = GLOBAL.LOCKS
--- local KEYS = GLOBAL.KEYS
--- local LOCKS_KEYS = GLOBAL.LOCKS_KEYS
-
 -- local dimlock = #LOCKS
 -- local dimkey = #KEYS
 

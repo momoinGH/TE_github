@@ -24,7 +24,7 @@ local statue_symbols =
 
 local function shoot(attacker, target, targetpos)
      local x, y, z = attacker.Transform:GetWorldPosition()
-     local angle = attacker.Transform:GetRotation() * GLOBAL.DEGREES
+     local angle = attacker.Transform:GetRotation() * DEGREES
      local radius = 2 
      local offset_x = radius * math.cos(angle)
      local offset_z = radius * math.sin(angle)
@@ -98,7 +98,7 @@ local IronLordStates =
                     inst.artifact.ToggleLight(inst, true)
                     inst.SoundEmitter:PlaySound("dontstarve_DLC003/music/iron_lord") end),
                TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/iron_lord/morph") end),
-               TimeEvent(105*FRAMES, function(inst) GLOBAL.ShakeAllCameras(GLOBAL.CAMERASHAKE.FULL, 0.7, 0.02, .5, inst, 40) end),
+               TimeEvent(105*FRAMES, function(inst) ShakeAllCameras(CAMERASHAKE.FULL, 0.7, 0.02, .5, inst, 40) end),
                TimeEvent(125*FRAMES, function(inst) 
                     inst.artifact.ToggleVisual(inst, true)
                     inst.artifact.SetNetVar("control", inst, true)
@@ -146,7 +146,7 @@ local IronLordStates =
                TimeEvent(35*FRAMES, function(inst) inst.artifact.ToggleBGM(inst, false) end), 
                
                TimeEvent(52*FRAMES, function(inst) 
-                    local explosion = GLOBAL.SpawnPrefab("living_suit_explode_fx")
+                    local explosion = SpawnPrefab("living_suit_explode_fx")
                     explosion.Transform:SetPosition(inst.Transform:GetWorldPosition()) 
                end),
           }, 
@@ -449,7 +449,7 @@ local IronLordStates =
                inst:ShowHUD(true)
                inst:SetCameraDistance()
 
-               GLOBAL.SerializeUserSession(inst)
+               SerializeUserSession(inst)
           end,
 
           events=

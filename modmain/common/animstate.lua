@@ -1,9 +1,6 @@
 ---@author: Runar 2024-11-13 16:36:57
 -- AnimState 增强 Ver 1.11.22
 -- 滤镜与色彩空间封装
-local AnimState = AnimState or GLOBAL.AnimState
-
-if not AnimState then return end
 
 local filters = {
     generic = function(animstate)
@@ -66,7 +63,7 @@ function AnimState:PlayExtendAnim(animname)
     inst._animTask = inst:StartThread(function()
         for frame = 0, animations[animname][2] do
             animations[animname][1](self, frame)
-            Sleep(FunctionOrValue(animations[animname][3], frame) or FRAMES or GLOBAL.FRAMES)
+            Sleep(FunctionOrValue(animations[animname][3], frame) or FRAMES or FRAMES)
         end
         self:SetScale(1, 1)
         inst:Remove()

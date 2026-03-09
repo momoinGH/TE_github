@@ -106,11 +106,11 @@ PLANT_DEFS.radish.weight_data                  = { 361.51, 506.04, .28 }
 PLANT_DEFS.wheat.weight_data                   = { 361.51, 506.04, .28 }
 PLANT_DEFS.turnip.weight_data                  = { 361.51, 506.04, .28 }
 
-PLANT_DEFS.sweet_potato.pictureframeanim       = { anim = "emote_happycheer", time = 12 * GLOBAL.FRAMES }
-PLANT_DEFS.aloe.pictureframeanim               = { anim = "emote_happycheer", time = 12 * GLOBAL.FRAMES }
-PLANT_DEFS.radish.pictureframeanim             = { anim = "emote_happycheer", time = 12 * GLOBAL.FRAMES }
-PLANT_DEFS.wheat.pictureframeanim              = { anim = "emote_happycheer", time = 12 * GLOBAL.FRAMES }
-PLANT_DEFS.turnip.pictureframeanim             = { anim = "emote_happycheer", time = 12 * GLOBAL.FRAMES }
+PLANT_DEFS.sweet_potato.pictureframeanim       = { anim = "emote_happycheer", time = 12 * FRAMES }
+PLANT_DEFS.aloe.pictureframeanim               = { anim = "emote_happycheer", time = 12 * FRAMES }
+PLANT_DEFS.radish.pictureframeanim             = { anim = "emote_happycheer", time = 12 * FRAMES }
+PLANT_DEFS.wheat.pictureframeanim              = { anim = "emote_happycheer", time = 12 * FRAMES }
+PLANT_DEFS.turnip.pictureframeanim             = { anim = "emote_happycheer", time = 12 * FRAMES }
 
 PLANT_DEFS.sweet_potato.prefab                 = "farm_plant_sweet_potato"
 PLANT_DEFS.aloe.prefab                         = "farm_plant_aloe"

@@ -11,7 +11,7 @@ AddClassPostConstruct("components/embarker", function(self)
             local embarkable_radius = 0.1
             local alvo = GetClosestInstWithTag("barcoapto", self.inst, 6) or self.inst.Transform:GetWorldPosition()
             local embarkable_x, embarkable_y, embarkable_z = alvo.Transform:GetWorldPosition()
-            local embark_x, embark_z = GLOBAL.VecUtil_Normalize(embarker_x - embarkable_x, embarker_z - embarkable_z)
+            local embark_x, embark_z = VecUtil_Normalize(embarker_x - embarkable_x, embarker_z - embarkable_z)
             return embarkable_x + embark_x * embarkable_radius, embarkable_z + embark_z * embarkable_radius
         else
             local x, z = (self.disembark_x or self.last_embark_x), (self.disembark_z or self.last_embark_z)

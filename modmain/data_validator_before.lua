@@ -73,5 +73,8 @@ GLOBAL.STRINGS = old_strings
 ----------------------------------------------------------------------------------------------------
 
 Utils.FnDecorator(env, "AddAction", function(id)
-    prodevassert(not ACTIONS[id], "重复定义了ACTIONS: " .. id)
+    if type(id) == "table" then
+        id = id.id
+    end
+    prodevassert(not ACTIONS[id], "重复定义了ACTIONS." .. tostring(id))
 end)

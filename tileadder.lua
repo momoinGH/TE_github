@@ -112,7 +112,7 @@ end
 
 -- local function FirstToUpper( str )           return ( str:gsub("^%l", string.upper) )                    end
 
-local is_multiworlds_enabled = GLOBAL.KnownModIndex:IsModEnabled("workshop-726432903")
+local is_multiworlds_enabled = KnownModIndex:IsModEnabled("workshop-726432903")
 
 function AddTiles()
     for tilename, data in pairs(newTilesProperties) do

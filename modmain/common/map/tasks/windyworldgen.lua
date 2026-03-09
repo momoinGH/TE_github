@@ -122,13 +122,13 @@ end
 AddLevelPreInitAny(LevelPreInit)
 
 AddRoomPreInit("BGGrass", function(room) room.contents.distributeprefabs.peach_tree1 = 0.012 end)
-GLOBAL.terrain.filter.peach_tree1 = { GLOBAL.GROUND.ROAD, GLOBAL.GROUND.WOODFLOOR, GLOBAL.GROUND.CARPET, GLOBAL.GROUND
-	.CHECKER, GLOBAL.GROUND.ROCKY, GLOBAL.GROUND.MARSH }
+terrain.filter.peach_tree1 = { GROUND.ROAD, GROUND.WOODFLOOR, GROUND.CARPET, GROUND
+	.CHECKER, GROUND.ROCKY, GROUND.MARSH }
 
 AddRoomPreInit("BGForest", function(room) room.contents.distributeprefabs.peach_tree2 = 0.012 end)
-GLOBAL.terrain.filter.peach_tree2 = { GLOBAL.GROUND.ROAD, GLOBAL.GROUND.WOODFLOOR, GLOBAL.GROUND.CARPET, GLOBAL.GROUND
-	.CHECKER, GLOBAL.GROUND.ROCKY, GLOBAL.GROUND.MARSH }
+terrain.filter.peach_tree2 = { GROUND.ROAD, GROUND.WOODFLOOR, GROUND.CARPET, GROUND
+	.CHECKER, GROUND.ROCKY, GROUND.MARSH }
 
 AddRoomPreInit("Clearing", function(room) room.contents.distributeprefabs.peach_tree3 = 0.012 end)
-GLOBAL.terrain.filter.peach_tree3 = { GLOBAL.GROUND.ROAD, GLOBAL.GROUND.WOODFLOOR, GLOBAL.GROUND.CARPET, GLOBAL.GROUND
-	.CHECKER, GLOBAL.GROUND.ROCKY, GLOBAL.GROUND.MARSH }
+terrain.filter.peach_tree3 = { GROUND.ROAD, GROUND.WOODFLOOR, GROUND.CARPET, GROUND
+	.CHECKER, GROUND.ROCKY, GROUND.MARSH }

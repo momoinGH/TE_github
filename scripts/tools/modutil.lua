@@ -17,9 +17,9 @@
 --- func desc
 -- ---@param modname string
 -- function GetModEnv(modname)
---     for i, name in pairs(GLOBAL.ModManager.modnames) do
+--     for i, name in pairs(ModManager.modnames) do
 --         if name == modname then
---             return GLOBAL.ModManager.modnames[i]
+--             return ModManager.modnames[i]
 --         end
 --     end
 -- end

@@ -34,9 +34,6 @@ AddClassPostConstruct("components/combat_replica", function(self)
     end
 end)
 
-local require = GLOBAL.require
-local resolvefilepath = GLOBAL.resolvefilepath
-
 AddClassPostConstruct("widgets/controls", function(self)
     if self.owner == nil then return end
     local VisorOver = require "widgets/visorover"
@@ -96,7 +93,7 @@ end)
 
 AddPlayerPostInit(function(inst)
     local function fn(ent)
-        if ent == GLOBAL.TheWorld then --[[
+        if ent == TheWorld then --[[
 	        local tuning = TUNING.GOGGLES_HEAT.GROUND
 			 ent.Map:SetMultColour(unpack(tuning.MULT_COLOUR))
 			 ent.Map:SetAddColour(unpack(tuning.ADD_COLOUR))
@@ -119,29 +116,29 @@ AddPlayerPostInit(function(inst)
             if tuning.BLOOM then
                 ent.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
             end
-            ent.AnimState:SetMultColour(GLOBAL.unpack(tuning.MULT_COLOUR))
-            ent.AnimState:SetAddColour(GLOBAL.unpack(tuning.ADD_COLOUR))
+            ent.AnimState:SetMultColour(unpack(tuning.MULT_COLOUR))
+            ent.AnimState:SetAddColour(unpack(tuning.ADD_COLOUR))
             -- ent.AnimState:SetSaturation(1 - tuning.DESATURATION)
         end
     end
 
     local function OnPlayerActivated(inst)
-        GLOBAL.TheWorld:ListenForEvent("ccoverrides", function()
+        TheWorld:ListenForEvent("ccoverrides", function()
             inst:DoTaskInTime(0, function()
                 if inst.components.playervision.heatvision then
-                    if GLOBAL.TheWorld.components.globalcolourmodifier then
-                        GLOBAL.TheWorld.components.globalcolourmodifier:SetModifyColourFn(fn)
+                    if TheWorld.components.globalcolourmodifier then
+                        TheWorld.components.globalcolourmodifier:SetModifyColourFn(fn)
                     end
                 elseif inst.components.playervision.heatvision == false then
-                    if GLOBAL.TheWorld.components.globalcolourmodifier then
-                        GLOBAL.TheWorld.components.globalcolourmodifier:Reset()
+                    if TheWorld.components.globalcolourmodifier then
+                        TheWorld.components.globalcolourmodifier:Reset()
                     end
                 end
             end)
         end, inst)
     end
 
-    if not GLOBAL.TheNet:IsDedicated() then
+    if not TheNet:IsDedicated() then
         inst:ListenForEvent("playeractivated", OnPlayerActivated)
     end
 end)
@@ -191,7 +188,7 @@ AddComponentPostInit("playervision", function(self)
     local function OnInit(inst, self)
         inst:ListenForEvent("equip", OnEquipChanged)
         inst:ListenForEvent("unequip", OnEquipChanged)
-        if not GLOBAL.TheWorld.ismastersim then
+        if not TheWorld.ismastersim then
             inst:ListenForEvent("inventoryclosed", OnEquipChanged)
             if inst.replica.inventory == nil then return end
         end

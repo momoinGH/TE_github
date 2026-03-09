@@ -1,5 +1,3 @@
-GLOBAL.setfenv(1, GLOBAL)
-
 require "constants"
 require "mathutil"
 require "map/terrain"

@@ -97,16 +97,16 @@ end
 
 
 local function OnPlayerSpawn(inst)
-	inst.mynetvarCameraMode = GLOBAL.net_tinybyte(inst.GUID, "BakuStuffNetStuff", "DirtyEventCameraStuff")
+	inst.mynetvarCameraMode = net_tinybyte(inst.GUID, "BakuStuffNetStuff", "DirtyEventCameraStuff")
 	inst.mynetvarCameraMode:set(0)
 	inst:DoTaskInTime(0, RegisterListenersCameraStuff)
 
 	inst:DoTaskInTime(0, function(inst)
-		-- if GLOBAL.GetClosestInstWithTag("shopinterior", inst, 30) then
+		-- if GetClosestInstWithTag("shopinterior", inst, 30) then
 		-- 	inst.mynetvarCameraMode:set(4)
-		-- elseif GLOBAL.GetClosestInstWithTag("caveinterior", inst, 30) then
+		-- elseif GetClosestInstWithTag("caveinterior", inst, 30) then
 		-- 	inst.mynetvarCameraMode:set(5)
-		-- elseif GLOBAL.GetClosestInstWithTag("pisointeriorpalace", inst, 30) then
+		-- elseif GetClosestInstWithTag("pisointeriorpalace", inst, 30) then
 		-- 	inst.mynetvarCameraMode:set(7)
 		-- else
 		inst.mynetvarCameraMode:set(6)

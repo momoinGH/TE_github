@@ -411,7 +411,7 @@ Bunches.wobster_den_spawner_shore = {
                         return "moonglass_wobster_den"
                     elseif tile == GROUND.BEACH or tile == GROUND.MEADOW or tile == GROUND.ASH or tile == GROUND.JUNGLE or tile == GROUND.VOLCANO_ROCK or tile == GROUND.TIDALMARSH then
                         return "lobsterhole"
-                    elseif not GLOBAL.IsOceanTile(tile) then
+                    elseif not IsOceanTile(tile) then
                         return "wobster_den"
                     end
                 end
@@ -463,7 +463,7 @@ AddRoom("FrostIsland_deciduoustree", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     contents = {
         countstaticlayouts =
         {
@@ -494,7 +494,7 @@ AddRoom("FrostIsland_Mine", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     contents = {
         countprefabs =
         {
@@ -521,7 +521,7 @@ AddRoom("FrostIsland_Mineboss", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     contents = {
         countprefabs =
         {
@@ -552,7 +552,7 @@ AddRoom("FrostIsland_Mammoth", {
     value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
     -- tags = { "RoadPoison" },
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     random_node_entrance_weight = 0,
     contents = {
         countprefabs =
@@ -580,7 +580,7 @@ AddRoom("FrostIsland_Meadows", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     random_node_exit_weight = 0,
     contents = {
         countprefabs =
@@ -610,7 +610,7 @@ AddRoom("FrostIsland_Meadowscave", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     random_node_exit_weight = 0,
     contents = {
         countprefabs =
@@ -685,7 +685,7 @@ AddRoom("strange_island_canada", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
-    --					type = GLOBAL.NODE_TYPE.SeparatedRoom,		
+    --					type = NODE_TYPE.SeparatedRoom,		
     contents = {
         --					countstaticlayouts={["strangerlavaarena"]=1},	
         countstaticlayouts =
@@ -721,7 +721,7 @@ AddRoom("strange_island_canada2", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
     value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
-    --					type = GLOBAL.NODE_TYPE.SeparatedRoom,	
+    --					type = NODE_TYPE.SeparatedRoom,	
     contents = {
         distributepercent = .38, --.5
         distributeprefabs =
@@ -754,7 +754,7 @@ AddRoom("strange_island_canada3", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = GROUND.SNOWLAND,
     tags = { "RoadPoison", "frost" },
-    type = GLOBAL.NODE_TYPE.SeparatedRoom,
+    type = NODE_TYPE.SeparatedRoom,
     contents = {
         distributepercent = 0.17,
         distributeprefabs =
@@ -981,7 +981,7 @@ AddRoom("rock_ice_frost_lake",
         colour = { r = .6, g = .2, b = .8, a = .50 },
         value = GROUND.OCEAN_ROUGH,
         tags = { "RoadPoison", "ForceConnected" }, --"ForceDisconnected"
-        type = GLOBAL.NODE_TYPE.SeparatedRoom,
+        type = NODE_TYPE.SeparatedRoom,
         contents =
         {
             distributepercent = 0.5,
@@ -1407,7 +1407,7 @@ AddRoom("seatarolake",
         colour = { r = .6, g = .2, b = .8, a = .50 },
         value = GROUND.OCEAN_ROUGH,
         tags = { "RoadPoison", "ForceConnected" }, --"ForceDisconnected"
-        type = GLOBAL.NODE_TYPE.SeparatedRoom,
+        type = NODE_TYPE.SeparatedRoom,
         contents =
         {
             distributepercent = 0.5,
@@ -1465,7 +1465,7 @@ AddRoom("Marshpool", {
     colour = { r = 0.5, g = .16, b = .35, a = .50 },
     value = GROUND.MARSH,
     tags = { "RoadPoison" }, ----"ForceConnected"
-    type = GLOBAL.NODE_TYPE.SeparatedRoom,
+    type = NODE_TYPE.SeparatedRoom,
     contents = {
         countstaticlayouts = {
             ["MushroomRingMedium"] = function()
@@ -1534,7 +1534,7 @@ AddRoom("swambpool1", {
     colour = { r = 0.5, g = .16, b = .35, a = .50 },
     value = GROUND.MARSH,
     tags = { "RoadPoison" }, ----"ForceConnected"
-    type = GLOBAL.NODE_TYPE.SeparatedRoom,
+    type = NODE_TYPE.SeparatedRoom,
     contents = {
         distributepercent = 0.8,
         distributeprefabs =
@@ -1560,7 +1560,7 @@ AddRoom("swambpool2", {
     colour = { r = 0.5, g = .16, b = .35, a = .50 },
     value = GROUND.MARSH,
     tags = { "RoadPoison" }, ----"ForceConnected"
-    type = GLOBAL.NODE_TYPE.SeparatedRoom,
+    type = NODE_TYPE.SeparatedRoom,
     contents = {
         distributepercent = 0.8,
         distributeprefabs =
@@ -1587,7 +1587,7 @@ AddRoom("poolox", {
     value = GROUND.OCEAN_COASTAL_SHORE,
     level_set_piece_blocker = true,
     tags = { "RoadPoison" }, ----"ForceConnected"
-    type = GLOBAL.NODE_TYPE.SeparatedRoom,
+    type = NODE_TYPE.SeparatedRoom,
     contents = {
         countstaticlayouts = { ["pantano"] = 1 },
         distributepercent = 1,
@@ -1601,7 +1601,7 @@ AddRoom("poolox1", {
     value = GROUND.OCEAN_COASTAL_SHORE,
     level_set_piece_blocker = true,
     tags = { "RoadPoison" }, ----"ForceConnected"
-    type = GLOBAL.NODE_TYPE.SeparatedRoom,
+    type = NODE_TYPE.SeparatedRoom,
     contents = {
         countstaticlayouts = { ["pantano"] = 1 },
         distributepercent = 1,
@@ -1615,7 +1615,7 @@ AddRoom("poolox2", {
     value = GROUND.OCEAN_COASTAL_SHORE,
     level_set_piece_blocker = true,
     tags = { "RoadPoison" }, ----"ForceConnected"
-    type = GLOBAL.NODE_TYPE.SeparatedRoom,
+    type = NODE_TYPE.SeparatedRoom,
     contents = {
         countstaticlayouts = { ["pantano"] = 1 },
         distributepercent = 1,
@@ -1629,7 +1629,7 @@ AddRoom("poolox3", {
     value = GROUND.OCEAN_COASTAL_SHORE,
     level_set_piece_blocker = true,
     tags = { "RoadPoison" }, ----"ForceConnected"
-    type = GLOBAL.NODE_TYPE.SeparatedRoom,
+    type = NODE_TYPE.SeparatedRoom,
     contents = {
         countstaticlayouts = { ["pantano"] = 1 },
         distributepercent = 1,
@@ -10450,7 +10450,7 @@ AddRoom("BeachPalmCasino", {
 
         countprefabs = {
             packim_fishbone = 1,
-            underwater_entrance1 = 1, --function() if GLOBAL.KnownModIndex:IsModEnabled("Creep in the deeps TE") then return 1 end return 0 end,
+            underwater_entrance1 = 1, --function() if KnownModIndex:IsModEnabled("Creep in the deeps TE") then return 1 end return 0 end,
             gravestone = 5,
         }
 
@@ -13679,7 +13679,7 @@ AddRoom("MAINBeachPalmCasino", {
 
         countprefabs = {
             packim_fishbone = 1,
-            underwater_entrance1 = 1, --function() if GLOBAL.KnownModIndex:IsModEnabled("Creep in the deeps TE") then return 1 end return 0 end,
+            underwater_entrance1 = 1, --function() if KnownModIndex:IsModEnabled("Creep in the deeps TE") then return 1 end return 0 end,
             gravestone = 5,
         }
 
@@ -15704,8 +15704,8 @@ AddRoom("HamSlurtleCanyon", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .20,
         distributeprefabs =
@@ -15740,8 +15740,8 @@ AddRoom("HamBatsAndSlurtles", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .20,
         distributeprefabs =
@@ -15775,8 +15775,8 @@ AddRoom("HamRockyPlains", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .25,
         distributeprefabs =
@@ -15811,8 +15811,8 @@ AddRoom("HamRockyPlainsexit", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .20,
         distributeprefabs =
@@ -15838,8 +15838,8 @@ AddRoom("HamRockyHatchingGrounds", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .30,
         distributeprefabs =
@@ -15864,8 +15864,8 @@ AddRoom("HamBatsAndRocky", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},
-    type = GLOBAL.NODE_TYPE.SeparatedRoom,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
+    type = NODE_TYPE.SeparatedRoom,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     contents = {
         countstaticlayouts = {
             ["antqueencave"] = 1,
@@ -15893,8 +15893,8 @@ AddRoom("HamBGRockyCaveRoom", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
     value = GROUND.MUD,
     --    tags = {"Hutch_Fishbowl"},	
-    type = GLOBAL.NODE_TYPE.Room,
-    internal_type = GLOBAL.NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
+    type = NODE_TYPE.Room,
+    internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
     contents = {
         distributepercent = .20,
         distributeprefabs =
@@ -16826,7 +16826,7 @@ AddTask("MFor a nice walk", {
 })
 
 
-if GLOBAL.KnownModIndex:IsModEnabled("workshop-2039181790") then
+if KnownModIndex:IsModEnabled("workshop-2039181790") then
     AddTask("MLightning Bluff", {
         locks = {},
         keys_given = {},
@@ -17153,7 +17153,7 @@ AddTask("XFor a nice walk", {
 })
 
 
-if GLOBAL.KnownModIndex:IsModEnabled("workshop-2039181790") then
+if KnownModIndex:IsModEnabled("workshop-2039181790") then
     AddTask("XLightning Bluff", {
         locks = { LOCKS.QUAGMIRE_GATEWAY },
         keys_given = { KEYS.QUAGMIRE_GATEWAY },
@@ -20025,7 +20025,7 @@ AddRoom("UnderwaterEntrance", {
 
 ------------------------------------------------------------------------------------------------------
 ----------------------------------cherry forest--------------------------------------------------------------------
-if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289779251") then
+if KnownModIndex:IsModEnabled("workshop-1289779251") then
     local function GetCherryForestSize(mod, min, max)
         local num = TUNING.CHERRYFOREST_SIZE
         num = num + mod
@@ -20038,7 +20038,7 @@ if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289779251") then
         keys_given = { KEYS.ISLAND_TIERCHERRY },
         region_id = "islandcherry",
         room_tags = { "RoadPoison", "cherryarea", "not_mainland" },
-        type = GLOBAL.NODE_TYPE.SeparatedRoom,
+        type = NODE_TYPE.SeparatedRoom,
         room_choices =
         {
             ["CherryForestArchipelago"] = GetCherryForestSize(2, 2, 6),
@@ -20379,7 +20379,7 @@ if TUNING.tropical.only_shipwrecked then
         end
 
         ---------------umcompromissing-------------------------------------
-        if GLOBAL.KnownModIndex:IsModEnabled("workshop-2039181790") then
+        if KnownModIndex:IsModEnabled("workshop-2039181790") then
             table.insert(taskset.tasks, "GiantTrees")
         end
         ----------------------------------------------------------------------
@@ -20388,7 +20388,7 @@ if TUNING.tropical.only_shipwrecked then
             table.insert(taskset.tasks, "EntranceToReef")
         end
         -----------------------------cherry forest-----------------------------------------------------
-        if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289779251") then
+        if KnownModIndex:IsModEnabled("workshop-1289779251") then
             if GetModConfigData("cherryforest") == 10 then
                 table.insert(taskset.tasks, "cherry_mainland")
             end
@@ -21398,7 +21398,7 @@ else
             table.insert(taskset.tasks, "Lightning Bluff")
         end
 
-        if GLOBAL.KnownModIndex:IsModEnabled("workshop-2039181790") then
+        if KnownModIndex:IsModEnabled("workshop-2039181790") then
             table.insert(taskset.tasks, "GiantTrees")
         end
 
@@ -21407,7 +21407,7 @@ else
         end
 
         -----------------------------cherry forest-----------------------------------------------------
-        if GLOBAL.KnownModIndex:IsModEnabled("workshop-1289779251") then
+        if KnownModIndex:IsModEnabled("workshop-1289779251") then
             if GetModConfigData("cherryforest") == 10 then
                 table.insert(taskset.tasks, "cherry_mainland")
             end
@@ -21443,7 +21443,7 @@ else
             end
         end
         ----------------------------------------------------------------------------
-        if GLOBAL.KnownModIndex:IsModEnabled("workshop-1982562290") then
+        if KnownModIndex:IsModEnabled("workshop-1982562290") then
             table.insert(taskset.tasks, "TiddlesBogs")
         end
         -------------------------

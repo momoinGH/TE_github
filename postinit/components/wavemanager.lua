@@ -1,6 +1,3 @@
-local TROENV = env
-GLOBAL.setfenv(1, GLOBAL)
-
 local function GetWaveBearing(map, ex, ey, ez)
 	local radius = 3.5
 	local tx, tz = ex % TILE_SCALE, ez % TILE_SCALE
@@ -165,7 +162,7 @@ local tro_shimmer = {
 -- 	self.shimmer_per_sec_mod = shimmer
 -- end
 
-TROENV.AddComponentPostInit("wavemanager", function(cmp)
+AddComponentPostInit("wavemanager", function(cmp)
 	for i, v in pairs(tro_shimmer) do
 		cmp.shimmer[i] = v
 	end

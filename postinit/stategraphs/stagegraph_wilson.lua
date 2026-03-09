@@ -1,17 +1,4 @@
-local AddStategraphActionHandler = AddStategraphActionHandler
-local ActionHandler = ActionHandler
-
-
-local AddStategraphState = AddStategraphState
-local EventHandler = EventHandler
-local State = State
-local ACTIONS = ACTIONS
-
-
-
-
-
-
+local TIMEOUT = 2
 
 -- players stategraph
 local player_overrides = {
@@ -2436,7 +2423,7 @@ local magica = State {
     },
 }
 
-local TIMEOUT = 2
+
 
 local magica_client = State
     {

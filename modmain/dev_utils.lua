@@ -4,7 +4,8 @@ proisdev = not string.starts(modname, "workshop-")
 GLOBAL.proisdev = proisdev
 
 if proisdev then
-    require("debugcommands") --允许控制台直接调用d_xxx函数
+    require("debugcommands")  --允许控制台直接调用d_xxx函数
+    require "consolecommands" --允许控制台直接调用c_xxx函数
 end
 
 -- 自定义打印函数，就是简单的把内容拼接在一起，和科雷不同的事不会在每个元素之间加空格
