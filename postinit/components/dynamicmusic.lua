@@ -1,4 +1,4 @@
-local upvaluehelper = require("tools/upvaluehelper")
+local upvaluehelper = require("tropical_utils/upvaluehelper")
 
 local soundremap = {
 
@@ -61,9 +61,9 @@ AddComponentPostInit("dynamicmusic", function(self, inst)
 
     ---勾不了函数我还勾不了参数吗，我可太牛逼了
     BUSYTHEMES.ROG = BUSYTHEMES.FOREST
-    BUSYTHEMES.SHIPWRECCKED = tableutil.getlength(BUSYTHEMES) + 1
-    BUSYTHEMES.HAMLET = tableutil.getlength(BUSYTHEMES) + 1
-    BUSYTHEMES.VOLCANO = tableutil.getlength(BUSYTHEMES) + 1
+    BUSYTHEMES.SHIPWRECCKED = table.count(BUSYTHEMES) + 1
+    BUSYTHEMES.HAMLET = table.count(BUSYTHEMES) + 1
+    BUSYTHEMES.VOLCANO = table.count(BUSYTHEMES) + 1
 
 
     local function MusicReDirect()

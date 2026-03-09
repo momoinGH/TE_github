@@ -267,7 +267,7 @@ local testfns = {
 for prefabname, prefabdata in pairs(natureskins) do
     for skinname, skindata in pairs(prefabdata) do
         if skinname ~= "default" then
-            skindata = tableutil.deep_merge(skindata, prefabdata.default) or skindata
+            skindata = table.prodeep_merge(skindata, prefabdata.default) or skindata
             skindata.prefabname = skindata.prefabname or prefabname
             skindata.skinname = skindata.skinname or skinname
 

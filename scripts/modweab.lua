@@ -33,10 +33,12 @@ function EntityScript:GetDisplayName()
     return name
 end;
 
-_G.DAMAGETYPE_IDS = {}
-for o, p in pairs(_G.DAMAGETYPES) do
-    _G.DAMAGETYPE_IDS[p] = o
+DAMAGETYPE_IDS = {}
+GLOBAL.DAMAGETYPE_IDS = DAMAGETYPE_IDS
+for o, p in pairs(DAMAGETYPES) do
+    DAMAGETYPE_IDS[p] = o
 end;
+
 
 local SpDamageUtil = require("components/spdamageutil")
 
@@ -92,7 +94,7 @@ AddComponentPostInit("combat", function(self)
                 u[s] = nil
             else
                 u[t][s] = nil;
-                if _G.GetTableSize(u[t]) < 1 then u[t] = nil end
+                if GetTableSize(u[t]) < 1 then u[t] = nil end
             end
         end
     end;
@@ -233,7 +235,7 @@ AddComponentPostInit("combat", function(self)
             for o, v in pairs(p) do
                 local z = z or self:GetWeapon()
                 local L = z ~= nil and z.components.weapon or self;
-                if t == "generic" or t == "stimuli" and x == o or t == "dmgtype" and L.damagetype and L.damagetype == _G.DAMAGETYPES[_G.DAMAGETYPE_IDS[o]] then
+                if t == "generic" or t == "stimuli" and x == o or t == "dmgtype" and L.damagetype and L.damagetype == DAMAGETYPES[DAMAGETYPE_IDS[o]] then
                     if t == "generic" then
                         if type(v) == "function" then
                             local M, N, O = v(G, H, z, x)
@@ -255,7 +257,7 @@ AddComponentPostInit("combat", function(self)
             end
         end;
         local R = false;
-        if _G.GetTableSize(K.overrides.additive) > 0 or _G.GetTableSize(K.overrides.multiplicative) > 0 then R = true end;
+        if GetTableSize(K.overrides.additive) > 0 or GetTableSize(K.overrides.multiplicative) > 0 then R = true end;
         for S, v in pairs(K[R and "overrides" or "common"].multiplicative) do if v then J = J * v end end; for S, v in pairs(K[R and "overrides" or "common"].additive) do
             if v then
                 I =
@@ -276,7 +278,7 @@ AddComponentPostInit("combat", function(self)
 
     function self:DoAreaAttack(A, Y, z, Z, x, _)
         local a0 = 0; local a1, a2, a3 = A.Transform:GetWorldPosition()
-        local a4 = _G.TheSim:FindEntities(a1, a2, a3, Y, { "_combat" }, _)
+        local a4 = TheSim:FindEntities(a1, a2, a3, Y, { "_combat" }, _)
         for P, y in ipairs(a4) do
             if y ~= A and y ~= self.inst and self:IsValidTarget(y) and (Z == nil or Z(y, self.inst)) then
                 self.inst:PushEvent("onareaattackother", { target = y, weapon = z, stimuli = x })
@@ -371,8 +373,8 @@ AddComponentPostInit("weapon", function(self)
                 for S, y in ipairs(T) do
                     if y ~= G and y.entity:IsValid() and y.components.workable ~= nil and self.inst.IsWorkableAllowed ~= nil and type(self.inst.IsWorkableAllowed) == "function" and self.inst:IsWorkableAllowed(y.components.workable:GetWorkAction(), y) then
                         local ac = self.inst.prefab:upper()
-                        if _G.TUNING.FORGE_ITEM_PACK[ac] ~= nil and _G.TUNING.FORGE_ITEM_PACK[ac].WORKABLE_DMG ~= nil then
-                            y.components.workable:WorkedBy(G, _G.TUNING.FORGE_ITEM_PACK[ac].WORKABLE_DMG)
+                        if TUNING.FORGE_ITEM_PACK[ac] ~= nil and TUNING.FORGE_ITEM_PACK[ac].WORKABLE_DMG ~= nil then
+                            y.components.workable:WorkedBy(G, TUNING.FORGE_ITEM_PACK[ac].WORKABLE_DMG)
                         end
                     end; if y ~= G and G.components.combat:IsValidTarget(y) and y.components.health and not y.components.health:IsDead() then
                         G.components.combat:DoAttack(y, self.inst, U, x, V)

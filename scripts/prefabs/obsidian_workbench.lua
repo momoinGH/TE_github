@@ -1,6 +1,4 @@
 require "recipe"
-require "modutil"
-
 local assets =
 {
     Asset("ANIM", "anim/workbench_obsidian.zip"),

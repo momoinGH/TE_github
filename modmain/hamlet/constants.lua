@@ -1,5 +1,5 @@
 --渡渡鸟数量控制
-_G.SEABEACH_AMOUNT = {
+SEABEACH_AMOUNT = {
     doydoy = 0,
 }
 

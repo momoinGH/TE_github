@@ -1,4 +1,4 @@
-local upvaluehelper = require("tools/upvaluehelper")
+local upvaluehelper = require("tropical_utils/upvaluehelper")
 
 AddComponentPostInit("hounded", function(self)
     self.inst:DoTaskInTime(0, function()

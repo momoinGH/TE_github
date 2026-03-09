@@ -1,11 +1,9 @@
-local upvaluehelper = require("tools/upvaluehelper")
 require("constants")
 require("mathutil")
 
-local ta_worldgen = TA_CONFIG.WORLDGEN
 local forest_map = require("map/forest_map")
 
-local old_generatemap = forest_map.Generate--[[
+local old_generatemap = forest_map.Generate --[[
 local SKIP_GEN_CHECKS = upvaluehelper.Get(old_generatemap, "SKIP_GEN_CHECKS")
 if SKIP_GEN_CHECKS ~= nil and TA_CONFIG.DEVELOP.test_map then
     print("Skipping generation checks for test map")
@@ -28,9 +26,10 @@ forest_map.Generate = function(prefab, map_width, map_height, tasks, level, leve
     if save == nil then return save end
     -- if level.location ~= "forest" then return save end
     -- if not TUNING.hamlet then return save end
-    if not tableutil.has_all_of_component(level.tasks, { "Edge_of_civilization", "Pigtopia", "Other_edge_of_civilization", "Other_pigtopia" }) then
-        return
-            save
+    for _, v in ipairs({ "Edge_of_civilization", "Pigtopia", "Other_edge_of_civilization", "Other_pigtopia" }) do
+        if not table.contains(level.tasks, v) then
+            return save
+        end
     end
 
     --------------------building porkland cities---------------------------------------------------------------------

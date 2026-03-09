@@ -41,7 +41,7 @@ if true then
             level.ocean_prefill_setpieces["HermitcrabIsland"] = 1
             -- level.ocean_prefill_setpieces["CrabKing"] = 1
 
-            tableutil.insert_components(level.ocean_population, {
+            table.proinserttable_unique(level.ocean_population, {
                 "OceanBrinepool",
             })
         end
@@ -62,7 +62,7 @@ end
 if ta_worldgen.together == false then
     AddLevelPreInitAny(function(level)
         if level.location == "forest" then
-            tableutil.remove_components(
+            table.proremovearrayvalues(
                 level.tasks,
                 {
                     "Make a pick",
@@ -79,7 +79,7 @@ if ta_worldgen.together == false then
             )
 
             level.numoptionaltasks = 0
-            tableutil.remove_indexes(
+            table.proremovearrayvalues(
                 level.set_pieces,
                 {
                     "ResurrectionStone",
@@ -102,7 +102,7 @@ end
 if ta_worldgen.ocean_content == false then
     AddLevelPreInitAny(function(level)
         if level.location == "forest" then
-            tableutil.remove_components(
+            table.proremovearrayvalues(
                 level.tasks,
                 {
                     "MoonIsland_IslandShards",
@@ -112,7 +112,7 @@ if ta_worldgen.ocean_content == false then
                     "MoonIsland_Mine",
                 }
             )
-            tableutil.remove_indexes(
+            table.proremovearrayvalues(
                 level.set_pieces,
                 {
                     "MoonAltarRockGlass",
@@ -123,17 +123,18 @@ if ta_worldgen.ocean_content == false then
                 }
             )
 
-            tableutil.remove_indexes(
-                level.ocean_prefill_setpieces,
-                {
+            if level.ocean_prefill_setpieces then
+                for _, v in ipairs({
                     "BrinePool1",
                     "BrinePool2",
                     "BrinePool3",
                     "Waterlogged1",
                     "MonkeyIsland",
                     "HermitcrabIsland",
-                }
-            )
+                }) do
+                    level.ocean_prefill_setpieces[v] = nil
+                end
+            end
 
             -- level.required_setpieces = {}
 
@@ -175,7 +176,7 @@ end
 if ta_worldgen.cave_content == "part" then
     AddLevelPreInitAny(function(level)
         if level.location == "caves" then
-            tableutil.remove_components(
+            table.proremovearrayvalues(
                 level.tasks,
                 {
                     "CaveExitTask1",

@@ -116,11 +116,11 @@ local is_multiworlds_enabled = KnownModIndex:IsModEnabled("workshop-726432903")
 
 function AddTiles()
     for tilename, data in pairs(newTilesProperties) do
-        _G.assert(_G.type(tilename) == "string", "Name should be a string parameter")
-        _G.assert(_G.type(data.specs) == "table", "Specs should be a table parameter")
+        assert(type(tilename) == "string", "Name should be a string parameter")
+        assert(type(data.specs) == "table", "Specs should be a table parameter")
 
         local mapspecs = data.specs
-        local layer = _G.type(data.layer) == "number" and data.layer or nil
+        local layer = type(data.layer) == "number" and data.layer or nil
         if layer and (layer < 0 or layer >= 255) then
             return error(("Layer level shoud be in range 1..255, now it is %d"):format(layer))
         end
@@ -223,7 +223,7 @@ function AddMinimap()
             { groundID, { name = "map_edge", noise_texture = MiniGroundTextures(tilename) } })
 
         if data.turf then
-            _G.assert(_G.type(data.turf) == "table")
+            assert(type(data.turf) == "table")
             addedTilesTurfInfo[groundID] = data.turf
         end
     end
@@ -233,7 +233,7 @@ function AddMinimap()
         for _, data in pairs(minimapGroundProperties) do
             local tile_type, layer_properties = unpack(data)
             -- print(layer_properties.name, GroundAtlas(layer_properties.name))
-            local handle = _G.MapLayerManager:CreateRenderLayer(
+            local handle = MapLayerManager:CreateRenderLayer(
                 tile_type,
                 resolvefilepath(GroundAtlas(layer_properties.name)),
                 resolvefilepath(GroundImage(layer_properties.name)),

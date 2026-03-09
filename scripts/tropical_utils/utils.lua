@@ -79,13 +79,6 @@ function FN.FnDecorator(obj, key, beforeFn, afterFn, isUseBeforeReturn)
     end
 end
 
-function FN.AppendKVArray(orig, addition)
-    for k, v in pairs(addition) do
-        orig[k] = v
-    end
-    return orig
-end
-
 ---在StateGraph中根据timline的time获取timeline对应的索引，通过time来查找自己要替换的TimeEvent比直接翻源码查索引要好一点儿，因为别的mod可能会中间插入其他的TimeEvent
 ---@param timeline table sg的timeline表
 ---@param time number TimeEvent的time，一般是 数字*FRAMES

@@ -1255,6 +1255,7 @@ function StackTraceToLog() end
 
 function StackTrace(err) end
 
+-- 新建一个数组，把参数数组全部插入insert进去
 function ArrayUnion(...) end
 
 Action = Class(function(self, data, instant, rmb, distance, ghost_valid, ghost_exclusive, canforce, rangecheckfn) end)
@@ -1300,3 +1301,12 @@ function SetPause(val, reason) end
 
 -- 加载预制件文件，返回文件定义的预制件对象
 function LoadPrefabFile( filename, async_batch_validation, search_asset_first_path ) end
+
+
+MapLayerManager = {}
+
+-- 表是否存在某个值
+function table.contains(table, element) end
+
+-- 移除数组值，这个比table.removearrayvalue强，因为这个是倒叙遍历数组
+function RemoveByValue(t, value) end

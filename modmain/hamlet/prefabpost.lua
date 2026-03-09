@@ -15,12 +15,12 @@ modimport "modmain/hamlet/components/inventory_replica"
 modimport "modmain/hamlet/components/builder"
 modimport "modmain/hamlet/components/builder_replica"
 modimport "modmain/hamlet/components/edible"
-modimport "modmain/hamlet/components/grogginess.lua" --眩晕、减速
+modimport "modmain/hamlet/components/grogginess.lua"      --眩晕、减速
+modimport "modmain/hamlet/components/autoterraformer.lua" --刮地皮头盔组件
 
-
-modimport "modmain/hamlet/AddIronLordHandlers" --活性机甲处理
-modimport "modmain/hamlet/AddIronLordPostinit" --活性机甲构造
-modimport "modmain/hamlet/prefabs/molehat.lua" --鼹鼠帽
+modimport "modmain/hamlet/AddIronLordHandlers"            --活性机甲处理
+modimport "modmain/hamlet/AddIronLordPostinit"            --活性机甲构造
+modimport "modmain/hamlet/prefabs/molehat.lua"            --鼹鼠帽
 modimport "modmain/hamlet/prefabs/player.lua"
 modimport "modmain/hamlet/prefabs/world.lua"
 modimport "modmain/hamlet/prefabs/forest.lua"
@@ -44,13 +44,6 @@ AddPrefabPostInit("world", function(inst)
     TheWorld.components.tro_tempentitytracker:AddKey("pig_ruins_exits") --遗迹出口
     TheWorld.components.tro_tempentitytracker:AddKey("cave_exit_roc")   --洞穴出口
     TheWorld.components.tro_tempentitytracker:AddKey("anthill_exit")    --蚁穴出口
-end)
-
-AddComponentPostInit("autoterraformer", function(self)
-    Utils.FnDecorator(self, "DoTerraform", function(_self, px, py, pz, _x, _y)
-        local tile = TheWorld.Map:GetTileAtPoint(px, py, pz)
-        if tile == GROUND.GASRAINFOREST or tile == GROUND.DEEPRAINFOREST then return nil, true end
-    end)
 end)
 
 local Unwrappable = require "components/unwrappable"

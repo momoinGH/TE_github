@@ -56,4 +56,4 @@ function InitLavaarenaWeapon(inst, symbol_build, damage, weaponspark)
 end
 
 ----------------------------------------------------------------------------------------------------
-_G.DAMAGETYPES = { PHYSICAL = 1, MAGIC = 2 }
+DAMAGETYPES = { PHYSICAL = 1, MAGIC = 2 }

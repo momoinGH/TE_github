@@ -1,4 +1,4 @@
-local upvaluehelper = require("tools/upvaluehelper")
+local upvaluehelper = require("tropical_utils/upvaluehelper")
 
 local CUBES = table.invert({ "default", "shipwrecked", "volcano", "hamlet" })
 
