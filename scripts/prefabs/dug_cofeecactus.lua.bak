@@ -42,14 +42,14 @@ local function make_plantable(data)
 	local function test_ground(inst, pt)
 	--local another = GetClosestInstWithTag("deployedplant", inst, 2)
     --if another then return false end
-	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.MAGMAFIELD) then return true end --adicionado por vagner
-	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.ASH) then return true end --adicionado por vagner
-	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.VOLCANO) then return true end --adicionado por vagner
+	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == WORLD_TILES.MAGMAFIELD) then return true end --adicionado por vagner
+	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == WORLD_TILES.ASH) then return true end --adicionado por vagner
+	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == WORLD_TILES.VOLCANO) then return true end --adicionado por vagner
 	return false
 	end
 	
 	local function test_jungle(inst, pt)
-	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.JUNGLE) then return true end --adicionado por vagner
+	if(TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == WORLD_TILES.JUNGLE) then return true end --adicionado por vagner
 	return false
 	end
 

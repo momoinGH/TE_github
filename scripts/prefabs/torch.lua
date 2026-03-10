@@ -148,11 +148,11 @@ local function onequip(inst, owner)
     local ground3 = map:GetTile(map:GetTileCoordsAtPoint(x, y, z + 5))
     local ground4 = map:GetTile(map:GetTileCoordsAtPoint(x, y, z - 5))
     local naagua = false
-    if ground == GROUND.UNDERWATER_SANDY or ground == GROUND.UNDERWATER_ROCKY or (ground == GROUND.BEACH and TheWorld:HasTag("cave")) or (ground == GROUND.PIGRUINS and TheWorld:HasTag("cave")) or (ground == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground == GROUND.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
-    if ground1 == GROUND.UNDERWATER_SANDY or ground1 == GROUND.UNDERWATER_ROCKY or (ground1 == GROUND.BEACH and TheWorld:HasTag("cave")) or (ground1 == GROUND.PIGRUINS and TheWorld:HasTag("cave")) or (ground1 == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground1 == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground1 == GROUND.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
-    if ground2 == GROUND.UNDERWATER_SANDY or ground2 == GROUND.UNDERWATER_ROCKY or (ground2 == GROUND.BEACH and TheWorld:HasTag("cave")) or (ground2 == GROUND.PIGRUINS and TheWorld:HasTag("cave")) or (ground2 == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground2 == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground2 == GROUND.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
-    if ground3 == GROUND.UNDERWATER_SANDY or ground3 == GROUND.UNDERWATER_ROCKY or (ground3 == GROUND.BEACH and TheWorld:HasTag("cave")) or (ground3 == GROUND.PIGRUINS and TheWorld:HasTag("cave")) or (ground3 == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground3 == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground3 == GROUND.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
-    if ground4 == GROUND.UNDERWATER_SANDY or ground4 == GROUND.UNDERWATER_ROCKY or (ground4 == GROUND.BEACH and TheWorld:HasTag("cave")) or (ground4 == GROUND.PIGRUINS and TheWorld:HasTag("cave")) or (ground4 == GROUND.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground4 == GROUND.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground4 == GROUND.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
+    if ground == WORLD_TILES.UNDERWATER_SANDY or ground == WORLD_TILES.UNDERWATER_ROCKY or (ground == WORLD_TILES.BEACH and TheWorld:HasTag("cave")) or (ground == WORLD_TILES.PIGRUINS and TheWorld:HasTag("cave")) or (ground == WORLD_TILES.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground == WORLD_TILES.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground == WORLD_TILES.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
+    if ground1 == WORLD_TILES.UNDERWATER_SANDY or ground1 == WORLD_TILES.UNDERWATER_ROCKY or (ground1 == WORLD_TILES.BEACH and TheWorld:HasTag("cave")) or (ground1 == WORLD_TILES.PIGRUINS and TheWorld:HasTag("cave")) or (ground1 == WORLD_TILES.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground1 == WORLD_TILES.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground1 == WORLD_TILES.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
+    if ground2 == WORLD_TILES.UNDERWATER_SANDY or ground2 == WORLD_TILES.UNDERWATER_ROCKY or (ground2 == WORLD_TILES.BEACH and TheWorld:HasTag("cave")) or (ground2 == WORLD_TILES.PIGRUINS and TheWorld:HasTag("cave")) or (ground2 == WORLD_TILES.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground2 == WORLD_TILES.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground2 == WORLD_TILES.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
+    if ground3 == WORLD_TILES.UNDERWATER_SANDY or ground3 == WORLD_TILES.UNDERWATER_ROCKY or (ground3 == WORLD_TILES.BEACH and TheWorld:HasTag("cave")) or (ground3 == WORLD_TILES.PIGRUINS and TheWorld:HasTag("cave")) or (ground3 == WORLD_TILES.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground3 == WORLD_TILES.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground3 == WORLD_TILES.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
+    if ground4 == WORLD_TILES.UNDERWATER_SANDY or ground4 == WORLD_TILES.UNDERWATER_ROCKY or (ground4 == WORLD_TILES.BEACH and TheWorld:HasTag("cave")) or (ground4 == WORLD_TILES.PIGRUINS and TheWorld:HasTag("cave")) or (ground4 == WORLD_TILES.PEBBLEBEACH and TheWorld:HasTag("cave")) or (ground4 == WORLD_TILES.MAGMAFIELD and TheWorld:HasTag("cave")) or (ground4 == WORLD_TILES.PAINTED and TheWorld:HasTag("cave")) then naagua = true end
 
 
     if naagua == false then
@@ -190,8 +190,11 @@ local function onequip(inst, owner)
         end
 
         applytorchskilleffects(inst,
-            { fuelmod = getskillfueleffectmodifier(inst, owner), brightnessmod = getskillbrightnesseffectmodifier(inst,
-                owner) })
+            {
+                fuelmod = getskillfueleffectmodifier(inst, owner),
+                brightnessmod = getskillbrightnesseffectmodifier(inst,
+                    owner)
+            })
     end
 end
 
@@ -356,8 +359,8 @@ end
 
 local function OnThrown(inst, thrower)
     inst.thrower = thrower and
-    { fuelmod = getskillfueleffectmodifier(inst, thrower), brightnessmod = getskillbrightnesseffectmodifier(inst, thrower) } or
-    nil
+        { fuelmod = getskillfueleffectmodifier(inst, thrower), brightnessmod = getskillbrightnesseffectmodifier(inst, thrower) } or
+        nil
     inst.AnimState:PlayAnimation("spin_loop", true)
     inst.SoundEmitter:PlaySound("wilson_rework/torch/torch_spin", "spin_loop")
     PlayIgniteSound(inst, nil, true, true)

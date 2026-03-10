@@ -104,7 +104,7 @@ local function GetLeaderFollowDistance(inst)
     end
 
     local platform_speed_sq = (leader_platform.components.boatphysics.velocity_x or 0) ^ 2 +
-    (leader_platform.components.boatphysics.velocity_z or 0) ^ 2
+        (leader_platform.components.boatphysics.velocity_z or 0) ^ 2
     if platform_speed_sq > TUNING.GNARWAIL.WALK_SPEED ^ 2 then
         return 0.5
     else
@@ -156,7 +156,7 @@ local function FindFoodAction(inst)
     local alvomorto = FindEntity(inst, 4,
         function(item)
             return inst.components.eater:CanEat(item)
-        end, nil, nil)                                   --and item:GetTimeAlive() <= 12
+        end, nil, nil) --and item:GetTimeAlive() <= 12
     if alvomorto ~= nil then
         if inst.sg:HasStateTag("hide") then inst.sg:GoToState("idle") end
 
@@ -170,8 +170,10 @@ local function FindFoodAction(inst)
             alvomorto.Physics:SetVel(math.cos(angle) * 3, 0, math.sin(angle) * 3)
         else
             local bact = BufferedAction(inst, alvomorto, ACTIONS.EAT)
-            bact.validfn = function() return alvomorto.components.inventoryitem == nil or
-                (alvomorto.components.inventoryitem.is_landed and not alvomorto.components.inventoryitem:IsHeld()) end
+            bact.validfn = function()
+                return alvomorto.components.inventoryitem == nil or
+                    (alvomorto.components.inventoryitem.is_landed and not alvomorto.components.inventoryitem:IsHeld())
+            end
             return bact
         end
     end
@@ -257,13 +259,13 @@ end
 function GnarwailunderwaterBrain:OnStart()
     local is_valid_turf_at_point = function(position)
         local tile_at_position = TheWorld.Map:GetTileAtPoint(position:Get())
-        if tile_at_position == GROUND.OCEAN_ROUGH or tile_at_position == GROUND.OCEAN_SWELL then
+        if tile_at_position == WORLD_TILES.OCEAN_ROUGH or tile_at_position == WORLD_TILES.OCEAN_SWELL then
             return true
         else
             local tile_at_gnarwail = TheWorld.Map:GetTileAtPoint(self.inst.Transform:GetWorldPosition())
-            if tile_at_gnarwail ~= GROUND.OCEAN_ROUGH and tile_at_gnarwail ~= GROUND.OCEAN_SWELL then
-                return (tile_at_position >= GROUND.OCEAN_START and tile_at_position <= GROUND.OCEAN_END) and
-                    (tile_at_position ~= GROUND.IMPASSABLE and tile_at_position ~= GROUND.INVALID)
+            if tile_at_gnarwail ~= WORLD_TILES.OCEAN_ROUGH and tile_at_gnarwail ~= WORLD_TILES.OCEAN_SWELL then
+                return (tile_at_position >= WORLD_TILES.OCEAN_START and tile_at_position <= WORLD_TILES.OCEAN_END) and
+                    (tile_at_position ~= WORLD_TILES.IMPASSABLE and tile_at_position ~= WORLD_TILES.INVALID)
             end
         end
         return false
@@ -308,8 +310,10 @@ function GnarwailunderwaterBrain:OnStart()
 		
 ]]
             WhileNode(
-                function() return GetTrader(self.inst) == nil and not self.inst.sg:HasStateTag("busy") or
-                    self.inst.sg:HasStateTag("hide") end,
+                function()
+                    return GetTrader(self.inst) == nil and not self.inst.sg:HasStateTag("busy") or
+                        self.inst.sg:HasStateTag("hide")
+                end,
                 "ActionsWhenNotEating",
                 PriorityNode({
                     --                RunAway(self.inst, {tags=BOAT_TAGS}, MIN_BOAT_FOLLOW_DIST, BOAT_TARGET_DISTANCE, nil, nil, nil, true),

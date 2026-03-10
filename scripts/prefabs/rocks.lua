@@ -72,13 +72,13 @@ SetSharedLootTable('rock1',
 
 SetSharedLootTable('rock2',
     {
-        { 'rocks',      1.00 },
-        { 'rocks',      1.00 },
-        { 'rocks',      1.00 },
+        { 'rocks', 1.00 },
+        { 'rocks', 1.00 },
+        { 'rocks', 1.00 },
         { 'goldnugget', 1.00 },
-        { 'flint',      1.00 },
+        { 'flint', 1.00 },
         { 'goldnugget', 0.25 },
-        { 'flint',      0.60 },
+        { 'flint', 0.60 },
     })
 
 SetSharedLootTable('rock_flintless',
@@ -107,8 +107,8 @@ SetSharedLootTable('rock_flintless_low',
 
 SetSharedLootTable('rock_moon',
     {
-        { 'rocks',          1.00 },
-        { 'flint',          1.00 },
+        { 'rocks', 1.00 },
+        { 'flint', 1.00 },
         { 'moonrocknugget', 1.00 },
         { 'moonrocknugget', 1.00 },
         { 'moonrocknugget', 0.6 },
@@ -117,8 +117,8 @@ SetSharedLootTable('rock_moon',
 
 SetSharedLootTable('rock_moon_shell',
     {
-        { 'rocks',          1.00 },
-        { 'flint',          1.00 },
+        { 'rocks', 1.00 },
+        { 'flint', 1.00 },
         { 'moonrocknugget', 1.00 },
         { 'moonrocknugget', 1.00 },
         { 'moonrocknugget', 1.00 },
@@ -166,14 +166,16 @@ SetSharedLootTable('rock_petrified_tree_old',
 local function OnWork(inst, worker, workleft)
     local pt = inst:GetPosition()
     local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-    if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.FIELDS or tiletype == GROUND.LAWN then
+    if tiletype == WORLD_TILES.SUBURB or tiletype == WORLD_TILES.FOUNDATION or tiletype == WORLD_TILES.COBBLEROAD or tiletype == WORLD_TILES.FIELDS or tiletype == WORLD_TILES.LAWN then
         if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
             local x, y, z = inst.Transform:GetWorldPosition()
             local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
             local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
             for k, guardas in pairs(eles) do
-                if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat
-                        :SetTarget(worker) end
+                if guardas.components.combat and guardas.components.combat.target == nil then
+                    guardas.components.combat
+                    :SetTarget(worker)
+                end
             end
         end
     end

@@ -218,42 +218,66 @@ AddRecipe2("mutator_tropical", { Ingredient("monstermeat", 2), Ingredient("silk"
 AddRecipe2("mutator_frost", { Ingredient("monstermeat", 2), Ingredient("silk", 3), Ingredient("ice", 4) }, TECH.NONE, { builder_tag = "spiderwhisperer" }, { "CHARACTER" })
 -- Wurt
 AddRecipe2("mermhouse_fisher_crafted", { Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("oceanfish_small_61_inv", 2) }, TECH.SCIENCE_ONE,
-    { builder_tag = "merm_builder", placer = "mermhouse_fisher_crafted_placer", testfn = function(pt, rot)
-        local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-    end }, { "CHARACTER" })
+    {
+        builder_tag = "merm_builder",
+        placer = "mermhouse_fisher_crafted_placer",
+        testfn = function(pt, rot)
+            local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
+            return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+        end
+    }, { "CHARACTER" })
 AddRecipe2("mermhouse_tropical_crafted", { Ingredient("boards", 5), Ingredient("cutreeds", 3), Ingredient("oceanfish_small_61_inv", 2) }, TECH.SCIENCE_ONE,
-    { builder_tag = "merm_builder", placer = "mermhouse_tropical_crafted_placer", testfn = function(pt, rot)
-        local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-    end }, { "CHARACTER" })
+    {
+        builder_tag = "merm_builder",
+        placer = "mermhouse_tropical_crafted_placer",
+        testfn = function(pt, rot)
+            local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
+            return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+        end
+    }, { "CHARACTER" })
 AddRecipe2("quagmire_merm_house_crafted", { Ingredient("boards", 5), Ingredient("cutstone", 3), Ingredient("oceanfish_small_11_inv", 2) }, TECH.SCIENCE_ONE,
-    { builder_tag = "merm_builder", placer = "quagmire_merm_house_crafted_placer", testfn = function(pt, rot)
-        local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-    end }, { "CHARACTER" })
+    {
+        builder_tag = "merm_builder",
+        placer = "quagmire_merm_house_crafted_placer",
+        testfn = function(pt, rot)
+            local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
+            return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+        end
+    }, { "CHARACTER" })
 
 AddRecipe2("mermhouse_crafted", { Ingredient("boards", 4), Ingredient("cutreeds", 3), Ingredient("pondfish", 2) }, TECH.SCIENCE_ONE,
-    { builder_tag = "merm_builder", placer = "mermhouse_crafted_placer", testfn = function(pt, rot)
-        local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-    end }, { "CHARACTER" })
+    {
+        builder_tag = "merm_builder",
+        placer = "mermhouse_crafted_placer",
+        testfn = function(pt, rot)
+            local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
+            return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+        end
+    }, { "CHARACTER" })
 AddRecipe2("mermthrone_construction", { Ingredient("boards", 5), Ingredient("rope", 5) }, TECH.SCIENCE_ONE,
-    { builder_tag = "merm_builder", placer = "mermthrone_construction_placer", testfn = function(pt, rot)
-        local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-    end }, { "CHARACTER" })
+    {
+        builder_tag = "merm_builder",
+        placer = "mermthrone_construction_placer",
+        testfn = function(pt, rot)
+            local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
+            return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+        end
+    }, { "CHARACTER" })
 AddRecipe2("mermwatchtower", { Ingredient("boards", 5), Ingredient("tentaclespots", 1), Ingredient("spear", 2) }, TECH.SCIENCE_TWO,
-    { builder_tag = "merm_builder", placer = "mermwatchtower_placer", testfn = function(pt, rot)
-        local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-        return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST)
-    end }, { "CHARACTER" })
---AddRecipe2("offering_pot",			{Ingredient("boards", 2), Ingredient("cutreeds", 2)},											            TECH.NONE,		  {builder_tag="merm_swampmaster_offeringpot",      placer="offering_pot_placer",           testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
---AddRecipe2("offering_pot_upgraded",	{Ingredient("boards", 3), Ingredient("cutreeds", 3),Ingredient("tentaclespots", 1)},			            TECH.NONE,		  {builder_tag="merm_swampmaster_offeringpot_upgraded", placer="offering_pot_upgraded_placer", testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
---AddRecipe2("merm_armory",			    {Ingredient("boards", 2), Ingredient("log", 5), Ingredient("cutgrass", 5)},						            TECH.NONE,		  {builder_tag="merm_swampmaster_mermarmory",           placer="merm_armory_placer",           testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
---AddRecipe2("merm_armory_upgraded",	{Ingredient("boards", 4), Ingredient("tentaclespots", 1), Ingredient("log", 5), Ingredient("cutgrass", 5)},	TECH.NONE,		  {builder_tag="merm_swampmaster_mermarmory_upgraded",  placer="merm_armory_upgraded_placer",  testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
---AddRecipe2("merm_toolshed",		    {Ingredient("boards", 2), Ingredient("twigs", 5), Ingredient("rocks", 5)},						            TECH.NONE,		  {builder_tag="merm_swampmaster_mermtoolshed",         placer="merm_toolshed_placer",         testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
---AddRecipe2("merm_toolshed_upgraded",  {Ingredient("boards", 4), Ingredient("tentaclespots", 1), Ingredient("twigs", 5), Ingredient("rocks", 5)},	TECH.NONE,	      {builder_tag="merm_swampmaster_mermtoolshed_upgraded",placer="merm_toolshed_upgraded_placer",testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == GROUND.MARSH or ground_tile == GROUND.TIDALMARSH or ground_tile == GROUND.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+    {
+        builder_tag = "merm_builder",
+        placer = "mermwatchtower_placer",
+        testfn = function(pt, rot)
+            local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
+            return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+        end
+    }, { "CHARACTER" })
+--AddRecipe2("offering_pot",			{Ingredient("boards", 2), Ingredient("cutreeds", 2)},											            TECH.NONE,		  {builder_tag="merm_swampmaster_offeringpot",      placer="offering_pot_placer",           testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+--AddRecipe2("offering_pot_upgraded",	{Ingredient("boards", 3), Ingredient("cutreeds", 3),Ingredient("tentaclespots", 1)},			            TECH.NONE,		  {builder_tag="merm_swampmaster_offeringpot_upgraded", placer="offering_pot_upgraded_placer", testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+--AddRecipe2("merm_armory",			    {Ingredient("boards", 2), Ingredient("log", 5), Ingredient("cutgrass", 5)},						            TECH.NONE,		  {builder_tag="merm_swampmaster_mermarmory",           placer="merm_armory_placer",           testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+--AddRecipe2("merm_armory_upgraded",	{Ingredient("boards", 4), Ingredient("tentaclespots", 1), Ingredient("log", 5), Ingredient("cutgrass", 5)},	TECH.NONE,		  {builder_tag="merm_swampmaster_mermarmory_upgraded",  placer="merm_armory_upgraded_placer",  testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+--AddRecipe2("merm_toolshed",		    {Ingredient("boards", 2), Ingredient("twigs", 5), Ingredient("rocks", 5)},						            TECH.NONE,		  {builder_tag="merm_swampmaster_mermtoolshed",         placer="merm_toolshed_placer",         testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
+--AddRecipe2("merm_toolshed_upgraded",  {Ingredient("boards", 4), Ingredient("tentaclespots", 1), Ingredient("twigs", 5), Ingredient("rocks", 5)},	TECH.NONE,	      {builder_tag="merm_swampmaster_mermtoolshed_upgraded",placer="merm_toolshed_upgraded_placer",testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
 -- Maxwell
 --AddRecipe2("shadowmower_builder", 		{Ingredient("nightmarefuel", 2), Ingredient(CHARACTER_INGREDIENT.SANITY, 60)}, 	TECH.SHADOW_TWO,  {builder_tag="shadowmagic", 		  nounlock=true}, {"CRAFTING_STATION"})
 --AddRecipe2("shadowlumber_builder",		{Ingredient("nightmarefuel", 2), Ingredient(CHARACTER_INGREDIENT.MAX_SANITY, TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWLUMBER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
@@ -319,17 +343,18 @@ AddRecipe2("thatchpack", { Ingredient("palmleaf", 6) }, TECH.NONE, nil, { "CLOTH
 AddRecipe2("tarsuit", { Ingredient("tar", 4), Ingredient("fabric", 2), Ingredient("palmleaf", 2) }, TECH.SCIENCE_ONE, nil, { "CLOTHING", "RAIN" })
 AddRecipe2("blubbersuit", { Ingredient("blubber", 4), Ingredient("fabric", 2), Ingredient("palmleaf", 2) }, TECH.SCIENCE_TWO, nil, { "CLOTHING", "RAIN", "WINTER" })
 AddRecipe2("brainjellyhat", { Ingredient("coral_brain", 1), Ingredient("jellyfish", 1), Ingredient("rope", 2) }, TECH.SCIENCE_TWO, nil, { "CLOTHING", "PROTOTYPERS" })
-AddRecipe2("armor_windbreaker", { Ingredient("blubber", 2), Ingredient("fabric", 1), Ingredient("rope", 1) }, TECH.SCIENCE_TWO, nil, { "CLOTHING", "RAIN" })    -- CHECK  THIS
+AddRecipe2("armor_windbreaker", { Ingredient("blubber", 2), Ingredient("fabric", 1), Ingredient("rope", 1) }, TECH.SCIENCE_TWO, nil, { "CLOTHING", "RAIN" }) -- CHECK  THIS
 AddRecipe2("gashat", { Ingredient("coral", 2), Ingredient("messagebottleempty_sw", 2), Ingredient("jellyfish", 1) }, TECH.SCIENCE_TWO, nil, { "CLOTHING" })
 AddRecipe2("antivenom", { Ingredient("venomgland", 1), Ingredient("coral", 2), Ingredient("seaweed", 2) }, TECH.SCIENCE_ONE, nil, { "RESTORATION" })
 AddRecipe2("ox_flute", { Ingredient("ox_horn", 1), Ingredient("nightmarefuel", 2), Ingredient("rope", 1) }, TECH.MAGIC_TWO, nil, { "MAGIC" })
 AddRecipe2("sand_castle", { Ingredient("sand", 4), Ingredient("palmleaf", 2), Ingredient("seashell", 3) }, TECH.NONE, { placer = "sand_castle_placer" }, { "STRUCTURES", "DECOR" })
 
-AddRecipe2("turf_road", { Ingredient("cutstone", 1), Ingredient("flint", 2) }, TECH.SCIENCE_TWO, { numtogive = 4 }, { "DECOR" })         --要先加个卵石路下面改的海难卵石路才能生效吗？
+AddRecipe2("turf_road", { Ingredient("cutstone", 1), Ingredient("flint", 2) }, TECH.SCIENCE_TWO, { numtogive = 4 }, { "DECOR" }) --要先加个卵石路下面改的海难卵石路才能生效吗？
 
 AddRecipe2("dragoonden", { Ingredient("dragoonheart", 1), Ingredient("rocks", 5), Ingredient("obsidian", 4) }, TECH.SCIENCE_TWO, { placer = "dragoonden_placer" }, { "STRUCTURES" })
 AddRecipe2("wildborehouse", { Ingredient("pigskin", 4), Ingredient("palmleaf", 5), Ingredient("bamboo", 8) }, TECH.SCIENCE_TWO, { placer = "wildborehouse_placer" }, { "STRUCTURES" })
-AddRecipe2("primeapebarrel", { Ingredient("twigs", 10), Ingredient("cave_banana", 3), Ingredient("poop", 4) }, TECH.SCIENCE_TWO, { placer = "primeapebarrel_placer" }, { "STRUCTURES" })
+AddRecipe2("primeapebarrel", { Ingredient("twigs", 10), Ingredient("cave_banana", 3), Ingredient("poop", 4) }, TECH.SCIENCE_TWO, { placer = "primeapebarrel_placer" },
+    { "STRUCTURES" })
 AddRecipe2("porto_ballphinhouse", { Ingredient("limestone", 4), Ingredient("seaweed", 4), Ingredient("dorsalfin", 2) }, TECH.SCIENCE_ONE, { image = "ballphinhouse.tex" },
     { "STRUCTURES" })
 AddRecipe2("sandbag_item", { Ingredient("fabric", 2), Ingredient("sand", 3) }, TECH.SCIENCE_TWO, { numtogive = 4 }, { "STRUCTURES", "DECOR" })
@@ -394,7 +419,8 @@ if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.multiplayerportal == 15 or
     AddRecipe2("corkchest", { Ingredient("cork", 2), Ingredient("rope", 1) }, TECH.SCIENCE_ONE, { min_spacing = 1, placer = "corkchest_placer" }, { "CONTAINERS", "STRUCTURES" })
     AddRecipe2("roottrunk_child", { Ingredient("bramble_bulb", 1), Ingredient("venus_stalk", 2), Ingredient("boards", 2) }, TECH.SCIENCE_ONE,
         { min_spacing = 1, placer = "roottrunk_child_placer" }, { "CONTAINERS", "STRUCTURES" })
-    AddRecipe2("basefan", { Ingredient("alloy", 2), Ingredient("transistor", 2), Ingredient("gears", 1) }, TECH.SCIENCE_TWO, { placer = "basefan_placer" }, { "STRUCTURES", "SUMMER" })
+    AddRecipe2("basefan", { Ingredient("alloy", 2), Ingredient("transistor", 2), Ingredient("gears", 1) }, TECH.SCIENCE_TWO, { placer = "basefan_placer" },
+        { "STRUCTURES", "SUMMER" })
     AddRecipe2("sprinkler", { Ingredient("alloy", 2), Ingredient("bluegem", 1), Ingredient("ice", 6) }, TECH.SCIENCE_TWO, { placer = "sprinkler1_placer" }, { "GARDENING" })
     AddRecipe2("smelter", { Ingredient("cutstone", 6), Ingredient("boards", 4), Ingredient("redgem", 1) }, TECH.SCIENCE_TWO, { placer = "smetler_placer" },
         { "STRUCTURES", "PROTOTYPERS" })
@@ -406,11 +432,12 @@ if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.multiplayerportal == 15 or
     AddRecipe2("bonestaff", { Ingredient("pugalisk_skull", 1), Ingredient("boneshard", 1), Ingredient("nightmarefuel", 2) }, TECH.LOST, nil, { "MAGIC" })
     AddRecipe2("armorvortexcloak", { Ingredient("ancient_remnant", 5), Ingredient("armor_sanity", 1) }, TECH.LOST, nil, { "ARMOUR", "MAGIC", "CONTAINERS" })
     AddRecipe2("armorvoidcloak", { Ingredient("armorvortexcloak", 1), Ingredient("horrorfuel", 4), Ingredient("voidcloth", 4), Ingredient("shadowheart", 1) }, TECH
-    .SHADOWFORGING_TWO, { nounlock = true }, { "CRAFTING_STATION" })
+        .SHADOWFORGING_TWO, { nounlock = true }, { "CRAFTING_STATION" })
     AddRecipe2("living_artifact", { Ingredient("infused_iron", 6), Ingredient("waterdrop", 1) }, TECH.LOST, nil, { "MAGIC" })
     AddRecipe2("honeychest", { Ingredient("chitin", 6), Ingredient("beeswax", 1), Ingredient("honey", 3) }, TECH.LOST, { min_spacing = 1, placer = "honeychest_placer" },
         { "STRUCTURES", "CONTAINERS", "COOKING", "GARDENING" })
-    AddRecipe2("hogusporkusator", { Ingredient("pigskin", 4), Ingredient("boards", 4), Ingredient("feather_robin_winter", 4) }, TECH.SCIENCE_ONE, { placer = "hogusporkusator_placer" },
+    AddRecipe2("hogusporkusator", { Ingredient("pigskin", 4), Ingredient("boards", 4), Ingredient("feather_robin_winter", 4) }, TECH.SCIENCE_ONE,
+        { placer = "hogusporkusator_placer" },
         { "PROTOTYPERS", "MAGIC", "STRUCTURES" })
     AddRecipe2("clawpalmtree_cone", { Ingredient("cork", 1), Ingredient("poop", 1) }, TECH.SCIENCE_ONE, {}, { "REFINE" })
     AddRecipe2("venomgland", { Ingredient("froglegs_poison", 3) }, TECH.SCIENCE_TWO, {}, { "REFINE" })
@@ -544,12 +571,14 @@ AddRecipe2("quagmire_park_angel2", { Ingredient("redgem", 1), Ingredient("cutsto
 AddRecipe2("quagmire_park_urn", { Ingredient("redgem", 1), Ingredient("cutstone", 2) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_park_urn_placer", }, { "GORGE" })
 AddRecipe2("quagmire_park_obelisk", { Ingredient("cutstone", 3) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_park_obelisk_placer", }, { "GORGE" })
 
-AddRecipe2("quagmire_rubble_bike", { Ingredient("wagpunk_bits", 3), Ingredient("gears", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_bike_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_bike", { Ingredient("wagpunk_bits", 3), Ingredient("gears", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_bike_placer", },
+    { "GORGE" })
 AddRecipe2("quagmire_rubble_carriage", { Ingredient("boards", 4) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_carriage_placer", }, { "GORGE" })
 AddRecipe2("quagmire_rubble_cathedral", { Ingredient("cutstone", 3) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_cathedral_placer", }, { "GORGE" })
 AddRecipe2("quagmire_rubble_chimney", { Ingredient("cutstone", 3) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_chimney_placer", }, { "GORGE" })
 AddRecipe2("quagmire_rubble_chimney2", { Ingredient("cutstone", 3) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_chimney2_placer", }, { "GORGE" })
-AddRecipe2("quagmire_rubble_clock", { Ingredient("cutstone", 2), Ingredient("compass", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_clock_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_clock", { Ingredient("cutstone", 2), Ingredient("compass", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_clock_placer", },
+    { "GORGE" })
 AddRecipe2("quagmire_rubble_clocktower", { Ingredient("cutstone", 3), Ingredient("compass", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_clocktower_placer", },
     { "GORGE" })
 AddRecipe2("quagmire_rubble_door", { Ingredient("cutstone", 2), Ingredient("boards", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_door_placer", }, { "GORGE" })

@@ -27,11 +27,11 @@ end
 
 local anims =
 {
-    { threshold = 0,    anim = "broken" },
-    { threshold = 0.4,  anim = "onequarter" },
-    { threshold = 0.5,  anim = "half" },
+    { threshold = 0, anim = "broken" },
+    { threshold = 0.4, anim = "onequarter" },
+    { threshold = 0.5, anim = "half" },
     { threshold = 0.99, anim = "threequarter" },
-    { threshold = 1,    anim = { "fullA", "fullB", "fullC" } },
+    { threshold = 1, anim = { "fullA", "fullB", "fullC" } },
 }
 
 local function resolveanimtoplay(inst, percent)
@@ -180,7 +180,7 @@ function MakeWallType(data)
     local function onhammered(inst, worker)
         local pt = inst:GetPosition()
         local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-        if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.FIELDS or tiletype == GROUND.LAWN then
+        if tiletype == WORLD_TILES.SUBURB or tiletype == WORLD_TILES.FOUNDATION or tiletype == WORLD_TILES.COBBLEROAD or tiletype == WORLD_TILES.FIELDS or tiletype == WORLD_TILES.LAWN then
             if worker and worker:HasTag("player") and not worker:HasTag("sneaky") then
                 local x, y, z = inst.Transform:GetWorldPosition()
                 local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
@@ -452,8 +452,8 @@ local wallprefabs = {}
 local walldata =
 {
     { name = "enforcedlimestone", material = "stone", tags = { "stone" }, loot = "coral", maxloots = 1, maxhealth = 750, buildsound = "dontstarve/common/place_structure_stone" },
-    { name = "limestone",         material = "stone", tags = { "stone" }, loot = "coral", maxloots = 2, maxhealth = 500, buildsound = "dontstarve/common/place_structure_stone" },
-    { name = "pig_ruins",         material = "stone", tags = { "stone" }, loot = "rocks", maxloots = 2, maxhealth = 500, buildsound = "dontstarve/common/place_structure_stone" },
+    { name = "limestone", material = "stone", tags = { "stone" }, loot = "coral", maxloots = 2, maxhealth = 500, buildsound = "dontstarve/common/place_structure_stone" },
+    { name = "pig_ruins", material = "stone", tags = { "stone" }, loot = "rocks", maxloots = 2, maxhealth = 500, buildsound = "dontstarve/common/place_structure_stone" },
 }
 for i, v in ipairs(walldata) do
     local wall, item, placer = MakeWallType(v)

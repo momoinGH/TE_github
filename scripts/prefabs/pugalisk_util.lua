@@ -1,12 +1,12 @@
 local function IsWater(tile)
-    return tile == GROUND.OCEAN_COASTAL or
-        tile == GROUND.OCEAN_COASTAL_SHORE or
-        tile == GROUND.OCEAN_SWELL or
-        tile == GROUND.OCEAN_ROUGH or
-        tile == GROUND.OCEAN_BRINEPOOL or
-        tile == GROUND.OCEAN_BRINEPOOL_SHORE or
-        tile == GROUND.OCEAN_WATERLOG or
-        tile == GROUND.OCEAN_HAZARDOUS
+    return tile == WORLD_TILES.OCEAN_COASTAL or
+        tile == WORLD_TILES.OCEAN_COASTAL_SHORE or
+        tile == WORLD_TILES.OCEAN_SWELL or
+        tile == WORLD_TILES.OCEAN_ROUGH or
+        tile == WORLD_TILES.OCEAN_BRINEPOOL or
+        tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+        tile == WORLD_TILES.OCEAN_WATERLOG or
+        tile == WORLD_TILES.OCEAN_HAZARDOUS
 end
 
 local function GetIsOnWater(target)
@@ -17,14 +17,14 @@ local function GetIsOnWater(target)
 
 
 
-        if ground == GROUND.OCEAN_COASTAL or
-            ground == GROUND.OCEAN_COASTAL_SHORE or
-            ground == GROUND.OCEAN_SWELL or
-            ground == GROUND.OCEAN_ROUGH or
-            ground == GROUND.OCEAN_BRINEPOOL or
-            ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-            ground == GROUND.OCEAN_WATERLOG or
-            ground == GROUND.OCEAN_HAZARDOUS then
+        if ground == WORLD_TILES.OCEAN_COASTAL or
+            ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
+            ground == WORLD_TILES.OCEAN_SWELL or
+            ground == WORLD_TILES.OCEAN_ROUGH or
+            ground == WORLD_TILES.OCEAN_BRINEPOOL or
+            ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+            ground == WORLD_TILES.OCEAN_WATERLOG or
+            ground == WORLD_TILES.OCEAN_HAZARDOUS then
             return true
         else
             return false
@@ -113,7 +113,7 @@ local function findMoveablePosition(position, start_angle, radius, attempts, che
         local ground = TheWorld
         local tile = ground.Map:GetTileAtPoint(run_point.x, run_point.y, run_point.z)
 
-        if tile == GROUND.IMPASSABLE or tile >= GROUND.UNDERGROUND or IsWater(tile) then
+        if tile == WORLD_TILES.IMPASSABLE or tile >= WORLD_TILES.UNDERGROUND or IsWater(tile) then
             --           print("failed, unwalkable ground.")
             return false
         end

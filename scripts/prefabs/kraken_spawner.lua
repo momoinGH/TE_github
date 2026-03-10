@@ -16,7 +16,7 @@ local function OnTimerDone(inst, data)
             z = math.random(-800, 800)
             local curr = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z))
         until
-            curr == GROUND.OCEAN_COASTAL
+            curr == WORLD_TILES.OCEAN_COASTAL
         local tesouro = SpawnPrefab("kraken").Transform:SetPosition(x, 0, z)
         inst:Remove()
     end

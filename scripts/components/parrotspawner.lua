@@ -12,9 +12,9 @@ return Class(function(self, inst)
 
     BIRD_TYPES =
     {
-        [GROUND.OCEAN_HAZARDOUS] = { "wave_ripple" },
-        [GROUND.OCEAN_ROUGH] = { "wave_ripple" },
-        [GROUND.OCEAN_SWELL] = { "wave_ripple" },
+        [WORLD_TILES.OCEAN_HAZARDOUS] = { "wave_ripple" },
+        [WORLD_TILES.OCEAN_ROUGH] = { "wave_ripple" },
+        [WORLD_TILES.OCEAN_SWELL] = { "wave_ripple" },
     }
 
     --------------------------------------------------------------------------
@@ -92,10 +92,10 @@ return Class(function(self, inst)
                         local curr3 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z - 4))
                         local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z + 4))
                         -------------------coloca os itens------------------------
-                        if curr == GROUND.RAINFOREST and curr1 == GROUND.RAINFOREST and curr2 == GROUND.RAINFOREST and curr3 == GROUND.RAINFOREST and curr4 == GROUND.RAINFOREST or
-                            curr == GROUND.DEEPRAINFOREST and curr1 == GROUND.DEEPRAINFOREST and curr2 == GROUND.DEEPRAINFOREST and curr3 == GROUND.DEEPRAINFOREST and curr4 == GROUND.DEEPRAINFOREST or
-                            curr == GROUND.GASRAINFOREST and curr1 == GROUND.GASRAINFOREST and curr2 == GROUND.GASRAINFOREST and curr3 == GROUND.GASRAINFOREST and curr4 == GROUND.GASRAINFOREST or
-                            curr == GROUND.PLAINS and curr1 == GROUND.PLAINS and curr2 == GROUND.PLAINS and curr3 == GROUND.PLAINS and curr4 == GROUND.PLAINS then
+                        if curr == WORLD_TILES.RAINFOREST and curr1 == WORLD_TILES.RAINFOREST and curr2 == WORLD_TILES.RAINFOREST and curr3 == WORLD_TILES.RAINFOREST and curr4 == WORLD_TILES.RAINFOREST or
+                            curr == WORLD_TILES.DEEPRAINFOREST and curr1 == WORLD_TILES.DEEPRAINFOREST and curr2 == WORLD_TILES.DEEPRAINFOREST and curr3 == WORLD_TILES.DEEPRAINFOREST and curr4 == WORLD_TILES.DEEPRAINFOREST or
+                            curr == WORLD_TILES.GASRAINFOREST and curr1 == WORLD_TILES.GASRAINFOREST and curr2 == WORLD_TILES.GASRAINFOREST and curr3 == WORLD_TILES.GASRAINFOREST and curr4 == WORLD_TILES.GASRAINFOREST or
+                            curr == WORLD_TILES.PLAINS and curr1 == WORLD_TILES.PLAINS and curr2 == WORLD_TILES.PLAINS and curr3 == WORLD_TILES.PLAINS and curr4 == WORLD_TILES.PLAINS then
                             local colocaitem = SpawnPrefab("bramble")
                             colocaitem.Transform:SetPosition(x, 0, z)
                             numerodeitens = numerodeitens - 1
@@ -217,7 +217,7 @@ return Class(function(self, inst)
 
         ---------------------------------------------ventania -------------------------------------------------------------
         if TUNING.tropical.wind ~= 5 then
-            if posicao == GROUND.OCEAN_COASTAL or posicao == GROUND.OCEAN_WATERLOG or posicao == GROUND.OCEAN_COASTAL_SHORE or posicao == GROUND.OCEAN_SWELL or posicao == GROUND.OCEAN_ROUGH or posicao == GROUND.OCEAN_BRINEPOOL or posicao == GROUND.OCEAN_BRINEPOOL_SHORE or posicao == GROUND.OCEAN_HAZARDOUS or player.components.areaaware and player.components.areaaware:CurrentlyInTag("shipwrecked") or player.components.areaaware and player.components.areaaware:CurrentlyInTag("hamlet") or TUNING.tropical.wind == 20 then
+            if posicao == WORLD_TILES.OCEAN_COASTAL or posicao == WORLD_TILES.OCEAN_WATERLOG or posicao == WORLD_TILES.OCEAN_COASTAL_SHORE or posicao == WORLD_TILES.OCEAN_SWELL or posicao == WORLD_TILES.OCEAN_ROUGH or posicao == WORLD_TILES.OCEAN_BRINEPOOL or posicao == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or posicao == WORLD_TILES.OCEAN_HAZARDOUS or player.components.areaaware and player.components.areaaware:CurrentlyInTag("shipwrecked") or player.components.areaaware and player.components.areaaware:CurrentlyInTag("hamlet") or TUNING.tropical.wind == 20 then
                 --print("shipwrecked")
                 if TheWorld.components.worldstate.data.israining and TheWorld.state.isautumn and math.random() < 0.07 then
                     tempodovento = tempodovento - 1
@@ -429,7 +429,7 @@ return Class(function(self, inst)
     end
 
     function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
-                          random_angle)
+        random_angle)
         wavePrefab = wavePrefab or "rogue_wave"
         totalAngle = math.clamp(totalAngle, 1, 360)
 

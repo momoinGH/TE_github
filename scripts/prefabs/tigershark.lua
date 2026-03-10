@@ -21,17 +21,17 @@ local prefabs =
 
 SetSharedLootTable('tigershark',
     {
-        { "fishmeat",    1.00 },
-        { "fishmeat",    1.00 },
-        { "fishmeat",    1.00 },
-        { "fishmeat",    1.00 },
-        { "fishmeat",    1.00 },
-        { "fishmeat",    1.00 },
-        { "fishmeat",    1.00 },
-        { "fishmeat",    1.00 },
+        { "fishmeat", 1.00 },
+        { "fishmeat", 1.00 },
+        { "fishmeat", 1.00 },
+        { "fishmeat", 1.00 },
+        { "fishmeat", 1.00 },
+        { "fishmeat", 1.00 },
+        { "fishmeat", 1.00 },
+        { "fishmeat", 1.00 },
 
-        { "tigereye",    1.00 },
-        { "tigereye",    0.50 },
+        { "tigereye", 1.00 },
+        { "tigereye", 0.50 },
 
         { "shark_gills", 1.00 },
         { "shark_gills", 1.00 },
@@ -150,18 +150,18 @@ local function RetargetFn(inst)
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
     --if not inst:HasTag("aquatic") and not inst.sg:HasStateTag("specialattack") and
-    --(ground == GROUND.OCEAN_SWELL or
-    --ground == GROUND.OCEAN_COASTAL or
-    --ground == GROUND.OCEAN_COASTAL_SHORE or
-    --ground == GROUND.OCEAN_ROUGH or
-    --ground == GROUND.OCEAN_BRINEPOOL or
-    --ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-    --ground == GROUND.OCEAN_HAZARDOUS) then
+    --(ground == WORLD_TILES.OCEAN_SWELL or
+    --ground == WORLD_TILES.OCEAN_COASTAL or
+    --ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
+    --ground == WORLD_TILES.OCEAN_ROUGH or
+    --ground == WORLD_TILES.OCEAN_BRINEPOOL or
+    --ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+    --ground == WORLD_TILES.OCEAN_HAZARDOUS) then
     --MakeWater(inst) end
 
     -----muda a forma de aquatico pra terrestre----------
-    --if inst:HasTag("aquatic") and not inst.sg:HasStateTag("specialattack") and ground ~= GROUND.OCEAN_SWELL and ground ~= GROUND.OCEAN_COASTAL and ground ~= GROUND.OCEAN_COASTAL_SHORE
-    --and ground ~= GROUND.OCEAN_ROUGH and ground ~= GROUND.OCEAN_BRINEPOOL and ground ~=GROUND.OCEAN_BRINEPOOL_SHORE and ground ~=GROUND.OCEAN_HAZARDOUS then MakeGround(inst) end
+    --if inst:HasTag("aquatic") and not inst.sg:HasStateTag("specialattack") and ground ~= WORLD_TILES.OCEAN_SWELL and ground ~= WORLD_TILES.OCEAN_COASTAL and ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE
+    --and ground ~= WORLD_TILES.OCEAN_ROUGH and ground ~= WORLD_TILES.OCEAN_BRINEPOOL and ground ~=WORLD_TILES.OCEAN_BRINEPOOL_SHORE and ground ~=WORLD_TILES.OCEAN_HAZARDOUS then MakeGround(inst) end
 
 
 

@@ -22,7 +22,7 @@ local function teleport(inst)
     end
 
     local tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
-    if tile == GROUND.IMPASSABLE or tile == GROUND.INVALID or tile == GROUND.OCEAN_COASTAL or tile == GROUND.OCEAN_COASTAL_SHORE or tile == GROUND.OCEAN_SWELL or tile == GROUND.OCEAN_ROUGH or tile == GROUND.OCEAN_BRINEPOOL or tile == GROUND.OCEAN_BRINEPOOL_SHORE or tile == GROUND.OCEAN_WATERLOG or tile == GROUND.OCEAN_HAZARDOUS then
+    if tile == WORLD_TILES.IMPASSABLE or tile == WORLD_TILES.INVALID or tile == WORLD_TILES.OCEAN_COASTAL or tile == WORLD_TILES.OCEAN_COASTAL_SHORE or tile == WORLD_TILES.OCEAN_SWELL or tile == WORLD_TILES.OCEAN_ROUGH or tile == WORLD_TILES.OCEAN_BRINEPOOL or tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or tile == WORLD_TILES.OCEAN_WATERLOG or tile == WORLD_TILES.OCEAN_HAZARDOUS then
         print("1111")
         pt = inst:GetPosition()
     end

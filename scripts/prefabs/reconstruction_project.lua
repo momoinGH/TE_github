@@ -112,12 +112,12 @@ local function onhammered(inst, worker)
         end
 
         if bank and bank == bank:match("topiary_pigman")
-        or bank and bank == bank:match("topiary_werepig")then
+            or bank and bank == bank:match("topiary_werepig") then
             inst.components.lootdropper:SetChanceLootTable('topiarymedium')
         end
 
         if bank and bank == bank:match("topiary_beefalo")
-        or bank and bank == bank:match("topiary_pigking")then
+            or bank and bank == bank:match("topiary_pigking") then
             inst.components.lootdropper:SetChanceLootTable('topiarylarge')
         end
 
@@ -253,14 +253,14 @@ local function getstatus(inst)
 end
 
 local function IsWater(tile)
-    return tile == GROUND.OCEAN_SWELL or
-        tile == GROUND.OCEAN_BRINEPOOL or
-        tile == GROUND.OCEAN_HAZARDOUS or
-        tile == GROUND.OCEAN_ROUGH or
-        tile == GROUND.OCEAN_BRINEPOOL_SHORE or
-        tile == GROUND.OCEAN_COASTAL or
-        tile == GROUND.OCEAN_WATERLOG or
-        tile == GROUND.OCEAN_COASTAL_SHORE
+    return tile == WORLD_TILES.OCEAN_SWELL or
+        tile == WORLD_TILES.OCEAN_BRINEPOOL or
+        tile == WORLD_TILES.OCEAN_HAZARDOUS or
+        tile == WORLD_TILES.OCEAN_ROUGH or
+        tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+        tile == WORLD_TILES.OCEAN_COASTAL or
+        tile == WORLD_TILES.OCEAN_WATERLOG or
+        tile == WORLD_TILES.OCEAN_COASTAL_SHORE
 end
 
 function GetSpawnPoint(inst, pt)
@@ -276,7 +276,7 @@ function GetSpawnPoint(inst, pt)
         local pos = pt + offset
 
         local ground = TheWorld
-        local tile = GROUND.GRASS
+        local tile = WORLD_TILES.GRASS
         if ground and ground.Map then
             tile = inst:GetCurrentTileType(pos:Get())
         end

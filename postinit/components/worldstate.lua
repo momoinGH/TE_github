@@ -1,3 +1,5 @@
+local SetVariable = nil
+
 AddComponentPostInit("worldstate", function(self, inst)
     --------------------------------------------------------------------------
     --[[ Member variables ]]
@@ -12,9 +14,11 @@ AddComponentPostInit("worldstate", function(self, inst)
     --[[ Private member functions ]]
     --------------------------------------------------------------------------
 
-    ----竟然有现成的函数hook这个东西
-    local OnTemperatureTick = inst:GetEventCallback("temperaturetick", TheWorld, "scripts/components/worldstate.lua")
-    local SetVariable = Hooks.FindUpvalue(OnTemperatureTick, "SetVariable")
+    if not SetVariable then
+        local OnTemperatureTick = Hooks.GetEventCallback(inst, "temperaturetick", inst, "scripts/components/worldstate.lua")
+        SetVariable = OnTemperatureTick and Hooks.FindUpvalue(OnTemperatureTick, "SetVariable")
+            or function(var, val, togglename) end --这个是hook失败
+    end
 
     --------------------------------------------------------------------------
     --[[ Private event handlers ]]

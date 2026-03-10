@@ -754,8 +754,8 @@ GROUND =
     OCEAN_WATERLOG = 208,
     OCEAN_END = 247,
 }
-GROUND.OCEAN_REEF = GROUND.OCEAN_BRINEPOOL
-GROUND.OCEAN_REEF_SHORE = GROUND.OCEAN_BRINEPOOL_SHORE
+WORLD_TILES.OCEAN_REEF = WORLD_TILES.OCEAN_BRINEPOOL
+WORLD_TILES.OCEAN_REEF_SHORE = WORLD_TILES.OCEAN_BRINEPOOL_SHORE
 
 --these are filled in via AddTile
 GROUND_NAMES = {}
@@ -1328,8 +1328,8 @@ NODE_TYPE =
     Blank = 1,   -- empty room with impassable ground
     Background = 2,
     Random = 3,
-    Blocker = 4,    -- Adds 2 Blank nodes beside it
-    Room = 5,       -- Land can only touch the room(s) it is connected to by the graph (adds impassable around its parameter with a single land bidge)
+    Blocker = 4,       -- Adds 2 Blank nodes beside it
+    Room = 5,          -- Land can only touch the room(s) it is connected to by the graph (adds impassable around its parameter with a single land bidge)
     BackgroundRoom = 6,
     SeparatedRoom = 7, -- adds impassable around its entire parameter
 }
@@ -1434,9 +1434,9 @@ LAYOUT_POSITION =
 LAYOUT_ROTATION =
 {
     NORTH = 0, -- 0 Degrees
-    EAST = 1, -- 90 Degrees
+    EAST = 1,  -- 90 Degrees
     SOUTH = 2, -- 180 Degrees
-    WEST = 3, -- 270 Degrees
+    WEST = 3,  -- 270 Degrees
 }
 
 PLACE_MASK =
@@ -1522,7 +1522,7 @@ RECIPETABS =
     --Crafting stations
     ANCIENT = { str = "ANCIENT", sort = 100, icon = "tab_crafting_table.tex", crafting_station = true },
     CELESTIAL = { str = "CELESTIAL", sort = 100, icon = "tab_celestial.tex", crafting_station = true },
-    MOON_ALTAR = { str = "MOON_ALTAR", sort = 100, icon = "tab_moonaltar.tex", crafting_station = true },       -- deprecated, all recipes have been moved into CELESTIAL
+    MOON_ALTAR = { str = "MOON_ALTAR", sort = 100, icon = "tab_moonaltar.tex", crafting_station = true }, -- deprecated, all recipes have been moved into CELESTIAL
     CARTOGRAPHY = { str = "CARTOGRAPHY", sort = 100, icon = "tab_cartography.tex", crafting_station = true },
     SCULPTING = { str = "SCULPTING", sort = 100, icon = "tab_sculpt.tex", crafting_station = true },
     ORPHANAGE = { str = "ORPHANAGE", sort = 100, icon = "tab_orphanage.tex", crafting_station = true },
@@ -2131,10 +2131,10 @@ TECH_SKILLTREE_BUILDER_TAG_OWNERS = {}
 SKILLTREE_EQUIPPABLE_RESTRICTED_TAGS =
 {
     -- Using quotes for searching purposes.
-    ["inspectacleshatuser"]                        = "winona",
-    ["wathgrithrshielduser"]                       = "wathgrithr",
+    ["inspectacleshatuser"]                          = "winona",
+    ["wathgrithrshielduser"]                         = "wathgrithr",
     [UPGRADETYPES.SPEAR_LIGHTNING .. "_upgradeuser"] = "wathgrithr",
-    ["nabbaguser"]                                 = "wortox",
+    ["nabbaguser"]                                   = "wortox",
 }
 
 -- IngredientMod must be one of the following values

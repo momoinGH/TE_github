@@ -2,15 +2,15 @@ local Utils = require("tropical_utils/utils")
 
 local function IsSpecialTile(tile)
     local isCave = TheWorld:HasTag("cave")
-    return tile == GROUND.UNDERWATER_SANDY
-        or tile == GROUND.UNDERWATER_ROCKY
-        or (isCave and (tile == GROUND.BEACH
-            or tile == GROUND.MAGMAFIELD
-            or tile == GROUND.PAINTED
-            or tile == GROUND.BATTLEGROUNDS
-            or tile == GROUND.PEBBLEBEACH
-            or tile == GROUND.ICELAND
-            or tile == GROUND.SNOWLAND
+    return tile == WORLD_TILES.UNDERWATER_SANDY
+        or tile == WORLD_TILES.UNDERWATER_ROCKY
+        or (isCave and (tile == WORLD_TILES.BEACH
+            or tile == WORLD_TILES.MAGMAFIELD
+            or tile == WORLD_TILES.PAINTED
+            or tile == WORLD_TILES.BATTLEGROUNDS
+            or tile == WORLD_TILES.PEBBLEBEACH
+            or tile == WORLD_TILES.ICELAND
+            or tile == WORLD_TILES.SNOWLAND
         ))
 end
 

@@ -1,14 +1,14 @@
 -- 改变海洋颜色 纯客户端内容
 local dp_id = {}
 local ocean_tile = {} --修改对应海洋地皮的颜色
-ocean_tile[GROUND.OCEAN_COASTAL_SHORE] = {1,0,0}
-ocean_tile[GROUND.OCEAN_COASTAL] = {0,1,0}
-ocean_tile[GROUND.OCEAN_SWELL] = {0,0,1}
-ocean_tile[GROUND.OCEAN_ROUGH] = {1,1,0}
-ocean_tile[GROUND.OCEAN_BRINEPOOL] = {1,0,1}
-ocean_tile[GROUND.OCEAN_BRINEPOOL_SHORE] = {1,1,1}
-ocean_tile[GROUND.OCEAN_HAZARDOUS] = {0,0,0}
-ocean_tile[GROUND.OCEAN_WATERLOG] = {0.5,0.5,0.5}
+ocean_tile[WORLD_TILES.OCEAN_COASTAL_SHORE] = { 1, 0, 0 }
+ocean_tile[WORLD_TILES.OCEAN_COASTAL] = { 0, 1, 0 }
+ocean_tile[WORLD_TILES.OCEAN_SWELL] = { 0, 0, 1 }
+ocean_tile[WORLD_TILES.OCEAN_ROUGH] = { 1, 1, 0 }
+ocean_tile[WORLD_TILES.OCEAN_BRINEPOOL] = { 1, 0, 1 }
+ocean_tile[WORLD_TILES.OCEAN_BRINEPOOL_SHORE] = { 1, 1, 1 }
+ocean_tile[WORLD_TILES.OCEAN_HAZARDOUS] = { 0, 0, 0 }
+ocean_tile[WORLD_TILES.OCEAN_WATERLOG] = { 0.5, 0.5, 0.5 }
 
 local GroundTiles = require("worldtiledefs")
 local old_Initialize = GroundTiles.Initialize
@@ -38,7 +38,7 @@ GroundTiles.Initialize = function()
     end
 end
 
-AddPrefabPostInit("world",function(inst)
+AddPrefabPostInit("world", function(inst)
     local idx = inst.Map and getmetatable(TheWorld.Map).__index
     if idx then
         local odl_SetOceanTextureBlendAmount = idx.SetOceanTextureBlendAmount

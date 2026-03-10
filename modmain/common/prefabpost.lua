@@ -6,7 +6,6 @@ modimport "scripts/prefabs/sw_fertilizer_nutrient_defs" --肥料值定义
 modimport "modmain/common/natureskin_variants"          --和自然皮肤切换相关的所有内容
 modimport "modmain/common/wx78_moduledefs"
 modimport "modmain/common/entityscript"
-modimport "modmain/common/floatable_items.lua" --海洋世界里石头漂浮
 
 ----------------------------------------------------------------------------------------------------
 

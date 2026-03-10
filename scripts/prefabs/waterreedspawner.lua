@@ -10,7 +10,7 @@ local prefabs =
 
 local VALID_TILES = table.invert(
     {
-        GROUND.MARSH,
+        WORLD_TILES.MARSH,
     })
 local function SpawnWaterReed(spawn_point)
     local plant = SpawnPrefab("reeds_water")

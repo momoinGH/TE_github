@@ -10,7 +10,7 @@ local prefabs =
 
 local VALID_TILES = table.invert(
     {
-        GROUND.MEADOW,
+        WORLD_TILES.MEADOW,
     })
 local function SpawnSeataro(spawn_point)
     local plant = SpawnPrefab("seataro_planted")

@@ -27,11 +27,11 @@ local function spawn_pigeon(inst)
             TheWorld.Map:IsPassableAtPoint(x - 2, y, z) and
             TheWorld.Map:IsPassableAtPoint(x, y, z + 2) and
             TheWorld.Map:IsPassableAtPoint(x, y, z - 2) and
-            TheWorld.Map:GetTileAtPoint(x, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x + 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x - 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= GROUND.OCEAN_COASTAL_SHORE and not
+            TheWorld.Map:GetTileAtPoint(x, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x + 2, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x - 2, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and not
             TheWorld.GroundCreep:OnCreep(x, y, z) then
             local pigeon = SpawnPrefab("pigeon")
             pigeon.Physics:Teleport(x, 15, z)
@@ -50,11 +50,11 @@ local function spawn_pigeon(inst)
             TheWorld.Map:IsPassableAtPoint(x - 2, y, z) and
             TheWorld.Map:IsPassableAtPoint(x, y, z + 2) and
             TheWorld.Map:IsPassableAtPoint(x, y, z - 2) and
-            TheWorld.Map:GetTileAtPoint(x, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x + 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x - 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= GROUND.OCEAN_COASTAL_SHORE and not
+            TheWorld.Map:GetTileAtPoint(x, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x + 2, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x - 2, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and not
             TheWorld.GroundCreep:OnCreep(x, y, z) then
             local pigeon = SpawnPrefab("quagmire_pigeon")
             pigeon.Physics:Teleport(x, 15, z)
@@ -73,11 +73,11 @@ local function spawn_pigeon(inst)
             TheWorld.Map:IsPassableAtPoint(x - 2, y, z) and
             TheWorld.Map:IsPassableAtPoint(x, y, z + 2) and
             TheWorld.Map:IsPassableAtPoint(x, y, z - 2) and
-            TheWorld.Map:GetTileAtPoint(x, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x + 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x - 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= GROUND.OCEAN_COASTAL_SHORE and not
+            TheWorld.Map:GetTileAtPoint(x, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x + 2, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x - 2, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and not
             TheWorld.GroundCreep:OnCreep(x, y, z) then
             local pigeon = SpawnPrefab("kingfisher")
             pigeon.Physics:Teleport(x, 15, z)
@@ -96,11 +96,11 @@ local function spawn_pigeon(inst)
             TheWorld.Map:IsPassableAtPoint(x - 2, y, z) and
             TheWorld.Map:IsPassableAtPoint(x, y, z + 2) and
             TheWorld.Map:IsPassableAtPoint(x, y, z - 2) and
-            TheWorld.Map:GetTileAtPoint(x, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x + 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x - 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= GROUND.OCEAN_COASTAL_SHORE and not
+            TheWorld.Map:GetTileAtPoint(x, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x + 2, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x - 2, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and not
             TheWorld.GroundCreep:OnCreep(x, y, z) then
             local pigeon = SpawnPrefab("toucan_hamlet")
             pigeon.Physics:Teleport(x, 15, z)
@@ -119,11 +119,11 @@ local function spawn_pigeon(inst)
             TheWorld.Map:IsPassableAtPoint(x - 2, y, z) and
             TheWorld.Map:IsPassableAtPoint(x, y, z + 2) and
             TheWorld.Map:IsPassableAtPoint(x, y, z - 2) and
-            TheWorld.Map:GetTileAtPoint(x, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x + 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x - 2, y, z) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= GROUND.OCEAN_COASTAL_SHORE and
-            TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= GROUND.OCEAN_COASTAL_SHORE and not
+            TheWorld.Map:GetTileAtPoint(x, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x + 2, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x - 2, y, z) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z + 2) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+            TheWorld.Map:GetTileAtPoint(x, y, z - 2) ~= WORLD_TILES.OCEAN_COASTAL_SHORE and not
             TheWorld.GroundCreep:OnCreep(x, y, z) then
             local pigeon = SpawnPrefab("parrot_blue")
             pigeon.Physics:Teleport(x, 15, z)

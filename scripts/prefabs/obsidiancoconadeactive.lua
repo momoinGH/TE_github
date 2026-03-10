@@ -12,7 +12,7 @@ local prefabs =
 local COCONADE_OBSIDIAN_DAMAGE = 350
 local COCONADE_OBSIDIAN_EXPLOSIONRANGE = 9
 local COCONADE_OBSIDIAN_BUILDINGDAMAGE = 15
-		
+
 local function ondropped(inst)
     local map = TheWorld.Map
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -32,14 +32,14 @@ local function ondropped(inst)
         end
     end
 
-    if ground == GROUND.OCEAN_COASTAL or
-        ground == GROUND.OCEAN_COASTAL_SHORE or
-        ground == GROUND.OCEAN_SWELL or
-        ground == GROUND.OCEAN_ROUGH or
-        ground == GROUND.OCEAN_BRINEPOOL or
-        ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-        ground == GROUND.OCEAN_WATERLOG or
-        ground == GROUND.OCEAN_HAZARDOUS then
+    if ground == WORLD_TILES.OCEAN_COASTAL or
+        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
+        ground == WORLD_TILES.OCEAN_SWELL or
+        ground == WORLD_TILES.OCEAN_ROUGH or
+        ground == WORLD_TILES.OCEAN_BRINEPOOL or
+        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+        ground == WORLD_TILES.OCEAN_WATERLOG or
+        ground == WORLD_TILES.OCEAN_HAZARDOUS then
         if not plataforma then
             inst.AnimState:PlayAnimation("idle_water", true)
         else
@@ -57,7 +57,7 @@ local FADE_RADIUS = 1.5
 local FADE_FALLOFF = .5
 
 function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
-                      random_angle)
+    random_angle)
     wavePrefab = wavePrefab or "rogue_wave"
     totalAngle = math.clamp(totalAngle, 1, 360)
 
@@ -184,14 +184,14 @@ local function Explode(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-    if ground == GROUND.OCEAN_COASTAL or
-        ground == GROUND.OCEAN_COASTAL_SHORE or
-        ground == GROUND.OCEAN_SWELL or
-        ground == GROUND.OCEAN_ROUGH or
-        ground == GROUND.OCEAN_BRINEPOOL or
-        ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-        ground == GROUND.OCEAN_WATERLOG or
-        ground == GROUND.OCEAN_HAZARDOUS then
+    if ground == WORLD_TILES.OCEAN_COASTAL or
+        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
+        ground == WORLD_TILES.OCEAN_SWELL or
+        ground == WORLD_TILES.OCEAN_ROUGH or
+        ground == WORLD_TILES.OCEAN_BRINEPOOL or
+        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+        ground == WORLD_TILES.OCEAN_WATERLOG or
+        ground == WORLD_TILES.OCEAN_HAZARDOUS then
         local WALKABLE_PLATFORM_TAGS = { "walkableplatform" }
         local x, y, z = inst.Transform:GetWorldPosition()
         local plataforma = false
@@ -253,9 +253,9 @@ local function fn(Sim)
 
 
     inst:AddComponent("explosive")
-	inst.components.explosive.explosivedamage = COCONADE_OBSIDIAN_DAMAGE
-	inst.components.explosive.explosiverange = COCONADE_OBSIDIAN_EXPLOSIONRANGE
-	inst.components.explosive.buildingdamage = COCONADE_OBSIDIAN_BUILDINGDAMAGE
+    inst.components.explosive.explosivedamage = COCONADE_OBSIDIAN_DAMAGE
+    inst.components.explosive.explosiverange = COCONADE_OBSIDIAN_EXPLOSIONRANGE
+    inst.components.explosive.buildingdamage = COCONADE_OBSIDIAN_BUILDINGDAMAGE
 
     inst._light = nil
 

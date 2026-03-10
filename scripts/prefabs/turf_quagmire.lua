@@ -85,19 +85,19 @@ end
 local ret = {}
 
 table.insert(ret,
-    make_turf(GROUND.QUAGMIRE_GATEWAY or GROUND.MARSH,
+    make_turf(WORLD_TILES.QUAGMIRE_GATEWAY or WORLD_TILES.MARSH,
         { name = "quagmire_gateway", anim = "quagmire_gateway" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
-    make_turf(GROUND.QUAGMIRE_CITYSTONE or GROUND.MARSH,
+    make_turf(WORLD_TILES.QUAGMIRE_CITYSTONE or WORLD_TILES.MARSH,
         { name = "quagmire_citystone", anim = "quagmire_citystone" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
-    make_turf(GROUND.QUAGMIRE_PARKFIELD or GROUND.MARSH,
+    make_turf(WORLD_TILES.QUAGMIRE_PARKFIELD or WORLD_TILES.MARSH,
         { name = "quagmire_parkfield", anim = "quagmire_parkfield" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
-    make_turf(GROUND.QUAGMIRE_PARKSTONE or GROUND.MARSH,
+    make_turf(WORLD_TILES.QUAGMIRE_PARKSTONE or WORLD_TILES.MARSH,
         { name = "quagmire_parkstone", anim = "quagmire_parkstone" })) --place a marsh tile, if the swamp generation is disabled
 table.insert(ret,
-    make_turf(GROUND.QUAGMIRE_PEATFOREST or GROUND.MARSH,
+    make_turf(WORLD_TILES.QUAGMIRE_PEATFOREST or WORLD_TILES.MARSH,
         { name = "quagmire_peatforest", anim = "quagmire_peatforest" })) --place a marsh tile, if the swamp generation is disabled
 
 return unpack(ret)

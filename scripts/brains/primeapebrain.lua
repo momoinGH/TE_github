@@ -272,14 +272,14 @@ local function EatFoodAction(inst)
             local map = TheWorld.Map
             local x, y, z = target.Transform:GetWorldPosition()
             local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground ~= GROUND.OCEAN_COASTAL and
-                ground ~= GROUND.OCEAN_COASTAL_SHORE and
-                ground ~= GROUND.OCEAN_SWELL and
-                ground ~= GROUND.OCEAN_ROUGH and
-                ground ~= GROUND.OCEAN_BRINEPOOL and
-                ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                ground ~= GROUND.OCEAN_WATERLOG and
-                ground ~= GROUND.OCEAN_HAZARDOUS then
+            if ground ~= WORLD_TILES.OCEAN_COASTAL and
+                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_SWELL and
+                ground ~= WORLD_TILES.OCEAN_ROUGH and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_WATERLOG and
+                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
                 return BufferedAction(inst, target, ACTIONS.EAT)
             end
         end
@@ -303,14 +303,14 @@ local function EatFoodAction(inst)
                 local map = TheWorld.Map
                 local x, y, z = item.Transform:GetWorldPosition()
                 local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-                if ground ~= GROUND.OCEAN_COASTAL and
-                    ground ~= GROUND.OCEAN_COASTAL_SHORE and
-                    ground ~= GROUND.OCEAN_SWELL and
-                    ground ~= GROUND.OCEAN_ROUGH and
-                    ground ~= GROUND.OCEAN_BRINEPOOL and
-                    ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                    ground ~= GROUND.OCEAN_WATERLOG and
-                    ground ~= GROUND.OCEAN_HAZARDOUS then
+                if ground ~= WORLD_TILES.OCEAN_COASTAL and
+                    ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+                    ground ~= WORLD_TILES.OCEAN_SWELL and
+                    ground ~= WORLD_TILES.OCEAN_ROUGH and
+                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
+                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                    ground ~= WORLD_TILES.OCEAN_WATERLOG and
+                    ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
                     return BufferedAction(inst, item, ACTIONS.PICKUP)
                 end
             end
@@ -327,14 +327,14 @@ local function EatFoodAction(inst)
             local map = TheWorld.Map
             local x, y, z = item.Transform:GetWorldPosition()
             local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground ~= GROUND.OCEAN_COASTAL and
-                ground ~= GROUND.OCEAN_COASTAL_SHORE and
-                ground ~= GROUND.OCEAN_SWELL and
-                ground ~= GROUND.OCEAN_ROUGH and
-                ground ~= GROUND.OCEAN_BRINEPOOL and
-                ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                ground ~= GROUND.OCEAN_WATERLOG and
-                ground ~= GROUND.OCEAN_HAZARDOUS then
+            if ground ~= WORLD_TILES.OCEAN_COASTAL and
+                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_SWELL and
+                ground ~= WORLD_TILES.OCEAN_ROUGH and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_WATERLOG and
+                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
                 return BufferedAction(inst, item, ACTIONS.PICKUP)
             end
         end
@@ -349,14 +349,14 @@ local function EatFoodAction(inst)
             local map = TheWorld.Map
             local x, y, z = item.Transform:GetWorldPosition()
             local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground ~= GROUND.OCEAN_COASTAL and
-                ground ~= GROUND.OCEAN_COASTAL_SHORE and
-                ground ~= GROUND.OCEAN_SWELL and
-                ground ~= GROUND.OCEAN_ROUGH and
-                ground ~= GROUND.OCEAN_BRINEPOOL and
-                ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                ground ~= GROUND.OCEAN_WATERLOG and
-                ground ~= GROUND.OCEAN_HAZARDOUS then
+            if ground ~= WORLD_TILES.OCEAN_COASTAL and
+                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_SWELL and
+                ground ~= WORLD_TILES.OCEAN_ROUGH and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_WATERLOG and
+                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
                 return BufferedAction(inst, item, ACTIONS.PICK)
             end
         end
@@ -369,14 +369,14 @@ local function EatFoodAction(inst)
             local map = TheWorld.Map
             local x, y, z = item.Transform:GetWorldPosition()
             local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground ~= GROUND.OCEAN_COASTAL and
-                ground ~= GROUND.OCEAN_COASTAL_SHORE and
-                ground ~= GROUND.OCEAN_SWELL and
-                ground ~= GROUND.OCEAN_ROUGH and
-                ground ~= GROUND.OCEAN_BRINEPOOL and
-                ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                ground ~= GROUND.OCEAN_WATERLOG and
-                ground ~= GROUND.OCEAN_HAZARDOUS then
+            if ground ~= WORLD_TILES.OCEAN_COASTAL and
+                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_SWELL and
+                ground ~= WORLD_TILES.OCEAN_ROUGH and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_WATERLOG and
+                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
                 return BufferedAction(inst, item, ACTIONS.HARVEST)
             end
         end
@@ -399,14 +399,14 @@ local function EatFoodAction(inst)
             local map = TheWorld.Map
             local x, y, z = item.Transform:GetWorldPosition()
             local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-            if ground ~= GROUND.OCEAN_COASTAL and
-                ground ~= GROUND.OCEAN_COASTAL_SHORE and
-                ground ~= GROUND.OCEAN_SWELL and
-                ground ~= GROUND.OCEAN_ROUGH and
-                ground ~= GROUND.OCEAN_BRINEPOOL and
-                ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                ground ~= GROUND.OCEAN_WATERLOG and
-                ground ~= GROUND.OCEAN_HAZARDOUS then
+            if ground ~= WORLD_TILES.OCEAN_COASTAL and
+                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_SWELL and
+                ground ~= WORLD_TILES.OCEAN_ROUGH and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_WATERLOG and
+                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
                 return BufferedAction(inst, item, ACTIONS.PICKUP)
             end
         end
@@ -566,7 +566,6 @@ local function AssistPlayer(inst)
                 return not inst.components.eater:CanEat(
                     item) and not item.components.fertilizer
             end)
-            
         end
 
         --If there is anything nearby (but still farish from the player) that I can pick, pick it.
@@ -580,14 +579,14 @@ local function AssistPlayer(inst)
                 local map = TheWorld.Map
                 local x, y, z = item.Transform:GetWorldPosition()
                 local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-                if ground ~= GROUND.OCEAN_COASTAL and
-                    ground ~= GROUND.OCEAN_COASTAL_SHORE and
-                    ground ~= GROUND.OCEAN_SWELL and
-                    ground ~= GROUND.OCEAN_ROUGH and
-                    ground ~= GROUND.OCEAN_BRINEPOOL and
-                    ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                    ground ~= GROUND.OCEAN_WATERLOG and
-                    ground ~= GROUND.OCEAN_HAZARDOUS then
+                if ground ~= WORLD_TILES.OCEAN_COASTAL and
+                    ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+                    ground ~= WORLD_TILES.OCEAN_SWELL and
+                    ground ~= WORLD_TILES.OCEAN_ROUGH and
+                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
+                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                    ground ~= WORLD_TILES.OCEAN_WATERLOG and
+                    ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
                     inst.components.timer:StartTimer("CanThrow", 60)
                     inst.CanThrowItems = false
                     return BufferedAction(inst, item, ACTIONS.PICK)
@@ -601,14 +600,14 @@ local function AssistPlayer(inst)
                 local map = TheWorld.Map
                 local x, y, z = item.Transform:GetWorldPosition()
                 local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-                if ground ~= GROUND.OCEAN_COASTAL and
-                    ground ~= GROUND.OCEAN_COASTAL_SHORE and
-                    ground ~= GROUND.OCEAN_SWELL and
-                    ground ~= GROUND.OCEAN_ROUGH and
-                    ground ~= GROUND.OCEAN_BRINEPOOL and
-                    ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                    ground ~= GROUND.OCEAN_WATERLOG and
-                    ground ~= GROUND.OCEAN_HAZARDOUS then
+                if ground ~= WORLD_TILES.OCEAN_COASTAL and
+                    ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+                    ground ~= WORLD_TILES.OCEAN_SWELL and
+                    ground ~= WORLD_TILES.OCEAN_ROUGH and
+                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
+                    ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                    ground ~= WORLD_TILES.OCEAN_WATERLOG and
+                    ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
                     inst.components.timer:StartTimer("CanThrow", 60)
                     inst.CanThrowItems = false
                     return BufferedAction(inst, item, ACTIONS.HARVEST)
@@ -692,7 +691,7 @@ function PrimeapeBrain:OnStart()
                 function()
                     return self.inst.components.combat.target ~= nil and
                         not self.inst.components.combat.target:HasTag("player")
-                end, "Attack NPC",                                                             --For everything else
+                end, "Attack NPC", --For everything else
                 SequenceNode({
                     ActionNode(function() EquipWeapon(self.inst, self.inst.weaponitems.hitter) end, "Equip hitter"),
                     ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),

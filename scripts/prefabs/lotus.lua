@@ -13,14 +13,14 @@ local prefabs =
 local LOTUS_REGROW_TIME = 480 * 5
 
 local function IsWater(tile)
-    return tile == GROUND.OCEAN_COASTAL or
-        tile == GROUND.OCEAN_COASTAL_SHORE or
-        tile == GROUND.OCEAN_SWELL or
-        tile == GROUND.OCEAN_ROUGH or
-        tile == GROUND.OCEAN_BRINEPOOL or
-        tile == GROUND.OCEAN_BRINEPOOL_SHORE or
-        tile == GROUND.OCEAN_WATERLOG or
-        tile == GROUND.OCEAN_HAZARDOUS
+    return tile == WORLD_TILES.OCEAN_COASTAL or
+        tile == WORLD_TILES.OCEAN_COASTAL_SHORE or
+        tile == WORLD_TILES.OCEAN_SWELL or
+        tile == WORLD_TILES.OCEAN_ROUGH or
+        tile == WORLD_TILES.OCEAN_BRINEPOOL or
+        tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+        tile == WORLD_TILES.OCEAN_WATERLOG or
+        tile == WORLD_TILES.OCEAN_HAZARDOUS
 end
 
 local BILL_SPAWN_CHANCE = 0.2
@@ -33,10 +33,10 @@ local function groundtest(inst)
     local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex + 4, ey, ez))
     local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex - 4, ey, ez))
 
-    if posicao1 ~= (GROUND.OCEAN_SWELL) and posicao1 ~= (GROUND.OCEAN_WATERLOG) and posicao1 ~= (GROUND.OCEAN_BRINEPOOL) and posicao1 ~= (GROUND.OCEAN_BRINEPOOL_SHORE) and posicao1 ~= (GROUND.OCEAN_HAZARDOUS) and posicao1 ~= (GROUND.OCEAN_ROUGH) and posicao1 ~= (GROUND.OCEAN_COASTAL) and posicao1 ~= (GROUND.OCEAN_COASTAL_SHORE)
-        or posicao2 ~= (GROUND.OCEAN_SWELL) and posicao2 ~= (GROUND.OCEAN_WATERLOG) and posicao2 ~= (GROUND.OCEAN_BRINEPOOL) and posicao2 ~= (GROUND.OCEAN_BRINEPOOL_SHORE) and posicao2 ~= (GROUND.OCEAN_HAZARDOUS) and posicao2 ~= (GROUND.OCEAN_ROUGH) and posicao2 ~= (GROUND.OCEAN_COASTAL) and posicao2 ~= (GROUND.OCEAN_COASTAL_SHORE)
-        or posicao3 ~= (GROUND.OCEAN_SWELL) and posicao3 ~= (GROUND.OCEAN_WATERLOG) and posicao3 ~= (GROUND.OCEAN_BRINEPOOL) and posicao3 ~= (GROUND.OCEAN_BRINEPOOL_SHORE) and posicao3 ~= (GROUND.OCEAN_HAZARDOUS) and posicao3 ~= (GROUND.OCEAN_ROUGH) and posicao3 ~= (GROUND.OCEAN_COASTAL) and posicao3 ~= (GROUND.OCEAN_COASTAL_SHORE)
-        or posicao4 ~= (GROUND.OCEAN_SWELL) and posicao4 ~= (GROUND.OCEAN_WATERLOG) and posicao4 ~= (GROUND.OCEAN_BRINEPOOL) and posicao4 ~= (GROUND.OCEAN_BRINEPOOL_SHORE) and posicao4 ~= (GROUND.OCEAN_HAZARDOUS) and posicao4 ~= (GROUND.OCEAN_ROUGH) and posicao4 ~= (GROUND.OCEAN_COASTAL) and posicao4 ~= (GROUND.OCEAN_COASTAL_SHORE) then
+    if posicao1 ~= (WORLD_TILES.OCEAN_SWELL) and posicao1 ~= (WORLD_TILES.OCEAN_WATERLOG) and posicao1 ~= (WORLD_TILES.OCEAN_BRINEPOOL) and posicao1 ~= (WORLD_TILES.OCEAN_BRINEPOOL_SHORE) and posicao1 ~= (WORLD_TILES.OCEAN_HAZARDOUS) and posicao1 ~= (WORLD_TILES.OCEAN_ROUGH) and posicao1 ~= (WORLD_TILES.OCEAN_COASTAL) and posicao1 ~= (WORLD_TILES.OCEAN_COASTAL_SHORE)
+        or posicao2 ~= (WORLD_TILES.OCEAN_SWELL) and posicao2 ~= (WORLD_TILES.OCEAN_WATERLOG) and posicao2 ~= (WORLD_TILES.OCEAN_BRINEPOOL) and posicao2 ~= (WORLD_TILES.OCEAN_BRINEPOOL_SHORE) and posicao2 ~= (WORLD_TILES.OCEAN_HAZARDOUS) and posicao2 ~= (WORLD_TILES.OCEAN_ROUGH) and posicao2 ~= (WORLD_TILES.OCEAN_COASTAL) and posicao2 ~= (WORLD_TILES.OCEAN_COASTAL_SHORE)
+        or posicao3 ~= (WORLD_TILES.OCEAN_SWELL) and posicao3 ~= (WORLD_TILES.OCEAN_WATERLOG) and posicao3 ~= (WORLD_TILES.OCEAN_BRINEPOOL) and posicao3 ~= (WORLD_TILES.OCEAN_BRINEPOOL_SHORE) and posicao3 ~= (WORLD_TILES.OCEAN_HAZARDOUS) and posicao3 ~= (WORLD_TILES.OCEAN_ROUGH) and posicao3 ~= (WORLD_TILES.OCEAN_COASTAL) and posicao3 ~= (WORLD_TILES.OCEAN_COASTAL_SHORE)
+        or posicao4 ~= (WORLD_TILES.OCEAN_SWELL) and posicao4 ~= (WORLD_TILES.OCEAN_WATERLOG) and posicao4 ~= (WORLD_TILES.OCEAN_BRINEPOOL) and posicao4 ~= (WORLD_TILES.OCEAN_BRINEPOOL_SHORE) and posicao4 ~= (WORLD_TILES.OCEAN_HAZARDOUS) and posicao4 ~= (WORLD_TILES.OCEAN_ROUGH) and posicao4 ~= (WORLD_TILES.OCEAN_COASTAL) and posicao4 ~= (WORLD_TILES.OCEAN_COASTAL_SHORE) then
         inst:Remove()
     end
 end

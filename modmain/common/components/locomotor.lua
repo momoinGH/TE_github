@@ -9,13 +9,13 @@ local function UpdateGroundSpeedMultiplierAfter(retTab, self)
     -- 重新修改groundspeedmultiplier的值
     local current_ground_tile = TheWorld.Map:GetTileAtPoint(x, 0, z)
     local isCave = TheWorld:HasTag("cave")
-    if current_ground_tile == GROUND.UNDERWATER_SANDY or
-        current_ground_tile == GROUND.UNDERWATER_ROCKY or
-        (current_ground_tile == GROUND.BEACH and isCave) or
-        (current_ground_tile == GROUND.MAGMAFIELD and isCave) or
-        (current_ground_tile == GROUND.PAINTED and isCave) or
-        (current_ground_tile == GROUND.PIGRUINS and isCave) or
-        (current_ground_tile == GROUND.PEBBLEBEACH and isCave) then
+    if current_ground_tile == WORLD_TILES.UNDERWATER_SANDY or
+        current_ground_tile == WORLD_TILES.UNDERWATER_ROCKY or
+        (current_ground_tile == WORLD_TILES.BEACH and isCave) or
+        (current_ground_tile == WORLD_TILES.MAGMAFIELD and isCave) or
+        (current_ground_tile == WORLD_TILES.PAINTED and isCave) or
+        (current_ground_tile == WORLD_TILES.PIGRUINS and isCave) or
+        (current_ground_tile == WORLD_TILES.PEBBLEBEACH and isCave) then
         if self.inst.prefab ~= "wurt" then
             self.groundspeedmultiplier = 0.5
         end
@@ -23,7 +23,7 @@ local function UpdateGroundSpeedMultiplierAfter(retTab, self)
             self.groundspeedmultiplier = 0.8
         end
     end
-    if current_ground_tile == GROUND.COBBLEROAD then -- 修改石板路的加速
+    if current_ground_tile == WORLD_TILES.COBBLEROAD then -- 修改石板路的加速
         self.groundspeedmultiplier = 1.3
     end
     return retTab

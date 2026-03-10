@@ -62,7 +62,7 @@ function OxBrain:OnStart()
         {
             --       WhileNode( function()
             --                local tile = self.inst.components.tiletracker.tile
-            --                return tile == GROUND.OCEAN_MEDIUM or tile == GROUND.OCEAN_DEEP or tile == GROUND.OCEAN_SHALLOW
+            --                return tile == WORLD_TILES.OCEAN_MEDIUM or tile == WORLD_TILES.OCEAN_DEEP or tile == WORLD_TILES.OCEAN_SHALLOW
             --            end, "intheocean",
             --            Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, WANDER_DIST_NIGHT)),
 

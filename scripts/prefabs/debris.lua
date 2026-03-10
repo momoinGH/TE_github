@@ -294,11 +294,11 @@ if
                     local curr4 = map:GetTile(map:GetTileCoordsAtPoint(xf, 0, zf - 2))
                     tentativas = tentativas + 1
                 until
-                    tentativas > 500 or (curr ~= GROUND.OCEAN_SWELL and curr ~= GROUND.OCEAN_WATERLOG and curr ~= GROUND.OCEAN_HAZARDOUS and curr ~= GROUND.OCEAN_ROUGH and curr ~= GROUND.OCEAN_COASTAL and curr ~= GROUND.OCEAN_BRINEPOOL and curr ~= GROUND.OCEAN_COASTAL_SHORE and curr ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                        curr1 ~= GROUND.OCEAN_SWELL and curr1 ~= GROUND.OCEAN_WATERLOG and curr1 ~= GROUND.OCEAN_HAZARDOUS and curr1 ~= GROUND.OCEAN_ROUGH and curr1 ~= GROUND.OCEAN_COASTAL and curr1 ~= GROUND.OCEAN_BRINEPOOL and curr1 ~= GROUND.OCEAN_COASTAL_SHORE and curr1 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                        curr2 ~= GROUND.OCEAN_SWELL and curr2 ~= GROUND.OCEAN_WATERLOG and curr2 ~= GROUND.OCEAN_HAZARDOUS and curr2 ~= GROUND.OCEAN_ROUGH and curr2 ~= GROUND.OCEAN_COASTAL and curr2 ~= GROUND.OCEAN_BRINEPOOL and curr2 ~= GROUND.OCEAN_COASTAL_SHORE and curr2 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                        curr3 ~= GROUND.OCEAN_SWELL and curr3 ~= GROUND.OCEAN_WATERLOG and curr3 ~= GROUND.OCEAN_HAZARDOUS and curr3 ~= GROUND.OCEAN_ROUGH and curr3 ~= GROUND.OCEAN_COASTAL and curr3 ~= GROUND.OCEAN_BRINEPOOL and curr3 ~= GROUND.OCEAN_COASTAL_SHORE and curr3 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                        curr4 ~= GROUND.OCEAN_SWELL and curr4 ~= GROUND.OCEAN_WATERLOG and curr4 ~= GROUND.OCEAN_HAZARDOUS and curr4 ~= GROUND.OCEAN_ROUGH and curr4 ~= GROUND.OCEAN_COASTAL and curr4 ~= GROUND.OCEAN_BRINEPOOL and curr4 ~= GROUND.OCEAN_COASTAL_SHORE and curr4 ~= GROUND.OCEAN_BRINEPOOL_SHORE)
+                    tentativas > 500 or (curr ~= WORLD_TILES.OCEAN_SWELL and curr ~= WORLD_TILES.OCEAN_WATERLOG and curr ~= WORLD_TILES.OCEAN_HAZARDOUS and curr ~= WORLD_TILES.OCEAN_ROUGH and curr ~= WORLD_TILES.OCEAN_COASTAL and curr ~= WORLD_TILES.OCEAN_BRINEPOOL and curr ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                        curr1 ~= WORLD_TILES.OCEAN_SWELL and curr1 ~= WORLD_TILES.OCEAN_WATERLOG and curr1 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr1 ~= WORLD_TILES.OCEAN_ROUGH and curr1 ~= WORLD_TILES.OCEAN_COASTAL and curr1 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr1 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr1 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                        curr2 ~= WORLD_TILES.OCEAN_SWELL and curr2 ~= WORLD_TILES.OCEAN_WATERLOG and curr2 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr2 ~= WORLD_TILES.OCEAN_ROUGH and curr2 ~= WORLD_TILES.OCEAN_COASTAL and curr2 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr2 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr2 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                        curr3 ~= WORLD_TILES.OCEAN_SWELL and curr3 ~= WORLD_TILES.OCEAN_WATERLOG and curr3 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr3 ~= WORLD_TILES.OCEAN_ROUGH and curr3 ~= WORLD_TILES.OCEAN_COASTAL and curr3 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr3 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr3 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                        curr4 ~= WORLD_TILES.OCEAN_SWELL and curr4 ~= WORLD_TILES.OCEAN_WATERLOG and curr4 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr4 ~= WORLD_TILES.OCEAN_ROUGH and curr4 ~= WORLD_TILES.OCEAN_COASTAL and curr4 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr4 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr4 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE)
                 data.player.Transform:SetPosition(xf, 0, zf)
                 if data.player.prefab == "warly" then
                     local mochila = SpawnPrefab("spicepack")
@@ -472,11 +472,11 @@ if
                         local curr4 = map:GetTile(map:GetTileCoordsAtPoint(xf, 0, zf - 2))
                         tentativas = tentativas + 1
                     until
-                        tentativas > 500 or (curr ~= GROUND.OCEAN_SWELL and curr ~= GROUND.OCEAN_WATERLOG and curr ~= GROUND.OCEAN_HAZARDOUS and curr ~= GROUND.OCEAN_ROUGH and curr ~= GROUND.OCEAN_COASTAL and curr ~= GROUND.OCEAN_BRINEPOOL and curr ~= GROUND.OCEAN_COASTAL_SHORE and curr ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                            curr1 ~= GROUND.OCEAN_SWELL and curr1 ~= GROUND.OCEAN_WATERLOG and curr1 ~= GROUND.OCEAN_HAZARDOUS and curr1 ~= GROUND.OCEAN_ROUGH and curr1 ~= GROUND.OCEAN_COASTAL and curr1 ~= GROUND.OCEAN_BRINEPOOL and curr1 ~= GROUND.OCEAN_COASTAL_SHORE and curr1 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                            curr2 ~= GROUND.OCEAN_SWELL and curr2 ~= GROUND.OCEAN_WATERLOG and curr2 ~= GROUND.OCEAN_HAZARDOUS and curr2 ~= GROUND.OCEAN_ROUGH and curr2 ~= GROUND.OCEAN_COASTAL and curr2 ~= GROUND.OCEAN_BRINEPOOL and curr2 ~= GROUND.OCEAN_COASTAL_SHORE and curr2 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                            curr3 ~= GROUND.OCEAN_SWELL and curr3 ~= GROUND.OCEAN_WATERLOG and curr3 ~= GROUND.OCEAN_HAZARDOUS and curr3 ~= GROUND.OCEAN_ROUGH and curr3 ~= GROUND.OCEAN_COASTAL and curr3 ~= GROUND.OCEAN_BRINEPOOL and curr3 ~= GROUND.OCEAN_COASTAL_SHORE and curr3 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                            curr4 ~= GROUND.OCEAN_SWELL and curr4 ~= GROUND.OCEAN_WATERLOG and curr4 ~= GROUND.OCEAN_HAZARDOUS and curr4 ~= GROUND.OCEAN_ROUGH and curr4 ~= GROUND.OCEAN_COASTAL and curr4 ~= GROUND.OCEAN_BRINEPOOL and curr4 ~= GROUND.OCEAN_COASTAL_SHORE and curr4 ~= GROUND.OCEAN_BRINEPOOL_SHORE)
+                        tentativas > 500 or (curr ~= WORLD_TILES.OCEAN_SWELL and curr ~= WORLD_TILES.OCEAN_WATERLOG and curr ~= WORLD_TILES.OCEAN_HAZARDOUS and curr ~= WORLD_TILES.OCEAN_ROUGH and curr ~= WORLD_TILES.OCEAN_COASTAL and curr ~= WORLD_TILES.OCEAN_BRINEPOOL and curr ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                            curr1 ~= WORLD_TILES.OCEAN_SWELL and curr1 ~= WORLD_TILES.OCEAN_WATERLOG and curr1 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr1 ~= WORLD_TILES.OCEAN_ROUGH and curr1 ~= WORLD_TILES.OCEAN_COASTAL and curr1 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr1 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr1 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                            curr2 ~= WORLD_TILES.OCEAN_SWELL and curr2 ~= WORLD_TILES.OCEAN_WATERLOG and curr2 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr2 ~= WORLD_TILES.OCEAN_ROUGH and curr2 ~= WORLD_TILES.OCEAN_COASTAL and curr2 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr2 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr2 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                            curr3 ~= WORLD_TILES.OCEAN_SWELL and curr3 ~= WORLD_TILES.OCEAN_WATERLOG and curr3 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr3 ~= WORLD_TILES.OCEAN_ROUGH and curr3 ~= WORLD_TILES.OCEAN_COASTAL and curr3 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr3 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr3 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                            curr4 ~= WORLD_TILES.OCEAN_SWELL and curr4 ~= WORLD_TILES.OCEAN_WATERLOG and curr4 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr4 ~= WORLD_TILES.OCEAN_ROUGH and curr4 ~= WORLD_TILES.OCEAN_COASTAL and curr4 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr4 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr4 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE)
                     --data.player.Transform:SetPosition(xf, 0, zf)
                     if data.player.prefab == "warly" then
                         local mochila = SpawnPrefab("spicepack")
@@ -717,7 +717,7 @@ if
         inst.sg.mem.targetconstructionphase = CalculateConstructionPhase(inst)
         if not (inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("open")) then
             inst.sg:GoToState(inst.sg.mem.constructionphase >= 3 and inst.sg.mem.targetconstructionphase >= 4 and
-            "constructionphase4" or "constructed")
+                "constructionphase4" or "constructed")
         end
     end
 
@@ -1205,11 +1205,11 @@ else
                     local curr4 = map:GetTile(map:GetTileCoordsAtPoint(xf, 0, zf - 2))
                     tentativas = tentativas + 1
                 until
-                    tentativas > 500 or (curr ~= GROUND.OCEAN_SWELL and curr ~= GROUND.OCEAN_WATERLOG and curr ~= GROUND.OCEAN_HAZARDOUS and curr ~= GROUND.OCEAN_ROUGH and curr ~= GROUND.OCEAN_COASTAL and curr ~= GROUND.OCEAN_BRINEPOOL and curr ~= GROUND.OCEAN_COASTAL_SHORE and curr ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                        curr1 ~= GROUND.OCEAN_SWELL and curr1 ~= GROUND.OCEAN_WATERLOG and curr1 ~= GROUND.OCEAN_HAZARDOUS and curr1 ~= GROUND.OCEAN_ROUGH and curr1 ~= GROUND.OCEAN_COASTAL and curr1 ~= GROUND.OCEAN_BRINEPOOL and curr1 ~= GROUND.OCEAN_COASTAL_SHORE and curr1 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                        curr2 ~= GROUND.OCEAN_SWELL and curr2 ~= GROUND.OCEAN_WATERLOG and curr2 ~= GROUND.OCEAN_HAZARDOUS and curr2 ~= GROUND.OCEAN_ROUGH and curr2 ~= GROUND.OCEAN_COASTAL and curr2 ~= GROUND.OCEAN_BRINEPOOL and curr2 ~= GROUND.OCEAN_COASTAL_SHORE and curr2 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                        curr3 ~= GROUND.OCEAN_SWELL and curr3 ~= GROUND.OCEAN_WATERLOG and curr3 ~= GROUND.OCEAN_HAZARDOUS and curr3 ~= GROUND.OCEAN_ROUGH and curr3 ~= GROUND.OCEAN_COASTAL and curr3 ~= GROUND.OCEAN_BRINEPOOL and curr3 ~= GROUND.OCEAN_COASTAL_SHORE and curr3 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                        curr4 ~= GROUND.OCEAN_SWELL and curr4 ~= GROUND.OCEAN_WATERLOG and curr4 ~= GROUND.OCEAN_HAZARDOUS and curr4 ~= GROUND.OCEAN_ROUGH and curr4 ~= GROUND.OCEAN_COASTAL and curr4 ~= GROUND.OCEAN_BRINEPOOL and curr4 ~= GROUND.OCEAN_COASTAL_SHORE and curr4 ~= GROUND.OCEAN_BRINEPOOL_SHORE)
+                    tentativas > 500 or (curr ~= WORLD_TILES.OCEAN_SWELL and curr ~= WORLD_TILES.OCEAN_WATERLOG and curr ~= WORLD_TILES.OCEAN_HAZARDOUS and curr ~= WORLD_TILES.OCEAN_ROUGH and curr ~= WORLD_TILES.OCEAN_COASTAL and curr ~= WORLD_TILES.OCEAN_BRINEPOOL and curr ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                        curr1 ~= WORLD_TILES.OCEAN_SWELL and curr1 ~= WORLD_TILES.OCEAN_WATERLOG and curr1 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr1 ~= WORLD_TILES.OCEAN_ROUGH and curr1 ~= WORLD_TILES.OCEAN_COASTAL and curr1 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr1 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr1 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                        curr2 ~= WORLD_TILES.OCEAN_SWELL and curr2 ~= WORLD_TILES.OCEAN_WATERLOG and curr2 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr2 ~= WORLD_TILES.OCEAN_ROUGH and curr2 ~= WORLD_TILES.OCEAN_COASTAL and curr2 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr2 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr2 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                        curr3 ~= WORLD_TILES.OCEAN_SWELL and curr3 ~= WORLD_TILES.OCEAN_WATERLOG and curr3 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr3 ~= WORLD_TILES.OCEAN_ROUGH and curr3 ~= WORLD_TILES.OCEAN_COASTAL and curr3 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr3 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr3 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                        curr4 ~= WORLD_TILES.OCEAN_SWELL and curr4 ~= WORLD_TILES.OCEAN_WATERLOG and curr4 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr4 ~= WORLD_TILES.OCEAN_ROUGH and curr4 ~= WORLD_TILES.OCEAN_COASTAL and curr4 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr4 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr4 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE)
                 data.player.Transform:SetPosition(xf, 0, zf)
                 if data.player.prefab == "warly" then
                     local mochila = SpawnPrefab("spicepack")
@@ -1373,11 +1373,11 @@ else
                         local curr4 = map:GetTile(map:GetTileCoordsAtPoint(xf, 0, zf - 2))
                         tentativas = tentativas + 1
                     until
-                        tentativas > 500 or (curr ~= GROUND.OCEAN_SWELL and curr ~= GROUND.OCEAN_WATERLOG and curr ~= GROUND.OCEAN_HAZARDOUS and curr ~= GROUND.OCEAN_ROUGH and curr ~= GROUND.OCEAN_COASTAL and curr ~= GROUND.OCEAN_BRINEPOOL and curr ~= GROUND.OCEAN_COASTAL_SHORE and curr ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                            curr1 ~= GROUND.OCEAN_SWELL and curr1 ~= GROUND.OCEAN_WATERLOG and curr1 ~= GROUND.OCEAN_HAZARDOUS and curr1 ~= GROUND.OCEAN_ROUGH and curr1 ~= GROUND.OCEAN_COASTAL and curr1 ~= GROUND.OCEAN_BRINEPOOL and curr1 ~= GROUND.OCEAN_COASTAL_SHORE and curr1 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                            curr2 ~= GROUND.OCEAN_SWELL and curr2 ~= GROUND.OCEAN_WATERLOG and curr2 ~= GROUND.OCEAN_HAZARDOUS and curr2 ~= GROUND.OCEAN_ROUGH and curr2 ~= GROUND.OCEAN_COASTAL and curr2 ~= GROUND.OCEAN_BRINEPOOL and curr2 ~= GROUND.OCEAN_COASTAL_SHORE and curr2 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                            curr3 ~= GROUND.OCEAN_SWELL and curr3 ~= GROUND.OCEAN_WATERLOG and curr3 ~= GROUND.OCEAN_HAZARDOUS and curr3 ~= GROUND.OCEAN_ROUGH and curr3 ~= GROUND.OCEAN_COASTAL and curr3 ~= GROUND.OCEAN_BRINEPOOL and curr3 ~= GROUND.OCEAN_COASTAL_SHORE and curr3 ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                            curr4 ~= GROUND.OCEAN_SWELL and curr4 ~= GROUND.OCEAN_WATERLOG and curr4 ~= GROUND.OCEAN_HAZARDOUS and curr4 ~= GROUND.OCEAN_ROUGH and curr4 ~= GROUND.OCEAN_COASTAL and curr4 ~= GROUND.OCEAN_BRINEPOOL and curr4 ~= GROUND.OCEAN_COASTAL_SHORE and curr4 ~= GROUND.OCEAN_BRINEPOOL_SHORE)
+                        tentativas > 500 or (curr ~= WORLD_TILES.OCEAN_SWELL and curr ~= WORLD_TILES.OCEAN_WATERLOG and curr ~= WORLD_TILES.OCEAN_HAZARDOUS and curr ~= WORLD_TILES.OCEAN_ROUGH and curr ~= WORLD_TILES.OCEAN_COASTAL and curr ~= WORLD_TILES.OCEAN_BRINEPOOL and curr ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                            curr1 ~= WORLD_TILES.OCEAN_SWELL and curr1 ~= WORLD_TILES.OCEAN_WATERLOG and curr1 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr1 ~= WORLD_TILES.OCEAN_ROUGH and curr1 ~= WORLD_TILES.OCEAN_COASTAL and curr1 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr1 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr1 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                            curr2 ~= WORLD_TILES.OCEAN_SWELL and curr2 ~= WORLD_TILES.OCEAN_WATERLOG and curr2 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr2 ~= WORLD_TILES.OCEAN_ROUGH and curr2 ~= WORLD_TILES.OCEAN_COASTAL and curr2 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr2 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr2 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                            curr3 ~= WORLD_TILES.OCEAN_SWELL and curr3 ~= WORLD_TILES.OCEAN_WATERLOG and curr3 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr3 ~= WORLD_TILES.OCEAN_ROUGH and curr3 ~= WORLD_TILES.OCEAN_COASTAL and curr3 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr3 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr3 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                            curr4 ~= WORLD_TILES.OCEAN_SWELL and curr4 ~= WORLD_TILES.OCEAN_WATERLOG and curr4 ~= WORLD_TILES.OCEAN_HAZARDOUS and curr4 ~= WORLD_TILES.OCEAN_ROUGH and curr4 ~= WORLD_TILES.OCEAN_COASTAL and curr4 ~= WORLD_TILES.OCEAN_BRINEPOOL and curr4 ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr4 ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE)
                     data.player.Transform:SetPosition(xf, 0, zf)
                     if data.player.prefab == "warly" then
                         local mochila = SpawnPrefab("spicepack")
@@ -1619,7 +1619,7 @@ else
         inst.sg.mem.targetconstructionphase = CalculateConstructionPhase(inst)
         if not (inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("open")) then
             inst.sg:GoToState(inst.sg.mem.constructionphase >= 3 and inst.sg.mem.targetconstructionphase >= 4 and
-            "constructionphase4" or "constructed")
+                "constructionphase4" or "constructed")
         end
     end
 

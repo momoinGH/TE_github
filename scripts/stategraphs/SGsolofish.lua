@@ -21,8 +21,12 @@ local events =
 
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("attacked",
-        function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg
-                    :GoToState("hit") end end),
+        function(inst)
+            if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then
+                inst.sg
+                    :GoToState("hit")
+            end
+        end),
 }
 
 local states =
@@ -171,17 +175,21 @@ local states =
                 inst.components.locomotor:RunForward()
                 if not inst.SoundEmitter:PlayingSound("runsound") then
                     inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC002/creatures/seacreature_movement/water_swimemerged_med_LP", "runsound")
+                        "dontstarve_DLC002/creatures/seacreature_movement/water_swimemerged_med_LP", "runsound")
                 end
             end
         end,
 
         timeline =
         {
-            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/seacreature_movement/water_emerge_med") end),
-            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/Dogfish/emerge") end),
+            TimeEvent(0 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/seacreature_movement/water_emerge_med")
+            end),
+            TimeEvent(1 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/Dogfish/emerge")
+            end),
         },
 
         events =
@@ -200,7 +208,7 @@ local states =
                 inst.AnimState:PlayAnimation("fishmed")
                 if not inst.SoundEmitter:PlayingSound("runsound") then
                     inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC002/creatures/seacreature_movement/water_swimemerged_med_LP", "runsound")
+                        "dontstarve_DLC002/creatures/seacreature_movement/water_swimemerged_med_LP", "runsound")
                 end
             end
         end,
@@ -262,12 +270,12 @@ local curr2 = map:GetTile(map:GetTileCoordsAtPoint(x+4,0,z))
 local curr3 = map:GetTile(map:GetTileCoordsAtPoint(x,0,z-4))
 local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x,0,z+4))
 -------------------coloca os itens------------------------
-if (curr == GROUND.IMPASSABLE and curr1 == GROUND.IMPASSABLE and curr2 == GROUND.IMPASSABLE and curr3 == GROUND.IMPASSABLE and curr4 == GROUND.IMPASSABLE)
-or (curr == GROUND.SNOWLAND and curr1 == GROUND.SNOWLAND and curr2 == GROUND.SNOWLAND and curr3 == GROUND.SNOWLAND and curr4 == GROUND.SNOWLAND)
-or (curr == GROUND.WATER_CORAL and curr1 == GROUND.WATER_CORAL and curr2 == GROUND.WATER_CORAL and curr3 == GROUND.WATER_CORAL and curr4 == GROUND.WATER_CORAL)
-or (curr == GROUND.WATER_DEEP and curr1 == GROUND.WATER_DEEP and curr2 == GROUND.WATER_DEEP and curr3 == GROUND.WATER_DEEP and curr4 == GROUND.WATER_DEEP)
-or (curr == GROUND.WATER_MEDIUM and curr1 == GROUND.WATER_MEDIUM and curr2 == GROUND.WATER_MEDIUM and curr3 == GROUND.WATER_MEDIUM and curr4 == GROUND.WATER_MEDIUM)
-or (curr == GROUND.WATER_SHALLOW and curr1 == GROUND.WATER_SHALLOW and curr2 == GROUND.WATER_SHALLOW and curr3 == GROUND.WATER_SHALLOW and curr4 == GROUND.WATER_SHALLOW)
+if (curr == WORLD_TILES.IMPASSABLE and curr1 == WORLD_TILES.IMPASSABLE and curr2 == WORLD_TILES.IMPASSABLE and curr3 == WORLD_TILES.IMPASSABLE and curr4 == WORLD_TILES.IMPASSABLE)
+or (curr == WORLD_TILES.SNOWLAND and curr1 == WORLD_TILES.SNOWLAND and curr2 == WORLD_TILES.SNOWLAND and curr3 == WORLD_TILES.SNOWLAND and curr4 == WORLD_TILES.SNOWLAND)
+or (curr == WORLD_TILES.WATER_CORAL and curr1 == WORLD_TILES.WATER_CORAL and curr2 == WORLD_TILES.WATER_CORAL and curr3 == WORLD_TILES.WATER_CORAL and curr4 == WORLD_TILES.WATER_CORAL)
+or (curr == WORLD_TILES.WATER_DEEP and curr1 == WORLD_TILES.WATER_DEEP and curr2 == WORLD_TILES.WATER_DEEP and curr3 == WORLD_TILES.WATER_DEEP and curr4 == WORLD_TILES.WATER_DEEP)
+or (curr == WORLD_TILES.WATER_MEDIUM and curr1 == WORLD_TILES.WATER_MEDIUM and curr2 == WORLD_TILES.WATER_MEDIUM and curr3 == WORLD_TILES.WATER_MEDIUM and curr4 == WORLD_TILES.WATER_MEDIUM)
+or (curr == WORLD_TILES.WATER_SHALLOW and curr1 == WORLD_TILES.WATER_SHALLOW and curr2 == WORLD_TILES.WATER_SHALLOW and curr3 == WORLD_TILES.WATER_SHALLOW and curr4 == WORLD_TILES.WATER_SHALLOW)
 then
 local colocaitem = SpawnPrefab(inst.prefab)
 colocaitem.Transform:SetPosition(x, 0, z)

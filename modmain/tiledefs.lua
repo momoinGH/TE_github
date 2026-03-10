@@ -1,20 +1,5 @@
 local NoiseFunctions = require("noisetilefunctions")
 
-local AddNewTile = function(tile, range, tile_data, ground_tile_def, minimap_tile_def, turf_def)
-    if WORLD_TILES[tile] then
-        ProErrorHandle("地皮重复定义" .. tostring(tile), false, false)
-        return
-    end
-
-    AddTile(tile, range, tile_data, ground_tile_def, minimap_tile_def, turf_def)
-end
-
-local is_worldgen = rawget(_G, "WORLDGEN_MAIN") ~= nil
-if not is_worldgen then
-    TileGroups.TAOceanTiles = TileGroupManager:AddTileGroup()
-end
-
-
 local TileRanges =
 {
     LAND = "LAND",
@@ -890,7 +875,7 @@ local tro_tiledefs = {
         tile_range       = TileRanges.LAND,
         tile_data        = {
             ground_name = "Gorge Gateway",
-            old_static_id = GROUND.QUAGMIRE_GATEWAY,
+            old_static_id = WORLD_TILES.QUAGMIRE_GATEWAY,
         },
         ground_tile_def  = {
             name = "grass3",
@@ -915,7 +900,7 @@ local tro_tiledefs = {
         tile_range       = TileRanges.LAND,
         tile_data        = {
             ground_name = "Gorge Citystone",
-            old_static_id = GROUND.QUAGMIRE_CITYSTONE,
+            old_static_id = WORLD_TILES.QUAGMIRE_CITYSTONE,
         },
         ground_tile_def  = {
             name = "cave",
@@ -940,7 +925,7 @@ local tro_tiledefs = {
         tile_range       = TileRanges.LAND,
         tile_data        = {
             ground_name = "Gorge Park Grass",
-            old_static_id = GROUND.QUAGMIRE_PARKFIELD,
+            old_static_id = WORLD_TILES.QUAGMIRE_PARKFIELD,
         },
         ground_tile_def  = {
             name = "deciduous",
@@ -965,7 +950,7 @@ local tro_tiledefs = {
         tile_range       = TileRanges.LAND,
         tile_data        = {
             ground_name = "Gorge Park Path",
-            old_static_id = GROUND.QUAGMIRE_PARKSTONE,
+            old_static_id = WORLD_TILES.QUAGMIRE_PARKSTONE,
         },
         ground_tile_def  = {
             name = "cave",
@@ -990,7 +975,7 @@ local tro_tiledefs = {
         tile_range       = TileRanges.LAND,
         tile_data        = {
             ground_name = "Gorge Peat Forest",
-            old_static_id = GROUND.QUAGMIRE_PEATFOREST,
+            old_static_id = WORLD_TILES.QUAGMIRE_PEATFOREST,
         },
         ground_tile_def  = {
             name = "grass2",
@@ -1175,6 +1160,11 @@ HAM_LAND_TILES = {}
 TRO_LAND_TILES = {}
 
 for tile, def in pairs(tro_tiledefs) do
+    if WORLD_TILES[tile] then
+        ProErrorHandle("地皮重复定义" .. tostring(tile), false, false)
+        return
+    end
+
     local range = def.tile_range
     if range == TileRanges.TRO_OCEAN then
         range = TileRanges.OCEAN
@@ -1184,22 +1174,10 @@ for tile, def in pairs(tro_tiledefs) do
         range = TileRanges.NOISE
     end
 
-    AddNewTile(tile, range, def.tile_data, def.ground_tile_def, def.minimap_tile_def, def.turf_def)
+    AddTile(tile, range, def.tile_data, def.ground_tile_def, def.minimap_tile_def, def.turf_def)
 
     local tile_id = WORLD_TILES[tile]
     if def.tile_range == TileRanges.TRO_OCEAN then
-        if not is_worldgen then
-            TileGroupManager:AddInvalidTile(TileGroups.TransparentOceanTiles, tile_id)
-            -- TileGroupManager:AddValidTile(TileGroups.OceanTiles, tile_id)
-            TileGroupManager:AddValidTile(TileGroups.TAOceanTiles, tile_id)
-        end
-        TRO_OCEAN_TILES[tile_id] = true
-    elseif def.tile_range == TileRanges.OCEAN then
-        if not is_worldgen then
-            -- TileGroupManager:AddInvalidTile(TileGroups.TransparentOceanTiles, tile_id)
-            -- TileGroupManager:AddValidTile(TileGroups.Legacy_OceanTiles, tile_id)
-            -- TileGroupManager:AddValidTile(TileGroups.TAOceanTiles, tile_id)
-        end
         TRO_OCEAN_TILES[tile_id] = true
     elseif def.tile_range == TileRanges.SW_LAND then
         SW_LAND_TILES[tile_id] = true
@@ -1225,8 +1203,6 @@ ChangeTileRenderOrder(WORLD_TILES.SNAKESKINFLOOR, WORLD_TILES.CARPET, false)
 ChangeTileRenderOrder(WORLD_TILES.TIDALMARSH, WORLD_TILES.DESERT_DIRT, true)
 ChangeTileRenderOrder(WORLD_TILES.VOLCANO, WORLD_TILES.DESERT_DIRT, true)
 ChangeTileRenderOrder(WORLD_TILES.VOLCANO_ROCK, WORLD_TILES.DESERT_DIRT, true)
-
-
 ChangeTileRenderOrder(WORLD_TILES.ANTCAVE, WORLD_TILES.MUD, true) --ANTFLOOR
 ChangeTileRenderOrder(WORLD_TILES.BATCAVE, WORLD_TILES.MUD, true) --BATFLOOR
 ChangeTileRenderOrder(WORLD_TILES.BATTLEGROUNDS, WORLD_TILES.MUD, true)
@@ -1242,7 +1218,6 @@ ChangeTileRenderOrder(WORLD_TILES.PIGRUINS, WORLD_TILES.CHECKER, true)
 ChangeTileRenderOrder(WORLD_TILES.PLAINS, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.RAINFOREST, WORLD_TILES.MUD, true)
 
--- --Priority turf
 
 -- ChangeTileRenderOrder(WORLD_TILES.BEARDRUG, WORLD_TILES.CARPET, false)
 
@@ -1263,9 +1238,3 @@ ChangeTileRenderOrder(WORLD_TILES.OCEAN_MEDIUM, WORLD_TILES.MONKEY_DOCK, false)
 ChangeTileRenderOrder(WORLD_TILES.OCEAN_DEEP, WORLD_TILES.MONKEY_DOCK, false)
 ChangeTileRenderOrder(WORLD_TILES.OCEAN_CORAL, WORLD_TILES.MONKEY_DOCK, false)
 ChangeTileRenderOrder(WORLD_TILES.OCEAN_SHIPGRAVEYARD, WORLD_TILES.MONKEY_DOCK, false)
-
-for tile, def in pairs(tro_tiledefs) do
-    if GROUND[tile] == nil then
-        GROUND[tile] = WORLD_TILES[tile]
-    end
-end

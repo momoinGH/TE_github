@@ -50,13 +50,13 @@ end
 local function playfallsound(inst)
     local ice_fall_sound =
     {
-        [GROUND.BEACH] = "dontstarve_DLC002/common/ice_fall_beach",
-        [GROUND.JUNGLE] = "dontstarve_DLC002/common/ice_fall_jungle",
-        [GROUND.TIDALMARSH] = "dontstarve_DLC002/common/ice_fall_marsh",
-        [GROUND.MAGMAFIELD] = "dontstarve_DLC002/common/ice_fall_rocks",
-        [GROUND.MEADOW] = "dontstarve_DLC002/common/ice_fall_grass",
-        [GROUND.VOLCANO] = "dontstarve_DLC002/common/ice_fall_rocks",
-        [GROUND.ASH] = "dontstarve_DLC002/common/ice_fall_rocks",
+        [WORLD_TILES.BEACH] = "dontstarve_DLC002/common/ice_fall_beach",
+        [WORLD_TILES.JUNGLE] = "dontstarve_DLC002/common/ice_fall_jungle",
+        [WORLD_TILES.TIDALMARSH] = "dontstarve_DLC002/common/ice_fall_marsh",
+        [WORLD_TILES.MAGMAFIELD] = "dontstarve_DLC002/common/ice_fall_rocks",
+        [WORLD_TILES.MEADOW] = "dontstarve_DLC002/common/ice_fall_grass",
+        [WORLD_TILES.VOLCANO] = "dontstarve_DLC002/common/ice_fall_rocks",
+        [WORLD_TILES.ASH] = "dontstarve_DLC002/common/ice_fall_rocks",
     }
 
     local tile = inst:GetCurrentTileType()
@@ -71,14 +71,14 @@ local function onhitground_hail(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-    if ground == GROUND.OCEAN_COASTAL or
-        ground == GROUND.OCEAN_COASTAL_SHORE or
-        ground == GROUND.OCEAN_SWELL or
-        ground == GROUND.OCEAN_ROUGH or
-        ground == GROUND.OCEAN_BRINEPOOL or
-        ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-        ground == GROUND.OCEAN_WATERLOG or
-        ground == GROUND.OCEAN_HAZARDOUS then
+    if ground == WORLD_TILES.OCEAN_COASTAL or
+        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
+        ground == WORLD_TILES.OCEAN_SWELL or
+        ground == WORLD_TILES.OCEAN_ROUGH or
+        ground == WORLD_TILES.OCEAN_BRINEPOOL or
+        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+        ground == WORLD_TILES.OCEAN_WATERLOG or
+        ground == WORLD_TILES.OCEAN_HAZARDOUS then
         inst:Remove()
         local bolha = SpawnPrefab("frogsplash")
         bolha.Transform:SetPosition(x, y, z)

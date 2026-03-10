@@ -1,10 +1,10 @@
 local Utils = require("tropical_utils/utils")
 -- 根据地皮判断不太好，能不能给草添加特殊标签
 local CANT_PICK_TILES = {
-    [GROUND.SUBURB] = true,
-    [GROUND.FOUNDATION] = true,
-    [GROUND.COBBLEROAD] = true,
-    [GROUND.FIELDS] = true
+    [WORLD_TILES.SUBURB] = true,
+    [WORLD_TILES.FOUNDATION] = true,
+    [WORLD_TILES.COBBLEROAD] = true,
+    [WORLD_TILES.FIELDS] = true
 }
 
 -- 当玩家采集哈姆雷特的草时，附近守卫攻击玩家
@@ -29,9 +29,9 @@ local function OnTransplantfnAfter(retTab, inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local tiletype = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-    if tiletype == GROUND.PLAINS
-        or tiletype == GROUND.RAINFOREST
-        or tiletype == GROUND.DEEPRAINFOREST then
+    if tiletype == WORLD_TILES.PLAINS
+        or tiletype == WORLD_TILES.RAINFOREST
+        or tiletype == WORLD_TILES.DEEPRAINFOREST then
         local newgrass = SpawnPrefab("grass_tall")
         newgrass.Transform:SetPosition(x, y, z)
         if newgrass:HasTag("machetecut") then

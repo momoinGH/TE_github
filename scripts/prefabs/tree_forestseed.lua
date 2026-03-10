@@ -179,12 +179,12 @@ end
 local notags = { 'NOBLOCK', 'player', 'FX' }
 local function test_ground(inst, pt)
     local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-    local ground_OK = tiletype ~= GROUND.ROCKY and tiletype ~= GROUND.ROAD and tiletype ~= GROUND.IMPASSABLE and
-        tiletype ~= GROUND.MAGMAFIELD and
-        tiletype ~= GROUND.UNDERROCK and tiletype ~= GROUND.WOODFLOOR and tiletype ~= GROUND.SAND and
-        tiletype ~= GROUND.CARPET and tiletype ~= GROUND.CHECKER and tiletype < GROUND.UNDERGROUND and
-        tiletype ~= GROUND.ASH and tiletype ~= GROUND.VOLCANO and tiletype ~= GROUND.VOLCANO_ROCK and
-        tiletype ~= GROUND.BRICK_GLOW
+    local ground_OK = tiletype ~= WORLD_TILES.ROCKY and tiletype ~= WORLD_TILES.ROAD and tiletype ~= WORLD_TILES.IMPASSABLE and
+        tiletype ~= WORLD_TILES.MAGMAFIELD and
+        tiletype ~= WORLD_TILES.UNDERROCK and tiletype ~= WORLD_TILES.WOODFLOOR and tiletype ~= WORLD_TILES.SAND and
+        tiletype ~= WORLD_TILES.CARPET and tiletype ~= WORLD_TILES.CHECKER and tiletype < WORLD_TILES.UNDERGROUND and
+        tiletype ~= WORLD_TILES.ASH and tiletype ~= WORLD_TILES.VOLCANO and tiletype ~= WORLD_TILES.VOLCANO_ROCK and
+        tiletype ~= WORLD_TILES.BRICK_GLOW
 
     if ground_OK then
         return true

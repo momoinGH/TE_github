@@ -399,7 +399,7 @@ local old_terraform = ACTIONS.TERRAFORM.fn
 ACTIONS.TERRAFORM.fn = function(act)
     if act.invobject and act.invobject.components.terraformer then
         local tile = TheWorld.Map:GetTileAtPoint(act:GetActionPoint():Get())
-        if tile == GROUND.GASRAINFOREST then
+        if tile == WORLD_TILES.GASRAINFOREST then
             if act.doer.components.talker then
                 act.doer.components.talker:Say(GetString(act.doer.prefab, "ANNOUNCE_TOOLCORRODED"))
             end
@@ -408,7 +408,7 @@ ACTIONS.TERRAFORM.fn = function(act)
                 finiteuses:Use(finiteuses:GetUses())
             end
             return
-        elseif tile == GROUND.DEEPRAINFOREST then
+        elseif tile == WORLD_TILES.DEEPRAINFOREST then
             if act.doer.components.talker then
                 act.doer.components.talker:Say(GetString(act.doer.prefab, "ANNOUNCE_TURFTOOHARD"))
             end

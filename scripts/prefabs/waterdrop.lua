@@ -5,15 +5,15 @@ local assets =
 }
 
 local function IsWater(tile)
-    return tile == GROUND.OCEAN_SWELL or
-        tile == GROUND.OCEAN_BRINEPOOL or
-        tile == GROUND.OCEAN_BRINEPOOL_SHORE or
-        tile == GROUND.OCEAN_HAZARDOUS or
-        tile == GROUND.OCEAN_ROUGH or
-        tile == GROUND.IMPASSABLE or
-        tile == GROUND.OCEAN_COASTAL or
-        tile == GROUND.OCEAN_WATERLOG or
-        tile == GROUND.OCEAN_COASTAL_SHORE
+    return tile == WORLD_TILES.OCEAN_SWELL or
+        tile == WORLD_TILES.OCEAN_BRINEPOOL or
+        tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+        tile == WORLD_TILES.OCEAN_HAZARDOUS or
+        tile == WORLD_TILES.OCEAN_ROUGH or
+        tile == WORLD_TILES.IMPASSABLE or
+        tile == WORLD_TILES.OCEAN_COASTAL or
+        tile == WORLD_TILES.OCEAN_WATERLOG or
+        tile == WORLD_TILES.OCEAN_COASTAL_SHORE
 end
 
 local function oneat(inst, eater)
@@ -36,9 +36,9 @@ end
 local notags = { 'NOBLOCK', 'player', 'FX' }
 local function test_ground(inst, pt)
     local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-    local ground_OK = tiletype ~= GROUND.ROCKY and tiletype ~= GROUND.ROAD and tiletype ~= GROUND.IMPASSABLE and
-        tiletype ~= GROUND.UNDERROCK and tiletype ~= GROUND.WOODFLOOR and
-        tiletype ~= GROUND.CARPET and tiletype ~= GROUND.CHECKER and tiletype < GROUND.UNDERGROUND and
+    local ground_OK = tiletype ~= WORLD_TILES.ROCKY and tiletype ~= WORLD_TILES.ROAD and tiletype ~= WORLD_TILES.IMPASSABLE and
+        tiletype ~= WORLD_TILES.UNDERROCK and tiletype ~= WORLD_TILES.WOODFLOOR and
+        tiletype ~= WORLD_TILES.CARPET and tiletype ~= WORLD_TILES.CHECKER and tiletype < WORLD_TILES.UNDERGROUND and
         not IsWater(tiletype)
 
     if ground_OK then

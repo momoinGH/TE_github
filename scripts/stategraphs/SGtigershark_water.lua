@@ -3,7 +3,7 @@ local JUMP_LAND_OFFSET = 3
 local TIGERSHARK_SPLASH_RADIUS = 5
 
 function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
-                      random_angle)
+    random_angle)
     wavePrefab = wavePrefab or "rogue_wave"
     totalAngle = math.clamp(totalAngle, 1, 360)
 
@@ -98,14 +98,14 @@ local function GetIsOnWater(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-    if ground == GROUND.OCEAN_SWELL or
-        ground == GROUND.OCEAN_COASTAL or
-        ground == GROUND.OCEAN_COASTAL_SHORE or
-        ground == GROUND.OCEAN_ROUGH or
-        ground == GROUND.OCEAN_BRINEPOOL or
-        ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-        ground == GROUND.OCEAN_WATERLOG or
-        ground == GROUND.OCEAN_HAZARDOUS then
+    if ground == WORLD_TILES.OCEAN_SWELL or
+        ground == WORLD_TILES.OCEAN_COASTAL or
+        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
+        ground == WORLD_TILES.OCEAN_ROUGH or
+        ground == WORLD_TILES.OCEAN_BRINEPOOL or
+        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+        ground == WORLD_TILES.OCEAN_WATERLOG or
+        ground == WORLD_TILES.OCEAN_HAZARDOUS then
         return true
     else
         return false
@@ -187,8 +187,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/tiger_shark/water_submerge_lrg") end),
+            TimeEvent(10 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/tiger_shark/water_submerge_lrg")
+            end),
             TimeEvent(30 * FRAMES, function(inst) inst.sg:GoToState("jumpwarn") end),
         },
     },
@@ -396,14 +398,14 @@ local states =
             local x, y, z = inst.Transform:GetWorldPosition()
             local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-            if ground ~= GROUND.OCEAN_SWELL and
-                ground ~= GROUND.OCEAN_COASTAL and
-                ground ~= GROUND.OCEAN_COASTAL_SHORE and
-                ground ~= GROUND.OCEAN_ROUGH and
-                ground ~= GROUND.OCEAN_BRINEPOOL and
-                ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                ground ~= GROUND.OCEAN_WATERLOG and
-                ground ~= GROUND.OCEAN_HAZARDOUS then
+            if ground ~= WORLD_TILES.OCEAN_SWELL and
+                ground ~= WORLD_TILES.OCEAN_COASTAL and
+                ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_ROUGH and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
+                ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                ground ~= WORLD_TILES.OCEAN_WATERLOG and
+                ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
                 inst:ClearStateGraph()
                 inst:SetStateGraph("SGtigershark_ground")
                 inst.AnimState:SetBuild("tigershark_ground_build")
@@ -434,8 +436,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/tiger_shark/roar") end)
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/tiger_shark/roar")
+            end)
         },
 
         ontimeout = function(inst)
@@ -666,8 +670,10 @@ local states =
                 --                    inst.sg:GoToState("dive")
                 --                end
             end),
-            TimeEvent(9 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/tiger_shark/run_down") end),
+            TimeEvent(9 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/tiger_shark/run_down")
+            end),
         },
     },
 
@@ -747,10 +753,14 @@ local states =
 
         timeline =
         {
-            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/tiger_shark/water_emerge_lrg") end),
-            TimeEvent(1 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/tiger_shark/sleep") end),
+            TimeEvent(1 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/tiger_shark/water_emerge_lrg")
+            end),
+            TimeEvent(1 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/tiger_shark/sleep")
+            end),
         },
 
     },
@@ -774,8 +784,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/tiger_shark/water_emerge_lrg") end),
+            TimeEvent(0 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/tiger_shark/water_emerge_lrg")
+            end),
         },
 
     },

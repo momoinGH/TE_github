@@ -100,14 +100,14 @@ local function turnon(inst)
             end
         end
 
-        if not plataforma and (ground == GROUND.OCEAN_COASTAL or
-                ground == GROUND.OCEAN_COASTAL_SHORE or
-                ground == GROUND.OCEAN_SWELL or
-                ground == GROUND.OCEAN_ROUGH or
-                ground == GROUND.OCEAN_BRINEPOOL or
-                ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-                ground == GROUND.OCEAN_WATERLOG or
-                ground == GROUND.OCEAN_HAZARDOUS) then
+        if not plataforma and (ground == WORLD_TILES.OCEAN_COASTAL or
+                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
+                ground == WORLD_TILES.OCEAN_SWELL or
+                ground == WORLD_TILES.OCEAN_ROUGH or
+                ground == WORLD_TILES.OCEAN_BRINEPOOL or
+                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+                ground == WORLD_TILES.OCEAN_WATERLOG or
+                ground == WORLD_TILES.OCEAN_HAZARDOUS) then
             inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
             inst.AnimState:PlayAnimation("idle_on_water", true)
             inst.AnimState:OverrideSymbol("water_ripple", "ripple_build", "water_ripple")
@@ -158,14 +158,14 @@ local function turnoff(inst)
         end
     end
 
-    if not plataforma and (ground == GROUND.OCEAN_COASTAL or
-            ground == GROUND.OCEAN_COASTAL_SHORE or
-            ground == GROUND.OCEAN_SWELL or
-            ground == GROUND.OCEAN_ROUGH or
-            ground == GROUND.OCEAN_BRINEPOOL or
-            ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-            ground == GROUND.OCEAN_WATERLOG or
-            ground == GROUND.OCEAN_HAZARDOUS) then
+    if not plataforma and (ground == WORLD_TILES.OCEAN_COASTAL or
+            ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
+            ground == WORLD_TILES.OCEAN_SWELL or
+            ground == WORLD_TILES.OCEAN_ROUGH or
+            ground == WORLD_TILES.OCEAN_BRINEPOOL or
+            ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+            ground == WORLD_TILES.OCEAN_WATERLOG or
+            ground == WORLD_TILES.OCEAN_HAZARDOUS) then
         inst.AnimState:PlayAnimation("idle_water", true)
     else
         inst.AnimState:PlayAnimation("idle_off", true)
@@ -213,21 +213,21 @@ local function onequip(inst, owner)
 end
 ]]
 local function onequip(inst, owner)
-	if owner and owner.sg and owner.sg:HasStateTag("rowing") then return end
-	owner.AnimState:OverrideSymbol("swap_object", "swap_bottlle_lantern", "swap_lantern_off")
-	owner.AnimState:OverrideSymbol("lantern_overlay", "swap_bottlle_lantern", "lantern_overlay")
+    if owner and owner.sg and owner.sg:HasStateTag("rowing") then return end
+    owner.AnimState:OverrideSymbol("swap_object", "swap_bottlle_lantern", "swap_lantern_off")
+    owner.AnimState:OverrideSymbol("lantern_overlay", "swap_bottlle_lantern", "lantern_overlay")
 
-	owner.AnimState:Show("ARM_carry")
-	owner.AnimState:Hide("ARM_normal")
+    owner.AnimState:Show("ARM_carry")
+    owner.AnimState:Hide("ARM_normal")
 
-	if inst.components.fueled:IsEmpty() then
-		owner.AnimState:OverrideSymbol("swap_object", "swap_bottlle_lantern", "swap_lantern_off")
-		owner.AnimState:Hide("LANTERN_OVERLAY")
-	else
-		owner.AnimState:OverrideSymbol("swap_object", "swap_bottlle_lantern", "swap_lantern_on")
-		owner.AnimState:Show("LANTERN_OVERLAY")
-		turnon(inst)
-	end
+    if inst.components.fueled:IsEmpty() then
+        owner.AnimState:OverrideSymbol("swap_object", "swap_bottlle_lantern", "swap_lantern_off")
+        owner.AnimState:Hide("LANTERN_OVERLAY")
+    else
+        owner.AnimState:OverrideSymbol("swap_object", "swap_bottlle_lantern", "swap_lantern_on")
+        owner.AnimState:Show("LANTERN_OVERLAY")
+        turnon(inst)
+    end
 end
 
 local function onunequip(inst, owner)
@@ -362,7 +362,7 @@ local function fn()
 
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
-	inst.components.equippable:SetOnEquipToModel(onequiptomodel)
+    inst.components.equippable:SetOnEquipToModel(onequiptomodel)
 
     inst.OnRemoveEntity = OnRemove
 

@@ -139,8 +139,8 @@ function AddTiles()
             end
         end
 
-        if tile_id >= GROUND.UNDERGROUND then
-            return error(("Numerical id %d is out of limits"):format(tile_id, GROUND.UNDERGROUND), 3)
+        if tile_id >= WORLD_TILES.UNDERGROUND then
+            return error(("Numerical id %d is out of limits"):format(tile_id, WORLD_TILES.UNDERGROUND), 3)
         end
 
         -- print("lowest founded value:", tile_id)

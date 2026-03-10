@@ -53,11 +53,11 @@ return Class(function(self, inst)
                 local map = TheWorld.Map
                 local x, y, z = player.Transform:GetWorldPosition()
                 local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-                if ground == GROUND.DEEPRAINFOREST or ground == GROUND.RAINFOREST then
+                if ground == WORLD_TILES.DEEPRAINFOREST or ground == WORLD_TILES.RAINFOREST then
                     butterfly = SpawnPrefab("glowfly")
-                elseif ground == GROUND.WINDY then
+                elseif ground == WORLD_TILES.WINDY then
                     butterfly = SpawnPrefab("goddess_butterfly")
-                elseif ground == GROUND.JUNGLE or ground == GROUND.MEADOW or ground == GROUND.BEACH then
+                elseif ground == WORLD_TILES.JUNGLE or ground == WORLD_TILES.MEADOW or ground == WORLD_TILES.BEACH then
                     butterfly = SpawnPrefab("butterfly_tropical")
                 else
                     butterfly = SpawnPrefab("butterfly")

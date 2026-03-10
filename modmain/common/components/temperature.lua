@@ -35,16 +35,16 @@ local function OnUpdate(self, dt, applyhealthdelta)
         local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex + 5, ey, ez))
         local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex - 5, ey, ez))
 
-        if posicao == (GROUND.ICELAND)
-            or posicao1 == (GROUND.ICELAND)
-            or posicao2 == (GROUND.ICELAND)
-            or posicao3 == (GROUND.ICELAND)
-            or posicao4 == (GROUND.ICELAND)
-            or posicao == (GROUND.SNOWLAND)
-            or posicao1 == (GROUND.SNOWLAND)
-            or posicao2 == (GROUND.SNOWLAND)
-            or posicao3 == (GROUND.SNOWLAND)
-            or posicao4 == (GROUND.SNOWLAND)
+        if posicao == (WORLD_TILES.ICELAND)
+            or posicao1 == (WORLD_TILES.ICELAND)
+            or posicao2 == (WORLD_TILES.ICELAND)
+            or posicao3 == (WORLD_TILES.ICELAND)
+            or posicao4 == (WORLD_TILES.ICELAND)
+            or posicao == (WORLD_TILES.SNOWLAND)
+            or posicao1 == (WORLD_TILES.SNOWLAND)
+            or posicao2 == (WORLD_TILES.SNOWLAND)
+            or posicao3 == (WORLD_TILES.SNOWLAND)
+            or posicao4 == (WORLD_TILES.SNOWLAND)
         then
             ambient_temperature = -20
         end
@@ -60,8 +60,8 @@ local function OnUpdate(self, dt, applyhealthdelta)
 	local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex+5, ey, ez))
 	local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex-5, ey, ez))	
 	
-	if posicao == (GROUND.ICELAND) or posicao1 == (GROUND.ICELAND) or posicao2 == (GROUND.ICELAND) or posicao3 == (GROUND.ICELAND) or posicao4 == (GROUND.ICELAND) or
-	posicao == (GROUND.SNOWLAND) or posicao1 == (GROUND.SNOWLAND) or posicao2 == (GROUND.SNOWLAND) or posicao3 == (GROUND.SNOWLAND) or posicao4 == (GROUND.SNOWLAND) then
+	if posicao == (WORLD_TILES.ICELAND) or posicao1 == (WORLD_TILES.ICELAND) or posicao2 == (WORLD_TILES.ICELAND) or posicao3 == (WORLD_TILES.ICELAND) or posicao4 == (WORLD_TILES.ICELAND) or
+	posicao == (WORLD_TILES.SNOWLAND) or posicao1 == (WORLD_TILES.SNOWLAND) or posicao2 == (WORLD_TILES.SNOWLAND) or posicao3 == (WORLD_TILES.SNOWLAND) or posicao4 == (WORLD_TILES.SNOWLAND) then
 	ambient_temperature = -20
 	end
 	end

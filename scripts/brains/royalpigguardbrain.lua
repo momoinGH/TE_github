@@ -172,10 +172,10 @@ end
 
 local function KeepChoppingAction(inst)
     local keep_chop = inst.components.follower.leader and
-    inst.components.follower.leader:GetDistanceSqToInst(inst) <= KEEP_CHOPPING_DIST * KEEP_CHOPPING_DIST
+        inst.components.follower.leader:GetDistanceSqToInst(inst) <= KEEP_CHOPPING_DIST * KEEP_CHOPPING_DIST
     local target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
         return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-        item.components.workable.action == ACTIONS.CHOP
+            item.components.workable.action == ACTIONS.CHOP
     end)
     if inst.tree_target ~= nil then target = inst.tree_target end
 
@@ -184,10 +184,10 @@ end
 
 local function StartChoppingCondition(inst)
     local start_chop = inst.components.follower.leader and inst.components.follower.leader.sg and
-    inst.components.follower.leader.sg:HasStateTag("chopping")
+        inst.components.follower.leader.sg:HasStateTag("chopping")
     local target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
         return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-        item.components.workable.action == ACTIONS.CHOP
+            item.components.workable.action == ACTIONS.CHOP
     end)
     if inst.tree_target ~= nil then target = inst.tree_target end
 
@@ -201,7 +201,7 @@ local function FindTreeToChopAction(inst)
     if target then
         local decid_monst_target = FindEntity(inst, SEE_TREE_DIST / 3, function(item)
             return item.prefab == "deciduoustree" and item.monster and item.components.workable and
-            item.components.workable.action == ACTIONS.CHOP
+                item.components.workable.action == ACTIONS.CHOP
         end)
         if decid_monst_target ~= nil then
             target = decid_monst_target
@@ -294,7 +294,7 @@ local function ExtinguishfireAction(inst)
 
             local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
 
-            if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.FIELDS or tiletype == GROUND.LAWN then
+            if tiletype == WORLD_TILES.SUBURB or tiletype == WORLD_TILES.FOUNDATION or tiletype == WORLD_TILES.COBBLEROAD or tiletype == WORLD_TILES.FIELDS or tiletype == WORLD_TILES.LAWN then
                 target = ent
                 break
             end
@@ -373,8 +373,10 @@ function RoyalPigGuardBrain:OnStart()
 
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_PROTECT),
                     WhileNode(
-                        function() return (self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown()) and
-                            self.inst:HasTag("guard") and not playersproblem(self.inst) end, "AttackMomentarily",                                                                                                                  -- and inCityLimits(self.inst)
+                        function()
+                            return (self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown()) and
+                                self.inst:HasTag("guard") and not playersproblem(self.inst)
+                        end, "AttackMomentarily",                                                                 -- and inCityLimits(self.inst)
                         ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST))),
 
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_EXTINGUISH),
@@ -382,8 +384,10 @@ function RoyalPigGuardBrain:OnStart()
 
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_FIGHT),
                     WhileNode(
-                        function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() and
-                            self.inst:HasTag("guard") end, "Dodge",
+                        function()
+                            return self.inst.components.combat.target and self.inst.components.combat:InCooldown() and
+                                self.inst:HasTag("guard")
+                        end, "Dodge",
                         RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST,
                             STOP_RUN_AWAY_DIST))),
 
@@ -412,8 +416,10 @@ function RoyalPigGuardBrain:OnStart()
                         Panic(self.inst))),
 
                 RunAway(self.inst,
-                    function(guy) return guy:HasTag("pig") and guy.components.combat and
-                        guy.components.combat.target == self.inst end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST),
+                    function(guy)
+                        return guy:HasTag("pig") and guy.components.combat and
+                            guy.components.combat.target == self.inst
+                    end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST),
 
                 ChattyNode(self.inst, getSpeechType(self.inst, STRINGS.CITY_PIG_TALK_ATTEMPT_TRADE),
                     FaceEntity(self.inst, GetTraderFn, KeepTraderFn)),

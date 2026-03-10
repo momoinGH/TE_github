@@ -18,7 +18,7 @@ local events =
 
 local states =
 {
-    State{
+    State {
         name = "bitehook_pre",
         tags = { "busy" },
 
@@ -44,7 +44,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "bitehook_loop",
         tags = { "busy" },
 
@@ -77,10 +77,10 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "bitehook_escape",
         tags = { "busy", "jumping" },
-        
+
         onenter = function(inst)
             inst.components.locomotor:Stop()
 
@@ -94,10 +94,10 @@ local states =
                 inst.AnimState:PushAnimation("idle", false)
             end
         end,
-        
+
         timeline =
         {
-            TimeEvent(2*FRAMES, function(inst)
+            TimeEvent(2 * FRAMES, function(inst)
                 if not inst.sg.statemem.underboat then
                     SpawnPrefab("ocean_splash_small1").Transform:SetPosition(inst.Transform:GetWorldPosition())
                     inst.AnimState:SetSortOrder(0)
@@ -105,13 +105,13 @@ local states =
                 end
             end),
 
-            TimeEvent(3*FRAMES, function(inst) 
-                if not inst.sg.statemem.underboat then 
+            TimeEvent(3 * FRAMES, function(inst)
+                if not inst.sg.statemem.underboat then
                     inst.Physics:SetMotorVelOverride(-1, 0, 0)
                 end
             end),
 
-            TimeEvent(21*FRAMES, function(inst)
+            TimeEvent(21 * FRAMES, function(inst)
                 if not inst.sg.statemem.underboat then
                     SpawnPrefab("ocean_splash_small1").Transform:SetPosition(inst.Transform:GetWorldPosition())
                     inst.Physics:ClearMotorVelOverride()
@@ -134,7 +134,7 @@ local states =
 
         onexit = function(inst)
             if not inst.sg.statemem.underboat then
-                inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
+                inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
                 inst.AnimState:SetLayer(LAYER_WIP_BELOW_OCEAN)
                 inst.Physics:ClearMotorVelOverride()
             end
@@ -145,7 +145,7 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "launched_out_of_water",
         tags = { "busy", "jumping" },
 
@@ -153,15 +153,15 @@ local states =
             inst.components.locomotor:Stop()
 
             SpawnPrefab("ocean_splash_small1").Transform:SetPosition(inst.Transform:GetWorldPosition())
-			inst.AnimState:SetBuild("lobster_build_color")
-			inst.AnimState:SetMultColour(1, 1, 1, 1)
+            inst.AnimState:SetBuild("lobster_build_color")
+            inst.AnimState:SetMultColour(1, 1, 1, 1)
             inst.AnimState:PlayAnimation("idle", true)
         end,
     },
 
-    State{
+    State {
         name = "hop_pst",
-        tags = {"busy", "jumping"},
+        tags = { "busy", "jumping" },
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("idle", false)
@@ -169,7 +169,7 @@ local states =
 
         timeline =
         {
-            TimeEvent(3*FRAMES, function(inst)
+            TimeEvent(3 * FRAMES, function(inst)
                 SpawnPrefab("ocean_splash_small1").Transform:SetPosition(inst.Transform:GetWorldPosition())
             end),
         },
@@ -184,9 +184,9 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "spawn_in",
-        tags = {"busy"},
+        tags = { "busy" },
 
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
@@ -212,47 +212,47 @@ local function play_run_step(inst)
 end
 
 CommonStates.AddWalkStates(states, {
-	starttimeline =
-	{
-		TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end)
-	},
+    starttimeline =
+    {
+        TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end)
+    },
 
-	walktimeline =
-	{
-		TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
-		TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
-		TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
-	},
+    walktimeline =
+    {
+        TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
+        TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
+        TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
+    },
 
-	endtimeline = 
-	{
-		TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end)
-	},
-}, {walk = "walk"})
+    endtimeline =
+    {
+        TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end)
+    },
+}, { walk = "walk" })
 
 CommonStates.AddRunStates(states, {
-	starttimeline =
-	{
-		TimeEvent(0, function(inst) 
-			inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") 
---			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/lobster/scared") 
-		end)
-	},
+    starttimeline =
+    {
+        TimeEvent(0, function(inst)
+            inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step")
+            --			inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/lobster/scared")
+        end)
+    },
 
-	runtimeline =
-	{
-		TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
-		TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
-		TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
-		TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
-	},
+    runtimeline =
+    {
+        TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
+        TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
+        TimeEvent(4 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
+        TimeEvent(6 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end),
+    },
 
-	endtimeline = 
-	{
-		TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end)
-	},
-}, {run = "run", stoprun = "idle"})
+    endtimeline =
+    {
+        TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound("hookline_2/creatures/wobster/step") end)
+    },
+}, { run = "run", stoprun = "idle" })
 
-CommonStates.AddSimpleActionState(states, "enter_home", "idle", 2*FRAMES, {"busy"})
+CommonStates.AddSimpleActionState(states, "enter_home", "idle", 2 * FRAMES, { "busy" })
 
 return StateGraph("wobstersw", states, events, "spawn_in", actionhandlers)

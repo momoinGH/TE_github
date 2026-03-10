@@ -54,13 +54,13 @@ local function OnAttack(inst, data)
         local x, y, z = data.target.Transform:GetWorldPosition()
         local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
         local naagua = false
-        if ground == GROUND.OCEAN_COASTAL or
-            ground == GROUND.OCEAN_SWELL or
-            ground == GROUND.OCEAN_ROUGH or
-            ground == GROUND.OCEAN_BRINEPOOL or
-            ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-            ground == GROUND.OCEAN_WATERLOG or
-            ground == GROUND.OCEAN_HAZARDOUS then
+        if ground == WORLD_TILES.OCEAN_COASTAL or
+            ground == WORLD_TILES.OCEAN_SWELL or
+            ground == WORLD_TILES.OCEAN_ROUGH or
+            ground == WORLD_TILES.OCEAN_BRINEPOOL or
+            ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+            ground == WORLD_TILES.OCEAN_WATERLOG or
+            ground == WORLD_TILES.OCEAN_HAZARDOUS then
             naagua = true
         end
 

@@ -22,20 +22,20 @@ local function ondropped(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-    if ground == GROUND.OCEAN_SWELL or
-        ground == GROUND.OCEAN_BRINEPOOL or
-        ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-        ground == GROUND.OCEAN_HAZARDOUS or
-        ground == GROUND.OCEAN_ROUGH or
-        ground == GROUND.OCEAN_COASTAL_SHORE or
-        ground == GROUND.OCEAN_WATERLOG or
-        ground == GROUND.OCEAN_COASTAL then
+    if ground == WORLD_TILES.OCEAN_SWELL or
+        ground == WORLD_TILES.OCEAN_BRINEPOOL or
+        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+        ground == WORLD_TILES.OCEAN_HAZARDOUS or
+        ground == WORLD_TILES.OCEAN_ROUGH or
+        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
+        ground == WORLD_TILES.OCEAN_WATERLOG or
+        ground == WORLD_TILES.OCEAN_COASTAL then
         inst.AnimState:PlayAnimation("idle_water", true)
         inst.AnimState:OverrideSymbol("water_ripple", "ripple_build", "water_ripple")
         inst.AnimState:OverrideSymbol("water_shadow", "ripple_build", "water_shadow")
         if not inst.replica.inventoryitem:IsHeld() then inst.components.inventoryitem:AddMoisture(80) end
     end
-    if ground ~= GROUND.OCEAN_SWELL and ground ~= GROUND.OCEAN_WATERLOG and ground ~= GROUND.OCEAN_BRINEPOOL and ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and ground ~= GROUND.OCEAN_COASTAL_SHORE and ground ~= GROUND.OCEAN_HAZARDOUS and ground ~= GROUND.OCEAN_ROUGH and ground ~= GROUND.OCEAN_COASTAL then
+    if ground ~= WORLD_TILES.OCEAN_SWELL and ground ~= WORLD_TILES.OCEAN_WATERLOG and ground ~= WORLD_TILES.OCEAN_BRINEPOOL and ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and ground ~= WORLD_TILES.OCEAN_HAZARDOUS and ground ~= WORLD_TILES.OCEAN_ROUGH and ground ~= WORLD_TILES.OCEAN_COASTAL then
         inst.AnimState:PlayAnimation("idle", true)
         inst.AnimState:ClearOverrideSymbol("water_ripple", "ripple_build", "water_ripple")
         inst.AnimState:ClearOverrideSymbol("water_shadow", "ripple_build", "water_shadow")

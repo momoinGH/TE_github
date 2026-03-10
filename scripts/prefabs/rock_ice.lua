@@ -238,7 +238,7 @@ local function TryStageChange(inst)
             "tall",
             "grow"
         )
-    elseif TheWorld.state.iswinter or ground == GROUND.SNOWLAND or ground == GROUND.ICELAND then
+    elseif TheWorld.state.iswinter or ground == WORLD_TILES.SNOWLAND or ground == WORLD_TILES.ICELAND then
         --if pct > .1 then
         SetStage(inst, "tall", "grow")
         --end
@@ -361,7 +361,7 @@ local function rock_ice_fn()
         local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
         if inst.stage then
             SetStage(inst, inst.stage)
-        elseif TheWorld.state.isspring or TheWorld.state.iswinter or ground == GROUND.SNOWLAND or ground == GROUND.ICELAND then
+        elseif TheWorld.state.isspring or TheWorld.state.iswinter or ground == WORLD_TILES.SNOWLAND or ground == WORLD_TILES.ICELAND then
             SetStage(inst, "tall")
         elseif TheWorld.state.issummer then
             SetStage(inst, "dryup")

@@ -33,7 +33,7 @@ local function getnewpoint(pt)
     local result_offset = FindValidPositionByFan(theta, radius, 12, function(offset)
         local ground = TheWorld
         local spawn_point = pt + offset
-        if GetGroundTypeAtPosition(spawn_point) == GROUND.OCEAN_SHALLOW then
+        if GetGroundTypeAtPosition(spawn_point) == WORLD_TILES.OCEAN_SHALLOW then
             return true
         end
         return false
@@ -203,7 +203,7 @@ local growth_stages =
     {
         name = "underwater", -- waiting to be stuck
         time = function(inst)
-            return nil -- this stage doesn't grow automatically
+            return nil       -- this stage doesn't grow automatically
         end,
         fn = SetUnderwater,
         growfn = GrowUnderwater,

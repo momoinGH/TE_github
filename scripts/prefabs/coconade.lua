@@ -18,14 +18,14 @@ local function OnHitWater(inst, attacker, target)
     inst.components.explosive:OnBurnt()
     local x, y, z = inst.Transform:GetWorldPosition()
     local ground = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(x, y, z))
-    if ground ~= GROUND.OCEAN_COASTAL and
-        ground ~= GROUND.OCEAN_COASTAL_SHORE and
-        ground ~= GROUND.OCEAN_SWELL and
-        ground ~= GROUND.OCEAN_ROUGH and
-        ground ~= GROUND.OCEAN_BRINEPOOL and
-        ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-        ground ~= GROUND.OCEAN_WATERLOG and
-        ground ~= GROUND.OCEAN_HAZARDOUS then
+    if ground ~= WORLD_TILES.OCEAN_COASTAL and
+        ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+        ground ~= WORLD_TILES.OCEAN_SWELL and
+        ground ~= WORLD_TILES.OCEAN_ROUGH and
+        ground ~= WORLD_TILES.OCEAN_BRINEPOOL and
+        ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+        ground ~= WORLD_TILES.OCEAN_WATERLOG and
+        ground ~= WORLD_TILES.OCEAN_HAZARDOUS then
         inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
         local explode = SpawnPrefab("explode_small")
         explode.Transform:SetPosition(x, y, z)
@@ -131,9 +131,9 @@ local function fn(Sim)
 
 
     inst:AddComponent("explosive")
-	inst.components.explosive.explosivedamage = COCONADE_DAMAGE
-	inst.components.explosive.explosiverange = COCONADE_EXPLOSIONRANGE
-	inst.components.explosive.buildingdamage = COCONADE_BUILDINGDAMAGE
+    inst.components.explosive.explosivedamage = COCONADE_DAMAGE
+    inst.components.explosive.explosiverange = COCONADE_EXPLOSIONRANGE
+    inst.components.explosive.buildingdamage = COCONADE_BUILDINGDAMAGE
 
     MakeSmallBurnable(inst, 3 + math.random() * 3)
     inst.components.burnable:SetOnBurntFn(nil)

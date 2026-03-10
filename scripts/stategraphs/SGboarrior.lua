@@ -154,7 +154,7 @@ end
 
 local function IsValidTile(x, y, z)
     local tile = TheWorld.Map:GetTileAtPoint(x, y, z)
-    return tile ~= GROUND.IMPASSABLE and tile ~= GROUND.INVALID
+    return tile ~= WORLD_TILES.IMPASSABLE and tile ~= WORLD_TILES.INVALID
 end
 
 local function GroundSlamattack(inst)
@@ -341,8 +341,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(13 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve/creatures/lava_arena/boarrior/taunt") end),
+            TimeEvent(13 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                "dontstarve/creatures/lava_arena/boarrior/taunt")
+            end),
         },
 
         events =

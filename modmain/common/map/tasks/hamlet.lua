@@ -8,7 +8,7 @@ AddTask("Edge_of_the_unknown", {
     room_choices = {
         ["BG_plains_base"] = 1 + tamanho,
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_plains_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -23,7 +23,7 @@ AddTask("painted_sands", {
         ["battleground_claw"] = 1,
         ["battleground_leg"] = 1,
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_painted_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -34,7 +34,7 @@ AddTask("plains", {
         ["plains_tallgrass"] = 1 + tamanho,
         ["plains_pogs_ruin"] = 1,
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_plains_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -44,7 +44,7 @@ AddTask("rainforests", {
     room_choices = {
         ["BG_rainforest_base"] = 1 + tamanho,
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 },
 })
@@ -55,7 +55,7 @@ AddTask("rainforest_ruins", {
         ["rainforest_ruins"] = 1 + tamanho,
         ["rainforest_ruins_entrance"] = 1,
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -67,7 +67,7 @@ AddTask("plains_ruins", {
         ["plains_ruins_set"] = 1,
         ["plains_pogs"] = math.random(0, 1),
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_plains_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -79,7 +79,7 @@ AddTask("Edge_of_civilization", {
         ["cultivated_base_1"] = 2 + tamanho,
         ["piko_land"] = 1 + tamanho,
     },
-    room_bg = GROUND.FIELDS,
+    room_bg = WORLD_TILES.FIELDS,
     background_room = "BG_cultivated_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -95,7 +95,7 @@ AddTask("Deep_rainforest", {
         ["deeprainforest_flytrap_grove"] = 1 + tamanho,
         ["deeprainforest_anthill_exit2"] = 1,
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -106,7 +106,7 @@ AddTask("Pigtopia", {
     room_choices = {
         ["suburb_base_1"] = 1 + tamanho,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = WORLD_TILES.SUBURB,
     background_room = "suburb_base_1",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -120,7 +120,7 @@ AddTask("Pigtopia_capital", {
         ["city_base_1_set2"] = 1,
         ["city_base_1"] = 1,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = WORLD_TILES.SUBURB,
     background_room = "suburb_base_1",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -134,7 +134,7 @@ AddTask("Deep_lost_ruins_gas", {
         ["deeprainforest_gas_flytrap_grove"] = 1,
         ["deeprainforest_gas_flytrap_grove_set"] = 1,
     },
-    room_bg = GROUND.GASRAINFOREST,
+    room_bg = WORLD_TILES.GASRAINFOREST,
     background_room = "deeprainforest_gas",
     colour = { r = 0.8, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -153,7 +153,7 @@ AddTask("Edge_of_the_unknown_2", {
         ["battleground_claw"] = 1,
         ["battleground_leg"] = 1,
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_plains_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -165,7 +165,7 @@ AddTask("Lilypond_land", {
         ["BG_rainforest_base"] = 1,
     },
     entrance_room = "rainforest_lillypond",
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 0.3, b = 0.3, a = 0.3 }
 })
@@ -177,7 +177,7 @@ AddTask("Lilypond_land_2", {
         ["BG_rainforest_base"] = 1,
     },
     entrance_room = "rainforest_lillypond",
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 0.3, b = 0.3, a = 0.3 }
 })
@@ -188,7 +188,7 @@ AddTask("this_is_how_you_get_ants", {
     room_choices = {
         ["deeprainforest_anthill"] = 1,
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0, g = 0, b = 1, a = 0.3 }
 })
@@ -204,7 +204,7 @@ AddTask("Deep_rainforest_2", {
         ["deeprainforest_anthill_exit"] = 1,
         ["deeprainforest_ruins_entrance2"] = 1,
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -215,7 +215,7 @@ AddTask("Lost_Ruins_1", {
     room_choices = {
         ["deeprainforest_ruins_entrance"] = 1,
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -230,7 +230,7 @@ AddTask("Land_Divide_1", {
         ["ForceDisconnectedRoom"] = 10,
     },
     entrance_room = "ForceDisconnectedRoom",
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -245,7 +245,7 @@ AddTask("Deep_rainforest_3", {
         ["deeprainforest_flytrap_grove"] = 1 + tamanho,
         ["deeprainforest_ruins_exit"] = 1,
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -256,7 +256,7 @@ AddTask("Deep_rainforest_mandrake", {
     room_choices = {
         ["deeprainforest_mandrakeman"] = 1,
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -270,7 +270,7 @@ AddTask("Path_to_the_others", {
         ["plains_tallgrass"] = 1 + tamanho,
         ["plains_pogs"] = 1 + tamanho,
     },
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -281,7 +281,7 @@ AddTask("Other_edge_of_civilization", {
     room_choices = {
         ["cultivated_base_2"] = 1 + tamanho,
     },
-    room_bg = GROUND.FIELDS,
+    room_bg = WORLD_TILES.FIELDS,
     background_room = "BG_cultivated_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -293,7 +293,7 @@ AddTask("Other_pigtopia", {
     room_choices = {
         ["suburb_base_2"] = 1 + tamanho,
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = WORLD_TILES.SUBURB,
     background_room = "suburb_base_2",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -306,7 +306,7 @@ AddTask("Other_pigtopia_capital", {
         ["city_base_2_set2"] = 1,
         ["city_base_2"] = 1,
     },
-    room_bg = GROUND.FOUNDATION,
+    room_bg = WORLD_TILES.FOUNDATION,
     background_room = "suburb_base_2",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -319,7 +319,7 @@ AddTask("Land_Divide_2", {
         ["ForceDisconnectedRoom"] = 10, --20,
     },
     entrance_room = "ForceDisconnectedRoom",
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -333,7 +333,7 @@ AddTask("Deep_lost_ruins4", {
         ["deeprainforest_flytrap_grove"] = 1 + tamanho,
         ["deeprainforest_ruins_exit2"] = 1,
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -349,7 +349,7 @@ AddTask("lost_rainforest", {
     },
 
     entrance_room = "rainforest_lillypond",
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_rainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -362,7 +362,7 @@ AddTask("Land_Divide_3", {
         ["ForceDisconnectedRoom"] = 10,
     },
     entrance_room = "ForceDisconnectedRoom",
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -374,7 +374,7 @@ AddTask("pincale", {
     room_choices = {
         ["BG_pinacle_base_set"] = 1,
     },
-    room_bg = GROUND.ROCKY,
+    room_bg = WORLD_TILES.ROCKY,
     background_room = "BG_pinacle_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -387,7 +387,7 @@ AddTask("Land_Divide_4", {
         ["ForceDisconnectedRoom"] = 10,
     },
     entrance_room = "ForceDisconnectedRoom",
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -402,7 +402,7 @@ AddTask("Deep_wild_ruins4", {
         ["deeprainforest_base_nobatcave_PigRuinsExit4"] = 1,
     },
 
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "deeprainforest_base_nobatcave",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -416,7 +416,7 @@ AddTask("wild_rainforest", {
         ["rainforest_base_nobatcave"] = 2 + tamanho,
     },
     entrance_room = "rainforest_lillypond",
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "rainforest_base_nobatcave",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -428,7 +428,7 @@ AddTask("wild_ancient_ruins", {
         ["deeprainforest_flytrap_grove_PigRuinsEntrance5"] = 1,
     },
 
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "rainforest_base_nobatcave",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -440,7 +440,7 @@ AddTask("Land_Divide_5", {
     room_choices = {
         ["ForceDisconnectedRoom"] = 20,
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -454,7 +454,7 @@ AddTask("interior_space", {
         ["BG_interior_base"] = 20,
     },
 
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_interior_base",
     colour = { r = 0.01, g = 0.01, b = 0.01, a = 0.3 }
 })
@@ -466,7 +466,7 @@ local preenchimento = GetModConfigData("fillingthebiomes") * 0.5
 
 AddRoom("BG_battleground_base", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.DIRT,
+    value = WORLD_TILES.DIRT,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .11 * preenchimento, -- .22, --.26
@@ -490,7 +490,7 @@ AddRoom("BG_battleground_base", {
 
 AddRoom("battleground_ribs", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.DIRT,
+    value = WORLD_TILES.DIRT,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .11 * preenchimento, -- .22, --.26
@@ -514,7 +514,7 @@ AddRoom("battleground_ribs", {
 })
 AddRoom("battleground_claw", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.DIRT,
+    value = WORLD_TILES.DIRT,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .11 * preenchimento, -- .22, --.26
@@ -538,7 +538,7 @@ AddRoom("battleground_claw", {
 })
 AddRoom("battleground_leg", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.DIRT,
+    value = WORLD_TILES.DIRT,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .11 * preenchimento, -- .22, --.26
@@ -562,7 +562,7 @@ AddRoom("battleground_leg", {
 })
 AddRoom("battleground_head", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.DIRT,
+    value = WORLD_TILES.DIRT,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .11 * preenchimento, -- .22, --.26
@@ -588,7 +588,7 @@ AddRoom("battleground_head", {
 ----------------------------------------------------------- deeprainforest room--------------------------------------------------------------------------------------------------
 AddRoom("BG_deeprainforest_base", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha", "Terrarium_Spawner", "StatueHarp_HedgeSpawner", "CharlieStage_Spawner" },
     contents = {
 
@@ -629,7 +629,7 @@ AddRoom("BG_deeprainforest_base", {
 
 AddRoom("deeprainforest_spider_monkey_nest", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
 
@@ -665,7 +665,7 @@ AddRoom("deeprainforest_spider_monkey_nest", {
 })
 AddRoom("deeprainforest_flytrap_grove", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = {
@@ -708,7 +708,7 @@ AddRoom("deeprainforest_flytrap_grove", {
 
 AddRoom("deeprainforest_flytrap_grove_PigRuinsEntrance5", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = {
@@ -748,7 +748,7 @@ AddRoom("deeprainforest_flytrap_grove_PigRuinsEntrance5", {
 
 AddRoom("deeprainforest_fireflygrove", {
     colour = { r = 1, g = 1, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
 
@@ -787,7 +787,7 @@ AddRoom("deeprainforest_fireflygrove", {
 
 AddRoom("deeprainforest_gas", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASRAINFOREST,
+    value = WORLD_TILES.GASRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         distributepercent = 0.225 * preenchimento, --.45
@@ -813,7 +813,7 @@ AddRoom("deeprainforest_gas", {
 
 AddRoom("deeprainforest_gas_set", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASRAINFOREST,
+    value = WORLD_TILES.GASRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = {
@@ -841,7 +841,7 @@ AddRoom("deeprainforest_gas_set", {
 
 AddRoom("deeprainforest_gas_flytrap_grove", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASRAINFOREST,
+    value = WORLD_TILES.GASRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = {
@@ -877,7 +877,7 @@ AddRoom("deeprainforest_gas_flytrap_grove", {
 
 AddRoom("deeprainforest_gas_flytrap_grove_set", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASRAINFOREST,
+    value = WORLD_TILES.GASRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = {
@@ -912,7 +912,7 @@ AddRoom("deeprainforest_gas_flytrap_grove_set", {
 
 AddRoom("deeprainforest_ruins_entrance", {
     colour = { r = 1, g = 0.1, b = 0.2, a = 0.5 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = { ["pig_ruins_entrance_1"] = 1 },
@@ -946,7 +946,7 @@ AddRoom("deeprainforest_ruins_entrance", {
 
 AddRoom("deeprainforest_ruins_entrance2", {
     colour = { r = 1, g = 0.1, b = 0.2, a = 0.5 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = { ["pig_ruins_entrance_2"] = 1 },
@@ -980,7 +980,7 @@ AddRoom("deeprainforest_ruins_entrance2", {
 
 AddRoom("deeprainforest_ruins_exit", {
     colour = { r = 0.2, g = 0.1, b = 1, a = 0.5 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = { ["pig_ruins_exit_1"] = 1 },
@@ -1014,7 +1014,7 @@ AddRoom("deeprainforest_ruins_exit", {
 
 AddRoom("deeprainforest_ruins_exit2", {
     colour = { r = 0.2, g = 0.1, b = 1, a = 0.5 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = { ["pig_ruins_exit_2"] = 1, ["nettlegrove"] = 1, },
@@ -1048,7 +1048,7 @@ AddRoom("deeprainforest_ruins_exit2", {
 
 AddRoom("deeprainforest_anthill", {
     colour = { r = 1, g = 0, b = 1, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         distributepercent = 0.125 * preenchimento, --.3
@@ -1080,7 +1080,7 @@ AddRoom("deeprainforest_anthill", {
 })
 AddRoom("deeprainforest_mandrakeman", {
     colour = { r = 1, g = 0, b = 1, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = { ["mandraketown"] = 1 },
@@ -1112,7 +1112,7 @@ AddRoom("deeprainforest_mandrakeman", {
 })
 AddRoom("deeprainforest_anthill_exit", {
     colour = { r = 1, g = 0, b = 1, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "hamlet", "folha" },
     contents = {
         distributepercent = 0.125 * preenchimento, --.3
@@ -1144,7 +1144,7 @@ AddRoom("deeprainforest_anthill_exit", {
 
 AddRoom("deeprainforest_anthill_exit2", {
     colour = { r = 1, g = 0, b = 1, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "hamlet", "folha" },
     contents = {
         distributepercent = 0.125 * preenchimento, --.3
@@ -1176,7 +1176,7 @@ AddRoom("deeprainforest_anthill_exit2", {
 ----------------------------------------------------------- painted room--------------------------------------------------------------------------------------------------
 AddRoom("BG_painted_base", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.PAINTED,
+    value = WORLD_TILES.PAINTED,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .075 * preenchimento, --.26
@@ -1202,7 +1202,7 @@ AddRoom("BG_painted_base", {
 ----------------------------------------------------------- rainflorest room--------------------------------------------------------------------------------------------------
 AddRoom("BG_rainforest_base", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha", "StagehandGarden", "Terrarium_Spawner", "StatueHarp_HedgeSpawner", "CharlieStage_Spawner" },
     contents = {
         distributepercent = .19 * preenchimento, --.5
@@ -1232,7 +1232,7 @@ AddRoom("BG_rainforest_base", {
 
 AddRoom("rainforest_ruins", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         distributepercent = 0.175 * preenchimento, -- .5
@@ -1259,7 +1259,7 @@ AddRoom("rainforest_ruins", {
 
 AddRoom("rainforest_ruins_entrance", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         distributepercent = .175 * preenchimento, -- .5
@@ -1288,7 +1288,7 @@ AddRoom("rainforest_ruins_entrance", {
 
 AddRoom("rainforest_lillypond", {
     colour = { r = 1.0, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         countstaticlayouts = {
@@ -1315,7 +1315,7 @@ AddRoom("rainforest_lillypond", {
 
 AddRoom("rainforest_pugalisk", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
     contents = {
         distributepercent = .075 * preenchimento, -- .3
@@ -1342,7 +1342,7 @@ AddRoom("rainforest_pugalisk", {
 ----------------------------------------------------------- pinacle room--------------------------------------------------------------------------------------------------
 AddRoom("BG_pinacle_base_set", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.ROCKY,
+    value = WORLD_TILES.ROCKY,
     tags = { "hamlet" },
     contents = {
         countstaticlayouts = {
@@ -1374,7 +1374,7 @@ AddRoom("BG_pinacle_base_set", {
 
 AddRoom("BG_pinacle_base", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.ROCKY,
+    value = WORLD_TILES.ROCKY,
     tags = { "hamlet" },
     contents = {
         distributepercent = .05 * preenchimento, --.26
@@ -1401,7 +1401,7 @@ AddRoom("BG_pinacle_base", {
 ----------------------------------------------------------- plain room--------------------------------------------------------------------------------------------------
 AddRoom("BG_plains_base", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .125 * preenchimento, --.22, --.26
@@ -1431,7 +1431,7 @@ AddRoom("BG_plains_base", {
 
 AddRoom("BG_plains_base_nocanopy", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         countstaticlayouts = {
@@ -1465,7 +1465,7 @@ AddRoom("BG_plains_base_nocanopy", {
 
 AddRoom("BG_plains_base_nocanopy1", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         countstaticlayouts = {
@@ -1504,7 +1504,7 @@ AddRoom("BG_plains_base_nocanopy1", {
 
 AddRoom("BG_plains_base_nocanopy2", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         countstaticlayouts = {
@@ -1538,7 +1538,7 @@ AddRoom("BG_plains_base_nocanopy2", {
 
 AddRoom("BG_plains_base_nocanopy3", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         countstaticlayouts = {
@@ -1572,7 +1572,7 @@ AddRoom("BG_plains_base_nocanopy3", {
 
 AddRoom("plains_tallgrass", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .075 * preenchimento, -- .15, -- .3
@@ -1599,7 +1599,7 @@ AddRoom("plains_tallgrass", {
 
 AddRoom("plains_ruins", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .125 * preenchimento, -- .15, -- .3
@@ -1626,7 +1626,7 @@ AddRoom("plains_ruins", {
 
 AddRoom("plains_ruins_set", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .125 * preenchimento, -- .15, -- .3
@@ -1654,7 +1654,7 @@ AddRoom("plains_ruins_set", {
 
 AddRoom("plains_pogs", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .125 * preenchimento, -- .15, -- .3
@@ -1679,7 +1679,7 @@ AddRoom("plains_pogs", {
 
 AddRoom("plains_pogs_ruin", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
         distributepercent = .125 * preenchimento, -- .15, -- .3
@@ -1706,7 +1706,7 @@ AddRoom("plains_pogs_ruin", {
 -------------------------------------------------------------city room------------------------------------------------------------------------------------
 AddRoom("BG_city_base", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1723,7 +1723,7 @@ AddRoom("BG_city_base", {
 
 AddRoom("city_base_1", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1739,7 +1739,7 @@ AddRoom("city_base_1", {
 
 AddRoom("city_base_1_set", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         countstaticlayouts = {
@@ -1758,7 +1758,7 @@ AddRoom("city_base_1_set", {
 
 AddRoom("city_base_1_set2", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1774,7 +1774,7 @@ AddRoom("city_base_1_set2", {
 
 AddRoom("city_base_2", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.FOUNDATION,
+    value = WORLD_TILES.FOUNDATION,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1790,7 +1790,7 @@ AddRoom("city_base_2", {
 
 AddRoom("city_base_2_set", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.FOUNDATION,
+    value = WORLD_TILES.FOUNDATION,
     tags = { "ExitPiece", "hamlet" },
     contents = {
 
@@ -1812,7 +1812,7 @@ AddRoom("city_base_2_set", {
 
 AddRoom("city_base_2_set2", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.FOUNDATION,
+    value = WORLD_TILES.FOUNDATION,
     tags = { "ExitPiece", "hamlet" },
     contents = {
 
@@ -1843,7 +1843,7 @@ fazendas =
 
 AddRoom("BG_cultivated_base", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.FIELDS,
+    value = WORLD_TILES.FIELDS,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.03 * preenchimento, ---0.1
@@ -1873,7 +1873,7 @@ AddRoom("BG_cultivated_base", {
 
 AddRoom("cultivated_base_1", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.FIELDS,
+    value = WORLD_TILES.FIELDS,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.03 * preenchimento, ---0.1
@@ -1891,7 +1891,7 @@ AddRoom("cultivated_base_1", {
 
 AddRoom("cultivated_base_2", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.FIELDS,
+    value = WORLD_TILES.FIELDS,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.03 * preenchimento, ---0.1
@@ -1910,7 +1910,7 @@ AddRoom("cultivated_base_2", {
 
 AddRoom("piko_land", {
     colour = { r = 1.0, g = 0.0, b = 1.0, a = 0.3 },
-    value = GROUND.FIELDS,
+    value = WORLD_TILES.FIELDS,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.03 * preenchimento, --0.1
@@ -1932,7 +1932,7 @@ AddRoom("piko_land", {
 -----------------------------------------------------suburb room-----------------------------------------
 AddRoom("BG_suburb_base", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1948,7 +1948,7 @@ AddRoom("BG_suburb_base", {
 
 AddRoom("suburb_base_1", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1964,7 +1964,7 @@ AddRoom("suburb_base_1", {
 
 AddRoom("suburb_base_2", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = 0.05 * preenchimento,
@@ -1981,7 +1981,7 @@ AddRoom("suburb_base_2", {
 ---------------------------------island 5--------------------------------------
 AddRoom("deeprainforest_base_nobatcave", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "hamlet", "folha" },
     contents = {
 
@@ -2013,7 +2013,7 @@ AddRoom("deeprainforest_base_nobatcave", {
 
 AddRoom("deeprainforest_base_nobatcave_PigRuinsExit4", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "hamlet", "folha" },
     contents = {
         countstaticlayouts = {
@@ -2048,7 +2048,7 @@ AddRoom("deeprainforest_base_nobatcave_PigRuinsExit4", {
 
 AddRoom("rainforest_base_nobatcave", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "ExitPiece", "hamlet", "folha" },
     contents = {
         distributepercent = .19 * preenchimento, --.5
@@ -2074,7 +2074,7 @@ AddRoom("rainforest_base_nobatcave", {
 
 AddRoom("painted_base_nobatcave", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.PAINTED,
+    value = WORLD_TILES.PAINTED,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = .075 * preenchimento, --.26
@@ -2099,7 +2099,7 @@ AddRoom("painted_base_nobatcave", {
 
 AddRoom("plains_base_nobatcave", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "hamlet" },
     contents = {
         distributepercent = .125 * preenchimento, --.22, --.26
@@ -2128,7 +2128,7 @@ AddRoom("plains_base_nobatcave", {
 ---------------------------------------------------------------------------Start Room -------------------------------------------------------------------------------------------------------------------------------------	
 AddRoom("PorklandPortalRoom", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "RoadPoison", "hamlet", "Chester_Eyebone" },
     contents = {
         distributepercent = .25,
@@ -2159,7 +2159,7 @@ AddTask("inicio", {
     room_choices = {
         ["PorklandPortalRoom"] = 1,
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_plains_base",
     colour = { r = 0, g = 1, b = 0, a = 1 }
 })
@@ -2173,7 +2173,7 @@ AddTask("separavulcao", {
         ["ForceDisconnectedRoom"] = 10,
     },
     entrance_room = "ForceDisconnectedRoom",
-    room_bg = GROUND.VOLCANO_ROCK,
+    room_bg = WORLD_TILES.VOLCANO_ROCK,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -2188,7 +2188,7 @@ AddTask("separahamcave", {
         ["ForceDisconnectedRoom"] = 10,
     },
     entrance_room = "ForceDisconnectedRoom",
-    room_bg = GROUND.VOLCANO_ROCK,
+    room_bg = WORLD_TILES.VOLCANO_ROCK,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -2207,7 +2207,7 @@ AddTask("HamMudWorld", {
         ["PitRoom"] = 1,
     },
     background_room = "HamBGMud",
-    room_bg = GROUND.MUD,
+    room_bg = WORLD_TILES.MUD,
     colour = { r = 0.6, g = 0.4, b = 0.0, a = 0.9 },
 })
 
@@ -2222,7 +2222,7 @@ AddTask("HamMudCave", {
         ["PitRoom"] = 1,
     },
     background_room = "HamBGBatCaveRoom",
-    room_bg = GROUND.MUD,
+    room_bg = WORLD_TILES.MUD,
     colour = { r = 0.7, g = 0.5, b = 0.0, a = 0.9 },
 })
 
@@ -2235,7 +2235,7 @@ AddTask("HamMudLights", {
         ["PitRoom"] = 1,
     },
     background_room = "HamWormPlantField",
-    room_bg = GROUND.MUD,
+    room_bg = WORLD_TILES.MUD,
     colour = { r = 0.7, g = 0.5, b = 0.0, a = 0.9 },
 })
 
@@ -2247,7 +2247,7 @@ AddTask("HamMudPit", {
         ["PitRoom"] = 2,
     },
     background_room = "HamFernGully",
-    room_bg = GROUND.MUD,
+    room_bg = WORLD_TILES.MUD,
     colour = { r = 0.6, g = 0.4, b = 0.0, a = 0.9 },
 })
 
@@ -2266,7 +2266,7 @@ AddTask("HamBigBatCave", {
         ["PitRoom"] = 2,
     },
     background_room = "HamBGBatCaveRoom",
-    room_bg = GROUND.CAVE,
+    room_bg = WORLD_TILES.CAVE,
     colour = { r = 0.8, g = 0.8, b = 0.8, a = 0.9 },
 })
 
@@ -2284,7 +2284,7 @@ AddTask("HamRockyLand", {
         ["PitRoom"] = 1,
     },
     background_room = "HamBGRockyCaveRoom",
-    room_bg = GROUND.CAVE,
+    room_bg = WORLD_TILES.CAVE,
     colour = { r = 0.5, g = 0.5, b = 0.5, a = 0.9 },
 })
 
@@ -2304,13 +2304,13 @@ AddTask("HamRedForest", {
         ["PitRoom"] = 1,
     },
     background_room = "HamBGRedMush",
-    room_bg = GROUND.QUAGMIRE_PARKFIELD,
+    room_bg = WORLD_TILES.QUAGMIRE_PARKFIELD,
     colour = { r = 1.0, g = 0.5, b = 0.5, a = 0.9 },
 })
 
 AddRoom("caveruinexitroom", {
     colour = { r = .25, g = .28, b = .25, a = .50 },
-    value = GROUND.SINKHOLE,
+    value = WORLD_TILES.SINKHOLE,
     contents = {
         countstaticlayouts = {
             ["ruins_exit"] = 1,
@@ -2336,7 +2336,7 @@ AddRoom("caveruinexitroom", {
 
 AddRoom("caveruinexitroom2", {
     colour = { r = .25, g = .28, b = .25, a = .50 },
-    value = GROUND.SINKHOLE,
+    value = WORLD_TILES.SINKHOLE,
     contents = {
         countstaticlayouts = {
             ["ruins_exit2"] = 1,
@@ -2367,7 +2367,7 @@ AddTask("caveruinsexit", {
         ["caveruinexitroom"] = 1,
     },
     background_room = "BGSinkhole",
-    room_bg = GROUND.SINKHOLE,
+    room_bg = WORLD_TILES.SINKHOLE,
     colour = { r = 1, g = 0, b = 1, a = 1 },
 })
 
@@ -2378,7 +2378,7 @@ AddTask("caveruinsexit2", {
         ["caveruinexitroom2"] = 1,
     },
     background_room = "BGSinkhole",
-    room_bg = GROUND.SINKHOLE,
+    room_bg = WORLD_TILES.SINKHOLE,
     colour = { r = 1, g = 0, b = 1, a = 1 },
 })
 
@@ -2396,7 +2396,7 @@ AddTask("HamGreenForest", {
         ["PitRoom"] = 1,
     },
     background_room = "HamBGGreenMush",
-    room_bg = GROUND.QUAGMIRE_PARKFIELD,
+    room_bg = WORLD_TILES.QUAGMIRE_PARKFIELD,
     colour = { r = 0.5, g = 1.0, b = 0.5, a = 0.9 },
 })
 
@@ -2412,7 +2412,7 @@ AddTask("HamBlueForest", {
         ["PitRoom"] = 1,
     },
     background_room = "HamBGBlueMush",
-    room_bg = GROUND.QUAGMIRE_PARKFIELD,
+    room_bg = WORLD_TILES.QUAGMIRE_PARKFIELD,
     colour = { r = 0.5, g = 0.5, b = 1.0, a = 0.9 },
 })
 
@@ -2427,7 +2427,7 @@ AddTask("HamMoonCaveForest", {
         ["HamCaveGraveyardentrance"] = 1,
     },
     background_room = "HamCaveGraveyard",
-    room_bg = GROUND.FUNGUSMOON,
+    room_bg = WORLD_TILES.FUNGUSMOON,
     colour = { r = 0.3, g = 0.3, b = 0.3, a = 0.9 },
 })
 
@@ -2440,9 +2440,9 @@ AddTask("HamArchiveMaze", {
     {
         ["ArchiveMazeRooms"] = 4,
     },
-    room_bg = GROUND.ARCHIVE,
-    --    maze_tiles = {rooms = {"archive_hallway"}, bosses = {"archive_hallway"}, keyroom = {"archive_keyroom"}, archive = {start={"archive_start"}, finish={"archive_end"}}, bridge_ground=GROUND.FAKE_GROUND},
-    maze_tiles = { rooms = { "hamlet_hallway", "hamlet_hallway_two" }, bosses = { "hamlet_hallway" }, archive = { keyroom = { "hamlet_keyroom" } }, special = { finish = { "hamlet_end" }, start = { "hamlet_start" } }, bridge_ground = GROUND.FAKE_GROUND },
+    room_bg = WORLD_TILES.ARCHIVE,
+    --    maze_tiles = {rooms = {"archive_hallway"}, bosses = {"archive_hallway"}, keyroom = {"archive_keyroom"}, archive = {start={"archive_start"}, finish={"archive_end"}}, bridge_ground=WORLD_TILES.FAKE_GROUND},
+    maze_tiles = { rooms = { "hamlet_hallway", "hamlet_hallway_two" }, bosses = { "hamlet_hallway" }, archive = { keyroom = { "hamlet_keyroom" } }, special = { finish = { "hamlet_end" }, start = { "hamlet_start" } }, bridge_ground = WORLD_TILES.FAKE_GROUND },
     background_room = "ArchiveMazeRooms",
     cove_room_chance = 0,
     cove_room_max_edges = 0,
@@ -2452,7 +2452,7 @@ AddTask("HamArchiveMaze", {
 
 AddRoom("HamArchiveMazeEntrance", {
     colour = { r = 0.1, g = 0.1, b = 0.8, a = 0.9 },
-    value = GROUND.CAVE_NOISE,
+    value = WORLD_TILES.CAVE_NOISE,
     tags = { "MazeEntrance", "RoadPoison" },
     contents = {
         distributepercent = 0.6,
@@ -2474,7 +2474,7 @@ AddRoom("HamArchiveMazeEntrance", {
 
 AddRoom("HamCaveGraveyardentrance", {
     colour = { r = 0.1, g = 0.1, b = 0.8, a = 0.9 },
-    value = GROUND.MARSH,
+    value = WORLD_TILES.MARSH,
     tags = { "RoadPoison", "Mist" },
     contents = {
         distributepercent = 0.6,
@@ -2497,7 +2497,7 @@ AddRoom("HamCaveGraveyardentrance", {
 
 AddRoom("HamCaveGraveyard", {
     colour = { r = .010, g = .010, b = .10, a = .50 },
-    value = GROUND.MARSH,
+    value = WORLD_TILES.MARSH,
     tags = { "Mist" },
     contents = {
         countprefabs = {
@@ -2520,7 +2520,7 @@ AddTask("HamSpillagmiteCaverns", {
         ["PitRoom"] = 1,
     },
     background_room = "HamBGSpillagmite",
-    room_bg = GROUND.UNDERROCK,
+    room_bg = WORLD_TILES.UNDERROCK,
     colour = { r = 0.3, g = 0.3, b = 0.3, a = 0.9 },
 })
 
@@ -2533,14 +2533,14 @@ AddTask("HamSpillagmiteCaverns1", {
         ["HamStalagmitesAndLights"] = 1,
     },
     background_room = "HamSpillagmiteForest",
-    room_bg = GROUND.FUNGUS,
+    room_bg = WORLD_TILES.FUNGUS,
     colour = { r = 0.3, g = 0.3, b = 0.3, a = 0.9 },
 })
 ----------------------------------------------Ham caves---------------------------------------------------------------------------
 -- plainscave
 AddRoom("HamLightPlantField", {
     colour = { r = 0.7, g = 0.5, b = 0.3, a = 0.9 },
-    value = GROUND.SINKHOLE,
+    value = WORLD_TILES.SINKHOLE,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .4,
@@ -2576,7 +2576,7 @@ AddRoom("HamLightPlantField", {
 -- plainscave 2
 AddRoom("HamLightPlantFieldexit", {
     colour = { r = 0.7, g = 0.5, b = 0.3, a = 0.9 },
-    value = GROUND.SINKHOLE,
+    value = WORLD_TILES.SINKHOLE,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .4,
@@ -2617,7 +2617,7 @@ AddRoom("HamLightPlantFieldexit", {
 -- plainscave 3
 AddRoom("HamWormPlantField", {
     colour = { r = 0.7, g = 0.5, b = 0.3, a = 0.9 },
-    value = GROUND.SINKHOLE,
+    value = WORLD_TILES.SINKHOLE,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .3,
@@ -2656,7 +2656,7 @@ AddRoom("HamWormPlantField", {
 -- plainscave 4 fern
 AddRoom("HamFernGully", {
     colour = { r = 0.7, g = 0.5, b = 0.3, a = 0.9 },
-    value = GROUND.SINKHOLE,
+    value = WORLD_TILES.SINKHOLE,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .5,
@@ -2694,7 +2694,7 @@ AddRoom("HamFernGully", {
 -- plainscave
 AddRoom("HamSlurtlePlains", {
     colour = { r = 0.7, g = 0.5, b = 0.3, a = 0.9 },
-    value = GROUND.SINKHOLE,
+    value = WORLD_TILES.SINKHOLE,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .4,
@@ -2732,7 +2732,7 @@ AddRoom("HamSlurtlePlains", {
 -- plainscave
 AddRoom("HamMudWithRabbit", {
     colour = { r = 0.7, g = 0.5, b = 0.3, a = 0.9 },
-    value = GROUND.SINKHOLE,
+    value = WORLD_TILES.SINKHOLE,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .3,
@@ -2770,7 +2770,7 @@ AddRoom("HamMudWithRabbit", {
 -- plainscave
 AddRoom("HamMudWithRabbitexit", {
     colour = { r = 0.7, g = 0.5, b = 0.3, a = 0.9 },
-    value = GROUND.SINKHOLE,
+    value = WORLD_TILES.SINKHOLE,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .3,
@@ -2813,7 +2813,7 @@ AddRoom("HamMudWithRabbitexit", {
 -- plainscave
 AddRoom("HamBGMud", {
     colour = { r = 0.7, g = 0.5, b = 0.3, a = 0.9 },
-    value = GROUND.SINKHOLE,
+    value = WORLD_TILES.SINKHOLE,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .3,
@@ -2852,7 +2852,7 @@ AddRoom("HamBGMud", {
 -- cave iron
 AddRoom("HamBatCave", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .15,
@@ -2881,7 +2881,7 @@ AddRoom("HamBatCave", {
 -- cave iron
 AddRoom("HamBattyCave", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .25,
@@ -2909,7 +2909,7 @@ AddRoom("HamBattyCave", {
 -- cave iron
 AddRoom("HamFernyBatCave", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .25,
@@ -2938,7 +2938,7 @@ AddRoom("HamFernyBatCave", {
 -- cave iron
 AddRoom("HamFernyBatCaveexit", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .25,
@@ -2972,7 +2972,7 @@ AddRoom("HamFernyBatCaveexit", {
 -- caveiron
 AddRoom("HamBGBatCaveRoom", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .13,
@@ -3004,7 +3004,7 @@ AddRoom("HamBGBatCaveRoom", {
 -- fip
 AddRoom("HamSlurtleCanyon", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     --    tags = {"Hutch_Fishbowl"},
     type = NODE_TYPE.Room,
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
@@ -3043,7 +3043,7 @@ AddRoom("HamSlurtleCanyon", {
 -- fip
 AddRoom("HamBatsAndSlurtles", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     --    tags = {"Hutch_Fishbowl"},
     type = NODE_TYPE.Room,
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
@@ -3080,7 +3080,7 @@ AddRoom("HamBatsAndSlurtles", {
 -- fip
 AddRoom("HamRockyPlains", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     --    tags = {"Hutch_Fishbowl"},
     type = NODE_TYPE.Room,
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
@@ -3120,7 +3120,7 @@ AddRoom("HamRockyPlains", {
 -- fip
 AddRoom("HamRockyPlainsexit", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     --    tags = {"Hutch_Fishbowl"},
     type = NODE_TYPE.Room,
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
@@ -3151,7 +3151,7 @@ AddRoom("HamRockyPlainsexit", {
 -- fip
 AddRoom("HamRockyHatchingGrounds", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     --    tags = {"Hutch_Fishbowl"},
     type = NODE_TYPE.Room,
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
@@ -3180,7 +3180,7 @@ AddRoom("HamRockyHatchingGrounds", {
 -- fip
 AddRoom("HamBatsAndRocky", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     --    tags = {"Hutch_Fishbowl"},
     type = NODE_TYPE.SeparatedRoom,
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
@@ -3209,7 +3209,7 @@ AddRoom("HamBatsAndRocky", {
 -- fip
 AddRoom("HamBGRockyCaveRoom", {
     colour = { r = 0.7, g = 0.7, b = 0.7, a = 0.9 },
-    value = GROUND.MUD,
+    value = WORLD_TILES.MUD,
     --    tags = {"Hutch_Fishbowl"},	
     type = NODE_TYPE.Room,
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeSite,
@@ -3245,7 +3245,7 @@ AddRoom("HamBGRockyCaveRoom", {
 -- Gass MIX MUSH
 AddRoom("HamRedMushForest", {
     colour = { r = 0.8, g = 0.1, b = 0.1, a = 0.9 },
-    value = GROUND.QUAGMIRE_PARKFIELD,
+    value = WORLD_TILES.QUAGMIRE_PARKFIELD,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .3,
@@ -3273,7 +3273,7 @@ AddRoom("HamRedMushForest", {
 -- Gass MIX MUSH
 AddRoom("HamRedSpiderForest", {
     colour = { r = 0.8, g = 0.1, b = 0.4, a = 0.9 },
-    value = GROUND.QUAGMIRE_PARKFIELD,
+    value = WORLD_TILES.QUAGMIRE_PARKFIELD,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .3,
@@ -3301,7 +3301,7 @@ AddRoom("HamRedSpiderForest", {
 -- Gass MIX MUSH
 AddRoom("HamRedSpiderForestexit", {
     colour = { r = 0.8, g = 0.1, b = 0.4, a = 0.9 },
-    value = GROUND.QUAGMIRE_PARKFIELD,
+    value = WORLD_TILES.QUAGMIRE_PARKFIELD,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .3,
@@ -3328,7 +3328,7 @@ AddRoom("HamRedSpiderForestexit", {
 -- Gass MIX MUSH
 AddRoom("HamRedMushPillars", {
     colour = { r = 0.8, g = 0.1, b = 0.4, a = 0.9 },
-    value = GROUND.QUAGMIRE_PARKFIELD,
+    value = WORLD_TILES.QUAGMIRE_PARKFIELD,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .15,
@@ -3356,7 +3356,7 @@ AddRoom("HamRedMushPillars", {
 -- Gass MIX MUSH
 AddRoom("HamStalagmiteForest", {
     colour = { r = 0.8, g = 0.1, b = 0.1, a = 0.9 },
-    value = GROUND.QUAGMIRE_PARKFIELD,
+    value = WORLD_TILES.QUAGMIRE_PARKFIELD,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .3,
@@ -3384,7 +3384,7 @@ AddRoom("HamStalagmiteForest", {
 -- Gass MIX MUSH
 AddRoom("HamSpillagmiteMeadow", {
     colour = { r = 0.8, g = 0.1, b = 0.1, a = 0.9 },
-    value = GROUND.QUAGMIRE_PARKFIELD,
+    value = WORLD_TILES.QUAGMIRE_PARKFIELD,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .15,
@@ -3416,7 +3416,7 @@ AddRoom("HamSpillagmiteMeadow", {
 -- Gass MIX MUSH
 AddRoom("HamBGRedMush", {
     colour = { r = 0.8, g = 0.1, b = 0.1, a = 0.9 },
-    value = GROUND.QUAGMIRE_PARKFIELD,
+    value = WORLD_TILES.QUAGMIRE_PARKFIELD,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .3,
@@ -3441,7 +3441,7 @@ AddRoom("HamBGRedMush", {
 -- Green mush forest
 AddRoom("HamGreenMushForest", {
     colour = { r = 0.1, g = 0.8, b = 0.1, a = 0.9 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .35,
@@ -3473,7 +3473,7 @@ AddRoom("HamGreenMushForest", {
 -- green
 AddRoom("HamGreenMushPonds", {
     colour = { r = 0.1, g = 0.8, b = 0.3, a = 0.9 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .3,
@@ -3507,7 +3507,7 @@ AddRoom("HamGreenMushPonds", {
 -- Greenmush Sinkhole
 AddRoom("HamGreenMushSinkhole", {
     colour = { r = 0.1, g = 0.8, b = 0.3, a = 0.9 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         countstaticlayouts = {
@@ -3548,7 +3548,7 @@ AddRoom("HamGreenMushSinkhole", {
 -- green
 AddRoom("HamGreenMushMeadow", {
     colour = { r = 0.1, g = 0.8, b = 0.3, a = 0.9 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .25,
@@ -3586,7 +3586,7 @@ AddRoom("HamGreenMushMeadow", {
 -- green
 AddRoom("HamGreenMushRabbits", {
     colour = { r = 0.1, g = 0.8, b = 0.3, a = 0.9 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         countstaticlayouts = {
@@ -3631,7 +3631,7 @@ AddRoom("HamGreenMushRabbits", {
 -- Green Mush and Sinkhole Noise
 AddRoom("HamGreenMushNoise", {
     colour = { r = .36, g = .32, b = .38, a = .50 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .25,
@@ -3663,7 +3663,7 @@ AddRoom("HamGreenMushNoise", {
 --Green
 AddRoom("HamBGGreenMush", {
     colour = { r = .36, g = .32, b = .38, a = .50 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "Hutch_Fishbowl", "folha" },
     contents = {
         distributepercent = .25,
@@ -3695,7 +3695,7 @@ AddRoom("HamBGGreenMush", {
 -- Blue mush forest
 AddRoom("HamBlueMushForest", {
     colour = { r = 0.1, g = 0.1, b = 0.8, a = 0.9 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .5,
@@ -3719,7 +3719,7 @@ AddRoom("HamBlueMushForest", {
 -- Blue mush forest
 AddRoom("HamBlueMushMeadow", {
     colour = { r = 0.1, g = 0.1, b = 0.8, a = 0.9 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .3,
@@ -3743,7 +3743,7 @@ AddRoom("HamBlueMushMeadow", {
 -- Blue mush forest
 AddRoom("HamBlueSpiderForest", {
     colour = { r = 0.1, g = 0.1, b = 0.8, a = 0.9 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     tags = { "Hutch_Fishbowl" },
     contents = {
         countstaticlayouts = {
@@ -3778,7 +3778,7 @@ AddRoom("HamBlueSpiderForest", {
 -- Blue mush forest
 AddRoom("HamDropperDesolation", {
     colour = { r = 0.1, g = 0.1, b = 0.8, a = 0.9 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .2,
@@ -3802,7 +3802,7 @@ AddRoom("HamDropperDesolation", {
 -- Blue mush forest
 AddRoom("HamBGBlueMush", {
     colour = { r = 0.1, g = 0.1, b = 0.8, a = 0.9 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .5,
@@ -3827,7 +3827,7 @@ AddRoom("HamBGBlueMush", {
 -- vampire
 AddRoom("HamSpillagmiteForest", {
     colour = { r = 0.4, g = 0.4, b = 0.4, a = 0.9 },
-    value = GROUND.FUNGUS,
+    value = WORLD_TILES.FUNGUS,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .35,
@@ -3856,7 +3856,7 @@ AddRoom("HamSpillagmiteForest", {
 -- vampire
 AddRoom("HamDropperCanyon", {
     colour = { r = 0.4, g = 0.4, b = 0.4, a = 0.9 },
-    value = GROUND.FUNGUS,
+    value = WORLD_TILES.FUNGUS,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .35,
@@ -3885,7 +3885,7 @@ AddRoom("HamDropperCanyon", {
 -- vampire
 AddRoom("HamStalagmitesAndLights", {
     colour = { r = 0.4, g = 0.4, b = 0.4, a = 0.9 },
-    value = GROUND.FUNGUS,
+    value = WORLD_TILES.FUNGUS,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .15,
@@ -3914,7 +3914,7 @@ AddRoom("HamStalagmitesAndLights", {
 -- red
 AddRoom("HamSpidersAndBats", {
     colour = { r = 0.4, g = 0.4, b = 0.4, a = 0.9 },
-    value = GROUND.QUAGMIRE_PARKFIELD,
+    value = WORLD_TILES.QUAGMIRE_PARKFIELD,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .20,
@@ -3942,7 +3942,7 @@ AddRoom("HamSpidersAndBats", {
 -- red
 AddRoom("HamThuleciteDebris", {
     colour = { r = 0.4, g = 0.4, b = 0.4, a = 0.9 },
-    value = GROUND.QUAGMIRE_PARKFIELD,
+    value = WORLD_TILES.QUAGMIRE_PARKFIELD,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .20,
@@ -3970,7 +3970,7 @@ AddRoom("HamThuleciteDebris", {
 -- red
 AddRoom("HamBGSpillagmite", {
     colour = { r = 0.4, g = 0.4, b = 0.4, a = 0.9 },
-    value = GROUND.QUAGMIRE_PARKFIELD,
+    value = WORLD_TILES.QUAGMIRE_PARKFIELD,
     tags = { "Hutch_Fishbowl" },
     contents = {
         distributepercent = .35,
@@ -3998,7 +3998,7 @@ AddRoom("HamBGSpillagmite", {
 -- red não usado
 AddRoom("HamCaveExitRoom", {
     colour = { r = .25, g = .28, b = .25, a = .50 },
-    value = GROUND.QUAGMIRE_PARKFIELD,
+    value = WORLD_TILES.QUAGMIRE_PARKFIELD,
     contents = {
         countstaticlayouts = {
             ["CaveExit"] = 1,
@@ -4034,14 +4034,14 @@ AddTask("underwaterdivide", {
     },
     level_set_piece_blocker = true,
     entrance_room = "VolcanoObsidian",
-    room_bg = GROUND.IMPASSABLE,
+    room_bg = WORLD_TILES.IMPASSABLE,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 
 AddRoom("VolcanoObsidian", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO_ROCK,
+    value = WORLD_TILES.VOLCANO_ROCK,
     tags = { "RoadPoison", "shipwrecked" },
     contents = {
         --									countstaticlayouts={["beaverking"]=1}, --adds 1 per room
@@ -4077,7 +4077,7 @@ AddTask("UnderwaterStart", {
         ["startPatch"] = 1,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_SANDY,
+    room_bg = WORLD_TILES.UNDERWATER_SANDY,
     background_room = "bg_SandyBottom",
     colour = { r = 0, g = 0, b = 0, a = 0 },
 })
@@ -4092,7 +4092,7 @@ AddTask("SandyBiome", {
         ["SandyBottomCoralPatch"] = 1,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_SANDY,
+    room_bg = WORLD_TILES.UNDERWATER_SANDY,
     background_room = "bg_SandyBottom",
     colour = { r = 0, g = 0, b = 0, a = 0 },
 })
@@ -4107,7 +4107,7 @@ AddTask("ReefBiome", {
         ["CoralReefJunked"] = 1,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_SANDY,
+    room_bg = WORLD_TILES.UNDERWATER_SANDY,
     background_room = "bg_CoralReef",
     colour = { r = 0, g = 0, b = 0, a = 0 },
 })
@@ -4122,7 +4122,7 @@ AddTask("KelpBiome", {
         ["KelpForestLight"] = 1,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_SANDY,
+    room_bg = WORLD_TILES.UNDERWATER_SANDY,
     background_room = "bg_KelpForest",
     colour = { r = 0, g = 0, b = 0, a = 0 },
 })
@@ -4136,7 +4136,7 @@ AddTask("RockyBiome", {
         ["RockyBottomBroken"] = 1,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_ROCKY,
+    room_bg = WORLD_TILES.UNDERWATER_ROCKY,
     background_room = "bg_RockyBottom",
     colour = { r = 0, g = 0, b = 0, a = 0 },
 })
@@ -4152,7 +4152,7 @@ AddTask("MoonBiome", {
         ["Lunnarrocksgnar"] = 1,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.PEBBLEBEACH,
+    room_bg = WORLD_TILES.PEBBLEBEACH,
     background_room = "bg_LunnarBottom",
     colour = { r = 0, g = 0, b = 0, a = 0 },
 })
@@ -4166,7 +4166,7 @@ AddTask("OpenWaterBiome", {
         ["TidalZone"] = math.random(2),
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_SANDY,
+    room_bg = WORLD_TILES.UNDERWATER_SANDY,
     background_room = "bg_TidalZone",
     colour = { r = 0, g = 0, b = 0, a = 0 },
 })
@@ -4181,7 +4181,7 @@ AddTask("UnderwaterExit1", {
         ["exitPatch1"] = 1,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_SANDY,
+    room_bg = WORLD_TILES.UNDERWATER_SANDY,
     background_room = "bg_SandyBottom",
     colour = { r = 0, g = 0, b = 0, a = 0 },
 })
@@ -4194,7 +4194,7 @@ AddTask("EntranceToReef", {
     room_choices = {
         ["UnderwaterEntrance"] = 1,
     },
-    room_bg = GROUND.FOREST,
+    room_bg = WORLD_TILES.FOREST,
     background_room = "BGGrass",
     colour = { r = 0, g = 0, b = 0, a = 0 },
 })
@@ -4210,7 +4210,7 @@ AddTask("task_underground_beach", {
         ["beach_crab"] = 1,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_SANDY,
+    room_bg = WORLD_TILES.UNDERWATER_SANDY,
     background_room = "beach_bg",
     colour = { r = 0, g = 1, b = 0, a = 1 }
 })
@@ -4223,7 +4223,7 @@ AddTask("task_underwatermagmafield", {
         ["underwatermagmafield"] = 1,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_ROCKY,
+    room_bg = WORLD_TILES.UNDERWATER_ROCKY,
     background_room = "underwatermagmafield",
     colour = { r = 0, g = 1, b = 0, a = 1 }
 })
@@ -4236,7 +4236,7 @@ AddTask("task_underwater_kraken_zone", {
         ["kraken_zone_basic"] = 2,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.IMPASSABLE,
+    room_bg = WORLD_TILES.IMPASSABLE,
     background_room = "kraken_zone_bg",
     colour = { r = 0, g = 1, b = 0, a = 1 }
 })
@@ -4249,7 +4249,7 @@ AddTask("secretcavedivisor", {
     },
     level_set_piece_blocker = true,
     entrance_room = "cave_underwater1_entrance",
-    room_bg = GROUND.UNDERWATER_ROCKY,
+    room_bg = WORLD_TILES.UNDERWATER_ROCKY,
     background_room = "ForceDisconnectedRoom",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -4263,7 +4263,7 @@ AddTask("task_secretcave1", {
     },
     level_set_piece_blocker = true,
     --		entrance_room = "ForceDisconnectedRoom",		
-    room_bg = GROUND.IMPASSABLE,
+    room_bg = WORLD_TILES.IMPASSABLE,
     background_room = "cave_underwater_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -4275,7 +4275,7 @@ AddTask("atlantidaExitRoom", {
     {
         ["atlantidaExitRoom"] = 1,
     },
-    room_bg = GROUND.SNOWLAND,
+    room_bg = WORLD_TILES.SNOWLAND,
     background_room = "BGSinkhole",
     colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
 })
@@ -4287,7 +4287,7 @@ AddTask("task_underwaterlavarock", {
         ["underwaterlavarock"] = 3,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_ROCKY,
+    room_bg = WORLD_TILES.UNDERWATER_ROCKY,
     background_room = "underwaterlavarock",
     colour = { r = 0, g = 1, b = 0, a = 1 }
 })
@@ -4300,7 +4300,7 @@ AddTask("task_underwaterothers", {
         ["underwaterothers_basic"] = 2,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_SANDY,
+    room_bg = WORLD_TILES.UNDERWATER_SANDY,
     background_room = "underwaterothers_bg",
     colour = { r = 0, g = 1, b = 0, a = 1 }
 })
@@ -4314,7 +4314,7 @@ AddTask("task_underwaterwatercoral", {
 
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.PAINTED,
+    room_bg = WORLD_TILES.PAINTED,
     background_room = "underwaterwatercoral_bg",
     colour = { r = 0, g = 1, b = 0, a = 1 }
 })
@@ -4329,7 +4329,7 @@ AddTask("UnderwaterExit2", {
         ["exitPatch2"] = 1,
     },
     level_set_piece_blocker = true,
-    room_bg = GROUND.UNDERWATER_SANDY,
+    room_bg = WORLD_TILES.UNDERWATER_SANDY,
     background_room = "bg_SandyBottom",
     colour = { r = 0, g = 0, b = 0, a = 0 },
 })
@@ -4337,7 +4337,7 @@ AddTask("UnderwaterExit2", {
 ---------------------new creeps rooms-------------------------------
 AddRoom("beach1", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = { sunkenchest_spawner = function() return (math.random(2) - 1) end, },
@@ -4362,7 +4362,7 @@ AddRoom("beach1", {
 
 AddRoom("beach2", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.3,
@@ -4388,7 +4388,7 @@ AddRoom("beach2", {
 
 AddRoom("beach_crab", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = .25,
@@ -4414,7 +4414,7 @@ AddRoom("beach_crab", {
 
 AddRoom("beach_bg", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = .25,
@@ -4440,7 +4440,7 @@ AddRoom("beach_bg", {
 
 AddRoom("underwaterothers_lobster", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4472,7 +4472,7 @@ AddRoom("underwaterothers_lobster", {
 
 AddRoom("underwaterothers_basic", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4504,7 +4504,7 @@ AddRoom("underwaterothers_basic", {
 
 AddRoom("underwaterothers_bg", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4534,7 +4534,7 @@ AddRoom("underwaterothers_bg", {
 
 AddRoom("kraken_zone_basic", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4565,7 +4565,7 @@ AddRoom("kraken_zone_basic", {
 
 AddRoom("kraken_zone", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4595,7 +4595,7 @@ AddRoom("kraken_zone", {
 
 AddRoom("kraken_zone_bg", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4627,7 +4627,7 @@ AddRoom("kraken_zone_bg", {
 
 AddRoom("cave_underwater1_entrance", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.UNDERWATER_ROCKY,
+    value = WORLD_TILES.UNDERWATER_ROCKY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4652,7 +4652,7 @@ AddRoom("cave_underwater1_entrance", {
 
 AddRoom("cave_underwater1_part1", {
     colour = { r = .25, g = .28, b = .25, a = .50 },
-    value = GROUND.UNDERWATER_ROCKY,
+    value = WORLD_TILES.UNDERWATER_ROCKY,
     tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = {
@@ -4675,7 +4675,7 @@ AddRoom("cave_underwater1_part1", {
 
 AddRoom("atlantidaExitRoom", {
     colour = { r = .25, g = .28, b = .25, a = .50 },
-    value = GROUND.SINKHOLE,
+    value = WORLD_TILES.SINKHOLE,
     contents = {
         countprefabs = { underwater_entrance3 = 1, },
         distributepercent = .2,
@@ -4700,7 +4700,7 @@ AddRoom("atlantidaExitRoom", {
 
 AddRoom("cave_underwater1_part2", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
-    value = GROUND.UNDERWATER_ROCKY,
+    value = WORLD_TILES.UNDERWATER_ROCKY,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = .15,
@@ -4717,7 +4717,7 @@ AddRoom("cave_underwater1_part2", {
 
 AddRoom("cave_underwater_base", {
     colour = { r = 0, g = 0, b = 0, a = 0.9 },
-    value = GROUND.UNDERWATER_ROCKY,
+    value = WORLD_TILES.UNDERWATER_ROCKY,
     tags = { "RoadPoison" },
     contents = {
         --									countstaticlayouts={
@@ -4740,7 +4740,7 @@ AddRoom("cave_underwater_base", {
 
 AddRoom("underwaterlavarock", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.UNDERWATER_ROCKY,
+    value = WORLD_TILES.UNDERWATER_ROCKY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4769,7 +4769,7 @@ AddRoom("underwaterlavarock", {
 
 AddRoom("underwatermagmafield", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4800,7 +4800,7 @@ AddRoom("underwatermagmafield", {
 
 AddRoom("underwatermagmafield1", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4831,7 +4831,7 @@ AddRoom("underwatermagmafield1", {
 
 AddRoom("underwaterwatercoral", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.PAINTED,
+    value = WORLD_TILES.PAINTED,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4858,7 +4858,7 @@ AddRoom("underwaterwatercoral", {
 
 AddRoom("underwaterwatercoral_octopus", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.PAINTED,
+    value = WORLD_TILES.PAINTED,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4887,7 +4887,7 @@ AddRoom("underwaterwatercoral_octopus", {
 
 AddRoom("underwaterwatercoral_bg", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.PAINTED,
+    value = WORLD_TILES.PAINTED,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4916,7 +4916,7 @@ AddRoom("underwaterwatercoral_bg", {
 
 AddRoom("SandyBottom", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.3,
@@ -4944,7 +4944,7 @@ AddRoom("SandyBottom", {
 
 AddRoom("startPatch", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -4975,7 +4975,7 @@ AddRoom("startPatch", {
 
 AddRoom("exitPatch1", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5006,7 +5006,7 @@ AddRoom("exitPatch1", {
 
 AddRoom("exitPatch2", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5038,7 +5038,7 @@ AddRoom("exitPatch2", {
 
 AddRoom("SandyBottomTreasureTrove", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5076,7 +5076,7 @@ AddRoom("SandyBottomTreasureTrove", {
 
 AddRoom("SandyBottomCoralPatch", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5115,7 +5115,7 @@ AddRoom("SandyBottomCoralPatch", {
 
 AddRoom("CoralReef", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5145,7 +5145,7 @@ AddRoom("CoralReef", {
 
 AddRoom("CoralReefJunked", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5176,7 +5176,7 @@ AddRoom("CoralReefJunked", {
 
 AddRoom("CoralReefLight", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5212,7 +5212,7 @@ AddRoom("CoralReefLight", {
 
 AddRoom("KelpForest", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.6,
@@ -5234,7 +5234,7 @@ AddRoom("KelpForest", {
 
 AddRoom("KelpForestLight", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5262,7 +5262,7 @@ AddRoom("KelpForestLight", {
 
 AddRoom("KelpForestInfested", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.6,
@@ -5291,7 +5291,7 @@ AddRoom("KelpForestInfested", {
 
 AddRoom("RockyBottom", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_ROCKY,
+    value = WORLD_TILES.UNDERWATER_ROCKY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5317,7 +5317,7 @@ AddRoom("RockyBottom", {
 
 AddRoom("RockyBottomBroken", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_ROCKY,
+    value = WORLD_TILES.UNDERWATER_ROCKY,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5349,7 +5349,7 @@ AddRoom("RockyBottomBroken", {
 
 AddRoom("LunnarBottom", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.PEBBLEBEACH,
+    value = WORLD_TILES.PEBBLEBEACH,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5376,7 +5376,7 @@ AddRoom("LunnarBottom", {
 
 AddRoom("LunnarBottomBroken", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.PEBBLEBEACH,
+    value = WORLD_TILES.PEBBLEBEACH,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5409,7 +5409,7 @@ AddRoom("LunnarBottomBroken", {
 
 AddRoom("Lunnarrocks", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.PEBBLEBEACH,
+    value = WORLD_TILES.PEBBLEBEACH,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5439,7 +5439,7 @@ AddRoom("Lunnarrocks", {
 
 AddRoom("Lunnarrocksgnar", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.PEBBLEBEACH,
+    value = WORLD_TILES.PEBBLEBEACH,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5470,7 +5470,7 @@ AddRoom("Lunnarrocksgnar", {
 
 AddRoom("bg_LunnarBottom", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.PEBBLEBEACH,
+    value = WORLD_TILES.PEBBLEBEACH,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.20,
@@ -5501,7 +5501,7 @@ AddRoom("bg_LunnarBottom", {
 
 AddRoom("TidalZoneEntrance", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.7,
@@ -5525,7 +5525,7 @@ AddRoom("TidalZoneEntrance", {
 
 AddRoom("TidalZone", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.7,
@@ -5555,7 +5555,7 @@ AddRoom("TidalZone", {
 
 AddRoom("bg_SandyBottom", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.25,
@@ -5576,7 +5576,7 @@ AddRoom("bg_SandyBottom", {
 
 AddRoom("bg_CoralReef", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.8,
@@ -5598,7 +5598,7 @@ AddRoom("bg_CoralReef", {
 
 AddRoom("bg_KelpForest", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.8,
@@ -5618,7 +5618,7 @@ AddRoom("bg_KelpForest", {
 
 AddRoom("bg_RockyBottom", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_ROCKY,
+    value = WORLD_TILES.UNDERWATER_ROCKY,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.15,
@@ -5640,7 +5640,7 @@ AddRoom("bg_RockyBottom", {
 
 AddRoom("bg_TidalZone", {
     colour = { r = 0, g = 0, b = 0, a = 0 },
-    value = GROUND.UNDERWATER_SANDY,
+    value = WORLD_TILES.UNDERWATER_SANDY,
     tags = { "RoadPoison" },
     contents = {
         distributepercent = 0.9,
@@ -5669,7 +5669,7 @@ AddRoom("bg_TidalZone", {
 
 AddRoom("UnderwaterEntrance", {
     colour = { r = 1, g = 0, b = 0, a = 0.3 },
-    value = GROUND.FOREST,
+    value = WORLD_TILES.FOREST,
     tags = { "RoadPoison" },
     contents = {
         countprefabs = {
@@ -5704,7 +5704,7 @@ if KnownModIndex:IsModEnabled("workshop-1289779251") then
 
             ["CherryVillage"] = 1,
         },
-        room_bg = GROUND.CHERRY,
+        room_bg = WORLD_TILES.CHERRY,
         background_room = "BGCherry",
         colour = { r = .5, g = 0.6, b = .080, a = .10 },
     })

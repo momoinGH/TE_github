@@ -46,28 +46,37 @@ local soundremap = {
 --     RemapSoundEvent(k, v)
 -- end
 
-
+local BUSYTHEMES = nil
+local StopBusy = nil
 AddComponentPostInit("dynamicmusic", function(self, inst)
     ------------------------------Adding Climate Music---------------------------------
     local _activatedplayer
-    local OnPlayerActivated = inst:GetEventCallback("playeractivated", inst, "scripts/components/dynamicmusic.lua")
-    local BUSYTHEMES = Hooks.FindUpvalue(OnPlayerActivated, "BUSYTHEMES")
+    if not BUSYTHEMES then
+        local OnPlayerActivated = Hooks.GetEventCallback(inst, "playeractivated", inst, "scripts/components/dynamicmusic.lua")
+        local StartPlayerListeners = OnPlayerActivated and Hooks.FindUpvalue(OnPlayerActivated, "StartPlayerListeners")
+        local StartBusy = StartPlayerListeners and Hooks.FindUpvalue(StartPlayerListeners, "StartBusy")
+        BUSYTHEMES = StartBusy and Hooks.FindUpvalue(StartBusy, "BUSYTHEMES")
+        if not BUSYTHEMES then
+            print("dynamicmusic组件hook失败，没有拿到BUSYTHEMES")
+            return --放弃了，后面代码不执行了
+        end
 
-    local OnEnableDynamicMusic = inst:GetEventCallback("enabledynamicmusic", TheWorld)
-    local StopBusy = Hooks.FindUpvalue(OnEnableDynamicMusic, "StopBusy")
+        BUSYTHEMES.ROG = BUSYTHEMES.FOREST
+        BUSYTHEMES.SHIPWRECCKED = table.count(BUSYTHEMES) + 1
+        BUSYTHEMES.HAMLET = table.count(BUSYTHEMES) + 1
+        BUSYTHEMES.VOLCANO = table.count(BUSYTHEMES) + 1
+    end
 
-
-    ---勾不了函数我还勾不了参数吗，我可太牛逼了
-    BUSYTHEMES.ROG = BUSYTHEMES.FOREST
-    BUSYTHEMES.SHIPWRECCKED = table.count(BUSYTHEMES) + 1
-    BUSYTHEMES.HAMLET = table.count(BUSYTHEMES) + 1
-    BUSYTHEMES.VOLCANO = table.count(BUSYTHEMES) + 1
-
+    if not StopBusy then
+        local OnEnableDynamicMusic = Hooks.GetEventCallback(inst, "enabledynamicmusic")
+        StopBusy = Hooks.FindUpvalue(OnEnableDynamicMusic, "StopBusy")
+    end
 
     local function MusicReDirect()
         if _activatedplayer then
-            StopBusy()
-            -- print("MusicReDirect")
+            if StopBusy then
+                StopBusy()
+            end
             if _activatedplayer:IsInHamletArea() then
                 -- print "in hamlet"
                 BUSYTHEMES.FOREST = BUSYTHEMES.HAMLET
@@ -91,7 +100,6 @@ AddComponentPostInit("dynamicmusic", function(self, inst)
     end
 
     self.inst:ListenForEvent("playeractivated", function(src, player)
-        -- print "playeractivated111111111"
         if player and _activatedplayer ~= player then
             player:ListenForEvent("changearea", MusicReDirect)
             player:DoTaskInTime(1, MusicReDirect) --initialise

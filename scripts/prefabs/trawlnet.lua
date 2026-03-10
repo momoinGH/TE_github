@@ -83,9 +83,9 @@ local function getLootList(inst)
         or loot
 
     local tile = TheWorld.Map:GetTileAtPoint(inst.Transform:GetWorldPosition())
-    if tile == GROUND.OCEAN_MEDIUM then
+    if tile == WORLD_TILES.OCEAN_MEDIUM then
         return loottable.medium
-    elseif tile == GROUND.OCEAN_DEEP then
+    elseif tile == WORLD_TILES.OCEAN_DEEP then
         return loottable.deep
     else
         return loottable.shallow

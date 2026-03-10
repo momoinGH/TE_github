@@ -79,8 +79,8 @@ end
 local function IsCrazyGuy(guy)
     local sanity = guy ~= nil and guy.replica.sanity or nil
     return sanity ~= nil and sanity:IsInsanityMode() and
-    sanity:GetPercentNetworked() <=
-    (guy:HasTag("dappereffects") and TUNING.DAPPER_BEARDLING_SANITY or TUNING.BEARDLING_SANITY)
+        sanity:GetPercentNetworked() <=
+        (guy:HasTag("dappereffects") and TUNING.DAPPER_BEARDLING_SANITY or TUNING.BEARDLING_SANITY)
 end
 
 local function IsForcedNightmare(inst)
@@ -215,7 +215,7 @@ local function OnIsWinter(inst, iswinter)
             if not IsWinterRabbit(inst) then
                 inst.task = inst:DoTaskInTime(math.random() * .5, BecomeWinterRabbit)
             end
-        elseif not IsNormalRabbit(inst) and ground ~= GROUND.SNOWLAND and ground ~= GROUND.ICELAND then
+        elseif not IsNormalRabbit(inst) and ground ~= WORLD_TILES.SNOWLAND and ground ~= WORLD_TILES.ICELAND then
             inst.task = inst:DoTaskInTime(math.random() * .5, BecomeRabbit)
         end
     end
@@ -232,11 +232,11 @@ local function OnWake(inst)
         inst.task = nil
     end
     if not IsForcedNightmare(inst) then
-        if TheWorld.state.iswinter or ground == GROUND.SNOWLAND or ground == GROUND.ICELAND then
+        if TheWorld.state.iswinter or ground == WORLD_TILES.SNOWLAND or ground == WORLD_TILES.ICELAND then
             if not IsWinterRabbit(inst) then
                 BecomeWinterRabbit(inst)
             end
-        elseif not IsNormalRabbit and ground ~= GROUND.SNOWLAND and ground ~= GROUND.ICELAND then
+        elseif not IsNormalRabbit and ground ~= WORLD_TILES.SNOWLAND and ground ~= WORLD_TILES.ICELAND then
             BecomeRabbit(inst)
         end
     end

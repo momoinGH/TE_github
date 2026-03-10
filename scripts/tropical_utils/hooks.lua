@@ -54,16 +54,18 @@ end
 
 ---链式查询上值，找不到就返回nil，应该比上面那个更常用，因为这个是链式的
 function FN.FindUpvalue(fn, ...)
-    assert(type(fn) == "function", "第一个参数必须是函数")
+    if not prodevassert(type(fn) == "function", "第一个参数必须是函数") then
+        return nil, nil, nil
+    end
 
-    local current_fn = fn
-    local val, i
+    local val, i, current_fn
+    val = fn
     for _, name in ipairs({ ... }) do
+        current_fn = val
         val, i = GetUpValue(current_fn, name)
         if i == nil then
             return nil, nil, nil
         end
-        current_fn = val
     end
     return val, current_fn, i
 end
@@ -71,8 +73,10 @@ end
 --- 替换上值，参数为路径，最后一个参数为要替换的新值
 function FN.SetUpvalue(fn, ...)
     local args = { ... }
-    assert(#args >= 2, "至少需要两个参数：函数和要设置的路径")
-    assert(type(fn) == "function", "第一个参数必须是函数")
+    if not prodevassert(#args >= 2, "至少需要两个参数：函数和要设置的路径")
+        or not prodevassert(type(fn) == "function", "第一个参数必须是函数") then
+        return false
+    end
 
     local newValue = args[#args] -- 最后一个参数是新值
     local pathNames = {}
@@ -101,36 +105,6 @@ local function FunctionTest(fn, file, test, source, listener)
     return true
 end
 
-function FN.GetEventHandle(inst, event, file, test)
-    if type(inst) == "table" then
-        if inst.event_listening and inst.event_listening[event] then --遍历他在监听的事件 我在监听谁
-            local listenings = inst.event_listening[event]
-            for listening, fns in pairs(listenings) do               --遍历被监听者
-                if fns and type(fns) == "table" then
-                    for _, fn in pairs(fns) do
-                        if FunctionTest(fn, file, test, listening, inst) then --寻找成功就返回
-                            return fn
-                        end
-                    end
-                end
-            end
-        end
-
-        if inst.event_listeners and inst.event_listeners[event] then --遍历监听他的事件的    谁在监听我
-            local listeners = inst.event_listeners[event]
-            for listener, fns in pairs(listeners) do                 --遍历监听者
-                if fns and type(fns) == "table" then
-                    for _, fn in pairs(fns) do
-                        if FunctionTest(fn, file, test, inst, listener) then --寻找成功就返回
-                            return fn
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
-
 --花花写的
 function FN.GetWorldHandle(inst, var, file) --补充一下风铃草大佬没写的关于世界监听函数,随便写的,感觉太菜就憋着别说 --咸鱼说的
     if type(inst) == "table" then
@@ -143,6 +117,25 @@ function FN.GetWorldHandle(inst, var, file) --补充一下风铃草大佬没写�
             end
         end
         --另一个获取的路径是 TheWorld.components.worldstate,不过没差了
+    end
+end
+
+-- 根据定义的文件获取事件回调函数，尽量少用，因为文件里定义多个监听时获取的不一定是自己想要的
+-- 可以使用require预制件文件用FindUpvalue拿到回调
+function FN.GetEventCallback(inst, event, source, source_file, test_fn)
+    source = source or inst
+    local listener_fns = inst.event_listening and inst.event_listening[event] and inst.event_listening[event][source]
+    if not listener_fns then return end
+
+    for _, fn in ipairs(listener_fns) do
+        if source_file then
+            local info = debug.getinfo(fn, "S")
+            if info and (info.source == source_file) and (not test_fn or test_fn(fn)) then
+                return fn
+            end
+        elseif (not test_fn or test_fn(fn)) then
+            return fn
+        end
     end
 end
 

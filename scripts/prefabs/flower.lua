@@ -43,14 +43,16 @@ end
 local function onpickedfn(inst, picker)
     local pt = inst:GetPosition()
     local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
-    if tiletype == GROUND.SUBURB or tiletype == GROUND.FOUNDATION or tiletype == GROUND.COBBLEROAD or tiletype == GROUND.FIELDS then
+    if tiletype == WORLD_TILES.SUBURB or tiletype == WORLD_TILES.FOUNDATION or tiletype == WORLD_TILES.COBBLEROAD or tiletype == WORLD_TILES.FIELDS then
         if picker and picker:HasTag("player") and not picker:HasTag("sneaky") then
             local x, y, z = inst.Transform:GetWorldPosition()
             local tiletype = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(pt:Get()))
             local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
             for k, guardas in pairs(eles) do
-                if guardas.components.combat and guardas.components.combat.target == nil then guardas.components.combat
-                        :SetTarget(picker) end
+                if guardas.components.combat and guardas.components.combat.target == nil then
+                    guardas.components.combat
+                    :SetTarget(picker)
+                end
             end
         end
     end
@@ -183,7 +185,7 @@ local function commonfn(isplanted)
         local map = TheWorld.Map
         local x, y, z = inst.Transform:GetWorldPosition()
         local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-        if ground == GROUND.RAINFOREST or ground == GROUND.DEEPRAINFOREST or ground == GROUND.GASRAINFOREST then
+        if ground == WORLD_TILES.RAINFOREST or ground == WORLD_TILES.DEEPRAINFOREST or ground == WORLD_TILES.GASRAINFOREST then
             local flor = SpawnPrefab("flower_rainforest")
             if flor then
                 flor.Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -196,7 +198,7 @@ local function commonfn(isplanted)
         local map = TheWorld.Map
         local x, y, z = inst.Transform:GetWorldPosition()
         local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-        if ground ~= GROUND.RAINFOREST and ground ~= GROUND.DEEPRAINFOREST and ground ~= GROUND.GASRAINFOREST then
+        if ground ~= WORLD_TILES.RAINFOREST and ground ~= WORLD_TILES.DEEPRAINFOREST and ground ~= WORLD_TILES.GASRAINFOREST then
             if TheWorld.components.aporkalypse and TheWorld.components.aporkalypse.aporkalypse_active == true then
                 local flor = SpawnPrefab("flower_evil")
                 if flor then

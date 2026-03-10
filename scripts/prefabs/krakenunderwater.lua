@@ -51,7 +51,7 @@ local function MoveToNewSpot(inst)
     local ground = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(x1, y1, z1))
     local new_pos = movimento:GetPosition()
     movimento:Remove()
-    if ground == GROUND.UNDERWATER_SANDY then
+    if ground == WORLD_TILES.UNDERWATER_SANDY then
         inst:PushEvent("move", { pos = new_pos })
         return
     end
@@ -62,7 +62,7 @@ local function MoveToNewSpot(inst)
     local ground = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(x1, y1, z1))
     local new_pos = movimento:GetPosition()
     movimento:Remove()
-    if ground == GROUND.UNDERWATER_SANDY then
+    if ground == WORLD_TILES.UNDERWATER_SANDY then
         inst:PushEvent("move", { pos = new_pos })
         return
     end
@@ -73,7 +73,7 @@ local function MoveToNewSpot(inst)
     local ground = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(x1, y1, z1))
     local new_pos = movimento:GetPosition()
     movimento:Remove()
-    if ground == GROUND.UNDERWATER_SANDY then
+    if ground == WORLD_TILES.UNDERWATER_SANDY then
         inst:PushEvent("move", { pos = new_pos })
         return
     end
@@ -84,7 +84,7 @@ local function MoveToNewSpot(inst)
     local ground = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(x1, y1, z1))
     local new_pos = movimento:GetPosition()
     movimento:Remove()
-    if ground == GROUND.UNDERWATER_SANDY then
+    if ground == WORLD_TILES.UNDERWATER_SANDY then
         inst:PushEvent("move", { pos = new_pos })
         return
     end
@@ -95,7 +95,7 @@ local function MoveToNewSpot(inst)
     local ground = TheWorld.Map:GetTile(TheWorld.Map:GetTileCoordsAtPoint(x1, y1, z1))
     local new_pos = movimento:GetPosition()
     movimento:Remove()
-    if ground == GROUND.UNDERWATER_SANDY then
+    if ground == WORLD_TILES.UNDERWATER_SANDY then
         inst:PushEvent("move", { pos = new_pos })
         return
     end
@@ -317,8 +317,8 @@ local function fn()
 
 
     inst:AddComponent("minionspawner")
-    inst.components.minionspawner.validtiletypes = { GROUND.UNDERWATER_SANDY, GROUND.UNDERWATER_ROCKY, GROUND.BEACH,
-        GROUND.MAGMAFIELD, GROUND.PAINTED, GROUND.PIGRUINS, GROUND.PEBBLEBEACH }
+    inst.components.minionspawner.validtiletypes = { WORLD_TILES.UNDERWATER_SANDY, WORLD_TILES.UNDERWATER_ROCKY, WORLD_TILES.BEACH,
+        WORLD_TILES.MAGMAFIELD, WORLD_TILES.PAINTED, WORLD_TILES.PIGRUINS, WORLD_TILES.PEBBLEBEACH }
 
     inst.components.minionspawner.miniontype = "krakenunderwater_tentacle"
     inst.components.minionspawner.distancemodifier = 9

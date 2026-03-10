@@ -19,15 +19,17 @@ local Aporkalypse = Class(function(self, inst)
 
     self.inst:ListenForEvent("clocktick", function(inst, data)
         local fiesta_elapsed = (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME -
-                                   self.fiesta_begin_date
+            self.fiesta_begin_date
         if self.fiesta_duration - fiesta_elapsed < 0 and self.fiesta_active == true then
             self.fiesta_active = false
         end
         if (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME >= self.begin_date and
-            not self:IsActive() then self:BeginAporkalypse() end
+            not self:IsActive() then
+            self:BeginAporkalypse()
+        end
 
         local aporkalypse_duration = ((TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME -
-                                         self.begin_date) / TUNING.TOTAL_DAY_TIME
+            self.begin_date) / TUNING.TOTAL_DAY_TIME
         if aporkalypse_duration >= 20 or TUNING.tropical.aporkalypse == false then self:EndAporkalypse() end
     end, TheWorld)
 
@@ -58,7 +60,7 @@ end
 function Aporkalypse:OnLoad(data)
     if data then
         self.begin_date = data.begin_date or (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME +
-                              (120 * TUNING.TOTAL_DAY_TIME)
+            (120 * TUNING.TOTAL_DAY_TIME)
         self.aporkalypse_active = data.aporkalypse_active
         self:ScheduleAporkalypseTasks()
         self.inside_ruins = data.inside_ruins
@@ -115,7 +117,7 @@ function Aporkalypse:EndAporkalypse()
     for k, jogador in pairs(AllPlayers) do jogador:RemoveTag("aporkalypse") end
 
     local aporkalypse_duration = ((TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME -
-                                     self.begin_date) / TUNING.TOTAL_DAY_TIME
+        self.begin_date) / TUNING.TOTAL_DAY_TIME
     if aporkalypse_duration >= 2 then
         self.fiesta_begin_date = TheWorld.state.cycles * TUNING.TOTAL_DAY_TIME
         self:BeginFiesta()
@@ -125,7 +127,7 @@ function Aporkalypse:EndAporkalypse()
 
     -- Schedule the next one!
     self:ScheduleAporkalypse((TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME +
-                                 (120 * TUNING.TOTAL_DAY_TIME))
+        (120 * TUNING.TOTAL_DAY_TIME))
     self.inst:PushEvent("endaporkalypse")
 end
 
@@ -156,10 +158,10 @@ function Aporkalypse:ScheduleHeraldCheck()
                             local map = TheWorld.Map
                             local x, _, z = player.Transform:GetWorldPosition()
                             local ground = map:GetTile(map:GetTileCoordsAtPoint(x + math.random(-10, 10), 0, z + math.random(-10, 10)))
-                            if ground ~= GROUND.OCEAN_COASTAL   and ground ~= GROUND.OCEAN_COASTAL_SHORE   and
-                               ground ~= GROUND.OCEAN_SWELL     and ground ~= GROUND.OCEAN_ROUGH           and
-                               ground ~= GROUND.OCEAN_BRINEPOOL and ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-                               ground ~= GROUND.OCEAN_WATERLOG  and ground ~= GROUND.OCEAN_HAZARDOU       then
+                            if ground ~= WORLD_TILES.OCEAN_COASTAL and ground ~= WORLD_TILES.OCEAN_COASTAL_SHORE and
+                                ground ~= WORLD_TILES.OCEAN_SWELL and ground ~= WORLD_TILES.OCEAN_ROUGH and
+                                ground ~= WORLD_TILES.OCEAN_BRINEPOOL and ground ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and
+                                ground ~= WORLD_TILES.OCEAN_WATERLOG and ground ~= WORLD_TILES.OCEAN_HAZARDOU then
                                 herald = SpawnAt("ancient_herald", Vector3(x, 0, z))
                             end
                             if herald and herald.components.combat then
@@ -178,7 +180,7 @@ function Aporkalypse:GetClockDungeon() return "RUINS_" .. self.clock_dungeon end
 
 function Aporkalypse:IsNear()
     return self.begin_date - (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME < self.near_days *
-               TUNING.TOTAL_DAY_TIME
+        TUNING.TOTAL_DAY_TIME
 end
 
 function Aporkalypse:GetBeginDate() return self.begin_date end

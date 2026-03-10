@@ -29,7 +29,7 @@ local function FindRandomOffscreenPoint(inst)
     if offset then
         local newpt = pt + offset
         local ground = TheWorld
-        local tile = GROUND.GRASS
+        local tile = WORLD_TILES.GRASS
         if ground and ground.Map then
             tile = inst:GetCurrentTileType(newpt:Get())
 

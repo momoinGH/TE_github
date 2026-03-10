@@ -33,7 +33,7 @@ local events =
 local function SpawnSplashFx(inst)
     if inst.fish_def.breach_fx ~= nil and not inst.sg.statemem.underboat then
         SpawnPrefab(inst.fish_def.breach_fx[math.random(#inst.fish_def.breach_fx)]).Transform:SetPosition(inst.Transform
-        :GetWorldPosition())
+            :GetWorldPosition())
     end
 end
 
@@ -50,7 +50,7 @@ local function SetBreaching(inst, is_in_air)
         --        inst.AnimState:SetLayer(LAYER_WORLD)
     else
         --		inst.Transform:SetSixFaced()
-        --		inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
+        --		inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
         --        inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
     end
 end

@@ -42,7 +42,7 @@ local function OnSnowLevel(inst, snowlevel)
     local ex, ey, ez = inst.Transform:GetWorldPosition()
     local map = TheWorld.Map
     local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
-    if posicao == GROUND.SNOWLAND or posicao == GROUND.ICELAND then
+    if posicao == WORLD_TILES.SNOWLAND or posicao == WORLD_TILES.ICELAND then
         snowlevel = 1
     end
 
@@ -63,7 +63,7 @@ local function OnEntityWake(inst)
     local map = TheWorld.Map
     local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
 
-    if TheWorld.state.snowlevel > SNOW_THRESH or posicao == GROUND.SNOWLAND or posicao == GROUND.ICELAND then
+    if TheWorld.state.snowlevel > SNOW_THRESH or posicao == WORLD_TILES.SNOWLAND or posicao == WORLD_TILES.ICELAND then
         inst.isfaded:set(false)
         inst.fadeval:set(0)
     else

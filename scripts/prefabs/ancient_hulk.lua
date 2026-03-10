@@ -287,14 +287,14 @@ local function dropparts(inst)
         local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z + 4))
         -------------------coloca os itens------------------------
         if
-            (curr == GROUND.FIELDS and curr1 == GROUND.FIELDS and curr2 == GROUND.FIELDS and curr3 == GROUND.FIELDS and curr4 == GROUND.FIELDS)
-            or (curr == GROUND.DEEPRAINFOREST and curr1 == GROUND.DEEPRAINFOREST and curr2 == GROUND.DEEPRAINFOREST and curr3 == GROUND.DEEPRAINFOREST and curr4 == GROUND.DEEPRAINFOREST)
-            or (curr == GROUND.RAINFOREST and curr1 == GROUND.RAINFOREST and curr2 == GROUND.RAINFOREST and curr3 == GROUND.RAINFOREST and curr4 == GROUND.RAINFOREST)
-            or (curr == GROUND.PAINTED and curr1 == GROUND.PAINTED and curr2 == GROUND.PAINTED and curr3 == GROUND.PAINTED and curr4 == GROUND.PAINTED)
-            or (curr == GROUND.DIRT and curr1 == GROUND.DIRT and curr2 == GROUND.DIRT and curr3 == GROUND.DIRT and curr4 == GROUND.DIRT)
-            or (curr == GROUND.DIRT and curr1 == GROUND.DIRT and curr2 == GROUND.DIRT and curr3 == GROUND.DIRT and curr4 == GROUND.DIRT)
-            or (curr == GROUND.GASRAINFOREST and curr1 == GROUND.GASRAINFOREST and curr2 == GROUND.GASRAINFOREST and curr3 == GROUND.GASRAINFOREST and curr4 == GROUND.GASRAINFOREST)
-            or (curr == GROUND.PLAINS and curr1 == GROUND.PLAINS and curr2 == GROUND.PLAINS and curr3 == GROUND.PLAINS and curr4 == GROUND.PLAINS)
+            (curr == WORLD_TILES.FIELDS and curr1 == WORLD_TILES.FIELDS and curr2 == WORLD_TILES.FIELDS and curr3 == WORLD_TILES.FIELDS and curr4 == WORLD_TILES.FIELDS)
+            or (curr == WORLD_TILES.DEEPRAINFOREST and curr1 == WORLD_TILES.DEEPRAINFOREST and curr2 == WORLD_TILES.DEEPRAINFOREST and curr3 == WORLD_TILES.DEEPRAINFOREST and curr4 == WORLD_TILES.DEEPRAINFOREST)
+            or (curr == WORLD_TILES.RAINFOREST and curr1 == WORLD_TILES.RAINFOREST and curr2 == WORLD_TILES.RAINFOREST and curr3 == WORLD_TILES.RAINFOREST and curr4 == WORLD_TILES.RAINFOREST)
+            or (curr == WORLD_TILES.PAINTED and curr1 == WORLD_TILES.PAINTED and curr2 == WORLD_TILES.PAINTED and curr3 == WORLD_TILES.PAINTED and curr4 == WORLD_TILES.PAINTED)
+            or (curr == WORLD_TILES.DIRT and curr1 == WORLD_TILES.DIRT and curr2 == WORLD_TILES.DIRT and curr3 == WORLD_TILES.DIRT and curr4 == WORLD_TILES.DIRT)
+            or (curr == WORLD_TILES.DIRT and curr1 == WORLD_TILES.DIRT and curr2 == WORLD_TILES.DIRT and curr3 == WORLD_TILES.DIRT and curr4 == WORLD_TILES.DIRT)
+            or (curr == WORLD_TILES.GASRAINFOREST and curr1 == WORLD_TILES.GASRAINFOREST and curr2 == WORLD_TILES.GASRAINFOREST and curr3 == WORLD_TILES.GASRAINFOREST and curr4 == WORLD_TILES.GASRAINFOREST)
+            or (curr == WORLD_TILES.PLAINS and curr1 == WORLD_TILES.PLAINS and curr2 == WORLD_TILES.PLAINS and curr3 == WORLD_TILES.PLAINS and curr4 == WORLD_TILES.PLAINS)
         then
             local partprop = SpawnPrefab("ancient_robot_claw")
             partprop.spawntask:Cancel()
@@ -325,14 +325,14 @@ local function dropparts(inst)
         local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z + 4))
         -------------------coloca os itens------------------------
         if
-            (curr == GROUND.FIELDS and curr1 == GROUND.FIELDS and curr2 == GROUND.FIELDS and curr3 == GROUND.FIELDS and curr4 == GROUND.FIELDS)
-            or (curr == GROUND.DEEPRAINFOREST and curr1 == GROUND.DEEPRAINFOREST and curr2 == GROUND.DEEPRAINFOREST and curr3 == GROUND.DEEPRAINFOREST and curr4 == GROUND.DEEPRAINFOREST)
-            or (curr == GROUND.RAINFOREST and curr1 == GROUND.RAINFOREST and curr2 == GROUND.RAINFOREST and curr3 == GROUND.RAINFOREST and curr4 == GROUND.RAINFOREST)
-            or (curr == GROUND.PAINTED and curr1 == GROUND.PAINTED and curr2 == GROUND.PAINTED and curr3 == GROUND.PAINTED and curr4 == GROUND.PAINTED)
-            or (curr == GROUND.DIRT and curr1 == GROUND.DIRT and curr2 == GROUND.DIRT and curr3 == GROUND.DIRT and curr4 == GROUND.DIRT)
-            or (curr == GROUND.DIRT and curr1 == GROUND.DIRT and curr2 == GROUND.DIRT and curr3 == GROUND.DIRT and curr4 == GROUND.DIRT)
-            or (curr == GROUND.GASRAINFOREST and curr1 == GROUND.GASRAINFOREST and curr2 == GROUND.GASRAINFOREST and curr3 == GROUND.GASRAINFOREST and curr4 == GROUND.GASRAINFOREST)
-            or (curr == GROUND.PLAINS and curr1 == GROUND.PLAINS and curr2 == GROUND.PLAINS and curr3 == GROUND.PLAINS and curr4 == GROUND.PLAINS)
+            (curr == WORLD_TILES.FIELDS and curr1 == WORLD_TILES.FIELDS and curr2 == WORLD_TILES.FIELDS and curr3 == WORLD_TILES.FIELDS and curr4 == WORLD_TILES.FIELDS)
+            or (curr == WORLD_TILES.DEEPRAINFOREST and curr1 == WORLD_TILES.DEEPRAINFOREST and curr2 == WORLD_TILES.DEEPRAINFOREST and curr3 == WORLD_TILES.DEEPRAINFOREST and curr4 == WORLD_TILES.DEEPRAINFOREST)
+            or (curr == WORLD_TILES.RAINFOREST and curr1 == WORLD_TILES.RAINFOREST and curr2 == WORLD_TILES.RAINFOREST and curr3 == WORLD_TILES.RAINFOREST and curr4 == WORLD_TILES.RAINFOREST)
+            or (curr == WORLD_TILES.PAINTED and curr1 == WORLD_TILES.PAINTED and curr2 == WORLD_TILES.PAINTED and curr3 == WORLD_TILES.PAINTED and curr4 == WORLD_TILES.PAINTED)
+            or (curr == WORLD_TILES.DIRT and curr1 == WORLD_TILES.DIRT and curr2 == WORLD_TILES.DIRT and curr3 == WORLD_TILES.DIRT and curr4 == WORLD_TILES.DIRT)
+            or (curr == WORLD_TILES.DIRT and curr1 == WORLD_TILES.DIRT and curr2 == WORLD_TILES.DIRT and curr3 == WORLD_TILES.DIRT and curr4 == WORLD_TILES.DIRT)
+            or (curr == WORLD_TILES.GASRAINFOREST and curr1 == WORLD_TILES.GASRAINFOREST and curr2 == WORLD_TILES.GASRAINFOREST and curr3 == WORLD_TILES.GASRAINFOREST and curr4 == WORLD_TILES.GASRAINFOREST)
+            or (curr == WORLD_TILES.PLAINS and curr1 == WORLD_TILES.PLAINS and curr2 == WORLD_TILES.PLAINS and curr3 == WORLD_TILES.PLAINS and curr4 == WORLD_TILES.PLAINS)
         then
             local partprop = SpawnPrefab("ancient_robot_leg")
             partprop.spawntask:Cancel()
@@ -363,14 +363,14 @@ local function dropparts(inst)
         local curr4 = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z + 4))
         -------------------coloca os itens------------------------
         if
-            (curr == GROUND.FIELDS and curr1 == GROUND.FIELDS and curr2 == GROUND.FIELDS and curr3 == GROUND.FIELDS and curr4 == GROUND.FIELDS)
-            or (curr == GROUND.DEEPRAINFOREST and curr1 == GROUND.DEEPRAINFOREST and curr2 == GROUND.DEEPRAINFOREST and curr3 == GROUND.DEEPRAINFOREST and curr4 == GROUND.DEEPRAINFOREST)
-            or (curr == GROUND.RAINFOREST and curr1 == GROUND.RAINFOREST and curr2 == GROUND.RAINFOREST and curr3 == GROUND.RAINFOREST and curr4 == GROUND.RAINFOREST)
-            or (curr == GROUND.PAINTED and curr1 == GROUND.PAINTED and curr2 == GROUND.PAINTED and curr3 == GROUND.PAINTED and curr4 == GROUND.PAINTED)
-            or (curr == GROUND.DIRT and curr1 == GROUND.DIRT and curr2 == GROUND.DIRT and curr3 == GROUND.DIRT and curr4 == GROUND.DIRT)
-            or (curr == GROUND.DIRT and curr1 == GROUND.DIRT and curr2 == GROUND.DIRT and curr3 == GROUND.DIRT and curr4 == GROUND.DIRT)
-            or (curr == GROUND.GASRAINFOREST and curr1 == GROUND.GASRAINFOREST and curr2 == GROUND.GASRAINFOREST and curr3 == GROUND.GASRAINFOREST and curr4 == GROUND.GASRAINFOREST)
-            or (curr == GROUND.PLAINS and curr1 == GROUND.PLAINS and curr2 == GROUND.PLAINS and curr3 == GROUND.PLAINS and curr4 == GROUND.PLAINS)
+            (curr == WORLD_TILES.FIELDS and curr1 == WORLD_TILES.FIELDS and curr2 == WORLD_TILES.FIELDS and curr3 == WORLD_TILES.FIELDS and curr4 == WORLD_TILES.FIELDS)
+            or (curr == WORLD_TILES.DEEPRAINFOREST and curr1 == WORLD_TILES.DEEPRAINFOREST and curr2 == WORLD_TILES.DEEPRAINFOREST and curr3 == WORLD_TILES.DEEPRAINFOREST and curr4 == WORLD_TILES.DEEPRAINFOREST)
+            or (curr == WORLD_TILES.RAINFOREST and curr1 == WORLD_TILES.RAINFOREST and curr2 == WORLD_TILES.RAINFOREST and curr3 == WORLD_TILES.RAINFOREST and curr4 == WORLD_TILES.RAINFOREST)
+            or (curr == WORLD_TILES.PAINTED and curr1 == WORLD_TILES.PAINTED and curr2 == WORLD_TILES.PAINTED and curr3 == WORLD_TILES.PAINTED and curr4 == WORLD_TILES.PAINTED)
+            or (curr == WORLD_TILES.DIRT and curr1 == WORLD_TILES.DIRT and curr2 == WORLD_TILES.DIRT and curr3 == WORLD_TILES.DIRT and curr4 == WORLD_TILES.DIRT)
+            or (curr == WORLD_TILES.DIRT and curr1 == WORLD_TILES.DIRT and curr2 == WORLD_TILES.DIRT and curr3 == WORLD_TILES.DIRT and curr4 == WORLD_TILES.DIRT)
+            or (curr == WORLD_TILES.GASRAINFOREST and curr1 == WORLD_TILES.GASRAINFOREST and curr2 == WORLD_TILES.GASRAINFOREST and curr3 == WORLD_TILES.GASRAINFOREST and curr4 == WORLD_TILES.GASRAINFOREST)
+            or (curr == WORLD_TILES.PLAINS and curr1 == WORLD_TILES.PLAINS and curr2 == WORLD_TILES.PLAINS and curr3 == WORLD_TILES.PLAINS and curr4 == WORLD_TILES.PLAINS)
         then
             local partprop = SpawnPrefab("ancient_robot_ribs")
             partprop.spawntask:Cancel()
@@ -515,7 +515,7 @@ local function spawnbarrier(inst, pt)
         local newpt = pt + offset
         local tile = TheWorld.Map:GetTileAtPoint(newpt.x, newpt.y, newpt.z)
 
-        if tile ~= GROUND.IMPASSABLE and tile ~= GROUND.OCEAN_WATERLOG and tile ~= GROUND.INVALID and tile ~= GROUND.OCEAN_COASTAL and tile ~= GROUND.OCEAN_COASTAL_SHORE and tile ~= GROUND.OCEAN_SWELL and tile ~= GROUND.OCEAN_ROUGH and tile ~= GROUND.OCEAN_BRINEPOOL and tile ~= GROUND.OCEAN_BRINEPOOL_SHORE and tile ~= GROUND.OCEAN_HAZARDOUS then
+        if tile ~= WORLD_TILES.IMPASSABLE and tile ~= WORLD_TILES.OCEAN_WATERLOG and tile ~= WORLD_TILES.INVALID and tile ~= WORLD_TILES.OCEAN_COASTAL and tile ~= WORLD_TILES.OCEAN_COASTAL_SHORE and tile ~= WORLD_TILES.OCEAN_SWELL and tile ~= WORLD_TILES.OCEAN_ROUGH and tile ~= WORLD_TILES.OCEAN_BRINEPOOL and tile ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and tile ~= WORLD_TILES.OCEAN_HAZARDOUS then
             TheWorld:DoTaskInTime(math.random() * 0.3, function()
                 local rock = SpawnPrefab("rock_basalt")
                 rock.AnimState:PlayAnimation("emerge")
@@ -914,7 +914,7 @@ local function orbartefatofn()
     inst.components.combat:SetDefaultDamage(ANCIENT_HULK_MINE_DAMAGE)
     inst.components.combat.playerdamagepercent =
 
-    inst.Physics:SetMotorVelOverride(60, 0, 0)
+        inst.Physics:SetMotorVelOverride(60, 0, 0)
 
     inst:DoTaskInTime(2, function() inst:Remove() end)
 

@@ -4,7 +4,8 @@ modimport "modmain/util.lua"           --一些表相关的工具函数
 Hooks = require "tropical_utils/hooks" ----用来hook的一些函数
 modimport "modmain/gentuning"
 modimport "modmain/dev_utils"          --开发环境下辅助用的函数，与游戏无关
-modimport "tiledefs"
+modimport "modmain/tiledefs.lua"
+modimport "modmain/tilegroups.lua"
 
 require("map/tasks")
 require("map/rooms")

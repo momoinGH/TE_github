@@ -16,7 +16,7 @@ local function OnTimerDone(inst, data)
             z = math.random(-800, 800)
             local curr = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z))
         until
-            curr == GROUND.UNDERWATER_SANDY
+            curr == WORLD_TILES.UNDERWATER_SANDY
 
         local tesouro = SpawnPrefab("krakenunderwater").Transform:SetPosition(x, 0, z)
         inst:Remove()

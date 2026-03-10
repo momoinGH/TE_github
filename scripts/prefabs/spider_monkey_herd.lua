@@ -50,7 +50,7 @@ local function GetNewHomeTree(inst)
 
                 -- Only get the new tree if it's offscreen because there is no animation
                 -- for it transforming from a jungle tree to a spider monkey tree.
-                local isJungleTile = tile == GROUND.DEEPRAINFOREST
+                local isJungleTile = tile == WORLD_TILES.DEEPRAINFOREST
 
                 if isJungleTile then
                     local possibleNeighborTrees = TheSim:FindEntities(possibleHomeTreePos.x, possibleHomeTreePos.y,

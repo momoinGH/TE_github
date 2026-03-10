@@ -11,14 +11,14 @@ AddTask("OceanWorldstart", {
     room_choices = {
         ["Blank"] = 1,
     },
-    room_bg = GROUND.GRASS,
+    room_bg = WORLD_TILES.GRASS,
     background_room = "Blank",
     colour = { r = 0, g = 1, b = 0, a = 1 }
 })
 
 AddRoom("OceanCoastalShore_SEA", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.OCEAN_COASTAL_SHORE,
+    value = WORLD_TILES.OCEAN_COASTAL_SHORE,
     contents = {
         distributepercent = 0.005,
         distributeprefabs =
@@ -30,7 +30,7 @@ AddRoom("OceanCoastalShore_SEA", {
 
 AddRoom("OceanCoastal_SEA", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.OCEAN_COASTAL,
+    value = WORLD_TILES.OCEAN_COASTAL,
     contents = {
 
         countprefabs =
@@ -55,7 +55,7 @@ AddRoom("OceanCoastal_SEA", {
 
 AddRoom("OceanSwell_SEA", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.OCEAN_SWELL,
+    value = WORLD_TILES.OCEAN_SWELL,
     required_prefabs = { "crabking_spawner" },
     contents = {
 
@@ -92,7 +92,7 @@ AddRoom("OceanSwell_SEA", {
 -- "moonglass_wobster_den"	"lobsterhole"	"wobster_den"
 AddRoom("OceanRough_SEA", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.OCEAN_ROUGH,
+    value = WORLD_TILES.OCEAN_ROUGH,
     required_prefabs = {
         "hermithouse_construction1",
         "waterplant",
@@ -135,7 +135,7 @@ AddRoom("OceanRough_SEA", {
 --coral					
 AddRoom("OceanReef_SEA", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.OCEAN_BRINEPOOL,
+    value = WORLD_TILES.OCEAN_BRINEPOOL,
     contents = {
         countprefabs =
         {
@@ -152,7 +152,7 @@ AddRoom("OceanReef_SEA", {
 --ship gravery
 AddRoom("OceanHazardous_SEA", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.OCEAN_HAZARDOUS,
+    value = WORLD_TILES.OCEAN_HAZARDOUS,
     contents = {
         countprefabs =
         {

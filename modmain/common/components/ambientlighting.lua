@@ -50,69 +50,32 @@ local COLOURS = {
 
 
 AddComponentPostInit("ambientlighting", function(self, inst)
-    -- if false and not TheNet:IsDedicated() then ------这种非全局性的东西还是不要放到ambientlighting
-    -- 	local DoUpdateFlash = Hooks.FindUpvalue(self.OnUpdate, "DoUpdateFlash")
-    -- 	local PushCurrentColour = Hooks.FindUpvalue(self.OnUpdate, "PushCurrentColour")
-    -- 	local _realcolour = Hooks.FindUpvalue(DoUpdateFlash, "_realcolour")
-    -- 	local _overridecolour = Hooks.FindUpvalue(DoUpdateFlash, "_overridecolour")
-    -- 	local _ComputeTargetColour = Hooks.FindUpvalue(DoUpdateFlash, "ComputeTargetColour")
+    local DoUpdateFlash = Hooks.FindUpvalue(self.OnUpdate, "DoUpdateFlash")
+    local PushCurrentColour = Hooks.FindUpvalue(self.OnUpdate, "PushCurrentColour")
+    local _realcolour = Hooks.FindUpvalue(DoUpdateFlash, "_realcolour")         ---真正的颜色(控制查理)
+    local _overridecolour = Hooks.FindUpvalue(DoUpdateFlash, "_overridecolour") ---表现的颜色
+    local _ComputeTargetColour = Hooks.FindUpvalue(DoUpdateFlash, "ComputeTargetColour")
 
-    -- 	local _activatedplayer
-
-    -- 	local function ComputeTargetColour(targetsettings, timeoverride, ...)
-    -- 		if _activatedplayer and targetsettings == _overridecolour and _overridecolour.currentcolourset.PHASE_COLOURS.spring then
-    -- 			local temp = _overridecolour.currentcolourset
-
-    -- 			if _activatedplayer:IsInTropicalArea() then
-    -- 				_overridecolour.currentcolourset = COLOURS.TROPICAL_COLOURS
-    -- 			end
-    -- 			_ComputeTargetColour(targetsettings, timeoverride, ...)
-    -- 			_overridecolour.currentcolourset = temp
-    -- 			return
-    -- 		end
-    -- 		_ComputeTargetColour(targetsettings, timeoverride, ...)
-    -- 	end
-
-    -- 	Hooks.SetUpvalue(DoUpdateFlash, "ComputeTargetColour", ComputeTargetColour)
-
-
-
-    -- 	local function OnClimateChanged()
-    -- 		-- ComputeTargetColour(_realcolour)
-    -- 		ComputeTargetColour(_overridecolour)
-    -- 		PushCurrentColour()
-    -- 	end
-
-    if true then
-        local DoUpdateFlash = Hooks.FindUpvalue(self.OnUpdate, "DoUpdateFlash")
-        local PushCurrentColour = Hooks.FindUpvalue(self.OnUpdate, "PushCurrentColour")
-        local _realcolour = Hooks.FindUpvalue(DoUpdateFlash, "_realcolour")         ---真正的颜色(控制查理)
-        local _overridecolour = Hooks.FindUpvalue(DoUpdateFlash, "_overridecolour") ---表现的颜色
-        local _ComputeTargetColour = Hooks.FindUpvalue(DoUpdateFlash, "ComputeTargetColour")
-
-        local function ComputeTargetColour(targetsettings, timeoverride, ...)
-            if not TheWorld:HasTag("cave") and TheWorld.state.isaporkalypse and targetsettings.currentcolourset.PHASE_COLOURS.spring then
-                local temp = targetsettings.currentcolourset
-                targetsettings.currentcolourset = COLOURS.APORKALYPSE_COLOURS
-                _ComputeTargetColour(targetsettings, timeoverride, ...)
-                targetsettings.currentcolourset = temp
-                return
-            end
+    local function ComputeTargetColour(targetsettings, timeoverride, ...)
+        if not TheWorld:HasTag("cave") and TheWorld.state.isaporkalypse and targetsettings.currentcolourset.PHASE_COLOURS.spring then
+            local temp = targetsettings.currentcolourset
+            targetsettings.currentcolourset = COLOURS.APORKALYPSE_COLOURS
             _ComputeTargetColour(targetsettings, timeoverride, ...)
+            targetsettings.currentcolourset = temp
+            return
         end
-
-        Hooks.SetUpvalue(DoUpdateFlash, "ComputeTargetColour", ComputeTargetColour)
-
-
-
-        local function OnClimateChanged()
-            ComputeTargetColour(_realcolour)
-            ComputeTargetColour(_overridecolour)
-            PushCurrentColour()
-        end
-
-        self.inst:WatchWorldState("startaporkalypse", OnClimateChanged) ----为什么 用isaporkalypse就不行呢
-        self.inst:WatchWorldState("stopaporkalypse", OnClimateChanged)
-        self.inst:DoTaskInTime(0, OnClimateChanged)                     --initialise
+        _ComputeTargetColour(targetsettings, timeoverride, ...)
     end
+
+    Hooks.SetUpvalue(DoUpdateFlash, "ComputeTargetColour", ComputeTargetColour)
+
+    local function OnClimateChanged()
+        ComputeTargetColour(_realcolour)
+        ComputeTargetColour(_overridecolour)
+        PushCurrentColour()
+    end
+
+    self.inst:WatchWorldState("startaporkalypse", OnClimateChanged) ----为什么 用isaporkalypse就不行呢
+    self.inst:WatchWorldState("stopaporkalypse", OnClimateChanged)
+    self.inst:DoTaskInTime(0, OnClimateChanged)                     --initialise
 end)

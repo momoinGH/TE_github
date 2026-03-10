@@ -222,14 +222,14 @@ local states =
             local x, y, z = inst.Transform:GetWorldPosition()
             local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
 
-            if ground == GROUND.OCEAN_SWELL or
-                ground == GROUND.OCEAN_COASTAL or
-                ground == GROUND.OCEAN_COASTAL_SHORE or
-                ground == GROUND.OCEAN_ROUGH or
-                ground == GROUND.OCEAN_BRINEPOOL or
-                ground == GROUND.OCEAN_BRINEPOOL_SHORE or
-                ground == GROUND.OCEAN_WATERLOG or
-                ground == GROUND.OCEAN_HAZARDOUS then
+            if ground == WORLD_TILES.OCEAN_SWELL or
+                ground == WORLD_TILES.OCEAN_COASTAL or
+                ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
+                ground == WORLD_TILES.OCEAN_ROUGH or
+                ground == WORLD_TILES.OCEAN_BRINEPOOL or
+                ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
+                ground == WORLD_TILES.OCEAN_WATERLOG or
+                ground == WORLD_TILES.OCEAN_HAZARDOUS then
                 inst:ClearStateGraph()
                 inst:SetStateGraph("SGtigershark_water")
                 inst.AnimState:SetBuild("tigershark_water_build")
@@ -263,8 +263,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC002/creatures/tiger_shark/roar") end)
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC002/creatures/tiger_shark/roar")
+            end)
         },
 
         ontimeout = function(inst)
@@ -444,8 +446,10 @@ local states =
 CommonStates.AddFrozenStates(states)
 CommonStates.AddSleepStates(states,
     {
-        sleeptimeline = { TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-            "dontstarve_DLC002/creatures/tiger_shark/sleep") end) },
+        sleeptimeline = { TimeEvent(0 * FRAMES, function(inst)
+            inst.SoundEmitter:PlaySound(
+                "dontstarve_DLC002/creatures/tiger_shark/sleep")
+        end) },
     })
 CommonStates.AddWalkStates(states,
     {
