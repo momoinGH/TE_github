@@ -1,11 +1,9 @@
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
-
-require "tools/upvaluehelper"                     ----用来hook的一些函数
-modimport "modmain/util.lua"                      --一些表相关的工具函数
-require "tropical_utils/tileutil"                 ----一些关于tile的工具函数
-require "tropical_utils/simutil"                  ----地形生成相关工具
-
+-- modworldgenmain.lua文件点击存档时本地调用一下，点击开始游戏主机才会调用
+modimport "modmain/util.lua"           --一些表相关的工具函数
+Hooks = require "tropical_utils/hooks" ----用来hook的一些函数
 modimport "modmain/gentuning"
+modimport "modmain/dev_utils"          --开发环境下辅助用的函数，与游戏无关
 modimport "tiledefs"
 
 require("map/tasks")

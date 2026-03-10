@@ -1,4 +1,4 @@
-Utils.FnDecorator(ACTIONS.COOK, "stroverridefn", function(act)
+Hooks.FnDecorator(ACTIONS.COOK, "stroverridefn", function(act)
     if act.target and act.target.prefab == "smelter" then
         return { STRINGS.ACTIONS.SMELT }, true
     end

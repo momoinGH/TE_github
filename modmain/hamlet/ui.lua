@@ -32,7 +32,7 @@ local PlayerHud = require("screens/playerhud")
 -- end
 
 AddClassPostConstruct("screens/playerhud", function(self)
-    Utils.FnDecorator(self, "CreateOverlays", nil, function(retTab, self, owner, ...)
+    Hooks.FnDecorator(self, "CreateOverlays", nil, function(retTab, self, owner, ...)
         -- 大雾
         self.fogover = self.overlayroot:AddChild(FogOver(owner))
         self.fogover:Hide()
@@ -40,7 +40,7 @@ AddClassPostConstruct("screens/playerhud", function(self)
         return retTab
     end)
 
-    Utils.FnDecorator(self, "SetMainCharacter", nil, function(retTab, self, maincharacter)
+    Hooks.FnDecorator(self, "SetMainCharacter", nil, function(retTab, self, maincharacter)
         if not maincharacter then return retTab end
 
         self.inst:ListenForEvent("pro_fogchange", function(inst, data) return self.fogover:OnFogStateChange() end, self.owner)

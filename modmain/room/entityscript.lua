@@ -5,4 +5,4 @@ local function GetCurrentTileTypeBefore(inst)
         return { WORLD_TILES.WOODFLOOR, GetTileInfo(WORLD_TILES.WOODFLOOR) }, true
     end
 end
-Utils.FnDecorator(EntityScript, "GetCurrentTileType", GetCurrentTileTypeBefore)
+Hooks.FnDecorator(EntityScript, "GetCurrentTileType", GetCurrentTileTypeBefore)

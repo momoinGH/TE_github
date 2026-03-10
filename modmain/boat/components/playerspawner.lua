@@ -16,5 +16,5 @@ local function SpawnAtLocationAfter(retTab, self, inst, player, x, y, z, isloadi
 end
 
 AddComponentPostInit("playerspawner", function(self)
-    Utils.FnDecorator(self, "SpawnAtLocation", nil, SpawnAtLocationAfter)
+    Hooks.FnDecorator(self, "SpawnAtLocation", nil, SpawnAtLocationAfter)
 end)

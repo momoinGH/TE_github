@@ -199,20 +199,6 @@ AddRecipeFilter({ name = "CITY", atlas = tab_atlas, image = "tab_city.tex" })   
 --AddRecipeFilter({ name = "FORGE", atlas = tab_atlas, image = "tab_forge.tex" })--给未来预留的
 AddRecipeFilter({ name = "GORGE", atlas = tab_atlas, image = "tab_gorge.tex" })         -- 这个靠近科技站才有物品，平常一直都是空的
 
-if TUNING.tropical.frost_island ~= 0 then
-    AddRecipe2("wildbeaver_house", { Ingredient("beaverskin", 4), Ingredient("boards", 4), Ingredient("cutstone", 3) }, TECH.SCIENCE_TWO, { placer = "wildbeaver_house_placer" },
-        { "STRUCTURES" })
-end
-
-if TUNING.tropical.shipwrecked_plus then
-    AddRecipe2("pandahouse", { Ingredient("pandaskin", 4), Ingredient("boards", 4), Ingredient("cutstone", 3) }, TECH.SCIENCE_TWO, { placer = "pandahouse_placer" }, { "STRUCTURES" })
-end
-
-if TUNING.tropical.quagmire or TUNING.tropical.shipwrecked_plus then
-    AddRecipe2("chickenhouse", { Ingredient("seeds", 6), Ingredient("boards", 4), Ingredient("feather_chicken", 2) }, TECH.SCIENCE_TWO, { placer = "chickenhouse_placer" },
-        { "STRUCTURES" })
-end
-
 ---------------------corrigindo bug estranho-------------
 --AddRecipe2("campfire", {Ingredient("cutgrass", 3), Ingredient("log", 2)}, TECH.NONE, {placer="campfire_placer"})--为什么有个营火？
 
@@ -340,9 +326,6 @@ AddRecipe2("ox_flute", { Ingredient("ox_horn", 1), Ingredient("nightmarefuel", 2
 AddRecipe2("sand_castle", { Ingredient("sand", 4), Ingredient("palmleaf", 2), Ingredient("seashell", 3) }, TECH.NONE, { placer = "sand_castle_placer" }, { "STRUCTURES", "DECOR" })
 
 AddRecipe2("turf_road", { Ingredient("cutstone", 1), Ingredient("flint", 2) }, TECH.SCIENCE_TWO, { numtogive = 4 }, { "DECOR" })         --要先加个卵石路下面改的海难卵石路才能生效吗？
-if TUNING.tropical.only_shipwrecked then                                                                                                 -- WHAT?
-    AddRecipe2("turf_road", { Ingredient("boards", 1), Ingredient("turf_magmafield", 1) }, TECH.SCIENCE_TWO, { numtogive = 4 }, { "DECOR" })
-end
 
 AddRecipe2("dragoonden", { Ingredient("dragoonheart", 1), Ingredient("rocks", 5), Ingredient("obsidian", 4) }, TECH.SCIENCE_TWO, { placer = "dragoonden_placer" }, { "STRUCTURES" })
 AddRecipe2("wildborehouse", { Ingredient("pigskin", 4), Ingredient("palmleaf", 5), Ingredient("bamboo", 8) }, TECH.SCIENCE_TWO, { placer = "wildborehouse_placer" }, { "STRUCTURES" })
@@ -439,10 +422,7 @@ if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.multiplayerportal == 15 or
     AddRecipe2("magnifying_glass", { Ingredient("iron", 1), Ingredient("twigs", 1), Ingredient("bluegem", 1) }, TECH.SCIENCE_TWO, nil, { "TOOLS", "ARCHAEOLOGY" })
 end
 
-if TUNING.tropical.only_hamlet then
-    AddRecipe2("antler", { Ingredient("hippo_antler", 1), Ingredient("bill_quill", 3), Ingredient("flint", 1) }, TECH.SCIENCE_ONE, nil, { "TOOLS" })
-    --AddRecipe2("antler_corrupted",		{Ingredient("antler", 1), Ingredient("ancient_remnant", 2)},		                        TECH.MAGIC_TWO, nil,     {"TOOLS","MAGIC"})--噩梦鸟笛(未来)
-end
+
 
 -- CITY--
 AddRecipe2("city_hammer", { Ingredient("iron", 2), Ingredient("twigs", 1) }, TECH.CITY_TWO, { nounlock = true }, { "CITY" })

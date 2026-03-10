@@ -118,7 +118,7 @@ end
 
 AddStategraphPostInit("wilson_client", function(sg)
     -- 划船
-    Utils.FnDecorator(sg.states["run_start"], "onenter", nil, function(retTab, inst)
+    Hooks.FnDecorator(sg.states["run_start"], "onenter", nil, function(retTab, inst)
         local boat = inst:TroGetSWBoat()
         if boat then
             local item = boat.replica.container and boat.replica.container:GetItemInSlot(1)
@@ -130,7 +130,7 @@ AddStategraphPostInit("wilson_client", function(sg)
         end
     end)
 
-    Utils.FnDecorator(sg.states["run"], "onenter", function(inst)
+    Hooks.FnDecorator(sg.states["run"], "onenter", function(inst)
         local boat = inst:TroGetSWBoat()
         if not boat then
             return
@@ -158,11 +158,11 @@ AddStategraphPostInit("wilson_client", function(sg)
         return nil, true
     end)
 
-    Utils.FnDecorator(sg.states["run"], "onexit", function(inst)
+    Hooks.FnDecorator(sg.states["run"], "onexit", function(inst)
         inst.AnimState:ClearOverrideBuild("player_actions_paddle")
     end)
 
-    Utils.FnDecorator(sg.states["run_stop"], "onenter", nil, function(retTab, inst)
+    Hooks.FnDecorator(sg.states["run_stop"], "onenter", nil, function(retTab, inst)
         local boat = inst:TroGetSWBoat()
         if boat then
             local item = boat.replica.container and boat.replica.container:GetItemInSlot(1)
@@ -175,7 +175,7 @@ AddStategraphPostInit("wilson_client", function(sg)
     end)
 
     --跳船
-    Utils.FnDecorator(sg.states["hop_pre"], "onenter", nil, function(retTab, inst)
+    Hooks.FnDecorator(sg.states["hop_pre"], "onenter", nil, function(retTab, inst)
         local act = inst:GetBufferedAction()
         if act and act.action == ACTIONS.BOATMOUNT then
             inst:PerformPreviewBufferedAction() --直接执行

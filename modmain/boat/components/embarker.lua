@@ -38,5 +38,5 @@ local function GetEmbarkPositionBefore(self)
 end
 
 AddComponentPostInit("embarker", function(self)
-    Utils.FnDecorator(self, "GetEmbarkPosition", GetEmbarkPositionBefore)
+    Hooks.FnDecorator(self, "GetEmbarkPosition", GetEmbarkPositionBefore)
 end)

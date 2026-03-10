@@ -1,5 +1,4 @@
 local MakePlayerCharacter = require "prefabs/player_common"
-local Utils = require("tropical_utils/utils")
 
 local assets =
 {
@@ -94,6 +93,8 @@ local function IsCursableBefore()
 end
 
 local master_postinit = function(inst)
+    inst.timeinmotion = 0
+
     inst.components.health:SetMaxHealth(125)
     inst.components.hunger:SetMax(175)
     inst.components.sanity:SetMax(150)
@@ -115,11 +116,10 @@ local master_postinit = function(inst)
     inst.components.hunger:SetRate(1 * TUNING.WILSON_HUNGER_RATE)
     inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED - 0.5
 
-    Utils.FnDecorator(inst.components.cursable, "IsCursable", IsCursableBefore) --不会被诅咒饰品吸引
+    inst.components.cursable.IsCursable = function() return false end --不会被诅咒饰品吸引
 
     inst.OnLoad = onload
     inst.OnNewSpawn = onload
-    inst.timeinmotion = 0
     --	inst:ListenForEvent("locomote", movimento)
 end
 

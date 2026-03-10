@@ -2,7 +2,6 @@
 ---modimport("postinit/room_camera")              --房间镜头
 
 -- do not know how to sort
----modimport("postinit/oceancolor")
 ---modimport("postinit/camera")               --旧的房间镜头，但是现在不能删
 
 ----------------------------components-------------------------------------------

@@ -4,7 +4,7 @@ local Utils = require("tropical_utils/utils")
 -- 该方法不够的地方再用AddPrefabPostInit补齐
 local MyEventServerFiles = {}
 
-Utils.FnDecorator(GLOBAL, "requireeventfile", nil, function(retTab, fullpath)
+Hooks.FnDecorator(GLOBAL, "requireeventfile", nil, function(retTab, fullpath)
     for k, v in pairs(MyEventServerFiles[fullpath] or {}) do
         retTab[1][k] = v --替换成我实现的初始化函数
     end
@@ -134,7 +134,7 @@ local function GetAttackedBefore(self, attacker, damage, weapon, ...)
 end
 
 AddComponentPostInit("combat", function(self, inst)
-    Utils.FnDecorator(self, "GetAttacked", GetAttackedBefore)
+    Hooks.FnDecorator(self, "GetAttacked", GetAttackedBefore)
 end)
 
 ----------------------------------------------------------------------------------------------------
@@ -174,6 +174,6 @@ local function StopTrackingBefore(self)
 end
 
 AddComponentPostInit("lavaarenamobtracker", function(self)
-    Utils.FnDecorator(self, "StartTracking", StartTrackingBefore)
-    Utils.FnDecorator(self, "StopTracking", StopTrackingBefore)
+    Hooks.FnDecorator(self, "StartTracking", StartTrackingBefore)
+    Hooks.FnDecorator(self, "StopTracking", StopTrackingBefore)
 end)

@@ -16,5 +16,5 @@ AddComponentPostInit("armor", function(self)
         self.immunetags = tags
     end
 
-    Utils.FnDecorator(self, "CanResist", ArmorCanResistBefore)
+    Hooks.FnDecorator(self, "CanResist", ArmorCanResistBefore)
 end)

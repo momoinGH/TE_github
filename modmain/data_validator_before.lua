@@ -72,7 +72,7 @@ GLOBAL.STRINGS = old_strings
 
 ----------------------------------------------------------------------------------------------------
 -- 检查ACTIONS是否重复定义
-Utils.FnDecorator(env, "AddAction", function(id)
+Hooks.FnDecorator(env, "AddAction", function(id)
     if type(id) == "table" then
         id = id.id
     end
@@ -83,7 +83,7 @@ end)
 -- 检查预制件重复定义的，或者和科雷重名的
 local mod_prefab_files = {}
 local prefab_filepaths = {}
-Utils.FnDecorator(GLOBAL, "LoadPrefabFile", nil, function(retTab, filename, async_batch_validation, search_asset_first_path)
+Hooks.FnDecorator(GLOBAL, "LoadPrefabFile", nil, function(retTab, filename, async_batch_validation, search_asset_first_path)
     if not search_asset_first_path then --有值表示是mod文件
         return retTab
     end

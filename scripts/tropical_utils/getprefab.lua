@@ -4,6 +4,7 @@ local _source = debug.getinfo(1, 'S').source
 local KEY = "_" .. _source:match(".*scripts[/\\](.*)%.lua"):gsub("[/\\]", "_") .. "_"
 
 local Utils = require(_source:match(".*scripts[/\\](.*[/\\])") .. "utils")
+local Hooks = require("tropical_utils/hooks")
 
 ---隐藏，停止一切活动，来自inventoryitem
 function FN.Hide(inst)
@@ -170,8 +171,8 @@ function FN.FarmingManagerGetMoisture(x, y, z)
         return 0
     end
     if not _overlaygrid then
-        _overlaygrid = Utils.ChainFindUpvalue(TheWorld.components.farming_manager.GetDebugString, "_overlaygrid")
-        _moisturegrid = Utils.ChainFindUpvalue(TheWorld.components.farming_manager.GetDebugString, "_moisturegrid")
+        _overlaygrid = Hooks.FindUpvalue(TheWorld.components.farming_manager.GetDebugString, "_overlaygrid")
+        _moisturegrid = Hooks.FindUpvalue(TheWorld.components.farming_manager.GetDebugString, "_moisturegrid")
     end
     -- 这里我不会判断是否读取到了，如果失败说明该更新代码了
 

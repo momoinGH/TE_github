@@ -1,5 +1,5 @@
 AddClassPostConstruct("components/builder_replica", function(self)
-    Utils.FnDecorator(self, "KnowsRecipe", function(self, recipe)
+    Hooks.FnDecorator(self, "KnowsRecipe", function(self, recipe)
         if type(recipe) == "string" then
             recipe = GetValidRecipe(recipe)
         end

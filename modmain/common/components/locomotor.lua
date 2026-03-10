@@ -82,9 +82,9 @@ end
 ----------------------------------------------------------------------------------------------------
 
 AddComponentPostInit("locomotor", function(self)
-    Utils.FnDecorator(self, "UpdateGroundSpeedMultiplier", nil, UpdateGroundSpeedMultiplierAfter)
+    Hooks.FnDecorator(self, "UpdateGroundSpeedMultiplier", nil, UpdateGroundSpeedMultiplierAfter)
 
     if not TheWorld.ismastersim then return end
 
-    Utils.FnDecorator(self, "ExternalSpeedMultiplier", ExternalSpeedMultiplierBefore)
+    Hooks.FnDecorator(self, "ExternalSpeedMultiplier", ExternalSpeedMultiplierBefore)
 end)

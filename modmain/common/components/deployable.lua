@@ -34,5 +34,5 @@ AddComponentPostInit("deployable", function(self)
     self.tro_force_deploy = false --不检查放置条件
 
     self.TroForceDeploy = TroForceDeploy
-    Utils.FnDecorator(self, "CanDeploy", DeployableCanDeployBefore)
+    Hooks.FnDecorator(self, "CanDeploy", DeployableCanDeployBefore)
 end)

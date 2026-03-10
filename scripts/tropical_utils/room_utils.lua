@@ -1,6 +1,6 @@
 -- 为虚空小房子服务
 
-local Utils = require("tropical_utils/utils")
+local Hooks = require("tropical_utils/hooks")
 
 local FN = {}
 
@@ -334,7 +334,7 @@ function FN.MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, uses
     inst.components.teleporter.offset = 0
     inst.components.teleporter.travelcameratime = 0
     inst.components.teleporter.travelarrivetime = 0
-    Utils.FnDecorator(inst.components.teleporter, "Target", TargetBefore)
+    Hooks.FnDecorator(inst.components.teleporter, "Target", TargetBefore)
     -- inst.components.teleporter.onActivate = OnActivate
     -- inst.components.teleporter.OnDoneTeleporting = OnDoneTeleporting
 

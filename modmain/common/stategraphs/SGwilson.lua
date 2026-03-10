@@ -323,7 +323,7 @@ end
 
 AddStategraphPostInit("wilson", function(sg)
     --攻击
-    Utils.FnDecorator(sg.actionhandlers[ACTIONS.ATTACK], "deststate", function(inst, action)
+    Hooks.FnDecorator(sg.actionhandlers[ACTIONS.ATTACK], "deststate", function(inst, action)
         local playercontroller = inst.components.playercontroller
         local attack_tag =
             playercontroller ~= nil and
@@ -345,7 +345,7 @@ AddStategraphPostInit("wilson", function(sg)
     end)
 
     -- 可以上床睡觉
-    Utils.FnDecorator(sg.actionhandlers[ACTIONS.SLEEPIN], "deststate", function(inst, action)
+    Hooks.FnDecorator(sg.actionhandlers[ACTIONS.SLEEPIN], "deststate", function(inst, action)
         if action.target:HasTag("bed") then
             local x, y, z = action.target.Transform:GetWorldPosition()
             action.doer.Transform:SetPosition(x + 0.02, y, z + 0.02)
@@ -354,7 +354,7 @@ AddStategraphPostInit("wilson", function(sg)
     end)
 
     -- 床上睡觉
-    Utils.FnDecorator(sg.states["bedroll"], "onenter", nil, function(retTab, inst)
+    Hooks.FnDecorator(sg.states["bedroll"], "onenter", nil, function(retTab, inst)
         local bed = inst:GetBufferedAction() and inst:GetBufferedAction().target
         if bed and bed:HasTag("bed") then
             inst.AnimState:PlayAnimation("bedroll", false)

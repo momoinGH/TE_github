@@ -73,5 +73,5 @@ local function UpdateCCTableBefore(self)
 end
 
 AddClassPostConstruct("components/playervision", function(self)
-    Utils.FnDecorator(self, "UpdateCCTable", UpdateCCTableBefore)
+    Hooks.FnDecorator(self, "UpdateCCTable", UpdateCCTableBefore)
 end)

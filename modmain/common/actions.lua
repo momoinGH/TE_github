@@ -4,7 +4,7 @@ local RoomUtils          = require("tropical_utils/room_utils")
 ACTIONS.ADDFUEL.priority = 1
 ACTIONS.GIVE.priority    = 0
 
-Utils.FnDecorator(ACTIONS.JUMPIN, "strfn", function(act)
+Hooks.FnDecorator(ACTIONS.JUMPIN, "strfn", function(act)
     if act.target ~= nil then
         if act.target:HasTag("hamlet_houseexit") then
             return { "LEAVE" }, true
@@ -116,7 +116,7 @@ Constructor.AddAction(nil, "PEAGAWK_TRANSFORM", STRINGS.ACTIONS.PEAGAWK_TRANSFOR
     --Dummy action for flup hiding
 end)
 
-Utils.FnDecorator(ACTIONS.MANUALEXTINGUISH, "fn", function(act)
+Hooks.FnDecorator(ACTIONS.MANUALEXTINGUISH, "fn", function(act)
     if act.doer:HasTag("extinguisher") then
         if act.target.components.burnable and act.target.components.burnable:IsBurning() then
             act.target.components.burnable:Extinguish()
@@ -280,7 +280,7 @@ Constructor.AddAction({ priority = 10, mount_valid = true },
     end
 )
 
-Utils.FnDecorator(ACTIONS.INSTALL, "fn", function(act)
+Hooks.FnDecorator(ACTIONS.INSTALL, "fn", function(act)
     if act.invobject ~= nil and act.target ~= nil then
         if act.invobject.components.installable ~= nil
             and act.target.components.installations ~= nil

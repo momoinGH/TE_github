@@ -121,46 +121,8 @@ if GetModConfigData("lilypad") then
 end
 
 ---------------lavaarena volcano---------------------
-if TUNING.tropical.hamlet_caves then
-    table.insert(PrefabFiles, "alloy")
-    table.insert(PrefabFiles, "armor_metal")
-    table.insert(PrefabFiles, "banditmap")
-    table.insert(PrefabFiles, "city_hammer")
-    table.insert(PrefabFiles, "city_lamp")
-    table.insert(PrefabFiles, "clippings")
-    table.insert(PrefabFiles, "halberd")
-    table.insert(PrefabFiles, "hamlet_cones")
-    table.insert(PrefabFiles, "hedge")
-    table.insert(PrefabFiles, "key_to_city")
-    table.insert(PrefabFiles, "lawnornaments")
-    table.insert(PrefabFiles, "magnifying_glass")
-    table.insert(PrefabFiles, "pig_guard_tower")
-    table.insert(PrefabFiles, "pig_shop")
-    table.insert(PrefabFiles, "pigbandit")
-    table.insert(PrefabFiles, "pighouse_city")
-    table.insert(PrefabFiles, "pigman_shopkeeper_desk")
-    table.insert(PrefabFiles, "player_house_kits")
-    table.insert(PrefabFiles, "reconstruction_project")
-    table.insert(PrefabFiles, "securitycontract")
-    table.insert(PrefabFiles, "shelf_slot")
-    table.insert(PrefabFiles, "shelf")
-    table.insert(PrefabFiles, "shop_pedestals")
-    table.insert(PrefabFiles, "smelter")
-    table.insert(PrefabFiles, "smeltingrecipecard")
-    table.insert(PrefabFiles, "sprinkler1")
-    table.insert(PrefabFiles, "topiary")
-    table.insert(PrefabFiles, "trinkets_giftshop")
-    table.insert(PrefabFiles, "water_pipe")
-    table.insert(PrefabFiles, "water_spray")
-end
-
 if TUNING.tropical.multiplayerportal == 15 then
     table.insert(PrefabFiles, "porklandintro")
-end
-
-if TUNING.tropical.multiplayerportal == 15
-    or TUNING.tropical.hamlet_caves
-then
     table.insert(PrefabFiles, "adult_flytrap")
     table.insert(PrefabFiles, "aloe")
     table.insert(PrefabFiles, "ancient_herald")

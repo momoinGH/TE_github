@@ -18,5 +18,5 @@ end
 
 AddComponentPostInit("trap", function(self)
     self.pro_water = nil --海里的陷阱
-    Utils.FnDecorator(self, "DoSpring", DoSpringBefore)
+    Hooks.FnDecorator(self, "DoSpring", DoSpringBefore)
 end)

@@ -244,24 +244,26 @@ function AddMinimap()
     end)
 
     -- 根据地皮id生成地皮物品，应对terraformer组件和autoterraformer组件
-    Utils.FnDecorator(GLOBAL, "HandleDugGround", function(dug_ground, x, y, z)
-        if addedTilesTurfInfo[dug_ground] then
-            for k, lootinfo in pairs(addedTilesTurfInfo[dug_ground]) do
-                local min = lootinfo[2] or 1
-                local max = lootinfo[3] or min
-                for i = 1, math.random(min, max) do
-                    local loot = SpawnPrefab(lootinfo[1])
-                    if loot.components.inventoryitem ~= nil then
-                        loot.components.inventoryitem:InheritWorldWetnessAtXZ(x, z)
-                    end
-                    loot.Transform:SetPosition(x, y, z)
-                    if loot.Physics ~= nil then
-                        local angle = math.random() * TWOPI
-                        loot.Physics:SetVel(2 * math.cos(angle), 10, 2 * math.sin(angle))
-                    end
+    local OldHandleDugGround = GLOBAL.HandleDugGround
+    GLOBAL.HandleDugGround = function(dug_ground, x, y, z, ...)
+        if not addedTilesTurfInfo[dug_ground] then
+            return OldHandleDugGround(dug_ground, x, y, z, ...)
+        end
+
+        for k, lootinfo in pairs(addedTilesTurfInfo[dug_ground]) do
+            local min = lootinfo[2] or 1
+            local max = lootinfo[3] or min
+            for i = 1, math.random(min, max) do
+                local loot = SpawnPrefab(lootinfo[1])
+                if loot.components.inventoryitem ~= nil then
+                    loot.components.inventoryitem:InheritWorldWetnessAtXZ(x, z)
+                end
+                loot.Transform:SetPosition(x, y, z)
+                if loot.Physics ~= nil then
+                    local angle = math.random() * TWOPI
+                    loot.Physics:SetVel(2 * math.cos(angle), 10, 2 * math.sin(angle))
                 end
             end
-            return nil, true
         end
-    end)
+    end
 end

@@ -77,6 +77,6 @@ AddComponentPostInit("playeractionpicker", function(self)
     self.current_boat = nil --鼠标悬停的海难小船
     self.unregisterBoatTask = nil
 
-    Utils.FnDecorator(self, "GetLeftClickActions", nil, GetLeftClickActionsAfter)
-    Utils.FnDecorator(self, "GetRightClickActions", GetRightClickActionsBefore, GetRightClickActionsAfter)
+    Hooks.FnDecorator(self, "GetLeftClickActions", nil, GetLeftClickActionsAfter)
+    Hooks.FnDecorator(self, "GetRightClickActions", GetRightClickActionsBefore, GetRightClickActionsAfter)
 end)

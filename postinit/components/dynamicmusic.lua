@@ -1,5 +1,3 @@
-local upvaluehelper = require("tropical_utils/upvaluehelper")
-
 local soundremap = {
 
     shipwrecked = {
@@ -53,10 +51,10 @@ AddComponentPostInit("dynamicmusic", function(self, inst)
     ------------------------------Adding Climate Music---------------------------------
     local _activatedplayer
     local OnPlayerActivated = inst:GetEventCallback("playeractivated", inst, "scripts/components/dynamicmusic.lua")
-    local BUSYTHEMES = upvaluehelper.Get(OnPlayerActivated, "BUSYTHEMES")
+    local BUSYTHEMES = Hooks.FindUpvalue(OnPlayerActivated, "BUSYTHEMES")
 
     local OnEnableDynamicMusic = inst:GetEventCallback("enabledynamicmusic", TheWorld)
-    local StopBusy = upvaluehelper.Get(OnEnableDynamicMusic, "StopBusy")
+    local StopBusy = Hooks.FindUpvalue(OnEnableDynamicMusic, "StopBusy")
 
 
     ---勾不了函数我还勾不了参数吗，我可太牛逼了

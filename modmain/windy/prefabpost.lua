@@ -27,6 +27,5 @@ local function HarvestBefore(self, harvester)
 end
 
 AddComponentPostInit("crop", function(self)
-    Utils.FnDecorator(self, "Harvest", HarvestBefore)
+    Hooks.FnDecorator(self, "Harvest", HarvestBefore)
 end)
-

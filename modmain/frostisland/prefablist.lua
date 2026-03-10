@@ -9,7 +9,6 @@ PrefabFiles = {
     "city_hammer",
     "magnifying_glass",
     "pigbandit",
-    "banditmap",
     "pig_shop",
 
     "pigman_shopkeeper_desk",
@@ -27,7 +26,6 @@ PrefabFiles = {
     "water_spray",
     "water_pipe",
     "sprinkler1",
-    "alloy",
     "smelter",
     "halberd",
     "billsnow",

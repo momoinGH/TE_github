@@ -123,7 +123,7 @@ for _, data in ipairs({
 
     if data[3] then
         AddPrefabPostInit(data[3], function(inst)
-            Utils.FnDecorator(inst.components.placer, "TestCanBuild", TestCanBuildBefore)
+            Hooks.FnDecorator(inst.components.placer, "TestCanBuild", TestCanBuildBefore)
         end)
     end
 end

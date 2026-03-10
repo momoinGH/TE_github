@@ -1,11 +1,9 @@
-TUNING.MAPWRAPPER_WARN_RANGE = 14
-TUNING.MAPEDGE_PADDING = TUNING.MAPWRAPPER_WARN_RANGE + 10
-TUNING.BERMUDA_AMOUNT = 12 --12 triangles make 6 pairs
-
 require("map/network")
 
+local BERMUDA_AMOUNT = 12 --12 triangles make 6 pairs
+
 local function GenerateBermudaTriangles(root, entities, width, height)
-    local numTriangles = TUNING.BERMUDA_AMOUNT
+    local numTriangles = BERMUDA_AMOUNT
     local minDistSq = 50 * 50
 
     if entities.bermudatriangle_MARKER == nil then

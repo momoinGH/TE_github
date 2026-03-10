@@ -1,3 +1,4 @@
+-- 这些东西浮起来
 if TUNING.tropical.only_sea then
     for _, v in ipairs({
         "rocks",

@@ -37,7 +37,7 @@ GLOBAL.MakeObsidianTool = MakeObsidianTool
 
 ----------------------------------------------------------------------------------------------------
 -- 取消作物冬天不生长的限制
-local TogglePickable = Utils.FindUpvalue(MakeNoGrowInWinter, "TogglePickable")
+local TogglePickable = Hooks.FindUpvalue(MakeNoGrowInWinter, "TogglePickable")
 if not TogglePickable then
     print("获取TogglePickable函数失败，无法让作物冬天也生长了。")
 end

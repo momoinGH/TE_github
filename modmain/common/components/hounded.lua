@@ -1,13 +1,11 @@
-local upvaluehelper = require("tropical_utils/upvaluehelper")
-
 AddComponentPostInit("hounded", function(self)
     self.inst:DoTaskInTime(0, function()
-        local _spawndata = upvaluehelper.Get(self.SetSpawnData, "_spawndata")
-        local _SummonSpawn = upvaluehelper.Get(self.SummonSpawn, "SummonSpawn")
-        local _GetSpawnPrefab = upvaluehelper.Get(_SummonSpawn, "GetSpawnPrefab")
-        local _GetSpawnPoint = upvaluehelper.Get(_SummonSpawn, "GetSpawnPoint")
-        local _GetSpecialSpawnChance = upvaluehelper.Get(_GetSpawnPrefab, "GetSpecialSpawnChance")
-        local _SPAWN_DIST = upvaluehelper.Get(_GetSpawnPoint, "SPAWN_DIST")
+        local _spawndata = Hooks.FindUpvalue(self.SetSpawnData, "_spawndata")
+        local _SummonSpawn = Hooks.FindUpvalue(self.SummonSpawn, "SummonSpawn")
+        local _GetSpawnPrefab = Hooks.FindUpvalue(_SummonSpawn, "GetSpawnPrefab")
+        local _GetSpawnPoint = Hooks.FindUpvalue(_SummonSpawn, "GetSpawnPoint")
+        local _GetSpecialSpawnChance = Hooks.FindUpvalue(_GetSpawnPrefab, "GetSpecialSpawnChance")
+        local _SPAWN_DIST = Hooks.FindUpvalue(_GetSpawnPoint, "SPAWN_DIST")
 
         local function SummonSpawn(pt, upgrade, radius_override)
             local x, y, z = pt:Get()
@@ -41,11 +39,11 @@ AddComponentPostInit("hounded", function(self)
                 _SPAWN_DIST = 30
             end
 
-            upvaluehelper.Set(_GetSpawnPoint, "SPAWN_DIST", _SPAWN_DIST)
-            upvaluehelper.Set(self.SetSpawnData, "_spawndata", spawndat)
+            Hooks.SetUpvalue(_GetSpawnPoint, "SPAWN_DIST", _SPAWN_DIST)
+            Hooks.SetUpvalue(self.SetSpawnData, "_spawndata", spawndat)
             return _SummonSpawn(pt, upgrade, radius_override)
         end
 
-        upvaluehelper.Set(self.SummonSpawn, "SummonSpawn", SummonSpawn)
+        Hooks.SetUpvalue(self.SummonSpawn, "SummonSpawn", SummonSpawn)
     end)
 end)

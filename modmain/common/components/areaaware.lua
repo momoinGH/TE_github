@@ -12,5 +12,5 @@ local function AreaAwareCurrentlyInTagBefore(self, tag)
 end
 
 AddComponentPostInit("areaaware", function(self)
-    Utils.FnDecorator(self, "CurrentlyInTag", AreaAwareCurrentlyInTagBefore)
+    Hooks.FnDecorator(self, "CurrentlyInTag", AreaAwareCurrentlyInTagBefore)
 end)

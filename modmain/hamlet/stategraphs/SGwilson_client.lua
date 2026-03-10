@@ -249,7 +249,7 @@ end
 ----------------------------------------------------------------------------------------------------
 
 AddStategraphPostInit("wilson_client", function(sg)
-    Utils.FnDecorator(sg.actionhandlers[ACTIONS.LIGHT], "deststate", function(inst, action)
+    Hooks.FnDecorator(sg.actionhandlers[ACTIONS.LIGHT], "deststate", function(inst, action)
         local equipped = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
         if equipped and equipped:HasTag("magnifying_glass") then
             return { "investigate" }, true

@@ -141,9 +141,9 @@ AddClassPostConstruct("widgets/mapwidget", function(self)
     self._tro_houseimags = {}
     self._tro_offset = { 0, 0 }
 
-    Utils.FnDecorator(self, "UpdateTexture", UpdateTextureBefore)
+    Hooks.FnDecorator(self, "UpdateTexture", UpdateTextureBefore)
 
-    Utils.FnDecorator(self, "OnControl", OnControlBefore)
+    Hooks.FnDecorator(self, "OnControl", OnControlBefore)
     self.SetDragPosition = SetDragPosition
     self.StartDrag = StartDrag
     self.EndDrag = EndDrag

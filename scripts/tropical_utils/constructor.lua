@@ -1,12 +1,9 @@
-
-
 local FN = {}
-local _source = debug.getinfo(1, 'S').source
 
-local Utils = require(_source:match(".*scripts[/\\](.*[/\\])") .. "utils")
+local Utils = require("tropical_utils/utils")
+local Hooks = require("tropical_utils/hooks")
 
 local env --环境变量，需要手动赋值
-
 function FN.SetEnv(newEnv)
     env = newEnv
 end
@@ -194,7 +191,7 @@ function FN.AddScrapbookWiki(type, data)
     local Widget = require "widgets/widget"
     local UIAnim = require "widgets/uianim"
     local PANEL_HEIGHT = 530
-    Utils.FnDecorator(ScrapbookScreen, "MakeSideBar", nil, function(retTab, self)
+    Hooks.FnDecorator(ScrapbookScreen, "MakeSideBar", nil, function(retTab, self)
         local colors = {
             { 114 / 255, 56 / 255, 56 / 255 },
             { 111 / 255, 85 / 255, 47 / 255 },
@@ -302,7 +299,7 @@ function FN.AddScrapbookWiki(type, data)
         MakeButton(index, button)
     end)
 
-    Utils.FnDecorator(ScrapbookScreen, "SetPlayerKnowledge", nil, function()
+    Hooks.FnDecorator(ScrapbookScreen, "SetPlayerKnowledge", nil, function()
         for _, d in pairs(data) do
             d.knownlevel = 2 --默认解锁
         end

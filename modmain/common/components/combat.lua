@@ -31,5 +31,5 @@ local function GetAttackedBefore(self, attacker, damage, weapon, ...)         --
 end
 
 AddComponentPostInit("combat", function(self, inst)
-    Utils.FnDecorator(self, "GetAttacked", GetAttackedBefore)
+    Hooks.FnDecorator(self, "GetAttacked", GetAttackedBefore)
 end)

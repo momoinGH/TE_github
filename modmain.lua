@@ -47,7 +47,6 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-modimport "modmain/dev_utils"                 --开发环境下辅助用的函数，与游戏无关
 if proisdev then
     modimport "modmain/data_validator_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end

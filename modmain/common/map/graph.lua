@@ -91,4 +91,4 @@ local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
     entities.bermudatriangle_MARKER = nil
 end
 
-Utils.FnDecorator(Graph, "GlobalPostPopulate", nil, GlobalPostPopulateAfter)
+Hooks.FnDecorator(Graph, "GlobalPostPopulate", nil, GlobalPostPopulateAfter)

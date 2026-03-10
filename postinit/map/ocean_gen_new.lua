@@ -24,11 +24,6 @@ local function is_oceanlined(tile)
 	return IsLandTile(tile) or (tile == WORLD_TILES.MANGROVE) or (tile == WORLD_TILES.LILYPOND)
 end
 
-local function is_tropical_oceanlined(tile)
-	return SW_LAND_TILES[tile] or
-		(tile == WORLD_TILES.MANGROVE)
-end
-
 local function IsWaterTile(ground)
 	return (IsOceanTile(ground) and (ground ~= WORLD_TILES.MANGROVE) and (ground ~= WORLD_TILES.LILYPOND))
 end
@@ -294,8 +289,8 @@ local function do_blend(width, height, data)
 		for x = 0, width - 1, 1 do
 			local tile = world:GetTile(x, y)
 			if IsWaterTile(tile) or tile == WORLD_TILES.IMPASSABLE then
-				local falloff = getEdgeFalloff(x, y, width, height, OCEAN_MAPWRAPPER_WARN_RANGE + 1,
-					OCEAN_MAPWRAPPER_WARN_RANGE + 5, 0.0, 1.0)
+                local falloff = getEdgeFalloff(x, y, width, height, OCEAN_MAPWRAPPER_WARN_RANGE + 1,
+                    OCEAN_MAPWRAPPER_WARN_RANGE + 5, 0.0, 1.0)
 				local ellevel = el[y * width + x]
 				local cmlevel = cm[y * width + x] * falloff
 				local glevel = g[y * width + x] * falloff

@@ -44,10 +44,10 @@ local function GetTileCenterPointBefore(self, x, y, z)
 end
 
 ---------- 根据components/deployable.lua判断需要覆盖的方法
-Utils.FnDecorator(Map, "IsAboveGroundAtPoint", CheckPointBefore)
-Utils.FnDecorator(Map, "IsPassableAtPoint", CheckPointBefore)
-Utils.FnDecorator(Map, "IsVisualGroundAtPoint", CheckPointBefore)
--- Utils.FnDecorator(Map, "CanPlantAtPoint", CheckPointBefore)             --允许房间里种植，不知道算不算超模
-Utils.FnDecorator(Map, "GetTileCenterPoint", GetTileCenterPointBefore) -------地皮中心
+Hooks.FnDecorator(Map, "IsAboveGroundAtPoint", CheckPointBefore)
+Hooks.FnDecorator(Map, "IsPassableAtPoint", CheckPointBefore)
+Hooks.FnDecorator(Map, "IsVisualGroundAtPoint", CheckPointBefore)
+-- Hooks.FnDecorator(Map, "CanPlantAtPoint", CheckPointBefore)             --允许房间里种植，不知道算不算超模
+Hooks.FnDecorator(Map, "GetTileCenterPoint", GetTileCenterPointBefore) -------地皮中心
 
 ----------------------------------------------------------------------------------------------------

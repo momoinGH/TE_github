@@ -90,3 +90,15 @@ function table.proremovearrayvalues(t, vs)
         table.proremovearrayvalue(t, v)
     end
 end
+
+----------------------------------------------------------------------------------------------------
+-- 三元运算函数，因为and or不能充当三元
+function Ternary(a, b, c)
+    if a then
+        return b
+    else
+        return c
+    end
+end
+
+GLOBAL.Ternary = Ternary

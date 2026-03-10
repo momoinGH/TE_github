@@ -102,7 +102,7 @@ end
 
 AddStategraphPostInit("wilson", function(sg)
     -- 划船
-    Utils.FnDecorator(sg.states["run_start"], "onenter", nil, function(retTab, inst)
+    Hooks.FnDecorator(sg.states["run_start"], "onenter", nil, function(retTab, inst)
         local boat = inst:TroGetSWBoat()
         if boat then
             local item = boat.components.container and boat.components.container:GetItemInSlot(1)
@@ -115,7 +115,7 @@ AddStategraphPostInit("wilson", function(sg)
         end
     end)
 
-    Utils.FnDecorator(sg.states["run"], "onenter", function(inst)
+    Hooks.FnDecorator(sg.states["run"], "onenter", function(inst)
         local boat = inst:TroGetSWBoat()
         if not boat then
             return
@@ -162,12 +162,12 @@ AddStategraphPostInit("wilson", function(sg)
     end))
     table.sort(sg.states["run"].timeline, Chronological)
 
-    Utils.FnDecorator(sg.states["run"], "onexit", function(inst)
+    Hooks.FnDecorator(sg.states["run"], "onexit", function(inst)
         inst.SoundEmitter:KillSound("sailmove")
         inst.AnimState:ClearOverrideBuild("player_actions_paddle")
     end)
 
-    Utils.FnDecorator(sg.states["run_stop"], "onenter", nil, function(retTab, inst)
+    Hooks.FnDecorator(sg.states["run_stop"], "onenter", nil, function(retTab, inst)
         local boat = inst:TroGetSWBoat()
         if boat then
             local item = boat.components.container and boat.components.container:GetItemInSlot(1)
@@ -180,7 +180,7 @@ AddStategraphPostInit("wilson", function(sg)
     end)
 
     --跳船
-    Utils.FnDecorator(sg.states["hop_pre"], "onenter", nil, function(retTab, inst)
+    Hooks.FnDecorator(sg.states["hop_pre"], "onenter", nil, function(retTab, inst)
         local act = inst:GetBufferedAction()
         if act and act.action == ACTIONS.BOATMOUNT then
             inst:PerformBufferedAction() --直接执行

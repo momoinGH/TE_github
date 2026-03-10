@@ -52,18 +52,18 @@ AddClassPostConstruct("widgets/healthbadge", function(self)
     self.poisonanim:GetAnimState():PlayAnimation("deactivate")
     self.poisonanim:Hide()
 
-    Utils.FnDecorator(self, "OnUpdate", HealthBadgeOnUpdateBefore)
+    Hooks.FnDecorator(self, "OnUpdate", HealthBadgeOnUpdateBefore)
 end)
 
 -- 中毒扣血时屏幕闪一下
 local PoisonOver = require("widgets/poisonover")
 AddClassPostConstruct("screens/playerhud", function(self)
-    Utils.FnDecorator(self, "CreateOverlays", nil, function(retTab, self, owner)
+    Hooks.FnDecorator(self, "CreateOverlays", nil, function(retTab, self, owner)
         self.poisonover = self.overlayroot:AddChild(PoisonOver(owner))
         return retTab
     end)
 
-    Utils.FnDecorator(self, "SetMainCharacter", nil, function(retTab, self, maincharacter)
+    Hooks.FnDecorator(self, "SetMainCharacter", nil, function(retTab, self, maincharacter)
         if not maincharacter then
             return retTab
         end

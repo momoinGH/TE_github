@@ -1062,8 +1062,11 @@ StateGraph = Class(function(self, name, states, events, defaultstate, actionhand
 --- RemapSoundEvent("dontstarve/characters/champion/talk_LP", "champion/champion/talk_LP")
 env.RemapSoundEvent = function(name, new_name) end
 
+KnownModIndex = {
+    IsModEnabled = function(self,modname) end, -- 判断某个mod是否启用
+}
 
--- 判断某个mod是否启用
+
 KnownModIndex:IsModEnabled("workshop-1289779251")
 
 -- 牛逼mod可能会用到的代码，版本控制
@@ -1273,9 +1276,13 @@ function RoundBiasedUp(num, idp) end
 SoundEmitter = {}
 
 function IsOceanTile(tile) end
+
 function IsLandTile(tile) end
+
 function GetOceanDepthAtPosition(x, y, z) end
+
 function GetOceanDepthAtPoint(pt) end
+
 function TintByOceanTile(inst) end
 
 TileGroupManager = {}
@@ -1292,7 +1299,6 @@ ModManager = {}
 -- => "this is my cool string, read it five times"
 function subfmt(s, tab) end
 
-
 terrain = { rooms = {}, filter = {} }
 
 
@@ -1300,8 +1306,7 @@ terrain = { rooms = {}, filter = {} }
 function SetPause(val, reason) end
 
 -- 加载预制件文件，返回文件定义的预制件对象
-function LoadPrefabFile( filename, async_batch_validation, search_asset_first_path ) end
-
+function LoadPrefabFile(filename, async_batch_validation, search_asset_first_path) end
 
 MapLayerManager = {}
 
@@ -1310,3 +1315,13 @@ function table.contains(table, element) end
 
 -- 移除数组值，这个比table.removearrayvalue强，因为这个是倒叙遍历数组
 function RemoveByValue(t, value) end
+
+Node = Class(function(self, id, data) end)
+
+function PopulateWorld_AddEntity(prefab, tile_x, tile_y, tile_value, entitiesOut, width, height, prefab_list, prefab_data, rand_offset) end
+
+
+function AddTask(name, data) end
+function AddModTask(mod, name, data) end
+
+ChangeTileRenderOrder = function(tile_id, target_tile_id, moveafter) end

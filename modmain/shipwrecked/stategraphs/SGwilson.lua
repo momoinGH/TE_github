@@ -63,7 +63,7 @@ end
 
 AddStategraphPostInit("wilson", function(sg)
     --望远镜
-    Utils.FnDecorator(sg.actionhandlers[ACTIONS.CASTSPELL], "deststate", function(inst)
+    Hooks.FnDecorator(sg.actionhandlers[ACTIONS.CASTSPELL], "deststate", function(inst)
         local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
         if item and item:HasTag("telescope") then
             return { "peertelescope" }, true

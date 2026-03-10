@@ -54,12 +54,12 @@ for _, v in ipairs({
         if not TheWorld.ismastersim then return end
 
         if inst.components.workable then
-            Utils.FnDecorator(inst.components.workable, "onfinish", OnPlayerPick)
+            Hooks.FnDecorator(inst.components.workable, "onfinish", OnPlayerPick)
         end
 
         if inst.components.pickable then
-            Utils.FnDecorator(inst.components.pickable, "onpickedfn", OnPlayerPick)
-            Utils.FnDecorator(inst.components.pickable, "ontransplantfn", nil, OnTransplantfnAfter)
+            Hooks.FnDecorator(inst.components.pickable, "onpickedfn", OnPlayerPick)
+            Hooks.FnDecorator(inst.components.pickable, "ontransplantfn", nil, OnTransplantfnAfter)
         end
     end)
 end

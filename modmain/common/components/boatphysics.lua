@@ -1,6 +1,6 @@
-local SWP_WAVEBREAK_EFFICIENCY = {  -- 破浪效率：var * 100%
+local SWP_WAVEBREAK_EFFICIENCY = { -- 破浪效率：var * 100%
     BUMPER = {
-        kelp = .6,                  -- prefab = "boat_bumper_" .. k
+        kelp = .6,                 -- prefab = "boat_bumper_" .. k
         shell = .8,
         yotd = .8,
         crabking = 1,
@@ -14,7 +14,7 @@ local SWP_WAVEBREAK_EFFICIENCY = {  -- 破浪效率：var * 100%
 }
 
 AddComponentPostInit("boatphysics", function(self, inst) -- 给船和保险杠增加破浪能力
-    Utils.FnDecorator(self, "ApplyForce", function(self, dir_x, dir_z, force)
+    Hooks.FnDecorator(self, "ApplyForce", function(self, dir_x, dir_z, force)
         if SWP_WAVEBREAK_EFFICIENCY.BOAT[self.inst.prefab] then
             force = force * math.max(1 - SWP_WAVEBREAK_EFFICIENCY.BOAT[self.inst.prefab], 0)
         end

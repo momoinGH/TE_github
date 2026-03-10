@@ -4,31 +4,37 @@ local TechTree = require("techtree")
 local IS_BETA = BRANCH == "staging" or BRANCH == "dev"
 
 PI = math.pi
-PI2 = PI*2
+PI2 = PI * 2
 TWOPI = PI2
-HALFPI = PI/2
-QUARTERPI = PI/4
-EIGHTHPI = PI/8
+HALFPI = PI / 2
+QUARTERPI = PI / 4
+EIGHTHPI = PI / 8
 SQRT2 = math.sqrt(2)
 GOLDENANGLE = PI * (3 - math.sqrt(5))
-DEGREES = PI/180
-RADIANS = 180/PI
-FRAMES = 1/30
+DEGREES = PI / 180
+RADIANS = 180 / PI
+FRAMES = 1 / 30
 TILE_SCALE = 4
 MAXUINT = 4294967295
 
 RESOLUTION_X = 1280
 RESOLUTION_Y = 720
 
-PLAYER_REVEAL_RADIUS = 30.0 -- NOTES(JBK): Keep in sync with MiniMapRenderer.cpp!
+PLAYER_REVEAL_RADIUS = 30.0                                                                                     -- NOTES(JBK): Keep in sync with MiniMapRenderer.cpp!
 PLAYER_REVEAL_RADIUS_SQ = PLAYER_REVEAL_RADIUS * PLAYER_REVEAL_RADIUS
-PLAYER_CAMERA_SEE_DISTANCE = 40.0 -- NOTES(JBK): Based off of an approximation of the maximum default camera distance before seeing clouds and is the screen diagonal.
-PLAYER_CAMERA_SEE_DISTANCE_SQ = PLAYER_CAMERA_SEE_DISTANCE * PLAYER_CAMERA_SEE_DISTANCE -- Helper.
-PLAYER_CAMERA_SHOULD_SNAP_DISTANCE = 20.0 -- NOTES(JBK): This is an approximate distance traveled where the camera should snap and fade out to not cause disorientations.
+PLAYER_CAMERA_SEE_DISTANCE = 40.0                                                                               -- NOTES(JBK): Based off of an approximation of the maximum default camera distance before seeing clouds and is the screen diagonal.
+PLAYER_CAMERA_SEE_DISTANCE_SQ = PLAYER_CAMERA_SEE_DISTANCE * PLAYER_CAMERA_SEE_DISTANCE                         -- Helper.
+PLAYER_CAMERA_SHOULD_SNAP_DISTANCE = 20.0                                                                       -- NOTES(JBK): This is an approximate distance traveled where the camera should snap and fade out to not cause disorientations.
 PLAYER_CAMERA_SHOULD_SNAP_DISTANCE_SQ = PLAYER_CAMERA_SHOULD_SNAP_DISTANCE * PLAYER_CAMERA_SHOULD_SNAP_DISTANCE -- Helper.
 --NOTE if we ever have other ways of increasing camera in-game, increase this!
-PLAYER_CAMERA_MAX_DIST = 65 -- 50 maxdist in forest world + 15 maxdist from scrap_monoclehat
-PLAYER_CAMERA_MAX_DIST_CAVES = 50 -- 35 maxdist in caves world + 15 maxdist from scrap_monoclehat
+PLAYER_CAMERA_MAX_DIST = 65                                                                                     -- 50 maxdist in forest world + 15 maxdist from scrap_monoclehat
+PLAYER_CAMERA_MAX_DIST_CAVES = 50                                                                               -- 35 maxdist in caves world + 15 maxdist from scrap_monoclehat
+
+ENTITY_POPIN_RADIUS = 64.0                                                                                      -- Read only value.
+ENTITY_POPOUT_RADIUS = ENTITY_POPIN_RADIUS * 1.2                                                                -- Read only value.
+
+ENTITY_POPIN_RADIUS_SQ = ENTITY_POPIN_RADIUS * ENTITY_POPIN_RADIUS
+ENTITY_POPOUT_RADIUS_SQ = ENTITY_POPOUT_RADIUS * ENTITY_POPOUT_RADIUS
 
 MAX_FE_SCALE = 3 --Default if you don't call SetMaxPropUpscale
 MAX_HUD_SCALE = 1.25
@@ -72,15 +78,15 @@ ANCHOR_TOP = 1
 ANCHOR_BOTTOM = 2
 
 SCALEMODE_NONE = 0
-SCALEMODE_FILLSCREEN = 1 --stretch art to fit/fill window
-SCALEMODE_PROPORTIONAL = 2 --preserve aspect ratio (picks the smaller of horizontal/vertical scale)
-SCALEMODE_FIXEDPROPORTIONAL = 3 --same as SCALEMODE_FIXEDSCREEN_NONDYNAMIC, except for safe area on consoles
+SCALEMODE_FILLSCREEN = 1             --stretch art to fit/fill window
+SCALEMODE_PROPORTIONAL = 2           --preserve aspect ratio (picks the smaller of horizontal/vertical scale)
+SCALEMODE_FIXEDPROPORTIONAL = 3      --same as SCALEMODE_FIXEDSCREEN_NONDYNAMIC, except for safe area on consoles
 SCALEMODE_FIXEDSCREEN_NONDYNAMIC = 4 --scale same amount as window scaling from 1280x720
 
 PHYSICS_TYPE_ANIMATION_CONTROLLED = 0
 PHYSICS_TYPE_PHYSICS_CONTROLLED = 1
 
-ALT_RENDERPATH = 1	-- You should really not use this unless you know what it is and how it works. Otherwise it can crash things, consume lots of memory, reduce performance, you name it.
+ALT_RENDERPATH = 1 -- You should really not use this unless you know what it is and how it works. Otherwise it can crash things, consume lots of memory, reduce performance, you name it.
 
 MOVE_UP = 1
 MOVE_DOWN = 2
@@ -104,289 +110,289 @@ CONTROL_INSPECT = 3
 CONTROL_ACTION = 4
 
 -- player movement controls
-CONTROL_MOVE_UP = 5  -- left joystick up
-CONTROL_MOVE_DOWN = 6 -- left joystick down
-CONTROL_MOVE_LEFT = 7 -- left joystick left
+CONTROL_MOVE_UP = 5    -- left joystick up
+CONTROL_MOVE_DOWN = 6  -- left joystick down
+CONTROL_MOVE_LEFT = 7  -- left joystick left
 CONTROL_MOVE_RIGHT = 8 -- left joystick right
 
 -- view controls
-CONTROL_ZOOM_IN = 9      -- left trigger
-CONTROL_ZOOM_OUT = 10    -- right trigger
+CONTROL_ZOOM_IN = 9       -- left trigger
+CONTROL_ZOOM_OUT = 10     -- right trigger
 CONTROL_ROTATE_LEFT = 11  -- left shoulder
 CONTROL_ROTATE_RIGHT = 12 -- right shoulder
 
 
 -- player movement controls
-CONTROL_PAUSE = 13  -- start
-CONTROL_MAP = 14
-CONTROL_INV_1 = 15
-CONTROL_INV_2 = 16
-CONTROL_INV_3 = 17
-CONTROL_INV_4 = 18
-CONTROL_INV_5 = 19
-CONTROL_INV_6 = 20
-CONTROL_INV_7 = 21
-CONTROL_INV_8 = 22
-CONTROL_INV_9 = 23
-CONTROL_INV_10 = 24
+CONTROL_PAUSE                          = 13 -- start
+CONTROL_MAP                            = 14
+CONTROL_INV_1                          = 15
+CONTROL_INV_2                          = 16
+CONTROL_INV_3                          = 17
+CONTROL_INV_4                          = 18
+CONTROL_INV_5                          = 19
+CONTROL_INV_6                          = 20
+CONTROL_INV_7                          = 21
+CONTROL_INV_8                          = 22
+CONTROL_INV_9                          = 23
+CONTROL_INV_10                         = 24
 
-CONTROL_FOCUS_UP = 25  -- d-pad up
-CONTROL_FOCUS_DOWN = 26  -- d-pad down
-CONTROL_FOCUS_LEFT = 27 -- d-pad left
-CONTROL_FOCUS_RIGHT = 28 -- d-pad right
+CONTROL_FOCUS_UP                       = 25 -- d-pad up
+CONTROL_FOCUS_DOWN                     = 26 -- d-pad down
+CONTROL_FOCUS_LEFT                     = 27 -- d-pad left
+CONTROL_FOCUS_RIGHT                    = 28 -- d-pad right
 
-CONTROL_ACCEPT = 29  -- A
-CONTROL_CANCEL = 30 -- B
-CONTROL_SCROLLBACK = 31  -- left shoulder
-CONTROL_SCROLLFWD = 32   -- right shoulder
+CONTROL_ACCEPT                         = 29 -- A
+CONTROL_CANCEL                         = 30 -- B
+CONTROL_SCROLLBACK                     = 31 -- left shoulder
+CONTROL_SCROLLFWD                      = 32 -- right shoulder
 
-CONTROL_PREVVALUE = 33
-CONTROL_NEXTVALUE = 34
+CONTROL_PREVVALUE                      = 33
+CONTROL_NEXTVALUE                      = 34
 
-CONTROL_SPLITSTACK = 35
-CONTROL_TRADEITEM = 36
-CONTROL_TRADESTACK = 37
-CONTROL_FORCE_INSPECT = 38
-CONTROL_FORCE_ATTACK = 39
-CONTROL_FORCE_TRADE = 40
-CONTROL_FORCE_STACK = 41
+CONTROL_SPLITSTACK                     = 35
+CONTROL_TRADEITEM                      = 36
+CONTROL_TRADESTACK                     = 37
+CONTROL_FORCE_INSPECT                  = 38
+CONTROL_FORCE_ATTACK                   = 39
+CONTROL_FORCE_TRADE                    = 40
+CONTROL_FORCE_STACK                    = 41
 
-CONTROL_OPEN_DEBUG_CONSOLE = 42
-CONTROL_TOGGLE_LOG = 43
-CONTROL_TOGGLE_DEBUGRENDER = 44
+CONTROL_OPEN_DEBUG_CONSOLE             = 42
+CONTROL_TOGGLE_LOG                     = 43
+CONTROL_TOGGLE_DEBUGRENDER             = 44
 
-CONTROL_OPEN_INVENTORY = 45  -- right trigger
-CONTROL_OPEN_CRAFTING = 46   -- left trigger
-CONTROL_INVENTORY_LEFT = 47 -- right joystick left
-CONTROL_INVENTORY_RIGHT = 48 -- right joystick right
-CONTROL_INVENTORY_UP = 49 --  right joystick up
-CONTROL_INVENTORY_DOWN = 50 -- right joystick down
-CONTROL_INVENTORY_EXAMINE = 51 -- d-pad up
-CONTROL_INVENTORY_USEONSELF = 52 -- d-pad right
-CONTROL_INVENTORY_USEONSCENE = 53 -- d-pad left
-CONTROL_INVENTORY_DROP = 54 -- d-pad down
-CONTROL_PUTSTACK = 55
-CONTROL_CONTROLLER_ATTACK = 56 -- X on xbox controller
-CONTROL_CONTROLLER_ACTION = 57 -- A
-CONTROL_CONTROLLER_ALTACTION = 58 -- B
-CONTROL_USE_ITEM_ON_ITEM = 59
+CONTROL_OPEN_INVENTORY                 = 45 -- right trigger
+CONTROL_OPEN_CRAFTING                  = 46 -- left trigger
+CONTROL_INVENTORY_LEFT                 = 47 -- right joystick left
+CONTROL_INVENTORY_RIGHT                = 48 -- right joystick right
+CONTROL_INVENTORY_UP                   = 49 --  right joystick up
+CONTROL_INVENTORY_DOWN                 = 50 -- right joystick down
+CONTROL_INVENTORY_EXAMINE              = 51 -- d-pad up
+CONTROL_INVENTORY_USEONSELF            = 52 -- d-pad right
+CONTROL_INVENTORY_USEONSCENE           = 53 -- d-pad left
+CONTROL_INVENTORY_DROP                 = 54 -- d-pad down
+CONTROL_PUTSTACK                       = 55
+CONTROL_CONTROLLER_ATTACK              = 56 -- X on xbox controller
+CONTROL_CONTROLLER_ACTION              = 57 -- A
+CONTROL_CONTROLLER_ALTACTION           = 58 -- B
+CONTROL_USE_ITEM_ON_ITEM               = 59
 
-CONTROL_MAP_ZOOM_IN = 60
-CONTROL_MAP_ZOOM_OUT = 61
+CONTROL_MAP_ZOOM_IN                    = 60
+CONTROL_MAP_ZOOM_OUT                   = 61
 
-CONTROL_OPEN_DEBUG_MENU = IsConsole() and 70 or -1 --62 steam deck is 70
+CONTROL_OPEN_DEBUG_MENU                = IsConsole() and 70 or -1 --62 steam deck is 70
 
-CONTROL_TOGGLE_SAY = 63
-CONTROL_TOGGLE_WHISPER = 64
-CONTROL_TOGGLE_SLASH_COMMAND = 65
-CONTROL_TOGGLE_PLAYER_STATUS = 66 -- Deprecated for CONTROL_OPEN_COMMAND_WHEEL.
-CONTROL_SHOW_PLAYER_STATUS = 67
+CONTROL_TOGGLE_SAY                     = 63
+CONTROL_TOGGLE_WHISPER                 = 64
+CONTROL_TOGGLE_SLASH_COMMAND           = 65
+CONTROL_TOGGLE_PLAYER_STATUS           = 66 -- Deprecated for CONTROL_OPEN_COMMAND_WHEEL.
+CONTROL_SHOW_PLAYER_STATUS             = 67
 
-CONTROL_MENU_MISC_1 = 68  -- X
-CONTROL_MENU_MISC_2 = 69  -- Y
-CONTROL_MENU_MISC_3 = 70  -- L
-CONTROL_MENU_MISC_4 = 71  -- R
+CONTROL_MENU_MISC_1                    = 68 -- X
+CONTROL_MENU_MISC_2                    = 69 -- Y
+CONTROL_MENU_MISC_3                    = 70 -- L
+CONTROL_MENU_MISC_4                    = 71 -- R
 
-CONTROL_INSPECT_SELF = 72 -- Keyboard self inspect [I]
+CONTROL_INSPECT_SELF                   = 72 -- Keyboard self inspect [I]
 
-CONTROL_SERVER_PAUSE = 73
+CONTROL_SERVER_PAUSE                   = 73
 
-CONTROL_CRAFTING_MODIFIER = 74		-- this + CONTROL_OPEN_CRAFTING to open with the search box ready to type in
-CONTROL_CRAFTING_PINLEFT = 75
-CONTROL_CRAFTING_PINRIGHT = 76
+CONTROL_CRAFTING_MODIFIER              = 74 -- this + CONTROL_OPEN_CRAFTING to open with the search box ready to type in
+CONTROL_CRAFTING_PINLEFT               = 75
+CONTROL_CRAFTING_PINRIGHT              = 76
 
-CONTROL_INV_11 = 77 -- Sequence ordering difference but makes backwards compatability easier.
-CONTROL_INV_12 = 78
-CONTROL_INV_13 = 79
-CONTROL_INV_14 = 80
-CONTROL_INV_15 = 81
+CONTROL_INV_11                         = 77 -- Sequence ordering difference but makes backwards compatability easier.
+CONTROL_INV_12                         = 78
+CONTROL_INV_13                         = 79
+CONTROL_INV_14                         = 80
+CONTROL_INV_15                         = 81
 
-CONTROL_START_EMOJI = 82
+CONTROL_START_EMOJI                    = 82
 
 -- extra menu controls that should have been above but it's too late to add them now
-CONTROL_MENU_BACK = 83
-CONTROL_MENU_START = 84
-CONTROL_MENU_L2 = 85
-CONTROL_MENU_R2 = 86
+CONTROL_MENU_BACK                      = 83
+CONTROL_MENU_START                     = 84
+CONTROL_MENU_L2                        = 85
+CONTROL_MENU_R2                        = 86
 
-CONTROL_OPEN_COMMAND_WHEEL = 87
+CONTROL_OPEN_COMMAND_WHEEL             = 87
 
 -- controller targetting
-CONTROL_TARGET_LOCK = 88
-CONTROL_TARGET_CYCLE = 89
+CONTROL_TARGET_LOCK                    = 88
+CONTROL_TARGET_CYCLE                   = 89
 
-CONTROL_CAM_AND_INV_MODIFIER = 90
-CONTROL_CHARACTER_COMMAND_WHEEL = 91
+CONTROL_CAM_AND_INV_MODIFIER           = 90
+CONTROL_CHARACTER_COMMAND_WHEEL        = 91
 
 --Preset directional controls (used with CameraModifier) (cannot be remapped)
-CONTROL_PRESET_RSTICK_UP = 92
-CONTROL_PRESET_RSTICK_DOWN = 93
-CONTROL_PRESET_RSTICK_LEFT = 94
-CONTROL_PRESET_RSTICK_RIGHT = 95
-CONTROL_PRESET_DPAD_UP = 96
-CONTROL_PRESET_DPAD_DOWN = 97
-CONTROL_PRESET_DPAD_LEFT = 98
-CONTROL_PRESET_DPAD_RIGHT = 99
+CONTROL_PRESET_RSTICK_UP               = 92
+CONTROL_PRESET_RSTICK_DOWN             = 93
+CONTROL_PRESET_RSTICK_LEFT             = 94
+CONTROL_PRESET_RSTICK_RIGHT            = 95
+CONTROL_PRESET_DPAD_UP                 = 96
+CONTROL_PRESET_DPAD_DOWN               = 97
+CONTROL_PRESET_DPAD_LEFT               = 98
+CONTROL_PRESET_DPAD_RIGHT              = 99
 
 CONTROL_AXISALIGNEDPLACEMENT_TOGGLEMOD = 100
 CONTROL_AXISALIGNEDPLACEMENT_CYCLEGRID = 101
 
-CONTROL_CUSTOM_START = 102 -- NOTES(JBK): This might not be used for anything keep it above our last control in case mods are using it for something.
+CONTROL_CUSTOM_START                   = 102 -- NOTES(JBK): This might not be used for anything keep it above our last control in case mods are using it for something.
 
 -- virtual controls
-VIRTUAL_CONTROL_START = 10000
+VIRTUAL_CONTROL_START                  = 10000
 
 -- Used in conjunction with CONTROL_CAM_AND_INV_MODIFIER and CONTROL_SCHEME_CAM_AND_INV
 --NOTE: these must be listed in order: up, down, left, right
-VIRTUAL_CONTROL_CAMERA_ZOOM_IN = 10001
-VIRTUAL_CONTROL_CAMERA_ZOOM_OUT = 10002
-VIRTUAL_CONTROL_CAMERA_ROTATE_LEFT = 10003
-VIRTUAL_CONTROL_CAMERA_ROTATE_RIGHT = 10004
+VIRTUAL_CONTROL_CAMERA_ZOOM_IN         = 10001
+VIRTUAL_CONTROL_CAMERA_ZOOM_OUT        = 10002
+VIRTUAL_CONTROL_CAMERA_ROTATE_LEFT     = 10003
+VIRTUAL_CONTROL_CAMERA_ROTATE_RIGHT    = 10004
 --
-VIRTUAL_CONTROL_AIM_UP = 10005
-VIRTUAL_CONTROL_AIM_DOWN = 10006
-VIRTUAL_CONTROL_AIM_LEFT = 10007
-VIRTUAL_CONTROL_AIM_RIGHT = 10008
+VIRTUAL_CONTROL_AIM_UP                 = 10005
+VIRTUAL_CONTROL_AIM_DOWN               = 10006
+VIRTUAL_CONTROL_AIM_LEFT               = 10007
+VIRTUAL_CONTROL_AIM_RIGHT              = 10008
 --
-VIRTUAL_CONTROL_INV_UP = 10009
-VIRTUAL_CONTROL_INV_DOWN = 10010
-VIRTUAL_CONTROL_INV_LEFT = 10011
-VIRTUAL_CONTROL_INV_RIGHT = 10012
+VIRTUAL_CONTROL_INV_UP                 = 10009
+VIRTUAL_CONTROL_INV_DOWN               = 10010
+VIRTUAL_CONTROL_INV_LEFT               = 10011
+VIRTUAL_CONTROL_INV_RIGHT              = 10012
 --
-VIRTUAL_CONTROL_INV_ACTION_UP = 10013
-VIRTUAL_CONTROL_INV_ACTION_DOWN = 10014
-VIRTUAL_CONTROL_INV_ACTION_LEFT = 10015
-VIRTUAL_CONTROL_INV_ACTION_RIGHT = 10016
+VIRTUAL_CONTROL_INV_ACTION_UP          = 10013
+VIRTUAL_CONTROL_INV_ACTION_DOWN        = 10014
+VIRTUAL_CONTROL_INV_ACTION_LEFT        = 10015
+VIRTUAL_CONTROL_INV_ACTION_RIGHT       = 10016
 --
-VIRTUAL_CONTROL_STRAFE_UP = 10017
-VIRTUAL_CONTROL_STRAFE_DOWN = 10018
-VIRTUAL_CONTROL_STRAFE_LEFT = 10019
-VIRTUAL_CONTROL_STRAFE_RIGHT = 10020
+VIRTUAL_CONTROL_STRAFE_UP              = 10017
+VIRTUAL_CONTROL_STRAFE_DOWN            = 10018
+VIRTUAL_CONTROL_STRAFE_LEFT            = 10019
+VIRTUAL_CONTROL_STRAFE_RIGHT           = 10020
 --
 
 -- Control Schemes:
 -- Must match STRINGS.UI.CONTROLSSCREEN.SCHEMES
 
-CONTROL_SCHEME_CAM_AND_INV = 1
+CONTROL_SCHEME_CAM_AND_INV             = 1
 
-XBOX_CONTROLLER_ID = 17
+XBOX_CONTROLLER_ID                     = 17
 
 -- a constant used in place of hardcoding the CONTROL_ for the skin presets popup. This is overridden to a different CONTROL_ in the console branch (currently CONTROL_MENU_L2)
-CONTROL_SKIN_PRESETS = CONTROL_MENU_MISC_1
+CONTROL_SKIN_PRESETS                   = CONTROL_MENU_MISC_1
 
-KEY_TAB = 9
-KEY_KP_0			= 256
-KEY_KP_1			= 257
-KEY_KP_2			= 258
-KEY_KP_3			= 259
-KEY_KP_4			= 260
-KEY_KP_5			= 261
-KEY_KP_6			= 262
-KEY_KP_7			= 263
-KEY_KP_8			= 264
-KEY_KP_9			= 265
-KEY_KP_PERIOD		= 266
-KEY_KP_DIVIDE		= 267
-KEY_KP_MULTIPLY		= 268
-KEY_KP_MINUS		= 269
-KEY_KP_PLUS			= 270
-KEY_KP_ENTER		= 271
-KEY_KP_EQUALS		= 272
-KEY_MINUS = 45
-KEY_EQUALS = 61
-KEY_SPACE = 32
-KEY_ENTER = 13
-KEY_ESCAPE = 27
-KEY_HOME = 278
-KEY_INSERT = 277
-KEY_DELETE = 127
-KEY_END    = 279
-KEY_PAUSE = 19
-KEY_PRINT = 316
-KEY_CAPSLOCK = 301
-KEY_SCROLLOCK = 302
-KEY_RSHIFT = 303 -- use KEY_SHIFT instead
-KEY_LSHIFT = 304 -- use KEY_SHIFT instead
-KEY_RCTRL = 305 -- use KEY_CTRL instead
-KEY_LCTRL = 306 -- use KEY_CTRL instead
-KEY_RALT = 307 -- use KEY_ALT instead
-KEY_LALT = 308 -- use KEY_ALT instead
-KEY_LSUPER = 311
-KEY_RSUPER = 312
-KEY_ALT = 400
-KEY_CTRL = 401
-KEY_SHIFT = 402
-KEY_BACKSPACE = 8
-KEY_PERIOD = 46
-KEY_SLASH = 47
-KEY_SEMICOLON = 59
-KEY_LEFTBRACKET	= 91
-KEY_BACKSLASH	= 92
-KEY_RIGHTBRACKET= 93
-KEY_TILDE = 96
-KEY_A = 97
-KEY_B = 98
-KEY_C = 99
-KEY_D = 100
-KEY_E = 101
-KEY_F = 102
-KEY_G = 103
-KEY_H = 104
-KEY_I = 105
-KEY_J = 106
-KEY_K = 107
-KEY_L = 108
-KEY_M = 109
-KEY_N = 110
-KEY_O = 111
-KEY_P = 112
-KEY_Q = 113
-KEY_R = 114
-KEY_S = 115
-KEY_T = 116
-KEY_U = 117
-KEY_V = 118
-KEY_W = 119
-KEY_X = 120
-KEY_Y = 121
-KEY_Z = 122
-KEY_F1 = 282
-KEY_F2 = 283
-KEY_F3 = 284
-KEY_F4 = 285
-KEY_F5 = 286
-KEY_F6 = 287
-KEY_F7 = 288
-KEY_F8 = 289
-KEY_F9 = 290
-KEY_F10 = 291
-KEY_F11 = 292
-KEY_F12 = 293
+KEY_TAB                                = 9
+KEY_KP_0                               = 256
+KEY_KP_1                               = 257
+KEY_KP_2                               = 258
+KEY_KP_3                               = 259
+KEY_KP_4                               = 260
+KEY_KP_5                               = 261
+KEY_KP_6                               = 262
+KEY_KP_7                               = 263
+KEY_KP_8                               = 264
+KEY_KP_9                               = 265
+KEY_KP_PERIOD                          = 266
+KEY_KP_DIVIDE                          = 267
+KEY_KP_MULTIPLY                        = 268
+KEY_KP_MINUS                           = 269
+KEY_KP_PLUS                            = 270
+KEY_KP_ENTER                           = 271
+KEY_KP_EQUALS                          = 272
+KEY_MINUS                              = 45
+KEY_EQUALS                             = 61
+KEY_SPACE                              = 32
+KEY_ENTER                              = 13
+KEY_ESCAPE                             = 27
+KEY_HOME                               = 278
+KEY_INSERT                             = 277
+KEY_DELETE                             = 127
+KEY_END                                = 279
+KEY_PAUSE                              = 19
+KEY_PRINT                              = 316
+KEY_CAPSLOCK                           = 301
+KEY_SCROLLOCK                          = 302
+KEY_RSHIFT                             = 303 -- use KEY_SHIFT instead
+KEY_LSHIFT                             = 304 -- use KEY_SHIFT instead
+KEY_RCTRL                              = 305 -- use KEY_CTRL instead
+KEY_LCTRL                              = 306 -- use KEY_CTRL instead
+KEY_RALT                               = 307 -- use KEY_ALT instead
+KEY_LALT                               = 308 -- use KEY_ALT instead
+KEY_LSUPER                             = 311
+KEY_RSUPER                             = 312
+KEY_ALT                                = 400
+KEY_CTRL                               = 401
+KEY_SHIFT                              = 402
+KEY_BACKSPACE                          = 8
+KEY_PERIOD                             = 46
+KEY_SLASH                              = 47
+KEY_SEMICOLON                          = 59
+KEY_LEFTBRACKET                        = 91
+KEY_BACKSLASH                          = 92
+KEY_RIGHTBRACKET                       = 93
+KEY_TILDE                              = 96
+KEY_A                                  = 97
+KEY_B                                  = 98
+KEY_C                                  = 99
+KEY_D                                  = 100
+KEY_E                                  = 101
+KEY_F                                  = 102
+KEY_G                                  = 103
+KEY_H                                  = 104
+KEY_I                                  = 105
+KEY_J                                  = 106
+KEY_K                                  = 107
+KEY_L                                  = 108
+KEY_M                                  = 109
+KEY_N                                  = 110
+KEY_O                                  = 111
+KEY_P                                  = 112
+KEY_Q                                  = 113
+KEY_R                                  = 114
+KEY_S                                  = 115
+KEY_T                                  = 116
+KEY_U                                  = 117
+KEY_V                                  = 118
+KEY_W                                  = 119
+KEY_X                                  = 120
+KEY_Y                                  = 121
+KEY_Z                                  = 122
+KEY_F1                                 = 282
+KEY_F2                                 = 283
+KEY_F3                                 = 284
+KEY_F4                                 = 285
+KEY_F5                                 = 286
+KEY_F6                                 = 287
+KEY_F7                                 = 288
+KEY_F8                                 = 289
+KEY_F9                                 = 290
+KEY_F10                                = 291
+KEY_F11                                = 292
+KEY_F12                                = 293
 
-KEY_UP			= 273
-KEY_DOWN		= 274
-KEY_RIGHT		= 275
-KEY_LEFT		= 276
-KEY_PAGEUP		= 280
-KEY_PAGEDOWN	= 281
+KEY_UP                                 = 273
+KEY_DOWN                               = 274
+KEY_RIGHT                              = 275
+KEY_LEFT                               = 276
+KEY_PAGEUP                             = 280
+KEY_PAGEDOWN                           = 281
 
-KEY_0 = 48
-KEY_1 = 49
-KEY_2 = 50
-KEY_3 = 51
-KEY_4 = 52
-KEY_5 = 53
-KEY_6 = 54
-KEY_7 = 55
-KEY_8 = 56
-KEY_9 = 57
+KEY_0                                  = 48
+KEY_1                                  = 49
+KEY_2                                  = 50
+KEY_3                                  = 51
+KEY_4                                  = 52
+KEY_5                                  = 53
+KEY_6                                  = 54
+KEY_7                                  = 55
+KEY_8                                  = 56
+KEY_9                                  = 57
 
 -- DO NOT use these for gameplay!
-MOUSEBUTTON_LEFT = 1000
-MOUSEBUTTON_RIGHT = 1001
-MOUSEBUTTON_MIDDLE = 1002
-MOUSEBUTTON_SCROLLUP = 1003
-MOUSEBUTTON_SCROLLDOWN = 1004
+MOUSEBUTTON_LEFT                       = 1000
+MOUSEBUTTON_RIGHT                      = 1001
+MOUSEBUTTON_MIDDLE                     = 1002
+MOUSEBUTTON_SCROLLUP                   = 1003
+MOUSEBUTTON_SCROLLDOWN                 = 1004
 
 
 GESTURE_ZOOM_IN = 900
@@ -397,9 +403,9 @@ GESTURE_MAX = 904
 
 SCREEN_FLASH_SCALING =
 {
-	0.9, -- default
-	0.6, -- dim
-	0.3, -- dimmest
+    0.9, -- default
+    0.6, -- dim
+    0.3, -- dimmest
 }
 
 BACKEND_PREFABS = { "forest", "cave", "lavaarena", "quagmire" }
@@ -461,33 +467,33 @@ SEAMLESSSWAP_CHARACTERLIST =
 
 CHARACTER_VIDEOS =
 {
-	wilson = {"https://bit.ly/3w9VYcN"},
-	willow = {"https://bit.ly/3rFOkU3"},
-	wendy = {"https://bit.ly/3fI3PbR"},
-	wolfgang = {"https://klei.gg/33A9mNx"},
-	wx78 = {"https://klei.gg/3F9qqc1"},
-	wickerbottom = {"https://klei.gg/3bCaOTL"},
-	wes = {"https://bit.ly/2QLFpn4"},
-	waxwell = {"https://klei.gg/3AHfLEb"},
-	woodie = {"https://bit.ly/3sHhUK1"},
-	wathgrithr = {"https://bit.ly/3rC8YV6"},
-	webber = {"https://klei.gg/3zXJrLt"},
-	winona = {"https://bit.ly/3fB6LHb"},
-    wortox = {"https://bit.ly/3cBQ10g"},
-    wormwood = {"https://bit.ly/3cBilQq"},
-    warly = {"https://bit.ly/39vp0tG"},
-    wurt = {"https://bit.ly/2QVJup1"},
-	walter = {"https://bit.ly/31Ajrpj"},
-	wanda = {"https://klei.gg/dst-wanda-short"},
+    wilson = { "https://bit.ly/3w9VYcN" },
+    willow = { "https://bit.ly/3rFOkU3" },
+    wendy = { "https://bit.ly/3fI3PbR" },
+    wolfgang = { "https://klei.gg/33A9mNx" },
+    wx78 = { "https://klei.gg/3F9qqc1" },
+    wickerbottom = { "https://klei.gg/3bCaOTL" },
+    wes = { "https://bit.ly/2QLFpn4" },
+    waxwell = { "https://klei.gg/3AHfLEb" },
+    woodie = { "https://bit.ly/3sHhUK1" },
+    wathgrithr = { "https://bit.ly/3rC8YV6" },
+    webber = { "https://klei.gg/3zXJrLt" },
+    winona = { "https://bit.ly/3fB6LHb" },
+    wortox = { "https://bit.ly/3cBQ10g" },
+    wormwood = { "https://bit.ly/3cBilQq" },
+    warly = { "https://bit.ly/39vp0tG" },
+    wurt = { "https://bit.ly/2QVJup1" },
+    walter = { "https://bit.ly/31Ajrpj" },
+    wanda = { "https://klei.gg/dst-wanda-short" },
 }
 
 PLAYER_SWAP_TRANSITIONS =
 {
-	wonkey =
-	{
-		transfrom_state = "changetomonkey_pst",
-		restore_state = "changefrommonkey_pst",
-	},
+    wonkey =
+    {
+        transfrom_state = "changetomonkey_pst",
+        restore_state = "changefrommonkey_pst",
+    },
 }
 
 require("prefabskins")
@@ -632,7 +638,7 @@ CHARACTER_GENDERS =
         "pyro",
     },
     NEUTRAL = {}, --empty, for modders to add to
-    PLURAL = {}, --empty, for modders to add to
+    PLURAL = {},  --empty, for modders to add to
 }
 
 MODCHARACTERMODES = {} --empty, for modders to add to
@@ -671,22 +677,22 @@ OCEAN_DEPTH =
 --this table is deprecated, nothing should add into this table, or reference this table at all.
 GROUND =
 {
-	INVALID = 65535,
+    INVALID = 65535,
     IMPASSABLE = 1,
     ROAD = 2,
     ROCKY = 3,
     DIRT = 4,
-	SAVANNA = 5,
-	GRASS = 6,
-	FOREST = 7,
-	MARSH = 8,
-	WEB = 9,
-	WOODFLOOR = 10,
-	CARPET = 11,
-	CHECKER = 12,
-	CAVE = 13,
-	FUNGUS = 14,
-	SINKHOLE = 15,
+    SAVANNA = 5,
+    GRASS = 6,
+    FOREST = 7,
+    MARSH = 8,
+    WEB = 9,
+    WOODFLOOR = 10,
+    CARPET = 11,
+    CHECKER = 12,
+    CAVE = 13,
+    FUNGUS = 14,
+    SINKHOLE = 15,
     UNDERROCK = 16,
     MUD = 17,
     BRICK = 18,
@@ -695,58 +701,58 @@ GROUND =
     TILES_GLOW = 21,
     TRIM = 22,
     TRIM_GLOW = 23,
-	FUNGUSRED = 24,
-	FUNGUSGREEN = 25,
-	DECIDUOUS = 30,
-	DESERT_DIRT = 31,
-	SCALE = 32,
-	LAVAARENA_FLOOR = 33,
-	LAVAARENA_TRIM = 34,
-	QUAGMIRE_PEATFOREST = 35,
-	QUAGMIRE_PARKFIELD = 36,
-	QUAGMIRE_PARKSTONE = 37,
-	QUAGMIRE_GATEWAY = 38,
-	QUAGMIRE_SOIL = 39,
-	QUAGMIRE_CITYSTONE = 41,
-	PEBBLEBEACH = 42,
-	METEOR = 43,
+    FUNGUSRED = 24,
+    FUNGUSGREEN = 25,
+    DECIDUOUS = 30,
+    DESERT_DIRT = 31,
+    SCALE = 32,
+    LAVAARENA_FLOOR = 33,
+    LAVAARENA_TRIM = 34,
+    QUAGMIRE_PEATFOREST = 35,
+    QUAGMIRE_PARKFIELD = 36,
+    QUAGMIRE_PARKSTONE = 37,
+    QUAGMIRE_GATEWAY = 38,
+    QUAGMIRE_SOIL = 39,
+    QUAGMIRE_CITYSTONE = 41,
+    PEBBLEBEACH = 42,
+    METEOR = 43,
     SHELLBEACH = 44,
     ARCHIVE = 45,
     FUNGUSMOON = 46,
     FARMING_SOIL = 47,
-	FUNGUSMOON_NOISE = 120,
-	METEORMINE_NOISE = 121,
-	METEORCOAST_NOISE = 122,
+    FUNGUSMOON_NOISE = 120,
+    METEORMINE_NOISE = 121,
+    METEORCOAST_NOISE = 122,
     DIRT_NOISE = 123,
-	ABYSS_NOISE = 124,
-	GROUND_NOISE = 125,
-	CAVE_NOISE = 126,
-	FUNGUS_NOISE = 127,
-	UNDERGROUND = 128,
-	WALL_ROCKY = 151,
-	WALL_DIRT = 152,
-	WALL_MARSH = 153,
-	WALL_CAVE = 154,
-	WALL_FUNGUS = 155,
-	WALL_SINKHOLE = 156,
-	WALL_MUD = 157,
-	WALL_TOP = 158,
-	WALL_WOOD = 159,
-	WALL_HUNESTONE = 160,
-	WALL_HUNESTONE_GLOW = 161,
-	WALL_STONEEYE = 162,
-	WALL_STONEEYE_GLOW = 163,
-	FAKE_GROUND = 200,
-	OCEAN_START = 201,
-	OCEAN_COASTAL = 201,
-	OCEAN_COASTAL_SHORE = 202,
-	OCEAN_SWELL = 203,
-	OCEAN_ROUGH = 204,
-	OCEAN_BRINEPOOL = 205,
-	OCEAN_BRINEPOOL_SHORE = 206,
-	OCEAN_HAZARDOUS = 207,
+    ABYSS_NOISE = 124,
+    GROUND_NOISE = 125,
+    CAVE_NOISE = 126,
+    FUNGUS_NOISE = 127,
+    UNDERGROUND = 128,
+    WALL_ROCKY = 151,
+    WALL_DIRT = 152,
+    WALL_MARSH = 153,
+    WALL_CAVE = 154,
+    WALL_FUNGUS = 155,
+    WALL_SINKHOLE = 156,
+    WALL_MUD = 157,
+    WALL_TOP = 158,
+    WALL_WOOD = 159,
+    WALL_HUNESTONE = 160,
+    WALL_HUNESTONE_GLOW = 161,
+    WALL_STONEEYE = 162,
+    WALL_STONEEYE_GLOW = 163,
+    FAKE_GROUND = 200,
+    OCEAN_START = 201,
+    OCEAN_COASTAL = 201,
+    OCEAN_COASTAL_SHORE = 202,
+    OCEAN_SWELL = 203,
+    OCEAN_ROUGH = 204,
+    OCEAN_BRINEPOOL = 205,
+    OCEAN_BRINEPOOL_SHORE = 206,
+    OCEAN_HAZARDOUS = 207,
     OCEAN_WATERLOG = 208,
-	OCEAN_END = 247,
+    OCEAN_END = 247,
 }
 GROUND.OCEAN_REEF = GROUND.OCEAN_BRINEPOOL
 GROUND.OCEAN_REEF_SHORE = GROUND.OCEAN_BRINEPOOL_SHORE
@@ -754,12 +760,12 @@ GROUND.OCEAN_REEF_SHORE = GROUND.OCEAN_BRINEPOOL_SHORE
 --these are filled in via AddTile
 GROUND_NAMES = {}
 TERRAFORM_IMMUNE = {}
-GROUND_FLOORING = {} --These tiles are flooring (stuff shouldn't grow on them)
-GROUND_HARD = {} --not plantable
-GROUND_ROADWAYS = {} -- Player speed boosting enabled.
+GROUND_FLOORING = {}         --These tiles are flooring (stuff shouldn't grow on them)
+GROUND_HARD = {}             --not plantable
+GROUND_ROADWAYS = {}         -- Player speed boosting enabled.
 GROUND_NOGROUNDOVERLAYS = {} -- Stops rendering of snow or water etc overlays this table is immutable after initialization or engine crashes may occur.
-GROUND_INVISIBLETILES = {} -- Stops rendering of the tile top and skirt but will still have overlays this table is immutable after initialization or engine crashes may occur.
-GROUND_ISTEMPTILE = {} -- Tiles that are temporarily placed as a layer using the undertile component.
+GROUND_INVISIBLETILES = {}   -- Stops rendering of the tile top and skirt but will still have overlays this table is immutable after initialization or engine crashes may occur.
+GROUND_ISTEMPTILE = {}       -- Tiles that are temporarily placed as a layer using the undertile component.
 
 FALLOFF_IDS = {
     FALLOFF = 1,
@@ -829,7 +835,7 @@ SPECIAL_EVENTS =
     NONE = "none",
     HALLOWED_NIGHTS = "hallowed_nights",
     WINTERS_FEAST = "winters_feast",
-	CARNIVAL = "crow_carnival",
+    CARNIVAL = "crow_carnival",
     YOTG = "year_of_the_gobbler",
     YOTV = "year_of_the_varg",
     YOTP = "year_of_the_pig",
@@ -839,8 +845,9 @@ SPECIAL_EVENTS =
     YOTR = "year_of_the_bunnyman",
     YOTD = "year_of_the_dragonfly",
     YOTS = "year_of_the_snake",
+    YOTH = "year_of_the_knight",
 }
-WORLD_SPECIAL_EVENT = SPECIAL_EVENTS.WINTERS_FEAST
+WORLD_SPECIAL_EVENT = SPECIAL_EVENTS.YOTH
 WORLD_EXTRA_EVENTS = {}
 
 FESTIVAL_EVENTS =
@@ -865,22 +872,23 @@ IS_YEAR_OF_THE_SPECIAL_EVENTS =
     [SPECIAL_EVENTS.YOTP] = true,
     [SPECIAL_EVENTS.YOTC] = true,
     [SPECIAL_EVENTS.YOTB] = true,
-	[SPECIAL_EVENTS.YOT_CATCOON] = true,
+    [SPECIAL_EVENTS.YOT_CATCOON] = true,
     [SPECIAL_EVENTS.YOTR] = true,
     [SPECIAL_EVENTS.YOTD] = true,
     [SPECIAL_EVENTS.YOTS] = true,
+    [SPECIAL_EVENTS.YOTH] = true,
 }
 
 
 ---------------------------------------------------------
 -- Reminder: update event_deps.lua
-SPECIAL_EVENT_GLOBAL_PREFABS = { WORLD_SPECIAL_EVENT.."_event_global" }
-SPECIAL_EVENT_BACKEND_PREFABS = { WORLD_SPECIAL_EVENT.."_event_backend" }
-SPECIAL_EVENT_FRONTEND_PREFABS = { WORLD_SPECIAL_EVENT.."_event_frontend" }
+SPECIAL_EVENT_GLOBAL_PREFABS = { WORLD_SPECIAL_EVENT .. "_event_global" }
+SPECIAL_EVENT_BACKEND_PREFABS = { WORLD_SPECIAL_EVENT .. "_event_backend" }
+SPECIAL_EVENT_FRONTEND_PREFABS = { WORLD_SPECIAL_EVENT .. "_event_frontend" }
 
-FESTIVAL_EVENT_GLOBAL_PREFABS = { WORLD_FESTIVAL_EVENT.."_fest_global" }
-FESTIVAL_EVENT_BACKEND_PREFABS = { WORLD_FESTIVAL_EVENT.."_fest_backend" }
-FESTIVAL_EVENT_FRONTEND_PREFABS = { WORLD_FESTIVAL_EVENT.."_fest_frontend" }
+FESTIVAL_EVENT_GLOBAL_PREFABS = { WORLD_FESTIVAL_EVENT .. "_fest_global" }
+FESTIVAL_EVENT_BACKEND_PREFABS = { WORLD_FESTIVAL_EVENT .. "_fest_backend" }
+FESTIVAL_EVENT_FRONTEND_PREFABS = { WORLD_FESTIVAL_EVENT .. "_fest_frontend" }
 
 
 ---------------------------------------------------------
@@ -890,18 +898,18 @@ FESTIVAL_EVENT_FRONTEND_PREFABS = { WORLD_FESTIVAL_EVENT.."_fest_frontend" }
 ---------------------------------------------------------
 SPECIAL_EVENT_MUSIC =
 {
-	--hallowed nights
-	[SPECIAL_EVENTS.HALLOWED_NIGHTS] =
-	{
-		bank = "music_frontend_hallowednights2024.fsb",
-		sound = "dontstarve/music/music_FE_hallowednights2025",
-	},
+    --hallowed nights
+    [SPECIAL_EVENTS.HALLOWED_NIGHTS] =
+    {
+        bank = "music_frontend_hallowednights2024.fsb",
+        sound = "dontstarve/music/music_FE_hallowednights2025",
+    },
 
     --winter's feast carol
     [SPECIAL_EVENTS.WINTERS_FEAST] =
     {
-		bank = "music_frontend_wintersfeast2025.fsb",
-		sound = "dontstarve/music/music_FE_winterfeast2025",
+        bank = "music_frontend_wintersfeast2025.fsb",
+        sound = "dontstarve/music/music_FE_winterfeast2025",
     },
 
     --year of the gobbler
@@ -959,13 +967,13 @@ SPECIAL_EVENT_MUSIC =
         sound = "dontstarve/music/music_FE_boatrace",
     },
 
-	-- crow carnival
+    -- crow carnival
     [SPECIAL_EVENTS.CARNIVAL] =
     {
         bank = "music_frontend.fsb",
         sound = "dontstarve/music/music_FE_summerevent",
     },
-    
+
     --year of the depths worm
     -- THE BETA HAS THIS EVENT TURNED ON, BUT IS USING THE META 5 BANNER AND MUSIC
     --[[
@@ -973,8 +981,14 @@ SPECIAL_EVENT_MUSIC =
     {
         bank = "music_frontend_yotg.fsb",
         sound = "dontstarve/music/music_FE_yotg",
-    },  
-    ]]  
+    },
+    ]]
+
+    [SPECIAL_EVENTS.YOTH] =
+    {
+        bank = "music_frontend_yoth2026.fsb",
+        sound = "dontstarve/music/music_FE_yoth2026",
+    },
 }
 
 FESTIVAL_EVENT_MUSIC =
@@ -1012,7 +1026,7 @@ local FESTIVAL_EVENT_INFO =
         GAME_MODE = "lavaarena",
         SERVER_NAME = "LavaArena",
         FEMUSIC = "dontstarve/music/lava_arena/FE2",
-		STATS_FILE_PREFIX = "forge_stats",
+        STATS_FILE_PREFIX = "forge_stats",
         LATEST_SEASON = 2,
     },
     --the gorge
@@ -1021,7 +1035,7 @@ local FESTIVAL_EVENT_INFO =
         GAME_MODE = "quagmire",
         SERVER_NAME = "Quagmire",
         FEMUSIC = nil, --no special FE music for the festival event screen
-		STATS_FILE_PREFIX = "thegorge_stats",
+        STATS_FILE_PREFIX = "thegorge_stats",
         LATEST_SEASON = 1,
     },
 }
@@ -1063,7 +1077,7 @@ end
 ---------------------------------------------------------
 -- Checks if any of the "Year of the <creature>" events are active
 function IsAny_YearOfThe_EventActive()
-	if IS_YEAR_OF_THE_SPECIAL_EVENTS[WORLD_SPECIAL_EVENT] then
+    if IS_YEAR_OF_THE_SPECIAL_EVENTS[WORLD_SPECIAL_EVENT] then
         return true
     end
     for special_event in pairs(WORLD_EXTRA_EVENTS) do
@@ -1085,7 +1099,7 @@ function IsFestivalEventActive(event)
 end
 
 function IsPreviousFestivalEvent(event)
-    for _,prev_event in ipairs(PREVIOUS_FESTIVAL_EVENTS_ORDER) do
+    for _, prev_event in ipairs(PREVIOUS_FESTIVAL_EVENTS_ORDER) do
         if prev_event.id == event then
             return true
         end
@@ -1112,19 +1126,19 @@ end
 -- Used by C side. Do NOT rename without editing simulation.cpp
 function GetActiveFestivalEventServerName()
     local festival = IsAnyFestivalEventActive() and WORLD_FESTIVAL_EVENT
-    return GetFestivalEventServerName( festival, GetFestivalEventSeasons(festival) )
+    return GetFestivalEventServerName(festival, GetFestivalEventSeasons(festival))
 end
 
 -- Used by C side. Do NOT rename without editing simulation.cpp
 function GetActiveFestivalProductName()
-	return FESTIVAL_EVENT_INFO[WORLD_FESTIVAL_EVENT] ~= nil and FESTIVAL_EVENT_INFO[WORLD_FESTIVAL_EVENT].SERVER_NAME or ""
+    return FESTIVAL_EVENT_INFO[WORLD_FESTIVAL_EVENT] ~= nil and FESTIVAL_EVENT_INFO[WORLD_FESTIVAL_EVENT].SERVER_NAME or ""
 end
 
 function GetFestivalEventServerName(festival, season)
     if season == 1 then
         return FESTIVAL_EVENT_INFO[festival] ~= nil and FESTIVAL_EVENT_INFO[festival].SERVER_NAME or ""
     else
-        return FESTIVAL_EVENT_INFO[festival] ~= nil and (string.format( "%s_s%d", FESTIVAL_EVENT_INFO[festival].SERVER_NAME, season )) or ""
+        return FESTIVAL_EVENT_INFO[festival] ~= nil and (string.format("%s_s%d", FESTIVAL_EVENT_INFO[festival].SERVER_NAME, season)) or ""
     end
 end
 
@@ -1141,12 +1155,12 @@ end
 
 -- To enable/disable the tournament, change the return value of Server_IsTournamentActive()
 function Server_IsTournamentActive()
-	-- for internal server use only
-	return false
+    -- for internal server use only
+    return false
 end
 
 function Client_IsTournamentActive() -- ticket_name is optional
-	return Server_IsTournamentActive() and IsSteam()
+    return Server_IsTournamentActive() and IsSteam()
 end
 
 ---------------------------------------------------------
@@ -1158,26 +1172,26 @@ FE_MUSIC =
     (FESTIVAL_EVENT_MUSIC[WORLD_FESTIVAL_EVENT] ~= nil and FESTIVAL_EVENT_MUSIC[WORLD_FESTIVAL_EVENT].sound) or
     (SPECIAL_EVENT_MUSIC[WORLD_SPECIAL_EVENT] ~= nil and SPECIAL_EVENT_MUSIC[WORLD_SPECIAL_EVENT].sound) or
     "dontstarve/music/music_FE_cavepuzzle"
-    --"dontstarve/music/music_FE_wagboss"
-    --"dontstarve/music/music_FE_balatro"
-    --"dontstarve/music/music_FE_rifts4"
-    --"dontstarve/music/music_FE_winonawurt"
-    --"dontstarve/music/music_FE_junkyardhog"
-    --"dontstarve/music/music_FE_riftsthree"
-    --"dontstarve/music/music_FE_survivorsguideone"
-    --"dontstarve/music/music_FE_shadowrift"
-    --"dontstarve/music/music_FE_lunarrift"
-    --"dontstarve/music/music_FE_daywalker"
-    --"dontstarve/music/music_FE_maxwell"
-    --"dontstarve/music/music_FE_charliestage"
-    --"dontstarve/music/music_FE_wickerbottom"
-    --"dontstarve/music/music_FE"
-    --"dontstarve/music/music_FE_pirates"
-    --"dontstarve/music/music_FE_WX"
-    --"dontstarve/music/music__moonstorm_FE"
-    --"dontstarve/music/musicFE_webber"
-    --"dontstarve/music/music_FE_wanda"
-    --"terraria1/common/music_main_eot"
+--"dontstarve/music/music_FE_wagboss"
+--"dontstarve/music/music_FE_balatro"
+--"dontstarve/music/music_FE_rifts4"
+--"dontstarve/music/music_FE_winonawurt"
+--"dontstarve/music/music_FE_junkyardhog"
+--"dontstarve/music/music_FE_riftsthree"
+--"dontstarve/music/music_FE_survivorsguideone"
+--"dontstarve/music/music_FE_shadowrift"
+--"dontstarve/music/music_FE_lunarrift"
+--"dontstarve/music/music_FE_daywalker"
+--"dontstarve/music/music_FE_maxwell"
+--"dontstarve/music/music_FE_charliestage"
+--"dontstarve/music/music_FE_wickerbottom"
+--"dontstarve/music/music_FE"
+--"dontstarve/music/music_FE_pirates"
+--"dontstarve/music/music_FE_WX"
+--"dontstarve/music/music__moonstorm_FE"
+--"dontstarve/music/musicFE_webber"
+--"dontstarve/music/music_FE_wanda"
+--"terraria1/common/music_main_eot"
 
 
 ---------------------------------------------------------
@@ -1189,11 +1203,12 @@ PICKUPSOUNDS = {
     ["metal"] = "aqol/new_test/metal",
     ["rock"] = "aqol/new_test/rock",
     ["vegetation_firm"] = "aqol/new_test/vegetation_firm",
-    ["vegetation_grassy"] = "aqol/new_test/vegetation_grassy",    
+    ["vegetation_grassy"] = "aqol/new_test/vegetation_grassy",
     ["squidgy"] = "aqol/new_test/squidgy",
     ["grainy"] = "aqol/new_test/grainy",
+    ["paper"] = "aqol/new_test/paper",
     ["DEFAULT_FALLBACK"] = "dontstarve/HUD/collect_resource",
-	["NONE"] = nil, --reserved
+    ["NONE"] = nil, --reserved
 }
 
 ---------------------------------------------------------
@@ -1224,7 +1239,7 @@ TECH =
     CELESTIAL_ONE = { CELESTIAL = 1 },
     CELESTIAL_THREE = { CELESTIAL = 3 },
 
-	MOON_ALTAR_TWO = { CELESTIAL = 3 }, -- deprecated, use CELESTIAL_THREE
+    MOON_ALTAR_TWO = { CELESTIAL = 3 }, -- deprecated, use CELESTIAL_THREE
 
     SHADOW_TWO = { SHADOW = 3 },
 
@@ -1247,19 +1262,20 @@ TECH =
     RABBITOFFERING_THREE = { RABBITOFFERING = 3 },
     DRAGONOFFERING_THREE = { DRAGONOFFERING = 3 },
     WORMOFFERING_THREE = { WORMOFFERING = 3 },
+    KNIGHTOFFERING_THREE = { KNIGHTOFFERING = 3 },
 
     MADSCIENCE_ONE = { MADSCIENCE = 1 },
-	CARNIVAL_PRIZESHOP_ONE = { CARNIVAL_PRIZESHOP = 1 },
-	CARNIVAL_HOSTSHOP_ONE = { CARNIVAL_HOSTSHOP = 1 },
-	CARNIVAL_HOSTSHOP_THREE = { CARNIVAL_HOSTSHOP = 3 },
+    CARNIVAL_PRIZESHOP_ONE = { CARNIVAL_PRIZESHOP = 1 },
+    CARNIVAL_HOSTSHOP_ONE = { CARNIVAL_HOSTSHOP = 1 },
+    CARNIVAL_HOSTSHOP_THREE = { CARNIVAL_HOSTSHOP = 3 },
 
     FOODPROCESSING_ONE = { FOODPROCESSING = 1 },
-	FISHING_ONE = { FISHING = 1 },
-	FISHING_TWO = { FISHING = 2 },
+    FISHING_ONE = { FISHING = 1 },
+    FISHING_TWO = { FISHING = 2 },
 
-	HERMITCRABSHOP_ONE = { HERMITCRABSHOP = 1 },
-	HERMITCRABSHOP_THREE = { HERMITCRABSHOP = 3 },
-	HERMITCRABSHOP_FIVE = { HERMITCRABSHOP = 5 },
+    HERMITCRABSHOP_ONE = { HERMITCRABSHOP = 1 },
+    HERMITCRABSHOP_THREE = { HERMITCRABSHOP = 3 },
+    HERMITCRABSHOP_FIVE = { HERMITCRABSHOP = 5 },
     HERMITCRABSHOP_SEVEN = { HERMITCRABSHOP = 7 },
 
     SHELLWEAVER_ONE = { SHELLWEAVER = 1 },
@@ -1271,21 +1287,22 @@ TECH =
 
     TURFCRAFTING_ONE = { TURFCRAFTING = 1 },
     TURFCRAFTING_TWO = { TURFCRAFTING = 2 },
-	MASHTURFCRAFTING_TWO = { MASHTURFCRAFTING = 2},
+    MASHTURFCRAFTING_TWO = { MASHTURFCRAFTING = 2 },
 
-	WINTERSFEASTCOOKING_ONE = { WINTERSFEASTCOOKING = 1 },
+    WINTERSFEASTCOOKING_ONE = { WINTERSFEASTCOOKING = 1 },
 
     HALLOWED_NIGHTS = { SCIENCE = 10 }, -- ApplySpecialEvent() will change this from lost to 0
-    WINTERS_FEAST = { SCIENCE = 10 }, -- ApplySpecialEvent() will change this from lost to 0
-    YOTG = { SCIENCE = 10 }, -- ApplySpecialEvent() will change this from lost to 0
-    YOTV = { SCIENCE = 10 }, -- ApplySpecialEvent() will change this from lost to 0
-    YOTP = { SCIENCE = 10 }, -- ApplySpecialEvent() will change this from lost to 0
-    YOTC = { SCIENCE = 10 }, -- ApplySpecialEvent() will change this from lost to 0
-    YOTB = { SCIENCE = 10 }, -- ApplySpecialEvent() will change this from lost to 0
-    YOT_CATCOON = { SCIENCE = 10 }, -- ApplySpecialEvent() will change this from lost to 0
-    YOTR = { SCIENCE = 10 }, -- ApplySpecialEvent() will change this from lost to 0
-    YOTD = { SCIENCE = 10 }, -- ApplySpecialEvent() will change this from lost to 0
-    YOTS = { SCIENCE = 10 }, -- ApplySpecialEvent() will change this from lost to 0
+    WINTERS_FEAST = { SCIENCE = 10 },   -- ApplySpecialEvent() will change this from lost to 0
+    YOTG = { SCIENCE = 10 },            -- ApplySpecialEvent() will change this from lost to 0
+    YOTV = { SCIENCE = 10 },            -- ApplySpecialEvent() will change this from lost to 0
+    YOTP = { SCIENCE = 10 },            -- ApplySpecialEvent() will change this from lost to 0
+    YOTC = { SCIENCE = 10 },            -- ApplySpecialEvent() will change this from lost to 0
+    YOTB = { SCIENCE = 10 },            -- ApplySpecialEvent() will change this from lost to 0
+    YOT_CATCOON = { SCIENCE = 10 },     -- ApplySpecialEvent() will change this from lost to 0
+    YOTR = { SCIENCE = 10 },            -- ApplySpecialEvent() will change this from lost to 0
+    YOTD = { SCIENCE = 10 },            -- ApplySpecialEvent() will change this from lost to 0
+    YOTS = { SCIENCE = 10 },            -- ApplySpecialEvent() will change this from lost to 0
+    YOTH = { SCIENCE = 10 },            -- ApplySpecialEvent() will change this from lost to 0
 
     LOST = { MAGIC = 10, SCIENCE = 10, ANCIENT = 10 },
 
@@ -1294,11 +1311,11 @@ TECH =
     ROBOTMODULECRAFT_ONE = { ROBOTMODULECRAFT = 1 },
     BOOKCRAFT_ONE = { BOOKCRAFT = 1 },
 
-	LUNARFORGING_ONE = { LUNARFORGING = 1 },
-	LUNARFORGING_TWO = { LUNARFORGING = 2 },
+    LUNARFORGING_ONE = { LUNARFORGING = 1 },
+    LUNARFORGING_TWO = { LUNARFORGING = 2 },
 
-	SHADOWFORGING_ONE = { SHADOWFORGING = 1 },
-	SHADOWFORGING_TWO = { SHADOWFORGING = 2 },
+    SHADOWFORGING_ONE = { SHADOWFORGING = 1 },
+    SHADOWFORGING_TWO = { SHADOWFORGING = 2 },
 
     CARPENTRY_TWO = { CARPENTRY = 2 },
     CARPENTRY_THREE = { CARPENTRY = 3 },
@@ -1307,14 +1324,14 @@ TECH =
 -- See cell_data.h
 NODE_TYPE =
 {
-    Default = 0,		-- Land can touch any other Default node in the task that is within range
-    Blank = 1,			-- empty room with impassable ground
+    Default = 0, -- Land can touch any other Default node in the task that is within range
+    Blank = 1,   -- empty room with impassable ground
     Background = 2,
     Random = 3,
-    Blocker = 4,		-- Adds 2 Blank nodes beside it
-    Room = 5,			-- Land can only touch the room(s) it is connected to by the graph (adds impassable around its parameter with a single land bidge)
+    Blocker = 4,    -- Adds 2 Blank nodes beside it
+    Room = 5,       -- Land can only touch the room(s) it is connected to by the graph (adds impassable around its parameter with a single land bidge)
     BackgroundRoom = 6,
-	SeparatedRoom = 7,	-- adds impassable around its entire parameter
+    SeparatedRoom = 7, -- adds impassable around its entire parameter
 }
 
 -- See cell_data.h
@@ -1361,84 +1378,84 @@ Meta maze def:
 
 MAZE_CELL_EXITS =
 {
-	NO_EXITS = 		0, -- Dont place a cell here.
-	SINGLE_NORTH = 	1,
-	SINGLE_EAST = 	2,
-	L_NORTH = 		3,
-	SINGLE_SOUTH = 	4,
-	TUNNEL_NS = 	5,
-	L_EAST = 		6,
-	THREE_WAY_N = 	7,
-	SINGLE_WEST = 	8,
-	L_WEST = 		9,
-	TUNNEL_EW =		10,
-	THREE_WAY_W = 	11,
-	L_SOUTH = 		12,
-	THREE_WAY_S = 	13,
-	THREE_WAY_E = 	14,
-	FOUR_WAY = 		15,
+    NO_EXITS = 0, -- Dont place a cell here.
+    SINGLE_NORTH = 1,
+    SINGLE_EAST = 2,
+    L_NORTH = 3,
+    SINGLE_SOUTH = 4,
+    TUNNEL_NS = 5,
+    L_EAST = 6,
+    THREE_WAY_N = 7,
+    SINGLE_WEST = 8,
+    L_WEST = 9,
+    TUNNEL_EW = 10,
+    THREE_WAY_W = 11,
+    L_SOUTH = 12,
+    THREE_WAY_S = 13,
+    THREE_WAY_E = 14,
+    FOUR_WAY = 15,
 }
 
 MAZE_CELL_EXITS_INV =
 {
-	"SINGLE_NORTH",
-	"SINGLE_EAST",
-	"L_NORTH",
-	"SINGLE_SOUTH",
-	"TUNNEL_NS",
-	"L_EAST",
-	"THREE_WAY_N",
-	"SINGLE_WEST",
-	"L_WEST",
-	"TUNNEL_EW",
-	"THREE_WAY_W",
-	"L_SOUTH" ,
-	"THREE_WAY_S",
-	"THREE_WAY_E",
-	"FOUR_WAY",
+    "SINGLE_NORTH",
+    "SINGLE_EAST",
+    "L_NORTH",
+    "SINGLE_SOUTH",
+    "TUNNEL_NS",
+    "L_EAST",
+    "THREE_WAY_N",
+    "SINGLE_WEST",
+    "L_WEST",
+    "TUNNEL_EW",
+    "THREE_WAY_W",
+    "L_SOUTH",
+    "THREE_WAY_S",
+    "THREE_WAY_E",
+    "FOUR_WAY",
 }
 
 LAYOUT =
 {
-	STATIC = 0,
-	CIRCLE_EDGE = 1,
-	CIRCLE_RANDOM = 2,
-	GRID = 3,
-	RECTANGLE_EDGE = 4,
-	CIRCLE_FILLED = 5,
+    STATIC = 0,
+    CIRCLE_EDGE = 1,
+    CIRCLE_RANDOM = 2,
+    GRID = 3,
+    RECTANGLE_EDGE = 4,
+    CIRCLE_FILLED = 5,
 }
 
 LAYOUT_POSITION =
 {
-	RANDOM = 0,
-	CENTER = 1,
+    RANDOM = 0,
+    CENTER = 1,
 }
 
 LAYOUT_ROTATION =
 {
-	NORTH = 0, 	-- 0 Degrees
-	EAST = 1, 	-- 90 Degrees
-	SOUTH = 2, 	-- 180 Degrees
-	WEST = 3, 	-- 270 Degrees
+    NORTH = 0, -- 0 Degrees
+    EAST = 1, -- 90 Degrees
+    SOUTH = 2, -- 180 Degrees
+    WEST = 3, -- 270 Degrees
 }
 
 PLACE_MASK =
 {
-	NORMAL = 0,
-	IGNORE_IMPASSABLE = 1,
-	IGNORE_BARREN = 2,
-	IGNORE_IMPASSABLE_BARREN = 3,
-	IGNORE_RESERVED = 4,
-	IGNORE_IMPASSABLE_RESERVED = 5,
-	IGNORE_BARREN_RESERVED = 6,
-	IGNORE_IMPASSABLE_BARREN_RESERVED = 7,
+    NORMAL = 0,
+    IGNORE_IMPASSABLE = 1,
+    IGNORE_BARREN = 2,
+    IGNORE_IMPASSABLE_BARREN = 3,
+    IGNORE_RESERVED = 4,
+    IGNORE_IMPASSABLE_RESERVED = 5,
+    IGNORE_BARREN_RESERVED = 6,
+    IGNORE_IMPASSABLE_BARREN_RESERVED = 7,
 }
 
 -- keep up to date with MapSampleStyle in MapDefines.h
 MAP_SAMPLE_STYLE =
 {
-	NINE_SAMPLE = 0,
-	MARCHING_SQUARES = 1, -- Note to modders: this approach is still a prototype
+    NINE_SAMPLE = 0,
+    MARCHING_SQUARES = 1, -- Note to modders: this approach is still a prototype
 }
 
 --keep up to date with luabit.h
@@ -1454,30 +1471,30 @@ LUABIT =
 COLLISION =
 {
     GROUND            = 32,
-	BOAT_LIMITS       = 64,
-	LAND_OCEAN_LIMITS = 128,             -- physics wall between water and land
-    LIMITS            = 128 + 64,        -- BOAT_LIMITS + LAND_OCEAN_LIMITS
-    WORLD             = 128 + 64 + 32,   -- BOAT_LIMITS + LAND_OCEAN_LIMITS + GROUND
+    BOAT_LIMITS       = 64,
+    LAND_OCEAN_LIMITS = 128,           -- physics wall between water and land
+    LIMITS            = 128 + 64,      -- BOAT_LIMITS + LAND_OCEAN_LIMITS
+    WORLD             = 128 + 64 + 32, -- BOAT_LIMITS + LAND_OCEAN_LIMITS + GROUND
     ITEMS             = 256,
     OBSTACLES         = 512,
     CHARACTERS        = 1024,
     FLYERS            = 2048,
     SANITY            = 4096,
-    SMALLOBSTACLES    = 8192,	-- collide with characters but not giants
-    GIANTS            = 16384,	-- collide with obstacles but not small obstacles
+    SMALLOBSTACLES    = 8192,  -- collide with characters but not giants
+    GIANTS            = 16384, -- collide with obstacles but not small obstacles
 }
 
 MAX_PHYSICS_RADIUS = 4 --boats are currently the largest.
 
 BLENDMODE =
 {
-	Disabled = 0,
-	AlphaBlended = 1,
-	Additive = 2,
-	Premultiplied = 3,
-	InverseAlpha = 4,
-	AlphaAdditive = 5,
-	VFXTest = 6,
+    Disabled = 0,
+    AlphaBlended = 1,
+    Additive = 2,
+    Premultiplied = 3,
+    InverseAlpha = 4,
+    AlphaAdditive = 5,
+    VFXTest = 6,
 }
 
 ANIM_ORIENTATION =
@@ -1490,55 +1507,55 @@ ANIM_ORIENTATION.Default = ANIM_ORIENTATION.BillBoard
 
 RECIPETABS =
 {
-    TOOLS =         { str = "TOOLS",        sort = 0,   icon = "tab_tool.tex" },
-    LIGHT =         { str = "LIGHT",        sort = 1,   icon = "tab_light.tex" },
-    SURVIVAL =      { str = "SURVIVAL",     sort = 2,   icon = "tab_trap.tex" },
-    FARM =          { str = "FARM",         sort = 3,   icon = "tab_farm.tex" },
-    SCIENCE =       { str = "SCIENCE",      sort = 4,   icon = "tab_science.tex" },
-    WAR =           { str = "WAR",          sort = 5,   icon = "tab_fight.tex" },
-    TOWN =          { str = "TOWN",         sort = 6,   icon = "tab_build.tex" },
-    SEAFARING =     { str = "SEAFARING",    sort = 7,   icon = "tab_seafaring.tex" },
-    REFINE =        { str = "REFINE",       sort = 8,   icon = "tab_refine.tex" },
-    MAGIC =         { str = "MAGIC",        sort = 9,   icon = "tab_arcane.tex" },
-    DRESS =         { str = "DRESS",        sort = 10,  icon = "tab_dress.tex" },
+    TOOLS = { str = "TOOLS", sort = 0, icon = "tab_tool.tex" },
+    LIGHT = { str = "LIGHT", sort = 1, icon = "tab_light.tex" },
+    SURVIVAL = { str = "SURVIVAL", sort = 2, icon = "tab_trap.tex" },
+    FARM = { str = "FARM", sort = 3, icon = "tab_farm.tex" },
+    SCIENCE = { str = "SCIENCE", sort = 4, icon = "tab_science.tex" },
+    WAR = { str = "WAR", sort = 5, icon = "tab_fight.tex" },
+    TOWN = { str = "TOWN", sort = 6, icon = "tab_build.tex" },
+    SEAFARING = { str = "SEAFARING", sort = 7, icon = "tab_seafaring.tex" },
+    REFINE = { str = "REFINE", sort = 8, icon = "tab_refine.tex" },
+    MAGIC = { str = "MAGIC", sort = 9, icon = "tab_arcane.tex" },
+    DRESS = { str = "DRESS", sort = 10, icon = "tab_dress.tex" },
 
     --Crafting stations
-    ANCIENT =				{ str = "ANCIENT",				sort = 100, icon = "tab_crafting_table.tex",	crafting_station = true },
-    CELESTIAL =				{ str = "CELESTIAL",			sort = 100, icon = "tab_celestial.tex",			crafting_station = true },
-    MOON_ALTAR =			{ str = "MOON_ALTAR",			sort = 100, icon = "tab_moonaltar.tex",			crafting_station = true }, -- deprecated, all recipes have been moved into CELESTIAL
-    CARTOGRAPHY =			{ str = "CARTOGRAPHY",			sort = 100, icon = "tab_cartography.tex",		crafting_station = true },
-    SCULPTING =				{ str = "SCULPTING",			sort = 100, icon = "tab_sculpt.tex",			crafting_station = true },
-    ORPHANAGE =				{ str = "ORPHANAGE",			sort = 100, icon = "tab_orphanage.tex",			crafting_station = true },
-    PERDOFFERING =			{ str = "PERDOFFERING",			sort = 100, icon = "tab_perd_offering.tex",		crafting_station = true },
-    MADSCIENCE =			{ str = "MADSCIENCE",			sort = 100, icon = "tab_madscience_lab.tex",	crafting_station = true, manufacturing_station = true },
-	CARNIVAL_PRIZESHOP =	{ str = "CARNIVAL_PRIZESHOP",	sort = 100, icon = "tab_prizebooth.tex",		crafting_station = true , shop = true, icon_atlas = "images/hud2.xml"},
-	CARNIVAL_HOSTSHOP =		{ str = "CARNIVAL_HOSTSHOP",	sort = 100, icon = "tab_host.tex",				crafting_station = true , shop = true, icon_atlas = "images/hud2.xml"},
-    FOODPROCESSING =		{ str = "FOODPROCESSING",		sort = 100, icon = "tab_foodprocessing.tex",	crafting_station = true },
-	FISHING =				{ str = "FISHING",				sort = 100, icon = "tab_fishing.tex",			crafting_station = true },
-	WINTERSFEASTCOOKING =	{ str = "WINTERSFEASTCOOKING",	sort = 100, icon = "tab_feast_oven.tex",		crafting_station = true },
-    HERMITCRABSHOP =		{ str = "HERMITCRABSHOP",		sort = 100, icon = "tab_hermitcrab_shop.tex",	crafting_station = true, shop = true},
-    SHELLWEAVER =           { str = "SHELLWEAVER",          sort = 100, icon = "tab_shellweaver.tex",       crafting_station = true, manufacturing_station = true, icon_atlas = "images/hud2.xml"},
-    RABBITKINGSHOP =		{ str = "RABBITKINGSHOP",		sort = 100, icon = "tab_rabbitking.tex",		crafting_station = true, shop = true, icon_atlas = "images/hud2.xml"},
-    WANDERINGTRADERSHOP =	{ str = "WANDERINGTRADERSHOP",	sort = 100, icon = "tab_wanderingtrader.tex",	crafting_station = true, shop = true, icon_atlas = "images/hud2.xml"},
-    WAGPUNK_WORKSTATION =	{ str = "WAGPUNK_WORKSTATION",	sort = 100, icon = "tab_wagpunk_workstation.tex",crafting_station = true, shop = true, icon_atlas = "images/hud2.xml"},
-    TURFCRAFTING =		    { str = "TURFCRAFTING", 		sort = 100, icon = "tab_turfcrafting.tex",      crafting_station = true, icon_atlas = "images/hud2.xml" },
-    CARPENTRY =	    	    { str = "CARPENTRY",			sort = 100, icon = "station_carpentry.tex",     crafting_station = true, icon_atlas = "images/hud2.xml" },
-    HERMITCRAB_TEASHOP =    { str = "HERMITCRABTEASHOP",    sort = 100, icon = "tab_hermitcrab_teashop.tex",crafting_station = true, manufacturing_station = true, icon_atlas = "images/hud2.xml"},
+    ANCIENT = { str = "ANCIENT", sort = 100, icon = "tab_crafting_table.tex", crafting_station = true },
+    CELESTIAL = { str = "CELESTIAL", sort = 100, icon = "tab_celestial.tex", crafting_station = true },
+    MOON_ALTAR = { str = "MOON_ALTAR", sort = 100, icon = "tab_moonaltar.tex", crafting_station = true },       -- deprecated, all recipes have been moved into CELESTIAL
+    CARTOGRAPHY = { str = "CARTOGRAPHY", sort = 100, icon = "tab_cartography.tex", crafting_station = true },
+    SCULPTING = { str = "SCULPTING", sort = 100, icon = "tab_sculpt.tex", crafting_station = true },
+    ORPHANAGE = { str = "ORPHANAGE", sort = 100, icon = "tab_orphanage.tex", crafting_station = true },
+    PERDOFFERING = { str = "PERDOFFERING", sort = 100, icon = "tab_perd_offering.tex", crafting_station = true },
+    MADSCIENCE = { str = "MADSCIENCE", sort = 100, icon = "tab_madscience_lab.tex", crafting_station = true, manufacturing_station = true },
+    CARNIVAL_PRIZESHOP = { str = "CARNIVAL_PRIZESHOP", sort = 100, icon = "tab_prizebooth.tex", crafting_station = true, shop = true, icon_atlas = "images/hud2.xml" },
+    CARNIVAL_HOSTSHOP = { str = "CARNIVAL_HOSTSHOP", sort = 100, icon = "tab_host.tex", crafting_station = true, shop = true, icon_atlas = "images/hud2.xml" },
+    FOODPROCESSING = { str = "FOODPROCESSING", sort = 100, icon = "tab_foodprocessing.tex", crafting_station = true },
+    FISHING = { str = "FISHING", sort = 100, icon = "tab_fishing.tex", crafting_station = true },
+    WINTERSFEASTCOOKING = { str = "WINTERSFEASTCOOKING", sort = 100, icon = "tab_feast_oven.tex", crafting_station = true },
+    HERMITCRABSHOP = { str = "HERMITCRABSHOP", sort = 100, icon = "tab_hermitcrab_shop.tex", crafting_station = true, shop = true },
+    SHELLWEAVER = { str = "SHELLWEAVER", sort = 100, icon = "tab_shellweaver.tex", crafting_station = true, manufacturing_station = true, icon_atlas = "images/hud2.xml" },
+    RABBITKINGSHOP = { str = "RABBITKINGSHOP", sort = 100, icon = "tab_rabbitking.tex", crafting_station = true, shop = true, icon_atlas = "images/hud2.xml" },
+    WANDERINGTRADERSHOP = { str = "WANDERINGTRADERSHOP", sort = 100, icon = "tab_wanderingtrader.tex", crafting_station = true, shop = true, icon_atlas = "images/hud2.xml" },
+    WAGPUNK_WORKSTATION = { str = "WAGPUNK_WORKSTATION", sort = 100, icon = "tab_wagpunk_workstation.tex", crafting_station = true, shop = true, icon_atlas = "images/hud2.xml" },
+    TURFCRAFTING = { str = "TURFCRAFTING", sort = 100, icon = "tab_turfcrafting.tex", crafting_station = true, icon_atlas = "images/hud2.xml" },
+    CARPENTRY = { str = "CARPENTRY", sort = 100, icon = "station_carpentry.tex", crafting_station = true, icon_atlas = "images/hud2.xml" },
+    HERMITCRAB_TEASHOP = { str = "HERMITCRABTEASHOP", sort = 100, icon = "tab_hermitcrab_teashop.tex", crafting_station = true, manufacturing_station = true, icon_atlas = "images/hud2.xml" },
 }
 
 CUSTOM_RECIPETABS =
 {
-    BOOKS         = { str = "BOOKS",			sort = 999, icon = "tab_book.tex",          owner_tag = "bookbuilder"  },
-    SHADOW        = { str = "SHADOW",			sort = 999, icon = "tab_shadow.tex",        owner_tag = "shadowmagic"  },
-    ENGINEERING   = { str = "ENGINEERING",		sort = 999, icon = "tab_engineering.tex",   owner_tag = "handyperson"  },
-	ELIXIRBREWING = { str = "ELIXIRBREWING",	sort = 999, icon = "tab_elixirbrewing.tex", owner_tag = "elixirbrewer" },
-    BATTLESONGS   = { str = "BATTLESONGS",      sort = 999, icon = "tab_battlesongs.tex",   owner_tag = "battlesinger",    icon_atlas = "images/hud2.xml" },
-    SPIDERCRAFT   = { str = "SPIDERCRAFT",      sort = 999, icon = "tab_spidercraft.tex",   owner_tag = "spiderwhisperer", icon_atlas = "images/hud2.xml" },
-    NATURE        = { str = "NATURE",			sort = 999, icon = "tab_nature.tex",        owner_tag = "plantkin"     },
-	SLINGSHOTAMMO =	{ str = "SLINGSHOTAMMO",	sort = 999, icon = "tab_slingshot.tex",	    owner_tag = "pebblemaker"  },
-	BALLOONOMANCY = { str = "BALLOONOMANCY",	sort = 999, icon = "tab_balloonomancy.tex",	owner_tag = "balloonomancer",	icon_atlas = "images/hud2.xml" },
-	CLOCKMAKER    =	{ str = "CLOCKMAKER",		sort = 999, icon = "tab_clockmaker.tex",	owner_tag = "clockmaker",		icon_atlas = "images/hud2.xml"},
-    STRONGMAN     =	{ str = "STRONGMAN",		sort = 999, icon = "tab_strongman.tex",	    owner_tag = "strongman",		icon_atlas = "images/hud2.xml"},
+    BOOKS         = { str = "BOOKS", sort = 999, icon = "tab_book.tex", owner_tag = "bookbuilder" },
+    SHADOW        = { str = "SHADOW", sort = 999, icon = "tab_shadow.tex", owner_tag = "shadowmagic" },
+    ENGINEERING   = { str = "ENGINEERING", sort = 999, icon = "tab_engineering.tex", owner_tag = "handyperson" },
+    ELIXIRBREWING = { str = "ELIXIRBREWING", sort = 999, icon = "tab_elixirbrewing.tex", owner_tag = "elixirbrewer" },
+    BATTLESONGS   = { str = "BATTLESONGS", sort = 999, icon = "tab_battlesongs.tex", owner_tag = "battlesinger", icon_atlas = "images/hud2.xml" },
+    SPIDERCRAFT   = { str = "SPIDERCRAFT", sort = 999, icon = "tab_spidercraft.tex", owner_tag = "spiderwhisperer", icon_atlas = "images/hud2.xml" },
+    NATURE        = { str = "NATURE", sort = 999, icon = "tab_nature.tex", owner_tag = "plantkin" },
+    SLINGSHOTAMMO = { str = "SLINGSHOTAMMO", sort = 999, icon = "tab_slingshot.tex", owner_tag = "pebblemaker" },
+    BALLOONOMANCY = { str = "BALLOONOMANCY", sort = 999, icon = "tab_balloonomancy.tex", owner_tag = "balloonomancer", icon_atlas = "images/hud2.xml" },
+    CLOCKMAKER    = { str = "CLOCKMAKER", sort = 999, icon = "tab_clockmaker.tex", owner_tag = "clockmaker", icon_atlas = "images/hud2.xml" },
+    STRONGMAN     = { str = "STRONGMAN", sort = 999, icon = "tab_strongman.tex", owner_tag = "strongman", icon_atlas = "images/hud2.xml" },
 }
 
 QUAGMIRE_RECIPETABS =
@@ -1547,23 +1564,23 @@ QUAGMIRE_RECIPETABS =
     QUAGMIRE_TRADER_ELDER = { str = "QUAGMIRE_TRADER_ELDER", sort = 0, icon = "tab_quagmire_swampigelder.tex", icon_atlas = "images/quagmire_hud.xml", crafting_station = true, shop = true },
     QUAGMIRE_TRADER_MERM1 = { str = "QUAGMIRE_TRADER_MERM1", sort = 0, icon = "tab_quagmire_trader_merm1.tex", icon_atlas = "images/quagmire_hud.xml", crafting_station = true, shop = true },
     QUAGMIRE_TRADER_MERM2 = { str = "QUAGMIRE_TRADER_MERM2", sort = 0, icon = "tab_quagmire_trader_merm2.tex", icon_atlas = "images/quagmire_hud.xml", crafting_station = true, shop = true },
-    QUAGMIRE_TRADER_MUM =   { str = "QUAGMIRE_TRADER_MUM",   sort = 0, icon = "tab_quagmire_trader_mum.tex",   icon_atlas = "images/quagmire_hud.xml", crafting_station = true, shop = true },
-    QUAGMIRE_TRADER_KID =   { str = "QUAGMIRE_TRADER_KID",   sort = 0, icon = "tab_quagmire_trader_kid.tex",   icon_atlas = "images/quagmire_hud.xml", crafting_station = true, shop = true },
+    QUAGMIRE_TRADER_MUM = { str = "QUAGMIRE_TRADER_MUM", sort = 0, icon = "tab_quagmire_trader_mum.tex", icon_atlas = "images/quagmire_hud.xml", crafting_station = true, shop = true },
+    QUAGMIRE_TRADER_KID = { str = "QUAGMIRE_TRADER_KID", sort = 0, icon = "tab_quagmire_trader_kid.tex", icon_atlas = "images/quagmire_hud.xml", crafting_station = true, shop = true },
 }
 
 VERBOSITY =
 {
-	ERROR = 0,
-	WARNING = 1,
-	INFO = 2,
-	DEBUG = 3,
+    ERROR = 0,
+    WARNING = 1,
+    INFO = 2,
+    DEBUG = 3,
 }
 
 RENDERPASS =
 {
-	Z = 0,
-	BLOOM = 1,
-	DEFAULT = 2,
+    Z = 0,
+    BLOOM = 1,
+    DEFAULT = 2,
 }
 
 NUM_TRINKETS = 46
@@ -1572,11 +1589,11 @@ HALLOWEDNIGHTS_TINKET_END = 46
 
 SEASONS =
 {
-	AUTUMN = "autumn",
-	WINTER = "winter",
-	SPRING = "spring",
-	SUMMER = "summer",
-	CAVES = "caves",
+    AUTUMN = "autumn",
+    WINTER = "winter",
+    SPRING = "spring",
+    SUMMER = "summer",
+    CAVES = "caves",
 }
 
 LEVELCATEGORY = {
@@ -1588,19 +1605,19 @@ LEVELCATEGORY = {
 
 RENDER_QUALITY =
 {
-	LOW = 0,
-	DEFAULT = 1,
-	HIGH = 2,
+    LOW = 0,
+    DEFAULT = 1,
+    HIGH = 2,
 }
 
 ANIM_SORT_ORDER =
 {
-	OCEAN_UNDERWATER = 0,
-	OCEAN_WAVES = 1,
-	OCEAN_WHIRLPORTAL = 1,
-	OCEAN_BOAT = 2, -- Keep at 2.
+    OCEAN_UNDERWATER = 0,
+    OCEAN_WAVES = 1,
+    OCEAN_WHIRLPORTAL = 1,
+    OCEAN_BOAT = 2, -- Keep at 2.
     OCEAN_BOAT_BUMPERS = 3,
-	OCEAN_SKYSHADOWS = 4,
+    OCEAN_SKYSHADOWS = 4,
 }
 
 ANIM_SORT_ORDER_BELOW_GROUND =
@@ -1613,30 +1630,30 @@ ANIM_SORT_ORDER_BELOW_GROUND =
 
 ROAD_PARAMETERS =
 {
-	NUM_SUBDIVISIONS_PER_SEGMENT = 50,
-	MIN_WIDTH = 2,
-	MAX_WIDTH = 3,
-	MIN_EDGE_WIDTH = 0.5,
-	MAX_EDGE_WIDTH = 1,
-	WIDTH_JITTER_SCALE=1,
+    NUM_SUBDIVISIONS_PER_SEGMENT = 50,
+    MIN_WIDTH = 2,
+    MAX_WIDTH = 3,
+    MIN_EDGE_WIDTH = 0.5,
+    MAX_EDGE_WIDTH = 1,
+    WIDTH_JITTER_SCALE = 1,
 }
 
 function RGB(r, g, b)
     return { r / 255, g / 255, b / 255, 1 }
 end
 
-BGCOLOURS =
+BGCOLOURS                       =
 {
-	RED =          RGB(255, 89,  46 ),
-	PURPLE =       RGB(184, 87,  198),
-	YELLOW =       RGB(255, 196, 45 ),
-	GREY =         RGB(75,  75,  75 ),
-	HALF =         RGB(128, 128, 128 ),
-	FULL =         RGB(255, 255, 255),
+    RED = RGB(255, 89, 46),
+    PURPLE = RGB(184, 87, 198),
+    YELLOW = RGB(255, 196, 45),
+    GREY = RGB(75, 75, 75),
+    HALF = RGB(128, 128, 128),
+    FULL = RGB(255, 255, 255),
 }
 
 -- Standard html colours: https://en.wikipedia.org/wiki/Web_colors#X11_color_names
-WEBCOLOURS =
+WEBCOLOURS                      =
 {
     -- pinks
     PINK           = RGB(255, 192, 203),
@@ -1667,7 +1684,7 @@ WEBCOLOURS =
     BROWN          = RGB(165, 42, 42),
     -- greens
     GREEN          = RGB(0, 128, 0),
-    SPRINGGREEN    = RGB( 0, 255, 127),
+    SPRINGGREEN    = RGB(0, 255, 127),
     -- cyans
     TURQUOISE      = RGB(64, 224, 208),
     TEAL           = RGB(0, 128, 128),
@@ -1685,68 +1702,68 @@ WEBCOLOURS =
 
 -- A limited palette of colours to match our world tones.
 -- Don't reference these from code! The names don't match the colour.
-PLAYERCOLOURS =
+PLAYERCOLOURS                   =
 {
-	BLUE =          RGB(149, 191, 242),
-	--RED =           RGB(242, 99,  99 ), --RED redefined below
-	YELLOW =        RGB(222, 222, 99 ),
-	GREEN =         RGB(59,  222, 99 ),
-	CORAL =         RGB(216, 60,  84 ),
-	GRASS =         RGB(129, 168, 99 ),
-	TEAL =          RGB(150, 206, 169),
-	LAVENDER =      RGB(206, 145, 192),
-	OTHERBLUE =     RGB(113, 125, 194),
-	OTHERYELLOW =   RGB(205, 191, 121),
-	FUSCHIA =       RGB(170, 85,  129),
-	OTHERTEAL =     RGB(150, 201, 206),
-	LIGHTORANGE =   RGB(206, 150, 100),
-	ORANGE =        RGB(208, 120, 86 ),
-	PURPLE =        RGB(125, 81,  156),
+    BLUE = RGB(149, 191, 242),
+    --RED =           RGB(242, 99,  99 ), --RED redefined below
+    YELLOW = RGB(222, 222, 99),
+    GREEN = RGB(59, 222, 99),
+    CORAL = RGB(216, 60, 84),
+    GRASS = RGB(129, 168, 99),
+    TEAL = RGB(150, 206, 169),
+    LAVENDER = RGB(206, 145, 192),
+    OTHERBLUE = RGB(113, 125, 194),
+    OTHERYELLOW = RGB(205, 191, 121),
+    FUSCHIA = RGB(170, 85, 129),
+    OTHERTEAL = RGB(150, 201, 206),
+    LIGHTORANGE = RGB(206, 150, 100),
+    ORANGE = RGB(208, 120, 86),
+    PURPLE = RGB(125, 81, 156),
 
     --Colour theme to better match the world tones
     --(So these colour names don't match standard web colours).
-    TOMATO =        RGB(205, 79,  57 ),
-    TAN =           RGB(255, 165, 79 ),
-    PLUM =          RGB(205, 150, 205),
-    BURLYWOOD =     RGB(205, 170, 125),
-    RED =           RGB(238, 99,  99 ),
-    PERU =          RGB(205, 133, 63 ),
-    DARKPLUM =      RGB(139, 102, 139),
-    EGGSHELL =      RGB(252, 230, 201),
-    SALMON =        RGB(255, 140, 105),
-    CHOCOLATE =     RGB(255, 127, 36 ),
-    VIOLETRED =     RGB(139, 71,  93 ),
-    SANDYBROWN =    RGB(244, 164, 96 ),
-    BROWN =         RGB(165, 42,  42 ),
-    BISQUE =        RGB(205, 183, 158),
+    TOMATO = RGB(205, 79, 57),
+    TAN = RGB(255, 165, 79),
+    PLUM = RGB(205, 150, 205),
+    BURLYWOOD = RGB(205, 170, 125),
+    RED = RGB(238, 99, 99),
+    PERU = RGB(205, 133, 63),
+    DARKPLUM = RGB(139, 102, 139),
+    EGGSHELL = RGB(252, 230, 201),
+    SALMON = RGB(255, 140, 105),
+    CHOCOLATE = RGB(255, 127, 36),
+    VIOLETRED = RGB(139, 71, 93),
+    SANDYBROWN = RGB(244, 164, 96),
+    BROWN = RGB(165, 42, 42),
+    BISQUE = RGB(205, 183, 158),
     PALEVIOLETRED = RGB(255, 130, 171),
-    GOLDENROD =     RGB(255, 193, 37 ),
-    ROSYBROWN =     RGB(255, 193, 193),
-    LIGHTTHISTLE =  RGB(255, 225, 255),
-    PINK =          RGB(255, 192, 203),
-    LEMON =         RGB(255, 250, 205),
-    FIREBRICK =     RGB(238, 44,  44 ),
-    LIGHTGOLD =     RGB(255, 236, 139),
-    MEDIUMPURPLE =  RGB(171, 130, 255),
-    THISTLE =       RGB(205, 181, 205),
+    GOLDENROD = RGB(255, 193, 37),
+    ROSYBROWN = RGB(255, 193, 193),
+    LIGHTTHISTLE = RGB(255, 225, 255),
+    PINK = RGB(255, 192, 203),
+    LEMON = RGB(255, 250, 205),
+    FIREBRICK = RGB(238, 44, 44),
+    LIGHTGOLD = RGB(255, 236, 139),
+    MEDIUMPURPLE = RGB(171, 130, 255),
+    THISTLE = RGB(205, 181, 205),
 }
-DEFAULT_PLAYER_COLOUR = RGB(153, 153, 153) -- GREY
+DEFAULT_PLAYER_COLOUR           = RGB(153, 153, 153) -- GREY
 
-SAY_COLOR =         RGB(255, 255, 255)
-WHISPER_COLOR =     RGB(153, 153, 153)
-TWITCH_COLOR  =     RGB(153, 153, 255)
+SAY_COLOR                       = RGB(255, 255, 255)
+WHISPER_COLOR                   = RGB(153, 153, 153)
+TWITCH_COLOR                    = RGB(153, 153, 255)
 
-WET_TEXT_COLOUR = RGB(149, 191, 242)
-NORMAL_TEXT_COLOUR = RGB(255, 255, 255)
+WET_TEXT_COLOUR                 = RGB(149, 191, 242)
+NORMAL_TEXT_COLOUR              = RGB(255, 255, 255)
 
-FRONTEND_PORTAL_COLOUR = {245/255, 232/255, 204/255, 255/255}
+FRONTEND_PORTAL_COLOUR          = { 245 / 255, 232 / 255, 204 / 255, 255 / 255 }
 --FRONTEND_TREE_COLOUR = {208/255, 196/255, 187/255, 255/255} --V2C: baked into the art now
-FRONTEND_CHARACTER_CLOSE_COLOUR = {235/255, 225/255, 212/255, 255/255}
-FRONTEND_CHARACTER_FAR_COLOUR = {225/255, 216/255, 206/255, 255/255}
-FRONTEND_SMOKE_COLOUR = {245/255, 232/255, 204/255, 153/255}
-FRONTEND_TITLE_COLOUR = {235/255, 225/255, 212/255, 255/255}
-PORTAL_TEXT_COLOUR = {243/255, 244/255, 243/255, 255/255}
-FADE_WHITE_COLOUR = {237/255, 224/255, 189/255, 255/255}
+FRONTEND_CHARACTER_CLOSE_COLOUR = { 235 / 255, 225 / 255, 212 / 255, 255 / 255 }
+FRONTEND_CHARACTER_FAR_COLOUR   = { 225 / 255, 216 / 255, 206 / 255, 255 / 255 }
+FRONTEND_SMOKE_COLOUR           = { 245 / 255, 232 / 255, 204 / 255, 153 / 255 }
+FRONTEND_TITLE_COLOUR           = { 235 / 255, 225 / 255, 212 / 255, 255 / 255 }
+PORTAL_TEXT_COLOUR              = { 243 / 255, 244 / 255, 243 / 255, 255 / 255 }
+FADE_WHITE_COLOUR               = { 237 / 255, 224 / 255, 189 / 255, 255 / 255 }
 
 
 CHARACTER_COLOURS =
@@ -1777,42 +1794,42 @@ CHARACTER_COLOURS =
 
 ANNOUNCEMENT_ICONS =
 {
-    ["default"] =           { atlas = "images/button_icons.xml", texture = "announcement.tex" },
-    ["afk_start"] =         { atlas = "images/button_icons.xml", texture = "AFKstart.tex" },
-    ["afk_stop"] =          { atlas = "images/button_icons.xml", texture = "AFKstop.tex" },
-    ["death"] =             { atlas = "images/button_icons.xml", texture = "death.tex" },
-    ["resurrect"] =         { atlas = "images/button_icons.xml", texture = "resurrect.tex" },
-    ["join_game"] =         { atlas = "images/button_icons.xml", texture = "join.tex" },
-    ["leave_game"] =        { atlas = "images/button_icons.xml", texture = "leave.tex" },
-    ["kicked_from_game"] =  { atlas = "images/button_icons.xml", texture = "kicked.tex" },
-    ["banned_from_game"] =  { atlas = "images/button_icons.xml", texture = "banned.tex" },
-    ["item_drop"] =         { atlas = "images/button_icons.xml", texture = "item_drop.tex" },
-    ["vote"] =              { atlas = "images/button_icons.xml", texture = "vote.tex" },
-    ["dice_roll"] =         { atlas = "images/button_icons.xml", texture = "diceroll.tex" },
-    ["mod"] =               { atlas = "images/button_icons.xml", texture = "mod_announcement.tex" },
+    ["default"] = { atlas = "images/button_icons.xml", texture = "announcement.tex" },
+    ["afk_start"] = { atlas = "images/button_icons.xml", texture = "AFKstart.tex" },
+    ["afk_stop"] = { atlas = "images/button_icons.xml", texture = "AFKstop.tex" },
+    ["death"] = { atlas = "images/button_icons.xml", texture = "death.tex" },
+    ["resurrect"] = { atlas = "images/button_icons.xml", texture = "resurrect.tex" },
+    ["join_game"] = { atlas = "images/button_icons.xml", texture = "join.tex" },
+    ["leave_game"] = { atlas = "images/button_icons.xml", texture = "leave.tex" },
+    ["kicked_from_game"] = { atlas = "images/button_icons.xml", texture = "kicked.tex" },
+    ["banned_from_game"] = { atlas = "images/button_icons.xml", texture = "banned.tex" },
+    ["item_drop"] = { atlas = "images/button_icons.xml", texture = "item_drop.tex" },
+    ["vote"] = { atlas = "images/button_icons.xml", texture = "vote.tex" },
+    ["dice_roll"] = { atlas = "images/button_icons.xml", texture = "diceroll.tex" },
+    ["mod"] = { atlas = "images/button_icons.xml", texture = "mod_announcement.tex" },
 }
 
 ROAD_STRIPS =
 {
-	CORNERS = 0,
-	ENDS = 1,
-	EDGES = 2,
-	CENTER = 3,
+    CORNERS = 0,
+    ENDS = 1,
+    EDGES = 2,
+    CENTER = 3,
 }
 
 WRAP_MODE =
 {
-	WRAP = 0,
-	CLAMP = 1,
-	MIRROR = 2,
-	CLAMP_TO_EDGE = 3,
+    WRAP = 0,
+    CLAMP = 1,
+    MIRROR = 2,
+    CLAMP_TO_EDGE = 3,
 }
 
 FILTER_MODE =
 {
     POINT = 0,
-	LINEAR = 1,
-	ANISOTROPIC = 2,
+    LINEAR = 1,
+    ANISOTROPIC = 2,
     NONE = 3,
 }
 
@@ -1850,10 +1867,10 @@ TileGroups = {}
 
 RESET_ACTION =
 {
-	LOAD_FRONTEND = 0,
-	LOAD_SLOT = 1,
-	LOAD_FILE = 2,
-	DO_DEMO = 3,
+    LOAD_FRONTEND = 0,
+    LOAD_SLOT = 1,
+    LOAD_FILE = 2,
+    DO_DEMO = 3,
     JOIN_SERVER = 4
 }
 
@@ -1916,15 +1933,15 @@ MATERIALS =
     KELP = "kelp",
     SHELL = "shell",
     NIGHTMARE = "nightmare",
-	DREADSTONE = "dreadstone",
+    DREADSTONE = "dreadstone",
     SALT = "salt",
     VITAE = "vitae",
 }
 
 FORGEMATERIALS =
 {
-	LUNARPLANT = "lunarplant",
-	VOIDCLOTH = "voidcloth",
+    LUNARPLANT = "lunarplant",
+    VOIDCLOTH = "voidcloth",
     WAGPUNKBITS = "wagpunk_bits",
 }
 
@@ -1982,7 +1999,7 @@ VALID_KITCOON_BUILDS = {
     "kitcoon_rocky_build",
     "kitcoon_desert_build",
     "kitcoon_moon_build",
-    "kitcoon_yot_build", 
+    "kitcoon_yot_build",
 }
 
 FOODTYPE =
@@ -1996,16 +2013,16 @@ FOODTYPE =
     INSECT = "INSECT",
     SEEDS = "SEEDS",
     BERRY = "BERRY", --hack for smallbird; berries are actually part of veggie
-    RAW = "RAW", -- things which some animals can eat off the ground, but players need to cook
+    RAW = "RAW",     -- things which some animals can eat off the ground, but players need to cook
     BURNT = "BURNT", --For lavae.
     NITRE = "NITRE", -- For acidbats; they are part of elemental.
     ROUGHAGE = "ROUGHAGE",
-	WOOD = "WOOD",
+    WOOD = "WOOD",
     GOODIES = "GOODIES",
-    MONSTER = "MONSTER", -- Added in for woby, uses the secondary foodype originally added for the berries
+    MONSTER = "MONSTER",           -- Added in for woby, uses the secondary foodype originally added for the berries
     LUNAR_SHARDS = "LUNAR_SHARDS", -- For rift birds, yummy glass
-    CORPSE = "CORPSE", -- For rift buzzards potentially
-    MIASMA = "MIASMA", -- For the centipede thrall
+    CORPSE = "CORPSE",             -- For rift buzzards potentially
+    MIASMA = "MIASMA",             -- For the centipede thrall
 }
 
 FOODGROUP =
@@ -2071,10 +2088,10 @@ FOODGROUP =
 }
 
 FARM_PLANT_STRESS = {
-	NONE = 1,
-	LOW = 2,
-	MODERATE = 3,
-	HIGH = 4,
+    NONE = 1,
+    LOW = 2,
+    MODERATE = 3,
+    HIGH = 4,
 }
 
 -- NOTES(JBK): After initial game load this is a constant of some value.
@@ -2092,7 +2109,7 @@ CHARACTER_INGREDIENT =
     MAX_HEALTH = "half_health",
     SANITY = "decrease_sanity",
     MAX_SANITY = "half_sanity",
-	OLDAGE = "decrease_oldage",
+    OLDAGE = "decrease_oldage",
 }
 
 --Character ingredient amounts must be multiples of 5
@@ -2106,18 +2123,18 @@ TECH_INGREDIENT =
 }
 
 -- NOTES(DiogoW): Now DEPRECATED, keeping it around for mods.
-    -- Identifies which builder tags are from which characters' skill trees,
-    -- so that the crafting menu properly identifies that they're locked behind a skill
-    -- for your current character.
+-- Identifies which builder tags are from which characters' skill trees,
+-- so that the crafting menu properly identifies that they're locked behind a skill
+-- for your current character.
 TECH_SKILLTREE_BUILDER_TAG_OWNERS = {}
 
-SKILLTREE_EQUIPPABLE_RESTRICTED_TAGS = 
+SKILLTREE_EQUIPPABLE_RESTRICTED_TAGS =
 {
     -- Using quotes for searching purposes.
-    ["inspectacleshatuser"]  = "winona",
-    ["wathgrithrshielduser"] = "wathgrithr",
-    [UPGRADETYPES.SPEAR_LIGHTNING.."_upgradeuser"] = "wathgrithr",
-    ["nabbaguser"] = "wortox",
+    ["inspectacleshatuser"]                        = "winona",
+    ["wathgrithrshielduser"]                       = "wathgrithr",
+    [UPGRADETYPES.SPEAR_LIGHTNING .. "_upgradeuser"] = "wathgrithr",
+    ["nabbaguser"]                                 = "wortox",
 }
 
 -- IngredientMod must be one of the following values
@@ -2148,7 +2165,7 @@ TOOLACTIONS =
     NET = true,
     PLAY = true,
     UNSADDLE = true,
-	SCYTHE = true,
+    SCYTHE = true,
 }
 
 FALLINGREASON =
@@ -2162,6 +2179,8 @@ EQUIPMENTSETNAMES =
     DREADSTONE = "dreadstone",
     LUNARPLANT = "lunarplant",
     VOIDCLOTH = "voidcloth",
+    YOTH_KNIGHT = "yoth_knight",
+    YOTH_PRINCESS = "yoth_princess",
 }
 
 -- this is a net_tinybyte on inventoryitem_classified.deploymode
@@ -2174,7 +2193,7 @@ DEPLOYMODE =
     PLANT = 4,
     WALL = 5,
     WATER = 6,
-    MAST = 7,-- Keeping MAST around for mod support
+    MAST = 7, -- Keeping MAST around for mod support
     CUSTOM = 7,
 }
 
@@ -2192,10 +2211,10 @@ DEPLOYSPACING =
     MEDIUM = 1,
     LESS = 2,
     NONE = 3,
-	PLACER_DEFAULT = 4,
+    PLACER_DEFAULT = 4,
     LARGE = 5,
-	--V2C: late additions
-	ONEPOINTFIVE = 6,
+    --V2C: late additions
+    ONEPOINTFIVE = 6,
 }
 
 --V2C: Deploy spacing is a legacy system where this is actually the distance
@@ -2210,9 +2229,9 @@ DEPLOYSPACING_RADIUS =
     [DEPLOYSPACING.MEDIUM] = 1,
     [DEPLOYSPACING.LESS] = .75,
     [DEPLOYSPACING.NONE] = 0,
-	[DEPLOYSPACING.PLACER_DEFAULT] = 3.2,
+    [DEPLOYSPACING.PLACER_DEFAULT] = 3.2,
     [DEPLOYSPACING.LARGE] = 4.0,
-	[DEPLOYSPACING.ONEPOINTFIVE] = 1.5,
+    [DEPLOYSPACING.ONEPOINTFIVE] = 1.5,
 }
 
 TROPHYSCALE_TYPES =
@@ -2263,19 +2282,19 @@ BACK_BUTTON_Y = 60
 DOUBLE_CLICK_TIMEOUT = .5
 DOUBLE_CLICK_POS_THRESHOLD = 3 --how far ur mouse can move and still count as dbl click
 
-GOLD = {202/255, 174/255, 118/255, 255/255}
-GREY = {.57, .57, .57, 1}
-BLACK = {.1, .1, .1, 1}
-WHITE = {1, 1, 1, 1}
-BROWN = {97/255, 73/255, 46/255, 255/255}
-RED = {.7, .1, .1, 1}
-DARKGREY = {.12, .12, .12, 1}
+GOLD = { 202 / 255, 174 / 255, 118 / 255, 255 / 255 }
+GREY = { .57, .57, .57, 1 }
+BLACK = { .1, .1, .1, 1 }
+WHITE = { 1, 1, 1, 1 }
+BROWN = { 97 / 255, 73 / 255, 46 / 255, 255 / 255 }
+RED = { .7, .1, .1, 1 }
+DARKGREY = { .12, .12, .12, 1 }
 
 -- A coherent palette for UI elements
 UICOLOURS = {
-    GOLD_CLICKABLE = RGB(215, 210, 157), -- interactive text & menu
-    GOLD_FOCUS = RGB(251, 193, 92), -- menu active item
-    GOLD_SELECTED = RGB(245, 243, 222), -- titles and non-interactive important text
+    GOLD_CLICKABLE = RGB(215, 210, 157),   -- interactive text & menu
+    GOLD_FOCUS = RGB(251, 193, 92),        -- menu active item
+    GOLD_SELECTED = RGB(245, 243, 222),    -- titles and non-interactive important text
     GOLD_UNIMPORTANT = RGB(213, 213, 203), -- non-interactive non-important text
     HIGHLIGHT_GOLD = RGB(243, 217, 161),
     GOLD = GOLD,
@@ -2292,7 +2311,7 @@ UICOLOURS = {
     PURPLE = RGB(152, 86, 232, 1),
     RED = RGB(207, 61, 61, 1),
     SLATE = RGB(155, 170, 177, 1),
-	SILVER = RGB(192, 192, 192, 1),
+    SILVER = RGB(192, 192, 192, 1),
 }
 
 PLANTREGISTRYUICOLOURS = {
@@ -2339,12 +2358,12 @@ CHATPRIORITIES =
 -- NOTE: Keep this up to date with USERFLAGS::Enum in PlayerListingData.h
 USERFLAGS =
 {
-    IS_GHOST			= 1,
-    IS_AFK				= 2,
-    CHARACTER_STATE_1	= 4,
-    CHARACTER_STATE_2	= 8,
-    IS_LOADING			= 16,
-    CHARACTER_STATE_3   = 32,
+    IS_GHOST          = 1,
+    IS_AFK            = 2,
+    CHARACTER_STATE_1 = 4,
+    CHARACTER_STATE_2 = 8,
+    IS_LOADING        = 16,
+    CHARACTER_STATE_3 = 32,
     -- = 64,
     -- = 128,
 }
@@ -2390,7 +2409,7 @@ ORDERS =
 -- How does this creature apply stunlock to the player
 PLAYERSTUNLOCK =
 {
-    ALWAYS = nil,--0,
+    ALWAYS = nil, --0,
     OFTEN = 1,
     SOMETIMES = 2,
     RARELY = 3,
@@ -2494,8 +2513,8 @@ assert(BRANCH == "dev" or SERVER_LEVEL_LOCATIONS[1] == "forest", "Invalid server
 
 EVENTSERVER_LEVEL_LOCATIONS =
 {
-	[LEVELTYPE.LAVAARENA] = { "lavaarena" },
-	[LEVELTYPE.QUAGMIRE] = { "quagmire" },
+    [LEVELTYPE.LAVAARENA] = { "lavaarena" },
+    [LEVELTYPE.QUAGMIRE] = { "quagmire" },
 }
 
 DEFAULT_LOCATION = "forest"
@@ -2508,29 +2527,29 @@ SERVER_LEVEL_SHARDS =
 
 SERVER_LEVEL_CONFIGS =
 {
-	forest = {
-		standalone = true,
-	},
-	cave = {
-		standalone = false,
-		shard_link = true,
-	},
+    forest = {
+        standalone = true,
+    },
+    cave = {
+        standalone = false,
+        shard_link = true,
+    },
 }
 
 -- Mirrors constant from CloudSaves.h
 CLOUD_SAVES_SAVE_OFFSET = 100000
 
 COMMAND_PERMISSION = {
-    ADMIN = "ADMIN", -- only admins see and can activate
+    ADMIN = "ADMIN",         -- only admins see and can activate
     MODERATOR = "MODERATOR", -- only admins and mods can see and activate
-    USER = "USER", -- anyone can see and do instantly. Mostly for local commands, or if a mod wants to offer accessible functionality
+    USER = "USER",           -- anyone can see and do instantly. Mostly for local commands, or if a mod wants to offer accessible functionality
 }
 
 COMMAND_RESULT = {
     ALLOW = "ALLOW",
     DISABLED = "DISABLED", --cannot run it right now (not related to voting)
     VOTE = "VOTE",
-    DENY = "DENY", --cannot start vote right now
+    DENY = "DENY",         --cannot start vote right now
     INVALID = "INVALID",
 }
 
@@ -2547,7 +2566,7 @@ LOCALPLAYER_MUSIC = {
 
 MAX_VOTE_OPTIONS = 6
 
-USER_HISTORY_EXPIRY_TIME = 60*60*24*30 -- 30 days
+USER_HISTORY_EXPIRY_TIME = 60 * 60 * 24 * 30 -- 30 days
 
 -- Mirrors enum in SystemService.h
 LANGUAGE =
@@ -2619,48 +2638,48 @@ OCEAN_WATERFALL_MAX_DIST = 14
 -- needs to be kept synchronized with InventoryProgress enum in InventoryManager.h
 INVENTORY_PROGRESS =
 {
-	IDLE = 0,
-	CHECK_SHOP = 1,
-	CHECK_EVENT = 2,
-	CHECK_DLC = 3,
-	CHECK_DAILY_GIFT = 4,
-	CHECK_PENDINGKEYVALUESTORES = 5,
-	CHECK_KEYVALUESTORES = 6,
-	CHECK_INVENTORY = 7,
+    IDLE = 0,
+    CHECK_SHOP = 1,
+    CHECK_EVENT = 2,
+    CHECK_DLC = 3,
+    CHECK_DAILY_GIFT = 4,
+    CHECK_PENDINGKEYVALUESTORES = 5,
+    CHECK_KEYVALUESTORES = 6,
+    CHECK_INVENTORY = 7,
 }
 
 CURRENT_BETA = 1 -- set to 0 if there is no beta. Note: release builds wont use this so only staging and dev really care
 BETA_INFO =
 {
     {
-		NAME = "UPDATEBETA",
-		SERVERTAG = "public_update_beta",
-		VERSION_MISMATCH_STRING = "VERSION_MISMATCH_UPDATEBETA",
-		URL = "https://forums.kleientertainment.com/forums/topic/106156-how-to-opt-in-to-return-of-them-beta-for-dont-starve-together/",
-	},
+        NAME = "UPDATEBETA",
+        SERVERTAG = "public_update_beta",
+        VERSION_MISMATCH_STRING = "VERSION_MISMATCH_UPDATEBETA",
+        URL = "https://forums.kleientertainment.com/forums/topic/106156-how-to-opt-in-to-return-of-them-beta-for-dont-starve-together/",
+    },
 
     {
-		NAME = "ROTBETA",
-		SERVERTAG = "return_of_them_beta",
-		VERSION_MISMATCH_STRING = "VERSION_MISMATCH_ROTBETA",
-		URL = "https://forums.kleientertainment.com/forums/topic/106156-how-to-opt-in-to-return-of-them-beta-for-dont-starve-together/ ",
-	},
+        NAME = "ROTBETA",
+        SERVERTAG = "return_of_them_beta",
+        VERSION_MISMATCH_STRING = "VERSION_MISMATCH_ROTBETA",
+        URL = "https://forums.kleientertainment.com/forums/topic/106156-how-to-opt-in-to-return-of-them-beta-for-dont-starve-together/ ",
+    },
 
     {
-		NAME = "ANRBETA",
-		SERVERTAG = "a_new_reign_beta",
-		VERSION_MISMATCH_STRING = "VERSION_MISMATCH_ARNBETA",
-		URL = "https://forums.kleientertainment.com/topic/69487-how-to-opt-in-to-a-new-reign-beta-for-dont-starve-together/",
-	},
+        NAME = "ANRBETA",
+        SERVERTAG = "a_new_reign_beta",
+        VERSION_MISMATCH_STRING = "VERSION_MISMATCH_ARNBETA",
+        URL = "https://forums.kleientertainment.com/topic/69487-how-to-opt-in-to-a-new-reign-beta-for-dont-starve-together/",
+    },
 
-	-- THE GENERIC PUBLIC BETA INFO MUST BE LAST --
-	-- This is added to all beta servers as a fallback
-	{
-		NAME = "PUBLIC_BETA",
-		SERVERTAG = "public_beta",
-		VERSION_MISMATCH_STRING = "VERSION_MISMATCH_PUBLIC_BETA",
-		URL = "https://forums.kleientertainment.com/forum/66-dont-starve-together-general-discussion/",
-	},
+    -- THE GENERIC PUBLIC BETA INFO MUST BE LAST --
+    -- This is added to all beta servers as a fallback
+    {
+        NAME = "PUBLIC_BETA",
+        SERVERTAG = "public_beta",
+        VERSION_MISMATCH_STRING = "VERSION_MISMATCH_PUBLIC_BETA",
+        URL = "https://forums.kleientertainment.com/forum/66-dont-starve-together-general-discussion/",
+    },
 }
 PUBLIC_BETA = #BETA_INFO
 
@@ -2702,36 +2721,36 @@ CHARACTER_BUTTON_SCALE =
 
 YOTB_COSTUMES =
 {
-    WAR         = 1,
-    DOLL        = 2,
-    ROBOT       = 4,
-    NATURE      = 8,
-    FORMAL      = 16,
-    VICTORIAN   = 32,
-    ICE         = 64,
-    FESTIVE     = 128,
-    BEAST       = 256,
+    WAR       = 1,
+    DOLL      = 2,
+    ROBOT     = 4,
+    NATURE    = 8,
+    FORMAL    = 16,
+    VICTORIAN = 32,
+    ICE       = 64,
+    FESTIVE   = 128,
+    BEAST     = 256,
 }
 
 SKIN_TYPES_THAT_RECEIVE_CLOTHING =
 {
     "normal_skin",
-	"wimpy_skin",
+    "wimpy_skin",
     "mighty_skin",
-	"stage_2",
+    "stage_2",
     "stage_3",
     "stage_4",
-	"young_skin",
-	"old_skin",
-	"powerup",
-	"NO_BASE",
+    "young_skin",
+    "old_skin",
+    "powerup",
+    "NO_BASE",
 }
 
 POSTACTIVATEHANDSHAKE = { -- NOTES(JBK): These are expected to never go backwards and only increment.
-    NONE = 0, -- Initialization purposes.
-    CTS_LOADED = 1, -- Client is ready to receive server state.
+    NONE = 0,             -- Initialization purposes.
+    CTS_LOADED = 1,       -- Client is ready to receive server state.
     STC_SENDINGSTATE = 2, -- Server is sending what it knows.
-    READY = 3, -- Client is in a good sync state. Must be the end.
+    READY = 3,            -- Client is in a good sync state. Must be the end.
 }
 
 STORM_TYPES =
@@ -2805,7 +2824,7 @@ LOADING_SCREEN_CONTROL_TIP_KEYS =
 {
     TIP_ATTACK = { attack = CONTROL_ATTACK },
     TIP_FORCE_ATTACK = { modifier = CONTROL_FORCE_ATTACK, attack = CONTROL_ATTACK },
-    TIP_HOLD_INSPECT = { inspect = CONTROL_FORCE_INSPECT},
+    TIP_HOLD_INSPECT = { inspect = CONTROL_FORCE_INSPECT },
     TIP_HOLD_ACTION = { action = CONTROL_ACTION },
     TIP_HOLD_PRIMARY = { primary = CONTROL_ATTACK },
     TIP_HOLD_MOUSE = { primary = CONTROL_PRIMARY },
@@ -2838,7 +2857,7 @@ SPECIAL_SCRAPBOOK_PAGES_LOOKUP =
     ]]
 }
 
-BERNIEALLEGIANCE ={
+BERNIEALLEGIANCE = {
     SHADOW = 1,
     LUNAR = 2,
 }
@@ -2878,9 +2897,9 @@ CHARLIERESIDUE_MAP_ACTIONS = {
     WORMHOLE = 1,
 }
 
-MINIMAP_DECORATION_PRIORITY = 50 -- NOTES(JBK): Nothing should go above this to maintain the minimap UI space.
+MINIMAP_DECORATION_PRIORITY = 50       -- NOTES(JBK): Nothing should go above this to maintain the minimap UI space.
 
-WOBYCOURIER_NO_CHEST_COORD = -32767 -- Way off of any normal sized map.
+WOBYCOURIER_NO_CHEST_COORD = -32767    -- Way off of any normal sized map.
 WOBYCOURIER_MIN_DIST_TO_PLAYER_SQ = 16 -- 4 * 4
 CONTAINER_AUTOCLOSE_DISTANCE = 3
 
@@ -2890,8 +2909,8 @@ CLIENTAUTHORITATIVESETTINGS = {
 }
 
 NIGHTSWORD_FX_OFFSETS = {
-    RIGHT = 0.75,-- -1,
-    DOWN = 2.9,-- 2.6,
+    RIGHT = 0.75, -- -1,
+    DOWN = 2.9,   -- 2.6,
 }
 
 SHARDTRANSACTIONSTEPS = {
@@ -2912,20 +2931,20 @@ EQUIVALENT_ATTUNABLE_TAGS =
 }
 
 -- This must match the Categories enum in HapticsManager
-HAPTICS = 
+HAPTICS =
 {
-    CATEGORIES = 
+    CATEGORIES =
     {
-        ["ui"]          = 2,       -- 0x02
-        ["danger"] 	    = 4,       -- 0x04
-        ["player"]      = 8,       -- 0x08
-        ["environment"] = 16,      -- 0x10
-        ["boss"]        = 32,      -- 0x20
+        ["ui"]          = 2,  -- 0x02
+        ["danger"]      = 4,  -- 0x04
+        ["player"]      = 8,  -- 0x08
+        ["environment"] = 16, -- 0x10
+        ["boss"]        = 32, -- 0x20
 
         -- These are included here for reference only since they exist and have meaning in C++
-        -- I won't include them in the table so we don't accidentally iterate over them        
+        -- I won't include them in the table so we don't accidentally iterate over them
         -- ["default"]     = 1,       -- 0x01
-        -- ["all"]         = 255,     -- 0xFF    
+        -- ["all"]         = 255,     -- 0xFF
     },
 
     CATEGORY_ENABLED_BY_DEFAULT = rawget(_G, "IsPS5") and IsPS5() or false,
@@ -2957,4 +2976,11 @@ PEARL_DECORATION_TYPES =
     FISHING_MARKERS = "FISHING_MARKERS",
     SPAWNER = "SPAWNER",
     JUNK = "JUNK",
+}
+
+YOTH_HORSE_NAMES = {
+    "CONQUEST",
+    "WAR",
+    "FAMINE",
+    "DEATH",
 }

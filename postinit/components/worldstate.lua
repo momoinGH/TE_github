@@ -1,5 +1,3 @@
-local upvaluehelper = require("tropical_utils/upvaluehelper")
-
 AddComponentPostInit("worldstate", function(self, inst)
     --------------------------------------------------------------------------
     --[[ Member variables ]]
@@ -16,7 +14,7 @@ AddComponentPostInit("worldstate", function(self, inst)
 
     ----竟然有现成的函数hook这个东西
     local OnTemperatureTick = inst:GetEventCallback("temperaturetick", TheWorld, "scripts/components/worldstate.lua")
-    local SetVariable = upvaluehelper.Get(OnTemperatureTick, "SetVariable")
+    local SetVariable = Hooks.FindUpvalue(OnTemperatureTick, "SetVariable")
 
     --------------------------------------------------------------------------
     --[[ Private event handlers ]]

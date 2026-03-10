@@ -25,5 +25,5 @@ AddPlayerPostInit(function(inst)
 
     inst:ListenForEvent("locomote", OnLocomote)
 
-    Utils.FnDecorator(inst, "OnDespawn", OnDespawnBefore)
+    Hooks.FnDecorator(inst, "OnDespawn", OnDespawnBefore)
 end)

@@ -2,7 +2,6 @@
 function ModGetLevelDataOverride()
     print("TA Mod Loading Custom Presets Manager33333")
 
-
     local filename = "../leveldataoverride.lua"
     local success, savedata
 

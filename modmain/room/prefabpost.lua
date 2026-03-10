@@ -13,7 +13,7 @@ modimport "modmain/room/components/map"
 
 
 ----------------------------------------------------------------------------------------------------
-Utils.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
+Hooks.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
     local val = next(retTab)
     if val > TUNING.WILDFIRE_THRESHOLD then
         -- 防止室内野火
@@ -42,14 +42,14 @@ local function ShelteredOnUpdateBefore(self)
 end
 
 AddComponentPostInit("sheltered", function(self)
-    Utils.FnDecorator(self, "OnUpdate", ShelteredOnUpdateBefore)
+    Hooks.FnDecorator(self, "OnUpdate", ShelteredOnUpdateBefore)
 end)
 
 ----------------------------------------------------------------------------------------------------
 --室内屏蔽花粉、雪、雨粒子？
 AddSimPostInit(function()
     EmitterManager.old_updatefuncs = { snow = nil, rain = nil, pollen = nil }
-    Utils.FnDecorator(EmitterManager, "PostUpdate", function(self, ...)
+    Hooks.FnDecorator(EmitterManager, "PostUpdate", function(self, ...)
         for inst, data in pairs(self.awakeEmitters.infiniteLifetimes) do
             if inst.prefab == "pollen" or inst.prefab == "snow" or inst.prefab == "rain" then
                 if self.old_updatefuncs[inst.prefab] == nil then

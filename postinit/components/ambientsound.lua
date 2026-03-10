@@ -1,4 +1,3 @@
-local upvaluehelper = require("tropical_utils/upvaluehelper")
 local ambient_sounds =
 {
     --TODO需要重新整理地皮
@@ -45,7 +44,7 @@ local ambient_sounds =
 
 AddComponentPostInit("ambientsound", function(self)
     local inst = self.inst
-    AMBIENT_SOUNDS = upvaluehelper.Get(self.OnUpdate, "AMBIENT_SOUNDS")
+    AMBIENT_SOUNDS = Hooks.FindUpvalue(self.OnUpdate, "AMBIENT_SOUNDS")
     for name, v in pairs(ambient_sounds) do
         AMBIENT_SOUNDS[name] = v
     end

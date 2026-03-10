@@ -24,9 +24,9 @@ end
 
 AddPlayerPostInit(function(inst)
     if not TheWorld.ismastersim then return end
-    Utils.FnDecorator(inst.components.temperature, "OnUpdate", OnTemperatureUpdateBefore)
-    -- Utils.FnDecorator(inst.components.weather, "OnUpdate", OnWeatherUpdateAfter)
-    -- Utils.FnDecorator(inst.components.moisture, "GetMoistureRate", GetMoistureRateBefore)
+    Hooks.FnDecorator(inst.components.temperature, "OnUpdate", OnTemperatureUpdateBefore)
+    -- Hooks.FnDecorator(inst.components.weather, "OnUpdate", OnWeatherUpdateAfter)
+    -- Hooks.FnDecorator(inst.components.moisture, "GetMoistureRate", GetMoistureRateBefore)
 end)
 
 
@@ -60,17 +60,16 @@ GLOBAL.MakeSnowCovered = function(inst, ...)
 end
 
 
-
 AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
     end
 
     --青蛙雨
-    local frograin = upvaluehelper.GetWorldHandle(inst, "israining", "components/frograin") --下雨
+    local frograin = Hooks.FindUpvalueWorldHandle(inst, "israining", "components/frograin") --下雨
     if frograin then
         -- print("找到青蛙雨了")
-        local GetSpawnPoint = upvaluehelper.Get(frograin, "GetSpawnPoint")
+        local GetSpawnPoint = Hooks.FindUpvalue(frograin, "GetSpawnPoint")
         if GetSpawnPoint ~= nil then
             local old = GetSpawnPoint
             local function newGetSpawnPoint(pt)
@@ -80,14 +79,14 @@ AddPrefabPostInit("forest", function(inst)
                 end
                 return old(pt)
             end
-            upvaluehelper.Set(frograin, "GetSpawnPoint", newGetSpawnPoint)
+            Hooks.SetUpvalue(frograin, "GetSpawnPoint", newGetSpawnPoint)
         end
     end
 
 
-    local wildfires = upvaluehelper.GetEventHandle(TheWorld, "ms_lightwildfireforplayer", "components/wildfires") --野火
+    local wildfires = Hooks.FindUpvalueEventHandle(TheWorld, "ms_lightwildfireforplayer", "components/wildfires") --野火
     if wildfires then
-        local LightFireForPlayer = upvaluehelper.Get(wildfires, "LightFireForPlayer")
+        local LightFireForPlayer = Hooks.FindUpvalue(wildfires, "LightFireForPlayer")
         if LightFireForPlayer ~= nil then
             local old = LightFireForPlayer
             local function NewLightFireForPlayer(player, rescheduleFn)
@@ -99,7 +98,7 @@ AddPrefabPostInit("forest", function(inst)
                 end
                 old(player, rescheduleFn)
             end
-            upvaluehelper.Set(wildfires, "LightFireForPlayer", NewLightFireForPlayer)
+            Hooks.SetUpvalue(wildfires, "LightFireForPlayer", NewLightFireForPlayer)
         end
     end
 end)
@@ -139,30 +138,5 @@ local function AreaAwareCurrentlyInTagBefore(self, tag)
 end
 
 AddComponentPostInit("areaaware", function(self)
-    Utils.FnDecorator(self, "CurrentlyInTag", AreaAwareCurrentlyInTagBefore)
+    Hooks.FnDecorator(self, "CurrentlyInTag", AreaAwareCurrentlyInTagBefore)
 end)
-
-
-----毒蜘蛛刷新
-for _, prefab in pairs({ "spider_warrior" }) do
-    AddPrefabPostInit(prefab, function(inst)
-        if not TheWorld.ismastersim then
-            return
-        end
-
-        inst:DoTaskInTime(0, function(inst)
-            local map = GLOBAL.TheWorld.Map
-            local x, y, z = inst.Transform:GetWorldPosition()
-            if x and y and z then
-                local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-                if IsSwLandTile(ground) then
-                    local bolha = SpawnPrefab("spider_tropical")
-                    if bolha then
-                        bolha.Transform:SetPosition(x, y, z)
-                    end
-                    inst:Remove()
-                end
-            end
-        end)
-    end)
-end

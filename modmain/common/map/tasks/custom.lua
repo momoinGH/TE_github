@@ -320,7 +320,7 @@ AddRoom("OceanSwell_SW", {
         },
         countstaticlayouts =
         {
-            ["CrabKing"] = GetModConfigData("Moonshipwrecked"),
+            ["CrabKing"] = TUNING.tropical.moon_shipwrecked and 1 or 0,
         },
 
     }
@@ -346,7 +346,7 @@ AddRoom("OceanRough_SW", {
 
         countstaticlayouts =
         {
-            ["HermitcrabIsland"] = GetModConfigData("Moonshipwrecked"),
+            ["HermitcrabIsland"] = TUNING.tropical.moon_shipwrecked and 1 or 0,
         },
     }
 })
@@ -3432,7 +3432,7 @@ AddTask("XDeep_lost_ruins_gas", {
     colour = { r = 0.8, g = 0.6, b = 0.2, a = 0.3 }
 })
 ------------------------------------------------------------------------------SW continental task---------------------------------------------------	
-if GetModConfigData("Shipwrecked") == 10 then
+if TUNING.tropical.shipwrecked == 10 then
     AddTask("MISTO6", {
         locks = {},
         keys_given = { KEYS.CAVE },
@@ -3798,7 +3798,7 @@ AddTask("walrusvacationjunto", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
 ------------------------------------------------------------SW islands tasks----------------------------------------------------------------------
-if GetModConfigData("Shipwrecked") == 15 or TUNING.tropical.only_shipwrecked then
+if TUNING.tropical.shipwrecked == 15 or TUNING.tropical.only_shipwrecked then
     AddTask("TROPICAL6", {
         locks = {},
         keys_given = {},
@@ -5233,7 +5233,7 @@ if TUNING.tropical.only_shipwrecked then
 end
 
 
-if GetModConfigData("Shipwrecked") == 20 then
+if TUNING.tropical.shipwrecked == 20 then
     AddTask("XISTO6", {
         locks = LOCKS.NONE,
         keys_given = { KEYS.PICKAXE, KEYS.AXE, KEYS.GRASS, KEYS.WOOD, KEYS.TIER1 },
@@ -5487,7 +5487,7 @@ end
 
 
 
-if GetModConfigData("Shipwrecked") == 25 or TUNING.tropical.only_shipwrecked then
+if TUNING.tropical.shipwrecked == 25 or TUNING.tropical.only_shipwrecked then
     AddTask("A_MISTO39", {
         locks = {},
         keys_given = { KEYS.MUSHROOM, KEYS.RABBIT, KEYS.AREA, KEYS.CAVERN, KEYS.SINKHOLE, KEYS.PASSAGE },
@@ -8792,7 +8792,7 @@ AddRoom("MeadowBees", {
         distributeprefabs =
         {
             flint = 0.05,               --was .01
-            grass = 3,              --was .4,
+            grass = 3,                  --was .4,
             --ox = 3,
             sweet_potato_planted = 0.1, --was .05,
             rock_flintless = 0.01,
@@ -9081,8 +9081,8 @@ AddRoom("Volcano", {
         countprefabs =
         {
             volcanofog = math.random(1, 2),
-            volcano = function() if GetModConfigData("Volcano") == false then return 1 else return 0 end end,
-            cave_entrance_vulcao = function() if GetModConfigData("Volcano") == true then return 1 else return 0 end end,
+            volcano = function() return Ternary(TUNING.tropical.volcano, 0, 1) end,
+            cave_entrance_vulcao = function() return TUNING.tropical.volcano and 1 or 0 end,
         },
 
         prefabdata =
@@ -9767,13 +9767,13 @@ AddRoom("BeachSand", {
             rock_limpet = .05,
             crabhole = .2,
             palmtree = .3,
-            rocks = .03,    --trying
-            rock1 = .1,     --trying
+            rocks = .03,   --trying
+            rock1 = .1,    --trying
             --rock2 = .2,
-            beehive = .01,  --was .05,
+            beehive = .01, --was .05,
             --flower = .04, --trying
-            grass = .2, --trying
-            sapling = .2,   --trying
+            grass = .2,    --trying
+            sapling = .2,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -9803,8 +9803,8 @@ AddRoom("BeachSandHome", {
             rock_flintless = .1, --trying
             --beehive = .05, --trying
             --flower = .04, --trying
-            grass = .5, --trying
-            sapling = .2,   --trying
+            grass = .5,   --trying
+            sapling = .2, --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -9830,8 +9830,8 @@ AddRoom("BeachUnkept", {
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            grass = .3, --down from 3
-            sapling = .1,   --lowered from 15
+            grass = .3,   --down from 3
+            sapling = .1, --lowered from 15
             --flower = 0.05,
             rock_limpet = .02,
             crabhole = .015, --was .03
@@ -9866,8 +9866,8 @@ AddRoom("BeachUnkeptInicio", {
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            grass = .3, --down from 3
-            sapling = .1,   --lowered from 15
+            grass = .3,   --down from 3
+            sapling = .1, --lowered from 15
             --flower = 0.05,
             rock_limpet = .02,
             crabhole = .015, --was .03
@@ -9939,8 +9939,8 @@ AddRoom("BeachUnkeptDubloon", {
         distributeprefabs =
         {
             seashell_beached = 0.025,
-            grass = .1, --was .3
-            sapling = .05,  --was .15
+            grass = .1,    --was .3
+            sapling = .05, --was .15
             --flower = 0.05,
             rock_limpet = .02,
             --crabhole = .015, --was .03
@@ -9994,13 +9994,13 @@ AddRoom("BeachSinglePalmTreeHome", {
             rock_limpet = .05,
             crabhole = .2,
             palmtree = .3,
-            rocks = .03,    --trying
-            rock1 = .1,     --trying
+            rocks = .03,   --trying
+            rock1 = .1,    --trying
             --rock2 = .2,
-            beehive = .01,  --was .05,
+            beehive = .01, --was .05,
             --flower = .04, --trying
-            grass = .2, --trying
-            sapling = .2,   --trying
+            grass = .2,    --trying
+            sapling = .2,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -10167,8 +10167,8 @@ AddRoom("BeesBeach", {
             beehive = .1, --was .5
             wasphive = .05,
             --flower = .04, --trying
-            grass = .4, --trying
-            sapling = .4,   --trying
+            grass = .4,   --trying
+            sapling = .4, --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -10345,7 +10345,7 @@ AddRoom("BeachNoFlowers", {
             palmtree = .3,
             rocks = .003,   --trying
             beehive = .005, --trying
-            grass = .3, --trying
+            grass = .3,     --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -10391,7 +10391,7 @@ AddRoom("BeachNoLimpets", {
             rocks = .003,    --trying
             beehive = .0025, --trying
             --flower = 0.04, --trying
-            grass = .3,  --trying
+            grass = .3,      --trying
             sapling = .2,    --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -10416,7 +10416,7 @@ AddRoom("BeachNoCrabbits", {
             rocks = .003,   --trying
             beehive = .005, --trying
             --flower = 0.04, --trying
-            grass = .3, --trying
+            grass = .3,     --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -10441,7 +10441,7 @@ AddRoom("BeachPalmCasino", {
             rocks = .003,   --trying
             beehive = .005, --trying
             --flower = 0.04, --trying
-            grass = .3, --trying
+            grass = .3,     --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -11959,13 +11959,13 @@ AddRoom("BeachPortalRoom", {
             rock_limpet = .05,
             crabhole = .2,
             palmtree = .5,
-            rocks = .03,    --trying
-            rock1 = .1,     --trying
+            rocks = .03,   --trying
+            rock1 = .1,    --trying
             --rock2 = .2,
-            beehive = .01,  --was .05,
+            beehive = .01, --was .05,
             --flower = .04, --trying
-            grass = .2, --trying
-            sapling = .2,   --trying
+            grass = .2,    --trying
+            sapling = .2,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -12076,7 +12076,7 @@ AddRoom("MAINMeadowBees", {
         distributeprefabs =
         {
             flint = 0.05,               --was .01
-            grass = 3,              --was .4,
+            grass = 3,                  --was .4,
             --ox = 3,
             sweet_potato_planted = 0.1, --was .05,
             rock_flintless = 0.01,
@@ -12365,8 +12365,8 @@ AddRoom("MAINVolcano", {
         countprefabs =
         {
             volcanofog = math.random(1, 2),
-            volcano = function() if GetModConfigData("Volcano") == false then return 1 else return 0 end end,
-            cave_entrance_vulcao = function() if GetModConfigData("Volcano") == true then return 1 else return 0 end end,
+            volcano = function() return TUNING.tropical.volcano and 0 or 1 end,
+            cave_entrance_vulcao = function() return TUNING.tropical.volcano and 1 or 0 end,
         },
 
         prefabdata =
@@ -12996,13 +12996,13 @@ AddRoom("MAINBeachSand", {
             rock_limpet = .05,
             crabhole = .2,
             palmtree = .3,
-            rocks = .03,    --trying
-            rock1 = .1,     --trying
+            rocks = .03,   --trying
+            rock1 = .1,    --trying
             --rock2 = .2,
-            beehive = .01,  --was .05,
+            beehive = .01, --was .05,
             --flower = .04, --trying
-            grass = .2, --trying
-            sapling = .2,   --trying
+            grass = .2,    --trying
+            sapling = .2,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -13032,8 +13032,8 @@ AddRoom("MAINBeachSandHome", {
             rock_flintless = .1, --trying
             --beehive = .05, --trying
             --flower = .04, --trying
-            grass = .5, --trying
-            sapling = .2,   --trying
+            grass = .5,   --trying
+            sapling = .2, --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -13059,8 +13059,8 @@ AddRoom("MAINBeachUnkept", {
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            grass = .3, --down from 3
-            sapling = .1,   --lowered from 15
+            grass = .3,   --down from 3
+            sapling = .1, --lowered from 15
             --flower = 0.05,
             rock_limpet = .02,
             crabhole = .015, --was .03
@@ -13095,8 +13095,8 @@ AddRoom("MAINBeachUnkeptInicio", {
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            grass = .3, --down from 3
-            sapling = .1,   --lowered from 15
+            grass = .3,   --down from 3
+            sapling = .1, --lowered from 15
             --flower = 0.05,
             rock_limpet = .02,
             crabhole = .015, --was .03
@@ -13168,8 +13168,8 @@ AddRoom("MAINBeachUnkeptDubloon", {
         distributeprefabs =
         {
             seashell_beached = 0.025,
-            grass = .1, --was .3
-            sapling = .05,  --was .15
+            grass = .1,    --was .3
+            sapling = .05, --was .15
             --flower = 0.05,
             rock_limpet = .02,
             --crabhole = .015, --was .03
@@ -13223,13 +13223,13 @@ AddRoom("MAINBeachSinglePalmTreeHome", {
             rock_limpet = .05,
             crabhole = .2,
             palmtree = .3,
-            rocks = .03,    --trying
-            rock1 = .1,     --trying
+            rocks = .03,   --trying
+            rock1 = .1,    --trying
             --rock2 = .2,
-            beehive = .01,  --was .05,
+            beehive = .01, --was .05,
             --flower = .04, --trying
-            grass = .2, --trying
-            sapling = .2,   --trying
+            grass = .2,    --trying
+            sapling = .2,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -13396,8 +13396,8 @@ AddRoom("MAINBeesBeach", {
             beehive = .1, --was .5
             wasphive = .05,
             --flower = .04, --trying
-            grass = .4, --trying
-            sapling = .4,   --trying
+            grass = .4,   --trying
+            sapling = .4, --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -13574,7 +13574,7 @@ AddRoom("MAINBeachNoFlowers", {
             palmtree = .3,
             rocks = .003,   --trying
             beehive = .005, --trying
-            grass = .3, --trying
+            grass = .3,     --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -13620,7 +13620,7 @@ AddRoom("MAINBeachNoLimpets", {
             rocks = .003,    --trying
             beehive = .0025, --trying
             --flower = 0.04, --trying
-            grass = .3,  --trying
+            grass = .3,      --trying
             sapling = .2,    --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -13645,7 +13645,7 @@ AddRoom("MAINBeachNoCrabbits", {
             rocks = .003,   --trying
             beehive = .005, --trying
             --flower = 0.04, --trying
-            grass = .3, --trying
+            grass = .3,     --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -13670,7 +13670,7 @@ AddRoom("MAINBeachPalmCasino", {
             rocks = .003,   --trying
             beehive = .005, --trying
             --flower = 0.04, --trying
-            grass = .3, --trying
+            grass = .3,     --trying
             sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
@@ -15188,13 +15188,13 @@ AddRoom("MAINBeachPortalRoom", {
             rock_limpet = .05,
             crabhole = .2,
             palmtree = .5,
-            rocks = .03,    --trying
-            rock1 = .1,     --trying
+            rocks = .03,   --trying
+            rock1 = .1,    --trying
             --rock2 = .2,
-            beehive = .01,  --was .05,
+            beehive = .01, --was .05,
             --flower = .04, --trying
-            grass = .2, --trying
-            sapling = .2,   --trying
+            grass = .2,    --trying
+            sapling = .2,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -18029,7 +18029,7 @@ AddTask("HamSpillagmiteCaverns1", {
     colour = { r = 0.3, g = 0.3, b = 0.3, a = 0.9 },
 })
 ---------------------------------------------------------------------------------------------------------------
-if TUNING.tropical.only_shipwrecked and GetModConfigData("togethercaves_shipwreckedworld") == 0 then
+if TUNING.tropical.only_shipwrecked and not TUNING.tropical.togethercaves_shipwreckedworld then
     AddTask("separavulcao", {
         locks = {
             LOCKS.NONE,
@@ -18043,7 +18043,7 @@ if TUNING.tropical.only_shipwrecked and GetModConfigData("togethercaves_shipwrec
         background_room = "ForceDisconnectedRoom",
         colour = { r = 1, g = 1, b = 1, a = 0.3 }
     })
-elseif GetModConfigData("Volcano") == true then
+elseif TUNING.tropical.volcano then
     AddTask("separavulcao", {
         locks = {
             LOCKS.RUINS,
@@ -20150,7 +20150,7 @@ if TUNING.tropical.only_shipwrecked then
     local function LevelPreInit(level)
         if level.location == "cave" then
             level.overrides.keep_disconnected_tiles = true
-            if level.location == "cave" and GetModConfigData("togethercaves_shipwreckedworld") == 0 then
+            if level.location == "cave" and not TUNING.tropical.togethercaves_shipwreckedworld then
                 level.tasks = {}
                 level.numoptionaltasks = 0
                 level.set_pieces = {}
@@ -20190,7 +20190,7 @@ if TUNING.tropical.only_shipwrecked then
                 table.insert(level.tasks, "task_underwater_kraken_zone")
                 table.insert(level.tasks, "secretcavedivisor")
                 table.insert(level.tasks, "task_secretcave1")
-                if GetModConfigData("togethercaves_shipwreckedworld") == 1 then
+                if TUNING.tropical.togethercaves_shipwreckedworld then
                     table.insert(level.tasks, "atlantidaExitRoom")
                 end
                 table.insert(level.tasks, "task_underwaterlavarock")
@@ -20370,7 +20370,7 @@ if TUNING.tropical.only_shipwrecked then
             table.insert(taskset.tasks, "FrostIsland_icelake")
         end
 
-        if GetModConfigData("Moonshipwrecked") == 1 then
+        if TUNING.tropical.moon_shipwrecked then
             table.insert(taskset.tasks, "MoonIsland_IslandShards")
             table.insert(taskset.tasks, "MoonIsland_Beach")
             table.insert(taskset.tasks, "MoonIsland_Forest")
@@ -20389,23 +20389,23 @@ if TUNING.tropical.only_shipwrecked then
         end
         -----------------------------cherry forest-----------------------------------------------------
         if KnownModIndex:IsModEnabled("workshop-1289779251") then
-            if GetModConfigData("cherryforest") == 10 then
+            if TUNING.tropical.cherryforest == 10 then
                 table.insert(taskset.tasks, "cherry_mainland")
             end
 
-            if GetModConfigData("cherryforest") == 20 then
+            if TUNING.tropical.cherryforest == 20 then
                 table.insert(taskset.tasks, "cherry_island")
             end
 
-            if GetModConfigData("cherryforest") == 30 then
+            if TUNING.tropical.cherryforest == 30 then
                 table.insert(taskset.tasks, "cherry_grove")
             end
 
-            if GetModConfigData("cherryforest") == 40 then
+            if TUNING.tropical.cherryforest == 40 then
                 table.insert(taskset.tasks, "cherry_arquipelago")
             end
 
-            if GetModConfigData("cherryforest") == 50 then
+            if TUNING.tropical.cherryforest == 50 then
                 AddTaskPreInit("MoonIsland_IslandShards", function(task)
                     task.room_choices["CherryForestIsland2"] = 2
                 end)
@@ -20427,7 +20427,7 @@ if TUNING.tropical.only_shipwrecked then
 
         taskset.set_pieces = {}
 
-        if GetModConfigData("Moonshipwrecked") == 1 then
+        if TUNING.tropical.moon_shipwrecked then
             taskset.set_pieces["MoonAltarRockGlass"] = { count = 1, tasks = { "MoonIsland_Mine" } }
             taskset.set_pieces["MoonAltarRockIdol"] = { count = 1, tasks = { "MoonIsland_Mine" } }
             taskset.set_pieces["MoonAltarRockSeed"] = { count = 1, tasks = { "MoonIsland_Mine" } }
@@ -20436,7 +20436,7 @@ if TUNING.tropical.only_shipwrecked then
         end
 
 
-        if GetModConfigData("togethercaves_shipwreckedworld") == 1 then
+        if TUNING.tropical.togethercaves_shipwreckedworld then
             taskset.set_pieces["CaveEntrance"] = {
                 count = 10,
                 tasks =
@@ -20958,7 +20958,7 @@ else
 
 
 
-            if GetModConfigData("Volcano") == true and GetModConfigData("Shipwrecked") ~= 5 or TUNING.tropical.tropicalshards == 30 then
+            if TUNING.tropical.volcano and TUNING.tropical.shipwrecked or TUNING.tropical.tropicalshards == 30 then
                 table.insert(level.tasks, "vulcaonacaverna")
                 table.insert(level.tasks, "vulcaonacaverna1")
                 table.insert(level.tasks, "vulcaonacaverna2")
@@ -20996,11 +20996,11 @@ else
                 table.insert(level.tasks, "task_underwaterlavarock")
                 table.insert(level.tasks, "task_underwatermagmafield")
                 table.insert(level.tasks, "task_underwaterwatercoral")
-                if GetModConfigData("Shipwrecked") ~= 5 or GetModConfigData("enableallprefabs") == true then
+                if TUNING.tropical.shipwrecked or GetModConfigData("enableallprefabs") == true then
                     table
                         .insert(level.tasks, "UnderwaterExit1")
                 end
-                if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.only_hamlet or GetModConfigData("enableallprefabs") == true then
+                if TUNING.tropical.hamlet or GetModConfigData("enableallprefabs") == true then
                     table.insert(level.tasks, "UnderwaterExit2")
                 end
             end
@@ -21048,7 +21048,7 @@ else
         end
 
 
-        if GetModConfigData("Hamlet") == 20 then
+        if TUNING.tropical.hamlet == 20 then
             table.insert(taskset.tasks, "Edge_of_the_unknown") --pugalisk
             --table.insert(taskset.tasks, "XEdge_of_the_unknown")
             table.insert(taskset.tasks, "Xplains")
@@ -21065,7 +21065,7 @@ else
 
 
 
-        if GetModConfigData("Hamlet") == 15 then
+        if TUNING.tropical.hamlet == 15 then
             table.insert(taskset.tasks, "Edge_of_the_unknown")
             table.insert(taskset.tasks, "plains")
             table.insert(taskset.tasks, "plains_ruins")
@@ -21081,7 +21081,7 @@ else
 
 
 
-        if GetModConfigData("Hamlet") == 10 then
+        if TUNING.tropical.hamlet == 10 then
             -- table.insert(taskset.tasks, "Mplains") --
             table.insert(taskset.tasks, "Mplains_ruins")
             -- table.insert(taskset.tasks, "MDeep_rainforest") --
@@ -21101,7 +21101,7 @@ else
 
         ---------------------Main Land------------------------	
         if TUNING.tropical.hamlet_pigcity1 == 10 then
---[[
+            --[[
             table.insert(taskset.tasks, "XPigcity")
             table.insert(taskset.tasks, "XPigcityside1")
             table.insert(taskset.tasks, "XPigcityside2")
@@ -21115,7 +21115,7 @@ else
 
         ------------continent----------------------
         if TUNING.tropical.hamlet_pigcity1 == 15 then
---[[
+            --[[
             table.insert(taskset.tasks, "MPigcity")
             table.insert(taskset.tasks, "MPigcityside1")
             table.insert(taskset.tasks, "MPigcityside2")
@@ -21139,7 +21139,7 @@ else
 
         ---------------------Main Land------------------------	
         if TUNING.tropical.hamlet_pigcity2 == 10 then
---[[
+            --[[
             table.insert(taskset.tasks, "XPigcity2")
             table.insert(taskset.tasks, "XPigcity2side1")
             table.insert(taskset.tasks, "XPigcity2side2")
@@ -21150,7 +21150,6 @@ else
             table.insert(taskset.tasks, "Other_pigtopia")
             -- table.insert(taskset.tasks, "Other_pigtopia_capital")
             table.insert(taskset.tasks, "XDeep_rainforest_3")
-
         end
 
         ------------continent----------------------
@@ -21243,7 +21242,7 @@ else
         end
 
 
-        if GetModConfigData("Shipwrecked") == 10 then
+        if TUNING.tropical.shipwrecked == 10 then
             table.insert(taskset.tasks, "MISTO6")
             table.insert(taskset.tasks, "MISTO7")
             table.insert(taskset.tasks, "MISTO8")
@@ -21266,7 +21265,7 @@ else
         end
 
 
-        if GetModConfigData("Shipwrecked") == 15 then
+        if TUNING.tropical.shipwrecked == 15 then
             table.insert(taskset.tasks, "TROPICAL6")
             table.insert(taskset.tasks, "TROPICAL7")
             table.insert(taskset.tasks, "TROPICAL8")
@@ -21289,7 +21288,7 @@ else
         end
 
 
-        if GetModConfigData("Shipwrecked") == 20 then
+        if TUNING.tropical.shipwrecked == 20 then
             table.insert(taskset.tasks, "XISTO6")
             table.insert(taskset.tasks, "XISTO7")
             table.insert(taskset.tasks, "XISTO8")
@@ -21319,7 +21318,7 @@ else
         end
 
 
-        if GetModConfigData("Shipwrecked") == 25 then
+        if TUNING.tropical.shipwrecked == 25 then
             table.insert(taskset.tasks, "A_MISTO6")
             table.insert(taskset.tasks, "A_MISTO7")
             table.insert(taskset.tasks, "A_MISTO8")
@@ -21408,23 +21407,23 @@ else
 
         -----------------------------cherry forest-----------------------------------------------------
         if KnownModIndex:IsModEnabled("workshop-1289779251") then
-            if GetModConfigData("cherryforest") == 10 then
+            if TUNING.tropical.cherryforest == 10 then
                 table.insert(taskset.tasks, "cherry_mainland")
             end
 
-            if GetModConfigData("cherryforest") == 20 then
+            if TUNING.tropical.cherryforest == 20 then
                 table.insert(taskset.tasks, "cherry_island")
             end
 
-            if GetModConfigData("cherryforest") == 30 then
+            if TUNING.tropical.cherryforest == 30 then
                 table.insert(taskset.tasks, "cherry_grove")
             end
 
-            if GetModConfigData("cherryforest") == 40 then
+            if TUNING.tropical.cherryforest == 40 then
                 table.insert(taskset.tasks, "cherry_arquipelago")
             end
 
-            if GetModConfigData("cherryforest") == 50 then
+            if TUNING.tropical.cherryforest == 50 then
                 AddTaskPreInit("MoonIsland_IslandShards", function(task)
                     task.room_choices["CherryForestIsland2"] = 2
                 end)
@@ -21614,77 +21613,77 @@ else
 
         --------------------------------
 
-        if GetModConfigData("Shipwrecked") == 10 and TUNING.tropical.tropicalshards ~= 0 then
+        if TUNING.tropical.shipwrecked == 10 and TUNING.tropical.tropicalshards ~= 0 then
             taskset.set_pieces["sw_exit"] = { count = 1, tasks = { "MISTO6", "MISTO7", "MISTO8", "MISTO9", "MISTO11", "MISTO14", "MISTO15", "MISTO16", "MISTO17", "MISTO20", "MISTO26", "MISTO27", "MISTO28", "MISTO38", "MISTO39", "MISTO43", "MISTO45", "MISTO50", "MISTO51" } }
         end
 
-        if GetModConfigData("Shipwrecked") == 15 and TUNING.tropical.tropicalshards ~= 0 then
+        if TUNING.tropical.shipwrecked == 15 and TUNING.tropical.tropicalshards ~= 0 then
             taskset.set_pieces["sw_exit"] = { count = 1, tasks = { "TROPICAL6", "TROPICAL7", "TROPICAL8", "TROPICAL9", "TROPICAL11", "TROPICAL14", "TROPICAL15", "TROPICAL16", "TROPICAL17", "TROPICAL20", "TROPICAL26", "TROPICAL27", "TROPICAL28", "TROPICAL38", "TROPICAL39", "TROPICAL43", "TROPICAL45", "TROPICAL50", "TROPICAL51" } }
         end
 
-        if GetModConfigData("Shipwrecked") == 20 and TUNING.tropical.tropicalshards ~= 0 then
+        if TUNING.tropical.shipwrecked == 20 and TUNING.tropical.tropicalshards ~= 0 then
             taskset.set_pieces["sw_exit"] = { count = 1, tasks = { "XISTO6", "XISTO7", "XISTO8", "XISTO9", "XISTO11", "XISTO14", "XISTO15", "XISTO16", "XISTO17", "XISTO20", "XISTO26", "XISTO27", "XISTO28", "XISTO38", "XISTO39", "XISTO43", "XISTO45", "XISTO50", "XISTO51" } }
         end
 
-        if GetModConfigData("Shipwrecked") == 25 and TUNING.tropical.tropicalshards ~= 0 then
+        if TUNING.tropical.shipwrecked == 25 and TUNING.tropical.tropicalshards ~= 0 then
             taskset.set_pieces["sw_exit"] = { count = 1, tasks = { "A_MISTO6", "A_MISTO7", "A_MISTO8", "A_MISTO9", "A_MISTO11", "A_MISTO14", "A_MISTO15", "A_MISTO16", "A_MISTO17", "A_MISTO20", "A_MISTO26", "A_MISTO27", "A_MISTO28", "A_MISTO38", "A_MISTO39", "A_MISTO43", "A_MISTO45", "A_MISTO50", "A_MISTO51" } }
         end
 
         -----------------------------
-        if GetModConfigData("Hamlet") == 20 and TUNING.tropical.tropicalshards ~= 0 then
+        if TUNING.tropical.hamlet == 20 and TUNING.tropical.tropicalshards ~= 0 then
             taskset.set_pieces["hamlet_exit"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
         end
 
-        if GetModConfigData("Hamlet") == 15 and TUNING.tropical.tropicalshards ~= 0 then
+        if TUNING.tropical.hamlet == 15 and TUNING.tropical.tropicalshards ~= 0 then
             taskset.set_pieces["hamlet_exit"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
         end
 
-        if GetModConfigData("Hamlet") == 10 and TUNING.tropical.tropicalshards ~= 0 then
+        if TUNING.tropical.hamlet == 10 and TUNING.tropical.tropicalshards ~= 0 then
             taskset.set_pieces["hamlet_exit"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }
         end
         ----------------------------------------wormhole para ilha do outro dlc---------------------------------------
 
-        if GetModConfigData("Shipwrecked") == 10 then
+        if TUNING.tropical.shipwrecked == 10 then
             taskset.set_pieces["ligamundoswexit"] = { count = 1, tasks = { "MISTO6", "MISTO7", "MISTO8", "MISTO9", "MISTO11", "MISTO14", "MISTO15", "MISTO16", "MISTO17", "MISTO20", "MISTO26", "MISTO27", "MISTO28", "MISTO38", "MISTO39", "MISTO43", "MISTO45", "MISTO50", "MISTO51" } }
         end
 
-        if GetModConfigData("Shipwrecked") == 15 then
+        if TUNING.tropical.shipwrecked == 15 then
             taskset.set_pieces["ligamundoswexit"] = { count = 1, tasks = { "TROPICAL6", "TROPICAL7", "TROPICAL8", "TROPICAL9", "TROPICAL11", "TROPICAL14", "TROPICAL15", "TROPICAL16", "TROPICAL17", "TROPICAL20", "TROPICAL26", "TROPICAL27", "TROPICAL28", "TROPICAL38", "TROPICAL39", "TROPICAL43", "TROPICAL45", "TROPICAL50", "TROPICAL51" } }
         end
 
-        if GetModConfigData("Shipwrecked") == 20 then
+        if TUNING.tropical.shipwrecked == 20 then
             taskset.set_pieces["ligamundoswexit"] = { count = 1, tasks = { "XISTO6", "XISTO7", "XISTO8", "XISTO9", "XISTO11", "XISTO14", "XISTO15", "XISTO16", "XISTO17", "XISTO20", "XISTO26", "XISTO27", "XISTO28", "XISTO38", "XISTO39", "XISTO43", "XISTO45", "XISTO50", "XISTO51" } }
         end
 
-        if GetModConfigData("Shipwrecked") == 25 then
+        if TUNING.tropical.shipwrecked == 25 then
             taskset.set_pieces["ligamundoswexit"] = { count = 1, tasks = { "A_MISTO6", "A_MISTO7", "A_MISTO8", "A_MISTO9", "A_MISTO11", "A_MISTO14", "A_MISTO15", "A_MISTO16", "A_MISTO17", "A_MISTO20", "A_MISTO26", "A_MISTO27", "A_MISTO28", "A_MISTO38", "A_MISTO39", "A_MISTO43", "A_MISTO45", "A_MISTO50", "A_MISTO51" } }
         end
         ---------------------------------------
-        if GetModConfigData("Hamlet") == 20 then
+        if TUNING.tropical.hamlet == 20 then
             taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins", "XDeep_lost_ruins_gas", "XEdge_of_the_unknown_2" } }
         end
 
-        if GetModConfigData("Hamlet") == 15 then
+        if TUNING.tropical.hamlet == 15 then
             taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins", "Deep_lost_ruins_gas", "Edge_of_the_unknown_2" } }
         end
 
-        if GetModConfigData("Hamlet") == 10 then
+        if TUNING.tropical.hamlet == 10 then
             taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks = { "Mplains_ruins", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins", "MEdge_of_the_unknown_2", "MDeep_rainforest_2" } }
         end
         --------------------------------------------------cave entrances hamlet----------------------------------------------------
-        if GetModConfigData("Hamlet") == 20 and TUNING.tropical.hamlet_caves then
+        if TUNING.tropical.hamlet == 20 and TUNING.tropical.hamlet_caves then
             taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
             taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
             taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
         end
 
-        if GetModConfigData("Hamlet") == 15 and TUNING.tropical.hamlet_caves then
+        if TUNING.tropical.hamlet == 15 and TUNING.tropical.hamlet_caves then
             taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
             taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
             taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
         end
 
-        if GetModConfigData("Hamlet") == 10 and TUNING.tropical.hamlet_caves then
+        if TUNING.tropical.hamlet == 10 and TUNING.tropical.hamlet_caves then
             taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }
             taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }
             taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }

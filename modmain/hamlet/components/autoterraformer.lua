@@ -4,7 +4,7 @@ local antlion_ignore_tiles = {
     [WORLD_TILES.DEEPRAINFOREST] = true
 }
 AddComponentPostInit("autoterraformer", function(self)
-    Utils.FnDecorator(self, "DoTerraform", function(_self, px, py, pz, _x, _y)
+    Hooks.FnDecorator(self, "DoTerraform", function(_self, px, py, pz, _x, _y)
         local tile = TheWorld.Map:GetTileAtPoint(px, py, pz)
         if antlion_ignore_tiles[tile] then
             return nil, true

@@ -64,7 +64,7 @@ local CANT_DEPLOY_IN_CAVE_TILES = {
     [WORLD_TILES.PEBBLEBEACH] = true,
 }
 
-Utils.FnDecorator(Map, "CanDeployRecipeAtPoint", function(self, pt, recipe, rot)
+Hooks.FnDecorator(Map, "CanDeployRecipeAtPoint", function(self, pt, recipe, rot)
     local x, _, z = pt:Get()
     -- 地皮限制
     local tile = TheWorld.Map:GetTileAtPoint(x, 0, z)
@@ -97,7 +97,7 @@ function Map:CanJunglePlantAtPoint(x, y, z)
     return JUNGLE_PLANT_TILES[tile]
 end
 
-Utils.FnDecorator(Map, "CanDeployPlantAtPoint", function(self, pt, inst, ...)
+Hooks.FnDecorator(Map, "CanDeployPlantAtPoint", function(self, pt, inst, ...)
     if inst.prefab == "dug_elephantcactus" or inst.prefab == "dug_coffeebush" then
         return
             { self:CanVolcanoPlantAtPoint(pt:Get()) and

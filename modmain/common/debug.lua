@@ -21,7 +21,7 @@ local function PrintActions(retTab, self, target)
 end
 
 AddComponentPostInit("playeractionpicker", function(self)
-    Utils.FnDecorator(self, "GetLeftClickActions", nil, function(retTab, self, position, target)
+    Hooks.FnDecorator(self, "GetLeftClickActions", nil, function(retTab, self, position, target)
         if not is_print_click_actions then
             return retTab
         end
@@ -29,7 +29,7 @@ AddComponentPostInit("playeractionpicker", function(self)
         print("左键Action，" .. PrintActions(retTab, self, target))
         return retTab
     end)
-    Utils.FnDecorator(self, "GetRightClickActions", nil, function(retTab, self, position, target, spellbook)
+    Hooks.FnDecorator(self, "GetRightClickActions", nil, function(retTab, self, position, target, spellbook)
         if not is_print_click_actions then
             return retTab
         end

@@ -126,7 +126,7 @@ end
 
 
 AddStategraphPostInit("wilson", function(sg)
-    Utils.FnDecorator(sg.actionhandlers[ACTIONS.JUMPIN], "deststate", function(inst, act)
+    Hooks.FnDecorator(sg.actionhandlers[ACTIONS.JUMPIN], "deststate", function(inst, act)
         return { "jumpin_interior" }, act.target and (act.target:HasTag("interior_door") or act.target.prefab == "lavaarena_portal")
     end)
 end)

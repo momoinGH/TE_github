@@ -8,7 +8,7 @@ end
 
 AddComponentPostInit("locomotor", function(self)
     if self.inst:HasTag("player") then
-        -- Utils.FnDecorator(self, "OnUpdate", OnUpdateBefore, OnUpdateAfter)
-        Utils.FnDecorator(self, "RunSpeed", RunSpeedBefore)
+        -- Hooks.FnDecorator(self, "OnUpdate", OnUpdateBefore, OnUpdateAfter)
+        Hooks.FnDecorator(self, "RunSpeed", RunSpeedBefore)
     end
 end)

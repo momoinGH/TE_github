@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 -- 控制鸟生成逻辑
 
 local BIRD_TYPES
@@ -16,7 +14,7 @@ end
 
 AddComponentPostInit("birdspawner",function(self)
     if not BIRD_TYPES then
-        BIRD_TYPES = Utils.ChainFindUpvalue(self.SpawnBird, "PickBird", "BIRD_TYPES")
+        BIRD_TYPES = Hooks.FindUpvalue(self.SpawnBird, "PickBird", "BIRD_TYPES")
         if BIRD_TYPES then
             AddBirds(WORLD_TILES.OCEAN_COASTAL, { "puffin", "cormorant" })
             AddBirds(WORLD_TILES.OCEAN_COASTAL_SHORE, { "puffin", "cormorant" })

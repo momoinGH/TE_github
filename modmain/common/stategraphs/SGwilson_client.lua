@@ -290,7 +290,7 @@ end
 ----------------------------------------------------------------------------------------------------
 
 AddStategraphPostInit("wilson_client", function(inst)
-    Utils.FnDecorator(inst.actionhandlers[ACTIONS.ATTACK], "deststate", function(inst, action)
+    Hooks.FnDecorator(inst.actionhandlers[ACTIONS.ATTACK], "deststate", function(inst, action)
         if not (inst.sg:HasStateTag("attack") and action.target == inst.sg.statemem.attacktarget or IsEntityDead(inst)) then
             local weapon = inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
             if weapon and (weapon:HasTag("speargun") or weapon:HasTag("blunderbuss")) then
@@ -305,7 +305,7 @@ AddStategraphPostInit("wilson_client", function(inst)
     end)
 
     -- 可以上床睡觉
-    Utils.FnDecorator(inst.actionhandlers[ACTIONS.SLEEPIN], "deststate", function(inst, action)
+    Hooks.FnDecorator(inst.actionhandlers[ACTIONS.SLEEPIN], "deststate", function(inst, action)
         if action.target:HasTag("bed") then
             local x, y, z = action.target.Transform:GetWorldPosition()
             action.doer.Transform:SetPosition(x + 0.02, y, z + 0.02)

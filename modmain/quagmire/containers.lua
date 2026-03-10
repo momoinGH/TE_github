@@ -30,7 +30,7 @@ params.mealingstone =
 containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS,
     params.mealingstone.widget.slotpos ~= nil and #params.mealingstone.widget.slotpos or 0)
 
-Utils.FnDecorator(containers, "widgetsetup", function(container, prefab, data)
+Hooks.FnDecorator(containers, "widgetsetup", function(container, prefab, data)
     local pref = prefab or container.inst.prefab
     if pref == "mealingstone" then
         local t = params[pref]

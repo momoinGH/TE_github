@@ -352,3 +352,9 @@ AddHomeRecipe("construction_permit", 50)
 
 AddRecipe2("shears", { Ingredient("twigs", 2), Ingredient("iron", 2) }, TECH.SCIENCE_ONE, nil, { "TOOLS" })
 AddRecipe2("bugrepellent", { Ingredient("tuber_crop", 6), Ingredient("venus_stalk", 1) }, TECH.SCIENCE_ONE, nil, { "TOOLS" })
+
+
+if TUNING.tropical.only_hamlet then
+    AddRecipe2("antler", { Ingredient("hippo_antler", 1), Ingredient("bill_quill", 3), Ingredient("flint", 1) }, TECH.SCIENCE_ONE, nil, { "TOOLS" })
+    --AddRecipe2("antler_corrupted",		{Ingredient("antler", 1), Ingredient("ancient_remnant", 2)},		                        TECH.MAGIC_TWO, nil,     {"TOOLS","MAGIC"})--噩梦鸟笛(未来)
+end
