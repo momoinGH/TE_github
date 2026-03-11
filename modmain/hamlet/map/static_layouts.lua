@@ -2,34 +2,31 @@ local Layouts = require("map/layouts").Layouts
 local StaticLayout = require("map/static_layout")
 
 -- 直接把单机版的表拿来了
-local hamlet_tile_remap = {
-    --Translates tile type index from constants.lua into tiled tileset.
-    --Order they appear here is the order they will be used in tiled.
-    WORLD_TILES.IMPASSABLE, WORLD_TILES.ROAD, WORLD_TILES.ROCKY, WORLD_TILES.DIRT,
-    WORLD_TILES.SAVANNA, WORLD_TILES.GRASS, WORLD_TILES.FOREST, WORLD_TILES.MARSH,
+local ground_types = {
+    -- Translates tile type index from constants.lua into tiled tileset.
+    -- Order they appear here is the order they will be used in tiled.
+    WORLD_TILES.IMPASSABLE or 65536, WORLD_TILES.ROAD or 65536, WORLD_TILES.ROCKY or 65536, WORLD_TILES.DIRT or 65536,
+    WORLD_TILES.SAVANNA or 65536, WORLD_TILES.GRASS or 65536, WORLD_TILES.FOREST or 65536, WORLD_TILES.MARSH or 65536,
 
-    WORLD_TILES.WOODFLOOR, WORLD_TILES.CARPET, WORLD_TILES.CHECKER, WORLD_TILES.CAVE,
-    WORLD_TILES.FUNGUS, WORLD_TILES.SINKHOLE, WORLD_TILES.WALL_ROCKY, WORLD_TILES.WALL_DIRT,
+    WORLD_TILES.WOODFLOOR or 65536, WORLD_TILES.CARPET or 65536, WORLD_TILES.CHECKER or 65536, WORLD_TILES.CAVE or 65536,
+    WORLD_TILES.FUNGUS or 65536, WORLD_TILES.SINKHOLE or 65536, WORLD_TILES.WALL_ROCKY or 65536, WORLD_TILES.WALL_DIRT or 65536,
+    WORLD_TILES.WALL_MARSH or 65536, WORLD_TILES.WALL_CAVE or 65536, WORLD_TILES.WALL_FUNGUS or 65536, WORLD_TILES.WALL_SINKHOLE or 65536,
+    WORLD_TILES.UNDERROCK or 65536, WORLD_TILES.MUD or 65536, WORLD_TILES.WALL_MUD or 65536, WORLD_TILES.WALL_WOOD or 65536,
 
-    WORLD_TILES.WALL_MARSH, WORLD_TILES.WALL_CAVE, WORLD_TILES.WALL_FUNGUS, WORLD_TILES.WALL_SINKHOLE,
-    WORLD_TILES.UNDERROCK, WORLD_TILES.MUD, WORLD_TILES.WALL_MUD, WORLD_TILES.WALL_WOOD,
+    WORLD_TILES.BRICK or 65536, WORLD_TILES.BRICK_GLOW or 65536, WORLD_TILES.TILES or 65536, WORLD_TILES.TILES_GLOW or 65536,
+    WORLD_TILES.TRIM or 65536, WORLD_TILES.TRIM_GLOW or 65536, WORLD_TILES.WALL_HUNESTONE or 65536, WORLD_TILES.WALL_HUNESTONE_GLOW or 65536,
+    WORLD_TILES.WALL_STONEEYE or 65536, WORLD_TILES.WALL_STONEEYE_GLOW or 65536,
+    WORLD_TILES.FUNGUSRED or 65536, WORLD_TILES.FUNGUSGREEN or 65536,
+    WORLD_TILES.BEACH or 65536, WORLD_TILES.JUNGLE or 65536, WORLD_TILES.SWAMP or 65536, WORLD_TILES.OCEAN_SHALLOW or 65536,
 
-    WORLD_TILES.BRICK, WORLD_TILES.BRICK_GLOW, WORLD_TILES.TILES, WORLD_TILES.TILES_GLOW,
-    WORLD_TILES.TRIM, WORLD_TILES.TRIM_GLOW, WORLD_TILES.WALL_HUNESTONE, WORLD_TILES.WALL_HUNESTONE_GLOW,
-
-    WORLD_TILES.WALL_STONEEYE, WORLD_TILES.WALL_STONEEYE_GLOW, WORLD_TILES.FUNGUSRED, WORLD_TILES.FUNGUSGREEN,
-    WORLD_TILES.BEACH, WORLD_TILES.JUNGLE, WORLD_TILES.SWAMP, WORLD_TILES.OCEAN_SHALLOW,
-
-    WORLD_TILES.OCEAN_MEDIUM, WORLD_TILES.OCEAN_DEEP, WORLD_TILES.OCEAN_CORAL, WORLD_TILES.MANGROVE,
-    WORLD_TILES.MAGMAFIELD, WORLD_TILES.TIDALMARSH, WORLD_TILES.MEADOW, WORLD_TILES.VOLCANO,
-
-    WORLD_TILES.VOLCANO_LAVA, WORLD_TILES.ASH, WORLD_TILES.VOLCANO_ROCK, WORLD_TILES.OCEAN_SHIPGRAVEYARD,
-    WORLD_TILES.COBBLEROAD, WORLD_TILES.FOUNDATION, WORLD_TILES.DEEPRAINFOREST, WORLD_TILES.LAWN,
-
-    WORLD_TILES.PIGRUINS, WORLD_TILES.LILYPOND, WORLD_TILES.GASJUNGLE, WORLD_TILES.SUBURB,
-    WORLD_TILES.RAINFOREST, WORLD_TILES.PIGRUINS_NOCANOPY, WORLD_TILES.PLAINS, WORLD_TILES.PAINTED,
-
-    WORLD_TILES.BATTLEGROUND, WORLD_TILES.INTERIOR, WORLD_TILES.FIELDS }
+    WORLD_TILES.OCEAN_MEDIUM or 65536, WORLD_TILES.OCEAN_DEEP or 65536, WORLD_TILES.OCEAN_CORAL or 65536, WORLD_TILES.MANGROVE or 65536,
+    WORLD_TILES.MAGMAFIELD or 65536, WORLD_TILES.TIDALMARSH or 65536, WORLD_TILES.MEADOW or 65536, WORLD_TILES.VOLCANO or 65536,
+    WORLD_TILES.VOLCANO_LAVA or 65536, WORLD_TILES.ASH or 65536, WORLD_TILES.VOLCANO_ROCK or 65536, WORLD_TILES.OCEAN_SHIPGRAVEYARD or 65536,
+    WORLD_TILES.COBBLEROAD or 65536, WORLD_TILES.FOUNDATION or 65536, WORLD_TILES.DEEPRAINFOREST or 65536, WORLD_TILES.CHECKEREDLAWN or 65536,
+    WORLD_TILES.PIGRUINS or 65536, WORLD_TILES.LILYPOND or 65536, WORLD_TILES.GASRAINFOREST or 65536, WORLD_TILES.SUBURB or 65536,
+    WORLD_TILES.RAINFOREST or 65536, WORLD_TILES.PIGRUINS_NOCANOPY or 65536, WORLD_TILES.PLAINS or 65536, WORLD_TILES.PAINTED or 65536,
+    WORLD_TILES.BATTLEGROUND or 65536, WORLD_TILES.INTERIOR or 65536, WORLD_TILES.FIELDS
+}
 
 -- 不老泉
 Layouts["pugalisk_fountain"] = StaticLayout.Get("map/static_layouts/pugalisk_fountain", {
@@ -43,31 +40,31 @@ Layouts["farm_1"] = StaticLayout.Get("map/static_layouts/farm_1", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("farm_1", hamlet_tile_remap)
+RemapLayoutTile("farm_1", ground_types)
 Layouts["farm_2"] = StaticLayout.Get("map/static_layouts/farm_2", {
     layout_position = LAYOUT_POSITION.RANDOM,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("farm_2", hamlet_tile_remap)
+RemapLayoutTile("farm_2", ground_types)
 Layouts["farm_3"] = StaticLayout.Get("map/static_layouts/farm_3", {
     layout_position = LAYOUT_POSITION.RANDOM,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("farm_3", hamlet_tile_remap)
+RemapLayoutTile("farm_3", ground_types)
 Layouts["farm_4"] = StaticLayout.Get("map/static_layouts/farm_4", {
     layout_position = LAYOUT_POSITION.RANDOM,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("farm_4", hamlet_tile_remap)
+RemapLayoutTile("farm_4", ground_types)
 Layouts["farm_5"] = StaticLayout.Get("map/static_layouts/farm_5", {
     layout_position = LAYOUT_POSITION.RANDOM,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("farm_5", hamlet_tile_remap)
+RemapLayoutTile("farm_5", ground_types)
 -- 瞭望塔
 Layouts["farm_fill_1"] = StaticLayout.Get("map/static_layouts/farm_fill_1", {
     layout_position = LAYOUT_POSITION.RANDOM,
@@ -125,55 +122,55 @@ Layouts["nettlegrove"] = StaticLayout.Get("map/static_layouts/nettlegrove", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("nettlegrove", hamlet_tile_remap)
+RemapLayoutTile("nettlegrove", ground_types)
 
 Layouts["pig_ruins_entrance_1"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_1", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_entrance_1", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_entrance_1", ground_types)
 
 Layouts["pig_ruins_entrance_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_2", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_entrance_2", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_entrance_2", ground_types)
 
 Layouts["pig_ruins_entrance_3"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_3", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_entrance_3", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_entrance_3", ground_types)
 
 Layouts["pig_ruins_entrance_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_4", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_entrance_4", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_entrance_4", ground_types)
 Layouts["pig_ruins_entrance_5"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_5", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_entrance_5", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_entrance_5", ground_types)
 
 Layouts["pig_ruins_exit_1"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_1", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_exit_1", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_exit_1", ground_types)
 
 Layouts["pig_ruins_exit_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_2", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_exit_2", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_exit_2", ground_types)
 
 Layouts["pig_ruins_exit_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_4", {
     layout_position = LAYOUT_POSITION.CENTER,
@@ -201,32 +198,32 @@ Layouts["pig_ruins_head"] = StaticLayout.Get("map/static_layouts/pig_ruins_head"
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_head", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_head", ground_types)
 
 Layouts["pig_ruins_nocanopy"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_nocanopy", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_nocanopy", ground_types)
 Layouts["pig_ruins_nocanopy_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_2", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_nocanopy_2", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_nocanopy_2", ground_types)
 Layouts["pig_ruins_nocanopy_3"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_3", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_nocanopy_3", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_nocanopy_3", ground_types)
 Layouts["pig_ruins_nocanopy_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_4", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_nocanopy_4", hamlet_tile_remap)
+RemapLayoutTile("pig_ruins_nocanopy_4", ground_types)
 
 Layouts["roc_cave"] = StaticLayout.Get("map/static_layouts/roc_cave", {
     layout_position = LAYOUT_POSITION.CENTER,
@@ -243,19 +240,19 @@ Layouts["cave_entranceham1"] = StaticLayout.Get("map/static_layouts/cave_entranc
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("cave_entranceham1", hamlet_tile_remap)
+RemapLayoutTile("cave_entranceham1", ground_types)
 
 Layouts["cave_entranceham2"] = StaticLayout.Get("map/static_layouts/cave_entranceham2", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("cave_entranceham2", hamlet_tile_remap)
+RemapLayoutTile("cave_entranceham2", ground_types)
 
 Layouts["cave_entranceham3"] = StaticLayout.Get("map/static_layouts/cave_entranceham3", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("cave_entranceham3", hamlet_tile_remap)
+RemapLayoutTile("cave_entranceham3", ground_types)
 
 Layouts["ruins_exit"] = StaticLayout.Get("map/static_layouts/ruins_exit", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
@@ -283,3 +280,31 @@ Layouts["ligamundohamexit"] = StaticLayout.Get("map/static_layouts/ligamundohame
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
+
+
+Layouts["city_park_1"] = StaticLayout.Get("map/static_layouts/city_park_1")
+RemapLayoutTile("city_park_1", ground_types)
+Layouts["city_park_2"] = StaticLayout.Get("map/static_layouts/city_park_2")
+RemapLayoutTile("city_park_2", ground_types)
+Layouts["city_park_3"] = StaticLayout.Get("map/static_layouts/city_park_3")
+RemapLayoutTile("city_park_3", ground_types)
+Layouts["city_park_4"] = StaticLayout.Get("map/static_layouts/city_park_4")
+RemapLayoutTile("city_park_4", ground_types)
+Layouts["city_park_5"] = StaticLayout.Get("map/static_layouts/city_park_5")
+RemapLayoutTile("city_park_5", ground_types)
+Layouts["city_park_6"] = StaticLayout.Get("map/static_layouts/city_park_6")
+RemapLayoutTile("city_park_6", ground_types)
+Layouts["city_park_7"] = StaticLayout.Get("map/static_layouts/city_park_7")
+RemapLayoutTile("city_park_7", ground_types)
+Layouts["city_park_8"] = StaticLayout.Get("map/static_layouts/city_park_8")
+RemapLayoutTile("city_park_8", ground_types)
+Layouts["city_park_9"] = StaticLayout.Get("map/static_layouts/city_park_9")
+RemapLayoutTile("city_park_9", ground_types)
+Layouts["city_park_10"] = StaticLayout.Get("map/static_layouts/city_park_10")
+RemapLayoutTile("city_park_10", ground_types)
+Layouts["pig_playerhouse_1"] = StaticLayout.Get("map/static_layouts/pig_playerhouse_1")
+RemapLayoutTile("pig_playerhouse_1", ground_types)
+Layouts["pig_palace_1"] = StaticLayout.Get("map/static_layouts/pig_palace_1")
+RemapLayoutTile("pig_palace_1", ground_types)
+Layouts["pig_cityhall_1"] = StaticLayout.Get("map/static_layouts/pig_cityhall_1")
+RemapLayoutTile("pig_cityhall_1", ground_types)

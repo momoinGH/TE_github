@@ -8,6 +8,8 @@ proimportmodulefile：提供一个模块目录下的相对路径，自动导入�
 
 TRO_AddComponentAction：添加ComponentAction，允许组件行为重复
 
+RemapLayoutTile：重新映射layout里地皮id对应的地皮
+
 RemapSound：重新映射音效路径
 ]]
 
@@ -49,8 +51,8 @@ end
 ----------------------------------------------------------------------------------------------------
 
 
-modimport "modmain/knownmodcheck"             -- 检测不兼容模组并报错崩溃
-modimport "modmain/mods"                      -- 兼容其他mod
+modimport "modmain/knownmodcheck" -- 检测不兼容模组并报错崩溃
+modimport "modmain/mods"          -- 兼容其他mod
 
 -- 共同
 modimport "modmain/postinit" --TODO 拆到各个模块中

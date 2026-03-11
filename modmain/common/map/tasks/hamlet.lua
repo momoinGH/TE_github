@@ -72,18 +72,6 @@ AddTask("plains_ruins", {
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 
-AddTask("Edge_of_civilization", {
-    locks = LOCKS.JUNGLE_DEPTH_1,
-    keys_given = KEYS.CIVILIZATION_1,
-    room_choices = {
-        ["cultivated_base_1"] = 2 + tamanho,
-        ["piko_land"] = 1 + tamanho,
-    },
-    room_bg = WORLD_TILES.FIELDS,
-    background_room = "BG_cultivated_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
-
 AddTask("Deep_rainforest", {
     locks = LOCKS.JUNGLE_DEPTH_1,
     keys_given = { KEYS.JUNGLE_DEPTH_2, KEYS.JUNGLE_DEPTH_3 },
@@ -1463,44 +1451,7 @@ AddRoom("BG_plains_base_nocanopy", {
     }
 })
 
-AddRoom("BG_plains_base_nocanopy1", {
-    colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = WORLD_TILES.PLAINS,
-    tags = { "ExitPiece", "RoadPoison", "hamlet" },
-    contents = {
-        countstaticlayouts = {
-            ["pig_ruins_nocanopy_2"] = 1,
-            ["pig_ruins_nocanopy_3"] = 1,
-            ["pugalisk_fountain"] = 1,
-        },
-        distributepercent = .125 * preenchimento, --.22, --.26
-        distributeprefabs =
-        {
-            clawpalmtree = 0.5,
-            grass_tall = 1,
-            sapling = .3,
-            flower = 0.05,
-            dungpile = 0.03,
-            peagawk = 0.01,
-            --		randomrelic = 0.0016,
-            --randomruin = 0.0025,	
-            randomdust = 0.0025,
-            rock_flippable = 0.08,
-            aloe_planted = 0.08,
-            pog = 0.01,
-            asparagus_planted = 0.05,
-        },
-        countprefabs =
-        {
-            grass_tall_patch = 2,
-            vampirebatcave_potential = 1,
-            underwater_entrance2 = 1,
-            vidanomar = 1,
-            gravestone = 2,
-            sculpture_rook = 1,
-        },
-    }
-})
+
 
 AddRoom("BG_plains_base_nocanopy2", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
@@ -1832,14 +1783,7 @@ AddRoom("city_base_2_set2", {
     }
 })
 --------------------------------------------------cultivated room--------------------------------------------------------------------------------------------------------------------
-fazendas =
-{
-    [1] = "farm_1",
-    [2] = "farm_2",
-    [3] = "farm_3",
-    [4] = "farm_4",
-    [5] = "farm_5",
-}
+
 
 AddRoom("BG_cultivated_base", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
@@ -1849,62 +1793,9 @@ AddRoom("BG_cultivated_base", {
         distributepercent = 0.03 * preenchimento, ---0.1
         distributeprefabs =
         {
-            -- 			grass = 0.05,
-            --			flower = 0.3,
             rock1 = 0.01,
             teatree = 0.1,
-            --			peekhenspawner = 0.003,
         },
-        --[[        countstaticlayouts={
-        ["farm_1"]=function()
-        		return math.random(1,2)			
-		   end,
-		["farm_2"]=function()
-        		return math.random(0,2)			
-		   end,
-		["farm_3"]=function()
-        		return math.random(0,1)			
-		   end
-		   },
-		]]
-    }
-})
-
-
-AddRoom("cultivated_base_1", {
-    colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = WORLD_TILES.FIELDS,
-    tags = { "ExitPiece", "hamlet" },
-    contents = {
-        distributepercent = 0.03 * preenchimento, ---0.1
-        distributeprefabs =
-        {
-            -- 			grass = 0.05,
-            --			flower = 0.3,
-            rock1 = 0.01,
-            teatree = 0.1,
-            --			peekhenspawner = 0.003,
-        },
-        countstaticlayouts = { [fazendas[math.random(1, 5)]] = 1, },
-    }
-})
-
-AddRoom("cultivated_base_2", {
-    colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = WORLD_TILES.FIELDS,
-    tags = { "ExitPiece", "hamlet" },
-    contents = {
-        distributepercent = 0.03 * preenchimento, ---0.1
-        distributeprefabs =
-        {
-            -- 			grass = 0.05,
-            --			flower = 0.3,
-            rock1 = 0.01,
-            teatree = 0.1,
-            --			peekhenspawner = 0.003,
-        },
-        countstaticlayouts = { [fazendas[math.random(1, 5)]] = 1, },
-
     }
 })
 
@@ -5869,8 +5760,6 @@ local function TasksetPreInit(taskset)
     if KnownModIndex:IsModEnabled("workshop-1289779251") then
         table.insert(taskset.tasks, "cherry_mainland")
     end
-
-
 
     if GetModConfigData("togethercaves_hamletworld") == 1 then
         taskset.set_pieces["CaveEntrance"] = { count = 10, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins", "Pigtopia" } }

@@ -660,7 +660,6 @@ AddRoom("strange_island_maxwell_set", {
     contents = {
         countstaticlayouts = {
             ["strangerlord"] = 1,
-            --					["CaveEntrance"]=1,		
             ["mactuskgrass"] = 1,
         },
         distributepercent = .1,
@@ -2365,18 +2364,7 @@ AddRoom("BG_pinacle_base", {
 })
 
 -------------------------------------------------------Hamlet tasks-------------------------------	
-AddTask("Edge_of_the_unknown", {
-    locks = {},
-    keys_given = {},
-    region_id = "hamletpugalisk",
-    room_choices = {
-        ["BG_plains_base"] = 2,
-        ["BG_plains_base_nocanopy1"] = 1,
-    },
-    room_bg = WORLD_TILES.PLAINS,
-    background_room = "BG_plains_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
+
 
 AddTask("plains", {
     locks = {},
@@ -2488,58 +2476,6 @@ AddTask("rainforest_ruins", {
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 -------------------------
---[[
-AddTask("Edge_of_civilization", {
-    locks = {},
-    keys_given = {},
-    region_id = "hamlet9",
-    room_choices = {
-        ["cultivated_base_1"] = 1,
-        ["cultivated_base_2"] = 1,
-        --			["cultivated_base_3"] = 1,
-        ["cultivated_base_4"] = 1,
-        ["cultivated_base_5"] = 1,
-        ["piko_land"] = 1,
-    },
-    room_bg = WORLD_TILES.FIELDS,
-    background_room = "BG_cultivated_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
-
-AddTask("Pigcity", {
-    locks = {},
-    keys_given = {},
-    region_id = "hamlet10",
-    room_tags = { "RoadPoison", "hamlet" },
-    room_choices = {
-        ["city_base_1_set"] = 1,
-        ["city_base"] = 1,
-    },
-    room_bg = WORLD_TILES.SUBURB,
-    background_room = "BG_suburb_base",
-    colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
-})
-]]
-
-AddTask("Edge_of_civilization", {
-    locks = LOCKS.JUNGLE_DEPTH_2,
-    keys_given = KEYS.CIVILIZATION_1,
-    region_id = "hamlet",
-    room_tags = { "City1", "RoadPoison", "hamlet", "tropical", "nohunt", "nohasslers", "not_mainland" },
-    room_choices = {
-        ["cultivated_base_1"] = math.random(3, 5),
-        ["piko_land"] = math.random(2, 3),
-    },
-    room_bg = WORLD_TILES.FIELDS,
-    background_room = "cultivated_base_1",
-    cove_room_name = "cultivated_base_1",
-    make_loop = true,
-    crosslink_factor = 10,
-    cove_room_chance = 1,
-    cove_room_max_edges = 10,
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
-
 
 AddTask("Pigtopia", {
     locks = LOCKS.CIVILIZATION_1,
@@ -2740,19 +2676,6 @@ AddTask("pincalejunto", {
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 ------------------------------------------------------------------------HAMLET continental tasks----------------------------------------------------------------------	
-AddTask("MEdge_of_the_unknown", {
-    locks = {},
-    keys_given = { KEYS.JUNGLE_DEPTH_2 },
-    region_id = "island3",
-    room_choices = {
-        ["BG_plains_base"] = 2,
-        ["BG_plains_base_nocanopy1"] = 1,
-    },
-    room_bg = WORLD_TILES.PLAINS,
-    background_room = "BG_plains_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
-
 AddTask("Mplains", {
     locks = { LOCKS.JUNGLE_DEPTH_2 },
     keys_given = { KEYS.JUNGLE_DEPTH_2 },
@@ -3035,22 +2958,6 @@ AddTask("Mrainforest_ruins", {
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 
-AddTask("MEdge_of_the_unknown_2", {
-    locks = LOCKS.CIVILIZATION_1,
-    keys_given = { KEYS.ISLAND8 },
-    region_id = "island3",
-    room_choices = {
-        ["plains_tallgrass"] = math.random(1, 2),
-        ["plains_pogs"] = math.random(0, 2),
-        ["rainforest_ruins"] = math.random(2, 3),
-        ["BG_painted_base"] = math.random(1, 2),
-        ["BG_rainforest_base"] = math.random(1, 3),
-    },
-    room_bg = WORLD_TILES.PLAINS,
-    background_room = "BG_plains_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
-
 AddTask("MDeep_lost_ruins_gas", {
     locks = LOCKS.JUNGLE_DEPTH_3,
     keys_given = KEYS.JUNGLE_DEPTH_3,
@@ -3117,35 +3024,7 @@ AddTask("M_BLANK2", {
     colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
 })
 
-AddTask("Edge_of_the_unknownC", {
-    locks = { LOCKS.ISLAND11 },
-    keys_given = { KEYS.ISLAND11 },
-    region_id = "island3",
-    room_choices = {
-        ["BG_plains_base"] = 2,
-        ["BG_plains_base_nocanopy1"] = 1,
-        ["BG_deeprainforest_base"] = 2,
-        ["deeprainforest_flytrap_grove"] = 2,
-    },
-    room_bg = WORLD_TILES.PLAINS,
-    background_room = "BG_plains_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
 --------------------------------------------------------------------------------Hamlet Merged----------------------------------------------------------------------------
-AddTask("XEdge_of_the_unknown", {
-    locks = LOCKS.NONE,
-    keys_given = KEYS.JUNGLE_DEPTH_1,
-    --		locks=LOCKS.NONE,
-    --		keys_given={KEYS.PICKAXE,KEYS.AXE,KEYS.GRASS,KEYS.WOOD,KEYS.TIER1},
-    room_choices = {
-        ["MAINBG_plains_base"] = 2,
-        ["MAINBG_plains_base_nocanopy1"] = 1,
-    },
-    room_bg = WORLD_TILES.PLAINS,
-    background_room = "MAINBG_plains_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
-
 AddTask("Xplains", {
     locks = { LOCKS.ROCKS },
     keys_given = { KEYS.TRINKETS, KEYS.STONE, KEYS.WOOD, KEYS.TIER1 },
@@ -3403,20 +3282,7 @@ AddTask("Xrainforest_ruins", {
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 
-AddTask("XEdge_of_the_unknown_2", {
-    locks = { LOCKS.TIER1 },
-    keys_given = { KEYS.ROCKS, KEYS.GOLD, KEYS.TIER2 },
-    room_choices = {
-        ["MAINplains_tallgrass"] = math.random(1, 2),
-        ["MAINplains_pogs"] = math.random(0, 2),
-        ["MAINrainforest_ruins"] = math.random(2, 3),
-        ["MAINBG_painted_base"] = math.random(1, 2),
-        ["MAINBG_rainforest_base"] = math.random(1, 3),
-    },
-    room_bg = WORLD_TILES.PLAINS,
-    background_room = "BG_plains_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
+
 
 AddTask("XDeep_lost_ruins_gas", {
     locks = { LOCKS.TIER4 },
@@ -5952,15 +5818,6 @@ if TUNING.tropical.shipwrecked == 25 or TUNING.tropical.only_shipwrecked then
     })
 end
 --------------------------------------------------cultivated room--------------------------------------------------------------------------------------------------------------------
-fazendas =
-{
-    [1] = "farm_1",
-    [2] = "farm_2",
-    [3] = "farm_3",
-    [4] = "farm_4",
-    [5] = "farm_5",
-}
-
 AddRoom("BG_cultivated_base", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
     value = WORLD_TILES.FIELDS,
@@ -5977,56 +5834,6 @@ AddRoom("BG_cultivated_base", {
         },
     }
 })
-
-
-AddRoom("cultivated_base_1", {
-    colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = WORLD_TILES.FIELDS,
-    tags = { "ExitPiece", "hamlet" },
-    contents = {
-        distributepercent = 0.06, ---0.1
-        distributeprefabs =
-        {
-            -- 			grass = 0.05,
-            --			flower = 0.3,
-            rock1 = 0.01,
-            teatree = 0.1,
-            --			peekhenspawner = 0.003,
-        },
-
-        countprefabs =
-        {
-            crabapple_tree = 4,
-
-        },
-        countstaticlayouts = { ["farm_1"] = 1, },
-    }
-})
-
-AddRoom("cultivated_base_2", {
-    colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = WORLD_TILES.FIELDS,
-    tags = { "ExitPiece", "hamlet" },
-    contents = {
-        distributepercent = 0.06, ---0.1
-        distributeprefabs =
-        {
-            -- 			grass = 0.05,
-            --			flower = 0.3,
-            rock1 = 0.01,
-            teatree = 0.1,
-            --			peekhenspawner = 0.003,
-        },
-
-        countprefabs =
-        {
-            crabapple_tree = 4,
-        },
-
-        countstaticlayouts = { ["farm_2"] = 1, },
-    }
-})
-
 
 AddRoom("cultivated_base_3", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
@@ -6951,40 +6758,6 @@ AddRoom("BG_plains_base_nocanopy", {
     }
 })
 
-AddRoom("BG_plains_base_nocanopy1", {
-    colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = WORLD_TILES.PLAINS,
-    tags = { "ExitPiece", "RoadPoison", "hamlet" },
-    contents = {
-        countstaticlayouts = {
-            ["pugalisk_fountain"] = 1,
-        },
-        distributepercent = .25, --.22, --.26
-        distributeprefabs =
-        {
-            clawpalmtree = 0.5,
-            grass_tall = 1,
-            sapling = .3,
-            flower = 0.05,
-            dungpile = 0.03,
-            peagawk = 0.01,
-            --		randomrelic = 0.0016,
-            --randomruin = 0.0025,	
-            randomdust = 0.0025,
-            rock_flippable = 0.08,
-            aloe_planted = 0.08,
-            pog = 0.01,
-            asparagus_planted = 0.05,
-        },
-        countprefabs =
-        {
-            grass_tall_patch = 2,
-            grass_tall = 1,
-            vampirebatcave_entrance_roc = 1,
-            gravestone = 5,
-        },
-    }
-})
 
 AddRoom("BG_plains_base_nocanopy2", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
@@ -8173,41 +7946,6 @@ AddRoom("MAINBG_plains_base_nocanopy", {
         {
             grass_tall_patch = 2,
             grass_tall = 1,
-        },
-    }
-})
-
-AddRoom("MAINBG_plains_base_nocanopy1", {
-    colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = WORLD_TILES.PLAINS,
-    tags = { "ExitPiece", "RoadPoison" },
-    contents = {
-        countstaticlayouts = {
-            ["pugalisk_fountain"] = 1,
-        },
-        distributepercent = .25, --.22, --.26
-        distributeprefabs =
-        {
-            clawpalmtree = 0.5,
-            grass_tall = 1,
-            sapling = .3,
-            flower = 0.05,
-            dungpile = 0.03,
-            peagawk = 0.01,
-            --		randomrelic = 0.0016,
-            --randomruin = 0.0025,	
-            randomdust = 0.0025,
-            rock_flippable = 0.08,
-            aloe_planted = 0.08,
-            pog = 0.01,
-            asparagus_planted = 0.05,
-        },
-        countprefabs =
-        {
-            grass_tall_patch = 2,
-            grass_tall = 1,
-            vampirebatcave_entrance_roc = 1,
-            gravestone = 5,
         },
     }
 })
@@ -21048,8 +20786,6 @@ else
 
 
         if TUNING.tropical.hamlet == 20 then
-            table.insert(taskset.tasks, "Edge_of_the_unknown") --pugalisk
-            --table.insert(taskset.tasks, "XEdge_of_the_unknown")
             table.insert(taskset.tasks, "Xplains")
             table.insert(taskset.tasks, "Xplains_ruins")
             table.insert(taskset.tasks, "XDeep_rainforest")
@@ -21059,7 +20795,6 @@ else
             table.insert(taskset.tasks, "XDeep_rainforest_mandrake")
             table.insert(taskset.tasks, "Xrainforest_ruins")
             table.insert(taskset.tasks, "XDeep_lost_ruins_gas")
-            table.insert(taskset.tasks, "XEdge_of_the_unknown_2")
         end
 
 
@@ -21071,7 +20806,6 @@ else
             table.insert(taskset.tasks, "Deep_rainforest")
             table.insert(taskset.tasks, "Deep_rainforest_2")
             table.insert(taskset.tasks, "painted_sands")
-            table.insert(taskset.tasks, "Edge_of_civilization")
             table.insert(taskset.tasks, "Deep_rainforest_mandrake")
             table.insert(taskset.tasks, "rainforest_ruins")
             table.insert(taskset.tasks, "Deep_lost_ruins_gas")
@@ -21089,11 +20823,9 @@ else
             table.insert(taskset.tasks, "MDeep_rainforest_mandrake")
             table.insert(taskset.tasks, "Mrainforest_ruins")
             -- table.insert(taskset.tasks, "MDeep_lost_ruins_gas")  --
-            table.insert(taskset.tasks, "MEdge_of_the_unknown_2")
             table.insert(taskset.tasks, "MDeep_rainforest_2")
 
             table.insert(taskset.tasks, "M_BLANK2")
-            table.insert(taskset.tasks, "Edge_of_the_unknownC") --pugalisk
         end
 
 
@@ -21107,7 +20839,6 @@ else
             table.insert(taskset.tasks, "XPigcityside3")
             table.insert(taskset.tasks, "XPigcityside4")
 ]]
-            table.insert(taskset.tasks, "Edge_of_civilization") --城郊地区
             table.insert(taskset.tasks, "Pigtopia")
             -- table.insert(taskset.tasks, "Pigtopia_capital")
         end
@@ -21121,7 +20852,6 @@ else
             table.insert(taskset.tasks, "MPigcityside3")
             table.insert(taskset.tasks, "MPigcityside4")
 ]]
-            table.insert(taskset.tasks, "Edge_of_civilization") --城郊地区
             table.insert(taskset.tasks, "Pigtopia")
             -- table.insert(taskset.tasks, "Pigtopia_capital")
         end
@@ -21129,7 +20859,6 @@ else
         --------------island-------------------------
         if TUNING.tropical.hamlet_pigcity1 == 20 then
             --table.insert(taskset.tasks, "Pigcity")
-            table.insert(taskset.tasks, "Edge_of_civilization") --城郊地区
             table.insert(taskset.tasks, "Pigtopia")
             -- table.insert(taskset.tasks, "Pigtopia_capital")
             table.insert(taskset.tasks, "Deep_rainforest_4")
@@ -21629,17 +21358,7 @@ else
         end
 
         -----------------------------
-        if TUNING.tropical.hamlet == 20 and TUNING.tropical.tropicalshards ~= 0 then
-            taskset.set_pieces["hamlet_exit"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
-        end
 
-        if TUNING.tropical.hamlet == 15 and TUNING.tropical.tropicalshards ~= 0 then
-            taskset.set_pieces["hamlet_exit"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
-        end
-
-        if TUNING.tropical.hamlet == 10 and TUNING.tropical.tropicalshards ~= 0 then
-            taskset.set_pieces["hamlet_exit"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }
-        end
         ----------------------------------------wormhole para ilha do outro dlc---------------------------------------
 
         if TUNING.tropical.shipwrecked == 10 then
@@ -21658,35 +21377,12 @@ else
             taskset.set_pieces["ligamundoswexit"] = { count = 1, tasks = { "A_MISTO6", "A_MISTO7", "A_MISTO8", "A_MISTO9", "A_MISTO11", "A_MISTO14", "A_MISTO15", "A_MISTO16", "A_MISTO17", "A_MISTO20", "A_MISTO26", "A_MISTO27", "A_MISTO28", "A_MISTO38", "A_MISTO39", "A_MISTO43", "A_MISTO45", "A_MISTO50", "A_MISTO51" } }
         end
         ---------------------------------------
-        if TUNING.tropical.hamlet == 20 then
-            taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins", "XDeep_lost_ruins_gas", "XEdge_of_the_unknown_2" } }
-        end
-
-        if TUNING.tropical.hamlet == 15 then
-            taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins", "Deep_lost_ruins_gas", "Edge_of_the_unknown_2" } }
-        end
-
-        if TUNING.tropical.hamlet == 10 then
-            taskset.set_pieces["ligamundohamexit"] = { count = 1, tasks = { "Mplains_ruins", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins", "MEdge_of_the_unknown_2", "MDeep_rainforest_2" } }
-        end
+   
         --------------------------------------------------cave entrances hamlet----------------------------------------------------
-        if TUNING.tropical.hamlet == 20 and TUNING.tropical.hamlet_caves then
-            taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
-            taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
-            taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks = { "Xplains", "Xplains_ruins", "XDeep_rainforest", "XDeep_rainforest_2", "Xpainted_sands", "XEdge_of_civilization", "XDeep_rainforest_mandrake", "Xrainforest_ruins" } }
-        end
 
-        if TUNING.tropical.hamlet == 15 and TUNING.tropical.hamlet_caves then
-            taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
-            taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
-            taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks = { "plains", "plains_ruins", "Deep_rainforest", "Deep_rainforest_2", "painted_sands", "Edge_of_civilization", "Deep_rainforest_mandrake", "rainforest_ruins" } }
-        end
 
-        if TUNING.tropical.hamlet == 10 and TUNING.tropical.hamlet_caves then
-            taskset.set_pieces["cave_entranceham1"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }
-            taskset.set_pieces["cave_entranceham2"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }
-            taskset.set_pieces["cave_entranceham3"] = { count = 1, tasks = { "Mplains", "Mplains_ruins", "MDeep_rainforest", "MDeep_rainforest_2", "Mpainted_sands", "MEdge_of_civilization", "MDeep_rainforest_mandrake", "Mrainforest_ruins" } }
-        end
+
+
         ----------------------------
 
 

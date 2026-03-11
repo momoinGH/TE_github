@@ -11,30 +11,22 @@ modimport "modmain/map/spawnutil.lua"
 
 proimportmodulefile "tiledefs"
 proimportmodulefile "tilegroups"
-proimportmodulefile "map/lockandkey"     --地形锁钥
+proimportmodulefile "map/lockandkey" --地形锁钥
+modimport "modmain/hamlet/map/storygen.lua"
 proimportmodulefile "map/tasks"
+proimportmodulefile "map/rooms"
 proimportmodulefile "map/network"        --地图生成后处理
 proimportmodulefile "map/static_layouts" --静态地形
 
-local MapTags = { "frost", "hamlet", "shipwrecked", "tropical", "underwater", "folha" }
-AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
-    for k, v in pairs(MapTags) do
-        self.map_tags.Tag[v] = function(tagdata) return "TAG", v end
-    end
-end)
 
-
-modimport "postinit/map/storygen"
-modimport "scripts/map/city_layouts" --新的城镇 layouts
-
--- vai ate 6077
-if TUNING.tropical.only_hamlet then
-    modimport "modmain/common/map/tasks/hamlet"
-elseif TUNING.tropical.sea then
-    modimport "modmain/common/map/tasks/sea"
-else
-    modimport "modmain/common/map/tasks/custom"
-end
+-- TODO
+-- if TUNING.tropical.only_hamlet then
+--     modimport "modmain/common/map/tasks/hamlet"
+-- elseif TUNING.tropical.sea then
+--     modimport "modmain/common/map/tasks/sea"
+-- else
+--     modimport "modmain/common/map/tasks/custom"
+-- end
 
 if TUNING.tropical.windy then
     modimport "modmain/common/map/tasks/windyworldgen"
