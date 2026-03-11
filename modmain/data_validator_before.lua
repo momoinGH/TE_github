@@ -28,22 +28,7 @@ end
 local old_strings = STRINGS
 GLOBAL.STRINGS = deepcopy(old_strings)
 
-local modules = {
-    "room",
-    "boat",
-    "windy",
-    "sea",
-    "underwater",
-    "hamlet",
-    "shipwrecked",
-    "shipwrecked_plus",
-    "lavaarena",
-    "greenworld",
-    "frostisland",
-    "quagmire"
-}
-
-for _, m in ipairs(modules) do
+for _, m in ipairs(pro_modules) do
     for _, language in ipairs({
         "pt",
         "zh",
@@ -54,14 +39,14 @@ for _, m in ipairs(modules) do
         "hun",
         "fr"
     }) do
-        modimportmodulefile("modmain/" .. m .. "/languages/strings_" .. language, false)
+        prosafemodimport("modmain/" .. m .. "/languages/strings_" .. language, false)
     end
 end
 local other_language_strings = STRINGS
 GLOBAL.STRINGS = deepcopy(old_strings)
 
-for _, m in ipairs(modules) do
-    modimportmodulefile("modmain/" .. m .. "/languages/strings_en", false)
+for _, m in ipairs(pro_modules) do
+    prosafemodimport("modmain/" .. m .. "/languages/strings_en", false)
 end
 
 -- 比较
@@ -115,4 +100,13 @@ local OldAddStategraphActionHandler = env.AddStategraphActionHandler
 env.AddStategraphActionHandler = function(stategraph, handler, ...)
     prodevassert(handler and handler.action and ACTIONS[handler.action.id], "发现没有定义的ACTION，你应该先在actions.lua文件中定义ACTION")
     return OldAddStategraphActionHandler(stategraph, handler, ...)
+end
+
+----------------------------------------------------------------------------------------------------
+local StaticLayout = require("map/static_layout")
+local OldGet = StaticLayout.Get
+local required_layout_files = {}
+StaticLayout.Get = function(layoutsrc, ...)
+    assert(layoutsrc and required_layout_files[layoutsrc], "重复加载了布局文件" .. tostring(layoutsrc))
+    return OldGet(layoutsrc, ...)
 end

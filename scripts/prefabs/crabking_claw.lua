@@ -242,7 +242,7 @@ local function shadowfn()
 
     inst.persists = false
 
-    inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
+    inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
     inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
 
     --local s  = 0.7

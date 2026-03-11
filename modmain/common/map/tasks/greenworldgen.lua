@@ -214,7 +214,7 @@ local function LevelPreInitBoth(level)
     if level.location == "forest" then
         if TUNING.tropical.only_shipwrecked or TUNING.tropical.greenworld == 15 then
             table.insert(level.tasks, "GREENSWAMP_TASK_FOREST_ISLAND")
-        elseif not TUNING.tropical.only_sea then --não adiciona no Sea World
+        elseif not TUNING.tropical.sea then --não adiciona no Sea World
             table.insert(level.tasks, "GREENSWAMP_TASK_FOREST")
         end
     end

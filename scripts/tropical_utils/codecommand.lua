@@ -1063,7 +1063,7 @@ StateGraph = Class(function(self, name, states, events, defaultstate, actionhand
 env.RemapSoundEvent = function(name, new_name) end
 
 KnownModIndex = {
-    IsModEnabled = function(self,modname) end, -- 判断某个mod是否启用
+    IsModEnabled = function(self, modname) end, -- 判断某个mod是否启用
 }
 
 
@@ -1320,8 +1320,78 @@ Node = Class(function(self, id, data) end)
 
 function PopulateWorld_AddEntity(prefab, tile_x, tile_y, tile_value, entitiesOut, width, height, prefab_list, prefab_data, rand_offset) end
 
-
 function AddTask(name, data) end
+
 function AddModTask(mod, name, data) end
 
 ChangeTileRenderOrder = function(tile_id, target_tile_id, moveafter) end
+
+AddTaskPreInit = function(taskname, fn) end
+
+KEYS = {}
+LOCKS = {}
+KEYS_ARRAY = {}
+LOCKS_ARRAY = {}
+LOCKS_KEYS = {}
+
+
+Task = Class(function(self, id, data)
+    self.id = id
+
+    -- what locks this task
+    self.locks = data.locks
+    if type(self.locks) ~= "table" then
+        self.locks = { self.locks }
+    end
+    -- the key that this task provides
+    self.keys_given = data.keys_given
+    if type(self.keys_given) ~= "table" then
+        self.keys_given = { self.keys_given }
+    end
+    self.region_id = data.region_id
+
+    self.entrance_room = data.entrance_room --入口房间
+    self.entrance_room_chance = data.entrance_room_chance
+    self.room_choices = data.room_choices   --常规房间
+    self.room_choices_special = data.room_choices_special
+    self.room_bg = data.room_bg
+    self.background_room = data.background_room
+    self.cove_room_name = data.cove_room_name
+    self.cove_room_chance = data.cove_room_chance
+    self.cove_room_max_edges = data.cove_room_max_edges
+    self.colour = data.colour
+    self.maze_tiles = data.maze_tiles
+    self.maze_tile_size = data.maze_tile_size
+    self.crosslink_factor = data.crosslink_factor
+    self.make_loop = data.make_loop
+    self.room_tags = data.room_tags
+    self.required_prefabs = data.required_prefabs
+    self.hub_room = data.hub_room
+    self.level_set_piece_blocker = data.level_set_piece_blocker -- prevents the task from getting any of the random_set_pieces and required_setpieces defined in the level
+end)
+
+local room = {
+    -- name = nil,
+    type = nil,   --NODE_TYPE值
+    contents = {
+        fn = nil, --初始化
+        distributeprefabs = nil,
+    },
+    -- entrance = nil, 入口房间
+    -- id = nil,
+    -- task = nil, --taskid
+    tags = {}, --判断room类型
+    colour = nil,
+    value = nil,
+    internal_type = nil,
+    custom_tiles = nil,
+    custom_objects = nil,
+    required_prefabs = nil,
+    random_node_exit_weight = nil,
+    random_node_entrance_weight = nil,
+    SafeFromDisconnect = nil,
+}
+
+WorldSim = {}
+
+Graph = Class(function(self, id, args) end)

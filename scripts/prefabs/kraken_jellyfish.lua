@@ -55,7 +55,7 @@ local function fn(Sim)
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
     inst.components.locomotor.walkspeed = JELLYFISH_WALK_SPEED
 
-    inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
+    inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
     inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
 
 

@@ -233,7 +233,7 @@ local function inkpatch_fn()
     inst.AnimState:SetBank("ink_puddle")
     inst.AnimState:PlayAnimation("idle", true)
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
+    inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
     inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
     inst.AnimState:SetSortOrder(3)
 

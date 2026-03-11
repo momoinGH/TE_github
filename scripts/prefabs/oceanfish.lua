@@ -103,7 +103,7 @@ local function OnProjectileLand(inst)
     if land_in_water then
         inst:RemoveComponent("complexprojectile")
         inst.Physics:SetCollisionMask(SWIMMING_COLLISION_MASK)
-        inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
+        inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
         inst.AnimState:SetLayer(LAYER_WIP_BELOW_OCEAN)
         if inst.Light ~= nil then
             inst.Light:Enable(false)
@@ -321,7 +321,7 @@ local function water_common(data)
 
     inst.scrapbook_anim = "idle_ground"
 
-    inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
+    inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
     inst.AnimState:SetLayer(LAYER_WIP_BELOW_OCEAN)
 
     inst.entity:SetPristine()

@@ -28,6 +28,7 @@ tro_作为公共模块前缀，新的命名建议都用这个作为前缀
     3.  shipwrecked_boat_tail：船尾配件
 11. 小船配件必须有shipwrecked_boat_head或者shipwrecked_boat_tail标签
 
+
 小房子逻辑：
 1. 小房子是生成在虚空（地图外面）的
 2. 通过tro_roomspawner组件每次获取一个新的坐标点作为房子中心开始生成房子
@@ -39,7 +40,8 @@ tro_作为公共模块前缀，新的命名建议都用这个作为前缀
    2. interior_center：中心点对象的标签，一般用于检查玩家当前在不在小房间内
 
 
-
+地形生成：
+1. 每个task有一些锁locks，也有一些钥匙keys_given，解锁该task需要有这些锁的钥匙，解锁后就能获得该task的所有钥匙，有了这些钥匙就能用于解锁其他的task，相互依赖
 
 
 

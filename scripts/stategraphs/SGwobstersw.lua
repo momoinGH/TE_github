@@ -134,7 +134,7 @@ local states =
 
         onexit = function(inst)
             if not inst.sg.statemem.underboat then
-                inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
+                inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
                 inst.AnimState:SetLayer(LAYER_WIP_BELOW_OCEAN)
                 inst.Physics:ClearMotorVelOverride()
             end

@@ -1,9 +1,8 @@
 require("map/network")
 
-local BERMUDA_AMOUNT = 12 --12 triangles make 6 pairs
-
-local function GenerateBermudaTriangles(root, entities, width, height)
-    local numTriangles = BERMUDA_AMOUNT
+-- 生成百慕大三角
+local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
+    local numTriangles = 12
     local minDistSq = 50 * 50
 
     if entities.bermudatriangle_MARKER == nil then
@@ -11,7 +10,9 @@ local function GenerateBermudaTriangles(root, entities, width, height)
     end
 
     local function checkTriangle(tile, x, y, points)
-        if tile ~= WORLD_TILES.OCEAN_SWELL then
+        if tile ~= WORLD_TILES.OCEAN_SWELL
+            and tile ~= WORLD_TILES.OCEAN_DEEP
+        then
             return false
         end
         for i = 1, #points, 1 do
@@ -78,7 +79,7 @@ local function GenerateBermudaTriangles(root, entities, width, height)
                 end
             end
 
-            if pair > 6 then
+            if pair > 6 --[[ IAENV.max_pairs and pair >= IAENV.max_pairs ]] then
                 break
             end
         end
@@ -90,13 +91,4 @@ local function GenerateBermudaTriangles(root, entities, width, height)
     entities.bermudatriangle_MARKER = nil
 end
 
-
-
-local _PostPopulate = Graph.GlobalPostPopulate
-Graph.GlobalPostPopulate = function(self, entities, width, height, ...)
-    _PostPopulate(self, entities, width, height, ...)
-    if true then
-        GenerateBermudaTriangles(self, entities, width, height)
-        -- GenerateTreasure(self, entities, width, height)
-    end
-end
+Hooks.FnDecorator(Graph, "GlobalPostPopulate", nil, GlobalPostPopulateAfter)

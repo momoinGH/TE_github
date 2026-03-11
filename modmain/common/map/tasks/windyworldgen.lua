@@ -112,9 +112,9 @@ local function LevelPreInit(level)
         return
     end
 
-    if TUNING.tropical.only_shipwrecked or TUNING.tropical.windyplains == 15 then
+    if TUNING.tropical.only_shipwrecked or TUNING.tropical.windy == 15 then
         table.insert(level.tasks, "WindyPlainsisland")
-    elseif not TUNING.tropical.only_sea then --não adiciona no Sea World
+    elseif not TUNING.tropical.sea then --não adiciona no Sea World
         table.insert(level.tasks, "WindyPlains")
     end
 end

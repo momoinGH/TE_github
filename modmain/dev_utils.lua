@@ -70,7 +70,7 @@ GLOBAL.prodevassert = prodevassert
 
 ----------------------------------------------------------------------------------------------------
 --- 科雷modmain的定义抄过来，不过文件不存在时不提醒
-function modimportmodulefile(modulename, has_print)
+function prosafemodimport(modulename, has_print)
     if has_print == nil then
         has_print = true
     end
@@ -89,5 +89,20 @@ function modimportmodulefile(modulename, has_print)
     else
         setfenv(result, env.env)
         result()
+    end
+end
+
+----------------------------------------------------------------------------------------------------
+
+function proimportmodulefile(path)
+    assert(type(path) == "string" and not string.starts(path, "modmain"), "path需要是模块下的相对路径！path：" .. tostring(path))
+
+    if not string.starts(path, "/") then
+        path = "/" .. path
+    end
+    for _, m in ipairs(pro_modules) do
+        if TUNING.tropical[m] then --根据配置项决定是否读取
+            prosafemodimport("modmain" .. m .. "/" .. path)
+        end
     end
 end

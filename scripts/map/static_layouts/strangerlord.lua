@@ -131,43 +131,6 @@ return {
           visible = true,
           properties = {}
         },
---[[		
-		
-        {
-          name = "",
-          type = "maxwellthrone",
-          shape = "rectangle",
-          x = 192,
-          y = 192,
-          width = 0,
-          height = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "maxwelllight",
-          shape = "rectangle",
-          x = 192,
-          y = 320,
-          width = 0,
-          height = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "maxwelllight",
-          shape = "rectangle",
-          x = 336,
-          y = 336,
-          width = 0,
-          height = 0,
-          visible = true,
-          properties = {}
-        },
-]]		
-
         {
           name = "",
           type = "maxwelllock",

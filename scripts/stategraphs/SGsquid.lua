@@ -119,7 +119,7 @@ local function setdivelayering(inst, under)
     end
 
     if dive and not inst.under then
-        inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
+        inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
         inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
         inst.under = true
     else
@@ -903,7 +903,7 @@ local states =
 
             --UpdateRunSpeed(inst)
 
-            --inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
+            --inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
             --inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
         end,
 

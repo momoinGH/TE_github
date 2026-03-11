@@ -49,7 +49,7 @@ local function SetBreaching(inst, is_in_air)
         --        inst.AnimState:SetLayer(LAYER_WORLD)
     else
         --		inst.Transform:SetSixFaced()
-        --		inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
+        --		inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
         --        inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
     end
 end

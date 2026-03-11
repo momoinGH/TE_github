@@ -1,857 +1,69 @@
 local Layouts = require("map/layouts").Layouts
 local StaticLayout = require("map/static_layout")
 
-Layouts["tigersharkarea"] = StaticLayout.Get("map/static_layouts/tigersharkarea", {
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
-})
+-- 重新映射布局中ground的数字对应的地皮，由于每个layout.ground_types都是独立的，所以覆盖也没问题
+function RemapLayoutTile(layout_name, map)
+    local layout = Layouts[layout_name]
+    for i, tile_id in pairs(map) do
+        while #layout.ground_types < i do
+            table.insert(layout.ground_types, WORLD_TILES.IMPASSABLE)
+        end
+        layout.ground_types[i] = tile_id
+    end
+end
 
-Layouts["CoffeeBushBunch"] = StaticLayout.Get("map/static_layouts/coffeebushbunch",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["Entradavulcao"] = StaticLayout.Get("map/static_layouts/volcano_start",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["ObsidianWorkbench"] = StaticLayout.Get("map/static_layouts/volcano_workbench",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["WoodlegsUnlock"] = StaticLayout.Get("map/static_layouts/woodlegs_unlock",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["volcano_altar"] = StaticLayout.Get("map/static_layouts/volcano_altar",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["lava_arena"] = StaticLayout.Get("map/static_layouts/lava_arena",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        layout_position = LAYOUT_POSITION.CENTER,
-        disable_transform = true,
-    })
-
-Layouts["LivingJungleTree"] = StaticLayout.Get("map/static_layouts/livingjungletree")
-Layouts["BerryBushBunch"] = StaticLayout.Get("map/static_layouts/berrybushbunch",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["slotmachine"] = StaticLayout.Get("map/static_layouts/slotmachine",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["skull_isle2"] = StaticLayout.Get("map/static_layouts/skull_isle2",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["coral"] = StaticLayout.Get("map/static_layouts/coral",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["entradadaarena"] = StaticLayout.Get("map/static_layouts/entradadaarena",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["doydoym"] = StaticLayout.Get("map/static_layouts/doydoym",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["doydoyf"] = StaticLayout.Get("map/static_layouts/doydoyf",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["strangerlord"] = StaticLayout.Get("map/static_layouts/strangerlord",
-    {
-        layout_position = 1,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["strangerpigs"] = StaticLayout.Get("map/static_layouts/strangerpigs",
-    {
-        layout_position = 1,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["strangerlavaarena"] = StaticLayout.Get("map/static_layouts/strangerlavaarena",
-    {
-        layout_position = 1,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["eldorado"] = StaticLayout.Get("map/static_layouts/eldorado",
-    {
-        layout_position = 1,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["tikitribe"] = StaticLayout.Get("map/static_layouts/tikitribe", {
+-- 多层世界，多个传送门
+Layouts["lobby"] = StaticLayout.Get("map/static_layouts/lobby", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-Layouts["vacation"] = StaticLayout.Get("map/static_layouts/vacation",
-    {
-        layout_position = 1,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
+RemapLayoutTile("lobby", {
+    [2] = WORLD_TILES.COBBLEROAD,
+})
 
-Layouts["city"] = StaticLayout.Get("map/static_layouts/city",
-    {
-        layout_position = 1,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["BeachStart"] = StaticLayout.Get("map/static_layouts/beachstart",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["volcano_entrance"] = StaticLayout.Get("map/static_layouts/volcano_entrance",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["x_spot"] = StaticLayout.Get("map/static_layouts/x_spot",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["lobby"] = StaticLayout.Get("map/static_layouts/lobby",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["mactuskgrass"] = StaticLayout.Get("map/static_layouts/mactuskgrass",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["mastuskrocky"] = StaticLayout.Get("map/static_layouts/mastuskrocky",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["mactusksavanna"] = StaticLayout.Get("map/static_layouts/mactusksavanna",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["pugalisk_fountain"] = StaticLayout.Get("map/static_layouts/pugalisk_fountain",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["farm_1"] = StaticLayout.Get("map/static_layouts/farm_1",
-    {
-        layout_position = LAYOUT_POSITION.RANDOM,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["farm_2"] = StaticLayout.Get("map/static_layouts/farm_2",
-    {
-        layout_position = LAYOUT_POSITION.RANDOM,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["farm_3"] = StaticLayout.Get("map/static_layouts/farm_3",
-    {
-        layout_position = LAYOUT_POSITION.RANDOM,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["farm_4"] = StaticLayout.Get("map/static_layouts/farm_4",
-    {
-        layout_position = LAYOUT_POSITION.RANDOM,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["farm_5"] = StaticLayout.Get("map/static_layouts/farm_5",
-    {
-        layout_position = LAYOUT_POSITION.RANDOM,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["farm_fill_1"] = StaticLayout.Get("map/static_layouts/farm_fill_1",
-    {
-        layout_position = LAYOUT_POSITION.RANDOM,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["farm_fill_2"] = StaticLayout.Get("map/static_layouts/farm_fill_2",
-    {
-        layout_position = LAYOUT_POSITION.RANDOM,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["farm_fill_3"] = StaticLayout.Get("map/static_layouts/farm_fill_3",
-    {
-        layout_position = LAYOUT_POSITION.RANDOM,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["cidade1"] = StaticLayout.Get("map/static_layouts/cidade1",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["cidade2"] = StaticLayout.Get("map/static_layouts/cidade2",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["mandraketown"] = StaticLayout.Get("map/static_layouts/mandraketown",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["porkland_start"] = StaticLayout.Get("map/static_layouts/porkland_start",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["IceSpiderpillar"] = StaticLayout.Get("map/static_layouts/IceSpiderpillar",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["nettlegrove"] = StaticLayout.Get("map/static_layouts/nettlegrove",
-    {
-        layout_position = LAYOUT_POSITION.RANDOM,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["pantano"] = StaticLayout.Get("map/static_layouts/pantano",
-    {
-        layout_position = LAYOUT_POSITION.RANDOM,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-------------------------------extras--------------------------------------------------------------------			
-Layouts["pig_ruins_entrance_1"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_1",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["pig_ruins_entrance_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_2",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["pig_ruins_entrance_3"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_3",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["pig_ruins_entrance_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_4",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["pig_ruins_entrance_5"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_5",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["pig_ruins_exit_1"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_1",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["pig_ruins_exit_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_2",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["pig_ruins_exit_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_4",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["lilypad"] = StaticLayout.Get("map/static_layouts/lilypad",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["pig_ruins_artichoke"] = StaticLayout.Get("map/static_layouts/pig_ruins_artichoke",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["pig_ruins_head"] = StaticLayout.Get("map/static_layouts/pig_ruins_head",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["pig_ruins_nocanopy"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["pig_ruins_nocanopy_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_2",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["pig_ruins_nocanopy_3"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_3",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["pig_ruins_nocanopy_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_4",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["roc_cave"] = StaticLayout.Get("map/static_layouts/roc_cave",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["roc_nest"] = StaticLayout.Get("map/static_layouts/roc_nest",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["sw_exit"] = StaticLayout.Get("map/static_layouts/sw_exit",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["hamlet_exit"] = StaticLayout.Get("map/static_layouts/hamlet_exit",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["sw_entrance"] = StaticLayout.Get("map/static_layouts/sw_entrance",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-Layouts["hamlet_entrance"] = StaticLayout.Get("map/static_layouts/hamlet_entrance",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["lobby_exit"] = StaticLayout.Get("map/static_layouts/lobby_exit",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["cave_entranceham1"] = StaticLayout.Get("map/static_layouts/cave_entranceham1",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["cave_entranceham2"] = StaticLayout.Get("map/static_layouts/cave_entranceham2",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["cave_entranceham3"] = StaticLayout.Get("map/static_layouts/cave_entranceham3",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["ruins_exit"] = StaticLayout.Get("map/static_layouts/ruins_exit",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["ruins_exit2"] = StaticLayout.Get("map/static_layouts/ruins_exit2",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["atlantida"] = StaticLayout.Get("map/static_layouts/atlantida",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["antqueencave"] = StaticLayout.Get("map/static_layouts/antqueencave",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["oceanworldstart"] = StaticLayout.Get("map/static_layouts/oceanworldstart",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["mermtrader1set"] = StaticLayout.Get("map/static_layouts/mermtrader1set",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["mermtrader2set"] = StaticLayout.Get("map/static_layouts/mermtrader2set",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["mermtrader3set"] = StaticLayout.Get("map/static_layouts/mermtrader3set",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["mermtrader3setmainland"] = StaticLayout.Get("map/static_layouts/mermtrader3setmainland",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["elderpig"] = StaticLayout.Get("map/static_layouts/elderpig",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["ligamundoham"] = StaticLayout.Get("map/static_layouts/ligamundoham",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["ligamundohamexit"] = StaticLayout.Get("map/static_layouts/ligamundohamexit",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["ligamundosw"] = StaticLayout.Get("map/static_layouts/ligamundosw",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["ligamundoswexit"] = StaticLayout.Get("map/static_layouts/ligamundoswexit",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
-
-Layouts["gwestatua"] = StaticLayout.Get("map/static_layouts/gwestatua",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
-    })
-
-Layouts["goatkid"] = StaticLayout.Get("map/static_layouts/goatkid",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        areas =
-        {
-            oldcity = function()
-                local tipo = math.random(1, 12)
-                if tipo == 1 then return { "quagmire_rubble_pubdoor" } end
-                if tipo == 2 then return { "quagmire_rubble_cathedral" } end
-                if tipo == 3 then return { "quagmire_rubble_clock" } end
-                if tipo == 4 then return { "quagmire_rubble_chimney" } end
-                if tipo == 5 then return { "quagmire_rubble_carriage" } end
-                if tipo == 6 then return { "quagmire_rubble_clocktower" } end
-                if tipo == 7 then return { "quagmire_rubble_empty" } end
-                if tipo == 8 then return { "rocks" } end
-                if tipo == 9 then return { "firepit" } end
-                if tipo == 10 then return { "quagmire_lamp_post" } end
-                if tipo == 11 then return { "quagmire_lamp_post" } end
-                if tipo == 12 then return { "quagmire_lamp_post" } end
-            end,
-        },
-    })
-
-Layouts["goatkid2"] = StaticLayout.Get("map/static_layouts/goatkid2",
-    {
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        areas =
-        {
-            oldcity = function()
-                local tipo = math.random(1, 12)
-                if tipo == 1 then return { "quagmire_rubble_bike" } end
-                if tipo == 2 then return { "quagmire_rubble_chimney2" } end
-                if tipo == 3 then return { "quagmire_rubble_roof" } end
-                if tipo == 4 then return { "quagmire_pond_salt" } end
-                if tipo == 5 then return { "quagmire_rubble_chimney" } end
-                if tipo == 6 then return { "quagmire_pond_salt" } end
-                if tipo == 7 then return { "rocks" } end
-                if tipo == 8 then return { "firepit" } end
-                if tipo == 9 then return { "quagmire_lamp_post" } end
-                if tipo == 10 then return { "quagmire_lamp_post" } end
-                if tipo == 11 then return { "quagmire_lamp_post" } end
-                if tipo == 12 then return { "quagmire_rubble_empty" } end
-            end,
-        },
-    })
-
-Layouts["octopuskinghome"] = StaticLayout.Get("map/static_layouts/octopuskinghome", {
+-- 海象营地
+Layouts["mactuskgrass"] = StaticLayout.Get("map/static_layouts/mactuskgrass", {
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})
+Layouts["mastuskrocky"] = StaticLayout.Get("map/static_layouts/mastuskrocky", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    areas =
-    {
-        treearea = function()
-            local stuff = {}
-
-            table.insert(stuff, "coralreef")
-            for i = 1, 6 do
-                if math.random() < 0.1 then
-                    table.insert(stuff, "coralreef")
-                end
-            end
-
-            table.insert(stuff, "coralreef")
-            --				table.insert(stuff,"oceanvine_deco")
-
-
-            if math.random() < 0.2 then
-                table.insert(stuff, "coralreef")
-            end
-
-            for i = 1, 3 do
-                if math.random() < 0.3 then
-                    table.insert(stuff, "spidercoralhole")
-                end
-            end
-
-            --				for i=1,3 do
-            --					if math.random()<0.3 then
-            --						table.insert(stuff,"oceanvine_deco")
-            --					end
-            --				end				
-
-            for i = 1, 4 do
-                if math.random() < 0.3 then
-                    table.insert(stuff, "fishinhole")
-                end
-            end
-
-            for i = 1, 2 do
-                if math.random() < 0.3 then
-                    table.insert(stuff, "ballphinhouse")
-                end
-            end
-
-
-            for i = 1, 10 do
-                if math.random() < 0.4 then
-                    table.insert(stuff, "mussel_farm")
-                end
-            end
-
-            return stuff
-        end,
-
-        notreearea = function()
-            local variador = math.random()
-            if variador > 0.4 then
-                return { "coralreef" }
-            else
-                local tipo = math.random(1, 25)
-                if tipo == 1 then return { "mussel_farm" } end
-                if tipo == 2 then return { "mussel_farm" } end
-                if tipo == 3 then return { "mussel_farm" } end
-                if tipo == 4 then return { "mussel_farm" } end
-                if tipo == 5 then return { "mussel_farm" } end
-                if tipo == 6 then return { "seaweed_planted" } end
-                if tipo == 7 then return { "seaweed_planted" } end
-                if tipo == 8 then return { "seaweed_planted" } end
-                if tipo == 9 then return { "seaweed_planted" } end
-                if tipo == 10 then return { "seaweed_planted" } end
-                if tipo == 11 then return { "spidercoralhole" } end
-                if tipo == 12 then return { "spidercoralhole" } end
-                if tipo == 13 then return { "ballphinhouse" } end
-                if tipo == 14 then return { "ballphinhouse" } end
-                if tipo == 15 then return { "ballphinhouse" } end
-                if tipo == 16 then return { "fishinhole" } end
-                if tipo == 17 then return { "fishinhole" } end
-                if tipo == 18 then return { "fishinhole" } end
-                if tipo == 19 then return { "fishinhole" } end
-                if tipo == 20 then return { "coral_brain_rock" } end
-                if tipo == 21 then return { "lobsterhole" } end
-                if tipo == 22 then return { "lobsterhole" } end
-                if tipo == 23 then return { "lobsterhole" } end
-                if tipo == 24 then return { "messagebottle_sw" } end
-                if tipo == 25 then return { "tar_pool" } end
-            end
-        end,
-    },
-
-
+})
+Layouts["mactusksavanna"] = StaticLayout.Get("map/static_layouts/mactusksavanna", {
+    layout_position = LAYOUT_POSITION.CENTER,
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})
+-- 传送门
+Layouts["sw_exit"] = StaticLayout.Get("map/static_layouts/sw_exit", {
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})
+Layouts["hamlet_exit"] = StaticLayout.Get("map/static_layouts/hamlet_exit", {
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})
+Layouts["sw_entrance"] = StaticLayout.Get("map/static_layouts/sw_entrance", {
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})
+Layouts["hamlet_entrance"] = StaticLayout.Get("map/static_layouts/hamlet_entrance", {
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})
+Layouts["lobby_exit"] = StaticLayout.Get("map/static_layouts/lobby_exit", {
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
 
-
-Layouts["coralpool1"] = StaticLayout.Get("map/static_layouts/coralpool1",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-
-        areas =
-        {
-            coralzone = function()
-                local variador = math.random()
-                if variador > 0.4 then
-                    return { "coralreef" }
-                else
-                    local tipo = math.random(1, 25)
-                    if tipo == 1 then return { "mussel_farm" } end
-                    if tipo == 2 then return { "mussel_farm" } end
-                    if tipo == 3 then return { "mussel_farm" } end
-                    if tipo == 4 then return { "mussel_farm" } end
-                    if tipo == 5 then return { "mussel_farm" } end
-                    if tipo == 6 then return { "seaweed_planted" } end
-                    if tipo == 7 then return { "seaweed_planted" } end
-                    if tipo == 8 then return { "seaweed_planted" } end
-                    if tipo == 9 then return { "seaweed_planted" } end
-                    if tipo == 10 then return { "seaweed_planted" } end
-                    if tipo == 11 then return { "spidercoralhole" } end
-                    if tipo == 12 then return { "spidercoralhole" } end
-                    if tipo == 13 then return { "ballphinhouse" } end
-                    if tipo == 14 then return { "ballphinhouse" } end
-                    if tipo == 15 then return { "ballphinhouse" } end
-                    if tipo == 16 then return { "fishinhole" } end
-                    if tipo == 17 then return { "fishinhole" } end
-                    if tipo == 18 then return { "fishinhole" } end
-                    if tipo == 19 then return { "fishinhole" } end
-                    if tipo == 20 then return { "coral_brain_rock" } end
-                    if tipo == 21 then return { "lobsterhole" } end
-                    if tipo == 22 then return { "lobsterhole" } end
-                    if tipo == 23 then return { "lobsterhole" } end
-                    if tipo == 24 then return { "messagebottle_sw" } end
-                    if tipo == 25 then return { "tar_pool" } end
-                end
-            end,
-        },
-    })
-
-
-
-Layouts["coralpool2"] = StaticLayout.Get("map/static_layouts/coralpool2",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        areas =
-        {
-            coralzone = function()
-                local variador = math.random()
-                if variador > 0.4 then
-                    return { "coralreef" }
-                else
-                    local tipo = math.random(1, 25)
-                    if tipo == 1 then return { "mussel_farm" } end
-                    if tipo == 2 then return { "mussel_farm" } end
-                    if tipo == 3 then return { "mussel_farm" } end
-                    if tipo == 4 then return { "mussel_farm" } end
-                    if tipo == 5 then return { "mussel_farm" } end
-                    if tipo == 6 then return { "seaweed_planted" } end
-                    if tipo == 7 then return { "seaweed_planted" } end
-                    if tipo == 8 then return { "seaweed_planted" } end
-                    if tipo == 9 then return { "seaweed_planted" } end
-                    if tipo == 10 then return { "seaweed_planted" } end
-                    if tipo == 11 then return { "spidercoralhole" } end
-                    if tipo == 12 then return { "spidercoralhole" } end
-                    if tipo == 13 then return { "ballphinhouse" } end
-                    if tipo == 14 then return { "ballphinhouse" } end
-                    if tipo == 15 then return { "ballphinhouse" } end
-                    if tipo == 16 then return { "fishinhole" } end
-                    if tipo == 17 then return { "fishinhole" } end
-                    if tipo == 18 then return { "fishinhole" } end
-                    if tipo == 19 then return { "fishinhole" } end
-                    if tipo == 20 then return { "coral_brain_rock" } end
-                    if tipo == 21 then return { "lobsterhole" } end
-                    if tipo == 22 then return { "lobsterhole" } end
-                    if tipo == 23 then return { "lobsterhole" } end
-                    if tipo == 24 then return { "messagebottle_sw" } end
-                    if tipo == 25 then return { "tar_pool" } end
-                end
-            end,
-        },
-
-    })
-
-
-Layouts["coralpool3"] = StaticLayout.Get("map/static_layouts/coralpool3",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        areas =
-        {
-            coralzone = function()
-                local variador = math.random()
-                if variador > 0.4 then
-                    return { "coralreef" }
-                else
-                    local tipo = math.random(1, 25)
-                    if tipo == 1 then return { "mussel_farm" } end
-                    if tipo == 2 then return { "mussel_farm" } end
-                    if tipo == 3 then return { "mussel_farm" } end
-                    if tipo == 4 then return { "mussel_farm" } end
-                    if tipo == 5 then return { "mussel_farm" } end
-                    if tipo == 6 then return { "seaweed_planted" } end
-                    if tipo == 7 then return { "seaweed_planted" } end
-                    if tipo == 8 then return { "seaweed_planted" } end
-                    if tipo == 9 then return { "seaweed_planted" } end
-                    if tipo == 10 then return { "seaweed_planted" } end
-                    if tipo == 11 then return { "spidercoralhole" } end
-                    if tipo == 12 then return { "spidercoralhole" } end
-                    if tipo == 13 then return { "ballphinhouse" } end
-                    if tipo == 14 then return { "ballphinhouse" } end
-                    if tipo == 15 then return { "ballphinhouse" } end
-                    if tipo == 16 then return { "fishinhole" } end
-                    if tipo == 17 then return { "fishinhole" } end
-                    if tipo == 18 then return { "fishinhole" } end
-                    if tipo == 19 then return { "fishinhole" } end
-                    if tipo == 20 then return { "ballphinhouse" } end
-                    if tipo == 21 then return { "lobsterhole" } end
-                    if tipo == 22 then return { "lobsterhole" } end
-                    if tipo == 23 then return { "lobsterhole" } end
-                    if tipo == 24 then return { "messagebottle_sw" } end
-                    if tipo == 25 then return { "tar_pool" } end
-                end
-            end,
-        },
-    })
-
-
-Layouts["oceanbamboforest"] = StaticLayout.Get("map/static_layouts/oceanbamboforest",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        disable_transform = true,
-        areas =
-        {
-            objetoaleatorio = function()
-                local variador = math.random()
-                if variador > 0.3 then
-                    return { "oceanbambootree" }
-                else
-                    local tipo = math.random(1, 20)
-                    if tipo == 1 then return { "frogsplash" } end
-                    if tipo == 2 then return { "frogsplash" } end
-                    if tipo == 3 then return { "tree_mangrovebee" } end
-                    if tipo == 4 then return { "oceanbambootreebig" } end
-                    if tipo == 5 then return { "spidercoralhole" } end
-                    if tipo == 6 then return { "grasswater" } end
-                    if tipo == 7 then return { "fishinhole" } end
-                    if tipo == 8 then return { "waterygrave" } end
-                    if tipo == 9 then return { "sapling" } end
-                    if tipo == 10 then return { "oceanbush_vine" } end
-                    if tipo == 11 then return { "oceanbambootreebig" } end
-                    if tipo == 12 then return { "oceanbambootreebig" } end
-                    if tipo == 13 then return { "mussel_farm" } end
-                    if tipo == 14 then return { "seaweed_planted" } end
-                    if tipo == 15 then return { "oceanbush_vine" } end
-                    if tipo == 16 then return { "tree_mangrovebee" } end
-                    if tipo == 17 then return { "driftwood_log" } end
-                    if tipo == 18 then return { "sapling" } end
-                    if tipo == 19 then return { "oceanbush_vine" } end
-                    if tipo == 20 then return { "oceanbush_vine" } end
-                end
-            end,
-        },
-    })
+Layouts["oceanworldstart"] = StaticLayout.Get("map/static_layouts/oceanworldstart", {
+    layout_position = LAYOUT_POSITION.CENTER,
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})
 
 Layouts["lilypadnovo"] = StaticLayout.Get("map/static_layouts/lilypadnovo", {
     layout_position = LAYOUT_POSITION.CENTER,
@@ -1096,465 +308,173 @@ Layouts["mangrove2"] = StaticLayout.Get("map/static_layouts/mangrove1", {
 })
 
 
-Layouts["oceanforest"] = StaticLayout.Get("map/static_layouts/oceanforest",
+Layouts["oceanforest"] = StaticLayout.Get("map/static_layouts/oceanforest", {
+    layout_position = LAYOUT_POSITION.CENTER,
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    disable_transform = true,
+    areas =
     {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        disable_transform = true,
-        areas =
-        {
-            objetoaleatorio = function()
-                local variador = math.random()
-                if variador > 0.3 then
-                    return { "tree_mangrove" }
-                else
-                    local tipo = math.random(1, 20)
-                    if tipo == 1 then
-                        return { "frogsplash" }
-                    elseif tipo == 2 then
-                        return { "sapling" }
-                    elseif tipo == 3 then
-                        return { "tree_mangrovebee" }
-                    elseif tipo == 4 then
-                        return { "tentacleunderwater" }
-                    elseif tipo == 5 then
-                        return { "spidercoralhole" }
-                    elseif tipo == 6 then
-                        return { "grasswater" }
-                    elseif tipo == 7 then
-                        return { "fishinhole" }
-                    elseif tipo == 8 then
-                        return { "waterygrave" }
-                    elseif tipo == 9 then
-                        return { "redbarrel" }
-                    elseif tipo == 10 then
-                        return { "mermboat" }
-                    elseif tipo == 11 then
-                        return { "seacucumber_planted" }
-                    elseif tipo == 12 then
-                        return { "seataro_planted" }
-                    elseif tipo == 13 then
-                        return { "mussel_farm" }
-                    elseif tipo == 14 then
-                        return { "seaweed_planted" }
-                    elseif tipo == 15 then
-                        return { "oxbaby" }
-                    elseif tipo == 16 then
-                        return { "ox" }
-                    elseif tipo == 17 then
-                        return { "driftwood_log" }
-                    elseif tipo == 18 then
-                        return { "watercress_planted" }
-                    elseif tipo == 19 then
-                        return { "reeds_water" }
-                    elseif tipo == 20 then
-                        return { "luggagechest_spawner" }
-                    else
-                        return { "tree_mangrove" }
-                    end
-                end
-            end,
-        },
-    })
-
-Layouts["oceanrocks"] = StaticLayout.Get("map/static_layouts/oceanrocks",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        disable_transform = true,
-        areas =
-        {
-            rochaaleatoria = function()
-                local variador = math.random()
-                if variador > 0.8 then
+        objetoaleatorio = function()
+            local variador = math.random()
+            if variador > 0.3 then
+                return { "tree_mangrove" }
+            else
+                local tipo = math.random(1, 20)
+                if tipo == 1 then
+                    return { "frogsplash" }
+                elseif tipo == 2 then
+                    return { "sapling" }
+                elseif tipo == 3 then
+                    return { "tree_mangrovebee" }
+                elseif tipo == 4 then
+                    return { "tentacleunderwater" }
+                elseif tipo == 5 then
+                    return { "spidercoralhole" }
+                elseif tipo == 6 then
                     return { "grasswater" }
+                elseif tipo == 7 then
+                    return { "fishinhole" }
+                elseif tipo == 8 then
+                    return { "waterygrave" }
+                elseif tipo == 9 then
+                    return { "redbarrel" }
+                elseif tipo == 10 then
+                    return { "mermboat" }
+                elseif tipo == 11 then
+                    return { "seacucumber_planted" }
+                elseif tipo == 12 then
+                    return { "seataro_planted" }
+                elseif tipo == 13 then
+                    return { "mussel_farm" }
+                elseif tipo == 14 then
+                    return { "seaweed_planted" }
+                elseif tipo == 15 then
+                    return { "oxbaby" }
+                elseif tipo == 16 then
+                    return { "ox" }
+                elseif tipo == 17 then
+                    return { "driftwood_log" }
+                elseif tipo == 18 then
+                    return { "watercress_planted" }
+                elseif tipo == 19 then
+                    return { "reeds_water" }
+                elseif tipo == 20 then
+                    return { "luggagechest_spawner" }
                 else
-                    local tipo = math.random(1, 10)
-                    if tipo == 1 then return { "tree_mangrovebee" } end
-                    if tipo == 2 then return { "frogsplash" } end
-                    if tipo == 3 then return { "frogsplash" } end
-                    if tipo == 4 then return { "frogsplash" } end
-                    if tipo == 5 then return { "frogsplash" } end
-                    if tipo == 6 then return { "sapling" } end
-                    if tipo == 7 then return { "reeds_water" } end
-                    if tipo == 8 then return { "reeds_water" } end
-                    if tipo == 9 then return { "seaweed_planted" } end
-                    if tipo == 10 then return { "mussel_farm" } end
+                    return { "tree_mangrove" }
                 end
-            end,
-        },
-    })
+            end
+        end,
+    },
+})
 
-Layouts["icebergs"] = StaticLayout.Get("map/static_layouts/icebergs",
+Layouts["oceanrocks"] = StaticLayout.Get("map/static_layouts/oceanrocks", {
+    layout_position = LAYOUT_POSITION.CENTER,
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    disable_transform = true,
+    areas =
     {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
+        rochaaleatoria = function()
+            local variador = math.random()
+            if variador > 0.8 then
+                return { "grasswater" }
+            else
+                local tipo = math.random(1, 10)
+                if tipo == 1 then return { "tree_mangrovebee" } end
+                if tipo == 2 then return { "frogsplash" } end
+                if tipo == 3 then return { "frogsplash" } end
+                if tipo == 4 then return { "frogsplash" } end
+                if tipo == 5 then return { "frogsplash" } end
+                if tipo == 6 then return { "sapling" } end
+                if tipo == 7 then return { "reeds_water" } end
+                if tipo == 8 then return { "reeds_water" } end
+                if tipo == 9 then return { "seaweed_planted" } end
+                if tipo == 10 then return { "mussel_farm" } end
+            end
+        end,
+    },
+})
 
-Layouts["oceangrotolunar"] = StaticLayout.Get("map/static_layouts/oceangrotolunar",
-    {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
+Layouts["icebergs"] = StaticLayout.Get("map/static_layouts/icebergs", {
+    layout_position = LAYOUT_POSITION.CENTER,
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})
+
+Layouts["oceangrotolunar"] = StaticLayout.Get("map/static_layouts/oceangrotolunar", {
+    layout_position = LAYOUT_POSITION.CENTER,
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})
 -----------------------------------------------------------------------------------------------			
 
 
-Layouts["wildboreking"] = StaticLayout.Get("map/static_layouts/wildboreking",
+Layouts["wildboreking"] = StaticLayout.Get("map/static_layouts/wildboreking", {
+    layout_position = LAYOUT_POSITION.CENTER,
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})
+
+
+Layouts["iceberg1"] = StaticLayout.Get("map/static_layouts/iceberg1", {
+
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    layout_position = LAYOUT_POSITION.CENTER,
+    disable_transform = true,
+
+    areas =
     {
-        layout_position = LAYOUT_POSITION.CENTER,
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
+        treearea = function()
+            local stuff = {}
 
-Layouts["quagmire_kitchen"] = StaticLayout.Get("map/static_layouts/quagmire_kitchen",
-    {
-
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        layout_position = LAYOUT_POSITION.CENTER,
-        disable_transform = true,
-
-        areas =
-        {
-            quagmire_parkspike_row = function(area, data)
-                local vert = data.height > data.width
-                --				local x = vert and (data.x) or (data.x - data.width/2.0)
-                --				local y = vert and (data.y - data.height/2.0) or (data.y)
-                local x = data.x - data.width / 2.0
-                local y = data.y - data.height / 2.0
-                local spacing = 0.18
-                local num = math.ceil((vert and data.height or data.width) / spacing)
-
-                local prefabs = {}
-                for i = 1, num do
-                    table.insert(prefabs,
-                        {
-                            prefab = i % 2 == (vert and 0 or 1) and "quagmire_parkspike_short" or "quagmire_parkspike",
-                            x = x,
-                            y = y,
-                        })
-                    if vert then
-                        y = y + spacing
-                    else
-                        x = x + spacing
-                    end
-                end
-                return prefabs
-            end,
-        },
-    })
-
-Layouts["wreck"] = StaticLayout.Get("map/static_layouts/wreck",
-    {
-
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        layout_position = LAYOUT_POSITION.CENTER,
-        disable_transform = true,
-
-        areas =
-        {
-            debris_area = function()
-                local stuff = {}
-
-                table.insert(stuff, "wreck")
-                for i = 1, 6 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "wreck")
-                    end
-                end
-
-                table.insert(stuff, "luggagechest_spawner")
-                table.insert(stuff, "waterygrave")
-
-
-                if math.random() < 0.2 then
-                    table.insert(stuff, "luggagechest_spawner")
-                end
-
-                for i = 1, 3 do
-                    if math.random() < 0.3 then
-                        table.insert(stuff, "redbarrel")
-                    end
-                end
-
-                for i = 1, 3 do
-                    if math.random() < 0.3 then
-                        table.insert(stuff, "waterygrave")
-                    end
-                end
-
-                for i = 1, 4 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "boatfragment01")
-                    end
-                end
-
-                for i = 1, 4 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "boatfragment02")
-                    end
-                end
-
-
-                for i = 1, 4 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "boatfragment03")
-                    end
-                end
-
-
-
-                for i = 1, 2 do
-                    if math.random() < 0.3 then
-                        table.insert(stuff, "whale_bluefinal")
-                    end
-                end
-
-
-                for i = 1, 4 do
-                    if math.random() < 0.4 then
-                        table.insert(stuff, "fishinhole")
-                    end
-                end
-
-                return stuff
-            end,
-
-        },
-    })
-
-
-Layouts["wreck2"] = StaticLayout.Get("map/static_layouts/wreck2",
-    {
-
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        layout_position = LAYOUT_POSITION.CENTER,
-        disable_transform = true,
-
-        areas =
-        {
-            debris_area = function()
-                local stuff = {}
-
-                table.insert(stuff, "wreck")
-                for i = 1, 6 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "wreck")
-                    end
-                end
-
-                table.insert(stuff, "luggagechest_spawner")
-                table.insert(stuff, "waterygrave")
-
-
-                if math.random() < 0.2 then
-                    table.insert(stuff, "luggagechest_spawner")
-                end
-
-                for i = 1, 3 do
-                    if math.random() < 0.3 then
-                        table.insert(stuff, "redbarrel")
-                    end
-                end
-
-                for i = 1, 3 do
-                    if math.random() < 0.3 then
-                        table.insert(stuff, "waterygrave")
-                    end
-                end
-
-                for i = 1, 4 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "boatfragment01")
-                    end
-                end
-
-                for i = 1, 4 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "boatfragment02")
-                    end
-                end
-
-
-                for i = 1, 4 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "boatfragment03")
-                    end
-                end
-
-
-
-                for i = 1, 2 do
-                    if math.random() < 0.3 then
-                        table.insert(stuff, "whale_bluefinal")
-                    end
-                end
-
-
-                for i = 1, 4 do
-                    if math.random() < 0.4 then
-                        table.insert(stuff, "fishinhole")
-                    end
-                end
-
-                return stuff
-            end,
-
-        },
-    })
-
-Layouts["iceberg1"] = StaticLayout.Get("map/static_layouts/iceberg1",
-    {
-
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        layout_position = LAYOUT_POSITION.CENTER,
-        disable_transform = true,
-
-        areas =
-        {
-            treearea = function()
-                local stuff = {}
-
-                table.insert(stuff, "rock_ice_frost")
-                for i = 1, 6 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "rock_ice_frost")
-                    end
-                end
-
-                table.insert(stuff, "rock_ice_frost")
-                table.insert(stuff, "rock_ice_frost")
-
-
-                if math.random() < 0.2 then
+            table.insert(stuff, "rock_ice_frost")
+            for i = 1, 6 do
+                if math.random() < 0.1 then
                     table.insert(stuff, "rock_ice_frost")
                 end
+            end
 
-                for i = 1, 3 do
-                    if math.random() < 0.6 then
-                        table.insert(stuff, "icedpad")
-                    end
+            table.insert(stuff, "rock_ice_frost")
+            table.insert(stuff, "rock_ice_frost")
+
+
+            if math.random() < 0.2 then
+                table.insert(stuff, "rock_ice_frost")
+            end
+
+            for i = 1, 3 do
+                if math.random() < 0.6 then
+                    table.insert(stuff, "icedpad")
                 end
+            end
 
-                for i = 1, 3 do
-                    if math.random() < 0.3 then
-                        table.insert(stuff, "fishinhole")
-                    end
+            for i = 1, 3 do
+                if math.random() < 0.3 then
+                    table.insert(stuff, "fishinhole")
                 end
-                --[[
-				for i=1,4 do
-					if math.random()<0.3 then
-						table.insert(stuff,"lightrays_canopy")
-					end
-				end
-			]]
+            end
 
-                for i = 1, 2 do
-                    if math.random() < 0.3 then
-                        table.insert(stuff, "whale_bluefinal")
-                    end
+            for i = 1, 2 do
+                if math.random() < 0.3 then
+                    table.insert(stuff, "whale_bluefinal")
                 end
+            end
 
 
-                for i = 1, 4 do
-                    if math.random() < 0.4 then
-                        table.insert(stuff, "rock_ice_frost")
-                    end
+            for i = 1, 4 do
+                if math.random() < 0.4 then
+                    table.insert(stuff, "rock_ice_frost")
                 end
+            end
 
-                return stuff
-            end,
+            return stuff
+        end,
 
-        },
-    })
-
-Layouts["kraken"] = StaticLayout.Get("map/static_layouts/kraken",
-    {
-
-        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        layout_position = LAYOUT_POSITION.CENTER,
-        disable_transform = true,
-
-        areas =
-        {
-            debris_area = function()
-                local stuff = {}
-
-                table.insert(stuff, "wreck")
-                for i = 1, 6 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "wreck")
-                    end
-                end
-
-                table.insert(stuff, "luggagechest_spawner")
-                table.insert(stuff, "waterygrave")
-
-
-                if math.random() < 0.2 then
-                    table.insert(stuff, "luggagechest_spawner")
-                end
-
-                for i = 1, 3 do
-                    if math.random() < 0.3 then
-                        table.insert(stuff, "redbarrel")
-                    end
-                end
-
-                for i = 1, 3 do
-                    if math.random() < 0.3 then
-                        table.insert(stuff, "waterygrave")
-                    end
-                end
-
-                for i = 1, 4 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "boatfragment01")
-                    end
-                end
-
-                for i = 1, 4 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "boatfragment02")
-                    end
-                end
-
-
-                for i = 1, 4 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "boatfragment03")
-                    end
-                end
-
-
-
-                for i = 1, 2 do
-                    if math.random() < 0.3 then
-                        table.insert(stuff, "redbarrel")
-                    end
-                end
-
-
-                for i = 1, 4 do
-                    if math.random() < 0.1 then
-                        table.insert(stuff, "fishinhole")
-                    end
-                end
-
-                return stuff
-            end,
-
-        },
-    })
-
+    },
+})
 
 
 Layouts["CropCirclegorge"] =
@@ -1570,823 +490,3 @@ Layouts["CropCirclegorge"] =
     },
     scale = 1.5
 }
-----------------------------------------------------------	
-
-
---[[
-Layouts["CrabKing1"] = StaticLayout.Get("map/static_layouts/crabking1", {
-		min_dist_from_land = 0,
-		areas =
-		{
-			stack_area = function() return math.random() < 0.9 and {"seastack"} or nil end,
-		}
-    })
-	]]
---[[
-Layouts["HermitcrabIsland"] = StaticLayout.Get("map/static_layouts/hermitcrab_01",
-	{
-		add_topology = {room_id = "StaticLayoutIsland:HermitcrabIsland", tags = {"RoadPoison", "nohunt", "nohasslers", "not_mainland"}},
-		min_dist_from_land = 0,
-	})
-]]
-
-----------------------------------------------------
-
-local layoutsToRemake = { "volcano_entrance" }
-local layoutsToRemakeGrounds =
-{
-    volcano_entrance = { WORLD_TILES.BEACH, WORLD_TILES.VOLCANO }
-}
-local layoutsToRemakeTiles =
-{
-    volcano_entrance =
-    {
-
-
-        { 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 2 },
-
-
-
-    }
-}
-
---for _, layoutName in pairs(layoutsToRemake) do
---	if layoutsToRemakeTiles[layoutName] and layoutsToRemakeGrounds[layoutName] then
---		Layouts[layoutName].ground_types = layoutsToRemakeGrounds[layoutName]
---		Layouts[layoutName].ground = layoutsToRemakeTiles[layoutName]
---	else
---		print("Table are not declared for ", layoutName, " layout!")
---	end
---end			
-
-
-
-local layoutsToRemake = { "tigersharkarea", "skull_isle2", "doydoym", "doydoyf", "cidade1", "cidade2", "city", "vacation",
-    "lava_arena", "lilypad", "lobby", "atlantida",
-    "pig_ruins_entrance_1", "pig_ruins_entrance_2", "pig_ruins_entrance_3", "pig_ruins_entrance_4",
-    "pig_ruins_entrance_5", "pig_ruins_exit_1", "pig_ruins_exit_2", "pig_ruins_exit_4",
-    "pig_ruins_head", "pig_ruins_nocanopy", "pig_ruins_nocanopy_2", "pig_ruins_nocanopy_3", "pig_ruins_nocanopy_4",
-    "cave_entranceham1", "cave_entranceham2", "cave_entranceham3",
-    "farm_1", "farm_2", "farm_3", "farm_4", "farm_5", "nettlegrove", "pantano", "pugalisk_fountain", "quagmire_kitchen",
-    "mermtrader3set", "goatkid", "goatkid2" }
-local layoutsToRemakeGrounds =
-{
-    tigersharkarea       = { WORLD_TILES.BEACH, WORLD_TILES.OCEAN_COASTAL },
-    skull_isle2          = { WORLD_TILES.MAGMAFIELD, WORLD_TILES.BEACH },
-    x_spot               = { WORLD_TILES.MAGMAFIELD, WORLD_TILES.BEACH },
-    doydoym              = { WORLD_TILES.BEACH },
-    doydoyf              = { WORLD_TILES.BEACH },
-    cidade1              = { WORLD_TILES.COBBLEROAD, WORLD_TILES.FOUNDATION, WORLD_TILES.LAWN },
-    cidade2              = { WORLD_TILES.COBBLEROAD, WORLD_TILES.FOUNDATION, WORLD_TILES.LAWN },
-    city                 = { WORLD_TILES.SNOWLAND, WORLD_TILES.SNOWLAND },
-    vacation             = { WORLD_TILES.BEACH },
-    lava_arena           = { WORLD_TILES.IMPASSABLE, WORLD_TILES.LAVALAND, WORLD_TILES.BATFLOOR },
-    lilypad              = { WORLD_TILES.OCEAN_COASTAL, WORLD_TILES.OCEAN_COASTAL, WORLD_TILES.OCEAN_COASTAL },
-    IceSpiderpillar      = { WORLD_TILES.SNOWLAND, WORLD_TILES.SNOWLAND },
-    lobby                = { WORLD_TILES.IMPASSABLE, WORLD_TILES.LAWN, WORLD_TILES.COBBLEROAD, WORLD_TILES.BEACH, WORLD_TILES.FOREST, WORLD_TILES.GRASS, WORLD_TILES.FOUNDATION },
-    atlantida            = { WORLD_TILES.IMPASSABLE, WORLD_TILES.PIGRUINS, WORLD_TILES.UNDERWATER_ROCKY },
-    pig_ruins_entrance_1 = { WORLD_TILES.DEEPRAINFOREST, WORLD_TILES.PIGRUINS },
-    pig_ruins_entrance_2 = { WORLD_TILES.DEEPRAINFOREST, WORLD_TILES.PIGRUINS },
-    pig_ruins_entrance_3 = { WORLD_TILES.PIGRUINS, WORLD_TILES.DEEPRAINFOREST },
-    pig_ruins_entrance_4 = { WORLD_TILES.PIGRUINS, WORLD_TILES.DEEPRAINFOREST },
-    pig_ruins_entrance_5 = { WORLD_TILES.DEEPRAINFOREST, WORLD_TILES.PIGRUINS },
-    pig_ruins_exit_1     = { WORLD_TILES.DEEPRAINFOREST, WORLD_TILES.PIGRUINS },
-    pig_ruins_exit_2     = { WORLD_TILES.DEEPRAINFOREST, WORLD_TILES.PIGRUINS },
-    pig_ruins_exit_4     = { WORLD_TILES.DEEPRAINFOREST, WORLD_TILES.PIGRUINS },
-    pugalisk_fountain    = { WORLD_TILES.PIGRUINS },
-    pig_ruins_head       = { WORLD_TILES.PIGRUINS },
-    pig_ruins_nocanopy   = { WORLD_TILES.PIGRUINS },
-    pig_ruins_nocanopy_2 = { WORLD_TILES.PIGRUINS },
-    pig_ruins_nocanopy_3 = { WORLD_TILES.PIGRUINS },
-    pig_ruins_nocanopy_4 = { WORLD_TILES.PIGRUINS },
-    cave_entranceham1    = { WORLD_TILES.PIGRUINS },
-    cave_entranceham2    = { WORLD_TILES.PIGRUINS },
-    cave_entranceham3    = { WORLD_TILES.PIGRUINS },
-    farm_1               = { WORLD_TILES.FIELDS, WORLD_TILES.SUBURB },
-    farm_2               = { WORLD_TILES.FIELDS, WORLD_TILES.SUBURB },
-    farm_3               = { WORLD_TILES.FIELDS, WORLD_TILES.SUBURB },
-    farm_4               = { WORLD_TILES.FIELDS, WORLD_TILES.SUBURB },
-    farm_5               = { WORLD_TILES.FIELDS, WORLD_TILES.SUBURB },
-    nettlegrove          = { WORLD_TILES.DEEPRAINFOREST, WORLD_TILES.DEEPRAINFOREST },
-    pantano              = { WORLD_TILES.MARSH },
-    quagmire_kitchen     = { WORLD_TILES.QUAGMIRE_PEATFOREST, WORLD_TILES.ROAD, WORLD_TILES.QUAGMIRE_GATEWAY, WORLD_TILES.QUAGMIRE_PARKFIELD, WORLD_TILES.QUAGMIRE_PARKSTONE, WORLD_TILES.FARMING_SOIL, WORLD_TILES.QUAGMIRE_CITYSTONE },
-    mermtrader3set       = { WORLD_TILES.QUAGMIRE_GATEWAY, WORLD_TILES.ROAD },
-    goatkid              = { WORLD_TILES.QUAGMIRE_CITYSTONE, WORLD_TILES.ROAD },
-    goatkid2             = { WORLD_TILES.QUAGMIRE_CITYSTONE, WORLD_TILES.ROAD },
-
-}
-local layoutsToRemakeTiles =
-{
-
-    atlantida =
-    {
-
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1 },
-        { 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-
-    },
-
-
-    lobby =
-    {
-
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 6, 6, 6, 6, 6, 6, 3, 4, 4, 4, 4, 4, 4, 1, 1, 1 },
-        { 1, 1, 1, 6, 6, 6, 6, 6, 6, 3, 4, 4, 4, 4, 4, 4, 1, 1, 1 },
-        { 1, 1, 1, 6, 6, 6, 6, 6, 6, 3, 4, 4, 4, 4, 4, 4, 1, 1, 1 },
-        { 1, 1, 1, 6, 6, 6, 6, 6, 6, 3, 4, 4, 4, 4, 4, 4, 1, 1, 1 },
-        { 1, 1, 1, 6, 6, 6, 6, 6, 6, 3, 4, 4, 4, 4, 4, 4, 1, 1, 1 },
-        { 1, 1, 1, 6, 6, 6, 6, 6, 3, 3, 3, 4, 4, 4, 4, 4, 1, 1, 1 },
-        { 1, 1, 1, 3, 3, 3, 3, 3, 3, 7, 3, 3, 3, 3, 3, 3, 1, 1, 1 },
-        { 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 5, 5, 5, 5, 5, 1, 1, 1 },
-        { 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 5, 5, 5, 5, 5, 5, 1, 1, 1 },
-        { 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 5, 5, 5, 5, 5, 5, 1, 1, 1 },
-        { 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 5, 5, 5, 5, 5, 5, 1, 1, 1 },
-        { 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 5, 5, 5, 5, 5, 5, 1, 1, 1 },
-        { 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 5, 5, 5, 5, 5, 5, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-
-
-    },
-
-    IceSpiderpillar =
-    {
-
-        { 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0 },
-        { 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
-        { 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 1, 1, 2, 2, 1, 2, 2, 2 },
-        { 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2 },
-        { 2, 2, 2, 2, 1, 1, 2, 1, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, 2 },
-        { 2, 2, 2, 1, 1, 2, 1, 1, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2 },
-        { 2, 2, 2, 2, 1, 2, 2, 1, 1, 2, 2, 2 },
-        { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0 },
-        { 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0 },
-
-
-    },
-
-    tigersharkarea =
-    {
-
-        { 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0 },
-        { 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0 },
-        { 0, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 0 },
-        { 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2 },
-        { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2 },
-        { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2 },
-        { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2 },
-        { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2 },
-        { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2 },
-        { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2 },
-        { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2 },
-        { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2 },
-        { 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2 },
-        { 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2 },
-        { 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2 },
-        { 0, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2 },
-        { 0, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 0 },
-        { 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0 },
-        { 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0 },
-
-    },
-
-    lilypad =
-    {
-
-        { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 },
-        { 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0 },
-        { 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 },
-        { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
-        { 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0 },
-        { 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 },
-
-    },
-
-
-    skull_isle2 =
-    {
-
-        { 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 0, 0, 0 },
-        { 0, 0, 2, 2, 2, 1, 1, 1, 1, 2, 1, 2, 2, 2, 0, 0, 0, 0, 0 },
-        { 2, 0, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 0, 0, 0, 0 },
-        { 0, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 0, 2, 0 },
-        { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 0 },
-        { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 0, 0 },
-        { 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 0, 0 },
-        { 0, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0 },
-        { 0, 0, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 0, 0 },
-        { 0, 2, 2, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 2, 2, 0, 0, 0 },
-        { 0, 0, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 0, 0, 0 },
-        { 0, 0, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 0, 0, 0, 0 },
-        { 0, 0, 0, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 0, 0, 0, 0 },
-        { 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0 },
-        { 0, 0, 0, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 0, 0, 0, 0 },
-        { 0, 0, 0, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 2, 2, 2, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0 },
-
-    },
-    doydoym =
-    {
-
-
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 1, 0, 0, 1, 0, 0, 0 },
-        { 0, 1, 0, 1, 1, 1, 1, 1, 0, 0 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
-        { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-
-
-
-    },
-    doydoyf =
-    {
-
-
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 1, 0, 0, 1, 0, 0, 0 },
-        { 0, 1, 0, 1, 1, 1, 1, 1, 0, 0 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 },
-        { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-
-
-
-    },
-    x_spot =
-    {
-
-
-        { 0, 0, 2, 2, 2, 0, 0 },
-        { 0, 2, 2, 1, 2, 2, 0 },
-        { 2, 2, 2, 1, 2, 2, 2 },
-        { 2, 1, 1, 1, 1, 1, 2 },
-        { 2, 2, 2, 1, 2, 2, 2 },
-        { 0, 2, 2, 1, 2, 2, 0 },
-        { 0, 0, 2, 2, 2, 0, 0 },
-
-    },
-
-    vacation =
-    {
-        { 1, 1, 1, 1 },
-        { 1, 1, 1, 1 },
-        { 1, 1, 1, 1 },
-        { 1, 1, 1, 1 },
-    },
-
-
-    cidade1 =
-    {
-        { 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 0, 0, 0 },
-        { 0, 0, 0, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 0 },
-        { 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 0 },
-        { 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 0 },
-        { 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 0 },
-        { 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 0, 0, 0 },
-        { 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 0, 0, 0 },
-        { 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 0, 0, 0 },
-        { 0, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 0, 0 },
-        { 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 0 },
-        { 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 0 },
-        { 0, 0, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 0 },
-        { 0, 0, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 0 },
-        { 0, 0, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 0 },
-        { 0, 0, 2, 2, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2 },
-        { 0, 2, 2, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 1, 3, 3, 3, 3, 3, 1, 2, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 1, 3, 3, 3, 3, 3, 1, 2, 3, 3, 3, 2, 2, 0, 0, 0, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 1, 3, 3, 3, 3, 3, 1, 2, 3, 3, 3, 2, 2, 0, 0, 0, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 2, 0, 0, 0, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1 },
-        { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2 },
-        { 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2 },
-        { 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2 },
-        { 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2 },
-        { 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-
-    },
-
-
-    cidade2 =
-    {
-
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 3, 3, 2, 2, 2, 2, 2, 2, 2, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0 },
-        { 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2 },
-        { 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2 },
-        { 0, 0, 0, 0, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2 },
-        { 0, 0, 0, 0, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0 },
-        { 0, 0, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0 },
-        { 0, 0, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 3, 3, 3, 2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 1, 2 },
-        { 0, 0, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 3, 3, 3, 2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 1, 2 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 3, 3, 3, 2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 1, 2 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2 },
-        { 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 0 },
-        { 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 0 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 0 },
-        { 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2 },
-        { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2 },
-        { 2, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2 },
-        { 0, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 1, 0 },
-        { 0, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 1, 0 },
-        { 0, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 2, 1, 0 },
-        { 0, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 },
-        { 2, 2, 1, 2, 2, 2, 2, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0 },
-        { 2, 2, 1, 2, 2, 2, 2, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0 },
-        { 2, 2, 1, 2, 2, 2, 2, 2, 1, 3, 3, 3, 3, 3, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0 },
-        { 2, 2, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0 },
-        { 0, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0 },
-        { 0, 0, 1, 2, 0, 0, 0, 0, 0, 2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0 },
-
-    },
-
-
-    city =
-    {
-
-        { 2, 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 2, 2 },
-        { 2, 2, 2, 2, 2, 2 },
-
-    },
-
-    lava_arena =
-    {
-
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 3, 3, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 3, 3, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 3, 3, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 2, 2, 3, 3, 2, 2, 3, 2, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 3, 3, 2, 3, 2, 2, 3, 2, 3, 3, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 3, 2, 3, 3, 2, 3, 3, 3, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 3, 3, 2, 3, 3, 2, 3, 3, 3, 3, 2, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 2, 3, 2, 2, 3, 2, 3, 3, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-
-    },
-
-    pig_ruins_entrance_1 =
-    {
-        { 1, 1, 1, 1, 1, 1, 0 },
-        { 1, 2, 2, 2, 2, 2, 1 },
-        { 1, 2, 2, 2, 2, 2, 1 },
-        { 1, 1, 2, 2, 1, 1, 1 },
-        { 1, 2, 2, 1, 2, 2, 1 },
-        { 1, 2, 2, 1, 2, 2, 1 },
-        { 0, 1, 1, 1, 1, 1, 1 },
-    },
-    pig_ruins_entrance_2 =
-    {
-        { 1, 1, 1, 1, 1, 1, 0 },
-        { 1, 1, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 2, 1, 1, 1 },
-        { 1, 2, 2, 2, 2, 1, 1 },
-        { 1, 2, 2, 2, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 0 },
-    },
-    pig_ruins_entrance_3 =
-    {
-        { 2, 2, 2, 2, 2, 2, 0 },
-        { 2, 1, 1, 1, 1, 2, 2 },
-        { 2, 2, 1, 1, 1, 2, 2 },
-        { 2, 1, 1, 2, 1, 2, 2 },
-        { 2, 1, 1, 1, 1, 2, 2 },
-        { 2, 2, 1, 1, 2, 2, 2 },
-        { 2, 2, 2, 2, 2, 2, 0 },
-    },
-    pig_ruins_entrance_4 =
-    {
-        { 2, 2, 2, 2, 2, 2, 0 },
-        { 2, 2, 1, 1, 1, 1, 2 },
-        { 2, 1, 1, 1, 1, 1, 2 },
-        { 2, 2, 1, 1, 2, 2, 2 },
-        { 2, 1, 1, 2, 1, 2, 2 },
-        { 2, 2, 1, 2, 1, 2, 2 },
-        { 0, 2, 2, 2, 2, 2, 2 },
-    },
-    pig_ruins_entrance_5 =
-    {
-        { 1, 1, 1, 1, 1, 1, 0 },
-        { 1, 1, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 2, 1, 1, 1 },
-        { 1, 2, 1, 1, 1, 1, 1 },
-        { 1, 1, 2, 1, 2, 1, 1 },
-        { 0, 1, 1, 1, 1, 1, 1 },
-    },
-
-    pig_ruins_exit_1 =
-    {
-        { 1, 1, 1, 1, 1, 1, 0 },
-        { 1, 1, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 2, 1, 1, 1 },
-        { 1, 2, 2, 2, 2, 1, 1 },
-        { 1, 2, 2, 2, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 0 },
-    },
-
-    pig_ruins_exit_2 =
-    {
-        { 0, 1, 1, 1, 1, 1, 0 },
-        { 1, 1, 2, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 2, 2, 1, 1 },
-        { 1, 1, 2, 2, 2, 1, 1 },
-        { 0, 1, 1, 1, 1, 1, 0 },
-        { 0, 0, 0, 0, 0, 0, 0 },
-    },
-
-    pig_ruins_exit_4 =
-    {
-        { 0, 1, 1, 1, 1, 1, 0 },
-        { 1, 1, 2, 2, 1, 1, 1 },
-        { 1, 1, 2, 2, 2, 2, 1 },
-        { 1, 1, 1, 2, 2, 1, 1 },
-        { 1, 1, 1, 2, 2, 1, 1 },
-        { 0, 1, 1, 1, 1, 1, 0 },
-        { 0, 0, 0, 0, 0, 0, 0 },
-    },
-
-    pugalisk_fountain =
-    {
-        { 0, 0, 1, 1, 0, 0, 1 },
-        { 0, 1, 1, 1, 1, 1, 0 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 0, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 0 },
-        { 0, 0, 1, 1, 1, 0, 0 },
-    },
-
-    pig_ruins_head =
-    {
-        { 1, 1 },
-        { 1, 1 },
-    },
-
-    pig_ruins_nocanopy =
-    {
-        { 1, 1 },
-        { 1, 1 },
-    },
-
-    pig_ruins_nocanopy_2 =
-    {
-        { 1, 1 },
-        { 1, 1 },
-    },
-    pig_ruins_nocanopy_3 =
-    {
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 1, 1, 1, 1, 0 },
-        { 0, 1, 1, 1, 1, 0 },
-        { 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0 },
-    },
-    pig_ruins_nocanopy_4 =
-    {
-        { 1, 1, 1 },
-        { 1, 1, 1 },
-        { 1, 1, 0 },
-    },
-
-    cave_entranceham1 =
-    {
-        { 0, 1, 1, 0 },
-        { 1, 1, 1, 1 },
-        { 1, 1, 1, 1 },
-        { 0, 1, 1, 0 },
-    },
-
-    cave_entranceham2 =
-    {
-        { 0, 1, 1, 0 },
-        { 1, 1, 1, 1 },
-        { 1, 1, 1, 1 },
-        { 0, 1, 1, 0 },
-    },
-
-    cave_entranceham3 =
-    {
-        { 0, 1, 1, 0 },
-        { 1, 1, 1, 1 },
-        { 1, 1, 1, 1 },
-        { 0, 1, 1, 0 },
-    },
-
-    farm_1 =
-    {
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 5, 5, 1, 1, 1, 1 },
-        { 1, 1, 1, 5, 5, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-    },
-    farm_2 =
-    {
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 5, 5, 5, 5, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 5, 5, 5, 5, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-    },
-    farm_3 =
-    {
-        { 1, 1, 1, 1, 1, 1, 1, 1, 0 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 0 },
-        { 1, 1, 4, 4, 4, 4, 1, 1, 0 },
-        { 1, 4, 4, 4, 4, 4, 4, 1, 0 },
-        { 1, 1, 4, 4, 4, 4, 1, 1, 0 },
-        { 1, 1, 1, 4, 4, 1, 1, 1, 0 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    },
-    farm_4 =
-    {
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 2, 2, 2, 2, 1, 1 },
-        { 1, 2, 2, 2, 2, 1, 1 },
-        { 1, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-    },
-    farm_5 =
-    {
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 2, 2, 2, 2, 1, 1 },
-        { 1, 2, 2, 2, 2, 1, 1 },
-        { 1, 2, 2, 2, 2, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-    },
-
-    nettlegrove =
-    {
-        { 1, 1, 1, 1 },
-        { 1, 1, 1, 1 },
-        { 1, 1, 1, 1 },
-        { 1, 1, 1, 1 },
-    },
-
-    pantano =
-    {
-
-        { 0, 1, 0 },
-        { 0, 1, 0 },
-        { 0, 0, 0 },
-    },
-
-
-
-    quagmire_kitchen =
-    {
-
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 0, 1, 3, 3, 3, 3, 3, 3, 1, 3, 1, 0, 0, 0, 0, 0, 4, 4, 4, 4, 5, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 0, 0, 0, 1, 3, 3, 2, 2, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 4, 4, 5, 4, 4, 5, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 1, 3, 3, 1, 3, 3, 3, 3, 2, 3, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 3, 1, 3, 3, 3, 3, 2, 2, 2, 2, 3, 3, 3, 7, 7, 5, 5, 5, 5, 5, 4, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 3, 3, 3, 3, 2, 3, 3, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 1, 1, 3, 6, 3, 3, 3, 3, 2, 3, 3, 2, 3, 3, 0, 0, 0, 0, 0, 4, 4, 5, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 3, 1, 3, 3, 3, 6, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 6, 3, 3, 3, 3, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 6, 6, 3, 3, 6, 3, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 7, 0, 0, 0, 7, 7, 0, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 2, 7, 7, 0, 7, 7, 7, 7, 2, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 3, 3, 3, 3, 3, 3, 0, 7, 7, 2, 7, 7, 2, 7, 7, 7, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 7, 7, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 0, 0, 0, 7, 7, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 3, 3, 3, 3, 0, 3, 3, 3, 0, 0, 0, 7, 7, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 3, 3, 0, 0, 3, 0, 0, 0, 0, 0, 7, 2, 7, 7, 7, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 2, 7, 0, 7, 7, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 2, 2, 7, 7, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 7, 7, 7, 2, 2, 2, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 7, 7, 2, 2, 2, 2, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 7, 1, 7, 7, 1, 1, 1, 0, 0, 0, 7, 7, 2, 2, 2, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 7, 7, 7, 7, 7, 7, 1, 6, 1, 0, 0, 0, 7, 7, 2, 2, 2, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 7, 7, 7, 7, 7, 7, 7, 7, 1, 1, 1, 0, 0, 0, 7, 7, 2, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 7, 7, 7, 7, 7, 7, 7, 7, 7, 1, 1, 1, 0, 0, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 7, 7, 7, 7, 7, 7, 7, 7, 1, 1, 1, 0, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 7, 7, 7, 7, 7, 7, 7, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 7, 7, 7, 7, 7, 7, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 7, 7, 7, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 7, 7, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-
-    },
-
-    mermtrader3set   =
-    {
-        { 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 2, 1, 1, 1, 2, 1 },
-        { 1, 1, 2, 1, 2, 1, 1 },
-        { 1, 1, 1, 2, 1, 1, 1 },
-        { 2, 1, 2, 2, 2, 1, 2 },
-        { 1, 2, 1, 2, 1, 2, 1 },
-        { 1, 1, 1, 1, 1, 1, 1 },
-    },
-
-    goatkid          =
-    {
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 2, 2, 1, 1, 1, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 1, 1, 1, 1, 1, 1, 2, 2, 1 },
-    },
-
-
-    goatkid2 =
-    {
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 2, 2, 1, 1, 1, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 2, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 1, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 1, 1, 1, 1, 1, 1, 2, 2, 1 },
-    },
-}
-
-for _, layoutName in pairs(layoutsToRemake) do
-    if layoutsToRemakeTiles[layoutName] and layoutsToRemakeGrounds[layoutName] then
-        Layouts[layoutName].ground_types = layoutsToRemakeGrounds[layoutName]
-        Layouts[layoutName].ground = layoutsToRemakeTiles[layoutName]
-    else
-        print("Table are not declared for ", layoutName, " layout!")
-    end
-end

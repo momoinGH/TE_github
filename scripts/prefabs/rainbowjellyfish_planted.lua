@@ -186,7 +186,7 @@ local function fn(Sim)
     inst.components.locomotor.walkspeed = RAINBOWJELLYFISH_WALKSPEED
 
     --inst.AnimState:SetRayTestOnBB(true);
-    --inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_WORLD_TILES.UNDERWATER)
+    --inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
     --inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
 
     inst:AddComponent("combat")

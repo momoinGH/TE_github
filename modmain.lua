@@ -3,7 +3,8 @@ mod前缀名：pro_
 
 ProErrorHandle：错误处理，可打印堆栈可设置仅开发环境崩溃
 prodevassert：仅开发环境崩溃的断言
-modimportmodulefile：允许一个文件重复导入，不会崩溃
+prosafemodimport：允许一个文件重复导入，不会崩溃
+proimportmodulefile：提供一个模块目录下的相对路径，自动导入启用的所有模块的文件
 
 TRO_AddComponentAction：添加ComponentAction，允许组件行为重复
 
@@ -47,9 +48,7 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-if proisdev then
-    modimport "modmain/data_validator_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
-end
+
 modimport "modmain/knownmodcheck"             -- 检测不兼容模组并报错崩溃
 modimport "modmain/mods"                      -- 兼容其他mod
 

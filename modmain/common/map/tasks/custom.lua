@@ -687,7 +687,6 @@ AddRoom("strange_island_canada", {
     tags = { "RoadPoison", "frost" },
     --					type = NODE_TYPE.SeparatedRoom,		
     contents = {
-        --					countstaticlayouts={["strangerlavaarena"]=1},	
         countstaticlayouts =
         {
             ["LivingTree"] = 1
@@ -20164,13 +20163,13 @@ if TUNING.tropical.only_shipwrecked then
             table.insert(level.tasks, "vulcaonacaverna4")
 
 
-            if TUNING.tropical.frost_island == 10 then
+            if TUNING.tropical.frostisland == 10 then
                 table.insert(level.tasks, "frostcavedivide")
                 table.insert(level.tasks, "Frostcavetask")
                 table.insert(level.tasks, "frostExitRoom")
             end
 
-            if TUNING.tropical.frost_island == 15 then
+            if TUNING.tropical.frostisland == 15 then
                 --table.insert(level.tasks, "frostcavedivide")
                 --table.insert(level.tasks, "Frostcavetask")
                 --table.insert(level.tasks, "frostExitRoom")
@@ -20348,7 +20347,7 @@ if TUNING.tropical.only_shipwrecked then
         --table.insert(taskset.tasks, "pantano")
         --end
 
-        if TUNING.tropical.frost_island == 10 then
+        if TUNING.tropical.frostisland == 10 then
             table.insert(taskset.tasks, "FrostIsland_Wildbeaver")
             table.insert(taskset.tasks, "FrostIsland_Beach")
             table.insert(taskset.tasks, "FrostIsland_deciduoustree")
@@ -20359,7 +20358,7 @@ if TUNING.tropical.only_shipwrecked then
             table.insert(taskset.tasks, "FrostIsland_icelake")
         end
 
-        if TUNING.tropical.frost_island == 15 then
+        if TUNING.tropical.frostisland == 15 then
             table.insert(taskset.tasks, "FrostIsland_Wildbeaver")
             table.insert(taskset.tasks, "FrostIsland_Beach")
             table.insert(taskset.tasks, "FrostIsland_deciduoustree")
@@ -20966,13 +20965,13 @@ else
                 table.insert(level.tasks, "vulcaonacaverna4")
             end
 
-            if TUNING.tropical.frost_island == 10 then
+            if TUNING.tropical.frostisland == 10 then
                 table.insert(level.tasks, "frostcavedivide")
                 table.insert(level.tasks, "Frostcavetask")
                 table.insert(level.tasks, "frostExitRoom")
             end
 
-            if TUNING.tropical.frost_island == 15 then
+            if TUNING.tropical.frostisland == 15 then
                 --table.insert(level.tasks, "frostcavedivide")
                 --table.insert(level.tasks, "Frostcavetask")
                 --table.insert(level.tasks, "frostExitRoom")
@@ -21190,7 +21189,7 @@ else
         end
 
 
-        if TUNING.tropical.frost_island == 10 then
+        if TUNING.tropical.frostisland == 10 then
             table.insert(taskset.tasks, "FrostIsland_Wildbeaver")
             table.insert(taskset.tasks, "FrostIsland_Beach")
             table.insert(taskset.tasks, "FrostIsland_deciduoustree")
@@ -21201,7 +21200,7 @@ else
             table.insert(taskset.tasks, "FrostIsland_icelake")
         end
 
-        if TUNING.tropical.frost_island == 15 then
+        if TUNING.tropical.frostisland == 15 then
             table.insert(taskset.tasks, "FrostIsland_Wildbeaver")
             table.insert(taskset.tasks, "FrostIsland_Beach")
             table.insert(taskset.tasks, "FrostIsland_deciduoustree")
