@@ -40,31 +40,31 @@ Layouts["farm_1"] = StaticLayout.Get("map/static_layouts/farm_1", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("farm_1", ground_types)
+ProRemapLayoutTile("farm_1", ground_types)
 Layouts["farm_2"] = StaticLayout.Get("map/static_layouts/farm_2", {
     layout_position = LAYOUT_POSITION.RANDOM,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("farm_2", ground_types)
+ProRemapLayoutTile("farm_2", ground_types)
 Layouts["farm_3"] = StaticLayout.Get("map/static_layouts/farm_3", {
     layout_position = LAYOUT_POSITION.RANDOM,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("farm_3", ground_types)
+ProRemapLayoutTile("farm_3", ground_types)
 Layouts["farm_4"] = StaticLayout.Get("map/static_layouts/farm_4", {
     layout_position = LAYOUT_POSITION.RANDOM,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("farm_4", ground_types)
+ProRemapLayoutTile("farm_4", ground_types)
 Layouts["farm_5"] = StaticLayout.Get("map/static_layouts/farm_5", {
     layout_position = LAYOUT_POSITION.RANDOM,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("farm_5", ground_types)
+ProRemapLayoutTile("farm_5", ground_types)
 -- 瞭望塔
 Layouts["farm_fill_1"] = StaticLayout.Get("map/static_layouts/farm_fill_1", {
     layout_position = LAYOUT_POSITION.RANDOM,
@@ -87,7 +87,7 @@ Layouts["cidade1"] = StaticLayout.Get("map/static_layouts/cidade1", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("cidade1", {
+ProRemapLayoutTile("cidade1", {
     [2] = WORLD_TILES.COBBLEROAD,
     [4] = WORLD_TILES.FOUNDATION,
     [6] = WORLD_TILES.LAWN
@@ -98,7 +98,7 @@ Layouts["cidade2"] = StaticLayout.Get("map/static_layouts/cidade2", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("cidade2", {
+ProRemapLayoutTile("cidade2", {
     [2] = WORLD_TILES.COBBLEROAD,
     [4] = WORLD_TILES.FOUNDATION,
     [6] = WORLD_TILES.LAWN
@@ -122,55 +122,55 @@ Layouts["nettlegrove"] = StaticLayout.Get("map/static_layouts/nettlegrove", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("nettlegrove", ground_types)
+ProRemapLayoutTile("nettlegrove", ground_types)
 
 Layouts["pig_ruins_entrance_1"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_1", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_entrance_1", ground_types)
+ProRemapLayoutTile("pig_ruins_entrance_1", ground_types)
 
 Layouts["pig_ruins_entrance_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_2", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_entrance_2", ground_types)
+ProRemapLayoutTile("pig_ruins_entrance_2", ground_types)
 
 Layouts["pig_ruins_entrance_3"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_3", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_entrance_3", ground_types)
+ProRemapLayoutTile("pig_ruins_entrance_3", ground_types)
 
 Layouts["pig_ruins_entrance_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_4", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_entrance_4", ground_types)
+ProRemapLayoutTile("pig_ruins_entrance_4", ground_types)
 Layouts["pig_ruins_entrance_5"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_5", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_entrance_5", ground_types)
+ProRemapLayoutTile("pig_ruins_entrance_5", ground_types)
 
 Layouts["pig_ruins_exit_1"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_1", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_exit_1", ground_types)
+ProRemapLayoutTile("pig_ruins_exit_1", ground_types)
 
 Layouts["pig_ruins_exit_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_2", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_exit_2", ground_types)
+ProRemapLayoutTile("pig_ruins_exit_2", ground_types)
 
 Layouts["pig_ruins_exit_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_4", {
     layout_position = LAYOUT_POSITION.CENTER,
@@ -183,7 +183,7 @@ Layouts["lilypad"] = StaticLayout.Get("map/static_layouts/lilypad", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("lilypad", {
+ProRemapLayoutTile("lilypad", {
     [58] = WORLD_TILES.OCEAN_COASTAL,
 })
 
@@ -198,32 +198,32 @@ Layouts["pig_ruins_head"] = StaticLayout.Get("map/static_layouts/pig_ruins_head"
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_head", ground_types)
+ProRemapLayoutTile("pig_ruins_head", ground_types)
 
 Layouts["pig_ruins_nocanopy"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_nocanopy", ground_types)
+ProRemapLayoutTile("pig_ruins_nocanopy", ground_types)
 Layouts["pig_ruins_nocanopy_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_2", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_nocanopy_2", ground_types)
+ProRemapLayoutTile("pig_ruins_nocanopy_2", ground_types)
 Layouts["pig_ruins_nocanopy_3"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_3", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_nocanopy_3", ground_types)
+ProRemapLayoutTile("pig_ruins_nocanopy_3", ground_types)
 Layouts["pig_ruins_nocanopy_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_4", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pig_ruins_nocanopy_4", ground_types)
+ProRemapLayoutTile("pig_ruins_nocanopy_4", ground_types)
 
 Layouts["roc_cave"] = StaticLayout.Get("map/static_layouts/roc_cave", {
     layout_position = LAYOUT_POSITION.CENTER,
@@ -240,19 +240,19 @@ Layouts["cave_entranceham1"] = StaticLayout.Get("map/static_layouts/cave_entranc
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("cave_entranceham1", ground_types)
+ProRemapLayoutTile("cave_entranceham1", ground_types)
 
 Layouts["cave_entranceham2"] = StaticLayout.Get("map/static_layouts/cave_entranceham2", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("cave_entranceham2", ground_types)
+ProRemapLayoutTile("cave_entranceham2", ground_types)
 
 Layouts["cave_entranceham3"] = StaticLayout.Get("map/static_layouts/cave_entranceham3", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("cave_entranceham3", ground_types)
+ProRemapLayoutTile("cave_entranceham3", ground_types)
 
 Layouts["ruins_exit"] = StaticLayout.Get("map/static_layouts/ruins_exit", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
@@ -283,28 +283,28 @@ Layouts["ligamundohamexit"] = StaticLayout.Get("map/static_layouts/ligamundohame
 
 
 Layouts["city_park_1"] = StaticLayout.Get("map/static_layouts/city_park_1")
-RemapLayoutTile("city_park_1", ground_types)
+ProRemapLayoutTile("city_park_1", ground_types)
 Layouts["city_park_2"] = StaticLayout.Get("map/static_layouts/city_park_2")
-RemapLayoutTile("city_park_2", ground_types)
+ProRemapLayoutTile("city_park_2", ground_types)
 Layouts["city_park_3"] = StaticLayout.Get("map/static_layouts/city_park_3")
-RemapLayoutTile("city_park_3", ground_types)
+ProRemapLayoutTile("city_park_3", ground_types)
 Layouts["city_park_4"] = StaticLayout.Get("map/static_layouts/city_park_4")
-RemapLayoutTile("city_park_4", ground_types)
+ProRemapLayoutTile("city_park_4", ground_types)
 Layouts["city_park_5"] = StaticLayout.Get("map/static_layouts/city_park_5")
-RemapLayoutTile("city_park_5", ground_types)
+ProRemapLayoutTile("city_park_5", ground_types)
 Layouts["city_park_6"] = StaticLayout.Get("map/static_layouts/city_park_6")
-RemapLayoutTile("city_park_6", ground_types)
+ProRemapLayoutTile("city_park_6", ground_types)
 Layouts["city_park_7"] = StaticLayout.Get("map/static_layouts/city_park_7")
-RemapLayoutTile("city_park_7", ground_types)
+ProRemapLayoutTile("city_park_7", ground_types)
 Layouts["city_park_8"] = StaticLayout.Get("map/static_layouts/city_park_8")
-RemapLayoutTile("city_park_8", ground_types)
+ProRemapLayoutTile("city_park_8", ground_types)
 Layouts["city_park_9"] = StaticLayout.Get("map/static_layouts/city_park_9")
-RemapLayoutTile("city_park_9", ground_types)
+ProRemapLayoutTile("city_park_9", ground_types)
 Layouts["city_park_10"] = StaticLayout.Get("map/static_layouts/city_park_10")
-RemapLayoutTile("city_park_10", ground_types)
+ProRemapLayoutTile("city_park_10", ground_types)
 Layouts["pig_playerhouse_1"] = StaticLayout.Get("map/static_layouts/pig_playerhouse_1")
-RemapLayoutTile("pig_playerhouse_1", ground_types)
+ProRemapLayoutTile("pig_playerhouse_1", ground_types)
 Layouts["pig_palace_1"] = StaticLayout.Get("map/static_layouts/pig_palace_1")
-RemapLayoutTile("pig_palace_1", ground_types)
+ProRemapLayoutTile("pig_palace_1", ground_types)
 Layouts["pig_cityhall_1"] = StaticLayout.Get("map/static_layouts/pig_cityhall_1")
-RemapLayoutTile("pig_cityhall_1", ground_types)
+ProRemapLayoutTile("pig_cityhall_1", ground_types)

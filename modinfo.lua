@@ -223,40 +223,6 @@ configuration_options =
     },
 
     {
-        name = "continentsize",
-        label = en_zh_zht("Continent Size", "大陆尺寸"),
-        hover = en_zh_zht("To change the continent size", "更改大陆尺寸"),
-        options =
-        {
-            {
-                description = en_zh_zht("Compact", "小型"),
-                data = 1,
-                hover = en_zh_zht(
-                    "Will generate the continent more compact can reduce lag in the game",
-                    "将生成更小的大陆，有助于减少服务器压力",
-                    "將生成更小的大陸，有助於減少伺服器壓力")
-            },
-            {
-                description = en_zh_zht("Default", "默认", "默認"),
-                data = 2,
-                hover = en_zh_zht(
-                    "Will generate the continent in default size",
-                    "将生成默认尺寸的大陆",
-                    "將生成默認尺寸的大陸")
-            },
-            {
-                description = en_zh_zht("Bigger", "大型"),
-                data = 3,
-                hover = en_zh_zht(
-                    "Will generate the continent bigger can increase lag in the game",
-                    "将生成更大的大陆，可能会增加服务器压力",
-                    "將生成更大的大陸，可能會增加伺服器壓力")
-            },
-        },
-        default = 2,
-    },
-
-    {
         name = "fillingthebiomes",
         label = en_zh_zht("Filling the Biomes", "填充生态群系", "填充生態羣系"),
         hover = en_zh_zht(
@@ -791,23 +757,6 @@ configuration_options =
 			default = 1,
 		},
 		]]
-
-
-
-    {
-        name = "monkeyisland",
-        label = en_zh_zht("Monkey Island", "月亮码头", "月亮碼頭"),
-        hover = en_zh_zht(
-            "It will generate the Monkey Island in ocean",
-            "将在海洋中生成月亮码头",
-            "將在海洋中生成月亮碼頭"),
-        default = true,
-        options = {
-            { description = en_zh_zht("Enabled", "启用", "啟用"), data = true, hover = en_zh_zht("Will generate the Monkey Island", "启用月亮码头生成", "啟用月亮碼頭生成") },
-            { description = en_zh_zht("Disabled", "禁用"), data = false, hover = en_zh_zht("The Monkey Island will not spawn", "禁用月亮码头生成", "禁用月亮碼頭生成") },
-        },
-    },
-
 
     title(en_zh_zht("for all worlds", "应用于整个世界的设置", "應用於整個世界的設置")),
 

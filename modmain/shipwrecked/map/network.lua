@@ -1,5 +1,7 @@
 require("map/network")
 
+local MAPEDGE_PADDING = OCEAN_MAPWRAPPER_WARN_RANGE + 10
+
 -- 生成百慕大三角
 local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
     local numTriangles = 12
@@ -27,7 +29,7 @@ local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
         return true
     end
 
-    local pointsX, pointsY = SpawnUtil.FindRandomWaterPoints(checkTriangle, width, height, TUNING.MAPEDGE_PADDING,
+    local pointsX, pointsY = SpawnUtil.FindRandomWaterPoints(checkTriangle, width, height, MAPEDGE_PADDING,
         numTriangles)
 
     for i = 1, #pointsX, 1 do
@@ -89,6 +91,7 @@ local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
 
     root.MIN_WORMHOLE_ID = id
     entities.bermudatriangle_MARKER = nil
+    return retTab
 end
 
 Hooks.FnDecorator(Graph, "GlobalPostPopulate", nil, GlobalPostPopulateAfter)

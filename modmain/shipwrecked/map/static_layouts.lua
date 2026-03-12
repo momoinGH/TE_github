@@ -12,7 +12,7 @@ Layouts["tigersharkarea"] = StaticLayout.Get("map/static_layouts/tigersharkarea"
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
 })
-RemapLayoutTile("tigersharkarea", {
+ProRemapLayoutTile("tigersharkarea", {
     [9] = WORLD_TILES.BEACH,
 })
 
@@ -43,7 +43,7 @@ Layouts["skull_isle2"] = StaticLayout.Get("map/static_layouts/skull_isle2", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("skull_isle2", {
+ProRemapLayoutTile("skull_isle2", {
     [3] = WORLD_TILES.MAGMAFIELD,
     [8] = WORLD_TILES.BEACH,
 })
@@ -60,7 +60,7 @@ Layouts["doydoym"] = StaticLayout.Get("map/static_layouts/doydoym", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("doydoym", {
+ProRemapLayoutTile("doydoym", {
     [1] = WORLD_TILES.BEACH
 })
 
@@ -69,7 +69,7 @@ Layouts["doydoyf"] = StaticLayout.Get("map/static_layouts/doydoyf", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("doydoyf", {
+ProRemapLayoutTile("doydoyf", {
     [1] = WORLD_TILES.BEACH
 })
 
@@ -91,7 +91,7 @@ Layouts["x_spot"] = StaticLayout.Get("map/static_layouts/x_spot", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("x_spot", {
+ProRemapLayoutTile("x_spot", {
     [3] = WORLD_TILES.BEACH
 })
 
@@ -101,7 +101,7 @@ Layouts["pantano"] = StaticLayout.Get("map/static_layouts/pantano", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("pantano", {
+ProRemapLayoutTile("pantano", {
     [6] = WORLD_TILES.MARSH
 })
 

@@ -121,14 +121,3 @@ end
 
 AddLevelPreInitAny(LevelPreInit)
 
-AddRoomPreInit("BGGrass", function(room) room.contents.distributeprefabs.peach_tree1 = 0.012 end)
-terrain.filter.peach_tree1 = { WORLD_TILES.ROAD, WORLD_TILES.WOODFLOOR, WORLD_TILES.CARPET, GROUND
-    .CHECKER, WORLD_TILES.ROCKY, WORLD_TILES.MARSH }
-
-AddRoomPreInit("BGForest", function(room) room.contents.distributeprefabs.peach_tree2 = 0.012 end)
-terrain.filter.peach_tree2 = { WORLD_TILES.ROAD, WORLD_TILES.WOODFLOOR, WORLD_TILES.CARPET, GROUND
-    .CHECKER, WORLD_TILES.ROCKY, WORLD_TILES.MARSH }
-
-AddRoomPreInit("Clearing", function(room) room.contents.distributeprefabs.peach_tree3 = 0.012 end)
-terrain.filter.peach_tree3 = { WORLD_TILES.ROAD, WORLD_TILES.WOODFLOOR, WORLD_TILES.CARPET, GROUND
-    .CHECKER, WORLD_TILES.ROCKY, WORLD_TILES.MARSH }

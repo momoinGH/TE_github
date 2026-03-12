@@ -69,13 +69,10 @@ end
 GLOBAL.prodevassert = prodevassert
 
 ----------------------------------------------------------------------------------------------------
---- 科雷modmain的定义抄过来，不过文件不存在时不提醒
+--- 科雷modmain的定义抄过来，不过文件不存在时不会报错
 function prosafemodimport(modulename, has_print)
     if has_print == nil then
         has_print = true
-    end
-    if has_print then
-        print("modimport: " .. env.MODROOT .. modulename)
     end
 
     if string.sub(modulename, #modulename - 3, #modulename) ~= ".lua" then
@@ -87,6 +84,9 @@ function prosafemodimport(modulename, has_print)
     elseif type(result) == "string" then
         error("Error in modimport: " .. ModInfoname(modname) .. " importing " .. modulename .. "!\n" .. result)
     else
+        if has_print then
+            print("modimport: " .. env.MODROOT .. modulename)
+        end
         setfenv(result, env.env)
         result()
     end
@@ -94,15 +94,15 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-function proimportmodulefile(path)
+function proimportmodulefile(path, is_load_all)
     assert(type(path) == "string" and not string.starts(path, "modmain"), "path需要是模块下的相对路径！path：" .. tostring(path))
 
     if not string.starts(path, "/") then
         path = "/" .. path
     end
     for _, m in ipairs(pro_modules) do
-        if TUNING.tropical[m] then --根据配置项决定是否读取
-            prosafemodimport("modmain" .. m .. "/" .. path)
+        if is_load_all or TUNING.tropical[m] then --根据配置项决定是否读取
+            prosafemodimport("modmain/" .. m .. path)
         end
     end
 end

@@ -1,48 +1,24 @@
 -------------------------------------------------------Hamlet task exclusivas ilha inicial---------------------------------	
 
-local tamanho = GetModConfigData("continentsize")
 
 AddTask("Edge_of_the_unknown", {
     locks = LOCKS.NONE,
     keys_given = KEYS.JUNGLE_DEPTH_1,
     room_choices = {
-        ["BG_plains_base"] = 1 + tamanho,
+        ["BG_plains_base"] = 1,
     },
     room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_plains_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 
-AddTask("painted_sands", {
-    locks = LOCKS.JUNGLE_DEPTH_1,
-    keys_given = KEYS.JUNGLE_DEPTH_1,
-    room_choices = {
-        ["BG_painted_base"] = 1 + tamanho,
-        ["BG_battleground_base"] = math.random(0, 1),
-        ["battleground_ribs"] = 1,
-        ["battleground_claw"] = 1,
-        ["battleground_leg"] = 1,
-    },
-    room_bg = WORLD_TILES.PLAINS,
-    background_room = "BG_painted_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
-AddTask("plains", {
-    locks = LOCKS.JUNGLE_DEPTH_1,
-    keys_given = KEYS.JUNGLE_DEPTH_1,
-    room_choices = {
-        ["plains_tallgrass"] = 1 + tamanho,
-        ["plains_pogs_ruin"] = 1,
-    },
-    room_bg = WORLD_TILES.PLAINS,
-    background_room = "BG_plains_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
+
+
 AddTask("rainforests", {
     locks = LOCKS.JUNGLE_DEPTH_1,
     keys_given = KEYS.JUNGLE_DEPTH_1,
     room_choices = {
-        ["BG_rainforest_base"] = 1 + tamanho,
+        ["BG_rainforest_base"] = 1,
     },
     room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_rainforest_base",
@@ -52,47 +28,21 @@ AddTask("rainforest_ruins", {
     locks = LOCKS.JUNGLE_DEPTH_1,
     keys_given = KEYS.JUNGLE_DEPTH_1,
     room_choices = {
-        ["rainforest_ruins"] = 1 + tamanho,
+        ["rainforest_ruins"] = 1,
         ["rainforest_ruins_entrance"] = 1,
     },
     room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
-AddTask("plains_ruins", {
-    locks = LOCKS.JUNGLE_DEPTH_1,
-    keys_given = KEYS.JUNGLE_DEPTH_1,
-    room_choices = {
-        ["plains_ruins"] = 1 + tamanho,
-        ["plains_ruins_set"] = 1,
-        ["plains_pogs"] = math.random(0, 1),
-    },
-    room_bg = WORLD_TILES.PLAINS,
-    background_room = "BG_plains_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
 
-AddTask("Deep_rainforest", {
-    locks = LOCKS.JUNGLE_DEPTH_1,
-    keys_given = { KEYS.JUNGLE_DEPTH_2, KEYS.JUNGLE_DEPTH_3 },
-    room_choices = {
-        ["BG_rainforest_base"] = 1 + tamanho,
-        ["BG_deeprainforest_base"] = 1,
-        ["deeprainforest_spider_monkey_nest"] = 1 + tamanho,
-        ["deeprainforest_fireflygrove"] = math.random(1, 1),
-        ["deeprainforest_flytrap_grove"] = 1 + tamanho,
-        ["deeprainforest_anthill_exit2"] = 1,
-    },
-    room_bg = WORLD_TILES.DEEPRAINFOREST,
-    background_room = "BG_deeprainforest_base",
-    colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
-})
+
 
 AddTask("Pigtopia", {
     locks = LOCKS.CIVILIZATION_1,
     keys_given = KEYS.CIVILIZATION_2,
     room_choices = {
-        ["suburb_base_1"] = 1 + tamanho,
+        ["suburb_base_1"] = 1,
     },
     room_bg = WORLD_TILES.SUBURB,
     background_room = "suburb_base_1",
@@ -117,7 +67,7 @@ AddTask("Deep_lost_ruins_gas", {
     locks = LOCKS.JUNGLE_DEPTH_3,
     keys_given = KEYS.JUNGLE_DEPTH_3,
     room_choices = {
-        ["deeprainforest_gas"] = 1 + tamanho,
+        ["deeprainforest_gas"] = 1,
         ["deeprainforest_gas_set"] = 1,
         ["deeprainforest_gas_flytrap_grove"] = 1,
         ["deeprainforest_gas_flytrap_grove_set"] = 1,
@@ -131,11 +81,11 @@ AddTask("Edge_of_the_unknown_2", {
     locks = LOCKS.CIVILIZATION_1,
     keys_given = KEYS.JUNGLE_DEPTH_1,
     room_choices = {
-        ["BG_rainforest_base"] = 1 + tamanho,
-        ["plains_tallgrass"] = 1 + tamanho,
+        ["BG_rainforest_base"] = 1,
+        ["plains_tallgrass"] = 1,
         ["plains_pogs_ruin"] = 1,
-        ["rainforest_ruins"] = 1 + tamanho,
-        ["BG_painted_base"] = 1 + tamanho,
+        ["rainforest_ruins"] = 1,
+        ["BG_painted_base"] = 1,
 
         ["battleground_head"] = 1,
         ["battleground_claw"] = 1,
@@ -181,21 +131,6 @@ AddTask("this_is_how_you_get_ants", {
     colour = { r = 0, g = 0, b = 1, a = 0.3 }
 })
 
-AddTask("Deep_rainforest_2", {
-    locks = LOCKS.JUNGLE_DEPTH_1,
-    keys_given = { KEYS.JUNGLE_DEPTH_2, KEYS.JUNGLE_DEPTH_3 },
-    room_choices = {
-        ["BG_deeprainforest_base"] = 1 + tamanho,
-        ["deeprainforest_spider_monkey_nest"] = 1 + tamanho,
-        ["deeprainforest_fireflygrove"] = 1 + tamanho,
-        ["deeprainforest_flytrap_grove"] = 1 + tamanho,
-        ["deeprainforest_anthill_exit"] = 1,
-        ["deeprainforest_ruins_entrance2"] = 1,
-    },
-    room_bg = WORLD_TILES.DEEPRAINFOREST,
-    background_room = "BG_deeprainforest_base",
-    colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
-})
 
 AddTask("Lost_Ruins_1", {
     locks = LOCKS.JUNGLE_DEPTH_3,
@@ -228,9 +163,9 @@ AddTask("Deep_rainforest_3", {
     locks = LOCKS.LAND_DIVIDE_1,
     keys_given = { KEYS.OTHER_JUNGLE_DEPTH_2 },
     room_choices = {
-        ["BG_deeprainforest_base"] = 1 + tamanho,
-        ["deeprainforest_fireflygrove"] = 0 + tamanho,
-        ["deeprainforest_flytrap_grove"] = 1 + tamanho,
+        ["BG_deeprainforest_base"] = 1,
+        ["deeprainforest_fireflygrove"] = 0,
+        ["deeprainforest_flytrap_grove"] = 1,
         ["deeprainforest_ruins_exit"] = 1,
     },
     room_bg = WORLD_TILES.DEEPRAINFOREST,
@@ -238,25 +173,15 @@ AddTask("Deep_rainforest_3", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
 
-AddTask("Deep_rainforest_mandrake", {
-    locks = LOCKS.OTHER_JUNGLE_DEPTH_2,
-    keys_given = { KEYS.NONE },
-    room_choices = {
-        ["deeprainforest_mandrakeman"] = 1,
-    },
-    room_bg = WORLD_TILES.DEEPRAINFOREST,
-    background_room = "BG_deeprainforest_base",
-    colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
-})
 
 
 AddTask("Path_to_the_others", {
     locks = LOCKS.OTHER_JUNGLE_DEPTH_2,
     keys_given = KEYS.OTHER_JUNGLE_DEPTH_1,
     room_choices = {
-        ["BG_plains_base"] = 1 + tamanho,
-        ["plains_tallgrass"] = 1 + tamanho,
-        ["plains_pogs"] = 1 + tamanho,
+        ["BG_plains_base"] = 1,
+        ["plains_tallgrass"] = 1,
+        ["plains_pogs"] = 1,
     },
     room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_rainforest_base",
@@ -267,7 +192,7 @@ AddTask("Other_edge_of_civilization", {
     locks = LOCKS.OTHER_JUNGLE_DEPTH_1,
     keys_given = KEYS.OTHER_CIVILIZATION_1,
     room_choices = {
-        ["cultivated_base_2"] = 1 + tamanho,
+        ["cultivated_base_2"] = 1,
     },
     room_bg = WORLD_TILES.FIELDS,
     background_room = "BG_cultivated_base",
@@ -279,7 +204,7 @@ AddTask("Other_pigtopia", {
     locks = LOCKS.OTHER_CIVILIZATION_1,
     keys_given = KEYS.OTHER_CIVILIZATION_2,
     room_choices = {
-        ["suburb_base_2"] = 1 + tamanho,
+        ["suburb_base_2"] = 1,
     },
     room_bg = WORLD_TILES.SUBURB,
     background_room = "suburb_base_2",
@@ -317,8 +242,8 @@ AddTask("Deep_lost_ruins4", {
     locks = LOCKS.LAND_DIVIDE_2,
     keys_given = { KEYS.LOST_JUNGLE_DEPTH_2 },
     room_choices = {
-        ["BG_deeprainforest_base"] = 1 + tamanho,
-        ["deeprainforest_flytrap_grove"] = 1 + tamanho,
+        ["BG_deeprainforest_base"] = 1,
+        ["deeprainforest_flytrap_grove"] = 1,
         ["deeprainforest_ruins_exit2"] = 1,
     },
     room_bg = WORLD_TILES.DEEPRAINFOREST,
@@ -385,8 +310,8 @@ AddTask("Deep_wild_ruins4", {
     locks = LOCKS.LAND_DIVIDE_4,
     keys_given = { KEYS.WILD_JUNGLE_DEPTH_1 },
     room_choices = {
-        ["deeprainforest_base_nobatcave"] = 1 + tamanho,
-        ["deeprainforest_flytrap_grove"] = 1 + tamanho,
+        ["deeprainforest_base_nobatcave"] = 1,
+        ["deeprainforest_flytrap_grove"] = 1,
         ["deeprainforest_base_nobatcave_PigRuinsExit4"] = 1,
     },
 
@@ -399,9 +324,9 @@ AddTask("wild_rainforest", {
     locks = LOCKS.WILD_JUNGLE_DEPTH_1,
     keys_given = { KEYS.WILD_JUNGLE_DEPTH_2 },
     room_choices = {
-        ["plains_base_nobatcave"] = 2 + tamanho,
-        ["painted_base_nobatcave"] = 2 + tamanho,
-        ["rainforest_base_nobatcave"] = 2 + tamanho,
+        ["plains_base_nobatcave"] = 2,
+        ["painted_base_nobatcave"] = 2,
+        ["rainforest_base_nobatcave"] = 2,
     },
     entrance_room = "rainforest_lillypond",
     room_bg = WORLD_TILES.RAINFOREST,
@@ -412,7 +337,7 @@ AddTask("wild_ancient_ruins", {
     locks = LOCKS.WILD_JUNGLE_DEPTH_2,
     keys_given = { KEYS.ISLAND_5 },
     room_choices = {
-        ["deeprainforest_flytrap_grove"] = 2 + tamanho,
+        ["deeprainforest_flytrap_grove"] = 2,
         ["deeprainforest_flytrap_grove_PigRuinsEntrance5"] = 1,
     },
 
@@ -457,7 +382,7 @@ AddRoom("BG_battleground_base", {
     value = WORLD_TILES.DIRT,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
-        distributepercent = .11 * preenchimento, -- .22, --.26
+        distributepercent = .22, -- .22, --.26
         distributeprefabs =
         {
             rainforesttree = 0.1,
@@ -481,7 +406,7 @@ AddRoom("battleground_ribs", {
     value = WORLD_TILES.DIRT,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
-        distributepercent = .11 * preenchimento, -- .22, --.26
+        distributepercent = .22, -- .22, --.26
         distributeprefabs =
         {
             rainforesttree = 0.1,
@@ -595,14 +520,10 @@ AddRoom("BG_deeprainforest_base", {
             deep_jungle_fern_noise = 1,
             jungle_border_vine = 0.5,
             fireflies = 0.2,
-            --										hanging_vine_patch = 0.1,
             randomrelic = 0.02,
             randomruin = 0.02,
             randomdust = 0.02,
             pig_ruins_torch = 0.02,
-            --		pig_ruins_artichoke = 0.01,
-            --		pig_ruins_head = 0.01,
-            --										mean_flytrap = 0.05,
             rock_flippable = 0.1,
             radish_planted = 0.5,
         },
@@ -1218,33 +1139,6 @@ AddRoom("BG_rainforest_base", {
     }
 })
 
-AddRoom("rainforest_ruins", {
-    colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = WORLD_TILES.RAINFOREST,
-    tags = { "ExitPiece", "RoadPoison", "hamlet", "folha" },
-    contents = {
-        distributepercent = 0.175 * preenchimento, -- .5
-        distributeprefabs =
-        {
-            rainforesttree = .5, --.7,
-            grass_tall = 0.5,
-            sapling = .6,
-            flower_rainforest = 0.1,
-            flower = 0.05,
-            --	randomrelic = 0.008,
-            --	randomruin = 0.005,	
-            randomdust = 0.005,
-            rock_flippable = 0.08,
-            radish_planted = 0.05,
-            asparagus_planted = 0.05,
-        },
-        countprefabs =
-        {
-            vampirebatcave_potential = 1,
-        },
-    }
-})
-
 AddRoom("rainforest_ruins_entrance", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
     value = WORLD_TILES.RAINFOREST,
@@ -1392,7 +1286,7 @@ AddRoom("BG_plains_base", {
     value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "RoadPoison", "hamlet" },
     contents = {
-        distributepercent = .125 * preenchimento, --.22, --.26
+        distributepercent = .25, --.22, --.26
         distributeprefabs =
         {
             clawpalmtree = 0.5,
@@ -1655,21 +1549,6 @@ AddRoom("plains_pogs_ruin", {
 })
 
 -------------------------------------------------------------city room------------------------------------------------------------------------------------
-AddRoom("BG_city_base", {
-    colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = WORLD_TILES.SUBURB,
-    tags = { "ExitPiece", "hamlet" },
-    contents = {
-        distributepercent = 0.05 * preenchimento,
-        distributeprefabs =
-        {
-            rocks = 1,
-            grass = 1,
-            spoiled_food = 1,
-            twigs = 1,
-        },
-    }
-})
 
 
 AddRoom("city_base_1", {
@@ -1677,7 +1556,7 @@ AddRoom("city_base_1", {
     value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
-        distributepercent = 0.05 * preenchimento,
+        distributepercent = 0.1,
         distributeprefabs =
         {
             rocks = 1,
@@ -1696,7 +1575,7 @@ AddRoom("city_base_1_set", {
         countstaticlayouts = {
             ["cidade1"] = 1,
         },
-        distributepercent = 0.05 * preenchimento,
+        distributepercent = 0.1,
         distributeprefabs =
         {
             rocks = 1,
@@ -1712,7 +1591,7 @@ AddRoom("city_base_1_set2", {
     value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
-        distributepercent = 0.05 * preenchimento,
+        distributepercent = 0.1,
         distributeprefabs =
         {
             rocks = 1,
@@ -1728,7 +1607,7 @@ AddRoom("city_base_2", {
     value = WORLD_TILES.FOUNDATION,
     tags = { "ExitPiece", "hamlet" },
     contents = {
-        distributepercent = 0.05 * preenchimento,
+        distributepercent = 0.1,
         distributeprefabs =
         {
             rocks = 1,
@@ -1750,7 +1629,7 @@ AddRoom("city_base_2_set", {
         },
 
 
-        distributepercent = 0.05 * preenchimento,
+        distributepercent = 0.1,
         distributeprefabs =
         {
             rocks = 1,
@@ -1772,7 +1651,7 @@ AddRoom("city_base_2_set2", {
         --		   },				
 
 
-        distributepercent = 0.05 * preenchimento,
+        distributepercent = 1,
         distributeprefabs =
         {
             rocks = 1,
@@ -1785,19 +1664,7 @@ AddRoom("city_base_2_set2", {
 --------------------------------------------------cultivated room--------------------------------------------------------------------------------------------------------------------
 
 
-AddRoom("BG_cultivated_base", {
-    colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = WORLD_TILES.FIELDS,
-    tags = { "ExitPiece", "hamlet" },
-    contents = {
-        distributepercent = 0.03 * preenchimento, ---0.1
-        distributeprefabs =
-        {
-            rock1 = 0.01,
-            teatree = 0.1,
-        },
-    }
-})
+
 
 AddRoom("piko_land", {
     colour = { r = 1.0, g = 0.0, b = 1.0, a = 0.3 },
@@ -1821,28 +1688,13 @@ AddRoom("piko_land", {
 })
 
 -----------------------------------------------------suburb room-----------------------------------------
-AddRoom("BG_suburb_base", {
-    colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
-    value = WORLD_TILES.SUBURB,
-    tags = { "ExitPiece", "hamlet" },
-    contents = {
-        distributepercent = 0.05 * preenchimento,
-        distributeprefabs =
-        {
-            rocks = 1,
-            grass = 1,
-            spoiled_food = 1,
-            twigs = 1,
-        },
-    }
-})
 
 AddRoom("suburb_base_1", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
     value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
-        distributepercent = 0.05 * preenchimento,
+        distributepercent = 1,
         distributeprefabs =
         {
             rocks = 1,
@@ -1858,7 +1710,7 @@ AddRoom("suburb_base_2", {
     value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "hamlet" },
     contents = {
-        distributepercent = 0.05 * preenchimento,
+        distributepercent = 1,
         distributeprefabs =
         {
             rocks = 1,
@@ -5579,6 +5431,16 @@ AddRoom("UnderwaterEntrance", {
         }
     }
 })
+
+
+
+
+
+
+
+
+
+
 --------------------------------cherry----------------------------
 if KnownModIndex:IsModEnabled("workshop-1289779251") then
     AddTask("cherry_mainland", {

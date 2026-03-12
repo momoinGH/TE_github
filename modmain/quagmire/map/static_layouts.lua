@@ -25,7 +25,7 @@ Layouts["mermtrader3set"] = StaticLayout.Get("map/static_layouts/mermtrader3set"
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-RemapLayoutTile("mermtrader3set", {
+ProRemapLayoutTile("mermtrader3set", {
     [23] = WORLD_TILES.QUAGMIRE_GATEWAY,
     [55] = WORLD_TILES.ROAD
 })
@@ -65,7 +65,7 @@ Layouts["goatkid"] = StaticLayout.Get("map/static_layouts/goatkid", {
         end,
     },
 })
-RemapLayoutTile("goatkid", {
+ProRemapLayoutTile("goatkid", {
     [2] = WORLD_TILES.QUAGMIRE_CITYSTONE,
 })
 
@@ -91,7 +91,7 @@ Layouts["goatkid2"] = StaticLayout.Get("map/static_layouts/goatkid2", {
         end,
     },
 })
-RemapLayoutTile("goatkid2", {
+ProRemapLayoutTile("goatkid2", {
     [2] = WORLD_TILES.QUAGMIRE_CITYSTONE,
 })
 
@@ -131,7 +131,7 @@ Layouts["quagmire_kitchen"] = StaticLayout.Get("map/static_layouts/quagmire_kitc
         end,
     },
 })
-RemapLayoutTile("quagmire_kitchen", {
+ProRemapLayoutTile("quagmire_kitchen", {
     [2] = WORLD_TILES.ROAD,
     [15] = WORLD_TILES.QUAGMIRE_GATEWAY,
     [23] = WORLD_TILES.QUAGMIRE_PEATFOREST,

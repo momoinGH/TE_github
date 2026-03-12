@@ -1364,7 +1364,7 @@ Task = Class(function(self, id, data)
     self.maze_tile_size = data.maze_tile_size
     self.crosslink_factor = data.crosslink_factor
     self.make_loop = data.make_loop
-    self.room_tags = data.room_tags
+    self.room_tags = data.room_tags --给属于自己的room都加上该标签
     self.required_prefabs = data.required_prefabs
     self.hub_room = data.hub_room
     self.level_set_piece_blocker = data.level_set_piece_blocker -- prevents the task from getting any of the random_set_pieces and required_setpieces defined in the level
@@ -1372,10 +1372,11 @@ end)
 
 local room = {
     -- name = nil,
-    type = nil,   --NODE_TYPE值
+    type = nil,                  --NODE_TYPE值
     contents = {
-        fn = nil, --初始化
-        distributeprefabs = nil,
+        fn = nil,                --初始化
+        distributeprefabs = nil, --概率分布
+        countprefabs = nil,      --生成指定个数
     },
     -- entrance = nil, 入口房间
     -- id = nil,
@@ -1386,7 +1387,7 @@ local room = {
     internal_type = nil,
     custom_tiles = nil,
     custom_objects = nil,
-    required_prefabs = nil,
+    required_prefabs = nil, --必须包含的预制体，只用来检查，最后检查所有要生成的预制件里有没有该预制件，没有就表示世界生成失败
     random_node_exit_weight = nil,
     random_node_entrance_weight = nil,
     SafeFromDisconnect = nil,
@@ -1395,3 +1396,9 @@ local room = {
 WorldSim = {}
 
 Graph = Class(function(self, id, args) end)
+
+AddStartLocation = function(arg1, ...) end
+
+
+AddCustomizeGroup = function(category, name, text, desc, atlas, order) end
+AddCustomizeItem = function(category, group, name, itemsettings) end

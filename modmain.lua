@@ -49,10 +49,11 @@ env.modimport = function(modulename, ...)
 end
 
 ----------------------------------------------------------------------------------------------------
-
-
-modimport "modmain/knownmodcheck" -- 检测不兼容模组并报错崩溃
-modimport "modmain/mods"          -- 兼容其他mod
+modimport "modmain/knownmodcheck"             -- 检测不兼容模组并报错崩溃
+modimport "modmain/mods"                      -- 兼容其他mod
+if proisdev then
+    modimport "modmain/data_validator_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
+end
 
 -- 共同
 modimport "modmain/postinit" --TODO 拆到各个模块中

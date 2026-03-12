@@ -47,15 +47,7 @@ if true then
         end
     end)
 
-    AddRoomPreInit("OceanRough", function(room)
-        room.required_prefabs = {}
-        room.contents.countstaticlayouts = {} ---delete  ["HermitcrabIsland"] = 1, 	["MonkeyIsland"] = 1,
-    end)
 
-    AddRoomPreInit("OceanSwell", function(room)
-        -- room.required_prefabs = {}
-        -- room.contents.countstaticlayouts = {} ---- delete ["CrabKing"] = 1
-    end)
 end
 
 ---------------------联机大陆调整--------------------------

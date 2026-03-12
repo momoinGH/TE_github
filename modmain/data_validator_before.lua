@@ -101,12 +101,3 @@ env.AddStategraphActionHandler = function(stategraph, handler, ...)
     prodevassert(handler and handler.action and ACTIONS[handler.action.id], "发现没有定义的ACTION，你应该先在actions.lua文件中定义ACTION")
     return OldAddStategraphActionHandler(stategraph, handler, ...)
 end
-
-----------------------------------------------------------------------------------------------------
-local StaticLayout = require("map/static_layout")
-local OldGet = StaticLayout.Get
-local required_layout_files = {}
-StaticLayout.Get = function(layoutsrc, ...)
-    assert(layoutsrc and required_layout_files[layoutsrc], "重复加载了布局文件" .. tostring(layoutsrc))
-    return OldGet(layoutsrc, ...)
-end
