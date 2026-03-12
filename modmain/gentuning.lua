@@ -104,7 +104,7 @@ TUNING.tropical = {
 
 
 
-
+    common                         = true,
     wind                           = false, --飓风
     hail                           = false, --冰雹
     megarandomCompatibilityWater   = false, --兼容超级随机世界生成
@@ -118,7 +118,7 @@ TUNING.tropical = {
     fog                            = false, --迷雾
     hayfever                       = false, --花粉症
     disembarkation                 = false, --自动离船
-    bosslife                       = false, --巨兽生命值
+    bosslife                       = 1,     --巨兽生命值
 
     moon_shipwrecked               = false,
     togethercaves_shipwreckedworld = false,

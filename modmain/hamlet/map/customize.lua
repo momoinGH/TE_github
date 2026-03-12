@@ -9,10 +9,10 @@ local settings_items = {
         label = "海风",
         category = LEVELCATEGORY.SETTINGS,
         desc = {
-            { text = "关闭", data = "disabled" },
-            { text = "开启", data = "enabled" },
+            { text = "关闭", data = "none" },
+            { text = "开启", data = "always" },
         },
-        value = "enabled",
+        value = "always",
         -- atlas = nil,
         -- image = "liefs.tex",
         order = -1,
@@ -22,6 +22,14 @@ local settings_items = {
         -- master_sync = nil,
         -- widget_type = nil,
         -- options_remap = {},
+        Pre = function(difficulty)
+            OverrideTuningVariables({
+                pro_wind = difficulty == "always" and true or false
+            })
+        end,
+        Post = function(difficulty)
+            TheWorld:PushEvent("pro_setwind", difficulty)
+        end
     }
 }
 

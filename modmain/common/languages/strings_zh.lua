@@ -19,8 +19,8 @@ STRINGS.UI.COOKBOOK.NETTLELOSANGE         = "免受花粉困扰"
 STRINGS.UI.COOKBOOK.MEATED_NETTLE         = "免受花粉困扰"
 
 --from RoG
-STRINGS.NAMES.BELL                       = "远古铃铛"
-STRINGS.RECIPE_DESC.BELL                 = "这可不是普通的铃铛。"
+STRINGS.NAMES.BELL                        = "远古铃铛"
+STRINGS.RECIPE_DESC.BELL                  = "这可不是普通的铃铛。"
 
 
 -------------------沃丽语句wally
@@ -47,7 +47,7 @@ STRINGS.CHARACTER_DESCRIPTIONS.wilbur                   = "*不会说话\n*两�
 STRINGS.CHARACTER_QUOTES.wilbur                         = "\"呜哦啊哈！\""
 STRINGS.NAMES.WILBUR                                    = "威尔伯"
 STRINGS.CHARACTER_ABOUTME.wilbur                        = "呜哦啊哈！"
-STRINGS.CHARACTER_SURVIVABILITY.wilbur                   = "渺茫"
+STRINGS.CHARACTER_SURVIVABILITY.wilbur                  = "渺茫"
 
 --Woodlegs:
 STRINGS.CHARACTER_TITLES.woodlegs                       = "海盗船长"
@@ -107,10 +107,10 @@ STRINGS.ACTIONS.JUMPIN.LEAVE                            = "离开"
 STRINGS.ACTIONS.TIRO                                    = "射击"
 STRINGS.ACTIONS.CHECKSHOP                               = "花费 {cost} {costprefab}\n购买 {item}"
 
-STRINGS.ACTIONS.IRONTURNON = "开启"
-STRINGS.ACTIONS.IRONTURNOFF = "关闭"
-STRINGS.ACTIONS.CHARGE_UP = "充能"
-STRINGS.ACTIONS.PUNCH = "重击"
+STRINGS.ACTIONS.IRONTURNON                              = "开启"
+STRINGS.ACTIONS.IRONTURNOFF                             = "关闭"
+STRINGS.ACTIONS.CHARGE_UP                               = "充能"
+STRINGS.ACTIONS.PUNCH                                   = "重击"
 
 --gorge
 STRINGS.ACTIONS.STOREOPEN                               = "交易"
@@ -903,72 +903,72 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT = "我发现我的饼干刚用完了�
 STRINGS.NAMES.PARROT_PIRATE = "海盗鹦鹉"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT_PIRATE = "我尽量不吃取了名字的东西。"
 STRINGS.PARROTNAMES = {
-    "丹佳亚","萨米","佐伊","克丽丝","特伦特",
-    "哈里森","阿勒西娅","乔尼・德雷格","弗兰克","波利冈",
-    "威克胜","尚格云顿","汉克","小甜心","蔬菜",
-    "斯卡威","黑胡子","奥克托帕罗","米格西","艾米",
-    "维多利亚","科尼利厄斯","德翰尼・约普","大个儿","虎克博士",
-    "霍雷肖","艾格","王尔德","默多克","莱托勒",
-    "博克霍尔","穆迪","菲利普斯","饼干","舰长",
-    "巴雷特","萨利","雷金纳德・韦尔约翰森",
-    "丹凡 3000","范・达德","哈利"
+    "丹佳亚", "萨米", "佐伊", "克丽丝", "特伦特",
+    "哈里森", "阿勒西娅", "乔尼・德雷格", "弗兰克", "波利冈",
+    "威克胜", "尚格云顿", "汉克", "小甜心", "蔬菜",
+    "斯卡威", "黑胡子", "奥克托帕罗", "米格西", "艾米",
+    "维多利亚", "科尼利厄斯", "德翰尼・约普", "大个儿", "虎克博士",
+    "霍雷肖", "艾格", "王尔德", "默多克", "莱托勒",
+    "博克霍尔", "穆迪", "菲利普斯", "饼干", "舰长",
+    "巴雷特", "萨利", "雷金纳德・韦尔约翰森",
+    "丹凡 3000", "范・达德", "哈利"
 }
 STRINGS.TALKINGBIRD = {
     in_container = {
-    "别把我埋了！",
-    "我要出去，出去！",
-    "完蛋了！",
-    "我的眼睛！我的眼睛！",
-    "太黑了！"
+        "别把我埋了！",
+        "我要出去，出去！",
+        "完蛋了！",
+        "我的眼睛！我的眼睛！",
+        "太黑了！"
     },
     in_inventory = {
-    "冒险！",
-    "你真臭！",
-    "嘎～！",
-    "喂～你！",
-    "笨蛋！",
-    "呆子！",
-    "宝藏！",
-    "走跳板！",
-    "饼干！"
+        "冒险！",
+        "你真臭！",
+        "嘎～！",
+        "喂～你！",
+        "笨蛋！",
+        "呆子！",
+        "宝藏！",
+        "走跳板！",
+        "饼干！"
     },
     on_dismounted = {
-    "着陆！",
-    "坚实的大地！",
-    "我们成功了！"
+        "着陆！",
+        "坚实的大地！",
+        "我们成功了！"
     },
     on_dropped = {
-    "笨蛋！",
-    "再见！",
-    "再见，笨蛋！",
-    "再见！"
+        "笨蛋！",
+        "再见！",
+        "再见，笨蛋！",
+        "再见！"
     },
     on_ground = {
-    "不错！",
-    "笨蛋！",
-    "自以为是！",
-    "你真臭！"
+        "不错！",
+        "笨蛋！",
+        "自以为是！",
+        "你真臭！"
     },
     on_mounted = {
-    "前进！",
-    "啊哦！",
-    "你确定吗？"
+        "前进！",
+        "啊哦！",
+        "你确定吗？"
     },
     on_pickedup = {
-    "笨蛋！",
-    "你好！",
-    "喂我吃东西！",
-    "我饿了！",
-    "哎哟！"
+        "笨蛋！",
+        "你好！",
+        "喂我吃东西！",
+        "我饿了！",
+        "哎哟！"
     },
     other_owner = {
-    "救命啊！",
-    "啊！",
-    "卑鄙！",
-    "救救我！",
-    "我没事！"
+        "救命啊！",
+        "啊！",
+        "卑鄙！",
+        "救救我！",
+        "我没事！"
     }
-    }
+}
 --------------------海难食物SWfood---------------------------------------------
 
 STRINGS.NAMES.SWEET_POTATO = "甘薯"
@@ -2101,9 +2101,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANDRAKEHOUSE = "好像有...什么尖声怪
 STRINGS.NAMES.MANDRAKEMAN = "曼德拉长者"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANDRAKEMAN = "肥大，尖声怪气。"
 STRINGS.MANDRAKEMANNAMES = {
-    "箣竹","山茱萸","柏桧","马利筋","栎","葱",
-    "豌豆","荆蓟","麝香草","豆","桦木","覆盆子",
-    "胡萝卜","甘蓝","齿栗叶","车轴草","黄瓜",
+    "箣竹", "山茱萸", "柏桧", "马利筋", "栎", "葱",
+    "豌豆", "荆蓟", "麝香草", "豆", "桦木", "覆盆子",
+    "胡萝卜", "甘蓝", "齿栗叶", "车轴草", "黄瓜",
 }
 STRINGS.MANDRAKEMAN_MANDRAKE_BATTLECRY = {
     "窃贼！",
@@ -5170,11 +5170,11 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SLAW               = "梦想中的沙拉。"
 
 ------------------料理副作用
 
-STRINGS.NAMES.BUFF_SPEEDUP_TRO = "咖啡因"
-STRINGS.NAMES.BUFF_SPEEDUP_TRO_1 = "咖啡因I"
-STRINGS.NAMES.BUFF_SPEEDUP_TRO_2 = "咖啡因II"
-STRINGS.NAMES.BUFF_SPEEDUP_TRO_3 = "冲浪"
-STRINGS.NAMES.BUFF_SPEEDUP_TRO_4 = "咖啡因III"
+STRINGS.NAMES.BUFF_SPEEDUP_TRO                         = "咖啡因"
+STRINGS.NAMES.BUFF_SPEEDUP_TRO_1                       = "咖啡因I"
+STRINGS.NAMES.BUFF_SPEEDUP_TRO_2                       = "咖啡因II"
+STRINGS.NAMES.BUFF_SPEEDUP_TRO_3                       = "冲浪"
+STRINGS.NAMES.BUFF_SPEEDUP_TRO_4                       = "咖啡因III"
 
 
 ------------------工具武器装备
@@ -5405,7 +5405,7 @@ STRINGS.RECIPE_DESC.TURF_PLAINS = "绿色草原版本！"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_PLAINS = "它有如此多的绿草！"
 ]]
 
-STRINGS.NAMES.TURF_HAMARCHIVE = "遗迹迷宫地皮"------------------------------------------------------------------
+STRINGS.NAMES.TURF_HAMARCHIVE = "遗迹迷宫地皮" ------------------------------------------------------------------
 
 --[[这些是正确的地皮]]
 STRINGS.NAMES.TURF_ANTCAVE = "蚁巢地皮"
@@ -5472,8 +5472,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_PLAINS = "它有如此多的绿草！"
 STRINGS.NAMES.TURF_RAINFOREST = "雨林地皮"
 STRINGS.RECIPE_DESC.TURF_RAINFOREST = "来自雨林的地皮。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_RAINFOREST = "一块雨林地皮。"
-
-
 
 STRINGS.NAMES.TURF_LAVALAND = "熔炉地皮"
 STRINGS.RECIPE_DESC.TURF_LAVALAND = "来自熔炉的地皮。"
@@ -5874,22 +5872,22 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SALMON = "高蛋白水产。"
 STRINGS.NAMES.SALMON_COOKED = "熟鲑鱼"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SALMON_COOKED = "看起来很不错。"
 
-STRINGS.RECIPE_DESC.QUAGMIRE_SWAMPIG_HOUSE = "适合沼泽居民居住。"--沼泽猪舍
+STRINGS.RECIPE_DESC.QUAGMIRE_SWAMPIG_HOUSE = "适合沼泽居民居住。" --沼泽猪舍
 
-STRINGS.RECIPE_DESC.QUAGMIRE_LAMP_POST = "文明的亮光。"--街灯
-STRINGS.RECIPE_DESC.QUAGMIRE_LAMP_SHORT = "文明的光亮。"--小街灯
+STRINGS.RECIPE_DESC.QUAGMIRE_LAMP_POST = "文明的亮光。" --街灯
+STRINGS.RECIPE_DESC.QUAGMIRE_LAMP_SHORT = "文明的光亮。" --小街灯
 
-STRINGS.RECIPE_DESC.QUAGMIRE_ALTAR_STATUE1 = "饥饿的具象化。"--饥饿之兽1
-STRINGS.RECIPE_DESC.QUAGMIRE_ALTAR_STATUE2 = "具象化的饥饿。"--饥饿之兽2
-STRINGS.RECIPE_DESC.QUAGMIRE_ALTAR_QUEEN = "威仪的野兽。"--女王野兽
-STRINGS.RECIPE_DESC.QUAGMIRE_ALTAR_BOLLARD = "很坚固，但实际上挡不住什么。"--祭坛柱子
-STRINGS.RECIPE_DESC.QUAGMIRE_ALTAR_IVY = "茂盛的植物。"--常青藤
+STRINGS.RECIPE_DESC.QUAGMIRE_ALTAR_STATUE1 = "饥饿的具象化。" --饥饿之兽1
+STRINGS.RECIPE_DESC.QUAGMIRE_ALTAR_STATUE2 = "具象化的饥饿。" --饥饿之兽2
+STRINGS.RECIPE_DESC.QUAGMIRE_ALTAR_QUEEN = "威仪的野兽。" --女王野兽
+STRINGS.RECIPE_DESC.QUAGMIRE_ALTAR_BOLLARD = "很坚固，但实际上挡不住什么。" --祭坛柱子
+STRINGS.RECIPE_DESC.QUAGMIRE_ALTAR_IVY = "茂盛的植物。" --常青藤
 
-STRINGS.RECIPE_DESC.QUAGMIRE_PARK_FOUNTAIN = "不含输水系统。"--喷泉
-STRINGS.RECIPE_DESC.QUAGMIRE_PARK_ANGEL = "替代你的敬拜工作。"--饕餮敬拜者1
-STRINGS.RECIPE_DESC.QUAGMIRE_PARK_ANGEL2 = "替代你的敬拜工作。"--饕餮敬拜者2
-STRINGS.RECIPE_DESC.QUAGMIRE_PARK_URN = "灵魂休憩之所。"--骨灰瓮
-STRINGS.RECIPE_DESC.QUAGMIRE_PARK_OBELISK = "上面刻了什么？"--石柱
+STRINGS.RECIPE_DESC.QUAGMIRE_PARK_FOUNTAIN = "不含输水系统。" --喷泉
+STRINGS.RECIPE_DESC.QUAGMIRE_PARK_ANGEL = "替代你的敬拜工作。" --饕餮敬拜者1
+STRINGS.RECIPE_DESC.QUAGMIRE_PARK_ANGEL2 = "替代你的敬拜工作。" --饕餮敬拜者2
+STRINGS.RECIPE_DESC.QUAGMIRE_PARK_URN = "灵魂休憩之所。" --骨灰瓮
+STRINGS.RECIPE_DESC.QUAGMIRE_PARK_OBELISK = "上面刻了什么？" --石柱
 
 
 -----------------------------------------暴食厨具gorge tools
@@ -6386,9 +6384,9 @@ STRINGS.NAMES.BEAVERKING_SPAWNER = "海狸王刷新点"
 STRINGS.NAMES.BEAVER_KING = "凯斯特·雷"
 
 STRINGS.WILDBEAVER_NAMES = {
-    "凯斯特","卢卡斯","罗根","伊桑",
-    "雅各布","艾弗里","艾玛","詹克生",
-    "卡尔洛特","利亚姆","梅森","伊利亚",
+    "凯斯特", "卢卡斯", "罗根", "伊桑",
+    "雅各布", "艾弗里", "艾玛", "詹克生",
+    "卡尔洛特", "利亚姆", "梅森", "伊利亚",
 }
 
 STRINGS.WILDBEAVER_TALK_FIGHT = {

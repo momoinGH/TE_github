@@ -1402,3 +1402,6 @@ AddStartLocation = function(arg1, ...) end
 
 AddCustomizeGroup = function(category, name, text, desc, atlas, order) end
 AddCustomizeItem = function(category, group, name, itemsettings) end
+
+-- 修改TUNING的值
+function OverrideTuningVariables(tuning) end
