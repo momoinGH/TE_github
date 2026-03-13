@@ -18,8 +18,10 @@ pro_modules = {
     "quagmire"
 }
 
-
-
+PreloadAssets = {
+    Asset("ATLAS", "images/scrapbook_tropical/scrapbook_hamlet.xml"),
+}
+ReloadPreloadAssets()
 
 modimport "modmain/dev_utils" --开发环境下辅助用的函数，与游戏无关
 local is_worldgen = rawget(_G, "WORLDGEN_MAIN") ~= nil
@@ -31,16 +33,15 @@ if proisdev then
     modimport "modmain/worldgen_check_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 modimport "modmain/map/spawnutil.lua"
-proimportmodulefile "map/terrain"        --世界生成地形限制
-proimportmodulefile "tiledefs"           --定义新地皮
-proimportmodulefile "tilegroups"         --地皮分组
-proimportmodulefile "map/lockandkey"     --地形锁钥
-
-modimport "modmain/map/storygen.lua"     --标签处理函数
-proimportmodulefile "map/static_layouts" --静态布局
+modimport "modmain/map/storygen.lua"         --标签处理函数
+proimportmodulefile "map/terrain"            --世界生成地形限制
+proimportmodulefile "tiledefs"               --定义新地皮
+proimportmodulefile "tilegroups"             --地皮分组
+proimportmodulefile "map/lockandkey"         --地形锁钥
+proimportmodulefile "map/static_layouts"     --静态布局
 proimportmodulefile "map/rooms"
 proimportmodulefile "map/tasks"
-proimportmodulefile "map/network" --地图生成后处理
+proimportmodulefile "map/network"     --地图生成后处理
 
 
 -- TODO

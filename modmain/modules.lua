@@ -77,11 +77,11 @@ if TUNING.tropical.lavaarena then
     modimport("scripts/complementos.lua")
 end
 -- 绿色世界
-if TUNING.tropical.greenworld  then
+if TUNING.tropical.greenworld then
     Modimport("greenworld")
 end
 -- 冰霜岛屿
-if TUNING.tropical.frostisland ~= 5 then
+if TUNING.tropical.frostisland then
     Modimport("frostisland")
 end
 -- 暴食

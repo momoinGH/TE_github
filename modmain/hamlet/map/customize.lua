@@ -2,34 +2,36 @@ local group = "hamlet"
 local group_label = "哈姆雷特"
 AddCustomizeGroup(LEVELCATEGORY.SETTINGS, group, group_label, nil, nil, -1)
 
+local options_enable = {
+    { text = STRINGS.UI.WARDROBESCREEN.FILTER_ON, data = "enabled" },
+    { text = STRINGS.UI.WARDROBESCREEN.FILTER_OFF, data = "disabled" },
+}
+
+local hamlet_atlas = "images/scrapbook_tropical/scrapbook_hamlet.xml"
+
 -- 世界规则
 local settings_items = {
     {
-        name = "wind",
-        label = "海风",
-        category = LEVELCATEGORY.SETTINGS,
-        desc = {
-            { text = "关闭", data = "none" },
-            { text = "开启", data = "always" },
-        },
-        value = "always",
+        name = "hamlet",       --设置id，如果Pre没填可以通过TUING.TE_WORLDGEN[name]访问
+        label = proenzh("Hamlet", "哈姆雷特"),
+        desc = options_enable, --选项列表
+        value = "enabled",     --默认值
         -- atlas = nil,
-        -- image = "liefs.tex",
-        order = -1,
-        world = { "forest", "cave" },
-        -- master_controlled = nil,
-        -- masteroption = nil,
-        -- master_sync = nil,
-        -- widget_type = nil,
-        -- options_remap = {},
-        Pre = function(difficulty)
-            OverrideTuningVariables({
-                pro_wind = difficulty == "always" and true or false
-            })
+        -- image = "liefs.tex", --图片
+        order = -1,                --优先级，越小越在前面
+        world = { "forest" },      --在世界和洞穴的世界规则中显示
+        Pre = function(difficulty) --赋值
+            TUNING.tropical.hamlet = difficulty == "enabled" and true or false
         end,
-        Post = function(difficulty)
-            TheWorld:PushEvent("pro_setwind", difficulty)
-        end
+    },
+    {
+        name = "vampirebatcave",
+        label = "洞穴裂缝",
+        desc = options_enable,
+        value = "enabled",
+        atlas = hamlet_atlas,
+        image = "vampire_bat_caves.tex",
+        world = { "forest" },
     }
 }
 
@@ -37,6 +39,5 @@ local settings_items = {
 local worldgen_items = {
 
 }
-
 
 ProAddCustomizeItems(group, settings_items, worldgen_items)

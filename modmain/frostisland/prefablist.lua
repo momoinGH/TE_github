@@ -9,7 +9,6 @@ PrefabFiles = {
     "city_hammer",
     "magnifying_glass",
     "pigbandit",
-    "pig_shop",
 
     "pigman_shopkeeper_desk",
     "shop_pedestals",

@@ -11,6 +11,9 @@ TRO_AddComponentAction：添加ComponentAction，允许组件行为重复
 RemapLayoutTile：重新映射layout里地皮id对应的地皮
 
 RemapSound：重新映射音效路径
+
+TUNING.tropical mod设置数据
+TUNING.TE_WORLDGEN 世界生成相关数据
 ]]
 
 

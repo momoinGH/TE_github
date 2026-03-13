@@ -79,7 +79,7 @@ TUNING.tropical = {
     windy            = false,
     sea              = false, --仅海洋世界
     underwater       = false, --海底世界
-    hamlet           = true,
+    hamlet           = false,
     shipwrecked      = false,
     shipwrecked_plus = false, --海难plus
     lavaarena        = false, --熔炉竞技场
@@ -93,8 +93,8 @@ TUNING.tropical = {
     pinacle         = true,  --峰顶
     anthill         = true,  --蚁丘
     pigruins        = true,  --古代猪人遗迹
-    hamlet_pigcity1 = true,  --猪伯利市3
-    hamlet_pigcity2 = true,  --猪伯利皇城
+    hamlet_pigcity1 = false, --猪伯利市3
+    hamlet_pigcity2 = false, --猪伯利皇城
 
 
     only_shipwrecked = false, --仅海难世界

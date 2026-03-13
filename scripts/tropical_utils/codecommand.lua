@@ -1265,11 +1265,6 @@ Action = Class(function(self, data, instant, rmb, distance, ghost_valid, ghost_e
 
 function resolvefilepath(filepath, force_path_search, search_first_path) end
 
---like resolvefilepath, but without the crash if it fails.
-function resolvefilepath_soft(filepath, force_path_search, search_first_path) end
-
-local function resolvefilepath_internal(filepath, force_path_search, search_first_path) end
-
 --Round a number to idp decimal points. 0.5-values are always rounded up.
 function RoundBiasedUp(num, idp) end
 
@@ -1405,3 +1400,5 @@ AddCustomizeItem = function(category, group, name, itemsettings) end
 
 -- 修改TUNING的值
 function OverrideTuningVariables(tuning) end
+
+ReloadPreloadAssets = function() end
