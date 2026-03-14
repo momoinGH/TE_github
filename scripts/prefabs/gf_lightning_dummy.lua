@@ -1,4 +1,4 @@
-local function lightningdummyfn()
+local function fn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddNetwork()
@@ -19,4 +19,4 @@ local function lightningdummyfn()
     return inst
 end
 
-return Prefab("gf_lightning_dummy", lightningdummyfn)
+return Prefab("gf_lightning_dummy", fn)
