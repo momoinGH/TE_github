@@ -39,57 +39,12 @@ local function Modimport(dirc)
     PrefabFiles = {}
     Assets = {}
 end
-----------------------------------------------------------------------------------------------------
--- 共同
-Modimport("common")
 
---小房子，以及在地图外生成相关
-Modimport("room")
---海难小船
-Modimport("boat")
--- 大风平原
-if TUNING.tropical.windy then
-    Modimport("windy")
+for _, m in pairs(pro_modules) do
+    if TUNING.tropical[m] then
+        Modimport(m)
+    end
 end
--- 海洋
-if TUNING.tropical.sea then
-    Modimport("sea")
-end
--- 海底
-if TUNING.tropical.underwater then
-    Modimport("underwater")
-end
--- 哈姆雷特
-if TUNING.tropical.hamlet then
-    Modimport("hamlet")
-end
--- 海难
-if TUNING.tropical.shipwrecked then
-    Modimport("shipwrecked")
-end
--- 海难plus
-if TUNING.tropical.shipwrecked_plus then
-    Modimport("shipwrecked_plus")
-end
--- 熔炉竞技场
-if TUNING.tropical.lavaarena then
-    Modimport("lavaarena")
-    modimport("scripts/complementos.lua")
-end
--- 绿色世界
-if TUNING.tropical.greenworld then
-    Modimport("greenworld")
-end
--- 冰霜岛屿
-if TUNING.tropical.frostisland then
-    Modimport("frostisland")
-end
--- 暴食
-if TUNING.tropical.quagmire then
-    Modimport("quagmire")
-end
-
-----------------------------------------------------------------------------------------------------
 
 PrefabFiles = ALL_PREFAB_FILES
 ALL_PREFAB_FILES = nil

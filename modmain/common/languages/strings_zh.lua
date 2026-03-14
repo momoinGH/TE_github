@@ -221,7 +221,6 @@ STRINGS.BORE_TALK_ATTEMPT_TRADE = { "你得到了什么？", "乖乖听话。", 
 STRINGS.BORE_TALK_PANIC = { "不！！！！！！", "太黑了！ 太黑了！", "啊啊啊啊啊啊！！" }
 STRINGS.BORE_TALK_PANICFIRE = { "热 热 热！", "嗷嗷嗷！", "烧起来了！" }
 STRINGS.BORE_TALK_FIND_MEAT = { "我饿了！", "好吃！", "我吃东西！", "吃东西的时间到了！" }
-STRINGS.BORE_TALK_EAT_MEAT = { "好吃 好吃 好吃", "好吃！" }
 STRINGS.BORE_TALK_GO_HOME = { "该回家了！", "家！ 家！" }
 
 STRINGS.NAMES.WILDBOREHOUSE = "野猪房"
@@ -560,7 +559,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGS_CAGE = "看上去有大量的锁。
 
 ------------------------------------------海洋相关sea---------------------------------------------
 
-STRINGS.PULAFORA = "嗯...这里太浅了"
 STRINGS.SEMBARCO = "我的船在哪？我要死了！"
 
 ------------------------------------------珊瑚coral
@@ -709,7 +707,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIRATEGHOST = "他遇到了一个糟糕的�
 ---罗林rawling
 STRINGS.NAMES.RAWLING = "罗林"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "那是我哥们儿！"
-STRINGS.RAWLINGon_hit_water = "嗖嗖！"
 STRINGS.RAWLINGon_dropped = "我在坠落！"
 STRINGS.RAWLINGon_extinguish = "拯救成功！"
 STRINGS.RAWLINGin_container = "这不是装桃子的篮子……"
@@ -731,13 +728,6 @@ STRINGS.RAWLINGon_thrown = {
     "我相信我可以飞！",
 }
 
-STRINGS.RAWLINGon_bounced =
-{
-    "诶呀！",
-    "只是个桃子！",
-    "浪花！",
-    "没中！",
-}
 STRINGS.RAWLINGequipped = {
     "你可以背起我，走几步路。",
     "这是某种加拿大玩笑吗？",
@@ -1715,10 +1705,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALL_TOTEM_ITEM = { "让我们开摞！" }
 STRINGS.RECIPE_DESC.WALL_TOTEM_ITEM = "显示你的财富。"
 STRINGS.NAMES.WANAWANATIKI = "哇呐哇呐提基"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WANAWANATIKI = { "他看起来像个领导人。" }
-STRINGS.WANA_TALK_FIGHT = { "死！", "入侵者！", "我要和你战斗" }
 
 STRINGS.TIKI_TALK_FIND_LIGHT = { "喔-喔-可怕！", "喔-喔-太阳？", "喔-喔-火", "喔-喔-好", "喔-喔-温暖" }
-STRINGS.TIKI_TALK_GO_HOME = { "喔-喔-家" }
 STRINGS.NAMES.TIKIFIRE = "提基营火"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIKIFIRE = { "我要让火焰大师给它加燃料。" }
 STRINGS.NAMES.TIKISTICK = "提基头颅"
@@ -2215,11 +2203,6 @@ for i = 1, 100 do
     table.insert(STRINGS.ANTWARRIORNAMES, "兵蚁 #" .. math.random(1, 1000000))
 end
 
-STRINGS.ANT_TALK_ATTEMPT_TRADE = {
-    "你也工-作-作-作？",
-    "有助群体-体-体？",
-    "一起-起-起建造？",
-}
 STRINGS.ANT_TALK_FIGHT = {
     "警-警-警告！",
     "攻-攻-攻击！",
@@ -2777,9 +2760,6 @@ STRINGS.NAMES.PIG_SHOP_ACADEMY_ENTRANCE = "猪伯利学会"
 STRINGS.RECIPE_DESC.PIG_SHOP_ACADEMY_ENTRANCE = "历史悠久。"
 STRINGS.NAMES.PIG_SHOP_ACADEMY_DOOR_ENTRADA = "门"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_ACADEMY_DOOR_ENTRADA = "门"
-
-STRINGS.NAMES.BUNDLED_STRUCTURE = "建筑包裹"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUNDLED_STRUCTURE = "一个建筑包裹。"
 
 ------------------------------猪镇猪人职业HM pigman --
 
@@ -5813,7 +5793,6 @@ STRINGS.SWAMPIG_TALK_ATTEMPT_TRADE = { "你要给我什么？", "是好东西吗
 STRINGS.SWAMPIG_TALK_PANIC = { "不！！！", "太黑了！ 太黑了！", "哼 呜啊啊啊！！" }
 STRINGS.SWAMPIG_TALK_PANICFIRE = { "太热了！", "嗷 哼哼！", "烧起来了！" }
 STRINGS.SWAMPIG_TALK_FIND_MEAT = { "我有点饿！", "好吃的！", "我要吃！", "猪要吃东西了！" }
-STRINGS.SWAMPIG_TALK_EAT_MEAT = { "吧唧 吧唧", "好吃！" }
 STRINGS.SWAMPIG_TALK_GO_HOME = { "要回家了！", "家！回家！" }
 
 STRINGS.NAMES.QUAGMIRE_SWAMPIG_HOUSE = "沼泽猪舍"
@@ -6367,8 +6346,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER = "这些生物以木头为食。
 STRINGS.NAMES.WILDBEAVERGUARD = "海狸守卫"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "他看上去很严肃。"
 
-STRINGS.NAMES.BEAVERTORCH = "海狸火炬"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "看起来很舒适。"
+
 
 STRINGS.NAMES.BEAVERHEAD = "海狸头"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERHEAD = "得有人告诉他的家人。"

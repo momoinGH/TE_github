@@ -100,8 +100,8 @@ function proimportmodulefile(path, is_load_all)
     if not string.starts(path, "/") then
         path = "/" .. path
     end
-    for _, m in ipairs(pro_modules) do
-        if is_load_all or m == "common" or TUNING.tropical[m] then --根据配置项决定是否读取
+    for _, m in pairs(pro_modules) do
+        if is_load_all or m == pro_modules.common or TUNING.tropical[m] then --根据配置项决定是否读取
             prosafemodimport("modmain/" .. m .. path)
         end
     end

@@ -255,4 +255,4 @@ local function fn1()
 end
 
 return Prefab("ballphin", fn, assets, prefabs),
-	Prefab("ocean/objects/ballphin2", fn1, assets, prefabs)
+	Prefab("ballphin2", fn1, assets, prefabs)

@@ -2,46 +2,20 @@ GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL,
 
 modimport "modmain/util.lua" --一些表相关的工具函数
 
-pro_modules = {
-    "common",
-    "room",
-    "boat",
-    "windy",
-    "sea",
-    "underwater",
-    "hamlet",
-    "shipwrecked",
-    "shipwrecked_plus",
-    "lavaarena",
-    "greenworld",
-    "frostisland",
-    "quagmire"
-}
+pro_modules = modinfo.pro_modules
 
-PreloadAssets = {
-    Asset("ATLAS", "images/scrapbook_tropical/scrapbook_hamlet.xml"),
-}
-ReloadPreloadAssets()
-
-modimport "modmain/dev_utils" --开发环境下辅助用的函数，与游戏无关
-local is_worldgen = rawget(_G, "WORLDGEN_MAIN") ~= nil
-print("调用modworldgenmain", is_worldgen)
-Hooks = require "tropical_utils/hooks"        --用来hook的一些函数
+modimport "modmain/dev_utils"          --开发环境下辅助用的函数，与游戏无关
+Hooks = require "tropical_utils/hooks" --用来hook的一些函数
 modimport "modmain/gentuning"
-proimportmodulefile("map/customize", true)    --世界设置
+modimport "modmain/map/customize.lua"
 if proisdev then
     modimport "modmain/worldgen_check_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 modimport "modmain/map/spawnutil.lua"
-modimport "modmain/map/storygen.lua"         --标签处理函数
-proimportmodulefile "map/terrain"            --世界生成地形限制
-proimportmodulefile "tiledefs"               --定义新地皮
-proimportmodulefile "tilegroups"             --地皮分组
-proimportmodulefile "map/lockandkey"         --地形锁钥
-proimportmodulefile "map/static_layouts"     --静态布局
-proimportmodulefile "map/rooms"
-proimportmodulefile "map/tasks"
-proimportmodulefile "map/network"     --地图生成后处理
+proimportmodulefile "map/terrain" --植物生成地形限制
+proimportmodulefile "tiledefs"    --定义新地皮
+proimportmodulefile "tilegroups"  --地皮分组
+
 
 
 -- TODO
@@ -60,3 +34,15 @@ proimportmodulefile "map/network"     --地图生成后处理
 -- if TUNING.tropical.greenworld then
 --     modimport "modmain/common/map/tasks/greenworldgen"
 -- end
+
+--生成世界需要用到的内容
+local is_worldgen = rawget(_G, "WORLDGEN_MAIN") ~= nil
+print("调用modworldgenmain", is_worldgen, rawget(_G, "WorldSim"))
+if rawget(_G, "WorldSim") then
+    modimport "modmain/map/storygen.lua"     --标签处理函数
+    proimportmodulefile "map/lockandkey"     --地形锁钥
+    proimportmodulefile "map/static_layouts" --静态布局
+    proimportmodulefile "map/rooms"
+    proimportmodulefile "map/tasks"
+    proimportmodulefile "map/network" --地图生成后处理
+end

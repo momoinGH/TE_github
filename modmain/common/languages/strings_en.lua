@@ -422,7 +422,6 @@ STRINGS.NAMES.PLAYER_HOUSE_TURRET_CRAFT                                         
 STRINGS.NAMES.RUG_OVAL                                                          = "Oval Rug"
 STRINGS.NAMES.RELIC_1                                                           = "Lost Idol"
 STRINGS.NAMES.WHALE_CARCASS_BLUE                                                = "Blue Whale Carcass"
-STRINGS.NAMES.GRASSNOVA                                                         = "Grass"
 STRINGS.NAMES.SPIDERB2                                                          = "Spider"
 STRINGS.NAMES.SUNKBOAT                                                          = "Sunken Boat"
 STRINGS.NAMES.SANDBAGSMALL                                                      = "Sandbag"
@@ -432,7 +431,6 @@ STRINGS.NAMES.PIG_RUINS_DOOR_DIREITA                                            
 STRINGS.NAMES.DIVING_SUIT_WINTER                                                = "潜水服"
 STRINGS.NAMES.DECO_ROLLHOLDER                                                   = "卷支架（没贴图）"
 STRINGS.NAMES.OBSIDIANSPEARGUN                                                  = "Obsidian Speargun"
-STRINGS.NAMES.BEAVERTORCH                                                       = "Wildbeaver Torch"
 STRINGS.NAMES.MERMB1                                                            = "Merm"
 STRINGS.NAMES.OCEANFISH_SMALL_17_INV                                            = "Hutch Fish"
 STRINGS.NAMES.MAZE_ANTHILL                                                      = "生成蚁丘"
@@ -1404,7 +1402,7 @@ STRINGS.NAMES.SHELVES_RUINS                                                     
 STRINGS.NAMES.TURF_WINDY                                                        = "Windy Turf"
 STRINGS.NAMES.PIG_ANTIQUITIES_ENTRANCE                                          = "'The Sty' Oddities Emporium"
 STRINGS.NAMES.DECO_ACCADEMY_TABLE_BOOKS                                         = "书桌"
-STRINGS.NAMES.PORTO_WATERCHEST1                                                 = "Sea Chest"
+STRINGS.NAMES.PORTO_WATERCHEST                                                  = "Sea Chest"
 STRINGS.NAMES.POT_ROAST                                                         = "罐炖烤肉贡品"
 STRINGS.NAMES.GODDESS_BELL                                                      = "Goddess Bell"
 STRINGS.NAMES.ICEROCKCARRAT                                                     = "Frozen Creature"
@@ -1988,7 +1986,6 @@ STRINGS.NAMES.BOTTLELANTERN                                                     
 STRINGS.NAMES.CAVE_ENTRANCE_CLOSED                                              = "Plugged Sinkhole"
 STRINGS.NAMES.SHELVES_PIPE                                                      = "Pipe Shelf"
 STRINGS.NAMES.OX_HORN                                                           = "Horn"
-STRINGS.NAMES.BUNDLED_STRUCTURE                                                 = "建筑包裹"
 STRINGS.NAMES.LAWNORNAMENT_7                                                    = "Spiral Tree"
 STRINGS.NAMES.DOYDOYEGG_CRACKED                                                 = "Cracked Doydoy Egg"
 STRINGS.NAMES.ANTCOMBHOME                                                       = "Antcomb Home"
@@ -3072,7 +3069,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PLAYERHOUSE_CITY_FORSALE                    
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_GENERAL_BURNING                    = "That shop is on fire!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.AXEOBSIDIAN                                 = "A winning combination!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_HAT                                 = "I can weather the elements better in this."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUNDLED_STRUCTURE                           = "一个建筑包裹。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOARBATTLE                                  = "boarbattle."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COFFEEBEANS                                 = "They could use some roasting."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.APOKALYPSE_HERALD                           = "Metaphisical end-ity."
@@ -3754,7 +3750,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SANDSTONE                                   
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDER_APE_TREE                             = "Where are those annoying monkeys?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LEATHER                                     = "Leather for all kinds of weather."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_QUAGMIRE_GATEWAY                       = "奇怪颜色的草地。"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH                                 = "Wildbeaver Torch."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SMALLBIRD_GENERIC                           = "That's a rather small bird."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_CUCUMBER                                = "一种多刺的红色海参。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BLUBBER                                     = "Squishy."
@@ -4798,7 +4793,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_LAMP_2UPTURNS                          
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEACH_TREE                                  = "More than enough peaches."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MINISIGN_GENERIC                            = "I could draw better than that!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MOLE_UNDERGROUND                            = "Something's under there, searching for minerals."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASSNOVA                                   = "It's a tuft of grass."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.COFFEEBUSH_BARREN                           = "I think it needs to be fertilized."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BLUE_MUSHROOM_GENERIC                       = "It's a mushroom."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GOLDENBAR                                   = "很有价值。"
@@ -5058,7 +5052,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_MINER_GENERIC                        
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROUND_DOOR                                  = "A little like being eaten."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_RING                         = "Looks like I could use this."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPEAR_OBSIDIAN                              = "This will leave a mark."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_WATERCHEST1                           = "Watertight, just like all my theories."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_WATERCHEST                            = "Watertight, just like all my theories."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GEM_FLOWER1                                 = "Ripe for the picking."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WEEVOLE                                     = "Whee!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTHILL                                     = "This must be where those giant bugs live."
@@ -5288,7 +5282,7 @@ STRINGS.RECIPE_DESC.DECO_LAMP_2EMBROIDERED                                      
 STRINGS.RECIPE_DESC.SWINGING_LIGHT_FLORAL_SCALLOP                               = "Floral themed illumination."
 STRINGS.RECIPE_DESC.SAND_CASTLE                                                 = "Therapeutic and relaxing."
 STRINGS.RECIPE_DESC.ICEMAKER                                                    = "Ice, ice, baby!"
-STRINGS.RECIPE_DESC.PORTO_WATERCHEST1                                           = "Davy Jones' storage locker."
+STRINGS.RECIPE_DESC.PORTO_WATERCHEST                                            = "Davy Jones' storage locker."
 STRINGS.RECIPE_DESC.WIND_CONCH                                                  = "The gales come early."
 STRINGS.RECIPE_DESC.SHELVES_LADDER                                              = "Use it to reach the high shelf."
 STRINGS.RECIPE_DESC.INTERIOR_FLOOR_GARDENSTONE                                  = "A soft mossy feel."
@@ -5683,7 +5677,6 @@ STRINGS.CHARACTERS.WILLOW.DESCRIBE.SWEET_POTATO_PLANTED     = "It would be cuter
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.MERMHOUSE_FISHER         = "No one would care if this burned down."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.OBSIDIANFIREPIT          = "I could watch it for hours."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.AERODYNAMICHAT           = "Brisk movement snuffs fires."
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.GRASSNOVA                = "It's a flammable tuft of grass."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.COCONUT_HALVED           = "Aha! Now you're food!"
 
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.BALLPHINHOUSE            = "It's the castle of the bouncy things... A bouncy castle."
@@ -6083,7 +6076,6 @@ STRINGS.CHARACTERS.WENDY.DESCRIBE.SWEET_POTATO              = "Sweet. Just like 
 STRINGS.CHARACTERS.WENDY.DESCRIBE.TROPICALBOUILLABAISSE     = "Afloat upon its own demise."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.ARMOR_SNAKESKIN           = "A jacket of dead flesh. Fashionable."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.COFFEE                    = "Dark. Bitter..."
-STRINGS.CHARACTERS.WENDY.DESCRIBE.GRASSNOVA                 = "It's just a tuft of grass."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.DEBRIS_3                  = "There was someone here before me!"
 STRINGS.CHARACTERS.WENDY.DESCRIBE.TIGERSHARK                = "Orange striped death on water!"
 STRINGS.CHARACTERS.WENDY.DESCRIBE.DUG_ELEPHANTCACTUS        = "Do I have to carry it?"
@@ -6466,7 +6458,6 @@ STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.SHARD_BEAK = "An instrument of deconstructi
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.DEBRIS_1 = "It's lost its battle."
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.SHARX = "I do not trust these sea-doggies."
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.MAGMAROCK_GOLD = "Is shiny volcano rock."
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.GRASSNOVA = "Is grass."
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.SHARD_SWORD = "The pen is mightier."
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.GLASS_SHARDS = "High temperature turns sand into imperfect glass."
 STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.KRAKENCHEST = "It dropped something."
@@ -6768,7 +6759,6 @@ STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.WOODLEGS_KEY1 = "A skull key..."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.LIMPETS_COOKED = "Cooked Patella vulgata."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.FLAMEGEYSER = "Maybe I should stand back."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.WOODLEGSGHOST = "He was my friend"
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.GRASSNOVA = "A cluster graminoid stalks."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.DOYDOYEGG_CRACKED = "I'm so curious..."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.OBSIDIAN = "A derivative of volcanic lava."
 STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.JUNGLETREE_BURNT = "A carbonized tree."
@@ -7065,7 +7055,6 @@ STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.TIGERSHARK = "Take me to Valhalla, devil 
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.WATERCROCODOG = "My, what big teeth you have!"
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.COFFEEBEANS = "It smells energizing."
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.MAGMAROCK_FULL = "What can I use to roll these rocks?"
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.GRASSNOVA = "That could be useful."
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.SHARK_GILLS = "Shark gills!"
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.COTTONTREE_CONE = "Seed?"
 STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.LAVAPONDBIG = "A bit hot for my tastes."
@@ -7234,7 +7223,6 @@ STRINGS.CHARACTERS.WAXWELL.DESCRIBE.PEG_LEG = "Good for whacking."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.BOTTLELANTERN = "Their lives have found purpose in servitude."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.TIGERSHARKPOOL = "There is a strange shark in this pond."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.CHIMINEA = "Safe keeping for my hard earned fires."
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.GRASSNOVA = "Tufty."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.PALMLEAF_HUT = "Phew."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.OXHAT = "Sometimes one must sacrifice form for function."
 STRINGS.CHARACTERS.WAXWELL.DESCRIBE.OBSIDIANFIREPIT = "The stone was born for this."
@@ -7920,7 +7908,6 @@ STRINGS.CHARACTERS.WX78.DESCRIBE.OXBABY = "You may be small, but you smell big."
 STRINGS.CHARACTERS.WX78.DESCRIBE.ARMOR_SNAKESKIN = "This coat makes me feel dangerous."
 STRINGS.CHARACTERS.WX78.DESCRIBE.OBSIDIAN_WORKBENCH = "Fire items can be forged here!"
 STRINGS.CHARACTERS.WX78.DESCRIBE.DOYDOYEGG_CRACKED = "The planet just got a little dumber."
-STRINGS.CHARACTERS.WX78.DESCRIBE.GRASSNOVA = "It's a flammable tuft of grass."
 STRINGS.CHARACTERS.WX78.DESCRIBE.DUBLOON = "Pirate monies!"
 STRINGS.CHARACTERS.WX78.DESCRIBE.TWISTER = "I've been burned by cute things before."
 STRINGS.CHARACTERS.WX78.DESCRIBE.COTTONTREE_CONE = "Seed?"
@@ -8181,7 +8168,6 @@ STRINGS.CHARACTERS.WOODIE.DESCRIBE.ELEPHANTCACTUS_ACTIVE = "Yowch!"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.TURF_ASH = "Ashy."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.MAGMAROCK_GOLD_FULL = "Magma-nificent!"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.FISH5 = "Is living underwater as awful as it sounds?"
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.GRASSNOVA = "It's a flammable tuft of grass."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.MUSSEL_STICK = "The mussels like this stick for some reason."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.FISH3 = "You look kinda dumb."
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.GOLDENMACHETE = "I don't want to scuff it up."
@@ -9447,7 +9433,88 @@ STRINGS.CITY_PIG_TALK_REFUSE_PURPLEGEM                    = {
     }
 }
 
+STRINGS.NAMES.TURF_LAVALAND                               = "熔炉地皮"
+STRINGS.RECIPE_DESC.TURF_LAVALAND                         = "来自熔炉的地皮。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_LAVALAND         = "一块熔炉地皮。"
 
+STRINGS.NAMES.TURF_ICELAND                                = "冰封地皮"
+STRINGS.RECIPE_DESC.TURF_ICELAND                          = "冰封地皮。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_ICELAND          = "冻手。"
+
+STRINGS.NAMES.TURF_BATCAVE                                = "蝙蝠洞地皮"
+STRINGS.RECIPE_DESC.TURF_BATCAVE                          = "杀掉蝙蝠！"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_BATCAVE          = "蝙蝠的料理怎么做来着？"
+
+STRINGS.NAMES.TURF_VOLCANO_ROCK                           = "火山岩地皮"
+STRINGS.RECIPE_DESC.TURF_VOLCANO                          = "火山岩石！"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_VOLCANO          = "岩石与灰烬。"
+
+STRINGS.NAMES.TURF_WATER_MANGROVE                         = "红树林地皮"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_WATER_MANGROVE   = "红树林地皮"
+
+STRINGS.NAMES.TFWP_FLOWER_HEADBAND_HAT                    = STRINGS.NAMES.LAVAARENA_HEALINGFLOWERHAT
+
+STRINGS.NAMES.BOOK_METEOR1                                = "Joies de la Volcanologie"
+
+STRINGS.NAMES.TFWP_BARBED_HELM_HAT                        = STRINGS.NAMES.LAVAARENA_LIGHTDAMAGERHAT
+
+STRINGS.NAMES.TFWP_LUXURY_NOX_HELM_HAT                    = STRINGS.NAMES.LAVAARENA_CROWNDAMAGERHAT
+
+STRINGS.NAMES.WATERCHEST                                  = "海上箱子"
+
+STRINGS.NAMES.ARMOROBSIDIAN                               = "黑曜石甲"
+
+STRINGS.NAMES.TURF_ANTCAVE                                = "蚁巢地皮"
+
+STRINGS.NAMES.DUG_QUAGMIRE_SPOTSPICE_SHRUB                = "带斑点的小灌木丛"
+
+STRINGS.NAMES.TFWP_WIZARD_CROWN_HAT                       = STRINGS.NAMES.LAVAARENA_EYECIRCLETHAT
+
+STRINGS.NAMES.MERMFISHHOUSE                               = "Casa de Tritón Pescador"
+
+STRINGS.NAMES.SPOILED_FISH_LARGE                          = "变质的大鱼"
+
+STRINGS.NAMES.MESSAGEBOTTLEEMPTY_SW                       = "空瓶子"
+
+STRINGS.NAMES.TFWP_WOVEN_GARLAND_HAT                      = STRINGS.NAMES.LAVAARENA_TIARAFLOWERPETALSHAT
+
+STRINGS.NAMES.TURF_GASJUNGLE                              = "毒瘴雨林地皮"
+
+STRINGS.NAMES.TFWP_NOX_HELM_HAT                           = STRINGS.NAMES.LAVAARENA_STRONGDAMAGERHAT
+
+STRINGS.NAMES.QUAGMIRE_MERM_HOUSE_CRAFTED                 = "暴食工艺屋"
+
+STRINGS.NAMES.TFWP_BLOSSOM_GARLAND_HAT                    = STRINGS.NAMES.LAVAARENA_HEALINGGARLANDHAT
+
+STRINGS.NAMES.TURF_BATTLEGROUNDS                          = "古代战场地皮"
+
+STRINGS.NAMES.TURF_SNOWLAND                               = "覆雪地皮"
+
+STRINGS.NAMES.GRASSGREEN                                  = "草"
+
+STRINGS.NAMES.TURF_DEEPRAINFOREST_NOCANOPY                = "茂密雨林地皮"
+
+STRINGS.RAWLINGon_dropped                                 = "我在坠落！"
+
+STRINGS.CITY_PIG_TALK_RUNAWAY_WILSON                      = {
+    DEFAULT = { "你不是善良的！", "离你远些！", "你滚开！", "你再见！" },
+    pigman_beautician = { "天呐！", "噗！ 哼！", "离开你！！", "你这非猪人的味道。" },
+    pigman_mechanic = { "再也不相信你了！", "你不要再回来！", "离开这，非猪人。" },
+    pigman_mayor = { "你去死！", "你滚开！", "守卫！ 过来保护我！", },
+    pigman_shopkeep = { "太近了！ 你太近了！", "离开我！", "你去死！" },
+    pigman_royalguard = { "离你远些！", "你去死！", "你这个恶臭的非猪人！" },
+    pigman_royalguard_2 = { "你滚开", "你不要再回来！", "要和我谈判吗？" },
+    pigman_storeowner = { "你不要离我太近！", "太近了！", "滚回你的地方！" },
+    pigman_farmer = { "你想要怎样才能放过我？", "滚回去！", "滚开！" },
+    pigman_miner = { "离开我！！", "赶走！", "离你远些！" },
+    pigman_collector = { "你最好消失！", "你去死", "你滚开！" },
+    pigman_banker = { "你这非猪人的味道。", "你滚开！", "你去死！" },
+    pigman_florist = { "告辞！", "你太近了！", "你一点儿也不要靠近我！" },
+    pigman_erudite = { "离开我！", "你要怎样才能放过我？", "你离开！" },
+    pigman_hatmaker = { "你滚开！", "你想要偷我的货物？", "你去死！", "我相信你会消失！" },
+    pigman_professor = { "离开我！！", "你滚开", "为什么你这么近？" },
+    pigman_hunter = { "滚开！", "快让我离开！", "你滚开！" },
+}
 
 
 

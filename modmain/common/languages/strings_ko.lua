@@ -282,10 +282,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOO = "저 녀석들을 대나무에 대�
 
 STRINGS.NAMES.BAMBOOTREE = "대나무"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOOTREE = {
-	GENERIC = "꽤나 단단해 보여.",
-	BURNING = "잘 가라, 대나무야.",
-	BURNT = "막을 수 있었을 텐데.",
-	CHOPPED = "받아라, 자연아!"
+    GENERIC = "꽤나 단단해 보여.",
+    BURNING = "잘 가라, 대나무야.",
+    BURNT = "막을 수 있었을 텐데.",
+    CHOPPED = "받아라, 자연아!"
 }
 
 STRINGS.NAMES.DUG_BAMBOOTREE = "대나무"
@@ -353,32 +353,31 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "He looks serious"
 STRINGS.NAMES.BEAVER_HEAD = "Beaver head"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVER_HEAD = "Someone should tell his family."
 
-STRINGS.NAMES.BEAVERTORCH = "Beaver Torch"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Sure looks cozy."
+
 
 STRINGS.NAMES.BEAVERSKIN = "Beaver Skin"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERSKIN = "The hide of a beaver creature"
 
 STRINGS.WILDBEAVER_NAMES = {
-	"Castor",
+    "Castor",
 }
 
 STRINGS.NAMES.BEAVER_KING = "Rei Castor"
 
 STRINGS.WILDBEAVER_TALK_FIGHT = {
-	"VOU TE MORDER!",
-	"VA EMBORA!",
-	"VOLTEI PARA LUTAR!",
+    "VOU TE MORDER!",
+    "VA EMBORA!",
+    "VOLTEI PARA LUTAR!",
 }
 STRINGS.WILDBEAVER_TALK_FOLLOW = {
-	"VOCÊ ME ENTENDE",
-	"VAMOS CONSTRUIR UMA BARRAGEM",
-	"NÓS PRECISAMOS DE MAIS MADEIRA",
+    "VOCÊ ME ENTENDE",
+    "VAMOS CONSTRUIR UMA BARRAGEM",
+    "NÓS PRECISAMOS DE MAIS MADEIRA",
 }
 STRINGS.WILDBEAVER_TALK_GOHOME = {
-	"VOU TERMINAR A BARRAGEM AMANHÃ",
-	"HORA DE DORMIR",
-	"VEJO VOCÊ MAIS TARDE",
+    "VOU TERMINAR A BARRAGEM AMANHÃ",
+    "HORA DE DORMIR",
+    "VEJO VOCÊ MAIS TARDE",
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER = "Qual o nome disso...?!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER_HOUSE = "Onde o Castor mora."
@@ -572,7 +571,6 @@ STRINGS.NAMES.OBSIDIANMACHETE = "흑요석 마체테"
 STRINGS.RECIPE_DESC.OBSIDIANMACHETE = "베고 태워라!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANMACHETE = "건드리기 힘들 정도로 뜨거워."
 
-STRINGS.PULAFORA = "음... 너무 얕아."
 STRINGS.SEMBARCO = "내 배 어디갔지? 난 여기서 죽고 말 거야!"
 
 STRINGS.NAMES.CORMORANT = "가마우지"
@@ -809,25 +807,25 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIRATEGHOST = "끔찍한 최후를 맞이한
 STRINGS.NAMES.WRECKOF = "%s 호의 잔해"
 STRINGS.SHIPNAMES =
 { "노틸러스",
-	"맥케이 베넷",
-	"메리 셀레스트",
-	"비글",
-	"산타 마리아",
-	"블루노즈",
-	"마우레타니아",
-	"엔데버",
-	"에드먼드 피츠제럴드",
-	"피쿼드",
-	"미시시네바",
-	"아프리칸 프린세스",
-	"몽블랑",
-	"케인",
-	"파라오",
-	"미노프",
-	"시라쿠샤",
-	"바론 오브 렌프루",
-	"아리엘",
-	"히스파니올라", }
+    "맥케이 베넷",
+    "메리 셀레스트",
+    "비글",
+    "산타 마리아",
+    "블루노즈",
+    "마우레타니아",
+    "엔데버",
+    "에드먼드 피츠제럴드",
+    "피쿼드",
+    "미시시네바",
+    "아프리칸 프린세스",
+    "몽블랑",
+    "케인",
+    "파라오",
+    "미노프",
+    "시라쿠샤",
+    "바론 오브 렌프루",
+    "아리엘",
+    "히스파니올라", }
 
 STRINGS.NAMES.MUSSEL_STICK = "홍합 막대"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSSEL_STICK = "저기 홍합 무리에 꽂아넣으면 되겠지."
@@ -996,8 +994,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_GILLS = "나도 아가미가 있었으
 
 STRINGS.RECIPE_DESC.DOUBLE_UMBRELLAHAT = "기능이 모양을 무마합니다."
 
-STRINGS.NAMES.GRASSNOVA = "풀"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASSNOVA = "그냥 풀이야."
 
 STRINGS.RECIPE_DESC.DOUBLE_UMBRELLAHAT = "덤브렐라"
 
@@ -1247,7 +1243,6 @@ STRINGS.ACTIONS.COLETAR = "걷어내기"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "롤링"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "롤링이야."
-STRINGS.RAWLINGon_hit_water = "첨벙!"
 STRINGS.RAWLINGon_dropped = "나 좀 놀아줘!"
 STRINGS.RAWLINGon_extinguish = "살았다!"
 STRINGS.RAWLINGin_container = "여긴 바스켓이 아닌데..."
@@ -1255,31 +1250,24 @@ STRINGS.RAWLINGon_ground = "나 좀 주워주라."
 STRINGS.RAWLINGin_inventory = "바스켓 바닥을 뚫어버리자고!"
 STRINGS.RAWLINGother_owner = "아야!"
 STRINGS.RAWLINGon_ignite = {
-	"나 불 붙었어!",
-	"아야 아야 아야 아야 아야!",
+    "나 불 붙었어!",
+    "아야 아야 아야 아야 아야!",
 }
 STRINGS.RAWLINGon_pickedup = {
-	"제임스?",
-	"넌 나의 MVP!",
+    "제임스?",
+    "넌 나의 MVP!",
 }
 STRINGS.RAWLINGon_thrown = {
-	"바스켓을 향해서!",
-	"슛!",
-	"잡지 않는 슛은 100% 놓치는 법이라구!",
-	"난 날 수 있다!",
+    "바스켓을 향해서!",
+    "슛!",
+    "잡지 않는 슛은 100% 놓치는 법이라구!",
+    "난 날 수 있다!",
 }
 
-STRINGS.RAWLINGon_bounced =
-{
-	"아야!",
-	"공놀이가 아니면 죽음을!",
-	"핫차!",
-	"또용!",
-}
 STRINGS.RAWLINGequipped = {
-	"날 들고 걸어도 좋아. 두 걸음까지만.",
-	"캐나다식 유머인가?",
-	"맘대로 던져도 좋아.",
+    "날 들고 걸어도 좋아. 두 걸음까지만.",
+    "캐나다식 유머인가?",
+    "맘대로 던져도 좋아.",
 }
 STRINGS.BORE_TALK_FOLLOWWILSON = { "YOU OK BY ME", "I LOVE FRIEND", "YOU IS GOOD", "I FOLLOW!" }
 STRINGS.BORE_TALK_FIND_LIGHT = { "SCARY", "NO LIKE DARK", "WHERE IS SUN?", "STAY NEAR FIRE", "FIRE IS GOOD" }
@@ -1293,7 +1281,6 @@ STRINGS.BORE_TALK_ATTEMPT_TRADE = { "WHAT YOU GOT?", "BETTER BE GOOD.", "NO WAST
 STRINGS.BORE_TALK_PANIC = { "NOOOOO!", "TOO DARK! TOO DARK!", "AAAAAAAAAH!!" }
 STRINGS.BORE_TALK_PANICFIRE = { "HOT HOT HOT!", "OWWWWW!", "IT BURNS!" }
 STRINGS.BORE_TALK_FIND_MEAT = { "ME HUNGRY!", "YUM!", "I EAT FOOD!", "TIME FOR FOOD!" }
-STRINGS.BORE_TALK_EAT_MEAT = { "NOM NOM NOM", "YUM!" }
 STRINGS.BORE_TALK_GO_HOME = { "HOME TIME!", "HOME! HOME!" }
 
 STRINGS.NAMES.WALL_LIMESTONE_ITEM = "Limestone Wall"

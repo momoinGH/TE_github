@@ -6,9 +6,7 @@ local events = {}
 
 local states =
 {
-
-    State
-    {
+    State {
         name = "idle",
         tags = { "idle" },
 
@@ -22,8 +20,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "raise",
         tags = { "busy" },
 
@@ -59,8 +56,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "smash",
         tags = { "busy" },
 
@@ -86,8 +82,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "hit_low",
         tags = { "idle" },
 
@@ -103,8 +98,7 @@ local states =
         }
     },
 
-    State
-    {
+    State {
         name = "place",
         tags = { "busy" },
 
@@ -123,13 +117,12 @@ local states =
         },
     },
 
-    State
-    {
+    State {
         name = "hit",
         tags = { "busy" },
 
         onenter = function(inst, data)
-            if inst.on then
+            if inst.components.machine:IsOn() then
                 inst.AnimState:PlayAnimation("hit_on")
             else
                 inst.AnimState:PlayAnimation("hit_off")

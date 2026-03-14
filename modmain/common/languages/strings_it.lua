@@ -354,8 +354,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "He looks serious"
 STRINGS.NAMES.BEAVER_HEAD = "Beaver head"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVER_HEAD = "Someone should tell his family."
 
-STRINGS.NAMES.BEAVERTORCH = "Beaver Torch"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Sure looks cozy."
+
 
 STRINGS.NAMES.BEAVERSKIN = "Beaver Skin"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERSKIN = "The hide of a beaver creature"
@@ -580,7 +579,6 @@ STRINGS.NAMES.OBSIDIANMACHETE = "Machete in ossidiana"
 STRINGS.RECIPE_DESC.OBSIDIANMACHETE = "Taglia e brucia!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANMACHETE = "È caldo al tatto."
 
-STRINGS.PULAFORA = "Non posso navigare nella terraferma."
 
 STRINGS.NAMES.CORMORANT = "Cormorano"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORMORANT = "Scommetto che mangia molto pesce."
@@ -995,8 +993,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BURIEDTREASURE = "Per favore, sii un buon te
 STRINGS.NAMES.SHARK_GILLS = "Branchie di squalo"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_GILLS = "Vorrei avere anche io le branchie."
 
-STRINGS.NAMES.GRASSNOVA = "Erba"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASSNOVA = "È un ciuffo d'erba."
 
 
 
@@ -1238,7 +1234,6 @@ STRINGS.ACTIONS.LANTERNON = "Turn On"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Rowley"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "È mio amico."
-STRINGS.RAWLINGon_hit_water = "Swish!"
 STRINGS.RAWLINGon_dropped = "Dribblami!"
 STRINGS.RAWLINGon_extinguish = "Salvo!"
 STRINGS.RAWLINGin_container = "Questo non è un canestro..."
@@ -1260,13 +1255,6 @@ STRINGS.RAWLINGon_thrown = {
     "I believe I can fly!",
 }
 
-STRINGS.RAWLINGon_bounced =
-{
-    "Ouch!",
-    "Tutto tranne che canestri!",
-    "Splish!",
-    "Mancato!",
-}
 STRINGS.RAWLINGequipped = {
     "Poi portarmi a fare una passeggiata.",
     "Questa è una specie di battuta canadese?",
@@ -1284,7 +1272,6 @@ STRINGS.BORE_TALK_ATTEMPT_TRADE = { "WHAT YOU GOT?", "BETTER BE GOOD.", "NO WAST
 STRINGS.BORE_TALK_PANIC = { "NOOOOO!", "TOO DARK! TOO DARK!", "AAAAAAAAAH!!" }
 STRINGS.BORE_TALK_PANICFIRE = { "HOT HOT HOT!", "OWWWWW!", "IT BURNS!" }
 STRINGS.BORE_TALK_FIND_MEAT = { "ME HUNGRY!", "YUM!", "I EAT FOOD!", "TIME FOR FOOD!" }
-STRINGS.BORE_TALK_EAT_MEAT = { "NOM NOM NOM", "YUM!" }
 STRINGS.BORE_TALK_GO_HOME = { "HOME TIME!", "HOME! HOME!" }
 
 STRINGS.NAMES.WALL_LIMESTONE_ITEM = "Limestone Wall"

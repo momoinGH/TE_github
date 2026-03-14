@@ -1402,3 +1402,25 @@ AddCustomizeItem = function(category, group, name, itemsettings) end
 function OverrideTuningVariables(tuning) end
 
 ReloadPreloadAssets = function() end
+ReloadFrontEndAssets = function() end
+
+--Remap a value (i) from one range (a - b) to another (x - y)
+function Remap(i, a, b, x, y)
+    return (((i - a) / (b - a)) * (y - x)) + x
+end
+
+function WorldSettings_Spawner_SpawnDelay(inst, startdelay, enabled) end
+
+function SetSharedLootTable(name, table) end
+
+function MakeHauntablePanic(inst, panictime, chance, cooldown, haunt_value) end
+
+
+TheShard = {}
+
+
+function RemovePhysicsColliders(inst) end
+
+
+-- modworldgenmain和modmain里能拿到这个值
+modinfo = {}

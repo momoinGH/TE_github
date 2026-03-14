@@ -194,4 +194,4 @@ local function fn2(Sim)
 end
 
 return Prefab("buriedtreasure", fn, assets, prefabs),
-       Prefab("shipwrecked/objects/buriedtreasure2", fn2, assets, prefabs)
+       Prefab("buriedtreasure2", fn2, assets, prefabs)

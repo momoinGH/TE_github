@@ -383,4 +383,4 @@ local function amphibiousfn(Sim)
 end
 
 return
-    Prefab("monsters/snake_amphibious", amphibiousfn, assets, prefabs)
+    Prefab("snake_amphibious", amphibiousfn, assets, prefabs)

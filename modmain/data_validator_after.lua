@@ -123,6 +123,6 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-for _, m in ipairs(pro_modules) do
+for _, m in pairs(pro_modules) do
     assert(TUNING.tropical[m] ~= nil, "你忘了给TUNING.tropical." .. m .. "变量赋值了，这个值用来决定模块的启用状态")
 end

@@ -1,5 +1,4 @@
 local clockwork_common = require "prefabs/clockwork_common"
-local RuinsRespawner = require "prefabs/ruinsrespawner"
 
 local assets =
 {
@@ -20,16 +19,6 @@ local prefabs =
     "gears",
     "bishop_charge",
     "purplegem",
-}
-
-local prefabs_nightmare =
-{
-    "gears",
-    "bishop_charge",
-    "purplegem",
-    "nightmarefuel",
-    "thulecite_pieces",
-    "bishop_nightmare_ruinsrespawner_inst",
 }
 
 local brain = require "brains/bishopbrain"

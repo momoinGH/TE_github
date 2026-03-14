@@ -64,10 +64,10 @@ local function onsleeptick(inst, sleeper)
     if sleeper.components.temperature ~= nil then
         if inst.sleep_temp_min ~= nil and sleeper.components.temperature:GetCurrent() < inst.sleep_temp_min then
             sleeper.components.temperature:SetTemperature(sleeper.components.temperature:GetCurrent() +
-            TUNING.SLEEP_TEMP_PER_TICK)
+                TUNING.SLEEP_TEMP_PER_TICK)
         elseif inst.sleep_temp_max ~= nil and sleeper.components.temperature:GetCurrent() > inst.sleep_temp_max then
             sleeper.components.temperature:SetTemperature(sleeper.components.temperature:GetCurrent() -
-            TUNING.SLEEP_TEMP_PER_TICK)
+                TUNING.SLEEP_TEMP_PER_TICK)
         end
     end
 

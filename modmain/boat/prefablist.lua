@@ -15,4 +15,6 @@ PrefabFiles = {
     "sail",
     "trawlnet",
     "tropical_boatlamp",
+
+    "quackering_wave",
 }

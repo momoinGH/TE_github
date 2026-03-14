@@ -348,8 +348,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "Он выглядит с�
 STRINGS.NAMES.BEAVER_HEAD = "Голова бобра"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVER_HEAD = "Кто - то должен рассказать его семье."
 
-STRINGS.NAMES.BEAVERTORCH = "Факел Бобра"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Выглядит уютно."
+
 
 STRINGS.NAMES.BEAVERSKIN = "Шкура Бобра"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERSKIN = "Скрытая натура бобра."
@@ -587,7 +586,6 @@ STRINGS.NAMES.OBSIDIANMACHETE = "Обсидиановое мачете"
 STRINGS.RECIPE_DESC.OBSIDIANMACHETE = "Режь-кромсай-поджигай!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANMACHETE = "Горячее на ощупь."
 
-STRINGS.PULAFORA = "Хм...слишком мелко"
 STRINGS.SEMBARCO = "Где находится моя лодка? Я умру здесь!"
 
 STRINGS.NAMES.CORMORANT = "Баклан"
@@ -1017,18 +1015,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_GILLS = "Жаль, что у меня 
 
 STRINGS.RECIPE_DESC.DOUBLE_UMBRELLAHAT = "Функциональность однозначно важнее моды."
 
-STRINGS.NAMES.GRASSNOVA = STRINGS.NAMES.GRASS
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASSNOVA = STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASS
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.GRASSNOVA = STRINGS.CHARACTERS.WILLOW.DESCRIBE.GRASS
-STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.GRASSNOVA = STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.GRASS
-STRINGS.CHARACTERS.WENDY.DESCRIBE.GRASSNOVA = STRINGS.CHARACTERS.WENDY.DESCRIBE.GRASS
-STRINGS.CHARACTERS.WX78.DESCRIBE.GRASSNOVA = STRINGS.CHARACTERS.WX78.DESCRIBE.GRASS
-STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.GRASSNOVA = STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.GRASS
-STRINGS.CHARACTERS.WOODIE.DESCRIBE.GRASSNOVA = STRINGS.CHARACTERS.WOODIE.DESCRIBE.GRASS
-STRINGS.CHARACTERS.WAXWELL.DESCRIBE.GRASSNOVA = STRINGS.CHARACTERS.WAXWELL.DESCRIBE.GRASS
-STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.GRASSNOVA = STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.GRASS
-STRINGS.CHARACTERS.WEBBER.DESCRIBE.GRASSNOVA = STRINGS.CHARACTERS.WEBBER.DESCRIBE.GRASS
-STRINGS.CHARACTERS.WINONA.DESCRIBE.GRASSNOVA = STRINGS.CHARACTERS.WINONA.DESCRIBE.GRASS
 
 
 
@@ -1294,7 +1280,6 @@ STRINGS.ACTIONS.LANTERNON = "Включить"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Роулинг"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "Это мой приятель!"
-STRINGS.RAWLINGon_hit_water = "Хлюп!"
 STRINGS.RAWLINGon_dropped = "Давай, веди меня!"
 STRINGS.RAWLINGon_extinguish = "Спасён!"
 STRINGS.RAWLINGin_container = "Это не корзина для фруктов..."
@@ -1316,13 +1301,6 @@ STRINGS.RAWLINGon_thrown = {
     "Я верю, что могу летать!",
 }
 
-STRINGS.RAWLINGon_bounced =
-{
-    "Ой!",
-    "Ничего, кроме персиков!",
-    "Шлёп!",
-    "Отбит!",
-}
 STRINGS.RAWLINGequipped = {
     "Можешь носить меня. Но только пару шагов.",
     "Это какие-то Канадские шуточки?",
@@ -1343,7 +1321,6 @@ STRINGS.BORE_TALK_ATTEMPT_TRADE = { "ЧТО У ТВОЯ ЕСТЬ?", "МОЯ ТЕ
 STRINGS.BORE_TALK_PANIC = { "НЕ-Е-Е-ЕТ!", "А-А-А! СЛИШКОМ ТЕМНО!", "А-А-А-А-А-А-А-А!!!" }
 STRINGS.BORE_TALK_PANICFIRE = { "ГОРЯЧО ГОРЯЧО ГОРЯЧО!", "А-А-А-АЙ!", "ГОРИТ-ГОРИТ!" }
 STRINGS.BORE_TALK_FIND_MEAT = { "МОЯ ДАВНО НЕ ЕЛ!", "НЯМ!", "МОЯ ЕСТЬ ЕДУ!", "НАСТАЛО ВРЕМЯ ОБЕДА!" }
-STRINGS.BORE_TALK_EAT_MEAT = { "НЯМ НЯМ НЯМ", "НЯМ!" }
 STRINGS.BORE_TALK_GO_HOME = { "МОЯ ПОРА ДОМОЙ!", "ДОМ! ДОМ!" }
 
 STRINGS.NAMES.WALL_LIMESTONE_ITEM = "Известняковая стена" --DTR
@@ -1513,8 +1490,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER                          = "Бо�
 STRINGS.NAMES.WILDBEAVERGUARD                                           = "Бобер защитник"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD                     = "Бобер защитник."
 
-STRINGS.NAMES.BEAVERTORCH                                               = "Факел бобра"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH                         = "Факел бобра."
 
 STRINGS.NAMES.BEAVERHEAD                                                = "Голова бобра"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERHEAD                          = "Голова бобра."
@@ -2140,8 +2115,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.RELIC_5                             = "Тр�
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.REEDS_WATER                         = "Водный тростник."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS                               = "Наука процветает."
 
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER                       = "Любимый цветок науки."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER_COOKED                = "У него тонкий вкус."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER                        = "Любимый цветок науки."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOTUS_FLOWER_COOKED                 = "У него тонкий вкус."
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VAMPIREBAT                          =
 {
@@ -2619,8 +2594,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROC_NEST_DEBRIS3                    = "Эт�
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROC_NEST_DEBRIS4                    = "Это в ветках."
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BASEFAN                             = "Сногсшибательно."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPRINKLER1                          = "А ты думал, для чего вода нужна?"
-STRINGS.RECIPE_DESC.SPRINKLER1                                          = "А ты думал, для чего вода нужна?"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPRINKLER                           = "А ты думал, для чего вода нужна?"
+STRINGS.RECIPE_DESC.SPRINKLER                                           = "А ты думал, для чего вода нужна?"
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.NETTLELOSANGE                       = "Безобидная прививка."
 
@@ -2771,8 +2746,8 @@ STRINGS.NAMES.LILYPAD                                                   = "Ку�
 STRINGS.NAMES.LOTUS                                                     = "Лотос"
 STRINGS.NAMES.REEDS_WATER                                               = "Камыши"
 
-STRINGS.NAMES.LOTUS_FLOWER                                             = "Цветок лотоса"
-STRINGS.NAMES.LOTUS_FLOWER_COOKED                                      = "Приготовленный корень лотоса"
+STRINGS.NAMES.LOTUS_FLOWER                                              = "Цветок лотоса"
+STRINGS.NAMES.LOTUS_FLOWER_COOKED                                       = "Приготовленный корень лотоса"
 
 STRINGS.NAMES.FROGLEGS_POISON                                           = "Ядовитые лапки древолаза"
 STRINGS.NAMES.FROGLEGS_POISON_COOKED                                    = "Приготовленные лапки древолаза"
@@ -2835,7 +2810,7 @@ STRINGS.NAMES.MANDRAKEMAN                                               = "Ст�
 STRINGS.NAMES.MANDRAKEHOUSE                                             = "Холм мандрагоры"
 
 STRINGS.NAMES.BASEFAN                                                   = "Крутящийся вентилятор"
-STRINGS.NAMES.SPRINKLER1                                                = "Разбрызгиватель"
+STRINGS.NAMES.SPRINKLER                                                 = "Разбрызгиватель"
 
 -- HOME DECO ITEMS
 STRINGS.NAMES.INTERIOR_FLOOR_MARBLE                                     = "Мраморный пол"
@@ -3981,12 +3956,6 @@ STRINGS.TABS.ARCHAEOLOGY = "Охота за сокровищами"
 STRINGS.TABS.HOME = "Интерьер"
 STRINGS.TABS.CITY = "Планировка города"
 
-STRINGS.ANT_TALK_ATTEMPT_TRADE = {
-    "Т-ТЫ РАБОТАТЬ-ТИК ТОЖЕ?",
-    "ТЫ ПО-ТИК-ПОМОГАТЬ КОЛОНИИ?",
-    "РАБОТ-ТИК-ТАТЬ ВМЕСТ-ТЬ-ТЕ?",
-}
-
 STRINGS.ANT_TALK_FIGHT = {
     "ВНИМ-ТИК-МАНИЕ!",
     "В АТ-ТИК-ТАКУ!",
@@ -4497,8 +4466,6 @@ STRINGS.NAMES.INTERIOR_FLOOR_WOOD = "Пол"
 STRINGS.NAMES.PIG_RUINS_DART_STATUE = "Поразительная статуя"
 
 STRINGS.TIKI_TALK_FIND_LIGHT = { "O-O-СТРАШНА", "O-O-СОЛНЦААА?", "O-O-АГОНЬ", "O-O-ХАРАШО", "O-O-ТЕПЛО" }
-STRINGS.TIKI_TALK_GO_HOME = { "O-O-ДОМОЙ" }
-STRINGS.WANA_TALK_FIGHT = { "УМРИ!", "ПОКОЙНИК!", "Я УБЬЮ ТЕБЯ!" }
 
 STRINGS.NAMES.OCTOHOUSE = "Домик осьминога"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCTOHOUSE = { "Как они вообще пролезают в дверь?" }
@@ -5036,7 +5003,7 @@ STRINGS.NAMES.PORTO_FISH_FARM = "Рыбная ферма - набор"
 STRINGS.NAMES.PORTO_BUOY = "Буй - набор"
 STRINGS.NAMES.PORTO_TAR_EXTRACTOR = "Смоляной экстрактор - набор"
 STRINGS.NAMES.PORTO_SEA_CHIMINEA = "Плавучий камин - набор"
-STRINGS.NAMES.PORTO_WATERCHEST1 = "Водный сундук - набор"
+STRINGS.NAMES.PORTO_WATERCHEST = "Водный сундук - набор"
 
 STRINGS.RECIPE_DESC.PORTO_BALLPHINHOUSE = "Двороец баллфина"
 STRINGS.RECIPE_DESC.PORTO_RESEARCHLAB5 = "Водная лабаратория"
@@ -5044,7 +5011,7 @@ STRINGS.RECIPE_DESC.PORTO_FISH_FARM = "Рыбная ферма"
 STRINGS.RECIPE_DESC.PORTO_BUOY = "Буй"
 STRINGS.RECIPE_DESC.PORTO_TAR_EXTRACTOR = "Смоляной экстрактор"
 STRINGS.RECIPE_DESC.PORTO_SEA_CHIMINEA = "Плавучий камин"
-STRINGS.RECIPE_DESC.PORTO_WATERCHEST1 = "Водный сундук"
+STRINGS.RECIPE_DESC.PORTO_WATERCHEST = "Водный сундук"
 
 STRINGS.NAMES.SPIDER_SNOW = "Морозный паук"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDER_SNOW = "Морозный паук."
@@ -5352,5 +5319,3 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PARSNIP_GIANT = "Гиганский �
 
 STRINGS.NAMES.FEATHER_CHICKEN = "Перо курицы"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FEATHER_CHICKEN = "Перо курицы."
-
-

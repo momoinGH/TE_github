@@ -1,4 +1,12 @@
 PrefabFiles = {
+    "artic_flower",        --花
+    "beaverskin",          --海狸皮
+    "beavertorch",         --海狸火炬
+    "cave_entrance_frost", --洞穴入口
+    "frosttocave",         --洞穴隧道
+    "cave_exit_frost",     --洞穴出口
+
+
     "topiary",
     "lawnornaments",
     "hedge",

@@ -197,4 +197,4 @@ local function commonfn(Sim)
 end
 
 return Prefab("grabbing_vine", commonfn, assets, prefabs),
-	Prefab("forest/animals/grabbing_vinefixo", commonfn, assets, prefabs)
+	Prefab("grabbing_vinefixo", commonfn, assets, prefabs)

@@ -167,5 +167,5 @@ local function green()
 end
 
 return Prefab("uw_coral", orange, assets, prefabs),
-	Prefab("cave/objects/uw_coral_blue", blue, assets, prefabs),
-	Prefab("cave/objects/uw_coral_green", green, assets, prefabs)
+	Prefab("uw_coral_blue", blue, assets, prefabs),
+	Prefab("uw_coral_green", green, assets, prefabs)

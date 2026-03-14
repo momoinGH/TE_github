@@ -265,4 +265,4 @@ local function shadowfn(Sim)
 end
 
 return Prefab("firerain", firerainfn, assets, prefabs),
-    Prefab("shipwrecked/firerainshadow", shadowfn, assets, prefabs)
+    Prefab("firerainshadow", shadowfn, assets, prefabs)

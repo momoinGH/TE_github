@@ -38,7 +38,7 @@ local function MakeBubble(name, level, loop)
         return inst
     end
 
-    return Prefab("common/fx/" .. name, fn, assets)
+    return Prefab( name, fn, assets)
 end
 
 --[[

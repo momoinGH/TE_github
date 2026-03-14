@@ -274,8 +274,8 @@ STRINGS.NAMES.TREE_JUNGLE = "Arbre de la jungle"
 
 STRINGS.NAMES.JUNGLETREESEED = "Graine d'arbre de la jungle"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLETREESEED = {
-	GENERIC = "Je peux entendre le sifflement de petits serpents.",
-	PLANTED = "Ça donnera un bel arbre de jungle."
+    GENERIC = "Je peux entendre le sifflement de petits serpents.",
+    PLANTED = "Ça donnera un bel arbre de jungle."
 }
 
 STRINGS.NAMES.JUNGLE_TREE_SAPLING = "Pousse d'arbre de jungle"
@@ -286,10 +286,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOO = "Je pourrais peut-être bamboubiner
 
 STRINGS.NAMES.BAMBOOTREE = "Carré de bambous"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOOTREE = {
-	GENERIC = "Ça a l'air assez costaud.",
-	BURNING = "Bye bye, bambou.",
-	BURNT = "Je trouve que j'aurais pu éviter ça.",
-	CHOPPED = "Prends ça, nature !"
+    GENERIC = "Ça a l'air assez costaud.",
+    BURNING = "Bye bye, bambou.",
+    BURNT = "Je trouve que j'aurais pu éviter ça.",
+    CHOPPED = "Prends ça, nature !"
 }
 
 STRINGS.NAMES.DUG_BAMBOOTREE = "Racine de bambou"
@@ -358,32 +358,31 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "Il a l'air sérieux"
 STRINGS.NAMES.BEAVER_HEAD = "Tête de castor"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVER_HEAD = "Quelqu'un devrait prévenir sa famille."
 
-STRINGS.NAMES.BEAVERTORCH = "Torche de castor"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Ça a l'air confortable.."
+
 
 STRINGS.NAMES.BEAVERSKIN = "Peau de castor"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERSKIN = "La peau d'une créature castor"
 
 STRINGS.WILDBEAVER_NAMES = {
-	"Castor sauvage",
+    "Castor sauvage",
 }
 
 STRINGS.NAMES.BEAVER_KING = "Roi Castor"
 
 STRINGS.WILDBEAVER_TALK_FIGHT = {
-	"JE VAIS TE MORDRE",
-	"ALLEZ-VOUS-EN!",
-	"JE SUIS REVENU POUR ME BATTRE!",
+    "JE VAIS TE MORDRE",
+    "ALLEZ-VOUS-EN!",
+    "JE SUIS REVENU POUR ME BATTRE!",
 }
 STRINGS.WILDBEAVER_TALK_FOLLOW = {
-	"TU ME COMPRENDS",
-	"CONSTRUISONS UN BARRAGE",
-	"NOUS AVONS BESOIN DE PLUS DE BOIS",
+    "TU ME COMPRENDS",
+    "CONSTRUISONS UN BARRAGE",
+    "NOUS AVONS BESOIN DE PLUS DE BOIS",
 }
 STRINGS.WILDBEAVER_TALK_GOHOME = {
-	"JE FINIRAI LE BARRAGE DEMAIN",
-	"HEURE DE DORMIR",
-	"À PLUS TARD",
+    "JE FINIRAI LE BARRAGE DEMAIN",
+    "HEURE DE DORMIR",
+    "À PLUS TARD",
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER = "QUEL EST LE NOM DE CETTE ...?!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER_HOUSE = "OÙ VIT LE CASTOR ?."
@@ -492,10 +491,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONUT_COOKED = "Je n'ai plus besoin que d'
 
 STRINGS.NAMES.PALMTREE = "Palmier"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMTREE = {
-	GENERIC = "Comme c'est tropical.",
-	BURNING = "Que de bouffe gaspillée.",
-	BURNT = "Je trouve que j'aurais pu éviter ça.",
-	CHOPPED = "Prends ça, nature !"
+    GENERIC = "Comme c'est tropical.",
+    BURNING = "Que de bouffe gaspillée.",
+    BURNT = "Je trouve que j'aurais pu éviter ça.",
+    CHOPPED = "Prends ça, nature !"
 }
 
 STRINGS.NAMES.PALMLEAF = "Feuille de palmier"
@@ -569,8 +568,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.VINE = "Ça pourrait me servir de ficelle."
 
 STRINGS.NAMES.BUSH_VINE = "Buisson de Sarments"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUSH_VINE = {
-	GENERIC = "C'est de la vigne !!",
-	BURNING = "Mince...",
+    GENERIC = "C'est de la vigne !!",
+    BURNING = "Mince...",
 }
 
 STRINGS.NAMES.DUG_BUSH_VINE = "Racine de buisson de vigne"
@@ -588,7 +587,6 @@ STRINGS.NAMES.OBSIDIANMACHETE = "Machette d'obsidienne"
 STRINGS.RECIPE_DESC.OBSIDIANMACHETE = "Taille et brûle !"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANMACHETE = "La machette qui déchiquette."
 
-STRINGS.PULAFORA = "Hm...trop peu profond"
 STRINGS.SEMBARCO = "Où est mon bateau ? Je vais mourir ici!"
 
 STRINGS.NAMES.CORMORANT = "Cormoran"
@@ -826,25 +824,25 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIRATEGHOST =
 STRINGS.NAMES.WRECKOF = "Épave du %s"
 STRINGS.SHIPNAMES =
 { "Nautilus",
-	"Mackay-Bennett",
-	"Mary Celeste",
-	"Beagle",
-	"Santa Maria",
-	"Bluenose",
-	"Mauretania",
-	"Endeavour",
-	"Edmund Fitzgerald",
-	"Pequod",
-	"Mississinewa",
-	"African Queen",
-	"Mont-Blanc",
-	"Caine",
-	"Pharaoh",
-	"Minnow",
-	"Syracusia",
-	"Baron of Renfrew",
-	"Ariel",
-	"Hispaniola", }
+    "Mackay-Bennett",
+    "Mary Celeste",
+    "Beagle",
+    "Santa Maria",
+    "Bluenose",
+    "Mauretania",
+    "Endeavour",
+    "Edmund Fitzgerald",
+    "Pequod",
+    "Mississinewa",
+    "African Queen",
+    "Mont-Blanc",
+    "Caine",
+    "Pharaoh",
+    "Minnow",
+    "Syracusia",
+    "Baron of Renfrew",
+    "Ariel",
+    "Hispaniola", }
 
 STRINGS.NAMES.MUSSEL_STICK = "Bouchot"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSSEL_STICK = "C'est pour mettre les moules au pieu."
@@ -1012,8 +1010,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_GILLS = "J'aimerais avoir des branchie
 
 STRINGS.RECIPE_DESC.DOUBLE_UMBRELLAHAT = "La fonction l'emporte sur l'aspect."
 
-STRINGS.NAMES.GRASSNOVA = "Herbe"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASSNOVA = "C'est une touffe d'herbe."
 
 STRINGS.RECIPE_DESC.DOUBLE_UMBRELLAHAT = "La fonction l'emporte sur l'aspect."
 
@@ -1291,7 +1287,6 @@ STRINGS.ACTIONS.PEER = "Scruter"
 ----------------------------- RAWLING -----------------------------
 STRINGS.NAMES.RAWLING = "Basket-boule"
 STRINGS.CHARACTERS.WENDY.DESCRIBE.RAWLING = "Ça me parle."
-STRINGS.RAWLINGon_hit_water = "Plouf !"
 STRINGS.RAWLINGon_dropped = "Dribble-moi !"
 STRINGS.RAWLINGon_extinguish = "Sauvé !"
 STRINGS.RAWLINGin_container = "C'est pas un panier de pêches..."
@@ -1299,47 +1294,39 @@ STRINGS.RAWLINGon_ground = "J'aurais bien besoin d'un petit coup de boost."
 STRINGS.RAWLINGin_inventory = "On a qu'à découper le fond du panier."
 STRINGS.RAWLINGother_owner = "Aïe, aïe, aïe!"
 STRINGS.RAWLINGon_ignite = {
-	"Je suis en feu !",
-	"Ow ow ow ow ow!",
+    "Je suis en feu !",
+    "Ow ow ow ow ow!",
 }
 STRINGS.RAWLINGon_pickedup = {
-	"C'est toi, James ?",
-	"Tu es MON MVP !",
+    "C'est toi, James ?",
+    "Tu es MON MVP !",
 }
 STRINGS.RAWLINGon_thrown = {
-	"Au panier de pêches !",
-	"Tire !",
-	"On rate 100 % des tirs qu'on ne prend pas !",
-	"I believe I can flyyyyy !",
+    "Au panier de pêches !",
+    "Tire !",
+    "On rate 100 % des tirs qu'on ne prend pas !",
+    "I believe I can flyyyyy !",
 }
 
-STRINGS.RAWLINGon_bounced =
-{
-	"Aïe, aïe, aïe!",
-	"Rien que des pêches !",
-	"Splash !",
-	"Refusé !",
-}
 STRINGS.RAWLINGequipped = {
-	"Tu peux me porter. Sur quelques pas.",
-	"C'est un genre de blague canadienne ?",
-	"N'ayez pas peur de me jeter.",
+    "Tu peux me porter. Sur quelques pas.",
+    "C'est un genre de blague canadienne ?",
+    "N'ayez pas peur de me jeter.",
 }
 STRINGS.BORE_TALK_FOLLOWWILSON = { "TOI POUVOIR RESTER", "AIMER COPAIN", "TOI BON", "MOI SUIVRE !" }
 STRINGS.BORE_TALK_FIND_LIGHT = { "MOI PEUR", "PEUR DU NOIR", "SOLEIL PARTI ?", "RESTER AU FEU", "FEU EST BON" }
 STRINGS.BORE_TALK_LOOKATWILSON = { "T'ES QUI ?", "TOI PAS COCHON.", "VILAIN HOMME SINGE", "TOI AVOIR VIANDE ?" }
 STRINGS.BORE_TALK_RUNAWAY_WILSON = { "TROP PRÈS !", "APPROCHE PAS !", "TOI RECULER!", "MON ESPACE." }
 STRINGS.BORE_TALK_FIGHT = { "TUER ! TUER !", "BOUSSILLER !", "GROAAAR !", "MOI TE CHOPER !", "DÉGAGE !",
-	"MOI CHASSER TOI !", }
+    "MOI CHASSER TOI !", }
 STRINGS.BORE_TALK_RUN_FROM_SPIDER = { "ARAIGNÉE PAS BIEN !", "PAS AIMER ARAIGNÉE !", "PEUR ARAIGNÉE !" }
 STRINGS.BORE_TALK_HELP_CHOP_WOOD = { "TUER ARBRE !", "COGNER SALE ARBRE !", "TAPER ARBRE !" }
 STRINGS.BORE_TALK_HELP_HACK = { "J'AIDE À CHOPER LES BUISSONS !", "JE COGNE LES BUISSONS !",
-	"ON COGNE LES PLANTES MAINTENANT ?" }
+    "ON COGNE LES PLANTES MAINTENANT ?" }
 STRINGS.BORE_TALK_ATTEMPT_TRADE = { "C'EST QUOI ?", "FAUT QU'C'EST BON.", "PAS DE TEMPS À PERDRE." }
 STRINGS.BORE_TALK_PANIC = { "NOOON !", "TROP NOIR ! TROP NOIR !", "AAAAAAAAH !" }
 STRINGS.BORE_TALK_PANICFIRE = { "CHAUD CHAUD CHAUD !", "OUHHH !", "ÇA BRÛLE !" }
 STRINGS.BORE_TALK_FIND_MEAT = { "MOI FAIM !", "MIAM !", "MOI MANGER !", "HEURE MANGER !" }
-STRINGS.BORE_TALK_EAT_MEAT = { "SLURP SLURP SLURP !", "MIAM !" }
 STRINGS.BORE_TALK_GO_HOME = { "RENTRER MAISON !", "MAISON ! MAISON !" }
 ----------------------------- MAPWRAPPER -----------------------------
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_LOSECONTROL = "On dirait que mon avenir va s'embrumer."

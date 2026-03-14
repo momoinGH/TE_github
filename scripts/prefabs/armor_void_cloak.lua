@@ -1,5 +1,3 @@
-local DEBUG_MODE = BRANCH == "dev"
-
 local assets =
 {
     Asset("ANIM", "anim/armor_void_cloak.zip"),
@@ -71,10 +69,6 @@ local function onunequip(inst, owner)
     --    inst.SoundEmitter:KillSound("vortex")
 end
 
-local function nofuel(inst)
-
-end
-
 local function ontakefuel(inst)
     if inst.components.armor:GetPercent() > inst.components.fueled:GetPercent() then -- Runar: 同步套件修的耐久
         inst.components.fueled:SetPercent(1)
@@ -123,14 +117,11 @@ local function _MakeForgeRepairable(inst, material, _onbroken, onrepaired)
         end
     end
     if inst.components.armor ~= nil then
-        assert(not (DEBUG_MODE and inst.components.armor.onfinished ~= nil))
         inst.components.armor:SetKeepOnFinished(true)
         inst.components.armor:SetOnFinished(__onbroken)
     elseif inst.components.finiteuses ~= nil then
-        assert(not (DEBUG_MODE and inst.components.finiteuses.onfinished ~= nil))
         inst.components.finiteuses:SetOnFinished(__onbroken)
     elseif inst.components.fueled ~= nil then
-        assert(not (DEBUG_MODE and inst.components.fueled.depleted ~= nil))
         inst.components.fueled:SetDepletedFn(__onbroken)
     end
     inst:AddComponent("forgerepairable")

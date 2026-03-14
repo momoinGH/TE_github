@@ -1032,11 +1032,11 @@ local function pig_ruins_sow()
 end
 
 return Prefab("pig_ruins_head", pig_ruins_head, ruins_assets, prefabs),
-	Prefab("rocks/pig_ruins_pig", pig_ruins_pig, ruins_assets, prefabs),
-	Prefab("rocks/pig_ruins_ant", pig_ruins_ant, ruins_assets, prefabs),
-	Prefab("rocks/pig_ruins_idol", pig_ruins_idol, ruins_assets, prefabs),
-	Prefab("rocks/pig_ruins_plaque", pig_ruins_plaque, ruins_assets, prefabs),
-	Prefab("rocks/pig_ruins_artichoke", pig_ruins_artichoke, ruins_assets, prefabs),
-	Prefab("rocks/pig_ruins_truffle", pig_ruins_truffle, ruins_assets, prefabs),
-	Prefab("rocks/pig_ruins_sow", pig_ruins_sow, ruins_assets, prefabs),
-	Prefab("rocks/antqueen_throne", antqueen_throne, antqueen_throne_assets, prefabs)
+	Prefab("pig_ruins_pig", pig_ruins_pig, ruins_assets, prefabs),
+	Prefab("pig_ruins_ant", pig_ruins_ant, ruins_assets, prefabs),
+	Prefab("pig_ruins_idol", pig_ruins_idol, ruins_assets, prefabs),
+	Prefab("pig_ruins_plaque", pig_ruins_plaque, ruins_assets, prefabs),
+	Prefab("pig_ruins_artichoke", pig_ruins_artichoke, ruins_assets, prefabs),
+	Prefab("pig_ruins_truffle", pig_ruins_truffle, ruins_assets, prefabs),
+	Prefab("pig_ruins_sow", pig_ruins_sow, ruins_assets, prefabs),
+	Prefab("antqueen_throne", antqueen_throne, antqueen_throne_assets, prefabs)

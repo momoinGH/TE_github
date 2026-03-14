@@ -341,5 +341,5 @@ end
 
 -- you can find dug_elephantcactus in plantables.lua
 return Prefab("elephantcactus", fn, assets, prefabs),
-	Prefab("marsh/objects/elephantcactus_active", activefn, assets, prefabs),
-	Prefab("marsh/objects/elephantcactus_stump", stumpfn, assets, prefabs)
+	Prefab("elephantcactus_active", activefn, assets, prefabs),
+	Prefab("elephantcactus_stump", stumpfn, assets, prefabs)

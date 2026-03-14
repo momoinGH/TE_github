@@ -1,8 +1,8 @@
 require "tuning"
 local PLANT_DEFS = require("prefabs/farm_plant_defs").PLANT_DEFS
 local function MakeVegStats(seedweight, hunger, health, perish_time, sanity, cooked_hunger, cooked_health,
-                            cooked_perish_time, cooked_sanity, float_settings, cooked_float_settings, dryable,
-                            secondary_foodtype, halloweenmoonmutable_settings, lure_data)
+    cooked_perish_time, cooked_sanity, float_settings, cooked_float_settings,
+    secondary_foodtype, halloweenmoonmutable_settings, lure_data)
     return {
         health = health,
         hunger = hunger,
@@ -15,7 +15,6 @@ local function MakeVegStats(seedweight, hunger, health, perish_time, sanity, coo
         cooked_sanity = cooked_sanity,
         float_settings = float_settings,
         cooked_float_settings = cooked_float_settings,
-        dryable = dryable,
         halloweenmoonmutable_settings = halloweenmoonmutable_settings,
         secondary_foodtype = secondary_foodtype,
         lure_data = lure_data,
@@ -52,7 +51,6 @@ TRO_VEGGIES =
     blueberries = MakeVegStats(0, TUNING.CALORIES_TINY, 0, TUNING.PERISH_FAST, 0,
         TUNING.CALORIES_SMALL, TUNING.HEALING_TINY, TUNING.PERISH_SUPERFAST, 0,
         { "med", nil, 0.7 }, { "med", nil, 0.65 },
-        nil,
         FOODTYPE.BERRY,
         nil,
         {
@@ -67,7 +65,6 @@ TRO_VEGGIES =
 
     wheat = MakeVegStats(COMMON, TUNING.CALORIES_TINY, -TUNING.HEALING_SMALL, TUNING.PERISH_SLOW, 0,
         TUNING.CALORIES_SMALL, TUNING.HEALING_SMALL, TUNING.PERISH_MED, TUNING.SANITY_TINY),
-
 }
 
 local SEEDLESS =
@@ -272,16 +269,9 @@ local function MakeVeggie(name, has_seeds)
         name .. "_cooked",
         "spoiled_food",
     }
-    local dryable = TRO_VEGGIES[name].dryable
 
     if has_seeds then
         table.insert(prefabs, name .. "_seeds")
-    end
-
-    local assets_dried = {}
-    if dryable ~= nil then
-        table.insert(prefabs, name .. "_dried")
-        table.insert(assets_dried, Asset("ANIM", "anim/" .. dryable.build .. ".zip"))
     end
 
     local seeds_prefabs = has_seeds and { "farm_plant_" .. name } or nil
@@ -447,11 +437,6 @@ local function MakeVeggie(name, has_seeds)
 
         --cookable (from cookable component) added to pristine state for optimization
         inst:AddTag("cookable")
-
-        if dryable ~= nil then
-            --dryable (from dryable component) added to pristine state for optimization
-            inst:AddTag("dryable")
-        end
 
         if not SEEDLESS[name] then
             --weighable (from weighable component) added to pristine state for optimization
@@ -857,9 +842,6 @@ local function MakeVeggie(name, has_seeds)
         table.insert(exported_prefabs, Prefab(name .. "_oversized", fn_oversized, assets_oversized))
         table.insert(exported_prefabs, Prefab(name .. "_oversized_waxed", fn_oversized_waxed, assets_oversized))
         table.insert(exported_prefabs, Prefab(name .. "_oversized_rotten", fn_oversized_rotten, assets_oversized))
-    end
-    if dryable ~= nil then
-        table.insert(exported_prefabs, Prefab(name .. "_dried", fn_dried, assets_dried))
     end
 
     table.insert(exported_prefabs, Prefab(name, fn, assets, prefabs))

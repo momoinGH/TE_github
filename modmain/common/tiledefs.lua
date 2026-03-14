@@ -110,7 +110,6 @@ local tro_tiledefs = {
         },
     },
 
-
     OCEAN_MEDIUM = {
         tile_range       = TileRanges.TRO_OCEAN,
         tile_data        = {

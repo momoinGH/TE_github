@@ -1,7 +1,8 @@
 -- 检测英文不存在但是其他语种存在的台词，判断是否需要补充，没有必要可以在ignore_print_strings中添加前缀不再提醒
 -- 可以忽视的台词前缀，这种不写也不会导致游戏崩溃
 local ignore_print_strings = {
-    "STRINGS.CHARACTERS.GENERIC.DESCRIBE"
+    "STRINGS.CHARACTERS.GENERIC.DESCRIBE",
+    "STRINGS.CHARACTERS."
 }
 
 print("开始比对英文和其他语言台词：")
@@ -28,7 +29,7 @@ end
 local old_strings = STRINGS
 GLOBAL.STRINGS = deepcopy(old_strings)
 
-for _, m in ipairs(pro_modules) do
+for _, m in pairs(pro_modules) do
     for _, language in ipairs({
         "pt",
         "zh",
@@ -45,7 +46,7 @@ end
 local other_language_strings = STRINGS
 GLOBAL.STRINGS = deepcopy(old_strings)
 
-for _, m in ipairs(pro_modules) do
+for _, m in pairs(pro_modules) do
     prosafemodimport("modmain/" .. m .. "/languages/strings_en", false)
 end
 

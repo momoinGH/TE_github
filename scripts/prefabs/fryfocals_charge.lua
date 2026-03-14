@@ -1,7 +1,7 @@
-local assets=
+local assets =
 {
-	Asset("ANIM", "anim/bishop_projectile_yellow.zip"),
-	Asset("SOUND", "sound/chess.fsb"),
+    Asset("ANIM", "anim/bishop_projectile_yellow.zip"),
+    Asset("SOUND", "sound/chess.fsb"),
 }
 
 local function OnHit(inst, owner, target)
@@ -9,15 +9,15 @@ local function OnHit(inst, owner, target)
     inst.AnimState:PlayAnimation("impact")
     inst.Physics:Stop()
     inst.persists = false
-	inst:ListenForEvent("animover", inst.Remove)
-	inst:ListenForEvent("entitysleep", inst.Remove)
+    inst:ListenForEvent("animover", inst.Remove)
+    inst:ListenForEvent("entitysleep", inst.Remove)
 end
 
 local function fn()
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     inst.Transform:SetFourFaced()
@@ -35,7 +35,7 @@ local function fn()
 
     inst.entity:SetPristine()
 
-	if not TheWorld.ismastersim then
+    if not TheWorld.ismastersim then
         return inst
     end
 
@@ -45,9 +45,9 @@ local function fn()
     inst.components.projectile:SetHitDist(2)
     inst.components.projectile:SetOnHitFn(OnHit)
     inst.components.projectile:SetOnMissFn(OnHit)
-    inst.components.projectile:SetLaunchOffset({x=1,y=1,z=0})
+    inst.components.projectile:SetLaunchOffset({ x = 1, y = 1, z = 0 })
 
     return inst
 end
 
-return Prefab( "fryfocals_charge", fn, assets)
+return Prefab("fryfocals_charge", fn, assets)

@@ -122,9 +122,6 @@ local function fn()
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({ "log", "poop", "log", "log" })
 
-
-
-
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(4)
@@ -142,27 +139,6 @@ local function fn()
     inst.components.hauntable:SetOnHauntFn(OnHaunt)
 
     --MakeSnowCovered(inst)
-
-    return inst
-end
-
-local function pigtorch_fuel()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddNetwork()
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("fuel")
-    inst.components.fuel.fuelvalue = TUNING.PIGTORCH_FUEL_MAX
-    inst.components.fuel.fueltype = FUELTYPE.PIGTORCH
-    inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem:SetOnDroppedFn(inst.Remove)
 
     return inst
 end

@@ -1,0 +1,2 @@
+STRINGS.NAMES.BEAVERTORCH = "Torche de castor"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Ça a l'air confortable.."

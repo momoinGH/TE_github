@@ -281,10 +281,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOO = "Talán ezzel el tudok buszozni inn
 
 STRINGS.NAMES.BAMBOOTREE = "Bambusz"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOOTREE = {
-	GENERIC = "Elég erősnek néz ki.",
-	BURNING = "Viszlát bmbusz.",
-	BURNT = "Úgy érzem hogy ezt megelőzhettem volna.",
-	CHOPPED = "Ezt neked természet!"
+    GENERIC = "Elég erősnek néz ki.",
+    BURNING = "Viszlát bmbusz.",
+    BURNT = "Úgy érzem hogy ezt megelőzhettem volna.",
+    CHOPPED = "Ezt neked természet!"
 }
 
 STRINGS.NAMES.DUG_BAMBOOTREE = "Bambusz Gyökér"
@@ -353,32 +353,31 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "Komolynak néz ki."
 STRINGS.NAMES.BEAVER_HEAD = "Hódfej"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVER_HEAD = "Valakinek el kéne mondania a családjának."
 
-STRINGS.NAMES.BEAVERTORCH = "Hód Fáklya"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Lakályosan néz ki."
+
 
 STRINGS.NAMES.BEAVERSKIN = "Hód Bőr"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERSKIN = "Egy hódlény bőre"
 
 STRINGS.WILDBEAVER_NAMES = {
-	"Castor",
+    "Castor",
 }
 
 STRINGS.NAMES.BEAVER_KING = "Rei Castor"
 
 STRINGS.WILDBEAVER_TALK_FIGHT = {
-	"VOU TE MORDER!",
-	"VA EMBORA!",
-	"VOLTEI PARA LUTAR!",
+    "VOU TE MORDER!",
+    "VA EMBORA!",
+    "VOLTEI PARA LUTAR!",
 }
 STRINGS.WILDBEAVER_TALK_FOLLOW = {
-	"VOCÊ ME ENTENDE",
-	"VAMOS CONSTRUIR UMA BARRAGEM",
-	"NÓS PRECISAMOS DE MAIS MADEIRA",
+    "VOCÊ ME ENTENDE",
+    "VAMOS CONSTRUIR UMA BARRAGEM",
+    "NÓS PRECISAMOS DE MAIS MADEIRA",
 }
 STRINGS.WILDBEAVER_TALK_GOHOME = {
-	"VOU TERMINAR A BARRAGEM AMANHÃ",
-	"HORA DE DORMIR",
-	"VEJO VOCÊ MAIS TARDE",
+    "VOU TERMINAR A BARRAGEM AMANHÃ",
+    "HORA DE DORMIR",
+    "VEJO VOCÊ MAIS TARDE",
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER = "Qual o nome disso...?!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER_HOUSE = "Onde o Castor mora."
@@ -572,7 +571,6 @@ STRINGS.NAMES.OBSIDIANMACHETE = "Obszidián Machete"
 STRINGS.RECIPE_DESC.OBSIDIANMACHETE = "Vágj & ég!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANMACHETE = "Meleg az érintése."
 
-STRINGS.PULAFORA = "Hmm...túl sekély."
 STRINGS.SEMBARCO = "Hol vannak a halyóm? Én meghalál itt!"
 
 STRINGS.NAMES.CORMORANT = "Komorán"
@@ -809,25 +807,25 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIRATEGHOST = "Egy borzasztó sors jutott r�
 STRINGS.NAMES.WRECKOF = "A % roncsa"
 STRINGS.SHIPNAMES =
 { "Nautilus",
-	"Mackay-Bennett",
-	"Mary Celeste",
-	"Beagle",
-	"Santa Maria",
-	"Bluenose",
-	"Mauretania",
-	"Endeavour",
-	"Edmund Fitzgerald",
-	"Pequod",
-	"Mississinewa",
-	"African Queen",
-	"Mont-Blanc",
-	"Caine",
-	"Pharaoh",
-	"Minnow",
-	"Syracusia",
-	"Baron of Renfrew",
-	"Ariel",
-	"Hispaniola", }
+    "Mackay-Bennett",
+    "Mary Celeste",
+    "Beagle",
+    "Santa Maria",
+    "Bluenose",
+    "Mauretania",
+    "Endeavour",
+    "Edmund Fitzgerald",
+    "Pequod",
+    "Mississinewa",
+    "African Queen",
+    "Mont-Blanc",
+    "Caine",
+    "Pharaoh",
+    "Minnow",
+    "Syracusia",
+    "Baron of Renfrew",
+    "Ariel",
+    "Hispaniola", }
 
 STRINGS.NAMES.MUSSEL_STICK = "Kagylóbot"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSSEL_STICK = "Hozzá fogom ragasztani azokhoz a kagylókhoz."
@@ -996,8 +994,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_GILLS = "Bárcsak lenne kopoltyúm."
 
 STRINGS.RECIPE_DESC.DOUBLE_UMBRELLAHAT = "A funkció egyértelműen a kinézet elött van."
 
-STRINGS.NAMES.GRASSNOVA = "Fű"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASSNOVA = "Ez egy fűcsomó."
 
 STRINGS.RECIPE_DESC.DOUBLE_UMBRELLAHAT = "Cápa Ernyő"
 
@@ -1239,7 +1235,6 @@ STRINGS.ACTIONS.LANTERNON = "Bekapcsol"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Wilson labdája"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "Wilson labdája"
-STRINGS.RAWLINGon_hit_water = "Shhhh!"
 STRINGS.RAWLINGon_dropped = "Dörgölj engem!"
 STRINGS.RAWLINGon_extinguish = "Mentve!"
 STRINGS.RAWLINGin_container = "Ez egy barackos kosár..."
@@ -1247,31 +1242,24 @@ STRINGS.RAWLINGon_ground = "Használhatok egy kicsi'vegyél felt'."
 STRINGS.RAWLINGin_inventory = "Vágjuk le az alját a kosárnak."
 STRINGS.RAWLINGother_owner = "Áucs!"
 STRINGS.RAWLINGon_ignite = {
-	"Lángolok!",
-	"Áucs,áucs,áucs,áucs,áucs!",
+    "Lángolok!",
+    "Áucs,áucs,áucs,áucs,áucs!",
 }
 STRINGS.RAWLINGon_pickedup = {
-	"Te vagy az James?",
-	"Te vagy a legjobbam!",
+    "Te vagy az James?",
+    "Te vagy a legjobbam!",
 }
 STRINGS.RAWLINGon_thrown = {
-	"A barackos kosárba!",
-	"Tűz!",
-	"Hiányzik a képek 100%-át amiket nem te csináltál!",
-	"Elhiszem,hogy tudok repülni!",
+    "A barackos kosárba!",
+    "Tűz!",
+    "Hiányzik a képek 100%-át amiket nem te csináltál!",
+    "Elhiszem,hogy tudok repülni!",
 }
 
-STRINGS.RAWLINGon_bounced =
-{
-	"Áucs!",
-	"Semmi,de barackok!",
-	"Fröccs!",
-	"Elutasítva!",
-}
 STRINGS.RAWLINGequipped = {
-	"El tudsz cipelni,néhány lépésig.",
-	"Ez valami féle Kanadai vicc??",
-	"Nyugodtan dobálhatsz.",
+    "El tudsz cipelni,néhány lépésig.",
+    "Ez valami féle Kanadai vicc??",
+    "Nyugodtan dobálhatsz.",
 }
 STRINGS.BORE_TALK_FOLLOWWILSON = { "YOU OK BY ME", "I LOVE FRIEND", "YOU IS GOOD", "I FOLLOW!" }
 STRINGS.BORE_TALK_FIND_LIGHT = { "SCARY", "NO LIKE DARK", "WHERE IS SUN?", "STAY NEAR FIRE", "FIRE IS GOOD" }
@@ -1285,7 +1273,6 @@ STRINGS.BORE_TALK_ATTEMPT_TRADE = { "WHAT YOU GOT?", "BETTER BE GOOD.", "NO WAST
 STRINGS.BORE_TALK_PANIC = { "NOOOOO!", "TOO DARK! TOO DARK!", "AAAAAAAAAH!!" }
 STRINGS.BORE_TALK_PANICFIRE = { "HOT HOT HOT!", "OWWWWW!", "IT BURNS!" }
 STRINGS.BORE_TALK_FIND_MEAT = { "ME HUNGRY!", "YUM!", "I EAT FOOD!", "TIME FOR FOOD!" }
-STRINGS.BORE_TALK_EAT_MEAT = { "NOM NOM NOM", "YUM!" }
 STRINGS.BORE_TALK_GO_HOME = { "HOME TIME!", "HOME! HOME!" }
 
 STRINGS.NAMES.WALL_LIMESTONE_ITEM = "Limestone Wall"

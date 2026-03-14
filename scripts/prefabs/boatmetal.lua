@@ -471,125 +471,6 @@ local function fn()
     return inst
 end
 
-local function build_boat_collision_mesh(radius, height)
-    local segment_count = 20
-    local segment_span = math.pi * 2 / segment_count
-
-    local triangles = {}
-    local y0 = 0
-    local y1 = height
-
-    for segement_idx = 0, segment_count do
-        local angle = segement_idx * segment_span
-        local angle0 = angle - segment_span / 2
-        local angle1 = angle + segment_span / 2
-
-        local x0 = math.cos(angle0) * radius
-        local z0 = math.sin(angle0) * radius
-
-        local x1 = math.cos(angle1) * radius
-        local z1 = math.sin(angle1) * radius
-
-        table.insert(triangles, x0)
-        table.insert(triangles, y0)
-        table.insert(triangles, z0)
-
-        table.insert(triangles, x0)
-        table.insert(triangles, y1)
-        table.insert(triangles, z0)
-
-        table.insert(triangles, x1)
-        table.insert(triangles, y0)
-        table.insert(triangles, z1)
-
-        table.insert(triangles, x1)
-        table.insert(triangles, y0)
-        table.insert(triangles, z1)
-
-        table.insert(triangles, x0)
-        table.insert(triangles, y1)
-        table.insert(triangles, z0)
-
-        table.insert(triangles, x1)
-        table.insert(triangles, y1)
-        table.insert(triangles, z1)
-    end
-
-    return triangles
-end
-
-local PLAYER_COLLISION_MESH = build_boat_collision_mesh(4.1, 3)
-local ITEM_COLLISION_MESH = build_boat_collision_mesh(4.2, 3)
-
-local function boat_player_collision_fn()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-
-    --[[Non-networked entity]]
-    inst:AddTag("CLASSIFIED")
-
-    local phys = inst.entity:AddPhysics()
-    phys:SetMass(0)
-    phys:SetFriction(0)
-    phys:SetDamping(5)
-    phys:SetCollisionGroup(COLLISION.BOAT_LIMITS)
-    phys:ClearCollisionMask()
-    phys:CollidesWith(COLLISION.CHARACTERS)
-    phys:CollidesWith(COLLISION.WORLD)
-    phys:SetTriangleMesh(PLAYER_COLLISION_MESH)
-
-    inst:AddTag("NOBLOCK")
-    inst:AddTag("NOCLICK")
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.persists = false
-
-    return inst
-end
-
-local function boat_item_collision_fn()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-
-    --[[Non-networked entity]]
-    inst:AddTag("CLASSIFIED")
-
-    local phys = inst.entity:AddPhysics()
-    phys:SetMass(1000)
-    phys:SetFriction(0)
-    phys:SetDamping(5)
-    phys:SetCollisionGroup(COLLISION.BOAT_LIMITS)
-    phys:ClearCollisionMask()
-    phys:CollidesWith(COLLISION.ITEMS)
-    phys:CollidesWith(COLLISION.FLYERS)
-    phys:CollidesWith(COLLISION.WORLD)
-    phys:SetTriangleMesh(ITEM_COLLISION_MESH)
-    --Boats currently need to not go to sleep because
-    --constraints will cause a crash if either the target object or the source object is removed from the physics world
-    --while the above is still true, the constraint is now properly removed before despawning the object, and can be safely ignored for this object, kept for future copy/pasting.
-    phys:SetDontRemoveOnSleep(true)
-
-    inst:AddTag("NOBLOCK")
-    inst:AddTag("ignorewalkableplatforms")
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.persists = false
-
-    return inst
-end
-
 local function ondeploy(inst, pt, deployer)
     local boat = SpawnPrefab("boatmetal")
     if boat ~= nil then
@@ -636,20 +517,12 @@ local function item_fn()
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-    --inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.NONE)
 
-    --inst:AddComponent("fuel")
-    --inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
-
-    --    MakeLargeBurnable(inst)
-    --    MakeLargePropagator(inst)
     MakeHauntableLaunch(inst)
 
     return inst
 end
 
 return Prefab("boatmetal", fn, assets, prefabs),
-    --       Prefab("boat_player_collision", boat_player_collision_fn),
-    --       Prefab("boat_item_collision", boat_item_collision_fn),
     Prefab("boatmetal_item", item_fn, item_assets, item_prefabs),
     MakePlacer("boatmetal_item_placer", "boat_01", "boat_iron", "idle_full", true)

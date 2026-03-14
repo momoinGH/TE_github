@@ -236,5 +236,5 @@ end
 
 
 return Prefab("flower_sea", single, assets, prefabs),
-	Prefab("underwater/objects/flower_sea_double", double, assets, prefabs),
-	Prefab("underwater/objects/flower_sea_triple", triple, assets, prefabs)
+	Prefab("flower_sea_double", double, assets, prefabs),
+	Prefab("flower_sea_triple", triple, assets, prefabs)

@@ -88,8 +88,4 @@ local function fn()
     return inst
 end
 
-local function GetVerb()
-    return "TOUCH"
-end
-
 return Prefab("bramble_bush", fn, assets, prefabs)

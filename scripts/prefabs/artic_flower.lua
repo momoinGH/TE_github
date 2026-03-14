@@ -34,13 +34,6 @@ local function onpickedfn(inst, picker)
     TheWorld:PushEvent("plantkilled", { doer = picker, pos = pos }) --this event is pushed in other places too
 end
 
-local function OnBurnt(inst)
-    --	if not inst.planted then
-    --		TheWorld:PushEvent("beginregrowth", inst)
-    --	end
-    DefaultBurntFn(inst)
-end
-
 local function fn()
     local inst = CreateEntity()
 
@@ -75,7 +68,6 @@ local function fn()
     inst.components.pickable.quickpick = true
 
     MakeSmallBurnable(inst)
-    inst.components.burnable:SetOnBurntFn(OnBurnt)
 
     MakeSmallPropagator(inst)
 

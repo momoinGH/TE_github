@@ -1,4 +1,8 @@
 PrefabFiles = {
+    "beds", --床
+    "boatmetal", --金属船
+    "bramble_bush", --荆棘
+    
     "pedestal_key",
     "adult_flytrap",
     "alloy",
@@ -239,4 +243,17 @@ PrefabFiles = {
     "weevole",
     "wreck",
     "zeb",
+    "poisonbalm", --解毒膏
 }
+
+if GetModConfigData("lilypad") then
+    table.insert(PrefabFiles, "bill_quill")
+    table.insert(PrefabFiles, "bill")
+    table.insert(PrefabFiles, "hippo_antler")
+    table.insert(PrefabFiles, "hippoherd")
+    table.insert(PrefabFiles, "hippoptamoose")
+    table.insert(PrefabFiles, "lillypad")
+    table.insert(PrefabFiles, "lotus_flower")
+    table.insert(PrefabFiles, "lotus")
+    table.insert(PrefabFiles, "reeds_water")
+end

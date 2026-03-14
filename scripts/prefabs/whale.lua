@@ -361,5 +361,5 @@ local function create_bluefinal(sim)
 end
 
 return Prefab("whale_blue", create_blue, assets, prefabs),
-	Prefab("forest/animals/whale_white", create_white, assets, prefabs),
-	Prefab("forest/animals/whale_bluefinal", create_bluefinal, assets, prefabs)
+	Prefab("whale_white", create_white, assets, prefabs),
+	Prefab("whale_bluefinal", create_bluefinal, assets, prefabs)

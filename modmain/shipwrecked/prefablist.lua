@@ -1,4 +1,19 @@
 PrefabFiles = {
+    "venomgland",           --毒腺
+    "snakeoil",             --蛇油
+    "bishopwater",          --浮船主教
+    "cave_entrance_vulcao", --火山
+    "cave_exit_vulcao",     --火山出口
+
+
+
+
+
+
+
+
+
+
     "shipwrecked_boat_placer2",
     "birds_sw",
     "axeobsidian",

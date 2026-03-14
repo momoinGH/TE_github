@@ -279,5 +279,5 @@ local function orangefn()
     return inst
 end
 
-return Prefab("forest/animals/piko", fn, assets, prefabs),
-       Prefab("forest/animals/piko_orange", orangefn, assets, prefabs)
+return Prefab("piko", fn, assets, prefabs),
+       Prefab("piko_orange", orangefn, assets, prefabs)
