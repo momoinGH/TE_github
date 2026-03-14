@@ -1,76 +1,76 @@
 local basic_assets =
 {
-	Asset("ANIM", "anim/cork_bat.zip"),
-	Asset("ANIM", "anim/swap_cork_bat.zip"),
+    Asset("ANIM", "anim/cork_bat.zip"),
+    Asset("ANIM", "anim/swap_cork_bat.zip"),
 }
 
 local CORK_BAT_DAMAGE = 35 * 1.5
 local CORK_BAT_USES = 20
 
 local function onfinished(inst)
-	inst:Remove()
+    inst:Remove()
 end
 
 local function onequip(inst, owner)
-	owner.AnimState:OverrideSymbol("swap_object", "swap_cork_bat", "swap_cork_bat")
-	owner.AnimState:Show("ARM_carry")
-	owner.AnimState:Hide("ARM_normal")
+    owner.AnimState:OverrideSymbol("swap_object", "swap_cork_bat", "swap_cork_bat")
+    owner.AnimState:Show("ARM_carry")
+    owner.AnimState:Hide("ARM_normal")
 end
 
 local function onunequip(inst, owner)
-	owner.AnimState:Hide("ARM_carry")
-	owner.AnimState:Show("ARM_normal")
+    owner.AnimState:Hide("ARM_carry")
+    owner.AnimState:Show("ARM_normal")
 end
 
 
 local function fn(Sim)
-	local inst = CreateEntity()
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddNetwork()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
 
-	MakeInventoryPhysics(inst)
-	MakeInventoryFloatable(inst, "med", 0.05, { 1.2, 0.75, 1.2 })
+    MakeInventoryPhysics(inst)
+    MakeInventoryFloatable(inst, "med", 0.05, { 1.2, 0.75, 1.2 })
 
-	inst.AnimState:SetBuild("cork_bat")
-	inst.AnimState:SetBank("cork_bat")
-	inst.AnimState:PlayAnimation("idle")
-	inst:AddTag("bat")
-	inst:AddTag("corkbat")
-	inst:AddTag("slowattack")
-	inst:AddTag("aquatic")
+    inst.AnimState:SetBuild("cork_bat")
+    inst.AnimState:SetBank("cork_bat")
+    inst.AnimState:PlayAnimation("idle")
+    inst:AddTag("bat")
+    inst:AddTag("corkbat")
+    inst:AddTag("slowattack")
+    inst:AddTag("aquatic")
 
-	inst.entity:SetPristine()
+    inst.entity:SetPristine()
 
-	if not TheWorld.ismastersim then
-		return inst
-	end
+    if not TheWorld.ismastersim then
+        return inst
+    end
 
-	inst.components.floater:SetBankSwapOnFloat(true, -11, { sym_build = "swap_cork_bat" })
+    inst.components.floater:SetBankSwapOnFloat(true, -11, { sym_build = "swap_cork_bat" })
 
-	inst:AddComponent("weapon")
-	inst.components.weapon:SetDamage(CORK_BAT_DAMAGE)
+    inst:AddComponent("weapon")
+    inst.components.weapon:SetDamage(CORK_BAT_DAMAGE)
 
-	inst:AddComponent("tradable")
+    inst:AddComponent("tradable")
 
-	-------
+    -------
 
-	inst:AddComponent("finiteuses")
-	inst.components.finiteuses:SetMaxUses(CORK_BAT_USES)
-	inst.components.finiteuses:SetUses(CORK_BAT_USES)
+    inst:AddComponent("finiteuses")
+    inst.components.finiteuses:SetMaxUses(CORK_BAT_USES)
+    inst.components.finiteuses:SetUses(CORK_BAT_USES)
 
-	inst.components.finiteuses:SetOnFinished(onfinished)
+    inst.components.finiteuses:SetOnFinished(onfinished)
 
-	inst:AddComponent("inspectable")
+    inst:AddComponent("inspectable")
 
-	inst:AddComponent("equippable")
-	inst.components.equippable:SetOnEquip(onequip)
-	inst.components.equippable:SetOnUnequip(onunequip)
+    inst:AddComponent("equippable")
+    inst.components.equippable:SetOnEquip(onequip)
+    inst.components.equippable:SetOnUnequip(onunequip)
 
-	inst:AddComponent("inventoryitem")
+    inst:AddComponent("inventoryitem")
 
 
-	return inst
+    return inst
 end
 
 

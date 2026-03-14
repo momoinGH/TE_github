@@ -211,7 +211,7 @@ AddRoom("seatarolake", {
         distributepercent = 0.5,
         distributeprefabs =
         {
-            seatarospawner = 1,
+            seataro_planted = 1,
         },
     }
 })

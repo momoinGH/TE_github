@@ -22,9 +22,9 @@ local function InitEnvelope()
     EnvelopeManager:AddColourEnvelope(
         COLOUR_ENVELOPE_NAME,
         {
-            { 0,   IntColour(50, 50, 50, 120) },
+            { 0, IntColour(50, 50, 50, 120) },
             { 0.9, IntColour(50, 50, 50, 150) },
-            { 1,   IntColour(50, 50, 50, 180) },
+            { 1, IntColour(50, 50, 50, 180) },
         }
     )
 

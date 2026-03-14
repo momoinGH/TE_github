@@ -1,57 +1,109 @@
-local assets =
-{
-    Asset("ANIM", "anim/cutnettle.zip"),
-    Asset("INV_IMAGE", "cutnettle"),
-}
+local assets = { Asset("ANIM", "anim/nettle.zip"), Asset("SOUND", "sound/common.fsb"), Asset("MINIMAP_IMAGE", "nettle") }
 
-local WRATH_SMALL = -8
+local VINE_REGROW_TIME = 480 * 3
 
-local function oneat(inst, eater)
-    if eater.components.temperature ~= nil and eater.components.temperature.hayfever then
-        eater.components.temperature.hayfever = -4000
+local prefabs = { "cutnettle" }
+
+local function onregenfn(inst)
+    inst.AnimState:PlayAnimation("grow")
+    inst.AnimState:PushAnimation("idle", true)
+end
+
+local function makeemptyfn(inst)
+    inst.AnimState:PlayExtendAnim("shake")
+    inst.AnimState:SetFilter("generic")
+    inst.AnimState:PlayAnimation("picked", true)
+end
+
+local function makebarrenfn(inst)
+    inst.AnimState:SetFilter("withered")
+    inst.AnimState:PlayAnimation("picked", true)
+end
+
+local function onpickedfn(inst)
+    inst.AnimState:PlayAnimation("picking")
+    inst.AnimState:PushAnimation("picked", false)
+end
+
+local function testForGrowth(inst)
+    local tile = TheWorld.Map:GetTileAtPoint(inst.Transform:GetWorldPosition())
+
+    if not TheWorld.state.iswinter and (tile == WORLD_TILES.DEEPRAINFOREST or tile == WORLD_TILES.RAINFOREST) then
+        inst.components.pickable:Regen()
+    else
+        inst.components.pickable:MakeBarren()
     end
 end
 
-local function fn(Sim)
+local function getstatus(inst) if not inst.components.pickable.canbepicked then return "EMPTY" end end
+
+local function ontransplantfn(inst)
+    inst.components.pickable:MakeBarren()
+end
+
+local function fn()
+    local function dig_up(inst, digger)
+        if inst.components.pickable and inst.components.pickable:CanBePicked() then
+            inst.components.lootdropper:SpawnLootPrefab("cutnettle")
+        end
+        local bush = inst.components.lootdropper:SpawnLootPrefab("dug_nettle")
+        -- print(inst.prefab)
+        inst:Remove()
+    end
+
     local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    MakeInventoryPhysics(inst)
+    local trans = inst.entity:AddTransform()
+    local anim = inst.entity:AddAnimState()
+    local sound = inst.entity:AddSoundEmitter()
+    local minimap = inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.AnimState:SetBank("cutnettle")
-    inst.AnimState:SetBuild("cutnettle")
+    inst.MiniMapEntity:SetIcon("nettle.png")
+    anim:SetBank("nettle")
+    anim:SetBuild("nettle")
 
-    inst.AnimState:PlayAnimation("idle")
+    anim:PlayAnimation("idle", true)
+    anim:SetTime(math.random() * 2)
 
-
-    inst:AddTag("cattoy")
-    MakeInventoryFloatable(inst)
+    inst:AddTag("gustable")
+    inst:AddTag("nettle_plant")
+    inst:AddTag("plant")
 
     inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
+    if not TheWorld.ismastersim then return inst end
 
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+    local pickable = inst:AddComponent("pickable")
+    pickable.picksound = "dontstarve/wilson/pickup_reeds"
 
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.VEGGIE
-    inst.components.edible:SetOnEatenFn(oneat)
+    pickable:SetUp("cutnettle", VINE_REGROW_TIME)
+    pickable.onregenfn = onregenfn
+    pickable.onpickedfn = onpickedfn
+    pickable.makeemptyfn = makeemptyfn
+    pickable.makebarrenfn = makebarrenfn
+    pickable.ontransplantfn = ontransplantfn
 
-    inst:AddComponent("tradable")
     inst:AddComponent("inspectable")
 
-    MakeSmallBurnable(inst, TUNING.SMALL_BURNTIME)
+    inst:AddComponent("lootdropper")
+    inst.components.inspectable.getstatus = getstatus
+
+    local workable = inst:AddComponent("workable")
+    workable:SetWorkAction(ACTIONS.DIG)
+    workable:SetOnFinishCallback(dig_up)
+    workable:SetWorkLeft(1)
+    --	    MakePickableBlowInWindGust(inst, TUNING.GRASS_WINDBLOWN_SPEED, TUNING.GRASS_WINDBLOWN_FALL_CHANCE)
+
+    ---------------------
+    MakeMediumBurnable(inst)
     MakeSmallPropagator(inst)
-    --inst.components.burnable:MakeDragonflyBait(3)
+    -- inst.components.burnable:MakeDragonflyBait(1)
+    MakeNoGrowInWinter(inst)
 
-    inst:AddComponent("inventoryitem")
-
+    inst:WatchWorldState("season", testForGrowth)
+    --		inst:ListenForEvent("seasonChange", function(it, data) testForGrowth(inst) end, TheWorld)
 
     return inst
 end
 
-return Prefab("cutnettle", fn, assets)
+return Prefab("nettle", fn, assets, prefabs)

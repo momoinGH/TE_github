@@ -27,10 +27,10 @@ local prefabs =
 
 SetSharedLootTable('hippopotamoose',
     {
-        { 'meat',         1.00 },
-        { 'meat',         1.00 },
-        { 'meat',         1.00 },
-        { 'meat',         1.00 },
+        { 'meat', 1.00 },
+        { 'meat', 1.00 },
+        { 'meat', 1.00 },
+        { 'meat', 1.00 },
         { 'hippo_antler', 1.00 },
     })
 

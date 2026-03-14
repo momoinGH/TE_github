@@ -3,6 +3,9 @@ local ALL_ASSETS = {}
 local language = string.lower(GetModConfigData("language"))
 WIKI_DATA = {}
 
+PrefabFiles = nil
+Assets = nil
+
 --- 导入对应模块的文件，不需要的文件可以不存在
 local function Modimport(dirc)
     prosafemodimport("modmain/" .. dirc .. "/tuning")               --定义的变量
@@ -31,9 +34,28 @@ local function Modimport(dirc)
     end
 
     if PrefabFiles and #PrefabFiles > 0 then
+        -- 检查PrefabFiles里有没有写重复
+        local prefabs_dirty = {}
+        for _, prefab in ipairs(PrefabFiles) do
+            if prefabs_dirty[prefab] then
+                ProErrorHandle(dirc .. "模块的PrefabFiles里预制件写重了，写重的是" .. prefab, false, false)
+            end
+            prefabs_dirty[prefab] = true
+        end
+
         ALL_PREFAB_FILES = ArrayUnion(ALL_PREFAB_FILES, PrefabFiles)
     end
     if Assets and #Assets > 0 then
+        -- 检查Assets里有没有写重复
+        local assets_dirty = {}
+        for _, asset in ipairs(Assets) do
+            local s = asset.type .. ":" .. asset.file
+            if assets_dirty[s] then
+                ProErrorHandle(dirc .. "模块的Assets里预制件写重了，写重的是" .. s, false, false)
+            end
+            assets_dirty[s] = true
+        end
+
         ConcatArrays(ALL_ASSETS, Assets)
     end
     PrefabFiles = {}

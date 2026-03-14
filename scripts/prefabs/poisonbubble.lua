@@ -1,4 +1,4 @@
-local assets = {Asset("ANIM", "anim/poison.zip")}
+local assets = { Asset("ANIM", "anim/poison.zip") }
 
 local function Removefx(inst)
     inst.AnimState:PushAnimation("level" .. inst.level .. "_pst", false)
@@ -38,7 +38,7 @@ local function MakeBubble(name, level, loop)
         return inst
     end
 
-    return Prefab( name, fn, assets)
+    return Prefab(name, fn, assets)
 end
 
 --[[

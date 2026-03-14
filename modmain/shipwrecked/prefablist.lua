@@ -54,7 +54,7 @@ PrefabFiles = {
     "chimineafire",
     "armor_seashell",
     "ox_horn",
-    "ox",
+    "ox", --水牛
     "oxherd",
     "knightboat",
     "knightboat_cannonshot",
@@ -202,12 +202,10 @@ PrefabFiles = {
     "tigereye",
     "packim",
     "packim_fishbone",
-    "poisonbubble",
     "tunacan",
-    "edgefog",
-    "wave_ripple",
+    "wave_ripple", --海浪
     "ashfx",
-    "firerain",
+    "firerain", --天降龙蛋
     "lavapool",
     "mermhouse_fisher",
     "fabric",
@@ -269,7 +267,7 @@ PrefabFiles = {
     "trinkets_sw",
     "earring",
     "boatraft",
-    "tigersharkpool",
+    "tigersharkpool", --鲨鱼池
     "tigersharktorch",
     "volcanostaff",
     "armor_snakeskin",

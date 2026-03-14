@@ -2,7 +2,7 @@ PrefabFiles =
 {
     "feather_chicken", --鸡毛
     "gorge_portal",    --苔藓大门
-
+    "chicken",         --鸡
 
 
 

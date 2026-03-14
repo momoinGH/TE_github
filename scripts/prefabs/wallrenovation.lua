@@ -1,4 +1,4 @@
-local function SpawnPiso2()
+local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -21,4 +21,4 @@ local function SpawnPiso2()
 end
 
 --原型机组件并不提供范围的变量，只能修改builder的方法查找半径，我不喜欢覆盖的做法
-return Prefab("wallrenovation", SpawnPiso2)
+return Prefab("wallrenovation", fn)

@@ -26,12 +26,12 @@ local prefabs =
 
 SetSharedLootTable('anchientrobot',
     {
-        { 'iron',  1.00 },
-        { 'iron',  1.00 },
-        { 'iron',  1.00 },
-        { 'iron',  0.33 },
-        { 'iron',  0.33 },
-        { 'iron',  0.33 },
+        { 'iron', 1.00 },
+        { 'iron', 1.00 },
+        { 'iron', 1.00 },
+        { 'iron', 0.33 },
+        { 'iron', 0.33 },
+        { 'iron', 0.33 },
         { 'gears', 1.00 },
         { 'gears', 0.33 },
     })

@@ -33,7 +33,6 @@ end
 
 local function MakeRelic(num)
     local name = "relic_" .. tostring(num)
-    local prefabname = "common/inventory/" .. name
 
     local assets =
     {
@@ -83,7 +82,7 @@ local function MakeRelic(num)
         return inst
     end
 
-    return Prefab(prefabname, fn, assets)
+    return Prefab(name, fn, assets)
 end
 
 local ret = {}

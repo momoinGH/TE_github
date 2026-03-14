@@ -5221,6 +5221,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOR_METALPLATE = "穿上这个会很安全
 STRINGS.NAMES.ANTMASKHAT                             = "蚁人面具"
 STRINGS.RECIPE_DESC.ANTMASKHAT                       = "一张只有蚂蚁喜欢的脸。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTMASKHAT       = "这里面还有些黏糊糊的黏液。"
+
 STRINGS.NAMES.ANTSUIT                                = "蚁人盔甲"
 STRINGS.RECIPE_DESC.ANTSUIT                          = "穿上这个壳，在蚁巢里走上一英里！"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTSUIT          = "硬但易碎。"

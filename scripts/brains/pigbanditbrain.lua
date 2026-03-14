@@ -48,7 +48,10 @@ local function GoHomeAction(inst)
     local position = FindRandomOffscreenPoint(inst)
 
     if not inst.components.homeseeker:HasHome() then
-        inst.components.homeseeker:SetHome(SpawnPrefab("pigbanditexit"))
+        --家没了
+        local exit = SpawnPrefab("pigbanditexit")
+        exit.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        inst.components.homeseeker:SetHome(exit)
     end
 
     if position and inst.components.homeseeker and inst.components.homeseeker.home then

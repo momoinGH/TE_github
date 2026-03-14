@@ -38,7 +38,7 @@ local function ShouldSleep(inst)
     return DefaultSleepTest(inst) and not inst.sg:HasStateTag("flight")
 end
 
-local BIRD_TAGS = {"bird"}
+local BIRD_TAGS = { "bird" }
 local function OnAttacked(inst, data)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 30, BIRD_TAGS)
@@ -72,22 +72,22 @@ local function OnDropped(inst)
 end
 
 local function canbeattacked(inst, attacked)
-	return not inst.sg:HasStateTag("flight")
+    return not inst.sg:HasStateTag("flight")
 end
 
 local function seedspawntest(inst)
-	local ground = TheWorld
-	local isWinter = TheWorld.state.iswinter
-	if ground and ground.components.birdspawner then
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local ground = TheWorld
-		local tile = ground.Map:GetTileAtPoint(x, y, z)
-	end
-	return not (isWinter)
+    local ground = TheWorld
+    local isWinter = TheWorld.state.iswinter
+    if ground and ground.components.birdspawner then
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ground = TheWorld
+        local tile = ground.Map:GetTileAtPoint(x, y, z)
+    end
+    return not (isWinter)
 end
 
 local function makebird(name, sounds, feather_name)
-	local featherpostfix = feather_name or name
+    local featherpostfix = feather_name or name
 
     local assets =
     {
@@ -96,17 +96,17 @@ local function makebird(name, sounds, feather_name)
         Asset("SOUND", "sound/birds.fsb"),
     }
 
-	local prefabs =
-	{
-		"seeds",
-		"smallmeat",
-		"cookedsmallmeat",
-		"feather_" .. featherpostfix,
-		"feather_crow",
-	}
+    local prefabs =
+    {
+        "seeds",
+        "smallmeat",
+        "cookedsmallmeat",
+        "feather_" .. featherpostfix,
+        "feather_crow",
+    }
 
-	local function fn()
-		local Parrotblue = (name == "parrot_blue")
+    local function fn()
+        local Parrotblue = (name == "parrot_blue")
         local Kingfisher = (name == "kingfisher")
         local inst = CreateEntity()
 
@@ -138,7 +138,7 @@ local function makebird(name, sounds, feather_name)
         inst.Transform:SetTwoFaced()
 
         inst.AnimState:SetBank("crow")
-        inst.AnimState:SetBuild(name.."_build")
+        inst.AnimState:SetBuild(name .. "_build")
         inst.AnimState:PlayAnimation("idle")
 
         inst.DynamicShadow:SetSize(1, .75)
@@ -150,40 +150,40 @@ local function makebird(name, sounds, feather_name)
             MakeInventoryFloatable(inst, nil, .07)
         end
 
-		inst.entity:SetPristine()
+        inst.entity:SetPristine()
 
-		if not TheWorld.ismastersim then
-			return inst
-		end
+        if not TheWorld.ismastersim then
+            return inst
+        end
 
         inst:AddComponent("inspectable")
 
         inst.sounds = sounds
-        inst.trappedbuild = name.."_build"
+        inst.trappedbuild = name .. "_build"
 
-		inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-		inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-		inst.components.locomotor:SetTriggersCreep(false)
+        inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
+        inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+        inst.components.locomotor:SetTriggersCreep(false)
 
-		inst:AddComponent("lootdropper")
+        inst:AddComponent("lootdropper")
         inst.components.lootdropper:AddRandomLoot("feather_" .. feather_name, 1)
-		inst.components.lootdropper:AddRandomLoot("smallmeat", 1)
-		inst.components.lootdropper.numrandomloot = 1
+        inst.components.lootdropper:AddRandomLoot("smallmeat", 1)
+        inst.components.lootdropper.numrandomloot = 1
 
-		inst:AddComponent("occupier")
+        inst:AddComponent("occupier")
 
-		inst:AddComponent("eater")
+        inst:AddComponent("eater")
         if Kingfisher then
-			inst.components.eater:SetDiet({ FOODTYPE.SEEDS }, { FOODTYPE.MEAT })
-		else
-			inst.components.eater:SetDiet({ FOODTYPE.SEEDS }, { FOODTYPE.SEEDS })
-		end
+            inst.components.eater:SetDiet({ FOODTYPE.SEEDS }, { FOODTYPE.MEAT })
+        else
+            inst.components.eater:SetDiet({ FOODTYPE.SEEDS }, { FOODTYPE.SEEDS })
+        end
 
-		inst:AddComponent("sleeper")
-		inst.components.sleeper.watchlight = true
-		inst.components.sleeper:SetSleepTest(ShouldSleep)
+        inst:AddComponent("sleeper")
+        inst.components.sleeper.watchlight = true
+        inst.components.sleeper:SetSleepTest(ShouldSleep)
 
-		inst:AddComponent("inventoryitem")
+        inst:AddComponent("inventoryitem")
         inst.components.inventoryitem.nobounce = true
         inst.components.inventoryitem.canbepickedup = false
         inst.components.inventoryitem.canbepickedupalive = true
@@ -191,42 +191,42 @@ local function makebird(name, sounds, feather_name)
             inst.components.inventoryitem:SetSinks(true)
         end
 
-		inst:AddComponent("cookable")
-		inst.components.cookable.product = "cookedsmallmeat"
+        inst:AddComponent("cookable")
+        inst.components.cookable.product = "cookedsmallmeat"
 
-		inst:AddComponent("health")
-		inst.components.health:SetMaxHealth(TUNING.BIRD_HEALTH)
-		inst.components.health.murdersound = "dontstarve/wilson/hit_animal"
+        inst:AddComponent("health")
+        inst.components.health:SetMaxHealth(TUNING.BIRD_HEALTH)
+        inst.components.health.murdersound = "dontstarve/wilson/hit_animal"
 
         inst.flyawaydistance = TUNING.BIRD_SEE_THREAT_DISTANCE
 
-		inst:AddComponent("combat")
-		inst.components.combat.hiteffectsymbol = "crow_body"
-		inst.components.combat.canbeattackedfn = canbeattacked
+        inst:AddComponent("combat")
+        inst.components.combat.hiteffectsymbol = "crow_body"
+        inst.components.combat.canbeattackedfn = canbeattacked
 
-		local brain = require "brains/birdbrain"
-		inst:SetBrain(brain)
-		inst:SetStateGraph("SGbird")
+        local brain = require "brains/birdbrain"
+        inst:SetBrain(brain)
+        inst:SetStateGraph("SGbird")
 
         inst:AddComponent("hauntable")
         inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
-		inst.components.hauntable.panicable = true
+        inst.components.hauntable.panicable = true
 
-		MakeSmallBurnableCharacter(inst, "crow_body")
-		MakeTinyFreezableCharacter(inst, "crow_body")
+        MakeSmallBurnableCharacter(inst, "crow_body")
+        MakeTinyFreezableCharacter(inst, "crow_body")
 
-		inst:AddComponent("periodicspawner")
-		if Parrotblue then
-			inst.components.periodicspawner:SetPrefab("oinc") --("dubloon")
-		elseif Kingfisher and math.random() < 0.1 then
-			inst.components.periodicspawner:SetPrefab("coi")
-			inst.components.periodicspawner.onlanding = true
-		else
-			inst.components.periodicspawner:SetPrefab("seeds")
-		end
-		inst.components.periodicspawner:SetDensityInRange(20, 2)
-		inst.components.periodicspawner:SetMinimumSpacing(8)
-		--inst.components.periodicspawner:SetSpawnTestFn( seedspawntest )
+        inst:AddComponent("periodicspawner")
+        if Parrotblue then
+            inst.components.periodicspawner:SetPrefab("oinc") --("dubloon")
+        elseif Kingfisher and math.random() < 0.1 then
+            inst.components.periodicspawner:SetPrefab("coi")
+            inst.components.periodicspawner.onlanding = true
+        else
+            inst.components.periodicspawner:SetPrefab("seeds")
+        end
+        inst.components.periodicspawner:SetDensityInRange(20, 2)
+        inst.components.periodicspawner:SetMinimumSpacing(8)
+        --inst.components.periodicspawner:SetSpawnTestFn( seedspawntest )
 
         inst:ListenForEvent("ontrapped", OnTrapped)
         inst:ListenForEvent("attacked", OnAttacked)
@@ -239,16 +239,16 @@ local function makebird(name, sounds, feather_name)
             birdspawner:StartTracking(inst)
         end
 
-		MakeFeedableSmallLivestock(inst, TUNING.BIRD_PERISH_TIME, OnPutInInventory, OnDropped)
+        MakeFeedableSmallLivestock(inst, TUNING.BIRD_PERISH_TIME, OnPutInInventory, OnDropped)
 
-		return inst
-	end
+        return inst
+    end
 
-	return Prefab(name, fn, assets, prefabs)
+    return Prefab(name, fn, assets, prefabs)
 end
 
 return
-	makebird("toucan_hamlet", toucan_hamlet_sounds, "robin"),
-	makebird("pigeon", pigeon_sounds, "robin_winter"),
-	makebird("parrot_blue", parrot_blue_sounds, "robin_winter"),
-	makebird("kingfisher", kingfisher_sounds, "robin_winter")
+    makebird("toucan_hamlet", toucan_hamlet_sounds, "robin"),
+    makebird("pigeon", pigeon_sounds, "robin_winter"),
+    makebird("parrot_blue", parrot_blue_sounds, "robin_winter"),
+    makebird("kingfisher", kingfisher_sounds, "robin_winter")

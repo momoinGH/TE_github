@@ -9,7 +9,6 @@ local prefabs =
 
 local function walls(inst)
     local tipodemuro = "wall_limestone"
-    local tipodegate = "log"
     local x, y, z = inst.Transform:GetWorldPosition()
     local POS = {}
     local POS2 = {}

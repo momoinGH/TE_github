@@ -19,45 +19,6 @@ local function turnoff(inst, light)
     inst:Hide()
 end
 
-local phasefunctions =
-{
-    day = function(inst, instant)
-        inst.Light:Enable(true)
-        inst:Show()
-        local time = 2
-        if instant then
-            time = 0
-        end
-        inst.components.lighttweener:StartTween(nil, 4, .8, .7, { 180 / 255, 195 / 255, 150 / 255 }, time)
-    end,
-
-    dusk = function(inst, instant)
-        inst.Light:Enable(true)
-        local time = 2
-        if instant then
-            time = 0
-        end
-        -- inst.components.lighttweener:StartTween(nil, 3, .6, .6, {91/255, 164/255, 255/255}, 4)
-        inst.components.lighttweener:StartTween(nil, 4, .8, .7, { 100 / 255, 100 / 255, 100 / 255 }, time)
-    end,
-
-    night = function(inst, instant)
-        if TheWorld.state.moonphase == "full" then
-            local time = 4
-            if instant then
-                time = 0
-            end
-            inst.components.lighttweener:StartTween(nil, 5, .6, .6, { 91 / 255, 164 / 255, 255 / 255 }, time)
-        else
-            local time = 6
-            if instant then
-                time = 0
-            end
-            inst.components.lighttweener:StartTween(nil, 0, 0, 1, { 0, 0, 0 }, time, turnoff)
-        end
-    end,
-}
-
 local function timechange(inst, instant)
     if TheWorld.components.aporkalypse and TheWorld.components.aporkalypse.aporkalypse_active == true then
         inst:Hide()
@@ -95,44 +56,8 @@ local function timechange(inst, instant)
     end
 end
 
-local function filterspawn(inst)
-    if not inst:HasTag("filtered") then
-        inst:AddTag("filtered")
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x, y, z, 12, { "lightrays" })
-
-        for i, ent in ipairs(ents) do
-            if ent == inst then
-                table.remove(ents, i)
-                break
-            end
-        end
-        if #ents > 0 then
-            inst:Remove()
-        end
-    end
-end
-
 local function UpdateIsInInterior(inst)
     timechange(inst, true)
-end
-
-local function distancefadeextra(inst, dt)
-    local time = 1
-
-    local X = dt / time
-
-    if inst:HasTag("under_leaf_canopy") or inst:HasTag("no_fade_by_zone") then
-        if inst.extradistancefade_current < 1 then
-            inst.extradistancefade_current = math.min(1, inst.extradistancefade_current + X)
-        end
-    else
-        if inst.extradistancefade_current > 0 then
-            inst.extradistancefade_current = math.max(0, inst.extradistancefade_current - X)
-        end
-    end
-
-    return inst.extradistancefade_current
 end
 
 local function updatevis(inst)

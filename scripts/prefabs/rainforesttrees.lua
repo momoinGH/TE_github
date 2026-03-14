@@ -51,8 +51,8 @@ local JUNGLETREESEED_GROWTIME = { base = 4.5 * day_time, random = 0.75 * day_tim
 local JUNGLETREE_GROW_TIME =
 {
     { base = 4.5 * day_time, random = 0.5 * day_time }, --tall to short
-    { base = 8 * day_time, random = 5 * day_time },  --short to normal
-    { base = 8 * day_time, random = 5 * day_time },  --normal to tall
+    { base = 8 * day_time, random = 5 * day_time },     --short to normal
+    { base = 8 * day_time, random = 5 * day_time },     --normal to tall
 }
 
 local SNAKE_JUNGLETREE_AMOUNT_TALL = 2 -- num of times to try and spawn a snake from a tall tree
@@ -76,21 +76,21 @@ local builds =
     normal = {
         file = "tree_rainforest_build",
         prefab_name = "rainforesttree",
-        normal_loot = { "log", "log" }, -- "jungletreeseed"
+        normal_loot = { "log", "log" },      -- "jungletreeseed"
         short_loot = { "log" },
         tall_loot = { "log", "log", "log" }, -- "jungletreeseed", "jungletreeseed"
     },
     rot = {
         file = "tree_rainforest_gas_build",
         prefab_name = "rainforesttree_rot",
-        normal_loot = { "log", "log" }, -- "jungletreeseed"
+        normal_loot = { "log", "log" },      -- "jungletreeseed"
         short_loot = { "log" },
         tall_loot = { "log", "log", "log" }, -- "jungletreeseed", "jungletreeseed"
     },
     blooming = {
         file = "tree_rainforest_bloom_build",
         prefab_name = "rainforesttree",
-        normal_loot = { "log", "log", "burr" },        -- "jungletreeseed"
+        normal_loot = { "log", "log", "burr" },              -- "jungletreeseed"
         short_loot = { "log" },
         tall_loot = { "log", "log", "log", "burr", "burr" }, -- "jungletreeseed", "jungletreeseed"
     }
