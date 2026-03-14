@@ -54,4 +54,5 @@ PrefabFiles =
     "dug_quagmire_spotspice_shrub",   --带斑点的小灌木丛
     "turf_quagmire",                  --地皮
     "quagmire_plants_planted",        --植物
+    "quagmire_fish"                   --鱼
 }

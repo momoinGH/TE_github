@@ -115,18 +115,18 @@ Layouts["mangrove1"] = StaticLayout.Get("map/static_layouts/mangrove1", {
         treearea = function()
             local stuff = {}
 
-            table.insert(stuff, "tree_mangrove")
+            table.insert(stuff, "mangrovetree")
             for i = 1, 6 do
                 if math.random() < 0.1 then
-                    table.insert(stuff, "tree_mangrove")
+                    table.insert(stuff, "mangrovetree")
                 end
             end
 
-            table.insert(stuff, "tree_mangrove")
+            table.insert(stuff, "mangrovetree")
             table.insert(stuff, "oceanvine_deco")
 
             if math.random() < 0.2 then
-                table.insert(stuff, "tree_mangrove")
+                table.insert(stuff, "mangrovetree")
             end
 
             for i = 1, 3 do
@@ -149,7 +149,7 @@ Layouts["mangrove1"] = StaticLayout.Get("map/static_layouts/mangrove1", {
 
             for i = 1, 2 do
                 if math.random() < 0.3 then
-                    table.insert(stuff, "tree_mangrovebee")
+                    table.insert(stuff, "mangrovetree")
                 end
             end
 
@@ -205,19 +205,19 @@ Layouts["mangrove2"] = StaticLayout.Get("map/static_layouts/mangrove1", {
         treearea = function()
             local stuff = {}
 
-            table.insert(stuff, "tree_mangrove")
+            table.insert(stuff, "mangrovetree")
             for i = 1, 6 do
                 if math.random() < 0.1 then
-                    table.insert(stuff, "tree_mangrove")
+                    table.insert(stuff, "mangrovetree")
                 end
             end
 
-            table.insert(stuff, "tree_mangrove")
+            table.insert(stuff, "mangrovetree")
             table.insert(stuff, "oceanvine_deco")
 
 
             if math.random() < 0.2 then
-                table.insert(stuff, "tree_mangrove")
+                table.insert(stuff, "mangrovetree")
             end
 
             for i = 1, 3 do
@@ -240,7 +240,7 @@ Layouts["mangrove2"] = StaticLayout.Get("map/static_layouts/mangrove1", {
 
             for i = 1, 2 do
                 if math.random() < 0.3 then
-                    table.insert(stuff, "tree_mangrovebee")
+                    table.insert(stuff, "mangrovetree")
                 end
             end
 

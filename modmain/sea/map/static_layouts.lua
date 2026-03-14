@@ -16,7 +16,7 @@ Layouts["oceanbamboforest"] = StaticLayout.Get("map/static_layouts/oceanbambofor
                 local tipo = math.random(1, 20)
                 if tipo == 1 then return { "frogsplash" } end
                 if tipo == 2 then return { "frogsplash" } end
-                if tipo == 3 then return { "tree_mangrovebee" } end
+                if tipo == 3 then return { "mangrovetree" } end
                 if tipo == 4 then return { "oceanbambootreebig" } end
                 if tipo == 5 then return { "spidercoralhole" } end
                 if tipo == 6 then return { "grass_water" } end
@@ -29,7 +29,7 @@ Layouts["oceanbamboforest"] = StaticLayout.Get("map/static_layouts/oceanbambofor
                 if tipo == 13 then return { "mussel_farm" } end
                 if tipo == 14 then return { "seaweed_planted" } end
                 if tipo == 15 then return { "oceanbush_vine" } end
-                if tipo == 16 then return { "tree_mangrovebee" } end
+                if tipo == 16 then return { "mangrovetree" } end
                 if tipo == 17 then return { "driftwood_log" } end
                 if tipo == 18 then return { "sapling" } end
                 if tipo == 19 then return { "oceanbush_vine" } end
@@ -54,7 +54,7 @@ Layouts["oceanforest"] = StaticLayout.Get("map/static_layouts/oceanforest", {
         objetoaleatorio = function()
             local variador = math.random()
             if variador > 0.3 then
-                return { "tree_mangrove" }
+                return { "mangrovetree" }
             else
                 local tipo = math.random(1, 20)
                 if tipo == 1 then
@@ -62,7 +62,7 @@ Layouts["oceanforest"] = StaticLayout.Get("map/static_layouts/oceanforest", {
                 elseif tipo == 2 then
                     return { "sapling" }
                 elseif tipo == 3 then
-                    return { "tree_mangrovebee" }
+                    return { "mangrovetree" }
                 elseif tipo == 4 then
                     return { "tentacleunderwater" }
                 elseif tipo == 5 then
@@ -98,7 +98,7 @@ Layouts["oceanforest"] = StaticLayout.Get("map/static_layouts/oceanforest", {
                 elseif tipo == 20 then
                     return { "luggagechest_spawner" }
                 else
-                    return { "tree_mangrove" }
+                    return { "mangrovetree" }
                 end
             end
         end,
@@ -118,7 +118,7 @@ Layouts["oceanrocks"] = StaticLayout.Get("map/static_layouts/oceanrocks", {
                 return { "grass_water" }
             else
                 local tipo = math.random(1, 10)
-                if tipo == 1 then return { "tree_mangrovebee" } end
+                if tipo == 1 then return { "mangrovetree" } end
                 if tipo == 2 then return { "frogsplash" } end
                 if tipo == 3 then return { "frogsplash" } end
                 if tipo == 4 then return { "frogsplash" } end

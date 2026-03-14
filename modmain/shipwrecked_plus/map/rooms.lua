@@ -239,7 +239,7 @@ AddRoom("Marshpool", {
             reeds = 0.20,
             blue_mushroom = 0.20,
             green_mushroom = 0.15,
-            tree_mangrove = 0.2,
+            mangrovetree = 0.2,
             Grasswaterspawner = 0.4,
             poisonmist = 0.3,
         },
@@ -266,7 +266,7 @@ AddRoom("MermySwamp1", {
             bush_vine = 0.2,
             snakeden = 0.2,
             flower_evil = 0.4,
-            tree_mangrove = 0.5,
+            mangrovetree = 0.5,
             Grasswaterspawner = 0.4,
             blue_mushroom = 0.01,
             green_mushroom = 2.02,
@@ -279,7 +279,7 @@ AddRoom("MermySwamp1", {
             mermhouse = 3,
             mermfishhouse = 2,
             sedimentpuddle = 1,
-            tree_mangrove = 10,
+            mangrovetree = 10,
             Grasswaterspawner = 15,
             farm_plow = 3,
         },
@@ -294,7 +294,7 @@ AddRoom("swambpool1", {
         distributepercent = 0.8,
         distributeprefabs =
         {
-            tree_mangrove = 0.5,
+            mangrovetree = 0.5,
             Grasswaterspawner = 0.7,
             bush_vine = 0.3,
             snakeden = 0.2,
@@ -320,7 +320,7 @@ AddRoom("swambpool2", {
         distributepercent = 0.8,
         distributeprefabs =
         {
-            tree_mangrove = 0.5,
+            mangrovetree = 0.5,
             Grasswaterspawner = 0.7,
             bush_vine = 0.3,
             snakeden = 0.2,

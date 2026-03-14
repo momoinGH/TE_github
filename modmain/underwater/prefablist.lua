@@ -82,7 +82,6 @@ PrefabFiles =
     "mermwatchtowerunderwater",
     "mermsunderwater",
     "roe_fish",
-    "fish_med",
     "bioluminescence",
     "kraken_projectile_underwater",
     "rainbowjellyfish",

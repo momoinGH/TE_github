@@ -77,9 +77,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPEAR_OBSIDIAN = "Ça va laisser une marque.
 --STRINGS.NAMES.OBSIDIANMACHETE = "Machete d'obsidienne"
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANMACHETE = "C'est chaud au toucher."
 
-STRINGS.NAMES.AXEOBSIDIAN = "Hache en obsidienne"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.AXEOBSIDIAN = "Un combo gagnant !"
-
 STRINGS.NAMES.ROCK_OBSIDIAN = "Grosse pierre d'obsidienne"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_OBSIDIAN = "Il faut l'exploser ! Impossible à extraire !"
 
@@ -135,7 +132,6 @@ STRINGS.RECIPE_DESC.ARMOROBSIDIAN = "C'est chaud au toucher."
 STRINGS.RECIPE_DESC.SPEAR_OBSIDIAN = "Et pourquoi pas un petit peu de feu avec la lance ?"
 STRINGS.RECIPE_DESC.OBSIDIANFIREPIT = "Le plus féroce de tous les feux !"
 STRINGS.RECIPE_DESC.OBSIDIANMACHETE = "Taille et brûle !"
-STRINGS.RECIPE_DESC.AXEOBSIDIAN = "Comme une hache ordinaire, mais plus chaude."
 --STRINGS.RECIPE_DESC.COFFEE = "Café chaud!"
 STRINGS.RECIPE_DESC.BOOK_METEOR1 = "Et du ciel tombera du feu !"
 STRINGS.RECIPE_DESC.VOLCANOSTAFF = "Le ciel s'écroule!"
@@ -616,8 +612,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISHINHOLE = "Ça sent le poisson." --- ATÉ
 STRINGS.NAMES.GRASS_WATER = "Herbe"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASS_WATER = "J'espère que tu as soif, l'herbe."
 
-STRINGS.NAMES.TREE_MANGROVE = "Arbre Mangrove "
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TREE_MANGROVE = "Bien adapté."
+STRINGS.NAMES.MANGROVETREE = "Arbre Mangrove "
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANGROVETREE = "Bien adapté."
 
 STRINGS.NAMES.ANTIDOTE = "Antidote"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTIDOTE = "Cela va m'aider."
@@ -649,10 +645,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.POISONCROCODOG = "On dirait une expérience 
 
 STRINGS.NAMES.GRASS_WATER = "Herbe"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASS_WATER = "Herbe de biôme humide"
-
-STRINGS.NAMES.ARMOR_SEASHELL = "Armure de coquillages"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOR_SEASHELL = "J'ai l'impression d'appartenir à la mer."
-STRINGS.RECIPE_DESC.ARMOR_SEASHELL = "Plus de protection."
 
 STRINGS.NAMES.OXHAT = "Casque à cornes"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OXHAT = "Joli et sec. Ce casque me protégera des éléments."
@@ -741,9 +733,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW_SMALL = "Un petit morceau de poisso
 
 STRINGS.NAMES.FISH_MED_COOKED = "Steak de poisson"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_MED_COOKED = "Parfaitement grillé."
-
-STRINGS.NAMES.FISH_MED = "Chien de mer mort"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_MED = "Bon chien-chien."
 
 STRINGS.NAMES.SPOILED_FISH = "Poisson avarié"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPOILED_FISH = "Cette odeur ne me dit rien qui vaille."
@@ -1075,12 +1064,6 @@ STRINGS.RECIPE_DESC.ARMOR_LIFEJACKET = "La sécurité d'abord !"
 
 STRINGS.WALLY1 = "Tu peux être fier !"
 STRINGS.WALLY2 = "Joli naufrage"
-
-
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKYHAT = "Est-ce que ça me donne l'air villain.... Je veux dire effrayant !?"
-STRINGS.NAMES.LUCKYHAT = "Chapeau porte-bonheur"
-STRINGS.RECIPE_DESC.LUCKYHAT = "Dénicher les trésors."
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPICEPACK = "Mon sac de trucs de chef !"
 STRINGS.NAMES.SPICEPACK = "Pochon du chef"

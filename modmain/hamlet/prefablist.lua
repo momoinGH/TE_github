@@ -271,4 +271,5 @@ PrefabFiles = {
     "wreck",              --残骸
     "zeb",                --斑马
     "poisonbalm",         --解毒膏
+    "walls_tropical",     --墙体
 }

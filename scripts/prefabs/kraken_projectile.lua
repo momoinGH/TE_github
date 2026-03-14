@@ -18,7 +18,7 @@ local function OnHit(inst, attacker)
     if inst.prefab == "kraken_projectile" then
         ReplacePrefab(inst, "kraken_inkpatch")
     else
-        local ent = ReplacePrefab(inst, "kraken_jellyfish") --水母
+        local ent = ReplacePrefab(inst, "jellyfish") --水母
         if not TheWorld.Map:IsSurroundedByWater(x, y, z, 2) then
             ent.sg:GoToState("some")
         end

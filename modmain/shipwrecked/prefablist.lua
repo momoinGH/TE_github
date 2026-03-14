@@ -1,13 +1,19 @@
 PrefabFiles = {
-    "venomgland",             --毒腺
-    "snakeoil",               --蛇油
-    "bishopwater",            --浮船主教
-    "cave_entrance_vulcao",   --火山
-    "cave_exit_vulcao",       --火山出口
-    "wallyintro",             --船只碎片
-    "firetwister_seal",       --小火豹
-    "firetwister",            --火豹卷
-    "twister_tornadodefogo",  --"火卷风"
+    "venomgland",           --毒腺
+    "snakeoil",             --蛇油
+    "bishopwater",          --浮船主教
+    "cave_entrance_vulcao", --火山
+    "cave_exit_vulcao",     --火山出口
+    "wallyintro",           --船只碎片
+
+
+    "twister",               --豹卷风
+    "twister_spawner",       --豹卷风生成器
+    "firetwister_seal",      --小火豹
+    "firetwister",           --火豹卷
+    "twister_tornadodefogo", --"火卷风"
+
+
     "glass",                  --玻璃
     "jellyfish",              --水母
     "ligamundosw",            --海洋之椅
@@ -28,79 +34,73 @@ PrefabFiles = {
     "wildborehead",           --野猪头
     "tro_treasurechest",      --一堆箱子
     "volcano_altar_pillar",   --火山灰石柱
-
-
-
-
-
-
-
-    "shipwrecked_boat_placer2",
-    "birds_sw",
-    "axeobsidian",
-    "armor_obsidian",
-    "meteor_impact",
-    "dug_cofeecactus",
-    "snake",
-    "snake_hole",
-    "snakeskin",
-    "harpoon",
-    "hats_sw",
-    "dubloon",
-    "mosquitopoison",
-    "mosquitosack_yellow",
-    "chiminea",
-    "sea_chiminea",
-    "chimineafire",
-    "armor_seashell",
-    "ox_horn",
-    "ox", --水牛
-    "oxherd",
-    "knightboat",
-    "knightboat_cannonshot",
-    "rowboat_wake", --trail do rowboat
-    "blubber",
-    "fish_med",
-    "solofish",
-    "boatrepairkit",
-    "sandbag",
-    "cutlass",
-    "luggagechest_spawner",
-    "buriedtreasure",
-    "windtrail",
-    "windswirl",
-    "ventania",
-    "quackenbeak",
-    "quackendrill",
-    "quackering_wave",
-    "quackering_wake",
-    "boatsurfothers",
-    "turbine_blades",
-    "buoy",
-    "armor_lifejacket",
-    "luckyhat",
-    "telescope",
-    "thatchpack",
-    "seaweed_stalk",
-    "corallarve",
-    "nubbin",
-    "coconade",
-    "piratepack",
-    "ox_flute",
-    "blubbersuit",
-    "tarsuit",
-    "waterchest",
-    "mussel_bed",
-    "mussel_stick",
-    "messagebottle_sw",
-    "bottlelantern",
-    "researchlab5",
-    "roe",
-    "roe_fish",
-    "fishfarm",
-    "fishfarm_sign",
-    "mussel_farm",
-    "tar_extractor",
+    "sw_porto",               --一堆套装
+    "sw_birds",               --鸟
+    "obsidianaxe",            --黑曜石斧
+    "armor_obsidian",         --黑曜石甲
+    "meteor_impact",          --地上坑洞特效
+    "dug_cofeecactus",        --植物根物品
+    "snake",                  --蛇
+    "snake_hole",             --蛇穴
+    "snakeskin",              --蛇皮
+    "harpoon",                --鱼叉
+    "hats_sw",                --帽子
+    "dubloon",                --金币
+    "mosquito_poison",        --毒蚊子
+    "mosquitosack_yellow",    --毒蚊血囊
+    "chiminea",               --火炉
+    "sea_chiminea",           --海上火炉
+    "chimineafire",           --火炉的火焰
+    "armorseashell",          --海贝甲
+    "ox_horn",                --水牛角
+    "ox",                     --水牛
+    "oxherd",                 --小水牛生成器
+    "knightboat",             --浮船骑士
+    "knightboat_cannonshot",  --浮船骑士的炮弹
+    "rowboat_wake",           --划船的波浪
+    "blubber",                --鲸脂
+    "fish_med",               --死鱼
+    "solofish",               --狗鱼
+    "boatrepairkit",          --修船套件
+    "sandbag",                --沙袋
+    "cutlass",                --剑鱼短剑
+    "luggagechest_spawner",   --海上旅行箱里随机装点东西
+    "buriedtreasure",         --宝藏标记
+    "windtrail",              --刮风特效
+    "windswirl",              --刮风特效
+    "ventania",               --刮风预制件，TODO 优化下代码
+    "quackenbeak",            --海妖之喙
+    "quackendrill",           --海妖钻子
+    "quackering_wave",        --划船的波浪
+    "quackering_wake",        --水特效
+    "boatsurfothers",         --大饼船贴图
+    "boatraft",               --大饼船
+    "turbine_blades",         --涡轮叶片
+    "buoy",                   --浮标
+    "armor_lifejacket",       --救生衣
+    "woodlegshat",            --幸运帽
+    "telescope",              --望远镜
+    "thatchpack",             --茅草袋
+    "seaweed_stalk",          --海带茎
+    "corallarve",             --珊瑚虫
+    "nubbin",                 --珊瑚礁块
+    "coconade",               --椰子炸弹
+    "piratepack",             --藏宝袋
+    "ox_flute",               --滴水排箫
+    "blubbersuit",            --鲸脂套装
+    "tarsuit",                --焦油套装
+    "waterchest",             --海上箱子
+    "mussel_bed",             --贻贝岩
+    "mussel_stick",           --采贝器
+    "messagebottle_sw",       --漂流瓶
+    "bottlelantern",          --水瓶灯
+    "researchlab5",           --海上实验室
+    "roe",                    --鱼卵
+    "roe_fish",               --鱼
+    "fish_farm",              --养鱼场
+    "fishfarm_sign",          --养鱼场牌子
+    "mussel_farm",            --贻贝岩
+    "tar_extractor",          --焦油提取器
     "seatrap",
     "hail",
     "spearlauncher",
@@ -205,7 +205,7 @@ PrefabFiles = {
     "tunacan",
     "wave_ripple", --海浪
     "ashfx",
-    "firerain", --天降龙蛋
+    "firerain",    --天降龙蛋
     "lavapool",
     "mermhouse_fisher",
     "fabric",
@@ -223,7 +223,8 @@ PrefabFiles = {
     "sharx",
     "stungray",
     "redbarrel",
-    "lobsterhole",
+    "lobster",     --龙虾
+    "lobsterhole", --龙虾巢穴
     "mussel",
     "bioluminescence",
     "rawling",
@@ -243,60 +244,39 @@ PrefabFiles = {
     "dorsalfin",
     "ballphinpod",
     "jellyfish_planted",
-    "crocodog_spawner",
-    "crocodog",
-    "whale",
-    "whale_carcass",
-    "jungletreeguard",
-    "jungletreeguard_snake",
-    -- "ox_wool", --水牛毛
-    -- "conch", --海螺
-    "spearsw",
-    "rookwater",
-    "whaletrack",
-    "panda",
-    "pandaskin",
-    "pandatree",
-    "shipwrecked_flood",
-    "chickenhouse",
-    "palmleaf_umbrella",
-    "blowdart_sw",
-    "piratihatitator",
-    "walls_tropical",
-    "trident_sw",
-    "trinkets_sw",
-    "earring",
-    "boatraft",
-    "tigersharkpool", --鲨鱼池
-    "tigersharktorch",
-    "volcanostaff",
-    "armor_snakeskin",
-    "mangrovetrees",
-    "mangrovetreesbee",
-    "grass_water",       --水草
-    "grasswaterspawner", --水草生成器
-    "kraken_jellyfish",
-    "kraken_spawner",
-    "pirateghost",
-    "waterygrave",
-    "flotsam_debris_sw",
+    "crocodog_spawner",      --鳄狗生成器
+    "crocodog",              --鳄狗
+    "whale",                 --蓝鲸、白鲸
+    "whale_carcass",         --鲸尸体
+    "jungletreeguard",       --丛林树守卫
+    "jungletreeguard_snake", --一团蛇
+    "ox_wool",               --水牛毛
+    "spearsw",               --矛
+    "rookwater",             --发条战船
+    "whaletrack",            --可疑的气泡
 
-    "shipwrecked_bishop",
+    "shipwrecked_flood",     --水坑
+    "palmleaf_umbrella",     --椰树叶伞
+    "blowdart_sw",           --眼睛吹箭
+    "piratihatitator",       --灵子海盗帽
+    "walls_tropical",        --墙体
+    "trident_sw",            --三叉戟
+    "trinkets_sw",           --玩具
+    "earring",               --至尊耳环
+    "tigersharkpool",        --鲨鱼池
+    "tigersharktorch",       --虎鲨生成器
+    "volcanostaff",          --火山魔杖
+    "armor_snakeskin",       --蛇皮夹克
+    "mangrove",              --红树
+    "grass_water",           --水草
+    "grasswaterspawner",     --水草生成器
+    "kraken_spawner",        --海妖的刷新点
+    "pirateghost",           --海盗幽灵
+    "waterygrave",           --海墓
+    "flotsam_debris_sw",     --残骸
+    "shipwrecked_bishop",    --发条主教
 
-    "lobster",
+
 
 
 }
-
-
-
-
-----------------------------------------------------------------------------------------------------
-
-
-if TUNING.tropical.sealnado then
-    table.insert(PrefabFiles, "twister")
-    table.insert(PrefabFiles, "twister_spawner")
-    table.insert(PrefabFiles, "twister_seal")
-    table.insert(PrefabFiles, "twister_tornado")
-end

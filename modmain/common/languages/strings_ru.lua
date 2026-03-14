@@ -69,9 +69,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPEAR_OBSIDIAN = "От такого не о�
 --STRINGS.NAMES.OBSIDIANMACHETE = "Обсидиановое мачете" --DTR Убрал --
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANMACHETE = "Горячее на ощупь." --DTR Убрал --
 
-STRINGS.NAMES.AXEOBSIDIAN = "Обсидиановый топор"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.AXEOBSIDIAN = "Беспроигрышная комбинация!"
-
 STRINGS.NAMES.ROCK_OBSIDIAN = "Обсидиановый валун"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_OBSIDIAN = "Взорвать его! Он не будет добываться!"
 
@@ -127,7 +124,6 @@ STRINGS.RECIPE_DESC.ARMOROBSIDIAN = "Горячая на ощупь."
 STRINGS.RECIPE_DESC.SPEAR_OBSIDIAN = "Как насчёт небольшого огонька в копье?"
 STRINGS.RECIPE_DESC.OBSIDIANFIREPIT = "Огонь всех огней!"
 STRINGS.RECIPE_DESC.OBSIDIANMACHETE = "Режь-кромсай-поджигай!"
-STRINGS.RECIPE_DESC.AXEOBSIDIAN = "Как обычный топор, только горячее."
 STRINGS.RECIPE_DESC.COFFEE = "Горячий кофе!" --DTR
 STRINGS.RECIPE_DESC.BOOK_METEOR1 = "Да прольются огнём альковы небес!"
 STRINGS.RECIPE_DESC.VOLCANOSTAFF = "Небеса разверзлись!"
@@ -615,8 +611,8 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISHINHOLE = "Тут, кажется, пол
 STRINGS.NAMES.GRASS_WATER = "Трава"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASS_WATER = "Что, травка, тоже хочешь пить?"
 
-STRINGS.NAMES.TREE_MANGROVE = "Мангровое дерево "
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TREE_MANGROVE = "Интересно, получает ли оно достаточно воды."
+STRINGS.NAMES.MANGROVETREE = "Мангровое дерево "
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANGROVETREE = "Интересно, получает ли оно достаточно воды."
 
 STRINGS.NAMES.ANTIDOTE = "Противоядие"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTIDOTE = "На вкус ужасно!"
@@ -648,10 +644,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.POISONCROCODOG = "Похоже на неуд
 
 STRINGS.NAMES.GRASS_WATER = "Трава"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GRASS_WATER = "Что, травка, тоже хочешь пить?"
-
-STRINGS.NAMES.ARMOR_SEASHELL = "Броня из ракушек"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOR_SEASHELL = "Декоративно-прикладное искусство!"
-STRINGS.RECIPE_DESC.ARMOR_SEASHELL = "Прекрасно защищает от яда."
 
 STRINGS.NAMES.OXHAT = "Рогатый шлем"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OXHAT = "Хорошо и сухо. Этот шлем защитит меня от непогоды."
@@ -740,9 +732,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW_SMALL = "Маленький кус�
 
 STRINGS.NAMES.FISH_MED_COOKED = "Рыбный стейк"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_MED_COOKED = "Идеально прожарен." --DTR
-
-STRINGS.NAMES.FISH_MED = "Мёртвая морская собака"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_MED = "Мёртвая морская собака."
 
 STRINGS.NAMES.SPOILED_FISH = "Сгнившая рыбина"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPOILED_FISH = "Не то чтобы я жалуюсь на запах..."
@@ -1092,11 +1081,6 @@ STRINGS.RECIPE_DESC.ARMOR_LIFEJACKET = "Безопасность прежде в
 
 STRINGS.WALLY1 = "Болван."
 STRINGS.WALLY2 = "Хорошего плавания!"
-
-
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUCKYHAT = "Это моя счастливая шляпа!"
-STRINGS.NAMES.LUCKYHAT = "Счастливая шляпа"
-STRINGS.RECIPE_DESC.LUCKYHAT = "Почуствуй Сокровище."
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPICEPACK = "Моя сумка шефских штучек!"
 STRINGS.NAMES.SPICEPACK = "Сумка шеф-повара"
@@ -1753,9 +1737,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WATERCRESS_COOKED                   = "Пр�
 
 STRINGS.NAMES.WATERCRESS_PLANTED                                        = "Морская капуста"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WATERCRESS_PLANTED                  = "Морская капуста"
-
-STRINGS.NAMES.CONCH                                                     = "Раковина"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CONCH                               = "Раковина"
 
 STRINGS.NAMES.JUNGLETREEGUARD                                           = "Джунглевый энт"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLETREEGUARD                     = "Джунглевый энт"

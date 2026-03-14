@@ -735,9 +735,9 @@ local function tree(name, build, stage, data)
     return Prefab(name, makefn(build, stage, data), assets, prefabs)
 end
 
-return tree("tree_mangrove", "normal", 0),
-    tree("tree_mangrove_normal", "normal", 2),
-    tree("tree_mangrove_tall", "normal", 3),
-    tree("tree_mangrove_short", "normal", 1),
+return tree("mangrovetree", "normal", 0),
+    tree("mangrovetree_normal", "normal", 2),
+    tree("mangrovetree_tall", "normal", 3),
+    tree("mangrovetree_short", "normal", 1),
     tree("mangrovetree_burnt", "normal", 0, "burnt"),
     tree("mangrovetree_stump", "normal", 0, "stump")

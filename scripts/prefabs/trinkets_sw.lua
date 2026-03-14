@@ -1,6 +1,5 @@
 local function MakeTrinket(num)
     local name = "trinket_sw_" .. tostring(num)
-    local prefabname = "common/inventory/" .. name
 
     local assets =
     {
@@ -49,7 +48,7 @@ local function MakeTrinket(num)
         return inst
     end
 
-    return Prefab(prefabname, fn, assets)
+    return Prefab(name, fn, assets)
 end
 
 local function seaworther_fn()

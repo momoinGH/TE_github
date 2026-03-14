@@ -193,7 +193,7 @@ return {
                 {
                     id = 13,
                     name = "mangrove tree",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "ellipse",
                     x = 105.242,
                     y = 76.6848,
@@ -206,7 +206,7 @@ return {
                 {
                     id = 14,
                     name = "mangrove tree",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "ellipse",
                     x = 94.0842,
                     y = 34.6226,
@@ -219,7 +219,7 @@ return {
                 {
                     id = 15,
                     name = "mangrove tree",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "ellipse",
                     x = 71.375,
                     y = 17.2989,
@@ -232,7 +232,7 @@ return {
                 {
                     id = 16,
                     name = "mangrove tree",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "ellipse",
                     x = 70.3642,
                     y = 114.334,
@@ -540,7 +540,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -551,7 +551,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -562,7 +562,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -573,7 +573,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -584,7 +584,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -595,7 +595,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -606,7 +606,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -617,7 +617,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -628,7 +628,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -639,7 +639,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -650,7 +650,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -661,7 +661,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -672,7 +672,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -683,7 +683,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -694,7 +694,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -705,7 +705,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -716,7 +716,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -727,7 +727,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -738,7 +738,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
@@ -749,7 +749,7 @@ return {
                 },
                 {
                     name = "",
-                    type = "tree_mangrove",
+                    type = "mangrovetree",
                     shape = "rectangle",
                     x = 100,
                     y = 90,
