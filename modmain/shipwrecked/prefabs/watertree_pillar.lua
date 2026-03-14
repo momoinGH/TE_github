@@ -1,5 +1,3 @@
-local OldOnPhaseChanged
-
 local FIREFLY_MUST = { "firefly" }
 local FIREFLY_CANT = { "FX", "NOBLOCK", "NOCLICK", "DECOR", "flying", "boat", "walkingplank", "_inventoryitem", "structure" }
 local function OnPhaseChanged(inst, phase)
@@ -9,10 +7,6 @@ local function OnPhaseChanged(inst, phase)
 
     if math.random() > 0.7 then
         return
-    end
-
-    if not TheWorld.Map:IsShipwreckedAreaAtPoint(x, y, z) then
-        return OldOnPhaseChanged(inst, phase) --只在海难区域的水中木才行
     end
 
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -42,15 +36,24 @@ local function OnPhaseChanged(inst, phase)
     end
 end
 
--- 水中木生成萤火虫换成荧光生物
-AddPrefabPostInit("watertree_pillar", function(inst)
-    if not TheWorld.ismastersim then return end
+local function InitCheck(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    if not TheWorld.Map:IsShipwreckedAreaAtPoint(x, y, z) then
+        return --只在海难区域的水中木才行
+    end
 
-    OldOnPhaseChanged = Hooks.GetEventCallback(inst, "phasechanged", nil, "scripts/prefabs/watertree_pillar.lua")
-    if OldOnPhaseChanged then
-        inst:RemoveEventCallback("phasechanged", OldOnPhaseChanged)
+    local old_fn = Hooks.GetEventCallback(inst, "phasechanged", nil, "scripts/prefabs/watertree_pillar.lua")
+    if old_fn then
+        inst:RemoveEventCallback("phasechanged", old_fn)
         inst:ListenForEvent("phasechanged", function(src, phase) OnPhaseChanged(inst, phase) end, TheWorld)
     else
         print("水中木求上值失败，没有拿到OnPhaseChanged，无法把生成萤火虫换成生成荧光生物。")
     end
+end
+
+-- 水中木生成萤火虫换成荧光生物
+AddPrefabPostInit("watertree_pillar", function(inst)
+    if not TheWorld.ismastersim then return end
+
+    inst:DoTaskInTime(0, InitCheck)
 end)
