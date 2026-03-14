@@ -99,95 +99,53 @@ local function OnHaunt(inst)
     return true
 end
 
-local function fn()
-    local inst = CreateEntity()
+local function MakePiggravestone(name, build)
+    local function fn()
+        local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddMiniMapEntity()
-    inst.entity:AddNetwork()
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
+        inst.entity:AddMiniMapEntity()
+        inst.entity:AddNetwork()
 
-    MakeObstaclePhysics(inst, .25)
+        MakeObstaclePhysics(inst, .25)
 
-    inst.MiniMapEntity:SetIcon("piggravestones.png")
+        inst.MiniMapEntity:SetIcon("piggravestones.png")
 
-    inst:AddTag("grave")
+        inst:AddTag("grave")
 
-    inst.AnimState:SetBank("gravestone")
-    inst.AnimState:SetBuild("gravespigs1")
+        inst.AnimState:SetBank("gravestone")
+        inst.AnimState:SetBuild(build)
 
-    inst.entity:SetPristine()
+        inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then
+        if not TheWorld.ismastersim then
+            return inst
+        end
+
+        inst.AnimState:PlayAnimation("grave" .. tostring(math.random(4)))
+
+        inst:AddComponent("inspectable")
+        inst.components.inspectable:SetDescription(STRINGS.EPITAPHS[math.random(#STRINGS.EPITAPHS)])
+
+        inst.mound = inst:SpawnChild("mound")
+        inst.mound.ghost_of_a_chance = 0.0
+        inst:ListenForEvent("worked", on_child_mound_dug, inst.mound)
+        inst.mound.Transform:SetPosition((TheCamera:GetDownVec() * .5):Get())
+
+        inst:AddComponent("hauntable")
+        inst.components.hauntable:SetOnHauntFn(OnHaunt)
+
+        inst:WatchWorldState("cycles", on_day_change)
+
+        inst.OnLoad = onload
+        inst.OnSave = onsave
+        inst.OnLoadPostPass = onloadpostpass
+
         return inst
     end
-
-    inst.AnimState:PlayAnimation("grave" .. tostring(math.random(4)))
-
-    inst:AddComponent("inspectable")
-    inst.components.inspectable:SetDescription(STRINGS.EPITAPHS[math.random(#STRINGS.EPITAPHS)])
-
-    inst.mound = inst:SpawnChild("mound")
-    inst.mound.ghost_of_a_chance = 0.0
-    inst:ListenForEvent("worked", on_child_mound_dug, inst.mound)
-    inst.mound.Transform:SetPosition((TheCamera:GetDownVec() * .5):Get())
-
-    inst:AddComponent("hauntable")
-    inst.components.hauntable:SetOnHauntFn(OnHaunt)
-
-    inst:WatchWorldState("cycles", on_day_change)
-
-    inst.OnLoad = onload
-    inst.OnSave = onsave
-    inst.OnLoadPostPass = onloadpostpass
-
-    return inst
+    return Prefab(name, fn, assets, prefabs)
 end
 
-local function fn1()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddMiniMapEntity()
-    inst.entity:AddNetwork()
-
-    MakeObstaclePhysics(inst, .25)
-
-    inst.MiniMapEntity:SetIcon("piggravestones.png")
-
-    inst:AddTag("grave")
-
-    inst.AnimState:SetBank("gravestone")
-    inst.AnimState:SetBuild("gravespigs2")
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.AnimState:PlayAnimation("grave" .. tostring(math.random(4)))
-
-    inst:AddComponent("inspectable")
-    inst.components.inspectable:SetDescription(STRINGS.EPITAPHS[math.random(#STRINGS.EPITAPHS)])
-
-    inst.mound = inst:SpawnChild("mound")
-    inst.mound.ghost_of_a_chance = 0.0
-    inst:ListenForEvent("worked", on_child_mound_dug, inst.mound)
-    inst.mound.Transform:SetPosition((TheCamera:GetDownVec() * .5):Get())
-
-    inst:AddComponent("hauntable")
-    inst.components.hauntable:SetOnHauntFn(OnHaunt)
-
-    inst:WatchWorldState("cycles", on_day_change)
-
-    inst.OnLoad = onload
-    inst.OnSave = onsave
-    inst.OnLoadPostPass = onloadpostpass
-
-    return inst
-end
-
-return Prefab("piggravestone1", fn, assets, prefabs),
-    Prefab("piggravestone2", fn1, assets, prefabs)
+return MakePiggravestone("piggravestone1", "gravespigs1"),
+    MakePiggravestone("piggravestone2", "gravespigs2")

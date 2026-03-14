@@ -5,7 +5,7 @@ local assets =
 
 local prefabs =
 {
-    "grasswater",
+    "grass_water",
 }
 
 local VALID_TILES = table.invert(
@@ -13,7 +13,7 @@ local VALID_TILES = table.invert(
         WORLD_TILES.MARSH,
     })
 local function SpawnGrassWater(spawn_point)
-    local plant = SpawnPrefab("grasswater")
+    local plant = SpawnPrefab("grass_water")
     plant.Transform:SetPosition(spawn_point.x, spawn_point.y, spawn_point.z)
     return plant
 end
@@ -116,7 +116,6 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
-    --inst:AddTag("CLASSIFIED")
     inst.tentativas = 10
 
     inst:DoTaskInTime(1, SpawnGrassWaterPre)

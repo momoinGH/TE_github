@@ -1,8 +1,29 @@
 PrefabFiles = {
-    "beds", --床
-    "boatmetal", --金属船
-    "bramble_bush", --荆棘
-    
+    "beds",              --床
+    "boatmetal",         --金属船
+    "bramble_bush",      --荆棘
+    "crabapple_tree",    --醋栗树
+    "feather_thunder",   --雷羽
+    "fennel",            --茴香
+    "grass_water",       --水草
+    "grasswaterspawner", --水草生成器
+    "grotto_grub_nest",  --虫穴
+    "grotto_grub",       --石窟蛴螬
+    "grotto_parsnip",    --防风草
+    "grottoqueen",       --石窟虫皇
+    "ligamundoham",      --天空之椅
+    "machetes",          --砍刀
+    "marsh_tree_new",    --石窟树木
+    "piggolem",          --遗迹石像猪守卫
+    "piggravestone",     --猪墓碑
+    "pollen_item",       --花粉
+    "pinkman",           --粉猪人
+    "tidalpoolnew",      --雨林积水池
+    "tree_forest_rot",   --阴森丛林树
+    "tro_treasurechest", --一堆箱子
+
+
+
     "pedestal_key",
     "adult_flytrap",
     "alloy",
@@ -83,7 +104,7 @@ PrefabFiles = {
     "edgefog",
     "fabric",
     "firerain",
-    "fishinhole",
+    "fishinhole", --鱼群
     "flower_rainforest",
     "floweroflife",
     "frog_poison",
@@ -200,7 +221,7 @@ PrefabFiles = {
     "seataro_planted",
     "seatarospawner",
     "securitycontract",
-    "sedimentpuddle",
+    "sedimentpuddle", --闪光的水坑
     "shears",
     "shelf_slot",
     "shelf",

@@ -99,7 +99,7 @@ local function onpickedfn(inst, picker)
         inst.AnimState:PushAnimation("idle_dead", false)
     else
         inst.AnimState:PushAnimation("picked", false)
-        if inst.prefab == "grasswater" then inst.AnimState:PushAnimation("picked", true) end
+        if inst.prefab == "grass_water" then inst.AnimState:PushAnimation("picked", true) end
     end
 end
 
@@ -231,4 +231,4 @@ local function grass(name, stage)
     return Prefab(name, fn, assets, prefabs)
 end
 
-return grass("grasswater", 0)
+return grass("grass_water", 0)

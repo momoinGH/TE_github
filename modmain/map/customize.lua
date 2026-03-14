@@ -1,3 +1,10 @@
+-- 世界生成选项
+-- 数据从modinfo里获取，有world_gen字段就会加进来
+-- 因为为了保证主客机数据一致并且modmain里能获取到数据，只能在把世界生成的选项都映射为mod配置项
+
+
+----------------------------------------------------------------------------------------------------
+
 -- 对configuration_options数据进行一些校验
 for _, option in ipairs(modinfo.configuration_options) do
     if option.name ~= "" then --不考虑标题
@@ -15,9 +22,9 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-local options_enable = {
-    { text = STRINGS.UI.WARDROBESCREEN.FILTER_OFF, data = "disabled" },
-    { text = STRINGS.UI.WARDROBESCREEN.FILTER_ON, data = "enabled" },
+local default_options_enable = {
+    { text = STRINGS.UI.WARDROBESCREEN.FILTER_OFF, data = 0 },
+    { text = STRINGS.UI.WARDROBESCREEN.FILTER_ON, data = 1 },
 }
 
 for _, m in pairs(pro_modules) do
@@ -37,10 +44,10 @@ for _, m in pairs(pro_modules) do
     end
     -- 标题
     if has_settings then
-        AddCustomizeGroup(LEVELCATEGORY.SETTINGS, m, group_label, options_enable, nil, -1)
+        AddCustomizeGroup(LEVELCATEGORY.SETTINGS, m, group_label, default_options_enable, nil, -1)
     end
     if has_worldgen then
-        AddCustomizeGroup(LEVELCATEGORY.WORLDGEN, m, group_label, options_enable, nil, -1)
+        AddCustomizeGroup(LEVELCATEGORY.WORLDGEN, m, group_label, default_options_enable, nil, -1)
     end
 
     -- 选项
@@ -65,9 +72,10 @@ for _, m in pairs(pro_modules) do
     end
 end
 
+----------------------------------------------------------------------------------------------------
 
-local spinners = {}             --世界生成里的每个选项
-local on_spiner_changed = false --防止递归
+local spinners = {}            --世界生成里的每个选项
+local config_sync_lock = false --防止递归
 
 -- 修改世界生成时设置mod配置
 local SettingsList = require("widgets/redux/worldsettings/settingslist")
@@ -77,18 +85,22 @@ Hooks.FnDecorator(SettingsList, "OnSpinnerChanged", function(self, option, spinn
         spinners[option.name] = spinner
         spinner._pro_option_name = option.name
 
-        on_spiner_changed = true
-        KnownModIndex:SaveConfigurationOptions(function()
-            -- print("保存成功")
-        end, modname, { { name = option.name, saved = value } })
-        on_spiner_changed = false
+        if not config_sync_lock then
+            config_sync_lock = true
+            KnownModIndex:SaveConfigurationOptions(function()
+                -- print("保存成功")
+            end, modname, { { name = option.name, saved = value } })
+            config_sync_lock = false
+        end
     end
 end)
 
 -- mod配置项修改时更新世界生成里的选项
 Hooks.FnDecorator(KnownModIndex, "SetConfigurationOption", function(self, modn, option_name, value)
     local spinner = spinners[option_name]
-    if spinner and spinner.inst:IsValid() and not on_spiner_changed and modn == modname then
+    if spinner and spinner.inst:IsValid() and not config_sync_lock and modn == modname then
+        config_sync_lock = true
         spinner:SetSelected(value)
+        config_sync_lock = false
     end
 end)

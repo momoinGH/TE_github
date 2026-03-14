@@ -5,6 +5,36 @@ PrefabFiles = {
     "cave_entrance_frost", --洞穴入口
     "frosttocave",         --洞穴隧道
     "cave_exit_frost",     --洞穴出口
+    "icebearger",          --暴躁的熊獾
+    "icedeerclops",        --红眼巨鹿
+    "icedpad",             --冰块浮岛
+    "icerockcreatures",    --被冰封的生物
+
+    "maxwellboss",         --暗影之王
+    "maxwellendgame",
+    "maxwellestatua",
+    "maxwelllight_flame",
+    "maxwelllight",
+    "maxwelllock",
+    "maxwellminions",
+    "maxwellphonograph",
+    "maxwellshadowheart",
+    "maxwellshadowmeteor",
+
+    "pig_palace2",      --冰窟钓手渔具店
+    "pig_shop_spears",  --极地猎手战利品店
+    "beaverhead",       --海狸头
+    "trapslug",         --陷阱鼻涕虫
+    "wildbeaver_house", --海狸屋
+    "wildbeaver",       --海狸
+    "wildbeaverguard",  --海狸守卫
+
+
+
+
+
+
+
 
 
     "topiary",

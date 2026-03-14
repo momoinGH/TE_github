@@ -166,7 +166,7 @@ Layouts["mangrove1"] = StaticLayout.Get("map/static_layouts/mangrove1", {
         notreearea = function()
             local variador = math.random()
             if variador > 0.4 then
-                return { "grasswater" }
+                return { "grass_water" }
             else
                 local tipo = math.random(1, 8)
                 if tipo == 1 then
@@ -186,7 +186,7 @@ Layouts["mangrove1"] = StaticLayout.Get("map/static_layouts/mangrove1", {
                 elseif tipo == 8 then
                     return { "reeds_water" }
                 else
-                    return { "grasswater" }
+                    return { "grass_water" }
                 end
             end
         end,

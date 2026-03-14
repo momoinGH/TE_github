@@ -241,5 +241,3 @@ local function makesnurtle()
 end
 
 return Prefab("trapslug", makeslurtle, assets, prefabs)
---Prefab("slurtle", makeslurtle, assets, prefabs),
---Prefab("snurtle", makesnurtle, assets, prefabs)

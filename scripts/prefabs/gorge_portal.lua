@@ -4,25 +4,11 @@ local assets =
     Asset("ANIM", "anim/quagmire_portal_base.zip"),
 }
 
-local prefabs =
-{
-    "quagmire_portal_activefx",
-    --"quagmire_portal_bubblefx",
-    "quagmire_portal_player_fx",
-    "quagmire_portal_playerdrip_fx",
-    "quagmire_portal_player_splash_fx",
-}
-
 local fx_assets =
 {
     Asset("ANIM", "anim/quagmire_portal_fx.zip"),
 }
---[[
-local fx_bubble_assets =
-{
-    Asset("ANIM", "anim/quagmire_portalbubbles_fx.zip"),
-}
-]]
+
 local function OnDoneTeleporting(inst, obj)
     if inst.closetask ~= nil then
         inst.closetask:Cancel()
@@ -185,68 +171,6 @@ local function fn()
 
     return inst
 end
---[[
-local function fn1()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-	
-    inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("gorge_portal.png")
-
-    inst.AnimState:SetBuild("quagmire_portal")
-    inst.AnimState:SetBank("quagmire_portal")
-    inst.AnimState:PlayAnimation("idle")
-    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:SetSortOrder(6)
-    inst.AnimState:SetFinalOffset(2)
-
-    inst.Transform:SetEightFaced()
-
-    if not TheNet:IsDedicated() then
-        CreateDropShadow(inst)
-    end	
-    --trader, alltrader (from trader component) added to pristine state for optimization	
-    inst:AddTag("trader")
-    inst:AddTag("alltrader")
-
-
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-	inst:AddComponent("playerprox")
-    inst.components.playerprox:SetDist(10, 13)
-    inst.components.playerprox:SetOnPlayerNear(onopen)
-    inst.components.playerprox:SetOnPlayerFar(onclose)	
-	
-    inst:AddComponent("inspectable")
-    inst.components.inspectable:RecordViews()
-
-    inst:AddComponent("teleporter")
-    inst.components.teleporter.onActivate = OnActivate
-    inst.components.teleporter.onActivateByOther = OnActivateByOther
-    inst.components.teleporter.offset = 0
-    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-    inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-    inst:AddComponent("inventory")
-
-    inst:AddComponent("trader")
-    inst.components.trader.acceptnontradable = true
-    inst.components.trader.onaccept = onaccept
-    inst.components.trader.deleteitemonaccept = false
-	
-		
-    return inst
-end]]
 
 local function activefx_fn()
     local inst = CreateEntity()
@@ -286,32 +210,5 @@ local function activefx_fn()
     return inst
 end
 
---[[
-local function bubblefx_fn()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
-
-    inst.AnimState:SetBuild("quagmire_portalbubbles_fx")
-    inst.AnimState:SetBank("quagmire_portalbubbles_fx")
-    inst.AnimState:PlayAnimation("idle")
---    inst:Hide()
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.persists = false
-
-    return inst
-end
-]]
-
 return Prefab("quagmire_portal_activeanim", activefx_fn, fx_assets),
     Prefab("gorge_portal", fn, assets)
---Prefab("gorge_portal1", fn1, assets)
---Prefab("quagmire_portal_bubblefx", bubblefx_fn, fx_bubble_assets)

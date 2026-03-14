@@ -31,8 +31,6 @@ local function fn(Sim)
 
     inst.AnimState:PlayAnimation("idle_on")
 
-
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -94,8 +92,6 @@ local function fn1(Sim)
 
     inst.AnimState:PlayAnimation("idle_on")
 
-
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -156,8 +152,6 @@ local function fn2(Sim)
     anim:SetBuild("portal_shipwrecked_build")
 
     inst.AnimState:PlayAnimation("idle_on")
-
-
 
     inst.entity:SetPristine()
 

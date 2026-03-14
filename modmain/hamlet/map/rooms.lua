@@ -30,7 +30,6 @@ AddRoom("BG_plains_base_nocanopy1", {
         {
             grass_tall_patch = 2,
             underwater_entrance2 = 1,
-            vidanomar = 1,
             gravestone = 2,
             sculpture_rook = 1,
         },

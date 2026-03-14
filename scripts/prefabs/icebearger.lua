@@ -22,15 +22,15 @@ local brain = require("brains/beargerbrain")
 
 SetSharedLootTable('bearger',
     {
-        { 'meat',                      1.00 },
-        { 'meat',                      1.00 },
-        { 'meat',                      1.00 },
-        { 'meat',                      1.00 },
-        { 'meat',                      1.00 },
-        { 'meat',                      1.00 },
-        { 'meat',                      1.00 },
-        { 'meat',                      1.00 },
-        { 'bearger_fur',               1.00 },
+        { 'meat', 1.00 },
+        { 'meat', 1.00 },
+        { 'meat', 1.00 },
+        { 'meat', 1.00 },
+        { 'meat', 1.00 },
+        { 'meat', 1.00 },
+        { 'meat', 1.00 },
+        { 'meat', 1.00 },
+        { 'bearger_fur', 1.00 },
         { 'chesspiece_bearger_sketch', 1.00 },
     })
 
@@ -53,7 +53,7 @@ local function RetargetFn(inst)
                     return guy.components.combat.target == inst
                         and inst.components.combat:CanTarget(guy)
                 end,
-                { "_combat" },     --see entityreplica.lua
+                { "_combat" }, --see entityreplica.lua
                 { "prey", "smallcreature", "INLIMBO" }
             ) or
             (inst.last_eat_time ~= nil and
@@ -65,7 +65,7 @@ local function RetargetFn(inst)
                         return guy.components.inventory:FindItem(HoneyedItem) ~= nil
                             and inst.components.combat:CanTarget(guy)
                     end,
-                    { "_combat", "_inventory" },     --see entityreplica.lua
+                    { "_combat", "_inventory" }, --see entityreplica.lua
                     { "prey", "smallcreature", "INLIMBO" }
                 )
             )

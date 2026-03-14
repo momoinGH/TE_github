@@ -1,40 +1,13 @@
 local wildbore_assets =
 {
-	Asset("ANIM", "anim/wildbore_head.zip")
-}
-
-local beaver_assets =
-{
-    Asset("ANIM", "anim/beaver_head.zip"),
-}
-
-local tiki_assets =
-{
-    Asset("ANIM", "anim/tiki_stick.zip")
+    Asset("ANIM", "anim/wildbore_head.zip")
 }
 
 local wildbore_prefabs =
 {
-	"flies",
-	"pigskin",
-	"bamboo",
-	"collapse_small",
-}
-
-local beaver_prefabs =
-{
     "flies",
-    "beaverskin",
-    "twigs",
-    "log",
-    "collapse_small",
-}
-
-local tiki_prefabs =
-{
-    "flies",
-    "tikimask",
-    "twigs",
+    "pigskin",
+    "bamboo",
     "collapse_small",
 }
 
@@ -98,11 +71,11 @@ end
 local function OnHaunt(inst, haunter)
     --#HAUNTFIX
     --if math.random() <= TUNING.HAUNT_CHANCE_OCCASIONAL and
-        --inst.components.workable ~= nil and
-        --inst.components.workable:CanBeWorked() then
-        --inst.components.workable:WorkedBy(haunter, 1)
-        --inst.components.hauntable.hauntvalue = TUNING.HAUNT_SMALL
-        --return true
+    --inst.components.workable ~= nil and
+    --inst.components.workable:CanBeWorked() then
+    --inst.components.workable:WorkedBy(haunter, 1)
+    --inst.components.hauntable.hauntvalue = TUNING.HAUNT_SMALL
+    --return true
     --else
     if not (inst.awake or inst:HasTag("burnt")) then
         inst.awake = true
@@ -124,7 +97,7 @@ local function create_common(bankandbuild)
     inst.entity:AddNetwork()
 
     inst:AddTag("structure")
-    inst:AddTag("beaverchewable")  -- for werebeaver
+    inst:AddTag("beaverchewable") -- for werebeaver
 
     inst.AnimState:SetBank(bankandbuild)
     inst.AnimState:SetBuild(bankandbuild)
@@ -173,40 +146,9 @@ local function create_wildborehead()
         return inst
     end
 
-	inst.components.lootdropper:SetLoot({"pigskin", "bamboo"})
+    inst.components.lootdropper:SetLoot({ "pigskin", "bamboo" })
 
     return inst
 end
 
-local function create_beaverhead()
-    local inst = create_common("pig_head")
-
-    inst.AnimState:SetBuild("bea_head")
-    inst.Transform:SetScale(1.3, 1.3, 1.3)
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.components.lootdropper:SetLoot({"beaverskin", "log", "twigs"})
-
-    return inst
-end
-
-local function create_tikistick()
-    local inst = create_common("pig_head")
-
-    inst.AnimState:SetBuild("tiki_stick")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.components.lootdropper:SetLoot({"tikimask", "twigs", "twigs"})
-
-    return inst
-end
-
-return Prefab("wildborehead", create_wildborehead, wildbore_assets, wildbore_prefabs),
-    Prefab("beaverhead", create_beaverhead, beaver_assets, beaver_prefabs),
-    Prefab("tikistick", create_tikistick, tiki_assets, tiki_prefabs)
+return Prefab("wildborehead", create_wildborehead, wildbore_assets, wildbore_prefabs)

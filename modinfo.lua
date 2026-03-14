@@ -100,8 +100,8 @@ end
 local hamlet_atlas = "images/scrapbook_tropical/scrapbook_hamlet.xml"
 
 local LEVELCATEGORY = {
-    SETTINGS = "SETTINGS",
-    WORLDGEN = "WORLDGEN",
+    SETTINGS = "SETTINGS", --世界规则里显示
+    WORLDGEN = "WORLDGEN", --世界生成里显示
 }
 
 pro_modules = {
@@ -154,7 +154,7 @@ configuration_options =
     --     world_gen = {
     --         category = { LEVELCATEGORY.WORLDGEN }, --世界规则还世界生成
     --         group = pro_modules.hamlet,            --在哪个组
-    --         world = { "forest" },                  --在世界和洞穴的世界规则中显示
+    --         world = { "forest","cave" },                  --在世界和洞穴的世界规则中显示
     --         -- atlas = nil, --用的的图集，需要在modservercreationmain.lua里面定义并加载资源
     --         -- image = "liefs.tex", --图片
     --         order = -1, --优先级，越小越在前面

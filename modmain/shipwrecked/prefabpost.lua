@@ -11,6 +11,7 @@ modimport "modmain/shipwrecked/prefabs/ash.lua"
 modimport "modmain/shipwrecked/prefabs/trinkets.lua"
 modimport "modmain/shipwrecked/prefabs/forest.lua"
 modimport "modmain/shipwrecked/prefabs/wobster.lua"
+modimport "modmain/shipwrecked/prefabs/watertree_pillar.lua"
 
 ----------------------------------------------------------------------------------------------------
 

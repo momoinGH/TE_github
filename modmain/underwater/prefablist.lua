@@ -85,7 +85,6 @@ PrefabFiles =
     "fish_med",
     "bioluminescence",
     "kraken_projectile_underwater",
-    "tropicalspawnblocker",
     "rainbowjellyfish",
     "magma_rocks",
     "limpets",

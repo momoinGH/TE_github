@@ -16,9 +16,6 @@ TUNING.tropical mod设置数据
 TUNING.TE_WORLDGEN 世界生成相关数据
 ]]
 
-print("执行modmain", GetModConfigData("vampirebatcave"))
-
-
 ----------------------------------------------------------------------------------------------------
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
 Utils = require("tropical_utils/utils")
@@ -54,6 +51,7 @@ env.modimport = function(modulename, ...)
 end
 
 ----------------------------------------------------------------------------------------------------
+ProOnConfigLoaded()
 modimport "modmain/knownmodcheck"             -- 检测不兼容模组并报错崩溃
 modimport "modmain/mods"                      -- 兼容其他mod
 if proisdev then

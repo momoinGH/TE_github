@@ -15,10 +15,6 @@ local total_day_time = 480
 
 PERISH_ONE_DAY = total_day_time
 
-local function CalcNewSize()
-	return math.random()
-end
-
 local function playshockanim(inst)
     if inst:HasTag("aquatic") then
         inst.AnimState:PlayAnimation("idle_water_shock")
@@ -49,17 +45,17 @@ local function ondropped(inst)
 
     if TileGroupManager:IsOceanTile(ground) then
         --if not inst.replica.inventoryitem:IsHeld() then
-            local replacement = SpawnPrefab("jellyfish_planted")
-            replacement.Transform:SetPosition(inst.Transform:GetWorldPosition())
-            inst:Remove()
-        else
-            local replacement = SpawnPrefab("jellyfish_dead")
-            replacement.Transform:SetPosition(inst.Transform:GetWorldPosition())
-            replacement.AnimState:PlayAnimation("stunned_loop", true)
-            replacement:DoTaskInTime(2.5, playDeadAnimation)
-            replacement.shocktask = replacement:DoPeriodicTask(math.random() * 10 + 5, playshockanim)
-            replacement:AddTag("stinger")
-            inst:Remove()
+        local replacement = SpawnPrefab("jellyfish_planted")
+        replacement.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        inst:Remove()
+    else
+        local replacement = SpawnPrefab("jellyfish_dead")
+        replacement.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        replacement.AnimState:PlayAnimation("stunned_loop", true)
+        replacement:DoTaskInTime(2.5, playDeadAnimation)
+        replacement.shocktask = replacement:DoPeriodicTask(math.random() * 10 + 5, playshockanim)
+        replacement:AddTag("stinger")
+        inst:Remove()
     end
 end
 
@@ -114,7 +110,7 @@ local function defaultfn(sim)
     inst.components.inventoryitem:SetOnDroppedFn(ondropped)
     inst.components.inventoryitem:SetOnPickupFn(onpickup)
 
-	inst:AddComponent("edible")
+    inst:AddComponent("edible")
     inst.components.edible.foodtype = nil
 
     inst:ListenForEvent("on_landed", ondropped)
@@ -137,7 +133,7 @@ local function defaultfn(sim)
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({ "jellyfish_dead" }) --Replace with dead jelly
 
-	--[[inst:AddComponent("weighable")
+    --[[inst:AddComponent("weighable")
 	inst.components.weighable.type = TROPHYSCALE_TYPES.FISH
 	inst.components.weighable:Initialize(TUNING.JELLYFISH_WEIGHTS.min, TUNING.JELLYFISH_WEIGHTS.max)
 	inst.components.weighable:SetWeight(Lerp(TUNING.JELLYFISH_WEIGHTS.min, TUNING.JELLYFISH_WEIGHTS.max, CalcNewSize()))]]

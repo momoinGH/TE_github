@@ -1704,7 +1704,6 @@ return Class(function(self, inst)
         --print("[schools - SpawnSchool] Spawned " .. tostring(count) .. "x " .. tostring(schooldata.prefab) .. " for " .. tostring(target))
 
         if count > 0 then
-            SpawnPrefab("tropicalspawnblocker").Transform:SetPosition(spawnpoint:Get())
 
             --        self.inst:PushEvent("schoolspawned", {spawnpoint = spawnpoint})
 

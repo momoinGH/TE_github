@@ -8060,7 +8060,6 @@ AddRoom("BeachPortalRoom", {
         countprefabs =
         {
             spawnpoint_multiplayer = 1,
-            --vidanomar = 1,
             --lake = 1,
         }
 
@@ -11289,7 +11288,6 @@ AddRoom("MAINBeachPortalRoom", {
         countprefabs =
         {
             spawnpoint_multiplayer = 1,
-            --vidanomar = 1,
             --lake = 1,
         }
 

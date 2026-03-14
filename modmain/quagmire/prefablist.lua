@@ -1,5 +1,11 @@
 PrefabFiles =
 {
+    "feather_chicken", --鸡毛
+    "gorge_portal",    --苔藓大门
+
+
+
+
     "quagmire_merm_house",
     "quagmire_mealingstone",
     "quagmire_flour",
@@ -50,7 +56,7 @@ PrefabFiles =
     "quagmire_sugarwoodtree_cone",
     "quagmire_pigeon",
     "quagmire_spiceshrub",
-	"dug_quagmire_spotspice_shrub",
-	"turf_quagmire",
-	"quagmire_plants_planted",
+    "dug_quagmire_spotspice_shrub",
+    "turf_quagmire",
+    "quagmire_plants_planted",
 }

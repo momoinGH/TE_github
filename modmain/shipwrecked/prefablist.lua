@@ -1,12 +1,33 @@
 PrefabFiles = {
-    "venomgland",           --毒腺
-    "snakeoil",             --蛇油
-    "bishopwater",          --浮船主教
-    "cave_entrance_vulcao", --火山
-    "cave_exit_vulcao",     --火山出口
-
-
-
+    "venomgland",             --毒腺
+    "snakeoil",               --蛇油
+    "bishopwater",            --浮船主教
+    "cave_entrance_vulcao",   --火山
+    "cave_exit_vulcao",       --火山出口
+    "wallyintro",             --船只碎片
+    "firetwister_seal",       --小火豹
+    "firetwister",            --火豹卷
+    "twister_tornadodefogo",  --"火卷风"
+    "glass",                  --玻璃
+    "jellyfish",              --水母
+    "ligamundosw",            --海洋之椅
+    "machetes",               --砍刀
+    "mermhouse_tropical",     --热带鱼人屋
+    "mermtrader",             --鱼人
+    "obsidiancoconade",       --黑曜石椰弹
+    "obsidiancoconadeactive", --点燃的黑曜石椰弹
+    "pigkingstaff",           --野猪王权杖
+    "wildbore_minion",        --野猪王守卫
+    "wildboreking_spawner",   --野猪王重生器
+    "wildboreking",           --野猪王
+    "slip",                   --小滑怪
+    "slipstor_spawner",       --大滑怪生成器
+    "slipstor",               --大滑怪
+    "seacucumber",            --海黄瓜
+    "watercress",             --海豆瓣菜
+    "wildborehead",           --野猪头
+    "tro_treasurechest",      --一堆箱子
+    "volcano_altar_pillar",   --火山灰石柱
 
 
 
@@ -194,7 +215,7 @@ PrefabFiles = {
     "seaweed_planted",
     "seaweed",
     "wreck",
-    "fishinhole",
+    "fishinhole", --鱼群
     "octopusking",
     "kraken_tentacle",
     "kraken_projectile",
@@ -254,7 +275,8 @@ PrefabFiles = {
     "armor_snakeskin",
     "mangrovetrees",
     "mangrovetreesbee",
-    "grass_water",
+    "grass_water",       --水草
+    "grasswaterspawner", --水草生成器
     "kraken_jellyfish",
     "kraken_spawner",
     "pirateghost",

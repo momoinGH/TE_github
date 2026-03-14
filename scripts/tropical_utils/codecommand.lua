@@ -1424,3 +1424,6 @@ function RemovePhysicsColliders(inst) end
 
 -- modworldgenmain和modmain里能拿到这个值
 modinfo = {}
+
+
+function MakeHauntableLaunchAndPerish(inst, launchchance, perishchance, speed, perishpct, cooldown, launch_haunt_value, perish_haunt_value) end

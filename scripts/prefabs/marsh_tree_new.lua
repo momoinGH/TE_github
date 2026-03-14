@@ -16,7 +16,7 @@ local prefabs =
 SetSharedLootTable('marsh_tree',
     {
         { 'twigs', 1.0 },
-        { 'log',   0.2 },
+        { 'log', 0.2 },
     })
 
 local function sway(inst)

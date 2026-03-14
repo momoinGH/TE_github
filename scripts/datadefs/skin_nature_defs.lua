@@ -126,7 +126,7 @@ local natureskins = {
     --     },
     -- },
 
-    -- grasswater = {
+    -- grass_water = {
     --     default = {
     --         base_minimapicon = "grass.png",skintype = "tropical",
     --         baseoverride = { { "grass_pieces", "grass1", "grass_pieces" }, },
