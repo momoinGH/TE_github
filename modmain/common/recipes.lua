@@ -421,7 +421,7 @@ if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.multiplayerportal == 15 or
         { min_spacing = 1, placer = "roottrunk_child_placer" }, { "CONTAINERS", "STRUCTURES" })
     AddRecipe2("basefan", { Ingredient("alloy", 2), Ingredient("transistor", 2), Ingredient("gears", 1) }, TECH.SCIENCE_TWO, { placer = "basefan_placer" },
         { "STRUCTURES", "SUMMER" })
-    AddRecipe2("sprinkler", { Ingredient("alloy", 2), Ingredient("bluegem", 1), Ingredient("ice", 6) }, TECH.SCIENCE_TWO, { placer = "sprinkler1_placer" }, { "GARDENING" })
+    AddRecipe2("sprinkler", { Ingredient("alloy", 2), Ingredient("bluegem", 1), Ingredient("ice", 6) }, TECH.SCIENCE_TWO, { placer = "sprinkler_placer" }, { "GARDENING" })
     AddRecipe2("smelter", { Ingredient("cutstone", 6), Ingredient("boards", 4), Ingredient("redgem", 1) }, TECH.SCIENCE_TWO, { placer = "smetler_placer" },
         { "STRUCTURES", "PROTOTYPERS" })
     AddRecipe2("disguisehat", { Ingredient("twigs", 2), Ingredient("pigskin", 1), Ingredient("beardhair", 1) }, TECH.SCIENCE_TWO, nil, { "CLOTHING" })

@@ -1,26 +1,52 @@
 PrefabFiles = {
-    "beds",              --床
-    "boatmetal",         --金属船
-    "bramble_bush",      --荆棘
-    "crabapple_tree",    --醋栗树
-    "feather_thunder",   --雷羽
-    "fennel",            --茴香
-    "grass_water",       --水草
-    "grasswaterspawner", --水草生成器
-    "grotto_grub_nest",  --虫穴
-    "grotto_grub",       --石窟蛴螬
-    "grotto_parsnip",    --防风草
-    "grottoqueen",       --石窟虫皇
-    "ligamundoham",      --天空之椅
-    "machetes",          --砍刀
-    "marsh_tree_new",    --石窟树木
-    "piggolem",          --遗迹石像猪守卫
-    "piggravestone",     --猪墓碑
-    "pollen_item",       --花粉
-    "pinkman",           --粉猪人
-    "tidalpoolnew",      --雨林积水池
-    "tree_forest_rot",   --阴森丛林树
-    "tro_treasurechest", --一堆箱子
+    "beds",                   --床
+    "boatmetal",              --金属船
+    "bramble_bush",           --荆棘
+    "crabapple_tree",         --醋栗树
+    "feather_thunder",        --雷羽
+    "fennel",                 --茴香
+    "grass_water",            --水草
+    "grasswaterspawner",      --水草生成器
+    "grotto_grub_nest",       --虫穴
+    "grotto_grub",            --石窟蛴螬
+    "grotto_parsnip",         --防风草
+    "grottoqueen",            --石窟虫皇
+    "ligamundoham",           --天空之椅
+    "machetes",               --砍刀
+    "marsh_tree_new",         --石窟树木
+    "piggolem",               --遗迹石像猪守卫
+    "piggravestone",          --猪墓碑
+    "pollen_item",            --花粉
+    "pinkman",                --粉猪人
+    "tidalpoolnew",           --雨林积水池
+    "tree_forest_rot",        --阴森丛林树
+    "tro_treasurechest",      --一堆箱子
+    "topiary",                --灌木
+    "lawnornaments",          --景观小树
+    "hedge",                  --树篱
+    "clippings",              --碎叶
+    "city_lamp",              --路灯
+    "hamlet_cones",           --雨林刺果、爪棕榈树
+    "securitycontract",       --安保合同
+    "city_hammer",            --执行官锤
+    "magnifying_glass",       --放大镜
+    "pigbandit",              --蒙面猪
+    "pigman_shopkeeper_desk", --猪人店主桌子
+    "shop_pedestals",         --一格小货架
+    "shelf",                  --柜子
+    "shelf_slot",             --柜子上的槽位
+    "trinkets_giftshop",      --玛法拉法女王的交易物
+    "key_to_city",            --城镇之钥
+    "player_house_kits",      --玩家房子皮肤套件
+    "pighouse_city",          --玩家小房子
+    "pig_guard_tower",        --瞭望塔
+    "armor_metal",            --合金盔甲
+    "reconstruction_project", --废墟
+    "water_spray",            --洒水器特效
+    "water_pipe",             --洒水器水管
+    "sprinkler",              --洒水器
+    "smelter",                --冶炼炉
+    "halberd",                --战戟
 
 
 
@@ -237,14 +263,12 @@ PrefabFiles = {
     "spider_monkey_herd",
     "spider_monkey_tree",
     "spider_monkey",
-    "sprinkler1",
     "swfishbait",
     "teatree_nut",
     "teatrees",
     "thunderbird",
     "thunderbirdnest",
     "tigersharkpool",
-    "topiary",
     "tree_pillar",
     "trinkets_giftshop",
     "tuber",

@@ -559,21 +559,6 @@ local function fn()
 
     MakeSnowCovered(inst, .01)
 
-
-    --[[
-	inst:DoTaskInTime(0.1,
-		function()
-		local P0 = inst:GetPosition()
-		local P1 = GetValidWaterPointNearby(P0)
-		if P1 == nil then return end
-			if not inst.pipes or (#inst.pipes < 1) then
-				CreatePipes(inst)
-			end
-
-			ConnectPipes(inst)
-			ExtendPipes(inst)
-		end)
-]]
     inst.waterSpray = nil
 
     return inst
@@ -588,6 +573,4 @@ end
 
 
 return Prefab("sprinkler", fn, assets, prefabs),
-    MakePlacer("sprinkler1_placer", "sprinkler_placement", "sprinkler_placement", "idle", true, nil, nil, 1.4, nil,
-        nil, nil, nil, nil, nil)
---MakePlacer("sprinkler_placer", "sprinkler_placement", "sprinkler_placement", "idle", true, nil, nil, 1.4, nil, nil, nil, nil, nil, PlaceTestFn)
+    MakePlacer("sprinkler_placer", "sprinkler_placement", "sprinkler_placement", "idle", true, nil, nil, 1.4)

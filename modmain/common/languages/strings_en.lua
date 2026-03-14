@@ -2663,7 +2663,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_BANKER                               
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KILLERBEE_HELD                              = "This seems dangerous."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PLAYERHOUSE_ROOM_PEDRA_CIMA                 = "石质房门。"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_ICE_GENERIC                            = "A very isolated glacier."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROC_NEST_TRUNK                              = "What could've broken that?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BANDITMAP                                   = "A map to where that thief hid all his treasure!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_HATSHOP_BURNING                    = "The hats are on fire!"
@@ -5092,7 +5091,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.HOMESIGN.UNWRITTEN                          
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVAE_EGG_CRACKED.COMFY                     = "I never thought I would see a happy egg."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PLANT_NORMAL.READY                          = "Mmmm. Ready to harvest."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RABBITHOLE.SPRING                           = "The Kingdom of the Bunnymen is closed for the season."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_ICE.MELTED                             = "Won't be useful until it freezes again."
 
 ------------------------------------------------------
 
@@ -9517,7 +9515,9 @@ STRINGS.CITY_PIG_TALK_RUNAWAY_WILSON                      = {
 }
 
 
-
+STRINGS.NAMES.ROCK_ICE = "Mini-geleira"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_ICE_GENERIC = "A very isolated glacier."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_ICE.MELTED  = "Won't be useful until it freezes again."
 
 modimport "modmain/common/languages/stringscreeps"
 modimport "modmain/common/languages/wurt_quotes"
