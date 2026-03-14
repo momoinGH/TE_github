@@ -15,7 +15,7 @@ PrefabFiles = {
 }
 
 if TUNING.tropical.tropicalshards ~= 0 then
-    table.insert(PrefabFiles, "porkland_sw_entrance")
+    table.insert(PrefabFiles, "porkland_sw_entrance") --去各种世界的传送门
 end
 
 if TUNING.tropical.boat then

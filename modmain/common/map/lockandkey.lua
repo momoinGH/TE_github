@@ -1,30 +1,7 @@
 require("map/lockandkey")
 
---TODO 把不存在的删了
 ARRAY_NEW =
 {
-
-    "HAM_CAVE", --哈姆雷特洞穴
-    "HAM_ANT",
-    "HAM_MAZE",
-
-    "PLAIN",
-    "RAINFOREST",
-    "DEEPRAINFOREST",
-    "EDGE",
-    "PAINTED",
-    "CITY_1",
-    "CITY_2",
-
-    "HAM_BLANK",
-    "HAM_BLANK1",
-    "HAM_BLANK2",
-    "SNAKE",
-
-    "DEEPRAINFOREST_CITY2",
-    "DEEPRAINFOREST_SNAKE",
-    "LOST_JUNGLE",
-
     "JUNGLE_DEPTH_1",
     "JUNGLE_DEPTH_2",
     "JUNGLE_DEPTH_3",
@@ -69,8 +46,6 @@ ARRAY_NEW =
     "ISLAND11",
 
     "VOLCANO_ENTRANCE", --火山洞穴
-    "VOLCANO",
-    "VOLCANO_INNER",
 }
 
 -- 声明新的锁和钥匙
