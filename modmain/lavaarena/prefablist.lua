@@ -1,13 +1,13 @@
 PrefabFiles = {
-    "lavaarena_spectator",
-    "lavaarena_spectatorblocker",
-    "rhinodrillbros",
-    "lavarenawaves",
-    "lavaarena_merm",
-    "lavaarena_spider",
-    "lavaarena_bossboar",
-    "teleportato_sw_parts",
-    "teleportato_sw",
-    "tfwp_armor",
-    "lavarenainside",
+    "lavaarena_spectator",        --观战的熔炉猪人
+    "lavaarena_spectatorblocker", --观战的熔炉猪人
+    "rhinodrillbros",             --犀牛兄弟
+    "lavarenawaves",              --祭品
+    "lavaarena_merm",             --红鱼人、大鱼人
+    "lavaarena_spider",           --蜘蛛
+    "lavaarena_bossboar",         --火焰特效
+    "teleportato_sw_parts",       --零件
+    "teleportato_sw",             --木质传送台
+    "tfwp_armor",                 --装备
+    "lavarenainside",             --地板
 }
