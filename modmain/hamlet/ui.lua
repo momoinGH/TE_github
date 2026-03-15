@@ -1,14 +1,9 @@
-local LeafBadge = require "widgets/leafbadge"
-local Clouds = require "widgets/hamlet_clouds"
-local Pollenover = require "widgets/pollenover"
-AddClassPostConstruct("widgets/controls", function(self)
-    -- 花粉
-    self.hamlet_pollenover = self:AddChild(Pollenover(self.owner))
+table.insert(Assets, Asset("ANIM", "anim/leaves_canopy2.zip")) --头顶绿荫
 
+local LeafBadge = require "widgets/leafbadge"
+AddClassPostConstruct("widgets/controls", function(self)
     -- 雨林叶子
     self.hamlet_leafbadge = self:AddChild(LeafBadge(self.owner))
-
-    self.hamlet_clouds = self:AddChild(Clouds(self.owner))
 end)
 
 
@@ -21,8 +16,6 @@ if TUNING.tropical.aporkalypse then
 end
 
 
--- local PollenOver = require("widgets/pollenover")
-local FogOver = require("widgets/fogover")
 local PlayerHud = require("screens/playerhud")
 -- function PlayerHud:CreateOverlays(owner, ...)
 --     -- 花粉
@@ -30,24 +23,6 @@ local PlayerHud = require("screens/playerhud")
 --     self.pollenover:Hide()
 --     self.inst:ListenForEvent("updatehayfever", function(inst, data) return self.pollenover:UpdateState(data.sneezetime) end, self.owner)
 -- end
-
-AddClassPostConstruct("screens/playerhud", function(self)
-    Hooks.FnDecorator(self, "CreateOverlays", nil, function(retTab, self, owner, ...)
-        -- 大雾
-        self.fogover = self.overlayroot:AddChild(FogOver(owner))
-        self.fogover:Hide()
-
-        return retTab
-    end)
-
-    Hooks.FnDecorator(self, "SetMainCharacter", nil, function(retTab, self, maincharacter)
-        if not maincharacter then return retTab end
-
-        self.inst:ListenForEvent("pro_fogchange", function(inst, data) return self.fogover:OnFogStateChange() end, self.owner)
-
-        return retTab
-    end)
-end)
 
 ----------------------------------------------------------------------------------------------------
 

@@ -3,6 +3,7 @@ local assets =
     Asset("ANIM", "anim/pig_house_old.zip"),          -- bank
     Asset("ANIM", "anim/quagmire_werepig_house.zip"), -- build
     Asset("SOUND", "sound/pig.fsb"),
+    Asset("ANIM", "anim/pig_house_old.zip")
 }
 
 local prefabs =

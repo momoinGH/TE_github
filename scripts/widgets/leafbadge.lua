@@ -94,6 +94,7 @@ function LeafBadge:OnUpdate(dt)
     end
 
     if self.leavestop_intensity == 0 then
+        -- self:GetAnimState():PlayAnimation("zoom_out")
         self:Hide()
     else
         self:Show()

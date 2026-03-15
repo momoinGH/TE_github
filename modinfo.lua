@@ -173,6 +173,32 @@ configuration_options =
         }
     },
     {
+        name = "hayfever",
+        label = "花粉症",
+        options = options_enable(),
+        default = 1, --默认值
+        world_gen = {
+            category = { LEVELCATEGORY.SETTINGS },
+            group = pro_modules.hamlet,
+            world = { "forest" }, --在世界和洞穴的世界规则中显示
+            atlas = hamlet_atlas,
+            image = "hayfever.tex",
+        }
+    },
+    {
+        name = "fog",
+        label = "大雾",
+        options = options_enable(),
+        default = 1, --默认值
+        world_gen = {
+            category = { LEVELCATEGORY.SETTINGS },
+            group = pro_modules.hamlet,
+            world = { "forest" }, --在世界和洞穴的世界规则中显示
+            atlas = hamlet_atlas,
+            image = "fog.tex",
+        }
+    },
+    {
         name = "vampirebatcave",
         label = "洞穴裂缝",
         options = options_enable(),

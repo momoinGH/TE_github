@@ -2,11 +2,6 @@ local kindofworld = GetModConfigData("kindofworld")
 
 local is_custom = kindofworld == 15
 
-local only_hamlet = kindofworld == 5
-local hamlet = only_hamlet and 20
-    or is_custom and GetModConfigData("hamlet")
-    or false
-
 local only_shipwrecked = kindofworld == 10
 local shipwrecked = only_shipwrecked and 20
     or is_custom and GetModConfigData("shipwrecked")
@@ -71,15 +66,33 @@ local only_sea = kindofworld == 20
 --     cherryforest                   = GetModConfigData("cherryforest"),
 -- }
 
+local hamlet = GetModConfigData("hamlet") == 1
+
+
 TUNING.tropical = {
+    room           = hamlet,
+    hamlet         = hamlet,
+    hayfever       = GetModConfigData("hayfever"),       --花粉症
+    fog            = GetModConfigData("fog"),            --迷雾
+    vampirebatcave = GetModConfigData("vampirebatcave"), --洞穴裂缝
+
+
+
+
+
+
+
+
+
+
+
     kindofworld      = 15, --世界类型
 
-    room             = true,
     boat             = false,
     windy            = false,
     sea              = false, --仅海洋世界
     underwater       = false, --海底世界
-    hamlet           = false,
+
     shipwrecked      = false,
     shipwrecked_plus = false, --海难plus
     lavaarena        = false, --熔炉竞技场
@@ -90,9 +103,9 @@ TUNING.tropical = {
 
     only_hamlet     = false, --仅哈姆雷特世界
     hamlet_caves    = false,
-    pinacle         = true,  --峰顶
-    anthill         = true,  --蚁丘
-    pigruins        = true,  --古代猪人遗迹
+    pinacle         = false, --峰顶
+    anthill         = false, --蚁丘
+    pigruins        = false, --古代猪人遗迹
     hamlet_pigcity1 = false, --猪伯利市3
     hamlet_pigcity2 = false, --猪伯利皇城
 
@@ -115,8 +128,7 @@ TUNING.tropical = {
     aporkalypse                    = false, --大灾变
     multiplayerportal              = false, --出生模式
     greenmod                       = false,
-    fog                            = false, --迷雾
-    hayfever                       = false, --花粉症
+
     disembarkation                 = false, --自动离船
     bosslife                       = 1,     --巨兽生命值
 

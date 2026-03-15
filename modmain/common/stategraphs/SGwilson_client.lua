@@ -19,6 +19,7 @@ local eventhandlers = {
 
 
 local states = {
+    --剪刀剪
     State {
         name = "shear_start",
         tags = { "preshear", "shearing", "working" },

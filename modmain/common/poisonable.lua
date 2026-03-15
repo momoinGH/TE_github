@@ -4,6 +4,7 @@ table.insert(PrefabFiles, "poisonbubble") --中毒特效
 
 table.insert(Assets, Asset("ANIM", "anim/poison.zip"))
 table.insert(Assets, Asset("ANIM", "anim/poison_meter_overlay.zip"))
+table.insert(Assets, Asset("ATLAS", "images/overlays/poison.xml"))
 
 ----------------------------------------------------------------------------------------------------
 

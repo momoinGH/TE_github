@@ -1,12 +1,6 @@
-local Utils = require "tropical_utils/utils"
-
-AddReplicableComponent("hayfever")
-AddReplicableComponent("hayfever")
-
 if TUNING.tropical.only_hamlet then
     modimport "modmain/hamlet/sim_ham" --ham cloud
 end
-
 
 modimport "modmain/hamlet/simutil"
 modimport "modmain/common/poisonable"
@@ -15,27 +9,25 @@ modimport "modmain/hamlet/components/inventory_replica"
 modimport "modmain/hamlet/components/builder"
 modimport "modmain/hamlet/components/builder_replica"
 modimport "modmain/hamlet/components/edible"
-modimport "modmain/hamlet/components/grogginess.lua"      --眩晕、减速
 modimport "modmain/hamlet/components/autoterraformer.lua" --刮地皮头盔组件
 
-modimport "modmain/hamlet/AddIronLordHandlers"            --活性机甲处理
-modimport "modmain/hamlet/AddIronLordPostinit"            --活性机甲构造
+
 modimport "modmain/hamlet/prefabs/molehat.lua"            --鼹鼠帽
 modimport "modmain/hamlet/prefabs/player.lua"
 modimport "modmain/hamlet/prefabs/world.lua"
 modimport "modmain/hamlet/prefabs/forest.lua"
 modimport "modmain/hamlet/prefabs/player_classified.lua" --玩家网络变量
 
+
+if TUNING.tropical.hayfever then
+    modimport "modmain/hamlet/hayfever" --花粉症
+end
+if TUNING.tropical.fog then
+    modimport "modmain/hamlet/fog" --大雾
+end
+modimport "modmain/hamlet/living_artifact.lua" --活性机甲
+
 ----------------------------------------------------------------------------------------------------
-
-
-AddPlayerPostInit(function(inst)
-    if not TheWorld.ismastersim then return end
-
-    if TUNING.tropical.hayfever ~= 0 then
-        inst:AddComponent("hayfever")
-    end
-end)
 
 
 AddPrefabPostInit("world", function(inst)

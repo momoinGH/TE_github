@@ -34,13 +34,6 @@ AddClassPostConstruct("components/combat_replica", function(self)
     end
 end)
 
-AddClassPostConstruct("widgets/controls", function(self)
-    if self.owner == nil then return end
-    local VisorOver = require "widgets/visorover"
-    self.visorover = self:AddChild(VisorOver(self.owner))
-    self.visorover:MoveToBack()
-end)
-
 AddClassPostConstruct("screens/playerhud", function(self)
     local BatSonar = require "widgets/batsonar"
     local TrapMarker = require "widgets/trapmarker"

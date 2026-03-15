@@ -1,3 +1,7 @@
+table.insert(Assets, Asset("ANIM", "anim/ui_honeychest_7x.zip"))
+table.insert(Assets, Asset("ATLAS", "images/ui/honeychest.xml"))
+
+
 local containers = require("containers")
 local params = containers.params
 

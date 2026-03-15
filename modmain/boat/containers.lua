@@ -1,5 +1,6 @@
 local params = require("containers").params
 
+table.insert(Assets, Asset("ATLAS", "images/barco.xml"))
 
 
 local shipwrecked_boat_slotbg =

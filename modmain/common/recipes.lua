@@ -404,7 +404,7 @@ if GetModConfigData("Shipwrecked") ~= 1 or TUNING.tropical.multiplayerportal == 
 end
 
 -- HAMLET--
-if GetModConfigData("Hamlet") ~= 5 or TUNING.tropical.multiplayerportal == 15 or TUNING.tropical.only_hamlet then -- GetModConfigData("painted_sands")
+if TUNING.tropical.hamlet or TUNING.tropical.multiplayerportal == 15 or TUNING.tropical.only_hamlet then -- GetModConfigData("painted_sands")
     AddRecipe2("bathat", { Ingredient("pigskin", 2), Ingredient("batwing", 1), Ingredient("compass", 1) }, TECH.SCIENCE_TWO, nil, { "LIGHT" })
     AddRecipe2("candlehat", { Ingredient("cork", 4), Ingredient("iron", 2) }, TECH.SCIENCE_ONE, nil, { "LIGHT" })
     AddRecipe2("goldnugget_ham", { Ingredient("gold_dust", 6) }, TECH.SCIENCE_ONE, { product = "goldnugget", }, { "REFINE" })

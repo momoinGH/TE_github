@@ -3,5 +3,4 @@ AddPrefabPostInit("forest", function(inst)
 
     inst:AddComponent("aporkalypse")           --蝙蝠生成
     inst:AddComponent("rocmanager")            --饥荒大鹏鸟管理
-    inst:AddComponent("pro_hamlet_fogspawner") --大雾生成
 end)

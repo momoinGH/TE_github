@@ -61,6 +61,7 @@ PrefabFiles =
     "lobsterunderwater",   --龙虾
     "stungrayunderwater",  --恶臭蝠鲼
     "wreckunderwater",     --残骸
+    "sunken_chest",        --沉默的宝箱
 
 
     "seaquaketentacle",             --海妖触手

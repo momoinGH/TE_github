@@ -5,7 +5,7 @@ local scale_envelope_name = "oceanfogscaleenvelope"
 local assets =
 {
 	Asset("IMAGE", texture),
-	Asset("SHADER", shader),
+    Asset("SHADER", shader),
 }
 
 local max_scale = 10

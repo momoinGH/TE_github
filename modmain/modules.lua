@@ -76,5 +76,8 @@ PrefabFiles = ALL_PREFAB_FILES
 ALL_PREFAB_FILES = nil
 Assets = ALL_ASSETS
 ALL_ASSETS = nil
+
+-- wiki
+table.insert(Assets, Asset("ANIM", "anim/pigman_tribe.zip")) --图鉴wiki默认动画
 Constructor.AddScrapbookWiki("tropical", WIKI_DATA)
 WIKI_DATA = nil

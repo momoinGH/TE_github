@@ -1,3 +1,21 @@
+for _, asset in ipairs({
+    -- 虚空小地图使用
+    Asset("ATLAS", "levels/textures/tro_map_interior/exit.xml"),
+    Asset("ATLAS", "levels/textures/tro_map_interior/frame.xml"),
+    Asset("ATLAS", "levels/textures/tro_map_interior/mini_antcave_floor.xml"),
+    Asset("ATLAS", "levels/textures/tro_map_interior/mini_floor_marble_royal.xml"),
+    Asset("ATLAS", "levels/textures/tro_map_interior/mini_ruins_slab.xml"),
+    Asset("ATLAS", "levels/textures/tro_map_interior/mini_vamp_cave_noise.xml"),
+    Asset("ATLAS", "levels/textures/tro_map_interior/passage_blocked.xml"),
+    Asset("ATLAS", "levels/textures/tro_map_interior/passage_unknown.xml"),
+    Asset("ATLAS", "levels/textures/tro_map_interior/passage.xml"),
+}) do
+    table.insert(Assets, asset)
+end
+
+
+----------------------------------------------------------------------------------------------------
+
 local Utils = require("tropical_utils/utils")
 local Image = require "widgets/image"
 local MINIMAP_DEFS = require("tro_minimapdefs")

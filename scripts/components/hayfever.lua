@@ -81,7 +81,6 @@ function Hayfever:OnUpdate(dt)
             self.nextsneeze = self.nextsneeze + (dt * 0.9)
         end
     end
-    self.inst:PushEvent("updatepollen", { sneezetime = self.nextsneeze })
 end
 
 function Hayfever:OnSave()
@@ -107,7 +106,6 @@ end
 
 function Hayfever:OnProgress()
     if self.enabled then
-        self.inst:PushEvent("updatepollen", { sneezetime = nil })
         self:SetNextSneezeTime(self:GetNextSneezTimeInitial())
     end
 
@@ -129,7 +127,6 @@ end
 
 function Hayfever:Disable()
     if self.enabled then
-        self.inst:PushEvent("updatepollen", { sneezetime = nil })
         self.inst.components.talker:Say(GetString(self.inst.prefab, "ANNOUNCE_HAYFEVER_OFF"))
 
         self:SetNextSneezeTime(self:GetNextSneezTimeInitial())

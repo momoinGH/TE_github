@@ -1,3 +1,5 @@
+table.insert(Assets, Asset("IMAGE", "images/fog_cloud.tex")) --云海
+
 function HamletcloudPostInit()
     local World = TheWorld
     if not (not TheNet:IsDedicated() and World and World.WaveComponent) then

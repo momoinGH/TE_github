@@ -1,8 +1,5 @@
 Assets =
 {
-    Asset("ANIM", "anim/pigman_tribe.zip"), --图鉴wiki默认动画
-
-    --LOAD SOUND FILE
     Asset("SOUNDPACKAGE", "sound/dontstarve_DLC002.fev"),
     Asset("SOUND", "sound/music_stream_SW.fsb"),
     Asset("SOUND", "sound/dontstarve_shipwreckedSFX.fsb"),
@@ -18,44 +15,13 @@ Assets =
     Asset("SOUNDPACKAGE", "sound/dontstarve_wagstaff.fev"),
     Asset("SOUND", "sound/dontstarve_wagstaff.fsb"),
 
-    --Asset("SOUNDPACKAGE", "sound/volcano.fev"),
-    --Asset("SOUND", "sound/volcano.fsb"),
-    --Asset("SOUND", "sound/boats.fsb"),
-    --Asset("SOUND", "sound/creatures.fsb"),
-    --Asset("SOUND", "sound/slot_machine.fsb"),
-    --Asset("SOUND", "sound/waves.fsb"),
-    --Asset("SOUND", "sound/amb_stream_SW.fsb"),
-    --NEW SOUND FILE
-    --Asset("SOUNDPACKAGE", "sound/volcano_new.fev"),
-    --Asset("SOUND", "sound/volcano_new.fsb"),
-    --Asset("SOUNDPACKAGE", "sound/tropical.fev"),
-    --Asset("SOUND", "sound/tropical.fsb"),
-    --Asset("SOUNDPACKAGE", "sound/Hamlet.fev"),
-    --Asset("SOUND", "sound/Hamlet.fsb"),
-
-    Asset("IMAGE", "images/fog_cloud.tex"), --云海
-    Asset("ATLAS", "images/barco.xml"),
-
     -------------overlays -------------------
-    Asset("ATLAS", "images/overlays/poison.xml"),
-    Asset("IMAGE", "images/overlays/poison.tex"),
-    Asset("ATLAS", "images/overlays/hayfever.xml"),
-    Asset("IMAGE", "images/overlays/hayfever.tex"),
-    Asset("ATLAS", "images/overlays/fog.xml"),
-    Asset("IMAGE", "images/overlays/fog.tex"),
-    Asset("ATLAS", "images/overlays/living_artifact.xml"),
-    Asset("IMAGE", "images/overlays/living_artifact.tex"),
-    Asset("ATLAS", "images/overlays/visorvision.xml"),
-    Asset("IMAGE", "images/overlays/visorvision.tex"),
 
     -------------mapstyle -------------------
-    Asset("IMAGE", "images/mapstyle/hud_shipwrecked.tex"),
     Asset("ATLAS", "images/mapstyle/hud_shipwrecked.xml"),
 
-    Asset("IMAGE", "images/mapstyle/hud_hamlet.tex"),
     Asset("ATLAS", "images/mapstyle/hud_hamlet.xml"),
 
-    Asset("IMAGE", "images/mapstyle/hud_pigcity.tex"),
     Asset("ATLAS", "images/mapstyle/hud_pigcity.xml"),
 
     -------------colour cubes -------------------
@@ -74,7 +40,6 @@ Assets =
     Asset("IMAGE", "images/colour_cubes/sw_volcano_cc.tex"),
     Asset("IMAGE", "images/colour_cubes/sw_volcano_active_cc.tex"),
 
-
     Asset("IMAGE", "images/colour_cubes/pork_temperate_day_cc.tex"),
     Asset("IMAGE", "images/colour_cubes/pork_temperate_dusk_cc.tex"),
     Asset("IMAGE", "images/colour_cubes/pork_temperate_night_cc.tex"),
@@ -90,87 +55,25 @@ Assets =
 
     Asset("IMAGE", "images/colour_cubes/pork_cold_bloodmoon_cc.tex"),
 
-    Asset("IMAGE", "images/colour_cubes/pigshop_interior_cc.tex"),
+    Asset("IMAGE", "images/colour_cubes/pigshop_interior_cc.tex"), --
     Asset("IMAGE", "images/colour_cubes/bat_vision_on_cc.tex"),
     Asset("IMAGE", "images/colour_cubes/heat_vision_cc.tex"),
     Asset("IMAGE", "images/colour_cubes/shooting_goggles_cc.tex"),
 
 
     -------------anims -------------------
-    Asset("ANIM", "anim/player_wagstaff.zip"),
-    Asset("ANIM", "anim/player_mount_wagstaff.zip"),
-    Asset("ANIM", "anim/livingartifact_meter.zip"),
-    Asset("ANIM", "anim/player_lifeplant.zip"),
-    Asset("ANIM", "anim/player_actions_paddle.zip"),
-    Asset("ANIM", "anim/player_actions_speargun.zip"),
-    Asset("ANIM", "anim/player_actions_tap.zip"),
-    Asset("ANIM", "anim/player_actions_panning.zip"),
-    Asset("ANIM", "anim/player_actions_hand_lens.zip"),
-    Asset("ANIM", "anim/player_mount_actions_speargun.zip"),
-    Asset("ANIM", "anim/walani_paddle.zip"),
-    Asset("ANIM", "anim/player_boat_death.zip"),
-    Asset("ANIM", "anim/player_sneeze.zip"),
-    Asset("ANIM", "anim/des_sail.zip"),
-    Asset("ANIM", "anim/player_actions_trawl.zip"),
-    Asset("ANIM", "anim/player_actions_machete.zip"),
-    Asset("ANIM", "anim/player_actions_shear.zip"),
-    Asset("ANIM", "anim/player_actions_cropdust.zip"),
-    Asset("ANIM", "anim/ripple_build.zip"),
+    --玩家动画
+    Asset("ANIM", "anim/player_wagstaff.zip"),          --使用传送伞
+    Asset("ANIM", "anim/player_mount_wagstaff.zip"),    --使用传送伞
+    Asset("ANIM", "anim/player_actions_machete.zip"),   --砍伐动画，有动画hack_pre、hack_loop、hack_pst
+    Asset("ANIM", "anim/player_actions_telescope.zip"), --望远镜，有动画telescope、telescope_pst
 
-    Asset("ANIM", "anim/boat_health.zip"),
-    Asset("ANIM", "anim/player_actions_telescope.zip"),
-    Asset("ANIM", "anim/pig_house_old.zip"),
-    Asset("ANIM", "anim/parrot_pirate_intro.zip"),
-    Asset("ANIM", "anim/parrot_pirate.zip"),
-    Asset("ANIM", "anim/pig_house_sale.zip"),
-    Asset("ANIM", "anim/fish2.zip"),
-    Asset("ANIM", "anim/fish3.zip"),
-    Asset("ANIM", "anim/fish4.zip"),
-    Asset("ANIM", "anim/fish5.zip"),
-    Asset("ANIM", "anim/fish6.zip"),
-    Asset("ANIM", "anim/fish7.zip"),
-    Asset("ANIM", "anim/coi.zip"),
-    Asset("ANIM", "anim/ballphinocean.zip"),
-    Asset("ANIM", "anim/dogfishocean.zip"),
-    Asset("ANIM", "anim/goldfish.zip"),
-    Asset("ANIM", "anim/salmon.zip"),
-    Asset("ANIM", "anim/sharxocean.zip"),
-    Asset("ANIM", "anim/swordfishjocean.zip"),
-    Asset("ANIM", "anim/swordfishjocean2.zip"),
-    Asset("ANIM", "anim/mecfish.zip"),
-    Asset("ANIM", "anim/whaleblueocean.zip"),
-    Asset("ANIM", "anim/kingfisher_build.zip"),
-    Asset("ANIM", "anim/parrot_blue_build.zip"),
-    Asset("ANIM", "anim/toucan_hamlet_build.zip"),
-    Asset("ANIM", "anim/toucan_build.zip"),
-    Asset("ANIM", "anim/parrot_build.zip"),
-    Asset("ANIM", "anim/parrot_pirate_build.zip"),
-    Asset("ANIM", "anim/cormorant_build.zip"),
-    Asset("ANIM", "anim/seagull_build.zip"),
-    Asset("ANIM", "anim/quagmire_pigeon_build.zip"),
-    Asset("ANIM", "anim/skeletons.zip"),
-    Asset("ANIM", "anim/oceanfish_small.zip"),
-    Asset("ANIM", "anim/oceanfish_small_1.zip"),
-    Asset("ANIM", "anim/oceanfish_small_2.zip"),
-    Asset("ANIM", "anim/oceanfish_small_3.zip"),
-    Asset("ANIM", "anim/oceanfish_small_4.zip"),
-    Asset("ANIM", "anim/oceanfish_small_5.zip"),
-    Asset("ANIM", "anim/oceanfish_small_6.zip"),
-    Asset("ANIM", "anim/oceanfish_small_7.zip"),
-    Asset("ANIM", "anim/oceanfish_small_8.zip"),
-    Asset("ANIM", "anim/oceanfish_medium.zip"),
-    Asset("ANIM", "anim/oceanfish_medium_1.zip"),
-    Asset("ANIM", "anim/oceanfish_medium_2.zip"),
-    Asset("ANIM", "anim/oceanfish_medium_3.zip"),
-    Asset("ANIM", "anim/oceanfish_medium_4.zip"),
-    Asset("ANIM", "anim/oceanfish_medium_5.zip"),
-    Asset("ANIM", "anim/oceanfish_medium_6.zip"),
-    Asset("ANIM", "anim/oceanfish_medium_7.zip"),
-    Asset("ANIM", "anim/oceanfish_medium_8.zip"),
-    Asset("IMAGE", "levels/textures/outro.tex"),
-    Asset("IMAGE", "levels/textures/ground_noise_water_deep.tex"),
+    Asset("ANIM", "anim/ripple_build.zip"),             --水里波纹，用于物品浮在水面时
 
-    Asset("ANIM", "anim/butterflymuffin.zip"),
+    --TODO 这几个纹理怎么使用
+    Asset("IMAGE", "levels/textures/outro.tex"),                   --哈姆雷特云纹理
+    Asset("IMAGE", "levels/textures/ground_noise_water_deep.tex"), --海洋纹理
+
 
     -- @Runar: 声明资产不需要声明tex
     Asset("ATLAS", "images/names_wilbur.xml"),
@@ -180,36 +83,15 @@ Assets =
     Asset("ATLAS", "images/names_gold_cn_woodlegs.xml"),
     Asset("ATLAS", "images/names_gold_cn_walani.xml"),
 
-    Asset("ATLAS", "images/tabs.xml"),
-    Asset("ANIM", "anim/vagner_over.zip"),
-    Asset("ANIM", "anim/leaves_canopy2.zip"),
+    Asset("ATLAS", "images/tabs.xml"), --制作栏图标
 
-    Asset("ANIM", "anim/mushroom_tree_yelow.zip"),
+    -- TODO 图鉴的料理图，检查是否正常显示
     Asset("ATLAS", "images/cookbook/cookbook_sw.xml"),
     Asset("ATLAS", "images/cookbook/cookbook_ham.xml"),
-
-    Asset("ANIM", "anim/ui_honeychest_7x.zip"),
-    Asset("ATLAS", "images/ui/honeychest.xml"),
-
-    Asset("ANIM", "anim/button.zip"),
-    Asset("ATLAS", "images/store.xml"),
-    Asset("ATLAS", "images/store_soldout.xml"),
-    Asset("ATLAS", "images/buttongorge.xml"),
-    -- 虚空小地图使用
-    Asset("ATLAS", "levels/textures/tro_map_interior/exit.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/frame.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/mini_antcave_floor.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/mini_floor_marble_royal.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/mini_ruins_slab.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/mini_vamp_cave_noise.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/passage_blocked.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/passage_unknown.xml"),
-    Asset("ATLAS", "levels/textures/tro_map_interior/passage.xml"),
-
-    Asset("IMAGE", "levels/textures/ds_fog1.tex"),
 }
 
--- # No more inventoryitem atlas register
+----------------------------------------------------------------------------------------------------
+-- No more inventoryitem atlas register，没有填写atlas时增加要查找的图集
 local InvAtlas = { "frost", "greenworld", "grotto", "hamlet", "lavaarena", "quagmire", "rog", "shipwrecked_plus",
     "shipwrecked", "underwater", "windy", "skins" }
 for i = 1, #InvAtlas do
