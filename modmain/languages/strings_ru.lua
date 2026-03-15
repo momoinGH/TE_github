@@ -445,82 +445,82 @@ STRINGS.NAMES.DUBLOON                                     = "Дублоны"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUBLOON               = "[Я|pl=Мы] богат[|а|о|ы]!"
 
 
-STRINGS.NAMES.FABRIC                                      = "Ткань"
-STRINGS.RECIPE_DESC.FABRIC                                = "Бамбук так универсален!"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.FABRIC                = "Мягкая ткань, сделанная из твёрдых корней!"
+STRINGS.NAMES.FABRIC                                    = "Ткань"
+STRINGS.RECIPE_DESC.FABRIC                              = "Бамбук так универсален!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FABRIC              = "Мягкая ткань, сделанная из твёрдых корней!"
 
-STRINGS.NAMES.SNAKESKINHAT                                = "Шапка из змеиной кожи"
-STRINGS.RECIPE_DESC.SNAKESKINHAT                          = "Не мокни под дождём и делай это с шиком."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNAKESKINHAT          = "Должна отталкивать дождь."
+STRINGS.NAMES.SNAKESKINHAT                              = "Шапка из змеиной кожи"
+STRINGS.RECIPE_DESC.SNAKESKINHAT                        = "Не мокни под дождём и делай это с шиком."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNAKESKINHAT        = "Должна отталкивать дождь."
 
-STRINGS.NAMES.ARMOR_SNAKESKIN                             = "Рубашка из змеиной кожи"
-STRINGS.RECIPE_DESC.ARMOR_SNAKESKIN                       = "Оставайся сухим, нося обтягивающее."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOR_SNAKESKIN       = "Как модно!!"
+STRINGS.NAMES.ARMOR_SNAKESKIN                           = "Рубашка из змеиной кожи"
+STRINGS.RECIPE_DESC.ARMOR_SNAKESKIN                     = "Оставайся сухим, нося обтягивающее."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOR_SNAKESKIN     = "Как модно!!"
 
-STRINGS.NAMES.TURF_SNAKESKINFLOOR                         = "Ковёр из змеиной кожи"
-STRINGS.RECIPE_DESC.TURF_SNAKESKINFLOOR                   = "Буквально запечатывает пространство."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_SNAKESKINFLOOR   = "Сссссстильное заявление."
+STRINGS.NAMES.TURF_SNAKESKINFLOOR                       = "Ковёр из змеиной кожи"
+STRINGS.RECIPE_DESC.TURF_SNAKESKINFLOOR                 = "Буквально запечатывает пространство."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_SNAKESKINFLOOR = "Сссссстильное заявление."
 
-STRINGS.NAMES.TURF_WATER_MANGROVE                         = "Мангровый дёрн" --DTR
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_WATER_MANGROVE   = "Мангровый дёрн" --DTR
+STRINGS.NAMES.TURF_WATER_MANGROVE                       = "Мангровый дёрн" --DTR
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_WATER_MANGROVE = "Мангровый дёрн" --DTR
 
-STRINGS.NAMES.TURF_BEACH                                  = "Пляжный дёрн"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_BEACH            = "Песочная земля."
+STRINGS.NAMES.TURF_BEACH                                = "Пляжный дёрн"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_BEACH          = "Песочная земля."
 
-STRINGS.NAMES.COCONUT                                     = "Кокос"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONUT               = "Вот это большой орех."
+STRINGS.NAMES.COCONUT                                   = "Кокос"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONUT             = "Вот это большой орех."
 
-STRINGS.NAMES.COCONUT_HALVED                              = "Разрезанный кокос"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONUT_HALVED        =
+STRINGS.NAMES.COCONUT_HALVED                            = "Разрезанный кокос"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONUT_HALVED      =
 "Когда я стучу ими друг о друга, они издают звуки цоканья копыт." --DTR
 
-STRINGS.NAMES.COCONUT_COOKED                              = "Жареный кокос"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONUT_COOKED        = "Теперь осталось найти пирог"
+STRINGS.NAMES.COCONUT_COOKED                            = "Жареный кокос"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.COCONUT_COOKED      = "Теперь осталось найти пирог"
 
-STRINGS.NAMES.PALMTREE                                    = "Пальма"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMTREE              = "Как по тропически."
+STRINGS.NAMES.PALMTREE                                  = "Пальма"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMTREE            = "Как по тропически."
 
-STRINGS.NAMES.PALMLEAF                                    = "Пальмовый лист"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMLEAF              = "[Я|pl=Мы] просто в восторге от этих листов."
+STRINGS.NAMES.PALMLEAF                                  = "Пальмовый лист"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMLEAF            = "[Я|pl=Мы] просто в восторге от этих листов."
 
-STRINGS.NAMES.ROCK_LIMPET                                 = "Прибрежный камень"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_LIMPET           =
+STRINGS.NAMES.ROCK_LIMPET                               = "Прибрежный камень"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_LIMPET         =
 {
     GENERIC = "Да тут этих блюдечек целое ведро можно насобирать.",
     PICKED = "[Я|pl=Мы] не мо[гу|pl=жем] заполнить ведро без блюдечек.",
 }
 
-STRINGS.NAMES.LIMPETS                                     = "Морские блюдечки"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIMPETS               = "Возможно, выживание тут окажется не таким уж и плохим..."
+STRINGS.NAMES.LIMPETS                                   = "Морские блюдечки"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIMPETS             = "Возможно, выживание тут окажется не таким уж и плохим..."
 
-STRINGS.NAMES.LIMPETS_COOKED                              = "Приготовленные морские блюдечки"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIMPETS_COOKED        = "Морской обед!"
+STRINGS.NAMES.LIMPETS_COOKED                            = "Приготовленные морские блюдечки"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIMPETS_COOKED      = "Морской обед!"
 
-STRINGS.NAMES.PALMLEAF_HUT                                = "Навес из пальмовых листьев"
-STRINGS.RECIPE_DESC.PALMLEAF_HUT                          = "Укрывайся от дождя. В основном."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMLEAF_HUT          = "Тень, милая тень."
+STRINGS.NAMES.PALMLEAF_HUT                              = "Навес из пальмовых листьев"
+STRINGS.RECIPE_DESC.PALMLEAF_HUT                        = "Укрывайся от дождя. В основном."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PALMLEAF_HUT        = "Тень, милая тень."
 
-STRINGS.NAMES.SAND_CASTLE                                 = "Песчаный замок"
-STRINGS.RECIPE_DESC.SAND_CASTLE                           = "Лечебный и расслабляющий."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAND_CASTLE           = "Смотрите, что [я|pl=мы] сделал[|а|о|и]!"
+STRINGS.NAMES.SAND_CASTLE                               = "Песчаный замок"
+STRINGS.RECIPE_DESC.SAND_CASTLE                         = "Лечебный и расслабляющий."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAND_CASTLE         = "Смотрите, что [я|pl=мы] сделал[|а|о|и]!"
 
-STRINGS.NAMES.SANDHILL                                    = "Кучка песка"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SANDHILL              = "Главное, чтоб в обувь не попадал."
+STRINGS.NAMES.SANDHILL                                  = "Кучка песка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SANDHILL            = "Главное, чтоб в обувь не попадал."
 
-STRINGS.NAMES.SAND                                        = "Песок"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAND                  = "Удобная кучка карманного песка."
+STRINGS.NAMES.SAND                                      = "Песок"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAND                = "Удобная кучка карманного песка."
 
-STRINGS.NAMES.SEASHELL_BEACHED                            = "Ракушка"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEASHELL_BEACHED      = "Морской мусор."
+STRINGS.NAMES.SEASHELL_BEACHED                          = "Ракушка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEASHELL_BEACHED    = "Морской мусор."
 
-STRINGS.NAMES.SEASHELL                                    = "Ракушка"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEASHELL              = "Может, удастся продать их?"
+STRINGS.NAMES.SEASHELL                                  = "Ракушка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEASHELL            = "Может, удастся продать их?"
 
-STRINGS.NAMES.CRATE                                       = "Ящик"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRATE                 = "Должен быть способ открыть его."
+STRINGS.NAMES.CRATE                                     = "Ящик"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRATE               = "Должен быть способ открыть его."
 
-STRINGS.NAMES.CRAB                                        = "Кроблик"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRAB                  = "Никуда ты не денешься, мистер щипучка."
+STRINGS.NAMES.CRAB                                      = "Кроблик"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRAB                = "Никуда ты не денешься, мистер щипучка."
 
 
 STRINGS.NAMES.CRABHOLE = "Кробликовая норка"
@@ -1358,118 +1358,118 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "Старый колокольчик.
 
 
 --Перевод сделан благодаря Mister Kto, Makc, Dartter
-STRINGS.NAMES.SWIMMINGHORROR                                            = "Плавучий ужас"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWIMMINGHORROR                      = "Плавучий ужас."
+STRINGS.NAMES.SWIMMINGHORROR                                 = "Плавучий ужас"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWIMMINGHORROR           = "Плавучий ужас."
 
-STRINGS.NAMES.FIRETWISTER                                               = "Огненное торнадо"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.FIRETWISTER                         = "Живой огонь."
+STRINGS.NAMES.FIRETWISTER                                    = "Огненное торнадо"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FIRETWISTER              = "Живой огонь."
 
-STRINGS.NAMES.CITY_HAMMER                                               = "Управляющий молот"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CITY_HAMMER                         = "Чтобы не оставить и кирпичика."
-STRINGS.RECIPE_DESC.CITY_HAMMER                                         = "Управляющий молот."
+STRINGS.NAMES.CITY_HAMMER                                    = "Управляющий молот"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CITY_HAMMER              = "Чтобы не оставить и кирпичика."
+STRINGS.RECIPE_DESC.CITY_HAMMER                              = "Управляющий молот."
 
-STRINGS.NAMES.BUTTERFLY_TROPICAL_WINGS                                  = "Крылья тропической бабочки"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUTTERFLY_TROPICAL_WINGS            = "Крылья тропической бабочки."
+STRINGS.NAMES.BUTTERFLY_TROPICAL_WINGS                       = "Крылья тропической бабочки"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUTTERFLY_TROPICAL_WINGS = "Крылья тропической бабочки."
 
-STRINGS.NAMES.BUTTERFLY_TROPICAL                                        = "Тропическая бабочка"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUTTERFLY_TROPICAL                  = "Тропическая бабочка."
+STRINGS.NAMES.BUTTERFLY_TROPICAL                             = "Тропическая бабочка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUTTERFLY_TROPICAL       = "Тропическая бабочка."
 
-STRINGS.NAMES.SPIDER_TROPICAL                                           = "Тропический паук"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDER_TROPICAL                     = "Тропический паук."
+STRINGS.NAMES.SPIDER_TROPICAL                                = "Тропический паук"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDER_TROPICAL          = "Тропический паук."
 
-STRINGS.NAMES.BLOWDART_FLUP                                             = "Глазострел"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BLOWDART_FLUP                       = "Зоркий глаз."
+STRINGS.NAMES.BLOWDART_FLUP                                  = "Глазострел"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BLOWDART_FLUP            = "Зоркий глаз."
 
-STRINGS.NAMES.BLOWDART_POISON                                           = "Ядовитый дротик"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BLOWDART_POISON                     = "Ядовитый дротик."
+STRINGS.NAMES.BLOWDART_POISON                                = "Ядовитый дротик"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BLOWDART_POISON          = "Ядовитый дротик."
 
-STRINGS.NAMES.GLASS_SHARDS                                              = "Осколок стекла"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GLASS_SHARDS                        = "Высокая температура превращает песок в несовершенное стекло."
-STRINGS.RECIPE_DESC.GLASS_SHARDS                                        = "Осколки твоего сердца."
+STRINGS.NAMES.GLASS_SHARDS                                   = "Осколок стекла"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GLASS_SHARDS             = "Высокая температура превращает песок в несовершенное стекло."
+STRINGS.RECIPE_DESC.GLASS_SHARDS                             = "Осколки твоего сердца."
 
-STRINGS.NAMES.SHARD_SWORD                                               = "Осколочный меч"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARD_SWORD                         = "Перо могущества."
-STRINGS.RECIPE_DESC.SHARD_SWORD                                         = "Отлично кромсает монстров."
+STRINGS.NAMES.SHARD_SWORD                                    = "Осколочный меч"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARD_SWORD              = "Перо могущества."
+STRINGS.RECIPE_DESC.SHARD_SWORD                              = "Отлично кромсает монстров."
 
-STRINGS.NAMES.SHARD_BEAK                                                = "Осколочная кирка"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARD_BEAK                          = "Инструмент для терраформирования."
-STRINGS.RECIPE_DESC.SHARD_BEAK                                          = "Разбивает крепкие камни."
+STRINGS.NAMES.SHARD_BEAK                                     = "Осколочная кирка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARD_BEAK               = "Инструмент для терраформирования."
+STRINGS.RECIPE_DESC.SHARD_BEAK                               = "Разбивает крепкие камни."
 ----------------
-STRINGS.NAMES.SPIKY_TURTLE_TFC                                          = "Хрюкопаха"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIKY_TURTLE_TFC                    = "Хрюкопаха."
+STRINGS.NAMES.SPIKY_TURTLE_TFC                               = "Хрюкопаха"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIKY_TURTLE_TFC         = "Хрюкопаха."
 
-STRINGS.NAMES.HATTY_PIGGY_TFC                                           = "Хряк из пекла"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATTY_PIGGY_TFC                     = "Хряк из пекла."
+STRINGS.NAMES.HATTY_PIGGY_TFC                                = "Хряк из пекла"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATTY_PIGGY_TFC          = "Хряк из пекла."
 
-STRINGS.NAMES.STRANGE_SCORPION_TFC                                      = "Скорпехотинец "
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.STRANGE_SCORPION_TFC                = "Скорпехотинец ."
+STRINGS.NAMES.STRANGE_SCORPION_TFC                           = "Скорпехотинец "
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.STRANGE_SCORPION_TFC     = "Скорпехотинец ."
 
-STRINGS.NAMES.TFWP_ELEMENTAL                                            = "Элементаль"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TFWP_ELEMENTAL                      = "Элементаль."
+STRINGS.NAMES.TFWP_ELEMENTAL                                 = "Элементаль"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TFWP_ELEMENTAL           = "Элементаль."
 
-STRINGS.NAMES.LIZARDMAN_TFC                                             = "Крокомандир"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIZARDMAN_TFC                       = "Крокомандир."
+STRINGS.NAMES.LIZARDMAN_TFC                                  = "Крокомандир"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIZARDMAN_TFC            = "Крокомандир."
 
-STRINGS.NAMES.SPIKY_MONKEY_TFC                                          = "Свинорилла"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIKY_MONKEY_TFC                    = "Свинорилла."
+STRINGS.NAMES.SPIKY_MONKEY_TFC                               = "Свинорилла"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIKY_MONKEY_TFC         = "Свинорилла."
 
-STRINGS.NAMES.LIZARDMAN_BANNER_TFC                                      = "Боевой баннер"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIZARDMAN_BANNER_TFC                = "Боевой баннер."
+STRINGS.NAMES.LIZARDMAN_BANNER_TFC                           = "Боевой баннер"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIZARDMAN_BANNER_TFC     = "Боевой баннер."
 
-STRINGS.NAMES.TELEPORTATO_SW_RING                                       = "Странное кольцо"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_RING                 = "Похоже, [я|pl= Ну-ка, давай-ка заглянем в дырочку..."
+STRINGS.NAMES.TELEPORTATO_SW_RING                            = "Странное кольцо"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_RING      = "Похоже, [я|pl= Ну-ка, давай-ка заглянем в дырочку..."
 
-STRINGS.NAMES.TELEPORTATO_SW_BOX                                        = "Странный винт"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_BOX                  = "Похоже, это часть чего-то."
+STRINGS.NAMES.TELEPORTATO_SW_BOX                             = "Странный винт"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_BOX       = "Похоже, это часть чего-то."
 
-STRINGS.NAMES.TELEPORTATO_SW_CRANK                                      = "Травянистый рычаг"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_CRANK                = "Интересно, для чего это?"
+STRINGS.NAMES.TELEPORTATO_SW_CRANK                           = "Травянистый рычаг"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_CRANK     = "Интересно, для чего это?"
 
-STRINGS.NAMES.TELEPORTATO_SW_POTATO                                     = "Деревянная картофелина"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_POTATO               = "Похоже, это было создано с определенной целью."
+STRINGS.NAMES.TELEPORTATO_SW_POTATO                          = "Деревянная картофелина"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_POTATO    = "Похоже, это было создано с определенной целью."
 
-STRINGS.NAMES.TELEPORTATO_SW_BASE                                       = "Странная платформа"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_BASE                 = "Кажется, ей не хватает частей."
+STRINGS.NAMES.TELEPORTATO_SW_BASE                            = "Странная платформа"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO_SW_BASE      = "Кажется, ей не хватает частей."
 
-STRINGS.NAMES.LAVARENAESCADA                                            = "Портал лавовой арены"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVARENAESCADA                      = "Портал лавовой арены."
+STRINGS.NAMES.LAVARENAESCADA                                 = "Портал лавовой арены"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVARENAESCADA           = "Портал лавовой арены."
 
-STRINGS.NAMES.LAVAARENA_BOARLORD                                        = "Полководец Пугна"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVAARENA_BOARLORD                  = "Полководец Пугна."
+STRINGS.NAMES.LAVAARENA_BOARLORD                             = "Полководец Пугна"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVAARENA_BOARLORD       = "Полководец Пугна."
 
-STRINGS.NAMES.SPIDERBATTLE                                              = "Боевой паук"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDERBATTLE                        = "Боевой паук."
+STRINGS.NAMES.SPIDERBATTLE                                   = "Боевой паук"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDERBATTLE             = "Боевой паук."
 
-STRINGS.NAMES.HOUNDBATTLE                                               = "Цепной пес"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.HOUNDBATTLE                         = "Цепной пес."
+STRINGS.NAMES.HOUNDBATTLE                                    = "Цепной пес"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.HOUNDBATTLE              = "Цепной пес."
 
-STRINGS.NAMES.MERMBATTLE                                                = "Боевой мэрм"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMBATTLE                          = "Боевой мэрм."
+STRINGS.NAMES.MERMBATTLE                                     = "Боевой мэрм"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMBATTLE               = "Боевой мэрм."
 
-STRINGS.NAMES.BOARBATTLE                                                = "Ручной хряк"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOARBATTLE                          = "Ручной хряк."
+STRINGS.NAMES.BOARBATTLE                                     = "Ручной хряк"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOARBATTLE               = "Ручной хряк."
 
-STRINGS.NAMES.KNIGHTBATTLE                                              = "Шахматный конь"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.KNIGHTBATTLE                        = "Шахматный конь."
+STRINGS.NAMES.KNIGHTBATTLE                                   = "Шахматный конь"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.KNIGHTBATTLE             = "Шахматный конь."
 
-STRINGS.NAMES.LIZARDBATTLE                                              = "Ящер ренегат"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIZARDBATTLE                        = "Ящер ренегат."
+STRINGS.NAMES.LIZARDBATTLE                                   = "Ящер ренегат"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIZARDBATTLE             = "Ящер ренегат."
 
-STRINGS.NAMES.TELEPORTATO2                                              = "Battle Recipient"  --IDK
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO2                        = "Battle Recipient." --IDK
+STRINGS.NAMES.TELEPORTATO2                                   = "Battle Recipient"             --IDK
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TELEPORTATO2             = "Battle Recipient."            --IDK
 
-STRINGS.NAMES.WILDBEAVER_HOUSE                                          = "Дом бобра"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER_HOUSE                    = "Дом бобра."
-STRINGS.RECIPE_DESC.WILDBEAVER_HOUSE                                    = "Дом бобра."
+STRINGS.NAMES.WILDBEAVER_HOUSE                               = "Дом бобра"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER_HOUSE         = "Дом бобра."
+STRINGS.RECIPE_DESC.WILDBEAVER_HOUSE                         = "Дом бобра."
 
-STRINGS.NAMES.BEAVERSKIN                                                = "Шкура бобра"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERSKIN                          = "Шкура бобра."
+STRINGS.NAMES.BEAVERSKIN                                     = "Шкура бобра"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERSKIN               = "Шкура бобра."
 
-STRINGS.NAMES.WILDBEAVER                                                = "Бобер"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER                          = "Бобер."
+STRINGS.NAMES.WILDBEAVER                                     = "Бобер"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVER               = "Бобер."
 
-STRINGS.NAMES.WILDBEAVERGUARD                                           = "Бобер защитник"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD                     = "Бобер защитник."
+STRINGS.NAMES.WILDBEAVERGUARD                                = "Бобер защитник"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD          = "Бобер защитник."
 
 
 STRINGS.NAMES.BEAVERHEAD                                                = "Голова бобра"
@@ -5250,53 +5250,53 @@ STRINGS.NAMES.TURF_QUAGMIRE_PEATFOREST = "Дёрн торфяного леса"
 STRINGS.RECIPE_DESC.TURF_QUAGMIRE_PEATFOREST = "Дёрн торфяного леса."
 
 
-STRINGS.NAMES.GOLEM = "Голем"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GOLEM = "Голем."
+STRINGS.NAMES.GOLEM                                        = "Голем"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GOLEM                  = "Голем."
 
-STRINGS.NAMES.MUTATOR_TROPICAL = "Печенька тропического паука"
-STRINGS.RECIPE_DESC.MUTATOR_TROPICAL = "Мутация в тропического паука!"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUTATOR_TROPICAL = "Мутация в тропического паука."
+STRINGS.NAMES.MUTATOR_TROPICAL                             = "Печенька тропического паука"
+STRINGS.RECIPE_DESC.MUTATOR_TROPICAL                       = "Мутация в тропического паука!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUTATOR_TROPICAL       = "Мутация в тропического паука."
 
-STRINGS.NAMES.MUTATOR_FROST = "Печенька морозного паука"
-STRINGS.RECIPE_DESC.MUTATOR_FROST = "Мутация в морозного паука!"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUTATOR_FROST = "Мутация в морозного паука."
+STRINGS.NAMES.MUTATOR_FROST                                = "Печенька морозного паука"
+STRINGS.RECIPE_DESC.MUTATOR_FROST                          = "Мутация в морозного паука!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUTATOR_FROST          = "Мутация в морозного паука."
 
-STRINGS.NAMES.SHADOWMOWER_BUILDER = "Тень с мачетте"
-STRINGS.RECIPE_DESC.SHADOWMOWER_BUILDER = "Может резать предметы"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHADOWMOWER_BUILDER = "Тень с мачетте"
+STRINGS.NAMES.SHADOWMOWER_BUILDER                          = "Тень с мачетте"
+STRINGS.RECIPE_DESC.SHADOWMOWER_BUILDER                    = "Может резать предметы"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHADOWMOWER_BUILDER    = "Тень с мачетте"
 
-STRINGS.NAMES.GROTTO_PILLAR_BUG = "Ненадежная опора"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PILLAR_BUG = "Ненадежная опора"
+STRINGS.NAMES.GROTTO_PILLAR_BUG                            = "Ненадежная опора"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PILLAR_BUG      = "Ненадежная опора"
 
-STRINGS.NAMES.DECO_HIVE_BEAM_ROOM = "Ненадежная опора"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_HIVE_BEAM_ROOM = "Ненадежная опора"
+STRINGS.NAMES.DECO_HIVE_BEAM_ROOM                          = "Ненадежная опора"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_HIVE_BEAM_ROOM    = "Ненадежная опора"
 
-STRINGS.NAMES.ANTHILL_CAVELAMP = "Лампа"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTHILL_CAVELAMP = "Дает немного света в кромешной тьме."
+STRINGS.NAMES.ANTHILL_CAVELAMP                             = "Лампа"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTHILL_CAVELAMP       = "Дает немного света в кромешной тьме."
 
-STRINGS.NAMES.ANTHILLCAVE = "Муравейник"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTHILLCAVE = "Муравейник."
+STRINGS.NAMES.ANTHILLCAVE                                  = "Муравейник"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTHILLCAVE            = "Муравейник."
 
-STRINGS.NAMES.GROTTO_GRUB_NEST = "Гнездо"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_GRUB_NEST = "Гнездо для странных существ."
+STRINGS.NAMES.GROTTO_GRUB_NEST                             = "Гнездо"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_GRUB_NEST       = "Гнездо для странных существ."
 
-STRINGS.NAMES.GROTTO_GRUB = "Личинка"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_GRUB = "Странное существо."
+STRINGS.NAMES.GROTTO_GRUB                                  = "Личинка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_GRUB            = "Странное существо."
 
-STRINGS.NAMES.GROTTO_PARSNIP_PLANTED = "Пастернак"
+STRINGS.NAMES.GROTTO_PARSNIP_PLANTED                       = "Пастернак"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PARSNIP_PLANTED = "Пастернак."
 
-STRINGS.NAMES.GROTTO_PARSNIP = "Пастернак"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PARSNIP = "Пастернак."
+STRINGS.NAMES.GROTTO_PARSNIP                               = "Пастернак"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PARSNIP         = "Пастернак."
 
-STRINGS.NAMES.GROTTO_PARSNIP_EATEN = "Покусанный пастернак"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PARSNIP_EATEN = "Покусанный пастернак."
+STRINGS.NAMES.GROTTO_PARSNIP_EATEN                         = "Покусанный пастернак"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PARSNIP_EATEN   = "Покусанный пастернак."
 
-STRINGS.NAMES.GROTTO_PARSNIP_GIANT = "Гиганский пастернак"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PARSNIP_GIANT = "Гиганский пастернак."
+STRINGS.NAMES.GROTTO_PARSNIP_GIANT                         = "Гиганский пастернак"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PARSNIP_GIANT   = "Гиганский пастернак."
 
-STRINGS.NAMES.FEATHER_CHICKEN = "Перо курицы"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.FEATHER_CHICKEN = "Перо курицы."
+STRINGS.NAMES.FEATHER_CHICKEN                              = "Перо курицы"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FEATHER_CHICKEN        = "Перо курицы."
 
 STRINGS.NAMES.BEAVERTORCH                                  = "Факел Бобра"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH            = "Выглядит уютно."
@@ -5312,3 +5312,166 @@ STRINGS.RECIPE_DESC.SEA_YARD                               = "Морская в�
 
 STRINGS.NAMES.PORTO_SEA_YARD                               = "Морская верфь - набор"
 STRINGS.RECIPE_DESC.PORTO_SEA_YARD                         = "Морская верфь"
+
+STRINGS.ACTIONS.BOATMOUNT                                  = "Сесть на"
+STRINGS.ACTIONS.BOATCANNON                                 = "Запустить"
+
+
+STRINGS.NAMES.ARMOUREDBOAT                                  = "Бронированная лодка"
+STRINGS.RECIPE_DESC.ARMOUREDBOAT                            = "Рассекает некоторые волны пополам."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOUREDBOAT            = "Вот это прочная лодка, тут не поспоришь."
+
+STRINGS.NAMES.CORKBOAT                                      = "Лубяная лодка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORKBOAT                = "Несчастный случай ждет своего часа."
+STRINGS.RECIPE_DESC.CORKBOAT                                = "Хорош для портажа и жесток как каша."
+
+STRINGS.NAMES.CORKBOATITEM                                  = "Лубяная лодка"
+STRINGS.RECIPE_DESC.CORKBOATITEM                            = "Лубяная лодка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORKBOATITEM            = "Лубяная лодка"
+
+STRINGS.NAMES.CARGOBOAT                                     = "Грузовая лодка"
+STRINGS.RECIPE_DESC.CARGOBOAT                               = "Сберегательный сейф в море!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CARGOBOAT               = "Тут хватит места для всего!"
+
+STRINGS.NAMES.PORTO_ARMOUREDBOAT                            = "Бронированная лодка"
+STRINGS.RECIPE_DESC.PORTO_ARMOUREDBOAT                      = "Рассекает некоторые волны пополам."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ARMOUREDBOAT      = "Вот это прочная лодка, тут не поспоришь."
+
+STRINGS.NAMES.PORTO_CARGOBOAT                               = "Грузовая лодка"
+STRINGS.RECIPE_DESC.PORTO_CARGOBOAT                         = "Сберегательный сейф в море!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_CARGOBOAT         = "Тут хватит места для всего!"
+
+STRINGS.NAMES.ENCRUSTEDBOAT                                 = "Инкрустированная лодка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ENCRUSTEDBOAT           = "Довольно крепкая."
+STRINGS.RECIPE_DESC.ENCRUSTEDBOAT                           = "Высокоустойчивая."
+
+STRINGS.NAMES.PORTO_ENCRUSTEDBOAT                           = "Инкрустированная лодка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ENCRUSTEDBOAT     = "Довольно крепкая."
+STRINGS.RECIPE_DESC.PORTO_ENCRUSTEDBOAT                     = "Высокоустойчивая."
+
+STRINGS.NAMES.ROWBOAT                                       = "Гребная лодка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROWBOAT                 = "Она работает на ручной тяге."
+STRINGS.RECIPE_DESC.ROWBOAT                                 = "Греби, греби, греби на своей лодке!"
+
+STRINGS.NAMES.PORTO_ROWBOAT                                 = "Гребная лодка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_ROWBOAT           = "Она работает на ручной тяге."
+STRINGS.RECIPE_DESC.PORTO_ROWBOAT                           = "Греби, греби, греби на своей лодке!"
+
+STRINGS.NAMES.SURFBOARD                                     = "Доска для сёрфинга"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SURFBOARD               = "Если бы я был на доске для серфинга, я бы смог тебя поймать.."
+STRINGS.RECIPE_DESC.SURFBOARD                               = "Кавабанга, чуваки!"
+
+STRINGS.NAMES.SURFBOARD_ITEM                                = "Доска для сёрфинга"
+STRINGS.RECIPE_DESC.SURFBOARD_ITEM                          = "Ковабанга, чуваки!" --DTR
+
+STRINGS.NAMES.PORTO_WOODLEGSBOAT                            = "Поступь моряка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_WOODLEGSBOAT      = "Моя лодка. Она мои морские ноги."
+STRINGS.RECIPE_DESC.PORTO_WOODLEGSBOAT                      = "Давай, сделай что-нибудь пиратское."
+
+STRINGS.NAMES.WOODLEGSBOAT                                  = "Поступь моряка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGSBOAT            = "Моя лодка. Она мои морские ноги."
+STRINGS.RECIPE_DESC.WOODLEGSBOAT                            = "Давай, сделай что-нибудь пиратское."
+
+STRINGS.NAMES.WOODLEGSBOATAMIGO                             = "Поступь моряка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGSBOATAMIGO       = "Моя лодка. Она мои морские ноги."
+STRINGS.RECIPE_DESC.WOODLEGSBOATAMIGO                       = "Давай, сделай что-нибудь пиратское."
+
+STRINGS.NAMES.RAFT_OLD                                      = "Плот"
+STRINGS.RECIPE_DESC.RAFT_OLD                                = "Вполне пригоден для плавания."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAFT_OLD                = "Это выглядит адекватно."
+
+STRINGS.NAMES.LOGRAFT_OLD                                   = "Плот из бревен"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOGRAFT_OLD             = "Плот из бревен...?"
+STRINGS.RECIPE_DESC.LOGRAFT_OLD                             = "Это выглядит... на подобие лодки.."
+
+STRINGS.NAMES.PORTO_RAFT_OLD                                = "Плот"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_RAFT_OLD          = "Это выглядит адекватноe."
+STRINGS.RECIPE_DESC.PORTO_RAFT_OLD                          = "Вполне пригоден для плавания."
+
+STRINGS.NAMES.PORTO_LOGRAFT_OLD                             = "Плот из бревен"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT_OLD       = "Бревенчатый плот...?"
+STRINGS.RECIPE_DESC.PORTO_LOGRAFT_OLD                       = "Это выглядит... на подобие лодки..."
+
+STRINGS.NAMES.FLOTSAM_ARMOURED_BUILD                        = "Обломки лодок"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_ARMOURED_BUILD  = "Обломки лодок"
+
+STRINGS.NAMES.FLOTSAM_CARGO_BUILD                           = "Обломки лодок"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_CARGO_BUILD     = "Обломки лодок"
+
+STRINGS.NAMES.FLOTSAM_BAMBOO_BUILD                          = "Обломки лодок"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_BAMBOO_BUILD    = "Обломки лодок"
+
+STRINGS.NAMES.FLOTSAM_LOGRAFT_BUILD                         = "Обломки лодок"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_LOGRAFT_BUILD   = "Обломки лодок"
+
+STRINGS.NAMES.FLOTSAM_ROWBOAT_BUILD                         = "Обломки лодок"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_ROWBOAT_BUILD   = "Обломки лодок"
+
+STRINGS.NAMES.FLOTSAM_SURFBOARD_BUILD                       = "Обломки лодок"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_SURFBOARD_BUILD = "Обломки лодок."
+
+STRINGS.NAMES.FLOTSAM_ENCRUSTED_BUILD                       = "Обломки лодок"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOTSAM_ENCRUSTED_BUILD = "Обломки лодок."
+
+STRINGS.NAMES.BOATCANNON                                    = "Лодочная пушка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOATCANNON              = "Единственная вещь лучше, чем лодка, это лодка с пушкой."
+STRINGS.RECIPE_DESC.BOATCANNON                              = "Она жаждет попасть на твою лодку."
+
+STRINGS.NAMES.OBSIDIAN_BOATCANNON                           = "Пиратская пушка"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIAN_BOATCANNON     = "Достоинство пирата"
+STRINGS.RECIPE_DESC.OBSIDIAN_BOATCANNON                     = "Хорошо усиленная"
+
+STRINGS.NAMES.QUACKERINGRAM                                 = "Крякающий таран"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUACKERINGRAM           = "ГРОМИ!"
+STRINGS.RECIPE_DESC.QUACKERINGRAM                           = "Всем лучше уйти с дороги."
+
+STRINGS.NAMES.SAIL                                          = "Пальмовый парус"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAIL                    = "Это должно ощутимо расширить мой плавательный опыт."
+STRINGS.RECIPE_DESC.SAIL                                    = "Поймай ветер!"
+
+STRINGS.NAMES.CLOTHSAIL                                     = "Тканевый парус"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CLOTHSAIL               = "Теперь ветер не дует просто так!"
+STRINGS.RECIPE_DESC.CLOTHSAIL                               = "Поймай ещё больше ветра!"
+
+STRINGS.NAMES.SNAKESKINSAIL                                 = "Кожаный парус"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNAKESKINSAIL           = "Розправь и плыви!"
+STRINGS.RECIPE_DESC.SNAKESKINSAIL                           = "Высококачественный улавливатель ветра."
+
+STRINGS.NAMES.FEATHERSAIL                                   = "Лёгкий перьевой парус"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FEATHERSAIL             = "Лёгкий, как пёрышко!"
+STRINGS.RECIPE_DESC.FEATHERSAIL                             = "Как крыло птицы для вашей лодки!"
+
+STRINGS.NAMES.IRONWIND                                      = "Железный ветер"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.IRONWIND                = "Именно так должен путешествовать учёный."
+STRINGS.RECIPE_DESC.IRONWIND                                = "Двигатель!"
+
+STRINGS.NAMES.WOODLEGSSAIL                                  = "Парус Вудлегса"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGSSAIL            = "Типичный пиратский парус."
+STRINGS.RECIPE_DESC.WOODLEGSSAIL                            = "Я стану настоящим пиратом!"
+
+STRINGS.NAMES.MALBATROSSAIL                                 = "Парус Мальбатроса"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MALBATROSSAIL           = "Это должно действительно изменить мой опыт катания на лодке..."
+STRINGS.RECIPE_DESC.MALBATROSSAIL                           = "Парус Мальбатроса!"
+
+STRINGS.NAMES.TRAWLNET                                      = "Рыболовная сеть"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRAWLNET                = "Я не вижу никаких возможных недостатков в её использовании."
+STRINGS.RECIPE_DESC.TRAWLNET                                = "Терпеливый рыбак будет вознаграждён."
+
+STRINGS.NAMES.TRAWLNETDROPPED                               = "Траловая сеть"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRAWLNETDROPPED         = "Она определённо натянулась."
+
+STRINGS.NAMES.TARLAMP                                       = "Смоляная лама." --DTR
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TARLAMP                 = "Смоляная лама." --DTR
+STRINGS.RECIPE_DESC.TARLAMP                                 = "Смоляная лама" --DTR
+
+STRINGS.NAMES.BOAT_LANTERN                                  = "Лодочный фонарь"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_LANTERN            = "Он творит чудеса с моим ночным зрением!"
+STRINGS.RECIPE_DESC.BOAT_LANTERN                            = "Пролей немного света на ситуацию."
+
+STRINGS.NAMES.BOAT_TORCH                                    = "Лодочный факел"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOAT_TORCH              = "Это сохранит [мои|pl=наши] руки свободными."
+STRINGS.RECIPE_DESC.BOAT_TORCH                              = "Смотри на море."
+
+STRINGS.NAMES.PORTO_LOGRAFT                                 = "Деревянный плот"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_LOGRAFT           = "Это выглядит... лодкоподобно..."
+STRINGS.RECIPE_DESC.PORTO_LOGRAFT                           = "Использовать на свой страх и риск."
