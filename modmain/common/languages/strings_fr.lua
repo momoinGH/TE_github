@@ -449,11 +449,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT_PIRATE = "J'essaie de ne jamais mange
 STRINGS.NAMES.DUBLOON = "Pièces d'or"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUBLOON = "Je suis riche!!"
 
-STRINGS.NAMES.DOYDOYFAN = "Eventail tropical"
-STRINGS.RECIPE_DESC.DOYDOYFAN = "Luxueusement doux, luxueusement tropical"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYFAN =
-"D'une façon ou d'une autre, la brise sort deux fois plus vite par l'arrière."
-
 STRINGS.NAMES.FABRIC = "Toile"
 STRINGS.RECIPE_DESC.FABRIC = "Le bambou c'est polyvalent !"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FABRIC = "Une toile douce faite à partir de racines dures !"

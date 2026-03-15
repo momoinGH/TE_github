@@ -444,9 +444,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT = "Tento não comer nada com um nome.
 STRINGS.NAMES.DUBLOON = "Moedas"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUBLOON = "Estou rico!"
 
-STRINGS.NAMES.DOYDOYFAN = "Pena Tropical"
-STRINGS.RECIPE_DESC.DOYDOYFAN = "Luxuosamente macia, luxuosamente tropical"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYFAN = "De alguma forma a brisa sai pelas costas duas vezes mais rápido."
 
 STRINGS.NAMES.FABRIC = "Pano"
 STRINGS.RECIPE_DESC.FABRIC = "O bambu é tão versátil!"

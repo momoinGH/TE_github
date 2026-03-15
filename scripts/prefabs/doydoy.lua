@@ -224,42 +224,6 @@ local function CanEatFn(inst, food)
     return food.prefab ~= "doydoyegg" and food.prefab ~= "doydoyegg_cooked" and food.prefab ~= "doydoyegg_cracked"
 end
 
-local function OnInventory(inst)
-    inst:RemoveTag("mating")
-    inst:ClearBufferedAction()
-end
-
-local function OnMate(inst, partner)
-
-end
-
-
-function OnDead(inst)
-    local x, y, z = inst.Transform:GetLocalPosition()
-
-    if SEABEACH_AMOUNT.doydoy < 3 then
-        local tamanhodomapa = (TheWorld.Map:GetSize()) * 2 - 2
-        local map = TheWorld.Map
-        local x
-        local z
-        local numerodeitens = 1
-
-        repeat
-            x = math.random(-tamanhodomapa, tamanhodomapa)
-            z = math.random(-tamanhodomapa, tamanhodomapa)
-            local curr = map:GetTile(map:GetTileCoordsAtPoint(x, 0, z))
-            -------------------coloca os itens------------------------
-            if (curr ~= WORLD_TILES.OCEAN_COASTAL and curr ~= WORLD_TILES.OCEAN_WATERLOG and curr ~= WORLD_TILES.OCEAN_COASTAL_SHORE and curr ~= WORLD_TILES.OCEAN_SWELL and curr ~= WORLD_TILES.OCEAN_ROUGH and curr ~= WORLD_TILES.OCEAN_BRINEPOOL and curr ~= WORLD_TILES.OCEAN_BRINEPOOL_SHORE and curr ~= WORLD_TILES.OCEAN_HAZARDOUS) then
-                local colocaitem = SpawnPrefab("doydoy_spawner")
-                colocaitem.Transform:SetPosition(x, 0, z)
-                numerodeitens = numerodeitens - 1
-            end
-            -----------------------------------------------------------
-        until
-            numerodeitens <= 0
-    end
-end
-
 local function commonfn(Sim)
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
@@ -324,7 +288,6 @@ local function commonfn(Sim)
 
     inst:AddComponent("combat")
 
-    inst:ListenForEvent("death", OnDead)
     inst:ListenForEvent("gotosleep", function(inst) inst.components.inventoryitem.canbepickedup = true end)
     inst:ListenForEvent("onwakeup", function(inst)
         inst.components.inventoryitem.canbepickedup = false

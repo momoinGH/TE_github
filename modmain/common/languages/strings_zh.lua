@@ -18,9 +18,7 @@ STRINGS.UI.COOKBOOK.ICEDTEA               = "为身体降温/提供加速效果"
 STRINGS.UI.COOKBOOK.NETTLELOSANGE         = "免受花粉困扰"
 STRINGS.UI.COOKBOOK.MEATED_NETTLE         = "免受花粉困扰"
 
---from RoG
-STRINGS.NAMES.BELL                        = "远古铃铛"
-STRINGS.RECIPE_DESC.BELL                  = "这可不是普通的铃铛。"
+
 
 
 -------------------沃丽语句wally
@@ -189,126 +187,129 @@ STRINGS.NAMES.TUNACAN = "金枪鱼罐头"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TUNACAN = "这个罐头是哪里生产的？"
 
 
-STRINGS.NAMES.SLOTMACHINE = "老虎机"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SLOTMACHINE = "一台碰运气的机器。"
-STRINGS.NAMES.PACKIM_FISHBONE = "鱼骨"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PACKIM_FISHBONE = "摇摆的小鱼。"
-STRINGS.NAMES.PACKIM = "鹈鹕"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PACKIM = "这大嘴里面一定装满了东西。"
+STRINGS.NAMES.SLOTMACHINE                               = "老虎机"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SLOTMACHINE         = "一台碰运气的机器。"
+STRINGS.NAMES.PACKIM_FISHBONE                           = "鱼骨"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PACKIM_FISHBONE     = "摇摆的小鱼。"
+STRINGS.NAMES.PACKIM                                    = "鹈鹕"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PACKIM              = "这大嘴里面一定装满了东西。"
 
-STRINGS.NAMES.CRAB = "兔蟹"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRAB = "别迁怒于我，先生。"
-STRINGS.NAMES.FISH_MEAT_SMALL = "小鱼肉"
-STRINGS.NAMES.CRABHOLE = "兔蟹洞"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRABHOLE = "他们把沙子里的洞叫做家。"
-STRINGS.NAMES.CRAB_HIDDEN = "在动的沙子"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRAB_HIDDEN = "我很想知道这只螃蟹躲去哪了？"
+STRINGS.NAMES.CRAB                                      = "兔蟹"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRAB                = "别迁怒于我，先生。"
+STRINGS.NAMES.FISH_MEAT_SMALL                           = "小鱼肉"
+STRINGS.NAMES.CRABHOLE                                  = "兔蟹洞"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRABHOLE            = "他们把沙子里的洞叫做家。"
+STRINGS.NAMES.CRAB_HIDDEN                               = "在动的沙子"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRAB_HIDDEN         = "我很想知道这只螃蟹躲去哪了？"
 
-STRINGS.NAMES.WILDBORE = "野猪"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBORE = "我并不像它一样野蛮。"
-STRINGS.BORE_TALK_FOLLOWWILSON = { "你还不错", "我喜欢朋友", "你很好", "我跟着你！" }
-STRINGS.BORE_TALK_FIND_LIGHT = { "可怕", "不喜欢黑暗", "太阳在哪里？", "待在火堆旁", "火很好" }
-STRINGS.BORE_TALK_LOOKATWILSON = { "你是谁？", "你不是猪", "难看的猴人", "你有肉吗？" }
-STRINGS.BORE_TALK_RUNAWAY_WILSON = { "太近了！", "保持距离！", "你退后！", "这是我的地盘。" }
-STRINGS.BORE_TALK_FIGHT = { "我要开杀！", "粉碎你！", "呜啊啊啊啊！", "你完蛋了！", "滚开！", "是你挑头的！", "我会把你打跑！", }
-STRINGS.BORE_TALK_RUN_FROM_SPIDER = { "坏蜘蛛！", "不喜欢蜘蛛！", "可怕的蜘蛛！" }
-STRINGS.BORE_TALK_HELP_CHOP_WOOD = { "杀死树！", "粉碎树！", "我揍树！" }
-STRINGS.BORE_TALK_HELP_HACK = { "我帮忙砍灌木！", "我揍灌木！", "我们现在揍植物？" }
-STRINGS.BORE_TALK_ATTEMPT_TRADE = { "你得到了什么？", "乖乖听话。", "别浪费我的时间。" }
-STRINGS.BORE_TALK_PANIC = { "不！！！！！！", "太黑了！ 太黑了！", "啊啊啊啊啊啊！！" }
-STRINGS.BORE_TALK_PANICFIRE = { "热 热 热！", "嗷嗷嗷！", "烧起来了！" }
-STRINGS.BORE_TALK_FIND_MEAT = { "我饿了！", "好吃！", "我吃东西！", "吃东西的时间到了！" }
-STRINGS.BORE_TALK_GO_HOME = { "该回家了！", "家！ 家！" }
+STRINGS.NAMES.WILDBORE                                  = "野猪"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBORE            = "我并不像它一样野蛮。"
+STRINGS.BORE_TALK_FOLLOWWILSON                          = { "你还不错", "我喜欢朋友", "你很好", "我跟着你！" }
+STRINGS.BORE_TALK_FIND_LIGHT                            = { "可怕", "不喜欢黑暗", "太阳在哪里？", "待在火堆旁", "火很好" }
+STRINGS.BORE_TALK_LOOKATWILSON                          = { "你是谁？", "你不是猪", "难看的猴人", "你有肉吗？" }
+STRINGS.BORE_TALK_RUNAWAY_WILSON                        = { "太近了！", "保持距离！", "你退后！", "这是我的地盘。" }
+STRINGS.BORE_TALK_FIGHT                                 = { "我要开杀！", "粉碎你！", "呜啊啊啊啊！", "你完蛋了！", "滚开！", "是你挑头的！", "我会把你打跑！", }
+STRINGS.BORE_TALK_RUN_FROM_SPIDER                       = { "坏蜘蛛！", "不喜欢蜘蛛！", "可怕的蜘蛛！" }
+STRINGS.BORE_TALK_HELP_CHOP_WOOD                        = { "杀死树！", "粉碎树！", "我揍树！" }
+STRINGS.BORE_TALK_HELP_HACK                             = { "我帮忙砍灌木！", "我揍灌木！", "我们现在揍植物？" }
+STRINGS.BORE_TALK_ATTEMPT_TRADE                         = { "你得到了什么？", "乖乖听话。", "别浪费我的时间。" }
+STRINGS.BORE_TALK_PANIC                                 = { "不！！！！！！", "太黑了！ 太黑了！", "啊啊啊啊啊啊！！" }
+STRINGS.BORE_TALK_PANICFIRE                             = { "热 热 热！", "嗷嗷嗷！", "烧起来了！" }
+STRINGS.BORE_TALK_FIND_MEAT                             = { "我饿了！", "好吃！", "我吃东西！", "吃东西的时间到了！" }
+STRINGS.BORE_TALK_GO_HOME                               = { "该回家了！", "家！ 家！" }
 
-STRINGS.NAMES.WILDBOREHOUSE = "野猪房"
-STRINGS.RECIPE_DESC.WILDBOREHOUSE = "猪快出来！"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREHOUSE = "多么无~聊~的房子。"
-STRINGS.NAMES.WILDBOREHEAD = "野猪头"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREHEAD = "它闻起来和它看上去的样子一般糟糕。"
-STRINGS.NAMES.WILDBOREGUARD = "野猪守卫"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREGUARD = "它在守卫着什么？"
+STRINGS.NAMES.WILDBOREHOUSE                             = "野猪房"
+STRINGS.RECIPE_DESC.WILDBOREHOUSE                       = "猪快出来！"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREHOUSE       = "多么无~聊~的房子。"
+STRINGS.NAMES.WILDBOREHEAD                              = "野猪头"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREHEAD        = "它闻起来和它看上去的样子一般糟糕。"
+STRINGS.NAMES.WILDBOREGUARD                             = "野猪守卫"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREGUARD       = "它在守卫着什么？"
 
-STRINGS.NAMES.WILDBOREKING = "野猪王"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREKING = "这位是野猪的王"
-STRINGS.NAMES.PIGKINGSTAFF = "野猪王权杖"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGKINGSTAFF = "召唤我的猪人部下！"
-STRINGS.NAMES.PIGMAN_MINION = "野猪王守卫"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_MINION = "他是野猪王的守卫。"
-STRINGS.NAMES.PIGGUARD_MINION = "野猪王守卫"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGGUARD_MINION = "他是野猪王的守卫。"
+STRINGS.NAMES.WILDBOREKING                              = "野猪王"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREKING        = "这位是野猪的王"
+STRINGS.NAMES.PIGKINGSTAFF                              = "野猪王权杖"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGKINGSTAFF        = "召唤我的猪人部下！"
+STRINGS.NAMES.PIGMAN_MINION                             = "野猪王守卫"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGMAN_MINION       = "他是野猪王的守卫。"
+STRINGS.NAMES.PIGGUARD_MINION                           = "野猪王守卫"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGGUARD_MINION     = "他是野猪王的守卫。"
 
 ----------boss tornado
-STRINGS.NAMES.TWISTER = "豹卷风"
-STRINGS.NAMES.TWISTER_TORNADO = "龙卷风"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TWISTER = "我以为是这里的风比较奇怪。"
-STRINGS.NAMES.TWISTER_SEAL = "小海豹"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TWISTER_SEAL = "哒嗷嗷嗷。"
-STRINGS.NAMES.TURBINE_BLADES = "涡轮叶片"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURBINE_BLADES = "也许它造成了恶劣的暴风雨？"
-STRINGS.NAMES.MAGIC_SEAL = "魔法豹印"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAGIC_SEAL = "蕴含了强大的魔法力量。"
+STRINGS.NAMES.TWISTER                                   = "豹卷风"
+STRINGS.NAMES.TWISTER_TORNADO                           = "龙卷风"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TWISTER             = "我以为是这里的风比较奇怪。"
+STRINGS.NAMES.TWISTER_SEAL                              = "小海豹"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TWISTER_SEAL        = "哒嗷嗷嗷。"
+STRINGS.NAMES.TURBINE_BLADES                            = "涡轮叶片"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURBINE_BLADES      = "也许它造成了恶劣的暴风雨？"
+STRINGS.NAMES.MAGIC_SEAL                                = "魔法豹印"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAGIC_SEAL          = "蕴含了强大的魔法力量。"
 
 --------boss  TIGERSHARK
-STRINGS.NAMES.TIGERSHARKPOOL = "鲨鱼池"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIGERSHARKPOOL = "这个池塘里有一条奇怪的鲨鱼。"
-STRINGS.NAMES.TIGERSHARK = "虎鲨"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIGERSHARK = "好吧，这相当可怕。"
-STRINGS.NAMES.TIGEREYE = "虎鲨之眼"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIGEREYE = "虎鲨的眼睛。"
-STRINGS.NAMES.TIGERSHARKSHADOW = "虎鲨的影子"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIGERSHARKSHADOW = "野兽的影子！"
-STRINGS.NAMES.SHARK_GILLS = "虎鲨腮"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_GILLS = "要是我也有鳃就好了。"
+STRINGS.NAMES.TIGERSHARKPOOL                            = "鲨鱼池"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIGERSHARKPOOL      = "这个池塘里有一条奇怪的鲨鱼。"
+STRINGS.NAMES.TIGERSHARK                                = "虎鲨"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIGERSHARK          = "好吧，这相当可怕。"
+STRINGS.NAMES.TIGEREYE                                  = "虎鲨之眼"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIGEREYE            = "虎鲨的眼睛。"
+STRINGS.NAMES.TIGERSHARKSHADOW                          = "虎鲨的影子"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIGERSHARKSHADOW    = "野兽的影子！"
+STRINGS.NAMES.SHARK_GILLS                               = "虎鲨腮"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_GILLS         = "要是我也有鳃就好了。"
 
-STRINGS.NAMES.SHARK_TOOTH = "鲨齿"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_TOOTH = "简直是锋利的刀片。"
+STRINGS.NAMES.SHARK_TOOTH                               = "鲨齿"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_TOOTH         = "简直是锋利的刀片。"
 
-STRINGS.NAMES.MYSTERYMEAT = "胆汁盖肉"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.MYSTERYMEAT = "我才不要碰那个。"
+STRINGS.NAMES.MYSTERYMEAT                               = "胆汁盖肉"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MYSTERYMEAT         = "我才不要碰那个。"
 
-STRINGS.NAMES.HARPOON = "鱼叉"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.HARPOON = "用来投掷的鱼叉。"
+STRINGS.NAMES.HARPOON                                   = "鱼叉"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.HARPOON             = "用来投掷的鱼叉。"
 
-STRINGS.NAMES.BELL = "远古铃铛"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "叮铃铃。"
-STRINGS.NAMES.BIGFOOTPRINT = "大脚印"
+--from RoG
+STRINGS.NAMES.BELL                                      = "远古铃铛"
+STRINGS.RECIPE_DESC.BELL                                = "这可不是普通的铃铛。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL                = "叮铃铃。"
 
-STRINGS.NAMES.SHARKITTENSPAWNER = "猫鲨巢穴"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARKITTENSPAWNER = "一个沙子堆起来的巢穴。"
-STRINGS.NAMES.SHARKITTEN = "猫鲨"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARKITTEN = "小可爱，你的妈妈在哪里？"
+STRINGS.NAMES.BIGFOOTPRINT                              = "大脚印"
+
+STRINGS.NAMES.SHARKITTENSPAWNER                         = "猫鲨巢穴"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARKITTENSPAWNER   = "一个沙子堆起来的巢穴。"
+STRINGS.NAMES.SHARKITTEN                                = "猫鲨"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARKITTEN          = "小可爱，你的妈妈在哪里？"
 
 --------------------------------------丛林相关jungle-----------------------------------
 
-STRINGS.NAMES.JUNGLETREE = "丛林树"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLETREE =
+STRINGS.NAMES.JUNGLETREE                                = "丛林树"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLETREE          =
 {
     GENERIC = "典型的热带丛林树木。",
     CHOPPED = "就剩一点木头。",
     BURNING = "它烧着了！",
     BURNT = "可惜了。",
 }
-STRINGS.NAMES.JUNGLETREESEED = "丛林树种"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLETREESEED = "我可以听到小蛇的嘶嘶声。"
-STRINGS.NAMES.JUNGLE_TREE_SAPLING = "丛林树苗"
+STRINGS.NAMES.JUNGLETREESEED                            = "丛林树种"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLETREESEED      = "我可以听到小蛇的嘶嘶声。"
+STRINGS.NAMES.JUNGLE_TREE_SAPLING                       = "丛林树苗"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLE_TREE_SAPLING = "它会长成很好的丛林树。"
-STRINGS.NAMES.LIVINGJUNGLETREE = "中规中矩的丛林树"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIVINGJUNGLETREE = "就像其它的树一样。"
-STRINGS.NAMES.JUNGLETREEGUARD = "丛林树守卫"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLETREEGUARD = "好强壮的丛林树。"
+STRINGS.NAMES.LIVINGJUNGLETREE                          = "中规中矩的丛林树"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIVINGJUNGLETREE    = "就像其它的树一样。"
+STRINGS.NAMES.JUNGLETREEGUARD                           = "丛林树守卫"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLETREEGUARD     = "好强壮的丛林树。"
 
-STRINGS.NAMES.BAMBOO = "竹子"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOO = "也许我可以用这个来迷惑我的敌人？"
-STRINGS.NAMES.BAMBOOTREE = "竹丛"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOOTREE = {
+STRINGS.NAMES.BAMBOO                                    = "竹子"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOO              = "也许我可以用这个来迷惑我的敌人？"
+STRINGS.NAMES.BAMBOOTREE                                = "竹丛"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAMBOOTREE          = {
     GENERIC = "看起来相当坚固。",
     BURNING = "再见，竹子。",
     BURNT = "我觉得我本来预防它的。",
     CHOPPED = "接招吧，大自然！"
 }
-STRINGS.NAMES.DUG_BAMBOOTREE = "竹根"
-STRINGS.RECIPE_DESC.DUG_BAMBOOTREE = "种植竹子"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUG_BAMBOOTREE = "我需要把它种起来。"
+STRINGS.NAMES.DUG_BAMBOOTREE                            = "竹根"
+STRINGS.RECIPE_DESC.DUG_BAMBOOTREE                      = "种植竹子"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUG_BAMBOOTREE      = "我需要把它种起来。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEPLETED_BAMBOOTREE = "它还会再长出来吗？"
 
 

@@ -443,9 +443,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT_PIRATE = "Megpróbálok semmit sem me
 STRINGS.NAMES.DUBLOON = "Arany Érme"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUBLOON = "Gazdag vagyok!!"
 
-STRINGS.NAMES.DOYDOYFAN = "Tropikus Legyező"
-STRINGS.RECIPE_DESC.DOYDOYFAN = "fényűzően puha, fényűzően tropikus"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYFAN = "Valahogy a hideg levegő kétszer gyorsabban jön rám."
 
 STRINGS.NAMES.FABRIC = "Szövet"
 STRINGS.RECIPE_DESC.FABRIC = "A bambusz olyan sokoldalú!"

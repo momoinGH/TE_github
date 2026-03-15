@@ -1442,7 +1442,7 @@ local internalloot =
 		loot =
 		{
 			icehat = 1,
-			doydoyfan = 1,
+            tropicalfan = 1,
 			--	palmleaf_umbrella = 1,
 		},
 	},

@@ -444,9 +444,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PARROT                = "Я стараюсь
 STRINGS.NAMES.DUBLOON                                     = "Дублоны"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUBLOON               = "[Я|pl=Мы] богат[|а|о|ы]!"
 
-STRINGS.NAMES.DOYDOYFAN                                   = "Тропический веер"
-STRINGS.RECIPE_DESC.DOYDOYFAN                             = "Роскошная мягкость, роскошная тропичность."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOYDOYFAN             = "Снизит мою температуру."
 
 STRINGS.NAMES.FABRIC                                      = "Ткань"
 STRINGS.RECIPE_DESC.FABRIC                                = "Бамбук так универсален!"
