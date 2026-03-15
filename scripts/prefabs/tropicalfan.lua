@@ -4,12 +4,21 @@ local assets =
     Asset("ANIM", "anim/fan.zip"),
 }
 
+local swap_data = {
+    bank = "fan_tropical",
+    sym_build = "fan_tropical",
+    sym_name = "fan01",
+}
+
+-- 针对sg use_fan 重新映射一下build文件
+ProRemapOverrideSymbol("tropicalfan", "fan01", function(inst, swap_build, swap_symbol)
+    if swap_build == "fan" then
+        swap_build = swap_data.sym_build
+    end
+    return swap_build, swap_symbol
+end)
+
 local function fn()
-    local swap_data = {
-        bank = "fan_tropical",
-        sym_build = "fan_tropical",
-        sym_name = "fan01",
-    }
     local inst = Prefabs.featherfan.fn()
     inst:SetPrefabName("tropicalfan")
 
@@ -20,7 +29,7 @@ local function fn()
     inst.components.floater:SetBankSwapOnFloat(true, -15, swap_data)
     inst.components.floater:SetSize("large")
     inst.components.floater:SetVerticalOffset(0.15)
-    inst.components.floater:SetScale({.55, .5, .55})
+    inst.components.floater:SetScale({ .55, .5, .55 })
 
     if not TheWorld.ismastersim then return inst end
 
@@ -30,7 +39,6 @@ local function fn()
     inst.components.finiteuses:SetUses(TUNING.PERDFAN_USES)
 
     return inst
-
 end
 
 return Prefab("tropicalfan", fn, assets)

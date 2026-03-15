@@ -2,6 +2,33 @@
 -- AnimState 增强 Ver 1.11.22
 -- 滤镜与色彩空间封装
 
+-- 对animstate和inst进行映射，可以在AnimsState里可以拿到自己的inst
+local Links = {} -- key = AnimState, value = Entity
+local function _GetEntity(anim)
+    return anim ~= nil and Links[anim]
+end
+
+local function _NewLink(anim, inst)
+    if inst:IsValid() then
+        Links[anim] = inst
+        inst:ListenForEvent("onremove", function() Links[anim] = nil end)
+    end
+end
+
+local old_add = Entity.AddAnimState
+Entity.AddAnimState = function(ent, ...)
+    local inst = Ents[ent:GetGUID()] -- Get real instant
+    if _GetEntity(inst and inst.AnimState) then
+        Links[inst.AnimState] = nil
+    end
+    local anim = old_add(ent, ...)
+    _NewLink(anim, inst)
+    return anim
+end
+
+----------------------------------------------------------------------------------------------------
+
+
 local filters = {
     generic = function(animstate)
         animstate:SetAddColour(0, 0, 0, 0)
@@ -93,6 +120,32 @@ function AnimState:SetLayer(layer, ...)
         self:SetSortOrder(5)
     end
     return _SetLayer(self, layer, ...)
+end
+
+----------------------------------------------------------------------------------------------------
+
+local overridesymbol_maps = {}
+
+---对指定的OverrideSymbol参数进行重新映射，可针对每个预制件每个symbol映射到新的动画文件
+---@param prefab_name string
+---@param need_symbol string
+---@param get_fn function 参数为(inst, swap_build, swap_symbol)，返回值为swap_build, swap_symbol
+function ProRemapOverrideSymbol(prefab_name, need_symbol, get_fn)
+    assert(type(prefab_name) == "string" and type(need_symbol) == "string" and type(get_fn) == "function")
+    overridesymbol_maps[prefab_name] = overridesymbol_maps[prefab_name] or {}
+    overridesymbol_maps[prefab_name][need_symbol] = get_fn
+end
+
+GLOBAL.ProRemapOverrideSymbol = ProRemapOverrideSymbol
+
+local OldOverrideSymbol = AnimState.OverrideSymbol
+function AnimState:OverrideSymbol(symbol, swap_build, swap_symbol, ...)
+    local inst = _GetEntity(self)
+    local get_fn = inst and inst.prefab and overridesymbol_maps[inst.prefab] and overridesymbol_maps[inst.prefab][symbol]
+    if not get_fn then return end
+
+    swap_build, swap_symbol = get_fn(inst, swap_build, swap_symbol) --重新映射
+    return OldOverrideSymbol(self, symbol, swap_build, swap_symbol, ...)
 end
 
 return {

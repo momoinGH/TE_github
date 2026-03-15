@@ -1417,13 +1417,15 @@ function MakeHauntablePanic(inst, panictime, chance, cooldown, haunt_value) end
 
 TheShard = {}
 
-
 function RemovePhysicsColliders(inst) end
 
 -- modworldgenmain和modmain里能拿到这个值
 modinfo = {}
 
-
 function MakeHauntableLaunchAndPerish(inst, launchchance, perishchance, speed, perishpct, cooldown, launch_haunt_value, perish_haunt_value) end
 
 function GetInventoryItemAtlas_Internal(imagename, no_fallback) end
+
+ActionHandler = Class(function(self, action, state, condition) end)
+
+function GetString(inst, stringtype, modifier, nil_missing) end

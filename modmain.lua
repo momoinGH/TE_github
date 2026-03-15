@@ -12,6 +12,8 @@ RemapLayoutTile：重新映射layout里地皮id对应的地皮
 
 RemapSound：重新映射音效路径
 
+ProRemapOverrideSymbol：对每个预制件的OverrideSymbol的参数重新映射
+
 TUNING.tropical mod设置数据
 TUNING.TE_WORLDGEN 世界生成相关数据
 ]]
@@ -62,7 +64,7 @@ end
 modimport "modmain/postinit" --TODO 拆到各个模块中
 
 modimport "modmain/soundemitter"
-modimport "modmain/modules"   --模块导入
+modimport "modmain/modules" --模块导入
 ----------------------------------------------------------------------------------------------------
 
 if proisdev then
