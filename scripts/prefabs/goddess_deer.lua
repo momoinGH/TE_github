@@ -47,7 +47,7 @@ SetSharedLootTable('goddess_deer',
         { 'peach',     0.50 },
     })
 
-SetSharedLootTable('goddess_deer1',
+SetSharedLootTable('goddess_deer',
     {
         { 'meat',                   1.00 },
         { 'smallmeat',              1.00 },
@@ -247,7 +247,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
         inst:AddTag("windy4")
         inst:AddTag("companion")
         inst.AnimState:OverrideSymbol("swap_antler_red", "goddess_deer_build", "swap_antler_red")
-        inst.components.lootdropper:SetChanceLootTable('goddess_deer1')
+        inst.components.lootdropper:SetChanceLootTable('goddess_deer')
         inst:DoTaskInTime(0, StartBlooming)
     elseif item.prefab == ("greengem") then
         inst.SoundEmitter:PlaySound("dontstarve/common/rebirth_amulet_raise")
@@ -289,7 +289,7 @@ local function onload(inst, data)
             inst:AddTag("companion")
             inst:DoTaskInTime(0, OnHungerDelta)
             inst.AnimState:OverrideSymbol("swap_antler_red", "goddess_deer_build", "swap_antler_red")
-            inst.components.lootdropper:SetChanceLootTable('goddess_deer1')
+            inst.components.lootdropper:SetChanceLootTable('goddess_deer')
         end
         if data.windy4 ~= nil then
             inst:AddTag("milked")

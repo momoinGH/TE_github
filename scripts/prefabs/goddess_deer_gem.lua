@@ -39,7 +39,7 @@ local blueprefabs =
 
 local brain = require("brains/goddessdeergembrain")
 
-SetSharedLootTable('goddess_deer2',
+SetSharedLootTable('goddess_deer_gem',
     {
         { 'meat',               1.00 },
         { 'smallmeat',          1.00 },
@@ -309,7 +309,7 @@ local function common_fn(gem)
     inst.components.sleeper.testperiod = 1
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable('goddess_deer2')
+    inst.components.lootdropper:SetChanceLootTable('goddess_deer_gem')
 
     inst:AddComponent("inspectable")
 
