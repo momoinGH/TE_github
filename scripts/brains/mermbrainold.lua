@@ -32,16 +32,6 @@ local SEE_THRONE_DISTANCE      = 50
 local FACETIME_BASE            = 2
 local FACETIME_RAND            = 2
 
-local MERM_TALK_FOLLOWWILSON   = { { "Will come with you.", "Flort glut." }, { "Make Mermfolk strong!", "Blut gloppy Glurtsu!" }, { "You help Mermfolk!", "Glut Glurtsu flopt!" }, { "You okay.", "Florpy flort." } }
-local MERM_TALK_HELP_CHOP_WOOD = { { "Will come with you.", "Flort glut." }, { "Make Mermfolk strong!", "Blut gloppy Glurtsu!" }, { "Chop, choppy, chop!", "Grop, groppy, grop!" }, { "Work hard, florp!", "Glort blut, florp!" } }
-local MERM_TALK_HELP_MINE_ROCK = { { "Will come with you.", "Flort glut." }, { "Make Mermfolk strong!", "Blut gloppy Glurtsu!" }, { "Break rock, easy!", "Wult wop, florty flort!" }, { "Work hard, florp!", "Glort blut, florp!" } }
-local MERM_TALK_HELP_HAMMER    = { { "Will come with you.", "Flort glut." }, { "Make Mermfolk strong!", "Blut gloppy Glurtsu!" }, { "Smash! Smash!", "Florph! Florph!" }, { "Work hard, florp!", "Glort blut, florp!" } }
-local MERM_TALK_FIND_FOOD      = { { "Will come with you.", "Flort glut." }, { "Make Mermfolk strong!", "Blut gloppy Glurtsu!" }, { "This do fine.", "Glort grolt flut." }, { "Find something tasty!", "Glurt florpy flut!" } }
-local MERM_BATTLECRY           = { { "Glorp! Go away!", "Glorp! Glorpy glup!" }, { "Destroy you!", "Wult glut!" }, }
-local MERM_GUARD_BATTLECRY     = { { "To battle!", "Wult flrot!" }, { "For glory of Mermfolk!", "Flort Glurtsu flut!" }, { "ATTAAAACK!!", "GLOT FLOOOORPH!!" }, { "Defend King!", "Glurph Glurtsen!" } }
-local MERM_TALK_PANICBOSS      = { { "Something coming!", "Gloppy flort!" }, { "Aaah!! Bad thing! Bad thing!", "Gloooorph!! Glurph glot! Glurph glot!" }, { "It come to destroy us!", "Flort wult Glurtsu!" } }
-local MERM_TALK_PANICBOSS_KING = { { "Rally to King!", "Glurtsen blut flort!" }, { "Hurry! Protect kingdom!", "Flurph flrot! Gloppy Glurtsam!" }, { "S-stay brave!!", "G-glop blut flrot!!" } }
-
 local MermBrain                = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
@@ -280,11 +270,11 @@ function MermBrain:OnStart()
             IfNode(
                 function() return TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager.king end,
                 "panic with king",
-                BrainCommon.PanicWhenScared(self.inst, .25, MERM_TALK_PANICBOSS)),
+                BrainCommon.PanicWhenScared(self.inst, .25, "MERM_TALK_PANICBOSS")),
             IfNode(
                 function() return not TheWorld.components.mermkingmanager or not TheWorld.components.mermkingmanager
                     .king end, "panic with no king",
-                BrainCommon.PanicWhenScared(self.inst, .25, MERM_TALK_PANICBOSS)),
+                BrainCommon.PanicWhenScared(self.inst, .25, "MERM_TALK_PANICBOSS")),
             WhileNode(
             function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end,
                 "PanicHaunted", Panic(self.inst)),
@@ -299,7 +289,7 @@ function MermBrain:OnStart()
                 RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST,
                     STOP_RUN_AWAY_DIST)),
 
-            ChattyNode(self.inst, MERM_TALK_FIND_FOOD,
+            ChattyNode(self.inst, "MERM_TALK_FIND_FOOD",
                 DoAction(self.inst, EatFoodAction, "Eat Food")),
 
             WhileNode(function() return ShouldGoToThrone(self.inst) and self.inst.components.combat.target == nil end,
@@ -314,21 +304,21 @@ function MermBrain:OnStart()
             IfNode(function() return StartChoppingCondition(self.inst) end, "chop",
                 WhileNode(function() return KeepChoppingAction(self.inst) end, "keep chopping",
                     LoopNode {
-                        ChattyNode(self.inst, MERM_TALK_HELP_CHOP_WOOD,
+                        ChattyNode(self.inst, "MERM_TALK_HELP_CHOP_WOOD",
                             DoAction(self.inst, FindTreeToChopAction)) })),
 
             IfNode(function() return StartMiningCondition(self.inst) end, "mine",
                 WhileNode(function() return KeepMiningAction(self.inst) end, "keep mining",
                     LoopNode {
-                        ChattyNode(self.inst, MERM_TALK_HELP_MINE_ROCK,
+                        ChattyNode(self.inst, "MERM_TALK_HELP_MINE_ROCK",
                             DoAction(self.inst, FindRockToMineAction)) })),
 
-            ChattyNode(self.inst, MERM_TALK_FOLLOWWILSON,
+            ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
                 Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST,
                     TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
 
             IfNode(function() return self.inst.components.follower.leader ~= nil end, "HasLeader",
-                ChattyNode(self.inst, MERM_TALK_FOLLOWWILSON,
+                ChattyNode(self.inst, "MERM_TALK_FOLLOWWILSON",
                     FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn))),
 
 

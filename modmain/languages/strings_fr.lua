@@ -2,9 +2,6 @@
 
 STRINGS.ACTIONS.HACK = "Tailler"
 STRINGS.ACTIONS.STICK = "Planter le bâton"
-STRINGS.TABS.NAUTICALTAB = "Nautique"
-STRINGS.ACTIONS.LANTERNON = "Allumer"
-STRINGS.ACTIONS.PEER = "Scruter"
 
 
 -----------------------------UI -----------------------------
@@ -12,7 +9,6 @@ STRINGS.ACTIONS.PEER = "Scruter"
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL = "Nautical"
 STRINGS.UI.CRAFTING_FILTERS.OBSIDIAN = "Volcano"
 --HaM
-STRINGS.UI.CRAFTING_FILTERS.LEGACY = "Legacy"
 STRINGS.UI.CRAFTING_FILTERS.INTERIOR = "Interior"
 STRINGS.UI.CRAFTING_FILTERS.CITY = "City"
 --Forge
@@ -20,13 +16,13 @@ STRINGS.UI.CRAFTING_FILTERS.CITY = "City"
 --Gorge
 STRINGS.UI.CRAFTING_FILTERS.GORGE = "Gorge"
 --STRINGS.UI.WORLDGEN.VOLCANOTITLE = "MAGMA BOUILLANT"
-STRINGS.UI.COOKBOOK.COFFEE = "Provide acceleration effect"
-STRINGS.UI.COOKBOOK.SHARKFINSOUP = "You're being watched..."
-STRINGS.UI.COOKBOOK.TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.TEA = "It warms the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.ICEDTEA = "It cools the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.NETTLELOSANGE = " Protects you from pollen"
-STRINGS.UI.COOKBOOK.MEATED_NETTLE = " Protects you from pollen"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_COFFEE = "Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_SHARKFINSOUP = "You're being watched..."
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TEA = "It warms the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_ICEDTEA = "It cools the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_NETTLELOSANGE = " Protects you from pollen"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_MEATED_NETTLE = " Protects you from pollen"
 
 -----------------------------Biome Tidal Mash---------------------------
 
@@ -350,7 +346,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREGUARD = "Qu'est-ce qu'il garde ?"
 
 
 
-STRINGS.NAMES.BEAVERKING_SPAWNER = "Spawn roi castor"
 
 STRINGS.NAMES.WILDBEAVERGUARD = "Garde du Castor Sauvage"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "Il a l'air sérieux"
@@ -733,9 +728,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW_SMALL = "Un petit morceau de poisso
 STRINGS.NAMES.FISH_MED_COOKED = "Steak de poisson"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_MED_COOKED = "Parfaitement grillé."
 
-STRINGS.NAMES.SPOILED_FISH = "Poisson avarié"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPOILED_FISH = "Cette odeur ne me dit rien qui vaille."
-
 STRINGS.NAMES.FISH_RAW = "Poisson cru"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW = "Un morceau de poisson."
 
@@ -1076,9 +1068,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAPTAINHAT = "La tenue adéquate pour une jo
 STRINGS.NAMES.CAPTAINHAT = "chapeau du capitaine"
 STRINGS.RECIPE_DESC.CAPTAINHAT = "Portez-en un. Votre bateau vous respectera davantage."
 
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTABLECOOKPOT =
-"Quelles nouvelles aventures culinaires devons-nous entreprendre, vieil ami ?"
-STRINGS.NAMES.PORTABLECOOKPOT = "Mijoteuse portative"
 STRINGS.NAMES.PORTABLECOOKPOT_ITEM = "Mijoteuse portative"
 STRINGS.RECIPE_DESC.PORTABLECOOKPOT_ITEM = "Quelles nouvelles aventures culinaires devons-nous entreprendre, vieil ami ?"
 
@@ -1272,10 +1261,7 @@ STRINGS.RAWLINGon_ignite = {
     "Je suis en feu !",
     "Ow ow ow ow ow!",
 }
-STRINGS.RAWLINGon_pickedup = {
-    "C'est toi, James ?",
-    "Tu es MON MVP !",
-}
+
 STRINGS.RAWLINGon_thrown = {
     "Au panier de pêches !",
     "Tire !",
@@ -1313,8 +1299,6 @@ STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_WARN = "Il va y avoir des monstres."
 ----------------------------- DEATH CAUSES -----------------------------
 STRINGS.NAMES.DROWNING = "Noyade"
 STRINGS.NAMES.POISON = "Poison"
-STRINGS.NAMES.BELL = "Vieille cloche"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "Ding, daing, dong."
 
 STRINGS.NAMES.PALMLEAF_UMBRELLA = "Parasol tropical"
 STRINGS.CHARACTERS.GENERIC.PALMLEAF_UMBRELLA = "Parapluie en feuilles de palmier"

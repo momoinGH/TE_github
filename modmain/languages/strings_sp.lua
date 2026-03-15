@@ -1,17 +1,16 @@
 -----------------------------UI -----------------------------
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL = "Nautical"
 STRINGS.UI.CRAFTING_FILTERS.OBSIDIAN = "Volcano"
-STRINGS.UI.CRAFTING_FILTERS.LEGACY = "Legacy"
 STRINGS.UI.CRAFTING_FILTERS.INTERIOR = "Interior"
 STRINGS.UI.CRAFTING_FILTERS.CITY = "City"
 STRINGS.UI.CRAFTING_FILTERS.GORGE = "Gorge"
-STRINGS.UI.COOKBOOK.COFFEE = "Provide acceleration effect"
-STRINGS.UI.COOKBOOK.SHARKFINSOUP = "You're being watched..."
-STRINGS.UI.COOKBOOK.TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.TEA = "It warms the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.ICEDTEA = "It cools the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.NETTLELOSANGE = " Protects you from pollen"
-STRINGS.UI.COOKBOOK.MEATED_NETTLE = " Protects you from pollen"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_COFFEE = "Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_SHARKFINSOUP = "You're being watched..."
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TEA = "It warms the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_ICEDTEA = "It cools the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_NETTLELOSANGE = " Protects you from pollen"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_MEATED_NETTLE = " Protects you from pollen"
 -----------------------------Biome Jungle -----------------------------
 
 
@@ -336,7 +335,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREGUARD = "Qué está protegiendo?"
 
 
 
-STRINGS.NAMES.BEAVERKING_SPAWNER = "Beaverking Spawner"
 
 STRINGS.NAMES.WILDBEAVERGUARD = "Guardia de Castor Salvaje"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "Se ve serio"
@@ -710,9 +708,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW_SMALL = "Un pequeño bocado de pesc
 STRINGS.NAMES.FISH_MED_COOKED = "Pescado Mediano Cocido"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_MED_COOKED = "Grillado a la perfección."
 
-STRINGS.NAMES.SPOILED_FISH = "Pescado Estropeado"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPOILED_FISH = "No tengo mucha curiosidad por el olor."
-
 STRINGS.NAMES.FISH_RAW = "Pescado Crudo"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW = "Un pedazo de carne de pescado."
 
@@ -1053,8 +1048,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAPTAINHAT = "El atuendo propio de navegaci�
 STRINGS.NAMES.CAPTAINHAT = "Sombrero de Capitán"
 STRINGS.RECIPE_DESC.CAPTAINHAT = "Usa uno. Tu bote te respetará más."
 
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTABLECOOKPOT = "Qué nuevas aventuras debemos emprender, vieja amiga?"
-STRINGS.NAMES.PORTABLECOOKPOT = "Olla de Barro Portátil"
 STRINGS.NAMES.PORTABLECOOKPOT_ITEM = "Olla de Barro Portátil"
 STRINGS.RECIPE_DESC.PORTABLECOOKPOT_ITEM = "Qué nuevas aventuras debemos emprender, vieja amiga?"
 
@@ -1215,8 +1208,6 @@ STRINGS.NAMES.MERM2 = "Merm"
 
 STRINGS.ACTIONS.HACK = "Tajar"
 STRINGS.ACTIONS.STICK = "Pegar"
-STRINGS.ACTIONS.LANTERNON = "Encender"
-STRINGS.TABS.NAUTICALTAB = "Náutico"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "rawling"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "rawling"
@@ -1229,10 +1220,6 @@ STRINGS.RAWLINGother_owner = "Ouch!"
 STRINGS.RAWLINGon_ignite = {
     "Estoy en llamas!",
     "Ow ow ow ow ow!",
-}
-STRINGS.RAWLINGon_pickedup = {
-    "Eres tú, James?",
-    "Eres MI MVP!",
 }
 STRINGS.RAWLINGon_thrown = {
     "A la canasta de durazno!",
@@ -1261,8 +1248,6 @@ STRINGS.BORE_TALK_PANIC = { "NOOOOO!", "TOO DARK! TOO DARK!", "AAAAAAAAAH!!" }
 STRINGS.BORE_TALK_PANICFIRE = { "HOT HOT HOT!", "OWWWWW!", "IT BURNS!" }
 STRINGS.BORE_TALK_FIND_MEAT = { "ME HUNGRY!", "YUM!", "I EAT FOOD!", "TIME FOR FOOD!" }
 STRINGS.BORE_TALK_GO_HOME = { "HOME TIME!", "HOME! HOME!" }
-STRINGS.NAMES.BELL = "Old Bell"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "Old Bell."
 
 STRINGS.NAMES.WALL_LIMESTONE_ITEM = "Limestone Wall"
 STRINGS.NAMES.WALL_LIMESTONE = "Limestone Wall"

@@ -2,7 +2,6 @@
 
 STRINGS.ACTIONS.HACK = "Felvágás"
 STRINGS.ACTIONS.STICK = "Bot"
-STRINGS.ACTIONS.LANTERNON = "Bekapcsol"
 
 
 -----------------------------UI -----------------------------
@@ -10,7 +9,6 @@ STRINGS.ACTIONS.LANTERNON = "Bekapcsol"
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL = "Nautical"
 STRINGS.UI.CRAFTING_FILTERS.OBSIDIAN = "Volcano"
 --HaM
-STRINGS.UI.CRAFTING_FILTERS.LEGACY = "Legacy"
 STRINGS.UI.CRAFTING_FILTERS.INTERIOR = "Interior"
 STRINGS.UI.CRAFTING_FILTERS.CITY = "City"
 --Forge
@@ -18,13 +16,13 @@ STRINGS.UI.CRAFTING_FILTERS.CITY = "City"
 --Gorge
 STRINGS.UI.CRAFTING_FILTERS.GORGE = "Gorge"
 --STRINGS.UI.WORLDGEN.VOLCANOTITLE = "Sülő Magma"
-STRINGS.UI.COOKBOOK.COFFEE = "Provide acceleration effect"
-STRINGS.UI.COOKBOOK.SHARKFINSOUP = "You're being watched..."
-STRINGS.UI.COOKBOOK.TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.TEA = "It warms the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.ICEDTEA = "It cools the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.NETTLELOSANGE = " Protects you from pollen"
-STRINGS.UI.COOKBOOK.MEATED_NETTLE = " Protects you from pollen"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_COFFEE = "Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_SHARKFINSOUP = "You're being watched..."
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TEA = "It warms the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_ICEDTEA = "It cools the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_NETTLELOSANGE = " Protects you from pollen"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_MEATED_NETTLE = " Protects you from pollen"
 -----------------------------Biome Jungle -----------------------------
 
 
@@ -348,7 +346,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREGUARD = "Vajon mit őriz?"
 
 
 
-STRINGS.NAMES.BEAVERKING_SPAWNER = "Hódkirály"
 
 STRINGS.NAMES.WILDBEAVERGUARD = "Vadhód Őr"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "Komolynak néz ki."
@@ -722,9 +719,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW_SMALL = "Egy kis adag hal."
 STRINGS.NAMES.FISH_MED_COOKED = "Sűlt Halhús"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_MED_COOKED = "Grilled to perfection."
 
-STRINGS.NAMES.SPOILED_FISH = "Lejárt Hal"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPOILED_FISH = "Nem érdekel annyira a szaga."
-
 STRINGS.NAMES.FISH_RAW = "Nyers Hal"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW = "Egy adag halhús."
 
@@ -1063,8 +1057,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAPTAINHAT = "A megfelelő hajózási visele
 STRINGS.NAMES.CAPTAINHAT = "Sityak Kapitány"
 STRINGS.RECIPE_DESC.CAPTAINHAT = "Viselj egyet. A hajó jobban fog tisztelni."
 
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTABLECOOKPOT = "Milyen új konyhai kalandokkal nézzunk szembe,régi barátom?"
-STRINGS.NAMES.PORTABLECOOKPOT = "Hordozható Grill"
 STRINGS.NAMES.PORTABLECOOKPOT_ITEM = "Hordozható Grill"
 STRINGS.RECIPE_DESC.PORTABLECOOKPOT_ITEM = "Milyen új konyhai kalandokkal nézzunk szembe,régi barátom?"
 
@@ -1212,9 +1204,6 @@ STRINGS.RECIPE_DESC.GOLDNUGGET = "Gold"
 
 STRINGS.NAMES.ESCADADOVULCAO2 = "Volcano Exit"
 STRINGS.NAMES.LAVAPONDBIG1 = "Big lava pool"
---------------store---------
-
-STRINGS.TABS.NAUTICALTAB = "Tengeri"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Wilson labdája"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "Wilson labdája"
@@ -1227,10 +1216,6 @@ STRINGS.RAWLINGother_owner = "Áucs!"
 STRINGS.RAWLINGon_ignite = {
     "Lángolok!",
     "Áucs,áucs,áucs,áucs,áucs!",
-}
-STRINGS.RAWLINGon_pickedup = {
-    "Te vagy az James?",
-    "Te vagy a legjobbam!",
 }
 STRINGS.RAWLINGon_thrown = {
     "A barackos kosárba!",
@@ -1280,8 +1265,6 @@ STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_WARN = "Szörnyek lesznek."
 -------------death causes--------------
 STRINGS.NAMES.DROWNING = "Fulladás"
 STRINGS.NAMES.POISON = "Méreg"
-STRINGS.NAMES.BELL = "Old Bell"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "Old Bell."
 
 STRINGS.NAMES.BEAVERTORCH = "Hód Fáklya"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Lakályosan néz ki."

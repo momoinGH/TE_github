@@ -3290,7 +3290,7 @@ AddRoom("piko_land", {
         },
         countprefabs =
         {
-            teatree_piko_nest_patch = 1
+            teatree_piko_nest_patch = 1 --TODO 需要有一个映射，映射为teatree_piko_nest
         },
     }
 

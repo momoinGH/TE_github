@@ -2,14 +2,21 @@
 -- 可以忽视的台词前缀，这种不写也不会导致游戏崩溃
 local ignore_print_strings = {
     "STRINGS.CHARACTERS.GENERIC.DESCRIBE",
-    "STRINGS.CHARACTERS."
+    "STRINGS.CHARACTERS",
+    "STRINGS.RECIPE_DESC"
 }
 
 print("开始比对英文和其他语言台词：")
 local startTime = os.clock()
 local function LanguageStringCompare(en_tab, other_tab, prefix)
+    if type(en_tab) == "table" and #en_tab > 0 and type(other_tab) == "table" and #other_tab > 0 then
+        return --数组不检查，允许元素个数不一样
+    end
+
     for k, v in pairs(other_tab) do
-        if type(v) ~= type(en_tab[k]) then
+        local t = type(v)
+        local en_t = type(en_tab[k])
+        if t ~= en_t then
             local should_ignore = false
             for _, p in ipairs(ignore_print_strings) do
                 if string.starts(prefix, p) then
@@ -20,7 +27,7 @@ local function LanguageStringCompare(en_tab, other_tab, prefix)
             if not should_ignore then
                 ProErrorHandle("英文台词缺失：" .. prefix .. "." .. k, false, false)
             end
-        elseif type(v) == "table" then
+        elseif t == "table" then
             LanguageStringCompare(en_tab[k], v, prefix .. "." .. k)
         end
     end
@@ -41,6 +48,31 @@ prosafemodimport("modmain/languages/strings_en", false)
 LanguageStringCompare(STRINGS, other_language_strings, "STRINGS")
 
 print(string.format("台词比对完成，耗时: %.6f 秒", os.clock() - startTime))
+GLOBAL.STRINGS = old_strings
+
+----------------------------------------------------------------------------------------------------
+-- 检查台词是否和原版冲突，数组允许扩容，但是不允许修改原有值
+local old_strings = deepcopy(STRINGS)
+prosafemodimport("modmain/languages/strings_en", false)
+local function CheckStringsDiff(old_tab, tab, prefix)
+    for k, v in pairs(old_tab) do
+        local new_value = tab[k]
+        local old_type = type(v)
+        local new_type = type(new_value)
+
+        -- 检查类型是否一致
+        if old_type ~= new_type then
+            ProErrorHandle("台词类型冲突：键" .. prefix .. "." .. tostring(k) .. " 原版类型为 " .. old_type .. "，mod类型为 " .. new_type, false, false)
+        elseif old_type == "table" then
+            -- 如果是表，递归检查
+            CheckStringsDiff(v, new_value, prefix .. "." .. tostring(k))
+        elseif v ~= new_value then
+            -- 如果是基本类型且值不同，报告冲突
+            ProErrorHandle("台词值冲突：键 " .. prefix .. "." .. tostring(k), false, false)
+        end
+    end
+end
+CheckStringsDiff(old_strings, STRINGS, "STRINGS")
 GLOBAL.STRINGS = old_strings
 
 ----------------------------------------------------------------------------------------------------

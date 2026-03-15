@@ -47,11 +47,23 @@ RECIPETABS["OBSIDIANTAB"] = {
     icon_atlas = "images/tabs.xml",
     crafting_station = true,
 }
-
 RECIPETABS["CITY"] = {
     str = "CITY",
     sort = 91,
     icon = "tab_city.tex",
+    icon_atlas = "images/tabs.xml",
+    crafting_station = true,
+}
+RECIPETABS["GODDESSTAB"] = {
+    str = "GODDESSTAB",
+    sort = 93,
+    icon = "windyfan1.tex",
+    crafting_station = true,
+}
+RECIPETABS["GORGE"] = {
+    str = "GORGE",
+    sort = 94,
+    icon = "tab_portal_key.tex",
     icon_atlas = "images/tabs.xml",
     crafting_station = true,
 }
@@ -62,25 +74,13 @@ AddPrototyperDef("key_to_city", {
     is_crafting_station = true,
 })
 
-RECIPETABS["GODDESSTAB"] = {
-    str = "GODDESSTAB",
-    sort = 93,
-    icon = "windyfan1.tex",
-    crafting_station = true,
-}
 AddPrototyperDef("goddess_shrine", {
     action_str = "GODDESSTAB",
     icon_image = "windyfan1.tex",
     is_crafting_station = true,
 })
 
-RECIPETABS["GORGE"] = {
-    str = "GORGE",
-    sort = 94,
-    icon = "tab_portal_key.tex",
-    icon_atlas = "images/tabs.xml",
-    crafting_station = true,
-}
+
 AddPrototyperDef("quagmire_portal_key", {
     action_str = "GORGE",
     icon_image = "tab_portal_key.tex",

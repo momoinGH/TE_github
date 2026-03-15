@@ -149,7 +149,6 @@ Assets =
     Asset("ANIM", "anim/seagull_build.zip"),
     Asset("ANIM", "anim/quagmire_pigeon_build.zip"),
     Asset("ANIM", "anim/skeletons.zip"),
-    Asset("ANIM", "anim/fish2.zip"),
     Asset("ANIM", "anim/oceanfish_small.zip"),
     Asset("ANIM", "anim/oceanfish_small_1.zip"),
     Asset("ANIM", "anim/oceanfish_small_2.zip"),
