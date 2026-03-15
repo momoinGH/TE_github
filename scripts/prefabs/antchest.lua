@@ -57,7 +57,7 @@ local function converttocollapsed(inst, droploot, burnt) -- 升级后转化废�
     inst.components.workable:SetWorkLeft(2)
 
     local pile = SpawnAt("collapsed_honeychest", inst)
-	pile:SetChest(inst, burnt)
+    pile:SetChest(inst, burnt)
 end
 
 local function Upgrade_onhit(inst, worker) -- 升级后受击
@@ -247,7 +247,7 @@ local function ArtificialPostInit(inst) -- 建造后装配
 end
 
 local function perishratemult(inst, item)
-    return ANTCHEST_PRESERVATION[item.prefab] and 0 or 1
+    return TUNING.ANTCHEST_PRESERVATION[item.prefab] and 0 or 1
 end
 
 local function Common(name)

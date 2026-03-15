@@ -27,3 +27,11 @@ TUNING.CITY_PIG_GUARD_TARGET_DIST    = 20
 
 TUNING.GROGGINESS_WEAR_OFF_DURATION  = 0.5
 TUNING.GROGGINESS_DECAY_RATE         = .01
+
+-- 蜜箱里会刷出的东西
+TUNING.ANTCHEST_PRESERVATION         = {
+    honey = true,
+    royal_jelly = true,
+    nectar_pod = true,
+    pollen_item = true,
+}

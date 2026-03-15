@@ -25,7 +25,7 @@ end
 
 ------ 蜜箱
 local function antchestitemtestfn(container, item, slot)
-    return ANTCHEST_PRESERVATION[item.prefab]
+    return TUNING.ANTCHEST_PRESERVATION[item.prefab]
 end
 
 params.antchest = deepcopy(params.icebox) -- 野生蜜箱
