@@ -1,6 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/cave_exit.zip"),
+    Asset("ANIM", "anim/cave_exit_ham.zip"),
     Asset("MINIMAP_IMAGE", "cave_open2"),
 }
 
@@ -100,8 +101,8 @@ local function fn1()
 
     inst.MiniMapEntity:SetIcon("cave_open2.png")
 
-    inst.AnimState:SetBank("cave_stairs")
-    inst.AnimState:SetBuild("cave_exit")
+    inst.AnimState:SetBank("cave_stairs_ham")
+    inst.AnimState:SetBuild("cave_exit_ham")
     inst.AnimState:PlayAnimation("open")
 
     inst.entity:SetPristine()
@@ -159,8 +160,8 @@ local function fn2()
 
     inst.MiniMapEntity:SetIcon("cave_open2.png")
 
-    inst.AnimState:SetBank("cave_stairs")
-    inst.AnimState:SetBuild("cave_exit")
+    inst.AnimState:SetBank("cave_stairs_ham")
+    inst.AnimState:SetBuild("cave_exit_ham")
     inst.AnimState:PlayAnimation("open")
 
     inst.entity:SetPristine()
@@ -218,8 +219,8 @@ local function fn3()
 
     inst.MiniMapEntity:SetIcon("cave_open2.png")
 
-    inst.AnimState:SetBank("cave_stairs")
-    inst.AnimState:SetBuild("cave_exit")
+    inst.AnimState:SetBank("cave_stairs_ham")
+    inst.AnimState:SetBuild("cave_exit_ham")
     inst.AnimState:PlayAnimation("open")
 
     inst.entity:SetPristine()
