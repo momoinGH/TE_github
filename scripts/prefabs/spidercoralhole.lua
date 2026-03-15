@@ -24,13 +24,13 @@ local prefabs =
 
 SetSharedLootTable('spidercoralhole',
     {
-        { 'rocks',        1.00 },
-        { 'rocks',        1.00 },
-        { 'silk',         1.00 },
+        { 'rocks', 1.00 },
+        { 'rocks', 1.00 },
+        { 'silk', 1.00 },
         { 'fossil_piece', 1.00 },
         { 'fossil_piece', 0.50 },
-        { 'spidergland',  0.25 },
-        { 'silk',         0.50 },
+        { 'spidergland', 0.25 },
+        { 'silk', 0.50 },
     })
 
 local function updateart(inst)
@@ -73,7 +73,7 @@ local function OnCollide(inst, data)
     local boat_physics = data.other.components.boatphysics
     if boat_physics ~= nil then
         local hit_velocity = math.floor(math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity) * DAMAGE_SCALE /
-        boat_physics.max_velocity + 0.5)
+            boat_physics.max_velocity + 0.5)
         inst.components.workable:WorkedBy(data.other, hit_velocity * TUNING.SEASTACK_MINE)
     end
 end

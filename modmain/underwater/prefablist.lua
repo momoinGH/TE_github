@@ -1,102 +1,106 @@
 PrefabFiles =
 {
-    "spidercoralhole",
-    "tentacleunderwater",
-    "geothermal_vent",
-    "pearl_amulet",
-    "flare",
-    "squidunderwater",
-    "jelly_cap",
-    "reef_jellyfish",
-    "jellyfishschool",
-    "underwater_entrance",
-    "underwater_exit",
-    "diving_suits",
-    "seatentacle",
-    "seaquaketentacle",
-    "uw_coral",
-    "pearl",
-    "seagrass",
-    "rotting_trunk",
-    "hat_snorkel",
-    "bubble_vent",
-    "flower_sea",
-    "iron_boulder",
-    "iron_ore",
-    "sandstone_boulder",
-    "sandstone",
-    "tidal_node",
-    "sponges",
-    "sponge_piece",
-    "fish_fillet",
-    "fish_fillet_cooked",
-    "bubbles",
-    "commonfish",
-    "lavastone",
-    "clam",
-    "sea_eel",
-    "kelp",
-    "wormplant",
-    "decorative_shell",
-    -- table.insert(PrefabFiles,"citd_preparedfoods",
-    "sea_cucumber",
-    "commonfishschool",
-    "shrimp",
-    "shrimp_tail",
-    "jelly_lantern",
-    "seagrass_chunk",
-    "cut_orange_coral",
-    "cut_blue_coral",
-    "cut_green_coral",
-    "uw_flowers",
-    "sea_petals",
-    "reeflight_small",
-    "coral_cluster",
-    "coral_fish",
-    "fishesunderwater",
-    "dogfish_under",
-    "fish_coi",
-    "lobsterunderwater",
-    "stungrayunderwater",
-    "wreckunderwater",
-    "krakenunderwater_tentacle",
-    "krakenunderwater",
-    "krakenunderwater_spawner",
-    "gaze_beamunderwater",
-    "rock_cave",
-    "coralreefunderwater",
-    "coral_brain_rockunderwater",
-    "hat_submarine",
-    "secretcaveentrance",
-    "jellyfish_underwater",
-    "rainbowjellyfish_underwater",
-    "fishesunderwaternew",
-    "kelpy",
-    "merm_statue",
-    "woodlegs_cage_underwater",
-    "squidundewater2",
-    "swordfishunderwater",
-    "sharxunderwater",
-    "mermkingunderwater",
-    "mermthroneunderwater",
-    "mermwatchtowerunderwater",
-    "mermsunderwater",
-    "roe_fish",
-    "bioluminescence",
-    "kraken_projectile_underwater",
-    "rainbowjellyfish",
-    "magma_rocks",
-    "limpets",
-    "rock_limpet",
-    "crate",
-    "crabhole",
-    "crab",
-    "coral",
-    "coral_brain",
-    "pig_ruins_pressure_plate",
-    "pig_ruins_spear_trap",
-    "smashingpot",
-    "gnarwailunderwater",
-    "seaweedunderwater",
-    "rocksunderwater",
+    "spidercoralhole",     --蜘蛛巢
+    "tentacleunderwater",  --触手
+    "geothermal_vent",     --地热喷口
+    "pearl_amulet",        --珍珠护符
+    "flare",               --闪光棒
+    "squidunderwater",     --乌贼
+    "jelly_cap",           --水母头
+    "reef_jellyfish",      --深海水母
+    "jellyfishschool",     --深海水母生成器
+    "underwater_entrance", --海底入口
+    "underwater_exit",     --巨锚
+    "diving_suits",        --潜水衣
+    "seatentacle",         --海底触手
+    "uw_coral",            --火珊瑚
+    "pearl",               --神秘的珍珠
+    "seagrass",            --海草
+    "rotting_trunk",       --被淹没的树
+    "hat_snorkel",         --浮潜通气管
+    "bubble_vent",         --气体喷口
+    "flower_sea",          --海洋荧光花
+    "iron_boulder",        --黑铁矿
+    "iron_ore",            --黑铁矿石
+    "sandstone_boulder",   --沙岩巨石
+    "sandstone",           --沙石
+    "tidal_node",          --水中气泡，一直存在
+    "bubbles",             --水中气泡
+    "sponge",              --海绵
+    "sponge_piece",        --海绵片
+    "fish_fillet",         --生鱼片
+    "fish_fillet_cooked",  --熟鱼片
+    "commonfish",          --海鲈鱼
+    "commonfishschool",    --海鲈鱼生成器
+    "lavastone",           --岩浆石
+    "clam",                --巨蛤
+    "sea_eel",             --巨鳗
+    "seaweedunderwater",   --海带
+    "kelp",                --活海带
+    "kelpy",               --活海带
+    "wormplant",           --瓶罐植物
+    "decorative_shell",    --美丽的贝壳
+    "citd_preparedfoods",  --料理
+    "sea_cucumber",        --海参
+    "shrimp",              --虾
+    "shrimp_tail",         --小虾尾
+    "jelly_lantern",       --凝胶提灯
+    "seagrass_chunk",      --海草块
+    "cut_orange_coral",    --采下的火珊瑚
+    "cut_blue_coral",      --采下的紫珊瑚
+    "cut_green_coral",     --采下的绿珊瑚
+    "uw_flowers",          --海底花朵
+    "sea_petals",          --海洋花瓣
+    "reeflight_small",     --洞穴光源
+    "coral_cluster",       --珊瑚簇
+    "coralfish",           --小鱼
+    "fishesunderwater",    --小鱼
+    "fishesunderwaternew", --小鱼
+    "dogfish_under",       --狗鱼
+    "fish_coi",            --鲤鱼
+    "lobsterunderwater",   --龙虾
+    "stungrayunderwater",  --恶臭蝠鲼
+    "wreckunderwater",     --残骸
+
+
+    "seaquaketentacle",             --海妖触手
+    "krakenunderwater_tentacle",    --海妖触手
+    "krakenunderwater",             --海妖
+    "krakenunderwater_spawner",     --海妖生成器
+    "kraken_projectile_underwater", --海妖投射物
+
+
+    "gaze_beamunderwater",         --红色圈圈特效
+    "rock_cave",                   --洞穴石笋
+    "coralreefunderwater",         --珊瑚礁
+    "coral_brain_rockunderwater",  --智慧树
+    "hat_submarine",               --潜水头盔
+    "secretcaveentrance",          --水底洞穴
+    "jellyfish_underwater",        --水母
+    "rainbowjellyfish_underwater", --彩虹水母
+    "rainbowjellyfish",            --彩虹水母
+    "merm_statue",                 --鱼人雕像
+    "woodlegs_cage_underwater",    --笼子
+    "squidundewater2",             --鱿鱼
+    "swordfishunderwater",         --剑鱼
+    "sharxunderwater",             --海狗
+    "mermkingunderwater",          --鱼人王
+    "mermthroneunderwater",        --鱼人皇家地毯
+    "mermwatchtowerunderwater",    --鱼人堡垒
+    "mermsunderwater",             --鱼人守卫
+    "roe_fish",                    --小鱼
+    "bioluminescence",             --荧光生物
+    "magma_rocks",                 --熔岩矿堆
+    "limpets",                     --帽贝
+    "rock_limpet",                 --帽贝岩
+    "crate",                       --板条箱
+    "crabhole",                    --兔蟹洞
+    "crab",                        --兔蟹
+    "coral",                       --珊瑚
+    "coral_brain",                 --智慧果
+    "pig_ruins_pressure_plate",    --可疑的石板
+    "pig_ruins_spear_trap",        --装饰孔
+    "smashingpot",                 --易碎的瓦罐
+    "gnarwailunderwater",          --一角鲸
+    "rocksunderwater",             --岩石
 }

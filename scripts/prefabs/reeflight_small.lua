@@ -158,7 +158,7 @@ local function OnInit(inst)
         inst:WatchWorldState("cavephase", OnCavePhase)
         inst:WatchWorldState("startfullmoon", OnFullMoon)
         local params = light_params
-        [TheWorld.state.iscavenight and TheWorld.state.isfullmoon and "fullmoon" or TheWorld.state.cavephase]
+            [TheWorld.state.iscavenight and TheWorld.state.isfullmoon and "fullmoon" or TheWorld.state.cavephase]
         if params ~= nil then
             inst._lightphase:set(params.id)
         end

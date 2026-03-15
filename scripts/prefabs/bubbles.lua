@@ -218,6 +218,7 @@ local function fn1(Sim)
     inst:AddTag("NOCLICK")
     inst:AddTag("ondamarinha")
 
+    inst.persists = false
     inst:ListenForEvent("animover", function(inst) inst:Remove() end)
 
     return inst

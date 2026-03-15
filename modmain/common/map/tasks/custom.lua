@@ -14905,7 +14905,7 @@ AddRoom("underwaterothers_basic", {
             --										shrimp = 0.1,
             dogfish_under = 0.5,
             fish_coi = 0.5,
-            tidal_node = 0.5,
+            correntdebolhas = 0.5,
             lobsterunderwater = 1,
             --										bioluminescence = 0.03,	
             reeflight_small = 0.2,
