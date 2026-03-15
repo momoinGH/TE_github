@@ -4,17 +4,16 @@
 -----------------------------UI -----------------------------
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL = "Nautical"
 STRINGS.UI.CRAFTING_FILTERS.OBSIDIAN = "Volcano"
-STRINGS.UI.CRAFTING_FILTERS.LEGACY = "Legacy"
 STRINGS.UI.CRAFTING_FILTERS.INTERIOR = "Interior"
 STRINGS.UI.CRAFTING_FILTERS.CITY = "City"
 STRINGS.UI.CRAFTING_FILTERS.GORGE = "Gorge"
-STRINGS.UI.COOKBOOK.COFFEE = "Provide acceleration effect"
-STRINGS.UI.COOKBOOK.SHARKFINSOUP = "You're being watched..."
-STRINGS.UI.COOKBOOK.TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.TEA = "It warms the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.ICEDTEA = "It cools the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.NETTLELOSANGE = " Protects you from pollen"
-STRINGS.UI.COOKBOOK.MEATED_NETTLE = " Protects you from pollen"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_COFFEE = "Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_SHARKFINSOUP = "You're being watched..."
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TEA = "It warms the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_ICEDTEA = "It cools the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_NETTLELOSANGE = " Protects you from pollen"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_MEATED_NETTLE = " Protects you from pollen"
 -----------------------------Biome Jungle -----------------------------
 -----------------------------Biome Tidal Mash---------------------------
 
@@ -336,7 +335,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREGUARD = "Что он охраняе�
 
 
 
-STRINGS.NAMES.BEAVERKING_SPAWNER = "Спавнер Короля бобров"
 
 STRINGS.NAMES.WILDBEAVERGUARD = "Дикий бобер-стражник"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "Он выглядит серьезным."
@@ -730,9 +728,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW_SMALL = "Маленький кус�
 STRINGS.NAMES.FISH_MED_COOKED = "Рыбный стейк"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_MED_COOKED = "Идеально прожарен." --DTR
 
-STRINGS.NAMES.SPOILED_FISH = "Сгнившая рыбина"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPOILED_FISH = "Не то чтобы я жалуюсь на запах..."
-
 STRINGS.NAMES.FISH_RAW = "Кусок рыбьего мяса."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW = "Кусок рыбьего мяса."
 
@@ -1091,8 +1086,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAPTAINHAT = "Правильная одеж�
 STRINGS.NAMES.CAPTAINHAT = "Капитанская фуражка"
 STRINGS.RECIPE_DESC.CAPTAINHAT = "Надень такую, и твоя лодка зауважает тебя."
 
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTABLECOOKPOT = "What new culinary adventures shall we undertake, old friend?"
-STRINGS.NAMES.PORTABLECOOKPOT = "Портативный казан"
 STRINGS.NAMES.PORTABLECOOKPOT_ITEM = "Портативный казан"
 STRINGS.RECIPE_DESC.PORTABLECOOKPOT_ITEM = "Готовь еду получше где угодно."
 
@@ -1256,8 +1249,6 @@ STRINGS.NAMES.MERM2 = "Мэрм" --DTR
 
 STRINGS.ACTIONS.HACK = "Кромсать"
 STRINGS.ACTIONS.STICK = "Разместить палку"
-STRINGS.ACTIONS.LANTERNON = "Включить"
-STRINGS.TABS.NAUTICALTAB = "Морское"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Роулинг"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "Это мой приятель!"
@@ -1270,10 +1261,6 @@ STRINGS.RAWLINGother_owner = "Ой!"
 STRINGS.RAWLINGon_ignite = {
     "Я в огне!",
     "Ай ай ай ай ай!",
-}
-STRINGS.RAWLINGon_pickedup = {
-    "Это ты, Джеймс?",
-    "Ты самый лучший!",
 }
 STRINGS.RAWLINGon_thrown = {
     "В корзину!",
@@ -1326,8 +1313,6 @@ STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_RETURN =
 "[Мне|pl=Нам] показалось, как что-то коснулось [моей|pl=нашей] ноги..."
 
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_WARN = "Там дальше повсюду монстры."
-STRINGS.NAMES.BELL = "Старый колокольчик" --DTR
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "Старый колокольчик." --DTR
 
 
 
@@ -1526,9 +1511,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.KNIGHT_NIGHTMAREB                   = "По�
 STRINGS.NAMES.BISHOPB                                                   = "Механический слон"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BISHOPB                             = "Механический слон"
 
-STRINGS.NAMES.BISHOP_NIGHTMAREB                                         = "Поврежденный слон"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BISHOP_NIGHTMAREB                   = "Поврежденный слон"
-
 --------------------------------------forge weapons -----------------------------------------------------
 STRINGS.NAMES.TFWP_SPEAR_GUNG                                           = STRINGS.NAMES.SPEAR_GUNGNIR
 STRINGS.RECIPE_DESC.TFWP_SPEAR_GUNG                                     = "Рывок вперед, нанося умеренный урон."
@@ -1678,11 +1660,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAXWELLBOSS                         = "Бо�
 
 STRINGS.NAMES.SHADOWTROOP                                               = "Теневой десант"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHADOWTROOP                         = "Теневой десант."
-
-STRINGS.MAXWELLBOSS1                                                    = "На этот раз ты не победишь..."
-STRINGS.MAXWELLBOSS2                                                    = "Почувствуй мою силу."
-STRINGS.MAXWELLBOSS3                                                    = "Тени вернутся."
-STRINGS.MAXWELLBOSS4                                                    = "Я - король этого места."
 
 STRINGS.NAMES.MAXWELLSTATUECORPO                                        = "Торс статуи"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAXWELLSTATUECORPO                  = "Торс статуи"
@@ -3776,10 +3753,7 @@ STRINGS.CITY_PIG_TALK_FORGIVE_PLAYER = {
 STRINGS.CITY_PIG_TALK_NOT_ENOUGH = {
     DEFAULT = { "Я ХОЧУ БОЛЬШЕГО", "МНЕ НЕДОСТАТОЧНО", "Я ТРЕБУЮ БОЛЬШЕГО", "МНЕ НУЖНО БОЛЬШЕ", "МНЕ НУЖНО БОЛЬШЕ" },
 }
-STRINGS.CITY_PIG_TALK_EAT_MEAT = {
-    DEFAULT = { "НОМ-ЭТ НОМ-ЭТ, НОМ-ЭТ", "О, ЕДА! О ПИЩА!", "ЕМ, ЕМ И ЕМ, ЕМ И ЕМ" },
 
-}
 STRINGS.CITY_PIG_TALK_GO_HOME = {
     DEFAULT = { "АДЬОС! ПРОЩАЙ!", "Я ЛОЖУСЬ СПАТЬ!" },
     pigman_beautician = { "СМИРЕННО УХОЖУ", "Я СПЛЮ", "ВОЗМОЖНО, Я ВИЖУ СНЫ" },
@@ -3804,12 +3778,7 @@ STRINGS.CITY_PIG_TALK_FIX = {
     pigman_mayor = { "МЭР НЕ ЧИНИТЬ", "Я НЕ ЧИНЮ", "ИДИ К МЕХАНИКУ" },
 
 }
-STRINGS.CITY_PIG_GUARD_TALK_TORCH = {
-    DEFAULT = { "ГОРИТЕ ЯРКО ФАКЕЛЫ!", "ЗАЖИГАЙТЕ ФАКЕЛЫ!", "ГОРИТЕ, ФАКЕЛЫ, ЯСНО И ЯРКО!", "ВЗВЕЙТЕСЬ КОСТРАМИ СИНИЕ НОЧИ" },
-}
-STRINGS.CITY_PIG_GUARD_TALK_FIGHT = {
-    DEFAULT = { "Я НАНЕСУ ТЕБЕ УДАР!", "ПОЛУЧАЙ!", "ПРОЧЬ, КУРВА! ВОН!" },
-}
+
 STRINGS.CITY_PIG_GUARD_TALK_GOHOME = {
     DEFAULT = { "STAND HO!", "WHOFORE IS THAT?", "WHATFORE THAT?", "WHAT HO!" }, --IDK
 }
@@ -3918,19 +3887,10 @@ STRINGS.MANDRAKEMAN_GIVEUP = {
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MYSTERY_FOUND = "Здесь определенно что-то да есть."
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MYSTERY_NOREWARD = "Здесь ничего нет."
 
-STRINGS.GROUNDED_WILBA_THANKS = {
-    "БОЛЬШОЕ СПАСИБО, НЕ СВИНЬЯ",
-    "ВИЛБА ВОЗЬМЕТ ТВОЙ ДАР.",
-    "ОТДАЙ МНЕ ТЕБЯ?",
-    "ВИЛБА ЗАСЛУЖИВАЕТ ЭТОГО",
-}
-
 ----------------------------ACTIONS-------------------------------
 STRINGS.ACTIONS.HACK = "Кромсать"
 STRINGS.ACTIONS.SMELT = "Плавить"
 
-STRINGS.TABS.NAUTICALTAB = "Море"
-STRINGS.TABS.ARCHAEOLOGY = "Охота за сокровищами"
 STRINGS.TABS.HOME = "Интерьер"
 STRINGS.TABS.CITY = "Планировка города"
 
@@ -4006,9 +3966,6 @@ STRINGS.ANT_TALK_WANT_WOOD = {
     "Я ХОТЕТЬ-ТЬ ДЕРЕВО",
 }
 
-STRINGS.NAMES.PIG_RUINS_DOOR_ENTRADA = "Дверь свинных руин"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_ENTRADA = "Дверь свиных руин"
-
 STRINGS.NAMES.PIG_RUINS_DOOR_CIMA = "Дверь свинных руин"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_CIMA = "Дверь свиных руин"
 
@@ -4030,9 +3987,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_BAIXOVINE = "Покрытая
 STRINGS.NAMES.PIG_RUINS_DOOR_ESQUERDAVINE = "Покрытая лозами дверь свинных руин"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_ESQUERDAVINE = "Покрытая лозами дверь свиных руин"
 
-STRINGS.NAMES.PIG_RUINS_DOOR_DIREITAVINE = "Покрытая лозами дверь свинных руин"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_DIREITAVINE = "Покрытая лозами дверь свиных руин"
-
 STRINGS.NAMES.PIG_RUINS_DOOR_CIMAESCONDIDA = "Тайная дверь свиных руин"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_CIMAESCONDIDA = "Тайная дверь свиных руин"
 
@@ -4050,9 +4004,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_WEAPONS_DOOR_ENTRADA = "Дверь"
 
 STRINGS.NAMES.PIG_SHOP_WEAPONS_DOOR_SAIDA = "Дверь"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_WEAPONS_DOOR_SAIDA = "Дверь"
-
-STRINGS.NAMES.PIG_SHOP_PRODUCE_DOOR_ENTRATA = "Дверь"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_PRODUCE_DOOR_ENTRATA = "Дверь"
 
 STRINGS.NAMES.PIG_SHOP_HOOFSPA_DOOR_ENTRATA = "Дверь"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_HOOFSPA_DOOR_ENTRATA = "Дверь"
@@ -4222,9 +4173,6 @@ STRINGS.RECIPE_DESC.DISGUISEHAT = "Свежее лицо."
 STRINGS.NAMES.CLAWPALMTREE_CONE = "Jungle Burr" --IDK
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CLAWPALMTREE_CONE = "Большая еловая шишка."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CLAWPALMTREE_SAPLING = "Саженец большого дерева."
-
-STRINGS.NAMES.RAINFORESTTREE_CONE = "Rain forest Cone"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINFORESTTREE_CONE = "Weird tree cone."       --IDK
 
 STRINGS.NAMES.RAINFORESTTREE_SAPLING = "Rain forest Sapling"                       --IDK
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINFORESTTREE_SAPLING = "Weird tree sapling." --IDK
@@ -4443,8 +4391,6 @@ STRINGS.NAMES.INTERIOR_FLOOR_WOOD = "Пол"
 
 STRINGS.NAMES.PIG_RUINS_DART_STATUE = "Поразительная статуя"
 
-STRINGS.TIKI_TALK_FIND_LIGHT = { "O-O-СТРАШНА", "O-O-СОЛНЦААА?", "O-O-АГОНЬ", "O-O-ХАРАШО", "O-O-ТЕПЛО" }
-
 STRINGS.NAMES.OCTOHOUSE = "Домик осьминога"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCTOHOUSE = { "Как они вообще пролезают в дверь?" }
 STRINGS.NAMES.OCTOPUS = "Осьминог"
@@ -4635,25 +4581,6 @@ STRINGS.NAMES.BED8 = "Мягкая кровать"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BED8 = "Такая мягкая"
 STRINGS.RECIPE_DESC.BED8 = "Такая мягкая"
 
-STRINGS.RECIPE_DESC.RENO_SHELVES_ADJUSTABLE = "Гибкая обстановка."
-STRINGS.RECIPE_DESC.RENO_SHELVES_AFRAME = "Стеллаж на пять с плюсом."
-STRINGS.RECIPE_DESC.RENO_SHELVES_BASIC = "Базовая книжная полка для базовых книг."
-STRINGS.RECIPE_DESC.RENO_SHELVES_CINDERBLOCKS = "Общежитие одобрено."
-STRINGS.RECIPE_DESC.RENO_SHELVES_CRATES = "Оптовый шик."
-STRINGS.RECIPE_DESC.RENO_SHELVES_FRIDGE = "Круто."
-STRINGS.RECIPE_DESC.RENO_SHELVES_GLASS = "Ломающийся, но практичный."
-STRINGS.RECIPE_DESC.RENO_SHELVES_HATTREE = "На самом деле дерево."
-STRINGS.RECIPE_DESC.RENO_SHELVES_HOOKS = "Подсаживайтесь."
-STRINGS.RECIPE_DESC.RENO_SHELVES_HUTCH = "Место для вещей."
-STRINGS.RECIPE_DESC.RENO_SHELVES_INDUSTRIAL = "Практичное хранение."
-STRINGS.RECIPE_DESC.RENO_SHELVES_LADDER = "Используйте его, чтобы добраться до высокой полки."
-STRINGS.RECIPE_DESC.RENO_SHELVES_MARBLE = "Классика и в то же время авангард."
-STRINGS.RECIPE_DESC.RENO_SHELVES_MIDCENTURY = "Изящно изогнутый."
-STRINGS.RECIPE_DESC.RENO_SHELVES_PALLET = "Едва ощутимо."
-STRINGS.RECIPE_DESC.RENO_SHELVES_PIPE = "Проникните в глубины этого стеллажа."
-STRINGS.RECIPE_DESC.RENO_SHELVES_WALLMOUNT = "Прибил его."
-STRINGS.RECIPE_DESC.RENO_SHELVES_WOOD = "Основная книга для книжных червей."
-STRINGS.RECIPE_DESC.RENO_SHELVES_FLOATING = "Плавающие полки."
 
 STRINGS.NAMES.PACKIM_FISHBONE = "Рыбий скелет."
 STRINGS.NAMES.PACKIM = "Паким Бэггимс."
@@ -4685,93 +4612,17 @@ STRINGS.RECIPE_DESC.INTERIOR_WALL_MAYORSOFFICE = "Часто их выбираю
 STRINGS.RECIPE_DESC.INTERIOR_WALL_FULLWALL_MOULDING = "Много работы, но усилия того стоят."
 STRINGS.RECIPE_DESC.INTERIOR_WALL_UPHOLSTERED = "Как диван на стене."
 
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_PHOTO = "Эта фотография была в рамке?"
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_FULLLENGTH_MIRROR = "Получите полную картину."
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_EMBROIDERY_HOOP = "Вышита вручную двоюродной бабушкой."
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_MOSAIC = "Пестрые камни."
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_WREATH = "Теперь не только на Рождество."
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_AXE = "Всегда под рукой."
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_HUNT = "Охотничий шик."
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_PERIODIC_TABLE = "Сенти-элементаль."
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_GEARS_ART = "Не знаю его эстетического эффекта."
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_CAPE = "У вас никогда не может быть слишком много плащей."
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_NO_SMOKING = "Для здоровья и безопасности."
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_BLACK_CAT = "Часто встречается в Богемском районе."
-
-STRINGS.NAMES.RENO_WALLORNAMENT_PHOTO = "Фото"
-STRINGS.NAMES.RENO_WALLORNAMENT_FULLLENGTH_MIRROR = "Зеркало во всю длину"
-STRINGS.NAMES.RENO_WALLORNAMENT_EMBROIDERY_HOOP = "Вышивальный обруч"
-STRINGS.NAMES.RENO_WALLORNAMENT_MOSAIC = "Мозаика"
-STRINGS.NAMES.RENO_WALLORNAMENT_WREATH = "Венок"
-STRINGS.NAMES.RENO_WALLORNAMENT_AXE = "Топор"
-STRINGS.NAMES.RENO_WALLORNAMENT_HUNT = "Охота"
-STRINGS.NAMES.RENO_WALLORNAMENT_PERIODIC_TABLE = "Периодическая таблица"
-STRINGS.NAMES.RENO_WALLORNAMENT_GEARS_ART = "Шестеренки Арт"
-STRINGS.NAMES.RENO_WALLORNAMENT_CAPE = "Плащ"
-STRINGS.NAMES.RENO_WALLORNAMENT_NO_SMOKING = "Не курить"
-STRINGS.NAMES.RENO_WALLORNAMENT_BLACK_CAT = "Черная кошка"
-STRINGS.NAMES.RENO_ANTIQUITIES_WALLFISH = "Tasteful Fish Mounting" --IDK
-STRINGS.NAMES.RENO_ANTIQUITIES_BEEFALO = "Beefalo Mounting"        --IDK
-
-STRINGS.RECIPE_DESC.RENO_ANTIQUITIES_WALLFISH = "Покажите свою пискаторскую гордость."
-STRINGS.RECIPE_DESC.RENO_ANTIQUITIES_BEEFALO = "Глаза стеклянные."
-
-STRINGS.NAMES.RENO_WINDOW_ROUND_CURTAINS_NAILS = "Круглое окно"
-STRINGS.NAMES.RENO_WINDOW_ROUND_BURLAP = "Круглое окно из рогожи"
-STRINGS.NAMES.RENO_WINDOW_SMALL_PEAKED = "Окно с козырьком"
-STRINGS.NAMES.RENO_WINDOW_LARGE_SQUARE = "Квадратное окно"
-STRINGS.NAMES.RENO_WINDOW_SMALL_PEAKED_CURTAIN = "Окно с пикообразной шторой"
-STRINGS.NAMES.RENO_WINDOW_TALL = "Высокое окно"
-STRINGS.NAMES.RENO_WINDOW_LARGE_SQUARE_CURTAIN = "Большое квадратное окно для штор"
-STRINGS.NAMES.RENO_WINDOW_TALL_CURTAIN = "Высокое окно для штор"
-
-STRINGS.RECIPE_DESC.RENO_WINDOW_ROUND_BURLAP = "Простое естественное освещение."
-STRINGS.RECIPE_DESC.RENO_WINDOW_SMALL_PEAKED = "Твердая древесина и мягкий свет."
-STRINGS.RECIPE_DESC.RENO_WINDOW_LARGE_SQUARE = "Удваивается, как доска для игры в крестики-нолики."
-STRINGS.RECIPE_DESC.RENO_WINDOW_SMALL_PEAKED_CURTAIN = "Экономично и функционально."
-STRINGS.RECIPE_DESC.RENO_WINDOW_TALL = "Хорошо округленный."
-STRINGS.RECIPE_DESC.RENO_WINDOW_LARGE_SQUARE_CURTAIN = "Поставляется с драпировкой."
-STRINGS.RECIPE_DESC.RENO_WINDOW_TALL_CURTAIN = "Модный."
-
-STRINGS.RECIPE_DESC.RENO_LIGHT1 = "Это дает свет."
-STRINGS.RECIPE_DESC.RENO_LIGHT_CHANDALIER_CANDLES = "Мягкий и смелый."
-STRINGS.RECIPE_DESC.RENO_LIGHT_ROPE_1 = "Светлый, с деревенским уклоном."
-STRINGS.RECIPE_DESC.RENO_LIGHT_FLORAL_BULB = "Деликатный и, в то же время, основательный."
-STRINGS.RECIPE_DESC.RENO_LIGHT_PENDANT_CHERRIES = "Милый веселый дизайн."
-STRINGS.RECIPE_DESC.RENO_LIGHT_FLORAL_SCALLOP = "Замечательное мастерство."
-STRINGS.RECIPE_DESC.RENO_LIGHT_BASIC_METAL = "Прочная металлическая конструкция."
-
-STRINGS.RECIPE_DESC.RENO_LIGHT_BASIC_BULB = "По крайней мере, он подключен."
-STRINGS.RECIPE_DESC.RENO_LIGHT_ROPE_2 = "Вдвое больше мрачности."
-STRINGS.RECIPE_DESC.RENO_LIGHT_FLORAL_SCALLOP = "Цветочная тематическая иллюминация."
-STRINGS.RECIPE_DESC.RENO_LIGHT_FLORAL_BLOOMER = "Осветление потолка."
-STRINGS.RECIPE_DESC.RENO_LIGHT_TOPHAT = "Добавьте немного изысканности."
-STRINGS.RECIPE_DESC.RENO_LIGHT_DERBY = "Привести шляпу в негодность."
-
-STRINGS.NAMES.RENO_LIGHT_FLORAL_BLOOMER = "Подвесной светильник с цветочным абажуром"
-STRINGS.NAMES.RENO_LIGHT_CHANDALIER_CANDLES = "Канделябр"
-STRINGS.NAMES.RENO_LIGHT_ROPE_1 = "Веревочный светильник"
-STRINGS.NAMES.RENO_LIGHT_FLORAL_BULB = "Выдувная стеклянная лампа"
-STRINGS.NAMES.RENO_LIGHT_PENDANT_CHERRIES = "Вишневый абажур"
-STRINGS.NAMES.RENO_LIGHT_BASIC_METAL = "Лампа с металлическим абажуром"
-STRINGS.NAMES.RENO_LIGHT_BASIC_BULB = "Проводная лампочка"
-STRINGS.NAMES.RENO_LIGHT_ROPE_2 = "Двойной веревочный светильник"
-STRINGS.NAMES.RENO_LIGHT_FLORAL_SCALLOP = "Hanging Blooming Lamp" --IDK
-STRINGS.NAMES.RENO_LIGHT_FLORAL_BLOOMER = "Hanging Floral Lamp"   --IDK
-STRINGS.NAMES.RENO_LIGHT_TOPHAT = "Tophat Light"                  --IDK
-STRINGS.NAMES.RENO_LIGHT_DERBY = "Derby Light"                    --IDK
 
 
 
-STRINGS.RECIPE_DESC.RENO_CORNERBEAM_WOOD = "Деревянный столб"
-STRINGS.RECIPE_DESC.RENO_CORNERBEAM_MILLINERY = "Столб Миллери"
-STRINGS.RECIPE_DESC.RENO_CORNERBEAM_ROUND = "Круглый столб"
-STRINGS.RECIPE_DESC.RENO_CORNERBEAM_MARBLE = "Мраморный столб"
 
-STRINGS.NAMES.RENO_CORNERBEAM_WOOD = "Деревянный столб"
-STRINGS.NAMES.RENO_CORNERBEAM_MILLINERY = "Столб Миллери"
-STRINGS.NAMES.RENO_CORNERBEAM_ROUND = "Круглый столб"
-STRINGS.NAMES.RENO_CORNERBEAM_MARBLE = "Мраморный столб"
+
+
+
+
+
+
+
 
 
 STRINGS.NAMES.STONE_DOOR = "Каменная арка"

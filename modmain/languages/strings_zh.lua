@@ -4,19 +4,18 @@ local STRINGS                             = STRINGS
 -----------------------------UI -----------------------------
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL      = "航海"
 STRINGS.UI.CRAFTING_FILTERS.OBSIDIAN      = "火山"
-STRINGS.UI.CRAFTING_FILTERS.LEGACY        = "寻宝"
 STRINGS.UI.CRAFTING_FILTERS.INTERIOR      = "内饰"
 STRINGS.UI.CRAFTING_FILTERS.CITY          = "城镇"
 -- STRINGS.UI.CRAFTING_FILTERS.FORGE = "熔炉"
 STRINGS.UI.CRAFTING_FILTERS.GORGE         = "暴食"
 --STRINGS.UI.WORLDGEN.VOLCANOTITLE = "滚烫的熔岩"
-STRINGS.UI.COOKBOOK.COFFEE                = "提供加速效果"
-STRINGS.UI.COOKBOOK.SHARKFINSOUP          = "你被盯上了..."
-STRINGS.UI.COOKBOOK.TROPICALBOUILLABAISSE = "免受潮湿影响/提供加速效果"
-STRINGS.UI.COOKBOOK.TEA                   = "让身体变暖/提供加速效果"
-STRINGS.UI.COOKBOOK.ICEDTEA               = "为身体降温/提供加速效果"
-STRINGS.UI.COOKBOOK.NETTLELOSANGE         = "免受花粉困扰"
-STRINGS.UI.COOKBOOK.MEATED_NETTLE         = "免受花粉困扰"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_COFFEE                = "提供加速效果"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_SHARKFINSOUP          = "你被盯上了..."
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TROPICALBOUILLABAISSE = "免受潮湿影响/提供加速效果"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TEA                   = "让身体变暖/提供加速效果"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_ICEDTEA               = "为身体降温/提供加速效果"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_NETTLELOSANGE         = "免受花粉困扰"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_MEATED_NETTLE         = "免受花粉困扰"
 
 
 
@@ -77,25 +76,12 @@ STRINGS.ACTIONS.GIVE.SPY                                = "调查"
 STRINGS.ACTIONS.GIVE.TAPSUGARTREE                       = "凿树"
 STRINGS.ACTIONS.GIVE.KILLSOFTLY                         = "屠宰"
 STRINGS.ACTIONS.GIVE.FILL                               = "灌满"
-STRINGS.ACTIONS.GIVE.MILK                               = "挤奶"
 STRINGS.ACTIONS.GIVE.REPLATE                            = "摆盘"
-STRINGS.ACTIONS.GIVE.ADDFUEL                            = "添加燃料"
 
 --SW
 STRINGS.ACTIONS.HACK                                    = "劈砍"
 STRINGS.ACTIONS.STICK                                   = "捣入"
-STRINGS.ACTIONS.LANTERNON                               = "开灯"
-STRINGS.ACTIONS.PEER                                    = "观察"
 STRINGS.ACTIONS.BOATDISMOUNT                            = "上岸"
-
-STRINGS.ACTIONS.DEPLOY.DEPLOYBUOY                       = "部署"
-STRINGS.ACTIONS.DEPLOY.DEPLOYFISH_FARM                  = "部署"
-STRINGS.ACTIONS.DEPLOY.DEPLOYBALLPHINHOUSE              = "部署"
-STRINGS.ACTIONS.DEPLOY.DEPLOYSEARCHLAB5                 = "部署"
-STRINGS.ACTIONS.DEPLOY.DEPLOYTAR_EXTRATOR               = "部署"
-STRINGS.ACTIONS.DEPLOY.DEPLOYSEA_CHIMINEA               = "部署"
-STRINGS.ACTIONS.DEPLOY.DEPLOYWATERCHEST                 = "部署"
-STRINGS.ACTIONS.DEPLOY.DEPLOYSEA_YARD                   = "部署"
 
 --ham
 STRINGS.ACTIONS.SMELT                                   = "熔炼"
@@ -103,7 +89,6 @@ STRINGS.ACTIONS.SMELT                                   = "熔炼"
 STRINGS.ACTIONS.JUMPIN.ENTER                            = "进入"
 STRINGS.ACTIONS.JUMPIN.LEAVE                            = "离开"
 STRINGS.ACTIONS.TIRO                                    = "射击"
-STRINGS.ACTIONS.CHECKSHOP                               = "花费 {cost} {costprefab}\n购买 {item}"
 
 STRINGS.ACTIONS.IRONTURNON                              = "开启"
 STRINGS.ACTIONS.IRONTURNOFF                             = "关闭"
@@ -114,10 +99,7 @@ STRINGS.ACTIONS.PUNCH                                   = "重击"
 STRINGS.ACTIONS.STOREOPEN                               = "交易"
 
 -----------选项卡----------
-STRINGS.TABS.NAUTICALTAB                                = "航海"
 STRINGS.TABS.OBSIDIANTAB                                = "火山"
-STRINGS.TABS.NAUTICALTAB                                = "航海"
-STRINGS.TABS.ARCHAEOLOGY                                = "考古"
 STRINGS.TABS.HOME                                       = "家"
 STRINGS.TABS.CITY                                       = "城镇"
 
@@ -267,11 +249,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MYSTERYMEAT         = "我才不要碰那个
 STRINGS.NAMES.HARPOON                                   = "鱼叉"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HARPOON             = "用来投掷的鱼叉。"
 
---from RoG
-STRINGS.NAMES.BELL                                      = "远古铃铛"
-STRINGS.RECIPE_DESC.BELL                                = "这可不是普通的铃铛。"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL                = "叮铃铃。"
-
 STRINGS.NAMES.BIGFOOTPRINT                              = "大脚印"
 
 STRINGS.NAMES.SHARKITTENSPAWNER                         = "猫鲨巢穴"
@@ -389,14 +366,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWEET_POTATO_PLANTED = "这是一种看起�
 
 
 -----------------------------潮滩相关Tidal beach----------------------------------------------
-STRINGS.MERMNAMES = {
-    "格罗皮", "布鲁特", "格朗特", "姆罗普特", "斯洛朋",
-    "布朗舍", "费特哈", "布洛特", "斯立普", "格罗朋",
-    "罗特罗特", "格洛皮", "姆沃普", "格利喷", "格勒特",
-    "谢尔普", "谢鲁波", "克里斯廷", "丹", "德鲁",
-    "戴夫", "乔恩", "布拉普", "马特", "那森", "维克",
-    "格拉斯基", "格鲁默", "格拉兹", "斯勒姆", "斯鲁歇", "斯勒纽斯",
-}
+
 STRINGS.NAMES.MERMFISHER = "渔人"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMFISHER = "你最好别尝有鱼味的东西。"
 STRINGS.NAMES.MERMFISHERGUARD = "渔人守卫"
@@ -714,10 +684,6 @@ STRINGS.RAWLINGother_owner = "诶呀！"
 STRINGS.RAWLINGon_ignite = {
     "我着火了！",
     "喔喔喔喔喔！",
-}
-STRINGS.RAWLINGon_pickedup = {
-    "是你吗，詹姆斯？",
-    "你是我的MVP！",
 }
 STRINGS.RAWLINGon_thrown = {
     "目标桃篮！",
@@ -1223,7 +1189,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ARMOROBSIDIAN = "我是个天才。"
 STRINGS.NAMES.OBSIDIANCOCONADE = "黑曜石椰弹"
 STRINGS.RECIPE_DESC.OBSIDIANCOCONADE = "爆炸！"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANCOCONADE = "它比一般的炸弹更危险！"
-STRINGS.NAMES.OBSIDIANCOCONADEACTIVE = "点燃的黑曜石椰弹"
 
 STRINGS.NAMES.SPEAR_OBSIDIAN = "黑曜石矛"
 STRINGS.RECIPE_DESC.SPEAR_OBSIDIAN = "用你的矛射一枪怎么样？"
@@ -1704,7 +1669,6 @@ STRINGS.RECIPE_DESC.WALL_TOTEM_ITEM = "显示你的财富。"
 STRINGS.NAMES.WANAWANATIKI = "哇呐哇呐提基"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WANAWANATIKI = { "他看起来像个领导人。" }
 
-STRINGS.TIKI_TALK_FIND_LIGHT = { "喔-喔-可怕！", "喔-喔-太阳？", "喔-喔-火", "喔-喔-好", "喔-喔-温暖" }
 STRINGS.NAMES.TIKIFIRE = "提基营火"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIKIFIRE = { "我要让火焰大师给它加燃料。" }
 STRINGS.NAMES.TIKISTICK = "提基头颅"
@@ -1936,8 +1900,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINFORESTTREE =
     BURNING = "现在毁了。",
     BURNT = "烧毁了。",
 }
-STRINGS.NAMES.RAINFORESTTREE_CONE = "雨林树种"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINFORESTTREE_CONE = "雨林树的种子。"
 STRINGS.NAMES.RAINFORESTTREE_SAPLING = "雨林树苗"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINFORESTTREE_SAPLING = "潮湿的树苗。"
 
@@ -2718,8 +2680,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_PRODUCE =
 }
 STRINGS.NAMES.PIG_SHOP_PRODUCE_ENTRANCE = "猪伯利精选食品店"
 STRINGS.RECIPE_DESC.PIG_SHOP_PRODUCE_ENTRANCE = "理性购物。"
-STRINGS.NAMES.PIG_SHOP_PRODUCE_DOOR_ENTRATA = "门"
-
 
 STRINGS.NAMES.PIG_SHOP_DELI = "高纯度猪熟食店"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_DELI =
@@ -3238,10 +3198,7 @@ STRINGS.CITY_PIG_TALK_FORGIVE_PLAYER = {
 STRINGS.CITY_PIG_TALK_NOT_ENOUGH = {
     DEFAULT = { "我还想要更多。", "看起来还不够。", "我需要更多这个。", "还要更多。" }, -- NEW
 }
-STRINGS.CITY_PIG_TALK_EAT_MEAT = {
-    DEFAULT = { "吃吃吃！", "哦吃的！ 哦食物！", "嚼，嚼，再嚼。" },
 
-}
 STRINGS.CITY_PIG_TALK_GO_HOME = {
     DEFAULT = { "快回去！ 再见！", "我要去睡觉了！" },
     pigman_beautician = { "很抱歉我先走了。", "我去睡了。", "我可能会做一个美梦。" },
@@ -3301,13 +3258,6 @@ STRINGS.CITY_PIG_TALK_APORKALYPSE_REWARD = {
     pigman_hunter = { "THOU SAVETH US！", "TAKEST THOU REWARD！", "THOU IS'T GOOD！", "APORKALYPSE 'TIS DONE！" },
 }
 
-
-STRINGS.CITY_PIG_GUARD_TALK_TORCH = {
-    DEFAULT = { "点燃火炬！", "点亮火炬！", "燃烧, 火炬, 带来清明！" },
-}
-STRINGS.CITY_PIG_GUARD_TALK_FIGHT = {
-    DEFAULT = { "我砍死你！", "攻击！", "滚开, 恶徒！ 滚开！" },
-}
 STRINGS.CITY_PIG_GUARD_TALK_GOHOME = {
     DEFAULT = { "站住！", "那是谁？", "谁在那？", "那是什么！" },
 }
@@ -3463,12 +3413,6 @@ STRINGS.NAMES.SHELVES_QUEEN_DISPLAY_3 = "皇家画廊展柜（执行官锤）"
 STRINGS.NAMES.SHELVES_QUEEN_DISPLAY_4 = "皇家画廊展柜（皇室明信片）"
 
 STRINGS.NAMES.GROUNDED_WILBA = "薇尔芭" --站皇家收藏室的NPC
-STRINGS.GROUNDED_WILBA_THANKS = {
-    "多谢啦，非猪人。",
-    "薇尔芭想要拿那边的礼物。",
-    "把你那个给我？",
-    "薇尔芭应得的这个。",
-}
 
 STRINGS.NAMES.PIGHOUSE_CITY2 = "城镇房屋"
 STRINGS.RECIPE_DESC.PIGHOUSE_CITY2 = "收容一只纳税的猪。"
@@ -3692,11 +3636,6 @@ STRINGS.NAMES.MAZE_PIG_RUINS_ENTRANCE_SMALL = "生成小型猪遗迹地面大门
 STRINGS.NAMES.PIG_RUINS_ENTRANCE_SMALL = "遗迹入口" --小地面大门没雕像
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_ENTRANCE_SMALL = "来一场冒险。"
 
-
---遗迹内部门
-STRINGS.NAMES.PIG_RUINS_DOOR_ENTRADA = "遗迹出口"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_ENTRADA = "遗迹出口"
-
 STRINGS.NAMES.PIG_RUINS_DOOR_CIMA = "遗迹门" --上
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_CIMA = "遗迹门"
 STRINGS.NAMES.PIG_RUINS_DOOR_CIMAVINE = "长满了藤蔓的遗迹门"
@@ -3720,8 +3659,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_ESQUERDAESCONDIDA = "可疑�
 
 STRINGS.NAMES.PIG_RUINS_DOOR_DIREITA = "遗迹门" --右
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_DIREITA = "遗迹门"
-STRINGS.NAMES.PIG_RUINS_DOOR_DIREITAVINE = "长满了藤蔓的遗迹门"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_DIREITAVINE = "长满了藤蔓的遗迹门"
 STRINGS.NAMES.PIG_RUINS_DOOR_DIREITAESCONDIDA = "可疑的裂缝"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_DOOR_DIREITAESCONDIDA = "可疑的裂缝"
 
@@ -4184,25 +4121,7 @@ STRINGS.RECIPE_DESC.DECO_TABLE_CHESS  = "骑士不在这里面"
 
 
 ---------窗子window
-STRINGS.NAMES.RENO_WINDOW_ROUND_CURTAINS_NAILS       = "椭圆窗"
-STRINGS.NAMES.RENO_WINDOW_ROUND_BURLAP               = "麻布帘子窗"
-STRINGS.NAMES.RENO_WINDOW_SMALL_PEAKED               = "椭圆拱窗"
-STRINGS.NAMES.RENO_WINDOW_LARGE_SQUARE               = "方形窗"
-STRINGS.NAMES.RENO_WINDOW_SMALL_PEAKED_CURTAIN       = "椭圆帘子窗"
-STRINGS.NAMES.RENO_WINDOW_TALL                       = "椭圆玻璃窗"
-STRINGS.NAMES.RENO_WINDOW_LARGE_SQUARE_CURTAIN       = "大方木帘子窗"
-STRINGS.NAMES.RENO_WINDOW_TALL_CURTAIN               = "椭圆玻璃帘子窗"
---STRINGS.NAMES.RENO_WINDOW_TALL_GREENHOUSE = "温室落地窗"
 
-STRINGS.RECIPE_DESC.RENO_WINDOW_ROUND_CURTAINS_NAILS = "简单的自然光线"
-STRINGS.RECIPE_DESC.RENO_WINDOW_ROUND_BURLAP         = "自然光线。"
-STRINGS.RECIPE_DESC.RENO_WINDOW_SMALL_PEAKED         = "硬木柔光"
-STRINGS.RECIPE_DESC.RENO_WINDOW_LARGE_SQUARE         = "就像一个井字游戏板一样"
-STRINGS.RECIPE_DESC.RENO_WINDOW_SMALL_PEAKED_CURTAIN = "简约而实用"
-STRINGS.RECIPE_DESC.RENO_WINDOW_TALL                 = "那么圆"
-STRINGS.RECIPE_DESC.RENO_WINDOW_LARGE_SQUARE_CURTAIN = "有打褶的帐幔"
-STRINGS.RECIPE_DESC.RENO_WINDOW_TALL_CURTAIN         = "漂亮"
---STRINGS.RECIPE_DESC.RENO_WINDOW_TALL_GREENHOUSE      = "贴近自然"
 
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.WINDOW_ROUND_CURTAINS_NAILS = "一个漂亮的窗子。"
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.WINDOW_ROUND_BURLAP         = "不全是高级玻璃。"
@@ -4216,15 +4135,7 @@ STRINGS.RECIPE_DESC.RENO_WINDOW_TALL_CURTAIN         = "漂亮"
 
 
 -------柱子ORNERBEAM
-STRINGS.NAMES.RENO_CORNERBEAM_WOOD            = "木灯柱"
-STRINGS.NAMES.RENO_CORNERBEAM_MILLINERY       = "女帽柱"
-STRINGS.NAMES.RENO_CORNERBEAM_ROUND           = "圆柱"
-STRINGS.NAMES.RENO_CORNERBEAM_MARBLE          = "大理石灯柱"
 
-STRINGS.RECIPE_DESC.RENO_CORNERBEAM_WOOD      = "挺不错"
-STRINGS.RECIPE_DESC.RENO_CORNERBEAM_MILLINERY = "还算文雅。"
-STRINGS.RECIPE_DESC.RENO_CORNERBEAM_ROUND     = "绕的挺圆"
-STRINGS.RECIPE_DESC.RENO_CORNERBEAM_MARBLE    = "点亮了这个地方"
 
 STRINGS.RECIPE_DESC.DECO_WOOD_CORNERBEAM      = "Raise the roof on a budget。"
 STRINGS.RECIPE_DESC.DECO_MARBLE_CORNERBEAM    = "Elegant and understated。"
@@ -4237,33 +4148,6 @@ STRINGS.RECIPE_DESC.DECO_MARBLE_CORNERBEAM    = "Elegant and understated。"
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_MARBLE_CORNERBEAM = "Adds some fancy stability。"
 
 
-
--------吊灯light
-STRINGS.NAMES.RENO_LIGHT_BASIC_BULB               = "电线灯"
-STRINGS.NAMES.RENO_LIGHT_BASIC_METAL              = "金属电灯"
-STRINGS.NAMES.RENO_LIGHT_CHANDALIER_CANDLES       = "吊灯"
-STRINGS.NAMES.RENO_LIGHT_ROPE_1                   = "绳索吊灯"
-STRINGS.NAMES.RENO_LIGHT_ROPE_2                   = "双绳吊灯"
-STRINGS.NAMES.RENO_LIGHT_FLORAL_BULB              = "玻璃花灯"
-STRINGS.NAMES.RENO_LIGHT_PENDANT_CHERRIES         = "樱桃灯"
-STRINGS.NAMES.RENO_LIGHT_FLORAL_SCALLOP           = "花罩灯"
-STRINGS.NAMES.RENO_LIGHT_FLORAL_BLOOMER           = "花苞灯"
-STRINGS.NAMES.RENO_LIGHT_TOPHAT                   = "高礼帽灯"
-STRINGS.NAMES.RENO_LIGHT_DERBY                    = "帽子灯"
-
-STRINGS.RECIPE_DESC.RENO_LIGHT_BASIC_BULB         = "至少它是有线的。"
-STRINGS.RECIPE_DESC.RENO_LIGHT_BASIC_METAL        = "坚固的金属设计。"
-STRINGS.RECIPE_DESC.RENO_LIGHT_CHANDALIER_CANDLES = "柔和的灯光，大胆的造型。"
-STRINGS.RECIPE_DESC.RENO_LIGHT_ROPE_1             = "带有乡村气息的灯光。"
-STRINGS.RECIPE_DESC.RENO_LIGHT_ROPE_2             = "两倍的凄凉。"
-STRINGS.RECIPE_DESC.RENO_LIGHT_FLORAL_BULB        = "精美又坚固。"
-STRINGS.RECIPE_DESC.RENO_LIGHT_PENDANT_CHERRIES   = "一个甜蜜而愉快的设计。"
---STRINGS.RECIPE_DESC.RENO_LIGHT_FLORAL_SCALLOP     = "美妙的工艺。"
-STRINGS.RECIPE_DESC.RENO_LIGHT_FLORAL_SCALLOP     = "植物主题照明。"
-STRINGS.RECIPE_DESC.RENO_LIGHT_FLORAL_BLOOMER     = "照亮你的天花板。"
-STRINGS.RECIPE_DESC.RENO_LIGHT_TOPHAT             = "增加一些复杂性。"
-STRINGS.RECIPE_DESC.RENO_LIGHT_DERBY              = "这帽子没法戴了。"
-STRINGS.RECIPE_DESC.RENO_LIGHT1                   = "是个灯。"
 
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWINGING_LIGHT_BASIC_BULB = "Looks pretty sad。"
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWINGING_LIGHT_BASIC_METAL = "Very functional。"
@@ -4278,53 +4162,12 @@ STRINGS.RECIPE_DESC.RENO_LIGHT1                   = "是个灯。"
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWINGING_LIGHT_DERBY = "Someone left their hat up there。"
 
 
------------墙上装饰WALLORNAMENT
-STRINGS.NAMES.RENO_WALLORNAMENT_PHOTO                   = "照片"
-STRINGS.NAMES.RENO_WALLORNAMENT_EMBROIDERY_HOOP         = "绣花圈"
-STRINGS.NAMES.RENO_WALLORNAMENT_MOSAIC                  = "镶嵌工艺品"
-STRINGS.NAMES.RENO_WALLORNAMENT_WREATH                  = "花环"
-STRINGS.NAMES.RENO_WALLORNAMENT_AXE                     = "斧头"
-STRINGS.NAMES.RENO_WALLORNAMENT_HUNT                    = "狩猎"
-STRINGS.NAMES.RENO_WALLORNAMENT_PERIODIC_TABLE          = "元素周期表"
-STRINGS.NAMES.RENO_WALLORNAMENT_GEARS_ART               = "齿轮艺术品"
-STRINGS.NAMES.RENO_WALLORNAMENT_CAPE                    = "斗篷"
-STRINGS.NAMES.RENO_WALLORNAMENT_NO_SMOKING              = "禁止吸烟"
-STRINGS.NAMES.RENO_WALLORNAMENT_BLACK_CAT               = "黑猫"
-STRINGS.NAMES.RENO_ANTIQUITIES_WALLFISH                 = "美味的鱼挂饰"
-STRINGS.NAMES.RENO_ANTIQUITIES_BEEFALO                  = "皮弗娄牛挂饰"
 STRINGS.NAMES.DECO_WALLORNAMENT_FULLLENGTH_MIRROR       = "穿衣镜"
 
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_PHOTO             = "这幅画是和画框一起来的吗？"
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_EMBROIDERY_HOOP   = "一个大婶亲手缝的。"
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_MOSAIC            = "一堆石头。"
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_WREATH            = "不再只是为了圣诞节。"
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_AXE               = "一直挺方便。"
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_HUNT              = "猎人风格。"
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_PERIODIC_TABLE    = "感受自然元素吧！"
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_GEARS_ART         = "不知道它的美学效果。"
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_CAPE              = "披风再多也不嫌多。"
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_NO_SMOKING        = "为了健康和安全。"
-STRINGS.RECIPE_DESC.RENO_WALLORNAMENT_BLACK_CAT         = "常在波希米亚区见到。"
-STRINGS.RECIPE_DESC.RENO_ANTIQUITIES_WALLFISH           = "展示你骄傲的渔业成果。"
-STRINGS.RECIPE_DESC.RENO_ANTIQUITIES_BEEFALO            = "这眼睛是玻璃的。"
 STRINGS.RECIPE_DESC.DECO_WALLORNAMENT_FULLLENGTH_MIRROR = "了解全身情况。"
 
 
 
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_PHOTO = "Who's that kid？"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_EMBROIDERY_HOOP = "How cozy。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_MOSAIC = "Well that's nice。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_WREATH = "Well that's nice。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_AXE = "I have an axe to grind with this。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_HUNT = "In-spear-ed。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_PERIODIC_TABLE = "Science-y。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_GEARS_ART = "Science-y。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_CAPE = "A little dramatic。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_NO_SMOKING = "Science says it's bad for your health。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_BLACK_CAT = "Is this bad luck, or good？"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_ANTIQUITIES_WALLFISH = "So that's where the smell is coming from。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_ANTIQUITIES_BEEFALO = "He looks unhappy。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_WALLORNAMENT_FULLLENGTH_MIRROR = "Now I can look at my gentlemanly figure。"
 
 
 
@@ -4400,65 +4243,9 @@ STRINGS.RECIPE_DESC.RUG_TILES      = "几何奢侈品。"
 
 
 ----------架shelves
-STRINGS.NAMES.RENO_SHELVES_WOOD               = "雕刻书架"
-STRINGS.NAMES.RENO_SHELVES_BASIC              = "基础书架"
-STRINGS.NAMES.RENO_SHELVES_CINDERBLOCKS       = "砖砌书架"
-STRINGS.NAMES.RENO_SHELVES_MARBLE             = "大理石架子"
-STRINGS.NAMES.RENO_SHELVES_GLASS              = "玻璃架"
-STRINGS.NAMES.RENO_SHELVES_LADDER             = "梯子架"
-STRINGS.NAMES.RENO_SHELVES_HUTCH              = "储物架"
-STRINGS.NAMES.RENO_SHELVES_INDUSTRIAL         = "工业架子"
-STRINGS.NAMES.RENO_SHELVES_ADJUSTABLE         = "活动架"
-STRINGS.NAMES.RENO_SHELVES_MIDCENTURY         = "玻璃柜"
-STRINGS.NAMES.RENO_SHELVES_WALLMOUNT          = "壁挂架"
-STRINGS.NAMES.RENO_SHELVES_AFRAME             = "A形架"
-STRINGS.NAMES.RENO_SHELVES_CRATES             = "板条架"
-STRINGS.NAMES.RENO_SHELVES_FRIDGE             = "冰柜"
-STRINGS.NAMES.RENO_SHELVES_HOOKS              = "挂钩架"
-STRINGS.NAMES.RENO_SHELVES_PIPE               = "水管架"
-STRINGS.NAMES.RENO_SHELVES_HATTREE            = "帽子架"
-STRINGS.NAMES.RENO_SHELVES_PALLET             = "托盘架"
-STRINGS.NAMES.RENO_SHELVES_FLOATING           = "浮木架"
-
-STRINGS.RECIPE_DESC.RENO_SHELVES_WOOD         = "书虫最常用的。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_BASIC        = "一个基本的书架，放基本的书。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_CINDERBLOCKS = "集体宿舍批准的。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_MARBLE       = "经典但前卫。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_MIDCENTURY   = "优雅的曲线。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_GLASS        = "易碎但实用。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_LADDER       = "用它去够高架子。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_HUTCH        = "放东西的地方。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_INDUSTRIAL   = "实用存储。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_ADJUSTABLE   = "灵活的家具。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_WALLMOUNT    = "钉墙上。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_AFRAME       = "A+品质的架子。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_CRATES       = "很大很别致。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_FRIDGE       = "酷！"
-STRINGS.RECIPE_DESC.RENO_SHELVES_HOOKS        = "挂住了。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_PIPE         = "探测一下这个架子的深处。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_HATTREE      = "实际上不是一棵树。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_PALLET       = "勉强达标。"
-STRINGS.RECIPE_DESC.RENO_SHELVES_FLOATING     = "换个角度试试看。"
 
 
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_WOOD = "A place to put stuff。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_BASIC = "Basic。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_CINDERBLOCKS = "It could use some work。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_MARBLE = "A place to put stuff。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_GLASS = "A place to put stuff。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_LADDER = "Nice use for a ladder。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_HUTCH = "A place to put stuff。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_INDUSTRIAL = "Functional。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_ADJUSTABLE = "A place to put stuff。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_MIDCENTURY = "A place to put stuff。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_WALLMOUNT = "A place to put stuff。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_AFRAME = "A place to put stuff。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_CRATES = "It could use some work。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_FRIDGE = "This doesn't make sense。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_HOOKS = "A place to hang stuff。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_PIPE = "A place to hang stuff。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_HATTREE = "A place to hang your hat。"
---STRINGS.CHARACTERS.GENERIC.DESCRIBE.RENO_SHELVES_PALLET = "It could use some work。"
+
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHELVES_FLOATING = "换个角度试试看。"
 --------------------床bed
 STRINGS.NAMES.BED0 = "原木床"
@@ -5430,7 +5217,6 @@ STRINGS.RECIPE_DESC.TURF_LAWN = "完全驯服的草皮。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_LAWN = "长满了草。"
 
 STRINGS.NAMES.TURF_MOSS = "苔藓地皮"
-STRINGS.RECIPE_DESC.TURF_MOSS = "苔藓地皮。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_MOSS = "这是什么地皮？"
 
 STRINGS.NAMES.TURF_PAINTED = "彩绘沙漠地皮"
@@ -5503,8 +5289,6 @@ STRINGS.NAMES.KNIGHT_NIGHTMAREB = "损坏的发条骑士"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.KNIGHT_NIGHTMAREB = "损坏的发条骑士"
 STRINGS.NAMES.BISHOPB = "发条主教"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BISHOPB = "发条主教"
-STRINGS.NAMES.BISHOP_NIGHTMAREB = "损坏的发条主教"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BISHOP_NIGHTMAREB = "损坏的发条主教"
 
 STRINGS.NAMES.HATTY_PIGGY_TFC = "小猪"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATTY_PIGGY_TFC = "它真的是小猪吗？"
@@ -5750,7 +5534,6 @@ STRINGS.NAMES.SAPTREE = "汁液树"
 STRINGS.NAMES.SAPBUCKET = "汁液桶"
 STRINGS.NAMES.SAP = "汁液"
 STRINGS.NAMES.SAP_SPOILED = "变质的汁液"
-STRINGS.NAMES.QUAGMIRE_SYRUP = "泥沼糖浆"
 
 
 STRINGS.NAMES.SUGARWOOD = "糖木树"
@@ -5905,8 +5688,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUAGMIRE_CRATE_OVEN        = "一包厨房�
 
 STRINGS.NAMES.SALT_RACK                                        = "盐架套装"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SALT_RACK                  = "一包厨房用具。"
-STRINGS.NAMES.SALT_RACK_ITEM                                   = "盐架"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SALT_RACK_ITEM             = "用来提取盐池里的盐。"
 
 STRINGS.NAMES.GORGE_ALTAR                                      = "祭坛"
 STRINGS.NAMES.PLATE_GENERIC                                    = "盘子"
@@ -5961,7 +5742,6 @@ STRINGS.NAMES.POACHED_FISH                                     = "蒸鱼片贡�
 STRINGS.NAMES.SHEPHERDS_PIE                                    = "肉馅薯派贡品" --41
 STRINGS.NAMES.CANDY                                            = "糖果贡品" --42
 STRINGS.NAMES.PUDDING                                          = "布丁贡品" --43
-STRINGS.NAMES.WAFFLES                                          = "华夫饼贡品" --44
 STRINGS.NAMES.BERRY_TART                                       = "莓果挞贡品" --45
 STRINGS.NAMES.MAC_N_CHEESE                                     = "芝士通心粉贡品" --46
 STRINGS.NAMES.BAGEL_N_FISH                                     = "鱼肉面包圈贡品" --47
@@ -6032,7 +5812,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.POACHED_FISH               = "安抚天空�
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHEPHERDS_PIE              = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CANDY                      = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PUDDING                    = "安抚天空之兽的贡品。"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WAFFLES                    = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BERRY_TART                 = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAC_N_CHEESE               = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BAGEL_N_FISH               = "安抚天空之兽的贡品。"
@@ -6143,16 +5922,11 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.STONEBAR = "能用作砖头吗？"
 STRINGS.NAMES.POOP2 = "袖珍粑粑"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POOP2 = "呜.."
 
-STRINGS.NAMES.ASPARAGUS_PATCH = "生成数个芦笋"
 STRINGS.NAMES.GRASS_PATCH = "生成数个草丛"
 STRINGS.NAMES.GRASS_TALL_PATCH = "生成数个高草丛"
 STRINGS.NAMES.HANGING_VINE_PATCH = "生成数个悬挂的藤蔓"
 STRINGS.NAMES.HANGING_VINE_PATCHFIXO = "生成数个悬挂的藤蔓"
-STRINGS.NAMES.TEATREE_PIKO_NEST_PATCH = "生成数个松鼠茶树"
 STRINGS.NAMES.DEEP_JUNGLE_FERN_NOISE = "生成数个深层雨林杂草"
-
-STRINGS.NAMES.DEEP_JUNGLE_FERN_NOISE_PLANT = "深层雨林杂草"
-STRINGS.NAMES.DEEP_JUNGLE_FERN_NOISE_PLANT2 = "深层雨林杂草2"
 
 --海钓鱼
 
@@ -6357,7 +6131,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.HATTY_PIGGY_TFC = "它真的是小猪吗？"
 STRINGS.NAMES.BOARMOUND = "小猪丘"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOARMOUND = "小猪的窝。"
 
-STRINGS.NAMES.BEAVERKING_SPAWNER = "海狸王刷新点"
 STRINGS.NAMES.BEAVER_KING = "凯斯特·雷"
 
 STRINGS.WILDBEAVER_NAMES = {
@@ -6490,11 +6263,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAXWELLESCADA = "Secret Portal"
 STRINGS.NAMES.MAXWELLBOSS = "暗影之王"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAXWELLBOSS = "那是麦斯威尔的过去。"
 
-STRINGS.MAXWELLBOSS1 = "这次你赢不了了..."
-STRINGS.MAXWELLBOSS2 = "感受我的力量吧！"
-STRINGS.MAXWELLBOSS3 = "暗影将会回归！"
-STRINGS.MAXWELLBOSS4 = "我是此地的主宰！"
-
 STRINGS.NAMES.MAXWELLSTATUECORPO = "雕像躯干"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAXWELLSTATUECORPO = "雕像躯干"
 STRINGS.NAMES.MAXWELLSTATUEBRACOE = "雕像手臂"
@@ -6528,8 +6296,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUTATOR_TROPICAL = "我们制作了这个在
 STRINGS.NAMES.MUTATOR_FROST = "冰霜变身涂鸦"
 STRINGS.RECIPE_DESC.MUTATOR_FROST = "这些温暖的小家伙挂着寒冷的冰霜。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUTATOR_FROST = "这个冰淇淋曲奇饼真的很不错。"
-
-
 
 
 
@@ -7041,8 +6807,6 @@ STRINGS.NAMES.MERMNOBLE = "贵族鱼人"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMNOBLE = "我希望地上的鱼人也能像他们一样文明。"
 STRINGS.NAMES.MERMWORKER = "鱼人工人"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMWORKER = "他一定工作很忙。不过不会超过我的工作时间。"
-STRINGS.NAMES.MERMGUARD = "鱼人守卫"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMGUARD = "他为什么一直那样看着我？"
 STRINGS.NAMES.SEATENTACLE = "海底触手"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEATENTACLE = "呱！我不要被那个触手抓到啊。"
 STRINGS.NAMES.SEAQUAKETENTACLE = "海妖触手"
@@ -7054,52 +6818,9 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_EEL = "那只真的很有攻击性，太
 STRINGS.NAMES.SHRIMP = "虾"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHRIMP = "一只扭动的小虾。"
 
-
--- 鱼人名字
-STRINGS.MERMNAMES = { MERM_NOBLE = {}, MERM_WORKER = {} }
-STRINGS.MERMNAMES.MERM_NOBLE[1] =
-{
-    "兰谱维克",
-    "沃伦",
-    "威廉姆",
-    "卢瑟福",
-}
-STRINGS.MERMNAMES.MERM_NOBLE[2] =
-{
-    "海伦娜",
-    "普莉希拉",
-    "伊丽莎白",
-    "伊芙琳",
-}
-STRINGS.MERMNAMES.MERM_WORKER[1] =
-{
-    "弗兰克",
-    "鲍里斯",
-    "比尔",
-    "乔",
-}
-STRINGS.MERMNAMES.MERM_WORKER[2] =
-{
-    "马季",
-    "莱斯利",
-    "贝斯",
-    "弗雷达",
-}
-
 -- Merm strings
 --[[
-STRINGS.MERM_TALK_HELP_CHOP_WOOD =
-{
-	MERM_NOBLE = {"Physical toil is best suited to others, I think。", "Sorry ol' thing, but my back you see...", "Good swing you have there。", "Don't worry, I'll wait。"},
-	MERM_WORKER = {"Alright, let's get to it。", "Lunch'll be afterwards, right？", "It won't know what hit it！", "I'll get that down in a jiffy。"},
-	MERM_GUARD = {"'Fraid that's outside my pay grade。", "I'll wait here。", "", ""},
-}
-STRINGS.MERM_TALK_FOLLOWWILSON =
-{
-	MERM_NOBLE = {"Lovely day。", "Will there be tea sometime soon？", "Smashing！", "I do enjoy a good walk after lunch。"},
-	MERM_WORKER = {"I'm being paid by the hour, right？", "'Fraid I can't do overtime。", "Are you a union member？", "What's the next job？"},
-	MERM_GUARD = {"", "", "", ""},
-}
+
 STRINGS.MERM_TALK_RUNAWAY_WILSON =
 {
 	MERM_NOBLE = {"Do you mind？", "Little too close there, ol' thing。", "Don't you know anything about personal space？", "Off with you！"},
@@ -7170,9 +6891,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WRECKUNDERWATER = "可怜的小船。"
 
 STRINGS.NAMES.REDBARRELUNDERWATER = "火药桶"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.REDBARRELUNDERWATER = "多么原始。"
-
-STRINGS.NAMES.SPIDER_WATER = "海蜘蛛"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDER_WATER = "蜘蛛真是无处不在。"
 
 STRINGS.NAMES.ROCK_CAVE = "洞穴石笋"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_CAVE = "一根大石头！"
@@ -7324,31 +7042,6 @@ STRINGS.MERM_TALK_PANIC                              = { "只是想要鱼儿！"
 STRINGS.MERM_TALK_RUNAWAY                            = { "切线！", "弗罗皮~格洛普~格罗普！", "坏东西！坏东西！", "格洛普！格罗皮~格罗普！", "保护鱼儿！",
     "格拉特~格拉特~弗罗普！" }
 STRINGS.MERM_TALK_GO_HOME                            = { "和鱼儿睡觉", "沃特~沃特~弗洛特。", "鱼儿朋友。不是食物。", "瓦鲁特~格洛~格洛皮~弗洛特。" }
-STRINGS.MERM_TALK_FIND_FOOD                          = { "食唔！", "噫携~噫携~食唔。", "弗洛提~格拉特。", "这个可以。", "找点好吃的！", "让鱼人族更加强大！" }
-
-STRINGS.MERM_TALK_FOLLOWWILSON                       = { "会跟着你", "浮浪噗 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "你要帮帮鱼人！",
-    "格鲁特 格鲁粗 浮鲁噗！", "你好么", "浮浪噗 浮鲁特" }
-STRINGS.MERM_TALK_HELP_CHOP_WOOD                     = { "会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "砍, 不停, 砍！",
-    "格浪噗, 格鲁噗, 格浪噗！", "努力干, 浮浪噗！", "格鲁特 布鲁特, 浮浪噗！" }
-STRINGS.MERM_TALK_HELP_MINE_ROCK                     = { "会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "打烂石头, 简单！",
-    "呜尔特 沃噗, 浮浪噗 浮浪特！", "努力干, 浮浪噗！", "格鲁特 布鲁特, 浮浪噗！" }
-STRINGS.MERM_TALK_HELP_HAMMER                        = { "会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "锤烂！ 锤烂！",
-    "浮浪浮！ 浮浪浮！", "努力干, 浮浪噗！", "格鲁特 布鲁特, 浮浪噗！" }
---STRINGS.MERM_TALK_FIND_FOOD      = {"会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "这个好", "格鲁特 格鲁特 浮鲁特", "找到好吃的！", "格濡特 浮浪噗 浮鲁特！"}
-STRINGS.MERM_BATTLECRY                               = { "格浪噗！ 走开！", "格浪噗！ 格浪噗 咕噜噗！", "灭了你！", "沃尔特 格鲁特！" }
-STRINGS.MERM_GUARD_BATTLECRY                         = { "开打了！", "呜鲁特 浮鲁特！", "为了鱼人族的荣耀！", "浮浪特 格鲁粗 浮鲁特！", "打啊啊啊！！",
-    "格鲁特 浮浪噗！！", "保卫国王！", "格鲁浮 格鲁特森！" }
-STRINGS.MERM_TALK_PANICBOSS                          = { "什么东西来了！", "格鲁噗 浮浪特！", "呵啊！！ 坏东西！ 坏东西！",
-    "格鲁鲁鲁浮！！ 格鲁浮 格鲁特！ 格鲁浮 格鲁特！", "它来毁灭我们了！", "浮浪特 呜尔特 格鲁粗！" }
-STRINGS.MERM_TALK_PANICBOSS_KING                     = { "朝国王汇合！", "格鲁特森 布鲁特 浮浪特！", "快点！ 保护王国！", "浮鲁浮 浮洛特！ 格鲁噗 格鲁特萨姆！",
-    "不、不要害怕！！", "格、格鲁噗 布鲁特 浮洛特！！" }
-
-STRINGS.MERM_KING_TALK_HUNGER_STARVING               = "饿了... 饿了！ 饿了了了！！！"
-STRINGS.MERM_KING_TALK_HUNGER_CLOSE_STARVING         = "简直是背叛... 简直有罪！ 让朕饿了这么久..."
-STRINGS.MERM_KING_TALK_HUNGER_VERY_HUNGRY            = "怎么这么久？ 朕要用膳！"
-STRINGS.MERM_KING_TALK_HUNGER_HUNGRY                 = "朕要用膳！"
-STRINGS.MERM_KING_TALK_HUNGER_HUNGRISH               = "朕有点饿了..."
-STRINGS.MERM_KING_TALK_HUNGER_FULL                   = "你做的很好，退下吧。"
 
 STRINGS.NAMES.CONSTRUCTION_PERMIT                    = "房屋扩建许可证"
 

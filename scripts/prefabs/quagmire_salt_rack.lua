@@ -6,7 +6,6 @@ local assets =
 
 local prefabs =
 {
-    "salt_rack_item",
     "saltrock",
     "collapse_small",
     "splash",

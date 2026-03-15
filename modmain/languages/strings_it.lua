@@ -2,14 +2,12 @@
 
 STRINGS.ACTIONS.HACK = "Taglia"
 STRINGS.ACTIONS.STICK = "Bastone"
-STRINGS.ACTIONS.LANTERNON = "Turn On"
 
 -----------------------------UI -----------------------------
 --SW
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL = "Nautical"
 STRINGS.UI.CRAFTING_FILTERS.OBSIDIAN = "Volcano"
 --HaM
-STRINGS.UI.CRAFTING_FILTERS.LEGACY = "Legacy"
 STRINGS.UI.CRAFTING_FILTERS.INTERIOR = "Interior"
 STRINGS.UI.CRAFTING_FILTERS.CITY = "City"
 --Forge
@@ -17,18 +15,13 @@ STRINGS.UI.CRAFTING_FILTERS.CITY = "City"
 --Gorge
 STRINGS.UI.CRAFTING_FILTERS.GORGE = "Gorge"
 --STRINGS.UI.WORLDGEN.VOLCANOTITLE = "BOILING MAGMA"
-STRINGS.UI.COOKBOOK.COFFEE = "Provide acceleration effect"
-STRINGS.UI.COOKBOOK.SHARKFINSOUP = "You're being watched..."
-STRINGS.UI.COOKBOOK.TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.TEA = "It warms the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.ICEDTEA = "It cools the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.NETTLELOSANGE = " Protects you from pollen"
-STRINGS.UI.COOKBOOK.MEATED_NETTLE = " Protects you from pollen"
------------------------------Biome Jungle -----------------------------
-
-
-
-
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_COFFEE = "Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_SHARKFINSOUP = "You're being watched..."
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TEA = "It warms the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_ICEDTEA = "It cools the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_NETTLELOSANGE = " Protects you from pollen"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_MEATED_NETTLE = " Protects you from pollen"
 
 -----------------------------Biome Tidal Mash---------------------------
 
@@ -348,7 +341,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREGUARD = "che cosa sta proteggendo?"
 
 
 
-STRINGS.NAMES.BEAVERKING_SPAWNER = "Wilbbeaver Guard"
 
 STRINGS.NAMES.WILDBEAVERGUARD = "Wildbeaver Guard"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "He looks serious"
@@ -728,9 +720,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW_SMALL = "Un piccolo pezzo di pesce.
 STRINGS.NAMES.FISH_MED_COOKED = "Bistecca di pesce"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_MED_COOKED = "Grigliato alla perfezione."
 
-STRINGS.NAMES.SPOILED_FISH = "Pesce marcio"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPOILED_FISH = "Non sono terribilmente curioso dell'odore."
-
 STRINGS.NAMES.FISH_RAW = "Pesce crudo"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW = "Un pezzo di carne di pesce"
 
@@ -985,29 +974,12 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BURIEDTREASURE = "Per favore, sii un buon te
 STRINGS.NAMES.SHARK_GILLS = "Branchie di squalo"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARK_GILLS = "Vorrei avere anche io le branchie."
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 STRINGS.NAMES.QUACKENDRILL = "Trapano del Quacken"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUACKENDRILL = "È molto pesante!"
 STRINGS.RECIPE_DESC.QUACKENDRILL = "Per un quacking in mare aperto."
 
 STRINGS.NAMES.QUACKENBEAK = "Becco del Quacken"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUACKENBEAK = "Sono riuscito a farlo tacere."
-
-
 
 STRINGS.NAMES.GLASS_SHARDS = "Frammenti di vetro"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GLASS_SHARDS = "Dei semplici cocci di vetro."
@@ -1021,16 +993,8 @@ STRINGS.NAMES.SHARD_BEAK = "Falce di vetro"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARD_BEAK = "Mi sento un pò cupo a tenerlo in mano."
 STRINGS.RECIPE_DESC.SHARD_BEAK = "Un taglia teste portatile ma fragile."
 
-
-
-
-
 STRINGS.NAMES.TURBINE_BLADES = "Pale della turbina"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURBINE_BLADES = "Mi fa girare la testa"
-
-STRINGS.NAMES.SAPLING1 = "Alberello"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAPLING1 = "Sarebbe meglio se fosse un pochino più al fresco."
-
 
 STRINGS.NAMES.SHARKITTEN = "Squalo gatto"
 
@@ -1051,12 +1015,9 @@ STRINGS.RECIPE_DESC.ARMOR_LIFEJACKET = "La sicurezza prima di tutto!"
 STRINGS.WALLY1 = "Chump."
 STRINGS.WALLY2 = "Nice Sailing"
 
-STRINGS.SPICEPACK = "Chef Pack"
 STRINGS.NAMES.SPICEPACK = "Chef Pack"
 STRINGS.RECIPE_DESC.SPICEPACK = "Chef Pack."
 
-STRINGS.PORTABLECOOKPOT = "Portable Crock Pot"
-STRINGS.NAMES.PORTABLECOOKPOT = "Portable Crock Pot"
 STRINGS.NAMES.PORTABLECOOKPOT_ITEM = "Portable Crock Pot"
 STRINGS.RECIPE_DESC.PORTABLECOOKPOT_ITEM = "Portable Crock Pot"
 
@@ -1210,9 +1171,7 @@ STRINGS.NAMES.LAVAPONDBIG1 = "Big lava pool"
 
 STRINGS.NAMES.MERM1 = "Merm"
 STRINGS.NAMES.MERM2 = "Merm"
---------------store---------
 
-STRINGS.TABS.NAUTICALTAB = "Nautico"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Rowley"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "È mio amico."
@@ -1225,10 +1184,6 @@ STRINGS.RAWLINGother_owner = "Ouch!"
 STRINGS.RAWLINGon_ignite = {
     "VADO A FUOCO!",
     "OW OW OW OW OW!",
-}
-STRINGS.RAWLINGon_pickedup = {
-    "Sei tu James?",
-    "Sei il mio miglior giocatore!",
 }
 STRINGS.RAWLINGon_thrown = {
     "Verso il canestro!",
@@ -1274,8 +1229,6 @@ STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_LOSECONTROL = "It would seem my futu
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_RETURN = "I think I felt something brush against my leg..."
 
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_WARN = "Here be monsters."
-STRINGS.NAMES.BELL = "Old Bell"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "Old Bell."
 
 STRINGS.NAMES.BEAVERTORCH = "Beaver Torch"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Sure looks cozy."

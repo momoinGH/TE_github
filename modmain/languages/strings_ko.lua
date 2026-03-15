@@ -2,15 +2,12 @@
 
 STRINGS.ACTIONS.HACK = "베기"
 STRINGS.ACTIONS.STICK = "꽂기"
-STRINGS.ACTIONS.LANTERNON = "켜기"
-STRINGS.ACTIONS.COLETAR = "걷어내기"
 
 -----------------------------UI -----------------------------
 --SW
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL = "Nautical"
 STRINGS.UI.CRAFTING_FILTERS.OBSIDIAN = "Volcano"
 --HaM
-STRINGS.UI.CRAFTING_FILTERS.LEGACY = "Legacy"
 STRINGS.UI.CRAFTING_FILTERS.INTERIOR = "Interior"
 STRINGS.UI.CRAFTING_FILTERS.CITY = "City"
 --Forge
@@ -18,13 +15,13 @@ STRINGS.UI.CRAFTING_FILTERS.CITY = "City"
 --STRINGS.UI.WORLDGEN.VOLCANOTITLE = "마그마 끓이는 중"
 --Gorge
 STRINGS.UI.CRAFTING_FILTERS.GORGE = "Gorge"
-STRINGS.UI.COOKBOOK.COFFEE = "Provide acceleration effect"
-STRINGS.UI.COOKBOOK.SHARKFINSOUP = "You're being watched..."
-STRINGS.UI.COOKBOOK.TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.TEA = "It warms the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.ICEDTEA = "It cools the body/Provide acceleration effect"
-STRINGS.UI.COOKBOOK.NETTLELOSANGE = " Protects you from pollen"
-STRINGS.UI.COOKBOOK.MEATED_NETTLE = " Protects you from pollen"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_COFFEE = "Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_SHARKFINSOUP = "You're being watched..."
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TROPICALBOUILLABAISSE = "Protects you from moisture/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_TEA = "It warms the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_ICEDTEA = "It cools the body/Provide acceleration effect"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_NETTLELOSANGE = " Protects you from pollen"
+STRINGS.UI.COOKBOOK.FOOD_EFFECTS_MEATED_NETTLE = " Protects you from pollen"
 -----------------------------Biome Jungle -----------------------------
 
 
@@ -348,7 +345,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBOREGUARD = "무엇을 지키는 것이�
 
 
 
-STRINGS.NAMES.BEAVERKING_SPAWNER = "Beaverking Spawner"
 
 STRINGS.NAMES.WILDBEAVERGUARD = "Wildbeaver Guard"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WILDBEAVERGUARD = "He looks serious"
@@ -722,9 +718,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW_SMALL = "작은 물고기야."
 STRINGS.NAMES.FISH_MED_COOKED = "구운 개물고기"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_MED_COOKED = "완벽하게 구워졌어."
 
-STRINGS.NAMES.SPOILED_FISH = "썩은 생선"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPOILED_FISH = "냄새가 영 아닌데."
-
 STRINGS.NAMES.FISH_RAW = "생선"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW = "생선살 덩어리야."
 
@@ -1065,8 +1058,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.CAPTAINHAT = "배를 타는 것이 더 멋�
 STRINGS.NAMES.CAPTAINHAT = "선장 모자"
 STRINGS.RECIPE_DESC.CAPTAINHAT = "이걸 쓰면 배가 당신을 더 존중해줍니다."
 
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTABLECOOKPOT = "어떤 요리를 만들어볼까, 친구?"
-STRINGS.NAMES.PORTABLECOOKPOT = "휴대용 요리솥"
 STRINGS.NAMES.PORTABLECOOKPOT_ITEM = "휴대용 요리솥"
 STRINGS.RECIPE_DESC.PORTABLECOOKPOT_ITEM = "어떤 요리를 만들어볼까요?"
 
@@ -1223,7 +1214,6 @@ STRINGS.NAMES.MERM2 = "Merm"
 --------------store---------
 
 
-STRINGS.TABS.NAUTICALTAB = "항해"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "롤링"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "롤링이야."
@@ -1236,10 +1226,6 @@ STRINGS.RAWLINGother_owner = "아야!"
 STRINGS.RAWLINGon_ignite = {
     "나 불 붙었어!",
     "아야 아야 아야 아야 아야!",
-}
-STRINGS.RAWLINGon_pickedup = {
-    "제임스?",
-    "넌 나의 MVP!",
 }
 STRINGS.RAWLINGon_thrown = {
     "바스켓을 향해서!",
@@ -1289,8 +1275,6 @@ STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_WARN = "괴물이라도 있을 것 �
 -------------death causes--------------
 STRINGS.NAMES.DROWNING = "익사"
 STRINGS.NAMES.POISON = "독"
-STRINGS.NAMES.BELL = "Old Bell"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "Old Bell."
 
 STRINGS.NAMES.BEAVERTORCH = "Beaver Torch"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Sure looks cozy."

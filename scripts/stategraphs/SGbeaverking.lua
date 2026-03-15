@@ -374,7 +374,7 @@ local states =
                 end
 
                 if inst.components.knownlocations and inst.components.knownlocations:GetLocation("spawnpoint") then
-                    local spawner = SpawnPrefab("beaverking_spawner")
+                    local spawner = SpawnPrefab("beaverking_spawner") --TODO 没有这个预制件
                     if spawner then
                         spawner.Transform:SetPosition(inst.components.knownlocations:GetLocation("spawnpoint"):Get())
                     end

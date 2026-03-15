@@ -169,27 +169,6 @@ Constructor.AddAction(nil, "RANSACK", STRINGS.ACTIONS.RANSACK, function(act)
     return true
 end)
 
-Constructor.AddAction(nil, "CUREPOISON", STRINGS.ACTIONS.CUREPOISON, function(act)
-    if act.invobject and act.invobject.components.poisonhealer then
-        local target = act.target or act.doer
-        return act.invobject.components.poisonhealer:Cure(target)
-    end
-end)
-
-Constructor.AddAction(nil, "USEDOOR", STRINGS.ACTIONS.USEDOOR, function(act)
-    if act.target:HasTag("secret_room") then
-        return false
-    end
-
-    if act.target.components.door and not act.target.components.door.disabled then
-        act.target.components.door:Activate(act.doer)
-        return true
-    elseif act.target.components.door and act.target.components.door.disabled then
-        return false, "LOCKED"
-    end
-end)
-
-
 Constructor.AddAction(nil, "FIX", STRINGS.ACTIONS.FIX, function(act)
     if act.target then
         local target = act.target
