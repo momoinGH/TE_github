@@ -1,5 +1,80 @@
-STRINGS.CHARACTERS.WOODLEGS                                                     = require "speech_woodlegs"
-STRINGS.CHARACTERS.WALANI                                                       = require "speech_walani"
+modimport "modmain/languages/wurt_quotes"
+STRINGS.CHARACTERS.WOODLEGS = require "speech_woodlegs"
+STRINGS.CHARACTERS.WALANI   = require "speech_walani"
+
+
+--actions
+STRINGS.ACTIONS.DEPLOY.DEPLOYBUOY          = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYFISH_FARM     = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYBALLPHINHOUSE = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYSEARCHLAB5    = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYTAR_EXTRATOR  = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYSEA_CHIMINEA  = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYWATERCHEST    = "Deploy"
+STRINGS.ACTIONS.DEPLOY.DEPLOYSEA_YARD      = "Deploy"
+
+STRINGS.ACTIONS.GIVE.USE                   = "Use"
+STRINGS.ACTIONS.GIVE.DISLODGE              = "Dislodge"
+STRINGS.ACTIONS.GIVE.INSTALL               = "Install"
+STRINGS.ACTIONS.GIVE.SPY                   = "Investigate"
+STRINGS.ACTIONS.GIVE.TAPSUGARTREE          = "凿树"
+STRINGS.ACTIONS.GIVE.KILLSOFTLY            = "屠宰"
+STRINGS.ACTIONS.GIVE.FILL                  = "Fill"
+STRINGS.ACTIONS.GIVE.MILK                  = "Milk"
+STRINGS.ACTIONS.GIVE.REPLATE               = "Replate"
+STRINGS.ACTIONS.GIVE.ADDFUEL               = "Add Fuel"
+
+STRINGS.ACTIONS.HACK                       = "Hack"
+STRINGS.ACTIONS.STICK                      = "Stick"
+STRINGS.ACTIONS.JUMPIN.ENTER               = "Enter"
+STRINGS.ACTIONS.JUMPIN.LEAVE               = "Leave"
+STRINGS.ACTIONS.JUMPIN.USE                 = STRINGS.ACTIONS.USEITEM
+STRINGS.ACTIONS.LANTERNON                  = "Turn On"
+STRINGS.ACTIONS.TRO_DISMANTLE              = STRINGS.ACTIONS.DISMANTLE
+STRINGS.ACTIONS.TIRO                       = "Shoot"
+STRINGS.ACTIONS.SMELT                      = "Smelt" --这不是一个action，不过文本需要
+STRINGS.ACTIONS.STOREOPEN                  = "交易"
+STRINGS.ACTIONS.LAVASPIT                   = "Spit"
+STRINGS.ACTIONS.DEPLOY_AI                  = "Deploy AI"
+STRINGS.ACTIONS.FLUP_HIDE                  = "FLUP_HIDE"
+STRINGS.ACTIONS.FISH1                      = "FISH1"
+STRINGS.ACTIONS.TIGERSHARK_FEED            = "Tigershark Feed"
+STRINGS.ACTIONS.MATE                       = "Mate"
+STRINGS.ACTIONS.CRAB_HIDE                  = "Crab Hide"
+STRINGS.ACTIONS.HIDECRAB                   = "Hide"
+STRINGS.ACTIONS.SHOWCRAB                   = "Emerge"
+STRINGS.ACTIONS.PEAGAWK_TRANSFORM          = "Peagank Transform"
+STRINGS.ACTIONS.SPECIAL_ACTION             = "Special Actions"
+STRINGS.ACTIONS.SPECIAL_ACTION2            = "Special Actions2"
+STRINGS.ACTIONS.INFEST                     = "Infest"
+STRINGS.ACTIONS.DIGDUNG                    = "Digdung"
+STRINGS.ACTIONS.MOUNTDUNG                  = "Mountdung"
+STRINGS.ACTIONS.BARK                       = "Bark"
+STRINGS.ACTIONS.RANSACK                    = "Ransack"
+STRINGS.ACTIONS.CUREPOISON                 = "Curepoison"
+STRINGS.ACTIONS.USEDOOR                    = "Usedoor"
+STRINGS.ACTIONS.FIX                        = "Fix"
+STRINGS.ACTIONS.BOATDISMOUNT               = "Boat Dismount"
+STRINGS.ACTIONS.IRONTURNON                 = "Turn On"
+STRINGS.ACTIONS.IRONTURNOFF                = "Turn Off"
+STRINGS.ACTIONS.CHARGE_UP                  = "Charge"
+STRINGS.ACTIONS.PUNCH                      = "Punch"
+STRINGS.ACTIONS.CHECKSHOP                  = "Cost {cost} {costprefab}\n for {item}"
+STRINGS.ACTIONS.GIVE_SHELF                 = STRINGS.ACTIONS.GIVE.GENERIC
+STRINGS.ACTIONS.TAKE_SHELF                 = {
+    GENERIC = "Take",
+    TAKE = "Take {item}",
+    STEAL = "Steal {item}",
+    BUY = "Buy {item}",
+}
+STRINGS.ACTIONS.GAS                        = "Gas"
+STRINGS.ACTIONS.PAN                        = "Pan"
+STRINGS.ACTIONS.SHEAR                      = "剪"
+STRINGS.ACTIONS.MEAL                       = "Meal"
+STRINGS.ACTIONS.SNACKRIFICE                = "Snackrifice"
+
+
+
 
 STRINGS.CHARACTER_ABOUTME.walani                                                = "Forgive me if I don't get up. I don't want to."
 STRINGS.CHARACTER_ABOUTME.woodlegs                                              = "Don't ye mind th'scurvy. Yarr-harr-harr!"
@@ -60,15 +135,7 @@ STRINGS.TABS.HOME                                                               
 STRINGS.TABS.CITY                                                               = "City Planning"
 STRINGS.TABS.GODDESSTAB                                                         = "GODDESSTAB"
 STRINGS.TABS.GORGE                                                              = "GORGE"
---actions
-STRINGS.ACTIONS.DEPLOY.DEPLOYBUOY                                               = "Deploy"
-STRINGS.ACTIONS.DEPLOY.DEPLOYFISH_FARM                                          = "Deploy"
-STRINGS.ACTIONS.DEPLOY.DEPLOYBALLPHINHOUSE                                      = "Deploy"
-STRINGS.ACTIONS.DEPLOY.DEPLOYSEARCHLAB5                                         = "Deploy"
-STRINGS.ACTIONS.DEPLOY.DEPLOYTAR_EXTRATOR                                       = "Deploy"
-STRINGS.ACTIONS.DEPLOY.DEPLOYSEA_CHIMINEA                                       = "Deploy"
-STRINGS.ACTIONS.DEPLOY.DEPLOYWATERCHEST                                         = "Deploy"
-STRINGS.ACTIONS.DEPLOY.DEPLOYSEA_YARD                                           = "Deploy"
+
 ----------------------------- Name of Things -----------------------------
 STRINGS.NAMES.WILBUR                                                            = "Wilbur"
 STRINGS.NAMES.WOODLEGS                                                          = "Woodlegs"
@@ -2940,7 +3007,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.NECTAR_POD                                  
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BUTTERFLYMUFFIN_SW                          = "We threw the recipe away and just kind of winged it."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHELVES_MIDCENTURY                          = "A place to put stuff."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.CANDLEHAT                                   = "What a bright idea!"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANGROVETREE                               = "I wonder if it's getting enough water?"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANGROVETREE                                = "I wonder if it's getting enough water?"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BISHOPB                                     = "Bishop"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_SHOP_TINKER                             = {
     BURNING = "那座塔楼正在燃烧！",
@@ -5802,7 +5869,7 @@ STRINGS.CHARACTERS.WILLOW.DESCRIBE.CRATE                    = "If I burn it, wha
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.SWORDFISH                = "En garde!"
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.RAINBOWJELLYFISH_PLANTED = "Hey fancyfish, get over here!"
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.TURF_JUNGLE              = "The ground is boring."
-STRINGS.CHARACTERS.WILLOW.DESCRIBE.MANGROVETREE            = "No need to water this guy."
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.MANGROVETREE             = "No need to water this guy."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.FISH5                    = "Is living underwater as awful as it sounds?"
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.FISH4_COOKED             = "I burned it just right."
 STRINGS.CHARACTERS.WILLOW.DESCRIBE.FISH4                    = "Found you!"
@@ -5989,7 +6056,7 @@ STRINGS.CHARACTERS.WENDY.DESCRIBE.SPEAR_POISON              = "One jab and they'
 STRINGS.CHARACTERS.WENDY.DESCRIBE.BOTTLELANTERN             = "The light of life. Trapped."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.WOODLEGSGHOST             = "He was my friend"
 STRINGS.CHARACTERS.WENDY.DESCRIBE.FISH5                     = "It misses its watery home."
-STRINGS.CHARACTERS.WENDY.DESCRIBE.MANGROVETREE             = "It's quite elegant."
+STRINGS.CHARACTERS.WENDY.DESCRIBE.MANGROVETREE              = "It's quite elegant."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.PRIMEAPEBARREL            = "Looks filthy."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.JELLYFISH_PLANTED         = "The sting isn't deadly. Only painful."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.MERMHOUSE_FISHER          = "Time has broken it down."
@@ -6020,7 +6087,7 @@ STRINGS.CHARACTERS.WENDY.DESCRIBE.RAINBOWJELLYJERKY         = "Its death means m
 STRINGS.CHARACTERS.WENDY.DESCRIBE.MERMFISHER                = "I commend this creature's commitment to cannibalism."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.ELEPHANTCACTUS_STUMP      = "It's hiding below."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.VOLCANO_SHRUB             = "A wretched shadow of its former self."
-STRINGS.CHARACTERS.WENDY.DESCRIBE.GRASS_WATER                = "The remains of a tuft of grass."
+STRINGS.CHARACTERS.WENDY.DESCRIBE.GRASS_WATER               = "The remains of a tuft of grass."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.MAGMAROCK_FULL            = "The earth's guts, cooled and ready for mining."
 STRINGS.CHARACTERS.WENDY.DESCRIBE.AERODYNAMICHAT            = "I cut through the air!"
 STRINGS.CHARACTERS.WENDY.DESCRIBE.SWEET_POTATO_PLANTED      = "That looks like lunch."
@@ -8336,49 +8403,7 @@ STRINGS.CHARACTERS.WOODIE.DESCRIBE.JELLYFISH_COOKED = "It actually looks edible.
 
 
 ----------------------------- ACTIONS -----------------------------
-STRINGS.ACTIONS.GIVE.USE          = "Use"
-STRINGS.ACTIONS.GIVE.DISLODGE     = "Dislodge"
-STRINGS.ACTIONS.GIVE.INSTALL      = "Install"
-STRINGS.ACTIONS.GIVE.SPY          = "Investigate"
-STRINGS.ACTIONS.GIVE.TAPSUGARTREE = "凿树"
-STRINGS.ACTIONS.GIVE.KILLSOFTLY   = "屠宰"
-STRINGS.ACTIONS.GIVE.FILL         = "Fill"
-STRINGS.ACTIONS.GIVE.MILK         = "Milk"
-STRINGS.ACTIONS.GIVE.REPLATE      = "Replate"
-STRINGS.ACTIONS.GIVE.ADDFUEL      = "Add Fuel"
 
-
-STRINGS.ACTIONS.HACK              = "Hack"
-STRINGS.ACTIONS.STICK             = "Stick"
-STRINGS.ACTIONS.JUMPIN.ENTER      = "Enter"
-STRINGS.ACTIONS.JUMPIN.LEAVE      = "Leave"
-STRINGS.ACTIONS.JUMPIN.USE        = STRINGS.ACTIONS.USEITEM
-STRINGS.ACTIONS.LANTERNON         = "Turn On"
-STRINGS.ACTIONS.TRO_DISMANTLE     = STRINGS.ACTIONS.DISMANTLE
-STRINGS.ACTIONS.TIRO              = "Shoot"
-STRINGS.ACTIONS.SMELT             = "Smelt" --这不是一个action，不过文本需要
-STRINGS.ACTIONS.STOREOPEN         = "交易"
-STRINGS.ACTIONS.LAVASPIT          = "Spit"
-STRINGS.ACTIONS.DEPLOY_AI         = "Deploy AI"
-STRINGS.ACTIONS.FLUP_HIDE         = "FLUP_HIDE"
-STRINGS.ACTIONS.FISH1             = "FISH1"
-STRINGS.ACTIONS.TIGERSHARK_FEED   = "Tigershark Feed"
-STRINGS.ACTIONS.MATE              = "Mate"
-STRINGS.ACTIONS.CRAB_HIDE         = "Crab Hide"
-STRINGS.ACTIONS.HIDECRAB          = "Hide"
-STRINGS.ACTIONS.SHOWCRAB          = "Emerge"
-STRINGS.ACTIONS.PEAGAWK_TRANSFORM = "Peagank Transform"
-STRINGS.ACTIONS.SPECIAL_ACTION    = "Special Actions"
-STRINGS.ACTIONS.SPECIAL_ACTION2   = "Special Actions2"
-STRINGS.ACTIONS.INFEST            = "Infest"
-STRINGS.ACTIONS.DIGDUNG           = "Digdung"
-STRINGS.ACTIONS.MOUNTDUNG         = "Mountdung"
-STRINGS.ACTIONS.BARK              = "Bark"
-STRINGS.ACTIONS.RANSACK           = "Ransack"
-STRINGS.ACTIONS.CUREPOISON        = "Curepoison"
-STRINGS.ACTIONS.USEDOOR           = "Usedoor"
-STRINGS.ACTIONS.FIX               = "Fix"
-STRINGS.ACTIONS.BOATDISMOUNT      = "Boat Dismount"
 
 
 STRINGS.CHARACTERS.GENERIC.ACTIONFAIL.GIVE.UN_CONSTRUCTION_PERMIT = "需要先使用房屋扩建许可证解锁该房间。"
@@ -9143,9 +9168,9 @@ STRINGS.MERM_TALK_RUNAWAY                      = { "切线！", "弗罗皮~格�
     "格拉特~格拉特~弗罗普！" }
 
 
-STRINGS.MERM_TALK_PANIC                                   = { "只是想要鱼儿！", "咯啰咯啰咯啰！", "啊！", "咯啰噗噗！", "浮浪噗！浮浪噗！", "呼啰噗特！费特隆！" }
-STRINGS.MERM_TALK_FISH                                    = { "想要鱼儿。", "布拉特~弗洛特。", "去抓鱼儿。", "格拉特苏~格林。", "鲜活鱼儿。好。", "布勒特~布勒恩。" }
-STRINGS.ELDERPIG_TALK_GREETING                            =
+STRINGS.MERM_TALK_PANIC                                = { "只是想要鱼儿！", "咯啰咯啰咯啰！", "啊！", "咯啰噗噗！", "浮浪噗！浮浪噗！", "呼啰噗特！费特隆！" }
+STRINGS.MERM_TALK_FISH                                 = { "想要鱼儿。", "布拉特~弗洛特。", "去抓鱼儿。", "格拉特苏~格林。", "鲜活鱼儿。好。", "布勒特~布勒恩。" }
+STRINGS.ELDERPIG_TALK_GREETING                         =
 {
     "你好啊...",
     "你是只好山羊。",
@@ -9159,22 +9184,22 @@ STRINGS.ELDERPIG_TALK_GREETING                            =
     "啊？你要做交易吗？日用品？",
     "啊！睡觉...睡觉会让长老做噩梦...",
 }
-STRINGS.WILDBEAVER_TALK_GOHOME                            = {
+STRINGS.WILDBEAVER_TALK_GOHOME                         = {
     "我明天再把沟渠挖好。",
     "是时候睡觉了。",
     "明天见。",
 }
-STRINGS.WILDBEAVER_TALK_FIGHT                             = {
+STRINGS.WILDBEAVER_TALK_FIGHT                          = {
     "我会咬你的！",
     "走开！",
     "我回来战斗了！",
 }
 
-STRINGS.WALLY1                                            = "Chump."
-STRINGS.WALLY2                                            = "Nice Sailing"
+STRINGS.WALLY1                                         = "Chump."
+STRINGS.WALLY2                                         = "Nice Sailing"
 
-STRINGS.SEMBARCO                                          = "It's my end."
-STRINGS.SHIPNAMES                                         = {
+STRINGS.SEMBARCO                                       = "It's my end."
+STRINGS.SHIPNAMES                                      = {
     "Nautilus",
     "Mackay-Bennett",
     "Mary Celeste",
@@ -9197,69 +9222,69 @@ STRINGS.SHIPNAMES                                         = {
     "Hispaniola",
 }
 ----------------------------- RAWLING -----------------------------
-STRINGS.RAWLINGon_extinguish                              = "Saved!"
-STRINGS.RAWLINGin_container                               = "This isn't a peach basket..."
-STRINGS.RAWLINGon_ground                                  = "I could use a little pick me up."
-STRINGS.RAWLINGin_inventory                               = "Let's cut the bottom out of the basket."
-STRINGS.RAWLINGother_owner                                = "Ouch!"
-STRINGS.RAWLINGon_ignite                                  = {
+STRINGS.RAWLINGon_extinguish                           = "Saved!"
+STRINGS.RAWLINGin_container                            = "This isn't a peach basket..."
+STRINGS.RAWLINGon_ground                               = "I could use a little pick me up."
+STRINGS.RAWLINGin_inventory                            = "Let's cut the bottom out of the basket."
+STRINGS.RAWLINGother_owner                             = "Ouch!"
+STRINGS.RAWLINGon_ignite                               = {
     "I'm on fire!",
     "Ow ow ow ow ow!",
 }
-STRINGS.RAWLINGon_thrown                                  = {
+STRINGS.RAWLINGon_thrown                               = {
     "To the peach basket!",
     "Shoot!",
     "You miss 100% of the shots you don't take!",
     "I believe I can fly!",
 }
-STRINGS.RAWLINGequipped                                   = {
+STRINGS.RAWLINGequipped                                = {
     "You can carry me. For a couple of steps.",
     "Is this some kind of Canadian joke?",
     "Feel 'free' to throw me.",
 }
-STRINGS.BORE_TALK_FOLLOWWILSON                            = { "YOU OK BY ME", "I LOVE FRIEND", "YOU IS GOOD", "I FOLLOW!" }
-STRINGS.BORE_TALK_FIND_LIGHT                              = { "SCARY", "NO LIKE DARK", "WHERE IS SUN?", "STAY NEAR FIRE", "FIRE IS GOOD" }
-STRINGS.BORE_TALK_LOOKATWILSON                            = { "WHO ARE YOU?", "YOU NOT BORE.", "UGLY MONKEY MAN", "YOU HAS MEAT?" }
-STRINGS.BORE_TALK_RUNAWAY_WILSON                          = { "TOO CLOSE!", "STAY 'WAY!", "YOU BACK OFF!", "THAT MY SPACE." }
-STRINGS.BORE_TALK_FIGHT                                   = { "I KILL NOW!", "YOU GO SMASH!", "RAAAWR!", "NOW YOU DUN IT!", "GO 'WAY!",
+STRINGS.BORE_TALK_FOLLOWWILSON                         = { "YOU OK BY ME", "I LOVE FRIEND", "YOU IS GOOD", "I FOLLOW!" }
+STRINGS.BORE_TALK_FIND_LIGHT                           = { "SCARY", "NO LIKE DARK", "WHERE IS SUN?", "STAY NEAR FIRE", "FIRE IS GOOD" }
+STRINGS.BORE_TALK_LOOKATWILSON                         = { "WHO ARE YOU?", "YOU NOT BORE.", "UGLY MONKEY MAN", "YOU HAS MEAT?" }
+STRINGS.BORE_TALK_RUNAWAY_WILSON                       = { "TOO CLOSE!", "STAY 'WAY!", "YOU BACK OFF!", "THAT MY SPACE." }
+STRINGS.BORE_TALK_FIGHT                                = { "I KILL NOW!", "YOU GO SMASH!", "RAAAWR!", "NOW YOU DUN IT!", "GO 'WAY!",
     "I MAKE YOU LEAVE!", }
-STRINGS.BORE_TALK_RUN_FROM_SPIDER                         = { "SPIDER BAD!", "NO LIKE SPIDER!", "SCARY SPIDER!" }
-STRINGS.BORE_TALK_HELP_CHOP_WOOD                          = { "KILL TREE!", "SMASH MEAN TREE!", "I PUNCH TREE!" }
-STRINGS.BORE_TALK_HELP_HACK                               = { "I HELP GET BUSH!", "I PUNCH BUSH!", "WE PUNCHIN' PLANTS NOW?" }
-STRINGS.BORE_TALK_ATTEMPT_TRADE                           = { "WHAT YOU GOT?", "BETTER BE GOOD.", "NO WASTE MY TIME." }
-STRINGS.BORE_TALK_PANIC                                   = { "NOOOOO!", "TOO DARK! TOO DARK!", "AAAAAAAAAH!!" }
-STRINGS.BORE_TALK_PANICFIRE                               = { "HOT HOT HOT!", "OWWWWW!", "IT BURNS!" }
-STRINGS.BORE_TALK_FIND_MEAT                               = { "ME HUNGRY!", "YUM!", "I EAT FOOD!", "TIME FOR FOOD!" }
-STRINGS.BORE_TALK_GO_HOME                                 = { "HOME TIME!", "HOME! HOME!" }
+STRINGS.BORE_TALK_RUN_FROM_SPIDER                      = { "SPIDER BAD!", "NO LIKE SPIDER!", "SCARY SPIDER!" }
+STRINGS.BORE_TALK_HELP_CHOP_WOOD                       = { "KILL TREE!", "SMASH MEAN TREE!", "I PUNCH TREE!" }
+STRINGS.BORE_TALK_HELP_HACK                            = { "I HELP GET BUSH!", "I PUNCH BUSH!", "WE PUNCHIN' PLANTS NOW?" }
+STRINGS.BORE_TALK_ATTEMPT_TRADE                        = { "WHAT YOU GOT?", "BETTER BE GOOD.", "NO WASTE MY TIME." }
+STRINGS.BORE_TALK_PANIC                                = { "NOOOOO!", "TOO DARK! TOO DARK!", "AAAAAAAAAH!!" }
+STRINGS.BORE_TALK_PANICFIRE                            = { "HOT HOT HOT!", "OWWWWW!", "IT BURNS!" }
+STRINGS.BORE_TALK_FIND_MEAT                            = { "ME HUNGRY!", "YUM!", "I EAT FOOD!", "TIME FOR FOOD!" }
+STRINGS.BORE_TALK_GO_HOME                              = { "HOME TIME!", "HOME! HOME!" }
 
-STRINGS.NAMES.TRINKET_SW_13                               = "Orange Soda"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_13         = "What is this substance?"
-STRINGS.NAMES.TRINKET_SW_14                               = "Voodoo Doll"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_14         = "This thing gives me the creeps..."
-STRINGS.NAMES.TRINKET_SW_15                               = "Ukulele"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_15         = "Incredible! This guitar has undergone shrinkification!"
-STRINGS.NAMES.TRINKET_SW_16                               = "License Plate"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_16         = "How did this get all the way out here?"
-STRINGS.NAMES.TRINKET_SW_17                               = "Old Boot"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_17         = "Where's the other one?"
-STRINGS.NAMES.TRINKET_SW_18                               = "Ancient Vase"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_18         = "A relic of a bygone era!"
-STRINGS.NAMES.TRINKET_SW_19                               = "Brain Cloud Pill"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_19         = "Clouding of the brain. Never heard of it..."
-STRINGS.NAMES.TRINKET_SW_20                               = "Sextant"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_20         = "I'm not sure what it is, but it makes me feel smarter!"
-STRINGS.NAMES.TRINKET_SW_21                               = "Toy Boat"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_21         = "I ought to measure it to ensure it's to scale."
-STRINGS.NAMES.TRINKET_SW_22                               = "Wine Bottle Candle"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_22         = "I'm sure someone would like this."
-STRINGS.NAMES.TRINKET_SW_23                               = "Broken AAC Device"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_23         = "Someone lost their words."
+STRINGS.NAMES.TRINKET_SW_13                            = "Orange Soda"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_13      = "What is this substance?"
+STRINGS.NAMES.TRINKET_SW_14                            = "Voodoo Doll"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_14      = "This thing gives me the creeps..."
+STRINGS.NAMES.TRINKET_SW_15                            = "Ukulele"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_15      = "Incredible! This guitar has undergone shrinkification!"
+STRINGS.NAMES.TRINKET_SW_16                            = "License Plate"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_16      = "How did this get all the way out here?"
+STRINGS.NAMES.TRINKET_SW_17                            = "Old Boot"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_17      = "Where's the other one?"
+STRINGS.NAMES.TRINKET_SW_18                            = "Ancient Vase"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_18      = "A relic of a bygone era!"
+STRINGS.NAMES.TRINKET_SW_19                            = "Brain Cloud Pill"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_19      = "Clouding of the brain. Never heard of it..."
+STRINGS.NAMES.TRINKET_SW_20                            = "Sextant"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_20      = "I'm not sure what it is, but it makes me feel smarter!"
+STRINGS.NAMES.TRINKET_SW_21                            = "Toy Boat"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_21      = "I ought to measure it to ensure it's to scale."
+STRINGS.NAMES.TRINKET_SW_22                            = "Wine Bottle Candle"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_22      = "I'm sure someone would like this."
+STRINGS.NAMES.TRINKET_SW_23                            = "Broken AAC Device"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TRINKET_SW_23      = "Someone lost their words."
 
-STRINGS.NAMES.TURF_PIGRUINS_BLUE                          = "Blue Pattern Ancient Stone Turf"
-STRINGS.RECIPE_DESC.TURF_PIGRUINS_BLUE                    = "From ancient ruins."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_PIGRUINS_BLUE    = "fancy broken stone brick."
+STRINGS.NAMES.TURF_PIGRUINS_BLUE                       = "Blue Pattern Ancient Stone Turf"
+STRINGS.RECIPE_DESC.TURF_PIGRUINS_BLUE                 = "From ancient ruins."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_PIGRUINS_BLUE = "fancy broken stone brick."
 
-STRINGS.PARROTNAMES                                       = {
+STRINGS.PARROTNAMES                                    = {
     "Danjaya", "Sammy", "Zoe", "Kris", "Trent",
     "Harrison", "Alethea", "Jonny Dregs", "Frankie", "Pollygon",
     "Vixel", "Jean Claud Van Dan", "Hank", "Cutiepie", "Vegetable",
@@ -9270,7 +9295,7 @@ STRINGS.PARROTNAMES                                       = {
     "Barrett", "Sully", "Reginald VelJohnson",
     "Dan Van 3000", "Van Dader", "Harry"
 }
-STRINGS.TALKINGBIRD                                       = {
+STRINGS.TALKINGBIRD                                    = {
     in_container = {
         "Don't bury me!",
         "Out, out!",
@@ -9329,21 +9354,18 @@ STRINGS.TALKINGBIRD                                       = {
 
 --STRINGS.NAMES.ONION_PLANTED = "洋葱"
 --STRINGS.CHARACTERS.GENERIC.DESCRIBE.ONION_PLANTED = "好大的萝卜，味道一定很好。"
-STRINGS.NAMES.WHEAT_PLANTED                               = "Wheat"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.WHEAT_PLANTED         = "The wheat crop."
-STRINGS.NAMES.TURNIP_PLANTED                              = "Turnip"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURNIP_PLANTED        = "That's a big turnip. It must be delicious."
-STRINGS.NAMES.POTATO_PLANTED                              = "Potato"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.POTATO_PLANTED        = "It's potatoes!"
-STRINGS.NAMES.TOMATO_PLANTED                              = "Tomato"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TOMATO_PLANTED        = "Juicy fruit."
-STRINGS.NAMES.GARLIC_PLANTED                              = "Garlic"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GARLIC_PLANTED        = "Wally likes this."
+STRINGS.NAMES.WHEAT_PLANTED                            = "Wheat"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WHEAT_PLANTED      = "The wheat crop."
+STRINGS.NAMES.TURNIP_PLANTED                           = "Turnip"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURNIP_PLANTED     = "That's a big turnip. It must be delicious."
+STRINGS.NAMES.POTATO_PLANTED                           = "Potato"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.POTATO_PLANTED     = "It's potatoes!"
+STRINGS.NAMES.TOMATO_PLANTED                           = "Tomato"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TOMATO_PLANTED     = "Juicy fruit."
+STRINGS.NAMES.GARLIC_PLANTED                           = "Garlic"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GARLIC_PLANTED     = "Wally likes this."
 
-STRINGS.ACTIONS.IRONTURNON                                = "Turn On"
-STRINGS.ACTIONS.IRONTURNOFF                               = "Turn Off"
-STRINGS.ACTIONS.CHARGE_UP                                 = "Charge"
-STRINGS.ACTIONS.PUNCH                                     = "Punch"
+
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_SUITUP                = "For Science!"
 
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_PUGALISK_INVULNERABLE = {
@@ -9362,7 +9384,6 @@ STRINGS.CHARACTERS.WORMWOOD.ANNOUNCE_PICKPOOP             = {
     "Yay!",
     "Woohoo!",
 }
-STRINGS.ACTIONS.CHECKSHOP                                 = "Cost {cost} {costprefab}\n for {item}"
 
 STRINGS.NAMES.GOLDNUGGET_SW                               = STRINGS.NAMES.GOLDNUGGET
 STRINGS.NAMES.GOLDNUGGET_HAM                              = STRINGS.NAMES.GOLDNUGGET
@@ -9462,9 +9483,823 @@ STRINGS.CITY_PIG_TALK_RUNAWAY_WILSON                      = {
 }
 
 
-STRINGS.NAMES.ROCK_ICE = "Mini-geleira"
+STRINGS.NAMES.ROCK_ICE                               = "Mini-geleira"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_ICE_GENERIC = "A very isolated glacier."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_ICE.MELTED  = "Won't be useful until it freezes again."
 
-modimport "modmain/common/languages/stringscreeps"
-modimport "modmain/common/languages/wurt_quotes"
+------------------------------------creeps------------------------------------
+STRINGS.NAMES.GEOTHERMAL_VENT                        = "Geothermal Vent"
+STRINGS.NAMES.CRABHOLE                               = "Mud Hole"
+STRINGS.NAMES.UNDERWATER_ENTRANCE                    = "Underwater Entrance"
+STRINGS.NAMES.UNDERWATER_ENTRANCE1                   = "Underwater Entrance"
+STRINGS.NAMES.UNDERWATER_ENTRANCE2                   = "Underwater Entrance"
+STRINGS.NAMES.UNDERWATER_ENTRANCE3                   = "Underwater Entrance"
+STRINGS.NAMES.UNDERWATER_ENTRANCE_OPEN               = "Underwater Entrance"
+STRINGS.NAMES.UNDERWATER_ENTRANCE_CLOSED             = "Sealed Underwater Entrance"
+STRINGS.NAMES.UNDERWATER_ENTRANCE_OPEN_CAVE          = "Deeper Underwater Entrance"
+STRINGS.NAMES.UNDERWATER_ENTRANCE_CLOSED_CAVE        = "Sealed Deeper Underwater Entrance"
+STRINGS.NAMES.UNDERWATER_EXIT                        = "Underwater Exit"
+STRINGS.NAMES.UNDERWATER_EXIT1                       = "Underwater Exit"
+STRINGS.NAMES.UNDERWATER_EXIT2                       = "Underwater Exit"
+STRINGS.NAMES.UNDERWATER_EXIT3                       = "Underwater Exit"
+STRINGS.NAMES.MERMNOBLEHOUSE                         = "Prestigious Merm House"
+STRINGS.NAMES.MERMWORKERHOUSE                        = "Merm House"
+STRINGS.NAMES.MERMGUARDHOUSE                         = "Merm Guardhouse"
+STRINGS.NAMES.ROTTING_TRUNK                          = "Rotting Tree Trunk"
+STRINGS.NAMES.SUNKEN_CHEST                           = "Ancient Sea Chest"
+STRINGS.NAMES.SEAGRASS                               = "Seagrass"
+STRINGS.NAMES.DEPLETED_SEAGRASS                      = "Seagrass"
+STRINGS.NAMES.UW_CORAL                               = "Fire Coral"
+STRINGS.NAMES.UW_CORAL_BLUE                          = "Turquoise Coral"
+STRINGS.NAMES.UW_CORAL_GREEN                         = "Emerald Coral"
+STRINGS.NAMES.FLOWER_SEA                             = "Sea Flower"
+STRINGS.NAMES.SANDSTONE_BOULDER                      = "Sandstone Boulder"
+STRINGS.NAMES.IRON_BOULDER                           = "Iron Ore Vein"
+STRINGS.NAMES.SUNKEN_CHEST                           = "Sea Chest"
+STRINGS.NAMES.KELPUNDERWATER                         = "Kelp"
+STRINGS.NAMES.WORMPLANT                              = "Worm Plant"
+STRINGS.NAMES.DECORATIVE_SHELL                       = "Pretty Shell"
+STRINGS.NAMES.SPONGE                                 = "Sea Sponge"
+STRINGS.NAMES.BUBBLE_VENT                            = "Bubbling Vent"
+STRINGS.NAMES.UW_FLOWERS                             = "Sea Flowers"
+
+
+-- Craftable items
+STRINGS.NAMES.HAT_DIVING = "Diving Helmet"
+STRINGS.RECIPE_DESC.HAT_DIVING = "For aquatic exploration."
+STRINGS.NAMES.SNORKEL = "Snorkelling Gear"
+STRINGS.RECIPE_DESC.SNORKEL = "Perfect for observing the reef."
+STRINGS.NAMES.PEARL_AMULET = "Pearl Amulet"
+STRINGS.RECIPE_DESC.PEARL_AMULET = "Converts sea water into fresh air."
+STRINGS.NAMES.FLARE = "Flare"
+STRINGS.RECIPE_DESC.FLARE = "Illuminate the ocean's depths."
+STRINGS.NAMES.DIVING_SUIT_SUMMER = "Wetsuit"
+STRINGS.RECIPE_DESC.DIVING_SUIT_SUMMER = "Clothing for dives into the ocean."
+STRINGS.NAMES.DIVING_SUIT_WINTER = "Drysuit"
+STRINGS.RECIPE_DESC.DIVING_SUIT_WINTER = "Sure to keep you warm while underwater."
+STRINGS.NAMES.JELLY_LANTERN = "Jelly O' Lantern'"
+STRINGS.RECIPE_DESC.JELLY_LANTERN = "Lasting light for longer dives."
+STRINGS.RECIPE_DESC.CORAL_CLUSTER = "When a bouquet of flowers just won't do the trick."
+STRINGS.NAMES.CORAL_CLUSTER = "Coral Cluster"
+
+
+-- Inventory items
+STRINGS.NAMES.PEARL = "Mysterious Pearl"
+STRINGS.NAMES.CORAL_PIECES = "Coral Fragments"
+STRINGS.NAMES.SANDSTONE = "Pile of Sand"
+STRINGS.NAMES.IRON_ORE = "Iron Ore"
+STRINGS.NAMES.BUBBLE_ITEM = "Bubble"
+STRINGS.NAMES.LAVASTONE = "Lavastone"
+STRINGS.NAMES.SPONGE_PIECE = "Piece of Sponge"
+STRINGS.NAMES.JELLY_CAP = "Jelly Cap"
+STRINGS.NAMES.SALT = "Salt"
+STRINGS.NAMES.SEA_CUCUMBER = "Sea Cucumber"
+STRINGS.NAMES.SEAGRASS_CHUNK = "Chunk of Seagrass"
+STRINGS.NAMES.CUT_ORANGE_CORAL = "Precious Fire Coral"
+STRINGS.NAMES.CUT_GREEN_CORAL = "Precious Emerald Coral"
+STRINGS.NAMES.CUT_BLUE_CORAL = "Precious Turquoise Coral"
+STRINGS.NAMES.SEA_PETALS = "Sea Petals"
+
+
+-- Food
+STRINGS.NAMES.FISH_FILLET = "Fish Fillet"
+STRINGS.NAMES.FISH_FILLET_COOKED = "Cooked Fish Fillet"
+STRINGS.NAMES.FISH_GAZPACHO = "Gazpacho Soup"
+STRINGS.NAMES.SPONGE_CAKE = "Sponge Cake"
+STRINGS.NAMES.FISH_N_CHIPS = "Fish 'n Chips"
+STRINGS.NAMES.TUNA_MUFFIN = "Tuna Muffin"
+STRINGS.NAMES.TENTACLE_SUSHI = "Geso Sushi"
+STRINGS.NAMES.FLOWER_SUSHI = "Bento Sushi"
+STRINGS.NAMES.FISH_SUSHI = "Aji Sushi"
+STRINGS.NAMES.SHRIMP_TAIL = "Shrimp Tail"
+STRINGS.NAMES.SEAJELLY = "Sea Jelly"
+
+
+-- Monsters and mobs
+STRINGS.NAMES.COMMONFISH = "Sea Bass"
+STRINGS.NAMES.REEF_JELLYFISH = "Deep-Sea Jellyfish"
+STRINGS.NAMES.SQUIDUNDERWATER = "Squiddy"
+STRINGS.NAMES.CRAB = "Crab"
+STRINGS.NAMES.MERMNOBLE = "Gentle-Merm"
+STRINGS.NAMES.MERMWORKER = "Merm Labourer"
+STRINGS.NAMES.MERMGUARD = "Merm Guard"
+STRINGS.NAMES.SEATENTACLE = "Sea Tentacle"
+STRINGS.NAMES.SEAQUAKETENTACLE = "Tentacle of the Kraken"
+STRINGS.NAMES.CLAM = "Giant Clam"
+STRINGS.NAMES.SEA_EEL = "Giant Eel"
+STRINGS.NAMES.SHRIMP = "Shrimpet"
+
+
+-- Names
+STRINGS.MERMNAMES                = { MERM_NOBLE = {}, MERM_WORKER = {} }
+STRINGS.MERMNAMES.MERM_NOBLE[1]  =
+{
+    "Lampwick",
+    "Warren",
+    "William",
+    "Rudderford",
+}
+STRINGS.MERMNAMES.MERM_NOBLE[2]  =
+{
+    "Helena",
+    "Priscilla",
+    "Elizabeth",
+    "Evelyn",
+}
+STRINGS.MERMNAMES.MERM_WORKER[1] =
+{
+    "Frank",
+    "Boris",
+    "Bill",
+    "Joe",
+}
+STRINGS.MERMNAMES.MERM_WORKER[2] =
+{
+    "Maggie",
+    "Leslie",
+    "Beth",
+    "Freda",
+}
+
+-- Merm strings
+STRINGS.MERM_TALK_FISH           = { "Want fish.", "Blut flort.", "Go fish.", "Glurtsu gleen.", "Fresh fish. Good.",
+    "Blet blurn." }
+STRINGS.MERM_TALK_PANIC          = { "Just wanted fish!", "GLOP GLOP GLOP!", "Aaah!", "GLORRRRRP!", "Florp! Florp!",
+    "FLOPT! FTHRON!" }
+STRINGS.MERM_TALK_RUNAWAY        = { "Cut line!", "Florpy glrop glop!", "Bad thing! Bad thing!", "GLORP! GLOPRPY GLUP!",
+    "Protect fish!", "Glut glut flrop!" }
+STRINGS.MERM_TALK_GO_HOME        = { "Sleep with fishes.", "Wort wort flrot.", "Fish friend. Not food.",
+    "Wrut glor gloppy flort." }
+STRINGS.MERM_TALK_HELP_CHOP_WOOD =
+{
+    MERM_NOBLE = { "Physical toil is best suited to others, I think.", "Sorry ol' thing, but my back you see...", "Good swing you have there.", "Don't worry, I'll wait." },
+    MERM_WORKER = { "Alright, let's get to it.", "Lunch'll be afterwards, right?", "It won't know what hit it!", "I'll get that down in a jiffy." },
+    MERM_GUARD = { "'Fraid that's outside my pay grade.", "I'll wait here.", "", "" },
+}
+STRINGS.MERM_TALK_FOLLOWWILSON   =
+{
+    MERM_NOBLE = { "Lovely day.", "Will there be tea sometime soon?", "Smashing!", "I do enjoy a good walk after lunch." },
+    MERM_WORKER = { "I'm being paid by the hour, right?", "'Fraid I can't do overtime.", "Are you a union member?", "What's the next job?" },
+    MERM_GUARD = { "", "", "", "" },
+}
+STRINGS.MERM_TALK_RUNAWAY_WILSON =
+{
+    MERM_NOBLE = { "Do you mind?", "Little too close there, ol' thing.", "Don't you know anything about personal space?", "Off with you!" },
+    MERM_WORKER = { "Hey, what's your problem?", "I don't think so...", "Not pickin' my pocket are you?", "Clear off!" },
+    MERM_GUARD = { "Move along!", "Stay clear of defence personnel at all times.", "I'll have my eye on you.", "Back off you!" },
+}
+STRINGS.MERM_TALK_LOOKATWILSON   =
+{
+    MERM_NOBLE = { "", "", "", "" },
+    MERM_WORKER = { "", "", "", "" },
+    MERM_GUARD = { "", "", "", "" },
+}
+STRINGS.MERM_TALK_PANICFIRE      =
+{
+    MERM_NOBLE = { "I'm burning up!", "Someone put it out! PUT IT OUT!", "AHH! AHH! FIIIIREE!" },
+    MERM_WORKER = { "I'm burning up!", "Someone put it out! PUT IT OUT!", "AHH! AHH! FIIIIREE!" },
+    MERM_GUARD = { "I'm burning up!", "Someone put it out! PUT IT OUT!", "AHH! AHH! FIIIIREE!" },
+}
+STRINGS.MERM_TALK_FIGHT          =
+{
+    MERM_NOBLE = { "Tally-ho!", "Guards! GUUUAAARRDDSSS!", "Thief! Murderer! Vagrant!", "Your mother was a hamster, and your father smelt of elderberries!" },
+    MERM_WORKER = { "Clear out you!", "I'll clean your clock!", "Let's get 'em!", "Come and fight, you pansy!" },
+    MERM_GUARD = { "Out of here, you scoundrel!", "Tally-ho!", "I'll give you a good seeing too, ruffian!", "Halt! You're under arrest!" },
+}
+STRINGS.MERM_TALK_ATTEMPT_TRADE  =
+{
+    MERM_NOBLE = { "A gift?", "Yes?" },
+    MERM_WORKER = { "What's this then?", "Need a hired hand?" },
+    MERM_GUARD = { "You have something for me?", "Bribery is a crime, ya-know." },
+}
+STRINGS.MERM_TALK_GO_HOME        =
+{
+    MERM_NOBLE = { "Time to retire.", "Brilliant day that!", "Time for a nightcap.", "Must be off!" },
+    MERM_WORKER = { "Time to knock off!", "Home time!", "At last!", "What's for supper?" },
+    MERM_GUARD = { "Better get some shut eye.", "Thought that shift would never end.", "Me legs are all stiff!", "I'm getting too old for this." },
+}
+
+
+-----------------new adde by vagner-----------------------
+STRINGS.NAMES.DEAD_SWORDFISH = "Dead Swordfish"
+STRINGS.NAMES.SWORDFISH = "Swordfish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEAD_SWORDFISH = "I'd better not run with this."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWORDFISH = "I think this fish evolved to run me through."
+
+STRINGS.NAMES.STUNGRAYUNDERWATER = "Stink Ray"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.STUNGRAYUNDERWATER = "I think I'll keep my distance."
+
+STRINGS.NAMES.DOGFISH_UNDER = "Dogfish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.DOGFISH_UNDER = "It has that wet-dog smell."
+
+
+STRINGS.NAMES.RAINBOWJELLYFISH_UNDERWATER = "Rainbow Jellyfish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINBOWJELLYFISH_UNDERWATER = "That's a lot of tendrils."
+
+STRINGS.NAMES.LOBSTERUNDERWATER = "Wobster"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOBSTERUNDERWATER = "That wascal is sleeping."
+
+STRINGS.NAMES.JELLYFISH_UNDERWATER = "Jellyfish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.JELLYFISH_UNDERWATER = "This creature is pure science!"
+
+STRINGS.NAMES.CORAL = "Coral"
+STRINGS.NAMES.CORALREEFUNDERWATER = "Coral Reef"
+
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORAL = "Living building material!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORALREEFUNDERWATER = "The coral's formed a reef!"
+
+STRINGS.NAMES.CORAL_BRAIN_ROCKUNDERWATER = "Coral Brain"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CORAL_BRAIN_ROCKUNDERWATER = "I wonder what it's plotting..."
+
+STRINGS.NAMES.CORAL_BRAIN = "Coral Brain"
+
+STRINGS.NAMES.COMMONFISH = "Sea Bass"
+STRINGS.NAMES.COMMONFISH = "Sea Bass"
+
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SHARXUNDERWATER = "These things sure are persistent."
+STRINGS.NAMES.SHARXUNDERWATER = "Sharx"
+
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCTOPUSKING = "I'm a sucker for this guy."
+STRINGS.NAMES.OCTOPUSKING = "Yaarctopus"
+
+STRINGS.NAMES.LIMPETS = "Limpet"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIMPETS = "Maybe starving wouldn't be so bad."
+STRINGS.NAMES.LIMPETS_COOKED = "Cooked Limpet"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIMPETS_COOKED = "Escargotcha!"
+
+STRINGS.NAMES.SANDHILL = "Sand Hill"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SANDHILL = "You better stay out of my shoes."
+STRINGS.NAMES.SAND = "Sand"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAND = "A handy pile of pocket sand."
+
+STRINGS.NAMES.LIMESTONE = "Limestone"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIMESTONE = "It could be a useful building material."
+STRINGS.RECIPE_DESC.LIMESTONE = "Stone, with a hint of lime."
+
+STRINGS.NAMES.WRECKUNDERWATER = "Wreck"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WRECKUNDERWATER = "Poor little boat."
+STRINGS.SHIPNAMES =
+{ "Nautilus",
+    "Mackay-Bennett",
+    "Mary Celeste",
+    "Beagle",
+    "Santa Maria",
+    "Bluenose",
+    "Mauretania",
+    "Endeavour",
+    "Edmund Fitzgerald",
+    "Pequod",
+    "Mississinewa",
+    "African Queen",
+    "Mont-Blanc",
+    "Caine",
+    "Pharaoh",
+    "Minnow",
+    "Syracusia",
+    "Baron of Renfrew",
+    "Ariel",
+    "Hispaniola", }
+
+STRINGS.NAMES.CRATE = "Crate"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.CRATE = "There must be a way to open it."
+
+STRINGS.NAMES.REDBARRELUNDERWATER = "Gunpowder Barrel"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.REDBARRELUNDERWATER = "How original."
+
+STRINGS.NAMES.FISH_RAW_SMALL_COOKED = "Cooked Fish Morsel"
+STRINGS.NAMES.FISH_RAW_SMALL = "Fish Morsel"
+STRINGS.NAMES.FISH_MED_COOKED = "Fish Steak"
+STRINGS.NAMES.SPOILED_FISH = "Spoiled Fish"
+STRINGS.NAMES.FISH_RAW = "Raw Fish"
+
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW_SMALL_COOKED = "A small bit of cooked fish."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW_SMALL = "A small bit of fish."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_MED_COOKED = "Grilled to perfection."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPOILED_FISH = "I'm not terribly curious about the smell."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_RAW = "A chunk of fish meat."
+
+STRINGS.NAMES.ROCK_LIMPET = "Limpet Rock"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_LIMPET = "I could fill a pail with all those snails!"
+
+STRINGS.NAMES.SEASHELL_BEACHED = "Seashell"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEASHELL_BEACHED = "Sea refuse."
+STRINGS.NAMES.SEASHELL = "Seashell"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEASHELL = "Maybe I could sell these."
+
+STRINGS.NAMES.SPIDER_WATER = "spider_water"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDER_WATER = "Maybe I could sell these."
+
+STRINGS.NAMES.ROCK_OBSIDIAN = "Obsidian Boulder"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_OBSIDIAN = "Blast it! It won't be mined!"
+
+STRINGS.NAMES.ROCK_CHARCOAL = "Charcoal Boulder"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_CHARCOAL = "Would need an awfully big stocking..."
+
+STRINGS.NAMES.ROCK_CAVE = "Rock Boulder"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROCK_CAVE = "Rock Boulder"
+
+STRINGS.NAMES.MAGMAROCK = "Magma Pile"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAGMAROCK = "I can dig it."
+
+STRINGS.NAMES.MAGMAROCK_GOLD = "Magma Pile"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MAGMAROCK_GOLD = "I see a golden opportunity."
+
+STRINGS.NAMES.FLAMEGEYSER = "Krissure"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLAMEGEYSER = "Maybe I should stand back."
+
+STRINGS.NAMES.MERMSTATUE = "Merm Statue"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMSTATUE = "Merm Statue."
+
+STRINGS.NAMES.OCTOPUSCHEST = "Octopus Chest"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCTOPUSCHEST = "I hope that thing is waterproof."
+
+STRINGS.NAMES.KRAKENCHEST = "Quacken Chest"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.KRAKENCHEST = "To the victor, the spoils."
+
+STRINGS.NAMES.KRAKENUNDERWATER_TENTACLE = "Quacken Tentacle"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.KRAKENUNDERWATER_TENTACLE = "A beast that never sleeps."
+
+STRINGS.NAMES.KRAKENUNDERWATER = "Quacken"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.KRAKENUNDERWATER = "A beast that never sleeps."
+
+STRINGS.NAMES.KRAKENHOLEFUNDO = "Quacken Hole"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.KRAKENHOLEFUNDO = "Quacken Hole."
+
+STRINGS.NAMES.KRAKENHOLEFRENTE = "Quacken Hole"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.KRAKENHOLEFRENTE = "Quacken Hole."
+
+STRINGS.NAMES.KRAKEN_SPAWNER = "kraken_spawner"
+STRINGS.NAMES.KRAKEN_PROJECTILE = "kraken_projectile"
+STRINGS.NAMES.KRAKEN_INKPATCH = "kraken_inkpatch"
+STRINGS.NAMES.GAZE_BEAM = "gaze_beam"
+
+STRINGS.NAMES.LUGGAGECHEST = "Treasure Chest"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LUGGAGECHEST = "Treasure Chest."
+
+STRINGS.NAMES.LAVARENACHEST = "Treasure Chest"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVARENACHEST = "Treasure Chest."
+
+STRINGS.NAMES.BIOLUMINESCENCE = "Bioluminescence"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BIOLUMINESCENCE = "These make a soothing glow."
+
+STRINGS.NAMES.BALLPHINHOUSE = "Coral House"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BALLPHINHOUSE = "The place where creatures hide."
+
+STRINGS.NAMES.FISH2 = "Tropical Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH2 = "What a tropical looking fish."
+
+STRINGS.NAMES.FISH2_COOKED = "Cooked Tropical Fish."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH2_COOKED = "Cooked Tropical Fish."
+
+STRINGS.NAMES.FISH3 = "Purple Grouper"
+STRINGS.NAMES.FISH3_COOKED = "Cooked Purple Grouper"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH3 = "Surf and turf, hold the turf."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH3_COOKED = "That fish is fin-ished."
+
+STRINGS.NAMES.FISH4 = "Pierrot Fish"
+STRINGS.NAMES.FISH4_COOKED = "Cooked Pierrot Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH4 = "This one's extra water repellent."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH4_COOKED = "Gilled to perfection."
+
+STRINGS.NAMES.FISH5 = "Neon Quattro"
+STRINGS.NAMES.FISH5_COOKED = "Cooked Neon Quattro"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH5 = "It looks like a fish, but it feels clammy."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH5_COOKED = "Fried fry."
+
+
+STRINGS.NAMES.FISH2_ALIVE = "Tropical Fish"
+STRINGS.NAMES.FISH3_ALIVE = "Purple Grouper"
+STRINGS.NAMES.FISH4_ALIVE = "Pierrot Fish"
+STRINGS.NAMES.FISH5_ALIVE = "Neon Quattro"
+STRINGS.NAMES.QUAGMIRE_SALMON_ALIVE = "Salmon"
+
+STRINGS.NAMES.SPIDERHOLE_WATER = "Coral Hole"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPIDERHOLE_WATER = "Coral Hole."
+
+STRINGS.NAMES.FROG_WATER = "Frog"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FROG_WATER = "Frog."
+
+STRINGS.NAMES.FENNEL = "fennel"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FENNEL = "fennel."
+
+STRINGS.NAMES.FENNEL_COOKED = "Cooked Fennel"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FENNEL_COOKED = "Cooked Fennel."
+
+STRINGS.NAMES.FENNEL_PLANTED = "fennel"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FENNEL_PLANTED = "fennel."
+
+STRINGS.NAMES.MUSSEL_STICK = "Mussel Stick"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSSEL_STICK = "I'm really going to stick it to those mussels."
+STRINGS.RECIPE_DESC.MUSSEL_STICK = "Mussel Stick."
+
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSSEL_FARM = "I wonder if they are from Brussels."
+STRINGS.NAMES.MUSSEL_FARM = "Mussel Farm"
+
+STRINGS.NAMES.MUSSEL_COOKED = "Mussel Cooked"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSSEL_COOKED = "I cook a mean mussel."
+
+STRINGS.NAMES.MUSSEL = "Mussel"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSSEL = "I wonder if they are from Brussels."
+
+STRINGS.NAMES.MERMFISHER = "Merm Fisher"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMFISHER = "You better not try anything fishy."
+
+STRINGS.NAMES.MERM1 = "Merm"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERM1 = "Merm."
+
+STRINGS.NAMES.MERM2 = "Merm"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERM2 = "Merm."
+
+STRINGS.NAMES.MERMEXPERIMENT = "mermexperiment"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMEXPERIMENT = "mermexperiment."
+
+STRINGS.NAMES.HAT_SUBMARINE = "Submarine Helmet"
+STRINGS.RECIPE_DESC.HAT_SUBMARINE = "Submarine Helmet."
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.HAT_SUBMARINE = "Submarine Helmet!"
+
+STRINGS.NAMES.PIRATEGHOST = "Pirate ghost"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIRATEGHOST = "Pirate Ghost."
+
+STRINGS.NAMES.FISH_COI = "Coi"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_COI = "Coi."
+
+STRINGS.NAMES.SECRETCAVEENTRANCE = "Under Water Cave"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SECRETCAVEENTRANCE = "Under Water Cave."
+
+
+
+
+STRINGS.NAMES.OCEANFISH_SMALL_UNDERWATER_1 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_1 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_SMALL_UNDERWATER_2 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_2 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_SMALL_UNDERWATER_3 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_3 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_SMALL_UNDERWATER_4 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_4 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_SMALL_UNDERWATER_5 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_5 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_SMALL_UNDERWATER_6 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_6 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_SMALL_UNDERWATER_7 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_7 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_SMALL_UNDERWATER_8 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_8 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_SMALL_UNDERWATER_9 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_9 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_MEDIUM_UNDERWATER_1 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_MEDIUM_UNDERWATER_1 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_MEDIUM_UNDERWATER_2 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_MEDIUM_UNDERWATER_2 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_MEDIUM_UNDERWATER_3 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_MEDIUM_UNDERWATER_3 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_MEDIUM_UNDERWATER_4 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_MEDIUM_UNDERWATER_4 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_MEDIUM_UNDERWATER_5 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_MEDIUM_UNDERWATER_5 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_MEDIUM_UNDERWATER_6 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_MEDIUM_UNDERWATER_6 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_MEDIUM_UNDERWATER_7 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_MEDIUM_UNDERWATER_7 = "Ocean Fish."
+
+STRINGS.NAMES.OCEANFISH_MEDIUM_UNDERWATER_8 = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_MEDIUM_UNDERWATER_8 = "Ocean Fish."
+
+STRINGS.NAMES.KELPY = "Kelpy"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.KELPY = "Kelpy."
+
+STRINGS.NAMES.WOODLEGS_CAGE_UNDERWATER = "Cage"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WOODLEGS_CAGE_UNDERWATER = "Cage."
+
+STRINGS.NAMES.SQUIDUNDERWATER2 = "Squiddy"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SQUIDUNDERWATER2 = "Squiddy."
+
+STRINGS.NAMES.SWORDFISHUNDERWATER = "Swordfish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWORDFISHUNDERWATER = "Swordfish."
+
+STRINGS.NAMES.MERMKINGUNDERWATER = "Merm king"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMKINGUNDERWATER = "Merm king."
+
+STRINGS.NAMES.MERMWATCHTOWERUNDERWATER = "Merm Watch Tower"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMWATCHTOWERUNDERWATER = "Merm Watch Tower."
+
+STRINGS.NAMES.MERMTHRONEUNDERWATER = "Merm Throne"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMTHRONEUNDERWATER = "Merm Throne."
+
+STRINGS.NAMES.MERMFISHERGUARDUNDERWATER = "Merm Guard"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMFISHERGUARDUNDERWATER = "Merm Guard."
+
+STRINGS.NAMES.MECFISH_ALIVE = "Mecfish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MECFISH_ALIVE = "Gear in the water."
+
+STRINGS.NAMES.GOLDFISH_ALIVE = "Goldfish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GOLDFISH_ALIVE = "Gold in the water."
+
+STRINGS.NAMES.FISH6_ALIVE = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH6_ALIVE = "Ocean Fish."
+
+STRINGS.NAMES.FISH7_ALIVE = "Ocean Fish"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH7_ALIVE = "Ocean Fish."
+
+STRINGS.NAMES.FISH2 = "Dead Tropical Fish"
+STRINGS.NAMES.FISH2_COOKED = "Tropical Fish Cooked"
+STRINGS.NAMES.FISH6 = "Dead Red Fish"
+STRINGS.NAMES.FISH6_COOKED = "Red Fish Cooked"
+STRINGS.NAMES.FISH7 = "Dead Hutch Fish"
+STRINGS.NAMES.FISH7_COOKED = "Hutch Fish Cooked"
+
+STRINGS.NAMES.COI = "Dead Coi"
+STRINGS.NAMES.COI_COOKED = "Coi Cooked"
+STRINGS.NAMES.SALMON = "Dead Salmon"
+STRINGS.NAMES.SALMON_COOKED = "Salmon Cooked"
+
+STRINGS.NAMES.BALLPHINOCEAN = "Dead Ballphin"
+STRINGS.NAMES.MECFISH = "Dead Mecfich"
+STRINGS.NAMES.GOLDFISH = "Dead Goldfish"
+STRINGS.NAMES.WHALEBLUEOCEAN = "Dead Blue Whale"
+STRINGS.NAMES.DOGFISHOCEAN = "Dead Dog Fish"
+STRINGS.NAMES.SWORDFISHJOCEAN = "Dead Sword Fish"
+STRINGS.NAMES.SWORDFISHJOCEAN2 = "Dead Rare Sword Fish"
+
+
+STRINGS.NAMES.OCEANFISH_SMALL_61_INV                               = "Tropical Fish"
+STRINGS.NAMES.OCEANFISH_SMALL_71_INV                               = "Purple Grouper"
+STRINGS.NAMES.OCEANFISH_SMALL_81_INV                               = "Pierrot Fish"
+STRINGS.NAMES.OCEANFISH_SMALL_91_INV                               = "Neon Quattro"
+STRINGS.NAMES.OCEANFISH_SMALL_10_INV                               = "Coi"
+STRINGS.NAMES.OCEANFISH_SMALL_11_INV                               = "Salmon"
+STRINGS.NAMES.OCEANFISH_SMALL_12_INV                               = "Ballphin"
+STRINGS.NAMES.OCEANFISH_SMALL_13_INV                               = "Mecfish"
+STRINGS.NAMES.OCEANFISH_SMALL_14_INV                               = "Gold Fish"
+STRINGS.NAMES.OCEANFISH_SMALL_15_INV                               = "Blue Whale"
+STRINGS.NAMES.OCEANFISH_SMALL_16_INV                               = "Dog Fish"
+STRINGS.NAMES.OCEANFISH_SMALL_17_INV                               = "Hutch Fish"
+STRINGS.NAMES.OCEANFISH_SMALL_18_INV                               = "Red Fish"
+STRINGS.NAMES.OCEANFISH_SMALL_19_INV                               = "Sword Fish"
+STRINGS.NAMES.OCEANFISH_SMALL_20_INV                               = "Rare Sword Fish"
+STRINGS.NAMES.OCEANFISH_SMALL_21_INV                               = "Sharx"
+STRINGS.NAMES.SHARXOCEAN                                           = "Sharx"
+STRINGS.NAMES.JELLYFISH                                            = "Jellyfish"
+STRINGS.NAMES.JELLYFISH_DEAD                                       = "Dead Jellyfish"
+STRINGS.NAMES.JELLYFISH_COOKED                                     = "Cooked Jellyfish"
+STRINGS.NAMES.RAINBOWJELLYFISH                                     = "Rainbow Jellyfish"
+STRINGS.NAMES.RAINBOWJELLYFISH_DEAD                                = "Dead Rainbow Jellyfish"
+STRINGS.NAMES.RAINBOWJELLYFISH_COOKED                              = "Cooked Rainbow Jellyfish"
+
+STRINGS.NAMES.GNARWAILUNDERWATER                                   = "Gnarwail"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GNARWAILUNDERWATER             = "Gnarwail"
+STRINGS.NAMES.GNARWAILHOLEFUNDOFINAL                               = "Gnarwail den"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GNARWAILHOLEFUNDOFINAL         = "Gnarwail den"
+STRINGS.NAMES.GNARWAIL_ATTACK_HORNUNDERWATER                       = "Gnarwail"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.GNARWAIL_ATTACK_HORNUNDERWATER = "Gnarwail"
+
+STRINGS.NAMES.SEAWEEDUNDERWATER                                    = "Seaweed"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEAWEEDUNDERWATER              = "Is that what passes for food around here?"
+
+STRINGS.NAMES.SEAWEED                                              = "Seaweed"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEAWEED                        = "A weed. Of the sea."
+
+STRINGS.NAMES.SEAWEED_COOKED                                       = "Seaweed Cooked"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.COOKED                         = "Char broiled to perfection."
+
+STRINGS.NAMES.SEAWEED_DRIED                                        = "Seaweed Dried"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEAWEED_DRIED                  = "Salty!"
+
+--NOTE: Limit to 7 strings per table! (Using net_tinybyte for NPC chatter)
+STRINGS.MERM_TALK_FISH                                             = { "Want fish.", "Blut flort.", "Go fish.",
+    "Glurtsu gleen.", "Fresh fish. Good.", "Blet blurn." }
+STRINGS.MERM_TALK_PANIC                                            = { "Just wanted fish!", "GLOP GLOP GLOP!",
+    "Aaah!", "GLORRRRRP!", "Florp! Florp!", "FLOPT! FTHRON!" }
+STRINGS.MERM_TALK_RUNAWAY                                          = { "Cut line!", "Florpy glrop glop!",
+    "Bad thing! Bad thing!", "GLORP! GLOPRPY GLUP!", "Protect fish!", "Glut glut flrop!" }
+STRINGS.MERM_TALK_GO_HOME                                          = { "Sleep with fishes.", "Wort wort flrot.",
+    "Fish friend. Not food.", "Wrut glor gloppy flort." }
+STRINGS.MERM_TALK_FOLLOWWILSON                                     = { "Will come with you.", "Flort glut.",
+    "Make Mermfolk strong!", "Blut gloppy Glurtsu!", "You help Mermfolk!", "Glut Glurtsu flopt!", "You okay.",
+    "Florpy flort." }
+STRINGS.MERM_TALK_HELP_CHOP_WOOD                                   = { "Will come with you.", "Flort glut.",
+    "Make Mermfolk strong!", "Blut gloppy Glurtsu!", "Chop, choppy, chop!", "Grop, groppy, grop!", "Work hard, florp!",
+    "Glort blut, florp!" }
+STRINGS.MERM_TALK_HELP_MINE_ROCK                                   = { "Will come with you.", "Flort glut.",
+    "Make Mermfolk strong!", "Blut gloppy Glurtsu!", "Break rock, easy!", "Wult wop, florty flort!", "Work hard, florp!",
+    "Glort blut, florp!" }
+STRINGS.MERM_TALK_HELP_HAMMER                                      = { "Will come with you.", "Flort glut.",
+    "Make Mermfolk strong!", "Blut gloppy Glurtsu!", "Smash! Smash!", "Florph! Florph!", "Work hard, florp!",
+    "Glort blut, florp!" }
+STRINGS.MERM_TALK_FIND_FOOD                                        = { "Will come with you.", "Flort glut.",
+    "Make Mermfolk strong!", "Blut gloppy Glurtsu!", "This do fine.", "Glort grolt flut.", "Find something tasty!",
+    "Glurt florpy flut!" }
+STRINGS.MERM_BATTLECRY                                             = { "Glorp! Go away!", "Glorp! Glorpy glup!",
+    "Destroy you!", "Wult glut!" }
+STRINGS.MERM_GUARD_BATTLECRY                                       = { "To battle!", "Wult flrot!",
+    "For glory of Mermfolk!", "Flort Glurtsu flut!", "ATTAAAACK!!", "GLOT FLOOOORPH!!", "Defend King!",
+    "Glurph Glurtsen!" }
+STRINGS.MERM_TALK_PANICBOSS                                        = { "Something coming!", "Gloppy flort!",
+    "Aaah!! Bad thing! Bad thing!", "Gloooorph!! Glurph glot! Glurph glot!", "It come to destroy us!",
+    "Flort wult Glurtsu!" }
+STRINGS.MERM_TALK_PANICBOSS_KING                                   = { "Rally to King!", "Glurtsen blut flort!",
+    "Hurry! Protect kingdom!", "Flurph flrot! Gloppy Glurtsam!", "S-stay brave!!", "G-glop blut flrot!!" }
+
+STRINGS.MERM_KING_TALK_HUNGER_STARVING                             = "Hungry... HUNGRY! HUNGRYYYY!!!"
+STRINGS.MERM_KING_TALK_HUNGER_CLOSE_STARVING                       = "Treachery... villainy! To let King waste away like this..."
+STRINGS.MERM_KING_TALK_HUNGER_VERY_HUNGRY                          = "What take so long? Make offerings to your King!"
+STRINGS.MERM_KING_TALK_HUNGER_HUNGRY                               = "King desires food!"
+STRINGS.MERM_KING_TALK_HUNGER_HUNGRISH                             = "King feeling a bit peckish..."
+STRINGS.MERM_KING_TALK_HUNGER_FULL                                 = "Have done well. Now go."
+
+------------------------------------gorge------------------------------------------
+
+STRINGS.NAMES.FLOUR                                                = "Flour"
+STRINGS.NAMES.SAPTREE                                              = "Sugarwood Tree"
+STRINGS.NAMES.SAPBUCKET                                            = "Sapbucket"
+STRINGS.NAMES.SYRUP                                                = "Syrup"
+STRINGS.NAMES.BREAD                                                = "Bread"
+STRINGS.NAMES.CHIPS                                                = "Chips"
+STRINGS.NAMES.VEGGIE_SOUP                                          = "Veggie Soup"
+STRINGS.NAMES.JELLY_SANDWICH                                       = "Jelly Sandwich"
+STRINGS.NAMES.FISH_STEW                                            = "Fish Stew"
+STRINGS.NAMES.TURNIP_CAKE                                          = "Turnip Cake"
+STRINGS.NAMES.POTATO_PANCAKES                                      = "Potato Pancakes"
+STRINGS.NAMES.POTATO_SOUP                                          = "Potato Soup"
+STRINGS.NAMES.FISHBALL_SKEWERS                                     = "Fishball Skewers"
+STRINGS.NAMES.MEATBALLS                                            = "Meatballs"
+STRINGS.NAMES.MEAT_SKEWERS                                         = "Meat Skewers"
+STRINGS.NAMES.STONE_SOUP                                           = "Stone Soup"
+STRINGS.NAMES.CROQUETTE                                            = "Croquette"
+STRINGS.NAMES.ROASTED_VEGGIES                                      = "Roasted Veggies"
+STRINGS.NAMES.MEATLOAF                                             = "Meatloaf"
+STRINGS.NAMES.CARROT_SOUP                                          = "Carrot Soup"
+STRINGS.NAMES.FISH_PIE                                             = "Fish Pie"
+STRINGS.NAMES.FISH_AND_CHIPS                                       = "Fish And Chips"
+STRINGS.NAMES.MEAT_PIE                                             = "Meat Pie"
+STRINGS.NAMES.SLIDER                                               = "Slider"
+STRINGS.NAMES.JAM                                                  = "Jam"
+STRINGS.NAMES.JELLY_ROLL                                           = "Jelly Roll"
+STRINGS.NAMES.CARROT_CAKE                                          = "Carrot Cake"
+STRINGS.NAMES.MASHED_POTATOES                                      = "Mashed Potatoes"
+STRINGS.NAMES.GARLIC_BREAD                                         = "Garlic Bread"
+STRINGS.NAMES.TOMATO_SOUP                                          = "Tomato Soup"
+STRINGS.NAMES.SAUSAGE                                              = "Sausage"
+STRINGS.NAMES.CANDIED_FISH                                         = "Candied Fish"
+STRINGS.NAMES.STUFFED_MUSHROOM                                     = "Stuffed Mushroom"
+STRINGS.NAMES.RATATOUILLE                                          = "Ratatouille"
+STRINGS.NAMES.BRUSCHETTA                                           = "Bruschetta"
+STRINGS.NAMES.MEAT_STEW                                            = "Meat Stew"
+STRINGS.NAMES.HAMBURGER                                            = "Hamburger"
+STRINGS.NAMES.FISH_BURGER                                          = "Fish Burger"
+STRINGS.NAMES.MUSHROOM_BURGER                                      = "Mushroom Burger"
+STRINGS.NAMES.FISH_STEAK                                           = "Fish Steak"
+STRINGS.NAMES.CURRY                                                = "Curry"
+STRINGS.NAMES.SPAGHETTI_AND_MEATBALLS                              = "Spaghetti And Meatballs"
+STRINGS.NAMES.LASAGNA                                              = "Lasagna"
+STRINGS.NAMES.POACHED_FISH                                         = "Poached Fish"
+STRINGS.NAMES.SHEPHERDS_PIE                                        = "Shepherds Pie"
+STRINGS.NAMES.CANDY                                                = "Candy"
+STRINGS.NAMES.PUDDING                                              = "Pudding"
+STRINGS.NAMES.WAFFLES                                              = "Waffles"
+STRINGS.NAMES.BERRY_TART                                           = "Berry Tart"
+STRINGS.NAMES.MAC_N_CHEESE                                         = "Mac N Cheese"
+STRINGS.NAMES.BAGEL_N_FISH                                         = "Bagel N Fish"
+STRINGS.NAMES.GRILLED_CHEESE                                       = "Grilled Cheese"
+STRINGS.NAMES.CREAM_OF_MUSHROOM                                    = "Cream Of Mushroom"
+STRINGS.NAMES.PIEROGIES                                            = "Pierogies"
+STRINGS.NAMES.MANICOTTI                                            = "Manicotti"
+STRINGS.NAMES.CHEESEBURGER                                         = "Cheeseburger"
+STRINGS.NAMES.FETTUCCINE                                           = "Fettuccine"
+STRINGS.NAMES.ONION_SOUP                                           = "Onion Soup"
+STRINGS.NAMES.BREADED_CUTLET                                       = "Breaded Cutlet"
+STRINGS.NAMES.CREAMY_FISH                                          = "Creamy Fish"
+STRINGS.NAMES.PIZZA                                                = "Pizza"
+STRINGS.NAMES.POT_ROAST                                            = "Pot Roast"
+STRINGS.NAMES.CRAB_CAKE                                            = "Crab Cake"
+STRINGS.NAMES.STEAK_FRITES                                         = "Steak Frites"
+STRINGS.NAMES.SHOOTER_SANDWICH                                     = "Shooter Sandwich"
+STRINGS.NAMES.BACON_WRAPPED_MEAT                                   = "Bacon Wrapped Meat"
+STRINGS.NAMES.CRAB_ROLL                                            = "Crab Roll"
+STRINGS.NAMES.MEAT_WELLINGTON                                      = "Meat Wellington"
+STRINGS.NAMES.CRAB_RAVIOLI                                         = "Crab Ravioli"
+STRINGS.NAMES.CARAMEL_CUBE                                         = "Caramel Cube"
+STRINGS.NAMES.SCONE                                                = "Scone"
+STRINGS.NAMES.TRIFLE                                               = "Trifle"
+STRINGS.NAMES.CHEESECAKE                                           = "Cheesecake"
+STRINGS.NAMES.QUAGMIRE_SYRUP                                       = "Quagmire Syrup"
+STRINGS.NAMES.JELLY_SANDWICH                                       = "Jelly Sandwich"
+STRINGS.NAMES.GORGE_MEATBALLS                                      = STRINGS.NAMES.MEATBALLS
+STRINGS.NAMES.GORGE_RATATOUILLE                                    = STRINGS.NAMES.RATATOUILLE
+STRINGS.NAMES.GORGE_JAM                                            = STRINGS.NAMES.JAM
+
+STRINGS.NAMES.CRATE_GRILL_SMALL                                    = "Small Grill Crate"
+STRINGS.NAMES.CRATE_GRILL                                          = "Grill Crate"
+STRINGS.NAMES.CRATE_POT_HANGER                                     = "Pot Hanger Crate"
+STRINGS.NAMES.CRATE_OVEN                                           = "Oven Crate"
+STRINGS.NAMES.GRILL                                                = "Large Grill"
+STRINGS.NAMES.GRILL_SMALL                                          = "Small Grill"
+STRINGS.NAMES.POT_HANGER                                           = "Pot Hanger"
+STRINGS.NAMES.GRILL_ITEM                                           = "Grill"
+STRINGS.NAMES.GRILL_SMALL_ITEM                                     = "Small Grill"
+STRINGS.NAMES.POT_HANGER_ITEM                                      = "Pot Hanger"
+STRINGS.NAMES.POT                                                  = "Cooking Pot"
+STRINGS.NAMES.POT_SMALL                                            = "Small Cooking Pot"
+STRINGS.NAMES.POT_SYRUP                                            = "Syrup Pot"
+STRINGS.NAMES.OVEN                                                 = "Oven"
+STRINGS.NAMES.OVEN_ITEM                                            = "Oven"
+STRINGS.NAMES.CASSEROLEDISH                                        = "Casseroledish"
+STRINGS.NAMES.CASSEROLEDISH_SMALL                                  = "Small Casseroledish"
+STRINGS.NAMES.SALT_RACK                                            = "Saltrack"
+STRINGS.NAMES.SALT_RACK_ITEM                                       = "Saltrack Item"
+STRINGS.NAMES.GORGE_ALTAR                                          = "Altar"
+STRINGS.NAMES.PLATE_GENERIC                                        = "Plate"
+STRINGS.NAMES.BOWL_GENERIC                                         = "Bowl"
+STRINGS.NAMES.PLATE_SILVER                                         = "Silver Plate"
+STRINGS.NAMES.BOWL_SILVER                                          = "Silver Bowl"
+STRINGS.NAMES.WHEAT                                                = "Wheat"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WHEAT                          = "Better grind this into flour."
+
+STRINGS.NAMES.WHEAT_COOKED                                         = "Cooked Wheat"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WHEAT_COOKED                   = "Nicely toasted grains."
+
+STRINGS.NAMES.WHEAT_OVERSIZED_ROTTEN                               = "Wheat Oversized Rotten"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WHEAT_OVERSIZED_ROTTEN         = "Wheat Oversized Rotten."
+
+STRINGS.NAMES.WHEAT_OVERSIZED                                      = "Wheat Oversized"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WHEAT_OVERSIZED                = "Wheat Oversized."
+
+STRINGS.NAMES.WHEAT_OVERSIZED_WAXED                                = "Wheat Oversized Waxed"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WHEAT_OVERSIZED_WAXED          = "Wheat Oversized Waxed."
+
+STRINGS.NAMES.FARM_PLANT_WHEAT                                     = "Wheat planted"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FARM_PLANT_WHEAT               = "Wheat planted."
+
+STRINGS.NAMES.TURNIP_OVERSIZED_ROTTEN                              = "Turnip Oversized Rotten"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURNIP_OVERSIZED_ROTTEN        = "Turnip Oversized Rotten."
+
+STRINGS.NAMES.TURNIP_OVERSIZED                                     = "Turnip Oversized"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURNIP_OVERSIZED               = "Turnip Oversized."
+
+STRINGS.NAMES.TURNIP_OVERSIZED_WAXED                               = "Turnip Oversized Waxed"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURNIP_OVERSIZED_WAXED         = "Turnip Oversized Waxed."
+
+STRINGS.NAMES.FARM_PLANT_TURNIP                                    = "Turnip planted"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.FARM_PLANT_TURNIP              = "Turnip planted."
+-- Pig Elder
+
+STRINGS.ELDERPIG_TALK_GREETING                                     =
+{
+    "Hello...",
+    "You is good goat.",
+    "Little one...",
+    "SNORT",
+    "*COUGH*",
+}
+
+
+STRINGS.ELDERPIG_TALK_FARWELL                   =
+{
+    "...",
+}
+
+STRINGS.NAMES.QUAGMIRE_TRADER_MERM3             = "Oliver The Merm Banker"
+
+STRINGS.NAMES.BEAVERTORCH                       = "Wildbeaver Torch"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Wildbeaver Torch."
+STRINGS.CHARACTERS.WURT.DESCRIBE.BEAVERTORCH    = "Has nice spot for fire, florpt."
+
+
+
+STRINGS.NAMES.SEA_YARD                            = "Sea Yard"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_YARD      = "Sea Yard."
+STRINGS.RECIPE_DESC.SEA_YARD                      = "Sea Yard"
+STRINGS.CHARACTERS.WILLOW.DESCRIBE.SEA_YARD       = "It's a fixin' machine."
+STRINGS.CHARACTERS.WENDY.DESCRIBE.SEA_YARD        = "It wards off the inevitable decay."
+STRINGS.CHARACTERS.WOLFGANG.DESCRIBE.SEA_YARD     = "Will make boats mighty again!"
+STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE.SEA_YARD = "It's at peak performance."
+STRINGS.CHARACTERS.WURT.DESCRIBE.SEA_YARD         = "Not for adding more holes to boat?"
+STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE.SEA_YARD   = "An altar to Njord!"
+STRINGS.CHARACTERS.WAXWELL.DESCRIBE.SEA_YARD      = "Much needed ship maintenance."
+STRINGS.CHARACTERS.WEBBER.DESCRIBE.SEA_YARD       = {
+    OFF = "It won't work again until we fuel it.",
+    ON = "It's making the boats feel better!",
+    LOWFUEL = "We gotta fill it up soon.",
+
+}
+
+STRINGS.NAMES.PORTO_SEA_YARD                      = "Sea yard kit"
+STRINGS.RECIPE_DESC.PORTO_SEA_YARD                = "Sea yard"
+
+STRINGS.NAMES.MESSAGEBOTTLE_SW                    = "漂流瓶"
+STRINGS.CHARACTERS.WURT.DESCRIBE.MESSAGEBOTTLE_SW = "Something inside!"

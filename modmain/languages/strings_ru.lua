@@ -1256,8 +1256,8 @@ STRINGS.NAMES.MERM2 = "Мэрм" --DTR
 
 STRINGS.ACTIONS.HACK = "Кромсать"
 STRINGS.ACTIONS.STICK = "Разместить палку"
-STRINGS.TABS.NAUTICALTAB = "Морское"
 STRINGS.ACTIONS.LANTERNON = "Включить"
+STRINGS.TABS.NAUTICALTAB = "Морское"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Роулинг"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "Это мой приятель!"
@@ -5297,3 +5297,18 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.GROTTO_PARSNIP_GIANT = "Гиганский �
 
 STRINGS.NAMES.FEATHER_CHICKEN = "Перо курицы"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FEATHER_CHICKEN = "Перо курицы."
+
+STRINGS.NAMES.BEAVERTORCH                                  = "Факел Бобра"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH            = "Выглядит уютно."
+
+STRINGS.ACTIONS.GIVE_SHELF                                 = STRINGS.ACTIONS.GIVE.GENERIC
+STRINGS.ACTIONS.SHEAR                                      = "Резать"
+STRINGS.ACTIONS.GAS                                        = "Газ"
+STRINGS.ACTIONS.PAN                                        = "Искать в воде"
+
+STRINGS.NAMES.SEA_YARD                                     = "Морская верфь" --DTR
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_YARD               = "Морская верфь." --DTR
+STRINGS.RECIPE_DESC.SEA_YARD                               = "Морская верфь" --DTR
+
+STRINGS.NAMES.PORTO_SEA_YARD                               = "Морская верфь - набор"
+STRINGS.RECIPE_DESC.PORTO_SEA_YARD                         = "Морская верфь"

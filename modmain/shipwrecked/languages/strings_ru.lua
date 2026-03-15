@@ -1,6 +1,0 @@
-STRINGS.NAMES.SEA_YARD = "Морская верфь" --DTR
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_YARD = "Морская верфь." --DTR
-STRINGS.RECIPE_DESC.SEA_YARD = "Морская верфь" --DTR
-
-STRINGS.NAMES.PORTO_SEA_YARD = "Морская верфь - набор"
-STRINGS.RECIPE_DESC.PORTO_SEA_YARD = "Морская верфь"

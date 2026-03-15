@@ -1,3 +1,12 @@
+----------------------------- ACTIONS -----------------------------
+
+STRINGS.ACTIONS.HACK = "Tailler"
+STRINGS.ACTIONS.STICK = "Planter le bâton"
+STRINGS.TABS.NAUTICALTAB = "Nautique"
+STRINGS.ACTIONS.LANTERNON = "Allumer"
+STRINGS.ACTIONS.PEER = "Scruter"
+
+
 -----------------------------UI -----------------------------
 --SW
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL = "Nautical"
@@ -18,11 +27,6 @@ STRINGS.UI.COOKBOOK.TEA = "It warms the body/Provide acceleration effect"
 STRINGS.UI.COOKBOOK.ICEDTEA = "It cools the body/Provide acceleration effect"
 STRINGS.UI.COOKBOOK.NETTLELOSANGE = " Protects you from pollen"
 STRINGS.UI.COOKBOOK.MEATED_NETTLE = " Protects you from pollen"
------------------------------Biome Jungle -----------------------------
-
-
-
-
 
 -----------------------------Biome Tidal Mash---------------------------
 
@@ -1253,14 +1257,7 @@ STRINGS.NAMES.WALL_ENFORCEDLIMESTONE = "Mur de mer"
 STRINGS.RECIPE_DESC.WALL_ENFORCEDLIMESTONE_ITEM = "Segments de mur solides pour construire en mer."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALL_ENFORCEDLIMESTONE = "J'ai payé le prix pour avoir ce qu'on fait de mieux."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WALL_ENFORCEDLIMESTONE_ITEM = "Il faut construire ça dans l'eau."
------------------------------ ACTIONS -----------------------------
 
-STRINGS.ACTIONS.HACK = "Tailler"
-STRINGS.ACTIONS.STICK = "Planter le bâton"
-STRINGS.TABS.NAUTICALTAB = "Nautique"
-STRINGS.ACTIONS.LANTERNON = "Allumer"
-
-STRINGS.ACTIONS.PEER = "Scruter"
 
 ----------------------------- RAWLING -----------------------------
 STRINGS.NAMES.RAWLING = "Basket-boule"
@@ -1324,3 +1321,10 @@ STRINGS.CHARACTERS.GENERIC.PALMLEAF_UMBRELLA = "Parapluie en feuilles de palmier
 STRINGS.RECIPE_DESC.PALMLEAF_UMBRELLA = "Protection tropicale portable & classe."
 
 STRINGS.NAMES.HAWAIIANSHIRT = "Chemise à fleurs"
+
+STRINGS.NAMES.BEAVERTORCH = "Torche de castor"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Ça a l'air confortable.."
+
+STRINGS.NAMES.SEA_YARD = "Chantier naval"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_YARD = "Je vais devoir réalimenter bientôt."
+STRINGS.RECIPE_DESC.SEA_YARD = "Pour maintenir vos bateaux en forme !"

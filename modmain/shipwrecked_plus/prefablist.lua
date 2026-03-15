@@ -6,7 +6,6 @@ PrefabFiles = {
     "panda",            --熊猫
     "pandaskin",        --熊猫皮
     "pandatree",        --巨竹
-
     "goldentomb",       --黄金球
     "goldmonkey",       --黄金猴
     "goldbishop",       --黄金守护者

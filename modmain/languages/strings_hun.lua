@@ -1,3 +1,10 @@
+--------------actions-------
+
+STRINGS.ACTIONS.HACK = "Felvágás"
+STRINGS.ACTIONS.STICK = "Bot"
+STRINGS.ACTIONS.LANTERNON = "Bekapcsol"
+
+
 -----------------------------UI -----------------------------
 --SW
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL = "Nautical"
@@ -1206,12 +1213,8 @@ STRINGS.RECIPE_DESC.GOLDNUGGET = "Gold"
 STRINGS.NAMES.ESCADADOVULCAO2 = "Volcano Exit"
 STRINGS.NAMES.LAVAPONDBIG1 = "Big lava pool"
 --------------store---------
---------------actions-------
 
-STRINGS.ACTIONS.HACK = "Felvágás"
-STRINGS.ACTIONS.STICK = "Bot"
 STRINGS.TABS.NAUTICALTAB = "Tengeri"
-STRINGS.ACTIONS.LANTERNON = "Bekapcsol"
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Wilson labdája"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "Wilson labdája"
@@ -1279,3 +1282,10 @@ STRINGS.NAMES.DROWNING = "Fulladás"
 STRINGS.NAMES.POISON = "Méreg"
 STRINGS.NAMES.BELL = "Old Bell"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "Old Bell."
+
+STRINGS.NAMES.BEAVERTORCH = "Hód Fáklya"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Lakályosan néz ki."
+
+STRINGS.NAMES.SEA_YARD = "Sea Yard"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_YARD = "Sea Yard."
+STRINGS.RECIPE_DESC.SEA_YARD = "Sea Yard"

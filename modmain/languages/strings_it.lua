@@ -1,3 +1,9 @@
+--------------actions-------
+
+STRINGS.ACTIONS.HACK = "Taglia"
+STRINGS.ACTIONS.STICK = "Bastone"
+STRINGS.ACTIONS.LANTERNON = "Turn On"
+
 -----------------------------UI -----------------------------
 --SW
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL = "Nautical"
@@ -1205,13 +1211,8 @@ STRINGS.NAMES.LAVAPONDBIG1 = "Big lava pool"
 STRINGS.NAMES.MERM1 = "Merm"
 STRINGS.NAMES.MERM2 = "Merm"
 --------------store---------
---------------actions-------
 
-STRINGS.ACTIONS.HACK = "Taglia"
-STRINGS.ACTIONS.STICK = "Bastone"
 STRINGS.TABS.NAUTICALTAB = "Nautico"
-STRINGS.ACTIONS.LANTERNON = "Turn On"
-
 --------------rawling speak---------------
 STRINGS.NAMES.RAWLING = "Rowley"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAWLING = "È mio amico."
@@ -1275,3 +1276,10 @@ STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_RETURN = "I think I felt something b
 STRINGS.CHARACTERS.GENERIC.ANNOUNCE_MAPWRAP_WARN = "Here be monsters."
 STRINGS.NAMES.BELL = "Old Bell"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BELL = "Old Bell."
+
+STRINGS.NAMES.BEAVERTORCH = "Beaver Torch"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Sure looks cozy."
+
+STRINGS.NAMES.SEA_YARD = "Sea Yard"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_YARD = "Sea Yard."
+STRINGS.RECIPE_DESC.SEA_YARD = "Sea Yard"

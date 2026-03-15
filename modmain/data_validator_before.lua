@@ -29,19 +29,17 @@ end
 local old_strings = STRINGS
 GLOBAL.STRINGS = deepcopy(old_strings)
 
-for _, m in pairs(pro_modules) do
-    for _, language in ipairs({
-        "pt",
-        "zh",
-        "it",
-        "ru",
-        "sp",
-        "ko",
-        "hun",
-        "fr"
-    }) do
-        prosafemodimport("modmain/" .. m .. "/languages/strings_" .. language, false)
-    end
+for _, language in ipairs({
+    "pt",
+    "zh",
+    "it",
+    "ru",
+    "sp",
+    "ko",
+    "hun",
+    "fr"
+}) do
+    prosafemodimport("modmain/languages/strings_" .. language, false)
 end
 local other_language_strings = STRINGS
 GLOBAL.STRINGS = deepcopy(old_strings)
@@ -55,6 +53,16 @@ LanguageStringCompare(STRINGS, other_language_strings, "STRINGS")
 
 print(string.format("台词比对完成，耗时: %.6f 秒", os.clock() - startTime))
 GLOBAL.STRINGS = old_strings
+
+----------------------------------------------------------------------------------------------------
+
+-- 检查无效预制件的台词
+
+
+
+
+
+
 
 ----------------------------------------------------------------------------------------------------
 -- 检查ACTIONS是否重复定义

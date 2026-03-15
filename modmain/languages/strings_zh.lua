@@ -7319,35 +7319,77 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEAWEEDUNDERWATER = "这就是这里的食�
 
 
 --NOTE: Limit to 7 strings per table！ (Using net_tinybyte for NPC chatter)
-STRINGS.MERM_TALK_FISH                       = { "想要鱼儿。", "布拉特~弗洛特。", "去抓鱼儿。", "格拉特苏~格林。", "鲜活鱼儿。好。", "布勒特~布勒恩。" }
-STRINGS.MERM_TALK_PANIC                      = { "只是想要鱼儿！", "咯啰咯啰咯啰！", "啊！", "咯啰噗噗！", "浮浪噗！浮浪噗！", "呼啰噗特！费特隆！" }
-STRINGS.MERM_TALK_RUNAWAY                    = { "切线！", "弗罗皮~格洛普~格罗普！", "坏东西！坏东西！", "格洛普！格罗皮~格罗普！", "保护鱼儿！",
+STRINGS.MERM_TALK_FISH                               = { "想要鱼儿。", "布拉特~弗洛特。", "去抓鱼儿。", "格拉特苏~格林。", "鲜活鱼儿。好。", "布勒特~布勒恩。" }
+STRINGS.MERM_TALK_PANIC                              = { "只是想要鱼儿！", "咯啰咯啰咯啰！", "啊！", "咯啰噗噗！", "浮浪噗！浮浪噗！", "呼啰噗特！费特隆！" }
+STRINGS.MERM_TALK_RUNAWAY                            = { "切线！", "弗罗皮~格洛普~格罗普！", "坏东西！坏东西！", "格洛普！格罗皮~格罗普！", "保护鱼儿！",
     "格拉特~格拉特~弗罗普！" }
-STRINGS.MERM_TALK_GO_HOME                    = { "和鱼儿睡觉", "沃特~沃特~弗洛特。", "鱼儿朋友。不是食物。", "瓦鲁特~格洛~格洛皮~弗洛特。" }
-STRINGS.MERM_TALK_FIND_FOOD                  = { "食唔！", "噫携~噫携~食唔。", "弗洛提~格拉特。", "这个可以。", "找点好吃的！", "让鱼人族更加强大！" }
+STRINGS.MERM_TALK_GO_HOME                            = { "和鱼儿睡觉", "沃特~沃特~弗洛特。", "鱼儿朋友。不是食物。", "瓦鲁特~格洛~格洛皮~弗洛特。" }
+STRINGS.MERM_TALK_FIND_FOOD                          = { "食唔！", "噫携~噫携~食唔。", "弗洛提~格拉特。", "这个可以。", "找点好吃的！", "让鱼人族更加强大！" }
 
-STRINGS.MERM_TALK_FOLLOWWILSON               = { "会跟着你", "浮浪噗 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "你要帮帮鱼人！",
+STRINGS.MERM_TALK_FOLLOWWILSON                       = { "会跟着你", "浮浪噗 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "你要帮帮鱼人！",
     "格鲁特 格鲁粗 浮鲁噗！", "你好么", "浮浪噗 浮鲁特" }
-STRINGS.MERM_TALK_HELP_CHOP_WOOD             = { "会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "砍, 不停, 砍！",
+STRINGS.MERM_TALK_HELP_CHOP_WOOD                     = { "会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "砍, 不停, 砍！",
     "格浪噗, 格鲁噗, 格浪噗！", "努力干, 浮浪噗！", "格鲁特 布鲁特, 浮浪噗！" }
-STRINGS.MERM_TALK_HELP_MINE_ROCK             = { "会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "打烂石头, 简单！",
+STRINGS.MERM_TALK_HELP_MINE_ROCK                     = { "会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "打烂石头, 简单！",
     "呜尔特 沃噗, 浮浪噗 浮浪特！", "努力干, 浮浪噗！", "格鲁特 布鲁特, 浮浪噗！" }
-STRINGS.MERM_TALK_HELP_HAMMER                = { "会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "锤烂！ 锤烂！",
+STRINGS.MERM_TALK_HELP_HAMMER                        = { "会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "锤烂！ 锤烂！",
     "浮浪浮！ 浮浪浮！", "努力干, 浮浪噗！", "格鲁特 布鲁特, 浮浪噗！" }
 --STRINGS.MERM_TALK_FIND_FOOD      = {"会跟着你", "浮鲁特 格鲁特", "让鱼人族更加强大！", "布鲁特 格浪噗 格鲁粗！", "这个好", "格鲁特 格鲁特 浮鲁特", "找到好吃的！", "格濡特 浮浪噗 浮鲁特！"}
-STRINGS.MERM_BATTLECRY                       = { "格浪噗！ 走开！", "格浪噗！ 格浪噗 咕噜噗！", "灭了你！", "沃尔特 格鲁特！" }
-STRINGS.MERM_GUARD_BATTLECRY                 = { "开打了！", "呜鲁特 浮鲁特！", "为了鱼人族的荣耀！", "浮浪特 格鲁粗 浮鲁特！", "打啊啊啊！！",
+STRINGS.MERM_BATTLECRY                               = { "格浪噗！ 走开！", "格浪噗！ 格浪噗 咕噜噗！", "灭了你！", "沃尔特 格鲁特！" }
+STRINGS.MERM_GUARD_BATTLECRY                         = { "开打了！", "呜鲁特 浮鲁特！", "为了鱼人族的荣耀！", "浮浪特 格鲁粗 浮鲁特！", "打啊啊啊！！",
     "格鲁特 浮浪噗！！", "保卫国王！", "格鲁浮 格鲁特森！" }
-STRINGS.MERM_TALK_PANICBOSS                  = { "什么东西来了！", "格鲁噗 浮浪特！", "呵啊！！ 坏东西！ 坏东西！",
+STRINGS.MERM_TALK_PANICBOSS                          = { "什么东西来了！", "格鲁噗 浮浪特！", "呵啊！！ 坏东西！ 坏东西！",
     "格鲁鲁鲁浮！！ 格鲁浮 格鲁特！ 格鲁浮 格鲁特！", "它来毁灭我们了！", "浮浪特 呜尔特 格鲁粗！" }
-STRINGS.MERM_TALK_PANICBOSS_KING             = { "朝国王汇合！", "格鲁特森 布鲁特 浮浪特！", "快点！ 保护王国！", "浮鲁浮 浮洛特！ 格鲁噗 格鲁特萨姆！",
+STRINGS.MERM_TALK_PANICBOSS_KING                     = { "朝国王汇合！", "格鲁特森 布鲁特 浮浪特！", "快点！ 保护王国！", "浮鲁浮 浮洛特！ 格鲁噗 格鲁特萨姆！",
     "不、不要害怕！！", "格、格鲁噗 布鲁特 浮洛特！！" }
 
-STRINGS.MERM_KING_TALK_HUNGER_STARVING       = "饿了... 饿了！ 饿了了了！！！"
-STRINGS.MERM_KING_TALK_HUNGER_CLOSE_STARVING = "简直是背叛... 简直有罪！ 让朕饿了这么久..."
-STRINGS.MERM_KING_TALK_HUNGER_VERY_HUNGRY    = "怎么这么久？ 朕要用膳！"
-STRINGS.MERM_KING_TALK_HUNGER_HUNGRY         = "朕要用膳！"
-STRINGS.MERM_KING_TALK_HUNGER_HUNGRISH       = "朕有点饿了..."
-STRINGS.MERM_KING_TALK_HUNGER_FULL           = "你做的很好，退下吧。"
+STRINGS.MERM_KING_TALK_HUNGER_STARVING               = "饿了... 饿了！ 饿了了了！！！"
+STRINGS.MERM_KING_TALK_HUNGER_CLOSE_STARVING         = "简直是背叛... 简直有罪！ 让朕饿了这么久..."
+STRINGS.MERM_KING_TALK_HUNGER_VERY_HUNGRY            = "怎么这么久？ 朕要用膳！"
+STRINGS.MERM_KING_TALK_HUNGER_HUNGRY                 = "朕要用膳！"
+STRINGS.MERM_KING_TALK_HUNGER_HUNGRISH               = "朕有点饿了..."
+STRINGS.MERM_KING_TALK_HUNGER_FULL                   = "你做的很好，退下吧。"
 
-STRINGS.NAMES.CONSTRUCTION_PERMIT            = "房屋扩建许可证"
+STRINGS.NAMES.CONSTRUCTION_PERMIT                    = "房屋扩建许可证"
+
+STRINGS.NAMES.BEAVERTORCH                            = "海狸火炬"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH      = "看起来很舒适。"
+
+STRINGS.ACTIONS.GIVE_SHELF                           = STRINGS.ACTIONS.GIVE.GENERIC
+STRINGS.ACTIONS.SHEAR                                = "剪"
+STRINGS.ACTIONS.TAKE_SHELF                           = {
+    GENERIC = "拿取",
+    TAKE = "拿取{item}",
+    STEAL = "偷走{item}",
+    BUY = "购买{item}",
+}
+STRINGS.ACTIONS.GAS                                  = "喷"
+STRINGS.ACTIONS.PAN                                  = "淘金"
+STRINGS.ACTIONS.MEAL                                 = "meal"
+STRINGS.ACTIONS.SNACKRIFICE                          = "献贡"
+
+STRINGS.NAMES.SEA_YARD                               = "修船码头"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SEA_YARD         = "它可以修好我的船！"
+STRINGS.RECIPE_DESC.SEA_YARD                         = "自动修船器！"
+
+STRINGS.NAMES.PORTO_SEA_YARD                         = "修船码头套装"
+STRINGS.RECIPE_DESC.PORTO_SEA_YARD                   = "自动修船器。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_SEA_YARD   = "用于保持我的船只状态良好。"
+
+STRINGS.NAMES.MESSAGEBOTTLE_SW                       = "漂流瓶"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MESSAGEBOTTLE_SW = "有人给我写了张纸条！"
+
+STRINGS.NAMES.MANGROVETREE                           = "红树"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MANGROVETREE     = "我想知道它能获得充足的水分吗？"
+
+STRINGS.NAMES.SPEARGUN                               = "矛枪"
+STRINGS.RECIPE_DESC.SPEARGUN                         = "没这个绝不出海！"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPEARGUN         = "噢，想想我能用这个干的事！"
+
+STRINGS.NAMES.SPEARGUN_POISON                        = "毒矛枪"
+STRINGS.RECIPE_DESC.SPEARGUN_POISON                  = "剧毒一击！"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPEARGUN_POISON  = "尖端带毒。"
+
+STRINGS.NAMES.OBSIDIANSPEARGUN                       = "黑曜石矛枪"
+STRINGS.RECIPE_DESC.OBSIDIANSPEARGUN                 = "炽热一击！"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANSPEARGUN = "尖端冒火。"

@@ -13,6 +13,3 @@ modimport("postinit/components/colourcube")
 modimport("postinit/components/dynamicmusic")
 ---modimport("postinit/components/wavemanager")波浪管理***
 ---modimport("postinit/components/worldstate")世界状态***
-
-
----------------------prefabs------------------------------

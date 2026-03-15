@@ -62,7 +62,7 @@ end
 modimport "modmain/postinit" --TODO 拆到各个模块中
 
 modimport "modmain/soundemitter"
-modimport "modmain/modules" --模块导入
+modimport "modmain/modules"   --模块导入
 ----------------------------------------------------------------------------------------------------
 
 if proisdev then
