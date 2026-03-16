@@ -26,7 +26,7 @@ modimport "modmain/map/spawnutil.lua"
 
 
 -- 当配置项加载好后，才能访问TUNING.tropical检查哪些模块启用了
-function ProOnConfigLoaded()
+function TroOnConfigLoaded()
     modimport "modmain/gentuning"
     troimportmodulefile "map/terrain" --植物生成地形限制
     troimportmodulefile "tiledefs"    --定义新地皮
@@ -53,7 +53,7 @@ end
 --生成世界需要用到的内容
 local is_worldgen = rawget(_G, "WORLDGEN_MAIN") ~= nil
 if is_worldgen then
-    ProOnConfigLoaded()
+    TroOnConfigLoaded()
 
     modimport "modmain/map/storygen.lua"     --标签处理函数
     troimportmodulefile "map/lockandkey"     --地形锁钥

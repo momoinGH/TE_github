@@ -4,7 +4,6 @@ modimport 'tiledescription.lua'
 
 local newTilesProperties = SetInfo() --Loading data from tiledescription.lua
 local minStartID = 33                -- 1-32 is reserved by game
-local Utils = require("tropical_utils/utils")
 
 print("Strating Tileadder")
 

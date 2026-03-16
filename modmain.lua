@@ -6,8 +6,6 @@ trodevassert：仅开发环境崩溃的断言
 trosafemodimport：允许一个文件重复导入，不会崩溃
 troimportmodulefile：提供一个模块目录下的相对路径，自动导入启用的所有模块的文件
 
-TroAddComponentAction：添加ComponentAction，允许组件行为重复
-
 TroRemapLayoutTile：重新映射layout里地皮id对应的地皮
 
 TroRemapSound：重新映射音效路径
@@ -16,27 +14,17 @@ TroRemapOverrideSymbol：对每个预制件的OverrideSymbol的参数重新映�
 
 TUNING.tropical mod设置数据
 TUNING.TE_WORLDGEN 世界生成相关数据
+
+每个模块自动导入的文件：
+tuning、prefablist、assets、containers、ui、prefabpost、sg、recipes、cooking、rpc、input、skins
+
 ]]
+
 
 ----------------------------------------------------------------------------------------------------
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
-Utils = require("tropical_utils/utils")
 Constructor = require("tropical_utils/constructor")
 Constructor.SetEnv(env)
-
-local TRO_COMPONENT_ACTIONS = {
-    SCENE = {},
-    USEITEM = {},
-    POINT = {},
-    EQUIPPED = {},
-    INVENTORY = {}
-}
-
--- 封装的AddComponentAction，同样的type和组件也不会被覆盖
-function TroAddComponentAction(actiontype, component, fn)
-    TRO_COMPONENT_ACTIONS[actiontype][component] = TRO_COMPONENT_ACTIONS[actiontype][component] or {}
-    table.insert(TRO_COMPONENT_ACTIONS[actiontype][component], fn)
-end
 
 -- 允许一个文件重复导入，这样多个模块导入同一个文件就不会执行多次了
 local modulename_loaded = {}
@@ -53,32 +41,94 @@ env.modimport = function(modulename, ...)
 end
 
 ----------------------------------------------------------------------------------------------------
-ProOnConfigLoaded()
+TroOnConfigLoaded()
 modimport "modmain/knownmodcheck"             -- 检测不兼容模组并报错崩溃
 modimport "modmain/mods"                      -- 兼容其他mod
 if troisdev then
     modimport "modmain/data_validator_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 
--- 共同
-modimport "modmain/postinit" --TODO 拆到各个模块中
-
+modimport "modmain/postinit"  --TODO 拆分一下
+modimport "modmain/animstate" -- AnimState 增强
 modimport "modmain/soundemitter"
-modimport "modmain/modules" --模块导入
+
+-- 文本
+local language = string.lower(GetModConfigData("language"))
+trosafemodimport("modmain/languages/strings_en") --英文版本兜底，不使用的台词不应该添加
+trosafemodimport("modmain/languages/strings_" .. language)
+trosafemodimport("modmain/languages/modwiki_zh") -- 其他语言的wiki先不管
+
+
+troimportmodulefile("tuning") --定义的常量
+
+
+modimport("modmain/constants")        --一些全局变量、全局函数
+modimport("modmain/actions")          --action相关
+modimport("modmain/actions_post")     --修改原版action
+modimport("modmain/componentactions") --componentactions相关
+
+
+--PrefabFiles
+local ALL_PREFAB_FILES = PrefabFiles or {}
+troimportmodulefile("prefablist", false, function()
+    PrefabFiles = {}
+end, function()
+    -- 检查PrefabFiles里有没有写重复
+    -- 不是很实用，因为有些独立的模块可以table.insert(PrefabFiles)来增加自己需要的预制件，这个检查时不时开一下就行
+    -- local prefabs_dirty = {}
+    -- for _, prefab in ipairs(PrefabFiles) do
+    --     if prefabs_dirty[prefab] then
+    --         TroErrorHandle(dirc .. "模块的PrefabFiles里预制件写重了，写重的是" .. prefab, false, false)
+    --     end
+    --     prefabs_dirty[prefab] = true
+    -- end
+
+    ALL_PREFAB_FILES = ArrayUnion(ALL_PREFAB_FILES, PrefabFiles)
+end)
+PrefabFiles = ALL_PREFAB_FILES
+ALL_PREFAB_FILES = nil
+
+
+--注册全局资产
+local ALL_ASSETS = Assets or {}
+troimportmodulefile("assets", false, function()
+    Assets = {}
+end, function()
+    -- 检查Assets里有没有写重复
+    -- local assets_dirty = {}
+    -- for _, asset in ipairs(Assets) do
+    --     local s = asset.type .. ":" .. asset.file
+    --     if assets_dirty[s] then
+    --         TroErrorHandle(dirc .. "模块的Assets里预制件写重了，写重的是" .. s, false, false)
+    --     end
+    --     assets_dirty[s] = true
+    -- end
+    ConcatArrays(ALL_ASSETS, Assets)
+end)
+Assets = ALL_ASSETS
+ALL_ASSETS = nil
+
+
+troimportmodulefile("containers") --定义容器
+troimportmodulefile("ui")         --UI相关
+troimportmodulefile("prefabpost") --组件、预制件的修改
+troimportmodulefile("sg")         --Stategraph相关
+troimportmodulefile("recipes")    --配方相关
+troimportmodulefile("cooking")    --料理相关
+troimportmodulefile("rpc")        --RPC的注册
+troimportmodulefile("input")      --客机操作的监听
+troimportmodulefile("skins")      --物品皮肤
+
+
+modimport("modmain/scrapbookwiki") -- 图鉴wiki
+modimport("modmain/character")     --添加角色，角色相关变量定义
+modimport("modmain/fx")            --特效
+
 ----------------------------------------------------------------------------------------------------
 
 if troisdev then
     modimport "modmain/data_validator_after" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
-
-for actiontype, components in pairs(TRO_COMPONENT_ACTIONS) do
-    for component, fns in pairs(components) do
-        AddComponentAction(actiontype, component, function(...)
-            for _, fn in ipairs(fns) do fn(...) end
-        end)
-    end
-end
-TRO_COMPONENT_ACTIONS = nil
 
 env.modimport = old_modimport
 old_modimport = nil

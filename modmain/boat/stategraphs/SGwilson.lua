@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 -- 源代码拷贝
 local function ConfigureRunState(inst)
     if inst.components.rider:IsRiding() then

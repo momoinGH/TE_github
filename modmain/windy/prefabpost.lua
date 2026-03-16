@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 local function HarvestBefore(self, harvester)
     if self.product_prefab ~= "peach" then return end
     if not self.matured then

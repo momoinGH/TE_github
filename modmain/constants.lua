@@ -163,3 +163,7 @@ function TroCanResistHamletFog(player)
 end
 
 GLOBAL.TroCanResistHamletFog = TroCanResistHamletFog
+
+
+-- 伤害类型
+DAMAGETYPES = { PHYSICAL = 1, MAGIC = 2 }

@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 local is_print_click_actions = false
 
 -- 打印左键和右键的Action，本地执行

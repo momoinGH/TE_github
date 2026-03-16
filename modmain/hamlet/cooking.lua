@@ -1,4 +1,3 @@
-local Utils = require("tropical_utils/utils")
 local cooking = require("cooking")
 local ingredients = cooking.ingredients
 

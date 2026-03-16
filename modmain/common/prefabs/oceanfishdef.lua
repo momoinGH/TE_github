@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 local SCHOOL_SIZE = {
     TINY = { min = 1, max = 3 },
     SMALL = { min = 2, max = 5 },

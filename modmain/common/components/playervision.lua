@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 -- 新增
 local NIGHTVISION_COLOURCUBES2 =
 {

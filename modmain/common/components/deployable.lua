@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 local function IsSpecialTile(tile)
     local isCave = TheWorld:HasTag("cave")
     return tile == WORLD_TILES.UNDERWATER_SANDY

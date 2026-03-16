@@ -1,6 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
-
 -- 调试焦点
 -- TUNING.TX = 0
 -- TUNING.TY = 0

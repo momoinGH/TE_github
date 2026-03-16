@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 local function IsChannelCasting(inst)
     --essentially prediction, since the actions aren't busy w/ lag states
     local buffaction = inst.sg.mem.preview_channelcast_action

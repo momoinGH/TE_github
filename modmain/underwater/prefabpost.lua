@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 AddPrefabPostInitAny(function(inst)
     if not TheWorld.ismastersim then return end
 

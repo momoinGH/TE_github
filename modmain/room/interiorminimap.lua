@@ -16,11 +16,9 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-local Utils = require("tropical_utils/utils")
 local Image = require "widgets/image"
 local MINIMAP_DEFS = require("tro_minimapdefs")
 local RoomUtils = require("tropical_utils/room_utils")
-local Widget = require "widgets/widget"
 
 -- 拟定的房子大小
 local WORLD_TO_MAP_SCALE = 10

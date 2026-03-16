@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 local function UpdateGroundSpeedMultiplierAfter(retTab, self)
     local x, y, z = self.inst.Transform:GetWorldPosition()
     local oncreep = TheWorld.GroundCreep:OnCreep(x, y, z)

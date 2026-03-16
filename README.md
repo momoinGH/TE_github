@@ -7,8 +7,7 @@ tro_作为公共模块前缀，新的命名建议都用这个作为前缀
 
 
 添加ComponentAction：
-1. 建议在每个模块的componentactions.lua文件里添加，调用TroAddComponentAction方法来添加
-2. 如果发现现有ACTION不满足自己的需求，并且需求只为了几个预制件服务，可以用一个比较通用的组件tro_componentaction，这个组件在预制件文件里主客机共有的地方添加，代码简便
+1. 如果发现现有ACTION不满足自己的需求，并且需求只为了几个预制件服务，可以用一个比较通用的组件tro_componentaction，这个组件在预制件文件里主客机共有的地方添加，代码简便
 
 
 覆盖原有组件或预制件：

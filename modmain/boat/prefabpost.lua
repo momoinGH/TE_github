@@ -1,5 +1,3 @@
-Utils = require("tropical_utils/utils")
-
 AddReplicableComponent("tro_driver")
 
 

@@ -1,5 +1,3 @@
-local Utils = require("tropical_utils/utils")
-
 local relative_temperature_thresholds = { -30, -10, 10, 30 }
 local function GetRangeForTemperature(temp, ambient)
     local range = 1

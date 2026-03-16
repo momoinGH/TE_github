@@ -24,7 +24,6 @@ AddClassPostConstruct("components/embarker", function(self)
     end
 end)]]
 
-local Utils = require("tropical_utils/utils")
 -- 直接让玩家跳到海难小船中心位置，天才！
 local function GetEmbarkPositionBefore(self)
     local boat = self.embarkable

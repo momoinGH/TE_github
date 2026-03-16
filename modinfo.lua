@@ -105,7 +105,7 @@ local LEVELCATEGORY = {
 }
 
 tro_modules = {
-    common           = "common",           -- 共同
+    common           = "common",           -- 包含单机巨人国以及原版内容的一些hook
     room             = "room",             --小房子，以及在地图外生成相关
     boat             = "boat",             --海难小船
     windy            = "windy",            -- 大风平原

@@ -94,7 +94,7 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-function troimportmodulefile(path, is_load_all)
+function troimportmodulefile(path, is_load_all, load_before_fn, load_after_fn)
     assert(type(path) == "string" and not string.starts(path, "modmain"), "path需要是模块下的相对路径！path：" .. tostring(path))
 
     if not string.starts(path, "/") then
@@ -102,7 +102,13 @@ function troimportmodulefile(path, is_load_all)
     end
     for _, m in pairs(tro_modules) do
         if is_load_all or m == tro_modules.common or TUNING.tropical[m] then --根据配置项决定是否读取
+            if load_before_fn then
+                load_before_fn(m)
+            end
             trosafemodimport("modmain/" .. m .. path)
+            if load_after_fn then
+                load_after_fn(m)
+            end
         end
     end
 end
