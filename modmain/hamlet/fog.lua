@@ -26,7 +26,7 @@ AddPlayerPostInit(function(inst)
 end)
 
 ----------------------------------------------------------------------------------------------------
-
+local GROGGINESS_DECAY_RATE = .01
 AddComponentPostInit("grogginess", function(self)
     local OldAddGrogginess = self.AddGrogginess
     --雾气开始减速
@@ -39,7 +39,7 @@ AddComponentPostInit("grogginess", function(self)
     end
 
     function self:ProStopFoggrog()
-        self:SetDecayRate(TUNING.GROGGINESS_DECAY_RATE)
+        self:SetDecayRate(GROGGINESS_DECAY_RATE)
     end
 end)
 

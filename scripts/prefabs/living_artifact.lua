@@ -1,7 +1,6 @@
 local Badge = require "widgets/badge"
 
 local IRON_LORD_DAMAGE = 68
--- local IRON_LORD_TIME = 180
 local IRON_LORD_SPEED_MULT = 1.35
 
 local assets = {Asset("ANIM", "anim/living_artifact.zip"), Asset("ANIM", "anim/living_suit_build.zip"),

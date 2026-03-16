@@ -5,6 +5,8 @@ local assets =
 
 local brain = require "brains/tfwp_elementalbrain"
 
+local TFWP_ELEMENTAL = { HEALTH = 50, DAMAGE = 5, RANGE = 15, ATTACK_PERIOD = 0.7, }
+
 local function MakeWeapon(inst)
     local weapon = CreateEntity()
 
@@ -12,7 +14,7 @@ local function MakeWeapon(inst)
 
     weapon:AddComponent("weapon")
     weapon.components.weapon:SetDamage(25)
-    weapon.components.weapon:SetRange(TUNING.TFWP_ELEMENTAL.RANGE, TUNING.TFWP_ELEMENTAL.RANGE + 2)
+    weapon.components.weapon:SetRange(TFWP_ELEMENTAL.RANGE, TFWP_ELEMENTAL.RANGE + 2)
     weapon.components.weapon:SetProjectile("fireball_projectile")
 
     weapon:AddComponent("inventoryitem")
@@ -35,10 +37,10 @@ local function master_postinit(inst)
 
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(25)
-    inst.components.combat:SetAttackPeriod(TUNING.TFWP_ELEMENTAL.ATTACK_PERIOD)
+    inst.components.combat:SetAttackPeriod(TFWP_ELEMENTAL.ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(3, retargetfn)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
-    inst.components.combat:SetRange(TUNING.TFWP_ELEMENTAL.RANGE * 1.3)
+    inst.components.combat:SetRange(TFWP_ELEMENTAL.RANGE * 1.3)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventory")

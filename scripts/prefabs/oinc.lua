@@ -23,10 +23,10 @@ local function onwake(inst)
 end
 
 local function GetOincAllValue(inst)
-    return GetStackSize(inst) * inst.oinc_value
+    return GetStackSize(inst) * TUNING.OINCS[inst.prefab]
 end
 
-local function MakeOinc(name, value, build, assets)
+local function MakeOinc(name, build, assets)
     local function fn()
         local inst = CreateEntity()
 
@@ -48,7 +48,6 @@ local function MakeOinc(name, value, build, assets)
         inst:AddTag("molebait")
         inst:AddTag("oinc")
 
-        inst.oinc_value = value
         inst.GetOincAllValue = GetOincAllValue
 
         inst.entity:SetPristine()
@@ -79,6 +78,6 @@ local function MakeOinc(name, value, build, assets)
     return Prefab(name, fn, assets)
 end
 
-return MakeOinc("oinc", 1, "pig_coin", assets1),
-    MakeOinc("oinc10", 10, "pig_coin_silver", assets10),
-    MakeOinc("oinc100", 100, "pig_coin_jade", assets100)
+return MakeOinc("oinc", "pig_coin", assets1),
+    MakeOinc("oinc10", "pig_coin_silver", assets10),
+    MakeOinc("oinc100", "pig_coin_jade", assets100)

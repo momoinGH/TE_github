@@ -1,7 +1,6 @@
 local dusk_time = 120
 local night_time = 60
 --local BOAT_TORCH_LIGHTTIME = night_time * 1.75
---local BOAT_LANTERN_LIGHTTIME = (night_time + dusk_time) * 2.6
 --local BOTTLE_LANTERN_LIGHTTIME = (night_time + dusk_time) * 2.6
 
 local assets =

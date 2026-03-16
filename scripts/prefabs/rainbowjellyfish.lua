@@ -161,6 +161,11 @@ end
 
 --[[ end of LIGHT EMITTING BENEFITS ]] --
 
+local RAINBOWJELLYFISH_WEIGHTS = {
+    min = 69.36,
+    max = 118.21,
+}
+
 local function defaultfn(sim)
     local inst = CreateEntity()
     inst.entity:AddTransform()
@@ -221,8 +226,8 @@ local function defaultfn(sim)
 
 	--[[inst:AddComponent("weighable")
 	inst.components.weighable.type = TROPHYSCALE_TYPES.FISH
-	inst.components.weighable:Initialize(TUNING.RAINBOWJELLYFISH_WEIGHTS.min, TUNING.RAINBOWJELLYFISH_WEIGHTS.max)
-	inst.components.weighable:SetWeight(Lerp(TUNING.RAINBOWJELLYFISH_WEIGHTS.min, TUNING.RAINBOWJELLYFISH_WEIGHTS.max, CalcNewSize()))]]
+	inst.components.weighable:Initialize(RAINBOWJELLYFISH_WEIGHTS.min, RAINBOWJELLYFISH_WEIGHTS.max)
+	inst.components.weighable:SetWeight(Lerp(RAINBOWJELLYFISH_WEIGHTS.min, RAINBOWJELLYFISH_WEIGHTS.max, CalcNewSize()))]]
 
     MakeHauntableLaunchAndPerish(inst)
 

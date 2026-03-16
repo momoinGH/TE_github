@@ -76,6 +76,11 @@ local function onpickup(inst, pickupguy)
     end
 end
 
+local JELLYFISH_WEIGHTS = {
+    min = 61.55,
+    max = 90.11,
+}
+
 local function defaultfn(sim)
     local inst = CreateEntity()
     inst.entity:AddTransform()
@@ -135,8 +140,8 @@ local function defaultfn(sim)
 
     --[[inst:AddComponent("weighable")
 	inst.components.weighable.type = TROPHYSCALE_TYPES.FISH
-	inst.components.weighable:Initialize(TUNING.JELLYFISH_WEIGHTS.min, TUNING.JELLYFISH_WEIGHTS.max)
-	inst.components.weighable:SetWeight(Lerp(TUNING.JELLYFISH_WEIGHTS.min, TUNING.JELLYFISH_WEIGHTS.max, CalcNewSize()))]]
+	inst.components.weighable:Initialize(JELLYFISH_WEIGHTS.min, JELLYFISH_WEIGHTS.max)
+	inst.components.weighable:SetWeight(Lerp(JELLYFISH_WEIGHTS.min, JELLYFISH_WEIGHTS.max, CalcNewSize()))]]
 
     MakeHauntableLaunchAndPerish(inst)
 

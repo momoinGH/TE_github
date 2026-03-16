@@ -244,7 +244,7 @@ local function MakeHat(name)
 
         inst:AddComponent("fueled")
         inst.components.fueled.fueltype = FUELTYPE.BLOOD
-        inst.components.fueled:InitializeFuelLevel(TUNING.BATHAT_PERISHTIME)
+        inst.components.fueled:InitializeFuelLevel(TUNING.TOTAL_DAY_TIME * 2)
         inst.components.fueled:SetDepletedFn(bat_perish)
         inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
         inst.components.fueled.accepting = true

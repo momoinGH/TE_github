@@ -106,6 +106,8 @@ local LIGHTS =
     }
 }
 
+local TROPICAL_DECO_RUINS_BEAM_WORK = 6
+
 local prefabs =
 {
     "swinglightobject",
@@ -175,7 +177,7 @@ end
 
 local function updateartworkable(inst, instant)
     local workleft = inst.components.workable.workleft
-    local animlevel = workleft / TUNING.TROPICAL_DECO_RUINS_BEAM_WORK
+    local animlevel = workleft / TROPICAL_DECO_RUINS_BEAM_WORK
     if animlevel <= 0 then
         if not instant then
             inst.AnimState:PlayAnimation("pillar_front_crumble")
@@ -506,8 +508,8 @@ function decofn(build, bank, animframe, data, name)
         if data.workable then
             inst:AddComponent("workable")
             inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-            inst.components.workable:SetWorkLeft(TUNING.TROPICAL_DECO_RUINS_BEAM_WORK)
-            inst.components.workable:SetMaxWork(TUNING.TROPICAL_DECO_RUINS_BEAM_WORK)
+            inst.components.workable:SetWorkLeft(TROPICAL_DECO_RUINS_BEAM_WORK)
+            inst.components.workable:SetMaxWork(TROPICAL_DECO_RUINS_BEAM_WORK)
             inst.components.workable.savestate = true --应该保存吗？
             inst.components.workable:SetOnWorkCallback(OnWorkCallback)
             inst.updateworkableart = true
