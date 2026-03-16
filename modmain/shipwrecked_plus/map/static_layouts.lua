@@ -7,7 +7,7 @@ Layouts["vacation"] = StaticLayout.Get("map/static_layouts/vacation", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-ProRemapLayoutTile("vacation", {
+TroRemapLayoutTile("vacation", {
     [6] = WORLD_TILES.BEACH
 })
 

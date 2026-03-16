@@ -277,13 +277,13 @@ Constructor.AddAction({ priority = 11, rmb = true, distance = 4, mount_valid = f
     STRINGS.ACTIONS.TRO_DISMANTLE,
     function(act)
         if act.target ~= nil and
-            act.target.components.pro_portablestructure ~= nil and
+            act.target.components.tro_portablestructure ~= nil and
             not (act.target.components.burnable ~= nil and act.target.components.burnable:IsBurning()) then
             if act.target.candismantle and not act.target:candismantle() then
                 return false
             end
         end
-        return act.target.components.pro_portablestructure:Dismantle(act.doer)
+        return act.target.components.tro_portablestructure:Dismantle(act.doer)
     end
 )
 

@@ -7,7 +7,7 @@ table.insert(Assets, Asset("ATLAS", "images/overlays/fog.xml"))
 AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then return end
 
-    inst:AddComponent("pro_hamlet_fogspawner") --大雾生成
+    inst:AddComponent("tro_hamlet_fogspawner") --大雾生成
 end)
 
 
@@ -55,7 +55,7 @@ AddClassPostConstruct("screens/playerhud", function(self)
 
     Hooks.FnDecorator(self, "SetMainCharacter", nil, function(retTab, self, maincharacter)
         if not maincharacter then return retTab end
-        self.inst:ListenForEvent("pro_fogchange", function(inst, data) return self.fogover:OnFogStateChange() end, self.owner)
+        self.inst:ListenForEvent("tro_fogchange", function(inst, data) return self.fogover:OnFogStateChange() end, self.owner)
         return retTab
     end)
 end)

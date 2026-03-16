@@ -2,7 +2,7 @@ local Layouts = require("map/layouts").Layouts
 local StaticLayout = require("map/static_layout")
 
 -- 重新映射布局中ground的数字对应的地皮，由于每个layout.ground_types都是独立的，所以覆盖也没问题
-function ProRemapLayoutTile(layout_name, map)
+function TroRemapLayoutTile(layout_name, map)
     local layout = Layouts[layout_name]
     for i, tile_id in pairs(map) do
         while #layout.ground_types < i do
@@ -18,7 +18,7 @@ Layouts["lobby"] = StaticLayout.Get("map/static_layouts/lobby", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-ProRemapLayoutTile("lobby", {
+TroRemapLayoutTile("lobby", {
     [2] = WORLD_TILES.COBBLEROAD,
 })
 

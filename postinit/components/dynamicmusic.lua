@@ -43,7 +43,7 @@ local soundremap = {
 
 
 -- for k, v in pairs(soundremap.shipwrecked) do
---     RemapSoundEvent(k, v)
+--     TroRemapSound(k, v)
 -- end
 
 local BUSYTHEMES = nil
@@ -81,19 +81,19 @@ AddComponentPostInit("dynamicmusic", function(self, inst)
                 -- print "in hamlet"
                 BUSYTHEMES.FOREST = BUSYTHEMES.HAMLET
                 for k, v in pairs(soundremap.hamlet) do
-                    RemapSound(k, v)
+                    TroRemapSound(k, v)
                 end
             elseif _activatedplayer:IsInShipwreckedArea() then
                 -- print "in shipwrecked"
                 BUSYTHEMES.FOREST = BUSYTHEMES.SHIPWRECCKED
                 for k, v in pairs(soundremap.shipwrecked) do
-                    RemapSound(k, v)
+                    TroRemapSound(k, v)
                 end
             else
                 -- print "in neither"
                 BUSYTHEMES.FOREST = BUSYTHEMES.ROG
                 for k, v in pairs(soundremap.shipwrecked) do
-                    RemapSound(k, nil)
+                    TroRemapSound(k, nil)
                 end
             end
         end

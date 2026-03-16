@@ -60,7 +60,7 @@ local function fn(Sim)
 
 	inst:AddTag("magnifying_glass")
 
-	inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheck, "investigate", "SPY", OnUse)
+    inst:AddComponent("tro_componentaction"):InitUSEITEM(TargetCheck, "investigate", "SPY", OnUse)
 
 	inst.entity:SetPristine()
 

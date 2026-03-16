@@ -130,13 +130,13 @@ local overridesymbol_maps = {}
 ---@param prefab_name string
 ---@param need_symbol string
 ---@param get_fn function 参数为(inst, swap_build, swap_symbol)，返回值为swap_build, swap_symbol
-function ProRemapOverrideSymbol(prefab_name, need_symbol, get_fn)
+function TroRemapOverrideSymbol(prefab_name, need_symbol, get_fn)
     assert(type(prefab_name) == "string" and type(need_symbol) == "string" and type(get_fn) == "function")
     overridesymbol_maps[prefab_name] = overridesymbol_maps[prefab_name] or {}
     overridesymbol_maps[prefab_name][need_symbol] = get_fn
 end
 
-GLOBAL.ProRemapOverrideSymbol = ProRemapOverrideSymbol
+GLOBAL.TroRemapOverrideSymbol = TroRemapOverrideSymbol
 
 local OldOverrideSymbol = AnimState.OverrideSymbol
 function AnimState:OverrideSymbol(symbol, swap_build, swap_symbol, ...)

@@ -54,7 +54,7 @@ end
 
 ---链式查询上值，找不到就返回nil，应该比上面那个更常用，因为这个是链式的
 function FN.FindUpvalue(fn, ...)
-    if not prodevassert(type(fn) == "function", "第一个参数必须是函数") then
+    if not trodevassert(type(fn) == "function", "第一个参数必须是函数") then
         return nil, nil, nil
     end
 
@@ -73,8 +73,8 @@ end
 --- 替换上值，参数为路径，最后一个参数为要替换的新值
 function FN.SetUpvalue(fn, ...)
     local args = { ... }
-    if not prodevassert(#args >= 2, "至少需要两个参数：函数和要设置的路径")
-        or not prodevassert(type(fn) == "function", "第一个参数必须是函数") then
+    if not trodevassert(#args >= 2, "至少需要两个参数：函数和要设置的路径")
+        or not trodevassert(type(fn) == "function", "第一个参数必须是函数") then
         return false
     end
 

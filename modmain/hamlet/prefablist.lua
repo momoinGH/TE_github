@@ -87,7 +87,7 @@ PrefabFiles = {
     "bill_quill",           --鸭嘴豪猪毛刺
     "bill",                 --鸭嘴豪猪
     "birds_ham",            --鸟
-    "pro_antler",           --鸟笛
+    "tro_antler",           --鸟笛
     "blunderbuss",          --喇叭前膛枪
     "bonestaff",            --蛇骨法杖
     "bramble_bulb",         --荆棘花苞

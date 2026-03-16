@@ -15,13 +15,13 @@ end
 
 -- 在玩家下线前把船脱离出来，因为船作为child不会进行保存
 local function OnDespawnBefore(inst)
-    inst.components.pro_driver:SetBoat()
+    inst.components.tro_driver:SetBoat()
 end
 
 AddPlayerPostInit(function(inst)
     if not TheWorld.ismastersim then return end
 
-    inst:AddComponent("pro_driver")
+    inst:AddComponent("tro_driver")
 
     inst:ListenForEvent("locomote", OnLocomote)
 

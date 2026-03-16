@@ -1160,7 +1160,7 @@ TRO_LAND_TILES = {}
 
 for tile, def in pairs(tro_tiledefs) do
     if WORLD_TILES[tile] then
-        ProErrorHandle("地皮重复定义" .. tostring(tile), false, false)
+        TroErrorHandle("地皮重复定义" .. tostring(tile), false, false)
         return
     end
 

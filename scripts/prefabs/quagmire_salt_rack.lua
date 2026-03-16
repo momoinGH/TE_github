@@ -84,7 +84,7 @@ local function itemfn()
     inst:AddTag("salty")
     inst:AddTag("saltrack")
 
-    inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheckFn, ConsumableState, "INSTALL", Use)
+    inst:AddComponent("tro_componentaction"):InitUSEITEM(TargetCheckFn, ConsumableState, "INSTALL", Use)
 
     inst.entity:SetPristine()
 

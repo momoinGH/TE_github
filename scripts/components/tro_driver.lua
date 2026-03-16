@@ -1,9 +1,9 @@
 local function ClearBoat(inst, data)
-    inst.components.pro_driver:SetBoat(nil)
+    inst.components.tro_driver:SetBoat(nil)
 end
 
 local function onboat(self, boat)
-    self.inst.replica.pro_driver:SetBoat(boat)
+    self.inst.replica.tro_driver:SetBoat(boat)
 end
 
 --- 海难小船行驶组件
@@ -67,7 +67,7 @@ end
 
 -- 小船抗伤
 local function PlayerRedirectDamage(inst, attacker, damage, weapon, stimuli)
-    local boat = inst.components.pro_driver.boat
+    local boat = inst.components.tro_driver.boat
     return boat
         and boat:IsValid()
         and not IsEntityDead(boat)

@@ -39,7 +39,7 @@ local function fn()
     inst.AnimState:SetBuild("quagmire_slaughtertool")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheck, ConsumableState, "KILLSOFTLY", OnUse)
+    inst:AddComponent("tro_componentaction"):InitUSEITEM(TargetCheck, ConsumableState, "KILLSOFTLY", OnUse)
 
     inst.entity:SetPristine()
 

@@ -25,7 +25,7 @@ local function LanguageStringCompare(en_tab, other_tab, prefix)
                 end
             end
             if not should_ignore then
-                ProErrorHandle("英文台词缺失：" .. prefix .. "." .. k, false, false)
+                TroErrorHandle("英文台词缺失：" .. prefix .. "." .. k, false, false)
             end
         elseif t == "table" then
             LanguageStringCompare(en_tab[k], v, prefix .. "." .. k)
@@ -36,13 +36,13 @@ end
 local old_strings = STRINGS
 GLOBAL.STRINGS = deepcopy(old_strings)
 
-for _, language in ipairs(pro_languages) do
-    prosafemodimport("modmain/languages/strings_" .. language, false)
+for _, language in ipairs(tro_languages) do
+    trosafemodimport("modmain/languages/strings_" .. language, false)
 end
 local other_language_strings = STRINGS
 
 GLOBAL.STRINGS = deepcopy(old_strings)
-prosafemodimport("modmain/languages/strings_en", false)
+trosafemodimport("modmain/languages/strings_en", false)
 
 -- 比较
 LanguageStringCompare(STRINGS, other_language_strings, "STRINGS")
@@ -53,7 +53,7 @@ GLOBAL.STRINGS = old_strings
 ----------------------------------------------------------------------------------------------------
 -- 检查台词是否和原版冲突，数组允许扩容，但是不允许修改原有值
 local old_strings = deepcopy(STRINGS)
-prosafemodimport("modmain/languages/strings_en", false)
+trosafemodimport("modmain/languages/strings_en", false)
 local function CheckStringsDiff(old_tab, tab, prefix)
     for k, v in pairs(old_tab) do
         local new_value = tab[k]
@@ -62,13 +62,13 @@ local function CheckStringsDiff(old_tab, tab, prefix)
 
         -- 检查类型是否一致
         if old_type ~= new_type then
-            ProErrorHandle("台词类型冲突：键" .. prefix .. "." .. tostring(k) .. " 原版类型为 " .. old_type .. "，mod类型为 " .. new_type, false, false)
+            TroErrorHandle("台词类型冲突：键" .. prefix .. "." .. tostring(k) .. " 原版类型为 " .. old_type .. "，mod类型为 " .. new_type, false, false)
         elseif old_type == "table" then
             -- 如果是表，递归检查
             CheckStringsDiff(v, new_value, prefix .. "." .. tostring(k))
         elseif v ~= new_value then
             -- 如果是基本类型且值不同，报告冲突
-            ProErrorHandle("台词值冲突：键 " .. prefix .. "." .. tostring(k), false, false)
+            TroErrorHandle("台词值冲突：键 " .. prefix .. "." .. tostring(k), false, false)
         end
     end
 end
@@ -81,7 +81,7 @@ Hooks.FnDecorator(env, "AddAction", function(id)
     if type(id) == "table" then
         id = id.id
     end
-    prodevassert(not ACTIONS[id], "重复定义了ACTIONS." .. tostring(id))
+    trodevassert(not ACTIONS[id], "重复定义了ACTIONS." .. tostring(id))
 end)
 
 ----------------------------------------------------------------------------------------------------
@@ -102,10 +102,10 @@ Hooks.FnDecorator(GLOBAL, "LoadPrefabFile", nil, function(retTab, filename, asyn
     local ret = retTab[1]
     for _, prefab in ipairs(ret) do
         local path = search_asset_first_path .. "/" .. filename
-        prodevassert(not Prefabs[prefab.name],
+        trodevassert(not Prefabs[prefab.name],
             "预制件" .. tostring(prefab.name) .. "已经定义过了，文件路径：" .. path .. ", 最早定义文件：" .. tostring(prefab_filepaths[prefab.name]))
         -- if Prefabs[prefab.name] then --仅打印
-        --     ProErrorHandle("预制件" .. tostring(prefab.name) .. "已经定义过了，文件路径：" .. path
+        --     TroErrorHandle("预制件" .. tostring(prefab.name) .. "已经定义过了，文件路径：" .. path
         --         .. ", 最早定义文件：" .. tostring(prefab_filepaths[prefab.name]), false, false)
         -- end
         mod_prefab_files[filename] = true
@@ -118,6 +118,6 @@ end)
 -- 检查ActionHandler的ACTION是否定义
 local OldAddStategraphActionHandler = env.AddStategraphActionHandler
 env.AddStategraphActionHandler = function(stategraph, handler, ...)
-    prodevassert(handler and handler.action and ACTIONS[handler.action.id], "发现没有定义的ACTION，你应该先在actions.lua文件中定义ACTION")
+    trodevassert(handler and handler.action and ACTIONS[handler.action.id], "发现没有定义的ACTION，你应该先在actions.lua文件中定义ACTION")
     return OldAddStategraphActionHandler(stategraph, handler, ...)
 end

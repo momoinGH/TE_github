@@ -6,7 +6,7 @@ Layouts["atlantida"] = StaticLayout.Get("map/static_layouts/atlantida", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-ProRemapLayoutTile("atlantida", {
+TroRemapLayoutTile("atlantida", {
     [1] = WORLD_TILES.IMPASSABLE,
     [2] = WORLD_TILES.PIGRUINS,
     [9] = WORLD_TILES.UNDERWATER_ROCKY

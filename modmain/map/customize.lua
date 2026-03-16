@@ -15,7 +15,7 @@ for _, option in ipairs(modinfo.configuration_options) do
         local gen = option.world_gen
         if gen then
             assert(gen.group and gen.world and type(gen.category) == "table", "modinfo的configuration_options配置数据的world_gen必须包含group和world，请检查" .. option.name)
-            assert(pro_modules[gen.group], "世界生成数据的group必须是pro_modules中的一个，请检查" .. option.name)
+            assert(tro_modules[gen.group], "世界生成数据的group必须是tro_modules中的一个，请检查" .. option.name)
         end
     end
 end
@@ -27,7 +27,7 @@ local default_options_enable = {
     { text = STRINGS.UI.WARDROBESCREEN.FILTER_ON, data = 1 },
 }
 
-for _, m in pairs(pro_modules) do
+for _, m in pairs(tro_modules) do
     local has_settings = false
     local has_worldgen = false
     local group_label = m
@@ -80,10 +80,9 @@ local config_sync_lock = false --防止递归
 -- 修改世界生成时设置mod配置
 local SettingsList = require("widgets/redux/worldsettings/settingslist")
 Hooks.FnDecorator(SettingsList, "OnSpinnerChanged", function(self, option, spinner, value)
-    if option and option.group and pro_modules[option.group] then
+    if option and option.group and tro_modules[option.group] then
         -- print("世界生成修改", option.group, option.name, value)
         spinners[option.name] = spinner
-        spinner._pro_option_name = option.name
 
         if not config_sync_lock then
             config_sync_lock = true

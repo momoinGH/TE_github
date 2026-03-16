@@ -1,2 +1,2 @@
-local makefeather = require("prefabs/pro_feather_defs")
+local makefeather = require("prefabs/tro_feather_defs")
 return makefeather("thunder")

@@ -33,7 +33,7 @@ local function fn()
     inst.AnimState:SetBuild("quagmire_sapbucket")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheck, ConsumableState, "TAPSUGARTREE", OnUse)
+    inst:AddComponent("tro_componentaction"):InitUSEITEM(TargetCheck, ConsumableState, "TAPSUGARTREE", OnUse)
 
     inst.entity:SetPristine()
 

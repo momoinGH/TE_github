@@ -35,7 +35,7 @@ local function fn(Sim)
     inst:AddTag("allow_action_on_impassable")
     inst:AddTag("boat_patch")
 
-    inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheck, "dolongaction", "REPAIR", OnRepair, { priority = 11 })
+    inst:AddComponent("tro_componentaction"):InitUSEITEM(TargetCheck, "dolongaction", "REPAIR", OnRepair, { priority = 11 })
 
     inst.entity:SetPristine()
 

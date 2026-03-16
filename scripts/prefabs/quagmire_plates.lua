@@ -41,7 +41,7 @@ local function MakePlate(basedish, dishtype, assets)
 
         inst:AddTag("replater")
 
-        inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheck, nil, "REPLATE", OnUse)
+        inst:AddComponent("tro_componentaction"):InitUSEITEM(TargetCheck, nil, "REPLATE", OnUse)
 
         inst.entity:SetPristine()
 

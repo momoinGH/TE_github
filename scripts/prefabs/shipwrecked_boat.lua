@@ -141,8 +141,8 @@ local function MakeBoat(name, data, common_post_fn, master_post_fn)
 
         if data.dismantlePrefab then --表示可收回
             inst.dismantlePrefab = data.dismantlePrefab
-            inst:AddComponent("pro_portablestructure")
-            inst.components.pro_portablestructure:SetOnDismantleFn(OnDismantle)
+            inst:AddComponent("tro_portablestructure")
+            inst.components.tro_portablestructure:SetOnDismantleFn(OnDismantle)
         end
 
         if data.container then

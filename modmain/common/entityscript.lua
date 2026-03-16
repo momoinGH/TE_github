@@ -51,9 +51,9 @@ end
 -- 获取玩家身上的小船
 function EntityScript:TroGetSWBoat()
     if TheWorld.ismastersim then
-        return self.components.pro_driver and self.components.pro_driver.boat or nil
+        return self.components.tro_driver and self.components.tro_driver.boat or nil
     else
-        return self.replica.pro_driver and self.replica.pro_driver:GetBoat() or nil
+        return self.replica.tro_driver and self.replica.tro_driver:GetBoat() or nil
     end
 end
 
@@ -68,7 +68,7 @@ end
 -- 是否在哈姆雷特雾气中
 function EntityScript:TroInHamletFog()
     if self.player_classified then
-        return self.player_classified.pro_fog and self.player_classified.pro_fog:value() or false
+        return self.player_classified.tro_fog and self.player_classified.tro_fog:value() or false
     end
     --不是玩家
     if GLOBAL.TroInHamlteFogImple then

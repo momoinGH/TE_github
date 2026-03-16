@@ -1,9 +1,9 @@
 require "util/textcompleter"
 require "stacktrace"
-proisdev = not string.starts(modname, "workshop-")
-GLOBAL.proisdev = proisdev
+troisdev = not string.starts(modname, "workshop-")
+GLOBAL.troisdev = troisdev
 
-if proisdev then
+if troisdev then
     require("debugcommands")  --允许控制台直接调用d_xxx函数
     require "consolecommands" --允许控制台直接调用c_xxx函数
 end
@@ -23,7 +23,7 @@ GLOBAL.conprint = conprint
 ---@param msg string 错误消息
 ---@param has_trace boolean 是否打印堆栈，默认true
 ---@param dev_can_crash boolean 开发模式下是否可以崩溃，默认true
-function ProErrorHandle(msg, has_trace, dev_can_crash)
+function TroErrorHandle(msg, has_trace, dev_can_crash)
     if has_trace == nil then
         has_trace = true
     end
@@ -37,7 +37,7 @@ function ProErrorHandle(msg, has_trace, dev_can_crash)
     else
         s = s .. tostring(msg) .. "\nLUA ERROR stack traceback:（方便搜索）" --方便搜索
     end
-    if proisdev then
+    if troisdev then
         if dev_can_crash then
             error(s)
         else
@@ -49,11 +49,11 @@ function ProErrorHandle(msg, has_trace, dev_can_crash)
     end
 end
 
-GLOBAL.ProErrorHandle = ProErrorHandle
+GLOBAL.TroErrorHandle = TroErrorHandle
 
 -- 可以判断是否是开发模式的断言，开发陌生下游戏崩溃，工坊订阅下只会打印堆栈到日志
-function prodevassert(v, ...)
-    if proisdev then
+function trodevassert(v, ...)
+    if troisdev then
         return assert(v, ...)
     end
 
@@ -62,15 +62,15 @@ function prodevassert(v, ...)
         return v
     end
 
-    ProErrorHandle(..., false, true)
+    TroErrorHandle(..., false, true)
     return v
 end
 
-GLOBAL.prodevassert = prodevassert
+GLOBAL.trodevassert = trodevassert
 
 ----------------------------------------------------------------------------------------------------
 --- 科雷modmain的定义抄过来，不过文件不存在时不会报错
-function prosafemodimport(modulename, has_print)
+function trosafemodimport(modulename, has_print)
     if has_print == nil then
         has_print = true
     end
@@ -94,15 +94,15 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-function proimportmodulefile(path, is_load_all)
+function troimportmodulefile(path, is_load_all)
     assert(type(path) == "string" and not string.starts(path, "modmain"), "path需要是模块下的相对路径！path：" .. tostring(path))
 
     if not string.starts(path, "/") then
         path = "/" .. path
     end
-    for _, m in pairs(pro_modules) do
-        if is_load_all or m == pro_modules.common or TUNING.tropical[m] then --根据配置项决定是否读取
-            prosafemodimport("modmain/" .. m .. path)
+    for _, m in pairs(tro_modules) do
+        if is_load_all or m == tro_modules.common or TUNING.tropical[m] then --根据配置项决定是否读取
+            trosafemodimport("modmain/" .. m .. path)
         end
     end
 end

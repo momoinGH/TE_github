@@ -5,10 +5,10 @@ local function SpawnAtLocationAfter(retTab, self, inst, player, x, y, z, isloadi
     end
 
     x, y, z = player.Transform:GetWorldPosition()
-    if not player.components.pro_driver.boat and TheWorld.Map:IsOceanAtPoint(x, y, z, false) then
+    if not player.components.tro_driver.boat and TheWorld.Map:IsOceanAtPoint(x, y, z, false) then
         local boat = FindClosestEntity(player, 0.5, function(ent) return not ent.parent end, { "shipwrecked_boat" }, { "INLIMBO" })
         if boat then
-            player.components.pro_driver:SetBoat(boat)
+            player.components.tro_driver:SetBoat(boat)
         end
     end
 

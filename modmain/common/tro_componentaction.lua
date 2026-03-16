@@ -134,35 +134,35 @@ end)
 --------------------------------------------------------------------------------------------------
 -- 如果c不存在，可能是组件只在主机添加了，应当注意
 
-TRO_AddComponentAction("SCENE", COMP_NAME, function(inst, doer, actions, right)
+TroAddComponentAction("SCENE", COMP_NAME, function(inst, doer, actions, right)
     local c = inst.components[COMP_NAME]
     if c:Test("SCENE", doer, right) then
         table.insert(actions, ACTIONS[SCENE_ACT .. c.actiontypes["SCENE"].priority])
     end
 end)
 
-TRO_AddComponentAction("USEITEM", COMP_NAME, function(inst, doer, target, actions, right)
+TroAddComponentAction("USEITEM", COMP_NAME, function(inst, doer, target, actions, right)
     local c = inst.components[COMP_NAME]
     if c:Test("USEITEM", doer, target, right) then
         table.insert(actions, ACTIONS[USEITEM_ACT .. c.actiontypes["USEITEM"].priority])
     end
 end)
 
-TRO_AddComponentAction("POINT", COMP_NAME, function(inst, doer, pos, actions, right)
+TroAddComponentAction("POINT", COMP_NAME, function(inst, doer, pos, actions, right)
     local c = inst.components[COMP_NAME]
     if c:Test("POINT", doer, pos, right) then
         table.insert(actions, ACTIONS[POINT_ACT .. c.actiontypes["POINT"].priority])
     end
 end)
 
-TRO_AddComponentAction("EQUIPPED", COMP_NAME, function(inst, doer, target, actions, right)
+TroAddComponentAction("EQUIPPED", COMP_NAME, function(inst, doer, target, actions, right)
     local c = inst.components[COMP_NAME]
     if c:Test("EQUIPPED", doer, target, right) then
         table.insert(actions, ACTIONS[EQUIPPED_ACT .. c.actiontypes["EQUIPPED"].priority])
     end
 end)
 
-TRO_AddComponentAction("INVENTORY", COMP_NAME, function(inst, doer, actions, right)
+TroAddComponentAction("INVENTORY", COMP_NAME, function(inst, doer, actions, right)
     local c = inst.components[COMP_NAME]
     if c:Test("INVENTORY", doer, right) then
         table.insert(actions, ACTIONS[INVENTORY_ACT .. c.actiontypes["INVENTORY"].priority])

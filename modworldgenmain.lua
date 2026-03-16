@@ -2,9 +2,9 @@ GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL,
 
 modimport "modmain/util.lua" --一些表相关的工具函数
 
-pro_modules = modinfo.pro_modules
+tro_modules = modinfo.tro_modules
 
-pro_languages = {
+tro_languages = {
     "pt",
     "zh",
     "it",
@@ -19,7 +19,7 @@ modimport "modmain/dev_utils"                 --开发环境下辅助用的函�
 Hooks = require "tropical_utils/hooks"        --用来hook的一些函数
 -- modimport "modmain/gentuning"
 modimport "modmain/map/customize.lua"         --世界生成选项
-if proisdev then
+if troisdev then
     modimport "modmain/worldgen_check_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 modimport "modmain/map/spawnutil.lua"
@@ -28,9 +28,9 @@ modimport "modmain/map/spawnutil.lua"
 -- 当配置项加载好后，才能访问TUNING.tropical检查哪些模块启用了
 function ProOnConfigLoaded()
     modimport "modmain/gentuning"
-    proimportmodulefile "map/terrain" --植物生成地形限制
-    proimportmodulefile "tiledefs"    --定义新地皮
-    proimportmodulefile "tilegroups"  --地皮分组
+    troimportmodulefile "map/terrain" --植物生成地形限制
+    troimportmodulefile "tiledefs"    --定义新地皮
+    troimportmodulefile "tilegroups"  --地皮分组
 end
 
 -- TODO
@@ -56,9 +56,9 @@ if is_worldgen then
     ProOnConfigLoaded()
 
     modimport "modmain/map/storygen.lua"     --标签处理函数
-    proimportmodulefile "map/lockandkey"     --地形锁钥
-    proimportmodulefile "map/static_layouts" --静态布局
-    proimportmodulefile "map/rooms"
-    proimportmodulefile "map/tasks"
-    proimportmodulefile "map/network" --地图生成后处理
+    troimportmodulefile "map/lockandkey"     --地形锁钥
+    troimportmodulefile "map/static_layouts" --静态布局
+    troimportmodulefile "map/rooms"
+    troimportmodulefile "map/tasks"
+    troimportmodulefile "map/network" --地图生成后处理
 end

@@ -19,5 +19,5 @@ if TUNING.tropical.tropicalshards ~= 0 then
 end
 
 if TUNING.tropical.boat then
-    table.insert(PrefabFiles, "pro_pirate_boat_group") --强盗船
+    table.insert(PrefabFiles, "tro_pirate_boat_group") --强盗船
 end

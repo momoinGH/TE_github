@@ -36,7 +36,7 @@ local function fn()
     inst.AnimState:SetBuild("bottle_green")
     inst.AnimState:PlayAnimation("idle")
 
-    inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheck, "dolongaction", "FILL", OnUse)
+    inst:AddComponent("tro_componentaction"):InitUSEITEM(TargetCheck, "dolongaction", "FILL", OnUse)
 
     inst.entity:SetPristine()
 

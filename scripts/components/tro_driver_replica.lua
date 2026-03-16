@@ -1,7 +1,7 @@
 local Driver = Class(function(self, inst)
     self.inst = inst
 
-    self.boat = net_entity(inst.GUID, "pro_driver.boat")
+    self.boat = net_entity(inst.GUID, "tro_driver.boat")
 end)
 
 function Driver:SetBoat(boat)

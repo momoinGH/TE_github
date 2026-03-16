@@ -1,7 +1,7 @@
 -- 海上陷阱可以抓海里的龙虾
 
 local function DoSpringBefore(self)
-    if not self.pro_water then return end
+    if not self.tro_water then return end
 
     if self.target
         and self.target:IsValid()
@@ -17,6 +17,6 @@ local function DoSpringBefore(self)
 end
 
 AddComponentPostInit("trap", function(self)
-    self.pro_water = nil --海里的陷阱
+    self.tro_water = nil --海里的陷阱
     Hooks.FnDecorator(self, "DoSpring", DoSpringBefore)
 end)

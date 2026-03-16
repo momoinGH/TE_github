@@ -8,7 +8,7 @@ Layouts["lava_arena"] = StaticLayout.Get("map/static_layouts/lava_arena", {
     layout_position = LAYOUT_POSITION.CENTER,
     disable_transform = true,
 })
-ProRemapLayoutTile("lava_arena", {
+TroRemapLayoutTile("lava_arena", {
     [2] = WORLD_TILES.LAVALAND,
     [30] = WORLD_TILES.BATFLOOR
 })

@@ -11,7 +11,7 @@ local swap_data = {
 }
 
 -- 针对sg use_fan 重新映射一下build文件
-ProRemapOverrideSymbol("tropicalfan", "fan01", function(inst, swap_build, swap_symbol)
+TroRemapOverrideSymbol("tropicalfan", "fan01", function(inst, swap_build, swap_symbol)
     if swap_build == "fan" then
         swap_build = swap_data.sym_build
     end

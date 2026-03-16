@@ -1,6 +1,6 @@
 Utils = require("tropical_utils/utils")
 
-AddReplicableComponent("pro_driver")
+AddReplicableComponent("tro_driver")
 
 
 ----------------------------------------------------------------------------------------------------

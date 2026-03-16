@@ -1,7 +1,7 @@
 local Hayfever = Class(function(self, inst)
 	self.inst = inst
 
-    self.level = net_tinybyte(inst.GUID, "hayfever.level", "pro_updatepollen")
+    self.level = net_tinybyte(inst.GUID, "hayfever.level", "tro_updatepollen")
 end)
 
 function Hayfever:SetLevel(level)

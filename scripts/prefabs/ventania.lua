@@ -451,9 +451,9 @@ local function OnInit(inst)
 
 
     ----------------saplingsw--------------------------------------------
-    local saplingsw = FindClosestEntity(inst, 40, true, { "pickable" }, nil, nil, function(ent) return ent.ProTryWind end)
+    local saplingsw = FindClosestEntity(inst, 40, true, { "pickable" }, nil, nil, function(ent) return ent.TroTryWind end)
     if saplingsw then
-        saplingsw:ProTryWind()
+        saplingsw:TroTryWind()
     end
 
 

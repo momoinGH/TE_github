@@ -45,7 +45,7 @@ local function fn(Sim)
 
     inst:AddTag("ballpein_hammer")
 
-    inst:AddComponent("pro_componentaction"):InitUSEITEM(TargetCheckFn, "tap", "DISLODGE", OnUse)
+    inst:AddComponent("tro_componentaction"):InitUSEITEM(TargetCheckFn, "tap", "DISLODGE", OnUse)
 
     inst.entity:SetPristine()
 

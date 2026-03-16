@@ -104,7 +104,7 @@ local LEVELCATEGORY = {
     WORLDGEN = "WORLDGEN", --世界生成里显示
 }
 
-pro_modules = {
+tro_modules = {
     common           = "common",           -- 共同
     room             = "room",             --小房子，以及在地图外生成相关
     boat             = "boat",             --海难小船
@@ -143,7 +143,7 @@ configuration_options =
         default = en_zh_zht("en", "zh"),
     },
 
-    title(en_zh_zht("<hamlet>", "<哈姆雷特>", "<哈姆雷特>"), pro_modules.hamlet),
+    title(en_zh_zht("<hamlet>", "<哈姆雷特>", "<哈姆雷特>"), tro_modules.hamlet),
 
     -- 使用示例
     -- {
@@ -153,7 +153,7 @@ configuration_options =
     --     default = 1,                               --默认值
     --     world_gen = {
     --         category = { LEVELCATEGORY.WORLDGEN }, --世界规则还世界生成
-    --         group = pro_modules.hamlet,            --在哪个组
+    --         group = tro_modules.hamlet,            --在哪个组
     --         world = { "forest","cave" },                  --在世界和洞穴的世界规则中显示
     --         -- atlas = nil, --用的的图集，需要在modservercreationmain.lua里面定义并加载资源
     --         -- image = "liefs.tex", --图片
@@ -168,7 +168,7 @@ configuration_options =
         default = 1, --默认值
         world_gen = {
             category = { LEVELCATEGORY.WORLDGEN },
-            group = pro_modules.hamlet,
+            group = tro_modules.hamlet,
             world = { "forest" }, --在世界和洞穴的世界规则中显示
         }
     },
@@ -179,7 +179,7 @@ configuration_options =
         default = 1, --默认值
         world_gen = {
             category = { LEVELCATEGORY.SETTINGS },
-            group = pro_modules.hamlet,
+            group = tro_modules.hamlet,
             world = { "forest" }, --在世界和洞穴的世界规则中显示
             atlas = hamlet_atlas,
             image = "hayfever.tex",
@@ -192,7 +192,7 @@ configuration_options =
         default = 1, --默认值
         world_gen = {
             category = { LEVELCATEGORY.SETTINGS },
-            group = pro_modules.hamlet,
+            group = tro_modules.hamlet,
             world = { "forest" }, --在世界和洞穴的世界规则中显示
             atlas = hamlet_atlas,
             image = "fog.tex",
@@ -205,7 +205,7 @@ configuration_options =
         default = 1,
         world_gen = {
             category = { LEVELCATEGORY.SETTINGS },
-            group = pro_modules.hamlet,
+            group = tro_modules.hamlet,
             world = { "forest" },
             atlas = hamlet_atlas,
             image = "vampire_bat_caves.tex",

@@ -14,7 +14,7 @@ Layouts["city"] = StaticLayout.Get("map/static_layouts/city", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-ProRemapLayoutTile("city", {
+TroRemapLayoutTile("city", {
     [2] = WORLD_TILES.SNOWLAND,
     [3] = WORLD_TILES.SNOWLAND,
     [6] = WORLD_TILES.SNOWLAND
@@ -25,6 +25,6 @@ Layouts["IceSpiderpillar"] = StaticLayout.Get("map/static_layouts/IceSpiderpilla
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-ProRemapLayoutTile("IceSpiderpillar", {
+TroRemapLayoutTile("IceSpiderpillar", {
     [3] = WORLD_TILES.SNOWLAND
 })
