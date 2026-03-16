@@ -178,14 +178,17 @@ Layouts["pig_ruins_exit_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_exi
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
 
+-- 睡莲
 Layouts["lilypad"] = StaticLayout.Get("map/static_layouts/lilypad", {
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-TroRemapLayoutTile("lilypad", {
-    [58] = WORLD_TILES.OCEAN_COASTAL,
-})
+TroRemapLayoutTile("lilypad", ground_types)
+
+-- 睡莲
+["lilypad2"] = StaticLayout.Get("map/static_layouts/lilypad_2")
+TroRemapLayoutTile("lilypad2", ground_types)
 
 Layouts["pig_ruins_artichoke"] = StaticLayout.Get("map/static_layouts/pig_ruins_artichoke", {
     layout_position = LAYOUT_POSITION.CENTER,
@@ -194,9 +197,18 @@ Layouts["pig_ruins_artichoke"] = StaticLayout.Get("map/static_layouts/pig_ruins_
 })
 
 Layouts["pig_ruins_head"] = StaticLayout.Get("map/static_layouts/pig_ruins_head", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    areas = {
+        item1 = { "pig_ruins_head" },
+        item2 = function()
+            local list = { "smashingpot", "grass", "pig_ruins_torch" }
+            for i = #list, 1, -1 do
+                if math.random() < 0.7 then
+                    table.remove(list, i)
+                end
+            end
+            return list
+        end,
+    },
 })
 TroRemapLayoutTile("pig_ruins_head", ground_types)
 
@@ -308,3 +320,19 @@ Layouts["pig_palace_1"] = StaticLayout.Get("map/static_layouts/pig_palace_1")
 TroRemapLayoutTile("pig_palace_1", ground_types)
 Layouts["pig_cityhall_1"] = StaticLayout.Get("map/static_layouts/pig_cityhall_1")
 TroRemapLayoutTile("pig_cityhall_1", ground_types)
+
+
+-- 莲花池群系
+Layouts["lilypadnovo"] = StaticLayout.Get("map/static_layouts/lilypadnovo", {
+    layout_position = LAYOUT_POSITION.CENTER,
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
+    areas =
+    {
+        objetoaleatorio = function()
+            return PickSomeWithDups(1,
+                { "lotus", "reeds_water", "reeds_water", "reeds_water", "reeds_water", "reeds_water", "reeds_water", "reeds_water", "watercress_planted",
+                    "watercress_planted", "watercress_planted", "driftwood_log" })
+        end,
+    },
+})

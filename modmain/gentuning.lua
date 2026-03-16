@@ -1,15 +1,3 @@
-local kindofworld = GetModConfigData("kindofworld")
-
-local is_custom = kindofworld == 15
-
-local only_shipwrecked = kindofworld == 10
-local shipwrecked = only_shipwrecked and 20
-    or is_custom and GetModConfigData("shipwrecked")
-    or false
-local shipwrecked_plus = shipwrecked and GetModConfigData("shipwrecked_plus")
-
-local only_sea = kindofworld == 20
-
 -- TUNING.tropical = {
 --     kindofworld      = kindofworld, --世界类型
 
@@ -66,17 +54,17 @@ local only_sea = kindofworld == 20
 --     cherryforest                   = GetModConfigData("cherryforest"),
 -- }
 
+print("加载配置项", GetModConfigData("hamlet"))
 local hamlet = GetModConfigData("hamlet") == 1
 
 
 TUNING.tropical = {
+    common         = true,
     room           = hamlet,
     hamlet         = hamlet,
-    hayfever       = GetModConfigData("hayfever"),       --花粉症
-    fog            = GetModConfigData("fog"),            --迷雾
-    vampirebatcave = GetModConfigData("vampirebatcave"), --洞穴裂缝
-
-
+    hayfever       = GetModConfigData("hayfever") == 1,       --花粉症
+    fog            = GetModConfigData("fog") == 1,            --迷雾
+    vampirebatcave = GetModConfigData("vampirebatcave") == 1, --洞穴裂缝
 
 
 
@@ -117,7 +105,6 @@ TUNING.tropical = {
 
 
 
-    common                         = true,
     wind                           = false, --飓风
     hail                           = false, --冰雹
     megarandomCompatibilityWater   = false, --兼容超级随机世界生成
@@ -136,3 +123,6 @@ TUNING.tropical = {
     togethercaves_shipwreckedworld = false,
     cherryforest                   = false,
 }
+
+print("打印配置项数据：")
+print(PrintTable(TUNING.tropical))

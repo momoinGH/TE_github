@@ -13,10 +13,10 @@ TroRemapSound：重新映射音效路径
 TroRemapOverrideSymbol：对每个预制件的OverrideSymbol的参数重新映射
 
 TUNING.tropical mod设置数据
-TUNING.TE_WORLDGEN 世界生成相关数据
 
 每个模块自动导入的文件：
 tuning、prefablist、assets、containers、ui、prefabpost、sg、recipes、cooking、rpc、input、skins
+不在模块下的内容是公共的部分，最好通过标签或者变量识别功能，减少特定prefab的判断
 
 ]]
 
@@ -41,6 +41,7 @@ env.modimport = function(modulename, ...)
 end
 
 ----------------------------------------------------------------------------------------------------
+print("初始化2")
 TroOnConfigLoaded()
 modimport "modmain/knownmodcheck"             -- 检测不兼容模组并报错崩溃
 modimport "modmain/mods"                      -- 兼容其他mod
@@ -52,6 +53,7 @@ modimport "modmain/postinit"  --TODO 拆分一下
 modimport "modmain/animstate" -- AnimState 增强
 modimport "modmain/soundemitter"
 
+
 -- 文本
 local language = string.lower(GetModConfigData("language"))
 trosafemodimport("modmain/languages/strings_en") --英文版本兜底，不使用的台词不应该添加
@@ -59,14 +61,13 @@ trosafemodimport("modmain/languages/strings_" .. language)
 trosafemodimport("modmain/languages/modwiki_zh") -- 其他语言的wiki先不管
 
 
-troimportmodulefile("tuning") --定义的常量
-
-
 modimport("modmain/constants")        --一些全局变量、全局函数
 modimport("modmain/actions")          --action相关
 modimport("modmain/actions_post")     --修改原版action
 modimport("modmain/componentactions") --componentactions相关
 
+
+troimportmodulefile("tuning") --定义的常量
 
 --PrefabFiles
 local ALL_PREFAB_FILES = PrefabFiles or {}

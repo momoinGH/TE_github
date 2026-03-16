@@ -41,7 +41,7 @@ tro_作为公共模块前缀，新的命名建议都用这个作为前缀
 
 地形生成：
 1. 每个task有一些锁locks，也有一些钥匙keys_given，解锁该task需要有这些锁的钥匙，解锁后就能获得该task的所有钥匙，有了这些钥匙就能用于解锁其他的task，相互依赖
-
+2. 地形层级递进关系：layout、room、task、taskSet、location、level
 
 
 

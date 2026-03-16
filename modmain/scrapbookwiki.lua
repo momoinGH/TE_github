@@ -1,6 +1,9 @@
 ---用图鉴的形式展示wiki，一般来说只在最开始的时候调用一次，调用该方法需要设置env
 ---实现该功能不得不覆盖了ScrapbookScreen的MakeSideBar方法，追加图鉴分类，这导致以后可能需要维护
 
+table.insert(Assets, Asset("ANIM", "anim/pigman_tribe.zip")) --图鉴wiki默认动画
+
+
 WIKI_DATA = {}                    --配置
 troimportmodulefile("modwiki")
 local scrapbook_type = "tropical" --新增的图鉴分类，建议与mod名保持一致，需要初始化STRINGS.SCRAPBOOK.CATS.XXX变量，XXX是这里的key大写形式

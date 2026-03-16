@@ -8,12 +8,7 @@
 很多地方通过地皮来判断玩家在什么区域，最好换成inst:IsInxxArea()方法
 
 
-pig_shop
-playerhouse_city
-vampirebatcave
 
-
-anthill
-cave_entrance_roc
-hamlet_pig_ruins_entrance
-pig_palace
+把一些_path去掉
+用region_id隔开、not_mainland标签
+刚开mod的时候不是很准，mod配置是关，世界生成那是开

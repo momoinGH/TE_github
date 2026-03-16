@@ -1429,3 +1429,9 @@ function GetInventoryItemAtlas_Internal(imagename, no_fallback) end
 ActionHandler = Class(function(self, action, state, condition) end)
 
 function GetString(inst, stringtype, modifier, nil_missing) end
+
+-- 聪choices数组里随机选num个，返回一个数组
+function PickSomeWithDups(num, choices) end
+
+AddLevelPreInitAny = function(fn) end
+AddTaskSetPreInitAny = function(fn) end

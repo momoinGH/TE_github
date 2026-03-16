@@ -80,7 +80,6 @@ AddRoom("OceanSwell_SEA", {
             ["BullkelpFarmSmall"] = 6,
             ["BullkelpFarmMedium"] = 3,
             ["lilypadnovo"] = 2 * GetModConfigData("lilypad") and 1 or 0,
-            ["lilypadnovograss"] = GetModConfigData("lilypad") and 1 or 0,
             ["icebergs"] = 8,
             ["oceangrotolunar"] = 1,
             ["oceanrocks"] = 4,

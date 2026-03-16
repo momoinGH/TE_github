@@ -1154,7 +1154,6 @@ STRINGS.NAMES.MERMNOBLE                                                         
 STRINGS.NAMES.PIG_RUINS_PIGMAN_RELIEF_DART2_BLUE                                = "飞箭机关浮雕"
 STRINGS.NAMES.THUNDERBIRD                                                       = "Thunderbird"
 STRINGS.NAMES.PIG_RUINS_TORCH                                                   = "Crumbling Brazier"
-STRINGS.NAMES.GRASS_TALL_PATCH                                                  = "生成数个高草丛"
 STRINGS.NAMES.TURF_FOUNDATION                                                   = "Flat Stone Turf"
 STRINGS.NAMES.CAPTAINHAT                                                        = "Captain Hat"
 STRINGS.NAMES.VAMPIREBATCAVE_ENTRANCE                                           = "生成小蝙蝠洞一个房间"

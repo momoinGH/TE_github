@@ -49,62 +49,6 @@ Layouts["lobby_exit"] = StaticLayout.Get("map/static_layouts/lobby_exit", {
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
 
-Layouts["lilypadnovo"] = StaticLayout.Get("map/static_layouts/lilypadnovo", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
-    areas =
-    {
-        objetoaleatorio = function()
-            local variador = math.random()
-            if variador > 0.4 then
-                return { "lotus" }
-            else
-                local tipo = math.random(1, 11)
-                if tipo == 1 then return { "reeds_water" } end
-                if tipo == 2 then return { "reeds_water" } end
-                if tipo == 3 then return { "reeds_water" } end
-                if tipo == 4 then return { "reeds_water" } end
-                if tipo == 5 then return { "reeds_water" } end
-                if tipo == 6 then return { "reeds_water" } end
-                if tipo == 7 then return { "reeds_water" } end
-                if tipo == 8 then return { "watercress_planted" } end
-                if tipo == 9 then return { "watercress_planted" } end
-                if tipo == 10 then return { "watercress_planted" } end
-                if tipo == 11 then return { "driftwood_log" } end
-            end
-        end,
-    },
-})
-
-Layouts["lilypadnovograss"] = StaticLayout.Get("map/static_layouts/lilypadnovograss", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
-    areas =
-    {
-        objetoaleatorio = function()
-            local variador = math.random()
-            if variador > 0.4 then
-                return { "lotus" }
-            else
-                local tipo = math.random(1, 11)
-                if tipo == 1 then return { "grass_tall" } end
-                if tipo == 2 then return { "grass_tall" } end
-                if tipo == 3 then return { "grass_tall" } end
-                if tipo == 4 then return { "grass_tall" } end
-                if tipo == 5 then return { "grass_tall" } end
-                if tipo == 6 then return { "grass_tall" } end
-                if tipo == 7 then return { "grass_tall" } end
-                if tipo == 8 then return { "watercress_planted" } end
-                if tipo == 9 then return { "watercress_planted" } end
-                if tipo == 10 then return { "watercress_planted" } end
-                if tipo == 11 then return { "driftwood_log" } end
-            end
-        end,
-    },
-})
-
 
 Layouts["mangrove1"] = StaticLayout.Get("map/static_layouts/mangrove1", {
     layout_position = LAYOUT_POSITION.CENTER,
@@ -194,7 +138,6 @@ Layouts["mangrove1"] = StaticLayout.Get("map/static_layouts/mangrove1", {
 
 
 })
-
 
 Layouts["mangrove2"] = StaticLayout.Get("map/static_layouts/mangrove1", {
     layout_position = LAYOUT_POSITION.CENTER,

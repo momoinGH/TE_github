@@ -528,21 +528,7 @@ AddTask("XDeep_rainforest_3", {
 })
 
 -------------------------
-AddTask("XEdge_of_civilization", {
-    locks = { LOCKS.BASIC_COMBAT, LOCKS.TIER2 },
-    keys_given = { KEYS.POOP, KEYS.WOOL, KEYS.WOOD, KEYS.GRASS, KEYS.TIER2 },
-    room_choices = {
-        ["MAINcultivated_base_1"] = 1,
-        ["MAINcultivated_base_2"] = 1,
-        --			["MAINcultivated_base_3"] = 1,
-        ["MAINcultivated_base_4"] = 1,
-        ["MAINcultivated_base_5"] = 1,
-        ["MAINpiko_land"] = 1,
-    },
-    room_bg = WORLD_TILES.FIELDS,
-    background_room = "MAINBG_cultivated_base",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
+
 
 AddTask("XPigcity", {
     locks = { LOCKS.TIER1 },
@@ -3275,26 +3261,7 @@ AddRoom("cultivated_base_5", {
     }
 })
 
-AddRoom("piko_land", {
-    colour = { r = 1.0, g = 0.0, b = 1.0, a = 0.3 },
-    value = WORLD_TILES.FIELDS,
-    tags = { "ExitPiece", "hamlet" },
-    contents = {
-        distributepercent = 0.06, --0.1
-        distributeprefabs =
-        {
-            --	grass = 0.05,
-            --	flower = 0.3,
-            rock1 = 0.01,
-            teatree = 2.0,
-        },
-        countprefabs =
-        {
-            teatree_piko_nest_patch = 1 --TODO 需要有一个映射，映射为teatree_piko_nest
-        },
-    }
 
-})
 
 fazendas =
 {
@@ -3443,7 +3410,7 @@ AddRoom("MAINpiko_land", {
         },
         countprefabs =
         {
-            teatree_piko_nest_patch = 1
+            teatree_piko_nest = math.random(4, 8)
         },
     }
 
@@ -4256,7 +4223,6 @@ AddRoom("MAINBG_plains_base", {
         },
         countprefabs =
         {
-            grass_tall_patch = 2,
             grass_tall = 1,
         },
     }
@@ -4290,7 +4256,7 @@ AddRoom("MAINBG_plains_base_nocanopy", {
         },
         countprefabs =
         {
-            grass_tall_patch = 2,
+            grass_tall = 2,
             grass_tall = 1,
         },
     }
@@ -4324,7 +4290,7 @@ AddRoom("MAINBG_plains_base_nocanopy2", {
         },
         countprefabs =
         {
-            grass_tall_patch = 2,
+            grass_tall = 2,
             grass_tall = 1,
         },
     }
@@ -4358,7 +4324,7 @@ AddRoom("MAINBG_plains_base_nocanopy3", {
         },
         countprefabs =
         {
-            grass_tall_patch = 2,
+            grass_tall = 2,
             grass_tall = 1,
         },
     }
@@ -4385,7 +4351,7 @@ AddRoom("MAINplains_tallgrass", {
         },
         countprefabs =
         {
-            grass_tall_patch = 2,
+            grass_tall = 2,
             grass_tall = 1,
         },
     }
@@ -4409,7 +4375,7 @@ AddRoom("MAINplains_ruins", {
         },
         countprefabs =
         {
-            grass_tall_patch = 2,
+            grass_tall = 2,
             grass_tall = 1,
         },
     }
@@ -4433,7 +4399,7 @@ AddRoom("MAINplains_ruins_set", {
         },
         countprefabs =
         {
-            grass_tall_patch = 2,
+            grass_tall = 2,
             grass_tall = 1,
         },
     }
@@ -12465,7 +12431,7 @@ AddRoom("HamBlueMushForest", {
             grass_tall = 3,
             ox = 0.5,
             teatree = 0.8,
-            teatree_piko_nest_patch = 0.5,
+            teatree_piko_nest = 0.5,
         },
     }
 })
@@ -12489,7 +12455,7 @@ AddRoom("HamBlueMushMeadow", {
             grass_tall = 3,
             ox = 0.5,
             teatree = 0.8,
-            teatree_piko_nest_patch = 0.5,
+            teatree_piko_nest = 0.5,
         },
     }
 })
@@ -12518,7 +12484,7 @@ AddRoom("HamBlueSpiderForest", {
             grass_tall = 3,
             ox = 0.5,
             teatree = 0.8,
-            teatree_piko_nest_patch = 0.5,
+            teatree_piko_nest = 0.5,
         },
         countprefabs =
         {
@@ -12548,7 +12514,7 @@ AddRoom("HamDropperDesolation", {
             grass_tall = 3,
             ox = 0.5,
             teatree = 0.8,
-            teatree_piko_nest_patch = 0.5,
+            teatree_piko_nest = 0.5,
         },
     }
 })
@@ -12572,7 +12538,7 @@ AddRoom("HamBGBlueMush", {
             grass_tall = 3,
             ox = 0.5,
             teatree = 0.8,
-            teatree_piko_nest_patch = 0.5,
+            teatree_piko_nest = 0.5,
         },
     }
 })
