@@ -73,11 +73,7 @@ for _, m in pairs(tro_modules) do
 end
 
 ----------------------------------------------------------------------------------------------------
-
-local spinners = {}            --世界生成里的每个选项
-local config_sync_lock = false --防止递归
-
-local function SetOptionValue(group, name, value)
+local function SetOptionValue(name, value)
     local world_tabs
     for _, screen_in_stack in pairs(TheFrontEnd.screenstack) do
         if screen_in_stack.name == "ServerCreationScreen" then
@@ -91,41 +87,38 @@ local function SetOptionValue(group, name, value)
 
     for _, tab in ipairs(world_tabs) do
         optionitems = tab.settings_widget.settingslist.optionitems
-        for _, item in ipairs(optionitems) do
+        for i, item in ipairs(optionitems) do
             local option = item.option
             if option then
-                if (group == nil or option.group == group) and option.name == name then
-                    -- TODO
+                if option.name == name and table.contains(tro_modules, option.group) then
+                    local opt = tab.settings_widget.settingslist.scroll_list:GetListWidgets()[i].opt_spinner
+                    opt.spinner:SetSelected(value)
+                    break
                 end
             end
         end
     end
 end
 
+-- 初始化一下选项的值
+for _, m in pairs(tro_modules) do
+    for _, option in ipairs(modinfo.configuration_options) do
+        local gen = option.world_gen
+        if gen and gen.group == m and option.name ~= "" then
+            SetOptionValue(option.name, GetModConfigData(option.name))
+        end
+    end
+end
 
--- option:
---  options:
---   1:
---    data: 0
---    text: 禁用
---   2:
---    data: 1
---    text: 启用
---  image: fog.tex
---  name: fog
---  widget_type: optionsspinner
---  group: hamlet
---  default: 1
---  atlas: images/scrapbook_tropical/scrapbook_hamlet.xml
---  grouplabel: <哈姆雷特>
+----------------------------------------------------------------------------------------------------
+
+local config_sync_lock = false --防止递归
 
 -- 修改世界生成时设置mod配置
 local SettingsList = require("widgets/redux/worldsettings/settingslist")
 Hooks.FnDecorator(SettingsList, "OnSpinnerChanged", function(self, option, spinner, value)
     if option and option.group and tro_modules[option.group] then
         -- print("世界生成修改", option.group, option.name, value)
-        spinners[option.name] = spinner
-
         if not config_sync_lock then
             config_sync_lock = true
             KnownModIndex:SaveConfigurationOptions(function()
@@ -136,17 +129,11 @@ Hooks.FnDecorator(SettingsList, "OnSpinnerChanged", function(self, option, spinn
     end
 end)
 
-
-
-
-
-
 -- mod配置项修改时更新世界生成里的选项
 Hooks.FnDecorator(KnownModIndex, "SetConfigurationOption", function(self, modn, option_name, value)
-    local spinner = spinners[option_name]
-    if spinner and spinner.inst:IsValid() and not config_sync_lock and modn == modname then
+    if not config_sync_lock and modn == modname then
         config_sync_lock = true
-        spinner:SetSelected(value)
+        SetOptionValue(option_name, value)
         config_sync_lock = false
     end
 end)

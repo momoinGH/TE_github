@@ -10,7 +10,7 @@
 
 
 用region_id隔开、not_mainland标签
-刚开mod的时候不是很准，mod配置是关，世界生成那是开
+刚开mod的时候不是很准，mod配置是关，世界生成那是开，哈姆雷特世界生成不能中途修改
 重写hamlet_interior_door
 
 
