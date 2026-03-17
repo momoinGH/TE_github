@@ -1,6 +1,9 @@
 local Layouts = require("map/layouts").Layouts
 local StaticLayout = require("map/static_layout")
 
+
+
+
 -- 重新映射布局中ground的数字对应的地皮，由于每个layout.ground_types都是独立的，所以覆盖也没问题
 function TroRemapLayoutTile(layout_name, map)
     local layout = Layouts[layout_name]

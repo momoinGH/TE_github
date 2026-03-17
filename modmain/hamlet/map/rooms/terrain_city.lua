@@ -14,7 +14,7 @@ local suburb_contents = {
 AddRoom("city_base_1", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
     value = WORLD_TILES.SUBURB,
-    tags = { "ExitPiece", "hamlet" },
+    tags = { "ExitPiece" },
     contents = suburb_contents
 })
 

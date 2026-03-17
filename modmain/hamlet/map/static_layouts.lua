@@ -187,7 +187,7 @@ Layouts["lilypad"] = StaticLayout.Get("map/static_layouts/lilypad", {
 TroRemapLayoutTile("lilypad", ground_types)
 
 -- 睡莲
-["lilypad2"] = StaticLayout.Get("map/static_layouts/lilypad_2")
+Layouts["lilypad2"] = StaticLayout.Get("map/static_layouts/lilypad_2")
 TroRemapLayoutTile("lilypad2", ground_types)
 
 Layouts["pig_ruins_artichoke"] = StaticLayout.Get("map/static_layouts/pig_ruins_artichoke", {

@@ -1,7 +1,7 @@
 AddRoom("FrostIsland_Beach", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     contents = {
         countprefabs =
         {
@@ -29,7 +29,7 @@ AddRoom("FrostIsland_Beach", {
 AddRoom("FrostIsland_deciduoustree", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     contents = {
         countstaticlayouts =
@@ -60,7 +60,7 @@ AddRoom("FrostIsland_deciduoustree", {
 AddRoom("FrostIsland_Mine", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     contents = {
         countprefabs =
@@ -87,7 +87,7 @@ AddRoom("FrostIsland_Mine", {
 AddRoom("FrostIsland_Mineboss", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     contents = {
         countprefabs =
@@ -117,7 +117,7 @@ AddRoom("FrostIsland_Mineboss", {
 AddRoom("FrostIsland_Mammoth", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     -- tags = { "RoadPoison" },
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     random_node_entrance_weight = 0,
@@ -146,7 +146,7 @@ AddRoom("FrostIsland_Mammoth", {
 AddRoom("FrostIsland_Meadows", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     random_node_exit_weight = 0,
     contents = {
@@ -176,7 +176,7 @@ AddRoom("FrostIsland_Meadows", {
 AddRoom("FrostIsland_Meadowscave", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     internal_type = NODE_INTERNAL_CONNECTION_TYPE.EdgeCentroid,
     random_node_exit_weight = 0,
     contents = {
@@ -206,7 +206,7 @@ AddRoom("FrostIsland_Meadowscave", {
 AddRoom("strange_island_maxwell", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = { ["mactuskgrass"] = 1 },
         distributepercent = .1,
@@ -223,7 +223,7 @@ AddRoom("strange_island_maxwell", {
 AddRoom("strange_island_maxwell_set", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = {
             ["strangerlord"] = 1,
@@ -250,7 +250,7 @@ AddRoom("strange_island_maxwell_set", {
 AddRoom("strange_island_canada", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     --					type = NODE_TYPE.SeparatedRoom,		
     contents = {
         countstaticlayouts =
@@ -285,7 +285,7 @@ AddRoom("strange_island_canada", {
 AddRoom("strange_island_canada2", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     --					type = NODE_TYPE.SeparatedRoom,	
     contents = {
         distributepercent = .38, --.5
@@ -318,7 +318,7 @@ AddRoom("strange_island_canada2", {
 AddRoom("strange_island_canada3", {
     colour = { r = 0.3, g = 0.2, b = 0.1, a = 0.3 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     type = NODE_TYPE.SeparatedRoom,
     contents = {
         distributepercent = 0.17,
@@ -353,7 +353,7 @@ AddRoom("strange_island_canada3", {
 AddRoom("frost_island_palace", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     contents = {
         --					countstaticlayouts={["strangerpigs"]=1},					
         distributepercent = .2,
@@ -389,7 +389,7 @@ AddRoom("frost_island_palace", {
 AddRoom("frost_island_palace_set", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     contents = {
         distributepercent = .2,
         distributeprefabs =
@@ -421,7 +421,7 @@ AddRoom("frost_island_palace_set", {
 AddRoom("frost_island_palace_city", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.SNOWLAND,
-    tags = { "RoadPoison", "frost" },
+    tags = { "RoadPoison" },
     contents = {
         countstaticlayouts = { ["city"] = 1 },
         distributepercent = .5,
@@ -451,7 +451,7 @@ AddRoom("frost_island_palace_city", {
 AddRoom("FrostIsland_icelake_beager", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
     value = WORLD_TILES.ICELAND,
-    tags = { "RoadPoison", "frost", "sandstorm" },
+    tags = { "RoadPoison", "sandstorm" },
     contents = {
         distributepercent = .1,
         distributeprefabs = {
@@ -475,7 +475,7 @@ AddRoom("FrostIsland_icelake_beager", {
 AddRoom("FrostIsland_deeclop", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
     value = WORLD_TILES.ICELAND,
-    tags = { "RoadPoison", "frost", "sandstorm" },
+    tags = { "RoadPoison", "sandstorm" },
     contents = {
         distributepercent = .1,
         distributeprefabs = {
@@ -499,7 +499,7 @@ AddRoom("FrostIsland_deeclop", {
 AddRoom("FrostIsland_icelake_cave", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
     value = WORLD_TILES.ICELAND,
-    tags = { "RoadPoison", "frost", "sandstorm" },
+    tags = { "RoadPoison", "sandstorm" },
     contents = {
         distributepercent = .15,
         distributeprefabs = {
@@ -524,7 +524,7 @@ AddRoom("FrostIsland_icelake_cave", {
 AddRoom("FrostIsland_icelake", {
     colour = { r = 0.5, g = .18, b = .35, a = .50 },
     value = WORLD_TILES.ICELAND,
-    tags = { "RoadPoison", "frost", "sandstorm" },
+    tags = { "RoadPoison", "sandstorm" },
     contents = {
         distributepercent = .15,
         distributeprefabs = {
@@ -543,7 +543,7 @@ AddRoom("FrostIsland_icelake", {
 AddRoom("rock_ice_frost_lake", {
     colour = { r = .6, g = .2, b = .8, a = .50 },
     value = WORLD_TILES.OCEAN_ROUGH,
-    tags = { "RoadPoison", "ForceConnected" },     --"ForceDisconnected"
+    tags = { "RoadPoison", "ForceConnected" }, --"ForceDisconnected"
     type = NODE_TYPE.SeparatedRoom,
     contents =
     {

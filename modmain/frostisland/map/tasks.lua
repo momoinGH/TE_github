@@ -3,7 +3,7 @@ AddTask("FrostIsland_icelake", {
     keys_given = { KEYS.ISLAND_TIER2 },
     region_id = "frostisland",
     level_set_piece_blocker = true,
-    room_tags = { "RoadPoison", "not_mainland", "frost" },
+    room_tags = { "RoadPoison", "not_mainland" },
     room_choices =
     {
         ["FrostIsland_icelake"] = 2,
@@ -22,7 +22,7 @@ AddTask("FrostIsland_Wildbeaver", {
     keys_given = { KEYS.ISLAND_TIER2 },
     region_id = "frostisland",
     level_set_piece_blocker = true,
-    room_tags = { "RoadPoison", "not_mainland", "frost" },
+    room_tags = { "RoadPoison", "not_mainland" },
     room_choices =
     {
         ["strange_island_canada2"] = 2,
@@ -46,7 +46,7 @@ AddTask("FrostIsland_Beach", {
     keys_given = { KEYS.ISLAND_TIER3 },
     region_id = "frostisland",
     level_set_piece_blocker = true,
-    room_tags = { "RoadPoison", "not_mainland", "frost" },
+    room_tags = { "RoadPoison", "not_mainland" },
     --    entrance_room = "FrostIsland_Blank",
     room_choices =
     {
@@ -67,7 +67,7 @@ AddTask("FrostIsland_palace", {
     keys_given = { KEYS.ISLAND_TIER3 },
     region_id = "frostisland",
     level_set_piece_blocker = true,
-    room_tags = { "RoadPoison", "not_mainland", "frost" },
+    room_tags = { "RoadPoison", "not_mainland" },
     entrance_room = "FrostIsland_Beach",
     room_choices =
     {
@@ -90,7 +90,7 @@ AddTask("FrostIsland_deciduoustree", {
     keys_given = {},
     region_id = "frostisland",
     level_set_piece_blocker = true,
-    room_tags = { "RoadPoison", "not_mainland", "frost" },
+    room_tags = { "RoadPoison", "not_mainland" },
     room_choices =
     {
         ["FrostIsland_deciduoustree"] = 3,
@@ -110,7 +110,7 @@ AddTask("FrostIsland_maxwell", {
     keys_given = {},
     region_id = "frostisland",
     level_set_piece_blocker = true,
-    room_tags = { "RoadPoison", "not_mainland", "frost" },
+    room_tags = { "RoadPoison", "not_mainland" },
     room_choices =
     {
         ["strange_island_maxwell"] = 1,
@@ -131,7 +131,7 @@ AddTask("FrostIsland_Mine", {
     keys_given = {},
     region_id = "frostisland",
     level_set_piece_blocker = true,
-    room_tags = { "RoadPoison", "not_mainland", "frost" },
+    room_tags = { "RoadPoison", "not_mainland" },
     room_choices = {
         ["FrostIsland_Mine"] = 2,
         ["FrostIsland_Mineboss"] = 1,
@@ -149,7 +149,7 @@ AddTask("FrostIsland_Mammoth", {
     keys_given = { KEYS.ISLAND_TIER4 },
     region_id = "frostisland",
     level_set_piece_blocker = true,
-    room_tags = { "RoadPoison", "not_mainland", "frost" },
+    room_tags = { "RoadPoison", "not_mainland" },
     room_choices =
     {
         ["FrostIsland_Mammoth"] = 2,

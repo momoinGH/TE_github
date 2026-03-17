@@ -28,14 +28,6 @@ function LeafBadge:SetLeavesTopColorMult(r, g, b)
     self.leavestopmultiplytarget = { r = r, g = g, b = b }
 end
 
---- 显示树叶的地皮
-local IS_CANOPY_TILE =
-{
-    WORLD_TILES.GASRAINFOREST,
-    WORLD_TILES.DEEPRAINFOREST,
-    WORLD_TILES.PIGRUINS,
-}
-
 function LeafBadge:OnUpdate(dt)
     local wasup = false
     if self.leavestop_intensity and self.leavestop_intensity > 0 then
@@ -76,17 +68,7 @@ function LeafBadge:OnUpdate(dt)
         -- end
     end
 
-    local under_leaves = false
-
-    local x, y, z = ThePlayer.Transform:GetWorldPosition()
-    local tile = TheWorld.Map:GetTileAtPoint(x, 0, z)
-    for i, tiletype in ipairs(IS_CANOPY_TILE) do
-        if tiletype == tile then
-            under_leaves = true
-            break
-        end
-    end
-
+    local under_leaves = ThePlayer.components.areaaware and ThePlayer.components.areaaware:CurrentlyInTag("Canopy")
     if under_leaves then
         self.leavestop_intensity = math.min(1, self.leavestop_intensity + (1 / 30))
     else

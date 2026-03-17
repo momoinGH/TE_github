@@ -20,6 +20,6 @@ AddRoom("suburb_base_1", {
 AddRoom("suburb_base_2", {
     colour = { r = .3, g = 0.3, b = 0.3, a = 0.3 },
     value = GROUND.SUBURB,
-    tags = { "ExitPiece", "City_Foundation", "City2", "Suburb" },
+    tags = { "ExitPiece", "City_Foundation", "City2" },
     contents = suburb_contents
 })

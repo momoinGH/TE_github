@@ -54,7 +54,7 @@ local is_worldgen = rawget(_G, "WORLDGEN_MAIN") ~= nil
 if is_worldgen then
     TroOnConfigLoaded()
 
-    modimport "modmain/map/storygen.lua"     --标签处理函数
+    modimport "modmain/map/storygen.lua"     --地形标签处理函数
     troimportmodulefile "map/lockandkey"     --地形锁钥
     troimportmodulefile "map/static_layouts" --静态布局
     troimportmodulefile "map/rooms"
