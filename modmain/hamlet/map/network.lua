@@ -20,8 +20,10 @@ local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
         for i, ent in ipairs(entities["randomruin"]) do
             local save_data = { x = ent.x, z = ent.z }
             if math.random(1, 2) == 1 then
+                entities["pig_ruins_idol"] = entities["pig_ruins_idol"] or {}
                 table.insert(entities["pig_ruins_idol"], save_data)
             else
+                entities["pig_ruins_plaque"] = entities["pig_ruins_plaque"] or {}
                 table.insert(entities["pig_ruins_plaque"], save_data)
             end
         end
@@ -33,6 +35,7 @@ local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
         for i, ent in ipairs(entities["randomrelic"]) do
             local relic = "relic_" .. tostring(math.random(1, 3))
             local save_data = { x = ent.x, z = ent.z }
+            entities[relic] = entities[relic] or {}
             table.insert(entities[relic], save_data)
         end
         entities["randomrelic"] = nil
@@ -43,8 +46,10 @@ local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
         for i, ent in ipairs(entities["randomdust"]) do
             local save_data = { x = ent.x, z = ent.z }
             if math.random(1, 2) == 1 then
+                entities["pig_ruins_pig"] = entities["pig_ruins_pig"] or {}
                 table.insert(entities["pig_ruins_pig"], save_data)
             else
+                entities["pig_ruins_ant"] = entities["pig_ruins_ant"] or {}
                 table.insert(entities["pig_ruins_ant"], save_data)
             end
         end

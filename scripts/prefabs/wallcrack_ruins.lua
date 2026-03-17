@@ -1,6 +1,9 @@
 local assets =
 {
-    Asset("ANIM", "anim/wallcrack_ruins.zip"),
+    Asset("ANIM", "anim/interior_wall_decals_ruins.zip"),
+    --Asset("ANIM", "anim/interior_wall_decals_ruins_blue.zip"),
+    Asset("ANIM", "anim/interior_wall_decals_ruins_cracks.zip"),
+    Asset("ANIM", "anim/interior_wall_decals_ruins_cracks_fake.zip"),
 }
 
 local prefabs = {

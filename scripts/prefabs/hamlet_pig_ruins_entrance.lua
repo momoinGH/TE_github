@@ -499,7 +499,7 @@ local function mazemaker(inst, dungeondef)
                 x_offset = x_offset,
                 z_offset = z_offset,
                 init = function(fake_door)
-                    fake_door:InitFakeDoor() --TODO 还缺少其他参数
+                    fake_door:InitFakeDoor(door_orientation) --TODO 还缺少其他参数
                 end
             })
         end

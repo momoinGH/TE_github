@@ -74,6 +74,8 @@ end
 
 ----------------------------------------------------------------------------------------------------
 local function SetOptionValue(name, value)
+    if not TheFrontEnd then return end
+
     local world_tabs
     for _, screen_in_stack in pairs(TheFrontEnd.screenstack) do
         if screen_in_stack.name == "ServerCreationScreen" then
@@ -86,12 +88,15 @@ local function SetOptionValue(name, value)
     end
 
     for _, tab in ipairs(world_tabs) do
-        optionitems = tab.settings_widget.settingslist.optionitems
-        for i, item in ipairs(optionitems) do
-            local option = item.option
-            if option then
-                if option.name == name and table.contains(tro_modules, option.group) then
-                    local opt = tab.settings_widget.settingslist.scroll_list:GetListWidgets()[i].opt_spinner
+        for _, w in ipairs({
+            "settings_widget",
+            "worldgen_widget"
+        }) do
+            widget = tab[w]
+            optionitems = widget.settingslist.optionitems
+            for i, item in ipairs(optionitems) do
+                if item.option and item.option.name == name and table.contains(tro_modules, item.option.group) then
+                    local opt = widget.settingslist.scroll_list:GetListWidgets()[i].opt_spinner
                     opt.spinner:SetSelected(value)
                     break
                 end
