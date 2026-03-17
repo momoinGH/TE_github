@@ -1,7 +1,7 @@
 -- 深层雨林
 AddRoom("BG_deeprainforest_base", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "Bramble", "Canopy" },
     contents = {
         distributepercent = 0.5,
@@ -13,7 +13,7 @@ AddRoom("BG_deeprainforest_base", {
             flower_rainforest = 1,
             --	berrybush = 1,
             lightrays_jungle = 1.2,
-            deep_jungle_fern_noise = 4,
+            deep_jungle_fern_noise_plant= 4,
             jungle_border_vine = 0.5,
             fireflies = 0.2,
             hanging_vine_patch = 0.1,
@@ -38,7 +38,7 @@ AddRoom("BG_deeprainforest_base", {
 -- 有蜘蛛猴的深层雨林
 AddRoom("deeprainforest_spider_monkey_nest", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "Bramble", "Canopy" },
     contents = {
         distributepercent = 0.25, --.3
@@ -49,7 +49,7 @@ AddRoom("deeprainforest_spider_monkey_nest", {
             nettle = 0.12,
             flower_rainforest = 1,
             lightrays_jungle = 1.2,
-            deep_jungle_fern_noise = 4,
+            deep_jungle_fern_noise_plant= 4,
             jungle_border_vine = 0.5,
             randomrelic = 0.02,
             randomruin = 0.02,
@@ -69,7 +69,7 @@ AddRoom("deeprainforest_spider_monkey_nest", {
 -- 有萤火虫的深层雨林
 AddRoom("deeprainforest_fireflygrove", {
     colour = { r = 1, g = 1, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "Bramble", "Canopy" },
     contents = {
         distributepercent = 0.25, --0.25, --.3
@@ -80,7 +80,7 @@ AddRoom("deeprainforest_fireflygrove", {
             nettle = 0.12,
             flower_rainforest = 1,
             lightrays_jungle = 1.2,
-            deep_jungle_fern_noise = 4,
+            deep_jungle_fern_noise_plant= 4,
             jungle_border_vine = 0.5,
             fireflies = 5,
             hanging_vine_patch = 0.1,
@@ -103,7 +103,7 @@ AddRoom("deeprainforest_fireflygrove", {
 -- 有捕蝇草的深层雨林
 AddRoom("deeprainforest_flytrap_grove", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "Bramble", "Canopy" },
     contents = {
         distributepercent = 0.25, --.3
@@ -114,7 +114,7 @@ AddRoom("deeprainforest_flytrap_grove", {
             nettle = 0.12,
             flower_rainforest = 1,
             lightrays_jungle = 1.2,
-            deep_jungle_fern_noise = 4,
+            deep_jungle_fern_noise_plant= 4,
             jungle_border_vine = 0.5,
             fireflies = 0.2,
             randomrelic = 0.02,
@@ -138,7 +138,7 @@ AddRoom("deeprainforest_flytrap_grove", {
 -- 有蚁丘出口的深层雨林
 AddRoom("deeprainforest_anthill_exit", {
     colour = { r = 1, g = 0, b = 1, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "Canopy" },
     contents = {
         distributepercent = 0.25, --.3
@@ -149,7 +149,7 @@ AddRoom("deeprainforest_anthill_exit", {
             nettle = 0.12,
             flower_rainforest = 1,
             lightrays_jungle = 1.2,
-            deep_jungle_fern_noise = 4,
+            deep_jungle_fern_noise_plant= 4,
             jungle_border_vine = 0.5,
             fireflies = 0.2,
             pig_ruins_torch = 0.02,
@@ -171,7 +171,7 @@ AddRoom("deeprainforest_anthill_exit", {
 -- 有毒气的深层雨林
 AddRoom("deeprainforest_gas", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASJUNGLE,
+    value = WORLD_TILES.GASRAINFOREST,
     tags = { "ExitPiece", "Bramble", "Canopy" },
     contents = {
         distributepercent = 0.45, --.45
@@ -198,7 +198,7 @@ AddRoom("deeprainforest_gas", {
 
 AddRoom("deeprainforest_gas_flytrap_grove", {
     colour = { r = 1, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.GASJUNGLE,
+    value = WORLD_TILES.GASRAINFOREST,
     tags = { "ExitPiece", "Bramble", "Canopy" },
     contents = {
         distributepercent = 0.5, --.45
@@ -230,7 +230,7 @@ AddRoom("deeprainforest_gas_flytrap_grove", {
 
 AddRoom("deeprainforest_ruins_entrance", {
     colour = { r = 1, g = 0.1, b = 0.2, a = 0.5 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "Bramble", "Canopy" },
     contents = {
         distributepercent = 0.25, --.3
@@ -241,7 +241,7 @@ AddRoom("deeprainforest_ruins_entrance", {
             nettle = 0.12,
             flower_rainforest = 1,
             lightrays_jungle = 1.2,
-            deep_jungle_fern_noise = 4,
+            deep_jungle_fern_noise_plant= 4,
             jungle_border_vine = 0.5,
             fireflies = 0.2,
             randomrelic = 0.02,
@@ -264,7 +264,7 @@ AddRoom("deeprainforest_ruins_entrance", {
 -- 有曼德拉丘的雨林
 AddRoom("deeprainforest_mandrakeman", {
     colour = { r = 1, g = 0, b = 1, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "Bramble", "Canopy" },
     contents = {
         distributepercent = 0.25, --.3
@@ -275,7 +275,7 @@ AddRoom("deeprainforest_mandrakeman", {
             nettle = 0.12,
             flower_rainforest = 1,
             lightrays_jungle = 1.2,
-            deep_jungle_fern_noise = 4,
+            deep_jungle_fern_noise_plant= 4,
             jungle_border_vine = 0.5,
             fireflies = 0.2,
             pig_ruins_torch = 0.02,
@@ -297,7 +297,7 @@ AddRoom("deeprainforest_mandrakeman", {
 
 AddRoom("deeprainforest_anthill", {
     colour = { r = 1, g = 0, b = 1, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "Bramble", "Canopy" },
     contents = {
         distributepercent = 0.25, --.3
@@ -308,7 +308,7 @@ AddRoom("deeprainforest_anthill", {
             nettle = 0.12,
             flower_rainforest = 1,
             lightrays_jungle = 1.2,
-            deep_jungle_fern_noise = 4,
+            deep_jungle_fern_noise_plant= 4,
             jungle_border_vine = 0.5,
             fireflies = 0.2,
             pig_ruins_torch = 0.02,
@@ -330,7 +330,7 @@ AddRoom("deeprainforest_anthill", {
 
 AddRoom("deeprainforest_base_nobatcave", {
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 },
-    value = GROUND.DEEPRAINFOREST,
+    value = WORLD_TILES.DEEPRAINFOREST,
     tags = { "ExitPiece", "Bramble", "Canopy" },
     contents = {
 
@@ -343,7 +343,7 @@ AddRoom("deeprainforest_base_nobatcave", {
             flower_rainforest = 1,
             --	berrybush = 1,
             lightrays_jungle = 1.2,
-            deep_jungle_fern_noise = 4,
+            deep_jungle_fern_noise_plant= 4,
             jungle_border_vine = 0.5,
             fireflies = 0.2,
             hanging_vine_patch = 0.1,

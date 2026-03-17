@@ -1,7 +1,7 @@
 -- 茶树
 AddRoom("piko_land", {
     colour = { r = 1.0, g = 0.0, b = 1.0, a = 0.3 },
-    value = GROUND.FIELDS,
+    value = WORLD_TILES.FIELDS,
     tags = { "ExitPiece", "Cultivated" },
     contents = {
         distributepercent = 0.06, --0.1
@@ -31,13 +31,13 @@ local cultivated_contnets = {
 
 AddRoom("cultivated_base_1", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.FIELDS,
+    value = WORLD_TILES.FIELDS,
     tags = { "ExitPiece", "Cultivated", "City1" },
     contents = cultivated_contnets
 })
 AddRoom("cultivated_base_2", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.FIELDS,
+    value = WORLD_TILES.FIELDS,
     tags = { "ExitPiece", "Cultivated", "City2" },
     contents = cultivated_contnets
 })

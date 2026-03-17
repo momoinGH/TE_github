@@ -1,5 +1,5 @@
-local RoomUtils = require("tropical_utils/room_utils")
-local assets               =
+local RoomUtils      = require("tropical_utils/room_utils")
+local assets         =
 {
     Asset("ANIM", "anim/pig_ruins_entrance.zip"),
     Asset("ANIM", "anim/pig_door_test.zip"),
@@ -7,7 +7,7 @@ local assets               =
     Asset("ANIM", "anim/pig_ruins_entrance_build.zip"),
     Asset("ANIM", "anim/pig_ruins_entrance_top_build.zip"),
 }
-local prefabs              =
+local prefabs        =
 {
     "deco_roomglow",
     "light_dust_fx",
@@ -43,7 +43,7 @@ local prefabs              =
     "aporkalypse_clock",
     "wallcrack_ruins"
 }
-local room_creatures       = {
+local room_creatures = {
     {
         { name = "bat", x_offset = (math.random() * 7) - (7 / 2), z_offset = (math.random() * 13) - (13 / 2) },
         { name = "bat", x_offset = (math.random() * 7) - (7 / 2), z_offset = (math.random() * 13) - (13 / 2) },
@@ -476,17 +476,32 @@ local function mazemaker(inst, dungeondef)
         local southexitopen = not room.exits[RoomUtils.GetSouth()]
         local eastexitopen = not room.exits[RoomUtils.GetEast()]
         local numexits = GetTableSize(room.exits)
+        local x_offset, z_offset = 0, 0
+        local door_orientation
         if northexitopen and math.random() < 0.10 then
-            table.insert(addprops, { name = "pig_ruins_cracks_fake_north_door", x_offset = -depth / 2 })
+            x_offset = -depth / 2
             northexitopen = false
+            door_orientation = "north"
         end
         if westexitopen and math.random() < 0.10 then
-            table.insert(addprops, { name = "pig_ruins_cracks_fake_west_door", z_offset = -width / 2 })
+            z_offset = -width / 2
             westexitopen = false
+            door_orientation = "west"
         end
         if eastexitopen and math.random() < 0.10 then
-            table.insert(addprops, { name = "pig_ruins_cracks_fake_east_door", z_offset = width / 2 })
+            z_offset = width / 2
             eastexitopen = false
+            door_orientation = "east"
+        end
+        if door_orientation then
+            table.insert(addprops, {
+                name = "wallcrack_ruins",
+                x_offset = x_offset,
+                z_offset = z_offset,
+                init = function(fake_door)
+                    fake_door:InitFakeDoor() --TODO 还缺少其他参数
+                end
+            })
         end
 
         local fountain = false

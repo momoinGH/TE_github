@@ -1,7 +1,7 @@
 --雨林遗迹
 AddRoom("rainforest_ruins", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "ExitPiece", "Bramble" },
     contents = {
         distributepercent = .35, -- .5
@@ -30,7 +30,7 @@ AddRoom("rainforest_ruins", {
 -- 基础雨林资源
 AddRoom("BG_rainforest_base", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "ExitPiece", "Bramble" },
     contents = {
         distributepercent = .38, --.5
@@ -58,7 +58,7 @@ AddRoom("BG_rainforest_base", {
 -- 睡莲池塘
 AddRoom("rainforest_lillypond", {
     colour = { r = 1.0, g = 0.3, b = 0.3, a = 0.3 },
-    value = GROUND.LILYPOND,
+    value = WORLD_TILES.LILYPOND,
     tags = { "ExitPiece", "Bramble" },
     contents = {
         countstaticlayouts = {
@@ -87,7 +87,7 @@ AddRoom("rainforest_lillypond", {
 
 AddRoom("rainforest_base_nobatcave", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.RAINFOREST,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "ExitPiece", "Bramble" },
     contents = {
         distributepercent = .38, --.5

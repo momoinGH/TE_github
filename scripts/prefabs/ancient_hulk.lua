@@ -121,8 +121,7 @@ local function applydamagetoent(inst, ent, targets, rad, hit)
                     (work_action == ACTIONS.CHOP or
                         work_action == ACTIONS.HAMMER or
                         work_action == ACTIONS.MINE or
-                        work_action == ACTIONS.DIG or
-                        work_action == ACTIONS.BLANK
+                        work_action == ACTIONS.DIG
                     )
             end
             if isworkable then

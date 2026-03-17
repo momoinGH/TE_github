@@ -31,7 +31,7 @@ local cityContents = {
 
 AddRoom("city_base_2", {
     colour = { r = .1, g = 0.1, b = 0.1, a = 0.3 },
-    value = GROUND.SUBURB,
+    value = WORLD_TILES.SUBURB,
     tags = { "ExitPiece", "City_Foundation", "City2" },
     contents = cityContents
 })

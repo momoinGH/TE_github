@@ -114,7 +114,6 @@ local prefabs =
 
     "deed",
     "construction_permit",
-    "demolition_permit",
     "securitycontract",
 }
 
@@ -609,7 +608,6 @@ local rooms = {
             { name = "wall_mirror", x_offset = -1, z_offset = -width / 2 },
             { name = "shop_buyer", x_offset = 1.75, z_offset = width / 2 - 5, saleitem = { "deed", "oinc", 50 }, anim = "idle_globe_bar", justsellonce = true },
             { name = "shop_buyer", x_offset = 3.5, z_offset = width / 2 - 2, saleitem = { "construction_permit", "oinc", 50 }, anim = "idle_globe_bar" },
-            { name = "shop_buyer", x_offset = -1, z_offset = width / 2 - 2, saleitem = { "demolition_permit", "oinc", 10 }, anim = "idle_globe_bar" },
             { name = "shop_buyer", x_offset = 2, z_offset = -width / 2 + 3, saleitem = { "securitycontract", "oinc", 10 }, anim = "idle_marble_dome" },
         }
     },
@@ -846,4 +844,5 @@ return MakeShop("pig_shop_deli", { build = "pig_shop_deli", sounds = { SHOPSOUND
     MakeShop("pig_shop_bank", { build = "pig_shop_bank", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
     MakeShop("pig_shop_tinker", { build = "pig_shop_tinker", sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true }),
     MakeShop("pig_shop_cityhall", { build = "pig_cityhall", bank = "pig_cityhall", indestructable = true, unburnable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 } }),
-    MakeShop("pig_shop_cityhall_player", { bank = "pig_cityhall", build = "pig_cityhall", minimap = "pig_shop_cityhall.png", unburnable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true })
+    MakeShop("pig_shop_cityhall_player",
+        { bank = "pig_cityhall", build = "pig_cityhall", minimap = "pig_shop_cityhall.png", unburnable = true, sounds = { SHOPSOUND_ENTER1, SHOPSOUND_ENTER2 }, usestonebreaksound = true })

@@ -77,6 +77,48 @@ end
 local spinners = {}            --世界生成里的每个选项
 local config_sync_lock = false --防止递归
 
+local function SetOptionValue(group, name, value)
+    local world_tabs
+    for _, screen_in_stack in pairs(TheFrontEnd.screenstack) do
+        if screen_in_stack.name == "ServerCreationScreen" then
+            world_tabs = screen_in_stack.world_tabs
+            break
+        end
+    end
+    if not world_tabs then
+        return
+    end
+
+    for _, tab in ipairs(world_tabs) do
+        optionitems = tab.settings_widget.settingslist.optionitems
+        for _, item in ipairs(optionitems) do
+            local option = item.option
+            if option then
+                if (group == nil or option.group == group) and option.name == name then
+                    -- TODO
+                end
+            end
+        end
+    end
+end
+
+
+-- option:
+--  options:
+--   1:
+--    data: 0
+--    text: 禁用
+--   2:
+--    data: 1
+--    text: 启用
+--  image: fog.tex
+--  name: fog
+--  widget_type: optionsspinner
+--  group: hamlet
+--  default: 1
+--  atlas: images/scrapbook_tropical/scrapbook_hamlet.xml
+--  grouplabel: <哈姆雷特>
+
 -- 修改世界生成时设置mod配置
 local SettingsList = require("widgets/redux/worldsettings/settingslist")
 Hooks.FnDecorator(SettingsList, "OnSpinnerChanged", function(self, option, spinner, value)
@@ -93,6 +135,11 @@ Hooks.FnDecorator(SettingsList, "OnSpinnerChanged", function(self, option, spinn
         end
     end
 end)
+
+
+
+
+
 
 -- mod配置项修改时更新世界生成里的选项
 Hooks.FnDecorator(KnownModIndex, "SetConfigurationOption", function(self, modn, option_name, value)

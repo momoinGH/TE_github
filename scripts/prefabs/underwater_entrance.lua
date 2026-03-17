@@ -5,7 +5,6 @@ local assets =
 
 local prefabs =
 {
-    "exitcavelight"
 }
 
 local function fn(Sim)

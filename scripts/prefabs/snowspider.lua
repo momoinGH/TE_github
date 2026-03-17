@@ -3,6 +3,7 @@ local moon_assets =
     Asset("ANIM", "anim/ds_spider_basic.zip"),
     Asset("ANIM", "anim/ds_spider_snow.zip"),
     Asset("SOUND", "sound/spider.fsb"),
+    Asset("ANIM", "anim/spider_frost.zip"),
 }
 
 local prefabs =

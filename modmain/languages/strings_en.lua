@@ -1107,7 +1107,6 @@ STRINGS.NAMES.FISH3                                                             
 STRINGS.NAMES.PIGMAN_PROFESSOR                                                  = "教授"
 STRINGS.NAMES.DECO_PRODUCE_MENU_SIDE                                            = "食品店菜单黑板侧"
 STRINGS.NAMES.DECO_WOOD_BASE                                                    = "Wooden Beam"
-STRINGS.NAMES.DEEP_JUNGLE_FERN_NOISE                                            = "生成数个深层雨林杂草"
 STRINGS.NAMES.HATBOX1                                                           = "帽子桶装饰"
 STRINGS.NAMES.VEGGIE_SOUP                                                       = "蔬菜汤贡品"
 STRINGS.NAMES.DECO_CAVE_FLOOR_TRIM_FRONT                                        = "洞穴房间地上断石柱后阴影"
@@ -1246,7 +1245,6 @@ STRINGS.NAMES.POT_SYRUP                                                         
 STRINGS.NAMES.GODDESS_SHRINE                                                    = "Wind Goddess Shrine"
 STRINGS.NAMES.DECO_FLORIST_HANGINGPLANT1                                        = "花店吊兰1"
 STRINGS.NAMES.OCEANFISH_MEDIUM_UNDERWATER_2                                     = "斑鱼"
-STRINGS.NAMES.PEAGAWK_PRISM                                                     = "Peagawk"
 STRINGS.NAMES.OCEANFISH_MEDIUM_UNDERWATER_6                                     = "花锦鲤"
 STRINGS.NAMES.MAXWELLSTATUECABECA                                               = "Statue Head"
 STRINGS.NAMES.WOODLEGS_CAGE_UNDERWATER                                          = "笼子"
@@ -3812,7 +3810,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTMAN2                                     
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POLLEN_COOKED                               = "彻底熟了的花粉。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPONGE_PIECE                                = "这是一小块海绵。"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEAGAWK_PRISM                               = "这只的颜色很少见啊。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_WALLORNAMENT_PERIODIC_TABLE            = "Science-y."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIKO_DEAD                                   = "I feel kinda bad."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH2_COOKED                                = "一块烤熟的热带鱼。"

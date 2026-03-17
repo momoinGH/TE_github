@@ -1,6 +1,6 @@
 AddRoom("BG_pinacle_base", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.ROCKY,
+    value = WORLD_TILES.ROCKY,
     tags = {},
     contents = {
         distributepercent = .10,                             --.26

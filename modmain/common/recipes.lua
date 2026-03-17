@@ -202,13 +202,6 @@ AddRecipeFilter({ name = "GORGE", atlas = tab_atlas, image = "tab_gorge.tex" }) 
 ---------------------corrigindo bug estranho-------------
 --AddRecipe2("campfire", {Ingredient("cutgrass", 3), Ingredient("log", 2)}, TECH.NONE, {placer="campfire_placer"})--为什么有个营火？
 
--- CHARACTER--
-if not GetModConfigData("disablecharacters") then
-    -- Walani
-    -- Woodlegs
-    AddRecipe2("woodlegshat", { Ingredient("boneshard", 4), Ingredient("fabric", 3), Ingredient("dubloon", 10) }, TECH.NONE, { builder_tag = "woodlegs" }, { "CHARACTER" })
-end
-
 -- Wormwood
 AddRecipe2("poisonbalm", { Ingredient("livinglog", 1), Ingredient("venomgland", 1) }, TECH.NONE, { builder_tag = "plantkin" }, { "CHARACTER" })
 AddRecipe2("seaweed_stalk", { Ingredient("bullkelp_root", 1), Ingredient("seaweed", 3), Ingredient(CHARACTER_INGREDIENT.HEALTH, 10) }, TECH.NONE, { builder_tag = "plantkin" },
@@ -285,7 +278,6 @@ AddRecipe2("mermwatchtower", { Ingredient("boards", 5), Ingredient("tentaclespot
 --AddRecipe2("shadowdigger_builder",		{Ingredient("nightmarefuel", 2), Ingredient(CHARACTER_INGREDIENT.MAX_SANITY, TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDIGGER)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
 --AddRecipe2("shadowduelist_builder",		{Ingredient("nightmarefuel", 2), Ingredient(CHARACTER_INGREDIENT.MAX_SANITY, TUNING.SHADOWWAXWELL_SANITY_PENALTY.SHADOWDUELIST)},	TECH.SHADOW_TWO, nil, nil, true, nil, "shadowmagic")
 -- Wickerbottom
-AddRecipe2("book_meteor", { Ingredient("papyrus", 2), Ingredient("obsidian", 2) }, TECH.SCIENCE_TWO, { builder_tag = "bookbuilder", }, { "CHARACTER" })
 -- WX78--
 AddRecipe2("wx78module_movespeed_sw", { Ingredient("scandata", 2), Ingredient("crab", 1) }, TECH.ROBOTMODULECRAFT_ONE,
     { builder_tag = "upgrademoduleowner", product = "wx78module_movespeed", }, { "CHARACTER" })
@@ -313,7 +305,6 @@ AddRecipe2("bottlelantern", { Ingredient("messagebottleempty_sw", 1), Ingredient
 
 AddRecipe2("porto_sea_chiminea", { Ingredient("sand", 4), Ingredient("tar", 6), Ingredient("limestone", 6) }, TECH.SCIENCE_ONE, { image = "sea_chiminea.tex" },
     { "LIGHT", "COOKING", "WINTER" })
-AddRecipe2("obsidianfirepit", { Ingredient("log", 3), Ingredient("obsidian", 8) }, TECH.SCIENCE_TWO, { placer = "obsidianfirepit_placer" }, { "LIGHT", "COOKING", "WINTER" })
 AddRecipe2("porto_researchlab5", { Ingredient("limestone", 4), Ingredient("sand", 2), Ingredient("transistor", 2) }, TECH.SCIENCE_ONE, { image = "researchlab5.tex" },
     { "PROTOTYPERS", "STRUCTURES" })
 AddRecipe2("icemaker", { Ingredient("heatrock", 1), Ingredient("bamboo", 5), Ingredient("transistor", 2) }, TECH.SCIENCE_TWO, { placer = "icemaker_placer" },
@@ -324,7 +315,6 @@ AddRecipe2("messagebottleempty_sw", { Ingredient("sand", 3) }, TECH.SCIENCE_TWO,
 AddRecipe2("limestone", { Ingredient("coral", 3) }, TECH.SCIENCE_ONE, nil, { "REFINE" })
 AddRecipe2("nubbin", { Ingredient("limestone", 3), Ingredient("corallarve", 1) }, TECH.SCIENCE_ONE, nil, { "REFINE" })
 AddRecipe2("ice", { Ingredient("hail_ice", 4) }, TECH.SCIENCE_ONE, nil, { "REFINE" })
-AddRecipe2("goldnugget_sw", { Ingredient("dubloon", 3) }, TECH.SCIENCE_ONE, { product = "goldnugget", }, { "REFINE" })
 AddRecipe2("spear_poison", { Ingredient("spear", 1), Ingredient("venomgland", 1) }, TECH.SCIENCE_ONE, nil, { "WEAPONS" })
 AddRecipe2("cutlass", { Ingredient("goldnugget", 2), Ingredient("twigs", 1), Ingredient("dead_swordfish", 1) }, TECH.SCIENCE_TWO, nil, { "WEAPONS" })
 AddRecipe2("coconade", { Ingredient("coconut", 1), Ingredient("gunpowder", 1), Ingredient("rope", 1) }, TECH.SCIENCE_ONE, nil, { "WEAPONS" })
@@ -351,7 +341,6 @@ AddRecipe2("sand_castle", { Ingredient("sand", 4), Ingredient("palmleaf", 2), In
 
 AddRecipe2("turf_road", { Ingredient("cutstone", 1), Ingredient("flint", 2) }, TECH.SCIENCE_TWO, { numtogive = 4 }, { "DECOR" }) --要先加个卵石路下面改的海难卵石路才能生效吗？
 
-AddRecipe2("dragoonden", { Ingredient("dragoonheart", 1), Ingredient("rocks", 5), Ingredient("obsidian", 4) }, TECH.SCIENCE_TWO, { placer = "dragoonden_placer" }, { "STRUCTURES" })
 AddRecipe2("wildborehouse", { Ingredient("pigskin", 4), Ingredient("palmleaf", 5), Ingredient("bamboo", 8) }, TECH.SCIENCE_TWO, { placer = "wildborehouse_placer" }, { "STRUCTURES" })
 AddRecipe2("primeapebarrel", { Ingredient("twigs", 10), Ingredient("cave_banana", 3), Ingredient("poop", 4) }, TECH.SCIENCE_TWO, { placer = "primeapebarrel_placer" },
     { "STRUCTURES" })
@@ -518,34 +507,6 @@ AddRecipe2("quagmire_swampig_house", { Ingredient("boards", 4), Ingredient("rock
     { nounlock = true, placer = "quagmire_swampig_house_placer" }, { "GORGE" })
 AddRecipe2("quagmire_flour", { Ingredient("wheat", 2) }, TECH.FOODPROCESSING_ONE, { nounlock = true }, { "REFINE", "COOKING" })
 AddRecipe2("quagmire_spotspice_ground", { Ingredient("quagmire_spotspice_sprig", 3) }, TECH.FOODPROCESSING_ONE, { nounlock = true }, { "REFINE", "COOKING" })
-
---[[AddRecipe2("dubloon",					{Ingredient("quagmire_coin1", 2)}, 	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("oinc",						{Ingredient("quagmire_coin1", 2)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_coin1",			{Ingredient("quagmire_coin2", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_coin2",			{Ingredient("quagmire_coin1", 5)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_crate_pot_hanger",	{Ingredient("quagmire_coin1", 6)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_crate_oven",		{Ingredient("quagmire_coin1", 6)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_crate_grill_small",{Ingredient("quagmire_coin1", 6)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_crate_grill",		{Ingredient("quagmire_coin1", 8)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("pot_syrup",					{Ingredient("quagmire_coin1", 4)},	TECH.GORGE_TWO, {nounlock=true, image="quagmire_pot_syrup.tex"}, {"GORGE"})
-AddRecipe2("pot",						{Ingredient("quagmire_coin2", 4)},	TECH.GORGE_TWO, {nounlock=true, image="quagmire_pot.tex"}, {"GORGE"})
-AddRecipe2("casseroledish",				{Ingredient("quagmire_coin1", 4)},	TECH.GORGE_TWO, {nounlock=true, image="quagmire_casseroledish.tex"}, {"GORGE"})
-AddRecipe2("plate_silver",				{Ingredient("quagmire_coin2", 3)},	TECH.GORGE_TWO, {atlas=gf_atlas, nounlock=true}, {"GORGE"})
-AddRecipe2("bowl_silver",				{Ingredient("quagmire_coin2", 3)}, TECH.GORGE_TWO, {atlas=gf_atlas, nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_key_park",			{Ingredient("quagmire_coin1", 10)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_salt_rack_item",	{Ingredient("quagmire_coin1", 8)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_slaughtertool",	{Ingredient("quagmire_coin2", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_sapbucket",		{Ingredient("quagmire_coin1", 3)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-
-AddRecipe2("quagmire_goatmilk",			{Ingredient("quagmire_coin2", 3)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_seedpacket_1",		{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_seedpacket_2",		{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_seedpacket_3",		{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_seedpacket_4",		{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_seedpacket_5",		{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_seedpacket_6",		{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_seedpacket_7",		{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})
-AddRecipe2("quagmire_seedpacket_mix",	{Ingredient("quagmire_coin1", 1)},	TECH.GORGE_TWO, {nounlock=true}, {"GORGE"})]]
 
 AddRecipe2("quagmire_crabtrap", { Ingredient("twigs", 3), Ingredient("silk", 2) }, TECH.GORGE_TWO, { nounlock = true, image = "quagmire_crabtrap.tex", }, { "GORGE" })
 AddRecipe2("quagmire_safe", { Ingredient("cutstone", 3), Ingredient("goldnugget", 2) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_safe_placer", }, { "GORGE" })

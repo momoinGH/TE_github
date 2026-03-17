@@ -151,7 +151,6 @@ function MakeWallType(data)
     local prefabs =
     {
         "collapse_small",
-        "brokenwall_" .. data.name,
     }
 
     local bank = data.name == "dreadstone" and "wall_dreadstone" or "wall"

@@ -9,6 +9,23 @@
 
 
 
-把一些_path去掉
 用region_id隔开、not_mainland标签
 刚开mod的时候不是很准，mod配置是关，世界生成那是开
+重写hamlet_interior_door
+
+
+
+
+[00:00:06]: AnimationFile::LoadFile Failed to open anim/sparks_green.zip
+[00:00:06]: AnimationFile::LoadFile Failed to open anim/chop_mangrove_blue.zip
+[00:00:06]: AnimationFile::LoadFile Failed to open anim/swap_poop.zip
+Failed to open anim/chop_mangrove_pink.zip
+LoadFile Failed to open anim/hacking_tall_grass_fx.zip
+[00:00:07]: AnimationFile::LoadFile Failed to open anim/farm_plant_aloeplant.zip
+[00:00:07]: AnimationFile::LoadFile Failed to open anim/farm_plant_sweett.zip
+[00:00:07]: AnimationFile::LoadFile Failed to open anim/farm_plant_radish.zip
+[00:00:07]: AnimationFile::LoadFile Failed to open anim/farm_plant_turnip.zip
+[00:00:07]: AnimationFile::LoadFile Failed to open anim/sparklefx.zip
+[00:00:07]: AnimationFile::LoadFile Failed to open anim/splash_water.zip
+[00:00:08]: AnimationFile::LoadFile Failed to open anim/farm_plant_wheataaaa.zip
+[00:00:08]: AnimationFile::LoadFile Failed to open anim/water_bombsplash.zip

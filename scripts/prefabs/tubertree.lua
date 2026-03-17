@@ -6,7 +6,6 @@ local assets =
     Asset("ANIM", "anim/tuber_tree.zip"),
     Asset("ANIM", "anim/dust_fx.zip"),
     Asset("SOUND", "sound/forest.fsb"),
-    --Asset("INV_IMAGE", "jungleTreeSeed"),
     Asset("MINIMAP_IMAGE", "tuber_trees"),
 }
 

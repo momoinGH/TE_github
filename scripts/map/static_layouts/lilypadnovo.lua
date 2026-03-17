@@ -62,7 +62,7 @@ return {
             objects = {
                 {
                     name = "",
-                    type = "watertree_pillar3",
+                    type = "tree_pillar",
                     shape = "rectangle",
                     x = 416,
                     y = 416,

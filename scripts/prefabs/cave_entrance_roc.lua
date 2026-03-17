@@ -11,7 +11,7 @@ local assets = {
     Asset("MINIMAP_IMAGE", "ruins_closed"),
 }
 
-local prefabs = { "exitcavelight", "roc_nest", "roc_nest_tree1", "roc_nest_tree2", "roc_nest_bush", "roc_nest_branch1", "roc_nest_branch2", "roc_nest_trunk", "roc_nest_house",
+local prefabs = { "roc_nest", "roc_nest_tree1", "roc_nest_tree2", "roc_nest_bush", "roc_nest_branch1", "roc_nest_branch2", "roc_nest_trunk", "roc_nest_house",
     "roc_nest_rusty_lamp",
     "roc_nest_egg1", "roc_nest_egg2", "roc_nest_egg3", "roc_nest_egg4", "roc_nest_debris1", "roc_nest_debris2", "roc_nest_debris3", "roc_cave_light_beam",
 }

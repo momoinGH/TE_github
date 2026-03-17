@@ -35,7 +35,7 @@ AddTask("Lilypond_land", {
     room_choices = {
         ["rainforest_lillypond"] = math.random(3, 5),
     },
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 0.3, b = 0.3, a = 0.3 }
 })
@@ -45,7 +45,7 @@ AddTask("Lilypond_land_2", {
     room_choices = {
         ["rainforest_lillypond"] = math.random(2, 3),
     },
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 0.3, b = 0.3, a = 0.3 }
 })
@@ -102,7 +102,7 @@ AddTask("Deep_rainforest", {
         { name = "pig_ruins_artichoke" },
         { name = "pig_ruins_artichoke" },
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -123,7 +123,7 @@ AddTask("Deep_rainforest_2", {
         { name = "pig_ruins_artichoke" },
         { name = "pig_ruins_artichoke" },
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -142,7 +142,7 @@ AddTask("Deep_lost_ruins_gas", {
         { name = "pig_ruins_artichoke" },
         { name = "pig_ruins_entrance_4" },
     },
-    room_bg = GROUND.GASJUNGLE,
+    room_bg = WORLD_TILES.GASRAINFOREST,
     background_room = "deeprainforest_gas",
     colour = { r = 0.8, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -157,7 +157,7 @@ AddTask("Lost_Ruins_1", {
     set_pieces = {
         { name = "pig_ruins_entrance_1" }
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -178,7 +178,7 @@ AddTask("Deep_rainforest_3", {
         { name = "pig_ruins_artichoke" },
         { name = "pig_ruins_artichoke" },
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -193,7 +193,7 @@ AddTask("Deep_rainforest_mandrake", {
     set_pieces = {
         { name = "mandraketown" },
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -207,7 +207,7 @@ AddTask("Path_to_the_others", {
         ["plains_tallgrass"] = math.random(1, 2),
         ["plains_pogs"] = math.random(1, 2),
     },
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -219,7 +219,7 @@ AddTask("Other_pigtopia_capital", {
     room_choices = {
         ["city_base_2"] = math.random(2, 3),
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = WORLD_TILES.SUBURB,
     background_room = "suburb_base_2",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -231,7 +231,7 @@ AddTask("Other_pigtopia", {
     room_choices = {
         ["suburb_base_2"] = math.random(2, 3),
     },
-    room_bg = GROUND.SUBURB,
+    room_bg = WORLD_TILES.SUBURB,
     background_room = "suburb_base_2",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -243,7 +243,7 @@ AddTask("Other_edge_of_civilization", {
     room_choices = {
         ["cultivated_base_2"] = math.random(1, 3),
     },
-    room_bg = GROUND.FIELDS,
+    room_bg = WORLD_TILES.FIELDS,
     background_room = "cultivated_base_2",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -254,7 +254,7 @@ AddTask("this_is_how_you_get_ants", {
     room_choices = {
         ["deeprainforest_anthill"] = 1,
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0, g = 0, b = 1, a = 0.3 }
 })
@@ -276,7 +276,7 @@ AddTask("Deep_lost_ruins4", {
         { name = "nettlegrove" },
         { name = "nettlegrove" },
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -298,7 +298,7 @@ AddTask("lost_rainforest", {
         { name = "pig_ruins_nocanopy_4" },
         { name = "pig_ruins_nocanopy_4" },
     },
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_rainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -313,7 +313,7 @@ AddTask("painted_sands", {
         ["battleground_claw"] = 1,
         ["battleground_leg"] = 1,
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_painted_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -325,7 +325,7 @@ AddTask("plains", {
         ["plains_tallgrass"] = math.random(2, 3),
         ["plains_pogs"] = 1,
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_plains_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -336,7 +336,7 @@ AddTask("rainforests", {
     room_choices = {
         ["BG_rainforest_base"] = math.random(2, 3),
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 },
 })
@@ -347,7 +347,7 @@ AddTask("rainforest_ruins", {
     room_choices = {
         ["rainforest_ruins"] = math.random(2, 3),
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -359,7 +359,7 @@ AddTask("plains_ruins", {
         ["plains_ruins"] = math.random(2, 3),
         ["plains_pogs"] = math.random(0, 1),
     },
-    room_bg = GROUND.PLAINS,
+    room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_plains_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -375,7 +375,7 @@ AddTask("pincale", {
         { name = "roc_nest" },
         { name = "roc_cave" },
     },
-    room_bg = GROUND.ROCKY,
+    room_bg = WORLD_TILES.ROCKY,
     background_room = "BG_pinacle_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
@@ -392,7 +392,7 @@ AddTask("Deep_wild_ruins4", {
     set_pieces = {
         { name = "pig_ruins_exit_4" },
     },
-    room_bg = GROUND.DEEPRAINFOREST,
+    room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "deeprainforest_base_nobatcave",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -406,7 +406,7 @@ AddTask("wild_rainforest", {
         ["painted_base_nobatcave"] = math.random(3, 4),
         ["rainforest_base_nobatcave"] = math.random(3, 4),
     },
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "rainforest_base_nobatcave",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })
@@ -420,7 +420,7 @@ AddTask("wild_ancient_ruins", {
     set_pieces = {
         { name = "pig_ruins_entrance_5" },
     },
-    room_bg = GROUND.RAINFOREST,
+    room_bg = WORLD_TILES.RAINFOREST,
     background_room = "rainforest_base_nobatcave",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
 })

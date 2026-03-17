@@ -7,7 +7,6 @@ local prefabs =
 {
     "marsh_plant",
     "fish",
-    "flup",
 }
 
 local function SpawnPlants(inst, plantname, count, maxradius)

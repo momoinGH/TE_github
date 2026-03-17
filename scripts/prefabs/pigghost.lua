@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/player_ghost_withhat.zip"),
-    Asset("ANIM", "anim/ghost_pirate_build.zip"),
+    Asset("ANIM", "anim/ghost_pig_build.zip"),
 }
 
 local brain = require "brains/ghostbrain"
@@ -14,7 +14,7 @@ local function OnDeath(inst)
     inst.components.aura:Enable(false)
 end
 
-local function fn()
+local function fn1()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -35,7 +35,7 @@ local function fn()
     inst.Light:SetColour(180 / 255, 195 / 255, 225 / 255)
 
     inst.AnimState:SetBank("ghost")
-    inst.AnimState:SetBuild("ghost_pirate_build")
+    inst.AnimState:SetBuild("ghost_pig_build")
     inst.AnimState:PlayAnimation("idle", true)
     --inst.AnimState:SetMultColour(1,1,1,.6)
 
@@ -91,4 +91,4 @@ local function fn()
     return inst
 end
 
-return Prefab("pirateghost", fn, assets)
+return Prefab("pigghost", fn1, assets)

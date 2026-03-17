@@ -15,6 +15,28 @@ local assets = {
     Asset("ANIM", "anim/ant_queen_entrance.zip"),
 }
 
+local function GetOpposite(dir)
+    if dir == "east" then
+        return "west"
+    elseif dir == "west" then
+        return "east"
+    end
+    return dir
+end
+
+local function OnFakeDoorRemoved(inst)
+    inst:ReturnToScene()
+    inst.AnimState:PlayAnimation(GetOpposite(inst.door_orientation) .. "_open")
+    inst:RemoveTag("secret")
+end
+
+local function SetFakeDoor(inst, fake_door)
+    inst:RemoveFromScene()
+    inst.components.teleporter:SetEnabled(false)
+    inst:AddTag("secret")
+    inst:ListenForEvent("onremove", function() OnFakeDoorRemoved(inst) end, fake_door) --监听假门消失
+end
+
 local function OnBlasted(inst, worker)
     inst:RemoveTag("NOCLICK")
     inst.AnimState:PlayAnimation(inst.door_orientation .. "_open")
@@ -78,6 +100,7 @@ local function common(bank, build, anim, data)
     end
 
     inst.door_orientation = data.door_orientation
+    inst.SetFakeDoor = SetFakeDoor
 
     if data.exploitable then
         inst.exploitable = true
@@ -134,15 +157,6 @@ return
     MakeDoor("pig_ruins_cracks_south_door", "interior_wall_decals_ruins", "interior_wall_decals_ruins_cracks", "south_closed", { door_orientation = "south", exploitable = true }),
     MakeDoor("pig_ruins_cracks_east_door", "interior_wall_decals_ruins", "interior_wall_decals_ruins_cracks", "east_closed", { door_orientation = "east", exploitable = true }),
     MakeDoor("pig_ruins_cracks_west_door", "interior_wall_decals_ruins", "interior_wall_decals_ruins_cracks", "west_closed", { door_orientation = "west", exploitable = true }),
-    --猪人遗迹虚假隐藏门，为什么不用一样的动画呢？
-    MakeDoor("pig_ruins_cracks_fake_north_door", "interior_wall_decals_ruins_fake", "interior_wall_decals_ruins_cracks_fake", "north_closed",
-        { door_orientation = "north", exploitable = true }),
-    MakeDoor("pig_ruins_cracks_fake_south_door", "interior_wall_decals_ruins_fake", "interior_wall_decals_ruins_cracks_fake", "south_closed",
-        { door_orientation = "south", exploitable = true }),
-    MakeDoor("pig_ruins_cracks_fake_east_door", "interior_wall_decals_ruins_fake", "interior_wall_decals_ruins_cracks_fake", "east_closed",
-        { door_orientation = "east", exploitable = true }),
-    MakeDoor("pig_ruins_cracks_fake_west_door", "interior_wall_decals_ruins_fake", "interior_wall_decals_ruins_cracks_fake", "west_closed",
-        { door_orientation = "west", exploitable = true }),
 
     --蚁巢门
     MakeDoor("ant_cave_exit_door", "ant_cave_door", "ant_cave_door", "day_loop", { light = true, minimap = "ant_cave_door.png" }),

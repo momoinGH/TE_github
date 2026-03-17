@@ -116,7 +116,6 @@ PrefabFiles = {
     "wind_conch",            --咆哮海螺
     "sail_stick",            --帆杆
     "armor_windbreaker",     --风衣
-    "vine",                  --藤蔓
     "lavapool",              --岩浆池
     "obsidian",              --黑曜石
     "armorlimestone",        --石灰岩甲

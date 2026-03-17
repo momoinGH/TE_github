@@ -9,6 +9,7 @@ local prefabs = -- this should really be broken up per book...
     "firepen",
     "tentacle",
     "booklight",
+    "firerain"
 }
 
 local VOLCANOBOOK_FIRERAIN_COUNT = 4

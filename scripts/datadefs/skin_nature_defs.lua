@@ -169,8 +169,6 @@ local natureskins = {
     --     },
     -- },
 
-
-
     log = {
         default = {
             basebuild = "log",
@@ -180,15 +178,12 @@ local natureskins = {
             image = "log_tropical",
             sourceprefabs = { "palmtree", "jungletree", "mangrovetree", "livingjungletree", "leif_palm", "leif_jungle", },
             skintype = "shipwrecked",
-
         },
-
         log_rainforest = {
             build = "log_rainforest",
             image = "log_rainforest",
             sourceprefabs = { "teatree", "teatree_piko_nest", "rainforesttree", "deciduoustree", },
             skintype = "hamlet",
-
         }
     },
 

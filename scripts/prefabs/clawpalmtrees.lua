@@ -17,7 +17,6 @@ local prefabs =
     "cork",
     --"jungletreeseed",
     "charcoal",
-    "treeguard",
     "chop_mangrove_blue",
     "fall_mangrove_blue",
     "snake_amphibious",

@@ -32,3 +32,8 @@ AddRecipe2("sail_stick", { Ig("obsidian", 2, v_atlas), Ig("nightmarefuel", 3), I
 AddRecipe2("porto_sea_yard", { Ig("limestone", 6), Ig("tar", 6), Ig("log", 4) }, TECH.SEAFARING_TWO, nil, { "STRUCTURES", "NAUTICAL" })
 AddRecipe2("seatrap", { Ingredient("palmleaf", 4), Ingredient("messagebottleempty_sw", 2), Ingredient("jellyfish", 1) }, TECH.SEAFARING_TWO, nil,
 { "TOOLS", "GARDENING", "NAUTICAL" })
+AddRecipe2("woodlegshat", { Ingredient("boneshard", 4), Ingredient("fabric", 3), Ingredient("dubloon", 10) }, TECH.NONE, { builder_tag = "woodlegs" }, { "CHARACTER" })
+AddRecipe2("goldnugget_sw", { Ingredient("dubloon", 3) }, TECH.SCIENCE_ONE, { product = "goldnugget", }, { "REFINE" })
+AddRecipe2("book_meteor", { Ingredient("papyrus", 2), Ingredient("obsidian", 2) }, TECH.SCIENCE_TWO, { builder_tag = "bookbuilder", }, { "CHARACTER" })
+AddRecipe2("obsidianfirepit", { Ingredient("log", 3), Ingredient("obsidian", 8) }, TECH.SCIENCE_TWO, { placer = "obsidianfirepit_placer" }, { "LIGHT", "COOKING", "WINTER" })
+AddRecipe2("dragoonden", { Ingredient("dragoonheart", 1), Ingredient("rocks", 5), Ingredient("obsidian", 4) }, TECH.SCIENCE_TWO, { placer = "dragoonden_placer" }, { "STRUCTURES" })

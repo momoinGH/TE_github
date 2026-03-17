@@ -22,17 +22,19 @@ local prefabs =
 
 local start_inv =
 {
-    "woodlegshat",
-    "boatcannon",
     "boards",
     "boards",
     "boards",
     "boards",
-    "dubloon",
-    "dubloon",
-    "dubloon",
-    "dubloon",
 }
+
+if TUNING.tropical.shipwrecked then
+    table.insert(start_inv, "woodlegshat")
+    table.insert(start_inv, "boatcannon")
+    for i = 1, 4 do
+        table.insert(start_inv, "dubloon")
+    end
+end
 
 local function onbecamehuman(inst)
     if inst:HasTag("aquatic") then

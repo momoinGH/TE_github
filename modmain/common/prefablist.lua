@@ -12,12 +12,9 @@ PrefabFiles = {
     "mushtree_yellow",     --黄蘑菇树
     "spider_mutators_new", --韦伯新的变身涂鸦
     "splash_water",        --海水特效
+    "tro_pirate_boat_group", --强盗船
 }
 
 if TUNING.tropical.tropicalshards ~= 0 then
     table.insert(PrefabFiles, "porkland_sw_entrance") --去各种世界的传送门
-end
-
-if TUNING.tropical.boat then
-    table.insert(PrefabFiles, "tro_pirate_boat_group") --强盗船
 end

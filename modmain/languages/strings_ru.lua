@@ -4151,7 +4151,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.NECTAR_POD = "Я мог бы сделать 
 
 STRINGS.NAMES.PIG_RUINS_EXTRACTED = "Точеный камень"
 STRINGS.NAMES.ANTHILL_DOOR_QUEEN = "Вход в королевские палаты"
---bat_leather
 
 STRINGS.NAMES.CAVE_ENTRANCE_ROC = "Забитый вход"
 
@@ -4494,7 +4493,6 @@ STRINGS.NAMES.TREE_FOREST_ROT_STUMP = "Пенек лесного дерева"
 STRINGS.NAMES.TREE_FORESTSEED = "Лесное дерево - шишка"
 STRINGS.NAMES.TREE_FOREST_DEEP_SEED = "Лесное дерево - шишка"
 STRINGS.NAMES.TREE_FOREST_ROT_SEED = "Лесное дерево - шишка"
-STRINGS.NAMES.PEAGAWK_PRISM = "Павлин"
 STRINGS.NAMES.FENNEL_PLANTED = "Укроп"
 STRINGS.NAMES.FENNEL_COOKED = "Пожаренный укроп"
 STRINGS.NAMES.FENNEL = "Укроп"

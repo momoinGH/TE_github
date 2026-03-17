@@ -1,7 +1,7 @@
 -- 平原，有一些基础资源
 AddRoom("BG_plains_base", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "Bramble" },
     contents = {
         distributepercent = .25, --.22, --.26
@@ -30,7 +30,7 @@ AddRoom("BG_plains_base", {
 -- 高草平原
 AddRoom("plains_tallgrass", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "Bramble" },
     contents = {
         distributepercent = .15, -- .15, -- .3
@@ -58,7 +58,7 @@ AddRoom("plains_tallgrass", {
 --小狐狸（哈巴狸）平原
 AddRoom("plains_pogs", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "Bramble" },
     contents = {
         distributepercent = .25, -- .15, -- .3
@@ -84,7 +84,7 @@ AddRoom("plains_pogs", {
 
 AddRoom("plains_ruins", {
     colour = { r = 0.0, g = 1, b = 0.3, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "Bramble" },
     contents = {
         distributepercent = .25, -- .15, -- .3
@@ -112,7 +112,7 @@ AddRoom("plains_ruins", {
 
 AddRoom("plains_base_nobatcave", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
-    value = GROUND.PLAINS,
+    value = WORLD_TILES.PLAINS,
     tags = { "ExitPiece", "Bramble" },
     contents = {
         distributepercent = .25, --.22, --.26

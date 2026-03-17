@@ -17,7 +17,6 @@ local assets =
     Asset("ANIM", "anim/tree_rainforest_tall.zip"),
     Asset("ANIM", "anim/dust_fx.zip"),
     Asset("SOUND", "sound/forest.fsb"),
-    Asset("INV_IMAGE", "jungleTreeSeed"),
     Asset("MINIMAP_IMAGE", "tree_rainforest"),
     Asset("MINIMAP_IMAGE", "tree_rainforest_stump"),
     Asset("MINIMAP_IMAGE", "tree_rainforest_burnt"),
@@ -26,9 +25,7 @@ local assets =
 local prefabs =
 {
     "log",
-    "jungletreeseed",
     "charcoal",
-    "treeguard",
     "chop_mangrove_pink",
     "fall_mangrove_pink",
     "snake_amphibious",
@@ -76,23 +73,23 @@ local builds =
     normal = {
         file = "tree_rainforest_build",
         prefab_name = "rainforesttree",
-        normal_loot = { "log", "log" },      -- "jungletreeseed"
+        normal_loot = { "log", "log" },
         short_loot = { "log" },
-        tall_loot = { "log", "log", "log" }, -- "jungletreeseed", "jungletreeseed"
+        tall_loot = { "log", "log", "log" },
     },
     rot = {
         file = "tree_rainforest_gas_build",
         prefab_name = "rainforesttree_rot",
-        normal_loot = { "log", "log" },      -- "jungletreeseed"
+        normal_loot = { "log", "log" },
         short_loot = { "log" },
-        tall_loot = { "log", "log", "log" }, -- "jungletreeseed", "jungletreeseed"
+        tall_loot = { "log", "log", "log" },
     },
     blooming = {
         file = "tree_rainforest_bloom_build",
         prefab_name = "rainforesttree",
-        normal_loot = { "log", "log", "burr" },              -- "jungletreeseed"
+        normal_loot = { "log", "log", "burr" },
         short_loot = { "log" },
-        tall_loot = { "log", "log", "log", "burr", "burr" }, -- "jungletreeseed", "jungletreeseed"
+        tall_loot = { "log", "log", "log", "burr", "burr" },
     }
 }
 

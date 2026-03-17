@@ -1,54 +1,55 @@
 PrefabFiles = {
-    "beds",                   --床
-    "boatmetal",              --金属船
-    "bramble_bush",           --荆棘
-    "crabapple_tree",         --醋栗树
-    "feather_thunder",        --雷羽
-    "fennel",                 --茴香
-    "grass_water",            --水草
-    "grasswaterspawner",      --水草生成器
-    "grotto_grub_nest",       --虫穴
-    "grotto_grub",            --石窟蛴螬
-    "grotto_parsnip",         --防风草
-    "grottoqueen",            --石窟虫皇
-    "ligamundoham",           --天空之椅
-    "machetes",               --砍刀
-    "marsh_tree_new",         --石窟树木
-    "piggolem",               --遗迹石像猪守卫
-    "piggravestone",          --猪墓碑
-    "pollen_item",            --花粉
-    "pinkman",                --粉猪人
-    "tidalpoolnew",           --雨林积水池
-    "tree_forest_rot",        --阴森丛林树
-    "tro_treasurechest",      --一堆箱子
-    "topiary",                --灌木
-    "lawnornaments",          --景观小树
-    "hedge",                  --树篱
-    "clippings",              --碎叶
-    "city_lamp",              --路灯
-    "city_lamp2",             --节庆路灯
-    "hamlet_cones",           --雨林刺果、爪棕榈树
-    "securitycontract",       --安保合同
-    "city_hammer",            --执行官锤
-    "magnifying_glass",       --放大镜
-    "pigbandit",              --蒙面猪
-    "pigman_shopkeeper_desk", --猪人店主桌子
-    "shop_pedestals",         --一格小货架
-    "shelf",                  --柜子
-    "shelf_slot",             --柜子上的槽位
-    "trinkets_giftshop",      --玛法拉法女王的交易物
-    "key_to_city",            --城镇之钥
-    "player_house_kits",      --玩家房子皮肤套件
-    "pighouse_city",          --玩家小房子
-    "pig_guard_tower",        --瞭望塔
-    "pig_guard_tower2",       --瞭望塔
-    "armor_metal",            --合金盔甲
-    "reconstruction_project", --废墟
-    "water_spray",            --洒水器特效
-    "water_pipe",             --洒水器水管
-    "sprinkler",              --洒水器
-    "smelter",                --冶炼炉
-    "halberd",                --战戟
+    "beds",                    --床
+    "boatmetal",               --金属船
+    "bramble_bush",            --荆棘
+    "crabapple_tree",          --醋栗树
+    "feather_thunder",         --雷羽
+    "fennel",                  --茴香
+    "grass_water",             --水草
+    "grasswaterspawner",       --水草生成器
+    "grotto_grub_nest",        --虫穴
+    "grotto_grub",             --石窟蛴螬
+    "grotto_parsnip",          --防风草
+    "grottoqueen",             --石窟虫皇
+    "ligamundoham",            --天空之椅
+    "machetes",                --砍刀
+    "marsh_tree_new",          --石窟树木
+    "piggolem",                --遗迹石像猪守卫
+    "piggravestone",           --猪墓碑
+    "pollen_item",             --花粉
+    "pinkman",                 --粉猪人
+    "tidalpoolnew",            --雨林积水池
+    "tree_forest_rot",         --阴森丛林树
+    "tree_forest_rot_seed",    --阴森丛林树种子
+    "tro_treasurechest",       --一堆箱子
+    "topiary",                 --灌木
+    "lawnornaments",           --景观小树
+    "hedge",                   --树篱
+    "clippings",               --碎叶
+    "city_lamp",               --路灯
+    "city_lamp2",              --节庆路灯
+    "hamlet_cones",            --雨林刺果、爪棕榈树
+    "securitycontract",        --安保合同
+    "city_hammer",             --执行官锤
+    "magnifying_glass",        --放大镜
+    "pigbandit",               --蒙面猪
+    "pigman_shopkeeper_desk",  --猪人店主桌子
+    "shop_pedestals",          --一格小货架
+    "shelf",                   --柜子
+    "shelf_slot",              --柜子上的槽位
+    "trinkets_giftshop",       --玛法拉法女王的交易物
+    "key_to_city",             --城镇之钥
+    "player_house_kits",       --玩家房子皮肤套件
+    "pighouse_city",           --玩家小房子
+    "pig_guard_tower",         --瞭望塔
+    "pig_guard_tower2",        --瞭望塔
+    "armor_metal",             --合金盔甲
+    "reconstruction_project",  --废墟
+    "water_spray",             --洒水器特效
+    "water_pipe",              --洒水器水管
+    "sprinkler",               --洒水器
+    "smelter",                 --冶炼炉
+    "halberd",                 --战戟
     "pedestal_key",            --皇家画廊钥匙
     "adult_flytrap",           --利齿捕蝇草
     "alloy",                   --合金
@@ -151,6 +152,7 @@ PrefabFiles = {
     "hamlet_interior_housedoor", --房子
     "hamlet_interior_wall",      --室内墙
     "hamlet_pig_ruins_entrance", --遗迹
+    "wallcrack_ruins",           --可疑的裂缝
     "hanging_vine",              --悬挂的藤蔓
     "hats_hamlet",               --帽子
     "herald_tatters",            --暗影碎布
@@ -177,7 +179,6 @@ PrefabFiles = {
     "cutnettle",                 --荨麻叶
     "oinc",                      --呼噜币
     "pangolden",                 --淘金兽
-    "peagawk_prism",             --孔雀
     "peagawk",                   --孔雀
     "peagawkfeather_prism",      --鲜艳的孔雀羽毛
     "peagawkfeather",            --孔雀羽毛
@@ -237,6 +238,7 @@ PrefabFiles = {
     "rocksham",           --文物
     "rug",                --地毯
     "scorpion",           --蝎子
+    "venomgland",         --毒腺
     "seataro_planted",    --海芋头
     "sedimentpuddle",     --闪光的水坑
     "shears",             --剪刀
@@ -272,4 +274,7 @@ PrefabFiles = {
     "zeb",                --斑马
     "poisonbalm",         --解毒膏
     "walls_tropical",     --墙体
+    "vine",               --藤蔓
+    "pigghost",           --远古猪魂
+    "watercress",         --海豆瓣菜
 }

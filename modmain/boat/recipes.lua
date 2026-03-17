@@ -47,16 +47,3 @@ AddRecipe2("boat_torch", { Ig("torch", 1), Ig("twigs", 2) }, TECH.ONE, nil, { "N
 
 
 
-
-
-
-
-
--- SortAfter("surfboard_item", "wx78_scanner_item", "CHARACTER")
--- SortAfter("woodlegshat", "surfboard_item", "CHARACTER")
--- SortAfter("trawlnet", "oceanfishingrod", "TOOLS")
--- SortAfter("trawlnet", "oceanfishingrod", "FISHING")
--- SortBefore("tarlamp", "lantern", "LIGHT")
--- SortAfter("boat_lantern", "boat_torch", "LIGHT")
--- SortAfter("boat_torch", "coldfirepit", "LIGHT")
--- SortAfter("porto_shadowboat", "waxwelljournal", "CHARACTER")

@@ -17,7 +17,6 @@ local VALID_FOODS =
 	"blue_cap",
 	"green_cap",
 	"seeds"
-	--"limpets",
 }
 
 

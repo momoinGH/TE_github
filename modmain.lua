@@ -41,7 +41,6 @@ env.modimport = function(modulename, ...)
 end
 
 ----------------------------------------------------------------------------------------------------
-print("初始化2")
 TroOnConfigLoaded()
 modimport "modmain/knownmodcheck"             -- 检测不兼容模组并报错崩溃
 modimport "modmain/mods"                      -- 兼容其他mod
