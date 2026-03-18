@@ -65,7 +65,7 @@ end
 modimport "modmain/postinit"  --TODO 拆分一下
 modimport "modmain/animstate" -- AnimState 增强
 modimport "modmain/soundemitter"
-
+require "tro_ents_trace"      --缓存记录一些需要全局查找的实体
 
 -- 文本
 local language = string.lower(GetModConfigData("language"))
