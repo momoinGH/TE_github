@@ -24,9 +24,10 @@ Hooks.FnDecorator(EntityScript, "Remove", function(inst)
 end)
 
 -- 获取所有指定预制体名的实体
-local function GetEnts(prefab)
-    local ents = {}
+function TroGetEntsByPrefab(prefab)
+    trodevassert(trace_prefabs[prefab], "查找的预制体必须是trace_prefabs表里定义过的", prefab)
 
+    local ents = {}
     local guids = trace_ents[prefab]
     if guids then
         for guid, _ in pairs(guids) do
@@ -42,7 +43,12 @@ local function GetEnts(prefab)
     return ents
 end
 
-local function GetAnyEnt(prefab)
+GLOBAL.TroGetEntsByPrefab = TroGetEntsByPrefab
+
+-- 获取任意一个
+function TroGetAnyEntByPrefab(prefab)
+    trodevassert(trace_prefabs[prefab], "查找的预制体必须是trace_prefabs表里定义过的", prefab)
+
     local guids = trace_ents[prefab]
     if guids then
         for guid, _ in pairs(guids) do
@@ -58,7 +64,4 @@ local function GetAnyEnt(prefab)
     return nil
 end
 
-return {
-    GetEnts = GetEnts,
-    GetAnyEnt = GetAnyEnt
-}
+GLOBAL.TroGetAnyEntByPrefab = TroGetAnyEntByPrefab
