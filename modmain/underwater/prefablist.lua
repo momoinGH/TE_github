@@ -89,7 +89,7 @@ PrefabFiles =
     "mermthroneunderwater",        --鱼人皇家地毯
     "mermwatchtowerunderwater",    --鱼人堡垒
     "mermsunderwater",             --鱼人守卫
-    "roe_fish",                    --小鱼
+    "roe_fish",                    --鱼
     "bioluminescence",             --荧光生物
     "magma_rocks",                 --熔岩矿堆
     "limpets",                     --帽贝

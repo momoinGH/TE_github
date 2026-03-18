@@ -277,4 +277,5 @@ PrefabFiles = {
     "vine",               --藤蔓
     "pigghost",           --远古猪魂
     "watercress",         --海豆瓣菜
+    "roe_fish",           --鱼
 }
