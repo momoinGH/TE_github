@@ -27,8 +27,6 @@ local function onpickedfn(inst, picker)
     if picker and picker.components.sanity then
         picker.components.sanity:DoDelta(TUNING.SANITY_TINY)
     end
-
-    inst:Remove()
 end
 
 local function fn(Sim)
@@ -59,7 +57,8 @@ local function fn(Sim)
     inst.components.pickable:SetUp("sea_petals", 6) -- changhe into sea_petals
     inst.components.pickable.onpickedfn = onpickedfn
     inst.components.pickable.quickpick = true
-
+    inst.components.pickable.remove_when_picked = true
+    
     inst.OnSave = onsave
     inst.OnLoad = onload
 

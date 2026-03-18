@@ -14,7 +14,4 @@
 
 
 
-[00:00:30]: Could not find anim build FROMNUM
-[00:00:30]: Could not find anim bank [FROMNUM]
-[00:00:30]: Could not find anim build FROMNUM
-[00:00:30]: Could not find anim bank [FROMNUM]
+哈姆雷特不要生成卵石路

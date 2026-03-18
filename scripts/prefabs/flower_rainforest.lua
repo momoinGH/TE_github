@@ -28,8 +28,6 @@ local function onpickedfn(inst, picker)
     if picker and picker.components.sanity then
         picker.components.sanity:DoDelta(TUNING.SANITY_TINY)
     end
-
-    inst:Remove()
 end
 
 local function ongustpickfn(inst)
@@ -74,6 +72,7 @@ local function fn(Sim)
     inst.components.pickable.onpickedfn = onpickedfn
     inst.components.pickable.quickpick = true
     inst.components.pickable.wildfirestarter = true
+    inst.components.pickable.remove_when_picked = true
 
     MakeSmallBurnable(inst)
     MakeSmallPropagator(inst)

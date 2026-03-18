@@ -29,8 +29,6 @@ local function onpickedfn(inst, picker)
         end
     end
 
-    inst:Remove()
-
     TheWorld:PushEvent("plantkilled", { doer = picker, pos = pos }) --this event is pushed in other places too
 end
 
@@ -66,6 +64,7 @@ local function fn()
     inst.components.pickable:SetUp("petals", 10)
     inst.components.pickable.onpickedfn = onpickedfn
     inst.components.pickable.quickpick = true
+    inst.components.pickable.remove_when_picked = true
 
     MakeSmallBurnable(inst)
 

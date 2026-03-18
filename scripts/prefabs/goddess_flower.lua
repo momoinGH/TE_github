@@ -53,8 +53,6 @@ local function onpickedfn(inst, picker)
     if not inst.planted then
         TheWorld:PushEvent("beginregrowth", inst)
     end
-
-    inst:Remove()
 end
 
 local function GetStatus(inst)
@@ -123,7 +121,8 @@ local function fn()
     inst.components.pickable.onpickedfn = onpickedfn
     inst.components.pickable.quickpick = true
     inst.components.pickable.wildfirestarter = true
-
+    inst.components.pickable.remove_when_picked = true
+    
     --inst:AddComponent("transformer")
     --inst.components.transformer:SetTransformWorldEvent("isfullmoon", true)
     --inst.components.transformer:SetRevertWorldEvent("isfullmoon", false)

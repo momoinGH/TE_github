@@ -45,8 +45,6 @@ local function onpickedfn(inst, picker)
     inst.components.lootdropper:DropLoot(pt)
 
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/harvested/flipping_rock/open")
-
-
     inst.flipped = true
 end
 

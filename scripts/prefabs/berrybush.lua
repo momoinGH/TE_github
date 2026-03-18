@@ -93,8 +93,7 @@ local function onpickedfn(inst, picker)
             local eles = TheSim:FindEntities(x, y, z, 40, { "guard" })
             for k, guardas in pairs(eles) do
                 if guardas.components.combat and guardas.components.combat.target == nil then
-                    guardas.components.combat
-                        :SetTarget(picker)
+                    guardas.components.combat:SetTarget(picker)
                 end
             end
         end

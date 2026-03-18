@@ -55,8 +55,6 @@ end
 
 local function onpickedfn(inst, picker)
     inst.AnimState:PlayAnimation("picked")
-
-
     inst.pickedanimdone = function(inst)
         inst.components.growable:SetStage(1)
         inst:RemoveEventCallback("animover", inst.pickedanimdone)
