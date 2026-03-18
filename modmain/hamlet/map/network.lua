@@ -16,6 +16,7 @@ local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
     end
 
     -- 替换为随机雕像
+    print("替换randomruin为随机雕像")
     if entities["randomruin"] then
         for i, ent in ipairs(entities["randomruin"]) do
             local save_data = { x = ent.x, z = ent.z }
@@ -31,6 +32,7 @@ local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
     end
 
     -- 替换为随机遗物
+    print("替换randomrelic为随机遗物")
     if entities["randomrelic"] then
         for i, ent in ipairs(entities["randomrelic"]) do
             local relic = "relic_" .. tostring(math.random(1, 3))
@@ -42,6 +44,7 @@ local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
     end
 
     -- 替换为随机雕像
+    print("替换randomdust为随机雕像")
     if entities["randomdust"] then
         for i, ent in ipairs(entities["randomdust"]) do
             local save_data = { x = ent.x, z = ent.z }

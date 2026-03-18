@@ -4,6 +4,8 @@ local assets =
     Asset("ANIM", "anim/raft_build.zip"),
     Asset("ANIM", "anim/raft_log_build.zip"),
     Asset("ANIM", "anim/raft_rot.zip"),
+
+    Asset("ANIM", "anim/raft_surfboard_build.zip"),
 }
 
 local prefabs =
@@ -361,16 +363,6 @@ local function MakeBoat(name, radius)
         phys:SetMass(TUNING.BOAT.MASS * stats_multiplier)
 
         phys:SetFriction(0)
-        --		if name == "raft" then
-        --        phys:SetFriction(0.011)
-        --		end
-        --		if name == "lograft" then
-        --        phys:SetFriction(0.015)
-        --		end		
-
-        --		if name == "boat_raft_rot" then
-        --        phys:SetFriction(0.010)
-        --		end	
 
         phys:SetDamping(5)
         phys:SetCollisionGroup(COLLISION.OBSTACLES)
@@ -383,11 +375,8 @@ local function MakeBoat(name, radius)
         phys:SetDontRemoveOnSleep(true)
 
         inst.AnimState:SetBank("raft")
-        --		inst.AnimState:SetBuild("raft_log_build")
-        --		inst.AnimState:SetBuild("raft_build")	
 
         inst.name = name
-        inst.AnimState:PlayAnimation(inst.name, true)
 
         inst.AnimState:SetSortOrder(ANIM_SORT_ORDER.OCEAN_BOAT)
         inst.AnimState:SetFinalOffset(1)

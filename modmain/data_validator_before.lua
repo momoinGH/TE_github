@@ -121,3 +121,31 @@ env.AddStategraphActionHandler = function(stategraph, handler, ...)
     trodevassert(handler and handler.action and ACTIONS[handler.action.id], "发现没有定义的ACTION，你应该先在actions.lua文件中定义ACTION")
     return OldAddStategraphActionHandler(stategraph, handler, ...)
 end
+
+----------------------------------------------------------------------------------------------------
+-- 调用AnimState方法失败也不会报错，日志也打印的含糊，这里hook三个方法，在创建世界的时候去掉注释检查一下是哪些动画没有，日志里搜索Could not find anim
+-- -- Could not find anim bank [FROMNUM]
+-- local log = c_spawn("log");
+-- log.AnimState:SetBank("ddd");
+
+
+-- -- Could not find anim build FROMNUM
+-- local log = c_spawn("log");
+-- log.AnimState:SetBuild("ddd");
+
+
+-- -- Could not find anim [FROMNUM] in bank [log]
+-- local log = c_spawn("log");
+-- log.AnimState:PlayAnimation("ddd");
+
+-- Hooks.FnDecorator(AnimState, "SetBank", function(self, bank)
+--     print("调用AnimState:SetBank", bank)
+-- end)
+
+-- Hooks.FnDecorator(AnimState, "SetBuild", function(self, build)
+--     print("调用AnimState:SetBuild", build)
+-- end)
+
+-- Hooks.FnDecorator(AnimState, "PlayAnimation", function(self, anim)
+--     print("调用AnimState:PlayAnimation", anim)
+-- end)

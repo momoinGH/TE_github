@@ -5,6 +5,7 @@ local assets = {
     Asset("ANIM", "anim/wallhamletcity2.zip"),
     Asset("ANIM", "anim/wallhamletcity3.zip"),
     Asset("ANIM", "anim/wallhamletant.zip"),
+    Asset("ANIM", "anim/wallhamletpig.zip"),
 }
 
 local function OnBuilt(inst)

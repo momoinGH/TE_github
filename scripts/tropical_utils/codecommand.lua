@@ -1435,3 +1435,8 @@ function PickSomeWithDups(num, choices) end
 
 AddLevelPreInitAny = function(fn) end
 AddTaskSetPreInitAny = function(fn) end
+
+
+-- Check if the beginning of str matches prefix. Analogous to python's
+-- startswith().
+function string.starts(str,prefix) end

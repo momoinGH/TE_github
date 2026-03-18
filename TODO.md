@@ -14,16 +14,7 @@
 
 
 
-[00:00:06]: AnimationFile::LoadFile Failed to open anim/sparks_green.zip
-[00:00:06]: AnimationFile::LoadFile Failed to open anim/chop_mangrove_blue.zip
-[00:00:06]: AnimationFile::LoadFile Failed to open anim/swap_poop.zip
-Failed to open anim/chop_mangrove_pink.zip
-LoadFile Failed to open anim/hacking_tall_grass_fx.zip
-[00:00:07]: AnimationFile::LoadFile Failed to open anim/farm_plant_aloeplant.zip
-[00:00:07]: AnimationFile::LoadFile Failed to open anim/farm_plant_sweett.zip
-[00:00:07]: AnimationFile::LoadFile Failed to open anim/farm_plant_radish.zip
-[00:00:07]: AnimationFile::LoadFile Failed to open anim/farm_plant_turnip.zip
-[00:00:07]: AnimationFile::LoadFile Failed to open anim/sparklefx.zip
-[00:00:07]: AnimationFile::LoadFile Failed to open anim/splash_water.zip
-[00:00:08]: AnimationFile::LoadFile Failed to open anim/farm_plant_wheataaaa.zip
-[00:00:08]: AnimationFile::LoadFile Failed to open anim/water_bombsplash.zip
+[00:00:30]: Could not find anim build FROMNUM
+[00:00:30]: Could not find anim bank [FROMNUM]
+[00:00:30]: Could not find anim build FROMNUM
+[00:00:30]: Could not find anim bank [FROMNUM]

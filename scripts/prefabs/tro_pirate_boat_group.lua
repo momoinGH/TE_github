@@ -28,7 +28,7 @@ local function createbanditboat(inst)
     if boat then
         boat.Transform:SetPosition(x, y, z)
     end
-    local tesouro = SpawnPrefab("buriedtreasure2")
+    local tesouro = SpawnPrefab("buriedtreasure")
     if tesouro then
         tesouro.Transform:SetPosition(x, y, z)
     end
@@ -54,7 +54,7 @@ local function createmermboat(inst)
 
 
     inst:DoTaskInTime(0.2, function()
-        local tesouro = SpawnPrefab("buriedtreasure2")
+        local tesouro = SpawnPrefab("buriedtreasure")
         if tesouro then tesouro.Transform:SetPosition(x, y, z) end
     end)
 

@@ -1,7 +1,6 @@
 PrefabFiles = {
     "rowboat_wake",           --划船的波浪
     "flotsam_debris_sw",      --残骸
-    "boatraft",               --海难船
     "shipwrecked_boat_items", --小船套装
     "shipwrecked_boat",       --海难船
     "boatcannon",             --船炮

@@ -1,18 +1,19 @@
 PrefabFiles = {
-    "fryfocals_charge",    --镭射焦点
-    "goggles",             --镭射焦点
-    "hiddendanger_fx",     --陷阱标记
-    "thumper",             --撼地者
-    "tro_veggies",         --蔬菜
-    "antivenom",           --解毒剂
-    "armor_void_cloak",    --虚空斗篷
-    "buffs_tro",           -- buff集合
-    "yellow_mushroom",     --黄蘑菇
-    "spore_yellow",        --黄色孢子
-    "mushtree_yellow",     --黄蘑菇树
-    "spider_mutators_new", --韦伯新的变身涂鸦
-    "splash_water",        --海水特效
-    "tro_pirate_boat_group", --强盗船
+    "fryfocals_charge",      --镭射焦点
+    "goggles",               --镭射焦点
+    "hiddendanger_fx",       --陷阱标记
+    "thumper",               --撼地者
+    "tro_veggies",           --蔬菜
+    "antivenom",             --解毒剂
+    "armor_void_cloak",      --虚空斗篷
+    "buffs_tro",             -- buff集合
+    "yellow_mushroom",       --黄蘑菇
+    "spore_yellow",          --黄色孢子
+    "mushtree_yellow",       --黄蘑菇树
+    "spider_mutators_new",   --韦伯新的变身涂鸦
+    "splash_water",          --海水特效
+    "boatsurfothers",        --大饼船贴图
+    "boatraft",              --大饼船 TODO 是不是换皮大饼船，可以优化掉吗
 }
 
 if TUNING.tropical.tropicalshards ~= 0 then
