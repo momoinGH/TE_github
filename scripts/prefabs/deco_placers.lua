@@ -284,9 +284,7 @@ return
     MakePlacer("window_square_weapons_backwall_placer", "interior_window_large", "window_weapons_build",
         "day_loop", nil,
         nil, nil, nil, nil, nil, PostInitWallOrnament),
-    MakePlacer("window_greenhouse_backwall_placer", "interior_window_greenhouse",
-        "interior_window_greenhouse_build",
-        "day_loop", nil, nil, nil, nil, nil, nil, PostInitWallOrnament),
+    MakePlacer("window_greenhouse_backwall_placer", "interior_window_greenhouse", "interior_window_greenhouse_build", "day_loop", nil, nil, nil, nil, nil, nil, PostInitWallOrnament),
 
     -- 吊灯
     MakePlacer("swinging_light_basic_bulb_placer", "ceiling_lights", "ceiling_lights", "light_basic_bulb", nil,

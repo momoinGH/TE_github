@@ -95,7 +95,7 @@ STRINGS.CHARACTER_TITLES.wilbur                        = "The Monkey King"
 STRINGS.UI.CRAFTING_FILTERS.NAUTICAL                   = "Nautical"
 STRINGS.UI.CRAFTING_FILTERS.OBSIDIAN                   = "Volcano"
 STRINGS.UI.CRAFTING_FILTERS.ARCHAEOLOGY                = "Archaeology"
-STRINGS.UI.CRAFTING_FILTERS.INTERIOR                   = "Interior"
+STRINGS.UI.CRAFTING_FILTERS.HOME                       = "Interior"
 STRINGS.UI.CRAFTING_FILTERS.CITY                       = "City"
 STRINGS.UI.CRAFTING_FILTERS.GORGE                      = "Gorge"
 
@@ -10483,3 +10483,7 @@ STRINGS.CHARACTERS.WEBBER.DESCRIBE.PORTO_LOGRAFT             = "This does not lo
 STRINGS.CHARACTERS.WX78.DESCRIBE.PORTO_LOGRAFT               = "Campfire wood has other uses, apparently!"
 STRINGS.CHARACTERS.WOODIE.DESCRIBE.PORTO_LOGRAFT             = "Campfire wood has other uses, apparently!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.PORTO_LOGRAFT               = "Is good for swimming, florp."
+
+
+STRINGS.NAMES.WINDOW_GREENHOUSE_BACKWALL = "WINDOW_GREENHOUSE_BACKWALL"
+STRINGS.RECIPE_DESC.WINDOW_GREENHOUSE_BACKWALL = "WINDOW_GREENHOUSE_BACKWALL"

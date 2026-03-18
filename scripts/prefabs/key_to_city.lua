@@ -112,7 +112,7 @@ local function fn(Sim)
     inst:AddComponent("prototyper")
     inst.components.prototyper.onturnon = OnTurnOn
     inst.components.prototyper.onturnoff = OnTurnOff
-    inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.CITY_TWO
+    inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.CITY_ONE
 
     return inst
 end

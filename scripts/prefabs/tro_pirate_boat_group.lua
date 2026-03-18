@@ -60,21 +60,11 @@ local function createmermboat(inst)
 
 
     inst:DoTaskInTime(0.5, function()
-        local bandido = SpawnPrefab("mermfisherpirate")
-        if bandido then
-            bandido.Transform:SetPosition(x, y, z)
-        end
-        local bandido = SpawnPrefab("mermfisherpirate")
-        if bandido then
-            bandido.Transform:SetPosition(x, y, z)
-        end
-        local bandido = SpawnPrefab("mermfisherpirate")
-        if bandido then
-            bandido.Transform:SetPosition(x, y, z)
-        end
-        local bandido = SpawnPrefab("mermfisherpirate")
-        if bandido then
-            bandido.Transform:SetPosition(x, y, z)
+        for i = 1, 4 do
+            local merm = SpawnPrefab("mermfisherpirate")
+            if merm then
+                merm.Transform:SetPosition(x, y, z)
+            end
         end
         inst:Remove()
     end)

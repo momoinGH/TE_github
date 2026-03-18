@@ -79,7 +79,7 @@ PrefabFiles = {
     "quackering_wave",       --划船的波浪
     "quackering_wake",       --水特效
     "boatsurfothers",        --大饼船贴图
-    "boatraft",              --大饼船
+    "boatraft",              --小船的大饼船
     "tro_pirate_boat_group", --强盗船
     "turbine_blades",        --涡轮叶片
     "buoy",                  --浮标

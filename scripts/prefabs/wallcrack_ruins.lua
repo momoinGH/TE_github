@@ -75,6 +75,7 @@ local function OnLoad(inst, ents, data)
 end
 
 local function OnLoadPostPass(inst, ents, data)
+    if not data then return end
     if data.door_guid then
         inst.door = ents[data.door_guid].entity
     end

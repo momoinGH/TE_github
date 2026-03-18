@@ -4,15 +4,15 @@ end
 
 modimport "modmain/hamlet/simutil"
 modimport "modmain/common/poisonable"
+modimport "modmain/hamlet/oinc.lua" --呼噜币换算
 
-modimport "modmain/hamlet/components/inventory_replica"
 modimport "modmain/hamlet/components/builder"
 modimport "modmain/hamlet/components/builder_replica"
 modimport "modmain/hamlet/components/edible"
 modimport "modmain/hamlet/components/autoterraformer.lua" --刮地皮头盔组件
 
 
-modimport "modmain/hamlet/prefabs/molehat.lua"            --鼹鼠帽
+modimport "modmain/hamlet/prefabs/molehat.lua" --鼹鼠帽
 modimport "modmain/hamlet/prefabs/player.lua"
 modimport "modmain/hamlet/prefabs/world.lua"
 modimport "modmain/hamlet/prefabs/forest.lua"
@@ -23,7 +23,7 @@ if TUNING.tropical.hayfever then
     modimport "modmain/hamlet/hayfever" --花粉症
 end
 if TUNING.tropical.fog then
-    modimport "modmain/hamlet/fog" --大雾
+    modimport "modmain/hamlet/fog"             --大雾
 end
 modimport "modmain/hamlet/living_artifact.lua" --活性机甲
 

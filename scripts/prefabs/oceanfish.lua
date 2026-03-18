@@ -225,7 +225,7 @@ local function OnEntityWake(inst)
 end
 
 local function OnEntitySleep(inst)
-    if not POPULATING then
+    if not POPULATING and inst:IsValid() then
         inst.remove_task = inst:DoTaskInTime(.1, HandleEntitySleep)
     end
 end

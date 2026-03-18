@@ -93,8 +93,9 @@ function Snackrificer:SubtractCravingViolation(reward)
     end
 end
 
+local preparedFoods = require("gorge_foods")
 function Snackrificer:ComputeReward(item, value, satisfaction)
-    local rewardTable = GNAW_REWARDS[item.prefab]
+    local rewardTable = preparedFoods[item.prefab].reward
     if rewardTable then
         local reward = rewardTable[item.components.replatable.material or "generic"]
         if reward then

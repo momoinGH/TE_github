@@ -1,3 +1,36 @@
+TroAddTech("GODDESS", {
+    max_level = 2,
+    atlas = "images/tabs.xml",
+    image = "windyfan1.tex"
+})
+
+TroAddPrototyperDef("goddess_shrine", {
+    action_str = "GODDESSTAB",
+    icon_image = "windyfan1.tex",
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 AddIngredientValues({ "full_bottle_green_milk" }, { dairy = 3 })
 AddIngredientValues({ "half_bottle_green_milk" }, { dairy = 2 })
 AddIngredientValues({ "less_bottle_green_milk" }, { dairy = 1 })

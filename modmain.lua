@@ -6,13 +6,25 @@ trodevassert：仅开发环境崩溃的断言
 trosafemodimport：允许一个文件重复导入，不会崩溃
 troimportmodulefile：提供一个模块目录下的相对路径，自动导入启用的所有模块的文件
 
+
 TroRemapLayoutTile：重新映射layout里地皮id对应的地皮
+
 
 TroRemapSound：重新映射音效路径
 
+
 TroRemapOverrideSymbol：对每个预制件的OverrideSymbol的参数重新映射
 
+
+TroAddRecipe：对AddRecipe2的一层封装，可以进行校验，因此添加配方请用这个，不要用AddRecipe2
+TroAddTech：添加新科技
+TroAddPrototyperDef：注册原型机的科技
+TroUpdateCookingIngredientTags：更新已有食材的标签值
+
+
 TUNING.tropical mod设置数据
+
+
 
 每个模块自动导入的文件：
 tuning、prefablist、assets、containers、ui、prefabpost、sg、recipes、cooking、rpc、input、skins

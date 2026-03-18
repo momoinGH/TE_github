@@ -12,8 +12,6 @@ PrefabFiles = {
     "mushtree_yellow",       --黄蘑菇树
     "spider_mutators_new",   --韦伯新的变身涂鸦
     "splash_water",          --海水特效
-    "boatsurfothers",        --大饼船贴图
-    "boatraft",              --大饼船 TODO 是不是换皮大饼船，可以优化掉吗
 }
 
 if TUNING.tropical.tropicalshards ~= 0 then

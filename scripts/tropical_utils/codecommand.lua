@@ -1440,3 +1440,6 @@ AddTaskSetPreInitAny = function(fn) end
 -- Check if the beginning of str matches prefix. Analogous to python's
 -- startswith().
 function string.starts(str,prefix) end
+
+-- 建造什么东西需要的材料
+CONSTRUCTION_PLANS = {}
