@@ -142,9 +142,9 @@ local OldOverrideSymbol = AnimState.OverrideSymbol
 function AnimState:OverrideSymbol(symbol, swap_build, swap_symbol, ...)
     local inst = _GetEntity(self)
     local get_fn = inst and inst.prefab and overridesymbol_maps[inst.prefab] and overridesymbol_maps[inst.prefab][symbol]
-    if not get_fn then return end
-
-    swap_build, swap_symbol = get_fn(inst, swap_build, swap_symbol) --重新映射
+    if get_fn then
+        swap_build, swap_symbol = get_fn(inst, swap_build, swap_symbol) --重新映射
+    end
     return OldOverrideSymbol(self, symbol, swap_build, swap_symbol, ...)
 end
 

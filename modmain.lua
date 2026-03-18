@@ -22,6 +22,8 @@ TroAddPrototyperDef：注册原型机的科技
 TroUpdateCookingIngredientTags：更新已有食材的标签值
 
 
+constants.lua文件还定义了很多全局函数
+
 TUNING.tropical mod设置数据
 
 
