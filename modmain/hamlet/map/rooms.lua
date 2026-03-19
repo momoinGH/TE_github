@@ -11,3 +11,6 @@ for _, r in ipairs({
 }) do
     modimport("modmain/hamlet/map/rooms/" .. r)
 end
+
+
+

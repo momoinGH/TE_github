@@ -564,46 +564,31 @@ end
 
 -- 城市生成核心逻辑：选择起点，填充网格，通过类似 Prim 算法的逻辑随机生成街道网格
 local function create_city(entities, width, height, spawners, city)
-    local start_node = nil
-
     -- 尝试在城市区域内找一个合法的起点
-    while not start_node do
+    local start_node = nil
+    for i = 1, #city.citynodes do
         local idx = math.random(1, #city.citynodes)
-        start_node = city.citynodes[idx]
-        local x, z = start_node.cent[1], start_node.cent[2]
+        local node = city.citynodes[idx]
+        local x, z = node.cent[1], node.cent[2]
         local y = 0
         x, y, z = get_div8_tile(x, 0, z)
         local testpt = { x = x, y = y, z = z }
-        if not test_tile(testpt, VALID_TILES) then start_node = nil end
+        if test_tile(testpt, VALID_TILES) then
+            start_node = node
+            break
+        end
     end
 
-
-    -- 如果中心点都不行，则遍历多边形顶点尝试找起点
     if not start_node then
-        local new_node_list = deepcopy(city.citynodes)
-        while not start_node do
-            local idx = math.random(1, #new_node_list)
-            start_node = new_node_list[idx]
-            local ok = false
-            for i = 1, #start_node.poly.x, 1 do
-                local x, z = start_node.poly.x[i], start_node.poly.y[i]
-                local y = 0
-                x, y, z = get_div8_tile(x, 0, z)
-                if test_tile({ x = x, y = y, z = z }, VALID_TILES) then
-                    ok = true
-                    break
-                end
-            end
-            if not ok then start_node = nil end
-            table.remove(new_node_list, idx)
-        end
+        print("没有找到合适的生成点位，不生成猪镇")
+        return
     end
 
     local x, z = start_node.cent[1], start_node.cent[2]
     local y = 0
     x, y, z = get_div8_tile(x, 0, z)
 
-    local grid = { { x = x, y = y, z = z } }
+    local grid = {}
 
     -- 扫描 17x17 的范围，将所有属于城市 Tag 且地皮合法的点加入网格列表
     for nx = -8, 8 do
@@ -617,6 +602,7 @@ local function create_city(entities, width, height, spawners, city)
             for i, node in ipairs(city.citynodes) do
                 if WorldSim:PointInSite(node.id, newpt.x, newpt.z) then
                     in_city_node = true
+                    break
                 end
             end
             if test_tile(newpt, VALID_TILES) and in_city_node then
@@ -629,9 +615,7 @@ local function create_city(entities, width, height, spawners, city)
     local start = grid[idx]
     table.remove(grid, idx)
 
-    if test_tile(start, VALID_TILES) then
-        place_tile_city(entities, width, height, start)
-    end
+    place_tile_city(entities, width, height, start)
 
     -- 迭代生成路口和街道
     local maxintersections = 30

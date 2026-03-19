@@ -121,7 +121,7 @@ return {
         },
         {
           name = "",
-          type = "roc_nest_house",
+          type = "roc_nest",
           shape = "rectangle",
           x = 197,
           y = 229,

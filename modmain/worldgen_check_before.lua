@@ -25,5 +25,6 @@ Hooks.FnDecorator(env, "AddRoom", function(name, room)
 end)
 
 Hooks.FnDecorator(env, "AddTask", function(name, task)
+    -- print("添加task", name)
     assert(task.room_bg, "必须给task指定一个room_bg字段表示默认地皮，" .. name .. "忘了指定")
 end)

@@ -24,6 +24,7 @@ AddRoom("BG_battleground_base", {
     }
 })
 
+--铁巨人躯干
 AddRoom("battleground_ribs", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
     value = WORLD_TILES.BATTLEGROUND_RAINFOREST_NOISE,
@@ -48,6 +49,8 @@ AddRoom("battleground_ribs", {
         },
     }
 })
+
+--爪子
 AddRoom("battleground_claw", {
     colour = { r = 1.0, g = 1.0, b = 1.0, a = 0.3 },
     value = WORLD_TILES.BATTLEGROUND_RAINFOREST_NOISE,

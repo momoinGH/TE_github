@@ -63,7 +63,7 @@ AddTask("Edge_of_civilization", {
     background_room = "cultivated_base_1",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
--- 猪镇
+-- 猪镇郊区
 AddTask("Pigtopia", {
     locks = LOCKS.CIVILIZATION_1,
     keys_given = KEYS.CIVILIZATION_2,
@@ -74,7 +74,7 @@ AddTask("Pigtopia", {
     background_room = "suburb_base_1",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
--- 郊区2
+-- 猪镇
 AddTask("Pigtopia_capital", {
     locks = LOCKS.CIVILIZATION_2,
     keys_given = KEYS.ISLAND_2,
