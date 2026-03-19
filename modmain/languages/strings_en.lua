@@ -1747,7 +1747,7 @@ STRINGS.NAMES.DECO_TABLE_ROUND                                                  
 STRINGS.NAMES.DECO_CITYHALL_BOOKSHELF                                           = "市政厅书柜"
 STRINGS.NAMES.ALLOY                                                             = "Alloy"
 STRINGS.NAMES.DEEPRAINFOREST_CRAFTED                                            = "Dense Turf"
-STRINGS.NAMES.TURF_CHECKEREDLAWN                                                = "Lawn Turf"
+STRINGS.NAMES.TURF_LAWN                                                         = "Lawn Turf"
 STRINGS.NAMES.GODDESS_BOWTIE                                                    = "Windy Bowtie"
 STRINGS.NAMES.LIZARDBATTLE                                                      = "lizardbattle"
 STRINGS.NAMES.VENOMGLAND                                                        = "Venom Gland"
@@ -4166,7 +4166,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.IS_GOLDOBI                                  
     "I wish I could mine it.",
 
 }
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_CHECKEREDLAWN                          = "This turf is so beautiful!"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.TURF_LAWN                                   = "This turf is so beautiful!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FIREFLIES_GENERIC                           = "If only I could catch them!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ROBIN_WINTER_GENERIC                        = "Life in the frozen wastes."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SAND_CASTLE_SAND                            = "It's a sandcastle, in the sand!"
@@ -5412,7 +5412,7 @@ STRINGS.RECIPE_DESC.TURF_PLAINS                                                 
 STRINGS.RECIPE_DESC.SPRINKLER                                                   = "Water you think it's for?"
 STRINGS.RECIPE_DESC.TFWP_LAVA_HAMMER                                            = "Jump at point, dealing moderate damage."
 STRINGS.RECIPE_DESC.TFWP_WORM_SUIT_ARMOR                                        = "Buffs on attacks."
-STRINGS.RECIPE_DESC.TURF_CHECKEREDLAWN                                          = "Checkered Floor copy."
+STRINGS.RECIPE_DESC.TURF_LAWN                                                   = "Checkered Floor copy."
 STRINGS.RECIPE_DESC.TFWP_BLOSSOM_GARLAND_HAT                                    = "Health regeneration, MS and CDR."
 STRINGS.RECIPE_DESC.BOATMETAL_ITEM                                              = "Resistant Boat"
 STRINGS.RECIPE_DESC.BANANARANG                                                  = "Death by potassium!"
@@ -9252,7 +9252,7 @@ STRINGS.NAMES.QUAGMIRE_MERM_HOUSE_CRAFTED                 = "暴食工艺屋"
 
 STRINGS.NAMES.TFWP_BLOSSOM_GARLAND_HAT                    = STRINGS.NAMES.LAVAARENA_HEALINGGARLANDHAT
 
-STRINGS.NAMES.TURF_BATTLEGROUNDS                          = "古代战场地皮"
+STRINGS.NAMES.TURF_BATTLEGROUND                          = "古代战场地皮"
 
 STRINGS.NAMES.TURF_SNOWLAND                               = "覆雪地皮"
 

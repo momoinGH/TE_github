@@ -5,7 +5,7 @@ local function IsSpecialTile(tile)
         or (isCave and (tile == WORLD_TILES.BEACH
             or tile == WORLD_TILES.MAGMAFIELD
             or tile == WORLD_TILES.PAINTED
-            or tile == WORLD_TILES.BATTLEGROUNDS
+            or tile == WORLD_TILES.BATTLEGROUND
             or tile == WORLD_TILES.PEBBLEBEACH
             or tile == WORLD_TILES.ICELAND
             or tile == WORLD_TILES.SNOWLAND

@@ -69,7 +69,7 @@ local states =
                         or (curr == WORLD_TILES.BEACH and curr1 == WORLD_TILES.BEACH and curr2 == WORLD_TILES.BEACH and curr3 == WORLD_TILES.BEACH and curr4 == WORLD_TILES.BEACH)
                         or (curr == WORLD_TILES.MAGMAFIELD and curr1 == WORLD_TILES.MAGMAFIELD and curr2 == WORLD_TILES.MAGMAFIELD and curr3 == WORLD_TILES.MAGMAFIELD and curr4 == WORLD_TILES.MAGMAFIELD)
                         or (curr == WORLD_TILES.PAINTED and curr1 == WORLD_TILES.PAINTED and curr2 == WORLD_TILES.PAINTED and curr3 == WORLD_TILES.PAINTED and curr4 == WORLD_TILES.PAINTED)
-                        or (curr == WORLD_TILES.PIGRUINS and curr1 == WORLD_TILES.PIGRUINS and curr2 == WORLD_TILES.PIGRUINS and curr3 == WORLD_TILES.PIGRUINS and curr4 == WORLD_TILES.BATTLEGROUNDS)
+                        or (curr == WORLD_TILES.PIGRUINS and curr1 == WORLD_TILES.PIGRUINS and curr2 == WORLD_TILES.PIGRUINS and curr3 == WORLD_TILES.PIGRUINS and curr4 == WORLD_TILES.BATTLEGROUND)
                         or (curr == WORLD_TILES.PEBBLEBEACH and curr1 == WORLD_TILES.PEBBLEBEACH and curr2 == WORLD_TILES.PEBBLEBEACH and curr3 == WORLD_TILES.PEBBLEBEACH and curr4 == WORLD_TILES.PEBBLEBEACH)
 
                     then

@@ -504,7 +504,7 @@ local tro_tiledefs = {
         },
     },
 
-    BATTLEGROUNDS = { --------古代战场地皮
+    BATTLEGROUND = { --------古代战场地皮
         tile_range = TileRanges.HAM_LAND,
         tile_data = {
             ground_name = "Battlegrounds",
@@ -1204,13 +1204,13 @@ ChangeTileRenderOrder(WORLD_TILES.VOLCANO, WORLD_TILES.DESERT_DIRT, true)
 ChangeTileRenderOrder(WORLD_TILES.VOLCANO_ROCK, WORLD_TILES.DESERT_DIRT, true)
 ChangeTileRenderOrder(WORLD_TILES.ANTCAVE, WORLD_TILES.MUD, true) --ANTFLOOR
 ChangeTileRenderOrder(WORLD_TILES.BATCAVE, WORLD_TILES.MUD, true) --BATFLOOR
-ChangeTileRenderOrder(WORLD_TILES.BATTLEGROUNDS, WORLD_TILES.MUD, true)
+ChangeTileRenderOrder(WORLD_TILES.BATTLEGROUND, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.COBBLEROAD, WORLD_TILES.WOODFLOOR, true)
 ChangeTileRenderOrder(WORLD_TILES.DEEPRAINFOREST, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.FIELDS, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.FOUNDATION, WORLD_TILES.WOODFLOOR, true)
 ChangeTileRenderOrder(WORLD_TILES.GASRAINFOREST, WORLD_TILES.MUD, true) --GASJUNGLE
-ChangeTileRenderOrder(WORLD_TILES.LAWN, WORLD_TILES.WOODFLOOR, true)    --CHECKEREDLAWN
+ChangeTileRenderOrder(WORLD_TILES.LAWN, WORLD_TILES.WOODFLOOR, true)
 ChangeTileRenderOrder(WORLD_TILES.SUBURB, WORLD_TILES.MUD, true)        --SUBURB
 ChangeTileRenderOrder(WORLD_TILES.PAINTED, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.PIGRUINS, WORLD_TILES.CHECKER, true)

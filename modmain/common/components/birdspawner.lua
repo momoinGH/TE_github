@@ -38,7 +38,7 @@ AddComponentPostInit("birdspawner",function(self)
 
             --AddBirds(WORLD_TILES.ANTCAVE, { "robin", "crow" })
             --AddBirds(WORLD_TILES.BATCAVE, { "robin", "crow" })
-            --AddBirds(WORLD_TILES.BATTLEGROUNDS, { "robin", "crow" })
+            --AddBirds(WORLD_TILES.BATTLEGROUND, { "robin", "crow" })
 			--AddBirds(WORLD_TILES.COBBLEROAD, { "robin", "crow" })
             AddBirds(WORLD_TILES.DEEPRAINFOREST, { "parrot_blue", "kingfisher", "kingfisher_swarm", "parrot_blue_swarm" })
             AddBirds(WORLD_TILES.FIELDS, { "robin", "crow" })
