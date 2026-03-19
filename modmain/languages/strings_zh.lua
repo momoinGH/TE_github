@@ -3323,7 +3323,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.OINCPILE52 = "我发财了！"
 
 
 ----------------------------------------------------猪镇2皇城pig city2 palace city----------------------------------------
-STRINGS.NAMES.PIG_PALACE_ENTRANCE = "生成宫殿"
 STRINGS.NAMES.PIG_PALACE = "宫殿"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_PALACE = "恢弘壮丽。"
 

@@ -692,7 +692,6 @@ STRINGS.NAMES.COTTONTREE_CONE                                                   
 STRINGS.NAMES.LIGAMUNDOSW                                                       = "Portal"
 STRINGS.NAMES.TURNIP_OVERSIZED_ROTTEN                                           = "巨型腐烂芜菁"
 STRINGS.NAMES.ANTCHEST                                                          = "honey chest"
-STRINGS.NAMES.PIG_PALACE_ENTRANCE                                               = "生成宫殿"
 STRINGS.NAMES.KRAKENCHEST                                                       = "Chest of the Depths"
 STRINGS.NAMES.TOPIARY_3                                                         = "Topiary"
 STRINGS.NAMES.TAR                                                               = "Tar"
