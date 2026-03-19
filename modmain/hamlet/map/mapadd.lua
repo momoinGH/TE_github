@@ -69,6 +69,7 @@ for _, t in ipairs(tasks) do
     AddTaskPreInit(t, function(task)
         task.room_tags = task.room_tags or {}
         table.insert(task.room_tags, "hamlet")
+        table.insert(task.room_tags, "RoadPoison") --禁止生成卵石路
     end)
 end
 
