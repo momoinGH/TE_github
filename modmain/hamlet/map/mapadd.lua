@@ -1,3 +1,7 @@
+modimport "modmain/hamlet/map/network.lua" --地图数据后处理，替换字符串为实际预制体
+modimport "modmain/hamlet/map/forest_map.lua"
+
+
 -- 沿海地形
 AddRoomPreInit("OceanCoastal", function(room)
     room.contents.countstaticlayouts["lilypadnovo"] = 2 --莲花池

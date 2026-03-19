@@ -1,4 +1,22 @@
-local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
+local topology_save = nil --只能通过hook拿到topology_save
+local storygen = nil
+local old_buildstory = BuildStory
+BuildStory = function(tasks, story_gen_params, level)
+    topology_save, storygen = old_buildstory(tasks, story_gen_params, level)
+    return topology_save, storygen
+end
+
+local make_cities = require("map/tro_city_builder")
+local function GlobalPostPopulateAfter(retTab, self, entities, width, height)
+    if topology_save and storygen then
+        print("Building porkland cities!")
+        make_cities(entities, topology_save, width, height)
+
+        topology_save = nil
+        storygen = nil
+    end
+
+
     -- 标记点替换为洞穴裂缝
     if entities["vampirebatcave_potential"] then
         local ents = entities["vampirebatcave_potential"]

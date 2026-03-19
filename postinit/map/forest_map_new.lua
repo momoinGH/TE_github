@@ -2,7 +2,7 @@ require("constants")
 require("mathutil")
 
 local forest_map = require("map/forest_map")
-
+local make_cities = require("map/tro_city_builder")
 local old_generatemap = forest_map.Generate --[[
 local SKIP_GEN_CHECKS = Hooks.FindUpvalue(old_generatemap, "SKIP_GEN_CHECKS")
 if SKIP_GEN_CHECKS ~= nil and TA_CONFIG.DEVELOP.test_map then
@@ -33,7 +33,6 @@ forest_map.Generate = function(prefab, map_width, map_height, tasks, level, leve
     end
 
     --------------------building porkland cities---------------------------------------------------------------------
-    local make_cities = require("map/city_builder")
     local build_porkland = function(entities, topology_save, map_width, map_height, current_gen_params)
         print("Building porkland cities!")
         make_cities(entities, topology_save, WorldSim, map_width, map_height, current_gen_params)
