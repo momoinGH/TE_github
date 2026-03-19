@@ -1,5 +1,5 @@
 -- this file function only for worldgen, in game use main/util.lua functions
-SpawnUtil = {}
+local SpawnUtil = {}
 
 local function CheckTileType(tile, check)
     if type(check) == "function" then
@@ -211,3 +211,13 @@ function SpawnUtil.FindRandomWaterPoints(populating_tile, width, height, edge_di
 
     return points_x, points_y
 end
+
+function SpawnUtil.NodeHasTag(tag)
+
+end
+
+function SpawnUtil.NodeHasGlobalTag(topology_save, tag)
+    local d = topology_save.GlobalTags[tag]
+end
+
+return SpawnUtil

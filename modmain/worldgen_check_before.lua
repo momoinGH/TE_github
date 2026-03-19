@@ -1,13 +1,13 @@
 local StaticLayout = require("map/static_layout")
-Hooks.FnDecorator(StaticLayout, "Get", function(layoutsrc)
-    print("开始加载布局文件" .. tostring(layoutsrc)) --打印一下，在报错的时候好排查问题
-end)
+-- Hooks.FnDecorator(StaticLayout, "Get", function(layoutsrc)
+--     print("开始加载布局文件" .. tostring(layoutsrc)) --打印一下，在报错的时候好排查问题
+-- end)
 
 
 -- 检查room的标签是否都加过处理函数
 local map_tags
 Hooks.FnDecorator(env, "AddRoom", function(name, room)
-    print("开始注册room：" .. name)
+    -- print("开始注册room：" .. name)
 
     if room.tags then
         if not map_tags then

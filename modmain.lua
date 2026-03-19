@@ -32,6 +32,9 @@ TUNING.tropical mod设置数据
 tuning、prefablist、assets、containers、ui、prefabpost、sg、recipes、cooking、rpc、input、skins
 不在模块下的内容是公共的部分，最好通过标签或者变量识别功能，减少特定prefab的判断
 
+
+debug文件定义了很多c_xxx函数，用于控制台调试
+默认开启了右键地图传送功能，可通过c_setmaprightteleport(false)关闭
 ]]
 
 
@@ -141,6 +144,7 @@ modimport("modmain/fx")            --特效
 ----------------------------------------------------------------------------------------------------
 
 if troisdev then
+    troimportmodulefile("debug") --方便开发的c_xxx控制台函数
     modimport "modmain/data_validator_after" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 

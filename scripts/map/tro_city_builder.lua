@@ -1,5 +1,6 @@
 -- 引入地图布局模块，用于加载预设的建筑结构
 local obj_layout = require("map/object_layout")
+local SpawnUtil = require("tropical_utils/spawnutil")
 
 -- 定义四个方向的步进值，用于在网格中进行坐标偏移
 local DIR_STEP = {
@@ -58,35 +59,26 @@ local FARM_FILLER_CHOICES = {
 
 -- 城市1（通常是主城）的建筑配额，定义了各种商店和民居的数量
 local BUILDING_QUOTAS = {
-    { prefab = "pig_shop_deli_entrance", num = 1 },
-    -- { prefab = "pig_shop_academy_entrance", num = 1 },
-    { prefab = "pig_shop_florist_entrance", num = 1 },
-    { prefab = "pig_shop_general_entrance", num = 1 },
-    { prefab = "pig_shop_hoofspa_entrance", num = 1 },
-    { prefab = "pig_shop_produce_entrance", num = 1 },
-    { prefab = "pig_shop_bank_entrance", num = 1 },
-
-    { prefab = "pig_academy_entrance", num = 1 },
-
+    { prefab = "pig_shop_deli", num = 1 },
+    { prefab = "pig_shop_academy", num = 1 },
+    { prefab = "pig_shop_florist", num = 1 },
+    { prefab = "pig_shop_general", num = 1 },
+    { prefab = "pig_shop_hoofspa", num = 1 },
+    { prefab = "pig_shop_produce", num = 1 },
+    { prefab = "pig_shop_bank", num = 1 },
     { prefab = "pig_guard_tower", num = 15 },
-    { prefab = "pighouse_city", num = 50 },
-
+    { prefab = "pighouse_city", num = 50 }
 }
 
 -- 城市2（通常是副城/高级城）的建筑配额，包含武器店、奥术店等
 local BUILDING_QUOTAS_2 = {
-    -- { prefab = "pig_shop_antiquities_entrance",  num = 2 },
-    -- { prefab = "pig_shop_hatshop_entrance", num = 1 },
-    { prefab = "pig_shop_weapons_entrance", num = 1 },
-    { prefab = "pig_shop_arcane_entrance", num = 1 },
-    { prefab = "pig_shop_tinker_entrance", num = 1 },
-
-    { prefab = "pig_antiquities_entrance", num = 2 },
-    { prefab = "hatshop_entrance", num = 1 },
-
+    { prefab = "pig_shop_antiquities", num = 1 },
+    { prefab = "pig_shop_hatshop", num = 1 },
+    { prefab = "pig_shop_weapons", num = 1 },
+    { prefab = "pig_shop_arcane", num = 1 },
+    { prefab = "pig_shop_tinker", num = 1 },
     { prefab = "pig_guard_tower", num = 15 },
-    { prefab = "pighouse_city", num = 50 },
-
+    { prefab = "pighouse_city", num = 50 }
 }
 
 -- 定义允许放置城市建筑的合法地皮类型
@@ -328,7 +320,7 @@ local function spawn_setpiece(entities, width, height, spawners, layout, pt, cit
             local zdist = math.abs(((data_list[i].z / TILE_SCALE) + height / 2.0) - pt.z) + 0.2
 
             if (xdist * xdist) + (zdist * zdist) <= radius * radius then
-                if tableutil.has_component(unrequired_prefabs, prefab) then
+                if table.contains(unrequired_prefabs, prefab) then
                     table.remove(data_list, i)
                 end
             end
@@ -854,7 +846,7 @@ local function is_in_nested_list(list_item, parent_list)
 end
 
 -- 【核心主函数】：执行整个猪人城市的生成流程
-local function make_cities(entities, topology_save, worldsim, width, height, setcurrent_gen_params)
+local function make_cities(entities, topology_save, width, height)
     print("BUILDING PIG CULTURE")
 
     local spawners = {} -- 初始化临时实体列表
@@ -891,9 +883,14 @@ local function make_cities(entities, topology_save, worldsim, width, height, set
 
     -- 第三阶段：对每个城市执行网格生成、公园放置、建筑结算
     for city_ID, city in ipairs(cities) do
-        create_city(entities, width, height, spawners, city)
-        make_parks(entities, width, height, spawners, city, true, 2)
-        make_parks(entities, width, height, spawners, city)
+        if #city.citynodes > 0 then
+            create_city(entities, width, height, spawners, city)
+            make_parks(entities, width, height, spawners, city, true, 2)
+            make_parks(entities, width, height, spawners, city)
+        else
+            print("猪镇" .. city_ID .. "没有City_Foundation标签的room，不再生成")
+        end
+
         set_buildings(spawners, city)
         make_farms(entities, width, height, spawners, city.farmnodes, city)
     end

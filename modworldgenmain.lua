@@ -23,7 +23,6 @@ end
 if troisdev then
     modimport "modmain/worldgen_check_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
-modimport "modmain/map/spawnutil.lua"
 
 
 -- 当配置项加载好后，才能访问TUNING.tropical检查哪些模块启用了

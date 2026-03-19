@@ -1,7 +1,8 @@
 local topology_save = nil --只能通过hook拿到topology_save
 local storygen = nil
+require("map/storygen")
 local old_buildstory = BuildStory
-BuildStory = function(tasks, story_gen_params, level)
+GLOBAL.BuildStory = function(tasks, story_gen_params, level)
     topology_save, storygen = old_buildstory(tasks, story_gen_params, level)
     return topology_save, storygen
 end
@@ -9,7 +10,15 @@ end
 local make_cities = require("map/tro_city_builder")
 local function GlobalPostPopulateAfter(retTab, self, entities, width, height)
     if topology_save and storygen then
-        print("Building porkland cities!")
+        -- local nodes = topology_save.root:GetNodes(true)
+        -- print("打印所有room：")
+        -- for k, node in pairs(nodes) do
+        --     print(k, node)
+        -- end
+
+
+
+        --构建猪镇
         make_cities(entities, topology_save, width, height)
 
         topology_save = nil

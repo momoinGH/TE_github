@@ -150,3 +150,30 @@ GLOBAL.c_setprofile = function(enable)
         profiler = nil
     end
 end
+
+----------------------------------------------------------------------------------------------------
+-- 玩家地图右键传送
+local map_right_teleport = true --默认开启
+GLOBAL.c_setmaprightteleport = function(enable)
+    map_right_teleport = enable or false
+end
+AddModRPCHandler(modname, "DebugMapTeleport", function(player, x, z)
+    if map_right_teleport and type(x) == "number" and type(z) == "number" and player.Physics then
+        player.Physics:Teleport(x, 0, z)
+    end
+end)
+
+TheInput:AddMouseButtonHandler(function(button, down)
+    if not map_right_teleport then
+        return
+    end
+    if not (not down and button == MOUSEBUTTON_RIGHT and TheFrontEnd and ThePlayer and ThePlayer.HUD:IsMapScreenOpen()) then
+        return
+    end
+
+    local mapscreen = TheFrontEnd:GetActiveScreen()
+    local x, y, z = mapscreen:GetWorldPositionAtCursor()
+    TheFrontEnd:PopScreen()
+    c_announce("（debug指令）玩家地图传送：" .. tostring(x) .. "," .. tostring(z))
+    SendModRPCToServer(MOD_RPC[modname]["DebugMapTeleport"], x, z)
+end)
