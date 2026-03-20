@@ -1,9 +1,6 @@
-local island_hamlet = "island_hamlet"
-
 AddTask("连接岛三和岛四中间的海", {
     locks = LOCKS.ISLAND_4,
     keys_given = KEYS.LAND_DIVIDE_3,
-    region_id = island_hamlet,
     room_choices = {
         ["ForceDisconnectedRoom"] = 20,
     },
@@ -15,7 +12,6 @@ AddTask("连接岛三和岛四中间的海", {
 AddTask("岛四", {
     locks = LOCKS.LAND_DIVIDE_3,
     keys_given = KEYS.PINACLE,
-    region_id = island_hamlet,
     room_choices = {
         ["BG_pinacle_base"] = 1,
     },

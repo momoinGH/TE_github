@@ -274,7 +274,7 @@ local function place_tile_city(entities, width, height, pt)
         end
     end
 
-    -- 在地块中心铺设 3x3 的街道
+    -- 在地块中心铺设 3x3 的街道，中间道路地皮，两侧卵石路
     for i = -1, 1 do
         for t = -1, 1 do
             local edge_pt = {
@@ -282,7 +282,7 @@ local function place_tile_city(entities, width, height, pt)
                 z = pt.z + t
             }
             if WorldSim:GetTile(edge_pt.x, edge_pt.z) > 1 then
-                if test_tile(edge_pt, VALID_TILES) then
+                if test_tile(edge_pt, VALID_TILES) then --如果是没铺过的地皮
                     place_tile(edge_pt, WORLD_TILES.ROAD)
                 end
             end
@@ -486,9 +486,6 @@ local function make_road(entities, width, height, spawners, pt, dir, sub_urb, ci
     local new_pt = nil
     local offset = 1
 
-    local nil_pig_shop_weight = 6
-    if sub_urb then nil_pig_shop_weight = 12 end
-
     while step < step_max and step > -1 do
         new_pt = {
             x = pt.x + (DIR_STEP[dir].x * step * offset),
@@ -506,6 +503,8 @@ local function make_road(entities, width, height, spawners, pt, dir, sub_urb, ci
 
     -- 如果道路延伸成功，则在末端添加配套设施
     if step == step_max then
+        local nil_pig_shop_weight = 6
+        if sub_urb then nil_pig_shop_weight = 12 end
         add_pig_shops(spawners, pt, dir, nil_pig_shop_weight, city)
         add_park_zones(pt, dir, city)
         add_city_lights(spawners, pt, dir, city.city_id)
@@ -851,11 +850,11 @@ local function make_cities(entities, topology_save, width, height)
                 local c_x, c_y = WorldSim:GetSiteCentroid(node.id)
                 local nodedata = { cent = { c_x, c_y }, id = node.id, poly = { x = poly_x, y = poly_y } }
 
-                if is_in_nested_list(node.id, topology_save.GlobalTags["City_Foundation"]) then
+                if is_in_nested_list(node.id, topology_save.GlobalTags["City_Foundation"] or {}) then
                     table.insert(cities[city_id].citynodes, nodedata)
                 end
 
-                if is_in_nested_list(node.id, topology_save.GlobalTags["Cultivated"]) then
+                if is_in_nested_list(node.id, topology_save.GlobalTags["Cultivated"] or {}) then
                     table.insert(cities[city_id].farmnodes, nodedata)
                 end
             end

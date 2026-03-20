@@ -1,9 +1,6 @@
-local island_hamlet = "island_hamlet" --从11开始，不和科雷的冲突
-
 AddTask("岛一平原基础", {
     locks = LOCKS.NONE,
     keys_given = KEYS.JUNGLE_DEPTH_1,
-    region_id = island_hamlet,
     room_choices = {
         ["BG_plains_base"] = 2,
     },
@@ -15,7 +12,6 @@ AddTask("岛一平原基础", {
 AddTask("岛一平原", {
     locks = LOCKS.JUNGLE_DEPTH_1,
     keys_given = KEYS.JUNGLE_DEPTH_1,
-    region_id = island_hamlet,
     room_choices = {
         ["plains_tallgrass"] = math.random(2, 3),
         ["plains_pogs"] = 1,
@@ -28,19 +24,19 @@ AddTask("岛一平原", {
 AddTask("岛一睡莲", {
     locks = LOCKS.JUNGLE_DEPTH_1,
     keys_given = KEYS.JUNGLE_DEPTH_2,
-    region_id = island_hamlet,
     room_choices = {
         ["rainforest_lillypond"] = math.random(2, 3),
     },
-    room_bg = WORLD_TILES.RAINFOREST,
-    background_room = "BG_rainforest_base",
+    -- room_bg = WORLD_TILES.RAINFOREST,
+    room_bg = WORLD_TILES.LILYPOND,
+    -- background_room = "BG_rainforest_base",
+    background_room = "rainforest_lillypond",
     colour = { r = 1, g = 0.3, b = 0.3, a = 0.3 }
 })
 
 AddTask("岛一猪镇农场", {
     locks = LOCKS.JUNGLE_DEPTH_1,
     keys_given = KEYS.CIVILIZATION_1,
-    region_id = island_hamlet,
     room_choices = {
         ["cultivated_base_1"] = math.random(2, 3),
         ["piko_land"] = math.random(2, 3), --茶树
@@ -53,7 +49,6 @@ AddTask("岛一猪镇农场", {
 AddTask("岛一猪镇郊区", {
     locks = LOCKS.CIVILIZATION_1,
     keys_given = KEYS.CIVILIZATION_2,
-    region_id = island_hamlet,
     room_choices = {
         ["suburb_base_1"] = 1,
     },
@@ -75,7 +70,6 @@ AddTask("岛一猪镇", {
 AddTask("岛一战场", {
     locks = LOCKS.JUNGLE_DEPTH_1,
     keys_given = KEYS.JUNGLE_DEPTH_1,
-    region_id = island_hamlet,
     room_choices = {
         ["BG_painted_base"] = 1,
         ["BG_battleground_base"] = math.random(0, 1),
@@ -92,7 +86,6 @@ AddTask("岛一战场", {
 AddTask("岛一雨林遗迹", {
     locks = LOCKS.JUNGLE_DEPTH_1,
     keys_given = KEYS.JUNGLE_DEPTH_2,
-    region_id = island_hamlet,
     room_choices = {
         ["rainforest_ruins"] = math.random(2, 3),
     },
@@ -104,19 +97,12 @@ AddTask("岛一雨林遗迹", {
 AddTask("岛一雨林深处", {
     locks = LOCKS.JUNGLE_DEPTH_2,
     keys_given = { KEYS.JUNGLE_DEPTH_2, KEYS.JUNGLE_DEPTH_3 },
-    region_id = island_hamlet,
     room_choices = {
         ["BG_deeprainforest_base"] = math.random(1, 2),
         ["deeprainforest_spider_monkey_nest"] = math.random(1, 2),
         ["deeprainforest_fireflygrove"] = math.random(0, 2),
         ["deeprainforest_flytrap_grove"] = math.random(1, 2),
         ["deeprainforest_anthill_exit"] = 1,
-    },
-    set_pieces = {
-        { name = "pig_ruins_entrance_2" },
-        { name = "pig_ruins_head" },
-        { name = "pig_ruins_artichoke" },
-        { name = "pig_ruins_artichoke" },
     },
     room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",

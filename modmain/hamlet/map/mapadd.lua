@@ -64,6 +64,7 @@ end)
 --     "wild_ancient_ruins",
 -- }
 
+
 tasks = {
     "岛一平原基础",
     "岛一平原",
@@ -74,30 +75,32 @@ tasks = {
     "岛一战场",
     "岛一雨林遗迹",
 
-    "岛一和岛二之间的海洋", --通过海洋task让这些岛生成在一起
-    "岛二雨林深处",
-    "岛二曼德拉丘",
-    "岛二农场",
-    "岛二郊区",
-    "岛二猪镇",
+    -- "岛一和岛二之间的海洋", --通过海洋task让这些岛生成在一起
+    -- "岛二雨林深处",
+    -- "岛二曼德拉丘",
+    -- "岛二农场",
+    -- "岛二郊区",
+    -- "岛二猪镇",
 
-    "连接岛二和岛三中间的海",
-    "岛三雨林深处",
-    "岛三雨林",
+    -- "连接岛二和岛三中间的海",
+    -- "岛三雨林深处",
+    -- "岛三雨林",
 
-    "连接岛三和岛四中间的海",
-    "岛四",
+    -- "连接岛三和岛四中间的海",
+    -- "岛四",
 
-    "连接岛四和岛五中间的海",
-    "岛五雨林深处",
-    "岛五雨林",
-    "岛五毁灭雨林"
+    -- "连接岛四和岛五中间的海",
+    -- "岛五雨林深处",
+    -- "岛五雨林",
+    -- "岛五毁灭雨林",
 }
 
 
 -- 给这些task的room统一添加hamlet地形标签
 for _, t in ipairs(tasks) do
     AddTaskPreInit(t, function(task)
+        task.region_id = "island_hamlet" --所有地形为一个岛
+
         task.room_tags = task.room_tags or {}
         table.insert(task.room_tags, "hamlet")       --模块专属标签
         table.insert(task.room_tags, "RoadPoison")   --禁止生成卵石路
@@ -110,5 +113,16 @@ AddLevelPreInitAny(function(level)
         for _, t in ipairs(tasks) do
             table.insert(level.tasks, t)
         end
+    end
+end)
+
+-- 联机版task不支持set_pieces字段，这里用联机版的方式添加布局
+AddTaskSetPreInitAny(function(task_set)
+    if task_set.location == "forest" then
+        task_set.set_pieces = task_set.set_pieces or {}
+
+        task_set.set_pieces["pig_ruins_entrance_2"] = { count = 1, tasks = { "岛一雨林深处" } }
+        task_set.set_pieces["pig_ruins_head"] = { count = 1, tasks = { "岛一雨林深处" } }
+        task_set.set_pieces["pig_ruins_artichoke"] = { count = 2, tasks = { "岛一雨林深处" } }
     end
 end)

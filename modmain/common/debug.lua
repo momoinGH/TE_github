@@ -177,3 +177,27 @@ TheInput:AddMouseButtonHandler(function(button, down)
     c_announce("（debug指令）玩家地图传送：" .. tostring(x) .. "," .. tostring(z))
     SendModRPCToServer(MOD_RPC[modname]["DebugMapTeleport"], x, z)
 end)
+
+----------------------------------------------------------------------------------------------------
+local last_teleport_node_id = nil
+-- 传送到指定标签的区域，可以用来判断有没有生成某个区域
+GLOBAL.c_teleportareahastag = function(tag)
+    node_id = nil
+    for id, node in pairs(TheWorld.topology.nodes) do
+        if node.tags and table.contains(node.tags, tag) then
+            node_id = id
+            if last_teleport_node_id ~= id then
+                break --不是上一个，直接返回
+            end
+        end
+    end
+
+    last_teleport_node_id = node_id
+    if node_id then
+        local ct = TheWorld.topology.nodes[node_id].cent
+        ThePlayer.Physics:Teleport(ct[1], 0, ct[2])
+    else
+        c_announce("未找到指定标签" .. tostring(tag) .. "的区域")
+        print("未找到指定标签" .. tostring(tag) .. "的区域")
+    end
+end

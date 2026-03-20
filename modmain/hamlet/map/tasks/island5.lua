@@ -1,9 +1,6 @@
-local island_hamlet = "island_hamlet"
-
 AddTask("连接岛四和岛五中间的海", {
     locks = LOCKS.PINACLE,
     keys_given = KEYS.LAND_DIVIDE_4,
-    region_id = island_hamlet,
     room_choices = {
         ["ForceDisconnectedRoom"] = 20,
     },
@@ -15,7 +12,6 @@ AddTask("连接岛四和岛五中间的海", {
 AddTask("岛五雨林深处", {
     locks = LOCKS.LAND_DIVIDE_4,
     keys_given = { KEYS.WILD_JUNGLE_DEPTH_1 },
-    region_id = island_hamlet,
     --		entrance_room = "ForceDisconnectedRoom", --  THIS IS HOW THEY ARE ON SEPARATE ISLANDS
     room_choices = {
         ["deeprainforest_base_nobatcave"] = math.random(2, 4),
@@ -32,7 +28,6 @@ AddTask("岛五雨林深处", {
 AddTask("岛五雨林", {
     locks = LOCKS.WILD_JUNGLE_DEPTH_1,
     keys_given = { KEYS.WILD_JUNGLE_DEPTH_2 },
-    region_id = island_hamlet,
     room_choices = {
         ["plains_base_nobatcave"] = math.random(3, 4),
         ["rainforest_lillypond"] = math.random(3, 4),
@@ -47,7 +42,6 @@ AddTask("岛五雨林", {
 AddTask("岛五毁灭雨林", {
     locks = LOCKS.WILD_JUNGLE_DEPTH_2,
     keys_given = { KEYS.ISLAND_5 },
-    region_id = island_hamlet,
     room_choices = {
         ["deeprainforest_flytrap_grove"] = math.random(4, 5),
     },

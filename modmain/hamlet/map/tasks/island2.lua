@@ -3,7 +3,6 @@ local island_hamlet = "island_hamlet"
 AddTask("岛一和岛二之间的海洋", {
     locks = LOCKS.ISLAND_2,
     keys_given = KEYS.LAND_DIVIDE_1,
-    region_id = island_hamlet,
     room_choices = {
         ["ForceDisconnectedRoom"] = 5, --20,
     },
@@ -15,7 +14,6 @@ AddTask("岛一和岛二之间的海洋", {
 AddTask("岛二雨林深处", {
     locks = LOCKS.LAND_DIVIDE_1,
     keys_given = { KEYS.OTHER_JUNGLE_DEPTH_2 },
-    region_id = island_hamlet,
     --	entrance_room = "ForceDisconnectedRoom",   --  THIS IS HOW THEY ARE ON SEPARATE ISLANDS
     room_choices = {
         ["BG_deeprainforest_base"] = math.random(2, 4),
@@ -37,7 +35,6 @@ AddTask("岛二雨林深处", {
 AddTask("岛二曼德拉丘", {
     locks = LOCKS.OTHER_JUNGLE_DEPTH_2,
     keys_given = { KEYS.OTHER_JUNGLE_DEPTH_1 },
-    region_id = island_hamlet,
     room_choices = {
         ["deeprainforest_mandrakeman"] = 1,
     },
@@ -52,7 +49,6 @@ AddTask("岛二曼德拉丘", {
 AddTask("岛二农场", {
     locks = LOCKS.OTHER_JUNGLE_DEPTH_1,
     keys_given = KEYS.OTHER_CIVILIZATION_1,
-    region_id = island_hamlet,
     room_choices = {
         ["cultivated_base_2"] = math.random(1, 3),
     },
@@ -64,7 +60,6 @@ AddTask("岛二农场", {
 AddTask("岛二郊区", {
     locks = LOCKS.OTHER_CIVILIZATION_1,
     keys_given = KEYS.OTHER_CIVILIZATION_2,
-    region_id = island_hamlet,
     room_choices = {
         ["suburb_base_2"] = math.random(2, 3),
     },
@@ -76,7 +71,6 @@ AddTask("岛二郊区", {
 AddTask("岛二猪镇", {
     locks = LOCKS.OTHER_CIVILIZATION_2,
     keys_given = KEYS.ISLAND_3,
-    region_id = island_hamlet,
     room_choices = {
         ["city_base_2"] = math.random(2, 3),
     },

@@ -50,9 +50,9 @@ end
 --     modimport "modmain/common/map/tasks/greenworldgen"
 -- end
 
+
 --生成世界需要用到的内容
-local is_worldgen = rawget(_G, "WORLDGEN_MAIN") ~= nil
-if is_worldgen then
+if rawget(_G, "WORLDGEN_MAIN") then
     TroOnConfigLoaded()
 
     modimport "modmain/map/storygen.lua"     --地形标签处理函数
@@ -60,5 +60,7 @@ if is_worldgen then
     troimportmodulefile "map/static_layouts" --静态布局
     troimportmodulefile "map/rooms"
     troimportmodulefile "map/tasks"
-    troimportmodulefile "map/mapadd" --hook生成函数、真正把地图数据加入原有地形数据中
+    troimportmodulefile "map/mapadd"      --hook生成函数、真正把地图数据加入原有地形数据中
+    modimport "modmain/map/ocean_gen"     --不让科雷覆盖mod海洋地皮
+    modimport "modmain/map/graphnode.lua" --允许在mod海洋地皮上填充实体
 end

@@ -61,10 +61,10 @@ AddRoom("rainforest_lillypond", {
     value = WORLD_TILES.LILYPOND,
     tags = { "ExitPiece", "Bramble" },
     contents = {
-        countstaticlayouts = {
-            ["lilypad2"] = math.random(1, 3),
-            ["lilypad"] = math.random(4, 8),
-        },
+        -- countstaticlayouts = {
+        --     ["lilypad2"] = math.random(1, 3),
+        --     ["lilypad"] = math.random(4, 8),
+        -- },
 
         distributepercent = .3, -- .3				
 
@@ -81,6 +81,7 @@ AddRoom("rainforest_lillypond", {
         countprefabs =
         {
             hippopotamoose = 1,
+            lilypad = math.random(4, 8)
         },
     }
 })
