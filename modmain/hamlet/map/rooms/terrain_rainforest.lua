@@ -58,30 +58,24 @@ AddRoom("BG_rainforest_base", {
 -- 睡莲池塘
 AddRoom("rainforest_lillypond", {
     colour = { r = 1.0, g = 0.3, b = 0.3, a = 0.3 },
-    value = WORLD_TILES.LILYPOND,
+    value = WORLD_TILES.RAINFOREST,
     tags = { "ExitPiece", "Bramble" },
     contents = {
-        -- countstaticlayouts = {
-        --     ["lilypad2"] = math.random(1, 3),
-        --     ["lilypad"] = math.random(4, 8),
-        -- },
+        countstaticlayouts = {
+            ["lilypad"] = 2,
+        },
 
         distributepercent = .3, -- .3				
 
         distributeprefabs =
         {
-            --lilypad = 2,	
             reeds_water = 3,
             lotus = 2,
             hippopotamoose = 0.08,
-            relic_1 = 0.04,
-            relic_2 = 0.04,
-            relic_3 = 0.04,
         },
         countprefabs =
         {
             hippopotamoose = 1,
-            lilypad = math.random(4, 8)
         },
     }
 })

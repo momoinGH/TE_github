@@ -90,23 +90,6 @@ local function speed(inst)
     end
 end
 
-local function groundtest(inst)
-    local map = TheWorld.Map
-    local ex, ey, ez = inst.Transform:GetWorldPosition()
-    local posicao1 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez + 5))
-    local posicao2 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez - 5))
-    local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex + 5, ey, ez))
-    local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex - 5, ey, ez))
-
-    if posicao1 ~= (WORLD_TILES.OCEAN_SWELL) and posicao1 ~= (WORLD_TILES.OCEAN_WATERLOG) and posicao1 ~= (WORLD_TILES.OCEAN_BRINEPOOL) and posicao1 ~= (WORLD_TILES.OCEAN_BRINEPOOL_SHORE) and posicao1 ~= (WORLD_TILES.OCEAN_HAZARDOUS) and posicao1 ~= (WORLD_TILES.OCEAN_ROUGH) and posicao1 ~= (WORLD_TILES.OCEAN_COASTAL) and posicao1 ~= (WORLD_TILES.OCEAN_COASTAL_SHORE)
-        or posicao2 ~= (WORLD_TILES.OCEAN_SWELL) and posicao2 ~= (WORLD_TILES.OCEAN_WATERLOG) and posicao2 ~= (WORLD_TILES.OCEAN_BRINEPOOL) and posicao2 ~= (WORLD_TILES.OCEAN_BRINEPOOL_SHORE) and posicao2 ~= (WORLD_TILES.OCEAN_HAZARDOUS) and posicao2 ~= (WORLD_TILES.OCEAN_ROUGH) and posicao2 ~= (WORLD_TILES.OCEAN_COASTAL) and posicao2 ~= (WORLD_TILES.OCEAN_COASTAL_SHORE)
-        or posicao3 ~= (WORLD_TILES.OCEAN_SWELL) and posicao3 ~= (WORLD_TILES.OCEAN_WATERLOG) and posicao3 ~= (WORLD_TILES.OCEAN_BRINEPOOL) and posicao3 ~= (WORLD_TILES.OCEAN_BRINEPOOL_SHORE) and posicao3 ~= (WORLD_TILES.OCEAN_HAZARDOUS) and posicao3 ~= (WORLD_TILES.OCEAN_ROUGH) and posicao3 ~= (WORLD_TILES.OCEAN_COASTAL) and posicao3 ~= (WORLD_TILES.OCEAN_COASTAL_SHORE)
-        or posicao4 ~= (WORLD_TILES.OCEAN_SWELL) and posicao4 ~= (WORLD_TILES.OCEAN_WATERLOG) and posicao4 ~= (WORLD_TILES.OCEAN_BRINEPOOL) and posicao4 ~= (WORLD_TILES.OCEAN_BRINEPOOL_SHORE) and posicao4 ~= (WORLD_TILES.OCEAN_HAZARDOUS) and posicao4 ~= (WORLD_TILES.OCEAN_ROUGH) and posicao4 ~= (WORLD_TILES.OCEAN_COASTAL) and posicao4 ~= (WORLD_TILES.OCEAN_COASTAL_SHORE) then
-        inst:Remove()
-    end
-end
-
-
 local function OnRepaired(inst)
     --inst.SoundEmitter:PlaySound("dontstarve/creatures/together/fossil/repair")
 end
@@ -425,8 +408,6 @@ local function fn()
 
     inst:WatchWorldState("startday", DoReleaseAllChildren)
     inst:WatchWorldState("stopday", ReturnChildren)
-
-    inst:DoTaskInTime(0, groundtest)
 
     inst.speed = speed
 

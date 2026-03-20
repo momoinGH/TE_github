@@ -24,14 +24,11 @@ if troisdev then
     modimport "modmain/worldgen_check_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 
+modimport "modmain/tiledefs"        --定义新地皮
+modimport "modmain/tilegroups"      --地皮分组
+modimport "modmain/map/terrain.lua" --定义预制体可以在哪些地皮上生成
 
--- 当配置项加载好后，才能访问TUNING.tropical检查哪些模块启用了
-function TroOnConfigLoaded()
-    modimport "modmain/gentuning"
-    troimportmodulefile "map/terrain" --植物生成地形限制
-    troimportmodulefile "tiledefs"    --定义新地皮
-    troimportmodulefile "tilegroups"  --地皮分组
-end
+
 
 -- TODO
 -- if TUNING.tropical.only_hamlet then
@@ -50,10 +47,9 @@ end
 --     modimport "modmain/common/map/tasks/greenworldgen"
 -- end
 
-
 --生成世界需要用到的内容
 if rawget(_G, "WORLDGEN_MAIN") then
-    TroOnConfigLoaded()
+    modimport "modmain/gentuning"            -- 当配置项加载好后，才能访问TUNING.tropical检查哪些模块启用了
 
     modimport "modmain/map/storygen.lua"     --地形标签处理函数
     troimportmodulefile "map/lockandkey"     --地形锁钥

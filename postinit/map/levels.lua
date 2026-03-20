@@ -41,20 +41,18 @@ if true then
             level.ocean_prefill_setpieces["HermitcrabIsland"] = 1
             -- level.ocean_prefill_setpieces["CrabKing"] = 1
 
-            table.proinserttable_unique(level.ocean_population, {
+            table.troinserttable_unique(level.ocean_population, {
                 "OceanBrinepool",
             })
         end
     end)
-
-
 end
 
 ---------------------联机大陆调整--------------------------
 if ta_worldgen.together == false then
     AddLevelPreInitAny(function(level)
         if level.location == "forest" then
-            table.proremovearrayvalues(
+            table.troremovearrayvalues(
                 level.tasks,
                 {
                     "Make a pick",
@@ -71,7 +69,7 @@ if ta_worldgen.together == false then
             )
 
             level.numoptionaltasks = 0
-            table.proremovearrayvalues(
+            table.troremovearrayvalues(
                 level.set_pieces,
                 {
                     "ResurrectionStone",
@@ -94,7 +92,7 @@ end
 if ta_worldgen.ocean_content == false then
     AddLevelPreInitAny(function(level)
         if level.location == "forest" then
-            table.proremovearrayvalues(
+            table.troremovearrayvalues(
                 level.tasks,
                 {
                     "MoonIsland_IslandShards",
@@ -104,7 +102,7 @@ if ta_worldgen.ocean_content == false then
                     "MoonIsland_Mine",
                 }
             )
-            table.proremovearrayvalues(
+            table.troremovearrayvalues(
                 level.set_pieces,
                 {
                     "MoonAltarRockGlass",
@@ -168,7 +166,7 @@ end
 if ta_worldgen.cave_content == "part" then
     AddLevelPreInitAny(function(level)
         if level.location == "caves" then
-            table.proremovearrayvalues(
+            table.troremovearrayvalues(
                 level.tasks,
                 {
                     "CaveExitTask1",

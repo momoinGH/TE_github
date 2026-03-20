@@ -60,17 +60,17 @@ env.modimport = function(modulename, ...)
 end
 
 ----------------------------------------------------------------------------------------------------
-TroOnConfigLoaded()
+modimport "modmain/gentuning"
 modimport "modmain/knownmodcheck"             -- 检测不兼容模组并报错崩溃
 modimport "modmain/mods"                      -- 兼容其他mod
 if troisdev then
     modimport "modmain/data_validator_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 
-modimport "modmain/postinit"  --TODO 拆分一下
-modimport "modmain/animstate" -- AnimState 增强
+modimport "modmain/postinit"   --TODO 拆分一下
+modimport "modmain/animstate"  -- AnimState 增强
 modimport "modmain/soundemitter"
-modimport "modmain/ents_trace"        --缓存记录一些需要全局查找的实体
+modimport "modmain/ents_trace" --缓存记录一些需要全局查找的实体
 
 -- 文本
 local language = string.lower(GetModConfigData("language"))
@@ -146,7 +146,7 @@ modimport("modmain/fx")            --特效
 ----------------------------------------------------------------------------------------------------
 
 if troisdev then
-    troimportmodulefile("debug") --方便开发的c_xxx控制台函数
+    troimportmodulefile("debug")             --方便开发的c_xxx控制台函数
     modimport "modmain/data_validator_after" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 

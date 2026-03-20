@@ -65,10 +65,10 @@ local ground_types = {
     WORLD_TILES.DEEPRAINFOREST or 0,
     WORLD_TILES.LAWN or 0,
     WORLD_TILES.PIGRUINS or 0,
-    WORLD_TILES.LILYPOND or 0,
+    WORLD_TILES.LILYPOND or 0, --58
     WORLD_TILES.GASRAINFOREST or 0,
     WORLD_TILES.SUBURB or 0,
-    WORLD_TILES.RAINFOREST or 0,
+    WORLD_TILES.RAINFOREST or 0,        --61
     WORLD_TILES.PIGRUINS_NOCANOPY or 0, --室内地皮，没有
     WORLD_TILES.PLAINS or 0,
     WORLD_TILES.PAINTED or 0,
@@ -233,7 +233,14 @@ Layouts["lilypad"] = StaticLayout.Get("map/static_layouts/lilypad", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-TroRemapLayoutTile("lilypad", ground_types)
+-- TroRemapLayoutTile("lilypad", ground_types)
+local layout = Layouts["lilypad"]
+local map = {}
+for i = 1, 58 do
+    table.insert(map, WORLD_TILES.LILYPOND)
+end
+layout.ground_types = map
+
 
 -- 睡莲
 Layouts["lilypad2"] = StaticLayout.Get("map/static_layouts/lilypad_2")

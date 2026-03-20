@@ -75,21 +75,6 @@ local function speed(inst)
     end
 end
 
-local function groundtest(inst)
-    local invader = GetClosestInstWithTag("rock_ice_frost", inst, 7)
-    if invader then invader:Remove() end
-
-    local invader = GetClosestInstWithTag("seastack", inst, 15)
-    if invader then invader:Remove() end
-
-    local invader = GetClosestInstWithTag("icedpad", inst, 7)
-    if invader then invader:Remove() end
-
-    local invader = GetClosestInstWithTag("whale", inst, 4.5)
-    if invader then invader:Remove() end
-end
-
-
 local function OnRepaired(inst)
     --inst.SoundEmitter:PlaySound("dontstarve/creatures/together/fossil/repair")
 end
@@ -406,8 +391,6 @@ local function fn()
 
     --inst:WatchWorldState("startday", DoReleaseAllChildren)	
     --inst:WatchWorldState("stopday", ReturnChildren)	
-
-    inst:DoTaskInTime(0, groundtest)
 
     inst.speed = speed
 

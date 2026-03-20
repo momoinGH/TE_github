@@ -27,10 +27,8 @@ AddTask("岛一睡莲", {
     room_choices = {
         ["rainforest_lillypond"] = math.random(2, 3),
     },
-    -- room_bg = WORLD_TILES.RAINFOREST,
-    room_bg = WORLD_TILES.LILYPOND,
-    -- background_room = "BG_rainforest_base",
-    background_room = "rainforest_lillypond",
+    room_bg = WORLD_TILES.RAINFOREST,
+    background_room = "BG_rainforest_base",
     colour = { r = 1, g = 0.3, b = 0.3, a = 0.3 }
 })
 

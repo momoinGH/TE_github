@@ -22,7 +22,7 @@ local itemskins =
             name = "sharkitten",
         },
     },
-	    snakeskinhat = {
+    snakeskinhat = {
         default = {
             basebuild = "hat_snakeskin",
         },
@@ -35,7 +35,7 @@ local itemskins =
             name = "viper",
         },
     },
-	    armor_snakeskin = {
+    armor_snakeskin = {
         default = {
             basebuild = "armor_snakeskin",
         },
@@ -48,7 +48,7 @@ local itemskins =
             name = "viper",
         },
     },
-	    snakeskinsail = {
+    snakeskinsail = {
         default = {
             basebuild = "swap_sail_snakeskin",
         },
@@ -68,7 +68,7 @@ local itemskins =
 for prefabname, prefabdata in pairs(itemskins) do
     for skinname, skindata in pairs(prefabdata) do
         if skinname ~= "default" then
-            skindata = table.prodeep_merge(skindata, prefabdata.default) or skindata
+            skindata = table.trodeep_merge(skindata, prefabdata.default) or skindata
             skindata.prefabname = skindata.prefabname or prefabname
             skindata.skinname = skindata.skinname or skinname
 

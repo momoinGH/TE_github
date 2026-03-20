@@ -1,7 +1,7 @@
 -- 把一个键值表添加到另一个键值表中
-function table.promerge(tbl, vs)
-    for i, v in pairs(vs) do
-        tbl[i] = v
+function table.tromerge(tbl, vs)
+    for k, v in pairs(vs) do
+        tbl[k] = v
     end
     return tbl
 end
@@ -21,7 +21,7 @@ local function is_array(t)
     return true
 end
 
-function table.prodeep_merge(target, add_table, override)
+function table.trodeep_merge(target, add_table, override)
     target = target or {}
 
     for k, v in pairs(add_table) do
@@ -36,7 +36,7 @@ function table.prodeep_merge(target, add_table, override)
                 end
             end
 
-            table.prodeep_merge(target[k], v, override)
+            table.trodeep_merge(target[k], v, override)
         else
             if is_array(target) and not override then
                 table.insert(target, v)
@@ -49,13 +49,13 @@ function table.prodeep_merge(target, add_table, override)
     return target
 end
 
-function table.proinserttable(tab, vs)
+function table.troinserttable(tab, vs)
     for _, v in pairs(vs) do
         table.insert(tab, v)
     end
 end
 
-function table.proinserttable_unique(tab, vs)
+function table.troinserttable_unique(tab, vs)
     for _, v in pairs(vs) do
         if not table.contains(tab, v) then
             table.insert(tab, v)
@@ -63,20 +63,8 @@ function table.proinserttable_unique(tab, vs)
     end
 end
 
-function table.proremove_components(tbl, vs)
-    -- 从后向前遍历 tbl
-    for i = #tbl, 1, -1 do
-        for k, w in pairs(vs) do
-            if tbl[i] == w then
-                table.remove(tbl, i)
-                break
-            end
-        end
-    end
-end
-
 -- 移除数组中指定的值
-function table.proremovearrayvalue(t, value)
+function table.troremovearrayvalue(t, value)
     for i = #t, 1, -1 do
         if t[i] == value then
             table.remove(t, i)
@@ -85,9 +73,9 @@ function table.proremovearrayvalue(t, value)
 end
 
 -- 移除数组中给定列表的所有值
-function table.proremovearrayvalues(t, vs)
+function table.troremovearrayvalues(t, vs)
     for _, v in pairs(vs) do
-        table.proremovearrayvalue(t, v)
+        table.troremovearrayvalue(t, v)
     end
 end
 

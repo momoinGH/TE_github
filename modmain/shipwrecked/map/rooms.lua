@@ -1,5 +1,5 @@
 AddRoomPreInit("OceanCoastal", function(room)
-    table.promerge(room.contents.distributeprefabs,
+    table.tromerge(room.contents.distributeprefabs,
         {
             messagebottle_sw = 0.1,
             seaweed_planted = 3,
@@ -15,7 +15,7 @@ end)
 
 
 AddRoomPreInit("OceanSwell", function(room)
-    table.promerge(room.contents.distributeprefabs,
+    table.tromerge(room.contents.distributeprefabs,
         {
             ballphinhouse = 5,
             redbarrel = 1,
@@ -33,7 +33,7 @@ end)
 
 
 AddRoomPreInit("OceanRough", function(room)
-    table.promerge(room.contents.distributeprefabs,
+    table.tromerge(room.contents.distributeprefabs,
         {
             redbarrel = 0.1,
             bioluminescence_spawner = .5,
@@ -48,7 +48,7 @@ end)
 
 AddRoomPreInit("OceanHazardous", function(room)
     room.contents.distributepercent = 0.3
-    table.promerge(room.contents.distributeprefabs,
+    table.tromerge(room.contents.distributeprefabs,
         {
             waterygrave = 5,
             wreck = 4,
@@ -73,7 +73,7 @@ AddRoomPreInit("OceanHazardous", function(room)
 end)
 
 AddRoomPreInit("OceanBrinepool", function(room)
-    table.promerge(room.contents.distributeprefabs,
+    table.tromerge(room.contents.distributeprefabs,
         {
 
             coralreef = 0.5,
@@ -91,7 +91,7 @@ end)
 
 AddRoomPreInit("OceanRough", function(room)
     room.contents.countprefabs = room.contents.countprefabs or {}
-    table.promerge(room.contents.countprefabs, {
+    table.tromerge(room.contents.countprefabs, {
         rawling = 1,
         tar_pool = 8,
     })
