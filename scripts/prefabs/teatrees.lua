@@ -331,6 +331,8 @@ local function OnEntityWake(inst)
 end
 
 local function TestSpawning(inst)
+    if not inst.components.childspawner then return end
+
     if TheWorld.state.isday or (TheWorld.state.moonphase == "new" and TheWorld.state.isnight) then
         inst.components.childspawner:StartSpawning()
     else

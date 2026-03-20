@@ -1,5 +1,6 @@
 require "map/ocean_gen"
 
+-- 不让科雷覆盖mod地形里的海洋地皮
 local OldOcean_ConvertImpassibleToWater = Ocean_ConvertImpassibleToWater
 GLOBAL.Ocean_ConvertImpassibleToWater = function(width, height, data)
     local tro_tiles = {}
