@@ -70,14 +70,14 @@ local function OnLoad(inst, data)
     end
 end
 
-local d = {
-    door_orientation = "", --门的朝向
-    minimap = "",          --小地图图标
-    exploitable = false,   --是否可爆破
-    vined = true,          --是否有藤蔓
-    light = true,          --是否有灯光
-    workcount = 4,         --是否可锤击
-}
+-- local d = {
+--     door_orientation = "", --门的朝向
+--     minimap = "",          --小地图图标
+--     exploitable = false,   --是否可爆破
+--     vined = true,          --是否有藤蔓
+--     light = true,          --是否有灯光
+--     workcount = 4,         --是否可锤击
+-- }
 
 local function common(bank, build, anim, data)
     data = data or {}
@@ -135,38 +135,27 @@ end
 -- 门动画的命名有点反直觉，位于房间顶部的门叫north北门，位于房间右侧的门叫west西门
 
 return
---洞穴门
-    MakeDoor("vamp_bat_cave_exit_door", "doorway_cave", "bat_cave_door", "day_loop", { light = true, minimap = "vamp_bat_cave_exit.png" }),
+-- 绳子
     MakeDoor("cave_exit_rope_door", "exitrope", "cave_exit_rope", "idle_loop"),
 
+    MakeDoor("anthill_cave_queen_door", "entrance", "ant_queen_entrance", "idle", { minimap = "ant_queen_entrance.png" }),
 
+
+    --宫殿
+    MakeDoor("interior_palace_south_door", "palace_door", "palace_door", "south", { door_orientation = "south" }),
+    MakeDoor("interior_palace_west_door", "wall_decals_palace", "interior_wall_decals_palace", "door_sidewall"),
+    MakeDoor("interior_palace_east_door", "wall_decals_palace", "interior_wall_decals_palace", "door_sidewall", { scale = { -1, 1 } }),
+
+
+    ----------------------------------------------------------------------------------------------------
+    --这几个门有光
     --猪人遗迹门，偷个懒，蓝色版本的替换个build得了
-    MakeDoor("pig_ruins_exit_door", "doorway_ruins", "pig_ruins_door", "day_loop", { light = true, minimap = "pig_ruins_exit_int.png" }),
-    --猪人遗迹内部门
-    MakeDoor("pig_ruins_north_door", "doorway_ruins", "pig_ruins_door", "north", { door_orientation = "north" }),
-    MakeDoor("pig_ruins_south_door", "doorway_ruins", "pig_ruins_door", "south", { door_orientation = "south" }),
-    MakeDoor("pig_ruins_east_door", "doorway_ruins", "pig_ruins_door", "east", { door_orientation = "east" }),
-    MakeDoor("pig_ruins_west_door", "doorway_ruins", "pig_ruins_door", "west", { door_orientation = "west" }),
-    --猪人遗迹藤蔓
-    MakeDoor("pig_ruins_vine_north_door", "doorway_ruins", "pig_ruins_door", "north", { door_orientation = "north", vined = true }),
-    MakeDoor("pig_ruins_vine_south_door", "doorway_ruins", "pig_ruins_door", "south", { door_orientation = "south", vined = true }),
-    MakeDoor("pig_ruins_vine_east_door", "doorway_ruins", "pig_ruins_door", "east", { door_orientation = "east", vined = true }),
-    MakeDoor("pig_ruins_vine_west_door", "doorway_ruins", "pig_ruins_door", "west", { door_orientation = "west", vined = true }),
-    --猪人遗迹隐藏门
-    MakeDoor("pig_ruins_cracks_north_door", "interior_wall_decals_ruins", "interior_wall_decals_ruins_cracks", "north_closed", { door_orientation = "north", exploitable = true }),
-    MakeDoor("pig_ruins_cracks_south_door", "interior_wall_decals_ruins", "interior_wall_decals_ruins_cracks", "south_closed", { door_orientation = "south", exploitable = true }),
-    MakeDoor("pig_ruins_cracks_east_door", "interior_wall_decals_ruins", "interior_wall_decals_ruins_cracks", "east_closed", { door_orientation = "east", exploitable = true }),
-    MakeDoor("pig_ruins_cracks_west_door", "interior_wall_decals_ruins", "interior_wall_decals_ruins_cracks", "west_closed", { door_orientation = "west", exploitable = true }),
-
+    MakeDoor("prop_door", "doorway_ruins", "pig_ruins_door", "day_loop", { light = true, minimap = "pig_ruins_exit_int.png" }),
+    --洞穴门
+    MakeDoor("vamp_bat_cave_exit_door", "doorway_cave", "bat_cave_door", "day_loop", { light = true, minimap = "vamp_bat_cave_exit.png" }),
     --蚁巢门
     MakeDoor("ant_cave_exit_door", "ant_cave_door", "ant_cave_door", "day_loop", { light = true, minimap = "ant_cave_door.png" }),
     MakeDoor("ant_cave_north_door", "ant_cave_door", "ant_cave_door", "north", { door_orientation = "north" }),
     MakeDoor("ant_cave_south_door", "ant_cave_door", "ant_cave_door", "south", { door_orientation = "south" }),
     MakeDoor("ant_cave_east_door", "ant_cave_door", "ant_cave_door", "east", { door_orientation = "east" }),
-    MakeDoor("ant_cave_west_door", "ant_cave_door", "ant_cave_door", "west", { door_orientation = "west" }),
-    MakeDoor("anthill_cave_queen_door", "entrance", "ant_queen_entrance", "idle", { minimap = "ant_queen_entrance.png" }),
-
-    --宫殿
-    MakeDoor("interior_palace_south_door", "palace_door", "palace_door", "south", { door_orientation = "south" }),
-    MakeDoor("interior_palace_west_door", "wall_decals_palace", "interior_wall_decals_palace", "door_sidewall"),
-    MakeDoor("interior_palace_east_door", "wall_decals_palace", "interior_wall_decals_palace", "door_sidewall", { scale = { -1, 1 } })
+    MakeDoor("ant_cave_west_door", "ant_cave_door", "ant_cave_door", "west", { door_orientation = "west" })

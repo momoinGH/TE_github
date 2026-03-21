@@ -242,6 +242,9 @@ end
 function c_select(inst)
 end
 
+-- 根据标签查找附近对象
+function c_findtag(tag, radius, inst) end
+
 ---获取一个玩家，优先选择鼠标所选的玩家
 function ConsoleCommandPlayer()
 end
@@ -1439,7 +1442,9 @@ AddTaskSetPreInitAny = function(fn) end
 
 -- Check if the beginning of str matches prefix. Analogous to python's
 -- startswith().
-function string.starts(str,prefix) end
+function string.starts(str, prefix) end
 
 -- 建造什么东西需要的材料
 CONSTRUCTION_PLANS = {}
+
+TheFocalPoint = {}

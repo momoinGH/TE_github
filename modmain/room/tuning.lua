@@ -9,7 +9,6 @@ TUNING.HAMROOM = {
         pig_palace_shop_floor = "medium",
     },
 
-
     roomcamera = {
         small = { pitch = 36, distance = 20, pos = -1 },
         medium = { pitch = 35, distance = 24, pos = -2 },
@@ -18,13 +17,17 @@ TUNING.HAMROOM = {
         cave = { pitch = 36, distance = 31, pos = 0 },
         xlarge = { pitch = 36, distance = 38, pos = -2 },
     },
-
-    roomsize = {
-        small = { back = 2.5, front = 9, side = 7.5 },
-        medium = { back = 5, front = 8.5, side = 7.5 },
-        big = { back = 5, front = 9.5, side = 9 },
-        large = { back = 5, front = 8, side = 11.5 },
-        cave = { back = 5, front = 13, side = 13 },
-        xlarge = { back = 5.5, front = 13, side = 13 },
-    },
 }
+
+
+TUNING.ROOM_TINY_WIDTH   = 15
+TUNING.ROOM_TINY_DEPTH   = 10
+
+TUNING.ROOM_SMALL_WIDTH  = 18
+TUNING.ROOM_SMALL_DEPTH  = 12
+
+TUNING.ROOM_MEDIUM_WIDTH = 24
+TUNING.ROOM_MEDIUM_DEPTH = 16
+
+TUNING.ROOM_LARGE_WIDTH  = 26
+TUNING.ROOM_LARGE_DEPTH  = 18

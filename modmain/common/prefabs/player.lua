@@ -43,7 +43,7 @@ local function OnDirtyEventCameraStuff(inst)
     -- 这里只改距离distancetarget和偏移量x
     local width = target.room_width:value()
     TheCamera.controllable = false
-    TheCamera.distancetarget = 21.5 + 0.75 * (width - 16) + GetModConfigData("housewallajust")
+    TheCamera.distancetarget = 21.5 + 0.75 * (width - 16)
     TheCamera:SetHeadingTarget(0)
     TheFocalPoint.components.focalpoint:StartFocusSource(inst, "tropical_inroom",
         target, math.huge, math.huge, 10, {

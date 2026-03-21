@@ -40,18 +40,6 @@ TUNING.RUINS_ENTRANCE_VINES_HACKS   = 4
 
 TUNING.WILBA_HEALTH                 = 150
 
-TUNING.ROOM_TINY_WIDTH              = 15
-TUNING.ROOM_TINY_DEPTH              = 10
-
-TUNING.ROOM_SMALL_WIDTH             = 18
-TUNING.ROOM_SMALL_DEPTH             = 12
-
-TUNING.ROOM_MEDIUM_WIDTH            = 24
-TUNING.ROOM_MEDIUM_DEPTH            = 16
-
-TUNING.ROOM_LARGE_WIDTH             = 26
-TUNING.ROOM_LARGE_DEPTH             = 18
-
 TUNING.ANTMAN_REGEN_TIME            = seg_time * 4
 TUNING.ANTMAN_RELEASE_TIME          = seg_time
 TUNING.ANTMAN_MIN                   = 3

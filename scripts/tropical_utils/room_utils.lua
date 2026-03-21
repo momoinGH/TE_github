@@ -9,27 +9,6 @@ FN.BASE_OFF = 1400 --小房子的初始z坐标
 FN.ROOM_GAP = 60
 FN.ROW_COUNT = (FN.BASE_OFF + 100) / FN.ROOM_GAP * 2
 
-FN.ROOM_SIZE = {
-    SMALL = {
-        dx = { -5.5, 5.5 }, --上下
-        dz = { -8.5, 8.5 }  --左右
-    },
-    MEDIUM = {
-        dx = { -8.5, 8.5 },  --上下
-        dz = { -12.5, 12.5 } --左右
-    },
-}
-
-function FN.GetRoomSizeId(room_size)
-    return room_size == FN.ROOM_SIZE.MEDIUM and 1
-        or 0
-end
-
-function FN.GetRoomSizeById(id)
-    return id == 1 and FN.ROOM_SIZE.MEDIUM
-        or FN.ROOM_SIZE.SMALL
-end
-
 function FN.GetCenterPosByHouse(house)
     local door = house.components.teleporter and house.components.teleporter:GetTarget()
     local center = door and door:GetRoomCenter()
@@ -550,68 +529,72 @@ function FN.CreateRoom(room)
     for _, data in ipairs(room.addprops) do
         local p = SpawnPrefab(data.name)
 
-        local x_offset = data.x_offset
-        local scale = data.scale
+        if p then
+            local x_offset = data.x_offset
+            local scale = data.scale
 
-        if TUNING.TRO_ROOM_DEBUG then
-            conprint("创建内部对象：", p, "是门吗：", p:HasTag("interior_door"), ", key：", data.key)
-        end
-
-        if p:HasTag("interior_door") then
-            --门
-            if p.room_center then
-                p.room_center:set(center)
+            if TUNING.TRO_ROOM_DEBUG then
+                conprint("创建内部对象：", p, "是门吗：", p:HasTag("interior_door"), ", key：", data.key)
             end
-            local key = data.key or door_inc
-            door_inc = door_inc + 1 --只要每次创建房间时唯一就行
-            doors[key] = p
-            door_map[key] = data.target_door
-        elseif p:HasTag("interior_floor") then
-            --地板自适应缩放，但不是直接的线性关系，这里懒得搞什么公式了
-            x_offset = x_offset
-                or depth == TUNING.ROOM_LARGE_DEPTH and -5.5
-                or depth == TUNING.ROOM_MEDIUM_DEPTH and -4.4
-                or depth == TUNING.ROOM_SMALL_DEPTH and -3.5
-                or depth == TUNING.ROOM_TINY_DEPTH and -3
-                or nil
-            scale = scale
-                or width == TUNING.ROOM_LARGE_WIDTH and { 4.5, 4.5 }
-                or width == TUNING.ROOM_MEDIUM_WIDTH and { 3.7, 3.7 }
-                or width == TUNING.ROOM_SMALL_WIDTH and { 2.9, 2.9 }
-                or width == TUNING.ROOM_TINY_WIDTH and { 2.4, 2.4 }
-                or nil
-        elseif p:HasTag("interior_wall") then
-            -- 墙壁自适应缩放
-            x_offset = x_offset
-                or depth == TUNING.ROOM_LARGE_DEPTH and -4.5
-                or depth == TUNING.ROOM_MEDIUM_DEPTH and -4
-                or depth == TUNING.ROOM_SMALL_DEPTH and -3.5
-                or depth == TUNING.ROOM_TINY_DEPTH and -2.8
-                or nil
-            scale = scale
-                or width == TUNING.ROOM_LARGE_WIDTH and { 4.6, 4.6 }
-                or width == TUNING.ROOM_MEDIUM_WIDTH and { 4.2, 4.2 }
-                or width == TUNING.ROOM_SMALL_WIDTH and { 3.5, 3.5 }
-                or width == TUNING.ROOM_TINY_WIDTH and { 3, 3 }
-                or nil
+
+            if p:HasTag("interior_door") then
+                --门
+                if p.room_center then
+                    p.room_center:set(center)
+                end
+                local key = data.key or door_inc
+                door_inc = door_inc + 1 --只要每次创建房间时唯一就行
+                doors[key] = p
+                door_map[key] = data.target_door
+            elseif p:HasTag("interior_floor") then
+                --地板自适应缩放，但不是直接的线性关系，这里懒得搞什么公式了
+                x_offset = x_offset
+                    or depth == TUNING.ROOM_LARGE_DEPTH and -5.5
+                    or depth == TUNING.ROOM_MEDIUM_DEPTH and -4.4
+                    or depth == TUNING.ROOM_SMALL_DEPTH and -3.5
+                    or depth == TUNING.ROOM_TINY_DEPTH and -3
+                    or nil
+                scale = scale
+                    or width == TUNING.ROOM_LARGE_WIDTH and { 4.5, 4.5 }
+                    or width == TUNING.ROOM_MEDIUM_WIDTH and { 3.7, 3.7 }
+                    or width == TUNING.ROOM_SMALL_WIDTH and { 2.9, 2.9 }
+                    or width == TUNING.ROOM_TINY_WIDTH and { 2.4, 2.4 }
+                    or nil
+            elseif p:HasTag("interior_wall") then
+                -- 墙壁自适应缩放
+                x_offset = x_offset
+                    or depth == TUNING.ROOM_LARGE_DEPTH and -4.5
+                    or depth == TUNING.ROOM_MEDIUM_DEPTH and -2 --遗迹测过
+                    or depth == TUNING.ROOM_SMALL_DEPTH and -3.5
+                    or depth == TUNING.ROOM_TINY_DEPTH and -2.8
+                    or nil
+                scale = scale
+                    or width == TUNING.ROOM_LARGE_WIDTH and { 4.6, 4.6 }
+                    or width == TUNING.ROOM_MEDIUM_WIDTH and { 3.8, 3.8 }
+                    or width == TUNING.ROOM_SMALL_WIDTH and { 3.5, 3.5 }
+                    or width == TUNING.ROOM_TINY_WIDTH and { 3, 3 }
+                    or nil
+            end
+
+            p.Transform:SetPosition(x + (x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))
+
+            if p.components.tro_saveanim then
+                p.components.tro_saveanim:Init(data.bank, data.build, data.anim, scale, data.isloopplay, data.isdelayset, data.rotation)
+            end
+
+            if data.startstate then
+                assert(p.sg and p.sg:HasState(data.startstate), data.name .. "没有sg或者没有state ：" .. data.startstate)
+                p.sg:GoToState(data.startstate)
+            end
+
+            if data.init then
+                data.init(p, center, data)
+            end
+
+            p:PushEvent("oninteriorspawn", data)
+        else
+            TroErrorHandle(data.name .. "预制件不存在", true, false)
         end
-
-        p.Transform:SetPosition(x + (x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))
-
-        if p.components.tro_saveanim then
-            p.components.tro_saveanim:Init(data.bank, data.build, data.anim, scale, data.isloopplay, data.isdelayset, data.rotation)
-        end
-
-        if data.startstate then
-            assert(p.sg and p.sg:HasState(data.startstate), data.name .. "没有sg或者没有state ：" .. data.startstate)
-            p.sg:GoToState(data.startstate)
-        end
-
-        if data.init then
-            data.init(p, center, data)
-        end
-
-        p:PushEvent("oninteriorspawn", data)
     end
 
     return doors, door_map, center
