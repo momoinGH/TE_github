@@ -1,5 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
-
+local MakeDoor = require("tro_interior_door_defs").MakeDoor
 local assets =
 {
     Asset("ANIM", "anim/vamp_bat_entrance.zip"),
@@ -122,23 +122,20 @@ local function creatInterior(inst)
     doors.exit.components.teleporter:Target(inst)
 end
 
-local function fn()
-    local inst = RoomUtils.MakeBaseDoor("vampbat_den", "vamp_bat_entrance", "idle", false, false, "vamp_bat_cave.png")
 
+return MakeDoor("vampirebatcave", {
+    assets = assets,
+    prefabs = prefabs,
+    bank = "vampbat_den",
+    build = "vamp_bat_entrance",
+    anim = "idle",
+    minimap = "vamp_bat_cave.png"
+}, function(inst)
     MakeObstaclePhysics(inst, .5)
 
     inst:AddTag("houndmound")
     inst:AddTag("batcave")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+end, function(inst)
     inst:DoTaskInTime(0, creatInterior)
-
     MakeSnowCovered(inst)
-
-    return inst
-end
-
-return Prefab("vampirebatcave", fn, assets, prefabs)
+end)

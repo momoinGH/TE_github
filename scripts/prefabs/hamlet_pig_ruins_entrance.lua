@@ -1,5 +1,5 @@
 local mazemaker = require("prefabs/hamlet_pig_ruins_entrance_defs")
-
+local MakeBaseDoor = require("tro_interior_door_defs").MakeBaseDoor
 
 local RoomUtils = require("tropical_utils/room_utils")
 
@@ -132,7 +132,7 @@ local function MakeRuinDoor(name, data, common_post_fn, master_post_fn)
     assert(not (not data.get_maze_fn and not data.maze_id), name .. "迷宫没有get_maze_fn字段被视为出口，但又没有maze_id表示是哪个迷宫的出口")
 
     local function fn()
-        local inst = RoomUtils.MakeBaseDoor("pig_ruins_entrance", "pig_ruins_entrance_build", "idle_closed", true, false, "pig_ruins_entrance.png")
+        local inst = MakeBaseDoor("pig_ruins_entrance", "pig_ruins_entrance_build", "idle_closed", true, false, "pig_ruins_entrance.png")
 
         MakeObstaclePhysics(inst, 1.20)
 

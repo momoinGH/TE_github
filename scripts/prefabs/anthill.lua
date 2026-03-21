@@ -1,4 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
+local MakeDoor = require("tro_interior_door_defs").MakeDoor
 
 local assets =
 {
@@ -287,7 +288,7 @@ local function CreateQueenChambers(rooms, room_count)
                     { name = "antman_warrior", x_offset = getlocationoutofcenter(depth * 0.65, 5, true), z_offset = getlocationoutofcenter(width * 0.65, 5, true) })
             end
             -- 一路向上的门
-            table.insert(addprops, { name = "ant_cave_exit_door", x_offset = -depth / 2, key = #rooms .. "NORTH", target_door = (#rooms + 1) .. "SOUTH" })
+            table.insert(addprops, { name = "ant_cave_door", x_offset = -depth / 2, key = #rooms .. "NORTH", target_door = (#rooms + 1) .. "SOUTH", anim = "north" })
         else
             -- 蚁后房间
             addprops = AddCommonDeco(addprops)
@@ -353,10 +354,11 @@ local function CreateQueenChambers(rooms, room_count)
         end
 
         table.insert(addprops, {
-            name = "ant_cave_south_door",
+            name = "ant_cave_door",
             x_offset = depth / 2,
             key = #rooms .. "SOUTH",
-            target_door = i == 1 and "boss_door" or (#rooms - 1) .. "NORTH" --需要和前面的房间连起来
+            target_door = i == 1 and "boss_door" or (#rooms - 1) .. "NORTH", --需要和前面的房间连起来
+            anim = "south"
         })
     end
 end
@@ -404,34 +406,38 @@ local function CreateMaze(inst)
             --相邻门
             if i > 1 then --顶部有房间
                 table.insert(newRoom.addprops, {
-                    name = "ant_cave_north_door",
+                    name = "ant_cave_door",
                     x_offset = -depth / 2,
                     key = #rooms .. "NORTH",
-                    target_door = (idx - NUM_COLS) .. "SOUTH"
+                    target_door = (idx - NUM_COLS) .. "SOUTH",
+                    anim = "north"
                 })
             end
             if i < NUM_ROWS then --底部有房间
                 table.insert(newRoom.addprops, {
-                    name = "ant_cave_south_door",
+                    name = "ant_cave_door",
                     x_offset = depth / 2,
                     key = #rooms .. "SOUTH",
-                    target_door = (idx + NUM_COLS) .. "NORTH"
+                    target_door = (idx + NUM_COLS) .. "NORTH",
+                    anim = "south"
                 })
             end
             if j > 1 then --左边有房间
                 table.insert(newRoom.addprops, {
-                    name = "ant_cave_east_door",
+                    name = "ant_cave_door",
                     z_offset = -width / 2,
                     key = #rooms .. "EAST",
-                    target_door = (idx - 1) .. "WEST"
+                    target_door = (idx - 1) .. "WEST",
+                    anim = "east"
                 })
             end
             if j < NUM_COLS then --右边有房间
                 table.insert(newRoom.addprops, {
-                    name = "ant_cave_west_door",
+                    name = "ant_cave_door",
                     z_offset = width / 2,
                     key = #rooms .. "WEST",
-                    target_door = (idx + 1) .. "EAST"
+                    target_door = (idx + 1) .. "EAST",
+                    anim = "west"
                 })
             end
 
@@ -529,7 +535,7 @@ local function CreateMaze(inst)
             end
 
             if room.isEntrance then
-                table.insert(addprops, { name = "ant_cave_exit_door", x_offset = -depth / 2, key = "exit" .. isEntranceId })
+                table.insert(addprops, { name = "ant_cave_door", x_offset = -depth / 2, key = "exit" .. isEntranceId, anim = "north" })
                 isEntranceId = isEntranceId + 1
             end
 
@@ -581,8 +587,6 @@ local function getstatus(inst)
     end
 end
 
-
-
 local function onbuilt(inst)
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("idle")
@@ -600,8 +604,13 @@ local function onload(inst, data)
     end
 end
 
-local function common(buildanthill)
-    local inst = RoomUtils.MakeBaseDoor("ant_hill_entrance", "ant_hill_entrance", "idle", false, false, "ant_hill_entrance.png")
+local function CommonPost(inst)
+    inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon("ant_hill_entrance.png")
+
+    inst.AnimState:SetBank("ant_hill_entrance")
+    inst.AnimState:SetBuild("ant_hill_entrance")
+    inst.AnimState:PlayAnimation("idle")
 
     local light = inst.entity:AddLight()
     light:SetFalloff(1)
@@ -616,11 +625,9 @@ local function common(buildanthill)
 
     inst:AddTag("structure")
     inst:AddTag("anthill_outside")
+end
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+local function MasterPost(inst)
     inst:AddComponent("lootdropper")
 
     inst:AddComponent("childspawner")
@@ -635,25 +642,28 @@ local function common(buildanthill)
 
     inst.name = STRINGS.NAMES.ANTHILL
 
-    if buildanthill then
-        inst:DoTaskInTime(0, CreateMaze)
-    end
-
-    MakeSnowCovered(inst, .01)
+    MakeSnowCovered(inst)
 
     inst.OnSave = onsave
     inst.OnLoad = onload
 
     inst:ListenForEvent("onbuilt", onbuilt)
-
-    return inst
-end
-
-local function makefn(buildanthill)
-    local fn = function() return common(buildanthill) end
-    return fn
 end
 
 -- 一个anthill搭配两个anthill_exit使用
-return Prefab("anthill", makefn(true), assets, prefabs),
-    Prefab("anthill_exit", makefn(false), assets, prefabs)
+return
+    MakeDoor("anthill", {
+            assets = assets,
+            prefabs = prefabs,
+        },
+        CommonPost,
+        function(inst)
+            MasterPost(inst)
+            inst:DoTaskInTime(0, CreateMaze)
+        end),
+    MakeDoor("anthill_exit", {
+            assets = assets,
+            prefabs = prefabs,
+        },
+        CommonPost,
+        MasterPost)

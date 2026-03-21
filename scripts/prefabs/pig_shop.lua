@@ -1,5 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
-
+local MakeBaseDoor = require("tro_interior_door_defs").MakeBaseDoor
 local assets =
 {
     Asset("ANIM", "anim/pig_shop.zip"),
@@ -760,7 +760,7 @@ local function MakeShop(name, data)
 
     local function fn()
         local usesound = data.sounds and data.sounds[1] or nil
-        local inst = RoomUtils.MakeBaseDoor(bank, build, "idle", false, false, minimap, usesound)
+        local inst = MakeBaseDoor(bank, build, "idle", false, false, minimap, usesound)
 
         inst.entity:AddLight()
         inst.Light:SetFalloff(1)

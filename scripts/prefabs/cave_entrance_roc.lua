@@ -1,4 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
+local MakeDoor = require("tro_interior_door_defs").MakeDoor
 
 local assets = {
     Asset("ANIM", "anim/cave_entrance.zip"),
@@ -33,9 +34,10 @@ local function GetDoorProp(room, dir, exit, width, depth)
     end
 
     return {
-        name = "ant_cave_" .. dir.label .. "_door",
+        name = "ant_cave_door",
         x_offset = x_offset,
         z_offset = z_offset,
+        anim = dir.label
     }
 end
 
@@ -113,11 +115,11 @@ local function initmaze(inst)
         end
 
         if room.entrance2 then
-            table.insert(addprops, { name = "cave_exit_rope_door", z_offset = -width / 6, key = "entrance2" })
+            table.insert(addprops, { name = "hamlet_cave_exit", z_offset = -width / 6, key = "entrance2" })
         end
 
         if room.entrance1 then
-            table.insert(addprops, { name = "cave_exit_rope_door", z_offset = -width / 6, key = "entrance1" })
+            table.insert(addprops, { name = "hamlet_cave_exit", z_offset = -width / 6, key = "entrance1" })
             table.insert(addprops, { name = "roc_cave_light_beam", z_offset = -width / 6 })
         end
 
@@ -329,15 +331,18 @@ local function Init(inst)
     end
 end
 
-local function common()
-    local inst = RoomUtils.MakeBaseDoor("cave_entrance", "cave_entrance", "idle_closed", false, false, "cave_closed.png")
+local function CommonPost(inst)
+    inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon("cave_closed.png")
+
+    inst.AnimState:SetBank("cave_entrance")
+    inst.AnimState:SetBuild("cave_entrance")
+    inst.AnimState:PlayAnimation("idle_closed")
 
     MakeObstaclePhysics(inst, 1)
+end
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+local function MasterPost(inst)
     inst:DoTaskInTime(0, Init)
 
     inst.components.teleporter.onActivateByOther = OnActivateByOther
@@ -355,36 +360,30 @@ local function common()
     inst.components.inspectable.getstatus = GetStatus
     inst.components.inspectable.nameoverride = "CAVE_ENTRANCE"
 
-    MakeSnowCovered(inst, .01)
+    MakeSnowCovered(inst)
 
     inst.OnSave = OnExitSave
     inst.OnLoad = OnExitLoad
-
-    return inst
-end
-
-local function fn()
-    local inst = common()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:DoTaskInTime(0, initmaze) --也可以凿开再生成
-
-    return inst
-end
-
-local function exitfn()
-    local inst = common()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    return inst
 end
 
 -- 一个可以生成迷宫，一个单纯作为出口二
-return Prefab("cave_entrance_roc", fn, assets, prefabs),
-    Prefab("cave_exit_roc", exitfn, assets, prefabs)
+return
+-- Prefab("cave_entrance_roc", fn, assets, prefabs),
+-- Prefab("cave_exit_roc", exitfn, assets, prefabs)
+    MakeDoor("cave_entrance_roc",
+        {
+            assets = assets,
+            prefabs = prefabs,
+        },
+        CommonPost,
+        function(inst)
+            MasterPost(inst)
+            inst:DoTaskInTime(0, initmaze) --也可以凿开再生成
+        end),
+    MakeDoor("cave_exit_roc",
+        {
+            assets = assets,
+            prefabs = prefabs,
+        },
+        CommonPost,
+        MasterPost)

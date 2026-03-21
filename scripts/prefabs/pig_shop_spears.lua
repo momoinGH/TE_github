@@ -1,14 +1,10 @@
 local RoomUtils = require("tropical_utils/room_utils")
-local function OnSave(inst, data)
-    data.entrada = inst.entrada
-end
+local MakeDoor = require("tro_interior_door_defs").MakeDoor
 
-
-local function OnLoad(inst, data)
-    if data == nil then return end
-    if data.entrada then inst.entrada = data.entrada end
-end
-
+local assets =
+{
+    Asset("ANIM", "anim/wildbea_house.zip"),
+}
 
 local function PlayTravelSound(inst, doer)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/store/door_close")
@@ -81,15 +77,17 @@ local function CreateInterior(inst)
     RoomUtils.CreateSimpleInterior(inst, room)
 end
 
-local function fn()
-    local inst = RoomUtils.MakeBaseDoor("merm_sw_house", "wildbea_house", "idle_hunt1", true, false, "pig_lootshop.png", "dontstarve/common/pighouse_door")
-
+return MakeDoor("pig_shop_spears", {
+    assets = assets,
+    bank = "merm_sw_house",
+    build = "wildbea_house",
+    anim = "idle_hunt1",
+    minimap = "pig_lootshop.png",
+    trader = true,
+    usesound = "dontstarve/common/pighouse_door"
+}, function(inst)
     inst:AddTag("structure")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+end, function(inst)
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({ "boards", "boards", "cutstone", "cutstone" })
 
@@ -107,8 +105,4 @@ local function fn()
     MakeSnowCovered(inst)
 
     inst:DoTaskInTime(0, CreateInterior)
-
-    return inst
-end
-
-return Prefab("pig_shop_spears", fn)
+end)

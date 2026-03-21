@@ -1,9 +1,9 @@
 local RoomUtils = require("tropical_utils/room_utils")
+local MakeDoor = require("tro_interior_door_defs").MakeDoor
 
 local assets =
 {
     Asset("ANIM", "anim/palace.zip"),
-    Asset("ANIM", "anim/pig_shop_doormats.zip"),
     Asset("ANIM", "anim/palace_door.zip"),
     Asset("ANIM", "anim/interior_wall_decals_palace.zip"),
     Asset("MINIMAP_IMAGE", "pig_palace"),
@@ -334,9 +334,15 @@ local function OnIgnite(inst)
     end
 end
 
-local function fn()
-    local inst = RoomUtils.MakeBaseDoor("palace", "palace", "idle", true, false, "pig_palace.png")
-
+return MakeDoor("pig_palace", {
+    assets = assets,
+    prefabs = prefabs,
+    trader = true,
+    bank = "palace",
+    build = "palace",
+    anim = "idle",
+    minimap = "pig_palace.png"
+}, function(inst)
     inst.entity:AddLight()
     inst.Light:SetFalloff(1)
     inst.Light:SetIntensity(.5)
@@ -347,11 +353,7 @@ local function fn()
     MakeObstaclePhysics(inst, 1.25)
 
     inst:AddTag("structure")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+end, function(inst)
     inst:AddComponent("spawner")
     inst.components.spawner:Configure("pigman_banker", TUNING.TOTAL_DAY_TIME * 4)
     inst.components.spawner.onoccupied = onoccupied
@@ -359,7 +361,7 @@ local function fn()
 
     inst.components.inspectable.getstatus = getstatus
 
-    MakeSnowCovered(inst, .01)
+    MakeSnowCovered(inst)
 
     inst.OnSave = onsave
     inst.OnLoad = onload
@@ -371,8 +373,4 @@ local function fn()
     inst:ListenForEvent("onbuilt", onbuilt)
     inst:WatchWorldState("isday", OnIsDay)
     OnIsDay(inst, TheWorld.state.isday)
-
-    return inst
-end
-
-return Prefab("pig_palace", fn, assets, prefabs)
+end)

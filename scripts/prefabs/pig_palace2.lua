@@ -1,5 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
-
+local MakeDoor = require("tro_interior_door_defs").MakeDoor
 local assets =
 {
     Asset("ANIM", "anim/wildbea_house.zip"),
@@ -67,9 +67,16 @@ local function CreateInterior(inst)
     RoomUtils.CreateSimpleInterior(inst, room)
 end
 
-local function fn()
-    local inst = RoomUtils.MakeBaseDoor("merm_sw_house", "wildbea_house", "idle_fish1", true, false, "pig_fishingshop.png", "dontstarve/common/teleportworm/swallow")
-
+return MakeDoor("pig_palace2", {
+    assets = assets,
+    prefabs = prefabs,
+    bank = "merm_sw_house",
+    build = "wildbea_house",
+    anim = "idle_fish1",
+    minimap = "pig_fishingshop.png",
+    trader = true,
+    usesound = "dontstarve/common/teleportworm/swallow"
+}, function(inst)
     inst.entity:AddLight()
     inst.Light:SetFalloff(1)
     inst.Light:SetIntensity(.5)
@@ -80,20 +87,12 @@ local function fn()
     MakeObstaclePhysics(inst, 1.0)
 
     inst:AddTag("structure")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+end, function(inst)
     inst:AddComponent("lootdropper")
 
     inst.components.inspectable.getstatus = getstatus
 
-    MakeSnowCovered(inst, .01)
+    MakeSnowCovered(inst)
 
     inst:DoTaskInTime(0, CreateInterior)
-
-    return inst
-end
-
-return Prefab("pig_palace2", fn, assets, prefabs)
+end)

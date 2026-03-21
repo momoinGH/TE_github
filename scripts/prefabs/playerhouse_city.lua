@@ -1,5 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
-
+local MakeDoor = require("tro_interior_door_defs").MakeDoor
 local assets =
 {
     Asset("ANIM", "anim/pig_house_sale.zip"),
@@ -154,9 +154,14 @@ local function onhammered(inst, worker)
     inst:Remove()
 end
 
-local function fn()
-    local inst = RoomUtils.MakeBaseDoor("pig_house_sale", "pig_house_sale", "idle", true, false, "pig_house_sale.png")
-
+return MakeDoor("playerhouse_city", {
+    assets = assets,
+    bank = "pig_house_sale",
+    build = "pig_house_sale",
+    anim = "idle",
+    minimap = "pig_house_sale.png",
+    trader = true,
+}, function(inst)
     inst.entity:AddLight()
     inst.Light:SetFalloff(1)
     inst.Light:SetIntensity(.5)
@@ -169,11 +174,7 @@ local function fn()
     inst.AnimState:Hide("boards")
 
     inst:AddTag("structure")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+end, function(inst)
     inst:AddComponent("lootdropper")
 
     inst:AddComponent("workable")
@@ -204,8 +205,4 @@ local function fn()
     inst.OnLoad = OnLoad
 
     inst:ListenForEvent("onbuilt", onbuilt)
-
-    return inst
-end
-
-return Prefab("playerhouse_city", fn, assets)
+end)

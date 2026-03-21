@@ -1,0 +1,128 @@
+local MakeDoor = require("tro_interior_door_defs").MakeDoor
+
+local assets = {
+    Asset("ANIM", "anim/ant_cave_door.zip"),
+    Asset("ANIM", "anim/bat_cave_door.zip"),
+
+    Asset("ANIM", "anim/pig_ruins_door.zip"),
+    Asset("ANIM", "anim/pig_ruins_door_blue.zip"),
+}
+
+local lights =
+{
+    day = { rad = 3, intensity = 0.75, falloff = 0.5, color = { 1, 1, 1 } },
+    dusk = { rad = 2, intensity = 0.75, falloff = 0.5, color = { 1 / 1.8, 1 / 1.8, 1 / 1.8 } },
+    full = { rad = 2, intensity = 0.75, falloff = 0.5, color = { 0.8 / 1.8, 0.8 / 1.8, 1 / 1.8 } }
+}
+
+local function turnoff(inst, light)
+    if light then
+        light:Enable(false)
+    end
+end
+
+local phasefunctions =
+{
+    day = function(inst)
+        if not inst:IsInLimbo() then inst.Light:Enable(true) end
+        inst.components.lighttweener:StartTween(nil, lights.day.rad, lights.day.intensity, lights.day.falloff,
+            { lights.day.color[1], lights.day.color[2], lights.day.color[3] }, 2)
+    end,
+
+    dusk = function(inst)
+        if not inst:IsInLimbo() then inst.Light:Enable(true) end
+        inst.components.lighttweener:StartTween(nil, lights.dusk.rad, lights.dusk.intensity, lights.dusk.falloff,
+            { lights.dusk.color[1], lights.dusk.color[2], lights.dusk.color[3] }, 2)
+    end,
+
+    night = function(inst)
+        if TheWorld.state.isfullmoon then
+            inst.components.lighttweener:StartTween(nil, lights.full.rad, lights.full.intensity, lights.full.falloff,
+                { lights.full.color[1], lights.full.color[2], lights.full.color[3] }, 4)
+        else
+            inst.components.lighttweener:StartTween(nil, 0, 0, 1, { 0, 0, 0 }, 6, turnoff)
+        end
+    end,
+}
+
+local function OnPhase(inst, phase)
+    if phase == "dusk" then
+        inst.AnimState:PlayAnimation("to_dusk")
+        inst.AnimState:PushAnimation("dusk_loop", true)
+    elseif phase == "night" then
+        inst.AnimState:PlayAnimation("to_night")
+        inst.AnimState:PushAnimation("night_loop", true)
+    elseif phase == "day" then
+        inst.AnimState:PlayAnimation("to_day")
+        inst.AnimState:PushAnimation("day_loop", true)
+    end
+    phasefunctions[phase](inst)
+end
+
+--- 让门的动画和光照随时段变化
+local function SetDoorTimeChange(inst)
+    if inst.components.lighttweener then
+        return
+    end
+
+    inst:AddComponent("lighttweener")
+    inst.components.lighttweener:StartTween(inst.entity:AddLight(), lights.day.rad, lights.day.intensity,
+        lights.day.falloff, { lights.day.color[1], lights.day.color[2], lights.day.color[3] }, 0)
+    inst.Light:Enable(true)
+
+    inst:WatchWorldState("phase", OnPhase)
+    OnPhase(inst, TheWorld.state.phase)
+end
+
+local function OnSave(inst, data)
+    data.light_door = inst.components.lighttweener ~= nil
+end
+
+local function OnLoad(inst, data)
+    if not data then return end
+    if data.light_door then
+        SetDoorTimeChange(inst)
+    end
+end
+
+local function MasterPost(inst)
+    inst.SetDoorTimeChange = SetDoorTimeChange
+
+    inst:AddComponent("tro_saveanim")
+
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
+end
+
+return
+--猪人遗迹门，偷个懒，蓝色版本的替换个build得了
+    MakeDoor("prop_door", {
+        assets = assets,
+        bank = "doorway_ruins",
+        build = "pig_ruins_door",
+        anim = "north",
+        minimap = "pig_ruins_exit_int.png",
+        trader = true,
+        is_inner = true,
+        door_orientation = "north"
+    }, nil, MasterPost),
+    --洞穴门
+    MakeDoor("vamp_bat_cave_exit_door", {
+        bank = "doorway_cave",
+        build = "bat_cave_door",
+        anim = "north",
+        minimap = "vamp_bat_cave_exit.png",
+        trader = true,
+        is_inner = true,
+        door_orientation = "north"
+    }, nil, MasterPost),
+    --蚁巢门
+    MakeDoor("ant_cave_door", {
+        bank = "ant_cave_door",
+        build = "ant_cave_door",
+        anim = "north",
+        minimap = "ant_cave_door.png",
+        trader = true,
+        is_inner = true,
+        door_orientation = "north"
+    }, nil, MasterPost)

@@ -11,8 +11,6 @@ local SaveAnim = Class(function(self, inst)
     self.isdelayset = nil
     self.rotation = nil
     self.minimap = nil
-
-    self.onSet = nil
 end)
 
 function SaveAnim:ReSet()
@@ -40,13 +38,11 @@ function SaveAnim:ReSet()
         inst.MiniMapEntity:SetIcon(self.minimap)
     end
 
-    if self.onSet then
-        self.onSet(inst)
-    end
+    self.inst:PushEvent("tro_saveanimonset")
 end
 
 --- 初始化
-function SaveAnim:Init(bank, build, anim, scale, isloopplay, isdelayset, rotation, minimap, onSet)
+function SaveAnim:Init(bank, build, anim, scale, isloopplay, isdelayset, rotation, minimap)
     self.bank = bank
     self.build = build
     self.anim = anim
@@ -55,7 +51,6 @@ function SaveAnim:Init(bank, build, anim, scale, isloopplay, isdelayset, rotatio
     self.isdelayset = isdelayset
     self.rotation = rotation
     self.minimap = minimap
-    self.onSet = onSet
     self:ReSet()
 end
 

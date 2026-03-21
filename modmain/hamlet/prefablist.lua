@@ -126,31 +126,37 @@ PrefabFiles = {
     "deco",                --屋内装饰
 
 
-    "deed",                      --房产所有权证书
-    "deep_jungle_fern_noise",    --深层雨林杂草
-    "dungball",                  --粪球
-    "dungbeetle",                --蜣螂
-    "dungpile",                  --粪堆
-    "edgefog",                   --TODO 地图边缘的云？
-    "fabric",                    --布料
-    "fishinhole",                --鱼群
-    "flower_rainforest",         --异域花朵
-    "floweroflife",              --魔力花
-    "frog_poison",               --箭毒蛙
-    "froglegs_poison",           --箭毒蛙腿
-    "gaze_beam",                 --凝视柱
-    "giantgrub",                 --巨型蛆虫
-    "glowfly",                   --发光飞虫
-    "gnat",                      --虫群
-    "gnatmound",                 --虫丘
-    "gold_dust",                 --金沙
-    "goldpan",                   --淘金盘
-    "grabbing_vine",             --悬挂的藤蔓
-    "grass_tall",                --高草
-    "hamlet_interior_door",      --室内门
-    "hamlet_interior_floor",     --室内地板
-    "hamlet_interior_housedoor", --房子
-    "hamlet_interior_wall",      --室内墙
+    "deed",                   --房产所有权证书
+    "deep_jungle_fern_noise", --深层雨林杂草
+    "dungball",               --粪球
+    "dungbeetle",             --蜣螂
+    "dungpile",               --粪堆
+    "edgefog",                --TODO 地图边缘的云？
+    "fabric",                 --布料
+    "fishinhole",             --鱼群
+    "flower_rainforest",      --异域花朵
+    "floweroflife",           --魔力花
+    "frog_poison",            --箭毒蛙
+    "froglegs_poison",        --箭毒蛙腿
+    "gaze_beam",              --凝视柱
+    "giantgrub",              --巨型蛆虫
+    "glowfly",                --发光飞虫
+    "gnat",                   --虫群
+    "gnatmound",              --虫丘
+    "gold_dust",              --金沙
+    "goldpan",                --淘金盘
+    "grabbing_vine",          --悬挂的藤蔓
+    "grass_tall",             --高草
+
+
+    "hamlet_interior_door",       --室内门
+    "hamlet_light_interior_door", --有灯光变化和开关动画的室内门
+    "hamlet_interior_floor",      --室内地板
+    "hamlet_interior_housedoor",  --房子
+    "hamlet_interior_wall",       --室内墙
+    "hamlet_cave_exit",           --哈姆雷特洞穴的出口，一根绳子
+
+
     "hamlet_pig_ruins_entrance", --遗迹
     "wallcrack_ruins",           --可疑的裂缝
     "hanging_vine",              --悬挂的藤蔓
@@ -278,5 +284,7 @@ PrefabFiles = {
     "pigghost",           --远古猪魂
     "watercress",         --海豆瓣菜
     "roe_fish",           --鱼
-    "prop_door",          --遗迹内部门
+
+
+
 }

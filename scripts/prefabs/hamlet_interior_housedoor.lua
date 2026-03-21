@@ -1,4 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
+local MakeBaseDoor = require("tro_interior_door_defs").MakeBaseDoor
 
 local assets = {
     Asset("ANIM", "anim/acorn.zip"),
@@ -74,25 +75,6 @@ local function onaccept(inst, giver, item)
     end
 end
 
-local function common(bank, build, anim, interior_door)
-    local inst = RoomUtils.MakeBaseDoor(bank, build, anim, true, interior_door)
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
-    inst.components.trader.onaccept = onaccept
-
-    inst.components.teleporter.onActivate = OnActivate
-
-    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-
-    inst.components.hauntable:SetOnHauntFn(OnHaunt)
-
-    return inst
-end
-
 local function OnBuilt(inst)
     inst.side = RoomUtils.TestWallOrnamentPos(inst, false, 7.5, 5, 7.5, 5.5)
     local anim
@@ -114,6 +96,25 @@ local function onhammered(inst, worker)
     local pos = inst:GetPosition()
     SpawnPrefab("collapse_big").Transform:SetPosition(pos:Get())
     inst:Remove()
+end
+
+local function common(bank, build, anim, interior_door)
+    local inst = MakeBaseDoor(bank, build, anim, true, interior_door)
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
+    inst.components.trader.onaccept = onaccept
+
+    inst.components.teleporter.onActivate = OnActivate
+
+    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
+
+    inst.components.hauntable:SetOnHauntFn(OnHaunt)
+
+    return inst
 end
 
 -- teleporter会紫东阁保存传送目的地的门
