@@ -227,24 +227,9 @@ Layouts["pig_ruins_exit_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_exi
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
 
--- 睡莲
-Layouts["lilypad"] = StaticLayout.Get("map/static_layouts/lilypad", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
--- TroRemapLayoutTile("lilypad", ground_types)
-local layout = Layouts["lilypad"]
-local map = {}
-for i = 1, 58 do
-    table.insert(map, WORLD_TILES.LILYPOND)
-end
-layout.ground_types = map
-
-
--- 睡莲
-Layouts["lilypad2"] = StaticLayout.Get("map/static_layouts/lilypad_2")
-TroRemapLayoutTile("lilypad2", ground_types)
+-- 睡莲使用静态布局，和单机的不是同一个布局
+Layouts["lilypad"] = StaticLayout.Get("map/static_layouts/lilypad")
+TroRemapLayoutTile("lilypad", ground_types)
 
 Layouts["pig_ruins_artichoke"] = StaticLayout.Get("map/static_layouts/pig_ruins_artichoke", {
     layout_position = LAYOUT_POSITION.CENTER,

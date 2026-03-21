@@ -1,6 +1,3 @@
-modimport "modmain/shipwrecked/map/network.lua"
-
-
 -- 沿海地形
 AddRoomPreInit("OceanCoastal", function(room)
     room.contents.countprefabs = room.contents.countprefabs or {}

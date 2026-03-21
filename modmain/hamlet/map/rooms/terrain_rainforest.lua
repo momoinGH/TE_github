@@ -66,17 +66,6 @@ AddRoom("rainforest_lillypond", {
         },
 
         distributepercent = .3, -- .3				
-
-        distributeprefabs =
-        {
-            reeds_water = 3,
-            lotus = 2,
-            hippopotamoose = 0.08,
-        },
-        countprefabs =
-        {
-            hippopotamoose = 1,
-        },
     }
 })
 

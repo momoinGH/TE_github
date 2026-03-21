@@ -58,7 +58,7 @@ AddTask("岛一猪镇", {
     locks = LOCKS.CIVILIZATION_2,
     keys_given = KEYS.ISLAND_2,
     room_choices = {
-        ["city_base_1"] = math.random(2, 3),
+        ["city_base_1"] = math.random(3, 4),
     },
     room_bg = WORLD_TILES.SUBURB,
     background_room = "suburb_base_1",

@@ -5,9 +5,12 @@ local FN = {}
 ---@param afterFn function|nil 晚于fn执行，第一个参数为前面执行后的返回值表，后续为fn的参数，返回值作为最终返回值（要求是表或nil，会用unpack解开）
 ---@param isUseBeforeReturn boolean|nil 在没有afterFn却有beforeFn的时候，是否采用beforeFn的返回值作为最终返回值，默认以原函数的返回值作为最终返回值
 function FN.FnDecorator(obj, key, beforeFn, afterFn, isUseBeforeReturn)
-    assert(type(obj) == "table", "obj 不是一个表：" .. tostring(obj) .. " " .. type(obj))
-    assert(beforeFn == nil or type(beforeFn) == "function", "beforeFn must be nil or a function")
-    assert(afterFn == nil or type(afterFn) == "function", "afterFn must be nil or a function")
+    if not trodevassert(type(obj) == "table", "obj 不是一个表：" .. tostring(obj) .. " " .. type(obj))
+        or not trodevassert(beforeFn == nil or type(beforeFn) == "function", "beforeFn must be nil or a function")
+        or not trodevassert(afterFn == nil or type(afterFn) == "function", "afterFn must be nil or a function")
+    then
+        return
+    end
 
     local oldVal = obj[key]
 

@@ -56,6 +56,7 @@ if rawget(_G, "WORLDGEN_MAIN") then
     troimportmodulefile "map/static_layouts" --静态布局
     troimportmodulefile "map/rooms"
     troimportmodulefile "map/tasks"
+    troimportmodulefile "map/network"     --地图数据后处理，替换字符串为实际预制体
     troimportmodulefile "map/mapadd"      --hook生成函数、真正把地图数据加入原有地形数据中
     modimport "modmain/map/ocean_gen"     --不让科雷覆盖mod海洋地皮
     modimport "modmain/map/graphnode.lua" --允许在mod海洋地皮上填充实体
