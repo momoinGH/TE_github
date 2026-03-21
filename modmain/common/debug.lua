@@ -201,3 +201,14 @@ GLOBAL.c_teleportareahastag = function(tag)
         print("未找到指定标签" .. tostring(tag) .. "的区域")
     end
 end
+
+----------------------------------------------------------------------------------------------------
+-- 打印鼠标位置的地皮
+GLOBAL.c_printtile = function()
+    local tile_id = TheWorld.Map:GetTileAtPoint(ConsoleWorldPosition():Get())
+    for k, v in pairs(WORLD_TILES) do
+        if v == tile_id then
+            print(k, v)
+        end
+    end
+end

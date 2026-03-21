@@ -12,6 +12,24 @@ local TileRanges =
     IMPASSABLE = "IMPASSABLE",
 }
 
+local WAVETINTS =
+{
+    shallow = { 0.8, 0.9, 1 },
+    rough = { 0.65, 0.84, 0.94 },
+    swell = { 0.65, 0.84, 0.94 },
+    brinepool = { 0.65, 0.92, 0.94 },
+    hazardous = { 0.40, 0.50, 0.62 },
+    waterlog = { 1, 1, 1 },
+}
+
+local LILYPOND_SHORE_OCEAN_COLOR =
+{
+    primary_color = { 5, 185, 220, 60 },
+    secondary_color = { 5, 20, 45, 200 },
+    secondary_color_dusk = { 5, 15, 20, 200 },
+    minimap_color = { 40, 87, 93, 51 },
+}
+
 
 local tro_tiledefs = {
     -------------------以下为水体地皮---------------------
@@ -33,7 +51,7 @@ local tro_tiledefs = {
         },
     },
 
-
+    -- 哈姆雷特莲花池
     LILYPOND = {
         tile_range       = TileRanges.TRO_OCEAN,
         tile_data        = {
@@ -43,12 +61,17 @@ local tro_tiledefs = {
         ground_tile_def  = {
             name = "sw/water_medium", ----- "water_medium"
             noise_texture = "ham/water_lilypond2",
-            -- is_shoreline = true,   -------------加上
+            runsound = "dontstarve/movement/run_marsh",
+            walksound = "dontstarve/movement/walk_marsh",
+            snowsound = "dontstarve/movement/run_ice",
+            mudsound = "dontstarve/movement/run_mud",
+
             flashpoint_modifier = 250,
             ocean_depth = "SHALLOW",
-            -- colors = OCEAN_COLOR, ----有了这个就会有边缘的瀑布效果--而且不能改颜色？
-            -- wavetint = WAVETINTS.waterlog,
+            colors = LILYPOND_SHORE_OCEAN_COLOR, ----有了这个就会有边缘的瀑布效果--而且不能改颜色？
             is_shoreline = true,
+            wavetint = WAVETINTS.waterlog,
+            nogroundoverlays = true,
         },
         minimap_tile_def = {
             name = "map_edge",

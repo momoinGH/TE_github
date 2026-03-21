@@ -64,8 +64,21 @@ AddRoom("rainforest_lillypond", {
         countstaticlayouts = {
             ["lilypad"] = 2,
         },
-
-        distributepercent = .3, -- .3				
+        distributepercent = .3, -- .3			
+        distributeprefabs =
+        {
+            rainforesttree = 0.6, --1.4,
+            grass_tall = .5,
+            sapling = .6,
+            flower_rainforest = 0.15,
+            dungpile = 0.03,
+            fireflies = 0.05,
+            peagawk = 0.01,
+            randomdust = 0.005,
+            rock_flippable = 0.08,
+            radish_planted = 0.05,
+            asparagus_planted = 0.05,
+        },
     }
 })
 

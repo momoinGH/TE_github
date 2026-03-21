@@ -17,9 +17,6 @@ AddTask("岛五雨林深处", {
         ["deeprainforest_base_nobatcave"] = math.random(2, 4),
         ["deeprainforest_flytrap_grove"] = math.random(2, 3),
     },
-    set_pieces = {
-        { name = "pig_ruins_exit_4" },
-    },
     room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "deeprainforest_base_nobatcave",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
@@ -30,7 +27,7 @@ AddTask("岛五雨林", {
     keys_given = { KEYS.WILD_JUNGLE_DEPTH_2 },
     room_choices = {
         ["plains_base_nobatcave"] = math.random(3, 4),
-        ["rainforest_lillypond"] = math.random(3, 4),
+        ["rainforest_lillypond"] = 1,
         ["painted_base_nobatcave"] = math.random(3, 4),
         ["rainforest_base_nobatcave"] = math.random(3, 4),
     },

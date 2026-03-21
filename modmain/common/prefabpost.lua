@@ -34,7 +34,7 @@ modimport "modmain/common/components/hounded" --猎犬袭击
 modimport "modmain/common/components/plantregrowth.lua"
 modimport "modmain/common/components/areaaware.lua"
 modimport "modmain/common/components/oar.lua"
-
+modimport "modmain/common/components/wavemanager.lua" --给地皮加点波纹生成
 
 
 ----------------------------------------------------------------------------------------------------

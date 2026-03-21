@@ -27,6 +27,7 @@ AddTask("岛一睡莲", {
     room_choices = {
         ["rainforest_lillypond"] = math.random(2, 3),
     },
+    level_set_piece_blocker = true,
     room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_rainforest_base",
     colour = { r = 1, g = 0.3, b = 0.3, a = 0.3 }
@@ -34,7 +35,7 @@ AddTask("岛一睡莲", {
 
 AddTask("岛一猪镇农场", {
     locks = LOCKS.JUNGLE_DEPTH_1,
-    keys_given = KEYS.CIVILIZATION_1,
+    keys_given = { KEYS.CIVILIZATION_1, KEYS.CIVILIZATION_2 },
     room_choices = {
         ["cultivated_base_1"] = math.random(2, 3),
         ["piko_land"] = math.random(2, 3), --茶树
@@ -44,24 +45,31 @@ AddTask("岛一猪镇农场", {
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 
-AddTask("岛一猪镇郊区", {
-    locks = LOCKS.CIVILIZATION_1,
-    keys_given = KEYS.CIVILIZATION_2,
-    room_choices = {
-        ["suburb_base_1"] = 1,
-    },
-    room_bg = WORLD_TILES.SUBURB,
-    background_room = "suburb_base_1",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
+-- AddTask("岛一猪镇郊区", {
+--     locks = LOCKS.CIVILIZATION_1,
+--     keys_given = KEYS.CIVILIZATION_2,
+--     room_choices = {
+--         ["suburb_base_1"] = 1,
+--     },
+--     room_bg = WORLD_TILES.SUBURB,
+--     background_room = "suburb_base_1",
+--     colour = { r = 1, g = 1, b = 1, a = 0.3 }
+-- })
+
 AddTask("岛一猪镇", {
     locks = LOCKS.CIVILIZATION_2,
     keys_given = KEYS.ISLAND_2,
     room_choices = {
-        ["city_base_1"] = math.random(3, 4),
+        ["city_base_1"] = math.random(5, 7),
     },
+    level_set_piece_blocker = true,
     room_bg = WORLD_TILES.SUBURB,
     background_room = "suburb_base_1",
+    crosslink_factor = 10,
+    -- cove_room_name = "suburb_base_1",
+    make_loop = true,
+    -- cove_room_chance = 1,
+    -- cove_room_max_edges = 10,
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })
 

@@ -21,12 +21,6 @@ AddTask("岛二雨林深处", {
         ["deeprainforest_flytrap_grove"] = math.random(1, 2),
         --	["deeprainforest_ruins_exit"] = 1,
     },
-    set_pieces = {
-        { name = "pig_ruins_exit_1" },
-        { name = "pig_ruins_head" },
-        { name = "pig_ruins_artichoke" },
-        { name = "pig_ruins_artichoke" },
-    },
     room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
@@ -37,9 +31,6 @@ AddTask("岛二曼德拉丘", {
     keys_given = { KEYS.OTHER_JUNGLE_DEPTH_1 },
     room_choices = {
         ["deeprainforest_mandrakeman"] = 1,
-    },
-    set_pieces = {
-        { name = "mandraketown" },
     },
     room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
@@ -72,9 +63,15 @@ AddTask("岛二猪镇", {
     locks = LOCKS.OTHER_CIVILIZATION_2,
     keys_given = KEYS.ISLAND_3,
     room_choices = {
-        ["city_base_2"] = math.random(2, 3),
+        ["city_base_2"] = math.random(5, 7),
     },
+    level_set_piece_blocker = true,
     room_bg = WORLD_TILES.SUBURB,
     background_room = "suburb_base_2",
+    crosslink_factor = 10,
+    -- cove_room_name = "suburb_base_2",
+    make_loop = true,
+    -- cove_room_chance = 1,
+    -- cove_room_max_edges = 10,
     colour = { r = 1, g = 1, b = 1, a = 0.3 }
 })

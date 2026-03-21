@@ -36,11 +36,6 @@ local UNIQUE_PARK_CHOICES = {
     "city_park_10",
 }
 
--- 必须生成的农田布局（当前为空，预留给特殊任务道具如传送机零件）
-local REQUIRED_FARMS = {
-    --"teleportato_hamlet_potato_layout",
-}
-
 -- 普通农田的布局选择池
 local FARM_CHOICES = {
     "farm_1",
@@ -231,19 +226,10 @@ local unrequired_prefabs = {
 local function clear_ground(entities, width, height, pt)
     local radius = 4
     for prefab, data_list in pairs(entities) do
-        local should_clear = false
-        for i, rprefab in ipairs(unrequired_prefabs) do
-            if prefab == rprefab then
-                should_clear = true
-                break
-            end
-        end
-
-        if should_clear then
+        if table.contains(unrequired_prefabs, prefab) then
             for i = #data_list, 1, -1 do
                 local x_dist = math.abs(((data_list[i].x / TILE_SCALE) + width / 2.0) - pt.x) + 0.2
                 local z_dist = math.abs(((data_list[i].z / TILE_SCALE) + height / 2.0) - pt.z) + 0.2
-
                 if (x_dist * x_dist) + (z_dist * z_dist) <= radius * radius then
                     table.remove(data_list, i)
                 end
@@ -282,14 +268,14 @@ local function place_tile_city(entities, width, height, pt)
                 z = pt.z + t
             }
             if WorldSim:GetTile(edge_pt.x, edge_pt.z) > 1 then
-                if test_tile(edge_pt, VALID_TILES) then --如果是没铺过的地皮
-                    place_tile(edge_pt, WORLD_TILES.ROAD)
+                if test_tile(edge_pt, VALID_TILES) then
+                    place_tile(edge_pt, WORLD_TILES.ROAD) --卵石路
                 end
             end
         end
     end
 
-    place_tile(pt, WORLD_TILES.COBBLEROAD)
+    place_tile(pt, WORLD_TILES.COBBLEROAD) --道路
 end
 
 -- 生成预设布局（Setpiece），如猪王宫殿、市政厅。处理旋转、翻转、地皮校验及实体添加
@@ -480,32 +466,28 @@ local function add_city_lights(spawners, pt, dir, city_id)
 end
 
 -- 道路延展逻辑：从当前点向指定方向“走”一段距离，边走边铺设城市地皮，并沿途添加设施
-local function make_road(entities, width, height, spawners, pt, dir, sub_urb, city)
-    local step_max = 9
+local function make_road(entities, width, height, spawners, pt, dir, city)
+    local step_max = 9 --两个路口间距
     local step = 1
     local new_pt = nil
-    local offset = 1
-
-    while step < step_max and step > -1 do
+    while step < step_max do
         new_pt = {
-            x = pt.x + (DIR_STEP[dir].x * step * offset),
+            x = pt.x + (DIR_STEP[dir].x * step),
             y = 0,
-            z = pt.z + (DIR_STEP[dir].z * step * offset)
+            z = pt.z + (DIR_STEP[dir].z * step)
         }
 
         if test_tile(new_pt, VALID_TILES_BASE) then
             place_tile_city(entities, width, height, new_pt)
             step = step + 1
         else
-            step = -1 -- 遇到边缘停止延伸
+            break -- 遇到边缘停止延伸
         end
     end
 
     -- 如果道路延伸成功，则在末端添加配套设施
     if step == step_max then
-        local nil_pig_shop_weight = 6
-        if sub_urb then nil_pig_shop_weight = 12 end
-        add_pig_shops(spawners, pt, dir, nil_pig_shop_weight, city)
+        add_pig_shops(spawners, pt, dir, 12, city)
         add_park_zones(pt, dir, city)
         add_city_lights(spawners, pt, dir, city.city_id)
     end
@@ -565,7 +547,7 @@ end
 local function create_city(entities, width, height, spawners, city)
     -- 尝试在城市区域内找一个合法的起点
     local start_node = nil
-    for i = 1, #city.citynodes do
+    for i = 1, #city.citynodes * 2 do
         local idx = math.random(1, #city.citynodes)
         local node = city.citynodes[idx]
         local x, z = node.cent[1], node.cent[2]
@@ -617,15 +599,14 @@ local function create_city(entities, width, height, spawners, city)
     place_tile_city(entities, width, height, start)
 
     -- 迭代生成路口和街道
-    local maxintersections = 30
     local opendirs = {}
-
     grid, opendirs = add_dirs(start, grid, opendirs)
 
+    local maxintersections = 30
     while maxintersections > 0 and #opendirs > 0 do
         local idx = math.random(1, #opendirs)
         local data = opendirs[idx]
-        make_road(entities, width, height, spawners, data.pt, data.dir, true, city)
+        make_road(entities, width, height, spawners, data.pt, data.dir, city)
         if data.newpt then
             grid, opendirs = add_dirs(data.newpt, grid, opendirs)
             maxintersections = maxintersections - 1
@@ -739,15 +720,6 @@ local function place_farm(entities, width, height, spawners, nodes, city, total,
     return nodes
 end
 
--- 放置必须生成的特殊农田（如传送机基座相关的）
-local function place_unique_farms(entities, width, height, spawners, cities)
-    for i, farm in ipairs(REQUIRED_FARMS) do
-        local city = math.random(1, CITIES)
-        local nodes = cities[city].farmnodes
-        place_farm(entities, width, height, spawners, nodes, cities[city], 1, { farm })
-    end
-end
-
 -- 在被标记为 Cultivated（耕作地）的区域生成农田和农田守卫塔
 local function make_farms(entities, width, height, spawners, nodes, city)
     nodes = place_farm(entities, width, height, spawners, nodes, city, 3, FARM_CHOICES)
@@ -830,7 +802,7 @@ end
 
 -- 【核心主函数】：执行整个猪人城市的生成流程
 local function make_cities(entities, topology_save, width, height)
-    print("BUILDING PIG CULTURE")
+    print("开始生成猪镇")
 
     local spawners = {} -- 初始化临时实体列表
 
@@ -842,7 +814,12 @@ local function make_cities(entities, topology_save, width, height)
     -- 第一阶段：根据世界拓扑数据识别并分类城市节点和农田节点
     local cities = {}
     for city_id = 1, CITIES do
-        cities[city_id] = { parks = {}, citynodes = {}, farmnodes = {}, city_id = city_id }
+        cities[city_id] = {
+            city_id = city_id,
+            parks = {},
+            citynodes = {}, --城镇
+            farmnodes = {}, --农场
+        }
 
         for task, node in pairs(topology_save.root:GetNodes(true)) do
             if table.contains(node.data.tags, "City" .. city_id) then
@@ -860,9 +837,6 @@ local function make_cities(entities, topology_save, width, height)
             end
         end
     end
-
-    -- 第二阶段：生成农田布局
-    place_unique_farms(entities, width, height, spawners, cities)
 
     -- 第三阶段：对每个城市执行网格生成、公园放置、建筑结算
     for city_ID, city in ipairs(cities) do

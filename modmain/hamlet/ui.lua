@@ -1,10 +1,16 @@
 table.insert(Assets, Asset("ANIM", "anim/leaves_canopy2.zip")) --头顶绿荫
 
 local LeafBadge = require "widgets/leafbadge"
-AddClassPostConstruct("widgets/controls", function(self)
-    -- 雨林叶子
-    self.hamlet_leafbadge = self:AddChild(LeafBadge(self.owner))
+AddClassPostConstruct("screens/playerhud", function(self)
+    Hooks.FnDecorator(self, "CreateOverlays", nil, function(retTab, self, owner, ...)
+        -- 雨林叶子
+        self.hamlet_leafbadge = self:AddChild(LeafBadge(owner))
+        self.hamlet_leafbadge:MoveToBack() --放后面，不能遮挡UI了
+        return retTab
+    end)
 end)
+
+----------------------------------------------------------------------------------------------------
 
 
 -- 哈姆雷特血月
@@ -25,12 +31,3 @@ local PlayerHud = require("screens/playerhud")
 -- end
 
 ----------------------------------------------------------------------------------------------------
-
-local CraftingMenuIngredients = require("widgets/redux/craftingmenu_ingredients")
-local set_recipe = CraftingMenuIngredients.SetRecipe
-function CraftingMenuIngredients:SetRecipe(...)
-    self.owner.replica.inventory.check_all_oincs = true
-    local ret = { set_recipe(self, ...) }
-    self.owner.replica.inventory.check_all_oincs = nil
-    return unpack(ret)
-end

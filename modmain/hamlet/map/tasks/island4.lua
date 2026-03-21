@@ -15,10 +15,6 @@ AddTask("岛四", {
     room_choices = {
         ["BG_pinacle_base"] = 1,
     },
-    set_pieces = {
-        { name = "roc_nest" },
-        { name = "roc_cave" },
-    },
     room_bg = WORLD_TILES.ROCKY,
     background_room = "BG_pinacle_base",
     colour = { r = 1, g = 1, b = 1, a = 0.3 }

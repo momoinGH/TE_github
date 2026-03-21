@@ -6,7 +6,6 @@ local LeafBadge = Class(UIAnim, function(self, owner)
     UIAnim._ctor(self)
 
     self:SetClickable(false)
-
     self:SetHAnchor(ANCHOR_MIDDLE)
     self:SetVAnchor(ANCHOR_TOP)
     self:SetScaleMode(SCALEMODE_FIXEDSCREEN_NONDYNAMIC)

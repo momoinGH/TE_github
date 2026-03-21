@@ -271,6 +271,7 @@ local function OnLoadPostPass(inst, newents, data)
 end
 
 --- 虚空门的基础代码
+---
 --- trader和hauntable用于传送物品，teleporter用来传送玩家
 --- teleporter加在所有门上，可以关联传送目的地和判断房间是否已经创建
 ---@param bank string

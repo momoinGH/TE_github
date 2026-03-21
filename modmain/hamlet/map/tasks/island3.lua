@@ -17,14 +17,6 @@ AddTask("岛三雨林深处", {
         ["BG_deeprainforest_base"] = math.random(2, 4),
         ["deeprainforest_flytrap_grove"] = math.random(2, 3),
     },
-    set_pieces = {
-        { name = "pig_ruins_exit_2" },
-        { name = "pig_ruins_head" },
-        { name = "pig_ruins_artichoke" },
-        { name = "pig_ruins_artichoke" },
-        { name = "nettlegrove" },
-        { name = "nettlegrove" },
-    },
     room_bg = WORLD_TILES.DEEPRAINFOREST,
     background_room = "BG_deeprainforest_base",
     colour = { r = 0.2, g = 0.6, b = 0.2, a = 0.3 }
@@ -35,17 +27,7 @@ AddTask("岛三雨林", {
     keys_given = { KEYS.ISLAND_4 },
     room_choices = {
         ["BG_plains_base"] = math.random(1, 4),
-        ["rainforest_lillypond"] = math.random(2, 4),
-    },
-    set_pieces = {
-        { name = "pugalisk_fountain" },
-        { name = "pig_ruins_nocanopy" },
-        { name = "pig_ruins_nocanopy_2" },
-        { name = "pig_ruins_nocanopy_2" },
-        { name = "pig_ruins_nocanopy_3" },
-        { name = "pig_ruins_nocanopy_3" },
-        { name = "pig_ruins_nocanopy_4" },
-        { name = "pig_ruins_nocanopy_4" },
+        ["rainforest_lillypond"] = math.random(1, 2),
     },
     room_bg = WORLD_TILES.RAINFOREST,
     background_room = "BG_rainforest_base",
