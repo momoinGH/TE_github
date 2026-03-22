@@ -156,60 +156,6 @@ Constructor.AddAction({ priority = 9, rmb = true, distance = 20, mount_valid = f
 ----------------------------------------------------------------------------------------------------
 
 
-local function DoToolWork(act, workaction)
-    if
-        act.target.components.workable ~= nil and act.target.components.workable:CanBeWorked() and
-        act.target.components.workable.action == workaction
-    then
-        if act.target:HasTag("grass_tall") then
-            local equipamento = act.doer.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-            if equipamento and equipamento.prefab == "shears" then
-                local x, y, z = act.target.Transform:GetWorldPosition()
-                local gramaextra = SpawnPrefab("cutgrass")
-                if gramaextra then gramaextra.Transform:SetPosition(x, y, z) end
-            end
-        end
-
-        if act.target:HasTag("hedgetoshear") then
-            local equipamento = act.doer.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-            if equipamento and equipamento.prefab == "shears" then
-                local x, y, z = act.target.Transform:GetWorldPosition()
-                local gramaextra = SpawnPrefab("clippings")
-                if gramaextra then gramaextra.Transform:SetPosition(x, y, z) end
-            end
-        end
-
-        if act.target:HasTag("hangingvine") then
-            local equipamento = act.doer.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-            if equipamento and equipamento.prefab == "shears" then
-                local x, y, z = act.target.Transform:GetWorldPosition()
-                act.target:DoTaskInTime(1, function()
-                    local gramaextra = SpawnPrefab("rope")
-                    if gramaextra then gramaextra.Transform:SetPosition(x, y, z) end
-                end)
-            end
-        end
-
-        act.target.components.workable:WorkedBy(
-            act.doer,
-            (act.invobject ~= nil and act.invobject.components.tool ~= nil and
-                act.invobject.components.tool:GetEffectiveness(workaction)) or
-            (act.doer ~= nil and act.doer.components.worker ~= nil and
-                act.doer.components.worker:GetEffectiveness(workaction)) or
-            1
-        )
-    end
-    return true
-end
-
-Constructor.AddAction({ priority = 10, mount_valid = true },
-    "HACK",
-    STRINGS.ACTIONS.HACK,
-    function(act)
-        return DoToolWork(act, ACTIONS.HACK)
-    end
-)
-
 
 
 -- 收回
@@ -354,21 +300,31 @@ Constructor.AddAction({ priority = 10, distance = 2, mount_valid = true },
 )
 
 -- 剪，支持workable和shearable
-Constructor.AddAction({},
-    "SHEAR",
-    STRINGS.ACTIONS.SHEAR,
-    function(act)
-        if act.target.components.shearable then
-            act.target.components.shearable:Shear(act.doer)
-            return true
-        end
-
-        if act.target.components.workable and act.target.components.workable.action == ACTIONS.SHEAR then
-            act.target.components.workable:WorkedBy(act.doer)
-            return true
-        end
+Constructor.AddAction({}, "SHEAR", STRINGS.ACTIONS.SHEAR, function(act)
+    if act.target.components.shearable then
+        act.target.components.shearable:WorkedBy(act.doer)
+        return true
     end
+
+    if act.target.components.workable and act.target.components.workable.action == ACTIONS.SHEAR then
+        act.target.components.workable:WorkedBy(act.doer)
+        return true
+    end
+end
 )
+
+-- 劈砍
+Constructor.AddAction({ priority = 10, mount_valid = true }, "HACK", STRINGS.ACTIONS.HACK, function(act)
+    if act.target.components.hackable then
+        act.target.components.hackable:WorkedBy(act.doer)
+        return true
+    end
+
+    if act.target.components.workable and act.target.components.workable.action == ACTIONS.HACK then
+        act.target.components.workable:WorkedBy(act.doer)
+        return true
+    end
+end)
 
 -- 柜子
 -- 拿取、偷、购买

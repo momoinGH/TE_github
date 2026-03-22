@@ -21,38 +21,6 @@ AddComponentAction("USEITEM", "inventoryitem", function(inst, doer, target, acti
     end
 end)
 
-local IRONLORD_WORKS = {
-    CHOP = true,
-    HAMMER = true,
-    MINE = true,
-}
---[[
-AddComponentAction("SCENE", "workable", function(inst, doer, actions, right)
-    if right and doer:HasTag("ironlord") then
-        -- 活性机甲
-        for k, _ in ipairs(IRONLORD_WORKS) do
-            if inst:HasTag(k .. "_workable") then
-                table.insert(actions, ACTIONS[k])
-            end
-        end
-    end
-end)
-
-AddComponentAction("SCENE", "hackable", function(inst, doer, actions, right)
-    if right and doer:HasTag("ironlord") and inst:HasTag("hackable") then
-        -- 活性机甲
-        table.insert(actions, ACTIONS.HACK)
-    end
-end)
-
--- bugrepellent
-AddComponentAction("SCENE", "combat", function(inst, doer, actions, right)
-    if right and doer:HasTag("ironlord") and doer.replica.combat:CanTarget(inst) then
-        --活性机甲发射
-        table.insert(actions, ACTIONS.TIRO)
-    end
-end)]]
-
 local ARTIFACT_FORBIDDEN = { "beaver", "weremoose", "weregoose", "wonkey" }
 
 AddComponentAction("INVENTORY", "ironmachine", function(inst, doer, actions)

@@ -160,43 +160,6 @@ local states =
         },
     },
 
-
-    --[[	
-
-    State{
-        name = "work",
-        tags = {"busy", "working"},
-
-        onenter = function(inst)
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("power_punch")
-            inst.sg.statemem.action = inst:GetBufferedAction()
-        end,
-
-        timeline=
-        {
-            TimeEvent(8*FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/crafted/iron_lord/punch",nil,.5)
-            end),
-            TimeEvent(6*FRAMES, function(inst) inst:PerformBufferedAction() end),
-            TimeEvent(14*FRAMES, function(inst) inst.sg:RemoveStateTag("working") inst.sg:RemoveStateTag("busy") inst.sg:AddStateTag("idle") end),
-            TimeEvent(15*FRAMES, function(inst)
-                if (TheInput:IsMouseDown(MOUSEBUTTON_LEFT) or
-                   TheInput:IsKeyDown(KEY_SPACE)) and
-                    inst.sg.statemem.action and
-                    inst.sg.statemem.action:IsValid() and
-                    inst.sg.statemem.action.target and
-                    inst.sg.statemem.action.target:IsActionValid(inst.sg.statemem.action.action) and
-                    (inst.sg.statemem.action.target.components.workable or inst.sg.statemem.action.target.components.hackable) then
-                        inst:ClearBufferedAction()
-                        inst:PushBufferedAction(inst.sg.statemem.action)
-                end
-            end),
-
-        },
-    },
-]]
-
     State {
         name = "frozen",
         tags = { "busy", "frozen" },
@@ -278,7 +241,7 @@ local states =
         onupdate = function(inst)
             if inst.readytoshoot then
                 inst.SoundEmitter:PlaySoundWithParams("dontstarve_DLC003/creatures/enemy/metal_robot/laser",
-                    { intensity = math.random(0.7, 1) })                                                                                         ---jason can i use a random number from .7 to 1 instead of a static number (.8)?
+                    { intensity = math.random(0.7, 1) }) ---jason can i use a random number from .7 to 1 instead of a static number (.8)?
 
                 inst.sg:GoToState("shoot")
             end
@@ -401,20 +364,34 @@ local states =
 
         timeline =
         { ---- death explosion
-            TimeEvent(4 * FRAMES, function(inst) inst.SoundEmitter:PlaySoundWithParams(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", { intensity = .2 }) end),
-            TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySoundWithParams(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", { intensity = .4 }) end),
-            TimeEvent(12 * FRAMES, function(inst) inst.SoundEmitter:PlaySoundWithParams(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", { intensity = .6 }) end),
-            TimeEvent(19 * FRAMES, function(inst) inst.SoundEmitter:PlaySoundWithParams(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", { intensity = 1 }) end),
-            TimeEvent(26 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5) end),
-            TimeEvent(35 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5) end),
-            TimeEvent(54 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/enemy/metal_robot/electro") end),
+            TimeEvent(4 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySoundWithParams(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", { intensity = .2 })
+            end),
+            TimeEvent(8 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySoundWithParams(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", { intensity = .4 })
+            end),
+            TimeEvent(12 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySoundWithParams(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", { intensity = .6 })
+            end),
+            TimeEvent(19 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySoundWithParams(
+                "dontstarve_DLC003/creatures/enemy/metal_robot/electro", { intensity = 1 })
+            end),
+            TimeEvent(26 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5)
+            end),
+            TimeEvent(35 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro", nil, .5)
+            end),
+            TimeEvent(54 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/enemy/metal_robot/electro")
+            end),
             --            TimeEvent(54*FRAMES, function(inst) print ("54") inst.SoundEmitter:KillSound("ironlord_music") end), --- jason i put the music here and commented out the living_artifact.lua lines
             TimeEvent(52 * FRAMES, function(inst)
                 local explosion = SpawnPrefab("living_suit_explode_fx")

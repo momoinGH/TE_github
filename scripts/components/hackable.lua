@@ -1,54 +1,18 @@
-local function oncanbehacked(self)
-	if self.canbehacked and self.caninteractwith then
-		self.inst:AddTag("hackable")
-	else
-		self.inst:RemoveTag("hackable")
-	end
-end
+local MakeWorkable = require("components/tro_basicworkable")
 
 --- 可以劈砍，简易组件，如果要更多功能可以加个pickable作为辅助组件
-local Hackable = Class(function(self, inst)
-	self.inst = inst
-
-	self.canbehacked = true
-	self.caninteractwith = true
-	self.savestate = false
-
-	self.hacksleft = 1
-	self.maxhacks = 1
-	self.onhackedfn = nil
-end, nil, {
-	canbehacked = oncanbehacked,
-	caninteractwith = oncanbehacked
-})
-
-function Hackable:OnSave()
-	return self.savestate and {
-		maxhacks = self.maxhacks,
-		hacksleft = self.hacksleft,
-	} or nil
-end
-
-function Hackable:OnLoad(data)
-	if not data then return end
-
-	self.hacksleft = data.hacksleft or self.hacksleft
-	self.maxhacks = data.maxhacks or self.maxhacks
-end
-
-function Hackable:CanBeHacked()
-	return self.canbehacked
-end
-
-function Hackable:Hack(hacker, numworks)
-	if not self.canbehacked or not self.caninteractwith then
-		return
-	end
-
-	self.hacksleft = self.hacksleft - numworks
-	if self.onhackedfn then
-		self.onhackedfn(self.inst, hacker, self.hacksleft)
-	end
-end
+local Hackable = MakeWorkable({
+    workable_tag       = "hackable",
+    worked_event       = "onhacked",
+    workfinished_event = "onhackfinished"
+}, function(self, inst)
+    if troisdev then
+        inst:DoTaskInTime(0, function(inst)
+            if not inst.components.workable then
+                TroErrorHandle("workable没有被占用的话建议使用workable，workable和其他预制体配合更好" .. tostring(inst), false, false)
+            end
+        end)
+    end
+end)
 
 return Hackable

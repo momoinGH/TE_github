@@ -167,3 +167,29 @@ GLOBAL.TroCanResistHamletFog = TroCanResistHamletFog
 
 -- 伤害类型
 DAMAGETYPES = { PHYSICAL = 1, MAGIC = 2 }
+
+
+
+---生成一个掉落物
+---@param inst Entity 谁生成的，在inst脚下生成
+---@param item string
+---@param count int 数量
+---@param target Entity 目标，如果有值，物品会飞向目标
+function TroSpawnDropItem(inst, item, count, target)
+    count = count or 1
+    for i = 1, count do
+        local product = SpawnPrefab(item)
+        if product then
+            product.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            if target then
+                LaunchAt(product, inst, target, 1, 4, .5)
+            else
+                if product.components.inventoryitem then
+                    product.components.inventoryitem:OnDropped()
+                end
+            end
+        end
+    end
+end
+
+GLOBAL.TroSpawnDropItem = TroSpawnDropItem

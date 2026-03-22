@@ -78,6 +78,10 @@ local function onhackedfn(inst, hacker, hacksleft)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/vine_hack")
 end
 
+local function OnShearFinished(inst, data)
+    inst.components.workable:Destroy(data.worker)
+end
+
 local function setup(inst, door)
     inst.door = door
     inst.Transform:SetPosition(0, 0, 0)
@@ -120,6 +124,9 @@ local function fn()
     inst.components.workable.maxwork = RUINS_DOOR_VINES_HACKS
 
     inst:AddComponent("shearable")
+    inst.components.shearable:SetMaxWork(1)
+    inst.components.shearable.savestate = true
+    inst:ListenForEvent("onshearfinished", OnShearFinished)
 
     inst:AddComponent("inspectable")
 

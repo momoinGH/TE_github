@@ -162,10 +162,6 @@ local function patchfn2(Sim)
     return inst
 end
 
-local function canshear(inst)
-    return true
-end
-
 local function onshear(inst)
     inst.AnimState:PlayAnimation("hit", false)
     inst.AnimState:PushAnimation("idle_loop", true)
@@ -174,6 +170,9 @@ end
 local function finished(inst)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/grabbing_vine/drop")
     inst.AnimState:PlayAnimation("death", false)
+    inst:DoTaskInTime(1, function(inst)
+        TroSpawnDropItem(inst, "rope")
+    end)
     inst:DoTaskInTime(1.5, inst.Remove)
 end
 
@@ -217,10 +216,6 @@ local function commonfn(Sim)
     inst.components.workable:SetOnFinishCallback(finished)
     inst.components.workable:SetWorkLeft(2)
     inst.components.workable.onwork = onshear
-
-
-    inst.canshear = canshear
-    inst.onshear = onshear
 
     inst.placegoffgrids = placegoffgrids
 

@@ -1,5 +1,7 @@
 require "util/textcompleter"
 require "stacktrace"
+
+--用这个字段判断是不是开发模式
 troisdev = not string.starts(modname, "workshop-")
 GLOBAL.troisdev = troisdev
 

@@ -277,12 +277,8 @@ local function fn(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("shearable")
-    inst.onshear = function(inst, shearer)
-        OnKilled(inst)
-    end
-    inst.canshear = function(inst)
-        return true
-    end
+    inst.components.shearable:SetMaxWork(1)
+    inst:ListenForEvent("onshearfinished", OnKilled)
 
     inst:SetStateGraph("SGspear_trap")
 
