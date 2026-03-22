@@ -1,41 +1,9 @@
-local ROOM_TINY_WIDTH             = 15
-local ROOM_TINY_DEPTH             = 10
-
-local ROOM_SMALL_WIDTH            = 18
-local ROOM_SMALL_DEPTH            = 12
-
-local ROOM_MEDIUM_WIDTH           = 24
-local ROOM_MEDIUM_DEPTH           = 16
-
-local ROOM_LARGE_WIDTH            = 26
-local ROOM_LARGE_DEPTH            = 18
-
 local seg_time                    = 30 --each segment of the clock is 30 seconds
-local TOTAL_DAY_TIME              = seg_time * 16
-
-local day_segs                    = 10
-local dusk_segs                   = 4
-local night_segs                  = 2
-local wilson_attack               = 34
-
-local ANTMAN_DAMAGE               = wilson_attack * 2 / 3
-local ANTMAN_HEALTH               = 250
-local ANTMAN_ATTACK_PERIOD        = 3
-local ANTMAN_TARGET_DIST          = 16
-local ANTMAN_LOYALTY_MAXTIME      = 2.5 * TOTAL_DAY_TIME
-local ANTMAN_LOYALTY_PER_HUNGER   = TOTAL_DAY_TIME / 25
-local ANTMAN_MIN_POOP_PERIOD      = seg_time * .5
-
-local ANTMAN_RUN_SPEED            = 5
-local ANTMAN_WALK_SPEED           = 3
 
 local ANTMAN_MIN                  = 3
 local ANTMAN_MAX                  = 4
 local ANTMAN_REGEN_TIME           = seg_time * 2
 local ANTMAN_RELEASE_TIME         = seg_time
-
-local ANTMAN_ATTACK_ON_SIGHT_DIST = 4
-local ANTMAN_LOYALTY_PER_HUNGER   = TOTAL_DAY_TIME / 25
 
 local assets                      =
 {

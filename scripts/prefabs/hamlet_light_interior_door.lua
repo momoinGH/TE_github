@@ -1,4 +1,4 @@
-local MakeDoor = require("tro_interior_door_defs").MakeDoor
+local MakeDoor = require("prefabs/tro_interior_door_defs").MakeDoor
 
 local assets = {
     Asset("ANIM", "anim/ant_cave_door.zip"),
@@ -74,8 +74,13 @@ local function SetDoorTimeChange(inst)
     OnPhase(inst, TheWorld.state.phase)
 end
 
+local function SetVine(inst)
+    AddComponentIfNot(inst, "vineable")
+end
+
 local function OnSave(inst, data)
     data.light_door = inst.components.lighttweener ~= nil
+    data.vined = inst.components.vineable ~= nil
 end
 
 local function OnLoad(inst, data)
@@ -83,12 +88,14 @@ local function OnLoad(inst, data)
     if data.light_door then
         SetDoorTimeChange(inst)
     end
+    if data.vined then
+        SetVine(inst)
+    end
 end
 
 local function MasterPost(inst)
-    inst.SetDoorTimeChange = SetDoorTimeChange
-
-    inst:AddComponent("tro_saveanim")
+    inst.SetDoorTimeChange = SetDoorTimeChange --有太阳光的门
+    inst.SetVine = SetVine                     --长藤蔓的门
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad

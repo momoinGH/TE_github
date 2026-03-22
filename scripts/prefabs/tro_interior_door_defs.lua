@@ -1,4 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
+local Hooks = require("tropical_utils/hooks")
 
 local function DefaultDoorAcceptTest(inst, item)
     return inst:HasTag("teleporter")
@@ -80,9 +81,15 @@ end
 
 local function SetDoorOrientation(inst, orientation)
     local anim = orientation
-    if inst.AnimState:IsCurrentAnimation(inst.door_orientation .. "_closed") then
-        anim = anim .. "_closed"
+
+    -- 检查当前门动画是不是_closed后缀
+    for _, dir in ipairs(RoomUtils.DIR) do
+        if inst.AnimState:IsCurrentAnimation(dir.label .. "_closed") then
+            anim = anim .. "_closed"
+            break
+        end
     end
+
     inst.AnimState:PlayAnimation(anim)
     inst.door_orientation = orientation
     for _, dir in ipairs(RoomUtils.DIR) do
@@ -94,6 +101,8 @@ end
 -- 根据动画重新刷新门朝向字段
 local function OnSetAnimData(inst)
     local anim = inst.components.tro_saveanim.anim
+    if not anim then return end
+
     for _, dir in ipairs(RoomUtils.DIR) do
         if string.starts(anim, dir.label) then
             SetDoorOrientation(inst, dir.label)
@@ -163,7 +172,7 @@ local function MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, u
 
     if has_orientation then
         inst.door_orientation = nil
-        local door_orientation = "north" --默认
+        local door_orientation = "north" --默认，不用保存，监听tro_saveanim组件的事件来初始化
         for _, dir in ipairs(RoomUtils.DIR) do
             if string.starts(anim, dir.label) then
                 door_orientation = dir.label
@@ -224,8 +233,8 @@ end
 ---@param data.minimap string
 ---@param data.trader boolean 是否可用于传送物品、交易
 ---@param data.is_inner boolean 是否是虚空内部的生成的门，如果是则表示需要记录中心点对象
----@param data.door_orientation string
----@param data.usesound string
+---@param data.door_orientation string 门的初始方向，有值就表示这是一个有四个方向的门
+---@param data.usesound string 使用门时播放的音效
 local function MakeDoor(name, data, common_post_fn, master_post_fn)
     local function fn()
         local inst = CreateEntity()

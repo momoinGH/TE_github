@@ -1,9 +1,9 @@
-local mazemaker = require("prefabs/hamlet_pig_ruins_entrance_defs")
-local MakeBaseDoor = require("tro_interior_door_defs").MakeBaseDoor
+local mazemaker    = require("prefabs/hamlet_pig_ruins_entrance_defs")
+local MakeBaseDoor = require("prefabs/tro_interior_door_defs").MakeBaseDoor
 
-local RoomUtils = require("tropical_utils/room_utils")
+local RoomUtils    = require("tropical_utils/room_utils")
 
-local assets    =
+local assets       =
 {
     Asset("ANIM", "anim/pig_ruins_entrance.zip"),
     Asset("ANIM", "anim/pig_door_test.zip"),
@@ -12,7 +12,7 @@ local assets    =
     Asset("ANIM", "anim/pig_ruins_entrance_top_build.zip"),
 }
 
-local prefabs   =
+local prefabs      =
 {
     "deco_roomglow",
     "light_dust_fx",

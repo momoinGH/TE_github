@@ -1,5 +1,43 @@
 require("entityscript")
 
+-- 设置player_classified网络变量的值
+function EntityScript:TroSetPlayerClassifiedNetVar(name, val, setdirty)
+    if not self.player_classified then
+        return false
+    end
+
+    local netvar = self.player_classified[name]
+    -- if not trodevassert(netvar, "你没定义" .. name .. "这个网络变量") then
+    if not netvar then
+        return false
+    end
+
+    if netvar.push then --是net_bool类型
+        netvar:push()
+        return true
+    end
+
+    if setdirty then --强制同步值
+        netvar:set_local(val)
+    end
+    netvar:set(val)
+    return true
+end
+
+-- 获取player_classified网络变量的值
+function EntityScript:TroGetPlayerClassifiedNetVar(name)
+    if not self.player_classified then
+        return nil
+    end
+
+    local netvar = self.player_classified[name]
+    if not trodevassert(netvar, "你没定义" .. name .. "这个网络变量") then
+        return nil
+    end
+
+    return netvar:value()
+end
+
 -- 我们mod定义的区域，海难、哈姆雷特、火山、热带等等
 function EntityScript:IsInTropicalArea()
     if self.components.areaaware then
@@ -68,7 +106,7 @@ end
 -- 是否在哈姆雷特雾气中
 function EntityScript:TroInHamletFog()
     if self.player_classified then
-        return self.player_classified.tro_fog and self.player_classified.tro_fog:value() or false
+        return self:TroGetPlayerClassifiedNetVar("tro_fog")
     end
     --不是玩家
     if GLOBAL.TroInHamlteFogImple then

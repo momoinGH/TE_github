@@ -20,24 +20,23 @@ local room_creatures = {
 }
 
 local function GetDoorProp(room, dir, exit, width, depth)
+    local name
     local build
+    local init
     if room.color == "_blue" and not exit.secret then
         build = "pig_ruins_door_blue" --蓝色的门
     end
-
-    local anim
-    if room.aporkalypseclock then
-        --日晷房间的门
-        anim = "pig_ruins_" .. dir.label .. "_door"
-    elseif exit.secret then
+    if exit.secret then
         --隐藏门
-        anim = "pig_ruins_cracks_" .. dir.label .. "_door"
-        build = false
+        name = "wallcrack_ruins"
     elseif exit.vined then
         --藤蔓门
-        anim = "pig_ruins_vine_" .. dir.label .. "_door"
+        name = "prop_door"
+        init = function(inst)
+            inst:SetVine()
+        end
     else
-        anim = "pig_ruins_" .. dir.label .. "_door"
+        name = "prop_door"
     end
 
     local x_offset, z_offset
@@ -52,11 +51,12 @@ local function GetDoorProp(room, dir, exit, width, depth)
     end
 
     return {
-        name = "prop_door",
+        name = name,
         x_offset = x_offset,
         z_offset = z_offset,
         build = build,
-        anim = anim,
+        anim = dir.label,
+        init = init,
     }
 end
 
@@ -376,8 +376,8 @@ local function mazemaker(dungeondef)
     local depth = TUNING.ROOM_MEDIUM_DEPTH
     local inc = 0
     for id, room in ipairs(rooms) do
-        room.width = 24
-        room.depth = 16
+        room.width = width
+        room.depth = depth
 
         local addprops = room.addprops
         if not addprops then
@@ -469,12 +469,10 @@ local function mazemaker(dungeondef)
         end
         if door_orientation then
             table.insert(addprops, {
-                name = "wallcrack_ruins",
+                name = "wallcrack_ruins", --假的
                 x_offset = x_offset,
                 z_offset = z_offset,
-                init = function(fake_door)
-                    fake_door:InitFakeDoor(door_orientation) --TODO 还缺少其他参数
-                end
+                anim = door_orientation
             })
         end
 

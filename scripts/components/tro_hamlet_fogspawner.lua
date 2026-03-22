@@ -11,14 +11,14 @@ end)
 local function PlayerStopFog(self, player)
     if self.in_fog_players[player.GUID] then
         self.in_fog_players[player.GUID] = nil
-        player.tro_fog:set(false) --玩家客户端会推送tro_fogchange事件
+        player:TroSetPlayerClassifiedNetVar("tro_fog", false) --玩家客户端会推送tro_fogchange事件
     end
 end
 
 local function PlayerStartFog(self, player)
     if not self.in_fog_players[player.GUID] then
         self.in_fog_players[player.GUID] = true
-        player.tro_fog:set(true)
+        player:TroSetPlayerClassifiedNetVar("tro_fog", true)
     end
 end
 

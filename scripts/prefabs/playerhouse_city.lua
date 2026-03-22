@@ -1,5 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
-local MakeDoor = require("tro_interior_door_defs").MakeDoor
+local MakeDoor = require("prefabs/tro_interior_door_defs").MakeDoor
 local assets =
 {
     Asset("ANIM", "anim/pig_house_sale.zip"),

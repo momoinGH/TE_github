@@ -1,6 +1,8 @@
 modimport "modmain/room/interiorminimap" --绘制小房间内的小地图
-
 modimport "modmain/room/entityscript"
+modimport "modmain/room/roomcamera.lua"  --玩家室内摄像机
+
+
 
 
 modimport "modmain/room/components/map"

@@ -69,7 +69,7 @@ function PollenOver:OnUpdate(dt)
         self.level = leveltarget
     end
 
-    if TheCamera.interior then
+    if ThePlayer:TroGetPlayerClassifiedNetVar("tro_curroomcenter") then
         self.level = self.level * 0.3
     end
 

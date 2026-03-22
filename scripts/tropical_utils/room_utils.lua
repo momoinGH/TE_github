@@ -1,7 +1,5 @@
 -- 为虚空小房子服务
 
-local Hooks = require("tropical_utils/hooks")
-
 local FN = {}
 
 FN.RADIUS = 16     --小房子最大半径
@@ -16,13 +14,13 @@ function FN.GetCenterPosByHouse(house)
 end
 
 --- 当房屋被摧毁时把屋内的掉落物扔出来
+--- 只针对更靠近外面的门
 --- 如果是remove就移除屋内道具，如果是敲毁就返还材料，只包括lootdropper和inventoryitem
 function FN.OnHouseDestroy(house, destroyer, isRemove)
     local centerPos = FN.GetCenterPosByHouse(house)
     if not centerPos then return end
 
     local dis = FN.RADIUS
-    local hx, hy, hz = house.Transform:GetWorldPosition()
     if not isRemove then
         --摧毁室内建筑，生成掉落物
         for _, v in ipairs(TheSim:FindEntities(centerPos.x, centerPos.y, centerPos.z, dis)) do
@@ -42,6 +40,7 @@ function FN.OnHouseDestroy(house, destroyer, isRemove)
     end
 
     --传送掉落物，移除地板
+    local hx, hy, hz = house.Transform:GetWorldPosition()
     for _, v in ipairs(TheSim:FindEntities(centerPos.x, centerPos.y, centerPos.z, dis)) do
         if not isRemove and v.components.inventoryitem then
             house.components.lootdropper:FlingItem(v) --借用lootdropper组件抛出物品

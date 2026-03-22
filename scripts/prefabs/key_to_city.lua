@@ -15,10 +15,6 @@ local function OnTurnOff(inst)
     end)
 end
 
-local function canCurrentlyPrototypeTestFn(inst)
-    return not TheCamera.interior
-end
-
 local function storeincontainer(inst, container)
     if container ~= nil and container.components.container ~= nil then
         inst:ListenForEvent("onputininventory", inst._oncontainerownerchanged, container)

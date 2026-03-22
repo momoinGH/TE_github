@@ -100,7 +100,6 @@ end
 
 local function OnStartTeleporting(inst, doer)
     if doer:HasTag("player") then
-        doer.tropical_room_event:push()
         if doer.components.talker ~= nil then
             doer.components.talker:ShutUp()
         end

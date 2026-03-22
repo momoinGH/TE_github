@@ -1,7 +1,6 @@
 local FN = {}
 
 local Utils = require("tropical_utils/utils")
-local Hooks = require("tropical_utils/hooks")
 
 local env --环境变量，需要手动赋值
 function FN.SetEnv(newEnv)

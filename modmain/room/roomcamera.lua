@@ -1,0 +1,83 @@
+TroAddPlayerClassifiedNetVar(net_entity, "tro_curroomcenter") --玩家当前所处的房间对象
+
+----------------------------------------------------------------------------------------------------
+
+-- 参数来自单机interiorspawner组件的ApplyInteriorCameraWithPosition方法
+local function GetRoomCameraData(depth, pt)
+    local cameraoffset = -2.5 --10x15
+    local interior_distance = 23
+
+    if depth == 12 then --12x18
+        cameraoffset = -2
+        interior_distance = 25
+    elseif depth == 16 then --16x24
+        cameraoffset = -1.5
+        interior_distance = 30
+    elseif depth == 18 then --18x26
+        cameraoffset = -2   -- -1
+        interior_distance = 35
+    end
+
+    interior_currentpos = Vector3(pt.x + cameraoffset, 0, pt.z)
+    return interior_distance, interior_currentpos
+end
+
+-- 参数来自单机室内摄像机interiorcamera的Apply方法
+local function Apply(room)
+    local interior_pitch = 35
+    local interior_heading = 0
+    local dx = -math.cos(interior_pitch * DEGREES) * math.cos(interior_heading * DEGREES)
+    local dy = -math.sin(interior_pitch * DEGREES)
+    local dz = -math.cos(interior_pitch * DEGREES) * math.sin(interior_heading * DEGREES)
+    TheSim:SetCameraDir(dx, dy, dz)
+
+    local depth = room.room_depth:value()
+    local interior_distance, interior_currentpos = GetRoomCameraData(depth, room:GetPosition())
+    local px = dx * (-interior_distance) + interior_currentpos.x
+    local py = dy * (-interior_distance) + interior_currentpos.y
+    local pz = dz * (-interior_distance) + interior_currentpos.z
+    TheSim:SetCameraPos(px, py, pz)
+
+    local rx = math.cos((interior_heading + 90) * DEGREES)
+    local ry = 0
+    local rz = math.sin((interior_heading + 90) * DEGREES)
+    local ux, uy, uz = dy * rz - dz * ry, dz * rx - dx * rz, dx * ry - dy * rx
+    TheSim:SetCameraUp(ux, uy, uz)
+
+    local interior_fov = 35
+    TheSim:SetCameraFOV(interior_fov)
+end
+
+-- this is called on client
+local function OnPlayerRoomChange(inst)
+    if inst.components.playervision then --TODO 这个是干什么的？
+        inst.components.playervision:UpdateCCTable()
+    end
+
+    local target = inst:TroGetPlayerClassifiedNetVar("tro_curroomcenter")
+    if target then
+        TheCamera:SetPaused(true)
+        TheCamera:SetControllable(false)
+        Apply(target)
+    else
+        TheCamera:SetPaused(false)
+        TheCamera:SetControllable(true)
+        TheCamera:SetDefault()
+    end
+end
+
+-- 刷帧检测玩家是否在虚空房子里
+local function CheckPlayerInRoom(inst)
+    local room_center = inst:TroGetRoomCenter()
+    inst:TroSetPlayerClassifiedNetVar("tro_curroomcenter", room_center)
+end
+
+AddPlayerPostInit(function(inst)
+    if not TheNet:IsDedicated() then
+        inst:ListenForEvent("tro_curroomcenter", OnPlayerRoomChange)
+    end
+
+    if not TheWorld.ismastersim then return end
+
+    inst:DoPeriodicTask(10 * FRAMES, CheckPlayerInRoom)
+end)

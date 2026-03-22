@@ -155,42 +155,41 @@ PrefabFiles = {
     "hamlet_interior_housedoor",  --房子
     "hamlet_interior_wall",       --室内墙
     "hamlet_cave_exit",           --哈姆雷特洞穴的出口，一根绳子
+    "wallcrack_ruins",            --可疑的裂缝，隐藏门
 
-
-    "hamlet_pig_ruins_entrance", --遗迹
-    "wallcrack_ruins",           --可疑的裂缝
-    "hanging_vine",              --悬挂的藤蔓
-    "hats_hamlet",               --帽子
-    "herald_tatters",            --暗影碎布
-    "hippo_antler",              --河鹿角
-    "hippoherd",                 --河鹿生成器
-    "hippopotamoose",            --河鹿
-    "hogusporkusator",           --石猪引擎
-    "infused_iron",              --注能铁块
-    "iron",                      --锈铁块
-    "jungle_border_vine",        --大树藤悬挂藤蔓
-    "lavapool",                  --岩浆池
-    "light_rays_ham",            --顶部太阳光
-    "lilypad",                   --巨大的莲叶
-    "ballpein_hammer",           --圆头锤
-    "living_artifact",           --活性机甲
-    "lotus_flower",              --莲花
-    "lotus",                     --莲花
-    "mandrakehouse",             --曼德拉丘
-    "mandrakeman",               --曼德拉长者
-    "mean_flytrap",              --利齿幼苗
-    "meteor_impact",             --地面坑特效
-    "nectar_pod",                --花蜜
-    "nettle",                    --荨麻藤
-    "cutnettle",                 --荨麻叶
-    "oinc",                      --呼噜币
-    "pangolden",                 --淘金兽
-    "peagawk",                   --孔雀
-    "peagawkfeather_prism",      --鲜艳的孔雀羽毛
-    "peagawkfeather",            --孔雀羽毛
-    "peekhen",                   --偷窥雀
-    "peekhenspawner",            --偷窥雀生成器
-    "pheromonestone",            --信息素石
+    "hamlet_pig_ruins_entrance",  --遗迹
+    "hanging_vine",               --悬挂的藤蔓
+    "hats_hamlet",                --帽子
+    "herald_tatters",             --暗影碎布
+    "hippo_antler",               --河鹿角
+    "hippoherd",                  --河鹿生成器
+    "hippopotamoose",             --河鹿
+    "hogusporkusator",            --石猪引擎
+    "infused_iron",               --注能铁块
+    "iron",                       --锈铁块
+    "jungle_border_vine",         --大树藤悬挂藤蔓
+    "lavapool",                   --岩浆池
+    "light_rays_ham",             --顶部太阳光
+    "lilypad",                    --巨大的莲叶
+    "ballpein_hammer",            --圆头锤
+    "living_artifact",            --活性机甲
+    "lotus_flower",               --莲花
+    "lotus",                      --莲花
+    "mandrakehouse",              --曼德拉丘
+    "mandrakeman",                --曼德拉长者
+    "mean_flytrap",               --利齿幼苗
+    "meteor_impact",              --地面坑特效
+    "nectar_pod",                 --花蜜
+    "nettle",                     --荨麻藤
+    "cutnettle",                  --荨麻叶
+    "oinc",                       --呼噜币
+    "pangolden",                  --淘金兽
+    "peagawk",                    --孔雀
+    "peagawkfeather_prism",       --鲜艳的孔雀羽毛
+    "peagawkfeather",             --孔雀羽毛
+    "peekhen",                    --偷窥雀
+    "peekhenspawner",             --偷窥雀生成器
+    "pheromonestone",             --信息素石
 
 
     "pig_palace",               --宫殿

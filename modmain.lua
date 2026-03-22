@@ -22,6 +22,9 @@ TroAddPrototyperDef：注册原型机的科技
 TroUpdateCookingIngredientTags：更新已有食材的标签值
 
 
+TroAddPlayerClassifiedNetVar：在player_classified上面新增网络变量
+
+
 constants.lua文件还定义了很多全局函数
 
 TUNING.tropical mod设置数据
@@ -31,6 +34,8 @@ TUNING.tropical mod设置数据
 每个模块自动导入的文件：
 tuning、prefablist、assets、containers、ui、prefabpost、sg、recipes、cooking、rpc、input、skins
 不在模块下的内容是公共的部分，最好通过标签或者变量识别功能，减少特定prefab的判断
+
+
 
 
 debug文件定义了很多c_xxx函数，用于控制台调试
@@ -67,10 +72,12 @@ if troisdev then
     modimport "modmain/data_validator_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 
-modimport "modmain/postinit"   --TODO 拆分一下
-modimport "modmain/animstate"  -- AnimState 增强
+modimport "modmain/animstate"         -- AnimState 增强
 modimport "modmain/soundemitter"
-modimport "modmain/ents_trace" --缓存记录一些需要全局查找的实体
+modimport "modmain/ents_trace"        --缓存记录一些需要全局查找的实体
+modimport "modmain/player_classified" --为player_classified添加网络变量提供便捷
+
+modimport "modmain/postinit"          --TODO 拆分一下
 
 -- 文本
 local language = string.lower(GetModConfigData("language"))
@@ -88,7 +95,7 @@ modimport("modmain/componentactions") --componentactions相关
 troimportmodulefile("tuning") --定义的常量
 
 --PrefabFiles
-local ALL_PREFAB_FILES = PrefabFiles or {}
+local all_prefab_files = PrefabFiles or {}
 troimportmodulefile("prefablist", false, function()
     PrefabFiles = {}
 end, function()
@@ -102,14 +109,14 @@ end, function()
     --     prefabs_dirty[prefab] = true
     -- end
 
-    ALL_PREFAB_FILES = ArrayUnion(ALL_PREFAB_FILES, PrefabFiles)
+    all_prefab_files = ArrayUnion(all_prefab_files, PrefabFiles)
 end)
-PrefabFiles = ALL_PREFAB_FILES
-ALL_PREFAB_FILES = nil
+PrefabFiles = all_prefab_files
+all_prefab_files = nil
 
 
 --注册全局资产
-local ALL_ASSETS = Assets or {}
+local all_assets = Assets or {}
 troimportmodulefile("assets", false, function()
     Assets = {}
 end, function()
@@ -122,10 +129,10 @@ end, function()
     --     end
     --     assets_dirty[s] = true
     -- end
-    ConcatArrays(ALL_ASSETS, Assets)
+    ConcatArrays(all_assets, Assets)
 end)
-Assets = ALL_ASSETS
-ALL_ASSETS = nil
+Assets = all_assets
+all_assets = nil
 
 
 troimportmodulefile("containers") --定义容器
@@ -143,12 +150,16 @@ modimport("modmain/scrapbookwiki") -- 图鉴wiki
 modimport("modmain/character")     --添加角色，角色相关变量定义
 modimport("modmain/fx")            --特效
 
-----------------------------------------------------------------------------------------------------
 
 if troisdev then
     troimportmodulefile("debug")             --方便开发的c_xxx控制台函数
     modimport "modmain/data_validator_after" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
+
+----------------------------------------------------------------------------------------------------
+-- 还原、追加到游戏里
+
+TroPlayerClassifiedNetVarEnd()
 
 env.modimport = old_modimport
 old_modimport = nil

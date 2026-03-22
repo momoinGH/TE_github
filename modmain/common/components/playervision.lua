@@ -44,7 +44,7 @@ local NIGHTMARE_PHASEFN =
 ----------------------------------------------------------------------------------------------------
 
 local function UpdateCCTableBefore(self)
-    if not GetClosestInstWithTag("interior_center", self.inst, 30) then
+    if not self.inst:TroGetRoomCenter() then
         return
     end
 

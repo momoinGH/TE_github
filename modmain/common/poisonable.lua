@@ -14,19 +14,7 @@ AddPrefabPostInitAny(function(inst)
     end
 end)
 
-local function OnPoisonOverDirty(inst)
-    if inst._parent then
-        inst._parent:PushEvent("poisondamage")
-    end
-end
-
-AddPrefabPostInit("player_classified", function(inst)
-    inst.poisonover = net_event(inst.GUID, "poison.poisonover", "poisonoverdirty") --中毒扣血事件
-
-    if not TheNet:IsDedicated() then
-        inst:ListenForEvent("poisonoverdirty", OnPoisonOverDirty)
-    end
-end)
+TroAddPlayerClassifiedNetVar(net_event, "tro_poisonover", "poisondamage") --中毒扣血事件
 
 ----------------------------------------------------------------------------------------------------
 

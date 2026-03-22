@@ -1,23 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
 
-local function OnPlayerFar(inst, doer)
-    doer:DoTaskInTime(0.5, function(doer)
-        doer.tropical_room_event:push()
-    end)
-end
-
-local function OnPlayerNear(inst, doer)
-    -- doer:DoTaskInTime(0.5, function(doer) --从一个房间跳到另一个房间，有可能出现先靠近再远离的调用顺序，这里延迟一下设置摄像机
-    --     local center = GetClosestInstWithTag("interior_center", doer, 30)
-    --     if center then
-    --         doer.tropical_room_event:push()
-    --     end
-    -- end)
-    doer:DoTaskInTime(0.5, function(doer)
-        doer.tropical_room_event:push()
-    end)
-end
-
 local function OnSave(inst, data)
     data.room_width = inst.room_width:value() ~= 0 and inst.room_width:value() or nil
     data.room_depth = inst.room_depth:value() ~= 0 and inst.room_depth:value() or nil
@@ -70,13 +52,6 @@ local function fn()
     inst.components.sanityaura.aura = TUNING.SANITYAURA_SMALL
     local dis = RoomUtils.RADIUS
     inst.components.sanityaura.max_distsq = dis * dis
-
-    -- 玩家可能通过其他手段进入和离开房间，我不能通过开关门来判断，只能用这个组件
-    inst:AddComponent("playerprox")
-    inst.components.playerprox:SetTargetMode(inst.components.playerprox.TargetModes.AllPlayers)
-    inst.components.playerprox:SetDist(dis, dis)
-    inst.components.playerprox:SetOnPlayerNear(OnPlayerNear)
-    inst.components.playerprox:SetOnPlayerFar(OnPlayerFar)
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad

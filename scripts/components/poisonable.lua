@@ -22,9 +22,7 @@ function Poisonable:SetPoison(dmg, interval, duration)
     self.interval = interval or self.maxInterval
     self.startDuration = duration or self.defaultDuration
     self.duration = self.startDuration
-    if self.inst.player_classified then
-        self.inst.player_classified.poisonover:push()
-    end
+    self.inst:TroSetPlayerClassifiedNetVar("tro_poisonover")
     if not self.updating then
         self.inst:StartUpdatingComponent(self)
     end
@@ -66,9 +64,7 @@ function Poisonable:OnUpdate(dt)
         self.inst.components.health:DoDelta(self.dmg, nil, "poison")
         self:IncreaseIntensity()
         self.lastDamageTime = self.interval
-        if self.inst.player_classified then
-            self.inst.player_classified.poisonover:push()
-        end
+        self.inst:TroSetPlayerClassifiedNetVar("tro_poisonover")
     end
 
     -- poison bubbles fx, fixed by EvenMr

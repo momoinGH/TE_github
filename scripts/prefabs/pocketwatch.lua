@@ -229,7 +229,6 @@ local function Recall_DoCastSpell(inst, doer, target, pos)
 			inst.components.rechargeable:Discharge(TUNING.POCKETWATCH_RECALL_COOLDOWN)
 
 			doer.sg.statemem.warpback = { dest_worldid = recallmark.recall_worldid, dest_x = recallmark.recall_x, dest_y = 0, dest_z = recallmark.recall_z, reset_warp = true }
-			doer.tropical_room_event:push()
 			return true
 		else
 			return false, "SHARD_UNAVAILABLE"
@@ -369,7 +368,6 @@ local function Warp_DoCastSpell(inst, doer)
 	if tx ~= nil then
 		inst.components.rechargeable:Discharge(TUNING.POCKETWATCH_WARP_COOLDOWN)
 		doer.sg.statemem.warpback = { dest_x = tx, dest_y = ty, dest_z = tz }
-		doer.tropical_room_event:push()
 		return true
 	end
 
