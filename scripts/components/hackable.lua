@@ -1,11 +1,9 @@
-local MakeWorkable = require("components/tro_basicworkable")
+local BasicWorkable = require("components/tro_basicworkable")
 
 --- 可以劈砍，简易组件，如果要更多功能可以加个pickable作为辅助组件
-local Hackable = MakeWorkable({
-    workable_tag       = "hackable",
-    worked_event       = "onhacked",
-    workfinished_event = "onhackfinished"
-}, function(self, inst)
+local Hackable = Class(BasicWorkable, function(self, inst)
+    BasicWorkable._ctor(self, inst, "hackable", "onhacked", "onhackfinished")
+
     if troisdev then
         inst:DoTaskInTime(0, function(inst)
             if not inst.components.workable then

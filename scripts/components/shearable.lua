@@ -1,11 +1,9 @@
-local MakeWorkable = require("components/tro_basicworkable")
+local BasicWorkable = require("components/tro_basicworkable")
 
 --- 可以剪
-local Shearable = MakeWorkable({
-    workable_tag       = "shearable",
-    worked_event       = "onshear",
-    workfinished_event = "onshearfinished"
-}, function(self, inst)
+local Shearable = Class(BasicWorkable, function(self, inst)
+    BasicWorkable._ctor(self, inst, "shearable", "onshear", "onshearfinished")
+
     if troisdev then
         inst:DoTaskInTime(0, function(inst)
             if not inst.components.workable then

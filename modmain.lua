@@ -76,8 +76,10 @@ modimport "modmain/animstate"         -- AnimState 增强
 modimport "modmain/soundemitter"
 modimport "modmain/ents_trace"        --缓存记录一些需要全局查找的实体
 modimport "modmain/player_classified" --为player_classified添加网络变量提供便捷
+modimport "modmain/class"             --修复class继承上的一些bug
 
-modimport "modmain/postinit"          --TODO 拆分一下
+
+modimport "modmain/postinit" --TODO 拆分一下
 
 -- 文本
 local language = string.lower(GetModConfigData("language"))
