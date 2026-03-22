@@ -245,6 +245,8 @@ end
 -- 根据标签查找附近对象
 function c_findtag(tag, radius, inst) end
 
+function c_selectnear(prefab, rad) end
+
 ---获取一个玩家，优先选择鼠标所选的玩家
 function ConsoleCommandPlayer()
 end

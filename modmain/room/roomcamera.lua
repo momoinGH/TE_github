@@ -7,14 +7,14 @@ local function GetRoomCameraData(depth, pt)
     local cameraoffset = -2.5 --10x15
     local interior_distance = 23
 
-    if depth == 12 then --12x18
+    if depth == TUNING.ROOM_SMALL_DEPTH then --12x18
         cameraoffset = -2
         interior_distance = 25
-    elseif depth == 16 then --16x24
+    elseif depth == TUNING.ROOM_MEDIUM_DEPTH then --16x24
         cameraoffset = -1.5
         interior_distance = 30
-    elseif depth == 18 then --18x26
-        cameraoffset = -2   -- -1
+    elseif depth == TUNING.ROOM_LARGE_DEPTH then --18x26
+        cameraoffset = -2                        -- -1
         interior_distance = 35
     end
 
