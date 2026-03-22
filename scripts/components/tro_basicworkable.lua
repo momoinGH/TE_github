@@ -14,7 +14,6 @@ local base_props = {
     workable = onworkable,
 }
 
--- TODO 没有生效！
 -- 提供一个基础的workable功能，只用于子类继承
 local BasicWorkable = Class(function(self, inst, workable_tag, worked_event, workfinished_event, working_event, finishedwork_event)
     self.inst = inst
@@ -102,7 +101,7 @@ local function MakeWorkable(data, _ctor, props)
     return Class(BasicWorkable, function(self, inst, ...)
         BasicWorkable._ctor(self, inst, data.workable_tag, data.worked_event, data.workfinished_event, data.working_event, data.finishedwork_event)
         return _ctor(self, inst, ...)
-    end, props)
+    end, nil, props)
 end
 
 return MakeWorkable
