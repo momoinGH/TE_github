@@ -231,7 +231,7 @@ return Class(function(self, inst)
     local _maxlightningdelay
     local _nextlightningtime
     local _lightningtargets
-    local _lightningexcludetags
+    local _lightningexcludetags -- NOTE(Omar): Deprecated, leaving this here in case any mods were upvalue hacking this variable.
 
     --Network
     local _noisetime = net_float(inst.GUID, "weather._noisetime")
@@ -399,10 +399,8 @@ return Class(function(self, inst)
     local function CalculatePrecipitationRate()
         if _precipmode:value() == PRECIP_MODES.always then
             return .1 + perlin(0, _noisetime:value() * .1, 0) * .9
-        elseif _preciptype:value() ~= PRECIP_TYPES.none and _preciptype:value() ~= PRECIP_TYPES.lunarhail and _precipmode:value() ~= PRECIP_MODES.never then
-            local p = math.max(0,
-                math.min(1,
-                    (_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value())))
+        elseif _preciptype:value() ~= PRECIP_TYPES.none and _precipmode:value() ~= PRECIP_MODES.never then
+            local p = math.max(0, math.min(1, (_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value())))
             local rate = MIN_PRECIP_RATE + (1 - MIN_PRECIP_RATE) * math.sin(p * PI)
             return math.min(rate, _peakprecipitationrate:value())
         end
@@ -428,16 +426,15 @@ return Class(function(self, inst)
     end or nil
 
     local StopPrecipitation = _ismastersim and function()
+        if _preciptype:value() == PRECIP_TYPES.lunarhail then return end
+
         _moisture:set(_moisturefloor:value())
         _moistureceil:set(RandomizeMoistureCeil())
 
-        if _preciptype:value() ~= PRECIP_TYPES.lunarhail then
             _preciptype:set(PRECIP_TYPES.none)
-        end
     end or nil
 
     local StartLunarHail = _ismastersim and function()
-        StopPrecipitation()
         _lunarhaillevel:set(LUNAR_HAIL_CEIL)
         _preciptype:set(PRECIP_TYPES.lunarhail)
     end or nil
@@ -450,24 +447,15 @@ return Class(function(self, inst)
     local function CalculatePOP()
         return (_preciptype:value() ~= PRECIP_TYPES.none and 1)
             or ((_moistureceil:value() <= 0 or _moisture:value() <= _moisturefloor:value()) and 0)
-            or
-            (_moisture:value() < _moistureceil:value() and (_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value()))
+            or (_moisture:value() < _moistureceil:value() and (_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value()))
             or 1
     end
 
     local function CalculateLight()
-        if _preciptype:value() == PRECIP_TYPES.lunarhail then
-            local dynrange = _daylight and SEASON_DYNRANGE_DAY[_season] or SEASON_DYNRANGE_NIGHT[_season]
-
-            local p = 1 - CalculateLunarHailRate()
-            p = easing.inQuad(p, 0, 1, 1)
-
-            return p * dynrange + 1 - dynrange
-        end
-
-        if _precipmode:value() == PRECIP_MODES.never then
+        if _precipmode:value() == PRECIP_MODES.never and _preciptype:value() ~= PRECIP_TYPES.lunarhail then
             return 1
         end
+
         local season = _season
         local snowlight = _preciptype:value() == PRECIP_TYPES.snow
         local dynrange = snowlight and (_daylight and SEASON_DYNRANGE_DAY["winter"] or SEASON_DYNRANGE_NIGHT["winter"])
@@ -476,13 +464,16 @@ return Class(function(self, inst)
         if _precipmode:value() == PRECIP_MODES.always then
             return 1 - dynrange
         end
-        local p = 1 -
-            math.min(
-                math.max((_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value()),
-                    0), 1)
+
+        local p = math.min(math.max((_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value()), 0), 1)
+        local p2 = _preciptype:value() == PRECIP_TYPES.lunarhail and CalculateLunarHailRate() or 0
+
+        p = 1 - math.max(p, p2)
+
         if _preciptype:value() ~= PRECIP_TYPES.none then
             p = easing.inQuad(p, 0, 1, 1)
         end
+
         return p * dynrange + 1 - dynrange
     end
 
@@ -504,6 +495,7 @@ return Class(function(self, inst)
             precipitationrate = CalculatePrecipitationRate(),
             snowlevel = _snowlevel:value(),
             lunarhaillevel = _lunarhaillevel:value(),
+            lunarhailrate = CalculateLunarHailRate(),
             wetness = _wetness:value(),
             light = CalculateLight(),
         }
@@ -526,8 +518,7 @@ return Class(function(self, inst)
             else
                 --It rains less in the middle of summer
                 local p = 1 - math.sin(PI * data.progress)
-                _moisturerateval = MOISTURE_RATES.MIN[_season] +
-                    p * (MOISTURE_RATES.MAX[_season] - MOISTURE_RATES.MIN[_season])
+                _moisturerateval = MOISTURE_RATES.MIN[_season] + p * (MOISTURE_RATES.MAX[_season] - MOISTURE_RATES.MIN[_season])
                 _moisturerateoffset = 0
             end
 
@@ -633,22 +624,18 @@ return Class(function(self, inst)
     end or nil
 
     local LIGHTNINGSTRIKE_CANT_TAGS = { "playerghost", "INLIMBO" }
-    local LIGHTNINGSTRIKE_ONEOF_TAGS = { "lightningrod", "lightningtarget", "lightningblocker", "interior_center" }
+    local LIGHTNINGSTRIKE_ONEOF_TAGS = { "lightningrod", "lightningtarget", "lightningblocker" }
     local LIGHTNINGSTRIKE_SEARCH_RANGE = 40
     local OnSendLightningStrike = _ismastersim and function(src, pos)
         local closest_generic = nil
         local closest_rod = nil
         local closest_blocker = nil
 
-        local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, LIGHTNINGSTRIKE_SEARCH_RANGE, nil,
-            LIGHTNINGSTRIKE_CANT_TAGS, LIGHTNINGSTRIKE_ONEOF_TAGS)
+        local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, LIGHTNINGSTRIKE_SEARCH_RANGE, nil, LIGHTNINGSTRIKE_CANT_TAGS, LIGHTNINGSTRIKE_ONEOF_TAGS)
         local blockers = nil
         for _, v in pairs(ents) do
             -- Track any blockers we find, since we redirect the strike position later,
             -- and might redirect it into their block range.
-            --###
-            local interior = v:HasTag("interior_center")
-            if interior then return end
             local is_blocker = v.components.lightningblocker ~= nil
             if is_blocker then
                 if blockers == nil then
@@ -665,27 +652,39 @@ return Class(function(self, inst)
                 closest_rod = v
             elseif closest_generic == nil then
                 if (v.components.health == nil or not v.components.health:IsInvincible())
-                    and not is_blocker -- If we're out of range of the first branch, ignore blocker objects.
-                    and (v.components.playerlightningtarget == nil or math.random() <= v.components.playerlightningtarget:GetHitChance()) then
+                    and not is_blocker     -- If we're out of range of the first branch, ignore blocker objects.
+                    and (v.components.playerlightningtarget == nil or TryLuckRoll(v, v.components.playerlightningtarget:GetHitChance(), LuckFormulas.LightningStrike)) then
                     closest_generic = v
                 end
             end
         end
 
-        local strike_position = pos
-        local prefab_type = "lightning"
+        local strike_position = nil
+        local prefab_type = nil
+
+        local function SetStrikePositionAndPrefab(new_pos, new_prefab_type)
+            strike_position = new_pos or strike_position
+            prefab_type = new_prefab_type or prefab_type
+
+            -- Lunar lightning should always override thunder or lightning (for now)
+            if TheWorld.net.components.moonstorms and TheWorld.net.components.moonstorms:IsPointInMoonstorm(strike_position) then
+                prefab_type = "moonstorm_lightning"
+            end
+        end
+
+        SetStrikePositionAndPrefab(pos, "lightning") --Default initialize
 
         if closest_blocker ~= nil then
             closest_blocker.components.lightningblocker:DoLightningStrike(strike_position)
-            prefab_type = "thunder"
+            SetStrikePositionAndPrefab(strike_position, "thunder")
         elseif closest_rod ~= nil then
-            strike_position = closest_rod:GetPosition()
+            SetStrikePositionAndPrefab(closest_rod:GetPosition(), prefab_type)
 
             -- Check if we just redirected into a lightning blocker's range.
             if blockers ~= nil then
                 for _, blocker in ipairs(blockers) do
                     if blocker:GetDistanceSqToPoint(strike_position:Get()) < (blocker.components.lightningblocker.block_rsq + 0.0001) then
-                        prefab_type = "thunder"
+                        SetStrikePositionAndPrefab(strike_position, "thunder")
                         blocker.components.lightningblocker:DoLightningStrike(strike_position)
                         break
                     end
@@ -693,18 +692,20 @@ return Class(function(self, inst)
             end
 
             -- If we didn't get blocked, push the event that does all the fx and behaviour.
-            if prefab_type == "lightning" then
+            -- NOTE: Let moon lightning still strike rods so we can get the charged rod visuals and sounds
+            if prefab_type == "lightning" or prefab_type == "moonstorm_lightning" then
                 closest_rod:PushEvent("lightningstrike")
             end
         else
+            local hit_player = false
             if closest_generic ~= nil then
-                strike_position = closest_generic:GetPosition()
+                SetStrikePositionAndPrefab(closest_generic:GetPosition(), prefab_type)
 
                 -- Check if we just redirected into a lightning blocker's range.
                 if blockers ~= nil then
                     for _, blocker in ipairs(blockers) do
                         if blocker:GetDistanceSqToPoint(strike_position:Get()) < (blocker.components.lightningblocker.block_rsq + 0.0001) then
-                            prefab_type = "thunder"
+                            SetStrikePositionAndPrefab(strike_position, "thunder")
                             blocker.components.lightningblocker:DoLightningStrike(strike_position)
                             break
                         end
@@ -715,20 +716,13 @@ return Class(function(self, inst)
                 if prefab_type == "lightning" then
                     if closest_generic.components.playerlightningtarget ~= nil then
                         closest_generic.components.playerlightningtarget:DoStrike()
+                        hit_player = true
                     end
                 end
             end
 
-            -- If we're doing lightning, light nearby unprotected objects on fire.
-            if prefab_type == "lightning" then
-                ents = TheSim:FindEntities(strike_position.x, strike_position.y, strike_position.z, 3, nil,
-                    _lightningexcludetags)
-                for _, v in pairs(ents) do
-                    if v.components.burnable ~= nil then
-                        v.components.burnable:Ignite()
-                    end
-                end
-            end
+            -- If we're doing lightning, shock creatures, andlight nearby unprotected objects on fire.
+            StrikeLightningAtPoint(prefab_type, hit_player, strike_position)
         end
 
         SpawnPrefab(prefab_type).Transform:SetPosition(strike_position:Get())
@@ -779,10 +773,8 @@ return Class(function(self, inst)
     end
 
     --Register network variable sync events
-    inst:ListenForEvent("moistureceildirty",
-        function() _world:PushEvent("moistureceilchanged", _moistureceil:value()) end)
-    inst:ListenForEvent("preciptypedirty",
-        function() _world:PushEvent("precipitationchanged", PRECIP_TYPE_NAMES[_preciptype:value()]) end)
+    inst:ListenForEvent("moistureceildirty", function() _world:PushEvent("moistureceilchanged", _moistureceil:value()) end)
+    inst:ListenForEvent("preciptypedirty", function() _world:PushEvent("precipitationchanged", PRECIP_TYPE_NAMES[_preciptype:value()]) end)
     inst:ListenForEvent("snowcovereddirty", function() _world:PushEvent("snowcoveredchanged", _snowcovered:value()) end)
     inst:ListenForEvent("wetdirty", function() _world:PushEvent("wetchanged", _wet:value()) end)
 
@@ -807,13 +799,6 @@ return Class(function(self, inst)
         _maxlightningdelay = nil
         _nextlightningtime = 5
         _lightningtargets = {}
-        _lightningexcludetags = { "player", "INLIMBO", "lightningblocker" }
-
-        for k, v in pairs(FUELTYPE) do
-            if v ~= FUELTYPE.USAGE then --Not a real fuel
-                table.insert(_lightningexcludetags, v .. "_fueled")
-            end
-        end
 
         for i, v in ipairs(AllPlayers) do
             table.insert(_lightningtargets, v)
@@ -836,6 +821,7 @@ return Class(function(self, inst)
         inst:ListenForEvent("ms_setlightningdelay", OnSetLightningDelay, _world)
         inst:ListenForEvent("ms_sendlightningstrike", OnSendLightningStrike, _world)
         inst:ListenForEvent("ms_simunpaused", OnSimUnpaused, _world)
+        inst:ListenForEvent("ms_startlunarhail", StartLunarHail, _world)
     end
 
     PushWeather()
@@ -939,7 +925,7 @@ return Class(function(self, inst)
             _world.components.riftspawner:IsLunarPortalActive() and
             _preciptype:value() ~= PRECIP_TYPES.lunarhail
         then
-            -- Increave _lunarhaillevel
+            -- Increase _lunarhaillevel
             local lunarhail = _lunarhaillevel:value() + LUNAR_HAIL_EVENT_RATE.COOLDOWN * dt
             if lunarhail >= LUNAR_HAIL_CEIL then
                 if _ismastersim then
@@ -966,8 +952,7 @@ return Class(function(self, inst)
 
         --Update wetness
         local wetrate = CalculateWetnessRate(_temperature, preciprate)
-        SetWithPeriodicSync(_wetness, math.clamp(_wetness:value() + wetrate * dt, MIN_WETNESS, MAX_WETNESS),
-            WETNESS_SYNC_PERIOD, _ismastersim)
+        SetWithPeriodicSync(_wetness, math.clamp(_wetness:value() + wetrate * dt, MIN_WETNESS, MAX_WETNESS), WETNESS_SYNC_PERIOD, _ismastersim)
         if _ismastersim then
             if _wet:value() then
                 if _wetness:value() < DRY_THRESHOLD then
@@ -1017,10 +1002,10 @@ return Class(function(self, inst)
                 StopAmbientRainSound()
             end
         end
-        --###
-        local nevenailha = 0
-        local nevetropical = 1
-        local chuvatropical = 0
+        --###TODO 看看怎么通过hook实现这个效果
+        local nevenailha = 0 --霜冻区域雪增强
+        local nevetropical = 1 --热带区域雪控制
+        local chuvatropical = 0 --热带区域雨控制
         if _snowfx then
             if _activatedplayer and _activatedplayer.components.areaaware and _activatedplayer.components.areaaware:CurrentlyInTag("frost") then
                 nevenailha = 10
@@ -1142,8 +1127,7 @@ return Class(function(self, inst)
                     local max = _maxlightningdelay or (min + easing.linear(preciprate, 30, 10, 1))
                     _nextlightningtime = GetRandomMinMax(min, max)
                     if (preciprate > .75 or _lightningmode == LIGHTNING_MODES.always) and next(_lightningtargets) ~= nil then
-                        local targeti = math.min(math.floor(easing.inQuint(math.random(), 1, #_lightningtargets, 1)),
-                            #_lightningtargets)
+                        local targeti = math.min(math.floor(easing.inQuint(math.random(), 1, #_lightningtargets, 1)), #_lightningtargets)
                         local target = _lightningtargets[targeti]
                         table.remove(_lightningtargets, targeti)
                         table.insert(_lightningtargets, target)
@@ -1248,13 +1232,11 @@ return Class(function(self, inst)
         local str =
         {
             string.format("  temperature: %2.1f", _temperature),
-            string.format("  moisture: %2.1f (%2.1f/%2.1f) + %2.1f", _moisture:value(), _moisturefloor:value(),
-                _moistureceil:value(), _moisturerate:value()),
+            string.format("  moisture: %2.1f (%2.1f/%2.1f) + %2.1f", _moisture:value(), _moisturefloor:value(), _moistureceil:value(), _moisturerate:value()),
             string.format("  preciprate: (%2.1f of %2.1f)", preciprate, _peakprecipitationrate:value()),
             string.format("  snowlevel: %2.1f", _snowlevel:value()),
             string.format("  lunarhaillevel: %2.1f", _lunarhaillevel:value()),
-            string.format("  wetness: %2.1f (%s %2.1f) %s", _wetness:value(), wetrate > 0 and "+" or "", wetrate,
-                _wet:value() and " WET" or ""),
+            string.format("  wetness: %2.1f (%s %2.1f) %s", _wetness:value(), wetrate > 0 and "+" or "", wetrate, _wet:value() and " WET" or ""),
             string.format("  light: %2.5f", CalculateLight()),
         }
 

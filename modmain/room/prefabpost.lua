@@ -68,12 +68,19 @@ end)
 
 ----------------------------------------------------------------------------------------------------
 
-AddPrefabPostInit("forest", function(inst)
+local function WorldPushEventBefore(inst, event, pos)
+    if event == "ms_sendlightningstrike" and pos and TheWorld.Map:TroGetRoomCenter(pos:Get()) then
+        return nil, true --你不能在屋子里打雷，或许可以在这里只打个响儿
+    end
+end
+
+AddPrefabPostInit("world", function(inst)
     if not TheWorld.ismastersim then return end
     inst:AddComponent("tro_roomspawner")
+
+
+    Hooks.FnDecorator(inst, "PushEvent", WorldPushEventBefore)
 end)
 
-AddPrefabPostInit("cave", function(inst)
-    if not TheWorld.ismastersim then return end
-    inst:AddComponent("tro_roomspawner")
-end)
+
+----------------------------------------------------------------------------------------------------
