@@ -211,21 +211,19 @@ local function OnHaunt(inst)
 end
 
 local function check_spawn_snake(inst)
-    if inst:IsValid() then
-        local invader = GetClosestInstWithTag("player", inst, 5)
+    local invader = GetClosestInstWithTag("player", inst, 5)
 
-        if invader then
-            if math.random() > 0.75 then
-                local perd = SpawnPrefab("snake")
-                local spawnpos = inst:GetPosition()
-                spawnpos = spawnpos + TheCamera:GetDownVec()
-                perd.Transform:SetPosition(spawnpos:Get())
-                shake(inst)
-            end
+    if invader then
+        if math.random() > 0.75 then
+            local perd = SpawnPrefab("snake")
+            local spawnpos = inst:GetPosition()
+            spawnpos = spawnpos + TheCamera:GetDownVec()
+            perd.Transform:SetPosition(spawnpos:Get())
+            shake(inst)
         end
-
-        inst:DoTaskInTime(5 + (math.random() * 2), check_spawn_snake)
     end
+
+    inst:DoTaskInTime(5 + (math.random() * 2), check_spawn_snake)
 end
 
 local function createbush(name, inspectname, berryname, master_postinit)

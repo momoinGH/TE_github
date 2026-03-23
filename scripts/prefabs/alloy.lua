@@ -24,149 +24,58 @@ local function OnEntityWake(inst)
     end
 end
 
-local function fn()
-    local inst = CreateEntity()
+local function MakeMetal(name, build)
+    local function fn()
+        local inst = CreateEntity()
 
-    inst.entity:AddNetwork()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddPhysics()
-    inst.entity:AddSoundEmitter()
+        inst.entity:AddNetwork()
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
+        inst.entity:AddPhysics()
+        inst.entity:AddSoundEmitter()
 
-    MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)
+        MakeInventoryPhysics(inst)
+        MakeInventoryFloatable(inst)
 
-    inst.pickupsound = "metal"
+        inst.pickupsound = "metal"
 
-    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-    inst.AnimState:SetBank("alloy")
-    inst.AnimState:SetBuild("alloy")
-    inst.AnimState:PlayAnimation("idle")
+        inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+        inst.AnimState:SetBank("alloy")
+        inst.AnimState:SetBuild(build)
+        inst.AnimState:PlayAnimation("idle")
 
-    inst.entity:SetPristine()
+        inst:AddTag("molebait")
+        inst:AddTag("scarerbait")
 
-    if not TheWorld.ismastersim then
+        inst.entity:SetPristine()
+
+        if not TheWorld.ismastersim then
+            return inst
+        end
+
+        inst:AddComponent("edible")
+        inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
+        inst.components.edible.hungervalue = 2
+
+        inst:AddComponent("tradable")
+        inst:AddComponent("inspectable")
+        inst:AddComponent("stackable")
+        inst:AddComponent("inventoryitem")
+        inst:AddComponent("bait")
+
+        inst:AddComponent("fuel")
+        inst.components.fuel.fueltype = FUELTYPE.LIVINGARTIFACT
+        inst.components.fuel.fuelvalue = 20
+
+        shine(inst)
+        inst.OnEntityWake = OnEntityWake
+
         return inst
     end
 
-    inst:AddTag("molebait")
-    inst:AddTag("scarerbait")
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
-    inst.components.edible.hungervalue = 2
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("stackable")
-
-    inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("bait")
-
-    inst:AddComponent("fuel")
-    inst.components.fuel.fueltype = FUELTYPE.LIVINGARTIFACT
-    inst.components.fuel.fuelvalue = 20
-
-    shine(inst)
-    inst.OnEntityWake = OnEntityWake
-
-    return inst
+    return Prefab(name, fn, assets)
 end
 
-local function fn2()
-    local inst = CreateEntity()
-
-    inst.entity:AddNetwork()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddPhysics()
-
-    MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)
-
-    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-    inst.AnimState:SetBank("alloy")
-    inst.AnimState:SetBuild("alloygold")
-    inst.AnimState:PlayAnimation("idle")
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
-    inst.components.edible.hungervalue = 2
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("stackable")
-
-    inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("bait")
-
-    inst:AddTag("molebait")
-    inst:AddTag("scarerbait")
-
-    shine(inst)
-    inst.OnEntityWake = OnEntityWake
-
-    return inst
-end
-
-local function fn3()
-    local inst = CreateEntity()
-
-    inst.entity:AddNetwork()
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddPhysics()
-
-    MakeInventoryPhysics(inst)
-    MakeInventoryFloatable(inst)
-
-    inst.AnimState:SetBank("alloy")
-    inst.AnimState:SetBuild("alloystone")
-    inst.AnimState:PlayAnimation("idle")
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
-    inst.components.edible.hungervalue = 2
-
-    inst:AddComponent("tradable")
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("stackable")
-
-    inst:AddComponent("inventoryitem")
-
-    inst:AddComponent("bait")
-
-    inst:AddTag("molebait")
-    inst:AddTag("scarerbait")
-
-    shine(inst)
-    inst.OnEntityWake = OnEntityWake
-
-    return inst
-end
-
-return Prefab("alloy", fn, assets),
-    Prefab("goldenbar", fn2, assets),
-    Prefab("stonebar", fn3, assets)
+return MakeMetal("alloy", "alloy"),
+    MakeMetal("goldenbar", "alloygold"),
+    MakeMetal("stonebar", "alloystone")

@@ -42,7 +42,7 @@ PrefabFiles = {
     "sw_porto",              --一堆套装
     "sw_birds",              --鸟
     "obsidianaxe",           --黑曜石斧
-    "armor_obsidian",        --黑曜石甲
+    "armorobsidian",         --黑曜石甲
     "meteor_impact",         --地上坑洞特效
     "dug_cofeecactus",       --植物根物品
     "snake",                 --蛇

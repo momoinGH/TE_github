@@ -53,7 +53,7 @@ PrefabFiles = {
     "pedestal_key",            --皇家画廊钥匙
     "adult_flytrap",           --利齿捕蝇草
     "alloy",                   --合金
-    "aloe",                    --芦荟
+    "aloe_planted",            --芦荟
     "ancient_herald",          --远古先驱
     "ancient_hulk",            --远古铁巨人
     "ancient_hulk_orb",        --铁巨人的能量弹

@@ -326,5 +326,5 @@ local function fn(Sim)
 	return inst
 end
 
-return Prefab("bandittreasure", fn, assets, prefabs),
+return Prefab("bandittreasure", fn, assets),
 	Prefab("banditmap", messagebottlefn, assets)

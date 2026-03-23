@@ -1,4 +1,5 @@
 -- 修复父类定义props子类没定义props时报错的问题，初始化时在__newindex(t, k, v)函数里会报错
+-- 这里是改为子类会继承父类的props，不知道会有什么影响
 local OldClass = Class
 GLOBAL.Class = function(base, _ctor, props, ...)
     if type(base) == 'table' and base._tro_props then
