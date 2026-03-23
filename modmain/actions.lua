@@ -143,35 +143,26 @@ Constructor.AddAction(nil, "FIX", STRINGS.ACTIONS.FIX, function(act)
     end
 end)
 
-Constructor.AddAction({ priority = 9, rmb = true, distance = 20, mount_valid = false },
-    "TIRO",
-    STRINGS.ACTIONS.TIRO,
-    function(act)
-        if act.doer ~= nil and act.doer:HasTag("ironlord") then
-            return true
-        end
+Constructor.AddAction({ priority = 9, rmb = true, distance = 20, mount_valid = false }, "TIRO", STRINGS.ACTIONS.TIRO, function(act)
+    if act.doer ~= nil and act.doer:HasTag("ironlord") then
+        return true
     end
+end
 )
 
 ----------------------------------------------------------------------------------------------------
 
-
-
-
 -- 收回
-Constructor.AddAction({ priority = 11, rmb = true, distance = 4, mount_valid = false },
-    "TRO_DISMANTLE",
-    STRINGS.ACTIONS.TRO_DISMANTLE,
-    function(act)
-        if act.target ~= nil and
-            act.target.components.tro_portablestructure ~= nil and
-            not (act.target.components.burnable ~= nil and act.target.components.burnable:IsBurning()) then
-            if act.target.candismantle and not act.target:candismantle() then
-                return false
-            end
+Constructor.AddAction({ priority = 11, rmb = true, distance = 4, mount_valid = false }, "TRO_DISMANTLE", STRINGS.ACTIONS.TRO_DISMANTLE, function(act)
+    if act.target ~= nil and
+        act.target.components.tro_portablestructure ~= nil and
+        not (act.target.components.burnable ~= nil and act.target.components.burnable:IsBurning()) then
+        if act.target.candismantle and not act.target:candismantle() then
+            return false
         end
-        return act.target.components.tro_portablestructure:Dismantle(act.doer)
     end
+    return act.target.components.tro_portablestructure:Dismantle(act.doer)
+end
 )
 
 -- 上岸

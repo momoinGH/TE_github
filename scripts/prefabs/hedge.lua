@@ -10,6 +10,7 @@ local prefabs =
 {
     "clippings",
     "collapse_small",
+    "robot_leaf_fx"
 }
 
 
@@ -59,7 +60,7 @@ end
 
 local function GetGrowTime(inst)
     -- return TUNING.TOTAL_DAY_TIME / 2 + math.random() * TUNING.TOTAL_DAY_TIME
-    return 5
+    return 5 --TODO test
 end
 
 local stages = {

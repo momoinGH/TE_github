@@ -86,6 +86,13 @@ function EntityScript:IsInFrostisLandArea()
     return tile_id == WORLD_TILES.ICELAND or tile_id == WORLD_TILES.SNOWLAND
 end
 
+function EntityScript:IsInWindyArea()
+    local tile_id = TheWorld.Map:GetTileAtPoint(self.Transform:GetWorldPosition())
+    return tile_id == WORLD_TILES.WINDY
+end
+
+----------------------------------------------------------------------------------------------------
+
 -- 获取玩家身上的小船
 function EntityScript:TroGetSWBoat()
     if TheWorld.ismastersim then

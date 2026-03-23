@@ -1,11 +1,12 @@
+--大脚
 local BigFooter = Class(function(self, inst)
     self.inst = inst
 
     self.directions = {
-        90, --right to left
-        -90, --left to right
+        90,   --right to left
+        -90,  --left to right
         -135, --bottom left to top right
-        -45 --top left to bottom right
+        -45   --top left to bottom right
     }
 
     self.footRotations = {

@@ -185,7 +185,7 @@ function TroSpawnDropItem(inst, item, count, target)
                 LaunchAt(product, inst, target, 1, 4, .5)
             else
                 if product.components.inventoryitem then
-                    product.components.inventoryitem:OnDropped()
+                    product.components.inventoryitem:OnDropped(true)
                 end
             end
         end

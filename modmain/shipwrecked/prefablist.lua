@@ -199,8 +199,6 @@ PrefabFiles = {
     "livingjungletree",     --中规中矩的丛林树
     "berrybush2_snake",     --有蛇的浆果丛
     "lavapondbig",          --大熔岩池
-    "bigfoot",              --大脚
-    "bell",                 --远古铃铛
     "sweet_potato_planted", --甘薯
     "tropicalfan",          --热带羽扇
     "sand_castle",          --沙堡

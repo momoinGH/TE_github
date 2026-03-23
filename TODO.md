@@ -8,10 +8,7 @@
 很多地方通过地皮来判断玩家在什么区域，最好换成inst:IsInxxArea()方法
 
 
-
-用region_id隔开、not_mainland标签
-
+hedge好像剪了一次就不再长了
 
 
-
-哈姆雷特不要生成卵石路
+-- scripts/prefabs/glowfly.lua

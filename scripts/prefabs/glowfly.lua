@@ -1,9 +1,7 @@
 require("brains/mosquitobrain")
 require "stategraphs/SGglowfly"
 
-local GLOWFLY_COCOON_HEALTH = 300
 local SPRING_COMBAT_MOD = 1.33
-local SEG_TIME = 30
 
 local assets =
 {
@@ -70,12 +68,6 @@ local function fadeout(inst)
     end
 end
 
-local function onnear(inst)
-    if inst:HasTag("readytohatch") then
-        inst:DoTaskInTime(5 + math.random() * 3, function() inst:PushEvent("hatch") end)
-    end
-end
-
 local function changetococoon(inst, forced)
     local pos = inst:GetPosition()
     local bug = SpawnPrefab("glowfly_cocoon")
@@ -137,32 +129,9 @@ local function OnWorked(inst, worker)
     end
 end
 
-local function OnWake(inst)
-    if not inst.components.inventoryitem:IsHeld() and not inst:HasTag("cocoon") then
-        inst.SoundEmitter:PlaySound(inst.sounds.buzz, "buzz")
-    end
-end
-
-local function OnSleep(inst)
-    inst.SoundEmitter:KillSound("buzz")
-end
-
-
 local function OnPickedUp(inst)
     inst.SoundEmitter:KillSound("buzz")
     inst.components.lootdropper:SetChanceLootTable("glowflyinventory")
-end
-
-local function KillerRetarget(inst)
-    local range = 20
-    if TheWorld.state.isspring then
-        range = range * SPRING_COMBAT_MOD
-    end
-    local notags = { "FX", "NOCLICK", "INLIMBO", "insect" }
-    local yestags = { "character", "animal", "monster" }
-    return FindEntity(inst, range, function(guy)
-        return inst.components.combat:CanTarget(guy)
-    end, nil, notags, yestags)
 end
 
 local function OnAttacked(inst, data)
@@ -197,14 +166,6 @@ end
 
 local function OnEntitySleep(inst)
     inst.SoundEmitter:KillSound("buzz")
-end
-
-local function checkRemoveGlowfly(inst)
-    local jogador = GetClosestInstWithTag("player", inst, 80)
-    if not inst:HasTag("cocoonspawn") and not jogador then
-        --		print("REMOVING GLOWFLY, TOO FAR AWAY")
-        inst:Remove()
-    end
 end
 
 local function OnRemoveEntity(inst)
@@ -282,52 +243,7 @@ local function ShouldSleep(inst)
             or (TheWorld:HasTag("cave") and TheWorld.state.iscavenight and (not watchlight or not inst:IsInLight())))
 end
 
-local function fn(Sim)
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddLightWatcher()
-    inst.entity:AddDynamicShadow()
-    inst.DynamicShadow:SetSize(.8, .5)
-    inst.Transform:SetSixFaced()
-    inst.entity:AddNetwork()
-
-    inst.Transform:SetScale(0.6, 0.6, 0.6)
-
-    ----------
-    inst:AddTag("insect")
-    inst:AddTag("flying")
-    inst:AddTag("animal")
-    inst:AddTag("smallcreature")
-    inst:AddTag("butterfly")
-    inst:AddTag("glowfly")
-
-    local physics = inst.entity:AddPhysics()
-    physics:SetMass(1)
-    physics:SetCapsule(0.5, 1)
-    inst.Physics:SetFriction(0)
-    inst.Physics:SetDamping(5)
-    inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
-    inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.GROUND)
-    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-
-    inst.AnimState:SetBank("lantern_fly")
-    inst.AnimState:SetBuild("lantern_fly")
-    inst.AnimState:PlayAnimation("idle")
-    inst.AnimState:SetRayTestOnBB(true);
-
-    local light = inst.entity:AddLight()
-    light:SetFalloff(.7)
-    light:SetIntensity(INTENSITY)
-    light:SetRadius(2)
-    light:SetColour(120 / 255, 120 / 255, 120 / 255)
-    light:Enable(false)
-
-    inst:AddComponent("fader")
-
+function fn()
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -335,85 +251,6 @@ local function fn(Sim)
     end
 
 
-    inst.sounds = sounds
-
-    inst.OnEntityWake = OnEntityWake
-    inst.OnEntitySleep = OnEntitySleep
-
-    inst.OnRemoveEntity = OnRemoveEntity
-
-    inst.OnBorn = OnBorn
-
-    inst:AddComponent("inventoryitem")
-    --inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
-    --inst.components.inventoryitem:SetOnPutInInventoryFn(OnPickedUp)
-    inst.components.inventoryitem.nobounce = true
-    inst.components.inventoryitem.canbepickedup = false
-    inst.components.inventoryitem.canbepickedupalive = true
-
-    inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-    inst.components.locomotor:SetTriggersCreep(false)
-    inst.components.locomotor.walkspeed = 6
-    inst.components.locomotor.runspeed = 8
-
-    inst:SetStateGraph("SGglowfly")
-    ---------------------
-
-    inst:AddComponent("pollinator")
-    ---------------------
-
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable('glowfly')
-
-    inst:AddComponent("tradable")
-
-    inst:AddTag("cattoyairborne")
-
-    ------------------
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.NET)
-    inst.components.workable:SetWorkLeft(1)
-    inst.components.workable:SetOnFinishCallback(OnWorked)
-
-    MakeSmallBurnableCharacter(inst, "upper_body", Vector3(0, -1, 1))
-    MakeTinyFreezableCharacter(inst, "upper_body", Vector3(0, -1, 1))
-
-    ------------------
-    inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(1)
-
-    MakeFeedableSmallLivestock(inst, TUNING.TOTAL_DAY_TIME * 2, OnPickedUp, OnDropped)
-    ------------------
-    inst:AddComponent("combat")
-    inst.components.combat.hiteffectsymbol = "body"
-
-    ------------------
-    inst:AddComponent("sleeper")
-    inst.components.sleeper:SetSleepTest(ShouldSleep)
-
-    ------------------
-    inst:AddComponent("knownlocations")
-
-    ------------------
-    inst:AddComponent("inspectable")
-    inst.components.inspectable.getstatus = inspect
-
-    inst:SetBrain(require("brains/glowflybrain"))
-
-    inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("death", OnKilled)
-
-    inst:WatchWorldState("isday", updatelight)
-    inst:WatchWorldState("isnight", updatelight)
-    inst:WatchWorldState("isdusk", updatelight)
-
-    inst.begincocoonstage = begincocoonstage
-    inst.changetococoon = changetococoon
-    inst.setcocoontask = setcocoontask
-    inst:DoTaskInTime(0.5, function() updatelight(inst) end)
-
-    --	inst:DoPeriodicTask(5, function() checkRemoveGlowfly(inst) end)
 
     return inst
 end
@@ -427,20 +264,7 @@ local function spawnRabidBeetle(inst)
     end
 end
 
-local function OnKilledcocon(inst)
-    if inst.components.fader then
-        inst.components.fader:Fade(INTENSITY, 0, .75 + math.random() * 1, function(v) inst.Light:SetIntensity(v) end,
-            function() inst.Light:Enable(false) end)
-    end
-    inst.AnimState:PlayAnimation("cocoon_idle_pst")
-    inst.AnimState:PushAnimation("cocoon_death")
-end
-
-local function OnAttackedcocon(inst, data)
-    inst.AnimState:PlayAnimation("cocoon_hit")
-end
-
-local function fn2(Sim)
+local function fn2()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -498,9 +322,6 @@ local function fn2(Sim)
 
     inst:AddComponent("inspectable")
 
-    --    inst:ListenForEvent("death", OnKilledcocon)
-    --	inst:ListenForEvent("attacked", OnAttackedcocon)
-
     inst:DoTaskInTime(math.random(50, 200), function(inst)
         inst.AnimState:PlayAnimation("cocoon_idle_pst")
         spawnRabidBeetle(inst)
@@ -512,5 +333,77 @@ local function fn2(Sim)
     return inst
 end
 
-return Prefab("glowfly", fn, assets, prefabs),
+----------------------------------------------------------------------------------------------------
+
+local function CommonPost(inst)
+    inst.entity:AddLightWatcher()
+
+    inst.AnimState:SetBuild("lantern_fly")
+    inst.AnimState:SetBank("lantern_fly")
+    inst.AnimState:PlayAnimation("idle")
+
+    inst.Transform:SetSixFaced()
+    inst.Transform:SetScale(0.6, 0.6, 0.6)
+
+    inst:AddTag("glowfly")
+
+    local light = inst.entity:AddLight()
+    light:SetFalloff(.7)
+    light:SetIntensity(INTENSITY)
+    light:SetRadius(2)
+    light:SetColour(120 / 255, 120 / 255, 120 / 255)
+    light:Enable(false)
+end
+
+local brain = require("brains/glowflybrain")
+
+local function MasterPost(inst)
+    inst:SetStateGraph("SGglowfly")
+
+    inst:AddComponent("fader")
+
+    inst.components.lootdropper:SetChanceLootTable("glowfly")
+
+    inst.sounds = sounds
+
+    inst.OnEntityWake = OnEntityWake
+    inst.OnEntitySleep = OnEntitySleep
+
+    inst.OnRemoveEntity = OnRemoveEntity
+
+    inst.OnBorn = OnBorn
+
+    inst.components.locomotor.walkspeed = 6
+    inst.components.locomotor.runspeed = 8
+
+    MakeSmallBurnableCharacter(inst, "upper_body", Vector3(0, -1, 1))
+    MakeTinyFreezableCharacter(inst, "upper_body", Vector3(0, -1, 1))
+
+    MakeFeedableSmallLivestock(inst, TUNING.TOTAL_DAY_TIME * 2, OnPickedUp, OnDropped)
+
+    inst.components.combat.hiteffectsymbol = "body"
+
+    inst:AddComponent("sleeper")
+    inst.components.sleeper:SetSleepTest(ShouldSleep)
+
+    ------------------
+    inst.components.inspectable.getstatus = inspect
+
+    inst:SetBrain(brain)
+
+    inst:ListenForEvent("attacked", OnAttacked)
+    inst:ListenForEvent("death", OnKilled)
+
+    inst:WatchWorldState("isday", updatelight)
+    inst:WatchWorldState("isnight", updatelight)
+    inst:WatchWorldState("isdusk", updatelight)
+
+    inst.begincocoonstage = begincocoonstage
+    inst.changetococoon = changetococoon
+    inst.setcocoontask = setcocoontask
+    inst:DoTaskInTime(0.5, function() updatelight(inst) end)
+end
+
+local MakeButterfly = require("prefabs/tro_butterflydefs").MakeButterfly
+return MakeButterfly("glowfly", CommonPost, MasterPost, assets, prefabs),
     Prefab("glowfly_cocoon", fn2, assets, prefabs)

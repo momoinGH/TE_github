@@ -1,17 +1,17 @@
 local assets =
 {
-    Asset("ANIM", "anim/goddess_butterfly_basic.zip"),
+    Asset("ANIM", "anim/butterfly_tropical_basic.zip"),
 }
 
 local prefabs =
 {
-    "goddess_butterflywings",
+    "butterflywings",
     "butter",
-    "flower",
+    "planted_flower",
 }
 
 local function CommonPost(inst)
-    inst.AnimState:SetBuild("goddess_butterfly_basic")
+    inst.AnimState:SetBuild("butterfly_tropical_basic")
     inst.AnimState:SetBank("butterfly")
     inst.AnimState:PlayAnimation("idle")
 end
@@ -25,11 +25,11 @@ local function MasterPost(inst)
     MakeTinyFreezableCharacter(inst, "butterfly_body")
 
     inst.components.lootdropper:AddRandomLoot("butter", 0.1)
-    inst.components.lootdropper:AddRandomLoot("goddess_butterflywings", 5)
+    inst.components.lootdropper:AddRandomLoot("butterfly_tropical_wings", 5)
     inst.components.lootdropper.numrandomloot = 1
 
     inst:SetBrain(brain)
 end
 
 local MakeButterfly = require("prefabs/tro_butterflydefs").MakeButterfly
-return MakeButterfly("goddess_butterfly", CommonPost, MasterPost, assets, prefabs)
+return MakeButterfly("butterfly_tropical", CommonPost, MasterPost, assets, prefabs)
