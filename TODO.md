@@ -12,3 +12,36 @@ hedge好像剪了一次就不再长了
 
 
 -- scripts/prefabs/glowfly.lua
+
+
+
+
+heatrock
+rock_petrified_tree_short
+spiderden
+wall_
+flower_evil
+firesuppressor_glow
+penguin_ice
+rock_petrified_tree_tall
+lighter
+pocketwatch_heal
+schoolherd_
+spidereggsack
+spiderden_3
+spiderden_2
+rock1
+rock_petrified_tree_old
+rock_petrified_tree
+moonglass_rock
+rock_flintless_low
+rock_flintless_med
+rock_flintless
+rock2
+crabking_claw_shadow
+heatrocklight
+buff_
+butterflywings
+firesuppressor
+crabking_claw
+lava_pond_rock

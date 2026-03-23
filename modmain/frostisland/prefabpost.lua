@@ -1,5 +1,6 @@
 modimport "modmain/frostisland/prefabs/koalefant_summer.lua" --象生成
-
+modimport "modmain/frostisland/prefabs/rock_ice.lua"
+modimport "modmain/frostisland/prefabs/rabbit.lua"
 
 
 

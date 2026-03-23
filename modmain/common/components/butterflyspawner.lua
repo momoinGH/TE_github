@@ -9,10 +9,12 @@ AddComponentPostInit("butterflyspawner", function(self, inst)
         ScheduleSpawn = OnPlayerJoined and Hooks.FindUpvalue(OnPlayerJoined, "ScheduleSpawn")
     end
     if ScheduleSpawn then
-        SpawnButterflyForPlayer = Hooks.GetUpvalue(ScheduleSpawn, "SpawnButterflyForPlayer")
-        _scheduledtasks = Hooks.GetUpvalue(ScheduleSpawn, "_scheduledtasks")
+        SpawnButterflyForPlayer = Hooks.FindUpvalue(ScheduleSpawn, "SpawnButterflyForPlayer")
+        _scheduledtasks = Hooks.FindUpvalue(ScheduleSpawn, "_scheduledtasks")
     end
-    if not (SpawnButterflyForPlayer and _scheduledtasks) then
+
+    local GetSpawnPoint = SpawnButterflyForPlayer and Hooks.FindUpvalue(SpawnButterflyForPlayer, "GetSpawnPoint")
+    if not (SpawnButterflyForPlayer and _scheduledtasks and GetSpawnPoint) then
         print("没有hook到butterflyspawner组件的ScheduleSpawn和_scheduledtasks，无法根据地形改变生成的蝴蝶")
         return
     end

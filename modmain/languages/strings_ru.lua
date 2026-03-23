@@ -4696,7 +4696,7 @@ STRINGS.NAMES.APORKALYPSE_FASTFORWARD_PLATE = "Календарь свинопо
 STRINGS.NAMES.APORKALYPSE_CLOCK1 = "Календарь свинопокалипсиса"
 STRINGS.NAMES.APORKALYPSE_CLOCK2 = "Календарь свинопокалипсиса"
 STRINGS.NAMES.APORKALYPSE_CLOCK3 = "Календарь свинопокалипсиса"
-STRINGS.NAMES.POOP2 = "Дерьмовый шарик"
+STRINGS.NAMES.WILBUR_POOP = "Дерьмовый шарик"
 STRINGS.NAMES.BRAMBLE_BULB = "Ежевичная луковица"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BRAMBLE_BULB = "Сладкая луковичка. Наверняка для чего-нибудь пригодится."
 
