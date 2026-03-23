@@ -1,3 +1,6 @@
+package.loaded["prefabs/oceanfish"] = nil --如果之前require过的话就清除记录
+
+
 local SCHOOL_SIZE = {
     TINY = { min = 1, max = 3 },
     SMALL = { min = 2, max = 5 },
@@ -106,38 +109,38 @@ local DIET = {
 }
 
 -- crokpot values
-COOKER_INGREDIENT_SMALL = { meat = .5, fish = .5 }
-COOKER_INGREDIENT_MEDIUM = { meat = 1, fish = 1 }
-COOKER_INGREDIENT_MEDIUM_ICE = { meat = 1, fish = 1, frozen = 1 }
+local COOKER_INGREDIENT_SMALL = { meat = .5, fish = .5 }
+local COOKER_INGREDIENT_MEDIUM = { meat = 1, fish = 1 }
+local COOKER_INGREDIENT_MEDIUM_ICE = { meat = 1, fish = 1, frozen = 1 }
 
-EDIBLE_VALUES_SMALL_MEAT = {
+local EDIBLE_VALUES_SMALL_MEAT = {
     health = TUNING.HEALING_TINY,
     hunger = TUNING.CALORIES_SMALL,
     sanity = 0,
     foodtype = FOODTYPE.MEAT,
 }
-EDIBLE_VALUES_MEDIUM_MEAT = {
+local EDIBLE_VALUES_MEDIUM_MEAT = {
     health = TUNING.HEALING_MEDSMALL,
     hunger = TUNING.CALORIES_MED,
     sanity = 0,
     foodtype =
         FOODTYPE.MEAT
 }
-EDIBLE_VALUES_SMALL_VEGGIE = {
+local EDIBLE_VALUES_SMALL_VEGGIE = {
     health = TUNING.HEALING_SMALL,
     hunger = TUNING.CALORIES_SMALL,
     sanity = 0,
     foodtype =
         FOODTYPE.VEGGIE
 }
-EDIBLE_VALUES_MEDIUM_VEGGIE = {
+local EDIBLE_VALUES_MEDIUM_VEGGIE = {
     health = TUNING.HEALING_SMALL,
     hunger = TUNING.CALORIES_MED,
     sanity = 0,
     foodtype =
         FOODTYPE.VEGGIE
 }
-EDIBLE_VALUES_PLANTMEAT = {
+local EDIBLE_VALUES_PLANTMEAT = {
     health = 0,
     hunger = TUNING.CALORIES_SMALL,
     sanity = -TUNING.SANITY_SMALL,
@@ -611,7 +614,7 @@ FISH_DEFS.oceanfish_small_15 = {
     bank = "whaleblueocean",
     build = "whaleblueocean",
     oceanbuild = "oceanfish_small_5",
-    tamanho = 2,
+    inv_scale = 2,
     weight_min = 48.34,
     weight_max = 60.30,
 
@@ -798,7 +801,7 @@ FISH_DEFS.oceanfish_small_19 = {
     build = "swordfishjocean",
     oceanbuild = "oceanfish_small_5",
     peixeespada = true,
-    tamanho = 1.3,
+    inv_scale = 1.3,
     weight_min = 270.32,
     weight_max = 320.97,
 
@@ -846,7 +849,7 @@ FISH_DEFS.oceanfish_small_20 = {
     build = "swordfishjocean2",
     oceanbuild = "oceanfish_small_5",
     peixeespada = true,
-    tamanho = 1.3,
+    inv_scale = 1.3,
     weight_min = 140.74,
     weight_max = 187.52,
 
@@ -894,7 +897,7 @@ FISH_DEFS.oceanfish_small_21 = {
     build = "sharxocean",
     oceanbuild = "oceanfish_small_5",
     sharx = true,
-    tamanho = 1.5,
+    inv_scale = 1.5,
     weight_min = 175.72,
     weight_max = 249.12,
 
@@ -989,3 +992,23 @@ SCHOOL_WEIGHTS[SEASONS.SPRING][WORLD_TILES.OCEAN_COASTAL].oceanfish_small_7 = SC
 SCHOOL_WEIGHTS[SEASONS.AUTUMN][WORLD_TILES.OCEAN_WATERLOG].oceanfish_small_6 = SCHOOL_COMMON
 SCHOOL_WEIGHTS[SEASONS.SPRING][WORLD_TILES.OCEAN_WATERLOG].oceanfish_small_7 = SCHOOL_COMMON
 SCHOOL_WEIGHTS[SEASONS.SUMMER][WORLD_TILES.OCEAN_SWELL].oceanfish_small_8 = SCHOOL_UNCOMMON
+
+
+----------------------------------------------------------------------------------------------------
+
+-- 扩展表的字段
+for _, data in pairs(FISH_DEFS) do
+    if data.inv_scale then
+        AddPrefabPostInit(data.prefab .. "_inv", function(inst)
+            inst.Transform:SetScale(data.inv_scale, data.inv_scale, data.inv_scale)
+        end)
+    end
+
+    AddPrefabPostInit(data.prefab, function(inst)
+        if not TheWorld.ismastersim then return end
+
+        if data.oceanbuild then
+            inst:SetStateGraph("SGoceanfishsw")
+        end
+    end)
+end

@@ -1,14 +1,14 @@
 local rock_ice_fn = require("prefabs/rock_ice").fn
 local TryStageChange = Hooks.FnDecorator(rock_ice_fn, "ontimerdone", "TryStageChange")
 if not TryStageChange then
-    print("获取rock_ice预制件的TryStageChange函数失败，冰岛无法修改迷你冰川生成。")
+    print("获取rock_ice预制件的TryStageChange函数失败，无法修改迷你冰川季节影响。")
     return
 end
 
 local SetStage = Hooks.FnDecorator(TryStageChange, "SetStage")
 local RescheduleTimer = Hooks.FnDecorator(TryStageChange, "RescheduleTimer")
 if not (SetStage and RescheduleTimer) then
-    print("获取rock_ice预制件的SetStage和RescheduleTimer函数失败，冰岛无法修改迷你冰川生成。")
+    print("获取rock_ice预制件的SetStage和RescheduleTimer函数失败，无法修改迷你冰川季节影响。")
     return
 end
 
@@ -24,18 +24,9 @@ local function NewTryStageChange(inst)
     end
 
     local pct = TheWorld.state.seasonprogress
-    if inst:IsInFrostisLandArea() then --冰岛一直冬天！
+    if inst:TroIsWinter() then --冬天
         SetStage(inst, "tall", "grow")
-    elseif TheWorld.state.isspring then
-        SetStage(
-            inst,
-            (pct < inst.threshold1 and "tall") or
-            (pct < inst.threshold2 and "medium") or
-            (pct < inst.threshold3 and "short") or
-            "empty",
-            "melt"
-        )
-    elseif TheWorld.state.issummer then
+    elseif inst:TroIsSummer() then
         --if pct > .1 then
         SetStage(inst, "dryup", "melt")
         --end
@@ -48,8 +39,16 @@ local function NewTryStageChange(inst)
             "tall",
             "grow"
         )
-    elseif TheWorld.state.iswinter then
-        SetStage(inst, "tall", "grow")
+    else
+        --春天和其他季节的mod地形为春天
+        SetStage(
+            inst,
+            (pct < inst.threshold1 and "tall") or
+            (pct < inst.threshold2 and "medium") or
+            (pct < inst.threshold3 and "short") or
+            "empty",
+            "melt"
+        )
     end
 end
 Hooks.SetUpvalue(rock_ice_fn, "ontimerdone", "TryStageChange", NewTryStageChange)

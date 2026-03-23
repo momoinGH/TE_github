@@ -1,3 +1,8 @@
+modimport "modmain/underwater/components/burnable.lua"
+
+
+
+
 AddPrefabPostInitAny(function(inst)
     if not TheWorld.ismastersim then return end
 

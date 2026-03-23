@@ -12,22 +12,7 @@ modimport "modmain/room/components/map"
 
 
 ----------------------------------------------------------------------------------------------------
-Hooks.FnDecorator(GLOBAL, "GetTemperatureAtXZ", nil, function(retTab, x, z)
-    local val = next(retTab)
-    if val > TUNING.WILDFIRE_THRESHOLD then
-        -- 防止室内野火
-        if TheWorld.Map:TroIsWorldOut(x, 0, z) then
-            return { TUNING.WILDFIRE_THRESHOLD }
-        end
 
-        local player = FindClosestPlayerInRangeSq(x, 0, z, 400)
-        if player and player.components.areaaware and player.components.areaaware:CurrentlyInTag("frost") then
-            return { TUNING.WILDFIRE_THRESHOLD }
-        end
-    end
-
-    return retTab
-end)
 ----------------------------------------------------------------------------------------------------
 --室内避雨？
 local function ShelteredOnUpdateBefore(self)

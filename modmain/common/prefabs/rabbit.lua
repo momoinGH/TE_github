@@ -6,35 +6,38 @@ local IsNormalRabbit = OnIsWinter and Hooks.FindUpvalue(OnIsWinter, "IsNormalRab
 local BecomeRabbit = OnIsWinter and Hooks.FindUpvalue(OnIsWinter, "BecomeRabbit")
 
 if not (OnIsWinter and IsForcedNightmare and IsWinterRabbit and BecomeWinterRabbit and IsNormalRabbit and BecomeRabbit) then
-    print("rabbit预制体求上值失败，冰岛不再修改兔子")
+    print("rabbit预制体求上值失败，不再修改兔子受到的季节影响")
     return
 end
 
-local function OnEntityWakeBefore(inst)
-    if not inst:IsInFrostisLandArea() then
-        return
-    end
-
-    -- inst:WatchWorldState("iswinter", OnIsWinter) --不监了，这兔子出不了冰岛，一直是冬天
+local function NewOnIsWinter(inst)
     if inst.task ~= nil then
         inst.task:Cancel()
         inst.task = nil
     end
     if not IsForcedNightmare(inst) then
-        if --[[TheWorld.state.iswinter]] true then --一直是冬天
+        if inst:TroIsWinter() then
             if not IsWinterRabbit(inst) then
-                BecomeWinterRabbit(inst)
+                inst.task = inst:DoTaskInTime(math.random() * .5, BecomeWinterRabbit)
             end
         elseif not IsNormalRabbit(inst) then
-            BecomeRabbit(inst)
+            inst.task = inst:DoTaskInTime(math.random() * .5, BecomeRabbit)
         end
     end
+end
 
-    return nil, true
+local function OnEntityWakeAfter(retTab, inst)
+    inst:StopWatchingWorldState("iswinter", OnIsWinter)
+    inst:WatchWorldState("iswinter", NewOnIsWinter)
+end
+
+local function OnEntitySleepBefore(inst)
+    inst:StopWatchingWorldState("iswinter", NewOnIsWinter)
 end
 
 AddPrefabPostInit("rabbit", function(inst)
     if not TheWorld.ismastersim then return end
 
-    Hooks.FnDecorator(inst, "OnEntityWake", OnEntityWakeBefore)
+    Hooks.FnDecorator(inst, "OnEntityWake", nil, OnEntityWakeAfter)
+    Hooks.FnDecorator(inst, "OnEntitySleep", OnEntitySleepBefore)
 end)

@@ -39,13 +39,6 @@ local function OnIsFadedDirty(inst)
 end
 
 local function OnSnowLevel(inst, snowlevel)
-    local ex, ey, ez = inst.Transform:GetWorldPosition()
-    local map = TheWorld.Map
-    local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
-    if posicao == WORLD_TILES.SNOWLAND or posicao == WORLD_TILES.ICELAND then
-        snowlevel = 1
-    end
-
     if snowlevel > SNOW_THRESH then
         if inst.isfaded:value() then
             inst.isfaded:set(false)
@@ -59,11 +52,7 @@ end
 
 local function OnEntityWake(inst)
     inst:WatchWorldState("snowlevel", OnSnowLevel)
-    local ex, ey, ez = inst.Transform:GetWorldPosition()
-    local map = TheWorld.Map
-    local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
-
-    if TheWorld.state.snowlevel > SNOW_THRESH or posicao == WORLD_TILES.SNOWLAND or posicao == WORLD_TILES.ICELAND then
+    if TheWorld.state.snowlevel > SNOW_THRESH then
         inst.isfaded:set(false)
         inst.fadeval:set(0)
     else

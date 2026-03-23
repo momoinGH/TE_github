@@ -1,15 +1,7 @@
 local RoomUtils = require("tropical_utils/room_utils")
 require("components/map")
 
-local check_size = 1350
--- 判断是否在世界外面，一般世界外就是小房子
-function Map:TroIsWorldOut(x, y, z)
-    if math.abs(z) >= check_size or math.abs(x) >= check_size then
-        return true
-    else
-        return false
-    end
-end
+
 
 local last_rooms = {} --缓存，短时间内在一个房间附近求值的可能性较大
 function Map:TroGetRoomCenter(x, y, z)

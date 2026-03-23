@@ -9,17 +9,21 @@ require("map/storygen")
 -- 追加标签处理函数，每个自定义标签需要有一个处理函数
 -- 可用来判断room类型，也可用于areaaware:CurrentlyInTag判断玩家是否在某个区域
 local MapTags = {
-    "frost",       --冰岛区域
-    "hamlet",      --哈姆雷特区域
-    "shipwrecked", --海难区域
+    "frost",         --冰岛区域
+    "hamlet",        --哈姆雷特区域
+    "shipwrecked",   --海难区域
     "tropical",
-    "underwater",  --海底区域
+    "underwater",    --海底区域
     "folha",
-    "volcano",     --火山区域
+    "volcano",       --火山区域
 
-    "City1",       --城1
-    "City2",       --城2
-    "Canopy",      --树冠覆盖区域标签，玩家在这个区域顶部有树叶UI
+    "City1",         --城1
+    "City2",         --城2
+    "Canopy",        --树冠覆盖区域标签，玩家在这个区域顶部有树叶UI
+
+    "Always_Winter", --永远冬天，用于冰岛
+    "No_Winter",     --没有冬天，用于哈姆雷特、海难、海底这些地区
+    "No_Summer",     --永远春天
 }
 
 -- 全局标签，当世界生成时包含了含有该标签的room后，便可以通过GlobalTags判断是否包含了该room并拿到对应的task和room

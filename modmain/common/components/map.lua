@@ -23,6 +23,39 @@ Map.IsVolcanoAreaAtPoint = function(self, x, y, z)
     return node ~= nil
 end
 
+-- 判断这个位置是否是冬天
+Map.TroIsWinterAtPoint = function(self, x, y, z)
+    if TheWorld.state.iswinter then
+        return self:FindVisualNodeAtPoint(x, y, z, "No_Winter") == nil
+    else
+        return self:FindVisualNodeAtPoint(x, y, z, "Always_Winter") ~= nil
+    end
+end
+
+-- 判断这个位置是否是夏天
+Map.TroIsSummerAtPoint = function(self, x, y, z)
+    if self:FindVisualNodeAtPoint(x, y, z, "Always_Winter") then
+        return false
+    end
+    if TheWorld.state.issummer then
+        return self:FindVisualNodeAtPoint(x, y, z, "No_Summer") == nil
+    else
+        return false
+    end
+end
+
+local check_size = 1350
+-- 判断是否在世界外面，一般世界外就是小房子
+function Map:TroIsWorldOut(x, y, z)
+    if math.abs(z) >= check_size or math.abs(x) >= check_size then
+        return true
+    else
+        return false
+    end
+end
+
+----------------------------------------------------------------------------------------------------
+
 local _SetTile = Map.SetTile
 function Map:SetTile(x, y, tile, ...)
     local newtile

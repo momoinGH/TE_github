@@ -5,7 +5,7 @@ end
 modimport "modmain/hamlet/simutil"
 modimport "modmain/common/poisonable"
 modimport "modmain/hamlet/oinc.lua"             --呼噜币换算
-modimport "modmain/hamlet/beginaporkalypse.lua" --大灾变
+modimport "modmain/hamlet/aporkalypse.lua" --大灾变
 modimport "modmain/hamlet/farm_guard.lua"       --采摘农场的东西会被打
 
 

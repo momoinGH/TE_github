@@ -86,9 +86,36 @@ function EntityScript:IsInFrostisLandArea()
     return tile_id == WORLD_TILES.ICELAND or tile_id == WORLD_TILES.SNOWLAND
 end
 
+-- 大风平原区域
 function EntityScript:IsInWindyArea()
     local tile_id = TheWorld.Map:GetTileAtPoint(self.Transform:GetWorldPosition())
     return tile_id == WORLD_TILES.WINDY
+end
+
+-- 判断实体所在位置是否是冬天
+function EntityScript:TroIsWinter()
+    if self.components.areaaware then
+        if TheWorld.state.iswinter then
+            return not self.components.areaaware:CurrentlyInTag("No_Winter")
+        else
+            return self.components.areaaware:CurrentlyInTag("Always_Winter")
+        end
+    end
+    return TheWorld.Map:TroIsWinterAtPoint(self.Transform:GetWorldPosition())
+end
+
+function EntityScript:TroIsSummer()
+    if self.components.areaaware then
+        if self.components.areaaware:CurrentlyInTag("Always_Winter") then
+            return false
+        end
+        if TheWorld.state.issummer then
+            return not self.components.areaaware:CurrentlyInTag("No_Summer")
+        else
+            return false
+        end
+    end
+    return TheWorld.Map:TroIsSummerAtPoint(self.Transform:GetWorldPosition())
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -121,3 +148,18 @@ function EntityScript:TroInHamletFog()
     end
     return false
 end
+
+----------------------------------------------------------------------------------------------------
+
+-- 给雪等级事件回调封装一层，如果实体在冰岛那拿到的snowlevel值会是最大值
+Hooks.FnDecorator(EntityScript, "WatchWorldState", function(self, var, fn)
+    if var == "snowlevel" then
+        local new_fn = function(inst, snowlevel, ...)
+            if inst:IsInFrostisLandArea() then
+                snowlevel = 1
+            end
+            return fn(inst, snowlevel, ...)
+        end
+        return { self, var, new_fn }, true
+    end
+end)

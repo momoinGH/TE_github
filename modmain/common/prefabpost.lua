@@ -34,14 +34,14 @@ modimport "modmain/common/components/hounded" --猎犬袭击
 modimport "modmain/common/components/plantregrowth.lua"
 modimport "modmain/common/components/areaaware.lua"
 modimport "modmain/common/components/oar.lua"
-modimport "modmain/common/components/wavemanager.lua"      --给地皮加点波纹生成
-modimport "modmain/common/components/butterflyspawner.lua" --修改不同地形上的蝴蝶生成
-
+modimport "modmain/common/components/wavemanager.lua"          --给地皮加点波纹生成
+modimport "modmain/common/components/butterflyspawner.lua"     --修改不同地形上的蝴蝶生成
+modimport "modmain/common/components/temperatureoverrider.lua" --对气温的一些hook
 
 ----------------------------------------------------------------------------------------------------
 
 
-modimport "modmain/common/prefabs/oceanfishdef"
+modimport "modmain/common/prefabs/oceanfishdef" --定义新的鱼
 modimport "modmain/common/prefabs/player"
 --modimport "modmain/common/prefabs/player_classified"
 modimport "modmain/common/prefabs/world"
@@ -54,6 +54,11 @@ modimport "modmain/common/prefabs/mosquitosack.lua"
 modimport "modmain/common/prefabs/mushroom_farm.lua"
 modimport "modmain/common/prefabs/warningshadow.lua"
 modimport "modmain/common/prefabs/wobster.lua"
+modimport "modmain/common/prefabs/rabbit.lua"
+modimport "modmain/common/prefabs/koalefant.lua"
+modimport "modmain/common/prefabs/rock_ice.lua"
+modimport "modmain/common/prefabs/heatrock.lua"
+modimport "modmain/common/prefabs/penguin_ice.lua"
 
 
 

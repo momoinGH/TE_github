@@ -50,3 +50,6 @@ angry_at_player：仇恨玩家
 atdesk：猪人在桌子上趴着
 
 
+
+冰岛只有冬天，哈姆雷特、海难、海底没有夏天，提供了两个方法inst:TroIsWinter()和inst:TroIsSummer()来判断实体所处位置的季节，如果四季都要判断，建议把else留给春天的处理
+针对world的snowlevel事件进行了hook，实体如果监听了这个事件倒是能拿到带有地形判断后的snowlevel

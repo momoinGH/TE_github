@@ -42,6 +42,8 @@ debug文件定义了很多c_xxx函数，用于控制台调试
 默认开启了右键地图传送功能，可通过c_setmaprightteleport(false)关闭
 
 
+
+
 ]]
 
 
