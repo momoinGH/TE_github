@@ -59,8 +59,7 @@ local function onhit(inst)
 end
 
 local function GetGrowTime(inst)
-    -- return TUNING.TOTAL_DAY_TIME / 2 + math.random() * TUNING.TOTAL_DAY_TIME
-    return 5 --TODO test
+    return TUNING.TOTAL_DAY_TIME / 2 + math.random() * TUNING.TOTAL_DAY_TIME
 end
 
 local stages = {
@@ -92,8 +91,8 @@ local stages = {
             inst.components.shearable:SetWorkLeft(1)
         end,
         growfn = function(inst)
-            inst.AnimState:PlayAnimation("growth1to2")
-            inst.AnimState:PushAnimation("growth2", false)
+            inst.AnimState:PlayAnimation("growth2to3")
+            inst.AnimState:PushAnimation("growth3", false)
         end
     },
 }
@@ -102,6 +101,7 @@ local function OnShear(inst, data)
     local stage = inst.components.growable:GetStage()
     TroSpawnDropItem(inst, "clippings", stage - 1)
     inst.components.growable:SetStage(1)
+    inst.components.growable:StartGrowing()
     inst.AnimState:PlayAnimation("growth" .. stage .. "to1")
     inst.AnimState:PushAnimation("growth1", false)
 end
@@ -190,7 +190,7 @@ local function MakeHedge(name, data)
         inst.components.workable:SetOnWorkCallback(onhit)
 
         inst:AddComponent("shearable")
-        inst.components.shearable:SetMaxWork(1)
+        inst.components.shearable:SetWorkLeft(1)
         inst:ListenForEvent("onshear", OnShear)
         -- inst.components.shearable:SetProduct("clippings", 2)
 

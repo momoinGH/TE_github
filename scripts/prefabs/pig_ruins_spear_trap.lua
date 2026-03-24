@@ -277,7 +277,7 @@ local function fn(Sim)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("shearable")
-    inst.components.shearable:SetMaxWork(1)
+    inst.components.shearable:SetWorkLeft(1)
     inst:ListenForEvent("onshearfinished", OnKilled)
 
     inst:SetStateGraph("SGspear_trap")

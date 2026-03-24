@@ -188,7 +188,7 @@ local HAM_FX =
         build = "vortex_cloak_fx",
         anim = "idle",
     },
-    
+
     --头顶掉点尘土
     {
         name = "int_ceiling_dust_fx",
@@ -207,3 +207,5 @@ for _, v in ipairs(HAM_FX) do
     table.insert(Assets, Asset("ANIM", "anim/" .. v.build .. ".zip"))
     table.insert(fx, v)
 end
+
+-- package.loaded["prefabs/fx"] = nil

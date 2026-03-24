@@ -1,12 +1,12 @@
 local rock_ice_fn = require("prefabs/rock_ice").fn
-local TryStageChange = Hooks.FnDecorator(rock_ice_fn, "ontimerdone", "TryStageChange")
+local TryStageChange = Hooks.FindUpvalue(rock_ice_fn, "ontimerdone", "TryStageChange")
 if not TryStageChange then
     print("获取rock_ice预制件的TryStageChange函数失败，无法修改迷你冰川季节影响。")
     return
 end
 
-local SetStage = Hooks.FnDecorator(TryStageChange, "SetStage")
-local RescheduleTimer = Hooks.FnDecorator(TryStageChange, "RescheduleTimer")
+local SetStage = Hooks.FindUpvalue(TryStageChange, "SetStage")
+local RescheduleTimer = Hooks.FindUpvalue(TryStageChange, "RescheduleTimer")
 if not (SetStage and RescheduleTimer) then
     print("获取rock_ice预制件的SetStage和RescheduleTimer函数失败，无法修改迷你冰川季节影响。")
     return

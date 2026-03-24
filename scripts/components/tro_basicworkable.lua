@@ -1,5 +1,4 @@
 local function onworkable(self)
-    print("可以吗", self.workleft > 0 and self.workable)
     if self.workleft > 0 and self.workable then
         self.inst:AddTag(self.workable_tag)
     else
@@ -20,14 +19,13 @@ local BasicWorkable = Class(function(self, inst, workable_tag, worked_event, wor
     self.finishedwork_event = finishedwork_event
 
     self.workleft = 10
-    self.maxwork = -1
+    -- self.maxwork = -1 --好像用不着这个
     self.workable = true
 
     self.savestate = false
     self.onloadfn = nil
 end, nil, {
     workleft = onworkable,
-    maxwork = onworkable,
     workable = onworkable,
 })
 
@@ -35,13 +33,9 @@ function BasicWorkable:OnRemoveFromEntity()
     self.inst:RemoveTag(self.workable_tag)
 end
 
-function BasicWorkable:SetMaxWork(work)
-    self.maxwork = math.max(1, work or 10)
-end
-
 function BasicWorkable:SetWorkLeft(work)
     self.workable = true
-    self.workleft = self.maxwork > 0 and math.clamp(work or 10, 1, self.maxwork) or math.max(1, work or 10)
+    self.workleft = work
 end
 
 function BasicWorkable:WorkedBy(worker, numworks)
@@ -77,7 +71,6 @@ end
 function BasicWorkable:OnSave()
     return self.savestate
         and {
-            maxwork = self.maxwork,
             workleft = self.workleft,
         }
         or {}
@@ -85,7 +78,6 @@ end
 
 function BasicWorkable:OnLoad(data)
     self.workleft = data.workleft or self.workleft
-    self.maxwork = data.maxwork or self.maxwork
     if self.onloadfn ~= nil then
         self.onloadfn(self.inst, data)
     end

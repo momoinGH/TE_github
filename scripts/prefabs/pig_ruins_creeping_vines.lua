@@ -124,7 +124,7 @@ local function fn()
     inst.components.workable.maxwork = RUINS_DOOR_VINES_HACKS
 
     inst:AddComponent("shearable")
-    inst.components.shearable:SetMaxWork(1)
+    inst.components.shearable:SetWorkLeft(1)
     inst.components.shearable.savestate = true
     inst:ListenForEvent("onshearfinished", OnShearFinished)
 
