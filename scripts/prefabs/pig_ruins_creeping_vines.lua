@@ -15,28 +15,23 @@ local prefabs =
 
 }
 
-local RUINS_ENTRANCE_VINES_HACKS = 4
 local RUINS_DOOR_VINES_HACKS = 2
 
 local function getanimname(inst)
     local stage_string = "_closed"
-
-    if inst.stage == 1 then
+    if inst.components.workable.workleft == 1 then
         stage_string = "_med"
-    elseif inst.stage == 0 then
+    elseif inst.components.workable.workleft == 0 then
         stage_string = "_open"
     end
-
     return inst.door_orientation .. stage_string
 end
 
 local function regrow(inst)
     -- this is just for viuals, it doesn't actually lock the assotiated door.
-    if inst.stage ~= 2 then
+    if inst.components.workable.workleft ~= 2 then
         inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/vine_grow")
-        inst.stage = 2
-        inst.components.workable.workable = true
-        inst.components.workable.workleft = inst.components.workable.maxwork
+        inst.components.workable.workleft = 2
         inst:RemoveTag("NOCLICK")
         inst.AnimState:PlayAnimation(getanimname(inst) .. "_pre", true)
         inst.AnimState:PushAnimation(getanimname(inst), true)
@@ -45,29 +40,18 @@ end
 
 local function hackedopen(inst)
     -- this is just for viuals, it doesn't actually open the assotiated door.
-    inst.stage = 0
-    inst.components.workable.workable = false
+    inst.components.workable.workleft = 0
     inst:AddTag("NOCLICK")
     inst.AnimState:PlayAnimation(getanimname(inst), true)
 end
 
 local function onhackedfn(inst, hacker, hacksleft)
-    if hacksleft <= 0 then
-        if inst.stage > 0 then
-            inst.stage = inst.stage - 1
-
-            if inst.stage == 0 then
-                if inst.door then
-                    inst.door.components.vineable:SetOpen(true)
-                end
-            else
-                -- 进入下一阶段
-                inst.AnimState:PlayAnimation(getanimname(inst) .. "_hit")
-                inst.AnimState:PushAnimation(getanimname(inst), true)
-                inst.components.workable.workleft = inst.components.workable.maxwork
-            end
+    if hacksleft == 0 then
+        if inst.door then
+            inst.door.components.vineable:SetOpen(true)
         end
     else
+        -- 进入下一阶段
         inst.AnimState:PlayAnimation(getanimname(inst) .. "_hit")
         inst.AnimState:PushAnimation(getanimname(inst), true)
     end
@@ -82,6 +66,10 @@ local function OnShearFinished(inst, data)
     inst.components.workable:Destroy(data.worker)
 end
 
+local function OnWorkLeftChange(inst, new, old)
+    inst.components.shearable.workleft = new
+end
+
 local function setup(inst, door)
     inst.door = door
     inst.Transform:SetPosition(0, 0, 0)
@@ -90,7 +78,8 @@ local function setup(inst, door)
 
     inst.door_orientation = door.door_orientation
     if inst.door_orientation ~= "south" then
-        inst.AnimState:SetSortOrder(3)
+        inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+        inst.AnimState:SetSortOrder(4)
     end
 
     inst.AnimState:PlayAnimation(getanimname(inst), true)
@@ -105,7 +94,6 @@ local function fn()
     inst.entity:AddNetwork()
 
     inst.door_orientation = "north"
-    inst.stage = 2
 
     inst.AnimState:SetBank("pig_ruins_vines_door")
     inst.AnimState:SetBuild("pig_ruins_vines_build")
@@ -117,16 +105,16 @@ local function fn()
         return inst
     end
 
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HACK)
-    inst.components.workable.onwork = onhackedfn
-    inst.components.workable.workleft = RUINS_DOOR_VINES_HACKS
-    inst.components.workable.maxwork = RUINS_DOOR_VINES_HACKS
-
     inst:AddComponent("shearable")
     inst.components.shearable:SetWorkLeft(1)
-    inst.components.shearable.savestate = true
     inst:ListenForEvent("onshearfinished", OnShearFinished)
+
+    inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.HACK)
+    inst.components.workable:SetWorkLeft(RUINS_DOOR_VINES_HACKS)
+    inst.components.workable.onwork = onhackedfn
+    inst.components.workable.savestate = true
+    inst:ListenForEvent("tro_onworkleftchange", OnWorkLeftChange)
 
     inst:AddComponent("inspectable")
 

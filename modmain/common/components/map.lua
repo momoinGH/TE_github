@@ -44,10 +44,10 @@ Map.TroIsSummerAtPoint = function(self, x, y, z)
     end
 end
 
-local check_size = 1350
+local RoomUtils = require("tropical_utils/room_utils")
 -- 判断是否在世界外面，一般世界外就是小房子
 function Map:TroIsWorldOut(x, y, z)
-    if math.abs(z) >= check_size or math.abs(x) >= check_size then
+    if math.abs(z) >= RoomUtils.BASE_OFF or math.abs(x) >= RoomUtils.BASE_OFF then
         return true
     else
         return false

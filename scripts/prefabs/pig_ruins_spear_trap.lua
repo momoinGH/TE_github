@@ -143,7 +143,6 @@ local function burnt(inst)
     local debris = SpawnPrefab("pig_ruins_spear_trap_broken")
     debris.AnimState:PlayAnimation("burnt")
     debris.Transform:SetPosition(inst.Transform:GetWorldPosition())
-
     inst:Remove()
 end
 
@@ -276,9 +275,10 @@ local function fn(Sim)
 
     inst:AddComponent("inspectable")
 
-    inst:AddComponent("shearable")
-    inst.components.shearable:SetWorkLeft(1)
-    inst:ListenForEvent("onshearfinished", OnKilled)
+    inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.SHEAR)
+    inst.components.workable:SetWorkLeft(1)
+    inst.components.workable:SetOnFinishCallback(OnKilled)
 
     inst:SetStateGraph("SGspear_trap")
 

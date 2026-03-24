@@ -81,7 +81,6 @@ function FN.ClearSpace(x, z)
 end
 
 ---根据目标对象位置计算距离最近的墙面
----side =1 左侧； =2 顶部； =3 右侧； =4 底部
 function FN.TestWallOrnamentPos(target, isSetPos, left, top, right, bottom)
     left = left or 7.5
     top = top or 5
@@ -95,38 +94,38 @@ function FN.TestWallOrnamentPos(target, isSetPos, left, top, right, bottom)
         local dx, dz = pos.x - x, pos.z - z
 
         -- 寻找距离最近的一侧墙
-        local side = 1
+        local side = "west"
         local minDis = math.abs(dz + left) --左
 
         local tem = math.abs(dx + top)
         if tem < minDis then --中
             minDis = tem
-            side = 2
+            side = "north"
         end
 
         tem = math.abs(dz - right)
         if tem < minDis then --右
             minDis = tem
-            side = 3
+            side = "east"
         end
 
         if bottom then
             tem = math.abs(dx - bottom)
             if tem < minDis then --下
                 minDis = tem
-                side = 4
+                side = "south"
             end
         end
         -- print("最小距离", minDis, dz + 8.5, dx + 5, dz - 7.5)
 
         if isSetPos and minDis < 4 then
-            if side == 1 then
+            if side == "west" then
                 target.Transform:SetPosition(pos.x, 0, z - left)
-            elseif side == 2 then
+            elseif side == "north" then
                 target.Transform:SetPosition(x - top, 0, pos.z)
-            elseif side == 3 then
+            elseif side == "east" then
                 target.Transform:SetPosition(pos.x, 0, z + right)
-            elseif side == 4 then
+            elseif side == "south" then
                 target.Transform:SetPosition(x + bottom, 0, pos.z)
             end
         end
@@ -183,10 +182,6 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-
-
-----------------------------------------------------------------------------------------------------
-
 local EAST  = { x = 1, y = 0, label = "east" }
 local WEST  = { x = -1, y = 0, label = "west" }
 local NORTH = { x = 0, y = 1, label = "north" }
@@ -232,6 +227,30 @@ function FN.GetOppositeFromDirection(direction)
         return FN.GetNorth()
     else
         return FN.GetEast()
+    end
+end
+
+function FN.GetOppositeLabelFromDirection(direction)
+    if direction == "north" then
+        return "south"
+    elseif direction == "south" then
+        return "north"
+    elseif direction == "east" then
+        return "west"
+    elseif direction == "west" then
+        return "east"
+    end
+end
+
+function FN.GetOrientationByLabel(orientation)
+    if orientation == "north" then
+        return FN.GetNorth()
+    elseif orientation == "south" then
+        return FN.GetSouth()
+    elseif orientation == "east" then
+        return FN.GetEast()
+    elseif orientation == "west" then
+        return FN.GetWest()
     end
 end
 
@@ -308,7 +327,7 @@ function FN.CreateRoom(room)
 
             if p:HasTag("interior_door") then
                 --门
-                if p.room_center then
+                if trodevassert(p.room_center, "室内门需要有room_center字段记录自己的中心点") then
                     p.room_center:set(center)
                 end
                 local key = data.key or door_inc
@@ -405,44 +424,34 @@ function FN.SpawnNearHouseInterior(door, room)
         return false
     end
     local dpos = FN.GetDoorRelativePosition(door)
-    if not dpos or not door.side then
-        print("生成新房间失败", door, door.side)
+    if not dpos or not door.door_orientation then
+        print("生成新房间失败", door, door.door_orientation)
         return false
     end
     local _, _, center = FN.CreateRoom(room)
     local pos = center:GetPosition()
 
     -- 还要装一个对应的门
-    local doorAnim, newDoorAnim
     local newDoor = SpawnPrefab(door.prefab)
     if newDoor.room_center then
         newDoor.room_center:set(center)
     end
 
-    if door.side == 1 then
-        newDoor.side = 3
+    local opp_dir = FN.GetOppositeLabelFromDirection(door.door_orientation)
+    newDoor:SetDoorOrientation(opp_dir)
+
+    if door.door_orientation == "west" then
         newDoor.Transform:SetPosition(pos.x + dpos.x, 0, pos.z + 7.5)
-        doorAnim = "_open_east"
-        newDoorAnim = "_open_west"
-    elseif door.side == 2 then
-        newDoor.side = 4
-        newDoor.Transform:SetPosition(pos.x + 5, 0, pos.z + dpos.z)
-        doorAnim = "_open_north"
-        newDoorAnim = "_open_south"
-    elseif door.side == 3 then
-        newDoor.side = 1
+    elseif door.door_orientation == "east" then
         newDoor.Transform:SetPosition(pos.x + dpos.x, 0, pos.z - 7.5)
-        doorAnim = "_open_west"
-        newDoorAnim = "_open_east"
-    elseif door.side == 4 then
-        newDoor.side = 2
+    elseif door.door_orientation == "north" then
         newDoor.Transform:SetPosition(pos.x - 5, 0, pos.z + dpos.z)
-        doorAnim = "_open_south"
-        newDoorAnim = "_open_north"
+    elseif door.door_orientation == "south" then
+        newDoor.Transform:SetPosition(pos.x + 5, 0, pos.z + dpos.z)
     end
 
-    door.components.tro_saveanim:Init(nil, nil, door.prefab .. doorAnim)
-    newDoor.components.tro_saveanim:Init(nil, nil, door.prefab .. newDoorAnim)
+    door.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. door.door_orientation)
+    newDoor.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. opp_dir)
 
     door:RemoveTag("predoor")
     newDoor:RemoveTag("predoor")
@@ -463,6 +472,22 @@ function FN.CreateSimpleInterior(inst, room)
     local doors = FN.CreateRoom(room)
     inst.components.teleporter:Target(doors.exit)
     doors.exit.components.teleporter:Target(inst)
+end
+
+-- 获取该房间内的实体
+function FN.FindRoomEnts(room, musttags, canttags, mustoneoftags)
+    local width = room.room_width:value() --z
+    local depth = room.room_depth:value() --x
+    local ents = {}
+    local x, y, z = room.Transform:GetWorldPosition()
+    local r = math.sqrt(depth * depth + width * width) / 2
+    for _, v in ipairs(TheSim:FindEntities(x, 0, z, r, musttags, canttags, mustoneoftags)) do
+        local vx, _, vz = v.Transform:GetWorldPosition()
+        if math.abs(vx - x) <= depth / 2 and math.abs(vz - z) <= width / 2 then --在房间里
+            table.insert(ents, v)
+        end
+    end
+    return ents
 end
 
 return FN

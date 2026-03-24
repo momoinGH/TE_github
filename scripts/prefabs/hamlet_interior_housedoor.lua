@@ -1,10 +1,10 @@
 local RoomUtils = require("tropical_utils/room_utils")
-local MakeBaseDoor = require("prefabs/tro_interior_door_defs").MakeBaseDoor
+local MakeDoor = require("prefabs/tro_interior_door_defs").MakeDoor
 
 local assets = {
     Asset("ANIM", "anim/acorn.zip"),
-    Asset("ANIM", "anim/pig_shop_doormats.zip"),  --出口地毯
-    Asset("ANIM", "anim/player_house_doors.zip"), --小屋房间门
+    Asset("ANIM", "anim/pig_shop_doormats.zip"),      --出口地毯
+    Asset("ANIM", "anim/new_player_house_doors.zip"), --小屋房间门，这个不是原版动画包，原版动画east和west名字都反了，这个矫正过来
 }
 
 local function OnActivate(inst, doer)
@@ -28,14 +28,12 @@ local function OnHaunt(inst, haunter)
 end
 
 local function OnHouseSave(inst, data)
-    data.side = inst.side
     data.hamlet_houseexit = inst:HasTag("hamlet_houseexit") or nil
 end
 
 local function OnHouseLoad(inst, data)
     if data == nil then return end
 
-    inst.side = data.side
     if data.hamlet_houseexit then
         inst:AddTag("hamlet_houseexit") --没有单机版的小地图，目前通过鼠标悬停时的“进入”和“离开”来判断出口
     end
@@ -76,18 +74,9 @@ local function onaccept(inst, giver, item)
 end
 
 local function OnBuilt(inst)
-    inst.side = RoomUtils.TestWallOrnamentPos(inst, false, 7.5, 5, 7.5, 5.5)
-    local anim
-    if inst.side == 1 then
-        anim = "_close_east"
-    elseif inst.side == 2 then
-        anim = "_close_north"
-    elseif inst.side == 3 then
-        anim = "_close_west"
-    elseif inst.side == 4 then
-        anim = "_close_south"
-    end
-
+    local door_orientation = RoomUtils.TestWallOrnamentPos(inst, false, 7.5, 5, 7.5, 5.5)
+    local anim = "_close_" .. door_orientation
+    inst:SetDoorOrientation(door_orientation)
     inst.components.tro_saveanim:Init(nil, nil, inst.prefab .. anim)
     -- inst.AnimState:PlayAnimation(inst.prefab .. anim)
 end
@@ -98,35 +87,21 @@ local function onhammered(inst, worker)
     inst:Remove()
 end
 
-local function common(bank, build, anim, interior_door)
-    local inst = MakeBaseDoor(bank, build, anim, true, interior_door)
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
-    inst.components.trader.onaccept = onaccept
-
-    inst.components.teleporter.onActivate = OnActivate
-
-    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-
-    inst.components.hauntable:SetOnHauntFn(OnHaunt)
-
-    return inst
-end
-
 -- teleporter会紫东阁保存传送目的地的门
 local function MakeHouseDoor(name)
-    local function fn()
-        local inst = common("player_house_doors", "player_house_doors")
+    local function CommonPost(inst)
 
-        if not TheWorld.ismastersim then
-            return inst
-        end
+    end
 
-        inst.side = nil --门所在墙边
+    local function MasterPost(inst)
+        inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
+        inst.components.trader.onaccept = onaccept
+
+        inst.components.teleporter.onActivate = OnActivate
+
+        inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
+
+        inst.components.hauntable:SetOnHauntFn(OnHaunt)
 
         inst:AddComponent("lootdropper")
         inst:AddComponent("tro_saveanim")
@@ -146,28 +121,26 @@ local function MakeHouseDoor(name)
 
         inst.OnSave = OnHouseSave
         inst.OnLoad = OnHouseLoad
-
-        return inst
     end
 
-    return Prefab(name, fn, assets)
+    return MakeDoor(name, {
+        assets = assets,
+        bank = "player_house_doors",
+        build = "player_house_doors",
+        anim = name .. "_close_north",
+        trader = true,
+        is_inner = true,
+        door_orientation = "north"
+    }, CommonPost, MasterPost)
 end
 
 ----------------------------------------------------------------------------------------------------
 
 local function PlacerOnUpdateTransform(inst)
-    local side, minDis = RoomUtils.TestWallOrnamentPos(inst, true, 7.5, 5, 7.5, 5) --门可建造范围，太靠墙会导致玩家过不去
+    local door_orientation, minDis = RoomUtils.TestWallOrnamentPos(inst, true, 7.5, 5, 7.5, 5) --门可建造范围，太靠墙会导致玩家过不去
     local anim
-    if side and minDis < 4 then
-        if side == 1 then
-            anim = "_close_east"
-        elseif side == 2 then
-            anim = "_close_north"
-        elseif side == 3 then
-            anim = "_close_west"
-        elseif side == 4 then
-            anim = "_close_south"
-        end
+    if door_orientation and minDis < 4 then
+        anim = "_close_" .. door_orientation
         inst.accept_placement = true
     else
         inst.accept_placement = false
@@ -227,26 +200,38 @@ local function OnTeleporting(inst, doer)
 end
 
 local function MakeExitDoor(name, anim)
-    local function fn()
-        local inst = common("pig_shop_doormats", "pig_shop_doormats", anim, true)
+    local function CommonPost(inst)
         inst:AddTag("hamlet_houseexit")
 
         inst:SetPrefabNameOverride("city_exit_old_door")
 
         inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
         inst.AnimState:SetSortOrder(3)
+    end
 
-        if not TheWorld.ismastersim then
-            return inst
-        end
+    local function MasterPost(inst)
+        inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
+        inst.components.trader.onaccept = onaccept
+
+        inst.components.teleporter.onActivate = OnActivate
+
+        inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
+
+        inst.components.hauntable:SetOnHauntFn(OnHaunt)
 
         inst.components.teleporter.onActivate = OnTeleporting
 
         inst.usesound = "dontstarve_DLC003/common/objects/store/door_close"
-
-        return inst
     end
-    return Prefab(name, fn, assets)
+
+    return MakeDoor(name, {
+        assets = assets,
+        bank = "pig_shop_doormats",
+        build = "pig_shop_doormats",
+        anim = anim,
+        trader = true,
+        is_inner = true,
+    }, CommonPost, MasterPost)
 end
 
 local function MakeHouseDoorPlacer(name, bank, build)

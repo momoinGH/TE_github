@@ -83,6 +83,12 @@ local function onhit(inst, worker)
     fx.Transform:SetPosition(x, y + math.random() * 2, z)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/vine_hack")
     refreshImage(inst, true)
+
+    inst.components.shearable.workleft = inst.components.workable.workleft --同步一下
+end
+
+local function OnShearableFinished(inst, data)
+    inst.components.workable:Destroy(data.worker)
 end
 
 local function inspect(inst)
@@ -125,7 +131,7 @@ local function Init(inst)
 end
 
 ---遗迹门
----@param data.hack boolean 是否可被剪，为true就会被藤蔓缠住进不去
+---@param data.vine boolean 是否可被剪，为true就会被藤蔓缠住进不去
 ---@param data.maze_id string 迷宫id
 ---@param data.get_maze_fn function 迷宫数据生成函数
 local function MakeRuinDoor(name, data, common_post_fn, master_post_fn)
@@ -151,13 +157,18 @@ local function MakeRuinDoor(name, data, common_post_fn, master_post_fn)
 
         inst.maze_id = data.maze_id
 
-        if data.hack then
+        if data.vine then
             inst:AddComponent("workable")
-            inst.components.workable:SetWorkAction(ACTIONS.SHEAR)
+            inst.components.workable:SetWorkAction(ACTIONS.HACK)
             inst.components.workable:SetWorkLeft(4)
             inst.components.workable:SetOnFinishCallback(onhammered)
             inst.components.workable:SetOnWorkCallback(onhit)
             inst.components.workable.savestate = true --重新上线不会再长回来
+
+            inst:AddComponent("shearable")
+            inst.components.shearable:SetWorkLeft(1)
+            inst:ListenForEvent("onshearfinished", OnShearableFinished)
+            inst.components.shearable.savestate = true
 
             inst.components.teleporter:SetEnabled(false)
         end
@@ -284,16 +295,16 @@ local function GetSmallMaze(inst)
     })
 end
 
-return MakeRuinDoor("pig_ruins_entrance", { hack = true, maze_id = "runis_1", get_maze_fn = GetMaze1 }, Runis1AnimInit),
+return MakeRuinDoor("pig_ruins_entrance", { vine = true, maze_id = "runis_1", get_maze_fn = GetMaze1 }, Runis1AnimInit),
     MakeRuinDoor("pig_ruins_exit", { maze_id = "runis_1" }, Runis1AnimInit),
 
-    MakeRuinDoor("pig_ruins_entrance2", { hack = true, maze_id = "runis_2", get_maze_fn = GetMaze2 }, Runis2AnimInit),
+    MakeRuinDoor("pig_ruins_entrance2", { vine = true, maze_id = "runis_2", get_maze_fn = GetMaze2 }, Runis2AnimInit),
     MakeRuinDoor("pig_ruins_exit2", { maze_id = "runis_2" }, Runis2AnimInit),
 
-    MakeRuinDoor("pig_ruins_entrance3", { hack = true, get_maze_fn = GetMaze3 }, Runis3AnimInit),
+    MakeRuinDoor("pig_ruins_entrance3", { vine = true, get_maze_fn = GetMaze3 }, Runis3AnimInit),
 
-    MakeRuinDoor("pig_ruins_entrance4", { hack = true, maze_id = "runis_4", get_maze_fn = GetMaze4 }, Runis4AnimInit),
+    MakeRuinDoor("pig_ruins_entrance4", { vine = true, maze_id = "runis_4", get_maze_fn = GetMaze4 }, Runis4AnimInit),
     MakeRuinDoor("pig_ruins_exit4", { maze_id = "runis_4" }, Runis4AnimInit),
 
-    MakeRuinDoor("pig_ruins_entrance5", { hack = true, get_maze_fn = GetMaze5 }, Runis4AnimInit),
+    MakeRuinDoor("pig_ruins_entrance5", { vine = true, get_maze_fn = GetMaze5 }, Runis4AnimInit),
     MakeRuinDoor("pig_ruins_entrance_small", { get_maze_fn = GetSmallMaze }, RunisSmallAnimInit)

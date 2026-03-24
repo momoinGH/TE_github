@@ -6,11 +6,8 @@ local function OnBuilt(inst)
     local bank = inst.AnimState:GetCurrentBankName()
     local side = RoomUtils.TestWallOrnamentPos(inst)
 
-    if side == 1 or side == 3 then
+    if side == "east" or side == "west" then
         bank = bank .. "_side"
-        if side == 3 then
-
-        end
     end
 end
 

@@ -37,6 +37,8 @@ modimport "modmain/common/components/oar.lua"
 modimport "modmain/common/components/wavemanager.lua"          --给地皮加点波纹生成
 modimport "modmain/common/components/butterflyspawner.lua"     --修改不同地形上的蝴蝶生成
 modimport "modmain/common/components/temperatureoverrider.lua" --对气温的一些hook
+modimport "modmain/common/components/workable.lua"
+
 
 ----------------------------------------------------------------------------------------------------
 

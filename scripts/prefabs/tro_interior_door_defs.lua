@@ -80,22 +80,40 @@ local function OnLoadPostPass(inst, newents, data)
 end
 
 local function SetDoorOrientation(inst, orientation)
-    local anim = orientation
-
+    local anim
     -- 检查当前门动画是不是_closed后缀
     for _, dir in ipairs(RoomUtils.DIR) do
         if inst.AnimState:IsCurrentAnimation(dir.label .. "_closed") then
-            anim = anim .. "_closed"
+            anim = orientation .. "_closed"
             break
         end
     end
-
-    inst.AnimState:PlayAnimation(anim)
+    if anim then
+        inst.AnimState:PlayAnimation(anim)
+    end
     inst.door_orientation = orientation
     for _, dir in ipairs(RoomUtils.DIR) do
         inst:RemoveTag("interior_" .. dir.label .. "_door")
     end
     inst:AddTag("interior_" .. orientation .. "_door") --门朝向标签，客户端可获取该标签
+
+    if orientation == "south" then                     --其他方向的门层级放低点
+        inst.AnimState:SetLayer(LAYER_WORLD)
+    else
+        inst.AnimState:SetLayer(LAYER_BACKGROUND)
+    end
+end
+
+local function GetDoorOrientation(inst)
+    if inst.door_orientation then
+        return inst.door_orientation
+    end
+
+    for _, dir in ipairs(RoomUtils.DIR) do
+        if inst:HasTag("interior_" .. dir.label .. "_door") then
+            return dir.label
+        end
+    end
 end
 
 -- 根据动画重新刷新门朝向字段
@@ -272,10 +290,13 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
             -- TODO 不知道为什么主机设置了网络变量客机老是获取不到
             --我需要客机拿到目的地房间的位置，用于构建小地图
             inst.targetdoor = net_entity(inst.GUID, "tro_interiordoor.targetdoor")
-
             inst.room_center = net_entity(inst.GUID, "tro_interiordoor.room_center")
         end
         inst.GetRoomCenter = GetRoomCenter
+
+        if data.door_orientation then
+            inst.GetDoorOrientation = GetDoorOrientation
+        end
 
         if common_post_fn then
             common_post_fn(inst)

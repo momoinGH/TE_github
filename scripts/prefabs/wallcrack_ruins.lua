@@ -55,8 +55,6 @@ local function MasterPost(inst)
     inst.components.workable:SetOnFinishCallback(OnDestroy)
     inst.components.workable.savestate = true
 
-    inst:AddComponent("inspectable")
-
     inst.components.teleporter:SetEnabled(false)
 
     inst.OnLoadPostPass = OnLoadPostPass

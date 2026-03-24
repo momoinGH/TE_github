@@ -450,8 +450,7 @@ local function mazemaker(dungeondef)
         local southexitopen = not room.exits[RoomUtils.GetSouth()]
         local eastexitopen = not room.exits[RoomUtils.GetEast()]
         local numexits = GetTableSize(room.exits)
-        local x_offset, z_offset = 0, 0
-        local door_orientation
+        local x_offset, z_offset, door_orientation
         if northexitopen and math.random() < 0.10 then
             x_offset = -depth / 2
             northexitopen = false

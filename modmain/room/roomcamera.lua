@@ -48,6 +48,22 @@ local function Apply(room)
     TheSim:SetCameraFOV(interior_fov)
 end
 
+local function CameraDefault(inst)
+    TheCamera:SetPaused(false)
+    TheCamera:SetControllable(true)
+    TheCamera:SetDefault()
+    if inst._tro_roomcameratask then
+        inst._tro_roomcameratask:Cancel()
+        inst._tro_roomcameratask = nil
+    end
+end
+
+local function UpdateRoomCamera(inst)
+    local target = inst:TroGetPlayerClassifiedNetVar("tro_curroomcenter")
+    Apply(target)
+end
+
+
 -- this is called on client
 local function OnPlayerRoomChange(inst)
     if inst.components.playervision then --TODO 这个是干什么的？
@@ -58,11 +74,12 @@ local function OnPlayerRoomChange(inst)
     if target then
         TheCamera:SetPaused(true)
         TheCamera:SetControllable(false)
-        Apply(target)
+        TheCamera.headingtarget = 0
+        if not inst._tro_roomcameratask then
+            inst._tro_roomcameratask = inst:DoPeriodicTask(0.2, UpdateRoomCamera) --这里刷一下，因为有时候进房间镜头中心会在侧门不在中心
+        end
     else
-        TheCamera:SetPaused(false)
-        TheCamera:SetControllable(true)
-        TheCamera:SetDefault()
+        CameraDefault(inst)
     end
 end
 
@@ -74,6 +91,7 @@ end
 
 AddPlayerPostInit(function(inst)
     if not TheNet:IsDedicated() then
+        inst._tro_roomcameratask = nil
         inst:ListenForEvent("tro_curroomcenter", OnPlayerRoomChange)
     end
 

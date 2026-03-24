@@ -57,7 +57,6 @@ function BasicWorkable:WorkedBy(worker, numworks)
     if self.worked_event then
         self.inst:PushEvent(self.worked_event, { worker = worker, workleft = self.workleft })
     end
-
     if self.workleft <= 0 then
         if self.workfinished_event then
             self.inst:PushEvent(self.workfinished_event, { worker = worker })
@@ -66,6 +65,10 @@ function BasicWorkable:WorkedBy(worker, numworks)
             worker:PushEvent(self.finishedwork_event, { target = self.inst })
         end
     end
+end
+
+function BasicWorkable:CanBeWorked()
+    return self.workable and self.workleft > 0
 end
 
 function BasicWorkable:OnSave()

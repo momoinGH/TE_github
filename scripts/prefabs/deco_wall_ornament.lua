@@ -6,9 +6,9 @@ local function OnBuilt(inst)
     local bank = inst.AnimState:GetCurrentBankName()
     local side = RoomUtils.TestWallOrnamentPos(inst)
 
-    if side == 1 or side == 3 then
-        bank = (side == 1 or side == 3) and bank .. "_side" or nil
-        local scale = side == 3 and { -1, 1 } or nil
+    if side == "west" or side == "east" then
+        bank = (side == "west" or side == "east") and bank .. "_side" or nil
+        local scale = side == "east" and { -1, 1 } or nil
         inst.components.tro_saveanim:Init(bank, nil, nil, scale)
     end
 end

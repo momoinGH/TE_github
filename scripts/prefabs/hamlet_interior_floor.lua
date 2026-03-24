@@ -28,10 +28,10 @@ local function common(anim)
 
     inst.AnimState:SetBank("pisohamlet")
     inst.AnimState:SetBuild("pisohamlet")
+    inst.AnimState:PlayAnimation(anim)
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:SetSortOrder(5)
-    inst.AnimState:PlayAnimation(anim)
+    inst.AnimState:SetSortOrder(-10)
 
     inst:AddTag("NOCLICK")
     inst:AddTag("NOBLOCK")

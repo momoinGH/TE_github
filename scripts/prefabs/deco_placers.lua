@@ -52,9 +52,9 @@ local function PlacerOnWallUpdateTransform(inst)
     local bank = ""
     local flip = false
     if side and minDis < 4 then
-        if side == 1 then
+        if side == "west" then
             bank = "_side"
-        elseif side == 3 then
+        elseif side == "east" then
             bank = "_side"
             flip = true
         end
