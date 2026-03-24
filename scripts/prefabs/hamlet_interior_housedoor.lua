@@ -79,6 +79,7 @@ local function OnBuilt(inst)
     inst:SetDoorOrientation(door_orientation)
     inst.components.tro_saveanim:Init(nil, nil, inst.prefab .. anim)
     -- inst.AnimState:PlayAnimation(inst.prefab .. anim)
+    inst.room_center:set(inst:TroGetRoomCenter()) --找到房子中心点对象
 end
 
 local function onhammered(inst, worker)
