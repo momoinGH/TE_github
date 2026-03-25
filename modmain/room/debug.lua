@@ -1,10 +1,3 @@
-TUNING.TRO_ROOM_DEBUG = false
-
--- 在关键处打印日志
-GLOBAL.c_setroomdebug = function(enable_debug)
-    TUNING.TRO_ROOM_DEBUG = enable_debug or false
-end
-
 -- 重新设置房内装饰相对于中心点的偏移量，可以在客户端调整调整位置然后填到room数据里
 GLOBAL.c_resetroomentoffset = function(offset_x, offset_y, offset_z)
     local ent = c_select()
@@ -18,7 +11,7 @@ GLOBAL.c_resetroomentoffset = function(offset_x, offset_y, offset_z)
 
     local x, y, z = ent.Transform:GetWorldPosition()
     local cx, cy, cz = room_center.Transform:GetWorldPosition()
-    conprint("旧偏移量：", x - cx, ", ", y - cy, ", ", z - cz, ", 新偏移量：", offset_x, ", ", offset_y, ", ", offset_z)
+    print(string.trofmt("旧偏移量：{0}, {1}, {2}, 新偏移量：{3}, {4}, {5}", x - cx, y - cy, z - cz, offset_x, offset_y, offset_z))
 
     if offset_x == nil and offset_y == nil and offset_z == nil then
         return --仅打印

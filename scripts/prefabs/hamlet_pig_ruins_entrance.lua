@@ -1,9 +1,9 @@
-local mazemaker    = require("prefabs/hamlet_pig_ruins_entrance_defs")
-local MakeBaseDoor = require("prefabs/tro_interior_door_defs").MakeBaseDoor
+local mazemaker = require("prefabs/hamlet_pig_ruins_entrance_defs")
+local MakeDoor  = require("prefabs/tro_interior_door_defs").MakeDoor
 
-local RoomUtils    = require("tropical_utils/room_utils")
+local RoomUtils = require("tropical_utils/room_utils")
 
-local assets       =
+local assets    =
 {
     Asset("ANIM", "anim/pig_ruins_entrance.zip"),
     Asset("ANIM", "anim/pig_door_test.zip"),
@@ -12,7 +12,7 @@ local assets       =
     Asset("ANIM", "anim/pig_ruins_entrance_top_build.zip"),
 }
 
-local prefabs      =
+local prefabs   =
 {
     "deco_roomglow",
     "light_dust_fx",
@@ -137,9 +137,7 @@ end
 local function MakeRuinDoor(name, data, common_post_fn, master_post_fn)
     assert(not (not data.get_maze_fn and not data.maze_id), name .. "迷宫没有get_maze_fn字段被视为出口，但又没有maze_id表示是哪个迷宫的出口")
 
-    local function fn()
-        local inst = MakeBaseDoor("pig_ruins_entrance", "pig_ruins_entrance_build", "idle_closed", true, false, "pig_ruins_entrance.png")
-
+    local function CommonPost(inst)
         MakeObstaclePhysics(inst, 1.20)
 
         if not data.get_maze_fn then
@@ -150,11 +148,8 @@ local function MakeRuinDoor(name, data, common_post_fn, master_post_fn)
         if common_post_fn then
             common_post_fn(inst)
         end
-
-        if not TheWorld.ismastersim then
-            return inst
-        end
-
+    end
+    local function MasterPost(inst)
         inst.maze_id = data.maze_id
 
         if data.vine then
@@ -185,10 +180,16 @@ local function MakeRuinDoor(name, data, common_post_fn, master_post_fn)
         if master_post_fn then
             master_post_fn(inst)
         end
-
-        return inst
     end
-    return Prefab(name, fn, assets, prefabs)
+
+    return MakeDoor(name, {
+            assets = assets,
+            bank = "pig_ruins_entrance",
+            build = "pig_ruins_entrance_build",
+            anim = "idle_closed",
+            minimap = "pig_ruins_entrance.png"
+        },
+        CommonPost, MasterPost)
 end
 
 ----------------------------------------------------------------------------------------------------

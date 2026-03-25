@@ -23,13 +23,13 @@ end
 
 local function GetDoorProp(room, dir, exit, width, depth)
     local x_offset, z_offset
-    if dir == RoomUtils.GetNorth() then
+    if dir == RoomUtils.DIR.north then
         x_offset = -depth / 2
-    elseif dir == RoomUtils.GetSouth() then
+    elseif dir == RoomUtils.DIR.south then
         x_offset = depth / 2
-    elseif dir == RoomUtils.GetEast() then
+    elseif dir == RoomUtils.DIR.east then
         z_offset = -width / 2
-    elseif dir == RoomUtils.GetWest() then
+    elseif dir == RoomUtils.DIR.west then
         z_offset = width / 2
     end
 
@@ -60,7 +60,7 @@ local function initmaze(inst)
     while #rooms < rooms_to_make do
         local dir = RoomUtils.DIR
         local dir_opposite = RoomUtils.DIR_OPPOSITE
-        local dir_choice = math.random(#dir)
+        local dir_choice = RoomUtils.GetRandomDir()
         local fromroom = rooms[math.random(#rooms)]
 
         local fail = false
@@ -91,7 +91,7 @@ local function initmaze(inst)
     local exits = {}
     for i, room in ipairs(rooms) do
         if not room.entrance1 then
-            local northexitopen = not room.exits[RoomUtils:GetNorth()]
+            local northexitopen = not room.exits[RoomUtils.DIR.north]
             if northexitopen then
                 table.insert(exits, i)
             end
@@ -104,9 +104,9 @@ local function initmaze(inst)
         room.width = width
         room.depth = depth
 
-        local westexitopen = not room.exits[RoomUtils:GetWest()]
-        local southexitopen = not room.exits[RoomUtils:GetSouth()]
-        local eastexitopen = not room.exits[RoomUtils:GetEast()]
+        local westexitopen = not room.exits[RoomUtils.DIR.west]
+        local southexitopen = not room.exits[RoomUtils.DIR.south]
+        local eastexitopen = not room.exits[RoomUtils.DIR.east]
 
         local addprops = room.addprops
         if not room.addprops then
@@ -245,7 +245,7 @@ local function initmaze(inst)
 
         --房间门
         for dir, exit in pairs(room.exits) do
-            local opposite_dir = RoomUtils.GetOppositeFromDirection(dir)
+            local opposite_dir = RoomUtils.DIR_OPPOSITE[dir.label]
             local doorprop = GetDoorProp(room, dir, exit, width, depth)
 
             -- 把隔壁门也一起生成

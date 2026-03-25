@@ -40,13 +40,13 @@ local function GetDoorProp(room, dir, exit, width, depth)
     end
 
     local x_offset, z_offset
-    if dir == RoomUtils.GetNorth() then
+    if dir == RoomUtils.DIR.north then
         x_offset = -depth / 2
-    elseif dir == RoomUtils.GetSouth() then
+    elseif dir == RoomUtils.DIR.south then
         x_offset = depth / 2
-    elseif dir == RoomUtils.GetEast() then
+    elseif dir == RoomUtils.DIR.east then
         z_offset = -width / 2
-    elseif dir == RoomUtils.GetWest() then
+    elseif dir == RoomUtils.DIR.west then
         z_offset = width / 2
     end
 
@@ -146,18 +146,18 @@ local function mazemaker(dungeondef)
     local DIR_OPPOSITE = RoomUtils.DIR_OPPOSITE
     local rooms_to_make = dungeondef.rooms
     local rooms = { {
-        x = 0,                                    --房间坐标，遗迹入口位于0,0，x右加左减，y上加下减
+        x = 0,                         --房间坐标，遗迹入口位于0,0，x右加左减，y上加下减
         y = 0,
-        idx = 1,                                  --房间编号，生成房间时会根据这个来判断什么房间相邻，生成对应的门
-        exits = {},                               --表示这个房间可以通向哪些房间
-        blocked_exits = { RoomUtils.GetNorth() }, --被堵塞的方向，表示上面不能建造门
-        entrance1 = true,                         --表示遗迹出口一所在房间
+        idx = 1,                       --房间编号，生成房间时会根据这个来判断什么房间相邻，生成对应的门
+        exits = {},                    --表示这个房间可以通向哪些房间
+        blocked_exits = { DIR.north }, --被堵塞的方向，表示上面不能建造门
+        entrance1 = true,              --表示遗迹出口一所在房间
     } }
 
     -- 构建每一个房间
     while #rooms < rooms_to_make do
         -- 从现有房间里随机选择一个房间作为前置房间，然后在前置房间随机选择一个方向
-        local dir_choice = math.random(#DIR)
+        local dir_choice = RoomUtils.GetRandomDir()
         local fromroom = rooms[math.random(#rooms)]
         local fail = false
         -- fail if this direction from the chosen room is blocked
@@ -235,9 +235,9 @@ local function mazemaker(dungeondef)
         local function FindCandidates()
             for i, room in ipairs(rooms) do
                 -- 通往秘密房间的门只会出现在上左右
-                local north = RoomUtils.GetNorth()
-                local west = RoomUtils.GetWest()
-                local east = RoomUtils.GetEast()
+                local north = RoomUtils.DIR.north
+                local west = RoomUtils.DIR.west
+                local east = RoomUtils.DIR.east
                 -- NORTH IS OPEN
                 if not room.exits[north] and not room.entrance2 and not room.entrance1 then
                     CheckAdjacent(room, north)
@@ -294,7 +294,7 @@ local function mazemaker(dungeondef)
             end
             -- 将秘密房间和相邻房间相连通
             for i, grid_room in ipairs(grid_rooms) do
-                local op_dir = RoomUtils.GetOppositeFromDirection(grid_dirs[i])
+                local op_dir = RoomUtils.DIR_OPPOSITE[grid_dirs[i].label]
                 local secret = true
                 if secret_room.aporkalypseclock then
                     secret = false --有日晷的房间
@@ -335,7 +335,7 @@ local function mazemaker(dungeondef)
         choices = {}
         local dist = 0
         for i, room in ipairs(rooms) do
-            local north_exit_open = not room.exits[RoomUtils.GetNorth()]
+            local north_exit_open = not room.exits[RoomUtils.DIR.north]
             if math.abs(room.x) + math.abs(room.y) >= dist and north_exit_open then
                 if math.abs(room.x) + math.abs(room.y) > dist then
                     choices = {}
@@ -445,10 +445,10 @@ local function mazemaker(dungeondef)
         end
 
         -- 有概率生成假的隐藏门
-        local northexitopen = not room.exits[RoomUtils.GetNorth()] and not room.entrance2 and not room.entrance1
-        local westexitopen = not room.exits[RoomUtils.GetWest()]
-        local southexitopen = not room.exits[RoomUtils.GetSouth()]
-        local eastexitopen = not room.exits[RoomUtils.GetEast()]
+        local northexitopen = not room.exits[RoomUtils.DIR.north] and not room.entrance2 and not room.entrance1
+        local westexitopen = not room.exits[RoomUtils.DIR.west]
+        local southexitopen = not room.exits[RoomUtils.DIR.south]
+        local eastexitopen = not room.exits[RoomUtils.DIR.east]
         local numexits = GetTableSize(room.exits)
         local x_offset, z_offset, door_orientation
         if northexitopen and math.random() < 0.10 then
@@ -807,7 +807,7 @@ local function mazemaker(dungeondef)
         local prop = math.random() < 0.2 and ("deco_ruins_beam_broken" .. room.color) or ("deco_ruins_beam" .. room.color)
         table.insert(addprops, { name = prop, x_offset = -depth / 2, z_offset = -width / 6 })
         table.insert(addprops, { name = prop, x_offset = -depth / 2, z_offset = width / 6, })
-        if room.exits[RoomUtils.GetNorth()] and room.exits[RoomUtils.GetNorth()].vined then
+        if room.exits[RoomUtils.DIR.north] and room.exits[RoomUtils.DIR.north].vined then
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = -width / 2 + 0.75 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = -width / 3 + 0.75 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = -width / 3 - 0.75 })
@@ -819,7 +819,7 @@ local function mazemaker(dungeondef)
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = width / 3 - 0.75 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_north", x_offset = -depth / 2, z_offset = width / 2 - 0.75 })
         end
-        if room.exits[RoomUtils.GetWest()] and room.exits[RoomUtils.GetWest()].vined then
+        if room.exits[RoomUtils.DIR.west] and room.exits[RoomUtils.DIR.west].vined then
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = -depth / 2 + 0.75, z_offset = -width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = -depth / 3 - 0.75, z_offset = -width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = -depth / 6 - 0.75, z_offset = -width / 2 })
@@ -827,7 +827,7 @@ local function mazemaker(dungeondef)
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = depth / 3 - 0.75, z_offset = -width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_east", x_offset = depth / 2 - 0.75, z_offset = -width / 2 })
         end
-        if room.exits[RoomUtils.GetEast()] and room.exits[RoomUtils.GetEast()].vined then
+        if room.exits[RoomUtils.DIR.east] and room.exits[RoomUtils.DIR.east].vined then
             table.insert(addprops, { name = "pig_ruins_wall_vines_west", x_offset = -depth / 2 + 0.75, z_offset = width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_west", x_offset = -depth / 3 - 0.75, z_offset = width / 2 })
             table.insert(addprops, { name = "pig_ruins_wall_vines_west", x_offset = -depth / 6 - 0.75, z_offset = width / 2 })
@@ -1393,7 +1393,7 @@ local function mazemaker(dungeondef)
 
         -- 门
         for dir, exit in pairs(room.exits) do
-            local opposite_dir = RoomUtils.GetOppositeFromDirection(dir)
+            local opposite_dir = RoomUtils.DIR_OPPOSITE[dir.label]
             local doorprop = GetDoorProp(room, dir, exit, width, depth)
 
             -- 把隔壁门也一起生成

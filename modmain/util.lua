@@ -80,6 +80,18 @@ function table.troremovearrayvalues(t, vs)
 end
 
 ----------------------------------------------------------------------------------------------------
+
+-- 字符串拼接，相比直接string.format更简洁，并且参数为nil不会报错，需要注意参数少了对不上$个数还是会报错
+-- 示例string.trofmt(房子大小x:{},y:{}, 2,3)
+function string.trofmt(str, ...)
+    local args = { ... }
+    for i = 1, select('#', ...) do  --获取所有参数，包括nil
+        args[i] = tostring(args[i]) --把表和None都转成字符串，不希望报错
+    end
+    return string.format(str:gsub("{}", "%%s"), unpack(args))
+end
+
+----------------------------------------------------------------------------------------------------
 -- 三元运算函数，因为and or不能充当三元
 function Ternary(a, b, c)
     if a then

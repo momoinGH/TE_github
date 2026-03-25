@@ -1,5 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
-local MakeBaseDoor = require("prefabs/tro_interior_door_defs").MakeBaseDoor
+local MakeDoor = require("prefabs/tro_interior_door_defs").MakeDoor
 local assets =
 {
     Asset("ANIM", "anim/pig_shop.zip"),
@@ -752,16 +752,12 @@ local function PlacerPost(inst)
 end
 
 local function MakeShop(name, data)
-    data = data or {}
     local bank = data.bank or "pig_shop"
     local build = data.build
     local minimap = data.minimap or (name .. ".png")
     assert(build)
 
-    local function fn()
-        local usesound = data.sounds and data.sounds[1] or nil
-        local inst = MakeBaseDoor(bank, build, "idle", false, false, minimap, usesound)
-
+    local function CommonPost(inst)
         inst.entity:AddLight()
         inst.Light:SetFalloff(1)
         inst.Light:SetIntensity(.5)
@@ -774,11 +770,9 @@ local function MakeShop(name, data)
         inst.AnimState:Hide("YOTP")
 
         inst:AddTag("structure")
+    end
 
-        if not TheWorld.ismastersim then
-            return inst
-        end
-
+    local function MasterPost(inst)
         inst.components.teleporter.onActivate = OnTeleporting
 
         inst:AddComponent("lootdropper")
@@ -821,11 +815,18 @@ local function MakeShop(name, data)
         inst:WatchWorldState("isnight", OnNight)
         OnNight(inst, TheWorld.state.isnight)
         inst:ListenForEvent("onbuilt", onbuilt)
-
-        return inst
     end
 
-    return Prefab(name, fn, assets, prefabs),
+    return
+        MakeDoor(name, {
+            assets = assets,
+            prefabs = prefabs,
+            bank = bank,
+            build = build,
+            anim = "idle",
+            minimap = minimap,
+            usesound = data.sounds and data.sounds[1] or nil
+        }, CommonPost, MasterPost),
         MakePlacer(name .. "_placer", bank, build, "idle", false, false, true, nil, nil, nil, PlacerPost)
 end
 

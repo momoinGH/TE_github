@@ -1,4 +1,4 @@
--- 动态加载开发
+-- 动态加载开发，功能开发完再删掉
 print("加载小地图文件")
 
 local Widget = require "widgets/widget"
@@ -8,7 +8,6 @@ local RoomUtils = require("tropical_utils/room_utils")
 
 -- 拟定的房子大小
 local WORLD_TO_MAP_SCALE = 10
-
 local function AddImage(root, atlas, tex, x, y, scale_x, scale_y)
     local img = root:AddChild(Image(atlas, tex))
     img:SetHAnchor(ANCHOR_MIDDLE)
@@ -27,7 +26,7 @@ local function DrawPassage(self, door, width, depth, room_offset_x, room_offset_
     local dir = door.GetDoorOrientation and door:GetDoorOrientation()
     if dir then
         local dx, dy, rotate
-        local d = RoomUtils.GetOrientationByLabel(dir)
+        local d = RoomUtils.DIR[dir]
         dx = d.x * (depth / 2 * ratio + 12)
         dy = d.y * (width / 2 + 6)
         if dir == "north" or dir == "south" then
@@ -50,11 +49,11 @@ local function DrawNearbyRoom(self, near_door, near_room, width, depth, room_off
     local ratio = width / depth
     local dir = near_door.GetDoorOrientation and near_door:GetDoorOrientation()
     if dir then
-        local d = RoomUtils.GetOrientationByLabel(dir)
+        local d = RoomUtils.DIR[dir]
 
         local new_room_offset_x = room_offset_x + d.x * (depth * ratio + 24)
         local nw_room_offset_y = room_offset_y + d.y * (width + 12)
-        local nearroom_node = AppendRoomTexture(self, near_room, new_room_offset_x, nw_room_offset_y)
+        local nearroom_root = AppendRoomTexture(self, near_room, new_room_offset_x, nw_room_offset_y)
     end
 end
 
@@ -68,21 +67,21 @@ AppendRoomTexture = function(self, room, room_offset_x, room_offset_y)
 
     local rx, _, rz = room.Transform:GetWorldPosition()
 
-    local room_node = self:AddChild(Widget("ROOT"))
-    self._tro_houseimags[room] = room_node
+    local room_root = self:AddChild(Widget("ROOT"))
+    self._tro_houseimags[room] = room_root
     -- room_node:SetPosition(room_offset_x, room_offset_y)--修改父对象坐标好像不会影响子坐标
 
     --地板
     for j = -1, 1 do
         for i = -1, 1 do
-            AddImage(room_node, "levels/textures/tro_map_interior/mini_ruins_slab.xml", "mini_ruins_slab.tex",
+            AddImage(room_root, "levels/textures/tro_map_interior/mini_ruins_slab.xml", "mini_ruins_slab.tex",
                 room_offset_x + j * 6.4 * ratio, room_offset_y + i * 6.4,
                 1.02 * ratio, 1.02)
         end
     end
 
     --房间边框
-    AddImage(room_node, "levels/textures/tro_map_interior/frame.xml", "frame.tex", room_offset_x, room_offset_y, ratio, 1)
+    AddImage(room_root, "levels/textures/tro_map_interior/frame.xml", "frame.tex", room_offset_x, room_offset_y, ratio, 1)
     -- frame.inst.ImageWidget:SetBlendMode(BLENDMODE.Additive)
 
     --把房间里所有有小地图图标的画出来
@@ -92,13 +91,14 @@ AppendRoomTexture = function(self, room, room_offset_x, room_offset_y)
         if icon then
             local vx, _, vz = v.Transform:GetWorldPosition()
             if math.abs(vx - rx) <= depth / 2 and math.abs(vz - rz) <= width / 2 then                                 --在房间里
-                AddImage(room_node, icon.atlas, icon.tex, room_offset_x + (vz - rz) * ratio, room_offset_y + rx - vx) --相对房子偏移
+                AddImage(room_root, icon.atlas, icon.tex, room_offset_x + (vz - rz) * ratio, room_offset_y + rx - vx) --相对房子偏移
             end
         end
     end
 
     --检查该房间的门，构建其他房间图片
     for _, v in ipairs(room_ents) do
+        print(v)
         if v:HasTag("interior_door") then
             local targetdoor = v.targetdoor and v.targetdoor:value()
             local near_room = targetdoor and targetdoor:GetRoomCenter()
@@ -113,7 +113,7 @@ AppendRoomTexture = function(self, room, room_offset_x, room_offset_y)
         end
     end
 
-    return room_node
+    return room_root
 end
 
 

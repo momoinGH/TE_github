@@ -45,6 +45,9 @@ end
 
 local function OnSave(inst, data)
     local refs = inst._OnSave and inst:_OnSave(data) or nil
+
+    data.door_orientation = inst.door_orientation
+
     local center = inst:GetRoomCenter()
     if center then
         data.center_guid = center.GUID
@@ -57,6 +60,10 @@ end
 local function OnLoad(inst, data)
     if inst._OnLoad then
         inst:_OnLoad(data)
+    end
+
+    if data and data.door_orientation and inst.SetDoorOrientation then
+        inst:SetDoorOrientation(data.door_orientation)
     end
 end
 
@@ -82,7 +89,7 @@ end
 local function SetDoorOrientation(inst, orientation)
     local anim
     -- 检查当前门动画是不是_closed后缀
-    for _, dir in ipairs(RoomUtils.DIR) do
+    for _, dir in pairs(RoomUtils.DIR) do
         if inst.AnimState:IsCurrentAnimation(dir.label .. "_closed") then
             anim = orientation .. "_closed"
             break
@@ -92,7 +99,7 @@ local function SetDoorOrientation(inst, orientation)
         inst.AnimState:PlayAnimation(anim)
     end
     inst.door_orientation = orientation
-    for _, dir in ipairs(RoomUtils.DIR) do
+    for _, dir in pairs(RoomUtils.DIR) do
         inst:RemoveTag("interior_" .. dir.label .. "_door")
     end
     inst:AddTag("interior_" .. orientation .. "_door") --门朝向标签，客户端可获取该标签
@@ -109,137 +116,11 @@ local function GetDoorOrientation(inst)
         return inst.door_orientation
     end
 
-    for _, dir in ipairs(RoomUtils.DIR) do
+    for _, dir in pairs(RoomUtils.DIR) do
         if inst:HasTag("interior_" .. dir.label .. "_door") then
             return dir.label
         end
     end
-end
-
--- 根据动画重新刷新门朝向字段
-local function OnSetAnimData(inst)
-    local anim = inst.components.tro_saveanim.anim
-    if not anim then return end
-
-    for _, dir in ipairs(RoomUtils.DIR) do
-        if string.starts(anim, dir.label) then
-            SetDoorOrientation(inst, dir.label)
-        end
-    end
-end
-
--- TODO 干掉这个，用MakeDoor代替
---- 虚空门的基础代码
---- trader和hauntable用于传送物品，teleporter用来传送玩家
---- teleporter加在所有门上，可以关联传送目的地和判断房间是否已经创建
----@param bank string
----@param build string
----@param anim string
----@param trader boolean|nil 是否可用于传送物品、交易
----@param interior_door boolean|nil 是否是虚空内部的生成的门，如果是则表示需要记录中心点对象
----@param minimap string|nil 小地图图标
----@param usesound string|nil 使用门的声音，建议"dontstarve/common/pighouse_door"、"dontstarve_DLC003/common/objects/store/door_open"
----@param has_orientation boolean 是否是有四个方向的门
-local function MakeBaseDoor(bank, build, anim, trader, interior_door, minimap, usesound, has_orientation)
-    local inst = CreateEntity()
-
-    inst.entity:SetCanSleep(false) --休眠会影响网络变量的更新
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    if minimap then
-        inst.entity:AddMiniMapEntity()
-        inst.MiniMapEntity:SetIcon(minimap)
-    end
-    if bank then
-        inst.AnimState:SetBank(bank)
-    end
-    if build then
-        inst.AnimState:SetBuild(build)
-    end
-    if anim then
-        inst.AnimState:PlayAnimation(anim)
-    end
-
-    inst.AnimState:SetSortOrder(0)
-
-    inst:AddTag("NOBLOCK")
-    inst:AddTag("interior_door")
-    if trader then
-        inst:AddTag("trader")
-        inst:AddTag("alltrader")
-    end
-
-    -- TODO 不知道为什么主机设置了网络变量客机老是获取不到
-    --我需要客机拿到目的地房间的位置，用于构建小地图
-    inst.targetdoor = net_entity(inst.GUID, "tro_interiordoor.targetdoor")
-
-    if interior_door then
-        inst.room_center = net_entity(inst.GUID, "tro_interiordoor.room_center")
-    end
-    inst.GetRoomCenter = GetRoomCenter
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    if has_orientation then
-        inst.door_orientation = nil
-        local door_orientation = "north" --默认，不用保存，监听tro_saveanim组件的事件来初始化
-        for _, dir in ipairs(RoomUtils.DIR) do
-            if string.starts(anim, dir.label) then
-                door_orientation = dir.label
-                break
-            end
-        end
-        SetDoorOrientation(inst, door_orientation)
-        inst.SetDoorOrientation = SetDoorOrientation
-
-        if not inst.components.tro_saveanim then
-            inst:AddComponent("tro_saveanim")
-            inst:ListenForEvent("tro_saveanimonset", OnSetAnimData)
-        end
-    end
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("teleporter")
-    inst.components.teleporter.offset = 0
-    inst.components.teleporter.travelcameratime = 0
-    inst.components.teleporter.travelarrivetime = 0
-    Hooks.FnDecorator(inst.components.teleporter, "Target", TargetBefore)
-    -- inst.components.teleporter.onActivate = OnActivate
-    -- inst.components.teleporter.OnDoneTeleporting = OnDoneTeleporting
-
-    if trader then
-        inst:AddComponent("trader")
-        inst.components.trader.acceptnontradable = true
-        inst.components.trader.deleteitemonaccept = false
-        inst.components.trader:SetAbleToAcceptTest(DefaultDoorAcceptTest)
-        inst.components.trader.onaccept = DefaultOnDoorAccept
-
-        inst:AddComponent("hauntable")
-        inst.components.hauntable:SetOnHauntFn(OnDoorHaunt)
-    end
-
-    if usesound then
-        inst.usesound = usesound
-    end
-
-    inst:ListenForEvent("onremove", OnDoorRemove)
-    inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-    --外部只能赋值inst._OnSave和inst._OnLoadPostPass
-    inst.OnSave = OnSave
-    inst.OnLoad = OnLoad
-    inst.OnLoadPostPass = OnLoadPostPass
-
-    return inst
 end
 
 ---虚空门
@@ -287,7 +168,6 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
 
         if data.is_inner then
             inst.entity:SetCanSleep(false) --休眠会影响网络变量的更新
-            -- TODO 不知道为什么主机设置了网络变量客机老是获取不到
             --我需要客机拿到目的地房间的位置，用于构建小地图
             inst.targetdoor = net_entity(inst.GUID, "tro_interiordoor.targetdoor")
             inst.room_center = net_entity(inst.GUID, "tro_interiordoor.room_center")
@@ -315,7 +195,6 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
 
             if not inst.components.tro_saveanim then
                 inst:AddComponent("tro_saveanim")
-                inst:ListenForEvent("tro_saveanimonset", OnSetAnimData)
             end
         end
 
@@ -367,6 +246,5 @@ end
 
 return {
     MakeDoor = MakeDoor,
-    MakeBaseDoor = MakeBaseDoor,
     DefaultOnDoorAccept = DefaultOnDoorAccept
 }

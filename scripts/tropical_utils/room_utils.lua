@@ -1,11 +1,34 @@
 -- 为虚空小房子服务
 
-local FN = {}
+local FN     = {}
 
-FN.RADIUS = 16     --小房子最大半径
-FN.BASE_OFF = 1400 --小房子的初始z坐标
-FN.ROOM_GAP = 60
+FN.RADIUS    = 16   --小房子最大半径，包括width和depth
+FN.BASE_OFF  = 1400 --小房子的初始z坐标
+FN.ROOM_GAP  = 60
 FN.ROW_COUNT = (FN.BASE_OFF + 100) / FN.ROOM_GAP * 2
+
+
+FN.DIR           = {
+    east = { x = 1, y = 0, label = "east" },
+    west = { x = -1, y = 0, label = "west" },
+    north = { x = 0, y = 1, label = "north" },
+    south = { x = 0, y = -1, label = "south" }
+}
+
+FN.DIR_OPPOSITE  =
+{
+    east = FN.DIR.west,
+    west = FN.DIR.east,
+    south = FN.DIR.north,
+    north = FN.DIR.south,
+}
+
+local dir_labels = { "east", "west", "north", "south" }
+function FN.GetRandomDir()
+    return dir_labels[math.random(1, #dir_labels)]
+end
+
+----------------------------------------------------------------------------------------------------
 
 function FN.GetCenterPosByHouse(house)
     local door = house.components.teleporter and house.components.teleporter:GetTarget()
@@ -64,7 +87,10 @@ function FN.SpawnWall(x, z, width, depth)
     for dx = -room_dx, room_dx do
         for dz = -room_dz, room_dz do
             if dx == -room_dx or dx == room_dx or dz == -room_dz or dz == room_dz then
-                local part = TUNING.TRO_ROOM_DEBUG and SpawnPrefab("wall_stone") or SpawnPrefab("wall_invisible") --测试使用石墙
+                -- if troisdev then
+                --     local part = SpawnPrefab("wall_stone")  --测试使用石墙
+                -- end
+                local part = SpawnPrefab("wall_invisible")
                 part.Transform:SetPosition(x + dx, 0, z + dz)
             end
         end
@@ -182,77 +208,6 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
-local EAST  = { x = 1, y = 0, label = "east" }
-local WEST  = { x = -1, y = 0, label = "west" }
-local NORTH = { x = 0, y = 1, label = "north" }
-local SOUTH = { x = 0, y = -1, label = "south" }
-
-function FN.GetNorth()
-    return NORTH
-end
-
-function FN.GetSouth()
-    return SOUTH
-end
-
-function FN.GetWest()
-    return WEST
-end
-
-function FN.GetEast()
-    return EAST
-end
-
-FN.DIR = {
-    EAST,
-    WEST,
-    NORTH,
-    SOUTH,
-}
-
-FN.DIR_OPPOSITE =
-{
-    WEST,
-    EAST,
-    SOUTH,
-    NORTH,
-}
-
-function FN.GetOppositeFromDirection(direction)
-    if direction == NORTH then
-        return FN.GetSouth()
-    elseif direction == EAST then
-        return FN.GetWest()
-    elseif direction == SOUTH then
-        return FN.GetNorth()
-    else
-        return FN.GetEast()
-    end
-end
-
-function FN.GetOppositeLabelFromDirection(direction)
-    if direction == "north" then
-        return "south"
-    elseif direction == "south" then
-        return "north"
-    elseif direction == "east" then
-        return "west"
-    elseif direction == "west" then
-        return "east"
-    end
-end
-
-function FN.GetOrientationByLabel(orientation)
-    if orientation == "north" then
-        return FN.GetNorth()
-    elseif orientation == "south" then
-        return FN.GetSouth()
-    elseif orientation == "east" then
-        return FN.GetEast()
-    elseif orientation == "west" then
-        return FN.GetWest()
-    end
-end
 
 -- 房间的配置表，除了name，其他都可省
 -- local newRoom = {
@@ -282,7 +237,6 @@ end
 -- }
 
 
-
 ---创建房间
 ---@param room table 房间配置表
 ---@return table doors  所有的房间门
@@ -305,9 +259,7 @@ function FN.CreateRoom(room)
     center.room_width:set(width)
     center.room_depth:set(depth)
 
-    if TUNING.TRO_ROOM_DEBUG then
-        conprint("开始生成房间，房子中心：", x, ",", z, "，房间大小：", width, ",", depth)
-    end
+    print(string.trofmt("开始生成房间，房子中心对象{}，房间大小：{},{}", center, width, depth))
 
     --生成墙体
     FN.SpawnWall(x, z, width, depth)
@@ -316,14 +268,11 @@ function FN.CreateRoom(room)
     --生产内部物品
     for _, data in ipairs(room.addprops) do
         local p = SpawnPrefab(data.name)
-
         if p then
             local x_offset = data.x_offset
             local scale = data.scale
 
-            if TUNING.TRO_ROOM_DEBUG then
-                conprint("创建内部对象：", p, "是门吗：", p:HasTag("interior_door"), ", key：", data.key)
-            end
+            print(string.trofmt("创建内部对象：{}, 是门吗：{}, key：{}", p, p:HasTag("interior_door"), data.key))
 
             if p:HasTag("interior_door") then
                 --门
@@ -424,6 +373,7 @@ function FN.SpawnNearHouseInterior(door, room)
         return false
     end
     local dpos = FN.GetDoorRelativePosition(door)
+    print("什么方向2", door.door_orientation)
     if not dpos or not door.door_orientation then
         print("生成新房间失败", door, door.door_orientation)
         return false
@@ -437,7 +387,7 @@ function FN.SpawnNearHouseInterior(door, room)
         newDoor.room_center:set(center)
     end
 
-    local opp_dir = FN.GetOppositeLabelFromDirection(door.door_orientation)
+    local opp_dir = FN.DIR_OPPOSITE[door.door_orientation].label
     newDoor:SetDoorOrientation(opp_dir)
 
     if door.door_orientation == "west" then
@@ -483,7 +433,7 @@ function FN.FindRoomEnts(room, musttags, canttags, mustoneoftags)
     local r = math.sqrt(depth * depth + width * width) / 2
     for _, v in ipairs(TheSim:FindEntities(x, 0, z, r, musttags, canttags, mustoneoftags)) do
         local vx, _, vz = v.Transform:GetWorldPosition()
-        if math.abs(vx - x) <= depth / 2 and math.abs(vz - z) <= width / 2 then --在房间里
+        if math.abs(vx - x) <= depth / 2 + 1 and math.abs(vz - z) <= width / 2 + 1 then --在房间里，加1稍微放大一点儿考虑边界情况
             table.insert(ents, v)
         end
     end

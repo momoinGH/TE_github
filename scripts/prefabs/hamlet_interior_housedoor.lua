@@ -105,8 +105,6 @@ local function MakeHouseDoor(name)
         inst.components.hauntable:SetOnHauntFn(OnHaunt)
 
         inst:AddComponent("lootdropper")
-        inst:AddComponent("tro_saveanim")
-        inst:AddComponent("entitytracker")
 
         -- 出口不能敲毁，入口可敲，出口不能敲
         inst:DoTaskInTime(0, function()
