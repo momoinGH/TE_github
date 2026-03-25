@@ -417,8 +417,6 @@ local function SpawnNearDoor(door, near_room)
     door.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. door.door_orientation)
     new_door.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. new_door.door_orientation)
 
-    door:RemoveTag("predoor")
-    new_door:RemoveTag("predoor")
     new_door:AddTag("hamlet_houseexit")
 
     door.components.teleporter:Target(new_door)
@@ -429,6 +427,7 @@ local function SpawnNearDoor(door, near_room)
     end
 
     OnBuiltDestroyNear(new_door)
+    return new_door
 end
 
 --- 生成临近的新房间，用于房屋扩展许可证
