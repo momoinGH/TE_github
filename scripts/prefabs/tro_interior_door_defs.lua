@@ -27,7 +27,6 @@ end
 
 local function OnDoorRemove(inst)
     RoomUtils.OnHouseDestroy(inst, nil, true)
-    TheWorld:PushEvent("tro_onroomdoorremove", inst)
 end
 
 local function OnDoneTeleporting(inst, obj)
@@ -40,21 +39,9 @@ local function TargetBefore(self, otherTeleporter)
     end
 end
 
-local function GetRoomCenter(inst)
-    return inst.room_center and inst.room_center:value() or nil
-end
-
 local function OnSave(inst, data)
     local refs = inst._OnSave and inst:_OnSave(data) or nil
-
     data.door_orientation = inst.door_orientation
-
-    local center = inst:GetRoomCenter()
-    if center then
-        data.center_guid = center.GUID
-        refs = refs or {}
-        refs = { center.GUID }
-    end
     return refs
 end
 
@@ -71,13 +58,6 @@ end
 local function OnLoadPostPass(inst, newents, data)
     if inst._OnLoadPostPass then
         inst:_OnLoadPostPass(newents, data)
-    end
-
-    if data and data.center_guid then
-        local center = newents[data.center_guid]
-        if center and inst.room_center then
-            inst.room_center:set(center.entity)
-        end
     end
 
     --加载的时候我需要手动给网络变量赋值
@@ -103,9 +83,9 @@ local function SetDoorOrientation(inst, orientation)
     for _, dir in pairs(RoomUtils.DIR) do
         inst:RemoveTag("interior_" .. dir.label .. "_door")
     end
-    inst:AddTag("interior_" .. orientation .. "_door") --门朝向标签，客户端可获取该标签
+    inst:AddTag("interior_" .. orientation .. "_door")  --门朝向标签，客户端可获取该标签
 
-    if orientation == "south" then                     --其他方向的门层级放低点
+    if orientation == "south" then                      --其他方向的门层级放低点
         inst.AnimState:SetLayer(LAYER_WORLD)
     else
         inst.AnimState:SetLayer(LAYER_BACKGROUND)
@@ -171,18 +151,11 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
         if data.is_inner then
             --我需要客机拿到目的地房间的位置，用于构建小地图
             inst.targetdoor = net_entity(inst.GUID, "tro_interiordoor.targetdoor")
-            inst.room_center = net_entity(inst.GUID, "tro_interiordoor.room_center")
         end
-        inst.GetRoomCenter = GetRoomCenter
 
         if data.door_orientation then
             inst.GetDoorOrientation = GetDoorOrientation
         end
-
-        inst:DoTaskInTime(0, function(inst)
-            TheWorld:PushEvent("tro_onroomdoorcreate", inst)
-        end)
-        inst:ListenForEvent("onremove", OnDoorRemove)
 
         if common_post_fn then
             common_post_fn(inst)
@@ -230,6 +203,7 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
         end
 
         inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
+        inst:ListenForEvent("onremove", OnDoorRemove)
 
         if master_post_fn then
             master_post_fn(inst)

@@ -44,10 +44,18 @@ function FN.GetRandomDir()
 end
 
 ----------------------------------------------------------------------------------------------------
+local function OnBuiltDestroyNear(inst, radius)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    for _, v in ipairs(TheSim:FindEntities(x, y, z, radius or 2)) do
+        if v.components.workable then
+            v.components.workable:Destroy(inst)
+        end
+    end
+end
 
 function FN.GetCenterPosByHouse(house)
     local door = house.components.teleporter and house.components.teleporter:GetTarget()
-    local center = door and door:GetRoomCenter()
+    local center = door and door:TroGetRoomCenter()
     return center and center:GetPosition()
 end
 
@@ -306,9 +314,6 @@ function FN.CreateRoom(room)
 
             if p:HasTag("interior_door") then
                 --门
-                if trodevassert(p.room_center, "室内门需要有room_center字段记录自己的中心点") then
-                    p.room_center:set(center)
-                end
                 local key = data.key or door_inc
                 door_inc = door_inc + 1 --只要每次创建房间时唯一就行
                 doors[key] = p
@@ -399,45 +404,53 @@ function FN.CreateRooms(rooms)
     return doors, door_map, centers
 end
 
---- 生成临近的新房间，用于房屋扩展许可证
-function FN.SpawnNearHouseInterior(door, room)
-    if door.components.teleporter:GetTarget() then
-        print("生成新房间失败，该门已经有传送目标了", door)
-        return false
-    end
-    local dpos = FN.GetDoorRelativePosition(door)
-    if not dpos or not door.door_orientation then
-        print("生成新房间失败", door, door.door_orientation)
-        return false
-    end
-    local _, _, center = FN.CreateRoom(room)
-    local pos = center:GetPosition()
-
-    -- 还要装一个对应的门
-    local newDoor = SpawnPrefab(door.prefab)
-    if newDoor.room_center then
-        newDoor.room_center:set(center)
-    end
+-- 还要装一个对应的门
+local function SpawnNearDoor(door, near_room)
+    local pos = near_room:GetPosition()
+    local new_door = SpawnPrefab(door.prefab)
 
     local opp_dir = FN.DIR_OPPOSITE[door.door_orientation]
-    newDoor:SetDoorOrientation(opp_dir.label)
-    print(string.trofmt("生成新房间门：{}，位置：{},{},{}", newDoor, pos.x + opp_dir.x * 5, 0, pos.z * 7.5))
-    newDoor.Transform:SetPosition(pos.x + opp_dir.x * 5, 0, pos.z + opp_dir.y * 7.5)
+    new_door:SetDoorOrientation(opp_dir.label)
+    print(string.trofmt("生成新房间门：{}，位置：{},{},{}", new_door, pos.x + opp_dir.x * 5, 0, pos.z * 7.5))
+    new_door.Transform:SetPosition(pos.x + opp_dir.x * 5, 0, pos.z + opp_dir.y * 7.5)
 
     door.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. door.door_orientation)
-    newDoor.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. newDoor.door_orientation)
+    new_door.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. new_door.door_orientation)
 
     door:RemoveTag("predoor")
-    newDoor:RemoveTag("predoor")
-    newDoor:AddTag("hamlet_houseexit")
+    new_door:RemoveTag("predoor")
+    new_door:AddTag("hamlet_houseexit")
 
-    door.components.teleporter:Target(newDoor)
-    newDoor.components.teleporter:Target(door)
+    door.components.teleporter:Target(new_door)
+    new_door.components.teleporter:Target(door)
 
     if door.SoundEmitter then
         door.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break")
     end
+
+    OnBuiltDestroyNear(new_door)
+end
+
+--- 生成临近的新房间，用于房屋扩展许可证
+function FN.SpawnNearHouseInterior(door, room, dir)
+    if door.components.teleporter:GetTarget() then
+        print("生成新房间失败，该门已经有传送目标了", door)
+        return false
+    end
+    local _, _, center = FN.CreateRoom(room)
+    SpawnNearDoor(door, center)
     return true
+end
+
+-- 门生成时如果该方向已经有房间了直接连通
+function FN.OnDoorBuiltCheckNearRoom(door)
+    local x, y, z = door.Transform:GetWorldPosition()
+    local room_grid, room_x, room_y = FN.GetCurrentRoomsGrid(x, y, z)
+    local dir = door.door_orientation
+    local near_room = room_grid[FN.DIR[dir].x + room_x] and room_grid[FN.DIR[dir].x + room_x][FN.DIR[dir].y + room_y]
+    if near_room then
+        SpawnNearDoor(door, near_room)
+    end
 end
 
 function FN.CreateSimpleInterior(inst, room)
@@ -462,6 +475,81 @@ function FN.FindRoomEnts(room, musttags, canttags, mustoneoftags)
         end
     end
     return ents
+end
+
+----------------------------------------------------------------------------------------------------
+
+-- 获得指定位置当前室内布局网格，用于地图绘制和室内新门构建
+function FN.GetCurrentRoomsGrid(rx, ry, rz)
+    local room_grid = {}
+
+    local start_room
+    if type(rx) == "table" and rx.prefab then
+        start_room = rx
+    else
+        start_room = TheWorld.Map:TroGetRoomCenter(rx, ry, rz)
+    end
+    if not start_room then
+        return room_grid
+    end
+
+
+    local start_x, start_y
+
+
+    local min_x, max_x, min_y, max_y = 0, 0, 0, 0
+    local room_poses = { [start_room] = { 0, 0 } }
+
+    local function dfs(room)
+        local cur_x = room_poses[room][1]
+        local cur_y = room_poses[room][2]
+        for dir, near_room in pairs(room:GetNearRooms()) do
+            if not room_poses[near_room] then
+                local x = cur_x + FN.DIR[dir].x
+                local y = cur_y + FN.DIR[dir].y
+                room_poses[near_room] = { x, y }
+                min_x = math.min(min_x, x)
+                max_x = math.max(max_x, x)
+                min_y = math.min(min_y, y)
+                max_y = math.max(max_y, y)
+                dfs(near_room)
+            end
+        end
+    end
+    dfs(start_room)
+
+    for i = min_x, max_x do
+        local row = {}
+        for j = min_y, max_y do
+            table.insert(row, false) --空的位置填充false
+        end
+        table.insert(room_grid, row)
+    end
+
+    for room, pos in pairs(room_poses) do
+        local x = pos[1] - min_x + 1
+        local y = pos[2] - min_y + 1
+        room_grid[x][y] = room
+        if room == start_room then
+            start_x = x
+            start_y = y
+        end
+    end
+
+    if troisdev then
+        print("打印指定位置房间网格", rx, ry, rz)
+        for x = 1, #room_grid do
+            local s = ""
+            for y = 1, #room_grid[x] do
+                local room = room_grid[x][y]
+                local is_start = room == start_room
+                s = s .. (room == false and " 000000 " or (is_start and ("[" .. tostring(room.GUID) .. "]") or (" " .. tostring(room.GUID) .. " "))) .. "  "
+            end
+            print(s)
+        end
+    end
+
+    return room_grid, start_x, start_y
 end
 
 return FN

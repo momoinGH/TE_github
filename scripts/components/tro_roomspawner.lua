@@ -5,7 +5,7 @@ local ROOM_GAP = RoomUtils.ROOM_GAP
 local ROW_COUNT = RoomUtils.ROW_COUNT
 
 local function OnRoomDoorCreate(inst, door)
-    local room_center = door:GetRoomCenter()
+    local room_center = door:TroGetRoomCenter()
     if not room_center then
         return
     end
@@ -16,7 +16,7 @@ end
 
 local function OnRoomDoorRemove(inst, door)
     local self = inst.components.tro_roomspawner
-    local room_center = door:GetRoomCenter()
+    local room_center = door:TroGetRoomCenter()
     if room_center then
         self:UpdateRoom(room_center)
     end
@@ -36,24 +36,6 @@ end
 -- 这是一个主客机都有的组件，主机只需要保存count保证count递增，主客机都会构建rooms结构
 local RoomSpawner = Class(function(self, inst)
     self.inst = inst
-
-    --所有房子结构图，记录每个房间各个方向通向哪里，主要用于新房间生成和地图显示，不应该太依赖这个，可能会更新不及时
-    self.rooms = {
-        -- [102707] = {
-        --     north = 102707,
-        --     south = 102707,
-        --     west = 102707,
-        --     east = 102707,
-        --     entrance_door = 102707, 连通外部的入口
-        -- }
-    }
-
-    inst:ListenForEvent("tro_onroomcreate", OnRoomCreate)
-    inst:ListenForEvent("tro_onroomremove", OnRoomRemove)
-    inst:ListenForEvent("tro_onroomdoorcreate", OnRoomDoorCreate)
-    inst:ListenForEvent("tro_onroomdoorremove", OnRoomDoorRemove)
-
-    if not TheWorld.ismastersim then return end
 
     self.count = 0 --小房子坐标计数器，主机数据
 end)
@@ -88,7 +70,7 @@ function RoomSpawner:UpdateRoom(room)
                 -- 地图外的门
                 local dir = door:GetDoorOrientation()
                 if dir then
-                    local near_room = near_door:GetRoomCenter()
+                    local near_room = near_door:TroGetRoomCenter()
                     if near_room then
                         self.rooms[room.GUID][dir] = near_room.GUID
                         self.rooms[near_room.GUID] = self.rooms[near_room.GUID] or {}

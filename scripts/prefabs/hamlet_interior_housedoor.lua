@@ -65,8 +65,11 @@ local room = {
 
 local function onaccept(inst, giver, item)
     if item.prefab == "construction_permit" and not inst.components.teleporter.targetTeleporter then
-        if RoomUtils.SpawnNearHouseInterior(inst, room) then --应该没可能失败
+        if RoomUtils.SpawnNearHouseInterior(inst, room, inst.door_orientation) then --应该没可能失败
             item:Remove()
+        else
+            item.Transform:SetPosition(giver.Transform:GetWorldPosition())
+            item.components.inventoryitem:OnDropped()
         end
     else
         inst.components.teleporter:Activate(item)
@@ -74,12 +77,12 @@ local function onaccept(inst, giver, item)
 end
 
 local function OnBuilt(inst)
-    local door_orientation = RoomUtils.TestWallOrnamentPos(inst, false, 7.5, 5, 7.5, 5.5)
-    local anim = "_close_" .. door_orientation
-    inst:SetDoorOrientation(door_orientation)
+    local dir = RoomUtils.TestWallOrnamentPos(inst, false, 7.5, 5, 7.5, 5)
+    local anim = "_close_" .. dir
+    inst:SetDoorOrientation(dir)
     inst.components.tro_saveanim:Init(nil, nil, inst.prefab .. anim)
     -- inst.AnimState:PlayAnimation(inst.prefab .. anim)
-    inst.room_center:set(inst:TroGetRoomCenter()) --找到房子中心点对象
+    RoomUtils.OnDoorBuiltCheckNearRoom(inst)
 end
 
 local function onhammered(inst, worker)

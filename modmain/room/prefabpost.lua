@@ -60,9 +60,8 @@ local function WorldPushEventBefore(inst, event, pos)
 end
 
 AddPrefabPostInit("world", function(inst)
-    inst:AddComponent("tro_roomspawner")
-
     if not TheWorld.ismastersim then return end
+    inst:AddComponent("tro_roomspawner")
     Hooks.FnDecorator(inst, "PushEvent", WorldPushEventBefore)
 end)
 

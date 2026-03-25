@@ -27,8 +27,31 @@ local function IsPointInRoom(inst, x, z)
         and x <= rx + half_depth
 end
 
-local function OnRemove(inst, data)
-    TheWorld:PushEvent("tro_onroomremove", inst)
+-- 拿到一侧的门
+local function GetRoomDoor(inst, dir)
+    local doors = RoomUtils.FindRoomEnts(inst, { "interior_" .. dir .. "_door" })
+    if #doors >= 2 then
+        TroErrorHandle(string.trofmt("这个室内{}方向有{}个门：{}", dir, #doors, PrintTable(doors)))
+    end
+    return #doors > 0 and doors[1] or nil
+end
+
+local function GetNearRoom(inst, dir)
+    local door = GetRoomDoor(inst, dir)
+    local target_door = door and door.targetdoor and door.targetdoor:value()
+    return target_door and target_door:TroGetRoomCenter() or nil
+end
+
+-- 查找上下左右的相邻房间
+local function GetNearRooms(inst)
+    local near_rooms = {}
+    for dir, _ in pairs(RoomUtils.DIR) do
+        local room = GetNearRoom(inst, dir)
+        if room then
+            near_rooms[dir] = room
+        end
+    end
+    return near_rooms
 end
 
 local function fn()
@@ -45,11 +68,9 @@ local function fn()
     inst.room_width = net_smallbyte(inst.GUID, "interior_center.room_width")
     inst.room_depth = net_smallbyte(inst.GUID, "interior_center.room_depth")
     inst.IsPointInRoom = IsPointInRoom
-
-    inst:DoTaskInTime(0, function()
-        TheWorld:PushEvent("tro_onroomcreate", inst)
-    end)
-    inst:ListenForEvent("onremove", OnRemove)
+    inst.GetRoomDoor = GetRoomDoor
+    inst.GetNearRoom = GetNearRoom
+    inst.GetNearRooms = GetNearRooms
 
     inst.entity:SetPristine()
 

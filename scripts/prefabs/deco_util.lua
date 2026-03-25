@@ -319,12 +319,6 @@ local function OnLoad(inst, data)
 
     inst.sunraysspawned = data.sunraysspawned or inst.sunraysspawned
 
-    if data.setbackground then
-        inst.setbackground = data.setbackground
-        inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-        inst.AnimState:SetSortOrder(data.setbackground)
-    end
-
     if data.onbuilt then
         inst.onbuilt = data.onbuilt
         inst:AddTag("playercrafted")
@@ -442,9 +436,9 @@ function decofn(build, bank, animframe, data, name)
         end
 
         if data.background then
-            inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+            -- inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+            inst.AnimState:SetLayer(LAYER_BACKGROUND)
             inst.AnimState:SetSortOrder(data.background)
-            inst.setbackground = data.background
         end
 
         if data.workable then
