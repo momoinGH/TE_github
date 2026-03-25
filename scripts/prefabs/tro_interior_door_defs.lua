@@ -167,8 +167,8 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
             inst:AddTag("alltrader")
         end
 
+        inst.entity:SetCanSleep(false) --休眠会影响网络变量的同步，而且客户端没有休眠的门实体
         if data.is_inner then
-            inst.entity:SetCanSleep(false) --休眠会影响网络变量的更新
             --我需要客机拿到目的地房间的位置，用于构建小地图
             inst.targetdoor = net_entity(inst.GUID, "tro_interiordoor.targetdoor")
             inst.room_center = net_entity(inst.GUID, "tro_interiordoor.room_center")

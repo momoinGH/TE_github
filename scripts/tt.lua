@@ -87,18 +87,23 @@ AppendRoomTexture = function(self, room, room_offset_x, room_offset_y)
     -- frame.inst.ImageWidget:SetBlendMode(BLENDMODE.Additive)
 
     --把房间里所有有小地图图标的画出来
+    local player_image = {}
     local room_ents = RoomUtils.FindRoomEnts(room)
     for _, v in ipairs(room_ents) do
         local icon = v.tro_minimap_icon
         local atlas = icon and GetMinimapAtlas(icon) --找到图集才显示
         if atlas then
             local vx, _, vz = v.Transform:GetWorldPosition()
-            if math.abs(vx - rx) <= depth / 2 and math.abs(vz - rz) <= width / 2 then --在房间里
-                local x = room_offset_x + (vz - rz) * ratio * 1.4                     --稍微远离中心点一点
-                local y = room_offset_y + (rx - vx) * 1.4
-                AddImage(room_root, atlas, icon, x, y)
+            local x = room_offset_x + (vz - rz) * ratio * 1.4     --稍微远离中心点一点
+            local y = room_offset_y + (rx - vx) * 1.4
+            local image = AddImage(room_root, atlas, icon, x, y)
+            if v:HasTag("player") then
+                table.insert(player_image, image)
             end
         end
+    end
+    for _, image in ipairs(player_image) do
+        image:MoveToFront() --玩家图片要放在最前面
     end
 
     --检查该房间的门，构建其他房间图片
