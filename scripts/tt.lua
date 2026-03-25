@@ -3,7 +3,7 @@ print("加载小地图文件")
 
 local Widget = require "widgets/widget"
 local Image = require "widgets/image"
-local MINIMAP_DEFS = require("tro_minimapdefs")
+local MINIMAP_DEFS = require("tro_roomminimapdefs")
 local RoomUtils = require("tropical_utils/room_utils")
 
 -- 拟定的房子大小
@@ -27,8 +27,8 @@ local function DrawPassage(self, door, width, depth, room_offset_x, room_offset_
     if dir then
         local dx, dy, rotate
         local d = RoomUtils.DIR[dir]
-        dx = d.x * (depth / 2 * ratio + 12)
-        dy = d.y * (width / 2 + 6)
+        dx = d.y * (depth / 2 * ratio + 12)
+        dy = -d.x * (width / 2 + 6)
         if dir == "north" or dir == "south" then
             rotate = 90
         end
@@ -45,18 +45,20 @@ end
 local AppendRoomTexture
 
 -- 绘制附近的房间
-local function DrawNearbyRoom(self, near_door, near_room, width, depth, room_offset_x, room_offset_y)
+local function DrawNearbyRoom(self, door, near_room, width, depth, room_offset_x, room_offset_y)
     local ratio = width / depth
-    local dir = near_door.GetDoorOrientation and near_door:GetDoorOrientation()
+    local dir = door.GetDoorOrientation and door:GetDoorOrientation()
     if dir then
         local d = RoomUtils.DIR[dir]
 
-        local new_room_offset_x = room_offset_x + d.x * (depth * ratio + 24)
-        local nw_room_offset_y = room_offset_y + d.y * (width + 12)
+        local new_room_offset_x = room_offset_x + d.y * (depth * ratio + 24)
+        local nw_room_offset_y = room_offset_y - d.x * (width + 12)
         local nearroom_root = AppendRoomTexture(self, near_room, new_room_offset_x, nw_room_offset_y)
     end
 end
 
+--- BFS绘制房间
+--- 以相对坐标决定绘制的坐标，需要注意的是x差值和z差值对应的是image的y和x，而且使用RoomUtils.DIR时别忘了房子的坐标轴和image坐标轴的转换
 AppendRoomTexture = function(self, room, room_offset_x, room_offset_y)
     room_offset_x = room_offset_x or 0
     room_offset_y = room_offset_y or 0
@@ -87,18 +89,20 @@ AppendRoomTexture = function(self, room, room_offset_x, room_offset_y)
     --把房间里所有有小地图图标的画出来
     local room_ents = RoomUtils.FindRoomEnts(room)
     for _, v in ipairs(room_ents) do
-        local icon = MINIMAP_DEFS[v.prefab]
-        if icon then
+        local icon = v.tro_minimap_icon
+        local atlas = icon and GetMinimapAtlas(icon) --找到图集才显示
+        if atlas then
             local vx, _, vz = v.Transform:GetWorldPosition()
-            if math.abs(vx - rx) <= depth / 2 and math.abs(vz - rz) <= width / 2 then                                 --在房间里
-                AddImage(room_root, icon.atlas, icon.tex, room_offset_x + (vz - rz) * ratio, room_offset_y + rx - vx) --相对房子偏移
+            if math.abs(vx - rx) <= depth / 2 and math.abs(vz - rz) <= width / 2 then --在房间里
+                local x = room_offset_x + (vz - rz) * ratio * 1.4                     --稍微远离中心点一点
+                local y = room_offset_y + (rx - vx) * 1.4
+                AddImage(room_root, atlas, icon, x, y)
             end
         end
     end
 
     --检查该房间的门，构建其他房间图片
     for _, v in ipairs(room_ents) do
-        print(v)
         if v:HasTag("interior_door") then
             local targetdoor = v.targetdoor and v.targetdoor:value()
             local near_room = targetdoor and targetdoor:GetRoomCenter()

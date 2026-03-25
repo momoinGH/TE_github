@@ -99,10 +99,10 @@ AddCityRecipe("lawnornament_4", { Ig("cutstone", 2), Ig("oinc", 7) }, { min_spac
 AddCityRecipe("lawnornament_5", { Ig("cutstone", 2), Ig("oinc", 7) }, { min_spacing = 1, placer = "lawnornament_5_placer" })
 AddCityRecipe("lawnornament_6", { Ig("cutstone", 2), Ig("oinc", 7) }, { min_spacing = 1, placer = "lawnornament_6_placer" })
 AddCityRecipe("lawnornament_7", { Ig("cutstone", 2), Ig("oinc", 7) }, { min_spacing = 1, placer = "lawnornament_7_placer" })
-AddCityRecipe("topiary_1", { Ig("oinc", 10) }, { min_spacing = 1, placer = "topiary_1_placer" })
-AddCityRecipe("topiary_2", { Ig("oinc", 10) }, { min_spacing = 1, placer = "topiary_2_placer" })
-AddCityRecipe("topiary_3", { Ig("oinc", 12) }, { min_spacing = 1, placer = "topiary_3_placer" })
-AddCityRecipe("topiary_4", { Ig("oinc", 12) }, { min_spacing = 1, placer = "topiary_4_placer" })
+AddCityRecipe("topiary_1", { Ig("oinc", 10) }, { min_spacing = 1, placer = "topiary_1_placer", atlas = "minimap/minimap_hamlet.xml", image = "topiary_1.png" }) --没图片，拿小地图图片凑合一下
+AddCityRecipe("topiary_2", { Ig("oinc", 10) }, { min_spacing = 1, placer = "topiary_2_placer", atlas = "minimap/minimap_hamlet.xml", image = "topiary_2.png" })
+AddCityRecipe("topiary_3", { Ig("oinc", 12) }, { min_spacing = 1, placer = "topiary_3_placer", atlas = "minimap/minimap_hamlet.xml", image = "topiary_3.png" })
+AddCityRecipe("topiary_4", { Ig("oinc", 12) }, { min_spacing = 1, placer = "topiary_4_placer", atlas = "minimap/minimap_hamlet.xml", image = "topiary_4.png" })
 
 
 ----------------------------------------------------------------------------------------------------
@@ -151,6 +151,7 @@ local function AddHomeRecipe(name, cost, placer, image, data)
     data.nounlock = true
     data.no_deconstruction = true
     data.placer = placer
+    data.image = image
     -- data.min_spacing = 0 --最小建造间距
 
     return TroAddRecipe(name, ingredients, TECH.HOME_TWO, data, { "HOME" })

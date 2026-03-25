@@ -27,6 +27,7 @@ end
 
 local function OnDoorRemove(inst)
     RoomUtils.OnHouseDestroy(inst, nil, true)
+    TheWorld:PushEvent("tro_onroomdoorremove", inst)
 end
 
 local function OnDoneTeleporting(inst, obj)
@@ -178,6 +179,11 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
             inst.GetDoorOrientation = GetDoorOrientation
         end
 
+        inst:DoTaskInTime(0, function(inst)
+            TheWorld:PushEvent("tro_onroomdoorcreate", inst)
+        end)
+        inst:ListenForEvent("onremove", OnDoorRemove)
+
         if common_post_fn then
             common_post_fn(inst)
         end
@@ -197,7 +203,6 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
                 inst:AddComponent("tro_saveanim")
             end
         end
-
 
         inst:AddComponent("inspectable")
 
@@ -224,7 +229,6 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
             inst.usesound = data.usesound
         end
 
-        inst:ListenForEvent("onremove", OnDoorRemove)
         inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
 
         if master_post_fn then

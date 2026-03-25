@@ -74,7 +74,8 @@ if troisdev then
     modimport "modmain/data_validator_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 
-modimport "modmain/animstate"         -- AnimState 增强
+modimport "modmain/animstate" -- AnimState 增强
+modimport "modmain/minimapentity"
 modimport "modmain/soundemitter"
 modimport "modmain/ents_trace"        --缓存记录一些需要全局查找的实体
 modimport "modmain/player_classified" --为player_classified添加网络变量提供便捷
@@ -138,7 +139,7 @@ end)
 Assets = all_assets
 all_assets = nil
 
-
+troimportmodulefile("simutil")
 troimportmodulefile("containers") --定义容器
 troimportmodulefile("ui")         --UI相关
 troimportmodulefile("prefabpost") --组件、预制件的修改

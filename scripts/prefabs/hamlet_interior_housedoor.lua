@@ -90,10 +90,6 @@ end
 
 -- teleporter会紫东阁保存传送目的地的门
 local function MakeHouseDoor(name)
-    local function CommonPost(inst)
-
-    end
-
     local function MasterPost(inst)
         inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
         inst.components.trader.onaccept = onaccept
@@ -130,13 +126,13 @@ local function MakeHouseDoor(name)
         trader = true,
         is_inner = true,
         door_orientation = "north"
-    }, CommonPost, MasterPost)
+    }, nil, MasterPost)
 end
 
 ----------------------------------------------------------------------------------------------------
 
 local function PlacerOnUpdateTransform(inst)
-    local door_orientation, minDis = RoomUtils.TestWallOrnamentPos(inst, true, 7.5, 5, 7.5, 5) --门可建造范围，太靠墙会导致玩家过不去
+    local door_orientation, minDis = RoomUtils.TestWallOrnamentPos(inst, true, 7.5, 5, 7.5, 5, true) --门可建造范围，太靠墙会导致玩家过不去
     local anim
     if door_orientation and minDis < 4 then
         anim = "_close_" .. door_orientation
@@ -153,7 +149,7 @@ local function PlacerOnUpdateTransform(inst)
     if inst.accept_placement then
         -- 我还需要检测旁边是否有门
         local x, y, z = inst.Transform:GetWorldPosition()
-        if #TheSim:FindEntities(x, 0, z, 4, { "hamlet_door" }) > 0 then
+        if #TheSim:FindEntities(x, 0, z, 4, { "interior_door" }) > 0 then
             inst.accept_placement = false
         end
     end
@@ -227,6 +223,7 @@ local function MakeExitDoor(name, anim)
         assets = assets,
         bank = "pig_shop_doormats",
         build = "pig_shop_doormats",
+        minimap = "player_frontdoor.png",
         anim = anim,
         trader = true,
         is_inner = true,

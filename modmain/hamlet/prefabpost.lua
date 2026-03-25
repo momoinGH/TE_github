@@ -2,7 +2,6 @@ if TUNING.tropical.only_hamlet then
     modimport "modmain/hamlet/sim_ham" --ham cloud
 end
 
-modimport "modmain/hamlet/simutil"
 modimport "modmain/common/poisonable"
 modimport "modmain/hamlet/oinc.lua"             --呼噜币换算
 modimport "modmain/hamlet/aporkalypse.lua" --大灾变

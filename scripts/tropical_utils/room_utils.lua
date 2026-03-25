@@ -7,20 +7,35 @@ FN.BASE_OFF  = 1400 --小房子的初始z坐标
 FN.ROOM_GAP  = 60
 FN.ROW_COUNT = (FN.BASE_OFF + 100) / FN.ROOM_GAP * 2
 
+--[[
+房间坐标轴朝向
+          |
+          |
+-------------------> z
+          |
+          |
+          v
+          x
+
+width：z轴
+depth：x轴
+虽然坐标轴有些反直觉，但是单机是这样的
+]]
+
 
 FN.DIR           = {
-    east = { x = 1, y = 0, label = "east" },
-    west = { x = -1, y = 0, label = "west" },
-    north = { x = 0, y = 1, label = "north" },
-    south = { x = 0, y = -1, label = "south" }
+    north = { x = -1, y = 0, label = "north" }, --上
+    south = { x = 1, y = 0, label = "south" },  --下
+    west = { x = 0, y = -1, label = "west" },   --左
+    east = { x = 0, y = 1, label = "east" },    --右
 }
 
 FN.DIR_OPPOSITE  =
 {
+    north = FN.DIR.south,
+    south = FN.DIR.north,
     east = FN.DIR.west,
     west = FN.DIR.east,
-    south = FN.DIR.north,
-    north = FN.DIR.south,
 }
 
 local dir_labels = { "east", "west", "north", "south" }
@@ -107,57 +122,69 @@ function FN.ClearSpace(x, z)
 end
 
 ---根据目标对象位置计算距离最近的墙面
-function FN.TestWallOrnamentPos(target, isSetPos, left, top, right, bottom)
+---@param target Entity
+---@param isSetPos boolean 是否设置实体坐标吸附到墙面
+---@param left number 离左边的距离
+---@param top number 离上边的距离
+---@param right number 离右边的距离
+---@param bottom number 离下边的距离
+---@param limit_center boolean 是否限制实体必须在墙面的中心位置
+---@return string side 哪个方向的墙
+---@return number minDis 距离
+---@return number x 房子中心坐标x
+---@return number z 房子中心坐标z
+function FN.TestWallOrnamentPos(target, isSetPos, left, top, right, bottom, limit_center)
     left = left or 7.5
     top = top or 5
     right = right or 7.5
 
     local pos = target:GetPosition()
     local room_center = target:TroGetRoomCenter()
-
-    if room_center then
-        local x, y, z = room_center.Transform:GetWorldPosition()
-        local dx, dz = pos.x - x, pos.z - z
-
-        -- 寻找距离最近的一侧墙
-        local side = "west"
-        local minDis = math.abs(dz + left) --左
-
-        local tem = math.abs(dx + top)
-        if tem < minDis then --中
-            minDis = tem
-            side = "north"
-        end
-
-        tem = math.abs(dz - right)
-        if tem < minDis then --右
-            minDis = tem
-            side = "east"
-        end
-
-        if bottom then
-            tem = math.abs(dx - bottom)
-            if tem < minDis then --下
-                minDis = tem
-                side = "south"
-            end
-        end
-        -- print("最小距离", minDis, dz + 8.5, dx + 5, dz - 7.5)
-
-        if isSetPos and minDis < 4 then
-            if side == "west" then
-                target.Transform:SetPosition(pos.x, 0, z - left)
-            elseif side == "north" then
-                target.Transform:SetPosition(x - top, 0, pos.z)
-            elseif side == "east" then
-                target.Transform:SetPosition(pos.x, 0, z + right)
-            elseif side == "south" then
-                target.Transform:SetPosition(x + bottom, 0, pos.z)
-            end
-        end
-
-        return side, minDis, x, z
+    if not room_center then
+        return nil, nil, nil, nil --target不在房间里
     end
+
+    local x, y, z = room_center.Transform:GetWorldPosition()
+    local dx, dz = pos.x - x, pos.z - z
+
+    -- 寻找距离最近的一侧墙
+    local side = "west"
+    local minDis = math.abs(dz + left) --左
+
+    local tem = math.abs(dx + top)
+    if tem < minDis then --中
+        minDis = tem
+        side = "north"
+    end
+
+    tem = math.abs(dz - right)
+    if tem < minDis then --右
+        minDis = tem
+        side = "east"
+    end
+
+    if bottom then
+        tem = math.abs(dx - bottom)
+        if tem < minDis then --下
+            minDis = tem
+            side = "south"
+        end
+    end
+    -- print("最小距离", minDis, dz + 8.5, dx + 5, dz - 7.5)
+
+    if isSetPos and minDis < 4 then
+        if side == "west" then
+            target.Transform:SetPosition(limit_center and x or pos.x, 0, z - left)
+        elseif side == "north" then
+            target.Transform:SetPosition(x - top, 0, limit_center and z or pos.z)
+        elseif side == "east" then
+            target.Transform:SetPosition(limit_center and x or pos.x, 0, z + right)
+        elseif side == "south" then
+            target.Transform:SetPosition(x + bottom, 0, limit_center and z or pos.z)
+        end
+    end
+
+    return side, minDis, x, z
 end
 
 ---判断柱子所在哪个角
@@ -170,7 +197,7 @@ function FN.TestBeam(target)
     end
 end
 
-local TNTERIOR_ONE_OF_TAGS = { "player", "hamlet_door" }
+local TNTERIOR_ONE_OF_TAGS = { "player", "interior_door" }
 --- 递归检测内部是否存在玩家
 ---@param door Entity 外门
 function FN.InterioHasPlayer(door)
@@ -208,6 +235,9 @@ end
 
 ----------------------------------------------------------------------------------------------------
 
+local function IsInRoom(width, depth, room_x, room_z, x, z)
+    return math.abs(x - room_x) <= depth / 2 + 1 and math.abs(z - room_z) <= width / 2 + 1 --在房间里，加1稍微放大一点儿考虑边界情况
+end
 
 -- 房间的配置表，除了name，其他都可省
 -- local newRoom = {
@@ -272,7 +302,7 @@ function FN.CreateRoom(room)
             local x_offset = data.x_offset
             local scale = data.scale
 
-            print(string.trofmt("创建内部对象：{}, 是门吗：{}, key：{}", p, p:HasTag("interior_door"), data.key))
+            print(string.trofmt("创建内部对象：{}, key：{}", p, data.key))
 
             if p:HasTag("interior_door") then
                 --门
@@ -314,6 +344,9 @@ function FN.CreateRoom(room)
             end
 
             p.Transform:SetPosition(x + (x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))
+            if troisdev and not IsInRoom(width, depth, x, z, x + (x_offset or 0), z + (data.z_offset or 0)) then
+                TroErrorHandle(string.trofmt("对象{}不在房间内生成，是不是坐标填错了？，x:{}, z:{}", p, x + (x_offset or 0), z + (data.z_offset or 0)), true, false)
+            end
 
             if p.components.tro_saveanim then
                 p.components.tro_saveanim:Init(data.bank, data.build, data.anim, scale, data.isloopplay, data.isdelayset, data.rotation)
@@ -373,7 +406,6 @@ function FN.SpawnNearHouseInterior(door, room)
         return false
     end
     local dpos = FN.GetDoorRelativePosition(door)
-    print("什么方向2", door.door_orientation)
     if not dpos or not door.door_orientation then
         print("生成新房间失败", door, door.door_orientation)
         return false
@@ -387,21 +419,13 @@ function FN.SpawnNearHouseInterior(door, room)
         newDoor.room_center:set(center)
     end
 
-    local opp_dir = FN.DIR_OPPOSITE[door.door_orientation].label
-    newDoor:SetDoorOrientation(opp_dir)
-
-    if door.door_orientation == "west" then
-        newDoor.Transform:SetPosition(pos.x + dpos.x, 0, pos.z + 7.5)
-    elseif door.door_orientation == "east" then
-        newDoor.Transform:SetPosition(pos.x + dpos.x, 0, pos.z - 7.5)
-    elseif door.door_orientation == "north" then
-        newDoor.Transform:SetPosition(pos.x - 5, 0, pos.z + dpos.z)
-    elseif door.door_orientation == "south" then
-        newDoor.Transform:SetPosition(pos.x + 5, 0, pos.z + dpos.z)
-    end
+    local opp_dir = FN.DIR_OPPOSITE[door.door_orientation]
+    newDoor:SetDoorOrientation(opp_dir.label)
+    print(string.trofmt("生成新房间门：{}，位置：{},{},{}", newDoor, pos.x + opp_dir.x * 5, 0, pos.z * 7.5))
+    newDoor.Transform:SetPosition(pos.x + opp_dir.x * 5, 0, pos.z + opp_dir.y * 7.5)
 
     door.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. door.door_orientation)
-    newDoor.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. opp_dir)
+    newDoor.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. newDoor.door_orientation)
 
     door:RemoveTag("predoor")
     newDoor:RemoveTag("predoor")
@@ -433,7 +457,7 @@ function FN.FindRoomEnts(room, musttags, canttags, mustoneoftags)
     local r = math.sqrt(depth * depth + width * width) / 2
     for _, v in ipairs(TheSim:FindEntities(x, 0, z, r, musttags, canttags, mustoneoftags)) do
         local vx, _, vz = v.Transform:GetWorldPosition()
-        if math.abs(vx - x) <= depth / 2 + 1 and math.abs(vz - z) <= width / 2 + 1 then --在房间里，加1稍微放大一点儿考虑边界情况
+        if IsInRoom(width, depth, x, z, vx, vz) then
             table.insert(ents, v)
         end
     end

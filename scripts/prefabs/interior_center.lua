@@ -18,13 +18,17 @@ end
 
 -- 横向为z右为正，纵向为x下为正
 local function IsPointInRoom(inst, x, z)
-    local half_width = inst.room_width:value() / 2
-    local half_depth = inst.room_depth:value() / 2
+    local half_width = inst.room_width:value() / 2 + 1 --加一点儿，增加点误差
+    local half_depth = inst.room_depth:value() / 2 + 1
     local rx, ry, rz = inst.Transform:GetWorldPosition()
     return z >= rz - half_width
         and z <= rz + half_width
         and x >= rx - half_depth
         and x <= rx + half_depth
+end
+
+local function OnRemove(inst, data)
+    TheWorld:PushEvent("tro_onroomremove", inst)
 end
 
 local function fn()
@@ -41,6 +45,11 @@ local function fn()
     inst.room_width = net_smallbyte(inst.GUID, "interior_center.room_width")
     inst.room_depth = net_smallbyte(inst.GUID, "interior_center.room_depth")
     inst.IsPointInRoom = IsPointInRoom
+
+    inst:DoTaskInTime(0, function()
+        TheWorld:PushEvent("tro_onroomcreate", inst)
+    end)
+    inst:ListenForEvent("onremove", OnRemove)
 
     inst.entity:SetPristine()
 

@@ -73,8 +73,6 @@ local function onbuilt(inst)
     doors.exit.components.teleporter:Target(inst)
 end
 
-
-
 local function OnSave(inst, data)
     if inst:HasTag("burnt") or inst:HasTag("fire") then
         data.burnt = true

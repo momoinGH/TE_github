@@ -18,14 +18,14 @@ local function GetRoomCameraData(depth, pt)
         interior_distance = 35
     end
 
-    interior_currentpos = Vector3(pt.x + cameraoffset, 0, pt.z)
+    local interior_currentpos = Vector3(pt.x + cameraoffset, 0, pt.z)
     return interior_distance, interior_currentpos
 end
 
 -- 参数来自单机室内摄像机interiorcamera的Apply方法
 local function Apply(room)
     local interior_pitch = 35
-    local interior_heading = 0
+    local interior_heading = 0 --这个决定方向，下x右z
     local dx = -math.cos(interior_pitch * DEGREES) * math.cos(interior_heading * DEGREES)
     local dy = -math.sin(interior_pitch * DEGREES)
     local dz = -math.cos(interior_pitch * DEGREES) * math.sin(interior_heading * DEGREES)

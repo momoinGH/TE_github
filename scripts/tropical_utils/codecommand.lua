@@ -7,6 +7,7 @@ modname         = ""
 TECH            = {}
 POPUPS          = {}
 AnimState       = {}
+MiniMapEntity   = {}
 TheSim          = {}
 Entity          = {}
 STRINGS         = {}
@@ -1450,3 +1451,8 @@ function string.starts(str, prefix) end
 CONSTRUCTION_PLANS = {}
 
 TheFocalPoint = {}
+
+-- 根据地图图片名字找图集
+function GetMinimapAtlas(imagename) end
+
+function GetMinimapAtlas_Internal(imagename) end
