@@ -184,6 +184,7 @@ local function MakeRuinDoor(name, data, common_post_fn, master_post_fn)
 
     return MakeDoor(name, {
             assets = assets,
+            prefabs = prefabs,
             bank = "pig_ruins_entrance",
             build = "pig_ruins_entrance_build",
             anim = "idle_closed",
@@ -307,5 +308,5 @@ return MakeRuinDoor("pig_ruins_entrance", { vine = true, maze_id = "runis_1", ge
     MakeRuinDoor("pig_ruins_entrance4", { vine = true, maze_id = "runis_4", get_maze_fn = GetMaze4 }, Runis4AnimInit),
     MakeRuinDoor("pig_ruins_exit4", { maze_id = "runis_4" }, Runis4AnimInit),
 
-    MakeRuinDoor("pig_ruins_entrance5", { vine = true, get_maze_fn = GetMaze5 }, Runis4AnimInit),
+    MakeRuinDoor("pig_ruins_entrance5", { vine = true, maze_id = "runis_5", get_maze_fn = GetMaze5 }, Runis4AnimInit),
     MakeRuinDoor("pig_ruins_entrance_small", { get_maze_fn = GetSmallMaze }, RunisSmallAnimInit)

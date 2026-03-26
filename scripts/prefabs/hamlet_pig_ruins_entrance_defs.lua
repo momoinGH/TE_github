@@ -1,4 +1,5 @@
 local RoomUtils = require("tropical_utils/room_utils")
+local RoomData = require("prefabs/hamlet_ruins_roomdata")
 
 local room_creatures = {
     {
@@ -61,11 +62,7 @@ local function GetDoorProp(room, dir, exit, width, depth)
 end
 
 local function exitNumbers(room)
-    local exits = room.exits
-    local total = 0
-    for i, exit in pairs(exits) do
-        total = total + 1
-    end
+    local total = table.count(room.exits)
     if room.entrance1 or room.entrance2 then
         total = total + 1
     end
@@ -129,6 +126,128 @@ local function makechoice(list)
 end
 
 
+-- 添加隐藏房间
+local function CreateSecretRoom(rooms, secret_room_count, need_clock)
+    -- 这个坐标是否有空间生成房间
+    local function CheckFreeGridPos(x, y)
+        for i, room in ipairs(rooms) do
+            if room.x == x and room.y == y then
+                return false
+            end
+        end
+        return true
+    end
+
+    -- grid[x][y] 表示坐标{x,y}的空间是可用的，可用来构建隐藏房间，值为相邻房间数据
+    local grid = {}
+    local function CheckAdjacent(room, dir)
+        local x = room.x + dir.x
+        local y = room.y + dir.y
+        if CheckFreeGridPos(x, y) then
+            grid[x] = grid[x] or {}
+            grid[x][y] = grid[x][y] or { rooms = {}, dirs = {} }
+            table.insert(grid[x][y].rooms, room)
+            table.insert(grid[x][y].dirs, dir)
+        end
+    end
+
+    -- 相邻房间最多的房间坐标
+    local function GetMax()
+        local max_x = 0
+        local max_y = 0
+        local max = 0
+        for x, row in pairs(grid) do
+            for y, data in pairs(row) do
+                if #data.rooms > max then
+                    max = #data.rooms
+                    max_x = x
+                    max_y = y
+                end
+            end
+        end
+        if max > 0 then
+            return max_x, max_y
+        end
+        return nil, nil
+    end
+
+    -- 隐藏房间
+    local clock_placed = false
+    local function PopulateSecretRoom(x, y)
+        local secret_room = {
+            x = x,
+            y = y,
+            idx = #rooms + 1,
+            exits = {},
+            blocked_exits = {},
+            secretroom = true
+        }
+        local grid_rooms = grid[x][y].rooms
+        local grid_dirs = grid[x][y].dirs
+        if need_clock and not clock_placed then
+            -- 可以放置日晷
+            clock_placed = true
+            secret_room.aporkalypseclock = true
+            while #grid_rooms > 1 do
+                local num = math.random(1, #grid_rooms)
+                table.remove(grid_rooms, num)
+                table.remove(grid_dirs, num)
+            end
+        end
+        -- 将秘密房间和相邻房间相连通
+        for i, grid_room in ipairs(grid_rooms) do
+            local op_dir = RoomUtils.DIR_OPPOSITE[grid_dirs[i].label]
+            local secret = true
+            if secret_room.aporkalypseclock then
+                secret = false --有日晷的房间
+            end
+            secret_room.exits[op_dir] = {
+                target_room = grid_room.idx,
+                room = secret_room.idx,
+                secret = secret,
+            }
+            grid_room.exits[grid_dirs[i]] = {
+                target_room = secret_room.idx,
+                room = grid_room.idx,
+                secret = true
+            }
+        end
+        grid[x][y] = nil
+        return secret_room
+    end
+
+    for i, room in ipairs(rooms) do
+        -- 通往秘密房间的门只会出现在上左右
+        local north = RoomUtils.DIR.north
+        local west = RoomUtils.DIR.west
+        local east = RoomUtils.DIR.east
+        -- NORTH IS OPEN
+        if not room.exits[north] and not room.entrance2 and not room.entrance1 then
+            CheckAdjacent(room, north)
+        end
+        -- WEST IS OPEN
+        if not room.exits[west] then
+            CheckAdjacent(room, west)
+        end
+        -- EAST IS OPEN
+        if not room.exits[east] then
+            CheckAdjacent(room, east)
+        end
+    end
+
+    for i = 1, secret_room_count do  --只是尝试次数
+        local x, y = GetMax()
+        if x == nil or y == nil then --没有空间生成隐藏房间
+            print("COULDN'T FIND SUITABLE CANDIDATES FOR THE SECRET ROOM.")
+        else
+            local newroom = PopulateSecretRoom(x, y)
+            if newroom then
+                table.insert(rooms, newroom)
+            end
+        end
+    end
+end
+
 ---构建房间
 ---@param dungeondef.name string|nil --遗迹类型，RUINS_5表示存放日晷的遗迹
 ---@param dungeondef.rooms number --房间数量
@@ -140,236 +259,54 @@ end
 ---@param dungeondef.smallsecret boolean --秘密房间宝物生成多点还是少点
 local function mazemaker(dungeondef)
     assert(dungeondef.rooms)
-    dungeondef.secretrooms = dungeondef.secretrooms or 0
 
-    local DIR = RoomUtils.DIR
     local DIR_OPPOSITE = RoomUtils.DIR_OPPOSITE
-    local rooms_to_make = dungeondef.rooms
-    local rooms = { {
-        x = 0,                         --房间坐标，遗迹入口位于0,0，x右加左减，y上加下减
-        y = 0,
-        idx = 1,                       --房间编号，生成房间时会根据这个来判断什么房间相邻，生成对应的门
-        exits = {},                    --表示这个房间可以通向哪些房间
-        blocked_exits = { DIR.north }, --被堵塞的方向，表示上面不能建造门
-        entrance1 = true,              --表示遗迹出口一所在房间
-    } }
+    local room_data = RoomData()
 
-    -- 构建每一个房间
-    while #rooms < rooms_to_make do
-        -- 从现有房间里随机选择一个房间作为前置房间，然后在前置房间随机选择一个方向
-        local dir_choice = RoomUtils.GetRandomDir()
-        local fromroom = rooms[math.random(#rooms)]
-        local fail = false
-        -- fail if this direction from the chosen room is blocked
-        --该方向被堵住了
-        for i, exit in ipairs(fromroom.blocked_exits) do
-            if DIR[dir_choice] == exit then
-                fail = true
-                break
-            end
-        end
-        -- fail if this room of the maze is already set up.
-        -- 该方向已经有房间了
-        if not fail then
-            for i, checkroom in ipairs(rooms) do
-                if checkroom.x == fromroom.x + DIR[dir_choice].x
-                    and checkroom.y == fromroom.y + DIR[dir_choice].y
-                then
-                    fail = true
-                    break
-                end
-            end
-        end
-        if not fail then
-            local newroom = {
-                x = fromroom.x + DIR[dir_choice].x,
-                y = fromroom.y + DIR[dir_choice].y,
-                idx = #rooms + 1,
-                exits = {},
-                blocked_exits = {},
-            }
-            fromroom.exits[DIR[dir_choice]] = {
-                target_room = newroom.idx,
-                room = fromroom.idx,
-            }
-            newroom.exits[DIR_OPPOSITE[dir_choice]] = {
-                target_room = fromroom.idx,
-                room = newroom.idx,
-            }
-            if dungeondef.doorvines and math.random() < dungeondef.doorvines then --藤蔓
-                fromroom.exits[DIR[dir_choice]].vined = true
-                newroom.exits[DIR_OPPOSITE[dir_choice]].vined = true
-            end
-            table.insert(rooms, newroom)
-        end
-    end
+    -- 构建足够数量的空房间
+    room_data:CreateRandomRooms(dungeondef.rooms)
 
-    local clock_placed = false
-    local function CreateSecretRoom()
-        -- grid[x][y] 表示坐标{x,y}的空间是可用的，可用来构建隐藏房间，值为相邻房间数据
-        local grid = {}
-        local function CheckFreeGridPos(x, y)
-            for i, room in ipairs(rooms) do
-                if room.x == x and room.y == y then
-                    return false
-                end
-            end
-            return true
-        end
-        local function CheckAdjacent(room, dir)
-            local x = room.x + dir.x
-            local y = room.y + dir.y
-            if CheckFreeGridPos(x, y) then
-                if not grid[x] then
-                    grid[x] = {}
-                end
-                if not grid[x][y] then
-                    grid[x][y] = { rooms = { room }, dirs = { dir } }
-                else
-                    table.insert(grid[x][y].rooms, room)
-                    table.insert(grid[x][y].dirs, dir)
-                end
-            end
-        end
-
-        local function FindCandidates()
-            for i, room in ipairs(rooms) do
-                -- 通往秘密房间的门只会出现在上左右
-                local north = RoomUtils.DIR.north
-                local west = RoomUtils.DIR.west
-                local east = RoomUtils.DIR.east
-                -- NORTH IS OPEN
-                if not room.exits[north] and not room.entrance2 and not room.entrance1 then
-                    CheckAdjacent(room, north)
-                end
-                -- WEST IS OPEN
-                if not room.exits[west] then
-                    CheckAdjacent(room, west)
-                end
-                -- EAST IS OPEN
-                if not room.exits[east] then
-                    CheckAdjacent(room, east)
-                end
-            end
-        end
-        -- 相邻房间最多的房间坐标
-        local function GetMax()
-            local max_x = 0
-            local max_y = 0
-            local max = 0
-            for k, v in pairs(grid) do
-                for k2, v2 in pairs(v) do
-                    if #v2.rooms > max then
-                        max = #v2.rooms
-                        max_x = k
-                        max_y = k2
-                    end
-                end
-            end
-            if max > 0 then
-                return max_x, max_y
-            end
-        end
-        -- 隐藏房间
-        local function PopulateSecretRoom(x, y)
-            local secret_room = {
-                x = x,
-                y = y,
-                idx = #rooms + 1,
-                exits = {},
-                blocked_exits = {},
-                secretroom = true
-            }
-            local grid_rooms = grid[x][y].rooms
-            local grid_dirs = grid[x][y].dirs
-            if dungeondef.name == "runis_5" and not clock_placed then
-                -- 可以放置日晷
-                clock_placed = true
-                secret_room.aporkalypseclock = true
-                while #grid_rooms > 1 do
-                    local num = math.random(1, #grid_rooms)
-                    table.remove(grid_rooms, num)
-                    table.remove(grid_dirs, num)
-                end
-            end
-            -- 将秘密房间和相邻房间相连通
-            for i, grid_room in ipairs(grid_rooms) do
-                local op_dir = RoomUtils.DIR_OPPOSITE[grid_dirs[i].label]
-                local secret = true
-                if secret_room.aporkalypseclock then
-                    secret = false --有日晷的房间
-                end
-                secret_room.exits[op_dir] = {
-                    target_room = grid_room.idx,
-                    room = secret_room.idx,
-                    secret = secret,
-                }
-                grid_room.exits[grid_dirs[i]] = {
-                    target_room = secret_room.idx,
-                    room = grid_room.idx,
-                    secret = true
-                }
-            end
-            grid[x][y] = nil
-            return secret_room
-        end
-
-        FindCandidates()
-        local secret_room_count = dungeondef.secretrooms --只是尝试次数
-        for i = 1, secret_room_count do
-            local x, y = GetMax()
-            if x == nil or y == nil then
-                print("COULDN'T FIND SUITABLE CANDIDATES FOR THE SECRET ROOM.")
-            else
-                local newroom = PopulateSecretRoom(x, y)
-                if newroom then
-                    table.insert(rooms, newroom)
+    -- 门生长藤蔓的概率
+    if dungeondef.doorvines then
+        for _, room in ipairs(room_data.rooms) do
+            for dir, data in pairs(room.exits) do
+                if math.random() < dungeondef.doorvines then --藤蔓
+                    data.vined = true
+                    room_data.rooms[data.target_room].exits[DIR_OPPOSITE[dir.label]].vined = true
                 end
             end
         end
     end
 
-    -- 遍历所有房间，查找那些顶部没有房间并且距离出口一房间最远的房间，查找结果随机选择一个作为遗迹出口二所在房间
-    local choices
+    -- 第二个出口
     if not dungeondef.nosecondexit then
-        choices = {}
-        local dist = 0
-        for i, room in ipairs(rooms) do
-            local north_exit_open = not room.exits[RoomUtils.DIR.north]
-            if math.abs(room.x) + math.abs(room.y) >= dist and north_exit_open then
-                if math.abs(room.x) + math.abs(room.y) > dist then
-                    choices = {}
-                end
-                table.insert(choices, room)
-                dist = math.abs(room.x) + math.abs(room.y)
-            end
-        end
-        if #choices > 0 then
-            choices[math.random(#choices)].entrance2 = true
-        end
+        room_data:SelectEntranceRoom(2)
     end
+
 
     -- 查找只有一个门的房间，用来生成一些乱七八糟的东西
-    choices = {}
-    for i, room in ipairs(rooms) do
-        if exitNumbers(room) == 1 then
+    local choices = {}
+    for i, room in ipairs(room_data.rooms) do
+        if room_data:GetRoomExitCount(i) == 1 then
             table.insert(choices, room)
         end
     end
     local advancedtraps = false
-    if dungeondef.name == "runis_3" then
-        choices[math.random(#choices)].pheromonestone = true
-    elseif dungeondef.name == "runis_1" then
+    if dungeondef.name == "runis_1" then
         choices[math.random(#choices)].relictruffle = true
     elseif dungeondef.name == "runis_2" then
         choices[math.random(#choices)].relicsow = true
+    elseif dungeondef.name == "runis_3" then
+        choices[math.random(#choices)].pheromonestone = true
     elseif dungeondef.name == "runis_5" then
         advancedtraps = true
         choices[math.random(#choices)].endswell = true
     else
         choices[math.random(#choices)].treasure = true
     end
-    CreateSecretRoom()
+
+    -- TODO 写到这了
+    CreateSecretRoom(rooms, dungeondef.secretrooms or 0, dungeondef.name == "runis_5")
 
 
     local width = TUNING.ROOM_MEDIUM_WIDTH

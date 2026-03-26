@@ -397,7 +397,7 @@ function FN.CreateRooms(rooms)
         -- print("构造门", key, door_map[key], door, target_door, door:GetPosition())
         if target_door then
             door.components.teleporter:Target(target_door)
-            target_door.components.teleporter:Target(door)
+        target_door.components.teleporter:Target(door)
         end
     end
 
