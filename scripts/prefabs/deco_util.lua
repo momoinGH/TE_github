@@ -436,7 +436,6 @@ function decofn(build, bank, animframe, data, name)
         end
 
         if data.background then
-            -- inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
             inst.AnimState:SetLayer(LAYER_BACKGROUND)
             inst.AnimState:SetSortOrder(data.background)
         end

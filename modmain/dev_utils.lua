@@ -32,12 +32,13 @@ function TroErrorHandle(msg, has_trace, dev_can_crash)
         if dev_can_crash then
             error(s)
         else
-            c_announce(s) --公告提示一下
+            c_announce(msg) --公告提示一下
             print(s)
         end
     else
         print(s)
     end
+    return s
 end
 
 GLOBAL.TroErrorHandle = TroErrorHandle

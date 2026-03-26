@@ -83,12 +83,13 @@ local function SetDoorOrientation(inst, orientation)
     for _, dir in pairs(RoomUtils.DIR) do
         inst:RemoveTag("interior_" .. dir.label .. "_door")
     end
-    inst:AddTag("interior_" .. orientation .. "_door")  --门朝向标签，客户端可获取该标签
+    inst:AddTag("interior_" .. orientation .. "_door") --门朝向标签，客户端可获取该标签
 
-    if orientation == "south" then                      --其他方向的门层级放低点
+    if orientation == "south" then                     --其他方向的门层级放低点
         inst.AnimState:SetLayer(LAYER_WORLD)
     else
-        inst.AnimState:SetLayer(LAYER_BACKGROUND)
+        -- inst.AnimState:SetLayer(LAYER_BACKGROUND)
+        inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
     end
 end
 

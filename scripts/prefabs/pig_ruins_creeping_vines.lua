@@ -97,7 +97,7 @@ local function fn()
 
     inst.AnimState:SetBank("pig_ruins_vines_door")
     inst.AnimState:SetBuild("pig_ruins_vines_build")
-    inst.AnimState:PlayAnimation(getanimname(inst), true)
+    inst.AnimState:PlayAnimation("north_closed", true)
 
     inst.entity:SetPristine()
 

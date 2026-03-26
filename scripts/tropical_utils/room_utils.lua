@@ -446,9 +446,9 @@ function FN.OnDoorBuiltCheckNearRoom(door)
     local x, y, z = door.Transform:GetWorldPosition()
     local room_grid, room_x, room_y = FN.GetCurrentRoomsGrid(x, y, z)
     local dir = door.door_orientation
-    local near_room = room_grid[FN.DIR[dir].x + room_x] and room_grid[FN.DIR[dir].x + room_x][FN.DIR[dir].y + room_y]
-    if near_room then
-        SpawnNearDoor(door, near_room)
+    local near_room_data = room_grid[FN.DIR[dir].x + room_x] and room_grid[FN.DIR[dir].x + room_x][FN.DIR[dir].y + room_y]
+    if near_room_data then
+        SpawnNearDoor(door, near_room_data.ent)
     end
 end
 
@@ -497,16 +497,17 @@ function FN.GetCurrentRoomsGrid(rx, ry, rz)
 
 
     local min_x, max_x, min_y, max_y = 0, 0, 0, 0
-    local room_poses = { [start_room] = { 0, 0 } }
+    local room_poses = { [start_room] = { x = 0, y = 0 } }
 
     local function dfs(room)
-        local cur_x = room_poses[room][1]
-        local cur_y = room_poses[room][2]
+        local cur_x = room_poses[room].x
+        local cur_y = room_poses[room].y
         for dir, near_room in pairs(room:GetNearRooms()) do
+            room_poses[room][dir] = true
             if not room_poses[near_room] then
                 local x = cur_x + FN.DIR[dir].x
                 local y = cur_y + FN.DIR[dir].y
-                room_poses[near_room] = { x, y }
+                room_poses[near_room] = { x = x, y = y }
                 min_x = math.min(min_x, x)
                 max_x = math.max(max_x, x)
                 min_y = math.min(min_y, y)
@@ -526,9 +527,14 @@ function FN.GetCurrentRoomsGrid(rx, ry, rz)
     end
 
     for room, pos in pairs(room_poses) do
-        local x = pos[1] - min_x + 1
-        local y = pos[2] - min_y + 1
-        room_grid[x][y] = room
+        local x = pos.x - min_x + 1
+        local y = pos.y - min_y + 1
+        room_grid[x][y] = { ent = room }
+        for dir, _ in pairs(FN.DIR) do
+            if pos[dir] then
+                room_grid[x][y][dir] = true --房间之间连通性
+            end
+        end
         if room == start_room then
             start_x = x
             start_y = y
@@ -540,9 +546,9 @@ function FN.GetCurrentRoomsGrid(rx, ry, rz)
         for x = 1, #room_grid do
             local s = ""
             for y = 1, #room_grid[x] do
-                local room = room_grid[x][y]
+                local room = room_grid[x][y] and room_grid[x][y].ent
                 local is_start = room == start_room
-                s = s .. (room == false and " 000000 " or (is_start and ("[" .. tostring(room.GUID) .. "]") or (" " .. tostring(room.GUID) .. " "))) .. "  "
+                s = s .. (not room and " 000000 " or (is_start and ("[" .. tostring(room.GUID) .. "]") or (" " .. tostring(room.GUID) .. " "))) .. "  "
             end
             print(s)
         end

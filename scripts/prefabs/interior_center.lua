@@ -31,7 +31,7 @@ end
 local function GetRoomDoor(inst, dir)
     local doors = RoomUtils.FindRoomEnts(inst, { "interior_" .. dir .. "_door" })
     if #doors >= 2 then
-        TroErrorHandle(string.trofmt("这个室内{}方向有{}个门：{}", dir, #doors, PrintTable(doors)))
+        TroErrorHandle(string.trofmt("{}这个室内{}方向有{}个门", inst, dir, #doors), true, false)
     end
     return #doors > 0 and doors[1] or nil
 end

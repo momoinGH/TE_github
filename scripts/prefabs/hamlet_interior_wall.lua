@@ -28,7 +28,7 @@ local function common(bank, build, anim)
     inst.AnimState:SetBuild(build)
     inst.AnimState:PlayAnimation(anim, true)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:SetSortOrder(-1)
+    inst.AnimState:SetSortOrder(-5)
 
     inst:AddTag("NOCLICK")
     inst:AddTag("NOBLOCK")

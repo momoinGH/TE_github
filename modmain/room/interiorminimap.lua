@@ -18,6 +18,9 @@ end
 ----------------------------------------------------------------------------------------------------
 local RoomUtils = require("tropical_utils/room_utils")
 
+
+
+
 local function UpdateTextureBefore(self)
     if not ThePlayer then return end
     local x, y, z = ThePlayer.Transform:GetWorldPosition()
@@ -46,7 +49,6 @@ end
 
 ----------------------------------------------------------------------------------------------------
 -- 拖拽
-
 local function OnControlBefore(self, control, down)
     if control == CONTROL_ACCEPT then
         if down then
@@ -64,44 +66,43 @@ local function SetDragPosition(self, x, y, z)
     else
         pos = x
     end
-    pos = pos + self.dragPosDiff
-    for _, v in pairs(self._tro_houseimags) do
-        v:SetPosition(v._tro_pos + pos)
+    local offset = pos - self.click_mouse_pos
+    self.click_mouse_pos = pos
+    for _, room_root in pairs(self._tro_houseimags) do
+        for k, _ in pairs(room_root.children) do
+            k:SetPosition(k:GetPosition() + offset)
+        end
     end
 end
 
 local function StartDrag(self)
     if not self.followhandler then
-        local mousepos = TheInput:GetScreenPosition()
-        self.dragPosDiff = (self:GetPosition() - mousepos)
+        self.click_mouse_pos = TheInput:GetScreenPosition()
         self.followhandler = TheInput:AddMoveHandler(function(x, y)
             self:SetDragPosition(x, y)
         end)
-        self:SetDragPosition(mousepos)
+        self:SetDragPosition(self.click_mouse_pos)
     end
 end
 
 local function EndDrag(self)
     if self.followhandler then
         self.followhandler:Remove()
+        self.followhandler = nil
     end
-    self.followhandler = nil
-    self.dragPosDiff = nil
-
-    for _, v in pairs(self._tro_houseimags) do
-        v._tro_pos = v:GetPosition()
-    end
+    self.click_mouse_pos = nil
 end
 
 
 AddClassPostConstruct("widgets/mapwidget", function(self)
+    self.click_mouse_pos = nil
+    self.followhandler = nil
     self._tro_houseimags = {}
-    self._tro_offset = { 0, 0 }
 
     Hooks.FnDecorator(self, "UpdateTexture", UpdateTextureBefore)
 
-    -- Hooks.FnDecorator(self, "OnControl", OnControlBefore)
-    -- self.SetDragPosition = SetDragPosition
-    -- self.StartDrag = StartDrag
-    -- self.EndDrag = EndDrag
+    Hooks.FnDecorator(self, "OnControl", OnControlBefore)
+    self.SetDragPosition = SetDragPosition
+    self.StartDrag = StartDrag
+    self.EndDrag = EndDrag
 end)
