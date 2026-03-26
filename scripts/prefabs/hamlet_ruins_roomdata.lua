@@ -1,7 +1,21 @@
 local RoomUtils = require("tropical_utils/room_utils")
-
-local Rooms = Class(function(self)
+local Rooms
+Rooms = Class(function(self)
     self.rooms = {}
+
+    -- 支持索引访问rooms里的room，比如room_data[2]就是room_data.rooms[2]
+    local mt = getmetatable(self) or {}
+    mt.__index = function(t, key)
+        if type(key) == "number" then
+            if key >= 1 and key <= #t.rooms then
+                return t.rooms[key]
+            end
+            return nil
+        else
+            return Rooms[key]
+        end
+    end
+    setmetatable(self, mt)
 
     local start_room = self:AddRoom(0, 0, nil, { RoomUtils.DIR.north }) --遗迹入口位于0,0
     start_room.is_entrance = true
@@ -87,6 +101,8 @@ end
 
 -- 遍历所有房间，查找那些顶部没有房间并且距离出口一房间最远的房间，查找结果随机选择一个作为遗迹出口二所在房间
 function Rooms:SelectEntranceRoom(entrance_id)
+    assert(entrance_id > 1)
+
     local choices = {}
     local min_dist = 0
     for i, room in ipairs(self.rooms) do
