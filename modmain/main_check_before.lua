@@ -149,3 +149,17 @@ end
 -- Hooks.FnDecorator(AnimState, "PlayAnimation", function(self, anim)
 --     print("调用AnimState:PlayAnimation", anim)
 -- end)
+
+----------------------------------------------------------------------------------------------------
+-- 定时器里报错了不崩溃，只打印提醒一下
+
+-- local OldDoTaskInTime = EntityScript.DoTaskInTime
+-- function EntityScript:DoTaskInTime(time, fn, ...)
+--     local function new_fn(...)
+--         local success, res = pcall(fn, ...)
+--         if not success then
+--             TroErrorHandle(res, true, false)
+--         end
+--     end
+--     return OldDoTaskInTime(self, time, new_fn, ...)
+-- end

@@ -3,8 +3,8 @@ local MakeDoor = require("prefabs/tro_interior_door_defs").MakeDoor
 
 local assets = {
     Asset("ANIM", "anim/acorn.zip"),
-    Asset("ANIM", "anim/pig_shop_doormats.zip"),      --出口地毯
-    Asset("ANIM", "anim/new_player_house_doors.zip"), --小屋房间门，这个不是原版动画包，原版动画east和west名字都反了，这个矫正过来
+    Asset("ANIM", "anim/pig_shop_doormats.zip"), --出口地毯
+    Asset("ANIM", "anim/new_player_house_doors.zip"),
 }
 
 local function OnActivate(inst, doer)

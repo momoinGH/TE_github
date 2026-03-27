@@ -21,7 +21,7 @@ if TheFrontEnd then
     modimport "modmain/map/customize.lua" --世界生成选项
 end
 if troisdev then
-    modimport "modmain/worldgen_check_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
+    modimport "modmain/modworldgenmain_check_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 
 modimport "modmain/tiledefs"        --定义新地皮

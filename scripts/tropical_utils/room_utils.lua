@@ -11,7 +11,7 @@ FN.ROW_COUNT = (FN.BASE_OFF + 100) / FN.ROOM_GAP * 2
 房间坐标轴朝向
           |
           |
--------------------> z
+-------------------> 东
           |
           |
           v
@@ -310,7 +310,7 @@ function FN.CreateRoom(room)
             local x_offset = data.x_offset
             local scale = data.scale
 
-            print(string.trofmt("创建内部对象：{}, key：{}", p, data.key))
+            -- print(string.trofmt("创建内部对象：{}, key：{}", p, data.key))
 
             if p:HasTag("interior_door") then
                 --门
@@ -377,17 +377,17 @@ end
 
 ---创建很多房间
 ---@param rooms table 房间配置表
----@return exits table 所有出口门，也就是未关联的房间门
----@return door_map table 门的key的映射关系
----@return centers table
+---@return table doors 所有出口门，也就是未关联的房间门
+---@return table door_map 门的key的映射关系
+---@return table centers
 function FN.CreateRooms(rooms)
     local doors = {}
     local door_map = {}
     local centers = {}
     for _, room in ipairs(rooms) do
         local d, map, center = FN.CreateRoom(room)
-        doors = MergeMaps(doors, d)
-        door_map = MergeMaps(door_map, map)
+        table.tromerge(doors, d)
+        table.tromerge(door_map, map)
         table.insert(centers, center)
     end
 
@@ -397,7 +397,15 @@ function FN.CreateRooms(rooms)
         -- print("构造门", key, door_map[key], door, target_door, door:GetPosition())
         if target_door then
             door.components.teleporter:Target(target_door)
-        target_door.components.teleporter:Target(door)
+            target_door.components.teleporter:Target(door)
+        else
+            if troisdev then
+                door:DoTaskInTime(0, function(inst) --打印一下
+                    if inst.components.teleporter and not inst.components.teleporter:GetTarget() then
+                        TroErrorHandle(string.trofmt("门{}的key为{}，没有关联到目标", door, key), false, false)
+                    end
+                end)
+            end
         end
     end
 

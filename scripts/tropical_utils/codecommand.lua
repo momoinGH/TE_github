@@ -672,15 +672,10 @@ function GetRandomItemWithIndex(choices) end
 
 ---带有权重的随机取数，越大的值越有可能选中
 ---@param choices array[number] 权重值表
-function weighted_random_choice(choices)
-end
-
----打印
-function PrintTable(tab)
-end
-
----从表中随机选一个，支持键值对表
 function weighted_random_choice(choices) end
+
+---递归打印表，注意别打印实体，容易死循环
+function PrintTable(tab) end
 
 ---从表中随机选指定个
 function weighted_random_choices(choices, num_choices) end

@@ -1,11 +1,11 @@
 local MakeDoor = require("prefabs/tro_interior_door_defs").MakeDoor
 
 local assets = {
-    Asset("ANIM", "anim/ant_cave_door.zip"),
-    Asset("ANIM", "anim/bat_cave_door.zip"),
+    Asset("ANIM", "anim/new_ant_cave_door.zip"),
+    Asset("ANIM", "anim/new_bat_cave_door.zip"),
 
-    Asset("ANIM", "anim/pig_ruins_door.zip"),
-    Asset("ANIM", "anim/pig_ruins_door_blue.zip"),
+    Asset("ANIM", "anim/new_pig_ruins_door.zip"),
+    Asset("ANIM", "anim/new_pig_ruins_door_blue.zip"),
 }
 
 local lights =
@@ -93,12 +93,20 @@ local function OnLoad(inst, data)
     end
 end
 
+local function OnInteriorSpawn(inst, data)
+    if data.vined then
+        inst:SetVine()
+    end
+end
+
 local function MasterPost(inst)
     inst.SetDoorTimeChange = SetDoorTimeChange --有太阳光的门
     inst.SetVine = SetVine                     --长藤蔓的门
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
+
+    inst:ListenForEvent("oninteriorspawn", OnInteriorSpawn)
 end
 
 return
