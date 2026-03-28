@@ -4,7 +4,7 @@ ACTIONS.GIVE.priority    = 0
 
 Hooks.FnDecorator(ACTIONS.JUMPIN, "strfn", function(act)
     if act.target ~= nil then
-        if act.target:HasTag("hamlet_houseexit") then
+        if act.target:HasTag("interior_houseexit") then
             return { "LEAVE" }, true
         elseif act.target:HasTag("interior_door") or act.target.prefab == "lavaarena_portal" then
             return { "ENTER" }, true

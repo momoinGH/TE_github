@@ -251,13 +251,14 @@ end
 --     },
 -- }
 
-
 ---创建房间
 ---@param room table 房间配置表
+---@param door_key_start number 门的key的起始值，默认1，注意不能和定义过的key重叠
 ---@return table doors  所有的房间门
 ---@return table door_map 门的key的映射关系
 ---@return Entity center
-function FN.CreateRoom(room)
+function FN.CreateRoom(room, door_key_start)
+    door_key_start = door_key_start or 100000 --从一个很大值开始，遗迹从1开始应该也达不到这个值
     local doors = {}
     local door_map = {}
     local x, y, z = TheWorld.components.tro_roomspawner:GetPos():Get()
@@ -274,12 +275,11 @@ function FN.CreateRoom(room)
     center.room_width:set(width)
     center.room_depth:set(depth)
 
-    print(string.trofmt("开始生成房间，房子中心对象{}，房间大小：{},{}", center, width, depth))
+    print(string.trofmt("生成房间，房子中心对象{}，房间大小：{},{}", center, width, depth))
 
     --生成墙体
     FN.SpawnWall(x, z, width, depth)
 
-    local door_inc = 1
     --生产内部物品
     for _, data in ipairs(room.addprops) do
         local p = SpawnPrefab(data.name)
@@ -291,8 +291,14 @@ function FN.CreateRoom(room)
 
             if p:HasTag("interior_door") then
                 --门
-                local key = data.key or door_inc
-                door_inc = door_inc + 1 --只要每次创建房间时唯一就行
+                local key
+                if data.key then
+                    key = data.key
+                else
+                    key = door_key_start
+                    door_key_start = door_key_start + 1
+                end
+                trodevassert(not doors[key], "房间门的key重叠，是不是door_key_start变量给的值小了？")
                 doors[key] = p
                 door_map[key] = data.target_door
             elseif p:HasTag("interior_floor") then
@@ -362,6 +368,7 @@ function FN.CreateRooms(rooms)
     local doors = {}
     local door_map = {}
     local centers = {}
+
     for _, room in ipairs(rooms) do
         local d, map, center = FN.CreateRoom(room)
         table.tromerge(doors, d)
@@ -372,13 +379,14 @@ function FN.CreateRooms(rooms)
     -- 关联门
     for key, door in pairs(doors) do
         local target_door = door_map[key] and doors[door_map[key]]
-        -- print("构造门", key, door_map[key], door, target_door, door:GetPosition())
+        print(string.trofmt("key为{}的门{}对应连接key为{}的门{}", key, door, door_map[key], target_door))
         if target_door then
             door.components.teleporter:Target(target_door)
             target_door.components.teleporter:Target(door)
         else
-            if troisdev then
-                door:DoTaskInTime(0, function(inst) --打印一下
+            --如果有门没有连接到其他门，打印一下
+            if troisdev and door.prefab ~= "wallcrack_ruins" then
+                door:DoTaskInTime(0, function(inst)
                     if inst.components.teleporter and not inst.components.teleporter:GetTarget() then
                         TroErrorHandle(string.trofmt("门{}的key为{}，没有关联到目标", door, key), false, false)
                     end
@@ -403,8 +411,6 @@ local function SpawnNearDoor(door, near_room)
     door.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. door.door_orientation)
     new_door.components.tro_saveanim:Init(nil, nil, door.prefab .. "_open_" .. new_door.door_orientation)
 
-    new_door:AddTag("hamlet_houseexit")
-
     door.components.teleporter:Target(new_door)
     new_door.components.teleporter:Target(door)
 
@@ -424,6 +430,7 @@ function FN.SpawnNearHouseInterior(door, room, dir)
     end
     local _, _, center = FN.CreateRoom(room)
     SpawnNearDoor(door, center)
+    center:AddTag("room_explored")
     return true
 end
 

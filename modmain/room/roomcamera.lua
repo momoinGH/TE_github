@@ -1,7 +1,3 @@
-TroAddPlayerClassifiedNetVar(net_entity, "tro_curroomcenter") --玩家当前所处的房间对象
-
-----------------------------------------------------------------------------------------------------
-
 -- 参数来自单机interiorspawner组件的ApplyInteriorCameraWithPosition方法
 local function GetRoomCameraData(depth, pt)
     local cameraoffset = -2.5 --10x15
@@ -66,10 +62,6 @@ end
 
 -- this is called on client
 local function OnPlayerRoomChange(inst)
-    if inst.components.playervision then --TODO 这个是干什么的？
-        inst.components.playervision:UpdateCCTable()
-    end
-
     local target = inst:TroGetPlayerClassifiedNetVar("tro_curroomcenter")
     if target then
         TheCamera:SetPaused(true)
@@ -83,19 +75,9 @@ local function OnPlayerRoomChange(inst)
     end
 end
 
--- 刷帧检测玩家是否在虚空房子里
-local function CheckPlayerInRoom(inst)
-    local room_center = inst:TroGetRoomCenter()
-    inst:TroSetPlayerClassifiedNetVar("tro_curroomcenter", room_center)
-end
-
 AddPlayerPostInit(function(inst)
     if not TheNet:IsDedicated() then
         inst._tro_roomcameratask = nil
         inst:ListenForEvent("tro_curroomcenter", OnPlayerRoomChange)
     end
-
-    if not TheWorld.ismastersim then return end
-
-    inst:DoPeriodicTask(10 * FRAMES, CheckPlayerInRoom)
 end)

@@ -92,6 +92,11 @@ function EntityScript:IsInWindyArea()
     return tile_id == WORLD_TILES.WINDY
 end
 
+function EntityScript:TroIsWorldOut()
+    local x, y, z = self.Transform:GetWorldPosition()
+    return TheWorld.Map:TroIsWorldOut(x, y, z)
+end
+
 -- 判断实体所在位置是否是冬天
 function EntityScript:TroIsWinter()
     if self.components.areaaware then

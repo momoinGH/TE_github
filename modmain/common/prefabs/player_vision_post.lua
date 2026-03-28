@@ -1,9 +1,13 @@
+table.insert(Assets, Asset("IMAGE", "images/colour_cubes/bat_vision_on_cc.tex"))
+
+
+----------------------------------------------------------------------------------------------------
 
 AddComponentPostInit("combat", function(self)
     function self:GetWeapon()
         if self.inst.components.inventory ~= nil then
             local item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or
-            self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+                self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
             return item ~= nil
                 and item.components.weapon ~= nil
                 and (item.components.projectile ~= nil or
@@ -22,7 +26,7 @@ AddClassPostConstruct("components/combat_replica", function(self)
             return self.inst.components.combat:GetWeapon()
         elseif self.inst.replica.inventory ~= nil then
             local item = self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) or
-            self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+                self.inst.replica.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
             if item ~= nil and item:HasTag("weapon") then
                 if item:HasTag("projectile") or item:HasTag("rangedweapon") then
                     return item
@@ -196,18 +200,17 @@ AddComponentPostInit("playervision", function(self)
 
     local old_UpdateCCTable = self.UpdateCCTable
     function self:UpdateCCTable(...)
-        if self.inst.replica.inventory and (self.inst.replica.inventory:EquipHasTag("heatvision")) then
-            --old_UpdateCCTable(self)
-            local cctable = (self.batvision and BAT_COLOURCUBES)
-                or (self.heatvision and HEATVISION_COLOURCUBES)
-                or (self.shootvision and SHOOT_COLOURCUBES)
-                or nil
-            if cctable ~= self.currentcctable and cctable ~= nil then
-                self.currentcctable = cctable
-                self.inst:PushEvent("ccoverrides", cctable)
-            end
-        else
+        if not (self.inst.replica.inventory and self.inst.replica.inventory:EquipHasTag("heatvision")) then
             old_UpdateCCTable(self, ...)
+        end
+
+        local cctable = (self.batvision and BAT_COLOURCUBES)
+            or (self.heatvision and HEATVISION_COLOURCUBES)
+            or (self.shootvision and SHOOT_COLOURCUBES)
+            or nil
+        if cctable ~= self.currentcctable and cctable ~= nil then
+            self.currentcctable = cctable
+            self.inst:PushEvent("ccoverrides", cctable)
         end
     end
 end)

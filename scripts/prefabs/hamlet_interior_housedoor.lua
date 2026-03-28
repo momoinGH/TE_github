@@ -27,18 +27,6 @@ local function OnHaunt(inst, haunter)
     inst.components.teleporter:Activate(haunter)
 end
 
-local function OnHouseSave(inst, data)
-    data.hamlet_houseexit = inst:HasTag("hamlet_houseexit") or nil
-end
-
-local function OnHouseLoad(inst, data)
-    if data == nil then return end
-
-    if data.hamlet_houseexit then
-        inst:AddTag("hamlet_houseexit") --没有单机版的小地图，目前通过鼠标悬停时的“进入”和“离开”来判断出口
-    end
-end
-
 ----------------------------------------------------------------------------------------------------
 
 local function AbleToAcceptTest(inst, item)
@@ -107,7 +95,7 @@ local function MakeHouseDoor(name)
 
         -- 出口不能敲毁，入口可敲，出口不能敲
         inst:DoTaskInTime(0, function()
-            if not inst:HasTag("hamlet_houseexit") then
+            if not inst:HasTag("interior_houseexit") then
                 inst:AddComponent("workable")
                 inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
                 inst.components.workable:SetWorkLeft(4)
@@ -116,9 +104,6 @@ local function MakeHouseDoor(name)
         end)
 
         inst:ListenForEvent("onbuilt", OnBuilt)
-
-        inst.OnSave = OnHouseSave
-        inst.OnLoad = OnHouseLoad
     end
 
     return MakeDoor(name, {
@@ -199,7 +184,6 @@ end
 
 local function MakeExitDoor(name, anim)
     local function CommonPost(inst)
-        inst:AddTag("hamlet_houseexit")
 
         inst:SetPrefabNameOverride("city_exit_old_door")
 

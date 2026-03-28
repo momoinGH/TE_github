@@ -10,7 +10,6 @@ modimport "modmain/common/entityscript"
 
 modimport "modmain/common/components/locomotor"
 modimport "modmain/common/components/birdspawner"
-modimport "modmain/common/components/playervision"
 modimport "modmain/common/components/temperature"
 modimport "modmain/common/components/walkableplatformplayer"
 --[[
@@ -38,6 +37,7 @@ modimport "modmain/common/components/wavemanager.lua"          --给地皮加点
 modimport "modmain/common/components/butterflyspawner.lua"     --修改不同地形上的蝴蝶生成
 modimport "modmain/common/components/temperatureoverrider.lua" --对气温的一些hook
 modimport "modmain/common/components/workable.lua"
+modimport "modmain/common/components/teleporter.lua"
 
 
 ----------------------------------------------------------------------------------------------------

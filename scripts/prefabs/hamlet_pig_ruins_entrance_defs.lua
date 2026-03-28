@@ -226,7 +226,7 @@ local function mazemaker(dungeondef)
 
     local width = TUNING.ROOM_MEDIUM_WIDTH
     local depth = TUNING.ROOM_MEDIUM_DEPTH
-    local door_key_inc = 0
+    local door_key_inc = 1
     for idx, room in ipairs(builder.rooms) do
         local fountain = false
 
@@ -1014,7 +1014,7 @@ local function mazemaker(dungeondef)
             builder:AddRoomProp(idx, doorprop)
             builder:AddRoomProp(opposite_room.idx, doorprop2)
 
-            print(string.trofmt("房间{},{} {}方向生成门连通房间{},{}", room.x, room.y, dir.label, opposite_room.x, opposite_room.y))
+            print(string.trofmt("遗迹房间{},{} {}方向key为{}，生成门连通房间{},{}", room.x, room.y, dir.label, doorprop.key, opposite_room.x, opposite_room.y))
         end
     end
 

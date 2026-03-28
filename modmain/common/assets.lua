@@ -55,8 +55,6 @@ Assets =
 
     Asset("IMAGE", "images/colour_cubes/pork_cold_bloodmoon_cc.tex"),
 
-    Asset("IMAGE", "images/colour_cubes/pigshop_interior_cc.tex"), --
-    Asset("IMAGE", "images/colour_cubes/bat_vision_on_cc.tex"),
     Asset("IMAGE", "images/colour_cubes/heat_vision_cc.tex"),
     Asset("IMAGE", "images/colour_cubes/shooting_goggles_cc.tex"),
 

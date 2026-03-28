@@ -41,9 +41,15 @@ local function OnDoneTeleporting(inst, obj)
     obj:PushEvent("enterroom", inst) --猪人商人进店要说两句的
 end
 
-local function TargetBefore(self, otherTeleporter)
-    if self.inst.targetdoor then
-        self.inst.targetdoor:set(otherTeleporter)
+local function OnTeleportTargetChange(inst, target)
+    if inst.targetdoor then
+        inst.targetdoor:set(target)
+    end
+
+    if target and not target:TroIsWorldOut() then
+        inst:AddTag("interior_houseexit") --表示这是一个出口
+    else
+        inst:RemoveTag("interior_houseexit")
     end
 end
 
@@ -66,12 +72,6 @@ end
 local function OnLoadPostPass(inst, newents, data)
     if inst._OnLoadPostPass then
         inst:_OnLoadPostPass(newents, data)
-    end
-
-    --加载的时候我需要手动给网络变量赋值
-    local targetdoor = inst.components.teleporter:GetTarget()
-    if targetdoor and inst.targetdoor then
-        inst.targetdoor:set(targetdoor)
     end
 end
 
@@ -183,9 +183,10 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
         inst.components.teleporter.offset = 0
         inst.components.teleporter.travelcameratime = 0
         inst.components.teleporter.travelarrivetime = 0
-        Hooks.FnDecorator(inst.components.teleporter, "Target", TargetBefore)
+        inst:ListenForEvent("tro_onteleportertargetchange", OnTeleportTargetChange)
         -- inst.components.teleporter.onActivate = OnActivate
         -- inst.components.teleporter.OnDoneTeleporting = OnDoneTeleporting
+
 
         if data.trader then
             inst:AddComponent("trader")

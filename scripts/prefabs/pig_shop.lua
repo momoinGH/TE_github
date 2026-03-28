@@ -21,8 +21,6 @@ local assets =
     Asset("ANIM", "anim/pig_shop_bank.zip"),
     Asset("ANIM", "anim/pig_shop_tinker.zip"),
 
-    -- Asset("IMAGE", "images/colour_cubes/pigshop_interior_cc.tex"),
-
     Asset("MINIMAP_IMAGE", "pig_shop_florist"),
     Asset("MINIMAP_IMAGE", "pig_shop_general"),
     Asset("MINIMAP_IMAGE", "pig_shop_hoofspa"),

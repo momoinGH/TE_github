@@ -131,7 +131,6 @@ end
 
 GLOBAL.TroGetEquippedItem = TroGetEquippedItem
 
-
 --渡渡鸟数量控制
 SEABEACH_AMOUNT = {
     doydoy = 0,

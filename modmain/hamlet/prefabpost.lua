@@ -12,6 +12,7 @@ modimport "modmain/hamlet/components/builder"
 modimport "modmain/hamlet/components/builder_replica"
 modimport "modmain/hamlet/components/edible"
 modimport "modmain/hamlet/components/autoterraformer.lua" --刮地皮头盔组件
+modimport "modmain/hamlet/components/playervision.lua"
 
 
 modimport "modmain/hamlet/prefabs/molehat.lua" --鼹鼠帽

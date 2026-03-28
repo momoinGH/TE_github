@@ -71,6 +71,7 @@ local function onbuilt(inst)
     local doors, _, center = RoomUtils.CreateRoom(room)
     inst.components.teleporter:Target(doors.exit)
     doors.exit.components.teleporter:Target(inst)
+    center:AddTag("room_explored")
 end
 
 local function OnSave(inst, data)
