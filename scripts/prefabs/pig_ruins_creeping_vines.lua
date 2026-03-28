@@ -1,12 +1,12 @@
 local assets =
 {
-    Asset("ANIM", "anim/pig_ruins_vines_door.zip"),
+    Asset("ANIM", "anim/new_pig_ruins_vines_door.zip"),
     Asset("ANIM", "anim/pig_ruins_vines_build.zip"),
 }
 
 local assets_wall =
 {
-    Asset("ANIM", "anim/pig_ruins_vines_wall.zip"),
+    Asset("ANIM", "anim/new_pig_ruins_vines_wall.zip"),
     Asset("ANIM", "anim/pig_ruins_vines_build.zip"),
 }
 

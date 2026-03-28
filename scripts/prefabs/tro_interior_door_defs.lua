@@ -29,6 +29,14 @@ local function OnDoorRemove(inst)
     RoomUtils.OnHouseDestroy(inst, nil, true)
 end
 
+-- 在门生成时，根据位置自动设置方向
+local function OnInteriorSpawn(inst, data)
+    if inst.SetDoorOrientation then
+        local dir_label = RoomUtils.TestWallOrnamentPos(inst)
+        inst:SetDoorOrientation(dir_label)
+    end
+end
+
 local function OnDoneTeleporting(inst, obj)
     obj:PushEvent("enterroom", inst) --猪人商人进店要说两句的
 end
@@ -68,17 +76,6 @@ local function OnLoadPostPass(inst, newents, data)
 end
 
 local function SetDoorOrientation(inst, orientation)
-    local anim
-    -- 检查当前门动画是不是_closed后缀
-    for _, dir in pairs(RoomUtils.DIR) do
-        if inst.AnimState:IsCurrentAnimation(dir.label .. "_closed") then
-            anim = orientation .. "_closed"
-            break
-        end
-    end
-    if anim then
-        inst.AnimState:PlayAnimation(anim)
-    end
     inst.door_orientation = orientation
     for _, dir in pairs(RoomUtils.DIR) do
         inst:RemoveTag("interior_" .. dir.label .. "_door")
@@ -103,6 +100,8 @@ local function GetDoorOrientation(inst)
             return dir.label
         end
     end
+
+    return RoomUtils.TestWallOrnamentPos(inst)
 end
 
 ---虚空门
@@ -114,7 +113,7 @@ end
 ---@param data.minimap string
 ---@param data.trader boolean 是否可用于传送物品、交易
 ---@param data.is_inner boolean 是否是虚空内部的生成的门，如果是则表示需要记录中心点对象
----@param data.door_orientation string 门的初始方向，有值就表示这是一个有四个方向的门
+---@param data.door_orientation string 门的初始方向，有值就表示这是一个有四个方向的门，在上面的门就是north，左边的门就是west
 ---@param data.usesound string 使用门时播放的音效
 local function MakeDoor(name, data, common_post_fn, master_post_fn)
     local function fn()
@@ -141,7 +140,7 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
         end
 
         inst:AddTag("NOBLOCK")
-        inst:AddTag("interior_door")
+        inst:AddTag("interior_door") --这个表示是可以通向其他房间的门
 
         if data.trader then
             inst:AddTag("trader")
@@ -205,6 +204,7 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
 
         inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
         inst:ListenForEvent("onremove", OnDoorRemove)
+        inst:ListenForEvent("oninteriorspawn", OnInteriorSpawn)
 
         if master_post_fn then
             master_post_fn(inst)

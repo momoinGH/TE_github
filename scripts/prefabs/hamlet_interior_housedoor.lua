@@ -77,7 +77,7 @@ local function onaccept(inst, giver, item)
 end
 
 local function OnBuilt(inst)
-    local dir = RoomUtils.TestWallOrnamentPos(inst, false, 7.5, 5, 7.5, 5)
+    local dir = RoomUtils.TestWallOrnamentPos(inst, false)
     local anim = "_close_" .. dir
     inst:SetDoorOrientation(dir)
     inst.components.tro_saveanim:Init(nil, nil, inst.prefab .. anim)
@@ -135,7 +135,7 @@ end
 ----------------------------------------------------------------------------------------------------
 
 local function PlacerOnUpdateTransform(inst)
-    local door_orientation, minDis = RoomUtils.TestWallOrnamentPos(inst, true, 7.5, 5, 7.5, 5, true) --门可建造范围，太靠墙会导致玩家过不去
+    local door_orientation, minDis = RoomUtils.TestWallOrnamentPos(inst, true, true)  --门可建造范围，太靠墙会导致玩家过不去
     local anim
     if door_orientation and minDis < 4 then
         anim = "_close_" .. door_orientation

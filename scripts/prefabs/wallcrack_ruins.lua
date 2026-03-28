@@ -2,8 +2,8 @@ local MakeDoor = require("prefabs/tro_interior_door_defs").MakeDoor
 
 local assets =
 {
-    Asset("ANIM", "anim/interior_wall_decals_ruins_cracks.zip"),
-    Asset("ANIM", "anim/interior_wall_decals_ruins_cracks_fake.zip"),
+    Asset("ANIM", "anim/new_interior_wall_decals_ruins_cracks.zip"),
+    Asset("ANIM", "anim/new_interior_wall_decals_ruins_cracks_fake.zip"),
 }
 
 local prefabs = {
@@ -51,6 +51,7 @@ end
 
 local function MasterPost(inst)
     inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.BLANK)
     inst.components.workable:SetWorkLeft(1)
     inst.components.workable:SetOnFinishCallback(OnDestroy)
     inst.components.workable.savestate = true

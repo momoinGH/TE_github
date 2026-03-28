@@ -131,68 +131,55 @@ end
 
 ---根据目标对象位置计算距离最近的墙面
 ---@param target Entity
----@param isSetPos boolean 是否设置实体坐标吸附到墙面
----@param left number 离左边的距离
----@param top number 离上边的距离
----@param right number 离右边的距离
----@param bottom number 离下边的距离
+---@param is_set_pos boolean 是否设置实体坐标吸附到墙面
 ---@param limit_center boolean 是否限制实体必须在墙面的中心位置
 ---@return string side 哪个方向的墙
 ---@return number minDis 距离
----@return number x 房子中心坐标x
----@return number z 房子中心坐标z
-function FN.TestWallOrnamentPos(target, isSetPos, left, top, right, bottom, limit_center)
-    left = left or 7.5
-    top = top or 5
-    right = right or 7.5
-
+function FN.TestWallOrnamentPos(target, is_set_pos, limit_center)
     local pos = target:GetPosition()
     local room_center = target:TroGetRoomCenter()
     if not room_center then
-        return nil, nil, nil, nil --target不在房间里
+        return nil, nil --target不在房间里
     end
 
-    local x, y, z = room_center.Transform:GetWorldPosition()
-    local dx, dz = pos.x - x, pos.z - z
+    local half_width = room_center.room_width:value() / 2
+    local half_depth = room_center.room_depth:value() / 2
+    local x, _, z = room_center.Transform:GetWorldPosition()
 
-    -- 寻找距离最近的一侧墙
-    local side = "west"
-    local minDis = math.abs(dz + left) --左
-
-    local tem = math.abs(dx + top)
-    if tem < minDis then --中
-        minDis = tem
-        side = "north"
-    end
-
-    tem = math.abs(dz - right)
-    if tem < minDis then --右
-        minDis = tem
-        side = "east"
-    end
-
-    if bottom then
-        tem = math.abs(dx - bottom)
-        if tem < minDis then --下
-            minDis = tem
-            side = "south"
-        end
-    end
-    -- print("最小距离", minDis, dz + 8.5, dx + 5, dz - 7.5)
-
-    if isSetPos and minDis < 4 then
-        if side == "west" then
-            target.Transform:SetPosition(limit_center and x or pos.x, 0, z - left)
-        elseif side == "north" then
-            target.Transform:SetPosition(x - top, 0, limit_center and z or pos.z)
-        elseif side == "east" then
-            target.Transform:SetPosition(limit_center and x or pos.x, 0, z + right)
-        elseif side == "south" then
-            target.Transform:SetPosition(x + bottom, 0, limit_center and z or pos.z)
+    local min_dist = 99999
+    local dir_label
+    for label, data in pairs(FN.DIR) do
+        if data.x ~= 0 then
+            local dist = math.abs(x + data.x * half_depth - pos.x)
+            if dist < min_dist then
+                min_dist = dist
+                dir_label = label
+            end
+        elseif data.y ~= 0 then
+            local dist = math.abs(z + data.y * half_width - pos.z)
+            if dist < min_dist then
+                min_dist = dist
+                dir_label = label
+            end
         end
     end
 
-    return side, minDis, x, z
+    if is_set_pos and min_dist < 4 then
+        local wall_x, wall_z = x + FN.DIR[dir_label].x * half_depth, z + FN.DIR[dir_label].y * half_width
+        if limit_center then
+            target.Transform:SetPosition(wall_x, 0, wall_z)
+        else
+            local nx, nz = pos.x, pos.z
+            if FN.DIR[dir_label].x ~= 0 then
+                nx = wall_x
+            else
+                nz = wall_z
+            end
+            target.Transform:SetPosition(nx, 0, nz)
+        end
+    end
+
+    return dir_label, min_dist
 end
 
 ---判断柱子所在哪个角
@@ -229,16 +216,6 @@ function FN.InterioHasPlayer(door)
     end
 
     return false
-end
-
----获取门对室内中心的相对位置
-function FN.GetDoorRelativePosition(door)
-    local room_center = door:TroGetRoomCenter()
-    if not room_center then
-        return nil
-    end
-    local centerPos = room_center:GetPosition()
-    return door:GetPosition() - centerPos
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -320,6 +297,7 @@ function FN.CreateRoom(room)
                 door_map[key] = data.target_door
             elseif p:HasTag("interior_floor") then
                 --地板自适应缩放，但不是直接的线性关系，这里懒得搞什么公式了
+                -- c_findtag("interior_floor").AnimState:SetScale()可在控制台不断调整
                 x_offset = x_offset
                     or depth == TUNING.ROOM_LARGE_DEPTH and -5.5
                     or depth == TUNING.ROOM_MEDIUM_DEPTH and -4.4
@@ -336,15 +314,15 @@ function FN.CreateRoom(room)
                 -- 墙壁自适应缩放
                 x_offset = x_offset
                     or depth == TUNING.ROOM_LARGE_DEPTH and -4.5
-                    or depth == TUNING.ROOM_MEDIUM_DEPTH and -2 --遗迹测过
+                    or depth == TUNING.ROOM_MEDIUM_DEPTH and -2
                     or depth == TUNING.ROOM_SMALL_DEPTH and -3.5
                     or depth == TUNING.ROOM_TINY_DEPTH and -2.8
                     or nil
                 scale = scale
                     or width == TUNING.ROOM_LARGE_WIDTH and { 4.6, 4.6 }
-                    or width == TUNING.ROOM_MEDIUM_WIDTH and { 3.8, 3.8 }
+                    or width == TUNING.ROOM_MEDIUM_WIDTH and { 3.7, 3.6 }
                     or width == TUNING.ROOM_SMALL_WIDTH and { 3.5, 3.5 }
-                    or width == TUNING.ROOM_TINY_WIDTH and { 3, 3 }
+                    or width == TUNING.ROOM_TINY_WIDTH and { 2.9, 2.9 }
                     or nil
             end
 

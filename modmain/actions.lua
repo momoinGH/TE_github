@@ -1,5 +1,7 @@
 local RoomUtils = require("tropical_utils/room_utils")
 
+-- 给workable使用，表示可以被破坏，比如火药
+Constructor.AddAction(nil, "BLANK", "")
 
 Constructor.AddAction(nil, "STOREOPEN", STRINGS.ACTIONS.STOREOPEN, function(act)
     if act.target.components.store == nil then return false end

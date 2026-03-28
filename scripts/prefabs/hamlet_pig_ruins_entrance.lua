@@ -120,6 +120,10 @@ local function InitMaze(inst, get_maze_fn)
                 break
             end
         end
+        if not doors.entrance2.components.teleporter:GetTarget() then
+            print("错误！没有找到遗迹的第二个出口实体")
+            --找个地方再生成个吧
+        end
     end
 end
 

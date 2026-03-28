@@ -124,7 +124,7 @@ for _, state in ipairs(states) do
     AddStategraphState("wilson", state)
 end
 
-
+-- 进房间
 AddStategraphPostInit("wilson", function(sg)
     Hooks.FnDecorator(sg.actionhandlers[ACTIONS.JUMPIN], "deststate", function(inst, act)
         return { "jumpin_interior" }, act.target and (act.target:HasTag("interior_door") or act.target.prefab == "lavaarena_portal")
