@@ -45,6 +45,10 @@ local phasefunctions =
     end,
 }
 
+local function CommonPost(inst)
+    inst:AddTag("lockable_door")
+end
+
 local function OnPhase(inst, phase)
     if phase == "dusk" then
         inst.AnimState:PlayAnimation("to_dusk")
@@ -99,6 +103,38 @@ local function OnInteriorSpawn(inst, data)
     end
 end
 
+local function OpenDoor(inst, instant)
+    if inst.components.teleporter:GetEnabled() then
+        return
+    end
+
+    if not instant then
+        inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/stone_door/slide")
+        inst.AnimState:PlayAnimation(inst.door_orientation .. "_open")
+        inst.AnimState:PushAnimation(inst.door_orientation)
+    else
+        inst.AnimState:PlayAnimation(inst.door_orientation)
+    end
+
+    inst.components.teleporter:SetEnabled(true)
+end
+local function CloseDoor(inst, instant)
+    if not inst.components.teleporter:GetEnabled() then
+        return
+    end
+
+    if not instant then
+        inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/stone_door/close")
+        inst.AnimState:PlayAnimation(inst.door_orientation .. "_shut")
+        inst.AnimState:PushAnimation(inst.door_orientation .. "_closed")
+        inst:DoTaskInTime(1 / 30 * 7, function() TheCamera:Shake("FULL", 0.7, 0.02, .5, 40) end)
+    else
+        inst.AnimState:PlayAnimation(inst.door_orientation .. "_closed")
+    end
+
+    inst.components.teleporter:SetEnabled(false)
+end
+
 local function MasterPost(inst)
     inst.SetDoorTimeChange = SetDoorTimeChange --有太阳光的门
     inst.SetVine = SetVine                     --长藤蔓的门
@@ -107,6 +143,8 @@ local function MasterPost(inst)
     inst.OnLoad = OnLoad
 
     inst:ListenForEvent("oninteriorspawn", OnInteriorSpawn)
+    inst:ListenForEvent("open", OpenDoor)
+    inst:ListenForEvent("close", CloseDoor)
 end
 
 return
@@ -120,7 +158,7 @@ return
         trader = true,
         is_inner = true,
         door_orientation = "north"
-    }, nil, MasterPost),
+    }, CommonPost, MasterPost),
     --洞穴门
     MakeDoor("vamp_bat_cave_exit_door", {
         bank = "doorway_cave",
@@ -130,7 +168,7 @@ return
         trader = true,
         is_inner = true,
         door_orientation = "north"
-    }, nil, MasterPost),
+    }, CommonPost, MasterPost),
     --蚁巢门
     MakeDoor("ant_cave_door", {
         bank = "ant_cave_door",
@@ -140,4 +178,4 @@ return
         trader = true,
         is_inner = true,
         door_orientation = "north"
-    }, nil, MasterPost)
+    }, CommonPost, MasterPost)

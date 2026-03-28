@@ -9,55 +9,45 @@ local prefabs =
     "pig_ruins_dart",
 }
 
-local function onsave(inst, data)
-    if inst:HasTag("trap_dart") then
-        data.trap = "trap_dart"
-    end
-    if inst:HasTag("trap_spear") then
-        data.trap = "trap_spear"
-    end
-    if inst:HasTag("localtrap") then
-        data.localtrap = true
-    end
-    if inst:HasTag("reversetrigger") then
-        data.reversetrigger = true
-    end
-    if inst:HasTag("startdown") then
-        data.startdown = true
-    end
+local function OnSave(inst, data)
+    data.trap_dart = inst:HasTag("trap_dart") or nil
+    data.trap_spear = inst:HasTag("trap_spear") or nil
+    data.trap_door = inst:HasTag("trap_door") or nil
+    data.localtrap = inst:HasTag("localtrap") or nil
+    data.reversetrigger = inst:HasTag("reversetrigger") or nil
 end
 
-local function onload(inst, data)
-    if data then
-        if data.trap then
-            inst:AddTag(data.trap)
-        end
-        if data.localtrap then
-            inst:AddTag("localtrap")
-        end
-        if data.reversetrigger then
-            inst:AddTag("reversetrigger")
-        end
-        if data.startdown then
-            inst:AddTag("startdown")
-        end
+local function OnLoad(inst, data)
+    if not data then return end
+    if data.trap_dart then
+        inst:AddTag("trap_dart")
+    end
+    if data.trap_spear then
+        inst:AddTag("trap_spear")
+    end
+    if data.trap_door then
+        inst:AddTag("trap_door")
+    end
+    if data.localtrap then
+        inst:AddTag("localtrap")
+    end
+    if data.reversetrigger then
+        inst:AddTag("reversetrigger")
     end
 end
 
 local function trigger(inst)
     if inst:HasTag("trap_dart") then
-        print("TRIGGER DARTS!")
         local pt = inst:GetPosition()
         local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "dartthrower" }, { "INTERIOR_LIMBO" })
         for i, ent in ipairs(ents) do
             if ent.components.simpleperiodtask then
                 ent.components.simpleperiodtask:TurnOn("autodartthrower")
             elseif ent.shoot then
-                ent.shoot(ent)
+                ent:shoot()
             end
         end
     elseif inst:HasTag("trap_spear") then
-        print("TRIGGER SPEARS!")
         local pt = inst:GetPosition()
         local dist = 50
         if inst:HasTag("localtrap") then
@@ -70,6 +60,7 @@ local function trigger(inst)
             end
         end
     else
+        --开门
         local pt = inst:GetPosition()
         local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
         for i, ent in ipairs(ents) do
@@ -83,7 +74,6 @@ end
 local function untrigger(inst)
     if inst:HasTag("trap_dart") then
     elseif inst:HasTag("trap_spear") then
-        print("TRIGGER SPEARS!")
         local pt = inst:GetPosition()
         local dist = 50
         if inst:HasTag("localtrap") then
@@ -107,8 +97,6 @@ local function untrigger(inst)
 end
 
 local function onnear(inst)
-    print("TRIGGER")
-    --  if inst.weights == 0 then
     if inst.components.disarmable and inst.components.disarmable.armed and not inst.down then
         inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/items/pressure_plate/hit")
         inst.AnimState:PlayAnimation("popdown")
@@ -120,56 +108,42 @@ local function onnear(inst)
             trigger(inst)
         end
     end
-    -- end
-    -- inst.weights = inst.weights +1
-    -- print("near",inst.weights)
 end
 
 local function onfar(inst)
-    --inst.weights = inst.weights -1
-    --if  inst.weights == 0 then
-    if not inst:HasTag("INTERIOR_LIMBO") and inst.components.disarmable and inst.components.disarmable.armed and inst.down then
+    if inst.components.disarmable and inst.components.disarmable.armed and inst.down then
         inst.AnimState:PlayAnimation("popup")
         inst.AnimState:PushAnimation("up_idle")
-        inst.down = nil
+        inst.down = false
         if inst:HasTag("reversetrigger") then
             trigger(inst)
         else
             untrigger(inst)
         end
     end
-    -- end
-    --  print("far",inst.weights)
-end
-
-local function testfn(testinst)
-    return not testinst:HasTag("flying")
 end
 
 local function disarm(inst, doer)
     inst.AnimState:PlayAnimation("disarmed")
-    inst.components.playerprox:SetOnPlayerNear(nil)
-    inst.components.playerprox:SetOnPlayerFar(nil)
+    inst.components.creatureprox:SetEnabled(false)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/disarm_floor")
     inst.down = false
 end
 
 local function rearm(inst, doer)
     inst.AnimState:PlayAnimation("up_idle")
-    inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetOnPlayerFar(onfar)
+    inst.components.creatureprox:SetEnabled(true)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/disarm_floor")
-end
-
-local function checkstartdown(inst)
-    if inst:HasTag("startdown") then
-        inst.down = true
-        --inst.AnimState:PushAnimation("down_idle")
-        inst.AnimState:PlayAnimation("down_idle")
+    if inst.components.creatureprox then
+        inst.components.creatureprox:ForceTest()
     end
 end
 
-local function fn(Sim)
+local function testfn(testinst)
+    return not testinst:HasTag("flying") and not testinst:HasTag("notraptrigger")
+end
+
+local function fn()
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
@@ -184,11 +158,8 @@ local function fn(Sim)
     inst.AnimState:SetSortOrder(3)
 
     inst:AddTag("structure")
-
+    inst:AddTag("weighdownable")
     inst:AddTag("NOCLICK")
-    --------------------
-
-    inst.weights = 0
 
     inst.entity:SetPristine()
 
@@ -196,23 +167,23 @@ local function fn(Sim)
         return inst
     end
 
+    inst.down = false
+
     inst:AddComponent("disarmable")
     inst.components.disarmable.disarmfn = disarm
     inst.components.disarmable.rearmfn = rearm
     inst.components.disarmable.rearmable = true
-    inst:AddTag("weighdownable")
 
-    inst:AddComponent("playerprox")
-    inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetOnPlayerFar(onfar)
-    inst.components.playerprox:SetDist(0.8, 0.9)
-    inst.components.playerprox.inventorytrigger = true
-    inst.components.playerprox.period = 0.01
+    inst:AddComponent("creatureprox")
+    inst.components.creatureprox:SetOnNear(onnear)
+    inst.components.creatureprox:SetOnFar(onfar)
+    inst.components.creatureprox:SetTestfn(testfn)
+    inst.components.creatureprox:SetDist(0.8, 0.9)
+    inst.components.creatureprox.inventorytrigger = true
+    inst.components.creatureprox.period = 0.01
 
-    inst.OnSave = onsave
-    inst.OnLoad = onload
-    inst:DoTaskInTime(0, function() checkstartdown(inst) end)
-    --inst.OnLoadPostPass = OnLoadPostPass
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
 
     return inst
 end

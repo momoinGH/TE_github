@@ -126,11 +126,14 @@ local function OnPercentUsedChange(inst, data)
     inst.AnimState:OverrideSymbol("swap_meter", "sea_yard_meter", fuelAnim)
 
     if data.percent > 0 then
-        if not inst.components.simpleperiodtask:TaskExists("repair") then
-            inst.components.simpleperiodtask:DoPeriodicTask("repair", 0.5, Repair)
+        if not inst.repair_task then
+            inst.repair_task = inst:TroDoCanSleepPeriodicTask(0.5, Repair)
         end
     else
-        inst.components.simpleperiodtask:Cancel("repair")
+        if inst.repair_task then
+            inst.repair_task:Cancel()
+            inst.repair_task = nil
+        end
         stopFixingFn(inst)
     end
 end
@@ -188,8 +191,7 @@ local function fn()
     inst.components.workable:SetOnWorkCallback(onhit)
     MakeSnowCovered(inst)
 
-    inst:AddComponent("simpleperiodtask")
-    inst.components.simpleperiodtask:DoPeriodicTask("repair", 0.5, Repair) --加载范围外不生效
+    inst.repair_task = inst:TroDoCanSleepPeriodicTask(0.5, Repair) --加载范围外不生效
 
     inst:ListenForEvent("onbuilt", onbuilt)
     inst:ListenForEvent("percentusedchange", OnPercentUsedChange)

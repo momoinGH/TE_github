@@ -168,3 +168,5 @@ Hooks.FnDecorator(EntityScript, "WatchWorldState", function(self, var, fn)
         return { self, var, new_fn }, true
     end
 end)
+
+----------------------------------------------------------------------------------------------------

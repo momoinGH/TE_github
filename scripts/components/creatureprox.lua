@@ -1,105 +1,110 @@
+local nothave = { "INTERIOR_LIMBO", "snake", "scorpion", "shadowcreature" }
+
 local function DoTest(inst)
-    local component = inst.components.creatureprox
-    if component and component.enabled and not inst:HasTag("INTERIOR_LIMBO") then
-        local x, y, z = inst.Transform:GetWorldPosition()
+    local self = inst.components.creatureprox
+    local x, y, z = inst.Transform:GetWorldPosition()
 
-        local range = nil
+    local range = nil
+    if self.isclose then
+        range = self.far
+    else
+        range = self.near
+    end
 
-        if component.isclose then
-            range = component.far
-        else
-            range = component.near
+    local ents
+    if self.all then
+        ents = TheSim:FindEntities(x, y, z, range, nil)
+    else
+        local oneof_tags = { "animal", "character" }
+        if self.inventorytrigger then
+            oneof_tags = { "_inventoryitem", "monster", "animal", "character", "meat" }
         end
+        ents = TheSim:FindEntities(x, y, z, range, nil, nothave, oneof_tags)
+    end
 
-        local musthave = { "animal", "character" }
-
-        if component.inventorytrigger then
-            musthave = { "_inventoryitem", "monster", "animal", "character", "meat" }
+    for i = #ents, 1, -1 do
+        if ents[i] == inst or (self.testfn and not self.testfn(ents[i])) then
+            table.remove(ents, i)
         end
+    end
 
-        local nothave = { "INTERIOR_LIMBO", "snake", "scorpion", "shadowcreature" }
-        local ents
-        if component.all then
-            ents = TheSim:FindEntities(x, y, z, range, nil)
-        else
-            ents = TheSim:FindEntities(x, y, z, range, nil, nothave, musthave)
-        end
-        local close = nil
-
-        for i = #ents, 1, -1 do
-            if ents[i] == inst or (component.testfn and not component.testfn(ents[i])) then
-                table.remove(ents, i)
+    local close = nil
+    if #ents > 0 then
+        close = true
+        if self.inproxfn then
+            for i, ent in ipairs(ents) do
+                self.inproxfn(inst, ent)
             end
         end
-
-        if #ents > 0 and inst then
-            close = true
-            if component.inproxfn then
-                for i, ent in ipairs(ents) do
-                    component.inproxfn(inst, ent)
-                end
-            end
+    end
+    if self.isclose ~= close then
+        self.isclose = close
+        if self.isclose and self.onnear then
+            self.onnear(inst, ents)
         end
-        if component.isclose ~= close then
-            component.isclose = close
-            if component.isclose and component.onnear then
-                component.onnear(inst, ents)
-            end
-
-            if not component.isclose and component.onfar then
-                component.onfar(inst)
-            end
-        end
-        if component.piggybackfn then
-            component.piggybackfn(inst)
+        if not self.isclose and self.onfar then
+            self.onfar(inst)
         end
     end
 end
 
+local function SetTaskEnable(self, enable)
+    if enable and not self.task then
+        self.task = self.inst:DoPeriodicTask(self.period, DoTest)
+    elseif not enable and self.task then
+        self.task:Cancel()
+        self.task = nil
+    end
+end
+
+local function UpdateTaskEnable(self)
+    local can_check = not self.inst:IsAsleep() and self.enabled
+    SetTaskEnable(self, can_check)
+end
+
+local function onperiod(self)
+    SetTaskEnable(self, false)
+    UpdateTaskEnable(self)
+end
+
+-- 附近单位检测，主要用于遗迹的机关
 local CreatureProx = Class(function(self, inst)
     self.inst = inst
-    self.near = 2
-    self.far = 3
-    self.period = .333
-    self.onnear = nil
-    self.onfar = nil
-    self.isclose = nil
+
+    self.near = 2               --激活距离
+    self.far = 3                --休眠距离
+    self.period = .333          --检测间隔
     self.enabled = true
-    self.all = nil
+    self.isclose = nil          --附近是否已经有单位了
+    self.all = nil              --是否检查所有单位
+    self.inventorytrigger = nil --物品触发
     self.task = nil
 
-    self:Schedule()
-end)
+    self.testfn = nil
+    self.inproxfn = nil
+    self.onnear = nil
+    self.onfar = nil
+
+    UpdateTaskEnable(self)
+end, nil, {
+    enabled = UpdateTaskEnable,
+    period = onperiod
+})
 
 function CreatureProx:GetDebugString()
     return self.isclose and "NEAR" or "FAR"
 end
 
-function CreatureProx:SetOnPlayerNear(fn)
+function CreatureProx:SetOnNear(fn)
     self.onnear = fn
 end
 
-function CreatureProx:OnSave()
-    local data = {
-        enabled = self.enabled
-    }
-end
-
-function CreatureProx:OnLoad(data)
-    if data.enabled then
-        self.enabled = data.enabled
-    end
+function CreatureProx:SetOnFar(fn)
+    self.onfar = fn
 end
 
 function CreatureProx:SetEnabled(enabled)
     self.enabled = enabled
-    if enabled == false then
-        self.isclose = nil
-    end
-end
-
-function CreatureProx:SetOnPlayerFar(fn)
-    self.onfar = fn
 end
 
 function CreatureProx:IsPlayerClose()
@@ -115,27 +120,16 @@ function CreatureProx:SetTestfn(testfn)
     self.testfn = testfn
 end
 
-function CreatureProx:forcetest()
+function CreatureProx:ForceTest()
     DoTest(self.inst)
 end
 
-function CreatureProx:Schedule()
-    if self.task then
-        self.task:Cancel()
-        self.task = nil
-    end
-    self.task = self.inst:DoPeriodicTask(self.period, DoTest)
-end
-
 function CreatureProx:OnEntitySleep()
-    if self.task then
-        self.task:Cancel()
-        self.task = nil
-    end
+    UpdateTaskEnable(self)
 end
 
 function CreatureProx:OnEntityWake()
-    self:Schedule()
+    UpdateTaskEnable(self)
 end
 
 function CreatureProx:OnRemoveEntity()

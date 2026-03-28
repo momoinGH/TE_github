@@ -1451,3 +1451,6 @@ TheFocalPoint = {}
 function GetMinimapAtlas(imagename) end
 
 function GetMinimapAtlas_Internal(imagename) end
+
+
+scheduler = {}

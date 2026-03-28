@@ -68,8 +68,8 @@ end
 
 ----------------------------------------------------------------------------------------------------
 modimport "modmain/gentuning"
-modimport "modmain/knownmodcheck"             -- 检测不兼容模组并报错崩溃
-modimport "modmain/mods"                      -- 兼容其他mod
+modimport "modmain/knownmodcheck"         -- 检测不兼容模组并报错崩溃
+modimport "modmain/mods"                  -- 兼容其他mod
 if troisdev then
     modimport "modmain/main_check_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
@@ -77,9 +77,10 @@ end
 modimport "modmain/animstate" -- AnimState 增强
 modimport "modmain/minimapentity"
 modimport "modmain/soundemitter"
-modimport "modmain/ents_trace"        --缓存记录一些需要全局查找的实体
-modimport "modmain/player_classified" --为player_classified添加网络变量提供便捷
-modimport "modmain/class"             --修复class继承上的一些bug
+modimport "modmain/ents_trace"            --缓存记录一些需要全局查找的实体
+modimport "modmain/player_classified"     --为player_classified添加网络变量提供便捷
+modimport "modmain/class"                 --修复class继承上的一些bug
+modimport "modmain/cansleep_periodictask" --提供一个TroDoCanSleepPeriodicTask方法可以开启可休眠的周期任务，这个和simpleperiodtask功能有点重合
 
 
 modimport "modmain/postinit" --TODO 拆分一下
@@ -157,7 +158,7 @@ modimport("modmain/fx")            --特效
 
 
 if troisdev then
-    troimportmodulefile("debug")             --方便开发的c_xxx控制台函数
+    troimportmodulefile("debug")         --方便开发的c_xxx控制台函数
     modimport "modmain/main_check_after" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
 

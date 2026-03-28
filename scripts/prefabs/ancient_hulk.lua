@@ -847,7 +847,7 @@ local function minefn()
     inst:AddComponent("creatureprox")
     inst.components.creatureprox.period = 0.01
     inst.components.creatureprox:SetDist(3.5, 5)
-    inst.components.creatureprox:SetOnPlayerNear(onnearmine)
+    inst.components.creatureprox:SetOnNear(onnearmine)
 
     return inst
 end
