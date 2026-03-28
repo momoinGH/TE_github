@@ -21,7 +21,7 @@ SetSharedLootTable('dart_thrower',
 
 local function updateart(inst)
     if not inst.components.disarmable.armed then
-        inst.components.simpleperiodtask:TurnOff("autodartthrower")
+        inst:SetAutodartThrower(false)
         inst.AnimState:PlayAnimation("disarmed")
     end
 
@@ -76,17 +76,8 @@ local function disarm(inst, doer)
     local pt = Point(inst.Transform:GetWorldPosition())
     inst.components.lootdropper:SpawnLootPrefab("blowdart_pipe", pt)
     updateart(inst)
-    inst.components.simpleperiodtask:TurnOff("autodartthrower")
+    inst:SetAutodartThrower(false)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/disarm_wall")
-end
-
-local function turnonfn(inst)
-    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/dart_statue_LP", "rotate")
-end
-
-local function turnofffn(inst)
-    inst.SoundEmitter:KillSound("rotate")
-    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/dart_statue_stop")
 end
 
 local function setrotation(inst, rotation)
@@ -115,7 +106,19 @@ local function updaterotation(inst)
     end
 end
 
-local function fn(Sim)
+local function SetAutodartThrower(inst, is_on)
+    if is_on and not inst.autodartthrower_task then
+        inst.autodartthrower_task = inst:TroDoCanSleepPeriodicTask(0.1, updaterotation)
+        inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/dart_statue_LP", "rotate")
+    elseif not is_on and inst.autodartthrower_task then
+        inst.autodartthrower_task:Cancel()
+        inst.autodartthrower_task = nil
+        inst.SoundEmitter:KillSound("rotate")
+        inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/dart_statue_stop")
+    end
+end
+
+local function fn()
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
@@ -151,19 +154,17 @@ local function fn(Sim)
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(10)
 
-    inst.components.workable:SetOnWorkCallback(
-        function(inst, worker, workleft)
-            local pt = Point(inst.Transform:GetWorldPosition())
-            inst.components.simpleperiodtask:TurnOn("autodartthrower")
-            inst:AddChild(SpawnPrefab("rock_hit_debris"))
-            if workleft <= 0 then
-                inst.SoundEmitter:PlaySound("dontstarve/wilson/rock_break")
-                inst.components.lootdropper:DropLoot(pt)
-                SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
-                inst:Remove()
-            end
-            updateart(inst)
-        end)
+    inst.components.workable:SetOnWorkCallback(function(inst, worker, workleft)
+        inst:SetAutodartThrower(true)
+        inst:AddChild(SpawnPrefab("rock_hit_debris"))
+        if workleft <= 0 then
+            inst.SoundEmitter:PlaySound("dontstarve/wilson/rock_break")
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
+            SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+            inst:Remove()
+        end
+        updateart(inst)
+    end)
 
     --------------------
     inst.OnSave = onsave
@@ -174,21 +175,20 @@ local function fn(Sim)
 
     inst.name = STRINGS.NAMES.PIG_RUINS_DART_TRAP
 
-    if math.random() < 0.5 then
-        inst.ccw = true
-    end
-
     inst.darttimer = 0
     inst.shoottime = 0.4
-
-    inst:AddComponent("simpleperiodtask")
-    inst.components.simpleperiodtask:DoPeriodicTask("autodartthrower", 0.1, updaterotation)
-    inst.components.simpleperiodtask.turnonfn = turnonfn
-    inst.components.simpleperiodtask.turnofffn = turnofffn
+    inst.autodartthrower_task = nil
+    inst.SetAutodartThrower = SetAutodartThrower
 
     updateart(inst)
 
     setrotation(inst, math.random() * 360)
+
+    inst:DoTaskInTime(0, function(inst)
+        if inst.ccw == nil then --没赋值过
+            inst.ccw = math.random() < 0.5
+        end
+    end)
 
     return inst
 end

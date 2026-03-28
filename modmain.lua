@@ -80,7 +80,7 @@ modimport "modmain/soundemitter"
 modimport "modmain/ents_trace"            --缓存记录一些需要全局查找的实体
 modimport "modmain/player_classified"     --为player_classified添加网络变量提供便捷
 modimport "modmain/class"                 --修复class继承上的一些bug
-modimport "modmain/cansleep_periodictask" --提供一个TroDoCanSleepPeriodicTask方法可以开启可休眠的周期任务，这个和simpleperiodtask功能有点重合
+modimport "modmain/cansleep_periodictask" --提供一个TroDoCanSleepPeriodicTask方法可以开启可休眠的周期任务
 
 
 modimport "modmain/postinit" --TODO 拆分一下

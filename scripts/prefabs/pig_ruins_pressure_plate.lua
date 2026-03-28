@@ -41,8 +41,8 @@ local function trigger(inst)
         local pt = inst:GetPosition()
         local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "dartthrower" }, { "INTERIOR_LIMBO" })
         for i, ent in ipairs(ents) do
-            if ent.components.simpleperiodtask then
-                ent.components.simpleperiodtask:TurnOn("autodartthrower")
+            if ent.SetAutodartThrower then
+                ent:SetAutodartThrower(true)
             elseif ent.shoot then
                 ent:shoot()
             end
