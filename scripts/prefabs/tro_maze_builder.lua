@@ -4,7 +4,7 @@ local DIR_OPPOSITE = RoomUtils.DIR_OPPOSITE
 
 ---迷宫生成器
 ---主要维护一个rooms表，并提供一些辅助函数
-local MazeBuilder = Class(function(self)
+local MazeBuilder = Class(function(self, width, depth)
     self.rooms = {}
 
     -- 支持索引访问rooms里的room，比如room_data[2]就是room_data.rooms[2]
@@ -29,8 +29,8 @@ local MazeBuilder = Class(function(self)
     setmetatable(self, mt)
 
     --房间默认大小
-    self.width = TUNING.ROOM_MEDIUM_WIDTH
-    self.depth = TUNING.ROOM_MEDIUM_DEPTH
+    self.width = width or TUNING.ROOM_TINY_WIDTH
+    self.depth = depth or TUNING.ROOM_TINY_DEPTH
 
     self.props_radius = {}        --物品半径表，标识物品的占地范围，这个范围内不会塞入其他东西了
     self.rooms_obstacle_grid = {} --每个房间被占用区域
@@ -103,6 +103,12 @@ end
 
 -- 构建指定数量的房间
 function MazeBuilder:CreateRandomRooms(rooms_to_make)
+    if rooms_to_make <= 0 then return end
+
+    if self:GetCount() == 0 then
+        self:AddRoom(0, 0)
+    end
+
     while self:GetCount() < rooms_to_make do
         -- 从现有房间里随机选择一个房间作为前置房间，然后在前置房间随机选择一个方向
         local dir_choice = RoomUtils.GetRandomDir()

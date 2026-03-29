@@ -172,7 +172,7 @@ local function mazemaker(dungeondef)
     assert(dungeondef.rooms)
 
     local DIR_OPPOSITE = RoomUtils.DIR_OPPOSITE
-    local builder = MazeBuilder()
+    local builder = MazeBuilder(TUNING.ROOM_MEDIUM_WIDTH, TUNING.ROOM_MEDIUM_DEPTH)
     -- 这里默认第一个房间是出口1，房间位置为0,0
     local start_room = builder:AddRoom(0, 0, nil, { RoomUtils.DIR.north })
     builder:SetEntrance(start_room.idx, 1, "north")

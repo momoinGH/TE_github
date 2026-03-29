@@ -320,16 +320,26 @@ function FN.CreateRoom(room, door_key_start)
                 -- 墙壁自适应缩放
                 x_offset = x_offset
                     or depth == TUNING.ROOM_LARGE_DEPTH and -4.5
-                    or depth == TUNING.ROOM_MEDIUM_DEPTH and -1.6
+                    or depth == TUNING.ROOM_MEDIUM_DEPTH and -1.5
                     or depth == TUNING.ROOM_SMALL_DEPTH and -3.5
                     or depth == TUNING.ROOM_TINY_DEPTH and -2.8
                     or nil
                 scale = scale
                     or width == TUNING.ROOM_LARGE_WIDTH and { 4.6, 4.6 }
-                    or width == TUNING.ROOM_MEDIUM_WIDTH and { 3.7, 3.6 }
+                    or width == TUNING.ROOM_MEDIUM_WIDTH and { 4.3, 3.4 }
                     or width == TUNING.ROOM_SMALL_WIDTH and { 3.5, 3.5 }
                     or width == TUNING.ROOM_TINY_WIDTH and { 2.9, 2.9 }
                     or nil
+
+                if p.basic_scale then
+                    if scale then
+                        scale[1] = scale[1] / p.basic_scale[1]
+                        scale[2] = scale[2] / p.basic_scale[2]
+                    end
+                    if x_offset then
+                        x_offset = x_offset / p.basic_scale[2]
+                    end
+                end
             end
 
             p.Transform:SetPosition(x + (x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))
