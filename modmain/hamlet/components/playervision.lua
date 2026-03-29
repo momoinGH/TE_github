@@ -28,7 +28,7 @@ AddComponentPostInit("playervision", function(self)
     self.inst:ListenForEvent("tro_curroomcenter", OnRoomChange)
 
     Hooks.FnDecorator(self, "UpdateCCTable", function(self)
-        if not self.inst:TroGetRoomCenter() then
+        if not self.inst:TroGetPlayerClassifiedNetVar("tro_curroomcenter") then
             return
         end
 

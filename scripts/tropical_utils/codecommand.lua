@@ -1454,3 +1454,4 @@ function GetMinimapAtlas_Internal(imagename) end
 
 
 scheduler = {}
+Map = {}

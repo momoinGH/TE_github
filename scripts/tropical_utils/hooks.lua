@@ -42,21 +42,38 @@ function FN.FnDecorator(obj, key, beforeFn, afterFn, isUseBeforeReturn)
     end
 end
 
-local function GetUpValue(fn, upvalueName)
+local function GetUpValueImpl(fn, upvalueName, level)
+    level = level or 5
     local i = 1
+    local fns = {}
+
+    -- 先找第一层函数里有没有
     while true do
         local name, value = debug.getupvalue(fn, i)
+        print("find", name, value)
         if not name then break end -- 没有更多的upvalue了
         if name == upvalueName then
             return value, i
         end
+        if level > 0 and type(value) == "function" then
+            table.insert(fns, value)
+        end
         i = i + 1
     end
+
+    -- 每个函数里再找下去
+    for _, f in ipairs(fns) do
+        local value, index = GetUpValueImpl(f, upvalueName, level - 1)
+        if value then
+            return value, index
+        end
+    end
+
     return nil, nil
 end
 
----链式查询上值，找不到就返回nil，应该比上面那个更常用，因为这个是链式的
-function FN.FindUpvalue(fn, ...)
+---链式查询上值，找不到就返回nil，这个是链式的
+function FN.GetUpValue(fn, ...)
     if not trodevassert(type(fn) == "function", "第一个参数必须是函数") then
         return nil, nil, nil
     end
@@ -65,7 +82,7 @@ function FN.FindUpvalue(fn, ...)
     val = fn
     for _, name in ipairs({ ... }) do
         current_fn = val
-        val, i = GetUpValue(current_fn, name)
+        val, i = GetUpValueImpl(current_fn, name)
         if i == nil then
             return nil, nil, nil
         end
@@ -87,7 +104,7 @@ function FN.SetUpvalue(fn, ...)
         table.insert(pathNames, args[i])
     end
 
-    local val, current_fn, i = FN.FindUpvalue(fn, unpack(pathNames))
+    local val, current_fn, i = FN.GetUpValue(fn, unpack(pathNames))
     if i == nil then
         return false
     end
@@ -124,7 +141,7 @@ function FN.GetWorldHandle(inst, var, file) --补充一下风铃草大佬没写�
 end
 
 -- 根据定义的文件获取事件回调函数，尽量少用，因为文件里定义多个监听时获取的不一定是自己想要的
--- 可以使用require预制件文件用FindUpvalue拿到回调
+-- 可以使用require预制件文件用GetUpvalue拿到回调
 function FN.GetEventCallback(inst, event, source, source_file, test_fn)
     source = source or inst
     local listener_fns = inst.event_listening and inst.event_listening[event] and inst.event_listening[event][source]

@@ -10,14 +10,14 @@ function Map:TroGetRoomCenter(x, y, z)
     end
 
     for _, v in ipairs(last_rooms) do
-        if v:IsValid() and v:IsPointInRoom(x, z) then
+        if v:IsValid() and v:IsPointInRoom(x, 0, z) then
             return v
         end
     end
     -- 查找
     last_rooms = TheSim:FindEntities(x, 0, z, RoomUtils.RADIUS, { "interior_center" })
     for _, v in ipairs(last_rooms) do
-        if v:IsPointInRoom(x, z) then
+        if v:IsPointInRoom(x, 0, z) then
             return v
         end
     end
@@ -43,3 +43,10 @@ Hooks.FnDecorator(Map, "IsVisualGroundAtPoint", CheckPointBefore)
 Hooks.FnDecorator(Map, "GetTileCenterPoint", GetTileCenterPointBefore) -------地皮中心
 
 ----------------------------------------------------------------------------------------------------
+
+-- 把在世界外面判定为在熔炉竞技场，可以避免猎犬在房间里生成
+-- Hooks.FnDecorator(Map, "IsPointInWagPunkArenaAndBarrierIsUp", function(self, x, y, z)
+--     if self:TroIsWorldOut(x, 0, z) then
+--         return { true }, true
+--     end
+-- end)

@@ -29,7 +29,7 @@ AddComponentPostInit("oceancolor", function(self)
         self.currentphase = phase
     end
 
-    local _COLOURS = Hooks.FindUpvalue(self.OnPhaseChanged, "COLORS")
+    local _COLOURS = Hooks.GetUpValue(self.OnPhaseChanged, "COLORS")
     COLOURSETS.forest = deepcopy(_COLOURS)
 
     local _activatedplayer

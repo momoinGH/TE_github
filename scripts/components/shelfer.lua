@@ -23,11 +23,13 @@ function Shelfer:GetGift()
     return self.shelf.components.container:GetItemInSlot(self.slotindex)
 end
 
-function Shelfer:GiveGift()
+function Shelfer:OnItemLose()
     self.inst:RemoveTag("slot_one")
-    self.shelf.SetImageFromName(self.shelf, nil, self.slot)
-    local item = self.shelf.components.container:RemoveItemBySlot(self.slotindex)
-    return self:ReturnGift(item)
+end
+
+function Shelfer:GiveGift()
+    self.shelf:SetImageFromName(nil, self.slot)
+    return self.shelf.components.container:RemoveItemBySlot(self.slotindex)
 end
 
 function Shelfer:CanAccept(item, giver)
@@ -55,13 +57,6 @@ function Shelfer:SetArt()
     end
 end
 
-function Shelfer:ReturnGift(item)
-    if item then
-        item.onshelf = nil
-        return item
-    end
-end
-
 function Shelfer:AcceptGift(giver, item)
     if self:CanAccept(item, giver) then
         if item.components.stackable and item.components.stackable.stacksize > 1 then
@@ -85,8 +80,6 @@ function Shelfer:AcceptGift(giver, item)
 end
 
 function Shelfer:UpdateGift(item)
-    item.onshelf = self.inst
-
     if self.shelf and self.slot then
         self.inst:AddTag("slot_one")
         self:SetArt()

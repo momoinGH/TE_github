@@ -12,9 +12,9 @@ local function AddBirds(tile, vals)
     BIRD_TYPES[tile] = birds
 end
 
-AddComponentPostInit("birdspawner",function(self)
+AddComponentPostInit("birdspawner", function(self)
     if not BIRD_TYPES then
-        BIRD_TYPES = Hooks.FindUpvalue(self.SpawnBird, "PickBird", "BIRD_TYPES")
+        BIRD_TYPES = Hooks.GetUpValue(self.SpawnBird, "PickBird", "BIRD_TYPES")
         if BIRD_TYPES then
             AddBirds(WORLD_TILES.OCEAN_COASTAL, { "puffin", "cormorant" })
             AddBirds(WORLD_TILES.OCEAN_COASTAL_SHORE, { "puffin", "cormorant" })
@@ -39,7 +39,7 @@ AddComponentPostInit("birdspawner",function(self)
             --AddBirds(WORLD_TILES.ANTCAVE, { "robin", "crow" })
             --AddBirds(WORLD_TILES.BATCAVE, { "robin", "crow" })
             --AddBirds(WORLD_TILES.BATTLEGROUND, { "robin", "crow" })
-			--AddBirds(WORLD_TILES.COBBLEROAD, { "robin", "crow" })
+            --AddBirds(WORLD_TILES.COBBLEROAD, { "robin", "crow" })
             AddBirds(WORLD_TILES.DEEPRAINFOREST, { "parrot_blue", "kingfisher", "kingfisher_swarm", "parrot_blue_swarm" })
             AddBirds(WORLD_TILES.FIELDS, { "robin", "crow" })
             AddBirds(WORLD_TILES.FOUNDATION, { "pigeon", "crow", "pigeon_swarm" })
@@ -49,10 +49,10 @@ AddComponentPostInit("birdspawner",function(self)
             AddBirds(WORLD_TILES.PAINTED, { "kingfisher", "crow", "kingfisher_swarm" })
             --AddBirds(WORLD_TILES.PIGRUINS, { "robin", "crow" })
             AddBirds(WORLD_TILES.PLAINS, { "robin", "crow", "kingfisher", "kingfisher_swarm" })
-            AddBirds(WORLD_TILES.RAINFOREST, { "toucan_hamlet", "kingfisher", "parrot_blue", "kingfisher_swarm","toucan_hamlet_swarm", "parrot_blue_swarm" })
+            AddBirds(WORLD_TILES.RAINFOREST, { "toucan_hamlet", "kingfisher", "parrot_blue", "kingfisher_swarm", "toucan_hamlet_swarm", "parrot_blue_swarm" })
 
 
-            AddBirds(WORLD_TILES.QUAGMIRE_PEATFOREST, { "robin", "crow" })--和dst森林一样
+            AddBirds(WORLD_TILES.QUAGMIRE_PEATFOREST, { "robin", "crow" }) --和dst森林一样
             AddBirds(WORLD_TILES.QUAGMIRE_PARKFIELD, { "robin", "quagmire_pigeon" })
             AddBirds(WORLD_TILES.QUAGMIRE_PARKSTONE, { "robin", "quagmire_pigeon", "quagmire_pigeon_swarm" })
             AddBirds(WORLD_TILES.QUAGMIRE_GATEWAY, { "robin", "quagmire_pigeon" })
@@ -72,7 +72,7 @@ AddComponentPostInit("birdspawner",function(self)
             end
         end
     end
---[[
+    --[[
     function self:SpawnBird(spawnpoint, ignorebait)
         local PARROT_PIRATE_CHANCE = 0.1
         local birds = nil

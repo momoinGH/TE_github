@@ -1,3 +1,5 @@
+local RoomUtils = require("tropical_utils/room_utils")
+
 local assets =
 {
     Asset("ANIM", "anim/pressure_plate.zip"),
@@ -39,7 +41,7 @@ end
 local function trigger(inst)
     if inst:HasTag("trap_dart") then
         local pt = inst:GetPosition()
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, { "dartthrower" }, { "INTERIOR_LIMBO" })
+        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, RoomUtils.RADIUS, { "dartthrower" })
         for i, ent in ipairs(ents) do
             if ent.SetAutodartThrower then
                 ent:SetAutodartThrower(true)
@@ -49,11 +51,11 @@ local function trigger(inst)
         end
     elseif inst:HasTag("trap_spear") then
         local pt = inst:GetPosition()
-        local dist = 50
+        local dist = RoomUtils.RADIUS
         if inst:HasTag("localtrap") then
             dist = 4
         end
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, dist, { "spear_trap" }, { "INTERIOR_LIMBO" })
+        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, dist, { "spear_trap" })
         for i, ent in ipairs(ents) do
             if ent then
                 ent:PushEvent("triggertrap")
@@ -62,7 +64,7 @@ local function trigger(inst)
     else
         --开门
         local pt = inst:GetPosition()
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
+        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, RoomUtils.RADIUS, nil)
         for i, ent in ipairs(ents) do
             if ent:HasTag("lockable_door") then
                 ent:PushEvent("open")
@@ -75,11 +77,11 @@ local function untrigger(inst)
     if inst:HasTag("trap_dart") then
     elseif inst:HasTag("trap_spear") then
         local pt = inst:GetPosition()
-        local dist = 50
+        local dist = RoomUtils.RADIUS
         if inst:HasTag("localtrap") then
             dist = 4
         end
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, dist, { "spear_trap" }, { "INTERIOR_LIMBO" })
+        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, dist, { "spear_trap" })
         for i, ent in ipairs(ents) do
             if ent then
                 ent:PushEvent("reset")
@@ -87,7 +89,7 @@ local function untrigger(inst)
         end
     else
         local pt = inst:GetPosition()
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 50, nil, { "INTERIOR_LIMBO" })
+        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, RoomUtils.RADIUS, nil)
         for i, ent in ipairs(ents) do
             if ent:HasTag("lockable_door") then
                 ent:PushEvent("close")

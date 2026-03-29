@@ -21,7 +21,7 @@ local function OnLoad(inst, data)
 end
 
 -- 横向为z右为正，纵向为x下为正
-local function IsPointInRoom(inst, x, z)
+local function IsPointInRoom(inst, x, y, z)
     local half_width = inst.room_width:value() / 2 + 1 --加一点儿，增加点误差
     local half_depth = inst.room_depth:value() / 2 + 1
     local rx, ry, rz = inst.Transform:GetWorldPosition()
@@ -34,10 +34,18 @@ end
 -- 拿到一侧的门
 local function GetRoomDoor(inst, dir)
     local doors = RoomUtils.FindRoomEnts(inst, { "interior_" .. dir .. "_door" })
-    if #doors >= 2 then
-        TroErrorHandle(string.trofmt("{}这个室内{}方向有{}个门", inst, dir, #doors), true, false)
+    if #doors >= 2 then --两个门重叠了，是bug
+        TroErrorHandle(string.trofmt("{}这个室内{}方向有{}个门", inst, dir, #doors), false, false)
     end
-    return #doors > 0 and doors[1] or nil
+
+    for _, door in ipairs(doors) do
+        local target_door = door and door.targetdoor and door.targetdoor:value()
+        -- 检查一下目标门是否方向和自己这个对应上，因为室内和室内之间没有标识符，像虫巢这种一个室内套一个室内的时候第二个室内入口是south门，容易找到室内一去
+        if target_door and target_door:HasTag("interior_" .. RoomUtils.DIR_OPPOSITE[dir].label .. "_door") then
+            return door
+        end
+    end
+    return nil
 end
 
 local function GetNearRoom(inst, dir)

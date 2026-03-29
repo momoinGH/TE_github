@@ -47,6 +47,8 @@ local phasefunctions =
 
 local function CommonPost(inst)
     inst:AddTag("lockable_door")
+
+    inst:SetPrefabNameOverride("prop_door")
 end
 
 local function OnPhase(inst, phase)
@@ -97,10 +99,22 @@ local function OnLoad(inst, data)
     end
 end
 
+-- 门的阴影实体
+local function UpdateDoorShadow(inst)
+    local can_shadow = inst.door_orientation == "south"
+    if can_shadow and not inst._shadow then
+        inst._shadow = inst:SpawnChild("prop_door_shadow")
+    elseif not can_shadow and inst._shadow then
+        inst._shadow:Remove()
+        inst._shadow = nil
+    end
+end
+
 local function OnInteriorSpawn(inst, data)
     if data.vined then
         inst:SetVine()
     end
+    UpdateDoorShadow(inst)
 end
 
 local function OpenDoor(inst, instant)
@@ -147,6 +161,34 @@ local function MasterPost(inst)
     inst:ListenForEvent("close", CloseDoor)
 end
 
+----------------------------------------------------------------------------------------------------
+
+local function shadow_fn()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+
+    inst.AnimState:SetBank("doorway_ruins")
+    inst.AnimState:SetBuild("pig_ruins_door")
+    inst.AnimState:PlayAnimation("south_floor")
+
+    inst:AddTag("NOCLICK") -- Note for future self: Was commented out, but not sure why.. if it's not there, the shadow eats the click on the door.
+    inst:AddTag("NOBLOCK")
+    -- inst.initInteriorPrefab = InitInteriorPrefab_shadow
+
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
+    inst.AnimState:SetSortOrder(3)
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
 return
 --猪人遗迹门，偷个懒，蓝色版本的替换个build得了
     MakeDoor("prop_door", {
@@ -178,4 +220,5 @@ return
         trader = true,
         is_inner = true,
         door_orientation = "north"
-    }, CommonPost, MasterPost)
+    }, CommonPost, MasterPost),
+    Prefab("prop_door_shadow", shadow_fn, assets)

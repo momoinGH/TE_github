@@ -2,7 +2,7 @@
 local flotsam_prefabs
 AddComponentPostInit("flotsamgenerator", function(self)
     if not flotsam_prefabs then
-        flotsam_prefabs = Hooks.FindUpvalue(self.SpawnFlotsam, "PickFlotsam", "flotsam_prefabs")
+        flotsam_prefabs = Hooks.GetUpValue(self.SpawnFlotsam, "PickFlotsam", "flotsam_prefabs")
         if flotsam_prefabs then
             flotsam_prefabs["waterygrave"] = 1
             flotsam_prefabs["redbarrel"] = 1

@@ -30,7 +30,7 @@ end
 local function regrow(inst)
     -- this is just for viuals, it doesn't actually lock the assotiated door.
     if inst.components.workable.workleft ~= 2 then
-        inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/vine_grow")
+        -- inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/vine_grow")
         inst.components.workable.workleft = 2
         inst:RemoveTag("NOCLICK")
         inst.AnimState:PlayAnimation(getanimname(inst) .. "_pre", true)
@@ -133,15 +133,20 @@ local function makewallfn(facing)
 
         inst.entity:AddTransform()
         inst.entity:AddAnimState()
-        inst.entity:AddSoundEmitter()
         inst.entity:AddNetwork()
-
-        inst.door_orientation = facing
 
         inst.AnimState:SetSortOrder(3)
         inst.AnimState:SetBank("pig_ruins_vines_wall")
         inst.AnimState:SetBuild("pig_ruins_vines_build")
-        inst.AnimState:PlayAnimation(inst.door_orientation .. math.random(1, 15), true)
+        inst.AnimState:PlayAnimation(facing .. math.random(1, 15), true)
+
+        inst:AddTag("NOCLICK")
+
+        inst.entity:SetPristine()
+
+        if not TheWorld.ismastersim then
+            return inst
+        end
 
         return inst
     end

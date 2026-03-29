@@ -212,3 +212,12 @@ GLOBAL.c_printtile = function()
         end
     end
 end
+
+----------------------------------------------------------------------------------------------------
+
+-- 如果c_goto参数是数字先检查是不是实体id
+Hooks.FnDecorator(GLOBAL, "c_goto", function(dest, inst, ...)
+    if type(dest) == "number" and Ents[dest] then
+        return nil, false, { dest, inst, ... }
+    end
+end)

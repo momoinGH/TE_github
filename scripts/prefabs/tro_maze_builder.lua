@@ -34,11 +34,6 @@ local MazeBuilder = Class(function(self)
 
     self.props_radius = {}        --物品半径表，标识物品的占地范围，这个范围内不会塞入其他东西了
     self.rooms_obstacle_grid = {} --每个房间被占用区域
-
-    -- 这里默认第一个房间是出口1，房间位置为0,0
-    local start_room = self:AddRoom(0, 0, nil, { DIR.north })
-    start_room.is_entrance = true
-    start_room.entrance1 = true
 end)
 
 function MazeBuilder:SetAllRoomsSize(width, depth)
@@ -140,8 +135,56 @@ function MazeBuilder:CreateRandomRooms(rooms_to_make)
     end
 end
 
+function MazeBuilder:GetRoom(x, y)
+    for _, room in ipairs(self.rooms) do
+        if room.x == x and room.y == y then
+            return room
+        end
+    end
+    return nil
+end
+
+function MazeBuilder:CreateGridRooms(row, col)
+    for y = 1, row do
+        for x = 1, col do
+            self:AddRoom(x, y)
+        end
+    end
+
+    -- 构造门，只要旁边有房间就创建门
+    for _, room in ipairs(self.rooms) do
+        for dir_label, data in pairs(DIR) do
+            local near_room_x = room.x + data.x
+            local near_room_y = room.y + data.y
+            if near_room_x >= 1 and near_room_x <= col and near_room_y >= 1 and near_room_y <= row then
+                self:SetRoomExit(room.idx, dir_label, self:GetRoom(near_room_x, near_room_y).idx)
+            end
+        end
+    end
+end
+
+function MazeBuilder:SetEntrance(idx, entrance_id, dir_label)
+    local room = self.rooms[idx]
+    room["entrance" .. entrance_id] = true
+    room.is_entrance = true
+
+    -- 如果入口是北门，就把north添加到障碍物表并断开north方向上门的连接
+    if dir_label then
+        if not table.contains(room.blocked_exits, DIR[dir_label]) then
+            table.insert(room.blocked_exits, DIR[dir_label])
+        end
+        if room.exits[DIR[dir_label]] then
+            local target_room = self.rooms[room.exits[DIR[dir_label]].target_room]
+            target_room.exits[DIR[DIR_OPPOSITE[dir_label].label]] = nil
+            room.exits[DIR[dir_label]] = nil
+        end
+    end
+
+    return room
+end
+
 -- 遍历所有房间，查找那些顶部没有房间并且距离出口一房间最远的房间，查找结果随机选择一个作为遗迹出口二所在房间
-function MazeBuilder:SelectEntranceRoom(entrance_id)
+function MazeBuilder:SelectEntranceRoom(entrance_id, dir_label)
     assert(entrance_id > 1)
 
     local choices = {}
@@ -158,10 +201,7 @@ function MazeBuilder:SelectEntranceRoom(entrance_id)
         end
     end
     if #choices > 0 then
-        local entrance_room = choices[math.random(#choices)]
-        entrance_room["entrance" .. entrance_id] = true
-        entrance_room.is_entrance = true
-        return entrance_room
+        return self:SetEntrance(choices[math.random(#choices)].idx, entrance_id, dir_label)
     end
     return nil
 end
@@ -297,32 +337,47 @@ function MazeBuilder:AddRomPropAtInside(idx, prop, count)
     end
 end
 
--- 房间墙上加点东西
-function MazeBuilder:AddRomPropAtWall(idx, prop, dir_label, offset)
-    local room = self.rooms[idx]
-    local dir = DIR[dir_label]
-    assert(room)
-    assert(dir)
-
-    offset = offset or 0
-    local x_offset = dir.x * room.depth / 2
-    local z_offset = dir.y * room.width / 2
-
-    if dir_label == "north" then
-        z_offset = offset
-    elseif dir_label == "south" then
-        z_offset = offset
-    elseif dir_label == "west" then
-        x_offset = offset
-    elseif dir_label == "east" then
-        x_offset = offset
+local function GetDoorProp(get_name, room, dir, exit)
+    local doorprop = FunctionOrValue(get_name, room, dir, exit)
+    if type(doorprop) == "string" then
+        doorprop = { name = doorprop }
     end
-    if type(prop) == "string" then
-        prop = { name = prop }
+    assert(doorprop.name)
+    doorprop.x_offset = dir.x * room.depth / 2
+    doorprop.z_offset = dir.y * room.width / 2
+    return doorprop
+end
+
+--- 根据出口构建所有房间的门
+--- get_name: 门的prop数据，可以是字符串、表也可以是函数
+function MazeBuilder:AddAllRoomDoorProp(get_name)
+    local door_key_inc = 1
+    for idx, room in ipairs(self.rooms) do
+        for dir, exit in pairs(room.exits) do
+            if not exit.key then
+                local doorprop = GetDoorProp(get_name, room, dir, exit)
+
+                -- 把隔壁门也一起生成
+                local opposite_room = self.rooms[exit.target_room]
+                local opposite_dir = DIR_OPPOSITE[dir.label]
+                local opposite_exit = opposite_room.exits[opposite_dir]
+                local doorprop2 = GetDoorProp(get_name, opposite_room, opposite_dir, opposite_exit)
+
+                doorprop.key = door_key_inc
+                door_key_inc = door_key_inc + 1
+                doorprop2.key = door_key_inc
+                door_key_inc = door_key_inc + 1
+                doorprop.target_door = doorprop2.key
+                doorprop2.target_door = doorprop.key
+
+                opposite_room.exits[opposite_dir].key = doorprop2.key --有key表示处理过了
+                self:AddRoomProp(idx, doorprop)
+                self:AddRoomProp(opposite_room.idx, doorprop2)
+
+                print(string.trofmt("遗迹房间{},{} {}方向key为{}，生成门连通房间{},{}", room.x, room.y, dir.label, doorprop.key, opposite_room.x, opposite_room.y))
+            end
+        end
     end
-    prop.x_offset = x_offset
-    prop.z_offset = z_offset
-    return self:AddRoomProp(idx, prop)
 end
 
 return MazeBuilder

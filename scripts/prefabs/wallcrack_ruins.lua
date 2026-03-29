@@ -16,12 +16,17 @@ end
 
 
 -- 门被摧毁
-local function reveal(inst)
+local function reveal(inst, worker)
     if not IsFakeDoor(inst) then
         --真的门
         inst.AnimState:SetBank("interior_wall_decals_ruins")
         inst.AnimState:SetBuild("interior_wall_decals_ruins_cracks")
         inst.components.teleporter:SetEnabled(true)
+
+        local target = inst.components.teleporter:GetTarget()
+        if target.components.worker then
+            target.components.worker:Destroy(worker or inst)
+        end
     end
 
     inst.AnimState:PlayAnimation(inst.door_orientation .. "_open")
@@ -29,7 +34,7 @@ local function reveal(inst)
 end
 
 local function OnDestroy(inst, worker)
-    reveal(inst)
+    reveal(inst, worker)
     inst.SoundEmitter:PlaySound("dontstarve/common/destroy_stone")
     if not IsFakeDoor(inst) and worker and worker.SoundEmitter then
         worker.SoundEmitter:PlaySound("dontstarve_DLC003/music/secret_found")

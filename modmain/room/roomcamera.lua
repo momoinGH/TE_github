@@ -55,6 +55,9 @@ local function CameraDefault(inst)
 end
 
 local function UpdateRoomCamera(inst)
+    TheCamera:SetPaused(true)
+    TheCamera:SetControllable(false)
+    TheCamera.headingtarget = 0
     local target = inst:TroGetPlayerClassifiedNetVar("tro_curroomcenter")
     Apply(target)
 end
@@ -64,11 +67,8 @@ end
 local function OnPlayerRoomChange(inst)
     local target = inst:TroGetPlayerClassifiedNetVar("tro_curroomcenter")
     if target then
-        TheCamera:SetPaused(true)
-        TheCamera:SetControllable(false)
-        TheCamera.headingtarget = 0
         if not inst._tro_roomcameratask then
-            inst._tro_roomcameratask = inst:DoPeriodicTask(0.2, UpdateRoomCamera) --这里刷一下，因为有时候进房间镜头中心会在侧门不在中心
+            inst._tro_roomcameratask = inst:DoPeriodicTask(0.2, UpdateRoomCamera) --这里刷一下，因为有时候进房间镜头中心会在侧门不在中心，玩家死亡复活镜头也会修改
         end
     else
         CameraDefault(inst)

@@ -1185,9 +1185,6 @@ STRINGS.CHARACTERS.WURT.DESCRIBE.ANTHILL_DOOR_DIREITA                  = "Go to 
 STRINGS.CHARACTERS.WURT.DESCRIBE.ANTHILL_DOOR_ENTRADA                  = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.ANTHILL_DOOR_ESQUERDA                 = "Go to different room, florp!"
 
-STRINGS.CHARACTERS.WURT.DESCRIBE.ANTHILL_EXIT_1                        = "Can leave antfolk home here, florp."
-STRINGS.CHARACTERS.WURT.DESCRIBE.ANTHILL_EXIT_2                        = "Can leave antfolk home here, florp."
-
 STRINGS.CHARACTERS.WURT.DESCRIBE.ANTIQUITIES_DOOR_ENTRADA              = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.ROC_CAVE_DOOR_BAIXO                   = "Go to different room, florp!"
 STRINGS.CHARACTERS.WURT.DESCRIBE.ROC_CAVE_DOOR_CIMA                    = "Go to different room, florp!"

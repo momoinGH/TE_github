@@ -11,5 +11,5 @@ end
 
 AddPlayerPostInit(function(inst)
     if not TheWorld.ismastersim then return end
-    inst:DoPeriodicTask(10 * FRAMES, CheckPlayerInRoom)
+    inst:DoPeriodicTask(15 * FRAMES, CheckPlayerInRoom)
 end)

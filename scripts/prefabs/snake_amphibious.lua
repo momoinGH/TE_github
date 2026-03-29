@@ -58,7 +58,7 @@ local sounds = {
         move = "dontstarve_DLC002/creatures/snake/move",
     },
     amphibious = {
-        idle = "dontstarve_DLC003/creatures/snake_amphibious/idle",
+        idle = "dontstarve_DLC003/creatures/enemy/snake_amphibious/idle",
         pre_attack = "dontstarve_DLC002/creatures/snake/pre-attack",
         attack = "dontstarve_DLC003/creatures/snake_amphibious/attack",
         hurt = "dontstarve_DLC002/creatures/snake/hurt",

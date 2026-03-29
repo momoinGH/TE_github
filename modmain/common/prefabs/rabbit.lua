@@ -1,9 +1,9 @@
-local OnIsWinter = Hooks.FindUpvalue(require("prefabs/rabbit").fn, "OnEntityWake", "OnIsWinter")
-local IsForcedNightmare = OnIsWinter and Hooks.FindUpvalue(OnIsWinter, "IsForcedNightmare")
-local IsWinterRabbit = OnIsWinter and Hooks.FindUpvalue(OnIsWinter, "IsWinterRabbit")
-local BecomeWinterRabbit = OnIsWinter and Hooks.FindUpvalue(OnIsWinter, "BecomeWinterRabbit")
-local IsNormalRabbit = OnIsWinter and Hooks.FindUpvalue(OnIsWinter, "IsNormalRabbit")
-local BecomeRabbit = OnIsWinter and Hooks.FindUpvalue(OnIsWinter, "BecomeRabbit")
+local OnIsWinter = Hooks.GetUpValue(require("prefabs/rabbit").fn, "OnEntityWake", "OnIsWinter")
+local IsForcedNightmare = OnIsWinter and Hooks.GetUpValue(OnIsWinter, "IsForcedNightmare")
+local IsWinterRabbit = OnIsWinter and Hooks.GetUpValue(OnIsWinter, "IsWinterRabbit")
+local BecomeWinterRabbit = OnIsWinter and Hooks.GetUpValue(OnIsWinter, "BecomeWinterRabbit")
+local IsNormalRabbit = OnIsWinter and Hooks.GetUpValue(OnIsWinter, "IsNormalRabbit")
+local BecomeRabbit = OnIsWinter and Hooks.GetUpValue(OnIsWinter, "BecomeRabbit")
 
 if not (OnIsWinter and IsForcedNightmare and IsWinterRabbit and BecomeWinterRabbit and IsNormalRabbit and BecomeRabbit) then
     print("rabbit预制体求上值失败，不再修改兔子受到的季节影响")

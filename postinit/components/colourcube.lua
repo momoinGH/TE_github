@@ -91,14 +91,14 @@ local REGION_SEASON_COLOURCUBES = {
 AddComponentPostInit("colourcube", function(self)
     local OnOverrideCCPhaseFn, _UpdateAmbientCCTable, _SEASON_COLOURCUBES
     for i, v in ipairs(self.inst.event_listening["playeractivated"][TheWorld]) do
-        OnOverrideCCPhaseFn = Hooks.FindUpvalue(v, "OnOverrideCCPhaseFn")
+        OnOverrideCCPhaseFn = Hooks.GetUpValue(v, "OnOverrideCCPhaseFn")
         if OnOverrideCCPhaseFn then
             break
         end
     end
 
-    _UpdateAmbientCCTable = Hooks.FindUpvalue(OnOverrideCCPhaseFn, "UpdateAmbientCCTable")
-    _SEASON_COLOURCUBES = Hooks.FindUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES")
+    _UpdateAmbientCCTable = Hooks.GetUpValue(OnOverrideCCPhaseFn, "UpdateAmbientCCTable")
+    _SEASON_COLOURCUBES = Hooks.GetUpValue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES")
 
     local _activatedplayer
     local _showencc = CUBES.default

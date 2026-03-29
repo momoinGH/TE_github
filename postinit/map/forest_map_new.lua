@@ -4,7 +4,7 @@ require("mathutil")
 local forest_map = require("map/forest_map")
 local make_cities = require("map/tro_city_builder")
 local old_generatemap = forest_map.Generate --[[
-local SKIP_GEN_CHECKS = Hooks.FindUpvalue(old_generatemap, "SKIP_GEN_CHECKS")
+local SKIP_GEN_CHECKS = Hooks.GetUpValue(old_generatemap, "SKIP_GEN_CHECKS")
 if SKIP_GEN_CHECKS ~= nil and TA_CONFIG.DEVELOP.test_map then
     print("Skipping generation checks for test map")
     local old = SKIP_GEN_CHECKS

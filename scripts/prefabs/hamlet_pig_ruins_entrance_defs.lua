@@ -9,7 +9,7 @@ local room_creatures = {
     { scorpion = 1 },
 }
 
-local function GetDoorProp(room, dir, exit, width, depth)
+local function GetDoorProp(room, dir, exit)
     local name, build
     if room.color == "_blue" and not exit.secret then
         build = "pig_ruins_door_blue" --蓝色的门
@@ -26,8 +26,6 @@ local function GetDoorProp(room, dir, exit, width, depth)
 
     return {
         name = name,
-        x_offset = dir.x * depth / 2,
-        z_offset = dir.y * width / 2,
         build = build,
         anim = dir.label,
         vined = exit.vined,
@@ -175,6 +173,9 @@ local function mazemaker(dungeondef)
 
     local DIR_OPPOSITE = RoomUtils.DIR_OPPOSITE
     local builder = MazeBuilder()
+    -- 这里默认第一个房间是出口1，房间位置为0,0
+    local start_room = builder:AddRoom(0, 0, nil, { RoomUtils.DIR.north })
+    builder:SetEntrance(start_room.idx, 1, "north")
 
     builder:SetPropsRadius({
         deco_ruins_fountain = 4
@@ -197,7 +198,7 @@ local function mazemaker(dungeondef)
 
     -- 第二个出口
     if not dungeondef.nosecondexit then
-        builder:SelectEntranceRoom(2)
+        builder:SelectEntranceRoom(2, "north")
     end
 
 
@@ -249,10 +250,10 @@ local function mazemaker(dungeondef)
 
         -- 出口
         if room.entrance1 then
-            builder:AddRomPropAtWall(idx, { name = "prop_door", key = "entrance1" }, "north")
+            builder:AddRoomProp(idx, { name = "prop_door", key = "entrance1", x_offset = -depth / 2 })
         end
         if room.entrance2 then
-            builder:AddRomPropAtWall(idx, { name = "prop_door", key = "entrance2" }, "north")
+            builder:AddRoomProp(idx, { name = "prop_door", key = "entrance2", x_offset = -depth / 2 })
         end
 
         -- 终焉之井
@@ -296,25 +297,20 @@ local function mazemaker(dungeondef)
         local westexitopen = not room.exits[RoomUtils.DIR.west]
         local southexitopen = not room.exits[RoomUtils.DIR.south]
         local eastexitopen = not room.exits[RoomUtils.DIR.east]
-        local numexits = GetTableSize(room.exits)
-        local door_orientation
+        local init = function(inst)
+            print("生成假门", inst)
+        end
         if northexitopen and math.random() < 0.10 then
             northexitopen = false
-            door_orientation = "north"
+            builder:AddRoomProp(idx, { name = "wallcrack_ruins", x_offset = -depth / 2, anim = "north", init = init })
         end
         if westexitopen and math.random() < 0.10 then
             westexitopen = false
-            door_orientation = "west"
+            builder:AddRoomProp(idx, { name = "wallcrack_ruins", z_offset = -width / 2, anim = "west", init = init })
         end
         if eastexitopen and math.random() < 0.10 then
             eastexitopen = false
-            door_orientation = "east"
-        end
-        if door_orientation then
-            builder:AddRomPropAtWall(idx, {
-                name = "wallcrack_ruins", --假的
-                anim = door_orientation
-            }, door_orientation)
+            builder:AddRoomProp(idx, { name = "wallcrack_ruins", z_offset = width / 2, anim = "east", init = init })
         end
 
         -- 添加柱子
@@ -442,7 +438,7 @@ local function mazemaker(dungeondef)
         -- 宝物
         if roomtype == "treasure" then
             if treasuretype and treasuretype == "aporkalypse" then
-                builder:AddRoomProp(idx, { name = "aporkalypse_clock", x_offset = -1 })
+                builder:AddRoomProp(idx, { name = "aporkalypse_clock", x_offset = -1 }) --日晷
                 fountain = true
             elseif treasuretype and treasuretype == "secret" then
                 local items = { redgem = 30, bluegem = 20, relic_1 = 10, relic_2 = 10, relic_3 = 10, nightsword = 1, ruins_bat = 1, ruinshat = 1, orangestaff = 1, armorruins = 1, multitool_axe_pickaxe = 1 }
@@ -632,6 +628,7 @@ local function mazemaker(dungeondef)
 
         if roomtype == "speartraps!" then
             local speartraps = { "spottraps", "walltrap", "wavetrap", "bait" }
+            local numexits = GetTableSize(room.exits)
             if dungeondef.deepruins and numexits > 1 then
                 table.insert(speartraps, "litfloor")
             end
@@ -909,13 +906,11 @@ local function mazemaker(dungeondef)
                         builder:AddRoomProp(idx, { name = "pig_ruins_torch_sidewall" .. room.color, x_offset = 0 - 0.5, z_offset = -width / 2, })
                     end
                     builder:AddRoomProp(idx, { name = "pig_ruins_torch_sidewall" .. room.color, x_offset = depth / 3 - 0.5, z_offset = -width / 2, })
-                    builder:AddRoomProp(idx, { name = "pig_ruins_torch_sidewall" .. room.color, x_offset = -depth / 3 - 0.5, z_offset = width / 2, scale = { -1, 1 }
-                    })
+                    builder:AddRoomProp(idx, { name = "pig_ruins_torch_sidewall" .. room.color, x_offset = -depth / 3 - 0.5, z_offset = width / 2, scale = { -1, 1 } })
                     if eastexitopen then
                         builder:AddRoomProp(idx, { name = "pig_ruins_torch_sidewall" .. room.color, x_offset = 0 - 0.5, z_offset = width / 2, scale = { -1, 1 } })
                     end
-                    builder:AddRoomProp(idx, { name = "pig_ruins_torch_sidewall" .. room.color, x_offset = depth / 3 - 0.5, z_offset = width / 2, scale = { -1, 1 }
-                    })
+                    builder:AddRoomProp(idx, { name = "pig_ruins_torch_sidewall" .. room.color, x_offset = depth / 3 - 0.5, z_offset = width / 2, scale = { -1, 1 } })
                 end
             end
         end
@@ -992,31 +987,10 @@ local function mazemaker(dungeondef)
             builder:AddRoomProp(idx, { name = "interior_floor_ground_ruins_slab" })
             builder:AddRoomProp(idx, { name = "interior_wall_pig_ruins" })
         end
-
-        -- 门
-        for dir, exit in pairs(room.exits) do
-            local opposite_dir = RoomUtils.DIR_OPPOSITE[dir.label]
-            local doorprop = GetDoorProp(room, dir, exit, width, depth)
-
-            -- 把隔壁门也一起生成
-            local opposite_room = builder[exit.target_room]
-            local opposite_exit = opposite_room.exits[opposite_dir]
-            local doorprop2 = GetDoorProp(opposite_room, opposite_dir, opposite_exit, width, depth)
-            opposite_room.exits[opposite_dir] = nil --不再处理
-
-            doorprop.key = door_key_inc
-            door_key_inc = door_key_inc + 1
-            doorprop2.key = door_key_inc
-            door_key_inc = door_key_inc + 1
-            doorprop.target_door = doorprop2.key
-            doorprop2.target_door = doorprop.key
-
-            builder:AddRoomProp(idx, doorprop)
-            builder:AddRoomProp(opposite_room.idx, doorprop2)
-
-            print(string.trofmt("遗迹房间{},{} {}方向key为{}，生成门连通房间{},{}", room.x, room.y, dir.label, doorprop.key, opposite_room.x, opposite_room.y))
-        end
     end
+
+    -- 门
+    builder:AddAllRoomDoorProp(GetDoorProp)
 
     return builder.rooms
 end

@@ -389,8 +389,6 @@ local function sidewallfn(Sim)
 
     MakeObstaclePhysics(inst, .2)
 
-
-
     inst:SetPrefabNameOverride("pig_ruins_torch_wall")
 
     inst.entity:SetPristine()
@@ -456,6 +454,8 @@ local function sidewallfn(Sim)
         end
     end
     --------------------
+
+    inst:AddComponent("tro_saveanim")
 
     inst.OnSave = onsave
     inst.OnLoad = onload
@@ -651,6 +651,8 @@ local function sidewallbluefn(Sim)
         end
     end
     --------------------
+
+    inst:AddComponent("tro_saveanim")
 
     inst.OnSave = onsave
     inst.OnLoad = onload

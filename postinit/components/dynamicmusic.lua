@@ -53,9 +53,9 @@ AddComponentPostInit("dynamicmusic", function(self, inst)
     local _activatedplayer
     if not BUSYTHEMES then
         local OnPlayerActivated = Hooks.GetEventCallback(inst, "playeractivated", inst, "scripts/components/dynamicmusic.lua")
-        local StartPlayerListeners = OnPlayerActivated and Hooks.FindUpvalue(OnPlayerActivated, "StartPlayerListeners")
-        local StartBusy = StartPlayerListeners and Hooks.FindUpvalue(StartPlayerListeners, "StartBusy")
-        BUSYTHEMES = StartBusy and Hooks.FindUpvalue(StartBusy, "BUSYTHEMES")
+        local StartPlayerListeners = OnPlayerActivated and Hooks.GetUpValue(OnPlayerActivated, "StartPlayerListeners")
+        local StartBusy = StartPlayerListeners and Hooks.GetUpValue(StartPlayerListeners, "StartBusy")
+        BUSYTHEMES = StartBusy and Hooks.GetUpValue(StartBusy, "BUSYTHEMES")
         if not BUSYTHEMES then
             print("dynamicmusic组件hook失败，没有拿到BUSYTHEMES")
             return --放弃了，后面代码不执行了
@@ -69,7 +69,7 @@ AddComponentPostInit("dynamicmusic", function(self, inst)
 
     if not StopBusy then
         local OnEnableDynamicMusic = Hooks.GetEventCallback(inst, "enabledynamicmusic")
-        StopBusy = Hooks.FindUpvalue(OnEnableDynamicMusic, "StopBusy")
+        StopBusy = Hooks.GetUpValue(OnEnableDynamicMusic, "StopBusy")
     end
 
     local function MusicReDirect()

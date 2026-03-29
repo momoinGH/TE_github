@@ -304,23 +304,23 @@ function FN.CreateRoom(room, door_key_start)
             elseif p:HasTag("interior_floor") then
                 --地板自适应缩放，但不是直接的线性关系，这里懒得搞什么公式了
                 -- c_findtag("interior_floor").AnimState:SetScale()可在控制台不断调整
-                x_offset = x_offset
-                    or depth == TUNING.ROOM_LARGE_DEPTH and -5.5
-                    or depth == TUNING.ROOM_MEDIUM_DEPTH and -4.4
-                    or depth == TUNING.ROOM_SMALL_DEPTH and -3.5
-                    or depth == TUNING.ROOM_TINY_DEPTH and -3
-                    or nil
+                -- x_offset = x_offset
+                --     or depth == TUNING.ROOM_LARGE_DEPTH and -5.5
+                --     or depth == TUNING.ROOM_MEDIUM_DEPTH and -4.4
+                --     or depth == TUNING.ROOM_SMALL_DEPTH and -3.5q
+                --     or depth == TUNING.ROOM_TINY_DEPTH and -3
+                --     or nil
                 scale = scale
-                    or width == TUNING.ROOM_LARGE_WIDTH and { 4.5, 4.5 }
-                    or width == TUNING.ROOM_MEDIUM_WIDTH and { 3.7, 3.7 }
+                    or width == TUNING.ROOM_LARGE_WIDTH and { 2.8, 3.9 }
+                    or width == TUNING.ROOM_MEDIUM_WIDTH and { 2.5, 3.6 }
                     or width == TUNING.ROOM_SMALL_WIDTH and { 2.9, 2.9 }
-                    or width == TUNING.ROOM_TINY_WIDTH and { 2.4, 2.4 }
+                    or width == TUNING.ROOM_TINY_WIDTH and { 1.6, 2.3 }
                     or nil
             elseif p:HasTag("interior_wall") then
                 -- 墙壁自适应缩放
                 x_offset = x_offset
                     or depth == TUNING.ROOM_LARGE_DEPTH and -4.5
-                    or depth == TUNING.ROOM_MEDIUM_DEPTH and -2
+                    or depth == TUNING.ROOM_MEDIUM_DEPTH and -1.6
                     or depth == TUNING.ROOM_SMALL_DEPTH and -3.5
                     or depth == TUNING.ROOM_TINY_DEPTH and -2.8
                     or nil
@@ -339,6 +339,8 @@ function FN.CreateRoom(room, door_key_start)
 
             if p.components.tro_saveanim then
                 p.components.tro_saveanim:Init(data.bank, data.build, data.anim, scale, data.isloopplay, data.isdelayset, data.rotation)
+            elseif scale then
+                TroErrorHandle(string.trofmt("对象{}没有tro_saveanim组件，但是有缩放参数，是不是忘了加组件？", p), false, false)
             end
 
             if data.startstate then
@@ -485,9 +487,7 @@ function FN.GetCurrentRoomsGrid(rx, ry, rz)
         return room_grid
     end
 
-
     local start_x, start_y
-
 
     local min_x, max_x, min_y, max_y = 0, 0, 0, 0
     local room_poses = { [start_room] = { x = 0, y = 0 } }

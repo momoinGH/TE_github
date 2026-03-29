@@ -50,11 +50,11 @@ local COLOURS = {
 
 
 AddComponentPostInit("ambientlighting", function(self, inst)
-    local DoUpdateFlash = Hooks.FindUpvalue(self.OnUpdate, "DoUpdateFlash")
-    local PushCurrentColour = Hooks.FindUpvalue(self.OnUpdate, "PushCurrentColour")
-    local _realcolour = Hooks.FindUpvalue(DoUpdateFlash, "_realcolour")         ---真正的颜色(控制查理)
-    local _overridecolour = Hooks.FindUpvalue(DoUpdateFlash, "_overridecolour") ---表现的颜色
-    local _ComputeTargetColour = Hooks.FindUpvalue(DoUpdateFlash, "ComputeTargetColour")
+    local DoUpdateFlash = Hooks.GetUpValue(self.OnUpdate, "DoUpdateFlash")
+    local PushCurrentColour = Hooks.GetUpValue(self.OnUpdate, "PushCurrentColour")
+    local _realcolour = Hooks.GetUpValue(DoUpdateFlash, "_realcolour")         ---真正的颜色(控制查理)
+    local _overridecolour = Hooks.GetUpValue(DoUpdateFlash, "_overridecolour") ---表现的颜色
+    local _ComputeTargetColour = Hooks.GetUpValue(DoUpdateFlash, "ComputeTargetColour")
 
     local function ComputeTargetColour(targetsettings, timeoverride, ...)
         if not TheWorld:HasTag("cave") and TheWorld.state.isaporkalypse and targetsettings.currentcolourset.PHASE_COLOURS.spring then

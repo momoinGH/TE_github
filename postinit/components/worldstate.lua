@@ -16,7 +16,7 @@ AddComponentPostInit("worldstate", function(self, inst)
 
     if not SetVariable then
         local OnTemperatureTick = Hooks.GetEventCallback(inst, "temperaturetick", inst, "scripts/components/worldstate.lua")
-        SetVariable = OnTemperatureTick and Hooks.FindUpvalue(OnTemperatureTick, "SetVariable")
+        SetVariable = OnTemperatureTick and Hooks.GetUpValue(OnTemperatureTick, "SetVariable")
             or function(var, val, togglename) end --这个是hook失败
     end
 
