@@ -29,7 +29,7 @@ local function creatInterior(inst)
     local width = TUNING.ROOM_LARGE_WIDTH
     local addprops = {
         { name = "interior_floor_batcave" },
-        { name = "interior_wall_batcave_wall_rock", x_offset = -4.5 },
+        { name = "interior_wall_batcave_wall_rock", x_offset = -4.6, scale = { 4.62, 4.8 } },
         { name = "vamp_bat_cave_exit_door", x_offset = -depth / 2, key = "exit" },
         { name = "deco_cave_cornerbeam", x_offset = -depth / 2, z_offset = -width / 2 },
         { name = "deco_cave_cornerbeam", x_offset = -depth / 2, z_offset = width / 2, scale = { -1, 1 } },
@@ -114,7 +114,8 @@ local function creatInterior(inst)
     local room = {
         width = width,
         depth = depth,
-        addprops = addprops
+        addprops = addprops,
+        night_room = true,
     }
 
     local doors = RoomUtils.CreateRoom(room)

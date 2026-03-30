@@ -11,6 +11,16 @@ local function displaynamefn(inst)
     return item:GetDisplayName()
 end
 
+local function OnGetItem(inst, item)
+    inst:AddTag("slot_one")
+    inst.components.named:SetName(STRINGS.NAMES[string.upper(item.components.inspectable.nameoverride or item.prefab)])
+end
+
+local function OnLoseItem(inst)
+    inst:RemoveTag("slot_one")
+    inst.components.named:SetName(nil)
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -42,6 +52,9 @@ local function fn()
     inst:AddComponent("shelfer")
 
     inst.displaynamefn = displaynamefn
+
+    inst.OnGetItem = OnGetItem
+    inst.OnLoseItem = OnLoseItem
 
     inst.persists = false
 

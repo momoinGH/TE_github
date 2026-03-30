@@ -397,7 +397,7 @@ ACTIONS.TAKE_SHELF.stroverridefn = function(act)
         or ""
     if target:HasTag("playercrafted") then
         return subfmt(STRINGS.ACTIONS.TAKE_SHELF.TAKE, { item = name })
-    elseif not act.doer.components.shopper:IsWatching(target) then
+    elseif act.doer.components.shopper and not act.doer.components.shopper:IsWatching(target) then
         return subfmt(STRINGS.ACTIONS.TAKE_SHELF.STEAL, { item = name })
     else
         return subfmt(STRINGS.ACTIONS.TAKE_SHELF.BUY, { item = name })

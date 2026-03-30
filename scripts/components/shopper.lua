@@ -22,7 +22,7 @@ function Shopper:CanPayFor(target)
     if target.components.shopped then
         --货架
         local prefab_wanted = target.components.shopped.costprefab
-        assert(prefab_wanted) --默认一定存在
+        -- assert(prefab_wanted) --默认一定存在
 
         if prefab_wanted == "oinc" then
             if inventory:GetMoney() >= target.cost then

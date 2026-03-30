@@ -11,8 +11,6 @@ local prefabs =
     "shelf_slot",
 }
 
-----------------------------------------------------------------------------------------------------
-
 local function spawnshelfslots(inst)
     for i = 1, inst.size do
         local object = SpawnPrefab("shelf_slot")
@@ -23,7 +21,12 @@ local function spawnshelfslots(inst)
     end
 end
 
-----------------------------------------------------------------------------------------------------
+local function RemoveShelves(inst)
+    for _, v in ipairs(inst.shelves) do
+        v:Remove()
+    end
+    inst.shelves = {}
+end
 
 local function onhammered(inst, worker)
     inst.components.lootdropper:DropLoot()
@@ -62,38 +65,22 @@ local function OnLoad(inst, data)
     end
 end
 
-local function RemoveShelves(inst)
-    for _, v in ipairs(inst.shelves) do
-        v:Remove()
-    end
-end
-
-local function OnLoadPostPass(inst)
-    -- put the container items in there
-    for index, v in ipairs(inst.shelves) do
-        local item = inst.components.container:GetItemInSlot(index)
-        if item then
-            v.components.shelfer:UpdateGift(item)
-        end
-    end
-end
-
 local function OnItemGet(inst, data)
     if data and data.item and data.slot then
-        inst.shelves[data.slot].components.shelfer:UpdateGift(data.item)
+        inst.shelves[data.slot]:OnGetItem(data.item)
+        inst:SetImage(data.item, data.slot)
     end
 end
 
 local function OnItemLose(inst, data)
     if data and data.slot then
         inst:SetImageFromName(nil, data.slot)
-        inst.shelves[data.slot].components.shelfer:OnItemLose()
+        inst.shelves[data.slot]:OnLoseItem()
     end
 end
 
 local function MakeShelf(name, data, common_post_fn, master_post_fn)
     assert(data.anim)
-
     local size = data.size or 6
     local function fn()
         local inst = CreateEntity()
@@ -172,7 +159,6 @@ local function MakeShelf(name, data, common_post_fn, master_post_fn)
 
         inst.OnSave = OnSave
         inst.OnLoad = OnLoad
-        inst.OnLoadPostPass = OnLoadPostPass
 
         if master_post_fn then
             master_post_fn(inst)
@@ -190,7 +176,6 @@ end
 local function ShelvesQueenMasterPost(inst)
     inst:AddComponent("inspectable")
     inst.components.inspectable.nameoverride = "royal_gallery"
-
 end
 
 local function OnOnShelvesInteriorSpawn(inst, data)
