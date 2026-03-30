@@ -14,7 +14,7 @@ local prefabs =
 local function spawnshelfslots(inst)
     for i = 1, inst.size do
         local object = SpawnPrefab("shelf_slot")
-        local slot = inst.swp_img_list and inst.swp_img_list[i] or ("SWAP_img" .. i)
+        local slot = inst.swp_img_list[i]
         object.entity:AddFollower():FollowSymbol(inst.GUID, slot, 10, 0, 0.6)
         object.components.shelfer:SetShelf(inst, slot, i)
         table.insert(inst.shelves, object)
@@ -68,13 +68,13 @@ end
 local function OnItemGet(inst, data)
     if data and data.item and data.slot then
         inst.shelves[data.slot]:OnGetItem(data.item)
-        inst:SetImage(data.item, data.slot)
+        inst:SetImage(data.item, inst.swp_img_list[data.slot])
     end
 end
 
 local function OnItemLose(inst, data)
     if data and data.slot then
-        inst:SetImageFromName(nil, data.slot)
+        inst:SetImageFromName(nil, inst.swp_img_list[data.slot])
         inst.shelves[data.slot]:OnLoseItem()
     end
 end
@@ -116,16 +116,11 @@ local function MakeShelf(name, data, common_post_fn, master_post_fn)
         inst.SetImage = pig_shop_defs.SetImage
         inst.SetImageFromName = pig_shop_defs.SetImageFromName
 
-        inst.swp_img_list = data.swp_img_list
+        inst.swp_img_list = data.swp_img_list or {}
         inst.size = size
-        if data.swp_img_list then
-            for i = 1, size do
-                inst:SetImageFromName(nil, data.swp_img_list[i])
-            end
-        else
-            for i = 1, size do
-                inst:SetImageFromName(nil, "SWAP_img" .. i)
-            end
+        for i = 1, size do
+            inst.swp_img_list[i] = inst.swp_img_list[i] or ("SWAP_img" .. i)
+            inst:SetImageFromName(nil, inst.swp_img_list[i])
         end
 
         inst:AddComponent("container")

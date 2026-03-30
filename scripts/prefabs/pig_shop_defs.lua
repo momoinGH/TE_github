@@ -201,15 +201,10 @@ local SHELFS = {
 }
 
 local function SetImage(inst, ent, slot)
-    local image = ent and ent.components.inventoryitem and ent.components.inventoryitem.imagename or nil
-
-    if image then
-        --mod物品drawatlasoverride或atlasname至少指定一个
-        local atlas = FunctionOrValue(ent.drawatlasoverride, ent, inst) or ent.components.inventoryitem.atlasname
-        if atlas ~= nil then
-            atlas = resolvefilepath_soft(atlas) --需要找到路径，例如../mods/PigmanTribe/images/inventoryimages/upgrade.xml
-        end
-        inst.AnimState:OverrideSymbol(slot, atlas or GetInventoryItemAtlas(image), image)
+    local image = ent and ent.components.inventoryitem and ent.components.inventoryitem:GetImage() or (ent.prefab .. ".tex")
+    local atlas = ent.components.inventoryitem.atlasname and resolvefilepath_soft(ent.components.inventoryitem.atlasname) or GetInventoryItemAtlas(image)
+    if atlas then
+        inst.AnimState:OverrideSymbol(slot, atlas, image)
     else
         inst.AnimState:ClearOverrideSymbol(slot)
     end
