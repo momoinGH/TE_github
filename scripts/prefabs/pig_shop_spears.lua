@@ -39,9 +39,12 @@ local function OnGoHome(inst, child)
     end
 end
 
+local width = TUNING.ROOM_TINY_WIDTH
+local depth = TUNING.ROOM_TINY_DEPTH
+
 local room = {
-    width = 16,
-    depth = 10,
+    width = width,
+    depth = depth,
     addprops = {
         { name = "city_exit_old_door", x_offset = 4.7, z_offset = 0.5, key = "exit" },
         { name = "interior_wall_upholstered", x_offset = -2.8 },
