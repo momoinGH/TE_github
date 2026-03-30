@@ -4,6 +4,7 @@ local function OnSave(inst, data)
     data.room_width = inst.room_width:value() ~= 0 and inst.room_width:value() or nil
     data.room_depth = inst.room_depth:value() ~= 0 and inst.room_depth:value() or nil
     data.room_explored = inst:HasTag("room_explored")
+    data.night_room = inst:HasTag("night_room")
 end
 
 local function OnLoad(inst, data)
@@ -17,6 +18,9 @@ local function OnLoad(inst, data)
     end
     if data.room_explored then
         inst:AddTag("room_explored")
+    end
+    if data.night_room then
+        inst:AddTag("night_room")
     end
 end
 
@@ -76,6 +80,7 @@ local function fn()
     inst:AddTag("interior_center")
     inst:AddTag("NOBLOCK")
     -- inst:AddTag("room_explored") --是否探索过，探索过就在地图上绘制
+    -- inst:AddTag("night_room") --是否是无光的房间，用于遗迹
 
     --房间的大小，影响摄像机的缩放
     inst.room_width = net_smallbyte(inst.GUID, "interior_center.room_width")

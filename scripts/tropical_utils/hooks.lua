@@ -91,6 +91,7 @@ function FN.GetUpValue(fn, ...)
 end
 
 --- 替换上值，参数为路径，最后一个参数为要替换的新值
+--- 影响是全局的，其他要调用被替换的函数时也会去调用这个新值
 function FN.SetUpvalue(fn, ...)
     local args = { ... }
     if not trodevassert(#args >= 2, "至少需要两个参数：函数和要设置的路径")

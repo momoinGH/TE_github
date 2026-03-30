@@ -163,6 +163,8 @@ local function MakeShelf(name, data, common_post_fn, master_post_fn)
         inst.shelves = {} --展柜槽
         spawnshelfslots(inst)
 
+        inst:AddComponent("tro_saveanim")
+
         inst:ListenForEvent("onremove", RemoveShelves)
         inst:ListenForEvent("onbuilt", setPlayerUncraftable)
         inst:ListenForEvent("itemget", OnItemGet)
@@ -188,6 +190,7 @@ end
 local function ShelvesQueenMasterPost(inst)
     inst:AddComponent("inspectable")
     inst.components.inspectable.nameoverride = "royal_gallery"
+
 end
 
 local function OnOnShelvesInteriorSpawn(inst, data)

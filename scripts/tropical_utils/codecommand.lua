@@ -47,7 +47,6 @@ function Class(base, _ctor, props) end
 
 function CanEntitySeeTarget(inst, target) end
 
-Vector3 = Class(function(self, x, y, z) end)
 Brain = Class(function(self) end)
 State = Class(function(self, args) end)
 EventHandler = Class(function(self, name, fn) end)
@@ -1455,3 +1454,9 @@ function GetMinimapAtlas_Internal(imagename) end
 
 scheduler = {}
 Map = {}
+
+Vector3 = Class(function(self, x, y, z)
+    self.x, self.y, self.z = x or 0, y or 0, z or 0
+end)
+
+Point = Vector3

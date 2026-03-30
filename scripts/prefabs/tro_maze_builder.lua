@@ -32,6 +32,8 @@ local MazeBuilder = Class(function(self, width, depth)
     self.width = width or TUNING.ROOM_TINY_WIDTH
     self.depth = depth or TUNING.ROOM_TINY_DEPTH
 
+    self.night_room = nil         --房间是不是都是黑黑的需要火把照亮
+
     self.props_radius = {}        --物品半径表，标识物品的占地范围，这个范围内不会塞入其他东西了
     self.rooms_obstacle_grid = {} --每个房间被占用区域
 end)
@@ -70,6 +72,7 @@ function MazeBuilder:AddRoom(x, y, exits, blocked_exits)
         exits = exits or {},                 --表示这个房间可以通向哪些房间
         blocked_exits = blocked_exits or {}, --被堵塞的方向，表示上面不能建造门
         addprops = {},
+        night_room = self.night_room,
         -- is_entrance = nil --这个房间是否是出口
         -- entrance1 = nil --这个房间是否是出口1，还可以有entrance2、entrance3
     }
@@ -383,6 +386,13 @@ function MazeBuilder:AddAllRoomDoorProp(get_name)
                 print(string.trofmt("遗迹房间{},{} {}方向key为{}，生成门连通房间{},{}", room.x, room.y, dir.label, doorprop.key, opposite_room.x, opposite_room.y))
             end
         end
+    end
+end
+
+function MazeBuilder:SetMazeNight()
+    self.night_room = true
+    for _, room in ipairs(self.rooms) do
+        room.night_room = true
     end
 end
 

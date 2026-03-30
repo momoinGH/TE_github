@@ -258,6 +258,7 @@ end
 local MazeBuilder = require("prefabs/tro_maze_builder")
 local function CreateQueenChambers()
     local builder = MazeBuilder()
+    builder:SetMazeNight()
     builder:SetAllRoomsSize(width, depth)
     builder:CreateGridRooms(1, math.random(3, 6))
 
@@ -357,6 +358,7 @@ end
 -- 三个入口、一个通往蚁后房间的门
 local function CreateMaze(entrance_num)
     local builder = MazeBuilder()
+    builder:SetMazeNight()
     builder:SetAllRoomsSize(width, depth)
 
     -- 构建所有房间

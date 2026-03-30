@@ -231,23 +231,23 @@ end
 
 local function fn(Sim)
     local inst = CreateEntity()
+
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
     inst.entity:AddNetwork()
+
     MakeObstaclePhysics(inst, .5)
     inst.Physics:SetActive(false)
 
     inst.setextendeddata = setextendeddata
-    --inst.Physics:SetCollisionCallback(oncollide)
 
     local minimap = inst.entity:AddMiniMapEntity()
     minimap:SetIcon("")
+
     anim:SetBank("spear_trap")
     anim:SetBuild("spear_trap")
     anim:PlayAnimation("idle_retract")
     inst:AddTag("spear_trap")
-    inst:AddTag("tree")
-    --	inst:AddTag("timed")
 
     inst.entity:SetPristine()
 

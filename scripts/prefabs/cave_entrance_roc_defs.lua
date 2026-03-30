@@ -21,6 +21,7 @@ local rooms_to_make = 6
 local MazeBuilder = require("prefabs/tro_maze_builder")
 local function CreateMaze()
     local builder = MazeBuilder()
+    builder:SetMazeNight()
     builder:SetAllRoomsSize(width, depth)
     builder:CreateRandomRooms(rooms_to_make)
     builder:SetEntrance(1, 1)

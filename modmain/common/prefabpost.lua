@@ -12,14 +12,6 @@ modimport "modmain/common/components/locomotor"
 modimport "modmain/common/components/birdspawner"
 modimport "modmain/common/components/temperature"
 modimport "modmain/common/components/walkableplatformplayer"
---[[
-modimport "modmain/common/components/soundemitter"
-modimport "modmain/common/components/ambientlighting"
-modimport "modmain/common/components/colourcube"
-modimport "modmain/common/components/mapstyle"
-modimport "modmain/common/components/ambientsound"
-modimport "modmain/common/components/dynamicmusic"
-]]
 modimport "modmain/common/components/map"        --theworld.map相关
 modimport "modmain/common/components/deployable" -- 让某些地形不能部署、建造、种东西
 modimport "modmain/common/components/spooked"    --黄蘑菇孢子
@@ -45,9 +37,7 @@ modimport "modmain/common/components/teleporter.lua"
 
 modimport "modmain/common/prefabs/oceanfishdef" --定义新的鱼
 modimport "modmain/common/prefabs/player"
---modimport "modmain/common/prefabs/player_classified"
 modimport "modmain/common/prefabs/world"
---modimport "modmain/common/poisonable"
 modimport("modmain/common/prefabs/guard_corp")               --守卫保护作物、高草转化、草大风摇晃？
 modimport("modmain/common/prefabs/player_vision_post")       --四眼镜、蝙蝠帽所用
 modimport "modmain/common/prefabs/farm_plant_randomseed.lua" --植物再生

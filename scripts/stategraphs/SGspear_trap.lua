@@ -1,138 +1,137 @@
 require("stategraphs/commonstates")
 
 
-local events=
+local events =
 {
     EventHandler("spring", function(inst)
-        if not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("extended") then   
+        if not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("extended") then
             inst.sg:GoToState("extending")
-        end       
-    end),   
+        end
+    end),
 
     EventHandler("reset", function(inst)
         --print("RESET EVENT")
-        if not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("retracted") and not inst.components.burnable:IsBurning() then   
+        if not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("retracted") and not inst.components.burnable:IsBurning() then
             inst.sg:GoToState("retract")
-        end       
-    end),     
+        end
+    end),
 
     EventHandler("hit", function(inst)
-        if inst.sg:HasStateTag("extended") then   
+        if inst.sg:HasStateTag("extended") then
             inst.sg:GoToState("hit")
-        end       
+        end
     end),
     EventHandler("dead", function(inst)
         inst.sg:GoToState("destroyed")
     end),
 }
 
-local states=
+local states =
 {
-    State{
+    State {
         name = "idle",
-        tags = {"idle","retracted","invisible"},
+        tags = { "idle", "retracted", "invisible" },
         onenter = function(inst)
             inst.setextendeddata(inst)
-            inst.AnimState:PlayAnimation("idle_retract",true)
-        end,       
+            inst.AnimState:PlayAnimation("idle_retract", true)
+        end,
     },
-    
-    State {
-		name = "extending",
-		tags = {"busy","damage"},
-		
-        onenter = function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/spear")       
-            inst.AnimState:PlayAnimation("extending")                      
 
-            inst.setextendeddata(inst, true) 
+    State {
+        name = "extending",
+        tags = { "busy", "damage" },
+
+        onenter = function(inst)
+            inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/spear")
+            inst.AnimState:PlayAnimation("extending")
+
+            inst.setextendeddata(inst, true)
         end,
 
-        timeline=
+        timeline =
         {
-            TimeEvent(5*FRAMES, function(inst) inst.inflictdamage(inst) end),
+            TimeEvent(5 * FRAMES, function(inst) inst.inflictdamage(inst) end),
         },
 
-        events=
+        events =
         {
-            EventHandler("animover", function(inst)  inst.sg:GoToState("extended") end ),
+            EventHandler("animover", function(inst) inst.sg:GoToState("extended") end),
         },
     },
-    
-    State{
+
+    State {
         name = "extended",
-        tags = {"extended"},
-        
+        tags = { "extended" },
+
         onenter = function(inst)
-            inst.setextendeddata(inst, true)             
+            inst.setextendeddata(inst, true)
             if inst.wantstoretract then
                 inst.sg:GoToState("retract")
             else
-                inst.AnimState:PlayAnimation("idle_extend")        
+                inst.AnimState:PlayAnimation("idle_extend")
             end
         end,
     },
 
-    State{
+    State {
         name = "hit",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("hit")        
+            inst.AnimState:PlayAnimation("hit")
         end,
 
-        events=
+        events =
         {
-            EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
                 if inst.components.health:IsDead() then
-                    inst.sg:GoToState("destroyed") 
+                    inst.sg:GoToState("destroyed")
                 else
-                    inst.sg:GoToState("extended") 
+                    inst.sg:GoToState("extended")
                 end
-            end ),
-        },        
-    },    
+            end),
+        },
+    },
 
-    
-    State{
+
+    State {
         name = "breaking",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst:RemoveTag("hostile")
             inst.Physics:SetActive(false)
-            inst.AnimState:PlayAnimation("breaking")        
+            inst.AnimState:PlayAnimation("breaking")
         end,
-    },  
-    
-    State{
+    },
+
+    State {
         name = "destroyed",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst:RemoveTag("hostile")
             inst.Physics:SetActive(false)
-            inst.AnimState:PlayAnimation("broken",true)        
+            inst.AnimState:PlayAnimation("broken", true)
         end,
-    },  
+    },
 
     State {
         name = "retract",
-        tags = {"busy"},
-        
+        tags = { "busy" },
+
         onenter = function(inst)
             inst.setextendeddata(inst)
             inst.AnimState:PlayAnimation("retracting")
         end,
-        
-        events=
-        {
-            EventHandler("animover", function(inst)                     
-                inst.sg:GoToState("idle") 
-            end ),
-        },
-    },  
-}
-    
-return StateGraph("spear_trap", states, events, "idle")
 
+        events =
+        {
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("idle")
+            end),
+        },
+    },
+}
+
+return StateGraph("spear_trap", states, events, "idle")

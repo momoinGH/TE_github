@@ -21,6 +21,11 @@ local VISION_PHASEFN = {
 local function OnRoomChange(inst, data)
     local self = inst.components.playervision
     self:UpdateCCTable()
+
+    --更新一下室内亮度
+    if not TheWorld.ismastersim and TheWorld.components.ambientlighting.TroOnClimateChanged then
+        TheWorld.components.ambientlighting:TroOnClimateChanged()
+    end
 end
 
 -- 哈姆雷特室内视觉效果

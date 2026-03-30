@@ -275,6 +275,10 @@ function FN.CreateRoom(room, door_key_start)
     center.room_width:set(width)
     center.room_depth:set(depth)
 
+    if room.night_room then
+        center:AddTag("night_room")
+    end
+
     print(string.trofmt("生成房间，房子中心对象{}，房间大小：{},{}", center, width, depth))
 
     --生成墙体
@@ -305,7 +309,7 @@ function FN.CreateRoom(room, door_key_start)
                 --地板自适应缩放，但不是直接的线性关系，这里懒得搞什么公式了
                 -- c_findtag("interior_floor").AnimState:SetScale()可在控制台不断调整
                 scale = scale
-                    or width == TUNING.ROOM_LARGE_WIDTH and { 2.8, 3.9 }
+                    or width == TUNING.ROOM_LARGE_WIDTH and { 2.8, 4 }
                     or width == TUNING.ROOM_MEDIUM_WIDTH and { 2.5, 3.6 }
                     or width == TUNING.ROOM_SMALL_WIDTH and { 2.9, 2.9 }
                     or width == TUNING.ROOM_TINY_WIDTH and { 1.6, 2.3 }
@@ -334,7 +338,7 @@ function FN.CreateRoom(room, door_key_start)
 
             p:PushEvent("oninteriorspawn", data)
         else
-            TroErrorHandle(data.name .. "预制件不存在", true, false)
+            TroErrorHandle(data.name .. "预制件不存在", false, false)
         end
     end
 

@@ -187,10 +187,10 @@ local rooms = { {
     depth    = TUNING.ROOM_LARGE_DEPTH,
     addprops = {
         { name = "interior_floor_marble_royal" },
-        { name = "interior_wall_rope", scale = { 5.2, 5.2 } },
+        { name = "interior_wall_rope", scale = { 5, 4 }, x_offset = -6 }, --缩放和偏移要重新设置
         { name = "interior_palace_south_door", x_offset = 9, key = "exit" },
         { name = "deco_roomglow_large", },
-        { name = "interior_palace_west_door", key = "door1a", target_door = "door1b", z_offset = -26 / 2, scale = { -1, 1 }, },
+        { name = "interior_palace_west_door", key = "door1a", target_door = "door1b", z_offset = -26 / 2 },
         { name = "deco_palace_beam_room_tall_corner", x_offset = -18 / 2, z_offset = -26 / 2, scale = { -1, 1 } },
         { name = "deco_palace_beam_room_tall_corner", x_offset = -18 / 2, z_offset = 26 / 2, },
         { name = "deco_palace_beam_room_tall_corner_front", x_offset = 18 / 2, z_offset = -26 / 2, scale = { -1, 1 } },
@@ -261,7 +261,7 @@ local rooms = { {
     depth    = TUNING.ROOM_SMALL_DEPTH,
     addprops = {
         { name = "interior_floor_marble_royal" },
-        { name = "interior_wall_rope" },
+        { name = "interior_wall_rope", scale = { 3.6, 3 }, x_offset = -4.4 },
         { name = "deco_roomglow", },
         { name = "interior_palace_east_door", z_offset = 18 / 2, key = "door1b", target_door = "door1a" },
         { name = "interior_palace_west_door", z_offset = -18 / 2, key = "door2a", target_door = "door2b" },
@@ -271,7 +271,7 @@ local rooms = { {
         { name = "rug_palace_corners", x_offset = -12 / 2, z_offset = -18 / 2 },
         { name = "window_round_light_backwall", x_offset = -12 / 2, z_offset = -18 / 3, rotation = -90 },
         { name = "window_palace", x_offset = -12 / 2, z_offset = -18 / 3, },
-        { name = "window_round_light_backwall", x_offset = -18 / 2, z_offset = 26 / 3, rotation = -90 },
+        { name = "window_round_light_backwall", x_offset = -12 / 2, z_offset = 26 / 3, rotation = -90 },
         { name = "window_palace", x_offset = -12 / 2, z_offset = 18 / 3, },
         { name = "deco_palace_beam_room_tall_corner", x_offset = -12 / 2, z_offset = -18 / 2, scale = { -1, 1 } },
         { name = "deco_palace_beam_room_tall_corner", x_offset = -12 / 2, z_offset = 18 / 2, },
@@ -295,7 +295,7 @@ local rooms = { {
     depth    = TUNING.ROOM_TINY_DEPTH,
     addprops = {
         { name = "interior_floor_marble_royal" },
-        { name = "interior_wall_rope" },
+        { name = "interior_wall_rope", scale = { 2.9, 2.6 }, x_offset = -3.6 },
         { name = "deco_roomglow", },
         { name = "city_exit_giftshop_door", x_offset = 10 / 2, key = "exit2" },
         { name = "interior_palace_east_door", key = "door2b", target_door = "door2a", z_offset = 15 / 2, },
@@ -334,15 +334,7 @@ local function OnIgnite(inst)
     end
 end
 
-return MakeDoor("pig_palace", {
-    assets = assets,
-    prefabs = prefabs,
-    trader = true,
-    bank = "palace",
-    build = "palace",
-    anim = "idle",
-    minimap = "pig_palace.png"
-}, function(inst)
+local function CommonPost(inst)
     inst.entity:AddLight()
     inst.Light:SetFalloff(1)
     inst.Light:SetIntensity(.5)
@@ -353,7 +345,9 @@ return MakeDoor("pig_palace", {
     MakeObstaclePhysics(inst, 1.25)
 
     inst:AddTag("structure")
-end, function(inst)
+end
+
+local function MasterPost(inst)
     inst:AddComponent("spawner")
     inst.components.spawner:Configure("pigman_banker", TUNING.TOTAL_DAY_TIME * 4)
     inst.components.spawner.onoccupied = onoccupied
@@ -373,4 +367,14 @@ end, function(inst)
     inst:ListenForEvent("onbuilt", onbuilt)
     inst:WatchWorldState("isday", OnIsDay)
     OnIsDay(inst, TheWorld.state.isday)
-end)
+end
+
+return MakeDoor("pig_palace", {
+    assets = assets,
+    prefabs = prefabs,
+    trader = true,
+    bank = "palace",
+    build = "palace",
+    anim = "idle",
+    minimap = "pig_palace.png"
+}, CommonPost, MasterPost)

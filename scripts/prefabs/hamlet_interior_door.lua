@@ -18,33 +18,41 @@ return
         inst.AnimState:SetBank("entrance")
         inst.AnimState:SetBuild("ant_queen_entrance")
         inst.AnimState:PlayAnimation("idle")
+
+        inst:SetPrefabNameOverride("prop_door")
     end),
     --宫殿
     MakeDoor("interior_palace_south_door", {
         assets = assets,
+        bank = "palace_door",
+        build = "palace_door",
+        anim = "south",
         trader = true,
         is_inner = true,
     }, function(inst)
-        inst.AnimState:SetBank("palace_door")
-        inst.AnimState:SetBuild("palace_door")
-        inst.AnimState:PlayAnimation("south")
+        inst:SetPrefabNameOverride("prop_door")
+        inst.AnimState:SetLayer(LAYER_WORLD)
     end),
     MakeDoor("interior_palace_west_door", {
         assets = assets,
+        bank = "wall_decals_palace",
+        build = "interior_wall_decals_palace",
+        anim = "door_sidewall",
         trader = true,
         is_inner = true,
     }, function(inst)
-        inst.AnimState:SetBank("wall_decals_palace")
-        inst.AnimState:SetBuild("interior_wall_decals_palace")
-        inst.AnimState:PlayAnimation("door_sidewall")
+        inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+        inst:SetPrefabNameOverride("prop_door")
     end),
-    MakeDoor("interior_palace_south_door", {
+    MakeDoor("interior_palace_east_door", {
         assets = assets,
+        bank = "wall_decals_palace",
+        build = "interior_wall_decals_palace",
+        anim = "door_sidewall",
         trader = true,
         is_inner = true,
     }, function(inst)
-        inst.AnimState:SetBank("wall_decals_palace")
-        inst.AnimState:SetBuild("interior_wall_decals_palace")
-        inst.AnimState:PlayAnimation("door_sidewall")
         inst.AnimState:SetScale(-1, 1)
+        inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+        inst:SetPrefabNameOverride("prop_door")
     end)

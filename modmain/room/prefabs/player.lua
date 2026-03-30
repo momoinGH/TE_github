@@ -1,4 +1,4 @@
-TroAddPlayerClassifiedNetVar(net_entity, "tro_curroomcenter") --玩家当前所处的房间对象
+TroAddPlayerClassifiedNetVar(net_entity, "tro_curroomcenter", nil, true) --玩家当前所处的房间对象
 
 -- 刷帧检测玩家是否在虚空房子里
 local function CheckPlayerInRoom(inst)

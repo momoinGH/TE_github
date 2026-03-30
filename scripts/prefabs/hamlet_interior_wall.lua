@@ -14,14 +14,15 @@ local function OnBuilt(inst)
         ReplacePrefab(inst, "collapse_small")
     end
 
-    -- 自适应缩放和偏移
-    local room = inst:TroGetRoomCenter()
-    if room then
-        inst.AnimState:SetScale(inst.scale[1], inst.scale[2])
-        local x, y, z = room.Transform:GetWorldPosition()
-        inst.Transform:SetPosition(x + inst.x_offset, 0, z)
-    else
-        TroErrorHandle(string.trofmt("{}墙壁没有找到房间中心点对象", inst))
+    -- 自适应偏移，没有设置过缩放才设置
+    if not inst.components.tro_saveanim.scale then
+        local room = inst:TroGetRoomCenter()
+        if room then
+            local x, y, z = room.Transform:GetWorldPosition()
+            inst.Transform:SetPosition(x + inst.x_offset, 0, z)
+        else
+            TroErrorHandle(string.trofmt("{}墙壁没有找到房间中心点对象", inst))
+        end
     end
 end
 
@@ -37,6 +38,7 @@ local function MakeWall(name, bank, build, anim, scale, x_offset)
         inst.AnimState:PlayAnimation(anim, true)
         inst.AnimState:SetLayer(LAYER_BACKGROUND)
         inst.AnimState:SetSortOrder(-5)
+        inst.AnimState:SetScale(scale[1], scale[2])
 
         inst:AddTag("NOCLICK")
         inst:AddTag("NOBLOCK")
@@ -48,8 +50,9 @@ local function MakeWall(name, bank, build, anim, scale, x_offset)
             return inst
         end
 
-        inst.scale = scale
         inst.x_offset = x_offset
+
+        inst:AddComponent("tro_saveanim") --还是允许外部重新设置缩放的
 
         inst:ListenForEvent("onbuilt", OnBuilt)
         inst:ListenForEvent("oninteriorspawn", OnBuilt)
@@ -77,7 +80,7 @@ return
     MakeWall("interior_wall_peagawk", "wallhamletcity", "wallhamletcity3", "wall_peagawk", { 2.9, 2.9 }, -2.8),
     MakeWall("interior_wall_plain_ds", "wallhamletcity", "wallhamletcity3", "wall_plain_DS", { 2.9, 2.9 }, -2.8),
     MakeWall("interior_wall_plain_rog", "wallhamletcity", "wallhamletcity3", "wall_plain_RoG", { 2.9, 2.9 }, -2.8),
-    MakeWall("interior_wall_rope", "wallhamletcity", "wallhamletcity3", "wall_rope", { 2.9, 2.9 }, -2.8),
+    MakeWall("interior_wall_rope", "wallhamletcity", "wallhamletcity3", "wall_rope", { 2.9, 2.9 }, -2.8), --
     MakeWall("interior_wall_fullwall_moulding", "wallhamletcity", "wallhamletcity3", "shop_wall_fullwall_moulding", { 2.9, 2.9 }, -2.8),
     MakeWall("interior_wall_upholstered", "wallhamletcity", "wallhamletcity3", "shop_wall_upholstered", { 2.9, 2.9 }, -2.8),
 
@@ -86,7 +89,7 @@ return
     MakeWall("interior_wall_wall_royal_high", "wallhamletpig", "wallhamletpig", "wall_royal_high", { 3.5, 3.5 }, -3.5),
     ----------------------------------------------------------------------------------------------------
     -- medium
-    MakeWall("interior_wall_batcave_wall_rock", "wallhamletant", "wallhamletant", "batcave_wall_rock", { 3.7, 3.6 }, -1.6),
+    MakeWall("interior_wall_batcave_wall_rock", "wallhamletant", "wallhamletant", "batcave_wall_rock", { 4.2, 4 }, -3.5),
 
     MakeWall("interior_wall_pig_ruins", "wallhamletpig", "wallhamletpig", "pig_ruins_panel", { 3.7, 3.6 }, -1.6),
     MakeWall("interior_wall_pig_ruins_blue", "wallhamletpig", "wallhamletpig", "pig_ruins_panel_blue", { 3.7, 3.6 }, -1.6),
