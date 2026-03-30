@@ -201,7 +201,7 @@ local SHELFS = {
 }
 
 local function SetImage(inst, ent, slot)
-    local image = ent and ent.components.inventoryitem and ent.components.inventoryitem:GetImage() or (ent.prefab .. ".tex")
+    local image = ent and ent.components.inventoryitem and ent.components.inventoryitem.imagename or (ent.prefab .. ".tex")
     local atlas = ent.components.inventoryitem.atlasname and resolvefilepath_soft(ent.components.inventoryitem.atlasname) or GetInventoryItemAtlas(image)
     if atlas then
         inst.AnimState:OverrideSymbol(slot, atlas, image)

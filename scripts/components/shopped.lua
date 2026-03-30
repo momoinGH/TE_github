@@ -85,7 +85,7 @@ end
 --- 补货
 function Shopped:Restock(force)
     if self.robbed then --被偷了
-        local ent = FindEntity(inst, 20, nil, { "shopkeep" })
+        local ent = FindEntity(self.inst, 20, nil, { "shopkeep" })
         if ent then
             ent.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_ROBBED[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_ROBBED)])
         end
