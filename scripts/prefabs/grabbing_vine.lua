@@ -156,7 +156,6 @@ local function commonfn(Sim)
     inst.components.combat:SetAttackPeriod(GRABBING_VINE_ATTACK_PERIOD)
     inst.components.combat:SetRange(3, 4)
     inst.components.combat:SetRetargetFunction(1, retargetfn)
-    inst.components.combat.canbeattackedfn = canbeattackedfn
 
     inst.components.combat.onhitotherfn = function(inst, other, damage)
         inst.components.thief:StealItem(other, nil, nil, true)

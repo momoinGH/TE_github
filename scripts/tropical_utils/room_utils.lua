@@ -314,6 +314,8 @@ function FN.CreateRoom(room, door_key_start)
                     or width == TUNING.ROOM_SMALL_WIDTH and { 2.9, 2.9 }
                     or width == TUNING.ROOM_TINY_WIDTH and { 1.6, 2.3 }
                     or nil
+            elseif p:HasTag("interior_wall") then
+                p.x_offset = x_offset or p.x_offset --设置一下，在后面的事件里别重新修改了
             end
 
             p.Transform:SetPosition(x + (x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))

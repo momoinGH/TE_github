@@ -50,7 +50,7 @@ local function fn(Sim)
     inst.animname = names[math.random(#names)]
     inst.AnimState:SetBuild("flowers_rainforest")
     inst.AnimState:PlayAnimation(inst.animname)
-    inst.AnimState:SetRayTestOnBB(true);
+    inst.AnimState:SetRayTestOnBB(true)
 
     inst:AddTag("flower")
     inst:AddTag("flower_rainforest")
@@ -76,14 +76,6 @@ local function fn(Sim)
 
     MakeSmallBurnable(inst)
     MakeSmallPropagator(inst)
-    --inst.components.burnable:MakeDragonflyBait(1)
-    --[[
-    inst:AddComponent("blowinwindgust")
-    inst.components.blowinwindgust:SetWindSpeedThreshold(TUNING.FLOWER_WINDBLOWN_SPEED)
-    inst.components.blowinwindgust:SetDestroyChance(TUNING.FLOWER_WINDBLOWN_FALL_CHANCE)
-    inst.components.blowinwindgust:SetDestroyFn(ongustpickfn)
-    inst.components.blowinwindgust:Start()
-]]
 
     --------SaveLoad
     inst.OnSave = onsave

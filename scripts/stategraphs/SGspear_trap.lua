@@ -22,7 +22,7 @@ local events =
         end
     end),
     EventHandler("dead", function(inst)
-        inst.sg:GoToState("destroyed")
+        inst.sg:GoToState("breaking")
     end),
 }
 
@@ -50,7 +50,7 @@ local states =
 
         timeline =
         {
-            TimeEvent(5 * FRAMES, function(inst) inst.inflictdamage(inst) end),
+            TimeEvent(5 * FRAMES, function(inst) inst:inflictdamage() end),
         },
 
         events =
@@ -80,17 +80,6 @@ local states =
         onenter = function(inst)
             inst.AnimState:PlayAnimation("hit")
         end,
-
-        events =
-        {
-            EventHandler("animover", function(inst)
-                if inst.components.health:IsDead() then
-                    inst.sg:GoToState("destroyed")
-                else
-                    inst.sg:GoToState("extended")
-                end
-            end),
-        },
     },
 
 
@@ -103,6 +92,13 @@ local states =
             inst.Physics:SetActive(false)
             inst.AnimState:PlayAnimation("breaking")
         end,
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("destroyed")
+            end),
+        },
     },
 
     State {
@@ -110,10 +106,18 @@ local states =
         tags = { "busy" },
 
         onenter = function(inst)
+            inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/speartrap_break")
             inst:RemoveTag("hostile")
             inst.Physics:SetActive(false)
             inst.AnimState:PlayAnimation("broken", true)
         end,
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                ReplacePrefab(inst, "pig_ruins_spear_trap_broken")
+            end),
+        },
     },
 
     State {

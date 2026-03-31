@@ -182,8 +182,8 @@ local SHOPTYPES = {
         { "dragonflychest_blueprint", "oinc", 200 },
         { "molehat_blueprint", "oinc", 30 },
         { "beargervest_blueprint", "oinc", 50 },
-        { "ox_flute_blueprint", "oinc", 100 },
-        { "trawlnet_blueprint", "oinc", 30 },
+        -- { "ox_flute_blueprint", "oinc", 100 },--这个不要了，还得添加配方才有蓝图
+        -- { "trawlnet_blueprint", "oinc", 30 },
     },
 
     pig_shop_academy = {},
@@ -201,7 +201,15 @@ local SHELFS = {
 }
 
 local function SetImage(inst, ent, slot)
+    if not ent then
+        inst.AnimState:ClearOverrideSymbol(slot)
+        return
+    end
+
     local image = ent and ent.components.inventoryitem and ent.components.inventoryitem.imagename or (ent.prefab .. ".tex")
+    if not string.endswith(image, ".tex") then
+        image = image .. ".tex"
+    end
     local atlas = ent.components.inventoryitem.atlasname and resolvefilepath_soft(ent.components.inventoryitem.atlasname) or GetInventoryItemAtlas(image)
     if atlas then
         inst.AnimState:OverrideSymbol(slot, atlas, image)

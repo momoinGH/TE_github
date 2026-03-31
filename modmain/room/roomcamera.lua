@@ -59,7 +59,14 @@ local function UpdateRoomCamera(inst)
     TheCamera:SetControllable(false)
     TheCamera.headingtarget = 0
     local target = inst:TroGetPlayerClassifiedNetVar("tro_curroomcenter")
-    Apply(target)
+    if target then --服务器报错的话这个还是会是nil的
+        Apply(target)
+    else
+        if inst._tro_roomcameratask then
+            inst._tro_roomcameratask:Cancel()
+            inst._tro_roomcameratask = nil
+        end
+    end
 end
 
 

@@ -29,41 +29,25 @@ local function inflictdamage(inst)
     end
 end
 
-local function oncollide(inst, other)
-    if other and other.components.health and inst.sg:HasStateTag("damage") then
-        inst.components.combat:DoAttack(other)
-    end
-end
-
 local function setextendeddata(inst, extended)
     if extended then
         inst:RemoveTag("NOCLICK")
         inst.extended = true
         inst:AddTag("hostile")
         inst:RemoveTag("fireimmune")
-        if inst.components.burnable then
-            inst.components.burnable.disabled = nil
-        end
         inst.components.health.vulnerabletoheatdamage = true
         inst.name = STRINGS.NAMES.PIG_RUINS_SPEAR_TRAP_TRIGGERED
         inst.Physics:SetActive(true)
-        if inst.MiniMapEntity then
-            inst.MiniMapEntity:SetIcon("spear_trap.png")
-        end
+        inst.MiniMapEntity:SetIcon("spear_trap.png")
     else
         inst:AddTag("NOCLICK")
         inst.extended = nil
         inst:RemoveTag("hostile")
         inst:AddTag("fireimmune")
-        if inst.components.burnable then
-            inst.components.burnable.disabled = true
-        end
         inst.components.health.vulnerabletoheatdamage = false
         inst.name = STRINGS.NAMES.PIG_RUINS_SPEAR_TRAP
         inst.Physics:SetActive(false)
-        if inst.MiniMapEntity then
-            inst.MiniMapEntity:SetIcon("")
-        end
+        inst.MiniMapEntity:SetIcon("")
     end
 end
 
@@ -72,9 +56,6 @@ local function onsave(inst, data)
         data.extended = true
     end
 
-    --if inst:HasTag("timed") then
-    --    data.timed = true
-    --end
     if inst:HasTag("up_3") then
         data.up_3 = true
     end
@@ -97,9 +78,6 @@ local function onload(inst, data)
         if data.extended then
             inst.sg:GoToState("extended")
         end
-        -- if data.timed then
-        --     inst:AddTag("timed")
-        -- end
         if data.up_3 then
             inst:AddTag("up_3")
         end
@@ -118,28 +96,11 @@ local function onload(inst, data)
     end
 end
 
-local function disarm(inst, doer)
-    local pt = Point(inst.Transform:GetWorldPosition())
-    inst.components.lootdropper:SpawnLootPrefab("blowdart_pipe", pt)
-    --doer.components.inventory:GiveItem( SpawnPrefab("blowdart_pipe"))
-end
-
 local function OnKilled(inst)
     inst:PushEvent("dead")
-
-    local debris = SpawnPrefab("pig_ruins_spear_trap_broken")
-    debris.AnimState:PlayAnimation("breaking")
-    debris.AnimState:PushAnimation("broken", true)
-    debris.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/traps/speartrap_break")
-
-    inst:Remove()
 end
 
 local function burnt(inst)
-    --  inst:AddTag("burnt")
-    -- inst.AnimState:PlayAnimation("burnt")
-    -- inst.Physics:SetActive(false)
     local debris = SpawnPrefab("pig_ruins_spear_trap_broken")
     debris.AnimState:PlayAnimation("burnt")
     debris.Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -162,54 +123,18 @@ end
 
 
 local function cycleup(inst)
-    --    if not inst:HasTag("INTERIOR_LIMBO") and not inst:Hastag("burnt") and not inst:Hastag("dead") then
-    local time = 1
-    if inst:HasTag("up_3") then
-        time = 3
-    end
-    --print("SETTING DOWN",time)
     if inst.cycletask then
         inst.cycletask:Cancel()
         inst.cycletask = nil
-        --        end
-        --    inst.cycletask = inst:DoTaskInTime(time, function() inst.cycledown(inst) end)
     end
 end
 
 local function cycledown(inst)
-    --    if not inst:HasTag("INTERIOR_LIMBO") and not inst:Hastag("burnt") and not inst:Hastag("dead") then
-    local time = 3
-    if inst:HasTag("down_6") then
-        time = 6
-    end
-    --print("SETTING UP",time)
-    if inst.cycletask then
-        inst.cycletask:Cancel()
-        inst.cycletask = nil
-        --        end
-        --  inst.cycletask = inst:DoTaskInTime(time, function() inst.cycleup(inst) end)
-    end
-end
-
-local function startcycle(inst)
-    local time = 6
-    local delay = 3
-    if inst:HasTag("delay_6") then
-        delay = 6
-    elseif inst:HasTag("delay_9") then
-        delay = 9
-    end
     if inst.cycletask then
         inst.cycletask:Cancel()
         inst.cycletask = nil
     end
-    if inst.sg:HasStateTag("retracted") then
-        inst.cycletask = inst:DoTaskInTime(delay, function() cycleup(inst) end)
-    elseif inst.sg:HasStateTag("extended") then
-        inst.cycletask = inst:DoTaskInTime(delay, function() cycledown(inst) end)
-    end
 end
-
 
 local function returntointeriorscene(inst)
     cycletrap(inst)
@@ -219,27 +144,16 @@ local function removefrominteriorscene(inst)
     cycletrap(inst)
 end
 
-local function canbeattackedfn(inst)
-    local canbeattacked = true
-
-    if inst:HasTag("burnt") or inst:HasTag("dead") then
-        canbeattacked = false
-    end
-
-    return canbeattacked
-end
-
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
 
-    local trans = inst.entity:AddTransform()
+    inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     MakeObstaclePhysics(inst, .5)
     inst.Physics:SetActive(false)
-
-    inst.setextendeddata = setextendeddata
 
     local minimap = inst.entity:AddMiniMapEntity()
     minimap:SetIcon("")
@@ -247,6 +161,7 @@ local function fn(Sim)
     anim:SetBank("spear_trap")
     anim:SetBuild("spear_trap")
     anim:PlayAnimation("idle_retract")
+
     inst:AddTag("spear_trap")
 
     inst.entity:SetPristine()
@@ -255,23 +170,15 @@ local function fn(Sim)
         return inst
     end
 
+    inst.setextendeddata = setextendeddata
+    inst.inflictdamage = inflictdamage
+
     inst:AddComponent("combat")
     inst.components.combat:SetOnHit(OnHit)
     inst.components.combat:SetDefaultDamage(SPEAR_TRAP_DAMNAGE)
-    inst.components.combat.canbeattackedfn = canbeattackedfn
-    inst.inflictdamage = inflictdamage
-
-    inst:ListenForEvent("death", OnKilled)
-    inst:ListenForEvent("triggertrap", function(inst, data)
-        inst.triggertask = inst:DoTaskInTime(math.random() * 0.25, function()
-            inst:PushEvent("spring")
-        end)
-    end)
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(SPEAR_TRAP_HEALTH)
-
-    inst.entity:AddSoundEmitter()
 
     inst:AddComponent("inspectable")
 
@@ -283,12 +190,10 @@ local function fn(Sim)
     inst:SetStateGraph("SGspear_trap")
 
     MakeSmallBurnable(inst)
-    inst.components.burnable.disabled = true
-    MakeSmallPropagator(inst)
     inst.components.burnable:SetFXLevel(2)
     inst.components.burnable:SetOnBurntFn(burnt)
-    --    inst.components.burnable:MakeDragonflyBait(1)
-    --inst.components.burnable:SetOnIgniteFn(tree_lit)
+    MakeSmallPropagator(inst)
+
 
     inst.cycleup = cycleup
     inst.cycledown = cycledown
@@ -298,23 +203,12 @@ local function fn(Sim)
     inst.OnLoad = onload
     inst.OnSave = onsave
 
-    inst:DoTaskInTime(0, function()
-        local time1 = 1
-        if inst:HasTag("up_3") then
-            time1 = 3
-        end
-
-        local time2 = 3
-        if inst:HasTag("down_6") then
-            time2 = 6
-        end
-        if inst:HasTag("timed") then
-            local initialdelay = 3
-            if inst:HasTag("delay_6") then
-                initialdelay = 6
-            elseif inst:HasTag("delay_9") then
-                initialdelay = 9
-            end
+    inst:ListenForEvent("death", OnKilled)
+    inst:ListenForEvent("triggertrap", function(inst, data)
+        if inst:IsValid() then
+            inst:DoTaskInTime(math.random() * 0.25, function()
+                inst:PushEvent("spring")
+            end)
         end
     end)
 

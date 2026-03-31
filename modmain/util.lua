@@ -91,6 +91,11 @@ function string.trofmt(str, ...)
     return string.format(str:gsub("{}", "%%s"), unpack(args))
 end
 
+-- 字符串是否以suffix结尾，科雷怎么没给这个函数
+function string.endswith(str, suffix)
+    return suffix == "" or string.sub(str, -string.len(suffix)) == suffix
+end
+
 ----------------------------------------------------------------------------------------------------
 -- 三元运算函数，因为and or不能充当三元
 function Ternary(a, b, c)

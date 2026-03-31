@@ -106,6 +106,7 @@ for _, t in ipairs(tasks) do
         table.insert(task.room_tags, "RoadPoison")   --禁止生成卵石路
         table.insert(task.room_tags, "not_mainland") --单独的小岛
         table.insert(task.room_tags, "No_Winter")    --没有冬天
+        table.insert(task.room_tags, "nohasslers")   --不生成熊大
     end)
 end
 

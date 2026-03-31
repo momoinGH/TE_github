@@ -15,14 +15,12 @@ local function OnBuilt(inst)
     end
 
     -- 自适应偏移，没有设置过缩放才设置
-    if not inst.components.tro_saveanim.scale then
-        local room = inst:TroGetRoomCenter()
-        if room then
-            local x, y, z = room.Transform:GetWorldPosition()
-            inst.Transform:SetPosition(x + inst.x_offset, 0, z)
-        else
-            TroErrorHandle(string.trofmt("{}墙壁没有找到房间中心点对象", inst))
-        end
+    local room = inst:TroGetRoomCenter()
+    if room then
+        local x, y, z = room.Transform:GetWorldPosition()
+        inst.Transform:SetPosition(x + inst.x_offset, 0, z)
+    else
+        TroErrorHandle(string.trofmt("{}墙壁没有找到房间中心点对象", inst))
     end
 end
 

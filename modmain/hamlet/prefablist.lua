@@ -160,6 +160,7 @@ PrefabFiles = {
     "hamlet_pig_ruins_entrance",  --遗迹
     "hanging_vine",               --悬挂的藤蔓
     "hats_hamlet",                --帽子
+    "hats_sw",                    --帽子
     "herald_tatters",             --暗影碎布
     "hippo_antler",               --河鹿角
     "hippoherd",                  --河鹿生成器
@@ -212,6 +213,8 @@ PrefabFiles = {
     "poisonmistparticle", --云雾特效
     "porklandintro",      --开局破烂的物品
     "preparedfoods_tro",  --食物
+    "coffeebeans",        --咖啡豆
+    "coconut",            --椰子
 
 
     "pugalisk_fountain",     --不老泉

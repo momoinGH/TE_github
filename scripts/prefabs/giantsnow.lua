@@ -177,7 +177,6 @@ local function fn(Sim)
 	inst.components.combat:SetRange(GIANT_GRUB_ATTACK_RANGE, GIANT_GRUB_ATTACK_RANGE)
 	inst.components.combat:SetRetargetFunction(3, Retarget)
 	inst.components.combat:SetKeepTargetFunction(KeepTarget)
-	inst.components.combat.canbeattackedfn = CanBeAttacked
 	inst.components.combat.hiteffectsymbol = "chest"
 
 	inst:SetStateGraph("SGgiantgrub")

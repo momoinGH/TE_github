@@ -265,7 +265,6 @@ local function makebird(name, sounds, feather_name, bank, water_bank)
 
         inst:AddComponent("combat")
         inst.components.combat.hiteffectsymbol = "crow_body"
-        inst.components.combat.canbeattackedfn = canbeattacked
 
         local brain = require "brains/birdbrain"
         inst:SetBrain(brain)

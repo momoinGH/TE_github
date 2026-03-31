@@ -358,7 +358,6 @@ local function fn()
     inst.components.combat:SetRetargetFunction(1, RetargetFn)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
     inst.components.combat:SetHurtSound("dontstarve_DLC001/creatures/bearger/hurt")
-    inst.components.combat.canbeattackedfn = CanBeAttacked
     inst.components.combat.battlecryenabled = false
     inst.components.combat.notags = { "sharkitten" }
 

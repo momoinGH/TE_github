@@ -93,7 +93,6 @@ local function fn(Sim)
     inst.components.combat:SetAttackPeriod(TUNING.BUZZARD_ATTACK_PERIOD)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
     inst.components.combat:SetHurtSound("dontstarve_DLC001/creatures/buzzard/hurt")
-    inst.components.combat.canbeattackedfn = canbeattacked
     ------------------------------------------
 
     inst:AddComponent("eater")

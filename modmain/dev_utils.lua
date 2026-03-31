@@ -14,7 +14,7 @@ end
 ---@param msg string 错误消息
 ---@param has_trace boolean 是否打印堆栈，默认true
 ---@param dev_can_crash boolean 开发模式下是否可以崩溃，默认true
-function TroErrorHandle(msg, has_trace, dev_can_crash)
+function TroErrorHandle(msg, has_trace, dev_can_crash, level)
     if has_trace == nil then
         has_trace = true
     end
@@ -30,7 +30,7 @@ function TroErrorHandle(msg, has_trace, dev_can_crash)
     end
     if troisdev then
         if dev_can_crash then
-            error(s)
+            error(s, level or 2)
         else
             c_announce(msg) --公告提示一下
             print(s)
@@ -44,9 +44,9 @@ end
 GLOBAL.TroErrorHandle = TroErrorHandle
 
 -- 可以判断是否是开发模式的断言，开发陌生下游戏崩溃，工坊订阅下只会打印堆栈到日志
-function trodevassert(v, ...)
+function trodevassert(v, msg)
     if troisdev then
-        return assert(v, ...)
+        return assert(v, msg)
     end
 
     -- 工坊订阅，不是开发模式
@@ -54,7 +54,7 @@ function trodevassert(v, ...)
         return v
     end
 
-    TroErrorHandle(..., false, true)
+    TroErrorHandle(msg, false, true, 3)
     return v
 end
 

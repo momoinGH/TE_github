@@ -115,6 +115,14 @@ local function OnInteriorSpawn(inst, data)
         inst:SetVine()
     end
     UpdateDoorShadow(inst)
+
+    -- 如果目标在外面，这个门就有光
+    inst:DoTaskInTime(0, function()
+        local target = inst.components.teleporter:GetTarget()
+        if target and not target:TroGetRoomCenter() then
+            SetDoorTimeChange(inst)
+        end
+    end)
 end
 
 local function OpenDoor(inst, instant)
@@ -150,8 +158,7 @@ local function CloseDoor(inst, instant)
 end
 
 local function MasterPost(inst)
-    inst.SetDoorTimeChange = SetDoorTimeChange --有太阳光的门
-    inst.SetVine = SetVine                     --长藤蔓的门
+    inst.SetVine = SetVine --长藤蔓的门
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad

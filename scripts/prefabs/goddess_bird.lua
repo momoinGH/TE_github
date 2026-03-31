@@ -161,7 +161,6 @@ local function makebird(name, soundname, loottable, psprefab, foodtype, scale)
 
         inst:AddComponent("combat")
         inst.components.combat.hiteffectsymbol = "crow_body"
-        --inst.components.combat.canbeattackedfn = canbeattacked
         inst:AddComponent("health")
         inst.components.health:SetMaxHealth(TUNING.BIRD_HEALTH)
         inst.components.health.murdersound = "dontstarve/wilson/hit_animal"

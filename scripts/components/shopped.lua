@@ -67,10 +67,13 @@ function Shopped:SpawnInventory(goods, costprefab, cost)
     end
 
     local item = SpawnPrefab(goods or self.goods)
-    assert(item.components.inventoryitem)
-    self:SetImage(item)
-    self:SetCost(costprefab, cost)
-    self.inst.components.container:GiveItem(item)
+    if item then
+        self:SetImage(item)
+        self:SetCost(costprefab, cost)
+        self.inst.components.container:GiveItem(item)
+    else
+        TroErrorHandle("生成物品失败：" .. tostring(goods) .. "   " .. tostring(self.goods), false, false)
+    end
 end
 
 --- 当商品被买后

@@ -37,7 +37,6 @@ local listadepratos =
 	"shepherds_pie",
 	"candy",
 	"pudding",
-	"waffles",
 	"berry_tart",
 	"mac_n_cheese",
 	"bagel_n_fish",
@@ -937,25 +936,6 @@ local preparedFoods = {
 		health = -5.0,
 		perishtime = 1920.0,
 		cooktime = 3.3333333333333335,
-	},
-	waffles = {
-		test = function(cooker, names, tags)
-			return (tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 1 and TotalCount(names) == 3) or
-				(tags.flour and tags.flour >= 3 and names.syrup and names.syrup >= 1 and TotalCount(names) == 4) or
-				(tags.flour and tags.flour >= 2 and names.syrup and names.syrup >= 2 and TotalCount(names) == 4)
-		end,
-		platetype = "plate",
-		priority = 11,
-		foodtype = FOODTYPE.VEGGIE,
-		reward = { generic = { coin1 = 4, coin2 = 5, coin3 = 0, coin4 = 0 }, silver = { coin1 = 2, coin2 = 6, coin3 = 0, coin4 = 0 }, gold = { coin1 = 4, coin2 = 12, coin3 = 0, coin4 = 0 } },
-		cookers = { "grill" },
-		cravings = { "sweet" },
-		tags = { "salty" },
-		hunger = 20,
-		sanity = 5,
-		health = 5,
-		perishtime = 4800,
-		cooktime = 2.5,
 	},
 	berry_tart = {
 		test = function(cooker, names, tags)
