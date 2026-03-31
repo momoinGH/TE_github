@@ -14,5 +14,3 @@ endaporkalypse
 考古不能用Dislodgeable
 
 
-
-实体销毁了不能调用DoTaskIntime，会报错

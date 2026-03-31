@@ -73,8 +73,8 @@ modimport "modmain/mods"                  -- 兼容其他mod
 if troisdev then
     modimport "modmain/main_check_before" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
-
-modimport "modmain/animstate" -- AnimState 增强
+modimport "modmain/error_prevent"         --预防一些崩溃情况，正式环境也需要
+modimport "modmain/animstate"             -- AnimState 增强
 modimport "modmain/minimapentity"
 modimport "modmain/soundemitter"
 modimport "modmain/ents_trace"            --缓存记录一些需要全局查找的实体

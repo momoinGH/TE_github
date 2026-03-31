@@ -46,6 +46,8 @@ local phasefunctions =
 }
 
 local function CommonPost(inst)
+    inst.entity:AddLight()
+
     inst:AddTag("lockable_door")
 
     inst:SetPrefabNameOverride("prop_door")
@@ -72,7 +74,7 @@ local function SetDoorTimeChange(inst)
     end
 
     inst:AddComponent("lighttweener")
-    inst.components.lighttweener:StartTween(inst.entity:AddLight(), lights.day.rad, lights.day.intensity,
+    inst.components.lighttweener:StartTween(inst.Light, lights.day.rad, lights.day.intensity,
         lights.day.falloff, { lights.day.color[1], lights.day.color[2], lights.day.color[3] }, 0)
     inst.Light:Enable(true)
 

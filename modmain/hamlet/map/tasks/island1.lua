@@ -93,7 +93,7 @@ AddTask("岛一雨林遗迹", {
     locks = LOCKS.JUNGLE_DEPTH_1,
     keys_given = KEYS.JUNGLE_DEPTH_2,
     room_choices = {
-        ["rainforest_ruins"] = math.random(2, 3),
+        ["rainforest_ruins"] = 2,
     },
     room_bg = WORLD_TILES.PLAINS,
     background_room = "BG_rainforest_base",

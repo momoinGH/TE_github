@@ -27,7 +27,7 @@ end
 modimport "modmain/tiledefs"        --定义新地皮
 modimport "modmain/tilegroups"      --地皮分组
 modimport "modmain/map/terrain.lua" --定义预制体可以在哪些地皮上生成
-
+modimport "modmain/shardindex.lua"  --世界生成后初始化实体，比如根据地形给实体换皮肤
 
 
 -- TODO
@@ -56,7 +56,7 @@ if rawget(_G, "WORLDGEN_MAIN") then
     troimportmodulefile "map/static_layouts" --静态布局
     troimportmodulefile "map/rooms"
     troimportmodulefile "map/tasks"
-    troimportmodulefile "map/network"     --地图数据后处理，替换字符串为实际预制体
+    troimportmodulefile "map/network"     --地图数据后处理，替换字符串为实际预制体，这个只是改预制件名，还没有真正的实体
     troimportmodulefile "map/mapadd"      --hook生成函数、真正把地图数据加入原有地形数据中
     modimport "modmain/map/ocean_gen"     --不让科雷覆盖mod海洋地皮
     modimport "modmain/map/graphnode.lua" --允许在mod海洋地皮上填充实体

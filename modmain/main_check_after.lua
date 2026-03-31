@@ -60,33 +60,24 @@ local need_data_events = {
     unequipped = true,
 }
 
+local ignore_remove_events = {
+    entitysleep = true
+}
+
 local OldPushEvent = EntityScript.PushEvent
-EntityScript.PushEvent = function(inst, event, data, ...)
+function EntityScript:PushEvent(event, data, ...)
     if event and need_data_events[event] and not (data == nil or type(data) == "table") then
-        TroErrorHandle("事件" .. tostring(event) .. "的参数" .. tostring(data) .. "不是table也不为空，可能导致游戏崩溃", true, true)
+        TroErrorHandle("事件" .. tostring(event) .. "的参数" .. tostring(data) .. "不是table也不为空，可能导致游戏崩溃", true, true, 3)
     end
-    return OldPushEvent(inst, event, data, ...)
+
+    -- 不能在事件毁掉里销毁实体
+    local is_valid_before = self.IsValid and self:IsValid()
+    local res = OldPushEvent(self, event, data, ...)
+    if event and not ignore_remove_events[event] and is_valid_before and not (self.IsValid and self:IsValid()) then
+        TroErrorHandle(string.trofmt("{}对象在{}事件中被销毁，这容易导致游戏崩溃，请使用DoTaskIntime(0,inst.Remove)来销毁", self, event), true, false, 3)
+    end
+    return res
 end
-
-----------------------------------------------------------------------------------------------------
--- 对象销毁时不能执行定时任务
--- local old_DoTaskInTime = EntityScript.DoTaskInTime
--- function EntityScript:DoTaskInTime(...)
---     if self.IsValid and not self:IsValid() then
---         TroErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoTaskInTime，这可能导致游戏崩溃", true, false)
---         return
---     end
---     return old_DoTaskInTime(self, ...)
--- end
-
--- local old_DoPeriodicTask = EntityScript.DoPeriodicTask
--- function EntityScript:DoPeriodicTask(...)
---     if self.IsValid and not self:IsValid() then
---         TroErrorHandle("对象" .. tostring(self) .. "在移除后仍然执行DoPeriodicTask，这可能导致游戏崩溃", true, false)
---         return
---     end
---     return old_DoPeriodicTask(self, ...)
--- end
 
 ----------------------------------------------------------------------------------------------------
 -- 检查状态机的重复注册

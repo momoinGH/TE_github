@@ -88,6 +88,7 @@ local states =
         tags = { "busy" },
 
         onenter = function(inst)
+            inst.persists = false
             inst:RemoveTag("hostile")
             inst.Physics:SetActive(false)
             inst.AnimState:PlayAnimation("breaking")
