@@ -1,3 +1,10 @@
+AddPrefabPostInit("forest", function(inst)
+    if not TheWorld.ismastersim then return end
+
+    inst:AddComponent("aporkalypse")
+end)
+
+
 -- 大灾变时花都变成恶魔花
 for _, v in ipairs({
     "flower",
@@ -14,7 +21,6 @@ for _, v in ipairs({
         end, TheWorld)
     end)
 end
-
 
 AddPrefabPostInit("flower_evil", function(inst)
     if not TheWorld.ismastersim then return end

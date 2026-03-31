@@ -1,4 +1,4 @@
---- 哈姆雷特蝙蝠的生成
+-- 哈姆雷特大灾变组件
 local Aporkalypse = Class(function(self, inst)
     self.inst = inst
     self.begin_date = 120 * TUNING.TOTAL_DAY_TIME

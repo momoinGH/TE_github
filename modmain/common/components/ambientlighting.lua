@@ -89,8 +89,8 @@ AddComponentPostInit("ambientlighting", function(self, inst)
     end
     self.TroOnClimateChanged = TroOnClimateChanged                     --暴露一下
 
-    self.inst:WatchWorldState("startaporkalypse", TroOnClimateChanged) ----为什么 用isaporkalypse就不行呢
-    self.inst:WatchWorldState("stopaporkalypse", TroOnClimateChanged)
+    self.inst:WatchWorldState("beginaporkalypse", TroOnClimateChanged) ----为什么 用isaporkalypse就不行呢
+    self.inst:WatchWorldState("endaporkalypse", TroOnClimateChanged)
     self.inst:DoTaskInTime(0, TroOnClimateChanged)                     --initialise
 
     ----------------------------------------------------------------------------------------------------

@@ -8,12 +8,12 @@ local PIKO_ATTACK_PERIOD = 2
 local PIKO_TARGET_DIST = 20
 local PIKO_RABID_SANITY_THRESHOLD = .8
 
-local assets = {Asset("ANIM", "anim/ds_squirrel_basic.zip"), Asset("ANIM", "anim/squirrel_cheeks_build.zip"),
-                Asset("ANIM", "anim/squirrel_build.zip"), Asset("ANIM", "anim/orange_squirrel_cheeks_build.zip"),
-                Asset("ANIM", "anim/orange_squirrel_build.zip"), Asset("INV_IMAGE", "piko_orange"),
-                Asset("SOUND", "sound/rabbit.fsb")}
+local assets = { Asset("ANIM", "anim/ds_squirrel_basic.zip"), Asset("ANIM", "anim/squirrel_cheeks_build.zip"),
+    Asset("ANIM", "anim/squirrel_build.zip"), Asset("ANIM", "anim/orange_squirrel_cheeks_build.zip"),
+    Asset("ANIM", "anim/orange_squirrel_build.zip"), Asset("INV_IMAGE", "piko_orange"),
+    Asset("SOUND", "sound/rabbit.fsb") }
 
-local prefabs = {"smallmeat", "cookedsmallmeat"}
+local prefabs = { "smallmeat", "cookedsmallmeat" }
 
 local pikosounds = {
     scream = "dontstarve_DLC003/creatures/piko/scream",
@@ -33,7 +33,7 @@ local function OnCooked(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/cre
 
 local function OnAttacked(inst, data)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local pikos = TheSim:FindEntities(x, y, z, 30, {"piko"})
+    local pikos = TheSim:FindEntities(x, y, z, 30, { "piko" })
     for i = 1, math.min(#pikos, 5) do
         if pikos[i] and pikos[i]:IsValid() then pikos[i]:PushEvent("gohome") end
     end
@@ -51,7 +51,7 @@ end
 local function Retarget(inst)
     return FindEntity(inst, PIKO_TARGET_DIST, function(guy)
         return not guy:HasTag("piko") and inst.components.combat:CanTarget(guy) and guy.components.inventory and
-                   (guy.components.inventory:NumItems() > 0)
+            (guy.components.inventory:NumItems() > 0)
     end)
 end
 
@@ -142,12 +142,12 @@ local function fn()
 
     local trans = inst.entity:AddTransform()
     trans:SetFourFaced()
-    
+
     local anim = inst.entity:AddAnimState()
     anim:SetBank("squirrel")
     anim:SetBuild("squirrel_build")
     anim:PlayAnimation("idle", true)
-    
+
     inst.entity:AddPhysics()
     inst.entity:AddSoundEmitter()
 
@@ -188,7 +188,7 @@ local function fn()
     inst.data = {}
 
     inst:AddComponent("eater")
-    inst.components.eater:SetDiet({FOODTYPE.SEEDS}, {FOODTYPE.SEEDS})
+    inst.components.eater:SetDiet({ FOODTYPE.SEEDS }, { FOODTYPE.SEEDS })
 
     inst:AddComponent("inventory")
 
@@ -225,7 +225,7 @@ local function fn()
     MakeTinyFreezableCharacter(inst, "chest")
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({"smallmeat"})
+    inst.components.lootdropper:SetLoot({ "smallmeat" })
 
     inst:AddComponent("tradable")
     inst:AddComponent("inspectable")
@@ -263,8 +263,8 @@ local function fn()
 
     -- When a piko is first created, ensure that it isn't rabid.
     SetAsRabid(inst, false)
-    inst:WatchWorldState("startaporkalypse", function() transformtest(inst) end, TheWorld)
-    inst:WatchWorldState("stopaporkalypse", function() transformtest(inst) end, TheWorld)
+    inst:WatchWorldState("beginaporkalypse", function() transformtest(inst) end, TheWorld)
+    inst:WatchWorldState("endaporkalypse", function() transformtest(inst) end, TheWorld)
     inst:DoTaskInTime(FRAMES, function(inst)
         transformtest(inst)
     end)
@@ -280,4 +280,4 @@ local function orangefn()
 end
 
 return Prefab("piko", fn, assets, prefabs),
-       Prefab("piko_orange", orangefn, assets, prefabs)
+    Prefab("piko_orange", orangefn, assets, prefabs)

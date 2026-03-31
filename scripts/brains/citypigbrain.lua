@@ -65,8 +65,7 @@ local function KeepFaceTargetFn(inst, target)
 end
 
 local function GetTraderFn(inst)
-    return FindEntity(inst, TRADE_DIST, function(target) return inst.components.trader:IsTryingToTradeWithMe(target) end,
-        { "player" })
+    return FindEntity(inst, TRADE_DIST, function(target) return inst.components.trader:IsTryingToTradeWithMe(target) end, { "player" })
 end
 
 local function KeepTraderFn(inst, target)

@@ -16,7 +16,7 @@ local function spawnshelfslots(inst)
         local object = SpawnPrefab("shelf_slot")
         local slot = inst.swp_img_list[i]
         object.entity:AddFollower():FollowSymbol(inst.GUID, slot, 10, 0, 0.6)
-        object.components.shelfer:SetShelf(inst, slot, i)
+        object.components.shelfer:SetShelf(inst, i)
         table.insert(inst.shelves, object)
     end
 end
@@ -207,8 +207,6 @@ return MakeShelf("shelves_wood", { anim = "wood" }),
     MakeShelf("shelves_metal", { anim = "metalcrates" }),
     MakeShelf("shelves_fridge", { anim = "fridge" }, function(inst)
         inst:AddTag("fridge")
-    end, function(inst)
-        inst.components.container:WidgetSetup("icebox")
     end),
     MakeShelf("shelves_displaycase", { anim = "displayshelf_wood", size = 3 }),
     MakeShelf("shelves_displaycase_metal", { anim = "displayshelf_metal", size = 3 }),

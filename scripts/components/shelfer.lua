@@ -4,12 +4,10 @@ local Shelfer = Class(function(self, inst)
 
     self.shelf = nil
     self.slotindex = nil
-    self.slot = nil
 end)
 
-function Shelfer:SetShelf(shelf, slot, slotindex)
+function Shelfer:SetShelf(shelf, slotindex)
     self.shelf = shelf
-    self.slot = slot
     self.slotindex = slotindex
 end
 
@@ -23,10 +21,9 @@ end
 
 function Shelfer:CanAccept(item, giver)
     local player_to_shop = not self.shelf:HasTag("playercrafted") and giver and giver:HasTag("player")
-    return
-        not self.shelf.components.container:GetItemInSlot(self.slotindex) --槽位当前空缺
-        and item.components.inventoryitem                                 --物品
-        and not player_to_shop                                            --非购买
+    return not self.shelf.components.container:GetItemInSlot(self.slotindex) --槽位当前空缺
+        and item.components.inventoryitem                                    --物品
+        and not player_to_shop                                               --非购买
 end
 
 function Shelfer:AcceptGift(giver, item)
