@@ -575,25 +575,17 @@ GLOBAL.SpawnPrefab = function(prefab, skin, skinid, userid, ...)
     end
     return oldSpawnPrefab(prefab, skin, skinid, userid, ...)
 end
+
 local oldReskinEntity = Sim.ReskinEntity
 Sim.ReskinEntity = function(sim, guid, oldskin, newskin, skinid, userid, ...)
     local inst = Ents[guid]
     if oldskin and itemskins[oldskin] then
         itemskins[oldskin].clear_fn(inst) -- 清除旧皮肤的
-        inst:SetPrefabNameOverride(nil)
     end
-
     local r = oldReskinEntity(sim, guid, oldskin, newskin, skinid, userid, ...)
     if newskin and itemskins[newskin] then
-        if PREFAB_SKINS_SHOULD_NOT_CHANGE[newskin] then
-            inst.skinname = nil
-            inst.natureskinname = newskin
-            inst.skin_id = nil
-            inst:SetPrefabNameOverride(itemskins[newskin].name or inst.prefab)
-        else
-            inst.skinname = newskin
-            inst.skin_id = 0
-        end
+        inst.skinname = newskin
+        inst.skin_id = 0
         itemskins[newskin].init_fn(inst)
     end
     return r

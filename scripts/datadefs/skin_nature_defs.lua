@@ -1,13 +1,13 @@
 ----需要做的内容
 --  毒蜘蛛
 
-
 local natureskins = {
     sapling = {
         default = { basebuild = "sapling", base_minimapicon = "sapling.png" },
         sapling_green = {
+            theme = "green",       --主题，用来关联其他皮肤的，如果这个皮肤的预制件生成的东西有这个主题的皮肤会自动换肤
             build = "sapling",
-            skintype = "tropical",
+            skintype = "tropical", --生成条件
             name = "saplingnova",
             minimapicon = "sapling.png",
             extra_init_fn = function(inst, skinname)
@@ -24,6 +24,7 @@ local natureskins = {
     grass = {
         default = { basebuild = "grass1", base_minimapicon = "grass.png" },
         grass_green = {
+            theme = "green",
             build = "grass1",
             image = "grassGreen",
             skintype = "tropical",
@@ -42,17 +43,18 @@ local natureskins = {
     grass_tall = {
         default = { basebuild = "grass_tall", base_minimapicon = "grass_tall.png" },
         grass_tall_green = {
+            theme = "green",
             build = "grass_tall_green",
             skintype = "tropical",
             name = "grass_tall_green",
             minimapicon = "grass_tall_green.png",
             -- extra_init_fn = function(inst, skinname)
-            --     -- CancelNoGrowInWinter(inst)
-            --     -- inst.AnimState:SetFilter("green")
+            --     CancelNoGrowInWinter(inst)
+            --     inst.AnimState:SetFilter("green")
             -- end,
             -- extra_clear_fn = function(inst, skinname)
-            --     -- MakeNoGrowInWinter(inst)
-            --     -- inst.AnimState:SetFilter("generic")
+            --     MakeNoGrowInWinter(inst)
+            --     inst.AnimState:SetFilter("generic")
             -- end,
         },
     },
@@ -60,6 +62,7 @@ local natureskins = {
     dug_grass = {
         default = { basebuild = "grass1", },
         dug_grass_green = {
+            theme = "green",
             build = "grass1",
             image = "dug_grass_green",
             sourceprefabs = { "grass_tall", "grassdwater" },
@@ -78,6 +81,7 @@ local natureskins = {
             basebuild = "cutgrass",
         },
         cutgrass_green = {
+            theme = "green",
             build = "cutgrass",
             image = "cutgrass_green",
             sourceprefabs = { "grass_tall", "grassdwater" },
@@ -240,22 +244,17 @@ local natureskins = {
 
 }
 
-local IsInTropicalArea = function(inst)
-    return inst:IsInTropicalArea()
-end
-
-local IsInShipwreckedArea = function(inst)
-    return inst:IsInShipwreckedArea()
-end
-
-local IsInHamletArea = function(inst)
-    return inst:IsInHamletArea()
-end
-
+-- 条件检查，根据skintype使用对应的检查函数
 local testfns = {
-    tropical = IsInTropicalArea,
-    shipwrecked = IsInShipwreckedArea,
-    hamlet = IsInHamletArea,
+    tropical = function(inst)
+        return inst:IsInTropicalArea()
+    end,
+    shipwrecked = function(inst)
+        return inst:IsInShipwreckedArea()
+    end,
+    hamlet = function(inst)
+        return inst:IsInHamletArea()
+    end,
 }
 
 
@@ -265,7 +264,6 @@ for prefabname, prefabdata in pairs(natureskins) do
             skindata = table.trodeep_merge(skindata, prefabdata.default) or skindata
             skindata.prefabname = skindata.prefabname or prefabname
             skindata.skinname = skindata.skinname or skinname
-
             skindata.build = skindata.build or skindata.skinname
             skindata.image = skindata.image or skindata.skinname
         end

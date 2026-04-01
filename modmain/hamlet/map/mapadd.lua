@@ -102,6 +102,7 @@ for _, t in ipairs(tasks) do
         task.region_id = "island_hamlet" --所有地形为一个岛
 
         task.room_tags = task.room_tags or {}
+        table.insert(task.room_tags, "tropical")     --我们mod地形
         table.insert(task.room_tags, "hamlet")       --模块专属标签
         table.insert(task.room_tags, "RoadPoison")   --禁止生成卵石路
         table.insert(task.room_tags, "not_mainland") --单独的小岛

@@ -61,7 +61,8 @@ local need_data_events = {
 }
 
 local ignore_remove_events = {
-    entitysleep = true
+    entitysleep = true,
+    animover = true,
 }
 
 local OldPushEvent = EntityScript.PushEvent
@@ -73,7 +74,7 @@ function EntityScript:PushEvent(event, data, ...)
     -- 不能在事件毁掉里销毁实体
     local is_valid_before = self.IsValid and self:IsValid()
     local res = OldPushEvent(self, event, data, ...)
-    if event and not ignore_remove_events[event] and is_valid_before and not (self.IsValid and self:IsValid()) then
+    if event and not ignore_remove_events[event] and is_valid_before and not (self.IsValid and self:IsValid()) and TheWorld and TheWorld.ismastersim then
         TroErrorHandle(string.trofmt("{}对象在{}事件中被销毁，这容易导致游戏崩溃，请使用DoTaskIntime(0,inst.Remove)来销毁", self, event), true, false, 3)
     end
     return res

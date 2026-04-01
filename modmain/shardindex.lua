@@ -1,10 +1,17 @@
+local skin_nature_defs = require("datadefs/skin_nature_defs")
+
+
 local function OnWorldEntsSpawned()
     print("所有实体创建完成，开始根据地形替换皮肤")
 
+    --检查皮肤是否满足条件，满足就替换皮肤
     for guid, ent in pairs(Ents) do
-        if ent.prefab == "grass" and ent:IsInHamletArea() then
-            -- TODO 这皮肤系统是不是有问题，下线再上线就没了？
-            TheSim:ReskinEntity(guid, nil, "grass_green")
+        if skin_nature_defs.skinlist[ent.prefab] then
+            for skin_name, skin_data in pairs(skin_nature_defs.skinlist[ent.prefab]) do
+                if skin_data.skintype and skin_nature_defs.testfns[skin_data.skintype] and skin_nature_defs.testfns[skin_data.skintype](ent) then
+                    TheSim:ReskinEntity(guid, ent.skinname, skin_name)
+                end
+            end
         end
     end
 end

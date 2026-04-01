@@ -41,10 +41,7 @@ end
 -- 我们mod定义的区域，海难、哈姆雷特、火山、热带等等
 function EntityScript:IsInTropicalArea()
     if self.components.areaaware then
-        return (self.components.areaaware:CurrentlyInTag("tropical")
-                or self.components.areaaware:CurrentlyInTag("ForceDisconnected"))
-            and true
-            or false
+        return self.components.areaaware:CurrentlyInTag("tropical") and true or false
     end
     return TheWorld.Map:IsTropicalAreaAtPoint(self.Transform:GetWorldPosition())
 end

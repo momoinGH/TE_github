@@ -1,4 +1,6 @@
---使用案例及最新版：https://n77a3mjegs.feishu.cn/docx/K9bUdpb5Qo85j2xo8XkcOsU1nuh?from=from_copylink
+-- 现在已经被一个注解很全面详细的仓库替代了，https://gitee.com/b1inkie/lsp-dst
+
+--[[
 --这个文件不会被调用，单纯写一些源码的注解，虽然删了更节省体积，不过我相信也许会对其他moder有些帮助，而且全局函数在一些编译器下会提供代码补全功能
 
 AllPlayers      = {}
@@ -8,7 +10,6 @@ TECH            = {}
 POPUPS          = {}
 AnimState       = {}
 MiniMapEntity   = {}
-TheSim          = {}
 Entity          = {}
 STRINGS         = {}
 TheWorld        = {}
@@ -43,6 +44,7 @@ FUELTYPE        = {}
 Ents            = {}
 TheInput        = {}
 MOD_RPC         = {}
+ShardIndex      = {}
 function Class(base, _ctor, props) end
 
 function CanEntitySeeTarget(inst, target) end
@@ -82,7 +84,6 @@ Prefab = Class(function(self, name, fn, assets, deps, force_path_search) end)
 function FunctionOrValue(func_or_val, ...) end
 
 modimport = function(modulename) end
-EntityScript = Class(function(self, entity) end)
 ------------------------------------------------------------------------------------------------------------------------
 --1. simutil.lua
 
@@ -459,6 +460,14 @@ end
 ------------------------------------------------------------------------------------------------------------------------
 
 --7.entityscript.lua
+---@class EntityScript
+EntityScript = {
+    -- components = {
+    --     combat = {
+    --         DoAttack = function(self, targ, weapon, projectile, stimuli, instancemult, instrangeoverride, instpos) end
+    --     }
+    -- }
+}
 
 ---获取实体对象的各项数据，使用SpawnSaveRecord复原一个一样的对象出来，返回的数据可在onsave中保存，实现随从跟随上下洞穴的效果
 function EntityScript:GetSaveRecord() end
@@ -511,9 +520,8 @@ function EntityScript:GetSkinName() end
 ------------------------------------------------------------------------------------------------------------------------
 --8.mainfunctions.lua
 
----@return Entity
-function SpawnPrefab(name, skin, skin_id, creator)
-end
+---@return EntityScript
+function SpawnPrefab(name, skin, skin_id, creator) return nil end
 
 --- 在指定对象的位置上生成新的对象并删除原来的对象
 function ReplacePrefab(original_inst, name, skin, skin_id, creator)
@@ -1078,8 +1086,22 @@ function IsSimPaused() end
 player.HUD:ShowPopupNumber(damage, large and 48 or 32, target:GetPosition(), 40, COLOUR, large)
 AddReplicableComponent = function(name) end
 
+
+TheSim = {}
+
 --- 判断一个点是否在多边形内部
-TheSim:WorldPointInPoly(x, z, node.poly)
+function TheSim:WorldPointInPoly(x, z, poly) end
+
+-- 把世界坐标转屏幕坐标
+function TheSim:GetScreenPos(x, y, z) end
+
+-- 扫描附近实体
+function TheSim:FindEntities(x, y, z, radius, must_tags, cant_tags, oneof_tags) end
+
+-- TheSim:Fin
+
+
+----------------------------------------------------------------------------------------------------
 
 function Lerp(a, b, t)
 end
@@ -1096,10 +1118,6 @@ AddPlayerPostInit(function(inst)
         end
     end)
 end)
-
--- 把世界坐标转屏幕坐标
-TheSim:GetScreenPos(x, y, z)
-
 
 AddRecipe = function(arg1, ...) end
 
@@ -1451,7 +1469,6 @@ function GetMinimapAtlas(imagename) end
 
 function GetMinimapAtlas_Internal(imagename) end
 
-
 scheduler = {}
 Map = {}
 
@@ -1460,3 +1477,7 @@ Vector3 = Class(function(self, x, y, z)
 end)
 
 Point = Vector3
+
+----------------------------------------------------------------------------------------------------
+
+]]

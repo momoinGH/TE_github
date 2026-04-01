@@ -149,9 +149,9 @@ troimportmodulefile("recipes")    --配方相关
 troimportmodulefile("cooking")    --料理相关
 troimportmodulefile("rpc")        --RPC的注册
 troimportmodulefile("input")      --客机操作的监听
-troimportmodulefile("skins")      --物品皮肤
 
 
+modimport("modmain/skins")         --物品皮肤
 modimport("modmain/scrapbookwiki") -- 图鉴wiki
 modimport("modmain/character")     --添加角色，角色相关变量定义
 modimport("modmain/fx")            --特效

@@ -2,7 +2,6 @@ modimport "modmain/common/tro_componentaction"          --一个功能比较强�
 modimport "modmain/common/standardcomponents"
 modimport "scripts/prefabs/tropical_farm_plant_defs"    --定义新植物
 modimport "scripts/prefabs/sw_fertilizer_nutrient_defs" --肥料值定义
-modimport "modmain/common/natureskin_variants"          --和自然皮肤切换相关的所有内容
 modimport "modmain/common/wx78_moduledefs"
 modimport "modmain/common/entityscript"
 
