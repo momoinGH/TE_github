@@ -119,6 +119,7 @@ AddComponentPostInit("inventory", function(self)
             local leftovers = item.components.stackable:Put(active_item)
             active_item.skinname = old_skinname
             self:SetActiveItem(leftovers)
+            return
         end
 
         return OldAddAllOfActiveItemToSlot(self, slot, ...)
