@@ -4,7 +4,6 @@ skin_can_combine_prefabs = {
     log = true
 }
 
-PREFAB_SKINS_CAN_COMBINE = {}
 modimport("modmain/skinsapi") --调用皮肤api  来自穹
 
 local itemskinlist = require("datadefs/skin_item_defs").skinlist
@@ -19,9 +18,6 @@ end
 local natureskinlist = require("datadefs/skin_nature_defs").skinlist
 for prefabname, prefabdata in pairs(natureskinlist) do
     for skinname, skindata in pairs(prefabdata) do
-        if skin_can_combine_prefabs[prefabname] then
-            PREFAB_SKINS_CAN_COMBINE[skinname] = true
-        end
         -- PREFAB_SKINS_SHOULD_NOT_SELECT[skinname] = true --不能用扫帚扫这些皮肤
         local assetname = skindata.assetname or skindata.build or skindata.skinname
         table.insert(Assets, Asset("ANIM", "anim/" .. assetname .. ".zip"))
@@ -104,3 +100,27 @@ AddPrefabPostInitAny(function(inst)
 end)
 
 ----------------------------------------------------------------------------------------------------
+-- 允许将两个不同皮肤的物品合并
+AddComponentPostInit("inventory", function(self)
+    local OldAddAllOfActiveItemToSlot = self.AddAllOfActiveItemToSlot
+    function self:AddAllOfActiveItemToSlot(slot, ...)
+        local active_item = self:GetActiveItem()
+        local item = self:GetItemInSlot(slot)
+        if active_item ~= nil and
+            item ~= nil and
+            self:CanTakeItemInSlot(active_item, slot) and
+            item.prefab == active_item.prefab and
+            skin_can_combine_prefabs[item.prefab] and
+            item.skinname ~= active_item.skinname and --皮肤不相等
+            item.components.stackable ~= nil and
+            self:AcceptsStacks() then
+            local old_skinname = active_item.skinname
+            active_item.skinname = item.skinname --允许合并
+            local leftovers = item.components.stackable:Put(active_item)
+            active_item.skinname = old_skinname
+            self:SetActiveItem(leftovers)
+        end
+
+        return OldAddAllOfActiveItemToSlot(self, slot, ...)
+    end
+end)

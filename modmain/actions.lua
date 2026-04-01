@@ -1,9 +1,32 @@
 local RoomUtils = require("tropical_utils/room_utils")
 
--- 给workable使用，表示可以被破坏，比如火药
-Constructor.AddAction(nil, "BLANK", "")
+local function TroAddAction(data, id, str, fn)
+    local action = Action(data)
+    action.id = id
+    local oldActionStr
+    if type(str) == "function" then
+        -- action.stroverridefn = str --不用这个，这个需要直接返回文本
+        action.strfn = str
+        oldActionStr = STRINGS.ACTIONS[string.upper(id)]
+    else
+        action.str = str
+    end
 
-Constructor.AddAction(nil, "STOREOPEN", STRINGS.ACTIONS.STOREOPEN, function(act)
+    action.fn = fn
+    AddAction(action)
+    --AddAction里面会直接覆盖STRINGS.ACTIONS，真麻烦
+    STRINGS.ACTIONS[string.upper(id)] = oldActionStr or STRINGS.ACTIONS[string.upper(id)]
+    return action
+end
+
+----------------------------------------------------------------------------------------------------
+
+
+
+-- 给workable使用，表示可以被破坏，比如火药
+TroAddAction(nil, "BLANK", "")
+
+TroAddAction(nil, "STOREOPEN", STRINGS.ACTIONS.STOREOPEN, function(act)
     if act.target.components.store == nil then return false end
 
     if act.target.components.store:CanOpen(act.doer) then
@@ -17,7 +40,7 @@ Constructor.AddAction(nil, "STOREOPEN", STRINGS.ACTIONS.STOREOPEN, function(act)
 end
 )
 
-Constructor.AddAction(nil, "LAVASPIT", STRINGS.ACTIONS.LAVASPIT, function(act)
+TroAddAction(nil, "LAVASPIT", STRINGS.ACTIONS.LAVASPIT, function(act)
     if act.doer and act.target and act.doer.prefab == "dragoon" then
         local x, y, z = act.doer.Transform:GetWorldPosition()
         local downvec = TheCamera:GetDownVec()
@@ -32,7 +55,7 @@ Constructor.AddAction(nil, "LAVASPIT", STRINGS.ACTIONS.LAVASPIT, function(act)
 end)
 
 -- DEPLOY_AI Action [FIX FOR MOBS THAT PLANT TREES]
-Constructor.AddAction(nil, "DEPLOY_AI", STRINGS.ACTIONS.DEPLOY_AI, function(act)
+TroAddAction(nil, "DEPLOY_AI", STRINGS.ACTIONS.DEPLOY_AI, function(act)
     if act.invobject and act.invobject.components.deployable then
         local obj =
             (act.doer.components.inventory and act.doer.components.inventory:RemoveItem(act.invobject)) or
@@ -47,12 +70,12 @@ Constructor.AddAction(nil, "DEPLOY_AI", STRINGS.ACTIONS.DEPLOY_AI, function(act)
     end
 end)
 
-Constructor.AddAction(nil, "FLUP_HIDE", STRINGS.ACTIONS.FLUP_HIDE, function(act)
+TroAddAction(nil, "FLUP_HIDE", STRINGS.ACTIONS.FLUP_HIDE, function(act)
     --Dummy action for flup hiding
 end)
 
 
-Constructor.AddAction(nil, "FISH1", STRINGS.ACTIONS.FISH1, function(act)
+TroAddAction(nil, "FISH1", STRINGS.ACTIONS.FISH1, function(act)
     if (act.invobject and act.invobject.components.fishingrod)
         or (act.doer and act.doer.components.fishingrod)
     then
@@ -61,14 +84,14 @@ Constructor.AddAction(nil, "FISH1", STRINGS.ACTIONS.FISH1, function(act)
     return true
 end)
 
-Constructor.AddAction(nil, "TIGERSHARK_FEED", STRINGS.ACTIONS.TIGERSHARK_FEED, function(act)
+TroAddAction(nil, "TIGERSHARK_FEED", STRINGS.ACTIONS.TIGERSHARK_FEED, function(act)
     local doer = act.doer
     if doer and doer.components.lootdropper then
         doer.components.lootdropper:SpawnLootPrefab("wetgoop")
     end
 end)
 
-Constructor.AddAction(nil, "MATE", STRINGS.ACTIONS.MATE, function(act)
+TroAddAction(nil, "MATE", STRINGS.ACTIONS.MATE, function(act)
     if act.target == act.doer then
         return false
     end
@@ -79,38 +102,38 @@ Constructor.AddAction(nil, "MATE", STRINGS.ACTIONS.MATE, function(act)
     end
 end)
 
-Constructor.AddAction(nil, "CRAB_HIDE", STRINGS.ACTIONS.CRAB_HIDE, function(act)
+TroAddAction(nil, "CRAB_HIDE", STRINGS.ACTIONS.CRAB_HIDE, function(act)
     --Dummy action for flup hiding
 end)
 
 
-Constructor.AddAction(nil, "HIDECRAB", STRINGS.ACTIONS.HIDECRAB, function(act)
+TroAddAction(nil, "HIDECRAB", STRINGS.ACTIONS.HIDECRAB, function(act)
     return act.doer ~= nil
 end)
 
-Constructor.AddAction(nil, "SHOWCRAB", STRINGS.ACTIONS.SHOWCRAB, function(act)
+TroAddAction(nil, "SHOWCRAB", STRINGS.ACTIONS.SHOWCRAB, function(act)
     return act.doer ~= nil
 end)
 
-Constructor.AddAction(nil, "PEAGAWK_TRANSFORM", STRINGS.ACTIONS.PEAGAWK_TRANSFORM, function(act)
+TroAddAction(nil, "PEAGAWK_TRANSFORM", STRINGS.ACTIONS.PEAGAWK_TRANSFORM, function(act)
     --Dummy action for flup hiding
 end)
 
-Constructor.AddAction(nil, "SPECIAL_ACTION", STRINGS.ACTIONS.SPECIAL_ACTION, function(act)
+TroAddAction(nil, "SPECIAL_ACTION", STRINGS.ACTIONS.SPECIAL_ACTION, function(act)
     if act.doer.special_action then
         act.doer.special_action(act.doer, act)
         return true
     end
 end)
 
-Constructor.AddAction(nil, "SPECIAL_ACTION2", STRINGS.ACTIONS.SPECIAL_ACTION2, function(act)
+TroAddAction(nil, "SPECIAL_ACTION2", STRINGS.ACTIONS.SPECIAL_ACTION2, function(act)
     if act.doer.special_action2 then
         act.doer.special_action2(act)
         return true
     end
 end)
 
-Constructor.AddAction(nil, "INFEST", STRINGS.ACTIONS.INFEST, function(act)
+TroAddAction(nil, "INFEST", STRINGS.ACTIONS.INFEST, function(act)
     if not act.doer.infesting then
         act.doer.components.infester:Infest(act.target)
     end
@@ -118,25 +141,25 @@ Constructor.AddAction(nil, "INFEST", STRINGS.ACTIONS.INFEST, function(act)
 end)
 
 
-Constructor.AddAction(nil, "DIGDUNG", STRINGS.ACTIONS.DIGDUNG, function(act)
+TroAddAction(nil, "DIGDUNG", STRINGS.ACTIONS.DIGDUNG, function(act)
     act.target.components.workable:WorkedBy(act.doer, 1)
 end)
 
-Constructor.AddAction(nil, "MOUNTDUNG", STRINGS.ACTIONS.MOUNTDUNG, function(act)
+TroAddAction(nil, "MOUNTDUNG", STRINGS.ACTIONS.MOUNTDUNG, function(act)
     act.doer.dung_target:Remove()
     act.doer:AddTag("hasdung")
     act.doer.dung_target = nil
 end)
 
-Constructor.AddAction(nil, "BARK", STRINGS.ACTIONS.BARK, function(act)
+TroAddAction(nil, "BARK", STRINGS.ACTIONS.BARK, function(act)
     return true
 end)
 
-Constructor.AddAction(nil, "RANSACK", STRINGS.ACTIONS.RANSACK, function(act)
+TroAddAction(nil, "RANSACK", STRINGS.ACTIONS.RANSACK, function(act)
     return true
 end)
 
-Constructor.AddAction(nil, "FIX", STRINGS.ACTIONS.FIX, function(act)
+TroAddAction(nil, "FIX", STRINGS.ACTIONS.FIX, function(act)
     if act.target then
         local target = act.target
         local numworks = 1
@@ -145,7 +168,7 @@ Constructor.AddAction(nil, "FIX", STRINGS.ACTIONS.FIX, function(act)
     end
 end)
 
-Constructor.AddAction({ priority = 9, rmb = true, distance = 20, mount_valid = false }, "TIRO", STRINGS.ACTIONS.TIRO, function(act)
+TroAddAction({ priority = 9, rmb = true, distance = 20, mount_valid = false }, "TIRO", STRINGS.ACTIONS.TIRO, function(act)
     if act.doer ~= nil and act.doer:HasTag("ironlord") then
         return true
     end
@@ -155,7 +178,7 @@ end
 ----------------------------------------------------------------------------------------------------
 
 -- 收回
-Constructor.AddAction({ priority = 11, rmb = true, distance = 4, mount_valid = false }, "TRO_DISMANTLE", STRINGS.ACTIONS.TRO_DISMANTLE, function(act)
+TroAddAction({ priority = 11, rmb = true, distance = 4, mount_valid = false }, "TRO_DISMANTLE", STRINGS.ACTIONS.TRO_DISMANTLE, function(act)
     if act.target ~= nil and
         act.target.components.tro_portablestructure ~= nil and
         not (act.target.components.burnable ~= nil and act.target.components.burnable:IsBurning()) then
@@ -168,7 +191,7 @@ end
 )
 
 -- 上岸
-Constructor.AddAction({ priority = 9, distance = 4, mount_valid = false, encumbered_valid = true },
+TroAddAction({ priority = 9, distance = 4, mount_valid = false, encumbered_valid = true },
     "BOATDISMOUNT",
     STRINGS.ACTIONS.BOATDISMOUNT,
     function(act) return true end
@@ -176,7 +199,7 @@ Constructor.AddAction({ priority = 9, distance = 4, mount_valid = false, encumbe
 
 ----------------------------------------------------------------------------------------------------
 --活性机甲
-Constructor.AddAction(nil, "IRONTURNON", STRINGS.ACTIONS.IRONTURNON, function(act)
+TroAddAction(nil, "IRONTURNON", STRINGS.ACTIONS.IRONTURNON, function(act)
     local inst = act.invobject
     if inst and inst.components.ironmachine and not inst.components.ironmachine:IsOn() then
         inst.components.ironmachine:TurnOn()
@@ -184,7 +207,7 @@ Constructor.AddAction(nil, "IRONTURNON", STRINGS.ACTIONS.IRONTURNON, function(ac
     end
 end)
 
-Constructor.AddAction(nil, "IRONTURNOFF", STRINGS.ACTIONS.IRONTURNOFF, function(act)
+TroAddAction(nil, "IRONTURNOFF", STRINGS.ACTIONS.IRONTURNOFF, function(act)
     local inst = act.invobject
     if inst and inst.components.ironmachine and inst.components.ironmachine:IsOn() then
         inst.components.ironmachine:TurnOff()
@@ -192,7 +215,7 @@ Constructor.AddAction(nil, "IRONTURNOFF", STRINGS.ACTIONS.IRONTURNOFF, function(
     end
 end)
 
-Constructor.AddAction(nil, "CHARGE_UP", STRINGS.ACTIONS.CHARGE_UP, function(act)
+TroAddAction(nil, "CHARGE_UP", STRINGS.ACTIONS.CHARGE_UP, function(act)
     if act.doer:HasTag("ironlord") then
         return true
     end
@@ -202,7 +225,7 @@ ACTIONS.CHARGE_UP.do_not_locomote = true
 ----------------------------------------------------------------------------------------------------
 
 -- 跳船
-Constructor.AddAction({ priority = 10, distance = 4, mount_valid = false, encumbered_valid = true },
+TroAddAction({ priority = 10, distance = 4, mount_valid = false, encumbered_valid = true },
     "BOATMOUNT",
     STRINGS.ACTIONS.BOATMOUNT,
     function(act)
@@ -212,7 +235,7 @@ Constructor.AddAction({ priority = 10, distance = 4, mount_valid = false, encumb
 )
 
 -- 发射船炮
-Constructor.AddAction({ priority = 11, distance = 25 }, "BOATCANNON", STRINGS.ACTIONS.BOATCANNON, function(act)
+TroAddAction({ priority = 11, distance = 25 }, "BOATCANNON", STRINGS.ACTIONS.BOATCANNON, function(act)
     local boat = act.doer:TroGetSWBoat()
     local item = boat
         and boat:HasTag("shipwrecked_boat")
@@ -255,7 +278,7 @@ AddAction(SMELT)
 
 -- 给予、补货，target支持柜子、柜子的槽、货架
 local PigShopDefs = require("prefabs/pig_shop_defs")
-Constructor.AddAction({ priority = 10, distance = 2, mount_valid = true }, "GIVE_SHELF", STRINGS.ACTIONS.GIVE_SHELF, function(act)
+TroAddAction({ priority = 10, distance = 2, mount_valid = true }, "GIVE_SHELF", STRINGS.ACTIONS.GIVE_SHELF, function(act)
     local target = act.target
     if act.doer:HasTag("player") then
         --玩家往柜子里放东西
@@ -292,7 +315,7 @@ Constructor.AddAction({ priority = 10, distance = 2, mount_valid = true }, "GIVE
 end)
 
 -- 剪，支持workable和shearable
-Constructor.AddAction({}, "SHEAR", STRINGS.ACTIONS.SHEAR, function(act)
+TroAddAction({}, "SHEAR", STRINGS.ACTIONS.SHEAR, function(act)
     if act.target.components.shearable and act.target.components.shearable:CanBeWorked() then
         act.target.components.shearable:WorkedBy(act.doer)
         return true
@@ -308,7 +331,7 @@ end
 )
 
 -- 劈砍
-Constructor.AddAction({ priority = 10, mount_valid = true }, "HACK", STRINGS.ACTIONS.HACK, function(act)
+TroAddAction({ priority = 10, mount_valid = true }, "HACK", STRINGS.ACTIONS.HACK, function(act)
     if act.target.components.hackable and act.target.components.hackable:CanBeWorked() then
         act.target.components.hackable:WorkedBy(act.doer)
         return true
@@ -324,7 +347,7 @@ end)
 
 -- 柜子
 -- 拿取、偷、购买
-Constructor.AddAction({ priority = 5, distance = 2 }, "TAKE_SHELF", STRINGS.ACTIONS.TAKE_SHELF, function(act)
+TroAddAction({ priority = 5, distance = 2 }, "TAKE_SHELF", STRINGS.ACTIONS.TAKE_SHELF, function(act)
     local target = act.target
     if act.doer:HasTag("player") then
         --玩家
@@ -337,15 +360,15 @@ Constructor.AddAction({ priority = 5, distance = 2 }, "TAKE_SHELF", STRINGS.ACTI
             end
         else
             -- 购买、偷
-            if not act.doer.components.shopper:IsWatching(act.target) then     --偷
+            if not act.doer.components.shopper:IsWatching(act.target) then --偷
                 act.doer.components.shopper:Take(act.target)
                 return true
             end
 
             local reason, prefab_wanted
-            if TheWorld.state.isnight then                                        --晚上不能买
+            if TheWorld.state.isnight then                                    --晚上不能买
                 reason = "closed"
-            elseif not act.doer.components.shopper:CanPayFor(act.target) then     --钱不够
+            elseif not act.doer.components.shopper:CanPayFor(act.target) then --钱不够
                 prefab_wanted = act.target:HasTag("cost_one_oinc") and "oinc"
                     or act.target.components.shopped.costprefab
                 if prefab_wanted == "oinc" then
@@ -364,7 +387,7 @@ Constructor.AddAction({ priority = 5, distance = 2 }, "TAKE_SHELF", STRINGS.ACTI
                     shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH)])
                 elseif reason == "goods" then
                     local name = STRINGS.NAMES[string.upper(prefab_wanted)]
-                    assert(name)     --严格一点，货币名字还是得有的
+                    assert(name) --严格一点，货币名字还是得有的
                     shopkeeper.components.talker:Say(string.format(STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE)], name))
                 elseif reason == "closed" then
                     shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_CLOSING[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_CLOSING)])
@@ -401,7 +424,7 @@ ACTIONS.TAKE_SHELF.stroverridefn = function(act)
 end
 
 -- 剪
-Constructor.AddAction({ priority = 10, distance = 3, mount_valid = true }, "GAS", STRINGS.ACTIONS.GAS,
+TroAddAction({ priority = 10, distance = 3, mount_valid = true }, "GAS", STRINGS.ACTIONS.GAS,
     function(act)
         local pos = act.target and act.target:GetPosition() or act:GetActionPoint()
         act.invobject.components.gasser:Gas(pos)
@@ -409,7 +432,7 @@ Constructor.AddAction({ priority = 10, distance = 3, mount_valid = true }, "GAS"
     end
 )
 
-Constructor.AddAction({ priority = 10, mount_valid = true }, "PAN", STRINGS.ACTIONS.PAN,
+TroAddAction({ priority = 10, mount_valid = true }, "PAN", STRINGS.ACTIONS.PAN,
     function(act)
         if act.target.components.workable and act.target.components.workable.action == ACTIONS.PAN then
             local numworks = 1
@@ -424,7 +447,7 @@ Constructor.AddAction({ priority = 10, mount_valid = true }, "PAN", STRINGS.ACTI
         return true
     end)
 
-Constructor.AddAction({ priority = 3, instant = false, mount_valid = true, rmb = true, distance = 1, canforce = true },
+TroAddAction({ priority = 3, instant = false, mount_valid = true, rmb = true, distance = 1, canforce = true },
     "MEAL",
     STRINGS.ACTIONS.MEAL,
     function(act)
@@ -435,7 +458,7 @@ Constructor.AddAction({ priority = 3, instant = false, mount_valid = true, rmb =
     end
 )
 
-Constructor.AddAction(nil, "SNACKRIFICE", STRINGS.ACTIONS.SNACKRIFICE, function(act)
+TroAddAction(nil, "SNACKRIFICE", STRINGS.ACTIONS.SNACKRIFICE, function(act)
     local snackrificer = act.target.components.snackrificer
     if snackrificer then
         snackrificer:Snackrifice(act.doer, act.invobject)
