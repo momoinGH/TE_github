@@ -63,7 +63,7 @@ local function fn()
     inst.components.workable:SetOnFinishCallback(onhammered)
 
     inst:AddComponent("childspawner")
-    inst.components.childspawner.childname = "antman"
+    inst.components.childspawner.childname = "antman_red"
     inst.components.childspawner:SetRegenPeriod(ANTMAN_REGEN_TIME)
     inst.components.childspawner:SetSpawnPeriod(ANTMAN_RELEASE_TIME)
     inst.components.childspawner:SetMaxChildren(math.random(ANTMAN_MIN, ANTMAN_MAX))
