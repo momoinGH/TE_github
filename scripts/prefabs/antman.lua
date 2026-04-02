@@ -5,7 +5,7 @@ local assets =
     Asset("ANIM", "anim/antman_actions.zip"),
 
     Asset("ANIM", "anim/antman_translucent_build.zip"),
-    Asset("ANIM", "anim/antman_build.zip"),
+    Asset("ANIM", "anim/antman_red.zip"),
     Asset("SOUND", "sound/pig.fsb"),
 }
 
@@ -33,15 +33,43 @@ local PIG_MIN_POOP_PERIOD = 30 * .5
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 30
 
-local EAT_TYPES = {
-    { FOODTYPE.VEGGIE },
-    { FOODTYPE.SEEDS },
-    { FOODTYPE.WOOD },
-    { FOODTYPE.MEAT }
+local EAT_CONFIG = {
+    -- 1：素食 + 生食
+    [1] = {
+        { FOODTYPE.VEGGIE, FOODTYPE.RAW },
+        { FOODTYPE.VEGGIE, FOODTYPE.RAW }
+    },
+    -- 2：种子 + 生食
+    [2] = {
+        { FOODTYPE.SEEDS, FOODTYPE.RAW },
+        { FOODTYPE.SEEDS, FOODTYPE.RAW }
+    },
+    -- 3：木头 + 粗料 + 生食
+    [3] = {
+        { FOODTYPE.WOOD, FOODTYPE.ROUGHAGE, FOODTYPE.RAW },
+        { FOODTYPE.WOOD, FOODTYPE.ROUGHAGE, FOODTYPE.RAW }
+    },
+    -- 4：肉食 + 生食
+    [4] = {
+        { FOODTYPE.MEAT, FOODTYPE.RAW },
+        { FOODTYPE.MEAT, FOODTYPE.RAW }
+    },
 }
 
-local function SetEatType(inst, eattype)
-    inst.components.eater:SetDiet(EAT_TYPES[eattype])
+local function SetEatType(inst, food_type)
+    if not inst.components.eater then return end
+    if not EAT_CONFIG[food_type] then return end -- 防止无效数字
+
+    local diet = EAT_CONFIG[food_type]
+    inst.components.eater:SetDiet(diet[1], diet[2])
+end
+
+local function speech_override_fn(inst, speech)
+    if not ThePlayer or ThePlayer:HasTag("antlingual") then
+        return speech
+    else
+        return GetRandomItem(STRINGS.ANT_TALK_UNTRANSLATED)
+    end
 end
 
 local function ontalk(inst, script)
@@ -240,15 +268,18 @@ local function fn()
     inst.components.talker.offset = Vector3(0, -400, 0)
     inst.components.talker:StopIgnoringAll()
 
+    inst.speech_override_fn = speech_override_fn
+
     MakeCharacterPhysics(inst, 50, .5)
     --    MakePoisonableCharacter(inst)
 
-    inst.build = builds[math.random(#builds)]
+    --inst.build = builds[math.random(#builds)]
     inst.AnimState:SetBank("antman")
-    inst.AnimState:SetBuild(inst.build)
+    --inst.AnimState:SetBuild(inst.build)
+    inst.AnimState:SetBuild("antman_translucent_build")
     inst.AnimState:PlayAnimation("idle_loop")
     inst.AnimState:Hide("hat")
-
+--[[
     if math.random() < 0.5 then
         inst.AnimState:OverrideSymbol("antman_arm", "antman_translucent_build", "antman_arm")
         --	inst.AnimState:OverrideSymbol("antman_cheeks", "antman_build", "antman_cheeks")		
@@ -258,7 +289,7 @@ local function fn()
         --	inst.AnimState:OverrideSymbol("antman_tails", "antman_build", "antman_tail")	
         --	inst.AnimState:OverrideSymbol("antman_torso", "antman_build", "antman_torso")	
     end
-
+]]
     inst:AddTag("character")
     inst:AddTag("ant")
     inst:AddTag("insect")
@@ -301,6 +332,7 @@ local function fn()
     inst.components.combat:SetKeepTargetFunction(NormalKeepTargetFn)
     inst.components.combat:SetRetargetFunction(3, NormalRetargetFn)
 
+    MakeHauntablePanic(inst)
     MakeMediumBurnableCharacter(inst, "antman_torso")
     MakeMediumFreezableCharacter(inst, "antman_torso")
 
@@ -373,4 +405,165 @@ local function fn()
     return inst
 end
 
-return Prefab("antman", fn, assets, prefabs)
+local function fn2()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddDynamicShadow()
+    inst.entity:AddLightWatcher()
+    inst.entity:AddNetwork()
+
+    inst.DynamicShadow:SetSize(1.5, .75)
+
+    inst.Transform:SetFourFaced()
+    inst.Transform:SetScale(1.15, 1.15, 1.15)
+
+    inst:AddComponent("talker")
+    inst.components.talker.ontalk = ontalk
+    inst.components.talker.fontsize = 35
+    inst.components.talker.font = TALKINGFONT
+    --inst.components.talker.colour = Vector3(133/255, 140/255, 167/255)
+    inst.components.talker.offset = Vector3(0, -400, 0)
+    inst.components.talker:StopIgnoringAll()
+
+    inst.speech_override_fn = speech_override_fn
+
+    MakeCharacterPhysics(inst, 50, .5)
+    --    MakePoisonableCharacter(inst)
+
+    --inst.build = builds[math.random(#builds)]
+    inst.AnimState:SetBank("antman_red")
+    --inst.AnimState:SetBuild(inst.build)
+    inst.AnimState:SetBuild("antman_red")
+    inst.AnimState:PlayAnimation("idle_loop")
+    inst.AnimState:Hide("hat")
+--[[
+    if math.random() < 0.5 then
+        inst.AnimState:OverrideSymbol("antman_arm", "antman_translucent_build", "antman_arm")
+        --	inst.AnimState:OverrideSymbol("antman_cheeks", "antman_build", "antman_cheeks")		
+        --	inst.AnimState:OverrideSymbol("antman_ear", "antman_build", "antman_ear")	
+        --	inst.AnimState:OverrideSymbol("antman_head", "antman_build", "antman_head")	
+        --	inst.AnimState:OverrideSymbol("antman_leg", "antman_build", "antman_leg")	
+        --	inst.AnimState:OverrideSymbol("antman_tails", "antman_build", "antman_tail")	
+        --	inst.AnimState:OverrideSymbol("antman_torso", "antman_build", "antman_torso")	
+    end
+]]
+    inst:AddTag("character")
+    inst:AddTag("ant")
+    inst:AddTag("insect")
+    inst:AddTag("scarytoprey")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.is_complete_disguise = is_complete_disguise
+
+    inst:DoPeriodicTask(3, CheckForAporkalypse)
+
+    inst:AddComponent("locomotor")                          -- locomotor must be constructed before the stategraph
+    inst.components.locomotor.runspeed = ANTMAN_RUN_SPEED   --5
+    inst.components.locomotor.walkspeed = ANTMAN_WALK_SPEED --3
+    inst.components.locomotor:SetAllowPlatformHopping(true) -- boat hopping setup
+
+    ------------------------------------------
+    inst.eattype = math.random(4)
+    inst:AddComponent("eater")
+    SetEatType(inst, inst.eattype)
+
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.nobounce = true
+    inst.components.inventoryitem.canbepickedup = false
+    inst.components.inventoryitem:SetSinks(true)
+
+    inst.components.eater:SetCanEatHorrible()
+    --    table.insert(inst.components.eater.foodprefs, FOODTYPE.RAW)
+    --    table.insert(inst.components.eater.ablefoods, FOODTYPE.RAW)
+    inst.components.eater.strongstomach = true -- can eat monster meat!
+    ------------------------------------------
+    inst:AddComponent("combat")
+    inst.components.combat.hiteffectsymbol = "antman_torso"
+    inst.components.combat:SetDefaultDamage(ANTMAN_DAMAGE)
+    inst.components.combat:SetAttackPeriod(ANTMAN_ATTACK_PERIOD)
+    inst.components.combat:SetKeepTargetFunction(NormalKeepTargetFn)
+    inst.components.combat:SetRetargetFunction(3, NormalRetargetFn)
+
+    MakeHauntablePanic(inst)
+    MakeMediumBurnableCharacter(inst, "antman_torso")
+    MakeMediumFreezableCharacter(inst, "antman_torso")
+
+    inst:AddComponent("named")
+    inst.components.named.possiblenames = STRINGS.ANTNAMES
+    inst.components.named:PickNewName()
+
+    ------------------------------------------
+    inst:AddComponent("follower")
+    inst.components.follower.maxfollowtime = ANTMAN_LOYALTY_MAXTIME
+
+    ------------------------------------------
+    inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(ANTMAN_HEALTH)
+    ------------------------------------------
+
+    inst:AddComponent("inventory")
+
+    ------------------------------------------
+
+    inst:AddComponent("lootdropper")
+    inst.components.lootdropper:AddRandomLoot("monstermeat", 3)
+    inst.components.lootdropper:AddRandomLoot("chitin", 1)
+    inst.components.lootdropper.numrandomloot = 1
+    ------------------------------------------
+
+    inst:AddComponent("knownlocations")
+
+    ------------------------------------------
+
+    inst:AddComponent("trader")
+    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+    inst.components.trader.onaccept = OnGetItemFromPlayer
+    inst.components.trader.onrefuse = OnRefuseItem
+    ------------------------------------------
+
+    inst:AddComponent("sanityaura")
+    inst.components.sanityaura.aurafn = CalcSanityAura
+
+    ------------------------------------------
+
+    inst:AddComponent("sleeper")
+    inst.components.sleeper:SetResistance(2)
+    inst.components.sleeper:SetSleepTest(NormalShouldSleep)
+    ------------------------------------------
+
+    inst:AddComponent("inspectable")
+    inst.components.inspectable.getstatus = getstatus
+
+    inst:AddComponent("embarker")
+
+    inst:SetBrain(brain)
+    inst:SetStateGraph("SGant")
+
+    inst:ListenForEvent("suggest_tree_target", function(inst, data)
+        if data and data.tree and inst:GetBufferedAction() ~= ACTIONS.CHOP then
+            inst.tree_target = data.tree
+        end
+    end)
+    inst:ListenForEvent("attacked", OnAttacked)
+    inst:ListenForEvent("beginaporkalypse", function()
+        if not inst:IsInLimbo() then
+            TransformToWarrior(inst, false)
+        end
+    end, TheWorld)
+
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
+
+    return inst
+end
+
+return Prefab("antman", fn, assets, prefabs),
+       Prefab("antman_red", fn2, assets, prefabs)
