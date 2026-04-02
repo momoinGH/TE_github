@@ -45,9 +45,9 @@ local natureskins = {
         grass_tall_green = {
             theme = "green",
             build = "grass_tall_green",
-            skintype = "tropical",
+            skintype = "tile_rainforest",
             name = "grass_tall_green",
-            minimapicon = "grass_tall_green.png",
+            minimapicon = "grass_tall.png",
             -- extra_init_fn = function(inst, skinname)
             --     CancelNoGrowInWinter(inst)
             --     inst.AnimState:SetFilter("green")
@@ -255,6 +255,12 @@ local testfns = {
     hamlet = function(inst)
         return inst:IsInHamletArea()
     end,
+
+    -- 在雨林地皮上
+    tile_rainforest = function(inst)
+        local tile_id = TheWorld.Map:GetTileAtPoint(inst.Transform:GetWorldPosition())
+        return tile_id == WORLD_TILES.RAINFOREST or tile_id == WORLD_TILES.DEEPRAINFOREST
+    end
 }
 
 

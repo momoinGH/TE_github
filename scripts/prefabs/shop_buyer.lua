@@ -18,7 +18,6 @@ local assets =
     Asset("INV_IMAGE", "cost-400"),
     Asset("INV_IMAGE", "cost-500"),
     Asset("INV_IMAGE", "cost-nil"),
-    Asset("MINIMAP_IMAGE", "accomplishment_shrine"),
 }
 
 local function OnInteriorSpawn(inst, data)
@@ -35,7 +34,7 @@ local function fn()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.MiniMapEntity:SetIcon("accomplishment_shrine.png")
+    -- inst.MiniMapEntity:SetIcon("accomplishment_shrine.png") --货架没有自己的小地图图标
 
     MakeObstaclePhysics(inst, .25)
 
@@ -52,7 +51,7 @@ local function fn()
         return inst
     end
 
-    -- 原版是生成商品，获取数据然后删除，但是我客机需要知道商品的名字，为了方便，这里一直留着
+    -- 原版是生成商品，获取数据然后删除，但是我客机需要知道商品的名字，为了方便，这里物品一直留着
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("shop_buyer")
     inst.components.container.canbeopened = false

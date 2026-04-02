@@ -551,31 +551,7 @@ local tro_tiledefs = {
         },
     },
 
-    COBBLEROAD = { ------------石板路地皮
-        tile_range = TileRanges.HAM_LAND,
-        tile_data = {
-            ground_name = "Cobbleroad",
-            old_static_id = 33,
-        },
-        ground_tile_def = {
-            name = "ham/stoneroad",
-            noise_texture = "ham/ground_cobbleroad",
-            runsound = "dontstarve/movement/run_marble",
-            walksound = "dontstarve/movement/walk_marble",
-            snowsound = "run_ice",
-            flashpoint_modifier = 0,
-            flooring = true,
-            hard = true,
-        },
-        minimap_tile_def = {
-            name = "map_edge",
-            noise_texture = "ham/mini_ground_cobbleroad",
-        },
-        turf_def = {
-            name = "cobbleroad",
-            bank_build = "turf_ham",
-        },
-    },
+
 
     DEEPRAINFOREST = { ------------深层雨林地皮
         tile_range       = TileRanges.HAM_LAND,
@@ -625,7 +601,6 @@ local tro_tiledefs = {
             bank_build = "turf_ham",
         },
     },
-
     FIELDS = { ------------耕种地皮
         tile_range = TileRanges.HAM_LAND,
         tile_data = {
@@ -647,8 +622,31 @@ local tro_tiledefs = {
             bank_build = "turf_ham",
         },
     },
-
-    FOUNDATION = { ------------平整石地皮
+    SUBURB = { ------------苔藓地皮
+        tile_range = TileRanges.HAM_LAND,
+        tile_data = {
+            ground_name = "Suburb",
+            old_static_id = 33,
+        },
+        ground_tile_def = {
+            name = "ham/deciduous",
+            noise_texture = "ham/ground_moss",
+            runsound = "dontstarve/movement/run_dirt",
+            walksound = "dontstarve/movement/walk_dirt",
+            snowsound = "run_ice",
+        },
+        minimap_tile_def = {
+            name = "map_edge",
+            noise_texture = "ham/mini_ground_moss",
+        },
+        turf_def = {
+            name = "moss",
+            anim = "moss",
+            bank_build = "turf_ham",
+        },
+    },
+    ------------平整石地皮
+    FOUNDATION = {
         tile_range = TileRanges.HAM_LAND,
         tile_data = {
             ground_name = "Foundation",
@@ -673,31 +671,6 @@ local tro_tiledefs = {
             bank_build = "turf_ham",
         },
     },
-
-    GASRAINFOREST = { ------------毒瘴雨林地皮
-        tile_range = TileRanges.HAM_LAND,
-        tile_data = {
-            ground_name = "Gas Jungle",
-            old_static_id = 33,
-        },
-        ground_tile_def = {
-            name = "ham/jungle_deep",
-            noise_texture = "ham/ground_gasrainforest",
-            runsound = "dontstarve/movement/run_moss",
-            walksound = "dontstarve/movement/walk_moss",
-            --cannotbedug = true,
-        },
-        minimap_tile_def = {
-            name = "map_edge",
-            noise_texture = "ham/mini_ground_gasrainforest",
-        },
-        turf_def = {
-            name = "gasrainforest",
-            anim = "gasrainforest",
-            bank_build = "turf_ham",
-        },
-    },
-
     LAWN = { ------------草坪地皮
         tile_range = TileRanges.HAM_LAND,
         tile_data = {
@@ -725,27 +698,51 @@ local tro_tiledefs = {
             bank_build = "turf_ham",
         },
     },
-
-    SUBURB = { ------------苔藓地皮
+    COBBLEROAD = { ------------石板路地皮
         tile_range = TileRanges.HAM_LAND,
         tile_data = {
-            ground_name = "Suburb",
+            ground_name = "Cobbleroad",
             old_static_id = 33,
         },
         ground_tile_def = {
-            name = "ham/deciduous",
-            noise_texture = "ham/ground_moss",
-            runsound = "dontstarve/movement/run_dirt",
-            walksound = "dontstarve/movement/walk_dirt",
+            name = "ham/stoneroad",
+            noise_texture = "ham/ground_cobbleroad",
+            runsound = "dontstarve/movement/run_marble",
+            walksound = "dontstarve/movement/walk_marble",
             snowsound = "run_ice",
+            flashpoint_modifier = 0,
+            flooring = true,
+            hard = true,
         },
         minimap_tile_def = {
             name = "map_edge",
-            noise_texture = "ham/mini_ground_moss",
+            noise_texture = "ham/mini_ground_cobbleroad",
         },
         turf_def = {
-            name = "moss",
-            anim = "moss",
+            name = "cobbleroad",
+            bank_build = "turf_ham",
+        },
+    },
+    GASRAINFOREST = { ------------毒瘴雨林地皮
+        tile_range = TileRanges.HAM_LAND,
+        tile_data = {
+            ground_name = "Gas Jungle",
+            old_static_id = 33,
+        },
+        ground_tile_def = {
+            name = "ham/jungle_deep",
+            noise_texture = "ham/ground_gasrainforest",
+            runsound = "dontstarve/movement/run_moss",
+            walksound = "dontstarve/movement/walk_moss",
+            --cannotbedug = true,
+        },
+        minimap_tile_def = {
+            name = "map_edge",
+            noise_texture = "ham/mini_ground_gasrainforest",
+        },
+        turf_def = {
+            name = "gasrainforest",
+            anim = "gasrainforest",
             bank_build = "turf_ham",
         },
     },
@@ -1213,9 +1210,7 @@ for tile, def in pairs(tro_tiledefs) do
 end
 
 
--- ID 1 is for impassable
--- in ds, tile priority after the desert tile
-
+-- 注意这个虽然能调整mod地皮和原有地皮的优先级，但是也会导致mod地皮之间的优先级被修改，如果发现被覆盖了可以尝试换换位置
 ChangeTileRenderOrder(WORLD_TILES.ASH, WORLD_TILES.DESERT_DIRT, true)
 ChangeTileRenderOrder(WORLD_TILES.BEACH, WORLD_TILES.DESERT_DIRT, true)
 ChangeTileRenderOrder(WORLD_TILES.JUNGLE, WORLD_TILES.DESERT_DIRT, true)
@@ -1231,17 +1226,14 @@ ChangeTileRenderOrder(WORLD_TILES.BATTLEGROUND, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.COBBLEROAD, WORLD_TILES.WOODFLOOR, true)
 ChangeTileRenderOrder(WORLD_TILES.DEEPRAINFOREST, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.FIELDS, WORLD_TILES.MUD, true)
+ChangeTileRenderOrder(WORLD_TILES.LAWN, WORLD_TILES.WOODFLOOR, true)
 ChangeTileRenderOrder(WORLD_TILES.FOUNDATION, WORLD_TILES.WOODFLOOR, true)
 ChangeTileRenderOrder(WORLD_TILES.GASRAINFOREST, WORLD_TILES.MUD, true) --GASJUNGLE
-ChangeTileRenderOrder(WORLD_TILES.LAWN, WORLD_TILES.WOODFLOOR, true)
 ChangeTileRenderOrder(WORLD_TILES.SUBURB, WORLD_TILES.MUD, true)        --SUBURB
 ChangeTileRenderOrder(WORLD_TILES.PAINTED, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.PIGRUINS, WORLD_TILES.CHECKER, true)
 ChangeTileRenderOrder(WORLD_TILES.PLAINS, WORLD_TILES.MUD, true)
 ChangeTileRenderOrder(WORLD_TILES.RAINFOREST, WORLD_TILES.MUD, true)
-
-
--- ChangeTileRenderOrder(WORLD_TILES.BEARDRUG, WORLD_TILES.CARPET, false)
 
 -----ocean turf -------如果是联机海水就不能设置高优先级
 -- ChangeTileRenderOrder(WORLD_TILES.OCEAN_SHALLOW, WORLD_TILES.OCEAN_COASTAL, false)
