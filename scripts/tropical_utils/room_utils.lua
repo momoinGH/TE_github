@@ -293,6 +293,10 @@ function FN.CreateRoom(room, door_key_start)
 
             -- print(string.trofmt("创建内部对象：{}, key：{}", p, data.key))
 
+            if room.cityID then --城镇标签
+                p:TroAddSaveTag("city" .. room.cityID)
+            end
+
             if p:HasTag("interior_door") then
                 --门
                 local key

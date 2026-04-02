@@ -1,11 +1,37 @@
-local function FindNearbyGuard(inst, picker)
-    if not picker or picker:HasTag("sneaky") then return end
-    if not inst:IsInHamletArea() then return end
+local function FindNearbyGuard(inst, threat)
+    if not inst:HasTag("city1") and not inst:HasTag("city2") then return end --不是猪镇长的
+    if not threat or threat:HasTag("sneaky") then return end
 
-    local x, y, z = inst.Transform:GetWorldPosition()
-    for _, guard in ipairs(TheSim:FindEntities(x, y, z, 40, { "guard", "_combat" })) do
-        guard.components.combat:SuggestTarget(picker)
+    local range = 20
+    if threat:HasTag("sneaky") then
+        range = 8
     end
+
+    local playmusic = false
+    local x, y, z = inst.Transform:GetWorldPosition()
+    for _, pig in ipairs(TheSim:FindEntities(x, y, z, range, { "city_pig" })) do
+        if not pig.components.combat.target then
+            pig:DoTaskInTime(math.random() * 1, function()
+                pig:PushEvent("attacked", { attacker = threat, damage = 0, weapon = nil })
+            end)
+            playmusic = true
+        end
+    end
+
+    local tower_range = 30
+    if threat:HasTag("sneaky") then
+        tower_range = 8
+    end
+
+    for _, tower in ipairs(TheSim:FindEntities(x, y, z, tower_range, { "guard_tower" })) do
+        tower:callguards(threat)
+        playmusic = true
+    end
+
+    --玩家播放音乐
+    -- if threat.components.dynamicmusic and playmusic then
+    --     threat.components.dynamicmusic:OnStartDanger()
+    -- end
 end
 
 -- 采集猪镇的浆果会被打
@@ -28,7 +54,6 @@ for _, v in ipairs({
     end)
 end
 
-----------------------------------------------------------------------------------------------------
 local function OnRockWorked(inst, data)
     FindNearbyGuard(inst, data and data.worker)
 end
@@ -38,7 +63,7 @@ for _, v in ipairs({
     "rock_flintless",
     "rock_flintless_med",
     "rock_flintless_low",
-    
+
 }) do
     AddPrefabPostInit(v, function(inst)
         if not TheWorld.ismastersim then return end

@@ -81,9 +81,9 @@ modimport "modmain/ents_trace"            --缓存记录一些需要全局查找
 modimport "modmain/player_classified"     --为player_classified添加网络变量提供便捷
 modimport "modmain/class"                 --修复class继承上的一些bug
 modimport "modmain/cansleep_periodictask" --提供一个TroDoCanSleepPeriodicTask方法可以开启可休眠的周期任务
+modimport "modmain/save_tag.lua"          --提供一个EntityScript:TroAddSaveTag方法，该方法添加的标签会自动保存和加载
 
-
-modimport "modmain/postinit" --TODO 拆分一下
+modimport "modmain/postinit"              --TODO 拆分一下
 
 -- 文本
 local language = string.lower(GetModConfigData("language"))

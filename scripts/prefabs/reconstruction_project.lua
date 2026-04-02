@@ -76,7 +76,9 @@ local function fix(inst, fixer)
         newprop.AnimState:PlayAnimation("place")
         newprop.AnimState:PushAnimation("idle")
         if inst.cityID then
-            newprop.components.citypossession:SetCity(inst.cityID)
+            if newprop.components.citypossession then
+                newprop.components.citypossession.cityID = inst.cityID
+            end
             if newprop.citypossessionfn then
                 newprop.citypossessionfn(newprop)
             end
