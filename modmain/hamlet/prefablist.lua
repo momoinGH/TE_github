@@ -34,7 +34,7 @@ PrefabFiles = {
     "magnifying_glass",        --放大镜
     "pigbandit",               --蒙面猪
     "pigman_shopkeeper_desk",  --猪人店主桌子
-    "shop_pedestals",          --一格小货架
+    "shop_buyer",              --一格小货架
     "shelf",                   --柜子
     "shelf_slot",              --柜子上的槽位
     "trinkets_giftshop",       --玛法拉法女王的交易物

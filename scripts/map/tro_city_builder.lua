@@ -282,8 +282,8 @@ end
 local function spawn_setpiece(entities, width, height, spawners, layout, pt, city)
     local setpiece = obj_layout.LayoutForDefinition(layout)
     -- 校验布局必须为奇数尺寸，以便有一个明确的中心点
-    assert(#setpiece.ground % 2 ~= 0, "ERROR, THE SET PIECE HAS AN EVEN NUMBER OF ROWS")
-    assert(#setpiece.ground[1] % 2 ~= 0, "ERROR, THE SET PIECE HAS AN EVEN NUMBER OF COLS")
+    assert(#setpiece.ground % 2 ~= 0, "ERROR, THE SET PIECE HAS AN EVEN NUMBER OF ROWS: " .. layout .. ", ground : " .. tostring(#setpiece.ground))
+    assert(#setpiece.ground[1] % 2 ~= 0, "ERROR, THE SET PIECE HAS AN EVEN NUMBER OF COLS: " .. layout .. ", ground : " .. tostring(#setpiece.ground[1]))
 
     local reverse = math.random() < 0.5 -- 随机交换 X/Z 轴（旋转 90 度）
     local flip = math.random() < 0.5    -- 随机镜像翻转
@@ -701,7 +701,7 @@ local function place_farm(entities, width, height, spawners, nodes, city, total,
                 location.x, location.y, location.z = get_div1_tile(location.x, location.y, location.z)
 
                 -- 校验：农田不能太靠近水边
-                local place_farm = true and not SpawnUtil.IsCloseToWaterTile(location.x, location.z, 1)
+                local place_farm = not SpawnUtil.IsCloseToWaterTile(location.x, location.z, 1)
                 if place_farm then
                     local choice = set[math.random(1, #set)]
                     if spawn_setpiece(entities, width, height, spawners, choice, { x = location.x, y = location.y, z = location.z }, city) then

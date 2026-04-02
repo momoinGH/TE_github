@@ -1,4 +1,4 @@
--- The price cannot be random, as it determines the SWAP_SIGN override symbol in shop_pedestals.lua, SetCost function.
+-- The price cannot be random, as it determines the SWAP_SIGN override symbol in shop_buyer.lua, SetCost function.
 -- Available prices: [1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 100, 200, 300, 400, 500]
 -- 猪人商店的商品售卖表
 

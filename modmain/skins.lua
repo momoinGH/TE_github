@@ -1,10 +1,10 @@
+modimport("modmain/skinsapi") --调用皮肤api  来自穹
+
 -- 允许皮肤合并的物品，即便皮肤不一样也能合并
-skin_can_combine_prefabs = {
+local skin_can_combine_prefabs = {
     cutgrass = true,
     log = true
 }
-
-modimport("modmain/skinsapi") --调用皮肤api  来自穹
 
 local itemskinlist = require("datadefs/skin_item_defs").skinlist
 for prefabname, prefabdata in pairs(itemskinlist) do
@@ -18,7 +18,7 @@ end
 local natureskinlist = require("datadefs/skin_nature_defs").skinlist
 for prefabname, prefabdata in pairs(natureskinlist) do
     for skinname, skindata in pairs(prefabdata) do
-        -- PREFAB_SKINS_SHOULD_NOT_SELECT[skinname] = true --不能用扫帚扫这些皮肤
+        -- PREFAB_SKINS_SHOULD_NOT_SELECT[skinname] = true --扫帚扫不出这些皮肤，但是皮肤可以扫成原皮，原皮又不能扫回来，所以不加了
         local assetname = skindata.assetname or skindata.build or skindata.skinname
         table.insert(Assets, Asset("ANIM", "anim/" .. assetname .. ".zip"))
         MakeItemSkin(skindata.prefabname, skindata.skinname, skindata)
@@ -26,8 +26,10 @@ for prefabname, prefabdata in pairs(natureskinlist) do
 end
 
 ----------------------------------------------------------------------------------------------------
--- 根据主题查找相关皮肤
+-- 根据主题查找相关皮肤，主要用于绿色草、绿色采下的草、绿色草丛这种多个同主题皮肤的关联
 local function GetRelatedSkin(prefab, source)
+    assert(type(prefab) == "string")
+
     local skinname = source:GetSkinName()
     if not skinname then
         return nil

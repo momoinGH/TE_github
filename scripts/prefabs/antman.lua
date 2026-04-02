@@ -177,7 +177,6 @@ local function OnAttacked(inst, data)
 end
 
 local builds = { "antman_translucent_build", "antman_build" } -- {"antman_build"}
-
 local function is_complete_disguise(target)
     if not target then return false end
     return target:HasTag("has_antmask") and target:HasTag("has_antsuit") or target:HasTag("antlingual")

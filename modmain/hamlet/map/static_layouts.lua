@@ -63,7 +63,7 @@ local ground_types = {
     WORLD_TILES.COBBLEROAD or 0,
     WORLD_TILES.FOUNDATION or 0,
     WORLD_TILES.DEEPRAINFOREST or 0,
-    WORLD_TILES.LAWN or 0,
+    WORLD_TILES.LAWN or 0,              --56
     WORLD_TILES.PIGRUINS or 0,
     WORLD_TILES.LILYPOND or 0,          --58
     WORLD_TILES.GASRAINFOREST or 0,
@@ -77,167 +77,77 @@ local ground_types = {
     WORLD_TILES.FIELDS or 0
 }
 
+local function GetHamletStaticLayout(name, data, path, custom_ground_types)
+    path = path or ("map/static_layouts/" .. name)
+    data = data and deepcopy(data) or {} --data需要拷贝一份，会被修改的
+    Layouts[name] = StaticLayout.Get(path, data)
+    TroRemapLayoutTile(name, custom_ground_types or ground_types)
+end
+
+local center_position = {
+    layout_position = LAYOUT_POSITION.CENTER,
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+}
+
+local random_position = {
+    layout_position = LAYOUT_POSITION.RANDOM,
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+}
+
+
 -- 不老泉
-Layouts["pugalisk_fountain"] = StaticLayout.Get("map/static_layouts/pugalisk_fountain", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
+GetHamletStaticLayout("pugalisk_fountain", center_position)
+
 -- 农场
-Layouts["farm_1"] = StaticLayout.Get("map/static_layouts/farm_1", {
-    layout_position = LAYOUT_POSITION.RANDOM,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("farm_1", ground_types)
-Layouts["farm_2"] = StaticLayout.Get("map/static_layouts/farm_2", {
-    layout_position = LAYOUT_POSITION.RANDOM,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("farm_2", ground_types)
-Layouts["farm_3"] = StaticLayout.Get("map/static_layouts/farm_3", {
-    layout_position = LAYOUT_POSITION.RANDOM,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("farm_3", ground_types)
-Layouts["farm_4"] = StaticLayout.Get("map/static_layouts/farm_4", {
-    layout_position = LAYOUT_POSITION.RANDOM,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("farm_4", ground_types)
-Layouts["farm_5"] = StaticLayout.Get("map/static_layouts/farm_5", {
-    layout_position = LAYOUT_POSITION.RANDOM,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("farm_5", ground_types)
+GetHamletStaticLayout("farm_1", random_position)
+GetHamletStaticLayout("farm_2", random_position)
+GetHamletStaticLayout("farm_3", random_position)
+GetHamletStaticLayout("farm_4", random_position)
+GetHamletStaticLayout("farm_5", random_position)
 -- 瞭望塔
-Layouts["farm_fill_1"] = StaticLayout.Get("map/static_layouts/farm_fill_1", {
-    layout_position = LAYOUT_POSITION.RANDOM,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-Layouts["farm_fill_2"] = StaticLayout.Get("map/static_layouts/farm_fill_2", {
-    layout_position = LAYOUT_POSITION.RANDOM,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-Layouts["farm_fill_3"] = StaticLayout.Get("map/static_layouts/farm_fill_3", {
-    layout_position = LAYOUT_POSITION.RANDOM,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
+GetHamletStaticLayout("farm_fill_1", random_position)
+GetHamletStaticLayout("farm_fill_2", random_position)
+GetHamletStaticLayout("farm_fill_3", random_position)
 -- 城镇
-Layouts["cidade1"] = StaticLayout.Get("map/static_layouts/cidade1", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+GetHamletStaticLayout("cidade1", center_position, nil, {
+    [2] = WORLD_TILES.COBBLEROAD,
+    [4] = WORLD_TILES.FOUNDATION,
+    [6] = WORLD_TILES.LAWN
 })
-TroRemapLayoutTile("cidade1", {
+GetHamletStaticLayout("cidade2", center_position, nil, {
     [2] = WORLD_TILES.COBBLEROAD,
     [4] = WORLD_TILES.FOUNDATION,
     [6] = WORLD_TILES.LAWN
 })
 
-Layouts["cidade2"] = StaticLayout.Get("map/static_layouts/cidade2", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("cidade2", {
-    [2] = WORLD_TILES.COBBLEROAD,
-    [4] = WORLD_TILES.FOUNDATION,
-    [6] = WORLD_TILES.LAWN
-})
 
 -- 曼德拉丘
-Layouts["mandraketown"] = StaticLayout.Get("map/static_layouts/mandraketown", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
+GetHamletStaticLayout("mandraketown", center_position)
+
 -- 出生点
-Layouts["porkland_start"] = StaticLayout.Get("map/static_layouts/porkland_start", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
+GetHamletStaticLayout("porkland_start", center_position)
 
-Layouts["nettlegrove"] = StaticLayout.Get("map/static_layouts/nettlegrove", {
-    layout_position = LAYOUT_POSITION.RANDOM,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("nettlegrove", ground_types)
+GetHamletStaticLayout("nettlegrove", random_position)
 
-Layouts["pig_ruins_entrance_1"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_1", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("pig_ruins_entrance_1", ground_types)
+GetHamletStaticLayout("pig_ruins_entrance_1", center_position)
+GetHamletStaticLayout("pig_ruins_entrance_2", center_position)
+GetHamletStaticLayout("pig_ruins_entrance_3", center_position)
+GetHamletStaticLayout("pig_ruins_entrance_4", center_position)
+GetHamletStaticLayout("pig_ruins_entrance_5", center_position)
 
-Layouts["pig_ruins_entrance_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_2", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("pig_ruins_entrance_2", ground_types)
+GetHamletStaticLayout("pig_ruins_exit_1", center_position)
+GetHamletStaticLayout("pig_ruins_exit_2", center_position)
+GetHamletStaticLayout("pig_ruins_exit_4", center_position)
 
-Layouts["pig_ruins_entrance_3"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_3", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("pig_ruins_entrance_3", ground_types)
-
-Layouts["pig_ruins_entrance_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_4", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("pig_ruins_entrance_4", ground_types)
-Layouts["pig_ruins_entrance_5"] = StaticLayout.Get("map/static_layouts/pig_ruins_entrance_5", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("pig_ruins_entrance_5", ground_types)
-
-Layouts["pig_ruins_exit_1"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_1", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("pig_ruins_exit_1", ground_types)
-
-Layouts["pig_ruins_exit_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_2", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("pig_ruins_exit_2", ground_types)
-
-Layouts["pig_ruins_exit_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_exit_4", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
 
 -- 睡莲使用静态布局，和单机的不是同一个布局
-Layouts["lilypad"] = StaticLayout.Get("map/static_layouts/lilypad")
-TroRemapLayoutTile("lilypad", ground_types)
+GetHamletStaticLayout("lilypad")
 
-Layouts["pig_ruins_artichoke"] = StaticLayout.Get("map/static_layouts/pig_ruins_artichoke", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
+GetHamletStaticLayout("pig_ruins_artichoke", center_position)
 
-Layouts["pig_ruins_head"] = StaticLayout.Get("map/static_layouts/pig_ruins_head", {
+GetHamletStaticLayout("pig_ruins_head", {
     areas = {
         item1 = { "pig_ruins_head" },
         item2 = function()
@@ -251,123 +161,56 @@ Layouts["pig_ruins_head"] = StaticLayout.Get("map/static_layouts/pig_ruins_head"
         end,
     },
 })
-TroRemapLayoutTile("pig_ruins_head", ground_types)
 
-Layouts["pig_ruins_nocanopy"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("pig_ruins_nocanopy", ground_types)
-Layouts["pig_ruins_nocanopy_2"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_2", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("pig_ruins_nocanopy_2", ground_types)
-Layouts["pig_ruins_nocanopy_3"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_3", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("pig_ruins_nocanopy_3", ground_types)
-Layouts["pig_ruins_nocanopy_4"] = StaticLayout.Get("map/static_layouts/pig_ruins_nocanopy_4", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("pig_ruins_nocanopy_4", ground_types)
+GetHamletStaticLayout("pig_ruins_nocanopy", center_position)
+GetHamletStaticLayout("pig_ruins_nocanopy_2", center_position)
+GetHamletStaticLayout("pig_ruins_nocanopy_3", center_position)
+GetHamletStaticLayout("pig_ruins_nocanopy_4", center_position)
 
-Layouts["roc_cave"] = StaticLayout.Get("map/static_layouts/roc_cave", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-Layouts["roc_nest"] = StaticLayout.Get("map/static_layouts/roc_nest", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
+GetHamletStaticLayout("roc_cave", center_position)
+GetHamletStaticLayout("roc_nest", center_position)
 
-Layouts["cave_entranceham1"] = StaticLayout.Get("map/static_layouts/cave_entranceham1", {
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("cave_entranceham1", ground_types)
+GetHamletStaticLayout("cave_entranceham1", center_position)
+GetHamletStaticLayout("cave_entranceham2", center_position)
+GetHamletStaticLayout("cave_entranceham3", center_position)
 
-Layouts["cave_entranceham2"] = StaticLayout.Get("map/static_layouts/cave_entranceham2", {
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("cave_entranceham2", ground_types)
+GetHamletStaticLayout("ruins_exit", center_position)
 
-Layouts["cave_entranceham3"] = StaticLayout.Get("map/static_layouts/cave_entranceham3", {
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-TroRemapLayoutTile("cave_entranceham3", ground_types)
+GetHamletStaticLayout("ruins_exit2", center_position)
 
-Layouts["ruins_exit"] = StaticLayout.Get("map/static_layouts/ruins_exit", {
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-
-Layouts["ruins_exit2"] = StaticLayout.Get("map/static_layouts/ruins_exit2", {
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
-
-Layouts["antqueencave"] = StaticLayout.Get("map/static_layouts/antqueencave", {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
+GetHamletStaticLayout("antqueencave", center_position)
 
 -- 天空之椅
-Layouts["ligamundoham"] = StaticLayout.Get("map/static_layouts/ligamundoham", {
+GetHamletStaticLayout("ligamundoham", {
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})
+GetHamletStaticLayout("ligamundohamexit", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
 
-Layouts["ligamundohamexit"] = StaticLayout.Get("map/static_layouts/ligamundohamexit", {
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-})
 
-
-Layouts["city_park_1"] = StaticLayout.Get("map/static_layouts/city_park_1")
-TroRemapLayoutTile("city_park_1", ground_types)
-Layouts["city_park_2"] = StaticLayout.Get("map/static_layouts/city_park_2")
-TroRemapLayoutTile("city_park_2", ground_types)
-Layouts["city_park_3"] = StaticLayout.Get("map/static_layouts/city_park_3")
-TroRemapLayoutTile("city_park_3", ground_types)
-Layouts["city_park_4"] = StaticLayout.Get("map/static_layouts/city_park_4")
-TroRemapLayoutTile("city_park_4", ground_types)
-Layouts["city_park_5"] = StaticLayout.Get("map/static_layouts/city_park_5")
-TroRemapLayoutTile("city_park_5", ground_types)
-Layouts["city_park_6"] = StaticLayout.Get("map/static_layouts/city_park_6")
-TroRemapLayoutTile("city_park_6", ground_types)
-Layouts["city_park_7"] = StaticLayout.Get("map/static_layouts/city_park_7")
-TroRemapLayoutTile("city_park_7", ground_types)
-Layouts["city_park_8"] = StaticLayout.Get("map/static_layouts/city_park_8")
-TroRemapLayoutTile("city_park_8", ground_types)
-Layouts["city_park_9"] = StaticLayout.Get("map/static_layouts/city_park_9")
-TroRemapLayoutTile("city_park_9", ground_types)
-Layouts["city_park_10"] = StaticLayout.Get("map/static_layouts/city_park_10")
-TroRemapLayoutTile("city_park_10", ground_types)
-Layouts["pig_playerhouse_1"] = StaticLayout.Get("map/static_layouts/pig_playerhouse_1")
-TroRemapLayoutTile("pig_playerhouse_1", ground_types)
-Layouts["pig_palace_1"] = StaticLayout.Get("map/static_layouts/pig_palace_1")
-TroRemapLayoutTile("pig_palace_1", ground_types)
-Layouts["pig_cityhall_1"] = StaticLayout.Get("map/static_layouts/pig_cityhall_1")
-TroRemapLayoutTile("pig_cityhall_1", ground_types)
+GetHamletStaticLayout("city_park_1")
+GetHamletStaticLayout("city_park_2")
+GetHamletStaticLayout("city_park_3")
+GetHamletStaticLayout("city_park_4")
+GetHamletStaticLayout("city_park_5")
+GetHamletStaticLayout("city_park_6")
+GetHamletStaticLayout("city_park_7")
+GetHamletStaticLayout("city_park_8")
+GetHamletStaticLayout("city_park_9")
+GetHamletStaticLayout("city_park_10")
+GetHamletStaticLayout("pig_playerhouse_1")
+GetHamletStaticLayout("pig_palace_1")
+GetHamletStaticLayout("pig_cityhall_1")
 
 
 -- 莲花池群系
-Layouts["lilypadnovo"] = StaticLayout.Get("map/static_layouts/lilypadnovo", {
+GetHamletStaticLayout("lilypadnovo", {
     layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     areas =
     {
         objetoaleatorio = function()
