@@ -3,7 +3,8 @@ table.insert(Assets, Asset("ANIM", "anim/player_sneeze.zip"))        --花粉打
 
 ----------------------------------------------------------------------------------------------------
 
-AddReplicableComponent("hayfever")
+TroAddPlayerClassifiedNetVar(net_float, "tro_sneezetime")
+
 
 AddPlayerPostInit(function(inst)
     if not TheWorld.ismastersim then return end
@@ -25,7 +26,12 @@ AddClassPostConstruct("screens/playerhud", function(self)
     Hooks.FnDecorator(self, "SetMainCharacter", nil, function(retTab, self, maincharacter)
         if not maincharacter then return retTab end
 
-        self.inst:ListenForEvent("tro_updatepollen", function(inst, data) return self.pollenover:UpdateState(data.sneezetime) end, self.owner)
+        self.inst:ListenForEvent("tro_sneezetime", function(inst, data)
+            local sneezetime = self.owner and self.owner:TroGetPlayerClassifiedNetVar("tro_sneezetime")
+            if sneezetime then
+                self.pollenover:UpdateState(data.sneezetime)
+            end
+        end, self.owner)
 
         return retTab
     end)

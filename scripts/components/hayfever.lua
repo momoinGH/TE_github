@@ -1,5 +1,5 @@
 local function Check(inst)
-    if TheWorld.state.issummer and (TUNING.tropical.hayfever == 20 or inst.components.areaaware:CurrentlyInTag("hamlet")) then
+    if TheWorld.state.issummer and inst:IsInHamletArea() then
         inst.components.hayfever:Enable()
     else
         inst.components.hayfever:Disable()
@@ -12,10 +12,6 @@ local function onnextsneeze(self, nextsneeze)
         or nextsneeze >= 20 and 2
         or nextsneeze >= 10 and 3
         or 4
-end
-
-local function onlevel(self, level)
-    self.inst.replica.hayfever:SetLevel(level)
 end
 
 --- 哈姆雷特花粉症
@@ -33,7 +29,6 @@ local Hayfever = Class(function(self, inst)
     inst:DoTaskInTime(0, Check)
 end, nil, {
     nextsneeze = onnextsneeze,
-    level = onlevel
 })
 
 function Hayfever:GetNextSneezTime()
@@ -81,6 +76,8 @@ function Hayfever:OnUpdate(dt)
             self.nextsneeze = self.nextsneeze + (dt * 0.9)
         end
     end
+
+    self.inst:TroSetPlayerClassifiedNetVar("tro_sneezetime", self.nextsneeze)
 end
 
 function Hayfever:OnSave()
@@ -114,15 +111,16 @@ function Hayfever:OnProgress()
 end
 
 function Hayfever:Enable()
-    if not self.hayfeverimune then
-        if not self.enabled then
-            self.inst.components.talker:Say(GetString(self.inst.prefab, "ANNOUNCE_HAYFEVER"))
-        end
-
-        self.enabled = true
-
-        self.inst:StartUpdatingComponent(self)
+    if self.inst:HasTag("plantkin") then
+        return --植物人免疫
     end
+
+    if not self.enabled then
+        self.inst.components.talker:Say(GetString(self.inst.prefab, "ANNOUNCE_HAYFEVER"))
+    end
+
+    self.enabled = true
+    self.inst:StartUpdatingComponent(self)
 end
 
 function Hayfever:Disable()

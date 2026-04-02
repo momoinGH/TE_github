@@ -29,7 +29,7 @@ local function OnUse(inst, doer, target)
     return true
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
     inst.entity:AddNetwork()
     local trans = inst.entity:AddTransform()
@@ -45,7 +45,9 @@ local function fn(Sim)
 
     inst:AddTag("ballpein_hammer")
 
-    inst:AddComponent("tro_componentaction"):InitUSEITEM(TargetCheckFn, "tap", "DISLODGE", OnUse)
+    inst:AddComponent("tro_componentaction")
+    inst.components.tro_componentaction:InitUSEITEM(TargetCheckFn, "tap", "DISLODGE", OnUse)
+    inst.components.tro_componentaction:InitEQUIPPED(TargetCheckFn, "tap", "DISLODGE", OnUse)
 
     inst.entity:SetPristine()
 

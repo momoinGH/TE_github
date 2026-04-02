@@ -8,9 +8,9 @@
 很多地方通过地皮来判断玩家在什么区域，最好换成inst:IsInxxArea()方法
 
 
-beginaporkalypse
-endaporkalypse
-
-考古不能用Dislodgeable
 
 
+验证花粉症
+验证大雾
+验证大蛇
+验证远古先驱
