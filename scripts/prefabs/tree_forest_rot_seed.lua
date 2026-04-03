@@ -99,7 +99,7 @@ local function test_ground(inst, pt)
     local ground_OK = tiletype ~= WORLD_TILES.ROCKY and tiletype ~= WORLD_TILES.ROAD and tiletype ~= WORLD_TILES.IMPASSABLE and
         tiletype ~= WORLD_TILES.MAGMAFIELD and
         tiletype ~= WORLD_TILES.UNDERROCK and tiletype ~= WORLD_TILES.WOODFLOOR and tiletype ~= WORLD_TILES.SAND and
-        tiletype ~= WORLD_TILES.CARPET and tiletype ~= WORLD_TILES.CHECKER and tiletype < WORLD_TILES.UNDERGROUND and
+        tiletype ~= WORLD_TILES.CARPET and tiletype ~= WORLD_TILES.CHECKER and tiletype < GROUND.UNDERGROUND and
         tiletype ~= WORLD_TILES.ASH and tiletype ~= WORLD_TILES.VOLCANO and tiletype ~= WORLD_TILES.VOLCANO_ROCK and
         tiletype ~= WORLD_TILES.BRICK_GLOW
 

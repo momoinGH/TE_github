@@ -10,7 +10,6 @@ local PUGALISK_MELEE_RANGE = 6
 local PUGALISK_DAMAGE = 200
 local PUGALISK_TARGET_DIST = 40
 local PUGALISK_TAIL_TARGET_DIST = 6
-local PUGALISK_RUINS_PILLAR_WORK = 3
 
 local assets =
 {
@@ -68,56 +67,42 @@ local function redirecthealth(inst, amount, overtime, cause, ignore_invincible, 
     end
 end
 
-
+local attack_one_tags = { "character", "animal", "monster" }
+local notags = { "FX", "NOCLICK", "INLIMBO", "pugalisk" }
 local function RetargetTailFn(inst)
     local targetDist = PUGALISK_TAIL_TARGET_DIST
-    local notags = { "FX", "NOCLICK", "INLIMBO" }
-    return FindEntity(inst, targetDist, function(guy)
-        return (guy:HasTag("character") or guy:HasTag("animal") or guy:HasTag("monster") and not guy:HasTag("pugalisk"))
-            and inst.components.combat:CanTarget(guy)
-    end, nil, notags)
+    return FindEntity(inst, targetDist, function(guy) return inst.components.combat:CanTarget(guy) end, nil, notags, attack_one_tags)
 end
+
 
 local function RetargetFn(inst)
     local targetDist = PUGALISK_TARGET_DIST
-
-    local notags = { "FX", "NOCLICK", "INLIMBO" }
-    return FindEntity(inst, targetDist, function(guy)
-        return (guy:HasTag("character") or guy:HasTag("animal") or guy:HasTag("monster") and not guy:HasTag("pugalisk"))
-            and inst.components.combat:CanTarget(guy)
-    end, nil, notags)
+    return FindEntity(inst, targetDist, function(guy) return inst.components.combat:CanTarget(guy) end, nil, notags, attack_one_tags)
 end
 
 local function OnHit(inst, attacker)
-    local host = inst
-    if inst.host then
-        host = inst.host
-    end
-
-    if attacker and (not inst.target or inst.target:HasTag("player")) then --    if attacker and not attacker:HasTag("player") then
-        host.target = attacker
-        if attacker and host.components.combat then
-            host.components.combat:SetTarget(attacker)
-        end
+    local host = inst.host or inst
+    if attacker then
+        host.components.combat:SuggestTarget(attacker)
     end
 end
 
-local function segmentfn(Sim)
+local function segmentfn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
-    local s = 1.5
-    trans:SetScale(s, s, s)
+    inst.Transform:SetScale(1.5, 1.5, 1.5)
     inst.Transform:SetEightFaced()
 
     inst.AnimState:SetFinalOffset(-10)
 
-    anim:SetBank("giant_snake")
-    anim:SetBuild("python_test")
-    anim:PlayAnimation("test_segment")
+    inst.AnimState:SetBank("giant_snake")
+    inst.AnimState:SetBuild("python_test")
+    inst.AnimState:PlayAnimation("test_segment")
 
     inst:AddTag("pugalisk")
     inst:AddTag("groundpound_immune")
@@ -131,19 +116,14 @@ local function segmentfn(Sim)
 
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(0)
-    --    inst.components.combat.hiteffectsymbol = "body" --"test_segments"-- "wormmovefx"
+    inst.components.combat.hiteffectsymbol = "test_segments"
     inst.components.combat.onhitfn = OnHit
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(10000)
     inst.components.health.destroytime = 5
     inst.components.health.redirect = redirecthealth
-    --inst.components.health:StartRegen(1, 2)
-    --[[
-    inst:ListenForEvent("death", function(inst, data)
-        onhostdeath(inst.playerpickerproxy.host)
-    end)
-]]
+
     inst:AddComponent("inspectable")
     inst.components.inspectable.nameoverride = "pugalisk"
     inst.name = STRINGS.NAMES.PUGALISK
@@ -193,27 +173,26 @@ local function segment_deathfn(segment)
     fx.Transform:SetPosition(pt.x, pt.y + 2 + math.random() * 2, pt.z)
 end
 
-local function bodyfn(Sim)
+local function bodyfn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     inst.Transform:SetSixFaced()
 
     local s = 1.5
-    trans:SetScale(s, s, s)
+    inst.Transform:SetScale(s, s, s)
 
     MakeObstaclePhysics(inst, 1)
 
-    anim:SetBank("giant_snake")
-    anim:SetBuild("python_test")
-    anim:PlayAnimation("dirt_static")
-
-    anim:Hide("broken01")
-    anim:Hide("broken02")
-
+    inst.AnimState:SetBank("giant_snake")
+    inst.AnimState:SetBuild("python_test")
+    inst.AnimState:PlayAnimation("dirt_static")
+    inst.AnimState:Hide("broken01")
+    inst.AnimState:Hide("broken02")
     inst.AnimState:SetFinalOffset(0)
 
     inst.name = STRINGS.NAMES.PUGALISK
@@ -242,18 +221,12 @@ local function bodyfn(Sim)
     inst.components.health.destroytime = 5
     inst.components.health.redirect = redirecthealth
 
-
-    inst:ListenForEvent("death", function(inst, data)
-
-    end)
-
     ------------------
 
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(PUGALISK_DAMAGE)
     inst.components.combat.playerdamagepercent = 0.75
-
-    --   inst.components.combat.hiteffectsymbol = "hit_target"
+    inst.components.combat.hiteffectsymbol = "hit_target"
     inst.components.combat.onhitfn = OnHit
 
     ------------------------------------------
@@ -289,13 +262,6 @@ local function bodyfn(Sim)
             inst.exitpt.AnimState:SetBuild("python_test")
             inst.exitpt.AnimState:PlayAnimation("dirt_static")
 
-            --                    local player = GetClosestInstWithTag("player", inst, SHAKE_DIST)
-            --                    if player then
-            --					    player:ShakeCamera(CAMERASHAKE.SIDE, 1, .02, .25)
-            --                        player.components.playercontroller:ShakeCamera(inst, "VERTICAL", 0.5, 0.03, 2, SHAKE_DIST)
-            --                    end
-
-            --TheCamera:Shake("VERTICAL", 0.5, 0.05, 0.1)
             inst.exitpt.Physics:SetActive(true)
             inst.exitpt.components.groundpounder:GroundPound()
 
@@ -303,8 +269,7 @@ local function bodyfn(Sim)
             inst.SoundEmitter:SetParameter("emerge", "start", math.random())
 
             if inst.host then
-                inst.host:PushEvent("bodycomplete",
-                    { pos = Vector3(inst.exitpt.Transform:GetWorldPosition()), angle = inst.angle })
+                inst.host:PushEvent("bodycomplete", { pos = Vector3(inst.exitpt.Transform:GetWorldPosition()), angle = inst.angle })
             end
         end
     end)
@@ -313,7 +278,7 @@ local function bodyfn(Sim)
         if inst.host then
             inst.host:PushEvent("bodyfinished", { body = inst })
         end
-        inst:Remove()
+        inst:DoTaskInTime(0, inst.Remove)
     end)
 
     inst.persists = false
@@ -328,26 +293,26 @@ end
 
 --===========================================================
 
-local function tailfn(Sim)
+local function tailfn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     inst.Transform:SetSixFaced()
 
-    local s = 1.5
-    trans:SetScale(s, s, s)
+    inst.Transform:SetScale(1.5, 1.5, 1.5)
 
     MakeObstaclePhysics(inst, 1)
 
-    anim:SetBank("giant_snake")
-    anim:SetBuild("python_test")
-    anim:PlayAnimation("tail_idle_loop", true)
+    inst.AnimState:SetBank("giant_snake")
+    inst.AnimState:SetBuild("python_test")
+    inst.AnimState:PlayAnimation("tail_idle_loop", true)
 
-    anim:Hide("broken01")
-    anim:Hide("broken02")
+    inst.AnimState:Hide("broken01")
+    inst.AnimState:Hide("broken02")
 
     inst.AnimState:SetFinalOffset(0)
 
@@ -357,7 +322,6 @@ local function tailfn(Sim)
     ------------------------------------------
 
     inst:AddTag("tail")
-    --inst:AddTag("epic")
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("pugalisk")
@@ -385,20 +349,14 @@ local function tailfn(Sim)
     inst.components.combat:SetDefaultDamage(PUGALISK_DAMAGE / 2)
     inst.components.combat.playerdamagepercent = 0.5
     inst.components.combat:SetRange(PUGALISK_MELEE_RANGE, PUGALISK_MELEE_RANGE)
-    --    inst.components.combat.hiteffectsymbol = "hit_target" -- "wormmovefx"
+    inst.components.combat.hiteffectsymbol = "hit_target" -- "wormmovefx"
     inst.components.combat:SetAttackPeriod(PUGALISK_ATTACK_PERIOD / 2)
     inst.components.combat:SetRetargetFunction(0.5, RetargetTailFn)
     inst.components.combat.onhitfn = OnHit
 
     ------------------------------------------
-
     inst:AddComponent("locomotor")
-
-    ------------------------------------------
-
     inst:AddComponent("lootdropper")
-
-    ------------------------------------------
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.nameoverride = "pugalisk"
@@ -417,19 +375,13 @@ end
 
 --===========================================================
 
-local function keeptargetfn(inst, target)
-    return target
-        and target.components.combat
-        and target.components.health
-        and not target.components.health:IsDead()
-end
-
 local function CalcSanityAura(inst, observer)
     return -TUNING.SANITYAURA_LARGE
 end
 
 local function onhostdeath(inst)
-    --    TheCamera:Shake("FULL",3, 0.05, .2)
+    ShakeAllCameras(CAMERASHAKE.FULL, 3, 0.05, .2, inst, 40)
+
     local mb = inst.components.multibody
     for i, body in ipairs(mb.bodies) do
         if body and body.components.health then
@@ -437,58 +389,34 @@ local function onhostdeath(inst)
         end
     end
     if mb.tail and mb.tail.components.health then
-        mb.tail:Remove() -- mb.tail.components.health:Kill()
+        mb.tail:Remove()
     end
 
-    if inst.home and inst.home.reactivate then
-        inst.home.reactivate(inst.home)
-    end
     mb:Kill()
 
     local ent = TheSim:FindFirstEntityWithTag("pugalisk_trap_door")
     if ent and ent.reactivate then
-        ent.reactivate(ent)
+        ent:reactivate()
     end
 end
 
-local function OnSave(inst, data)
-    local refs = {}
-    if inst.home then
-        data.home = inst.home.GUID
-        table.insert(refs, inst.home.GUID)
-    end
-    return refs
-end
-
-local function OnLoadPostPass(inst, newents, data)
-    if data and data.home then
-        if newents and newents[data.home] then
-            local home = newents[data.home].entity or inst
-            if home then
-                --           print("FOUND HOME, RELOADING IT")
-                inst.home = home
-            end
-        end
-    end
-end
-
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     inst.Transform:SetSixFaced()
 
     MakeObstaclePhysics(inst, 1)
 
-    local s = 1.5
-    trans:SetScale(s, s, s)
+    inst.Transform:SetScale(1.5, 1.5, 1.5)
 
-    anim:SetBank("giant_snake")
-    anim:SetBuild("python_test") --"python"
-    anim:PushAnimation("head_idle_loop", true)
+    inst.AnimState:SetBank("giant_snake")
+    inst.AnimState:SetBuild("python_test") --"python"
+    inst.AnimState:PushAnimation("head_idle_loop", true)
 
     inst.AnimState:SetFinalOffset(0)
 
@@ -510,32 +438,20 @@ local function fn(Sim)
     if not TheWorld.ismastersim then
         return inst
     end
-    ------------------------------------------
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura
-
-    ------------------------------------------
 
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(PUGALISK_DAMAGE)
     inst.components.combat.playerdamagepercent = 0.75
     inst.components.combat:SetRange(TUNING.BEARGER_ATTACK_RANGE, PUGALISK_MELEE_RANGE)
-    --    inst.components.combat.hiteffectsymbol = "hit_target" -- "wormmovefx"
+    inst.components.combat.hiteffectsymbol = "hit_target" -- "wormmovefx"
     inst.components.combat:SetAttackPeriod(PUGALISK_ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(0.5, RetargetFn)
     inst.components.combat.onhitfn = OnHit
 
-    ------------------------------------------
-
     inst:AddComponent("lootdropper")
-
-    ------------------------------------------
-    --[[
-    inst:AddComponent("sleeper")
-    inst.components.sleeper:SetResistance(4)
-    ]]
-    ------------------------------------------
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.nameoverride = "pugalisk"
@@ -551,10 +467,7 @@ local function fn(Sim)
     ------------------------------------------
 
     inst:AddComponent("knownlocations")
-    ------------------------------------------
-
     inst:AddComponent("locomotor")
-
     ------------------------------------------
 
     inst:AddComponent("groundpounder")
@@ -572,19 +485,14 @@ local function fn(Sim)
 
     ------------------------------------------
 
-    inst:ListenForEvent("healthdelta", function(inst, data)
-        --        print("TOOK DAMAGE",inst.components.health.currenthealth)
-    end)
-
     inst:ListenForEvent("bodycomplete", function(inst, data)
         local pt = pu.findsafelocation(data.pos, data.angle / DEGREES)
         inst.Transform:SetPosition(pt.x, 0, pt.z)
         inst:DoTaskInTime(0.75, function()
-            --            local player = GetClosestInstWithTag("player", inst, SHAKE_DIST)
-            --            if player then
-            --                player:ShakeCamera(CAMERASHAKE.SIDE, 1, .02, .25)			
-            --                player.components.playercontroller:ShakeCamera(inst, "VERTICAL", 0.3, 0.03, 1, SHAKE_DIST)
-            --            end
+            local player = GetClosestInstWithTag("player", inst, SHAKE_DIST)
+            if player then
+                player:ShakeCamera(CAMERASHAKE.FULL, 0.3, 0.03, 1)
+            end
             inst.components.groundpounder:GroundPound()
 
             inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/pugalisk/emerge", "emerge")
@@ -598,22 +506,12 @@ local function fn(Sim)
         inst.components.multibody:RemoveBody(data.body)
     end)
 
-    inst:ListenForEvent("death", function(inst, data)
-        onhostdeath(inst)
-    end)
-
-    inst.spawntask = inst:DoTaskInTime(0, function()
-        inst.spawned = true
-    end)
+    inst:ListenForEvent("death", onhostdeath)
 
     inst:SetStateGraph("SGpugalisk_head")
 
     local brain = require "brains/pugalisk_headbrain"
     inst:SetBrain(brain)
-
-    inst.OnSave = OnSave
-    --inst.OnLoad = onload
-    inst.OnLoadPostPass = OnLoadPostPass
 
     return inst
 end
@@ -643,11 +541,12 @@ local function onfinishcallback(inst, worker)
 end
 
 
-local function corpsefn(Sim)
+local function corpsefn()
     local inst = CreateEntity()
+
     local trans = inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     local minimap = inst.entity:AddMiniMapEntity()
@@ -655,8 +554,7 @@ local function corpsefn(Sim)
 
     inst.Transform:SetSixFaced()
 
-    local s = 1.5
-    trans:SetScale(s, s, s)
+    trans:SetScale(1.5, 1.5, 1.5)
 
     MakeObstaclePhysics(inst, 1)
 
@@ -670,16 +568,15 @@ local function corpsefn(Sim)
         return inst
     end
 
-    inst:AddComponent("lootdropper")
-
     inst:AddComponent("inspectable")
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.DIG)
     inst.components.workable:SetWorkLeft(1)
+    inst.components.workable:SetOnFinishCallback(onfinishcallback)
+
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({ "pugalisk_skull", "bonestaff_blueprint" })
-    inst.components.workable:SetOnFinishCallback(onfinishcallback)
 
     return inst
 end

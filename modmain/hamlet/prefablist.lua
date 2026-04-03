@@ -286,7 +286,7 @@ PrefabFiles = {
     "pigghost",           --远古猪魂
     "watercress",         --海豆瓣菜
     "roe_fish",           --鱼
-    "giantgrubspawner"    --生物生成器
-
+    "giantgrubspawner",   --生物生成器
+    "hamlet_plantables", --可种植的植物，dug_
 
 }

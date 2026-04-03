@@ -66,6 +66,7 @@ Assets =
     Asset("ANIM", "anim/player_actions_machete.zip"),   --砍伐动画，有动画hack_pre、hack_loop、hack_pst
     Asset("ANIM", "anim/player_actions_telescope.zip"), --望远镜，有动画telescope、telescope_pst
 
+
     Asset("ANIM", "anim/ripple_build.zip"),             --水里波纹，用于物品浮在水面时
 
     --TODO 这几个纹理怎么使用

@@ -19,7 +19,6 @@ modimport "modmain/hamlet/prefabs/molehat.lua" --鼹鼠帽
 modimport "modmain/hamlet/prefabs/player.lua"
 modimport "modmain/hamlet/prefabs/world.lua"
 modimport "modmain/hamlet/prefabs/forest.lua"
-modimport "modmain/hamlet/prefabs/player_classified.lua" --玩家网络变量
 modimport "modmain/hamlet/prefabs/statueruins.lua" --联机洞穴雕像也能考古
 
 

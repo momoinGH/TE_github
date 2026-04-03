@@ -18,7 +18,7 @@ local function KnockbackOnHit(inst, target, radius, attack_knockback, strength_m
         target:PushEvent("knockback",
             { knocker = inst, radius = radius, strengthmult = strength_mult, forcelanded = force_land })
     else
-        Knockback(inst, target, radius, attack_knockback)
+        -- Knockback(inst, target, radius, attack_knockback)
     end
 end
 

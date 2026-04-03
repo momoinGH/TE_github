@@ -3,6 +3,8 @@ table.insert(Assets, Asset("ATLAS", "images/overlays/fog.xml"))
 
 
 ----------------------------------------------------------------------------------------------------
+TroAddPlayerClassifiedNetVar(net_bool, "tro_fog", "tro_fogchange") --是否在雾气中
+
 
 AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then return end

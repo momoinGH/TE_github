@@ -95,7 +95,7 @@ local function IsValidGround(pos)
 
     if ground and pos then
         local tile = ground.Map:GetTileAtPoint(pos.x, pos.y, pos.z)
-        return tile ~= WORLD_TILES.IMPASSABLE and tile < WORLD_TILES.UNDERGROUND
+        return tile ~= WORLD_TILES.IMPASSABLE and tile < GROUND.UNDERGROUND
     end
 
     return false

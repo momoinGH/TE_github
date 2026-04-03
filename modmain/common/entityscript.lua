@@ -120,6 +120,13 @@ function EntityScript:TroIsSummer()
     return TheWorld.Map:TroIsSummerAtPoint(self.Transform:GetWorldPosition())
 end
 
+function EntityScript:TroIsRiding()
+    if self.components.rider then
+        return self.components.rider:IsRiding()
+    end
+    return self.replica.rider and self.replica.rider:IsRiding()
+end
+
 ----------------------------------------------------------------------------------------------------
 
 -- 获取玩家身上的小船
@@ -145,10 +152,7 @@ function EntityScript:TroInHamletFog()
         return self:TroGetPlayerClassifiedNetVar("tro_fog")
     end
     --不是玩家
-    if GLOBAL.TroInHamlteFogImple then
-        return TroInHamlteFogImple(self)
-    end
-    return false
+    return TroInHamlteFogImple(self)
 end
 
 ----------------------------------------------------------------------------------------------------

@@ -31,7 +31,12 @@ local PollenOver = Class(UIAnim, function(self, owner)
 end)
 
 function PollenOver:UpdateState(sneezetime)
-    self.lastsneezetime = sneezetime
+    if sneezetime < 0 then
+        self.lastsneezetime = nil --不打喷嚏了
+    else
+        self.lastsneezetime = sneezetime
+    end
+
     if self.lastsneezetime and self.lastsneezetime < 120 then
         self:StartUpdating()
     end
@@ -84,6 +89,7 @@ function PollenOver:OnUpdate(dt)
 
     if self.level > 0 or self.level2 > 0 then
         self:Show()
+        -- 好像有点儿一闪一闪的，是不是这里SetTint贴图更新太快了？
         self.bg:SetTint(1, 1, 1, self.level)
         self.bg2:SetTint(1, 1, 1, self.level2)
     else

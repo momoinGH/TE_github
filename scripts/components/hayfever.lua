@@ -24,6 +24,8 @@ local Hayfever = Class(function(self, inst)
     self.nextsneeze    = self:GetNextSneezTimeInitial() --下一次打喷嚏时间
     self.level         = 0                              --一共四个等级
 
+    self.update_task   = nil
+
     inst:WatchWorldState("issummer", Check)
     inst:ListenForEvent("changearea", Check)
     inst:DoTaskInTime(0, Check)
@@ -46,13 +48,15 @@ function Hayfever:SetNextSneezeTime(newtime)
 end
 
 function Hayfever:CanSneeze()
+    if self.inst:HasTag("has_gasmask") then
+        return false
+    end
+
     local x, y, z = self.inst.Transform:GetWorldPosition()
-    return self.inst:HasTag("has_gasmask")
-        and not self.inst:HasTag("has_hayfeverhat")
-        and #TheSim:FindEntities(x, y, z, 30, { "prevents_hayfever" }) <= 0 --工作的摆动风扇旁边
+    return #TheSim:FindEntities(x, y, z, 30, { "prevents_hayfever" }) <= 0 --工作的摆动风扇旁边
 end
 
-function Hayfever:OnUpdate(dt)
+local function Update(inst, self, dt)
     if self:CanSneeze() then
         if self.nextsneeze <= 0 then
             if not self.wantstosneeze then
@@ -66,9 +70,13 @@ function Hayfever:OnUpdate(dt)
                 end
 
                 self.wantstosneeze = true
-                self.inst:PushEvent("sneeze")
+            end
+
+            if self.wantstosneeze then
+                self.inst:PushEvent("sneeze") --不把这个喷嚏打了就一直推送！
             end
         else
+            self.wantstosneeze = false
             self.nextsneeze = self.nextsneeze - dt
         end
     else
@@ -101,15 +109,6 @@ function Hayfever:OnLoad(data, newents)
     end
 end
 
-function Hayfever:OnProgress()
-    if self.enabled then
-        self:SetNextSneezeTime(self:GetNextSneezTimeInitial())
-    end
-
-    self.enabled = false
-    self.inst:StopUpdatingComponent(self)
-end
-
 function Hayfever:Enable()
     if self.inst:HasTag("plantkin") then
         return --植物人免疫
@@ -120,18 +119,22 @@ function Hayfever:Enable()
     end
 
     self.enabled = true
-    self.inst:StartUpdatingComponent(self)
+    self.update_task = self.inst:DoPeriodicTask(0.2, Update, 0.2, self, 0.2)
 end
 
 function Hayfever:Disable()
     if self.enabled then
+        self.inst:TroSetPlayerClassifiedNetVar("tro_sneezetime", -1)
         self.inst.components.talker:Say(GetString(self.inst.prefab, "ANNOUNCE_HAYFEVER_OFF"))
 
         self:SetNextSneezeTime(self:GetNextSneezTimeInitial())
     end
 
     self.enabled = false
-    self.inst:StopUpdatingComponent(self)
+    if self.update_task then
+        self.update_task:Cancel()
+        self.update_task = nil
+    end
 end
 
 function Hayfever:GetDebugString()
@@ -155,7 +158,7 @@ function Hayfever:DoSneezeEffects()
     if itemstodrop > 0 then
         local findItems = self.inst.components.inventory:FindItems(function(item) return not item:HasTag("nosteal") end)
         for i = 1, itemstodrop do
-            for i = 1, itemstodrop do
+            for j = 1, itemstodrop do
                 if #findItems > 0 then
                     local itemnum = math.random(1, #findItems)
                     local item = findItems[itemnum]

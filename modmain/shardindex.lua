@@ -17,11 +17,13 @@ local function OnWorldEntsSpawned()
 
     -- 给猪镇上的东西加个标记，表示属于猪人的
     for guid, ent in pairs(Ents) do
-        local x, y, z = ent.Transform:GetWorldPosition()
-        if TheWorld.Map:FindVisualNodeAtPoint(x, y, z, "City1") then
-            ent:TroAddSaveTag("city1") --用这个标签替代citypossession组件
-        elseif TheWorld.Map:FindVisualNodeAtPoint(x, y, z, "City2") then
-            ent:TroAddSaveTag("city2")
+        if ent.Transform then
+            local x, y, z = ent.Transform:GetWorldPosition()
+            if TheWorld.Map:FindVisualNodeAtPoint(x, y, z, "City1") then
+                ent:TroAddSaveTag("city1") --用这个标签替代citypossession组件
+            elseif TheWorld.Map:FindVisualNodeAtPoint(x, y, z, "City2") then
+                ent:TroAddSaveTag("city2")
+            end
         end
     end
 end
