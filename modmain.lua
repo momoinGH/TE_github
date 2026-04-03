@@ -5162,9 +5162,11 @@ AddComponentPostInit("inventoryitem", function(self)
     end
 
     function self:TakeOffShelf()
-        local shelf_slot = SpawnPrefab("shelf_slot")
-        shelf_slot.components.inventoryitem:PutOnShelf(self.inst.bookshelf, self.inst.bookshelfslot)
-        shelf_slot.components.shelfer:SetShelf(self.inst.bookshelf, self.inst.bookshelfslot)
+        if self.inst.bookshelf then
+            local shelf_slot = SpawnPrefab("shelf_slot")
+            shelf_slot.components.inventoryitem:PutOnShelf(self.inst.bookshelf, self.inst.bookshelfslot)
+            shelf_slot.components.shelfer:SetShelf(self.inst.bookshelf, self.inst.bookshelfslot)
+        end
 
         self.inst:RemoveTag("bookshelfed")
         self.inst.bookshelfslot = nil
