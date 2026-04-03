@@ -47,7 +47,7 @@ description = en_zh_zht(
 )
 
 author = "Vagner da Rocha Santos."
-version = "3.9.5"
+version = "3.9.7"
 forumthread = ""
 api_version = 10
 priority = -20
