@@ -358,3 +358,12 @@ for action_id, data in pairs(ACTIONS) do
         end
     end
 end
+
+local OldSpawnPrefabFromSim = SpawnPrefabFromSim
+GLOBAL.SpawnPrefabFromSim = function(name, ...)
+    local prefab = OldSpawnPrefabFromSim(name, ...)
+    if prefab == -1 then
+        TroErrorHandle(string.trofmt("预制件{}生成失败", name), false, "warn")
+    end
+    return prefab
+end

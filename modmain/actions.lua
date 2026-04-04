@@ -33,8 +33,7 @@ TroAddAction(nil, "STOREOPEN", STRINGS.ACTIONS.STOREOPEN, function(act)
         act.target.components.store:OpenStore(act.doer)
     end
 
-    act.doer._isopening:set(true)
-    act.doer._isopening:set_local(true)
+    act.doer:AddTag("tro_store_isopening")
     act.target.NetEvt_Requested:push()
     return true
 end

@@ -87,19 +87,18 @@ function SpawnFrogRain(inst)
     local count = 0
     local max = 5
 
-    inst.frograintask = inst:DoPeriodicTask(0.2,
-        function()
-            local objs = SpawnRandomInRange(inst, "frog_poison", 1, 4, 8, 35)
+    inst.frograintask = inst:DoPeriodicTask(0.2, function()
+        local objs = SpawnRandomInRange(inst, "frog_poison", 1, 4, 8, 35)
 
-            for k, v in pairs(objs) do
-                v.sg:GoToState("fall")
-            end
-
-            count = count + 1
-            if count >= max then
-                cancelrain()
-            end
+        for k, v in pairs(objs) do
+            v.sg:GoToState("fall")
         end
+
+        count = count + 1
+        if count >= max then
+            cancelrain()
+        end
+    end
     )
 end
 
@@ -223,7 +222,7 @@ end
 
 local states =
 {
-    State{
+    State {
         name = "idle",
         tags = { "idle", "canrotate", "canslide" },
         onenter = function(inst)
@@ -231,7 +230,7 @@ local states =
         end,
     },
 
-    State{
+    State {
         name = "appear",
         tags = { "busy" },
         onenter = function(inst)
@@ -257,7 +256,7 @@ local states =
 
     },
 
-    State{
+    State {
         name = "taunt",
         tags = { "busy" },
         onenter = function(inst)
@@ -279,7 +278,7 @@ local states =
         },
     },
 
-    State{
+    State {
         name = "summon",
         tags = { "busy" },
         onenter = function(inst)

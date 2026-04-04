@@ -9,7 +9,7 @@ local assets =
 local prefabs =
 {
     "firerain",
-    "gaze_beam2",
+    "gaze_beam",
 }
 
 local VOLCANOSTAFF_USES = 5

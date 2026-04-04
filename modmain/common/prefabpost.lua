@@ -35,7 +35,6 @@ modimport "modmain/common/components/teleporter.lua"
 
 
 modimport "modmain/common/prefabs/oceanfishdef" --定义新的鱼
-modimport "modmain/common/prefabs/player"
 modimport "modmain/common/prefabs/world"
 modimport("modmain/common/prefabs/guard_corp")               --守卫保护作物、高草转化、草大风摇晃？
 modimport("modmain/common/prefabs/player_vision_post")       --四眼镜、蝙蝠帽所用

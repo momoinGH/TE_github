@@ -1,3 +1,5 @@
+-- TODO 废掉这个文件
+
 local StoreScreen = require "screens/storescreen"
 local ModStoreData = require "ModStoreData"
 local CoinsPrefab, GoodsPrefab = ModStoreData.CoinsPrefab, ModStoreData.GoodsPrefab
@@ -46,7 +48,7 @@ local function OpenStoreFunction1(inst)
     end
 
     inst:DoTaskInTime(0.1, function()
-        if not GLOBAL.ThePlayer._isopening:value() then return false end
+        if not ThePlayer:HasTag("tro_store_isopening") then return false end
         GLOBAL.TheFrontEnd:PushScreen(StoreScreen(GLOBAL.ThePlayer, inst, inst.goodsinfo, "lavaarena_boarlord.tex"))
     end)
 end
@@ -62,7 +64,7 @@ local function OpenStoreFunction2(inst)
     end
 
     inst:DoTaskInTime(0.1, function()
-        if not GLOBAL.ThePlayer._isopening:value() then return false end
+        if not ThePlayer:HasTag("tro_store_isopening") then return false end
         GLOBAL.TheFrontEnd:PushScreen(StoreScreen(GLOBAL.ThePlayer, inst, inst.goodsinfo, "quagmire_goatmum.tex"))
     end)
 end
@@ -78,7 +80,7 @@ local function OpenStoreFunction3(inst)
     end
 
     inst:DoTaskInTime(0.1, function()
-        if not GLOBAL.ThePlayer._isopening:value() then return false end
+        if not ThePlayer:HasTag("tro_store_isopening") then return false end
         GLOBAL.TheFrontEnd:PushScreen(StoreScreen(GLOBAL.ThePlayer, inst, inst.goodsinfo, "quagmire_goatkid.tex"))
     end)
 end
@@ -94,7 +96,7 @@ local function OpenStoreFunction4(inst)
     end
 
     inst:DoTaskInTime(0.1, function()
-        if not GLOBAL.ThePlayer._isopening:value() then return false end
+        if not ThePlayer:HasTag("tro_store_isopening") then return false end
         GLOBAL.TheFrontEnd:PushScreen(StoreScreen(GLOBAL.ThePlayer, inst, inst.goodsinfo, "quagmire_swampigelder.tex"))
     end)
 end
@@ -110,7 +112,7 @@ local function OpenStoreFunction5(inst)
     end
 
     inst:DoTaskInTime(0.1, function()
-        if not GLOBAL.ThePlayer._isopening:value() then return false end
+        if not ThePlayer:HasTag("tro_store_isopening") then return false end
         GLOBAL.TheFrontEnd:PushScreen(StoreScreen(GLOBAL.ThePlayer, inst, inst.goodsinfo, "quagmire_swampigelder.tex"))
     end)
 end
@@ -132,7 +134,7 @@ end
 
 --==============================--
 local function ShutStoreFunction(inst)
-    --inst:DoTaskInTime(0.1, function()print(GLOBAL.ThePlayer._isopening:value()) end)
+    --inst:DoTaskInTime(0.1, function()print(ThePlayer:HasTag("tro_store_isopening")) end)
 end
 
 --==============================--

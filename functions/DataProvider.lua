@@ -1426,7 +1426,7 @@ local function ClientOpenStore(player)
 end
 
 local function ClientShutStore(player, inst)
-    player._isopening:set(false)
+    player:RemoveTag("tro_store_isopening")
     inst.NetEvt_ShutStore:push()
 end
 ----------------------------------------------------------------------------------------------------

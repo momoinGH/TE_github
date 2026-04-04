@@ -6,43 +6,6 @@ local KEY = "_" .. _source:match(".*scripts[/\\](.*)%.lua"):gsub("[/\\]", "_") .
 local Utils = require(_source:match(".*scripts[/\\](.*[/\\])") .. "utils")
 local Hooks = require("tropical_utils/hooks")
 
----隐藏，停止一切活动，来自inventoryitem
-function FN.Hide(inst)
-    inst:RemoveFromScene()
-    if inst.Transform then
-        inst.Transform:SetPosition(0, 0, 0)
-    end
-    if inst.components.brain then
-        BrainManager:Hibernate(inst)
-    end
-    if inst.SoundEmitter then
-        inst.SoundEmitter:KillAllSounds()
-    end
-end
-
----显示，来自inventoryitem，与Hide配套使用
-function FN.Show(inst)
-    inst:ReturnToScene()
-    if inst.components.brain then
-        BrainManager:Wake(self.inst)
-    end
-end
-
---- 获取equipslot，支持主机客机
-function FN.GetEquipslot(inst)
-    if TheWorld.ismastersim then
-        return inst.components.equippable and inst.components.equippable.equipslot or nil
-    else
-        return inst.replica.equippable and inst.replica.equippable:EquipSlot()
-    end
-end
-
----卸下装备的重物
-function FN.ForceStopHeavyLifting(inst)
-    if inst.components.inventory and inst.components.inventory:IsHeavyLifting() then
-        inst.components.inventory:DropItem(inst.components.inventory:Unequip(EQUIPSLOTS.BODY), true, true)
-    end
-end
 
 ---攻击对象检测，会攻击monster标签生物和当前仇恨对象，不会误伤其他单位
 ---攻击示例代码：
@@ -69,97 +32,6 @@ function FN.TargetTest(inst, target)
     end
 
     return ismonster
-end
-
----单位缩放动画，Transform缩放
-function FN.AnimateScale(inst, total_time, start_scale, end_scale, refresh)
-    local task
-    local start_time = GetTime()
-    task = inst:DoPeriodicTask(refresh ~= nil and refresh or 0.05, function()
-        local percent = (GetTime() - start_time) / total_time
-        if percent > 1 then
-            inst.Transform:SetScale(end_scale, end_scale, end_scale)
-            task:Cancel()
-            return
-        end
-        local scale = (1 - percent) * start_scale + percent * end_scale
-        inst.Transform:SetScale(scale, scale, scale)
-    end)
-end
-
----不同ErodeCB，这个是反转腐蚀的过程，就是一个动画渐出的过程，生成的物体可以先调用inst.AnimState:SetErosionParams(1, 0.1, 1.0)让其隐身，然后调用该函数慢慢浮现
-function FN.AntiErodeCB(inst, time, cb)
-    local time_to_erode = time or 1
-    local tick_time = TheSim:GetTickTime()
-
-    inst:StartThread(function()
-        local ticks = 0
-        while ticks * tick_time < time_to_erode do
-            local erode_amount = ticks * tick_time / time_to_erode
-            inst.AnimState:SetErosionParams(1 - erode_amount, 0.1, 1.0)
-            ticks = ticks + 1
-            Yield()
-        end
-        inst.AnimState:SetErosionParams(0, 0, 0)
-        if cb ~= nil then
-            cb(inst)
-        end
-    end)
-end
-
----向目标发射物品或是直接给予目标物品，基于LaunchAt
----@param prefab Entity|string 要发射的对象或预制体名
----@param launcher Entity 发射源
----@param data table|nil
-function FN.ReturnMaterial(prefab, launcher, data)
-    local count = Utils.GetVal(data, "count", 1)                      --数量
-    local isStack = Utils.GetVal(data, "isStack")                     --是否堆叠成一个物品发射
-    local target = Utils.GetVal(data, "target")                       --目标
-    local isGiveTarget = Utils.GetVal(data, "isGiveTarget")           --是否取消发射，直接给予目标
-    local speedmult = Utils.GetVal(data, "speedmult")                 --速度
-    local startheight = Utils.GetVal(data, "startheight")             --初始高度
-    local startradius = Utils.GetVal(data, "startradius")             --初始半径
-    local randomangleoffset = Utils.GetVal(data, "randomangleoffset") --发射角
-
-    local name, drop
-    if type(prefab) == "string" then
-        name = prefab
-        drop = SpawnPrefab(name)
-    else
-        name = prefab.prefab --不做检验
-        drop = prefab
-    end
-
-    assert(name and drop, "Make sure the prefab is entity or prefab name")
-
-    local inventory = target and target.components.inventory
-    isGiveTarget = isGiveTarget and inventory ~= nil
-    local drops = {}
-    table.insert(drops, drop)
-    if (isStack or isGiveTarget) and drop.components.stackable then
-        local maxsize = drop.components.stackable.maxsize
-        drop.components.stackable:SetStackSize(math.min(count, maxsize))
-        count = count - maxsize
-
-        while count > 0 do
-            drop = SpawnPrefab(name)
-            drop.components.stackable:SetStackSize(math.min(count, maxsize))
-            table.insert(drops, drop)
-            count = count - maxsize
-        end
-    else
-        for i = 1, count - 1 do
-            table.insert(drops, SpawnPrefab(name))
-        end
-    end
-
-    for _, v in ipairs(drops) do
-        if isGiveTarget and target then
-            target.components.inventory:GiveItem(v)
-        else
-            LaunchAt(v, launcher, target, speedmult, startheight, startradius, randomangleoffset)
-        end
-    end
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -241,11 +113,6 @@ function FN.SetMaxHealth(inst, maxHealth)
         health.currenthealth = per * maxHealth
     end
     health:ForceUpdateHUD(true) --handles capping health at max with penalty
-end
-
---- 获取一个
-function FN.GetOne(inst)
-    return inst.components.stackable and inst.components.stackable:Get() or inst
 end
 
 --- 在原版函数基础上加一个可以判断的函数checkFn

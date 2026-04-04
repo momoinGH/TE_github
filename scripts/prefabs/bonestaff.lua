@@ -9,7 +9,7 @@ local assets =
 local prefabs =
 {
     "firerain",
-    "gaze_beam2",
+    "gaze_beam",
 }
 
 local function onunequip(inst, owner)
@@ -20,7 +20,7 @@ end
 
 local function spawngaze(inst, pos, target)
     local rotation = pos
-    local beam = SpawnPrefab("gaze_beam2")
+    local beam = SpawnPrefab("gaze_beam")
     local pt = inst:GetPosition()
     local angle = rotation * DEGREES
     inst.radius = inst.radius + 3
@@ -78,14 +78,6 @@ local function bone()
     inst.components.finiteuses:SetMaxUses(TUNING.TORNADOSTAFF_USES * 3)
     inst.components.finiteuses:SetUses(TUNING.TORNADOSTAFF_USES * 3)
     inst.components.finiteuses:SetOnFinished(inst.Remove)
-
-
-    --    inst:AddComponent("spellcaster")
-    --    inst.components.spellcaster:SetSpellFn(creategaze)
-    --    inst.components.spellcaster.canuseonpoint = true
-    --    inst.components.spellcaster.canusefrominventory = false
-    --	inst.components.spellcaster.quickcast = true
-    --	inst.components.spellcaster.canuseonpoint_water = true	
 
     inst:AddComponent("spellcaster")
     inst.components.spellcaster.canuseontargets = true
