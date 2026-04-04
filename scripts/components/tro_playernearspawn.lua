@@ -20,7 +20,7 @@ local TrySpawnEnt
 
 -- 生成冷却结束
 local function OnPlayerSpawnCDDone(inst, self, player)
-    player_data = self.player_datas[player.userid]
+    local player_data = self.player_datas[player.userid]
     if not player_data.spawn_task then
         player_data.spawn_task = self.inst:DoPeriodicTask(0.1, TrySpawnEnt, 0, self, player)
     end
@@ -156,7 +156,7 @@ end
 function PlayerNearSpawn:OnSave()
     for userid, data in pairs(self.player_datas) do
         RemoveSpawnCooldown(data)
-        CnacelSpawnTask(data)
+        CancelSpawnTask(data)
     end
 
     return {
