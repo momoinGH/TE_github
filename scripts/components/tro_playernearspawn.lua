@@ -65,7 +65,9 @@ local function OnPlayerJoined(self, player)
     player_data.next_spawn_time = next_spawn_time
 
     if GetTotalTime() >= next_spawn_time then
-        OnPlayerSpawnCDDone(self.inst, self, player)
+        OnPlayerSpawnCDDone(self.inst, self, player)                --可以生成
+    else
+        OnPlayerSpawned(self, player, player_data, next_spawn_time) --冷却中
     end
 end
 
