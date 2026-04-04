@@ -61,7 +61,7 @@ local function DetermineAction(inst)
         distsq = inst:GetDistanceSqToInst(target)
     end
 
-    -- 凝视攻击
+    -- 血少了才会凝视攻击
     local wasgazing = inst.wantstogaze
     inst.wantstogaze = nil
     if distsq

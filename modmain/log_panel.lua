@@ -1,14 +1,14 @@
--- 提供一个控制台面板
+-- 提供一个控制台面板，并且hook一些容易导致游戏崩溃的地方，让其只打印在屏幕上不崩溃
 
 local Widget = require "widgets/widget"
 local Image = require "widgets/image"
 local Text = require "widgets/text"
 local ImageButton = require "widgets/imagebutton"
 
--- 所有日志数据: { {text=, colour=}, ... }
-local log_data = {}
+
+local log_data = {}  -- 所有日志数据: { {text=, colour=}, ... }
 local log_panel
-local cache_log = {}
+local cache_log = {} --缓存的日志，等面板打开塞进去
 
 local LogPanel = Class(Widget, function(self)
     Widget._ctor(self, "LogPanel")
@@ -350,9 +350,11 @@ end
 for action_id, data in pairs(ACTIONS) do
     local old_fn = data.fn
     data.fn = function(...)
-        local success, err = pcall(old_fn, ...)
-        if not success then
-            TroErrorHandle(err, true)
+        local results = { pcall(old_fn, ...) }
+        if not results[1] then
+            TroErrorHandle(results[2], true)
+        else
+            return unpack(results, 2)
         end
     end
 end

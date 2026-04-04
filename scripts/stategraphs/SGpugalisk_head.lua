@@ -158,8 +158,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/pugalisk/death") end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/pugalisk/death")
+            end),
         },
 
         events =
@@ -238,8 +240,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/pugalisk/hit") end),
+            TimeEvent(2 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/pugalisk/hit")
+            end),
         },
 
         events =
@@ -265,8 +269,10 @@ local states =
 
         timeline =
         {
-            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/pugalisk/taunt") end),
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/pugalisk/taunt")
+            end),
         },
 
         events =
@@ -300,10 +306,14 @@ local states =
                 ---inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/pugalisk/taunt")
                 inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/volcano/volcano_erupt")
             end),
-            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/pugalisk/taunt") end),
-            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/pugalisk/attack") end),
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/pugalisk/taunt")
+            end),
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/pugalisk/attack")
+            end),
         },
 
         events =
@@ -376,8 +386,6 @@ local states =
             inst.AnimState:PlayAnimation("gaze_pre")
         end,
 
-
-
         events =
         {
             EventHandler("animover", function(inst)
@@ -399,7 +407,7 @@ local states =
 
         timeline =
         {
-            TimeEvent(45 * FRAMES, function(inst) dogaze(inst) end),
+            TimeEvent(45 * FRAMES, dogaze),
         },
 
         onupdate = function(inst)
@@ -568,14 +576,30 @@ local states =
         timeline =
         {
             TimeEvent(17 * FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
-            TimeEvent(3 * FRAMES, function(inst) if not inst:HasTag("tail") then inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/boss/pugalisk/attack") end end),
-            TimeEvent(6 * FRAMES, function(inst) if not inst:HasTag("tail") then inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/boss/pugalisk/attack_pre") end end),
-            TimeEvent(18 * FRAMES, function(inst) if not inst:HasTag("tail") then inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/boss/pugalisk/bite") end end),
-            TimeEvent(7 * FRAMES, function(inst) if inst:HasTag("tail") then inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC003/creatures/boss/pugalisk/tail_attack") end end),
+            TimeEvent(3 * FRAMES, function(inst)
+                if not inst:HasTag("tail") then
+                    inst.SoundEmitter:PlaySound(
+                        "dontstarve_DLC003/creatures/boss/pugalisk/attack")
+                end
+            end),
+            TimeEvent(6 * FRAMES, function(inst)
+                if not inst:HasTag("tail") then
+                    inst.SoundEmitter:PlaySound(
+                        "dontstarve_DLC003/creatures/boss/pugalisk/attack_pre")
+                end
+            end),
+            TimeEvent(18 * FRAMES, function(inst)
+                if not inst:HasTag("tail") then
+                    inst.SoundEmitter:PlaySound(
+                        "dontstarve_DLC003/creatures/boss/pugalisk/bite")
+                end
+            end),
+            TimeEvent(7 * FRAMES, function(inst)
+                if inst:HasTag("tail") then
+                    inst.SoundEmitter:PlaySound(
+                        "dontstarve_DLC003/creatures/boss/pugalisk/tail_attack")
+                end
+            end),
             --if inst:HasTag("tail") then inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/pugalisk/attack") end
         },
 
