@@ -306,7 +306,9 @@ function FN.CreateRoom(room, door_key_start)
                     key = door_key_start
                     door_key_start = door_key_start + 1
                 end
-                trodevassert(not doors[key], "房间门的key重叠，是不是door_key_start变量给的值小了？")
+                if doors[key] then
+                    TroErrorHandle(string.trofmt("房间门的key重叠，是不是door_key_start变量给的值小了？key:{}", key), true)
+                end
                 doors[key] = p
                 door_map[key] = data.target_door
             elseif p:HasTag("interior_floor") then
@@ -324,13 +326,13 @@ function FN.CreateRoom(room, door_key_start)
 
             p.Transform:SetPosition(x + (x_offset or 0), (data.y_offset or 0), z + (data.z_offset or 0))
             if troisdev and not IsInRoom(width, depth, x, z, x + (x_offset or 0), z + (data.z_offset or 0)) then
-                TroErrorHandle(string.trofmt("对象{}不在房间内生成，是不是坐标填错了？，x:{}, z:{}", p, x + (x_offset or 0), z + (data.z_offset or 0)), true, false)
+                TroErrorHandle(string.trofmt("对象{}不在房间内生成，是不是坐标填错了？，x:{}, z:{}", p, x + (x_offset or 0), z + (data.z_offset or 0)), true)
             end
 
             if p.components.tro_saveanim then
                 p.components.tro_saveanim:Init(data.bank, data.build, data.anim, scale, data.isloopplay, data.isdelayset, data.rotation)
             elseif scale then
-                TroErrorHandle(string.trofmt("对象{}没有tro_saveanim组件，但是有缩放参数，是不是忘了加组件？", p), false, false)
+                TroErrorHandle(string.trofmt("对象{}没有tro_saveanim组件，但是有缩放参数，是不是忘了加组件？", p), false)
             end
 
             if data.startstate then
@@ -344,7 +346,7 @@ function FN.CreateRoom(room, door_key_start)
 
             p:PushEvent("oninteriorspawn", data)
         else
-            TroErrorHandle(data.name .. "预制件不存在", false, false)
+            TroErrorHandle(data.name .. "预制件不存在", false)
         end
     end
 
@@ -380,7 +382,7 @@ function FN.CreateRooms(rooms)
             if troisdev and door.prefab ~= "wallcrack_ruins" then
                 door:DoTaskInTime(0, function(inst)
                     if inst.components.teleporter and not inst.components.teleporter:GetTarget() then
-                        TroErrorHandle(string.trofmt("门{}的key为{}，没有关联到目标", door, key), false, false)
+                        TroErrorHandle(string.trofmt("门{}的key为{}，没有关联到目标", door, key), false)
                     end
                 end)
             end

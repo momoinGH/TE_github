@@ -25,7 +25,7 @@ local function LanguageStringCompare(en_tab, other_tab, prefix)
                 end
             end
             if not should_ignore then
-                TroErrorHandle("英文台词缺失：" .. prefix .. "." .. k, false, false)
+                TroErrorHandle("英文台词缺失：" .. prefix .. "." .. k, false)
             end
         elseif t == "table" then
             LanguageStringCompare(en_tab[k], v, prefix .. "." .. k)
@@ -62,13 +62,13 @@ local function CheckStringsDiff(old_tab, tab, prefix)
 
         -- 检查类型是否一致
         if old_type ~= new_type then
-            TroErrorHandle("台词类型冲突：键" .. prefix .. "." .. tostring(k) .. " 原版类型为 " .. old_type .. "，mod类型为 " .. new_type, false, false)
+            TroErrorHandle("台词类型冲突：键" .. prefix .. "." .. tostring(k) .. " 原版类型为 " .. old_type .. "，mod类型为 " .. new_type, false)
         elseif old_type == "table" then
             -- 如果是表，递归检查
             CheckStringsDiff(v, new_value, prefix .. "." .. tostring(k))
         elseif v ~= new_value then
             -- 如果是基本类型且值不同，报告冲突
-            TroErrorHandle("台词值冲突：键 " .. prefix .. "." .. tostring(k), false, false)
+            TroErrorHandle("台词值冲突：键 " .. prefix .. "." .. tostring(k), false)
         end
     end
 end
@@ -81,7 +81,9 @@ Hooks.FnDecorator(env, "AddAction", function(id)
     if type(id) == "table" then
         id = id.id
     end
-    trodevassert(not ACTIONS[id], "重复定义了ACTIONS." .. tostring(id))
+    if ACTIONS[id] then
+        TroErrorHandle("重复定义了ACTIONS." .. tostring(id), true)
+    end
 end)
 
 ----------------------------------------------------------------------------------------------------
@@ -102,12 +104,9 @@ Hooks.FnDecorator(GLOBAL, "LoadPrefabFile", nil, function(retTab, filename, asyn
     local ret = retTab[1]
     for _, prefab in ipairs(ret) do
         local path = search_asset_first_path .. "/" .. filename
-        trodevassert(not Prefabs[prefab.name],
-            "预制件" .. tostring(prefab.name) .. "已经定义过了，文件路径：" .. path .. ", 最早定义文件：" .. tostring(prefab_filepaths[prefab.name]))
-        -- if Prefabs[prefab.name] then --仅打印
-        --     TroErrorHandle("预制件" .. tostring(prefab.name) .. "已经定义过了，文件路径：" .. path
-        --         .. ", 最早定义文件：" .. tostring(prefab_filepaths[prefab.name]), false, false)
-        -- end
+        if Prefabs[prefab.name] then --仅打印
+            TroErrorHandle("预制件" .. tostring(prefab.name) .. "已经定义过了，文件路径：" .. path .. ", 最早定义文件：" .. tostring(prefab_filepaths[prefab.name]), false)
+        end
         mod_prefab_files[filename] = true
         prefab_filepaths[prefab.name] = path
     end
@@ -118,7 +117,9 @@ end)
 -- 检查ActionHandler的ACTION是否定义
 local OldAddStategraphActionHandler = env.AddStategraphActionHandler
 env.AddStategraphActionHandler = function(stategraph, handler, ...)
-    trodevassert(handler and handler.action and ACTIONS[handler.action.id], "发现没有定义的ACTION，你应该先在actions.lua文件中定义ACTION")
+    if not (handler and handler.action and ACTIONS[handler.action.id]) then
+        TroErrorHandle("发现没有定义的ACTION，你应该先在actions.lua文件中定义ACTION", true)
+    end
     return OldAddStategraphActionHandler(stategraph, handler, ...)
 end
 

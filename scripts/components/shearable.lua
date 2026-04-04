@@ -7,7 +7,7 @@ local Shearable = Class(BasicWorkable, function(self, inst)
     if troisdev then
         inst:DoTaskInTime(0, function(inst)
             if not inst.components.workable then
-                TroErrorHandle("workable没有被占用的话建议使用workable，workable和其他预制体配合更好" .. tostring(inst), false, false)
+                TroErrorHandle("workable没有被占用的话建议使用workable，workable和其他预制体配合更好" .. tostring(inst), false)
             end
         end)
     end

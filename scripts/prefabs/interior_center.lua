@@ -39,7 +39,7 @@ end
 local function GetRoomDoor(inst, dir)
     local doors = RoomUtils.FindRoomEnts(inst, { "interior_" .. dir .. "_door" })
     if #doors >= 2 then --两个门重叠了，是bug
-        TroErrorHandle(string.trofmt("{}这个室内{}方向有{}个门", inst, dir, #doors), false, false)
+        TroErrorHandle(string.trofmt("{}这个室内{}方向有{}个门", inst, dir, #doors), false)
     end
 
     for _, door in ipairs(doors) do

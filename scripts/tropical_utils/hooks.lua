@@ -5,12 +5,10 @@ local FN = {}
 ---@param afterFn function|nil 晚于fn执行，第一个参数为前面执行后的返回值表，后续为fn的参数，返回值作为最终返回值（要求是表或nil，会用unpack解开）
 ---@param isUseBeforeReturn boolean|nil 在没有afterFn却有beforeFn的时候，是否采用beforeFn的返回值作为最终返回值，默认以原函数的返回值作为最终返回值
 function FN.FnDecorator(obj, key, beforeFn, afterFn, isUseBeforeReturn)
-    if not trodevassert(type(obj) == "table", "obj 不是一个表：" .. tostring(obj) .. " " .. type(obj))
-        or not trodevassert(beforeFn == nil or type(beforeFn) == "function", "beforeFn must be nil or a function")
-        or not trodevassert(afterFn == nil or type(afterFn) == "function", "afterFn must be nil or a function")
-    then
-        return
+    if not ((type(obj) == "table") and (beforeFn == nil or type(beforeFn) == "function") and (afterFn == nil or type(afterFn) == "function")) then
+        TroErrorHandle(string.trofmt("FN.FnDecorator 参数不合法, obj:{}, beforeFn:{},afterFn:{}", obj, beforeFn, afterFn))
     end
+
 
     local oldVal = obj[key]
 
@@ -74,7 +72,8 @@ end
 
 ---链式查询上值，找不到就返回nil，这个是链式的
 function FN.GetUpValue(fn, ...)
-    if not trodevassert(type(fn) == "function", "第一个参数必须是函数") then
+    if type(fn) ~= "function" then
+        TroErrorHandle("第一个参数必须是函数")
         return nil, nil, nil
     end
 
@@ -94,8 +93,8 @@ end
 --- 影响是全局的，其他要调用被替换的函数时也会去调用这个新值
 function FN.SetUpvalue(fn, ...)
     local args = { ... }
-    if not trodevassert(#args >= 2, "至少需要两个参数：函数和要设置的路径")
-        or not trodevassert(type(fn) == "function", "第一个参数必须是函数") then
+    if not (#args >= 2 and type(fn) == "function") then
+        TroErrorHandle("至少需要两个参数并且第一个参数为函数")
         return false
     end
 

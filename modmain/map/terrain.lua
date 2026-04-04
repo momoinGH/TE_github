@@ -45,7 +45,7 @@ if troisdev then
     for terrain, tiles in pairs(TRO_TERRAIN_FILTER) do
         for i, tile in ipairs(tiles) do
             if tile == nil then
-                TroErrorHandle("modmain/map/terrain.lua里预制体" .. terrain .. "加了不存在的地皮，索引为" .. i, false, false)
+                TroErrorHandle("modmain/map/terrain.lua里预制体" .. terrain .. "加了不存在的地皮，索引为" .. i)
             end
         end
     end

@@ -24,7 +24,7 @@ AddRecipePostInitAny(function(v)
         local uppername = string.upper(v.name)
         if not STRINGS.NAMES[uppername] then
             STRINGS.NAMES[uppername] = "STRINGS.NAMES." .. uppername .. "未赋值"
-            TroErrorHandle("STRINGS.NAMES." .. uppername .. "未赋值，生成蓝图时会报错", false, false)
+            TroErrorHandle("STRINGS.NAMES." .. uppername .. "未赋值，生成蓝图时会报错", false)
         end
     end
 end)
@@ -33,7 +33,7 @@ end)
 for name, _ in ipairs(CRAFTING_FILTERS) do
     if not STRINGS.UI.CRAFTING_FILTERS[name] then
         STRINGS.UI.CRAFTING_FILTERS[name] = "STRINGS.UI.CRAFTING_FILTERS." .. name .. "未赋值"
-        TroErrorHandle("STRINGS.UI.CRAFTING_FILTERS." .. name .. "未赋值，点击制作栏时会报错", false, false)
+        TroErrorHandle("STRINGS.UI.CRAFTING_FILTERS." .. name .. "未赋值，点击制作栏时会报错", false)
     end
 end
 
@@ -68,14 +68,14 @@ local ignore_remove_events = {
 local OldPushEvent = EntityScript.PushEvent
 function EntityScript:PushEvent(event, data, ...)
     if event and need_data_events[event] and not (data == nil or type(data) == "table") then
-        TroErrorHandle("事件" .. tostring(event) .. "的参数" .. tostring(data) .. "不是table也不为空，可能导致游戏崩溃", true, true, 3)
+        TroErrorHandle("事件" .. tostring(event) .. "的参数" .. tostring(data) .. "不是table也不为空，可能导致游戏崩溃", true)
     end
 
     -- 不能在事件毁掉里销毁实体
     local is_valid_before = self.IsValid and self:IsValid()
     local res = OldPushEvent(self, event, data, ...)
     if event and not ignore_remove_events[event] and is_valid_before and not (self.IsValid and self:IsValid()) and TheWorld and TheWorld.ismastersim then
-        TroErrorHandle(string.trofmt("{}对象在{}事件中被销毁，这容易导致游戏崩溃，请使用DoTaskIntime(0,inst.Remove)来销毁", self, event), true, false, 3)
+        TroErrorHandle(string.trofmt("{}对象在{}事件中被销毁，这容易导致游戏崩溃，请使用DoTaskIntime(0,inst.Remove)来销毁", self, event), true)
     end
     return res
 end
@@ -90,7 +90,9 @@ for _, name in ipairs({
         local actions = {}
         for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphActionHandler", self.name)) do
             for i, v in ipairs(modhandlers) do
-                trodevassert(not actions[v.action], name .. "状态机对ACTIONS." .. v.action.id .. "重复注册，会导致相互覆盖，请hook对应的函数")
+                if actions[v.action] then
+                    TroErrorHandle(name .. "状态机对ACTIONS." .. v.action.id .. "重复注册，会导致相互覆盖，请hook对应的函数", true)
+                end
                 actions[v.action] = true
             end
         end
@@ -98,7 +100,9 @@ for _, name in ipairs({
         local events = {}
         for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphEvent", self.name)) do
             for i, v in ipairs(modhandlers) do
-                trodevassert(not events[v.name], name .. "状态机对事件" .. v.name .. "重复注册，会导致相互覆盖，请hook对应的函数")
+                if events[v.name] then
+                    TroErrorHandle(name .. "状态机对事件" .. v.name .. "重复注册，会导致相互覆盖，请hook对应的函数", true)
+                end
                 events[v.name] = true
             end
         end
@@ -106,7 +110,9 @@ for _, name in ipairs({
         local states = {}
         for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphState", self.name)) do
             for i, v in ipairs(modhandlers) do
-                trodevassert(not states[v.name], name .. "状态机对状态" .. v.name .. "重复注册，会导致相互覆盖，请hook对应的函数")
+                if states[v.name] then
+                    TroErrorHandle(name .. "状态机对状态" .. v.name .. "重复注册，会导致相互覆盖，请hook对应的函数", true)
+                end
                 states[v.name] = true
             end
         end

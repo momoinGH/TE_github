@@ -67,17 +67,23 @@ local function redirecthealth(inst, amount, overtime, cause, ignore_invincible, 
     end
 end
 
+-- 不能在水里
+local function KeepTargetFn(inst, target)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    return inst.components.combat:CanTarget(target) and TheWorld.Map:IsPassableAtPoint(x, y, z, false)
+end
+
 local attack_one_tags = { "character", "animal", "monster" }
 local notags = { "FX", "NOCLICK", "INLIMBO", "pugalisk" }
 local function RetargetTailFn(inst)
     local targetDist = PUGALISK_TAIL_TARGET_DIST
-    return FindEntity(inst, targetDist, function(guy) return inst.components.combat:CanTarget(guy) end, nil, notags, attack_one_tags)
+    return FindEntity(inst, targetDist, function(guy) return KeepTargetFn(inst, guy) end, nil, notags, attack_one_tags)
 end
 
 
 local function RetargetFn(inst)
     local targetDist = PUGALISK_TARGET_DIST
-    return FindEntity(inst, targetDist, function(guy) return inst.components.combat:CanTarget(guy) end, nil, notags, attack_one_tags)
+    return FindEntity(inst, targetDist, function(guy) return KeepTargetFn(inst, guy) end, nil, notags, attack_one_tags)
 end
 
 local function OnHit(inst, attacker)
@@ -439,6 +445,12 @@ local function fn()
         return inst
     end
 
+    inst.angle = nil          --移动角度
+    inst.wantstopremove = nil --想要从地面钻入地下开始穿行
+    inst.wantstogaze = nil    --想要凝视石化攻击
+    inst.wantstotaunt = nil   --想要嘲讽
+    inst.movecommited = nil   --头部已经决定了移动方案，正在执行中
+
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura
 
@@ -449,6 +461,7 @@ local function fn()
     inst.components.combat.hiteffectsymbol = "hit_target" -- "wormmovefx"
     inst.components.combat:SetAttackPeriod(PUGALISK_ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(0.5, RetargetFn)
+    inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
     inst.components.combat.onhitfn = OnHit
 
     inst:AddComponent("lootdropper")
@@ -484,7 +497,7 @@ local function fn()
     inst.components.multibody:Setup(5, "pugalisk_body")
 
     ------------------------------------------
-
+    -- 身体段到达出口点
     inst:ListenForEvent("bodycomplete", function(inst, data)
         local pt = pu.findsafelocation(data.pos, data.angle / DEGREES)
         inst.Transform:SetPosition(pt.x, 0, pt.z)
@@ -502,6 +515,7 @@ local function fn()
         end)
     end)
 
+    -- 身体段完全消失
     inst:ListenForEvent("bodyfinished", function(inst, data)
         inst.components.multibody:RemoveBody(data.body)
     end)

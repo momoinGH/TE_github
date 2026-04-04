@@ -11,11 +11,13 @@ function TroAddRecipe(name, ingredients, tech, config, filters)
     end
 
     --防止我忘记给某些会生成蓝图配方的预制件起名字，然后就会在生成随机蓝图的时候报错
-    if not trodevassert(config.builder_tag or config.nounlock or STRINGS.NAMES[upperName], "配方名字缺失: " .. name) then
+    if not (config.builder_tag or config.nounlock or STRINGS.NAMES[upperName]) then
+        TroErrorHandle("配方名字缺失: " .. name, false)
         STRINGS.NAMES[upperName] = name
     end
     --防止配方没名字
-    if not trodevassert(STRINGS.NAMES[upperName] or STRINGS.NAMES[config.product], name .. "配方没有名字") then
+    if not (STRINGS.NAMES[upperName] or STRINGS.NAMES[config.product]) then
+        TroErrorHandle(name .. "配方没有名字")
         if config.product then
             STRINGS.NAMES[config.product] = config.product
         else
@@ -76,7 +78,8 @@ function TroAddTech(tech, data)
 
     -- 添加一个过滤器菜单
     if data.has_filter then
-        if not trodevassert(STRINGS.UI.CRAFTING_FILTERS[tech], "科技" .. tech .. "没有设置过滤器名") then
+        if not (STRINGS.UI.CRAFTING_FILTERS[tech]) then
+            TroErrorHandle("科技" .. tech .. "没有设置过滤器名", false)
             STRINGS.UI.CRAFTING_FILTERS[tech] = tech
         end
         AddRecipeFilter({
@@ -95,7 +98,7 @@ end
 ---@param data.trees table: 解锁的科技树，对应科雷的TUNING.PROTOTYPER_TREES.XXX变量的值
 function TroAddPrototyperDef(prefab, data)
     if data.action_str and not STRINGS.ACTIONS.OPEN_CRAFTING[data.action_str] then
-        TroErrorHandle("你给原型机" .. prefab .. "指定了action_str的值为" .. tostring(data.action_str) .. ",但是没有找到STRINGS.ACTIONS.OPEN_CRAFTING." .. data.action_str .. "的值", false, false)
+        TroErrorHandle("你给原型机" .. prefab .. "指定了action_str的值为" .. tostring(data.action_str) .. ",但是没有找到STRINGS.ACTIONS.OPEN_CRAFTING." .. data.action_str .. "的值", false)
     end
 
     AddPrototyperDef(prefab, {
@@ -152,4 +155,3 @@ local function SortAfter(a, b, filter_name) SortRecipe(a, b, filter_name, 1) end
 -- Wedbber
 TroAddRecipe("mutator_tropical", { Ig("monstermeat", 2), Ig("silk", 1), Ig("venomgland", 1) }, TECH.NONE, { builder_tag = "spiderwhisperer" }, { "CHARACTER" })
 TroAddRecipe("mutator_frost", { Ig("monstermeat", 2), Ig("silk", 3), Ig("ice", 4) }, TECH.NONE, { builder_tag = "spiderwhisperer" }, { "CHARACTER" })
-

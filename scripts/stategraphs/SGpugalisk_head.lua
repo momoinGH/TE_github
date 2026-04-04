@@ -403,7 +403,7 @@ local states =
         },
 
         onupdate = function(inst)
-            local target = pu.FindCurrentTarget(inst)
+            local target = inst.components.combat.target
             if not inst.wantstogaze then
                 inst.sg:GoToState("gaze_pst")
                 --       if not target or not target.components.freezable then

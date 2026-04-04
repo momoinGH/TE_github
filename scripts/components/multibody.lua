@@ -13,19 +13,15 @@ local Multibody = Class(function(self, inst)
     self.bodyprefab = "pugalisk_body"
     self.state = STATES.MOVING
 
-    self.inst:ListenForEvent("startmove", function(inst, data)
-        self:OnStartMove()
-    end)
+    self.inst:ListenForEvent("startmove", function() self:OnStartMove() end)
 
-    self.inst:ListenForEvent("stopmove", function(inst, data)
-        self:OnStopMove()
-    end)
+    self.inst:ListenForEvent("stopmove", function() self:OnStopMove() end)
 end)
 
 
 function Multibody:SpawnBody(angle, percent, pos)
-    assert(pos)  -- where the body spawns
-    assert(angle) -- the direction of the travel
+    assert(pos)     -- where the body spawns
+    assert(angle)   -- the direction of the travel
     assert(percent) -- how far along the travel the body should spawn in at
 
     local newbody = SpawnPrefab(self.bodyprefab)

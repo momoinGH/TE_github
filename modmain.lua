@@ -2,7 +2,6 @@
 mod前缀名：tro_
 
 TroErrorHandle：错误处理，可打印堆栈可设置仅开发环境崩溃
-trodevassert：仅开发环境崩溃的断言
 trosafemodimport：允许一个文件重复导入，不会崩溃
 troimportmodulefile：提供一个模块目录下的相对路径，自动导入启用的所有模块的文件
 
@@ -49,8 +48,6 @@ debug文件定义了很多c_xxx函数，用于控制台调试
 
 ----------------------------------------------------------------------------------------------------
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
-Constructor = require("tropical_utils/constructor")
-Constructor.SetEnv(env)
 
 -- 允许一个文件重复导入，这样多个模块导入同一个文件就不会执行多次了
 local modulename_loaded = {}
@@ -67,6 +64,9 @@ env.modimport = function(modulename, ...)
 end
 
 ----------------------------------------------------------------------------------------------------
+if troisdev then
+    modimport "modmain/log_panel" --新增一个日志面板，按F11打开，并且对一对函数进行安全hook，报错时只打印不让游戏崩溃
+end
 modimport "modmain/gentuning"
 modimport "modmain/knownmodcheck"         -- 检测不兼容模组并报错崩溃
 modimport "modmain/mods"                  -- 兼容其他mod
@@ -109,7 +109,7 @@ end, function()
     -- local prefabs_dirty = {}
     -- for _, prefab in ipairs(PrefabFiles) do
     --     if prefabs_dirty[prefab] then
-    --         TroErrorHandle(dirc .. "模块的PrefabFiles里预制件写重了，写重的是" .. prefab, false, false)
+    --         TroErrorHandle(dirc .. "模块的PrefabFiles里预制件写重了，写重的是" .. prefab, false)
     --     end
     --     prefabs_dirty[prefab] = true
     -- end
@@ -130,7 +130,7 @@ end, function()
     -- for _, asset in ipairs(Assets) do
     --     local s = asset.type .. ":" .. asset.file
     --     if assets_dirty[s] then
-    --         TroErrorHandle(dirc .. "模块的Assets里预制件写重了，写重的是" .. s, false, false)
+    --         TroErrorHandle(dirc .. "模块的Assets里预制件写重了，写重的是" .. s, false)
     --     end
     --     assets_dirty[s] = true
     -- end

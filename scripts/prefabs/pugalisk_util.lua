@@ -1,58 +1,13 @@
-local function IsWater(tile)
-    return tile == WORLD_TILES.OCEAN_COASTAL or
-        tile == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        tile == WORLD_TILES.OCEAN_SWELL or
-        tile == WORLD_TILES.OCEAN_ROUGH or
-        tile == WORLD_TILES.OCEAN_BRINEPOOL or
-        tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        tile == WORLD_TILES.OCEAN_WATERLOG or
-        tile == WORLD_TILES.OCEAN_HAZARDOUS
-end
-
-local function FindCurrentTarget(inst)
-    -- looks for a combat target, if none, sets target as home if range is too far
-    local jogador = GetClosestInstWithTag("player", inst, 40)
-    local home = GetClosestInstWithTag("pugalisk_trap_door", inst, 120)
-    local target = inst
-
-    local DIST = 100      -- 40
-    local WANDERDIST = 60 -- 25
-
-    if jogador and home and inst:GetDistanceSqToInst(home) < WANDERDIST * WANDERDIST and not jogador:HasTag("playerghost") then
-        target = jogador
-    end
-
-    if jogador and not home and not jogador:HasTag("playerghost") then
-        target = jogador
-    end
-
-    if jogador and home and jogador:HasTag("playerghost") then
-        target = home
-    end
-
-    if home and inst:GetDistanceSqToInst(home) > WANDERDIST * WANDERDIST then
-        --       print("-- no target, keep close to home")
-        -- if no target but too far away from home, target home to get close to it.
-        target = home
-    end
-
-    return target
-end
-
 local function findMoveablePosition(position, start_angle, radius, attempts, check_los)
     local test = function(offset)
         local run_point = position + offset
 
-        local ground = TheWorld
-        local tile = ground.Map:GetTileAtPoint(run_point.x, run_point.y, run_point.z)
-
-        if tile == WORLD_TILES.IMPASSABLE or tile >= GROUND.UNDERGROUND or IsWater(tile) then
-            --           print("failed, unwalkable ground.")
+        local tile = TheWorld.Map:GetTileAtPoint(run_point.x, run_point.y, run_point.z)
+        if tile == WORLD_TILES.IMPASSABLE or tile >= GROUND.UNDERGROUND or TheWorld.Map:IsTileOcean(tile) then
             return false
         end
 
-        local ents = TheSim:FindEntities(run_point.x, run_point.y, run_point.z, 2, nil, nil,
-            { "pugalisk", "pugalisk_avoids" })
+        local ents = TheSim:FindEntities(run_point.x, run_point.y, run_point.z, 2, nil, nil, { "pugalisk", "pugalisk_avoids" })
         if #ents > 0 then
             return false
         end
@@ -62,9 +17,7 @@ local function findMoveablePosition(position, start_angle, radius, attempts, che
             return false
         end
 
-        if check_los and not ground.Pathfinder:IsClear(position.x, position.y, position.z,
-                run_point.x, run_point.y, run_point.z,
-                { ignorecreep = true }) then
+        if check_los and not TheWorld.Pathfinder:IsClear(position.x, position.y, position.z, run_point.x, run_point.y, run_point.z, { ignorecreep = true }) then
             return false
         end
 
@@ -79,13 +32,8 @@ local function findDirectionToDive(inst, target)
     local angle = math.random() * TWOPI
     if target then
         angle = target:GetAngleToPoint(pt.x, pt.y, pt.z) * DEGREES - PI
-        --        print("CALCING ANGLE",angle, target.prefab)
-    else
-        --        print("USING RANDOM ANGLE",angle)
     end
-
     local offset, endangle = findMoveablePosition(pt, angle, 6, 24, true)
-
     return endangle
 end
 
@@ -104,42 +52,23 @@ local function findsafelocation(pt, angle)
     return finalpt
 end
 
-local function getNewBodyPosition(inst, bodies, target)
-    local finalpt = nil
-    local finalangle = nil
-
-    -- get the new origin point
-    if #bodies < 1 then
-        -- this is the first body piece, start at the spawn point
-        finalpt = inst:GetPosition()
-    else
-        -- this is a new body piece. try to put it out front of the last piece.
-        finalpt = findsafelocation(bodies[#bodies].exitpt:GetPosition(), bodies[#bodies].Transform:GetRotation())
-    end
-
-    return finalpt
-end
-
 local function DetermineAction(inst)
     -- tested each frame when head to see if the head should start moving
-    local target = FindCurrentTarget(inst)
+    local target = inst.components.combat.target
 
+    local distsq = nil
+    if target then
+        distsq = inst:GetDistanceSqToInst(target)
+    end
+
+    -- 凝视攻击
     local wasgazing = inst.wantstogaze
     inst.wantstogaze = nil
-
-    local pt = inst:GetPosition()
-    local dist = nil
-
-    local rando = math.random()
-    if rando < 0.0001 then
-        inst.wantstotaunt = true
-    end
-
-    if target then
-        dist = inst:GetDistanceSqToInst(target)
-    end
-
-    if dist and target and target.components.freezable and not target.components.freezable:IsFrozen() and dist > 8 * 8 and dist < 20 * 20 then --and not head:HasTag("now_segmented")
+    if distsq
+        and target
+        and target.components.freezable and not target.components.freezable:IsFrozen()
+        and distsq > 8 * 8 and distsq < 20 * 20
+    then
         local gazechange = 0
         local health = inst.components.health:GetPercent()
         if health < 0.2 then
@@ -159,7 +88,10 @@ local function DetermineAction(inst)
         end
     end
 
-    if dist and dist < 6 * 6 and target then
+
+
+    if distsq and distsq < 6 * 6 and target then
+        -- 太近了
         if inst.sg:HasStateTag("underground") then
             inst:PushEvent("emerge")
         end
@@ -171,24 +103,18 @@ local function DetermineAction(inst)
         -- if no target, then direction is random.
         if target then
             angle = findDirectionToDive(inst, target)
-            -- else
-            --     angle = math.random()*2*PI
         end
 
         if angle then
             inst.Transform:SetRotation(angle / DEGREES)
-
             inst.angle = angle
-
             if inst.sg:HasStateTag("underground") then
                 local pos = inst:GetPosition()
                 inst.components.multibody:SpawnBody(inst.angle, 0, pos)
             else
                 inst.wantstopremove = true
-                --inst:PushEvent("premove")
             end
         else
-            --            print("COULD NOT GET AN ANGLE FOR THE BODY SEGMENT, BACKING UP THE PUGAKISK UP")
             inst:PushEvent("backup")
         end
     end
@@ -200,11 +126,7 @@ local function recoverfrombadangle(inst)
 end
 
 return {
-    findMoveablePosition = findMoveablePosition,
-    findDirectionToDive = findDirectionToDive,
     findsafelocation = findsafelocation,
-    getNewBodyPosition = getNewBodyPosition,
-    FindCurrentTarget = FindCurrentTarget,
     DetermineAction = DetermineAction,
     recoverfrombadangle = recoverfrombadangle,
 }

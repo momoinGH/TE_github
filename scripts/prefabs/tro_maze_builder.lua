@@ -86,8 +86,12 @@ function MazeBuilder:SetRoomExit(from_idx, dir_label, to_idx)
 
     local dir = DIR[dir_label]
     local opposite_dir = DIR_OPPOSITE[dir_label]
-    trodevassert(not table.contains(from_room.blocked_exits, dir), string.trofmt("{}门{}方向在阻挡列表里，你却添加了出口\n{}", from_idx, dir_label, PrintTable(from_room)))
-    trodevassert(not table.contains(to_room.blocked_exits, opposite_dir), string.trofmt("{}门{}方向在阻挡列表里，你却添加了出口\n{}", to_idx, opposite_dir.label, PrintTable(to_room)))
+    if table.contains(from_room.blocked_exits, dir) then
+        TroErrorHandle(string.trofmt("{}门{}方向在阻挡列表里，你却添加了出口\n{}", from_idx, dir_label, PrintTable(from_room)))
+    end
+    if table.contains(to_room.blocked_exits, opposite_dir) then
+        TroErrorHandle(string.trofmt("{}门{}方向在阻挡列表里，你却添加了出口\n{}", to_idx, opposite_dir.label, PrintTable(to_room)))
+    end
 
     from_room.exits[dir] = {
         room = from_idx,

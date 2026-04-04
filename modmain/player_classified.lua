@@ -54,7 +54,7 @@ function TroPlayerClassifiedNetVarEnd()
                 local net_class = data.net_class
                 inst[name] = net_class(inst.GUID, name, data.event_name)
             else
-                TroErrorHandle("重复定义player_classified网络变量，会崩溃的！" .. name, true, true)
+                TroErrorHandle("重复定义player_classified网络变量，会崩溃的！" .. name, true)
             end
         end
 

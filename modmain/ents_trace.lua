@@ -25,7 +25,10 @@ end)
 
 -- 获取所有指定预制体名的实体
 function TroGetEntsByPrefab(prefab)
-    trodevassert(trace_prefabs[prefab], "查找的预制体必须是trace_prefabs表里定义过的", prefab)
+    if not trace_prefabs[prefab] then
+        TroErrorHandle("查找的预制体必须是trace_prefabs表里定义过的" .. tostring(prefab))
+    end
+
 
     local ents = {}
     local guids = trace_ents[prefab]
@@ -47,7 +50,9 @@ GLOBAL.TroGetEntsByPrefab = TroGetEntsByPrefab
 
 -- 获取任意一个
 function TroGetAnyEntByPrefab(prefab)
-    trodevassert(trace_prefabs[prefab], "查找的预制体必须是trace_prefabs表里定义过的", prefab)
+    if not trace_prefabs[prefab] then
+        TroErrorHandle("查找的预制体必须是trace_prefabs表里定义过的" .. tostring(prefab))
+    end
 
     local guids = trace_ents[prefab]
     if guids then

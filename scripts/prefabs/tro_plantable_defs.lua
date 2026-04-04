@@ -5,6 +5,7 @@
 ---@param data.inspectoverride string 检查名
 ---@param data.mediumspacing boolean 更大的种植间距
 local function make_plantable(name, data, common_post, master_post)
+    data = data or {}
     local build = data.build or name
     local assets =
     {

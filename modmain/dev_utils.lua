@@ -10,55 +10,28 @@ if troisdev then
     require "consolecommands" --允许控制台直接调用c_xxx函数
 end
 
+OnTroErrorHandle = nil
+
 ---错误处理
 ---@param msg string 错误消息
 ---@param has_trace boolean 是否打印堆栈，默认true
----@param dev_can_crash boolean 开发模式下是否可以崩溃，默认true
-function TroErrorHandle(msg, has_trace, dev_can_crash, level)
+function TroErrorHandle(msg, has_trace, level)
     if has_trace == nil then
         has_trace = true
     end
-    if dev_can_crash == nil then
-        dev_can_crash = true
-    end
 
-    local s = "错误（注意这里不是崩溃原因）："
+    local res = { msg }
     if has_trace then
-        s = s .. StackTrace(msg)
-    else
-        s = s .. tostring(msg) .. "\nLUA ERROR stack traceback:（方便搜索）" --方便搜索
+        res = getdebugstack(res, 2)
     end
-    if troisdev then
-        if dev_can_crash then
-            error(s, level or 2)
-        else
-            c_announce(msg) --公告提示一下
-            print(s)
-        end
-    else
-        print(s)
+    print(table.concat(res, "\n"))
+
+    if OnTroErrorHandle then
+        OnTroErrorHandle(msg, has_trace, level)
     end
-    return s
 end
 
 GLOBAL.TroErrorHandle = TroErrorHandle
-
--- 可以判断是否是开发模式的断言，开发陌生下游戏崩溃，工坊订阅下只会打印堆栈到日志
-function trodevassert(v, msg)
-    if troisdev then
-        return assert(v, msg)
-    end
-
-    -- 工坊订阅，不是开发模式
-    if v then
-        return v
-    end
-
-    TroErrorHandle(msg, false, true, 3)
-    return v
-end
-
-GLOBAL.trodevassert = trodevassert
 
 ----------------------------------------------------------------------------------------------------
 --- 科雷modmain的定义抄过来，不过文件不存在时不会报错

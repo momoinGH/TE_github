@@ -14,7 +14,6 @@ tro_languages = {
     "hun",
     "fr"
 }
-
 modimport "modmain/dev_utils"             --开发环境下辅助用的函数，与游戏无关
 Hooks = require "tropical_utils/hooks"    --用来hook的一些函数
 if TheFrontEnd then

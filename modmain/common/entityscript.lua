@@ -7,7 +7,6 @@ function EntityScript:TroSetPlayerClassifiedNetVar(name, val, setdirty)
     end
 
     local netvar = self.player_classified[name]
-    -- if not trodevassert(netvar, "你没定义" .. name .. "这个网络变量") then
     if not netvar then
         return false
     end
@@ -31,7 +30,8 @@ function EntityScript:TroGetPlayerClassifiedNetVar(name)
     end
 
     local netvar = self.player_classified[name]
-    if not trodevassert(netvar, "你没定义" .. name .. "这个网络变量") then
+    if not netvar then
+        TroErrorHandle("你没定义" .. name .. "这个网络变量", false)
         return nil
     end
 

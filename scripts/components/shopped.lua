@@ -72,7 +72,7 @@ function Shopped:SpawnInventory(goods, costprefab, cost)
         self:SetCost(costprefab, cost)
         self.inst.components.container:GiveItem(item)
     else
-        TroErrorHandle("生成物品失败：" .. tostring(goods) .. "   " .. tostring(self.goods), false, false)
+        TroErrorHandle("生成物品失败：" .. tostring(goods) .. "   " .. tostring(self.goods), false)
     end
 end
 
