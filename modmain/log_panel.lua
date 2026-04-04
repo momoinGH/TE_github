@@ -240,6 +240,7 @@ end
 
 function LogPanel:Kill()
     log_panel = nil
+    self:OnLoseFocus()
     LogPanel._base.Kill(self)
 end
 
@@ -343,5 +344,15 @@ function EntityScript:PushEvent_Internal(event, data, immediate)
     local success, err = pcall(OldPushEvent_Internal, self, event, data, immediate)
     if not success then
         TroErrorHandle(err, true)
+    end
+end
+
+for action_id, data in pairs(ACTIONS) do
+    local old_fn = data.fn
+    data.fn = function(...)
+        local success, err = pcall(old_fn, ...)
+        if not success then
+            TroErrorHandle(err, true)
+        end
     end
 end

@@ -531,27 +531,20 @@ local function fn()
 end
 
 local function onfinishcallback(inst, worker)
-    inst.MiniMapEntity:SetEnabled(false)
-    inst:RemoveComponent("workable")
-    inst.components.hole.canbury = true
-
     SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
 
-    if worker then
-        -- figure out which side to drop the loot
-        local pt = inst:GetPosition()
-        local hispos = Vector3(worker.Transform:GetWorldPosition())
+    -- figure out which side to drop the loot
+    local pt = inst:GetPosition()
+    local hispos = Vector3((worker or inst).Transform:GetWorldPosition())
 
-        local he_right = ((hispos - pt):Dot(TheCamera:GetRightVec()) > 0)
+    local he_right = ((hispos - pt):Dot(TheCamera:GetRightVec()) > 0)
 
-        if he_right then
-            inst.components.lootdropper:DropLoot(pt - (TheCamera:GetRightVec() * (math.random() + 1)))
-        else
-            inst.components.lootdropper:DropLoot(pt + (TheCamera:GetRightVec() * (math.random() + 1)))
-        end
-
-        inst:Remove()
+    if he_right then
+        inst.components.lootdropper:DropLoot(pt - (TheCamera:GetRightVec() * (math.random() + 1)))
+    else
+        inst.components.lootdropper:DropLoot(pt + (TheCamera:GetRightVec() * (math.random() + 1)))
     end
+    inst:Remove()
 end
 
 

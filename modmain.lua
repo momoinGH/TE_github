@@ -64,9 +64,6 @@ env.modimport = function(modulename, ...)
 end
 
 ----------------------------------------------------------------------------------------------------
-if troisdev then
-    modimport "modmain/log_panel" --新增一个日志面板，按F11打开，并且对一对函数进行安全hook，报错时只打印不让游戏崩溃
-end
 modimport "modmain/gentuning"
 modimport "modmain/knownmodcheck"         -- 检测不兼容模组并报错崩溃
 modimport "modmain/mods"                  -- 兼容其他mod
@@ -155,8 +152,8 @@ modimport("modmain/scrapbookwiki") -- 图鉴wiki
 modimport("modmain/character")     --添加角色，角色相关变量定义
 modimport("modmain/fx")            --特效
 
-
 if troisdev then
+    modimport "modmain/log_panel"        --新增一个日志面板，按F11打开，并且对一对函数进行安全hook，报错时只打印不让游戏崩溃
     troimportmodulefile("debug")         --方便开发的c_xxx控制台函数
     modimport "modmain/main_check_after" --开发环境校验，检查不合规或者忘写的数据，防止游戏执行那部分代码时崩溃
 end
