@@ -4,5 +4,4 @@
 
 -- modimport("postinit/components/oceancolor")
 modimport("postinit/components/ambientsound")
-modimport("postinit/components/colourcube")
 modimport("postinit/components/dynamicmusic")

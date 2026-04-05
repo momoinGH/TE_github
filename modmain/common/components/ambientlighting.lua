@@ -58,8 +58,16 @@ AddComponentPostInit("ambientlighting", function(self)
 
     local function ComputeTargetColour(targetsettings, timeoverride, ...)
         local temp = targetsettings.currentcolourset
+        -- 大灾变
+        if ThePlayer and ThePlayer:TroIsAporkalypse() then
+            targetsettings.currentcolourset = COLOURS.APORKALYPSE_COLOURS
+            _ComputeTargetColour(targetsettings, timeoverride, ...)
+            targetsettings.currentcolourset = temp
+            return
+        end
+
+        -- 遗迹看不见，这里只是本地的修改，不是晚上还不会被查理攻击
         if ThePlayer then
-            -- 遗迹看不见，这里只是本地的修改，不是晚上还不会被查理攻击
             local room = ThePlayer:TroGetRoomCenter()
             if room and room:HasTag("night_room") then
                 targetsettings.currentcolourset = COLOURS.NIGHT_ROOM
@@ -67,14 +75,6 @@ AddComponentPostInit("ambientlighting", function(self)
                 targetsettings.currentcolourset = temp
                 return
             end
-        end
-
-        -- 大灾变
-        if ThePlayer and ThePlayer:TroIsAporkalypse() then
-            targetsettings.currentcolourset = COLOURS.APORKALYPSE_COLOURS
-            _ComputeTargetColour(targetsettings, timeoverride, ...)
-            targetsettings.currentcolourset = temp
-            return
         end
         _ComputeTargetColour(targetsettings, timeoverride, ...)
     end

@@ -81,7 +81,6 @@ local REGION_SEASON_COLOURCUBES = {
             dusk = bloodmoon,
             night = bloodmoon,
             full_moon = bloodmoon
-
         },
     },
 

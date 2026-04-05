@@ -14,7 +14,6 @@ modimport "modmain/common/components/walkableplatformplayer"
 modimport "modmain/common/components/map"        --theworld.map相关
 modimport "modmain/common/components/deployable" -- 让某些地形不能部署、建造、种东西
 modimport "modmain/common/components/spooked"    --黄蘑菇孢子
-modimport("modmain/common/components/ambientlighting")
 modimport "modmain/common/components/inventory"
 modimport "modmain/common/components/inventory_replica"
 modimport "modmain/common/components/armor"
@@ -30,11 +29,13 @@ modimport "modmain/common/components/temperatureoverrider.lua" --对气温的一
 modimport "modmain/common/components/workable.lua"
 modimport "modmain/common/components/teleporter.lua"
 modimport "modmain/common/components/childspawner.lua"
+modimport "modmain/common/components/ambientlighting"
+modimport "modmain/common/components/colourcube.lua"
 
 ----------------------------------------------------------------------------------------------------
 
 
-modimport "modmain/common/prefabs/oceanfishdef" --定义新的鱼
+modimport "modmain/common/prefabs/oceanfishdef"              --定义新的鱼
 modimport "modmain/common/prefabs/world"
 modimport("modmain/common/prefabs/guard_corp")               --守卫保护作物、高草转化、草大风摇晃？
 modimport("modmain/common/prefabs/player_vision_post")       --四眼镜、蝙蝠帽所用

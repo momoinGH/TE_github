@@ -46,7 +46,7 @@ SetSharedLootTable('ancientherald', {
 local function TryTeleportPlayerNear(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local player = FindClosestPlayer(x, y, z, true)
-    if not player then
+    if not player or player:TroGetRoomCenter() then --房子里就不去了
         inst.find_player_task = inst:DoTaskInTime(2, TryTeleportPlayerNear)
         return
     end
