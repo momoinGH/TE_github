@@ -119,7 +119,7 @@ local function SetAsRabid(inst, rabid)
 end
 
 local function transformtest(inst)
-    if TheWorld.state.isnight and (TheWorld.state.moonphase == "full") or TheWorld.state.isaporkalypse then
+    if TheWorld.state.isnight and (TheWorld.state.moonphase == "full") or inst:TroIsAporkalypse() then
         if not inst.currentlyRabid then
             inst:DoTaskInTime(1 + math.random(), function() SetAsRabid(inst, true) end)
         end
@@ -263,8 +263,9 @@ local function fn()
 
     -- When a piko is first created, ensure that it isn't rabid.
     SetAsRabid(inst, false)
-    inst:WatchWorldState("beginaporkalypse", function() transformtest(inst) end, TheWorld)
-    inst:WatchWorldState("endaporkalypse", function() transformtest(inst) end, TheWorld)
+    inst:ListenForEvent("beginaporkalypse", function() transformtest(inst) end, TheWorld)
+    inst:ListenForEvent("endaporkalypse", function() transformtest(inst) end, TheWorld)
+
     inst:DoTaskInTime(FRAMES, function(inst)
         transformtest(inst)
     end)

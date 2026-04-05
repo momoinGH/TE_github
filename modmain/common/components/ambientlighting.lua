@@ -50,7 +50,7 @@ local COLOURS = {
 
 
 
-AddComponentPostInit("ambientlighting", function(self, inst)
+AddComponentPostInit("ambientlighting", function(self)
     local DoUpdateFlash = Hooks.GetUpValue(self.OnUpdate, "DoUpdateFlash")
     local PushCurrentColour = Hooks.GetUpValue(self.OnUpdate, "PushCurrentColour")
     local _realcolour = Hooks.GetUpValue(DoUpdateFlash, "_realcolour")         ---真正的颜色(控制查理)
@@ -59,7 +59,7 @@ AddComponentPostInit("ambientlighting", function(self, inst)
 
     local function ComputeTargetColour(targetsettings, timeoverride, ...)
         local temp = targetsettings.currentcolourset
-        if not TheWorld.ismastersim and ThePlayer then
+        if ThePlayer then
             -- 遗迹看不见，这里只是本地的修改，不是晚上还不会被查理攻击
             local room = ThePlayer:TroGetRoomCenter()
             if room and room:HasTag("night_room") then
@@ -71,7 +71,7 @@ AddComponentPostInit("ambientlighting", function(self, inst)
         end
 
         -- 大灾变
-        if not TheWorld:HasTag("cave") and TheWorld.state.isaporkalypse and targetsettings.currentcolourset.PHASE_COLOURS.spring then
+        if ThePlayer and ThePlayer:TroIsAporkalypse() then
             targetsettings.currentcolourset = COLOURS.APORKALYPSE_COLOURS
             _ComputeTargetColour(targetsettings, timeoverride, ...)
             targetsettings.currentcolourset = temp
@@ -87,11 +87,11 @@ AddComponentPostInit("ambientlighting", function(self, inst)
         ComputeTargetColour(_overridecolour)
         PushCurrentColour()
     end
-    self.TroOnClimateChanged = TroOnClimateChanged                     --暴露一下
+    self.TroOnClimateChanged = TroOnClimateChanged --暴露一下
 
-    self.inst:WatchWorldState("beginaporkalypse", TroOnClimateChanged) ----为什么 用isaporkalypse就不行呢
-    self.inst:WatchWorldState("endaporkalypse", TroOnClimateChanged)
-    self.inst:DoTaskInTime(0, TroOnClimateChanged)                     --initialise
+    self.inst:ListenForEvent("beginaporkalypse", TroOnClimateChanged)
+    self.inst:ListenForEvent("endaporkalypse", TroOnClimateChanged)
+    self.inst:DoTaskInTime(0, TroOnClimateChanged) --initialise
 
     ----------------------------------------------------------------------------------------------------
 end)

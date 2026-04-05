@@ -708,7 +708,7 @@ local function throwcrackers(inst)
     tossdir.z = -math.sin(rot)
 
     inst.components.inventory:DropItem(cracker, nil, nil, nil, nil, tossdir)
-    cracker.components.fuse:StartFuse()
+    cracker.components.burnable:Ignite(true)
 end
 
 

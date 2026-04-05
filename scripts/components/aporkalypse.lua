@@ -3,7 +3,7 @@ local function GetTotalTime()
 end
 
 local function SpawnHerald(src, player, count)
-    if not player:HasTag("aporkalypse") then return end
+    if not player:TroIsAporkalypse() then return end
     if IsEntityDeadOrGhost(player) then return end
     if player:TroGetRoomCenter() then return end
 
@@ -18,12 +18,11 @@ local function SpawnHerald(src, player, count)
 end
 
 local function SpawnBats(src, player, count)
-    if not player:HasTag("aporkalypse") then return end
+    if not player:TroIsAporkalypse() then return end
     if IsEntityDeadOrGhost(player) then return end
     if player:TroGetRoomCenter() then return end
 
     local pt = player:GetPosition()
-    print("生成蝙蝠", count)
     local bats = TroSpawnRandomEntsInRange("circlingbat", pt, count, 5, nil, function()
         return Vector3(math.random(-5, 5), 0, math.random(-5, 5))
     end)
@@ -31,14 +30,6 @@ local function SpawnBats(src, player, count)
         bat:TroAddSaveTag("aporkalypse_cleanup")
     end
     return bats
-end
-
-local function UpdatePlayerTag(self, player)
-    if self.aporkalypse_active and player:IsInHamletArea() then
-        player:AddTag("aporkalypse") --在大灾变范围内
-    else
-        player:RemoveTag("aporkalypse")
-    end
 end
 
 -- 哈姆雷特大灾变组件
@@ -57,7 +48,7 @@ local Aporkalypse = Class(function(self, inst)
     local PlayerNearSpawnForEach = require("components/tro_playernearspawnforeach")
     self.bat_spawn = PlayerNearSpawnForEach(inst)
     self.bat_spawn.first_spawn_time = 0
-    self.bat_spawn.max_count = 15
+    self.bat_spawn.max_count = 6 --太多有点儿难打
     self.bat_spawn.spawn_interval = function() return TUNING.TOTAL_DAY_TIME + (TUNING.TOTAL_DAY_TIME * math.random(0, 0.25)) end
     self.bat_spawn.spawn_fn = SpawnBats
     self.bat_spawn.enable = false
@@ -78,12 +69,6 @@ local Aporkalypse = Class(function(self, inst)
             self:BeginAporkalypse()
         end
     end, TheWorld)
-
-    self.inst:ListenForEvent("ms_playerjoined", function(src, player)
-        UpdatePlayerTag(self, player)
-        self.inst:ListenForEvent("changearea", function() UpdatePlayerTag(self, player) end, player)
-    end, TheWorld)
-    for _, v in ipairs(AllPlayers) do UpdatePlayerTag(self, v) end
 end)
 
 function Aporkalypse:OnSave()
@@ -154,7 +139,9 @@ function Aporkalypse:BeginAporkalypse(is_load)
     if not is_load then
         self.inst:PushEvent("beginaporkalypse")
     end
-    for _, v in ipairs(AllPlayers) do UpdatePlayerTag(self, v) end
+    if TheWorld.net and TheWorld.net.tro_isaporkalypse then
+        TheWorld.net.tro_isaporkalypse:set(true)
+    end
 end
 
 -- 开始庆典
@@ -176,8 +163,11 @@ function Aporkalypse:EndAporkalypse()
     self.aporkalypse_active = nil
     self.herald_spawn.enable = false
     self.bat_spawn.enable = false
-    for _, v in ipairs(AllPlayers) do UpdatePlayerTag(self, v) end
+    if TheWorld.net and TheWorld.net.tro_isaporkalypse then
+        TheWorld.net.tro_isaporkalypse:set(false)
+    end
 
+    --检查是否需要开始庆典
     local aporkalypse_duration = (GetTotalTime() - self.begin_date) / TUNING.TOTAL_DAY_TIME
     if aporkalypse_duration >= 2 then
         self:BeginFiesta()

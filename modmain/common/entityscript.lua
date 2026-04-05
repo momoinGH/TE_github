@@ -127,6 +127,12 @@ function EntityScript:TroIsRiding()
     return self.replica.rider and self.replica.rider:IsRiding()
 end
 
+-- 是不是在大灾变中
+function EntityScript:TroIsAporkalypse()
+    return TheWorld.net and TheWorld.net.tro_isaporkalypse and TheWorld.net.tro_isaporkalypse:value()
+        and self:IsInHamletArea()
+end
+
 ----------------------------------------------------------------------------------------------------
 
 -- 获取玩家身上的小船

@@ -104,7 +104,7 @@ AddComponentPostInit("colourcube", function(self)
     local _showencc = CUBES.default
     local function UpdateAmbientCCTable(blendtime)
         if _activatedplayer then
-            if TheWorld.state.isaporkalypse and not TheWorld:HasTag("cave") then
+            if _activatedplayer:TroIsAporkalypse() then
                 if _showencc ~= CUBES.aporka then
                     _showencc = CUBES.aporka
                     Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.aporkalypse)
@@ -152,8 +152,8 @@ AddComponentPostInit("colourcube", function(self)
     self.inst:ListenForEvent("playeractivated", function(src, player)
         if player and _activatedplayer ~= player then
             player:ListenForEvent("changearea", onClimateDirty)
-            self.inst:WatchWorldState("beginaporkalypse", onClimateDirtyfast)
-            self.inst:WatchWorldState("endaporkalypse", onClimateDirtyfast)
+            player:ListenForEvent("beginaporkalypse", onClimateDirtyfast, TheWorld)
+            player:ListenForEvent("endaporkalypse", onClimateDirtyfast, TheWorld)
             player:DoTaskInTime(0, function() UpdateAmbientCCTable(.01) end) --initialise
         end
         _activatedplayer = player
@@ -161,8 +161,8 @@ AddComponentPostInit("colourcube", function(self)
     self.inst:ListenForEvent("playerdeactivated", function(src, player)
         if player then
             player:RemoveEventCallback("changearea", onClimateDirty)
-            player:StopWatchingWorldState("beginaporkalypse", onClimateDirtyfast)
-            player:StopWatchingWorldState("endaporkalypse", onClimateDirtyfast)
+            player:RemoveEventCallback("beginaporkalypse", onClimateDirtyfast, TheWorld)
+            player:RemoveEventCallback("endaporkalypse", onClimateDirtyfast, TheWorld)
             if _activatedplayer == player then
                 _activatedplayer = nil
             end

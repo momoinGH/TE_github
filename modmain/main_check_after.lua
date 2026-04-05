@@ -63,6 +63,7 @@ local need_data_events = {
 local ignore_remove_events = {
     entitysleep = true,
     animover = true,
+    timerdone = true,
 }
 
 local OldPushEvent = EntityScript.PushEvent

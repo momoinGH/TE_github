@@ -49,12 +49,12 @@ function BloodmoonBadge:OnUpdate(dt)
     if self.contador > 50 then
         self.contador = 0
         for k, player in pairs(AllPlayers) do
-            if player:HasTag("aporkalypse") and self.aporkalypse == false then
+            if player:TroIsAporkalypse() and self.aporkalypse == false then
                 self.aporkalypse = true
                 self:Show()
             end
 
-            if self.aporkalypse == true and not player:HasTag("aporkalypse") then
+            if self.aporkalypse == true and not player:TroIsAporkalypse() then
                 self.aporkalypse = false
                 self:Hide()
             end

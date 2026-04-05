@@ -37,14 +37,16 @@ local function TrySpawnEnt(inst, self, player)
     end
 
     local player_data = self.player_datas[player.userid]
-    local need_count = self.max_count - math.max(player_data.cur_spawn_count or 0, GetTableSize(player_data.all_ents))
+    player_data.cur_spawn_count = player_data.cur_spawn_count or 0
+    local need_count = self.max_count - math.max(player_data.cur_spawn_count, GetTableSize(player_data.all_ents))
     local ents = self.spawn_fn(inst, player, need_count)
     if ents and EntityScript.is_instance(ents) then
         ents = { ents }
     end
+
     for _, ent in ipairs(ents or {}) do
         BindEnt(self, player_data, ent)
-        player_data.cur_spawn_count = (player_data.cur_spawn_count or 0) + 1
+        player_data.cur_spawn_count = player_data.cur_spawn_count + 1
     end
 
     if player_data.cur_spawn_count >= self.max_count or GetTableSize(player_data.all_ents) >= self.max_count then

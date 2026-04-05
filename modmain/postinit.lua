@@ -6,4 +6,3 @@
 modimport("postinit/components/ambientsound")
 modimport("postinit/components/colourcube")
 modimport("postinit/components/dynamicmusic")
----modimport("postinit/components/worldstate")世界状态***
