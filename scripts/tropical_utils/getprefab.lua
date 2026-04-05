@@ -171,14 +171,7 @@ function FN.FindClosestEntity(inst, radius, ignoreheight, musttags, canttags, mu
     return closestEntity, closestEntity ~= nil and rangesq or nil
 end
 
---- 通过userid在AllPlayers中查找玩家
-function FN.GetPlayerById(userid)
-    for _, player in ipairs(AllPlayers) do
-        if player.userid == userid then
-            return player
-        end
-    end
-end
+
 
 --- 判断单位是否死亡或正在死亡
 --- 好像比IsEntityDeadOrGhost更好点，用IsEntityDeadOrGhost判断有时候还是会有"Left death state."的崩溃，我怀疑是有mod在玩家在death的

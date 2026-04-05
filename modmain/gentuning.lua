@@ -65,7 +65,7 @@ TUNING.tropical = {
     hayfever       = GetModConfigData("hayfever") == 1,       --花粉症
     fog            = GetModConfigData("fog") == 1,            --迷雾
     vampirebatcave = GetModConfigData("vampirebatcave") == 1, --洞穴裂缝
-
+    aporkalypse    = GetModConfigData("aporkalypse") == 1,    --大灾变
 
 
 
@@ -112,7 +112,6 @@ TUNING.tropical = {
     waves                          = false, --海浪
     tropicalshards                 = false, --多层世界服务器
     removedark                     = false, --移除黑暗
-    aporkalypse                    = false, --大灾变
     multiplayerportal              = false, --出生模式
     greenmod                       = false,
 

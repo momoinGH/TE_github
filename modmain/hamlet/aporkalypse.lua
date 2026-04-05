@@ -4,6 +4,7 @@ AddPrefabPostInit("forest", function(inst)
     inst:AddComponent("aporkalypse")
 end)
 
+----------------------------------------------------------------------------------------------------
 
 -- 大灾变时花都变成恶魔花
 for _, v in ipairs({
@@ -31,4 +32,12 @@ AddPrefabPostInit("flower_evil", function(inst)
             inst:DoTaskInTime(0, ReplacePrefab, "flower")
         end
     end, TheWorld)
+end)
+
+----------------------------------------------------------------------------------------------------
+
+-- 血月
+local luavermelha = require "widgets/bloodmoon"
+AddClassPostConstruct("widgets/uiclock", function(self)
+    self.luadesangue = self:AddChild(luavermelha(self.owner))
 end)

@@ -3,9 +3,8 @@ if TUNING.tropical.only_hamlet then
 end
 
 modimport "modmain/common/poisonable"
-modimport "modmain/hamlet/oinc.lua"             --呼噜币换算
-modimport "modmain/hamlet/aporkalypse.lua" --大灾变
-modimport "modmain/hamlet/farm_guard.lua"       --采摘农场的东西会被打
+modimport "modmain/hamlet/oinc.lua"       --呼噜币换算
+modimport "modmain/hamlet/farm_guard.lua" --采摘农场的东西会被打
 
 
 modimport "modmain/hamlet/components/builder"
@@ -26,8 +25,12 @@ if TUNING.tropical.hayfever then
     modimport "modmain/hamlet/hayfever" --花粉症
 end
 if TUNING.tropical.fog then
-    modimport "modmain/hamlet/fog"             --大雾
+    modimport "modmain/hamlet/fog" --大雾
 end
+if TUNING.tropical.aporkalypse then
+    modimport "modmain/hamlet/aporkalypse.lua" --大灾变
+end
+
 modimport "modmain/hamlet/living_artifact.lua" --活性机甲
 
 ----------------------------------------------------------------------------------------------------

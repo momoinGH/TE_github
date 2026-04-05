@@ -135,13 +135,13 @@ local function common(childname)
 end
 
 local function fn1()
-    return common("antman2")
+    return common("antman_red")
 end
 
 local function fn2()
     return common("antman_warrior")
 end
 
-return Prefab("antcombhomecave", fn1, assets, prefabs),
-    Prefab("antcombhomecavewarrior", fn2, assets, prefabs),
-    MakePlacer("antcombhomecave_placer", "ant_house", "ant_house", "idle")
+return Prefab("antcombhome", fn1, assets, prefabs),
+    Prefab("antcombhome_warrior", fn2, assets, prefabs),
+    MakePlacer("antcombhome_placer", "ant_house", "ant_house", "idle")

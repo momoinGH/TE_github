@@ -151,13 +151,8 @@ local function DoDamage(inst, rad)
                     v:DoTaskInTime(0.6, function()
                         if v.components.workable then
                             v.components.workable:Destroy(inst)
-                            local vx, vy, vz = v.Transform:GetWorldPosition()
-                            v:DoTaskInTime(0.3, function() setfires(vx, vy, vz, 1) end)
                         end
                     end)
-                    if v:IsValid() and v:HasTag("stump") then
-                        -- v:Remove()
-                    end
                 elseif v.components.pickable ~= nil
                     and v.components.pickable:CanBePicked()
                     and not v:HasTag("intense") then

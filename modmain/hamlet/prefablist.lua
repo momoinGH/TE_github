@@ -64,7 +64,7 @@ PrefabFiles = {
 
 
     "antchest",           --蜜箱
-    "antcombhomecave",    --蚁窝
+    "antcombhome",    --蚁窝
     "anthill_cavelamp",   --爪灯
     "anthill_lamp",       --蜜灯
     "anthill_stalactite", --蚁穴石笋

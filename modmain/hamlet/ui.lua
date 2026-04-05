@@ -13,14 +13,6 @@ end)
 ----------------------------------------------------------------------------------------------------
 
 
--- 哈姆雷特血月
-local luavermelha = require "widgets/bloodmoon"
-if TUNING.tropical.aporkalypse then
-    AddClassPostConstruct("widgets/uiclock", function(self)
-        self.luadesangue = self:AddChild(luavermelha(self.owner))
-    end)
-end
-
 
 local PlayerHud = require("screens/playerhud")
 -- function PlayerHud:CreateOverlays(owner, ...)

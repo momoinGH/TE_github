@@ -50,6 +50,7 @@ function table.trodeep_merge(target, add_table, override)
 end
 
 function table.troinserttable(tab, vs)
+    if not vs then return end
     for _, v in pairs(vs) do
         table.insert(tab, v)
     end

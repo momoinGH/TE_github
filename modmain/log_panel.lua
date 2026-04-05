@@ -274,6 +274,15 @@ TheInput:AddKeyDownHandler(KEY_F11, function()
     ToggleLogPanel()
 end)
 
+-- 刚进游戏如果有报错自动打开面板
+AddPrefabPostInit("world", function(inst)
+    inst:DoTaskInTime(3, function()
+        if #cache_log > 0 and not log_panel then
+            ToggleLogPanel()
+        end
+    end)
+end)
+
 ----------------------------------------------------------------------------------------------------
 local function ClientShowLog(msg, level)
     -- 在日志面板显示
@@ -322,7 +331,8 @@ function EntityScript:DoTaskInTime(time, fn, ...)
     local new_fn = function(inst, ...)
         local success, err = pcall(fn, inst, ...)
         if not success then
-            TroErrorHandle(err, true)
+            TroErrorHandle(err, false)
+            StackTraceToLog()
         end
     end
     return OldDoTaskInTime(self, time, new_fn, ...)
@@ -333,7 +343,8 @@ function EntityScript:DoPeriodicTask(time, fn, initialdelay, ...)
     local new_fn = function(inst, ...)
         local success, err = pcall(fn, inst, ...)
         if not success then
-            TroErrorHandle(err, true)
+            TroErrorHandle(err, false)
+            StackTraceToLog()
         end
     end
     return OldDoPeriodicTask(self, time, new_fn, initialdelay, ...)
@@ -343,7 +354,8 @@ local OldPushEvent_Internal = EntityScript.PushEvent_Internal
 function EntityScript:PushEvent_Internal(event, data, immediate)
     local success, err = pcall(OldPushEvent_Internal, self, event, data, immediate)
     if not success then
-        TroErrorHandle(err, true)
+        TroErrorHandle(err, false)
+        StackTraceToLog()
     end
 end
 
@@ -352,7 +364,8 @@ for action_id, data in pairs(ACTIONS) do
     data.fn = function(...)
         local results = { pcall(old_fn, ...) }
         if not results[1] then
-            TroErrorHandle(results[2], true)
+            TroErrorHandle(results[2], false)
+            StackTraceToLog()
         else
             return unpack(results, 2)
         end

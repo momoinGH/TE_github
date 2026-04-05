@@ -25,18 +25,8 @@ local function OnAttacked(inst, data)
     inst.components.combat:SetTarget(data.attacker)
 end
 
-local function oncollide(inst, other)
-    if not other:HasTag("tree") then return end
-
-    local v1 = Vector3(inst.Physics:GetVelocity())
-    if v1:LengthSq() < 1 then return end
-
-    inst:DoTaskInTime(2 * FRAMES, function()
-        if other and other.components.workable and other.components.workable.workleft > 0 then
-            SpawnPrefab("collapse_small").Transform:SetPosition(other:GetPosition():Get())
-            other.components.workable:Destroy(inst)
-        end
-    end)
+local function NoHoles(pt)
+    return not TheWorld.Map:IsPointNearHole(pt)
 end
 
 SetSharedLootTable('ancientherald', {
@@ -51,6 +41,39 @@ SetSharedLootTable('ancientherald', {
 
     { 'armorvortexcloak_blueprint', 1 },
 })
+
+--玩家别想甩掉！
+local function TryTeleportPlayerNear(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local player = FindClosestPlayer(x, y, z, true)
+    if not player then
+        inst.find_player_task = inst:DoTaskInTime(2, TryTeleportPlayerNear)
+        return
+    end
+
+    local pos = inst:GetPosition()
+    local angle = player:GetAngleToPoint(pos) * DEGREES
+    local offset = FindWalkableOffset(player:GetPosition(), angle, 30, 10, false, true, NoHoles)
+    if not offset then
+        inst.find_player_task = inst:DoTaskInTime(2, TryTeleportPlayerNear)
+        return
+    end
+
+    inst.Physics:Teleport((pos + offset):Get())
+    inst.find_player_task = nil
+end
+
+local function OnEntitySleep(inst)
+    if not inst.find_player_task then
+        inst.find_player_task = inst:DoTaskInTime(math.random(30, 60), TryTeleportPlayerNear)
+    end
+end
+local function OnEntityWake(inst)
+    if inst.find_player_task then
+        inst.find_player_task:Cancel()
+        inst.find_player_task = nil
+    end
+end
 
 local function fn()
     local inst = CreateEntity()
@@ -124,7 +147,7 @@ local function fn()
 
     inst:ListenForEvent("attacked", OnAttacked)
 
-    inst:AddComponent("knownlocations")
+    -- inst:AddComponent("knownlocations")
 
     inst:ListenForEvent("endaporkalypse", function()
         inst:Remove()
@@ -133,6 +156,11 @@ local function fn()
     inst.summon_time = GetTime()
     inst.taunt_time = GetTime()
 
+    inst.find_player_task = nil
+
+
+    inst.OnEntitySleep = OnEntitySleep
+    inst.OnEntityWake = OnEntityWake
     return inst
 end
 

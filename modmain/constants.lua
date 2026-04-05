@@ -188,3 +188,62 @@ function TroSpawnDropItem(inst, item, count, target)
 end
 
 GLOBAL.TroSpawnDropItem = TroSpawnDropItem
+
+
+---简易的坐标附近生成实体的函数，经常用于在玩家附近生成一些怪物
+---不能保证数量一定足够，没有找到合适的位置就会少生成
+---@param prefab string 要生成的实体名，可以是一个数组
+---@param pt Vector3
+---@param count number
+---@param radius number 生成半径
+---@param offset_y number
+---@param find_offset_fn function 查找偏移量的函数，一般是FindWalkableOffset、FindSwimmableOffset，默认是一个尝试12次查找陆地的函数
+---@return table
+function TroSpawnRandomEntsInRange(prefab, pt, count, radius, offset_y, find_offset_fn)
+    local ents = {}
+    offset_y = offset_y or 0
+    local function getrandomoffset()
+        local theta = math.random() * 2 * PI
+        local offset = find_offset_fn and find_offset_fn(pt) or FindWalkableOffset(pt, theta, radius, 12, true)
+        if offset then
+            return pt + offset
+        end
+    end
+
+    for i = 1, count do
+        local spawn_pt = getrandomoffset()
+        if spawn_pt then
+            spawn_pt.y = spawn_pt.y + offset_y
+
+            local ent = nil
+            if type(prefab) == "table" then
+                ent = SpawnPrefab(prefab[math.random(1, #prefab)])
+            else
+                ent = SpawnPrefab(prefab)
+            end
+            if ent then
+                if ent.Physics then
+                    ent.Physics:Teleport(spawn_pt:Get())
+                else
+                    ent.Transform:SetPosition(spawn_pt.x, spawn_pt.y, spawn_pt.z)
+                end
+                table.insert(ents, ent)
+            end
+        end
+    end
+    return ents
+end
+
+GLOBAL.TroSpawnRandomEntsInRange = TroSpawnRandomEntsInRange
+
+
+--- 通过userid在AllPlayers中查找玩家
+function TroGetPlayerById(userid)
+    for _, player in ipairs(AllPlayers) do
+        if player.userid == userid then
+            return player
+        end
+    end
+end
+
+GLOBAL.TroGetPlayerById = TroGetPlayerById

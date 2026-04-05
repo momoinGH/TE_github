@@ -11767,7 +11767,7 @@ AddRoom("HamSlurtleCanyon", {
         },
         countprefabs =
         {
-            antcombhomecave = 2,
+            antcombhome = 2,
             giantgrubspawner = 1,
             ant_cave_lantern = 2,
         },
@@ -11801,7 +11801,7 @@ AddRoom("HamBatsAndSlurtles", {
         },
         countprefabs =
         {
-            antcombhomecave = 2,
+            antcombhome = 2,
             giantgrubspawner = 1,
             ant_cave_lantern = 2,
             antchest = 1,
@@ -11824,7 +11824,7 @@ AddRoom("HamRockyPlains", {
             pillar_cave_rock = 0.1,
             rock_flippable = 0.3,
             rock_antcave = 0.7,
-            antcombhomecave = 0.15,
+            antcombhome = 0.15,
             sapling = 0.2,
             guano = 0.27,
             goldnugget = .05,
@@ -11837,7 +11837,7 @@ AddRoom("HamRockyPlains", {
         },
         countprefabs =
         {
-            antcombhomecave = 2,
+            antcombhome = 2,
             giantgrubspawner = 1,
             ant_cave_lantern = 2,
             pond_cave = 2,
@@ -11866,7 +11866,7 @@ AddRoom("HamRockyPlainsexit", {
         },
         countprefabs =
         {
-            antcombhomecave = 1,
+            antcombhome = 1,
             giantgrubspawner = 1,
         },
     }
@@ -11891,7 +11891,7 @@ AddRoom("HamRockyHatchingGrounds", {
         },
         countprefabs =
         {
-            antcombhomecave = 2,
+            antcombhome = 2,
             giantgrubspawner = 1,
             ant_cave_lantern = 2,
         },
@@ -11947,7 +11947,7 @@ AddRoom("HamBGRockyCaveRoom", {
         },
         countprefabs =
         {
-            antcombhomecave = 2,
+            antcombhome = 2,
             giantgrubspawner = 1,
             ant_cave_lantern = 2,
         },

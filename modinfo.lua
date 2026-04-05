@@ -211,4 +211,17 @@ configuration_options =
             image = "vampire_bat_caves.tex",
         },
     },
+    {
+        name = "aporkalypse",
+        label = "大灾变",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.SETTINGS },
+            group = tro_modules.hamlet,
+            world = { "forest" },
+            atlas = hamlet_atlas,
+            image = "aporkalypse.tex",
+        },
+    },
 }

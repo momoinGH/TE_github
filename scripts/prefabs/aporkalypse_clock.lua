@@ -279,6 +279,7 @@ local function make_master_fn()
         inst.SoundEmitter:KillSound("totem_sound")
         inst.SoundEmitter:KillSound("base_sound")
         inst.SoundEmitter:PlaySound("dontstarve_DLC003/common/objects/stone_door/close")
+        ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1, inst, 40)
 
         inst.AnimState:PushAnimation("idle_pst", false)
         inst.AnimState:PushAnimation("idle_on")

@@ -111,7 +111,7 @@ local room_setup_fns = {
 
     function()
         local roomItems = {}
-        addItemTables("antcombhomecave", roomItems, 1, 2)
+        addItemTables("antcombhome", roomItems, 1, 2)
         addItemTables("antman", roomItems, 3, 4)
         addLanternTables(roomItems, MIN_LANTERNS, MAX_LANTERNS)
         return roomItems
@@ -126,7 +126,7 @@ local room_setup_fns = {
 
     function()
         local roomItems = {}
-        addItemTables("antcombhomecave", roomItems, 1, 1)
+        addItemTables("antcombhome", roomItems, 1, 1)
         addItemTables("antman", roomItems, 1, 2)
         addItemTables("antchest", roomItems, 1, 2)
         addLanternTables(roomItems, MIN_LANTERNS, MAX_LANTERNS)

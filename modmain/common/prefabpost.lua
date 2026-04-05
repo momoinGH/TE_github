@@ -29,7 +29,7 @@ modimport "modmain/common/components/butterflyspawner.lua"     --修改不同地
 modimport "modmain/common/components/temperatureoverrider.lua" --对气温的一些hook
 modimport "modmain/common/components/workable.lua"
 modimport "modmain/common/components/teleporter.lua"
-
+modimport "modmain/common/components/childspawner.lua"
 
 ----------------------------------------------------------------------------------------------------
 

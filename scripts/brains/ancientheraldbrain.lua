@@ -15,8 +15,12 @@ local CHASE_TIME = 20
 local SUMMON_COOLDOWN = 15
 local TAUNT_COOLDOWN = 100
 
+-- 我希望围着玩家转悠
 local function GetHomePos(inst)
-    return inst.components.knownlocations:GetLocation("spawnpoint")
+    -- return inst.components.knownlocations:GetLocation("spawnpoint")
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local player = FindClosestPlayer(x, y, z, true)
+    return player and player:GetPosition() or nil
 end
 
 local function ShoudSummonEntities(inst)
@@ -60,26 +64,28 @@ function AncientHeraldBrain:OnStart()
     local root =
         PriorityNode(
             {
+                -- 嘲讽（100秒冷却，10 % 概率）
                 IfNode(function() return CanTaunt(self.inst) end, "CanTaunt",
                     DoAction(self.inst, function() PerformTaunt(self.inst) end)),
-
+                -- 召唤怪物（15秒冷却）
                 IfNode(function() return CanSummon(self.inst) end, "CanSummon",
                     DoAction(self.inst, function() PerformSummon(self.inst) end)),
-
+                -- 追击并攻击玩家
                 WhileNode(
                     function()
                         return self.inst.components.combat.target == nil or
                             not self.inst.components.combat:InCooldown()
                     end, "AttackMomentarily",
                     ChaseAndAttack(self.inst, CHASE_TIME, CHASE_DIST)),
+                -- 游荡
                 Wander(self.inst, GetHomePos, CHASE_DIST),
             }, 1)
 
     self.bt = BT(self.inst, root)
 end
 
-function AncientHeraldBrain:OnInitializationComplete()
-    self.inst.components.knownlocations:RememberLocation("spawnpoint", self.inst:GetPosition())
-end
+-- function AncientHeraldBrain:OnInitializationComplete()
+--     self.inst.components.knownlocations:RememberLocation("spawnpoint", self.inst:GetPosition())
+-- end
 
 return AncientHeraldBrain
