@@ -31,20 +31,19 @@ local COLOURS = {
         CAVE_COLOUR = { colour = Point(0, 0, 0), time = 2 },
     },
 
-    --大灾变
+    --大灾变，不太暗不太亮就行
     APORKALYPSE_COLOURS = {
         PHASE_COLOURS =
         {
             default =
             {
-                day = { colour = Point(200 / 255, 0, 0), time = 2 },
-                dusk = { colour = Point(200 / 255, 0, 0), time = 2 },
-                night = { colour = Point(200 / 255, 0, 0), time = 2 },
+                day = { colour = Point(122 / 255, 122 / 255, 122 / 255), time = 2 },
+                dusk = { colour = Point(122 / 255, 122 / 255, 122 / 255), time = 2 },
+                night = { colour = Point(122 / 255, 122 / 255, 122 / 255), time = 2 },
             },
         },
-
-        FULL_MOON_COLOUR = { colour = Point(200 / 255, 0, 0), time = 2 },
-        CAVE_COLOUR = { colour = Point(20 / 255, 0, 0), time = 2 },
+        FULL_MOON_COLOUR = { colour = Point(122 / 255, 122 / 255, 122 / 255), time = 2 },
+        CAVE_COLOUR = { colour = Point(122 / 255, 122 / 255, 122 / 255), time = 2 },
     },
 }
 
