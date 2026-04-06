@@ -4,7 +4,7 @@ local assets =
 }
 
 
-function dodamageinplayer(inst)
+local function dodamageinplayer(inst)
     local alvo = GetClosestInstWithTag("player", inst, 5)
     local alvo2 = GetClosestInstWithTag("insect", inst, 5)
 

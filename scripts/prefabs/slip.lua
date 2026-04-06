@@ -20,7 +20,7 @@ local function ShouldAcceptItem(inst, item, giver)
     return giver:HasTag("slipwhisperer") and inst.components.eater:CanEat(item)
 end
 
-function GetOtherSpiders(inst)
+local function GetOtherSpiders(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     return TheSim:FindEntities(x, y, z, 15, { "slip" }, { "FX", "NOCLICK", "DECOR", "INLIMBO" })
 end

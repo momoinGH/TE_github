@@ -11,7 +11,7 @@ local BillBrain       = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
-function IsBillFood(item)
+local function IsBillFood(item)
     return item:HasTag("billfood")
 end
 

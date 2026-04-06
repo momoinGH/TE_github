@@ -305,7 +305,7 @@ local function ReplenishStockAction(inst)
     end
 end
 
-function getfacespeech(inst)
+local function getfacespeech(inst)
     local econ = TheWorld.components.economy
 
     local econprefab = inst.prefab

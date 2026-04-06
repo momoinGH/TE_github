@@ -66,7 +66,7 @@ local function OnNewTarget(inst, data)
     end
 end
 
-function FindOincs(inst)
+local function FindOincs(inst)
     if inst.components.inventory then
         return inst.components.inventory:FindItems(function(item) return item:HasTag("oinc") end)
     end
@@ -101,7 +101,7 @@ local function IsValidGround(pos)
     return false
 end
 
-function Shuffle(tbl)
+local function Shuffle(tbl)
     local size = #tbl
     for i = size, 1, -1 do
         local rand = math.random(size)

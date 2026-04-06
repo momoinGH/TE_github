@@ -301,7 +301,7 @@ function Quaker_Interior:SpawnDebris(spawn_point)
 	end
 end
 
-function PlayFallingSound(inst, volume)
+local function PlayFallingSound(inst, volume)
 	volume = volume or 1
 	local sound = inst.SoundEmitter
 	if sound then

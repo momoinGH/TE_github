@@ -14,7 +14,7 @@ local Vacuum = Class(function(self, inst)
     self.vacuuming_player = false
     self.spitplayer = false
 end)
-function CheckLOSFromPoint(pos, target_pos)
+local function CheckLOSFromPoint(pos, target_pos)
     --[[
     local dist = target_pos:Dist(pos)
     local vec = (target_pos - pos):GetNormalized()

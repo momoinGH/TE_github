@@ -3,7 +3,7 @@ require("stategraphs/commonstates")
 CommonForgeStates = {}
 CommonForgeHandlers = {}
 
-function EnsureTable(tab, ...)
+local function EnsureTable(tab, ...)
     if not tab then tab = {} end
     local keys = { ... }
     for i = 1, #keys, 1 do
@@ -77,7 +77,7 @@ CommonForgeHandlers.OnExitShield = function()
     return EventHandler("exitshield", onexitshield)
 end
 --------------------------------------------------------------------------
-function onsleep(inst, data)
+local function onsleep(inst, data)
     if inst.sg:HasStateTag("nosleep") then
         inst.sg.mem.sleep_duration = 3
     elseif inst.sg.currentstate.name ~= "sleep" then

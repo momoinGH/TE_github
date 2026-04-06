@@ -82,7 +82,7 @@ local function DoWirlwlind(inst)
     end
 end
 ------------------------------------------------
-function IsEntityInside(polygon, ent)
+local function IsEntityInside(polygon, ent)
     local pt = {}
     pt.x, pt.o, pt.y = ent.Transform:GetWorldPosition()
     local radius = ent:GetPhysicsRadius(0) or 0.5

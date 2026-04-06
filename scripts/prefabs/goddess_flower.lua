@@ -150,7 +150,7 @@ local function fn()
     return inst
 end
 
-function rosefn()
+local function rosefn()
     local inst = fn()
 
     inst:SetPrefabName("goddess_flower")
@@ -164,7 +164,7 @@ function rosefn()
     return inst
 end
 
-function plantedflowerfn()
+local function plantedflowerfn()
     local inst = fn()
 
     inst:SetPrefabName("goddess_flower")

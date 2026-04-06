@@ -314,6 +314,41 @@ local function playersproblem(inst)
     return false
 end
 
+local function getfacespeech(inst)
+    local econ = TheWorld.components.economy
+
+    local econprefab = inst.prefab
+    if inst.econprefab then
+        econprefab = inst.econprefab
+    end
+    local desc = econ:GetTradeItemDesc(econprefab)
+    if desc then
+        local speech = deepcopy(getSpeechType(inst, STRINGS.CITY_PIG_TALK_LOOKATWILSON_TRADER))
+
+        if TheWorld.components.aporkalypse and TheWorld.components.aporkalypse:IsNear() then
+            speech = deepcopy(getSpeechType(inst, STRINGS.CITY_PIG_TALK_APORKALYPSE_SOON))
+        end
+
+        for i, line in ipairs(speech) do
+            speech[i] = string.format(line, desc)
+        end
+
+        return speech
+    else
+        local speech = getSpeechType(inst, STRINGS.CITY_PIG_TALK_LOOKATWILSON)
+        if ThePlayer and ThePlayer:HasTag("pigroyalty") then
+            speech = STRINGS.CITY_PIG_TALK_LOOKATWILSON.ROYALTY
+        end
+
+        --        if GetAporkalypse():IsNear() then
+        if TheWorld.components.aporkalyps then
+            speech = deepcopy(getSpeechType(inst, STRINGS.CITY_PIG_TALK_APORKALYPSE_SOON))
+        end
+
+        return speech
+    end
+end
+
 local function GoHomeAction(inst)
     if not inst.components.follower.leader and
         HasValidHome(inst) and

@@ -138,7 +138,7 @@ local function ValidRepairFn(inst)
     return true
 end
 
-function MakeWallType(data)
+local function MakeWallType(data)
     local assets =
     {
         Asset("ANIM", "anim/wall.zip"),

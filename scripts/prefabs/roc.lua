@@ -39,7 +39,7 @@ local function OnRemoved(inst)
 	--    TheWorld.components.rocmanager:RemoveRoc(inst)
 end
 
-function MakeNoPhysics(inst, mass, rad)
+local function MakeNoPhysics(inst, mass, rad)
 	local physics = inst.entity:AddPhysics()
 	physics:SetMass(mass)
 	physics:SetCapsule(rad, 1)

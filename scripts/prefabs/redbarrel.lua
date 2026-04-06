@@ -10,7 +10,7 @@ local prefabs =
     "explode_small",
 }
 
-function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
+local function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
                       random_angle)
     wavePrefab = wavePrefab or "rogue_wave"
     totalAngle = math.clamp(totalAngle, 1, 360)

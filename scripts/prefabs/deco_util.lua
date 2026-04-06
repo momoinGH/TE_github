@@ -338,7 +338,7 @@ local function LoadPostPass(inst, ents, data)
     end
 end
 
-function decofn(build, bank, animframe, data, name)
+local function decofn(build, bank, animframe, data, name)
     data = data or {}
 
     local function fn()

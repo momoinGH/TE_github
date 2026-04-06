@@ -1,6 +1,6 @@
 require("stategraphs/commonstates")
 
-function SpawnRandomInRange(inst, prefab, min_count, max_count, radius, offset_y)
+local function SpawnRandomInRange(inst, prefab, min_count, max_count, radius, offset_y)
     local objs = {}
     offset_y = offset_y or 0
 
@@ -45,7 +45,7 @@ function SpawnRandomInRange(inst, prefab, min_count, max_count, radius, offset_y
                 obj.components.combat:SuggestTarget(player)
             end
 
-            obj:AddTag("aporkalypse_cleanup")
+            obj:TroAddSaveTag("aporkalypse_cleanup")
             table.insert(objs, obj)
         end
     end
@@ -53,7 +53,7 @@ function SpawnRandomInRange(inst, prefab, min_count, max_count, radius, offset_y
     return objs
 end
 
-function SpawnFireRain(inst)
+local function SpawnFireRain(inst)
     if TheWorld:HasTag("cave") then
         SpawnRandomInRange(inst, "cavein_boulder", 1, 4, 6, 35)
     else
@@ -62,19 +62,19 @@ function SpawnFireRain(inst)
     end
 end
 
-function SpawnGhosts(inst)
+local function SpawnGhosts(inst)
     SpawnRandomInRange(inst, "pigghost", 4, 6, 10) --pigghost
 end
 
-function SpawnNightmares(inst)
+local function SpawnNightmares(inst)
     local nightmares = SpawnRandomInRange(inst, { "nightmarebeak", "crawlingnightmare" }, 2, 4, 10)
 
     for k, nightmare in pairs(nightmares) do
-        nightmare:AddTag("aporkalypse_cleanup")
+        nightmare:TroAddSaveTag("aporkalypse_cleanup")
     end
 end
 
-function SpawnFrogRain(inst)
+local function SpawnFrogRain(inst)
     local function cancelrain()
         if inst.frograintask then
             inst.frograintask:Cancel()

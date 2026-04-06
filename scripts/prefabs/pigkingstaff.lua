@@ -62,7 +62,7 @@ local function Horror(Target)
     SpawnPrefab("shadowmeteor").Transform:SetPosition(Target:GetPosition():Get())
 end
 
-function convert_rocks(inst, replacement)
+local function convert_rocks(inst, replacement)
     if inst:IsValid() and replacement ~= nil then
         local goop = SpawnPrefab(replacement)
         if goop ~= nil then
@@ -84,7 +84,7 @@ function convert_rocks(inst, replacement)
     end
 end
 
-function UseStaff(inst, Target, pos)
+local function UseStaff(inst, Target, pos)
     --print("using staff")
     if inst.prefab == "pigking" then
         Target = inst

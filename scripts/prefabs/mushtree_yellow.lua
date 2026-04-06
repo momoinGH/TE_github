@@ -557,7 +557,7 @@ local function maketree(name, data, state)
 end
 
 local treeprefabs = {}
-function treeset(name, data, build, bloombuild)
+local function treeset(name, data, build, bloombuild)
     local buildasset = Asset("ANIM", build)
     local bloombuildasset = Asset("ANIM", bloombuild)
     local assets =

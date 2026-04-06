@@ -185,7 +185,7 @@ local function TransformToWarrior(inst, from_limbo_or_asleep)
     if from_limbo_or_asleep then
         local warrior = SpawnPrefab("antman_warrior")
         warrior.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        warrior:AddTag("aporkalypse_cleanup")
+        warrior:TroAddSaveTag("aporkalypse_cleanup")
 
         local home = inst.components.homeseeker and inst.components.homeseeker:GetHome()
         if home then

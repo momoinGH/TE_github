@@ -2579,11 +2579,11 @@ local internalloot =
 local TreasureList = {}
 local TreasureLootList = {}
 
-function AddTreasure(name, data)
+local function AddTreasure(name, data)
 	TreasureList[name] = data
 end
 
-function AddTreasureLoot(name, data)
+local function AddTreasureLoot(name, data)
 	TreasureLootList[name] = data
 end
 
@@ -2601,23 +2601,23 @@ local function GetTierLootTable(tier)
 	return table.remove(Tiers[tier], math.random(1, #Tiers[tier]))
 end
 
-function GetTreasureDefinitionTable()
+local function GetTreasureDefinitionTable()
 	return TreasureList
 end
 
-function GetTreasureDefinition(name)
+local function GetTreasureDefinition(name)
 	return TreasureList[name]
 end
 
-function GetTreasureLootDefinitionTable()
+local function GetTreasureLootDefinitionTable()
 	return TreasureLootList
 end
 
-function GetTreasureLootDefinition(name)
+local function GetTreasureLootDefinition(name)
 	return TreasureLootList[name]
 end
 
-function ApplyModsToTreasure()
+local function ApplyModsToTreasure()
 	for name, data in pairs(TreasureList) do
 		local modfns = ModManager:GetPostInitFns("TreasurePreInit", name)
 		for i, modfn in ipairs(modfns) do
@@ -2627,7 +2627,7 @@ function ApplyModsToTreasure()
 	end
 end
 
-function ApplyModsToTreasureLoot()
+local function ApplyModsToTreasureLoot()
 	for name, data in pairs(TreasureLootList) do
 		local modfns = ModManager:GetPostInitFns("TreasureLootPreInit", name)
 		for i, modfn in ipairs(modfns) do
@@ -2676,11 +2676,11 @@ local function GetTreasureLoot(loots)
 	return lootlist
 end
 
-function GetTreasureLootList(name)
+local function GetTreasureLootList(name)
 	return GetTreasureLoot(GetTreasureLootDefinition(name))
 end
 
-function SpawnTreasureLoot(name, lootdropper, pt, nexttreasure)
+local function SpawnTreasureLoot(name, lootdropper, pt, nexttreasure)
 	if name and lootdropper ~= nil then
 		if not pt then
 			pt = Point(lootdropper.inst.Transform:GetWorldPosition())
@@ -2711,7 +2711,7 @@ function SpawnTreasureLoot(name, lootdropper, pt, nexttreasure)
 	end
 end
 
-function SpawnTreasureChest(name, lootdropper, pt, nexttreasure)
+local function SpawnTreasureChest(name, lootdropper, pt, nexttreasure)
 	local loots = GetTreasureLootDefinition(name)
 	if loots then
 		local chest = SpawnPrefab(loots.chest or "treasurechest")

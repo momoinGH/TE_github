@@ -38,7 +38,7 @@ SetSharedLootTable('billloot',
 	})
 
 
-function IsBillFood(item)
+local function IsBillFood(item)
 	return item:HasTag("billfood")
 end
 

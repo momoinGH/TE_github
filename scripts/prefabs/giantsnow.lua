@@ -1,6 +1,6 @@
 require "stategraphs/SGgiantgrub"
 
-function ChangeToUndergroundCharacterPhysics(inst)
+local function ChangeToUndergroundCharacterPhysics(inst)
 	local phys = inst.Physics
 	phys:SetCollisionGroup(COLLISION.CHARACTERS)
 	phys:ClearCollisionMask()

@@ -102,36 +102,38 @@ AddComponentPostInit("colourcube", function(self)
     local _activatedplayer
     local _showencc = CUBES.default
     local function UpdateAmbientCCTable(blendtime)
-        if _activatedplayer then
-            if _activatedplayer:TroIsAporkalypse() then
-                if _showencc ~= CUBES.aporka then
-                    _showencc = CUBES.aporka
-                    Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.aporkalypse)
-                end
-            elseif _activatedplayer:IsInShipwreckedArea() then
-                --print("colourcube shipwrecked")
-                if _showencc ~= CUBES.shipwrecked then
-                    _showencc = CUBES.shipwrecked
-                    Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.shipwrecked)
-                end
-            elseif _activatedplayer:IsInHamletArea() then
-                --print("colourcube hamlet")
-                if _showencc ~= CUBES.hamlet then
-                    _showencc = CUBES.hamlet
-                    Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.hamlet)
-                end
-            elseif _activatedplayer:IsInVolcanoArea() then
-                --print("colourcube volcano")
-                if _showencc ~= CUBES.vlocano then
-                    _showencc = CUBES.volcano
-                    Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.volcano)
-                end
-            else
-                --print("colourcube default")
-                if _showencc ~= CUBES.default then
-                    _showencc = CUBES.default
-                    Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", _SEASON_COLOURCUBES)
-                end
+        if not _activatedplayer then
+            return _UpdateAmbientCCTable(blendtime)
+        end
+
+        if _activatedplayer:TroIsAporkalypse() then
+            if _showencc ~= CUBES.aporka then
+                _showencc = CUBES.aporka
+                Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.aporkalypse)
+            end
+        elseif _activatedplayer:IsInShipwreckedArea() then
+            --print("colourcube shipwrecked")
+            if _showencc ~= CUBES.shipwrecked then
+                _showencc = CUBES.shipwrecked
+                Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.shipwrecked)
+            end
+        elseif _activatedplayer:IsInHamletArea() then
+            --print("colourcube hamlet")
+            if _showencc ~= CUBES.hamlet then
+                _showencc = CUBES.hamlet
+                Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.hamlet)
+            end
+        elseif _activatedplayer:IsInVolcanoArea() then
+            --print("colourcube volcano")
+            if _showencc ~= CUBES.vlocano then
+                _showencc = CUBES.volcano
+                Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", REGION_SEASON_COLOURCUBES.volcano)
+            end
+        else
+            --print("colourcube default")
+            if _showencc ~= CUBES.default then
+                _showencc = CUBES.default
+                Hooks.SetUpvalue(_UpdateAmbientCCTable, "SEASON_COLOURCUBES", _SEASON_COLOURCUBES)
             end
         end
 

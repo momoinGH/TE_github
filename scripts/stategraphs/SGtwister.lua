@@ -29,7 +29,7 @@ local function onattackedfn(inst, data)
     end
 end
 
-function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive, random_angle)
+local function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive, random_angle)
     wavePrefab = wavePrefab or "rogue_wave"
     totalAngle = math.clamp(totalAngle, 1, 360)
 

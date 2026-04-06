@@ -2,7 +2,7 @@ local JUMP_SPEED = 50
 local JUMP_LAND_OFFSET = 3
 local TIGERSHARK_SPLASH_RADIUS = 5
 
-function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
+local function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
     random_angle)
     wavePrefab = wavePrefab or "rogue_wave"
     totalAngle = math.clamp(totalAngle, 1, 360)

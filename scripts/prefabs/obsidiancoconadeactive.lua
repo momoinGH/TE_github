@@ -56,7 +56,7 @@ local FADE_INTENSITY = .8
 local FADE_RADIUS = 1.5
 local FADE_FALLOFF = .5
 
-function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
+local function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
     random_angle)
     wavePrefab = wavePrefab or "rogue_wave"
     totalAngle = math.clamp(totalAngle, 1, 360)

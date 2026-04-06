@@ -14,7 +14,7 @@ local Whirlpool = Class(function(self, inst)
 	self.whirlpooling_player = false
 	self.spitplayer = false
 end)
-function CheckLOSFromPoint(pos, target_pos)
+local function CheckLOSFromPoint(pos, target_pos)
 	return true
 end
 

@@ -13,7 +13,7 @@ local prefabs =
     "rogue_wave",
 }
 
-function SpawnWindSwirl(x, y, z, speed, angle)
+local function SpawnWindSwirl(x, y, z, speed, angle)
     local swirl = SpawnPrefab("windswirl")
     swirl.Transform:SetPosition(x, y, z)
     swirl.Transform:SetRotation(angle + 180)

@@ -243,7 +243,7 @@ local function ShouldSleep(inst)
             or (TheWorld:HasTag("cave") and TheWorld.state.iscavenight and (not watchlight or not inst:IsInLight())))
 end
 
-function fn()
+local function fn()
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then

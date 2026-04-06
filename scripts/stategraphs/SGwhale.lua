@@ -12,7 +12,7 @@ local events=
 	EventHandler("attacked", function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
 }
 
-function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive, random_angle)
+local function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive, random_angle)
 	wavePrefab = wavePrefab or "rogue_wave"
 	totalAngle = math.clamp(totalAngle, 1, 360)
 

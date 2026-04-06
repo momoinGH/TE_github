@@ -1909,7 +1909,7 @@ local internalloot =
 
 local TreasureLootList = {}
 
-function AddTreasureLoot(name, data)
+local function AddTreasureLoot(name, data)
 	TreasureLootList[name] = data
 end
 
@@ -1917,11 +1917,11 @@ for name, data in pairs(internalloot) do
 	AddTreasureLoot(name, data)
 end
 
-function GetTreasureLootDefinitionTable()
+local function GetTreasureLootDefinitionTable()
 	return TreasureLootList
 end
 
-function GetTreasureLootDefinition(name)
+local function GetTreasureLootDefinition(name)
 	return TreasureLootList[name]
 end
 
@@ -1964,7 +1964,7 @@ local function GetTreasureLoot(loots)
 	return lootlist
 end
 
-function GetTreasureLootList(name)
+local function GetTreasureLootList(name)
 	return GetTreasureLoot(GetTreasureLootDefinition(name))
 end
 

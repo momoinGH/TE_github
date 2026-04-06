@@ -3,7 +3,7 @@ local prefabs = {
     "fryfocals_charge",
 }
 
-function MakeGoggle(name)
+local function MakeGoggle(name)
     local fname = "hat_" .. name
     local symname = name .. "hat"
     local texture = symname .. ".tex"

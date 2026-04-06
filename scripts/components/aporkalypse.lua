@@ -12,7 +12,7 @@ local function SpawnHerald(src, player, count)
     if not herald then return false end         --没有合适的位置
 
     herald:TroAddSaveTag("aporkalypse_cleanup") --大灾变过去会销毁
-    -- herald.components.combat:SuggestTarget(player) --绕过玩家吧
+    -- herald.components.combat:SuggestTarget(player) --饶过玩家吧
     herald.sg:GoToState("appear")
     return herald
 end
