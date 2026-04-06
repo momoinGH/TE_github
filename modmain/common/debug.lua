@@ -212,3 +212,52 @@ GLOBAL.c_printtile = function()
         end
     end
 end
+
+----------------------------------------------------------------------------------------------------
+
+-- 遍历所有休眠实体，找出仍有待执行任务的实体
+GLOBAL.printsleepentstaskinfo = function()
+    local results = {}
+    for guid, inst in pairs(Ents) do
+        -- 只检查休眠的、有pendingtasks的实体
+        if inst.IsAsleep and inst:IsAsleep()
+            and inst.pendingtasks and next(inst.pendingtasks) then
+            local task_count = 0
+            local task_infos = {}
+            for task, _ in pairs(inst.pendingtasks) do
+                task_count = task_count + 1
+                table.insert(task_infos, {
+                    period = task.period,        -- 周期（nil表示一次性任务）
+                    id = task.id,                -- 通常是实体GUID
+                    fn = tostring(task.fn),      -- 函数引用
+                    next_time = task:NextTime(), -- 下次执行时间
+                })
+            end
+            table.insert(results, {
+                guid = guid,
+                prefab = inst.prefab or "unknown",
+                task_count = task_count,
+                tasks = task_infos,
+            })
+        end
+    end
+
+    -- 按任务数量降序排列
+    table.sort(results, function(a, b) return a.task_count > b.task_count end)
+
+    -- 打印结果
+    print(string.format("===== 休眠实体中仍有任务的: %d 个 =====", #results))
+    for _, info in ipairs(results) do
+        print(string.format("[%s] GUID:%s  任务数:%d",
+            info.prefab, tostring(info.guid), info.task_count))
+        for i, t in ipairs(info.tasks) do
+            print(string.format("  任务%d: period=%s, next=%.2f, fn=%s",
+                i,
+                t.period and string.format("%.2f", t.period) or "一次性",
+                t.next_time or 0,
+                t.fn))
+        end
+    end
+
+    return results
+end

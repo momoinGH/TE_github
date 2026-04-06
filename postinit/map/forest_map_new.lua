@@ -3,15 +3,7 @@ require("mathutil")
 
 local forest_map = require("map/forest_map")
 local make_cities = require("map/tro_city_builder")
-local old_generatemap = forest_map.Generate --[[
-local SKIP_GEN_CHECKS = Hooks.GetUpValue(old_generatemap, "SKIP_GEN_CHECKS")
-if SKIP_GEN_CHECKS ~= nil and TA_CONFIG.DEVELOP.test_map then
-    print("Skipping generation checks for test map")
-    local old = SKIP_GEN_CHECKS
-    Hooks.SetUpvalue(old_generatemap, "SKIP_GEN_CHECKS", true)
-end]]
-
-
+local old_generatemap = forest_map.Generate
 forest_map.Generate = function(prefab, map_width, map_height, tasks, level, level_type, ...)
     ----世界设置覆盖mod设置中的相同内容
     --local worldgenset = deepcopy(level.overrides) or {}
@@ -19,7 +11,6 @@ forest_map.Generate = function(prefab, map_width, map_height, tasks, level, leve
     -- for i, v in pairs(worldgenset) do
     --     print(i .. ":" .. tostring(v))
     -- end
-
 
     local save = old_generatemap(prefab, map_width, map_height, tasks, level, level_type, ...)
 

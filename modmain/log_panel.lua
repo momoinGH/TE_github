@@ -373,7 +373,7 @@ for action_id, data in pairs(ACTIONS) do
 end
 
 local can_zero_prefabs = {
-
+    roottrunk = true
 }
 
 local OldSpawnPrefabFromSim = SpawnPrefabFromSim

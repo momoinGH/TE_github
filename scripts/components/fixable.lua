@@ -6,7 +6,6 @@ end)
 
 function Fixable:OnRemoveEntity()
     local fixer = SpawnPrefab("reconstruction_project")
-    if fixer == nil then return end
     fixer.Transform:SetPosition(self.inst.Transform:GetWorldPosition())
     fixer.construction_prefab = self.inst.prefab
 
@@ -47,6 +46,7 @@ function Fixable:OnRemoveEntity()
         fixer:SetPrefabNameOverride(self.inst.prefab)
     end
     fixer.reconstruction_stages = self.reconstruction_stages
+    fixer.room_door = self.inst.components.teleporter and self.inst.components.teleporter:GetTarget()
 end
 
 function Fixable:SetPrefabName(name)

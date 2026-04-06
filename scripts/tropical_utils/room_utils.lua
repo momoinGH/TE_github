@@ -59,22 +59,17 @@ function FN.GetCenterPosByHouse(house)
     return center and center:GetPosition()
 end
 
---- 当房屋被摧毁时把屋内的掉落物扔出来
---- 只针对更靠近外面的门
+--- 当房间被摧毁时把屋内的掉落物扔出来
 --- 如果是remove就移除屋内道具，如果是敲毁就返还材料，只包括lootdropper和inventoryitem
-function FN.OnHouseDestroy(house, destroyer, isRemove)
-    local centerPos = FN.GetCenterPosByHouse(house)
-    if not centerPos then return end
-
-    local dis = FN.RADIUS
-    if not isRemove then
+function FN.OnRoomDestroy(room_center, out_ent, destroyer, is_remove)
+    if not is_remove then
         --摧毁室内建筑，生成掉落物
-        for _, v in ipairs(TheSim:FindEntities(centerPos.x, centerPos.y, centerPos.z, dis)) do
-            if not v:HasTag("interior_center") and v ~= house then --中心点下面再删除
+        for _, v in ipairs(FN.FindRoomEnts(room_center)) do
+            if not v:HasTag("interior_center") then          --中心点下面再删除
                 if v.components.workable then
-                    v.components.workable:Destroy(destroyer)       --包括其他的房间
+                    v.components.workable:Destroy(destroyer) --包括其他的房间
                 elseif v.components.health and not v.components.health:IsDead()
-                    and ((not v.components.locomotor and v.components.lootdropper) or v:HasTag("only_interior"))
+                    and (not v.components.locomotor and v.components.lootdropper)
                 then
                     if v.components.lootdropper then
                         v.components.lootdropper:DropLoot() --一般是在死亡的sg中生成，我杀死直接移除不会生成额外的掉落物
@@ -86,11 +81,16 @@ function FN.OnHouseDestroy(house, destroyer, isRemove)
     end
 
     --传送掉落物，移除地板
-    local hx, hy, hz = house.Transform:GetWorldPosition()
-    for _, v in ipairs(TheSim:FindEntities(centerPos.x, centerPos.y, centerPos.z, dis)) do
-        if not isRemove and v.components.inventoryitem then
-            house.components.lootdropper:FlingItem(v) --借用lootdropper组件抛出物品
-        elseif v.components.health and v.components.locomotor and not v:HasTag("only_interior") then
+    local hx, hy, hz = out_ent.Transform:GetWorldPosition()
+    for _, v in ipairs(FN.FindRoomEnts(room_center)) do
+        if not is_remove and v.components.inventoryitem then
+            if out_ent.components.lootdropper then
+                out_ent.components.lootdropper:FlingItem(v) --借用lootdropper组件抛出物品
+            else
+                v.Transform:SetPosition(hx, hy, hz)
+                v.components.inventoryitem:OnDropped(true)
+            end
+        elseif v.components.health and v.components.locomotor then
             if v:HasTag("player") then
                 -- 玩家落水处理
                 v.sg:GoToState("sink_fast")
@@ -100,6 +100,17 @@ function FN.OnHouseDestroy(house, destroyer, isRemove)
         else
             v:Remove()
         end
+    end
+end
+
+--- 当房屋被摧毁时把屋内的掉落物扔出来
+--- 只针对更靠近外面的门
+--- 如果是remove就移除屋内道具，如果是敲毁就返还材料，只包括lootdropper和inventoryitem
+function FN.OnHouseDestroy(house, destroyer, isRemove)
+    local inner_door = house.components.teleporter and house.components.teleporter:GetTarget()
+    local room_center = inner_door and inner_door:IsValid() and inner_door:TroGetRoomCenter()
+    if room_center then
+        FN.OnRoomDestroy(room_center, house, destroyer, isRemove)
     end
 end
 

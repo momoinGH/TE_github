@@ -168,7 +168,6 @@ local function onhammered(inst, worker)
         inst.components.lootdropper:DropLoot()
     end
 
-    -- SpawnPrefab("collapse_big").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst.SoundEmitter:PlaySound("dontstarve/common/destroy_" .. inst.breaksoundsufix)
     inst:Remove()
 end
@@ -823,7 +822,8 @@ local function MakeShop(name, data)
             build = build,
             anim = "idle",
             minimap = minimap,
-            usesound = data.sounds and data.sounds[1] or nil
+            usesound = data.sounds and data.sounds[1] or nil,
+            remove_no_destroy_room = true
         }, CommonPost, MasterPost),
         MakePlacer(name .. "_placer", bank, build, "idle", false, false, true, nil, nil, nil, PlacerPost)
 end

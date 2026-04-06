@@ -56,8 +56,6 @@ SetSharedLootTable('lamp_post',
 local REBUILD_REACTION_TIME = TUNING.TOTAL_DAY_TIME / 50
 local REBUILD_REACTION_VARIANCE = TUNING.SEG_TIME * 3 / 50
 
-local CALL_WORKER_TIME = TUNING.SEG_TIME * 3 / 50
-
 local OFF_SCREENDIST = 30
 local AUTO_REPAIRDIST = 100
 
@@ -87,7 +85,7 @@ local function fix(inst, fixer)
             newprop.interiorID = inst.interiorID
         end
         if newprop.reconstructed then
-            newprop.reconstructed(newprop)
+            newprop:reconstructed()
         end
         newprop:AddTag("reconstructed")
         if inst.spawnerdata and newprop.components.spawner then
@@ -98,6 +96,18 @@ local function fix(inst, fixer)
                 newprop.components.spawner:TakeOwnership(inst.spawnerdata.child)
             end
         end
+
+        --重新连接室内
+        if newprop.components.teleporter
+            and inst.room_door and inst.room_door:IsValid()
+            and inst.room_door.components.teleporter
+        then
+            newprop.components.teleporter:Target(inst.room_door)
+            if not inst.room_door.components.teleporter.target then
+                inst.room_door.components.teleporter:Target(newprop)
+            end
+        end
+        inst.room_door = nil
     end
     inst:Remove()
 end
@@ -194,55 +204,62 @@ local function OnSave(inst, data)
         data.child = inst.spawnerdata.child and inst.spawnerdata.child.GUID or nil
         data.delay = inst.spawnerdata.delay
     end
+    local refs = {}
     if data.child then
-        return { data.child }
+        table.insert(refs, data.child)
     end
+    if inst.room_door then
+        table.insert(refs, inst.room_door.GUID)
+        data.room_door = inst.room_door.GUID
+    end
+
+    return #refs > 0 and refs or nil
 end
 
 local function OnLoad(inst, data)
-    if data then
-        if data.bank then
-            inst.AnimState:SetBank(data.bank)
-            inst:Show()
-        end
-        if data.build then
-            inst.AnimState:SetBuild(data.build)
-            inst:Show()
-        end
-        if data.anim then
-            inst.AnimState:PlayAnimation(data.anim, true)
-            inst:Show()
-        end
-        if data.scaleX then
-            print("HAD SCALE-X", data.scaleX)
-            inst.AnimState:SetScale(data.scaleX, data.scaleY, data.scaleZ)
-            inst:Show()
-        end
+    if not data then return end
 
-        if data.cityID then
-            inst.cityID = data.cityID
-        end
+    if data.bank then
+        inst.AnimState:SetBank(data.bank)
+        inst:Show()
+    end
+    if data.build then
+        inst.AnimState:SetBuild(data.build)
+        inst:Show()
+    end
+    if data.anim then
+        inst.AnimState:PlayAnimation(data.anim, true)
+        inst:Show()
+    end
+    if data.scaleX then
+        print("HAD SCALE-X", data.scaleX)
+        inst.AnimState:SetScale(data.scaleX, data.scaleY, data.scaleZ)
+        inst:Show()
+    end
 
-        if data.interiorID then
-            inst.interiorID = data.interiorID
-        end
+    if data.cityID then
+        inst.cityID = data.cityID
+    end
 
-        inst.reconstruction_stage = data.reconstruction_stage
-        inst.reconstruction_stages = data.reconstruction_stages
-        inst.construction_prefab = data.construction_prefab
+    if data.interiorID then
+        inst.interiorID = data.interiorID
+    end
 
-        if data.childname then
-            inst.spawnerdata = {
-                childname = data.childname,
-                delay = data.delay
-            }
-        end
+    inst.reconstruction_stage = data.reconstruction_stage
+    inst.reconstruction_stages = data.reconstruction_stages
+    inst.construction_prefab = data.construction_prefab
+
+    if data.childname then
+        inst.spawnerdata = {
+            childname = data.childname,
+            delay = data.delay
+        }
     end
 end
 
 local function OnLoadPostPass(inst, newents, data)
-    if data.child then
-        inst.spawnerdata.child = newents[data.child].entity
+    if data and data.room_door and newents[data.room_door] then
+        inst.room_door = newents[data.room_door].entity
     end
 end
 
@@ -266,10 +283,6 @@ local function IsWater(tile)
 end
 
 local function GetSpawnPoint(inst, pt)
-    --    if ThePlayer:HasTag("aquatic") then
-    --        return
-    --    end
-
     local theta = math.random() * TWOPI
     local radius = OFF_SCREENDIST
 
@@ -300,9 +313,9 @@ local function spawnFixer(inst)
     -- look for fixer pig
     -- spawn if none
     -- set pig's fixer target to this inst.
-    local invader = GetClosestInstWithTag("player", inst, 30)
-    if not invader then return end
-    if inst:GetDistanceSqToInst(invader) > AUTO_REPAIRDIST * AUTO_REPAIRDIST then
+    local player = GetClosestInstWithTag("player", inst, 30)
+    if not player then return end
+    if inst:GetDistanceSqToInst(player) > AUTO_REPAIRDIST * AUTO_REPAIRDIST then
         fix(inst)
     else
         if not inst.fixer or inst.fixer.components.health:IsDead() then
@@ -319,7 +332,7 @@ local function spawnFixer(inst)
                         end
                     end
                 else
-                    local pt = Vector3(invader.Transform:GetWorldPosition())
+                    local pt = Vector3(player.Transform:GetWorldPosition())
                     local spawn_pt = GetSpawnPoint(inst, pt)
                     if spawn_pt then
                         local fixer = SpawnPrefab("pigman_mechanic")
@@ -335,21 +348,22 @@ local function spawnFixer(inst)
     end
 end
 
+local RoomUtils = require("tropical_utils/room_utils")
+
+-- 销毁同时把室内销毁掉
 local function OnRemove(inst)
-    if inst.task then
-        inst.task:Cancel()
-        inst.task = nil
+    local room_center = inst.room_door and inst.room_door:IsValid() and inst.room_door:TroGetRoomCenter() --room_door有值就表示没修好就销毁了
+    if room_center then
+        RoomUtils.OnRoomDestroy(room_center, inst, nil, true)
     end
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
+
+    inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-
-    --inst.entity:AddPhysics()
-    --MakeObstaclePhysics(inst, .25)
 
     inst.entity:AddSoundEmitter()
 
@@ -367,10 +381,12 @@ local function fn(Sim)
         return inst
     end
 
+    inst.room_door = nil --室内门对象，等修好后要重新连接
+
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('reconstruction_project')
 
-    MakeSnowCovered(inst, .01)
+    MakeSnowCovered(inst)
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
@@ -388,13 +404,13 @@ local function fn(Sim)
 
     inst.fix = fix
 
-    inst.OnRemoveEntity = OnRemove
-
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
+    inst.OnLoadPostPass = OnLoadPostPass
+    inst.OnRemoveEntity = OnRemove
 
-    inst.task = inst:DoTaskInTime(REBUILD_REACTION_TIME + (math.random() * REBUILD_REACTION_VARIANCE),
-        function() spawnFixer(inst) end)
+
+    inst.task = inst:DoTaskInTime(REBUILD_REACTION_TIME + (math.random() * REBUILD_REACTION_VARIANCE), spawnFixer)
     return inst
 end
 

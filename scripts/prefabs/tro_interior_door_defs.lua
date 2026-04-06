@@ -1,5 +1,4 @@
 local RoomUtils = require("tropical_utils/room_utils")
-local Hooks = require("tropical_utils/hooks")
 
 local function DefaultDoorAcceptTest(inst, item)
     return inst:HasTag("teleporter")
@@ -115,6 +114,7 @@ end
 ---@param data.is_inner boolean 是否是虚空内部的生成的门，如果是则表示需要记录中心点对象
 ---@param data.door_orientation string 门的初始方向，有值就表示这是一个有四个方向的门，在上面的门就是north，左边的门就是west
 ---@param data.usesound string 使用门时播放的音效
+---@param data.remove_no_destroy_room boolean 门被移除时不销毁里面的东西，这个主要用于猪人商店自定义室内的销毁逻辑
 local function MakeDoor(name, data, common_post_fn, master_post_fn)
     local function fn()
         local inst = CreateEntity()
@@ -204,8 +204,10 @@ local function MakeDoor(name, data, common_post_fn, master_post_fn)
         end
 
         inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-        inst:ListenForEvent("onremove", OnDoorRemove)
         inst:ListenForEvent("oninteriorspawn", OnInteriorSpawn)
+        if not data.remove_no_destroy_room then
+            inst:ListenForEvent("onremove", OnDoorRemove)
+        end
 
         if master_post_fn then
             master_post_fn(inst)
