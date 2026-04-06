@@ -28,8 +28,6 @@ forest_map.Generate = function(prefab, map_width, map_height, tasks, level, leve
         print("Building porkland cities!")
         make_cities(entities, topology_save, WorldSim, map_width, map_height, current_gen_params)
 
-
-
         local join_islands = not current_gen_params.no_joining_islands
         save.map.tiles, save.map.tiledata, save.map.nav, save.map.adj, save.map.nodeidtilemap =
             WorldSim:GetEncodedMap(join_islands) ----这是存储地形数据的关键

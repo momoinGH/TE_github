@@ -54,7 +54,6 @@
 --     cherryforest                   = GetModConfigData("cherryforest"),
 -- }
 
-print("加载配置项", GetModConfigData("hamlet"))
 local hamlet = GetModConfigData("hamlet") == 1
 
 
@@ -66,6 +65,7 @@ TUNING.tropical = {
     fog            = GetModConfigData("fog") == 1,            --迷雾
     vampirebatcave = GetModConfigData("vampirebatcave") == 1, --洞穴裂缝
     aporkalypse    = GetModConfigData("aporkalypse") == 1,    --大灾变
+    shipwrecked    = GetModConfigData("shipwrecked") == 1,
 
 
 
@@ -73,15 +73,14 @@ TUNING.tropical = {
 
 
 
+    kindofworld = 15, --世界类型
 
-    kindofworld      = 15, --世界类型
+    boat        = false,
+    windy       = false,
+    sea         = false, --仅海洋世界
+    underwater  = false, --海底世界
 
-    boat             = false,
-    windy            = false,
-    sea              = false, --仅海洋世界
-    underwater       = false, --海底世界
 
-    shipwrecked      = false,
     shipwrecked_plus = false, --海难plus
     lavaarena        = false, --熔炉竞技场
     greenworld       = false, --以后删了

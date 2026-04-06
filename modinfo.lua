@@ -224,4 +224,19 @@ configuration_options =
             image = "aporkalypse.tex",
         },
     },
+
+
+
+    title(en_zh_zht("<shipwrecked>", "<海难>", "<海难>"), tro_modules.shipwrecked),
+    {
+        name = "shipwrecked",
+        label = "海难",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.WORLDGEN },
+            group = tro_modules.hamlet,
+            world = { "forest" },
+        }
+    },
 }
