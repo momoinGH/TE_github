@@ -9,20 +9,8 @@ end)
 
 AddModRPCHandler("Living Artifact", "UpdateInput", function(player, event, x, y, z)
     if event then player:PushEvent(event) end
-    if x and y and z then player.targetpos = Vector3(x, y, z) end
+    if x and y and z then player.tro_laser_targetpos = Vector3(x, y, z) end
 end)
-
-local function UpdateInput(event, pos)
-    if event then ThePlayer:PushEvent(event) end
-
-    local x, y, z
-    if pos then
-        ThePlayer.targetpos = pos
-        x, y, z = pos.x, pos.y, pos.z
-    end
-
-    SendModRPCToServer(GetModRPC("Living Artifact", "UpdateInput"), event, x, y, z)
-end
 
 AddClientModRPCHandler("Living Artifact", "ToggleBGM", function(on)
     if on then
@@ -34,14 +22,27 @@ AddClientModRPCHandler("Living Artifact", "ToggleBGM", function(on)
 end)
 
 ----------------------------------------------------------------------------------------------------
+local function UpdateInput(event, pos)
+    if event then
+        ThePlayer:PushEvent(event)
+    end
 
+    local x, y, z
+    if pos then
+        ThePlayer.tro_laser_targetpos = pos --激光炮落点
+        x, y, z = pos.x, pos.y, pos.z
+    end
+
+    SendModRPCToServer(GetModRPC("Living Artifact", "UpdateInput"), event, x, y, z)
+end
+-- 右键按下松开，用于激光炮
 TheInput:AddControlHandler(CONTROL_SECONDARY, function(down)
     if TheNet:IsServerPaused() or not (ThePlayer and ThePlayer:HasTag("ironlord")) then return end
 
     local event = down and "rightbuttondown" or "rightbuttonup"
     UpdateInput(event, TheInput:GetWorldPosition())
 end)
-
+-- 激光炮蓄力期间修改目标点
 TheInput:AddMoveHandler(function()
     if TheNet:IsServerPaused() or not (ThePlayer and ThePlayer:HasTag("charged")) then return end
     UpdateInput(nil, TheInput:GetWorldPosition())
@@ -187,6 +188,7 @@ AddComponentPostInit("locomotor", function(self)
     end
 end)
 
+-- 猴子诅咒
 AddComponentPostInit("cursable", function(self)
     function self:RemoveMonkeyCurse(dropitems)
         local curse = "MONKEY"
@@ -299,9 +301,6 @@ AddPrefabPostInit("player_classified", function(inst)
     inst.artifactexplode = net_bool(inst.GUID, "artifactexplode", "artifactexplodedirty")
     inst.artifactcontrol = net_bool(inst.GUID, "artifactcontrol", "artifactcontroldirty")
     inst.artifactoverridden = net_bool(inst.GUID, "artifactoverridden")
-
-    -- Initial values (don't trigger event)
-    --inst.artifactfuel:set_local(TUNING.IRON_LORD_TIME)
     inst.artifactoverridden:set_local(false)
 
     inst:ListenForEvent("artifactexplodedirty", OnArtifactexplodeDirty)
@@ -309,6 +308,9 @@ AddPrefabPostInit("player_classified", function(inst)
 end)
 
 --------------------------------------------- Stategraph ---------------------------------------------
+
+modimport "modmain/common/stategraphs/AddIronLordStates"
+modimport "modmain/common/stategraphs/AddIronLordStates_client"
 
 local NEW_ACTIONS =
 {

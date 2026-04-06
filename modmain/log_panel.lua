@@ -372,11 +372,26 @@ for action_id, data in pairs(ACTIONS) do
     end
 end
 
+local can_zero_prefabs = {
+
+}
+
+-- 预制件坐标检查
 local OldSpawnPrefabFromSim = SpawnPrefabFromSim
 GLOBAL.SpawnPrefabFromSim = function(name, ...)
-    local prefab = OldSpawnPrefabFromSim(name, ...)
-    if prefab == -1 then
+    local guid = OldSpawnPrefabFromSim(name, ...)
+    if guid == -1 then
         TroErrorHandle(string.trofmt("预制件{}生成失败", name), false, "warn")
+    else
+        local ent = Ents[guid]
+        if ent and ent.prefab and not can_zero_prefabs[ent.prefab] then
+            ent:DoTaskInTime(0, function()
+                local x, y, z = ent.Transform:GetWorldPosition()
+                if x == 0 and y == 0 and z == 0 then
+                    TroErrorHandle(string.trofmt("预制件{}坐标在零点，是不是忘了初始化了？", ent), false, "warn")
+                end
+            end)
+        end
     end
-    return prefab
+    return guid
 end
