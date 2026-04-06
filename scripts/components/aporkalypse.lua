@@ -9,9 +9,9 @@ local function SpawnHerald(src, player, count)
 
     local pt = player:GetPosition()
     local herald = TroSpawnRandomEntsInRange("ancient_herald", pt, 1, 10)[1]
-    if not herald then return false end         --没有合适的位置
+    if not herald then return false end --没有合适的位置
 
-    herald:TroAddSaveTag("aporkalypse_cleanup") --大灾变过去会销毁
+    herald:TroAddSaveTag("aporkalypse_cleanup")
     -- herald.components.combat:SuggestTarget(player) --饶过玩家吧
     herald.sg:GoToState("appear")
     return herald

@@ -225,6 +225,12 @@ local states =
             local egg = SpawnPrefab("antman_warrior_egg")
             egg.Transform:SetPosition(inst.Transform:GetWorldPosition())
             egg.eggify(egg)
+
+            local home = inst.components.homeseeker and inst.components.homeseeker:GetHome()
+            if home then
+                home.components.childspawner:ReplaceChild(inst, egg)
+            end
+            egg:AddTag("aporkalypse_cleanup")
         end,
 
         events =

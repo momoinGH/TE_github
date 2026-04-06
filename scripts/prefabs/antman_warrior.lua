@@ -237,14 +237,17 @@ local function fn()
 
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("antqueenbattle", function() inst:SetAporkalypse(true) end, TheWorld)
-    inst:ListenForEvent("beginaporkalypse", function()
-        inst.Light:Enable(true)
-        inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-        inst.build = "antman_warpaint_build"
-        inst.AnimState:SetBuild(inst.build)
-    end, TheWorld)
+    inst:ListenForEvent("beginaporkalypse", function() inst:SetAporkalypse(true) end, TheWorld)
 
-    inst:ListenForEvent("endaporkalypse", function() ReplacePrefab(inst, "antman") end, TheWorld)
+    inst:ListenForEvent("endaporkalypse", function()
+        if inst:HasTag("aporkalypse_cleanup") then
+            if not inst:IsInLimbo() then
+                TransformToNormal(inst)
+            end
+        else
+            inst:SetAporkalypse(false)
+        end
+    end, TheWorld)
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad

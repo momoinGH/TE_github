@@ -28,7 +28,6 @@ local function ShoudSummonEntities(inst)
     if player then
         local x, y, z = player.Transform:GetWorldPosition()
         local ents = TheSim:FindEntities(x, y, z, 20, { "aporkalypse_cleanup" })
-
         return #ents < 12
     else
         return false

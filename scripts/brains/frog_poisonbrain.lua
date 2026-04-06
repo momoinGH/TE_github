@@ -23,8 +23,10 @@ end
 local function EatFoodAction(inst)
     if inst:HasTag("eatsbait") then
         local target = FindEntity(inst, SEE_BAIT_DIST,
-            function(item) return item.components.bait and item:HasTag("frogbait") and
-                not (item.components.inventoryitem and item.components.inventoryitem:IsHeld()) end)
+            function(item)
+                return item.components.bait and item:HasTag("frogbait") and
+                    not (item.components.inventoryitem and item.components.inventoryitem:IsHeld())
+            end)
         if target then
             local act = BufferedAction(inst, target, ACTIONS.EAT)
             act.validfn = function() return not (target.components.inventoryitem and target.components.inventoryitem:IsHeld()) end
@@ -36,16 +38,14 @@ end
 
 local function ShouldGoHome(inst)
     return (not TheWorld.state.isday and not inst:HasTag("duskok")) or (TheWorld.state.isnight and inst:HasTag("duskok")) or
-    TheWorld.state.iswinter
+        TheWorld.state.iswinter
 end
 
-local Frog2Brain = Class(Brain, function(self, inst)
+local FrogPoisonBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
-function Frog2Brain:OnStart()
-    --	local clock = GetClock()
-
+function FrogPoisonBrain:OnStart()
     local root = PriorityNode(
         {
             ChaseAndAttack(self.inst, MAX_CHASE_TIME),
@@ -61,4 +61,4 @@ function Frog2Brain:OnStart()
     self.bt = BT(self.inst, root)
 end
 
-return Frog2Brain
+return FrogPoisonBrain

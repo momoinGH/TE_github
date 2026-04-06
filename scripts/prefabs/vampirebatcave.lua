@@ -139,4 +139,11 @@ return MakeDoor("vampirebatcave", {
 end, function(inst)
     inst:DoTaskInTime(0, creatInterior)
     MakeSnowCovered(inst)
+
+    -- 玩家中间关了要不要删除呢
+    -- inst:DoTaskInTime(0, function()
+    --     if not TUNING.tropical.vampirebatcave then
+    --         inst:Remove()
+    --     end
+    -- end)
 end)

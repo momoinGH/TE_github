@@ -14,7 +14,7 @@ local prefabs =
 	"froglegs_poison",
 }
 
-local brain = require "brains/frog2brain"
+local brain = require "brains/frog_poisonbrain"
 
 local sounds = {
 	base = {
