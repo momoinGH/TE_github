@@ -12,6 +12,7 @@ local is_end = false
 ---@param master_listen boolean 主机是否也监听网络变量事件，值改变时玩家也会推送该事件
 function TroAddPlayerClassifiedNetVar(net_class, name, event_name, master_listen)
     assert(not is_end, "不能再添加了")
+    assert(not (net_class == net_event and event_name and event_name ~= name), "net_event事件名必须和name一致，event_name这里只能留空或者和name值一样")
     event_name = event_name or name
     --允许重复定义，不允许事件名不同
     assert(not net_vars[name] or (net_vars[name].event_name == event_name

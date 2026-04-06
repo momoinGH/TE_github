@@ -376,18 +376,24 @@ local can_zero_prefabs = {
 
 }
 
--- 预制件坐标检查
 local OldSpawnPrefabFromSim = SpawnPrefabFromSim
 GLOBAL.SpawnPrefabFromSim = function(name, ...)
     local guid = OldSpawnPrefabFromSim(name, ...)
     if guid == -1 then
         TroErrorHandle(string.trofmt("预制件{}生成失败", name), false, "warn")
-    else
+    elseif TheWorld.ismastersim then
+        -- 主机预制件坐标检查
         local ent = Ents[guid]
-        if ent and ent.prefab and not can_zero_prefabs[ent.prefab] then
+        if ent and ent.prefab
+            and ent.Transform
+            and ent.AnimState --看得见的
+            and not can_zero_prefabs[ent.prefab]
+        then
             ent:DoTaskInTime(0, function()
                 local x, y, z = ent.Transform:GetWorldPosition()
-                if x == 0 and y == 0 and z == 0 then
+                if x == 0 and y == 0 and z == 0
+                    and not ent:HasTag("INLIMBO") --没有被隐藏
+                then
                     TroErrorHandle(string.trofmt("预制件{}坐标在零点，是不是忘了初始化了？", ent), false, "warn")
                 end
             end)

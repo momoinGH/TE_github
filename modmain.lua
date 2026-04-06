@@ -137,16 +137,16 @@ Assets = all_assets
 all_assets = nil
 
 troimportmodulefile("simutil")
-troimportmodulefile("containers")  --定义容器
-troimportmodulefile("ui")          --UI相关
-troimportmodulefile("prefabpost")  --组件、预制件的修改
-troimportmodulefile("sg")          --Stategraph相关
-troimportmodulefile("recipes")     --配方相关
-troimportmodulefile("cooking")     --料理相关
+troimportmodulefile("containers") --定义容器
+troimportmodulefile("ui")         --UI相关
+troimportmodulefile("prefabpost") --组件、预制件的修改
+troimportmodulefile("sg")         --Stategraph相关
+troimportmodulefile("recipes")    --配方相关
+troimportmodulefile("cooking")    --料理相关
 
 
-modimport("rpc")                   --RPC的注册
-modimport("input")                 --客机操作的监听
+modimport("modmain/rpc")           --RPC的注册
+modimport("modmain/input")         --客机操作的监听
 modimport("modmain/skins")         --物品皮肤
 modimport("modmain/scrapbookwiki") -- 图鉴wiki
 modimport("modmain/character")     --添加角色，角色相关变量定义

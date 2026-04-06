@@ -14,7 +14,7 @@ AddPrefabPostInitAny(function(inst)
     end
 end)
 
-TroAddPlayerClassifiedNetVar(net_event, "tro_poisonover", "poisondamage") --中毒扣血事件
+TroAddPlayerClassifiedNetVar(net_event, "tro_poisondamage") --中毒扣血事件
 
 ----------------------------------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ AddClassPostConstruct("screens/playerhud", function(self)
             return retTab
         end
 
-        self.inst:ListenForEvent("poisondamage", function(inst, data) return self.poisonover:Flash() end, self.owner)
+        self.inst:ListenForEvent("tro_poisondamage", function(inst, data) return self.poisonover:Flash() end, self.owner)
 
         return retTab
     end)
