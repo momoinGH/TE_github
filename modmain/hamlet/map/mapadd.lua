@@ -1,3 +1,5 @@
+--[[
+
 modimport "modmain/hamlet/map/forest_map.lua"
 
 
@@ -22,7 +24,7 @@ end)
 ----------------------------------------------------------------------------------------------------
 
 
--- tasks = {
+-- local tasks = {
 --     "Pigtopia",                   --郊区
 --     "Pigtopia_capital",           --郊区2
 --     "Edge_of_civilization",       --城镇边缘
@@ -64,7 +66,7 @@ end)
 -- }
 
 
-tasks = {
+local tasks = {
     "岛一平原基础",
     "岛一平原",
     "岛一睡莲",
@@ -99,7 +101,7 @@ tasks = {
 -- 给这些task的room统一添加hamlet地形标签
 for _, t in ipairs(tasks) do
     AddTaskPreInit(t, function(task)
-        task.region_id = "island_hamlet" --所有地形为一个岛
+        task.region_id = "hamlet" --所有地形为一个岛
 
         task.room_tags = task.room_tags or {}
         table.insert(task.room_tags, "tropical")     --我们mod地形
@@ -147,3 +149,6 @@ AddTaskSetPreInitAny(function(task_set)
         task_set.set_pieces["pig_ruins_nocanopy_4"] = { count = 2, tasks = { "岛三雨林" } }
     end
 end)
+
+
+]]

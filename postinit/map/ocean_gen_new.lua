@@ -54,34 +54,6 @@ local function IsCloseToWater(x, y, radius)
 	return false
 end
 
-local function IsCloseToOcean(x, y, radius)
-	for i = -radius, radius, 1 do
-		if IsOceanTile(world:GetTile(x - radius, y + i)) or IsOceanTile(world:GetTile(x + radius, y + i)) then
-			return true
-		end
-	end
-	for i = -(radius - 1), radius - 1, 1 do
-		if IsOceanTile(world:GetTile(x + i, y - radius)) or IsOceanTile(world:GetTile(x + i, y + radius)) then
-			return true
-		end
-	end
-	return false
-end
-
-local function IsCloseToLand(x, y, radius)
-	for i = -radius, radius, 1 do
-		if IsLandTile(world:GetTile(x - radius, y + i)) or IsLandTile(world:GetTile(x + radius, y + i)) then
-			return true
-		end
-	end
-	for i = -(radius - 1), radius - 1, 1 do
-		if IsLandTile(world:GetTile(x + i, y - radius)) or IsLandTile(world:GetTile(x + i, y + radius)) then
-			return true
-		end
-	end
-	return false
-end
-
 local function IsCloseToImpassable(x, y, radius)
 	for i = -radius, radius, 1 do
 		if TileGroupManager:IsImpassableTile(world:GetTile(x - radius, y + i)) or TileGroupManager:IsImpassableTile(world:GetTile(x + radius, y + i)) then

@@ -168,3 +168,27 @@ old_modimport = nil
 modulename_loaded = nil
 
 ----------------------------------------------------------------------------------------------------
+
+
+
+
+
+--[[
+-- 调整世界大小
+local extra_map_size = 400
+local old_map_size = 0
+local HAMLET_GENERATED = false
+if rawget(_G, "WorldSim") then
+    local mt = getmetatable(WorldSim).__index
+    local OldSetWorldSize = mt["SetWorldSize"]
+    mt["SetWorldSize"] = function(self, map_width, map_height)
+        old_map_size = math.max(map_width, 400) --科雷有个最小限制，不足某个值会设置为某个值，大概是400
+        return OldSetWorldSize(self, old_map_size + extra_map_size, old_map_size + extra_map_size)
+    end
+
+    local OldConvertToTileMap = mt["ConvertToTileMap"]
+    mt["ConvertToTileMap"] = function(self, size)
+        return OldConvertToTileMap(self, old_map_size + extra_map_size)
+    end
+end
+]]

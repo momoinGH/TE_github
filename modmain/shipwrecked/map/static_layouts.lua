@@ -120,8 +120,7 @@ Layouts["octopuskinghome"] = StaticLayout.Get("map/static_layouts/octopuskinghom
     layout_position = LAYOUT_POSITION.CENTER,
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    areas =
-    {
+    areas = {
         treearea = function()
             local stuff = {}
 
@@ -343,7 +342,6 @@ Layouts["coralpool3"] = StaticLayout.Get("map/static_layouts/coralpool3", {
 })
 
 Layouts["wreck"] = StaticLayout.Get("map/static_layouts/wreck", {
-
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     layout_position = LAYOUT_POSITION.CENTER,
@@ -399,16 +397,11 @@ Layouts["wreck"] = StaticLayout.Get("map/static_layouts/wreck", {
                     table.insert(stuff, "boatfragment03")
                 end
             end
-
-
-
             for i = 1, 2 do
                 if math.random() < 0.3 then
                     table.insert(stuff, "whale_bluefinal")
                 end
             end
-
-
             for i = 1, 4 do
                 if math.random() < 0.4 then
                     table.insert(stuff, "fishinhole")
@@ -580,3 +573,27 @@ Layouts["kraken"] = StaticLayout.Get("map/static_layouts/kraken", {
 
     },
 })
+
+Layouts["start_sw"] = StaticLayout.Get("map/static_layouts/start_sw", {
+    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED, --mask什么意思不太明白
+    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    layout_position = LAYOUT_POSITION.CENTER,
+    disable_transform = true,
+    defs = {
+        welcomitem = { "flower" }
+    },
+})
+
+Layouts["lava_arena"] = StaticLayout.Get("map/static_layouts/lava_arena",
+    {
+        start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+        fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+        layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+        disable_transform = true,
+    })
+Layouts["wildboreking"] = StaticLayout.Get("map/static_layouts/wildboreking",
+    {
+        layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+        start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+        fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    })
