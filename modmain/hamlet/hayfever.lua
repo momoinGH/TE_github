@@ -54,7 +54,7 @@ AddStategraphState("wilson", State {
     tags = { "busy", "sneeze", "pausepredict" },
 
     onenter = function(inst)
-        if inst:TroIsRiding() then
+        if inst:TroGetMount() then
             inst.Transform:SetFourFaced()
         end
         if inst.components.hayfever then

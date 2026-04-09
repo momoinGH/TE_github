@@ -38,6 +38,8 @@ function EntityScript:TroGetPlayerClassifiedNetVar(name)
     return netvar:value()
 end
 
+----------------------------------------------------------------------------------------------------
+
 -- 我们mod定义的区域，海难、哈姆雷特、火山、热带等等
 function EntityScript:IsInTropicalArea()
     if self.components.areaaware then
@@ -94,6 +96,8 @@ function EntityScript:TroIsWorldOut()
     return TheWorld.Map:TroIsWorldOut(x, y, z)
 end
 
+----------------------------------------------------------------------------------------------------
+
 -- 判断实体所在位置是否是冬天
 function EntityScript:TroIsWinter()
     if self.components.areaaware then
@@ -120,11 +124,9 @@ function EntityScript:TroIsSummer()
     return TheWorld.Map:TroIsSummerAtPoint(self.Transform:GetWorldPosition())
 end
 
-function EntityScript:TroIsRiding()
-    if self.components.rider then
-        return self.components.rider:IsRiding()
-    end
-    return self.replica.rider and self.replica.rider:IsRiding()
+-- 获取骑的牛
+function EntityScript:TroGetMount()
+    return self.replica.rider and self.replica.rider:GetMount()
 end
 
 -- 是不是在大灾变中，如果不需要判断地形可以直接用TheWorld.state.isaporkalypse
@@ -133,7 +135,14 @@ function EntityScript:TroIsAporkalypse()
         and (self:IsInHamletArea() or self:TroGetRoomCenter() ~= nil)
 end
 
-----------------------------------------------------------------------------------------------------
+-- 是否在哈姆雷特雾气中
+function EntityScript:TroInHamletFog()
+    if self.player_classified then
+        return self:TroGetPlayerClassifiedNetVar("tro_fog")
+    end
+    --不是玩家
+    return TroInHamlteFogImple(self)
+end
 
 -- 获取玩家身上的小船
 function EntityScript:TroGetSWBoat()
@@ -150,15 +159,6 @@ function EntityScript:TroGetRoomCenter()
         return nil --没加载room模块
     end
     return TheWorld.Map:TroGetRoomCenter(self.Transform:GetWorldPosition())
-end
-
--- 是否在哈姆雷特雾气中
-function EntityScript:TroInHamletFog()
-    if self.player_classified then
-        return self:TroGetPlayerClassifiedNetVar("tro_fog")
-    end
-    --不是玩家
-    return TroInHamlteFogImple(self)
 end
 
 ----------------------------------------------------------------------------------------------------

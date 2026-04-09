@@ -1,4 +1,4 @@
--- 定义一些TheWorld.state.xxx变量，用的时候可能还得判断模块的地形
+-- 定义一些TheWorld.state.xxx变量，用的时候可能还得判断模块的地形，可以先看看EntityScript有没有封装给实体判断用的方法
 
 AddComponentPostInit("worldstate", function(self, inst)
     local OnTemperatureTick = Hooks.GetEventCallback(inst, "temperaturetick", inst, "scripts/components/worldstate.lua")
@@ -18,12 +18,6 @@ AddComponentPostInit("worldstate", function(self, inst)
     inst:DoTaskInTime(0, function() OnSeasonChange(inst, self.data.season) end)
 
     -- 大灾变
-    local function OnBeginPorkalypse(inst, data)
-        SetVariable("isaporkalypse", true)
-    end
-    local function OnEndPorkalypse(inst, data)
-        SetVariable("isaporkalypse", false)
-    end
-    inst:ListenForEvent("beginaporkalypse", OnBeginPorkalypse)
-    inst:ListenForEvent("endaporkalypse", OnEndPorkalypse)
+    inst:ListenForEvent("beginaporkalypse", function() SetVariable("isaporkalypse", true) end)
+    inst:ListenForEvent("endaporkalypse", function() SetVariable("isaporkalypse", false) end)
 end)
