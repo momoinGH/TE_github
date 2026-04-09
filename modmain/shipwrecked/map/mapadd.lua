@@ -19,6 +19,7 @@ local tasks = {
     "DoyDoyM",         ---doydoyM
     "DoyDoyF",         ---doydoyF
     "Volcano ground",  --火山  ["VolcanoAsh"] = 1,       ["Volcano"] = 1,    ["VolcanoObsidian"] = 1,
+    
     "A_BLANK1",
     "A_BLANK2",
     "A_BLANK3",
@@ -70,30 +71,28 @@ AddTaskPreInit("RedForest", function(task)
 end)
 
 AddRoomPreInit("OceanCoastal", function(room)
-    table.tromerge(room.contents.distributeprefabs,
-        {
-            messagebottle_sw = 0.1,
-            seaweed_planted = 3,
-            mussel_farm = 2,
-            lobsterhole = 1 / 2,
-            ballphinhouse = .1 / 2,
-            solofish_spawner = 1 / 2,
-            jellyfish_spawner = 1 / 2,
-            rainbowjellyfish_spawner = 0.25 / 2,
-            bioluminescence_spawner = 0.1,
-        })
+    table.tromerge(room.contents.distributeprefabs, {
+        messagebottle_sw = 0.1,
+        seaweed_planted = 3,
+        mussel_farm = 2,
+        lobsterhole = 1 / 2,
+        ballphinhouse = .1 / 2,
+        solofish_spawner = 1 / 2,
+        jellyfish_spawner = 1 / 2,
+        rainbowjellyfish_spawner = 0.25 / 2,
+        bioluminescence_spawner = 0.1,
+    })
 end)
 
 AddRoomPreInit("OceanSwell", function(room)
-    table.tromerge(room.contents.distributeprefabs,
-        {
-            ballphinhouse = 5,
-            redbarrel = 1,
-            seagullspawner = 6,
-            oceanfog = 2,
-            tar_pool = 1,
-            bioluminescence_spawner = 5,
-        })
+    table.tromerge(room.contents.distributeprefabs, {
+        ballphinhouse = 5,
+        redbarrel = 1,
+        seagullspawner = 6,
+        oceanfog = 2,
+        tar_pool = 1,
+        bioluminescence_spawner = 5,
+    })
 
     room.contents.countprefabs =
     {
@@ -102,12 +101,11 @@ AddRoomPreInit("OceanSwell", function(room)
 end)
 
 AddRoomPreInit("OceanRough", function(room)
-    table.tromerge(room.contents.distributeprefabs,
-        {
-            redbarrel = 0.1,
-            bioluminescence_spawner = .5,
-            oceanfog = 0.1,
-        })
+    table.tromerge(room.contents.distributeprefabs, {
+        redbarrel = 0.1,
+        bioluminescence_spawner = .5,
+        oceanfog = 0.1,
+    })
     room.contents.countprefabs = {
         luggagechest = 4,
         rawling = 1
@@ -116,25 +114,24 @@ end)
 
 AddRoomPreInit("OceanHazardous", function(room)
     room.contents.distributepercent = 0.3
-    table.tromerge(room.contents.distributeprefabs,
-        {
-            waterygrave = 5,
-            wreck = 4,
-            seaweed_planted = 3,
+    table.tromerge(room.contents.distributeprefabs, {
+        waterygrave = 5,
+        wreck = 4,
+        seaweed_planted = 3,
 
-            pirateghost = 4,
-            redbarrel = 2,
-            bishopwaterfixo = .5,
-            rookwater = .5,
-            knightboat = .5,
+        pirateghost = 4,
+        redbarrel = 2,
+        bishopwaterfixo = .5,
+        rookwater = .5,
+        knightboat = .5,
 
-            luggagechest_spawner = .3,
-            boatfragment01 = 1,
-            boatfragment02 = 1,
-            boatfragment03 = 1,
-            whale_bluefinal = 1,
+        luggagechest_spawner = .3,
+        boatfragment01 = 1,
+        boatfragment02 = 1,
+        boatfragment03 = 1,
+        whale_bluefinal = 1,
 
-        })
+    })
     room.contents.countprefabs = {
         kraken = 1,
     }

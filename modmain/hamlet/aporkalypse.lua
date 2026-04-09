@@ -4,10 +4,6 @@ end)
 
 -- 直接给TheWorld.state.isaporkalypse赋值，并且给客户端也推送begin和end事件
 local function OnIsAporkalypseChange(inst)
-    if TheWorld.state then
-        TheWorld.state.isaporkalypse = inst.tro_isaporkalypse:value()
-    end
-
     if not TheWorld.ismastersim then
         if inst.tro_isaporkalypse:value() then
             TheWorld:PushEvent("beginaporkalypse")

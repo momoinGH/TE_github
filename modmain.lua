@@ -40,9 +40,6 @@ tuning、prefablist、assets、containers、ui、prefabpost、sg、recipes、coo
 debug文件定义了很多c_xxx函数，用于控制台调试
 默认开启了右键地图传送功能，可通过c_setmaprightteleport(false)关闭
 
-
-
-
 ]]
 
 
@@ -101,16 +98,6 @@ local all_prefab_files = PrefabFiles or {}
 troimportmodulefile("prefablist", false, function()
     PrefabFiles = {}
 end, function()
-    -- 检查PrefabFiles里有没有写重复
-    -- 不是很实用，因为有些独立的模块可以table.insert(PrefabFiles)来增加自己需要的预制件，这个检查时不时开一下就行
-    -- local prefabs_dirty = {}
-    -- for _, prefab in ipairs(PrefabFiles) do
-    --     if prefabs_dirty[prefab] then
-    --         TroErrorHandle(dirc .. "模块的PrefabFiles里预制件写重了，写重的是" .. prefab, false)
-    --     end
-    --     prefabs_dirty[prefab] = true
-    -- end
-
     all_prefab_files = ArrayUnion(all_prefab_files, PrefabFiles)
 end)
 PrefabFiles = all_prefab_files
@@ -122,15 +109,6 @@ local all_assets = Assets or {}
 troimportmodulefile("assets", false, function()
     Assets = {}
 end, function()
-    -- 检查Assets里有没有写重复
-    -- local assets_dirty = {}
-    -- for _, asset in ipairs(Assets) do
-    --     local s = asset.type .. ":" .. asset.file
-    --     if assets_dirty[s] then
-    --         TroErrorHandle(dirc .. "模块的Assets里预制件写重了，写重的是" .. s, false)
-    --     end
-    --     assets_dirty[s] = true
-    -- end
     ConcatArrays(all_assets, Assets)
 end)
 Assets = all_assets
@@ -168,27 +146,3 @@ old_modimport = nil
 modulename_loaded = nil
 
 ----------------------------------------------------------------------------------------------------
-
-
-
-
-
---[[
--- 调整世界大小
-local extra_map_size = 400
-local old_map_size = 0
-local HAMLET_GENERATED = false
-if rawget(_G, "WorldSim") then
-    local mt = getmetatable(WorldSim).__index
-    local OldSetWorldSize = mt["SetWorldSize"]
-    mt["SetWorldSize"] = function(self, map_width, map_height)
-        old_map_size = math.max(map_width, 400) --科雷有个最小限制，不足某个值会设置为某个值，大概是400
-        return OldSetWorldSize(self, old_map_size + extra_map_size, old_map_size + extra_map_size)
-    end
-
-    local OldConvertToTileMap = mt["ConvertToTileMap"]
-    mt["ConvertToTileMap"] = function(self, size)
-        return OldConvertToTileMap(self, old_map_size + extra_map_size)
-    end
-end
-]]

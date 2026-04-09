@@ -31,6 +31,7 @@ modimport "modmain/common/components/teleporter.lua"
 modimport "modmain/common/components/childspawner.lua"
 modimport "modmain/common/components/ambientlighting"
 modimport "modmain/common/components/colourcube.lua"
+modimport "modmain/common/components/worldstate.lua" --世界状态，比如新增的季节
 
 ----------------------------------------------------------------------------------------------------
 

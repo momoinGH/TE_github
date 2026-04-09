@@ -1,9 +1,6 @@
 GLOBAL.setmetatable(env, { __index = function(t, k) return GLOBAL.rawget(GLOBAL, k) end })
 
-modimport "modmain/util.lua" --一些表相关的工具函数
-
 tro_modules = modinfo.tro_modules
-
 tro_languages = {
     "pt",
     "zh",
@@ -14,6 +11,7 @@ tro_languages = {
     "hun",
     "fr"
 }
+modimport "modmain/util.lua"              --一些表相关的工具函数
 modimport "modmain/dev_utils"             --开发环境下辅助用的函数，与游戏无关
 Hooks = require "tropical_utils/hooks"    --用来hook的一些函数
 if TheFrontEnd then
@@ -30,9 +28,7 @@ modimport "modmain/shardindex.lua"  --世界生成后初始化实体，比如根
 
 
 -- TODO
--- if TUNING.tropical.only_hamlet then
---     modimport "modmain/common/map/tasks/hamlet"
--- elseif TUNING.tropical.sea then
+-- if TUNING.tropical.sea then
 --     modimport "modmain/common/map/tasks/sea"
 -- else
 --     modimport "modmain/common/map/tasks/custom"
@@ -49,7 +45,7 @@ modimport "modmain/shardindex.lua"  --世界生成后初始化实体，比如根
 --生成世界需要用到的内容
 if rawget(_G, "WORLDGEN_MAIN") then
     modimport "modmain/gentuning"            -- 当配置项加载好后，才能访问TUNING.tropical检查哪些模块启用了
-
+    modimport "modmain/worldsim.lua"         --WorldSim函数的hook
     modimport "modmain/map/storygen.lua"     --地形标签处理函数
     troimportmodulefile "map/lockandkey"     --地形锁钥
     troimportmodulefile "map/static_layouts" --静态布局

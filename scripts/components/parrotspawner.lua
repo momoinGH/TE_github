@@ -216,32 +216,33 @@ return Class(function(self, inst)
         end
 
         ---------------------------------------------ventania -------------------------------------------------------------
-        if TUNING.tropical.wind ~= 5 then
-            if posicao == WORLD_TILES.OCEAN_COASTAL or posicao == WORLD_TILES.OCEAN_WATERLOG or posicao == WORLD_TILES.OCEAN_COASTAL_SHORE or posicao == WORLD_TILES.OCEAN_SWELL or posicao == WORLD_TILES.OCEAN_ROUGH or posicao == WORLD_TILES.OCEAN_BRINEPOOL or posicao == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or posicao == WORLD_TILES.OCEAN_HAZARDOUS or player.components.areaaware and player.components.areaaware:CurrentlyInTag("shipwrecked") or player.components.areaaware and player.components.areaaware:CurrentlyInTag("hamlet") or TUNING.tropical.wind == 20 then
-                --print("shipwrecked")
-                if TheWorld.components.worldstate.data.israining and TheWorld.state.isautumn and math.random() < 0.07 then
-                    tempodovento = tempodovento - 1
-                end
+        -- TODO 删掉这里的飓风生成，使用seasonmanager_sw来执行
+        -- if TUNING.tropical.wind ~= 5 then
+        --     if posicao == WORLD_TILES.OCEAN_COASTAL or posicao == WORLD_TILES.OCEAN_WATERLOG or posicao == WORLD_TILES.OCEAN_COASTAL_SHORE or posicao == WORLD_TILES.OCEAN_SWELL or posicao == WORLD_TILES.OCEAN_ROUGH or posicao == WORLD_TILES.OCEAN_BRINEPOOL or posicao == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or posicao == WORLD_TILES.OCEAN_HAZARDOUS or player.components.areaaware and player.components.areaaware:CurrentlyInTag("shipwrecked") or player.components.areaaware and player.components.areaaware:CurrentlyInTag("hamlet") or TUNING.tropical.wind == 20 then
+        --         --print("shipwrecked")
+        --         if TheWorld.components.worldstate.data.israining and TheWorld.state.isautumn and math.random() < 0.07 then
+        --             tempodovento = tempodovento - 1
+        --         end
 
-                if TheWorld.components.worldstate.data.issnowing and TheWorld.state.iswinter and math.random() < 0.13 then
-                    tempodovento = tempodovento - 1
-                end
+        --         if TheWorld.components.worldstate.data.issnowing and TheWorld.state.iswinter and math.random() < 0.13 then
+        --             tempodovento = tempodovento - 1
+        --         end
 
-                if TheWorld.components.worldstate.data.israining and TheWorld.state.issummer and math.random() < 0.02 then
-                    tempodovento = tempodovento - 1
-                end
+        --         if TheWorld.components.worldstate.data.israining and TheWorld.state.issummer and math.random() < 0.02 then
+        --             tempodovento = tempodovento - 1
+        --         end
 
-                if tempodovento <= 0 then
-                    local a, b, c = player.Transform:GetWorldPosition()
-                    local casa = GetClosestInstWithTag("interior_center", player, 30)
-                    if not casa then
-                        local vento = SpawnPrefab("ventania")
-                        vento.Transform:SetPosition(a, b, c)
-                    end
-                    tempodovento = 4
-                end
-            end
-        end
+        --         if tempodovento <= 0 then
+        --             local a, b, c = player.Transform:GetWorldPosition()
+        --             local casa = GetClosestInstWithTag("interior_center", player, 30)
+        --             if not casa then
+        --                 local vento = SpawnPrefab("ventania")
+        --                 vento.Transform:SetPosition(a, b, c)
+        --             end
+        --             tempodovento = 4
+        --         end
+        --     end
+        -- end
         ---------------------------------------------------------------------------------------------------
 
 

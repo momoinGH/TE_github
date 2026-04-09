@@ -143,9 +143,7 @@ configuration_options =
         default = en_zh_zht("en", "zh"),
     },
 
-    title(en_zh_zht("<hamlet>", "<哈姆雷特>", "<哈姆雷特>"), tro_modules.hamlet),
-
-    -- 使用示例
+    -- 添加到世界生成中的使用示例
     -- {
     --     name = "hamlet",
     --     label = "哈姆雷特",
@@ -162,6 +160,27 @@ configuration_options =
     -- },
 
     {
+        name = "world_size_multi",
+        label = "世界面积乘数",
+        hover = "可以让世界变得更大，在世界大小上乘以该倍率",
+        options = {
+            { description = "Default, 1×", data = 1 },
+            { description = "Larger, 1.25×", data = 1.25 },
+            { description = "Huger, 1.5×", data = 1.5 },
+            { description = "xHuger, 2×", data = 2 },
+        },
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.WORLDGEN },
+            group = "global", --科雷的group
+            world = { "forest" },
+            image = "world_size.tex"
+        }
+    },
+
+    title(en_zh_zht("<hamlet>", "<哈姆雷特>", "<哈姆雷特>"), tro_modules.hamlet),
+
+    {
         name = "hamlet",
         label = "哈姆雷特",
         options = options_enable(),
@@ -169,7 +188,7 @@ configuration_options =
         world_gen = {
             category = { LEVELCATEGORY.WORLDGEN },
             group = tro_modules.hamlet,
-            world = { "forest" }, --在世界和洞穴的世界规则中显示
+            world = { "forest" },
         }
     },
     {
@@ -180,7 +199,7 @@ configuration_options =
         world_gen = {
             category = { LEVELCATEGORY.SETTINGS },
             group = tro_modules.hamlet,
-            world = { "forest" }, --在世界和洞穴的世界规则中显示
+            world = { "forest" },
             atlas = hamlet_atlas,
             image = "hayfever.tex",
         }
@@ -193,7 +212,7 @@ configuration_options =
         world_gen = {
             category = { LEVELCATEGORY.SETTINGS },
             group = tro_modules.hamlet,
-            world = { "forest" }, --在世界和洞穴的世界规则中显示
+            world = { "forest" },
             atlas = hamlet_atlas,
             image = "fog.tex",
         }
