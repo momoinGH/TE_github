@@ -3216,7 +3216,7 @@ AddRoom("PigVillagesw", {
 
 AddRoom("WaterMangrove", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = WORLD_TILES.OCEAN_COASTAL,
+    value = WORLD_TILES.MANGROVE,
     tags = { "RoadPoison", "shipwrecked", "tropical" },
     contents = {
         distributepercent = 0.2,

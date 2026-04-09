@@ -145,12 +145,6 @@ Layouts["octopuskinghome"] = StaticLayout.Get("map/static_layouts/octopuskinghom
                 end
             end
 
-            --				for i=1,3 do
-            --					if math.random()<0.3 then
-            --						table.insert(stuff,"oceanvine_deco")
-            --					end
-            --				end				
-
             for i = 1, 4 do
                 if math.random() < 0.3 then
                     table.insert(stuff, "fishinhole")

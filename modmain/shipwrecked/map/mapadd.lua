@@ -20,23 +20,24 @@ local tasks = {
     "DoyDoyF",         ---doydoyF
     "Volcano ground",  --火山  ["VolcanoAsh"] = 1,       ["Volcano"] = 1,    ["VolcanoObsidian"] = 1,
     
-    "A_BLANK1",
-    "A_BLANK2",
-    "A_BLANK3",
-    "A_BLANK4",
-    "A_BLANK5",
-    "A_BLANK6",
-    "A_BLANK7",
-    "A_BLANK8",
-    "A_BLANK9",
-    "A_BLANK10",
-    "A_BLANK11",
-    "A_BLANK12",
+    -- "A_BLANK1",
+    -- "A_BLANK2",
+    -- "A_BLANK3",
+    -- "A_BLANK4",
+    -- "A_BLANK5",
+    -- "A_BLANK6",
+    -- "A_BLANK7",
+    -- "A_BLANK8",
+    -- "A_BLANK9",
+    -- "A_BLANK10",
+    -- "A_BLANK11",
+    -- "A_BLANK12",
 }
 
 for _, t in ipairs(tasks) do
     AddTaskPreInit(t, function(task)
-        task.region_id = "shipwrecked" --所有地形为一个岛
+        -- task.region_id = "shipwrecked" --所有地形为一个岛
+        task.region_id = t
 
         task.room_tags = task.room_tags or {}
         table.insert(task.room_tags, "tropical")     --我们mod地形
@@ -85,7 +86,7 @@ end)
 
 AddRoomPreInit("OceanSwell", function(room)
     table.tromerge(room.contents.distributeprefabs, {
-        ballphinhouse = 5,
+        ballphinhouse = 2,
         redbarrel = 1,
         seagullspawner = 6,
         oceanfog = 2,
