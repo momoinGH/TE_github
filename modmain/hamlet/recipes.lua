@@ -53,8 +53,8 @@ TroAddTech("CITY", {
 })
 
 TroAddPrototyperDef("key_to_city", {
-    icon_image = "tab_city.tex",
     icon_atlas = "images/tabs.xml",
+    icon_image = "tab_city.tex",
     is_crafting_station = true,
 })
 

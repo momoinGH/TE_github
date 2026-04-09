@@ -1,4 +1,4 @@
-local OnIsWinter = Hooks.GetUpValue(require("prefabs/rabbit").fn, "OnEntityWake", "OnIsWinter")
+local OnIsWinter = Hooks.GetUpValue(require("prefabs/rabbit").fn, "OnWake", "OnIsWinter")
 local IsForcedNightmare = OnIsWinter and Hooks.GetUpValue(OnIsWinter, "IsForcedNightmare")
 local IsWinterRabbit = OnIsWinter and Hooks.GetUpValue(OnIsWinter, "IsWinterRabbit")
 local BecomeWinterRabbit = OnIsWinter and Hooks.GetUpValue(OnIsWinter, "BecomeWinterRabbit")

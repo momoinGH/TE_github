@@ -22,8 +22,6 @@ AddComponentPostInit("worldstate", function(self, inst)
     end
 
     local function OnSeasonChange(inst, season)
-        print("季节变化", season)
-
         -- 海难
         SetVariable("ismild", season == "autumn", EntityScript.IsInShipwreckedArea)  --温和季，秋
         SetVariable("iswet", season == "winter", EntityScript.IsInShipwreckedArea)   --飓风季，冬
@@ -37,12 +35,4 @@ AddComponentPostInit("worldstate", function(self, inst)
     -- 大灾变
     inst:ListenForEvent("beginaporkalypse", function() SetVariable("isaporkalypse", true, EntityScript.IsInHamletArea) end)
     inst:ListenForEvent("endaporkalypse", function() SetVariable("isaporkalypse", false, EntityScript.IsInHamletArea) end)
-end)
-
-
-AddPrefabPostInit("log", function(inst)
-    inst:WatchWorldState("ismild", function(inst, ismild)
-        print("温和季到了", inst, ismild)
-    end)
-    print("是温和季吗", TheWorld.state.ismild)
 end)

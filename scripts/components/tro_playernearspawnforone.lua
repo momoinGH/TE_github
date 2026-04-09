@@ -52,7 +52,7 @@ end
 
 local function StartSpawn(self)
     if not self.spawn_task then
-        self.spawn_task = self.inst:DoPeriodicTask(0.1, TrySpawnEnt, 0, self)
+        self.spawn_task = self.inst:DoPeriodicTask(self.spawn_check_interval, TrySpawnEnt, 0, self)
     end
 end
 
@@ -145,11 +145,11 @@ local PlayerNearSpawnForOne = Class(function(self, inst)
 
     -- 可赋值
     self.spawn_fn = nil                         --生成任务，返回值为true才表示玩家条件满足生成了东西，就会进入冷却
-    self.spawn_interval = TUNING.TOTAL_DAY_TIME --生成间隔
+    self.spawn_interval = TUNING.TOTAL_DAY_TIME --生成间隔，就是死了再重新生成的间隔
     self.first_spawn_time = nil                 --第一次生成所需时间，在世界多少时间之后
     self.enable = true                          --是否启用
     self.max_count = 1
-
+    self.spawn_check_interval = 1
 
     self.all_ents = {} --已经生成的实体id
     self.cur_spawn_count = 0

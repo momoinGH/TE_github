@@ -29,13 +29,8 @@ local function ShouldAcceptItem(inst, item)
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local obsidian = SpawnPrefab("obsidian")
-    obsidian.Transform:SetPosition(x, y, z)
-
-    SpawnPrefab("collapse_small").Transform:SetPosition(x, y, z)
-
-    --inst.cooltask:Cancel()
+    SpawnAt("obsidian", inst)
+    SpawnAt("collapse_small", inst)
     inst:Remove()
 end
 
@@ -63,21 +58,8 @@ local function OnExtinguish(inst)
     end
 
     inst.AnimState:ClearBloomEffectHandle()
-    inst:Remove()
+    inst:DoTaskInTime(0, inst.Remove)
 end
-
-local INTENSITY = .8
-
---[[local function fade_in(inst)
-    inst.components.fader:StopAll()
-    inst.Light:Enable(true)
-    inst.components.fader:Fade(0, INTENSITY, 5*FRAMES, function(v) inst.Light:SetIntensity(v) end)
-end
-
-local function fade_out(inst)
-    inst.components.fader:StopAll()
-    inst.components.fader:Fade(INTENSITY, 0, 5*FRAMES, function(v) inst.Light:SetIntensity(v) end, function() inst.Light:Enable(false) end)
-end]]
 
 local function fn(Sim)
     local inst = CreateEntity()
@@ -146,8 +128,6 @@ local function fn(Sim)
     end)
 
     inst.components.fueled:InitializeFuelLevel(LAVAPOOL_FUEL_START)
-
-
 
     inst:AddComponent("inspectable")
 

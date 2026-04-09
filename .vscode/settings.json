@@ -9,7 +9,8 @@
         "lowercase-global",
         "undefined-doc-name",
         "return-type-mismatch",
-        "undefined-doc-param"
+        "undefined-doc-param",
+        "assign-type-mismatch"
     ],
     "Lua.workspace.maxPreload": 2000,
     "Lua.diagnostics.workspaceDelay": -1

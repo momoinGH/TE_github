@@ -11,9 +11,7 @@ SetSharedLootTable('twister_seal',
 		{ 'meat',       1.00 },
 		{ 'meat',       1.00 },
 		{ 'meat',       1.00 },
-		--	{'twister_spawner', 1.00},
 		{ 'magic_seal', 1.00 },
-		--Drop an item here too?
 	})
 
 local function OnEntitySleep(inst)

@@ -271,29 +271,6 @@ return Class(function(self, inst)
     end
 
     local function ToggleUpdate(force)
-        for i, v in ipairs(_activeplayers) do
-            if v.components.inventory and v.components.inventory:GetMoney() >= 2 and math.random() > 0.6 then
-                local pt = v:GetPosition()
-                if (TUNING.tropical.hamlet ~= 5 or TUNING.tropical.kindofworld == 5) and TUNING.tropical.kindofworld ~= 10 then
-                    local map = TheWorld.Map
-                    local x, y, z = pt:Get()
-                    local ents = TheSim:FindEntities(x, y, z, 40, { "bandit_cover" })
-                    if #ents > 1 then
-                        local cover = ents[math.random(1, #ents)]
-                        if cover then
-                            local x2, y2, z2 = cover.Transform:GetWorldPosition()
-                            if TheWorld.Map:IsVisualGroundAtPoint(x2, y2, z2) then
-                                local bandidao = SpawnPrefab("pigbandit")
-                                bandidao.Transform:SetPosition(x2, y2, z2)
-                            end
-                        end
-                    end
-                end
-            end
-        end
-
-
-
         if _maxbirds > 0 then
             if not _updating then
                 _updating = true

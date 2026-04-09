@@ -62,7 +62,7 @@ local function OnSpawnCDDone(inst, self, player)
     local player_data = self.player_datas[player.userid]
     RemoveSpawnCooldown(player_data)
     if not player_data.spawn_task then
-        player_data.spawn_task = self.inst:DoPeriodicTask(0.1, TrySpawnEnt, 0, self, player)
+        player_data.spawn_task = self.inst:DoPeriodicTask(self.spawn_check_interval, TrySpawnEnt, 0, self, player)
     end
 end
 
@@ -164,6 +164,7 @@ local PlayerNearSpawnForEach = Class(function(self, inst)
     self.first_spawn_time = nil                 --第一次生成所需时间，在世界多少时间之后
     self.enable = true                          --是否启用
     self.max_count = 1
+    self.spawn_check_interval = 1
 
     --玩家数据
     self.player_datas = {

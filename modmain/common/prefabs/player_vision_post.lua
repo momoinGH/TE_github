@@ -1,5 +1,5 @@
 table.insert(Assets, Asset("IMAGE", "images/colour_cubes/bat_vision_on_cc.tex"))
-
+table.insert(Assets, Asset("ATLAS", "images/overlays/fog.xml"))
 
 ----------------------------------------------------------------------------------------------------
 

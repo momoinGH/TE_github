@@ -89,6 +89,7 @@ local function FlameMain(inst)
         inst.flame3.Transform:SetPosition(x, .1, z)
     end
 end
+
 local function DestroyMain(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     for i, v in ipairs(TheSim:FindEntities(x, 0, z, 2, nil, {}, { "CHOP_workable" })) do
@@ -98,6 +99,7 @@ local function DestroyMain(inst)
         if v.components.workable then v.components.workable:Destroy(inst) end
     end
 end
+
 local function d(inst)
     if inst.ItemsMain ~= nil then
         inst.ItemsMain:Cancel()
@@ -108,12 +110,15 @@ local function d(inst)
     inst.DestroyMain = inst:DoPeriodicTask(0, DestroyMain)
     inst.ItemsMain = inst:DoPeriodicTask(0, ItemsMain)
 end
+
 local function f(inst)
     if inst.FlameMain ~= nil then
         inst.FlameMain:Cancel()
     end
     inst.FlameMain = inst:DoPeriodicTask(0, FlameMain)
+    FlameMain(inst)
 end
+
 local function PushMusic(inst, level)
     if ThePlayer == nil then
         inst._playingmusic = false
@@ -134,35 +139,33 @@ local function OnInit(inst)
     end
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     local shadow = inst.entity:AddDynamicShadow()
+    local physics = inst.entity:AddPhysics()
     inst.entity:AddLight()
-    inst.Light:SetRadius(.5)
-    inst.Light:SetFalloff(0.5)
-    inst.Light:SetIntensity(0.75)
-    inst.Light:SetColour(235 / 255, 121 / 255, 12 / 255)
+    inst.entity:AddNetwork()
+
+
+
     shadow:SetSize(6, 3.5)
+
     inst.d = d(inst)
+
     inst.Transform:SetFourFaced()
 
-    local s = 1
-    trans:SetScale(s, s, s)
-
-    local physics = inst.entity:AddPhysics()
     physics:SetMass(1000)
     physics:SetCapsule(1.5, 1)
     physics:SetFriction(0)
     physics:SetDamping(5)
 
-    anim:SetBank("twister")
-    anim:SetBuild("twister_build")
-    anim:PlayAnimation("idle_loop", true)
-
+    inst.AnimState:SetBank("twister")
+    inst.AnimState:SetBuild("twister_build")
+    inst.AnimState:PlayAnimation("idle_loop", true)
     inst.AnimState:SetMultColour(255 / 255, 150 / 255, 0 / 255, 1)
     --  inst.AnimState:OverrideMultColour(255/255, 0, 0, 0.5)	
 
@@ -178,7 +181,6 @@ local function fn(Sim)
     inst:AddTag("scarytoprey")
     inst:AddTag("largecreature")
 
-    inst.entity:AddLight()
     inst.Light:SetFalloff(0.4)
     inst.Light:SetIntensity(.7)
     inst.Light:SetRadius(4)
@@ -252,8 +254,6 @@ local function fn(Sim)
 
     inst:DoTaskInTime(0, OnInit)
 
-    --   inst.despawnday = TheWorld.state.cycles + TheWorld.state.winterlength
-
     TheWorld:PushEvent("ms_registertwister", inst)
 
     inst.CanVacuum = true
@@ -265,13 +265,11 @@ local function fn(Sim)
     --inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/twister/twister_active", "wind_loop")
     inst.SoundEmitter:SetParameter("wind_loop", "intensity", 0)
     inst.AnimState:Hide("twister_water_fx")
-    inst.flame1 = SpawnPrefab("deer_fire_flakes")
     inst:DoTaskInTime(.1, function(inst)
+        inst.flame1 = SpawnPrefab("deer_fire_flakes")
         inst.flame2 = SpawnPrefab("deer_fire_flakes")
-        inst:DoTaskInTime(.1, function(inst)
-            inst.flame3 = SpawnPrefab("deer_fire_flakes")
-            inst.f = f(inst)
-        end)
+        inst.flame3 = SpawnPrefab("deer_fire_flakes")
+        inst.f = f(inst)
     end)
     ------------------
 

@@ -11,7 +11,6 @@ SetSharedLootTable('firetwister_seal',
         { 'meat', 1.00 },
         { 'meat', 1.00 },
         { 'meat', 1.00 },
-        { 'firetwister_spawner', 1.00 },
         { 'volcanostaff', 1.00 },
         { 'magic_seal', 1.00 },
         --Drop an item here too?

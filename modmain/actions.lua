@@ -73,11 +73,10 @@ TroAddAction(nil, "FLUP_HIDE", STRINGS.ACTIONS.FLUP_HIDE, function(act)
     --Dummy action for flup hiding
 end)
 
-
 TroAddAction(nil, "FISH1", STRINGS.ACTIONS.FISH1, function(act)
-    if (act.invobject and act.invobject.components.fishingrod)
+    local fishingrod = (act.invobject and act.invobject.components.fishingrod)
         or (act.doer and act.doer.components.fishingrod)
-    then
+    if fishingrod then
         fishingrod:StartFishing(act.target, act.doer)
     end
     return true

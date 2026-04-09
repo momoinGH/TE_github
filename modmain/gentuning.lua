@@ -55,7 +55,7 @@
 -- }
 
 local hamlet = GetModConfigData("hamlet") == 1
-
+local shipwrecked = GetModConfigData("shipwrecked") == 1
 
 TUNING.tropical = {
     common         = true,
@@ -65,8 +65,8 @@ TUNING.tropical = {
     fog            = GetModConfigData("fog") == 1,            --迷雾
     vampirebatcave = GetModConfigData("vampirebatcave") == 1, --洞穴裂缝
     aporkalypse    = GetModConfigData("aporkalypse") == 1,    --大灾变
-    shipwrecked    = GetModConfigData("shipwrecked") == 1,
-
+    shipwrecked    = shipwrecked,
+    boat           = shipwrecked,
 
 
 
@@ -75,10 +75,10 @@ TUNING.tropical = {
 
     kindofworld = 15, --世界类型
 
-    boat        = false,
-    windy       = false,
-    sea         = false, --仅海洋世界
-    underwater  = false, --海底世界
+
+    windy      = false,
+    sea        = false,  --仅海洋世界
+    underwater = false,  --海底世界
 
 
     shipwrecked_plus = false, --海难plus

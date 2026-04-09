@@ -18,7 +18,7 @@ local function fn(Sim)
 
     MakeObstaclePhysics(inst, 1)
     inst.Transform:SetScale(0.3, 0.3, 0.3)
-    inst.MiniMapEntity:SetIcon("entrance_open.tex")
+    inst.MiniMapEntity:SetIcon("cave_open2.png")
 
     anim:SetBank("entrance_reef")
     anim:SetBuild("underwater_entrance")
@@ -68,7 +68,7 @@ local function fn1(Sim)
 
     MakeObstaclePhysics(inst, 1)
     inst.Transform:SetScale(0.3, 0.3, 0.3)
-    inst.MiniMapEntity:SetIcon("entrance_open.tex")
+    inst.MiniMapEntity:SetIcon("cave_open2.png")
 
     anim:SetBank("entrance_reef")
     anim:SetBuild("underwater_entrance")
@@ -118,7 +118,7 @@ local function fn2(Sim)
 
     MakeObstaclePhysics(inst, 1)
     inst.Transform:SetScale(0.3, 0.3, 0.3)
-    inst.MiniMapEntity:SetIcon("entrance_open.tex")
+    inst.MiniMapEntity:SetIcon("cave_open2.png")
 
     anim:SetBank("entrance_reef")
     anim:SetBuild("underwater_entrance")
@@ -214,8 +214,8 @@ local function fn3()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("entrance_open.tex")
+    inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon("cave_open2.png")
 
     inst.AnimState:SetBuild("underwater_entrance")
     inst.AnimState:SetBank("entrance_reef")

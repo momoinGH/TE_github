@@ -73,7 +73,7 @@ local function fn()
     inst.components.lighttweener:StartTween(light, 1, .9, 0.9, { 255 / 255, 177 / 255, 164 / 255 }, 0, turnlightoff)
 
     inst:AddComponent("prototyper")
-    inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.OBSIDIAN_TWO
+    inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.OBSIDIAN_ONE
     inst.components.prototyper.onturnoff = OnTurnOff
     inst.components.prototyper.onturnon = OnTurnOn
     --	inst.components.prototyper.onactivate = onactivate

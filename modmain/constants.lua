@@ -128,7 +128,7 @@ end
 GLOBAL.TroGetEquippedItem = TroGetEquippedItem
 
 -- 是否在哈姆雷特雾气中
-function TroInHamlteFogImple(inst)
+function TroInHamletFogImple(inst)
     return TheWorld.state.israining                                           --下雨
         and TheWorld.state.moisture > 500                                     --潮湿度，雨越下越小，这个值要看着效果调整
         and TheWorld.state.issummer                                           --夏天当潮湿季用
@@ -136,7 +136,7 @@ function TroInHamlteFogImple(inst)
         and not TheWorld.Map:TroIsWorldOut(inst.Transform:GetWorldPosition()) --不在虚空小房子里或虚空洞穴里
 end
 
-GLOBAL.TroInHamlteFogImple = TroInHamlteFogImple
+GLOBAL.TroInHamletFogImple = TroInHamletFogImple
 
 -- 是否可以抵抗哈姆雷特雾气
 function TroCanResistHamletFog(player)

@@ -141,7 +141,7 @@ function EntityScript:TroInHamletFog()
         return self:TroGetPlayerClassifiedNetVar("tro_fog")
     end
     --不是玩家
-    return TroInHamlteFogImple(self)
+    return TroInHamletFogImple(self)
 end
 
 -- 获取玩家身上的小船

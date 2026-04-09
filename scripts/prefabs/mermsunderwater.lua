@@ -1666,28 +1666,6 @@ local function common_master2(inst)
     inst.components.named:PickNewName()
 
     inst.CanFish = true
-
-    --[[	
-    inst:ListenForEvent("onmermkingcreated",   function()
-        inst:DoTaskInTime(math.random()*SLIGHTDELAY,function()
-            RoyalUpgrade(inst)
-            inst:PushEvent("onmermkingcreated")
-        end)
-    end, TheWorld)
-    inst:ListenForEvent("onmermkingdestroyed", function()
-        inst:DoTaskInTime(math.random()*SLIGHTDELAY,function()
-            RoyalDowngrade(inst)
-            inst:PushEvent("onmermkingdestroyed")
-        end)
-    end, TheWorld)
-
-    inst:ListenForEvent("oneat", OnEat)
-
-    if TheWorld.components.mermkingmanager and TheWorld.components.mermkingmanager:HasKing() then
-        RoyalUpgrade(inst)
-    end
-	
-]]
 end
 
 return --MakeMerm("merm1", assets, prefabs, common_common, common_master),

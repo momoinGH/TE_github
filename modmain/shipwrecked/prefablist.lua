@@ -7,7 +7,6 @@ PrefabFiles = {
 
 
     "twister",               --豹卷风
-    "twister_spawner",       --豹卷风生成器
     "firetwister_seal",      --小火豹
     "firetwister",           --火豹卷
     "twister_tornadodefogo", --"火卷风"
@@ -17,6 +16,7 @@ PrefabFiles = {
     "jellyfish_spawner",        --水母生成器
     "rainbowjellyfish",         --彩虹水母
     "rainbowjellyfish_planted", --彩虹水母
+    "rainbowjellyfish_spawner", --彩虹水母生成器
     "jellyfish_planted",
 
 
@@ -312,4 +312,5 @@ PrefabFiles = {
     "seataro_planted",       --海芋头
     "seagullspawner",        --海鸥生成器
     "underwater_entrance",   --海底入口
+
 }

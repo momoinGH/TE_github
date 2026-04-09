@@ -179,7 +179,6 @@ local function fn()
     MakeMediumBurnableCharacter(inst, "pig_torso")
 
     inst:AddComponent("homeseeker")
-    --inst.components.homeseeker:SetHome(SpawnPrefab("pigbanditexit"))
 
     inst:AddComponent("follower")
     inst.components.follower.maxfollowtime = PIG_LOYALTY_MAXTIME

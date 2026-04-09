@@ -772,7 +772,6 @@ local function fn()
     inst:AddTag("wildboreking")
     inst:AddTag("king")
     inst:AddTag("trader")
-
     inst:AddTag("prey") -- Pig King is not attackable by bosses
     inst:AddTag("houndfriend")
     inst:AddTag("wall")

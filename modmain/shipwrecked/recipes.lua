@@ -1,9 +1,27 @@
 local Ig = Ingredient
-local TechTree = require("techtree")
+local v_atlas = "images/inventoryimages/inventory_shipwrecked.xml"
+local tab_atlas = "images/tabs.xml"
 
+--火山
+TroAddTech("OBSIDIAN", {
+    max_level = 1,
+    atlas = tab_atlas,
+    image = "tab_volcano.tex",
+    has_filter = true
+})
 
+-- 原型机指定交互和侧边栏
+TroAddPrototyperDef("obsidian_workbench", {
+    action_str = "OBSIDIANTAB", --交互时文本提示
+    icon_atlas = tab_atlas,
+    icon_image = "tab_volcano.tex",
+    is_crafting_station = true --是不是一个制作站，如果是就在单独的tab里显示配方
+})
 
+--航海过滤器菜单
+AddRecipeFilter({ name = "NAUTICAL", atlas = tab_atlas, image = "tab_nautical.tex" })
 
+----------------------------------------------------------------------------------------------------
 
 TroAddRecipe("seaweed_stalk", { Ig("bullkelp_root", 1), Ig("seaweed", 3), Ig(CHARACTER_INGREDIENT.HEALTH, 10) }, TECH.NONE, { builder_tag = "plantkin" }, { "CHARACTER" })
 -- WX78--
@@ -15,126 +33,74 @@ TroAddRecipe("glassmachete", { Ig("twigs", 2), Ig("moonglass", 4) }, TECH.CELEST
 -- OTHER--
 TroAddRecipe("machete", { Ig("flint", 3), Ig("twigs", 1) }, TECH.NONE, nil, { "TOOLS" })
 TroAddRecipe("goldenmachete", { Ig("twigs", 4), Ig("goldnugget", 2) }, TECH.SCIENCE_TWO, nil, { "TOOLS" })
-----------------------------------------------------------------------------------------------------
 
-
-
-
-
-table.insert(TechTree.AVAILABLE_TECH, "OBSIDIAN") --火山
-TECH.OBSIDIAN_ONE = { OBSIDIAN = 1, }
-TECH.OBSIDIAN_TWO = { OBSIDIAN = 2 }
-for i, v in pairs(AllRecipes) do
-    v.level.OBSIDIAN_ONE = v.level.OBSIDIAN_ONE or 0
-    v.level.OBSIDIAN_TWO = v.level.OBSIDIAN_TWO or 0
-end
-
-local v_atlas = "images/inventoryimages/inventory_shipwrecked.xml"
-local tab_atlas = "images/tabs.xml"
-
--- 新增一个制作栏
-RECIPETABS["OBSIDIANTAB"] = {
-    str = "OBSIDIANTAB",
-    sort = 90,
-    icon = "tab_volcano.tex",
-    icon_atlas = tab_atlas,
-    crafting_station = true,
-}
-
--- 这个原型机拥有的科技
-TUNING.PROTOTYPER_TREES.OBSIDIAN_ONE = TechTree.Create({
-    OBSIDIAN = 1,
-})
-
--- 原型机指定交互和侧边栏
-AddPrototyperDef("obsidian_workbench", {
-    action_str = "OBSIDIANTAB", --交互时文本提示
-    icon_image = "tab_volcano.tex",
-    icon_atlas = tab_atlas,
-    is_crafting_station = true --是不是一个制作站，如果是就在单独的tab里显示配方
-})
-
-AddRecipeFilter({ name = "OBSIDIAN", atlas = tab_atlas, image = "tab_volcano.tex" })  --火山
-AddRecipeFilter({ name = "NAUTICAL", atlas = tab_atlas, image = "tab_nautical.tex" }) --航海
 
 -- 黑曜石
-AddRecipe2("obsidianaxe", { Ig("axe", 1), Ig("obsidian", 2, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("armorobsidian", { Ig("armorwood", 1), Ig("obsidian", 5, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("obsidianmachete", { Ig("machete", 1, v_atlas), Ig("obsidian", 3, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("spear_obsidian", { Ig("spear", 1), Ig("obsidian", 3, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("volcanostaff", { Ig("firestaff", 1), Ig("obsidian", 4, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("obsidiancoconade", { Ig("coconade", 3, v_atlas), Ig("obsidian", 3, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true, numtogive = 3 }, { "OBSIDIAN" })
-AddRecipe2("obsidian_boatcannon", { Ig("obsidian", 6, v_atlas), Ig("log", 5), Ig("gunpowder", 4) }, TECH.OBSIDIAN_TWO, nil, { "OBSIDIAN" })
-AddRecipe2("wind_conch", { Ig("obsidian", 4, v_atlas), Ig("purplegem", 1), Ig("magic_seal", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
-AddRecipe2("sail_stick", { Ig("obsidian", 2, v_atlas), Ig("nightmarefuel", 3), Ig("magic_seal", 1, v_atlas) }, TECH.OBSIDIAN_TWO, { nounlock = true }, { "OBSIDIAN" })
+TroAddRecipe("obsidianaxe", { Ig("axe", 1), Ig("obsidian", 2, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_ONE, { nounlock = true }, { "OBSIDIAN" })
+TroAddRecipe("armorobsidian", { Ig("armorwood", 1), Ig("obsidian", 5, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_ONE, { nounlock = true }, { "OBSIDIAN" })
+TroAddRecipe("obsidianmachete", { Ig("machete", 1, v_atlas), Ig("obsidian", 3, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_ONE, { nounlock = true }, { "OBSIDIAN" })
+TroAddRecipe("spear_obsidian", { Ig("spear", 1), Ig("obsidian", 3, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_ONE, { nounlock = true }, { "OBSIDIAN" })
+TroAddRecipe("volcanostaff", { Ig("firestaff", 1), Ig("obsidian", 4, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_ONE, { nounlock = true }, { "OBSIDIAN" })
+TroAddRecipe("obsidiancoconade", { Ig("coconade", 3, v_atlas), Ig("obsidian", 3, v_atlas), Ig("dragoonheart", 1, v_atlas) }, TECH.OBSIDIAN_ONE, { nounlock = true, numtogive = 3 }, { "OBSIDIAN" })
+TroAddRecipe("obsidian_boatcannon", { Ig("obsidian", 6, v_atlas), Ig("log", 5), Ig("gunpowder", 4) }, TECH.OBSIDIAN_ONE, nil, { "OBSIDIAN" })
+TroAddRecipe("wind_conch", { Ig("obsidian", 4, v_atlas), Ig("purplegem", 1), Ig("magic_seal", 1, v_atlas) }, TECH.OBSIDIAN_ONE, { nounlock = true }, { "OBSIDIAN" })
+TroAddRecipe("sail_stick", { Ig("obsidian", 2, v_atlas), Ig("nightmarefuel", 3), Ig("magic_seal", 1, v_atlas) }, TECH.OBSIDIAN_ONE, { nounlock = true }, { "OBSIDIAN" })
 
-
-
-
-
-
-
-AddRecipe2("porto_sea_yard", { Ig("limestone", 6), Ig("tar", 6), Ig("log", 4) }, TECH.SEAFARING_TWO, nil, { "STRUCTURES", "NAUTICAL" })
-AddRecipe2("seatrap", { Ig("palmleaf", 4), Ig("messagebottleempty_sw", 2), Ig("jellyfish", 1) }, TECH.SEAFARING_TWO, nil, { "TOOLS", "GARDENING", "NAUTICAL" })
-AddRecipe2("woodlegshat", { Ig("boneshard", 4), Ig("fabric", 3), Ig("dubloon", 10) }, TECH.NONE, { builder_tag = "woodlegs" }, { "CHARACTER" })
-AddRecipe2("goldnugget_sw", { Ig("dubloon", 3) }, TECH.SCIENCE_ONE, { product = "goldnugget", }, { "REFINE" })
-AddRecipe2("book_meteor", { Ig("papyrus", 2), Ig("obsidian", 2) }, TECH.SCIENCE_TWO, { builder_tag = "bookbuilder", }, { "CHARACTER" })
-AddRecipe2("obsidianfirepit", { Ig("log", 3), Ig("obsidian", 8) }, TECH.SCIENCE_TWO, { placer = "obsidianfirepit_placer" }, { "LIGHT", "COOKING", "WINTER" })
-AddRecipe2("dragoonden", { Ig("dragoonheart", 1), Ig("rocks", 5), Ig("obsidian", 4) }, TECH.SCIENCE_TWO, { placer = "dragoonden_placer" }, { "STRUCTURES" })
+TroAddRecipe("porto_sea_yard", { Ig("limestone", 6), Ig("tar", 6), Ig("log", 4) }, TECH.SEAFARING_TWO, nil, { "STRUCTURES", "NAUTICAL" })
+TroAddRecipe("seatrap", { Ig("palmleaf", 4), Ig("messagebottleempty_sw", 2), Ig("jellyfish", 1) }, TECH.SEAFARING_TWO, nil, { "TOOLS", "GARDENING", "NAUTICAL" })
+TroAddRecipe("woodlegshat", { Ig("boneshard", 4), Ig("fabric", 3), Ig("dubloon", 10) }, TECH.NONE, { builder_tag = "woodlegs" }, { "CHARACTER" })
+TroAddRecipe("goldnugget_sw", { Ig("dubloon", 3) }, TECH.SCIENCE_ONE, { product = "goldnugget", }, { "REFINE" })
+TroAddRecipe("book_meteor", { Ig("papyrus", 2), Ig("obsidian", 2) }, TECH.SCIENCE_TWO, { builder_tag = "bookbuilder", }, { "CHARACTER" })
+TroAddRecipe("obsidianfirepit", { Ig("log", 3), Ig("obsidian", 8) }, TECH.SCIENCE_TWO, { placer = "obsidianfirepit_placer" }, { "LIGHT", "COOKING", "WINTER" })
+TroAddRecipe("dragoonden", { Ig("dragoonheart", 1), Ig("rocks", 5), Ig("obsidian", 4) }, TECH.SCIENCE_TWO, { placer = "dragoonden_placer" }, { "STRUCTURES" })
 
 
 ----------------------------------------------------------------------------------------------------
 
 -- 小船
-AddRecipe2("porto_armouredboat", { Ig("boards", 6), Ig("rope", 3), Ig("seashell", 10) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
-AddRecipe2("porto_cargoboat", { Ig("boards", 6), Ig("rope", 3) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
-AddRecipe2("porto_encrustedboat", { Ig("boards", 6), Ig("limestone", 4), Ig("rope", 3) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
-AddRecipe2("porto_rowboat", { Ig("boards", 3), Ig("vine", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
-AddRecipe2("porto_woodlegsboat", { Ig("boards", 4), Ig("dubloon", 4), Ig("boatcannon", 1) }, TECH.NONE, { builder_tag = "woodlegs" }, { "CHARACTER" })
-AddRecipe2("porto_shadowboat", { Ig("papyrus", 3), Ig("nightmarefuel", 4), Ig(CHARACTER_INGREDIENT.SANITY, 60) }, TECH.NONE, { builder_tag = "shadowmagic" }, { "CHARACTER" })
-AddRecipe2("corkboatitem", { Ig("rope", 1), Ig("cork", 4) }, TECH.NONE, nil, { "NAUTICAL" })
-AddRecipe2("surfboard_item", { Ig("boards", 1), Ig("seashell", 1) }, TECH.NONE, { builder_tag = "walani" }, { "CHARACTER" })
+TroAddRecipe("porto_armouredboat", { Ig("boards", 6), Ig("rope", 3), Ig("seashell", 10) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("porto_cargoboat", { Ig("boards", 6), Ig("rope", 3) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("porto_encrustedboat", { Ig("boards", 6), Ig("limestone", 4), Ig("rope", 3) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("porto_rowboat", { Ig("boards", 3), Ig("vine", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("porto_woodlegsboat", { Ig("boards", 4), Ig("dubloon", 4), Ig("boatcannon", 1) }, TECH.NONE, { builder_tag = "woodlegs" }, { "CHARACTER" })
+TroAddRecipe("porto_shadowboat", { Ig("papyrus", 3), Ig("nightmarefuel", 4), Ig(CHARACTER_INGREDIENT.SANITY, 60) }, TECH.NONE, { builder_tag = "shadowmagic" }, { "CHARACTER" })
+TroAddRecipe("corkboatitem", { Ig("rope", 1), Ig("cork", 4) }, TECH.NONE, nil, { "NAUTICAL" })
+TroAddRecipe("surfboard_item", { Ig("boards", 1), Ig("seashell", 1) }, TECH.NONE, { builder_tag = "walani" }, { "CHARACTER" })
 
 if TUNING.tropical.only_shipwrecked or GetModConfigData("raftlog") then
-    AddRecipe2("porto_lograft_old", { Ig("log", 6), Ig("cutgrass", 4) }, TECH.NONE, nil, { "NAUTICAL" })
-    AddRecipe2("porto_raft_old", { Ig("bamboo", 4), Ig("vine", 3) }, TECH.NONE, nil, { "NAUTICAL" })
+    TroAddRecipe("porto_lograft_old", { Ig("log", 6), Ig("cutgrass", 4) }, TECH.NONE, nil, { "NAUTICAL" })
+    TroAddRecipe("porto_raft_old", { Ig("bamboo", 4), Ig("vine", 3) }, TECH.NONE, nil, { "NAUTICAL" })
 else
-    AddRecipe2("porto_lograft", { Ig("log", 6), Ig("cutgrass", 4) }, TECH.NONE, nil, { "SEAFARING", "NAUTICAL" })
-    AddRecipe2("porto_raft", { Ig("bamboo", 4), Ig("vine", 3) }, TECH.NONE, nil, { "SEAFARING", "NAUTICAL" })
+    TroAddRecipe("porto_lograft", { Ig("log", 6), Ig("cutgrass", 4) }, TECH.NONE, nil, { "SEAFARING", "NAUTICAL" })
+    TroAddRecipe("porto_raft", { Ig("bamboo", 4), Ig("vine", 3) }, TECH.NONE, nil, { "SEAFARING", "NAUTICAL" })
 end
 
 -- 小船配件
-AddRecipe2("boatcannon", { Ig("coconut", 6), Ig("log", 5), Ig("gunpowder", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
-AddRecipe2("quackeringram", { Ig("quackenbeak", 1), Ig("bamboo", 4), Ig("rope", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("boatcannon", { Ig("coconut", 6), Ig("log", 5), Ig("gunpowder", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("quackeringram", { Ig("quackenbeak", 1), Ig("bamboo", 4), Ig("rope", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
 
-AddRecipe2("sail", { Ig("bamboo", 2), Ig("vine", 2), Ig("palmleaf", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
-AddRecipe2("feathersail", { Ig("bamboo", 2), Ig("rope", 4), Ig("doydoyfeather", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
-AddRecipe2("clothsail", { Ig("bamboo", 2), Ig("fabric", 2), Ig("rope", 2) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
-AddRecipe2("snakeskinsail", { Ig("log", 4), Ig("rope", 2), Ig("snakeskin", 2) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
-AddRecipe2("malbatrossail", { Ig("driftwood_log", 4), Ig("rope", 2), Ig("malbatross_feather", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
-AddRecipe2("ironwind", { Ig("turbine_blades", 1), Ig("transistor", 1), Ig("goldnugget", 2) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("sail", { Ig("bamboo", 2), Ig("vine", 2), Ig("palmleaf", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("feathersail", { Ig("bamboo", 2), Ig("rope", 4), Ig("doydoyfeather", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("clothsail", { Ig("bamboo", 2), Ig("fabric", 2), Ig("rope", 2) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("snakeskinsail", { Ig("log", 4), Ig("rope", 2), Ig("snakeskin", 2) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("malbatrossail", { Ig("driftwood_log", 4), Ig("rope", 2), Ig("malbatross_feather", 4) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("ironwind", { Ig("turbine_blades", 1), Ig("transistor", 1), Ig("goldnugget", 2) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
 
-AddRecipe2("trawlnet", { Ig("bamboo", 2), Ig("rope", 3) }, TECH.SEAFARING_TWO, nil, { "TOOLS", "FISHING", "NAUTICAL" })
+TroAddRecipe("trawlnet", { Ig("bamboo", 2), Ig("rope", 3) }, TECH.SEAFARING_TWO, nil, { "TOOLS", "FISHING", "NAUTICAL" })
 
-AddRecipe2("tarlamp", { Ig("seashell", 1), Ig("tar", 1) }, TECH.SCIENCE_ONE, nil, { "LIGHT" })
-AddRecipe2("boat_lantern", { Ig("messagebottleempty_sw", 1), Ig("twigs", 2), Ig("bioluminescence", 1) }, TECH.SCIENCE_TWO, nil, { "NAUTICAL", "LIGHT" })
-AddRecipe2("boat_torch", { Ig("torch", 1), Ig("twigs", 2) }, TECH.ONE, nil, { "NAUTICAL", "LIGHT" })
-
+TroAddRecipe("tarlamp", { Ig("seashell", 1), Ig("tar", 1) }, TECH.SCIENCE_ONE, nil, { "LIGHT" })
+TroAddRecipe("boat_lantern", { Ig("messagebottleempty_sw", 1), Ig("twigs", 2), Ig("bioluminescence", 1) }, TECH.SCIENCE_TWO, nil, { "NAUTICAL", "LIGHT" })
+TroAddRecipe("boat_torch", { Ig("torch", 1), Ig("twigs", 2) }, TECH.ONE, nil, { "NAUTICAL", "LIGHT" })
 
 -- NAUTICAL--
-AddRecipe2("boatrepairkit", { Ig("boards", 2), Ig("stinger", 2), Ig("rope", 2) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
-AddRecipe2("porto_buoy", { Ig("messagebottleempty_sw", 1), Ig("bamboo", 4), Ig("bioluminescence", 2) }, TECH.SEAFARING_TWO, { image = "buoy.tex" }, { "LIGHT", "STRUCTURES", "NAUTICAL" })
-AddRecipe2("telescope", { Ig("goldnugget", 1), Ig("pigskin", 1), Ig("messagebottleempty_sw", 1) }, TECH.SEAFARING_TWO, nil, { "TOOLS", "NAUTICAL" })
-AddRecipe2("supertelescope", { Ig("telescope", 1), Ig("goldnugget", 1), Ig("tigereye", 1) }, TECH.SEAFARING_TWO, nil, { "TOOLS", "NAUTICAL" })
-AddRecipe2("captainhat", { Ig("boneshard", 1), Ig("seaweed", 1), Ig("strawhat", 1) }, TECH.SCIENCE_TWO, nil, { "CLOTHING", "NAUTICAL" })
-AddRecipe2("piratehat", { Ig("boneshard", 2), Ig("rope", 1), Ig("silk", 2) }, TECH.SCIENCE_TWO, nil, { "CLOTHING", "NAUTICAL" })
-AddRecipe2("armor_lifejacket", { Ig("fabric", 2), Ig("vine", 2), Ig("messagebottleempty_sw", 2) }, TECH.SEAFARING_TWO, nil, { "CLOTHING", "NAUTICAL" })
-AddRecipe2("porto_tar_extractor", { Ig("coconut", 2), Ig("bamboo", 4), Ig("limestone", 4) }, TECH.SEAFARING_TWO, { image = "tar_extractor.tex" }, { "STRUCTURES", "NAUTICAL" })
-
-
-
-
-
+TroAddRecipe("boatrepairkit", { Ig("boards", 2), Ig("stinger", 2), Ig("rope", 2) }, TECH.SEAFARING_TWO, nil, { "NAUTICAL" })
+TroAddRecipe("porto_buoy", { Ig("messagebottleempty_sw", 1), Ig("bamboo", 4), Ig("bioluminescence", 2) }, TECH.SEAFARING_TWO, { image = "buoy.tex" }, { "LIGHT", "STRUCTURES", "NAUTICAL" })
+TroAddRecipe("telescope", { Ig("goldnugget", 1), Ig("pigskin", 1), Ig("messagebottleempty_sw", 1) }, TECH.SEAFARING_TWO, nil, { "TOOLS", "NAUTICAL" })
+TroAddRecipe("supertelescope", { Ig("telescope", 1), Ig("goldnugget", 1), Ig("tigereye", 1) }, TECH.SEAFARING_TWO, nil, { "TOOLS", "NAUTICAL" })
+TroAddRecipe("captainhat", { Ig("boneshard", 1), Ig("seaweed", 1), Ig("strawhat", 1) }, TECH.SCIENCE_TWO, nil, { "CLOTHING", "NAUTICAL" })
+TroAddRecipe("piratehat", { Ig("boneshard", 2), Ig("rope", 1), Ig("silk", 2) }, TECH.SCIENCE_TWO, nil, { "CLOTHING", "NAUTICAL" })
+TroAddRecipe("armor_lifejacket", { Ig("fabric", 2), Ig("vine", 2), Ig("messagebottleempty_sw", 2) }, TECH.SEAFARING_TWO, nil, { "CLOTHING", "NAUTICAL" })
+TroAddRecipe("porto_tar_extractor", { Ig("coconut", 2), Ig("bamboo", 4), Ig("limestone", 4) }, TECH.SEAFARING_TWO, { image = "tar_extractor.tex" }, { "STRUCTURES", "NAUTICAL" })
 
 TroAddRecipe("monkeyball", { Ig("cave_banana", 1), Ig("snakeskin", 2), Ig("rope", 2) }, TECH.SCIENCE_ONE, nil, { "TOOLS" })
 TroAddRecipe("chiminea", { Ig("log", 2), Ig("limestone", 3), Ig("sand", 2) }, TECH.NONE, { placer = "chiminea_placer" }, { "LIGHT", "COOKING", "WINTER" })
@@ -187,15 +153,13 @@ TroAddRecipe("tropicalfan", { Ig("cutreeds", 2), Ig("rope", 2), Ig("doydoyfeathe
 TroAddRecipe("palmleaf_hut", { Ig("palmleaf", 4), Ig("bamboo", 4), Ig("rope", 3) }, TECH.SCIENCE_TWO, { placer = "palmleaf_hut_placer" }, { "STRUCTURES", "RAIN", "SUMMER" })
 TroAddRecipe("armorlimestone", { Ig("limestone", 3), Ig("rope", 2) }, TECH.SCIENCE_TWO, nil, { "ARMOUR" })
 TroAddRecipe("bell", { Ig("glommerwings", 1), Ig("glommerflower", 1) }, TECH.MAGIC_TWO, nil, { "MAGIC" })
---TroAddRecipe("slow_farmplot",         {Ig("cutgrass", 8),Ig("poop", 4),Ig("log", 4)},                            TECH.SCIENCE_ONE, {atlas = TapDefaultAtlas, min_spacing = 0, placer = "slow_farmplot_placer", image = "slow_farmplot.tex",},{"GARDENING"})
---TroAddRecipe("fast_farmplot",         {Ig("cutgrass", 10),Ig("poop", 6),Ig("rocks", 4)},                         TECH.SCIENCE_ONE, {atlas = TapDefaultAtlas, min_spacing = 0, placer = "fast_farmplot_placer", image = "fast_farmplot.tex",},{"GARDENING"})
-
 
 TroAddRecipe("glass_shards", { Ig("sand", 3) }, TECH.SCIENCE_ONE, nil, { "REFINE" })
 TroAddRecipe("shard_sword", { Ig("glass_shards", 3), Ig("nightmarefuel", 2), Ig("twigs", 2) }, TECH.MAGIC_TWO, nil, { "MAGIC", "WEAPONS" })
 TroAddRecipe("shard_beak", { Ig("glass_shards", 3), Ig("crow", 1), Ig("twigs", 2) }, TECH.MAGIC_TWO, nil, { "MAGIC", "WEAPONS" })
 TroAddRecipe("piratihatitator", { Ig("parrot", 1), Ig("boards", 4), Ig("piratehat", 1) }, TECH.SCIENCE_ONE, { placer = "piratihatitator_placer" }, { "PROTOTYPERS", "MAGIC", "STRUCTURES" })
 
+-- 地皮
 TroAddRecipe("turf_snakeskinfloor", { Ig("snakeskin", 2), Ig("fabric", 1) }, TECH.SCIENCE_TWO, { numtogive = 4 }, { "DECOR" })
 TroAddRecipe("turf_magmafield", { Ig("rocks", 2), Ig("ash", 1) }, TECH.TURFCRAFTING_ONE, { numtogive = 4 }, { "DECOR" })
 TroAddRecipe("turf_ash", { Ig("ash", 3) }, TECH.TURFCRAFTING_ONE, { numtogive = 4 }, { "DECOR" })
