@@ -127,13 +127,6 @@ end
 
 GLOBAL.TroGetEquippedItem = TroGetEquippedItem
 
---渡渡鸟数量控制
-SEABEACH_AMOUNT = {
-    doydoy = 0,
-}
-
-
-
 -- 是否在哈姆雷特雾气中
 function TroInHamlteFogImple(inst)
     return TheWorld.state.israining                                           --下雨

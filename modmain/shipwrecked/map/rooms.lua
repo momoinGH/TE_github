@@ -1,5 +1,4 @@
 --彩蛋和参数 ----这些参数该怎么放在一个独立的文件里呢
-
 local meadow_fairy_rings =
 {
     ["MushroomRingLarge"] = function()
@@ -18,7 +17,6 @@ local meadow_fairy_rings =
 
 local LIVINGJUNGLETREE_CHANCE = 0.9
 
-
 AddRoom("ForceDisconnectedRoomSW", {
     colour = { r = .45, g = .75, b = .45, a = .50 },
     type = "blank",
@@ -27,26 +25,23 @@ AddRoom("ForceDisconnectedRoomSW", {
     contents = {},
 })
 
-
-
 AddRoom("Shipwrecked start", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
-        -- countstaticlayouts={["shipwrecked_start"]=1},
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .5,
-            rocks = .03,     --trying
-            rock1 = .1,      --trying
+            rocks = .03,   --trying
+            rock1 = .1,    --trying
             --rock2 = .2,
-            beehive = .01,   --was .05,
+            beehive = .01, --was .05,
             --flower = .04, --trying
-            grass_sw = .2,   --trying
-            sapling_sw = .2, --trying
+            grass_sw = .2, --trying
+            sapling = .2,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -55,17 +50,16 @@ AddRoom("Shipwrecked start", {
             wildborehouse = .005,
             crate = .01,
         },
+        -- countstaticlayouts={["shipwrecked_start"]=1},
         countstaticlayouts = {
             ["start_sw"] = 1,
         },
-
     }
 })
-
 ---------------------------------------------------------------------------------------------------
 AddRoom("NoOxMeadow", {
     colour = { r = .8, g = .4, b = .4, a = .50 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     contents = {
         countstaticlayouts = meadow_fairy_rings,
         distributepercent = .4, --.1, --lowered from .2
@@ -86,7 +80,7 @@ AddRoom("NoOxMeadow", {
 
 AddRoom("MeadowOxBoon", {
     colour = { r = .8, g = .4, b = .4, a = .50 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     contents = {
         countstaticlayouts = meadow_fairy_rings,
         distributepercent = .4, --was .1,
@@ -103,7 +97,7 @@ AddRoom("MeadowOxBoon", {
 
 AddRoom("MeadowFlowery", {
     colour = { r = .8, g = .4, b = .4, a = .50 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     contents = {
         countstaticlayouts = meadow_fairy_rings,
         distributepercent = .5, --.1, --lowered from .2
@@ -120,7 +114,7 @@ AddRoom("MeadowFlowery", {
 
 AddRoom("MeadowBees", {
     colour = { r = .8, g = .4, b = .4, a = .50 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     contents = {
         countstaticlayouts = meadow_fairy_rings,
         distributepercent = .4, --.1, --lowered from .2
@@ -140,7 +134,7 @@ AddRoom("MeadowBees", {
 
 AddRoom("MeadowCarroty", {
     colour = { r = .8, g = .4, b = .4, a = .50 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     contents = {
         countstaticlayouts = meadow_fairy_rings,
         distributepercent = .35, --was .1
@@ -157,13 +151,13 @@ AddRoom("MeadowCarroty", {
 
 AddRoom("MeadowSappy", {
     colour = { r = .8, g = .4, b = .4, a = .50 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     contents = {
         distributepercent = .3,
         distributeprefabs =
         {
             grass_sw = 3,
-            sapling_sw = 1,
+            sapling = 1,
             flower = .5,
             beehive = .1, --was 1,
             wasphive = 0.003,
@@ -174,14 +168,14 @@ AddRoom("MeadowSappy", {
 
 AddRoom("MeadowSpider", {
     colour = { r = .8, g = .4, b = .4, a = .50 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     contents = {
         distributepercent = .4, --was .2
         distributeprefabs =
         {
             spiderden = .1,
             grass_sw = 1,
-            sapling_sw = .8,
+            sapling = .8,
             --ox = .5,
             flower = .5,
         },
@@ -190,7 +184,7 @@ AddRoom("MeadowSpider", {
 
 AddRoom("MeadowRocky", {
     colour = { r = .8, g = .4, b = .4, a = .50 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     contents = {
         distributepercent = .4, --was .1,
         distributeprefabs =
@@ -207,13 +201,13 @@ AddRoom("MeadowRocky", {
 
 AddRoom("MeadowMandrake", {
     colour = { r = .8, g = .4, b = .4, a = .50 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     contents = {
         distributepercent = .3,
         distributeprefabs =
         {
             grass_sw = .8,
-            sapling_sw = .8,
+            sapling = .8,
             sweet_potato_planted = 0.05,
             rocks = 0.003,
             rock_flintless = 0.01,
@@ -230,7 +224,7 @@ AddRoom("MeadowMandrake", {
 
 AddRoom("Magma", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = .3,
         distributeprefabs =
@@ -242,14 +236,14 @@ AddRoom("Magma", {
             rocks = .25,
             flint = 0.5, -- lowered from 3
             spiderden = .1,
-            sapling_sw = 1.0,
+            sapling = 1.0,
         },
     }
 })
 
 AddRoom("MagmaHome", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = .3,
         distributeprefabs =
@@ -264,7 +258,7 @@ AddRoom("MagmaHome", {
             -- rock_ice = 1,
             --tallbirdnest= --2, --.1,
             spiderden = .1,
-            sapling_sw = 0.5,
+            sapling = 0.5,
 
         },
 
@@ -277,7 +271,7 @@ AddRoom("MagmaHome", {
 
 AddRoom("MagmaHomeBoon", {
     colour = { r = .66, g = .66, b = .66, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = .2,
         distributeprefabs =
@@ -292,7 +286,7 @@ AddRoom("MagmaHomeBoon", {
             -- rock_ice = 1,
             --tallbirdnest= --2, --.1,
             spiderden = .1,
-            sapling_sw = 0.5,
+            sapling = 0.5,
         },
 
         countprefabs =
@@ -304,7 +298,7 @@ AddRoom("MagmaHomeBoon", {
 
 AddRoom("BG_Magma", {
     colour = { r = .66, g = .66, b = .66, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = .2,
         distributeprefabs =
@@ -316,7 +310,7 @@ AddRoom("BG_Magma", {
             rock2 = 1,
             rocks = 25,
             tallbirdnest = 0.08,
-            sapling_sw = 1.5,
+            sapling = 1.5,
             spiderden = .1,
         },
     }
@@ -324,7 +318,7 @@ AddRoom("BG_Magma", {
 
 AddRoom("GenericMagmaNoThreat", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = .25,
         distributeprefabs =
@@ -336,11 +330,11 @@ AddRoom("GenericMagmaNoThreat", {
             --rock_ice = .75,
             rocks = .25,
             flint = 1.5,
-            sapling_sw = .05,
+            sapling = .05,
             blue_mushroom = .002,
             green_mushroom = .002,
             red_mushroom = .002,
-            sapling_sw = .5,
+            sapling = .5,
             spiderden = .1,
         },
     }
@@ -348,7 +342,7 @@ AddRoom("GenericMagmaNoThreat", {
 
 AddRoom("MagmaVolcano", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = .3,
         distributeprefabs =
@@ -359,7 +353,7 @@ AddRoom("MagmaVolcano", {
             rock2 = 2,
             rocks = .25,
             flint = 0.,
-            sapling_sw = .5,
+            sapling = .5,
             spiderden = .1,
         },
 
@@ -368,7 +362,7 @@ AddRoom("MagmaVolcano", {
 
 AddRoom("Volcano", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO_NOISE,
+    value = WORLD_TILES.VOLCANO_NOISE,
     contents = {
         distributepercent = .2,
         distributeprefabs =
@@ -399,7 +393,7 @@ AddRoom("Volcano", {
 
 AddRoom("Volcanofundo", {
     colour = { r = 0.8, g = .8, b = .1, a = .50 },
-    value = GROUND.VOLCANO_NOISE,
+    value = WORLD_TILES.VOLCANO_NOISE,
     contents = {
         countprefabs = {
         }
@@ -408,7 +402,7 @@ AddRoom("Volcanofundo", {
 
 AddRoom("Magmadragoon", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = 0.2,
         distributeprefabs =
@@ -420,7 +414,7 @@ AddRoom("Magmadragoon", {
             rock_flintless = 0.4,
             rocks = 0.4,
             flint = 0.2, -- lowered from 3
-            sapling_sw = .3,
+            sapling = .3,
         },
         countprefabs =
         {
@@ -432,7 +426,7 @@ AddRoom("Magmadragoon", {
 
 AddRoom("MagmaGold", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = .2,
         distributeprefabs =
@@ -447,7 +441,7 @@ AddRoom("MagmaGold", {
             rock_moon = 0.1,
             goldnugget = .25,
             tallbirdnest = .2,
-            sapling_sw = .5,
+            sapling = .5,
             spiderden = .1,
         },
     }
@@ -455,7 +449,7 @@ AddRoom("MagmaGold", {
 
 AddRoom("MagmaGoldmoon", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         --									countstaticlayouts={["CaveEntrance"]=1}, --adds 1 per room					
         distributepercent = .2,
@@ -471,7 +465,7 @@ AddRoom("MagmaGoldmoon", {
             rock_moon = 0.1,
             goldnugget = .25,
             tallbirdnest = .2,
-            sapling_sw = .5,
+            sapling = .5,
             spiderden = .1,
         },
         countprefabs =
@@ -485,7 +479,7 @@ AddRoom("MagmaGoldmoon", {
 
 AddRoom("MagmaGoldBoon", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = .2,
         distributeprefabs =
@@ -499,7 +493,7 @@ AddRoom("MagmaGoldBoon", {
             tallbirdnest = .1,
             rock_moon = 0.1,
             -- rock_moon = 2,
-            sapling_sw = .5,
+            sapling = .5,
             --spiderden= .1,
         },
     }
@@ -507,7 +501,7 @@ AddRoom("MagmaGoldBoon", {
 
 AddRoom("MagmaTallBird", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = .2,
         distributeprefabs =
@@ -520,7 +514,7 @@ AddRoom("MagmaTallBird", {
             rock_moon = 0.1,
             rock_flintless = 1,
             tallbirdnest = .25,
-            sapling_sw = .5,
+            sapling = .5,
             spiderden = .1,
         },
     }
@@ -528,7 +522,7 @@ AddRoom("MagmaTallBird", {
 
 AddRoom("MagmaForest", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = .2,
         distributeprefabs =
@@ -543,7 +537,7 @@ AddRoom("MagmaForest", {
             rock_flintless = 1,
             rock_moon = 0.1,
             jungletree = 0.5,
-            sapling_sw = 2,
+            sapling = 2,
             spiderden = .15,
         },
 
@@ -558,7 +552,7 @@ AddRoom("MagmaForest", {
 
 AddRoom("MagmaSpiders", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MAGMAFIELD,
+    value = WORLD_TILES.MAGMAFIELD,
     contents = {
         distributepercent = .2,
         distributeprefabs =
@@ -574,7 +568,7 @@ AddRoom("MagmaSpiders", {
             -- rock_ice = 1,
             tallbirdnest = .2, --.1,
             spiderden = 1.5,   --.5,
-            sapling_sw = .5,
+            sapling = .5,
 
         },
     }
@@ -586,7 +580,7 @@ AddRoom("MagmaSpiders", {
 
 AddRoom("VolcanoRock", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO_NOISE,
+    value = WORLD_TILES.VOLCANO_NOISE,
     contents = {
         distributepercent = .15,
         distributeprefabs =
@@ -614,7 +608,7 @@ AddRoom("VolcanoRock", {
 
 AddRoom("VolcanoAsh", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.ASH,
+    value = WORLD_TILES.ASH,
     contents = {
         distributepercent = .1,
         countstaticlayouts = { ["CoffeeBushBunch"] = 1 }, --adds 1 per room
@@ -641,7 +635,7 @@ AddRoom("VolcanoAsh", {
 
 AddRoom("VolcanoObsidian", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO_ROCK,
+    value = WORLD_TILES.VOLCANO_ROCK,
     contents = {
         --									countstaticlayouts={["beaverking"]=1}, --adds 1 per room
         distributepercent = .2,
@@ -668,7 +662,7 @@ AddRoom("VolcanoObsidian", {
 
 AddRoom("VolcanoStart", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO_NOISE,
+    value = WORLD_TILES.VOLCANO_NOISE,
     contents = {
         countstaticlayouts = { ["Entradavulcao"] = 1 }, --adds 1 per room
         distributepercent = .2,
@@ -695,7 +689,7 @@ AddRoom("VolcanoStart", {
 
 AddRoom("VolcanoNoise", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO_NOISE,
+    value = WORLD_TILES.VOLCANO_NOISE,
     contents = {
         countstaticlayouts = {
             ["CoffeeBushBunch"] = function() if math.random() < 0.25 then return 1 else return 0 end end },
@@ -723,7 +717,7 @@ AddRoom("VolcanoNoise", {
 
 AddRoom("VolcanoObsidianBench", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO_ROCK,
+    value = WORLD_TILES.VOLCANO_ROCK,
     contents = {
         countstaticlayouts = { ["ObsidianWorkbench"] = 1 }, --adds 1 per room
         distributepercent = .1,
@@ -747,7 +741,7 @@ AddRoom("VolcanoObsidianBench", {
 
 AddRoom("VolcanoAltar", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO_ROCK,
+    value = WORLD_TILES.VOLCANO_ROCK,
     contents = {
         countstaticlayouts = { ["volcano_altar"] = 1 --[[GetModConfigData("forge")]], },
         distributepercent = .1,
@@ -771,7 +765,7 @@ AddRoom("VolcanoAltar", {
 
 AddRoom("VolcanoLavaarena", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO_ROCK,
+    value = WORLD_TILES.VOLCANO_ROCK,
     contents = {
         countstaticlayouts = { ["lava_arena"] = 0 --[[GetModConfigData("forge")]], },
         distributepercent = .1,
@@ -792,7 +786,7 @@ AddRoom("VolcanoLavaarena", {
 
 AddRoom("VolcanoCage", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.VOLCANO_ROCK,
+    value = WORLD_TILES.VOLCANO_ROCK,
     contents = {
         countstaticlayouts = { ["WoodlegsUnlock"] = 1, },
         distributepercent = .1,
@@ -816,7 +810,7 @@ AddRoom("VolcanoCage", {
 
 AddRoom("VolcanoLava", {
     colour = { r = 1.0, g = 0.55, b = 0, a = .50 },
-    value = GROUND.IMPASSABLE,
+    value = WORLD_TILES.IMPASSABLE,
     type = "blank",
     contents = {
         distributepercent = 0,
@@ -830,7 +824,7 @@ AddRoom("VolcanoLava", {
 
 AddRoom("TidalMarsh", {
     colour = { r = 0, g = .5, b = .5, a = .10 },
-    value = GROUND.TIDALMARSH,
+    value = WORLD_TILES.TIDALMARSH,
     contents = {
         distributepercent = 0.4,
         distributeprefabs =
@@ -864,7 +858,7 @@ AddRoom("TidalMarsh", {
 
 AddRoom("TidalMarsh1", {
     colour = { r = 0, g = .5, b = .5, a = .10 },
-    value = GROUND.TIDALMARSH,
+    value = WORLD_TILES.TIDALMARSH,
     contents = {
         distributepercent = 0.4,
         distributeprefabs =
@@ -897,7 +891,7 @@ AddRoom("TidalMarsh1", {
 
 AddRoom("TidalMermMarsh", {
     colour = { r = 0, g = .5, b = .5, a = .10 },
-    value = GROUND.TIDALMARSH,
+    value = WORLD_TILES.TIDALMARSH,
     contents = {
         distributepercent = 0.1,
         distributeprefabs =
@@ -930,7 +924,7 @@ AddRoom("TidalMermMarsh", {
 
 AddRoom("TidalSharkHome", {
     colour = { r = 0.8, g = .8, b = .1, a = .50 },
-    value = GROUND.IMPASSABLE,
+    value = WORLD_TILES.IMPASSABLE,
     contents = {
         green_mushroom = .05,
         reeds = 2,
@@ -953,7 +947,7 @@ AddRoom("TidalSharkHome", {
 
 AddRoom("ToxicTidalMarsh", {
     colour = { r = 0, g = .5, b = .5, a = .10 },
-    value = GROUND.TIDALMARSH,
+    value = WORLD_TILES.TIDALMARSH,
     contents = {
         distributepercent = 0.2,
         distributeprefabs =
@@ -980,7 +974,7 @@ AddRoom("ToxicTidalMarsh", {
 
 AddRoom("TidalMarshnovo", {
     colour = { r = 0, g = .5, b = .5, a = .10 },
-    value = GROUND.TIDALMARSH,
+    value = WORLD_TILES.TIDALMARSH,
     contents = {
         distributepercent = 0.4,
         distributeprefabs =
@@ -1039,21 +1033,21 @@ AddRoom("TidalMarshnovo", {
 
 AddRoom("BeachSand", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
-            rocks = .03,     --trying
-            rock1 = .1,      --trying
+            rocks = .03,   --trying
+            rock1 = .1,    --trying
             --rock2 = .2,
-            beehive = .01,   --was .05,
+            beehive = .01, --was .05,
             --flower = .04, --trying
-            grass_sw = .2,   --trying
-            sapling_sw = .2, --trying
+            grass_sw = .2, --trying
+            sapling = .2,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -1068,13 +1062,13 @@ AddRoom("BeachSand", {
 
 AddRoom("BeachSandHome", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .3, --upped from .05
         distributeprefabs =
         {
             seashell_beached = .25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .1,       --was 0.2
             palmtree = .3,
             rocks = .03,         --trying
@@ -1082,8 +1076,8 @@ AddRoom("BeachSandHome", {
             rock_flintless = .1, --trying
             --beehive = .05, --trying
             --flower = .04, --trying
-            grass_sw = .5,   --trying
-            sapling_sw = .2, --trying
+            grass_sw = .5, --trying
+            sapling = .2,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -1094,7 +1088,7 @@ AddRoom("BeachSandHome", {
         countprefabs =
         {
             flint = 1,
-            sapling_sw = 1,
+            sapling = 1,
         }
 
     }
@@ -1102,16 +1096,16 @@ AddRoom("BeachSandHome", {
 
 AddRoom("BeachUnkept", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .3, --lowered from .3
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            grass_sw = .3,   --down from 3
-            sapling_sw = .1, --lowered from 15
+            grass_sw = .3, --down from 3
+            sapling = .1,  --lowered from 15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             crabhole = .015, --was .03
             palmtree = .1,
             rocks = .003,
@@ -1128,7 +1122,7 @@ AddRoom("BeachUnkept", {
             --seashell_beached = 1, --one seashell
             --coconut = 1, --one coconut
             --mandrake =0.05,
-            sapling_sw = 3,
+            sapling = 3,
             grass_sw = 3,
             --sandhill = .05,
         }
@@ -1137,16 +1131,16 @@ AddRoom("BeachUnkept", {
 })
 AddRoom("BeachUnkeptInicio", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .3, --lowered from .3
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            grass_sw = .3,   --down from 3
-            sapling_sw = .1, --lowered from 15
+            grass_sw = .3, --down from 3
+            sapling = .1,  --lowered from 15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             crabhole = .015, --was .03
             palmtree = .1,
             rocks = .003,
@@ -1163,7 +1157,7 @@ AddRoom("BeachUnkeptInicio", {
             --seashell_beached = 1, --one seashell
             --coconut = 1, --one coconut
             --mandrake =0.05,
-            sapling_sw = 6,
+            sapling = 6,
             grass_sw = 6,
             --sandhill = .05,
         }
@@ -1172,17 +1166,17 @@ AddRoom("BeachUnkeptInicio", {
 })
 AddRoom("BeachX", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         countstaticlayouts = { ["x_spot"] = 1 },
         distributepercent = .3, --lowered from .3
         distributeprefabs =
         {
             seashell_beached = 0.125,
-            grass_sw = .3,   --down from 3
-            sapling_sw = .1, --lowered from 15
+            grass_sw = .3, --down from 3
+            sapling = .1,  --lowered from 15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             -- crabhole = .015, --was .03
             palmtree = .1,
             -- rocks = .003,
@@ -1199,7 +1193,7 @@ AddRoom("BeachX", {
             --seashell_beached = 1, --one seashell
             --coconut = 1, --one coconut
             --mandrake =0.05,
-            sapling_sw = 3,
+            sapling = 3,
             grass_sw = 3,
             --sandhill = .05,
         }
@@ -1208,16 +1202,16 @@ AddRoom("BeachX", {
 })
 AddRoom("BeachUnkeptDubloon", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .3,
         distributeprefabs =
         {
             seashell_beached = 0.025,
-            grass_sw = .1,    --was .3
-            sapling_sw = .05, --was .15
+            grass_sw = .1, --was .3
+            sapling = .05, --was .15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             --crabhole = .015, --was .03
             palmtree = .1,
             rocks = .003,
@@ -1236,12 +1230,12 @@ AddRoom("BeachUnkeptDubloon", {
 
 AddRoom("BeachGravel", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .3,
         distributeprefabs =
         {
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             rocks = 0.1,
             flint = 0.02,
             rock1 = 0.05,
@@ -1259,21 +1253,21 @@ AddRoom("BeachGravel", {
 
 AddRoom("BeachSinglePalmTreeHome", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
-            rocks = .03,     --trying
-            rock1 = .1,      --trying
+            rocks = .03,   --trying
+            rock1 = .1,    --trying
             --rock2 = .2,
-            beehive = .01,   --was .05,
+            beehive = .01, --was .05,
             --flower = .04, --trying
-            grass_sw = .2,   --trying
-            sapling_sw = .2, --trying
+            grass_sw = .2, --trying
+            sapling = .2,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -1288,7 +1282,7 @@ AddRoom("BeachSinglePalmTreeHome", {
 
 AddRoom("DoydoyBeach1", {
     colour = { r = .66, g = .66, b = .66, a = .50 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         distributepercent = .1,
         distributeprefabs =
@@ -1315,7 +1309,7 @@ AddRoom("DoydoyBeach1", {
 
 AddRoom("DoydoyBeach", {
     colour = { r = .66, g = .66, b = .66, a = .50 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .3,
         distributeprefabs =
@@ -1342,7 +1336,7 @@ AddRoom("DoydoyBeach", {
 
 AddRoom("BeachWaspy", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .1, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
         distributeprefabs =
@@ -1351,7 +1345,7 @@ AddRoom("BeachWaspy", {
             --fireflies = .1, -- was 1, now .1 (results in an empty beach because these only show at night)
             wasphive = .005,
             sandhill = .05,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             flint = .005,
             seashell_beached = .025,
         },
@@ -1361,7 +1355,7 @@ AddRoom("BeachWaspy", {
 
 AddRoom("BeachPalmForest", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .3,
         distributeprefabs =
@@ -1371,7 +1365,7 @@ AddRoom("BeachPalmForest", {
             crabhole = .025,
             crate = 0.02,
             grass_sw = .05,
-            rock_limpet = .015,
+            limpetrock = .015,
             flint = .005,
             seashell_beached = .025,
             wildborehouse = .005,
@@ -1381,16 +1375,16 @@ AddRoom("BeachPalmForest", {
 
 AddRoom("BeachPiggy", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .2, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
         distributeprefabs =
         {
-            sapling_sw = 0.25,
+            sapling = 0.25,
             grass_sw = .5,
             palmtree = .1,
             wildborehouse = .05,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             sandhill = .3,
             seashell_beached = .125,
         },
@@ -1399,16 +1393,16 @@ AddRoom("BeachPiggy", {
 })
 AddRoom("BeachCassino", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .2, -- just copied this whole thing from EvilFlowerPatch in terrain_grass
         distributeprefabs =
         {
-            sapling_sw = 0.25,
+            sapling = 0.25,
             grass_sw = .5,
             palmtree = .1,
             wildborehouse = .05,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             sandhill = .3,
             seashell_beached = .125,
         },
@@ -1418,13 +1412,13 @@ AddRoom("BeachCassino", {
 
 AddRoom("BeesBeach", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .3, --Up from .025
         distributeprefabs =
         {
             seashell_beached = 0.025,
-            rock_limpet = .05, --reducing from .2 (everything is so low here)
+            limpetrock = .05, --reducing from .2 (everything is so low here)
             crabhole = .2,
             palmtree = .3,
             rocks = .03,  --trying
@@ -1432,8 +1426,8 @@ AddRoom("BeesBeach", {
             beehive = .1, --was .5
             wasphive = .05,
             --flower = .04, --trying
-            grass_sw = .4,   --trying
-            sapling_sw = .4, --trying
+            grass_sw = .4, --trying
+            sapling = .4,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -1445,14 +1439,14 @@ AddRoom("BeesBeach", {
 
 AddRoom("BeachCrabTown", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = 0.005,
+            limpetrock = 0.005,
             crabhole = 1,
-            sapling_sw = .2,
+            sapling = .2,
             palmtree = .75,
             grass_sw = .5,
             --flower=.1,
@@ -1470,7 +1464,7 @@ AddRoom("BeachCrabTown", {
 
 AddRoom("BeachDunes", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .1,
         distributeprefabs =
@@ -1478,9 +1472,9 @@ AddRoom("BeachDunes", {
             sandhill = 1.5,
             grass_sw = 1,
             seashell_beached = .5,
-            sapling_sw = 1,
+            sapling = 1,
             rock1 = .5,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             wildborehouse = .05,
         },
 
@@ -1489,14 +1483,14 @@ AddRoom("BeachDunes", {
 
 AddRoom("BeachGrassy", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
 
     contents = {
         distributepercent = .2, --was .1
         distributeprefabs =
         {
             grass_sw = 1.5,
-            rock_limpet = .25,
+            limpetrock = .25,
             beehive = .1,
             sandhill = 1,
             rock1 = .5,
@@ -1510,15 +1504,15 @@ AddRoom("BeachGrassy", {
 
 AddRoom("BeachSappy", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .1,
         distributeprefabs =
         {
-            sapling_sw = 1,
+            sapling = 1,
             crabhole = .5,
             palmtree = 1,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             flint = .05,
             seashell_beached = .25,
         },
@@ -1528,7 +1522,7 @@ AddRoom("BeachSappy", {
 
 AddRoom("BeachRocky", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .1,
         distributeprefabs =
@@ -1539,7 +1533,7 @@ AddRoom("BeachRocky", {
             rock_flintless = 1,
             grass_sw = 2,
             crabhole = 2,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             flint = .05,
             seashell_beached = .25,
             wildborehouse = .05,
@@ -1550,16 +1544,16 @@ AddRoom("BeachRocky", {
 
 AddRoom("BeachLimpety", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .1,
         distributeprefabs =
         {
-            rock_limpet = 1,
+            limpetrock = 1,
             rock1 = 1,
             grass_sw = 1,
             seashell = 1,
-            sapling_sw = .5,
+            sapling = .5,
             flint = .05,
             seashell_beached = .25,
             wildborehouse = .05,
@@ -1570,17 +1564,17 @@ AddRoom("BeachLimpety", {
 
 AddRoom("BeachSpider", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .2,
         distributeprefabs =
         {
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             spiderden = 0.5,
             palmtree = 1,
             grass_sw = 1,
             rocks = 0.5,
-            sapling_sw = 0.2,
+            sapling = 0.2,
             flint = .05,
             seashell_beached = .25,
             wildborehouse = .025,
@@ -1591,19 +1585,19 @@ AddRoom("BeachSpider", {
 
 AddRoom("BeachNoFlowers", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .1, --Lowered a bit
         distributeprefabs =
         {
             seashell_beached = 0.0025,
-            rock_limpet = .005, --reducing from .03 (everything is so low here)
+            limpetrock = .005, --reducing from .03 (everything is so low here)
             crabhole = .002,
             palmtree = .3,
-            rocks = .003,    --trying
-            beehive = .005,  --trying
-            grass_sw = .3,   --trying
-            sapling_sw = .2, --trying
+            rocks = .003,   --trying
+            beehive = .005, --trying
+            grass_sw = .3,  --trying
+            sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
             sandhill = .055,
@@ -1614,7 +1608,7 @@ AddRoom("BeachNoFlowers", {
 
 AddRoom("BeachFlowers", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .5, --was .1
         distributeprefabs =
@@ -1624,9 +1618,9 @@ AddRoom("BeachFlowers", {
             palmtree = .3,
             rock1 = .1,
             grass_sw = .2,
-            sapling_sw = .1,
+            sapling = .1,
             seashell_beached = .025,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             flint = .05,
         },
 
@@ -1635,7 +1629,7 @@ AddRoom("BeachFlowers", {
 
 AddRoom("BeachNoLimpets", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .1, --Lowered a bit
         distributeprefabs =
@@ -1647,7 +1641,7 @@ AddRoom("BeachNoLimpets", {
             beehive = .0025, --trying
             --flower = 0.04, --trying
             grass_sw = .3,   --trying
-            sapling_sw = .2, --trying
+            sapling = .2,    --trying
             --fireflies = .002, --trying
             flint = .05,
             sandhill = .055,
@@ -1659,19 +1653,19 @@ AddRoom("BeachNoLimpets", {
 
 AddRoom("BeachNoCrabbits", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .1, --Lowered a bit
         distributeprefabs =
         {
             seashell_beached = 0.0025,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             palmtree = .3,
-            rocks = .003,    --trying
-            beehive = .005,  --trying
+            rocks = .003,   --trying
+            beehive = .005, --trying
             --flower = 0.04, --trying
-            grass_sw = .3,   --trying
-            sapling_sw = .2, --trying
+            grass_sw = .3,  --trying
+            sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
             sandhill = .055,
@@ -1682,20 +1676,20 @@ AddRoom("BeachNoCrabbits", {
 
 AddRoom("BeachPalmCasino", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         countstaticlayouts = { ["slotmachine"] = 1 }, --adds 1 per room
         distributepercent = .1,                       --Lowered a bit
         distributeprefabs =
         {
             seashell_beached = 0.025,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             palmtree = .3,
-            rocks = .003,    --trying
-            beehive = .005,  --trying
+            rocks = .003,   --trying
+            beehive = .005, --trying
             --flower = 0.04, --trying
-            grass_sw = .3,   --trying
-            sapling_sw = .2, --trying
+            grass_sw = .3,  --trying
+            sapling = .2,   --trying
             --fireflies = .002, --trying
             flint = .05,
             sandhill = .055,
@@ -1711,13 +1705,13 @@ AddRoom("BeachPalmCasino", {
 })
 AddRoom("BeachShells", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .25,
         distributeprefabs =
         {
             seashell_beached = 1.25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
@@ -1726,7 +1720,7 @@ AddRoom("BeachShells", {
             beehive = .02,
             --flower = .04,
             grass_sw = .3, --was .2,
-            sapling_sw = .2,
+            sapling = .2,
             --fireflies = .02,
             --spiderden = .03,
             flint = .25,
@@ -1744,13 +1738,13 @@ AddRoom("BeachShells", {
 })
 AddRoom("BeachShark", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .25,
         distributeprefabs =
         {
             seashell_beached = 1.25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
@@ -1759,7 +1753,7 @@ AddRoom("BeachShark", {
             beehive = .02,
             --flower = .04,
             grass_sw = .3, --was .2,
-            sapling_sw = .2,
+            sapling = .2,
             --fireflies = .02,
             --spiderden = .03,
             flint = .25,
@@ -1777,13 +1771,13 @@ AddRoom("BeachShark", {
 })
 AddRoom("BeachShells1", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .25,
         distributeprefabs =
         {
             seashell_beached = 1.25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
@@ -1792,7 +1786,7 @@ AddRoom("BeachShells1", {
             beehive = .02,
             --flower = .04,
             grass_sw = .3, --was .2,
-            sapling_sw = .2,
+            sapling = .2,
             --fireflies = .02,
             --spiderden = .03,
             flint = .25,
@@ -1812,19 +1806,19 @@ AddRoom("BeachShells1", {
 
 AddRoom("BeachSkull", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
             rock1 = .1,
             beehive = .01,
             grass_sw = .2,
-            sapling_sw = .2,
+            sapling = .2,
             flint = .05,
             sandhill = .6,
             seashell_beached = .02,
@@ -1841,7 +1835,7 @@ AddRoom("BeachSkull", {
 
 AddRoom("JunglePigs", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     --	required_prefabs = {"slipstor"},
     contents = {
         countstaticlayouts =
@@ -1858,7 +1852,7 @@ AddRoom("JunglePigs", {
             rock1 = 0.05,
             flint = 0.05,
             grass_sw = .025,
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
             red_mushroom = .06,
@@ -1884,7 +1878,7 @@ AddRoom("JunglePigs", {
 
 AddRoom("Beaverkinghome", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     --required_prefabs = {"octopusking"},
     contents = {
         --countstaticlayouts={["octopusking"]=1}, --adds 1 per room
@@ -1914,7 +1908,7 @@ AddRoom("Beaverkinghome", {
 
 AddRoom("Beaverkingcity", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.MEADOW,
+    value = WORLD_TILES.MEADOW,
     contents = {
         --									countstaticlayouts=
         --									{
@@ -1943,7 +1937,7 @@ AddRoom("Beaverkingcity", {
 
 AddRoom("JungleEyeplant", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -1977,7 +1971,7 @@ AddRoom("JungleEyeplant", {
 
 AddRoom("JungleFrogSanctuary", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2009,7 +2003,7 @@ AddRoom("JungleFrogSanctuary", {
 
 AddRoom("JungleBees", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2024,7 +2018,7 @@ AddRoom("JungleBees", {
             rock1 = 0.05,
             flint = 0.05,
             grass_sw = .025,
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
             red_mushroom = .06,
@@ -2041,7 +2035,7 @@ AddRoom("JungleBees", {
 
 AddRoom("JungleDenseVery", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2073,7 +2067,7 @@ AddRoom("JungleDenseVery", {
 
 AddRoom("JungleClearing", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts = {
             ["MushroomRingLarge"] = function()
@@ -2108,7 +2102,7 @@ AddRoom("JungleClearing", {
 
 AddRoom("Jungle", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2124,7 +2118,7 @@ AddRoom("Jungle", {
             rock2 = 0.1,      --was .05
             flint = 0.1,      --was 0.03,
             grass_sw = .01,   --was .05
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .09, -- was .0003
             berrybush2_snake = 0.01,
             red_mushroom = .03,
@@ -2144,7 +2138,7 @@ AddRoom("Jungle", {
 
 AddRoom("JungleRockSkull", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts = { ["skull_isle2"] = 1 }, --adds 1 per room
         distributepercent = .1,                       --Lowered a bit
@@ -2173,7 +2167,7 @@ AddRoom("JungleRockSkull", {
 })
 AddRoom("DoyDoyF", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts = { ["doydoyf"] = 1 }, --adds 1 per room
         distributepercent = .1,                   --Lowered a bit
@@ -2198,7 +2192,7 @@ AddRoom("DoyDoyF", {
 })
 AddRoom("JungleSparse", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2214,7 +2208,7 @@ AddRoom("JungleSparse", {
             rock2 = 0.05,
             rocks = .3,
             flint = .1,       --dropped
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .05, --was .03
             berrybush2_snake = 0.01,
             grass_sw = 1,
@@ -2233,7 +2227,7 @@ AddRoom("JungleSparse", {
 
 AddRoom("JungleSparseHome", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2249,7 +2243,7 @@ AddRoom("JungleSparseHome", {
             -- rock2 = 0.05, --gold rock
             flint = .1,       --dropped
             grass_sw = .6,    --raised from 05
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .05, --was .03
             berrybush2_snake = 0.01,
             red_mushroom = .03,
@@ -2267,7 +2261,7 @@ AddRoom("JungleSparseHome", {
 
 AddRoom("JungleDense", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2282,7 +2276,7 @@ AddRoom("JungleDense", {
             rock1 = 0.05,
             rock2 = 0.1,      --was .05
             grass_sw = 1,     --was .05
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .1,
             berrybush2_snake = 0.04,
             red_mushroom = .03,
@@ -2303,7 +2297,7 @@ AddRoom("JungleDense", {
 
 AddRoom("JungleDenseHome", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2318,7 +2312,7 @@ AddRoom("JungleDenseHome", {
             rock1 = 0.05,
             --rock2 = 0.05, --gold rock
             grass_sw = 1,            --was .05
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .1,         --was .05,
             berrybush2_snake = 0.03, --was 0.01,
             red_mushroom = .03,
@@ -2338,7 +2332,7 @@ AddRoom("JungleDenseHome", {
 
 AddRoom("JungleDenseMed", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         distributepercent = 0.5, ---was 0.75
         distributeprefabs =
@@ -2349,7 +2343,7 @@ AddRoom("JungleDenseMed", {
             rock1 = 0.05,
             rock2 = 0.05,
             grass_sw = .02,         --was .05
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .06,       --was .03,
             berrybush2_snake = .02, --was .01,
             red_mushroom = .03,
@@ -2367,7 +2361,7 @@ AddRoom("JungleDenseMed", {
 
 AddRoom("JungleDenseBerries", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts = { ["BerryBushBunch"] = 1 }, --adds 1 per room
         distributepercent = 0.35,
@@ -2379,7 +2373,7 @@ AddRoom("JungleDenseBerries", {
             rock1 = 0.05,
             rock2 = 0.05,
             grass_sw = .02,         --was .05
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .6,        --was .03
             berrybush2_snake = .03, --was .01,
             red_mushroom = .03,
@@ -2397,7 +2391,7 @@ AddRoom("JungleDenseBerries", {
 
 AddRoom("JungleDenseMedHome", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2430,7 +2424,7 @@ AddRoom("JungleDenseMedHome", {
 
 AddRoom("JunglePigGuards", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts = { ["pigguard_berries_easy"] = 1 }, --adds 1 per room
         distributepercent = 0.3,
@@ -2442,7 +2436,7 @@ AddRoom("JunglePigGuards", {
             rock1 = 0.05,
             flint = 0.05,
             grass_sw = .025,
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
             red_mushroom = .06,
@@ -2460,7 +2454,7 @@ AddRoom("JunglePigGuards", {
 
 AddRoom("JungleFlower", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2475,7 +2469,7 @@ AddRoom("JungleFlower", {
             rock1 = 0.05,
             --flint=0.05,
             grass_sw = .025,
-            sapling_sw = .4,
+            sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
             red_mushroom = .06,
@@ -2497,7 +2491,7 @@ AddRoom("JungleFlower", {
 
 AddRoom("JungleSpidersDense", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2512,7 +2506,7 @@ AddRoom("JungleSpidersDense", {
             rock1 = 0.05,
             rock2 = 0.05,
             grass_sw = 1,           --was .05
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was 0.01,
             red_mushroom = .03,
@@ -2533,7 +2527,7 @@ AddRoom("JungleSpidersDense", {
 
 AddRoom("JungleSpiderCity", {
     colour = { r = .30, g = .20, b = .50, a = .50 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2561,7 +2555,7 @@ AddRoom("JungleSpiderCity", {
 
 AddRoom("JungleBamboozled", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2576,7 +2570,7 @@ AddRoom("JungleBamboozled", {
             rock1 = 0.05,
             -- flint=0.05,
             grass_sw = .025,
-            sapling_sw = .04,
+            sapling = .04,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
             red_mushroom = .06,
@@ -2596,7 +2590,7 @@ AddRoom("JungleBamboozled", {
 
 AddRoom("JungleMonkeyHell", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2613,7 +2607,7 @@ AddRoom("JungleMonkeyHell", {
             skeleton = .1,
             flint = 0.5,
             grass_sw = .75,
-            sapling_sw = .4,
+            sapling = .4,
             berrybush2 = .1,
             berrybush2_snake = .02,
             red_mushroom = .06,
@@ -2635,7 +2629,7 @@ AddRoom("JungleMonkeyHell", {
 
 AddRoom("JungleCritterCrunch", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2650,7 +2644,7 @@ AddRoom("JungleCritterCrunch", {
             rock1 = 0.05,
             --flint=0.05,
             grass_sw = .025,
-            sapling_sw = .4,
+            sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .06, --was .01,
             red_mushroom = .06,
@@ -2670,7 +2664,7 @@ AddRoom("JungleCritterCrunch", {
 
 AddRoom("JungleDenseCritterCrunch", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2685,7 +2679,7 @@ AddRoom("JungleDenseCritterCrunch", {
             rock_flintless = 0.05,
             --rock2 = 0.05, --gold rock
             grass_sw = .05,
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .75,       --was 0.3
             berrybush2_snake = .04, --was .01,
             red_mushroom = .03,
@@ -2704,7 +2698,7 @@ AddRoom("JungleDenseCritterCrunch", {
 
 AddRoom("JungleShroomin", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2719,7 +2713,7 @@ AddRoom("JungleShroomin", {
             rock1 = 0.05,
             --flint=0.05,
             grass_sw = 1,           --was .4,
-            sapling_sw = .3,
+            sapling = .3,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .07, --was .01,
             red_mushroom = 3,
@@ -2737,7 +2731,7 @@ AddRoom("JungleShroomin", {
 
 AddRoom("JungleRockyDrop", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2755,7 +2749,7 @@ AddRoom("JungleRockyDrop", {
             rocks = 3,
             --flint = 0.05,
             grass_sw = .025,
-            sapling_sw = .4,
+            sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .07, --was .01,
             red_mushroom = .06,
@@ -2772,7 +2766,7 @@ AddRoom("JungleRockyDrop", {
 
 AddRoom("JungleGrassy", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2787,7 +2781,7 @@ AddRoom("JungleGrassy", {
             rock1 = 0.05,
             --flint=0.05,
             grass_sw = 5,
-            sapling_sw = .4,
+            sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
             red_mushroom = .06,
@@ -2804,7 +2798,7 @@ AddRoom("JungleGrassy", {
 
 AddRoom("JungleSappy", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2819,7 +2813,7 @@ AddRoom("JungleSappy", {
             rock1 = 0.05,
             --flint = 0.05,
             grass_sw = .025,
-            sapling_sw = 6,
+            sapling = 6,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
             red_mushroom = .06,
@@ -2836,7 +2830,7 @@ AddRoom("JungleSappy", {
 
 AddRoom("JungleEvilFlowers", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2851,7 +2845,7 @@ AddRoom("JungleEvilFlowers", {
             rock1 = 0.05,
             --flint = 0.05,
             grass_sw = .025,
-            sapling_sw = .4,
+            sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
             red_mushroom = .06,
@@ -2871,7 +2865,7 @@ AddRoom("JungleEvilFlowers", {
 
 AddRoom("JungleParrotSanctuary", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2909,7 +2903,7 @@ AddRoom("JungleParrotSanctuary", {
 
 AddRoom("JungleNoBerry", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2924,7 +2918,7 @@ AddRoom("JungleNoBerry", {
             rock2 = 0.5,
             rocks = 0.4,
             grass_sw = 0.6, --was .05
-            sapling_sw = .8,
+            sapling = .8,
             red_mushroom = 0.05,
             green_mushroom = 0.03,
             blue_mushroom = 0.02,
@@ -2945,7 +2939,7 @@ AddRoom("JungleNoBerry", {
 
 AddRoom("JungleNoRock", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2957,7 +2951,7 @@ AddRoom("JungleNoRock", {
             --palmtree = 0.05,
             jungletree = 5,
             grass_sw = 0.6, --was .05
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .05,
             berrybush2_snake = 0.01,
             red_mushroom = 0.05,
@@ -2980,7 +2974,7 @@ AddRoom("JungleNoRock", {
 
 AddRoom("JungleNoMushroom", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -2995,7 +2989,7 @@ AddRoom("JungleNoMushroom", {
             rock2 = 0.05,
             rocks = 0.04,
             grass_sw = 0.6,         --was .05
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was .01,
             flower = 0.2,
@@ -3015,7 +3009,7 @@ AddRoom("JungleNoMushroom", {
 
 AddRoom("JungleNoFlowers", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
 
@@ -3032,7 +3026,7 @@ AddRoom("JungleNoFlowers", {
             rock2 = 0.05,
             rocks = 0.04,
             grass_sw = 0.6,         --was .05
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was .01,
             red_mushroom = 0.05,
@@ -3057,7 +3051,7 @@ AddRoom("JungleNoFlowers", {
 
 AddRoom("JungleMorePalms", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -3072,7 +3066,7 @@ AddRoom("JungleMorePalms", {
             rock2 = 0.05,
             rocks = 0.04,
             grass_sw = 0.6,         --was .05
-            sapling_sw = .8,
+            sapling = .8,
             berrybush2 = .1,        --was .05,
             berrybush2_snake = .05, --was .01,
             red_mushroom = 0.05,
@@ -3095,7 +3089,7 @@ AddRoom("JungleMorePalms", {
 
 AddRoom("DoyDoyM", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts = { ["doydoym"] = 1 }, --adds 1 per room
         distributepercent = .1,                   --Lowered a bit
@@ -3126,7 +3120,7 @@ AddRoom("DoyDoyM", {
 
 AddRoom("JungleSkeleton", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts =
         {
@@ -3141,7 +3135,7 @@ AddRoom("JungleSkeleton", {
             rock1 = 0.05,
             --flint = 0.05,
             grass_sw = .025,
-            sapling_sw = .4,
+            sapling = .4,
             berrybush2 = .05,       --was .01,
             berrybush2_snake = .05, --was .01,
             red_mushroom = .06,
@@ -3164,22 +3158,22 @@ AddRoom("JungleSkeleton", {
 -------------------------------------start room to portal room-------------------------------------------------------------
 AddRoom("BeachPortalRoom", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = GROUND.BEACH,
+    value = WORLD_TILES.BEACH,
     contents = {
         -- countstaticlayouts={["shipwrecked_start"]=1},
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .5,
-            rocks = .03,     --trying
-            rock1 = .1,      --trying
+            rocks = .03,   --trying
+            rock1 = .1,    --trying
             --rock2 = .2,
-            beehive = .01,   --was .05,
+            beehive = .01, --was .05,
             --flower = .04, --trying
-            grass_sw = .2,   --trying
-            sapling_sw = .2, --trying
+            grass_sw = .2, --trying
+            sapling = .2,  --trying
             --fireflies = .02, --trying
             --spiderden = .03, --trying
             flint = .05,
@@ -3200,7 +3194,7 @@ AddRoom("BeachPortalRoom", {
 
 AddRoom("PigVillagesw", {
     colour = { r = 0.3, g = .8, b = .5, a = .50 },
-    value = GROUND.JUNGLE,
+    value = WORLD_TILES.JUNGLE,
     contents = {
         countstaticlayouts = {
             ["Farmplot"] = function() return math.random(2, 5) end,
@@ -3216,6 +3210,32 @@ AddRoom("PigVillagesw", {
             grass_sw = .05,
             berrybush2 = .05,
             berrybush_juicy = 0.025,
+        },
+    }
+})
+
+AddRoom("WaterMangrove", {
+    colour = { r = .5, g = 0.6, b = .080, a = .10 },
+    value = WORLD_TILES.MANGROVE,
+    tags = { "RoadPoison", "shipwrecked", "tropical" },
+    contents = {
+        distributepercent = 0.2,
+        distributeprefabs = {
+            mangrovetree = 1,
+            fishinhole = 0.5,
+            grass_water = 1,
+            seataro_planted = 0.5,
+            seacucumber_planted = 0.5,
+            watertree_root = 0.5,
+            ox = 0.5,
+            oxbaby = 0.5,
+            bioluminescence = 1,
+            bioluminescence_spawner = 0.1,
+        },
+
+        countprefabs = {
+            watertree_pillar = 1,
+            seataro_planted = 1,
         },
     }
 })

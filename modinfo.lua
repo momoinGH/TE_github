@@ -159,6 +159,7 @@ configuration_options =
     --     }
     -- },
 
+    title(en_zh_zht("<热带体验>", "<热带体验>", "<热带体验>"), tro_modules.common),
     {
         name = "world_size_multi",
         label = "世界面积乘数",
@@ -172,7 +173,7 @@ configuration_options =
         default = 1,
         world_gen = {
             category = { LEVELCATEGORY.WORLDGEN },
-            group = "global", --科雷的group
+            group = tro_modules.common,
             world = { "forest" },
             image = "world_size.tex"
         }

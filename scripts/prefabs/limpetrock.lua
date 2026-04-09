@@ -174,4 +174,4 @@ local function fn()
 	return inst
 end
 
-return Prefab("rock_limpet", fn, assets, prefabs)
+return Prefab("limpetrock", fn, assets, prefabs)

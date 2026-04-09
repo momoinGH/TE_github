@@ -67,7 +67,8 @@ Assets =
     Asset("ANIM", "anim/player_actions_telescope.zip"), --望远镜，有动画telescope、telescope_pst
 
 
-    Asset("ANIM", "anim/ripple_build.zip"),             --水里波纹，用于物品浮在水面时
+    Asset("ANIM", "anim/ripple_build.zip"), --水里波纹，用于物品浮在水面时
+    Asset("ANIM", "anim/grass_blown.zip"),  --给草追加单机的刮风动画
 
     --TODO 这几个纹理怎么使用
     Asset("IMAGE", "levels/textures/outro.tex"),                   --哈姆雷特云纹理
@@ -87,4 +88,10 @@ Assets =
     -- TODO 图鉴的料理图，检查是否正常显示
     Asset("ATLAS", "images/cookbook/cookbook_sw.xml"),
     Asset("ATLAS", "images/cookbook/cookbook_ham.xml"),
+
+
+
+
+
+    Asset("IMAGE", "levels/textures/ds_fog1.tex"), --写预制件里的assets里好像还会显示资源不存在？
 }

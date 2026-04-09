@@ -6,7 +6,7 @@ local IsNormalRabbit = OnIsWinter and Hooks.GetUpValue(OnIsWinter, "IsNormalRabb
 local BecomeRabbit = OnIsWinter and Hooks.GetUpValue(OnIsWinter, "BecomeRabbit")
 
 if not (OnIsWinter and IsForcedNightmare and IsWinterRabbit and BecomeWinterRabbit and IsNormalRabbit and BecomeRabbit) then
-    print("rabbit预制体求上值失败，不再修改兔子受到的季节影响")
+    print("错误：rabbit预制体求上值失败，不再修改兔子受到的季节影响", OnIsWinter, IsForcedNightmare, IsWinterRabbit, BecomeWinterRabbit, IsNormalRabbit, BecomeRabbit)
     return
 end
 

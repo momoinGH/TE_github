@@ -134,7 +134,7 @@ local waterprefabs = {
 }
 
 local landprefabs = {
-    "livingjungletree", "volcano_shrub", "jungletree", "palmtree", "bush_vine", "rock_limpet", "sanddune", "sapling",
+    "livingjungletree", "volcano_shrub", "jungletree", "palmtree", "bush_vine", "limpetrock", "sanddune", "sapling",
     "poisonhole", "coffeebush", "elephantcactus",
     "dragoonden", "wildborehouse", "mermhouse", "mermhouse_tropical", "magmarock", "magmarock_gold", "flower",
     "fireflies", "grass", "charcoal",

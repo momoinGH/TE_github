@@ -86,6 +86,7 @@ trosafemodimport("modmain/languages/strings_" .. language)
 trosafemodimport("modmain/languages/modwiki_zh") -- 其他语言的wiki先不管
 
 modimport("modmain/constants")                   --一些全局变量、全局函数
+modimport "modmain/ocean_util"                   --海洋相关的一些全局函数
 modimport("modmain/actions")                     --action相关
 modimport("modmain/actions_post")                --修改原版action
 modimport("modmain/componentactions")            --componentactions相关

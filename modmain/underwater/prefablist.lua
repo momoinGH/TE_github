@@ -93,7 +93,7 @@ PrefabFiles =
     "bioluminescence",             --荧光生物
     "magma_rocks",                 --熔岩矿堆
     "limpets",                     --帽贝
-    "rock_limpet",                 --帽贝岩
+    "limpetrock",                  --帽贝岩
     "crate",                       --板条箱
     "crabhole",                    --兔蟹洞
     "crab",                        --兔蟹

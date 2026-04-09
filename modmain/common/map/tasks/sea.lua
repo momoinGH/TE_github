@@ -159,9 +159,6 @@ AddRoom("OceanHazardous_SEA", {
         distributepercent = 0.15,
         distributeprefabs =
         {
-            boatfragment03 = 1,
-            boatfragment04 = 1,
-            boatfragment05 = 1,
             seastack = 1,
         },
     }

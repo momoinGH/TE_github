@@ -342,155 +342,20 @@ Layouts["coralpool3"] = StaticLayout.Get("map/static_layouts/coralpool3", {
 })
 
 Layouts["wreck"] = StaticLayout.Get("map/static_layouts/wreck", {
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    layout_position = LAYOUT_POSITION.CENTER,
     disable_transform = true,
-
-    areas =
-    {
-        debris_area = function()
-            local stuff = {}
-
-            table.insert(stuff, "wreck")
-            for i = 1, 6 do
-                if math.random() < 0.1 then
-                    table.insert(stuff, "wreck")
-                end
-            end
-
-            table.insert(stuff, "luggagechest_spawner")
-            table.insert(stuff, "waterygrave")
-
-
-            if math.random() < 0.2 then
-                table.insert(stuff, "luggagechest_spawner")
-            end
-
-            for i = 1, 3 do
-                if math.random() < 0.3 then
-                    table.insert(stuff, "redbarrel")
-                end
-            end
-
-            for i = 1, 3 do
-                if math.random() < 0.3 then
-                    table.insert(stuff, "waterygrave")
-                end
-            end
-
-            for i = 1, 4 do
-                if math.random() < 0.1 then
-                    table.insert(stuff, "boatfragment01")
-                end
-            end
-
-            for i = 1, 4 do
-                if math.random() < 0.1 then
-                    table.insert(stuff, "boatfragment02")
-                end
-            end
-
-
-            for i = 1, 4 do
-                if math.random() < 0.1 then
-                    table.insert(stuff, "boatfragment03")
-                end
-            end
-            for i = 1, 2 do
-                if math.random() < 0.3 then
-                    table.insert(stuff, "whale_bluefinal")
-                end
-            end
-            for i = 1, 4 do
-                if math.random() < 0.4 then
-                    table.insert(stuff, "fishinhole")
-                end
-            end
-
-            return stuff
-        end,
-
+    areas = {
+        ship_area = { "wreck" },
+        mast_area = function() if math.random() < 0.75 then return { "wreck" } else return {} end end,
+        debris_area = PickSomeWithDups(math.random(1, 4), { "boards", "rope", "fabric", "messagebottleempty" })
     },
 })
 
-
 Layouts["wreck2"] = StaticLayout.Get("map/static_layouts/wreck2", {
-
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    layout_position = LAYOUT_POSITION.CENTER,
     disable_transform = true,
-
-    areas =
-    {
-        debris_area = function()
-            local stuff = {}
-
-            table.insert(stuff, "wreck")
-            for i = 1, 6 do
-                if math.random() < 0.1 then
-                    table.insert(stuff, "wreck")
-                end
-            end
-
-            table.insert(stuff, "luggagechest_spawner")
-            table.insert(stuff, "waterygrave")
-
-
-            if math.random() < 0.2 then
-                table.insert(stuff, "luggagechest_spawner")
-            end
-
-            for i = 1, 3 do
-                if math.random() < 0.3 then
-                    table.insert(stuff, "redbarrel")
-                end
-            end
-
-            for i = 1, 3 do
-                if math.random() < 0.3 then
-                    table.insert(stuff, "waterygrave")
-                end
-            end
-
-            for i = 1, 4 do
-                if math.random() < 0.1 then
-                    table.insert(stuff, "boatfragment01")
-                end
-            end
-
-            for i = 1, 4 do
-                if math.random() < 0.1 then
-                    table.insert(stuff, "boatfragment02")
-                end
-            end
-
-
-            for i = 1, 4 do
-                if math.random() < 0.1 then
-                    table.insert(stuff, "boatfragment03")
-                end
-            end
-
-
-
-            for i = 1, 2 do
-                if math.random() < 0.3 then
-                    table.insert(stuff, "whale_bluefinal")
-                end
-            end
-
-
-            for i = 1, 4 do
-                if math.random() < 0.4 then
-                    table.insert(stuff, "fishinhole")
-                end
-            end
-
-            return stuff
-        end,
-
+    areas = {
+        ship_area = { "wreck" },
+        mast_area = function() if math.random() < 0.75 then return { "wreck" } else return {} end end,
+        debris_area = PickSomeWithDups(math.random(1, 4), { "boards", "rope", "fabric", "messagebottleempty" })
     },
 })
 

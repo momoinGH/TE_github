@@ -296,17 +296,6 @@ local function commonfn(Sim)
         end
     end)
 
-    --	MakeFeedablePet(inst, total_day_time, OnInventory, OnDropped)
-
-    --数量统计
-    SEABEACH_AMOUNT.doydoy = SEABEACH_AMOUNT.doydoy + 1
-
-    inst:ListenForEvent("onremove", function(inst, data)
-        if SEABEACH_AMOUNT.doydoy > 0 then
-            SEABEACH_AMOUNT.doydoy = SEABEACH_AMOUNT.doydoy - 1
-        end
-    end)
-
     return inst
 end
 
@@ -417,13 +406,6 @@ local function adultfn(Sim)
     inst:SetBrain(brain)
 
     inst:AddComponent("named")
-    if math.fmod(SEABEACH_AMOUNT.doydoy, 2) == 0 then
-        inst:AddTag("daddy")
-        inst.components.named:SetName("Doydoy(M)")
-    else
-        inst:AddTag("mommy")
-        inst.components.named:SetName("DoyDoy(F)")
-    end
 
     inst:DoTaskInTime(0, InitAnimationFromPosition)
 
@@ -431,4 +413,4 @@ local function adultfn(Sim)
 end
 
 return Prefab("doydoybaby", babyfn, assets_baby, prefabs_baby),
-    Prefab("/doydoy", adultfn, assets, prefabs)
+    Prefab("doydoy", adultfn, assets, prefabs)

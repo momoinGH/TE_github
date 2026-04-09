@@ -18,77 +18,15 @@ local prefabs =
     "firerainshadow",
 }
 
-SetSharedLootTable('dragoonegg',
-    {
-        { 'flint', 1.0 },
-        { 'flint', 0.5 },
-        { 'rocks', 1.0 },
-        { 'rocks', 0.5 },
-        { 'rocks', 0.3 },
-        { 'obsidian', 0.5 },
-        { 'obsidian', 0.5 },
-    })
-
-local function SpawnWavesSW(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive,
-    random_angle)
-    wavePrefab = wavePrefab or "rogue_wave"
-    totalAngle = math.clamp(totalAngle, 1, 360)
-
-    local pos = inst:GetPosition()
-    local startAngle = (random_angle and math.random(-180, 180)) or inst.Transform:GetRotation()
-    local anglePerWave = totalAngle / (numWaves - 1)
-
-    if totalAngle == 360 then
-        anglePerWave = totalAngle / numWaves
-    end
-
-    --[[
-    local debug_offset = Vector3(2 * math.cos(startAngle*DEGREES), 0, -2 * math.sin(startAngle*DEGREES)):Normalize()
-    inst.components.debugger:SetOrigin("debugy", pos.x, pos.z)
-    local debugpos = pos + (debug_offset * 2)
-    inst.components.debugger:SetTarget("debugy", debugpos.x, debugpos.z)
-    inst.components.debugger:SetColour("debugy", 1, 0, 0, 1)
-	--]]
-
-    for i = 0, numWaves - 1 do
-        local wave = SpawnPrefab(wavePrefab)
-
-        local angle = (startAngle - (totalAngle / 2)) + (i * anglePerWave)
-        local rad = initialOffset or (inst.Physics and inst.Physics:GetRadius()) or 0.0
-        local total_rad = rad + wave.Physics:GetRadius() + 0.1
-        local offset = Vector3(math.cos(angle * DEGREES), 0, -math.sin(angle * DEGREES)):Normalize()
-        local wavepos = pos + (offset * total_rad)
-
-        --        if inst:GetIsOnWater(wavepos:Get()) then
-        wave.Transform:SetPosition(wavepos:Get())
-
-        local speed = waveSpeed or 6
-        wave.Transform:SetRotation(angle)
-        wave.Physics:SetMotorVel(speed, 0, 0)
-        wave.idle_time = idleTime or 5
-
-        if instantActive then
-            wave.sg:GoToState("idle")
-        end
-
-        if wave.soundtidal then
-            --	        	wave.SoundEmitter:PlaySound("dontstarve_DLC002/common/rogue_waves/"..wave.soundtidal)
-        end
-        --        else
-        --        	wave:Remove()
-        --        end
-    end
-end
-
-local function DropLoot(inst)
-    print("dragoonegg - DropLoot")
-
-    if inst.components.hatchable.toohot then
-
-    else
-        inst.components.lootdropper:SetLoot(loot_cold)
-    end
-end
+SetSharedLootTable('dragoonegg', {
+    { 'flint', 1.0 },
+    { 'flint', 0.5 },
+    { 'rocks', 1.0 },
+    { 'rocks', 0.5 },
+    { 'rocks', 0.3 },
+    { 'obsidian', 0.5 },
+    { 'obsidian', 0.5 },
+})
 
 local function cracksound(inst, loudness) --is this worth a stategraph?
     inst:DoTaskInTime(11 * FRAMES, function(inst)
@@ -256,7 +194,7 @@ local function StartStep(inst)
                     ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
                     ground == WORLD_TILES.OCEAN_WATERLOG or
                     ground == WORLD_TILES.OCEAN_HAZARDOUS) then
-                SpawnWavesSW(inst, 8, 360, 6)
+                TroSpawnAttackWavesForEnt(inst, nil, nil, 8, 360, 6, "rogue_wave")
                 local lavapool = SpawnPrefab("bombsplash")
                 lavapool.Transform:SetPosition(x, y, z)
                 --inst.SoundEmitter:PlaySound("dontstarve_DLC002/quacken/splash_large")

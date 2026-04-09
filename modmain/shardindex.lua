@@ -3,7 +3,6 @@ local skin_nature_defs = require("datadefs/skin_nature_defs")
 
 local function OnWorldEntsSpawned()
     print("所有实体创建完成，开始根据地形替换皮肤")
-
     --检查皮肤是否满足条件，满足就替换皮肤
     for guid, ent in pairs(Ents) do
         if skin_nature_defs.skinlist[ent.prefab] then
@@ -15,7 +14,8 @@ local function OnWorldEntsSpawned()
         end
     end
 
-    -- 给猪镇上的东西加个标记，表示属于猪人的
+
+    print("给猪镇上的东西加个标记，表示属于猪人的")
     for guid, ent in pairs(Ents) do
         if ent.Transform then
             local x, y, z = ent.Transform:GetWorldPosition()
@@ -26,7 +26,24 @@ local function OnWorldEntsSpawned()
             end
         end
     end
+
+
+    print("给世界上的渡渡鸟分配公母")
+    local doydoy_count = 0
+    for guid, ent in pairs(Ents) do
+        if ent.prefab == "doydoy" then
+            doydoy_count = doydoy_count + 1
+            if math.fmod(doydoy_count, 2) == 0 then
+                ent:AddTag("daddy")
+                ent.components.named:SetName("Doydoy(M)")
+            else
+                ent:AddTag("mommy")
+                ent.components.named:SetName("DoyDoy(F)")
+            end
+        end
+    end
 end
+
 
 
 require("shardindex")

@@ -15,7 +15,7 @@ local builds =
 {
     normal = {
         file = "tree_mangrove_build",
-        prefab_name = "tree_mangrove",
+        prefab_name = "mangrovetree",
         normal_loot = { "log", "log", "twigs" },
         short_loot = { "log" },
         tall_loot = { "log", "log", "log", "twigs", "twigs", "petals" },

@@ -5813,7 +5813,7 @@ AddRoom("BeachSand", {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,   --trying
@@ -5844,7 +5844,7 @@ AddRoom("BeachSandHome", {
         distributeprefabs =
         {
             seashell_beached = .25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .1,       --was 0.2
             palmtree = .3,
             rocks = .03,         --trying
@@ -5882,7 +5882,7 @@ AddRoom("BeachUnkept", {
             grass = .3,   --down from 3
             sapling = .1, --lowered from 15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             crabhole = .015, --was .03
             palmtree = .1,
             rocks = .003,
@@ -5918,7 +5918,7 @@ AddRoom("BeachUnkeptInicio", {
             grass = .3,   --down from 3
             sapling = .1, --lowered from 15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             crabhole = .015, --was .03
             palmtree = .1,
             rocks = .003,
@@ -5955,7 +5955,7 @@ AddRoom("BeachX", {
             --grass = .3, --down from 3
             --sapling = .1, --lowered from 15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             -- crabhole = .015, --was .03
             palmtree = .1,
             -- rocks = .003,
@@ -5991,7 +5991,7 @@ AddRoom("BeachUnkeptDubloon", {
             grass = .1,    --was .3
             sapling = .05, --was .15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             --crabhole = .015, --was .03
             palmtree = .1,
             rocks = .003,
@@ -6016,7 +6016,7 @@ AddRoom("BeachGravel", {
         distributepercent = .3,
         distributeprefabs =
         {
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             rocks = 0.1,
             flint = 0.02,
             rock1 = 0.05,
@@ -6040,7 +6040,7 @@ AddRoom("BeachSinglePalmTreeHome", {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,   --trying
@@ -6131,7 +6131,7 @@ AddRoom("BeachWaspy", {
             --fireflies = .1, -- was 1, now .1 (results in an empty beach because these only show at night)
             wasphive = .005,
             sandhill = .05,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             flint = .005,
             seashell_beached = .025,
         },
@@ -6152,7 +6152,7 @@ AddRoom("BeachPalmForest", {
             crabhole = .025,
             crate = 0.02,
             grass = .05,
-            rock_limpet = .015,
+            limpetrock = .015,
             flint = .005,
             seashell_beached = .025,
             wildborehouse = .005,
@@ -6172,7 +6172,7 @@ AddRoom("BeachPiggy", {
             grass = .5,
             palmtree = .1,
             wildborehouse = .05,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             sandhill = .3,
             seashell_beached = .125,
         },
@@ -6191,7 +6191,7 @@ AddRoom("BeachCassino", {
             grass = .5,
             palmtree = .1,
             wildborehouse = .05,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             sandhill = .3,
             seashell_beached = .125,
         },
@@ -6208,7 +6208,7 @@ AddRoom("BeesBeach", {
         distributeprefabs =
         {
             seashell_beached = 0.025,
-            rock_limpet = .05, --reducing from .2 (everything is so low here)
+            limpetrock = .05, --reducing from .2 (everything is so low here)
             crabhole = .2,
             palmtree = .3,
             rocks = .03,  --trying
@@ -6235,7 +6235,7 @@ AddRoom("BeachCrabTown", {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = 0.005,
+            limpetrock = 0.005,
             crabhole = 1,
             sapling = .2,
             palmtree = .75,
@@ -6266,7 +6266,7 @@ AddRoom("BeachDunes", {
             seashell_beached = .5,
             sapling = 1,
             rock1 = .5,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             wildborehouse = .05,
         },
 
@@ -6283,7 +6283,7 @@ AddRoom("BeachGrassy", {
         distributeprefabs =
         {
             grass = 1.5,
-            rock_limpet = .25,
+            limpetrock = .25,
             beehive = .1,
             sandhill = 1,
             rock1 = .5,
@@ -6306,7 +6306,7 @@ AddRoom("BeachSappy", {
             sapling = 1,
             crabhole = .5,
             palmtree = 1,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             flint = .05,
             seashell_beached = .25,
         },
@@ -6328,7 +6328,7 @@ AddRoom("BeachRocky", {
             rock_flintless = 1,
             grass = 2,
             crabhole = 2,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             flint = .05,
             seashell_beached = .25,
             wildborehouse = .05,
@@ -6345,7 +6345,7 @@ AddRoom("BeachLimpety", {
         distributepercent = .1,
         distributeprefabs =
         {
-            rock_limpet = 1,
+            limpetrock = 1,
             rock1 = 1,
             grass = 1,
             seashell = 1,
@@ -6366,7 +6366,7 @@ AddRoom("BeachSpider", {
         distributepercent = .2,
         distributeprefabs =
         {
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             spiderden = 0.5,
             palmtree = 1,
             grass = 1,
@@ -6389,7 +6389,7 @@ AddRoom("BeachNoFlowers", {
         distributeprefabs =
         {
             seashell_beached = 0.0025,
-            rock_limpet = .005, --reducing from .03 (everything is so low here)
+            limpetrock = .005, --reducing from .03 (everything is so low here)
             crabhole = .002,
             palmtree = .3,
             rocks = .003,   --trying
@@ -6419,7 +6419,7 @@ AddRoom("BeachFlowers", {
             grass = .2,
             sapling = .1,
             seashell_beached = .025,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             flint = .05,
         },
 
@@ -6460,7 +6460,7 @@ AddRoom("BeachNoCrabbits", {
         distributeprefabs =
         {
             seashell_beached = 0.0025,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             palmtree = .3,
             rocks = .003,   --trying
             beehive = .005, --trying
@@ -6485,7 +6485,7 @@ AddRoom("BeachPalmCasino", {
         distributeprefabs =
         {
             seashell_beached = 0.025,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             palmtree = .3,
             rocks = .003,   --trying
             beehive = .005, --trying
@@ -6514,7 +6514,7 @@ AddRoom("BeachShells", {
         distributeprefabs =
         {
             seashell_beached = 1.25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
@@ -6548,7 +6548,7 @@ AddRoom("BeachShark", {
         distributeprefabs =
         {
             seashell_beached = 1.25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
@@ -6582,7 +6582,7 @@ AddRoom("BeachShells1", {
         distributeprefabs =
         {
             seashell_beached = 1.25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
@@ -6617,7 +6617,7 @@ AddRoom("BeachSkull", {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
@@ -8005,7 +8005,7 @@ AddRoom("BeachPortalRoom", {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .5,
             rocks = .03,   --trying
@@ -9041,7 +9041,7 @@ AddRoom("MAINBeachSand", {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,   --trying
@@ -9072,7 +9072,7 @@ AddRoom("MAINBeachSandHome", {
         distributeprefabs =
         {
             seashell_beached = .25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .1,       --was 0.2
             palmtree = .3,
             rocks = .03,         --trying
@@ -9110,7 +9110,7 @@ AddRoom("MAINBeachUnkept", {
             grass = .3,   --down from 3
             sapling = .1, --lowered from 15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             crabhole = .015, --was .03
             palmtree = .1,
             rocks = .003,
@@ -9146,7 +9146,7 @@ AddRoom("MAINBeachUnkeptInicio", {
             grass = .3,   --down from 3
             sapling = .1, --lowered from 15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             crabhole = .015, --was .03
             palmtree = .1,
             rocks = .003,
@@ -9183,7 +9183,7 @@ AddRoom("MAINBeachX", {
             --grass = .3, --down from 3
             --sapling = .1, --lowered from 15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             -- crabhole = .015, --was .03
             palmtree = .1,
             -- rocks = .003,
@@ -9219,7 +9219,7 @@ AddRoom("MAINBeachUnkeptDubloon", {
             grass = .1,    --was .3
             sapling = .05, --was .15
             --flower = 0.05,
-            rock_limpet = .02,
+            limpetrock = .02,
             --crabhole = .015, --was .03
             palmtree = .1,
             rocks = .003,
@@ -9244,7 +9244,7 @@ AddRoom("MAINBeachGravel", {
         distributepercent = .3,
         distributeprefabs =
         {
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             rocks = 0.1,
             flint = 0.02,
             rock1 = 0.05,
@@ -9268,7 +9268,7 @@ AddRoom("MAINBeachSinglePalmTreeHome", {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,   --trying
@@ -9359,7 +9359,7 @@ AddRoom("MAINBeachWaspy", {
             --fireflies = .1, -- was 1, now .1 (results in an empty beach because these only show at night)
             wasphive = .005,
             sandhill = .05,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             flint = .005,
             seashell_beached = .025,
         },
@@ -9380,7 +9380,7 @@ AddRoom("MAINBeachPalmForest", {
             crabhole = .025,
             crate = 0.02,
             grass = .05,
-            rock_limpet = .015,
+            limpetrock = .015,
             flint = .005,
             seashell_beached = .025,
             wildborehouse = .005,
@@ -9400,7 +9400,7 @@ AddRoom("MAINBeachPiggy", {
             grass = .5,
             palmtree = .1,
             wildborehouse = .05,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             sandhill = .3,
             seashell_beached = .125,
         },
@@ -9419,7 +9419,7 @@ AddRoom("MAINBeachCassino", {
             grass = .5,
             palmtree = .1,
             wildborehouse = .05,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             sandhill = .3,
             seashell_beached = .125,
         },
@@ -9436,7 +9436,7 @@ AddRoom("MAINBeesBeach", {
         distributeprefabs =
         {
             seashell_beached = 0.025,
-            rock_limpet = .05, --reducing from .2 (everything is so low here)
+            limpetrock = .05, --reducing from .2 (everything is so low here)
             crabhole = .2,
             palmtree = .3,
             rocks = .03,  --trying
@@ -9463,7 +9463,7 @@ AddRoom("MAINBeachCrabTown", {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = 0.005,
+            limpetrock = 0.005,
             crabhole = 1,
             sapling = .2,
             palmtree = .75,
@@ -9494,7 +9494,7 @@ AddRoom("MAINBeachDunes", {
             seashell_beached = .5,
             sapling = 1,
             rock1 = .5,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             wildborehouse = .05,
         },
 
@@ -9511,7 +9511,7 @@ AddRoom("MAINBeachGrassy", {
         distributeprefabs =
         {
             grass = 1.5,
-            rock_limpet = .25,
+            limpetrock = .25,
             beehive = .1,
             sandhill = 1,
             rock1 = .5,
@@ -9534,7 +9534,7 @@ AddRoom("MAINBeachSappy", {
             sapling = 1,
             crabhole = .5,
             palmtree = 1,
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             flint = .05,
             seashell_beached = .25,
         },
@@ -9556,7 +9556,7 @@ AddRoom("MAINBeachRocky", {
             rock_flintless = 1,
             grass = 2,
             crabhole = 2,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             flint = .05,
             seashell_beached = .25,
             wildborehouse = .05,
@@ -9573,7 +9573,7 @@ AddRoom("MAINBeachLimpety", {
         distributepercent = .1,
         distributeprefabs =
         {
-            rock_limpet = 1,
+            limpetrock = 1,
             rock1 = 1,
             grass = 1,
             seashell = 1,
@@ -9594,7 +9594,7 @@ AddRoom("MAINBeachSpider", {
         distributepercent = .2,
         distributeprefabs =
         {
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             spiderden = 0.5,
             palmtree = 1,
             grass = 1,
@@ -9617,7 +9617,7 @@ AddRoom("MAINBeachNoFlowers", {
         distributeprefabs =
         {
             seashell_beached = 0.0025,
-            rock_limpet = .005, --reducing from .03 (everything is so low here)
+            limpetrock = .005, --reducing from .03 (everything is so low here)
             crabhole = .002,
             palmtree = .3,
             rocks = .003,   --trying
@@ -9647,7 +9647,7 @@ AddRoom("MAINBeachFlowers", {
             grass = .2,
             sapling = .1,
             seashell_beached = .025,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             flint = .05,
         },
 
@@ -9688,7 +9688,7 @@ AddRoom("MAINBeachNoCrabbits", {
         distributeprefabs =
         {
             seashell_beached = 0.0025,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             palmtree = .3,
             rocks = .003,   --trying
             beehive = .005, --trying
@@ -9713,7 +9713,7 @@ AddRoom("MAINBeachPalmCasino", {
         distributeprefabs =
         {
             seashell_beached = 0.025,
-            rock_limpet = 0.01,
+            limpetrock = 0.01,
             palmtree = .3,
             rocks = .003,   --trying
             beehive = .005, --trying
@@ -9742,7 +9742,7 @@ AddRoom("MAINBeachShells", {
         distributeprefabs =
         {
             seashell_beached = 1.25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
@@ -9776,7 +9776,7 @@ AddRoom("MAINBeachShark", {
         distributeprefabs =
         {
             seashell_beached = 1.25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
@@ -9810,7 +9810,7 @@ AddRoom("MAINBeachShells1", {
         distributeprefabs =
         {
             seashell_beached = 1.25,
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
@@ -9845,7 +9845,7 @@ AddRoom("MAINBeachSkull", {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .3,
             rocks = .03,
@@ -11233,7 +11233,7 @@ AddRoom("MAINBeachPortalRoom", {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = .05,
+            limpetrock = .05,
             crabhole = .2,
             palmtree = .5,
             rocks = .03,   --trying
@@ -14717,7 +14717,7 @@ AddRoom("beach1", {
         distributeprefabs = {
             sandhill = .3,
             seashell_beached = .5,
-            rock_limpet = 0.08,
+            limpetrock = 0.08,
             crate = 0.1,
             jellyfish_underwater = 0.1,
             fish2_alive = 0.1,
@@ -14740,7 +14740,7 @@ AddRoom("beach2", {
         distributeprefabs = {
             sandhill = 0.5,
             seashell_beached = 0.5,
-            rock_limpet = 1,
+            limpetrock = 1,
             crate = 0.1,
             stungrayunderwater = 1,
             jellyfish_underwater = 0.1,
@@ -14767,7 +14767,7 @@ AddRoom("beach_crab", {
         {
             sandhill = 0.5,
             seashell_beached = 1,
-            rock_limpet = 0.5,
+            limpetrock = 0.5,
             crate = 0.1,
             crabhole = 1,
             fish2_alive = 0.05,
@@ -14793,7 +14793,7 @@ AddRoom("beach_bg", {
         {
             sandhill = 1,
             seashell_beached = 0.5,
-            rock_limpet = 0.5,
+            limpetrock = 0.5,
             crate = 0.1,
             fish2_alive = 0.1,
             fish3_alive = 0.05,
@@ -15121,7 +15121,7 @@ AddRoom("underwaterlavarock", {
         distributepercent = .25,
         distributeprefabs =
         {
-            rock_limpet = 0.1,
+            limpetrock = 0.1,
             spongea = .2,
             bubble_vent = 0.03,
             uw_flowers = .1,

@@ -13,8 +13,14 @@ PrefabFiles = {
     "twister_tornadodefogo", --"火卷风"
 
 
+    "jellyfish",                --水母
+    "jellyfish_spawner",        --水母生成器
+    "rainbowjellyfish",         --彩虹水母
+    "rainbowjellyfish_planted", --彩虹水母
+    "jellyfish_planted",
+
+
     "glass",                  --玻璃
-    "jellyfish",              --水母
     "ligamundosw",            --海洋之椅
     "machetes",               --砍刀
     "mermhouse_tropical",     --热带鱼人屋
@@ -161,12 +167,10 @@ PrefabFiles = {
     "woodlegsghost",   --海盗船长的鬼魂
     "woodlegs_unlock", --海盗船长NPC
 
-
-    "mermfisher",  --渔人
-    "flup",        --追踪性弹涂鱼
-    "flupspawner", --追踪性弹涂鱼生成器
-    "tidalpool",   --潮水池
-    "poisonhole",  --毒洞
+    "flup",            --追踪性弹涂鱼
+    "flupspawner",     --追踪性弹涂鱼生成器
+    "tidalpool",       --潮水池
+    "poisonhole",      --毒洞
 
 
     "tigershark",        --虎鲨
@@ -206,7 +210,7 @@ PrefabFiles = {
     "sand",                 --沙子
     "seashell",             --贝壳
     "seashell_beached",     --贝壳
-    "rock_limpet",          --帽贝岩
+    "limpetrock",           --帽贝岩
     "limpets",              --帽贝
 
 
@@ -248,27 +252,26 @@ PrefabFiles = {
     "kraken_spawner",    --海妖的刷新点
 
 
-    "solofish",                 --狗鱼
-    "swordfish",                --剑鱼
-    "sharx",                    --海狗
-    "stungray",                 --恶臭蝠鲼
-    "redbarrel",                --火药桶
-    "lobster",                  --龙虾
-    "lobsterhole",              --龙虾巢穴
-    "mussel",                   --贻贝
-    "bioluminescence",          --荧光生物
-    "bioluminescence_spawner",  --荧光生物生成器
-    "rawling",                  --罗林
-    "coral_brain_rock",         --智慧树
-    "coral_brain",              --智慧果
-    "limestone",                --石灰岩
-    "shark_fin",                --鱼翅
-    "rainbowjellyfish",         --彩虹水母
-    "rainbowjellyfish_planted", --彩虹水母
-    "sea_yard",                 --修船码头
-    "sea_yard_arms_fx",         --修船码头手臂特效
-    "tar",                      --焦油
-    "tar_pool",                 --焦油浮膜
+    "solofish",                --狗鱼
+    "swordfish",               --剑鱼
+    "sharx",                   --海狗
+    "stungray",                --恶臭蝠鲼
+    "redbarrel",               --火药桶
+    "lobster",                 --龙虾
+    "lobsterhole",             --龙虾巢穴
+    "mussel",                  --贻贝
+    "bioluminescence",         --荧光生物
+    "bioluminescence_spawner", --荧光生物生成器
+    "rawling",                 --罗林
+    "coral_brain_rock",        --智慧树
+    "coral_brain",             --智慧果
+    "limestone",               --石灰岩
+    "shark_fin",               --鱼翅
+
+    "sea_yard",                --修船码头
+    "sea_yard_arms_fx",        --修船码头手臂特效
+    "tar",                     --焦油
+    "tar_pool",                --焦油浮膜
 
 
     "ballphin",      --海豚
@@ -277,7 +280,6 @@ PrefabFiles = {
     "ballphinpod",   --海豚生成器
 
 
-    "jellyfish_planted",
     "crocodog_spawner",      --鳄狗生成器
     "crocodog",              --鳄狗
     "whale",                 --蓝鲸、白鲸
@@ -307,4 +309,7 @@ PrefabFiles = {
     "pirateghost",           --海盗幽灵
     "waterygrave",           --海墓
     "flotsam_debris_sw",     --残骸
+    "seataro_planted",       --海芋头
+    "seagullspawner",        --海鸥生成器
+    "underwater_entrance",   --海底入口
 }

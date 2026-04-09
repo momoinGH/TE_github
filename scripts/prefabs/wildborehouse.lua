@@ -274,15 +274,6 @@ local function fn(Sim)
         inst:WatchWorldState("startcaveday", OnDay)
     end)
 
-    --	--数量统计
-    --	SEABEACH_AMOUNT.wildborehouse = SEABEACH_AMOUNT.wildborehouse + 1
-    --	
-    --	inst:ListenForEvent("onremove", function(inst, data)
-    --		if SEABEACH_AMOUNT.wildborehouse > 0 then
-    --			SEABEACH_AMOUNT.wildborehouse = SEABEACH_AMOUNT.wildborehouse - 1
-    --		end
-    --	end)
-
     return inst
 end
 

@@ -77,7 +77,6 @@ AddRoomPreInit("OceanCoastal", function(room)
         mussel_farm = 2,
         lobsterhole = 1 / 2,
         ballphinhouse = .1 / 2,
-        solofish_spawner = 1 / 2,
         jellyfish_spawner = 1 / 2,
         rainbowjellyfish_spawner = 0.25 / 2,
         bioluminescence_spawner = 0.1,
@@ -126,9 +125,6 @@ AddRoomPreInit("OceanHazardous", function(room)
         knightboat = .5,
 
         luggagechest_spawner = .3,
-        boatfragment01 = 1,
-        boatfragment02 = 1,
-        boatfragment03 = 1,
         whale_bluefinal = 1,
 
     })

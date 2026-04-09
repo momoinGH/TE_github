@@ -15,7 +15,7 @@ for _, option in ipairs(modinfo.configuration_options) do
         local gen = option.world_gen
         if gen then
             assert(gen.group and gen.world and type(gen.category) == "table", "modinfo的configuration_options配置数据的world_gen必须包含group和world，请检查" .. option.name)
-            assert(tro_modules[gen.group], "世界生成数据的group必须是tro_modules中的一个，请检查" .. option.name)
+            assert(tro_modules[gen.group], "世界生成数据的group必须是tro_modules中的一个，请检查" .. option.name .. ", " .. tostring(gen.group))
         end
     end
 end
@@ -27,7 +27,15 @@ local default_options_enable = {
     { text = STRINGS.UI.WARDROBESCREEN.FILTER_ON, data = 1 },
 }
 
+-- 把coomon放第一个位置
+local module_list = { tro_modules.common }
 for _, m in pairs(tro_modules) do
+    if m ~= tro_modules.common then
+        table.insert(module_list, m)
+    end
+end
+
+for _, m in ipairs(module_list) do
     local has_settings = false
     local has_worldgen = false
     local group_label = m
