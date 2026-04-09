@@ -50,6 +50,7 @@ modimport "modmain/common/prefabs/rabbit.lua"
 modimport "modmain/common/prefabs/koalefant.lua"
 modimport "modmain/common/prefabs/rock_ice.lua"
 modimport "modmain/common/prefabs/heatrock.lua"
+modimport "modmain/common/prefabs/grass.lua"
 
 
 
