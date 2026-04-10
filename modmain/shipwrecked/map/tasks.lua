@@ -117,7 +117,6 @@ AddTask("RockyGold", {
         ["MagmaGold"] = 2,
         ["MagmaGoldBoon"] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.MAGMAFIELD,
     background_room = "Magma",
     colour = { 1, .5, .5, .2 },
@@ -131,7 +130,6 @@ AddTask("BoreKing", {
         ["JungleDenseBerries"] = 1,
         ["BeachShark"] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.JUNGLE,
     background_room = "JungleDenseMed",
     colour = { 1, .5, .5, .2 },
@@ -144,7 +142,6 @@ AddTask("RockyTallJungle", {
         ["MagmaTallBird"] = 1,
         ["MagmaGoldBoon"] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.MAGMAFIELD,
     background_room = "BeachDunes",
     colour = { 1, .5, .5, .2 },
@@ -158,7 +155,6 @@ AddTask("BeachSkull", {
         ["JungleRockSkull"] = 1,
         [salasjungle[math.random(1, 24)]] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.JUNGLE,
     background_room = salasjungle[math.random(1, 24)],
     colour = { 1, .5, .5, .2 },
@@ -172,7 +168,6 @@ AddTask("MagmaJungle", {
         ["JungleDense"] = 1,
         ["JunglePigs"] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.JUNGLE,
     background_room = "JungleDense",
     colour = { 1, .5, .5, .2 },
@@ -188,7 +183,6 @@ AddTask("JungleMarshy", {
         ["BeachSappy"] = 1,
         ["WaterMangrove"] = 2,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.JUNGLE,
     background_room = "BeachSand",
     colour = { 1, .5, .5, .2 },
@@ -202,7 +196,6 @@ AddTask("JungleBushy", {
         [salasbeach[math.random(1, 24)]] = 1,
 
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.JUNGLE,
     background_room = "BeachUnkept",
     colour = { 1, .5, .5, .2 },
@@ -216,7 +209,6 @@ AddTask("JungleBeachy", {
         [salasbeach[math.random(1, 24)]] = 1,
         [salasbeach[math.random(1, 24)]] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.JUNGLE,
     background_room = "BeachSand",
     "BeachUnkept",
@@ -228,11 +220,9 @@ AddTask("JungleMonkey", {
     level_set_piece_blocker = true,
     room_choices = {
         [salasjungle[math.random(1, 33)]] = 1,
-        --        [salasjungle[math.random(1, 33)]] = 1,
         ["JungleMonkeyHell"] = 2,
         ["WaterMangrove"] = 2,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.JUNGLE,
     background_room = "TidalMarsh",
     colour = { 1, .5, .5, .2 },
@@ -246,7 +236,6 @@ AddTask("BeachMarshy", {
         [salastidal[math.random(1, 4)]] = 3,
         ["WaterMangrove"] = 2,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.BEACH,
     background_room = "BeachUnkept",
     colour = { 1, .5, .5, .2 },
@@ -259,7 +248,6 @@ AddTask("MoonRocky", {
         ["MagmaGold"] = 1,
         ["MagmaGoldmoon"] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.BEACH,
     background_room = "MagmaGold",
     "MagmaHomeBoon",
@@ -269,12 +257,8 @@ AddTask("TigerSharky", {
     locks = { LOCKS.FUNGUS },
     keys_given = { KEYS.RED },
     room_choices = {
-        -- ["JungleNoBerry"] = 1,
         ["TidalSharkHome"] = 1,
-        -- ["JungleNoBerry"] = 1,
-        -- -- ["ForceDisconnectedRoomSW"] = 3,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.JUNGLE,
     background_room = "JungleRockyDrop",
     colour = { 1, .5, .5, .2 },
@@ -288,7 +272,6 @@ AddTask("Verdent", {
         ["Beaverkingcity"] = 1,
         [salasmeadow[math.random(1, 9)]] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.MEADOW,
     background_room = "MeadowFlowery",
     colour = { 1, .5, .5, .2 },
@@ -300,7 +283,6 @@ AddTask("Casino", {
         ["BeachPalmCasino"] = 1,
         [salasbeach[math.random(1, 24)]] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.BEACH,
     background_room = salasbeach[math.random(1, 24)],
     colour = { 1, .5, .5, .2 },
@@ -313,7 +295,6 @@ AddTask("BeachBeachy", {
         [salasbeach[math.random(1, 24)]] = 1, --CM was 5 +
         ["BeachShark"] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.BEACH,
     background_room = "BeachSand",
     colour = { 1, .5, .5, .2 },
@@ -325,7 +306,6 @@ AddTask("BeachPiggy", {
         ["BeachSand"] = 1,
         ["BeachPiggy"] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.JUNGLE,
     background_room = "JungleDenseMed",
     colour = { 1, .5, .5, .2 },
@@ -338,7 +318,6 @@ AddTask("DoyDoyM", {
         ["DoyDoyM"] = 1,
         [salasjungle[math.random(1, 24)]] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.JUNGLE,
     background_room = "Jungle",
     colour = { 1, .5, .5, .2 },
@@ -351,7 +330,6 @@ AddTask("DoyDoyF", {
         ["DoyDoyF"] = 1,
         [salasjungle[math.random(1, 24)]] = 1,
     },
-    -- entrance_room = "ForceDisconnectedRoomSW",
     room_bg = WORLD_TILES.JUNGLE,
     background_room = "Jungle",
     colour = { 1, .5, .5, .2 },
@@ -380,148 +358,4 @@ AddTask("Volcano ground", {
     cove_room_max_edges = 10,
     crosslink_factor = 10,
     colour = { 1, .5, .5, .2 },
-})
-AddTask("A_BLANK1", {
-    locks = { LOCKS.MUSHROOM },
-    keys_given = { KEYS.CAVE },
-    room_choices =
-    {
-        -- -- ["ForceDisconnectedRoomSW"] = 2,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
-})
-AddTask("A_BLANK2", {
-    locks = { LOCKS.RABBIT },
-    keys_given = { KEYS.INNERTIER },
-    room_choices =
-    {
-        -- -- ["ForceDisconnectedRoomSW"] = 2,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
-})
-AddTask("A_BLANK3", {
-    locks = { LOCKS.AREA },
-    keys_given = { KEYS.OUTERTIER },
-    room_choices =
-    {
-        -- -- ["ForceDisconnectedRoomSW"] = 2,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
-})
-AddTask("A_BLANK4", {
-    locks = { LOCKS.CAVERN },
-    keys_given = { KEYS.LIGHT },
-    room_choices =
-    {
-        -- ["ForceDisconnectedRoomSW"] = 2,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
-})
-AddTask("A_BLANK5", {
-    locks = { LOCKS.SINKHOLE },
-    keys_given = { KEYS.FUNGUS },
-    room_choices =
-    {
-        -- ["ForceDisconnectedRoomSW"] = 2,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
-})
-AddTask("A_BLANK6", {
-    locks = { LOCKS.PASSAGE },
-    keys_given = { KEYS.LABYRINTH },
-    room_choices =
-    {
-        -- ["ForceDisconnectedRoomSW"] = 2,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
-})
-AddTask("A_BLANK7", {
-    locks = { LOCKS.EASY },
-    keys_given = { KEYS.EASY },
-    room_choices =
-    {
-        -- ["ForceDisconnectedRoomSW"] = 2,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
-})
-AddTask("A_BLANK8", {
-    locks = { LOCKS.MEDIUM },
-    keys_given = { KEYS.MEDIUM },
-    room_choices =
-    {
-        -- ["ForceDisconnectedRoomSW"] = 2,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
-})
-AddTask("A_BLANK9", {
-    locks = { LOCKS.HARD },
-    keys_given = { KEYS.HARD },
-    room_choices =
-    {
-        -- ["ForceDisconnectedRoomSW"] = 2,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
-})
-AddTask("A_BLANK10", {
-    locks = { LOCKS.BLUE },
-    keys_given = { KEYS.BLUE },
-    room_choices =
-    {
-        -- ["ForceDisconnectedRoomSW"] = 2,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
-})
-AddTask("A_BLANK11", {
-    locks = { LOCKS.RED },
-    keys_given = { KEYS.RED },
-    room_choices =
-    {
-        -- ["ForceDisconnectedRoomSW"] = 2,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
-})
-AddTask("A_BLANK12", {
-    locks = { LOCKS.GREEN },
-    keys_given = { KEYS.GREEN },
-    room_choices =
-    {
-        -- ["ForceDisconnectedRoomSW"] = 5,
-    },
-    -- entrance_room = "ForceDisconnectedRoomSW",
-    room_bg = WORLD_TILES.IMPASSABLE,
-    background_room = "ForceDisconnectedRoomSW",
-    colour = { r = 0.6, g = 0.6, b = 0.0, a = 1 },
 })

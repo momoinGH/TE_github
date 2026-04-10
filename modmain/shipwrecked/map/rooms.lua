@@ -928,21 +928,9 @@ AddRoom("TidalSharkHome", {
     contents = {
         green_mushroom = .05,
         reeds = 2,
-        countstaticlayouts = { ["tigersharkarea"] = 1 }, --adds 1 per room
-        countprefabs = {
-            -- marsh_bush = 1,
-            -- tidalpool = 3,
-            -- reeds = 7,
-            -- poisonhole = 5,
-            -- mermhouse_fisher = 2,
-            -- green_mushroom = 7,
-            --tigersharkpool = 1,
-            -- flupspawner = 3,
-        }
+        countstaticlayouts = { ["sharkhome"] = 1 }, --adds 1 per room
     }
 })
-
-
 
 
 AddRoom("ToxicTidalMarsh", {
@@ -1729,9 +1717,7 @@ AddRoom("BeachShells", {
         },
 
         countprefabs = {
-            --beachresurrector = 1,
             crate = 5,
-            --sharkittenspawner = 1,
         }
 
     }
@@ -1762,9 +1748,7 @@ AddRoom("BeachShark", {
         },
 
         countprefabs = {
-            --beachresurrector = 1,
             crate = 5,
-            --sharkittenspawner = 1,
         }
 
     }
@@ -1795,9 +1779,7 @@ AddRoom("BeachShells1", {
         },
 
         countprefabs = {
-            --beachresurrector = 1,
             crate = 5,
-            --sharkittenspawner = 1,
         }
 
     }
@@ -3216,7 +3198,8 @@ AddRoom("PigVillagesw", {
 
 AddRoom("WaterMangrove", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
-    value = WORLD_TILES.MANGROVE,
+    -- value = WORLD_TILES.OCEAN_COASTAL,
+    value = WORLD_TILES.OCEAN_WATERLOG, --水中木区域的海洋地皮
     tags = { "RoadPoison", "shipwrecked", "tropical" },
     contents = {
         distributepercent = 0.2,

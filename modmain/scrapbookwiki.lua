@@ -156,5 +156,3 @@ Hooks.FnDecorator(ScrapbookScreen, "SetPlayerKnowledge", nil, function()
         d.knownlevel = 2 --默认解锁
     end
 end)
-
-WIKI_DATA = nil

@@ -1008,6 +1008,7 @@ for _, data in pairs(FISH_DEFS) do
         if not TheWorld.ismastersim then return end
 
         if data.oceanbuild then
+            inst.oceanbuild = data.oceanbuild
             inst.oceanbank = "oceanfish_small"
             inst:SetStateGraph("SGoceanfishsw")
         end

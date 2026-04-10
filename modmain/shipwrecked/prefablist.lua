@@ -177,7 +177,6 @@ PrefabFiles = {
     "tigersharkshadow",  --鲨鱼阴影特效
     "shark_tooth",       --鲨齿
     "tigersharkpool",    --鲨鱼池
-    "tigersharktorch",   --虎鲨生成器
     "sharkitten",        --猫鲨
     "sharkittenspawner", --猫鲨生成器
     "shark_gills",       --虎鲨腮

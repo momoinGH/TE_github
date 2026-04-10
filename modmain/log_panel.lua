@@ -401,3 +401,25 @@ GLOBAL.SpawnPrefabFromSim = function(name, ...)
     end
     return guid
 end
+
+
+
+
+require("stategraph")
+local OldGoToState = StateGraphInstance.GoToState
+function StateGraphInstance:GoToState(statename, ...)
+    local success, err = pcall(OldGoToState, self, statename, ...)
+    if not success then
+        TroErrorHandle(err, false)
+        StackTraceToLog()
+    end
+end
+
+local OldUpdateState = StateGraphInstance.UpdateState
+function StateGraphInstance:UpdateState(dt)
+    local success, err = pcall(OldUpdateState, self, dt)
+    if not success then
+        TroErrorHandle(err, false)
+        StackTraceToLog()
+    end
+end

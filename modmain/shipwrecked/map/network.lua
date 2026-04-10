@@ -29,8 +29,7 @@ local function GlobalPostPopulateAfter(retTab, root, entities, width, height)
         return true
     end
 
-    local pointsX, pointsY = SpawnUtil.FindRandomWaterPoints(checkTriangle, width, height, MAPEDGE_PADDING,
-        numTriangles)
+    local pointsX, pointsY = SpawnUtil.FindRandomWaterPoints(checkTriangle, width, height, MAPEDGE_PADDING, numTriangles)
 
     for i = 1, #pointsX, 1 do
         local entData = {}

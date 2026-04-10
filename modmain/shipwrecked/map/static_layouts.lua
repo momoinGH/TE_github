@@ -8,12 +8,9 @@ local default_layout_data = {
 }
 
 -- 猫鲨
-Layouts["tigersharkarea"] = StaticLayout.Get("map/static_layouts/tigersharkarea", {
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE,
-})
-TroRemapLayoutTile("tigersharkarea", {
-    [9] = WORLD_TILES.BEACH,
+Layouts["sharkhome"] = StaticLayout.Get("map/static_layouts/sharkhome")
+TroRemapLayoutTile("sharkhome", {
+    [37] = WORLD_TILES.BEACH,
 })
 
 -- 咖啡丛

@@ -47,12 +47,12 @@ if rawget(_G, "WORLDGEN_MAIN") then
     modimport "modmain/gentuning"            -- 当配置项加载好后，才能访问TUNING.tropical检查哪些模块启用了
     modimport "modmain/worldsim.lua"         --WorldSim函数的hook
     modimport "modmain/map/storygen.lua"     --地形标签处理函数
+    modimport "modmain/map/ocean_gen"        --不让科雷覆盖mod海洋地皮
+    modimport "modmain/map/graphnode.lua"    --允许在mod海洋地皮上填充实体
     troimportmodulefile "map/lockandkey"     --地形锁钥
     troimportmodulefile "map/static_layouts" --静态布局
     troimportmodulefile "map/rooms"
     troimportmodulefile "map/tasks"
-    troimportmodulefile "map/network"     --地图数据后处理，替换字符串为实际预制体，这个只是改预制件名，还没有真正的实体
-    troimportmodulefile "map/mapadd"      --hook生成函数、真正把地图数据加入原有地形数据中
-    modimport "modmain/map/ocean_gen"     --不让科雷覆盖mod海洋地皮
-    modimport "modmain/map/graphnode.lua" --允许在mod海洋地皮上填充实体
+    troimportmodulefile "map/network" --地图数据后处理，替换字符串为实际预制体，这个只是改预制件名，还没有真正的实体
+    troimportmodulefile "map/mapadd"  --hook生成函数、真正把地图数据加入原有地形数据中
 end

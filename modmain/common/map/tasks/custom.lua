@@ -5702,7 +5702,7 @@ AddRoom("TidalSharkHome", {
     contents = {
         green_mushroom = .05,
         reeds = 2,
-        countstaticlayouts = { ["tigersharkarea"] = 1 }, --adds 1 per room
+        countstaticlayouts = { ["sharkhome"] = 1 }, --adds 1 per room
         countprefabs = {
             -- marsh_bush = 1,
             tidalpool = 3,
@@ -6532,9 +6532,7 @@ AddRoom("BeachShells", {
         },
 
         countprefabs = {
-            --beachresurrector = 1,
             crate = 5,
-            --sharkittenspawner = 1,
         }
 
     }
@@ -6566,9 +6564,7 @@ AddRoom("BeachShark", {
         },
 
         countprefabs = {
-            --beachresurrector = 1,
             crate = 5,
-            --sharkittenspawner = 1,
         }
 
     }
@@ -6600,9 +6596,7 @@ AddRoom("BeachShells1", {
         },
 
         countprefabs = {
-            --beachresurrector = 1,
             crate = 5,
-            --sharkittenspawner = 1,
         }
 
     }
@@ -8987,7 +8981,7 @@ AddRoom("MAINTidalSharkHome", {
     contents = {
         green_mushroom = .05,
         reeds = 2,
-        countstaticlayouts = { ["tigersharkarea"] = 1 }, --adds 1 per room
+        countstaticlayouts = { ["sharkhome"] = 1 }, --adds 1 per room
         countprefabs = {
             -- marsh_bush = 1,
             tidalpool = 3,
@@ -9760,9 +9754,7 @@ AddRoom("MAINBeachShells", {
         },
 
         countprefabs = {
-            --beachresurrector = 1,
             crate = 5,
-            --sharkittenspawner = 1,
         }
 
     }
@@ -9794,9 +9786,7 @@ AddRoom("MAINBeachShark", {
         },
 
         countprefabs = {
-            --beachresurrector = 1,
             crate = 5,
-            --sharkittenspawner = 1,
         }
 
     }
@@ -9828,9 +9818,7 @@ AddRoom("MAINBeachShells1", {
         },
 
         countprefabs = {
-            --beachresurrector = 1,
             crate = 5,
-            --sharkittenspawner = 1,
         }
 
     }

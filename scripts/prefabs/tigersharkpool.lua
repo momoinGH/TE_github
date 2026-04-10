@@ -55,21 +55,6 @@ local function onload(inst, data, newents)
     if data.entrada then inst.entrada = data.entrada end
 end
 
-local function initshark(inst)
-    if inst.entrada == nil then
-        local x, y, z = inst.Transform:GetLocalPosition()
-        local fx = SpawnPrefab("tigersharktorch")
-        fx.Transform:SetPosition(x, y, z)
-        local tigre = SpawnPrefab("tigershark")
-        if tigre ~= nil then
-            tigre.Transform:SetPosition(x, y, z)
-        end
-        inst.entrada = 1
-    end
-    inst:Remove()
-end
-
-
 local function commonfn(pondtype)
     local inst = CreateEntity()
 
@@ -128,8 +113,6 @@ local function commonfn(pondtype)
 
     inst.OnSave = onsave
     inst.OnLoad = onload
-
-    inst:DoTaskInTime(0, initshark)
 
     SetSize(inst)
 

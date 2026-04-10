@@ -6,7 +6,6 @@ local assets =
 local prefabs =
 {
     "sharkitten",
-    --"tigershark",
 }
 
 local function ReturnChildren(inst)
@@ -60,38 +59,6 @@ local function ActivateSpawner(inst, isload)
         end
     end
 end
-
-local function DeactiveateSpawner(inst, isload)
-    if inst.spawneractive then
-        inst.spawneractive = false
-        --inst.components.named:SetName(STRINGS.NAMES["SHARKITTENSPAWNER_INACTIVE"])
-        inst.deactivatefn = function()
-            --Queue up an animation change for the next time this is off screen
-            inst.AnimState:PlayAnimation("idle_inactive")
-            --Start task to periodically blink if there are children inside
-            if inst.blink_task then
-                inst.blink_task:Cancel()
-                inst.blink_task = nil
-            end
-
-            inst:StopWatchingWorldState("iscaveday", OnIsDay)
-        end
-
-        if isload then
-            inst.deactivatefn()
-        end
-    end
-end
-
--- local function OnSeasonChange(inst, world, data)
---     if data.season == SEASONS.GREEN then
---         --Start the spawning.
---         ActivateSpawner(inst)
---     else
---         --Stop
---         DeactiveateSpawner(inst)
---     end
--- end
 
 local function getstatus(inst)
     if not inst.spawneractive then

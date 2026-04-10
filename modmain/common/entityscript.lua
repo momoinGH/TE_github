@@ -177,3 +177,13 @@ Hooks.FnDecorator(EntityScript, "WatchWorldState", function(self, var, fn)
 end)
 
 ----------------------------------------------------------------------------------------------------
+-- 同单机，在ACTION执行成功后推送一下事件，用来在玩家执行一些操作时触发什么事件，比如召唤虎鲨
+local OldPerformBufferedAction = EntityScript.PerformBufferedAction
+function EntityScript:PerformBufferedAction(...)
+    local action = self.bufferedaction
+    local success = OldPerformBufferedAction(self, ...)
+    if success then
+        self:PushEvent("actionsuccess", { action = action })
+    end
+    return success
+end
