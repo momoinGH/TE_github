@@ -182,10 +182,6 @@ local function StartStep(inst)
                 end
             end
 
-
-
-
-
             if not plataforma and (ground == WORLD_TILES.OCEAN_COASTAL or
                     ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
                     ground == WORLD_TILES.OCEAN_SWELL or

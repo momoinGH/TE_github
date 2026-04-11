@@ -1,6 +1,5 @@
 local SHARK_TUNING = {
-    [SEASONS.MILD] =
-    {
+    MILD = {
         actions =
         {
             [ACTIONS.FISH]  = 0.01,
@@ -12,8 +11,7 @@ local SHARK_TUNING = {
         events = {},
         cooldown = TUNING.TOTAL_DAY_TIME * 7,
     },
-    [SEASONS.WET] =
-    {
+    WET = {
         actions =
         {
             [ACTIONS.FISH]   = 0.01,
@@ -30,8 +28,7 @@ local SHARK_TUNING = {
         },
         cooldown = TUNING.TOTAL_DAY_TIME * 5,
     },
-    [SEASONS.GREEN] =
-    {
+    GREEN = {
         actions =
         {
             [ACTIONS.FISH]   = 0.02,
@@ -48,8 +45,7 @@ local SHARK_TUNING = {
         },
         cooldown = TUNING.TOTAL_DAY_TIME * 3,
     },
-    [SEASONS.DRY] =
-    {
+    DRY = {
         actions =
         {
             [ACTIONS.FISH]  = 0.01,
@@ -63,11 +59,7 @@ local SHARK_TUNING = {
     },
 }
 
-local function GetTotalTime()
-    return (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME
-end
-
-local function GetActiveActons()
+local function GetActiveActonsData()
     if TheWorld.state.ismild then
         return SHARK_TUNING.MILD
     elseif TheWorld.state.iswet then
@@ -79,48 +71,90 @@ local function GetActiveActons()
     end
 end
 
+local SHARK_TIMERNAME = "shark_timetospawn"
+
+local function OnEvent(doer, pct)
+    local self = TheWorld.components.tigersharker
+    local x, y, z = doer.Transform:GetWorldPosition()
+    if TheWorld.Map:IsOceanAtPoint(x, y, z, true) and (math.random() <= pct or self.DEBUG_ALWAYS_SPAWN) then
+        self:DoSharkEvent(doer)
+    end
+end
+
+-- 根据季节改变改变监听的事件
+local function OnSeasonChange(src, season)
+    local self = TheWorld.components.tigersharker
+    for _, v in ipairs(AllPlayers) do
+        for e, f in pairs(self.events) do
+            self.inst:RemoveEventCallback(e, f, v)
+        end
+    end
+
+    self.events = {}
+    local events = GetActiveActonsData().events
+    for e, v in pairs(events) do
+        self.events[e] = function(player) OnEvent(player, v) end
+    end
+
+    for _, v in ipairs(AllPlayers) do
+        for e, f in pairs(self.events) do
+            self.inst:ListenForEvent(e, f, v)
+        end
+    end
+end
+
 -- 海难虎鲨生成组件
 local TigerSharker = Class(function(self, inst)
     self.inst = inst
 
-    self.next_spawn_time = self:GetAppearanceCooldown() --下次生成时间
-    self.shark = nil                                    --虎鲨
-    self.shark_data = nil                               --虎鲨消失的时候保存一下状态
+    self.DEBUG_ALWAYS_SPAWN = nil                      --调试使用，触发action或者event时不考虑概率
 
-    local function OnActionSuccess(doer, buf)
-        if GetTotalTime() < self.next_spawn_time then return end --没到生成时间
+    self.respawn_cooldown = TUNING.TOTAL_DAY_TIME * 10 --重生倒计时
+    self.shark = nil                                   --虎鲨
+    self.shark_data = nil                              --虎鲨消失的时候保存一下状态
+    self.events = {}                                   --当前季节监听的事件
 
-        local actions = GetActiveActons()
-        if not actions[buf.action] then return end
+    local function OnActionSuccess(doer, data)
+        local action = data.action.action
+        local actions = GetActiveActonsData().actions
+        if not actions[action] then return end
         local x, y, z = doer.Transform:GetWorldPosition()
-        if TheWorld.Map:IsOceanAtPoint(x, y, z, true) and math.random() < actions[buf.action] or true then --TODO
+        if TheWorld.Map:IsOceanAtPoint(x, y, z, true) and (math.random() < actions[action] or self.DEBUG_ALWAYS_SPAWN) then
             self:DoSharkEvent(doer)
         end
     end
 
+
+    -- 玩家进来就监听事件和action
     local function OnPlayerJoined(src, player)
         inst:ListenForEvent("actionsuccess", OnActionSuccess, player)
+        for e, f in pairs(self.events) do
+            inst:ListenForEvent(e, f, player)
+        end
     end
 
     local function OnPlayerLeft(src, player)
         inst:RemoveEventCallback("actionsuccess", OnActionSuccess, player)
+        for e, f in pairs(self.events) do
+            inst:RemoveEventCallback(e, f, player)
+        end
     end
 
     inst:ListenForEvent("ms_playerjoined", OnPlayerJoined, TheWorld)
     inst:ListenForEvent("ms_playerleft", OnPlayerLeft, TheWorld)
 
-    local function OnSeasonChange(inst, season)
-        for _, v in ipairs(AllPlayers) do
-            -- TODO
-        end
-    end
+
     self:WatchWorldState("season", OnSeasonChange)
 end)
 
+function TigerSharker:OnPostInit()
+    OnSeasonChange()
+    TheWorld.components.worldsettingstimer:AddTimer(SHARK_TIMERNAME, self.respawn_cooldown, true)
+end
+
 --出现的间隔，随生成条件更新
-function GetAppearanceCooldown()
-    local actions = GetActiveActons()
-    return actions.cooldown
+function TigerSharker:GetAppearanceCooldown()
+    return GetActiveActonsData().cooldown
 end
 
 function TigerSharker:GetNearbySpawnPoint(target)
@@ -140,39 +174,69 @@ function TigerSharker:GetNearbySpawnPoint(target)
 end
 
 function TigerSharker:GetHomePosition()
-    local home = TroGetAnyEntByPrefab("sharkhome")
+    local home = TroGetAnyEntByPrefab("sharkittenspawner")
     return home and home:GetPosition() or nil
 end
 
-function TigerSharker:DoSharkEvent(target)
-    local spawnpt = self:GetNearbySpawnPoint(target)
-    if not spawnpt then return end
+function TigerSharker:CanSpawn(ignore_cooldown)
+    if self.shark then
+        return false --虎鲨还没死呢
+    end
+    if not ignore_cooldown and TheWorld.components.worldsettingstimer:ActiveTimerExists(SHARK_TIMERNAME) then
+        return false --还没到生成时间
+    end
+    return true
+end
 
+function TigerSharker:SpawnShark(ignore_cooldown)
+    if not self:CanSpawn(ignore_cooldown) then return end
+
+    local shark
     if self.shark_data then
         shark = SpawnSaveRecord(self.shark_data)
         self.shark_data = nil
+        if shark.components.health:GetPercent() < 0.25 then
+            shark.components.health:SetPercent(0.25)
+        end
     else
-        shark = SpawnPrefab(self.shark_prefab)
+        shark = SpawnPrefab("tigershark")
     end
-    if shark.components.health:GetPercent() < 0.25 then
-        shark.components.health:SetPercent(0.25)
-    end
+
     self:TakeOwnership(shark)
-    shark.Transform:SetPosition(spawnpt:Get())
+
     local home_pos = self:GetHomePosition()
     shark.components.knownlocations:RememberLocation("point_owaf_interest", home_pos)
 
+    TheWorld.components.worldsettingstimer:StopTimer(SHARK_TIMERNAME)
+
+    return shark
+end
+
+function TigerSharker:DoSharkEvent(target)
+    if not self:CanSpawn() then return end
+
+    local spawnpt = self:GetNearbySpawnPoint(target)
+    if not spawnpt then return end
+
+    local shark = self:SpawnShark()
+    if not shark then return end
+
+    shark.Transform:SetPosition(spawnpt:Get())
+
     --Look around the target for something you can interact with (kill)
+    --要是没找到目标就会原地不动了
     local possible_target = FindEntity(target, 20,
         function(tar) return shark.components.combat:CanTarget(tar) end,
-        nil, { "prey", "player", "companion", "bird", "butterfly", "sharkitten" })
+        nil, { --[["prey",]] "player", "companion", "bird", "butterfly", "sharkitten" })
     shark.components.combat:SuggestTarget(possible_target)
-
-    self.next_spawn_time = GetTotalTime() + self:GetAppearanceCooldown()
 end
 
 local function OnSharkDeath(shark)
     local self = TheWorld.components.tigersharker
+    self.shark = nil
+
+    TheWorld.components.worldsettingstimer:StopTimer(SHARK_TIMERNAME)
+    TheWorld.components.worldsettingstimer:AddTimer(SHARK_TIMERNAME, math.max(self:GetAppearanceCooldown(), self.respawn_cooldown), true)
 end
 
 local function OnSharkSleep(shark)
@@ -189,13 +253,13 @@ end
 
 function TigerSharker:TakeOwnership(shark)
     if self.shark and self.shark:IsValid() then
-        self.inst:RemoveEventCallback("death", OnSharkDeath, self.shark)
+        self.inst:RemoveEventCallback("onremove", OnSharkDeath, self.shark)
         self.inst:RemoveEventCallback("entitywake", OnSharkWake, self.shark)
         self.inst:RemoveEventCallback("entitysleep", OnSharkSleep, self.shark)
     end
 
     self.shark = shark
-    self.inst:ListenForEvent("death", OnSharkDeath, shark)
+    self.inst:ListenForEvent("onremove", OnSharkDeath, shark)
     self.inst:ListenForEvent("entitywake", OnSharkWake, shark)
     self.inst:ListenForEvent("entitysleep", OnSharkSleep, shark)
 end
@@ -214,7 +278,7 @@ end
 
 function TigerSharker:OnSave()
     local data = {
-        next_spawn_time = self.next_spawn_time
+        shark_data = self.shark_data,
     }
     local refs = {}
     if self.shark and self.shark:IsValid() then
@@ -227,7 +291,7 @@ end
 function TigerSharker:OnLoad(data)
     if not data then return end
 
-    self.next_spawn_time = data.next_spawn_time or self.next_spawn_time
+    self.shark_data = data.shark_data
 end
 
 function TigerSharker:LoadPostPass(ents, data)

@@ -9,7 +9,7 @@
 ---@param idleTime number
 ---@param instantActive boolean
 ---@return boolean wave_spawned 是否找到合适的点生成了波浪，inst在陆地上是不会生成的
-function TroSpawnAttackWavesForEnt(inst, rotation, spawn_radius, numWaves, totalAngle, waveSpeed, wavePrefab, idleTime, instantActive)
+function _G.TroSpawnAttackWavesForEnt(inst, rotation, spawn_radius, numWaves, totalAngle, waveSpeed, wavePrefab, idleTime, instantActive)
     local position = inst:GetPosition()
     if spawn_radius == nil then
         spawn_radius = inst:GetPhysicsRadius(0)

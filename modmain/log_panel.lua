@@ -402,9 +402,6 @@ GLOBAL.SpawnPrefabFromSim = function(name, ...)
     return guid
 end
 
-
-
-
 require("stategraph")
 local OldGoToState = StateGraphInstance.GoToState
 function StateGraphInstance:GoToState(statename, ...)
@@ -422,4 +419,33 @@ function StateGraphInstance:UpdateState(dt)
         TroErrorHandle(err, false)
         StackTraceToLog()
     end
+end
+
+-- 检查保存数据中是否有不合法对象
+local function CheckData(self, data)
+    for k, v in pairs(data) do
+        if EntityScript.is_instance(k) or EntityScript.is_instance(v) then
+            TroErrorHandle(string.trofmt("你不能直接保存一个实体对象{}, {}, {}", self, k, v), true)
+            StackTraceToLog()
+        end
+        if type(k) == "userdata" or type(v) == "userdata" then
+            TroErrorHandle(string.trofmt("你不能直接保存一个userdata对象{}, {}, {}", self, k, v), true)
+            StackTraceToLog()
+        end
+        if type(k) == "table" then
+            CheckData(self, k)
+        end
+        if type(v) == "table" then
+            CheckData(self, v)
+        end
+    end
+end
+
+local OldGetPersistData = EntityScript.GetPersistData
+function EntityScript:GetPersistData()
+    local data, references = OldGetPersistData(self)
+    if data then
+        CheckData(self, data)
+    end
+    return data, references
 end

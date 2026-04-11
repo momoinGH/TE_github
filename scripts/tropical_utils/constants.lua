@@ -1428,7 +1428,7 @@ LAYOUT =
 LAYOUT_POSITION =
 {
     RANDOM = 0,
-    CENTER = 1,
+    CENTER = 1, --在room正中间生成
 }
 
 LAYOUT_ROTATION =
@@ -1442,7 +1442,7 @@ LAYOUT_ROTATION =
 PLACE_MASK =
 {
     NORMAL = 0,
-    IGNORE_IMPASSABLE = 1,
+    IGNORE_IMPASSABLE = 1, --可以在虚空地皮生成，一般配合room.value是IMPASSABLE使用，就是room是海洋，布局是陆地的情况
     IGNORE_BARREN = 2,
     IGNORE_IMPASSABLE_BARREN = 3,
     IGNORE_RESERVED = 4,

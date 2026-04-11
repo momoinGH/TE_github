@@ -8,7 +8,10 @@ local default_layout_data = {
 }
 
 -- 猫鲨
-Layouts["sharkhome"] = StaticLayout.Get("map/static_layouts/sharkhome")
+Layouts["sharkhome"] = StaticLayout.Get("map/static_layouts/sharkhome", {
+    start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE, --配合room虚空地皮，可以只在虚空地皮上（铺海洋前）生成布局
+    fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE,
+})
 TroRemapLayoutTile("sharkhome", {
     [37] = WORLD_TILES.BEACH,
 })
@@ -440,16 +443,14 @@ Layouts["start_sw"] = StaticLayout.Get("map/static_layouts/start_sw", {
     },
 })
 
-Layouts["lava_arena"] = StaticLayout.Get("map/static_layouts/lava_arena",
-    {
-        start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-        disable_transform = true,
-    })
-Layouts["wildboreking"] = StaticLayout.Get("map/static_layouts/wildboreking",
-    {
-        layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-        start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-        fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    })
+Layouts["lava_arena"] = StaticLayout.Get("map/static_layouts/lava_arena", {
+    start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+    disable_transform = true,
+})
+Layouts["wildboreking"] = StaticLayout.Get("map/static_layouts/wildboreking", {
+    layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+    start_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+})

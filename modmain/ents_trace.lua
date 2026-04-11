@@ -2,7 +2,8 @@
 
 -- 要追踪的所有实体
 local trace_prefabs = {
-    pigking = true
+    pigking = true,           --猪王
+    sharkittenspawner = true, --虎鲨生成器
 }
 
 local trace_ents = {}

@@ -17,6 +17,21 @@ local function ReturnChildren(inst)
     end
 end
 
+local function SummonShark(inst, player)
+    --Try to spawn a shark to protect this area if it's spring.
+    if inst.spawneractive then
+        local tigersharker = TheWorld.components.tigersharker
+        local shark = tigersharker:SpawnShark(true, false)
+        if shark then
+            local spawnpt = tigersharker:GetNearbySpawnPoint(player)
+            if spawnpt then
+                shark.Transform:SetPosition(spawnpt:Get())
+                shark.components.combat:SuggestTarget(player)
+            end
+        end
+    end
+end
+
 local function SpawnKittens(inst, num)
     for i = 1, num do
         local kitten = SpawnPrefab("sharkitten")
@@ -108,10 +123,10 @@ local function fn()
     inst.components.childspawner:SetMaxChildren(4)
     inst.components.childspawner:StartRegen()
 
-    --    inst:AddComponent("playerprox")
-    --    inst.components.playerprox:SetOnPlayerNear(SummonShark)
-    --    inst.components.playerprox:SetDist(7.5, 10)
-    --    inst.components.playerprox.period = 1
+    inst:AddComponent("playerprox")
+    inst.components.playerprox:SetOnPlayerNear(SummonShark)
+    inst.components.playerprox:SetDist(7.5, 10)
+    inst.components.playerprox.period = 1
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = getstatus

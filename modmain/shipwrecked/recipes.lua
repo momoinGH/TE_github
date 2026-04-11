@@ -12,7 +12,6 @@ TroAddTech("OBSIDIAN", {
 
 -- 原型机指定交互和侧边栏
 TroAddPrototyperDef("obsidian_workbench", {
-    action_str = "OBSIDIANTAB", --交互时文本提示
     icon_atlas = tab_atlas,
     icon_image = "tab_volcano.tex",
     is_crafting_station = true --是不是一个制作站，如果是就在单独的tab里显示配方

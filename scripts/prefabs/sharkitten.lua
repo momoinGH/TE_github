@@ -13,14 +13,14 @@ local prefabs =
 
 SetSharedLootTable('sharkitten',
     {
-        {"fishmeat", 1.00},
-        {"fishmeat", 1.00},
-        {'shark_fin',  1.0},
-        {"shark_gills", 0.25},
-        {"shark_gills", 0.10},
+        { "fishmeat", 1.00 },
+        { "fishmeat", 1.00 },
+        { 'shark_fin', 1.0 },
+        { "shark_gills", 0.25 },
+        { "shark_gills", 0.10 },
 
-        {"shark_tooth", 0.25 },
-        {"mysterymeat", 0.10 },
+        { "shark_tooth", 0.25 },
+        { "mysterymeat", 0.10 },
     })
 
 local function grow(inst, dt)
@@ -54,18 +54,17 @@ local function OnAttacked(inst, data)
         end
     end
 
-
-    for k, v in pairs(Ents) do
-        if v.prefab == "tigershark" then
-            if v:HasTag("aquatic") then
-                v:Hide()
-                v.Transform:SetPosition(x, y, z)
-                v.sg:GoToState("fallwarn")
-                v.components.combat:SuggestTarget(data.attacker)
-            else
-                v.components.combat:SuggestTarget(data.attacker)
-                v.sg:GoToState("jump")
-            end
+    local attacker = data and data.attacker
+    if attacker then
+        --Try to get help from tigershark
+        --check if it's nearby first
+        local shark = GetClosestInstWithTag("tigershark", inst, 60)
+        --try to spawn it if it isn't.
+        if not shark then
+            shark = TheWorld.components.tigersharker:DoSharkEvent(data.attacker)
+        end
+        if shark then
+            shark.components.combat:SuggestTarget(data.attacker)
         end
     end
 end

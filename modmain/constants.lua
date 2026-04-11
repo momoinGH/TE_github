@@ -86,26 +86,23 @@ NAUGHTY_VALUE["pigman_mechanic_shopkeep"] = 6
 
 ----------------------------------------------------------------------------------------------------
 
-function AddComponentIfNot(inst, name)
+function _G.AddComponentIfNot(inst, name)
     if not inst.components[name] then
         inst:AddComponent(name)
     end
 end
 
-GLOBAL.AddComponentIfNot = AddComponentIfNot
 
 
 -- 关闭物理碰撞
-function ToggleOffPhysics(inst)
+function _G.ToggleOffPhysics(inst)
     inst.sg.statemem.isphysicstoggle = true
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.GROUND)
 end
 
-GLOBAL.ToggleOffPhysics = ToggleOffPhysics
-
 -- 开启物理碰撞
-function ToggleOnPhysics(inst)
+function _G.ToggleOnPhysics(inst)
     inst.sg.statemem.isphysicstoggle = nil
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.WORLD)
@@ -115,20 +112,16 @@ function ToggleOnPhysics(inst)
     inst.Physics:CollidesWith(COLLISION.GIANTS)
 end
 
-GLOBAL.ToggleOnPhysics = ToggleOnPhysics
-
 -- 拿到装备的东西
-function TroGetEquippedItem(inst, eslot)
+function _G.TroGetEquippedItem(inst, eslot)
     if inst.components.inventory then
         return inst.components.inventory:GetEquippedItem(eslot)
     end
     return inst.replilca.inventory and inst.replilca.inventory:GetEquippedItem(eslot) or nil
 end
 
-GLOBAL.TroGetEquippedItem = TroGetEquippedItem
-
 -- 是否在哈姆雷特雾气中
-function TroInHamletFogImple(inst)
+function _G.TroInHamletFogImple(inst)
     return TheWorld.state.israining                                           --下雨
         and TheWorld.state.moisture > 500                                     --潮湿度，雨越下越小，这个值要看着效果调整
         and TheWorld.state.issummer                                           --夏天当潮湿季用
@@ -136,10 +129,8 @@ function TroInHamletFogImple(inst)
         and not TheWorld.Map:TroIsWorldOut(inst.Transform:GetWorldPosition()) --不在虚空小房子里或虚空洞穴里
 end
 
-GLOBAL.TroInHamletFogImple = TroInHamletFogImple
-
 -- 是否可以抵抗哈姆雷特雾气
-function TroCanResistHamletFog(player)
+function _G.TroCanResistHamletFog(player)
     if player:HasTag("playerghost") then
         return true
     end
@@ -149,8 +140,6 @@ function TroCanResistHamletFog(player)
         return player.replica.inventory:EquipHasTag("clearfog")
     end
 end
-
-GLOBAL.TroCanResistHamletFog = TroCanResistHamletFog
 
 
 -- 伤害类型
@@ -163,7 +152,7 @@ DAMAGETYPES = { PHYSICAL = 1, MAGIC = 2 }
 ---@param item string
 ---@param count int 数量
 ---@param target Entity 目标，如果有值，物品会飞向目标
-function TroSpawnDropItem(inst, item, count, target)
+function _G.TroSpawnDropItem(inst, item, count, target)
     count = count or 1
     for i = 1, count do
         local product = SpawnPrefab(item)
@@ -180,9 +169,6 @@ function TroSpawnDropItem(inst, item, count, target)
     end
 end
 
-GLOBAL.TroSpawnDropItem = TroSpawnDropItem
-
-
 ---简易的坐标附近生成实体的函数，经常用于在玩家附近生成一些怪物
 ---不能保证数量一定足够，没有找到合适的位置就会少生成
 ---@param prefab string 要生成的实体名，可以是一个数组
@@ -192,7 +178,7 @@ GLOBAL.TroSpawnDropItem = TroSpawnDropItem
 ---@param offset_y number
 ---@param find_offset_fn function 查找偏移量的函数，一般是FindWalkableOffset、FindSwimmableOffset，默认是一个尝试12次查找陆地的函数
 ---@return table
-function TroSpawnRandomEntsInRange(prefab, pt, count, radius, offset_y, find_offset_fn)
+function _G.TroSpawnRandomEntsInRange(prefab, pt, count, radius, offset_y, find_offset_fn)
     local ents = {}
     offset_y = offset_y or 0
     local function getrandomoffset()
@@ -227,16 +213,11 @@ function TroSpawnRandomEntsInRange(prefab, pt, count, radius, offset_y, find_off
     return ents
 end
 
-GLOBAL.TroSpawnRandomEntsInRange = TroSpawnRandomEntsInRange
-
-
 --- 通过userid在AllPlayers中查找玩家
-function TroGetPlayerById(userid)
+function _G.TroGetPlayerById(userid)
     for _, player in ipairs(AllPlayers) do
         if player.userid == userid then
             return player
         end
     end
 end
-
-GLOBAL.TroGetPlayerById = TroGetPlayerById

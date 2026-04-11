@@ -31,7 +31,6 @@ modimport "modmain/shardindex.lua"  --世界生成后初始化实体，比如根
 -- if TUNING.tropical.sea then
 --     modimport "modmain/common/map/tasks/sea"
 -- else
---     modimport "modmain/common/map/tasks/custom"
 -- end
 
 -- if TUNING.tropical.windy then

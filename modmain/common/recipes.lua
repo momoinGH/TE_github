@@ -98,7 +98,7 @@ end
 ---@param data.trees table: 解锁的科技树，对应科雷的TUNING.PROTOTYPER_TREES.XXX变量的值
 function TroAddPrototyperDef(prefab, data)
     if data.action_str and not STRINGS.ACTIONS.OPEN_CRAFTING[data.action_str] then
-        TroErrorHandle("你给原型机" .. prefab .. "指定了action_str的值为" .. tostring(data.action_str) .. ",但是没有找到STRINGS.ACTIONS.OPEN_CRAFTING." .. data.action_str .. "的值", false)
+        TroErrorHandle("错误：你给原型机" .. prefab .. "指定了action_str的值为" .. tostring(data.action_str) .. ",但是没有找到STRINGS.ACTIONS.OPEN_CRAFTING." .. data.action_str .. "的值", false)
     end
 
     AddPrototyperDef(prefab, {
@@ -115,7 +115,7 @@ function TroAddPrototyperDef(prefab, data)
             if not TheWorld.ismastersim then return end
 
             if not inst.components.prototyper then
-                TroErrorHandle("你给原型机" .. prefab .. "添加了科技，但是没有找到components.prototyper组件")
+                TroErrorHandle("错误：你给原型机" .. prefab .. "添加了科技，但是没有找到components.prototyper组件")
             elseif inst.components.prototyper.trees then
                 --预制件文件里已经赋值了，这里不处理
             else

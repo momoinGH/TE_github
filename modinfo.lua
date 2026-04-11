@@ -255,7 +255,7 @@ configuration_options =
         default = 1,
         world_gen = {
             category = { LEVELCATEGORY.WORLDGEN },
-            group = tro_modules.hamlet,
+            group = tro_modules.shipwrecked,
             world = { "forest" },
         }
     },

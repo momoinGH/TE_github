@@ -65,9 +65,10 @@ TUNING.tropical = {
     fog            = GetModConfigData("fog") == 1,            --迷雾
     vampirebatcave = GetModConfigData("vampirebatcave") == 1, --洞穴裂缝
     aporkalypse    = GetModConfigData("aporkalypse") == 1,    --大灾变
+
+
     shipwrecked    = shipwrecked,
     boat           = shipwrecked,
-
 
 
 

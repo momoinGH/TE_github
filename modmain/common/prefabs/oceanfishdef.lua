@@ -1010,6 +1010,7 @@ for _, data in pairs(FISH_DEFS) do
         if data.oceanbuild then
             inst.oceanbuild = data.oceanbuild
             inst.oceanbank = "oceanfish_small"
+            inst.build = data.build or inst.build or inst.oceanbuild
             inst:SetStateGraph("SGoceanfishsw")
         end
     end)

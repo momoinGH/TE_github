@@ -222,7 +222,7 @@ local states =
             inst.AnimState:PushAnimation("launch_up_loop", true)
             inst.components.combat:DoAreaAttack(inst, TIGERSHARK_SPLASH_RADIUS)
 
-            TroSpawnAttackWavesForEnt(inst, nil, math.random(-180, 180), 9, 360, 12, "rogue_wave", 3, true)
+            TroSpawnAttackWavesForEnt(inst, math.random(-180, 180), nil, 9, 360, 12, "rogue_wave", 3, true)
         end,
 
         timeline =
@@ -266,7 +266,7 @@ local states =
 
             inst.AnimState:PlayAnimation("launch_up_pre")
             inst.components.combat:DoAreaAttack(inst, TIGERSHARK_SPLASH_RADIUS)
-            TroSpawnAttackWavesForEnt(inst, nil, math.random(-180, 180), 9, 360, 12, "rogue_wave", 3, true)
+            TroSpawnAttackWavesForEnt(inst, math.random(-180, 180), nil, 9, 360, 12, "rogue_wave", 3, true)
         end,
 
         events =
@@ -426,7 +426,7 @@ local states =
             inst.components.locomotor.disable = false
             inst.AnimState:PlayAnimation("launch_down_pst")
             inst.components.combat:DoAreaAttack(inst, TIGERSHARK_SPLASH_RADIUS)
-            TroSpawnAttackWavesForEnt(inst, nil, math.random(-180, 180), 9, 360, 12, "rogue_wave", 3, true)
+            TroSpawnAttackWavesForEnt(inst, math.random(-180, 180), nil, 9, 360, 12, "rogue_wave", 3, true)
             inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_shark/splash_large")
             --            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_shark/splash_explode")
         end,
@@ -493,7 +493,7 @@ local states =
             TimeEvent(15 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_shark/water_attack")
                 inst.components.combat:DoAttack()
-                TroSpawnAttackWavesForEnt(inst, nil, math.random(-180, 180), 5, 110, 12, "rogue_wave", 3, true)
+                TroSpawnAttackWavesForEnt(inst, math.random(-180, 180), nil, 5, 110, 12, "rogue_wave", 3, true)
             end),
 
             TimeEvent(27 * FRAMES, function(inst)
@@ -762,7 +762,7 @@ CommonStates.AddRunStates(states,
                 --            end
             end),
             TimeEvent(0, function(inst)
-                TroSpawnAttackWavesForEnt(inst, nil, math.random(-180, 180), 2, 160, 12, "rogue_wave", 3, true)
+                TroSpawnAttackWavesForEnt(inst, math.random(-180, 180), nil, 2, 160, 12, "rogue_wave", 3, true)
             end),
             TimeEvent(9 * FRAMES,
                 function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_shark/run_down") end),
@@ -777,7 +777,7 @@ CommonStates.AddRunStates(states,
                 end
             end),
             TimeEvent(0, function(inst)
-                TroSpawnAttackWavesForEnt(inst, nil, math.random(-180, 180), 2, 160, 12, "rogue_wave", 3, true)
+                TroSpawnAttackWavesForEnt(inst, math.random(-180, 180), nil, 2, 160, 12, "rogue_wave", 3, true)
             end),
             TimeEvent(9 * FRAMES,
                 function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/tiger_shark/run_down") end),

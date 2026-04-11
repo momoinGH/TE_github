@@ -181,7 +181,7 @@ local states =
                     "dontstarve_DLC002/creatures/quacken/enter")
             end),
             TimeEvent(70 * FRAMES, function(inst)
-                TroSpawnAttackWavesForEnt(inst, nil, math.random(-180, 180), 9, 360, 5, "rogue_wave", 3, true)
+                TroSpawnAttackWavesForEnt(inst, math.random(-180, 180), nil, 9, 360, 5, "rogue_wave", 3, true)
             end),
         },
 

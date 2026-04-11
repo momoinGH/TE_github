@@ -351,7 +351,7 @@ local states =
         onupdate = function(inst, dt)
             inst.sg.statemem.wavetimer = inst.sg.statemem.wavetimer + dt
             if inst.sg.statemem.wavetimer >= inst.sg.statemem.wavetime and inst.sg.statemem.waves <= inst.sg.statemem.maxwaves then
-                TroSpawnAttackWavesForEnt(inst, nil, math.random(-180, 180), math.random(10, 15), 360, 6, "rogue_wave", 2, true)
+                TroSpawnAttackWavesForEnt(inst, math.random(-180, 180), nil, math.random(10, 15), 360, 6, "rogue_wave", 2, true)
                 inst.sg.statemem.waves = inst.sg.statemem.waves + 1
                 inst.sg.statemem.wavetimer = 0
             end
@@ -418,7 +418,7 @@ local states =
         onupdate = function(inst, dt)
             inst.sg.statemem.wavetimer = inst.sg.statemem.wavetimer + dt
             if inst.sg.statemem.wavetimer >= inst.sg.statemem.wavetime then
-                TroSpawnAttackWavesForEnt(inst, nil, math.random(-180, 180), math.random(11, 12), 360, 12, "rogue_wave", 3, true)
+                TroSpawnAttackWavesForEnt(inst, math.random(-180, 180), nil, math.random(11, 12), 360, 12, "rogue_wave", 3, true)
                 inst.sg.statemem.wavetimer = 0
             end
         end,
