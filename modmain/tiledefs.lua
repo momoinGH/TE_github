@@ -51,6 +51,9 @@ local tro_tiledefs = {
         },
     },
 
+    -- TODO 能添加吗
+    -- { GROUND.MANGROVE_SHORE, { name = "water_medium", noise_texture = "levels/textures/Ground_water_mangrove.tex", runsound = "run_marsh", walksound = "walk_marsh", snowsound = "run_snow", mudsound = "run_mud" } },
+
     -- 哈姆雷特莲花池
     LILYPOND = {
         tile_range       = TileRanges.TRO_OCEAN,

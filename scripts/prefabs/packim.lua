@@ -461,7 +461,7 @@ local function create_chester()
     MakeSmallBurnableCharacter(inst, "chester_body")
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("chester")
+    inst.components.container:WidgetSetup("packim")
     inst.components.container.onopenfn = OnOpen
     inst.components.container.onclosefn = OnClose
 
@@ -472,11 +472,6 @@ local function create_chester()
     inst.components.sleeper:SetWakeTest(ShouldWakeUp)
 
     inst:AddComponent("lootdropper")
-
-    --	inst:AddComponent("inventory")
-    --	inst.components.inventory.maxslots = 0
-    --	inst.components.inventory.nosteal = true
-    --	inst.components.inventory.acceptitems = false	
 
     inst:AddComponent("hunger")
     inst.components.hunger:SetMax(150)

@@ -126,18 +126,6 @@ end
 
 local overridesymbol_maps = {}
 
----对指定的OverrideSymbol参数进行重新映射，可针对每个预制件每个symbol映射到新的动画文件
----@param prefab_name string
----@param need_symbol string
----@param get_fn function 参数为(inst, swap_build, swap_symbol)，返回值为swap_build, swap_symbol
-function TroRemapOverrideSymbol(prefab_name, need_symbol, get_fn)
-    assert(type(prefab_name) == "string" and type(need_symbol) == "string" and type(get_fn) == "function")
-    overridesymbol_maps[prefab_name] = overridesymbol_maps[prefab_name] or {}
-    overridesymbol_maps[prefab_name][need_symbol] = get_fn
-end
-
-GLOBAL.TroRemapOverrideSymbol = TroRemapOverrideSymbol
-
 local OldOverrideSymbol = AnimState.OverrideSymbol
 function AnimState:OverrideSymbol(symbol, swap_build, swap_symbol, ...)
     local inst = _GetEntity(self)
@@ -146,6 +134,16 @@ function AnimState:OverrideSymbol(symbol, swap_build, swap_symbol, ...)
         swap_build, swap_symbol = get_fn(inst, swap_build, swap_symbol) --重新映射
     end
     return OldOverrideSymbol(self, symbol, swap_build, swap_symbol, ...)
+end
+
+---对指定的OverrideSymbol参数进行重新映射，可针对每个预制件每个symbol映射到新的动画文件
+---@param prefab_name string
+---@param need_symbol string
+---@param get_fn function 参数为(inst, swap_build, swap_symbol)，返回值为swap_build, swap_symbol
+function _G.TroRemapOverrideSymbol(prefab_name, need_symbol, get_fn)
+    assert(type(prefab_name) == "string" and type(need_symbol) == "string" and type(get_fn) == "function")
+    overridesymbol_maps[prefab_name] = overridesymbol_maps[prefab_name] or {}
+    overridesymbol_maps[prefab_name][need_symbol] = get_fn
 end
 
 return {

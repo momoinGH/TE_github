@@ -12,8 +12,6 @@ local function fn()
     MakeInventoryPhysics(inst)
     MakeInventoryFloatable(inst)
 
-
-
     inst.AnimState:SetBank("vine")
     inst.AnimState:SetBuild("vine")
     inst.AnimState:PlayAnimation("idle")
@@ -28,10 +26,6 @@ local function fn()
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
-    --inst:AddComponent("edible")
-    --inst.components.edible.foodtype = "WOOD"
-    --inst.components.edible.woodiness = 10
-
     inst:AddComponent("fuel")
     inst.components.fuel.fuelvalue = TUNING.MED_FUEL
 
@@ -40,7 +34,6 @@ local function fn()
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-
 
     return inst
 end

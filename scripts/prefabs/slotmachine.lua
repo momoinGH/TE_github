@@ -1917,10 +1917,6 @@ for name, data in pairs(internalloot) do
 	AddTreasureLoot(name, data)
 end
 
-local function GetTreasureLootDefinitionTable()
-	return TreasureLootList
-end
-
 local function GetTreasureLootDefinition(name)
 	return TreasureLootList[name]
 end
@@ -2002,27 +1998,6 @@ local prefabs =
 -- It's based off altar_prototyper.lua
 local goodspawns =
 {
-	--	log = 50,
-	--	twigs =50,
-	--	cutgrass = 50,
-	--	berries = 50,
-	--	limpets = 50,
-	--	meat = 50,
-	--	monstermeat = 50,
-	--	fish = 50,
-	--	meat_dried = 30,
-	--	seaweed = 50,
-	--	jellyfish = 20,
-	--	dubloon = 50,
-	--	redgem = 10,
-	--	bluegem = 10,
-	--	purplegem = 10,
-	--	goldnugget = 50,
-	--	snakeskin = 20,
-	--	spidergland = 20,
-	--	torch = 50,
-	--	coconut = 50,
-
 	-- Best Slot Loot List
 	slot_goldy = 1,
 	slot_10dubloons = 1,
@@ -2136,7 +2111,6 @@ local actions =
 	-- treasure = <the name in the TreasureLoot table>
 	-- overrides all other things
 
-
 	firestarter = { treasure = "firestarter", },
 	geologist = { treasure = "geologist", },
 	cutgrassbunch = { treasure = "3cutgrass", },
@@ -2161,8 +2135,6 @@ local actions =
 	slot_fisherman = { treasure = "slot_fisherman", },
 	slot_dapper = { treasure = "slot_dapper", },
 	slot_speed = { treasure = "slot_speed", },
-
-
 
 
 	slot_anotherspin = { treasure = "slot_anotherspin", },
@@ -2313,9 +2285,6 @@ local function DoneSpinning(inst)
 		local offset, check_angle, deflected = FindWalkableOffset(pos, math.random() * TWOPI, radius, 8, true, false) -- try to avoid walls
 		if offset then
 			if treasure then
-				-- print("Slot machine treasure "..tostring(treasure))
-				-- SpawnTreasureLoot(treasure, inst.components.lootdropper, pos+offset)
-				-- SpawnPrefab("collapse_small").Transform:SetPosition((pos+offset):Get())
 				SpawnReward(inst, treasure)
 			elseif func then
 				func(inst, item, doaction)
@@ -2323,7 +2292,6 @@ local function DoneSpinning(inst)
 				SpawnCritter(inst, "trinket_" .. tostring(math.random(NUM_TRINKETS)), inst.components.lootdropper,
 					pos + offset)
 			elseif item == "nothing" then
-				-- do nothing
 				-- print("Slot machine says you lose.")
 			else
 				-- print("Slot machine item "..tostring(item))
@@ -2394,11 +2362,9 @@ local function CreateSlotMachine(name)
 	local assets =
 	{
 		Asset("ANIM", "anim/slot_machine.zip"),
-		--Asset("MINIMAP_IMAGE", "slot_machine"),
 	}
 
-
-	local function InitFn(Sim)
+	local function InitFn()
 		local inst = CreateEntity()
 		inst.OnSave = OnSave
 		inst.OnLoad = OnLoad

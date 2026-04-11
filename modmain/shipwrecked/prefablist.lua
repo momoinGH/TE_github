@@ -1,8 +1,8 @@
 PrefabFiles = {
-    "venomgland",  --毒腺
-    "snakeoil",    --蛇油
+    "venomgland", --毒腺
+    "snakeoil",   --蛇油
 
-    "wallyintro",  --船只碎片
+    "wallyintro", --船只碎片
 
 
     "twister",               --豹卷风
@@ -308,5 +308,5 @@ PrefabFiles = {
     "seataro_planted",       --海芋头
     "seagullspawner",        --海鸥生成器
     "underwater_entrance",   --海底入口
-
+    "vine",                  --藤蔓
 }

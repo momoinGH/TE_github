@@ -638,7 +638,7 @@ local function fn8(Sim)
     return inst
 end
 
-local function fn9(Sim)
+local function fn9()
     local inst = CreateEntity()
     inst.entity:AddNetwork()
     local trans = inst.entity:AddTransform()

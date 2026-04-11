@@ -60,11 +60,13 @@ local need_data_events = {
     unequipped = true,
 }
 
+-- 这些都是科雷会销毁的
 local ignore_remove_events = {
     entitysleep = true,
     animover = true,
     timerdone = true,
     animqueueover = true,
+    on_landed = true,
 }
 
 local OldPushEvent = EntityScript.PushEvent

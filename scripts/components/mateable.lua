@@ -14,8 +14,12 @@ local function TryToSpawn(inst)
         return --周围有很多就不生了
     end
 
+    if inst:GetIsOnWater() then
+        return --海上不繁殖
+    end
+
     for _, v in ipairs(TheSim:FindEntities(x, y, z, 15, { "doydoy" }, nomatingtags)) do
-        if v ~= inst and not v.components.inventoryitem:IsHeld() then
+        if v ~= inst and not v.components.inventoryitem:IsHeld() and not v:GetIsOnWater() then
             -- 随便分配个公母
             inst.components.mateable:SetPartner(v, true)
             v.components.mateable:SetPartner(inst, false)

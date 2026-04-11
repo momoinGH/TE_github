@@ -1,3 +1,8 @@
+--[[
+海难海鱼的逻辑和联机的不一样，没有水下的动画，还得用其他鱼的，所以需要频繁的设置bank、build
+可惜科雷更新就容易报错了
+]]
+
 require("stategraphs/commonstates")
 
 local actionhandlers =
@@ -13,7 +18,7 @@ local events =
 {
     CommonHandlers.OnLocomote(true, true),
     EventHandler("dobreach", function(inst, data)
-        if not inst.sg:HasStateTag("jumping") then
+        if not inst.sg:HasStateTag("jumping") and (inst.food_target == nil or not inst.food_target:HasTag("oceantrawler")) then
             inst.sg:GoToState("breach")
         end
     end),
@@ -27,6 +32,11 @@ local events =
             inst.sg:GoToState("breach")
         end
         inst.leaving = true
+    end),
+    EventHandler("putoutfire", function(inst, data)
+        if not inst.sg:HasStateTag("jumping") and not inst.sg:HasStateTag("busy") then
+            inst.sg:GoToState("shoot", { fire_pos = data.firePos })
+        end
     end),
 }
 
@@ -42,159 +52,35 @@ local function IsUnderBoat(inst)
     return inst.sg.statemem.underboat
 end
 
+-- 在出水和入水时再修改动画bank和build
 local function SetBreaching(inst, is_in_air)
     if is_in_air then
         inst.Transform:SetTwoFaced()
         inst.AnimState:SetSortOrder(0)
         inst.AnimState:SetLayer(LAYER_WORLD)
+        if inst.Light then
+            inst.Light:Enable(true)
+        end
+        inst.AnimState:SetBank(inst.bank)
+        inst.AnimState:SetBuild(inst.build)
     else
         inst.Transform:SetSixFaced()
         inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
-        inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
+        inst.AnimState:SetLayer(LAYER_WIP_BELOW_OCEAN)
+        if inst.Light then
+            inst.Light:Enable(false)
+        end
+        inst.AnimState:SetBank(inst.oceanbank)
+        inst.AnimState:SetBuild(inst.oceanbuild)
     end
 end
 
 local states =
 {
     State {
-        name = "run_start",
-        tags = { "moving", "running", "canrotate" },
-
-        onenter = function(inst)
-            inst.components.locomotor:RunForward()
-            inst.AnimState:SetBank(inst.oceanbank)
-            inst.AnimState:SetBuild(inst.oceanbuild)
-            inst.Transform:SetSixFaced()
-            inst.AnimState:PlayAnimation("run_pre")
-            inst.sg.mem.foosteps = 0
-        end,
-
-        onupdate = function(inst)
-            inst.components.locomotor:RunForward()
-        end,
-
-        events =
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("run") end),
-        },
-
-    },
-
-    State {
-        name = "run",
-        tags = { "moving", "running", "canrotate" },
-
-        onenter = function(inst)
-            inst.components.locomotor:RunForward()
-            inst.AnimState:SetBank(inst.oceanbank)
-            inst.AnimState:SetBuild(inst.oceanbuild)
-            inst.Transform:SetSixFaced()
-            inst.AnimState:PlayAnimation("run_loop")
-        end,
-
-        onupdate = function(inst)
-            inst.components.locomotor:RunForward()
-        end,
-
-        events =
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("run") end),
-        },
-    },
-
-    State {
-
-        name = "run_stop",
-        tags = { "canrotate", "idle" },
-
-        onenter = function(inst)
-            inst.Physics:Stop()
-            inst.AnimState:SetBank(inst.oceanbank)
-            inst.AnimState:SetBuild(inst.oceanbuild)
-            inst.Transform:SetSixFaced()
-            inst.AnimState:PlayAnimation("run_pst")
-        end,
-
-        events =
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-        },
-
-    },
-
-
-    State {
-        name = "walk_start",
-        tags = { "moving", "canrotate" },
-
-        onenter = function(inst)
-            inst.components.locomotor:WalkForward()
-            inst.AnimState:SetBank(inst.oceanbank)
-            inst.AnimState:SetBuild(inst.oceanbuild)
-            inst.Transform:SetSixFaced()
-            inst.AnimState:PlayAnimation("run_pre")
-        end,
-
-        timeline = nil,
-
-        events =
-        {
-            EventHandler("animover", function(inst) if inst.AnimState:AnimDone() then inst.sg:GoToState("walk") end end),
-        },
-
-    },
-
-    State {
-        name = "walk",
-        tags = { "moving", "canrotate" },
-
-        onenter = function(inst)
-            inst.components.locomotor:WalkForward()
-            inst.AnimState:SetBank(inst.oceanbank)
-            inst.AnimState:SetBuild(inst.oceanbuild)
-            inst.Transform:SetSixFaced()
-            inst.AnimState:PlayAnimation("run_loop")
-            inst.sg:SetTimeout(inst.AnimState:GetCurrentAnimationLength())
-        end,
-
-        timeline = nil,
-
-        events =
-        {
-            EventHandler("animover", function(inst) if inst.AnimState:AnimDone() then inst.sg:GoToState("walk") end end),
-        },
-
-    },
-
-
-    State {
-
-        name = "walk_stop",
-        tags = { "canrotate" },
-
-        onenter = function(inst)
-            inst.Physics:Stop()
-            inst.AnimState:SetBank(inst.oceanbank)
-            inst.AnimState:SetBuild(inst.oceanbuild)
-            inst.Transform:SetSixFaced()
-            inst.AnimState:PlayAnimation("run_pst")
-        end,
-
-        events =
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-        },
-
-    },
-
-
-    State {
         name = "idle",
         tags = { "idle", "canrotate" },
         onenter = function(inst)
-            inst.AnimState:SetBank(inst.oceanbank)
-            inst.AnimState:SetBuild(inst.oceanbuild)
-            inst.Transform:SetSixFaced()
             inst.AnimState:PlayAnimation("idle_loop", true)
             if inst.timetoleave then
                 inst.sg:GoToState("leave")
@@ -207,9 +93,6 @@ local states =
         tags = { "busy", "canrotate" },
         onenter = function(inst)
             inst.components.locomotor:Stop()
-            inst.AnimState:SetBank(inst.oceanbank)
-            inst.AnimState:SetBuild(inst.oceanbuild)
-            inst.Transform:SetSixFaced()
             inst.AnimState:PlayAnimation("spawn_in")
         end,
 
@@ -223,9 +106,6 @@ local states =
         name = "leave",
         tags = { "busy" },
         onenter = function(inst)
-            inst.AnimState:SetBank(inst.oceanbank)
-            inst.AnimState:SetBuild(inst.oceanbuild)
-            inst.Transform:SetSixFaced()
             inst.AnimState:PlayAnimation("spawn_out")
             inst.persists = false
         end,
@@ -248,12 +128,11 @@ local states =
             end
 
             inst.components.locomotor:Stop()
-            inst.AnimState:SetBank(inst.build)
-            inst.AnimState:SetBuild(inst.build)
-            inst.Transform:SetTwoFaced()
-            inst.AnimState:PlayAnimation("breach")
-            SetBreaching(inst, true)
-            SpawnSplashFx(inst)
+            if inst.food_target == nil or not inst.food_target:HasTag("oceantrawler") then
+                SetBreaching(inst, true)
+                inst.AnimState:PlayAnimation("breach")
+                SpawnSplashFx(inst)
+            end
 
             inst:PerformBufferedAction()
         end,
@@ -285,9 +164,6 @@ local states =
 
         onenter = function(inst)
             inst.components.locomotor:Stop()
-            inst.AnimState:SetBank(inst.oceanbank)
-            inst.AnimState:SetBuild(inst.oceanbuild)
-            inst.Transform:SetSixFaced()
             inst.AnimState:PlayAnimation("struggle_pre")
             inst:PerformBufferedAction()
         end,
@@ -312,9 +188,6 @@ local states =
 
         onenter = function(inst)
             inst.components.locomotor:Stop()
-            inst.AnimState:SetBank(inst.oceanbank)
-            inst.AnimState:SetBuild(inst.oceanbuild)
-            inst.Transform:SetSixFaced()
             inst.AnimState:PlayAnimation("struggle_loop", true)
             inst.sg:SetTimeout(inst.fish_def.set_hook_time.base + math.random() * inst.fish_def.set_hook_time.var)
         end,
@@ -353,16 +226,10 @@ local states =
             inst.components.locomotor:Stop()
             inst.sg.statemem.underboat = IsUnderBoat(inst)
             if inst.sg.statemem.underboat then
-                inst.AnimState:SetBank(inst.oceanbank)
-                inst.AnimState:SetBuild(inst.oceanbuild)
-                inst.Transform:SetSixFaced()
                 inst.AnimState:PlayAnimation("idle")
             else
-                --				inst.AnimState:PlayAnimation("struggle_to_breach")
-                inst.AnimState:SetBank(inst.build)
-                inst.AnimState:SetBuild(inst.build)
-                inst.Transform:SetTwoFaced()
-                inst.AnimState:PlayAnimation("breach", false)
+                inst.AnimState:PlayAnimation("struggle_to_breach")
+                inst.AnimState:PushAnimation("breach", false)
             end
         end,
 
@@ -414,12 +281,8 @@ local states =
             end
 
             inst.components.locomotor:Stop()
-            inst.AnimState:SetBank(inst.build)
-            inst.AnimState:SetBuild(inst.build)
-            inst.Transform:SetTwoFaced()
-            inst.AnimState:PlayAnimation("breach", false)
-            --            inst.AnimState:PlayAnimation("breach_pre", false)
-            --            inst.AnimState:PushAnimation("breach", false)
+            inst.AnimState:PlayAnimation("breach_pre", false)
+            inst.AnimState:PushAnimation("breach", false)
         end,
 
         timeline =
@@ -459,13 +322,54 @@ local states =
         onenter = function(inst)
             SpawnSplashFx(inst)
             inst.components.locomotor:Stop()
-            inst.AnimState:SetBank(inst.build)
-            inst.AnimState:SetBuild(inst.build)
-            inst.Transform:SetTwoFaced()
             inst.AnimState:PlayAnimation("catching_loop", true)
         end,
     },
 
+    State {
+        name = "shoot",
+        tags = { "busy", "shooting", "jumping" },
+
+        onenter = function(inst, data)
+            if IsUnderBoat(inst) then
+                inst.sg:GoToState("idle")
+                return
+            end
+
+            inst.AnimState:PlayAnimation("spit")
+            inst.SoundEmitter:PlaySound("turnoftides/common/together/water/splash/jump_small", nil, .25)
+
+            inst.sg.statemem.fire_pos = data.fire_pos
+        end,
+
+        timeline =
+        {
+            TimeEvent(6 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/firesupressor_shoot")
+                inst:LaunchProjectile(inst.sg.statemem.fire_pos)
+
+                SpawnSplashFx(inst)
+                SetBreaching(inst, true)
+            end),
+            TimeEvent(25 * FRAMES, function(inst)
+                inst.components.firedetector:DetectFire()
+            end),
+        },
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("idle")
+            end),
+        },
+
+        onexit = function(inst)
+            SetBreaching(inst, false)
+        end,
+    },
 }
 
-return StateGraph("sgoceanfishsw", states, events, "idle", actionhandlers)
+CommonStates.AddWalkStates(states)
+CommonStates.AddRunStates(states)
+
+return StateGraph("sgoceanfish", states, events, "idle", actionhandlers)
