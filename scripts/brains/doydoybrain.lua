@@ -104,56 +104,10 @@ local function StealFoodAction(inst) --Look for things to take food from (EatFoo
     end
 end
 
-local function CanMate(doy)
-    if doy == nil then
-        return false
-    end
-
-    --	if not TheWorld.state.isday then
-    --		return false
-    --	end
-
-    if doy.components.inventoryitem and doy.components.inventoryitem:IsHeld() then
-        return false
-    end
-
-    if doy:IsAsleep() then
-        return false
-    end
-
-    if doy.components.sleeper and doy.components.sleeper:IsAsleep() then
-        return false
-    end
-
-    --计算时间间隔
-    if doy.day_to_spawn and doy.day_to_spawn > 0 then
-        return false
-    end
-
-    return true
-end
-
 local function MateAction(inst)
-    --渡渡鸟总数量限制
-    local x, y, z = inst.Transform:GetWorldPosition()
-    if #TheSim:FindEntities(x, y, z, 30, { "doydoy" }) > 20 then
-        return
-    end
-
-    if CanMate(inst) and inst:HasTag("daddy") then
-        local parceira = GetClosestInstWithTag("mommy", inst, 4)
-        if not parceira then return false end
-        if parceira and parceira.components.inventoryitem and parceira.components.inventoryitem:IsHeld() then return false end
-
-        local pt = inst:GetPosition()
-        local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, SEE_STRUCTURE_DIST, { "mommy" })
-        for k, item in pairs(ents) do
-            if CanMate(item) then
-                inst.sg:GoToState("mate")
-                inst.day_to_spawn = 2
-                item.day_to_spawn = 2
-            end
-        end
+    local partner = inst.components.mateable:GetPartner()
+    if partner and not partner.sg:HasStateTag("sleeping") then --不能在睡觉
+        return BufferedAction(inst, partner, ACTIONS.MATE, nil, nil, nil, TUNING.DOYDOY_MATING_DANCE_DIST)
     end
 end
 

@@ -1,7 +1,3 @@
-local function GetTotalTime()
-    return (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME
-end
-
 local function RemoveSpawnCooldown(self)
     if self.spawn_cd_task then
         self.spawn_cd_task:Cancel()
@@ -79,18 +75,18 @@ local function OnPlayerJoined(self, player)
             self.next_spawn_time = self.first_spawn_time
         end
         if not self.next_spawn_time then
-            self.next_spawn_time = GetTotalTime() + FunctionOrValue(self.spawn_interval, self.inst)
+            self.next_spawn_time = TroGetTotalTime() + FunctionOrValue(self.spawn_interval, self.inst)
         end
     end
-    self.next_spawn_time = math.max(self.next_spawn_time, GetTotalTime() + math.random(5, 10)) --给点保护时间
+    self.next_spawn_time = math.max(self.next_spawn_time, TroGetTotalTime() + math.random(5, 10)) --给点保护时间
 
-    if GetTotalTime() >= self.next_spawn_time then
+    if TroGetTotalTime() >= self.next_spawn_time then
         --可以生成
         StartSpawn(self)
     else
         --冷却中
         if not self.spawn_cd_task then
-            local time = self.next_spawn_time - GetTotalTime()
+            local time = self.next_spawn_time - TroGetTotalTime()
             self.spawn_cd_task = self.inst:DoTaskInTime(time, OnSpawnCDDone, self)
         end
     end
@@ -100,7 +96,7 @@ local function OnEntRemove(self, ent)
     self.all_ents[ent] = nil
     if not self.spawn_cd_task and GetTableSize(self.all_ents) < self.max_count then
         local time = FunctionOrValue(self.spawn_interval, self.inst)
-        self.next_spawn_time = GetTotalTime() + time
+        self.next_spawn_time = TroGetTotalTime() + time
         self.spawn_cd_task = self.inst:DoTaskInTime(time, OnSpawnCDDone, self)
     end
 end

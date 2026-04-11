@@ -31,26 +31,6 @@ local function OnWorldEntsSpawned()
             end
         end
     end
-
-
-    print("给世界上的渡渡鸟分配公母")
-    local doydoy_count = 0
-    for guid, ent in pairs(Ents) do
-        if ent.prefab == "doydoy" then
-            doydoy_count = doydoy_count + 1
-            if math.fmod(doydoy_count, 2) == 0 then
-                ent:AddTag("daddy")
-                ent.components.named:SetName("Doydoy(M)")
-            else
-                ent:AddTag("mommy")
-                ent.components.named:SetName("DoyDoy(F)")
-            end
-        end
-    end
-
-
-    -- OCEAN_COASTAL
-    -- print("替换海洋地皮为联机海洋地皮")
 end
 
 

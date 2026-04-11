@@ -39,6 +39,11 @@ function EntityScript:TroGetPlayerClassifiedNetVar(name)
 end
 
 ----------------------------------------------------------------------------------------------------
+-- 是不是在水上
+function EntityScript:GetIsOnWater(allow_boats)
+    local x, y, z = self.Transform:GetWorldPosition()
+    return TheWorld.Map:IsOceanAtPoint(x, y, z, allow_boats)
+end
 
 -- 我们mod定义的区域，海难、哈姆雷特、火山、热带等等
 function EntityScript:IsInTropicalArea()

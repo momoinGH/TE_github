@@ -9,56 +9,38 @@ local assets_baby =
     Asset("INV_IMAGE", "doydoy_teen"),
 }
 
-local function InitAnimationFromPosition(inst)
-    if inst.components.inventoryitem and inst.components.inventoryitem.owner then return end
 
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-    if ground == WORLD_TILES.OCEAN_COASTAL or
-        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        ground == WORLD_TILES.OCEAN_SWELL or
-        ground == WORLD_TILES.OCEAN_ROUGH or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        ground == WORLD_TILES.OCEAN_WATERLOG or
-        ground == WORLD_TILES.OCEAN_HAZARDOUS then
+local function InitAnimationFromPosition(inst)
+    if inst.components.inventoryitem.owner then return end
+
+    if inst:GetIsOnWater() then
         inst.onwater = true
         inst.components.inventoryitem.canbepickedup = true
-
         inst.sg:GoToState("idle_water")
     end
 end
 
 local function ondropped(inst)
-    local map = TheWorld.Map
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-    if ground == WORLD_TILES.OCEAN_COASTAL or
-        ground == WORLD_TILES.OCEAN_COASTAL_SHORE or
-        ground == WORLD_TILES.OCEAN_SWELL or
-        ground == WORLD_TILES.OCEAN_ROUGH or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL or
-        ground == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or
-        ground == WORLD_TILES.OCEAN_WATERLOG or
-        ground == WORLD_TILES.OCEAN_HAZARDOUS then
+    if not inst:GetIsOnWater() then
+        if not inst.components.sleeper then
+            inst:AddComponent("sleeper")
+        end
+        inst.components.sleeper:GoToSleep()
+
+        inst.onwater = false
+    else
         if inst:HasTag("baby") then
-            local bolha = SpawnPrefab("frogsplash")
-            bolha.Transform:SetPosition(x, y, z)
+            local splash = SpawnPrefab("frogsplash")
+            splash.Transform:SetPosition(inst.Transform:GetWorldPosition())
             inst:Remove()
         else
             inst:RemoveComponent("sleeper")
+            inst.onwater = true
             inst.components.inventoryitem.canbepickedup = true
+
             inst.sg:GoToState("idle_water")
-            return
         end
     end
-
-    inst:AddTag("mating")
-    if not inst.components.sleeper then
-        inst:AddComponent("sleeper")
-    end
-    inst.components.sleeper:GoToSleep()
 end
 
 
@@ -215,7 +197,6 @@ local function OnEntityWake(inst)
         local grown = SpawnPrefab("doydoy")
         grown.Transform:SetPosition(inst.Transform:GetWorldPosition())
         grown.Transform:SetRotation(inst.Transform:GetRotation())
-
         inst:Remove()
     end
 end
@@ -224,11 +205,12 @@ local function CanEatFn(inst, food)
     return food.prefab ~= "doydoyegg" and food.prefab ~= "doydoyegg_cooked" and food.prefab ~= "doydoyegg_cracked"
 end
 
-local function commonfn(Sim)
+local function commonfn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     local shadow = inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
 
@@ -254,9 +236,8 @@ local function commonfn(Sim)
         return inst
     end
     inst:AddComponent("talker")
+
     inst:AddComponent("inventoryitem")
-
-
     inst.components.inventoryitem.nobounce = true
     inst.components.inventoryitem.canbepickedup = false
     inst.components.inventoryitem.longpickup = true
@@ -265,11 +246,8 @@ local function commonfn(Sim)
     inst:AddComponent("health")
     inst:AddComponent("sizetweener")
     inst:AddComponent("sleeper")
-
     inst:AddComponent("lootdropper")
-
     inst:AddComponent("inspectable")
-
     inst:AddComponent("inventory")
     inst:AddComponent("entitytracker")
 
@@ -284,16 +262,11 @@ local function commonfn(Sim)
 
 
     inst:AddComponent("locomotor")
-
-
     inst:AddComponent("combat")
 
     inst:ListenForEvent("gotosleep", function(inst) inst.components.inventoryitem.canbepickedup = true end)
     inst:ListenForEvent("onwakeup", function(inst)
         inst.components.inventoryitem.canbepickedup = false
-        if inst.day_to_spawn then
-            inst.day_to_spawn = inst.day_to_spawn - 1
-        end
     end)
 
     return inst
@@ -346,44 +319,14 @@ local function babyfn(Sim)
     return inst
 end
 
-local function onpreload(inst, data)
-    if data then
-        if data.day_to_spawn then
-            inst.day_to_spawn = data.day_to_spawn
-        end
-        if data.hastag_mating then
-            inst:AddTag("mating")
-        end
-        if data.hastag_daddy then
-            inst:AddTag("daddy")
-        end
-        if data.hastag_mommy then
-            inst:AddTag("mommy")
-        end
-    end
-end
-
-local function onsave(inst, data)
-    data.day_to_spawn = inst.day_to_spawn
-    data.hastag_mating = inst:HasTag("mating")
-    data.hastag_daddy = inst:HasTag("daddy")
-    data.hastag_mommy = inst:HasTag("mommy")
-end
-
-local function adultfn(Sim)
-    local inst = commonfn(Sim)
-
-    inst.OnSave = onsave
-    inst.OnPreLoad = onpreload
+local function adultfn()
+    local inst = commonfn()
 
     MakeInventoryFloatable(inst, "large", 0.8, { 0.8, 0.8, 0.8 })
 
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst:AddTag("mating")
-    inst.day_to_spawn = 0
 
     inst.AnimState:SetBank("doydoy")
     inst.AnimState:SetBuild("doydoy_adult_build")
@@ -406,6 +349,8 @@ local function adultfn(Sim)
     inst:SetBrain(brain)
 
     inst:AddComponent("named")
+
+    inst:AddComponent("mateable")
 
     inst:DoTaskInTime(0, InitAnimationFromPosition)
 

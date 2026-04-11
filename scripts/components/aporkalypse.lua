@@ -1,7 +1,3 @@
-local function GetTotalTime()
-    return (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME
-end
-
 local function SpawnHerald(src, player, count)
     if not player:TroIsAporkalypse() then return end
     if IsEntityDeadOrGhost(player) then return end
@@ -63,9 +59,9 @@ local Aporkalypse = Class(function(self, inst)
     self.fiesta_duration = 5 * TUNING.TOTAL_DAY_TIME
 
     self.inst:ListenForEvent("clocktick", function(inst, data)
-        if GetTotalTime() - self.begin_date >= 20 * TUNING.TOTAL_DAY_TIME then --这里让他20天自动结束
+        if TroGetTotalTime() - self.begin_date >= 20 * TUNING.TOTAL_DAY_TIME then --这里让他20天自动结束
             self:EndAporkalypse()
-        elseif GetTotalTime() >= self.begin_date then
+        elseif TroGetTotalTime() >= self.begin_date then
             self:BeginAporkalypse()
         end
     end, TheWorld)
@@ -77,7 +73,7 @@ function Aporkalypse:OnSave()
         aporkalypse_active = self.aporkalypse_active,
         fiesta_active = self.fiesta_active,
         fiesta_begin_date = self.fiesta_begin_date,
-        fiesta_elapsed = GetTotalTime() - self.fiesta_begin_date
+        fiesta_elapsed = TroGetTotalTime() - self.fiesta_begin_date
     }
     local refs = {}
 
@@ -118,7 +114,7 @@ end
 
 -- 调整大灾变时间
 function Aporkalypse:ScheduleAporkalypse(date)
-    local delta = date - GetTotalTime()
+    local delta = date - TroGetTotalTime()
     local daytime = 60 * TUNING.TOTAL_DAY_TIME
     while delta > daytime do
         delta = delta % daytime
@@ -126,7 +122,7 @@ function Aporkalypse:ScheduleAporkalypse(date)
     while delta < 0 do
         delta = delta + daytime
     end
-    self.begin_date = GetTotalTime() + delta
+    self.begin_date = TroGetTotalTime() + delta
 end
 
 -- 开始大灾变
@@ -147,7 +143,7 @@ end
 -- 开始庆典
 function Aporkalypse:BeginFiesta()
     self.fiesta_active = true
-    self.fiesta_begin_date = GetTotalTime()
+    self.fiesta_begin_date = TroGetTotalTime()
     self.inst:PushEvent("beginfiesta")
     self.fiesta_task = self.inst:DoTaskInTime(self.fiesta_duration, function() self:EndFiesta() end)
 end
@@ -168,19 +164,19 @@ function Aporkalypse:EndAporkalypse()
     end
 
     --检查是否需要开始庆典
-    local aporkalypse_duration = (GetTotalTime() - self.begin_date) / TUNING.TOTAL_DAY_TIME
+    local aporkalypse_duration = (TroGetTotalTime() - self.begin_date) / TUNING.TOTAL_DAY_TIME
     if aporkalypse_duration >= 2 then
         self:BeginFiesta()
     end
 
     -- Schedule the next one!
-    self:ScheduleAporkalypse(GetTotalTime() + (60 * TUNING.TOTAL_DAY_TIME))
+    self:ScheduleAporkalypse(TroGetTotalTime() + (60 * TUNING.TOTAL_DAY_TIME))
     self.inst:PushEvent("endaporkalypse") --相关实体会在这个事件里处理
 end
 
 function Aporkalypse:IsNear()
     local near_days = 7
-    return self.begin_date - GetTotalTime() < near_days * TUNING.TOTAL_DAY_TIME
+    return self.begin_date - TroGetTotalTime() < near_days * TUNING.TOTAL_DAY_TIME
 end
 
 function Aporkalypse:GetBeginDate() return self.begin_date end

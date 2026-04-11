@@ -221,3 +221,8 @@ function _G.TroGetPlayerById(userid)
         end
     end
 end
+
+-- 世界经过的总时间
+function _G.TroGetTotalTime()
+    return (TheWorld.state.cycles + TheWorld.state.time) * TUNING.TOTAL_DAY_TIME
+end

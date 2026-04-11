@@ -89,6 +89,7 @@ TroAddAction(nil, "TIGERSHARK_FEED", STRINGS.ACTIONS.TIGERSHARK_FEED, function(a
     end
 end)
 
+-- 渡渡鸟繁殖
 TroAddAction(nil, "MATE", STRINGS.ACTIONS.MATE, function(act)
     if act.target == act.doer then
         return false
