@@ -79,7 +79,7 @@ return {
 	  
         {
           name = "",
-          type = "bishopwaterfixo",
+                    type = "bishop",
           shape = "rectangle",
           x = 700,
           y = 700,
@@ -91,7 +91,7 @@ return {
 
         {
           name = "",
-          type = "bishopwaterfixo",
+                    type = "bishop",
           shape = "rectangle",
           x = 900,
           y = 900,

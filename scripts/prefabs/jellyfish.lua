@@ -25,11 +25,6 @@ local function playshockanim(inst)
         inst.AnimState:PushAnimation("idle_ground", true)
         inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/jellyfish/electric_land")
     end
-    --[[local pclose = GetClosestInstWithTag("player", inst, 2)
-    if pclose and pclose.components.health then
-        pclose.components.health:DoDelta(-5)
-        pclose.sg:GoToState("electrocute")
-    end]]
 end
 
 local function playDeadAnimation(inst)
@@ -39,24 +34,19 @@ local function playDeadAnimation(inst)
 end
 
 local function ondropped(inst)
-    local map = TheWorld.Map
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-
-    if TileGroupManager:IsOceanTile(ground) then
-        --if not inst.replica.inventoryitem:IsHeld() then
+    if TheWorld.Map:IsOceanAtPoint(x, y, z) then
         local replacement = SpawnPrefab("jellyfish_planted")
         replacement.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        inst:Remove()
     else
         local replacement = SpawnPrefab("jellyfish_dead")
         replacement.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        replacement.AnimState:PlayAnimation("stunned_loop", true)
+        replacement.AnimState:PlayAnimation("death_ground", true)
         replacement:DoTaskInTime(2.5, playDeadAnimation)
         replacement.shocktask = replacement:DoPeriodicTask(math.random() * 10 + 5, playshockanim)
         replacement:AddTag("stinger")
-        inst:Remove()
     end
+    inst:DoTaskInTime(0, inst.Remove)
 end
 
 local function onpickup(inst, pickupguy)
@@ -76,13 +66,10 @@ local function onpickup(inst, pickupguy)
     end
 end
 
-local JELLYFISH_WEIGHTS = {
-    min = 61.55,
-    max = 90.11,
-}
 
-local function defaultfn(sim)
+local function defaultfn()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddNetwork()
     inst.entity:AddSoundEmitter()
@@ -95,9 +82,6 @@ local function defaultfn(sim)
     inst.AnimState:SetBank("jellyfish")
     inst.AnimState:SetBuild("jellyfish")
     inst.AnimState:PlayAnimation("idle_ground", true)
-
-    --inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    --inst.AnimState:SetSortOrder(3)
 
     inst:AddTag("show_spoilage")
     inst:AddTag("jellyfish")
@@ -127,7 +111,6 @@ local function defaultfn(sim)
 
     inst:AddComponent("tradable")
     inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
-    --inst.components.tradable.dubloonvalue = TUNING.DUBLOON_VALUES.SEAFOOD
 
     inst:AddComponent("cookable")
     inst.components.cookable.product = "jellyfish_cooked"
@@ -137,11 +120,6 @@ local function defaultfn(sim)
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({ "jellyfish_dead" }) --Replace with dead jelly
-
-    --[[inst:AddComponent("weighable")
-	inst.components.weighable.type = TROPHYSCALE_TYPES.FISH
-	inst.components.weighable:Initialize(JELLYFISH_WEIGHTS.min, JELLYFISH_WEIGHTS.max)
-	inst.components.weighable:SetWeight(Lerp(JELLYFISH_WEIGHTS.min, JELLYFISH_WEIGHTS.max, CalcNewSize()))]]
 
     MakeHauntableLaunchAndPerish(inst)
 

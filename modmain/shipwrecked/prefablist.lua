@@ -1,7 +1,6 @@
 PrefabFiles = {
     "venomgland",  --毒腺
     "snakeoil",    --蛇油
-    "bishopwater", --浮船主教
 
     "wallyintro",  --船只碎片
 
@@ -219,37 +218,36 @@ PrefabFiles = {
     "coconut",     --椰子
 
 
-    "crab",              --兔蟹
-    "crabhole",          --兔蟹洞
-    "treeguard",         --椰树守卫
-    "treeguard_coconut", --椰树守卫投掷物
-    "slotmachine",       --老虎机
-    "bush_vine",         --藤蔓丛
-    "primeape",          --猿猴
-    "primeapebarrel",    --猿猴小窝
-    "monkeyball",        --逗猴球
-    "icemaker",          --制冰机 3000
-    "packim",            --鹈鹕
-    "packim_fishbone",   --鱼骨
-    "tunacan",           --金枪鱼罐头
-    "wave_ripple",       --海浪
-    "ashfx",             --灰烬特效
-    "firerain",          --天降龙蛋
-    "mermhouse_fisher",  --渔人小屋
-    "fabric",            --布料
-    "coral",             --珊瑚
-    "seaweed_planted",   --海带
-    "seaweed",           --海带
-    "wreck",             --残骸
-    "fishinhole",        --鱼群
-    "octopusking",       --章鱼王
-    "octopuschest", --章鱼王的箱子
+    "crab",                    --兔蟹
+    "crabhole",                --兔蟹洞
+    "treeguard",               --椰树守卫
+    "treeguard_coconut",       --椰树守卫投掷物
+    "slotmachine",             --老虎机
+    "bush_vine",               --藤蔓丛
+    "primeape",                --猿猴
+    "primeapebarrel",          --猿猴小窝
+    "monkeyball",              --逗猴球
+    "icemaker",                --制冰机 3000
+    "packim",                  --鹈鹕
+    "packim_fishbone",         --鱼骨
+    "tunacan",                 --金枪鱼罐头
+    "wave_ripple",             --海浪
+    "ashfx",                   --灰烬特效
+    "firerain",                --天降龙蛋
+    "mermhouse_fisher",        --渔人小屋
+    "fabric",                  --布料
+    "coral",                   --珊瑚
+    "seaweed_planted",         --海带
+    "seaweed",                 --海带
+    "wreck",                   --残骸
+    "fishinhole",              --鱼群
+    "octopusking",             --章鱼王
+    "octopuschest",            --章鱼王的箱子
 
-    "kraken_tentacle",   --海妖触手
-    "kraken_projectile", --黏墨球
-    "kraken",            --海妖
-    "kraken_spawner",    --海妖的刷新点
-
+    "kraken_tentacle",         --海妖触手
+    "kraken_projectile",       --黏墨球
+    "kraken",                  --海妖
+    "kraken_spawner",          --海妖的刷新点
 
     "solofish",                --狗鱼
     "swordfish",               --剑鱼
@@ -288,7 +286,6 @@ PrefabFiles = {
     "ox_wool",               --水牛毛
     "spearsw",               --矛
     "rookwater",             --发条战船
-    "shipwrecked_bishop",    --发条主教
     "whaletrack",            --可疑的气泡
 
     "shipwrecked_flood",     --水坑

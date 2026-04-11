@@ -15,14 +15,10 @@ local function OnHit(inst, attacker)
     end
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/seacreature_movement/splash_large")
 
-    if inst.prefab == "kraken_projectile" then
-        ReplacePrefab(inst, "kraken_inkpatch")
-    else
-        local ent = ReplacePrefab(inst, "jellyfish") --水母
-        if not TheWorld.Map:IsSurroundedByWater(x, y, z, 2) then
-            ent:PushEvent("on_landed")
-        end
-    end
+    SpawnAt("kraken_inkpatch", inst)       --减速区
+    local ent = SpawnAt("jellyfish", inst) --水母
+    ent:PushEvent("on_landed")             --刷新一下动画
+    inst:Remove()
 end
 
 local function onremove(inst)
@@ -68,43 +64,6 @@ local function fn()
 
     return inst
 end
-
-local function fn2()
-    local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    inst.AnimState:SetBank("jellyfish")
-    inst.AnimState:SetBuild("jellyfish")
-    inst.AnimState:PlayAnimation("stunned_loop", true)
-
-    inst:AddTag("thrown")
-    inst:AddTag("projectile")
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    MakeInventoryPhysics(inst)
-
-    inst:AddComponent("complexprojectile")
-    inst.components.complexprojectile:SetOnHit(OnHit)
-    inst.components.complexprojectile:SetLaunchOffset(Vector3(0, 7, 0))
-    inst.components.complexprojectile:SetHorizontalSpeed(25)
-    inst.components.complexprojectile:SetGravity(-30)
-
-    inst.OnRemoveEntity = onremove
-    inst:DoTaskInTime(4, function(inst) inst:Remove() end)
-
-    inst.persists = false
-
-    return inst
-end
-
 
 local function updateslowdowners(inst, range)
     local ground = TheWorld
@@ -239,5 +198,4 @@ local function inkpatch_fn()
 end
 
 return Prefab("kraken_projectile", fn, assets, prefabs),
-    Prefab("kraken_projectile2", fn2, assets, prefabs),
     Prefab("kraken_inkpatch", inkpatch_fn)

@@ -315,10 +315,16 @@ local function fn()
     inst:AddComponent("sanityaura")
     inst:AddComponent("locomotor")
 
-
     inst:AddComponent("minionspawner")
-    inst.components.minionspawner.validtiletypes = { WORLD_TILES.UNDERWATER_SANDY, WORLD_TILES.UNDERWATER_ROCKY, WORLD_TILES.BEACH,
-        WORLD_TILES.MAGMAFIELD, WORLD_TILES.PAINTED, WORLD_TILES.PIGRUINS, WORLD_TILES.PEBBLEBEACH }
+    inst.components.minionspawner.validtiletypes = {
+        [WORLD_TILES.UNDERWATER_SANDY] = true,
+        [WORLD_TILES.UNDERWATER_ROCKY] = true,
+        [WORLD_TILES.BEACH] = true,
+        [WORLD_TILES.MAGMAFIELD] = true,
+        [WORLD_TILES.PAINTED] = true,
+        [WORLD_TILES.PIGRUINS] = true,
+        [WORLD_TILES.PEBBLEBEACH] = true,
+    }
 
     inst.components.minionspawner.miniontype = "krakenunderwater_tentacle"
     inst.components.minionspawner.distancemodifier = 9

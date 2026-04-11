@@ -45,7 +45,6 @@ local states =
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/spit")
             end),
             TimeEvent(57 * FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
-            TimeEvent(5 * FRAMES, function(inst) inst.components.minionspawner:SpawnAll() end),
         },
 
         events =
@@ -74,10 +73,7 @@ local states =
 
         events =
         {
-            EventHandler("animover",
-                function(inst)
-                    inst.sg:GoToState("newattack")
-                end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
@@ -106,7 +102,7 @@ local states =
             end),
 
             TimeEvent(83 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken_submerge")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/quacken_submerge")
                 inst.SoundEmitter:KillSound("quacken_lp_1")
                 inst.SoundEmitter:KillSound("quacken_lp_2")
             end),
@@ -120,75 +116,6 @@ local states =
         ontimeout = function(inst)
             inst.sg:GoToState("spawn")
         end,
-    },
-
-    State {
-        name = "newattack",
-        tags = { "busy", "move" },
-
-        onenter = function(inst, pos)
-            inst.components.health:SetInvincible(true)
-            --            inst.AnimState:PlayAnimation("taunt")
-            inst.AnimState:PlayAnimation("exit", false)
-            inst.sg.statemem.pos = pos
-            inst.sg:SetTimeout(4)
-        end,
-
-        timeline =
-        {
-            TimeEvent(20 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/taunt")
-            end),
-
-            TimeEvent(62 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/exit")
-            end),
-
-            TimeEvent(83 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken_submerge")
-                inst.SoundEmitter:KillSound("quacken_lp_1")
-                inst.SoundEmitter:KillSound("quacken_lp_2")
-            end),
-        },
-
-        onexit = function(inst)
-            inst.components.health:SetInvincible(false)
-        end,
-
-        ontimeout = function(inst)
-            inst.sg:GoToState("newattackfinish")
-        end,
-    },
-
-    State {
-        name = "newattackfinish",
-        tags = { "busy" },
-
-        onenter = function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/enter")
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/quacken_emerge")
-
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/head_drone_rnd_LP", "quacken_lp_1")
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/head_drone_LP", "quacken_lp_2")
-
-            inst.AnimState:PlayAnimation("enter")
-        end,
-
-        timeline =
-        {
-            TimeEvent(35 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC002/creatures/quacken/enter")
-            end),
-            TimeEvent(70 * FRAMES, function(inst)
-                TroSpawnAttackWavesForEnt(inst, math.random(-180, 180), nil, 9, 360, 5, "rogue_wave", 3, true)
-            end),
-        },
-
-        events =
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end)
-        },
     },
 
     State {
@@ -208,10 +135,7 @@ local states =
         timeline =
         {
             TimeEvent(5 * FRAMES, function(inst) inst.components.minionspawner:SpawnAll() end),
-            TimeEvent(35 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC002/creatures/quacken/enter")
-            end)
+            TimeEvent(35 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/enter") end)
         },
 
         events =
@@ -265,10 +189,7 @@ local states =
 
         timeline =
         {
-            TimeEvent(20 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(
-                    "dontstarve_DLC002/creatures/quacken/taunt")
-            end)
+            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/quacken/taunt") end)
         },
 
         events =

@@ -93,7 +93,7 @@ local function fn()
     inst.components.equippable:SetOnUnequip(onunequip)
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("backpack")
+    inst.components.container:WidgetSetup("piratepack")
 
     MakeSmallBurnable(inst)
     MakeSmallPropagator(inst)

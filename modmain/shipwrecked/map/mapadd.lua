@@ -104,10 +104,13 @@ AddRoomPreInit("OceanRough", function(room)
         bioluminescence_spawner = .5,
         oceanfog = 0.1,
     })
-    room.contents.countprefabs = {
+
+    room.contents.countprefabs = room.contents.countprefabs or {}
+    table.tromerge(room.contents.countprefabs, {
+        rawling = 1,
+        tar_pool = 8,
         luggagechest = 4,
-        rawling = 1
-    }
+    })
 end)
 
 -- 很危险的深海
@@ -120,24 +123,14 @@ AddRoomPreInit("OceanHazardous", function(room)
 
         pirateghost = 4,
         redbarrel = 2,
-        bishopwaterfixo = .5,
+        bishop = .5,
         rookwater = .5,
         knightboat = .5,
-
         luggagechest_spawner = .3,
-        whale_bluefinal = 1,
-
     })
     room.contents.countprefabs = {
-        kraken = 1, --海妖
-        octopusking = 1, --章鱼王
+        kraken = 1,          --海妖
+        octopusking = 1,     --章鱼王
+        whale_bluefinal = 1, --蓝鲸
     }
-end)
-
-AddRoomPreInit("OceanRough", function(room)
-    room.contents.countprefabs = room.contents.countprefabs or {}
-    table.tromerge(room.contents.countprefabs, {
-        rawling = 1,
-        tar_pool = 8,
-    })
 end)

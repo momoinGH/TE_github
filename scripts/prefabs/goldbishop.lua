@@ -18,22 +18,12 @@ local prefabs =
     "purplegem",
 }
 
-local prefabs_nightmare =
-{
-    "gears",
-    "bishop_charge",
-    "purplegem",
-    "nightmarefuel",
-    "thulecite_pieces",
-    "bishop_nightmare_ruinsrespawner_inst",
-}
-
 local brain = require "brains/bishopbrain"
 
 SetSharedLootTable('goldbishop',
     {
-        { 'gears',      1.0 },
-        { 'purplegem',  1.0 },
+        { 'gears', 1.0 },
+        { 'purplegem', 1.0 },
         { 'goldnugget', 1.0 },
         { 'goldnugget', 1.0 },
         { 'goldnugget', 1.0 },
@@ -41,15 +31,15 @@ SetSharedLootTable('goldbishop',
 
 SetSharedLootTable('bishop',
     {
-        { 'gears',     1.0 },
-        { 'gears',     1.0 },
+        { 'gears', 1.0 },
+        { 'gears', 1.0 },
         { 'purplegem', 1.0 },
     })
 
 SetSharedLootTable('bishop_nightmare',
     {
-        { 'purplegem',        1.0 },
-        { 'nightmarefuel',    0.6 },
+        { 'purplegem', 1.0 },
+        { 'nightmarefuel', 0.6 },
         { 'thulecite_pieces', 0.5 },
     })
 
@@ -132,7 +122,7 @@ local function common_fn(build, tag)
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = TUNING.BISHOP_WALK_SPEED
 
-    inst:SetStateGraph("SGbishop")
+    inst:SetStateGraph("SGbishop") --TODO这个预制件用bishop.lua的MakeBishop来重写一下，不然sg里容易缺方法
     inst:SetBrain(brain)
 
     inst:AddComponent("sleeper")
@@ -186,27 +176,6 @@ local function bishop_fn()
     inst.effortsound = "dontstarve/creatures/bishop/idle"
 
     return inst
-end
-
-local function bishop_nightmare_fn()
-    local inst = common_fn("bishop_nightmare", "cavedweller")
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.components.lootdropper:SetChanceLootTable('bishop_nightmare')
-    inst.kind = "_nightmare"
-    inst.soundpath = "dontstarve/creatures/bishop_nightmare/"
-    inst.effortsound = "dontstarve/creatures/bishop_nightmare/rattle"
-
-    return inst
-end
-
-local function onruinsrespawn(inst, respawner)
-    if not respawner:IsAsleep() then
-        inst.sg:GoToState("ruinsrespawn")
-    end
 end
 
 return Prefab("goldbishop", bishop_fn, assets, prefabs)
