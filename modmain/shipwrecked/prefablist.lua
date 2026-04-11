@@ -243,7 +243,7 @@ PrefabFiles = {
     "wreck",             --残骸
     "fishinhole",        --鱼群
     "octopusking",       --章鱼王
-
+    "octopuschest", --章鱼王的箱子
 
     "kraken_tentacle",   --海妖触手
     "kraken_projectile", --黏墨球

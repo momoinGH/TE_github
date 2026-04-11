@@ -37,20 +37,15 @@ AddRoom("Shipwrecked start", {
             palmtree = .5,
             rocks = .03,   --trying
             rock1 = .1,    --trying
-            --rock2 = .2,
             beehive = .01, --was .05,
-            --flower = .04, --trying
             grass = .2,    --trying
             sapling = .2,  --trying
-            --fireflies = .02, --trying
-            --spiderden = .03, --trying
             flint = .05,
             sandhill = .6,
             seashell_beached = .02,
             wildborehouse = .005,
             crate = .01,
         },
-        -- countstaticlayouts={["shipwrecked_start"]=1},
         countstaticlayouts = {
             ["start_sw"] = 1,
         },
@@ -67,7 +62,6 @@ AddRoom("NoOxMeadow", {
         {
             flint = 0.01,
             grass = .4,
-            -- ox = 0.05,
             sweet_potato_planted = 0.05,
             beehive = 0.003,
             wasphive = 0.003,
@@ -122,7 +116,6 @@ AddRoom("MeadowBees", {
         {
             flint = 0.05,               --was .01
             grass = 3,                  --was .4,
-            --ox = 3,
             sweet_potato_planted = 0.1, --was .05,
             rock_flintless = 0.01,
             flower = 0.15,
@@ -176,7 +169,6 @@ AddRoom("MeadowSpider", {
             spiderden = .1,
             grass = 1,
             sapling = .8,
-            --ox = .5,
             flower = .5,
         },
     }
@@ -251,12 +243,9 @@ AddRoom("MagmaHome", {
             magmarock_gold = 2,
             magmarock = 2,
             rock1 = .2, --nitre
-            --rock2 = 2, --gold
             rock_flintless = 1,
             rocks = .25, --was 0.5
             flint = 0.1, -- lowered from 3
-            -- rock_ice = 1,
-            --tallbirdnest= --2, --.1,
             spiderden = .1,
             sapling = 0.5,
 
@@ -278,13 +267,10 @@ AddRoom("MagmaHomeBoon", {
         {
             magmarock = 1,
             magmarock_gold = 1,
-            --rock1 = 2, --nitre
             rock2 = 1, --gold
             rock_flintless = 2,
             rocks = .25,
             flint = 1, -- lowered from 3
-            -- rock_ice = 1,
-            --tallbirdnest= --2, --.1,
             spiderden = .1,
             sapling = 0.5,
         },
@@ -327,10 +313,8 @@ AddRoom("GenericMagmaNoThreat", {
             magmarock_gold = 1,
             rock1 = 0.3,
             rock2 = 0.3,
-            --rock_ice = .75,
             rocks = .25,
             flint = 1.5,
-            sapling = .05,
             blue_mushroom = .002,
             green_mushroom = .002,
             red_mushroom = .002,
@@ -379,7 +363,6 @@ AddRoom("Volcano", {
         countprefabs =
         {
             volcanofog = math.random(1, 2),
-            -- volcano = 1,
             cave_entrance_vulcao = 1,
         },
 
@@ -451,7 +434,6 @@ AddRoom("MagmaGoldmoon", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.MAGMAFIELD,
     contents = {
-        --									countstaticlayouts={["CaveEntrance"]=1}, --adds 1 per room					
         distributepercent = .2,
         distributeprefabs =
         {
@@ -492,9 +474,7 @@ AddRoom("MagmaGoldBoon", {
             goldnugget = 1,
             tallbirdnest = .1,
             rock_moon = 0.1,
-            -- rock_moon = 2,
             sapling = .5,
-            --spiderden= .1,
         },
     }
 })
@@ -532,7 +512,6 @@ AddRoom("MagmaForest", {
             rock1 = 0.5,
             rock2 = 0.3,
             obsidian = .02,
-            --elephantcactus = 0.2,
             rocks = 2,
             rock_flintless = 1,
             rock_moon = 0.1,
@@ -565,7 +544,6 @@ AddRoom("MagmaSpiders", {
             rocks = 1,
             rock_moon = 0.1,
             flint = 1,         -- lowered from 3
-            -- rock_ice = 1,
             tallbirdnest = .2, --.1,
             spiderden = 1.5,   --.5,
             sapling = .5,
@@ -589,18 +567,12 @@ AddRoom("VolcanoRock", {
             magmarock_gold = .5,
             flint = .5,
             obsidian = .02,
-            --rocks = 1,
             charcoal = 0.04,
             skeleton = 0.25,
-            --elephantcactus = 0.3,
-
-            --coffeebush = 0.25,
-            --dragoonden = .2,
         },
 
         countprefabs =
         {
-            --palmtree = math.random(8, 16),
             volcanofog = math.random(1, 2)
         },
     }
@@ -617,13 +589,10 @@ AddRoom("VolcanoAsh", {
             --rocks = 1,
             skeleton = 0.05,
             coffeebush = 0.04,
-            --elephantcactus = 0.09,
-            --dragoonden = .2,
         },
 
         countprefabs =
         {
-            --palmtree = math.random(4, 8),
             volcanofog = math.random(1, 2),
             coffeebush = 6,
             charcoal = 4,
@@ -650,7 +619,6 @@ AddRoom("VolcanoObsidian", {
             skeleton = 0.1,
             dragoonden = .1,
             elephantcactus = 0.1,
-            --coffeebush = 1,
         },
 
         countprefabs =
@@ -680,9 +648,6 @@ AddRoom("VolcanoStart", {
         countprefabs =
         {
             volcanofog = math.random(1, 2),
-            --  cavelight = 3,
-            --  cavelight_small = 3,
-            --  cavelight_tiny = 3,
         },
     }
 })
@@ -732,8 +697,6 @@ AddRoom("VolcanoObsidianBench", {
         countprefabs =
         {
             volcanofog = math.random(1, 2),
-            --  cavelight = 2,
-            --  cavelight_small = 2,
             firetwister = 1,
         },
     }
@@ -755,8 +718,6 @@ AddRoom("VolcanoAltar", {
         countprefabs =
         {
             volcanofog = math.random(1, 2),
-            --  cavelight = 2,
-            --  cavelight_small = 2,
         },
 
     }
@@ -802,8 +763,6 @@ AddRoom("VolcanoCage", {
         countprefabs =
         {
             volcanofog = 1,
-            --  cavelight = 2,
-            --  cavelight_small = 2,
         },
     }
 })
@@ -831,26 +790,19 @@ AddRoom("TidalMarsh", {
         {
             jungletree = .05,
             marsh_bush = .05,
-            --					                    tidalpool = 0.08,										
             reeds = 1,
             spiderden = .01,
             green_mushroom = 1,
-            --					                    mermhouse = 0.01, --was 0.04
             mermhouse_fisher = 0.05,
             poisonhole = 0.15,
-            --					                    seaweed_planted = 0.5,
-            --					                    fishinhole = .1,
             flupspawner = 0.7,
             flup = 1,
         },
         countprefabs =
         {
-            --mermhouse_fisher = 5,
             tidalpool = 2,
-            poisonhole = 8,
             mermhouse_fisher = 2,
             reeds = 3,
-            --										mermhouse = 2,
             poisonhole = 3,
         },
     }
@@ -864,19 +816,10 @@ AddRoom("TidalMarsh1", {
         distributeprefabs =
         {
             jungletree = .01,
-            --marsh_bush = .05,
             reeds = 1,
-            --spiderden=.01,
             poisonhole = 0.5,
             green_mushroom = 0.4,
-            --                                        mermhouse = 0.2,
-            --                                        mermhouse_fisher = 1.0,
-            --                                        tidalpool = 0.8,
-            -- poisonhole = 0.1,
-            --                                        seaweed_planted = 0.5,
-            --                                        fishinhole = .1,
             flupspawner_sparse = 0.2,
-            --                                        flup = 1,
         },
 
         countprefabs =
@@ -901,14 +844,8 @@ AddRoom("TidalMermMarsh", {
             reeds = 1,
             spiderden = .01,
             green_mushroom = 1.02,
-            --					                    mermhouse = 0.2,
-            --					                    mermhouse_fisher = 1.0,
             poisonhole = 0.2,
-            --					                    seaweed_planted = 0.5,
-            --					                    fishinhole = .1,
             flupspawner_sparse = 0.3,
-            --										tidalpool = 1,
-            --					                    flup = 1,
         },
 
         countprefabs =
@@ -949,8 +886,6 @@ AddRoom("ToxicTidalMarsh", {
             mermhouse = 0.1, --was 0.04
             mermhouse_fisher = 0.05,
             poisonhole = 1,  --was 2
-            --seaweed_planted = 0.5,
-            -- fishinhole = .1,
             flupspawner_dense = 1,
             flup = 2,
         },
@@ -969,26 +904,19 @@ AddRoom("TidalMarshnovo", {
         {
             jungletree = .05,
             marsh_bush = .05,
-            --					                    tidalpool = 0.08,										
             reeds = 1,
             spiderden = .01,
             green_mushroom = 1,
-            --					                    mermhouse = 0.01, --was 0.04
             mermhouse_fisher = 0.05,
             poisonhole = 0.15,
-            --					                    seaweed_planted = 0.5,
-            --					                    fishinhole = .1,
             flupspawner = 0.7,
             flup = 1,
         },
         countprefabs =
         {
-            --mermhouse_fisher = 5,
             tidalpool = 2,
-            poisonhole = 8,
             mermhouse_fisher = 2,
             reeds = 3,
-            --										mermhouse = 2,
             poisonhole = 3,
         },
     }
@@ -1861,16 +1789,11 @@ AddRoom("JunglePigs", {
 AddRoom("Beaverkinghome", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.MEADOW,
-    --required_prefabs = {"octopusking"},
     contents = {
-        --countstaticlayouts={["octopusking"]=1}, --adds 1 per room
         distributepercent = .2,
         distributeprefabs =
         {
-            --sweet_potato_planted = 0.5,
             grass = 1,
-            rocks = .2,
-            --beehive = 0.003,
             rocks = 0.003,
             rock_flintless = 0.01,
             flower = .25,
@@ -1878,9 +1801,6 @@ AddRoom("Beaverkinghome", {
         countprefabs =
         {
             mandrake_planted = 1,
-            --doydoybaby = 1,
-            --doydoy = 1,
-            --octopusking = 1,
             sweet_potato_planted = 7,
             beehive = 5,
         },
@@ -1892,20 +1812,13 @@ AddRoom("Beaverkingcity", {
     colour = { r = .5, g = 0.6, b = .080, a = .10 },
     value = WORLD_TILES.MEADOW,
     contents = {
-        --									countstaticlayouts=
-        --									{
-        --										["LivingJungleTree"]= function() return (math.random() > LIVINGJUNGLETREE_CHANCE and 1) or 0 end	
-        --									},
-        --countstaticlayouts={["DefaultPigking"]=1}, --adds 1 per room
         distributepercent = 0.35,
         distributeprefabs =
         {
-            --   sweet_potato_planted = 1,
             grass = 1,
             rocks = .2,
             rock_flintless = 0.01,
             flower = 0.15,
-            --beehive = 0.3, -- lowered from 1
         },
         countprefabs =
 
@@ -1940,7 +1853,6 @@ AddRoom("JungleEyeplant", {
             spiderden = .25, --was .001
             bush_vine = 1,
             snake_hole = 0.1,
-            --wildborehouse = .5, --just added
             eyeplant = 4,
         },
 

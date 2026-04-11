@@ -19,7 +19,7 @@ local tasks = {
     "DoyDoyM",         ---doydoyM
     "DoyDoyF",         ---doydoyF
     "Volcano ground",  --火山  ["VolcanoAsh"] = 1,       ["Volcano"] = 1,    ["VolcanoObsidian"] = 1,
-    
+
     -- "A_BLANK1",
     -- "A_BLANK2",
     -- "A_BLANK3",
@@ -63,15 +63,7 @@ end)
 AddRoomPreInit("OceanCoastal", function(room)
     room.contents.countprefabs = room.contents.countprefabs or {}
     room.contents.countprefabs.mermboat = 4 --鱼人海盗船
-end)
 
--- 给这些task添加新的钥匙，解锁该task就能凭借钥匙解锁其他的task了
-AddTaskPreInit("RedForest", function(task)
-    task.keys_given = task.keys_given or {}
-    table.insert(task.keys_given, KEYS.VOLCANO_ENTRANCE)
-end)
-
-AddRoomPreInit("OceanCoastal", function(room)
     table.tromerge(room.contents.distributeprefabs, {
         messagebottle_sw = 0.1,
         seaweed_planted = 3,
@@ -82,6 +74,12 @@ AddRoomPreInit("OceanCoastal", function(room)
         rainbowjellyfish_spawner = 0.25 / 2,
         bioluminescence_spawner = 0.1,
     })
+end)
+
+-- 给这些task添加新的钥匙，解锁该task就能凭借钥匙解锁其他的task了
+AddTaskPreInit("RedForest", function(task)
+    task.keys_given = task.keys_given or {}
+    table.insert(task.keys_given, KEYS.VOLCANO_ENTRANCE)
 end)
 
 AddRoomPreInit("OceanSwell", function(room)
@@ -112,6 +110,7 @@ AddRoomPreInit("OceanRough", function(room)
     }
 end)
 
+-- 很危险的深海
 AddRoomPreInit("OceanHazardous", function(room)
     room.contents.distributepercent = 0.3
     table.tromerge(room.contents.distributeprefabs, {
@@ -130,7 +129,8 @@ AddRoomPreInit("OceanHazardous", function(room)
 
     })
     room.contents.countprefabs = {
-        kraken = 1,
+        kraken = 1, --海妖
+        octopusking = 1, --章鱼王
     }
 end)
 

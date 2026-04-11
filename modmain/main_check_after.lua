@@ -64,6 +64,7 @@ local ignore_remove_events = {
     entitysleep = true,
     animover = true,
     timerdone = true,
+    animqueueover = true,
 }
 
 local OldPushEvent = EntityScript.PushEvent
