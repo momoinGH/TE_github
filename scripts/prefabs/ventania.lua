@@ -13,14 +13,6 @@ local prefabs =
     "rogue_wave",
 }
 
-local function SpawnWindSwirl(x, y, z, speed, angle)
-    local swirl = SpawnPrefab("windswirl")
-    swirl.Transform:SetPosition(x, y, z)
-    swirl.Transform:SetRotation(angle + 180)
-    swirl.AnimState:SetMultColour(1, 1, 1, math.clamp(speed, 0.0, 1.0))
-    --swirl.Physics:SetMotorVel(speed, 0, 0)
-end
-
 local function dig_up_stump(inst, chopper)
     inst.components.lootdropper:SpawnLootPrefab("log")
     inst:Remove()

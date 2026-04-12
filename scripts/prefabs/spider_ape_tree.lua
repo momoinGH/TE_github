@@ -664,18 +664,6 @@ local function makefn(build, stage, data)
         inst.components.growable.loopstages = true
         inst.growfromseed = handler_growfromseed
 
-
-
-        --[[
-        inst:AddComponent("blowinwindgust")
-        inst.components.blowinwindgust:SetWindSpeedThreshold(TUNING.JUNGLETREE_WINDBLOWN_SPEED)
-        inst.components.blowinwindgust:SetDestroyChance(TUNING.JUNGLETREE_WINDBLOWN_FALL_CHANCE)
-        inst.components.blowinwindgust:SetGustStartFn(OnGustStart)
-        -- inst.components.blowinwindgust:SetGustEndFn(OnGustEnd)
-        inst.components.blowinwindgust:SetDestroyFn(OnGustFall)
-        inst.components.blowinwindgust:Start()
-]]
-
         inst:AddComponent("childspawner")
         inst.components.childspawner.childname = "spider_ape"
         inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME)

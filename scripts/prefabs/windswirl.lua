@@ -3,12 +3,22 @@ local assets =
     Asset("ANIM", "anim/wind_fx.zip")
 }
 
-local function fn(Sim)
+local function Update(inst)
+    local speed = TheWorld.components.tro_hurricane and TheWorld.components.tro_hurricane:GetHurricaneWindSpeed() or 0
+    speed = math.clamp(speed, 0.0, 1.0)
+    inst.AnimState:SetMultColour(1, 1, 1, speed)
+    if speed < 0.01 then
+        inst:Remove()
+    end
+end
+
+local function fn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
+
+    inst.entity:AddTransform()
     local anim = inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-    --inst.entity:AddPhysics()
+
     anim:SetBuild("wind_fx")
     anim:SetBank("wind_fx")
     anim:SetOrientation(ANIM_ORIENTATION.OnGround)
@@ -24,7 +34,10 @@ local function fn(Sim)
         return inst
     end
 
-    inst:ListenForEvent("animover", function(inst) inst:Remove() end)
+    inst.persists = false
+    inst:ListenForEvent("animover", inst.Remove)
+    inst:ListenForEvent("entitysleep", inst.Remove)
+    inst:DoPeriodicTask(0, Update) --替代单机windfx组件
 
     return inst
 end

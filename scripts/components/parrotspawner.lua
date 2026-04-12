@@ -216,7 +216,7 @@ return Class(function(self, inst)
         end
 
         ---------------------------------------------ventania -------------------------------------------------------------
-        -- TODO 删掉这里的飓风生成，使用seasonmanager_sw来执行
+        -- TODO 删掉这里的飓风生成，使用tro_hurricane来执行
         -- if TUNING.tropical.wind ~= 5 then
         --     if posicao == WORLD_TILES.OCEAN_COASTAL or posicao == WORLD_TILES.OCEAN_WATERLOG or posicao == WORLD_TILES.OCEAN_COASTAL_SHORE or posicao == WORLD_TILES.OCEAN_SWELL or posicao == WORLD_TILES.OCEAN_ROUGH or posicao == WORLD_TILES.OCEAN_BRINEPOOL or posicao == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or posicao == WORLD_TILES.OCEAN_HAZARDOUS or player.components.areaaware and player.components.areaaware:CurrentlyInTag("shipwrecked") or player.components.areaaware and player.components.areaaware:CurrentlyInTag("hamlet") or TUNING.tropical.wind == 20 then
         --         --print("shipwrecked")

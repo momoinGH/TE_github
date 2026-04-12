@@ -11,8 +11,6 @@ local prefabs =
 }
 
 local total_day_time = 480
-local MUSSELFARM_WINDBLOWN_SPEED = 0.2
-local MUSSELFARM_WINDBLOWN_FALL_CHANCE = 0.1
 local MUSSEL_CATCH_TIME =
 {
     { base = 1 * total_day_time, random = 0.5 * total_day_time }, --tall to short
@@ -25,33 +23,6 @@ local MUSSEL_CATCH_TIME =
 MUSSEL_CATCH_SMALL = 1
 MUSSEL_CATCH_MED = 3
 MUSSEL_CATCH_LARGE = 6
-
-local function getnewpoint(pt)
-    local theta = math.random() * TWOPI
-    local radius = 6 + math.random() * 6
-
-    local result_offset = FindValidPositionByFan(theta, radius, 12, function(offset)
-        local ground = TheWorld
-        local spawn_point = pt + offset
-        if GetGroundTypeAtPosition(spawn_point) == WORLD_TILES.OCEAN_SHALLOW then
-            return true
-        end
-        return false
-    end)
-
-    if result_offset then
-        return pt + result_offset
-    end
-end
-
-local function movetonewhome(inst, child)
-    local pos = inst:GetPosition()
-    local spawn_point = getnewpoint(pos)
-
-    if spawn_point then
-        child.Transform:SetPosition(spawn_point:Get())
-    end
-end
 
 local function onpickedfn(inst, picker)
     inst.AnimState:PlayAnimation("picked")
@@ -243,21 +214,16 @@ local growth_stages =
 local function onpoked(inst, worker, stick)
     inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/plant_mussel")
     inst.components.growable:SetStage(3)
-
-    --	if stick.components.stackable and stick.components.stackable.stacksize > 1 then
-    --		stick = stick.components.stackable:Get()
-    -- 	end
-    --	stick:Remove()
 end
 
---local function ongustharvest(inst)
---	if inst.components.pickable and inst.components.pickable.numtoharvest > 0 then
---		for i = 1, inst.components.pickable.numtoharvest, 1 do
---			inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
---		end
---		onpickedfn(inst, nil)
---	end
---end
+local function ongustharvest(inst)
+    if inst.components.pickable and inst.components.pickable.numtoharvest > 0 then
+        for i = 1, inst.components.pickable.numtoharvest, 1 do
+            inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
+        end
+        onpickedfn(inst, nil)
+    end
+end
 
 local function fn()
     local inst = CreateEntity()
@@ -308,6 +274,11 @@ local function fn()
     inst:AddComponent("trader")
     inst.components.trader:SetAcceptTest(function(inst, item) return (item:HasTag("mussel_stick") and (inst.components.growable.stage < 3)) end)
     inst.components.trader.onaccept = onpoked
+
+    inst:AddComponent("blowinwindgust")
+    inst.components.blowinwindgust:SetWindSpeedThreshold(0.2)
+    inst.components.blowinwindgust:SetDestroyChance(0.1)
+    inst.components.blowinwindgust:SetDestroyFn(ongustharvest)
 
     inst:AddComponent("pickable")
     inst.components.pickable.picksound = "dontstarve/wilson/harvest_berries"

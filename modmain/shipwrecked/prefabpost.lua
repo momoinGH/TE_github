@@ -13,6 +13,10 @@ modimport "modmain/shipwrecked/prefabs/forest.lua"
 modimport "modmain/shipwrecked/prefabs/wobster.lua"
 modimport "modmain/shipwrecked/prefabs/watertree_pillar.lua"
 
+
+modimport "modmain/shipwrecked/hurricane.lua" --飓风
+
+
 ----------------------------------------------------------------------------------------------------
 
 -- 海难洪水仪器失灵

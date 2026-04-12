@@ -669,24 +669,7 @@ local function makefn(build, stage, data)
         inst.components.growable.stages = growth_stages
         inst.components.growable:SetStage(l_stage)
         inst.components.growable:StartGrowing()
-        --		if build ~= "new" then		
-        --		inst.components.growable.loopstages = true
-        --        inst.growfromseed = handler_growfromseed	
-        --		end
 
-
-
-        --[[
-        inst:AddComponent("blowinwindgust")
-        inst.components.blowinwindgust:SetWindSpeedThreshold(TUNING.JUNGLETREE_WINDBLOWN_SPEED)
-        inst.components.blowinwindgust:SetDestroyChance(TUNING.JUNGLETREE_WINDBLOWN_FALL_CHANCE)
-        inst.components.blowinwindgust:SetGustStartFn(OnGustStart)
-        -- inst.components.blowinwindgust:SetGustEndFn(OnGustEnd)
-        inst.components.blowinwindgust:SetDestroyFn(OnGustFall)
-        inst.components.blowinwindgust:Start()
-]]
-
-        --		if build == "new" then
         inst:AddComponent("childspawner")
         inst.components.childspawner.childname = "spider_monkey"
         inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME)
@@ -697,12 +680,8 @@ local function makefn(build, stage, data)
         inst.components.childspawner.emergencychildrenperplayer = 1
 
         inst.components.childspawner:SetSpawnedFn(onspawnspider)
-        --		inst.components.childspawner:SetMaxChildren(2)
         inst.components.childspawner:StartSpawning()
-        --		end
 
-        ---------------------
-        -- PushSway(inst)
         inst.AnimState:SetTime(math.random() * 2)
 
         ---------------------

@@ -92,16 +92,14 @@ local function fn()
     workable:SetWorkAction(ACTIONS.DIG)
     workable:SetOnFinishCallback(dig_up)
     workable:SetWorkLeft(1)
-    --	    MakePickableBlowInWindGust(inst, TUNING.GRASS_WINDBLOWN_SPEED, TUNING.GRASS_WINDBLOWN_FALL_CHANCE)
 
     ---------------------
     MakeMediumBurnable(inst)
     MakeSmallPropagator(inst)
-    -- inst.components.burnable:MakeDragonflyBait(1)
     MakeNoGrowInWinter(inst)
+    MakePickableBlowInWindGust(inst, 0.2, 0.01)
 
     inst:WatchWorldState("season", testForGrowth)
-    --		inst:ListenForEvent("seasonChange", function(it, data) testForGrowth(inst) end, TheWorld)
 
     return inst
 end

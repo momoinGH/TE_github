@@ -171,6 +171,10 @@ local function fn()
 
     inst:DoTaskInTime(0, OnInit)
 
+    inst:AddComponent("blowinwindgust")
+    inst.components.blowinwindgust:SetWindSpeedThreshold(0.7)
+    inst.components.blowinwindgust:Start()
+
     return inst
 end
 

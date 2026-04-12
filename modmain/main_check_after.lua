@@ -40,49 +40,49 @@ end
 ----------------------------------------------------------------------------------------------------
 -- 对于推送常见事件data的补充，避免有些地方推送事件参数类型不对导致崩溃
 -- 一些常见的含有data的事件
-local need_data_events = {
-    death = true,
-    onattackother = true,
-    onmissother = true,
-    attacked = true,
-    itemget = true,
-    itemlose = true,
-    timerdone = true,
-    picked = true,
-    worked = true,
-    equip = true,
-    unequip = true,
-    onbuilt = true,
-    healthdelta = true,
-    sanitydelta = true,
-    hungerdelta = true,
-    equipped = true,
-    unequipped = true,
-}
+-- local need_data_events = {
+--     death = true,
+--     onattackother = true,
+--     onmissother = true,
+--     attacked = true,
+--     itemget = true,
+--     itemlose = true,
+--     timerdone = true,
+--     picked = true,
+--     worked = true,
+--     equip = true,
+--     unequip = true,
+--     onbuilt = true,
+--     healthdelta = true,
+--     sanitydelta = true,
+--     hungerdelta = true,
+--     equipped = true,
+--     unequipped = true,
+-- }
 
--- 这些都是科雷会销毁的
-local ignore_remove_events = {
-    entitysleep = true,
-    animover = true,
-    timerdone = true,
-    animqueueover = true,
-    on_landed = true,
-}
+-- -- 这些都是科雷会销毁的
+-- local ignore_remove_events = {
+--     entitysleep = true,
+--     animover = true,
+--     timerdone = true,
+--     animqueueover = true,
+--     on_landed = true,
+-- }
 
-local OldPushEvent = EntityScript.PushEvent
-function EntityScript:PushEvent(event, data, ...)
-    if event and need_data_events[event] and not (data == nil or type(data) == "table") then
-        TroErrorHandle("事件" .. tostring(event) .. "的参数" .. tostring(data) .. "不是table也不为空，可能导致游戏崩溃", true)
-    end
+-- local OldPushEvent = EntityScript.PushEvent
+-- function EntityScript:PushEvent(event, data, ...)
+--     if event and need_data_events[event] and not (data == nil or type(data) == "table") then
+--         TroErrorHandle("事件" .. tostring(event) .. "的参数" .. tostring(data) .. "不是table也不为空，可能导致游戏崩溃", true)
+--     end
 
-    -- 不能在事件毁掉里销毁实体
-    local is_valid_before = self.IsValid and self:IsValid()
-    local res = OldPushEvent(self, event, data, ...)
-    if event and not ignore_remove_events[event] and is_valid_before and not (self.IsValid and self:IsValid()) and TheWorld and TheWorld.ismastersim then
-        TroErrorHandle(string.trofmt("{}对象在{}事件中被销毁，这容易导致游戏崩溃，请使用DoTaskIntime(0,inst.Remove)来销毁", self, event), true)
-    end
-    return res
-end
+--     -- 不能在事件毁掉里销毁实体
+--     local is_valid_before = self.IsValid and self:IsValid()
+--     local res = OldPushEvent(self, event, data, ...)
+--     if event and not ignore_remove_events[event] and is_valid_before and not (self.IsValid and self:IsValid()) and TheWorld and TheWorld.ismastersim then
+--         TroErrorHandle(string.trofmt("{}对象在{}事件中被销毁，这容易导致游戏崩溃，请使用DoTaskIntime(0,inst.Remove)来销毁", self, event), true)
+--     end
+--     return res
+-- end
 
 ----------------------------------------------------------------------------------------------------
 -- 检查状态机的重复注册

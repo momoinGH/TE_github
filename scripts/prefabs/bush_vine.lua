@@ -34,8 +34,6 @@ local function dig_up(inst, worker)
         inst.components.workable:SetWorkLeft(1)
         inst.components.lootdropper:SpawnLootPrefab("vine")
         inst.components.timer:StartTimer("spawndelay", 60 * 8 * respawndays)
-
-
         return
     end
 
@@ -133,6 +131,8 @@ local function fn()
     inst.components.workable:SetWorkLeft(6)
     inst.components.workable.onwork = onhackedfn
 
+    MakeHackableBlowInWindGust(inst, 0.2, 0.1)
+
     MakeMediumBurnable(inst)
     MakeSmallPropagator(inst)
     MakeHauntableIgnite(inst)
@@ -148,7 +148,7 @@ local function OnCollide(inst, data)
     local boat_physics = data.other.components.boatphysics
     if boat_physics ~= nil then
         local hit_velocity = math.floor(math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity) * DAMAGE_SCALE /
-        boat_physics.max_velocity + 0.5)
+            boat_physics.max_velocity + 0.5)
         inst.components.workable:WorkedBy(data.other, hit_velocity * TUNING.SEASTACK_MINE)
     end
 end

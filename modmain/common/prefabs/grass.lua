@@ -1,6 +1,3 @@
---给草追加单机的刮风动画
-table.insert(Assets, Asset("ANIM", "anim/grass_blown.zip"))
-
 -- 在水里就切换到水里的动画
 local function CheckGround(inst)
     local x, y, z = inst.Transform:GetWorldPosition()

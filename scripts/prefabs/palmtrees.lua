@@ -13,8 +13,8 @@ local day_time = seg_time * day_segs
 local PALMTREE_GROW_TIME =
 {
     { base = 1.5 * day_time, random = 0.5 * day_time }, --tall to short
-    { base = 5 * day_time, random = 2 * day_time },  --short to normal
-    { base = 5 * day_time, random = 2 * day_time },  --normal to tall
+    { base = 5 * day_time, random = 2 * day_time },     --short to normal
+    { base = 5 * day_time, random = 2 * day_time },     --normal to tall
 }
 
 local PALMTREE_CHOPS = "a"
@@ -622,41 +622,6 @@ local function OnEntityWake(inst)
         inst.components.inspectable.getstatus = inspect_tree
     end
 end
-
-local function OnGustAnimDone(inst)
-    if inst:HasTag("stump") or inst:HasTag("burnt") then
-        inst:RemoveEventCallback("animover", OnGustAnimDone)
-        return
-    end
-    --	if inst.components.blowinwindgust and inst.components.blowinwindgust:IsGusting() then
-    local anim = math.random(1, 2)
-    inst.AnimState:PlayAnimation(inst.anims["blown" .. tostring(anim)], false)
-    --	else
-    inst:DoTaskInTime(math.random() / 2, function(inst)
-        --			inst:RemoveEventCallback("animover", OnGustAnimDone)
-        inst.AnimState:PlayAnimation(inst.anims.blown_pst, false)
-        PushSway(inst)
-    end)
-    --	end
-end
-
-local function OnGustStart(inst, windspeed)
-    if inst:HasTag("stump") or inst:HasTag("burnt") then
-        return
-    end
-    inst:DoTaskInTime(math.random() / 2, function(inst)
-        --		if inst.spotemitter == nil then
-        --			AddToNearSpotEmitter(inst, "treeherd", "tree_creak_emitter", TUNING.TREE_CREAK_RANGE)
-        --		end
-        inst.AnimState:PlayAnimation(inst.anims.blown_pre, false)
-        --		inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/wind_tree_creak")
-        inst:ListenForEvent("animover", OnGustAnimDone)
-    end)
-end
-
-local function OnGustEnd(inst, windspeed)
-end
-
 
 local function makefn(build, stage, data)
     local function fn()
