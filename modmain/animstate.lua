@@ -146,6 +146,45 @@ function _G.TroRemapOverrideSymbol(prefab_name, need_symbol, get_fn)
     overridesymbol_maps[prefab_name][need_symbol] = get_fn
 end
 
+local animation_maps = {}
+
+local function AnimationHook(self, anim, is_loop, ...)
+    local inst = _GetEntity(self)
+    local val = inst and inst.prefab and animation_maps[inst.prefab] and (animation_maps[inst.prefab][anim] or animation_maps[inst.prefab]._)
+    if val then
+        if type(val) == "function" then
+            anim, is_loop = val(inst, anim, is_loop, ...)
+        else
+            anim = val
+        end
+    end
+    return anim, is_loop
+end
+
+local OldPlayAnimation = AnimState.PlayAnimation
+function AnimState:PlayAnimation(anim, is_loop, ...)
+    anim, is_loop = AnimationHook(self, anim, is_loop, ...)
+    return OldPlayAnimation(self, anim, is_loop, ...)
+end
+
+local OldPushAnimation = AnimState.PushAnimation
+function AnimState:PushAnimation(anim, is_loop, ...)
+    anim, is_loop = AnimationHook(self, anim, is_loop, ...)
+    return OldPushAnimation(self, anim, is_loop, ...)
+end
+
+---重新映射某个预制件的动画
+---@param prefab_name string
+---@param anim string|nil 要重映射的动画名，如果为空则表示对所有动画修改
+---@param val string|function 新的动画名，或者一个返回anim和is_loop的函数
+function _G.TroRemapAnimation(prefab_name, anim, val)
+    animation_maps[prefab_name] = animation_maps[prefab_name] or {}
+    if not anim then
+        anim = "_" --对所有动画修改
+    end
+    animation_maps[prefab_name][anim] = val
+end
+
 return {
     Addfilter = Addfilter,
 }

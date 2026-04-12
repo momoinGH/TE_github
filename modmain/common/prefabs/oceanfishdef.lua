@@ -998,26 +998,22 @@ SCHOOL_WEIGHTS[SEASONS.SUMMER][WORLD_TILES.OCEAN_SWELL].oceanfish_small_8 = SCHO
 
 -- 扩展表的字段
 for _, data in pairs(FISH_DEFS) do
-    AddPrefabPostInit(data.prefab .. "_inv", function(inst)
-        if data.inv_scale then
+    if data.inv_scale then
+        AddPrefabPostInit(data.prefab .. "_inv", function(inst)
             inst.Transform:SetScale(data.inv_scale, data.inv_scale, data.inv_scale)
-        end
+        end)
+    end
 
-        if data.oceanbuild then
-            -- 物品鱼播放的动画flop_xxx单机鱼没有，这里让其一直播放idle动画
-            inst.AnimState:PlayAnimation("idle", true)
-            inst:ListenForEvent("on_landed", function(inst)
-                if inst:IsValid() then
-                    inst:DoTaskInTime(0, function() --在科雷的后面执行
-                        if inst.flop_task then
-                            inst.flop_task:Cancel()
-                            inst.flop_task = nil
-                        end
-                    end)
-                end
-            end)
-        end
-    end)
+    --单机的鱼没有这几个动画，全换成idle
+    if data.oceanbuild then
+        TroRemapAnimation(data.prefab .. "_inv", nil, function(inst, anim, is_loop)
+            if anim == "flop_pre" or anim == "flop_loop" or anim == "flop_pst" then
+                anim = "idle"
+                is_loop = true
+            end
+            return anim, is_loop
+        end)
+    end
 
 
     AddPrefabPostInit(data.prefab, function(inst)

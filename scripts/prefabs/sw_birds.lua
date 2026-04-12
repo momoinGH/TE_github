@@ -242,15 +242,6 @@ local function makebird(name, sounds, feather_name, bank, water_bank)
             inst.components.named:PickNewName()
             inst.components.health.canmurder = false
 
-            inst:AddComponent("talker")
-            inst.components.talker.fontsize = 28
-            inst.components.talker.font = TALKINGFONT
-            inst.components.talker.colour = Vector3(.9, .4, .4, 1)
-            inst:ListenForEvent("donetalking", function() inst.SoundEmitter:KillSound("talk") end)
-            inst:ListenForEvent("ontalk", function()
-                inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/parrot/chirp", "talk")
-            end)
-
             inst:AddComponent("talkingbird")
 
             inst:AddComponent("sanityaura")
