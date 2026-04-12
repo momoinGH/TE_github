@@ -39,10 +39,6 @@ local HailManager = Class(function(self, inst)
         end
     end)
     inst:ListenForEvent("hurricanestop", function()
-        if self.next_spawn_task then
-            self.next_spawn_task:Cancel()
-            self.next_spawn_task = nil
-        end
         self:Stop()
     end)
 end)
@@ -112,6 +108,11 @@ end
 
 -- 停止冰雹
 function HailManager:Stop()
+    if self.next_spawn_task then
+        self.next_spawn_task:Cancel()
+        self.next_spawn_task = nil
+    end
+
     if not self.active then return end
     self.active = false
     self.hail_rate = 0
