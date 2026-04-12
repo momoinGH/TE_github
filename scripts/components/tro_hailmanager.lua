@@ -53,8 +53,7 @@ function HailManager:UpdateHailRate(percent)
         (1.0 / (hailend - hailstart)) * (percent - hailstart),
         0.0, 1.0
     )
-    -- self.hail_rate = TUNING_HAIL.HURRICANE_HAIL_SCALE * math.sin(PI * hailpercent)
-    self.hail_rate = 1 --TODO
+    self.hail_rate = TUNING_HAIL.HURRICANE_HAIL_SCALE * math.sin(PI * hailpercent)
 end
 
 -- 获取当前冰雹速率
