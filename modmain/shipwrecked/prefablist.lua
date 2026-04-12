@@ -309,4 +309,8 @@ PrefabFiles = {
     "seagullspawner",        --海鸥生成器
     "underwater_entrance",   --海底入口
     "vine",                  --藤蔓
+
+
+    "hail_sw",  --冰雹
+    "haildrop", --冰雹特效
 }

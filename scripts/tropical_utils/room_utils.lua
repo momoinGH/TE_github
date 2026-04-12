@@ -283,8 +283,7 @@ function FN.CreateRoom(room, door_key_start)
     -- 生成中心点
     local center = SpawnPrefab("interior_center")
     center.Transform:SetPosition(x, 0, z)
-    center.room_width:set(width)
-    center.room_depth:set(depth)
+    center:SetRoomSize(width,depth)
 
     if room.night_room then
         center:AddTag("night_room")

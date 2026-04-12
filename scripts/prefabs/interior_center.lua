@@ -10,18 +10,26 @@ end
 local function OnLoad(inst, data)
     if not data then return end
 
-    if data.room_width then
-        inst.room_width:set(data.room_width)
-    end
-    if data.room_depth then
-        inst.room_depth:set(data.room_depth)
-    end
+    inst:SetRoomSize(data.room_width, data.room_depth)
     if data.room_explored then
         inst:AddTag("room_explored")
     end
     if data.night_room then
         inst:AddTag("night_room")
     end
+end
+
+local function SetRoomSize(inst, width, depth)
+    if width then
+        inst.room_width:set(width)
+    end
+    if depth then
+        inst.room_depth:set(depth)
+    end
+
+    width = (width or inst.room_width:value()) + 1 --多算一点儿，增加点误差
+    depth = (depth or inst.room_depth:value()) + 1
+    inst.components.raindome:SetRadius(math.sqrt(width * width + depth * depth) / 2)
 end
 
 -- 横向为z右为正，纵向为x下为正
@@ -85,16 +93,21 @@ local function fn()
     --房间的大小，影响摄像机的缩放
     inst.room_width = net_smallbyte(inst.GUID, "interior_center.room_width")
     inst.room_depth = net_smallbyte(inst.GUID, "interior_center.room_depth")
+    inst.SetRoomSize = SetRoomSize
     inst.IsPointInRoom = IsPointInRoom
     inst.GetRoomDoor = GetRoomDoor
     inst.GetNearRoom = GetNearRoom
     inst.GetNearRooms = GetNearRooms
+
+    inst:AddComponent("raindome") --这个组件可以防雨防冰雹啥的，来自暗影伞
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst.components.raindome:Enable()
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aura = TUNING.SANITYAURA_SMALL

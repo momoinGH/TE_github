@@ -87,7 +87,28 @@ local function onhitground_hail(inst)
     end
 end
 
-local function hailfn(Sim)
+local function onhitground_haildrop(inst, onwater)
+    if not onwater then
+        if math.random() < 0.8 then
+            ReplacePrefab(inst, "ice_break_fx")
+        else
+            inst:RemoveEventCallback("on_landed", onhitground_haildrop)
+            ChangeToInventoryPhysics(inst)
+        end
+    end
+end
+
+local function hail_startfalling(inst, x, y, z)
+    inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
+    inst.Physics:ClearCollisionMask()
+    inst.Physics:SetCollisionMask(COLLISION.GROUND)
+    inst.Physics:SetCollisionMask(COLLISION.OBSTACLES)
+    inst.Physics:SetCollisionMask(COLLISION.CHARACTERS)
+    inst.Physics:Teleport(x, 35, z)
+    inst:ListenForEvent("on_landed", onhitground_haildrop)
+end
+
+local function hailfn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -108,6 +129,8 @@ local function hailfn(Sim)
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst.StartFalling = hail_startfalling
 
     inst:AddComponent("smotherer")
 

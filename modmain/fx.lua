@@ -196,6 +196,13 @@ local HAM_FX =
         build = "int_ceiling_dust_fx",
         anim = "idle",
     },
+    --冰块碎开
+    {
+        name = "ice_break_fx",
+        bank = "ice_break",
+        build = "ice_break",
+        anim = "break"
+    }
 }
 
 local fx = require("fx")
@@ -208,4 +215,4 @@ for _, v in ipairs(HAM_FX) do
     table.insert(fx, v)
 end
 
--- package.loaded["prefabs/fx"] = nil
+package.loaded["prefabs/fx"] = nil
