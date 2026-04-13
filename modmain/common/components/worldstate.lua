@@ -4,7 +4,7 @@ AddComponentPostInit("worldstate", function(self, inst)
     local _watchers = Hooks.GetUpValue(self.AddWatcher, "_watchers")
 
     ---@param check_fn fn 检查实体是否符合条件来决定是否给这个实体推送事件
-    local function SetVariable(var, val, check_fn)
+    local function SetVariable(var, val, togglename, check_fn)
         if self.data[var] ~= val and val ~= nil then
             self.data[var] = val
 
@@ -18,21 +18,32 @@ AddComponentPostInit("worldstate", function(self, inst)
                     end
                 end
             end
+
+            if togglename then
+                watchers = _watchers[(val and "start" or "stop") .. togglename]
+                if watchers ~= nil then
+                    for k, v in pairs(watchers) do
+                        for i, fn in ipairs(v) do
+                            fn[1](fn[2])
+                        end
+                    end
+                end
+            end
         end
     end
 
     local function OnSeasonChange(inst, season)
         -- 海难
-        SetVariable("ismild", season == "autumn", EntityScript.IsInShipwreckedArea)  --温和季，秋
-        SetVariable("iswet", season == "winter", EntityScript.IsInShipwreckedArea)   --飓风季，冬
-        SetVariable("isdry", season == "summer", EntityScript.IsInShipwreckedArea)   --旱季，夏
-        SetVariable("isgreen", season == "spring", EntityScript.IsInShipwreckedArea) --雨季，春
+        SetVariable("ismild", season == "autumn", "mild", EntityScript.IsInShipwreckedArea)   --温和季，秋
+        SetVariable("iswet", season == "winter", "wet", EntityScript.IsInShipwreckedArea)     --飓风季，冬
+        SetVariable("isdry", season == "summer", "dry", EntityScript.IsInShipwreckedArea)     --旱季，夏
+        SetVariable("isgreen", season == "spring", "green", EntityScript.IsInShipwreckedArea) --雨季，春
     end
 
     self:WatchWorldState("season", OnSeasonChange)
     inst:DoTaskInTime(0, function() OnSeasonChange(inst, self.data.season) end)
 
     -- 大灾变
-    inst:ListenForEvent("beginaporkalypse", function() SetVariable("isaporkalypse", true, EntityScript.IsInHamletArea) end)
-    inst:ListenForEvent("endaporkalypse", function() SetVariable("isaporkalypse", false, EntityScript.IsInHamletArea) end)
+    inst:ListenForEvent("beginaporkalypse", function() SetVariable("isaporkalypse", true, "aporkalypse", EntityScript.IsInHamletArea) end)
+    inst:ListenForEvent("endaporkalypse", function() SetVariable("isaporkalypse", false, "aporkalypse", EntityScript.IsInHamletArea) end)
 end)

@@ -5,10 +5,13 @@ local function RemoveSpawnCooldown(self)
     end
 end
 
-local function CancelSpawnTask(self)
+local function CancelSpawnTask(self, is_success)
     if self.spawn_task then
         self.spawn_task:Cancel()
         self.spawn_task = nil
+        if self.stop_spawn_fn then
+            self.stop_spawn_fn(self.inst, is_success)
+        end
     end
 end
 
@@ -19,7 +22,7 @@ end
 
 local function TrySpawnEnt(inst, self)
     if #AllPlayers <= 0 then --没玩家了，不再生成
-        CancelSpawnTask(self)
+        CancelSpawnTask(self, false)
         return
     end
 
@@ -39,7 +42,7 @@ local function TrySpawnEnt(inst, self)
             -- 数量足够了
             self.cur_spawn_count = 0
             self.next_spawn_time = nil
-            CancelSpawnTask(self)
+            CancelSpawnTask(self, true)
             break
         end
     end
@@ -48,6 +51,9 @@ end
 
 local function StartSpawn(self)
     if not self.spawn_task then
+        if self.start_spawn_fn then
+            self.start_spawn_fn(self.inst)
+        end
         self.spawn_task = self.inst:DoPeriodicTask(self.spawn_check_interval, TrySpawnEnt, 0, self)
     end
 end
@@ -116,7 +122,7 @@ local function OnEnableChange(self, enable)
             OnPlayerJoined(self, v)
         end
     else
-        CancelSpawnTask(self)
+        CancelSpawnTask(self, false)
         RemoveSpawnCooldown(self)
         self.next_spawn_time = nil
     end
@@ -140,7 +146,9 @@ local PlayerNearSpawnForOne = Class(function(self, inst)
     assert(inst)
 
     -- 可赋值
-    self.spawn_fn = nil                         --生成任务，返回值为true才表示玩家条件满足生成了东西，就会进入冷却
+    self.spawn_fn = nil --生成任务，返回值为true才表示玩家条件满足生成了东西，就会进入冷却
+    self.start_spawn_fn = nil
+    self.stop_spawn_fn = nil
     self.spawn_interval = TUNING.TOTAL_DAY_TIME --生成间隔，就是死了再重新生成的间隔
     self.first_spawn_time = nil                 --第一次生成所需时间，在世界多少时间之后
     self.enable = true                          --是否启用
@@ -162,6 +170,14 @@ local PlayerNearSpawnForOne = Class(function(self, inst)
 end, nil, {
     enable = onenable
 })
+
+function PlayerNearSpawnForOne:SetNextSpawnTime(override_interval)
+    self.next_spawn_time = GetTime() + math.max((override_interval or self.spawn_interval), 0)
+    if self.is_first and self.first_spawn_time then --第一次生成所需时间，两者取其长
+        self.next_spawn_time = math.max(self.first_spawn_time, self.next_spawn_time)
+    end
+    self.is_first = false
+end
 
 function PlayerNearSpawnForOne:OnRemoveFromEntity()
     OnEnableChange(self, false)
