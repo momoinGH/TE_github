@@ -15,6 +15,25 @@ local STOP_RUN_DIST = 25
 local MAX_FLEE_TIME = 75
 local SEE_IRON_DIST = 15
 
+local ORIGIN_PERCENTS = {
+    [FACING_DOWN] = 0,
+    [FACING_RIGHT] = 0.25,
+    [FACING_UP] = 0.5,
+    [FACING_LEFT] = 0.75
+}
+
+local function InitLookAtPercent(inst, force_reset)
+    local facing_percent = ORIGIN_PERCENTS[inst.AnimState:GetCurrentFacing()] or inst.current_percent or inst.origin or 0
+
+    if force_reset or inst.origin == nil then
+        inst.origin = facing_percent
+    end
+
+    if force_reset or inst.current_percent == nil then
+        inst.current_percent = inst.origin
+    end
+end
+
 local function GetTarget(inst, distance)
     return GetClosestInstWithTag("player", inst, distance) or GetClosestInstWithTag("monster", inst, distance)
 end
@@ -27,26 +46,26 @@ local function HomePos(inst)
     if inst.components.homeseeker then
         return inst.components.homeseeker:GetHomePos()
     end
-    return Vector3(0,0,0)
+    return Vector3(0, 0, 0)
 end
 
 local function IsHome(inst)
-if inst.components.homeseeker then
-    local target = inst.components.homeseeker.home
-    if target then
-        return inst:GetDistanceSqToInst(target) <= 1
+    if inst.components.homeseeker then
+        local target = inst.components.homeseeker.home
+        if target then
+            return inst:GetDistanceSqToInst(target) <= 1
+        end
     end
-end
     return false
 end
 
 local function IsNestEmpty(inst)
-if inst.components.homeseeker then
-    local nest = inst.components.homeseeker.home
-    if nest then
-        return not nest.components.pickable:CanBePicked()
+    if inst.components.homeseeker then
+        local nest = inst.components.homeseeker.home
+        if nest then
+            return not nest.components.pickable:CanBePicked()
+        end
     end
-end
 
     return false
 end
@@ -95,8 +114,8 @@ local function FleeAction(inst)
     while search_for_point do
         local rad = math.random(10, 25)
         local angle = math.random(360)
-        pos = Vector3(inst.Transform:GetWorldPosition()) + Vector3(rad*math.cos(angle), 0, rad*math.sin(angle))
-        
+        pos = Vector3(inst.Transform:GetWorldPosition()) + Vector3(rad * math.cos(angle), 0, rad * math.sin(angle))
+
         if IsValidGround(pos) then
             search_for_point = false
         end
@@ -111,7 +130,7 @@ local function FleeAction(inst)
     inst.Transform:SetFourFaced()
     inst.lightning_target = nil
 
-    return BufferedAction (inst, nil, ACTIONS.WALKTO, nil, pos)
+    return BufferedAction(inst, nil, ACTIONS.WALKTO, nil, pos)
 end
 
 local function RunAwayAction(inst)
@@ -130,15 +149,16 @@ local function RunAwayAction(inst)
 end
 
 local function ShouldReturnHome(inst)
-    return not IsHome(inst) and (not IsNestEmpty(inst) or inst.components.inventory:NumItems() > 0) and not inst.is_fleeing
+    return not IsHome(inst) and (not IsNestEmpty(inst) or inst.components.inventory:NumItems() > 0) and
+        not inst.is_fleeing
 end
 
 local function PickIronAction(inst)
     local target = FindEntity(inst, SEE_IRON_DIST,
         function(item)
-            local x,y,z = item.Transform:GetWorldPosition()
+            local x, y, z = item.Transform:GetWorldPosition()
             local isValidPosition = x and y and z
-            
+
             local isValidPickupItem =
                 isValidPosition and
                 item.components.inventoryitem and
@@ -158,7 +178,6 @@ end
 
 
 local function TargetAtChargeDistance(inst)
-
     local function ReturnToDefault()
         if inst.charging and inst.sg.currentstate.name ~= "charge_pst" then
             inst:PushEvent("cancel_charge")
@@ -167,15 +186,14 @@ local function TargetAtChargeDistance(inst)
 
     local target = GetTarget(inst, CHARGE_DIST)
     if ValidateTarget(target) and not inst.is_fleeing then
-
         local dist = inst:GetDistanceSqToInst(target)
-        local keep = dist <= CHARGE_DIST*CHARGE_DIST and dist > ATTACK_DIST*ATTACK_DIST
+        local keep = dist <= CHARGE_DIST * CHARGE_DIST and dist > ATTACK_DIST * ATTACK_DIST
 
-        if not keep then 
+        if not keep then
             ReturnToDefault()
         end
 
-       return keep
+        return keep
     end
 
     ReturnToDefault()
@@ -189,7 +207,7 @@ local function ChargeFn(inst)
 end
 
 
-local function FixAngle( target_angle)
+local function FixAngle(target_angle)
     if target_angle > 360 then
         return target_angle % 360
     elseif target_angle < 0 then
@@ -203,7 +221,6 @@ end
 
 
 local function TargetAtLookDistance(inst)
-    
     if inst.charging then
         return false
     end
@@ -216,24 +233,17 @@ local function TargetAtLookDistance(inst)
 
     local target = GetTarget(inst, FACE_DIST)
     if ValidateTarget(target) and not inst.is_fleeing then
-
         local dist = inst:GetDistanceSqToInst(target)
-        local keep = dist <= FACE_DIST*FACE_DIST and dist > CHARGE_DIST*CHARGE_DIST
+        local keep = dist <= FACE_DIST * FACE_DIST and dist > CHARGE_DIST * CHARGE_DIST
 
         if keep then
             if inst.lightning_target == nil or inst.lightning_target ~= target then
                 inst.lightning_target = target
-                
-                local origin_percents = {
-                    [FACING_DOWN] = 0,
-                    [FACING_RIGHT] = 0.25,
-                    [FACING_UP] = 0.5,
-                    [FACING_LEFT] = 0.75
-                }
-
-                inst.origin = origin_percents[inst.AnimState:GetCurrentFacing()]
-                inst.current_percent = inst.origin
-
+                InitLookAtPercent(inst, true)
+                inst.Transform:SetNoFaced()
+            elseif inst.current_percent == nil or inst.origin == nil then
+                -- lightning_target may be set by other actions (e.g. attack) before look-at starts.
+                InitLookAtPercent(inst, false)
                 inst.Transform:SetNoFaced()
             end
         else
@@ -249,27 +259,34 @@ local function TargetAtLookDistance(inst)
 end
 
 local function LookAtFn(inst)
-    local x1, y1, z1 = inst.Transform:GetWorldPosition()
-    local x2, y2, z2 = inst.lightning_target.Transform:GetWorldPosition()
-	
-	if x2 == nil then x2 = x1 end
-	if z2 == nil then z2 = z1 end
-
-    local angle = math.atan2(z2-z1, x2-x1)
-
-    if angle < 0 then
-        angle = (2*PI + angle)
+    if inst.lightning_target == nil or not inst.lightning_target:IsValid() then
+        return
     end
 
-    angle = angle * 360 / (2*PI)
+    if inst.current_percent == nil or inst.origin == nil then
+        InitLookAtPercent(inst, false)
+    end
+
+    local x1, y1, z1 = inst.Transform:GetWorldPosition()
+    local x2, y2, z2 = inst.lightning_target.Transform:GetWorldPosition()
+
+    if x2 == nil then x2 = x1 end
+    if z2 == nil then z2 = z1 end
+
+    local angle = math.atan2(z2 - z1, x2 - x1)
+
+    if angle < 0 then
+        angle = (2 * PI + angle)
+    end
+
+    angle = angle * 360 / (2 * PI)
 
     angle = FixAngle(angle - TheCamera:GetHeadingTarget())
     local percent = angle / 360
 
-    local diff = percent > inst.current_percent and percent - inst.current_percent or inst.current_percent - percent or 0
+    local diff = percent > inst.current_percent and percent - inst.current_percent or inst.current_percent - percent
     -- Minimum percent for us to change frames
     if diff > 0.02 then
-
         -- Determines the orientation we're supposed to rotate towards
         if percent > inst.origin then
             if percent - inst.origin > 0.5 then
@@ -277,7 +294,6 @@ local function LookAtFn(inst)
             elseif percent - inst.origin < 0.5 then
                 inst.current_percent = inst.current_percent + 0.02
             end
-
         elseif percent < inst.origin then
             if inst.origin - percent > 0.5 then
                 inst.current_percent = inst.current_percent + 0.02
@@ -298,7 +314,6 @@ local function LookAtFn(inst)
         -- We've reached the target, so this is our new origin
         inst.origin = inst.current_percent
     end
-
 end
 
 local ThunderbirdBrain = Class(Brain, function(self, inst)
@@ -306,34 +321,41 @@ local ThunderbirdBrain = Class(Brain, function(self, inst)
 end)
 
 function ThunderbirdBrain:OnStart()
---    local clock = GetClock()
-    
+    --    local clock = GetClock()
+
     local root = PriorityNode(
-    {
-        WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
-        
-        IfNode(function() return ThreatInAttackRange(self.inst) and not self.inst.cooling_down end, "ThreatInRange",
-            DoAction(self.inst, LightningAction, "ThreatInRange", false )),
+        {
+            WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
+            IfNode(function() return ThreatInAttackRange(self.inst) and not self.inst.cooling_down end, "ThreatInRange",
+                DoAction(self.inst, LightningAction, "ThreatInRange", false)),
 
-        RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST, function() return RunAwayAction(self.inst) end),
+            RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST,
+                function() return RunAwayAction(self.inst) end),
 
-        IfNode (function () return not ThreatInAttackRange(self.inst) and TargetAtChargeDistance(self.inst) end, "Charge", 
-            DoAction(self.inst, function() ChargeFn(self.inst) end, "Charging")),
+            IfNode(function() return not ThreatInAttackRange(self.inst) and TargetAtChargeDistance(self.inst) end,
+                "Charge",
+                DoAction(self.inst, function() ChargeFn(self.inst) end, "Charging")),
 
-        WhileNode(function() return ShouldReturnHome(self.inst) end, "FarFromHome",
-            DoAction(self.inst, GoHomeAction, "Go Home", false )),
+            WhileNode(function() return ShouldReturnHome(self.inst) end, "FarFromHome",
+                DoAction(self.inst, GoHomeAction, "Go Home", false)),
 
-        WhileNode(function () return not TargetAtChargeDistance(self.inst) and TargetAtLookDistance(self.inst) end, "LookAt",
-            DoAction(self.inst, function() LookAtFn(self.inst) end, "Looking")),
-    
+            WhileNode(function() return not TargetAtChargeDistance(self.inst) and TargetAtLookDistance(self.inst) end,
+                "LookAt",
+                DoAction(self.inst, function() LookAtFn(self.inst) end, "Looking")),
 
-        IfNode(function() return IsNestEmpty(self.inst) and not self.inst.is_fleeing and self.inst.components.inventory:NumItems() < 1 end, "PickIron", 
-            DoAction(self.inst, PickIronAction, "PickIron", false )),
 
-        IfNode(function() return IsNestEmpty(self.inst) and not self.inst.is_fleeing end, "Wander", Wander(self.inst, HomePos, MAX_WANDER_DIST)),
+            IfNode(
+                function()
+                    return IsNestEmpty(self.inst) and not self.inst.is_fleeing and
+                        self.inst.components.inventory:NumItems() < 1
+                end, "PickIron",
+                DoAction(self.inst, PickIronAction, "PickIron", false)),
 
-    }, .1)
-    
+            IfNode(function() return IsNestEmpty(self.inst) and not self.inst.is_fleeing end, "Wander",
+                Wander(self.inst, HomePos, MAX_WANDER_DIST)),
+
+        }, .1)
+
     self.bt = BT(self.inst, root)
 end
 
