@@ -242,7 +242,7 @@ AddRoom("MagmaHome", {
         {
             magmarock_gold = 2,
             magmarock = 2,
-            rock1 = .2, --nitre
+            rock1 = .2,  --nitre
             rock_flintless = 1,
             rocks = .25, --was 0.5
             flint = 0.1, -- lowered from 3
@@ -363,7 +363,7 @@ AddRoom("Volcano", {
         countprefabs =
         {
             volcanofog = math.random(1, 2),
-            cave_entrance_vulcao = 1,
+            volcano = 1,
         },
 
         prefabdata =

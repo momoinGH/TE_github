@@ -74,10 +74,6 @@ local function make_plantable(data)
 
         inst:AddComponent("inventoryitem")
 
-        if data.name == "nettle" then
-        else
-        end
-
         inst:AddComponent("fuel")
         inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
 

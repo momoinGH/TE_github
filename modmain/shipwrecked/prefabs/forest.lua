@@ -6,4 +6,5 @@ AddPrefabPostInit("forest", function(inst)
     inst:AddComponent("rainbowjellymigration") --彩虹水母生成
     inst:AddComponent("tigersharker")          --虎鲨生成
     inst:AddComponent("tro_twistermanager")    --豹卷风生成
+    inst:AddComponent("volcanomanager")        --火山喷发
 end)

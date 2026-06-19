@@ -1,11 +1,15 @@
 local Layouts = require("map/layouts").Layouts
 local StaticLayout = require("map/static_layout")
 
-local default_layout_data = {
-    layout_position = LAYOUT_POSITION.CENTER,
-    start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-}
+-- 内部会修改这个表，不能复用
+local function GetDefaultLayoutData()
+    return {
+        layout_position = LAYOUT_POSITION.CENTER,
+        start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+        fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+    }
+end
+
 
 -- 猫鲨
 Layouts["sharkhome"] = StaticLayout.Get("map/static_layouts/sharkhome", {
@@ -17,20 +21,20 @@ TroRemapLayoutTile("sharkhome", {
 })
 
 -- 咖啡丛
-Layouts["CoffeeBushBunch"] = StaticLayout.Get("map/static_layouts/coffeebushbunch", default_layout_data)
+Layouts["CoffeeBushBunch"] = StaticLayout.Get("map/static_layouts/coffeebushbunch", GetDefaultLayoutData())
 --火山出口
-Layouts["Entradavulcao"] = StaticLayout.Get("map/static_layouts/volcano_start", default_layout_data)
+Layouts["Entradavulcao"] = StaticLayout.Get("map/static_layouts/volcano_start", GetDefaultLayoutData())
 -- 黑曜石工作台
-Layouts["ObsidianWorkbench"] = StaticLayout.Get("map/static_layouts/volcano_workbench", default_layout_data)
+Layouts["ObsidianWorkbench"] = StaticLayout.Get("map/static_layouts/volcano_workbench", GetDefaultLayoutData())
 -- 海盗船长的牢笼
-Layouts["WoodlegsUnlock"] = StaticLayout.Get("map/static_layouts/woodlegs_unlock", default_layout_data)
+Layouts["WoodlegsUnlock"] = StaticLayout.Get("map/static_layouts/woodlegs_unlock", GetDefaultLayoutData())
 -- 火豹卷
-Layouts["volcano_altar"] = StaticLayout.Get("map/static_layouts/volcano_altar", default_layout_data)
+Layouts["volcano_altar"] = StaticLayout.Get("map/static_layouts/volcano_altar", GetDefaultLayoutData())
 -- 丛林树精
 Layouts["LivingJungleTree"] = StaticLayout.Get("map/static_layouts/livingjungletree")
 
 -- 竹丛、藤蔓、浆果
-Layouts["BerryBushBunch"] = StaticLayout.Get("map/static_layouts/berrybushbunch", default_layout_data)
+Layouts["BerryBushBunch"] = StaticLayout.Get("map/static_layouts/berrybushbunch", GetDefaultLayoutData())
 -- 老虎机
 Layouts["slotmachine"] = StaticLayout.Get("map/static_layouts/slotmachine", {
     layout_position = LAYOUT_POSITION.CENTER,

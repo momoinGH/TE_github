@@ -81,7 +81,7 @@ return {
         },
         {
           name = "",
-          type = "cave_exit_vulcao",
+          type = "volcano_exit",
           shape = "rectangle",
           x = 193,
           y = 195,

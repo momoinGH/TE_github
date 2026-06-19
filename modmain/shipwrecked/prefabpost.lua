@@ -89,37 +89,37 @@ end
 
 for _, data in ipairs({
     -- {预制件名、是否播放特效和音效、禁止建造的placer}
-    { "rainometer", true },
+    { "rainometer",           true },
     { "winterometer" },
 
-    { "researchlab", true },
-    { "researchlab2", true },
-    { "researchlab3", true },
-    { "researchlab4", true },
-    { "piratihatitator", true },
+    { "researchlab",          true },
+    { "researchlab2",         true },
+    { "researchlab3",         true },
+    { "researchlab4",         true },
+    { "piratihatitator",      true },
     { "seafaring_prototyper", true },
-    { "hogusporkusator", true },
-    { "tacklestation", true },
-    { "madscience_lab", true },
+    { "hogusporkusator",      true },
+    { "tacklestation",        true },
+    { "madscience_lab",       true },
 
-    { "cookpot", true },
-    { "portablecookpot", true },
-    { "portableblender", true },
-    { "portablespicer", true },
+    { "cookpot",              true },
+    { "portablecookpot",      true },
+    { "portableblender",      true },
+    { "portablespicer",       true },
 
-    { "winona_spotlight", true },
-    { "winona_catapult", true },
+    { "winona_spotlight",     true },
+    { "winona_catapult",      true },
 
-    { "firesuppressor", true },
-    { "icemaker", true },
-    { "icebox", true },
-    { "slotmachine", true },
+    { "firesuppressor",       true },
+    { "icemaker",             true },
+    { "icebox",               true },
+    { "slotmachine",          true },
 
-    { "campfire", false, "campfire_placer" },
-    { "firepit", false, "firepit_placer" },
-    { "coldfire", false, "coldfire_placer" },
-    { "coldfirepit", false, "coldfirepit_placer" },
-    { "obsidianfirepit", false, "obsidianfirepit_placer" },
+    { "campfire",             false, "campfire_placer" },
+    { "firepit",              false, "firepit_placer" },
+    { "coldfire",             false, "coldfire_placer" },
+    { "coldfirepit",          false, "coldfirepit_placer" },
+    { "obsidianfirepit",      false, "obsidianfirepit_placer" },
 }) do
     AddPrefabPostInit(data[1], function(inst)
         if not TheWorld.ismastersim then return end

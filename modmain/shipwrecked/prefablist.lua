@@ -150,13 +150,9 @@ PrefabFiles = {
     "lava_erupt",         --岩浆热浪特效 没实装
 
 
-    --TODO 整理一下火山
-    "volcano",              --火山
-    "vulcano",              --火山
-    "cave_entrance_vulcao", --火山
-    "cave_exit_vulcao",     --火山出口
-    "escadadovulcao",       --火山入口
-
+    "volcano",         --火山
+    "volcano_exit",    --火山出口
+    "volcano_altar",   --火山祭坛
 
     "woodlegs_cage",   --海盗船长的牢笼
     "woodlegs_key1",   --骨钥匙

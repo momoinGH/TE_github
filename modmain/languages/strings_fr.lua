@@ -103,9 +103,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.VOLCANO_SHRUB = "Il a l'air en cendre."
 STRINGS.NAMES.VOLCANO_EXIT = "Volcan"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VOLCANO_EXIT = "Il y a un petit vent frais qui vient de l'extérieur."
 
-STRINGS.NAMES.VULCANO_ENTRANCE = "Entrée du volcan"
-STRINGS.NAMES.ESCADADOVULCAO = "Sortie du volcan"
-
 STRINGS.NAMES.VOLCANO = "Volcan"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.VOLCANO =
 "Mon savoir-faire scientifique m'indique que c'est une montagne qui ne présente aucun danger !"
@@ -1213,7 +1210,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIGEREYE = "Avec plus d'yeux on voit mieux, 
 
 STRINGS.RECIPE_DESC.GOLDNUGGET = "De l'or ! De l'or ! De l'or !"
 
-STRINGS.NAMES.ESCADADOVULCAO2 = "Sortie de volcan"
 STRINGS.NAMES.LAVAPONDBIG1 = "Gros bassin de lave"
 
 STRINGS.NAMES.MERM1 = "Merm"

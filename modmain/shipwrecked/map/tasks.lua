@@ -334,6 +334,8 @@ AddTask("DoyDoyF", {
     background_room = "Jungle",
     colour = { 1, .5, .5, .2 },
 })
+
+-- 火山世界，生成在洞穴里
 AddTask("Volcano ground", {
     locks = { LOCKS.MEDIUM },
     keys_given = { KEYS.MEDIUM },

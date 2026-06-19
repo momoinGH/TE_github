@@ -18,20 +18,7 @@ local tasks = {
     "BeachPiggy",      --猪人沙滩
     "DoyDoyM",         ---doydoyM
     "DoyDoyF",         ---doydoyF
-    "Volcano ground",  --火山  ["VolcanoAsh"] = 1,       ["Volcano"] = 1,    ["VolcanoObsidian"] = 1,
-
-    -- "A_BLANK1",
-    -- "A_BLANK2",
-    -- "A_BLANK3",
-    -- "A_BLANK4",
-    -- "A_BLANK5",
-    -- "A_BLANK6",
-    -- "A_BLANK7",
-    -- "A_BLANK8",
-    -- "A_BLANK9",
-    -- "A_BLANK10",
-    -- "A_BLANK11",
-    -- "A_BLANK12",
+    "Volcano ground"   --火山世界
 }
 
 for _, t in ipairs(tasks) do
