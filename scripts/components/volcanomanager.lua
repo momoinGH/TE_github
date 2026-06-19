@@ -1,20 +1,68 @@
 local WARN_QUAKE_DURATION = 0.7
+local DRY_SEASON = "summer"
+local DEFAULT_SHAKE_DIST = 80
+local DEFAULT_FIRERAIN_RADIUS = 20
+local DEFAULT_DRAGOONEGG_CHANCE = 0.25
+
+local function IsValidPlayer(player)
+    return player ~= nil
+        and player:IsValid()
+        and player.entity ~= nil
+        and player.Transform ~= nil
+        and not player:HasTag("playerghost")
+end
+
+local function GetValidPlayers()
+    local players = {}
+    for _, player in ipairs(AllPlayers) do
+        if IsValidPlayer(player) then
+            table.insert(players, player)
+        end
+    end
+    return players
+end
+
+local function GetDayTime()
+    return (TheWorld.state.cycles or 0) + (TheWorld.state.time or 0)
+end
+
+local function GetSeasonPercent()
+    local totaldays = (TheWorld.state.elapseddaysinseason or 0) + (TheWorld.state.remainingdaysinseason or 0)
+    if totaldays <= 0 then
+        return TheWorld.state.seasonprogress or 0
+    end
+    return math.clamp((TheWorld.state.elapseddaysinseason or 0) / totaldays, 0, 1)
+end
+
+local function GetSeasonLength(season)
+    local length = TheWorld.state[season .. "length"]
+    if length ~= nil and length > 0 then
+        return length
+    end
+    return TUNING[string.upper(season) .. "_LENGTH"] or 0
+end
+
+local function AnnounceToPlayers(strid)
+    for _, player in ipairs(GetValidPlayers()) do
+        if player.components ~= nil and player.components.talker ~= nil then
+            player.components.talker:Say(GetString(player, strid))
+        end
+    end
+end
 
 -- waits 'delay' frames before actually listening for the event
 local function EventLoader(inst, delay)
     if delay > 0 then
         inst:DoTaskInTime(0, EventLoader, delay - 1)
     else
-        inst:ListenForEvent("seasonChange", function(it, data)
-            if data.season == SEASONS.DRY then
-                inst.components.volcanomanager:StartDrySeason()
-            end
-        end)
+        inst.components.volcanomanager:WatchWorldState("start" .. DRY_SEASON, inst.components.volcanomanager.StartDrySeason)
     end
 end
 
 -- 海难火山喷发组件
 local VolcanoManager = Class(function(self, inst)
+    assert(TheWorld.ismastersim, "VolcanoManager should not exist on client")
+
     self.inst = inst
     self.volcanoes = {}
     self.schedule = {}
@@ -34,7 +82,7 @@ local VolcanoManager = Class(function(self, inst)
     self.ash_timer = 0
     self.ash_delay = 0
     self.ash_duration = 0
-    self.ash = nil
+    self.ash = {}
     self.intensity = 1.0 -- 1.0 = normal
     self.waserupting = false
 
@@ -48,24 +96,22 @@ function VolcanoManager:DoWarnQuake(duration, speed, scale)
     duration = duration or WARN_QUAKE_DURATION
     speed = speed or 0.02
     scale = scale or .75
-    ShakeAllCameras(CAMERASHAKE.FULL, duration, speed, scale)
+    ShakeAllCameras(CAMERASHAKE.FULL, duration, speed, scale, self.inst, DEFAULT_SHAKE_DIST)
 
     self.inst.SoundEmitter:PlaySound("dontstarve/cave/earthquake", "earthquake")
     self.inst.SoundEmitter:SetParameter("earthquake", "intensity", 0.08)
     self.inst:DoTaskInTime(duration, function() self.inst.SoundEmitter:KillSound("earthquake") end)
 
-    local player = GetPlayer()
-    player.components.talker:Say(GetString(player.prefab, "ANNOUNCE_QUAKE"))
+    AnnounceToPlayers("ANNOUNCE_QUAKE")
 end
 
 function VolcanoManager:DoEruptQuake(duration, speed, scale)
     duration = duration or 4.0
     speed = speed or 0.02
     scale = scale or 2.0
-    ShakeAllCameras(CAMERASHAKE.FULL, duration, speed, scale)
+    ShakeAllCameras(CAMERASHAKE.FULL, duration, speed, scale, self.inst, DEFAULT_SHAKE_DIST)
 
-    local player = GetPlayer()
-    player.components.talker:Say(GetString(player.prefab, "ANNOUNCE_VOLCANO_ERUPT"))
+    AnnounceToPlayers("ANNOUNCE_VOLCANO_ERUPT")
     self.inst:PushEvent("OnVolcanoWarningQuake")
 end
 
@@ -89,7 +135,7 @@ end
 
 function VolcanoManager:SpawnFireRain(x, y, z)
     local firerain
-    if math.random() <= TUNING.VOLCANO_DRAGOONEGG_CHANCE then
+    if math.random() <= (TUNING.VOLCANO_DRAGOONEGG_CHANCE or DEFAULT_DRAGOONEGG_CHANCE) then
         firerain = SpawnPrefab("dragoonegg_falling")
     else
         firerain = SpawnPrefab("firerain")
@@ -143,7 +189,7 @@ end
 function VolcanoManager:StartStaffTrap()
     print("VolcanoManager start staff trap")
     --self:DoWarnQuake()
-    self:ResumeStaffTrap(math.floor(16 * (GetClock():GetNumCycles() + GetClock():GetNormTime())))
+    self:ResumeStaffTrap(math.floor(16 * GetDayTime()))
 end
 
 function VolcanoManager:StartStaffEffect(ash_timer)
@@ -185,10 +231,12 @@ function VolcanoManager:StartAshRain(ash_duration, ash_delay)
 end
 
 function VolcanoManager:StopAshRain()
-    if self.ash then
-        self.ash:Remove()
+    for player, ash in pairs(self.ash) do
+        if ash:IsValid() then
+            ash:Remove()
+        end
     end
-    self.ash = nil
+    self.ash = {}
     self.ash_timer = 0.0
     self.ash_delay = 0.0
     self.ash_duration = 0.0
@@ -218,26 +266,29 @@ function VolcanoManager:RunSchedule(schedule, segs)
 end
 
 function VolcanoManager:GetCurrentScheduleSegment()
-    local sm = GetSeasonManager()
-    local cycles = sm:GetPercentSeason() * sm:GetSeasonLength(SEASONS.DRY)
-    local normTime = GetClock():GetNormTime()
+    local cycles = GetSeasonPercent() * GetSeasonLength(DRY_SEASON)
+    local normTime = TheWorld.state.time or 0
     return math.floor(16 * (cycles + normTime)) - self.appeasesegs
 end
 
 function VolcanoManager:GetCurrentStaffScheduleSegment()
-    return math.floor(16 * (GetClock():GetNumCycles() + GetClock():GetNormTime())) - self.staffstartseg
+    return math.floor(16 * GetDayTime()) - self.staffstartseg
 end
 
 function VolcanoManager:GetDebugString()
-    local sm = GetSeasonManager()
-    local clock = GetClock()
-    local cycles = clock:GetNumCycles()
-    local normtime = clock:GetNormTime()
+    local cycles = TheWorld.state.cycles or 0
+    local normtime = TheWorld.state.time or 0
     local cursegs = math.floor(16 * (cycles + normtime))
+    local ash_particles = 0
+    for _, ash in pairs(self.ash) do
+        if ash:IsValid() then
+            ash_particles = ash_particles + (ash.particles_per_tick or 0)
+        end
+    end
     local str = "Volcano\n"
 
     if self.schedule[1] then
-        str = str .. string.format("  dry segs %d, season %4.2f\n", self:GetCurrentScheduleSegment(), sm:GetPercentSeason())
+        str = str .. string.format("  dry segs %d, season %4.2f\n", self:GetCurrentScheduleSegment(), GetSeasonPercent())
     end
     if self.schedule[2] then
         str = str .. string.format("  staff segs %d, start seg %d\n", cursegs - self.staffstartseg, self.staffstartseg)
@@ -249,7 +300,7 @@ function VolcanoManager:GetDebugString()
             self:GetNumSegmentsUntilQuake() or 0, self:GetNumSegmentsUntilEruption() or 0,
             cycles, normtime, cursegs,
             self.firerain_timer, self.firerain_delay, self.firerain_duration, self.firerain_intensity, self.firerain_spawn_rate, self.firerain_spawn_per_sec,
-            self.ash_timer, self.ash_delay, self.ash_duration, (self.ash and self.ash.particles_per_tick) or 0,
+            self.ash_timer, self.ash_delay, self.ash_duration, ash_particles,
             self.smoke_timer, self.smoke_delay, self.smoke_duration, self:GetSmokeRate(),
             self.appeasesegs)
 
@@ -262,7 +313,6 @@ function VolcanoManager:OnUpdate(dt)
     if self.schedule[1] then
         if TheWorld.state.issummer then
             local segs = self:GetCurrentScheduleSegment()
-            --print(string.format("segs %d (%d), %f, %f\n", segs, get_segs(), TheWorld.state.issummer, GetClock():GetNormTime()))
             self:RunSchedule(self.schedule[1], segs)
             if segs > self.schedulesegs[1] then
                 self:SetDormantIcon()
@@ -275,9 +325,7 @@ function VolcanoManager:OnUpdate(dt)
     end
 
     if self.schedule[2] then
-        --local cursegs = math.floor(16 * (GetClock():GetNumCycles() + GetClock():GetNormTime()))
-        local segs = self:GetCurrentStaffScheduleSegment() --cursegs - self.staffstartseg
-        --print(string.format("segs %f, cursegs %f, cycles %d, normtime %f", segs, cursegs, GetClock():GetNumCycles(), GetClock():GetNormTime()))
+        local segs = self:GetCurrentStaffScheduleSegment()
         self:RunSchedule(self.schedule[2], segs)
         if segs > self.schedulesegs[2] then
             self:SetDormantIcon()
@@ -291,8 +339,14 @@ function VolcanoManager:OnUpdate(dt)
         if self.firerain_timer <= self.firerain_duration then
             self.firerain_spawn_rate = self.firerain_spawn_rate + self.firerain_spawn_per_sec * self.firerain_intensity * dt
             while self.firerain_spawn_rate > 1.0 do
-                local px, py, pz = GetPlayer().Transform:GetWorldPosition()
-                local x, y, z = TUNING.VOLCANO_FIRERAIN_RADIUS * UnitRand() + px, py, TUNING.VOLCANO_FIRERAIN_RADIUS * UnitRand() + pz
+                local players = GetValidPlayers()
+                if #players <= 0 then
+                    break
+                end
+                local player = players[math.random(#players)]
+                local px, py, pz = player.Transform:GetWorldPosition()
+                local radius = TUNING.VOLCANO_FIRERAIN_RADIUS or DEFAULT_FIRERAIN_RADIUS
+                local x, y, z = radius * UnitRand() + px, py, radius * UnitRand() + pz
                 self:SpawnFireRain(x, y, z)
                 self.firerain_spawn_rate = self.firerain_spawn_rate - 1.0
             end
@@ -306,16 +360,40 @@ function VolcanoManager:OnUpdate(dt)
     if self.ash_timer > 0.0 then
         self.ash_timer = self.ash_timer - dt
         if self.ash_timer <= self.ash_duration then
-            if not self.ash then
-                self.ash = SpawnPrefab("ashfx")
-                self.ash.entity:SetParent(GetPlayer().entity)
+            local particles_per_tick = 20 * math.min(self.ash_timer / self.ash_duration, 1.0)
+            local players = GetValidPlayers()
+            local valid_players = {}
+            for _, player in ipairs(players) do
+                valid_players[player] = true
+                local ash = self.ash[player]
+                if ash == nil or not ash:IsValid() then
+                    ash = SpawnPrefab("ashfx")
+                    ash.entity:SetParent(player.entity)
+                    self.ash[player] = ash
+                end
+                ash.particles_per_tick = particles_per_tick
             end
-            self.ash.particles_per_tick = 20 * math.min(self.ash_timer / self.ash_duration, 1.0)
-        elseif self.ash then
-            self.ash.particles_per_tick = 0
+            for player, ash in pairs(self.ash) do
+                if not valid_players[player] then
+                    if ash:IsValid() then
+                        ash:Remove()
+                    end
+                    self.ash[player] = nil
+                end
+            end
+        else
+            for _, ash in pairs(self.ash) do
+                if ash:IsValid() then
+                    ash.particles_per_tick = 0
+                end
+            end
         end
-    elseif self.ash then
-        self.ash.particles_per_tick = 0
+    else
+        for _, ash in pairs(self.ash) do
+            if ash:IsValid() then
+                ash.particles_per_tick = 0
+            end
+        end
     end
 
     if self.smoke_timer > 0.0 then
@@ -428,15 +506,18 @@ end
 function VolcanoManager:GetClosestVolcano()
     local closest = nil
     local closestdistsq = nil
+    local players = GetValidPlayers()
     for k, v in pairs(self.volcanoes) do
-        if v then
-            local x, y, z = GetPlayer().Transform:GetWorldPosition()
+        if v ~= nil and v:IsValid() then
             local vx, vy, vz = v.Transform:GetWorldPosition()
-            local dx, dy, dz = x - vx, y - vy, z - vz
-            local distSq = dx * dx + dy * dy + dz * dz
-            if closest == nil or distSq < closestdistsq then
-                closestdistsq = distSq
-                closest = v
+            for _, player in ipairs(players) do
+                local x, y, z = player.Transform:GetWorldPosition()
+                local dx, dz = x - vx, z - vz
+                local distSq = dx * dx + dz * dz
+                if closest == nil or distSq < closestdistsq then
+                    closestdistsq = distSq
+                    closest = v
+                end
             end
         end
     end
@@ -444,17 +525,24 @@ function VolcanoManager:GetClosestVolcano()
 end
 
 function VolcanoManager:GetDistanceFromVolcano(x, y, z)
-    local dist = 100000000
+    if x == nil or z == nil then
+        local player = GetValidPlayers()[1]
+        if player == nil then
+            return math.huge
+        end
+        x, y, z = player.Transform:GetWorldPosition()
+    end
+
+    local closestdistsq = math.huge
     for k, v in pairs(self.volcanoes) do
-        if v then
-            local x, y, z = GetPlayer().Transform:GetWorldPosition()
+        if v ~= nil and v:IsValid() then
             local vx, vy, vz = v.Transform:GetWorldPosition()
-            local dx, dy, dz = x - vx, y - vy, z - vz
-            local distSq = dx * dx + dy * dy + dz * dz
-            dist = math.sqrt(math.min(dist, distSq))
+            local dx, dz = x - vx, z - vz
+            local distSq = dx * dx + dz * dz
+            closestdistsq = math.min(closestdistsq, distSq)
         end
     end
-    return dist
+    return math.sqrt(closestdistsq)
 end
 
 function VolcanoManager:GetSmokeRate()
