@@ -15,7 +15,7 @@ end
 -- 检查每个玩家是否应该起雾
 local function Update(inst, self)
     for _, player in ipairs(AllPlayers) do
-        if TroInHamlteFogImple(player) then --在哈姆雷特区域，不在小房子里
+        if TroInHamletFogImple(player) then --在哈姆雷特区域，不在小房子里
             PlayerStartFog(self, player)
         else
             PlayerStopFog(self, player)

@@ -71,7 +71,7 @@ local function make_plantable(data)
 
         inst:AddComponent("inspectable")
         inst.components.inspectable.nameoverride = data.inspectoverride or ("dug_" .. data.name)
-        
+
         inst:AddComponent("inventoryitem")
 
         if data.name == "nettle" then
@@ -104,11 +104,10 @@ end
 
 local plantables =
 {
-    { name = "bambootree",     bank = "bambootree",     build = "bambootree_build", anim = "picked",      },
-    { name = "elephantcactus", bank = "cactus_volcano", build = "cactus_volcano",   anim = "idle_dead",   },
+    { name = "bambootree",     bank = "bambootree",     build = "bambootree_build", anim = "picked", },
+    { name = "elephantcactus", bank = "cactus_volcano", build = "cactus_volcano",   anim = "idle_dead", },
     { name = "bush_vine",      bank = "bush_vine",      build = "bush_vine",        anim = "hacked_idle", },
-    { name = "nettle",         bank = "nettle",         build = "nettle",                                 },
-    { name = "coffeebush",     bank = "coffeebush",     build = "coffeebush",                             },
+    { name = "coffeebush",     bank = "coffeebush",     build = "coffeebush", },
 }
 
 local prefabs = {}

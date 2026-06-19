@@ -314,7 +314,7 @@ end)
 ---@param msg string 错误消息
 ---@param has_trace boolean 是否打印堆栈，默认true
 OnTroErrorHandle = function(msg, has_trace, level)
-    if TheWorld.ismastersim then
+    if TheWorld and TheWorld.ismastersim then
         SendModRPCToClient(GetClientModRPC("TE", "LogToClient"), nil, msg, level) -- 发到本地去
         return
     end

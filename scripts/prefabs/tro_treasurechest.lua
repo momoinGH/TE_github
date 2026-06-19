@@ -82,6 +82,7 @@ return
         bank = "roottrunk",
         build = "treasure_chest_roottrunk",
         minimap = "root_chest.png",
+        workable = true,
     }, nil, function(inst)
         inst.components.container.onopenfn = onopenroot
         inst.components.container.onclosefn = oncloseroot
