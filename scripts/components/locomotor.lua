@@ -270,12 +270,12 @@ end
 
 local function ClientExternalVelocityVectorX(self)
     return self.inst.player_classified and self.inst.player_classified.externalvelocityvectorx:value() or
-    self.externalvelocityvectorx
+        self.externalvelocityvectorx
 end
 
 local function ClientExternalVelocityVectorZ(self)
     return self.inst.player_classified and self.inst.player_classified.externalvelocityvectorz:value() or
-    self.externalvelocityvectorz
+        self.externalvelocityvectorz
 end
 
 local function ServerGetSpeedMultiplier(self)
@@ -291,7 +291,7 @@ local function ServerGetSpeedMultiplier(self)
             --      nothing if inventory is closed.
             --      Don't check visibility though.
             local is_mighty = self.inst.components.mightiness ~= nil and
-            self.inst.components.mightiness:GetState() == "mighty"
+                self.inst.components.mightiness:GetState() == "mighty"
             for k, v in pairs(self.inst.components.inventory.equipslots) do
                 if v.components.equippable ~= nil then
                     local item_speed_mult = v.components.equippable:GetWalkSpeedMult()
@@ -1064,7 +1064,7 @@ function LocoMotor:PushAction(bufferedaction, run, try_instant)
         self.inst:PushBufferedAction(bufferedaction)
     elseif bufferedaction.target ~= nil then
         local owner = bufferedaction.target.components.inventoryitem ~= nil and
-        bufferedaction.target.components.inventoryitem.owner or nil
+            bufferedaction.target.components.inventoryitem.owner or nil
         if owner ~= nil and owner:HasTag("pocketdimension_container") then
             --don't try to walk to this container at (0, 0, 0)
             self:FaceMovePoint(bufferedaction.target.Transform:GetWorldPosition())
@@ -1121,7 +1121,7 @@ function LocoMotor:GoToEntity(target, bufferedaction, run)
         arrive_dist = ARRIVE_STEP + owner:GetPhysicsRadius(0) + self.inst:GetPhysicsRadius(0)
 
         local extra_arrive_dist = (bufferedaction ~= nil and bufferedaction.action ~= nil and bufferedaction.action.extra_arrive_dist) or
-        nil
+            nil
         if extra_arrive_dist ~= nil then
             arrive_dist = arrive_dist + extra_arrive_dist(self.inst, self.dest, bufferedaction)
         end
@@ -1167,7 +1167,7 @@ function LocoMotor:GoToPoint(pt, bufferedaction, run, overridedest)
         or ARRIVE_STEP
 
     local extra_arrive_dist = (bufferedaction ~= nil and bufferedaction.action ~= nil and bufferedaction.action.extra_arrive_dist) or
-    nil
+        nil
     if extra_arrive_dist ~= nil then
         self.arrive_dist = self.arrive_dist + extra_arrive_dist(self.inst, self.dest, bufferedaction)
     end
@@ -1408,7 +1408,7 @@ function LocoMotor:ScanForPlatformInDir_Internal(my_platform, map, my_x, my_z, d
                                 my_platform.components.platformhopdelay:GetDelayTicks() or 0
                             )
                             delay = platform_delay > 0 and platform_delay or self.inst.forced_platformhopdelay or
-                            TUNING.PLATFORM_HOP_DELAY_TICKS
+                                TUNING.PLATFORM_HOP_DELAY_TICKS
                         end
                         if delay > 0 then
                             local skip_delay = false
@@ -1544,7 +1544,7 @@ function LocoMotor:StartHopping(x, z, target_platform)
                     FindSwimmableOffset(posifinal, math.random() * 2 * PI, 20, 6) or
                     FindSwimmableOffset(posifinal, math.random() * 2 * PI, 18, 6)
                 if destino then
-                    consumo.Transform:SetPosition(xd + destino.xd, yd + destino.yd, zd + destino.zd)
+                    consumo.Transform:SetPosition(xd + destino.x, yd + destino.y, zd + destino.z)
                 end
             end
             -------------------------transfere o conteudo do barco inventario para o barco do criado---------------------------------
@@ -1931,7 +1931,7 @@ function LocoMotor:OnUpdate(dt, arrive_check_only)
                     self:StartHopping(hop_x, hop_z, target_platform)
                 elseif self.inst.components.amphibiouscreature ~= nil and other_platform == nil and not self.inst.sg:HasStateTag("jumping") then
                     local dist = self.inst:GetPhysicsRadius(0) +
-                    self.inst.components.amphibiouscreature:GetTransitionDistance()
+                        self.inst.components.amphibiouscreature:GetTransitionDistance()
                     local _x, _z = forward_x * dist + mypos_x, forward_z * dist + mypos_z
                     if my_platform ~= nil then
                         local _
