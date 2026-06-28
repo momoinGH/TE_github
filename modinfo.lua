@@ -12,8 +12,9 @@ folder_name = folder_name or "workshop-"
 
 local isdev = not folder_name:find("workshop-")
 
-name = not isdev and en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "船難哈姆雷特生態：來自域外")
-        or "Tropical Experience | Classic Dev"
+name = not isdev and
+	en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "船難哈姆雷特生態：來自域外")
+	or "Tropical Experience | Classic Dev"
 description = en_zh_zht(
 	"\nversion：3.9.9" ..
 	"\nAttention: We added a complement to this mod." ..
@@ -47,7 +48,7 @@ description = en_zh_zht(
 )
 
 author = "Vagner da Rocha Santos."
-version = "3.9.9"
+version = "3.9.11"
 forumthread = ""
 api_version = 10
 priority = -20
@@ -57,7 +58,8 @@ dont_starve_compatible = false
 all_clients_require_mod = true
 client_only_mod = false
 reign_of_giants_compatible = false
-server_filter_tags = { "shipwrecked", "tropical experience", "Hamlet", "Economy", "itens", "biome", "world", "gen", "money", "coins", "house", "home", "boats", "light", "hats",
+server_filter_tags = { "shipwrecked", "tropical experience", "Hamlet", "Economy", "itens", "biome", "world", "gen",
+	"money", "coins", "house", "home", "boats", "light", "hats",
 	"boss", "companion", "endless", "ruins", "gun", "hard", "trade", "vagner", "三合一", "热带体验" }
 
 icon_atlas = "modicon.xml"
@@ -1466,13 +1468,13 @@ configuration_options =
 		options =
 		{
 			{ description = "-100", data = -100 },
-			{ description = "-75", data = -75 },
-			{ description = "-50", data = -50 },
-			{ description = "-25", data = -25 },
-			{ description = "0", data = 0 },
-			{ description = "+25", data = 25 },
-			{ description = "+50", data = 50 },
-			{ description = "+75", data = 75 },
+			{ description = "-75",  data = -75 },
+			{ description = "-50",  data = -50 },
+			{ description = "-25",  data = -25 },
+			{ description = "0",    data = 0 },
+			{ description = "+25",  data = 25 },
+			{ description = "+50",  data = 50 },
+			{ description = "+75",  data = 75 },
 			{ description = "+100", data = 100 },
 		},
 	},
@@ -1494,7 +1496,7 @@ configuration_options =
 			{ description = "-3", data = -3 },
 			{ description = "-2", data = -2 },
 			{ description = "-1", data = -1 },
-			{ description = "0", data = 0 },
+			{ description = "0",  data = 0 },
 			{ description = "+1", data = 1 },
 			{ description = "+2", data = 2 },
 			{ description = "+3", data = 3 },
