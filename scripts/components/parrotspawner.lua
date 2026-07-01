@@ -70,7 +70,7 @@ return Class(function(self, inst)
         local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
         ---------------------------------------------adiciona bramble -------------------------------------------------------------
 
-        if (TUNING.tropical.kindofworld == 5) or (TUNING.tropical.kindofworld == 15 and TUNING.tropical.hamlet ~= 5) then
+        if TUNING.tropical.hamlet then
             if diadobramble ~= TheWorld.state.cycles then
                 diadobramble = TheWorld.state.cycles
 
@@ -111,7 +111,7 @@ return Class(function(self, inst)
         if TUNING.tropical.volcaniceruption ~= 5 then
             if not vulcaonojogo then
                 for k, v in pairs(Ents) do
-                    if v:HasTag("vulcaomigrador") then vulcaonojogo = v end
+                    if v:HasTag("theVolcano") then vulcaonojogo = v end
                     if not vulcaonojogo then vulcaonojogo = 10 end
                     --print(vulcaonojogo)
                 end

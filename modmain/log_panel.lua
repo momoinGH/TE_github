@@ -378,7 +378,14 @@ local can_zero_prefabs = {
 
 local OldSpawnPrefabFromSim = SpawnPrefabFromSim
 GLOBAL.SpawnPrefabFromSim = function(name, ...)
-    local guid = OldSpawnPrefabFromSim(name, ...)
+    local success, err = pcall(OldSpawnPrefabFromSim, name, ...)
+    if not success then
+        TroErrorHandle(err, false)
+        StackTraceToLog()
+        return
+    end
+
+    local guid = err
     if guid == -1 then
         TroErrorHandle(string.trofmt("错误：预制件{}生成失败", name), false, "warn")
     elseif TheWorld.ismastersim then

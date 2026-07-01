@@ -14,7 +14,11 @@ local function OnThrown(inst)
         local x, y, z = owr.Transform:GetWorldPosition()
         inst.Transform:SetPosition(x, 7, z)
     end
-    inst:ListenForEvent("entitysleep", inst.Remove)
+    if inst:IsValid() then
+        inst:ListenForEvent("entitysleep", function(inst)
+            inst:DoTaskInTime(0, inst.Remove)
+        end)
+    end
 end
 
 local function fn()

@@ -3,10 +3,6 @@ local assets =
     Asset("ANIM", "anim/vulcano_hatch.zip"),
 }
 
---local function GetStatus(inst)
---    return inst.sg.currentstate.name ~= "idle" and "OPEN" or nil
---end
-
 local function OnDoneTeleporting(inst, obj)
     if inst.closetask ~= nil then
         inst.closetask:Cancel()
@@ -86,8 +82,6 @@ local function fn()
     inst:AddTag("trader")
     inst:AddTag("alltrader")
 
-
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -103,8 +97,6 @@ local function fn()
     inst.components.teleporter.offset = 0
     inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
     inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-    inst:AddComponent("inventory")
 
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetOnHauntFn(OnHaunt)

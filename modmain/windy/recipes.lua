@@ -1,35 +1,14 @@
 TroAddTech("GODDESS", {
     max_level = 2,
-    atlas = "images/tabs.xml",
+    atlas = "minimap/minimap_windy.xml",
     image = "windyfan1.tex"
 })
 
 TroAddPrototyperDef("goddess_shrine", {
     action_str = "GODDESSTAB",
+    icon_atlas = "minimap/minimap_windy.xml",
     icon_image = "windyfan1.tex",
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 AddIngredientValues({ "full_bottle_green_milk" }, { dairy = 3 })
 AddIngredientValues({ "half_bottle_green_milk" }, { dairy = 2 })
@@ -83,7 +62,7 @@ AddCookerRecipe("portablecookpot", peach_juice)
 --local goddess_tab = AddRecipeTab("Wind Goddess Magic", 969, "windyfan1.tex", nil )
 AddRecipe2("magicpowder",
     { Ingredient("goddess_butterflywings", 8), Ingredient(
-        "nightmarefuel", 8), Ingredient("cutgreengrass", 8) },
+        "nightmarefuel", 8), Ingredient("cutgrass", 8) },
     TECH.GODDESS_TWO,
     { numtogive = 8 }, { "CRAFTING_STATION" })
 AddRecipe2("goddess_ribbon",
@@ -102,14 +81,16 @@ AddRecipe2("goddess_hat",
         Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO,
     nil, { "CRAFTING_STATION" })
 AddRecipe2("goddess_bowtie",
-    { Ingredient("goddess_ribbon", 8), Ingredient("goddess_butterfly", 3), Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO,
+    { Ingredient("goddess_ribbon", 8), Ingredient("goddess_butterfly", 3), Ingredient("forbidden_fruit", 1) },
+    TECH.GODDESS_TWO,
     nil, { "CRAFTING_STATION" })
 AddRecipe2("usedfan",
     { Ingredient("goddess_feather", 8), Ingredient("goldnugget", 12),
         Ingredient("goose_feather", 8) }, TECH.GODDESS_TWO, nil,
     { "CRAFTING_STATION" })
 AddRecipe2("windyfan",
-    { Ingredient("usedfan", 1), Ingredient("magicpowder", 8), Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO, nil, { "CRAFTING_STATION" })
+    { Ingredient("usedfan", 1), Ingredient("magicpowder", 8), Ingredient("forbidden_fruit", 1) }, TECH.GODDESS_TWO, nil,
+    { "CRAFTING_STATION" })
 AddRecipe2("goddess_sword",
     { Ingredient("magicpowder", 10), Ingredient("nightsword", 3), Ingredient(
         "forbidden_fruit", 1) }, TECH.GODDESS_TWO,

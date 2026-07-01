@@ -1,28 +1,33 @@
 PrefabFiles =
 {
-    "feather_chicken",                --鸡毛
-    "gorge_portal",                   --苔藓大门
-    "chicken",                        --鸡
-    "quagmire_merm_house",            --破烂的小屋
-    "quagmire_mealingstone",          --碾磨石
-    "quagmire_flour",                 --面粉
-    "quagmire_foods",                 --食物
-    "quagmire_goatmilk",              --羊奶
-    "quagmire_sap",                   --汁液
-    "quagmire_syrup",                 --糖浆
-    "quagmire_casseroledish",         --大法国砂锅
-    "quagmire_crates",                --厨具套装
-    "quagmire_grill",                 --大烤架
-    "quagmire_oven",                  --烤箱
-    "quagmire_plates",                --银盘
-    "quagmire_pot",                   --大锅
-    "quagmire_pot_hanger",            --挂锅装置
-    "quagmire_salt_rack",             --盐架
-    "quagmire_sapbucket",             --树液采集工具包
-    "quagmire_slaughtertool",         --屠宰工具
-    "quagmire_altar",                 --饕餮祭坛
-    "quagmire_seedpackets",           --种子包
-    "quagmire_sugarwoodtree",         --糖木树
+    "feather_chicken",        --鸡毛
+    "gorge_portal",           --苔藓大门
+    "chicken",                --鸡
+    "quagmire_merm_house",    --破烂的小屋
+    "quagmire_mealingstone",  --碾磨石
+    "quagmire_flour",         --面粉
+    "quagmire_foods",         --食物
+    "quagmire_goatmilk",      --羊奶
+    "quagmire_sap",           --汁液
+    "quagmire_syrup",         --糖浆
+    "quagmire_casseroledish", --大法国砂锅
+    "quagmire_crates",        --厨具套装
+    "quagmire_grill",         --大烤架
+    "quagmire_oven",          --烤箱
+    "quagmire_plates",        --银盘
+    "quagmire_pot",           --大锅
+    "quagmire_pot_hanger",    --挂锅装置
+    "quagmire_salt_rack",     --盐架
+    "quagmire_sapbucket",     --树液采集工具包
+    "quagmire_slaughtertool", --屠宰工具
+    "quagmire_altar",         --饕餮祭坛
+    "quagmire_seedpackets",   --种子包
+
+
+    "quagmire_sugarwoodtree", --糖木树
+    -- "quagmire_sugarwood_sapling",
+
+
     "quagmire_sugarwoodtree_sapling", --棉树苗
     "quagmire_sugarwoodtree_cone",    --棉树种子
     "quagmire_goatmum",               --玛姆茜
@@ -55,5 +60,6 @@ PrefabFiles =
     "turf_quagmire",                  --地皮
     "quagmire_plants_planted",        --植物
     "quagmire_fish",                  --鱼
-    "pebblecrabspawner"
+    "pebblecrabspawner",
+    "chickenhouse"                    --鸡舍
 }

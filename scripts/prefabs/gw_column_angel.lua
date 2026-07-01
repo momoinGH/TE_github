@@ -26,12 +26,12 @@ local midloot = {
     { "orangegem" },
     { "yellowgem" },
 
-    { "livinglog", "livinglog", },
-    { "tentaclespots", "tentaclespots", },
-    { "honeycomb", "honeycomb", },
-    { "pigskin", "pigskin", "pigskin", "pigskin", },
+    { "livinglog",      "livinglog", },
+    { "tentaclespots",  "tentaclespots", },
+    { "honeycomb",      "honeycomb", },
+    { "pigskin",        "pigskin",        "pigskin", "pigskin", },
     { "manrabbit_tail", "manrabbit_tail", },
-    { "gears", "gears", "gears", },
+    { "gears",          "gears",          "gears", },
 
     --equip
     { "batbat", },
@@ -39,11 +39,11 @@ local midloot = {
 
     { "ruinshat", },
     --    {"wizard_hat",},
-    { "footballhat", "footballhat", },
-    { "armormarble", "armormarble", },
+    { "footballhat",    "footballhat", },
+    { "armormarble",    "armormarble", },
 
     --other
-    { "dug_berrybush", "dug_berrybush", },
+    { "dug_berrybush",  "dug_berrybush", },
     { "gunpowder" },
 }
 
@@ -52,14 +52,14 @@ local lowloot = {
     { "cutreeds", "cutreeds", "cutreeds", "cutreeds", "cutreeds",
         "cutreeds", "cutreeds", "cutreeds", "cutreeds", "cutreeds", },
     { "goldnugget", "goldnugget", "goldnugget", "goldnugget", "goldnugget", "goldnugget", },
-    { "silk", "silk", "silk", "silk", "silk", "silk", "silk", "silk", "silk", "silk", "silk", },
+    { "silk",       "silk",       "silk",       "silk",       "silk",       "silk",       "silk",  "silk",  "silk",  "silk",  "silk", },
 
     --equip
     { "umbrella", },
 
     --food
-    { "honey", "honey", "honey", "honey", "honey", "honey", "honey", "honey", "honey", "honey", "honey", },
-    { "meat", "meat", "meat", "meat", "meat", "meat", },
+    { "honey",      "honey",      "honey",      "honey",      "honey",      "honey",      "honey", "honey", "honey", "honey", "honey", },
+    { "meat",       "meat",       "meat",       "meat",       "meat",       "meat", },
     { "watermelon", "watermelon", "watermelon", },
 }
 

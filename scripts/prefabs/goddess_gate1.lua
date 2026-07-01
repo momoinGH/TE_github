@@ -10,10 +10,10 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddLight()
 
-    inst.MiniMapEntity:SetIcon("goddess_gate.tex")
+    inst.entity:AddMiniMapEntity()
+    inst.MiniMapEntity:SetIcon("goddess_gate.png")
 
     MakeObstaclePhysics(inst, .25)
     inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)

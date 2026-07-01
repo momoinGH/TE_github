@@ -33,14 +33,6 @@ modimport "modmain/shardindex.lua"  --世界生成后初始化实体，比如根
 -- else
 -- end
 
--- if TUNING.tropical.windy then
---     modimport "modmain/common/map/tasks/windyworldgen"
--- end
-
--- if TUNING.tropical.greenworld then
---     modimport "modmain/common/map/tasks/greenworldgen"
--- end
-
 --生成世界需要用到的内容
 if rawget(_G, "WORLDGEN_MAIN") then
     modimport "modmain/gentuning"            -- 当配置项加载好后，才能访问TUNING.tropical检查哪些模块启用了

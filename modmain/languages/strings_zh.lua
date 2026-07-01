@@ -193,7 +193,8 @@ STRINGS.BORE_TALK_FOLLOWWILSON                          = { "你还不错", "我
 STRINGS.BORE_TALK_FIND_LIGHT                            = { "可怕", "不喜欢黑暗", "太阳在哪里？", "待在火堆旁", "火很好" }
 STRINGS.BORE_TALK_LOOKATWILSON                          = { "你是谁？", "你不是猪", "难看的猴人", "你有肉吗？" }
 STRINGS.BORE_TALK_RUNAWAY_WILSON                        = { "太近了！", "保持距离！", "你退后！", "这是我的地盘。" }
-STRINGS.BORE_TALK_FIGHT                                 = { "我要开杀！", "粉碎你！", "呜啊啊啊啊！", "你完蛋了！", "滚开！", "是你挑头的！", "我会把你打跑！", }
+STRINGS.BORE_TALK_FIGHT                                 = { "我要开杀！", "粉碎你！", "呜啊啊啊啊！", "你完蛋了！", "滚开！", "是你挑头的！",
+    "我会把你打跑！", }
 STRINGS.BORE_TALK_RUN_FROM_SPIDER                       = { "坏蜘蛛！", "不喜欢蜘蛛！", "可怕的蜘蛛！" }
 STRINGS.BORE_TALK_HELP_CHOP_WOOD                        = { "杀死树！", "粉碎树！", "我揍树！" }
 STRINGS.BORE_TALK_HELP_HACK                             = { "我帮忙砍灌木！", "我揍灌木！", "我们现在揍植物？" }
@@ -4464,8 +4465,6 @@ STRINGS.NAMES.SHELVES_HATTREE                                 = "帽子架"
 STRINGS.NAMES.SHELVES_PALLET                                  = "托盘架"
 STRINGS.NAMES.SHELVES_FLOATING                                = "浮木架"
 
-STRINGS.NAMES.SHELVES_BONESTAFF                               = "骨头法杖架"
-STRINGS.NAMES.SHELVES_BOSSBOAR                                = "迷你猪像架"
 STRINGS.NAMES.SHELVES_DISPLAYCASE                             = "宫殿藏品室架"
 STRINGS.NAMES.SHELVES_DISPLAYCASE_METAL                       = "展示铁架"
 STRINGS.NAMES.SHELVES_MIDCENTURY_WEAPON                       = "武器店架"
@@ -6339,12 +6338,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEER_FLOWER = "这些花吸引了很多蝴�
 STRINGS.NAMES.DEER_FLOWER_WITHERED = "凋零花朵"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEER_FLOWER_WITHERED = "这些花枯萎了。"
 
-STRINGS.NAMES.GREENGRASS = "绿草"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GREENGRASS = "这些草是绿的，就像普通的那样。"
-
-STRINGS.NAMES.CUTGREENGRASS = "采下的绿草"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CUTGREENGRASS = "绿色的草，就像普通的那样。"
-
 STRINGS.NAMES.PEACHY_POOP = "桃树肥料"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEACHY_POOP = "现在我的桃树不会哭泣了。"
 STRINGS.RECIPE_DESC.PEACHY_POOP = "为那些铁杆园丁准备的。"
@@ -7186,3 +7179,9 @@ STRINGS.WALLY_SANDBOXINTROS = {
     ONE = "船开得不错。",
     TWO = "笨蛋。"
 }
+
+STRINGS.UI.STARTVOLCANO = STRINGS.UI.STARTVOLCANO or {}
+STRINGS.UI.STARTVOLCANO.TITLE = "通往火山之路"
+STRINGS.UI.STARTVOLCANO.BODY = "攀爬随时可能爆发的火山？"
+STRINGS.UI.STARTVOLCANO.YES = "出发！"
+STRINGS.UI.STARTVOLCANO.NO = "待在这里"

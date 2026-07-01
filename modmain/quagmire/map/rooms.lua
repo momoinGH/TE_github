@@ -58,7 +58,7 @@ AddRoom("quagmire1", {
         distributepercent = .2,
         distributeprefabs =
         {
-            sugarwood_normal = 0.5, --nitre
+            cottontree_normal = 0.5, --nitre
             --					                    quagmire_pond_salt = .1,
             quagmire_spotspice_shrub = 0.1,
         },
@@ -235,7 +235,6 @@ AddRoom("chickenbiomeset", {
             quagmire_beefalo = 4,
             beefalo = 1,
             chickenhouse = 2,
-            grass_patch = 2,
         }
     }
 })
@@ -258,7 +257,6 @@ AddRoom("chickenbiome", {
         countprefabs =
         {
             chickenhouse = 2,
-            grass_patch = 2,
         }
     }
 })
@@ -270,7 +268,7 @@ AddRoom("quagmirepinkset", {
         distributepercent = .6,
         distributeprefabs =
         {
-            sugarwood_short = 0.5, --nitre
+            cottontree_small = 0.5, --nitre
             cave_fern = 0.112,
             turnip_planted = 0.05,
             flint = 0.05,
@@ -298,7 +296,7 @@ AddRoom("quagmirepink", {
         distributepercent = .6,
         distributeprefabs =
         {
-            sugarwood_normal = 0.5, --nitre
+            cottontree_normal = 0.5, --nitre
             cave_fern = 0.112,
             turnip_planted = 0.05,
             flint = 0.05,

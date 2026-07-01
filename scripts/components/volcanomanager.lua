@@ -55,7 +55,8 @@ local function EventLoader(inst, delay)
     if delay > 0 then
         inst:DoTaskInTime(0, EventLoader, delay - 1)
     else
-        inst.components.volcanomanager:WatchWorldState("start" .. DRY_SEASON, inst.components.volcanomanager.StartDrySeason)
+        inst.components.volcanomanager:WatchWorldState("start" .. DRY_SEASON,
+            inst.components.volcanomanager.StartDrySeason)
     end
 end
 
@@ -128,7 +129,8 @@ function VolcanoManager:DoEruption(data)
     self.waserupting = true
     self.inst.SoundEmitter:PlaySound("dontstarve/cave/earthquake", "earthquake")
     self.inst.SoundEmitter:SetParameter("earthquake", "intensity", 0.08)
-    self.inst:DoTaskInTime(data.firerain_duration + data.firerain_delay, function() self.inst.SoundEmitter:KillSound("earthquake") end)
+    self.inst:DoTaskInTime(data.firerain_duration + data.firerain_delay,
+        function() self.inst.SoundEmitter:KillSound("earthquake") end)
 
     self.inst:PushEvent("OnVolcanoEruptionBegin")
 end
@@ -148,7 +150,8 @@ function VolcanoManager:RebuildDrySchedule()
     if self.intensity > 0.0 then
         print("VolcanoManager rebuilding schedule")
         local volcanoschedule = require("map/volcanoschedule")
-        self.schedule[1], self.schedulesegs[1] = self:BuildSchedule(volcanoschedule.DrySeasonSchedule, self.highest_schedule_seg)
+        self.schedule[1], self.schedulesegs[1] = self:BuildSchedule(volcanoschedule.DrySeasonSchedule,
+            self.highest_schedule_seg)
         self.inst:DoTaskInTime(1, function() self:SetActiveIcon() end)
         self.inst:StartUpdatingComponent(self)
     end
@@ -180,7 +183,8 @@ function VolcanoManager:ResumeStaffTrap(startsegs)
     print("VolcanoManager resume staff trap", startsegs)
     local volcanoschedule = require("map/volcanoschedule")
     self.staffstartseg = startsegs
-    self.schedule[2], self.schedulesegs[2] = self:BuildSchedule(volcanoschedule.StaffTrapSchedule, self:GetCurrentStaffScheduleSegment())
+    self.schedule[2], self.schedulesegs[2] = self:BuildSchedule(volcanoschedule.StaffTrapSchedule,
+        self:GetCurrentStaffScheduleSegment())
     --self:Appease(self.schedulesegs[2]) --treat staff trap as appeasement to delay dry schedule
     self.inst:DoTaskInTime(1, function() self:SetActiveIcon() end)
     self.inst:StartUpdatingComponent(self)
@@ -299,7 +303,8 @@ function VolcanoManager:GetDebugString()
             "  next quake %d, next eruption %d\n  cycles %d, normtime %f, cursegs %d\n  firerain timer %4.2f, delay %4.2f, dur %4.2f, int %4.2f, rate %4.2f, %4.2f/s\n  ash timer %4.2f, delay %4.2f, dur %4.2f, %d particles/tick\n  smoke timer %4.2f, delay %4.2f, dur %4.2f, rate %4.2f\n  appease segs %4.2f\n",
             self:GetNumSegmentsUntilQuake() or 0, self:GetNumSegmentsUntilEruption() or 0,
             cycles, normtime, cursegs,
-            self.firerain_timer, self.firerain_delay, self.firerain_duration, self.firerain_intensity, self.firerain_spawn_rate, self.firerain_spawn_per_sec,
+            self.firerain_timer, self.firerain_delay, self.firerain_duration, self.firerain_intensity,
+            self.firerain_spawn_rate, self.firerain_spawn_per_sec,
             self.ash_timer, self.ash_delay, self.ash_duration, ash_particles,
             self.smoke_timer, self.smoke_delay, self.smoke_duration, self:GetSmokeRate(),
             self.appeasesegs)
@@ -337,7 +342,8 @@ function VolcanoManager:OnUpdate(dt)
     if self.firerain_timer > 0.0 and self.firerain_intensity > 0.0 then
         self.firerain_timer = self.firerain_timer - dt
         if self.firerain_timer <= self.firerain_duration then
-            self.firerain_spawn_rate = self.firerain_spawn_rate + self.firerain_spawn_per_sec * self.firerain_intensity * dt
+            self.firerain_spawn_rate = self.firerain_spawn_rate +
+            self.firerain_spawn_per_sec * self.firerain_intensity * dt
             while self.firerain_spawn_rate > 1.0 do
                 local players = GetValidPlayers()
                 if #players <= 0 then
@@ -503,27 +509,6 @@ function VolcanoManager:SetDormantIcon()
     end
 end
 
-function VolcanoManager:GetClosestVolcano()
-    local closest = nil
-    local closestdistsq = nil
-    local players = GetValidPlayers()
-    for k, v in pairs(self.volcanoes) do
-        if v ~= nil and v:IsValid() then
-            local vx, vy, vz = v.Transform:GetWorldPosition()
-            for _, player in ipairs(players) do
-                local x, y, z = player.Transform:GetWorldPosition()
-                local dx, dz = x - vx, z - vz
-                local distSq = dx * dx + dz * dz
-                if closest == nil or distSq < closestdistsq then
-                    closestdistsq = distSq
-                    closest = v
-                end
-            end
-        end
-    end
-    return closest
-end
-
 function VolcanoManager:GetDistanceFromVolcano(x, y, z)
     if x == nil or z == nil then
         local player = GetValidPlayers()[1]
@@ -620,7 +605,8 @@ function VolcanoManager:BuildSchedule(scheduledef, startseg)
                             newschedule[quakesegs] = {}
                         end
                         --print(string.format("warnquake %d", quakesegs))
-                        table.insert(newschedule[quakesegs], { fn = DoWarnQuake, data = { size = erupt.warnquake[j].size } })
+                        table.insert(newschedule[quakesegs],
+                            { fn = DoWarnQuake, data = { size = erupt.warnquake[j].size } })
                     end
                 end
             end

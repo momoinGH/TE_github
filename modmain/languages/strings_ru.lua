@@ -197,9 +197,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLUP = "Оставь меня в покое!
 STRINGS.NAMES.TIDALPOOL = "Приливной бассейн"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIDALPOOL = "Бассейн, оставленный приливами и отливами."
 
-STRINGS.NAMES.MERMFISHHOUSE = "Хижина мэрма-рыбака"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMFISHHOUSE = "Пахнет как-то не очень приятно."
-
 STRINGS.NAMES.POISONHOLE = "Ядовитый гейзер"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POISONHOLE = "[Я|pl=Мы] дума[ю|pl=ем], стоит держаться подальше от этого."
 
@@ -4573,7 +4570,6 @@ STRINGS.RECIPE_DESC.BED8 = "Такая мягкая"
 STRINGS.NAMES.PACKIM_FISHBONE = "Рыбий скелет."
 STRINGS.NAMES.PACKIM = "Паким Бэггимс."
 
-STRINGS.RECIPE_DESC.MERMFISHHOUSE = "Дом мэрма рыбака."
 STRINGS.NAMES.MERMFISHERGUARD = "Мэрм рыбак"
 
 STRINGS.NAMES.WHALE_BUBBLES = "Подозрительные пузырьки"

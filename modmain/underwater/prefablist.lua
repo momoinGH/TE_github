@@ -40,7 +40,6 @@ PrefabFiles =
     "kelpy",               --活海带
     "wormplant",           --瓶罐植物
     "decorative_shell",    --美丽的贝壳
-    "citd_preparedfoods",  --料理
     "sea_cucumber",        --海参
     "shrimp",              --虾
     "shrimp_tail",         --小虾尾

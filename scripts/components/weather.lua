@@ -400,7 +400,9 @@ return Class(function(self, inst)
         if _precipmode:value() == PRECIP_MODES.always then
             return .1 + perlin(0, _noisetime:value() * .1, 0) * .9
         elseif _preciptype:value() ~= PRECIP_TYPES.none and _precipmode:value() ~= PRECIP_MODES.never then
-            local p = math.max(0, math.min(1, (_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value())))
+            local p = math.max(0,
+                math.min(1,
+                    (_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value())))
             local rate = MIN_PRECIP_RATE + (1 - MIN_PRECIP_RATE) * math.sin(p * PI)
             return math.min(rate, _peakprecipitationrate:value())
         end
@@ -431,7 +433,7 @@ return Class(function(self, inst)
         _moisture:set(_moisturefloor:value())
         _moistureceil:set(RandomizeMoistureCeil())
 
-            _preciptype:set(PRECIP_TYPES.none)
+        _preciptype:set(PRECIP_TYPES.none)
     end or nil
 
     local StartLunarHail = _ismastersim and function()
@@ -447,7 +449,8 @@ return Class(function(self, inst)
     local function CalculatePOP()
         return (_preciptype:value() ~= PRECIP_TYPES.none and 1)
             or ((_moistureceil:value() <= 0 or _moisture:value() <= _moisturefloor:value()) and 0)
-            or (_moisture:value() < _moistureceil:value() and (_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value()))
+            or
+            (_moisture:value() < _moistureceil:value() and (_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value()))
             or 1
     end
 
@@ -465,7 +468,9 @@ return Class(function(self, inst)
             return 1 - dynrange
         end
 
-        local p = math.min(math.max((_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value()), 0), 1)
+        local p = math.min(
+            math.max((_moisture:value() - _moisturefloor:value()) / (_moistureceil:value() - _moisturefloor:value()), 0),
+            1)
         local p2 = _preciptype:value() == PRECIP_TYPES.lunarhail and CalculateLunarHailRate() or 0
 
         p = 1 - math.max(p, p2)
@@ -518,7 +523,8 @@ return Class(function(self, inst)
             else
                 --It rains less in the middle of summer
                 local p = 1 - math.sin(PI * data.progress)
-                _moisturerateval = MOISTURE_RATES.MIN[_season] + p * (MOISTURE_RATES.MAX[_season] - MOISTURE_RATES.MIN[_season])
+                _moisturerateval = MOISTURE_RATES.MIN[_season] +
+                    p * (MOISTURE_RATES.MAX[_season] - MOISTURE_RATES.MIN[_season])
                 _moisturerateoffset = 0
             end
 
@@ -631,7 +637,8 @@ return Class(function(self, inst)
         local closest_rod = nil
         local closest_blocker = nil
 
-        local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, LIGHTNINGSTRIKE_SEARCH_RANGE, nil, LIGHTNINGSTRIKE_CANT_TAGS, LIGHTNINGSTRIKE_ONEOF_TAGS)
+        local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, LIGHTNINGSTRIKE_SEARCH_RANGE, nil,
+            LIGHTNINGSTRIKE_CANT_TAGS, LIGHTNINGSTRIKE_ONEOF_TAGS)
         local blockers = nil
         for _, v in pairs(ents) do
             -- Track any blockers we find, since we redirect the strike position later,
@@ -652,7 +659,7 @@ return Class(function(self, inst)
                 closest_rod = v
             elseif closest_generic == nil then
                 if (v.components.health == nil or not v.components.health:IsInvincible())
-                    and not is_blocker     -- If we're out of range of the first branch, ignore blocker objects.
+                    and not is_blocker -- If we're out of range of the first branch, ignore blocker objects.
                     and (v.components.playerlightningtarget == nil or TryLuckRoll(v, v.components.playerlightningtarget:GetHitChance(), LuckFormulas.LightningStrike)) then
                     closest_generic = v
                 end
@@ -773,8 +780,10 @@ return Class(function(self, inst)
     end
 
     --Register network variable sync events
-    inst:ListenForEvent("moistureceildirty", function() _world:PushEvent("moistureceilchanged", _moistureceil:value()) end)
-    inst:ListenForEvent("preciptypedirty", function() _world:PushEvent("precipitationchanged", PRECIP_TYPE_NAMES[_preciptype:value()]) end)
+    inst:ListenForEvent("moistureceildirty",
+        function() _world:PushEvent("moistureceilchanged", _moistureceil:value()) end)
+    inst:ListenForEvent("preciptypedirty",
+        function() _world:PushEvent("precipitationchanged", PRECIP_TYPE_NAMES[_preciptype:value()]) end)
     inst:ListenForEvent("snowcovereddirty", function() _world:PushEvent("snowcoveredchanged", _snowcovered:value()) end)
     inst:ListenForEvent("wetdirty", function() _world:PushEvent("wetchanged", _wet:value()) end)
 
@@ -952,7 +961,8 @@ return Class(function(self, inst)
 
         --Update wetness
         local wetrate = CalculateWetnessRate(_temperature, preciprate)
-        SetWithPeriodicSync(_wetness, math.clamp(_wetness:value() + wetrate * dt, MIN_WETNESS, MAX_WETNESS), WETNESS_SYNC_PERIOD, _ismastersim)
+        SetWithPeriodicSync(_wetness, math.clamp(_wetness:value() + wetrate * dt, MIN_WETNESS, MAX_WETNESS),
+            WETNESS_SYNC_PERIOD, _ismastersim)
         if _ismastersim then
             if _wet:value() then
                 if _wetness:value() < DRY_THRESHOLD then
@@ -1003,14 +1013,14 @@ return Class(function(self, inst)
             end
         end
         --###TODO 看看怎么通过hook实现这个效果
-        local nevenailha = 0 --霜冻区域雪增强
-        local nevetropical = 1 --热带区域雪控制
+        local nevenailha = 0    --霜冻区域雪增强
+        local nevetropical = 1  --热带区域雪控制
         local chuvatropical = 0 --热带区域雨控制
         if _snowfx then
             if _activatedplayer and _activatedplayer.components.areaaware and _activatedplayer.components.areaaware:CurrentlyInTag("frost") then
                 nevenailha = 10
             end
-            if (TUNING.tropical.kindofworld ~= 15) or (_activatedplayer and _activatedplayer.components.areaaware
+            if (_activatedplayer and _activatedplayer.components.areaaware
                     and (_activatedplayer.components.areaaware:CurrentlyInTag("shipwrecked")
                         or _activatedplayer.components.areaaware:CurrentlyInTag("hamlet")
                         or _activatedplayer.components.areaaware:CurrentlyInTag("ForceDisconnected")))
@@ -1076,7 +1086,7 @@ return Class(function(self, inst)
         SetWithPeriodicSync(_snowlevel, snowlevel, SNOW_LEVEL_SYNC_PERIOD, _ismastersim)
         if _snowlevel:value() > 0 and (_temperature < 0 or _wetness:value() < 5) then
             --###
-            if (TUNING.tropical.kindofworld ~= 15) or (_activatedplayer and _activatedplayer.components.areaaware
+            if (_activatedplayer and _activatedplayer.components.areaaware
                     and (_activatedplayer.components.areaaware:CurrentlyInTag("shipwrecked")
                         or _activatedplayer.components.areaaware:CurrentlyInTag("hamlet")
                         or _activatedplayer.components.areaaware:CurrentlyInTag("ForceDisconnected"))
@@ -1127,7 +1137,8 @@ return Class(function(self, inst)
                     local max = _maxlightningdelay or (min + easing.linear(preciprate, 30, 10, 1))
                     _nextlightningtime = GetRandomMinMax(min, max)
                     if (preciprate > .75 or _lightningmode == LIGHTNING_MODES.always) and next(_lightningtargets) ~= nil then
-                        local targeti = math.min(math.floor(easing.inQuint(math.random(), 1, #_lightningtargets, 1)), #_lightningtargets)
+                        local targeti = math.min(math.floor(easing.inQuint(math.random(), 1, #_lightningtargets, 1)),
+                            #_lightningtargets)
                         local target = _lightningtargets[targeti]
                         table.remove(_lightningtargets, targeti)
                         table.insert(_lightningtargets, target)
@@ -1232,11 +1243,13 @@ return Class(function(self, inst)
         local str =
         {
             string.format("  temperature: %2.1f", _temperature),
-            string.format("  moisture: %2.1f (%2.1f/%2.1f) + %2.1f", _moisture:value(), _moisturefloor:value(), _moistureceil:value(), _moisturerate:value()),
+            string.format("  moisture: %2.1f (%2.1f/%2.1f) + %2.1f", _moisture:value(), _moisturefloor:value(),
+                _moistureceil:value(), _moisturerate:value()),
             string.format("  preciprate: (%2.1f of %2.1f)", preciprate, _peakprecipitationrate:value()),
             string.format("  snowlevel: %2.1f", _snowlevel:value()),
             string.format("  lunarhaillevel: %2.1f", _lunarhaillevel:value()),
-            string.format("  wetness: %2.1f (%s %2.1f) %s", _wetness:value(), wetrate > 0 and "+" or "", wetrate, _wet:value() and " WET" or ""),
+            string.format("  wetness: %2.1f (%s %2.1f) %s", _wetness:value(), wetrate > 0 and "+" or "", wetrate,
+                _wet:value() and " WET" or ""),
             string.format("  light: %2.5f", CalculateLight()),
         }
 

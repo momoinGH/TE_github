@@ -4,7 +4,7 @@ local assets =
 }
 
 local function growintotree(inst)
-	local tree = SpawnPrefab("sugarwood_short")
+	local tree = SpawnPrefab("cottontree_small")
 
 	if tree then
 		tree.Transform:SetPosition(inst.Transform:GetWorldPosition())

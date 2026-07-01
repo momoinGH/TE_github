@@ -26,6 +26,7 @@ end
 -- 给workable使用，表示可以被破坏，比如火药
 TroAddAction(nil, "BLANK", "")
 
+-- 暴食NPC交易
 TroAddAction(nil, "STOREOPEN", STRINGS.ACTIONS.STOREOPEN, function(act)
     if act.target.components.store == nil then return false end
 
@@ -33,8 +34,9 @@ TroAddAction(nil, "STOREOPEN", STRINGS.ACTIONS.STOREOPEN, function(act)
         act.target.components.store:OpenStore(act.doer)
     end
 
-    act.doer:AddTag("tro_store_isopening")
-    act.target.NetEvt_Requested:push()
+    -- act.doer:AddTag("tro_store_isopening")
+    -- act.target.NetEvt_Requested:push()
+    -- TODO NPC可以交易什么？
     return true
 end
 )
@@ -167,26 +169,28 @@ TroAddAction(nil, "FIX", STRINGS.ACTIONS.FIX, function(act)
     end
 end)
 
-TroAddAction({ priority = 9, rmb = true, distance = 20, mount_valid = false }, "TIRO", STRINGS.ACTIONS.TIRO, function(act)
-    if act.doer ~= nil and act.doer:HasTag("ironlord") then
-        return true
+TroAddAction({ priority = 9, rmb = true, distance = 20, mount_valid = false }, "TIRO", STRINGS.ACTIONS.TIRO,
+    function(act)
+        if act.doer ~= nil and act.doer:HasTag("ironlord") then
+            return true
+        end
     end
-end
 )
 
 ----------------------------------------------------------------------------------------------------
 
 -- 收回
-TroAddAction({ priority = 11, rmb = true, distance = 4, mount_valid = false }, "TRO_DISMANTLE", STRINGS.ACTIONS.TRO_DISMANTLE, function(act)
-    if act.target ~= nil and
-        act.target.components.tro_portablestructure ~= nil and
-        not (act.target.components.burnable ~= nil and act.target.components.burnable:IsBurning()) then
-        if act.target.candismantle and not act.target:candismantle() then
-            return false
+TroAddAction({ priority = 11, rmb = true, distance = 4, mount_valid = false }, "TRO_DISMANTLE",
+    STRINGS.ACTIONS.TRO_DISMANTLE, function(act)
+        if act.target ~= nil and
+            act.target.components.tro_portablestructure ~= nil and
+            not (act.target.components.burnable ~= nil and act.target.components.burnable:IsBurning()) then
+            if act.target.candismantle and not act.target:candismantle() then
+                return false
+            end
         end
+        return act.target.components.tro_portablestructure:Dismantle(act.doer)
     end
-    return act.target.components.tro_portablestructure:Dismantle(act.doer)
-end
 )
 
 -- 上岸
@@ -383,15 +387,20 @@ TroAddAction({ priority = 5, distance = 2 }, "TAKE_SHELF", STRINGS.ACTIONS.TAKE_
             local shopkeeper = FindEntity(act.doer, RoomUtils.RADIUS, nil, { "shopkeep" })
             if shopkeeper then
                 if reason == "money" then
-                    shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH)])
+                    shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH
+                        [math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH)])
                 elseif reason == "goods" then
                     local name = STRINGS.NAMES[string.upper(prefab_wanted)]
                     assert(name) --严格一点，货币名字还是得有的
-                    shopkeeper.components.talker:Say(string.format(STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE)], name))
+                    shopkeeper.components.talker:Say(string.format(
+                        STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE)],
+                        name))
                 elseif reason == "closed" then
-                    shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_CLOSING[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_CLOSING)])
+                    shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_CLOSING
+                        [math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_CLOSING)])
                 else
-                    shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_SALE[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_SALE)])
+                    shopkeeper.components.talker:Say(STRINGS.CITY_PIG_SHOPKEEPER_SALE
+                        [math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_SALE)])
                 end
             end
 
@@ -409,7 +418,8 @@ ACTIONS.TAKE_SHELF.stroverridefn = function(act)
     end
 
     local target = act.target
-    local item = target.replica.container and target.replica.container:GetNumSlots() == 1 and target.replica.container:GetItemInSlot(1)
+    local item = target.replica.container and target.replica.container:GetNumSlots() == 1 and
+        target.replica.container:GetItemInSlot(1)
     local name = item and item:GetDisplayName()
         or target.replica.named and target:GetDisplayName()
         or ""

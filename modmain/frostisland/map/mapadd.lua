@@ -12,6 +12,15 @@ local tasks = {
 for _, t in ipairs(tasks) do
     AddTaskPreInit(t, function(task)
         task.room_tags = task.room_tags or {}
-        table.insert(task.room_tags, "frost") --冰岛区域
+        table.insert(task.room_tags, "tropical") --我们mod地形
+        table.insert(task.room_tags, "frost")    --模块专属标签
     end)
 end
+
+AddLevelPreInitAny(function(level)
+    if level.location == "forest" then
+        for _, t in ipairs(tasks) do
+            table.insert(level.tasks, t)
+        end
+    end
+end)

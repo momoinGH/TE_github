@@ -206,9 +206,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLUP = "Laisse-moi tranquille !"
 STRINGS.NAMES.TIDALPOOL = "Bassin de marée"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIDALPOOL = "Un bassin laissé par la marée."
 
-STRINGS.NAMES.MERMFISHHOUSE = "Maison des Merms pêcheurs"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMFISHHOUSE = "Ça ne sent pas très bon."
-
 STRINGS.NAMES.POISONHOLE = "Trou toxique"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POISONHOLE = "Je crois que je ne vais pas approcher de ça."
 

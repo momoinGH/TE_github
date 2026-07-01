@@ -1,17 +1,15 @@
 {
-    "Lua.diagnostics.disable": [
-        "need-check-nil",
-        "inject-field",
-        "param-type-mismatch",
-        "cast-local-type",
-        "missing-parameter",
-        "lowercase-global",
-        "undefined-doc-name",
-        "return-type-mismatch",
-        "undefined-doc-param",
-        "assign-type-mismatch",
-        "undefined-field"
-    ],
-    "Lua.workspace.maxPreload": 2000,
-    "Lua.diagnostics.workspaceDelay": -1,
+  "Lua.diagnostics.disable": [
+    "need-check-nil",
+    "inject-field",
+    "param-type-mismatch",
+    "cast-local-type",
+    "missing-parameter",
+    "lowercase-global",
+    "return-type-mismatch",
+    "assign-type-mismatch",
+    "undefined-field"
+  ],
+  "Lua.workspace.maxPreload": 2000,
+  "Lua.diagnostics.workspaceDelay": -1
 }

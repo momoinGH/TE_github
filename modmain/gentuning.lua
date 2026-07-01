@@ -1,6 +1,4 @@
 -- TUNING.tropical = {
---     kindofworld      = kindofworld, --世界类型
-
 --     room             = hamlet and true or false,
 --     boat             = shipwrecked and true or false,
 --     -- windy            = GetModConfigData("windy"),                    --大风平原
@@ -58,37 +56,26 @@ local hamlet = GetModConfigData("hamlet") == 1
 local shipwrecked = GetModConfigData("shipwrecked") == 1
 
 TUNING.tropical = {
-    common         = true,
-    room           = hamlet,
-    hamlet         = hamlet,
-    hayfever       = GetModConfigData("hayfever") == 1,       --花粉症
-    fog            = GetModConfigData("fog") == 1,            --迷雾
-    vampirebatcave = GetModConfigData("vampirebatcave") == 1, --洞穴裂缝
-    aporkalypse    = GetModConfigData("aporkalypse") == 1,    --大灾变
+    common           = true,
+    room             = hamlet,
+    hamlet           = hamlet,
+    hayfever         = GetModConfigData("hayfever") == 1,       --花粉症
+    fog              = GetModConfigData("fog") == 1,            --迷雾
+    vampirebatcave   = GetModConfigData("vampirebatcave") == 1, --洞穴裂缝
+    aporkalypse      = GetModConfigData("aporkalypse") == 1,    --大灾变
+    shipwrecked      = shipwrecked,
+    boat             = shipwrecked,
+
+    windy            = GetModConfigData("windy") == 1,
+    underwater       = GetModConfigData("underwater") == 1,       --海底世界
+    shipwrecked_plus = GetModConfigData("shipwrecked_plus") == 1, --海难plus
+    lavaarena        = GetModConfigData("lavaarena") == 1,        --熔炉竞技场
+    greenworld       = GetModConfigData("greenworld") == 1,
+    frostisland      = GetModConfigData("frostisland") == 1,      --冰霜岛屿
+    quagmire         = GetModConfigData("quagmire") == 1,         --暴食
 
 
-    shipwrecked    = shipwrecked,
-    boat           = shipwrecked,
-
-
-
-
-
-    kindofworld = 15, --世界类型
-
-
-    windy      = false,
-    sea        = false,  --仅海洋世界
-    underwater = false,  --海底世界
-
-
-    shipwrecked_plus = false, --海难plus
-    lavaarena        = false, --熔炉竞技场
-    greenworld       = false, --以后删了
-    frostisland      = false, --冰霜岛屿
-    quagmire         = false, --暴食
-
-
+    sea             = false, --仅海洋世界
     only_hamlet     = false, --仅哈姆雷特世界
     hamlet_caves    = false,
     pinacle         = false, --峰顶

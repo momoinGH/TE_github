@@ -1222,12 +1222,6 @@ return
 		SMALLMEAT = "Tis' small, but tis' meat.",
 		SMALLMEAT_DRIED = "Jolly jerky!",
 		SNAKE = "Ya split-tongued devil!",
-		SNAKEDEN =
-		{
-			BURNT = "Thet's one way ta solve a knot.",
-			CHOPPED = "Thet straightened ya out.",
-			GENERIC = "Ya look like a tangled pile o'riggin'.",
-		},
 		SNAKEOIL = "Me knows a good deal when me sees it.",
 		SNAKESKIN = "Me leathers do need replacin'.",
 		SNAKESKINHAT = "On me head? Wear thet?",

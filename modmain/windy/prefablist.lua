@@ -19,8 +19,6 @@ PrefabFiles = {
     "goddess_bird",           --风鸟
     "goddess_butterfly",      --微风蝴蝶
     "goddess_butterflywings", --微风蝴蝶翅膀
-    "greengrass",             --绿草
-    "cutgreengrass",          --采下的绿草
     "magicpowder",            --微风细粉
     "goddess_gate1",          --风之大门
 

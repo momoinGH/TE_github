@@ -1,21 +1,3 @@
-AddTask("pandatask", {
-    locks = {},
-    keys_given = {},
-    region_id = "eldorado1",
-    room_choices = {
-        ["pandajungle1"] = 1,
-        ["pandajungle2"] = 1,
-        ["pandajungle3"] = 1,
-        ["pandajungle4"] = 1,
-        ["pandajungle5"] = 1,
-        ["pandajungle6"] = 1,
-    },
-    --	entrance_room = "seatarolake",
-    room_bg = WORLD_TILES.MEADOW,
-    background_room = "BGpandajungle",
-    colour = { 1, .5, .5, .2 },
-})
-
 AddTask("pandataskjunto", {
     locks = { LOCKS.CAVE },
     keys_given = { KEYS.CAVE },

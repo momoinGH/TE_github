@@ -142,7 +142,7 @@ local landprefabs = {
     "rock_obsidian", "rock_charcoal", "skeleton",
     "rock_flintless", "rocks", "flint", "goldnugget", "gravestone", "mound", "red_mushroom", "blue_mushroom",
     "wallyintro_shipmast", "wallyintro_debris_1", "wallyintro_debris_2", "wallyintro_debris_3",
-    "green_mushroom", "carrot_planted", "beehive", "beequeenhive", "reeds", "marsh_tree", "snakeden", "pond",
+    "green_mushroom", "carrot_planted", "beehive", "beequeenhive", "reeds", "marsh_tree", "pond",
     "primeapebarrel",
     "mandrake_planted", "mermhouse_fisher", "sweet_potato_planted", "flup", "flupspawner", "flupspawner_sparse",
     "flupspawner_dense", "wasphive", "flower_evil", "crate", "tallbirdnest", "terrariumchest",

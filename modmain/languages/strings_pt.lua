@@ -201,9 +201,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLUP = "Deixe-me sozinho!"
 STRINGS.NAMES.TIDALPOOL = "Piscina das marés"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TIDALPOOL = "Uma piscina deixada pelas marés."
 
-STRINGS.NAMES.MERMFISHHOUSE = "Casa do Merm pescador"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMFISHHOUSE = "Hm... deve feder ai dentro"
-
 STRINGS.NAMES.POISONHOLE = "Buraco venenoso"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POISONHOLE = "Eu acho que vou ficar longe disso."
 
@@ -4324,7 +4321,6 @@ STRINGS.NAMES.SMASHINGPOT = "Um pote esmagador"
 STRINGS.NAMES.SMELTER = "Fundidora"
 STRINGS.NAMES.SNAKE = "Cobra"
 STRINGS.NAMES.SNAKEBONESOUP = "Sopa de Osso de Cobra"
-STRINGS.NAMES.SNAKEDEN = "Arbusto videiroso"
 STRINGS.NAMES.SNAKEOIL = "Óleo de cobra"
 STRINGS.NAMES.SNAKESKIN = "Pele de cobra"
 STRINGS.NAMES.SNAKESKINHAT = "Chapéu de pele de cobra"
@@ -5312,12 +5308,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEER_FLOWER = "Essas flores atraem todos os 
 
 STRINGS.NAMES.DEER_FLOWER_WITHERED = "A Flor Murchou"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DEER_FLOWER_WITHERED = "Essas flores estão secas."
-
-STRINGS.NAMES.GREENGRASS = "Grama verde"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GREENGRASS = "Esta grama é verde, o que é normal."
-
-STRINGS.NAMES.CUTGREENGRASS = "Cortar grama verde"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CUTGREENGRASS = "Esta grama é verde, o que é normal."
 
 STRINGS.NAMES.PEACHY_POOP = "Fertilizante de árvore de pêssego"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PEACHY_POOP = "Agora, as árvores de pêssego não vão chorar."

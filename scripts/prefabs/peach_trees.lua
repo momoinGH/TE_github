@@ -228,7 +228,7 @@ local function common_fn(anim)
 	inst.entity:AddMiniMapEntity()
 	inst.entity:AddNetwork()
 
-	inst.MiniMapEntity:SetIcon("peach.tex")
+	inst.MiniMapEntity:SetIcon("peach.png")
 
 	MakeObstaclePhysics(inst, .5)
 

@@ -1,6 +1,5 @@
 -- 现在已经被一个注解很全面详细的仓库替代了，https://gitee.com/b1inkie/lsp-dst
 
---[[
 --这个文件不会被调用，单纯写一些源码的注解，虽然删了更节省体积，不过我相信也许会对其他moder有些帮助，而且全局函数在一些编译器下会提供代码补全功能
 
 AllPlayers      = {}
@@ -157,7 +156,7 @@ end
 
 ---FindValidPositionByFan 以原点为圆心，扇形展开的方式查找任意一个可以行走的点
 function FindWalkableOffset(position, start_angle, radius, attempts, check_los, ignore_walls, customcheckfn, allow_water,
-    allow_boats)
+                            allow_boats)
 end
 
 ---海洋版本
@@ -176,7 +175,7 @@ end
 ---@param worker void 要执行动作的工人
 ---@param extra_filter function(worker, v, owner):boolean 过滤器
 function FindPickupableItem(owner, radius, furthestfirst, positionoverride, ignorethese, onlytheseprefabs, allowpickables,
-    worker, extra_filter)
+                            worker, extra_filter)
 end
 
 ---对象是否能在夜晚看见，会通过playervision组件检查或者是否已经装备含有nightvision标签的装备
@@ -921,7 +920,8 @@ TheWorld.Pathfinder:AddWall(x + 0.5, 0, z + 0.5);
 -- prefabutil.lua
 
 -- 制作placer，如果希望有吸附效果的placer，可以参考月亮虹吸器的，prefabs/moon_device.lua
-function MakePlacer(name, bank, build, anim, onground, snap, metersnap, scale, fixedcameraoffset, facing, postinit_fn, offset, onfailedplacement)
+function MakePlacer(name, bank, build, anim, onground, snap, metersnap, scale, fixedcameraoffset, facing, postinit_fn,
+                    offset, onfailedplacement)
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -1059,7 +1059,7 @@ function IfThenDoWhileNode(ifcond, whilecond, name, node) end
 
 ----------------------------------------------------------------------------------------------------
 BufferedAction = Class(function(self, doer, target, action, invobject, pos, recipe, distance, forced, rotation,
-    arrivedist)
+                                arrivedist)
 end)
 
 Ingredient = Class(function(self, ingredienttype, amount, atlas, deconstruct, imageoverride) end)
@@ -1148,7 +1148,8 @@ function MakeWaterObstaclePhysics(inst, rad, height, restitution) end
 
 function MakeSnowCovered(inst) end
 
-function MakeHauntableLaunchAndIgnite(inst, launchchance, ignitechance, speed, cooldown, launch_haunt_value, ignite_haunt_value) end
+function MakeHauntableLaunchAndIgnite(inst, launchchance, ignitechance, speed, cooldown, launch_haunt_value,
+                                      ignite_haunt_value) end
 
 function MakeHauntableIgnite(inst, chance, cooldown, haunt_value) end
 
@@ -1246,7 +1247,8 @@ PriorityNode = Class(BehaviourNode, function(self, children, period, noscatter) 
 
 DoAction = Class(BehaviourNode, function(self, inst, getactionfn, name, run, timeout) end)
 
-ChattyNode = Class(BehaviourNode, function(self, inst, chatlines, child, delay, rand_delay, enter_delay, enter_delay_rand) end)
+ChattyNode = Class(BehaviourNode,
+    function(self, inst, chatlines, child, delay, rand_delay, enter_delay, enter_delay_rand) end)
 
 LoopNode = Class(BehaviourNode, function(self, children, maxreps) end)
 
@@ -1254,9 +1256,11 @@ Leash = Class(BehaviourNode, function(self, inst, homelocation, max_dist, inner_
 
 FaceEntity = Class(BehaviourNode, function(self, inst, getfn, keepfn, timeout, customalert) end)
 
-Wander = Class(BehaviourNode, function(self, inst, homelocation, max_dist, times, getdirectionFn, setdirectionFn, checkpointFn, data) end)
+Wander = Class(BehaviourNode,
+    function(self, inst, homelocation, max_dist, times, getdirectionFn, setdirectionFn, checkpointFn, data) end)
 
-RunAway = Class(BehaviourNode, function(self, inst, hunterparams, see_dist, safe_dist, fn, runhome, fix_overhang, walk_instead, safe_point_fn) end)
+RunAway = Class(BehaviourNode,
+    function(self, inst, hunterparams, see_dist, safe_dist, fn, runhome, fix_overhang, walk_instead, safe_point_fn) end)
 
 FindLight = Class(BehaviourNode, function(self, inst, see_dist, safe_dist) end)
 
@@ -1264,7 +1268,8 @@ Panic = Class(BehaviourNode, function(self, inst) end)
 
 ActionNode = Class(BehaviourNode, function(self, action, name) end)
 
-Follow = Class(BehaviourNode, function(self, inst, target, min_dist, target_dist, max_dist, canrun, alwayseval, inlimbo_invalid) end)
+Follow = Class(BehaviourNode,
+    function(self, inst, target, min_dist, target_dist, max_dist, canrun, alwayseval, inlimbo_invalid) end)
 
 BT = Class(function(self, inst, root) end)
 
@@ -1331,7 +1336,8 @@ function RemoveByValue(t, value) end
 
 Node = Class(function(self, id, data) end)
 
-function PopulateWorld_AddEntity(prefab, tile_x, tile_y, tile_value, entitiesOut, width, height, prefab_list, prefab_data, rand_offset) end
+function PopulateWorld_AddEntity(prefab, tile_x, tile_y, tile_value, entitiesOut, width, height, prefab_list, prefab_data,
+                                 rand_offset) end
 
 function AddTask(name, data) end
 
@@ -1380,7 +1386,8 @@ Task = Class(function(self, id, data)
     self.room_tags = data.room_tags --给属于自己的room都加上该标签
     self.required_prefabs = data.required_prefabs
     self.hub_room = data.hub_room
-    self.level_set_piece_blocker = data.level_set_piece_blocker -- prevents the task from getting any of the random_set_pieces and required_setpieces defined in the level
+    self.level_set_piece_blocker = data
+    .level_set_piece_blocker                                    -- prevents the task from getting any of the random_set_pieces and required_setpieces defined in the level
 end)
 
 local room = {
@@ -1440,7 +1447,8 @@ function RemovePhysicsColliders(inst) end
 -- modworldgenmain和modmain里能拿到这个值
 modinfo = {}
 
-function MakeHauntableLaunchAndPerish(inst, launchchance, perishchance, speed, perishpct, cooldown, launch_haunt_value, perish_haunt_value) end
+function MakeHauntableLaunchAndPerish(inst, launchchance, perishchance, speed, perishpct, cooldown, launch_haunt_value,
+                                      perish_haunt_value) end
 
 function GetInventoryItemAtlas_Internal(imagename, no_fallback) end
 
@@ -1479,5 +1487,3 @@ end)
 Point = Vector3
 
 ----------------------------------------------------------------------------------------------------
-
-]]

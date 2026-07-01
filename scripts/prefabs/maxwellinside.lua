@@ -529,14 +529,6 @@ local function entrance()
 			end
 		end
 
-		local part = SpawnPrefab("maxwellstatuecorpo")
-		if part ~= nil then
-			part.Transform:SetPosition(x - 63, 0, z + 9)
-			if part.components.health ~= nil then
-				part.components.health:SetPercent(1)
-			end
-		end
-
 		local part = SpawnPrefab("maxwellstatuebracoe")
 		if part ~= nil then
 			part.Transform:SetPosition(x - 60, 0, z - 12)

@@ -16,7 +16,8 @@ local function pub_dev(pub, dev)
     return isdev and dev or pub
 end
 
-name = pub_dev(en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "熱帶體驗 | 船難哈姆雷特生態：來自域外"),
+name = pub_dev(
+    en_zh_zht("Tropical Experience | SW HAM Biomes : From Beyond", "热带体验 | 海难哈姆雷特生态：来自域外", "熱帶體驗 | 船難哈姆雷特生態：來自域外"),
     en_zh_zht("Tropical Experience | DEV", "热带体验 | 开发版", "熱帶體驗 | 開發版"))
 
 description = en_zh_zht([[
@@ -165,10 +166,10 @@ configuration_options =
         label = "世界面积乘数",
         hover = "可以让世界变得更大，在世界大小上乘以该倍率",
         options = {
-            { description = "Default, 1×", data = 1 },
+            { description = "Default, 1×",   data = 1 },
             { description = "Larger, 1.25×", data = 1.25 },
-            { description = "Huger, 1.5×", data = 1.5 },
-            { description = "xHuger, 2×", data = 2 },
+            { description = "Huger, 1.5×",   data = 1.5 },
+            { description = "xHuger, 2×",    data = 2 },
         },
         default = 1,
         world_gen = {
@@ -245,8 +246,6 @@ configuration_options =
         },
     },
 
-
-
     title(en_zh_zht("<shipwrecked>", "<海难>", "<海难>"), tro_modules.shipwrecked),
     {
         name = "shipwrecked",
@@ -259,4 +258,94 @@ configuration_options =
             world = { "forest" },
         }
     },
+    title(en_zh_zht("<shipwrecked_plus>", "<海难Plus>", "<海难Plus>"), tro_modules.shipwrecked),
+    {
+        name = "shipwrecked_plus",
+        label = "海难Plus",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.WORLDGEN },
+            group = tro_modules.shipwrecked_plus,
+            world = { "forest" },
+        }
+    },
+
+    title(en_zh_zht("<greenworld>", "<绿色世界>", "<绿色世界>"), tro_modules.greenworld),
+    {
+        name = "greenworld",
+        label = "绿色世界",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.WORLDGEN },
+            group = tro_modules.greenworld,
+            world = { "forest" },
+        }
+    },
+
+    title(en_zh_zht("<windy>", "<大风平原>", "<大风平原>"), tro_modules.windy),
+    {
+        name = "windy",
+        label = "大风平原",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.WORLDGEN },
+            group = tro_modules.windy,
+            world = { "forest" },
+        }
+    },
+
+    title(en_zh_zht("<frostisland>", "<冰霜岛屿>", "<冰霜岛屿>"), tro_modules.frostisland),
+    {
+        name = "frostisland",
+        label = "冰霜岛屿",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.WORLDGEN },
+            group = tro_modules.frostisland,
+            world = { "forest" },
+        }
+    },
+
+    title(en_zh_zht("<quagmire>", "<暴食>", "<暴食>"), tro_modules.quagmire),
+    {
+        name = "quagmire",
+        label = "暴食",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.WORLDGEN },
+            group = tro_modules.quagmire,
+            world = { "forest" },
+        }
+    },
+
+    title(en_zh_zht("<underwater>", "<海底世界>", "<海底世界>"), tro_modules.underwater),
+    {
+        name = "underwater",
+        label = "海底世界",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.WORLDGEN },
+            group = tro_modules.underwater,
+            world = { "forest" },
+        }
+    },
+
+    -- title(en_zh_zht("<lavaarena>", "<熔炉竞技场>", "<熔炉竞技场>"), tro_modules.lavaarena),
+    -- {
+    --     name = "lavaarena",
+    --     label = "熔炉竞技场",
+    --     options = options_enable(),
+    --     default = 1,
+    --     world_gen = {
+    --         category = { LEVELCATEGORY.WORLDGEN },
+    --         group = tro_modules.lavaarena,
+    --         world = { "forest" },
+    --     }
+    -- },
 }

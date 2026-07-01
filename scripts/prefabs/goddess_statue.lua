@@ -128,7 +128,7 @@ local function fn()
 	inst.entity:AddMiniMapEntity()
 	inst.entity:AddLight()
 
-	inst.MiniMapEntity:SetIcon("goddess_statue.tex")
+	inst.MiniMapEntity:SetIcon("goddess_statue.png")
 
 	MakeObstaclePhysics(inst, 1)
 	inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)

@@ -40,7 +40,7 @@ local function MakeLoot(inst)
         { chance = 2,   item = "peach_juice_bottle_green" },
         { chance = 10,  item = "full_bottle_green_dirty" },
         { chance = 5,   item = "full_bottle_green_milk" },
-        { chance = 9.5, item = "cutgreengrass" },
+        { chance = 9.5, item = "cutgrass" },
         { chance = 3,   item = "goddess_butterflywings" },
         { chance = 2,   item = "peach" },
         { chance = 2,   item = "dragonfruit" },

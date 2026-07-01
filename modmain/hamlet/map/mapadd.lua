@@ -1,5 +1,3 @@
---[[
-
 modimport "modmain/hamlet/map/forest_map.lua"
 
 
@@ -149,6 +147,3 @@ AddTaskSetPreInitAny(function(task_set)
         task_set.set_pieces["pig_ruins_nocanopy_4"] = { count = 2, tasks = { "岛三雨林" } }
     end
 end)
-
-
-]]

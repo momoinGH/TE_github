@@ -7,9 +7,9 @@ Layouts["vacation"] = StaticLayout.Get("map/static_layouts/vacation", {
     start_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
     fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
 })
-TroRemapLayoutTile("vacation", {
-    [6] = WORLD_TILES.BEACH
-})
+-- TroRemapLayoutTile("vacation", {
+--     [6] = WORLD_TILES.BEACH
+-- })
 
 -- 黄金球，金色方尖碑
 Layouts["eldorado"] = StaticLayout.Get("map/static_layouts/eldorado", {

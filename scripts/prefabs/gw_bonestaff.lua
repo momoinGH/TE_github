@@ -54,7 +54,6 @@ end
 
 local zombies = {
     grass = { "grassgekko" },
-    greengrass = { "grassgekko" },
     dug_grass = { "grassgekko" },
     pigskin = { "pigman" },
     manrabbit_tail = { "bunnyman" },

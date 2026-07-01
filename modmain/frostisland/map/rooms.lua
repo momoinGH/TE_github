@@ -274,7 +274,6 @@ AddRoom("strange_island_canada", {
         countprefabs =
         {
             wildbeaver_house = 3,
-            maxwellstatuecorpo = 1,
             gravestone = 2,
             snowpile1 = 1,
         }

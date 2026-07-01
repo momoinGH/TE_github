@@ -177,7 +177,7 @@ AddRoom("pandajungle6", {
 AddRoom("BGpandajungle", {
     colour = { r = 1, g = 1, b = 1, a = .50 },
     value = WORLD_TILES.MEADOW,
-    tags = { "RoadPoison", "shipwrecked" },     --"ForceDisconnected"
+    tags = { "RoadPoison", "shipwrecked" }, --"ForceDisconnected"
     contents =
     {
         distributepercent = 0.3,
@@ -247,7 +247,7 @@ AddRoom("Marshpool", {
         {
             sedimentpuddle = 1,
             mermhouse = 1,
-            mermfishhouse = 1,
+            mermhouse_fisher = 1,
             poisonhole = 1.5,
             fishinhole = 1.5,
         },
@@ -256,6 +256,7 @@ AddRoom("Marshpool", {
 -- OX,en Biome
 -- merm city
 AddRoom("MermySwamp1", {
+    colour = { r = 0.5, g = .16, b = .35, a = .50 },
     value = WORLD_TILES.MARSH,
     tags = { "RoadPoison" }, ----"ForceConnected"
     contents = {
@@ -264,7 +265,6 @@ AddRoom("MermySwamp1", {
         {
             pighead = 0.01,
             bush_vine = 0.2,
-            snakeden = 0.2,
             flower_evil = 0.4,
             mangrovetree = 0.5,
             Grasswaterspawner = 0.4,
@@ -277,7 +277,7 @@ AddRoom("MermySwamp1", {
         countprefabs =
         {
             mermhouse = 3,
-            mermfishhouse = 2,
+            mermhouse_fisher = 2,
             sedimentpuddle = 1,
             mangrovetree = 10,
             Grasswaterspawner = 15,
@@ -297,7 +297,7 @@ AddRoom("swambpool1", {
             mangrovetree = 0.5,
             Grasswaterspawner = 0.7,
             bush_vine = 0.3,
-            snakeden = 0.2,
+            snakeskin = 0.2,
             reeds = 0.1,
             poisonmist = 0.2,
             tentacle = 0.40,
@@ -323,7 +323,7 @@ AddRoom("swambpool2", {
             mangrovetree = 0.5,
             Grasswaterspawner = 0.7,
             bush_vine = 0.3,
-            snakeden = 0.2,
+            snakeskin = 0.2,
             reeds = 0.35,
             tentacle = 0.40,
             flupspawner = 0.30,
