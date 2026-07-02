@@ -27,7 +27,9 @@ end
 ----------------------------------------------------------------------------------------------------
 
 local function AcceptTest(inst, item, giver)
-    return inst.sg.currentstate.name == "opened" and item.components.appeasement
+    return TheWorld.components.volcanomanager
+        and inst.sg.currentstate.name == "opened"
+        and item.components.appeasement
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
@@ -84,13 +86,16 @@ end
 
 local function SetIsOpen(inst)
     local vm = TheWorld.components.volcanomanager
-    if not inst:FullAppeased() and TheWorld.state.issummer and not vm:IsFireRaining() then
-        if inst.sg.currentstate.name ~= "opened" then
+    if not inst:FullAppeased()
+        and TheWorld.state.issummer
+        and not vm:IsFireRaining()
+    then
+        if not inst.sg:HasStateTag("open") then
             inst.sg:GoToState("open")
         end
         inst.components.trader:Enable()
     else
-        if inst.sg.currentstate.name ~= "closed" then
+        if not inst.sg:HasStateTag("close") then
             inst.sg:GoToState("close")
         end
         inst.components.trader:Disable()
@@ -98,7 +103,8 @@ local function SetIsOpen(inst)
 end
 
 local function FullAppeased(inst)
-    return inst.meterprefab and inst.meterprefab.components.volcanometer.targetseg >= inst.meterprefab.components.volcanometer.maxseg
+    return inst.meterprefab and
+        inst.meterprefab.components.volcanometer.targetseg >= inst.meterprefab.components.volcanometer.maxseg
 end
 
 local function base_fn()

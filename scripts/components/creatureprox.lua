@@ -2,6 +2,11 @@ local nothave = { "INTERIOR_LIMBO", "snake", "scorpion", "shadowcreature" }
 
 local function DoTest(inst)
     local self = inst.components.creatureprox
+    if inst:IsAsleep() then
+        self:UpdateTaskEnable()
+        return
+    end
+
     local x, y, z = inst.Transform:GetWorldPosition()
 
     local range = nil
@@ -57,14 +62,13 @@ local function SetTaskEnable(self, enable)
     end
 end
 
-local function UpdateTaskEnable(self)
-    local can_check = not self.inst:IsAsleep() and self.enabled
-    SetTaskEnable(self, can_check)
-end
-
 local function onperiod(self)
     SetTaskEnable(self, false)
-    UpdateTaskEnable(self)
+    self:UpdateTaskEnable()
+end
+
+local function onenabled(self)
+    self:UpdateTaskEnable()
 end
 
 -- 附近单位检测，主要用于遗迹的机关
@@ -85,11 +89,16 @@ local CreatureProx = Class(function(self, inst)
     self.onnear = nil
     self.onfar = nil
 
-    UpdateTaskEnable(self)
+    self:UpdateTaskEnable()
 end, nil, {
-    enabled = UpdateTaskEnable,
+    enabled = onenabled,
     period = onperiod
 })
+
+function CreatureProx:UpdateTaskEnable(self)
+    local can_check = not self.inst:IsAsleep() and self.enabled
+    SetTaskEnable(self, can_check)
+end
 
 function CreatureProx:GetDebugString()
     return self.isclose and "NEAR" or "FAR"
@@ -122,14 +131,6 @@ end
 
 function CreatureProx:ForceTest()
     DoTest(self.inst)
-end
-
-function CreatureProx:OnEntitySleep()
-    UpdateTaskEnable(self)
-end
-
-function CreatureProx:OnEntityWake()
-    UpdateTaskEnable(self)
 end
 
 function CreatureProx:OnRemoveEntity()

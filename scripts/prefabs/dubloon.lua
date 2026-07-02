@@ -41,14 +41,8 @@ local function fn()
     inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
     inst.components.edible.hungervalue = 2
     inst:AddComponent("tradable")
-
     inst:AddComponent("inspectable")
-
     inst:AddComponent("inventoryitem")
-
-
-
-
     inst:AddComponent("stackable")
     inst:AddComponent("bait")
 

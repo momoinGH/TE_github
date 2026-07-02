@@ -29,8 +29,8 @@ local function MakeTrinket(num)
             return inst
         end
 
-        --inst:AddComponent("appeasement")
-        --inst.components.appeasement.appeasementvalue = TUNING.APPEASEMENT_LARGE
+        inst:AddComponent("appeasement")
+        inst.components.appeasement.appeasementvalue = TUNING.APPEASEMENT_LARGE
 
         inst:AddComponent("inspectable")
         inst:AddComponent("stackable")

@@ -57,8 +57,8 @@ local function fn()
     inst.components.tradable.goldvalue = 3
     --inst.components.tradable.dubloonvalue = 12
 
-    --inst:AddComponent("appeasement")
-    --inst.components.appeasement.appeasementvalue = TUNING.APPEASEMENT_HUGE
+    inst:AddComponent("appeasement")
+    inst.components.appeasement.appeasementvalue = TUNING.APPEASEMENT_HUGE
 
     MakeHauntableLaunch(inst)
 

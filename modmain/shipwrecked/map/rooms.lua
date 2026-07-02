@@ -680,6 +680,7 @@ AddRoom("VolcanoNoise", {
     }
 })
 
+-- 火山祭坛
 AddRoom("VolcanoObsidianBench", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.VOLCANO_ROCK,
@@ -697,7 +698,7 @@ AddRoom("VolcanoObsidianBench", {
         countprefabs =
         {
             volcanofog = math.random(1, 2),
-            firetwister = 1,
+            volcano_altar = 1,
         },
     }
 })
@@ -723,28 +724,7 @@ AddRoom("VolcanoAltar", {
     }
 })
 
-
-AddRoom("VolcanoLavaarena", {
-    colour = { r = .55, g = .75, b = .75, a = .50 },
-    value = WORLD_TILES.VOLCANO_ROCK,
-    contents = {
-        countstaticlayouts = { ["lava_arena"] = 0 --[[GetModConfigData("forge")]], },
-        distributepercent = .1,
-        distributeprefabs =
-        {
-            magmarock = 1,
-            charcoal = 0.04,
-            skeleton = 0.5
-        },
-
-        countprefabs =
-        {
-            volcanofog = math.random(1, 2)
-        },
-
-    }
-})
-
+-- 海盗船长笼子
 AddRoom("VolcanoCage", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.VOLCANO_ROCK,
@@ -764,16 +744,6 @@ AddRoom("VolcanoCage", {
         {
             volcanofog = 1,
         },
-    }
-})
-
-AddRoom("VolcanoLava", {
-    colour = { r = 1.0, g = 0.55, b = 0, a = .50 },
-    value = WORLD_TILES.IMPASSABLE,
-    type = "blank",
-    contents = {
-        distributepercent = 0,
-        distributeprefabs = {},
     }
 })
 

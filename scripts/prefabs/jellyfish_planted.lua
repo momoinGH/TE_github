@@ -121,7 +121,6 @@ local function fn(Sim)
     inst.components.workable:SetWorkLeft(1)
     inst.components.workable:SetOnFinishCallback(OnWorked)
 
-    --inst:DoTaskInTime(0, ondropped)
     inst:SetStateGraph("SGjellyfish")
     local brain = require "brains/jellyfishbrain"
     inst:SetBrain(brain)

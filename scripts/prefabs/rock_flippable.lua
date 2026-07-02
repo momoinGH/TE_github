@@ -87,32 +87,32 @@ local function setloot(inst)
     local pt = inst:GetPosition()
     local tile = ground.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
     if tile == WORLD_TILES.PLAINS then
-        inst.components.lootdropper:AddRandomLoot("jellybug", 5.0)  -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("rocks", 20.0)    -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("flint", 20.0)    -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("cutgrass", 20.0) -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("jellybug", 5.0)        -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("rocks", 20.0)          -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("flint", 20.0)          -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("cutgrass", 20.0)       -- Weighted average
     elseif tile == WORLD_TILES.RAINFOREST then
-        inst.components.lootdropper:AddRandomLoot("jellybug", 10.0) -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("slugbug", 10.0)  -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("rocks", 15.0)    -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("flint", 15.0)    -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("cutgrass", 10.0) -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("rabid_beetle", 0.1) -- Weighted average    	
+        inst.components.lootdropper:AddRandomLoot("jellybug", 10.0)       -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("slugbug", 10.0)        -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("rocks", 15.0)          -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("flint", 15.0)          -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("cutgrass", 10.0)       -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("rabid_beetle", 0.1)    -- Weighted average    	
     elseif tile == WORLD_TILES.DEEPRAINFOREST then
-        inst.components.lootdropper:AddRandomLoot("jellybug", 15.0) -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("slugbug", 15.0)  -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("rocks", 5.0)     -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("flint", 5.0)     -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("cutgrass", 5.0)  -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("rabid_beetle", 10) -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("jellybug", 15.0)       -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("slugbug", 15.0)        -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("rocks", 5.0)           -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("flint", 5.0)           -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("cutgrass", 5.0)        -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("rabid_beetle", 10)     -- Weighted average
         inst.components.lootdropper:AddRandomLoot("snake_amphibious", 10) -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("relic_1", 1)     -- Weighted average  	
-        inst.components.lootdropper:AddRandomLoot("relic_2", 1)     -- Weighted average  	
-        inst.components.lootdropper:AddRandomLoot("relic_3", 1)     -- Weighted average  	
+        inst.components.lootdropper:AddRandomLoot("relic_1", 1)           -- Weighted average  	
+        inst.components.lootdropper:AddRandomLoot("relic_2", 1)           -- Weighted average  	
+        inst.components.lootdropper:AddRandomLoot("relic_3", 1)           -- Weighted average  	
     else
-        inst.components.lootdropper:AddRandomLoot("rocks", 20.0)    -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("flint", 20.0)    -- Weighted average
-        inst.components.lootdropper:AddRandomLoot("cutgrass", 20.0) -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("rocks", 20.0)          -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("flint", 20.0)          -- Weighted average
+        inst.components.lootdropper:AddRandomLoot("cutgrass", 20.0)       -- Weighted average
     end
 end
 
@@ -193,7 +193,7 @@ local function fn(Sim)
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.nameoverride = "rock"
-    inst:DoPeriodicTask(10 + (math.random() * 10), function() dowobbletest(inst) end)
+    inst:DoPeriodicTask(10 + (math.random() * 10), dowobbletest)
 
     return inst
 end

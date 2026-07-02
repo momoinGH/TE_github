@@ -168,12 +168,12 @@ function VolcanoManager:StartEruption(smoke_duration, ash_duration, firerain_dur
     local data =
     {
         firerain_delay = 0,
-        firerain_duration = firerain_duration,
-        firerain_per_sec = firerain_spawn_per_sec,
+        firerain_duration = firerain_duration or 0,
+        firerain_per_sec = firerain_spawn_per_sec or 0,
         smoke_delay = 0,
-        smoke_duration = smoke_duration,
+        smoke_duration = smoke_duration or 0,
         ash_delay = 0,
-        ash_duration = ash_duration
+        ash_duration = ash_duration or 0
     }
     self:DoEruption(data)
     self.inst:StartUpdatingComponent(self)
@@ -206,19 +206,25 @@ end
 function VolcanoManager:Stop()
     print("VolcanoManager stop")
 
+    local waserupting = self.waserupting
     self.inst.SoundEmitter:KillSound("earthquake")
     self.appeasesegs = 0
     self:StopAshRain()
     self:StopFireRain()
+    self:StopSmoke()
+    self.waserupting = false
+    if waserupting then
+        self.inst:PushEvent("OnVolcanoEruptionEnd")
+    end
     self.inst:StopUpdatingComponent(self)
 end
 
 function VolcanoManager:StartFireRain(firerain_duration, firerain_delay, firerain_spawn_per_sec)
-    self.firerain_delay = firerain_delay
-    self.firerain_duration = firerain_duration
+    self.firerain_delay = firerain_delay or 0
+    self.firerain_duration = firerain_duration or 0
     self.firerain_timer = self.firerain_delay + self.firerain_duration
     self.firerain_spawn_rate = 0.0
-    self.firerain_spawn_per_sec = firerain_spawn_per_sec
+    self.firerain_spawn_per_sec = firerain_spawn_per_sec or 0
 end
 
 function VolcanoManager:StopFireRain()
@@ -228,8 +234,8 @@ function VolcanoManager:StopFireRain()
 end
 
 function VolcanoManager:StartAshRain(ash_duration, ash_delay)
-    self.ash_delay = ash_delay
-    self.ash_duration = ash_duration
+    self.ash_delay = ash_delay or 0
+    self.ash_duration = ash_duration or 0
     self.ash_timer = self.ash_delay + self.ash_duration
     self.inst:PushEvent("ashstart")
 end
@@ -248,8 +254,8 @@ function VolcanoManager:StopAshRain()
 end
 
 function VolcanoManager:StartSmoke(smoke_duration, smoke_delay)
-    self.smoke_delay = smoke_delay
-    self.smoke_duration = smoke_duration
+    self.smoke_delay = smoke_delay or 0
+    self.smoke_duration = smoke_duration or 0
     self.smoke_timer = self.smoke_delay + self.smoke_duration
 end
 
@@ -259,14 +265,27 @@ function VolcanoManager:StopSmoke()
     self.smoke_duration = 0.0
 end
 
-function VolcanoManager:RunSchedule(schedule, segs)
-    if schedule and schedule[segs] then
-        for i = 1, #schedule[segs], 1 do
-            schedule[segs][i].fn(self, schedule[segs][i].data)
-        end
-        schedule[segs] = {}
+function VolcanoManager:RunSchedule(schedule, segs, lastsegs)
+    if schedule == nil then
+        return
     end
-    self.highest_schedule_seg = math.max(self.highest_schedule_seg, segs)
+
+    lastsegs = lastsegs or -1
+    local due = {}
+    for schedule_segs, events in pairs(schedule) do
+        if schedule_segs > lastsegs and schedule_segs <= segs then
+            table.insert(due, schedule_segs)
+        end
+    end
+
+    table.sort(due)
+    for _, schedule_segs in ipairs(due) do
+        local events = schedule[schedule_segs]
+        for i = 1, #events, 1 do
+            events[i].fn(self, events[i].data)
+        end
+        schedule[schedule_segs] = nil
+    end
 end
 
 function VolcanoManager:GetCurrentScheduleSegment()
@@ -318,32 +337,38 @@ function VolcanoManager:OnUpdate(dt)
     if self.schedule[1] then
         if TheWorld.state.issummer then
             local segs = self:GetCurrentScheduleSegment()
-            self:RunSchedule(self.schedule[1], segs)
+            self:RunSchedule(self.schedule[1], segs, self.highest_schedule_seg)
+            self.highest_schedule_seg = math.max(self.highest_schedule_seg, segs)
             if segs > self.schedulesegs[1] then
                 self:SetDormantIcon()
-                self.schedule[1] = {}
+                self.schedule[1] = nil
+                self.schedulesegs[1] = nil
             end
         else
             self:SetDormantIcon()
-            self.schedule[1] = {}
+            self.schedule[1] = nil
+            self.schedulesegs[1] = nil
         end
     end
 
     if self.schedule[2] then
         local segs = self:GetCurrentStaffScheduleSegment()
-        self:RunSchedule(self.schedule[2], segs)
+        self:RunSchedule(self.schedule[2], segs, self._staff_highest_schedule_seg)
+        self._staff_highest_schedule_seg = math.max(self._staff_highest_schedule_seg or -1, segs)
         if segs > self.schedulesegs[2] then
             self:SetDormantIcon()
-            self.schedule[2] = {}
+            self.schedule[2] = nil
+            self.schedulesegs[2] = nil
+            self._staff_highest_schedule_seg = nil
         end
     end
 
     --update fire rain
-    if self.firerain_timer > 0.0 and self.firerain_intensity > 0.0 then
+    if self.firerain_timer > 0.0 then
         self.firerain_timer = self.firerain_timer - dt
-        if self.firerain_timer <= self.firerain_duration then
+        if self.firerain_intensity > 0.0 and self.firerain_timer <= self.firerain_duration then
             self.firerain_spawn_rate = self.firerain_spawn_rate +
-            self.firerain_spawn_per_sec * self.firerain_intensity * dt
+                self.firerain_spawn_per_sec * self.firerain_intensity * dt
             while self.firerain_spawn_rate > 1.0 do
                 local players = GetValidPlayers()
                 if #players <= 0 then
@@ -365,7 +390,7 @@ function VolcanoManager:OnUpdate(dt)
     --update ash rain
     if self.ash_timer > 0.0 then
         self.ash_timer = self.ash_timer - dt
-        if self.ash_timer <= self.ash_duration then
+        if self.ash_timer <= self.ash_duration and self.ash_duration > 0 then
             local particles_per_tick = 20 * math.min(self.ash_timer / self.ash_duration, 1.0)
             local players = GetValidPlayers()
             local valid_players = {}
@@ -717,6 +742,7 @@ function VolcanoManager:Appease(segs)
 
         local segsuntilquake = self:GetNumSegmentsUntilQuake()
         local segsuntilerupt = self:GetNumSegmentsUntilEruption()
+        local erupt = self:GetNextEruptionEvent()
 
         if segsuntilquake and segsuntilquake < numSegs then
             doquake = true
@@ -732,13 +758,16 @@ function VolcanoManager:Appease(segs)
             if doerupt then
                 print("and eruption")
                 self.inst:DoTaskInTime(WARN_QUAKE_DURATION + 1.0, function()
-                    local erupt = self:GetNextEruptionEvent()
-                    DoEruption(self, erupt.data)
+                    if erupt ~= nil then
+                        DoEruption(self, erupt.data)
+                    end
                 end)
             end
         elseif doerupt then
             print("Wrath causing eruption")
-            DoEruption(self)
+            if erupt ~= nil then
+                DoEruption(self, erupt.data)
+            end
         end
     end
 
