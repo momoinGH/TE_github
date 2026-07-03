@@ -12,7 +12,7 @@ TroUpdateCookingIngredientTags({ "meat", "monstermeat" }, { bigmeat = 1, })
 
 
 
-AddCookerRecipe("pot", {
+AddCookerRecipe("quagmire_pot", {
     name = "syrup",
     test = function(cooker, names, tags) return names.sap and names.sap >= 3 end,
     priority = 1,

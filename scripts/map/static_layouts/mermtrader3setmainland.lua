@@ -87,7 +87,7 @@ return {
           visible = true,
           properties = {}
         },
-		
+
         {
           name = "",
           type = "quagmire_altar_bollard",
@@ -112,7 +112,7 @@ return {
           visible = true,
           properties = {}
         },
-		
+
         {
           name = "",
           type = "quagmire_altar_bollard",
@@ -123,7 +123,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
+        },
 
 
         {
@@ -162,7 +162,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },	
+        },
 
         {
           name = "",
@@ -174,7 +174,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },			
+        },
 
 
         --[[{
@@ -188,8 +188,8 @@ return {
           visible = true,
           properties = {}
         },]]
-		
-		
+
+
         {
           name = "",
           type = "quagmire_lamp_short",
@@ -200,8 +200,8 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
-		
+        },
+
 
         {
           name = "",
@@ -213,9 +213,9 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
-		
-		--[[
+        },
+
+        --[[
         {
           name = "",
           type = "quagmire_goatmum",
@@ -251,8 +251,8 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
-		
+        },
+
         --[[{
           name = "",
           type = "firepit",
@@ -275,8 +275,8 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },]]			
-		
+        },]]
+
         {
           name = "",
           type = "quagmire_altar_statue1",
@@ -302,9 +302,9 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "-77"
           }
-        },	
-		
-		
+        },
+
+
         {
           name = "",
           type = "quagmire_altar_statue2",
@@ -330,21 +330,7 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "-77"
           }
-        },		
-		
-		
-        --[[{
-          name = "",
-          type = "quagmire_trader_merm3",
-          shape = "rectangle",
-          x = 400,
-          y = 100,
-          width = 0,
-          height = 0,
-          visible = true,
-          properties = {}
-        },]]		
-		
+        },
         {
           name = "",
           type = "quagmire_altar_bollard",
@@ -356,7 +342,7 @@ return {
           visible = true,
           properties = {}
         },
-		
+
         {
           name = "",
           type = "quagmire_altar_bollard",
@@ -381,7 +367,7 @@ return {
           visible = true,
           properties = {}
         },
-		
+
         {
           name = "",
           type = "quagmire_altar_bollard",
@@ -392,7 +378,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },		
+        },
 
 
         {
@@ -431,7 +417,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },	
+        },
 
         {
           name = "",
@@ -443,7 +429,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },			
+        },
 
 
 

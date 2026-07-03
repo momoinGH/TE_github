@@ -108,12 +108,9 @@ local function GuardRetargetFn(inst)
     --defend the king, then the torch, then myself
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
     local defendDist = SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
-    local defenseTarget =
-        FindEntity(inst, defendDist, nil, { "beaverking" }) or
-        (home ~= nil and inst:IsNear(home, defendDist) and home) or
-        inst
+    local defenseTarget = FindEntity(inst, defendDist, nil, { "beaverking" }) or
+        (home ~= nil and inst:IsNear(home, defendDist) and home) or inst
     local defenseTarget1 = FindEntity(inst, defendDist * 2, nil, { "beaverking" })
-
     if not defenseTarget.happy then
         local invader = FindEntity(defenseTarget, SpringCombatMod(TUNING.PIG_GUARD_TARGET_DIST), nil, { "character" },
             { "wildbeaverguard", "INLIMBO" })

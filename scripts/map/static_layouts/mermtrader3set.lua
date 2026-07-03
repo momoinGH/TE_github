@@ -335,7 +335,7 @@ return {
 		
         {
           name = "",
-          type = "quagmire_trader_merm3",
+          type = "quagmire_trader_merm",
           shape = "rectangle",
           x = 400,
           y = 100,

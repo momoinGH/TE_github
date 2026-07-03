@@ -22,7 +22,7 @@ local KIT_ITEMS =
     ["oven"] =
     {
         "oven_item",
-        "casseroledish_small",
+        "quagmire_casseroledish",
     },
     ["grill_small"] =
     {

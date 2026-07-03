@@ -12,105 +12,63 @@ TroAddPrototyperDef("quagmire_portal_key", {
     icon_atlas = "images/tabs.xml",
 })
 
+----------------------------------------------------------------------------------------------------
+
 
 -- GORGE--
-AddRecipe2("quagmire_swampig_house", { Ingredient("boards", 4), Ingredient("rocks", 8), Ingredient("pigskin", 4) },
-    TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_swampig_house_placer" }, { "GORGE" })
-AddRecipe2("quagmire_flour", { Ingredient("wheat", 2) }, TECH.FOODPROCESSING_ONE, { nounlock = true },
-    { "REFINE", "COOKING" })
-AddRecipe2("quagmire_spotspice_ground", { Ingredient("quagmire_spotspice_sprig", 3) }, TECH.FOODPROCESSING_ONE,
-    { nounlock = true }, { "REFINE", "COOKING" })
+AddRecipe2("quagmire_swampig_house", { Ig("boards", 4), Ig("rocks", 8), Ig("pigskin", 4) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_swampig_house_placer" }, { "GORGE" })
 
-AddRecipe2("quagmire_crabtrap", { Ingredient("twigs", 3), Ingredient("silk", 2) }, TECH.GORGE_TWO,
-    { nounlock = true, image = "quagmire_crabtrap.tex", }, { "GORGE" })
-AddRecipe2("quagmire_safe", { Ingredient("cutstone", 3), Ingredient("goldnugget", 2) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_safe_placer", }, { "GORGE" })
+AddRecipe2("quagmire_crabtrap", { Ig("twigs", 3), Ig("silk", 2) }, TECH.GORGE_TWO, { nounlock = true, image = "quagmire_crabtrap.tex", }, { "GORGE" })
+AddRecipe2("quagmire_safe", { Ig("cutstone", 3), Ig("goldnugget", 2) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_safe_placer", }, { "GORGE" })
 
-AddRecipe2("quagmire_lamp_post", { Ingredient("lantern", 1), Ingredient("cutstone", 1), Ingredient("transistor", 1) },
-    TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_lamp_post_placer" }, { "GORGE" })
-AddRecipe2("quagmire_lamp_short", { Ingredient("lantern", 1), Ingredient("cutstone", 1), Ingredient("transistor", 1) },
-    TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_lamp_short_placer", }, { "GORGE" })
+AddRecipe2("quagmire_lamp_post", { Ig("lantern", 1), Ig("cutstone", 1), Ig("transistor", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_lamp_post_placer" }, { "GORGE" })
+AddRecipe2("quagmire_lamp_short", { Ig("lantern", 1), Ig("cutstone", 1), Ig("transistor", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_lamp_short_placer", }, { "GORGE" })
 
-AddRecipe2("quagmire_altar_statue1", { Ingredient("redgem", 2), Ingredient("cutstone", 2) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_altar_statue1_placer", },
-    { "GORGE" })
-AddRecipe2("quagmire_altar_statue2", { Ingredient("redgem", 2), Ingredient("cutstone", 1) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_altar_statue2_placer", },
-    { "GORGE" })
-AddRecipe2("quagmire_altar_queen", { Ingredient("redgem", 2), Ingredient("purplegem", 1),
-    Ingredient("yellowgem", 1), Ingredient("cutstone", 4) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_altar_queen_placer", }, { "GORGE" })
-AddRecipe2("quagmire_altar_bollard", { Ingredient("cutstone", 1) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_altar_bollard_placer", }, { "GORGE" })
-AddRecipe2("quagmire_altar_ivy", { Ingredient("cutgrass", 2), Ingredient("cutstone", 1) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_altar_ivy_placer", }, { "GORGE" })
+AddRecipe2("quagmire_altar_statue1", { Ig("redgem", 2), Ig("cutstone", 2) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_altar_statue1_placer", }, { "GORGE" })
+AddRecipe2("quagmire_altar_statue2", { Ig("redgem", 2), Ig("cutstone", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_altar_statue2_placer", }, { "GORGE" })
+AddRecipe2("quagmire_altar_queen", { Ig("redgem", 2), Ig("purplegem", 1), Ig("yellowgem", 1), Ig("cutstone", 4) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_altar_queen_placer", }, { "GORGE" })
+AddRecipe2("quagmire_altar_bollard", { Ig("cutstone", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_altar_bollard_placer", }, { "GORGE" })
+AddRecipe2("quagmire_altar_ivy", { Ig("cutgrass", 2), Ig("cutstone", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_altar_ivy_placer", }, { "GORGE" })
 
-AddRecipe2("quagmire_park_fountain", { Ingredient("purplegem", 1), Ingredient("cutstone", 1) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_park_fountain_placer", },
-    { "GORGE" })
-AddRecipe2("quagmire_park_angel", { Ingredient("redgem", 1), Ingredient("cutstone", 2) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_park_angel_placer", }, { "GORGE" })
-AddRecipe2("quagmire_park_angel2", { Ingredient("redgem", 1), Ingredient("cutstone", 2) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_park_angel2_placer", }, { "GORGE" })
-AddRecipe2("quagmire_park_urn", { Ingredient("redgem", 1), Ingredient("cutstone", 2) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_park_urn_placer", }, { "GORGE" })
-AddRecipe2("quagmire_park_obelisk", { Ingredient("cutstone", 3) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_park_obelisk_placer", }, { "GORGE" })
+AddRecipe2("quagmire_park_fountain", { Ig("purplegem", 1), Ig("cutstone", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_park_fountain_placer", }, { "GORGE" })
+AddRecipe2("quagmire_park_angel", { Ig("redgem", 1), Ig("cutstone", 2) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_park_angel_placer", }, { "GORGE" })
+AddRecipe2("quagmire_park_angel2", { Ig("redgem", 1), Ig("cutstone", 2) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_park_angel2_placer", }, { "GORGE" })
+AddRecipe2("quagmire_park_urn", { Ig("redgem", 1), Ig("cutstone", 2) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_park_urn_placer", }, { "GORGE" })
+AddRecipe2("quagmire_park_obelisk", { Ig("cutstone", 3) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_park_obelisk_placer", }, { "GORGE" })
 
-AddRecipe2("quagmire_rubble_bike", { Ingredient("wagpunk_bits", 3), Ingredient("gears", 1) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_rubble_bike_placer", },
-    { "GORGE" })
-AddRecipe2("quagmire_rubble_carriage", { Ingredient("boards", 4) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_rubble_carriage_placer", }, { "GORGE" })
-AddRecipe2("quagmire_rubble_cathedral", { Ingredient("cutstone", 3) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_rubble_cathedral_placer", }, { "GORGE" })
-AddRecipe2("quagmire_rubble_chimney", { Ingredient("cutstone", 3) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_rubble_chimney_placer", }, { "GORGE" })
-AddRecipe2("quagmire_rubble_chimney2", { Ingredient("cutstone", 3) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_rubble_chimney2_placer", }, { "GORGE" })
-AddRecipe2("quagmire_rubble_clock", { Ingredient("cutstone", 2), Ingredient("compass", 1) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_rubble_clock_placer", },
-    { "GORGE" })
-AddRecipe2("quagmire_rubble_clocktower", { Ingredient("cutstone", 3), Ingredient("compass", 1) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_rubble_clocktower_placer", },
-    { "GORGE" })
-AddRecipe2("quagmire_rubble_door", { Ingredient("cutstone", 2), Ingredient("boards", 1) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_rubble_door_placer", }, { "GORGE" })
-AddRecipe2("quagmire_rubble_house", { Ingredient("cutstone", 3) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_rubble_house_placer", }, { "GORGE" })
-AddRecipe2("quagmire_rubble_pubdoor", { Ingredient("boards", 3) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_rubble_pubdoor_placer", }, { "GORGE" })
-AddRecipe2("quagmire_rubble_roof", { Ingredient("cutstone", 2), Ingredient("boards", 1) }, TECH.GORGE_TWO,
-    { nounlock = true, placer = "quagmire_rubble_roof_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_bike", { Ig("wagpunk_bits", 3), Ig("gears", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_bike_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_carriage", { Ig("boards", 4) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_carriage_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_cathedral", { Ig("cutstone", 3) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_cathedral_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_chimney", { Ig("cutstone", 3) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_chimney_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_chimney2", { Ig("cutstone", 3) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_chimney2_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_clock", { Ig("cutstone", 2), Ig("compass", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_clock_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_clocktower", { Ig("cutstone", 3), Ig("compass", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_clocktower_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_door", { Ig("cutstone", 2), Ig("boards", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_door_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_house", { Ig("cutstone", 3) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_house_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_pubdoor", { Ig("boards", 3) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_pubdoor_placer", }, { "GORGE" })
+AddRecipe2("quagmire_rubble_roof", { Ig("cutstone", 2), Ig("boards", 1) }, TECH.GORGE_TWO, { nounlock = true, placer = "quagmire_rubble_roof_placer", }, { "GORGE" })
 
+AddRecipe2("quagmire_flour", { Ig("wheat", 2) }, TECH.FOODPROCESSING_ONE, { nounlock = true }, { "REFINE", "COOKING" })
+AddRecipe2("quagmire_spotspice_ground", { Ig("quagmire_spotspice_sprig", 3) }, TECH.FOODPROCESSING_ONE, { nounlock = true }, { "REFINE", "COOKING" })
 
 -- Gorge
-AddRecipe2("turf_quagmire_gateway", { Ingredient("cutgrass", 2), Ingredient("petals", 1) }, TECH.TURFCRAFTING_ONE,
-    { numtogive = 4 }, { "DECOR" })
-AddRecipe2("turf_quagmire_citystone", { Ingredient("rocks", 2), Ingredient("saltrock", 1) }, TECH.TURFCRAFTING_ONE,
-    { numtogive = 4 }, { "DECOR" })
-AddRecipe2("turf_quagmire_parkfield", { Ingredient("cutgrass", 2), Ingredient("quagmire_spotspice_sprig", 1) },
-    TECH.TURFCRAFTING_ONE, { numtogive = 4 }, { "DECOR" })
-AddRecipe2("turf_quagmire_parkstone", { Ingredient("rocks", 2), Ingredient("quagmire_spotspice_sprig", 1) },
-    TECH.TURFCRAFTING_ONE, { numtogive = 4 }, { "DECOR" })
-AddRecipe2("turf_quagmire_peatforest", { Ingredient("charcoal", 1), Ingredient("spoiled_food", 2) },
-    TECH.TURFCRAFTING_ONE, { numtogive = 4 }, { "DECOR" })
+AddRecipe2("turf_quagmire_gateway", { Ig("cutgrass", 2), Ig("petals", 1) }, TECH.TURFCRAFTING_ONE, { numtogive = 4 }, { "DECOR" })
+AddRecipe2("turf_quagmire_citystone", { Ig("rocks", 2), Ig("saltrock", 1) }, TECH.TURFCRAFTING_ONE, { numtogive = 4 }, { "DECOR" })
+AddRecipe2("turf_quagmire_parkfield", { Ig("cutgrass", 2), Ig("quagmire_spotspice_sprig", 1) }, TECH.TURFCRAFTING_ONE, { numtogive = 4 }, { "DECOR" })
+AddRecipe2("turf_quagmire_parkstone", { Ig("rocks", 2), Ig("quagmire_spotspice_sprig", 1) }, TECH.TURFCRAFTING_ONE, { numtogive = 4 }, { "DECOR" })
+AddRecipe2("turf_quagmire_peatforest", { Ig("charcoal", 1), Ig("spoiled_food", 2) }, TECH.TURFCRAFTING_ONE, { numtogive = 4 }, { "DECOR" })
 
 ----------------------------------------------------------------------------------------------------
 
 -- Wurt
-TroAddRecipe("mermhouse_fisher_crafted", { Ig("boards", 5), Ig("cutreeds", 3), Ig("oceanfish_small_61_inv", 2) },
-    TECH.SCIENCE_ONE,
+TroAddRecipe("mermhouse_fisher_crafted", { Ig("boards", 5), Ig("cutreeds", 3), Ig("oceanfish_small_61_inv", 2) }, TECH.SCIENCE_ONE,
     {
         builder_tag = "merm_builder",
         placer = "mermhouse_fisher_crafted_placer",
         testfn = function(pt, rot)
             local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
             return ground_tile and
-            (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+                (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
         end
     }, { "CHARACTER" })
 TroAddRecipe("mermhouse_tropical_crafted", { Ig("boards", 5), Ig("cutreeds", 3), Ig("oceanfish_small_61_inv", 2) },
@@ -121,7 +79,7 @@ TroAddRecipe("mermhouse_tropical_crafted", { Ig("boards", 5), Ig("cutreeds", 3),
         testfn = function(pt, rot)
             local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
             return ground_tile and
-            (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+                (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
         end
     }, { "CHARACTER" })
 TroAddRecipe("quagmire_merm_house_crafted", { Ig("boards", 5), Ig("cutstone", 3), Ig("oceanfish_small_11_inv", 2) },
@@ -132,7 +90,7 @@ TroAddRecipe("quagmire_merm_house_crafted", { Ig("boards", 5), Ig("cutstone", 3)
         testfn = function(pt, rot)
             local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
             return ground_tile and
-            (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+                (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
         end
     }, { "CHARACTER" })
 
@@ -143,7 +101,7 @@ TroAddRecipe("mermhouse_crafted", { Ig("boards", 4), Ig("cutreeds", 3), Ig("pond
         testfn = function(pt, rot)
             local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
             return ground_tile and
-            (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+                (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
         end
     }, { "CHARACTER" })
 TroAddRecipe("mermthrone_construction", { Ig("boards", 5), Ig("rope", 5) }, TECH.SCIENCE_ONE,
@@ -153,7 +111,7 @@ TroAddRecipe("mermthrone_construction", { Ig("boards", 5), Ig("rope", 5) }, TECH
         testfn = function(pt, rot)
             local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
             return ground_tile and
-            (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+                (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
         end
     }, { "CHARACTER" })
 TroAddRecipe("mermwatchtower", { Ig("boards", 5), Ig("tentaclespots", 1), Ig("spear", 2) }, TECH.SCIENCE_TWO,
@@ -163,7 +121,7 @@ TroAddRecipe("mermwatchtower", { Ig("boards", 5), Ig("tentaclespots", 1), Ig("sp
         testfn = function(pt, rot)
             local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
             return ground_tile and
-            (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
+                (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST)
         end
     }, { "CHARACTER" })
 --TroAddRecipe("offering_pot",			{Ingredient("boards", 2),Ig("cutreeds", 2)},											            TECH.NONE,		  {builder_tag="merm_swampmaster_offeringpot",      placer="offering_pot_placer",           testfn=function(pt, rot) local ground_tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z) return ground_tile and (ground_tile == WORLD_TILES.MARSH or ground_tile == WORLD_TILES.TIDALMARSH or ground_tile == WORLD_TILES.QUAGMIRE_PEATFOREST) end}, {"CHARACTER"})
@@ -179,7 +137,7 @@ TroAddRecipe("mermwatchtower", { Ig("boards", 5), Ig("tentaclespots", 1), Ig("sp
 local cookers = {
     grill = { "grill", "grill_small" },
     oven = { "oven" },
-    pot = { "pot" },
+    quagmire_pot = { "quagmire_pot" },
 }
 local preparedFoods = require("gorge_foods")
 for k, v in pairs(preparedFoods) do
@@ -195,3 +153,5 @@ for k, v in pairs(preparedFoods) do
 end
 
 ----------------------------------------------------------------------------------------------------
+
+modimport("modmain/quagmire/recipes_store")

@@ -80,7 +80,7 @@ return {
 
         {
           name = "",
-          type = "quagmire_goatkid2",
+          type = "quagmire_goatkid",
           shape = "rectangle",
           x = 225,
           y = 225,

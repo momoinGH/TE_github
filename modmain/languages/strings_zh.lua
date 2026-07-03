@@ -21,6 +21,7 @@ STRINGS.UI.COOKBOOK.FOOD_EFFECTS_NETTLELOSANGE         = "免受花粉困扰"
 STRINGS.UI.COOKBOOK.FOOD_EFFECTS_MEATED_NETTLE         = "免受花粉困扰"
 
 
+STRINGS.ACTIONS.OPEN_CRAFTING.STORE = "交易"
 
 
 -------------------沃丽语句wally
@@ -5423,9 +5424,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TFWP_BLOSSOM_GARLAND_HAT = STRINGS.CHARACTER
 STRINGS.NAMES.GORGE_PORTAL = "苔藓大门"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GORGE_PORTAL = "又是一条死胡同。"
 
-STRINGS.NAMES.QUAGMIRE_TRADER_MERM3 = "奥利弗 \n 泥沼鱼人银行家"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUAGMIRE_TRADER_MERM3 = "这个家伙挺有钱。"
-
 -- 沼泽猪长老Pig Elder
 
 STRINGS.ELDERPIG_TALK_GREETING =
@@ -5587,10 +5585,6 @@ STRINGS.NAMES.POT                                              = "大锅"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POT                        = "这个能装更多配料。"
 STRINGS.NAMES.POT_SYRUP                                        = "糖锅"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POT_SYRUP                  = "我需要东西给这锅里增加甜味。"
-STRINGS.NAMES.CASSEROLEDISH                                    = "大砂锅"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CASSEROLEDISH              = "做一道加了各种调料的菜。"
-STRINGS.NAMES.CASSEROLEDISH_SMALL                              = "小砂锅"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CASSEROLEDISH_SMALL        = "可以做些杂七杂八的小菜。"
 STRINGS.NAMES.OVEN_ITEM                                        = "烤箱"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OVEN_ITEM                  = "内部燃烧用具。"
 STRINGS.NAMES.OVEN                                             = "架好的烤箱"
@@ -5617,10 +5611,10 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SALT_RACK                  = "一包厨房�
 STRINGS.NAMES.GORGE_ALTAR                                      = "祭坛"
 STRINGS.NAMES.PLATE_GENERIC                                    = "盘子"
 STRINGS.NAMES.BOWL_GENERIC                                     = "碗"
-STRINGS.NAMES.PLATE_SILVER                                     = "银盘"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PLATE_SILVER               = "镀银的盘子。"
-STRINGS.NAMES.BOWL_SILVER                                      = "银碗"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOWL_SILVER                = "一只明亮的碗。"
+STRINGS.NAMES.QUAGMIRE_PLATE_SILVER                            = "银盘"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUAGMIRE_PLATE_SILVER      = "镀银的盘子。"
+STRINGS.NAMES.QUAGMIRE_BOWL_SILVER                             = "银碗"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUAGMIRE_BOWL_SILVER       = "一只明亮的碗。"
 
 -----------------------------------------暴食料理gorge cuisine
 

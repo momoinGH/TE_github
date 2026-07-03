@@ -6,9 +6,9 @@ local assets =
 
 local safe_contents = {
 
-	{ "plate_silver", "plate_silver", "plate_silver", "quagmire_sapbucket", "quagmire_sapbucket",    "quagmire_sapbucket",   "quagmire_sapbucket", "quagmire_seedpacket_mix", "quagmire_seedpacket_mix" },
-	{ "plate_silver", "plate_silver", "plate_silver", "monstermeat",        "quagmire_seedpacket_4", "quagmire_seedpacket_7" },
-	{ "plate_silver", "plate_silver", "plate_silver", "tree_syrup_contest", "honeycomb" }
+	{ "quagmire_plate_silver", "quagmire_plate_silver", "quagmire_plate_silver", "quagmire_sapbucket", "quagmire_sapbucket",    "quagmire_sapbucket",   "quagmire_sapbucket", "quagmire_seedpacket_mix", "quagmire_seedpacket_mix" },
+	{ "quagmire_plate_silver", "quagmire_plate_silver", "quagmire_plate_silver", "monstermeat",        "quagmire_seedpacket_4", "quagmire_seedpacket_7" },
+	{ "quagmire_plate_silver", "quagmire_plate_silver", "quagmire_plate_silver", "tree_syrup_contest", "honeycomb" }
 
 }
 

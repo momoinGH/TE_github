@@ -89,9 +89,9 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -103,9 +103,8 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
-		
-         {
+        },
+        {
           name = "",
           type = "quagmire_mealingstone",
           shape = "rectangle",
@@ -117,9 +116,9 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
-		
-         {
+        },
+
+        {
           name = "",
           type = "quagmire_rubble_empty",
           shape = "rectangle",
@@ -131,10 +130,10 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },			
-		
+        },
 
-         {
+
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -146,9 +145,9 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -160,10 +159,10 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -175,9 +174,9 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -189,10 +188,10 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -204,10 +203,10 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -219,10 +218,10 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -234,10 +233,10 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -249,10 +248,10 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -264,10 +263,10 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -279,10 +278,10 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -294,10 +293,10 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -309,9 +308,9 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -323,9 +322,9 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -337,9 +336,9 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },		
+        },
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -351,9 +350,9 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -365,9 +364,9 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },			
+        },
 
-         {
+        {
           name = "",
           type = "oldcity",
           shape = "rectangle",
@@ -379,7 +378,7 @@ return {
           properties = {
             ["data.savedrotation.rotation"] = "135"
           }
-        },	
+        },
       }
     }
   }

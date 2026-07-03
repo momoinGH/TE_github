@@ -2,6 +2,9 @@ modimport "modmain/languages/wurt_quotes"
 
 
 
+STRINGS.ACTIONS.OPEN_CRAFTING.STORE = "Trade"
+
+
 --actions
 STRINGS.ACTIONS.GIVE.USE                               = "Use"
 STRINGS.ACTIONS.GIVE.DISLODGE                          = "Dislodge"
@@ -295,7 +298,7 @@ STRINGS.NAMES.RADISH_OVERSIZED_ROTTEN                                           
 STRINGS.NAMES.ALOE_OVERSIZED_ROTTEN                                             = "Aloe Oversized Rotten"
 STRINGS.NAMES.IRON_DOOR                                                         = "Wrought Iron Door"
 STRINGS.NAMES.CAVE_ENTRANCE_HAM3                                                = "Cave Entrance"
-STRINGS.NAMES.BOWL_SILVER                                                       = "银碗"
+STRINGS.NAMES.QUAGMIRE_BOWL_SILVER                                              = "银碗"
 STRINGS.NAMES.ROC_NEST_DEBRIS1                                                  = "Weathered Stick"
 STRINGS.NAMES.DECO_RUINS_BEAM_ROOM                                              = "Unimportant Pillar"
 STRINGS.NAMES.PIG_ACADEMY_ENTRANCE                                              = "Swinesbury Academy"
@@ -622,13 +625,12 @@ STRINGS.NAMES.PEACH_SMOOTHIE                                                    
 STRINGS.NAMES.HOUNDB                                                            = "Hound"
 STRINGS.NAMES.GEM_FLOWER                                                        = "Gem Plant"
 STRINGS.NAMES.SEASACK                                                           = "Sea Sack"
-STRINGS.NAMES.PLATE_SILVER                                                      = "银盘"
+STRINGS.NAMES.QUAGMIRE_PLATE_SILVER                                             = "银盘"
 STRINGS.NAMES.MERMHOUSE_FISHER_CRAFTED                                          = "渔人工艺屋"
 STRINGS.NAMES.DECO_HIVE_FLOOR_TRIM                                              = "蚁穴地板边缘阴影"
 STRINGS.NAMES.SWINGING_LIGHT_FLORAL_BULB                                        = "Blown Glass Bulb"
 STRINGS.NAMES.ANTHILL_DOOR_ESQUERDA                                             = "Door"
 STRINGS.NAMES.DECO_PLANTHOLDER_BONSAI                                           = "Bonsai Plantholder"
-STRINGS.NAMES.QUAGMIRE_TRADER_MERM3                                             = "奥利弗 \n 泥沼鱼人银行家"
 STRINGS.NAMES.WTENTACLE                                                         = "Dead Tentacle"
 STRINGS.NAMES.SCORPION                                                          = "Scorpion"
 STRINGS.NAMES.GREENTORNADO                                                      = "绿旋风"
@@ -654,7 +656,6 @@ STRINGS.NAMES.DECO_WALLPAPER_FLORIST_RIP4                                       
 STRINGS.NAMES.PLAYERHOUSE_CITY                                                  = "Slanty Shanty"
 STRINGS.NAMES.RUG_CIRCLE                                                        = "半圆毯子"
 STRINGS.NAMES.BED3                                                              = "Canopy Bed"
-STRINGS.NAMES.CASSEROLEDISH_SMALL                                               = "小砂锅"
 STRINGS.NAMES.ROC_TAIL                                                          = "BFB"
 STRINGS.NAMES.PIG_RUINS_SPEAR_TRAP_TRIGGERED                                    = "Nasty Spear Trap"
 STRINGS.NAMES.TURF_SWAMP                                                        = "Swamp Turf"
@@ -1362,7 +1363,6 @@ STRINGS.NAMES.DECO_TINKER_CORNERBEAM                                            
 STRINGS.NAMES.DECO_ANTIQUITIES_ENDBEAM                                          = "上原木柱"
 STRINGS.NAMES.HAT_DIVING                                                        = "潜水头盔"
 STRINGS.NAMES.SANDSTONE_BOULDER                                                 = "沙岩巨石"
-STRINGS.NAMES.CASSEROLEDISH                                                     = "大砂锅"
 STRINGS.NAMES.DECO_LAMP_HOOFSPA                                                 = "Fancy Lamp"
 STRINGS.NAMES.DECO_RUINS_CRACK_ROOTS3                                           = "遗迹裂口树根3"
 STRINGS.NAMES.JELLYBUG_COOKED                                                   = "Cooked Bean Bugs"
@@ -2565,7 +2565,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BURNING                                     
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RUG_RUBBERMAT                               = "Good for the lab."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ALOE_OVERSIZED_ROTTEN                       = "Aloe Oversized Rotten."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.JUNGLETREESEED_GENERIC                      = "I can hear the hissing of tiny snakes."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PLATE_SILVER                                = "镀银的盘子。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUAGMIRE_PLATE_SILVER                       = "镀银的盘子。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.FLOWERS_LAKE                                = "Beautiful flowers in the spring."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PACKIM                                      = "I bet I could pack'im full of stuff."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SUNKEN_BOAT_TRINKET_1                       = "An instrument of some sort."
@@ -2995,7 +2995,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWORDFISHJOCEAN2                            
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_PLANTHOLDER_DISHGARDEN                 = "A fancy way to hold a plant."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SALT                                        = "这种盐的主要成分是氯化钠。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.INTERIOR_WALL_WOOD                          = "A bunch of wood."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CASSEROLEDISH                               = "做一道加了各种调料的菜。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.NIGHTMARE_TIMEPIECE_STEADY                  = "It seems to be staying steady."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PORTO_SEA_CHIMINEA                          = "在海上用这个烤火。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RESEARCHLAB2_GENERIC                        = "It's even more science-y than the last one!"
@@ -3500,7 +3499,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSHTREE_SMALL_GENERIC                      
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LAVAARENA_SPECTATOR2                        = "Spectator."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.POT                                         = "这个能装更多配料。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RAINBOWJELLYJERKY                           = "All the water's dried right out of it."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.CASSEROLEDISH_SMALL                         = "可以做些杂七杂八的小菜。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.ONION_SOUP                                  = "安抚天空之兽的贡品。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SWINGING_LIGHT_ROPE_1                       = "It could use some decoration."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DUNGPILE_GENERIC                            = "It's a pile of dung."
@@ -3828,7 +3826,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.FISH_AND_CHIPS                              
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SUNKBOAT                                    = "It's no use to me out there!"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_9                = "我只是随便说说，你也有可能派上什么用场。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.DECO_LAMP_CANDELABRA                        = "A fancy lamp."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.BOWL_SILVER                                 = "一只明亮的碗。"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUAGMIRE_BOWL_SILVER                                 = "一只明亮的碗。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIG_RUINS_ENTRANCE6                         = "来一场冒险。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WHEAT_OVERSIZED                             = "巨型麦子。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GODDESS_TEA                                 = "A wonderous tea made from forbidden fruit."
@@ -4369,7 +4367,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.OBSIDIANAXE                                 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LIMESTONE                                   = "Could be a useful building material."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.EVERGREEN_SPARSE_GENERIC                    = "This sad tree has no cones."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BRAMBLE_BUSH                                = "This might be of some use."
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.QUAGMIRE_TRADER_MERM3                       = "这个家伙挺有钱。"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.GOGGLESARMORHAT                             = "It works, as long as I don't have to see."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.LOGRAFT                                     = "This looks... sort of boat-like..."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SNAKESKINFLOOR                              = "Sssstylish ssssstatement."
@@ -9900,14 +9897,12 @@ STRINGS.NAMES.POT_SMALL                                            = "Small Cook
 STRINGS.NAMES.POT_SYRUP                                            = "Syrup Pot"
 STRINGS.NAMES.OVEN                                                 = "Oven"
 STRINGS.NAMES.OVEN_ITEM                                            = "Oven"
-STRINGS.NAMES.CASSEROLEDISH                                        = "Casseroledish"
-STRINGS.NAMES.CASSEROLEDISH_SMALL                                  = "Small Casseroledish"
 STRINGS.NAMES.SALT_RACK                                            = "Saltrack"
 STRINGS.NAMES.GORGE_ALTAR                                          = "Altar"
 STRINGS.NAMES.PLATE_GENERIC                                        = "Plate"
 STRINGS.NAMES.BOWL_GENERIC                                         = "Bowl"
-STRINGS.NAMES.PLATE_SILVER                                         = "Silver Plate"
-STRINGS.NAMES.BOWL_SILVER                                          = "Silver Bowl"
+STRINGS.NAMES.QUAGMIRE_PLATE_SILVER                                = "Silver Plate"
+STRINGS.NAMES.QUAGMIRE_BOWL_SILVER                                          = "Silver Bowl"
 STRINGS.NAMES.WHEAT                                                = "Wheat"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.WHEAT                          = "Better grind this into flour."
 
@@ -9953,8 +9948,6 @@ STRINGS.ELDERPIG_TALK_FARWELL                   =
 {
     "...",
 }
-
-STRINGS.NAMES.QUAGMIRE_TRADER_MERM3             = "Oliver The Merm Banker"
 
 STRINGS.NAMES.BEAVERTORCH                       = "Wildbeaver Torch"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEAVERTORCH = "Wildbeaver Torch."

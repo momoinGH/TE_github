@@ -11,5 +11,7 @@
     "undefined-field"
   ],
   "Lua.workspace.maxPreload": 2000,
-  "Lua.diagnostics.workspaceDelay": -1
+  "Lua.diagnostics.workspaceDelay": -1,
+  "files.autoSave": "afterDelay",
+  "Lua.completion.autoRequire": false
 }

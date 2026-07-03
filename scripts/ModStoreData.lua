@@ -89,8 +89,8 @@ return {
         [061] = "quagmire_crate_pot_hanger",
         [062] = "quagmire_crate_oven",
         [063] = "quagmire_crate_grill_small",
-        [064] = "plate_silver",
-        [065] = "bowl_silver",
+        [064] = "quagmire_plate_silver",
+        [065] = "quagmire_bowl_silver",
         [066] = "quagmire_goatmilk",
         --------------------------trade 1--------------------------------------
 
@@ -103,9 +103,9 @@ return {
         --------------------------trade 2------------------------------------
         [073] = "quagmire_seedpacket_7",
         [074] = "quagmire_portal_key",
-        [075] = "pot_syrup",
-        [076] = "pot",
-        [077] = "casseroledish",
+        [075] = "quagmire_pot_syrup",
+        [076] = "quagmire_pot",
+        [077] = "quagmire_casseroledish",
         [078] = "quagmire_crate_grill",
 
         ----------------------pig elder----------------------------

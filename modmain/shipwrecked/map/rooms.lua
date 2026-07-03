@@ -606,7 +606,6 @@ AddRoom("VolcanoObsidian", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.VOLCANO_ROCK,
     contents = {
-        --									countstaticlayouts={["beaverking"]=1}, --adds 1 per room
         distributepercent = .2,
         distributeprefabs =
         {

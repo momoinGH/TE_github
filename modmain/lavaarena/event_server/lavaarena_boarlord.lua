@@ -6,7 +6,9 @@ local assets =
 
 local function master_postinit(inst)
     inst:AddComponent("inspectable")
-    inst:AddComponent("store")
+
+    inst:AddComponent("prototyper")
+    inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.LAVAARENA_BOARLORD
 end
 
 add_event_server_data("lavaarena", "prefabs/lavaarena_boarlord", {

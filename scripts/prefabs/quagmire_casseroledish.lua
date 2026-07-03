@@ -5,14 +5,13 @@ local prefabs =
 }
 
 local function MakePot(suffix, numslots)
-    local name = "casseroledish" .. suffix
-    local animname = "quagmire_" .. name
+    local name = "quagmire_casseroledish" .. suffix
     local assets =
     {
         Asset("ANIM", "anim/quagmire_grill.zip"),
-        Asset("ANIM", "anim/" .. animname .. ".zip"),
+        Asset("ANIM", "anim/" .. name .. ".zip"),
         Asset("ANIM", "anim/quagmire_ui_pot_1x" .. tostring(numslots) .. ".zip"),
-        Asset("INV_IMAGE", animname .. "_overcooked"),
+        Asset("INV_IMAGE", name .. "_overcooked"),
     }
 
     local function fn()
@@ -25,8 +24,8 @@ local function MakePot(suffix, numslots)
 
         MakeInventoryPhysics(inst)
         MakeInventoryFloatable(inst)
-        inst.AnimState:SetBank(animname)
-        inst.AnimState:SetBuild(animname)
+        inst.AnimState:SetBank(name)
+        inst.AnimState:SetBuild(name)
         inst.AnimState:PlayAnimation("idle")
         inst.AnimState:OverrideSymbol("goop", "quagmire_oven", "goop")
         inst.AnimState:Hide("goop")
@@ -43,15 +42,13 @@ local function MakePot(suffix, numslots)
         inst:AddComponent("inspectable")
 
         inst:AddComponent("inventoryitem")
-        inst.components.inventoryitem.imagename = animname
+        inst.components.inventoryitem.imagename = name
 
         inst:AddComponent("container")
         inst.components.container:WidgetSetup(name)
 
         inst:AddComponent("specialstewer_dish")
         inst.components.specialstewer_dish:SetDishType("oven")
-
-        -- event_server_data("quagmire", "prefabs/quagmire_casseroledish").master_postinit(inst, suffix, numslots)
 
         return inst
     end

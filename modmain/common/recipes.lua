@@ -28,6 +28,23 @@ function TroAddRecipe(name, ingredients, tech, config, filters)
     AddRecipe2(name, ingredients, tech, config, filters)
 end
 
+---添加商品配方，给暴食几个可以购买物品商人用的
+---@param store_prefab string 商人预制件名
+---@param product prefab 卖的东西预制件名
+---@param ingredients table 配方
+---@param tech TECH
+---@param config table
+function TroAddStoreRecipe(store_prefab, product, ingredients, tech, config)
+    config = config or {}
+    local name = store_prefab .. "_" .. product
+    config.product = product
+config.nounlock = true
+    config.actionstr = config.actionstr or "HERMITCRABSHOP" --制作栏物品按钮显示交易文本
+    config.sg_state = config.sg_state or "give"
+
+    TroAddRecipe(name, ingredients, tech, config)
+end
+
 -- 命名和科雷保持一致，随便写几个
 local level_str = {
     "ONE",
@@ -95,34 +112,15 @@ end
 ---@param data.icon_image string: 靠近时侧边栏图片
 ---@param data.icon_atlas string: 靠近时侧边栏图片的atlas
 ---@param data.is_crafting_station boolean: 是不是一个制作站，如果是就在单独的tab里显示配方
----@param data.trees table: 解锁的科技树，对应科雷的TUNING.PROTOTYPER_TREES.XXX变量的值
+---@param data.shop boolean 是不是一个商人，如果是靠近显示制作栏物品离开隐藏
 function TroAddPrototyperDef(prefab, data)
     if data.action_str and not STRINGS.ACTIONS.OPEN_CRAFTING[data.action_str] then
         TroErrorHandle("错误：你给原型机" .. prefab .. "指定了action_str的值为" .. tostring(data.action_str) .. ",但是没有找到STRINGS.ACTIONS.OPEN_CRAFTING." .. data.action_str .. "的值", false)
     end
 
-    AddPrototyperDef(prefab, {
-        action_str = data.action_str,
-        icon_image = data.icon_image,
-        icon_atlas = data.icon_atlas,
-        is_crafting_station = data.is_crafting_station,
-    })
-
-    local trees = data.trees
-    if trees then
-        assert(type(trees) == "table")
-        AddPrefabPostInit(prefab, function(inst)
-            if not TheWorld.ismastersim then return end
-
-            if not inst.components.prototyper then
-                TroErrorHandle("错误：你给原型机" .. prefab .. "添加了科技，但是没有找到components.prototyper组件")
-            elseif inst.components.prototyper.trees then
-                --预制件文件里已经赋值了，这里不处理
-            else
-                inst.components.prototyper.trees = trees
-            end
-        end)
-    end
+    data.icon_image = data.icon_image or "station_none.tex" --没有会报错的
+    data.icon_atlas = data.icon_atlas or CRAFTING_ICONS_ATLAS
+    AddPrototyperDef(prefab, data)
 end
 
 ---调整配方顺序

@@ -15,6 +15,7 @@ local prefabs =
 
 local function fn1()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
@@ -25,17 +26,15 @@ local function fn1()
     inst.MiniMapEntity:SetIcon("forgeboar.png")
 
     inst.Transform:SetFourFaced()
-    MakeObstaclePhysics(inst, 1.5, .5)
     inst.Transform:SetRotation(0)
 
+    MakeObstaclePhysics(inst, 1.5, .5)
 
     inst.DynamicShadow:SetSize(10, 5)
 
     inst.AnimState:SetBuild("lavaarena_boaraudience1")
     inst.AnimState:SetBank("lavaarena_boaraudience1")
     inst.AnimState:PlayAnimation("idle_loop", true)
-
-
 
     inst.entity:SetPristine()
 
@@ -44,7 +43,7 @@ local function fn1()
     end
 
     inst:AddComponent("inspectable")
-    inst:AddComponent("store")
+
     return inst
 end
 
@@ -80,7 +79,7 @@ local function fn2()
     end
 
     inst:AddComponent("inspectable")
-    inst:AddComponent("store")
+    -- inst:AddComponent("store") TODO 改成制作栏
     return inst
 end
 
@@ -113,7 +112,7 @@ local function fn3()
     end
 
     inst:AddComponent("inspectable")
-    inst:AddComponent("store")
+    -- inst:AddComponent("store") TODO 改成制作栏
     return inst
 end
 
@@ -148,7 +147,7 @@ local function fn4()
     end
 
     inst:AddComponent("inspectable")
-    inst:AddComponent("store")
+    -- inst:AddComponent("store") TODO 改成制作栏
     return inst
 end
 

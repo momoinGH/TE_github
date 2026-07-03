@@ -50,8 +50,8 @@ local StoreWidget = Class(Widget, function(self, owner, goods)
         prefabname = goods.goodsprefab.Prefab
     end
 
-    for _, v in ipairs({"pot_syrup", "pot", "casseroledish", "crate_grill", "crate_pot_hanger", "crate_oven",
-                        "crate_grill_small"}) do
+    for _, v in ipairs({"quagmire_casseroledish", "crate_grill", "crate_pot_hanger", "crate_oven",
+        "crate_grill_small" }) do
         if prefabname == v then
             prefabname = "quagmire_" .. prefabname
             break

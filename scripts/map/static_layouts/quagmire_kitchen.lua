@@ -110,7 +110,7 @@ return {
 
         {
           name = "",
-          type = "quagmire_trader_merm3",
+          type = "quagmire_trader_merm",
           shape = "rectangle",
           x = 1342,
           y = 1215,
@@ -232,17 +232,6 @@ return {
           shape = "rectangle",
           x = 1265,
           y = 1742,
-          width = 0,
-          height = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          name = "",
-          type = "quagmire_trader_merm",
-          shape = "rectangle",
-          x = 1337,
-          y = 822,
           width = 0,
           height = 0,
           visible = true,
@@ -4073,7 +4062,7 @@ return {
         },
         {
           name = "",
-          type = "quagmire_goatkid2",
+          type = "quagmire_goatkid",
           shape = "rectangle",
           x = 2103,
           y = 1948,

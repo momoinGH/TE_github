@@ -12,7 +12,7 @@ local function onopen(inst)
     inst.SoundEmitter:PlaySound("dontstarve/creatures/together/clayhound/footstep_hound")
 
     local foodstuff = inst.replica.container ~= nil and inst.replica.container:GetItemInSlot(1) or
-    inst.components.container:GetItemInSlot(1)
+        inst.components.container:GetItemInSlot(1)
 
     if foodstuff ~= nil then
         if foodstuff.prefab == "quagmire_flour" or foodstuff.prefab == "turnip_sugar" then
@@ -113,7 +113,7 @@ local function fn()
     end
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("mealingstone")
+    inst.components.container:WidgetSetup("quagmire_mealingstone")
     inst.components.container.onopenfn = onopen
 
     inst:AddComponent("inspectable")
@@ -142,4 +142,4 @@ local function fn()
 end
 
 return Prefab("quagmire_mealingstone", fn, assets, prefabs),
-    MakePlacer("mealingstone_placer", "quagmire_mealingstone", "quagmire_mealingstone", "idle")
+    MakePlacer("quagmire_mealingstone_placer", "quagmire_mealingstone", "quagmire_mealingstone", "idle")

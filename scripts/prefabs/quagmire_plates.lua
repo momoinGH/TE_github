@@ -12,7 +12,7 @@ local function OnUse(inst, doer, target)
     return false
 end
 
-local function MakePlate(basedish, dishtype, assets)
+local function MakePlate(basedish, dishtype)
     local assets =
     {
         Asset("ANIM", "anim/quagmire_generic_" .. basedish .. ".zip"),
@@ -52,10 +52,9 @@ local function MakePlate(basedish, dishtype, assets)
         inst:AddComponent("inspectable")
 
         inst:AddComponent("inventoryitem")
-        local imagename = dishtype == "generic" and basedish or (basedish .. "_" .. dishtype)
 
-        inst.components.inventoryitem.imagename = imagename
-        inst.components.inventoryitem.atlasname = "images/inventoryimages/cookpotfoods/cookpotfoods_quagmire.xml"
+        inst.components.inventoryitem.imagename = basedish .. "_silver"
+        inst.components.inventoryitem.atlasname = "images/quagmire_food_common_inv_images.xml"
 
         inst:AddComponent("replater")
         inst.components.replater:SetUp(basedish, dishtype)
@@ -65,7 +64,7 @@ local function MakePlate(basedish, dishtype, assets)
         return inst
     end
 
-    return Prefab(basedish .. "_" .. dishtype, fn, assets)
+    return Prefab("quagmire_" .. basedish .. "_" .. dishtype, fn, assets)
 end
 
 return MakePlate("plate", "silver"),

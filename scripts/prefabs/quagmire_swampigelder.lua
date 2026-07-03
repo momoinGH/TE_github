@@ -11,12 +11,13 @@ sleep_loop
 sleep_pst
 
 
+]]
 local sounds =
 {
-	wake = "dontstarve/quagmire/creature/swamppig_elder/sleep_out",
-	trade = "dontstarve/quagmire/creature/swamppig_elder/talk",
-	sleep = "dontstarve/quagmire/creature/swamppig_elder/sleep_in",
-}]]
+    wake = "dontstarve/quagmire/creature/swamppig_elder/sleep_out",
+    trade = "dontstarve/quagmire/creature/swamppig_elder/talk",
+    sleep = "dontstarve/quagmire/creature/swamppig_elder/sleep_in",
+}
 
 local function onnear(inst)
     if not inst.AnimState:IsCurrentAnimation("sleep_pst") and not inst.AnimState:IsCurrentAnimation("idle") then
@@ -74,8 +75,6 @@ local function fn()
     inst.components.talker.offset = Vector3(0, -600, 0)
     inst.components.talker:MakeChatter()
 
-
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -83,12 +82,14 @@ local function fn()
     end
 
     inst:AddComponent("inspectable")
-    inst:AddComponent("store")
 
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(8, 9)
     inst.components.playerprox:SetOnPlayerFar(onfar)
     inst.components.playerprox:SetOnPlayerNear(onnear)
+
+    inst:AddComponent("prototyper")
+    inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.QUAGMIRE_SWAMPIGELDER
 
     inst.sounds = sounds
 

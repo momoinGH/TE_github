@@ -138,7 +138,7 @@ local function OnInstall(inst, target)
     target.components.specialstewer.oncompletefn = OnCompleted
     target.components.specialstewer.oncookingstepfn = OnCookingStep
     target.components.specialstewer.containerfn = GetContainer
-    target.components.specialstewer.cookertype = "pot"
+    target.components.specialstewer.cookertype = "quagmire_pot"
     target.components.specialstewer:StartWorking()
 
     target.components.shelf.ontakeitemfn = OnDishTaken

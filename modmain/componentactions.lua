@@ -47,10 +47,6 @@ AddComponentAction("USEITEM", "installable", function(inst, doer, target, action
 end
 )
 
-AddComponentAction("SCENE", "store", function(inst, doer, actions)
-    table.insert(actions, ACTIONS.STOREOPEN)
-end)
-
 AddComponentAction("SCENE", "tro_portablestructure", function(inst, doer, actions, right)
     if right
         and not inst:HasTag("fire")
