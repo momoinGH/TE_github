@@ -482,7 +482,7 @@ return {
 		
         {
           name = "",
-          type = "underwater_exit3",
+          type = "underwater_exit",
           shape = "rectangle",
           x = 1188,
           y = 2391,

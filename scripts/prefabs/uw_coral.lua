@@ -113,7 +113,7 @@ local function orange()
 	inst.AnimState:PlayAnimation("idle", true)
 	inst.AnimState:SetTime(math.random() * 2)
 
-	inst.MiniMapEntity:SetIcon("orange_coral.tex")
+	inst.MiniMapEntity:SetIcon("orange_coral.png")
 
 	if not TheWorld.ismastersim then
 		return inst
@@ -134,7 +134,7 @@ local function blue()
 	inst.AnimState:PlayAnimation("idle", true)
 	inst.AnimState:SetTime(math.random() * 2)
 
-	inst.MiniMapEntity:SetIcon("orange_coral.tex") --"blue_coral.tex"
+	inst.MiniMapEntity:SetIcon("orange_coral.png") --"blue_coral.tex"
 
 	if not TheWorld.ismastersim then
 		return inst
@@ -155,7 +155,7 @@ local function green()
 	inst.AnimState:PlayAnimation("idle", true)
 	inst.AnimState:SetTime(math.random() * 2)
 
-	inst.MiniMapEntity:SetIcon("orange_coral.tex") --"green_coral.tex"
+	inst.MiniMapEntity:SetIcon("orange_coral.png") --"green_coral.tex"
 
 	if not TheWorld.ismastersim then
 		return inst

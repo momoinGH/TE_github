@@ -29,7 +29,7 @@ local function fn(Sim)
 
 	local minimap = inst.entity:AddMiniMapEntity()
 	inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("vent.tex")
+	inst.MiniMapEntity:SetIcon("vent.png")
 
 	inst.entity:AddAnimState()
 	inst.AnimState:SetBank("air_vent")

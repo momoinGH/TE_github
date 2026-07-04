@@ -33,7 +33,7 @@ local function fn()
 	inst.entity:AddSoundEmitter()
 
 	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetIcon("vent.tex")
+	minimap:SetIcon("vent.png")
 	minimap:SetPriority(1)
 
 	MakeObstaclePhysics(inst, 1.2)

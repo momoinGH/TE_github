@@ -310,18 +310,18 @@ configuration_options =
         }
     },
 
-    title(en_zh_zht("<quagmire>", "<暴食>", "<暴食>"), tro_modules.quagmire),
-    {
-        name = "quagmire",
-        label = "暴食",
-        options = options_enable(),
-        default = 1,
-        world_gen = {
-            category = { LEVELCATEGORY.WORLDGEN },
-            group = tro_modules.quagmire,
-            world = { "forest" },
-        }
-    },
+    -- title(en_zh_zht("<quagmire>", "<暴食>", "<暴食>"), tro_modules.quagmire),
+    -- {
+    --     name = "quagmire",
+    --     label = "暴食",
+    --     options = options_enable(),
+    --     default = 1,
+    --     world_gen = {
+    --         category = { LEVELCATEGORY.WORLDGEN },
+    --         group = tro_modules.quagmire,
+    --         world = { "forest" },
+    --     }
+    -- },
 
     title(en_zh_zht("<underwater>", "<海底世界>", "<海底世界>"), tro_modules.underwater),
     {

@@ -95,7 +95,7 @@ end, nil, {
     period = onperiod
 })
 
-function CreatureProx:UpdateTaskEnable(self)
+function CreatureProx:UpdateTaskEnable()
     local can_check = not self.inst:IsAsleep() and self.enabled
     SetTaskEnable(self, can_check)
 end

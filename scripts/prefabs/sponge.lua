@@ -43,10 +43,9 @@ local function fn(Sim)
 	local trans = inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
 	local sound = inst.entity:AddSoundEmitter()
-	local minimap = inst.entity:AddMiniMapEntity()
 
 	inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("sponge.tex")
+	inst.MiniMapEntity:SetIcon("sponge.png")
 
 	inst:AddTag("underwater")
 

@@ -24,7 +24,7 @@ end
 
 local default_options_enable = {
     { text = STRINGS.UI.WARDROBESCREEN.FILTER_OFF, data = 0 },
-    { text = STRINGS.UI.WARDROBESCREEN.FILTER_ON, data = 1 },
+    { text = STRINGS.UI.WARDROBESCREEN.FILTER_ON,  data = 1 },
 }
 
 -- 把coomon放第一个位置
@@ -104,8 +104,11 @@ local function SetOptionValue(name, value)
             optionitems = widget.settingslist.optionitems
             for i, item in ipairs(optionitems) do
                 if item.option and item.option.name == name and table.contains(tro_modules, item.option.group) then
-                    local opt = widget.settingslist.scroll_list:GetListWidgets()[i].opt_spinner
-                    opt.spinner:SetSelected(value)
+                    local widgets = widget.settingslist.scroll_list:GetListWidgets()
+                    local opt = widgets and widgets[i] and widgets[i].opt_spinner
+                    if opt then
+                        opt.spinner:SetSelected(value)
+                    end
                     break
                 end
             end

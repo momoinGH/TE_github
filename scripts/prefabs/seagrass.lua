@@ -69,6 +69,7 @@ end
 
 local function fn(Sim)
 	local inst = CreateEntity()
+
 	inst.entity:AddNetwork()
 	local trans = inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
@@ -76,7 +77,7 @@ local function fn(Sim)
 	local minimap = inst.entity:AddMiniMapEntity()
 
 	inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("seagrass.tex")
+	inst.MiniMapEntity:SetIcon("seagrass.png")
 
 	-- Since they are so similiar, we don't bother remembering which type it is and just re-roll every time
 	if math.random() < .5 then

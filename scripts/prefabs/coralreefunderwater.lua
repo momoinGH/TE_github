@@ -59,9 +59,9 @@ local function SetLarge(inst)
 end
 
 local growth_stages = {
-	{ name = "small", time = getsmallgrowtime, fn = SetSmall,            anim = "low" },
-	{ name = "med", time = getmedgrowtime,   fn = SetMedium,             transition = "low_to_med", anim = "med" },
-	{ name = "large", fn = SetLarge,         transition = "med_to_full", anim = "full" } }
+	{ name = "small", time = getsmallgrowtime, fn = SetSmall,              anim = "low" },
+	{ name = "med",   time = getmedgrowtime,   fn = SetMedium,             transition = "low_to_med", anim = "med" },
+	{ name = "large", fn = SetLarge,           transition = "med_to_full", anim = "full" } }
 
 
 local function OnGrowthFn(inst, last, current)
@@ -104,9 +104,6 @@ local function reef_fn(Sim)
 
 	MakeObstaclePhysics(inst, 1)
 
-	local minimap = inst.entity:AddMiniMapEntity()
-	minimap:SetIcon("minimap_coralreef.png")
-
 	inst.AnimState:SetBank("coral_rock_underwater")
 	inst.AnimState:SetBuild("coral_rock_underwater")
 
@@ -117,7 +114,6 @@ local function reef_fn(Sim)
 	if not TheWorld.ismastersim then
 		return inst
 	end
-
 
 	inst:AddComponent("lootdropper")
 

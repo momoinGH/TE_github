@@ -475,8 +475,8 @@ local function fn6(Sim)
 
     inst:AddComponent("knownlocations")
 
-    inst:AddComponent("herdmember")
-    inst.components.herdmember.herdprefab = "salmomfishschool"
+    -- inst:AddComponent("herdmember")
+    -- inst.components.herdmember.herdprefab = "salmomfishschool" --没有这个预制件
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.NET)

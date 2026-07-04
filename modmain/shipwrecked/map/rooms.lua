@@ -1582,7 +1582,7 @@ AddRoom("BeachPalmCasino", {
 
         countprefabs = {
             packim_fishbone = 1,
-            underwater_entrance1 = TUNING.tropical.underwater and 1 or nil, --海底入口
+            underwater_entrance2 = TUNING.tropical.underwater and 1 or nil, --海底入口
             gravestone = 5,
         }
 

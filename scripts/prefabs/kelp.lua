@@ -63,7 +63,7 @@ local function fn(Sim)
     MakeObstaclePhysics(inst, .25)
 
     inst.entity:AddMiniMapEntity()
-    inst.MiniMapEntity:SetIcon("kelp.tex")
+    inst.MiniMapEntity:SetIcon("kelp.png")
 
     trans:SetScale(1, 1, 1)
 

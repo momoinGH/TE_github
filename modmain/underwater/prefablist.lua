@@ -10,7 +10,7 @@ PrefabFiles =
     "reef_jellyfish",      --深海水母
     "jellyfishschool",     --深海水母生成器
     "underwater_entrance", --海底入口
-    "underwater_exit",     --巨锚
+    "underwater_exit",     --巨锚，海底世界的入口出口
     "diving_suits",        --潜水衣
     "seatentacle",         --海底触手
     "uw_coral",            --火珊瑚
@@ -103,4 +103,15 @@ PrefabFiles =
     "smashingpot",                 --易碎的瓦罐
     "gnarwailunderwater",          --一角鲸
     "rocksunderwater",             --岩石
+    "rock_limpet",                 --帽贝岩
+    "sunkenchest_spawner",
+    "seashell_beached",            --贝壳
+    "rock_obsidian",               --煤矿石
+    "sandhill",                    --沙丘
+    "redbarrel",                   --火药桶
+    "pugalisk_ruins_pillar",       --摇摇欲坠的柱子
+    "volcano_shrub",               --灰烬树
+    "volcanofog",                  --雾气特效
+    "dragoonden",                  --龙穴
+    "elephantcactus",              --象仙人掌
 }

@@ -5,7 +5,7 @@ TroAddTech("GODDESS", {
 })
 
 TroAddPrototyperDef("goddess_shrine", {
-    action_str = "GODDESSTAB",
+    action_str = "GODDESS",
     icon_atlas = "minimap/minimap_windy.xml",
     icon_image = "windyfan1.tex",
 })

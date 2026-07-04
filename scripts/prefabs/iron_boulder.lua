@@ -35,7 +35,7 @@ local function fn(Sim)
 	MakeObstaclePhysics(inst, 1.)
 
 	inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("iron_boulder.tex")
+	inst.MiniMapEntity:SetIcon("iron_boulder.png")
 
 	inst.entity:SetPristine()
 

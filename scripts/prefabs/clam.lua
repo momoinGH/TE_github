@@ -32,7 +32,7 @@ local function fn(Sim)
 	inst.Transform:SetTwoFaced()
 
 	inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("clam.tex")
+	inst.MiniMapEntity:SetIcon("clam.png")
 
 
 	MakeObstaclePhysics(inst, 0.8, 1.2)

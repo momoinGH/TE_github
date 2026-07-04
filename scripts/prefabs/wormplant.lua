@@ -19,10 +19,9 @@ local function fn(Sim)
 	local trans = inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
 	local sound = inst.entity:AddSoundEmitter()
-	local minimap = inst.entity:AddMiniMapEntity()
 
 	inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("wormplant.tex")
+	inst.MiniMapEntity:SetIcon("wormplant.png")
 
 	trans:SetScale(0.6, 0.6, 0.6) --!!!
 	MakeObstaclePhysics(inst, .25)
