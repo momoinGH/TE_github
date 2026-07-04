@@ -264,7 +264,6 @@ STRINGS.CHARACTERS.WURT.DESCRIBE.SHARD_BEAK                    = "Could use to b
 
 
 STRINGS.CHARACTERS.WURT.DESCRIBE.TURBINE_BLADES                        = "What this?"
-STRINGS.CHARACTERS.WURT.DESCRIBE.SAPLINGNOVA                           = "Small tree."
 STRINGS.CHARACTERS.WURT.DESCRIBE.PORTAL_SHIPWRECKED                    = "It broke, florp."
 STRINGS.CHARACTERS.WURT.DESCRIBE.BUOY                                  = "Scale-less use these to find their way around water."
 STRINGS.CHARACTERS.WURT.DESCRIBE.ARMOR_LIFEJACKET                      = "Scale-less use these because they can't swim well."

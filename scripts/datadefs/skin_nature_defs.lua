@@ -8,7 +8,7 @@ local natureskins = {
             theme = "green",       --主题，用来关联其他皮肤的，如果这个皮肤的预制件生成的东西有这个主题的皮肤会自动换肤
             build = "sapling",
             skintype = "tropical", --生成条件
-            name = "saplingnova",
+            name = "sapling",
             minimapicon = "sapling.png",
             extra_init_fn = function(inst, skinname)
                 CancelNoGrowInWinter(inst)

@@ -225,7 +225,7 @@ AddRoom("UnderwaterEntrance", {
         distributepercent = 0.25,
         distributeprefabs = {
             grass = 2,
-            saplingnova = 2,
+            sapling = 2,
             green_mushroom = 3,
             blue_mushroom = 3,
             flower = 1,

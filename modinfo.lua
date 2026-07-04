@@ -180,12 +180,37 @@ configuration_options =
             image = "world_size.tex"
         }
     },
+    {
+        name = "bosslife",
+        label = en_zh_zht("Bosses Life", "巨兽生命值", "巨獸生命值"),
+        hover = en_zh_zht(
+            "Determines how much health mod bosses will have",
+            "巨兽不行？不够撸？\n那就提升巨兽的生命值吧！",
+            "巨獸不行？不夠擼？\n那就提升巨獸的生命值吧！"),
+        options = {
+            { description = "25%", data = 0.25, hover = en_zh_zht("bosses with 25% health", "巨兽生命值为25%", "巨獸生命值爲25%") },
+            { description = "50%", data = 0.50, hover = en_zh_zht("bosses with 50% health", "巨兽生命值为50%", "巨獸生命值爲50%") },
+            { description = "75%", data = 0.75, hover = en_zh_zht("bosses with 75% health", "巨兽生命值为75%", "巨獸生命值爲75%") },
+            { description = "100%", data = 1.00, hover = en_zh_zht("bosses with 100% health", "巨兽生命值为100%", "巨獸生命值爲100%") },
+            { description = "125%", data = 1.25, hover = en_zh_zht("bosses with 125% health", "巨兽生命值为125%", "巨獸生命值爲125%") },
+            { description = "150%", data = 1.50, hover = en_zh_zht("bosses with 150% health", "巨兽生命值为150%", "巨獸生命值爲150%") },
+            { description = "200%", data = 2.00, hover = en_zh_zht("bosses with 200% health", "巨兽生命值为200%", "巨獸生命值爲200%") },
+            { description = "300%", data = 3.00, hover = en_zh_zht("bosses with 300% health", "巨兽生命值为300%", "巨獸生命值爲300%") },
+        },
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.WORLDGEN },
+            group = tro_modules.common,
+            world = { "forest" },
+        }
+    },
+
 
     title(en_zh_zht("<hamlet>", "<哈姆雷特>", "<哈姆雷特>"), tro_modules.hamlet),
 
     {
         name = "hamlet",
-        label = "哈姆雷特",
+        label = en_zh_zht("hamlet", "哈姆雷特", "哈姆雷特"),
         options = options_enable(),
         default = 1, --默认值
         world_gen = {
@@ -196,7 +221,8 @@ configuration_options =
     },
     {
         name = "hayfever",
-        label = "花粉症",
+        label = en_zh_zht("Hay Fever", "花粉症"),
+        hover = en_zh_zht("Enables the Hay Fever on Summer", "在夏季启用花粉症", "在夏季啓用花粉症"),
         options = options_enable(),
         default = 1, --默认值
         world_gen = {
@@ -209,7 +235,8 @@ configuration_options =
     },
     {
         name = "fog",
-        label = "大雾",
+        label = en_zh_zht("Winter Fog", "迷雾", "迷霧"),
+        hover = en_zh_zht("Enables the fog on Winter", "在冬季启用迷雾", "在冬季啟用迷霧"),
         options = options_enable(),
         default = 1, --默认值
         world_gen = {
@@ -222,7 +249,7 @@ configuration_options =
     },
     {
         name = "vampirebatcave",
-        label = "洞穴裂缝",
+        label = en_zh_zht("Vampire bat cave", "洞穴裂缝"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -235,7 +262,11 @@ configuration_options =
     },
     {
         name = "aporkalypse",
-        label = "大灾变",
+        label = en_zh_zht("Aporkalypse", "大灾变", "大災變"),
+        hover = en_zh_zht(
+            "Aporkalypse appear every 60 days, if u don't reset the calendar inside the ruins *Active Time: 20 days*",
+            "大灾变每60天出现一次\n如果不在遗迹内重置灾变日历，每次将持续20天",
+            "大災變每60天出現一次\n如果不在遺蹟內重置災變日曆，每次將持續20天"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -250,7 +281,7 @@ configuration_options =
     title(en_zh_zht("<shipwrecked>", "<海难>", "<海难>"), tro_modules.shipwrecked),
     {
         name = "shipwrecked",
-        label = "海难",
+        label = en_zh_zht("shipwrecked", "海难", "船難"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -261,7 +292,11 @@ configuration_options =
     },
     {
         name = "volcaniceruption",
-        label = "火山爆发",
+        label = en_zh_zht("Volcanic Eruption", "火山喷发", "火山噴發"),
+        hover = en_zh_zht(
+            "Enables the Volcanic Eruption",
+            "将在夏季时的海难区域定时发生火山喷发",
+            "將在夏季時的海難區域定時發生火山噴發"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -274,7 +309,11 @@ configuration_options =
     },
     {
         name = "twister",
-        label = "豹卷风生成",
+        label = en_zh_zht("Sealnado", "豹卷风", "豹捲風"),
+        hover = en_zh_zht(
+            "Will spawn in spring on Shipwrecked Biomes *Sealnado/Twister* ",
+            "将在春季时的海难生态群系生成海难巨兽：“豹卷风”",
+            "將在春季時的船難生態羣系生成船難巨獸：“豹捲風”"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -287,7 +326,11 @@ configuration_options =
     },
     {
         name = "hurricane",
-        label = "飓风和冰雹生成",
+        label = en_zh_zht("Wind", "飓风", "颶風"),
+        hover = en_zh_zht(
+            "affects speed, make trees & plant fall down and the sea create more and powerfull waves",
+            "飓风刮起时会影响玩家移动速度\n并将树木和植物吹倒\n在海面形成更大的海浪",
+            "颶風颳起時會影響玩家移動速度\n並將樹木和植物吹倒\n在海面形成更大的海浪"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -298,7 +341,11 @@ configuration_options =
     },
     {
         name = "springflood",
-        label = "洪水生成",
+        label = en_zh_zht("Flood", "洪水"),
+        hover = en_zh_zht(
+            "In Spring puddles will spawn and attract Mosquitos from the water",
+            "春季下雨时会生成水坑\n并在其中生成具有攻击性的毒蚊子",
+            "春季下雨時會生成水坑\n並在其中生成具有攻擊性的毒蚊子"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -311,7 +358,11 @@ configuration_options =
     },
     {
         name = "waves",
-        label = "海浪生成",
+        label = en_zh_zht("Waves", "海浪"),
+        hover = en_zh_zht(
+            "The sea generate Waves *wind make them stronger and faster*",
+            "海面将生成海浪 *吹风时会有更大的浪*",
+            "海面將生成海浪 *吹風時會有更大的浪*"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -325,7 +376,11 @@ configuration_options =
     title(en_zh_zht("<shipwrecked_plus>", "<海难Plus>", "<海难Plus>"), tro_modules.shipwrecked),
     {
         name = "shipwrecked_plus",
-        label = "海难Plus",
+        label = en_zh_zht("Shipwrecked Plus", "海难PLUS内容", "船難PLUS內容"),
+        hover = en_zh_zht(
+            "Generate a extra Shipwrecked island based on the Shipwrecked Plus mod",
+            "生成来自海难PLUS(Shipwrecked PLUS)模组内容的额外岛屿",
+            "生成來自船難PLUS(Shipwrecked PLUS)模組內容的額外島嶼"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -338,7 +393,11 @@ configuration_options =
     title(en_zh_zht("<greenworld>", "<绿色世界>", "<绿色世界>"), tro_modules.greenworld),
     {
         name = "greenworld",
-        label = "绿色世界",
+        label = en_zh_zht("Green World", "绿色世界群系", "綠色世界羣系"),
+        hover = en_zh_zht(
+            "It will generate the Green World",
+            "将生成来自绿色世界(Green World)模组的生态群系",
+            "將生成來自綠色世界(Green World)模組的生態羣系"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -351,7 +410,11 @@ configuration_options =
     title(en_zh_zht("<windy>", "<大风平原>", "<大风平原>"), tro_modules.windy),
     {
         name = "windy",
-        label = "大风平原",
+        label = en_zh_zht("Windy Plains Biome", "大风平原群系", "大風平原羣系"),
+        hover = en_zh_zht(
+            "It will generate the Windy Plains Biome",
+            "将生成来自大风平原(Windy Plains)模组的生态群系",
+            "將生成來自大風平原(Windy Plains)模組的生態羣系"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -364,7 +427,11 @@ configuration_options =
     title(en_zh_zht("<frostisland>", "<冰霜岛屿>", "<冰霜岛屿>"), tro_modules.frostisland),
     {
         name = "frostisland",
-        label = "冰霜岛屿",
+        label = en_zh_zht("Frost Land", "冰霜岛屿", "冰霜島嶼"),
+        hover = en_zh_zht(
+            "Creates Frost island、frozen cave where it is winter all the time.",
+            "创建永远是冬天的冰霜岛屿、冰霜洞穴\n灵感来自永不妥协(Uncompromising Mode)",
+            "創建永遠是冬天的冰霜岛屿、冰霜洞穴\n靈感來自永不妥協(Uncompromising Mode)"),
         options = options_enable(),
         default = 1,
         world_gen = {
@@ -374,23 +441,31 @@ configuration_options =
         }
     },
 
-    -- title(en_zh_zht("<quagmire>", "<暴食>", "<暴食>"), tro_modules.quagmire),
-    -- {
-    --     name = "quagmire",
-    --     label = "暴食",
-    --     options = options_enable(),
-    --     default = 1,
-    --     world_gen = {
-    --         category = { LEVELCATEGORY.WORLDGEN },
-    --         group = tro_modules.quagmire,
-    --         world = { "forest" },
-    --     }
-    -- },
+    title(en_zh_zht("<quagmire>", "<暴食>", "<暴食>"), tro_modules.quagmire),
+    {
+        name = "quagmire",
+        label = en_zh_zht("Gorge Island", "暴食生态群系岛屿", "暴食生態羣系島嶼"),
+        hover = en_zh_zht(
+            "create an island with content from the gorge event",
+            "生成一个暴食生态群系岛屿\n灵感来自官方的暴食(Re-Gorge-itated)模组",
+            "生成一個暴食生態羣系島嶼\n靈感來自官方的暴食(Re-Gorge-itated)模組"),
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.WORLDGEN },
+            group = tro_modules.quagmire,
+            world = { "forest" },
+        }
+    },
 
     title(en_zh_zht("<underwater>", "<海底世界>", "<海底世界>"), tro_modules.underwater),
     {
         name = "underwater",
-        label = "海底世界",
+        label = en_zh_zht("Underwater", "海底生态群系", "海底生態羣系"),
+        hover = en_zh_zht(
+            "It will generate entrances on the surface that lead to the bottom of the ocean. (will only affects custom, hamlet and shipwrecked world)",
+            "将在地面服务器生成海底入口\n（仅影响自定义世界、哈姆雷特世界和海难世界）",
+            "將在地面伺服器生成海底入口\n（僅影響自定義世界、哈姆雷特世界和船難世界）"),
         options = options_enable(),
         default = 1,
         world_gen = {

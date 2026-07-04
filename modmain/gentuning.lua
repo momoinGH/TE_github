@@ -3,7 +3,7 @@ local shipwrecked = GetModConfigData("shipwrecked") == 1
 
 TUNING.tropical = {
     common           = true,
-    bosslife         = 1, --巨兽生命值
+    bosslife         = GetModConfigData("bosslife"), --巨兽生命值
 
     hamlet           = hamlet,
     room             = hamlet,
@@ -28,7 +28,7 @@ TUNING.tropical = {
     frostisland      = GetModConfigData("frostisland") == 1,      --冰霜岛屿
     quagmire         = GetModConfigData("quagmire") == 1,         --暴食
 
-    sea = false, --仅海洋世界
+    sea              = false,                                     --仅海洋世界
 }
 
 print("打印配置项数据：")
