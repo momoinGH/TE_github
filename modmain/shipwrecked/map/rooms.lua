@@ -707,7 +707,7 @@ AddRoom("VolcanoAltar", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.VOLCANO_ROCK,
     contents = {
-        countstaticlayouts = { ["volcano_altar"] = 1 --[[GetModConfigData("forge")]], },
+        countstaticlayouts = { ["volcano_altar"] = 1, },
         distributepercent = .1,
         distributeprefabs =
         {

@@ -2,7 +2,6 @@ local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets =
 {
-	--	Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
 	Asset("ANIM", "anim/player_ghost_withhat.zip"),
 	Asset("ANIM", "anim/ghost_build.zip"),
 	Asset("IMAGE", "images/avatars/avatar_walani.tex"),
@@ -19,16 +18,13 @@ local assets =
 local WALANI_HEALTH = 120
 local WALANI_SANITY = 200
 local WALANI_HUNGER = 200
-local WALANI_SANITY_RATE_MODIFIER = -0.5
 local WALANI_HUNGER_RATE_MODIFIER = 1
 
 local prefabs =
 {
 }
 
-local start_inv =
-{
-}
+local start_inv = TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALANI
 
 
 local function onbecamehuman(inst)
@@ -58,7 +54,6 @@ local common_postinit = function(inst)
 	inst:AddTag("walani")
 	inst.soundsname = "walani"
 end
-
 
 local master_postinit = function(inst)
 	inst.components.health:SetMaxHealth(WALANI_HEALTH)

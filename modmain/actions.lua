@@ -257,7 +257,7 @@ TroAddAction({ priority = 11, distance = 25 }, "BOATCANNON", STRINGS.ACTIONS.BOA
 
     local bomba = SpawnPrefab(item.prefab == "obsidian_boatcannon" and "cannonshotobsidian" or "cannonshot")
     if boat.prefab == "woodlegsboat" and act.doer.prefab == "woodlegs" then
-        bomba.components.explosive.explosivedamage = 50
+        bomba.components.explosive.explosivedamage = 50 --木腿船长不消耗耐久！
     else
         item.components.finiteuses:Use(1)
     end

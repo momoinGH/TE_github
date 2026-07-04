@@ -1,8 +1,6 @@
 local day_length = 30 * 16
 
 -- Config options
--- TUNING.DEBUG_MODE = GetModConfigData("debug_mode")
--- TUNING.OXYGENMETER_COMPACT = GetModConfigData("oxygenmetermode")
 TUNING.DEBUG_MODE = false
 TUNING.OXYGENMETER_COMPACT = true
 TUNING.CITD_BGCOLOURS = { 50 / 255, 100 / 255, 220 / 255 }
