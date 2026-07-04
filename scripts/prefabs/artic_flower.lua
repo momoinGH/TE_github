@@ -11,7 +11,7 @@ local prefabs =
 local names = { "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10" }
 
 local function onsave(inst, data)
-    data.anim = inst.animname
+    data.animname = inst.animname
 end
 
 local function onload(inst, data)

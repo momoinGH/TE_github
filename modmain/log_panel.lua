@@ -388,7 +388,7 @@ GLOBAL.SpawnPrefabFromSim = function(name, ...)
     local guid = err
     if guid == -1 then
         TroErrorHandle(string.trofmt("错误：预制件{}生成失败", name), false, "warn")
-    elseif TheWorld.ismastersim then
+    elseif TheWorld and TheWorld.ismastersim then
         -- 主机预制件坐标检查
         local ent = Ents[guid]
         if ent and ent.prefab

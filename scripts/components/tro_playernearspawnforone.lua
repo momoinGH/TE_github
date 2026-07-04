@@ -172,7 +172,7 @@ end, nil, {
 })
 
 function PlayerNearSpawnForOne:SetNextSpawnTime(override_interval)
-    self.next_spawn_time = GetTime() + math.max((override_interval or self.spawn_interval), 0)
+    self.next_spawn_time = TroGetTotalTime() + math.max((override_interval or self.spawn_interval), 0)
     if self.is_first and self.first_spawn_time then --第一次生成所需时间，两者取其长
         self.next_spawn_time = math.max(self.first_spawn_time, self.next_spawn_time)
     end

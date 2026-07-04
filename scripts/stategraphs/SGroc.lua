@@ -80,7 +80,7 @@ local states =
 
         timeline =
         {
-            TimeEvent(30 * FRAMES, function(inst) inst.components.roccontroller:Spawnbodyparts() end),
+            -- TimeEvent(30 * FRAMES, function(inst) inst.components.roccontroller:Spawnbodyparts() end),
             TimeEvent(5 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/boss/roc/flap", "flaps")
                 inst.SoundEmitter:SetParameter("flaps", "intensity", inst.sounddistance)

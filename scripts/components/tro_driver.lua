@@ -75,7 +75,7 @@ local function PlayerRedirectDamage(inst, attacker, damage, weapon, stimuli)
             weapon and (
                 weapon.components.projectile or
                 weapon.components.complexprojectile or
-                weapon.components.weapon:CanRangedAttack()
+                (weapon.components.weapon and weapon.components.weapon:CanRangedAttack())
             ) or
             (attacker and attacker:HasTag("pseudoprojectile"))
         )

@@ -1,5 +1,5 @@
 local function onnotready(inst)
-	if inst.replica.container ~= nil and inst.replica.container:IsEmpty() or inst.components.container:IsEmpty() then
+	if inst.components.container:IsEmpty() then
 		inst:RemoveTag("pleasetakeitem")
 	end
 end

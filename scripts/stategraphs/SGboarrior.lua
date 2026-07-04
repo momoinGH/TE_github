@@ -343,7 +343,7 @@ local states =
         {
             TimeEvent(13 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound(
-                "dontstarve/creatures/lava_arena/boarrior/taunt")
+                    "dontstarve/creatures/lava_arena/boarrior/taunt")
             end),
         },
 
@@ -398,18 +398,17 @@ local states =
             inst.AnimState:PlayAnimation("banner_pre", false)
             inst.AnimState:PushAnimation("banner_loop", false)
             inst.sg.statemem.loops = 0
-            --                inst.sg.statemem.gbdone = false
+            inst.sg.statemem.gbdone = false
         end,
 
         events = {
             EventHandler("animover", function(inst)
                 if inst.AnimState:IsCurrentAnimation("banner_loop") and inst.sg.statemem.loops <= 3 then
-                    print("need to play sound")
-                    --                    if not inst.sg.statemem.gbdone then
-                    inst:PerformBufferedAction()
-                    burstattack(inst)
-                    --                        inst.sg.statemem.gbdone = true
-                    --                    end
+                    if not inst.sg.statemem.gbdone then
+                        inst:PerformBufferedAction()
+                        burstattack(inst)
+                        inst.sg.statemem.gbdone = true
+                    end
                     inst.AnimState:PlayAnimation("banner_loop", false)
                     inst.SoundEmitter:PlaySound("dontstarve/creatures/lava_arena/boarrior/bone_drop_stick")
                     inst.sg.statemem.loops = inst.sg.statemem.loops + 1

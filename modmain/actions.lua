@@ -65,7 +65,9 @@ TroAddAction(nil, "DEPLOY_AI", STRINGS.ACTIONS.DEPLOY_AI, function(act)
             if obj.components.deployable:TroForceDeploy(act:GetActionPoint(), act.doer, act.rotation) then
                 return true
             else
-                act.doer.components.inventory:GiveItem(obj)
+                if act.doer.components.inventory then
+                    act.doer.components.inventory:GiveItem(obj)
+                end
             end
         end
     end
@@ -391,7 +393,11 @@ TroAddAction({ priority = 5, distance = 2 }, "TAKE_SHELF", STRINGS.ACTIONS.TAKE_
                         [math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_NOT_ENOUGH)])
                 elseif reason == "goods" then
                     local name = STRINGS.NAMES[string.upper(prefab_wanted)]
-                    assert(name) --严格一点，货币名字还是得有的
+                    if not name then
+                        -- 货币名字还是得有的
+                        TroErrorHandle("货币名不存在: " + prefab_wanted, true)
+                        name = prefab_wanted
+                    end
                     shopkeeper.components.talker:Say(string.format(
                         STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE[math.random(1, #STRINGS.CITY_PIG_SHOPKEEPER_DONT_HAVE)],
                         name))

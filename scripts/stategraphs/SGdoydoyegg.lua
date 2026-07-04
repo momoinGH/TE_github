@@ -7,7 +7,6 @@ local events =
 }
 
 local function ReleaseDoydoy(inst)
-	print("ReleaseDoydoy")
 	local doydoy = SpawnPrefab("doydoy")
 	doydoy.Transform:SetPosition(inst:GetPosition():Get())
 	doydoy.sg:GoToState("hatch")
@@ -15,7 +14,6 @@ local function ReleaseDoydoy(inst)
 end
 
 local function Hatch(inst)
-	print("Hatch")
 	inst.EggHatched = true
 	inst:DoTaskInTime(0.1, ReleaseDoydoy)
 end
@@ -106,8 +104,10 @@ local states =
 
 		timeline =
 		{
-			TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve/creatures/together/lavae/egg_crack") end)
+			TimeEvent(10 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve/creatures/together/lavae/egg_crack")
+			end)
 		},
 
 		events = {
@@ -125,12 +125,18 @@ local states =
 
 		timeline =
 		{
-			TimeEvent(10 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve/creatures/together/lavae/egg_bounce") end),
-			TimeEvent(35 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve/creatures/together/lavae/egg_bounce") end),
-			TimeEvent(50 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-				"dontstarve/creatures/together/lavae/egg_bounce") end),
+			TimeEvent(10 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve/creatures/together/lavae/egg_bounce")
+			end),
+			TimeEvent(35 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve/creatures/together/lavae/egg_bounce")
+			end),
+			TimeEvent(50 * FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(
+					"dontstarve/creatures/together/lavae/egg_bounce")
+			end),
 			TimeEvent(60 * FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/egg_burst")
 			end),

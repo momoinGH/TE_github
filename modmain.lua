@@ -130,7 +130,6 @@ troimportmodulefile("cooking")    --料理相关
 
 
 modimport("modmain/rpc")           --RPC的注册
-modimport("modmain/input")         --客机操作的监听
 modimport("modmain/skins")         --物品皮肤
 modimport("modmain/scrapbookwiki") -- 图鉴wiki
 modimport("modmain/character")     --添加角色，角色相关变量定义

@@ -35,20 +35,10 @@ local function Retarget(inst)
     end, { "monster" }, { "FX", "NOCLICK", "INLIMBO" })
 end
 
-local function KeepTarget(inst, target)
-    return inst.components.combat:CanTarget(target) and inst:GetDistanceSqToInst(target) <= keepDistSq
-end
-
 local function OnAttacked(inst, data)
-    if data.attacker == nil and inst.components.combat:CanTarget(data.attacker) then
-        return
+    if data and data.attacker and inst.components.combat:CanTarget(data.attacker) then
+        inst.components.combat:SetTarget(data.attacker)
     end
-
-    inst.components.combat:SetTarget(data.attacker)
-end
-
-local function OnAttackOther(inst, data)
-
 end
 
 local function SlamAttack(inst)

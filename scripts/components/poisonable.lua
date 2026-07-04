@@ -96,7 +96,7 @@ function Poisonable:SetOnHitFn()
             attacker.components.poisonous:OnAttack(inst, dmg)
         end
     end
-    if self.inst.components.combat.onhitfn ~= nil then
+    if self.inst.components.combat.onhitfn ~= nil then --需要先添加combat组件
         local oldonhitfn = self.inst.components.combat.onhitfn
         self.inst.components.combat:SetOnHit(function(inst, attacker, dmg)
             oldonhitfn(inst, attacker, dmg)

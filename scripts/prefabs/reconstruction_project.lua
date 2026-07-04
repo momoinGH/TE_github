@@ -184,7 +184,7 @@ local function OnSave(inst, data)
             print("SCALE-X SAVE", inst.saveartdata.scale[1])
             data.scaleX = inst.saveartdata.scale[1]
             data.scaleY = inst.saveartdata.scale[2]
-            data.scaleX = inst.saveartdata.scale[3]
+            data.scaleZ = inst.saveartdata.scale[3]
         end
     end
     data.reconstruction_stages = inst.reconstruction_stages

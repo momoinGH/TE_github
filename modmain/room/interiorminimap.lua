@@ -18,9 +18,6 @@ end
 ----------------------------------------------------------------------------------------------------
 local RoomUtils = require("tropical_utils/room_utils")
 
-
-
-
 local function UpdateTextureBefore(self)
     if not ThePlayer then return end
     local x, y, z = ThePlayer.Transform:GetWorldPosition()
@@ -38,7 +35,7 @@ local function UpdateTextureBefore(self)
     local room = TheWorld.Map:TroGetRoomCenter(x, y, z)
     if room then
         package.loaded.tt = nil
-        local AppendRoomTexture = require("tt")
+        local AppendRoomTexture = require("minimap_fn")
         AppendRoomTexture(self, room)
         -- local x, _, z = ThePlayer.Transform:GetWorldPosition()
     end

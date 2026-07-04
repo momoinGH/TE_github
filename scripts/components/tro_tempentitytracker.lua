@@ -26,7 +26,9 @@ function TempEntityTracker:GetEnts(key)
 end
 
 function TempEntityTracker:RemoveEnt(ent)
+    if ent[KEY] and self.ents[ent[KEY]] then
     self.ents[ent[KEY]][ent] = nil
+    end
 end
 
 local function OnRemove(ent)

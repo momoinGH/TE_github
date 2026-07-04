@@ -23,22 +23,19 @@ local function teleport(inst)
 
     local tile = TheWorld.Map:GetTileAtPoint(pt.x, pt.y, pt.z)
     if tile == WORLD_TILES.IMPASSABLE or tile == WORLD_TILES.INVALID or tile == WORLD_TILES.OCEAN_COASTAL or tile == WORLD_TILES.OCEAN_COASTAL_SHORE or tile == WORLD_TILES.OCEAN_SWELL or tile == WORLD_TILES.OCEAN_ROUGH or tile == WORLD_TILES.OCEAN_BRINEPOOL or tile == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or tile == WORLD_TILES.OCEAN_WATERLOG or tile == WORLD_TILES.OCEAN_HAZARDOUS then
-        print("1111")
         pt = inst:GetPosition()
     end
 
 
     local theta = math.random() * TWOPI
-
-    local offset = nil
-    while not offset do
-        offset = FindWalkableOffset(pt, theta, 12 + math.random() * 5, 12, true) --12
+    local offset = FindWalkableOffset(pt, theta, 12 + math.random() * 5, 12, true) --12
+    if not offset then
+        return
     end
 
     pt.x = pt.x + offset.x
     pt.z = pt.z + offset.z
-    inst.Physics:SetActive(true)
-    inst.Transform:SetPosition(pt.x, 0, pt.z)
+    inst.Physics:Teleport(pt.x, 0, pt.z)
     inst.sg:GoToState("telportin")
 end
 
