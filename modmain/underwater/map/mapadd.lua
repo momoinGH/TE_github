@@ -1,16 +1,5 @@
---[[
-把地形生成在主大陆之外是通过separavulcao、underwaterdivide塞入大量虚空房间，然后再让地形用这个task给的keys解锁
-世界生成后处理可能会清理/修正不连通区域。keep_disconnected_tiles允许那些和主大陆不接壤的 tile 被保留下来
-不过这些很多的虚空房间也会把主大陆挤到墙角
-]]
-
-local forest_tasks = {
-    "EntranceToReef" --入口
-}
-
 local cave_tasks = {
-    "separavulcao",
-    "underwaterdivide",
+    "underwaterdivide", --虚空地形
     "SandyBiome",
     "ReefBiome",
     "KelpBiome",
@@ -31,7 +20,6 @@ local cave_tasks = {
     "UnderwaterExit2",
 }
 
-
 for _, t in ipairs(cave_tasks) do
     AddTaskPreInit(t, function(task)
         task.room_tags = task.room_tags or {}
@@ -50,7 +38,7 @@ AddLevelPreInitAny(function(level)
     end
 end)
 
-
+--地上入口
 AddTaskSetPreInitAny(function(taskset)
     if taskset.location == "forest" then
         table.insert(taskset.tasks, "EntranceToReef")

@@ -91,12 +91,8 @@ local function fn()
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
 
-    inst:AddComponent("teleporter")
-    inst.components.teleporter.onActivate = OnActivate
-    inst.components.teleporter.onActivateByOther = OnActivateByOther
-    inst.components.teleporter.offset = 0
-    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-    inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
+    inst:AddComponent("worldmigrator")
+    inst.components.worldmigrator:SetID("volcano")
 
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetOnHauntFn(OnHaunt)

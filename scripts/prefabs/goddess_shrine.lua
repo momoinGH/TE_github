@@ -90,7 +90,7 @@ local function fn()
 	inst.entity:AddNetwork()
 	inst.entity:AddMiniMapEntity()
 
-	inst.MiniMapEntity:SetIcon("goddess_shrine.tex")
+	inst.MiniMapEntity:SetIcon("goddess_shrine.png")
 
 	MakeObstaclePhysics(inst, 0.75)
 	inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)

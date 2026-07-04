@@ -679,7 +679,7 @@ AddRoom("VolcanoNoise", {
     }
 })
 
--- 火山祭坛
+-- 工作台
 AddRoom("VolcanoObsidianBench", {
     colour = { r = .55, g = .75, b = .75, a = .50 },
     value = WORLD_TILES.VOLCANO_ROCK,
@@ -697,7 +697,8 @@ AddRoom("VolcanoObsidianBench", {
         countprefabs =
         {
             volcanofog = math.random(1, 2),
-            volcano_altar = 1,
+            cavelight_small = 2,
+            firetwister = 1,
         },
     }
 })

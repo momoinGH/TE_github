@@ -134,7 +134,7 @@ return {
 		
         {
           name = "",
-          type = "firetwister",
+          type = "volcano_altar",
           shape = "rectangle",
           x = 256,
           y = 256,

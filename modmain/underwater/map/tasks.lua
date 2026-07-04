@@ -219,24 +219,12 @@ AddTask("UnderwaterExit2", {
     background_room = "bg_SandyBottom",
     colour = { r = 0, g = 0, b = 0, a = 0 },
 })
-AddTask("separavulcao", {
-    locks = {
-        LOCKS.RUINS,
-    },
-    keys_given = KEYS.LAND_DIVIDE_3,
-    room_choices = {
-        ["ForceDisconnectedRoom"] = 10,
-    },
-    entrance_room = "ForceDisconnectedRoom",
-    room_bg = WORLD_TILES.VOLCANO,
-    background_room = "ForceDisconnectedRoom",
-    colour = { r = 1, g = 1, b = 1, a = 0.3 }
-})
+
 AddTask("underwaterdivide", {
     locks = { LOCKS.LAND_DIVIDE_3 },
     keys_given = { KEYS.LAND_DIVIDE_4 },
     room_choices = {
-        ["ForceDisconnectedRoom"] = 20,
+        ["ForceDisconnectedRoom"] = 10,
     },
     level_set_piece_blocker = true,
     room_bg = GROUND.IMPASSABLE,

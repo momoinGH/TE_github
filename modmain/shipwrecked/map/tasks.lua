@@ -140,7 +140,7 @@ AddTask("RockyTallJungle", {
     keys_given = { KEYS.EASY },
     room_choices = {
         ["MagmaTallBird"] = 1,
-        ["MagmaGoldBoon"] = 1,
+        -- ["MagmaGoldBoon"] = 1,
     },
     room_bg = WORLD_TILES.MAGMAFIELD,
     background_room = "BeachDunes",
@@ -244,9 +244,10 @@ AddTask("MoonRocky", {
     locks = { LOCKS.BLUE },
     keys_given = { KEYS.BLUE },
     room_choices = {
-        ["Magma"] = 1, -- MR went from 1-3
-        ["MagmaGold"] = 1,
+        ["Magma"] = 1,        -- MR went from 1-3
         ["MagmaGoldmoon"] = 1,
+        ["Volcano"] = 1,      --火山
+        ["VolcanoAltar"] = 1, -- 火山祭坛
     },
     room_bg = WORLD_TILES.BEACH,
     background_room = "MagmaGold",
@@ -335,22 +336,33 @@ AddTask("DoyDoyF", {
     colour = { 1, .5, .5, .2 },
 })
 
+AddTask("VolcanoDivide", {
+    locks = { LOCKS.LAND_DIVIDE_3 },
+    keys_given = { KEYS.VOLCANO_DIVIDE },
+    room_choices = {
+        ["ForceDisconnectedRoom"] = 5,
+    },
+    level_set_piece_blocker = true,
+    room_bg = GROUND.IMPASSABLE,
+    background_room = "ForceDisconnectedRoom",
+    colour = { r = 1, g = 1, b = 1, a = 0.3 }
+})
+
 -- 火山世界，生成在洞穴里
 AddTask("Volcano ground", {
-    locks = { LOCKS.MEDIUM },
+    locks = { LOCKS.VOLCANO_DIVIDE },
     keys_given = { KEYS.MEDIUM },
     room_tags = { "volcano" },
     room_choices = {
+        ["VolcanoStart"] = 1, --出口
         [salasvolcano[math.random(1, 5)]] = 1,
         [salasvolcano[math.random(1, 5)]] = 1,
         [salasvolcano[math.random(1, 5)]] = 1,
         ["VolcanoAsh"] = 1,
         ["VolcanoObsidian"] = 3,
         ["VolcanoRock"] = 2,
-        ["VolcanoAltar"] = 1,
-        ["VolcanoObsidianBench"] = 1,
-        ["VolcanoCage"] = 1,
-
+        ["VolcanoObsidianBench"] = 1, --工作台
+        ["VolcanoCage"] = 1,          --海盗船长
     },
     room_bg = WORLD_TILES.VOLCANO,
     background_room = "VolcanoNoise",

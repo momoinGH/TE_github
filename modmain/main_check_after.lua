@@ -30,7 +30,7 @@ AddRecipePostInitAny(function(v)
 end)
 
 -- 防止制作栏文本忘记写导致游戏崩溃
-for name, _ in ipairs(CRAFTING_FILTERS) do
+for name, _ in pairs(CRAFTING_FILTERS) do
     if not STRINGS.UI.CRAFTING_FILTERS[name] then
         STRINGS.UI.CRAFTING_FILTERS[name] = "STRINGS.UI.CRAFTING_FILTERS." .. name .. "未赋值"
         TroErrorHandle("STRINGS.UI.CRAFTING_FILTERS." .. name .. "未赋值，点击制作栏时会报错", false)
@@ -83,45 +83,6 @@ end
 --     end
 --     return res
 -- end
-
-----------------------------------------------------------------------------------------------------
--- 检查状态机的重复注册
-for _, name in ipairs({
-    "wilson",
-    "wilson_client"
-}) do
-    AddStategraphPostInit(name, function(self)
-        local actions = {}
-        for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphActionHandler", self.name)) do
-            for i, v in ipairs(modhandlers) do
-                if actions[v.action] then
-                    TroErrorHandle(name .. "状态机对ACTIONS." .. v.action.id .. "重复注册，会导致相互覆盖，请hook对应的函数", true)
-                end
-                actions[v.action] = true
-            end
-        end
-
-        local events = {}
-        for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphEvent", self.name)) do
-            for i, v in ipairs(modhandlers) do
-                if events[v.name] then
-                    TroErrorHandle(name .. "状态机对事件" .. v.name .. "重复注册，会导致相互覆盖，请hook对应的函数", true)
-                end
-                events[v.name] = true
-            end
-        end
-
-        local states = {}
-        for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphState", self.name)) do
-            for i, v in ipairs(modhandlers) do
-                if states[v.name] then
-                    TroErrorHandle(name .. "状态机对状态" .. v.name .. "重复注册，会导致相互覆盖，请hook对应的函数", true)
-                end
-                states[v.name] = true
-            end
-        end
-    end)
-end
 
 ----------------------------------------------------------------------------------------------------
 

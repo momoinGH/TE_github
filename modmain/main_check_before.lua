@@ -123,6 +123,53 @@ env.AddStategraphActionHandler = function(stategraph, handler, ...)
     return OldAddStategraphActionHandler(stategraph, handler, ...)
 end
 
+-- 检查ActionHandler之间是否相互覆盖
+local OldSGCtor = StateGraph._ctor
+StateGraph._ctor = function(self, name, states, events, defaultstate, actionhandlers, ...)
+    local actionhandlers_set = {}
+    for _, v in pairs(actionhandlers or {}) do
+        actionhandlers_set[v.action] = true
+    end
+
+    for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphActionHandler", name)) do
+        for i, v in ipairs(modhandlers) do
+            if actionhandlers_set[v.action] then
+                TroErrorHandle(name .. " 状态机对ACTION " .. v.action.id .. " 重复注册，会导致相互覆盖，请hook对应的函数", false)
+            else
+                actionhandlers_set[v.action] = true
+            end
+        end
+    end
+
+    local events_set = {}
+    for k, v in pairs(events) do
+        events_set[v.name] = true
+    end
+    for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphEvent", name)) do
+        for i, v in ipairs(modhandlers) do
+            if events_set[v.name] then
+                TroErrorHandle(name .. "状态机对事件" .. v.name .. "重复注册，会导致相互覆盖，请hook对应的函数", false)
+            end
+            events_set[v.name] = true
+        end
+    end
+
+    local states_set = {}
+    for k, v in pairs(states) do
+        states_set[v.name] = true
+    end
+    for k, modhandlers in pairs(ModManager:GetPostInitData("StategraphState", name)) do
+        for i, v in ipairs(modhandlers) do
+            if states_set[v.name] then
+                TroErrorHandle(name .. "状态机对状态" .. v.name .. "重复注册，会导致相互覆盖，请hook对应的函数", false)
+            end
+            states_set[v.name] = true
+        end
+    end
+
+    OldSGCtor(self, name, states, events, defaultstate, actionhandlers, ...)
+end
+
 ----------------------------------------------------------------------------------------------------
 -- 调用AnimState方法失败也不会报错，日志也打印的含糊，这里hook三个方法，在创建世界的时候去掉注释检查一下是哪些动画没有，日志里搜索Could not find anim
 -- -- Could not find anim bank [FROMNUM]

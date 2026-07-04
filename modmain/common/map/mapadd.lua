@@ -31,3 +31,18 @@ AddRoomPreInit("OceanSwell", function(room)
     -- room.required_prefabs = {}
     -- room.contents.countstaticlayouts = {} ---- delete ["CrabKing"] = 1
 end)
+
+----------------------------------------------------------------------------------------------------
+
+--[[
+separavulcao是洞穴一大片虚空地形，作为其他模块小岛的基础，现在是给海底世界地形使用
+把地形生成在主大陆之外是通过separavulcao、underwaterdivide塞入大量虚空房间，然后再让地形用这个task给的keys解锁
+世界生成后处理可能会清理/修正不连通区域。keep_disconnected_tiles允许那些和主大陆不接壤的 tile 被保留下来
+不过这些很多的虚空房间也会把主大陆挤到墙角
+]]
+AddLevelPreInitAny(function(level)
+    if level.location == "cave" then
+        level.overrides.keep_disconnected_tiles = true
+        table.insert(level.tasks, "separavulcao")
+    end
+end)

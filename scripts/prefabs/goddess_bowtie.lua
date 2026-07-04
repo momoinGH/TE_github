@@ -2,7 +2,10 @@ local assets =
 {
     Asset("ANIM", "anim/goddess_bowtie.zip"),
     Asset("ANIM", "anim/torso_bowtie.zip"),
+    Asset("ATLAS", "images/inventoryimages/goddess_bowtie.xml"),
 }
+
+RegisterInventoryItemAtlas("images/inventoryimages/goddess_bowtie.xml", "goddess_bowtie.tex")
 
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "torso_bowtie", "redamulet")
@@ -30,9 +33,6 @@ local function OnGetItem(inst, giver, item)
     if uses >= 1 then
         inst.components.armor:SetPercent(1)
     end
-end
-
-local function ReflectDamage(inst, attacker)
 end
 
 local function fn()

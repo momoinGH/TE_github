@@ -1,4 +1,4 @@
-local tasks = {
+local forest_tasks = {
     "HomeIsland",
     "RockyGold",       --火山矿区  ["MagmaGold"] = 2,  ["MagmaGoldBoon"] = 1,
     "BoreKing",        --野猪王  ["PigVillagesw"] = 1,      ["JungleDenseBerries"] = 1,  ["BeachShark"] = 1,
@@ -18,10 +18,14 @@ local tasks = {
     "BeachPiggy",      --猪人沙滩
     "DoyDoyM",         ---doydoyM
     "DoyDoyF",         ---doydoyF
-    "Volcano ground"   --火山世界
 }
 
-for _, t in ipairs(tasks) do
+local cave_tasks = {
+    "VolcanoDivide",
+    "Volcano ground" --火山世界
+}
+
+for _, t in ipairs(forest_tasks) do
     AddTaskPreInit(t, function(task)
         -- task.region_id = "shipwrecked" --所有地形为一个岛
         task.region_id = t
@@ -33,13 +37,25 @@ for _, t in ipairs(tasks) do
         table.insert(task.room_tags, "not_mainland") --单独的小岛
         table.insert(task.room_tags, "No_Winter")    --没有冬天
         table.insert(task.room_tags, "nohasslers")   --不生成熊大
-        table.insert(task.room_tags, "nohunt")
+        table.insert(task.room_tags, "nohunt")       --无猎犬
+    end)
+end
+
+for _, t in ipairs(cave_tasks) do
+    AddTaskPreInit(t, function(task)
+        task.room_tags = task.room_tags or {}
+        table.insert(task.room_tags, "tropical")    --我们mod地形
+        table.insert(task.room_tags, "shipwrecked") --模块专属标签
     end)
 end
 
 AddLevelPreInitAny(function(level)
     if level.location == "forest" then
-        for _, t in ipairs(tasks) do
+        for _, t in ipairs(forest_tasks) do
+            table.insert(level.tasks, t)
+        end
+    elseif level.location == "cave" then
+        for _, t in ipairs(cave_tasks) do
             table.insert(level.tasks, t)
         end
     end

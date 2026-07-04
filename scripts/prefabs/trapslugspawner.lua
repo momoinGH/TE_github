@@ -39,8 +39,7 @@ local function fn5()
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "billsnow"
     inst.components.childspawner:SetMaxChildren(1)
-    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD,
-        TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
+    inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD, TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
     inst.components.childspawner:SetRegenPeriod(TUNING.TUMBLEWEED_REGEN_PERIOD)
     inst.components.childspawner.spawnoffscreen = true
     inst:DoTaskInTime(0, function(inst)

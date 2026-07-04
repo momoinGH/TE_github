@@ -10,15 +10,6 @@ local prefabs =
 
 }
 
-local function GetVerb()
-	return STRINGS.ACTIONS.ACTIVATE.CLIMB
-end
-
-local function OnActivate(inst, doer)
-	print("TODO 传送")
-	return true
-end
-
 local function OnSeasonChange(inst)
 	if TheWorld.state.issummer then
 		inst.sg:GoToState("active")
@@ -84,11 +75,8 @@ local function fn()
 	inst.components.scenariorunner:SetScript("camera_volcano")
 	inst.components.scenariorunner:Run()
 
-	inst:AddComponent("activatable")
-	inst.components.activatable.OnActivate = OnActivate
-	inst.components.activatable.inactive = true
-	inst.components.activatable.getverb = GetVerb
-	inst.components.activatable.quickaction = true
+	inst:AddComponent("worldmigrator")
+	inst.components.worldmigrator:SetID("volcano")
 
 	inst:SetStateGraph("SGvolcano")
 

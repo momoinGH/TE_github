@@ -26,13 +26,6 @@ modimport "modmain/tilegroups"      --地皮分组
 modimport "modmain/map/terrain.lua" --定义预制体可以在哪些地皮上生成
 modimport "modmain/shardindex.lua"  --世界生成后初始化实体，比如根据地形给实体换皮肤
 
-
--- TODO
--- if TUNING.tropical.sea then
---     modimport "modmain/common/map/tasks/sea"
--- else
--- end
-
 --生成世界需要用到的内容
 if rawget(_G, "WORLDGEN_MAIN") then
     modimport "modmain/gentuning"            -- 当配置项加载好后，才能访问TUNING.tropical检查哪些模块启用了

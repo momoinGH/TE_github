@@ -46,6 +46,7 @@ ARRAY_NEW =
     "ISLAND11",
 
     "VOLCANO_ENTRANCE", --火山洞穴
+    "VOLCANO_DIVIDE"
 }
 
 -- 声明新的锁和钥匙

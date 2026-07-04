@@ -49,8 +49,7 @@ local function fn()
 
 	inst:AddComponent("childspawner")
 	inst.components.childspawner.childname = "goddess_deer"
-	inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD,
-		TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
+	inst.components.childspawner:SetSpawnPeriod(math.random(TUNING.MIN_TUMBLEWEED_SPAWN_PERIOD, TUNING.MAX_TUMBLEWEED_SPAWN_PERIOD))
 	inst.components.childspawner:SetRegenPeriod(TUNING.TUMBLEWEED_REGEN_PERIOD)
 	inst.components.childspawner.spawnoffscreen = true
 
