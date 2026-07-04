@@ -115,17 +115,6 @@ local function OnInit(inst)
                 angle = player.Transform:GetRotation() + 180
             end
         end
-
-
-
-        --if player and player.components.locomotor then
-        --	player.components.locomotor.driftangle=angle
-        --	player.components.locomotor:StartUpdatingInternal()
-        --	player:DoTaskInTime(5.5,function()
-        --		player.components.locomotor.driftangle=nil
-        --		if not player.components.locomotor.dest then player.components.locomotor:Stop() end
-        --	end)
-        --end
         inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/wind_tree_creak")
         inst:RemoveTag("ventania")
     end
@@ -205,37 +194,6 @@ local function OnInit(inst)
         end
     end
 
-
-    ---------------empurra os itens na direcao do vento--------------------------------------
-    --local itensleve = GetClosestInstWithTag("voador", inst, 40)
-
-    --if itensleve and itensleve.components.inventoryitem and itensleve.replica.inventoryitem:IsHeld() then
-    --itensleve:RemoveTag("voador")
-    ---------------------------se itensleve ta cortada nao faz nada-------------------------------------------
-    --local pos = itensleve:GetPosition()
-    --itensleve.Transform:SetPosition(pos.x, 0, pos.z)
-    --local vx, vy, vz = itensleve.Physics:GetVelocity()
-    --local move = math.random(1,3)
-    --if angle == 0 then itensleve.Physics:SetVel(-move, vy, vz) end
-    --if angle == 45 then itensleve.Physics:SetVel(-move, vy, move) end
-    --if angle == 90 then itensleve.Physics:SetVel(vx, vy, move) end
-    --if angle == 135 then itensleve.Physics:SetVel(move, vy, move) end
-    --if angle == 180 then itensleve.Physics:SetVel(move, vy, vz) end
-    --if angle == 225 then itensleve.Physics:SetVel(move, vy, -move) end
-    --if angle == 270 then itensleve.Physics:SetVel(vx, vy, -move) end
-    --if angle == 315 then itensleve.Physics:SetVel(-move, vy, -move) end
-    --itensleve:DoTaskInTime(1, function(inst)
-    ---------------permite movimentar--------------------------------
-    --itensleve:AddTag("voador")
-    --end)
-    --end
-
-
-
-
-
-
-
     ----------------balanca arvore-----------jungletree-palmtree-treemangrove-------------------------------
     local palmtree = GetClosestInstWithTag("palmtree", inst, 40)
     if palmtree then
@@ -272,11 +230,6 @@ local function OnInit(inst)
             end)
         end
     end
-
-
-
-
-
 
     ----------------balanca arvore-----------jungletree-twiggytreesw-treemangrove-------------------------------
     local twiggytreesw = GetClosestInstWithTag("twiggytreesw", inst, 40)
@@ -501,8 +454,9 @@ local function apaga(inst)
     inst:Remove()
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddMiniMapEntity()

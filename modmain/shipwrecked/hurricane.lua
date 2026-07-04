@@ -7,8 +7,8 @@ table.insert(Assets, Asset("ANIM", "anim/sapling_blown.zip"))
 AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then return end
 
-    inst:AddComponent("tro_hurricane")   --海难飓风季
-    inst:AddComponent("tro_hailmanager") --冰雹
+    inst:AddComponent("tro_hurricane")     --海难飓风季
+    inst:AddComponent("tro_hailmanager")   --冰雹
 end)
 ----------------------------------------------------------------------------------------------------
 -- 地面刮风特效的生成

@@ -49,27 +49,11 @@ local function OnUpdate(self, dt, applyhealthdelta)
             ambient_temperature = -20
         end
     end
-    ------------------------------caverna congelada---------------------------------------------
-    --[[	
-	if TheWorld:HasTag("cave") then
-	local ex, ey, ez = self.inst.Transform:GetWorldPosition()	
-	local map = TheWorld.Map
-	local posicao = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez))
-	local posicao1 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez+5))
-	local posicao2 = map:GetTile(map:GetTileCoordsAtPoint(ex, ey, ez-5))
-	local posicao3 = map:GetTile(map:GetTileCoordsAtPoint(ex+5, ey, ez))
-	local posicao4 = map:GetTile(map:GetTileCoordsAtPoint(ex-5, ey, ez))	
-	
-	if posicao == (WORLD_TILES.ICELAND) or posicao1 == (WORLD_TILES.ICELAND) or posicao2 == (WORLD_TILES.ICELAND) or posicao3 == (WORLD_TILES.ICELAND) or posicao4 == (WORLD_TILES.ICELAND) or
-	posicao == (WORLD_TILES.SNOWLAND) or posicao1 == (WORLD_TILES.SNOWLAND) or posicao2 == (WORLD_TILES.SNOWLAND) or posicao3 == (WORLD_TILES.SNOWLAND) or posicao4 == (WORLD_TILES.SNOWLAND) then
-	ambient_temperature = -20
-	end
-	end
-]]
+
     ------------------------------------------frost------------------------------------------------------------	
-    if self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("frost") then
+    if self.inst:IsInFrostisLandArea() then
         ambient_temperature = -20
-    elseif TheWorld.state.iswinter and TUNING.tropical.only_shipwrecked or
+    elseif TheWorld.state.iswinter and
         TheWorld.state.iswinter and self.inst and self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("shipwrecked") or
         TheWorld.state.iswinter and self.inst and self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("hamlet")
     then
@@ -87,11 +71,10 @@ local function OnUpdate(self, dt, applyhealthdelta)
         end
     end
     ---------------------------------------frio no verão ------------------------------	
-    if TheWorld.state.issummer and TUNING.tropical.only_hamlet or
-        TheWorld.state.issummer and self.inst and self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("hamlet") then
+    if TheWorld.state.issummer and self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("hamlet") then
         ambient_temperature = TheWorld.state.temperature - 30
     end
-    if TheWorld.state.issummer and TUNING.tropical.only_shipwrecked or
+    if TheWorld.state.issummer and
         TheWorld.state.issummer and self.inst and self.inst.components.areaaware and self.inst.components.areaaware:CurrentlyInTag("shipwrecked") then
         ambient_temperature = TheWorld.state.temperature - 10
     end

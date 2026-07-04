@@ -34,6 +34,7 @@ end
 
 local function OnGetItemFromPlayer(inst, giver, item)
     local vm = TheWorld.components.volcanomanager
+    if not vm then return end
     local appeasesegs = item.components.appeasement.appeasementvalue
     vm:Appease(appeasesegs)
 
@@ -86,7 +87,8 @@ end
 
 local function SetIsOpen(inst)
     local vm = TheWorld.components.volcanomanager
-    if not inst:FullAppeased()
+    if vm
+        and not inst:FullAppeased()
         and TheWorld.state.issummer
         and not vm:IsFireRaining()
     then

@@ -13,9 +13,9 @@ modimport "modmain/shipwrecked/prefabs/forest.lua"
 modimport "modmain/shipwrecked/prefabs/wobster.lua"
 modimport "modmain/shipwrecked/prefabs/watertree_pillar.lua"
 
-
-modimport "modmain/shipwrecked/hurricane.lua" --飓风
-
+if TUNING.tropical.hurricane then
+    modimport "modmain/shipwrecked/hurricane.lua" --飓风
+end
 
 ----------------------------------------------------------------------------------------------------
 
@@ -132,15 +132,6 @@ for _, data in ipairs({
         end)
     end
 end
-
-
-
-----------------------------------------------------------------------------------------------------
-AddPrefabPostInit("forest", function(inst)
-    if not TheWorld.ismastersim then return end
-
-    inst:AddComponent("parrotspawner")
-end)
 
 ----------------------------------------------------------------------------------------------------
 

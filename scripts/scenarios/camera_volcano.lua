@@ -9,6 +9,9 @@ local distToLerpOver = distToStart_SQ - distToFinish_SQ
 local percentFromPlayer = 1
 
 local function Update(inst)
+    if not TheWorld.components.volcanomanager then
+        return
+    end
     -- local closest = TheWorld.components.volcanomanager:GetClosestVolcano()
     -- if closest and closest == inst then
     --     local player = FindClosestPlayerToInst(inst, distToStart)

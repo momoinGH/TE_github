@@ -81,10 +81,14 @@ local function fn()
 	inst:SetStateGraph("SGvolcano")
 
 	inst.OnLoadPostPass = function(inst, ents, data)
-		TheWorld.components.volcanomanager:AddVolcano(inst)
+		if TheWorld.components.volcanomanager then
+			TheWorld.components.volcanomanager:AddVolcano(inst)
+		end
 	end
 	inst.OnRemoveEntity = function(inst)
-		TheWorld.components.volcanomanager:RemoveVolcano(inst)
+		if TheWorld.components.volcanomanager then
+			TheWorld.components.volcanomanager:RemoveVolcano(inst)
+		end
 	end
 
 	inst.OnEntityWake = OnWake

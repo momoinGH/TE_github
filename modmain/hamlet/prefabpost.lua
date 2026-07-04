@@ -1,7 +1,3 @@
-if TUNING.tropical.only_hamlet then
-    modimport "modmain/hamlet/sim_ham" --ham cloud
-end
-
 modimport "modmain/common/poisonable"
 modimport "modmain/hamlet/oinc.lua"       --呼噜币换算
 modimport "modmain/hamlet/farm_guard.lua" --采摘农场的东西会被打

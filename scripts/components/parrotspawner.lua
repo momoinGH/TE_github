@@ -107,139 +107,26 @@ return Class(function(self, inst)
             end
         end
 
-        ---------------------------------------------adiciona erupção -------------------------------------------------------------
-        if TUNING.tropical.volcaniceruption ~= 5 then
-            if not vulcaonojogo then
-                for k, v in pairs(Ents) do
-                    if v:HasTag("theVolcano") then vulcaonojogo = v end
-                    if not vulcaonojogo then vulcaonojogo = 10 end
-                    --print(vulcaonojogo)
-                end
-            end
-
-            local vx, vy, vz = player.Transform:GetWorldPosition()
-            if TheWorld.state.issummer and math.fmod(TheWorld.state.remainingdaysinseason, 3) ~= 0 and diadoterremoto ~= 0 then
-                diadoterremoto = 0
-            end
-            if (TheWorld.state.issummer and math.fmod(TheWorld.state.remainingdaysinseason, 3) == 0 and TheWorld.state.seasonprogress > 0.1 and (player.components.areaaware:CurrentlyInTag("shipwrecked") or TheWorld.Map:IsOceanTileAtPoint(vx, vy, vz))) or
-                (TheWorld.state.issummer and math.fmod(TheWorld.state.remainingdaysinseason, 3) == 0 and TheWorld.state.seasonprogress > 0.1 and (TUNING.tropical.volcaniceruption == 20)) then
-                --print(diadoterremoto)
-
-                diadoterremoto = diadoterremoto + 1
-                --------------------------------tremor um-------------------------------
-                if diadoterremoto == 50 then
-                    ShakeAllCameras(CAMERASHAKE.FULL, 8, .04, .8, player, 40)
-                    player.SoundEmitter:PlaySound("dontstarve/cave/earthquake", "earthquake")
-                    player:DoTaskInTime(7, function(inst)
-                        inst.SoundEmitter:KillSound("earthquake")
-                        player.components.talker:Say(STRINGS.CHARACTERS.GENERIC.ANNOUNCE_QUAKE)
-                    end)
-                end
-                --------------------------------tremor dois-------------------------------
-                if diadoterremoto == 150 then
-                    ShakeAllCameras(CAMERASHAKE.FULL, 12, .04, .8, player, 40)
-                    player.SoundEmitter:PlaySound("dontstarve/cave/earthquake", "earthquake")
-                    player:DoTaskInTime(10, function(inst)
-                        inst.SoundEmitter:KillSound("earthquake")
-                        player.components.talker:Say(STRINGS.CHARACTERS.GENERIC.ANNOUNCE_QUAKE)
-                    end)
-                end
-                --------------------------------tremor três-------------------------------
-                if diadoterremoto == 200 then
-                    ShakeAllCameras(CAMERASHAKE.FULL, 18, .04, .8, player, 40)
-                    player.SoundEmitter:PlaySound("dontstarve/cave/earthquake", "earthquake")
-                    player:DoTaskInTime(15, function(inst)
-                        inst.SoundEmitter:KillSound("earthquake")
-                        player.components.talker:Say(STRINGS.CHARACTERS.GENERIC.ANNOUNCE_VOLCANO_ERUPT)
-                    end)
-                end
-                -------------------------------chuva de fogo-----------------
-                if (diadoterremoto > 200 and diadoterremoto < (600 - (TheWorld.state.remainingdaysinseason * 20)) and player.components.areaaware and player.components.areaaware:CurrentlyInTag("shipwrecked") or diadoterremoto > 200 and diadoterremoto < (600 - (TheWorld.state.remainingdaysinseason * 20)) and TheWorld.Map:IsOceanTileAtPoint(vx, vy, vz)) or
-                    diadoterremoto > 200 and diadoterremoto < (600 - (TheWorld.state.remainingdaysinseason * 20)) and TUNING.tropical.volcaniceruption == 20 then
-                    --if not cinzas then
-                    player:AddTag("cinzas")
-                    --cinzas = SpawnPrefab("ashfx")
-                    --cinzas.entity:SetParent(player.entity )
-                    --cinzas.particles_per_tick = 6
-                    --end
-
-                    contadordovulcao = contadordovulcao + 1
-                    if contadordovulcao > TheWorld.state.remainingdaysinseason then
-                        if vulcaonojogo and vulcaonojogo ~= 10 and not vulcaonojogo.sg:HasStateTag("atacando") then
-                            vulcaonojogo.sg:GoToState("erupt")
-                        end
-                        --print(vulcaonojogo)
-                        contadordovulcao = 0
-                        local chuvadefogo
-
-                        local casa = GetClosestInstWithTag("interior_center", player, 30)
-                        if not casa then
-                            if math.random() <= 0.25 then
-                                chuvadefogo = SpawnPrefab("dragoonegg_falling")
-                            else
-                                chuvadefogo = SpawnPrefab("firerain")
-                            end
-                            chuvadefogo.Transform:SetPosition(vx + math.random(-15, 15), 0, vz + math.random(-15, 15))
-                            chuvadefogo:StartStep()
-                        end
-                    end
-                else
-                    --if cinzas then
-                    player:RemoveTag("cinzas")
-                    --cinzas:Remove()
-                    --cinzas = nil
-                    --end
-                end
-            end
-        end
         ----------------------------adiciona hail----------------------------------------
-        if (TUNING.tropical.hail and TUNING.tropical.hamworld ~= 5) then
-            if player.components.areaaware and player.components.areaaware:CurrentlyInTag("shipwrecked") then
-                if TheWorld.components.worldstate.data.israining and TheWorld.state.isspring and math.random() < 0.07 then
-                    tempodohail = tempodohail - 3
-                end
-
-                if TheWorld.components.worldstate.data.issnowing and TheWorld.state.iswinter and math.random() < 0.03 then
-                    tempodohail = tempodohail - 3
-                end
-
-                if tempodohail <= 0 then
-                    local a, b, c = player.Transform:GetWorldPosition()
-                    local casa = GetClosestInstWithTag("interior_center", player, 30)
-                    if not casa then
-                        local hail = SpawnPrefab("hail_ice")
-                        hail.Transform:SetPosition(a + math.random(-15, 15), 35, c + math.random(-15, 15))
-                    end
-                    tempodohail = 4
-                end
-            end
-        end
-
-        ---------------------------------------------ventania -------------------------------------------------------------
-        -- TODO 删掉这里的飓风生成，使用tro_hurricane来执行
-        -- if TUNING.tropical.wind ~= 5 then
-        --     if posicao == WORLD_TILES.OCEAN_COASTAL or posicao == WORLD_TILES.OCEAN_WATERLOG or posicao == WORLD_TILES.OCEAN_COASTAL_SHORE or posicao == WORLD_TILES.OCEAN_SWELL or posicao == WORLD_TILES.OCEAN_ROUGH or posicao == WORLD_TILES.OCEAN_BRINEPOOL or posicao == WORLD_TILES.OCEAN_BRINEPOOL_SHORE or posicao == WORLD_TILES.OCEAN_HAZARDOUS or player.components.areaaware and player.components.areaaware:CurrentlyInTag("shipwrecked") or player.components.areaaware and player.components.areaaware:CurrentlyInTag("hamlet") or TUNING.tropical.wind == 20 then
-        --         --print("shipwrecked")
-        --         if TheWorld.components.worldstate.data.israining and TheWorld.state.isautumn and math.random() < 0.07 then
-        --             tempodovento = tempodovento - 1
+        -- 冰雹
+        -- if (TUNING.tropical.hurricane and TUNING.tropical.hamworld ~= 5) then
+        --     if player.components.areaaware and player.components.areaaware:CurrentlyInTag("shipwrecked") then
+        --         if TheWorld.components.worldstate.data.israining and TheWorld.state.isspring and math.random() < 0.07 then
+        --             tempodohail = tempodohail - 3
         --         end
 
-        --         if TheWorld.components.worldstate.data.issnowing and TheWorld.state.iswinter and math.random() < 0.13 then
-        --             tempodovento = tempodovento - 1
+        --         if TheWorld.components.worldstate.data.issnowing and TheWorld.state.iswinter and math.random() < 0.03 then
+        --             tempodohail = tempodohail - 3
         --         end
 
-        --         if TheWorld.components.worldstate.data.israining and TheWorld.state.issummer and math.random() < 0.02 then
-        --             tempodovento = tempodovento - 1
-        --         end
-
-        --         if tempodovento <= 0 then
+        --         if tempodohail <= 0 then
         --             local a, b, c = player.Transform:GetWorldPosition()
         --             local casa = GetClosestInstWithTag("interior_center", player, 30)
         --             if not casa then
-        --                 local vento = SpawnPrefab("ventania")
-        --                 vento.Transform:SetPosition(a, b, c)
+        --                 local hail = SpawnPrefab("hail_ice")
+        --                 hail.Transform:SetPosition(a + math.random(-15, 15), 35, c + math.random(-15, 15))
         --             end
-        --             tempodovento = 4
+        --             tempodohail = 4
         --         end
         --     end
         -- end
@@ -294,16 +181,7 @@ return Class(function(self, inst)
     local function PickBird(spawnpoint)
         local tile = _map:GetTileAtPoint(spawnpoint:Get())
         local bird = GetRandomItem(BIRD_TYPES[tile]) -- or "flood"
-        --    if bird == "crow" then
-        --        local x, y, z = spawnpoint:Get()
-        --        local canarylure = TheSim:FindEntities(x, y, z, TUNING.BIRD_CANARY_LURE_DISTANCE, { "scarecrow" })
-        --        if #canarylure ~= 0 then
-        --            bird = "canary"
-        --        end
-        --    end
-
-        return
-            bird --_worldstate.iswinter and bird == "wave_shimmer" and "wave_shimmer_med" or _worldstate.issummer and bird == "wave_shimmer" and "wave_shimmer_deep" or bird
+        return bird
     end
 
     local function AutoRemoveTarget(inst, target)
@@ -425,88 +303,74 @@ return Class(function(self, inst)
     function self:SpawnBird(spawnpoint, player)
         local prefab = PickBird(spawnpoint)
         ----------------------------flood--------------------------------------
-        if TUNING.tropical.springflood ~= 5 then
-            if (TheWorld.state.isspring and TheWorld.state.iswet and TheWorld.state.israining and math.random() > 0.80 and player and player.components.areaaware and player.components.areaaware:CurrentlyInTag("shipwrecked")) or
-                (TheWorld.state.isspring and TheWorld.state.iswet and TheWorld.state.israining and math.random() > 0.80 and player and TUNING.tropical.springflood == 20) then
-                if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x, spawnpoint.y, spawnpoint.z) then return end
-                if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x, spawnpoint.y, spawnpoint.z + 6) then return end
-                if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x, spawnpoint.y, spawnpoint.z - 6) then return end
-                if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x + 6, spawnpoint.y, spawnpoint.z) then return end
-                if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x - 6, spawnpoint.y, spawnpoint.z) then return end
-                if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x + 6, spawnpoint.y, spawnpoint.z + 6) then return end
-                if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x + 6, spawnpoint.y, spawnpoint.z - 6) then return end
-                if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x - 6, spawnpoint.y, spawnpoint.z - 6) then return end
-                if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x + 6, spawnpoint.y, spawnpoint.z + 6) then return end
-                local casa = GetClosestInstWithTag("interior_center", player, 30)
-                if casa then return end
+        if (TheWorld.state.isspring and TheWorld.state.iswet and TheWorld.state.israining and math.random() > 0.80 and player and player.components.areaaware and player.components.areaaware:CurrentlyInTag("shipwrecked")) or
+            (TheWorld.state.isspring and TheWorld.state.iswet and TheWorld.state.israining and math.random() > 0.80 and player) then
+            if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x, spawnpoint.y, spawnpoint.z) then return end
+            if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x, spawnpoint.y, spawnpoint.z + 6) then return end
+            if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x, spawnpoint.y, spawnpoint.z - 6) then return end
+            if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x + 6, spawnpoint.y, spawnpoint.z) then return end
+            if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x - 6, spawnpoint.y, spawnpoint.z) then return end
+            if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x + 6, spawnpoint.y, spawnpoint.z + 6) then return end
+            if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x + 6, spawnpoint.y, spawnpoint.z - 6) then return end
+            if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x - 6, spawnpoint.y, spawnpoint.z - 6) then return end
+            if TheWorld.Map:IsOceanTileAtPoint(spawnpoint.x + 6, spawnpoint.y, spawnpoint.z + 6) then return end
+            local casa = GetClosestInstWithTag("interior_center", player, 30)
+            if casa then return end
 
-                local sandbags = TheSim:FindEntities(spawnpoint.x, spawnpoint.y, spawnpoint.z, 10, { "removealagamento" })
-                if #sandbags > 3 then return end
-                local bird = SpawnPrefab("shipwrecked_flood")
-                bird.Transform:SetPosition(spawnpoint:Get())
-                local outraperto = GetClosestInstWithTag("marepracolocar", bird, 13)
-                if outraperto then
-                    bird:Remove()
-                    return
-                end
-                return
-            end
-        end
-        ----------------------------------------------------------------------------
-
-
-
-        if TUNING.tropical.waves == false then return end
-
-        if prefab == "wave_ripple" then
-            if TheWorld.state.issummer and math.random() > 0.10 or TheWorld.state.moonphase == "new" and math.random() > 0.10 then return end
-
-            if TheWorld.state.moonphase == "full" and math.random() < 0.3 then
-                prefab = "rogue_wave"
-            end
-
-            if TheWorld.state.iswinter and math.random() < (TheWorld.state.seasonprogress + 0.2) then
-                prefab = "rogue_wave"
-            end
-
-            local bird = SpawnPrefab(prefab)
+            local sandbags = TheSim:FindEntities(spawnpoint.x, spawnpoint.y, spawnpoint.z, 10, { "removealagamento" })
+            if #sandbags > 3 then return end
+            local bird = SpawnPrefab("shipwrecked_flood")
             bird.Transform:SetPosition(spawnpoint:Get())
-            local plataforma = GetClosestInstWithTag("walkableplatform", bird, 8)
-            if plataforma then
+            local outraperto = GetClosestInstWithTag("marepracolocar", bird, 13)
+            if outraperto then
                 bird:Remove()
                 return
             end
-
-
-
-            if TheWorld.state.isday then
-                bird.Transform:SetRotation(90)
-                if prefab == "rogue_wave" then
-                    bird.Physics:SetMotorVel(6, 0, 6)
-                else
-                    bird.Physics:SetMotorVel(2, 0, 2)
-                end
-            else
-                bird.Transform:SetRotation(-90)
-                if prefab == "rogue_wave" then
-                    bird.Physics:SetMotorVel(6, 0, 6)
-                else
-                    bird.Physics:SetMotorVel(2, 0, 2)
-                end
-            end
-            return bird
+            return
         end
+        ----------------------------------------------------------------------------
+
+        -- 海浪
+        -- if TUNING.tropical.waves then
+        --     if prefab == "wave_ripple" then
+        --         if TheWorld.state.issummer and math.random() > 0.10 or TheWorld.state.moonphase == "new" and math.random() > 0.10 then return end
+
+        --         if TheWorld.state.moonphase == "full" and math.random() < 0.3 then
+        --             prefab = "rogue_wave"
+        --         end
+
+        --         if TheWorld.state.iswinter and math.random() < (TheWorld.state.seasonprogress + 0.2) then
+        --             prefab = "rogue_wave"
+        --         end
+
+        --         local bird = SpawnPrefab(prefab)
+        --         bird.Transform:SetPosition(spawnpoint:Get())
+        --         local plataforma = GetClosestInstWithTag("walkableplatform", bird, 8)
+        --         if plataforma then
+        --             bird:Remove()
+        --             return
+        --         end
 
 
-        return
-        --[[	
-local bird = SpawnPrefab("wave_ripple")
-bird.Transform:SetPosition(spawnpoint:Get())
-local plataforma = GetClosestInstWithTag("walkableplatform", bird, 8)
-if plataforma then bird:Remove() return end
 
-    return bird
-]]
+        --         if TheWorld.state.isday then
+        --             bird.Transform:SetRotation(90)
+        --             if prefab == "rogue_wave" then
+        --                 bird.Physics:SetMotorVel(6, 0, 6)
+        --             else
+        --                 bird.Physics:SetMotorVel(2, 0, 2)
+        --             end
+        --         else
+        --             bird.Transform:SetRotation(-90)
+        --             if prefab == "rogue_wave" then
+        --                 bird.Physics:SetMotorVel(6, 0, 6)
+        --             else
+        --                 bird.Physics:SetMotorVel(2, 0, 2)
+        --             end
+        --         end
+        --         return bird
+        --     end
+        -- end
     end
 
     function self.StartTrackingFn(target)

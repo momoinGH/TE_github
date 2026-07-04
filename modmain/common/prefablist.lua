@@ -19,7 +19,3 @@ PrefabFiles = {
     "wave_shimmer_hurricane",   --水里的小波纹
     "wilbur_poop",              --威尔伯的粑粑投射物
 }
-
-if TUNING.tropical.tropicalshards ~= 0 then
-    table.insert(PrefabFiles, "porkland_sw_entrance") --去各种世界的传送门
-end

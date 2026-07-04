@@ -1,4 +1,6 @@
-table.insert(Assets, Asset("IMAGE", "images/fog_cloud.tex")) --云海
+--哈姆雷特云海
+
+table.insert(Assets, Asset("IMAGE", "images/fog_cloud.tex"))
 
 local function HamletcloudPostInit()
     local World = TheWorld

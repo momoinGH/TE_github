@@ -66,7 +66,7 @@ TroAddRecipe("porto_shadowboat", { Ig("papyrus", 3), Ig("nightmarefuel", 4), Ig(
 TroAddRecipe("corkboatitem", { Ig("rope", 1), Ig("cork", 4) }, TECH.NONE, nil, { "NAUTICAL" })
 TroAddRecipe("surfboard_item", { Ig("boards", 1), Ig("seashell", 1) }, TECH.NONE, { builder_tag = "walani" }, { "CHARACTER" })
 
-if TUNING.tropical.only_shipwrecked or GetModConfigData("raftlog") then
+if GetModConfigData("raftlog") then
     TroAddRecipe("porto_lograft_old", { Ig("log", 6), Ig("cutgrass", 4) }, TECH.NONE, nil, { "NAUTICAL" })
     TroAddRecipe("porto_raft_old", { Ig("bamboo", 4), Ig("vine", 3) }, TECH.NONE, nil, { "NAUTICAL" })
 else

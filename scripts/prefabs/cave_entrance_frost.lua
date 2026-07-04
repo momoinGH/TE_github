@@ -44,11 +44,6 @@ local function fn2()
     inst.components.worldmigrator.id = 558
     inst.components.worldmigrator.receivedPortal = 557
 
-    if TUNING.tropical.tropicalshards == 5 or TUNING.tropical.tropicalshards == 10 or TUNING.tropical.tropicalshards == 20 or TUNING.tropical.tropicalshards == 30 then
-        inst.components.worldmigrator.auto = false
-        inst.components.worldmigrator.linkedWorld = "2"
-    end
-
     return inst
 end
 

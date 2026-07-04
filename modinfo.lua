@@ -99,6 +99,7 @@ local function options_enable()
 end
 
 local hamlet_atlas = "images/scrapbook_tropical/scrapbook_hamlet.xml"
+local shipwrecked_atlas = "images/scrapbook_tropical/scrapbook_shipwrecked.xml"
 
 local LEVELCATEGORY = {
     SETTINGS = "SETTINGS", --世界规则里显示
@@ -257,6 +258,69 @@ configuration_options =
             group = tro_modules.shipwrecked,
             world = { "forest" },
         }
+    },
+    {
+        name = "volcaniceruption",
+        label = "火山爆发",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.SETTINGS },
+            group = tro_modules.shipwrecked,
+            world = { "forest" },
+            atlas = shipwrecked_atlas,
+            image = "volcano.tex",
+        },
+    },
+    {
+        name = "twister",
+        label = "豹卷风生成",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.SETTINGS },
+            group = tro_modules.shipwrecked,
+            world = { "forest" },
+            atlas = shipwrecked_atlas,
+            image = "twister.tex",
+        },
+    },
+    {
+        name = "hurricane",
+        label = "飓风和冰雹生成",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.SETTINGS },
+            group = tro_modules.shipwrecked,
+            world = { "forest" },
+        },
+    },
+    {
+        name = "springflood",
+        label = "洪水生成",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.SETTINGS },
+            group = tro_modules.shipwrecked,
+            world = { "forest" },
+            atlas = shipwrecked_atlas,
+            image = "floods.tex",
+        },
+    },
+    {
+        name = "waves",
+        label = "海浪生成",
+        options = options_enable(),
+        default = 1,
+        world_gen = {
+            category = { LEVELCATEGORY.SETTINGS },
+            group = tro_modules.shipwrecked,
+            world = { "forest" },
+            atlas = shipwrecked_atlas,
+            image = "waves.tex",
+        },
     },
     title(en_zh_zht("<shipwrecked_plus>", "<海难Plus>", "<海难Plus>"), tro_modules.shipwrecked),
     {

@@ -58,11 +58,6 @@ local function fn_ham1(Sim)
     inst.components.worldmigrator.id = 1272
     inst.components.worldmigrator.receivedPortal = 1271
 
-    if TUNING.tropical.tropicalshards == 5 or TUNING.tropical.tropicalshards == 10 or TUNING.tropical.tropicalshards == 20 or TUNING.tropical.tropicalshards == 30 then
-        inst.components.worldmigrator.auto = false
-        inst.components.worldmigrator.linkedWorld = "2"
-    end
-
     return inst
 end
 
@@ -106,11 +101,6 @@ local function fn_ham2(Sim)
     inst.components.worldmigrator.id = 1372
     inst.components.worldmigrator.receivedPortal = 1371
 
-    if TUNING.tropical.tropicalshards == 5 or TUNING.tropical.tropicalshards == 10 or TUNING.tropical.tropicalshards == 20 or TUNING.tropical.tropicalshards == 30 then
-        inst.components.worldmigrator.auto = false
-        inst.components.worldmigrator.linkedWorld = "2"
-    end
-
     return inst
 end
 
@@ -153,11 +143,6 @@ local function fn_ham3(Sim)
     inst:AddComponent("worldmigrator")
     inst.components.worldmigrator.id = 1472
     inst.components.worldmigrator.receivedPortal = 1471
-
-    if TUNING.tropical.tropicalshards == 5 or TUNING.tropical.tropicalshards == 10 or TUNING.tropical.tropicalshards == 20 or TUNING.tropical.tropicalshards == 30 then
-        inst.components.worldmigrator.auto = false
-        inst.components.worldmigrator.linkedWorld = "2"
-    end
 
     return inst
 end
