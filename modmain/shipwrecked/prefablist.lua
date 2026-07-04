@@ -78,7 +78,6 @@ PrefabFiles = {
     "buriedtreasure",        --宝藏标记
     "windtrail",             --刮风特效
     "windswirl",             --刮风特效
-    "ventania",              --刮风预制件，TODO 优化下代码
     "quackenbeak",           --海妖之喙
     "quackendrill",          --海妖钻子
     "quackering_wave",       --划船的波浪

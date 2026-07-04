@@ -7,54 +7,9 @@ table.insert(Assets, Asset("ANIM", "anim/sapling_blown.zip"))
 AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then return end
 
-    inst:AddComponent("tro_hurricane")     --海难飓风季
-    inst:AddComponent("tro_hailmanager")   --冰雹
+    inst:AddComponent("tro_hurricane")   --海难飓风季
+    inst:AddComponent("tro_hailmanager") --冰雹
 end)
-----------------------------------------------------------------------------------------------------
--- 地面刮风特效的生成
-AddComponentPostInit("worldwind", function(self)
-    self.windfx_spawn_rate = 0
-    self.windfx_spawn_pre_sec = 16
-
-    Hooks.FnDecorator(self, "OnUpdate", nil, function(retTab, self, dt)
-        local sm = TheWorld.components.tro_hurricane
-        local windspeed = sm and sm:GetHurricaneWindSpeed() or 0
-        if windspeed > 0.01 and sm:IsHurricaneStorm() then
-            self.windfx_spawn_rate = self.windfx_spawn_rate + self.windfx_spawn_pre_sec * dt
-            if self.windfx_spawn_rate > 1.0 then
-                local spawn_pos = {}
-                for _, v in ipairs(AllPlayers) do
-                    local px, py, pz = v.Transform:GetWorldPosition()
-                    local can_spawn = true
-                    for _, pos in ipairs(spawn_pos) do
-                        if distsq(pos.x, pos.z, px, pz) < 256 then
-                            can_spawn = false --玩家挤在一起的时候只生成一个
-                            break
-                        end
-                    end
-                    if can_spawn then
-                        local dx, dz = 16 * UnitRand(), 16 * UnitRand()
-                        local x, y, z = px + dx, py, pz + dz
-                        local angle = self:GetWindAngle()
-                        self:SpawnWindSwirl(x, y, z, windspeed, angle)
-                        table.insert(spawn_pos, { x = x, y = y, z = z })
-                    end
-                end
-
-                self.windfx_spawn_rate = self.windfx_spawn_rate - 1.0
-            end
-        end
-    end)
-
-    function self:SpawnWindSwirl(x, y, z, speed, angle)
-        local swirl = SpawnPrefab("windswirl")
-        swirl.Transform:SetPosition(x, y, z)
-        swirl.Transform:SetRotation(angle + 180)
-        swirl.AnimState:SetMultColour(1, 1, 1, math.clamp(speed, 0.0, 1.0))
-        --swirl.Physics:SetMotorVel(speed, 0, 0)
-    end
-end)
-
 
 ----------------------------------------------------------------------------------------------------
 local function ongustpick(inst)

@@ -187,8 +187,10 @@ local states =
         tags = { "attack", "busy", "vacuo" },
 
         onenter = function(inst)
-            local vento = SpawnPrefab("ventania")
-            vento.Transform:SetPosition(inst:GetPosition():Get())
+            if TheWorld.components.tro_hurricane then
+                TheWorld.components.tro_hurricane:StartHurricaneStorm(6,inst)
+            end
+
             TheMixer:PushMix("twister")
             inst.SoundEmitter:SetParameter("wind_loop", "intensity", 1)
             if inst.components.locomotor then
@@ -209,7 +211,9 @@ local states =
         tags = { "attack", "busy", "vacuo" },
 
         onenter = function(inst)
-            local vento = SpawnPrefab("ventania")
+            if TheWorld.components.tro_hurricane then
+                TheWorld.components.tro_hurricane:StartHurricaneStorm(6,inst)
+            end
             if inst.components.locomotor then
                 inst.components.locomotor:StopMoving()
             end
@@ -252,7 +256,9 @@ local states =
         tags = { "attack", "busy", "vacuo" },
 
         onenter = function(inst)
-            local vento = SpawnPrefab("ventania")
+            if TheWorld.components.tro_hurricane then
+                TheWorld.components.tro_hurricane:StartHurricaneStorm(6,inst)
+            end
             if inst.components.locomotor then
                 inst.components.locomotor:StopMoving()
             end
@@ -291,7 +297,9 @@ local states =
         tags = { "attack", "busy", "vacuo" },
 
         onenter = function(inst)
-            local vento = SpawnPrefab("ventania")
+            if TheWorld.components.tro_hurricane then
+                TheWorld.components.tro_hurricane:StartHurricaneStorm(6,inst)
+            end
             TheMixer:PopMix("twister")
 
             inst.SoundEmitter:SetParameter("wind_loop", "intensity", 0)

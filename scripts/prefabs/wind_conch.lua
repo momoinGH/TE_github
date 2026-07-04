@@ -9,18 +9,16 @@ local function onfinished(inst)
 end
 
 local function OnPlayed(inst, musician)
-    if musician then
-        local a, b, c = musician.Transform:GetWorldPosition()
-        local casa = GetClosestInstWithTag("interior_center", musician, 30)
-        if not casa then
-            local vento = SpawnPrefab("ventania")
-            vento.Transform:SetPosition(a, b, c)
+    if musician and not musician:TroGetRoomCenter() then
+        if TheWorld.components.tro_hurricane then
+            TheWorld.components.tro_hurricane:StartHurricaneStorm(6, musician)
         end
     end
 end
 
-local function fn(Sim)
+local function fn()
     local inst = CreateEntity()
+
     inst.entity:AddNetwork()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()

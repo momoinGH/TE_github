@@ -40,6 +40,8 @@ tuning、prefablist、assets、containers、ui、prefabpost、sg、recipes、coo
 debug文件定义了很多c_xxx函数，用于控制台调试
 默认开启了右键地图传送功能，可通过c_setmaprightteleport(false)关闭
 
+
+有些方法不得不覆盖写法，这类覆盖的地方加上"#NeedUpdate"注释，方便日后更新时搜索
 ]]
 
 
@@ -80,7 +82,7 @@ modimport "modmain/mainfunctions.lua"
 
 
 
-modimport "modmain/postinit"              --TODO 拆分一下
+modimport "modmain/postinit" --TODO 拆分一下
 
 -- 文本
 local language = string.lower(GetModConfigData("language"))

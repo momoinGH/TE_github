@@ -9,7 +9,6 @@ modimport "modmain/common/entityscript"
 
 modimport "modmain/common/components/locomotor"
 modimport "modmain/common/components/birdspawner"
-modimport "modmain/common/components/temperature"
 modimport "modmain/common/components/walkableplatformplayer"
 modimport "modmain/common/components/map"        --theworld.map相关
 modimport "modmain/common/components/deployable" -- 让某些地形不能部署、建造、种东西

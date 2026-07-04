@@ -1149,7 +1149,8 @@ function MakeWaterObstaclePhysics(inst, rad, height, restitution) end
 function MakeSnowCovered(inst) end
 
 function MakeHauntableLaunchAndIgnite(inst, launchchance, ignitechance, speed, cooldown, launch_haunt_value,
-                                      ignite_haunt_value) end
+                                      ignite_haunt_value)
+end
 
 function MakeHauntableIgnite(inst, chance, cooldown, haunt_value) end
 
@@ -1337,7 +1338,8 @@ function RemoveByValue(t, value) end
 Node = Class(function(self, id, data) end)
 
 function PopulateWorld_AddEntity(prefab, tile_x, tile_y, tile_value, entitiesOut, width, height, prefab_list, prefab_data,
-                                 rand_offset) end
+                                 rand_offset)
+end
 
 function AddTask(name, data) end
 
@@ -1387,7 +1389,7 @@ Task = Class(function(self, id, data)
     self.required_prefabs = data.required_prefabs
     self.hub_room = data.hub_room
     self.level_set_piece_blocker = data
-    .level_set_piece_blocker                                    -- prevents the task from getting any of the random_set_pieces and required_setpieces defined in the level
+        .level_set_piece_blocker -- prevents the task from getting any of the random_set_pieces and required_setpieces defined in the level
 end)
 
 local room = {
@@ -1448,7 +1450,8 @@ function RemovePhysicsColliders(inst) end
 modinfo = {}
 
 function MakeHauntableLaunchAndPerish(inst, launchchance, perishchance, speed, perishpct, cooldown, launch_haunt_value,
-                                      perish_haunt_value) end
+                                      perish_haunt_value)
+end
 
 function GetInventoryItemAtlas_Internal(imagename, no_fallback) end
 
@@ -1487,3 +1490,4 @@ end)
 Point = Vector3
 
 ----------------------------------------------------------------------------------------------------
+function GetTemperatureAtXZ(x, z) end
