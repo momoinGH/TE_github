@@ -199,7 +199,7 @@ configuration_options =
         },
         default = 1,
         world_gen = {
-            category = { LEVELCATEGORY.WORLDGEN },
+            category = { LEVELCATEGORY.SETTINGS },
             group = tro_modules.common,
             world = { "forest" },
         }
@@ -373,7 +373,7 @@ configuration_options =
             image = "waves.tex",
         },
     },
-    title(en_zh_zht("<shipwrecked_plus>", "<海难Plus>", "<海难Plus>"), tro_modules.shipwrecked),
+    title(en_zh_zht("<shipwrecked_plus>", "<海难Plus>", "<海难Plus>"), tro_modules.shipwrecked_plus),
     {
         name = "shipwrecked_plus",
         label = en_zh_zht("Shipwrecked Plus", "海难PLUS内容", "船難PLUS內容"),
