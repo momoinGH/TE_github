@@ -197,7 +197,7 @@ local function fn()
     inst:AddTag("wall")
     inst:AddTag("noauradamage")
     inst:AddTag("nointerpolate")
-    inst:AddTag("removealagamento")
+    inst:AddTag("sandbag")
 
     inst.AnimState:SetBank("sandbag_small")
     inst.AnimState:SetBuild("sandbag_small")

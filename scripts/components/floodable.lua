@@ -8,7 +8,7 @@ end
 
 local function Init(inst, self)
     if not inst:HasTag("flooded") then
-        if FindEntity(inst, 10, nil, { "mare" }) then
+        if FindEntity(inst, 10, nil, { "sw_flood" }) then
             self:StartFlooded()
         end
     end

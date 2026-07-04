@@ -306,6 +306,7 @@ PrefabFiles = {
     "vine",                  --藤蔓
 
 
-    "hail_sw",  --冰雹
-    "haildrop", --冰雹特效
+    "hail_sw",        --冰雹
+    "haildrop",       --冰雹特效
+    "sedimentpuddle", --积水特效
 }

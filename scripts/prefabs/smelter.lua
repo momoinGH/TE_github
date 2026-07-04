@@ -87,7 +87,7 @@ local function playJoggleAnim(inst)
 end
 
 local function onopen(inst)
-    local alagado = GetClosestInstWithTag("mare", inst, 10)
+    local alagado = GetClosestInstWithTag("sw_flood", inst, 10)
     if alagado then
         local fx = SpawnPrefab("shock_machines_fx")
         if fx then

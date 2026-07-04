@@ -77,23 +77,28 @@ function EntityScript:IsInVolcanoArea()
     return TheWorld.Map:IsVolcanoAreaAtPoint(self.Transform:GetWorldPosition())
 end
 
--- TODO 等待给地形加个tag，现在用地皮判断
 -- 水下区域
 function EntityScript:IsInUnderWaterArea()
-    local tile_id = TheWorld.Map:GetTileAtPoint(self.Transform:GetWorldPosition())
-    return tile_id == WORLD_TILES.UNDERWATER_SANDY or tile_id == WORLD_TILES.UNDERWATER_ROCKY
+    if self.components.areaaware then
+        return self.components.areaaware:CurrentlyInTag("underwater") and true or false
+    end
+    return TheWorld.Map:IsUnderWaterAreaAtPoint(self.Transform:GetWorldPosition())
 end
 
 -- 冰岛区域
 function EntityScript:IsInFrostisLandArea()
-    local tile_id = TheWorld.Map:GetTileAtPoint(self.Transform:GetWorldPosition())
-    return tile_id == WORLD_TILES.ICELAND or tile_id == WORLD_TILES.SNOWLAND
+    if self.components.areaaware then
+        return self.components.areaaware:CurrentlyInTag("frost") and true or false
+    end
+    return TheWorld.Map:IsFrostisLandAreaAtPoint(self.Transform:GetWorldPosition())
 end
 
 -- 大风平原区域
 function EntityScript:IsInWindyArea()
-    local tile_id = TheWorld.Map:GetTileAtPoint(self.Transform:GetWorldPosition())
-    return tile_id == WORLD_TILES.WINDY
+    if self.components.areaaware then
+        return self.components.areaaware:CurrentlyInTag("windy") and true or false
+    end
+    return TheWorld.Map:IsWindyAreaAtPoint(self.Transform:GetWorldPosition())
 end
 
 function EntityScript:TroIsWorldOut()

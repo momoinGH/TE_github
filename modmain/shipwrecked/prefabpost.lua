@@ -16,6 +16,9 @@ modimport "modmain/shipwrecked/prefabs/watertree_pillar.lua"
 if TUNING.tropical.hurricane then
     modimport "modmain/shipwrecked/hurricane.lua" --飓风
 end
+if TUNING.tropical.springflood then
+    modimport "modmain/shipwrecked/flood.lua" --洪水
+end
 
 ----------------------------------------------------------------------------------------------------
 
@@ -84,7 +87,7 @@ local function InitFlood(inst, metal)
 end
 
 local function TestCanBuildBefore(self)
-    return { false, false }, GetClosestInstWithTag("mare", self.inst, 10) ~= nil
+    return { false, false }, GetClosestInstWithTag("sw_flood", self.inst, 10) ~= nil
 end
 
 for _, data in ipairs({

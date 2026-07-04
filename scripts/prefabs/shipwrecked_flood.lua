@@ -3,21 +3,25 @@ local assets =
     Asset("ANIM", "anim/flood.zip"),
 }
 
+local function Kill(inst)
+    inst.AnimState:PlayAnimation("sai")
+    inst:DoTaskInTime(2, inst.Remove)
+end
 
 local function QueueRemove(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local sandbags = TheSim:FindEntities(x, y, z, 10, { "removealagamento" })
-    if #sandbags > 3 then inst:Remove() end
+    local sandbags = TheSim:FindEntities(x, y, z, 10, { "sandbag" })
+    if #sandbags > 3 then Kill(inst) end
+
     if TheWorld.state.wetness < 1 then
-        inst.AnimState:PlayAnimation("sai")
-        inst:DoTaskInTime(2, function(inst) inst:Remove() end)
+        Kill(inst)
     end
 
+    -- 有概率生成毒蚊子
     if math.random() < 0.10 then
         local invader = GetClosestInstWithTag("player", inst, 25)
         local outrobicho = GetClosestInstWithTag("mosquito", inst, 20)
         if invader and not outrobicho then
-            local x, y, z = inst.Transform:GetWorldPosition()
             local bicho = SpawnPrefab("mosquito_poison")
             bicho.Transform:SetPosition(x, y, z)
         end
@@ -34,6 +38,10 @@ local function OnEntitySleep(inst)
 end
 
 local function Init(inst)
+    if TheWorld.components.sw_floodspawner then
+        TheWorld.components.sw_floodspawner:OnFloodSpawn()
+    end
+
     local x, y, z = inst.Transform:GetWorldPosition()
     for _, v in ipairs(TheSim:FindEntities(x, 0, z, 10, nil, { "flooded" })) do
         if v.components.floodable then
@@ -43,10 +51,14 @@ local function Init(inst)
 end
 
 local function OnRemove(inst)
+    if TheWorld.components.sw_floodspawner then
+        TheWorld.components.sw_floodspawner:OnFloodRemove()
+    end
+
     local x, y, z = inst.Transform:GetWorldPosition()
-    for _, v in ipairs(TheSim:FindEntities(x, 0, z, 10, nil, { "flooded" })) do
+    for _, v in ipairs(TheSim:FindEntities(x, 0, z, 10, { "flooded" })) do
         if v.components.floodable then
-            local flood = FindEntity(v, 10, nil, { "mare" })
+            local flood = FindEntity(v, 10, nil, { "sw_flood" })
             if not flood or flood ~= inst then
                 v.components.floodable:StopFlooded()
             end
@@ -56,25 +68,24 @@ end
 
 local function fn()
     local inst = CreateEntity()
-    --    inst.entity:AddMiniMapEntity()
-    inst.entity:AddNetwork()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
 
-    --    inst.MiniMapEntity:SetIcon("gold_puddle.png")
     inst.AnimState:SetBank("flood")
     inst.AnimState:SetBuild("flood")
     inst.AnimState:PlayAnimation("chega")
     inst.AnimState:PushAnimation("idle", true)
-    inst.Transform:SetScale(1.5, 1.5, 1.5)
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(1)
 
+    inst.Transform:SetScale(1.5, 1.5, 1.5)
+
     inst:AddTag("NOCLICK")
     inst:AddTag("NOBLOCK")
-    inst:AddTag("marepracolocar")
-    inst:AddTag("mare")
+    inst:AddTag("sw_flood")
 
     inst.entity:SetPristine()
 
@@ -84,7 +95,6 @@ local function fn()
 
     inst:DoTaskInTime(0, Init)
 
-    inst:AddTag("alagamentopraremovergrande")
     inst:AddComponent("ripplespawner")
     inst.components.ripplespawner.range = 8
     inst.components.ripplespawner:Start()

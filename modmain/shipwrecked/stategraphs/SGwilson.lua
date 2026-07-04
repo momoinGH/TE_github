@@ -1,3 +1,4 @@
+
 local actionhandlers = {
 
 }
@@ -60,7 +61,6 @@ end
 
 
 ----------------------------------------------------------------------------------------------------
-
 AddStategraphPostInit("wilson", function(sg)
     --望远镜
     Hooks.FnDecorator(sg.actionhandlers[ACTIONS.CASTSPELL], "deststate", function(inst)

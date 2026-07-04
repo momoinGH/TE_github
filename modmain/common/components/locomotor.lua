@@ -1,45 +1,43 @@
 local function UpdateGroundSpeedMultiplierAfter(retTab, self)
-    local x, y, z = self.inst.Transform:GetWorldPosition()
-    local oncreep = TheWorld.GroundCreep:OnCreep(x, y, z)
-
-    if oncreep and self.triggerscreep then return retTab end
-
-    -- 重新修改groundspeedmultiplier的值
-    local current_ground_tile = TheWorld.Map:GetTileAtPoint(x, 0, z)
-    local isCave = TheWorld:HasTag("cave")
-    if current_ground_tile == WORLD_TILES.UNDERWATER_SANDY or
-        current_ground_tile == WORLD_TILES.UNDERWATER_ROCKY or
-        (current_ground_tile == WORLD_TILES.BEACH and isCave) or
-        (current_ground_tile == WORLD_TILES.MAGMAFIELD and isCave) or
-        (current_ground_tile == WORLD_TILES.PAINTED and isCave) or
-        (current_ground_tile == WORLD_TILES.PIGRUINS and isCave) or
-        (current_ground_tile == WORLD_TILES.PEBBLEBEACH and isCave) then
-        if self.inst.prefab ~= "wurt" then
-            self.groundspeedmultiplier = 0.5
-        end
-        if self.inst:HasTag("nadador") then
-            self.groundspeedmultiplier = 0.8
+    -- 海底世界减速，这里只考虑玩家
+    if self.inst:HasTag("player")
+        and not self.inst:HasTag("playerghost")
+        and self.inst:IsInUnderWaterArea()
+        and self.inst.prefab ~= "wurt"      --沃特不减速
+    then
+        if self.inst:HasTag("nadador") then --穿了潜水衣
+            self.groundspeedmultiplier = math.min(0.8, self.groundspeedmultiplier)
+        else
+            self.groundspeedmultiplier = math.min(0.5, self.groundspeedmultiplier)
         end
     end
-    if current_ground_tile == WORLD_TILES.COBBLEROAD then -- 修改石板路的加速
-        self.groundspeedmultiplier = 1.3
-    end
+
     return retTab
 end
 
-local function ExternalSpeedMultiplierBefore(self)
-    ----------------------efeito dos ventos风效应----------------------------------
-    local wind_speed = 1
-    local vento = GetClosestInstWithTag("vento", self.inst, 10)
-    if vento then
-        local wind = vento.Transform:GetRotation() + 180
-        local windangle = self.inst.Transform:GetRotation() - wind
+AddComponentPostInit("locomotor", function(self)
+    Hooks.FnDecorator(self, "UpdateGroundSpeedMultiplier", nil, UpdateGroundSpeedMultiplierAfter)
+end)
+
+----------------------------------------------------------------------------------------------------
+-- 刷帧刷新倍率
+local function UpdateSpeedMult(inst)
+    if inst:HasTag("playerghost") then
+        inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "sw_wind")
+        inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "ondamarinha")
+        inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "sw_flood")
+        return
+    end
+
+    -- efeito dos ventos风效应
+    if TheWorld.components.tro_hurricane and TheWorld.components.tro_hurricane:IsHurricaneStorm() then
+        local windangle = TheWorld.components.tro_hurricane:GetWindAngle(inst)
         local windproofness = 1.0
         local velocidadedovento = 1.5
 
-        if self.inst.components.inventory then
-            local corpo = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-            local cabeca = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+        if inst.components.inventory then
+            local corpo = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+            local cabeca = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
             if cabeca and cabeca.prefab == "aerodynamichat" then
                 windproofness = 0.5
             end
@@ -47,42 +45,38 @@ local function ExternalSpeedMultiplierBefore(self)
                 windproofness = 0
             end
         end
-
         local windfactor = 0.4 * windproofness * velocidadedovento * math.cos(windangle * DEGREES) + 1.0
-        wind_speed = math.max(0.1, windfactor)
+        local wind_speed = math.max(0.1, windfactor)
+        inst.components.locomotor:SetExternalSpeedMultiplier(inst, "sw_wind", wind_speed)
+    else
+        inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "sw_wind")
     end
+
     ----------------------efeito das correntes marinhas海流的影响----------------------------------
-    local wave_speed = 1
-    local ondamarinha = GetClosestInstWithTag("ondamarinha", self.inst, 6)
+    local ondamarinha = GetClosestInstWithTag("ondamarinha", inst, 6)
     if ondamarinha then
         local wave = ondamarinha.Transform:GetRotation() + 180
-        local waveangle = self.inst.Transform:GetRotation() - wave
+        local waveangle = inst.Transform:GetRotation() - wave
         local waveproofness = 1.0
         local velocidadedoondamarinha = 2
-
-
         local wavefactor = 0.4 * waveproofness * velocidadedoondamarinha * math.cos(waveangle * DEGREES) + 1.0
-        wave_speed = math.max(0.1, wavefactor)
+        local wave_speed = math.max(0.1, wavefactor)
+        inst.components.locomotor:SetExternalSpeedMultiplier(inst, "ondamarinha", wave_speed)
+    else
+        inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "ondamarinha")
     end
-    ----------------------efeito da inundação洪水效应----------------------------------
-    local flood_speed = 1
-    local alagamento = GetClosestInstWithTag("mare", self.inst, 8)
-    if alagamento and not self.inst:HasTag("ghost") then
-        if not self.inst:HasTag("playerghost") then
-            flood_speed = 0.6
-        end
-    end
-    -------------------------------------------------------------------------------------------
 
-    return self.externalspeedmultiplier * wind_speed * wave_speed * flood_speed
+    ----------------------efeito da inundação洪水效应----------------------------------
+    if GetClosestInstWithTag("sw_flood", inst, 8) then
+        inst.components.locomotor:SetExternalSpeedMultiplier(inst, "sw_flood", 0.8)
+    else
+        inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "sw_flood")
+    end
 end
 
-----------------------------------------------------------------------------------------------------
-
-AddComponentPostInit("locomotor", function(self)
-    Hooks.FnDecorator(self, "UpdateGroundSpeedMultiplier", nil, UpdateGroundSpeedMultiplierAfter)
-
+AddPlayerPostInit(function(inst)
     if not TheWorld.ismastersim then return end
+    inst.components.locomotor:SetFasterOnGroundTile(WORLD_TILES.COBBLEROAD, true) --石板路为加速地皮
 
-    Hooks.FnDecorator(self, "ExternalSpeedMultiplier", ExternalSpeedMultiplierBefore)
+    inst:DoPeriodicTask(FRAMES * 4, UpdateSpeedMult)
 end)

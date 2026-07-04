@@ -23,6 +23,21 @@ Map.IsVolcanoAreaAtPoint = function(self, x, y, z)
     return node ~= nil
 end
 
+Map.IsUnderWaterAreaAtPoint = function(self, x, y, z)
+    local node = self:FindVisualNodeAtPoint(x, y, z, "underwater")
+    return node ~= nil
+end
+
+Map.IsFrostisLandAreaAtPoint = function(self, x, y, z)
+    local node = self:FindVisualNodeAtPoint(x, y, z, "frost")
+    return node ~= nil
+end
+
+Map.IsWindyAreaAtPoint = function(self, x, y, z)
+    local node = self:FindVisualNodeAtPoint(x, y, z, "windy")
+    return node ~= nil
+end
+
 -- 判断这个位置是否是冬天
 Map.TroIsWinterAtPoint = function(self, x, y, z)
     if TheWorld.state.iswinter then

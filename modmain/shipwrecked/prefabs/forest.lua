@@ -11,9 +11,6 @@ AddPrefabPostInit("forest", function(inst)
     if TUNING.tropical.volcaniceruption then
         inst:AddComponent("volcanomanager") --火山喷发
     end
-    if TUNING.tropical.springflood then
-        inst:AddComponent("parrotspawner") --洪水
-    end
     if TUNING.tropical.waves then
         inst:AddComponent("sw_wavemanager") --海浪
     end

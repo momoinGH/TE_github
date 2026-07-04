@@ -174,8 +174,6 @@ local function OnLoad(inst, data)
 	end
 end
 
-
-
 local function floodstart(inst)
 	if TheWorld.state.israining then
 		inst.watercollected = inst.watercollected + 4
@@ -267,7 +265,7 @@ end
 
 local function testpararemover(inst)
 	local lago = GetClosestInstWithTag("alagamentopraremover", inst, 3)
-	local lagogrande = GetClosestInstWithTag("alagamentopraremovergrande", inst, 8)
+	local lagogrande = GetClosestInstWithTag("sw_flood", inst, 8)
 	if not lago then
 		if not lagogrande then
 			if inst.controlador then

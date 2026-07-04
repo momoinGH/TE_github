@@ -1,5 +1,9 @@
+-- 水中波纹生成，用于积水池上的单位脚下生成波纹
 local Ripplespawner = Class(function(self, inst)
     self.inst = inst
+
+    inst:AddTag("sw_flood")
+
     self.range = 3
     self.permanente = nil
     self.objects = {}
@@ -91,7 +95,6 @@ function Ripplespawner:OnUpdate(dt)
                     ent.lagonope.Transform:SetScale(0.65, 0.65, 0.65)
                 end
             end
-            --            ent.rippletask = ent:DoPeriodicTask(0.4,function(ent) self:spawnripple(ent) end)
         end
     end
 end
