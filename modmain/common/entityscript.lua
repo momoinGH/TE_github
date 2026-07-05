@@ -197,3 +197,16 @@ function EntityScript:PerformBufferedAction(...)
     end
     return success
 end
+
+----------------------------------------------------------------------------------------------------
+
+-- 重定向熔炉、暴食的文件，请求不到时就在本地找找
+local old_requireeventfile = GLOBAL.requireeventfile
+GLOBAL.requireeventfile = function(path)
+    local res = old_requireeventfile(path)
+    if (not res or not next(res)) and softresolvefilepath("scripts/" .. path .. ".lua") ~= nil then
+        print("eventfile加载本地文件", path)
+        res = require(path)
+    end
+    return res
+end
