@@ -20,7 +20,7 @@ local function TurnOff(inst, instant)
 	inst.on = false
 	inst.components.fueled:StopConsuming()
 	inst:RemoveTag("prevents_hayfever")
-	inst:RemoveTag("interior_center")
+	inst:RemoveTag("blows_air")
 
 	if instant then
 		inst.sg:GoToState("idle_off")

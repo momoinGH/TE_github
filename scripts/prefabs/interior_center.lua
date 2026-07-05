@@ -26,10 +26,6 @@ local function SetRoomSize(inst, width, depth)
     if depth then
         inst.room_depth:set(depth)
     end
-
-    width = (width or inst.room_width:value()) + 1 --多算一点儿，增加点误差
-    depth = (depth or inst.room_depth:value()) + 1
-    inst.components.raindome:SetRadius(math.sqrt(width * width + depth * depth) / 2)
 end
 
 -- 横向为z右为正，纵向为x下为正
@@ -78,6 +74,39 @@ local function GetNearRooms(inst)
     return near_rooms
 end
 
+-- 不停的给周围实体添加rainimmunity，防雨防冰雹，参考raindome组件的OnUpdate
+local TAGS = { "inspectable" }
+local NOTAGS = { "INLIMBO" }
+local function CheckNearEnts(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local width = inst.room_width:value() + 1 --多算一点儿，增加点误差
+    local depth = inst.room_depth:value() + 1
+    local radius = math.sqrt(width * width + depth * depth) / 2
+    local oldtargets = inst.near_targets
+    inst.near_targets = {}
+    local awake = not inst:IsAsleep()
+    for _, target in ipairs(TheSim:FindEntities(x, y, z, radius, TAGS, NOTAGS)) do
+        if oldtargets[target] then
+            oldtargets[target] = nil
+        else
+            if not target.components.rainimmunity then
+                target:AddComponent("rainimmunity")
+            end
+            target.components.rainimmunity:AddSource(inst)
+        end
+        inst.near_targets[target] = true
+        awake = awake or not target:IsAsleep()
+    end
+    for tgt in pairs(oldtargets) do
+        if tgt.components.rainimmunity ~= nil and tgt:IsValid() then
+            tgt.components.rainimmunity:RemoveSource(inst)
+        end
+    end
+
+    local delay = awake and 1 or 3
+    inst:DoTaskInTime(delay, CheckNearEnts)
+end
+
 local function fn()
     local inst = CreateEntity()
     inst.entity:SetCanSleep(false)
@@ -99,7 +128,7 @@ local function fn()
     inst.GetNearRoom = GetNearRoom
     inst.GetNearRooms = GetNearRooms
 
-    inst:AddComponent("raindome") --这个组件可以防雨防冰雹啥的，来自暗影伞
+    -- inst:AddComponent("raindome") --这个组件可以防雨防冰雹啥的，不用这个组件，这个会有个同暗影伞的滤镜，会导致边缘模糊
 
     inst.entity:SetPristine()
 
@@ -107,7 +136,8 @@ local function fn()
         return inst
     end
 
-    inst.components.raindome:Enable()
+    inst.near_targets = {}
+    inst:DoTaskInTime(0, CheckNearEnts)
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aura = TUNING.SANITYAURA_SMALL
