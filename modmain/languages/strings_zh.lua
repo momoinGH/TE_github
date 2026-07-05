@@ -5417,8 +5417,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.TFWP_BLOSSOM_GARLAND_HAT = STRINGS.CHARACTER
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------暴食相关gorge-----------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-STRINGS.NAMES.GORGE_PORTAL = "苔藓大门"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.GORGE_PORTAL = "又是一条死胡同。"
 
 -- 沼泽猪长老Pig Elder
 
@@ -6843,9 +6841,6 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.MERMEXPERIMENT = "鱼人试验。"
 
 STRINGS.NAMES.SECRETCAVEENTRANCE = "水底洞穴"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SECRETCAVEENTRANCE = "水底洞穴。"
-
-
-
 
 STRINGS.NAMES.OCEANFISH_SMALL_UNDERWATER_1 = "小孔雀鱼" --
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.OCEANFISH_SMALL_UNDERWATER_1 = "看起来是个小家伙。"

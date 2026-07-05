@@ -38,9 +38,11 @@ function TroAddStoreRecipe(store_prefab, product, ingredients, tech, config)
     config = config or {}
     local name = store_prefab .. "_" .. product
     config.product = product
-config.nounlock = true
+    config.nounlock = true
     config.actionstr = config.actionstr or "HERMITCRABSHOP" --制作栏物品按钮显示交易文本
     config.sg_state = config.sg_state or "give"
+
+    STRINGS.NAMES[string.upper(name)] = STRINGS.NAMES[string.upper(name)] or STRINGS.NAMES[string.upper(product)]
 
     TroAddRecipe(name, ingredients, tech, config)
 end

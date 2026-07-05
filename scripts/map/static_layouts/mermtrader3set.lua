@@ -243,7 +243,7 @@ return {
 
         {
           name = "",
-          type = "gorge_portal",
+          type = "quagmire_portal",
           shape = "rectangle",
           x = 250,
           y = 280,

@@ -44,26 +44,17 @@ local function DoGrab(inst)
         if dist < 2 then
             controller.target.components.combat:GetAttacked(inst, 50, nil, nil)
 
-
-
-            for k, v in pairs(Ents) do
-                if v.prefab == "roc_nest" then
-                    local target_x, target_y, target_z = v.Transform:GetWorldPosition()
-
-
-                    if controller.target.Physics ~= nil then
-                        controller.target.Physics:Teleport(target_x, target_y, target_z)
-                    elseif controller.target.Transform ~= nil then
-                        controller.target.Transform:SetPosition(target_x, target_y, target_z)
-                    end
-
-                    controller.target:ScreenFade(false)
-                    inst:DoTaskInTime(3, oncameraarrive, controller.target)
+            local nest = TroGetAnyEntByPrefab("roc_nest")
+            if nest then
+                local target_x, target_y, target_z = nest.Transform:GetWorldPosition()
+                if controller.target.Physics ~= nil then
+                    controller.target.Physics:Teleport(target_x, target_y, target_z)
+                elseif controller.target.Transform ~= nil then
+                    controller.target.Transform:SetPosition(target_x, target_y, target_z)
                 end
+                controller.target:ScreenFade(false)
+                inst:DoTaskInTime(3, oncameraarrive, controller.target)
             end
-
-            --            controller:playergrabbed()
-            --            inst.triggerliftoff = true
         end
     end
     controller.target = nil
@@ -137,12 +128,18 @@ local states =
 
         timeline =
         {
-            TimeEvent(14 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/roc/attack_3") end),
-            TimeEvent(25 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/roc/attack_2") end),
-            TimeEvent(29 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/roc/attack_1") end),
+            TimeEvent(14 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/roc/attack_3")
+            end),
+            TimeEvent(25 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/roc/attack_2")
+            end),
+            TimeEvent(29 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/roc/attack_1")
+            end),
             TimeEvent(31 * FRAMES, function(inst)
                 DoGrab(inst)
             end)
@@ -192,12 +189,18 @@ local states =
 
         timeline =
         {
-            TimeEvent(14 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/roc/attack_3") end),
-            TimeEvent(20 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/roc/attack_2") end),
-            TimeEvent(24 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(
-                "dontstarve_DLC003/creatures/boss/roc/attack_1") end),
+            TimeEvent(14 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/roc/attack_3")
+            end),
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/roc/attack_2")
+            end),
+            TimeEvent(24 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound(
+                    "dontstarve_DLC003/creatures/boss/roc/attack_1")
+            end),
         },
 
         events =

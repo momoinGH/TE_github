@@ -168,6 +168,17 @@ modimport "modmain/lavaarena/event_server/lavaarena_trails"
 modimport "modmain/lavaarena/event_server/lavaarena_turtillus"
 modimport "modmain/lavaarena/event_server/lavaarena_peghook"
 
+----------------------------------------------------------------------------------------------------
+
+local function Kill(inst)
+    inst.AnimState:PushAnimation("portal_pst", false)
+    inst:ListenForEvent("animqueueover", inst.Remove)
+end
+
+AddPrefabPostInit("lavaarena_portal_activefx", function(inst)
+    if not TheWorld.ismastersim then return end
+    inst.Kill = Kill
+end)
 
 ----------------------------------------------------------------------------------------------------
 
@@ -199,8 +210,6 @@ AddPrefabPostInit("world", function(inst)
     inst:AddComponent("lavaarenamobtracker") --熔炉单位对象记录
 
     if not TheWorld.ismastersim then return end
-
-
 end)
 
 ----------------------------------------------------------------------------------------------------

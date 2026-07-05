@@ -2,18 +2,23 @@
 
 -- 要追踪的所有实体
 local trace_prefabs = {
-    pigking = true,           --猪王
-    sharkittenspawner = true, --虎鲨生成器
-    cave_exit_roc = true,     --洞穴出口
-    kraken = true,            --海妖
-    octopusking = true,       --章鱼王
+    pigking = true,                          --猪王
+    sharkittenspawner = true,                --虎鲨生成器
+    cave_exit_roc = true,                    --洞穴出口
+    kraken = true,                           --海妖
+    octopusking = true,                      --章鱼王
 
+    anthill_exit = true,                     --蚁巢出口
+    frosttocave = true,                      --洞穴隧道
+    roc_nest = true,                         --大鹏巢
 
-    lavaarena_portal = true,               --熔炉传送门
-    lavaarena_center = true,               --角斗容器
+    lavaarena_portal = true,                 --熔炉传送门
+    lavaarena_center = true,                 --角斗容器
     lavaarena_battlestandard_damager = true, --战旗
     lavaarena_battlestandard_shield = true,
     lavaarena_battlestandard_heal = true,
+
+    quagmire_portal = true, --苔藓大门
 }
 
 local trace_ents = {}

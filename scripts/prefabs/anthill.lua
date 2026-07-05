@@ -52,8 +52,8 @@ local function CreateMaze(inst)
     doors["exit" .. isEntranceId].components.teleporter:Target(inst)
     isEntranceId = isEntranceId - 1
 
-    for _, v in pairs(Ents) do
-        if v.prefab == "anthill_exit" and v.components.teleporter and not v.components.teleporter:GetTarget() then
+    for _, v in ipairs(TroGetEntsByPrefab("anthill_exit")) do
+        if v.components.teleporter and not v.components.teleporter:GetTarget() then
             v.components.teleporter:Target(doors["exit" .. isEntranceId])
             doors["exit" .. isEntranceId].components.teleporter:Target(v)
             isEntranceId = isEntranceId - 1

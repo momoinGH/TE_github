@@ -12,8 +12,6 @@ local function fn()
     MakeInventoryPhysics(inst)
     -- MakeInventoryFloatable(inst, "idle_water", "idle")
 
-
-
     inst.AnimState:SetBank("bamboo")
     inst.AnimState:SetBuild("bamboo")
     inst.AnimState:PlayAnimation("idle")

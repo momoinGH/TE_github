@@ -93,8 +93,8 @@ local function fn3()
     inst.components.trader.deleteitemonaccept = false
 
     inst:DoTaskInTime(1, function(inst)
-        for k, v in pairs(Ents) do
-            if v ~= inst and v.prefab == "frosttocave" then
+        for _, v in ipairs(TroGetEntsByPrefab("frosttocave")) do
+            if v ~= inst and v.components.teleporter and not v.components.teleporter.targetTeleporter then
                 inst.components.teleporter.targetTeleporter = v
                 v.components.teleporter.targetTeleporter = inst
             end

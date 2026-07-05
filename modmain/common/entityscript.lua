@@ -201,6 +201,7 @@ end
 ----------------------------------------------------------------------------------------------------
 
 -- 重定向熔炉、暴食的文件，请求不到时就在本地找找
+-- 可以少写一写代码，但也不是万能的，有些地方用了TheNet:GetServerGameMode() == "quagmire"判断执行什么代码，可能并不是想要的
 local old_requireeventfile = GLOBAL.requireeventfile
 GLOBAL.requireeventfile = function(path)
     local res = old_requireeventfile(path)

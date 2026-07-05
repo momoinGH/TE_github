@@ -55,68 +55,6 @@ local function StartTravelSound(inst, doer)
     doer:PushEvent("wormholetravel", WORMHOLETYPE.WORM) --Event for playing local travel sound
 end
 
-local function fn()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-    inst.entity:AddMiniMapEntity()
-
-    inst.MiniMapEntity:SetIcon("shipwrecked_exit.png")
-
-    inst.AnimState:SetBank("boatportal")
-    inst.AnimState:SetBuild("portal_shipwrecked_build")
-    inst.AnimState:PlayAnimation("idle_on")
-
-    --trader, alltrader (from trader component) added to pristine state for optimization
-    inst:AddTag("trader")
-    inst:AddTag("alltrader")
-
-
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:AddComponent("inspectable")
-
-    inst:AddComponent("teleporter")
-    inst.components.teleporter.onActivate = OnActivate
-    inst.components.teleporter.onActivateByOther = OnActivateByOther
-    inst.components.teleporter.offset = 0
-    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-    inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
-
-    inst:AddComponent("inventory")
-
-    inst:AddComponent("trader")
-    inst.components.trader.acceptnontradable = true
-    inst.components.trader.onaccept = onaccept
-    inst.components.trader.deleteitemonaccept = false
-
-    inst:DoTaskInTime(1, function(inst)
-        for k, v in pairs(Ents) do
-            if v ~= inst and v.prefab == "ligamundosw" then
-                inst.components.teleporter.targetTeleporter = v
-                v.components.teleporter.targetTeleporter = inst
-            end
-        end
-    end)
-
-    inst:DoTaskInTime(3, function(inst)
-        if inst.components.teleporter.targetTeleporter == nil then
-            inst:Remove()
-        end
-    end)
-
-
-    return inst
-end
-
 local function fn1()
     local inst = CreateEntity()
 

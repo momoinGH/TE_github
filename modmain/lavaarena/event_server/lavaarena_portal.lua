@@ -61,14 +61,3 @@ end
 add_event_server_data("lavaarena", "prefabs/lavaarena_portal", {
     master_postinit = master_postinit,
 }, assets)
-
-
-local function Kill(inst)
-    inst.AnimState:PushAnimation("portal_pst", false)
-    inst:ListenForEvent("animqueueover", inst.Remove)
-end
-
-AddPrefabPostInit("lavaarena_portal_activefx", function(inst)
-    if not TheWorld.ismastersim then return end
-    inst.Kill = Kill
-end)

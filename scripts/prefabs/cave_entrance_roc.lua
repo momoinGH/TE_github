@@ -32,21 +32,14 @@ local function initmaze(inst)
     doors.entrance1.components.teleporter:Target(inst)
 
     for _, v in ipairs(TroGetEntsByPrefab("cave_exit_roc")) do
-        if not v.components.teleporter:GetTarget() then
-            doors.entrance2.components.teleporter:Target(v)
-            v.components.teleporter:Target(doors.entrance2)
-            break
-        end
-    end
-
-    for _, v in pairs(Ents) do
-        if v.prefab == "cave_exit_roc" and v.components.teleporter and not v.components.teleporter:GetTarget() then
+        if v ~= doors.entrance2 and v.components.teleporter and not v.components.teleporter:GetTarget() then
             doors.entrance2.components.teleporter:Target(v)
             v.components.teleporter:Target(doors.entrance2)
             print("洞穴入口二：" .. tostring(doors.entrance2))
             break
         end
     end
+
     if not doors.entrance2.components.teleporter:GetTarget() then
         doors.entrance2:Remove() --没有就删了
     end

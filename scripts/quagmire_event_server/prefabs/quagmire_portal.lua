@@ -1,8 +1,3 @@
-local assets =
-{
-    Asset("ANIM", "anim/vamp_bat_entrance.zip"),
-}
-
 local function OnDoneTeleporting(inst, obj)
     if inst.closetask ~= nil then
         inst.closetask:Cancel()
@@ -51,62 +46,54 @@ local function StartTravelSound(inst, doer)
     doer:PushEvent("wormholetravel", WORMHOLETYPE.WORM) --Event for playing local travel sound
 end
 
-local function fn()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    local minimap = inst.entity:AddMiniMapEntity()
-    minimap:SetIcon("vamp_bat_cave.png")
-
-    inst.AnimState:SetBuild("vamp_bat_entrance")
-    inst.AnimState:SetBank("vampbat_den")
-    inst.AnimState:PlayAnimation("idle")
-
-    inst:AddTag("trader")
-    inst:AddTag("alltrader")
-
-
-    inst:AddTag("pugalisk_fountain")
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
+local function onclose(inst)
+    local invader = GetClosestInstWithTag("quagmire_portal_activefx", inst, 3)
+    if invader then
+        invader:Remove()
     end
+end
 
-    inst:AddComponent("inspectable")
-    inst.components.inspectable:RecordViews()
+local function onopen(inst)
+    local invader = GetClosestInstWithTag("quagmire_portal_activefx", inst, 3)
+    if not invader then
+        SpawnAt("quagmire_portal_activefx", inst)
+    end
+end
 
-    inst:AddComponent("teleporter")
-    inst.components.teleporter.onActivate = OnActivate
-    inst.components.teleporter.onActivateByOther = OnActivateByOther
-    inst.components.teleporter.offset = 0
-    inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
-    inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
+return {
+    master_postinit = function(inst)
+        inst:AddTag("trader")
+        inst:AddTag("alltrader")
 
-    inst:AddComponent("inventory")
+        inst:AddComponent("playerprox")
+        inst.components.playerprox:SetDist(10, 13)
+        inst.components.playerprox:SetOnPlayerNear(onopen)
+        inst.components.playerprox:SetOnPlayerFar(onclose)
 
-    inst:AddComponent("trader")
-    inst.components.trader.acceptnontradable = true
-    inst.components.trader.onaccept = onaccept
-    inst.components.trader.deleteitemonaccept = false
+        inst:AddComponent("inspectable")
+        inst.components.inspectable:RecordViews()
 
-    inst:DoTaskInTime(1, function(inst)
-        if not inst.components.teleporter.targetTeleporter then
-            for k, v in pairs(Ents) do
-                if v ~= inst and v.prefab == "secretcaveentrance" then
+        inst:AddComponent("teleporter")
+        inst.components.teleporter.onActivate = OnActivate
+        inst.components.teleporter.onActivateByOther = OnActivateByOther
+        inst.components.teleporter.offset = 0
+        inst:ListenForEvent("starttravelsound", StartTravelSound) -- triggered by player stategraph
+        inst:ListenForEvent("doneteleporting", OnDoneTeleporting)
+
+        inst:AddComponent("inventory")
+
+        inst:AddComponent("trader")
+        inst.components.trader.acceptnontradable = true
+        inst.components.trader.onaccept = onaccept
+        inst.components.trader.deleteitemonaccept = false
+
+        inst:DoTaskInTime(1, function(inst)
+            for _, v in ipairs(TroGetEntsByPrefab("quagmire_portal")) do
+                if v ~= inst and not v.components.teleporter.targetTeleporter then
                     inst.components.teleporter.targetTeleporter = v
                     v.components.teleporter.targetTeleporter = inst
                 end
             end
-        end
-    end)
-
-    return inst
-end
-
-return Prefab("secretcaveentrance", fn, assets)
+        end)
+    end
+}

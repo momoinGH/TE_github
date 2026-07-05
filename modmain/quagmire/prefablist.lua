@@ -1,7 +1,6 @@
 PrefabFiles =
 {
     "feather_chicken",                --鸡毛
-    "gorge_portal",                   --苔藓大门
     "chicken",                        --鸡
     "quagmire_merm_house",            --破烂的小屋
     "quagmire_flour",                 --面粉
